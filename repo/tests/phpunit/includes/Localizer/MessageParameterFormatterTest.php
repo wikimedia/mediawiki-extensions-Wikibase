@@ -65,14 +65,14 @@ class MessageParameterFormatterTest extends \PHPUnit\Framework\TestCase {
 	private function getMockValueFormatter() {
 		$mock = $this->createMock( ValueFormatter::class );
 		$mock->method( 'format' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function ( DataValue $param ) {
 					$class = get_class( $param );
 					$value = $param->getArrayValue();
 
 					return "$class:$value";
 				}
-			) );
+			);
 
 		return $mock;
 	}
@@ -83,11 +83,11 @@ class MessageParameterFormatterTest extends \PHPUnit\Framework\TestCase {
 	private function getMockIdFormatter() {
 		$mock = $this->createMock( EntityIdFormatter::class );
 		$mock->method( 'formatEntityId' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function ( EntityId $id ) {
 					return '[[ENTITYID]]';
 				}
-			) );
+			);
 
 		return $mock;
 	}

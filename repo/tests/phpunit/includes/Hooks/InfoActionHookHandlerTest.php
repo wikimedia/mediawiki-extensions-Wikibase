@@ -113,13 +113,13 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$subLookup->expects( $this->once() )
 			->method( 'getSubscribers' )
 			->with( $itemId )
-			->will( $this->returnValue( $subscriptions ) );
+			->willReturn( $subscriptions );
 
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 		$entityIdLookup->expects( $this->once() )
 			->method( 'getEntityIdForTitle' )
 			->with( $context->getTitle() )
-			->will( $this->returnValue( $itemId ) );
+			->willReturn( $itemId );
 
 		$pageProps = $this->getMockBuilder( PageProps::class )
 			->disableOriginalConstructor()
@@ -150,7 +150,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$siteLookup = $this->createMock( SiteLookup::class );
 
 		$siteLookup->method( 'getSite' )
-			->will( $this->returnValue( $site ) );
+			->willReturn( $site );
 
 		return $siteLookup;
 	}
@@ -162,13 +162,13 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$title = $this->createMock( Title::class );
 
 		$title->method( 'exists' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$title->method( 'getNamespace' )
-			->will( $this->returnValue( NS_MAIN ) );
+			->willReturn( NS_MAIN );
 
 		$title->method( 'getPrefixedText' )
-			->will( $this->returnValue( 'Q4' ) );
+			->willReturn( 'Q4' );
 
 		$context = new RequestContext();
 		$context->setTitle( $title );

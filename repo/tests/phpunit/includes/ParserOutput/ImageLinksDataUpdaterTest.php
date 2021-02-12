@@ -29,9 +29,9 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$matcher->method( 'isMatchingDataType' )
-			->will( $this->returnCallback( function( PropertyId $id, $type ) {
+			->willReturnCallback( function( PropertyId $id, $type ) {
 				return $id->getSerialization() === 'P1';
-			} ) );
+			} );
 		$repoGroup = $this->createMock( RepoGroup::class );
 
 		return new ImageLinksDataUpdater( $matcher, $repoGroup );
@@ -59,9 +59,9 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 		$parserOutput->expects( $this->exactly( count( $expected ) ) )
 			->method( 'addImage' )
-			->will( $this->returnCallback( function( $name ) use ( &$actual ) {
+			->willReturnCallback( function( $name ) use ( &$actual ) {
 				$actual[] = $name;
-			} ) );
+			} );
 
 		$instance = $this->newInstance();
 

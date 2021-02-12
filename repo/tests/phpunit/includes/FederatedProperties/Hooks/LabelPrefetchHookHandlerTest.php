@@ -75,11 +75,11 @@ class LabelPrefetchHookHandlerTest extends LabelPrefetchHookHandlerTestBase {
 		$prefetchingTermLookup = $this->createMock( PrefetchingTermLookup::class );
 		$prefetchingTermLookup->expects( $this->once() )
 			->method( 'prefetchTerms' )
-			->will( $this->returnCallback( $this->getPrefetchTermsCallback(
+			->willReturnCallback( $this->getPrefetchTermsCallback(
 				$expectedPropertyIds,
 				$expectedTermTypes,
 				$expectedLanguageCodes
-			) ) );
+			) );
 
 		$linkBeginHookHandler = $this->getLabelPrefetchHookHandlers(
 			$this->getPrefetchTermsCallback( $expectedItemIds, $expectedTermTypes, $expectedLanguageCodes ),

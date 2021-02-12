@@ -118,7 +118,7 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 			->getMock();
 
 		$pageSet->method( 'getGoodTitles' )
-			->will( $this->returnValue( $titles ) );
+			->willReturn( $titles );
 
 		$query = $this->getMockBuilder( ApiQuery::class )
 			->setConstructorArgs( [ $main, $params['action'] ] )
@@ -126,7 +126,7 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 			->getMock();
 
 		$query->method( 'getPageSet' )
-			->will( $this->returnValue( $pageSet ) );
+			->willReturn( $pageSet );
 
 		return $query;
 	}

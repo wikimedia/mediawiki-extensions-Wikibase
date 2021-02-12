@@ -57,7 +57,7 @@ class CacheRetrievingEntityRevisionLookupTest extends EntityRevisionLookupTestCa
 		$mock->expects( $this->once() )
 			->method( 'getEntityRevision' )
 			->with( $id, 1234, 'load-mode' )
-			->will( $this->returnValue( $item ) );
+			->willReturn( $item );
 
 		$lookup = new CacheRetrievingEntityRevisionLookup( new EntityRevisionCache( new HashBagOStuff() ), $mock );
 		$lookup->setVerifyRevision( false );

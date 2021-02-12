@@ -47,7 +47,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 		$titleFactory = $this->createMock( TitleFactory::class );
 
 		$titleFactory->method( 'newFromIDs' )
-			->will( $this->returnCallback( function( array $ids ) {
+			->willReturnCallback( function( array $ids ) {
 				$titles = [];
 				foreach ( $ids as $id ) {
 					$title = Title::makeTitle( NS_MAIN, "$id" );
@@ -55,10 +55,10 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 					$titles[] = $title;
 				}
 				return $titles;
-			} ) );
+			} );
 
 		$titleFactory->method( 'newFromText' )
-			->will( $this->returnCallback( function( $text, $defaultNs = \NS_MAIN ) {
+			->willReturnCallback( function( $text, $defaultNs = \NS_MAIN ) {
 				$title = Title::newFromText( $text, $defaultNs );
 
 				if ( !$title ) {
@@ -67,7 +67,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 
 				$title->resetArticleID( $text );
 				return $title;
-			} ) );
+			} );
 
 		return $titleFactory;
 	}
@@ -89,7 +89,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 
 		$usageLookup->method( 'getPagesUsing' )
 			->with( $this->anything(), $expectedAspects )
-			->will( $this->returnValue( new ArrayIterator( $usage ) ) );
+			->willReturn( new ArrayIterator( $usage ) );
 
 		$affectedPagesFinder = new AffectedPagesFinder(
 			$usageLookup,
@@ -559,7 +559,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 		$mock = $this->createMock( UsageLookup::class );
 
 		$mock->method( 'getPagesUsing' )
-			->will( $this->returnValue( new ArrayIterator( $pageEntityUsages ) ) );
+			->willReturn( new ArrayIterator( $pageEntityUsages ) );
 
 		return $mock;
 	}

@@ -40,11 +40,11 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 				],
 				$fromReplica
 			)
-			->will( $this->returnValue( [
+			->willReturn( [
 				'Q1' => 'Nyan',
 				'Q2' => 'cat',
 				'Q3' => '~=[,,_,,]:3'
-			] ) );
+			] );
 
 		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 
@@ -88,7 +88,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 				$q1->getSerialization() => $q1,
 				$q3->getSerialization() => $q3,
 				$q2->getSerialization() => $q2 ] )
-			->will( $this->returnValue( $expected ) );
+			->willReturn( $expected );
 
 		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger(), 2 );
 
@@ -118,7 +118,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 			->with( [
 				$q1->getSerialization() => $q1,
 				$q2->getSerialization() => $q2 ] )
-			->will( $this->returnValue( $expected ) );
+			->willReturn( $expected );
 
 		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger(), 2 );
 
@@ -144,7 +144,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->exactly( 3 ) )
 			->method( 'loadRevisionInformation' )
-			->will( $this->returnCallback( function( array $entityIds, $mode ) {
+			->willReturnCallback( function( array $entityIds, $mode ) {
 				$ret = [];
 
 				/**
@@ -155,7 +155,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 				}
 
 				return $ret;
-			} ) );
+			} );
 
 		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 		// Prefetch Q1 and Q3
@@ -209,7 +209,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 				[ $q1->getSerialization() => $q1 ],
 				'load-mode'
 			)
-			->will( $this->returnValue( [ 'Q1' => 'data' ] ) );
+			->willReturn( [ 'Q1' => 'data' ] );
 
 		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 
@@ -228,7 +228,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformationByRevisionId' )
 			->with( $q1, 123, LookupConstants::LATEST_FROM_MASTER )
-			->will( $this->returnValue( 'passthrough' ) );
+			->willReturn( 'passthrough' );
 
 		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 
@@ -417,7 +417,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		$lookup->expects( $this->exactly( 2 ) )
 			->method( 'loadRevisionInformation' )
 			->with( [ $q1->getSerialization() => $q1 ] )
-			->will( $this->returnCallback( function( array $entityIds ) {
+			->willReturnCallback( function( array $entityIds ) {
 				static $firstCall = true;
 				if ( $firstCall ) {
 					$firstCall = false;
@@ -425,7 +425,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 				} else {
 					return [ 'Q1' => 'Bar' ];
 				}
-			} ) );
+			} );
 
 		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 

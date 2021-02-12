@@ -59,7 +59,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$mock->expects( $this->once() )
 			->method( 'getEntityRevision' )
 			->with( $id, 1234, 'load-mode' )
-			->will( $this->returnValue( $item ) );
+			->willReturn( $item );
 
 		$entityRevisionCache = new EntityRevisionCache( new HashBagOStuff() );
 

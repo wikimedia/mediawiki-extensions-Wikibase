@@ -27,11 +27,11 @@ class TokenCheckInteractorTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$user->method( 'matchEditToken' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function ( $token ) {
 					return $token === 'VALID';
 				}
-			) );
+			);
 
 		return $user;
 	}

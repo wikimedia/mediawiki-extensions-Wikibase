@@ -94,7 +94,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$repoLinker->method( 'buildEntityLink' )
-			->will( $this->returnCallback( function (
+			->willReturnCallback( function (
 				EntityId $entityId,
 				array $classes = [],
 				$text = null
@@ -103,12 +103,12 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 					'href' => 'https://www.wikidata.org/wiki/' . $entityId,
 					'class' => $classes,
 				], $text ?: $entityId );
-			} ) );
+			} );
 
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 
 		$siteLinkLookup->method( 'getItemIdForLink' )
-			->will( $this->returnValue( $entityId ) );
+			->willReturn( $entityId );
 
 		$sqlUsageTracker = $this->getMockBuilder( SqlUsageTracker::class )
 			->disableOriginalConstructor()
@@ -117,7 +117,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$entityUsage = $entityId ? [ new EntityUsage( $entityId, 'S' ) ] : null;
 		$sqlUsageTracker->expects( $this->once() )
 			->method( 'getUsagesForPage' )
-			->will( $this->returnValue( $entityUsage ) );
+			->willReturn( $entityUsage );
 
 		$labelDescriptionLookupFactory = $this->getMockBuilder(
 			LanguageFallbackLabelDescriptionLookupFactory::class
@@ -126,14 +126,14 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$labelDescriptionLookupFactory->method( 'newLabelDescriptionLookup' )
-			->will( $this->returnCallback( [ $this, 'newLabelDescriptionLookup' ] ) );
+			->willReturnCallback( [ $this, 'newLabelDescriptionLookup' ] );
 
 		$idParser = $this->createMock( EntityIdParser::class );
 
 		$idParser->method( 'parse' )
-			->will( $this->returnCallback( function ( $idSerialization ) {
+			->willReturnCallback( function ( $idSerialization ) {
 				return new ItemId( $idSerialization );
-			} ) );
+			} );
 
 		$hookHandler = new EditActionHookHandler(
 			$repoLinker,
@@ -166,14 +166,14 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$lookup = $this->createMock( LabelDescriptionLookup::class );
 
 		$lookup->method( 'getLabel' )
-			->will( $this->returnCallback( function ( EntityId $entityId ) {
+			->willReturnCallback( function ( EntityId $entityId ) {
 				switch ( $entityId->getSerialization() ) {
 					case 'Q4':
 						return new Term( 'en', 'Berlin' );
 					default:
 						return null;
 				}
-			} ) );
+			} );
 
 		return $lookup;
 	}
@@ -189,7 +189,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$editor->method( 'getTitle' )
-			->will( $this->returnValue( $title ) );
+			->willReturn( $title );
 
 		$editor->editFormTextAfterTools = '';
 
@@ -205,13 +205,13 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$title->method( 'exists' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$title->method( 'getNamespace' )
-			->will( $this->returnValue( NS_MAIN ) );
+			->willReturn( NS_MAIN );
 
 		$title->method( 'getPrefixedText' )
-			->will( $this->returnValue( 'Cat' ) );
+			->willReturn( 'Cat' );
 
 		return $title;
 	}

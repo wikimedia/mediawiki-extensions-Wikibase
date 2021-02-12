@@ -182,7 +182,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$namespaceChecker->method( 'isWikibaseEnabled' )
-			->will( $this->returnValue( $enabled ) );
+			->willReturn( $enabled );
 
 		$repoLinker = $this->getMockBuilder( RepoLinker::class )
 			->disableOriginalConstructor()
@@ -190,7 +190,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$repoLinker->method( 'buildEntityLink' )
-			->will( $this->returnCallback( function (
+			->willReturnCallback( function (
 				EntityId $entityId,
 				array $classes = [],
 				$text = null
@@ -199,12 +199,12 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 					'href' => 'https://www.wikidata.org/wiki/' . $entityId,
 					'class' => $classes,
 				], $text ?: $entityId );
-			} ) );
+			} );
 
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 
 		$siteLinkLookup->method( 'getItemIdForLink' )
-			->will( $this->returnValue( $itemId ) );
+			->willReturn( $itemId );
 
 		$sqlUsageTracker = $this->getMockBuilder( SqlUsageTracker::class )
 			->disableOriginalConstructor()
@@ -213,7 +213,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		if ( $itemId ) {
 			$entityUsage = [ new EntityUsage( $itemId, 'S' ) ];
 			$sqlUsageTracker->method( 'getUsagesForPage' )
-				->will( $this->returnValue( $entityUsage ) );
+				->willReturn( $entityUsage );
 		}
 
 		$labelDescriptionLookupFactory = $this->getMockBuilder(
@@ -223,14 +223,14 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$labelDescriptionLookupFactory->method( 'newLabelDescriptionLookup' )
-			->will( $this->returnCallback( [ $this, 'newLabelDescriptionLookup' ] ) );
+			->willReturnCallback( [ $this, 'newLabelDescriptionLookup' ] );
 
 		$idParser = $this->createMock( EntityIdParser::class );
 
 		$idParser->method( 'parse' )
-			->will( $this->returnCallback( function ( $idSerialization ) {
+			->willReturnCallback( function ( $idSerialization ) {
 				return new ItemId( $idSerialization );
-			} ) );
+			} );
 
 		$descriptionLookup = $this->getMockBuilder( DescriptionLookup::class )
 			->disableOriginalConstructor()
@@ -269,13 +269,13 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$title->method( 'exists' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$title->method( 'getNamespace' )
-			->will( $this->returnValue( NS_MAIN ) );
+			->willReturn( NS_MAIN );
 
 		$title->method( 'getPrefixedText' )
-			->will( $this->returnValue( 'Cat' ) );
+			->willReturn( 'Cat' );
 
 		$context = new RequestContext();
 		$context->setTitle( $title );
@@ -292,14 +292,14 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$lookup = $this->createMock( LabelDescriptionLookup::class );
 
 		$lookup->method( 'getLabel' )
-			->will( $this->returnCallback( function ( EntityId $entityId ) {
+			->willReturnCallback( function ( EntityId $entityId ) {
 				switch ( $entityId->getSerialization() ) {
 					case 'Q4':
 						return new Term( 'en', 'Berlin' );
 					default:
 						return null;
 				}
-			} ) );
+			} );
 
 		return $lookup;
 	}

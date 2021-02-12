@@ -43,7 +43,7 @@ class CachingPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
 		$provider->expects( $this->once() )
 			->method( 'getPropertyOrder' )
 			->with()
-			->will( $this->returnValue( $expected ) );
+			->willReturn( $expected );
 
 		$cachingPropertyOrderProvider = new CachingPropertyOrderProvider( $provider, $cache, 123 );
 

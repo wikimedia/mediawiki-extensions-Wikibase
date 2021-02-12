@@ -37,9 +37,9 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->method( 'getHTML' )
-			->will( $this->returnCallback( function ( $searchResult ) {
+			->willReturnCallback( function ( $searchResult ) {
 				return '<span class="mock-span" >ItemDisambiguationHTML-' . count( $searchResult ) . '</span>';
-			} ) );
+			} );
 
 		return $mock;
 	}
@@ -69,7 +69,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		$mock = $this->createMock( EntitySearchHelper::class );
 
 		$mock->method( 'getRankedSearchResults' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function( $text, $lang, $entityType ) use ( $searchResults ) {
 					if ( $lang !== 'fr' ) {
 						throw new InvalidArgumentException( 'Not a valid language code' );
@@ -81,7 +81,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 
 					return [];
 				}
-			) );
+			);
 
 		return $mock;
 	}
@@ -96,7 +96,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	private function getMockLanguageNameLookup() {
 		$mock = $this->createMock( LanguageNameLookup::class );
 		$mock->method( 'getName' )
-			->will( $this->returnValue( '<LANG>' ) );
+			->willReturn( '<LANG>' );
 
 		return $mock;
 	}

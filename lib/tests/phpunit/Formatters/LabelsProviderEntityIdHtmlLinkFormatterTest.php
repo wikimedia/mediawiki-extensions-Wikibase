@@ -215,19 +215,17 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 	private function newMockLanguageNameLookup(): LanguageNameLookup {
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->method( 'getName' )
-			->will(
-				$this->returnCallback(
-					function ( $languageCode ) {
-						$names = [
-							'de' => 'Deutsch',
-							'de-at' => 'Österreichisches Deutsch',
-							'de-ch' => 'Schweizer Hochdeutsch',
-							'en' => 'english in german',
-							'en-ca' => 'Canadian English'
-						];
-						return $names[$languageCode];
-					}
-				)
+			->willReturnCallback(
+				function ( $languageCode ) {
+					$names = [
+						'de' => 'Deutsch',
+						'de-at' => 'Österreichisches Deutsch',
+						'de-ch' => 'Schweizer Hochdeutsch',
+						'en' => 'english in german',
+						'en-ca' => 'Canadian English'
+					];
+					return $names[$languageCode];
+				}
 			);
 
 		return $languageNameLookup;

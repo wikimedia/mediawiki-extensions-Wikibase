@@ -44,10 +44,10 @@ class MediaWikiConfigModuleTest extends \PHPUnit\Framework\TestCase {
 			$provider = $this->createMock( MediaWikiConfigValueProvider::class );
 
 			$provider->method( 'getKey' )
-				->will( $this->returnValue( 'dummyKey' ) );
+				->willReturn( 'dummyKey' );
 
 			$provider->method( 'getValue' )
-				->will( $this->returnValue( 'dummyValue' ) );
+				->willReturn( 'dummyValue' );
 
 			return $provider;
 		} ] );

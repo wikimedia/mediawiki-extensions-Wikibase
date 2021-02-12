@@ -74,26 +74,26 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 		$termLookup = $this->createMock( TermLookup::class );
 
 		$termLookup->method( 'getLabel' )
-			->will( $this->returnCallback( function ( EntityId $id, $language ) {
+			->willReturnCallback( function ( EntityId $id, $language ) {
 				switch ( $language ) {
 					case 'de':
 						return 'Name für ' . $id->getSerialization();
 					default:
 						return 'Label for ' . $id->getSerialization();
 				}
-			} ) );
+			} );
 
 		$termLookup->method( 'getLabels' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				return [
 					'de' => 'Name für ' . $id->getSerialization(),
 					'en' => 'Label for ' . $id->getSerialization(),
 				];
-			} ) );
+			} );
 
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->method( 'getName' )
-			->will( $this->returnValue( 'Deutsch' ) );
+			->willReturn( 'Deutsch' );
 
 		$urlLookup = $this->createMock( EntityUrlLookup::class );
 		$urlLookup->method( 'getLinkUrl' )
@@ -133,14 +133,14 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 				$this->isInstanceOf( GlobeCoordinateValue::class ),
 				$this->isInstanceOf( Language::class )
 			)
-			->will( $this->returnValue( '<kartographer-html/>' ) );
+			->willReturn( '<kartographer-html/>' );
 
 		$handler->method( 'getPreviewHtml' )
 			->with(
 				$this->isInstanceOf( GlobeCoordinateValue::class ),
 				$this->isInstanceOf( Language::class )
 			)
-			->will( $this->returnValue( '<kartographer-preview-html/>' ) );
+			->willReturn( '<kartographer-preview-html/>' );
 
 		return $handler;
 	}
@@ -163,11 +163,11 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
 
 		$titleLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function ( EntityId $id ) {
 					return Title::makeTitle( NS_MAIN, $id->getSerialization() );
 				}
-			) );
+			);
 
 		return $titleLookup;
 	}
@@ -587,7 +587,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 	public function provideNewFormatter_LabelDescriptionLookupOption() {
 		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelDescriptionLookup->method( 'getLabel' )
-			->will( $this->returnValue( new Term( 'xy', 'Custom LabelDescriptionLookup' ) ) );
+			->willReturn( new Term( 'xy', 'Custom LabelDescriptionLookup' ) );
 
 		$fallbackFactory = new LanguageFallbackChainFactory();
 		$fallbackChain = $fallbackFactory->newFromLanguage( Language::factory( 'de-ch' ) );

@@ -72,7 +72,7 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 
 		$this->validatorFactory = $this->createMock( DataTypeValidatorFactory::class );
 		$this->validatorFactory->method( 'getValidators' )
-			->will( $this->returnCallback( function( $dataTypeId ) use (
+			->willReturnCallback( function( $dataTypeId ) use (
 				$numericValidator,
 				$alphabeticValidator,
 				$lengthValidator
@@ -81,7 +81,7 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 					$dataTypeId === 'numeric' ? $numericValidator : $alphabeticValidator,
 					$lengthValidator
 				];
-			} ) );
+			} );
 	}
 
 	public function provideValidateClaimSnaks() {

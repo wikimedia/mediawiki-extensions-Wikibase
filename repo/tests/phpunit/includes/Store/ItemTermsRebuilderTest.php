@@ -161,7 +161,7 @@ class ItemTermsRebuilderTest extends MediaWikiIntegrationTestCase {
 		$itemTermStoreWriter = $this->createMock( ItemTermStoreWriter::class );
 		$itemTermStoreWriter->expects( $this->exactly( 2 ) )
 			->method( 'storeTerms' )
-			->will( $this->throwException( new TermStoreException() ) );
+			->willThrowException( new TermStoreException() );
 		$this->itemTermStoreWriter = $itemTermStoreWriter;
 
 		$this->newRebuilder()->rebuild();

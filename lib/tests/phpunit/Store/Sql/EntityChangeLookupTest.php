@@ -41,7 +41,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 		$change = $this->createMock( EntityChange::class );
 		$change->expects( $this->once() )
 			->method( 'getId' )
-			->will( $this->returnValue( 42 ) );
+			->willReturn( 42 );
 
 		$changeLookup = $this->newEntityChangeLookup( 'doesntmatterwiki' );
 

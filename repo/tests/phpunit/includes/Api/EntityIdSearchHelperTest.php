@@ -41,11 +41,9 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		$mock = $this->createMock( LabelDescriptionLookup::class );
 
 		$mock->method( 'getLabel' )
-			->will( $this->returnValue( new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ) ) );
+			->willReturn( new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ) );
 		$mock->method( 'getDescription' )
-			->will(
-				$this->returnValue( new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_DESCRIPTION ) )
-			);
+			->willReturn( new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_DESCRIPTION ) );
 		return $mock;
 	}
 

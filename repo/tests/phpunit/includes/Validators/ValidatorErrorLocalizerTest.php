@@ -26,7 +26,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit\Framework\TestCase {
 	private function getMockFormatter() {
 		$mock = $this->createMock( ValueFormatter::class );
 		$mock->method( 'format' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function ( $param ) {
 					if ( is_array( $param ) ) {
 						$param = implode( '|', $param );
@@ -34,7 +34,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit\Framework\TestCase {
 
 					return strval( $param );
 				}
-			) );
+			);
 
 		return $mock;
 	}

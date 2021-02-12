@@ -52,14 +52,14 @@ class WikibaseLanguageDependentLuaBindingsTest extends \PHPUnit\Framework\TestCa
 			->getMock();
 
 		$labelDescriptionLookup->method( 'getLabel' )
-			->will( $this->returnValue(
+			->willReturn(
 				new TermFallback( 'ar', 'LabelString', 'lang-code', null )
-			) );
+			);
 
 		$labelDescriptionLookup->method( 'getDescription' )
-			->will( $this->returnValue(
+			->willReturn(
 				new TermFallback( 'ar', 'DescriptionString', 'lang-code', null )
-			) );
+			);
 
 		return $labelDescriptionLookup;
 	}

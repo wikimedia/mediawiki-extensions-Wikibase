@@ -183,7 +183,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
 
 		$labelDescriptionLookup->method( 'getLabel' )
-			->will( $this->returnValue( new Term( 'en', 'featured' ) ) );
+			->willReturn( new Term( 'en', 'featured' ) );
 
 		return new LanguageLinkBadgeDisplay(
 			new SidebarLinkBadgeDisplay(

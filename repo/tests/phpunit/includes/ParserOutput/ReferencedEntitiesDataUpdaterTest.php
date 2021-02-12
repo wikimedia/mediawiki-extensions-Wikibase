@@ -58,10 +58,10 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->expects( $this->exactly( count( $extractedEntities ) ) )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				$namespace = $this->getEntityNamespace( $id->getEntityType() );
 				return Title::makeTitle( $namespace, $id->getSerialization() );
-			} ) );
+			} );
 
 		return new ReferencedEntitiesDataUpdater( $mockEntityIdExtractor, $entityTitleLookup );
 	}
@@ -80,9 +80,9 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 		$parserOutput->expects( $this->exactly( count( $expectedEntityIds ) ) )
 			->method( 'addLink' )
-			->will( $this->returnCallback( function( Title $title ) use ( &$actual ) {
+			->willReturnCallback( function( Title $title ) use ( &$actual ) {
 				$actual[] = $title->getText();
-			} ) );
+			} );
 
 		$instance = $this->newInstance( $item, $expectedEntityIds );
 

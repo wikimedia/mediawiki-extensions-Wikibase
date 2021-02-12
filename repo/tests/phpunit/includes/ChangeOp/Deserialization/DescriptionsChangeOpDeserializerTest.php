@@ -40,10 +40,8 @@ class DescriptionsChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 					->getMock();
 
 				$validator->method( $this->anything() )
-					->will(
-						$this->throwException(
-							new ChangeOpDeserializationException( 'invalid serialization', 'test-error' )
-						)
+					->willThrowException(
+						new ChangeOpDeserializationException( 'invalid serialization', 'test-error' )
 					);
 
 				$deserializer = $this->newDescriptionsChangeOpDeserializer( $validator );

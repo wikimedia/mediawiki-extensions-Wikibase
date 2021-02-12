@@ -39,7 +39,7 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
 
 		$labelLookup->method( 'getLabel' )
-			  ->will( $this->returnValue( 'o' ) );
+			  ->willReturn( 'o' );
 
 		return $labelLookup;
 	}
@@ -69,7 +69,7 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$sidebarGenerator->method( 'buildProjectLinkSidebar' )
-			->will( $this->returnValue( $projects ) );
+			->willReturn( $projects );
 
 		return $sidebarGenerator;
 	}
@@ -190,7 +190,7 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$skin->method( 'getContext' )
-			->will( $this->returnValue( $context ) );
+			->willReturn( $context );
 
 		return $skin;
 	}

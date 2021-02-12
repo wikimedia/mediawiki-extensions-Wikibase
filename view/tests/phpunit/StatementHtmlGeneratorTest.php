@@ -38,7 +38,7 @@ class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$snakHtmlGenerator->method( 'getSnakHtml' )
-			->will( $this->returnValue( 'SNAK HTML' ) );
+			->willReturn( 'SNAK HTML' );
 
 		return $snakHtmlGenerator;
 	}

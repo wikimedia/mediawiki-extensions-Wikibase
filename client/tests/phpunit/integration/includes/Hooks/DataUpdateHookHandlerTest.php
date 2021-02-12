@@ -212,13 +212,13 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$title->method( 'getArticleID' )
-			->will( $this->returnValue( $id ) );
+			->willReturn( $id );
 
 		$title->method( 'getNamespace' )
-			->will( $this->returnValue( $ns ) );
+			->willReturn( $ns );
 
 		$title->method( 'getDBkey' )
-			->will( $this->returnValue( $text ) );
+			->willReturn( $text );
 
 		return $title;
 	}
@@ -239,10 +239,10 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$linksUpdate->mId = $title->getArticleID();
 
 		$linksUpdate->method( 'getTitle' )
-			->will( $this->returnValue( $title ) );
+			->willReturn( $title );
 
 		$linksUpdate->method( 'getParserOutput' )
-			->will( $this->returnValue( $pout ) );
+			->willReturn( $pout );
 
 		return $linksUpdate;
 	}

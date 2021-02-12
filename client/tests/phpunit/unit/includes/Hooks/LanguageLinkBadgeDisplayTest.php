@@ -33,7 +33,7 @@ class LanguageLinkBadgeDisplayTest extends \PHPUnit\Framework\TestCase {
 		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
 
 		$labelLookup->method( 'getLabel' )
-			->will( $this->returnCallback( function( EntityId $entityId ) {
+			->willReturnCallback( function( EntityId $entityId ) {
 				switch ( $entityId->getSerialization() ) {
 					case 'Q3':
 						return new Term( 'de', 'Lesenswerter Artikel' );
@@ -42,7 +42,7 @@ class LanguageLinkBadgeDisplayTest extends \PHPUnit\Framework\TestCase {
 					default:
 						return null;
 				}
-			} ) );
+			} );
 
 		$badgeClassNames = [ 'Q4' => 'foo', 'Q3' => 'bar' ];
 

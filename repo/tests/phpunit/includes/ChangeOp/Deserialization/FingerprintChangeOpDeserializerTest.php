@@ -106,9 +106,8 @@ class FingerprintChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	public function testSubject_whenLabelsDeserializerThrows_throws() {
 		$this->expectException( ChangeOpDeserializationException::class );
 
-		$this->labelsChangeOpDeserializerMock->method( 'createEntityChangeOp' )->will(
-			$this->throwException( $this->createMock( ChangeOpDeserializationException::class ) )
-		);
+		$this->labelsChangeOpDeserializerMock->method( 'createEntityChangeOp' )
+			->willThrowException( $this->createMock( ChangeOpDeserializationException::class ) );
 
 		$this->createEntityChangeOpWithTestSubject( [
 			'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ]
@@ -118,9 +117,8 @@ class FingerprintChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	public function testSubject_whenDescriptionsDeserializerThrows_throws() {
 		$this->expectException( ChangeOpDeserializationException::class );
 
-		$this->descriptionsChangeOpDeserializerMock->method( 'createEntityChangeOp' )->will(
-			$this->throwException( $this->createMock( ChangeOpDeserializationException::class ) )
-		);
+		$this->descriptionsChangeOpDeserializerMock->method( 'createEntityChangeOp' )
+			->willThrowException( $this->createMock( ChangeOpDeserializationException::class ) );
 
 		$this->createEntityChangeOpWithTestSubject( [
 			'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ]
@@ -130,9 +128,8 @@ class FingerprintChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	public function testSubject_whenAliasesDeserializerThrows_throws() {
 		$this->expectException( ChangeOpDeserializationException::class );
 
-		$this->aliasesChangeOpDeserializerMock->method( 'createEntityChangeOp' )->will(
-			$this->throwException( $this->createMock( ChangeOpDeserializationException::class ) )
-		);
+		$this->aliasesChangeOpDeserializerMock->method( 'createEntityChangeOp' )
+			->willThrowException( $this->createMock( ChangeOpDeserializationException::class ) );
 
 		$this->createEntityChangeOpWithTestSubject( [
 			'aliases' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ]

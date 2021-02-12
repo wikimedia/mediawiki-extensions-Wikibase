@@ -80,7 +80,7 @@ class ItemDiffViewTest extends \PHPUnit\Framework\TestCase {
 
 		$entityIdFormatter = $this->createMock( EntityIdFormatter::class );
 		$entityIdFormatter->method( 'formatEntityId' )
-			->will( $this->returnValue( 'FORMATTED BADGE ID' ) );
+			->willReturn( 'FORMATTED BADGE ID' );
 
 		$diffView = new ItemDiffView(
 			$path,

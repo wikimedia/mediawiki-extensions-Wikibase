@@ -28,7 +28,7 @@ class MockJobQueueFactory {
 
 		if ( $expectedTermInLangIdsToClean != null ) {
 			foreach ( $expectedTermInLangIdsToClean as $index => $termInLangId ) {
-				$jobQueueGroupMock->expects( $this->test->at( $index ) )->method( 'push' )->will( $this->test->returnCallback( function (
+				$jobQueueGroupMock->expects( $this->test->at( $index ) )->method( 'push' )->willReturnCallback( function (
 					IJobSpecification $jobSpec
 				) use ( $termInLangId ) {
 					$this->test->assertInstanceOf( CleanTermsIfUnusedJob::class, $jobSpec );
@@ -36,7 +36,7 @@ class MockJobQueueFactory {
 						[ $termInLangId ],
 						$jobSpec->getParams()[ CleanTermsIfUnusedJob::TERM_IN_LANG_IDS ]
 					);
-				} ) );
+				} );
 			}
 		}
 

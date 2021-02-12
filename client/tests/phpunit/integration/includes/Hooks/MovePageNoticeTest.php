@@ -53,7 +53,7 @@ class MovePageNoticeTest extends MediaWikiIntegrationTestCase {
 
 		$siteLinkLookup->method( 'getItemIdForLink' )
 			->with( 'dewiki', 'New Amsterdam' )
-			->will( $this->returnValue( new ItemId( 'Q4880' ) ) );
+			->willReturn( new ItemId( 'Q4880' ) );
 
 		$movePageNotice = new MovePageNotice(
 			$siteLinkLookup,
@@ -76,7 +76,7 @@ class MovePageNoticeTest extends MediaWikiIntegrationTestCase {
 		$movePageForm = $this->createMock( MovePageForm::class );
 		$movePageForm->expects( $this->once() )
 				->method( 'getOutput' )
-				->will( $this->returnValue( $outputPage ) );
+				->willReturn( $outputPage );
 
 		$movePageNotice->onSpecialMovepageAfterMove( $movePageForm, $oldTitle, $newTitle );
 

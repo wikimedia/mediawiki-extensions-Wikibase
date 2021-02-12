@@ -149,7 +149,7 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$snakValidator->method( 'validate' )
-			->will( $this->returnValue( $result ) );
+			->willReturn( $result );
 
 		$changeOps = new ChangeOps();
 		$changeOps->add( new ChangeOpMainSnak( $guid, $snak, $guidGenerator, $snakValidator ) );
@@ -190,16 +190,16 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 
 		$changeOp = $this->createMock( ChangeOp::class );
 		$changeOp->method( 'validate' )
-			->will( $this->returnCallback( function( Item $item ) {
+			->willReturnCallback( function( Item $item ) {
 				// Fail when the label is already set (by a previous apply call).
 				return $item->getFingerprint()->hasLabel( 'en' )
 					? Result::newError( [] )
 					: Result::newSuccess();
-			} ) );
+			} );
 		$changeOp->method( 'apply' )
-			->will( $this->returnCallback( function( Item $item ) {
+			->willReturnCallback( function( Item $item ) {
 				$item->setLabel( 'en', 'Label' );
-			} ) );
+			} );
 
 		$changeOps = new ChangeOps();
 		$changeOps->add( $changeOp );

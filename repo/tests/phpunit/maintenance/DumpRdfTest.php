@@ -154,7 +154,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 		$sqlEntityIdPagerFactory->expects( $this->once() )
 			->method( 'newSqlEntityIdPager' )
 			->with( array_diff( $existingEntityTypes, $entityTypesWithoutRdfOutput ), EntityIdPager::INCLUDE_REDIRECTS )
-			->will( $this->returnValue( $mockEntityIdPager ) );
+			->willReturn( $mockEntityIdPager );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// Note: We are testing with the actual RDF bindings, so we can check for actual RDF output.
@@ -287,12 +287,12 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 	private function getMockPropertyDataTypeLookup() {
 		$mockDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$mockDataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnCallback( function( PropertyId $id ) {
+			->willReturnCallback( function( PropertyId $id ) {
 				if ( $id->getSerialization() === 'P999' ) {
 					throw new PropertyDataTypeLookupException( $id );
 				}
 				return 'string';
-			} ) );
+			} );
 		return $mockDataTypeLookup;
 	}
 

@@ -43,7 +43,7 @@ class SpecialPageCopyrightViewTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$copyrightMessageBuilder->method( 'build' )
-			->will( $this->returnValue( $message ) );
+			->willReturn( $message );
 
 		return $copyrightMessageBuilder;
 	}

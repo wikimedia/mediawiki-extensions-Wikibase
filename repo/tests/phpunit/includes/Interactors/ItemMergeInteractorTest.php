@@ -79,7 +79,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->method( 'run' )
-			->will( $this->returnValue( Status::newGood() ) );
+			->willReturn( Status::newGood() );
 
 		return $mock;
 	}
@@ -91,7 +91,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )
-			->will( $this->returnCallback( function( User $user ) {
+			->willReturnCallback( function( User $user ) {
 				$userWithoutPermissionName = 'UserWithoutPermission';
 
 				if ( $user->getName() === $userWithoutPermissionName ) {
@@ -99,7 +99,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 				} else {
 					return Status::newGood();
 				}
-			} ) );
+			} );
 
 		return $permissionChecker;
 	}
@@ -111,10 +111,10 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		$mock = $this->createMock( EntityTitleStoreLookup::class );
 
 		$mock->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				$contentHandler = ContentHandler::getForModelID( ItemContent::CONTENT_MODEL_ID );
 				return $contentHandler->getTitleForId( $id );
-			} ) );
+			} );
 
 		return $mock;
 	}
@@ -170,12 +170,12 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				$title = $this->createMock( Title::class );
 				$title->method( 'isDeleted' )
-					->will( $this->returnValue( false ) );
+					->willReturn( false );
 				return $title;
-			} ) );
+			} );
 
 		return $titleLookup;
 	}

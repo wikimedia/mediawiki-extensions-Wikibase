@@ -45,7 +45,7 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$rcFactory->method( 'prepareChangeAttributes' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		return $rcFactory;
 	}
@@ -67,9 +67,9 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$changeLookup->method( 'loadByChangeIds' )
-			->will( $this->returnCallback( function ( $ids ) use ( $changes ) {
+			->willReturnCallback( function ( $ids ) use ( $changes ) {
 				return array_values( array_intersect_key( $changes, array_flip( $ids ) ) );
-			} ) );
+			} );
 
 		return $changeLookup;
 	}
@@ -104,9 +104,9 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 
 		$id = 200;
 		$titleFactory->method( 'makeTitle' )
-			->will( $this->returnCallback( function( $ns, $text ) use ( &$id ) {
+			->willReturnCallback( function( $ns, $text ) use ( &$id ) {
 				return $this->getTitleMock( $text, $id++ );
-			} ) );
+			} );
 
 		return $titleFactory;
 	}
@@ -123,19 +123,19 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$title->method( 'getArticleID' )
-			->will( $this->returnValue( $id ) );
+			->willReturn( $id );
 
 		$title->method( 'exists' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$title->method( 'getDBkey' )
-			->will( $this->returnValue( $text ) );
+			->willReturn( $text );
 
 		$title->method( 'getPrefixedDBkey' )
-			->will( $this->returnValue( $text ) );
+			->willReturn( $text );
 
 		$title->method( 'getNamespace' )
-			->will( $this->returnValue( 0 ) );
+			->willReturn( 0 );
 
 		return $title;
 	}
@@ -154,16 +154,16 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$change->method( 'getId' )
-			->will( $this->returnValue( $id ) );
+			->willReturn( $id );
 
 		$change->method( 'getFields' )
-			->will( $this->returnValue( $fields ) );
+			->willReturn( $fields );
 
 		$change->method( 'getInfo' )
-			->will( $this->returnValue( $info ) );
+			->willReturn( $info );
 
 		$change->method( 'getSerializedInfo' )
-			->will( $this->returnValue( json_encode( $info ) ) );
+			->willReturn( json_encode( $info ) );
 
 		return $change;
 	}
@@ -427,7 +427,7 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 		$rcFactory->expects( $this->once() )
 			->method( 'newRecentChange' )
 			->with( $change, $title, [] )
-			->will( $this->returnValue( $rc ) );
+			->willReturn( $rc );
 
 		$rcDupeDetector = $this->getRCDupeDetectorMock();
 

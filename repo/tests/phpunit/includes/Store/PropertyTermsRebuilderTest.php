@@ -160,7 +160,7 @@ class PropertyTermsRebuilderTest extends MediaWikiIntegrationTestCase {
 		$propertyTermStoreWriter = $this->createMock( PropertyTermStoreWriter::class );
 		$propertyTermStoreWriter->expects( $this->exactly( 2 ) )
 			->method( 'storeTerms' )
-			->will( $this->throwException( new TermStoreException() ) );
+			->willThrowException( new TermStoreException() );
 		$this->propertyTermStoreWriter = $propertyTermStoreWriter;
 
 		$this->newRebuilder()->rebuild();

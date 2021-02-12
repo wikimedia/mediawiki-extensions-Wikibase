@@ -75,20 +75,20 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 		// A validator which makes sure that no site link is for page 'DUPE'
 		$siteLinkUniquenessValidator = $this->createMock( EntityValidator::class );
 		$siteLinkUniquenessValidator->method( 'validateEntity' )
-			->will( $this->returnCallback( function( Item $item ) {
+			->willReturnCallback( function( Item $item ) {
 				foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 					if ( $siteLink->getPageName() === 'DUPE' ) {
 						return Result::newError( [ Error::newError( 'SiteLink conflict' ) ] );
 					}
 				}
 				return Result::newSuccess();
-			} ) );
+			} );
 
 		$constraintProvider = $this->getMockBuilder( EntityConstraintProvider::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$constraintProvider->method( 'getUpdateValidators' )
-			->will( $this->returnValue( [ $siteLinkUniquenessValidator ] ) );
+			->willReturn( [ $siteLinkUniquenessValidator ] );
 
 		$changeOpFactoryProvider = new ChangeOpFactoryProvider(
 			$constraintProvider,
@@ -426,14 +426,14 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 		$enwiki = $this->createMock( Site::class );
 		$enwiki->expects( $this->once() )
 			->method( 'getGlobalId' )
-			->will( $this->returnValue( 'enwiki' ) );
+			->willReturn( 'enwiki' );
 		$enwiki->expects( $this->exactly( 2 ) )
 			->method( 'normalizePageName' )
 			->withConsecutive(
 				[ $this->equalTo( 'FOo' ) ],
 				[ $this->equalTo( 'Foo' ) ]
 			)
-			->will( $this->returnValue( 'Foo' ) );
+			->willReturn( 'Foo' );
 
 		$mockSiteStore = new HashSiteStore( TestSites::getSites() );
 		$mockSiteStore->saveSite( $enwiki );

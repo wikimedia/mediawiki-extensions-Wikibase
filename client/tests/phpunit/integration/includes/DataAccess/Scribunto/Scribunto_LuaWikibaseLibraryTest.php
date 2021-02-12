@@ -237,7 +237,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 		$repoLinker->method( 'getEntityUrl' )
 			->with( new ItemId( 'Q1' ) )
-			->will( $this->returnValue( 'this-is-a-URL' ) );
+			->willReturn( 'this-is-a-URL' );
 
 		return $repoLinker;
 	}

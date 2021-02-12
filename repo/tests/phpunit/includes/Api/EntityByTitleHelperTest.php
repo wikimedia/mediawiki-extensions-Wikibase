@@ -43,7 +43,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 		$site = $this->createMock( Site::class );
 
 		$site->method( 'getGlobalId' )
-			->will( $this->returnValue( 'FooSite' ) );
+			->willReturn( 'FooSite' );
 
 		return new HashSiteStore( [ $site ] );
 	}
@@ -73,7 +73,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 		$siteLinkLookupMock = $this->createMock( EntityByLinkedTitleLookup::class );
 
 		$siteLinkLookupMock->method( 'getEntityIdForLinkedTitle' )
-				->will( $this->returnValue( $itemId ) );
+				->willReturn( $itemId );
 
 		return $siteLinkLookupMock;
 	}

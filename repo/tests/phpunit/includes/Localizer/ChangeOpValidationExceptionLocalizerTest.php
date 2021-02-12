@@ -71,7 +71,7 @@ class ChangeOpValidationExceptionLocalizerTest extends \PHPUnit\Framework\TestCa
 	private function getMockFormatter() {
 		$mock = $this->createMock( ValueFormatter::class );
 		$mock->method( 'format' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function ( $param ) {
 					if ( is_array( $param ) ) {
 						$param = implode( '|', $param );
@@ -79,7 +79,7 @@ class ChangeOpValidationExceptionLocalizerTest extends \PHPUnit\Framework\TestCa
 
 					return strval( $param );
 				}
-			) );
+			);
 
 		return $mock;
 	}

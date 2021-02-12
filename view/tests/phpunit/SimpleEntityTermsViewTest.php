@@ -39,7 +39,7 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 		$editSectionGenerator = $this->createMock( EditSectionGenerator::class );
 		$editSectionGenerator->expects( $this->exactly( $editSectionCalls ) )
 			->method( 'getLabelDescriptionAliasesEditSection' )
-			->will( $this->returnValue( '<EDITSECTION>' ) );
+			->willReturn( '<EDITSECTION>' );
 
 		$textProvider = new DummyLocalizedTextProvider( 'lkt' );
 
@@ -49,23 +49,23 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 
 		$htmlTermRenderer = $this->createMock( HtmlTermRenderer::class );
 		$htmlTermRenderer->method( 'renderTerm' )
-			->will( $this->returnCallback( function( Term $term ) {
+			->willReturnCallback( function( Term $term ) {
 				return htmlspecialchars( $term->getText() );
-			} ) );
+			} );
 
 		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelDescriptionLookup->method( 'getLabel' )
-			->will( $this->returnCallback( function( EntityId $entityId ) {
+			->willReturnCallback( function( EntityId $entityId ) {
 				$terms = [
 					'Q111' => new Term( 'language', '<LABEL>' ),
 					'Q666' => new Term( 'language', '<a href="#">evil html</a>' ),
 				];
 				return $terms[$entityId->getSerialization()] ?? null;
-			} ) );
+			} );
 		$labelDescriptionLookup->method( 'getDescription' )
-			->will( $this->returnCallback( function( EntityId $entityId ) {
+			->willReturnCallback( function( EntityId $entityId ) {
 				return $entityId->getSerialization() === 'Q111' ? new Term( 'language', '<DESCRIPTION>' ) : null;
-			} ) );
+			} );
 
 		return new SimpleEntityTermsView(
 			$htmlTermRenderer,
@@ -206,7 +206,7 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 				$aliases,
 				$this->equalTo( $languageCode === 'de' ? [ 'de', 'en' ] : [ 'en' ] )
 			)
-			->will( $this->returnValue( '<TERMSLISTVIEW>' ) );
+			->willReturn( '<TERMSLISTVIEW>' );
 		$entityTermsView = $this->getEntityTermsView( 1, $termsListView );
 		$html = $entityTermsView->getHtml( $languageCode, $labels, $descriptions, $aliases, $entityId );
 

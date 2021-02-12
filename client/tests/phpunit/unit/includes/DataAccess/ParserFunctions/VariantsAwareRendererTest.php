@@ -93,7 +93,7 @@ class VariantsAwareRendererTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$languageRenderer->method( 'render' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function ( EntityId $entityId, $propertyLabelOrId ) use ( $languageCode ) {
 					if ( $propertyLabelOrId === 'url' ) {
 						return 'http://wikipedia.de';
@@ -101,7 +101,7 @@ class VariantsAwareRendererTest extends \PHPUnit\Framework\TestCase {
 
 					return "$propertyLabelOrId in $languageCode";
 				}
-			) );
+			);
 
 		return $languageRenderer;
 	}

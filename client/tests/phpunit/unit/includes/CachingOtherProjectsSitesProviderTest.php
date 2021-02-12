@@ -26,7 +26,7 @@ class CachingOtherProjectsSitesProviderTest extends \PHPUnit\Framework\TestCase 
 
 		$otherProjectsSitesProvider->expects( $this->once() )
 			->method( 'getOtherProjectsSiteIds' )
-			->will( $this->returnValue( [ 'dewikivoyage', 'commons' ] ) );
+			->willReturn( [ 'dewikivoyage', 'commons' ] );
 
 		return $otherProjectsSitesProvider;
 	}

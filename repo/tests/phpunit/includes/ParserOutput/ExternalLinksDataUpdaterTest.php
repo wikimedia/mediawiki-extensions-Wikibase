@@ -28,9 +28,9 @@ class ExternalLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$matcher->method( 'isMatchingDataType' )
-			->will( $this->returnCallback( function( PropertyId $id, $type ) {
+			->willReturnCallback( function( PropertyId $id, $type ) {
 				return $id->getSerialization() === 'P1';
-			} ) );
+			} );
 
 		return new ExternalLinksDataUpdater( $matcher );
 	}
@@ -57,9 +57,9 @@ class ExternalLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 		$parserOutput->expects( $this->exactly( count( $expected ) ) )
 			->method( 'addExternalLink' )
-			->will( $this->returnCallback( function( $url ) use ( &$actual ) {
+			->willReturnCallback( function( $url ) use ( &$actual ) {
 				$actual[] = $url;
-			} ) );
+			} );
 
 		$instance = $this->newInstance();
 

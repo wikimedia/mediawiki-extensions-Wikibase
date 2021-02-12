@@ -55,12 +55,12 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				return Title::makeTitle(
 					NS_MAIN,
 					$id->getEntityType() . '/' . $id->getSerialization()
 				);
-			} ) );
+			} );
 
 		return $titleLookup;
 	}
@@ -84,10 +84,10 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		};
 
 		$permissionChecker->method( 'getPermissionStatusForEntity' )
-			->will( $this->returnCallback( $checkAction ) );
+			->willReturnCallback( $checkAction );
 
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )
-			->will( $this->returnCallback( $checkAction ) );
+			->willReturnCallback( $checkAction );
 
 		return $permissionChecker;
 	}
@@ -108,7 +108,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 		$runner->expects( $expects )
 			->method( 'run' )
-			->will( $this->returnValue( $status ) );
+			->willReturn( $status );
 		return $runner;
 	}
 

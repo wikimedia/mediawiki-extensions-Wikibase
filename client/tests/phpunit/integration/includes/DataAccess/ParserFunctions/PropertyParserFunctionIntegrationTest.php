@@ -72,9 +72,9 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 		$propertyLabelResolver = $this->createMock( PropertyLabelResolver::class );
 		$propertyLabelResolver->method( 'getPropertyIdsForLabels' )
 			->with( [ 'LuaTestStringProperty' ] )
-			->will( $this->returnValue(
+			->willReturn(
 				[ 'LuaTestStringProperty' => new PropertyId( 'P342' ) ]
-			) );
+			);
 
 		$wikibaseClient->propertyLabelResolver = $propertyLabelResolver;
 	}

@@ -182,7 +182,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testGivenDeletedRevision_hookHandlerDoesNotFail() {
 		$this->outputPageEntityIdReader->expects( $this->once() )
 			->method( 'getEntityIdFromOutputPage' )
-			->will( $this->returnValue( null ) );
+			->willReturn( null );
 
 		$this->userLanguageLookup = $this->getUserLanguageLookupReturnsSpecifiedLangs();
 
@@ -201,7 +201,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->willReturn( new Item( $this->itemId ) );
 		$this->userLanguageLookup->expects( $this->once() )
 			->method( 'getUserSpecifiedLanguages' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 		$this->isExternallyRendered = true;
 
 		$this->outputPageEntityIdReader = $this->getOutputPageEntityIdReaderReturningEntity( $this->itemId );
@@ -223,9 +223,9 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	private function newUserLanguageLookup() {
 		$userLanguageLookup = $this->createMock( UserLanguageLookup::class );
 		$userLanguageLookup->method( 'getUserSpecifiedLanguages' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 		$userLanguageLookup->method( 'getAllUserLanguages' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 		return $userLanguageLookup;
 	}
 
@@ -250,7 +250,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->expects( $this->once() )
 			->method( 'getEntityRevision' )
-			->will( $this->returnValue( new EntityRevision( new Item( $itemId ) ) ) );
+			->willReturn( new EntityRevision( new Item( $itemId ) ) );
 		return $entityRevisionLookup;
 	}
 
@@ -293,7 +293,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$userLanguageLookup = $this->createMock( UserLanguageLookup::class );
 		$userLanguageLookup->expects( $this->once() )
 			->method( 'getUserSpecifiedLanguages' )
-			->will( $this->returnValue( [ 'de', 'es', 'ru' ] ) );
+			->willReturn( [ 'de', 'es', 'ru' ] );
 		return $userLanguageLookup;
 	}
 

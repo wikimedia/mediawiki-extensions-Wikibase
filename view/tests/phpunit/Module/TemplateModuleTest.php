@@ -59,7 +59,7 @@ class TemplateModuleTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$context->method( 'getLanguage' )
-			->will( $this->returnValue( 'en' ) );
+			->willReturn( 'en' );
 
 		return $context;
 	}

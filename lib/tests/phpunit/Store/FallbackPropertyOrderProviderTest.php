@@ -44,13 +44,13 @@ class FallbackPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
 		$primaryProvider->expects( $this->once() )
 			->method( 'getPropertyOrder' )
 			->with()
-			->will( $this->returnValue( $primaryReturnValue ) );
+			->willReturn( $primaryReturnValue );
 
 		$secondaryProvider = $this->createMock( PropertyOrderProvider::class );
 		$secondaryProvider->expects( $this->exactly( $primaryReturnValue === null ? 1 : 0 ) )
 			->method( 'getPropertyOrder' )
 			->with()
-			->will( $this->returnValue( $secondaryReturnValue ) );
+			->willReturn( $secondaryReturnValue );
 
 		$provider = new FallbackPropertyOrderProvider( $primaryProvider, $secondaryProvider );
 

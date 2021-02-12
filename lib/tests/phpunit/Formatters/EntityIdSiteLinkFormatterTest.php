@@ -59,15 +59,15 @@ class EntityIdSiteLinkFormatterTest extends \PHPUnit\Framework\TestCase {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
 		$titleLookup->method( 'getTitleForId' )
 			->with( $id )
-			->will( $this->returnValue( $siteLink
+			->willReturn( $siteLink
 				? Title::newFromText( $siteLink->getPageName() )
 				: null
-			) );
+			);
 
 		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelLookup->method( 'getLabel' )
 			->with( $id )
-			->will( $this->returnValue( $label ) );
+			->willReturn( $label );
 
 		$formatter = new EntityIdSiteLinkFormatter( $titleLookup, $labelLookup );
 

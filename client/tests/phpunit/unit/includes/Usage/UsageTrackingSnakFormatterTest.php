@@ -43,7 +43,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 
 		$mockFormatter->expects( $this->once() )
 			->method( $method )
-			->will( $this->returnValue( $return ) );
+			->willReturn( $return );
 
 		return $mockFormatter;
 	}
@@ -64,7 +64,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		$getLabelInvocationMocker = $usageTrackingLabelDescriptionLookup->expects( $this->exactly( $formatEntity ? 1 : 0 ) )
 			->method( 'getLabel' )
 			->with( $formatEntity )
-			->will( $this->returnValue( 'foobar' ) );
+			->willReturn( 'foobar' );
 
 		return $usageTrackingLabelDescriptionLookup;
 	}
@@ -96,9 +96,9 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		$parser = $this->createMock( EntityIdParser::class );
 		$parser->expects( $this->once() )
 			->method( 'parse' )
-			->will( $this->returnCallback( function ( $id ) {
+			->willReturnCallback( function ( $id ) {
 				return $id === '1' ? null : new ItemId( $id );
-			} ) );
+			} );
 
 		return $parser;
 	}

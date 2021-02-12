@@ -153,7 +153,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 		$dataTypeLookup = $this->getTestData()->getMockRepository();
 
 		$entityRevisionLookup->method( 'getEntityRevision' )
-			->will( $this->returnCallback( function( EntityId $id ) use ( $entityRevisions, $redirects ) {
+			->willReturnCallback( function( EntityId $id ) use ( $entityRevisions, $redirects ) {
 				$key = $id->getSerialization();
 
 				if ( isset( $redirects[$key] ) ) {
@@ -161,7 +161,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 				}
 
 				return $entityRevisions[$key] ?? null;
-			} ) );
+			} );
 
 		$siteLookup = $this->getSiteLookup();
 

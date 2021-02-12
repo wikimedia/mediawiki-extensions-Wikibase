@@ -73,12 +73,12 @@ abstract class LabelPrefetchHookHandlerTestBase extends TestCase {
 		$termBuffer = $this->createMock( TermBuffer::class );
 		$termBuffer->expects( $this->atLeastOnce() )
 			->method( 'prefetchTerms' )
-			->will( $this->returnCallback( $prefetchTerms ) );
+			->willReturnCallback( $prefetchTerms );
 
 		$idLookup = $this->createMock( EntityIdLookup::class );
 		$idLookup->expects( $this->atLeastOnce() )
 			->method( 'getEntityIds' )
-			->will( $this->returnCallback( [ $this, 'titlesToIds' ] ) );
+			->willReturnCallback( [ $this, 'titlesToIds' ] );
 
 		$titleFactory = new TitleFactory();
 

@@ -21,13 +21,13 @@ class FingerprintableEntityMetaTagsCreatorTest extends EntityMetaTagsCreatorTest
 	public function provideTestGetMetaTags() {
 		$mock = $this->createMock( TermLanguageFallbackChain::class );
 		$mock->method( 'extractPreferredValue' )
-			->will( $this->returnCallback( function( $input ) {
+			->willReturnCallback( function( $input ) {
 				$langString = $input['en'] ?? null;
 				if ( $langString !== null ) {
 					return [ 'value' => $langString ];
 				}
 				return null;
-			} ) );
+			} );
 
 		$fingerprintableEntityMetaTags = new FingerprintableEntityMetaTagsCreator( $mock );
 

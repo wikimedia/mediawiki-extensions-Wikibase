@@ -30,7 +30,7 @@ class StatementGrouperBuilderTest extends \PHPUnit\Framework\TestCase {
 		$lookup = $this->createMock( PropertyDataTypeLookup::class );
 
 		$lookup->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		return new StatementGrouperBuilder(
 			$specifications,

@@ -158,9 +158,8 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 				] )
 			->getMock();
 
-		$hookHandlerMock->method( 'hasWikibaseChangesEnabled' )->will(
-			$this->returnValue( $hasWikibaseChangesEnabled )
-		);
+		$hookHandlerMock->method( 'hasWikibaseChangesEnabled' )
+			->willReturn( $hasWikibaseChangesEnabled );
 
 		$hookHandlerMock->expects( $this->exactly( $expectedAddConditionsCalls ) )
 			->method( 'addWikibaseConditions' )
@@ -474,7 +473,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 			->getMock();
 
 		$user->method( 'getOption' )
-			->will( $this->returnCallback( function( $optionName ) use ( $userOptions ) {
+			->willReturnCallback( function( $optionName ) use ( $userOptions ) {
 				foreach ( $userOptions as $key => $value ) {
 					if ( $optionName === $key ) {
 						return $value;
@@ -482,7 +481,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 				}
 
 				return null;
-			} ) );
+			} );
 
 		return $user;
 	}
@@ -494,9 +493,9 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		$databaseBase = $this->createMock( DBConnRef::class );
 
 		$databaseBase->method( 'addQuotes' )
-			->will( $this->returnCallback( function( $input ) {
+			->willReturnCallback( function( $input ) {
 				return "'$input'";
-			} ) );
+			} );
 
 		return $databaseBase;
 	}

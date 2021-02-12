@@ -34,13 +34,13 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 
 		$statementGrouper = $this->createMock( StatementGrouper::class );
 		$statementGrouper->method( 'groupStatements' )
-			->will( $this->returnValue( $statementLists ) );
+			->willReturn( $statementLists );
 
 		$statementListView = $this->getMockBuilder( StatementGroupListView::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$statementListView->method( 'getHtml' )
-			->will( $this->returnValue( '<LIST>' ) );
+			->willReturn( '<LIST>' );
 
 		return new StatementSectionsView(
 			$templateFactory,

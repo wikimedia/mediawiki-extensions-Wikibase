@@ -154,11 +154,11 @@ class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$lookup = $this->createMock( SiteLinksForDisplayLookup::class );
 		$lookup->method( $expectedMethod )
 			->with( $expectedArgument )
-			->will( $this->returnValue( [
+			->willReturn( [
 				'enwikiquote' => new SiteLink( 'enwikiquote', 'Nyan Cat' ),
 				'enwiki' => new SiteLink( 'enwiki', 'Nyan Cat', [ new ItemId( self::BADGE_ITEM_ID ) ] ),
 				'enwiktionary' => new SiteLink( 'enwiktionary', 'Nyan Cat' )
-			] ) );
+			] );
 		return $lookup;
 	}
 
@@ -169,7 +169,7 @@ class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelDescriptionLookup->method( 'getLabel' )
 			->with( new ItemId( self::BADGE_ITEM_ID ) )
-			->will( $this->returnValue( new Term( 'en', self::BADGE_ITEM_LABEL ) ) );
+			->willReturn( new Term( 'en', self::BADGE_ITEM_LABEL ) );
 
 		return new SidebarLinkBadgeDisplay(
 			$labelDescriptionLookup,

@@ -88,13 +88,13 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$dataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( 'string' ) );
+			->willReturn( 'string' );
 
 		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleStoreLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
-			} ) );
+			} );
 
 		$entityContentFactory = $this->createMock( EntityContentFactory::class );
 		// implements EntityTitleLookup but should never be used as such (T269603)

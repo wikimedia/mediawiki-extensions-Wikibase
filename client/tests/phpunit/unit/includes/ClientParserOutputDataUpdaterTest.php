@@ -100,7 +100,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$factory->method( 'getOtherProjectsSidebarGenerator' )
-			->will( $this->returnValue( $generator ) );
+			->willReturn( $generator );
 
 		return $factory;
 	}
@@ -116,10 +116,10 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 		$title->expects( $this->once() )
 			->method( 'getPrefixedText' )
-			->will( $this->returnValue( $prefixedText ) );
+			->willReturn( $prefixedText );
 
 		$title->method( 'isRedirect' )
-			->will( $this->returnValue( $isRedirect ) );
+			->willReturn( $isRedirect );
 
 		return $title;
 	}
@@ -135,7 +135,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$generator->method( 'buildProjectLinkSidebar' )
-			->will( $this->returnValue( $otherProjects ) );
+			->willReturn( $otherProjects );
 
 		return $generator;
 	}

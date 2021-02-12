@@ -122,9 +122,9 @@ class JsonDataTypeInjectorTest extends TestCase {
 	private function getMockPropertyDataTypeLookup() {
 		$mockDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$mockDataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnCallback( function( PropertyId $id ) {
+			->willReturnCallback( function( PropertyId $id ) {
 				return 'DtIdFor_' . $id->getSerialization();
-			} ) );
+			} );
 		return $mockDataTypeLookup;
 	}
 }

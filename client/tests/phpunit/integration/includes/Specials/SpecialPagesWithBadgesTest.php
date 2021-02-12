@@ -34,9 +34,9 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 	private function getLabelLookup() {
 		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelLookup->method( 'getLabel' )
-			->will( $this->returnCallback( function( ItemId $id ) {
+			->willReturnCallback( function( ItemId $id ) {
 				return new Term( 'en', 'Label of ' . $id->getSerialization() );
-			} ) );
+			} );
 
 		return $labelLookup;
 	}
@@ -58,7 +58,7 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 		$labelDescriptionLookupFactory->expects( $this->once() )
 			->method( 'newLabelDescriptionLookup' )
 			->with( $this->anything(), $this->equalTo( $itemIds ) )
-			->will( $this->returnValue( $this->getLabelLookup() ) );
+			->willReturn( $this->getLabelLookup() );
 
 		return $labelDescriptionLookupFactory;
 	}

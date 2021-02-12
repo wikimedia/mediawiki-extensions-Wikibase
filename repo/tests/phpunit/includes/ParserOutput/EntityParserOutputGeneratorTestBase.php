@@ -51,7 +51,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$fallbackChain->method( 'extractPreferredValue' )
-			->will( $this->returnCallback( function( $labels ) {
+			->willReturnCallback( function( $labels ) {
 				if ( array_key_exists( 'en', $labels ) ) {
 					return [
 						'value' => $labels['en'],
@@ -61,7 +61,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 				}
 
 				return null;
-			} ) );
+			} );
 
 		$fallbackChain->method( 'getFetchLanguageCodes' )
 			->willReturn( [ 'en' ] );
@@ -100,7 +100,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 
 		$entityViewFactory->expects( $createView ? $this->once() : $this->never() )
 			->method( 'newEntityView' )
-			->will( $this->returnValue( $this->getEntityView() ) );
+			->willReturn( $this->getEntityView() );
 
 		return $entityViewFactory;
 	}
@@ -118,7 +118,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 			->getMockForAbstractClass();
 
 		$entityView->method( 'getTitleHtml' )
-			->will( $this->returnValue( '<TITLE>' ) );
+			->willReturn( '<TITLE>' );
 
 		$viewContent = new ViewContent(
 			'<HTML>',
@@ -126,7 +126,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 		);
 
 		$entityView->method( 'getContent' )
-			->will( $this->returnValue( $viewContent ) );
+			->willReturn( $viewContent );
 
 		return $entityView;
 	}
@@ -139,7 +139,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 
 		$entityMetaTagsCreatorFactory
 			->method( 'newEntityMetaTags' )
-			->will( $this->returnValue( $this->getMetaTags( $title, $description ) ) );
+			->willReturn( $this->getMetaTags( $title, $description ) );
 
 		return $entityMetaTagsCreatorFactory;
 	}
@@ -164,7 +164,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 		}
 
 		$entityMetaTagsCreator->method( 'getMetaTags' )
-			->will( $this->returnValue( $tags ) );
+			->willReturn( $tags );
 
 		return $entityMetaTagsCreator;
 	}
@@ -178,7 +178,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$configBuilder->method( 'build' )
-			->will( $this->returnValue( [ '<JS>' ] ) );
+			->willReturn( [ '<JS>' ] );
 
 		return $configBuilder;
 	}
@@ -190,12 +190,12 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 
 		$entityTitleLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				return Title::makeTitle(
 					NS_MAIN,
 					$id->getEntityType() . ':' . $id->getSerialization()
 				);
-			} ) );
+			} );
 
 		return $entityTitleLookup;
 	}

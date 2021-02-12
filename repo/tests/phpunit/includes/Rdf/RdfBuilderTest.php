@@ -73,9 +73,9 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	private function getEntityTitleLookup() {
 		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback( function ( EntityId $entityId ) {
+			->willReturnCallback( function ( EntityId $entityId ) {
 				return Title::newFromText( $entityId->getSerialization() );
-			} ) );
+			} );
 
 		return $entityTitleLookup;
 	}

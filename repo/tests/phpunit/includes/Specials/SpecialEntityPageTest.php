@@ -42,20 +42,20 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
 
 		$titleLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback( function ( $id ) {
+			->willReturnCallback( function ( $id ) {
 				$title = $this->createMock( Title::class );
 
 				$title->method( 'getFullURL' )
-					->will( $this->returnCallback(
+					->willReturnCallback(
 						function ( $query ) use ( $id ) {
 							$base = strstr( $id, ':' )
 								? self::FOREIGN_ENTITY_PAGE_URL
 								: self::LOCAL_ENTITY_PAGE_URL;
 							return wfAppendQuery( $base, $query );
-						} ) );
+						} );
 
 				return $title;
-			} ) );
+			} );
 
 		return $titleLookup;
 	}
@@ -167,7 +167,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 		$nullReturningTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$nullReturningTitleLookup
 			->method( 'getTitleForId' )
-			->will( $this->returnValue( null ) );
+			->willReturn( null );
 
 		$specialEntityPage = new SpecialEntityPage(
 			new ItemIdParser(),

@@ -84,7 +84,7 @@ class CachingCommonsMediaFileNameLookupTest extends \PHPUnit\Framework\TestCase 
 
 		$fileNameLookup->expects( $matcher )
 			->method( 'normalizePageName' )
-			->will( $this->returnCallback( function( $fileName, $apiUrl ) {
+			->willReturnCallback( function( $fileName, $apiUrl ) {
 				$this->assertSame( 'https://commons.wikimedia.org/w/api.php', $apiUrl );
 
 				if ( strpos( $fileName, 'NOT-FOUND' ) !== false ) {
@@ -96,7 +96,7 @@ class CachingCommonsMediaFileNameLookupTest extends \PHPUnit\Framework\TestCase 
 				}
 
 				return 'File:' . $fileName;
-			} ) );
+			} );
 
 		return $fileNameLookup;
 	}

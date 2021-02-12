@@ -97,9 +97,9 @@ class ItemContentTest extends EntityContentTestCase {
 
 		$badTitle = $this->createMock( Title::class );
 		$badTitle->method( 'getContentModel' )
-			->will( $this->returnValue( 'bad content model' ) );
+			->willReturn( 'bad content model' );
 		$badTitle->method( 'exists' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		return [
 			'all' => [ $holder, $redirect, $title ],
@@ -167,20 +167,20 @@ class ItemContentTest extends EntityContentTestCase {
 
 		$title = $this->createMock( Title::class );
 		$title->method( 'getFullText' )
-			->will( $this->returnValue( $targetId->getSerialization() ) );
+			->willReturn( $targetId->getSerialization() );
 		$title->method( 'getText' )
-			->will( $this->returnValue( $targetId->getSerialization() ) );
+			->willReturn( $targetId->getSerialization() );
 		$title->method( 'isRedirect' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 		$title->method( 'getNamespace' )
-			->will( $this->returnValue( $itemNs ) );
+			->willReturn( $itemNs );
 		$title->method( 'equals' )
-			->will( $this->returnCallback( function( Title $other ) use ( $targetId ) {
+			->willReturnCallback( function( Title $other ) use ( $targetId ) {
 				// XXX: Ignores namespaces
 				return $other->getText() === $targetId->getSerialization();
-			} ) );
+			} );
 		$title->method( 'getLinkURL' )
-			->will( $this->returnValue( 'http://foo.bar/' . $targetId->getSerialization() ) );
+			->willReturn( 'http://foo.bar/' . $targetId->getSerialization() );
 
 		return ItemContent::newFromRedirect( new EntityRedirect( $itemId, $targetId ), $title );
 	}
@@ -255,7 +255,7 @@ class ItemContentTest extends EntityContentTestCase {
 
 		$handler = $this->getItemHandler();
 		$itemContent->method( 'getContentHandler' )
-			->will( $this->returnValue( $handler ) );
+			->willReturn( $handler );
 
 		return $itemContent;
 	}

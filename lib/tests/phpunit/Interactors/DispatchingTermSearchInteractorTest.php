@@ -44,11 +44,11 @@ class DispatchingTermSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 	private function getTermSearchInteractor( array $resultsByEntityType ) {
 		$interactor = $this->createMock( TermSearchInteractor::class );
 		$interactor->method( 'searchForEntities' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function ( $text, $language, $entityType ) use ( $resultsByEntityType ) {
 					return $resultsByEntityType[$entityType] ?? [];
 				}
-			) );
+			);
 		return $interactor;
 	}
 

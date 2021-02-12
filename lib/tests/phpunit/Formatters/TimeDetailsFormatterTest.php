@@ -33,7 +33,7 @@ class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 
 		$timeFormatter = $this->createMock( ValueFormatter::class );
 		$timeFormatter->method( 'format' )
-			->will( $this->returnValue( $formattedHeading ) );
+			->willReturn( $formattedHeading );
 
 		return new TimeDetailsFormatter( $options, $timeFormatter );
 	}

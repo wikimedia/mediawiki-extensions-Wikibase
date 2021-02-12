@@ -21,12 +21,12 @@ class DataValueFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function newInstance() {
 		$deserializer = $this->createMock( Deserializer::class );
 		$deserializer->method( 'deserialize' )
-			->will( $this->returnCallback( function( array $data ) {
+			->willReturnCallback( function( array $data ) {
 				if ( $data['type'] === 'string' ) {
 					return 'success';
 				}
 				throw new DeserializationException();
-			} ) );
+			} );
 
 		return new DataValueFactory( $deserializer );
 	}

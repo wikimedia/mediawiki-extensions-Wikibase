@@ -39,7 +39,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 				$this->isInstanceOf( User::class ),
 				EDIT_UPDATE, 6789
 			)
-			->will( $this->returnValue( new EntityRevision( $expectedProperty, 6790 ) ) );
+			->willReturn( new EntityRevision( $expectedProperty, 6790 ) );
 
 		$propertyDataTypeChanger = $this->getPropertyDataTypeChanger( $entityStore );
 		$propertyDataTypeChanger->changeDataType( $propertyId, $this->createMock( User::class ), 'shinydata' );
@@ -72,7 +72,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 				$this->isInstanceOf( User::class ),
 				EDIT_UPDATE, 6789
 			)
-			->will( $this->throwException( $storageException ) );
+			->willThrowException( $storageException );
 
 		$propertyDataTypeChanger = $this->getPropertyDataTypeChanger( $entityStore );
 
@@ -102,7 +102,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 				0,
 				 LookupConstants::LATEST_FROM_MASTER
 			)
-			->will( $this->returnCallback( function( PropertyId $propertyId ) {
+			->willReturnCallback( function( PropertyId $propertyId ) {
 				if ( $propertyId->getSerialization() === 'P42' ) {
 					$property = new Property(
 						new PropertyId( 'P42' ),
@@ -114,7 +114,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 				} else {
 					return null;
 				}
-			} ) );
+			} );
 
 		return new PropertyDataTypeChanger( $entityRevisionLookup, $entityStore, $this->getDataTypeFactory() );
 	}

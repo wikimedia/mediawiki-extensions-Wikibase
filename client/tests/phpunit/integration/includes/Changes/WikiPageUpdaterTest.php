@@ -51,25 +51,25 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$title->method( 'getArticleID' )
-			->will( $this->returnValue( $id ) );
+			->willReturn( $id );
 
 		$title->method( 'exists' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$title->method( 'getPrefixedDBkey' )
-			->will( $this->returnValue( $text ) );
+			->willReturn( $text );
 
 		$title->method( 'getDBkey' )
-			->will( $this->returnValue( $text ) );
+			->willReturn( $text );
 
 		$title->method( 'getText' )
-			->will( $this->returnValue( $text ) );
+			->willReturn( $text );
 
 		$title->method( 'getNamespace' )
-			->will( $this->returnValue( 0 ) );
+			->willReturn( 0 );
 
 		$title->method( 'getNsText' )
-			->will( $this->returnValue( '' ) );
+			->willReturn( '' );
 
 		return $title;
 	}
@@ -101,7 +101,7 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 		$rootJobParams = [];
 		$jobQueueGroup->expects( $this->atLeastOnce() )
 			->method( 'lazyPush' )
-			->will( $this->returnCallback( function( array $jobs ) use ( &$pages, &$rootJobParams ) {
+			->willReturnCallback( function( array $jobs ) use ( &$pages, &$rootJobParams ) {
 				/** @var Job $job */
 				foreach ( $jobs as $job ) {
 					$this->assertInstanceOf( HTMLCacheUpdateJob::class, $job );
@@ -110,7 +110,7 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 					$pages += $params['pages']; // addition uses keys, array_merge does not
 					$rootJobParams = $job->getRootJobParams();
 				}
-			} ) );
+			} );
 
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
@@ -159,10 +159,10 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 		$jobQueueGroup->expects( $this->atLeastOnce() )
 			->method( 'lazyPush' )
 			->with( $this->isInstanceOf( RefreshLinksJob::class ) )
-			->will( $this->returnCallback( function( Job $job ) use ( &$pages, &$rootJobParams ) {
+			->willReturnCallback( function( Job $job ) use ( &$pages, &$rootJobParams ) {
 				$pages[] = $job->getTitle()->getPrefixedDBkey();
 				$rootJobParams = $job->getRootJobParams();
-			} ) );
+			} );
 
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
@@ -210,7 +210,7 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 		$rootJobParams = [];
 		$jobQueueGroup->expects( $this->atLeastOnce() )
 			->method( 'lazyPush' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function( array $jobs ) use ( &$pages, &$rootJobParams ) {
 					/** @var Job $job */
 					foreach ( $jobs as $job ) {
@@ -221,7 +221,7 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 						$rootJobParams = $job->getRootJobParams();
 					}
 				}
-			) );
+			);
 
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,

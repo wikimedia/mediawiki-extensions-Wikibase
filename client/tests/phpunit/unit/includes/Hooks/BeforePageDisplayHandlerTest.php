@@ -294,7 +294,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$title->method( 'exists' )
-			->will( $this->returnValue( $titleExists ) );
+			->willReturn( $titleExists );
 
 		return $title;
 	}
@@ -310,7 +310,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$user->method( 'isRegistered' )
-			->will( $this->returnValue( $loggedIn ) );
+			->willReturn( $loggedIn );
 
 		return $user;
 	}
@@ -326,7 +326,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$namespaceChecker->method( 'isWikibaseEnabled' )
-			->will( $this->returnValue( $wikibaseEnabled ) );
+			->willReturn( $wikibaseEnabled );
 
 		return $namespaceChecker;
 	}

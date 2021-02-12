@@ -208,7 +208,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 
 		$siteLinkLookup->expects( $this->once() )
 			->method( 'getItemIdForLink' )
-			->will( $this->returnValue( $itemId ) );
+			->willReturn( $itemId );
 
 		return $siteLinkLookup;
 	}
@@ -224,18 +224,18 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$frame->expects( $this->once() )
 			->method( 'expand' )
 			->with( 'Cat' )
-			->will( $this->returnValue( 'Cat' ) );
+			->willReturn( 'Cat' );
 
 		$childFrame = $this->getMockBuilder( PPFrame::class )
 			->getMock();
 		$childFrame->expects( $this->once() )
 			->method( 'getArgument' )
 			->with( 'from' )
-			->will( $this->returnValue( $itemIdSerialization ) );
+			->willReturn( $itemIdSerialization );
 
 		$frame->expects( $this->once() )
 			->method( 'newChild' )
-			->will( $this->returnValue( $childFrame ) );
+			->willReturn( $childFrame );
 
 		return $frame;
 	}
@@ -256,7 +256,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 
 		$rendererFactory->method( 'newRendererFromParser' )
 			->with( $this->isInstanceOf( Parser::class ), $type )
-			->will( $this->returnValue( $renderer ) );
+			->willReturn( $renderer );
 
 		return $rendererFactory;
 	}
@@ -272,7 +272,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 
 		$renderer->method( 'render' )
 			->with( $entityId, $propertyLabelOrId )
-			->will( $this->returnValue( 'meow!' ) );
+			->willReturn( 'meow!' );
 
 		return $renderer;
 	}

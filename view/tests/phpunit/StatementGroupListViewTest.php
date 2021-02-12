@@ -181,11 +181,11 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 		$propertyOrderProvider = $this->createMock( PropertyOrderProvider::class );
 
 		$propertyOrderProvider->method( 'getPropertyOrder' )
-			->will( $this->returnValue( [
+			->willReturn( [
 				'P101' => 0,
 				'P102' => 1,
 				'P103' => 2,
-			] ) );
+			] );
 
 		return $propertyOrderProvider;
 	}
@@ -199,9 +199,9 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$statementHtmlGenerator->method( 'getHtmlForStatement' )
-			->will( $this->returnCallback( function( Statement $statement, $editSectionHtml = null ) {
+			->willReturnCallback( function( Statement $statement, $editSectionHtml = null ) {
 				return $statement->getGuid() . "\n";
-			} ) );
+			} );
 
 		return $statementHtmlGenerator;
 	}
@@ -213,7 +213,7 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 		$entityIdFormatter = $this->createMock( EntityIdFormatter::class );
 
 		$entityIdFormatter->method( 'formatEntityId' )
-			->will( $this->returnValue( '<ID>' ) );
+			->willReturn( '<ID>' );
 
 		return $entityIdFormatter;
 	}

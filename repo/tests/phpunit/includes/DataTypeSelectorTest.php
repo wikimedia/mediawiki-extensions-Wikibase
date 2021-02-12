@@ -31,10 +31,10 @@ class DataTypeSelectorTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$dataType->method( 'getId' )
-			->will( $this->returnValue( $propertyType ) );
+			->willReturn( $propertyType );
 
 		$dataType->method( 'getMessageKey' )
-			->will( $this->returnValue( $messageKey ) );
+			->willReturn( $messageKey );
 
 		return $dataType;
 	}

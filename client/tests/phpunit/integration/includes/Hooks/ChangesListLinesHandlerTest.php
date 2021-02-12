@@ -196,14 +196,14 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 		$formatter = $this->getChangeLineFormatter();
 		$formatter->expects( $this->once() )
 			->method( 'format' )
-			->will( $this->returnArgument( 3 ) ); // $flags
+			->willReturnArgument( 3 ); // $flags
 
 		$changesList = $this->createMock( OldChangesList::class );
 		$changesList->expects( $this->once() )
 			->method( 'recentChangesFlags' )
-			->will( $this->returnCallback( function ( $flags, $sep ) {
+			->willReturnCallback( function ( $flags, $sep ) {
 				return implode( ',', array_keys( $flags, true ) );
-			} ) );
+			} );
 		$changesList->method( 'getUser' )
 			->willReturn( $this->createMock( User::class ) );
 		$changesList->method( 'getLanguage' )

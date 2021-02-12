@@ -96,14 +96,14 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 
 		$handler->expects( $this->once() )
 			->method( 'getParserOutput' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function( array $values, Language $language ) {
 					$this->assertContainsOnlyInstancesOf( GlobeCoordinateValue::class, $values );
 					$this->assertSame( 'qqx', $language->getCode() );
 
 					return $this->getKartographerParserOutput();
 				}
-			) );
+			);
 
 		return $handler;
 	}

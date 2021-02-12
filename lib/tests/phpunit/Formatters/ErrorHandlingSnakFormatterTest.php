@@ -39,14 +39,14 @@ class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 		$formatter = $this->createMock( SnakFormatter::class );
 
 		$formatter->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
+			->willReturn( SnakFormatter::FORMAT_HTML );
 
 		if ( $throw ) {
 			$formatter->method( 'formatSnak' )
-				->will( $this->throwException( $throw ) );
+				->willThrowException( $throw );
 		} else {
 			$formatter->method( 'formatSnak' )
-				->will( $this->returnValue( 'SNAK' ) );
+				->willReturn( 'SNAK' );
 		}
 
 		return $formatter;
@@ -59,7 +59,7 @@ class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 		$formatter = $this->createMock( ValueFormatter::class );
 
 		$formatter->method( 'format' )
-			->will( $this->returnValue( 'VALUE' ) );
+			->willReturn( 'VALUE' );
 
 		return $formatter;
 	}

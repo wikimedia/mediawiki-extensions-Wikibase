@@ -51,16 +51,16 @@ class SnakSerializationRendererTest extends \PHPUnit\Framework\TestCase {
 
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 		$snakFormatter->method( 'formatSnak' )
-			->will( $this->returnCallback( function ( PropertyValueSnak $snak ) {
+			->willReturnCallback( function ( PropertyValueSnak $snak ) {
 				$value = $snak->getDataValue();
 				if ( $value instanceof EntityIdValue ) {
 					return $value->getEntityId()->getSerialization();
 				} else {
 					return $value->getValue();
 				}
-			} ) );
+			} );
 		$snakFormatter->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
+			->willReturn( SnakFormatter::FORMAT_PLAIN );
 
 		$snakDeserializer = $wikibaseClient->getBaseDataModelDeserializerFactory()->newSnakDeserializer();
 		$snaksDeserializer = $wikibaseClient->getBaseDataModelDeserializerFactory()->newSnakListDeserializer();

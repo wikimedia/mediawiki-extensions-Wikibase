@@ -43,11 +43,11 @@ class Scribunto_LuaWikibaseLibraryInProcessEntityCacheTest extends Scribunto_Lua
 		$this->registerMockObject( $entityLookup );
 		$entityLookup->expects( $this->exactly( 20 ) )
 			->method( 'getEntity' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function( ItemId $id ) {
 					return new Item( $id );
 				}
-			) );
+			);
 
 		parent::testLua( $key, $testName, $expected );
 	}

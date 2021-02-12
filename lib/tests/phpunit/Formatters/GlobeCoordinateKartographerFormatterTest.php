@@ -88,7 +88,7 @@ class GlobeCoordinateKartographerFormatterTest extends \PHPUnit\Framework\TestCa
 				$this->isInstanceOf( GlobeCoordinateValue::class ),
 				$this->isInstanceOf( Language::class )
 			)
-			->will( $this->returnValue( $returnValue ) );
+			->willReturn( $returnValue );
 
 		$handler->expects( $this->never() )
 			->method( $isPreview ? 'getHtml' : 'getPreviewHtml' );
@@ -102,7 +102,7 @@ class GlobeCoordinateKartographerFormatterTest extends \PHPUnit\Framework\TestCa
 		$formatter->expects( $this->exactly( $expectedFormatCalls ) )
 			->method( 'format' )
 			->with( $this->isInstanceOf( GlobeCoordinateValue::class ) )
-			->will( $this->returnValue( '<base-formatter-html/>' ) );
+			->willReturn( '<base-formatter-html/>' );
 
 		return $formatter;
 	}

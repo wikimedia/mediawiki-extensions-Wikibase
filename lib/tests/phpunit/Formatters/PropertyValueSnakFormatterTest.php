@@ -135,7 +135,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	private function getMockFormatter( $value ) {
 		$formatter = $this->createMock( ValueFormatter::class );
 		$formatter->method( 'format' )
-			->will( $this->returnValue( $value ) );
+			->willReturn( $value );
 
 		return $formatter;
 	}

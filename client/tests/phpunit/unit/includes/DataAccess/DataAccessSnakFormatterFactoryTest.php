@@ -43,7 +43,7 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$languageFallbackLabelDescriptionLookupFactory->expects( $this->once() )
 			->method( 'newLabelDescriptionLookup' )
-			->will( $this->returnValue( $languageFallbackLabelDescriptionLookup ) );
+			->willReturn( $languageFallbackLabelDescriptionLookup );
 
 		return new DataAccessSnakFormatterFactory(
 			$this->getLanguageFallbackChainFactory(),
@@ -66,7 +66,7 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory->expects( $this->once() )
 			->method( 'newFromLanguage' )
 			->with( $this->isInstanceOf( Language::class ), LanguageFallbackChainFactory::FALLBACK_ALL )
-			->will( $this->returnCallback( [ $realFactory, 'newFromLanguage' ] ) );
+			->willReturnCallback( [ $realFactory, 'newFromLanguage' ] );
 
 		return $factory;
 	}
@@ -82,17 +82,17 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 
 		$snakFormatter->method( 'formatSnak' )
-			->will( $this->returnCallback( function( PropertyValueSnak $snak ) {
+			->willReturnCallback( function( PropertyValueSnak $snak ) {
 				return $snak->getDataValue()->getValue();
-			} ) );
+			} );
 
 		$snakFormatter->method( 'getFormat' )
-			->will( $this->returnValue( $expectedFormat ) );
+			->willReturn( $expectedFormat );
 
 		$factory->expects( $this->once() )
 			->method( 'getSnakFormatter' )
 			->with( $expectedFormat, $this->isInstanceOf( FormatterOptions::class ) )
-			->will( $this->returnValue( $snakFormatter ) );
+			->willReturn( $snakFormatter );
 
 		return $factory;
 	}

@@ -36,19 +36,19 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->exactly( $languageNameCalls ) )
 			->method( 'getName' )
-			->will( $this->returnCallback( function( $languageCode ) {
+			->willReturnCallback( function( $languageCode ) {
 				return "<LANGUAGENAME-$languageCode>";
-			} ) );
+			} );
 
 		$languageDirectionalityLookup = $this->createMock( LanguageDirectionalityLookup::class );
 		$languageDirectionalityLookup->method( 'getDirectionality' )
-			->will( $this->returnCallback( function( $languageCode ) {
+			->willReturnCallback( function( $languageCode ) {
 				return [
 					'en' => 'ltr',
 					'arc' => 'rtl',
 					'qqx' => 'ltr'
 				][ $languageCode ];
-			} ) );
+			} );
 
 		return new TermsListView(
 			TemplateFactory::getDefaultInstance(),

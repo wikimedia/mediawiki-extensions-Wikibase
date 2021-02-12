@@ -36,11 +36,11 @@ class ItemDisambiguationTest extends MediaWikiIntegrationTestCase {
 	private function newInstance() {
 		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->method( 'getTitleForId' )
-			->will( $this->returnValue( $this->createMock( Title::class ) ) );
+			->willReturn( $this->createMock( Title::class ) );
 
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->method( 'getName' )
-			->will( $this->returnValue( '<LANG>' ) );
+			->willReturn( '<LANG>' );
 
 		return new ItemDisambiguation(
 			$entityTitleLookup,

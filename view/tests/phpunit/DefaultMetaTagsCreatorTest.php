@@ -36,14 +36,14 @@ class DefaultMetaTagsCreatorTest extends EntityMetaTagsCreatorTestCase {
 	private function getMockEntityWithId() {
 		$mockEntity = $this->createMock( EntityDocument::class );
 		$mockEntity->method( 'getId' )
-			->will( $this->returnValue( $this->getMockEntityId() ) );
+			->willReturn( $this->getMockEntityId() );
 		return $mockEntity;
 	}
 
 	private function getMockEntityId() {
 		$mockId = $this->createMock( EntityId::class );
 		$mockId->method( 'getSerialization' )
-			->will( $this->returnValue( 'EntityID12345' ) );
+			->willReturn( 'EntityID12345' );
 		return $mockId;
 	}
 

@@ -27,7 +27,7 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCas
 		$formatterUrlExpander = $this->createMock( SnakUrlExpander::class );
 
 		$formatterUrlExpander->method( 'expandUrl' )
-			->will( $this->returnCallback( function( PropertyValueSnak $snak ) {
+			->willReturnCallback( function( PropertyValueSnak $snak ) {
 				$value = $snak->getDataValue()->getValue();
 
 				switch ( $snak->getPropertyId()->getSerialization() ) {
@@ -38,7 +38,7 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCas
 					default:
 						return null;
 				}
-			} ) );
+			} );
 
 		return [
 			'formatter URL' => [

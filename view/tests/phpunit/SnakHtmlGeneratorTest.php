@@ -39,15 +39,15 @@ class SnakHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 		$snakFormatter->expects( $this->once() )
 			->method( 'formatSnak' )
-			->will( $this->returnValue( '<SNAK>' ) );
+			->willReturn( '<SNAK>' );
 		$snakFormatter->expects( $this->once() )
 			->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
+			->willReturn( SnakFormatter::FORMAT_HTML );
 
 		$propertyIdFormatter = $this->createMock( EntityIdFormatter::class );
 		$propertyIdFormatter->expects( $formatPropertyIdMatcher )
 			->method( 'formatEntityId' )
-			->will( $this->returnValue( '<ID>' ) );
+			->willReturn( '<ID>' );
 
 		return new SnakHtmlGenerator(
 			TemplateFactory::getDefaultInstance(),

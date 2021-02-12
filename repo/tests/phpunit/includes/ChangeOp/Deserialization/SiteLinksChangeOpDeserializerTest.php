@@ -121,9 +121,9 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$badgeValidator->method( $this->anything() )
-			->will( $this->throwException(
+			->willThrowException(
 				new ChangeOpDeserializationException( 'invalid badge data', 'test-badge-error' )
-			) );
+			);
 
 		$deserializer = new SiteLinksChangeOpDeserializer(
 			$badgeValidator,
@@ -147,13 +147,13 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenTitleNotFoundOnSite_createEntityChangeOpThrowsException() {
 		$site = $this->createMock( Site::class );
 		$site->method( 'getGlobalId' )
-			->will( $this->returnValue( self::SITE_ID ) );
+			->willReturn( self::SITE_ID );
 		$site->method( 'getGroup' )
-			->will( $this->returnValue( 'testwikis' ) );
+			->willReturn( 'testwikis' );
 		$site->method( 'getNavigationIds' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 		$site->method( 'normalizePageName' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 
 		$deserializer = new SiteLinksChangeOpDeserializer(
 			$this->newBadgeSerializationValidator(),

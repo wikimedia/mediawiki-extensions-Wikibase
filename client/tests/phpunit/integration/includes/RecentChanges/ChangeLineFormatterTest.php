@@ -573,22 +573,22 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$title = $this->createMock( Title::class );
 
 		$title->method( 'getNamespace' )
-			->will( $this->returnValue( $ns ) );
+			->willReturn( $ns );
 
 		$title->method( 'getText' )
-			->will( $this->returnValue( $text ) );
+			->willReturn( $text );
 
 		$title->method( 'getDBkey' )
-			->will( $this->returnValue( str_replace( ' ', '_', $text ) ) );
+			->willReturn( str_replace( ' ', '_', $text ) );
 
 		$title->method( 'getArticleID' )
-			->will( $this->returnValue( $pageId ) );
+			->willReturn( $pageId );
 
 		$title->method( 'getLatestRevID' )
-			->will( $this->returnValue( $currentRevision ) );
+			->willReturn( $currentRevision );
 
 		$title->method( 'getLength' )
-			->will( $this->returnValue( 1234 ) );
+			->willReturn( 1234 );
 
 		return $title;
 	}

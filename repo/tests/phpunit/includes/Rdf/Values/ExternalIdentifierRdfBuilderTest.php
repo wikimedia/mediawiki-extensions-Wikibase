@@ -39,9 +39,9 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	public function testAddValue() {
 		$uriPatternProvider = $this->createMock( PropertyInfoProvider::class );
 		$uriPatternProvider->method( 'getPropertyInfo' )
-			->will( $this->returnCallback( function( PropertyId $id ) {
+			->willReturnCallback( function( PropertyId $id ) {
 				return $id->getSerialization() === 'P1' ? 'http://xyzzy.test/vocab/$1' : null;
-			} ) );
+			} );
 
 		$vocabulary = new RdfVocabulary(
 			[ '' => '<BASE>' ],

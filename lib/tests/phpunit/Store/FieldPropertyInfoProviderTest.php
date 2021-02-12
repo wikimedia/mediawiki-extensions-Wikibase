@@ -27,7 +27,7 @@ class FieldPropertyInfoProviderTest extends \PHPUnit\Framework\TestCase {
 		$lookup->expects( $this->once() )
 			->method( 'getPropertyInfo' )
 			->with( $propertyId )
-			->will( $this->returnValue( $info ) );
+			->willReturn( $info );
 
 		$instance = new FieldPropertyInfoProvider( $lookup, $key );
 		$this->assertSame( $expected, $instance->getPropertyInfo( $propertyId ) );

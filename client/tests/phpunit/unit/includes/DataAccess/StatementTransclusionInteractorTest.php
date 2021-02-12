@@ -176,7 +176,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$snaksFinder->method( 'findSnaks' )
-			->will( $this->returnValue( $snaks ) );
+			->willReturn( $snaks );
 
 		return $snaksFinder;
 	}
@@ -190,7 +190,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$propertyIdResolver->method( 'resolvePropertyId' )
-			->will( $this->returnValue( new PropertyId( 'P1337' ) ) );
+			->willReturn( new PropertyId( 'P1337' ) );
 
 		return $propertyIdResolver;
 	}
@@ -204,10 +204,9 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$propertyIdResolver->method( 'resolvePropertyId' )
-			->will( $this->returnCallback( function( $propertyLabelOrId, $languageCode ) {
+			->willReturnCallback( function( $propertyLabelOrId, $languageCode ) {
 				throw new PropertyLabelNotResolvedException( $propertyLabelOrId, $languageCode );
-			} )
-		);
+			} );
 
 		return $propertyIdResolver;
 	}
@@ -223,7 +222,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 		$lookup = $this->createMock( EntityRevisionLookup::class );
 
 		$lookup->method( 'getEntityRevision' )
-			->will( $this->returnCallback( function( EntityId $entityId ) {
+			->willReturnCallback( function( EntityId $entityId ) {
 				switch ( $entityId->getSerialization() ) {
 					case 'Q42':
 						return new EntityRevision( new Item( new ItemId( 'Q42' ) ) );
@@ -235,8 +234,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 					default:
 						return null;
 				}
-			} )
-		);
+			} );
 
 		return $lookup;
 	}
@@ -250,7 +248,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 
 		$snakFormatter->method( 'formatSnak' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function ( Snak $snak ) {
 					if ( $snak instanceof PropertyValueSnak ) {
 						$value = $snak->getDataValue();
@@ -265,10 +263,10 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 						return '(' . $snak->getType() . ')';
 					}
 				}
-			) );
+			);
 
 		$snakFormatter->method( 'getFormat' )
-			->will( $this->returnValue( $format ) );
+			->willReturn( $format );
 
 		return $snakFormatter;
 	}

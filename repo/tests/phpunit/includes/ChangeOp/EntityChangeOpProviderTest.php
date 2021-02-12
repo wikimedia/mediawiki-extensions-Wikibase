@@ -40,7 +40,7 @@ class EntityChangeOpProviderTest extends \PHPUnit\Framework\TestCase {
 	private function getChangeOpDeserializer() {
 		$deserializer = $this->createMock( ChangeOpDeserializer::class );
 		$deserializer->method( $this->anything() )
-			->will( $this->returnValue( $this->createMock( ChangeOp::class ) ) );
+			->willReturn( $this->createMock( ChangeOp::class ) );
 
 		return $deserializer;
 	}

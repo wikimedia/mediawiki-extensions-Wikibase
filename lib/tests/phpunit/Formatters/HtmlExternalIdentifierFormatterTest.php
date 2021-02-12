@@ -27,14 +27,14 @@ class HtmlExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatterUrlExpander = $this->createMock( SnakUrlExpander::class );
 
 		$formatterUrlExpander->method( 'expandUrl' )
-			->will( $this->returnCallback( function( PropertyValueSnak $snak ) {
+			->willReturnCallback( function( PropertyValueSnak $snak ) {
 				if ( $snak->getPropertyId()->getSerialization() === 'P1' ) {
 					$value = $snak->getDataValue()->getValue();
 					return 'http://acme.test/stuff/' . wfUrlencode( $value );
 				}
 
 				return null;
-			} ) );
+			} );
 
 		return [
 			'formatter URL' => [

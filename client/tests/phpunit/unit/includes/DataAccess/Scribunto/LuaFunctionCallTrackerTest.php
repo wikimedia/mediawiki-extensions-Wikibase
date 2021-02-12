@@ -54,9 +54,9 @@ class LuaFunctionCallTrackerTest extends \PHPUnit\Framework\TestCase {
 		$keyBuffer = [];
 		$statsdFactory->expects( $this->exactly( count( $expected ) ) )
 			->method( 'increment' )
-			->will( $this->returnCallback( function ( $key ) use ( &$keyBuffer ) {
+			->willReturnCallback( function ( $key ) use ( &$keyBuffer ) {
 				$keyBuffer[] = $key;
-			} ) );
+			} );
 
 		$tracker = new LuaFunctionCallTracker(
 			$statsdFactory,

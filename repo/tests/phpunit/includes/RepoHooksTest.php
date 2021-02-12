@@ -325,13 +325,13 @@ XML
 		$parserOutput = $this->createMock( ParserOutput::class );
 		$parserOutput->expects( $this->exactly( 5 ) )
 			->method( 'getExtensionData' )
-			->will( $this->returnCallback( function ( $key ) use ( $altLinks ) {
+			->willReturnCallback( function ( $key ) use ( $altLinks ) {
 				if ( $key === 'wikibase-alternate-links' ) {
 					return $altLinks;
 				} else {
 					return $key;
 				}
-			} ) );
+			} );
 
 		RepoHooks::onOutputPageParserOutput( $out, $parserOutput );
 

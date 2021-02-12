@@ -174,7 +174,7 @@ class UpdateRepoHookHandlerTest extends TestCase {
 			array_diff( get_class_methods( Title::class ), [ '__get', '__set' ] )
 		);
 		$title->method( 'getPrefixedText' )
-			->will( $this->returnValue( 'UpdateRepoHookHandlersTest' ) );
+			->willReturn( 'UpdateRepoHookHandlersTest' );
 
 		return $title;
 	}
@@ -189,14 +189,14 @@ class UpdateRepoHookHandlerTest extends TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$namespaceChecker->method( 'isWikibaseEnabled' )
-			->will( $this->returnValue( $isWikibaseEnabled ) );
+			->willReturn( $isWikibaseEnabled );
 
 		$jobQueue = $this->getMockBuilder( JobQueue::class )
 			->disableOriginalConstructor()
 			->setMethods( [ 'supportsDelayedJobs' ] )
 			->getMockForAbstractClass();
 		$jobQueue->method( 'supportsDelayedJobs' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$jobQueueGroup = $this->getMockBuilder( JobQueueGroup::class )
 			->disableOriginalConstructor()
@@ -208,7 +208,7 @@ class UpdateRepoHookHandlerTest extends TestCase {
 			$jobQueueGroup->expects( $this->once() )
 				->method( 'get' )
 				->with( $jobName )
-				->will( $this->returnValue( $jobQueue ) );
+				->willReturn( $jobQueue );
 		} else {
 			$jobQueueGroup->expects( $this->never() )
 				->method( 'push' );
@@ -219,7 +219,7 @@ class UpdateRepoHookHandlerTest extends TestCase {
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 		$siteLinkLookup->method( 'getItemIdForLink' )
 			->with( 'clientwiki', 'UpdateRepoHookHandlersTest' )
-			->will( $this->returnValue( $itemId ) );
+			->willReturn( $itemId );
 
 		return new UpdateRepoHookHandler(
 			$namespaceChecker,

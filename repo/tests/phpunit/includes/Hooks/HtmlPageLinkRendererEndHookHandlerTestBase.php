@@ -182,7 +182,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 		$termLookup = $this->createMock( TermLookup::class );
 
 		$termLookup->method( 'getLabels' )
-			->will( $this->returnCallback( function ( EntityId $id ) {
+			->willReturnCallback( function ( EntityId $id ) {
 				switch ( $id->getSerialization() ) {
 					case self::ITEM_WITH_LABEL:
 					case self::ITEM_LABEL_NO_DESCRIPTION:
@@ -198,10 +198,10 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 					default:
 						throw new StorageException( "Unexpected entity id $id" );
 				}
-			} ) );
+			} );
 
 		$termLookup->method( 'getDescriptions' )
-			->will( $this->returnCallback( function ( EntityId $id ) {
+			->willReturnCallback( function ( EntityId $id ) {
 				switch ( $id->getSerialization() ) {
 					case self::ITEM_WITH_LABEL:
 						return [ 'en' => self::DUMMY_DESCRIPTION ];
@@ -217,7 +217,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 					default:
 						throw new StorageException( "Unexpected entity id $id" );
 				}
-			} ) );
+			} );
 
 		return $termLookup;
 	}
@@ -234,11 +234,9 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 	private function getInterwikiLookup() {
 		$lookup = $this->createMock( InterwikiLookup::class );
 		$lookup->method( 'isValidInterwiki' )
-			->will(
-				$this->returnCallback( function( $interwiki ) {
-					return $interwiki === self::FOREIGN_REPO_PREFIX;
-				} )
-			);
+			->willReturnCallback( function( $interwiki ) {
+				return $interwiki === self::FOREIGN_REPO_PREFIX;
+			} );
 		return $lookup;
 	}
 

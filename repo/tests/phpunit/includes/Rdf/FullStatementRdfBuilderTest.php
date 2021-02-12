@@ -71,10 +71,10 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$mentionTracker = $this->createMock( EntityMentionListener::class );
 		$mentionTracker->method( 'propertyMentioned' )
-			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {
+			->willReturnCallback( function( EntityId $id ) use ( &$mentioned ) {
 				$key = $id->getSerialization();
 				$mentioned[$key] = $id;
-			} ) );
+			} );
 
 		// Note: using the actual factory here makes this an integration test!
 		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();

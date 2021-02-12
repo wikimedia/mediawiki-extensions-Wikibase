@@ -86,16 +86,16 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->method( 'getLabels' )
-			->will( $this->returnCallback( function( EntityId $entityId, $languageCodes ) {
+			->willReturnCallback( function( EntityId $entityId, $languageCodes ) {
 				$labels = [];
 				foreach ( $languageCodes as $languageCode ) {
 					$labels[$languageCode] = 'label-' . $languageCode . '-' . $entityId->getSerialization();
 				}
 				return $labels;
 			}
-			) );
+			);
 		$mock->method( 'getDescriptions' )
-			->will( $this->returnCallback( function( EntityId $entityId, $languageCodes ) {
+			->willReturnCallback( function( EntityId $entityId, $languageCodes ) {
 				$descriptions = [];
 				foreach ( $languageCodes as $languageCode ) {
 					$descriptions[$languageCode] =
@@ -103,7 +103,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				}
 				return $descriptions;
 			}
-			) );
+			);
 		return $mock;
 	}
 
@@ -119,9 +119,9 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 			->disableOriginalConstructor()
 			->getMock();
 		$mockFactory->method( 'newFromLanguageCode' )
-			->will( $this->returnCallback( function( $langCode ) {
+			->willReturnCallback( function( $langCode ) {
 				return $this->getMockLanguageFallbackChainFromLanguage( $langCode );
-			} ) );
+			} );
 		return $mockFactory;
 	}
 
@@ -135,14 +135,14 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 			->disableOriginalConstructor()
 			->getMock();
 		$mockFallbackChain->method( 'getFetchLanguageCodes' )
-			->will( $this->returnCallback( function () use( $langCode ) {
+			->willReturnCallback( function () use( $langCode ) {
 				if ( $langCode === 'en-gb' || $langCode === 'en-ca' ) {
 					return [ $langCode, 'en' ];
 				}
 				return [ $langCode ]; // no fallback for everything else...
-			} ) );
+			} );
 		$mockFallbackChain->method( 'extractPreferredValue' )
-			->will( $this->returnCallback( function( $data ) {
+			->willReturnCallback( function( $data ) {
 				foreach ( $data as $languageCode => $value ) {
 					return [
 						'value' => $value,
@@ -151,7 +151,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 					];
 				}
 				return null;
-			} ) );
+			} );
 		return $mockFallbackChain;
 	}
 

@@ -195,7 +195,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 		$formatterFactory->expects( $this->once() )
 			->method( 'getSnakFormatter' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function( $format, FormatterOptions $options ) use ( $allowDataAccessInUserLanguage )  {
 					$this->assertSame(
 						$allowDataAccessInUserLanguage ? 'es' : 'de',
@@ -203,7 +203,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 					);
 					return $this->createMock( SnakFormatter::class );
 				}
-			) );
+			);
 
 		$factory = new StatementGroupRendererFactory(
 			$labelResolver,
@@ -257,7 +257,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$snakListFinder = $this->createMock( SnaksFinder::class );
 
 		$snakListFinder->method( 'findSnaks' )
-			->will( $this->returnCallback( function(
+			->willReturnCallback( function(
 				StatementListProvider $statementListProvider,
 				PropertyId $propertyId,
 				array $acceptableRanks = null
@@ -265,7 +265,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 				return [
 					new PropertyValueSnak( $propertyId, new EntityIdValue( new ItemId( 'Q7' ) ) )
 				];
-			} ) );
+			} );
 
 		return $snakListFinder;
 	}
@@ -281,14 +281,14 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 
 		$snakFormatter->method( 'formatSnak' )
-			->will( $this->returnValue( 'Kittens!' ) );
+			->willReturn( 'Kittens!' );
 
 		$snakFormatterFactory = $this->getMockBuilder( OutputFormatSnakFormatterFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$snakFormatterFactory->method( 'getSnakFormatter' )
-			->will( $this->returnValue( $snakFormatter ) );
+			->willReturn( $snakFormatter );
 
 		return $snakFormatterFactory;
 	}
@@ -300,12 +300,12 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$entityLookup = $this->createMock( EntityLookup::class );
 
 		$entityLookup->method( 'getEntity' )
-			->will( $this->returnCallback( function ( EntityId $id ) {
+			->willReturnCallback( function ( EntityId $id ) {
 				return new Item( $id );
-			} ) );
+			} );
 
 		$entityLookup->method( 'hasEntity' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		return $entityLookup;
 	}
@@ -359,7 +359,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$languageFallbackLabelDescriptionLookupFactory->method( 'newLabelDescriptionLookup' )
-			->will( $this->returnValue( $languageFallbackLabelDescriptionLookup ) );
+			->willReturn( $languageFallbackLabelDescriptionLookup );
 
 		return $languageFallbackLabelDescriptionLookupFactory;
 	}

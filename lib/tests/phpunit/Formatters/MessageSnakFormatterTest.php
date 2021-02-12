@@ -43,7 +43,7 @@ class MessageSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 
 		foreach ( [ 'parse', 'text', 'plain' ] as $method ) {
 			$message->method( $method )
-				->will( $this->returnValue( $method ) );
+				->willReturn( $method );
 		}
 
 		return new MessageSnakFormatter( $snakType, $message, $format );

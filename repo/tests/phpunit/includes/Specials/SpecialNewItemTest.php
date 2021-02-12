@@ -413,7 +413,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		/** @var MockObject|TermValidatorFactory $mock */
 		$mock = $this->createMock( TermValidatorFactory::Class );
 		$mock->method( $this->anything() )
-			->will( $this->returnValue( $validatorMock ) );
+			->willReturn( $validatorMock );
 
 		return $mock;
 	}

@@ -33,9 +33,9 @@ class DifferencesSnakVisualizerTest extends MediaWikiIntegrationTestCase {
 	public function newSnakFormatter( $returnValue = '<i>SNAK</i>', $format = SnakFormatter::FORMAT_HTML ) {
 		$instance = $this->createMock( SnakFormatter::class );
 		$instance->method( 'getFormat' )
-			->will( $this->returnValue( $format ) );
+			->willReturn( $format );
 		$instance->method( 'formatSnak' )
-			->will( $this->returnValue( $returnValue ) );
+			->willReturn( $returnValue );
 		return $instance;
 	}
 
@@ -46,7 +46,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiIntegrationTestCase {
 		$instance = $this->createMock( EntityIdFormatter::class );
 
 		$instance->method( 'formatEntityId' )
-			->will( $this->returnValue( '<a>PID</a>' ) );
+			->willReturn( '<a>PID</a>' );
 
 		return $instance;
 	}

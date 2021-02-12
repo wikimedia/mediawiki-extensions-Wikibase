@@ -50,7 +50,7 @@ class EntityTermSearchHelperTest extends \PHPUnit\Framework\TestCase {
 				$this->equalTo( $type ),
 				$this->equalTo( [ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ] )
 			)
-			->will( $this->returnValue( $returnResults ) );
+			->willReturn( $returnResults );
 		return $mock;
 	}
 

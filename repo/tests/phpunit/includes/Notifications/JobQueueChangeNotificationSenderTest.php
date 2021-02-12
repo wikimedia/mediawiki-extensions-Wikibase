@@ -31,7 +31,7 @@ class JobQueueChangeNotificationSenderTest extends \PHPUnit\Framework\TestCase {
 		$jobQueueGroup->expects( $this->exactly( $expectedChunks ? 1 : 0 ) )
 			->method( 'lazyPush' )
 			->with( $this->isType( 'array' ) )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function( array $jobs ) use ( $expectedChunks ) {
 					$this->assertCount( $expectedChunks, $jobs );
 					$this->assertContainsOnlyInstancesOf(
@@ -45,7 +45,7 @@ class JobQueueChangeNotificationSenderTest extends \PHPUnit\Framework\TestCase {
 						$this->assertSame( 'repo-db', $params['repo'] );
 						$this->assertContainsOnly( 'int', $params['changeIds'] );
 					}
-				} )
+				}
 			);
 
 		$jobQueueGroupFactory = function( $wikiId ) use ( $jobQueueGroup ) {
@@ -65,7 +65,7 @@ class JobQueueChangeNotificationSenderTest extends \PHPUnit\Framework\TestCase {
 	public function sendNotificationProvider() {
 		$change = $this->createMock( Change::class );
 		$change->method( 'getId' )
-			->will( $this->returnValue( 4 ) );
+			->willReturn( 4 );
 
 		return [
 			'no changes' => [

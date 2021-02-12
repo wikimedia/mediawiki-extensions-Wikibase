@@ -133,9 +133,9 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$entityTitleLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				return Title::makeTitle( NS_MAIN, $id->getSerialization() );
-			} ) );
+			} );
 
 		return $entityTitleLookup;
 	}
@@ -147,9 +147,9 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 
 		$entityIdLookup->method( 'getEntityIdForTitle' )
-			->will( $this->returnCallback( function( Title $title ) {
+			->willReturnCallback( function( Title $title ) {
 				return new ItemId( $title->getText() );
-			} ) );
+			} );
 
 		return $entityIdLookup;
 	}
@@ -165,7 +165,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		$loadBalancer = $this->createMock( ILoadBalancer::class );
 
 		$loadBalancer->method( 'getConnection' )
-			->will( $this->returnValue( $db ) );
+			->willReturn( $db );
 
 		return $loadBalancer;
 	}
@@ -179,7 +179,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		$db = $this->createMock( IDatabase::class );
 
 		$db->method( 'selectRow' )
-			->will( $this->returnValue( (object)$row ) );
+			->willReturn( (object)$row );
 
 		return $db;
 	}

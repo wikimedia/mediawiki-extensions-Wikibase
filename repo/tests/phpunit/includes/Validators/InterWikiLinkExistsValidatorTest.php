@@ -30,9 +30,9 @@ class InterWikiLinkExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 
 		$pageNormalizer->method( 'normalizePageName' )
 			->with( $this->isType( 'string' ), $this->anything() )
-			->will( $this->returnCallback( function( $pageName ) {
+			->willReturnCallback( function( $pageName ) {
 				return $pageName === self::EXISTING_PAGE ? $pageName : false;
-			} ) );
+			} );
 
 		return $pageNormalizer;
 	}

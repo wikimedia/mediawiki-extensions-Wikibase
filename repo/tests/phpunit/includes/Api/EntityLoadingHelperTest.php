@@ -43,7 +43,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$apiBase->method( 'extractRequestParams' )
-			->will( $this->returnValue( $params ) );
+			->willReturn( $params );
 
 		return $apiBase;
 	}
@@ -71,9 +71,9 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 				->with( $entityId );
 
 			if ( $exception ) {
-				$invocation->will( $this->throwException( $exception ) );
+				$invocation->willThrowException( $exception );
 			} else {
-				$invocation->will( $this->returnValue( $entityRevision ) );
+				$invocation->willReturn( $entityRevision );
 			}
 		}
 
@@ -96,7 +96,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 			$mock->expects( $this->once() )
 				->method( 'dieException' )
 				->with( $this->isInstanceOf( Exception::class ), $expectedExceptionCode )
-				->will( $this->throwException( $apiUsageException ) );
+				->willThrowException( $apiUsageException );
 		} else {
 			$mock->expects( $this->never() )
 				->method( 'dieException' );
@@ -109,7 +109,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 			$mock->expects( $this->once() )
 				->method( $dieWithErrorCodeMethods )
 				->with( $this->anything(), $expectedErrorCode )
-				->will( $this->throwException( $apiUsageException ) );
+				->willThrowException( $apiUsageException );
 		} else {
 			$mock->expects( $this->never() )
 				->method( $dieWithErrorCodeMethods );
@@ -129,7 +129,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$revision->method( 'getEntity' )
-			->will( $this->returnValue( $entity ) );
+			->willReturn( $entity );
 
 		return $revision;
 	}
@@ -207,7 +207,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 		$entityByLinkedTitleLookup->expects( $this->once() )
 			->method( 'getEntityIdForLinkedTitle' )
 			->with( 'foowiki', 'FooBar' )
-			->will( $this->returnValue( $id ) );
+			->willReturn( $id );
 
 		$helper->setEntityByLinkedTitleLookup( $entityByLinkedTitleLookup );
 

@@ -32,7 +32,7 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 		$dateTimeFormatter = $this->createMock( ValueFormatter::class );
 
 		$dateTimeFormatter->method( 'format' )
-			->will( $this->returnValue( 'MOCKDATE' ) );
+			->willReturn( 'MOCKDATE' );
 
 		return new HtmlTimeFormatter( $options, $dateTimeFormatter );
 	}

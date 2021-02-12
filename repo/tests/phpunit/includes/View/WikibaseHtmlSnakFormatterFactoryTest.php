@@ -40,7 +40,7 @@ class WikibaseHtmlSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallbackChain,
 				] )
 			)
-			->will( $this->returnValue( $snakFormatter ) );
+			->willReturn( $snakFormatter );
 
 		$factory = new WikibaseHtmlSnakFormatterFactory( $outputFormatSnakFormatterFactory );
 

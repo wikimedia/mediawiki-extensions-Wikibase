@@ -41,14 +41,14 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		$mock = $this->createMock( SiteLinkLookup::class );
 
 		$mock->method( 'getLinks' )
-			->will( $this->returnCallback( function( $itemIds, $siteIds ) {
+			->willReturnCallback( function( $itemIds, $siteIds ) {
 				$result = [ [ '', 'TestPageName' ] ];
 				if ( $siteIds === [ 'dewiki' ] && $itemIds === [ 23 ] ) {
 					return $result;
 				} else {
 					return null;
 				}
-			} ) );
+			} );
 
 		return $mock;
 	}
@@ -70,13 +70,13 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	private function getEntityRedirectLookup() {
 		$mock = $this->createMock( EntityRedirectLookup::class );
 		$mock->method( 'getRedirectForEntityId' )
-			->will( $this->returnCallback( function( ItemId $id ) {
+			->willReturnCallback( function( ItemId $id ) {
 				if ( $id->getSerialization() === 'Q24' ) {
 					return new ItemId( 'Q23' );
 				} else {
 					return null;
 				}
-			} ) );
+			} );
 
 		return $mock;
 	}
@@ -87,13 +87,13 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	private function getEntityIdParser() {
 		$mock = $this->createMock( EntityIdParser::class );
 		$mock->method( 'parse' )
-			->will( $this->returnCallback( function( $itemString ) {
+			->willReturnCallback( function( $itemString ) {
 				try {
 					return new ItemId( $itemString );
 				} catch ( InvalidArgumentException $ex ) {
 					throw new EntityIdParsingException();
 				}
-			} ) );
+			} );
 
 		return $mock;
 	}
@@ -104,10 +104,10 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	private function getEntityLookup() {
 		$mock = $this->createMock( EntityLookup::class );
 		$mock->method( 'hasEntity' )
-			->will( $this->returnCallback( function( ItemId $itemId ) {
+			->willReturnCallback( function( ItemId $itemId ) {
 				$id = $itemId->getSerialization();
 				return $id === 'Q23' || $id === 'Q24';
-			} ) );
+			} );
 
 		return $mock;
 	}

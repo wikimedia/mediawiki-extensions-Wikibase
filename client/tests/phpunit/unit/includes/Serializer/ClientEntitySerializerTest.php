@@ -35,11 +35,11 @@ class ClientEntitySerializerTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$fallbackChain->method( 'extractPreferredValue' )
-			->will( $this->returnValue( [ 'source' => '<SOURCE>' ] ) );
+			->willReturn( [ 'source' => '<SOURCE>' ] );
 
 		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$dataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( '<DATATYPE>' ) );
+			->willReturn( '<DATATYPE>' );
 
 		return new ClientEntitySerializer(
 			$serializerFactory->newItemSerializer(),

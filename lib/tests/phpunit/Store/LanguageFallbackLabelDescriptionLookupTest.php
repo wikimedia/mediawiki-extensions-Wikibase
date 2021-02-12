@@ -101,22 +101,22 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiIntegrationTes
 			->getMock();
 
 		$languageFallbackChain->method( 'extractPreferredValue' )
-			->will( $this->returnCallback( function( array $fallbackData ) use ( $languageCode ) {
+			->willReturnCallback( function( array $fallbackData ) use ( $languageCode ) {
 				if ( $languageCode === 'zh' && array_key_exists( 'zh-cn', $fallbackData ) ) {
 					return [ 'value' => 'fallbackterm', 'language' => 'zh-cn', 'source' => 'zh-xy' ];
 				} else {
 					return null;
 				}
-			} ) );
+			} );
 
 		$languageFallbackChain->method( 'getFetchLanguageCodes' )
-			->will( $this->returnCallback( function() use ( $languageCode ) {
+			->willReturnCallback( function() use ( $languageCode ) {
 				if ( $languageCode === 'zh' ) {
 					return [ 'zh', 'zh-cn', 'zh-xy' ];
 				} else {
 					return [ $languageCode ];
 				}
-			} ) );
+			} );
 
 		return $languageFallbackChain;
 	}

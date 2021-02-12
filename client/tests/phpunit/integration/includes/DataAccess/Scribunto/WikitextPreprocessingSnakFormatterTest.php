@@ -39,10 +39,10 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiIntegrationTestCas
 		$mockFormatter->expects( $expectedSnak ? $this->once() : $this->never() )
 			->method( 'formatSnak' )
 			->with( $expectedSnak )
-			->will( $this->returnValue( $formattedValue ) );
+			->willReturn( $formattedValue );
 		$mockFormatter->expects( $this->atLeast( 1 ) )
 			->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_WIKI ) );
+			->willReturn( SnakFormatter::FORMAT_WIKI );
 
 		return $mockFormatter;
 	}
@@ -51,7 +51,7 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiIntegrationTestCas
 		$mockFormatter = $this->createMock( SnakFormatter::class );
 		$mockFormatter->expects( $this->once() )
 			->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
+			->willReturn( SnakFormatter::FORMAT_PLAIN );
 
 		$this->expectException( InvalidArgumentException::class );
 		new WikitextPreprocessingSnakFormatter(

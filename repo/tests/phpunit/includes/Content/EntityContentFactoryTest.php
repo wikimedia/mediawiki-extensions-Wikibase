@@ -154,7 +154,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 	public function testGetTitleForId_nonLocalEntity() {
 		$lookup = $this->createMock( InterwikiLookup::class );
 		$lookup->method( 'isValidInterwiki' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 		$this->setService( 'InterwikiLookup', $lookup );
 
 		$factory = $this->newFactory();
@@ -177,7 +177,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 	public function testGetTitlesForIds_nonLocalEntity() {
 		$lookup = $this->createMock( InterwikiLookup::class );
 		$lookup->method( 'isValidInterwiki' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 		$this->setService( 'InterwikiLookup', $lookup );
 
 		$factory = $this->newFactory();

@@ -68,9 +68,9 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleStoreLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
-			} ) );
+			} );
 
 		$entityContentFactory = $this->createMock( EntityContentFactory::class );
 		// implements EntityTitleLookup but should never be used as such (T269603)
@@ -82,7 +82,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$dataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( 'string' ) );
+			->willReturn( 'string' );
 
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$serializerFactory = new SerializerFactory(

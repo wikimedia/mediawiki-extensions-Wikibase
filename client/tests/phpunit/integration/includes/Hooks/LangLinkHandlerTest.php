@@ -111,10 +111,10 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$badgeDisplay->method( 'attachBadgesToOutput' )
-			->will( $this->returnCallback( function ( array $siteLinks, ParserOutput $parserOutput ) {
+			->willReturnCallback( function ( array $siteLinks, ParserOutput $parserOutput ) {
 				$badges = $this->linksToBadges( $siteLinks );
 				$parserOutput->setExtensionData( 'wikibase_badges', $badges );
-			} ) );
+			} );
 
 		return $badgeDisplay;
 	}

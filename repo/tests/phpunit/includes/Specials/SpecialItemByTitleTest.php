@@ -48,9 +48,9 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		$mock = $this->createMock( EntityTitleLookup::class );
 
 		$mock->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				return Title::makeTitle( NS_MAIN, $id->getSerialization() );
-			} ) );
+			} );
 
 		return $mock;
 	}
@@ -62,7 +62,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		$mock = $this->createMock( LanguageNameLookup::class );
 
 		$mock->method( 'getName' )
-			->will( $this->returnValue( '<LANG>' ) );
+			->willReturn( '<LANG>' );
 
 		return $mock;
 	}

@@ -26,9 +26,9 @@ class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 	protected function makeUriManager() {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
 		$titleLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
-			} ) );
+			} );
 
 		$title = Title::newFromText( "Special:EntityDataUriManagerTest" );
 

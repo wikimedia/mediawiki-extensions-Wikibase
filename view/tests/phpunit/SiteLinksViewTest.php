@@ -136,7 +136,7 @@ class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->method( 'getName' )
-			->will( $this->returnValue( '<LANG>' ) );
+			->willReturn( '<LANG>' );
 
 		return new SiteLinksView(
 			$templateFactory,
@@ -157,7 +157,7 @@ class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 	private function newNumberLocalizer() {
 		$numberLocalizer = $this->createMock( NumberLocalizer::class );
 		$numberLocalizer->method( 'localizeNumber' )
-			->will( $this->returnCallback( 'strval' ) );
+			->willReturnCallback( 'strval' );
 		return $numberLocalizer;
 	}
 
@@ -193,13 +193,13 @@ class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 		$formatter = $this->createMock( EntityIdFormatter::class );
 
 		$formatter->method( 'formatEntityId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() === 'Q42' ) {
 					return 'Featured article';
 				}
 
 				return $id->getSerialization();
-			} ) );
+			} );
 
 		return $formatter;
 	}

@@ -67,9 +67,9 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				return Title::makeTitle( NS_MAIN, $id->getEntityType() . ':' . $id->getSerialization() );
-			} ) );
+			} );
 
 		return $titleLookup;
 	}
@@ -90,10 +90,10 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 		$ok = Status::newGood();
 
 		$permissionChecker->method( 'getPermissionStatusForEntity' )
-			->will( $this->returnValue( $ok ) );
+			->willReturn( $ok );
 
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )
-			->will( $this->returnValue( $ok ) );
+			->willReturn( $ok );
 
 		return $permissionChecker;
 	}
@@ -119,7 +119,7 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 		$formatter = $this->createMock( ValueFormatter::class );
 
 		$formatter->method( 'format' )
-			->will( $this->returnCallback( [ $this, 'formatValueAsText' ] ) );
+			->willReturnCallback( [ $this, 'formatValueAsText' ] );
 
 		return $formatter;
 	}
@@ -131,10 +131,10 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 		$formatter = $this->createMock( SnakFormatter::class );
 
 		$formatter->method( 'formatSnak' )
-			->will( $this->returnCallback( [ $this, 'formatSnakAsText' ] ) );
+			->willReturnCallback( [ $this, 'formatSnakAsText' ] );
 
 		$formatter->method( 'getFormat' )
-			->will( $this->returnValue( 'text/plain' ) );
+			->willReturn( 'text/plain' );
 
 		return $formatter;
 	}

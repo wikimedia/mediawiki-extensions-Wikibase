@@ -40,12 +40,12 @@ class VocabularyUriFormatterTest extends \PHPUnit\Framework\TestCase {
 	public function testFormat( $unit, $expected ) {
 		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelLookup->method( 'getLabel' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() === 'Q112233' ) {
 					throw new LabelDescriptionLookupException( $id, 'No such label!' );
 				}
 				return new Term( 'en', 'LABEL:' . $id->getSerialization() );
-			} ) );
+			} );
 
 		$formatter = new VocabularyUriFormatter(
 			new BasicEntityIdParser(),

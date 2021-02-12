@@ -98,23 +98,23 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$title->method( 'getNamespace' )
-			->will( $this->returnValue( $ns ) );
+			->willReturn( $ns );
 
 		$title->method( 'getDBkey' )
-			->will( $this->returnValue( str_replace( ' ', '_', $text ) ) );
+			->willReturn( str_replace( ' ', '_', $text ) );
 
 		// XXX: This assumes NS_MAIN. Getting namespace names right nicely is hard, they depend on the lang.
 		$title->method( 'getPrefixedText' )
-			->will( $this->returnValue( $text ) );
+			->willReturn( $text );
 
 		$title->method( 'getArticleID' )
-			->will( $this->returnValue( $pageId ) );
+			->willReturn( $pageId );
 
 		$title->method( 'getLatestRevID' )
-			->will( $this->returnValue( $revId ) );
+			->willReturn( $revId );
 
 		$title->method( 'getLength' )
-			->will( $this->returnValue( $length ) );
+			->willReturn( $length );
 
 		return $title;
 	}

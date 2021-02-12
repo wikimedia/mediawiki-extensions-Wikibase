@@ -188,7 +188,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$snaksFinder->method( 'findSnaks' )
-			->will( $this->returnValue( $snaks ) );
+			->willReturn( $snaks );
 
 		return $snaksFinder;
 	}
@@ -202,7 +202,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$propertyIdResolver->method( 'resolvePropertyId' )
-			->will( $this->returnValue( new PropertyId( 'P1337' ) ) );
+			->willReturn( new PropertyId( 'P1337' ) );
 
 		return $propertyIdResolver;
 	}
@@ -216,10 +216,9 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$propertyIdResolver->method( 'resolvePropertyId' )
-			->will( $this->returnCallback( function( $propertyLabelOrId, $languageCode ) {
+			->willReturnCallback( function( $propertyLabelOrId, $languageCode ) {
 				throw new PropertyLabelNotResolvedException( $propertyLabelOrId, $languageCode );
-			} )
-		);
+			} );
 
 		return $propertyIdResolver;
 	}
@@ -232,7 +231,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 	private function getEntityLookup( $entityAccessLimit ) {
 		$lookup = $this->createMock( EntityLookup::class );
 		$lookup->method( 'getEntity' )
-			->will( $this->returnValue( $this->createMock( StatementListProvider::class ) ) );
+			->willReturn( $this->createMock( StatementListProvider::class ) );
 
 		return new RestrictedEntityLookup( $lookup, $entityAccessLimit );
 	}
@@ -244,7 +243,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 
 		$snakFormatter->method( 'formatSnak' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function ( Snak $snak ) {
 					if ( $snak instanceof PropertyValueSnak ) {
 						$value = $snak->getDataValue();
@@ -259,10 +258,10 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 						return '(' . $snak->getType() . ')';
 					}
 				}
-			) );
+			);
 
 		$snakFormatter->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
+			->willReturn( SnakFormatter::FORMAT_PLAIN );
 
 		return $snakFormatter;
 	}

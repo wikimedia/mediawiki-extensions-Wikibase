@@ -46,15 +46,15 @@ class PageConnectionPresentationModelTest extends MediaWikiIntegrationTestCase {
 			->setMethods( $methods )
 			->getMock();
 		$event->method( 'getAgent' )
-			->will( $this->returnValue( $agent ) );
+			->willReturn( $agent );
 		$event->method( 'getBundleHash' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 		$event->method( 'getExtraParam' )
-			->will( $this->returnValue( 'dummy' ) );
+			->willReturn( 'dummy' );
 		$event->method( 'getTitle' )
-			->will( $this->returnValue( $title ) );
+			->willReturn( $title );
 		$event->method( 'getType' )
-			->will( $this->returnValue( EchoNotificationsHandlers::NOTIFICATION_TYPE ) );
+			->willReturn( EchoNotificationsHandlers::NOTIFICATION_TYPE );
 
 		return $event;
 	}

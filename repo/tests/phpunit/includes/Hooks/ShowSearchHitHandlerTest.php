@@ -128,13 +128,13 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 
 		$entityIdLookup->method( 'getEntityIdForTitle' )
-			->will( $this->returnCallback( function( Title $title ) {
+			->willReturnCallback( function( Title $title ) {
 				if ( preg_match( '/^Q(\d+)$/', $title->getText(), $m ) ) {
 					return new ItemId( $m[0] );
 				}
 
 				return null;
-			} ) );
+			} );
 
 		return $entityIdLookup;
 	}
@@ -178,16 +178,16 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	private function getMockFallbackChain( array $languages ) {
 		$mock = $this->createMock( TermLanguageFallbackChain::class );
 		$mock->method( 'getFetchLanguageCodes' )
-			->will( $this->returnValue( $languages ) );
+			->willReturn( $languages );
 		$mock->method( 'extractPreferredValue' )
-			->will( $this->returnCallback( function ( $sourceData ) use ( $languages ) {
+			->willReturnCallback( function ( $sourceData ) use ( $languages ) {
 				foreach ( $languages as $language ) {
 					if ( isset( $sourceData[$language] ) ) {
 						return [ 'language' => $language, 'value' => $sourceData[$language] ];
 					}
 				}
 				return null;
-			} ) );
+			} );
 		return $mock;
 	}
 
@@ -199,10 +199,10 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$entityLookup = $this->createMock( EntityLookup::class );
 		if ( isset( $entities ) ) {
 			$entityLookup->method( 'getEntity' )
-				->will( $this->returnCallback( function ( ItemId $id ) use ( $entities ) {
+				->willReturnCallback( function ( ItemId $id ) use ( $entities ) {
 					$key = $id->getSerialization();
 					return $entities[$key];
-				} ) );
+				} );
 		}
 		return $entityLookup;
 	}

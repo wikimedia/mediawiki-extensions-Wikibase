@@ -96,13 +96,13 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )
-			->will( $this->returnCallback( function( User $user, $permission ) {
+			->willReturnCallback( function( User $user, $permission ) {
 				if ( $user->getName() === 'UserWithoutPermission' && $permission === 'edit' ) {
 					return Status::newFatal( 'permissiondenied' );
 				} else {
 					return Status::newGood();
 				}
-			} ) );
+			} );
 
 		return $permissionChecker;
 	}
@@ -121,9 +121,9 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 			$mock->expects( $this->once() )
 				->method( 'createRedirect' )
 				->with( $redirect->getEntityId(), $redirect->getTargetId() )
-				->will( $this->returnCallback( function() use ( $redirect ) {
+				->willReturnCallback( function() use ( $redirect ) {
 					return $redirect;
-				} ) );
+				} );
 		} else {
 			$mock->expects( $this->never() )
 				->method( 'createRedirect' );
@@ -138,9 +138,9 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	private function getEntityTitleStoreLookup() {
 		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleStoreLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $entityId ) {
+			->willReturnCallback( function( EntityId $entityId ) {
 				return Title::newFromText( $entityId->getSerialization() );
-			} ) );
+			} );
 
 		return $entityTitleStoreLookup;
 	}
@@ -218,7 +218,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$constraintProvider->method( 'getUpdateValidators' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		return $constraintProvider;
 	}
@@ -232,7 +232,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$snakValidator->method( 'validate' )
-			->will( $this->returnValue( Status::newGood() ) );
+			->willReturn( Status::newGood() );
 
 		return $snakValidator;
 	}

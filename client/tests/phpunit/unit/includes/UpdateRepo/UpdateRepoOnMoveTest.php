@@ -36,7 +36,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 		$siteLinkLookupMock = $this->createMock( SiteLinkLookup::class );
 
 		$siteLinkLookupMock->method( 'getItemIdForLink' )
-			->will( $this->returnValue( $entityId ) );
+			->willReturn( $entityId );
 
 		return [
 			'repoDB' => 'wikidata',
@@ -87,11 +87,9 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 
 		$jobQueueGroupMock->expects( $this->once() )
 			->method( 'push' )
-			->will(
-				$this->returnCallback( function( JobSpecification $job ) {
-					$this->verifyJob( $job );
-				} )
-			);
+			->willReturnCallback( function( JobSpecification $job ) {
+				$this->verifyJob( $job );
+			} );
 
 		// Use JobQueueRedis over here, as mocking abstract classes sucks
 		// and it doesn't matter anyway
@@ -101,12 +99,12 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$jobQueue->method( 'supportsDelayedJobs' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$jobQueueGroupMock->expects( $this->once() )
 			->method( 'get' )
 			->with( $this->equalTo( 'UpdateRepoOnMove' ) )
-			->will( $this->returnValue( $jobQueue ) );
+			->willReturn( $jobQueue );
 
 		return $jobQueueGroupMock;
 	}

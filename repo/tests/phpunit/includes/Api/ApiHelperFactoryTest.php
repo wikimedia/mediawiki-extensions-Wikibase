@@ -76,10 +76,10 @@ class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$api->method( 'getResult' )
-			->will( $this->returnValue( $result ) );
+			->willReturn( $result );
 
 		$api->method( 'getLanguage' )
-			->will( $this->returnValue( $language ) );
+			->willReturn( $language );
 
 		return $api;
 	}

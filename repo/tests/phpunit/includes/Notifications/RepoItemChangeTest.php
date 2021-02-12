@@ -27,11 +27,11 @@ class RepoItemChangeTest extends ChangeRowTest {
 
 		$user->expects( $this->atLeastOnce() )
 			->method( 'getId' )
-			->will( $this->returnValue( 7 ) );
+			->willReturn( 7 );
 
 		$user->expects( $this->atLeastOnce() )
 			->method( 'getName' )
-			->will( $this->returnValue( 'Mr. Kittens' ) );
+			->willReturn( 'Mr. Kittens' );
 
 		$entityChange = $this->newItemChange( new ItemId( 'Q7' ) );
 

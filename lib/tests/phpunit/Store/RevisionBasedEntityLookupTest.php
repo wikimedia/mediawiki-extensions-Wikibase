@@ -97,16 +97,16 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 		$revisionLookup = $this->createMock( EntityRevisionLookup::class );
 
 		$revisionLookup->method( 'getEntityRevision' )
-			->will( $this->throwException( new UnresolvedEntityRedirectException(
+			->willThrowException( new UnresolvedEntityRedirectException(
 				new ItemId( 'Q1' ),
 				new ItemId( 'Q2' )
-			) ) );
+			) );
 
 		$revisionLookup->method( 'getLatestRevisionId' )
-			->will( $this->throwException( new UnresolvedEntityRedirectException(
+			->willThrowException( new UnresolvedEntityRedirectException(
 				new ItemId( 'Q1' ),
 				new ItemId( 'Q2' )
-			) ) );
+			) );
 
 		return $revisionLookup;
 	}
@@ -132,10 +132,10 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 		$revisionLookup = $this->createMock( EntityRevisionLookup::class );
 
 		$revisionLookup->method( 'getEntityRevision' )
-			->will( $this->throwException( new \Exception( 'Someone killed a kitten' ) ) );
+			->willThrowException( new \Exception( 'Someone killed a kitten' ) );
 
 		$revisionLookup->method( 'getLatestRevisionId' )
-			->will( $this->throwException( new \Exception( 'Someone killed a kitten' ) ) );
+			->willThrowException( new \Exception( 'Someone killed a kitten' ) );
 
 		return $revisionLookup;
 	}

@@ -141,7 +141,7 @@ class StatementModificationHelperTest extends MediaWikiIntegrationTestCase {
 
 		$changeOp->expects( $this->once() )
 			->method( 'validate' )
-			->will( $this->returnValue( Result::newSuccess() ) );
+			->willReturn( Result::newSuccess() );
 
 		$changeOp->expects( $this->once() )
 			->method( 'apply' );
@@ -157,7 +157,7 @@ class StatementModificationHelperTest extends MediaWikiIntegrationTestCase {
 		$changeOp = $this->createMock( ChangeOp::class );
 
 		$changeOp->method( 'validate' )
-			->will( $this->returnValue( Result::newError( [] ) ) );
+			->willReturn( Result::newError( [] ) );
 
 		$changeOp->expects( $this->never() )
 			->method( 'apply' );
@@ -174,10 +174,10 @@ class StatementModificationHelperTest extends MediaWikiIntegrationTestCase {
 		$changeOp = $this->createMock( ChangeOp::class );
 
 		$changeOp->method( 'validate' )
-			->will( $this->returnValue( Result::newSuccess() ) );
+			->willReturn( Result::newSuccess() );
 
 		$changeOp->method( 'apply' )
-			->will( $this->throwException( new ChangeOpException() ) );
+			->willThrowException( new ChangeOpException() );
 
 		$this->expectException( RuntimeException::class );
 		$this->expectExceptionMessage( 'modification-failed' );
@@ -209,14 +209,14 @@ class StatementModificationHelperTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 
 		$errorReporter->method( 'dieException' )
-			->will( $this->returnCallback( function ( $exception, $message ) {
+			->willReturnCallback( function ( $exception, $message ) {
 				throw new RuntimeException( $message );
-			} ) );
+			} );
 
 		$errorReporter->method( 'dieError' )
-			->will( $this->returnCallback( function ( $description, $message ) {
+			->willReturnCallback( function ( $description, $message ) {
 				throw new RuntimeException( $message );
-			} ) );
+			} );
 
 		return $errorReporter;
 	}

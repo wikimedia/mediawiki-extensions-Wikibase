@@ -126,13 +126,13 @@ class SkinAfterPortletHandlerTest extends TestCase {
 		$title = $output->getTitle();
 
 		$skin->method( 'getOutput' )
-			->will( $this->returnValue( $output ) );
+			->willReturn( $output );
 		$skin->method( 'getContext' )
-			->will( $this->returnValue( $output ) );
+			->willReturn( $output );
 		$skin->method( 'getTitle' )
-			->will( $this->returnValue( $title ) );
+			->willReturn( $title );
 		$skin->method( 'getLanguages' )
-			->will( $this->returnValue( $languageUrls ) );
+			->willReturn( $languageUrls );
 
 		return $skin;
 	}
@@ -146,11 +146,11 @@ class SkinAfterPortletHandlerTest extends TestCase {
 
 		$title = $this->createMock( Title::class );
 		$title->method( 'exists' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 		$title->method( 'canExist' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 		$title->method( 'getNamespace' )
-			->will( $this->returnValue( 0 ) );
+			->willReturn( 0 );
 
 		$contentHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKITEXT );
 
@@ -158,27 +158,27 @@ class SkinAfterPortletHandlerTest extends TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$wikiPage->method( 'getActionOverrides' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 		$wikiPage->method( 'getContentHandler' )
-			->will( $this->returnValue( $contentHandler ) );
+			->willReturn( $contentHandler );
 		$wikiPage->method( 'getTitle' )
-			->will( $this->returnValue( $title ) );
+			->willReturn( $title );
 
 		$context = $this->createMock( IContextSource::class );
 		$context->method( 'canUseWikiPage' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 		$context->method( 'getWikiPage' )
-			->will( $this->returnValue( $wikiPage ) );
+			->willReturn( $wikiPage );
 		$context->method( 'getRequest' )
-			->will( $this->returnValue( $request ) );
+			->willReturn( $request );
 		$context->method( 'getTitle' )
-			->will( $this->returnValue( $title ) );
+			->willReturn( $title );
 		$context->method( 'getLanguage' )
 			->willReturn( Language::factory( 'qqx' ) );
 		$context->method( 'getConfig' )
-			->will( $this->returnValue(
+			->willReturn(
 				ConfigFactory::getDefaultInstance()->makeConfig( 'main' )
-			) );
+			);
 		return $context;
 	}
 }

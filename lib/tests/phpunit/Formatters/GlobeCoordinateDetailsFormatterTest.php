@@ -24,11 +24,11 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 	private function newFormatter( FormatterOptions $options = null ) {
 		$vocabularyUriFormatter = $this->createMock( ValueFormatter::class );
 		$vocabularyUriFormatter->method( 'format' )
-			->will( $this->returnCallback( function( $value ) {
+			->willReturnCallback( function( $value ) {
 				return preg_match( '@^http://www\.wikidata\.org/entity/(.*)@', $value, $matches )
 					? "formatted-globe-{$matches[1]}"
 					: $value;
-			} ) );
+			} );
 
 		return new GlobeCoordinateDetailsFormatter( $vocabularyUriFormatter, $options );
 	}
@@ -79,11 +79,11 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 			->setConstructorArgs( [ new LatLongValue( 0, 0 ), null, '<GLOBE>' ] )
 			->getMock();
 		$value->method( 'getLatitude' )
-			->will( $this->returnValue( 0 ) );
+			->willReturn( 0.0 );
 		$value->method( 'getLongitude' )
-			->will( $this->returnValue( 0 ) );
+			->willReturn( 0.0 );
 		$value->method( 'getPrecision' )
-			->will( $this->returnValue( 1.0 ) );
+			->willReturn( 1.0 );
 
 		$formatter = $this->newFormatter();
 		$formatted = $formatter->format( $value );

@@ -83,17 +83,17 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	private function newFormatter() {
 		$idFormatter = $this->createMock( EntityIdFormatter::class );
 		$idFormatter->method( 'formatEntityId' )
-			->will( $this->returnCallback( [ $this, 'formatId' ] ) );
+			->willReturnCallback( [ $this, 'formatId' ] );
 
 		$valueFormatter = $this->createMock( ValueFormatter::class );
 		$valueFormatter->method( 'format' )
-			->will( $this->returnCallback( [ $this, 'formatValue' ] ) );
+			->willReturnCallback( [ $this, 'formatValue' ] );
 
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 		$snakFormatter->method( 'formatSnak' )
-			->will( $this->returnCallback( [ $this, 'formatSnak' ] ) );
+			->willReturnCallback( [ $this, 'formatSnak' ] );
 		$snakFormatter->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
+			->willReturn( SnakFormatter::FORMAT_PLAIN );
 
 		$language = Language::factory( 'en' );
 
@@ -445,11 +445,11 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$itemTitle = $this->createMock( $title );
 		$itemTitle->expects( $this->once() )
 			->method( 'getNamespace' )
-			->will( $this->returnValue(
+			->willReturn(
 				WikibaseRepo::getDefaultInstance()
 					->getEntityNamespaceLookup()
 					->getEntityNamespace( $type )
-			) );
+			);
 
 		$comment = null;
 

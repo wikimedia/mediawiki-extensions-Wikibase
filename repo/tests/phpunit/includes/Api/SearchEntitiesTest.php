@@ -92,7 +92,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 				$this->equalTo( $params['continue'] + $params['limit'] + 1 ),
 				$this->equalTo( $params['strictlanguage'] )
 			)
-			->will( $this->returnValue( $returnResults ) );
+			->willReturn( $returnResults );
 
 		return $mock;
 	}
@@ -356,9 +356,9 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$nyanId->method( 'getLocalPart' )
-			->will( $this->returnValue( '[,,_,,];3' ) );
+			->willReturn( '[,,_,,];3' );
 		$nyanId->method( 'getEntityType' )
-			->will( $this->returnValue( 'kitten' ) );
+			->willReturn( 'kitten' );
 
 		$params = [
 			'action' => 'wbsearchentities',

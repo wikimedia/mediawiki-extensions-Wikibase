@@ -64,7 +64,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 
 		$propertyDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$propertyDataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( 'structured-cat' ) );
+			->willReturn( 'structured-cat' );
 
 		$fallbackChainFactory = new LanguageFallbackChainFactory();
 		$fallbackChain = $fallbackChainFactory->newFromLanguage( $language,

@@ -42,19 +42,19 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getSerialization(), NS_MAIN );
-			} ) );
+			} );
 
 		$entityContentFactory = $this->getMockBuilder( EntityContentFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$entityContentFactory->method( 'newFromEntity' )
 			->with( $this->isInstanceOf( EntityDocument::class ) )
-			->will( $this->returnValue( new ItemContent( new EntityInstanceHolder( new Item() ) ) ) );
+			->willReturn( new ItemContent( new EntityInstanceHolder( new Item() ) ) );
 		$entityContentFactory->method( 'newFromRedirect' )
 			->with( $this->isInstanceOf( EntityRedirect::class ) )
-			->will( $this->returnValue( new ItemContent( new EntityInstanceHolder( new Item() ) ) ) );
+			->willReturn( new ItemContent( new EntityInstanceHolder( new Item() ) ) );
 
 		return new MediawikiEditFilterHookRunner(
 			$namespaceLookup,

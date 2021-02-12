@@ -40,7 +40,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 		$lookup->expects( $this->once() )
 			->method( 'getItemIdForLink' )
 			->with( 'foowiki', 'bar' )
-			->will( $this->returnValue( new ItemId( 'Q42' ) ) );
+			->willReturn( new ItemId( 'Q42' ) );
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup(
 			$lookup,
@@ -82,7 +82,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 		$lookup->expects( $this->once() )
 			->method( 'getItemIdForLink' )
 			->with( 'foowiki', 'bar' )
-			->will( $this->returnValue( new ItemId( 'Q42' ) ) );
+			->willReturn( new ItemId( 'Q42' ) );
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup(
 			$lookup,
@@ -127,7 +127,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 		$lookup->expects( $this->once() )
 			->method( 'getSiteLinksForItem' )
 			->with( $q42 )
-			->will( $this->returnValue( $siteLinks ) );
+			->willReturn( $siteLinks );
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup( $lookup, $cache );
 
@@ -146,7 +146,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 		$lookup->expects( $this->once() )
 			->method( 'getLinks' )
 			->with( [ 1 ], [ 'a' ], [ 'b' ] )
-			->will( $this->returnValue( 'bar' ) );
+			->willReturn( 'bar' );
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup( $lookup, new HashBagOStuff() );
 

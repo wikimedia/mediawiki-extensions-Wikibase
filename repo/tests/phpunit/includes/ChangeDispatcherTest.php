@@ -76,9 +76,9 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 		$sender = $this->createMock( ChangeNotificationSender::class );
 
 		$sender->method( 'sendNotification' )
-			->will( $this->returnCallback( function ( $siteID, array $changes ) use ( &$notifications ) {
+			->willReturnCallback( function ( $siteID, array $changes ) use ( &$notifications ) {
 				$notifications[] = [ $siteID, $changes ];
-			} ) );
+			} );
 
 		return $sender;
 	}
@@ -93,14 +93,14 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 
 		$chunkedAccess->expects( $expectedLoadChunkCalls ?: $this->never() )
 			->method( 'loadChunk' )
-			->will( $this->returnCallback( function ( $fromId, $limit ) {
+			->willReturnCallback( function ( $fromId, $limit ) {
 				return array_slice( $this->changes, $fromId, $limit );
-			} ) );
+			} );
 
 		$chunkedAccess->method( 'getRecordId' )
-			->will( $this->returnCallback( function ( Change $change ) {
+			->willReturnCallback( function ( Change $change ) {
 				return $change->getId();
-			} ) );
+			} );
 
 		return $chunkedAccess;
 	}
@@ -112,11 +112,11 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 		$lookup = $this->createMock( SubscriptionLookup::class );
 
 		$lookup->method( 'getSubscriptions' )
-			->will( $this->returnCallback( function ( $siteId, array $entityIds ) {
+			->willReturnCallback( function ( $siteId, array $entityIds ) {
 				return isset( $this->subscriptions[$siteId] )
 					? array_intersect( $this->subscriptions[$siteId], $entityIds )
 					: [];
-			} ) );
+			} );
 
 		return $lookup;
 	}
@@ -183,23 +183,28 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 			->method( 'getType' );
 
 		$change->method( 'getTime' )
-			->will( $this->returnValue( $time ) );
+			->willReturn( $time );
 
 		$change->method( 'getAge' )
-			->will( $this->returnValue( (int)wfTimestamp( TS_UNIX, $time ) - (int)wfTimestamp( TS_UNIX, $this->now ) ) );
+			->willReturn( (int)wfTimestamp( TS_UNIX, $time ) - (int)wfTimestamp( TS_UNIX, $this->now ) );
 
 		$change->method( 'getId' )
-			->will( $this->returnValue( $changeId ) );
+			->willReturn( $changeId );
 
 		$change->method( 'getObjectId' )
-			->will( $this->returnValue( $entityId->getSerialization() ) );
+			->willReturn( $entityId->getSerialization() );
 
 		$change->method( 'getEntityId' )
-			->will( $this->returnValue( $entityId ) );
+			->willReturn( $entityId );
 
 		if ( $changeClass === ItemChange::class ) {
-			$change->method( 'getSiteLinkDiff' )
-				->will( $this->returnValue( $siteLinkDiff ) );
+			if ( $siteLinkDiff !== null ) {
+				$change->method( 'getSiteLinkDiff' )
+					->willReturn( $siteLinkDiff );
+			} else {
+				$change->expects( $this->never() )
+					->method( 'getSiteLinkDiff' );
+			}
 		}
 
 		return $change;
@@ -263,7 +268,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 
 		$coordinator->expects( $this->once() )
 			->method( 'selectClient' )
-			->will( $this->returnValue( $expectedClientState ) );
+			->willReturn( $expectedClientState );
 
 		$coordinator->expects( $this->never() )
 			->method( 'initState' );

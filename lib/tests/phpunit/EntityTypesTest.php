@@ -32,7 +32,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 		$serializerFactory->expects( $this->once() )
 			->method( 'new' . $entityType . 'Serializer' )
-			->will( $this->returnValue( $this->createMock( Serializer::class ) ) );
+			->willReturn( $this->createMock( Serializer::class ) );
 
 		return $serializerFactory;
 	}
@@ -49,7 +49,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 		$deserializerFactory->expects( $this->once() )
 			->method( 'new' . $entityType . 'Deserializer' )
-			->will( $this->returnValue( $this->createMock( Deserializer::class ) ) );
+			->willReturn( $this->createMock( Deserializer::class ) );
 
 		return $deserializerFactory;
 	}

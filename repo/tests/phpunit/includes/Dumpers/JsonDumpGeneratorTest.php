@@ -114,7 +114,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->method( 'getEntityRevision' )
-			->will( $this->returnCallback( function( EntityId $id ) use ( $entityRevisions, $missingIds, $redirectedIds ) {
+			->willReturnCallback( function( EntityId $id ) use ( $entityRevisions, $missingIds, $redirectedIds ) {
 				if ( in_array( $id, $missingIds ) ) {
 					return null;
 				}
@@ -124,7 +124,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 				$key = $id->getSerialization();
 				return $entityRevisions[$key];
-			} ) );
+			} );
 
 		return new JsonDumpGenerator(
 			$out,
@@ -175,9 +175,9 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$offset = 0;
 
 		$pager->method( 'fetchIds' )
-			->will( $this->returnCallback( function( $limit ) use ( $ids, $entityType, &$offset ) {
+			->willReturnCallback( function( $limit ) use ( $ids, $entityType, &$offset ) {
 				return $this->listEntities( $ids, $entityType, $limit, $offset );
-			} ) );
+			} );
 
 		return $pager;
 	}
@@ -252,7 +252,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	public function getMockPropertyDataTypeLookup() {
 		$mock = $this->createMock( PropertyDataTypeLookup::class );
 		$mock->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( 'string' ) );
+			->willReturn( 'string' );
 
 		return $mock;
 	}
@@ -265,9 +265,9 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	private function getEntityRevisionLookupThrows( Exception $ex ) {
 		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->method( 'getEntityRevision' )
-			->will( $this->returnCallback( function( EntityId $id ) use ( $ex ) {
+			->willReturnCallback( function( EntityId $id ) use ( $ex ) {
 				throw $ex;
-			} ) );
+			} );
 
 		return $entityRevisionLookup;
 	}

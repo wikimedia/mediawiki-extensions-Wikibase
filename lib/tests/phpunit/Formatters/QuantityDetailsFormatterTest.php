@@ -26,11 +26,11 @@ class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 	private function newFormatter( NumberLocalizer $numberLocalizer = null ) {
 		$vocabularyUriFormatter = $this->createMock( ValueFormatter::class );
 		$vocabularyUriFormatter->method( 'format' )
-			->will( $this->returnCallback( function( $value ) {
+			->willReturnCallback( function( $value ) {
 				return preg_match( '@^http://www\.wikidata\.org/entity/(.*)@', $value, $matches )
 					? $matches[1]
 					: $value;
-			} ) );
+			} );
 
 		return new QuantityDetailsFormatter(
 			$numberLocalizer ?: new BasicNumberLocalizer(),
@@ -106,7 +106,7 @@ class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenHtmlCharacters_formatEscapesHtmlCharacters() {
 		$unitFormatter = $this->createMock( NumberLocalizer::class );
 		$unitFormatter->method( 'localizeNumber' )
-			->will( $this->returnValue( '<a>+2</a>' ) );
+			->willReturn( '<a>+2</a>' );
 
 		$formatter = $this->newFormatter( $unitFormatter );
 		$value = QuantityValue::newFromNumber( '+2', '<a>m</a>', '+2', '+2' );

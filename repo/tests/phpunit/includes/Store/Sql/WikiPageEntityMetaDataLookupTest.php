@@ -147,7 +147,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 
 		$lookup->expects( $this->exactly( $getConnectionCount ) )
 			->method( 'getConnection' )
-			->will( $this->returnCallback( function( $id ) use ( $selectCount, $selectRowCount ) {
+			->willReturnCallback( function( $id ) use ( $selectCount, $selectRowCount ) {
 				$db = $realDB = wfGetDB( DB_MASTER );
 
 				if ( $id === DB_REPLICA ) {
@@ -156,7 +156,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				}
 
 				return $db;
-			} ) );
+			} );
 
 		return $lookup;
 	}
@@ -172,7 +172,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 
 		$db->expects( $this->exactly( $selectCount ) )
 			->method( 'select' )
-			->will( $this->returnCallback( function( ...$args ) use ( $realDB ) {
+			->willReturnCallback( function( ...$args ) use ( $realDB ) {
 				// Get the actual result
 				$res = $realDB->select( ...$args );
 
@@ -183,11 +183,11 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				}
 
 				return new FakeResultWrapper( array_slice( $data, 1 ) );
-			} ) );
+			} );
 
 		$db->expects( $this->exactly( $selectRowCount ) )
 			->method( 'selectRow' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 
 		return $db;
 	}

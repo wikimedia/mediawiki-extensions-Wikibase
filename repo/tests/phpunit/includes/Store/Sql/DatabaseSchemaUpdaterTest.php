@@ -28,7 +28,7 @@ class DatabaseSchemaUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 		$db->expects( $this->atLeastOnce() )
 			->method( 'getType' )
-			->will( $this->returnValue( 'mysql' ) );
+			->willReturn( 'mysql' );
 
 		$updater = $this->getMockBuilder( MysqlUpdater::class )
 			->disableOriginalConstructor()
@@ -36,7 +36,7 @@ class DatabaseSchemaUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 		$updater->expects( $this->atLeastOnce() )
 			->method( 'getDB' )
-			->will( $this->returnValue( $db ) );
+			->willReturn( $db );
 
 		$databaseSchemaUpdater = new DatabaseSchemaUpdater( $store );
 		$databaseSchemaUpdater->onLoadExtensionSchemaUpdates( $updater );

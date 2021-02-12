@@ -228,7 +228,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	public function testGivenEntityIdWithNullTitle_htmlForNonExistentEntityIsDisplayed() {
 		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->method( $this->anything() )
-			->will( $this->returnValue( null ) );
+			->willReturn( null );
 
 		$formatter = new ItemPropertyIdHtmlLinkFormatter(
 			$this->createMock( LanguageFallbackLabelDescriptionLookup::class ),

@@ -73,7 +73,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )
-			->will( $this->returnCallback( function( User $user ) {
+			->willReturnCallback( function( User $user ) {
 				$userWithoutPermissionName = 'UserWithoutPermission';
 
 				if ( $user->getName() === $userWithoutPermissionName ) {
@@ -81,7 +81,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 				} else {
 					return Status::newGood();
 				}
-			} ) );
+			} );
 
 		return $permissionChecker;
 	}
@@ -108,7 +108,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 		$mock->expects( $invokeCount )
 			->method( 'run' )
-			->will( $this->returnValue( $hookReturn ) );
+			->willReturn( $hookReturn );
 		return $mock;
 	}
 
@@ -154,12 +154,12 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				$title = $this->createMock( Title::class );
 				$title->method( 'isDeleted' )
-					->will( $this->returnValue( $id->getSerialization() === 'Q666' ) );
+					->willReturn( $id->getSerialization() === 'Q666' );
 				return $title;
-			} ) );
+			} );
 
 		return $titleLookup;
 	}

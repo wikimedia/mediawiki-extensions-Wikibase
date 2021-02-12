@@ -210,7 +210,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		$termLookup->expects( $this->exactly( $hasLang && $entityId ? 1 : 0 ) )
 			->method( 'getLabel' )
 			->with( $entityId )
-			->will( $this->returnValue( $hasLabel ? "$prefixedEntityId-$languageCode" : null ) );
+			->willReturn( $hasLabel ? "$prefixedEntityId-$languageCode" : null );
 
 		$bindings = new WikibaseLanguageIndependentLuaBindings(
 			$this->createMock( SiteLinkLookup::class ),

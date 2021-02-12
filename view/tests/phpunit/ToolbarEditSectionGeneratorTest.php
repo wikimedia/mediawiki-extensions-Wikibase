@@ -105,9 +105,9 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 	private function newToolbarEditSectionGenerator() {
 		$specialPageLinker = $this->createMock( SpecialPageLinker::class );
 		$specialPageLinker->method( 'getLink' )
-			->will( $this->returnCallback( function( $specialPage, $params = [] ) {
+			->willReturnCallback( function( $specialPage, $params = [] ) {
 				return 'Special:' . $specialPage . '/' . implode( '/', $params );
-			} ) );
+			} );
 
 		$templateFactory = TemplateFactory::getDefaultInstance();
 

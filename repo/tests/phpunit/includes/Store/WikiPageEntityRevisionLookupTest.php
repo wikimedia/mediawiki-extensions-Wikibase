@@ -153,9 +153,9 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$metaDataLookup->expects( $this->once() )
 			->method( 'loadRevisionInformationByRevisionId' )
 			->with( $entityId, $revisionId, 'load-mode' )
-			->will( $this->returnValue(
+			->willReturn(
 				$realMetaDataLookup->loadRevisionInformationByRevisionId( $entityId, $revisionId )
-			) );
+			);
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$metaDataLookup,
@@ -202,18 +202,16 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$metaDataLookup->expects( $this->once() )
 			->method( 'loadRevisionInformationByRevisionId' )
 			->with( $entityId, $revisionId )
-			->will( $this->returnValue(
+			->willReturn(
 				(object)[ 'rev_id' => $revisionId, 'role_name' => 'kittens' ]
-			) );
+			);
 
 		$revisionStore = $this->createMock( RevisionStore::class );
 
 		$revisionStore->expects( $this->once() )
 			->method( 'getRevisionById' )
 			->with( $revisionId )
-			->will( $this->returnValue(
-				$revision
-			) );
+			->willReturn( $revision );
 
 		$codec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
 
@@ -221,9 +219,9 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$blobStore->expects( $this->once() )
 			->method( 'getBlob' )
 			->with( 'xx:blob' )
-			->will( $this->returnValue(
+			->willReturn(
 				$codec->encodeEntity( $entity, CONTENT_FORMAT_JSON )
-			) );
+			);
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$metaDataLookup,
@@ -516,10 +514,10 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$entityId = $this->createMock( EntityId::class );
 		$entityId->method( '__toString' )->willReturn( $idString );
 		$entityId->method( 'getSerialization' )->willReturn( $idString );
-		$entityId->method( 'equals' )->will(
-			$this->returnCallback( function ( EntityId $otherEntityId ) use ( $entityId ) {
+		$entityId->method( 'equals' )->willReturnCallback(
+			function ( EntityId $otherEntityId ) use ( $entityId ) {
 				return $otherEntityId->getSerialization() === $entityId->getSerialization();
-			} )
+			}
 		);
 		return $entityId;
 	}

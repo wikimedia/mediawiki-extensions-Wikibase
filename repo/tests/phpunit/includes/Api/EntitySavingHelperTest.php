@@ -85,13 +85,13 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	private function getMockEntityStore() {
 		$mock = $this->createMock( EntityStore::class );
 		$mock->method( 'canCreateWithCustomId' )
-			->will( $this->returnCallback( function ( EntityId $id ) {
+			->willReturnCallback( function ( EntityId $id ) {
 				return $id->getEntityType() === 'mediainfo';
-			} ) );
+			} );
 		$mock->method( 'assignFreshId' )
-			->will( $this->returnCallback( function ( EntityDocument $entity ) {
+			->willReturnCallback( function ( EntityDocument $entity ) {
 				$entity->setId( new ItemId( 'Q333' ) );
-			} ) );
+			} );
 
 		return $mock;
 	}
@@ -100,7 +100,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		$api = parent::getMockApiBase( $params );
 
 		$api->method( 'getContext' )
-			->will( $this->returnValue( $this->newContext( $params ) ) );
+			->willReturn( $this->newContext( $params ) );
 
 		return $api;
 	}
@@ -203,7 +203,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		$revision = $this->getMockRevision();
 		$revision->expects( $this->once() )
 			->method( 'getRevisionId' )
-			->will( $this->returnValue( 17 ) );
+			->willReturn( 17 );
 
 		$entity = $revision->getEntity();
 
@@ -295,7 +295,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	protected function newEntitySavingHelper( array $config ) {
 		$apiModule = $this->getMockApiBase( $config['params'] ?? [] );
 		$apiModule->method( 'isWriteMode' )
-			->will( $this->returnValue( $config['writeMode'] ?? true ) );
+			->willReturn( $config['writeMode'] ?? true );
 
 		$helper = new EntitySavingHelper(
 			$apiModule,

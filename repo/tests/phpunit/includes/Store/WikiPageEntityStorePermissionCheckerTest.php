@@ -583,7 +583,7 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$lookup = $this->createMock( EntityTitleLookup::class );
 
 		$lookup->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->willReturnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() === self::EXISTING_ITEM_ID ) {
 					return Title::newFromTitleValue( new TitleValue( WB_NS_ITEM, 'Test_Item' ) );
 				}
@@ -591,7 +591,7 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 					return Title::newFromTitleValue( new TitleValue( WB_NS_PROPERTY, 'Test_Property' ) );
 				}
 				return null;
-			} ) );
+			} );
 
 		return $lookup;
 	}

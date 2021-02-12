@@ -48,7 +48,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 			->getMock();
 
 		$pageSet->method( 'getGoodTitles' )
-			->will( $this->returnValue( $titles ) );
+			->willReturn( $titles );
 
 		$query = $this->getMockBuilder( ApiQuery::class )
 			->setConstructorArgs( [ $main, $params['action'] ] )
@@ -56,7 +56,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 			->getMock();
 
 		$query->method( 'getPageSet' )
-			->will( $this->returnValue( $pageSet ) );
+			->willReturn( $pageSet );
 
 		return $query;
 	}
@@ -116,7 +116,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 	private function getEntityIdLookup( array $entityIds ): EntityIdLookup {
 		$idLookup = $this->createMock( EntityIdLookup::class );
 		$idLookup->method( 'getEntityIds' )
-			->will( $this->returnValue( $entityIds ) );
+			->willReturn( $entityIds );
 
 		return $idLookup;
 	}

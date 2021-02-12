@@ -150,10 +150,10 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$formatterFactory = $this->createMock( EntityIdFormatterFactory::class );
 
 		$formatterFactory->method( 'getOutputFormat' )
-			->will( $this->returnValue( $format ) );
+			->willReturn( $format );
 
 		$formatterFactory->method( 'getEntityIdFormatter' )
-			->will( $this->returnValue( $entityIdFormatter ) );
+			->willReturn( $entityIdFormatter );
 
 		return $formatterFactory;
 	}
@@ -165,12 +165,12 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 
 		$snakFormatter->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
+			->willReturn( SnakFormatter::FORMAT_HTML );
 
 		$snakFormatterFactory = $this->createMock( HtmlSnakFormatterFactory::class );
 
 		$snakFormatterFactory->method( 'getSnakFormatter' )
-			->will( $this->returnValue( $snakFormatter ) );
+			->willReturn( $snakFormatter );
 
 		return $snakFormatterFactory;
 	}

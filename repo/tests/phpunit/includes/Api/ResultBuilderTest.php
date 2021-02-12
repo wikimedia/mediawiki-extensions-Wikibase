@@ -54,21 +54,21 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$mockTitle->method( 'getArticleID' )
-			->will( $this->returnValue( 123 ) );
+			->willReturn( 123 );
 		$mockTitle->method( 'getNamespace' )
-			->will( $this->returnValue( 456 ) );
+			->willReturn( 456 );
 		$mockTitle->method( 'getPrefixedText' )
-			->will( $this->returnValue( 'MockPrefixedText' ) );
+			->willReturn( 'MockPrefixedText' );
 
 		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleStoreLookup->method( 'getTitleForId' )
-			->will( $this->returnValue( $mockTitle ) );
+			->willReturn( $mockTitle );
 
 		$mockPropertyDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$mockPropertyDataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnCallback( function( PropertyId $id ) {
+			->willReturnCallback( function( PropertyId $id ) {
 				return 'DtIdFor_' . $id->getSerialization();
-			} ) );
+			} );
 
 		$serializerFactory = new SerializerFactory(
 			new DataValueSerializer(),
@@ -1390,11 +1390,11 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 		$mockRevision->expects( $this->once() )
 			->method( 'getRevisionId' )
-			->will( $this->returnValue( 123 ) );
+			->willReturn( 123 );
 		$mockStatus = $this->createMock( Status::class );
 		$mockStatus->expects( $this->once() )
 			->method( 'getValue' )
-			->will( $this->returnValue( [ 'revision' => $mockRevision ] ) );
+			->willReturn( [ 'revision' => $mockRevision ] );
 		$expected = [
 			'entity' => [ 'lastrevid' => '123' ],
 			'_type' => 'assoc',

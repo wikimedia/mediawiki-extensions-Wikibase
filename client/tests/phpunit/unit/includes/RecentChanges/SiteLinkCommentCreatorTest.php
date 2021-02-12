@@ -120,7 +120,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$title->method( 'getPrefixedText' )
-			->will( $this->returnValue( $fullText ) );
+			->willReturn( $fullText );
 
 		return $title;
 	}

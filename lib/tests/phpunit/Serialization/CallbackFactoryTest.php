@@ -23,7 +23,7 @@ class CallbackFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$mock->expects( $this->once() )
 			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( 'propertyDataType' ) );
+			->willReturn( 'propertyDataType' );
 
 		return $mock;
 	}

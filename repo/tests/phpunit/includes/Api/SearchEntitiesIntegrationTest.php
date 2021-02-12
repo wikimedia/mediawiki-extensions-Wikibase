@@ -203,14 +203,14 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 	private function newEntityTitleLookup() {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
 		$titleLookup->method( 'getTitlesForIds' )
-			->will( $this->returnCallback( function ( $ids ) {
+			->willReturnCallback( function ( $ids ) {
 				$titles = [];
 				/** @var EntityId $id */
 				foreach ( $ids as $id ) {
 					$titles[ $id->getSerialization() ] = $this->createMock( Title::class );
 				}
 				return $titles;
-			} ) );
+			} );
 
 		return $titleLookup;
 	}

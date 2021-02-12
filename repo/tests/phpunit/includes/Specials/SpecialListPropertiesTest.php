@@ -62,9 +62,9 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 			->disableOriginalConstructor()
 			->getMock();
 		$lookup->method( 'getLabels' )
-			->will( $this->returnCallback( function( PropertyId $id ) {
+			->willReturnCallback( function( PropertyId $id ) {
 				return [ 'en' => 'Property with label ' . $id->getSerialization() ];
-			} ) );
+			} );
 		return $lookup;
 	}
 
@@ -74,14 +74,14 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	private function getEntityTitleLookup() {
 		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->method( 'getTitleForId' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				function ( EntityId $id ) {
 					$title = $this->createMock( Title::class );
 					$title->method( 'exists' )
-						->will( $this->returnValue( true ) );
+						->willReturn( true );
 					return $title;
 				}
-			) );
+			);
 
 		return $entityTitleLookup;
 	}

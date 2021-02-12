@@ -115,9 +115,9 @@ class ChangeOpTestMockProvider {
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->method( 'validate' )
-			->will( TestCase::returnValue( true ) );
+			->willReturn( true );
 		$mock->method( 'validateFormat' )
-			->will( TestCase::returnValue( true ) );
+			->willReturn( true );
 		return $mock;
 	}
 
@@ -145,7 +145,7 @@ class ChangeOpTestMockProvider {
 	public function getMockPropertyDataTypeLookup() {
 		$mock = $this->createMock( PropertyDataTypeLookup::class );
 		$mock->method( 'getDataTypeIdForProperty' )
-			->will( TestCase::returnValue( 'string' ) );
+			->willReturn( 'string' );
 
 		return $mock;
 	}
@@ -167,13 +167,13 @@ class ChangeOpTestMockProvider {
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->method( 'getType' )
-			->will( TestCase::returnCallback( function( $id ) use ( $types ) {
+			->willReturnCallback( function( $id ) use ( $types ) {
 				if ( !isset( $types[$id] ) ) {
 					throw new OutOfBoundsException( "No such type: $id" );
 				}
 
 				return $types[$id];
-			} ) );
+			} );
 
 		return $mock;
 	}
@@ -197,9 +197,9 @@ class ChangeOpTestMockProvider {
 
 		$mock = $this->createMock( DataTypeValidatorFactory::class );
 		$mock->method( 'getValidators' )
-			->will( TestCase::returnCallback( function( $id ) use ( $validators ) {
+			->willReturnCallback( function( $id ) use ( $validators ) {
 				return $validators;
-			} ) );
+			} );
 
 		return $mock;
 	}
@@ -213,14 +213,14 @@ class ChangeOpTestMockProvider {
 	public function getMockTermValidator() {
 		$mock = $this->createMock( ValueValidator::class );
 		$mock->method( 'validate' )
-			->will( TestCase::returnCallback( function( $text ) {
+			->willReturnCallback( function( $text ) {
 				if ( $text === 'INVALID' ) {
 					$error = Error::newError( 'Invalid', '', 'test-invalid' );
 					return Result::newError( [ $error ] );
 				} else {
 					return Result::newSuccess();
 				}
-			} ) );
+			} );
 
 		return $mock;
 	}
@@ -238,15 +238,15 @@ class ChangeOpTestMockProvider {
 			->disableOriginalConstructor()
 			->getMock();
 		$guid->method( 'getSerialization' )
-			->will( TestCase::returnValue( 'theValidatorIsMockedSoMeh! :D' ) );
+			->willReturn( 'theValidatorIsMockedSoMeh! :D' );
 		$guid->method( 'getEntityId' )
-			->will( TestCase::returnValue( $entityId ) );
+			->willReturn( $entityId );
 
 		$mock = $this->getMockBuilder( StatementGuidParser::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->method( 'parse' )
-			->will( TestCase::returnValue( $guid ) );
+			->willReturn( $guid );
 		return $mock;
 	}
 
@@ -312,7 +312,7 @@ class ChangeOpTestMockProvider {
 		$mock = $this->createMock( SiteLinkConflictLookup::class );
 
 		$mock->method( 'getConflictsForItem' )
-			->will( TestCase::returnCallback( function ( Item $item ) {
+			->willReturnCallback( function ( Item $item ) {
 				$conflicts = [];
 
 				foreach ( $item->getSiteLinkList()->toArray() as $link ) {
@@ -326,7 +326,7 @@ class ChangeOpTestMockProvider {
 				}
 
 				return $conflicts;
-			} ) );
+			} );
 
 		return $mock;
 	}
@@ -353,29 +353,29 @@ class ChangeOpTestMockProvider {
 			->getMock();
 
 		$mock->method( 'getLabelDescriptionNotEqualValidator' )
-			->will( TestCase::returnCallback(
+			->willReturnCallback(
 				[ $this, 'getLabelDescriptionNotEqualValidator' ]
-			) );
+			);
 
 		$mock->method( 'getLanguageValidator' )
-			->will( TestCase::returnCallback(
+			->willReturnCallback(
 				[ $this, 'getMockTermValidator' ]
-			) );
+			);
 
 		$mock->method( 'getLabelValidator' )
-			->will( TestCase::returnCallback(
+			->willReturnCallback(
 				[ $this, 'getMockTermValidator' ]
-			) );
+			);
 
 		$mock->method( 'getDescriptionValidator' )
-			->will( TestCase::returnCallback(
+			->willReturnCallback(
 				[ $this, 'getMockTermValidator' ]
-			) );
+			);
 
 		$mock->method( 'getAliasValidator' )
-			->will( TestCase::returnCallback(
+			->willReturnCallback(
 				[ $this, 'getMockTermValidator' ]
-			) );
+			);
 
 		return $mock;
 	}

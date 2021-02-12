@@ -28,7 +28,7 @@ class ParserHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$restrictedEntityLookup->expects( $this->once() )
 			->method( 'getEntityAccessCount' )
-			->will( $this->returnValue( 42 ) );
+			->willReturn( 42 );
 
 		$handler = new ParserHookHandler(
 			$restrictedEntityLookup,
