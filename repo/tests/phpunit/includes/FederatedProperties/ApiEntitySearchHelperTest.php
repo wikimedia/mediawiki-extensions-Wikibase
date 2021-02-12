@@ -79,12 +79,12 @@ class ApiEntitySearchHelperTest extends TestCase {
 	 * @param $shouldThrowError
 	 */
 	public function testGetRankedSearchResultsFiltering(
-		$params,
-		$responseDataFile,
-		$expectedResultsEntityIds,
-		$dataTypes,
-		$shouldThrowError,
-		$langCode = 'de'
+		array $params,
+		string $responseDataFile,
+		array $expectedResultsEntityIds,
+		?array $dataTypes,
+		?string $shouldThrowError,
+		string $langCode = 'de'
 	) {
 
 		$api = $this->setupTestApi( $params, $langCode, $responseDataFile );
@@ -156,7 +156,12 @@ class ApiEntitySearchHelperTest extends TestCase {
 	 * @param array $expectedResultsEntityId
 	 * @throws ApiRequestException
 	 */
-	public function testGetRankedSearchResults( $langCode, $params, $responseDataFile, $expectedResultsEntityIds ) {
+	public function testGetRankedSearchResults(
+		string $langCode,
+		array $params,
+		string $responseDataFile,
+		array $expectedResultsEntityIds
+	) {
 
 		$api = $this->setupTestApi( $params, $langCode, $responseDataFile );
 		$apiEntitySearchHelper = $this->getNewApiSearchHelper( $api );
@@ -236,7 +241,12 @@ class ApiEntitySearchHelperTest extends TestCase {
 	 * @param int $expectedResultCount
 	 * @param array $expectedResultsEntityId
 	 */
-	public function testApiResponseStructureIsValid( $langCode, $params, $responseDataFile, $statusCode ) {
+	public function testApiResponseStructureIsValid(
+		string $langCode,
+		array $params,
+		string $responseDataFile,
+		?int $statusCode
+	) {
 		$api = $this->setupTestApi( $params, $langCode, $responseDataFile, $statusCode );
 		$apiEntitySearchHelper = $this->getNewApiSearchHelper( $api );
 		try {
