@@ -235,9 +235,6 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider applyInvalidThrowsExceptionProvider
-	 *
-	 * @param Item $item
-	 * @param Statement $statement
 	 */
 	public function testApplyInvalidThrowsException( Item $item, Statement $statement ) {
 		$this->expectException( ChangeOpException::class );

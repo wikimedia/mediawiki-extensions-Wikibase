@@ -30,7 +30,6 @@ class EntityUsageFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider newFromIdentityRoundtripProvider
-	 * @param EntityUsage $entityUsage
 	 */
 	public function testNewFromIdentityRoundtrip( EntityUsage $entityUsage ) {
 		$factory = new EntityUsageFactory( new BasicEntityIdParser() );

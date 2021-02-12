@@ -392,7 +392,6 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider provideGetFreshest
-	 * @param array $expected
 	 */
 	public function testGetFreshest( array $expected ) {
 		$stats = $this->getDispatchStats();
@@ -412,7 +411,6 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider provideGetStalest
-	 * @param array $expected
 	 */
 	public function testGetStalest( array $expected ) {
 		$stats = $this->getDispatchStats();
@@ -432,7 +430,6 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider provideGetAverage
-	 * @param array $expected
 	 */
 	public function testGetAverage( array $expected ) {
 		$stats = $this->getDispatchStats();
@@ -452,7 +449,6 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider provideGetMedian
-	 * @param array $expected
 	 */
 	public function testGetMedian( array $expected ) {
 		$stats = $this->getDispatchStats();

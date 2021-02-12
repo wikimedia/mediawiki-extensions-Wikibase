@@ -180,7 +180,6 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider contentProvider
-	 * @param EntityContent $content
 	 */
 	public function testSerialization( EntityContent $content ) {
 		$handler = $this->getHandler();

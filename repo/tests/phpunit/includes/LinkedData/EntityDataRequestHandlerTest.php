@@ -346,8 +346,6 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @param EntityId $id
 	 * @param array $headers Request headers
 	 * @param string $expectedRedirectSuffix Expected suffix of the HTTP Location header.
-	 *
-	 * @throws HttpError
 	 */
 	public function testHttpContentNegotiation(
 		EntityId $id,

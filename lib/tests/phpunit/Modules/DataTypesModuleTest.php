@@ -39,8 +39,6 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideDataTypesModuleAndResourceDefinition
-	 *
-	 * @param DataTypesModule $module
 	 */
 	public function testGetDataTypeFactory( DataTypesModule $module ) {
 		$this->assertInstanceOf( DataTypeFactory::class, $module->getDataTypeFactory() );
@@ -98,9 +96,6 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideDataTypesModuleAndResourceDefinition
-	 *
-	 * @param DataTypesModule $module
-	 * @param array $definition
 	 */
 	public function testGetConfigVarName( DataTypesModule $module, array $definition ) {
 		$configVarName = $module->getConfigVarName();
