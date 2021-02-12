@@ -50,6 +50,7 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		}
 
 		parent::setUp();
+		$this->tablesUsed[] = 'page';
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
@@ -108,7 +109,7 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		$title->resetArticleID( false );
 	}
 
-	public function testUpdateUsageOnCreation() {
+	public function testUpdateUsage() {
 		// Create a new page that uses Q11.
 		$text = "Just some text\n";
 		$text .= "using a property: {{#property:doesNotExist|from=Q11}}\n";
@@ -118,29 +119,12 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		$expected = [
 			new EntityUsage( new ItemId( 'Q11' ), EntityUsage::OTHER_USAGE ),
 		];
-
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
-	}
-
-	private function waitForNextTimestamp() {
-		$timestamp = wfTimestampNow();
-
-		do {
-			usleep( 100 * 1000 );
-		} while ( wfTimestampNow() === $timestamp );
-	}
-
-	/**
-	 * @depends testUpdateUsageOnCreation
-	 */
-	public function testUpdateUsageOnEdit() {
-		$this->waitForNextTimestamp(); // make sure we don't get the same timestamp as the edit before!
 
 		// Create the template we'll use below.
 		$text = "{{#property:doesNotExist|from=Q22}}\n";
 		$this->updatePage( $this->templateTitle, $text );
 
-		// Assume the state created by testUpdateUsageOnCreation().
 		// Change page content to use the template instead of {{#property}} directly.
 		$text = "Just some text\n";
 		$text .= "using a template: {{" . $this->templateTitle->getPrefixedText() . "}}\n";
@@ -151,20 +135,10 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		$expected = [
 			new EntityUsage( new ItemId( 'Q22' ), EntityUsage::OTHER_USAGE ),
 		];
-
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
-	}
 
-	/**
-	 * @depends testUpdateUsageOnEdit
-	 */
-	public function testUpdateUsageOnTemplateChange() {
-		$this->waitForNextTimestamp(); // Make sure we don't get the same timestamp as the edit before!
-
-		// Assume the state created by testUpdateUsageOnEdit().
 		// Change the template to use Q33.
 		$text = "{{#property:doesNotExist|from=Q33}}\n";
-
 		$this->updatePage( $this->templateTitle, $text );
 
 		// Check that Q33, now used via the template, is tracked.
@@ -172,17 +146,8 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		$expected = [
 			new EntityUsage( new ItemId( 'Q33' ), EntityUsage::OTHER_USAGE ),
 		];
-
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
-	}
 
-	/**
-	 * @depends testUpdateUsageOnTemplateChange
-	 */
-	public function testUpdateUsageOnDelete() {
-		$this->waitForNextTimestamp(); // make sure we don't get the same timestamp as the edit before!
-
-		// Assume the state created by testUpdateUsageOnTemplateChange().
 		// Delete the page.
 		$this->deletePage( $this->articleTitle );
 
