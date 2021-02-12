@@ -113,7 +113,7 @@ abstract class DispatchChangeModificationNotificationJob extends Job {
 
 		if ( $entityId === null ) {
 			$this->logger->warning( "Job should not be queued for non-entity pages." );
-			return false;
+			return true;
 		}
 
 		$jobSpecifications = $this->getChangeModificationNotificationJobs( $entityId );
