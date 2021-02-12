@@ -275,7 +275,13 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @param string $expected
 	 * @throws MWException
 	 */
-	public function testShowSearchHitPlain( $title, array $labels, $displayLanguage, array $languages, $expected ) {
+	public function testShowSearchHitPlain(
+		string $title,
+		array $labels,
+		string $displayLanguage,
+		array $languages,
+		string $expected
+	) {
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CLDR' ) ) {
 			// This test uses language names from CLDR
 			$this->markTestSkipped( 'cldr not installed, skipping' );
