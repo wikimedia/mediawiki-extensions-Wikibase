@@ -38,27 +38,23 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$instance->expects( $this->any() )
-			->method( 'getPropertyAndDetailedValue' )
+		$instance->method( 'getPropertyAndDetailedValue' )
 			->willReturnCallback( function( PropertyValueSnak $snak ) {
 				return $snak->getPropertyId()->getSerialization() . ': ' . $snak->getDataValue()->getValue()
 					. ' (DETAILED)';
 			} );
 
-		$instance->expects( $this->any() )
-			->method( 'getDetailedValue' )
+		$instance->method( 'getDetailedValue' )
 			->willReturnCallback( function( PropertyValueSnak $snak = null ) {
 				return $snak === null ? null : $snak->getDataValue()->getValue() . ' (DETAILED)';
 			} );
 
-		$instance->expects( $this->any() )
-			->method( 'getPropertyHeader' )
+		$instance->method( 'getPropertyHeader' )
 			->willReturnCallback( function( Snak $snak ) {
 				return 'property / ' . $snak->getPropertyId()->getSerialization();
 			} );
 
-		$instance->expects( $this->any() )
-			->method( 'getPropertyAndValueHeader' )
+		$instance->method( 'getPropertyAndValueHeader' )
 			->willReturnCallback( function( PropertyValueSnak $snak ) {
 				return 'property / ' . $snak->getPropertyId()->getSerialization() . ': ' .
 					$snak->getDataValue()->getValue();

@@ -94,8 +94,7 @@ class BasicEntityDiffVisualizerTest extends MediaWikiIntegrationTestCase {
 	private function getMockMessageLocalizer() {
 		$mock = $this->createMock( MessageLocalizer::class );
 
-		$mock->expects( $this->any() )
-			->method( 'msg' )
+		$mock->method( 'msg' )
 			->will( $this->returnCallback( function ( $key ) {
 				return new RawMessage( "($key)" );
 			} ) );

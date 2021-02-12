@@ -83,8 +83,8 @@ class ShortDescHandlerTest extends TestCase {
 	public function testDoHandle( $inputString, $pageProperty ) {
 		$output = $this->getMockBuilder( \OutputPage::class )->disableOriginalConstructor()->getMock();
 		$parser = $this->getMockBuilder( \Parser::class )->disableOriginalConstructor()->getMock();
-		$parser->expects( $this->any() )->method( 'getOutput' )->willReturn( $output );
-		$parser->expects( $this->any() )->method( 'getMagicWordFactory' )->willReturn(
+		$parser->method( 'getOutput' )->willReturn( $output );
+		$parser->method( 'getMagicWordFactory' )->willReturn(
 			MediaWikiServices::getInstance()->getMagicWordFactory() );
 		if ( $pageProperty === null ) {
 			$output->expects( $this->never() )->method( 'setProperty' );
@@ -112,8 +112,8 @@ class ShortDescHandlerTest extends TestCase {
 
 		$output = $this->getMockBuilder( \OutputPage::class )->disableOriginalConstructor()->getMock();
 		$parser = $this->getMockBuilder( \Parser::class )->disableOriginalConstructor()->getMock();
-		$parser->expects( $this->any() )->method( 'getOutput' )->willReturn( $output );
-		$output->expects( $this->any() )->method( 'setProperty' )
+		$parser->method( 'getOutput' )->willReturn( $output );
+		$output->method( 'setProperty' )
 			->willReturnCallback( function ( $name, $value ) use ( &$shortDesc ) {
 				$this->assertSame( 'wikibase-shortdesc', $name );
 				$shortDesc = $value;

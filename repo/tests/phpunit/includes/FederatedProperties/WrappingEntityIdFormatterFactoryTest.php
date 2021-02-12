@@ -26,13 +26,11 @@ class WrappingEntityIdFormatterFactoryTest extends TestCase {
 	 */
 	private function mockEntityIdFormatterFactory() {
 		$mock = $this->createMock( EntityIdFormatterFactory::class );
-		$mock->expects( $this->any() )
-		->method( 'getOutputFormat' )
-		->willReturn( 'OUTPUT' );
-		$mock->expects( $this->any() )
-		->method( 'getEntityIdFormatter' )
-		->with( $this->mockLanguage() )
-		->willReturn( $this->createMock( EntityIdFormatter::class ) );
+		$mock->method( 'getOutputFormat' )
+			->willReturn( 'OUTPUT' );
+		$mock->method( 'getEntityIdFormatter' )
+			->with( $this->mockLanguage() )
+			->willReturn( $this->createMock( EntityIdFormatter::class ) );
 		return $mock;
 	}
 

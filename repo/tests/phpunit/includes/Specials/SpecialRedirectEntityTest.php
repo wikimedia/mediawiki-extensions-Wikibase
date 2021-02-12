@@ -80,8 +80,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'run' )
+		$mock->method( 'run' )
 			->will( $this->returnValue( Status::newGood() ) );
 		return $mock;
 	}
@@ -92,12 +91,10 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	private function getMockEntityTitleLookup() {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
-		$titleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$titleLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				$title = $this->createMock( Title::class );
-				$title->expects( $this->any() )
-					->method( 'isDeleted' )
+				$title->method( 'isDeleted' )
 					->will( $this->returnValue( false ) );
 				return $title;
 			} ) );
@@ -112,8 +109,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$exceptionLocalizer = $this->createMock( ExceptionLocalizer::class );
-		$exceptionLocalizer->expects( $this->any() )
-			->method( 'getExceptionMessage' )
+		$exceptionLocalizer->method( 'getExceptionMessage' )
 			->will( $this->returnCallback( function( Exception $ex ) {
 				if ( $ex instanceof Error ) {
 					throw $ex;
@@ -188,8 +184,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	private function getPermissionCheckers() {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
-		$permissionChecker->expects( $this->any() )
-			->method( 'getPermissionStatusForEntityId' )
+		$permissionChecker->method( 'getPermissionStatusForEntityId' )
 			->will( $this->returnCallback( function( User $user ) {
 				$name = 'UserWithoutPermission';
 				if ( $user->getName() === $name ) {

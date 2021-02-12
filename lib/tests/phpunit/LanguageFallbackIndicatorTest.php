@@ -20,8 +20,7 @@ class LanguageFallbackIndicatorTest extends \PHPUnit\Framework\TestCase {
 
 	private function getIndicator() {
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->any() )
-			->method( 'getName' )
+		$languageNameLookup->method( 'getName' )
 			->will( $this->returnCallback( function( $languageCode ) {
 				$names = [
 						'de' => 'Deutsch',

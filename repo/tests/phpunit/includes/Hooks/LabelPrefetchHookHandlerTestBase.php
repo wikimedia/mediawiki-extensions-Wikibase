@@ -83,13 +83,11 @@ abstract class LabelPrefetchHookHandlerTestBase extends TestCase {
 		$titleFactory = new TitleFactory();
 
 		$fallbackChain = $this->createMock( TermLanguageFallbackChain::class );
-		$fallbackChain->expects( $this->any() )
-			->method( 'getFetchLanguageCodes' )
+		$fallbackChain->method( 'getFetchLanguageCodes' )
 			->willReturn( $languageCodes );
 
 		$fallbackChainFactory = $this->createMock( LanguageFallbackChainFactory::class );
-		$fallbackChainFactory->expects( $this->any() )
-			->method( 'newFromContext' )
+		$fallbackChainFactory->method( 'newFromContext' )
 			->willReturn( $fallbackChain );
 
 		return new LabelPrefetchHookHandler(

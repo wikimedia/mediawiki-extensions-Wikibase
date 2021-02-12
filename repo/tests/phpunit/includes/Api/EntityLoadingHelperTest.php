@@ -42,8 +42,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$apiBase->expects( $this->any() )
-			->method( 'extractRequestParams' )
+		$apiBase->method( 'extractRequestParams' )
 			->will( $this->returnValue( $params ) );
 
 		return $apiBase;
@@ -129,8 +128,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$revision->expects( $this->any() )
-			->method( 'getEntity' )
+		$revision->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
 		return $revision;

@@ -98,13 +98,11 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 					->method( 'getConnectionRef' );
 				$lb->expects( $this->never() )
 					->method( 'getMaintenanceConnectionRef' );
-				$lb->expects( $this->any() )
-					->method( 'getLocalDomainID' )
+				$lb->method( 'getLocalDomainID' )
 					->willReturn( 'banana' );
 
 				$lbFactory = $this->createMock( LBFactory::class );
-				$lbFactory->expects( $this->any() )
-					->method( 'getMainLB' )
+				$lbFactory->method( 'getMainLB' )
 					->willReturn( $lb );
 
 				return $lbFactory;

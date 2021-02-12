@@ -26,14 +26,12 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit\Framewo
 	 */
 	private function getTermLookupMock() {
 		$termLookup = $this->createMock( TermLookup::class );
-		$termLookup->expects( $this->any() )
-			->method( 'getLabel' )
+		$termLookup->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return $id->getSerialization() . '\'s label';
 			} ) );
 
-		$termLookup->expects( $this->any() )
-			->method( 'getLabels' )
+		$termLookup->method( 'getLabels' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return [ 'en' => $id->getSerialization() . '\'s label' ];
 			} ) );

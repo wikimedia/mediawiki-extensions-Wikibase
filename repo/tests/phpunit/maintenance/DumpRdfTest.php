@@ -286,8 +286,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 	 */
 	private function getMockPropertyDataTypeLookup() {
 		$mockDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
-		$mockDataTypeLookup->expects( $this->any() )
-			->method( 'getDataTypeIdForProperty' )
+		$mockDataTypeLookup->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( function( PropertyId $id ) {
 				if ( $id->getSerialization() === 'P999' ) {
 					throw new PropertyDataTypeLookupException( $id );

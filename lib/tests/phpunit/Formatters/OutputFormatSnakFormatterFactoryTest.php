@@ -52,8 +52,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
-		$dataTypeLookup->expects( $this->any() )
-			->method( 'getDataTypeIdForProperty' )
+		$dataTypeLookup->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( $dataType ) );
 
 		return new OutputFormatSnakFormatterFactory(
@@ -72,8 +71,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function makeMockValueFormatter( $format ) {
 		$mock = $this->createMock( ValueFormatter::class );
 
-		$mock->expects( $this->any() )
-			->method( 'format' )
+		$mock->method( 'format' )
 			->will( $this->returnCallback(
 				function( DataValue $value ) use ( $format ) {
 					return strval( $value->getValue() ) . ' (' . $format . ')';
@@ -91,8 +89,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function makeMockSnakFormatter( $format ) {
 		$mock = $this->createMock( SnakFormatter::class );
 
-		$mock->expects( $this->any() )
-			->method( 'formatSnak' )
+		$mock->method( 'formatSnak' )
 			->will( $this->returnCallback(
 				function( Snak $snak ) use ( $format ) {
 					$s = $snak->getType() . '/' . $snak->getPropertyId();
@@ -105,8 +102,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 				}
 			) );
 
-		$mock->expects( $this->any() )
-			->method( 'getFormat' )
+		$mock->method( 'getFormat' )
 			->will( $this->returnValue( $format ) );
 
 		return $mock;

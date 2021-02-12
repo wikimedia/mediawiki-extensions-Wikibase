@@ -29,8 +29,7 @@ class ClientSiteLinkTitleLookupTest extends \PHPUnit\Framework\TestCase {
 		$expected
 	) {
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
-		$siteLinkLookup->expects( $this->any() )
-			->method( 'getLinks' )
+		$siteLinkLookup->method( 'getLinks' )
 			->with( [ $id->getNumericId() ], [ $clientSiteId ] )
 			->will( $this->returnCallback( function ( array $numericIds, array $siteIds ) {
 				// TODO: SiteLinkLookup::getLinks does have a bad, bad interface.

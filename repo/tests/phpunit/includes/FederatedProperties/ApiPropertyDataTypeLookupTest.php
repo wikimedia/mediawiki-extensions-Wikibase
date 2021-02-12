@@ -53,8 +53,7 @@ class ApiPropertyDataTypeLookupTest extends TestCase {
 
 	private function getApiClient( $responseDataFile ) {
 		$client = $this->createMock( GenericActionApiClient::class );
-		$client->expects( $this->any() )
-			->method( 'get' )
+		$client->method( 'get' )
 			->willReturn( $this->newMockResponse( file_get_contents( $responseDataFile ), 200 ) );
 		return $client;
 	}

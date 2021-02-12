@@ -60,8 +60,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$transformer->expects( $this->any() )
-			->method( 'transformChangeList' )
+		$transformer->method( 'transformChangeList' )
 			->will( $this->returnArgument( 0 ) );
 
 		return $transformer;
@@ -246,8 +245,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 				return $titles;
 			} );
 
-		$titleFactory->expects( $this->any() )
-			->method( 'newFromText' )
+		$titleFactory->method( 'newFromText' )
 			->will( $this->returnCallback( function( $text, $defaultNs = \NS_MAIN ) use ( $pageIdsByTitle ) {
 				$title = Title::newFromText( $text, $defaultNs );
 
@@ -277,8 +275,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getUsageLookup( SiteLinkLookup $siteLinkLookup ) {
 		$usageLookup = $this->createMock( UsageLookup::class );
-		$usageLookup->expects( $this->any() )
-			->method( 'getPagesUsing' )
+		$usageLookup->method( 'getPagesUsing' )
 			->will( $this->returnCallback(
 				function( $ids, $aspects ) use ( $siteLinkLookup ) {
 					$pages = [];
@@ -586,8 +583,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 		$affectedPagesFinder = $this->getMockBuilder( AffectedPagesFinder::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$affectedPagesFinder->expects( $this->any() )
-			->method( 'getAffectedUsagesByPage' )
+		$affectedPagesFinder->method( 'getAffectedUsagesByPage' )
 			->will( $this->returnValue( $usages ) );
 
 		$titleFactory = $this->getMockBuilder( TitleFactory::class )

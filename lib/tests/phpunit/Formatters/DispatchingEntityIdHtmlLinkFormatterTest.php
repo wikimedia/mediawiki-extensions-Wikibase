@@ -41,8 +41,7 @@ class DispatchingEntityIdHtmlLinkFormatterTest extends TestCase {
 		$formatters = [ 'foo' => $formatter ];
 
 		$mockEntityId = $this->createMock( EntityId::class );
-		$mockEntityId->expects( $this->any() )
-			->method( 'getEntityType' )
+		$mockEntityId->method( 'getEntityType' )
 			->willReturn( 'foo' );
 
 		$formatter = new DispatchingEntityIdHtmlLinkFormatter( $formatters, $this->defaultFormatter );

@@ -29,8 +29,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function newMonthNameProvider() {
 		$monthNameProvider = $this->createMock( MonthNameProvider::class );
 
-		$monthNameProvider->expects( $this->any() )
-			->method( 'getLocalizedMonthNames' )
+		$monthNameProvider->method( 'getLocalizedMonthNames' )
 			->will( $this->returnCallback( function( $languageCode ) {
 				$monthNames = [];
 				for ( $i = 1; $i <= 12; $i++ ) {
@@ -39,8 +38,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 				return $monthNames;
 			} ) );
 
-		$monthNameProvider->expects( $this->any() )
-			->method( 'getMonthNumbers' )
+		$monthNameProvider->method( 'getMonthNumbers' )
 			->will( $this->returnCallback( function( $languageCode ) {
 				$numbers = [];
 				for ( $i = 1; $i <= 12; $i++ ) {
@@ -477,11 +475,9 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function testMonthNameUnlocalizer_withUnlocalizedMonthNumbers() {
 		$monthNameProvider = $this->createMock( MonthNameProvider::class );
-		$monthNameProvider->expects( $this->any() )
-			->method( 'getLocalizedMonthNames' )
+		$monthNameProvider->method( 'getLocalizedMonthNames' )
 			->will( $this->returnValue( [ 2 => 'Localized' ] ) );
-		$monthNameProvider->expects( $this->any() )
-			->method( 'getMonthNumbers' )
+		$monthNameProvider->method( 'getMonthNumbers' )
 			->will( $this->returnValue( [ '2' => 2 ] ) );
 
 		$factory = $this->newTimeParserFactory( 'ko', $monthNameProvider );

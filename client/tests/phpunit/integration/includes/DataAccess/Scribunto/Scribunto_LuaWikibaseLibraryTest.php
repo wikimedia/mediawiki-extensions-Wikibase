@@ -235,8 +235,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 			->disableOriginalConstructor()
 			->getMock();
 
-		$repoLinker->expects( $this->any() )
-			->method( 'getEntityUrl' )
+		$repoLinker->method( 'getEntityUrl' )
 			->with( new ItemId( 'Q1' ) )
 			->will( $this->returnValue( 'this-is-a-URL' ) );
 

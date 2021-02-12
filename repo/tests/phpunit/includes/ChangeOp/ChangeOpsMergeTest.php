@@ -74,8 +74,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 		}
 		// A validator which makes sure that no site link is for page 'DUPE'
 		$siteLinkUniquenessValidator = $this->createMock( EntityValidator::class );
-		$siteLinkUniquenessValidator->expects( $this->any() )
-			->method( 'validateEntity' )
+		$siteLinkUniquenessValidator->method( 'validateEntity' )
 			->will( $this->returnCallback( function( Item $item ) {
 				foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 					if ( $siteLink->getPageName() === 'DUPE' ) {
@@ -88,8 +87,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 		$constraintProvider = $this->getMockBuilder( EntityConstraintProvider::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$constraintProvider->expects( $this->any() )
-			->method( 'getUpdateValidators' )
+		$constraintProvider->method( 'getUpdateValidators' )
 			->will( $this->returnValue( [ $siteLinkUniquenessValidator ] ) );
 
 		$changeOpFactoryProvider = new ChangeOpFactoryProvider(

@@ -39,8 +39,7 @@ class ApiEntityTitleTextLookupTest extends TestCase {
 
 	private function getApiEntityNamespaceInfoLookup( $namespaceName ) {
 		$mock = $this->createMock( ApiEntityNamespaceInfoLookup::class );
-		$mock->expects( $this->any() )
-			->method( 'getNamespaceNameForEntityType' )
+		$mock->method( 'getNamespaceNameForEntityType' )
 			->willReturn( $namespaceName );
 		return $mock;
 	}

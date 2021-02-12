@@ -34,13 +34,11 @@ class ClientEntitySerializerTest extends \PHPUnit\Framework\TestCase {
 		$fallbackChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$fallbackChain->expects( $this->any() )
-			->method( 'extractPreferredValue' )
+		$fallbackChain->method( 'extractPreferredValue' )
 			->will( $this->returnValue( [ 'source' => '<SOURCE>' ] ) );
 
 		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
-		$dataTypeLookup->expects( $this->any() )
-			->method( 'getDataTypeIdForProperty' )
+		$dataTypeLookup->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( '<DATATYPE>' ) );
 
 		return new ClientEntitySerializer(

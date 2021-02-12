@@ -44,8 +44,7 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 	public function provideGetLabelDescriptionLookup() {
 		$termLookup = $this->createMock( TermLookup::class );
 
-		$termLookup->expects( $this->any() )
-			->method( 'getLabel' )
+		$termLookup->method( 'getLabel' )
 			->will( $this->returnCallback( function ( $item, $language ) {
 				if ( $language === 'de' ) {
 					return 'Kätzchen';
@@ -54,8 +53,7 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 				throw new OutOfBoundsException( 'no bananas' );
 			} ) );
 
-		$termLookup->expects( $this->any() )
-			->method( 'getLabels' )
+		$termLookup->method( 'getLabels' )
 			->will( $this->returnValue( [ 'de' => 'Kätzchen' ] ) );
 
 		$labelDescriptionLookup = new LanguageLabelDescriptionLookup( $termLookup, 'de' );

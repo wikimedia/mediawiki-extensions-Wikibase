@@ -36,8 +36,7 @@ class SqlEntityIdPagerFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function getMockEntityIdLookup() {
 		$entityIdLookup = $this->getMockBuilder( EntityIdLookup::class )->getMock();
 
-		$entityIdLookup->expects( $this->any() )
-			->method( 'getEntityIdForTitle' )
+		$entityIdLookup->method( 'getEntityIdForTitle' )
 			->willReturnCallback( function ( Title $title ) {
 				return new ItemId( $title->getText() );
 			} );

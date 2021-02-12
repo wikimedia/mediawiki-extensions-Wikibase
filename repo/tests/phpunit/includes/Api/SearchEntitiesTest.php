@@ -415,8 +415,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 
 	private function newMockTitleTextLookup(): EntityTitleTextLookup {
 		$titleTextLookup = $this->createMock( EntityTitleTextLookup::class );
-		$titleTextLookup->expects( $this->any() )
-			->method( 'getPrefixedText' )
+		$titleTextLookup->method( 'getPrefixedText' )
 			->willReturn( 'Prefixed:Title' );
 
 		return $titleTextLookup;
@@ -424,8 +423,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 
 	private function newMockUrlLookup(): EntityUrlLookup {
 		$urlLookup = $this->createMock( EntityUrlLookup::class );
-		$urlLookup->expects( $this->any() )
-			->method( 'getFullUrl' )
+		$urlLookup->method( 'getFullUrl' )
 			->willReturn( 'http://fullTitleUrl' );
 
 		return $urlLookup;
@@ -433,8 +431,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 
 	private function newMockArticleIdLookup(): EntityArticleIdLookup {
 		$articleIdLookup = $this->createMock( EntityArticleIdLookup::class );
-		$articleIdLookup->expects( $this->any() )
-			->method( 'getArticleID' )
+		$articleIdLookup->method( 'getArticleID' )
 			->willReturn( 42 );
 
 		return $articleIdLookup;

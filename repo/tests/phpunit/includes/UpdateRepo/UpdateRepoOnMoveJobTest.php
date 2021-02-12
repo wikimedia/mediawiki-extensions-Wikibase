@@ -68,11 +68,9 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getSiteLookup( $normalizedPageName ) {
 		$enwiki = $this->createMock( Site::class );
-		$enwiki->expects( $this->any() )
-			->method( 'getGlobalId' )
+		$enwiki->method( 'getGlobalId' )
 			->will( $this->returnValue( 'enwiki' ) );
-		$enwiki->expects( $this->any() )
-			->method( 'normalizePageName' )
+		$enwiki->method( 'normalizePageName' )
 			->will( $this->returnValue( $normalizedPageName ) );
 
 		return new HashSiteStore( [ $enwiki ] );
@@ -85,8 +83,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getEntityTitleLookup( ItemId $itemId ) {
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$entityTitleLookup->method( 'getTitleForId' )
 			->with( $itemId )
 			->will( $this->returnValue( Title::newFromText( $itemId->getSerialization() ) ) );
 
@@ -98,8 +95,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getEntityPermissionChecker() {
 		$entityPermissionChecker = $this->createMock( EntityPermissionChecker::class );
-		$entityPermissionChecker->expects( $this->any() )
-			->method( 'getPermissionStatusForEntity' )
+		$entityPermissionChecker->method( 'getPermissionStatusForEntity' )
 			->will( $this->returnValue( Status::newGood() ) );
 
 		return $entityPermissionChecker;
@@ -120,8 +116,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
-		$runner->expects( $this->any() )
-			->method( 'run' )
+		$runner->method( 'run' )
 			->will( $this->returnValue( Status::newGood() ) );
 		return $runner;
 	}

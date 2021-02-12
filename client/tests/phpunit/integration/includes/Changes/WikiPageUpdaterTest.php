@@ -50,32 +50,25 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$title->expects( $this->any() )
-			->method( 'getArticleID' )
+		$title->method( 'getArticleID' )
 			->will( $this->returnValue( $id ) );
 
-		$title->expects( $this->any() )
-			->method( 'exists' )
+		$title->method( 'exists' )
 			->will( $this->returnValue( true ) );
 
-		$title->expects( $this->any() )
-			->method( 'getPrefixedDBkey' )
+		$title->method( 'getPrefixedDBkey' )
 			->will( $this->returnValue( $text ) );
 
-		$title->expects( $this->any() )
-			->method( 'getDBkey' )
+		$title->method( 'getDBkey' )
 			->will( $this->returnValue( $text ) );
 
-		$title->expects( $this->any() )
-			->method( 'getText' )
+		$title->method( 'getText' )
 			->will( $this->returnValue( $text ) );
 
-		$title->expects( $this->any() )
-			->method( 'getNamespace' )
+		$title->method( 'getNamespace' )
 			->will( $this->returnValue( 0 ) );
 
-		$title->expects( $this->any() )
-			->method( 'getNsText' )
+		$title->method( 'getNsText' )
 			->will( $this->returnValue( '' ) );
 
 		return $title;

@@ -66,11 +66,9 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getSiteLookup( $titleExists ) {
 		$enwiki = $this->createMock( Site::class );
-		$enwiki->expects( $this->any() )
-			->method( 'getGlobalId' )
+		$enwiki->method( 'getGlobalId' )
 			->will( $this->returnValue( 'enwiki' ) );
-		$enwiki->expects( $this->any() )
-			->method( 'normalizePageName' )
+		$enwiki->method( 'normalizePageName' )
 			->with( 'Delete me' )
 			->will( $this->returnValue( $titleExists ) );
 
@@ -84,8 +82,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getEntityTitleLookup( ItemId $itemId ) {
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$entityTitleLookup->method( 'getTitleForId' )
 			->with( $itemId )
 			->will( $this->returnValue( Title::newFromText( $itemId->getSerialization() ) ) );
 
@@ -97,8 +94,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getEntityPermissionChecker() {
 		$entityPermissionChecker = $this->createMock( EntityPermissionChecker::class );
-		$entityPermissionChecker->expects( $this->any() )
-				->method( 'getPermissionStatusForEntity' )
+		$entityPermissionChecker->method( 'getPermissionStatusForEntity' )
 				->will( $this->returnValue( Status::newGood() ) );
 
 		return $entityPermissionChecker;
@@ -119,8 +115,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
-		$runner->expects( $this->any() )
-			->method( 'run' )
+		$runner->method( 'run' )
 			->will( $this->returnValue( Status::newGood() ) );
 		return $runner;
 	}

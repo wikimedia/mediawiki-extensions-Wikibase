@@ -44,8 +44,7 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$rcFactory->expects( $this->any() )
-			->method( 'prepareChangeAttributes' )
+		$rcFactory->method( 'prepareChangeAttributes' )
 			->will( $this->returnValue( [] ) );
 
 		return $rcFactory;
@@ -67,8 +66,7 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 			$changes[$id] = $change;
 		}
 
-		$changeLookup->expects( $this->any() )
-			->method( 'loadByChangeIds' )
+		$changeLookup->method( 'loadByChangeIds' )
 			->will( $this->returnCallback( function ( $ids ) use ( $changes ) {
 				return array_values( array_intersect_key( $changes, array_flip( $ids ) ) );
 			} ) );
@@ -105,8 +103,7 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 		$titleFactory = $this->createMock( TitleFactory::class );
 
 		$id = 200;
-		$titleFactory->expects( $this->any() )
-			->method( 'makeTitle' )
+		$titleFactory->method( 'makeTitle' )
 			->will( $this->returnCallback( function( $ns, $text ) use ( &$id ) {
 				return $this->getTitleMock( $text, $id++ );
 			} ) );
@@ -125,24 +122,19 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$title->expects( $this->any() )
-			->method( 'getArticleID' )
+		$title->method( 'getArticleID' )
 			->will( $this->returnValue( $id ) );
 
-		$title->expects( $this->any() )
-			->method( 'exists' )
+		$title->method( 'exists' )
 			->will( $this->returnValue( true ) );
 
-		$title->expects( $this->any() )
-			->method( 'getDBkey' )
+		$title->method( 'getDBkey' )
 			->will( $this->returnValue( $text ) );
 
-		$title->expects( $this->any() )
-			->method( 'getPrefixedDBkey' )
+		$title->method( 'getPrefixedDBkey' )
 			->will( $this->returnValue( $text ) );
 
-		$title->expects( $this->any() )
-			->method( 'getNamespace' )
+		$title->method( 'getNamespace' )
 			->will( $this->returnValue( 0 ) );
 
 		return $title;
@@ -161,20 +153,16 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$change->expects( $this->any() )
-			->method( 'getId' )
+		$change->method( 'getId' )
 			->will( $this->returnValue( $id ) );
 
-		$change->expects( $this->any() )
-			->method( 'getFields' )
+		$change->method( 'getFields' )
 			->will( $this->returnValue( $fields ) );
 
-		$change->expects( $this->any() )
-			->method( 'getInfo' )
+		$change->method( 'getInfo' )
 			->will( $this->returnValue( $info ) );
 
-		$change->expects( $this->any() )
-			->method( 'getSerializedInfo' )
+		$change->method( 'getSerializedInfo' )
 			->will( $this->returnValue( json_encode( $info ) ) );
 
 		return $change;

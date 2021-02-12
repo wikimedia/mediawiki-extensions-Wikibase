@@ -31,8 +31,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$context->expects( $this->any() )
-			->method( 'getLanguage' )
+		$context->method( 'getLanguage' )
 			->willReturn( $languageCode );
 
 		return $context;

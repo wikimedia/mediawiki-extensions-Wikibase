@@ -81,8 +81,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 	private function getPermissionCheckers() {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
-		$permissionChecker->expects( $this->any() )
-			->method( 'getPermissionStatusForEntityId' )
+		$permissionChecker->method( 'getPermissionStatusForEntityId' )
 			->will( $this->returnCallback( function( User $user ) {
 				if ( $user->getName() === 'UserWithoutPermission' ) {
 					return Status::newFatal( 'permissiondenied' );
@@ -102,8 +101,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$mock->expects( $this->any() )
-			->method( 'run' )
+		$mock->method( 'run' )
 			->will( $this->returnValue( Status::newGood() ) );
 
 		return $mock;
@@ -165,12 +163,10 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 	private function getMockEntityTitleLookup() {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
-		$titleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$titleLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				$title = $this->createMock( Title::class );
-				$title->expects( $this->any() )
-					->method( 'isDeleted' )
+				$title->method( 'isDeleted' )
 					->will( $this->returnValue( false ) );
 				return $title;
 			} ) );

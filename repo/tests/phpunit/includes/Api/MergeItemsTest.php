@@ -95,8 +95,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	private function getPermissionCheckers() {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
-		$permissionChecker->expects( $this->any() )
-			->method( 'getPermissionStatusForEntityId' )
+		$permissionChecker->method( 'getPermissionStatusForEntityId' )
 			->will( $this->returnCallback( function( User $user, $permission ) {
 				if ( $user->getName() === 'UserWithoutPermission' && $permission === 'edit' ) {
 					return Status::newFatal( 'permissiondenied' );
@@ -138,8 +137,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getEntityTitleStoreLookup() {
 		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
-		$entityTitleStoreLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$entityTitleStoreLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
 				return Title::newFromText( $entityId->getSerialization() );
 			} ) );
@@ -219,8 +217,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$constraintProvider->expects( $this->any() )
-			->method( 'getUpdateValidators' )
+		$constraintProvider->method( 'getUpdateValidators' )
 			->will( $this->returnValue( [] ) );
 
 		return $constraintProvider;
@@ -234,8 +231,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$snakValidator->expects( $this->any() )
-			->method( 'validate' )
+		$snakValidator->method( 'validate' )
 			->will( $this->returnValue( Status::newGood() ) );
 
 		return $snakValidator;

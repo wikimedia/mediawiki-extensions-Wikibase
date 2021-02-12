@@ -51,14 +51,12 @@ class WikibaseLanguageDependentLuaBindingsTest extends \PHPUnit\Framework\TestCa
 			->disableOriginalConstructor()
 			->getMock();
 
-		$labelDescriptionLookup->expects( $this->any() )
-			->method( 'getLabel' )
+		$labelDescriptionLookup->method( 'getLabel' )
 			->will( $this->returnValue(
 				new TermFallback( 'ar', 'LabelString', 'lang-code', null )
 			) );
 
-		$labelDescriptionLookup->expects( $this->any() )
-			->method( 'getDescription' )
+		$labelDescriptionLookup->method( 'getDescription' )
 			->will( $this->returnValue(
 				new TermFallback( 'ar', 'DescriptionString', 'lang-code', null )
 			) );

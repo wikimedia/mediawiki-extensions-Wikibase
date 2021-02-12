@@ -71,8 +71,7 @@ class ApiEntityNamespaceInfoLookupTest extends TestCase {
 
 	private function getApiClient( $responseDataFile ) {
 		$client = $this->createMock( GenericActionApiClient::class );
-		$client->expects( $this->any() )
-			->method( 'get' )
+		$client->method( 'get' )
 			->willReturnCallback( function() use ( $responseDataFile ) {
 				return $this->newMockResponse( $this->data[$responseDataFile], 200 );
 			} );

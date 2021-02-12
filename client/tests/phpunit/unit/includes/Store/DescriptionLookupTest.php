@@ -185,11 +185,9 @@ class DescriptionLookupTest extends TestCase {
 		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$title->expects( $this->any() )
-			->method( 'getArticleID' )
+		$title->method( 'getArticleID' )
 			->willReturn( $pageId );
-		$title->expects( $this->any() )
-			->method( 'getPageLanguage' )
+		$title->method( 'getPageLanguage' )
 			->willReturn( $language );
 		return $title;
 	}
@@ -205,8 +203,7 @@ class DescriptionLookupTest extends TestCase {
 		$pageProps = $this->getMockBuilder( PageProps::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$pageProps->expects( $this->any() )
-			->method( 'getProperties' )
+		$pageProps->method( 'getProperties' )
 			->with( $this->anything(), DescriptionLookup::LOCAL_PROPERTY_NAME )
 			->willReturnCallback( function ( $titlesByPageId ) use ( $localDescriptions ) {
 				return array_filter( array_map( function ( Title $title ) use ( $localDescriptions ) {
@@ -236,8 +233,7 @@ class DescriptionLookupTest extends TestCase {
 	private function getIdLookup( array $centralDescriptions ) {
 		$idLookup = $this->getMockBuilder( EntityIdLookup::class )
 			->getMockForAbstractClass();
-		$idLookup->expects( $this->any() )
-			->method( 'getEntityIds' )
+		$idLookup->method( 'getEntityIds' )
 			->willReturnCallback( function ( $titlesByPageId ) use ( $centralDescriptions ) {
 				return array_filter( array_map( function ( Title $title ) use ( $centralDescriptions ) {
 					if ( !array_key_exists( $title->getArticleID(), $centralDescriptions ) ) {
@@ -267,8 +263,7 @@ class DescriptionLookupTest extends TestCase {
 		$termBuffer = $this->getMockBuilder( TermBuffer::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$termBuffer->expects( $this->any() )
-			->method( 'getPrefetchedTerm' )
+		$termBuffer->method( 'getPrefetchedTerm' )
 			->willReturnCallback(
 				function ( $entityId, $termType, $langCode ) use ( $centralDescriptions ) {
 					$pageId = (int)substr( $entityId->getLocalPart(), 1 );

@@ -98,8 +98,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 		$languageFallbackChainFactory = $this
 			->createMock( LanguageFallbackChainFactory::class );
 
-		$languageFallbackChainFactory->expects( $this->any() )
-			->method( 'newFromContext' )
+		$languageFallbackChainFactory->method( 'newFromContext' )
 			->willReturn( $languageFallback );
 		$entityIdParser = new BasicEntityIdParser();
 		return new HtmlPageLinkRendererEndHookHandler(
@@ -141,8 +140,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 	private function getEntityExistenceChecker( $isDeleted ) {
 		$entityExistenceChecker = $this->createMock( EntityExistenceChecker::class );
 
-		$entityExistenceChecker->expects( $this->any() )
-			->method( 'exists' )
+		$entityExistenceChecker->method( 'exists' )
 			->willReturn( !$isDeleted );
 		return $entityExistenceChecker;
 	}
@@ -150,8 +148,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 	private function getEntityTitleTextLookup( $titleText ) {
 		$entityTitleTextLookup = $this->createMock( EntityTitleTextLookup::class );
 
-		$entityTitleTextLookup->expects( $this->any() )
-			->method( 'getPrefixedText' )
+		$entityTitleTextLookup->method( 'getPrefixedText' )
 			->willReturn( $titleText );
 
 		return $entityTitleTextLookup;
@@ -159,13 +156,11 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 
 	private function newMockEntitySourceDefinitions( $entityType ) {
 		$foreignItemSource = $this->createMock( EntitySource::class );
-		$foreignItemSource->expects( $this->any() )
-			->method( 'getInterwikiPrefix' )
+		$foreignItemSource->method( 'getInterwikiPrefix' )
 			->willReturn( self::FOREIGN_REPO_PREFIX );
 
 		$sourceDefs = $this->createMock( EntitySourceDefinitions::class );
-		$sourceDefs->expects( $this->any() )
-			->method( 'getSourceForEntityType' )
+		$sourceDefs->method( 'getSourceForEntityType' )
 			->with( $entityType )
 			->willReturn( $foreignItemSource );
 
@@ -174,8 +169,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 
 	private function newMockEntitySource() {
 		$entitySource = $this->createMock( EntitySource::class );
-		$entitySource->expects( $this->any() )
-			->method( 'getEntityTypes' )
+		$entitySource->method( 'getEntityTypes' )
 			->willReturn( [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] );
 
 		return $entitySource;
@@ -187,8 +181,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 	private function getTermLookup() {
 		$termLookup = $this->createMock( TermLookup::class );
 
-		$termLookup->expects( $this->any() )
-			->method( 'getLabels' )
+		$termLookup->method( 'getLabels' )
 			->will( $this->returnCallback( function ( EntityId $id ) {
 				switch ( $id->getSerialization() ) {
 					case self::ITEM_WITH_LABEL:
@@ -207,8 +200,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 				}
 			} ) );
 
-		$termLookup->expects( $this->any() )
-			->method( 'getDescriptions' )
+		$termLookup->method( 'getDescriptions' )
 			->will( $this->returnCallback( function ( EntityId $id ) {
 				switch ( $id->getSerialization() ) {
 					case self::ITEM_WITH_LABEL:
@@ -241,8 +233,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 
 	private function getInterwikiLookup() {
 		$lookup = $this->createMock( InterwikiLookup::class );
-		$lookup->expects( $this->any() )
-			->method( 'isValidInterwiki' )
+		$lookup->method( 'isValidInterwiki' )
 			->will(
 				$this->returnCallback( function( $interwiki ) {
 					return $interwiki === self::FOREIGN_REPO_PREFIX;

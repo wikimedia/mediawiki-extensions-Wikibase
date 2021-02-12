@@ -166,26 +166,20 @@ class ItemContentTest extends EntityContentTestCase {
 		$itemNs = $nsLookup->getEntityNamespace( 'item' );
 
 		$title = $this->createMock( Title::class );
-		$title->expects( $this->any() )
-			->method( 'getFullText' )
+		$title->method( 'getFullText' )
 			->will( $this->returnValue( $targetId->getSerialization() ) );
-		$title->expects( $this->any() )
-			->method( 'getText' )
+		$title->method( 'getText' )
 			->will( $this->returnValue( $targetId->getSerialization() ) );
-		$title->expects( $this->any() )
-			->method( 'isRedirect' )
+		$title->method( 'isRedirect' )
 			->will( $this->returnValue( false ) );
-		$title->expects( $this->any() )
-			->method( 'getNamespace' )
+		$title->method( 'getNamespace' )
 			->will( $this->returnValue( $itemNs ) );
-		$title->expects( $this->any() )
-			->method( 'equals' )
+		$title->method( 'equals' )
 			->will( $this->returnCallback( function( Title $other ) use ( $targetId ) {
 				// XXX: Ignores namespaces
 				return $other->getText() === $targetId->getSerialization();
 			} ) );
-		$title->expects( $this->any() )
-			->method( 'getLinkURL' )
+		$title->method( 'getLinkURL' )
 			->will( $this->returnValue( 'http://foo.bar/' . $targetId->getSerialization() ) );
 
 		return ItemContent::newFromRedirect( new EntityRedirect( $itemId, $targetId ), $title );
@@ -260,8 +254,7 @@ class ItemContentTest extends EntityContentTestCase {
 			->getMock();
 
 		$handler = $this->getItemHandler();
-		$itemContent->expects( $this->any() )
-			->method( 'getContentHandler' )
+		$itemContent->method( 'getContentHandler' )
 			->will( $this->returnValue( $handler ) );
 
 		return $itemContent;

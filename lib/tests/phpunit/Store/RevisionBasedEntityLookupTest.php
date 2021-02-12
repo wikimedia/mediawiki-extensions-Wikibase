@@ -96,15 +96,13 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 	private function newEntityLookupExceptionThrowingRevisionLookup() {
 		$revisionLookup = $this->createMock( EntityRevisionLookup::class );
 
-		$revisionLookup->expects( $this->any() )
-			->method( 'getEntityRevision' )
+		$revisionLookup->method( 'getEntityRevision' )
 			->will( $this->throwException( new UnresolvedEntityRedirectException(
 				new ItemId( 'Q1' ),
 				new ItemId( 'Q2' )
 			) ) );
 
-		$revisionLookup->expects( $this->any() )
-			->method( 'getLatestRevisionId' )
+		$revisionLookup->method( 'getLatestRevisionId' )
 			->will( $this->throwException( new UnresolvedEntityRedirectException(
 				new ItemId( 'Q1' ),
 				new ItemId( 'Q2' )
@@ -133,12 +131,10 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 	private function newBadExceptionThrowingRevisionLookup() {
 		$revisionLookup = $this->createMock( EntityRevisionLookup::class );
 
-		$revisionLookup->expects( $this->any() )
-			->method( 'getEntityRevision' )
+		$revisionLookup->method( 'getEntityRevision' )
 			->will( $this->throwException( new \Exception( 'Someone killed a kitten' ) ) );
 
-		$revisionLookup->expects( $this->any() )
-			->method( 'getLatestRevisionId' )
+		$revisionLookup->method( 'getLatestRevisionId' )
 			->will( $this->throwException( new \Exception( 'Someone killed a kitten' ) ) );
 
 		return $revisionLookup;

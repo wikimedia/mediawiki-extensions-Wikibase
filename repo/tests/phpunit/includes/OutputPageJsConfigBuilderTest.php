@@ -108,22 +108,19 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 
 		$user = $this->getUser();
 
-		$out->expects( $this->any() )
-			->method( 'getUser' )
+		$out->method( 'getUser' )
 			->will( $this->returnCallback( function() use ( $user ) {
 				return $user;
 			} ) );
 
-		$out->expects( $this->any() )
-			->method( 'getLanguage' )
+		$out->method( 'getLanguage' )
 			->will( $this->returnCallback( function() {
 				return Language::factory( 'qqx' );
 			} ) );
 
 		$title = $this->getTitle();
 
-		$out->expects( $this->any() )
-			->method( 'getTitle' )
+		$out->method( 'getTitle' )
 			->will( $this->returnCallback( function() use( $title ) {
 				return $title;
 			} ) );

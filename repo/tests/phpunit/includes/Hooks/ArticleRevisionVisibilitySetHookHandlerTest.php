@@ -81,8 +81,7 @@ class ArticleRevisionVisibilitySetHookHandlerTest extends \PHPUnit\Framework\Tes
 
 	private function newEntityNamespaceLookup( bool $returnValue, int $expectedNamespace ): EntityNamespaceLookup {
 		$entityNamespaceLookup = $this->createMock( EntityNamespaceLookup::class );
-		$entityNamespaceLookup->expects( $this->any() )
-			->method( 'isEntityNamespace' )
+		$entityNamespaceLookup->method( 'isEntityNamespace' )
 			->with( $expectedNamespace )
 			->willReturn( $returnValue );
 

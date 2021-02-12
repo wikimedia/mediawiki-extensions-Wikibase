@@ -72,8 +72,7 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 		$user = $this->getMockBuilder( User::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$user->expects( $this->any() )
-			->method( 'isAnon' )
+		$user->method( 'isAnon' )
 			->will( $this->returnValue( $isAnon ) );
 
 		/** @var User $user */

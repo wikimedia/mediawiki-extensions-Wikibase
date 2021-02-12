@@ -149,8 +149,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$siteLookup = $this->createMock( SiteLookup::class );
 
-		$siteLookup->expects( $this->any() )
-			->method( 'getSite' )
+		$siteLookup->method( 'getSite' )
 			->will( $this->returnValue( $site ) );
 
 		return $siteLookup;
@@ -162,16 +161,13 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	private function getContext() {
 		$title = $this->createMock( Title::class );
 
-		$title->expects( $this->any() )
-			->method( 'exists' )
+		$title->method( 'exists' )
 			->will( $this->returnValue( true ) );
 
-		$title->expects( $this->any() )
-			->method( 'getNamespace' )
+		$title->method( 'getNamespace' )
 			->will( $this->returnValue( NS_MAIN ) );
 
-		$title->expects( $this->any() )
-			->method( 'getPrefixedText' )
+		$title->method( 'getPrefixedText' )
 			->will( $this->returnValue( 'Q4' ) );
 
 		$context = new RequestContext();

@@ -93,8 +93,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 		$wikibaseClient = TestingAccessWrapper::newFromObject( $wikibaseClient );
 
 		$propertyLabelResolver = $this->createMock( PropertyLabelResolver::class );
-		$propertyLabelResolver->expects( $this->any() )
-			->method( 'getPropertyIdsForLabels' )
+		$propertyLabelResolver->method( 'getPropertyIdsForLabels' )
 			->with( [ 'LuaTestStringProperty' ] )
 			->will( $this->returnValue(
 				[ 'LuaTestStringProperty' => new PropertyId( 'P342' ) ]

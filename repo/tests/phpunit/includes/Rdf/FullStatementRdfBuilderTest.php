@@ -70,8 +70,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$vocabulary = $this->getTestData()->getVocabulary();
 
 		$mentionTracker = $this->createMock( EntityMentionListener::class );
-		$mentionTracker->expects( $this->any() )
-			->method( 'propertyMentioned' )
+		$mentionTracker->method( 'propertyMentioned' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {
 				$key = $id->getSerialization();
 				$mentioned[$key] = $id;

@@ -202,8 +202,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function newEntityTitleLookup() {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
-		$titleLookup->expects( $this->any() )
-			->method( 'getTitlesForIds' )
+		$titleLookup->method( 'getTitlesForIds' )
 			->will( $this->returnCallback( function ( $ids ) {
 				$titles = [];
 				/** @var EntityId $id */

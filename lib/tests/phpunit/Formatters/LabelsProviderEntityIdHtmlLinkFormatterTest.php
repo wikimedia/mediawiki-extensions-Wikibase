@@ -205,7 +205,6 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 	private function newMockLabelDescriptionLookup( Term $label = null, ItemId $entityId = null ): LabelDescriptionLookup {
 		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelDescriptionLookup
-			->expects( $this->any() )
 			->method( 'getLabel' )
 			->with( $entityId ?? $this->anything() )
 			->willReturn( $label );
@@ -215,8 +214,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 
 	private function newMockLanguageNameLookup(): LanguageNameLookup {
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->any() )
-			->method( 'getName' )
+		$languageNameLookup->method( 'getName' )
 			->will(
 				$this->returnCallback(
 					function ( $languageCode ) {
@@ -238,7 +236,6 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 	private function newMockExistenceChecker( bool $exists = true, EntityId $entityId = null ): EntityExistenceChecker {
 		$entityExistenceChecker = $this->createMock( EntityExistenceChecker::class );
 		$entityExistenceChecker
-			->expects( $this->any() )
 			->method( 'exists' )
 			->with( $entityId ?? $this->anything() )
 			->willReturn( $exists );
@@ -249,7 +246,6 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 	private function newMockTitleTextFormatter( string $titleText = null, EntityId $entityId = null ): EntityTitleTextLookup {
 		$titleTextFormatter = $this->createMock( EntityTitleTextLookup::class );
 		$titleTextFormatter
-			->expects( $this->any() )
 			->method( 'getPrefixedText' )
 			->with( $entityId ?? $this->anything() )
 			->willReturn( $titleText );
@@ -259,8 +255,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 
 	private function newMockUrlLookup( string $url = self::DEFAULT_URL, EntityId $entityId = null ): EntityUrlLookup {
 		$urlLookup = $this->createMock( EntityUrlLookup::class );
-		$urlLookup->expects( $this->any() )
-			->method( 'getLinkUrl' )
+		$urlLookup->method( 'getLinkUrl' )
 			->with( $entityId ?? $this->anything() )
 			->willReturn( $url );
 		return $urlLookup;
@@ -269,7 +264,6 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 	private function newMockRedirectChecker( bool $isRedirect = false, EntityId $entityId = null ): EntityRedirectChecker {
 		$entityRedirectChecker = $this->createMock( EntityRedirectChecker::class );
 		$entityRedirectChecker
-			->expects( $this->any() )
 			->method( 'isRedirect' )
 			->with( $entityId ?? $this->anything() )
 			->willReturn( $isRedirect );

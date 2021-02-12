@@ -81,8 +81,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$handler->expects( $this->any() )
-			->method( 'canCreateWithCustomId' )
+		$handler->method( 'canCreateWithCustomId' )
 			->will( $this->returnValue( true ) );
 
 		return $handler;
@@ -99,8 +98,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			->setMethods( [ 'getEntityType', 'serialize', 'unserialize' ] )
 			->getMock();
 
-		$id->expects( $this->any() )
-			->method( 'getEntityType' )
+		$id->method( 'getEntityType' )
 			->will( $this->returnValue( 'custom-type' ) );
 
 		return $id;
@@ -358,8 +356,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		// This serializer will yield different (but valid) serializations
 		// for the same content by appending junk.
 		$storageEntitySerializer = $this->createMock( Serializer::class );
-		$storageEntitySerializer->expects( $this->any() )
-			->method( 'serialize' )
+		$storageEntitySerializer->method( 'serialize' )
 			->will( $this->returnCallback( function( $object ) use ( $oldWikibaseServices ) {
 				static $c = 0;
 
@@ -377,15 +374,13 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 				continue;
 			}
 
-			$wikibaseServices->expects( $this->any() )
-				->method( $method )
+			$wikibaseServices->method( $method )
 				->will( $this->returnCallback( function( ...$args ) use ( $oldWikibaseServices, $method ) {
 					return $oldWikibaseServices->$method( ...$args );
 				} ) );
 		}
 
-		$wikibaseServices->expects( $this->any() )
-			->method( 'getStorageEntitySerializer' )
+		$wikibaseServices->method( 'getStorageEntitySerializer' )
 			->will( $this->returnValue( $storageEntitySerializer ) );
 
 		$wikibaseRepo->wikibaseServices = $wikibaseServices;

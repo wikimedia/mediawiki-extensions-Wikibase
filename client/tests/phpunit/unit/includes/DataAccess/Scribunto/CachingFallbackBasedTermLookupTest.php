@@ -53,8 +53,7 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 		$this->contentLanguages = $this->createMock( ContentLanguages::class );
 
 		$englishLanguage = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' );
-		$this->languageFactory->expects( $this->any() )
-			->method( 'getLanguage' )
+		$this->languageFactory->method( 'getLanguage' )
 			->with( 'en' )
 			->willReturn( $englishLanguage );
 	}
@@ -288,7 +287,6 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 
 	private function mockHasContentLanguage( bool $return ) {
 		$this->contentLanguages
-			->expects( $this->any() )
 			->method( 'hasLanguage' )
 			->with( $this->anything() )
 			->willReturn( $return );

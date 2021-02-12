@@ -61,10 +61,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		$lookup = $this->getMockBuilder( PrefetchingTermLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$lookup->expects( $this->any() )
-			->method( 'prefetchTerms' );
-		$lookup->expects( $this->any() )
-			->method( 'getLabels' )
+		$lookup->method( 'getLabels' )
 			->will( $this->returnCallback( function( PropertyId $id ) {
 				return [ 'en' => 'Property with label ' . $id->getSerialization() ];
 			} ) );
@@ -76,13 +73,11 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	 */
 	private function getEntityTitleLookup() {
 		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$entityTitleLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback(
 				function ( EntityId $id ) {
 					$title = $this->createMock( Title::class );
-					$title->expects( $this->any() )
-						->method( 'exists' )
+					$title->method( 'exists' )
 						->will( $this->returnValue( true ) );
 					return $title;
 				}

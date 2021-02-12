@@ -29,8 +29,7 @@ class ClientStatementListSerializerTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
-		$dataTypeLookup->expects( $this->any() )
-			->method( 'getDataTypeIdForProperty' )
+		$dataTypeLookup->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( '<DATATYPE>' ) );
 
 		return new ClientStatementListSerializer(

@@ -256,8 +256,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function getSnaksFinder() {
 		$snakListFinder = $this->createMock( SnaksFinder::class );
 
-		$snakListFinder->expects( $this->any() )
-			->method( 'findSnaks' )
+		$snakListFinder->method( 'findSnaks' )
 			->will( $this->returnCallback( function(
 				StatementListProvider $statementListProvider,
 				PropertyId $propertyId,
@@ -281,16 +280,14 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function getSnakFormatterFactory() {
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 
-		$snakFormatter->expects( $this->any() )
-			->method( 'formatSnak' )
+		$snakFormatter->method( 'formatSnak' )
 			->will( $this->returnValue( 'Kittens!' ) );
 
 		$snakFormatterFactory = $this->getMockBuilder( OutputFormatSnakFormatterFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$snakFormatterFactory->expects( $this->any() )
-			->method( 'getSnakFormatter' )
+		$snakFormatterFactory->method( 'getSnakFormatter' )
 			->will( $this->returnValue( $snakFormatter ) );
 
 		return $snakFormatterFactory;
@@ -302,14 +299,12 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function getEntityLookup() {
 		$entityLookup = $this->createMock( EntityLookup::class );
 
-		$entityLookup->expects( $this->any() )
-			->method( 'getEntity' )
+		$entityLookup->method( 'getEntity' )
 			->will( $this->returnCallback( function ( EntityId $id ) {
 				return new Item( $id );
 			} ) );
 
-		$entityLookup->expects( $this->any() )
-			->method( 'hasEntity' )
+		$entityLookup->method( 'hasEntity' )
 			->will( $this->returnValue( true ) );
 
 		return $entityLookup;
@@ -363,8 +358,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$languageFallbackLabelDescriptionLookupFactory->expects( $this->any() )
-			->method( 'newLabelDescriptionLookup' )
+		$languageFallbackLabelDescriptionLookupFactory->method( 'newLabelDescriptionLookup' )
 			->will( $this->returnValue( $languageFallbackLabelDescriptionLookup ) );
 
 		return $languageFallbackLabelDescriptionLookupFactory;

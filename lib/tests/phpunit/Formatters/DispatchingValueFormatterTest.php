@@ -64,13 +64,11 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	public function formatProvider() {
 		$stringFormatter = $this->createMock( ValueFormatter::class );
-		$stringFormatter->expects( $this->any() )
-			->method( 'format' )
+		$stringFormatter->method( 'format' )
 			->will( $this->returnValue( 'VT:string' ) );
 
 		$mediaFormatter = $this->createMock( ValueFormatter::class );
-		$mediaFormatter->expects( $this->any() )
-			->method( 'format' )
+		$mediaFormatter->method( 'format' )
 			->will( $this->returnValue( 'VT:wikibase-entityid' ) );
 
 		$formatters = [
@@ -106,13 +104,11 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	public function formatValueProvider() {
 		$stringFormatter = $this->createMock( ValueFormatter::class );
-		$stringFormatter->expects( $this->any() )
-			->method( 'format' )
+		$stringFormatter->method( 'format' )
 			->will( $this->returnValue( 'VT:string' ) );
 
 		$mediaFormatter = $this->createMock( ValueFormatter::class );
-		$mediaFormatter->expects( $this->any() )
-			->method( 'format' )
+		$mediaFormatter->method( 'format' )
 			->will( $this->returnValue( 'PT:commonsMedia' ) );
 
 		$formatters = [

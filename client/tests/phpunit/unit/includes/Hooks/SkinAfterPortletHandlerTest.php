@@ -125,17 +125,13 @@ class SkinAfterPortletHandlerTest extends TestCase {
 		$output->setProperty( 'noexternallanglinks', $noExternalLangLinks );
 		$title = $output->getTitle();
 
-		$skin->expects( $this->any() )
-			->method( 'getOutput' )
+		$skin->method( 'getOutput' )
 			->will( $this->returnValue( $output ) );
-		$skin->expects( $this->any() )
-			->method( 'getContext' )
+		$skin->method( 'getContext' )
 			->will( $this->returnValue( $output ) );
-		$skin->expects( $this->any() )
-			->method( 'getTitle' )
+		$skin->method( 'getTitle' )
 			->will( $this->returnValue( $title ) );
-		$skin->expects( $this->any() )
-			->method( 'getLanguages' )
+		$skin->method( 'getLanguages' )
 			->will( $this->returnValue( $languageUrls ) );
 
 		return $skin;
@@ -149,14 +145,11 @@ class SkinAfterPortletHandlerTest extends TestCase {
 		$request = new FauxRequest( [ 'action' => $action ] );
 
 		$title = $this->createMock( Title::class );
-		$title->expects( $this->any() )
-			->method( 'exists' )
+		$title->method( 'exists' )
 			->will( $this->returnValue( true ) );
-		$title->expects( $this->any() )
-			->method( 'canExist' )
+		$title->method( 'canExist' )
 			->will( $this->returnValue( true ) );
-		$title->expects( $this->any() )
-			->method( 'getNamespace' )
+		$title->method( 'getNamespace' )
 			->will( $this->returnValue( 0 ) );
 
 		$contentHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKITEXT );
@@ -164,33 +157,25 @@ class SkinAfterPortletHandlerTest extends TestCase {
 		$wikiPage = $this->getMockBuilder( WikiPage::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$wikiPage->expects( $this->any() )
-			->method( 'getActionOverrides' )
+		$wikiPage->method( 'getActionOverrides' )
 			->will( $this->returnValue( [] ) );
-		$wikiPage->expects( $this->any() )
-			->method( 'getContentHandler' )
+		$wikiPage->method( 'getContentHandler' )
 			->will( $this->returnValue( $contentHandler ) );
-		$wikiPage->expects( $this->any() )
-			->method( 'getTitle' )
+		$wikiPage->method( 'getTitle' )
 			->will( $this->returnValue( $title ) );
 
 		$context = $this->createMock( IContextSource::class );
-		$context->expects( $this->any() )
-			->method( 'canUseWikiPage' )
+		$context->method( 'canUseWikiPage' )
 			->will( $this->returnValue( true ) );
-		$context->expects( $this->any() )
-			->method( 'getWikiPage' )
+		$context->method( 'getWikiPage' )
 			->will( $this->returnValue( $wikiPage ) );
-		$context->expects( $this->any() )
-			->method( 'getRequest' )
+		$context->method( 'getRequest' )
 			->will( $this->returnValue( $request ) );
-		$context->expects( $this->any() )
-			->method( 'getTitle' )
+		$context->method( 'getTitle' )
 			->will( $this->returnValue( $title ) );
 		$context->method( 'getLanguage' )
 			->willReturn( Language::factory( 'qqx' ) );
-		$context->expects( $this->any() )
-			->method( 'getConfig' )
+		$context->method( 'getConfig' )
 			->will( $this->returnValue(
 				ConfigFactory::getDefaultInstance()->makeConfig( 'main' )
 			) );

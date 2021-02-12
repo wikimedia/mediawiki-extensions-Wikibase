@@ -81,14 +81,12 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 
-		$snakFormatter->expects( $this->any() )
-			->method( 'formatSnak' )
+		$snakFormatter->method( 'formatSnak' )
 			->will( $this->returnCallback( function( PropertyValueSnak $snak ) {
 				return $snak->getDataValue()->getValue();
 			} ) );
 
-		$snakFormatter->expects( $this->any() )
-			->method( 'getFormat' )
+		$snakFormatter->method( 'getFormat' )
 			->will( $this->returnValue( $expectedFormat ) );
 
 		$factory->expects( $this->once() )

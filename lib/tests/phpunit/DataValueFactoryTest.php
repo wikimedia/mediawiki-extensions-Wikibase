@@ -20,8 +20,7 @@ class DataValueFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function newInstance() {
 		$deserializer = $this->createMock( Deserializer::class );
-		$deserializer->expects( $this->any() )
-			->method( 'deserialize' )
+		$deserializer->method( 'deserialize' )
 			->will( $this->returnCallback( function( array $data ) {
 				if ( $data['type'] === 'string' ) {
 					return 'success';

@@ -46,8 +46,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 	private function getTitleFactory() {
 		$titleFactory = $this->createMock( TitleFactory::class );
 
-		$titleFactory->expects( $this->any() )
-			->method( 'newFromIDs' )
+		$titleFactory->method( 'newFromIDs' )
 			->will( $this->returnCallback( function( array $ids ) {
 				$titles = [];
 				foreach ( $ids as $id ) {
@@ -58,8 +57,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				return $titles;
 			} ) );
 
-		$titleFactory->expects( $this->any() )
-			->method( 'newFromText' )
+		$titleFactory->method( 'newFromText' )
 			->will( $this->returnCallback( function( $text, $defaultNs = \NS_MAIN ) {
 				$title = Title::newFromText( $text, $defaultNs );
 
@@ -89,8 +87,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 	private function getAffectedPagesFinder( array $usage, array $expectedAspects ) {
 		$usageLookup = $this->createMock( UsageLookup::class );
 
-		$usageLookup->expects( $this->any() )
-			->method( 'getPagesUsing' )
+		$usageLookup->method( 'getPagesUsing' )
 			->with( $this->anything(), $expectedAspects )
 			->will( $this->returnValue( new ArrayIterator( $usage ) ) );
 
@@ -561,8 +558,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 		$pageEntityUsages = [ new PageEntityUsages( 1, [] ) ];
 		$mock = $this->createMock( UsageLookup::class );
 
-		$mock->expects( $this->any() )
-			->method( 'getPagesUsing' )
+		$mock->method( 'getPagesUsing' )
 			->will( $this->returnValue( new ArrayIterator( $pageEntityUsages ) ) );
 
 		return $mock;

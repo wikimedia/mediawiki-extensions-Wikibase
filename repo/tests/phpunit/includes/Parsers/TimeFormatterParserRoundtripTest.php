@@ -25,15 +25,13 @@ class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 
 	private function newTimeParserFactory( ParserOptions $options = null ) {
 		$monthNameProvider = $this->createMock( MonthNameProvider::class );
-		$monthNameProvider->expects( $this->any() )
-			->method( 'getLocalizedMonthNames' )
+		$monthNameProvider->method( 'getLocalizedMonthNames' )
 			->will( $this->returnValue( [
 				1 => 'January',
 				8 => 'August',
 				12 => 'December',
 			] ) );
-		$monthNameProvider->expects( $this->any() )
-			->method( 'getMonthNumbers' )
+		$monthNameProvider->method( 'getMonthNumbers' )
 			->will( $this->returnValue( [
 				'January' => 1,
 				'agosto' => 8,

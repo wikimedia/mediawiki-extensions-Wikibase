@@ -40,8 +40,7 @@ class RedirectResolvingLatestRevisionLookupTest extends TestCase {
 		$redirectEntityRevision = 666;
 
 		$revisionLookup = $this->createMock( EntityRevisionLookup::class );
-		$revisionLookup->expects( $this->any() )
-			->method( 'getLatestRevisionId' )
+		$revisionLookup->method( 'getLatestRevisionId' )
 			->withConsecutive(
 				[ $originalEntityId ],
 				[ $redirectEntityId ]
@@ -64,8 +63,7 @@ class RedirectResolvingLatestRevisionLookupTest extends TestCase {
 		$redirect2 = new ItemId( 'Q3' );
 
 		$revisionLookup = $this->createMock( EntityRevisionLookup::class );
-		$revisionLookup->expects( $this->any() )
-			->method( 'getLatestRevisionId' )
+		$revisionLookup->method( 'getLatestRevisionId' )
 			->withConsecutive(
 				[ $originalEntityId ],
 				[ $redirect1 ]
@@ -84,8 +82,7 @@ class RedirectResolvingLatestRevisionLookupTest extends TestCase {
 		$redirect = new ItemId( 'Q2' );
 
 		$revisionLookup = $this->createMock( EntityRevisionLookup::class );
-		$revisionLookup->expects( $this->any() )
-			->method( 'getLatestRevisionId' )
+		$revisionLookup->method( 'getLatestRevisionId' )
 			->withConsecutive(
 				[ $originalEntityId ],
 				[ $redirect ]

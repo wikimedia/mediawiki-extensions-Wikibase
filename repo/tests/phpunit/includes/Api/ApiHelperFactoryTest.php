@@ -75,12 +75,10 @@ class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$api->expects( $this->any() )
-			->method( 'getResult' )
+		$api->method( 'getResult' )
 			->will( $this->returnValue( $result ) );
 
-		$api->expects( $this->any() )
-			->method( 'getLanguage' )
+		$api->method( 'getLanguage' )
 			->will( $this->returnValue( $language ) );
 
 		return $api;

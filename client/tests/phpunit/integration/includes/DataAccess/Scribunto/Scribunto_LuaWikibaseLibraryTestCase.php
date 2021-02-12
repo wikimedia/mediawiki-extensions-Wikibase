@@ -175,8 +175,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		$wikibaseClient = TestingAccessWrapper::newFromObject( WikibaseClient::getDefaultInstance() );
 
 		$propertyLabelResolver = $this->createMock( PropertyLabelResolver::class );
-		$propertyLabelResolver->expects( $this->any() )
-			->method( 'getPropertyIdsForLabels' )
+		$propertyLabelResolver->method( 'getPropertyIdsForLabels' )
 			->willReturnCallback( function ( array $labels ): array {
 				if ( in_array( 'LuaTestStringProperty', $labels ) ) {
 					return [

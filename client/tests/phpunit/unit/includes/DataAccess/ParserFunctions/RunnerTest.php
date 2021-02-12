@@ -254,8 +254,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$rendererFactory->expects( $this->any() )
-			->method( 'newRendererFromParser' )
+		$rendererFactory->method( 'newRendererFromParser' )
 			->with( $this->isInstanceOf( Parser::class ), $type )
 			->will( $this->returnValue( $renderer ) );
 
@@ -271,8 +270,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 	private function getRenderer( EntityId $entityId, $propertyLabelOrId ) {
 		$renderer = $this->createMock( StatementGroupRenderer::class );
 
-		$renderer->expects( $this->any() )
-			->method( 'render' )
+		$renderer->method( 'render' )
 			->with( $entityId, $propertyLabelOrId )
 			->will( $this->returnValue( 'meow!' ) );
 

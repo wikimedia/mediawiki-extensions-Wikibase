@@ -58,8 +58,7 @@ class EntityIdLinkFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	private function newEntityIdLinkFormatter() {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
-		$titleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$titleLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback( [ $this, 'getTitleForId' ] ) );
 
 		$formatter = new EntityIdLinkFormatter( $titleLookup );

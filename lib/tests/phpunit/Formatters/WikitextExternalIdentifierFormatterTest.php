@@ -26,8 +26,7 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCas
 	public function provideFormatSnak() {
 		$formatterUrlExpander = $this->createMock( SnakUrlExpander::class );
 
-		$formatterUrlExpander->expects( $this->any() )
-			->method( 'expandUrl' )
+		$formatterUrlExpander->method( 'expandUrl' )
 			->will( $this->returnCallback( function( PropertyValueSnak $snak ) {
 				$value = $snak->getDataValue()->getValue();
 

@@ -254,8 +254,7 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 
 	private function newRevisionLookup(): RevisionLookup {
 		$revisionLookup = $this->createMock( RevisionLookup::class );
-		$revisionLookup->expects( $this->any() )
-			->method( 'getTimestampFromId' )
+		$revisionLookup->method( 'getTimestampFromId' )
 			->willReturnCallback( function ( int $id ) {
 				if ( $id === 404 ) {
 					// Non-existant revision
@@ -275,13 +274,11 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 
 	private function newTitle( int $id ): Title {
 		$title = $this->createMock( Title::class );
-		$title->expects( $this->any() )
-			->method( 'getNamespace' )
+		$title->method( 'getNamespace' )
 			->willReturn( 0 );
 		$title->method( 'getDBkey' )
 			->willReturn( 'Q' . ( 1000 + $id ) );
-		$title->expects( $this->any() )
-			->method( 'getArticleId' )
+		$title->method( 'getArticleId' )
 			->willReturn( $id );
 		return $title;
 	}

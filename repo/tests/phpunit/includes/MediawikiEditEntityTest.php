@@ -54,8 +54,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	private function getEntityTitleLookup() {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
-		$titleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$titleLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::makeTitle(
 					NS_MAIN,
@@ -84,12 +83,10 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			}
 		};
 
-		$permissionChecker->expects( $this->any() )
-			->method( 'getPermissionStatusForEntity' )
+		$permissionChecker->method( 'getPermissionStatusForEntity' )
 			->will( $this->returnCallback( $checkAction ) );
 
-		$permissionChecker->expects( $this->any() )
-			->method( 'getPermissionStatusForEntityId' )
+		$permissionChecker->method( 'getPermissionStatusForEntityId' )
 			->will( $this->returnCallback( $checkAction ) );
 
 		return $permissionChecker;

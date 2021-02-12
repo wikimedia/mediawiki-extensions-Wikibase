@@ -158,11 +158,10 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 	 * @dataProvider getUnitsData
 	 */
 	public function testBaseUnit( $values, $statements, $converted, $result ) {
-		$this->client->expects( $this->any() )
-			->method( 'query' )
+		$this->client->method( 'query' )
 			->will( $this->onConsecutiveCalls( $values, $statements ) );
 
-		$this->uc->expects( $this->any() )->method( 'toStandardUnits' )->will( $converted
+		$this->uc->method( 'toStandardUnits' )->will( $converted
 			? $this->returnValue( $converted ) : $this->returnArgument( 0 ) );
 
 		$values = 'Q1';

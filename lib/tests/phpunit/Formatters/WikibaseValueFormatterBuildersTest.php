@@ -73,8 +73,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 	private function newWikibaseValueFormatterBuilders( EntityTitleLookup $entityTitleLookup ) {
 		$termLookup = $this->createMock( TermLookup::class );
 
-		$termLookup->expects( $this->any() )
-			->method( 'getLabel' )
+		$termLookup->method( 'getLabel' )
 			->will( $this->returnCallback( function ( EntityId $id, $language ) {
 				switch ( $language ) {
 					case 'de':
@@ -84,8 +83,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 				}
 			} ) );
 
-		$termLookup->expects( $this->any() )
-			->method( 'getLabels' )
+		$termLookup->method( 'getLabels' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return [
 					'de' => 'Name für ' . $id->getSerialization(),
@@ -94,13 +92,11 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			} ) );
 
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->any() )
-			->method( 'getName' )
+		$languageNameLookup->method( 'getName' )
 			->will( $this->returnValue( 'Deutsch' ) );
 
 		$urlLookup = $this->createMock( EntityUrlLookup::class );
-		$urlLookup->expects( $this->any() )
-			->method( 'getLinkUrl' )
+		$urlLookup->method( 'getLinkUrl' )
 			->willReturnCallback( function ( EntityId $id ) {
 				return '/wiki/' . $id->getSerialization();
 			} );
@@ -132,16 +128,14 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$handler->expects( $this->any() )
-			->method( 'getHtml' )
+		$handler->method( 'getHtml' )
 			->with(
 				$this->isInstanceOf( GlobeCoordinateValue::class ),
 				$this->isInstanceOf( Language::class )
 			)
 			->will( $this->returnValue( '<kartographer-html/>' ) );
 
-		$handler->expects( $this->any() )
-			->method( 'getPreviewHtml' )
+		$handler->method( 'getPreviewHtml' )
 			->with(
 				$this->isInstanceOf( GlobeCoordinateValue::class ),
 				$this->isInstanceOf( Language::class )
@@ -168,8 +162,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 	private function getTitleLookup() {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
 
-		$titleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$titleLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback(
 				function ( EntityId $id ) {
 					return Title::makeTitle( NS_MAIN, $id->getSerialization() );
@@ -593,8 +586,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 
 	public function provideNewFormatter_LabelDescriptionLookupOption() {
 		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
-		$labelDescriptionLookup->expects( $this->any() )
-			->method( 'getLabel' )
+		$labelDescriptionLookup->method( 'getLabel' )
 			->will( $this->returnValue( new Term( 'xy', 'Custom LabelDescriptionLookup' ) ) );
 
 		$fallbackFactory = new LanguageFallbackChainFactory();

@@ -187,8 +187,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$snaksFinder->expects( $this->any() )
-			->method( 'findSnaks' )
+		$snaksFinder->method( 'findSnaks' )
 			->will( $this->returnValue( $snaks ) );
 
 		return $snaksFinder;
@@ -202,8 +201,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$propertyIdResolver->expects( $this->any() )
-			->method( 'resolvePropertyId' )
+		$propertyIdResolver->method( 'resolvePropertyId' )
 			->will( $this->returnValue( new PropertyId( 'P1337' ) ) );
 
 		return $propertyIdResolver;
@@ -217,8 +215,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$propertyIdResolver->expects( $this->any() )
-			->method( 'resolvePropertyId' )
+		$propertyIdResolver->method( 'resolvePropertyId' )
 			->will( $this->returnCallback( function( $propertyLabelOrId, $languageCode ) {
 				throw new PropertyLabelNotResolvedException( $propertyLabelOrId, $languageCode );
 			} )
@@ -234,8 +231,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function getEntityLookup( $entityAccessLimit ) {
 		$lookup = $this->createMock( EntityLookup::class );
-		$lookup->expects( $this->any() )
-			->method( 'getEntity' )
+		$lookup->method( 'getEntity' )
 			->will( $this->returnValue( $this->createMock( StatementListProvider::class ) ) );
 
 		return new RestrictedEntityLookup( $lookup, $entityAccessLimit );
@@ -247,8 +243,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 	private function getSnakFormatter() {
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 
-		$snakFormatter->expects( $this->any() )
-			->method( 'formatSnak' )
+		$snakFormatter->method( 'formatSnak' )
 			->will( $this->returnCallback(
 				function ( Snak $snak ) {
 					if ( $snak instanceof PropertyValueSnak ) {
@@ -266,8 +261,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 				}
 			) );
 
-		$snakFormatter->expects( $this->any() )
-			->method( 'getFormat' )
+		$snakFormatter->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
 
 		return $snakFormatter;

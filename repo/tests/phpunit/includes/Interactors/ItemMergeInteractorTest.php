@@ -78,8 +78,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'run' )
+		$mock->method( 'run' )
 			->will( $this->returnValue( Status::newGood() ) );
 
 		return $mock;
@@ -91,8 +90,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 	private function getPermissionChecker() {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
-		$permissionChecker->expects( $this->any() )
-			->method( 'getPermissionStatusForEntityId' )
+		$permissionChecker->method( 'getPermissionStatusForEntityId' )
 			->will( $this->returnCallback( function( User $user ) {
 				$userWithoutPermissionName = 'UserWithoutPermission';
 
@@ -112,8 +110,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 	private function getEntityTitleLookup() {
 		$mock = $this->createMock( EntityTitleStoreLookup::class );
 
-		$mock->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$mock->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				$contentHandler = ContentHandler::getForModelID( ItemContent::CONTENT_MODEL_ID );
 				return $contentHandler->getTitleForId( $id );
@@ -172,12 +169,10 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 	private function getMockEntityTitleLookup() {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
-		$titleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$titleLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				$title = $this->createMock( Title::class );
-				$title->expects( $this->any() )
-					->method( 'isDeleted' )
+				$title->method( 'isDeleted' )
 					->will( $this->returnValue( false ) );
 				return $title;
 			} ) );

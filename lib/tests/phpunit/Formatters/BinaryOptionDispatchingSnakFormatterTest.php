@@ -109,8 +109,7 @@ class BinaryOptionDispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCa
 	 */
 	private function getPropertyDataTypeLookup() {
 		$propertyDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
-		$propertyDataTypeLookup->expects( $this->any() )
-			->method( 'getDataTypeIdForProperty' )
+		$propertyDataTypeLookup->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( function( PropertyId $propertyId ) {
 				switch ( $propertyId->getSerialization() ) {
 					case 'P1':

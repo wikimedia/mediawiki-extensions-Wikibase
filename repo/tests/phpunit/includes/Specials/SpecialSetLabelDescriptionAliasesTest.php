@@ -86,8 +86,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
-		$runner->expects( $this->any() )
-			->method( 'run' )
+		$runner->method( 'run' )
 			->will( $this->returnValue( Status::newGood() ) );
 		return $runner;
 	}

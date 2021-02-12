@@ -35,8 +35,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 
 		$siteLinkLookupMock = $this->createMock( SiteLinkLookup::class );
 
-		$siteLinkLookupMock->expects( $this->any() )
-			->method( 'getItemIdForLink' )
+		$siteLinkLookupMock->method( 'getItemIdForLink' )
 			->will( $this->returnValue( $entityId ) );
 
 		return [
@@ -101,8 +100,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 			->setMethods( [ 'supportsDelayedJobs' ] )
 			->getMock();
 
-		$jobQueue->expects( $this->any() )
-			->method( 'supportsDelayedJobs' )
+		$jobQueue->method( 'supportsDelayedJobs' )
 			->will( $this->returnValue( true ) );
 
 		$jobQueueGroupMock->expects( $this->once() )

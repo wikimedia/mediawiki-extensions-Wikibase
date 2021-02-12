@@ -25,8 +25,7 @@ class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	private function newFormatter( NumberLocalizer $numberLocalizer = null ) {
 		$vocabularyUriFormatter = $this->createMock( ValueFormatter::class );
-		$vocabularyUriFormatter->expects( $this->any() )
-			->method( 'format' )
+		$vocabularyUriFormatter->method( 'format' )
 			->will( $this->returnCallback( function( $value ) {
 				return preg_match( '@^http://www\.wikidata\.org/entity/(.*)@', $value, $matches )
 					? $matches[1]
@@ -106,8 +105,7 @@ class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenHtmlCharacters_formatEscapesHtmlCharacters() {
 		$unitFormatter = $this->createMock( NumberLocalizer::class );
-		$unitFormatter->expects( $this->any() )
-			->method( 'localizeNumber' )
+		$unitFormatter->method( 'localizeNumber' )
 			->will( $this->returnValue( '<a>+2</a>' ) );
 
 		$formatter = $this->newFormatter( $unitFormatter );

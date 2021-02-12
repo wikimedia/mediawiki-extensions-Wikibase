@@ -66,8 +66,7 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 	protected function getEntityTitleLookup() {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
-		$titleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$titleLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::makeTitle( NS_MAIN, $id->getEntityType() . ':' . $id->getSerialization() );
 			} ) );
@@ -90,12 +89,10 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 
 		$ok = Status::newGood();
 
-		$permissionChecker->expects( $this->any() )
-			->method( 'getPermissionStatusForEntity' )
+		$permissionChecker->method( 'getPermissionStatusForEntity' )
 			->will( $this->returnValue( $ok ) );
 
-		$permissionChecker->expects( $this->any() )
-			->method( 'getPermissionStatusForEntityId' )
+		$permissionChecker->method( 'getPermissionStatusForEntityId' )
 			->will( $this->returnValue( $ok ) );
 
 		return $permissionChecker;
@@ -121,8 +118,7 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 	protected function getValueFormatter() {
 		$formatter = $this->createMock( ValueFormatter::class );
 
-		$formatter->expects( $this->any() )
-			->method( 'format' )
+		$formatter->method( 'format' )
 			->will( $this->returnCallback( [ $this, 'formatValueAsText' ] ) );
 
 		return $formatter;
@@ -134,12 +130,10 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 	protected function getSnakFormatter() {
 		$formatter = $this->createMock( SnakFormatter::class );
 
-		$formatter->expects( $this->any() )
-			->method( 'formatSnak' )
+		$formatter->method( 'formatSnak' )
 			->will( $this->returnCallback( [ $this, 'formatSnakAsText' ] ) );
 
-		$formatter->expects( $this->any() )
-			->method( 'getFormat' )
+		$formatter->method( 'getFormat' )
 			->will( $this->returnValue( 'text/plain' ) );
 
 		return $formatter;

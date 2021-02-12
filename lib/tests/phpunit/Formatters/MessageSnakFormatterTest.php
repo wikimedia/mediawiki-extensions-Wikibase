@@ -42,8 +42,7 @@ class MessageSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		foreach ( [ 'parse', 'text', 'plain' ] as $method ) {
-			$message->expects( $this->any() )
-				->method( $method )
+			$message->method( $method )
 				->will( $this->returnValue( $method ) );
 		}
 

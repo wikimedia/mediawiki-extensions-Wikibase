@@ -38,8 +38,7 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	public function testAddValue() {
 		$uriPatternProvider = $this->createMock( PropertyInfoProvider::class );
-		$uriPatternProvider->expects( $this->any() )
-			->method( 'getPropertyInfo' )
+		$uriPatternProvider->method( 'getPropertyInfo' )
 			->will( $this->returnCallback( function( PropertyId $id ) {
 				return $id->getSerialization() === 'P1' ? 'http://xyzzy.test/vocab/$1' : null;
 			} ) );

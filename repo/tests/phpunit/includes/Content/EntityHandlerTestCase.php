@@ -580,8 +580,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 
 		$searchEngine = $this->getMockBuilder( SearchEngine::class )->getMock();
 
-		$searchEngine->expects( $this->any() )
-			->method( 'makeSearchFieldMapping' )
+		$searchEngine->method( 'makeSearchFieldMapping' )
 			->will( $this->returnCallback( function ( $name, $type ) {
 				return new DummySearchIndexFieldDefinition( $name, $type );
 			} ) );

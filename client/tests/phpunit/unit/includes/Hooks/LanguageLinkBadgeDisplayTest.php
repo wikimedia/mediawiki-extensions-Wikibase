@@ -32,8 +32,7 @@ class LanguageLinkBadgeDisplayTest extends \PHPUnit\Framework\TestCase {
 	private function getLanguageLinkBadgeDisplay() {
 		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
 
-		$labelLookup->expects( $this->any() )
-			->method( 'getLabel' )
+		$labelLookup->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
 				switch ( $entityId->getSerialization() ) {
 					case 'Q3':

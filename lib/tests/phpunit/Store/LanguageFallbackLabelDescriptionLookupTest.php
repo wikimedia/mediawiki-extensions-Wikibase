@@ -100,8 +100,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiIntegrationTes
 			->disableOriginalConstructor()
 			->getMock();
 
-		$languageFallbackChain->expects( $this->any() )
-			->method( 'extractPreferredValue' )
+		$languageFallbackChain->method( 'extractPreferredValue' )
 			->will( $this->returnCallback( function( array $fallbackData ) use ( $languageCode ) {
 				if ( $languageCode === 'zh' && array_key_exists( 'zh-cn', $fallbackData ) ) {
 					return [ 'value' => 'fallbackterm', 'language' => 'zh-cn', 'source' => 'zh-xy' ];
@@ -110,8 +109,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiIntegrationTes
 				}
 			} ) );
 
-		$languageFallbackChain->expects( $this->any() )
-			->method( 'getFetchLanguageCodes' )
+		$languageFallbackChain->method( 'getFetchLanguageCodes' )
 			->will( $this->returnCallback( function() use ( $languageCode ) {
 				if ( $languageCode === 'zh' ) {
 					return [ 'zh', 'zh-cn', 'zh-xy' ];

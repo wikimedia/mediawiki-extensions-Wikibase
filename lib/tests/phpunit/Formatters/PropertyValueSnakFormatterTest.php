@@ -95,8 +95,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$typeFactory->expects( $this->any() )
-			->method( 'getType' )
+		$typeFactory->method( 'getType' )
 			->will( $getValueTypeIdForPropertyResult );
 
 		return $typeFactory;
@@ -135,8 +134,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function getMockFormatter( $value ) {
 		$formatter = $this->createMock( ValueFormatter::class );
-		$formatter->expects( $this->any() )
-			->method( 'format' )
+		$formatter->method( 'format' )
 			->will( $this->returnValue( $value ) );
 
 		return $formatter;

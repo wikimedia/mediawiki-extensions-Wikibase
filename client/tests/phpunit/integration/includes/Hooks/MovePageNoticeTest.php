@@ -51,8 +51,7 @@ class MovePageNoticeTest extends MediaWikiIntegrationTestCase {
 	public function testDoSpecialMovepageAfterMove( $expected, Title $oldTitle, Title $newTitle ) {
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 
-		$siteLinkLookup->expects( $this->any() )
-			->method( 'getItemIdForLink' )
+		$siteLinkLookup->method( 'getItemIdForLink' )
 			->with( 'dewiki', 'New Amsterdam' )
 			->will( $this->returnValue( new ItemId( 'Q4880' ) ) );
 

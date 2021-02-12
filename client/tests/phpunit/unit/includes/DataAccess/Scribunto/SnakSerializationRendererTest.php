@@ -50,8 +50,7 @@ class SnakSerializationRendererTest extends \PHPUnit\Framework\TestCase {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$snakFormatter = $this->createMock( SnakFormatter::class );
-		$snakFormatter->expects( $this->any() )
-			->method( 'formatSnak' )
+		$snakFormatter->method( 'formatSnak' )
 			->will( $this->returnCallback( function ( PropertyValueSnak $snak ) {
 				$value = $snak->getDataValue();
 				if ( $value instanceof EntityIdValue ) {
@@ -60,8 +59,7 @@ class SnakSerializationRendererTest extends \PHPUnit\Framework\TestCase {
 					return $value->getValue();
 				}
 			} ) );
-		$snakFormatter->expects( $this->any() )
-			->method( 'getFormat' )
+		$snakFormatter->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
 
 		$snakDeserializer = $wikibaseClient->getBaseDataModelDeserializerFactory()->newSnakDeserializer();

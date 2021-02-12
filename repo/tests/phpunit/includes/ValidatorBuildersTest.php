@@ -94,8 +94,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$pageNormalizer->expects( $this->any() )
-			->method( 'normalizePageName' )
+		$pageNormalizer->method( 'normalizePageName' )
 			->will( $this->returnCallback( function( $pageName ) {
 				return strpos( $pageName, 'NOT-FOUND' ) === false ? $pageName : false;
 			} ) );
@@ -111,8 +110,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$fileNameLookup->expects( $this->any() )
-			->method( 'lookupFileName' )
+		$fileNameLookup->method( 'lookupFileName' )
 			->with( $this->isType( 'string' ) )
 			->will( $this->returnCallback( function( $fileName ) {
 				return strpos( $fileName, 'NOT-FOUND' ) === false ? $fileName : null;

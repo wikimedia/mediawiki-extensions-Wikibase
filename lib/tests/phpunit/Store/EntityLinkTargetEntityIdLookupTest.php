@@ -80,7 +80,7 @@ class EntityLinkTargetEntityIdLookupTest extends TestCase {
 
 	private function getMockEntityNamespaceLookupWhere111IsItemNamespace() {
 		$mock = $this->createMock( EntityNamespaceLookup::class );
-		$mock->expects( $this->any() )->method( 'getEntityType' )->willReturnCallback(
+		$mock->method( 'getEntityType' )->willReturnCallback(
 			function ( $namespace ) {
 				return $namespace === self::ITEM_NAMESPACE ? 'item' : 'otherEntityType';
 			}
@@ -90,7 +90,7 @@ class EntityLinkTargetEntityIdLookupTest extends TestCase {
 
 	private function newMockEntityIdParserForId( EntityId $id ) {
 		$mock = $this->createMock( EntityIdParser::class );
-		$mock->expects( $this->any() )->method( 'parse' )->willReturnCallback(
+		$mock->method( 'parse' )->willReturnCallback(
 			function ( $toParse ) use ( $id ) {
 				if ( $toParse !== $id->getSerialization() ) {
 					throw new EntityIdParsingException( 'mock' );
@@ -104,13 +104,11 @@ class EntityLinkTargetEntityIdLookupTest extends TestCase {
 
 	private function newMockEntitySourceDefinitions() {
 		$itemSource = $this->createMock( EntitySource::class );
-		$itemSource->expects( $this->any() )
-			->method( 'getInterwikiPrefix' )
+		$itemSource->method( 'getInterwikiPrefix' )
 			->willReturn( self::ITEM_SOURCE_INTERWIKI_PREFIX );
 
 		$sourceDefs = $this->createMock( EntitySourceDefinitions::class );
-		$sourceDefs->expects( $this->any() )
-			->method( 'getSourceForEntityType' )
+		$sourceDefs->method( 'getSourceForEntityType' )
 			->with( Item::ENTITY_TYPE )
 			->willReturn( $itemSource );
 
@@ -119,8 +117,7 @@ class EntityLinkTargetEntityIdLookupTest extends TestCase {
 
 	private function newMockEntitySource() {
 		$entitySource = $this->createMock( EntitySource::class );
-		$entitySource->expects( $this->any() )
-			->method( 'getEntityTypes' )
+		$entitySource->method( 'getEntityTypes' )
 			->willReturn( [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] );
 
 		return $entitySource;

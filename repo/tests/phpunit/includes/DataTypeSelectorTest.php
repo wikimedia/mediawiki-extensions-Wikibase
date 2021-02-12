@@ -30,12 +30,10 @@ class DataTypeSelectorTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$dataType->expects( $this->any() )
-			->method( 'getId' )
+		$dataType->method( 'getId' )
 			->will( $this->returnValue( $propertyType ) );
 
-		$dataType->expects( $this->any() )
-			->method( 'getMessageKey' )
+		$dataType->method( 'getMessageKey' )
 			->will( $this->returnValue( $messageKey ) );
 
 		return $dataType;

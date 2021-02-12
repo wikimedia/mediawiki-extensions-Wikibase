@@ -84,8 +84,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->willReturn( [ [ $this->uiLanguageCode, 'de', 'es', 'ru' ] ] );
 
 		$this->entityViewChecker = $this->createMock( OutputPageEntityViewChecker::class );
-		$this->entityViewChecker->expects( $this->any() )
-			->method( 'hasEntityView' )
+		$this->entityViewChecker->method( 'hasEntityView' )
 			->willReturn( true );
 	}
 
@@ -223,11 +222,9 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	private function newUserLanguageLookup() {
 		$userLanguageLookup = $this->createMock( UserLanguageLookup::class );
-		$userLanguageLookup->expects( $this->any() )
-			->method( 'getUserSpecifiedLanguages' )
+		$userLanguageLookup->method( 'getUserSpecifiedLanguages' )
 			->will( $this->returnValue( [] ) );
-		$userLanguageLookup->expects( $this->any() )
-			->method( 'getAllUserLanguages' )
+		$userLanguageLookup->method( 'getAllUserLanguages' )
 			->will( $this->returnValue( [] ) );
 		return $userLanguageLookup;
 	}

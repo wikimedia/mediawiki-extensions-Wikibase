@@ -132,8 +132,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 	private function getMockEntityTitleLookup() {
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$entityTitleLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::makeTitle( NS_MAIN, $id->getSerialization() );
 			} ) );
@@ -147,8 +146,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 	private function getMockEntityIdLookup() {
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 
-		$entityIdLookup->expects( $this->any() )
-			->method( 'getEntityIdForTitle' )
+		$entityIdLookup->method( 'getEntityIdForTitle' )
 			->will( $this->returnCallback( function( Title $title ) {
 				return new ItemId( $title->getText() );
 			} ) );

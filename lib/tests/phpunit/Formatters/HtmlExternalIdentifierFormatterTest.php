@@ -26,8 +26,7 @@ class HtmlExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
 	public function provideFormatSnak() {
 		$formatterUrlExpander = $this->createMock( SnakUrlExpander::class );
 
-		$formatterUrlExpander->expects( $this->any() )
-			->method( 'expandUrl' )
+		$formatterUrlExpander->method( 'expandUrl' )
 			->will( $this->returnCallback( function( PropertyValueSnak $snak ) {
 				if ( $snak->getPropertyId()->getSerialization() === 'P1' ) {
 					$value = $snak->getDataValue()->getValue();

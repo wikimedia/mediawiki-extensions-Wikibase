@@ -152,8 +152,7 @@ class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function getSiteLinkForDisplayLookup( string $expectedMethod, $expectedArgument ) {
 		$lookup = $this->createMock( SiteLinksForDisplayLookup::class );
-		$lookup->expects( $this->any() )
-			->method( $expectedMethod )
+		$lookup->method( $expectedMethod )
 			->with( $expectedArgument )
 			->will( $this->returnValue( [
 				'enwikiquote' => new SiteLink( 'enwikiquote', 'Nyan Cat' ),

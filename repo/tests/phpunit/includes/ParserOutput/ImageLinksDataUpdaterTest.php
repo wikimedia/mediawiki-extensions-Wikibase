@@ -28,8 +28,7 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$matcher = $this->getMockBuilder( PropertyDataTypeMatcher::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$matcher->expects( $this->any() )
-			->method( 'isMatchingDataType' )
+		$matcher->method( 'isMatchingDataType' )
 			->will( $this->returnCallback( function( PropertyId $id, $type ) {
 				return $id->getSerialization() === 'P1';
 			} ) );

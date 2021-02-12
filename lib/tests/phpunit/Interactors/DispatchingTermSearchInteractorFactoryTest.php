@@ -41,15 +41,13 @@ class DispatchingTermSearchInteractorFactoryTest extends \PHPUnit\Framework\Test
 
 	public function testNewInteractorReturnsDispatchingTermSearchInteractorInstance() {
 		$fooInteractorFactory = $this->createMock( TermSearchInteractorFactory::class );
-		$fooInteractorFactory->expects( $this->any() )
-			->method( 'newInteractor' )
+		$fooInteractorFactory->method( 'newInteractor' )
 			->will(
 				$this->returnValue( $this->createMock( TermSearchInteractor::class ) )
 			);
 
 		$localInteractorFactory = $this->createMock( TermSearchInteractorFactory::class );
-		$localInteractorFactory->expects( $this->any() )
-			->method( 'newInteractor' )
+		$localInteractorFactory->method( 'newInteractor' )
 			->will(
 				$this->returnValue( $this->createMock( TermSearchInteractor::class ) )
 			);

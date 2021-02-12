@@ -49,8 +49,7 @@ class ApiEntityUrlLookupTest extends TestCase {
 
 	private function getApiEntityTitleTextLookup( ?string $prefixedText ) {
 		$mock = $this->createMock( ApiEntityTitleTextLookup::class );
-		$mock->expects( $this->any() )
-			->method( 'getPrefixedText' )
+		$mock->method( 'getPrefixedText' )
 			->willReturn( $prefixedText );
 		return $mock;
 	}

@@ -572,28 +572,22 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	private function makeTitle( $ns, $text, $pageId, $currentRevision ) {
 		$title = $this->createMock( Title::class );
 
-		$title->expects( $this->any() )
-			->method( 'getNamespace' )
+		$title->method( 'getNamespace' )
 			->will( $this->returnValue( $ns ) );
 
-		$title->expects( $this->any() )
-			->method( 'getText' )
+		$title->method( 'getText' )
 			->will( $this->returnValue( $text ) );
 
-		$title->expects( $this->any() )
-			->method( 'getDBkey' )
+		$title->method( 'getDBkey' )
 			->will( $this->returnValue( str_replace( ' ', '_', $text ) ) );
 
-		$title->expects( $this->any() )
-			->method( 'getArticleID' )
+		$title->method( 'getArticleID' )
 			->will( $this->returnValue( $pageId ) );
 
-		$title->expects( $this->any() )
-			->method( 'getLatestRevID' )
+		$title->method( 'getLatestRevID' )
 			->will( $this->returnValue( $currentRevision ) );
 
-		$title->expects( $this->any() )
-			->method( 'getLength' )
+		$title->method( 'getLength' )
 			->will( $this->returnValue( 1234 ) );
 
 		return $title;

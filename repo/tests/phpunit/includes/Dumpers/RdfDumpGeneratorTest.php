@@ -152,8 +152,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 
 		$dataTypeLookup = $this->getTestData()->getMockRepository();
 
-		$entityRevisionLookup->expects( $this->any() )
-			->method( 'getEntityRevision' )
+		$entityRevisionLookup->method( 'getEntityRevision' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( $entityRevisions, $redirects ) {
 				$key = $id->getSerialization();
 

@@ -94,8 +94,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$mock->expects( $this->any() )
-			->method( 'run' )
+		$mock->method( 'run' )
 			->will( $this->returnValue( Status::newGood() ) );
 
 		return $mock;
@@ -106,8 +105,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 */
 	private function getEntityTitleLookup() {
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$entityTitleLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
 				return Title::newFromText( $entityId->getSerialization() );
 			} ) );
@@ -129,8 +127,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		);
 
 		$exceptionLocalizer = $this->createMock( ExceptionLocalizer::class );
-		$exceptionLocalizer->expects( $this->any() )
-			->method( 'getExceptionMessage' )
+		$exceptionLocalizer->method( 'getExceptionMessage' )
 			->will( $this->returnCallback( function( Exception $ex ) {
 				if ( $ex instanceof Error ) {
 					throw $ex;
@@ -182,11 +179,9 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$linkRenderer = $this->getMockBuilder( LinkRenderer::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$linkRenderer->expects( $this->any() )
-			->method( 'makeKnownLink' )
+		$linkRenderer->method( 'makeKnownLink' )
 			->will( $this->returnArgument( 1 ) );
-		$linkRenderer->expects( $this->any() )
-			->method( 'makePreloadedLink' )
+		$linkRenderer->method( 'makePreloadedLink' )
 			->will( $this->returnArgument( 1 ) );
 		$specialPage->setLinkRenderer( $linkRenderer );
 
@@ -199,12 +194,10 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	private function getMockEntityTitleLookup() {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
-		$titleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$titleLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				$title = $this->createMock( Title::class );
-				$title->expects( $this->any() )
-					->method( 'isDeleted' )
+				$title->method( 'isDeleted' )
 					->will( $this->returnValue( false ) );
 				return $title;
 			} ) );
@@ -247,8 +240,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	private function getPermissionCheckers() {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
-		$permissionChecker->expects( $this->any() )
-			->method( 'getPermissionStatusForEntityId' )
+		$permissionChecker->method( 'getPermissionStatusForEntityId' )
 			->will( $this->returnCallback( function( User $user ) {
 				$name = 'UserWithoutPermission';
 				if ( $user->getName() === $name ) {

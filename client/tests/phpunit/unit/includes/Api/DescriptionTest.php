@@ -300,22 +300,19 @@ class DescriptionTest extends TestCase {
 		$main = $this->getMockBuilder( ApiMain::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$main->expects( $this->any() )
-			->method( 'canApiHighLimits' )
+		$main->method( 'canApiHighLimits' )
 			->willReturn( false );
 
 		$pageSet = $this->getMockBuilder( \ApiPageSet::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$pageSet->expects( $this->any() )
-			->method( 'getGoodTitles' )
+		$pageSet->method( 'getGoodTitles' )
 			->willReturn( $this->makeTitles( $requestedPageIds ) );
 
 		$result = $this->getMockBuilder( \ApiResult::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$result->expects( $this->any() )
-			->method( 'addValue' )
+		$result->method( 'addValue' )
 			->willReturnCallback( function ( $path, $name, $value ) use ( $fitLimit ) {
 				static $fitCount = 0;
 				if ( $name === 'description' ) {
@@ -340,8 +337,7 @@ class DescriptionTest extends TestCase {
 		$modulePrivate->allowLocalShortDesc = $allowLocalShortDesc;
 		$modulePrivate->forceLocalShortDesc = $forceLocalShortDesc;
 		$modulePrivate->descriptionLookup = $descriptionLookup;
-		$module->expects( $this->any() )
-			->method( 'getParameter' )
+		$module->method( 'getParameter' )
 			->willReturnCallback( function ( $name ) use ( $params ) {
 				$finalParams = $params + [
 					'continue' => 0,
@@ -350,20 +346,16 @@ class DescriptionTest extends TestCase {
 				$this->assertArrayHasKey( $name, $finalParams );
 				return $finalParams[$name];
 			} );
-		$module->expects( $this->any() )
-			->method( 'getPageSet' )
+		$module->method( 'getPageSet' )
 			->willReturn( $pageSet );
-		$module->expects( $this->any() )
-			->method( 'getMain' )
+		$module->method( 'getMain' )
 			->willReturn( $main );
-		$module->expects( $this->any() )
-			->method( 'setContinueEnumParameter' )
+		$module->method( 'setContinueEnumParameter' )
 			->with( 'continue', $this->anything() )
 			->willReturnCallback( function ( $_, $continue ) {
 				$this->continueEnumParameter = $continue;
 			} );
-		$module->expects( $this->any() )
-			->method( 'getResult' )
+		$module->method( 'getResult' )
 			->willReturn( $result );
 
 		return $module;
@@ -380,11 +372,9 @@ class DescriptionTest extends TestCase {
 			$title = $this->getMockBuilder( Title::class )
 				->disableOriginalConstructor()
 				->getMock();
-			$title->expects( $this->any() )
-				->method( 'getArticleID' )
+			$title->method( 'getArticleID' )
 				->willReturn( $pageId );
-			$title->expects( $this->any() )
-				->method( 'getPageLanguage' )
+			$title->method( 'getPageLanguage' )
 				->willReturn( $en );
 			return $title;
 		}, array_combine( $requestedPageIds, $requestedPageIds ) );

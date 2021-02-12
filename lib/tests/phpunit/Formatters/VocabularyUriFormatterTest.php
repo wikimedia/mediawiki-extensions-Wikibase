@@ -39,8 +39,7 @@ class VocabularyUriFormatterTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testFormat( $unit, $expected ) {
 		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
-		$labelLookup->expects( $this->any() )
-			->method( 'getLabel' )
+		$labelLookup->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() === 'Q112233' ) {
 					throw new LabelDescriptionLookupException( $id, 'No such label!' );

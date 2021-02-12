@@ -64,8 +64,7 @@ class JobQueueChangeNotificationSenderTest extends \PHPUnit\Framework\TestCase {
 
 	public function sendNotificationProvider() {
 		$change = $this->createMock( Change::class );
-		$change->expects( $this->any() )
-			->method( 'getId' )
+		$change->method( 'getId' )
 			->will( $this->returnValue( 4 ) );
 
 		return [

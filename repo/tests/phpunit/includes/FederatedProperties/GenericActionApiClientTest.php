@@ -99,8 +99,7 @@ class GenericActionApiClientTest extends TestCase {
 
 	private function newMockResponseWithHeaders( array $headers = [ 'Some-header' => [ 'some' ] ] ) {
 		$mwResponse = $this->createMock( MWHttpRequest::class );
-		$mwResponse->expects( $this->any() )
-			->method( 'getResponseHeaders' )
+		$mwResponse->method( 'getResponseHeaders' )
 			->willReturn( $headers );
 
 		return $mwResponse;

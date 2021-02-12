@@ -26,8 +26,7 @@ class CommonsMediaExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$fileNameLookup->expects( $this->any() )
-			->method( 'lookupFileName' )
+		$fileNameLookup->method( 'lookupFileName' )
 			->with( $this->isType( 'string' ) )
 			->will( $this->returnCallback( function( $fileName ) {
 				return strpos( $fileName, 'NOT-FOUND' ) === false ? $fileName : null;

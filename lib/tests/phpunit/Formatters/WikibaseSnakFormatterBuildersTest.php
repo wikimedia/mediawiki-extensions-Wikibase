@@ -39,8 +39,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$valueFormatterBuilders->expects( $this->any() )
-			->method( 'newStringFormatter' )
+		$valueFormatterBuilders->method( 'newStringFormatter' )
 			->will( $this->returnValue( new StringFormatter() ) );
 
 		$propertyInfoLookup = new MockPropertyInfoLookup( [

@@ -45,7 +45,6 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$this->repoLinker
-			->expects( $this->any() )
 			->method( 'getEntityUrl' )
 			->will( $this->returnValue( 'foo' ) );
 
@@ -53,7 +52,6 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$this->namespaceChecker
-			->expects( $this->any() )
 			->method( 'isWikibaseEnabled' )
 			->will( $this->returnValue( true ) );
 	}

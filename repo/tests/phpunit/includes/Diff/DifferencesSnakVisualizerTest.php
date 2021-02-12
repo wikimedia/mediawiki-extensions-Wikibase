@@ -32,11 +32,9 @@ class DifferencesSnakVisualizerTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function newSnakFormatter( $returnValue = '<i>SNAK</i>', $format = SnakFormatter::FORMAT_HTML ) {
 		$instance = $this->createMock( SnakFormatter::class );
-		$instance->expects( $this->any() )
-			->method( 'getFormat' )
+		$instance->method( 'getFormat' )
 			->will( $this->returnValue( $format ) );
-		$instance->expects( $this->any() )
-			->method( 'formatSnak' )
+		$instance->method( 'formatSnak' )
 			->will( $this->returnValue( $returnValue ) );
 		return $instance;
 	}
@@ -47,8 +45,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiIntegrationTestCase {
 	public function newEntityIdLabelFormatter() {
 		$instance = $this->createMock( EntityIdFormatter::class );
 
-		$instance->expects( $this->any() )
-			->method( 'formatEntityId' )
+		$instance->method( 'formatEntityId' )
 			->will( $this->returnValue( '<a>PID</a>' ) );
 
 		return $instance;

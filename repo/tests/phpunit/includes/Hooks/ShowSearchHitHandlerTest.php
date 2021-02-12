@@ -127,8 +127,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	private function getEntityIdLookup() {
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 
-		$entityIdLookup->expects( $this->any() )
-			->method( 'getEntityIdForTitle' )
+		$entityIdLookup->method( 'getEntityIdForTitle' )
 			->will( $this->returnCallback( function( Title $title ) {
 				if ( preg_match( '/^Q(\d+)$/', $title->getText(), $m ) ) {
 					return new ItemId( $m[0] );
@@ -178,11 +177,9 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getMockFallbackChain( array $languages ) {
 		$mock = $this->createMock( TermLanguageFallbackChain::class );
-		$mock->expects( $this->any() )
-			->method( 'getFetchLanguageCodes' )
+		$mock->method( 'getFetchLanguageCodes' )
 			->will( $this->returnValue( $languages ) );
-		$mock->expects( $this->any() )
-			->method( 'extractPreferredValue' )
+		$mock->method( 'extractPreferredValue' )
 			->will( $this->returnCallback( function ( $sourceData ) use ( $languages ) {
 				foreach ( $languages as $language ) {
 					if ( isset( $sourceData[$language] ) ) {
@@ -201,8 +198,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	private function getEntityLookup( array $entities = null ) {
 		$entityLookup = $this->createMock( EntityLookup::class );
 		if ( isset( $entities ) ) {
-			$entityLookup->expects( $this->any() )
-				->method( 'getEntity' )
+			$entityLookup->method( 'getEntity' )
 				->will( $this->returnCallback( function ( ItemId $id ) use ( $entities ) {
 					$key = $id->getSerialization();
 					return $entities[$key];
@@ -219,8 +215,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$entityContentFactory->expects( $this->any() )
-			->method( 'isEntityContentModel' )
+		$entityContentFactory->method( 'isEntityContentModel' )
 			->willReturn( true );
 
 		return $entityContentFactory;
@@ -338,8 +333,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$displayLanguage = 'en';
 
 		$lookup = $this->getEntityLookup();
-		$lookup->expects( $this->any() )
-			->method( 'getEntity' )
+		$lookup->method( 'getEntity' )
 			->willThrowException( new UnresolvedEntityRedirectException( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ) );
 		$showHandler = $this->getShowSearchHitHandler( [], $lookup );
 

@@ -85,10 +85,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 		$mock = $this->getMockBuilder( PrefetchingTermLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'prefetchTerms' );
-		$mock->expects( $this->any() )
-			->method( 'getLabels' )
+		$mock->method( 'getLabels' )
 			->will( $this->returnCallback( function( EntityId $entityId, $languageCodes ) {
 				$labels = [];
 				foreach ( $languageCodes as $languageCode ) {
@@ -97,8 +94,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				return $labels;
 			}
 			) );
-		$mock->expects( $this->any() )
-			->method( 'getDescriptions' )
+		$mock->method( 'getDescriptions' )
 			->will( $this->returnCallback( function( EntityId $entityId, $languageCodes ) {
 				$descriptions = [];
 				foreach ( $languageCodes as $languageCode ) {
@@ -122,8 +118,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 		$mockFactory = $this->getMockBuilder( LanguageFallbackChainFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$mockFactory->expects( $this->any() )
-			->method( 'newFromLanguageCode' )
+		$mockFactory->method( 'newFromLanguageCode' )
 			->will( $this->returnCallback( function( $langCode ) {
 				return $this->getMockLanguageFallbackChainFromLanguage( $langCode );
 			} ) );
@@ -139,16 +134,14 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 		$mockFallbackChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$mockFallbackChain->expects( $this->any() )
-			->method( 'getFetchLanguageCodes' )
+		$mockFallbackChain->method( 'getFetchLanguageCodes' )
 			->will( $this->returnCallback( function () use( $langCode ) {
 				if ( $langCode === 'en-gb' || $langCode === 'en-ca' ) {
 					return [ $langCode, 'en' ];
 				}
 				return [ $langCode ]; // no fallback for everything else...
 			} ) );
-		$mockFallbackChain->expects( $this->any() )
-			->method( 'extractPreferredValue' )
+		$mockFallbackChain->method( 'extractPreferredValue' )
 			->will( $this->returnCallback( function( $data ) {
 				foreach ( $data as $languageCode => $value ) {
 					return [

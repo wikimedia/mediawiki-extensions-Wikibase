@@ -75,8 +75,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 	private function getNotificationSender( array &$notifications = [] ) {
 		$sender = $this->createMock( ChangeNotificationSender::class );
 
-		$sender->expects( $this->any() )
-			->method( 'sendNotification' )
+		$sender->method( 'sendNotification' )
 			->will( $this->returnCallback( function ( $siteID, array $changes ) use ( &$notifications ) {
 				$notifications[] = [ $siteID, $changes ];
 			} ) );
@@ -98,8 +97,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 				return array_slice( $this->changes, $fromId, $limit );
 			} ) );
 
-		$chunkedAccess->expects( $this->any() )
-			->method( 'getRecordId' )
+		$chunkedAccess->method( 'getRecordId' )
 			->will( $this->returnCallback( function ( Change $change ) {
 				return $change->getId();
 			} ) );
@@ -113,8 +111,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 	private function getSubscriptionLookup() {
 		$lookup = $this->createMock( SubscriptionLookup::class );
 
-		$lookup->expects( $this->any() )
-			->method( 'getSubscriptions' )
+		$lookup->method( 'getSubscriptions' )
 			->will( $this->returnCallback( function ( $siteId, array $entityIds ) {
 				return isset( $this->subscriptions[$siteId] )
 					? array_intersect( $this->subscriptions[$siteId], $entityIds )
@@ -185,29 +182,23 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 		$change->expects( $this->never() )
 			->method( 'getType' );
 
-		$change->expects( $this->any() )
-			->method( 'getTime' )
+		$change->method( 'getTime' )
 			->will( $this->returnValue( $time ) );
 
-		$change->expects( $this->any() )
-			->method( 'getAge' )
+		$change->method( 'getAge' )
 			->will( $this->returnValue( (int)wfTimestamp( TS_UNIX, $time ) - (int)wfTimestamp( TS_UNIX, $this->now ) ) );
 
-		$change->expects( $this->any() )
-			->method( 'getId' )
+		$change->method( 'getId' )
 			->will( $this->returnValue( $changeId ) );
 
-		$change->expects( $this->any() )
-			->method( 'getObjectId' )
+		$change->method( 'getObjectId' )
 			->will( $this->returnValue( $entityId->getSerialization() ) );
 
-		$change->expects( $this->any() )
-			->method( 'getEntityId' )
+		$change->method( 'getEntityId' )
 			->will( $this->returnValue( $entityId ) );
 
 		if ( $changeClass === ItemChange::class ) {
-			$change->expects( $this->any() )
-				->method( 'getSiteLinkDiff' )
+			$change->method( 'getSiteLinkDiff' )
 				->will( $this->returnValue( $siteLinkDiff ) );
 		}
 

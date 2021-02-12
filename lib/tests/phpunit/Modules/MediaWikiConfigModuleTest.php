@@ -43,12 +43,10 @@ class MediaWikiConfigModuleTest extends \PHPUnit\Framework\TestCase {
 		return new MediaWikiConfigModule( [ 'getconfigvalueprovider' => function () {
 			$provider = $this->createMock( MediaWikiConfigValueProvider::class );
 
-			$provider->expects( $this->any() )
-				->method( 'getKey' )
+			$provider->method( 'getKey' )
 				->will( $this->returnValue( 'dummyKey' ) );
 
-			$provider->expects( $this->any() )
-				->method( 'getValue' )
+			$provider->method( 'getValue' )
 				->will( $this->returnValue( 'dummyValue' ) );
 
 			return $provider;

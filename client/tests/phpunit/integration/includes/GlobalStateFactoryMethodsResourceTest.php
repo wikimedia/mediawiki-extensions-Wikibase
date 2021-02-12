@@ -140,8 +140,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 					->method( 'getConnectionRef' );
 				$lb->expects( $this->never() )
 					->method( 'getMaintenanceConnectionRef' );
-				$lb->expects( $this->any() )
-					->method( 'getLocalDomainID' )
+				$lb->method( 'getLocalDomainID' )
 					->willReturn( 'banana' );
 
 				// This LazyConnectionRef will use our mocked LoadBalancer when actually
@@ -151,13 +150,11 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 					[ 'dummy', 'dummy', 'dummy', 'dummy' ],
 					DB_REPLICA
 				);
-				$lb->expects( $this->any() )
-					->method( 'getLazyConnectionRef' )
+				$lb->method( 'getLazyConnectionRef' )
 					->willReturn( $lazyDb );
 
 				$lbFactory = $this->createMock( LBFactory::class );
-				$lbFactory->expects( $this->any() )
-					->method( 'getMainLB' )
+				$lbFactory->method( 'getMainLB' )
 					->willReturn( $lb );
 
 				return $lbFactory;

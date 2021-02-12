@@ -87,13 +87,11 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 
 	private function newService() {
 		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
-		$dataTypeLookup->expects( $this->any() )
-			->method( 'getDataTypeIdForProperty' )
+		$dataTypeLookup->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'wikibase-item' ) );
 
 		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
-		$entityTitleStoreLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$entityTitleStoreLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
 			} ) );

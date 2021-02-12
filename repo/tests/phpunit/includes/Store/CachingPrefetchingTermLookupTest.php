@@ -637,8 +637,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 	 */
 	private function newStubRedirectResolvingRevisionLookup() {
 		$revisionAndRedirectResolver = $this->createMock( RedirectResolvingLatestRevisionLookup::class );
-		$revisionAndRedirectResolver->expects( $this->any() )
-			->method( 'lookupLatestRevisionResolvingRedirect' )
+		$revisionAndRedirectResolver->method( 'lookupLatestRevisionResolvingRedirect' )
 			->willReturnCallback( function ( EntityId $id ) {
 				return [ self::TEST_REVISION, $id ];
 			} );

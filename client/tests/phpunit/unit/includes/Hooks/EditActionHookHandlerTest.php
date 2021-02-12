@@ -93,8 +93,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->setMethods( [ 'buildEntityLink' ] )
 			->getMock();
 
-		$repoLinker->expects( $this->any() )
-			->method( 'buildEntityLink' )
+		$repoLinker->method( 'buildEntityLink' )
 			->will( $this->returnCallback( function (
 				EntityId $entityId,
 				array $classes = [],
@@ -108,8 +107,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 
-		$siteLinkLookup->expects( $this->any() )
-			->method( 'getItemIdForLink' )
+		$siteLinkLookup->method( 'getItemIdForLink' )
 			->will( $this->returnValue( $entityId ) );
 
 		$sqlUsageTracker = $this->getMockBuilder( SqlUsageTracker::class )
@@ -127,14 +125,12 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$labelDescriptionLookupFactory->expects( $this->any() )
-			->method( 'newLabelDescriptionLookup' )
+		$labelDescriptionLookupFactory->method( 'newLabelDescriptionLookup' )
 			->will( $this->returnCallback( [ $this, 'newLabelDescriptionLookup' ] ) );
 
 		$idParser = $this->createMock( EntityIdParser::class );
 
-		$idParser->expects( $this->any() )
-			->method( 'parse' )
+		$idParser->method( 'parse' )
 			->will( $this->returnCallback( function ( $idSerialization ) {
 				return new ItemId( $idSerialization );
 			} ) );
@@ -169,8 +165,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	public function newLabelDescriptionLookup() {
 		$lookup = $this->createMock( LabelDescriptionLookup::class );
 
-		$lookup->expects( $this->any() )
-			->method( 'getLabel' )
+		$lookup->method( 'getLabel' )
 			->will( $this->returnCallback( function ( EntityId $entityId ) {
 				switch ( $entityId->getSerialization() ) {
 					case 'Q4':
@@ -193,8 +188,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$editor->expects( $this->any() )
-			->method( 'getTitle' )
+		$editor->method( 'getTitle' )
 			->will( $this->returnValue( $title ) );
 
 		$editor->editFormTextAfterTools = '';
@@ -210,16 +204,13 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$title->expects( $this->any() )
-			->method( 'exists' )
+		$title->method( 'exists' )
 			->will( $this->returnValue( true ) );
 
-		$title->expects( $this->any() )
-			->method( 'getNamespace' )
+		$title->method( 'getNamespace' )
 			->will( $this->returnValue( NS_MAIN ) );
 
-		$title->expects( $this->any() )
-			->method( 'getPrefixedText' )
+		$title->method( 'getPrefixedText' )
 			->will( $this->returnValue( 'Cat' ) );
 
 		return $title;

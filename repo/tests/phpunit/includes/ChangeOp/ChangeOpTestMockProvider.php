@@ -114,11 +114,9 @@ class ChangeOpTestMockProvider {
 		$mock = $this->getMockBuilder( StatementGuidValidator::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$mock->expects( TestCase::any() )
-			->method( 'validate' )
+		$mock->method( 'validate' )
 			->will( TestCase::returnValue( true ) );
-		$mock->expects( TestCase::any() )
-			->method( 'validateFormat' )
+		$mock->method( 'validateFormat' )
 			->will( TestCase::returnValue( true ) );
 		return $mock;
 	}
@@ -146,8 +144,7 @@ class ChangeOpTestMockProvider {
 	 */
 	public function getMockPropertyDataTypeLookup() {
 		$mock = $this->createMock( PropertyDataTypeLookup::class );
-		$mock->expects( TestCase::any() )
-			->method( 'getDataTypeIdForProperty' )
+		$mock->method( 'getDataTypeIdForProperty' )
 			->will( TestCase::returnValue( 'string' ) );
 
 		return $mock;
@@ -169,8 +166,7 @@ class ChangeOpTestMockProvider {
 		$mock = $this->getMockBuilder( DataTypeFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$mock->expects( TestCase::any() )
-			->method( 'getType' )
+		$mock->method( 'getType' )
 			->will( TestCase::returnCallback( function( $id ) use ( $types ) {
 				if ( !isset( $types[$id] ) ) {
 					throw new OutOfBoundsException( "No such type: $id" );
@@ -200,8 +196,7 @@ class ChangeOpTestMockProvider {
 		$validators = [ new TypeValidator( DataValue::class ), $topValidator ];
 
 		$mock = $this->createMock( DataTypeValidatorFactory::class );
-		$mock->expects( TestCase::any() )
-			->method( 'getValidators' )
+		$mock->method( 'getValidators' )
 			->will( TestCase::returnCallback( function( $id ) use ( $validators ) {
 				return $validators;
 			} ) );
@@ -217,8 +212,7 @@ class ChangeOpTestMockProvider {
 	 */
 	public function getMockTermValidator() {
 		$mock = $this->createMock( ValueValidator::class );
-		$mock->expects( TestCase::any() )
-			->method( 'validate' )
+		$mock->method( 'validate' )
 			->will( TestCase::returnCallback( function( $text ) {
 				if ( $text === 'INVALID' ) {
 					$error = Error::newError( 'Invalid', '', 'test-invalid' );
@@ -243,18 +237,15 @@ class ChangeOpTestMockProvider {
 		$guid = $this->getMockBuilder( StatementGuid::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$guid->expects( TestCase::any() )
-			->method( 'getSerialization' )
+		$guid->method( 'getSerialization' )
 			->will( TestCase::returnValue( 'theValidatorIsMockedSoMeh! :D' ) );
-		$guid->expects( TestCase::any() )
-			->method( 'getEntityId' )
+		$guid->method( 'getEntityId' )
 			->will( TestCase::returnValue( $entityId ) );
 
 		$mock = $this->getMockBuilder( StatementGuidParser::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$mock->expects( TestCase::any() )
-			->method( 'parse' )
+		$mock->method( 'parse' )
 			->will( TestCase::returnValue( $guid ) );
 		return $mock;
 	}
@@ -320,8 +311,7 @@ class ChangeOpTestMockProvider {
 	public function getMockSiteLinkConflictLookup() {
 		$mock = $this->createMock( SiteLinkConflictLookup::class );
 
-		$mock->expects( TestCase::any() )
-			->method( 'getConflictsForItem' )
+		$mock->method( 'getConflictsForItem' )
 			->will( TestCase::returnCallback( function ( Item $item ) {
 				$conflicts = [];
 
@@ -362,32 +352,27 @@ class ChangeOpTestMockProvider {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$mock->expects( TestCase::any() )
-			->method( 'getLabelDescriptionNotEqualValidator' )
+		$mock->method( 'getLabelDescriptionNotEqualValidator' )
 			->will( TestCase::returnCallback(
 				[ $this, 'getLabelDescriptionNotEqualValidator' ]
 			) );
 
-		$mock->expects( TestCase::any() )
-			->method( 'getLanguageValidator' )
+		$mock->method( 'getLanguageValidator' )
 			->will( TestCase::returnCallback(
 				[ $this, 'getMockTermValidator' ]
 			) );
 
-		$mock->expects( TestCase::any() )
-			->method( 'getLabelValidator' )
+		$mock->method( 'getLabelValidator' )
 			->will( TestCase::returnCallback(
 				[ $this, 'getMockTermValidator' ]
 			) );
 
-		$mock->expects( TestCase::any() )
-			->method( 'getDescriptionValidator' )
+		$mock->method( 'getDescriptionValidator' )
 			->will( TestCase::returnCallback(
 				[ $this, 'getMockTermValidator' ]
 			) );
 
-		$mock->expects( TestCase::any() )
-			->method( 'getAliasValidator' )
+		$mock->method( 'getAliasValidator' )
 			->will( TestCase::returnCallback(
 				[ $this, 'getMockTermValidator' ]
 			) );

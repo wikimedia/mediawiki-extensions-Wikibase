@@ -33,8 +33,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$plainTextTransclusionInteractor->expects( $this->any() )
-				->method( 'render' )
+		$plainTextTransclusionInteractor->method( 'render' )
 				->with( new ItemId( 'Q12' ), 'some label', [ Statement::RANK_DEPRECATED ] )
 				->will( $this->returnValue( 'Kittens > Cats' ) );
 
@@ -42,8 +41,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$richWikitextTransclusionInteractor->expects( $this->any() )
-				->method( 'render' )
+		$richWikitextTransclusionInteractor->method( 'render' )
 				->with( new ItemId( 'Q12' ), 'some label', [ Statement::RANK_DEPRECATED ] )
 				->will( $this->returnValue( '<span>Kittens > Cats</span>' ) );
 

@@ -17,16 +17,13 @@ trait HttpResponseMockerTrait {
 	 */
 	private function newMockResponse( $response, ?int $statusCode ): ResponseInterface {
 		$mockStream = $this->createMock( StreamInterface::class );
-		$mockStream->expects( $this->any() )
-			->method( 'getContents' )
+		$mockStream->method( 'getContents' )
 			->willReturn( $response );
 
 		$httpResponse = $this->createMock( ResponseInterface::class );
-		$httpResponse->expects( $this->any() )
-			->method( 'getStatusCode' )
+		$httpResponse->method( 'getStatusCode' )
 			->willReturn( $statusCode );
-		$httpResponse->expects( $this->any() )
-			->method( 'getBody' )
+		$httpResponse->method( 'getBody' )
 			->willReturn( $mockStream );
 
 		return $httpResponse;

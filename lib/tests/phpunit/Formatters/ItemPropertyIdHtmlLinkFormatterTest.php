@@ -227,8 +227,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 
 	public function testGivenEntityIdWithNullTitle_htmlForNonExistentEntityIsDisplayed() {
 		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
-		$entityTitleLookup->expects( $this->any() )
-			->method( $this->anything() )
+		$entityTitleLookup->method( $this->anything() )
 			->will( $this->returnValue( null ) );
 
 		$formatter = new ItemPropertyIdHtmlLinkFormatter(
@@ -336,7 +335,6 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	private function getEntityTitleTextLookup( $entityId ) {
 		$entityTitleTextLookup = $this->createMock( EntityTitleTextLookup::class );
 		$entityTitleTextLookup
-			->expects( $this->any() )
 			->method( 'getPrefixedText' )
 			->willReturn( 'Property:' . $entityId );
 		return $entityTitleTextLookup;
@@ -345,7 +343,6 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	private function getEntityUrlLookup() {
 		$entityUrlLookup = $this->createMock( EntityUrlLookup::class );
 		$entityUrlLookup
-			->expects( $this->any() )
 			->method( 'getFullUrl' )
 			->willReturn( 'http://someUrl.com' );
 		return $entityUrlLookup;

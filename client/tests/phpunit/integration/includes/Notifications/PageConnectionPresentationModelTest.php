@@ -45,20 +45,15 @@ class PageConnectionPresentationModelTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->setMethods( $methods )
 			->getMock();
-		$event->expects( $this->any() )
-			->method( 'getAgent' )
+		$event->method( 'getAgent' )
 			->will( $this->returnValue( $agent ) );
-		$event->expects( $this->any() )
-			->method( 'getBundleHash' )
+		$event->method( 'getBundleHash' )
 			->will( $this->returnValue( false ) );
-		$event->expects( $this->any() )
-			->method( 'getExtraParam' )
+		$event->method( 'getExtraParam' )
 			->will( $this->returnValue( 'dummy' ) );
-		$event->expects( $this->any() )
-			->method( 'getTitle' )
+		$event->method( 'getTitle' )
 			->will( $this->returnValue( $title ) );
-		$event->expects( $this->any() )
-			->method( 'getType' )
+		$event->method( 'getType' )
 			->will( $this->returnValue( EchoNotificationsHandlers::NOTIFICATION_TYPE ) );
 
 		return $event;

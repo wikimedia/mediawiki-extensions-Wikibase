@@ -28,12 +28,10 @@ class EscapingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	private function getSnakFormatter( $output ) {
 		$formatter = $this->createMock( SnakFormatter::class );
 
-		$formatter->expects( $this->any() )
-			->method( 'formatSnak' )
+		$formatter->method( 'formatSnak' )
 			->will( $this->returnValue( $output ) );
 
-		$formatter->expects( $this->any() )
-			->method( 'getFormat' )
+		$formatter->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
 
 		return $formatter;

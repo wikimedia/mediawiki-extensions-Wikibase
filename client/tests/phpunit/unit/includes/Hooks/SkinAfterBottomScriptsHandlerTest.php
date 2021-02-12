@@ -108,8 +108,7 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 		$mock = $this->getMockForAbstractClass(
 			File::class, [ false, false ], '', true, true, true, [ 'getUrl' ]
 		);
-		$mock->expects( $this->any() )
-			->method( 'getUrl' )
+		$mock->method( 'getUrl' )
 			->will( $this->returnValue( $url ) );
 		return $mock;
 	}
@@ -122,14 +121,11 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function mockTitle( $baseURL, $titleText, $earliestRevTimestamp = null ) {
 		$mock = $this->createMock( Title::class );
-		$mock->expects( $this->any() )
-			->method( 'getFullURL' )
+		$mock->method( 'getFullURL' )
 			->will( $this->returnValue( $baseURL . '/' . str_replace( ' ', '_', $titleText ) ) );
-		$mock->expects( $this->any() )
-			->method( 'getText' )
+		$mock->method( 'getText' )
 			->will( $this->returnValue( $titleText ) );
-		$mock->expects( $this->any() )
-			->method( 'getEarliestRevTime' )
+		$mock->method( 'getEarliestRevTime' )
 			->will( $this->returnValue( $earliestRevTimestamp ) );
 		return $mock;
 	}

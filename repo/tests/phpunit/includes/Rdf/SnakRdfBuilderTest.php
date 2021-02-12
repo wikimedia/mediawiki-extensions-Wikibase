@@ -69,8 +69,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		array &$mentioned = []
 	) {
 		$mentionTracker = $this->createMock( EntityMentionListener::class );
-		$mentionTracker->expects( $this->any() )
-			->method( 'propertyMentioned' )
+		$mentionTracker->method( 'propertyMentioned' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {
 				$key = $id->getSerialization();
 				$mentioned[$key] = $id;

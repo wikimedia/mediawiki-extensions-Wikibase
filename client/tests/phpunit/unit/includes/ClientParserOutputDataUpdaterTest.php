@@ -99,8 +99,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$factory->expects( $this->any() )
-			->method( 'getOtherProjectsSidebarGenerator' )
+		$factory->method( 'getOtherProjectsSidebarGenerator' )
 			->will( $this->returnValue( $generator ) );
 
 		return $factory;
@@ -135,8 +134,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$generator->expects( $this->any() )
-			->method( 'buildProjectLinkSidebar' )
+		$generator->method( 'buildProjectLinkSidebar' )
 			->will( $this->returnValue( $otherProjects ) );
 
 		return $generator;

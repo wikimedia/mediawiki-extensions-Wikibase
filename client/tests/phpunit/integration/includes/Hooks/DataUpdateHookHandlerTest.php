@@ -142,8 +142,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 		$currentUsages = ( $currentUsages == null ) ? [] : $currentUsages;
 
-		$usageLookup->expects( $this->any() )
-			->method( 'getUsagesForPage' )
+		$usageLookup->method( 'getUsagesForPage' )
 			->willReturn( $currentUsages );
 
 		return $usageLookup;
@@ -212,16 +211,13 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$title->expects( $this->any() )
-			->method( 'getArticleID' )
+		$title->method( 'getArticleID' )
 			->will( $this->returnValue( $id ) );
 
-		$title->expects( $this->any() )
-			->method( 'getNamespace' )
+		$title->method( 'getNamespace' )
 			->will( $this->returnValue( $ns ) );
 
-		$title->expects( $this->any() )
-			->method( 'getDBkey' )
+		$title->method( 'getDBkey' )
 			->will( $this->returnValue( $text ) );
 
 		return $title;
@@ -242,12 +238,10 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$linksUpdate->mId = $title->getArticleID();
 
-		$linksUpdate->expects( $this->any() )
-			->method( 'getTitle' )
+		$linksUpdate->method( 'getTitle' )
 			->will( $this->returnValue( $title ) );
 
-		$linksUpdate->expects( $this->any() )
-			->method( 'getParserOutput' )
+		$linksUpdate->method( 'getParserOutput' )
 			->will( $this->returnValue( $pout ) );
 
 		return $linksUpdate;

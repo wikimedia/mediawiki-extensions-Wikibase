@@ -48,8 +48,7 @@ class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function getMockTitleLookup() {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
-		$titleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$titleLookup->method( 'getTitleForId' )
 			->will( $this->returnValue( $this->getMockTitle() ) );
 
 		return $titleLookup;
@@ -71,14 +70,11 @@ class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$mock = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'getNamespace' )
+		$mock->method( 'getNamespace' )
 			->will( $this->returnValue( 0 ) );
-		$mock->expects( $this->any() )
-			->method( 'getPrefixedText' )
+		$mock->method( 'getPrefixedText' )
 			->will( $this->returnValue( 'Prefixed:Title' ) );
-		$mock->expects( $this->any() )
-			->method( 'getArticleID' )
+		$mock->method( 'getArticleID' )
 			->will( $this->returnValue( 42 ) );
 
 		return $mock;

@@ -53,24 +53,19 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$mockTitle = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$mockTitle->expects( $this->any() )
-			->method( 'getArticleID' )
+		$mockTitle->method( 'getArticleID' )
 			->will( $this->returnValue( 123 ) );
-		$mockTitle->expects( $this->any() )
-			->method( 'getNamespace' )
+		$mockTitle->method( 'getNamespace' )
 			->will( $this->returnValue( 456 ) );
-		$mockTitle->expects( $this->any() )
-			->method( 'getPrefixedText' )
+		$mockTitle->method( 'getPrefixedText' )
 			->will( $this->returnValue( 'MockPrefixedText' ) );
 
 		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
-		$entityTitleStoreLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$entityTitleStoreLookup->method( 'getTitleForId' )
 			->will( $this->returnValue( $mockTitle ) );
 
 		$mockPropertyDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
-		$mockPropertyDataTypeLookup->expects( $this->any() )
-			->method( 'getDataTypeIdForProperty' )
+		$mockPropertyDataTypeLookup->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( function( PropertyId $id ) {
 				return 'DtIdFor_' . $id->getSerialization();
 			} ) );

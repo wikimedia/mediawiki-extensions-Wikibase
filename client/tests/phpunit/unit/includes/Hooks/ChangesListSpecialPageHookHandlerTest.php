@@ -473,8 +473,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 			->disableOriginalConstructor()
 			->getMock();
 
-		$user->expects( $this->any() )
-			->method( 'getOption' )
+		$user->method( 'getOption' )
 			->will( $this->returnCallback( function( $optionName ) use ( $userOptions ) {
 				foreach ( $userOptions as $key => $value ) {
 					if ( $optionName === $key ) {
@@ -494,8 +493,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 	private function getDatabase() {
 		$databaseBase = $this->createMock( DBConnRef::class );
 
-		$databaseBase->expects( $this->any() )
-			->method( 'addQuotes' )
+		$databaseBase->method( 'addQuotes' )
 			->will( $this->returnCallback( function( $input ) {
 				return "'$input'";
 			} ) );

@@ -38,17 +38,14 @@ class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 	private function getSnakFormatter( $throw = null ) {
 		$formatter = $this->createMock( SnakFormatter::class );
 
-		$formatter->expects( $this->any() )
-			->method( 'getFormat' )
+		$formatter->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
 
 		if ( $throw ) {
-			$formatter->expects( $this->any() )
-				->method( 'formatSnak' )
+			$formatter->method( 'formatSnak' )
 				->will( $this->throwException( $throw ) );
 		} else {
-			$formatter->expects( $this->any() )
-				->method( 'formatSnak' )
+			$formatter->method( 'formatSnak' )
 				->will( $this->returnValue( 'SNAK' ) );
 		}
 
@@ -61,8 +58,7 @@ class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 	private function getValueFormatter() {
 		$formatter = $this->createMock( ValueFormatter::class );
 
-		$formatter->expects( $this->any() )
-			->method( 'format' )
+		$formatter->method( 'format' )
 			->will( $this->returnValue( 'VALUE' ) );
 
 		return $formatter;

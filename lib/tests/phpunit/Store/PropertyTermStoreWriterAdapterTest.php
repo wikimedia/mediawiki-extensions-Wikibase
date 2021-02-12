@@ -135,11 +135,9 @@ class PropertyTermStoreWriterAdapterTest extends TestCase {
 
 	private function newThrowingPropertyTermStoreWriter() {
 		$propertyTermStoreWriter = $this->createMock( PropertyTermStoreWriter::class );
-		$propertyTermStoreWriter->expects( $this->any() )
-			->method( 'storeTerms' )
+		$propertyTermStoreWriter->method( 'storeTerms' )
 			->will( $this->throwException( new TermStoreException() ) );
-		$propertyTermStoreWriter->expects( $this->any() )
-			->method( 'deleteTerms' )
+		$propertyTermStoreWriter->method( 'deleteTerms' )
 			->will( $this->throwException( new TermStoreException() ) );
 
 		return $propertyTermStoreWriter;

@@ -50,8 +50,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$fallbackChain->expects( $this->any() )
-			->method( 'extractPreferredValue' )
+		$fallbackChain->method( 'extractPreferredValue' )
 			->will( $this->returnCallback( function( $labels ) {
 				if ( array_key_exists( 'en', $labels ) ) {
 					return [
@@ -118,8 +117,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMockForAbstractClass();
 
-		$entityView->expects( $this->any() )
-			->method( 'getTitleHtml' )
+		$entityView->method( 'getTitleHtml' )
 			->will( $this->returnValue( '<TITLE>' ) );
 
 		$viewContent = new ViewContent(
@@ -127,8 +125,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 			[]
 		);
 
-		$entityView->expects( $this->any() )
-			->method( 'getContent' )
+		$entityView->method( 'getContent' )
 			->will( $this->returnValue( $viewContent ) );
 
 		return $entityView;
@@ -166,8 +163,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 			$tags[ 'description' ] = $description;
 		}
 
-		$entityMetaTagsCreator->expects( $this->any() )
-			->method( 'getMetaTags' )
+		$entityMetaTagsCreator->method( 'getMetaTags' )
 			->will( $this->returnValue( $tags ) );
 
 		return $entityMetaTagsCreator;
@@ -181,8 +177,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$configBuilder->expects( $this->any() )
-			->method( 'build' )
+		$configBuilder->method( 'build' )
 			->will( $this->returnValue( [ '<JS>' ] ) );
 
 		return $configBuilder;
@@ -194,8 +189,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 	protected function getEntityTitleLookupMock() {
 		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$entityTitleLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::makeTitle(
 					NS_MAIN,

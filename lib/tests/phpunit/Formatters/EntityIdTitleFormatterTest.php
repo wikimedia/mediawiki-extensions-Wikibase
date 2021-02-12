@@ -60,8 +60,7 @@ class EntityIdTitleFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	protected function newEntityIdTitleFormatter() {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
-		$titleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
+		$titleLookup->method( 'getTitleForId' )
 			->will( $this->returnCallback( [ $this, 'getTitleForId' ] ) );
 
 		$formatter = new EntityIdTitleFormatter( $titleLookup );
