@@ -15,6 +15,7 @@ mirrors most of the PHP implementations of DataValue classes as specified in the
 ### 0.11.0 (dev)
 * Removed `globeCoordinate.GlobeCoordinate.getDecimal`
 * Removed `getLowerBound`, `getUpperBound`, `getAmount` from QuantityValue
+* Removed support for Node.js versions older than v10
 ### 0.10.0 (2017-10-06)
 * The library is now a pure JavaScript library.
 * Removed MediaWiki ResourceLoader module definitions.
