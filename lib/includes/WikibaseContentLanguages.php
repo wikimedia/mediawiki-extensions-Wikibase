@@ -63,9 +63,37 @@ class WikibaseContentLanguages {
 			new MediaWikiContentLanguages(),
 			new StaticContentLanguages(
 				[
+					'bag', // T263946
+					'bas', // T263946
+					'bax', // T263946
+					'bbj', // T263946
+					'bfd', // T263946
+					'bkc', // T263946
+					'bkh', // T263946
+					'bkm', // T263946
+					'bqz', // T263946
+					'byv', // T263946
 					'dag', // T260037
+					'dua', // T263946
+					'eto', // T263946
+					'etu', // T263946
+					'ewo', // T263946
 					'fkv', // T167259
+					'fmp', // T263946
+					'gya', // T263946
+					'isu', // T263946
 					'kea', // T127435
+					'ker', // T263946
+					'ksf', // T263946
+					'lem', // T263946
+					'lns', // T263946
+					'mcp', // T263946
+					'mua', // T263946
+					'nge', // T263946
+					'nla', // T263946
+					'nmg', // T263946
+					'nnh', // T263946
+					'nnz', // T263946
 					'nod', // T93880
 					'ota', // T59342
 					'rmf', // T226701
@@ -76,6 +104,13 @@ class WikibaseContentLanguages {
 					'smj', // T146707
 					'sms', // T220118, T223544
 					'srq', // T113408
+					'tvu', // T263946
+					'vut', // T263946
+					'wes', // T263946
+					'yas', // T263946
+					'yat', // T263946
+					'yav', // T263946
+					'ybb' // T263946
 				]
 			)
 		);
@@ -145,6 +180,7 @@ class WikibaseContentLanguages {
 					'mid', // T155418
 					'mnc', // T137808
 					'moe', // T151129
+					'ms-arab', // T270059
 					'non', // T137115
 					'non-runr', // T265782
 					'nr', // T155430
@@ -167,6 +203,7 @@ class WikibaseContentLanguages {
 					'pyu', // T174227
 					'quc', // T155376
 					'qya', // T185194
+					'rah', // T267479
 					'rar', // T155427
 					'rm-puter', // T222426
 					'rm-rumgr', // T222426
