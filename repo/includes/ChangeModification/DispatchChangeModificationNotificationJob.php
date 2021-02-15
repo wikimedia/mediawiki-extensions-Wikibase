@@ -30,7 +30,7 @@ abstract class DispatchChangeModificationNotificationJob extends Job {
 	private $localClientDatabases;
 
 	/** @var EntityContentFactory */
-	protected $entityContentFactory;
+	private $entityContentFactory;
 
 	/** @var LoggerInterface */
 	protected $logger;

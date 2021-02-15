@@ -12,7 +12,6 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use Title;
-use TitleFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
@@ -36,17 +35,17 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 
 	public function parameterProvider(): array {
 		$repoRevision24IdentifierArray = ( new RepoRevisionIdentifier(
-			'Q44801',
+			'Q1042',
 			$this->getMwTimestamp(),
 			24
 		) )->toArray();
 		$repoRevision25IdentifierArray = ( new RepoRevisionIdentifier(
-			'Q44802',
+			'Q1042',
 			$this->getMwTimestamp(),
 			25
 		) )->toArray();
 		$repoRevision26IdentifierArray = ( new RepoRevisionIdentifier(
-			'Q44803',
+			'Q1042',
 			$this->getMwTimestamp(),
 			26
 		) )->toArray();
@@ -187,7 +186,6 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 			'changeVisibilityNotificationJobBatchSize' => $batchSize,
 		] );
 		$this->setService( 'RevisionLookup', $this->newRevisionLookup() );
-		$this->setService( 'TitleFactory', $this->newTitleFactory() );
 
 		$job = new DispatchChangeVisibilityNotificationJob(
 			$this->newTitle( 42 ),
@@ -247,24 +245,13 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 
 	private function newEntityContentFactory(): EntityContentFactory {
 		$entityContentFactory = $this->createMock( EntityContentFactory::class );
-		$entityContentFactory->expects( $this->any() )
+		$entityContentFactory->expects( $this->once() )
 			->method( 'getEntityIdForTitle' )
 			->willReturnCallback( function ( Title $title ): EntityId {
 				return ( new BasicEntityIdParser() )->parse( $title->getText() );
 			} );
 
 		return $entityContentFactory;
-	}
-
-	private function newTitleFactory(): TitleFactory {
-		$titleFactory = $this->createMock( TitleFactory::class );
-		$titleFactory->expects( $this->any() )
-			->method( 'newFromID' )
-			->willReturnCallback( function ( int $id ): Title {
-				return $this->newTitle( $id );
-			} );
-
-		return $titleFactory;
 	}
 
 	private function newRevisionLookup(): RevisionLookup {
@@ -285,7 +272,6 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 					$revisionRecord->setTimestamp( '20050504121300' );
 				}
 				$revisionRecord->setId( 12 + $id );
-				$revisionRecord->setPageId( 43789 + $id );
 
 				return $revisionRecord;
 			} );
@@ -298,16 +284,10 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 		$title->expects( $this->any() )
 			->method( 'getNamespace' )
 			->willReturn( 0 );
-		$title->expects( $this->any() )
-			->method( 'getText' )
-			->willReturn( 'Q' . ( 1000 + $id ) );
 		$title->method( 'getDBkey' )
 			->willReturn( 'Q' . ( 1000 + $id ) );
 		$title->expects( $this->any() )
 			->method( 'getArticleId' )
-			->willReturn( $id );
-		$title->expects( $this->any() )
-			->method( 'getId' )
 			->willReturn( $id );
 		return $title;
 	}

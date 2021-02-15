@@ -8,7 +8,6 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use Title;
-use TitleFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 use Wikibase\Repo\WikibaseRepo;
@@ -39,9 +38,6 @@ class DispatchChangeVisibilityNotificationJob extends DispatchChangeModification
 	/** @var RevisionLookup */
 	private $revisionLookup;
 
-	/** @var TitleFactory */
-	private $titleFactory;
-
 	public function __construct( Title $title, array $params = [] ) {
 		parent::__construct( 'DispatchChangeVisibilityNotification', $title, $params );
 
@@ -60,7 +56,6 @@ class DispatchChangeVisibilityNotificationJob extends DispatchChangeModification
 		$repoSettings = WikibaseRepo::getSettings( $mwServices );
 		$this->jobBatchSize = $repoSettings->getSetting( 'changeVisibilityNotificationJobBatchSize' );
 		$this->revisionLookup = $mwServices->getRevisionLookup();
-		$this->titleFactory = $mwServices->getTitleFactory();
 	}
 
 	protected function getChangeModificationNotificationJobs( EntityId $entityId ): array {
@@ -72,7 +67,7 @@ class DispatchChangeVisibilityNotificationJob extends DispatchChangeModification
 
 		$jobSpecifications = [];
 		foreach ( $revisionsByNewBits as $newBits => $revisions ) {
-			$revisionIdentifiers = $this->getRepoRevisionIdentifiers( $revisions );
+			$revisionIdentifiers = $this->getRepoRevisionIdentifiers( $entityId, $revisions );
 
 			foreach ( array_chunk( $revisionIdentifiers, $this->jobBatchSize ) as $revisionIdentifierChunk ) {
 				$jobSpecifications[] = $this->createJobSpecification(
@@ -114,42 +109,23 @@ class DispatchChangeVisibilityNotificationJob extends DispatchChangeModification
 	}
 
 	/**
+	 * @param EntityId $entityId
 	 * @param RevisionRecord[] $revisions
 	 *
 	 * @return RepoRevisionIdentifier[]
 	 */
-	private function getRepoRevisionIdentifiers( array $revisions ): array {
+	private function getRepoRevisionIdentifiers( EntityId $entityId, array $revisions ): array {
 		$revisionIdentifiers = [];
 
 		foreach ( $revisions as $revision ) {
-			$repoRevisionIdentifier = $this->newRepoRevisionIdentifier( $revision );
-			if ( $repoRevisionIdentifier ) {
-				$revisionIdentifiers[] = $repoRevisionIdentifier;
-			}
+			$revisionIdentifiers[] = new RepoRevisionIdentifier(
+				$entityId->getSerialization(),
+				$revision->getTimestamp(),
+				$revision->getId()
+			);
 		}
 
 		return $revisionIdentifiers;
-	}
-
-	/**
-	 * @param RevisionRecord $revision
-	 *
-	 * @return RepoRevisionIdentifier|null
-	 */
-	private function newRepoRevisionIdentifier( RevisionRecord $revision ): ?RepoRevisionIdentifier {
-		$title = $this->titleFactory->newFromID( $revision->getPageId() );
-		if ( !$title ) {
-			return null;
-		}
-		$entityId = $this->entityContentFactory->getEntityIdForTitle( $title );
-		if ( !$entityId ) {
-			return null;
-		}
-		return new RepoRevisionIdentifier(
-			$entityId->getSerialization(),
-			$revision->getTimestamp(),
-			$revision->getId()
-		);
 	}
 
 	/**
