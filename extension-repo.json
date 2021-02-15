@@ -359,7 +359,8 @@
 		"PurgeEntityData": "Wikibase\\Repo\\PurgeEntityDataJob::newFromGlobalState",
 		"UpdateRepoOnMove": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnMoveJob",
 		"UpdateRepoOnDelete": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnDeleteJob",
-		"DispatchChangeDeletionNotification": "Wikibase\\Repo\\ChangeModification\\DispatchChangeDeletionNotificationJob"
+		"DispatchChangeDeletionNotification": "Wikibase\\Repo\\ChangeModification\\DispatchChangeDeletionNotificationJob",
+		"DispatchChangeVisibilityNotification": "Wikibase\\Repo\\ChangeModification\\DispatchChangeVisibilityNotificationJob"
 	},
 	"AutoloadNamespaces": {
 		"Wikibase\\Repo\\": "repo/includes/",
@@ -545,12 +546,7 @@
 	"HookHandlers": {
 		"ArticleRevisionVisibilitySet": {
 			"class": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler",
-			"factory": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler::factory",
-			"services": [
-				"RevisionLookup",
-				"TitleFactory",
-				"WikibaseRepo.Settings"
-			]
+			"factory": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler::factory"
 		},
 		"DatabaseSchemaUpdater": {
 			"class": "\\Wikibase\\Repo\\Store\\Sql\\DatabaseSchemaUpdater",
