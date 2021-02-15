@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Irus"
+			"Irus",
+			"ObaTango"
 		]
 	},
-	"wikibase-edit": "editá"
+	"wikibase-edit": "editá",
+	"wikibase-add": "añadí"
 }

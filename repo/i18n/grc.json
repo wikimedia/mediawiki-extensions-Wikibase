@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Gts-tg",
-			"Ladsgroup"
+			"Ladsgroup",
+			"PastelKos"
 		]
 	},
 	"wikibase-edit": "μεταγράφειν",
@@ -11,5 +12,6 @@
 	"wikibase-description-empty": "Περιγραφή μη ὀριζμένη",
 	"wikibase-sitelinks-special": "Ἔτεροι ἰστότοποι",
 	"wikibase-statementview-rank-normal": "Συνήθης κατάταξη",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|μνεία|μνείαι}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|μνεία|μνείαι}}",
+	"wikibase-entityselector-more": "πλείω"
 }
