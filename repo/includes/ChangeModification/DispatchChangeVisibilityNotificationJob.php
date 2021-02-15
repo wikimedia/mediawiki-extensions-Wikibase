@@ -6,7 +6,6 @@ use IJobSpecification;
 use JobSpecification;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionLookup;
-use MediaWiki\Revision\RevisionRecord;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
@@ -59,16 +58,14 @@ class DispatchChangeVisibilityNotificationJob extends DispatchChangeModification
 	}
 
 	protected function getChangeModificationNotificationJobs( EntityId $entityId ): array {
-		/** @var RevisionRecord[][] $revisionsByNewBits */
+		/** @var RepoRevisionIdentifier[][] $revisionsByNewBits */
 		$revisionsByNewBits = [];
-		foreach ( $this->getEligibleRevisionsById( $this->revisionIds ) as $id => $revision ) {
+		foreach ( $this->getEligibleRevisionIdentifiersById( $entityId, $this->revisionIds ) as $id => $revision ) {
 			$revisionsByNewBits[$this->visibilityChangeMap[$id]['newBits']][] = $revision;
 		}
 
 		$jobSpecifications = [];
-		foreach ( $revisionsByNewBits as $newBits => $revisions ) {
-			$revisionIdentifiers = $this->getRepoRevisionIdentifiers( $entityId, $revisions );
-
+		foreach ( $revisionsByNewBits as $newBits => $revisionIdentifiers ) {
 			foreach ( array_chunk( $revisionIdentifiers, $this->jobBatchSize ) as $revisionIdentifierChunk ) {
 				$jobSpecifications[] = $this->createJobSpecification(
 					$this->revisionIdentifiersToJson( $revisionIdentifierChunk ),
@@ -81,61 +78,47 @@ class DispatchChangeVisibilityNotificationJob extends DispatchChangeModification
 	}
 
 	/**
-	 * Gets all revisions with the given ids and returns those that are relevant
+	 * Gets the timestamps of all revisions with the given IDs
+	 * and returns repo revision identifiers for those that are relevant
 	 * (=> no older than self::clientRCMaxAge).
 	 *
+	 * @param EntityId $entityId
 	 * @param int[] $ids
 	 *
-	 * @return RevisionRecord[] Indexed by revision id
+	 * @return RepoRevisionIdentifier[] Indexed by revision id
 	 */
-	private function getEligibleRevisionsById( array $ids ): array {
+	private function getEligibleRevisionIdentifiersById( EntityId $entityId, array $ids ): array {
 		$revisions = [];
 
 		foreach ( $ids as $id ) {
-			$revision = $this->revisionLookup->getRevisionById( $id );
-			if ( !$revision ) {
+			$timestamp = $this->revisionLookup->getTimestampFromId( $id );
+			if ( !$timestamp ) {
 				continue;
 			}
 
-			$timeDiff = time() - $this->getRevisionAge( $revision );
+			$timeDiff = time() - $this->getRevisionAge( $timestamp );
 			if ( $timeDiff > $this->clientRCMaxAge ) {
 				continue;
 			}
 
-			$revisions[$id] = $revision;
+			$revisions[$id] = new RepoRevisionIdentifier(
+				$entityId->getSerialization(),
+				$timestamp,
+				$id
+			);
 		}
 
 		return $revisions;
 	}
 
 	/**
-	 * @param EntityId $entityId
-	 * @param RevisionRecord[] $revisions
-	 *
-	 * @return RepoRevisionIdentifier[]
-	 */
-	private function getRepoRevisionIdentifiers( EntityId $entityId, array $revisions ): array {
-		$revisionIdentifiers = [];
-
-		foreach ( $revisions as $revision ) {
-			$revisionIdentifiers[] = new RepoRevisionIdentifier(
-				$entityId->getSerialization(),
-				$revision->getTimestamp(),
-				$revision->getId()
-			);
-		}
-
-		return $revisionIdentifiers;
-	}
-
-	/**
-	 * @param RevisionRecord $revision
+	 * @param string $timestamp
 	 *
 	 * @return int Age of the revision in seconds
 	 */
-	private function getRevisionAge( RevisionRecord $revision ): int {
+	private function getRevisionAge( string $timestamp ): int {
 		return intval(
-			( new ConvertibleTimestamp( $revision->getTimestamp() ) )->getTimestamp( TS_UNIX )
+			( new ConvertibleTimestamp( $timestamp ) )->getTimestamp( TS_UNIX )
 		);
 	}
 

@@ -6,9 +6,7 @@ namespace Wikibase\Repo\Tests\ChangeModification;
 
 use IJobSpecification;
 use JobQueueGroup;
-use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionLookup;
-use MediaWiki\Revision\RevisionRecord;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use Title;
@@ -37,17 +35,17 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 		$repoRevision24IdentifierArray = ( new RepoRevisionIdentifier(
 			'Q1042',
 			$this->getMwTimestamp(),
-			24
+			12
 		) )->toArray();
 		$repoRevision25IdentifierArray = ( new RepoRevisionIdentifier(
 			'Q1042',
 			$this->getMwTimestamp(),
-			25
+			13
 		) )->toArray();
 		$repoRevision26IdentifierArray = ( new RepoRevisionIdentifier(
 			'Q1042',
 			$this->getMwTimestamp(),
-			26
+			14
 		) )->toArray();
 		$visibilityChangeMap = [
 			12 =>
@@ -257,23 +255,19 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 	private function newRevisionLookup(): RevisionLookup {
 		$revisionLookup = $this->createMock( RevisionLookup::class );
 		$revisionLookup->expects( $this->any() )
-			->method( 'getRevisionById' )
-			->willReturnCallback( function ( int $id ): ?RevisionRecord {
+			->method( 'getTimestampFromId' )
+			->willReturnCallback( function ( int $id ) {
 				if ( $id === 404 ) {
 					// Non-existant revision
-					return null;
+					return false;
 				}
 
-				$revisionRecord = new MutableRevisionRecord( $this->newTitle( 42 ) );
-
-				$revisionRecord->setTimestamp( $this->getMwTimestamp() );
 				if ( $id === 408 ) {
 					// Very old revision
-					$revisionRecord->setTimestamp( '20050504121300' );
+					return '20050504121300';
 				}
-				$revisionRecord->setId( 12 + $id );
 
-				return $revisionRecord;
+				return $this->getMwTimestamp();
 			} );
 
 		return $revisionLookup;
