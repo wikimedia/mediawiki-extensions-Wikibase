@@ -143,9 +143,9 @@
 				alteredHandler;
 
 			if ( options.throttle ) {
-				alteredHandler = $.throttle( options.throttle, actualHandler );
+				alteredHandler = OO.ui.throttle( actualHandler, options.throttle );
 			} else if ( options.debounce ) {
-				alteredHandler = $.debounce( options.debounce, actualHandler );
+				alteredHandler = OO.ui.debounce( actualHandler, options.debounce );
 			}
 
 			$( target ).on( event, alteredHandler || actualHandler );
