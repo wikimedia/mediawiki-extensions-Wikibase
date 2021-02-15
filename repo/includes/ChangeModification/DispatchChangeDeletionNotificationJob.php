@@ -4,13 +4,11 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\ChangeModification;
 
 use BatchRowIterator;
-use Job;
 use JobSpecification;
 use MediaWiki\MediaWikiServices;
-use Psr\Log\LoggerInterface;
 use Title;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
-use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\ILBFactory;
@@ -20,7 +18,7 @@ use Wikimedia\Rdbms\ILBFactory;
  *
  * @license GPL-2.0-or-later
  */
-class DispatchChangeDeletionNotificationJob extends Job {
+class DispatchChangeDeletionNotificationJob extends DispatchChangeModificationNotificationJob {
 
 	/** @var int */
 	private $batchSize;
@@ -34,21 +32,6 @@ class DispatchChangeDeletionNotificationJob extends Job {
 	/** @var ILBFactory */
 	private $loadBalancerFactory;
 
-	/** @var int */
-	private $clientRCMaxAge;
-
-	/** @var EntityContentFactory */
-	private $entityContentFactory;
-
-	/** @var string[] */
-	private $localClientDatabases;
-
-	/** @var LoggerInterface */
-	private $logger;
-
-	/** @var callable */
-	private $jobGroupFactory;
-
 	public function __construct( Title $title, array $params = [] ) {
 		parent::__construct( 'DispatchChangeDeletionNotification', $title, $params );
 
@@ -59,71 +42,13 @@ class DispatchChangeDeletionNotificationJob extends Job {
 
 		$this->pageId = $params['pageId'];
 		$this->archivedRevisionCount = $params['archivedRevisionCount'];
-
-		$this->initRepoJobServicesFromGlobalState();
 	}
 
-	private function initRepoJobServicesFromGlobalState() {
-		$mwServices = MediaWikiServices::getInstance();
-		$repo = WikibaseRepo::getDefaultInstance();
+	protected function initFromGlobalState( MediaWikiServices $mwServices, WikibaseRepo $repo ) {
+		parent::initFromGlobalState( $mwServices, $repo );
 
 		$this->batchSize = $mwServices->getMainConfig()->get( 'UpdateRowsPerQuery' );
-		$repoSettings = WikibaseRepo::getSettings( $mwServices );
-		$this->clientRCMaxAge = $repoSettings->getSetting( 'deleteNotificationClientRCMaxAge' );
-		$this->localClientDatabases = $repoSettings->getSetting( 'localClientDatabases' );
-
-		$this->initServices(
-			$mwServices->getDBLoadBalancerFactory(),
-			$repo->getEntityContentFactory(),
-			$repo->getLogger(),
-			'JobQueueGroup::singleton'
-		);
-	}
-
-	/**
-	 * @param ILBFactory $loadBalancerFactory
-	 * @param EntityContentFactory $entityContentFactory
-	 * @param LoggerInterface $logger
-	 * @param callable $jobGroupFactory
-	 */
-	public function initServices(
-		ILBFactory $loadBalancerFactory,
-		EntityContentFactory $entityContentFactory,
-		LoggerInterface $logger,
-		callable $jobGroupFactory
-	) {
-		$this->loadBalancerFactory = $loadBalancerFactory;
-		$this->entityContentFactory = $entityContentFactory;
-		$this->logger = $logger;
-		$this->jobGroupFactory = $jobGroupFactory;
-	}
-
-	/**
-	 * @param RepoRevisionIdentifier[] $revisionIdentifiers
-	 * @return string JSON
-	 */
-	private function revisionIdentifiersToJson( array $revisionIdentifiers ): string {
-		return json_encode(
-			array_map(
-				function ( RepoRevisionIdentifier $revisionIdentifier ) {
-					return $revisionIdentifier->toArray();
-				},
-				$revisionIdentifiers
-			)
-		);
-	}
-
-	private function dispatchClientDeletionJob( array $repoRevisionIdentifiers ) {
-		$jobSpecification = new JobSpecification(
-			'ChangeDeletionNotification',
-			[
-				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( $repoRevisionIdentifiers ),
-			]
-		);
-
-		foreach ( $this->localClientDatabases as $clientDatabase ) {
-			call_user_func( $this->jobGroupFactory, $clientDatabase )->push( $jobSpecification );
-		}
+		$this->loadBalancerFactory = $mwServices->getDBLoadBalancerFactory();
 	}
 
 	private function getArchiveRows( int &$processed, int &$staleRecords, string $entityIdSerialization ) {
@@ -175,26 +100,14 @@ class DispatchChangeDeletionNotificationJob extends Job {
 		return $identifiers;
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function run() {
-		if ( $this->localClientDatabases === [] ) {
-			return true;
-		}
-		$entityId = $this->entityContentFactory->getEntityIdForTitle( $this->getTitle() );
-		if ( $entityId === null ) {
-			$this->logger->warning( "Job should not be queued for non-entity pages." );
-			return false;
-		}
-
+	protected function getChangeModificationNotificationJobs( EntityId $entityId ): array {
 		$processed = 0;
 		$staleRecords = 0;
 		$repoRevisionIdentifiers = $this->getArchiveRows( $processed, $staleRecords, $entityId->getSerialization() );
 
 		if ( $staleRecords === $this->archivedRevisionCount ) {
 			$this->logger->info( "All archive records are too old. Aborting." );
-			return true;
+			return [];
 		}
 
 		if ( $processed !== $this->archivedRevisionCount - $staleRecords ) {
@@ -205,8 +118,12 @@ class DispatchChangeDeletionNotificationJob extends Job {
 			] );
 		}
 
-		$this->dispatchClientDeletionJob( $repoRevisionIdentifiers );
+		if ( $repoRevisionIdentifiers === [] ) {
+			return [];
+		}
 
-		return true;
+		return [ new JobSpecification( 'ChangeDeletionNotification', [
+			'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( $repoRevisionIdentifiers ),
+		] ) ];
 	}
 }
