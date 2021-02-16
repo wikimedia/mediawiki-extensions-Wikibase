@@ -26,6 +26,7 @@
 	"wikibase-editlinkstitle": "Uredi medjezikovne povezave",
 	"wikibase-addlinkstitle": "Dodaj medjezikovne povezave",
 	"wikibase-linkitem-addlinks": "Dodaj povezave",
+	"wikibase-linkitem-alreadylinked": "Stran, na katero ste želeli ustvariti povezavo, je že povezana s [$1 predmetom] v centralni shrambi podatkov, ki se povezuje s s stranjo/člankom [[$2]] v tem spletišču. Predmeti se lahko povezujejo samo z eno stranjo v posameznem spletišču. Za povezavo izberite drugo stran.",
 	"wikibase-linkitem-close": "Zapri obvestilo in ponovno naloži stran",
 	"wikibase-linkitem-failure": "Med povezovanjem s stranjo je prišlo do neznane napake.",
 	"wikibase-linkitem-title": "Poveži s stranjo",
