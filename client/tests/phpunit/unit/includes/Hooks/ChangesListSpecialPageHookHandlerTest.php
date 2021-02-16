@@ -47,7 +47,13 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		// Forget about the other extensions.  Although ORES may be loaded,
 		// since this is only unit-testing *our* listener, ORES's listener
 		// hasn't run, so for all intents and purposes it's not loaded.
-		$this->extensionRegistry->loaded = [ 'Wikibase' ];
+		$this->extensionRegistry->loaded = array_intersect_key(
+			$this->extensionRegistry->loaded,
+			[
+				'WikibaseRepository' => [],
+				'WikibaseClient' => [],
+			]
+		);
 	}
 
 	protected function tearDown(): void {
