@@ -161,7 +161,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	public function testConsecutivePrefetch() {
 		$api = $this->createMock( GenericActionApiClient::class );
 		// expect two API request
-		$api->expects( $this->any() )
+		$api->expects( $this->exactly( 2 ) )
 			->method( 'get' )
 			->withConsecutive(
 				[ $this->getRequestParameters( [ $this->p18->getSerialization() ] ) ],
@@ -186,7 +186,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	public function testConsecutivePrefetch_alreadyInBuffer() {
 		$api = $this->createMock( GenericActionApiClient::class );
 		// expect two API request
-		$api->expects( $this->any() )
+		$api->expects( $this->exactly( 2 ) )
 			->method( 'get' )
 			->withConsecutive(
 				[ $this->getRequestParameters( [ $this->p18->getSerialization() ] ) ],
