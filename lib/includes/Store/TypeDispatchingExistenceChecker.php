@@ -25,4 +25,18 @@ class TypeDispatchingExistenceChecker implements EntityExistenceChecker {
 		return $this->serviceDispatcher->getServiceForType( $id->getEntityType() )
 			->exists( $id );
 	}
+
+	public function existsBatch( array $ids ): array {
+		$idsByType = [];
+		foreach ( $ids as $id ) {
+			$idsByType[$id->getEntityType()][] = $id;
+		}
+
+		$ret = [];
+		foreach ( $idsByType as $type => $idsForType ) {
+			$ret += $this->serviceDispatcher->getServiceForType( $type )
+				->existsBatch( $idsForType );
+		}
+		return $ret;
+	}
 }

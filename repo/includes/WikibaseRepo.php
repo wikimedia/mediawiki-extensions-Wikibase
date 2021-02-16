@@ -692,9 +692,13 @@ class WikibaseRepo {
 	}
 
 	public function getEntityExistenceChecker(): EntityExistenceChecker {
+		$services = MediaWikiServices::getInstance();
 		return new TypeDispatchingExistenceChecker(
 			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::EXISTENCE_CHECKER_CALLBACK ),
-			new TitleLookupBasedEntityExistenceChecker( $this->getEntityTitleLookup() )
+			new TitleLookupBasedEntityExistenceChecker(
+				$this->getEntityTitleLookup(),
+				$services->getLinkBatchFactory()
+			)
 		);
 	}
 

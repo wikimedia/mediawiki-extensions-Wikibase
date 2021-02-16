@@ -5,6 +5,7 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\TypeDispatchingExistenceChecker;
@@ -63,6 +64,39 @@ class TypeDispatchingExistenceCheckerTest extends TestCase {
 		$existenceChecker->expects( $this->never() )->method( $this->anything() );
 
 		return $existenceChecker;
+	}
+
+	public function testExistsBatch() {
+		$itemIds = [ new ItemId( 'Q123' ), new ItemId( 'Q456' ) ];
+		$propertyIds = [ new PropertyId( 'P123' ), new PropertyId( 'P456' ) ];
+
+		$itemChecker = $this->createMock( EntityExistenceChecker::class );
+		$itemChecker->expects( $this->once() )
+			->method( 'existsBatch' )
+			->with( $itemIds )
+			->willReturn( [ 'Q123' => true, 'Q456' => false ] );
+		$propertyChecker = $this->createMock( EntityExistenceChecker::class );
+		$propertyChecker->expects( $this->once() )
+			->method( 'existsBatch' )
+			->with( $propertyIds )
+			->willReturn( [ 'P123' => true, 'P456' => false ] );
+
+		$existenceChecker = new TypeDispatchingExistenceChecker(
+			[ 'item' => function () use ( $itemChecker ) {
+				return $itemChecker;
+			} ],
+			$propertyChecker
+		);
+
+		$result = $existenceChecker->existsBatch( array_merge( $itemIds, $propertyIds ) );
+
+		$expected = [
+			'Q123' => true,
+			'Q456' => false,
+			'P123' => true,
+			'P456' => false,
+		];
+		$this->assertSame( $expected, $result );
 	}
 
 }

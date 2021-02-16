@@ -50,4 +50,29 @@ class ApiEntityExistenceCheckerTest extends TestCase {
 		$this->assertTrue( $existenceChecker->exists( $id ) );
 	}
 
+	public function testExistsBatch() {
+		$ids = [ new PropertyId( 'P123' ), new PropertyId( 'P321' ) ];
+
+		$apiEntityLookup = $this->createMock( ApiEntityLookup::class );
+		$apiEntityLookup->expects( $this->once() )
+			->method( 'fetchEntities' )
+			->with( $ids );
+		$apiEntityLookup->expects( $this->exactly( 2 ) )
+			->method( 'getResultPartForId' )
+			->withConsecutive(
+				[ $ids[0] ],
+				[ $ids[1] ]
+			)
+			->willReturnOnConsecutiveCalls(
+				[ 'id' => 'P123', 'datatype' => 'string' ],
+				[ 'id' => 'P321', 'missing' => '' ]
+			);
+
+		$existenceChecker = new ApiEntityExistenceChecker( $apiEntityLookup );
+		$result = $existenceChecker->existsBatch( $ids );
+
+		$expected = [ 'P123' => true, 'P321' => false ];
+		$this->assertSame( $expected, $result );
+	}
+
 }

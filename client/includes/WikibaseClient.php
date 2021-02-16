@@ -323,10 +323,12 @@ final class WikibaseClient {
 				$this->settings->getSetting( 'siteGlobalID' )
 			);
 
+			$services = MediaWikiServices::getInstance();
+
 			$kartographerEmbeddingHandler = null;
 			if ( $this->useKartographerGlobeCoordinateFormatter() ) {
 				$kartographerEmbeddingHandler = new CachingKartographerEmbeddingHandler(
-					MediaWikiServices::getInstance()->getParserFactory()->create()
+					$services->getParserFactory()->create()
 				);
 			}
 
@@ -341,7 +343,10 @@ final class WikibaseClient {
 				$this->getEntityLookup(),
 				$this->getStore()->getEntityRevisionLookup(),
 				$this->settings->getSetting( 'entitySchemaNamespace' ),
-				new TitleLookupBasedEntityExistenceChecker( $entityTitleLookup ),
+				new TitleLookupBasedEntityExistenceChecker(
+					$entityTitleLookup,
+					$services->getLinkBatchFactory()
+				),
 				new TitleLookupBasedEntityTitleTextLookup( $entityTitleLookup ),
 				new TitleLookupBasedEntityUrlLookup( $entityTitleLookup ),
 				new TitleLookupBasedEntityRedirectChecker( $entityTitleLookup ),
