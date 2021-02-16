@@ -67,7 +67,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'jquery.event.special.eachchange',
-				'jquery.throttle-debounce',
 				'jquery.ui.suggester',
 				'jquery.ui',
 			],
@@ -254,7 +253,6 @@ return call_user_func( function() {
 				'jquery.util.getDirectionality',
 				'jquery.event.special.eachchange',
 				'jquery.inputautoexpand',
-				'jquery.throttle-debounce',
 				'jquery.wikibase.entityselector',
 				'wikibase.buildErrorOutput',
 				'wikibase.getLanguageNameByCode',
