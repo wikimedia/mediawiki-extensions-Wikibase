@@ -6,6 +6,7 @@ use ArrayIterator;
 use Comparable;
 use Countable;
 use InvalidArgumentException;
+use Iterator;
 use IteratorAggregate;
 use Traversable;
 use Wikibase\DataModel\Entity\PropertyId;
