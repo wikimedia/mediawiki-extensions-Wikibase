@@ -8,6 +8,7 @@ describe( 'License component', () => {
 	const $messages = {
 		KEYS: MessageKeys,
 		get: jest.fn( ( key: string ) => `⧼${key}⧽` ),
+		getText: jest.fn( ( key: string ) => `⧼${key}⧽` ),
 	};
 
 	it( 'bubbles the button\'s click event as close event', () => {

@@ -8,6 +8,7 @@ describe( 'WarningAnonymousEdit', () => {
 		const $messages = {
 			KEYS: MessageKeys,
 			get: jest.fn().mockReturnValue( 'Some <abbr>HTML</abbr>.' ),
+			getText: jest.fn().mockReturnValue( "Some 'text" ),
 		};
 		const wrapper = shallowMount( WarningAnonymousEdit, {
 			propsData: {

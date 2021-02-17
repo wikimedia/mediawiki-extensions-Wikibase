@@ -10,6 +10,7 @@ describe( 'BailoutActions', () => {
 	const $messages = {
 		KEYS: MessageKeys,
 		get: jest.fn( ( key: string ) => `⧼${key}⧽` ),
+		getText: jest.fn( ( key: string ) => `⧼${key}⧽` ),
 	};
 	const $clientRouter = {
 		getPageUrl: jest.fn(),
@@ -21,7 +22,7 @@ describe( 'BailoutActions', () => {
 			mocks: { $messages, $clientRouter },
 		} );
 
-		const messageKeys = $messages.get.mock.calls.map( ( call ) => call[ 0 ] );
+		const messageKeys = $messages.getText.mock.calls.map( ( call ) => call[ 0 ] );
 		messageKeys.forEach( ( messageKey ) => {
 			expect( messageKey ).toMatch( /^wikibase-client-data-bridge-bailout-/ );
 		} );

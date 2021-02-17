@@ -9,7 +9,7 @@
 			:class="[ `wb-db-error-permission-info__toggle--${ infoIsExpanded ? 'open' : 'closed' }` ]"
 			@click="toggleInfo"
 		>
-			{{ this.$messages.get( this.$messages.KEYS.PERMISSIONS_MORE_INFO ) }}
+			{{ this.$messages.getText( this.$messages.KEYS.PERMISSIONS_MORE_INFO ) }}
 		</a>
 		<div
 			class="wb-db-error-permission-info__body"

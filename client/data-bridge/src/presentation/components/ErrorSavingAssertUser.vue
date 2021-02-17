@@ -3,20 +3,20 @@
 		<h2
 			class="wb-db-error-saving-assertuser__heading"
 		>
-			{{ $messages.get( $messages.KEYS.SAVING_ERROR_ASSERTUSER_HEADING ) }}
+			{{ $messages.getText( $messages.KEYS.SAVING_ERROR_ASSERTUSER_HEADING ) }}
 		</h2>
 		<IconMessageBox
 			class="wb-db-error-saving-assertuser__message"
 			type="warning"
 		>
-			{{ $messages.get( $messages.KEYS.SAVING_ERROR_ASSERTUSER_MESSAGE ) }}
+			{{ $messages.getText( $messages.KEYS.SAVING_ERROR_ASSERTUSER_MESSAGE ) }}
 		</IconMessageBox>
 		<div class="wb-db-error-saving-assertuser__buttons">
 			<EventEmittingButton
 				class="wb-db-error-saving-assertuser__proceed"
 				type="primaryProgressive"
 				size="M"
-				:message="$messages.get( publishOrSave )"
+				:message="$messages.getText( publishOrSave )"
 				@click="proceed"
 			/>
 			<EventEmittingButton
@@ -24,7 +24,7 @@
 				type="neutral"
 				size="M"
 				:href="loginUrl"
-				:message="$messages.get( $messages.KEYS.SAVING_ERROR_ASSERTUSER_LOGIN )"
+				:message="$messages.getText( $messages.KEYS.SAVING_ERROR_ASSERTUSER_LOGIN )"
 				:new-tab="true"
 				:prevent-default="false"
 				@click="back"
@@ -33,7 +33,7 @@
 				class="wb-db-error-saving-assertuser__back"
 				type="link"
 				size="M"
-				:message="$messages.get( $messages.KEYS.SAVING_ERROR_ASSERTUSER_KEEP_EDITING )"
+				:message="$messages.getText( $messages.KEYS.SAVING_ERROR_ASSERTUSER_KEEP_EDITING )"
 				@click="back"
 			/>
 		</div>

@@ -3,7 +3,7 @@
 		<h2
 			class="wb-db-warning-anonymous-edit__heading"
 		>
-			{{ $messages.get( $messages.KEYS.ANONYMOUS_EDIT_WARNING_HEADING ) }}
+			{{ $messages.getText( $messages.KEYS.ANONYMOUS_EDIT_WARNING_HEADING ) }}
 		</h2>
 		<IconMessageBox
 			class="wb-db-warning-anonymous-edit__message"
@@ -19,14 +19,14 @@
 				class="wb-db-warning-anonymous-edit__proceed"
 				type="primaryProgressive"
 				size="M"
-				:message="$messages.get( $messages.KEYS.ANONYMOUS_EDIT_WARNING_PROCEED )"
+				:message="$messages.getText( $messages.KEYS.ANONYMOUS_EDIT_WARNING_PROCEED )"
 				@click="proceed"
 			/>
 			<EventEmittingButton
 				class="wb-db-warning-anonymous-edit__login"
 				type="neutral"
 				size="M"
-				:message="$messages.get( $messages.KEYS.ANONYMOUS_EDIT_WARNING_LOGIN )"
+				:message="$messages.getText( $messages.KEYS.ANONYMOUS_EDIT_WARNING_LOGIN )"
 				:href="loginUrl"
 				:prevent-default="false"
 			/>

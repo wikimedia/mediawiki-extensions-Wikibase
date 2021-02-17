@@ -3,13 +3,13 @@
 		<h2
 			class="wb-db-error-unknown__heading"
 		>
-			{{ $messages.get( $messages.KEYS.UNKNOWN_ERROR_HEADING ) }}
+			{{ $messages.getText( $messages.KEYS.UNKNOWN_ERROR_HEADING ) }}
 		</h2>
 		<IconMessageBox
 			class="wb-db-error-unknown__message"
 			type="error"
 		>
-			{{ $messages.get( $messages.KEYS.UNKNOWN_ERROR_MESSAGE ) }}
+			{{ $messages.getText( $messages.KEYS.UNKNOWN_ERROR_MESSAGE ) }}
 		</IconMessageBox>
 		<ReportIssue
 			class="wb-db-error-unknown__report"
@@ -18,7 +18,7 @@
 			class="wb-db-error-unknown__relaunch"
 			type="primaryProgressive"
 			size="M"
-			:message="$messages.get( $messages.KEYS.ERROR_RELOAD_BRIDGE )"
+			:message="$messages.getText( $messages.KEYS.ERROR_RELOAD_BRIDGE )"
 			@click="relaunch"
 		/>
 	</div>

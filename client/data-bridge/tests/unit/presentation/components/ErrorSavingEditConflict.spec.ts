@@ -6,7 +6,7 @@ import { shallowMount } from '@vue/test-utils';
 describe( 'ErrorSavingEditConflict', () => {
 	const $messages = {
 		KEYS: MessageKeys,
-		get: jest.fn( ( key: string ) => `⧼${key}⧽` ),
+		getText: jest.fn( ( key: string ) => `⧼${key}⧽` ),
 	};
 
 	it( 'matches the snapshot', () => {

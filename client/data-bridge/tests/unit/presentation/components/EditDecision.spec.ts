@@ -36,15 +36,15 @@ describe( 'EditDecision', () => {
 
 	it( 'shows the Edit Decision message as the header', () => {
 		const editDecisionHeading = 'edit decision heading';
-		const get = jest.fn(
+		const getText = jest.fn(
 			( key: string ) => {
 				if ( key === MessageKeys.EDIT_DECISION_HEADING ) {
 					return editDecisionHeading;
 				}
-
 				return '';
 			},
 		);
+		const get = jest.fn( () => '' );
 
 		const wrapper = shallowMount( EditDecision, {
 			store,
@@ -53,12 +53,13 @@ describe( 'EditDecision', () => {
 				$messages: {
 					KEYS: MessageKeys,
 					get,
+					getText,
 				},
 			},
 		} );
 
 		expect( wrapper.text() ).toBe( editDecisionHeading );
-		expect( get ).toHaveBeenCalledWith( MessageKeys.EDIT_DECISION_HEADING );
+		expect( getText ).toHaveBeenCalledWith( MessageKeys.EDIT_DECISION_HEADING );
 	} );
 
 	it( 'mounts RadioGroup and two RadioInputs', () => {

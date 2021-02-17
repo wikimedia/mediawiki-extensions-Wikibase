@@ -6,7 +6,7 @@
 			:inline="true"
 		>
 			<p class="wb-db-ambiguous-statement__head">
-				{{ $messages.get(
+				{{ $messages.getText(
 					$messages.KEYS.AMBIGUOUS_STATEMENT_ERROR_HEAD,
 				) }}
 			</p>

@@ -64,6 +64,7 @@ describe( 'ErrorPermission', () => {
 				$messages: {
 					KEYS: MessageKeys,
 					get: messageGet,
+					getText: messageGet,
 				},
 			},
 			store,
@@ -116,6 +117,7 @@ describe( 'ErrorPermission', () => {
 				$messages: {
 					KEYS: MessageKeys,
 					get: messageGet,
+					getText: messageGet,
 				},
 				$repoRouter: {
 					getPageUrl( title: string, _params?: Record<string, unknown> ) {
@@ -155,6 +157,7 @@ describe( 'ErrorPermission', () => {
 				$messages: {
 					KEYS: MessageKeys,
 					get: messageGet,
+					getText: messageGet,
 				},
 				$repoRouter: unusedRouter( 'repo' ),
 				$clientRouter: unusedRouter( 'client' ),
@@ -209,6 +212,7 @@ describe( 'ErrorPermission', () => {
 				$messages: {
 					KEYS: MessageKeys,
 					get: messageGet,
+					getText: messageGet,
 				},
 				$repoRouter,
 				$clientRouter: unusedRouter( 'client' ),
@@ -259,6 +263,7 @@ describe( 'ErrorPermission', () => {
 				$messages: {
 					KEYS: MessageKeys,
 					get: messageGet,
+					getText: messageGet,
 				},
 				$repoRouter,
 				$clientRouter: unusedRouter( 'client' ),
@@ -317,6 +322,7 @@ describe( 'ErrorPermission', () => {
 				$messages: {
 					KEYS: MessageKeys,
 					get: messageGet,
+					getText: messageGet,
 				},
 				$repoRouter: unusedRouter( 'repo' ),
 				$clientRouter,
@@ -380,6 +386,7 @@ describe( 'ErrorPermission', () => {
 				$messages: {
 					KEYS: MessageKeys,
 					get: messageGet,
+					getText: messageGet,
 				},
 				$repoRouter,
 				$clientRouter: unusedRouter( 'client' ),
@@ -447,6 +454,7 @@ describe( 'ErrorPermission', () => {
 				$messages: {
 					KEYS: MessageKeys,
 					get: messageGet,
+					getText: messageGet,
 				},
 				$repoRouter: wiki === 'repo' ? $router : unusedRouter( 'repo' ),
 				$clientRouter: wiki === 'client' ? $router : unusedRouter( 'client' ),
@@ -503,6 +511,7 @@ describe( 'ErrorPermission', () => {
 				$messages: {
 					KEYS: MessageKeys,
 					get: messageGet,
+					getText: messageGet,
 				},
 				$repoRouter,
 			},
@@ -546,6 +555,7 @@ describe( 'ErrorPermission', () => {
 				$messages: {
 					KEYS: MessageKeys,
 					get: messageGet,
+					getText: messageGet,
 				},
 			},
 			store,

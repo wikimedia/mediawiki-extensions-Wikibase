@@ -24,6 +24,7 @@ describe( 'ReportIssue', () => {
 		const $messages = {
 			KEYS: MessageKeys,
 			get: jest.fn().mockReturnValue( 'Some <abbr>HTML</abbr>.' ),
+			getText: jest.fn().mockReturnValue( 'Some text' ),
 		};
 		const $bridgeConfig = {
 			issueReportingLink: 'https://bugs.example/new',
@@ -55,6 +56,7 @@ describe( 'ReportIssue', () => {
 		const $messages = {
 			KEYS: MessageKeys,
 			get: jest.fn(),
+			getText: jest.fn(),
 		};
 		const $bridgeConfig = {
 			issueReportingLink: 'https://bugs.example/new?body=<body>&tag=data-bridge',

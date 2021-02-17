@@ -8,7 +8,7 @@ exports[`WarningAnonymousEdit matches the snapshot 1`] = `
     class="wb-db-warning-anonymous-edit__heading"
   >
     
-		Some &lt;abbr&gt;HTML&lt;/abbr&gt;.
+		Some 'text
 	
   </h2>
    
@@ -32,7 +32,7 @@ exports[`WarningAnonymousEdit matches the snapshot 1`] = `
   >
     <eventemittingbutton-stub
       class="wb-db-warning-anonymous-edit__proceed"
-      message="Some <abbr>HTML</abbr>."
+      message="Some 'text"
       preventdefault="true"
       size="M"
       type="primaryProgressive"
@@ -41,7 +41,7 @@ exports[`WarningAnonymousEdit matches the snapshot 1`] = `
     <eventemittingbutton-stub
       class="wb-db-warning-anonymous-edit__login"
       href="https://data-bridge.test/Login"
-      message="Some <abbr>HTML</abbr>."
+      message="Some 'text"
       size="M"
       type="neutral"
     />

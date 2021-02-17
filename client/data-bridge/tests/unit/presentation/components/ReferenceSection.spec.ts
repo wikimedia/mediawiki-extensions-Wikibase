@@ -27,7 +27,7 @@ describe( 'ReferenceSection', () => {
 
 	it( 'shows the Reference message as the header', () => {
 		const referenceHeading = 'here be credibility';
-		const get = jest.fn(
+		const getText = jest.fn(
 			( key: string ) => {
 				if ( key === MessageKeys.REFERENCES_HEADING ) {
 					return referenceHeading;
@@ -44,13 +44,13 @@ describe( 'ReferenceSection', () => {
 			mocks: {
 				$messages: {
 					KEYS: MessageKeys,
-					get,
+					getText,
 				},
 			},
 		} );
 
 		expect( wrapper.text() ).toBe( referenceHeading );
-		expect( get ).toHaveBeenCalledWith( MessageKeys.REFERENCES_HEADING );
+		expect( getText ).toHaveBeenCalledWith( MessageKeys.REFERENCES_HEADING );
 	} );
 
 	it( 'shows each renderedTargetReferences HTML if there are any', () => {

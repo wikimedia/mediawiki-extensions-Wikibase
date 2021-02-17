@@ -34,7 +34,7 @@ describe( 'ErrorPermissionInfo', () => {
 			mocks: {
 				$messages: {
 					KEYS: MessageKeys,
-					get: messageGet,
+					getText: messageGet,
 				},
 			},
 		} );

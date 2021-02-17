@@ -1,16 +1,16 @@
 <template>
 	<div class="wb-db-bailout-actions">
 		<h2 class="wb-db-bailout-actions__heading">
-			{{ $messages.get( $messages.KEYS.BAILOUT_HEADING ) }}
+			{{ $messages.getText( $messages.KEYS.BAILOUT_HEADING ) }}
 		</h2>
 		<ul>
 			<li class="wb-db-bailout-actions__suggestion">
-				{{ $messages.get( $messages.KEYS.BAILOUT_SUGGESTION_GO_TO_REPO ) }}<br>
+				{{ $messages.getText( $messages.KEYS.BAILOUT_SUGGESTION_GO_TO_REPO ) }}<br>
 				<EventEmittingButton
 					class="wb-db-bailout-actions__button"
 					type="primaryProgressive"
 					size="M"
-					:message="$messages.get( $messages.KEYS.BAILOUT_SUGGESTION_GO_TO_REPO_BUTTON )"
+					:message="$messages.getText( $messages.KEYS.BAILOUT_SUGGESTION_GO_TO_REPO_BUTTON )"
 					:href="originalHref"
 					:new-tab="true"
 					:prevent-default="false"
