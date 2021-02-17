@@ -3,6 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Store;
 
+use MediaWiki\Cache\LinkBatchFactory;
 use PHPUnit\Framework\TestCase;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
@@ -35,7 +36,11 @@ class TitleLookupBasedEntityExistenceCheckerTest extends TestCase {
 			->with( $entityId )
 			->willReturn( $isNull ? null : $mockTitle );
 
-		$result = ( new TitleLookupBasedEntityExistenceChecker( $titleLookup ) )
+		$linkBatchFactory = $this->createMock( LinkBatchFactory::class );
+		$linkBatchFactory->expects( $this->never() )
+			->method( 'newLinkBatch' );
+
+		$result = ( new TitleLookupBasedEntityExistenceChecker( $titleLookup, $linkBatchFactory ) )
 			->exists( $entityId );
 		$this->assertSame(
 			$expected,
@@ -61,6 +66,53 @@ class TitleLookupBasedEntityExistenceCheckerTest extends TestCase {
 				'expected' => false
 			]
 		];
+	}
+
+	public function testExistsBatch() {
+		$ids = [
+			new ItemId( 'Q123' ),
+			new ItemId( 'Q456' ),
+			new ItemId( 'Q789' ),
+		];
+
+		$title1 = $this->createMock( Title::class );
+		$title1->expects( $this->once() )
+			->method( 'isKnown' )
+			->willReturn( true );
+		$title2 = $this->createMock( Title::class );
+		$title2->expects( $this->once() )
+			->method( 'isKnown' )
+			->willReturn( false );
+		$title3 = null;
+
+		$titleLookup = $this->createMock( EntityTitleLookup::class );
+		$titleLookup->expects( $this->once() )
+			->method( 'getTitlesForIds' )
+			->with( $ids )
+			->willReturn( [
+				'Q123' => $title1,
+				'Q456' => $title2,
+				'Q789' => $title3,
+			] );
+
+		$linkBatchFactory = $this->createMock( LinkBatchFactory::class );
+		$linkBatchFactory->expects( $this->once() )
+			->method( 'newLinkBatch' )
+			->with( [
+				'Q123' => $title1,
+				'Q456' => $title2,
+				// no $title3
+			] );
+
+		$result = ( new TitleLookupBasedEntityExistenceChecker( $titleLookup, $linkBatchFactory ) )
+			->existsBatch( $ids );
+
+		$expected = [
+			'Q123' => true,
+			'Q456' => false,
+			'Q789' => false,
+		];
+		$this->assertSame( $expected, $result );
 	}
 
 }

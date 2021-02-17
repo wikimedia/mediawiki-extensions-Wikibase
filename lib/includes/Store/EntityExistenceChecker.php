@@ -20,4 +20,16 @@ interface EntityExistenceChecker {
 	 */
 	public function exists( EntityId $id ): bool;
 
+	/**
+	 * Checks if a batch of entities exists at once.
+	 *
+	 * This is equivalent to iterating over $ids and calling {@link exists()} for each,
+	 * but may be more efficient, depending on implementation.
+	 *
+	 * @param EntityId[] $ids
+	 * @return bool[] Mapping from {@link EntityId::getSerialization() entity ID serialization}
+	 * to {@link exists()} result.
+	 */
+	public function existsBatch( array $ids ): array;
+
 }

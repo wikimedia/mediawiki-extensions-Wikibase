@@ -25,4 +25,14 @@ class ApiEntityExistenceChecker implements EntityExistenceChecker {
 			$this->apiEntityLookup->getResultPartForId( $id )
 		);
 	}
+
+	public function existsBatch( array $ids ): array {
+		$this->apiEntityLookup->fetchEntities( $ids );
+
+		$ret = [];
+		foreach ( $ids as $id ) {
+			$ret[$id->getSerialization()] = $this->exists( $id );
+		}
+		return $ret;
+	}
 }
