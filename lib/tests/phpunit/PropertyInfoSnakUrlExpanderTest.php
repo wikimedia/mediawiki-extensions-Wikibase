@@ -47,16 +47,11 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 				PropertyInfoLookup::KEY_DATA_TYPE => 'string',
 				PropertyInfoLookup::KEY_FORMATTER_URL => 'http://acme.info/foo#$1',
 			],
-			$p523->getSerialization() => [
-				PropertyInfoLookup::KEY_DATA_TYPE => 'string',
-				PropertyInfoLookup::KEY_FORMATTER_URL => '$1',
-			],
 		] );
 
 		$infoProvider = new FieldPropertyInfoProvider( $infoLookup, PropertyInfoLookup::KEY_FORMATTER_URL );
 
 		$value = new StringValue( 'X&Y' );
-		$url = new StringValue( 'http://acme.info/&?&foo/' );
 
 		return [
 			'unknown property' => [
@@ -79,6 +74,11 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 				new PropertyValueSnak( $p3, new StringValue( 'X/Y' ) ),
 				'http://acme.info/foo/X/Y'
 			],
+			'value with spaces' => [
+				$infoProvider,
+				new PropertyValueSnak( $p3, new StringValue( 'X Y Z' ) ),
+				'http://acme.info/foo/X%20Y%20Z'
+			],
 			'pattern with url parameter' => [
 				$infoProvider,
 				new PropertyValueSnak( $p4, $value ),
@@ -88,11 +88,6 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 				$infoProvider,
 				new PropertyValueSnak( $p5, $value ),
 				'http://acme.info/foo#X%26Y'
-			],
-			'minimal url pattern' => [
-				$infoProvider,
-				new PropertyValueSnak( $p523, $url ),
-				'http://acme.info/%26%3F%26foo/'
 			],
 		];
 	}

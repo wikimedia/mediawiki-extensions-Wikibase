@@ -288,7 +288,7 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 				)
 			],
 			'external-id with formatter url' => [
-				'<span>[https://dataAccessSnakFormatterOutputFormatTest/P10/a+b+c a b c]</span>',
+				'<span>[https://dataAccessSnakFormatterOutputFormatTest/P10/a%20b%20c a b c]</span>',
 				new PropertyValueSnak(
 					new PropertyId( 'P10' ),
 					new StringValue( 'a b c' )
