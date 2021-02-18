@@ -70,7 +70,10 @@
 	QUnit.test( 'value does not change if upstream value changes', function( assert ) {
 		var upstreamValue = 'en';
 		var languageSelector = new LanguageSelector(
-			newContentLanguagesFromLanguageMap( {} ),
+			newContentLanguagesFromLanguageMap( {
+				de: 'de label',
+				en: 'en label'
+			} ),
 			messageProvider,
 			function() {
 				return upstreamValue;
@@ -154,10 +157,11 @@
 		assert.strictEqual( languageSelector.$selector.val(), 'fr' );
 	} );
 
-	QUnit.test( 'returns correct value after initialization for value not in ContentLanguages', function( assert ) {
+	QUnit.test( 'returns correct value after initialization for value without label in ContentLanguages', function( assert ) {
 		var languageSelector = new LanguageSelector(
 			newContentLanguagesFromLanguageMap( {
-				en: 'en label'
+				en: 'en label',
+				ar: null
 			} ),
 			messageProvider,
 			function() {
@@ -180,11 +184,11 @@
 		assert.strictEqual( languageSelector.$selector.val(), 'ar' );
 	} );
 
-	QUnit.test( 'returns correct value after changing it to a value not in ContentLanguages', function( assert ) {
+	QUnit.test( 'returns correct value after changing it to a value without label in ContentLanguages', function( assert ) {
 		var languageSelector = new LanguageSelector(
 			newContentLanguagesFromLanguageMap( {
 				en: 'en label',
-				ar: 'ar label'
+				fr: null
 			} ),
 			messageProvider,
 			function() {

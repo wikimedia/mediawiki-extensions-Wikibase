@@ -88,10 +88,12 @@
 			if ( languages !== null ) {
 				this._labels = {};
 				$.each( languages, function( i, code ) {
-					self._labels[code] = self._messageProvider.getMessage(
+					var languageName = self._contentLanguages.getName( code );
+
+					self._labels[code] = languageName ? self._messageProvider.getMessage(
 						'languagetemplate',
-						[ self._contentLanguages.getName( code ), code ]
-					);
+						[ languageName, code ]
+					) : code;
 				} );
 			}
 		},
