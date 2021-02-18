@@ -36,6 +36,7 @@ describe( 'AppHeader', () => {
 				$messages: {
 					KEYS: MessageKeys,
 					get: messageGet,
+					getText: messageGet,
 				},
 			},
 			stubs: { ProcessDialogHeader },
@@ -72,6 +73,7 @@ describe( 'AppHeader', () => {
 					$messages: {
 						KEYS: MessageKeys,
 						get: messageGet,
+						getText: messageGet,
 					},
 				},
 				stubs: { ProcessDialogHeader, EventEmittingButton },
@@ -102,6 +104,7 @@ describe( 'AppHeader', () => {
 					$messages: {
 						KEYS: MessageKeys,
 						get: messageGet,
+						getText: messageGet,
 					},
 				},
 				stubs: { ProcessDialogHeader, EventEmittingButton },
@@ -171,6 +174,7 @@ describe( 'AppHeader', () => {
 					$messages: {
 						KEYS: MessageKeys,
 						get: messageGet,
+						getText: messageGet,
 					},
 				},
 				stubs: { ProcessDialogHeader, EventEmittingButton },
@@ -246,6 +250,7 @@ describe( 'AppHeader', () => {
 					$messages: {
 						KEYS: MessageKeys,
 						get: messageGet,
+						getText: messageGet,
 					},
 				},
 				stubs: { ProcessDialogHeader, EventEmittingButton },

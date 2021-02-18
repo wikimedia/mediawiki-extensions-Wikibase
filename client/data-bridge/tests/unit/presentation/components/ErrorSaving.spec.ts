@@ -14,6 +14,7 @@ describe( 'ErrorSaving', () => {
 	const $messages = {
 		KEYS: MessageKeys,
 		get: jest.fn( ( key: string ) => `⧼${key}⧽` ),
+		getText: jest.fn( ( key: string ) => `⧼${key}⧽` ),
 	};
 	const mocks = { $messages };
 

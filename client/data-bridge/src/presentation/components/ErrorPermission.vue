@@ -3,7 +3,7 @@
 		<p
 			class="wb-db-error-permission__heading"
 		>
-			{{ $messages.get( $messages.KEYS.PERMISSIONS_HEADING ) }}
+			{{ $messages.getText( $messages.KEYS.PERMISSIONS_HEADING ) }}
 		</p>
 		<ErrorPermissionInfo
 			class="wb-db-error-permission__info"

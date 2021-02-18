@@ -26,6 +26,7 @@ config.mocks = {
 		$messages: {
 			KEYS: MessageKeys,
 			get: ( key: string ) => `⧼${key}⧽`,
+			getText: ( key: string ) => `⧼${key}⧽`,
 		},
 		$bridgeConfig: {
 			usePublish: false,

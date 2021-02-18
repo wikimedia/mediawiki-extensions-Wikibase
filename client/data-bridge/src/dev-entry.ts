@@ -66,6 +66,9 @@ services.set( 'messagesRepository', {
 	get( messageKey: MessageKeys ): string {
 		return messages[ messageKey ] || `⧼${messageKey}⧽`;
 	},
+	getText( messageKey: MessageKeys ): string {
+		return messages[ messageKey ] || `⧼${messageKey}⧽`;
+	},
 } );
 
 services.set( 'wikibaseRepoConfigRepository', {

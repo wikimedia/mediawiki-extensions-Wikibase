@@ -1,9 +1,9 @@
 <template>
 	<div class="wb-db-references">
 		<h2 class="wb-db-references__heading">
-			{{ $messages.get( $messages.KEYS.REFERENCES_HEADING ) }}
+			{{ $messages.getText( $messages.KEYS.REFERENCES_HEADING ) }}
 		</h2>
-		<span class="wb-db-references__note">{{ $messages.get( $messages.KEYS.REFERENCE_NOTE ) }}</span>
+		<span class="wb-db-references__note">{{ $messages.getText( $messages.KEYS.REFERENCE_NOTE ) }}</span>
 		<ul class="wb-db-references__list">
 			<li
 				class="wb-db-references__listItem"

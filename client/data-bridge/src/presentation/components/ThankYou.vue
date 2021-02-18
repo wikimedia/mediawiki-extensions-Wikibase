@@ -1,18 +1,18 @@
 <template>
 	<div class="wb-db-thankyou">
 		<h2 class="wb-db-thankyou__head">
-			{{ $messages.get( $messages.KEYS.THANK_YOU_HEAD ) }}
+			{{ $messages.getText( $messages.KEYS.THANK_YOU_HEAD ) }}
 		</h2>
 
 		<p class="wb-db-thankyou__body">
-			{{ $messages.get( $messages.KEYS.THANK_YOU_EDIT_REFERENCE_ON_REPO_BODY ) }}
+			{{ $messages.getText( $messages.KEYS.THANK_YOU_EDIT_REFERENCE_ON_REPO_BODY ) }}
 		</p>
 
 		<div class="wb-db-thankyou__button">
 			<EventEmittingButton
 				type="primaryProgressive"
 				size="M"
-				:message="$messages.get( $messages.KEYS.THANK_YOU_EDIT_REFERENCE_ON_REPO_BUTTON )"
+				:message="$messages.getText( $messages.KEYS.THANK_YOU_EDIT_REFERENCE_ON_REPO_BUTTON )"
 				:href="repoLink"
 				:new-tab="true"
 				:prevent-default="false"

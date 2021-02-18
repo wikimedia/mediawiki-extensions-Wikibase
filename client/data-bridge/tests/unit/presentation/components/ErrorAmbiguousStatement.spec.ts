@@ -30,6 +30,7 @@ describe( 'ErrorAmbiguousStatement', () => {
 				$messages: {
 					KEYS: MessageKeys,
 					get: messageGet,
+					getText: messageGet,
 				},
 			},
 			store,
@@ -57,6 +58,7 @@ describe( 'ErrorAmbiguousStatement', () => {
 				$messages: {
 					KEYS: MessageKeys,
 					get: messageGet,
+					getText: messageGet,
 				},
 			},
 			store,

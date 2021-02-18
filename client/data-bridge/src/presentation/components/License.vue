@@ -2,7 +2,7 @@
 	<div class="wb-db-license">
 		<span class="wb-db-license__button">
 			<EventEmittingButton
-				:message="$messages.get( $messages.KEYS.CANCEL )"
+				:message="$messages.getText( $messages.KEYS.CANCEL )"
 				size="M"
 				type="close"
 				@click="handleCloseButtonClick"
@@ -10,7 +10,7 @@
 		</span>
 		<div class="wb-db-license__text">
 			<h2 class="wb-db-license__heading">
-				{{ $messages.get( $messages.KEYS.LICENSE_HEADING ) }}
+				{{ $messages.getText( $messages.KEYS.LICENSE_HEADING ) }}
 			</h2>
 			<div
 				class="wb-db-license__body"

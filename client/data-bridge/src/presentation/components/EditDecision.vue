@@ -1,7 +1,7 @@
 <template>
 	<div class="wb-db-edit-decision">
 		<h2 class="wb-db-edit-decision__heading">
-			{{ $messages.get( $messages.KEYS.EDIT_DECISION_HEADING ) }}
+			{{ $messages.getText( $messages.KEYS.EDIT_DECISION_HEADING ) }}
 		</h2>
 		<RadioGroup>
 			<RadioInput name="editDecision" html-value="replace" v-model="editDecision">
@@ -9,7 +9,7 @@
 					<span v-html="$messages.get( $messages.KEYS.EDIT_DECISION_REPLACE_LABEL )" />
 				</template>
 				<template slot="description">
-					{{ $messages.get( $messages.KEYS.EDIT_DECISION_REPLACE_DESCRIPTION ) }}
+					{{ $messages.getText( $messages.KEYS.EDIT_DECISION_REPLACE_DESCRIPTION ) }}
 				</template>
 			</RadioInput>
 			<RadioInput name="editDecision" html-value="update" v-model="editDecision">
@@ -17,7 +17,7 @@
 					<span v-html="$messages.get( $messages.KEYS.EDIT_DECISION_UPDATE_LABEL )" />
 				</template>
 				<template slot="description">
-					{{ $messages.get( $messages.KEYS.EDIT_DECISION_UPDATE_DESCRIPTION ) }}
+					{{ $messages.getText( $messages.KEYS.EDIT_DECISION_UPDATE_DESCRIPTION ) }}
 				</template>
 			</RadioInput>
 		</RadioGroup>

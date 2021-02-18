@@ -25,7 +25,7 @@ describe( 'ErrorSavingAssertUser', () => {
 	it( 'matches the snapshot', () => {
 		const $messages = {
 			KEYS: MessageKeys,
-			get: jest.fn().mockReturnValue( 'Test <abbr>HTML</abbr>.' ),
+			getText: jest.fn().mockReturnValue( "Some 'text" ),
 		};
 
 		const wrapper = shallowMount( ErrorSavingAssertUser, {
@@ -41,7 +41,7 @@ describe( 'ErrorSavingAssertUser', () => {
 	it( 'dispatches stopAssertingUserWhenSaving and retrySave when publish without logging in is clicked', async () => {
 		const $messages = {
 			KEYS: MessageKeys,
-			get: jest.fn().mockReturnValue( 'Test <abbr>HTML</abbr>.' ),
+			getText: jest.fn().mockReturnValue( "Some 'text" ),
 		};
 
 		const wrapper = shallowMount( ErrorSavingAssertUser, {
@@ -67,7 +67,7 @@ describe( 'ErrorSavingAssertUser', () => {
 	] )( 'goes back if the %s button is clicked', async ( buttonName: string ) => {
 		const $messages = {
 			KEYS: MessageKeys,
-			get: jest.fn().mockReturnValue( 'Test <abbr>HTML</abbr>.' ),
+			getText: jest.fn().mockReturnValue( "Some 'text" ),
 		};
 
 		const wrapper = shallowMount( ErrorSavingAssertUser, {
@@ -105,7 +105,7 @@ describe( 'ErrorSavingAssertUser', () => {
 				$bridgeConfig: { usePublish: false },
 				$messages: {
 					KEYS: MessageKeys,
-					get: messageGet,
+					getText: messageGet,
 				},
 			},
 			store,
@@ -137,7 +137,7 @@ describe( 'ErrorSavingAssertUser', () => {
 				$bridgeConfig: { usePublish: true },
 				$messages: {
 					KEYS: MessageKeys,
-					get: messageGet,
+					getText: messageGet,
 				},
 			},
 			store,

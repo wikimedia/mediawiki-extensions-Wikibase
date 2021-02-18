@@ -3,19 +3,19 @@
 		<h2
 			class="wb-db-error-saving-edit-conflict__heading"
 		>
-			{{ $messages.get( $messages.KEYS.EDIT_CONFLICT_ERROR_HEADING ) }}
+			{{ $messages.getText( $messages.KEYS.EDIT_CONFLICT_ERROR_HEADING ) }}
 		</h2>
 		<IconMessageBox
 			class="wb-db-error-saving-edit-conflict__message"
 			type="error"
 		>
-			{{ $messages.get( $messages.KEYS.EDIT_CONFLICT_ERROR_MESSAGE ) }}
+			{{ $messages.getText( $messages.KEYS.EDIT_CONFLICT_ERROR_MESSAGE ) }}
 		</IconMessageBox>
 		<EventEmittingButton
 			class="wb-db-error-saving-edit-conflict__reload"
 			type="primaryProgressive"
 			size="M"
-			:message="$messages.get( $messages.KEYS.ERROR_RELOAD_PAGE )"
+			:message="$messages.getText( $messages.KEYS.ERROR_RELOAD_PAGE )"
 			@click="reload"
 		/>
 	</div>

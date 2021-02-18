@@ -5,7 +5,7 @@
 		</template>
 		<template v-slot:primaryAction>
 			<EventEmittingButton
-				:message="$messages.get( publishOrSave )"
+				:message="$messages.getText( publishOrSave )"
 				type="primaryProgressive"
 				size="L"
 				:squary="true"
@@ -19,7 +19,7 @@
 				:class="{ 'app-header__close-button--desktop-only': canGoBack }"
 			>
 				<EventEmittingButton
-					:message="$messages.get( $messages.KEYS.CANCEL )"
+					:message="$messages.getText( $messages.KEYS.CANCEL )"
 					type="close"
 					size="L"
 					:squary="true"
@@ -32,7 +32,7 @@
 				class="app-header__back-button"
 			>
 				<EventEmittingButton
-					:message="$messages.get( $messages.KEYS.ERROR_GO_BACK )"
+					:message="$messages.getText( $messages.KEYS.ERROR_GO_BACK )"
 					type="back"
 					size="L"
 					:squary="true"

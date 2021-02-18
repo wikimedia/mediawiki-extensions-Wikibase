@@ -3,13 +3,13 @@
 		<h2
 			class="wb-db-error-saving__heading"
 		>
-			{{ $messages.get( $messages.KEYS.SAVING_ERROR_HEADING ) }}
+			{{ $messages.getText( $messages.KEYS.SAVING_ERROR_HEADING ) }}
 		</h2>
 		<IconMessageBox
 			class="wb-db-error-saving__message"
 			type="error"
 		>
-			{{ $messages.get( $messages.KEYS.SAVING_ERROR_MESSAGE ) }}
+			{{ $messages.getText( $messages.KEYS.SAVING_ERROR_MESSAGE ) }}
 		</IconMessageBox>
 		<ReportIssue
 			class="wb-db-error-saving__report"
@@ -19,13 +19,13 @@
 				class="wb-db-error-saving__back"
 				type="neutral"
 				size="M"
-				:message="$messages.get( $messages.KEYS.ERROR_GO_BACK )"
+				:message="$messages.getText( $messages.KEYS.ERROR_GO_BACK )"
 				@click="goBack"
 			/><EventEmittingButton
 				class="wb-db-error-saving__retry"
 				type="primaryProgressive"
 				size="M"
-				:message="$messages.get( $messages.KEYS.ERROR_RETRY_SAVE )"
+				:message="$messages.getText( $messages.KEYS.ERROR_RETRY_SAVE )"
 				@click="retrySave"
 			/>
 		</div>
