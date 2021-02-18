@@ -31,12 +31,22 @@
 		}
 	);
 
+	/**
+	 * @param {Object} languageMap - maps language codes to language names
+	 * @return {util.ContentLanguages}
+	 */
+	function newContentLanguagesFromLanguageMap( languageMap ) {
+		return {
+			getAll: function() { return Object.keys( languageMap ); },
+			getName: function( code ) { return languageMap[code] || null; }
+		};
+	}
+
 	QUnit.test( 'initial draw works when the upstream value is null', function( assert ) {
 		var languageSelector = new LanguageSelector(
-			{
-				getAll: function() { return [ 'en' ]; },
-				getName: function( code ) { return code === 'en' ? 'en label' : null; }
-			},
+			newContentLanguagesFromLanguageMap( {
+				en: 'en label'
+			} ),
 			messageProvider,
 			function() {
 				return null;
@@ -60,9 +70,7 @@
 	QUnit.test( 'value does not change if upstream value changes', function( assert ) {
 		var upstreamValue = 'en';
 		var languageSelector = new LanguageSelector(
-			{
-				getAll: function() { return null; }
-			},
+			newContentLanguagesFromLanguageMap( {} ),
 			messageProvider,
 			function() {
 				return upstreamValue;
@@ -93,10 +101,9 @@
 
 	QUnit.test( 'returns correct value after initialization', function( assert ) {
 		var languageSelector = new LanguageSelector(
-			{
-				getAll: function() { return [ 'en' ]; },
-				getName: function( code ) { return code === 'en' ? 'en label' : null; }
-			},
+			newContentLanguagesFromLanguageMap( {
+				en: 'en label'
+			} ),
 			messageProvider,
 			function() {
 				return 'en';
@@ -120,10 +127,10 @@
 
 	QUnit.test( 'returns correct value after changing it', function( assert ) {
 		var languageSelector = new LanguageSelector(
-			{
-				getAll: function() { return [ 'en', 'fr' ]; },
-				getName: function( code ) { return code === 'en' || code === 'fr' ? code + ' label' : null; }
-			},
+			newContentLanguagesFromLanguageMap( {
+				en: 'en label',
+				fr: 'fr label'
+			} ),
 			messageProvider,
 			function() {
 				return 'en';
@@ -149,10 +156,9 @@
 
 	QUnit.test( 'returns correct value after initialization for value not in ContentLanguages', function( assert ) {
 		var languageSelector = new LanguageSelector(
-			{
-				getAll: function() { return [ 'en' ]; },
-				getName: function( code ) { return code === 'en' ? 'label' : null; }
-			},
+			newContentLanguagesFromLanguageMap( {
+				en: 'en label'
+			} ),
 			messageProvider,
 			function() {
 				return 'ar';
@@ -176,10 +182,10 @@
 
 	QUnit.test( 'returns correct value after changing it to a value not in ContentLanguages', function( assert ) {
 		var languageSelector = new LanguageSelector(
-			{
-				getAll: function() { return [ 'en', 'ar' ]; },
-				getName: function( code ) { return code === 'en' || code === 'ar' ? code + ' label' : null; }
-			},
+			newContentLanguagesFromLanguageMap( {
+				en: 'en label',
+				ar: 'ar label'
+			} ),
 			messageProvider,
 			function() {
 				return 'en';
