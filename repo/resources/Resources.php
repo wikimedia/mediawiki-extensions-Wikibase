@@ -122,14 +122,13 @@ return call_user_func( function() {
 				'wikibase.EntityInitializer.js',
 
 				[
-				"name" => "config.json",
-				"callback" => function () {
-					return [
-						'entityTypes' => WikibaseRepo::getDefaultInstance()->getEntityTypesConfigValue()
-					];
-				}
-			],
-
+					"name" => "config.json",
+					"callback" => function () {
+						return [
+							'entityTypes' => WikibaseRepo::getDefaultInstance()->getEntityTypesConfigValue()
+						];
+					}
+				],
 			],
 			'dependencies' => [
 				'wikibase',
