@@ -72,6 +72,7 @@
 	"wikibase-pageinfo-entity-id-none": "ХӀумма цаоьшу",
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}} хӀокху агӀонгахь лелош йолу объекташ",
 	"wikibase-pageinfo-entity-usage-S": "Кхин тӀе хьажорг",
+	"wikibase-pageinfo-entity-usage-L": "Цхьайолу билгалонаш",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Билгало: $1",
 	"wikibase-pageinfo-entity-usage-T": "Корта",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Хаам: $1",

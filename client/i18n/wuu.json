@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Poiuyt",
+			"Subarupan",
 			"飞舞回堂前"
 		]
 	},
@@ -10,6 +11,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}项",
 	"wikibase-editlinks": "编辑链接",
 	"wikibase-editlinkstitle": "编辑跨语言链接",
+	"wikibase-linkitem-addlinks": "添加链接",
 	"wikibase-rc-hide-wikidata": "$1{{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "囥脱",
 	"wikibase-rc-hide-wikidata-show": "显示",
