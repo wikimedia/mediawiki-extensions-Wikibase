@@ -2037,7 +2037,7 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.DataTypeDefinitions' );
 	}
 
-	public function getWikibaseContentLanguages() {
+	public function getWikibaseContentLanguages(): WikibaseContentLanguages {
 		if ( $this->wikibaseContentLanguages === null ) {
 			$this->wikibaseContentLanguages = WikibaseContentLanguages::getDefaultInstance();
 		}
