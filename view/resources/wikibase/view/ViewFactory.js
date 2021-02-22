@@ -34,7 +34,6 @@
 	require( '../../jquery/wikibase/jquery.wikibase.sitelinkgroupview.js' );
 	require( '../../jquery/wikibase/jquery.wikibase.sitelinklistview.js' );
 	require( '../../jquery/wikibase/jquery.wikibase.sitelinkview.js' );
-	require( '../../jquery/wikibase/jquery.wikibase.statementgrouplabelscroll.js' );
 	require( '../../jquery/wikibase/jquery.wikibase.statementgrouplistview.js' );
 	require( '../../jquery/wikibase/jquery.wikibase.statementgroupview.js' );
 	require( '../../jquery/wikibase/jquery.wikibase.statementlistview.js' );

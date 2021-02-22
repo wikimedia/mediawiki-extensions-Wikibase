@@ -209,7 +209,6 @@ return call_user_func( function() {
 				'resources/jquery/wikibase/jquery.wikibase.sitelinklistview.js',
 				'resources/jquery/wikibase/jquery.wikibase.sitelinkview.js',
 				'resources/jquery/wikibase/jquery.wikibase.snaklistview.js',
-				'resources/jquery/wikibase/jquery.wikibase.statementgrouplabelscroll.js',
 				'resources/jquery/wikibase/jquery.wikibase.statementgrouplistview.js',
 				'resources/jquery/wikibase/jquery.wikibase.statementgroupview.js',
 				'resources/jquery/wikibase/jquery.wikibase.statementlistview.js',

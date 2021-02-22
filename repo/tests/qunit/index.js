@@ -25,7 +25,6 @@
 	require( '../../../view/tests/qunit/jquery/wikibase/toolbar/jquery.wikibase.toolbaritem.tests.js' );
 	require( '../../../view/tests/qunit/jquery/wikibase/jquery.wikibase.aliasesview.tests.js' );
 	require( '../../../view/tests/qunit/jquery/wikibase/jquery.wikibase.badgeselector.tests.js' );
-	require( '../../../view/tests/qunit/jquery/wikibase/jquery.wikibase.statementgrouplabelscroll.tests.js' );
 	require( '../../../view/tests/qunit/jquery/wikibase/jquery.wikibase.statementgrouplistview.tests.js' );
 	require( '../../../view/tests/qunit/jquery/wikibase/jquery.wikibase.statementgroupview.tests.js' );
 	require( '../../../view/tests/qunit/jquery/wikibase/jquery.wikibase.statementlistview.tests.js' );

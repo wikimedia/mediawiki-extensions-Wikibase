@@ -10,7 +10,6 @@
 	 *
 	 * @see datamodel.StatementGroup
 	 * @see datamodel.StatementGroupSet
-	 * @uses jQuery.wikibase.statementgrouplabelscroll
 	 * @uses jQuery.wikibase.listview
 	 * @uses jQuery.wikibase.listview.ListItemAdapter
 	 * @extends jQuery.ui.TemplatedWidget
@@ -72,8 +71,6 @@
 					listview.removeItem( $statementgroupview );
 				}
 			} );
-
-			this.element.statementgrouplabelscroll();
 
 			this._statementGroupAdder = this.options.getAdder( this.enterNewItem.bind( this ),
 				this.element,
