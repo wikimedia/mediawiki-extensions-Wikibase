@@ -39,6 +39,9 @@
 	"ExtensionFunctions": [
 		"\\Wikibase\\Client\\Hooks\\ExtensionLoadHandler::onExtensionLoad"
 	],
+	"ServiceWiringFiles": [
+		"client/WikibaseClient.ServiceWiring.php"
+	],
 	"QUnitTestModule": {
 		"remoteExtPath": "Wikibase/lib/tests/qunit",
 		"localBasePath": "lib/tests/qunit",

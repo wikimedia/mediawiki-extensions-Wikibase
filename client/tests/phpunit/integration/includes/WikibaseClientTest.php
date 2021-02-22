@@ -34,7 +34,6 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
@@ -214,8 +213,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		$client = new WikibaseClient(
 			$settings,
-			new DataTypeDefinitions( [] ),
-			$entityTypeDefinitions,
 			$siteLookup,
 			new EntitySourceDefinitions( [], $entityTypeDefinitions )
 		);
@@ -249,8 +246,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetSiteGroup( $expected, SettingsArray $settings, SiteLookup $siteLookup ) {
 		$client = new WikibaseClient(
 			$settings,
-			new DataTypeDefinitions( [] ),
-			new EntityTypeDefinitions( [] ),
 			$siteLookup,
 			$this->getEntitySourceDefinitions()
 		);
@@ -351,8 +346,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		$wikibaseClient = new WikibaseClient(
 			$settings,
-			new DataTypeDefinitions( [] ),
-			$entityTypeDefinitions,
 			$this->getSiteLookup(),
 			new EntitySourceDefinitions(
 				[ new EntitySource(
@@ -443,8 +436,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		$wikibaseClient = new WikibaseClient(
 			$settings,
-			new DataTypeDefinitions( [] ),
-			$entityTypeDefinitions,
 			$this->getSiteLookup(),
 			new EntitySourceDefinitions(
 				[
@@ -493,8 +484,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		}
 		return new WikibaseClient(
 			new SettingsArray( $settings->getArrayCopy() ),
-			new DataTypeDefinitions( [] ),
-			new EntityTypeDefinitions( [] ),
 			$this->getSiteLookup(),
 			$this->getEntitySourceDefinitions()
 		);
