@@ -40,6 +40,7 @@ use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
+use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\Api\MetaDataBridgeConfig;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityHandler;
@@ -986,8 +987,20 @@ final class RepoHooks {
 
 		$modules = [
 			'wikibase.WikibaseContentLanguages' => $moduleTemplate + [
-				'scripts' => [
+				'packageFiles' => [
 					'resources/wikibase.WikibaseContentLanguages.js',
+
+					[
+						'name' => 'resources/contentLanguages.json',
+						'callback' => function () {
+							return [
+								WikibaseContentLanguages::CONTEXT_MONOLINGUAL_TEXT => WikibaseRepo::getDefaultInstance()
+									->getWikibaseContentLanguages()
+									->getContentLanguages( WikibaseContentLanguages::CONTEXT_MONOLINGUAL_TEXT )
+									->getLanguages(),
+							];
+						},
+					]
 				],
 				'dependencies' => [
 					'util.ContentLanguages',

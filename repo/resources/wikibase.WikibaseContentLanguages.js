@@ -7,6 +7,7 @@
 
 	var MODULE = wb;
 	var PARENT = util.ContentLanguages;
+	var contentLanguages = require( './contentLanguages.json' ).monolingualtext;
 
 	/**
 	 * @constructor
@@ -15,6 +16,7 @@
 		'WbContentLanguages',
 		PARENT,
 		function () {
+			this._languageCodes = contentLanguages;
 			this._languageMap = mw.config.get( 'wgULSLanguages' );
 		}
 	);
@@ -36,18 +38,6 @@
 		 * @inheritdoc
 		 */
 		getAll: function () {
-			// Cache language codes
-			if ( !this._languageCodes && this._languageMap ) {
-				this._languageCodes = Object.keys( this._languageMap );
-				this._languageCodes = this._languageCodes.filter( function ( code ) {
-					// Make sure this is a subset of the language codes returned by
-					// WikibaseRepo::getMonolingualTextLanguages
-					// We don't want to have language codes in the suggester that are not
-					// supported by the backend. The other way round is currently acceptable,
-					// but will be fixed in T124758.
-					return [ 'de-formal', 'es-formal', 'hu-formal', 'nl-informal' ].indexOf( code ) === -1;
-				} );
-			}
 			return this._languageCodes;
 		},
 
@@ -58,15 +48,15 @@
 			return this._languageMap ? this._languageMap[ code ] : null;
 		},
 
-		/**
-		 * @inheritdoc
-		 */
 		getAllPairs: function () {
-			return this._deepClone( this._languageMap );
-		},
+			var map = {},
+				self = this;
 
-		_deepClone: function ( original ) {
-			return JSON.parse( JSON.stringify( original ) );
+			this._languageCodes.forEach( function ( languageCode ) {
+				map[ languageCode ] = self.getName( languageCode );
+			} );
+
+			return map;
 		}
 	} );
 
