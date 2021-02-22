@@ -57,7 +57,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	protected function setUp(): void {
 		parent::setUp();
 
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = WikibaseClient::getSettings();
 		$this->oldAllowDataAccessInUserLanguage = $settings->getSetting( 'allowDataAccessInUserLanguage' );
 		$this->setAllowDataAccessInUserLanguage( false );
 
@@ -514,7 +514,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	}
 
 	public function testGetReferencedEntityId_limitExceeded() {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = WikibaseClient::getSettings();
 		$settings->setSetting( 'referencedEntityIdAccessLimit', 2 );
 
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
@@ -609,19 +609,13 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		return new Scribunto_LuaWikibaseLibrary( $engine );
 	}
 
-	/**
-	 * @param bool $value
-	 */
-	private function setAllowDataAccessInUserLanguage( $value ) {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+	private function setAllowDataAccessInUserLanguage( bool $value ) {
+		$settings = WikibaseClient::getSettings();
 		$settings->setSetting( 'allowDataAccessInUserLanguage', $value );
 	}
 
-	/**
-	 * @param bool $value
-	 */
-	private function setFineGrainedLuaTracking( $value ) {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+	private function setFineGrainedLuaTracking( bool $value ) {
+		$settings = WikibaseClient::getSettings();
 		$settings->setSetting( 'fineGrainedLuaTracking', $value );
 	}
 

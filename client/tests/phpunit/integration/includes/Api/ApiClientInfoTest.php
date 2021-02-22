@@ -52,7 +52,7 @@ class ApiClientInfoTest extends MediaWikiIntegrationTestCase {
 		$apiMain = new ApiMain( $context, true );
 		$apiQuery = new ApiQuery( $apiMain, 'wikibase' );
 
-		$apiModule = new ApiClientInfo( $this->getSettings(), $apiQuery, 'query' );
+		$apiModule = new ApiClientInfo( $apiQuery, 'query', $this->getSettings() );
 
 		return $apiModule;
 	}

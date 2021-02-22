@@ -33,12 +33,8 @@ class NoLangLinkHandler {
 		$handler->doHandle( $parser, $langs );
 	}
 
-	/**
-	 * @return self
-	 */
-	private static function factory() {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
+	private static function factory(): self {
+		$settings = WikibaseClient::getSettings();
 
 		$namespaceChecker = new NamespaceChecker(
 			$settings->getSetting( 'excludeNamespaces' ),

@@ -81,7 +81,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 
 		$setupHelper = new WikibaseDataAccessTestItemSetUpHelper( $store );
 		$setupHelper->setUp();
-		$settings = $wikibaseClient->getSettings();
+		$settings = WikibaseClient::getSettings();
 
 		$this->oldAllowDataAccessInUserLanguage = $settings->getSetting( 'allowDataAccessInUserLanguage' );
 		$this->setAllowDataAccessInUserLanguage( false );
@@ -114,7 +114,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 
 		$this->setAllowDataAccessInUserLanguage( $this->oldAllowDataAccessInUserLanguage );
 
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = WikibaseClient::getSettings();
 		$settings->setSetting( 'useKartographerMaplinkInWikitext', $this->oldUseKartographerMaplinkInWikitext );
 
 		WikibaseClient::getDefaultInstance( 'reset' );
@@ -124,7 +124,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 	 * @param bool $value
 	 */
 	private function setAllowDataAccessInUserLanguage( $value ) {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = WikibaseClient::getSettings();
 		$settings->setSetting( 'allowDataAccessInUserLanguage', $value );
 	}
 

@@ -65,7 +65,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 		// Use the actual setting, because our handler for the FormatAutocomment hook will check
 		// the wiki id against this setting.
-		$repoWikiId = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'repoSiteId' );
+		$repoWikiId = WikibaseClient::getSettings()->getSetting( 'repoSiteId' );
 
 		$changesList = ChangesList::newFromContext( $context );
 		$changeFactory = new ExternalChangeFactory(
@@ -112,7 +112,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 		// Use the actual setting, because out handler for the FormatAutocomment hook will check
 		// the wiki id against this setting.
-		$repoWikiId = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'repoSiteId' );
+		$repoWikiId = WikibaseClient::getSettings()->getSetting( 'repoSiteId' );
 
 		$changeFactory = new ExternalChangeFactory(
 			$repoWikiId,
@@ -192,7 +192,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 		// Use the actual setting, because out handler for the FormatAutocomment hook will check
 		// the wiki id against this setting.
-		$repoWikiId = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'repoSiteId' );
+		$repoWikiId = WikibaseClient::getSettings()->getSetting( 'repoSiteId' );
 
 		$changeFactory = new ExternalChangeFactory(
 			$repoWikiId,

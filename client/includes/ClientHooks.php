@@ -39,7 +39,7 @@ final class ClientHooks {
 	 * @param string[] &$extraLibraries
 	 */
 	public static function onScribuntoExternalLibraries( $engine, array &$extraLibraries ) {
-		$allowDataTransclusion = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'allowDataTransclusion' );
+		$allowDataTransclusion = WikibaseClient::getSettings()->getSetting( 'allowDataTransclusion' );
 		if ( $engine == 'lua' && $allowDataTransclusion === true ) {
 			$extraLibraries['mw.wikibase'] = Scribunto_LuaWikibaseLibrary::class;
 			$extraLibraries['mw.wikibase.entity'] = Scribunto_LuaWikibaseEntityLibrary::class;
@@ -59,8 +59,7 @@ final class ClientHooks {
 	 * @param string|null $wikiId The ID of the wiki the comment applies to, if not the local wiki.
 	 */
 	public static function onFormat( &$comment, $pre, $auto, $post, $title, $local, $wikiId = null ) {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$repoId = $wikibaseClient->getSettings()->getSetting( 'repoSiteId' );
+		$repoId = WikibaseClient::getSettings()->getSetting( 'repoSiteId' );
 
 		// Only do special formatting for comments from a wikibase repo.
 		// XXX: what to do if the local wiki is the repo? For entity pages, RepoHooks has a handler.
@@ -140,7 +139,7 @@ final class ClientHooks {
 	 * @param array[] &$prefs
 	 */
 	public static function onGetPreferences( User $user, array &$prefs ) {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = WikibaseClient::getSettings();
 
 		if ( !$settings->getSetting( 'showExternalRecentChanges' ) ) {
 			return;
@@ -181,7 +180,7 @@ final class ClientHooks {
 	 */
 	public static function onSkinAfterBottomScripts( Skin $skin, &$html ) {
 		$client = WikibaseClient::getDefaultInstance();
-		$enabledNamespaces = $client->getSettings()->getSetting( 'pageSchemaNamespaces' );
+		$enabledNamespaces = WikibaseClient::getSettings()->getSetting( 'pageSchemaNamespaces' );
 
 		$out = $skin->getOutput();
 		$entityId = self::parseEntityId( $client, $out->getProperty( 'wikibase_item' ) );

@@ -59,7 +59,6 @@ use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\PrefetchingTermLookup;
@@ -125,7 +124,6 @@ use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Lib\WikibaseContentLanguages;
-use Wikibase\Lib\WikibaseSettings;
 
 /**
  * Top level factory for the WikibaseClient extension.
@@ -147,11 +145,6 @@ final class WikibaseClient {
 	 * @var WikibaseSnakFormatterBuilders
 	 */
 	private static $defaultSnakFormatterBuilders = null;
-
-	/**
-	 * @var SettingsArray
-	 */
-	private $settings;
 
 	/**
 	 * @var SiteLookup
@@ -268,11 +261,6 @@ final class WikibaseClient {
 	 */
 	private $wikibaseContentLanguages = null;
 
-	/**
-	 * @var EntitySourceDefinitions
-	 */
-	private $entitySourceDefinitions;
-
 	/** @var DescriptionLookup|null */
 	private $descriptionLookup = null;
 
@@ -308,9 +296,11 @@ final class WikibaseClient {
 	 */
 	private function newWikibaseValueFormatterBuilders( array $thumbLimits ) {
 		if ( $this->valueFormatterBuilders === null ) {
+			$settings = self::getSettings();
+
 			$entityTitleLookup = new ClientSiteLinkTitleLookup(
 				$this->getStore()->getSiteLinkLookup(),
-				$this->settings->getSetting( 'siteGlobalID' )
+				$settings->getSetting( 'siteGlobalID' )
 			);
 
 			$services = MediaWikiServices::getInstance();
@@ -326,13 +316,13 @@ final class WikibaseClient {
 				new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 				new LanguageNameLookup( $this->getUserLanguage()->getCode() ),
 				$this->getRepoItemUriParser(),
-				$this->settings->getSetting( 'geoShapeStorageBaseUrl' ),
-				$this->settings->getSetting( 'tabularDataStorageBaseUrl' ),
+				$settings->getSetting( 'geoShapeStorageBaseUrl' ),
+				$settings->getSetting( 'tabularDataStorageBaseUrl' ),
 				$this->getTermFallbackCache(),
-				$this->settings->getSetting( 'sharedCacheDuration' ),
+				$settings->getSetting( 'sharedCacheDuration' ),
 				$this->getEntityLookup(),
 				$this->getStore()->getEntityRevisionLookup(),
-				$this->settings->getSetting( 'entitySchemaNamespace' ),
+				$settings->getSetting( 'entitySchemaNamespace' ),
 				new TitleLookupBasedEntityExistenceChecker(
 					$entityTitleLookup,
 					$services->getLinkBatchFactory()
@@ -342,7 +332,7 @@ final class WikibaseClient {
 				new TitleLookupBasedEntityRedirectChecker( $entityTitleLookup ),
 				$entityTitleLookup,
 				$kartographerEmbeddingHandler,
-				$this->settings->getSetting( 'useKartographerMaplinkInWikitext' ),
+				$settings->getSetting( 'useKartographerMaplinkInWikitext' ),
 				$thumbLimits
 			);
 		}
@@ -357,7 +347,7 @@ final class WikibaseClient {
 		// FIXME: remove the global out of here
 		global $wgKartographerEnableMapFrame;
 
-		return $this->settings->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
+		return self::getSettings()->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
 			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) &&
 			isset( $wgKartographerEnableMapFrame ) &&
 			$wgKartographerEnableMapFrame;
@@ -399,18 +389,19 @@ final class WikibaseClient {
 	}
 
 	public function __construct(
-		SettingsArray $settings,
-		SiteLookup $siteLookup,
-		EntitySourceDefinitions $entitySourceDefinitions
+		SiteLookup $siteLookup
 	) {
-		$this->settings = $settings;
 		$this->siteLookup = $siteLookup;
-		$this->entitySourceDefinitions = $entitySourceDefinitions;
 	}
 
 	public static function getDataTypeDefinitions( ContainerInterface $services = null ): DataTypeDefinitions {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.DataTypeDefinitions' );
+	}
+
+	public static function getEntitySourceDefinitions( ContainerInterface $services = null ): EntitySourceDefinitions {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.EntitySourceDefinitions' );
 	}
 
 	public static function getEntityTypeDefinitions( ContainerInterface $services = null ): EntityTypeDefinitions {
@@ -459,8 +450,9 @@ final class WikibaseClient {
 		$entityTypeDefinitions = self::getEntityTypeDefinitions();
 		$genericServices = new GenericServices( $entityTypeDefinitions );
 
+		$entitySourceDefinitions = self::getEntitySourceDefinitions();
 		$singleSourceServices = [];
-		foreach ( $this->entitySourceDefinitions->getSources() as $source ) {
+		foreach ( $entitySourceDefinitions->getSources() as $source ) {
 			// TODO: extract
 			$singleSourceServices[$source->getSourceName()] = new SingleEntitySourceServices(
 				$genericServices,
@@ -477,12 +469,12 @@ final class WikibaseClient {
 			);
 		}
 
-		return new MultipleEntitySourceServices( $this->entitySourceDefinitions, $genericServices, $singleSourceServices );
+		return new MultipleEntitySourceServices( $entitySourceDefinitions, $genericServices, $singleSourceServices );
 	}
 
 	private function getDataAccessSettings() {
 		return new DataAccessSettings(
-			$this->settings->getSetting( 'maxSerializedEntitySize' )
+			self::getSettings()->getSetting( 'maxSerializedEntitySize' )
 		);
 	}
 
@@ -547,11 +539,13 @@ final class WikibaseClient {
 	}
 
 	public function newRepoLinker(): RepoLinker {
+		$settings = self::getSettings();
+
 		return new RepoLinker(
-			$this->entitySourceDefinitions,
-			$this->settings->getSetting( 'repoUrl' ),
-			$this->settings->getSetting( 'repoArticlePath' ),
-			$this->settings->getSetting( 'repoScriptPath' )
+			self::getEntitySourceDefinitions(),
+			$settings->getSetting( 'repoUrl' ),
+			$settings->getSetting( 'repoArticlePath' ),
+			$settings->getSetting( 'repoScriptPath' )
 		);
 	}
 
@@ -659,8 +653,9 @@ final class WikibaseClient {
 		return $wgLang;
 	}
 
-	public function getSettings(): SettingsArray {
-		return $this->settings;
+	public static function getSettings( ContainerInterface $services = null ): SettingsArray {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.Settings' );
 	}
 
 	/**
@@ -671,33 +666,9 @@ final class WikibaseClient {
 	 * @return self
 	 */
 	private static function newInstance() {
-		$settings = WikibaseSettings::getClientSettings();
-
 		return new self(
-			$settings,
-			MediaWikiServices::getInstance()->getSiteLookup(),
-			self::getEntitySourceDefinitionsFromSettings(
-				$settings,
-				self::getEntityTypeDefinitions()
-			)
+			MediaWikiServices::getInstance()->getSiteLookup()
 		);
-	}
-
-	// TODO: current settings (especially (foreign) repositories blob) might be quite confusing
-	// Having a "entitySources" or so setting might be better, and would also allow unifying
-	// the way these are configured in Repo and in Client parts
-	private static function getEntitySourceDefinitionsFromSettings(
-		SettingsArray $settings,
-		EntityTypeDefinitions $entityTypeDefinitions
-	) {
-		if ( $settings->hasSetting( 'entitySources' ) && !empty( $settings->getSetting( 'entitySources' ) ) ) {
-			$configParser = new EntitySourceDefinitionsConfigParser();
-
-			return $configParser->newDefinitionsFromConfigArray( $settings->getSetting( 'entitySources' ), $entityTypeDefinitions );
-		}
-
-		$parser = new EntitySourceDefinitionsLegacyClientSettingsParser();
-		return $parser->newDefinitionsFromSettings( $settings, $entityTypeDefinitions );
 	}
 
 	/**
@@ -737,8 +708,9 @@ final class WikibaseClient {
 	 */
 	public function getSite(): Site {
 		if ( $this->site === null ) {
-			$globalId = $this->settings->getSetting( 'siteGlobalID' );
-			$localId = $this->settings->getSetting( 'siteLocalID' );
+			$settings = self::getSettings();
+			$globalId = $settings->getSetting( 'siteGlobalID' );
+			$localId = $settings->getSetting( 'siteLocalID' );
 
 			$this->site = $this->siteLookup->getSite( $globalId );
 
@@ -781,7 +753,7 @@ final class WikibaseClient {
 	 * @return string
 	 */
 	public function getLangLinkSiteGroup() {
-		$group = $this->settings->getSetting( 'languageLinkSiteGroup' );
+		$group = self::getSettings()->getSetting( 'languageLinkSiteGroup' );
 
 		if ( $group === null ) {
 			$group = $this->getSiteGroup();
@@ -797,10 +769,11 @@ final class WikibaseClient {
 	 * @return string
 	 */
 	private function newSiteGroup() {
-		$siteGroup = $this->settings->getSetting( 'siteGroup' );
+		$settings = self::getSettings();
+		$siteGroup = $settings->getSetting( 'siteGroup' );
 
 		if ( !$siteGroup ) {
-			$siteId = $this->settings->getSetting( 'siteGlobalID' );
+			$siteId = $settings->getSetting( 'siteGlobalID' );
 
 			$site = $this->siteLookup->getSite( $siteId );
 
@@ -871,9 +844,10 @@ final class WikibaseClient {
 
 	public function getNamespaceChecker(): NamespaceChecker {
 		if ( $this->namespaceChecker === null ) {
+			$settings = self::getSettings();
 			$this->namespaceChecker = new NamespaceChecker(
-				$this->settings->getSetting( 'excludeNamespaces' ),
-				$this->settings->getSetting( 'namespaces' )
+				$settings->getSetting( 'excludeNamespaces' ),
+				$settings->getSetting( 'namespaces' )
 			);
 		}
 
@@ -889,7 +863,7 @@ final class WikibaseClient {
 			$this->siteLookup,
 			MediaWikiServices::getInstance()->getHookContainer(),
 			$this->getLogger(),
-			$this->settings->getSetting( 'siteGlobalID' ),
+			self::getSettings()->getSetting( 'siteGlobalID' ),
 			$this->getLangLinkSiteGroup()
 		);
 	}
@@ -901,7 +875,7 @@ final class WikibaseClient {
 				$this->getStore()->getSiteLinkLookup(),
 				$this->getStore()->getEntityLookup(),
 				new EntityUsageFactory( $this->getEntityIdParser() ),
-				$this->settings->getSetting( 'siteGlobalID' ),
+				self::getSettings()->getSetting( 'siteGlobalID' ),
 				$this->getLogger()
 			);
 		}
@@ -912,7 +886,7 @@ final class WikibaseClient {
 	public function getSidebarLinkBadgeDisplay(): SidebarLinkBadgeDisplay {
 		if ( $this->sidebarLinkBadgeDisplay === null ) {
 			$labelDescriptionLookupFactory = $this->getLanguageFallbackLabelDescriptionLookupFactory();
-			$badgeClassNames = $this->settings->getSetting( 'badgeClassNames' );
+			$badgeClassNames = self::getSettings()->getSetting( 'badgeClassNames' );
 			$lang = $this->getUserLanguage();
 
 			$this->sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay(
@@ -1017,7 +991,7 @@ final class WikibaseClient {
 
 	public function getOtherProjectsSidebarGeneratorFactory(): OtherProjectsSidebarGeneratorFactory {
 		return new OtherProjectsSidebarGeneratorFactory(
-			$this->settings,
+			self::getSettings(),
 			$this->getStore()->getSiteLinkLookup(),
 			$this->siteLookup,
 			$this->getStore()->getEntityLookup(),
@@ -1058,7 +1032,7 @@ final class WikibaseClient {
 			$this->getRestrictedEntityLookup(),
 			$this->getDataAccessSnakFormatterFactory(),
 			new EntityUsageFactory( $this->getEntityIdParser() ),
-			$this->settings->getSetting( 'allowDataAccessInUserLanguage' )
+			self::getSettings()->getSetting( 'allowDataAccessInUserLanguage' )
 		);
 	}
 
@@ -1069,27 +1043,30 @@ final class WikibaseClient {
 			$this->getPropertyDataTypeLookup(),
 			$this->getRepoItemUriParser(),
 			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
-			$this->settings->getSetting( 'allowDataAccessInUserLanguage' )
+			self::getSettings()->getSetting( 'allowDataAccessInUserLanguage' )
 		);
 	}
 
 	public function getPropertyParserFunctionRunner(): Runner {
+		$settings = self::getSettings();
 		return new Runner(
 			$this->getStatementGroupRendererFactory(),
 			$this->getStore()->getSiteLinkLookup(),
 			$this->getEntityIdParser(),
 			$this->getRestrictedEntityLookup(),
-			$this->settings->getSetting( 'siteGlobalID' ),
-			$this->settings->getSetting( 'allowArbitraryDataAccess' )
+			$settings->getSetting( 'siteGlobalID' ),
+			$settings->getSetting( 'allowArbitraryDataAccess' )
 		);
 	}
 
 	public function getOtherProjectsSitesProvider(): OtherProjectsSitesProvider {
+		$settings = self::getSettings();
+
 		return new CachingOtherProjectsSitesProvider(
 			new OtherProjectsSitesGenerator(
 				$this->siteLookup,
-				$this->settings->getSetting( 'siteGlobalID' ),
-				$this->settings->getSetting( 'specialSiteLinkGroups' )
+				$settings->getSetting( 'siteGlobalID' ),
+				$settings->getSetting( 'specialSiteLinkGroups' )
 			),
 			// TODO: Make configurable? Should be similar, maybe identical to sharedCacheType and
 			// sharedCacheDuration, but can not reuse these because this here is not shared.
@@ -1103,7 +1080,7 @@ final class WikibaseClient {
 			$this->getStore()->getUsageLookup(),
 			new TitleFactory(),
 			MediaWikiServices::getInstance()->getLinkBatchFactory(),
-			$this->settings->getSetting( 'siteGlobalID' ),
+			self::getSettings()->getSetting( 'siteGlobalID' ),
 			$this->getLogger()
 		);
 	}
@@ -1117,14 +1094,16 @@ final class WikibaseClient {
 			MediaWikiServices::getInstance()->getStatsdDataFactory()
 		);
 
-		$pageUpdater->setPurgeCacheBatchSize( $this->settings->getSetting( 'purgeCacheBatchSize' ) );
-		$pageUpdater->setRecentChangesBatchSize( $this->settings->getSetting( 'recentChangesBatchSize' ) );
+		$settings = self::getSettings();
+
+		$pageUpdater->setPurgeCacheBatchSize( $settings->getSetting( 'purgeCacheBatchSize' ) );
+		$pageUpdater->setRecentChangesBatchSize( $settings->getSetting( 'recentChangesBatchSize' ) );
 
 		$changeListTransformer = new ChangeRunCoalescer(
 			$this->getStore()->getEntityRevisionLookup(),
 			$this->getEntityChangeFactory(),
 			$logger,
-			$this->settings->getSetting( 'siteGlobalID' )
+			$settings->getSetting( 'siteGlobalID' )
 		);
 
 		return new ChangeHandler(
@@ -1134,7 +1113,7 @@ final class WikibaseClient {
 			$changeListTransformer,
 			$this->siteLookup,
 			$logger,
-			$this->settings->getSetting( 'injectRecentChanges' )
+			$settings->getSetting( 'injectRecentChanges' )
 		);
 	}
 
@@ -1150,7 +1129,7 @@ final class WikibaseClient {
 			new SiteLinkCommentCreator(
 				$this->getContentLanguage(),
 				$this->siteLookup,
-				$this->settings->getSetting( 'siteGlobalID' )
+				self::getSettings()->getSetting( 'siteGlobalID' )
 			),
 			CentralIdLookup::factoryNonLocal(),
 			( $interwikiPrefix !== null ) ?
@@ -1166,8 +1145,8 @@ final class WikibaseClient {
 	}
 
 	private function getEntitySourceOfLocalRepo(): EntitySource {
-		$itemAndPropertySourceName = $this->settings->getSetting( 'itemAndPropertySourceName' );
-		$sources = $this->entitySourceDefinitions->getSources();
+		$itemAndPropertySourceName = self::getSettings()->getSetting( 'itemAndPropertySourceName' );
+		$sources = self::getEntitySourceDefinitions()->getSources();
 		foreach ( $sources as $source ) {
 			if ( $source->getSourceName() === $itemAndPropertySourceName ) {
 				return $source;
@@ -1194,13 +1173,14 @@ final class WikibaseClient {
 
 	public function getRestrictedEntityLookup(): RestrictedEntityLookup {
 		if ( $this->restrictedEntityLookup === null ) {
+			$settings = self::getSettings();
 			$disabledEntityTypesEntityLookup = new DisabledEntityTypesEntityLookup(
 				$this->getEntityLookup(),
-				$this->settings->getSetting( 'disabledAccessEntityTypes' )
+				$settings->getSetting( 'disabledAccessEntityTypes' )
 			);
 			$this->restrictedEntityLookup = new RestrictedEntityLookup(
 				$disabledEntityTypesEntityLookup,
-				$this->settings->getSetting( 'entityAccessLimit' )
+				$settings->getSetting( 'entityAccessLimit' )
 			);
 		}
 
@@ -1212,7 +1192,7 @@ final class WikibaseClient {
 			$title = Title::newFromText( 'MediaWiki:Wikibase-SortedProperties' );
 			$innerProvider = new WikiPagePropertyOrderProvider( $title );
 
-			$url = $this->settings->getSetting( 'propertyOrderUrl' );
+			$url = self::getSettings()->getSetting( 'propertyOrderUrl' );
 			if ( $url !== null ) {
 				$innerProvider = new FallbackPropertyOrderProvider(
 					$innerProvider,
@@ -1255,13 +1235,14 @@ final class WikibaseClient {
 		global $wgSecretKey;
 
 		if ( $this->termFallbackCacheFactory === null ) {
+			$settings = self::getSettings();
 			$this->termFallbackCacheFactory = new TermFallbackCacheFactory(
-				$this->settings->getSetting( 'sharedCacheType' ),
+				$settings->getSetting( 'sharedCacheType' ),
 				$this->getLogger(),
 				MediaWikiServices::getInstance()->getStatsdDataFactory(),
 				hash( 'sha256', $wgSecretKey ),
 				new TermFallbackCacheServiceFactory(),
-				$this->settings->getSetting( 'termFallbackCacheVersion' )
+				$settings->getSetting( 'termFallbackCacheVersion' )
 			);
 		}
 		return $this->termFallbackCacheFactory;
@@ -1297,9 +1278,10 @@ final class WikibaseClient {
 	public function getPropertyLabelResolver(): PropertyLabelResolver {
 		if ( $this->propertyLabelResolver === null ) {
 			$languageCode = $this->getContentLanguage()->getCode();
-			$cacheKeyPrefix = $this->settings->getSetting( 'sharedCacheKeyPrefix' );
-			$cacheType = $this->settings->getSetting( 'sharedCacheType' );
-			$cacheDuration = $this->settings->getSetting( 'sharedCacheDuration' );
+			$settings = self::getSettings();
+			$cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
+			$cacheType = $settings->getSetting( 'sharedCacheType' );
+			$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 
 			// Cache key needs to be language specific
 			$cacheKey = $cacheKeyPrefix . ':TermPropertyLabelResolver' . '/' . $languageCode;
@@ -1376,7 +1358,7 @@ final class WikibaseClient {
 	}
 
 	private function getItemSource() {
-		$itemSource = $this->entitySourceDefinitions->getSourceForEntityType( Item::ENTITY_TYPE );
+		$itemSource = self::getEntitySourceDefinitions()->getSourceForEntityType( Item::ENTITY_TYPE );
 
 		if ( $itemSource === null ) {
 			throw new LogicException( 'No source providing Items configured!' );
@@ -1386,7 +1368,7 @@ final class WikibaseClient {
 	}
 
 	private function getPropertySource() {
-		$propertySource = $this->entitySourceDefinitions->getSourceForEntityType( Property::ENTITY_TYPE );
+		$propertySource = self::getEntitySourceDefinitions()->getSourceForEntityType( Property::ENTITY_TYPE );
 
 		if ( $propertySource === null ) {
 			throw new LogicException( 'No source providing Properties configured!' );

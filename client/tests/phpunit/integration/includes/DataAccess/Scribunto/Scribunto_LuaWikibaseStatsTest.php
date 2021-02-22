@@ -37,7 +37,7 @@ class Scribunto_LuaWikibaseStatsTest extends Scribunto_LuaWikibaseLibraryTestCas
 
 		$mwServices = MediaWikiServices::getInstance();
 		$mwServices->getStatsdDataFactory()->clearData();
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = WikibaseClient::getSettings();
 
 		$this->oldTrackLuaFunctionCallsPerWiki = $settings->getSetting(
 			'trackLuaFunctionCallsPerWiki'
@@ -52,7 +52,7 @@ class Scribunto_LuaWikibaseStatsTest extends Scribunto_LuaWikibaseLibraryTestCas
 
 	protected function tearDown(): void {
 		$mwServices = MediaWikiServices::getInstance();
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = WikibaseClient::getSettings();
 
 		$settings->setSetting(
 			'trackLuaFunctionCallsPerWiki',

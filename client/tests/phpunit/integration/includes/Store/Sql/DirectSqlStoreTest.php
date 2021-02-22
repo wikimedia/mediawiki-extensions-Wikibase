@@ -64,7 +64,7 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( EntityIdLookup::class ),
 			new EntityNamespaceLookup( [] ),
 			$wikibaseServices,
-			$wikibaseClient->getSettings(),
+			WikibaseClient::getSettings(),
 			wfWikiID(),
 			'en'
 		);

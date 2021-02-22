@@ -133,7 +133,7 @@ class ApiFormatReferenceTest extends ApiTestCase {
 	}
 
 	private function isApiTestable(): bool {
-		$apiEnabled = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'dataBridgeEnabled' ) ?? false;
+		$apiEnabled = WikibaseClient::getSettings()->getSetting( 'dataBridgeEnabled' ) ?? false;
 		$repoEnabled = WikibaseSettings::isRepoEnabled(); // to ensure DB is set up
 		return $apiEnabled && $repoEnabled;
 	}

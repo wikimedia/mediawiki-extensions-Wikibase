@@ -62,7 +62,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 		$setupHelper = new WikibaseDataAccessTestItemSetUpHelper( $store );
 		$setupHelper->setUp();
 
-		$this->oldAllowDataAccessInUserLanguage = $wikibaseClient->getSettings()->getSetting( 'allowDataAccessInUserLanguage' );
+		$this->oldAllowDataAccessInUserLanguage = WikibaseClient::getSettings()->getSetting( 'allowDataAccessInUserLanguage' );
 		$this->setAllowDataAccessInUserLanguage( false );
 	}
 
@@ -97,7 +97,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 	 * @param bool $value
 	 */
 	private function setAllowDataAccessInUserLanguage( $value ) {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = WikibaseClient::getSettings();
 		$settings->setSetting( 'allowDataAccessInUserLanguage', $value );
 	}
 

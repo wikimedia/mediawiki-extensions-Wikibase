@@ -10,6 +10,7 @@ use Title;
 use User;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * Adds CSS for the edit links sidebar link or JS to create a new item
@@ -35,11 +36,13 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 		$this->dataBridgeEnabled = $dataBridgeEnabled;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		SettingsArray $clientSettings
+	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		return new self(
 			$wikibaseClient->getNamespaceChecker(),
-			$wikibaseClient->getSettings()->getSetting( 'dataBridgeEnabled' )
+			$clientSettings->getSetting( 'dataBridgeEnabled' )
 		);
 	}
 

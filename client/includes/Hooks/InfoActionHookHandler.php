@@ -13,6 +13,7 @@ use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -82,9 +83,10 @@ class InfoActionHookHandler implements InfoActionHook {
 		$this->descriptionLookup = $descriptionLookup;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		SettingsArray $clientSettings
+	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
 
 		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
 		$usageLookup = $wikibaseClient->getStore()->getUsageLookup();
@@ -100,7 +102,7 @@ class InfoActionHookHandler implements InfoActionHook {
 			$namespaceChecker,
 			$wikibaseClient->newRepoLinker(),
 			$wikibaseClient->getStore()->getSiteLinkLookup(),
-			$settings->getSetting( 'siteGlobalID' ),
+			$clientSettings->getSetting( 'siteGlobalID' ),
 			$usageLookup,
 			$labelDescriptionLookupFactory,
 			$idParser,
