@@ -94,7 +94,8 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[ '5' ],
 			[ '+3' ],
-			[ '-15' ],
+			[ '-15' ], // U+002D - HYPHEN-MINUS
+			[ '−22' ], // U+2212 − MINUS SIGN
 
 			[ '5.3' ],
 			[ '+3.2' ],

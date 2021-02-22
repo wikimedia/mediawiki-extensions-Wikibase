@@ -78,7 +78,7 @@ class MediaWikiNumberUnlocalizer extends BasicNumberUnlocalizer {
 			$separators .= ' ';
 		}
 
-		$numberRegex = '[-+]?[' . preg_quote( $digits . $separators, $delimiter ) . ']+';
+		$numberRegex = '[-−+]?[' . preg_quote( $digits . $separators, $delimiter ) . ']+';
 
 		// Scientific notation support. Keep in sync with DecimalParser::splitDecimalExponent.
 		$numberRegex .= '(?:(?:[eE]|x10\^)[-+]?[' . preg_quote( $digits, $delimiter ) . ']+)?';
