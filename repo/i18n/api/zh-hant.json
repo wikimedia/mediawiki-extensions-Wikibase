@@ -79,7 +79,7 @@
 	"apihelp-wbgetentities-description": "取得多個 Wikibase 實體的資料。",
 	"apihelp-wbgetentities-summary": "取得多個 Wikibase 實體的資料。",
 	"apihelp-wbgetentities-param-ids": "取得資料的來源實體 ID",
-	"apihelp-wbgetentities-param-sites": "於相對應頁面所在處網站的識別碼\n與 <code>title</code> 一起使用，但僅能多個標題提供一個網站；或是一個標題提供多個網站。",
+	"apihelp-wbgetentities-param-sites": "於相對應頁面所在處網站的識別碼。\n與 <code>title</code> 一起使用，但僅能多個標題提供一個網站；或是一個標題提供多個網站。",
 	"apihelp-wbgetentities-param-titles": "相對應頁面的標題。\n與 <code>sites</code> 一起使用，但僅能多個標題提供一個網站；或是一個標題提供多個網站。",
 	"apihelp-wbgetentities-param-redirects": "是否消除掉重新導向。\n若設定成「no」，重新導向會被視為已刪除過的實體。",
 	"apihelp-wbgetentities-param-props": "從任一實體所要取回的屬性名稱。\n會依據所指定語言做進一步篩選。",

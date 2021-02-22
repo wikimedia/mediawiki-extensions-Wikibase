@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Äberlausitzer"
+		]
+	},
+	"wikibase-edit": "beorbeetn",
+	"wikibase-add": "hinzufiega",
+	"wikibase-label-empty": "Kenne Bezeechnung vurhanda",
+	"wikibase-description-empty": "Kenne Beschreibung vurhanda",
+	"wikibase-sitelinks-special": "Andere Websites",
+	"wikibase-statementview-rank-normal": "Normaler Rang"
+}

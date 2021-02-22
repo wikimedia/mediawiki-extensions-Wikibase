@@ -1,8 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ghiutun"
+			"Ghiutun",
+			"Äberlausitzer"
 		]
 	},
-	"wikibase-rc-wikibase-edit-letter": "D"
+	"tooltip-t-wikibase": "Link zum verbundenen Objekt eim Datenrepositorium",
+	"wikibase-comment-update": "Doas {{WBREPONAME}}-Objekt wurde geändert",
+	"wikibase-dataitem": "{{WBREPONAME}}-Datenobjekt",
+	"wikibase-editlinks": "Links beorbeetn",
+	"wikibase-editlinkstitle": "Links uff Ortikel ei andern Sproacha beorbeetn",
+	"wikibase-linkitem-addlinks": "Links hinzufügen",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "ausblenda",
+	"wikibase-rc-hide-wikidata-show": "oazeiga",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-Beorbeetung",
+	"wikibase-otherprojects": "Ei andern Projekten"
 }

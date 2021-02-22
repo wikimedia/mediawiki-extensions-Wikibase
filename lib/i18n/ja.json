@@ -86,7 +86,7 @@
 	"wikibase-entity-summary-wbeditentity-create": "エンティティを新規作成",
 	"wikibase-entity-summary-wbeditentity-update": "エンティティを変更",
 	"wikibase-entity-summary-wbeditentity-override": "エンティティをクリア",
-	"wikibase-entity-summary-wbeditentity-update-languages": " $3{{PLURAL:$3|言語}}のラベル、説明、別名を変更",
+	"wikibase-entity-summary-wbeditentity-update-languages": "$3{{PLURAL:$3|言語}}のラベル、説明、別名を変更",
 	"wikibase-entity-summary-wbsetreference": "情報源を設定",
 	"wikibase-entity-summary-wbsetreference-add": "主張に情報源を追加",
 	"wikibase-entity-summary-wbsetreference-set": "主張の情報源を変更",
