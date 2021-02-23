@@ -53,7 +53,8 @@
 			"factory": "\\Wikibase\\Repo\\Api\\FormatSnakValue::factory",
 			"services": [
 				"StatsdDataFactory",
-				"WikibaseRepo.DataTypeFactory"
+				"WikibaseRepo.DataTypeFactory",
+			  	"WikibaseRepo.DataValueFactory"
 			]
 		},
 		"wbgetclaims": {

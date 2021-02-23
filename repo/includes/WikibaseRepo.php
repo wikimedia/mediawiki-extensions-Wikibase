@@ -582,11 +582,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.ValueParserFactory' );
 	}
 
-	/**
-	 * @return DataValueFactory
-	 */
-	public function getDataValueFactory() {
-		return new DataValueFactory( $this->getDataValueDeserializer() );
+	public static function getDataValueFactory( ContainerInterface $services = null ): DataValueFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.DataValueFactory' );
 	}
 
 	/**
@@ -875,7 +873,7 @@ class WikibaseRepo {
 			$this->snakFactory = new SnakFactory(
 				$this->getPropertyDataTypeLookup(),
 				self::getDataTypeFactory(),
-				$this->getDataValueFactory()
+				self::getDataValueFactory()
 			);
 		}
 
