@@ -86,7 +86,10 @@
 		},
 		"DataUpdate": {
 			"class": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler::factory"
+			"factory": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler::factory",
+			"services": [
+				"WikibaseClient.Logger"
+			]
 		},
 		"DeletePageNoticeCreator": {
 			"class": "\\Wikibase\\Client\\Hooks\\DeletePageNoticeCreator",

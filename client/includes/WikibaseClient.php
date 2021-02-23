@@ -19,7 +19,6 @@ use Http;
 use JobQueueGroup;
 use Language;
 use LogicException;
-use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiSite;
 use MWException;
@@ -526,7 +525,7 @@ final class WikibaseClient {
 			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
 			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup(
 				$infoLookup,
-				$this->getLogger(),
+				self::getLogger(),
 				$retrievingLookup
 			);
 		}
@@ -691,8 +690,9 @@ final class WikibaseClient {
 		return self::$defaultInstance;
 	}
 
-	public function getLogger(): LoggerInterface {
-		return LoggerFactory::getInstance( 'Wikibase' );
+	public static function getLogger( ContainerInterface $services = null ): LoggerInterface {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.Logger' );
 	}
 
 	/**
@@ -714,8 +714,7 @@ final class WikibaseClient {
 
 			$this->site = $this->siteLookup->getSite( $globalId );
 
-			// Todo inject me
-			$logger = $this->getLogger();
+			$logger = self::getLogger();
 
 			if ( !$this->site ) {
 				$logger->debug(
@@ -862,7 +861,7 @@ final class WikibaseClient {
 			$this->getStore()->getEntityLookup(),
 			$this->siteLookup,
 			MediaWikiServices::getInstance()->getHookContainer(),
-			$this->getLogger(),
+			self::getLogger(),
 			self::getSettings()->getSetting( 'siteGlobalID' ),
 			$this->getLangLinkSiteGroup()
 		);
@@ -876,7 +875,7 @@ final class WikibaseClient {
 				$this->getStore()->getEntityLookup(),
 				new EntityUsageFactory( $this->getEntityIdParser() ),
 				self::getSettings()->getSetting( 'siteGlobalID' ),
-				$this->getLogger()
+				self::getLogger()
 			);
 		}
 
@@ -997,7 +996,7 @@ final class WikibaseClient {
 			$this->getStore()->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			MediaWikiServices::getInstance()->getHookContainer(),
-			$this->getLogger()
+			self::getLogger()
 		);
 	}
 
@@ -1013,7 +1012,7 @@ final class WikibaseClient {
 			$this->getEntityIdParser(),
 			$changeClasses,
 			EntityChange::class,
-			$this->getLogger()
+			self::getLogger()
 		);
 	}
 
@@ -1081,12 +1080,12 @@ final class WikibaseClient {
 			new TitleFactory(),
 			MediaWikiServices::getInstance()->getLinkBatchFactory(),
 			self::getSettings()->getSetting( 'siteGlobalID' ),
-			$this->getLogger()
+			self::getLogger()
 		);
 	}
 
 	public function getChangeHandler(): ChangeHandler {
-		$logger = $this->getLogger();
+		$logger = self::getLogger();
 
 		$pageUpdater = new WikiPageUpdater(
 			JobQueueGroup::singleton(),
@@ -1199,7 +1198,7 @@ final class WikibaseClient {
 					new HttpUrlPropertyOrderProvider(
 						$url,
 						new Http(),
-						$this->getLogger()
+						self::getLogger()
 					)
 				);
 			}
@@ -1238,7 +1237,7 @@ final class WikibaseClient {
 			$settings = self::getSettings();
 			$this->termFallbackCacheFactory = new TermFallbackCacheFactory(
 				$settings->getSetting( 'sharedCacheType' ),
-				$this->getLogger(),
+				self::getLogger(),
 				MediaWikiServices::getInstance()->getStatsdDataFactory(),
 				hash( 'sha256', $wgSecretKey ),
 				new TermFallbackCacheServiceFactory(),
@@ -1299,7 +1298,7 @@ final class WikibaseClient {
 
 	public function getReferenceFormatterFactory(): ReferenceFormatterFactory {
 		if ( $this->referenceFormatterFactory === null ) {
-			$logger = $this->getLogger();
+			$logger = self::getLogger();
 			$this->referenceFormatterFactory = new ReferenceFormatterFactory(
 				$this->getDataAccessSnakFormatterFactory(),
 				WellKnownReferenceProperties::newFromArray(

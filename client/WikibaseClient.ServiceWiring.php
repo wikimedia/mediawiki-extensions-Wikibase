@@ -2,7 +2,9 @@
 
 declare( strict_types = 1 );
 
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use Psr\Log\LoggerInterface;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -54,6 +56,10 @@ return [
 		$services->getHookContainer()->run( 'WikibaseClientEntityTypes', [ &$entityTypes ] );
 
 		return new EntityTypeDefinitions( $entityTypes );
+	},
+
+	'WikibaseClient.Logger' => function ( MediaWikiServices $services ): LoggerInterface {
+		return LoggerFactory::getInstance( 'Wikibase' );
 	},
 
 	'WikibaseClient.Settings' => function ( MediaWikiServices $services ): SettingsArray {

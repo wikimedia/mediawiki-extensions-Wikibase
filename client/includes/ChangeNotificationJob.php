@@ -62,7 +62,7 @@ class ChangeNotificationJob extends Job {
 		);
 
 		// TODO inject me
-		$this->logger = WikibaseClient::getDefaultInstance()->getLogger();
+		$this->logger = WikibaseClient::getLogger();
 	}
 
 	/**
