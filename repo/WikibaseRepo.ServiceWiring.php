@@ -2,12 +2,21 @@
 
 declare( strict_types = 1 );
 
+use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\MonolingualTextValue;
+use DataValues\QuantityValue;
+use DataValues\StringValue;
+use DataValues\TimeValue;
+use DataValues\UnknownValue;
 use MediaWiki\MediaWikiServices;
 use ValueParsers\NullParser;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
@@ -42,6 +51,33 @@ return [
 		return new DataTypeFactory(
 			WikibaseRepo::getDataTypeDefinitions( $services )->getValueTypes()
 		);
+	},
+
+	'WikibaseRepo.DataValueDeserializer' => function ( MediaWikiServices $services ): DataValueDeserializer {
+		return new DataValueDeserializer( [
+			'string' => StringValue::class,
+			'unknown' => UnknownValue::class,
+			'globecoordinate' => GlobeCoordinateValue::class,
+			'monolingualtext' => MonolingualTextValue::class,
+			'quantity' => QuantityValue::class,
+			'time' => TimeValue::class,
+			'wikibase-entityid' => function ( $value ) use ( $services ) {
+				// TODO this should perhaps be factored out into a class
+				if ( isset( $value['id'] ) ) {
+					try {
+						return new EntityIdValue( WikibaseRepo::getEntityIdParser( $services )->parse( $value['id'] ) );
+					} catch ( EntityIdParsingException $parsingException ) {
+						throw new InvalidArgumentException(
+							'Can not parse id \'' . $value['id'] . '\' to build EntityIdValue with',
+							0,
+							$parsingException
+						);
+					}
+				} else {
+					return EntityIdValue::newFromArray( $value );
+				}
+			},
+		] );
 	},
 
 	'WikibaseRepo.EntityIdParser' => function ( MediaWikiServices $services ): EntityIdParser {

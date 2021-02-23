@@ -4,12 +4,6 @@ namespace Wikibase\Repo;
 
 use CentralIdLookup;
 use DataValues\Deserializers\DataValueDeserializer;
-use DataValues\Geo\Values\GlobeCoordinateValue;
-use DataValues\MonolingualTextValue;
-use DataValues\QuantityValue;
-use DataValues\StringValue;
-use DataValues\TimeValue;
-use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\DispatchingDeserializer;
@@ -52,8 +46,6 @@ use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
@@ -1528,7 +1520,7 @@ class WikibaseRepo {
 	 */
 	public function getBaseDataModelDeserializerFactory() {
 		return new DeserializerFactory(
-			$this->getDataValueDeserializer(),
+			self::getDataValueDeserializer(),
 			self::getEntityIdParser()
 		);
 	}
@@ -1538,7 +1530,7 @@ class WikibaseRepo {
 	 */
 	private function getInternalFormatDeserializerFactory() {
 		return new InternalDeserializerFactory(
-			$this->getDataValueDeserializer(),
+			self::getDataValueDeserializer(),
 			self::getEntityIdParser(),
 			$this->getAllTypesEntityDeserializer()
 		);
@@ -1643,31 +1635,9 @@ class WikibaseRepo {
 	/**
 	 * @return DataValueDeserializer
 	 */
-	private function getDataValueDeserializer() {
-		return new DataValueDeserializer( [
-			'string' => StringValue::class,
-			'unknown' => UnknownValue::class,
-			'globecoordinate' => GlobeCoordinateValue::class,
-			'monolingualtext' => MonolingualTextValue::class,
-			'quantity' => QuantityValue::class,
-			'time' => TimeValue::class,
-			'wikibase-entityid' => function ( $value ) {
-				// TODO this should perhaps be factored out into a class
-				if ( isset( $value['id'] ) ) {
-					try {
-						return new EntityIdValue( self::getEntityIdParser()->parse( $value['id'] ) );
-					} catch ( EntityIdParsingException $parsingException ) {
-						throw new InvalidArgumentException(
-							'Can not parse id \'' . $value['id'] . '\' to build EntityIdValue with',
-							0,
-							$parsingException
-						);
-					}
-				} else {
-					return EntityIdValue::newFromArray( $value );
-				}
-			},
-		] );
+	public static function getDataValueDeserializer( ContainerInterface $services = null ): DataValueDeserializer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.DataValueDeserializer' );
 	}
 
 	public function newItemHandler(): ItemHandler {
@@ -2216,7 +2186,7 @@ class WikibaseRepo {
 				$genericServices,
 				self::getEntityIdParser(),
 				$this->getEntityIdComposer(),
-				$this->getDataValueDeserializer(),
+				self::getDataValueDeserializer(),
 				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
 				$this->getDataAccessSettings(),
 				$source,
