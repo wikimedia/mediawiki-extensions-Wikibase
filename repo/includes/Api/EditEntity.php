@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -256,15 +255,6 @@ class EditEntity extends ModifyEntity {
 		try {
 			$this->getResult()->addValue( null, 'entity',
 				$this->getResultBuilder()->getModifiedEntityArray( $entity, 'all', null, [], [] ) );
-
-			if ( $entity instanceof StatementListProvider &&
-			    $this->getResult()->getResultData( [ 'entity', 'claims' ] ) === null
-			) {
-				// temporarily add statements data under 'claims' for
-				// backwards compatibility of MediaInfo entities (T271105)
-				// TODO delete this whole block
-				$this->getResultBuilder()->addStatements( $entity->getStatements(), 'entity' );
-			}
 		} catch ( SerializationException $e ) {
 			$this->addWarning(
 			'wikibase-editentity-warning-serializeresult',
