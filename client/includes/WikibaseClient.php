@@ -15,7 +15,6 @@ use Deserializers\DispatchableDeserializer;
 use Deserializers\DispatchingDeserializer;
 use ExtensionRegistry;
 use ExternalUserNames;
-use Hooks;
 use Http;
 use JobQueueGroup;
 use Language;
@@ -25,6 +24,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWikiSite;
 use MWException;
 use ObjectCache;
+use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Serializers\Serializer;
 use Site;
@@ -234,16 +234,6 @@ final class WikibaseClient {
 	private $restrictedEntityLookup = null;
 
 	/**
-	 * @var DataTypeDefinitions
-	 */
-	private $dataTypeDefinitions;
-
-	/**
-	 * @var EntityTypeDefinitions
-	 */
-	private $entityTypeDefinitions;
-
-	/**
 	 * @var TermLookup|null
 	 */
 	private $termLookup = null;
@@ -410,21 +400,27 @@ final class WikibaseClient {
 
 	public function __construct(
 		SettingsArray $settings,
-		DataTypeDefinitions $dataTypeDefinitions,
-		EntityTypeDefinitions $entityTypeDefinitions,
 		SiteLookup $siteLookup,
 		EntitySourceDefinitions $entitySourceDefinitions
 	) {
 		$this->settings = $settings;
-		$this->dataTypeDefinitions = $dataTypeDefinitions;
-		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->siteLookup = $siteLookup;
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
 	}
 
+	public static function getDataTypeDefinitions( ContainerInterface $services = null ): DataTypeDefinitions {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.DataTypeDefinitions' );
+	}
+
+	public static function getEntityTypeDefinitions( ContainerInterface $services = null ): EntityTypeDefinitions {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.EntityTypeDefinitions' );
+	}
+
 	public function getDataTypeFactory(): DataTypeFactory {
 		if ( $this->dataTypeFactory === null ) {
-			$this->dataTypeFactory = new DataTypeFactory( $this->dataTypeDefinitions->getValueTypes() );
+			$this->dataTypeFactory = new DataTypeFactory( self::getDataTypeDefinitions()->getValueTypes() );
 		}
 
 		return $this->dataTypeFactory;
@@ -433,7 +429,7 @@ final class WikibaseClient {
 	public function getEntityIdParser(): EntityIdParser {
 		if ( $this->entityIdParser === null ) {
 			$this->entityIdParser = new DispatchingEntityIdParser(
-				$this->entityTypeDefinitions->getEntityIdBuilders()
+				self::getEntityTypeDefinitions()->getEntityIdBuilders()
 			);
 		}
 
@@ -443,7 +439,7 @@ final class WikibaseClient {
 	public function getEntityIdComposer(): EntityIdComposer {
 		if ( $this->entityIdComposer === null ) {
 			$this->entityIdComposer = new EntityIdComposer(
-				$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK )
+				self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK )
 			);
 		}
 
@@ -460,7 +456,8 @@ final class WikibaseClient {
 
 	private function newEntitySourceWikibaseServices() {
 		$nameTableStoreFactory = MediaWikiServices::getInstance()->getNameTableStoreFactory();
-		$genericServices = new GenericServices( $this->entityTypeDefinitions );
+		$entityTypeDefinitions = self::getEntityTypeDefinitions();
+		$genericServices = new GenericServices( $entityTypeDefinitions );
 
 		$singleSourceServices = [];
 		foreach ( $this->entitySourceDefinitions->getSources() as $source ) {
@@ -473,10 +470,10 @@ final class WikibaseClient {
 				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
 				$this->getDataAccessSettings(),
 				$source,
-				$this->entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
-				$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
-				$this->entityTypeDefinitions->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK ),
-				$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK )
+				$entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
+				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
+				$entityTypeDefinitions->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK ),
+				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK )
 			);
 		}
 
@@ -494,20 +491,6 @@ final class WikibaseClient {
 	 */
 	private function getEntityLookup() {
 		return $this->getStore()->getEntityLookup();
-	}
-
-	private static function getDefaultDataTypes() {
-		$baseDataTypes = require __DIR__ . '/../../lib/WikibaseLib.datatypes.php';
-		$clientDataTypes = require __DIR__ . '/../WikibaseClient.datatypes.php';
-
-		return array_merge_recursive( $baseDataTypes, $clientDataTypes );
-	}
-
-	/**
-	 * @return array[]
-	 */
-	private static function getDefaultEntityTypes() {
-		return require __DIR__ . '/../../lib/WikibaseLib.entitytypes.php';
 	}
 
 	/**
@@ -688,26 +671,15 @@ final class WikibaseClient {
 	 * @return self
 	 */
 	private static function newInstance() {
-		$dataTypeDefinitionsArray = self::getDefaultDataTypes();
-		Hooks::run( 'WikibaseClientDataTypes', [ &$dataTypeDefinitionsArray ] );
-
-		$entityTypeDefinitionsArray = self::getDefaultEntityTypes();
-		Hooks::run( 'WikibaseClientEntityTypes', [ &$entityTypeDefinitionsArray ] );
-
 		$settings = WikibaseSettings::getClientSettings();
-
-		$dataTypeDefinitions = new DataTypeDefinitions(
-			$dataTypeDefinitionsArray,
-			$settings->getSetting( 'disabledDataTypes' )
-		);
-		$entityTypeDefinitions = new EntityTypeDefinitions( $entityTypeDefinitionsArray );
 
 		return new self(
 			$settings,
-			$dataTypeDefinitions,
-			$entityTypeDefinitions,
 			MediaWikiServices::getInstance()->getSiteLookup(),
-			self::getEntitySourceDefinitionsFromSettings( $settings, $entityTypeDefinitions )
+			self::getEntitySourceDefinitionsFromSettings(
+				$settings,
+				self::getEntityTypeDefinitions()
+			)
 		);
 	}
 
@@ -862,7 +834,7 @@ final class WikibaseClient {
 	private function getSnakFormatterFactory(): OutputFormatSnakFormatterFactory {
 		if ( $this->snakFormatterFactory === null ) {
 			$this->snakFormatterFactory = new OutputFormatSnakFormatterFactory(
-				$this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks(),
+				self::getDataTypeDefinitions()->getSnakFormatterFactoryCallbacks(),
 				$this->getValueFormatterFactory(),
 				$this->getPropertyDataTypeLookup(),
 				$this->getDataTypeFactory()
@@ -879,7 +851,7 @@ final class WikibaseClient {
 	private function getValueFormatterFactory(): OutputFormatValueFormatterFactory {
 		if ( $this->valueFormatterFactory === null ) {
 			$this->valueFormatterFactory = new OutputFormatValueFormatterFactory(
-				$this->dataTypeDefinitions->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
+				self::getDataTypeDefinitions()->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
 				$this->getContentLanguage(),
 				$this->getLanguageFallbackChainFactory()
 			);
@@ -1001,14 +973,14 @@ final class WikibaseClient {
 	 * @return callable[]
 	 */
 	public function getEntityDeserializerFactoryCallbacks() {
-		return $this->entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK );
+		return self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK );
 	}
 
 	/**
 	 * @return string[]
 	 */
 	public function getLuaEntityModules() {
-		return $this->entityTypeDefinitions->get( EntityTypeDefinitions::LUA_ENTITY_MODULE );
+		return self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::LUA_ENTITY_MODULE );
 	}
 
 	/**
@@ -1073,7 +1045,7 @@ final class WikibaseClient {
 
 	private function getEntityDiffer(): EntityDiffer {
 		$entityDiffer = new EntityDiffer();
-		foreach ( $this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_DIFFER_STRATEGY_BUILDER ) as $builder ) {
+		foreach ( self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_DIFFER_STRATEGY_BUILDER ) as $builder ) {
 			$entityDiffer->registerEntityDifferStrategy( call_user_func( $builder ) );
 		}
 		return $entityDiffer;
@@ -1297,9 +1269,10 @@ final class WikibaseClient {
 
 	public function getEntityIdLookup(): EntityIdLookup {
 		if ( $this->entityIdLookup === null ) {
+			$entityTypeDefinitions = self::getEntityTypeDefinitions();
 			$this->entityIdLookup = new ByTypeDispatchingEntityIdLookup(
-				$this->entityTypeDefinitions->get( EntityTypeDefinitions::CONTENT_MODEL_ID ),
-				$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_ID_LOOKUP_CALLBACK ),
+				$entityTypeDefinitions->get( EntityTypeDefinitions::CONTENT_MODEL_ID ),
+				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_ID_LOOKUP_CALLBACK ),
 				new PagePropsEntityIdLookup(
 					MediaWikiServices::getInstance()->getDBLoadBalancer(),
 					$this->getEntityIdParser()
