@@ -26,5 +26,6 @@
 	"wikibase-rc-wikibase-edit-title": "Vikimaʼlumotlarga oid tahrir",
 	"wikibase-replicationnote": "Iltimos, eʼtibor bering, oʻzgarishlar barcha viki-loyihalarda koʻrsatilishi uchun bir necha daqiqa kerak boʻlishi mumkin",
 	"wikibase-watchlist-show-changes-pref": "Vikimaʼlumotlarga oid tahrirlar kuzatuv roʻyxatimda koʻrsatilsin",
-	"wikibase-otherprojects": "Boshqa loyihalarda"
+	"wikibase-otherprojects": "Boshqa loyihalarda",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Kirmasdan turib tahrirlash"
 }

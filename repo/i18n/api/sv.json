@@ -82,7 +82,7 @@
 	"apihelp-wbgetentities-description": "Hämtar data från multipla Wikibase-entiteter.",
 	"apihelp-wbgetentities-summary": "Hämtar data från flera Wikibase-entiteter.",
 	"apihelp-wbgetentities-param-ids": "ID:n för entiteterna att hämta data från",
-	"apihelp-wbgetentities-param-sites": "Identifierare för webbplatsen som den motsvarande sidan finns på\nAnvänd tillsammans med <code>title</code>, men bara för en given webbplats för flera titlar eller flera webbplatser för en titel.",
+	"apihelp-wbgetentities-param-sites": "Identifierare för webbplatsen som den motsvarande sidan finns på.\nAnvänd tillsammans med <code>title</code>, men bara för en given webbplats för flera titlar eller flera webbplatser för en titel.",
 	"apihelp-wbgetentities-param-titles": "Titeln för motsvarande sida.\nAnvänd tillsammans med <code>sites</code> men ange bara en webbplats för flera titlar eller flera webbplatser för en titel.",
 	"apihelp-wbgetentities-param-redirects": "Huruvida omdirigeringar ska lösas.\nOm \"no\" är angivet kommer omdirigeringar att behandlas som raderade entiteter.",
 	"apihelp-wbgetentities-param-props": "Namnet på de egenskaper som ska hämtas från var entitet.\nFiltreras ytterligare på eventuella språk som anges.",

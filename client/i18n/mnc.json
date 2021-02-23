@@ -2,13 +2,18 @@
 	"@metadata": {
 		"authors": [
 			"ChoiChong",
+			"Chulsu463",
 			"Moon0319"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}} jaka kūbulihebi",
 	"wikibase-dataitem": "{{WBREPONAME}} ᡥᠠᠴᡳᠨ",
 	"wikibase-editlinks": "ᠪᠠᠨᠵᡳᠪᡠᠰᡳ ᠯᡳᠨᡴᠰ",
+	"wikibase-editlinkstitle": "geren gisun i asu be halambi",
+	"wikibase-linkitem-addlinks": "asu be nonggimbi",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ᠰᠣᠮᡳᡵᡝ",
 	"wikibase-rc-hide-wikidata-show": "ᡳᠯᡝᡨᡠᠯᡝᡵᡝ",
+	"wikibase-rc-wikibase-edit-letter": "ton",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ᠪᠠᠨᠵᡳᠪᡠᠰᡳ"
 }

@@ -461,6 +461,7 @@
 	"wikibase-tainted-ref-popper-text": "Uttalandets värde ändrades, men referensen förblev densamma. Du kan ta bort den här varningen om referensen fortfarande stämmer.",
 	"wikibase-tainted-ref-popper-help-link-text": "Hjälp",
 	"wikibase-tainted-ref-popper-remove-warning": "Ta bort varning",
+	"wikibase-editentity-warning-serializeresult": "Kunde inte serialisera entitetsdata för resultat.",
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Lista över egenskaper på $2]",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Avbryt",
 	"wikibase-federated-properties-leaving-site-notice-continue": "Fortsätt till källwikin",
