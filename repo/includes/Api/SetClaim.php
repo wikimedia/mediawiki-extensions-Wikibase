@@ -108,7 +108,8 @@ class SetClaim extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		IBufferingStatsdDataFactory $stats,
-		EntityIdParser $entityIdParser
+		EntityIdParser $entityIdParser,
+		StatementGuidParser $statementGuidParser
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
@@ -128,7 +129,7 @@ class SetClaim extends ApiBase {
 			$wikibaseRepo->getExternalFormatStatementDeserializer(),
 			$changeOpFactoryProvider->getStatementChangeOpFactory(),
 			$modificationHelper,
-			$wikibaseRepo->getStatementGuidParser(),
+			$statementGuidParser,
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getResultBuilder( $module );
 			},

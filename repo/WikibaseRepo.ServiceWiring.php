@@ -8,6 +8,7 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -93,6 +94,10 @@ return [
 
 	'WikibaseRepo.Settings' => function ( MediaWikiServices $services ): SettingsArray {
 		return WikibaseSettings::getRepoSettings();
+	},
+
+	'WikibaseRepo.StatementGuidParser' => function ( MediaWikiServices $services ): StatementGuidParser {
+		return new StatementGuidParser( WikibaseRepo::getEntityIdParser( $services ) );
 	},
 
 	'WikibaseRepo.ValueParserFactory' => function ( MediaWikiServices $services ): ValueParserFactory {
