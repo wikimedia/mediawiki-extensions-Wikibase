@@ -9,6 +9,7 @@ use ApiMain;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -86,7 +87,8 @@ class RemoveClaims extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		EntityIdParser $entityIdParser,
-		StatementGuidParser $statementGuidParser
+		StatementGuidParser $statementGuidParser,
+		StatementGuidValidator $statementGuidValidator
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
@@ -95,7 +97,7 @@ class RemoveClaims extends ApiBase {
 		$modificationHelper = new StatementModificationHelper(
 			$wikibaseRepo->getSnakFactory(),
 			$entityIdParser,
-			$wikibaseRepo->getStatementGuidValidator(),
+			$statementGuidValidator,
 			$apiHelperFactory->getErrorReporter( $mainModule )
 		);
 

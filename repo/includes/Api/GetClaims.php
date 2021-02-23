@@ -92,7 +92,8 @@ class GetClaims extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		EntityIdParser $entityIdParser,
-		StatementGuidParser $statementGuidParser
+		StatementGuidParser $statementGuidParser,
+		StatementGuidValidator $statementGuidValidator
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
@@ -100,7 +101,7 @@ class GetClaims extends ApiBase {
 		return new self(
 			$mainModule,
 			$moduleName,
-			$wikibaseRepo->getStatementGuidValidator(),
+			$statementGuidValidator,
 			$statementGuidParser,
 			$entityIdParser,
 			$apiHelperFactory->getErrorReporter( $mainModule ),

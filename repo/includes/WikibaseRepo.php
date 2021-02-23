@@ -233,11 +233,6 @@ class WikibaseRepo {
 	private $propertyDataTypeLookup = null;
 
 	/**
-	 * @var StatementGuidValidator|null
-	 */
-	private $statementGuidValidator = null;
-
-	/**
 	 * @var Deserializer|null
 	 */
 	private $entityDeserializer = null;
@@ -918,7 +913,7 @@ class WikibaseRepo {
 		return new ChangeOpFactoryProvider(
 			$this->getEntityConstraintProvider(),
 			new GuidGenerator(),
-			$this->getStatementGuidValidator(),
+			self::getStatementGuidValidator(),
 			self::getStatementGuidParser(),
 			$snakValidator,
 			$this->getTermValidatorFactory(),
@@ -984,15 +979,9 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return StatementGuidValidator
-	 */
-	public function getStatementGuidValidator() {
-		if ( $this->statementGuidValidator === null ) {
-			$this->statementGuidValidator = new StatementGuidValidator( self::getEntityIdParser() );
-		}
-
-		return $this->statementGuidValidator;
+	public static function getStatementGuidValidator( ContainerInterface $service = null ): StatementGuidValidator {
+		return ( $service ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.StatementGuidValidator' );
 	}
 
 	public static function getSettings( ContainerInterface $services = null ): SettingsArray {

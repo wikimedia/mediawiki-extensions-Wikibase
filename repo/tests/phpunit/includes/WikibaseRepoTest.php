@@ -397,7 +397,7 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetStatementGuidValidator() {
-		$returnValue = $this->getWikibaseRepo()->getStatementGuidValidator();
+		$returnValue = WikibaseRepo::getStatementGuidValidator();
 		$this->assertInstanceOf( StatementGuidValidator::class, $returnValue );
 	}
 

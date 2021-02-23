@@ -19,6 +19,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\StatementListProvidingEntity;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
+use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Summary;
@@ -109,7 +110,8 @@ class SetClaim extends ApiBase {
 		string $moduleName,
 		IBufferingStatsdDataFactory $stats,
 		EntityIdParser $entityIdParser,
-		StatementGuidParser $statementGuidParser
+		StatementGuidParser $statementGuidParser,
+		StatementGuidValidator $statementGuidValidator
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
@@ -118,7 +120,7 @@ class SetClaim extends ApiBase {
 		$modificationHelper = new StatementModificationHelper(
 			$wikibaseRepo->getSnakFactory(),
 			$entityIdParser,
-			$wikibaseRepo->getStatementGuidValidator(),
+			$statementGuidValidator,
 			$apiHelperFactory->getErrorReporter( $mainModule )
 		);
 

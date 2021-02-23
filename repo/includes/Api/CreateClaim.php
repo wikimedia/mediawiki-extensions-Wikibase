@@ -8,6 +8,7 @@ use ApiBase;
 use ApiMain;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\Repo\ChangeOp\ChangeOpMainSnak;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -73,7 +74,8 @@ class CreateClaim extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
-		EntityIdParser $entityIdParser
+		EntityIdParser $entityIdParser,
+		StatementGuidValidator $statementGuidValidator
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
@@ -83,7 +85,7 @@ class CreateClaim extends ApiBase {
 		$modificationHelper = new StatementModificationHelper(
 			$wikibaseRepo->getSnakFactory(),
 			$entityIdParser,
-			$wikibaseRepo->getStatementGuidValidator(),
+			$statementGuidValidator,
 			$errorReporter
 		);
 
