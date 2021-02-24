@@ -44,6 +44,9 @@ extendVueEnvironment(
 		get: ( messageKey ) => {
 			return messages[ messageKey ] || `⧼${messageKey}⧽`;
 		},
+		getText: ( messageKey ) => {
+			return messages[ messageKey ] || `⧼${messageKey}⧽`;
+		},
 	},
 	{
 		usePublish: true,
