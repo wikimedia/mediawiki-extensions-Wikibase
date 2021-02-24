@@ -4,7 +4,6 @@ namespace Wikibase\Client\Api;
 
 use ApiQuery;
 use ApiQueryBase;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\SettingsArray;
 
 /**
@@ -24,22 +23,14 @@ class ApiClientInfo extends ApiQueryBase {
 	private $settings;
 
 	/**
-	 * @param SettingsArray $settings
 	 * @param ApiQuery $apiQuery
 	 * @param string $moduleName
+	 * @param SettingsArray $settings
 	 */
-	public function __construct( SettingsArray $settings, ApiQuery $apiQuery, $moduleName ) {
+	public function __construct( ApiQuery $apiQuery, $moduleName, SettingsArray $settings ) {
 		parent::__construct( $apiQuery, $moduleName, 'wb' );
 
 		$this->settings = $settings;
-	}
-
-	public static function factory( ApiQuery $apiQuery, string $moduleName ): self {
-		return new self(
-			WikibaseClient::getDefaultInstance()->getSettings(),
-			$apiQuery,
-			$moduleName
-		);
 	}
 
 	/**

@@ -10,7 +10,6 @@ use Message;
 use Parser;
 use PPFrame;
 use ResourceLoaderContext;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\SettingsArray;
 
 /**
@@ -30,14 +29,6 @@ class MagicWordHookHandler implements
 
 	public function __construct( SettingsArray $settings ) {
 		$this->settings = $settings;
-	}
-
-	/**
-	 * @return self
-	 */
-	public static function factory() {
-		$client = WikibaseClient::getDefaultInstance();
-		return new self( $client->getSettings() );
 	}
 
 	/**

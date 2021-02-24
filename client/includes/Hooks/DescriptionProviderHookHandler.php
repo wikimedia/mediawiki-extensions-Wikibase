@@ -9,6 +9,7 @@ use MediaWiki\Rest\Hook\SearchResultProvideDescriptionHook;
 use Title;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * Description Provider Hook Handler for Search Results
@@ -59,12 +60,14 @@ class DescriptionProviderHookHandler implements SearchResultProvideDescriptionHo
 		}
 	}
 
-	public static function factory(): DescriptionProviderHookHandler {
+	public static function factory(
+		SettingsArray $clientSettings
+	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$allowLocalShortDesc = $wikibaseClient->getSettings()->getSetting( 'allowLocalShortDesc' );
-		$forceLocalShortDesc = $wikibaseClient->getSettings()->getSetting( 'forceLocalShortDesc' );
+		$allowLocalShortDesc = $clientSettings->getSetting( 'allowLocalShortDesc' );
+		$forceLocalShortDesc = $clientSettings->getSetting( 'forceLocalShortDesc' );
 		$descriptionLookup = $wikibaseClient->getDescriptionLookup();
-		return new DescriptionProviderHookHandler( $allowLocalShortDesc, $forceLocalShortDesc, $descriptionLookup );
+		return new self( $allowLocalShortDesc, $forceLocalShortDesc, $descriptionLookup );
 	}
 
 }

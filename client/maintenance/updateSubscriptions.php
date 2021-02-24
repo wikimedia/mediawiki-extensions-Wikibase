@@ -58,7 +58,7 @@ class UpdateSubscriptions extends Maintenance {
 		}
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
+		$settings = WikibaseClient::getSettings();
 		$repoDB = $wikibaseClient->getDatabaseDomainNameOfLocalRepo();
 		$clientId = $settings->getSetting( 'siteGlobalID' );
 

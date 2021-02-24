@@ -178,7 +178,7 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetSettingsReturnType() {
-		$returnValue = $this->getWikibaseClient()->getSettings();
+		$returnValue = WikibaseClient::getSettings();
 		$this->assertInstanceOf( SettingsArray::class, $returnValue );
 	}
 
@@ -188,7 +188,7 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetLangLinkHandlerFactoryReturnType() {
-		$settings = clone WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = clone WikibaseClient::getSettings();
 
 		$settings->setSetting( 'itemAndPropertySourceName', 'test' );
 		$settings->setSetting( 'siteGroup', 'wikipedia' );
@@ -210,11 +210,9 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider getLangLinkSiteGroupProvider
 	 */
 	public function testGetLangLinkSiteGroup( $expected, SettingsArray $settings, SiteLookup $siteLookup ) {
-		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
+		$this->setService( 'WikibaseClient.Settings', $settings );
 		$client = new WikibaseClient(
-			$settings,
-			$siteLookup,
-			new EntitySourceDefinitions( [], $entityTypeDefinitions )
+			$siteLookup
 		);
 
 		$this->assertEquals( $expected, $client->getLangLinkSiteGroup() );
@@ -223,7 +221,7 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function getLangLinkSiteGroupProvider() {
 		$siteLookup = $this->getSiteLookup();
 
-		$settings = clone WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = clone WikibaseClient::getSettings();
 
 		$settings->setSetting( 'siteGroup', 'wikipedia' );
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
@@ -244,10 +242,9 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider getSiteGroupProvider
 	 */
 	public function testGetSiteGroup( $expected, SettingsArray $settings, SiteLookup $siteLookup ) {
+		$this->setService( 'WikibaseClient.Settings', $settings );
 		$client = new WikibaseClient(
-			$settings,
-			$siteLookup,
-			$this->getEntitySourceDefinitions()
+			$siteLookup
 		);
 
 		$this->assertEquals( $expected, $client->getSiteGroup() );
@@ -276,7 +273,7 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function getSiteGroupProvider() {
-		$settings = clone WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = clone WikibaseClient::getSettings();
 		$settings->setSetting( 'siteGroup', null );
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
 
@@ -339,16 +336,16 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetRecentChangeFactory() {
-		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings = clone WikibaseClient::getSettings();
 
 		$settings->setSetting( 'itemAndPropertySourceName', 'localrepo' );
+		$this->setService( 'WikibaseClient.Settings', $settings );
 
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
-		$wikibaseClient = new WikibaseClient(
-			$settings,
-			$this->getSiteLookup(),
-			new EntitySourceDefinitions(
-				[ new EntitySource(
+		$this->setService( 'WikibaseClient.EntityTypeDefinitions', $entityTypeDefinitions );
+		$entitySourceDefinitions = new EntitySourceDefinitions(
+			[
+				new EntitySource(
 					'localrepo',
 					'repo',
 					[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
@@ -356,9 +353,13 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 					'',
 					'',
 					'repo'
-				) ],
-				$entityTypeDefinitions
-			)
+				)
+			],
+			$entityTypeDefinitions
+		);
+		$this->setService( 'WikibaseClient.EntitySourceDefinitions', $entitySourceDefinitions );
+		$wikibaseClient = new WikibaseClient(
+			$this->getSiteLookup()
 		);
 
 		$recentChangeFactory = $wikibaseClient->getRecentChangeFactory();
@@ -429,37 +430,39 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetDatabaseDomainNameOfLocalRepo() {
-		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings = clone WikibaseClient::getSettings();
 
 		$settings->setSetting( 'itemAndPropertySourceName', 'localrepo' );
+		$this->setService( 'WikibaseClient.Settings', $settings );
 
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
+		$this->setService( 'WikibaseClient.EntityTypeDefinitions', $entityTypeDefinitions );
+		$entitySourceDefinitions = new EntitySourceDefinitions(
+			[
+				new EntitySource(
+					'localrepo',
+					'repodb',
+					[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
+					'',
+					'',
+					'',
+					'repo'
+				),
+				new EntitySource(
+					'otherrepo',
+					'otherdb',
+					[ 'property' => [ 'namespaceId' => 321, 'slot' => 'main' ] ],
+					'',
+					'',
+					'',
+					'other'
+				),
+			],
+			$entityTypeDefinitions
+		);
+		$this->setService( 'WikibaseClient.EntitySourceDefinitions', $entitySourceDefinitions );
 		$wikibaseClient = new WikibaseClient(
-			$settings,
-			$this->getSiteLookup(),
-			new EntitySourceDefinitions(
-				[
-					new EntitySource(
-						'localrepo',
-						'repodb',
-						[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
-						'',
-						'',
-						'',
-						'repo'
-					),
-					new EntitySource(
-						'otherrepo',
-						'otherdb',
-						[ 'property' => [ 'namespaceId' => 321, 'slot' => 'main' ] ],
-						'',
-						'',
-						'',
-						'other'
-					),
-				],
-				$entityTypeDefinitions
-			)
+			$this->getSiteLookup()
 		);
 
 		$this->assertEquals( 'repodb', $wikibaseClient->getDatabaseDomainNameOfLocalRepo() );
@@ -477,15 +480,15 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getWikibaseClient( SettingsArray $settings = null ) {
 		if ( $settings === null ) {
-			$settings = WikibaseClient::getDefaultInstance()->getSettings();
-			// Don't mutate settings of default instance
-			$settings = clone $settings;
+			$settings = clone WikibaseClient::getSettings();
 			$settings->setSetting( 'itemAndPropertySourceName', 'test' );
 		}
+		$this->setService( 'WikibaseClient.Settings', $settings );
+		$entitySourceDefinitions = $this->getEntitySourceDefinitions();
+		$this->setService( 'WikibaseClient.EntitySourceDefinitions', $entitySourceDefinitions );
+
 		return new WikibaseClient(
-			new SettingsArray( $settings->getArrayCopy() ),
-			$this->getSiteLookup(),
-			$this->getEntitySourceDefinitions()
+			$this->getSiteLookup()
 		);
 	}
 

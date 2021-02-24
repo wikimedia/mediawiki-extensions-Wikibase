@@ -16,7 +16,7 @@ use Wikibase\Lib\Modules\MediaWikiConfigModule;
  */
 class DataBridgeResourceLoaderModules {
 	public static function initModule() {
-		$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
+		$clientSettings = WikibaseClient::getSettings();
 		return new ResourceLoaderFileModule(
 			[
 				'scripts' => [
@@ -37,7 +37,7 @@ class DataBridgeResourceLoaderModules {
 	}
 
 	public static function externalModifiersModule() {
-		$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
+		$clientSettings = WikibaseClient::getSettings();
 		return new ResourceLoaderFileModule(
 			[
 				'styles' => [
@@ -54,7 +54,7 @@ class DataBridgeResourceLoaderModules {
 	}
 
 	public static function configModule() {
-		$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
+		$clientSettings = WikibaseClient::getSettings();
 		return new MediaWikiConfigModule(
 			[
 				'getconfigvalueprovider' => function () use ( $clientSettings ) {
@@ -71,7 +71,7 @@ class DataBridgeResourceLoaderModules {
 	}
 
 	public static function appModule() {
-		$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
+		$clientSettings = WikibaseClient::getSettings();
 		return new ResourceLoaderFileModule(
 			[
 				'scripts' => [
@@ -166,7 +166,7 @@ class DataBridgeResourceLoaderModules {
 	}
 
 	public static function modernAppModule() {
-		$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
+		$clientSettings = WikibaseClient::getSettings();
 		return new ResourceLoaderFileModule(
 			[
 				'scripts' => [
@@ -182,7 +182,7 @@ class DataBridgeResourceLoaderModules {
 	}
 
 	public static function legacyAppModule() {
-		$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
+		$clientSettings = WikibaseClient::getSettings();
 		return new ResourceLoaderFileModule(
 			[
 				'scripts' => [

@@ -88,7 +88,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getEntityIdParser(),
 			$lang,
 			$this->getUsageAccumulator(),
-			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
+			WikibaseClient::getSettings()->getSetting( 'siteGlobalID' )
 		);
 	}
 
@@ -123,7 +123,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		if ( !$this->luaFunctionCallTracker ) {
 			$mwServices = MediaWikiServices::getInstance();
 			$wikibaseClient = WikibaseClient::getDefaultInstance();
-			$settings = $wikibaseClient->getSettings();
+			$settings = WikibaseClient::getSettings();
 
 			$this->luaFunctionCallTracker = new LuaFunctionCallTracker(
 				$mwServices->getStatsdDataFactory(),
@@ -162,7 +162,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @return bool
 	 */
 	private function allowDataAccessInUserLanguage() {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = WikibaseClient::getSettings();
 
 		return $settings->getSetting( 'allowDataAccessInUserLanguage' );
 	}
@@ -262,7 +262,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getSetting( $setting ) {
 		$this->checkType( 'setting', 1, $setting, 'string' );
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = WikibaseClient::getSettings();
 		return [ $settings->getSetting( $setting ) ];
 	}
 

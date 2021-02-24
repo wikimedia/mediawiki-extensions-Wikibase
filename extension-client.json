@@ -19,7 +19,9 @@
 	"APIMetaModules": {
 		"wikibase": {
 			"class": "\\Wikibase\\Client\\Api\\ApiClientInfo",
-			"factory": "\\Wikibase\\Client\\Api\\ApiClientInfo::factory"
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		}
 	},
 	"APIPropModules": {
@@ -29,7 +31,10 @@
 		},
 		"description": {
 			"class": "\\Wikibase\\Client\\Api\\Description",
-			"factory": "\\Wikibase\\Client\\Api\\Description::factory"
+			"factory": "\\Wikibase\\Client\\Api\\Description::factory",
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		},
 		"wbentityusage": {
 			"class": "\\Wikibase\\Client\\Api\\ApiPropsEntityUsage",
@@ -55,16 +60,25 @@
 	"HookHandlers": {
 		"BeforePageDisplay": {
 			"class": "\\Wikibase\\Client\\Hooks\\BeforePageDisplayHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\BeforePageDisplayHandler::factory"
+			"factory": "\\Wikibase\\Client\\Hooks\\BeforePageDisplayHandler::factory",
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		},
 		"ChangesListLines": {
 			"class" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler",
-			"factory" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler::factory"
+			"factory" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler::factory",
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		},
 		"ChangesListSpecialPage": {
 			"class": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler::factory",
-			"services": [ "DBLoadBalancer" ]
+			"services": [
+				"DBLoadBalancer",
+				"WikibaseClient.Settings"
+			]
 		},
 		"ParserOutputUpdate": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler",
@@ -76,14 +90,20 @@
 		},
 		"DeletePageNoticeCreator": {
 			"class": "\\Wikibase\\Client\\Hooks\\DeletePageNoticeCreator",
-			"factory": "\\Wikibase\\Client\\Hooks\\DeletePageNoticeCreator::factory"
+			"factory": "\\Wikibase\\Client\\Hooks\\DeletePageNoticeCreator::factory",
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		},
 		"LibHooks": {
 			"class": "\\Wikibase\\Lib\\LibHooks"
 		},
 		"DescriptionProvider": {
 			"class": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler::factory"
+			"factory": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler::factory",
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		},
 		"EditAction": {
 			"class": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler",
@@ -91,23 +111,37 @@
 		},
 		"InfoAction": {
 			"class": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler::factory"
+			"factory": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler::factory",
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		},
 		"Magic": {
 			"class": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler::factory"
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		},
 		"MovePageNotice": {
 			"class": "\\Wikibase\\Client\\Hooks\\MovePageNotice",
-			"factory": "\\Wikibase\\Client\\Hooks\\MovePageNotice::factory"
+			"factory": "\\Wikibase\\Client\\Hooks\\MovePageNotice::factory",
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		},
 		"ParserFunctionRegistrant": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserFunctionRegistrant",
-			"factory": "\\Wikibase\\Client\\Hooks\\ParserFunctionRegistrant::factory"
+			"factory": "\\Wikibase\\Client\\Hooks\\ParserFunctionRegistrant::factory",
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		},
 		"Parser": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\ParserHookHandler::factory"
+			"factory": "\\Wikibase\\Client\\Hooks\\ParserHookHandler::factory",
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		},
 		"Sidebar": {
 			"class": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler",
@@ -115,7 +149,10 @@
 		},
 		"SkinAfterPortlet": {
 			"class": "\\Wikibase\\Client\\Hooks\\SkinAfterPortletHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\SkinAfterPortletHandler::factory"
+			"factory": "\\Wikibase\\Client\\Hooks\\SkinAfterPortletHandler::factory",
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		},
 		"SqlUsageTrackerSchemaUpdater": {
 			"class": "\\Wikibase\\Client\\Usage\\Sql\\SqlUsageTrackerSchemaUpdater"
@@ -125,7 +162,10 @@
 		},
 		"UpdateRepo": {
 			"class": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler::factory"
+			"factory": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler::factory",
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		}
 	},
 	"Hooks": {
@@ -350,7 +390,10 @@
 		"UnconnectedPages": "Wikibase\\Client\\Specials\\SpecialUnconnectedPages",
 		"PagesWithBadges": {
 			"class": "Wikibase\\Client\\Specials\\SpecialPagesWithBadges",
-			"factory": "Wikibase\\Client\\Specials\\SpecialPagesWithBadges::factory"
+			"factory": "Wikibase\\Client\\Specials\\SpecialPagesWithBadges::factory",
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		},
 		"EntityUsage": {
 			"class": "Wikibase\\Client\\Specials\\SpecialEntityUsage",

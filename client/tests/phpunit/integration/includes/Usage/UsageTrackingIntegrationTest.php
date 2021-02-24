@@ -54,7 +54,7 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$settings = $wikibaseClient->getSettings();
+		$settings = WikibaseClient::getSettings();
 		$this->oldAllowDataTransclusion = $settings->getSetting( 'allowDataTransclusion' );
 		$this->oldEntityNamespaces = $wikibaseClient->getEntityNamespaceLookup()->getEntityNamespaces();
 		$settings->setSetting( 'allowDataTransclusion', true );
@@ -68,11 +68,11 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 	protected function tearDown(): void {
 		parent::tearDown();
 
-		WikibaseClient::getDefaultInstance()->getSettings()->setSetting(
+		WikibaseClient::getSettings()->setSetting(
 			'allowDataTransclusion',
 			$this->oldAllowDataTransclusion
 		);
-		WikibaseClient::getDefaultInstance()->getSettings()->setSetting(
+		WikibaseClient::getSettings()->setSetting(
 			'entityNamespaces',
 			$this->oldEntityNamespaces
 		);

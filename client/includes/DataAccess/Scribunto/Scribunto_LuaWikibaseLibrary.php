@@ -217,7 +217,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		if ( !$this->luaFunctionCallTracker ) {
 			$mwServices = MediaWikiServices::getInstance();
 			$wikibaseClient = WikibaseClient::getDefaultInstance();
-			$settings = $wikibaseClient->getSettings();
+			$settings = WikibaseClient::getSettings();
 
 			$this->luaFunctionCallTracker = new LuaFunctionCallTracker(
 				$mwServices->getStatsdDataFactory(),
@@ -235,14 +235,14 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return bool
 	 */
 	private function allowDataAccessInUserLanguage() {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = WikibaseClient::getSettings();
 
 		return $settings->getSetting( 'allowDataAccessInUserLanguage' );
 	}
 
 	private function newEntityAccessor() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
+		$settings = WikibaseClient::getSettings();
 		return new EntityAccessor(
 			$this->getEntityIdParser(),
 			$wikibaseClient->getRestrictedEntityLookup(),
@@ -323,7 +323,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private function newLanguageIndependentLuaBindings() {
 		$mediaWikiServices = MediaWikiServices::getInstance();
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
+		$settings = WikibaseClient::getSettings();
 
 		$termLookup = new CachingFallbackBasedTermLookup(
 			$wikibaseClient->getTermFallbackCache(),
@@ -466,7 +466,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$accesses++;
 		$parserOutput->setExtensionData( $key, $accesses );
 
-		$limit = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'referencedEntityIdAccessLimit' );
+		$limit = WikibaseClient::getSettings()->getSetting( 'referencedEntityIdAccessLimit' );
 		if ( $accesses > $limit ) {
 			throw new Scribunto_LuaError(
 				wfMessage( 'wikibase-error-exceeded-referenced-entity-id-limit' )->params( 'IGNORED' )->numParams( 3 )->text()

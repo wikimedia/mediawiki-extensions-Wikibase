@@ -15,6 +15,7 @@ use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * Handlers for hooks dealing with Wikibase changes in client recent changes and watchlists
@@ -44,10 +45,12 @@ class ChangesListLinesHandler implements
 		$this->formatter = $formatter;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		SettingsArray $clientSettings
+	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$changeFactory = new ExternalChangeFactory(
-			$wikibaseClient->getSettings()->getSetting( 'repoSiteId' ),
+			$clientSettings->getSetting( 'repoSiteId' ),
 			$wikibaseClient->getContentLanguage(),
 			$wikibaseClient->getEntityIdParser()
 		);

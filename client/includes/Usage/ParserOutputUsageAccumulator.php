@@ -39,7 +39,7 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	) {
 		$this->parserOutput = $parserOutput;
 		// TODO: Inject it properly
-		$usageModifierLimits = WikibaseClient::getDefaultInstance()->getSettings()->getSetting(
+		$usageModifierLimits = WikibaseClient::getSettings()->getSetting(
 			'entityUsageModifierLimits'
 		);
 		$this->usageDeduplicator = $deduplicator ?: new UsageDeduplicator( $usageModifierLimits );

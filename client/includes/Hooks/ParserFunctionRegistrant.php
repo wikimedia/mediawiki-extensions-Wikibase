@@ -6,8 +6,8 @@ use MediaWiki\Hook\ParserFirstCallInitHook;
 use Parser;
 use PPFrame;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @license GPL-2.0-or-later
@@ -26,20 +26,17 @@ class ParserFunctionRegistrant implements ParserFirstCallInitHook {
 	 */
 	private $allowLocalShortDesc;
 
-	/**
-	 * @param bool $allowDataTransclusion
-	 */
-	public function __construct( $allowDataTransclusion, $allowLocalShortDesc ) {
+	public function __construct( bool $allowDataTransclusion, bool $allowLocalShortDesc ) {
 		$this->allowDataTransclusion = $allowDataTransclusion;
 		$this->allowLocalShortDesc = $allowLocalShortDesc;
 	}
 
-	public static function factory(): self {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
+	public static function factory(
+		SettingsArray $clientSettings
+	): self {
 		return new self(
-			$settings->getSetting( 'allowDataTransclusion' ),
-			$settings->getSetting( 'allowLocalShortDesc' )
+			$clientSettings->getSetting( 'allowDataTransclusion' ),
+			$clientSettings->getSetting( 'allowLocalShortDesc' )
 		);
 	}
 

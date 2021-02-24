@@ -6,6 +6,7 @@ use ApiQuery;
 use ApiQueryBase;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * Provides a short description of the page in the content language.
@@ -54,10 +55,14 @@ class Description extends ApiQueryBase {
 		$this->descriptionLookup = $descriptionLookup;
 	}
 
-	public static function factory( ApiQuery $apiQuery, string $moduleName ): self {
+	public static function factory(
+		ApiQuery $apiQuery,
+		string $moduleName,
+		SettingsArray $clientSettings
+	): self {
 		$client = WikibaseClient::getDefaultInstance();
-		$allowLocalShortDesc = $client->getSettings()->getSetting( 'allowLocalShortDesc' );
-		$forceLocalShortDesc = $client->getSettings()->getSetting( 'forceLocalShortDesc' );
+		$allowLocalShortDesc = $clientSettings->getSetting( 'allowLocalShortDesc' );
+		$forceLocalShortDesc = $clientSettings->getSetting( 'forceLocalShortDesc' );
 		$descriptionLookup = $client->getDescriptionLookup();
 		return new self(
 			$apiQuery,

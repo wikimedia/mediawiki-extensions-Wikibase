@@ -58,7 +58,7 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 			new EntityRetrievingTermLookup( $store->getEntityLookup() )
 		);
 
-		$settings = $wikibaseClient->getSettings();
+		$settings = WikibaseClient::getSettings();
 		$siteId = $settings->getSetting( 'siteGlobalID' );
 
 		$settings->setSetting( 'geoShapeStorageBaseUrl', 'https://media.something/view/' );
@@ -255,8 +255,6 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 	 * @dataProvider richWikitextSnakProvider
 	 */
 	public function testRichWikitextOutput( $expected, $snak ) {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-
 		// This is an integration test, use the global factory
 		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
 		$formatter = $factory->newWikitextSnakFormatter(
@@ -330,8 +328,6 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 	 * @dataProvider escapedPlainTextSnakProvider
 	 */
 	public function testEscapedPlainTextOutput( $expected, $snak ) {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-
 		// This is an integration test, use the global factory
 		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
 		$formatter = $factory->newWikitextSnakFormatter(

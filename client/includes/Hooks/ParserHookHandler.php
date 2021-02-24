@@ -10,6 +10,7 @@ use Parser;
 use ParserOutput;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * Handler for some Parser-related hooks.
@@ -36,12 +37,14 @@ class ParserHookHandler implements
 		$this->entityAccessLimit = $entityAccessLimit;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		SettingsArray $clientSettings
+	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		return new self(
 			$wikibaseClient->getRestrictedEntityLookup(),
-			$wikibaseClient->getSettings()->getSetting( 'entityAccessLimit' )
+			$clientSettings->getSetting( 'entityAccessLimit' )
 		);
 	}
 

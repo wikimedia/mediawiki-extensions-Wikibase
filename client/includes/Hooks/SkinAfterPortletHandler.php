@@ -7,6 +7,7 @@ use MediaWiki\Skins\Hook\SkinAfterPortletHook;
 use Skin;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * Handler for the "SkinAfterPortlet" hook.
@@ -27,7 +28,9 @@ class SkinAfterPortletHandler implements SkinAfterPortletHook {
 		$this->repoItemLinkGenerator = $repoItemLinkGenerator;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		SettingsArray $clientSettings
+	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		return new self(
@@ -36,7 +39,7 @@ class SkinAfterPortletHandler implements SkinAfterPortletHook {
 				$wikibaseClient->newRepoLinker(),
 				$wikibaseClient->getEntityIdParser(),
 				$wikibaseClient->getLangLinkSiteGroup(),
-				$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
+				$clientSettings->getSetting( 'siteGlobalID' )
 			)
 		);
 	}

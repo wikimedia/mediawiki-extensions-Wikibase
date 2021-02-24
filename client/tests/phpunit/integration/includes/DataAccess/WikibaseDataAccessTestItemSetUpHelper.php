@@ -43,7 +43,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 	 */
 	public function setUp(): void {
 		$siteLink = new SiteLink(
-			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' ),
+			WikibaseClient::getSettings()->getSetting( 'siteGlobalID' ),
 			'WikibaseClientDataAccessTest'
 		);
 

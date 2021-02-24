@@ -42,7 +42,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 	protected function setUp(): void {
 		parent::setUp();
 
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = WikibaseClient::getSettings();
 
 		$this->oldAllowDataAccessInUserLanguage = $settings->getSetting( 'allowDataAccessInUserLanguage' );
 		$this->setAllowDataAccessInUserLanguage( false );
@@ -89,7 +89,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
 		$expected = [
-			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' )
+			WikibaseClient::getSettings()->getSetting( 'siteGlobalID' )
 		];
 
 		$this->assertSame( $expected, $luaWikibaseLibrary->getGlobalSiteId() );
@@ -314,11 +314,8 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		return new Scribunto_LuaWikibaseEntityLibrary( $engine );
 	}
 
-	/**
-	 * @param bool $value
-	 */
-	private function setAllowDataAccessInUserLanguage( $value ) {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+	private function setAllowDataAccessInUserLanguage( bool $value ) {
+		$settings = WikibaseClient::getSettings();
 		$settings->setSetting( 'allowDataAccessInUserLanguage', $value );
 	}
 

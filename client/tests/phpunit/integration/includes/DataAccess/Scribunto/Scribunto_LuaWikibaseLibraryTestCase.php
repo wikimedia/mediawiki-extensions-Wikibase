@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
 use ExtensionRegistry;
-use PHPUnit\Framework\TestSuite;
 use Scribunto_LuaEngineTestBase;
 use Title;
 use Wikibase\Client\Tests\Integration\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
@@ -73,7 +72,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 	/**
 	 * Makes sure WikibaseClient uses our ClientStore mock
 	 */
-	private static function doMock() {
+	private function doMock() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
 
 		$store = new MockClientStore( 'de' );
@@ -86,7 +85,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 			new EntityRetrievingTermLookup( $entityLookup ?: $store->getEntityLookup() )
 		);
 
-		$settings = $wikibaseClient->getSettings();
+		$settings = clone WikibaseClient::getSettings();
 		if ( self::$oldAllowArbitraryDataAccess === null ) {
 			// Only need to set this once, as this is supposed to be the original value
 			self::$oldAllowArbitraryDataAccess = $settings->getSetting( 'allowArbitraryDataAccess' );
@@ -104,44 +103,27 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 
 		$settings->setSetting( 'repoDatabase', false );
 
+		$this->setService( 'WikibaseClient.Settings', $settings );
+
 		$testHelper = new WikibaseDataAccessTestItemSetUpHelper( $store );
 		$testHelper->setUp();
 	}
 
-	private static function unMock() {
-		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
+	private function unMock() {
+		WikibaseClient::getDefaultInstance( 'reset' );
 
 		if ( self::$oldAllowArbitraryDataAccess !== null ) {
-			$wikibaseClient->getSettings()->setSetting(
+			WikibaseClient::getSettings()->setSetting(
 				'allowArbitraryDataAccess',
 				self::$oldAllowArbitraryDataAccess
 			);
 		}
 	}
 
-	/**
-	 * Set up stuff we need to have in place even before Scribunto does its stuff.
-	 * And remove that again after suite is done, so that other test won't get
-	 * affected.
-	 *
-	 * @param string $className
-	 *
-	 * @return TestSuite
-	 */
-	public static function suite( $className ) {
-		self::doMock();
-
-		$res = parent::suite( $className );
-
-		self::unMock();
-
-		return $res;
-	}
-
 	protected function setUp(): void {
 		parent::setUp();
 
-		self::doMock();
+		$this->doMock();
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
@@ -157,7 +139,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		// Make sure <maplink> can be used, even if Kartographer is not installed.
 		$this->addMaplinkParserTag();
 
-		$settings = $wikibaseClient->getSettings();
+		$settings = WikibaseClient::getSettings();
 		$this->oldUseKartographerMaplinkInWikitext = $settings->getSetting( 'useKartographerMaplinkInWikitext' );
 		$settings->setSetting( 'useKartographerMaplinkInWikitext', true );
 	}
@@ -165,10 +147,10 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 	protected function tearDown(): void {
 		parent::tearDown();
 
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings = WikibaseClient::getSettings();
 		$settings->setSetting( 'useKartographerMaplinkInWikitext', $this->oldUseKartographerMaplinkInWikitext );
 
-		self::unMock();
+		$this->unMock();
 	}
 
 	private function overridePropertyLabelResolver(): void {
