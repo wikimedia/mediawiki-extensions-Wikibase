@@ -595,7 +595,7 @@ class WikibaseRepo {
 			$this->getContentModelMappings(),
 			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::CONTENT_HANDLER_FACTORY_CALLBACK ),
 			self::getEntitySourceDefinitions(),
-			$this->getLocalEntitySource(),
+			self::getLocalEntitySource(),
 			MediaWikiServices::getInstance()->getInterwikiLookup()
 		);
 	}
@@ -719,7 +719,7 @@ class WikibaseRepo {
 						$entityNamespaceLookup,
 						MediaWikiServices::getInstance()->getSlotRoleStore()
 					),
-					$this->getLocalEntitySource()
+					self::getLocalEntitySource()
 				),
 				$dbName,
 				$repoName
@@ -1045,7 +1045,7 @@ class WikibaseRepo {
 	 */
 	public function getStore() {
 		if ( $this->store === null ) {
-			$localEntitySource = $this->getLocalEntitySource();
+			$localEntitySource = self::getLocalEntitySource();
 			// TODO: the idea of local entity source seems not really suitable here. Store should probably
 			// get source definitions and pass the right source/sources to services it creates accordingly
 			// (as long as what it creates should not migrate to *SourceServices in the first place)
@@ -1066,19 +1066,10 @@ class WikibaseRepo {
 		return $this->store;
 	}
 
-	/**
-	 * @return EntitySource The entity source of the local repository
-	 */
-	public function getLocalEntitySource(): EntitySource {
-		$localEntitySourceName = self::getSettings()->getSetting( 'localEntitySourceName' );
-		$sources = self::getEntitySourceDefinitions()->getSources();
-		foreach ( $sources as $source ) {
-			if ( $source->getSourceName() === $localEntitySourceName ) {
-				return $source;
-			}
-		}
-
-		throw new LogicException( 'No source configured: ' . $localEntitySourceName );
+	public static function getLocalEntitySource( ContainerInterface $services = null ): EntitySource {
+		// EntitySource bearing the same name as the localEntitySourceName setting
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.LocalEntitySource' );
 	}
 
 	/**
@@ -1186,7 +1177,7 @@ class WikibaseRepo {
 				self::getSettings()->getSetting( 'canonicalLanguageCodes' )
 			);
 
-			$localEntitySourceName = $this->getLocalEntitySource()->getSourceName();
+			$localEntitySourceName = self::getLocalEntitySource()->getSourceName();
 			$nodeNamespacePrefixes = self::getEntitySourceDefinitions()->getRdfNodeNamespacePrefixes();
 			$predicateNamespacePrefixes = self::getEntitySourceDefinitions()->getRdfPredicateNamespacePrefixes();
 
@@ -1483,7 +1474,7 @@ class WikibaseRepo {
 	 *  This list will also include any sub entity types of entity types defined in $wgWBRepoSettings['entityNamespaces'].
 	 */
 	public function getLocalEntityTypes() {
-		$localSource = $this->getLocalEntitySource();
+		$localSource = self::getLocalEntitySource();
 		$types = $localSource->getEntityTypes();
 		$subEntityTypes = self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::SUB_ENTITY_TYPES );
 
@@ -1661,7 +1652,7 @@ class WikibaseRepo {
 	}
 
 	public function getPropertyTermStoreWriter(): EntityTermStoreWriter {
-		if ( !in_array( Property::ENTITY_TYPE, $this->getLocalEntitySource()->getEntityTypes() ) ) {
+		if ( !in_array( Property::ENTITY_TYPE, self::getLocalEntitySource()->getEntityTypes() ) ) {
 			return new ThrowingEntityTermStoreWriter();
 		}
 
@@ -1669,7 +1660,7 @@ class WikibaseRepo {
 	}
 
 	public function getItemTermStoreWriter(): EntityTermStoreWriter {
-		if ( !in_array( Item::ENTITY_TYPE, $this->getLocalEntitySource()->getEntityTypes() ) ) {
+		if ( !in_array( Item::ENTITY_TYPE, self::getLocalEntitySource()->getEntityTypes() ) ) {
 			return new ThrowingEntityTermStoreWriter();
 		}
 
@@ -1678,7 +1669,7 @@ class WikibaseRepo {
 
 	public function getNewTermStoreWriterFactory(): TermStoreWriterFactory {
 		return new TermStoreWriterFactory(
-			$this->getLocalEntitySource(),
+			self::getLocalEntitySource(),
 			$this->getStringNormalizer(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			MediaWikiServices::getInstance()->getMainWANObjectCache(),
@@ -1857,7 +1848,7 @@ class WikibaseRepo {
 	}
 
 	public function getLocalEntityNamespaceLookup(): EntityNamespaceLookup {
-		$localEntitySource = $this->getLocalEntitySource();
+		$localEntitySource = self::getLocalEntitySource();
 		$nsIds = $localEntitySource->getEntityNamespaceIds();
 		$entitySlots = $localEntitySource->getEntitySlotNames();
 
@@ -2300,7 +2291,7 @@ class WikibaseRepo {
 			$this->getEntityNamespaceLookup(),
 			self::getEntityIdParser(),
 			self::getEntitySourceDefinitions(),
-			$this->getLocalEntitySource()
+			self::getLocalEntitySource()
 		);
 	}
 
