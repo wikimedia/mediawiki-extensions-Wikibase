@@ -437,7 +437,7 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetContentModelMappings() {
-		$array = $this->getWikibaseRepo()->getContentModelMappings();
+		$array = WikibaseRepo::getContentModelMappings();
 		$this->assertIsArray( $array );
 		$this->assertContainsOnly( 'string', $array );
 	}

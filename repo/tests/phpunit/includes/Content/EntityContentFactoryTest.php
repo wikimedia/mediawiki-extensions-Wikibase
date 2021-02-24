@@ -58,7 +58,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 	public function contentModelsProvider() {
 		yield [ [], [] ];
 		yield [ [ 'Foo' => 'Bar' ], [] ];
-		yield [ WikibaseRepo::getDefaultInstance()->getContentModelMappings(), [] ];
+		yield [ WikibaseRepo::getContentModelMappings(), [] ];
 	}
 
 	public function provideInvalidConstructorArguments() {

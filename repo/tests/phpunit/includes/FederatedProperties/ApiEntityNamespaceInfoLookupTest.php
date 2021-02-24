@@ -52,7 +52,7 @@ class ApiEntityNamespaceInfoLookupTest extends TestCase {
 
 	private function getContentModelMappings() {
 		return array_merge(
-			WikibaseRepo::getDefaultInstance()->getContentModelMappings(),
+			WikibaseRepo::getContentModelMappings(),
 			[ 'notDefinedOnRemote' => 'notDefinedOnRemote' ]
 		);
 	}

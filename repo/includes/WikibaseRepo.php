@@ -12,7 +12,6 @@ use Diff\Differ\OrderedListDiffer;
 use Exception;
 use ExtensionRegistry;
 use HashBagOStuff;
-use Hooks;
 use IContextSource;
 use InvalidArgumentException;
 use JobQueueGroup;
@@ -592,7 +591,7 @@ class WikibaseRepo {
 	 */
 	public function getEntityContentFactory() {
 		return new EntityContentFactory(
-			$this->getContentModelMappings(),
+			self::getContentModelMappings(),
 			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::CONTENT_HANDLER_FACTORY_CALLBACK ),
 			self::getEntitySourceDefinitions(),
 			$this->getLocalEntitySource(),
@@ -1432,15 +1431,10 @@ class WikibaseRepo {
 
 	/**
 	 * Get the mapping of entity types => content models
-	 *
-	 * @return array
 	 */
-	public function getContentModelMappings() {
-		$map = self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::CONTENT_MODEL_ID );
-
-		Hooks::run( 'WikibaseContentModelMapping', [ &$map ] );
-
-		return $map;
+	public static function getContentModelMappings( ContainerInterface $services = null ): array {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ContentModelMappings' );
 	}
 
 	/**

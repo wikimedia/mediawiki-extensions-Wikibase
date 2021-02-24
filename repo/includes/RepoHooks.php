@@ -131,7 +131,7 @@ final class RepoHooks {
 		// Register entity namespaces.
 		// Note that $wgExtraNamespaces and $wgNamespaceAliases have already been processed at this
 		// point and should no longer be touched.
-		$contentModelIds = $wikibaseRepo->getContentModelMappings();
+		$contentModelIds = WikibaseRepo::getContentModelMappings();
 
 		foreach ( $namespaces as $entityType => $namespace ) {
 			// TODO: once there is a mechanism for registering the default content model for
@@ -804,7 +804,7 @@ final class RepoHooks {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$namespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
-		$contentModelIds = $wikibaseRepo->getContentModelMappings();
+		$contentModelIds = WikibaseRepo::getContentModelMappings();
 
 		// Find any entity type that is mapped to the title namespace
 		$expectedEntityType = $namespaceLookup->getEntityType( $title->getNamespace() );
@@ -933,8 +933,7 @@ final class RepoHooks {
 	 */
 	public static function onImportHandleRevisionXMLTag( $importer, $pageInfo, $revisionInfo ) {
 		if ( isset( $revisionInfo['model'] ) ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$contentModels = $wikibaseRepo->getContentModelMappings();
+			$contentModels = WikibaseRepo::getContentModelMappings();
 			$allowImport = WikibaseRepo::getSettings()->getSetting( 'allowEntityImport' );
 
 			if ( !$allowImport && in_array( $revisionInfo['model'], $contentModels ) ) {
