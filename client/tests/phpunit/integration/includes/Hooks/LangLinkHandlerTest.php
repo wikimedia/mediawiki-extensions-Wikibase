@@ -237,7 +237,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testUseRepoLinks( $title, array $noExternalLangLinks, $expected ) {
 		if ( is_string( $title ) ) {
-			$title = Title::newFromText( $title );
+			$title = Title::newFromTextThrow( $title );
 			$title->resetArticleID( 1 );
 		}
 
@@ -323,7 +323,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 		array $expectedLinks
 	) {
 		if ( is_string( $title ) ) {
-			$title = Title::newFromText( $title );
+			$title = Title::newFromTextThrow( $title );
 		}
 
 		$out = $this->makeParserOutput( $langLinks, $noExternalLangLinks );
@@ -403,7 +403,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 		array $expectedBadges
 	) {
 		if ( is_string( $title ) ) {
-			$title = Title::newFromText( $title );
+			$title = Title::newFromTextThrow( $title );
 		}
 
 		$out = $this->makeParserOutput( $langLinks, $noExternalLangLinks );

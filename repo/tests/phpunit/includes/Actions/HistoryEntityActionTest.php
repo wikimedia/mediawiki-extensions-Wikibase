@@ -52,7 +52,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 	 * @return Article
 	 */
 	private function getArticle(): Article {
-		$title = Title::newFromText( 'Page title' );
+		$title = Title::newFromTextThrow( 'Page title' );
 		$article = $this->getMockBuilder( Article::class )
 			->disableOriginalConstructor()
 			->getMock();

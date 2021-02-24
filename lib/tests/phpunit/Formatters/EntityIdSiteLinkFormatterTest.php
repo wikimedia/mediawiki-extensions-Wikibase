@@ -60,7 +60,7 @@ class EntityIdSiteLinkFormatterTest extends \PHPUnit\Framework\TestCase {
 		$titleLookup->method( 'getTitleForId' )
 			->with( $id )
 			->willReturn( $siteLink
-				? Title::newFromText( $siteLink->getPageName() )
+				? Title::newFromTextThrow( $siteLink->getPageName() )
 				: null
 			);
 

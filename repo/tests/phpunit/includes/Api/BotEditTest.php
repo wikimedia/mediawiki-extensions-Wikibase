@@ -160,7 +160,7 @@ class BotEditTest extends WikibaseApiTestCase {
 		$itemNs = $entityNamespaceLookup->getEntityNamespace( 'item' );
 
 		foreach ( $rcResult[0]['query']['recentchanges'] as $rc ) {
-			$title = Title::newFromText( $rc['title'] );
+			$title = Title::newFromTextThrow( $rc['title'] );
 			// XXX: strtoupper is a bit arcane, would ne nice to have a utility function for prefixed id -> title.
 			if ( $title->getNamespace() === $itemNs && $title->getText() === strtoupper( $myid ) ) {
 				$change = $rc;

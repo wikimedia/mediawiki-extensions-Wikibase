@@ -27,10 +27,10 @@ class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
 		$titleLookup->method( 'getTitleForId' )
 			->willReturnCallback( function( EntityId $id ) {
-				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
+				return Title::newFromTextThrow( $id->getEntityType() . ':' . $id->getSerialization() );
 			} );
 
-		$title = Title::newFromText( "Special:EntityDataUriManagerTest" );
+		$title = Title::newFromTextThrow( "Special:EntityDataUriManagerTest" );
 
 		$extensions = [
 			'text' => 'txt',
@@ -127,7 +127,7 @@ class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function provideGetDocTitle() {
-		$title = Title::newFromText( "Special:EntityDataUriManagerTest" );
+		$title = Title::newFromTextThrow( "Special:EntityDataUriManagerTest" );
 		$base = $title->getPrefixedText();
 
 		return [

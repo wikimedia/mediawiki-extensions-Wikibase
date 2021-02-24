@@ -70,7 +70,7 @@ class PageConnectionPresentationModelTest extends MediaWikiIntegrationTestCase {
 			$wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons
 		);
 
-		$title = Title::newFromText( 'Connected_page' );
+		$title = Title::newFromTextThrow( 'Connected_page' );
 		$event = $this->mockEvent( $title );
 		$this->assertTrue(
 			EchoEventPresentationModel::supportsPresentationModel( $event->getType() ),

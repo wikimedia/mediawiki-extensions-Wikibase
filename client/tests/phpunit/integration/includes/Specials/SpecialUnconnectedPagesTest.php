@@ -59,7 +59,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	 */
 	public function testBuildConditionals( $text, $expected ) {
 		$page = $this->newSpecialPage();
-		$title = Title::newFromText( $text );
+		$title = Title::newFromTextThrow( $text );
 		$checker = new NamespaceChecker( [ 2, 4 ], [ 0 ] );
 		$dbr = wfGetDB( DB_REPLICA );
 		$this->assertEquals( $expected, $page->buildConditionals( $dbr, $title, $checker ) );

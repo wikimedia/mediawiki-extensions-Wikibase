@@ -107,7 +107,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->method( 'getTitleForId' )
 			->willReturnCallback( function( EntityId $entityId ) {
-				return Title::newFromText( $entityId->getSerialization() );
+				return Title::newFromTextThrow( $entityId->getSerialization() );
 			} );
 
 		return $entityTitleLookup;

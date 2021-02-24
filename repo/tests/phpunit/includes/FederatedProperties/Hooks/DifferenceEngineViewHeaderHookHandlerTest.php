@@ -171,7 +171,7 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 		}, $this->entity->getStatements()->getAllSnaks() );
 
 		$rows = array_map( function ( $prop ) {
-			$object = new MutableRevisionRecord( Title::newFromText( $prop->getSerialization() ) );
+			$object = new MutableRevisionRecord( Title::newFromTextThrow( $prop->getSerialization() ) );
 			$object->setComment( new CommentStoreComment(
 				null,
 				"[[Property:{$prop->getSerialization()}]]"
@@ -186,7 +186,7 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 		$diffEngine = $this->createMock( DifferenceEngine::class );
 		$diffEngine->expects( $this->once() )
 			->method( 'getTitle' )
-			->willReturn( Title::newFromText( $titleText ) );
+			->willReturn( Title::newFromTextThrow( $titleText ) );
 
 		$diffEngine->method( 'getOldRevision' )
 			->willReturn( $getOldRevision );

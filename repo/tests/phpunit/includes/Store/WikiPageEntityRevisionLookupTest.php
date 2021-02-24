@@ -192,7 +192,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			$this->fail( 'Content should not be constructed by the RevisionStore' );
 		} );
 
-		$revision = new MutableRevisionRecord( Title::newFromText( $entityId->getSerialization() ) );
+		$revision = new MutableRevisionRecord( Title::newFromTextThrow( $entityId->getSerialization() ) );
 		$revision->setId( $revisionId );
 		$revision->setTimestamp( wfTimestampNow() );
 		$revision->setSlot( $slot );

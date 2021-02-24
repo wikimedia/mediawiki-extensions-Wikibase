@@ -72,7 +72,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 		] );
 		$additionalRecentChange = $recentChangeFactory->newRecentChange(
 			$entityChange,
-			Title::newFromText( 'UNIQ-FROM-RecentChangeFactory' )
+			Title::newFromTextThrow( 'UNIQ-FROM-RecentChangeFactory' )
 		);
 		$additionalRecentChange->save();
 

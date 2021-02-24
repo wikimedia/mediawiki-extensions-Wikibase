@@ -85,7 +85,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->method( 'getTitleForId' )
 			->with( $itemId )
-			->willReturn( Title::newFromText( $itemId->getSerialization() ) );
+			->willReturn( Title::newFromTextThrow( $itemId->getSerialization() ) );
 
 		return $entityTitleLookup;
 	}

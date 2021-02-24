@@ -235,7 +235,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 				$titles = [];
 				foreach ( $ids as $id ) {
 					if ( isset( $titlesById[$id] ) ) {
-						$title = Title::newFromText( $titlesById[$id] );
+						$title = Title::newFromTextThrow( $titlesById[$id] );
 						$title->resetArticleID( $id );
 						$titles[] = $title;
 					} else {
@@ -345,7 +345,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function provideHandleChange() {
 		$changes = TestChanges::getChanges();
-		$userEmmy2 = Title::newFromText( 'User:Emmy2' )->getPrefixedText();
+		$userEmmy2 = Title::newFromTextThrow( 'User:Emmy2' )->getPrefixedText();
 
 		$empty = [
 			'scheduleRefreshLinks' => [],

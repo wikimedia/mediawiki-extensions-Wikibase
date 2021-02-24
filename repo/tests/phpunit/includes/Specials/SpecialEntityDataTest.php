@@ -69,7 +69,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleStoreLookup->method( 'getTitleForId' )
 			->willReturnCallback( function( EntityId $id ) {
-				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
+				return Title::newFromTextThrow( $id->getEntityType() . ':' . $id->getSerialization() );
 			} );
 
 		$entityContentFactory = $this->createMock( EntityContentFactory::class );

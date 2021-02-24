@@ -38,7 +38,7 @@ class OutputPageEditabilityTest extends TestCase {
 		$noRightsUserContext = new DerivativeContext( RequestContext::getMain() );
 		$noRightsUserContext->setUser( $noRightsUser );
 		$out->setContext( $noRightsUserContext );
-		$out->setTitle( Title::newFromText( 'Test' ) );
+		$out->setTitle( Title::newFromTextThrow( 'Test' ) );
 		yield 'user does not have edit permission' => [ $out ];
 
 		$request = $this->createMock( WebRequest::class );

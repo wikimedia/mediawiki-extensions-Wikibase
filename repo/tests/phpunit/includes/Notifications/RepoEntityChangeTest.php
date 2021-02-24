@@ -85,7 +85,7 @@ class RepoEntityChangeTest extends ChangeRowTest {
 		$entityChange = $this->newEntityChange( $id );
 		$timestamp = '20140523' . '174422';
 
-		$revRecord = new MutableRevisionRecord( Title::newFromText( 'Required workaround' ) );
+		$revRecord = new MutableRevisionRecord( Title::newFromTextThrow( 'Required workaround' ) );
 		$revRecord->setParentId( 3 );
 		$revRecord->setComment( CommentStoreComment::newUnsavedComment( 'Test!' ) );
 		$revRecord->setTimestamp( $timestamp );

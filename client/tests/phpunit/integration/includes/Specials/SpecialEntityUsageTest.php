@@ -198,7 +198,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 
 			foreach ( $rows as $row ) {
 				if ( $table === 'page' ) {
-					$title = Title::newFromText( $row['page_title'], $row['page_namespace'] );
+					$title = Title::newFromTextThrow( $row['page_title'], $row['page_namespace'] );
 					$page = WikiPage::factory( $title );
 					$page->insertOn( $db, $row['page_id'] );
 				} else {

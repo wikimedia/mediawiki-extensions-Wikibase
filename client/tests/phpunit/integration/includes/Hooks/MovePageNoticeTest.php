@@ -84,11 +84,11 @@ class MovePageNoticeTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function getMovePageNoticeCaseProvider() {
-		$oldTitle = Title::newFromText( 'New Amsterdam' );
-		$newTitle = Title::newFromText( 'New York City' );
+		$oldTitle = Title::newFromTextThrow( 'New Amsterdam' );
+		$newTitle = Title::newFromTextThrow( 'New York City' );
 		$expected = $this->getParsedMessage( 'wikibase-after-page-move' );
 
-		$newTitle2 = Title::newFromText( 'New York' );
+		$newTitle2 = Title::newFromTextThrow( 'New York' );
 		$newTitle2->wikibasePushedMoveToRepo = true;
 		$expected2 = $this->getParsedMessage( 'wikibase-after-page-move-queued' );
 

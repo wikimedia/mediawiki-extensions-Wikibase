@@ -140,7 +140,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		/** @var WebResponse $response */
 		list( , $response ) = $this->executeSpecialPage( $subPage );
 
-		$itemUrl = Title::newFromText( $itemId )->getFullURL();
+		$itemUrl = Title::newFromTextThrow( $itemId )->getFullURL();
 		$expectedUrl = wfExpandUrl( $itemUrl, PROTO_CURRENT );
 		$this->assertEquals( $expectedUrl, $response->getHeader( 'Location' ), 'Redirect' );
 	}

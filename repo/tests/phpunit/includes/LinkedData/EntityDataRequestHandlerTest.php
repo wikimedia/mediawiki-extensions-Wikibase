@@ -57,7 +57,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->interfaceTitle = Title::newFromText( "Special:EntityDataRequestHandlerTest" );
+		$this->interfaceTitle = Title::newFromTextThrow( "Special:EntityDataRequestHandlerTest" );
 		// ensure the namespace name doesn’t get translated
 		$this->setMwGlobals( 'wgLanguageCode', 'qqx' );
 
@@ -93,7 +93,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleStoreLookup->method( 'getTitleForId' )
 			->willReturnCallback( function( EntityId $id ) {
-				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
+				return Title::newFromTextThrow( $id->getEntityType() . ':' . $id->getSerialization() );
 			} );
 
 		$entityContentFactory = $this->createMock( EntityContentFactory::class );

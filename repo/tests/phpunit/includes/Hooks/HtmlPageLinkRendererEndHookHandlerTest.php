@@ -368,8 +368,8 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		return [
 			'NS=MAIN, title=null' => [ Title::makeTitle( NS_MAIN, null ), null ], // T260853
 			'NS=SPECIAL, title=null' => [ Title::makeTitle( NS_SPECIAL, null ), null ],
-			'NS=SPECIAL, title=EntityPage/Q123' => [ Title::newFromText( 'Special:EntityPage/Q123' ), 'Q123' ],
-			'NS=MAIN, title=Special:EntityPage/Q123' => [ Title::newFromText( 'wikidata:Special:EntityPage/Q123' ), 'Q123' ],
+			'NS=SPECIAL, title=EntityPage/Q123' => [ Title::newFromTextThrow( 'Special:EntityPage/Q123' ), 'Q123' ],
+			'NS=MAIN, title=Special:EntityPage/Q123' => [ Title::newFromTextThrow( 'wikidata:Special:EntityPage/Q123' ), 'Q123' ],
 		];
 	}
 

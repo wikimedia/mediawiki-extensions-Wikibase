@@ -74,7 +74,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 	}
 
 	protected function newContext( string $title = 'Special:Recentchanges' ): RequestContext {
-		return RequestContext::newExtraneousContext( Title::newFromText( $title ) );
+		return RequestContext::newExtraneousContext( Title::newFromTextThrow( $title ) );
 	}
 
 	protected function getLinkRenderer(): LinkRenderer {

@@ -170,7 +170,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 	 * @dataProvider providePageProperties
 	 */
 	public function testPageProperties( EntityContent $content, array $expectedProps ) {
-		$title = Title::newFromText( 'Foo' );
+		$title = Title::newFromTextThrow( 'Foo' );
 		$parserOutput = $content->getParserOutput( $title, null, null, false );
 
 		foreach ( $expectedProps as $name => $expected ) {

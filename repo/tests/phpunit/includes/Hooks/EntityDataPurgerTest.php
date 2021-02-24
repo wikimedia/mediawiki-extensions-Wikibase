@@ -40,7 +40,7 @@ class EntityDataPurgerTest extends TestCase {
 	}
 
 	public function testGivenEntityIdLookupReturnsNull_handlerDoesNothing() {
-		$title = Title::newFromText( 'Project:About' );
+		$title = Title::newFromTextThrow( 'Project:About' );
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 		$entityIdLookup->expects( $this->once() )
 			->method( 'getEntityIdForTitle' )
@@ -63,7 +63,7 @@ class EntityDataPurgerTest extends TestCase {
 	}
 
 	public function testGivenEntityIdLookupReturnsId_handlerPurgesCache() {
-		$title = Title::newFromText( 'Item:Q1' );
+		$title = Title::newFromTextThrow( 'Item:Q1' );
 		$entityId = new ItemId( 'Q1' );
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 		$entityIdLookup->expects( $this->once() )
@@ -90,7 +90,7 @@ class EntityDataPurgerTest extends TestCase {
 	}
 
 	public function testGivenMultipleRevisions_handlerPurgesCacheOnce() {
-		$title = Title::newFromText( 'Item:Q1' );
+		$title = Title::newFromTextThrow( 'Item:Q1' );
 		$entityId = new ItemId( 'Q1' );
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 		$entityIdLookup->expects( $this->once() )
