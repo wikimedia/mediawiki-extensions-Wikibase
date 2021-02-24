@@ -188,6 +188,7 @@ class WikibaseContentLanguages {
 					'nrf-je', // T165648
 					'nsk', // T250246
 					'nxm', // T167745
+					'oj', // T268431
 					'ojp', // T195816
 					'ojp-hani', // T195816
 					'ojp-hira', // T195816
