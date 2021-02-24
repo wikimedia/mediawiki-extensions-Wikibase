@@ -11,6 +11,7 @@ use DataValues\TimeValue;
 use DataValues\UnknownValue;
 use MediaWiki\MediaWikiServices;
 use ValueParsers\NullParser;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -127,6 +128,18 @@ return [
 		$services->getHookContainer()->run( 'WikibaseRepoEntityTypes', [ &$entityTypes ] );
 
 		return new EntityTypeDefinitions( $entityTypes );
+	},
+
+	'WikibaseRepo.LocalEntitySource' => function ( MediaWikiServices $services ): EntitySource {
+		$localEntitySourceName = WikibaseRepo::getSettings( $services )->getSetting( 'localEntitySourceName' );
+		$sources = WikibaseRepo::getEntitySourceDefinitions( $services )->getSources();
+		foreach ( $sources as $source ) {
+			if ( $source->getSourceName() === $localEntitySourceName ) {
+				return $source;
+			}
+		}
+
+		throw new LogicException( 'No source configured: ' . $localEntitySourceName );
 	},
 
 	'WikibaseRepo.PropertyValueExpertsModule' => function ( MediaWikiServices $services ): PropertyValueExpertsModule {

@@ -41,7 +41,7 @@ class PruneItemsPerSite extends Maintenance {
 		}
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		if ( !in_array( Item::ENTITY_TYPE, $wikibaseRepo->getLocalEntitySource()->getEntityTypes() ) ) {
+		if ( !in_array( Item::ENTITY_TYPE, WikibaseRepo::getLocalEntitySource()->getEntityTypes() ) ) {
 			$this->fatalError(
 				"This script assumes Items to be part of the local entity source."
 			);

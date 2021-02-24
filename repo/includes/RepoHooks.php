@@ -623,7 +623,7 @@ final class RepoHooks {
 			 * Don't make Wikibase check if a user can execute when the namespace in question does
 			 * not refer to a namespace used locally for Wikibase entities.
 			 */
-			$localEntitySource = $wikibaseRepo->getLocalEntitySource();
+			$localEntitySource = WikibaseRepo::getLocalEntitySource();
 			if ( !in_array( $namespace, $localEntitySource->getEntityNamespaceIds() ) ) {
 					return true;
 			}
@@ -816,7 +816,7 @@ final class RepoHooks {
 
 		// If the entity type is not from the local source, don't check anything else
 		$entitySource = WikibaseRepo::getEntitySourceDefinitions()->getSourceForEntityType( $expectedEntityType );
-		if ( $entitySource->getSourceName() !== $wikibaseRepo->getLocalEntitySource()->getSourceName() ) {
+		if ( $entitySource->getSourceName() !== WikibaseRepo::getLocalEntitySource()->getSourceName() ) {
 			return true;
 		}
 
