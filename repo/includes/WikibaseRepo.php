@@ -626,15 +626,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityDiffer' );
 	}
 
-	/**
-	 * @return EntityPatcher
-	 */
-	public function getEntityPatcher() {
-		$entityPatcher = new EntityPatcher();
-		foreach ( self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_PATCHER_STRATEGY_BUILDER ) as $builder ) {
-			$entityPatcher->registerEntityPatcherStrategy( call_user_func( $builder ) );
-		}
-		return $entityPatcher;
+	public static function getEntityPatcher( ContainerInterface $services = null ): EntityPatcher {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityPatcher' );
 	}
 
 	/**
@@ -1798,7 +1792,7 @@ class WikibaseRepo {
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
 			self::getEntityDiffer(),
-			$this->getEntityPatcher(),
+			self::getEntityPatcher(),
 			$this->newEditFilterHookRunner( $context ?: RequestContext::getMain() ),
 			MediaWikiServices::getInstance()->getStatsdDataFactory(),
 			self::getSettings()->getSetting( 'maxSerializedEntitySize' )

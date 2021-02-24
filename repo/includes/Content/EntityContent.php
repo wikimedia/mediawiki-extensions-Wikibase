@@ -546,7 +546,7 @@ abstract class EntityContent extends AbstractContent {
 				$entityAfterPatch = $this->getEntity()->copy();
 			}
 
-			$patcher = WikibaseRepo::getDefaultInstance()->getEntityPatcher();
+			$patcher = WikibaseRepo::getEntityPatcher();
 			$patcher->patchEntity( $entityAfterPatch, $patch->getEntityDiff() );
 
 			$patched = $handler->makeEntityContent( new EntityInstanceHolder( $entityAfterPatch ) );

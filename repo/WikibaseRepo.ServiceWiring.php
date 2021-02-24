@@ -19,6 +19,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
@@ -101,6 +102,16 @@ return [
 		return new DispatchingEntityIdParser(
 			WikibaseRepo::getEntityTypeDefinitions( $services )->getEntityIdBuilders()
 		);
+	},
+
+	'WikibaseRepo.EntityPatcher' => function ( MediaWikiServices $services ): EntityPatcher {
+		$entityPatcher = new EntityPatcher();
+		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
+		$builders = $entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_PATCHER_STRATEGY_BUILDER );
+		foreach ( $builders as $builder ) {
+			$entityPatcher->registerEntityPatcherStrategy( $builder() );
+		}
+		return $entityPatcher;
 	},
 
 	'WikibaseRepo.EntitySourceDefinitions' => function ( MediaWikiServices $services ): EntitySourceDefinitions {
