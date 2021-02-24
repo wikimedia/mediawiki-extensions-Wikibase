@@ -613,7 +613,7 @@ class WikibaseRepo {
 		];
 
 		return new EntityChangeFactory(
-			$this->getEntityDiffer(),
+			self::getEntityDiffer(),
 			self::getEntityIdParser(),
 			$changeClasses,
 			RepoEntityChange::class,
@@ -621,15 +621,9 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return EntityDiffer
-	 */
-	public function getEntityDiffer() {
-		$entityDiffer = new EntityDiffer();
-		foreach ( self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_DIFFER_STRATEGY_BUILDER ) as $builder ) {
-			$entityDiffer->registerEntityDifferStrategy( call_user_func( $builder ) );
-		}
-		return $entityDiffer;
+	public static function getEntityDiffer( ContainerInterface $services = null ): EntityDiffer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityDiffer' );
 	}
 
 	/**
@@ -1803,7 +1797,7 @@ class WikibaseRepo {
 			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
-			$this->getEntityDiffer(),
+			self::getEntityDiffer(),
 			$this->getEntityPatcher(),
 			$this->newEditFilterHookRunner( $context ?: RequestContext::getMain() ),
 			MediaWikiServices::getInstance()->getStatsdDataFactory(),

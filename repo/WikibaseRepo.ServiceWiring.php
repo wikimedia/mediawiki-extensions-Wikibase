@@ -18,6 +18,7 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
@@ -84,6 +85,16 @@ return [
 
 	'WikibaseRepo.DataValueFactory' => function ( MediaWikiServices $services ): DataValueFactory {
 		return new DataValueFactory( WikibaseRepo::getDataValueDeserializer( $services ) );
+	},
+
+	'WikibaseRepo.EntityDiffer' => function ( MediaWikiServices $services ): EntityDiffer {
+		$entityDiffer = new EntityDiffer();
+		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
+		$builders = $entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_DIFFER_STRATEGY_BUILDER );
+		foreach ( $builders as $builder ) {
+			$entityDiffer->registerEntityDifferStrategy( $builder() );
+		}
+		return $entityDiffer;
 	},
 
 	'WikibaseRepo.EntityIdParser' => function ( MediaWikiServices $services ): EntityIdParser {
