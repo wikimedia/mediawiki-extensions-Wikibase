@@ -51,7 +51,7 @@ abstract class DispatchChangeModificationNotificationJob extends Job {
 
 		$this->initServices(
 			$repo->getEntityContentFactory(),
-			$repo->getLogger(),
+			WikibaseRepo::getLogger( $mwServices ),
 			'JobQueueGroup::singleton'
 		);
 	}

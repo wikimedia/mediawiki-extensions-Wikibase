@@ -9,7 +9,9 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnknownValue;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use Psr\Log\LoggerInterface;
 use ValueParsers\NullParser;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -178,6 +180,10 @@ return [
 		}
 
 		throw new LogicException( 'No source configured: ' . $localEntitySourceName );
+	},
+
+	'WikibaseRepo.Logger' => function ( MediaWikiServices $services ): LoggerInterface {
+		return LoggerFactory::getInstance( 'Wikibase' );
 	},
 
 	'WikibaseRepo.PropertyValueExpertsModule' => function ( MediaWikiServices $services ): PropertyValueExpertsModule {

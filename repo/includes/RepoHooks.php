@@ -961,7 +961,7 @@ final class RepoHooks {
 			$repo->getEntityIdLookup(),
 			$repo->getEntityLookup(),
 			$repo->getEntityNamespaceLookup(),
-			$repo->getLogger()
+			WikibaseRepo::getLogger()
 		);
 
 		$conceptUriLink = $hookHandler->buildConceptUriLink( $skin );

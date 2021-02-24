@@ -290,19 +290,20 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	}
 
 	private function getExternallyRenderedEntityViewPlaceholderExpander( OutputPage $out ) {
+		$services = MediaWikiServices::getInstance();
 		$repo = WikibaseRepo::getDefaultInstance();
-		$repoSettings = WikibaseRepo::getSettings();
+		$repoSettings = WikibaseRepo::getSettings( $services );
 		$languageFallbackChainFactory = $repo->getLanguageFallbackChainFactory();
 
 		return new ExternallyRenderedEntityViewPlaceholderExpander(
 			$out,
 			new TermboxRequestInspector( $languageFallbackChainFactory ),
 			new TermboxRemoteRenderer(
-				MediaWikiServices::getInstance()->getHttpRequestFactory(),
+				$services->getHttpRequestFactory(),
 				$repoSettings->getSetting( 'ssrServerUrl' ),
 				$repoSettings->getSetting( 'ssrServerTimeout' ),
-				$repo->getLogger(),
-				MediaWikiServices::getInstance()->getStatsdDataFactory()
+				WikibaseRepo::getLogger( $services ),
+				$services->getStatsdDataFactory()
 			),
 			$this->outputPageEntityIdReader,
 			new RepoSpecialPageLinker(),

@@ -601,7 +601,7 @@ class WikibaseRepo {
 			self::getEntityIdParser(),
 			$changeClasses,
 			RepoEntityChange::class,
-			$this->getLogger()
+			self::getLogger()
 		);
 	}
 
@@ -696,7 +696,7 @@ class WikibaseRepo {
 				$dbName,
 				$repoName
 			),
-			$this->getLogger()
+			self::getLogger()
 		);
 	}
 
@@ -800,7 +800,7 @@ class WikibaseRepo {
 		$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
 		return new PropertyInfoDataTypeLookup(
 			$infoLookup,
-			$this->getLogger(),
+			self::getLogger(),
 			$retrievingLookup
 		);
 	}
@@ -1613,7 +1613,7 @@ class WikibaseRepo {
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			MediaWikiServices::getInstance()->getMainWANObjectCache(),
 			JobQueueGroup::singleton(),
-			$this->getLogger()
+			self::getLogger()
 		);
 	}
 
@@ -2182,7 +2182,7 @@ class WikibaseRepo {
 		if ( $this->termFallbackCacheFactory === null ) {
 			$this->termFallbackCacheFactory = new TermFallbackCacheFactory(
 				self::getSettings()->getSetting( 'sharedCacheType' ),
-				$this->getLogger(),
+				self::getLogger(),
 				MediaWikiServices::getInstance()->getStatsdDataFactory(),
 				hash( 'sha256', $wgSecretKey ),
 				new TermFallbackCacheServiceFactory(),
@@ -2192,8 +2192,9 @@ class WikibaseRepo {
 		return $this->termFallbackCacheFactory;
 	}
 
-	public function getLogger(): LoggerInterface {
-		return LoggerFactory::getInstance( 'Wikibase' );
+	public static function getLogger( ContainerInterface $services = null ): LoggerInterface {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.Logger' );
 	}
 
 	/**

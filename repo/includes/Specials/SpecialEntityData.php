@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use HtmlCacheUpdater;
 use HttpError;
+use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -52,6 +53,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 	public static function factory(
 		HtmlCacheUpdater $htmlCacheUpdater,
 		EntityIdParser $entityIdParser,
+		LoggerInterface $logger,
 		SettingsArray $repoSettings,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
 	): self {
@@ -91,7 +93,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$entityRedirectLookup,
 			$serializationService,
 			$entityDataFormatProvider,
-			$wikibaseRepo->getLogger(),
+			$logger,
 			$repoSettings->getSetting( 'entityTypesWithoutRdfOutput' ),
 			$defaultFormat,
 			$maxAge,

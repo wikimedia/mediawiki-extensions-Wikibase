@@ -262,7 +262,7 @@ class DispatchChanges extends Maintenance {
 			$clientWikis,
 			$wikibaseRepo->getStore()->getEntityChangeLookup(),
 			$repoSettings,
-			$wikibaseRepo->getLogger()
+			WikibaseRepo::getLogger()
 		);
 
 		$dispatcher->getDispatchCoordinator()->initState( $clientWikis );

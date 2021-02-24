@@ -93,6 +93,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	}
 
 	public static function factory(
+		LoggerInterface $logger,
 		SettingsArray $repoSettings
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -108,7 +109,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->getStore()->newSiteLinkStore(),
 			$siteLinkTargetProvider,
-			$wikibaseRepo->getLogger(),
+			$logger,
 			$repoSettings->getSetting( 'siteLinkGroups' )
 		);
 	}

@@ -240,6 +240,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialItemByTitle",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialItemByTitle::factory",
 			"services": [
+				"WikibaseRepo.Logger",
 				"WikibaseRepo.Settings"
 			]
 		},
@@ -303,6 +304,7 @@
 			"services": [
 				"HtmlCacheUpdater",
 				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.Logger",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.ValueSnakRdfBuilderFactory"
 			]
