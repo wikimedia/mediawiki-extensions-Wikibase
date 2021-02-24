@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ghaly"
+			"Ghaly",
+			"HitomiAkane"
 		]
 	},
 	"tooltip-t-wikibase": "الربط بعنصر مرتبط ف مستودع البيانات",
@@ -15,5 +16,6 @@
 	"wikibase-rc-hide-wikidata-show": "عرض",
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "تعديل {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "التعديلات اللى اصلها من {{WBREPONAME}}.",
 	"wikibase-otherprojects": "مشاريع تانيه"
 }
