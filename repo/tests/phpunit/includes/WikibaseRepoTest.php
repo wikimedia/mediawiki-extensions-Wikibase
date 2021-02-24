@@ -272,11 +272,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( ValueParserFactory::class, $returnValue );
 	}
 
-	public function testGetDataValueFactoryReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getDataValueFactory();
-		$this->assertInstanceOf( DataValueFactory::class, $returnValue );
-	}
-
 	public function testGetEntityContentFactoryReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getEntityContentFactory();
 		$this->assertInstanceOf( EntityContentFactory::class, $returnValue );
@@ -862,7 +857,9 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 				},
 			],
 		] );
-		return $this->getWikibaseRepo()->getDataValueFactory();
+
+		$this->setEntityTypeDefinitions( $this->entityTypeDefinitions );
+		return WikibaseRepo::getDataValueFactory();
 	}
 
 	public function dataValueProvider() {

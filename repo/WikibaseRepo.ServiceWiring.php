@@ -20,6 +20,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\SettingsArray;
@@ -51,6 +52,10 @@ return [
 		return new DataTypeFactory(
 			WikibaseRepo::getDataTypeDefinitions( $services )->getValueTypes()
 		);
+	},
+
+	'WikibaseRepo.DataValueFactory' => function ( MediaWikiServices $services ): DataValueFactory {
+		return new DataValueFactory( WikibaseRepo::getDataValueDeserializer( $services ) );
 	},
 
 	'WikibaseRepo.DataValueDeserializer' => function ( MediaWikiServices $services ): DataValueDeserializer {
