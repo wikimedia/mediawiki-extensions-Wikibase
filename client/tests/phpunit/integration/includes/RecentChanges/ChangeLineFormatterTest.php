@@ -38,6 +38,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 	protected $repoLinker;
 
+	protected $userNameUtils;
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -55,6 +57,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'/wiki/$1',
 			'/w'
 		);
+
+		$this->userNameUtils = $this->getServiceContainer()->getUserNameUtils();
 	}
 
 	/**
@@ -76,7 +80,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
 
 		$formatter = new ChangeLineFormatter(
-			$this->repoLinker
+			$this->repoLinker,
+			$this->userNameUtils
 		);
 
 		$formattedLine = $formatter->format(
@@ -107,7 +112,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	 */
 	public function testFormatDataForEnhancedLine( array $expectedTags, array $patterns, RecentChange $recentChange ) {
 		$formatter = new ChangeLineFormatter(
-			$this->repoLinker
+			$this->repoLinker,
+			$this->userNameUtils
 		);
 
 		// Use the actual setting, because out handler for the FormatAutocomment hook will check
@@ -187,7 +193,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	 */
 	public function testFormatDataForEnhancedBlockLine( array $expectedTags, array $patterns, RecentChange $recentChange ) {
 		$formatter = new ChangeLineFormatter(
-			$this->repoLinker
+			$this->repoLinker,
+			$this->userNameUtils
 		);
 
 		// Use the actual setting, because out handler for the FormatAutocomment hook will check

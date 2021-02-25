@@ -69,6 +69,7 @@
 			"class" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler",
 			"factory" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler::factory",
 			"services": [
+				"UserNameUtils",
 			  	"WikibaseClient.EntityIdParser",
 				"WikibaseClient.Settings"
 			]
