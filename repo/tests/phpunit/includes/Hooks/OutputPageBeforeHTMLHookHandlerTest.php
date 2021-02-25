@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Tests\Hooks;
 use FauxRequest;
 use Language;
 use MediaWikiIntegrationTestCase;
+use NullHttpRequestFactory;
+use NullStatsdDataFactory;
 use OutputPage;
 use PHPUnit\Framework\MockObject\MockObject;
 use RequestContext;
@@ -18,6 +20,7 @@ use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;
@@ -107,6 +110,9 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	private function getHookHandler() {
 		return new OutputPageBeforeHTMLHookHandler(
+			new NullHttpRequestFactory(),
+			new NullStatsdDataFactory(),
+			WikibaseSettings::getRepoSettings(),
 			TemplateFactory::getDefaultInstance(),
 			$this->userLanguageLookup,
 			$this->contentLanguages,

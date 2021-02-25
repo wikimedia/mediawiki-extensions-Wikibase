@@ -617,7 +617,12 @@
 			"class": "Wikibase\\Repo\\Hooks\\OutputPageBeforeHTMLHookHandler",
 			"factory": "Wikibase\\Repo\\Hooks\\OutputPageBeforeHTMLHookHandler::factory",
 			"services": [
-				"WikibaseRepo.EntityIdParser"
+				"HttpRequestFactory",
+				"ContentLanguage",
+				"StatsdDataFactory",
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.Logger",
+				"WikibaseRepo.Settings"
 			]
 		},
 		"OutputPageJsConfig": {

@@ -2,15 +2,20 @@
 
 namespace Wikibase\Repo\Hooks;
 
+use IBufferingStatsdDataFactory;
+use Language;
 use MediaWiki\Hook\OutputPageBeforeHTMLHook;
-use MediaWiki\MediaWikiServices;
+use MediaWiki\Http\HttpRequestFactory;
 use OutputPage;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
@@ -40,6 +45,15 @@ use Wikibase\View\ToolbarEditSectionGenerator;
  * @author Marius Hoch < hoo@online.de >
  */
 class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
+
+	/** @var HttpRequestFactory */
+	private $httpRequestFactory;
+
+	/** @var IBufferingStatsdDataFactory */
+	private $statsDataFactory;
+
+	/** @var SettingsArray */
+	private $repoSettings;
 
 	/**
 	 * @var TemplateFactory
@@ -101,7 +115,13 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	 */
 	private $entityViewChecker;
 
+	/** @var LoggerInterface */
+	private $logger;
+
 	public function __construct(
+		HttpRequestFactory $httpRequestFactory,
+		IBufferingStatsdDataFactory $statsdDataFactory,
+		SettingsArray $repoSettings,
 		TemplateFactory $templateFactory,
 		UserLanguageLookup $userLanguageLookup,
 		ContentLanguages $termsLanguages,
@@ -113,8 +133,12 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		OutputPageEditability $editability,
 		$isExternallyRendered,
 		UserPreferredContentLanguagesLookup $userPreferredTermsLanguages,
-		OutputPageEntityViewChecker $entityViewChecker
+		OutputPageEntityViewChecker $entityViewChecker,
+		LoggerInterface $logger = null
 	) {
+		$this->httpRequestFactory = $httpRequestFactory;
+		$this->statsDataFactory = $statsdDataFactory;
+		$this->repoSettings = $repoSettings;
 		$this->templateFactory = $templateFactory;
 		$this->userLanguageLookup = $userLanguageLookup;
 		$this->termsLanguages = $termsLanguages;
@@ -127,13 +151,19 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$this->editability = $editability;
 		$this->userPreferredTermsLanguages = $userPreferredTermsLanguages;
 		$this->entityViewChecker = $entityViewChecker;
+		$this->logger = $logger ?: new NullLogger();
 	}
 
 	/**
 	 * @return self
 	 */
 	public static function factory(
-		EntityIdParser $entityIdParser
+		HttpRequestFactory $httpRequestFactory,
+		Language $contentLanguage,
+		IBufferingStatsdDataFactory $statsdDataFactory,
+		EntityIdParser $entityIdParser,
+		LoggerInterface $logger,
+		SettingsArray $settings
 	): self {
 		global $wgLang, $wgCookiePrefix;
 
@@ -143,6 +173,9 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$entityViewChecker = new OutputPageEntityViewChecker( $wikibaseRepo->getEntityContentFactory() );
 
 		return new self(
+			$httpRequestFactory,
+			$statsdDataFactory,
+			$settings,
 			TemplateFactory::getDefaultInstance(),
 			$babelUserLanguageLookup,
 			$termLanguages,
@@ -159,9 +192,10 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			new UserPreferredContentLanguagesLookup(
 				$termLanguages,
 				$babelUserLanguageLookup,
-				MediaWikiServices::getInstance()->getContentLanguage()->getCode()
+				$contentLanguage->getCode()
 			),
-			$entityViewChecker
+			$entityViewChecker,
+			$logger
 		);
 	}
 
@@ -290,26 +324,24 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	}
 
 	private function getExternallyRenderedEntityViewPlaceholderExpander( OutputPage $out ) {
-		$services = MediaWikiServices::getInstance();
 		$repo = WikibaseRepo::getDefaultInstance();
-		$repoSettings = WikibaseRepo::getSettings( $services );
 		$languageFallbackChainFactory = $repo->getLanguageFallbackChainFactory();
 
 		return new ExternallyRenderedEntityViewPlaceholderExpander(
 			$out,
 			new TermboxRequestInspector( $languageFallbackChainFactory ),
 			new TermboxRemoteRenderer(
-				$services->getHttpRequestFactory(),
-				$repoSettings->getSetting( 'ssrServerUrl' ),
-				$repoSettings->getSetting( 'ssrServerTimeout' ),
-				WikibaseRepo::getLogger( $services ),
-				$services->getStatsdDataFactory()
+				$this->httpRequestFactory,
+				$this->repoSettings->getSetting( 'ssrServerUrl' ),
+				$this->repoSettings->getSetting( 'ssrServerTimeout' ),
+				$this->logger,
+				$this->statsDataFactory
 			),
 			$this->outputPageEntityIdReader,
 			new RepoSpecialPageLinker(),
 			$languageFallbackChainFactory,
 			new OutputPageRevisionIdReader(),
-			$repoSettings->getSetting( 'termboxUserSpecificSsrEnabled' )
+			$this->repoSettings->getSetting( 'termboxUserSpecificSsrEnabled' )
 		);
 	}
 
