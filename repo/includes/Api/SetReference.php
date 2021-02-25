@@ -11,6 +11,7 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\ChangeOp\ChangeOp;
@@ -91,7 +92,8 @@ class SetReference extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		EntityIdParser $entityIdParser,
-		StatementGuidParser $statementGuidParser
+		StatementGuidParser $statementGuidParser,
+		StatementGuidValidator $statementGuidValidator
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
@@ -100,7 +102,7 @@ class SetReference extends ApiBase {
 		$modificationHelper = new StatementModificationHelper(
 			$wikibaseRepo->getSnakFactory(),
 			$entityIdParser,
-			$wikibaseRepo->getStatementGuidValidator(),
+			$statementGuidValidator,
 			$apiHelperFactory->getErrorReporter( $mainModule )
 		);
 

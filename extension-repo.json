@@ -21,7 +21,8 @@
 			"class": "\\Wikibase\\Repo\\Api\\CreateClaim",
 			"factory": "\\Wikibase\\Repo\\Api\\CreateClaim::factory",
 			"services": [
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.StatementGuidValidator"
 			]
 		},
 		"wbeditentity": {
@@ -62,7 +63,8 @@
 			"factory": "\\Wikibase\\Repo\\Api\\GetClaims::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.StatementGuidParser"
+				"WikibaseRepo.StatementGuidParser",
+			  	"WikibaseRepo.StatementGuidValidator"
 			]
 		},
 		"wbgetentities": {
@@ -102,7 +104,8 @@
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveClaims::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.StatementGuidParser"
+				"WikibaseRepo.StatementGuidParser",
+			  	"WikibaseRepo.StatementGuidValidator"
 			]
 		},
 		"wbremovequalifiers": {
@@ -110,7 +113,8 @@
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveQualifiers::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.StatementGuidParser"
+				"WikibaseRepo.StatementGuidParser",
+			  	"WikibaseRepo.StatementGuidValidator"
 			]
 		},
 		"wbremovereferences": {
@@ -118,7 +122,8 @@
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveReferences::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.StatementGuidParser"
+				"WikibaseRepo.StatementGuidParser",
+			  	"WikibaseRepo.StatementGuidValidator"
 			]
 		},
 		"wbsearchentities": {
@@ -141,7 +146,8 @@
 			"services": [
 				"StatsdDataFactory",
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.StatementGuidParser"
+				"WikibaseRepo.StatementGuidParser",
+			  	"WikibaseRepo.StatementGuidValidator"
 			]
 		},
 		"wbsetclaimvalue": {
@@ -149,7 +155,8 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SetClaimValue::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.StatementGuidParser"
+				"WikibaseRepo.StatementGuidParser",
+			  	"WikibaseRepo.StatementGuidValidator"
 			]
 		},
 		"wbsetdescription": {
@@ -165,7 +172,8 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SetQualifier::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.StatementGuidParser"
+				"WikibaseRepo.StatementGuidParser",
+			  	"WikibaseRepo.StatementGuidValidator"
 			]
 		},
 		"wbsetreference": {
@@ -173,7 +181,8 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SetReference::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.StatementGuidParser"
+				"WikibaseRepo.StatementGuidParser",
+			  	"WikibaseRepo.StatementGuidValidator"
 			]
 		},
 		"wbsetsitelink": {

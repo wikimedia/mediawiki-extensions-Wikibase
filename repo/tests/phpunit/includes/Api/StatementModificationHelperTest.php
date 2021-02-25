@@ -82,7 +82,7 @@ class StatementModificationHelperTest extends MediaWikiIntegrationTestCase {
 		$modificationHelper = new StatementModificationHelper(
 			$wikibaseRepo->getSnakFactory(),
 			WikibaseRepo::getEntityIdParser(),
-			$wikibaseRepo->getStatementGuidValidator(),
+			WikibaseRepo::getStatementGuidValidator(),
 			$apiHelperFactory->getErrorReporter( $apiMain )
 		);
 

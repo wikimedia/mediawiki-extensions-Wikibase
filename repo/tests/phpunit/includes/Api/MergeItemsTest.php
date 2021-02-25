@@ -164,7 +164,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$changeOpsFactoryProvider = new ChangeOpFactoryProvider(
 			$this->getConstraintProvider(),
 			new GuidGenerator(),
-			$wikibaseRepo->getStatementGuidValidator(),
+			WikibaseRepo::getStatementGuidValidator(),
 			WikibaseRepo::getStatementGuidParser(),
 			$this->getSnakValidator(),
 			$this->getTermValidatorFactory(),
