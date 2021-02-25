@@ -28,6 +28,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
@@ -168,6 +169,23 @@ return [
 		$services->getHookContainer()->run( 'WikibaseRepoEntityTypes', [ &$entityTypes ] );
 
 		return new EntityTypeDefinitions( $entityTypes );
+	},
+
+	'WikibaseRepo.KartographerEmbeddingHandler' => function ( MediaWikiServices $services ): ?CachingKartographerEmbeddingHandler {
+		$settings = WikibaseRepo::getSettings( $services );
+		$config = $services->getMainConfig();
+		if (
+			$settings->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
+			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) &&
+			$config->has( 'KartographerEnableMapFrame' ) &&
+			$config->get( 'KartographerEnableMapFrame' )
+		) {
+			return new CachingKartographerEmbeddingHandler(
+				$services->getParserFactory()->create()
+			);
+		} else {
+			return null;
+		}
 	},
 
 	'WikibaseRepo.LocalEntitySource' => function ( MediaWikiServices $services ): EntitySource {
