@@ -3,8 +3,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit;
 
-use Wikimedia\TestingAccessWrapper;
-
 /**
  * @coversNothing
  *
@@ -34,14 +32,6 @@ class ServiceWiringTest extends ServiceWiringTestCase {
 			class_exists( $testClass ),
 			"Expecting test of the '$name' wiring in $testClass"
 		);
-	}
-
-	public function testAllWiringsAreSorted(): void {
-		$names = array_keys( TestingAccessWrapper::newFromObject( $this )->wiring );
-		$sortedNames = $names;
-		sort( $sortedNames, SORT_STRING );
-		$this->assertSame( $sortedNames, $names,
-			'Services must be listed in lexical order' );
 	}
 
 }

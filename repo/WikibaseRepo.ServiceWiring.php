@@ -31,6 +31,7 @@ use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitions
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 
+/** @phpcs-require-sorted-array */
 return [
 	'WikibaseRepo.DataTypeDefinitions' => function ( MediaWikiServices $services ): DataTypeDefinitions {
 		$baseDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
