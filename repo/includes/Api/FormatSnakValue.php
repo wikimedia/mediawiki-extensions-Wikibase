@@ -101,7 +101,8 @@ class FormatSnakValue extends ApiBase {
 		string $moduleName,
 		IBufferingStatsdDataFactory $stats,
 		DataTypeFactory $dataTypeFactory,
-		DataValueFactory $dataValueFactory
+		DataValueFactory $dataValueFactory,
+		OutputFormatValueFormatterFactory $valueFormatterFactory
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
@@ -109,7 +110,7 @@ class FormatSnakValue extends ApiBase {
 		return new self(
 			$mainModule,
 			$moduleName,
-			$wikibaseRepo->getValueFormatterFactory(),
+			$valueFormatterFactory,
 			$wikibaseRepo->getSnakFormatterFactory(),
 			$dataTypeFactory,
 			$dataValueFactory,

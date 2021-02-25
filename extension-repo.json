@@ -55,7 +55,8 @@
 			"services": [
 				"StatsdDataFactory",
 				"WikibaseRepo.DataTypeFactory",
-			  	"WikibaseRepo.DataValueFactory"
+			  	"WikibaseRepo.DataValueFactory",
+			  	"WikibaseRepo.ValueFormatterFactory"
 			]
 		},
 		"wbgetclaims": {

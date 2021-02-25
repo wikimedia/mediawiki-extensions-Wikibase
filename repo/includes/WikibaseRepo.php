@@ -248,11 +248,6 @@ class WikibaseRepo {
 	private $snakFormatterFactory = null;
 
 	/**
-	 * @var OutputFormatValueFormatterFactory|null
-	 */
-	private $valueFormatterFactory = null;
-
-	/**
 	 * @var SummaryFormatter|null
 	 */
 	private $summaryFormatter = null;
@@ -1071,7 +1066,7 @@ class WikibaseRepo {
 		if ( $this->snakFormatterFactory === null ) {
 			$this->snakFormatterFactory = new OutputFormatSnakFormatterFactory(
 				self::getDataTypeDefinitions()->getSnakFormatterFactoryCallbacks(),
-				$this->getValueFormatterFactory(),
+				self::getValueFormatterFactory(),
 				$this->getPropertyDataTypeLookup(),
 				self::getDataTypeFactory()
 			);
@@ -1116,29 +1111,9 @@ class WikibaseRepo {
 			->getConceptBaseUri();
 	}
 
-	/**
-	 * Returns a OutputFormatValueFormatterFactory the provides ValueFormatters
-	 * for different output formats.
-	 *
-	 * @return OutputFormatValueFormatterFactory
-	 */
-	public function getValueFormatterFactory() {
-		if ( $this->valueFormatterFactory === null ) {
-			$this->valueFormatterFactory = $this->newValueFormatterFactory();
-		}
-
-		return $this->valueFormatterFactory;
-	}
-
-	/**
-	 * @return OutputFormatValueFormatterFactory
-	 */
-	private function newValueFormatterFactory() {
-		return new OutputFormatValueFormatterFactory(
-			self::getDataTypeDefinitions()->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
-			$this->getContentLanguage(),
-			new LanguageFallbackChainFactory()
-		);
+	public static function getValueFormatterFactory( ContainerInterface $services = null ): OutputFormatValueFormatterFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ValueFormatterFactory' );
 	}
 
 	/**
@@ -1243,22 +1218,28 @@ class WikibaseRepo {
 		// contain a display text: [[Item:Q1]] is fine but [[Item:Q1|Q1]] isn't).
 		$idFormatter = new EntityIdPlainLinkFormatter( $this->getEntityTitleLookup() );
 
-		// Create a new ValueFormatterFactory, and override the formatter for entity IDs.
-		$valueFormatterFactory = $this->newValueFormatterFactory();
+		$formatterFactoryCBs = self::getDataTypeDefinitions()
+			->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE );
 
-		// Iterate through all defined entity types
+		// Iterate through all defined entity types and override the formatter for entity IDs.
 		foreach ( self::getEntityTypeDefinitions()->getEntityTypes() as $entityType ) {
-			$valueFormatterFactory->setFormatterFactoryCallback(
-				"PT:wikibase-$entityType",
-				function ( $format, FormatterOptions $options ) use ( $idFormatter ) {
-					if ( $format === SnakFormatter::FORMAT_PLAIN ) {
-						return new EntityIdValueFormatter( $idFormatter );
-					} else {
-						return null;
-					}
+			$formatterFactoryCBs[ "PT:wikibase-$entityType" ] = function (
+				$format,
+				FormatterOptions $options ) use ( $idFormatter ) {
+				if ( $format === SnakFormatter::FORMAT_PLAIN ) {
+					return new EntityIdValueFormatter( $idFormatter );
+				} else {
+					return null;
 				}
-			);
+			};
 		}
+
+		// Create a new ValueFormatterFactory from entity definition overrides.
+		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
+			$formatterFactoryCBs,
+			$this->getContentLanguage(),
+			new LanguageFallbackChainFactory()
+		);
 
 		// Create a new SnakFormatterFactory based on the specialized ValueFormatterFactory.
 		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
@@ -1381,7 +1362,7 @@ class WikibaseRepo {
 	 */
 	private function getMessageParameterFormatter() {
 		$formatterOptions = new FormatterOptions();
-		$valueFormatterFactory = $this->getValueFormatterFactory();
+		$valueFormatterFactory = self::getValueFormatterFactory();
 
 		return new MessageParameterFormatter(
 			$valueFormatterFactory->getValueFormatter( SnakFormatter::FORMAT_WIKI, $formatterOptions ),
