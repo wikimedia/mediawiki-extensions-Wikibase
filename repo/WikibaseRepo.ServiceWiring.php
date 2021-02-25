@@ -55,10 +55,6 @@ return [
 		);
 	},
 
-	'WikibaseRepo.DataValueFactory' => function ( MediaWikiServices $services ): DataValueFactory {
-		return new DataValueFactory( WikibaseRepo::getDataValueDeserializer( $services ) );
-	},
-
 	'WikibaseRepo.DataValueDeserializer' => function ( MediaWikiServices $services ): DataValueDeserializer {
 		return new DataValueDeserializer( [
 			'string' => StringValue::class,
@@ -84,6 +80,10 @@ return [
 				}
 			},
 		] );
+	},
+
+	'WikibaseRepo.DataValueFactory' => function ( MediaWikiServices $services ): DataValueFactory {
+		return new DataValueFactory( WikibaseRepo::getDataValueDeserializer( $services ) );
 	},
 
 	'WikibaseRepo.EntityIdParser' => function ( MediaWikiServices $services ): EntityIdParser {
