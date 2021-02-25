@@ -260,7 +260,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 				}
 			] );
 
-			$factory = WikibaseRepo::getDefaultInstance()->getValueFormatterFactory();
+			$factory = WikibaseRepo::getValueFormatterFactory();
 			$this->propertyValueFormatter = $factory->getValueFormatter( SnakFormatter::FORMAT_PLAIN, $options );
 		}
 
