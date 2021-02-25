@@ -94,7 +94,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// Note: We are testing with the actual RDF bindings. These should not change for well
 		// known data types. Mocking the bindings would be nice, but is complex and not needed.
-		$rdfBuilder = $wikibaseRepo->getValueSnakRdfBuilderFactory();
+		$rdfBuilder = WikibaseRepo::getValueSnakRdfBuilderFactory();
 
 		$serializationService = new EntityDataSerializationService(
 			$mockRepository,

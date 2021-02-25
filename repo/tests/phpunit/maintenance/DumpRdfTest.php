@@ -158,7 +158,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// Note: We are testing with the actual RDF bindings, so we can check for actual RDF output.
-		$rdfBuilder = $wikibaseRepo->getValueSnakRdfBuilderFactory();
+		$rdfBuilder = WikibaseRepo::getValueSnakRdfBuilderFactory();
 
 		$dumpScript->setServices(
 			$sqlEntityIdPagerFactory,

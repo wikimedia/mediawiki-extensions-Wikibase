@@ -831,7 +831,7 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetValueSnakRdfBuilderFactory() {
-		$factory = $this->getWikibaseRepo()->getValueSnakRdfBuilderFactory();
+		$factory = WikibaseRepo::getValueSnakRdfBuilderFactory();
 		$this->assertInstanceOf( ValueSnakRdfBuilderFactory::class, $factory );
 	}
 

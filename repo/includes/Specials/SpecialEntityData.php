@@ -9,6 +9,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
+use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -51,7 +52,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 	public static function factory(
 		HtmlCacheUpdater $htmlCacheUpdater,
 		EntityIdParser $entityIdParser,
-		SettingsArray $repoSettings
+		SettingsArray $repoSettings,
+		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
 	): self {
 		global $wgUseCdn, $wgApiFrameOptions;
 
@@ -67,7 +69,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->getEntityContentFactory(),
 			$wikibaseRepo->getPropertyDataTypeLookup(),
-			$wikibaseRepo->getValueSnakRdfBuilderFactory(),
+			$valueSnakRdfBuilderFactory,
 			$wikibaseRepo->getEntityRdfBuilderFactory(),
 			$entityDataFormatProvider,
 			$wikibaseRepo->getCompactBaseDataModelSerializerFactory(),

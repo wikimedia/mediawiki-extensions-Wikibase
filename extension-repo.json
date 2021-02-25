@@ -302,7 +302,8 @@
 			"services": [
 				"HtmlCacheUpdater",
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.ValueSnakRdfBuilderFactory"
 			]
 		},
 		"EntityPage": {

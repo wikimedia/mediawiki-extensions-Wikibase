@@ -29,6 +29,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
+use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -181,4 +182,12 @@ return [
 
 		return new ValueParserFactory( $callbacks );
 	},
+
+	'WikibaseRepo.ValueSnakRdfBuilderFactory' => function ( MediaWikiServices $services ): ValueSnakRdfBuilderFactory {
+		return new ValueSnakRdfBuilderFactory(
+			WikibaseRepo::getDataTypeDefinitions( $services )
+				->getRdfBuilderFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
+		);
+	},
+
 ];

@@ -273,11 +273,6 @@ class WikibaseRepo {
 	private $wikibaseContentLanguages = null;
 
 	/**
-	 * @var ValueSnakRdfBuilderFactory
-	 */
-	private $valueSnakRdfBuilderFactory;
-
-	/**
 	 * @var RdfVocabulary
 	 */
 	private $rdfVocabulary;
@@ -1141,17 +1136,9 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return ValueSnakRdfBuilderFactory
-	 */
-	public function getValueSnakRdfBuilderFactory() {
-		if ( $this->valueSnakRdfBuilderFactory === null ) {
-			$this->valueSnakRdfBuilderFactory = new ValueSnakRdfBuilderFactory(
-				self::getDataTypeDefinitions()->getRdfBuilderFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
-			);
-		}
-
-		return $this->valueSnakRdfBuilderFactory;
+	public static function getValueSnakRdfBuilderFactory( ContainerInterface $services = null ): ValueSnakRdfBuilderFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ValueSnakRdfBuilderFactory' );
 	}
 
 	/**

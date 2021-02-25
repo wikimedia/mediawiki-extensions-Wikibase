@@ -54,7 +54,7 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$vocabulary = $this->getTestData()->getVocabulary();
 
 		// Note: using the actual factory here makes this an integration test!
-		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+		$valueBuilderFactory = WikibaseRepo::getValueSnakRdfBuilderFactory();
 
 		$valueBuilder = $valueBuilderFactory->getValueSnakRdfBuilder(
 			RdfProducer::PRODUCE_ALL & ~RdfProducer::PRODUCE_FULL_VALUES,
