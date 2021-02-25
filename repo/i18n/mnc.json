@@ -2,10 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"ChoiChong",
-			"Chulsu463"
+			"Chulsu463",
+			"Foavi33"
 		]
 	},
 	"wikibase-edit": "banjibume arara",
 	"wikibase-add": "nonggimbi",
-	"wikibase-sitelinks-special": "ᡤᡡᠸᠠ ᠵᡥᠠᠮ"
+	"wikibase-label-empty": "toktobuhe lature afahari akū",
+	"wikibase-description-empty": "suhe gisun akv",
+	"wikibase-sitelinks-special": "gvwa jan",
+	"wikibase-statementview-rank-normal": "an i tangkan"
 }
