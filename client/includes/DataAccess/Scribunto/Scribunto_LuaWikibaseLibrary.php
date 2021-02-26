@@ -254,7 +254,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$this->getLanguage(),
 			$wikibaseClient->getTermsLanguages(),
 			$settings->getSetting( 'fineGrainedLuaTracking' ),
-			$wikibaseClient->getLogger()
+			WikibaseClient::getLogger()
 		);
 	}
 

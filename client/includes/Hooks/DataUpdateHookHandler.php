@@ -14,6 +14,8 @@ use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
 use ParserCache;
 use ParserOptions;
 use ParserOutput;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use RuntimeException;
 use Title;
 use User;
@@ -63,14 +65,20 @@ class DataUpdateHookHandler implements
 	 */
 	private $entityUsageFactory;
 
-	public static function factory(): self {
+	/** @var LoggerInterface */
+	private $logger;
+
+	public static function factory(
+		LoggerInterface $logger
+	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		return new self(
 			$wikibaseClient->getStore()->getUsageUpdater(),
 			JobQueueGroup::singleton(),
 			$wikibaseClient->getStore()->getUsageLookup(),
-			new EntityUsageFactory( $wikibaseClient->getEntityIdParser() )
+			new EntityUsageFactory( $wikibaseClient->getEntityIdParser() ),
+			$logger
 		);
 	}
 
@@ -78,12 +86,14 @@ class DataUpdateHookHandler implements
 		UsageUpdater $usageUpdater,
 		JobQueueGroup $jobScheduler,
 		UsageLookup $usageLookup,
-		EntityUsageFactory $entityUsageFactory
+		EntityUsageFactory $entityUsageFactory,
+		LoggerInterface $logger = null
 	) {
 		$this->usageUpdater = $usageUpdater;
 		$this->jobScheduler = $jobScheduler;
 		$this->usageLookup = $usageLookup;
 		$this->entityUsageFactory = $entityUsageFactory;
+		$this->logger = $logger ?: new NullLogger();
 	}
 
 	/**
@@ -128,14 +138,15 @@ class DataUpdateHookHandler implements
 	public function doLinksUpdateComplete( LinksUpdate $linksUpdate ): void {
 		$pageId = $linksUpdate->mId;
 		if ( !$pageId ) {
-			// TODO inject logger
-			WikibaseClient::getDefaultInstance()->getLogger()
-				->info( __METHOD__ . ': skipping page ID {pageId} for title {title} (T264929)', [
+			$this->logger->info(
+				__METHOD__ . ': skipping page ID {pageId} for title {title} (T264929)',
+				[
 					'pageId' => $pageId,
 					'title' => $linksUpdate->getTitle()->getPrefixedText(),
 					'causeAction' => $linksUpdate->getCauseAction(),
 					'exception' => new RuntimeException(),
-				] );
+				]
+			);
 			return;
 		}
 

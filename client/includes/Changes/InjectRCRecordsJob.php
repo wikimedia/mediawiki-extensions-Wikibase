@@ -175,7 +175,7 @@ class InjectRCRecordsJob extends Job {
 
 		$job->setRecentChangesFinder( $wbServices->getStore()->getRecentChangesFinder() );
 
-		$job->setLogger( $wbServices->getLogger() );
+		$job->setLogger( WikibaseClient::getLogger( $mwServices ) );
 		$job->setStats( $mwServices->getStatsdDataFactory() );
 
 		return $job;
