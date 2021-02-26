@@ -77,7 +77,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			} );
 
 		// Note: using the actual factory here makes this an integration test!
-		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+		$valueBuilderFactory = WikibaseRepo::getValueSnakRdfBuilderFactory();
 
 		if ( $flavor & RdfProducer::PRODUCE_FULL_VALUES ) {
 			$valueWriter = $writer->sub();
