@@ -10,6 +10,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
+use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -54,6 +55,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		HtmlCacheUpdater $htmlCacheUpdater,
 		EntityIdParser $entityIdParser,
 		LoggerInterface $logger,
+		RdfVocabulary $rdfVocabulary,
 		SettingsArray $repoSettings,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
 	): self {
@@ -77,7 +79,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wikibaseRepo->getCompactBaseDataModelSerializerFactory(),
 			$wikibaseRepo->getCompactEntitySerializer(),
 			$wikibaseRepo->getSiteLookup(),
-			$wikibaseRepo->getRdfVocabulary()
+			$rdfVocabulary
 		);
 
 		$maxAge = $repoSettings->getSetting( 'dataCdnMaxAge' );

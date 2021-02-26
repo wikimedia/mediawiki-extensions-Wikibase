@@ -759,7 +759,7 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetRdfVocabulary() {
-		$factory = $this->getWikibaseRepo()->getRdfVocabulary();
+		$factory = WikibaseRepo::getRdfVocabulary();
 		$this->assertInstanceOf( RdfVocabulary::class, $factory );
 	}
 
