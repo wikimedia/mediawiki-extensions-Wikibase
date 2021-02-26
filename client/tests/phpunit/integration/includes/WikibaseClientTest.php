@@ -42,7 +42,6 @@ use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
-use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermLanguageFallbackChain;
@@ -390,24 +389,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetEntityChangeFactory() {
 		$entityChangeFactory = $this->getWikibaseClient()->getEntityChangeFactory();
 		$this->assertInstanceOf( EntityChangeFactory::class, $entityChangeFactory );
-	}
-
-	public function propertyOrderUrlProvider() {
-		return [
-			[ 'page-url' ],
-			[ null ]
-		];
-	}
-
-	/**
-	 * @dataProvider propertyOrderUrlProvider
-	 */
-	public function testGetPropertyOrderProvider_noSortedPropertiesUrl( $propertyOrderUrl ) {
-		$wikibaseClient = $this->getWikibaseClient();
-		$wikibaseClient->getSettings()->setSetting( 'propertyOrderUrl', $propertyOrderUrl );
-
-		$propertyOrderProvider = $wikibaseClient->getPropertyOrderProvider();
-		$this->assertInstanceOf( PropertyOrderProvider::class, $propertyOrderProvider );
 	}
 
 	public function testGetDataAccessLanguageFallbackChain() {

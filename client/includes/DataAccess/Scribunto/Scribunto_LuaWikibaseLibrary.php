@@ -856,8 +856,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	private function getPropertyOrderProvider() {
 		if ( !$this->propertyOrderProvider ) {
-			$wikibaseClient = WikibaseClient::getDefaultInstance();
-			$this->propertyOrderProvider = $wikibaseClient->getPropertyOrderProvider();
+			$this->propertyOrderProvider = WikibaseClient::getPropertyOrderProvider();
 		}
 		return $this->propertyOrderProvider;
 	}

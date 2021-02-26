@@ -15,7 +15,6 @@ use Deserializers\DispatchableDeserializer;
 use Deserializers\DispatchingDeserializer;
 use ExtensionRegistry;
 use ExternalUserNames;
-use Http;
 use JobQueueGroup;
 use Language;
 use LogicException;
@@ -29,7 +28,6 @@ use Serializers\Serializer;
 use Site;
 use SiteLookup;
 use StubObject;
-use Title;
 use TitleFactory;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
@@ -102,11 +100,8 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
-use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
@@ -116,7 +111,6 @@ use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
-use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCacheFactory;
@@ -233,11 +227,6 @@ final class WikibaseClient {
 	 * @var PrefetchingTermLookup|null
 	 */
 	private $prefetchingTermLookup = null;
-
-	/**
-	 * @var PropertyOrderProvider|null
-	 */
-	private $propertyOrderProvider = null;
 
 	/**
 	 * @var SidebarLinkBadgeDisplay|null
@@ -1173,30 +1162,9 @@ final class WikibaseClient {
 		return $this->restrictedEntityLookup;
 	}
 
-	public function getPropertyOrderProvider(): PropertyOrderProvider {
-		if ( $this->propertyOrderProvider === null ) {
-			$title = Title::newFromText( 'MediaWiki:Wikibase-SortedProperties' );
-			$innerProvider = new WikiPagePropertyOrderProvider( $title );
-
-			$url = self::getSettings()->getSetting( 'propertyOrderUrl' );
-			if ( $url !== null ) {
-				$innerProvider = new FallbackPropertyOrderProvider(
-					$innerProvider,
-					new HttpUrlPropertyOrderProvider(
-						$url,
-						new Http(),
-						self::getLogger()
-					)
-				);
-			}
-
-			$this->propertyOrderProvider = new CachingPropertyOrderProvider(
-				$innerProvider,
-				ObjectCache::getLocalClusterInstance()
-			);
-		}
-
-		return $this->propertyOrderProvider;
+	public static function getPropertyOrderProvider( ContainerInterface $services = null ): PropertyOrderProvider {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.PropertyOrderProvider' );
 	}
 
 	public function getEntityNamespaceLookup(): EntityNamespaceLookup {

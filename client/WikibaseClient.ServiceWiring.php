@@ -13,6 +13,10 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Store\CachingPropertyOrderProvider;
+use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
+use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
+use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
@@ -72,6 +76,29 @@ return [
 
 	'WikibaseClient.Logger' => function ( MediaWikiServices $services ): LoggerInterface {
 		return LoggerFactory::getInstance( 'Wikibase' );
+	},
+
+	'WikibaseClient.PropertyOrderProvider' => function ( MediaWikiServices $services ): CachingPropertyOrderProvider {
+		$title = $services->getTitleFactory()->newFromTextThrow( 'MediaWiki:Wikibase-SortedProperties' );
+		$innerProvider = new WikiPagePropertyOrderProvider( $title );
+
+		$url = WikibaseClient::getSettings( $services )->getSetting( 'propertyOrderUrl' );
+
+		if ( $url !== null ) {
+			$innerProvider = new FallbackPropertyOrderProvider(
+				$innerProvider,
+				new HttpUrlPropertyOrderProvider(
+					$url,
+					new Http(),
+					WikibaseClient::getLogger( $services )
+				)
+			);
+		}
+
+		return new CachingPropertyOrderProvider(
+			$innerProvider,
+			ObjectCache::getLocalClusterInstance()
+		);
 	},
 
 	'WikibaseClient.Settings' => function ( MediaWikiServices $services ): SettingsArray {
