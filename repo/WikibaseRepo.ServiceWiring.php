@@ -182,6 +182,25 @@ return [
 		throw new LogicException( 'No source configured: ' . $localEntitySourceName );
 	},
 
+	'WikibaseRepo.LocalEntityTypes' => function ( MediaWikiServices $services ): array {
+		$localSource = WikibaseRepo::getLocalEntitySource( $services );
+		$subEntityTypes = WikibaseRepo::getEntityTypeDefinitions( $services )
+				->get( EntityTypeDefinitions::SUB_ENTITY_TYPES );
+
+		// Expands the array of local entity types with sub types
+		return array_reduce(
+			$localSource->getEntityTypes(),
+			function ( $types, $localTypeName ) use ( $subEntityTypes ) {
+				$types[] = $localTypeName;
+				if ( array_key_exists( $localTypeName, $subEntityTypes ) ) {
+					$types = array_merge( $types, $subEntityTypes[$localTypeName] );
+				}
+				return $types;
+			},
+			[]
+		);
+	},
+
 	'WikibaseRepo.Logger' => function ( MediaWikiServices $services ): LoggerInterface {
 		return LoggerFactory::getInstance( 'Wikibase' );
 	},

@@ -441,39 +441,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( EntityFactory::class, $entityFactory );
 	}
 
-	public function testGetLocalEntityTypes() {
-		$this->settings->setSetting( 'localEntitySourceName', 'local' );
-		$this->entityTypeDefinitions = $this->getEntityTypeDefinitionsWithSubentities();
-		$this->entitySourceDefinitions = new EntitySourceDefinitions(
-			[
-				new EntitySource(
-					'local',
-					false,
-					[
-						'foo' => [ 'namespaceId' => 100, 'slot' => 'main' ],
-						'bar' => [ 'namespaceId' => 102, 'slot' => 'main' ],
-						'lexeme' => [ 'namespaceId' => 104, 'slot' => 'main' ],
-					],
-					'',
-					'wd',
-					'',
-					''
-				)
-			],
-			$this->entityTypeDefinitions
-		);
-
-		$wikibaseRepo = $this->getWikibaseRepo();
-
-		$localEntityTypes = $wikibaseRepo->getLocalEntityTypes();
-
-		$this->assertContains( 'foo', $localEntityTypes );
-		$this->assertContains( 'bar', $localEntityTypes );
-		$this->assertContains( 'lexeme', $localEntityTypes );
-		// Sub entities should appear in the list
-		$this->assertContains( 'form', $localEntityTypes );
-	}
-
 	public function testGetLocalEntityNamespaceLookup() {
 		$this->settings->setSetting( 'localEntitySourceName', 'local' );
 		$this->entitySourceDefinitions = new EntitySourceDefinitions(
@@ -504,9 +471,10 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 			$this->entityTypeDefinitions
 		);
 
-		$wikibaseRepo = $this->getWikibaseRepo();
+		$this->setRepoSettings( $this->settings );
+		$this->setEntitySourceDefinitions( $this->entitySourceDefinitions );
 
-		$localEntityTypes = $wikibaseRepo->getLocalEntityTypes();
+		$localEntityTypes = WikibaseRepo::getLocalEntityTypes();
 
 		$this->assertContains( 'foo', $localEntityTypes );
 		$this->assertNotContains( 'bar', $localEntityTypes );

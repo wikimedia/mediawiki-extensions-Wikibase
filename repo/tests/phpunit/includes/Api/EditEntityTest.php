@@ -412,7 +412,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			return;
 		}
 
-		$enabledTypes = WikibaseRepo::getDefaultInstance()->getLocalEntityTypes();
+		$enabledTypes = WikibaseRepo::getLocalEntityTypes();
 		if ( !in_array( $requiredEntityType, $enabledTypes ) ) {
 			$this->markTestSkipped( 'Entity type not enabled: ' . $requiredEntityType );
 		}
