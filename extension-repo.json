@@ -446,7 +446,6 @@
 			"view/tests/qunit/jquery/wikibase/toolbar/jquery.wikibase.toolbaritem.tests.js",
 			"view/tests/qunit/jquery/wikibase/jquery.wikibase.aliasesview.tests.js",
 			"view/tests/qunit/jquery/wikibase/jquery.wikibase.badgeselector.tests.js",
-			"view/tests/qunit/jquery/wikibase/jquery.wikibase.statementgrouplabelscroll.tests.js",
 			"view/tests/qunit/jquery/wikibase/jquery.wikibase.statementgrouplistview.tests.js",
 			"view/tests/qunit/jquery/wikibase/jquery.wikibase.statementgroupview.tests.js",
 			"view/tests/qunit/jquery/wikibase/jquery.wikibase.statementlistview.tests.js",
