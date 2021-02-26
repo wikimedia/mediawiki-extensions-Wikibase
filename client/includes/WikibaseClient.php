@@ -558,7 +558,7 @@ final class WikibaseClient {
 				$this->getEntityIdLookup(),
 				$this->getEntityNamespaceLookup(),
 				$this->getWikibaseServices(),
-				$this->getSettings(),
+				self::getSettings(),
 				$this->getDatabaseDomainNameOfLocalRepo(),
 				$this->getContentLanguage()->getCode()
 			);
@@ -1275,7 +1275,7 @@ final class WikibaseClient {
 			$this->referenceFormatterFactory = new ReferenceFormatterFactory(
 				$this->getDataAccessSnakFormatterFactory(),
 				WellKnownReferenceProperties::newFromArray(
-					$this->getSettings()->getSetting( 'wellKnownReferencePropertyIds' ),
+					self::getSettings()->getSetting( 'wellKnownReferencePropertyIds' ),
 					$logger
 				),
 				$logger
