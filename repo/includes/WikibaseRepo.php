@@ -10,7 +10,6 @@ use Deserializers\DispatchingDeserializer;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
 use Exception;
-use ExtensionRegistry;
 use HashBagOStuff;
 use IContextSource;
 use InvalidArgumentException;
@@ -287,11 +286,6 @@ class WikibaseRepo {
 	private $entityRdfBuilderFactory = null;
 
 	/**
-	 * @var CachingKartographerEmbeddingHandler|null
-	 */
-	private $kartographerEmbeddingHandler = null;
-
-	/**
 	 * @var WikibaseRepo|null
 	 */
 	private static $instance = null;
@@ -439,36 +433,15 @@ class WikibaseRepo {
 			$this->getEntityUrlLookup(),
 			$this->getEntityRedirectChecker(),
 			$this->getEntityTitleLookup(),
-			$this->getKartographerEmbeddingHandler(),
+			self::getKartographerEmbeddingHandler(),
 			self::getSettings()->getSetting( 'useKartographerMaplinkInWikitext' ),
 			$thumbLimits
 		);
 	}
 
-	/**
-	 * @return CachingKartographerEmbeddingHandler|null
-	 */
-	public function getKartographerEmbeddingHandler() {
-		if ( $this->kartographerEmbeddingHandler === null && $this->useKartographerGlobeCoordinateFormatter() ) {
-			$this->kartographerEmbeddingHandler = new CachingKartographerEmbeddingHandler(
-				MediaWikiServices::getInstance()->getParserFactory()->create()
-			);
-		}
-
-		return $this->kartographerEmbeddingHandler;
-	}
-
-	/**
-	 * @return bool
-	 */
-	private function useKartographerGlobeCoordinateFormatter() {
-		// FIXME: remove the global out of here
-		global $wgKartographerEnableMapFrame;
-
-		return self::getSettings()->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
-			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) &&
-			isset( $wgKartographerEnableMapFrame ) &&
-			$wgKartographerEnableMapFrame;
+	public static function getKartographerEmbeddingHandler( ContainerInterface $services = null ): ?CachingKartographerEmbeddingHandler {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.KartographerEmbeddingHandler' );
 	}
 
 	/**
@@ -1850,7 +1823,7 @@ class WikibaseRepo {
 				self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_REFERENCE_EXTRACTOR_CALLBACK ),
 				new StatementEntityReferenceExtractor( $this->getItemUrlParser() )
 			),
-			$this->getKartographerEmbeddingHandler(),
+			self::getKartographerEmbeddingHandler(),
 			$services->getStatsdDataFactory(),
 			$services->getRepoGroup(),
 			self::getSettings()->getSetting( 'preferredGeoDataProperties' ),
