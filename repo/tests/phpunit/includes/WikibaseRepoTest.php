@@ -441,45 +441,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( EntityFactory::class, $entityFactory );
 	}
 
-	public function testGetLocalEntityNamespaceLookup() {
-		$this->settings->setSetting( 'localEntitySourceName', 'local' );
-		$this->entitySourceDefinitions = new EntitySourceDefinitions(
-			[
-				new EntitySource(
-					'local',
-					false,
-					[
-						'foo' => [ 'namespaceId' => 100, 'slot' => 'main' ],
-					],
-					'',
-					'wd',
-					'',
-					''
-				),
-				new EntitySource(
-					'otherSource',
-					false,
-					[
-						'bar' => [ 'namespaceId' => 102, 'slot' => 'main' ],
-					],
-					'',
-					'wd',
-					'',
-					''
-				)
-			],
-			$this->entityTypeDefinitions
-		);
-
-		$this->setRepoSettings( $this->settings );
-		$this->setEntitySourceDefinitions( $this->entitySourceDefinitions );
-
-		$localEntityTypes = WikibaseRepo::getLocalEntityTypes();
-
-		$this->assertContains( 'foo', $localEntityTypes );
-		$this->assertNotContains( 'bar', $localEntityTypes );
-	}
-
 	private function getEntityTypeDefinitionsWithSubentities(): EntityTypeDefinitions {
 		return new EntityTypeDefinitions(
 			[
