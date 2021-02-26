@@ -445,7 +445,6 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			new EntitySourceDefinitions( [
 				new EntitySource( '', 'somedb', [ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' )
 			], new EntityTypeDefinitions( [] ) ),
-			'',
 			[ '' => '' ],
 			[ '' => '' ],
 			[],
@@ -473,7 +472,6 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			[ '' => RdfBuilderTestData::URI_BASE ],
 			[ '' => RdfBuilderTestData::URI_DATA ],
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			'',
 			[ '' => '' ],
 			[ '' => '' ],
 			[],

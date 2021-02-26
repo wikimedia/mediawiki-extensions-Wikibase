@@ -50,8 +50,6 @@ class RdfVocabularyTest extends ServiceWiringTestCase {
 				'pagePropertiesRdf' => $pagePropertyDefs,
 				'rdfDataRightsUrl' => 'https://license.test/cc0',
 			] ) );
-		$this->mockService( 'WikibaseRepo.LocalEntitySource',
-			$localEntitySource );
 		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions',
 			new EntitySourceDefinitions( [
 				$localEntitySource,

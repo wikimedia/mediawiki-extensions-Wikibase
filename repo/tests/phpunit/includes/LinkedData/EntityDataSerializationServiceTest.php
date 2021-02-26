@@ -149,7 +149,6 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 						'p'
 					),
 				], new EntityTypeDefinitions( [] ) ),
-				'items',
 				[ 'items' => 'wd', 'props' => 'pro', ],
 				[ 'items' => '', 'props' => 'pro', ]
 			)

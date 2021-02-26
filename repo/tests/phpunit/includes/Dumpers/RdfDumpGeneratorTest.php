@@ -195,7 +195,6 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 						''
 					)
 				], new EntityTypeDefinitions( [] ) ),
-				'test',
 				[ 'test' => 'wd', 'foreign' => 'foreign' ],
 				[ 'test' => '', 'foreign' => 'foreign' ],
 				[ 'test' => 'en-x-test' ]

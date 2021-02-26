@@ -52,7 +52,6 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					''
 				)
 			], new EntityTypeDefinitions( [] ) ),
-			'test',
 			[ 'test' => '' ],
 			[ 'test' => '' ]
 		);

@@ -39,7 +39,6 @@ class GeoShapeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ '' => 'http://test/item/' ],
 			[ '' => 'http://test/data/' ],
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			'',
 			[ '' => '' ],
 			[ '' => '' ]
 		);

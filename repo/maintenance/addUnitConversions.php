@@ -356,7 +356,6 @@ QUERY;
 			[ '' => $baseUri ],
 			[ '' => $entityDataTitle->getCanonicalURL() . '/' ],
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			'',
 			[ '' => 'wd' ],
 			[ '' => '' ],
 			[],

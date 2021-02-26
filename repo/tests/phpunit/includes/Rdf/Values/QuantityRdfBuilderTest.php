@@ -282,7 +282,6 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ '' => 'http://acme.com/item/' ],
 			[ '' => 'http://acme.com/data/' ],
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			'',
 			[ '' => '' ],
 			[ '' => '' ]
 		);
@@ -314,7 +313,6 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ '' => 'http://acme.com/item/' ],
 			[ '' => 'http://acme.com/data/' ],
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			'',
 			[ '' => '' ],
 			[ '' => '' ]
 		);
@@ -363,7 +361,6 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ '' => 'http://acme.com/item/' ],
 			[ '' => 'http://acme.com/data/' ],
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			'',
 			[ '' => '' ],
 			[ '' => '' ]
 		);

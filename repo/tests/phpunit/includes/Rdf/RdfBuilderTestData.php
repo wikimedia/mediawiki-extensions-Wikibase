@@ -186,7 +186,6 @@ class RdfBuilderTestData {
 				],
 				new EntityTypeDefinitions( [] )
 			),
-			'wikidata',
 			[ 'wikidata' => '', 'foreign' => 'foreign' ],
 			[ 'wikidata' => '', 'foreign' => 'foreign' ],
 			[],

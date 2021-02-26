@@ -121,7 +121,6 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 						''
 					)
 				], new EntityTypeDefinitions( [] ) ),
-				'test',
 				[ 'test' => '' ],
 				[ 'test' => '' ]
 			)

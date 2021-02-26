@@ -146,7 +146,6 @@ class RdfVocabulary {
 	 * @param string[] $conceptUris Associative array mapping repository names to base URIs for entity concept URIs.
 	 * @param string[] $dataUris Associative array mapping source/repository names to base URIs for entity description URIs.
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
-	 * @param string $localEntitySourceName
 	 * @param string[] $rdfTurtleNodePrefixes
 	 * @param string[] $rdfTurtlePredicatePrefixes
 	 * @param string[] $canonicalLanguageCodes Mapping of non-standard to canonical language codes.
@@ -156,33 +155,42 @@ class RdfVocabulary {
 	 *                 pageProp => [ 'name' => wikibase predicate, 'type' => integer ]
 	 *                 All predicates will be prefixed with wikibase:
 	 * @param string $licenseUrl
+	 * @suppress PhanTypeMismatchDeclaredParamNullable
+	 * @suppress PhanTypeArraySuspiciousNullable
 	 */
 	public function __construct(
 		array $conceptUris,
 		array $dataUris,
 		EntitySourceDefinitions $entitySourceDefinitions,
-		$localEntitySourceName,
-		array $rdfTurtleNodePrefixes,
+		/* array */ $rdfTurtleNodePrefixes,
 		array $rdfTurtlePredicatePrefixes,
-		array $canonicalLanguageCodes = [],
-		array $dataTypeUris = [],
-		array $pagePropertyDefs = [],
-		$licenseUrl = 'http://creativecommons.org/publicdomain/zero/1.0/'
+		array $canonicalLanguageCodes = /* [] */ null,
+		array $dataTypeUris = /* [] */ null,
+		array $pagePropertyDefs = /* [] */ null,
+		/* string */ $licenseUrl = /* 'http://creativecommons.org/publicdomain/zero/1.0/' */ null,
+		$extraLicenseUrl = null
 	) {
-		Assert::parameter(
-			array_key_exists( $localEntitySourceName, $conceptUris ),
-			'$conceptUris',
-			'must contain entry for the local repository, ie. ' . $localEntitySourceName
-		);
+		if ( is_string( $rdfTurtleNodePrefixes ) ) {
+			// there used to be a string $localEntitySourceName parameter
+			// between $entitySourceDefinitions and $rdfTurtleNodePrefixes,
+			// and apparently this call included it – shift all subsequent arguments
+			$rdfTurtleNodePrefixes = $rdfTurtlePredicatePrefixes;
+			$rdfTurtlePredicatePrefixes = $canonicalLanguageCodes;
+			$canonicalLanguageCodes = $dataTypeUris;
+			$dataTypeUris = $pagePropertyDefs;
+			$pagePropertyDefs = $licenseUrl;
+			$licenseUrl = $extraLicenseUrl;
+			unset( $extraLicenseUrl );
+		}
+		$canonicalLanguageCodes = $canonicalLanguageCodes ?: [];
+		$dataTypeUris = $dataTypeUris ?: [];
+		$pagePropertyDefs = $pagePropertyDefs ?: [];
+		$licenseUrl = $licenseUrl ?: 'http://creativecommons.org/publicdomain/zero/1.0/';
+
 		Assert::parameterElementType( 'string', $conceptUris, '$conceptUris' );
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $conceptUris, '$conceptUris' );
 
 		Assert::parameterElementType( 'string', $dataUris, '$dataUris' );
-		Assert::parameter(
-			array_key_exists( $localEntitySourceName, $dataUris ),
-			'$dataUris',
-			'must contain entry for the local entity source, ie. ' . $localEntitySourceName
-		);
 
 		Assert::parameter(
 			array_keys( $conceptUris ) === array_keys( $dataUris ),
