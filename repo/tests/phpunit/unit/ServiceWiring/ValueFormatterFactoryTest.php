@@ -17,10 +17,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class ValueFormatterFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.DataTypeDefinitions' )
-			->willReturn( new DataTypeDefinitions( [] ) );
+		$this->mockService( 'WikibaseRepo.DataTypeDefinitions',
+			new DataTypeDefinitions( [] ) );
 
 		$this->assertInstanceOf(
 			OutputFormatValueFormatterFactory::class,

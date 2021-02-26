@@ -20,10 +20,8 @@ class DataTypeFactoryTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$testDataType = 'entity-schema';
 		$testDataValueType = 'string';
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.DataTypeDefinitions' )
-			->willReturn( new DataTypeDefinitions( [
+		$this->mockService( 'WikibaseRepo.DataTypeDefinitions',
+			new DataTypeDefinitions( [
 				"PT:$testDataType" => [ 'value-type' => $testDataValueType ],
 			] ) );
 

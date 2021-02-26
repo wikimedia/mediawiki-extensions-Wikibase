@@ -101,10 +101,8 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 	}
 
 	private function mockRepoSettings( bool $useKartographerGlobeCoordinateFormatter ): void {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.Settings' )
-			->willReturn( new SettingsArray( [
+		$this->mockService( 'WikibaseRepo.Settings',
+			new SettingsArray( [
 				'useKartographerGlobeCoordinateFormatter' => $useKartographerGlobeCoordinateFormatter,
 			] ) );
 	}

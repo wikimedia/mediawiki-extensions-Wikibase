@@ -22,10 +22,8 @@ class LocalEntityNamespaceLookupTest extends ServiceWiringTestCase {
 			'property' => 777
 		];
 
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.LocalEntitySource' )
-			->willReturn( new EntitySource(
+		$this->mockService( 'WikibaseRepo.LocalEntitySource',
+			new EntitySource(
 				'local',
 				false,
 				array_map( function ( $nsId ) {

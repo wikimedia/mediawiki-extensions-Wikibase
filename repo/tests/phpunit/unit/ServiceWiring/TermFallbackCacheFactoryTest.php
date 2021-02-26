@@ -20,21 +20,13 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class TermFallbackCacheFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$this->serviceContainer->expects( $this->exactly( 2 ) )
-			->method( 'get' )
-			->willReturnCallback( function ( string $id ) {
-				switch ( $id ) {
-					case 'WikibaseRepo.Settings':
-						return new SettingsArray( [
-							'sharedCacheType' => 'test cache type',
-							'termFallbackCacheVersion' => 1,
-						] );
-					case 'WikibaseRepo.Logger':
-						return new NullLogger();
-					default:
-						$this->fail( "Unexpected service $id" );
-				}
-			} );
+		$this->mockService( 'WikibaseRepo.Settings',
+			new SettingsArray( [
+				'sharedCacheType' => 'test cache type',
+				'termFallbackCacheVersion' => 1,
+			] ) );
+		$this->mockService( 'WikibaseRepo.Logger',
+			new NullLogger() );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getStatsdDataFactory' )
 			->willReturn( new NullStatsdDataFactory() );

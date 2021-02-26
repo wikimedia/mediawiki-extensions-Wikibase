@@ -18,10 +18,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class ValueSnakRdfBuilderFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.DataTypeDefinitions' )
-			->willReturn( new DataTypeDefinitions( [
+		$this->mockService( 'WikibaseRepo.DataTypeDefinitions',
+			new DataTypeDefinitions( [
 				'VT:test' => [
 					'rdf-builder-factory-callback' => function () {
 						return null;
@@ -39,10 +37,8 @@ class ValueSnakRdfBuilderFactoryTest extends ServiceWiringTestCase {
 	}
 
 	public function testChecksCallable(): void {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.DataTypeDefinitions' )
-			->willReturn( new DataTypeDefinitions( [
+		$this->mockService( 'WikibaseRepo.DataTypeDefinitions',
+			new DataTypeDefinitions( [
 				'VT:test' => [
 					'rdf-builder-factory-callback' => true,
 				],

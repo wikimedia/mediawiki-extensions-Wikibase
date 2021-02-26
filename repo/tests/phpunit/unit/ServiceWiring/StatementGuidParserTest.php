@@ -17,10 +17,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class StatementGuidParserTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.EntityIdParser' )
-			->willReturn( new ItemIdParser() );
+		$this->mockService( 'WikibaseRepo.EntityIdParser',
+			new ItemIdParser() );
 
 		/** @var StatementGuidParser $statementGuidParser */
 		$statementGuidParser = $this->getService( 'WikibaseRepo.StatementGuidParser' );
