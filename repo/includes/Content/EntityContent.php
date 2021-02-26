@@ -512,7 +512,7 @@ abstract class EntityContent extends AbstractContent {
 		$toEntity = ( $toContent->isRedirect() || $toContent->getEntityHolder() === null ) ?
 			$this->makeEmptyEntity() : $toContent->getEntity();
 
-		$entityDiffer = WikibaseRepo::getDefaultInstance()->getEntityDiffer();
+		$entityDiffer = WikibaseRepo::getEntityDiffer();
 		$entityDiff = $entityDiffer->diffEntities( $fromEntity, $toEntity );
 
 		return new EntityContentDiff( $entityDiff, $redirectDiff, $fromEntity->getType() );
