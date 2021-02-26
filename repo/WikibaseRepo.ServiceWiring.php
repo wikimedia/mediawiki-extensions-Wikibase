@@ -35,6 +35,7 @@ use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikibase\Lib\WikibaseSettings;
@@ -208,6 +209,14 @@ return [
 		} else {
 			return null;
 		}
+	},
+
+	'WikibaseRepo.LocalEntityNamespaceLookup' => function ( MediaWikiServices $services ): EntityNamespaceLookup {
+		$localEntitySource = WikibaseRepo::getLocalEntitySource( $services );
+		$nsIds = $localEntitySource->getEntityNamespaceIds();
+		$entitySlots = $localEntitySource->getEntitySlotNames();
+
+		return new EntityNamespaceLookup( $nsIds, $entitySlots );
 	},
 
 	'WikibaseRepo.LocalEntitySource' => function ( MediaWikiServices $services ): EntitySource {

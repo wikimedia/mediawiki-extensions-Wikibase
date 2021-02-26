@@ -1724,12 +1724,9 @@ class WikibaseRepo {
 		return $this->getWikibaseServices()->getEntityNamespaceLookup();
 	}
 
-	public function getLocalEntityNamespaceLookup(): EntityNamespaceLookup {
-		$localEntitySource = self::getLocalEntitySource();
-		$nsIds = $localEntitySource->getEntityNamespaceIds();
-		$entitySlots = $localEntitySource->getEntitySlotNames();
-
-		return new EntityNamespaceLookup( $nsIds, $entitySlots );
+	public static function getLocalEntityNamespaceLookup( ContainerInterface $services = null ): EntityNamespaceLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.LocalEntityNamespaceLookup' );
 	}
 
 	/**

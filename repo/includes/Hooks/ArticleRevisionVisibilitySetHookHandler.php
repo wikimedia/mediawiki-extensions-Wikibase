@@ -8,7 +8,6 @@ use MediaWiki\Hook\ArticleRevisionVisibilitySetHook;
 use Title;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\ChangeModification\DispatchChangeVisibilityNotificationJob;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Hook handler that propagates changes to the visibility of an article's revisions
@@ -37,20 +36,11 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 	private $jobQueueGroupFactory;
 
 	public function __construct(
-		EntityNamespaceLookup $entityNamespaceLookup,
-		callable $jobQueueGroupFactory
+		EntityNamespaceLookup $localEntityNamespaceLookup,
+		callable $jobQueueGroupFactory = null
 	) {
-		$this->entityNamespaceLookup = $entityNamespaceLookup;
-		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
-	}
-
-	public static function factory(): self {
-		$wbRepo = WikibaseRepo::getDefaultInstance();
-
-		return new self(
-			$wbRepo->getLocalEntityNamespaceLookup(),
-			'JobQueueGroup::singleton'
-		);
+		$this->entityNamespaceLookup = $localEntityNamespaceLookup;
+		$this->jobQueueGroupFactory = $jobQueueGroupFactory ?: 'JobQueueGroup::singleton';
 	}
 
 	/**
