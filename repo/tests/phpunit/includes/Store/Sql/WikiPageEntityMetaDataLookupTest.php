@@ -126,12 +126,11 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 	 * This mock uses the real code except for DBAccessBase::getConnection
 	 *
 	 * @param int $selectCount Number of mocked/lagged DBAccessBase::getConnection::select calls
-	 * @param int $selectRowCount Number of mocked/lagged DBAccessBase::getConnection::selectRow calls
 	 * @param int $getConnectionCount Number of WikiPageEntityMetaDataLookup::getConnection calls
 	 *
 	 * @return WikiPageEntityMetaDataLookup
 	 */
-	private function getLookupWithLaggedConnection( $selectCount, $selectRowCount, $getConnectionCount ) {
+	private function getLookupWithLaggedConnection( $selectCount, $getConnectionCount ) {
 		$nsLookup = $this->getEntityNamespaceLookup();
 		$lookup = $this->getMockBuilder( WikiPageEntityMetaDataLookup::class )
 			->setConstructorArgs( [
@@ -147,12 +146,12 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 
 		$lookup->expects( $this->exactly( $getConnectionCount ) )
 			->method( 'getConnection' )
-			->willReturnCallback( function( $id ) use ( $selectCount, $selectRowCount ) {
+			->willReturnCallback( function( $id ) use ( $selectCount ) {
 				$db = $realDB = wfGetDB( DB_MASTER );
 
 				if ( $id === DB_REPLICA ) {
 					// This is a (fake) lagged database connection.
-					$db = $this->getLaggedDatabase( $realDB, $selectCount, $selectRowCount );
+					$db = $this->getLaggedDatabase( $realDB, $selectCount );
 				}
 
 				return $db;
@@ -164,7 +163,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * Gets a "lagged" database connection: We always leave out the first row on select.
 	 */
-	private function getLaggedDatabase( IDatabase $realDB, $selectCount, $selectRowCount ) {
+	private function getLaggedDatabase( IDatabase $realDB, $selectCount ) {
 		$db = $this->getMockBuilder( IDatabase::class )
 			->setMethods( [ 'select', 'selectRow' ] )
 			->setProxyTarget( $realDB )
@@ -185,9 +184,8 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				return new FakeResultWrapper( array_slice( $data, 1 ) );
 			} );
 
-		$db->expects( $this->exactly( $selectRowCount ) )
-			->method( 'selectRow' )
-			->willReturn( false );
+		$db->expects( $this->never() )
+			->method( 'selectRow' );
 
 		return $db;
 	}
@@ -208,7 +206,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 
 		// Make sure we have two calls to getConnection: One that asks for a
 		// replica and one that asks for the master.
-		$lookup = $this->getLookupWithLaggedConnection( 0, 1, 2 );
+		$lookup = $this->getLookupWithLaggedConnection( 1, 2 );
 
 		$result = $lookup->loadRevisionInformationByRevisionId(
 			$entityRevision->getEntity()->getId(),
@@ -224,7 +222,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$entityRevision = $this->data[0];
 
 		// Should do only one getConnection call.
-		$lookup = $this->getLookupWithLaggedConnection( 0, 1, 1 );
+		$lookup = $this->getLookupWithLaggedConnection( 1, 1 );
 
 		$result = $lookup->loadRevisionInformationByRevisionId(
 			$entityRevision->getEntity()->getId(),
@@ -330,7 +328,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 
 		// Make sure we have two calls to getConnection: One that asks for a
 		// replica and one that asks for the master.
-		$lookup = $this->getLookupWithLaggedConnection( 1, 0, 2 );
+		$lookup = $this->getLookupWithLaggedConnection( 1, 2 );
 
 		$result = $lookup->loadRevisionInformation(
 			$entityIds,
@@ -455,7 +453,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 
 		// Make sure we have two calls to getConnection: One that asks for a
 		// replica and one that asks for the master.
-		$lookup = $this->getLookupWithLaggedConnection( 1, 0, 2 );
+		$lookup = $this->getLookupWithLaggedConnection( 1, 2 );
 
 		$result = $lookup->loadLatestRevisionIds(
 			$entityIds,

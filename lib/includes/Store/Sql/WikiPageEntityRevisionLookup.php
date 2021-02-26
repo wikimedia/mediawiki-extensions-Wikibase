@@ -134,13 +134,12 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			}
 
 			if ( $entityRevision === null ) {
-				// This happens when:
-				// - there is a problem with the external store; or
-				// - if access is forbidden; or
-				// - revision has no entity slot
-				$this->logger->debug(
-					'{method}: Entity not loaded for {entityId}',
-					[ 'method' => __METHOD__, 'entityId' => $entityId ]
+				// This may happen when there is a problem with the external store or if access is forbidden.
+				// It should not happen when a revision has no entity slot –
+				// in that case, the EntityMetaDataAccessor should not return a row at all.
+				$this->logger->warning(
+					__METHOD__ . ': Entity not loaded for {entityId}',
+					[ 'entityId' => $entityId, 'revisionId' => $revisionId ]
 				);
 			}
 		}

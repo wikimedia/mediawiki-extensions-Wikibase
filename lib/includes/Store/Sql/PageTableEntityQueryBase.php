@@ -50,7 +50,8 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 		array $entityIds,
 		IDatabase $db
 	) {
-		list( $where, $slotJoinConds ) = $this->getQueryInfo( $entityIds, $db );
+		$usesRevisionTable = array_key_exists( 'revision', $joins );
+		list( $where, $slotJoinConds ) = $this->getQueryInfo( $entityIds, $usesRevisionTable, $db );
 		$joins = array_merge( $joins, $slotJoinConds );
 		$vars = array_merge( $fields, $this->getFieldsNeededForMapping() );
 		$table = array_merge( [ 'page' ], array_keys( $joins ) );
@@ -69,10 +70,11 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 
 	/**
 	 * @param EntityId[] $entityIds
+	 * @param bool $usesRevisionTable
 	 * @param IDatabase $db
 	 * @return array [ string $whereCondition, array $extraTables ]
 	 */
-	private function getQueryInfo( array $entityIds, IDatabase $db ) {
+	private function getQueryInfo( array $entityIds, bool $usesRevisionTable, IDatabase $db ) {
 		$where = [];
 		$slotJoinConds = [];
 
@@ -107,7 +109,11 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 				}
 
 				$conditions['slot_role_id'] = $slotRoleId;
-				$slotJoinConds = [ 'slots' => [ 'INNER JOIN', 'page_latest=slot_revision_id' ] ];
+				if ( $usesRevisionTable ) {
+					$slotJoinConds = [ 'slots' => [ 'INNER JOIN', 'rev_id=slot_revision_id' ] ];
+				} else {
+					$slotJoinConds = [ 'slots' => [ 'INNER JOIN', 'page_latest=slot_revision_id' ] ];
+				}
 			}
 
 			$where[] = $db->makeList(
