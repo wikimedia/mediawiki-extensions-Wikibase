@@ -59,8 +59,10 @@
 		"lint": "parallel-lint . --exclude vendor --exclude node_modules --exclude .git",
 		"phpcs": "phpcs -p -s",
 		"phpcs-modified": "bash build/phpcsGitModified.sh",
+		"phpcs-committed": "bash build/phpcsGitCommitted.sh",
 		"fix": "phpcbf",
 		"fix-modified": "bash build/phpcbfGitModified.sh",
+		"fix-committed": "bash build/phpcbfGitCommitted.sh",
 		"test": [
 			"composer validate --no-interaction",
 			"composer lint",
