@@ -82,7 +82,7 @@ class ApiServiceFactory {
 		if ( self::$apiEntityNamespaceInfoLookup === null ) {
 			self::$apiEntityNamespaceInfoLookup = new ApiEntityNamespaceInfoLookup(
 				$this->newFederatedPropertiesApiClient(),
-				WikibaseRepo::getDefaultInstance()->getContentModelMappings()
+				WikibaseRepo::getContentModelMappings()
 			);
 		}
 		return self::$apiEntityNamespaceInfoLookup;

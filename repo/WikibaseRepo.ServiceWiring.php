@@ -38,6 +38,17 @@ use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 return [
+
+	'WikibaseRepo.ContentModelMappings' => function ( MediaWikiServices $services ): array {
+		$map = WikibaseRepo::getEntityTypeDefinitions( $services )
+			->get( EntityTypeDefinitions::CONTENT_MODEL_ID );
+
+		$services->getHookContainer()
+			->run( 'WikibaseContentModelMapping', [ &$map ] );
+
+		return $map;
+	},
+
 	'WikibaseRepo.DataTypeDefinitions' => function ( MediaWikiServices $services ): DataTypeDefinitions {
 		$baseDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
 		$repoDataTypes = require __DIR__ . '/WikibaseRepo.datatypes.php';
