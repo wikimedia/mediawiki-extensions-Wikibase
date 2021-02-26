@@ -627,7 +627,7 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetEntityChangeFactory() {
-		$factory = $this->getWikibaseRepo()->getEntityChangeFactory();
+		$factory = WikibaseRepo::getEntityChangeFactory();
 		$this->assertInstanceOf( EntityChangeFactory::class, $factory );
 	}
 

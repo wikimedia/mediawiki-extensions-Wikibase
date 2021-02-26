@@ -20,10 +20,12 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
+use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
@@ -35,6 +37,8 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
+use Wikibase\Repo\Notifications\RepoEntityChange;
+use Wikibase\Repo\Notifications\RepoItemChange;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -104,6 +108,22 @@ return [
 
 	'WikibaseRepo.DataValueFactory' => function ( MediaWikiServices $services ): DataValueFactory {
 		return new DataValueFactory( WikibaseRepo::getDataValueDeserializer( $services ) );
+	},
+
+	'WikibaseRepo.EntityChangeFactory' => function ( MediaWikiServices $services ): EntityChangeFactory {
+		//TODO: take this from a setting or registry.
+		$changeClasses = [
+			Item::ENTITY_TYPE => RepoItemChange::class,
+			// Other types of entities will use EntityChange
+		];
+
+		return new EntityChangeFactory(
+			WikibaseRepo::getEntityDiffer( $services ),
+			WikibaseRepo::getEntityIdParser( $services ),
+			$changeClasses,
+			RepoEntityChange::class,
+			WikibaseRepo::getLogger( $services )
+		);
 	},
 
 	'WikibaseRepo.EntityDiffer' => function ( MediaWikiServices $services ): EntityDiffer {

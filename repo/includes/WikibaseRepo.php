@@ -177,8 +177,6 @@ use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
-use Wikibase\Repo\Notifications\RepoEntityChange;
-use Wikibase\Repo\Notifications\RepoItemChange;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
@@ -589,20 +587,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityTypeDefinitions' );
 	}
 
-	public function getEntityChangeFactory(): EntityChangeFactory {
-		//TODO: take this from a setting or registry.
-		$changeClasses = [
-			Item::ENTITY_TYPE => RepoItemChange::class,
-			// Other types of entities will use EntityChange
-		];
-
-		return new EntityChangeFactory(
-			self::getEntityDiffer(),
-			self::getEntityIdParser(),
-			$changeClasses,
-			RepoEntityChange::class,
-			self::getLogger()
-		);
+	public static function getEntityChangeFactory( ContainerInterface $services = null ): EntityChangeFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityChangeFactory' );
 	}
 
 	public static function getEntityDiffer( ContainerInterface $services = null ): EntityDiffer {
@@ -1017,7 +1004,7 @@ class WikibaseRepo {
 			// (as long as what it creates should not migrate to *SourceServices in the first place)
 
 			$this->store = new SqlStore(
-				$this->getEntityChangeFactory(),
+				self::getEntityChangeFactory(),
 				self::getEntityIdParser(),
 				$this->getEntityIdComposer(),
 				$this->getEntityIdLookup(),
@@ -1359,7 +1346,7 @@ class WikibaseRepo {
 		}
 
 		return new ChangeNotifier(
-			$this->getEntityChangeFactory(),
+			self::getEntityChangeFactory(),
 			$transmitters,
 			CentralIdLookup::factoryNonLocal()
 		);

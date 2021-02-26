@@ -37,7 +37,7 @@ class StoreTest extends MediaWikiIntegrationTestCase {
 
 		$instances = [
 			new SqlStore(
-				$wikibaseRepo->getEntityChangeFactory(),
+				WikibaseRepo::getEntityChangeFactory(),
 				WikibaseRepo::getEntityIdParser(),
 				$wikibaseRepo->getEntityIdComposer(),
 				$this->createMock( EntityIdLookup::class ),
