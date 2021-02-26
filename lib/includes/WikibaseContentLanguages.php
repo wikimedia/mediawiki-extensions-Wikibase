@@ -96,6 +96,7 @@ class WikibaseContentLanguages {
 					'nnz', // T263946
 					'nod', // T93880
 					'ota', // T59342
+					'pap-aw', // T275682
 					'rmf', // T226701
 					'rwr', // T61905
 					'sjd', // T226701
