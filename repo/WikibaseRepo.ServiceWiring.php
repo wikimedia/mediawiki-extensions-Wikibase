@@ -37,6 +37,7 @@ use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 
+/** @phpcs-require-sorted-array */
 return [
 
 	'WikibaseRepo.ContentModelMappings' => function ( MediaWikiServices $services ): array {

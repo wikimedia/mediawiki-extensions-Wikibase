@@ -12,6 +12,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\WikibaseSettings;
 
+/** @phpcs-require-sorted-array */
 return [
 
 	'WikibaseClient.DataTypeDefinitions' => function ( MediaWikiServices $services ): DataTypeDefinitions {
