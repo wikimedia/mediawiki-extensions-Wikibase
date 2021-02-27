@@ -40,9 +40,9 @@ use WikiPage;
  * @author Marius Hoch
  */
 class DataUpdateHookHandler implements
-				LinksUpdateCompleteHook,
-				ArticleDeleteCompleteHook,
-				ParserCacheSaveCompleteHook
+	LinksUpdateCompleteHook,
+	ArticleDeleteCompleteHook,
+	ParserCacheSaveCompleteHook
 {
 
 	/**

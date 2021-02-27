@@ -118,15 +118,15 @@ class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 		$types = $provider->getSupportedMimeTypes();
 
 		foreach ( self::$apiMimeTypes as $type ) {
-			$this->assertTrue( in_array( $type, $types ), "api mime type $type" );
+			$this->assertContains( $type, $types, "api mime type $type" );
 		}
 
 		foreach ( self::$rdfMimeTypes as $type ) {
-			$this->assertTrue( in_array( $type, $types ), "rdf mime type $type" );
+			$this->assertContains( $type, $types, "rdf mime type $type" );
 		}
 
 		foreach ( self::$badMimeTypes as $type ) {
-			$this->assertFalse( in_array( $type, $types ), "bad mime type $type" );
+			$this->assertNotContains( $type, $types, "bad mime type $type" );
 		}
 	}
 
@@ -136,15 +136,15 @@ class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 		$types = $provider->getSupportedExtensions();
 
 		foreach ( self::$apiExtensions as $type ) {
-			$this->assertTrue( in_array( $type, $types ), "api extension $type" );
+			$this->assertContains( $type, $types, "api extension $type" );
 		}
 
 		foreach ( self::$rdfExtensions as $type ) {
-			$this->assertTrue( in_array( $type, $types ), "rdf extension $type" );
+			$this->assertContains( $type, $types, "rdf extension $type" );
 		}
 
 		foreach ( self::$badExtensions as $type ) {
-			$this->assertFalse( in_array( $type, $types ), "bad extension $type" );
+			$this->assertNotContains( $type, $types, "bad extension $type" );
 		}
 	}
 
@@ -154,15 +154,15 @@ class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 		$types = $provider->getSupportedFormats();
 
 		foreach ( self::$apiFormats as $type ) {
-			$this->assertTrue( in_array( $type, $types ), "api format $type" );
+			$this->assertContains( $type, $types, "api format $type" );
 		}
 
 		foreach ( self::$rdfFormats as $type ) {
-			$this->assertTrue( in_array( $type, $types ), "rdf format $type" );
+			$this->assertContains( $type, $types, "rdf format $type" );
 		}
 
 		foreach ( self::$badFormats as $type ) {
-			$this->assertFalse( in_array( $type, $types ), "bad format $type" );
+			$this->assertNotContains( $type, $types, "bad format $type" );
 		}
 	}
 

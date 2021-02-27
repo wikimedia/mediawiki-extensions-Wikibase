@@ -221,7 +221,7 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 
 		$states = $stats->getClientStates();
 
-		$this->assertEquals( count( $expected ), count( $states ), "number of state objects" );
+		$this->assertSame( count( $expected ), count( $states ), "number of state objects" );
 
 		reset( $expected );
 		reset( $states );

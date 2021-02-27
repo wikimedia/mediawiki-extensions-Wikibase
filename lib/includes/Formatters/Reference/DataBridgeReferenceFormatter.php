@@ -99,7 +99,7 @@ class DataBridgeReferenceFormatter implements ReferenceFormatter {
 				$referenceUrl = $referenceUrlSnak->getDataValue();
 				if ( $referenceUrl instanceof StringValue ) {
 					return '[' . $referenceUrl->getValue() . ' ' .
-					       $this->snakFormatter->formatSnak( $titleSnak ) . ']';
+						$this->snakFormatter->formatSnak( $titleSnak ) . ']';
 				}
 			}
 		}

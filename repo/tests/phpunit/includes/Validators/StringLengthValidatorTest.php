@@ -39,8 +39,8 @@ class StringLengthValidatorTest extends \PHPUnit\Framework\TestCase {
 		if ( !$expected ) {
 			$errors = $result->getErrors();
 			$this->assertCount( 1, $errors, $message );
-			$this->assertTrue(
-				in_array( $errors[0]->getCode(), [ 'too-long', 'too-short' ] ),
+			$this->assertContains(
+				$errors[0]->getCode(), [ 'too-long', 'too-short' ],
 				$message . "\n" . $errors[0]->getCode()
 			);
 

@@ -1,11 +1,7 @@
 <?xml version="1.0"?>
 <ruleset>
 	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
-		<exclude name="PSR2.Classes.ClassDeclaration.InterfaceWrongIndent" />
-		<exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed" />
-		<exclude name="MediaWiki.Commenting.FunctionAnnotations.UnrecognizedAnnotation" />
-		<exclude name="PSR2.Classes.ClassDeclaration.InterfaceSameLine" />
-		<exclude name="PSR2.Classes.ClassDeclaration.FirstInterfaceSameLine" />
+		<exclude name="MediaWiki.PHPUnit.AssertCount.NotUsed" />
 	</rule>
 
 	<!-- The function comment sniff is way to rigorous about way to many details that need
@@ -17,6 +13,9 @@
 		  doesn't make the code easier to read.
 		* It does not understand "@param <type> [$optional,…]. -->
 	<rule ref="MediaWiki.Commenting.FunctionComment">
+		<severity>0</severity>
+	</rule>
+	<rule ref="MediaWiki.Commenting.PropertyDocumentation">
 		<severity>0</severity>
 	</rule>
 

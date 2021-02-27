@@ -43,8 +43,14 @@ use Wikibase\Lib\Store\StorageException;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class MockRepository implements EntityLookup, EntityRedirectLookup,
-	EntityRevisionLookup, EntityStore, PropertyDataTypeLookup, SiteLinkLookup {
+class MockRepository implements
+	EntityLookup,
+	EntityRedirectLookup,
+	EntityRevisionLookup,
+	EntityStore,
+	PropertyDataTypeLookup,
+	SiteLinkLookup
+{
 
 	/**
 	 * @var SiteLinkStore

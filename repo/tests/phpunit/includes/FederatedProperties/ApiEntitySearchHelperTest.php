@@ -95,7 +95,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 			$params[ 'strictlanguage' ]
 		);
 
-		$this->assertEquals( count( $expectedResultsEntityIds ), count( $results ) );
+		$this->assertSame( count( $expectedResultsEntityIds ), count( $results ) );
 		$this->assertEquals( $expectedResultsEntityIds, array_keys( $results ) );
 	}
 
@@ -164,7 +164,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 			$params[ 'strictlanguage' ]
 		);
 
-		$this->assertEquals( count( $expectedResultsEntityIds ), count( $results ) );
+		$this->assertSame( count( $expectedResultsEntityIds ), count( $results ) );
 		$this->assertEquals( $expectedResultsEntityIds, array_keys( $results ) );
 
 		foreach ( $expectedResultsEntityIds as $resultId ) {

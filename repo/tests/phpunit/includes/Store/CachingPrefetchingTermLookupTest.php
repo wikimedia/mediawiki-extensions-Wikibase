@@ -523,7 +523,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 		->willReturnOnConsecutiveCalls(
 			[ $cacheKeyEnglish => 'meow' ],
 			[ $cacheKeyGerman => 'miau', $cacheKeyFrench => null ]
- 		);
+		);
 
 		$cachingLookup = new CachingPrefetchingTermLookup(
 			$cache,
