@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Unit\DataAccess\ParserFunctions;
 
 use Language;
+use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\MediaWikiServices;
 use Parser;
 use ParserOptions;
@@ -217,6 +218,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 				$this->getLanguageFallbackLabelDescriptionLookupFactory()
 			),
 			new EntityUsageFactory( new BasicEntityIdParser() ),
+			$this->createMock( LanguageConverterFactory::class ),
 			$allowDataAccessInUserLanguage
 		);
 		$factory->newRendererFromParser( $this->getParser( 'de', 'es' ) );
@@ -246,6 +248,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 				$this->getLanguageFallbackLabelDescriptionLookupFactory()
 			),
 			new EntityUsageFactory( new BasicEntityIdParser() ),
+			MediaWikiServices::getInstance()->getLanguageConverterFactory(),
 			$allowDataAccessInUserLanguage
 		);
 	}

@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use Language;
+use MediaWiki\MediaWikiServices;
 use MWException;
 
 /**
@@ -132,16 +133,19 @@ class LanguageWithConversion {
 		}
 
 		if ( $sourceLanguageCode !== null ) {
+			$services = MediaWikiServices::getInstance();
+			$langFactory = $services->getLanguageFactory();
+			$langConvFactory = $services->getLanguageConverterFactory();
 			if ( !$language ) {
-				$language = Language::factory( $languageCode );
+				$language = $langFactory->getLanguage( $languageCode );
 			}
-			$parentLanguage = $language->getParentLanguage();
+			$parentLanguage = $langFactory->getParentLanguage( $language->getCode() );
 
 			if ( !$parentLanguage ) {
 				throw new MWException( __METHOD__ . ': $language does not support conversion' );
 			}
 
-			if ( !$parentLanguage->hasVariant( $sourceLanguageCode ) ) {
+			if ( !$langConvFactory->getLanguageConverter( $parentLanguage )->hasVariant( $sourceLanguageCode ) ) {
 				throw new MWException( __METHOD__ . ': given languages do not have the same parent language' );
 			}
 		} else {

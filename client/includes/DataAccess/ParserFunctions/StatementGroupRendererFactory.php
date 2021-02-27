@@ -3,6 +3,7 @@
 namespace Wikibase\Client\DataAccess\ParserFunctions;
 
 use Language;
+use MediaWiki\Languages\LanguageConverterFactory;
 use Parser;
 use ParserOutput;
 use Title;
@@ -54,6 +55,11 @@ class StatementGroupRendererFactory {
 	private $entityUsageFactory;
 
 	/**
+	 * @var LanguageConverterFactory
+	 */
+	private $langConvFactory;
+
+	/**
 	 * @var bool
 	 */
 	private $allowDataAccessInUserLanguage;
@@ -64,6 +70,7 @@ class StatementGroupRendererFactory {
 	 * @param EntityLookup $entityLookup
 	 * @param DataAccessSnakFormatterFactory $dataAccessSnakFormatterFactory
 	 * @param EntityUsageFactory $entityUsageFactory
+	 * @param LanguageConverterFactory $langConvFactory
 	 * @param bool $allowDataAccessInUserLanguage
 	 */
 	public function __construct(
@@ -72,6 +79,7 @@ class StatementGroupRendererFactory {
 		EntityLookup $entityLookup,
 		DataAccessSnakFormatterFactory $dataAccessSnakFormatterFactory,
 		EntityUsageFactory $entityUsageFactory,
+		LanguageConverterFactory $langConvFactory,
 		$allowDataAccessInUserLanguage
 	) {
 		$this->propertyLabelResolver = $propertyLabelResolver;
@@ -79,6 +87,7 @@ class StatementGroupRendererFactory {
 		$this->entityLookup = $entityLookup;
 		$this->dataAccessSnakFormatterFactory = $dataAccessSnakFormatterFactory;
 		$this->entityUsageFactory = $entityUsageFactory;
+		$this->langConvFactory = $langConvFactory;
 		$this->allowDataAccessInUserLanguage = $allowDataAccessInUserLanguage;
 	}
 
@@ -103,7 +112,7 @@ class StatementGroupRendererFactory {
 				$parser->getTitle()
 			);
 		} elseif ( $this->useVariants( $parser ) ) {
-			$variants = $parser->getTargetLanguage()->getVariants();
+			$variants = $this->langConvFactory->getLanguageConverter( $parser->getTargetLanguage() )->getVariants();
 			return $this->newVariantsAwareRenderer(
 				$type,
 				$variants,
@@ -250,7 +259,7 @@ class StatementGroupRendererFactory {
 	 */
 	private function useVariants( Parser $parser ) {
 		return $this->isParserUsingVariants( $parser )
-			&& $parser->getTargetLanguage()->hasVariants();
+			&& $this->langConvFactory->getLanguageConverter( $parser->getTargetLanguage() )->hasVariants();
 	}
 
 }

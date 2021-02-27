@@ -1031,6 +1031,7 @@ final class WikibaseClient {
 			$this->getRestrictedEntityLookup(),
 			$this->getDataAccessSnakFormatterFactory(),
 			new EntityUsageFactory( $this->getEntityIdParser() ),
+			MediaWikiServices::getInstance()->getLanguageConverterFactory(),
 			self::getSettings()->getSetting( 'allowDataAccessInUserLanguage' )
 		);
 	}
