@@ -342,4 +342,6 @@ return [
 	'propagateChangeVisibility' => false,
 	'changeVisibilityNotificationClientRCMaxAge' => $GLOBALS['wgRCMaxAge'],
 	'changeVisibilityNotificationJobBatchSize' => 3,
+
+	'wikibasePingback' => false,
 ];
