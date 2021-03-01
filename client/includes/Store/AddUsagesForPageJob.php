@@ -78,7 +78,7 @@ class AddUsagesForPageJob extends Job {
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$usageUpdater = $wikibaseClient->getStore()->getUsageUpdater();
-		$idParser = $wikibaseClient->getEntityIdParser();
+		$idParser = WikibaseClient::getEntityIdParser();
 		$this->overrideServices( $usageUpdater, $idParser );
 	}
 

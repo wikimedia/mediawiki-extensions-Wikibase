@@ -84,6 +84,7 @@ class InfoActionHookHandler implements InfoActionHook {
 	}
 
 	public static function factory(
+		EntityIdParser $idParser,
 		SettingsArray $clientSettings
 	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
@@ -95,7 +96,6 @@ class InfoActionHookHandler implements InfoActionHook {
 			$wikibaseClient->getTermLookup(),
 			$wikibaseClient->getTermBuffer()
 		);
-		$idParser = $wikibaseClient->getEntityIdParser();
 		$descriptionLookup = $wikibaseClient->getDescriptionLookup();
 
 		return new self(

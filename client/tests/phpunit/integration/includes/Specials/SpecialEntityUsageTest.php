@@ -54,7 +54,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 	 * @return SpecialEntityUsage
 	 */
 	protected function newSpecialPage() {
-		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
+		$idParser = WikibaseClient::getEntityIdParser();
 
 		$specialPage = $this->getMockBuilder( SpecialEntityUsage::class )
 			->setConstructorArgs( [ $idParser, $this->languageConverterFactory() ] )
@@ -118,8 +118,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		}
 		$this->addReallyDoQueryData();
 
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$special = new SpecialEntityUsage( $wikibaseClient->getEntityIdParser(), $this->languageConverterFactory() );
+		$special = new SpecialEntityUsage( WikibaseClient::getEntityIdParser(), $this->languageConverterFactory() );
 		$special->prepareParams( 'Q3' );
 		$res = $special->reallyDoQuery( 50 );
 		$values = [];

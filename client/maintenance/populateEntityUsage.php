@@ -50,7 +50,7 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 		$reporter = new CallbackMessageReporter( [ $this, 'report' ] );
 
 		$builder = new EntityUsageTableBuilder(
-			WikibaseClient::getDefaultInstance()->getEntityIdParser(),
+			WikibaseClient::getEntityIdParser(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			$this->mBatchSize
 		);

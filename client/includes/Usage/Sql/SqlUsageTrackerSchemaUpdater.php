@@ -56,7 +56,7 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	 * @param DatabaseUpdater $dbUpdater
 	 */
 	public static function fillUsageTable( DatabaseUpdater $dbUpdater ) {
-		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
+		$idParser = WikibaseClient::getEntityIdParser();
 
 		$primer = new EntityUsageTableBuilder(
 			$idParser,

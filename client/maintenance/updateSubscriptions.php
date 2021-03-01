@@ -62,7 +62,7 @@ class UpdateSubscriptions extends Maintenance {
 		$repoDB = $wikibaseClient->getDatabaseDomainNameOfLocalRepo();
 		$clientId = $settings->getSetting( 'siteGlobalID' );
 
-		$idParser = $wikibaseClient->getEntityIdParser();
+		$idParser = WikibaseClient::getEntityIdParser();
 		$startItemOption = $this->getOption( 'start-item' );
 
 		$startItem = $startItemOption === null ? null : $idParser->parse( $startItemOption );

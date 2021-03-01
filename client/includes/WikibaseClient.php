@@ -64,7 +64,6 @@ use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -168,11 +167,6 @@ final class WikibaseClient {
 	 * @var Deserializer|null
 	 */
 	private $entityDeserializer = null;
-
-	/**
-	 * @var EntityIdParser|null
-	 */
-	private $entityIdParser = null;
 
 	/**
 	 * @var EntityIdLookup|null
@@ -407,14 +401,9 @@ final class WikibaseClient {
 		return $this->dataTypeFactory;
 	}
 
-	public function getEntityIdParser(): EntityIdParser {
-		if ( $this->entityIdParser === null ) {
-			$this->entityIdParser = new DispatchingEntityIdParser(
-				self::getEntityTypeDefinitions()->getEntityIdBuilders()
-			);
-		}
-
-		return $this->entityIdParser;
+	public static function getEntityIdParser( ContainerInterface $services = null ): EntityIdParser {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.EntityIdParser' );
 	}
 
 	public static function getEntityIdComposer( ContainerInterface $services = null ): EntityIdComposer {
@@ -441,7 +430,7 @@ final class WikibaseClient {
 			// TODO: extract
 			$singleSourceServices[$source->getSourceName()] = new SingleEntitySourceServices(
 				$genericServices,
-				$this->getEntityIdParser(),
+				self::getEntityIdParser(),
 				self::getEntityIdComposer(),
 				$this->getDataValueDeserializer(),
 				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
@@ -553,7 +542,7 @@ final class WikibaseClient {
 		if ( $this->store === null ) {
 			$this->store = new DirectSqlStore(
 				$this->getEntityChangeFactory(),
-				$this->getEntityIdParser(),
+				self::getEntityIdParser(),
 				self::getEntityIdComposer(),
 				$this->getEntityIdLookup(),
 				$this->getEntityNamespaceLookup(),
@@ -859,7 +848,7 @@ final class WikibaseClient {
 				$this->getOtherProjectsSidebarGeneratorFactory(),
 				$this->getStore()->getSiteLinkLookup(),
 				$this->getStore()->getEntityLookup(),
-				new EntityUsageFactory( $this->getEntityIdParser() ),
+				new EntityUsageFactory( self::getEntityIdParser() ),
 				self::getSettings()->getSetting( 'siteGlobalID' ),
 				self::getLogger()
 			);
@@ -893,14 +882,14 @@ final class WikibaseClient {
 	public function getBaseDataModelDeserializerFactory(): DeserializerFactory {
 		return new DeserializerFactory(
 			$this->getDataValueDeserializer(),
-			$this->getEntityIdParser()
+			self::getEntityIdParser()
 		);
 	}
 
 	private function getInternalFormatDeserializerFactory(): InternalDeserializerFactory {
 		return new InternalDeserializerFactory(
 			$this->getDataValueDeserializer(),
-			$this->getEntityIdParser(),
+			self::getEntityIdParser(),
 			$this->getAllTypesEntityDeserializer()
 		);
 	}
@@ -968,7 +957,7 @@ final class WikibaseClient {
 			'time' => TimeValue::class,
 			'wikibase-entityid' => function ( $value ) {
 				return isset( $value['id'] )
-					? new EntityIdValue( $this->getEntityIdParser()->parse( $value['id'] ) )
+					? new EntityIdValue( self::getEntityIdParser()->parse( $value['id'] ) )
 					: EntityIdValue::newFromArray( $value );
 			},
 		] );
@@ -995,7 +984,7 @@ final class WikibaseClient {
 
 		return new EntityChangeFactory(
 			$this->getEntityDiffer(),
-			$this->getEntityIdParser(),
+			self::getEntityIdParser(),
 			$changeClasses,
 			EntityChange::class,
 			self::getLogger()
@@ -1016,7 +1005,7 @@ final class WikibaseClient {
 			new SnaksFinder(),
 			$this->getRestrictedEntityLookup(),
 			$this->getDataAccessSnakFormatterFactory(),
-			new EntityUsageFactory( $this->getEntityIdParser() ),
+			new EntityUsageFactory( self::getEntityIdParser() ),
 			MediaWikiServices::getInstance()->getLanguageConverterFactory(),
 			self::getSettings()->getSetting( 'allowDataAccessInUserLanguage' )
 		);
@@ -1038,7 +1027,7 @@ final class WikibaseClient {
 		return new Runner(
 			$this->getStatementGroupRendererFactory(),
 			$this->getStore()->getSiteLinkLookup(),
-			$this->getEntityIdParser(),
+			self::getEntityIdParser(),
 			$this->getRestrictedEntityLookup(),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'allowArbitraryDataAccess' )
@@ -1228,7 +1217,7 @@ final class WikibaseClient {
 				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_ID_LOOKUP_CALLBACK ),
 				new PagePropsEntityIdLookup(
 					MediaWikiServices::getInstance()->getDBLoadBalancer(),
-					$this->getEntityIdParser()
+					self::getEntityIdParser()
 				)
 			);
 		}

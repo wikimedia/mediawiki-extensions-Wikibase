@@ -9,6 +9,8 @@ use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
+use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -42,6 +44,12 @@ return [
 		return new EntityIdComposer(
 			WikibaseClient::getEntityTypeDefinitions( $services )
 				->get( EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK )
+		);
+	},
+
+	'WikibaseClient.EntityIdParser' => function ( MediaWikiServices $services ): EntityIdParser {
+		return new DispatchingEntityIdParser(
+			WikibaseClient::getEntityTypeDefinitions( $services )->getEntityIdBuilders()
 		);
 	},
 

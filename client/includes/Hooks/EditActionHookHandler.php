@@ -57,7 +57,9 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 		$this->idParser = $idParser;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		EntityIdParser $idParser
+	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$usageLookup = $wikibaseClient->getStore()->getUsageLookup();
@@ -66,7 +68,6 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 			$wikibaseClient->getTermLookup(),
 			$wikibaseClient->getTermBuffer()
 		);
-		$idParser = $wikibaseClient->getEntityIdParser();
 
 		return new self(
 			$wikibaseClient->newRepoLinker(),

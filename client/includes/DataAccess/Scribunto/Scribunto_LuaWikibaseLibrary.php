@@ -163,7 +163,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$parserOutput = $this->getParser()->getOutput();
 			$this->usageAccumulator = new ParserOutputUsageAccumulator(
 				$parserOutput,
-				new EntityUsageFactory( WikibaseClient::getDefaultInstance()->getEntityIdParser() )
+				new EntityUsageFactory( WikibaseClient::getEntityIdParser() )
 			);
 		}
 
@@ -362,7 +362,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private function getEntityIdParser() {
 		if ( !$this->entityIdParser ) {
 			$wikibaseClient = WikibaseClient::getDefaultInstance();
-			$this->entityIdParser = $wikibaseClient->getEntityIdParser();
+			$this->entityIdParser = WikibaseClient::getEntityIdParser();
 		}
 		return $this->entityIdParser;
 	}

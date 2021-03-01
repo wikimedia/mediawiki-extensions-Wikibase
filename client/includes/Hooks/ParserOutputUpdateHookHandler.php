@@ -13,6 +13,7 @@ use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
  * @license GPL-2.0-or-later
@@ -51,14 +52,16 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 		$this->entityUsageFactory = $entityUsageFactory;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		EntityIdParser $entityIdParser
+	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		return new self(
 			$wikibaseClient->getNamespaceChecker(),
 			$wikibaseClient->getLangLinkHandlerFactory(),
 			$wikibaseClient->getParserOutputDataUpdater(),
-			new EntityUsageFactory( $wikibaseClient->getEntityIdParser() )
+			new EntityUsageFactory( $entityIdParser )
 		);
 	}
 

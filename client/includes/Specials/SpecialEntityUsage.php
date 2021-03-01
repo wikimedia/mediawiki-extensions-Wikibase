@@ -11,7 +11,6 @@ use QueryPage;
 use Skin;
 use Title;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -38,23 +37,11 @@ class SpecialEntityUsage extends QueryPage {
 	 */
 	private $entityId = null;
 
-	/**
-	 * @see SpecialPage::__construct
-	 *
-	 * @param EntityIdParser $idParser
-	 */
 	public function __construct( EntityIdParser $idParser, LanguageConverterFactory $languageConverterFactory ) {
 		parent::__construct( 'EntityUsage' );
 
 		$this->idParser = $idParser;
 		$this->languageConverterFactory = $languageConverterFactory;
-	}
-
-	public static function factory( LanguageConverterFactory $languageConverterFactory ): self {
-		return new self(
-			WikibaseClient::getDefaultInstance()->getEntityIdParser(),
-			$languageConverterFactory
-		);
 	}
 
 	/**

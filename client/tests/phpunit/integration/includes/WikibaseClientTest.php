@@ -28,7 +28,6 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
@@ -130,11 +129,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetDataTypeFactoryReturnType() {
 		$returnValue = $this->getWikibaseClient()->getDataTypeFactory();
 		$this->assertInstanceOf( DataTypeFactory::class, $returnValue );
-	}
-
-	public function testGetEntityIdParserReturnType() {
-		$returnValue = $this->getWikibaseClient()->getEntityIdParser();
-		$this->assertInstanceOf( EntityIdParser::class, $returnValue );
 	}
 
 	public function testNewTermSearchInteractor() {
