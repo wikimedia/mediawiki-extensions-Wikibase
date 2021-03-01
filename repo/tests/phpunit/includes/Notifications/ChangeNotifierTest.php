@@ -36,7 +36,7 @@ class ChangeNotifierTest extends MediaWikiIntegrationTestCase {
 		$changeTransmitter->expects( $this->exactly( $expectNotifications ) )
 			->method( 'transmitChange' );
 
-		$changeFactory = WikibaseRepo::getDefaultInstance()->getEntityChangeFactory();
+		$changeFactory = WikibaseRepo::getEntityChangeFactory();
 		return new ChangeNotifier(
 			$changeFactory,
 			[ $changeTransmitter ],
