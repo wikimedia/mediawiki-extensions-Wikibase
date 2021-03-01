@@ -9,6 +9,7 @@ use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
@@ -33,6 +34,13 @@ return [
 		return new DataTypeDefinitions(
 			$dataTypes,
 			$settings->getSetting( 'disabledDataTypes' )
+		);
+	},
+
+	'WikibaseClient.EntityIdComposer' => function ( MediaWikiServices $services ): EntityIdComposer {
+		return new EntityIdComposer(
+			WikibaseClient::getEntityTypeDefinitions( $services )
+				->get( EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK )
 		);
 	},
 
