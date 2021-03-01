@@ -16,6 +16,7 @@ use ValueParsers\NullParser;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
+use Wikibase\DataAccess\MediaWiki\EntitySourceDocumentUrlProvider;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -43,6 +44,7 @@ use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 use Wikibase\Repo\Notifications\RepoEntityChange;
 use Wikibase\Repo\Notifications\RepoItemChange;
+use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -256,6 +258,35 @@ return [
 
 	'WikibaseRepo.PropertyValueExpertsModule' => function ( MediaWikiServices $services ): PropertyValueExpertsModule {
 		return new PropertyValueExpertsModule( WikibaseRepo::getDataTypeDefinitions( $services ) );
+	},
+
+	'WikibaseRepo.RdfVocabulary' => function ( MediaWikiServices $services ): RdfVocabulary {
+		$repoSettings = WikibaseRepo::getSettings( $services );
+		$languageCodes = array_merge(
+			$services->getMainConfig()->get( 'DummyLanguageCodes' ),
+			$repoSettings->getSetting( 'canonicalLanguageCodes' )
+		);
+
+		$localEntitySourceName = WikibaseRepo::getLocalEntitySource( $services )->getSourceName();
+		$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions( $services );
+		$nodeNamespacePrefixes = $entitySourceDefinitions->getRdfNodeNamespacePrefixes();
+		$predicateNamespacePrefixes = $entitySourceDefinitions->getRdfPredicateNamespacePrefixes();
+
+		$urlProvider = new EntitySourceDocumentUrlProvider();
+		$canonicalDocumentUrls = $urlProvider->getCanonicalDocumentsUrls( $entitySourceDefinitions );
+
+		return new RdfVocabulary(
+			$entitySourceDefinitions->getConceptBaseUris(),
+			$canonicalDocumentUrls,
+			$entitySourceDefinitions,
+			$localEntitySourceName,
+			$nodeNamespacePrefixes,
+			$predicateNamespacePrefixes,
+			$languageCodes,
+			WikibaseRepo::getDataTypeDefinitions( $services )->getRdfTypeUris(),
+			$repoSettings->getSetting( 'pagePropertiesRdf' ) ?: [],
+			$repoSettings->getSetting( 'rdfDataRightsUrl' )
+		);
 	},
 
 	'WikibaseRepo.Settings' => function ( MediaWikiServices $services ): SettingsArray {

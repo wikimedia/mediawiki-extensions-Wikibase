@@ -37,7 +37,6 @@ use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\GenericServices;
-use Wikibase\DataAccess\MediaWiki\EntitySourceDocumentUrlProvider;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\SingleEntitySourceServices;
@@ -261,11 +260,6 @@ class WikibaseRepo {
 	 * @var WikibaseContentLanguages|null
 	 */
 	private $wikibaseContentLanguages = null;
-
-	/**
-	 * @var RdfVocabulary
-	 */
-	private $rdfVocabulary;
 
 	/**
 	 * @var CachingCommonsMediaFileNameLookup|null
@@ -1057,43 +1051,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.ValueSnakRdfBuilderFactory' );
 	}
 
-	/**
-	 * @return RdfVocabulary
-	 */
-	public function getRdfVocabulary() {
-		global $wgDummyLanguageCodes;
-
-		if ( $this->rdfVocabulary === null ) {
-			$languageCodes = array_merge(
-				$wgDummyLanguageCodes,
-				self::getSettings()->getSetting( 'canonicalLanguageCodes' )
-			);
-
-			$localEntitySourceName = self::getLocalEntitySource()->getSourceName();
-			$nodeNamespacePrefixes = self::getEntitySourceDefinitions()->getRdfNodeNamespacePrefixes();
-			$predicateNamespacePrefixes = self::getEntitySourceDefinitions()->getRdfPredicateNamespacePrefixes();
-
-			$this->rdfVocabulary = new RdfVocabulary(
-				self::getEntitySourceDefinitions()->getConceptBaseUris(),
-				$this->getCanonicalDocumentUrls(),
-				self::getEntitySourceDefinitions(),
-				$localEntitySourceName,
-				$nodeNamespacePrefixes,
-				$predicateNamespacePrefixes,
-				$languageCodes,
-				self::getDataTypeDefinitions()->getRdfTypeUris(),
-				self::getSettings()->getSetting( 'pagePropertiesRdf' ) ?: [],
-				self::getSettings()->getSetting( 'rdfDataRightsUrl' )
-			);
-		}
-
-		return $this->rdfVocabulary;
-	}
-
-	private function getCanonicalDocumentUrls() {
-		$urlProvider = new EntitySourceDocumentUrlProvider();
-
-		return $urlProvider->getCanonicalDocumentsUrls( self::getEntitySourceDefinitions() );
+	public static function getRdfVocabulary( ContainerInterface $services = null ): RdfVocabulary {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.RdfVocabulary' );
 	}
 
 	/**

@@ -305,6 +305,7 @@
 				"HtmlCacheUpdater",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.Logger",
+				"WikibaseRepo.RdfVocabulary",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.ValueSnakRdfBuilderFactory"
 			]
