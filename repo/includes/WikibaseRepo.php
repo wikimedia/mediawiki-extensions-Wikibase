@@ -409,7 +409,7 @@ class WikibaseRepo {
 			$this->getItemUrlParser(),
 			self::getSettings()->getSetting( 'geoShapeStorageBaseUrl' ),
 			self::getSettings()->getSetting( 'tabularDataStorageBaseUrl' ),
-			$this->getTermFallbackCache(),
+			self::getTermFallbackCache(),
 			self::getSettings()->getSetting( 'sharedCacheDuration' ),
 			$this->getEntityLookup(),
 			$this->getEntityRevisionLookup(),
@@ -2064,11 +2064,9 @@ class WikibaseRepo {
 		return $searchTypes;
 	}
 
-	public function getTermFallbackCache(): TermFallbackCacheFacade {
-		return new TermFallbackCacheFacade(
-			self::getTermFallbackCacheFactory()->getTermFallbackCache(),
-			self::getSettings()->getSetting( 'sharedCacheDuration' )
-		);
+	public static function getTermFallbackCache( ContainerInterface $services = null ): TermFallbackCacheFacade {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.TermFallbackCache' );
 	}
 
 	public static function getTermFallbackCacheFactory( ContainerInterface $services = null ): TermFallbackCacheFactory {
