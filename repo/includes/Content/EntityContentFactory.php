@@ -116,9 +116,9 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 * @throws MWException
 	 * @throws OutOfBoundsException
 	 * @throws InvalidArgumentException
-	 * @return Title
+	 * @return Title|null
 	 */
-	public function getTitleForId( EntityId $id ): Title {
+	public function getTitleForId( EntityId $id ): ?Title {
 		if ( isset( $this->titleForIdCache[ $id->getSerialization() ] ) ) {
 			return $this->titleForIdCache[ $id->getSerialization() ];
 		}
@@ -164,7 +164,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 * @throws MWException
 	 * @throws OutOfBoundsException
 	 * @throws InvalidArgumentException
-	 * @return Title[]
+	 * @return (Title|null)[]
 	 */
 	public function getTitlesForIds( array $ids ): array {
 		Assert::parameterElementType( 'Wikibase\DataModel\Entity\EntityId', $ids, '$ids' );
