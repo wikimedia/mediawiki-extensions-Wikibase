@@ -81,7 +81,7 @@
 	"wikibase-client-data-bridge-novalue-error-body": "Á̱ cak $1 nang <i>a̱sang a̱fi̱ng</i> da̱ {{WBREPONAME}}. Nfi̱ng jhyuk nang á̱ cak <i>a̱sang a̱fi̱ng</i> a̱ni yet doot mi̱ di̱ yong huni bah.",
 	"wikibase-client-data-bridge-saving-error-heading": "Á̱ si̱ mi̱n sak a̱ka̱shai na bah",
 	"wikibase-client-data-bridge-saving-error-message": "Á̱ si̱ mi̱n sak a̱ka̱shai ang na bah mat ghyuap. Ma̱sa̱kut bu kwan sak.",
-	"wikibase-client-data-bridge-edit-conflict-error-heading": "Á̱ ta̱taat jhya̱ jhyuk",
+	"wikibase-client-data-bridge-edit-conflict-error-heading": "Á̱ ta̱taat zok jhyuk",
 	"wikibase-client-data-bridge-edit-conflict-error-message": "A̱tyuta̱m a̱ghyang sii jhyuk a̱fi̱ng kani a̱ si̱ yet a̱son di̱ shei a̱ka̱shai nna. Á̱ si̱ si̱ mi̱n tyia̱ a̱ka̱shai ang na di̱n ta̱m bah. Ma̱sa̱kut bu nyia̱ lodi peji hu a shyia̱ a̱fi̱ng a̱fai ka.",
 	"wikibase-client-data-bridge-unknown-error-heading": "Kyang byian",
 	"wikibase-client-data-bridge-unknown-error-message": "Ghyuap si̱si̱ nnyia̱ a̱wot á̱ si̱ mi̱n jhyuk a̱fi̱ng khai ka mi̱ di̱ yong huni bah. Ma̱sa̱kut kwan a bu nyia̱ lodi.",

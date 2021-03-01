@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aandeginini"
+		]
+	},
+	"tooltip-t-wikibase": "Biiwaabiko-zagapijigan izhi-daangishin mamizhim-zhooniyaawigamig ayi-ii",
+	"wikibase-comment-update": "{{WBREPONAME}} gii-aanji'",
+	"wikibase-dataitem": "{{WBREPONAME}} ayi'ii",
+	"wikibase-editlinks": "Aanji' biiwaabiko-zagapijigan",
+	"wikibase-editlinkstitle": "Aanji' biiwaabiko-zagapijigan bakaan inwewin",
+	"wikibase-linkitem-addlinks": "Asigagindaaso biiwaabiko-zagapijigan",
+	"wikibase-rc-wikibase-edit-letter": "A",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} aanji'"
+}

@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ardzun",
+			"David Wadie Fisher-Freberg",
 			"Iwan Novirion",
 			"Muhraz",
 			"Naval Scene"
@@ -20,10 +21,10 @@
 	"wikibase-comment-sitelink-change": "Interwiki barubah dari $1 ka $2",
 	"wikibase-comment-sitelink-remove": "Pangurangan interwiki: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|parubahan}}",
-	"wikibase-dataitem": "Item di {{WBREPONAME}}",
-	"wikibase-editlinks": "Suntiang interwiki",
-	"wikibase-editlinkstitle": "Suntiang pautan interwiki",
-	"wikibase-linkitem-addlinks": "Tambah interwiki",
+	"wikibase-dataitem": "Butia di {{WBREPONAME}}",
+	"wikibase-editlinks": "Suntiang pautan",
+	"wikibase-editlinkstitle": "Suntiang pautan antarbahaso",
+	"wikibase-linkitem-addlinks": "Tambah pautan",
 	"wikibase-linkitem-alreadylinked": "Laman nan nio Sanak tauikkan alah tatauik ka [$1 item] pado pusek panyimpanan data nan tahubuang pado [[$2]] di situs ko. Item hanyo dapek punyo satu laman per situs nan tatauik. Silakan piliah laman lain untuak ditauikkan.",
 	"wikibase-linkitem-close": "Tutuik dan muek ulang laman",
 	"wikibase-linkitem-failure": "Kasalahan indak dikatahui tajadi sangkek mancubo manauikkan laman.",
@@ -40,7 +41,7 @@
 	"wikibase-property-notfound": "Properti $1 indak basobok.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Suruakan",
-	"wikibase-rc-hide-wikidata-show": "Tunjuakan",
+	"wikibase-rc-hide-wikidata-show": "Tunjuakkan",
 	"wikibase-rc-show-wikidata-pref": "Tunjuakan suntiangan Wikidata di parubahan baru",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Suntiang {{WBREPONAME}}",
