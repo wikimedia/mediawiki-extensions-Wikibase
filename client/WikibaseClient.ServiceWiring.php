@@ -12,6 +12,7 @@ use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikibase\Lib\WikibaseSettings;
@@ -67,6 +68,13 @@ return [
 
 	'WikibaseClient.Settings' => function ( MediaWikiServices $services ): SettingsArray {
 		return WikibaseSettings::getClientSettings();
+	},
+
+	'WikibaseClient.TermFallbackCache' => function ( MediaWikiServices $services ): TermFallbackCacheFacade {
+		return new TermFallbackCacheFacade(
+			WikibaseClient::getTermFallbackCacheFactory( $services )->getTermFallbackCache(),
+			WikibaseClient::getSettings( $services )->getSetting( 'sharedCacheDuration' )
+		);
 	},
 
 	'WikibaseClient.TermFallbackCacheFactory' => function ( MediaWikiServices $services ): TermFallbackCacheFactory {

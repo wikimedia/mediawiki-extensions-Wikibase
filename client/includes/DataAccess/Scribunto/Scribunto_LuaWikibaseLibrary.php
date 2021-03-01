@@ -301,7 +301,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		);
 
 		$labelDescriptionLookup = new CachingFallbackLabelDescriptionLookup(
-			$wikibaseClient->getTermFallbackCache(),
+			WikibaseClient::getTermFallbackCache(),
 			new RedirectResolvingLatestRevisionLookup( $wikibaseClient->getStore()->getEntityRevisionLookup() ),
 			$nonCachingLookup,
 			$this->getLanguageFallbackChain()
@@ -326,7 +326,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$settings = WikibaseClient::getSettings();
 
 		$termLookup = new CachingFallbackBasedTermLookup(
-			$wikibaseClient->getTermFallbackCache(),
+			WikibaseClient::getTermFallbackCache( $mediaWikiServices ),
 			new RedirectResolvingLatestRevisionLookup( $wikibaseClient->getStore()->getEntityRevisionLookup() ),
 			new LanguageFallbackLabelDescriptionLookupFactory(
 				$wikibaseClient->getLanguageFallbackChainFactory(),
