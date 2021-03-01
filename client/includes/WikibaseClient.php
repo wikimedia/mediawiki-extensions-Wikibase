@@ -175,11 +175,6 @@ final class WikibaseClient {
 	private $entityIdParser = null;
 
 	/**
-	 * @var EntityIdComposer|null
-	 */
-	private $entityIdComposer = null;
-
-	/**
 	 * @var EntityIdLookup|null
 	 */
 	private $entityIdLookup = null;
@@ -422,14 +417,9 @@ final class WikibaseClient {
 		return $this->entityIdParser;
 	}
 
-	public function getEntityIdComposer(): EntityIdComposer {
-		if ( $this->entityIdComposer === null ) {
-			$this->entityIdComposer = new EntityIdComposer(
-				self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK )
-			);
-		}
-
-		return $this->entityIdComposer;
+	public static function getEntityIdComposer( ContainerInterface $services = null ): EntityIdComposer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.EntityIdComposer' );
 	}
 
 	public function getWikibaseServices(): WikibaseServices {
@@ -452,7 +442,7 @@ final class WikibaseClient {
 			$singleSourceServices[$source->getSourceName()] = new SingleEntitySourceServices(
 				$genericServices,
 				$this->getEntityIdParser(),
-				$this->getEntityIdComposer(),
+				self::getEntityIdComposer(),
 				$this->getDataValueDeserializer(),
 				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
 				$this->getDataAccessSettings(),
@@ -564,7 +554,7 @@ final class WikibaseClient {
 			$this->store = new DirectSqlStore(
 				$this->getEntityChangeFactory(),
 				$this->getEntityIdParser(),
-				$this->getEntityIdComposer(),
+				self::getEntityIdComposer(),
 				$this->getEntityIdLookup(),
 				$this->getEntityNamespaceLookup(),
 				$this->getWikibaseServices(),
