@@ -16,10 +16,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class StatementGuidValidatorTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.EntityIdParser' )
-			->willReturn( new ItemIdParser() );
+		$this->mockService( 'WikibaseRepo.EntityIdParser',
+			new ItemIdParser() );
 
 		/** @var StatementGuidValidator $statementGuidValidator */
 		$statementGuidValidator = $this->getService( 'WikibaseRepo.StatementGuidValidator' );

@@ -3,7 +3,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Psr\Log\InvalidArgumentException;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -41,19 +40,10 @@ class LocalEntitySourceTest extends ServiceWiringTestCase {
 				'localwiki'
 			)
 		];
-
-		$this->serviceContainer
-			->method( 'get' )
-			->willReturnCallback( function ( string $id ) use ( $settingsArray, $mockEntitySources ) {
-				switch ( $id ) {
-					case 'WikibaseRepo.Settings':
-						return new SettingsArray( $settingsArray );
-					case 'WikibaseRepo.EntitySourceDefinitions':
-						return new EntitySourceDefinitions( $mockEntitySources, new EntityTypeDefinitions( [] ) );
-					default:
-						throw new InvalidArgumentException( "Unexpected service name: $id" );
-				}
-			} );
+		$this->mockService( 'WikibaseRepo.Settings',
+			new SettingsArray( $settingsArray ) );
+		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions',
+			new EntitySourceDefinitions( $mockEntitySources, new EntityTypeDefinitions( [] ) ) );
 
 		$localEntitySource = $this->getService( 'WikibaseRepo.LocalEntitySource' );
 

@@ -23,10 +23,8 @@ class EntityDifferTest extends ServiceWiringTestCase {
 		$strategy1 = $this->createMock( EntityDifferStrategy::class );
 		$calls2 = 0;
 		$strategy2 = $this->createMock( EntityDifferStrategy::class );
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.EntityTypeDefinitions' )
-			->willReturn( new EntityTypeDefinitions( [
+		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
+			new EntityTypeDefinitions( [
 				'test1' => [
 					EntityTypeDefinitions::ENTITY_DIFFER_STRATEGY_BUILDER => function () use ( &$calls1, $strategy1 ) {
 						$calls1++;

@@ -18,14 +18,10 @@ class PropertyValueExpertsModuleTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
 		$testExpertModule = 'foo';
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.DataTypeDefinitions' )
-			->willReturn(
-				new DataTypeDefinitions( [
-					"PT:foobar" => [ 'value-type' => 'string', 'expert-module' => $testExpertModule ],
-				] )
-			);
+		$this->mockService( 'WikibaseRepo.DataTypeDefinitions',
+			new DataTypeDefinitions( [
+				"PT:foobar" => [ 'value-type' => 'string', 'expert-module' => $testExpertModule ],
+			] ) );
 
 		/** @var PropertyValueExpertsModule $propertyValueExpertsModule */
 		$propertyValueExpertsModule = $this->getService( 'WikibaseRepo.PropertyValueExpertsModule' );

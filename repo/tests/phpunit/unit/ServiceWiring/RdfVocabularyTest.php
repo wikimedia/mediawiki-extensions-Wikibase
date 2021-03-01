@@ -44,31 +44,23 @@ class RdfVocabularyTest extends ServiceWiringTestCase {
 			'o',
 			'o'
 		);
-		$this->serviceContainer->expects( $this->exactly( 4 ) )
-			->method( 'get' )
-			->willReturnCallback( function ( string $id ) use ( $pagePropertyDefs, $localEntitySource, $otherEntitySource ) {
-				switch ( $id ) {
-					case 'WikibaseRepo.Settings':
-						return new SettingsArray( [
-							'canonicalLanguageCodes' => [ 't1' => 'test-1', ],
-							'pagePropertiesRdf' => $pagePropertyDefs,
-							'rdfDataRightsUrl' => 'https://license.test/cc0',
-						] );
-					case 'WikibaseRepo.LocalEntitySource':
-						return $localEntitySource;
-					case 'WikibaseRepo.EntitySourceDefinitions':
-						return new EntitySourceDefinitions( [
-							$localEntitySource,
-							$otherEntitySource,
-						], new EntityTypeDefinitions( [] ) );
-					case 'WikibaseRepo.DataTypeDefinitions':
-						return new DataTypeDefinitions( [
-							'PT:test' => [ 'rdf-uri' => 'https://rdf.test/Datatype' ],
-						] );
-					default:
-						$this->fail( "Unexpected service $id" );
-				}
-			} );
+		$this->mockService( 'WikibaseRepo.Settings',
+			new SettingsArray( [
+				'canonicalLanguageCodes' => [ 't1' => 'test-1', ],
+				'pagePropertiesRdf' => $pagePropertyDefs,
+				'rdfDataRightsUrl' => 'https://license.test/cc0',
+			] ) );
+		$this->mockService( 'WikibaseRepo.LocalEntitySource',
+			$localEntitySource );
+		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions',
+			new EntitySourceDefinitions( [
+				$localEntitySource,
+				$otherEntitySource,
+			], new EntityTypeDefinitions( [] ) ) );
+		$this->mockService( 'WikibaseRepo.DataTypeDefinitions',
+			new DataTypeDefinitions( [
+				'PT:test' => [ 'rdf-uri' => 'https://rdf.test/Datatype' ],
+			] ) );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getMainConfig' )
 			->willReturn( new HashConfig( [

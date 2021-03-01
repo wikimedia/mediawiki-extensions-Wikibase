@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use InvalidArgumentException;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
@@ -20,18 +19,10 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 
 	private function mockServices( array $settingsArray ) {
-		$this->serviceContainer
-			->method( 'get' )
-			->willReturnCallback( function ( string $id ) use ( $settingsArray ) {
-				switch ( $id ) {
-					case 'WikibaseRepo.EntityTypeDefinitions':
-						return new EntityTypeDefinitions( [] );
-					case 'WikibaseRepo.Settings':
-						return new SettingsArray( $settingsArray );
-					default:
-						throw new InvalidArgumentException( "Unexpected service name: $id" );
-				}
-			} );
+		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
+			new EntityTypeDefinitions( [] ) );
+		$this->mockService( 'WikibaseRepo.Settings',
+			new SettingsArray( $settingsArray ) );
 	}
 
 	public function testGetEntitySourceDefinitionsFromSettingsParsesSettings() {

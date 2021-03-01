@@ -20,18 +20,12 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class EntityChangeFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
-		$this->serviceContainer->expects( $this->exactly( 3 ) )
-			->method( 'get' )
-			->willReturnCallback( function ( string $id ) {
-				switch ( $id ) {
-					case 'WikibaseRepo.EntityDiffer':
-						return new EntityDiffer();
-					case 'WikibaseRepo.EntityIdParser':
-						return new DispatchingEntityIdParser( [] );
-					case 'WikibaseRepo.Logger':
-						return new NullLogger();
-				}
-			} );
+		$this->mockService( 'WikibaseRepo.EntityDiffer',
+			new EntityDiffer() );
+		$this->mockService( 'WikibaseRepo.EntityIdParser',
+			new DispatchingEntityIdParser( [] ) );
+		$this->mockService( 'WikibaseRepo.Logger',
+			new NullLogger() );
 
 		$this->assertInstanceOf(
 			EntityChangeFactory::class,

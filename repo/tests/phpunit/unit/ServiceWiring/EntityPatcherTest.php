@@ -23,10 +23,8 @@ class EntityPatcherTest extends ServiceWiringTestCase {
 		$strategy1 = $this->createMock( EntityPatcherStrategy::class );
 		$calls2 = 0;
 		$strategy2 = $this->createMock( EntityPatcherStrategy::class );
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.EntityTypeDefinitions' )
-			->willReturn( new EntityTypeDefinitions( [
+		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
+			new EntityTypeDefinitions( [
 				'test1' => [
 					EntityTypeDefinitions::ENTITY_PATCHER_STRATEGY_BUILDER => function () use ( &$calls1, $strategy1 ) {
 						$calls1++;

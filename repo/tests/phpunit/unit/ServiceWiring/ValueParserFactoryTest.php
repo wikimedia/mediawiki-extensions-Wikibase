@@ -80,10 +80,8 @@ class ValueParserFactoryTest extends ServiceWiringTestCase {
 	}
 
 	private function installMockDataTypeDefinitions( array $dataTypeDefinitions ): void {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.DataTypeDefinitions' )
-			->willReturn( new DataTypeDefinitions( $dataTypeDefinitions ) );
+		$this->mockService( 'WikibaseRepo.DataTypeDefinitions',
+			new DataTypeDefinitions( $dataTypeDefinitions ) );
 	}
 
 	private function makeParserFactoryCallback(): callable {

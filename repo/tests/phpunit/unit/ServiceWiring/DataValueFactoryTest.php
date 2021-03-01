@@ -17,10 +17,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class DataValueFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.DataValueDeserializer' )
-			->willReturn( new DataValueDeserializer() );
+		$this->mockService( 'WikibaseRepo.DataValueDeserializer',
+			new DataValueDeserializer() );
 
 		$this->assertInstanceOf(
 			DataValueFactory::class,

@@ -17,10 +17,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class EntityIdParserTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.EntityTypeDefinitions' )
-			->willReturn( new EntityTypeDefinitions( [
+		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
+			new EntityTypeDefinitions( [
 				'test' => [
 					EntityTypeDefinitions::ENTITY_ID_PATTERN => '/^T[1-9][0-9]*$/',
 					EntityTypeDefinitions::ENTITY_ID_BUILDER => function ( $serialization ) {

@@ -16,10 +16,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class ContentModelMappingsTest extends ServiceWiringTestCase {
 
 	public function testUsesEntityTypeDefinitions(): void {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.EntityTypeDefinitions' )
-			->willReturn( new EntityTypeDefinitions( [
+		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
+			new EntityTypeDefinitions( [
 				'test1' => [
 					EntityTypeDefinitions::CONTENT_MODEL_ID => 'test1-content-model',
 				]
@@ -34,10 +32,8 @@ class ContentModelMappingsTest extends ServiceWiringTestCase {
 	}
 
 	public function testRunsHook(): void {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.EntityTypeDefinitions' )
-			->willReturn( new EntityTypeDefinitions( [] ) );
+		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
+			new EntityTypeDefinitions( [] ) );
 		$this->configureHookContainer( [
 			'WikibaseContentModelMapping' => [ function ( array &$map ) {
 				$map['test2'] = 'test2-content-model';
