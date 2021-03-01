@@ -134,7 +134,6 @@ use Wikibase\Lib\Store\TypeDispatchingUrlLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
-use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Lib\Units\UnitStorage;
@@ -307,11 +306,6 @@ class WikibaseRepo {
 	 * @var DataAccessSettings
 	 */
 	private $dataAccessSettings;
-
-	/**
-	 * @var TermFallbackCacheFactory|null
-	 */
-	private $termFallbackCacheFactory = null;
 
 	public static function resetClassStatics() {
 		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
@@ -2115,25 +2109,14 @@ class WikibaseRepo {
 
 	public function getTermFallbackCache(): TermFallbackCacheFacade {
 		return new TermFallbackCacheFacade(
-			$this->getTermFallbackCacheFactory()->getTermFallbackCache(),
+			self::getTermFallbackCacheFactory()->getTermFallbackCache(),
 			self::getSettings()->getSetting( 'sharedCacheDuration' )
 		);
 	}
 
-	public function getTermFallbackCacheFactory(): TermFallbackCacheFactory {
-		global $wgSecretKey;
-
-		if ( $this->termFallbackCacheFactory === null ) {
-			$this->termFallbackCacheFactory = new TermFallbackCacheFactory(
-				self::getSettings()->getSetting( 'sharedCacheType' ),
-				self::getLogger(),
-				MediaWikiServices::getInstance()->getStatsdDataFactory(),
-				hash( 'sha256', $wgSecretKey ),
-				new TermFallbackCacheServiceFactory(),
-				self::getSettings()->getSetting( 'termFallbackCacheVersion' )
-			);
-		}
-		return $this->termFallbackCacheFactory;
+	public static function getTermFallbackCacheFactory( ContainerInterface $services = null ): TermFallbackCacheFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.TermFallbackCacheFactory' );
 	}
 
 	public static function getLogger( ContainerInterface $services = null ): LoggerInterface {

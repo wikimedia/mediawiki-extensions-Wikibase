@@ -35,6 +35,8 @@ use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
+use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
@@ -257,6 +259,18 @@ return [
 
 	'WikibaseRepo.StatementGuidValidator' => function ( MediaWikiServices $services ): StatementGuidValidator {
 		return new StatementGuidValidator( WikibaseRepo::getEntityIdParser( $services ) );
+	},
+
+	'WikibaseRepo.TermFallbackCacheFactory' => function ( MediaWikiServices $services ): TermFallbackCacheFactory {
+		$settings = WikibaseRepo::getSettings( $services );
+		return new TermFallbackCacheFactory(
+			$settings->getSetting( 'sharedCacheType' ),
+			WikibaseRepo::getLogger( $services ),
+			$services->getStatsdDataFactory(),
+			hash( 'sha256', $services->getMainConfig()->get( 'SecretKey' ) ),
+			new TermFallbackCacheServiceFactory(),
+			$settings->getSetting( 'termFallbackCacheVersion' )
+		);
 	},
 
 	'WikibaseRepo.ValueFormatterFactory' => function ( MediaWikiServices $services ): OutputFormatValueFormatterFactory {
