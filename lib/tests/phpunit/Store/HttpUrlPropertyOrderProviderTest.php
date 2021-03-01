@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use MediaWiki\Http\HttpRequestFactory;
 use Psr\Log\NullLogger;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 
@@ -26,18 +27,19 @@ class HttpUrlPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideGetPropertyOrder
 	 */
 	public function testGetPropertyOrder( $text, $expected ) {
+		$mockHttp = $this->createMock( HttpRequestFactory::class );
+
+		$mockHttp->expects( $this->once() )
+			->method( 'get' )
+			->with( 'page-url' )
+			->willReturn( $text );
+
 		$instance = new HttpUrlPropertyOrderProvider(
 			'page-url',
-			$this->getHttp( $text ),
+			$mockHttp,
 			new NullLogger()
 		);
 		$propertyOrder = $instance->getPropertyOrder();
 		$this->assertSame( $expected, $propertyOrder );
 	}
-
-	private function getHttp( $text ) {
-		HttpUrlPropertyOrderProviderTestMockHttp::$response = $text;
-		return new HttpUrlPropertyOrderProviderTestMockHttp();
-	}
-
 }
