@@ -268,7 +268,6 @@ return [
 			$repoSettings->getSetting( 'canonicalLanguageCodes' )
 		);
 
-		$localEntitySourceName = WikibaseRepo::getLocalEntitySource( $services )->getSourceName();
 		$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions( $services );
 		$nodeNamespacePrefixes = $entitySourceDefinitions->getRdfNodeNamespacePrefixes();
 		$predicateNamespacePrefixes = $entitySourceDefinitions->getRdfPredicateNamespacePrefixes();
@@ -280,7 +279,6 @@ return [
 			$entitySourceDefinitions->getConceptBaseUris(),
 			$canonicalDocumentUrls,
 			$entitySourceDefinitions,
-			$localEntitySourceName,
 			$nodeNamespacePrefixes,
 			$predicateNamespacePrefixes,
 			$languageCodes,

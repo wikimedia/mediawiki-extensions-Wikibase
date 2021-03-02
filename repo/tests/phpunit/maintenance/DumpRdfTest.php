@@ -173,7 +173,6 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 				[ '' => 'fooUri/' ],
 				[ '' => 'acme/EntityData/' ],
 				new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-				'',
 				[ '' => '' ],
 				[ '' => '' ]
 			),

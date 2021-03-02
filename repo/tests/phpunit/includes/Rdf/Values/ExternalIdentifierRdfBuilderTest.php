@@ -47,7 +47,6 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ '' => '<BASE>' ],
 			[ '' => '<DATA>' ],
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			'',
 			[ '' => '' ],
 			[ '' => '' ]
 		);

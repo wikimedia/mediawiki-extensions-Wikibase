@@ -139,7 +139,7 @@ class EntitySource {
 		return $this->databaseName;
 	}
 
-	public function getSourceName() {
+	public function getSourceName(): string {
 		return $this->sourceName;
 	}
 

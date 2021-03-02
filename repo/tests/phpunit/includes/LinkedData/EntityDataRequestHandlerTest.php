@@ -141,7 +141,6 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 						''
 					)
 				], new EntityTypeDefinitions( [] ) ),
-				'test',
 				[ 'test' => 'wd' ],
 				[ 'test' => '' ]
 			)

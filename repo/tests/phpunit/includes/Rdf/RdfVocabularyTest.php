@@ -51,7 +51,6 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 					''
 				),
 			], new EntityTypeDefinitions( [] ) ),
-			'local',
 			[ 'localwiki' => 'wd', 'otherwiki' => 'other' ],
 			[ 'localwiki' => '', 'otherwiki' => 'other' ]
 		);
@@ -83,10 +82,77 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 					''
 				),
 			], new EntityTypeDefinitions( [] ) ),
-			'local',
 			[ 'localwiki' => 'wd', 'otherwiki' => 'other' ],
 			[ 'localwiki' => '', 'otherwiki' => 'other' ]
 		);
+	}
+
+	public function testGivenLocalEntitySourceNameAndDefaultArguments_shiftsOtherArguments() {
+		$rdfVocabulary = new RdfVocabulary(
+			[ 'local' => '<BASE>', 'foo' => '<BASE-foo>' ],
+			[ 'local' => '<DATA>', 'foo' => '<DATA-foo>' ],
+			new EntitySourceDefinitions( [
+				new EntitySource(
+					'local',
+					'localdb',
+					[ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ],
+					'<BASE>',
+					'wd',
+					'',
+					''
+				),
+				new EntitySource(
+					'foo',
+					'otherbd',
+					[ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ],
+					'<BASE-foo>',
+					'other',
+					'other',
+					''
+				),
+			], new EntityTypeDefinitions( [] ) ),
+			'local',
+			[ 'local' => 'wd', 'foo' => 'other' ],
+			[ 'local' => '', 'foo' => 'other' ]
+		);
+
+		$this->assertSame( 'http://creativecommons.org/publicdomain/zero/1.0/', $rdfVocabulary->getLicenseUrl() );
+	}
+
+	public function testGivenLocalEntitySourceNameAndOtherArguments_shiftsOtherArguments() {
+		$rdfVocabulary = new RdfVocabulary(
+			[ 'local' => '<BASE>', 'foo' => '<BASE-foo>' ],
+			[ 'local' => '<DATA>', 'foo' => '<DATA-foo>' ],
+			new EntitySourceDefinitions( [
+				new EntitySource(
+					'local',
+					'localdb',
+					[ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ],
+					'<BASE>',
+					'wd',
+					'',
+					''
+				),
+				new EntitySource(
+					'foo',
+					'otherbd',
+					[ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ],
+					'<BASE-foo>',
+					'other',
+					'other',
+					''
+				),
+			], new EntityTypeDefinitions( [] ) ),
+			'local',
+			[ 'local' => 'wd', 'foo' => 'other' ],
+			[ 'local' => '', 'foo' => 'other' ],
+			[ 'simple' => 'en-simple' ],
+			[ 'test' => 'https://datatype.example/test' ],
+			[ 'page-prop' => [] ],
+			'https://license.test/'
+		);
+
+		$this->assertSame( 'https://license.test/', $rdfVocabulary->getLicenseUrl() );
 	}
 
 	private function newInstance() {
@@ -113,7 +179,6 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 					''
 				),
 			], new EntityTypeDefinitions( [] ) ),
-			'localwiki',
 			[ 'localwiki' => 'wd', 'otherwiki' => 'other' ],
 			[ 'localwiki' => '', 'otherwiki' => 'other' ],
 			[ 'German' => 'de' ],
