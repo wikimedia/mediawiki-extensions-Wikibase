@@ -19,10 +19,8 @@ use Wikibase\Lib\EntityTypeDefinitions;
 class EntityIdComposerTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseClient.EntityTypeDefinitions' )
-			->willReturn( new EntityTypeDefinitions( [
+		$this->mockService( 'WikibaseClient.EntityTypeDefinitions',
+			new EntityTypeDefinitions( [
 				'test' => [
 					EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK => function ( $repositoryName, $uniquePart ) {
 						return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
