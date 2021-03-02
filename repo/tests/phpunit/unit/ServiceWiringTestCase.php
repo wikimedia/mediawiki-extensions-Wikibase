@@ -36,7 +36,7 @@ abstract class ServiceWiringTestCase extends TestCase {
 	 */
 	protected $serviceContainer;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->wiring = $this->loadWiring();
@@ -44,13 +44,13 @@ abstract class ServiceWiringTestCase extends TestCase {
 		$this->accessedServices = [];
 		$this->serviceContainer = $this->createMock( MediaWikiServices::class );
 		$this->serviceContainer->method( 'get' )
-			->willReturnCallback( function ( string $id ) {
-				$this->assertArrayNotHasKey( $id, $this->accessedServices,
-					"Service $id must not be used yet" );
-				$this->accessedServices[$id] = null;
-				$this->assertArrayHasKey( $id, $this->mockedServices,
-					"Service $id must be mocked" );
-				return $this->mockedServices[$id];
+			->willReturnCallback( function ( string $name ) {
+				$this->assertArrayNotHasKey( $name, $this->accessedServices,
+					"Service $name must not be used yet" );
+				$this->accessedServices[$name] = null;
+				$this->assertArrayHasKey( $name, $this->mockedServices,
+					"Service $name must be mocked" );
+				return $this->mockedServices[$name];
 			} );
 		$this->serviceContainer->expects( $this->never() )
 			->method( 'getService' ); // get() should be used instead
@@ -67,23 +67,48 @@ abstract class ServiceWiringTestCase extends TestCase {
 		parent::tearDown();
 	}
 
-	protected function getDefinition( $name ): callable {
+	private function getDefinition( $name ): callable {
 		if ( !array_key_exists( $name, $this->wiring ) ) {
 			throw new LogicException( "Service wiring '$name' does not exist" );
 		}
 		return $this->wiring[ $name ];
 	}
 
-	protected function getService( $name ) {
+	/**
+	 * Get a WikibaseRepo service by calling its wiring function.
+	 *
+	 * @param string $name full service name (including "WikibaseRepo." prefix)
+	 * @return mixed service (typically an object)
+	 */
+	protected function getService( string $name ) {
 		return $this->getDefinition( $name )( $this->serviceContainer );
 	}
 
-	protected function mockService( string $id, $service ) {
-		$this->assertArrayNotHasKey( $id, $this->mockedServices,
-			"Service $id must not be mocked already" );
-		$this->mockedServices[$id] = $service;
+	/**
+	 * Mock a service that will be accessed through get().
+	 *
+	 * Typically, this will be a WikibaseRepo service.
+	 * The test will assert that the service is used exactly once.
+	 *
+	 * To mock a MediaWiki service, directly mock the getServiceName()
+	 * method on the service container instead.
+	 *
+	 * @param string $name full service name (including prefix like "WikibaseRepo.")
+	 * @param mixed $service service (usually an object)
+	 */
+	protected function mockService( string $name, $service ) {
+		$this->assertArrayNotHasKey( $name, $this->mockedServices,
+			"Service $name must not be mocked already" );
+		$this->mockedServices[$name] = $service;
 	}
 
+	/**
+	 * Mock the MediaWiki hook container with the given hook handlers.
+	 *
+	 * @param callable[][] $globalHooks
+	 * @param callable[][] $extensionHooks
+	 * @param callable[][] $deprecatedHooks
+	 */
 	protected function configureHookContainer(
 		array $globalHooks = [],
 		array $extensionHooks = [],

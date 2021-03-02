@@ -27,7 +27,7 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 	/** @var array */
 	private $originalLoaded;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		// TODO overriding ExtensionRegistry’s loaded list is ugly (T257586)
