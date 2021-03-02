@@ -27,7 +27,7 @@ cp -rT $originalDirectory Wikibase
 
 cd ..
 
-cp $originalDirectory/build/travis/composer.local.json composer.local.json
+cp $originalDirectory/build/ci-scripts/composer.local.json composer.local.json
 
 composer self-update --1 # TODO: Allow using Composer version 2: T266455
 composer install
