@@ -155,38 +155,18 @@ class RdfVocabulary {
 	 *                 pageProp => [ 'name' => wikibase predicate, 'type' => integer ]
 	 *                 All predicates will be prefixed with wikibase:
 	 * @param string $licenseUrl
-	 * @suppress PhanTypeMismatchDeclaredParamNullable
-	 * @suppress PhanTypeArraySuspiciousNullable
 	 */
 	public function __construct(
 		array $conceptUris,
 		array $dataUris,
 		EntitySourceDefinitions $entitySourceDefinitions,
-		/* array */ $rdfTurtleNodePrefixes,
+		array $rdfTurtleNodePrefixes,
 		array $rdfTurtlePredicatePrefixes,
-		array $canonicalLanguageCodes = /* [] */ null,
-		array $dataTypeUris = /* [] */ null,
-		array $pagePropertyDefs = /* [] */ null,
-		/* string */ $licenseUrl = /* 'http://creativecommons.org/publicdomain/zero/1.0/' */ null,
-		$extraLicenseUrl = null
+		array $canonicalLanguageCodes = [],
+		array $dataTypeUris = [],
+		array $pagePropertyDefs = [],
+		string $licenseUrl = 'http://creativecommons.org/publicdomain/zero/1.0/'
 	) {
-		if ( is_string( $rdfTurtleNodePrefixes ) ) {
-			// there used to be a string $localEntitySourceName parameter
-			// between $entitySourceDefinitions and $rdfTurtleNodePrefixes,
-			// and apparently this call included it – shift all subsequent arguments
-			$rdfTurtleNodePrefixes = $rdfTurtlePredicatePrefixes;
-			$rdfTurtlePredicatePrefixes = $canonicalLanguageCodes;
-			$canonicalLanguageCodes = $dataTypeUris;
-			$dataTypeUris = $pagePropertyDefs;
-			$pagePropertyDefs = $licenseUrl;
-			$licenseUrl = $extraLicenseUrl;
-			unset( $extraLicenseUrl );
-		}
-		$canonicalLanguageCodes = $canonicalLanguageCodes ?: [];
-		$dataTypeUris = $dataTypeUris ?: [];
-		$pagePropertyDefs = $pagePropertyDefs ?: [];
-		$licenseUrl = $licenseUrl ?: 'http://creativecommons.org/publicdomain/zero/1.0/';
-
 		Assert::parameterElementType( 'string', $conceptUris, '$conceptUris' );
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $conceptUris, '$conceptUris' );
 
