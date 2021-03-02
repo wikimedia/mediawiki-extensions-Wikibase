@@ -26,6 +26,7 @@ use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use WikiPage;
 
 /**
@@ -69,6 +70,7 @@ class DataUpdateHookHandler implements
 	private $logger;
 
 	public static function factory(
+		EntityIdParser $entityIdParser,
 		LoggerInterface $logger
 	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
@@ -77,7 +79,7 @@ class DataUpdateHookHandler implements
 			$wikibaseClient->getStore()->getUsageUpdater(),
 			JobQueueGroup::singleton(),
 			$wikibaseClient->getStore()->getUsageLookup(),
-			new EntityUsageFactory( $wikibaseClient->getEntityIdParser() ),
+			new EntityUsageFactory( $entityIdParser ),
 			$logger
 		);
 	}

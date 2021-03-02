@@ -85,7 +85,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		return new WikibaseLuaEntityBindings(
 			$plainTextTransclusionInteractor,
 			$richWikitextTransclusionInteractor,
-			$wikibaseClient->getEntityIdParser(),
+			WikibaseClient::getEntityIdParser(),
 			$lang,
 			$this->getUsageAccumulator(),
 			WikibaseClient::getSettings()->getSetting( 'siteGlobalID' )
@@ -173,7 +173,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	public function getUsageAccumulator() {
 		return new ParserOutputUsageAccumulator(
 			$this->getParser()->getOutput(),
-			new EntityUsageFactory( WikibaseClient::getDefaultInstance()->getEntityIdParser() )
+			new EntityUsageFactory( WikibaseClient::getEntityIdParser() )
 		);
 	}
 

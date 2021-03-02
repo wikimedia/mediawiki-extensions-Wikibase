@@ -69,6 +69,7 @@
 			"class" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler",
 			"factory" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler::factory",
 			"services": [
+			  	"WikibaseClient.EntityIdParser",
 				"WikibaseClient.Settings"
 			]
 		},
@@ -82,12 +83,16 @@
 		},
 		"ParserOutputUpdate": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler::factory"
+			"factory": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler::factory",
+			"services": [
+				"WikibaseClient.EntityIdParser"
+			]
 		},
 		"DataUpdate": {
 			"class": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler::factory",
 			"services": [
+			  	"WikibaseClient.EntityIdParser",
 				"WikibaseClient.Logger"
 			]
 		},
@@ -110,12 +115,16 @@
 		},
 		"EditAction": {
 			"class": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler::factory"
+			"factory": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler::factory",
+			"services": [
+				"WikibaseClient.EntityIdParser"
+			]
 		},
 		"InfoAction": {
 			"class": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler::factory",
 			"services": [
+				"WikibaseClient.EntityIdParser",
 				"WikibaseClient.Settings"
 			]
 		},
@@ -154,6 +163,7 @@
 			"class": "\\Wikibase\\Client\\Hooks\\SkinAfterPortletHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\SkinAfterPortletHandler::factory",
 			"services": [
+				"WikibaseClient.EntityIdParser",
 				"WikibaseClient.Settings"
 			]
 		},
@@ -400,8 +410,8 @@
 		},
 		"EntityUsage": {
 			"class": "Wikibase\\Client\\Specials\\SpecialEntityUsage",
-			"factory": "Wikibase\\Client\\Specials\\SpecialEntityUsage::factory",
 			"services": [
+				"WikibaseClient.EntityIdParser",
 				"LanguageConverterFactory"
 			]
 		}

@@ -94,7 +94,7 @@ final class ClientHooks {
 		$entityId = null;
 
 		if ( $idString !== null ) {
-			$entityIdParser = $wbClient->getEntityIdParser();
+			$entityIdParser = WikibaseClient::getEntityIdParser();
 			$entityId = $entityIdParser->parse( $idString );
 		} elseif ( $title &&
 			Action::getActionName( $skin->getContext() ) !== 'view' && $title->exists()
@@ -222,7 +222,7 @@ final class ClientHooks {
 		}
 
 		try {
-			return $client->getEntityIdParser()->parse( $prefixedId );
+			return WikibaseClient::getEntityIdParser()->parse( $prefixedId );
 		} catch ( EntityIdParsingException $ex ) {
 			return null;
 		}
