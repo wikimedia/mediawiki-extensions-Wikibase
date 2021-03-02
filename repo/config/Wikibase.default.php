@@ -364,4 +364,5 @@ return [
 	'termFallbackCacheVersion' => null,
 
 	'wikibasePingback' => false,
+	'pingbackHost' => 'https://www.mediawiki.org/beacon/event',
 ];
