@@ -106,7 +106,7 @@ class WikibasePingback {
 		$this->loadBalancerFactory = $loadBalancerFactory ?: MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 
 		$this->key = $key ?: 'WikibasePingback-' . MW_VERSION;
-		$this->host = 'https://www.mediawiki.org/beacon/event';
+		$this->host = $this->wikibaseRepoSettings->getSetting( 'pingbackHost' );
 	}
 
 	/**

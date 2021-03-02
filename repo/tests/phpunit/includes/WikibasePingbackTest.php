@@ -36,6 +36,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 
 		$settings = $wgWBRepoSettings;
 		$settings['wikibasePingback'] = true;
+		$settings['pingbackHost'] = 'http://localhost/event/beacon';
 		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
 		WikibaseRepo::resetClassStatics();
 		$this->tablesUsed[] = 'updatelog';
@@ -67,8 +68,9 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetSystemInfo_getsRepoSettings() {
 		$pingback = $this->getPingback();
-		$federationActual = $pingback->getSystemInfo()['federation'];
-		$termboxActual = $pingback->getSystemInfo()['termbox'];
+		$systemInfo = $pingback->getSystemInfo();
+		$federationActual = $systemInfo['federation'];
+		$termboxActual = $systemInfo['termbox'];
 
 		$this->assertTrue( $federationActual );
 		$this->assertTrue( $termboxActual );
@@ -167,8 +169,8 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 
 		$wikibaseRepoSettings
 			->method( 'getSetting' )
-			->withConsecutive( [ 'federatedPropertiesEnabled' ], [ 'termboxEnabled' ] )
-			->willReturn( true );
+			->withConsecutive( [ 'pingbackHost' ], [ 'federatedPropertiesEnabled' ], [ 'termboxEnabled' ] )
+			->willReturn( 'http://localhost', true, true );
 
 		$extensions->method( 'getAllThings' )
 			->willReturn( [

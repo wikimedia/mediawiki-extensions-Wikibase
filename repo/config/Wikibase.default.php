@@ -344,4 +344,5 @@ return [
 	'changeVisibilityNotificationJobBatchSize' => 3,
 
 	'wikibasePingback' => false,
+	'pingbackHost' => 'https://www.mediawiki.org/beacon/event',
 ];
