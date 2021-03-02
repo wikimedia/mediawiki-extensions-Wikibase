@@ -7,7 +7,6 @@ use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\ChangeModification\DispatchChangeDeletionNotificationJob;
 use Wikibase\Repo\Content\EntityContentFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Hook for dispatching DeleteDispatchNotificationJob on repo which in turn will fetch archived revisions
@@ -42,12 +41,12 @@ class DeleteDispatcher implements ArticleDeleteCompleteHook {
 	}
 
 	public static function factory(
+		EntityContentFactory $entityContentFactory,
 		SettingsArray $repoSettings
 	): self {
-		$repo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			'JobQueueGroup::singleton',
-			$repo->getEntityContentFactory(),
+			$entityContentFactory,
 			$repoSettings->getSetting( 'localClientDatabases' )
 		);
 	}

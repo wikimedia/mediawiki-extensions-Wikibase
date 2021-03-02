@@ -147,8 +147,8 @@ final class RepoHooks {
 
 		// Register callbacks for instantiating ContentHandlers for EntityContent.
 		foreach ( $contentModelIds as $entityType => $model ) {
-			$wgContentHandlers[$model] = function () use ( $wikibaseRepo, $entityType ) {
-				$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
+			$wgContentHandlers[$model] = function () use ( $entityType ) {
+				$entityContentFactory = WikibaseRepo::getEntityContentFactory();
 				return $entityContentFactory->getContentHandlerForType( $entityType );
 			};
 		}
@@ -231,7 +231,7 @@ final class RepoHooks {
 		$baseID,
 		UserIdentity $user
 	) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
 
 		if ( $entityContentFactory->isEntityContentModel( $wikiPage->getContent()->getModel() ) ) {
 			self::notifyEntityStoreWatcherOnUpdate(
@@ -305,7 +305,7 @@ final class RepoHooks {
 		LogEntry $logEntry
 	) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
+		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
 
 		// Bail out if we are not looking at an entity
 		if ( !$content || !$entityContentFactory->isEntityContentModel( $content->getModel() ) ) {
@@ -332,7 +332,7 @@ final class RepoHooks {
 	 */
 	public static function onArticleUndelete( Title $title, $created, $comment ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
+		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
 
 		// Bail out if we are not looking at an entity
 		if ( !$entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
@@ -451,7 +451,7 @@ final class RepoHooks {
 	 */
 	public static function onPageHistoryLineEnding( HistoryPager $history, $row, &$html, array $classes ) {
 		// Note: This assumes that HistoryPager::getTitle returns a Title.
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
 
 		$wikiPage = $history->getWikiPage();
 		$services = MediaWikiServices::getInstance();
@@ -490,7 +490,7 @@ final class RepoHooks {
 	 * @param array[] &$links
 	 */
 	public static function onPageTabs( SkinTemplate $skinTemplate, array &$links ) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
 
 		$title = $skinTemplate->getRelevantTitle();
 
@@ -564,7 +564,7 @@ final class RepoHooks {
 	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $skin, array &$bodyAttrs ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$outputPageEntityIdReader = new OutputPageEntityIdReader(
-			new OutputPageEntityViewChecker( $wikibaseRepo->getEntityContentFactory() ),
+			new OutputPageEntityViewChecker( WikibaseRepo::getEntityContentFactory() ),
 			WikibaseRepo::getEntityIdParser()
 		);
 
@@ -628,7 +628,7 @@ final class RepoHooks {
 					return true;
 			}
 
-			$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
+			$entityContentFactory = WikibaseRepo::getEntityContentFactory();
 			$entityTypes = $wikibaseRepo->getEnabledEntityTypes();
 
 			foreach ( $entityContentFactory->getEntityContentModels() as $contentModel ) {

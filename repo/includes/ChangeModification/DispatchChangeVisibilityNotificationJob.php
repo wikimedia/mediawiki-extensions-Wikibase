@@ -49,8 +49,8 @@ class DispatchChangeVisibilityNotificationJob extends DispatchChangeModification
 		$this->visibilityChangeMap = $params['visibilityChangeMap'];
 	}
 
-	protected function initFromGlobalState( MediaWikiServices $mwServices, WikibaseRepo $repo ) {
-		parent::initFromGlobalState( $mwServices, $repo );
+	protected function initFromGlobalState( MediaWikiServices $mwServices ) {
+		parent::initFromGlobalState( $mwServices );
 
 		$repoSettings = WikibaseRepo::getSettings( $mwServices );
 		$this->jobBatchSize = $repoSettings->getSetting( 'changeVisibilityNotificationJobBatchSize' );

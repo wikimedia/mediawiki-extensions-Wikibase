@@ -41,16 +41,16 @@ abstract class DispatchChangeModificationNotificationJob extends Job {
 	public function __construct( string $jobName, Title $title, array $params ) {
 		parent::__construct( $jobName, $title, $params );
 
-		$this->initFromGlobalState( MediaWikiServices::getInstance(), WikibaseRepo::getDefaultInstance() );
+		$this->initFromGlobalState( MediaWikiServices::getInstance() );
 	}
 
-	protected function initFromGlobalState( MediaWikiServices $mwServices, WikibaseRepo $repo ) {
+	protected function initFromGlobalState( MediaWikiServices $mwServices ) {
 		$repoSettings = WikibaseRepo::getSettings( $mwServices );
 		$this->clientRCMaxAge = $repoSettings->getSetting( 'deleteNotificationClientRCMaxAge' );
 		$this->localClientDatabases = $repoSettings->getSetting( 'localClientDatabases' );
 
 		$this->initServices(
-			$repo->getEntityContentFactory(),
+			WikibaseRepo::getEntityContentFactory( $mwServices ),
 			WikibaseRepo::getLogger( $mwServices ),
 			'JobQueueGroup::singleton'
 		);

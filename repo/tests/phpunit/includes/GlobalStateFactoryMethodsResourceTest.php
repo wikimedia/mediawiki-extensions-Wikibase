@@ -9,9 +9,7 @@ use FauxRequest;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
-use RequestContext;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
-use Wikibase\Repo\Hooks\ShowSearchHitHandler;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
@@ -119,11 +117,6 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 	public function testOutputPageJsConfigHookHandler(): void {
 		TestingAccessWrapper::newFromClass( OutputPageJsConfigHookHandler::class )
 			->factory();
-	}
-
-	public function testShowSearchHitHandler(): void {
-		TestingAccessWrapper::newFromClass( ShowSearchHitHandler::class )
-			->factory( RequestContext::getMain() );
 	}
 
 	public function testTermboxFlag(): void {

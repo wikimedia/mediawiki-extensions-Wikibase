@@ -32,7 +32,7 @@ class ViewEntityAction extends ViewAction {
 	 */
 	public static function onBeforeDisplayNoArticleText( Article $article ) {
 		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
-		$contentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$contentFactory = WikibaseRepo::getEntityContentFactory();
 
 		$ns = $article->getTitle()->getNamespace();
 		$entityType = $namespaceLookup->getEntityType( $ns );

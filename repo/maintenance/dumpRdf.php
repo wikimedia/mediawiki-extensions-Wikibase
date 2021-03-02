@@ -123,7 +123,7 @@ class DumpRdf extends DumpEntities {
 				$wikibaseRepo->getEntityRdfBuilderFactory(),
 				$wikibaseRepo->getEntityRevisionLookup( $this->getEntityRevisionLookupCacheMode() ),
 				WikibaseRepo::getRdfVocabulary(),
-				$wikibaseRepo->getEntityContentFactory()
+				WikibaseRepo::getEntityContentFactory()
 			);
 		}
 		parent::execute();
