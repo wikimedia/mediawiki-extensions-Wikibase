@@ -20,7 +20,7 @@ use Wikibase\Repo\WikibaseRepo;
 class IdGeneratorTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetNewId() {
-		$generator = WikibaseRepo::getDefaultInstance()->newIdGenerator();
+		$generator = WikibaseRepo::getIdGenerator();
 		/**
 		 * @var IdGenerator $clone
 		 */
