@@ -251,7 +251,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		);
 
 		$table = new PropertyInfoTable(
-			$wikibaseRepo->getEntityIdComposer(),
+			WikibaseRepo::getEntityIdComposer(),
 			$propertySource->getDatabaseName(),
 			true
 		);
@@ -424,7 +424,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$primer = new ChangesSubscriptionTableBuilder(
 			// would be nice to pass in $dbUpdater->getDB().
 			MediaWikiServices::getInstance()->getDBLoadBalancer(),
-			WikibaseRepo::getDefaultInstance()->getEntityIdComposer(),
+			WikibaseRepo::getEntityIdComposer(),
 			$table,
 			1000
 		);

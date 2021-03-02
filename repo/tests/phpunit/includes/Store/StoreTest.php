@@ -33,13 +33,11 @@ use Wikibase\Repo\WikibaseRepo;
 class StoreTest extends MediaWikiIntegrationTestCase {
 
 	public function instanceProvider() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$instances = [
 			new SqlStore(
 				WikibaseRepo::getEntityChangeFactory(),
 				WikibaseRepo::getEntityIdParser(),
-				$wikibaseRepo->getEntityIdComposer(),
+				WikibaseRepo::getEntityIdComposer(),
 				$this->createMock( EntityIdLookup::class ),
 				$this->createMock( EntityTitleStoreLookup::class ),
 				new EntityNamespaceLookup( [] ),

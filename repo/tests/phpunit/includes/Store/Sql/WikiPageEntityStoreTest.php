@@ -170,7 +170,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 				$localSource
 			),
 			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
-			$wikibaseRepo->getEntityIdComposer(),
+			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$localSource,
 			MediaWikiServices::getInstance()->getPermissionManager()
@@ -1050,7 +1050,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 				$itemSource
 			),
 			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
-			$wikibaseRepo->getEntityIdComposer(),
+			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$itemSource,
 			MediaWikiServices::getInstance()->getPermissionManager()
@@ -1086,7 +1086,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 				$customSource
 			),
 			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
-			$wikibaseRepo->getEntityIdComposer(),
+			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$customSource,
 			MediaWikiServices::getInstance()->getPermissionManager()

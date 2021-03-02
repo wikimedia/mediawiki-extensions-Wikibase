@@ -52,13 +52,13 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 
 		$builder = new PropertyInfoTableBuilder(
 			new PropertyInfoTable(
-				$wikibaseRepo->getEntityIdComposer(),
+				WikibaseRepo::getEntityIdComposer(),
 				$propertySource->getDatabaseName(),
 				true
 			),
 			$wikibaseRepo->getPropertyLookup(),
 			$wikibaseRepo->newPropertyInfoBuilder(),
-			$wikibaseRepo->getEntityIdComposer(),
+			WikibaseRepo::getEntityIdComposer(),
 			$wikibaseRepo->getEntityNamespaceLookup()
 		);
 		$builder->setReporter( $reporter );
