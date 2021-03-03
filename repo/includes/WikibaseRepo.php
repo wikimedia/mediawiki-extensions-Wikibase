@@ -232,11 +232,6 @@ class WikibaseRepo {
 	private $entityDeserializer = null;
 
 	/**
-	 * @var EntityIdComposer|null
-	 */
-	private $entityIdComposer = null;
-
-	/**
 	 * @var OutputFormatSnakFormatterFactory|null
 	 */
 	private $snakFormatterFactory = null;
@@ -805,17 +800,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityIdParser' );
 	}
 
-	/**
-	 * @return EntityIdComposer
-	 */
-	public function getEntityIdComposer() {
-		if ( $this->entityIdComposer === null ) {
-			$this->entityIdComposer = new EntityIdComposer(
-				self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK )
-			);
-		}
-
-		return $this->entityIdComposer;
+	public static function getEntityIdComposer( ContainerInterface $services = null ): EntityIdComposer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityIdComposer' );
 	}
 
 	public static function getStatementGuidParser( ContainerInterface $services = null ): StatementGuidParser {
@@ -967,7 +954,7 @@ class WikibaseRepo {
 			$this->store = new SqlStore(
 				self::getEntityChangeFactory(),
 				self::getEntityIdParser(),
-				$this->getEntityIdComposer(),
+				self::getEntityIdComposer(),
 				$this->getEntityIdLookup(),
 				$this->getEntityTitleLookup(),
 				$this->getEntityNamespaceLookup(),
@@ -2012,7 +1999,7 @@ class WikibaseRepo {
 			$singleSourceServices[$source->getSourceName()] = new SingleEntitySourceServices(
 				$genericServices,
 				self::getEntityIdParser(),
-				$this->getEntityIdComposer(),
+				self::getEntityIdComposer(),
 				self::getDataValueDeserializer(),
 				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
 				$this->getDataAccessSettings(),

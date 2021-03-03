@@ -43,7 +43,7 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 
 		return new ChangesSubscriptionTableBuilder(
 			$loadBalancer,
-			WikibaseRepo::getDefaultInstance()->getEntityIdComposer(),
+			WikibaseRepo::getEntityIdComposer(),
 			self::TABLE_NAME,
 			$batchSize,
 			$verbosity

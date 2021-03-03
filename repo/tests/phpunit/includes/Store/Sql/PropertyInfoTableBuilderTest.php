@@ -98,7 +98,7 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$table = new PropertyInfoTable(
-			$wikibaseRepo->getEntityIdComposer(),
+			WikibaseRepo::getEntityIdComposer(),
 			$entitySource->getDatabaseName(),
 			true
 		);
@@ -117,7 +117,7 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 			$table,
 			$propertyLookup,
 			$propertyInfoBuilder,
-			$wikibaseRepo->getEntityIdComposer(),
+			WikibaseRepo::getEntityIdComposer(),
 			$wikibaseRepo->getEntityNamespaceLookup()
 		);
 		$builder->setBatchSize( 3 );

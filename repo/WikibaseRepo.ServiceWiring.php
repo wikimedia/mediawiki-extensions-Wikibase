@@ -24,6 +24,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -141,6 +142,13 @@ return [
 			$entityDiffer->registerEntityDifferStrategy( $builder() );
 		}
 		return $entityDiffer;
+	},
+
+	'WikibaseRepo.EntityIdComposer' => function ( MediaWikiServices $services ): EntityIdComposer {
+		return new EntityIdComposer(
+			WikibaseRepo::getEntityTypeDefinitions( $services )
+				->get( EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK )
+		);
 	},
 
 	'WikibaseRepo.EntityIdParser' => function ( MediaWikiServices $services ): EntityIdParser {
