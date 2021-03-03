@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
-use Http;
+use MediaWiki\Http\HttpRequestFactory;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -14,7 +14,7 @@ use Psr\Log\LoggerInterface;
 class HttpUrlPropertyOrderProvider extends WikiTextPropertyOrderProvider implements PropertyOrderProvider {
 
 	/**
-	 * @var Http
+	 * @var HttpRequestFactory
 	 */
 	private $http;
 
@@ -30,10 +30,10 @@ class HttpUrlPropertyOrderProvider extends WikiTextPropertyOrderProvider impleme
 
 	/**
 	 * @param string $url
-	 * @param Http $http
+	 * @param HttpRequestFactory $http
 	 * @param LoggerInterface $logger
 	 */
-	public function __construct( $url, Http $http, LoggerInterface $logger ) {
+	public function __construct( $url, HttpRequestFactory $http, LoggerInterface $logger ) {
 		$this->url = $url;
 		$this->http = $http;
 		$this->logger = $logger;

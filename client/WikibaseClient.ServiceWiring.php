@@ -97,7 +97,7 @@ return [
 				$innerProvider,
 				new HttpUrlPropertyOrderProvider(
 					$url,
-					new Http(),
+					$services->getHttpRequestFactory(),
 					WikibaseClient::getLogger( $services )
 				)
 			);
