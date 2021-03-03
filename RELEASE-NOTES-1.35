@@ -1,5 +1,21 @@
 = Wikibase 1.35 =
 
+== Wikibase 1.35.1-wmde.1 ==
+
+THIS IS NOT A RELEASE YET
+
+=== Changes since MediaWiki 1.35.0-wmde.0 ===
+
+* (T269666) Create a Wikibase Pingback based on MW Pingback
+* (T254740) Prefetch entities as part of federated properties
+* (T258558) Error messages for API modules that will not work with federated properties
+* (T255756, T258565) Handling failed requests to the federation source Wiki
+* (T246125, T251102) Notifications for redirects to Wikidata in Federated Properties MVP
+* (T246871) Changes to RDF dumping when federated properties are enabled
+* (T257907) Automatically alter entitysources configuration for Wikidata.org values for
+ fed props when pointing at wikidata.org
+* (T255581) Changes to Special:ListDatatypes when federation is enabled
+
 == Upgrading notes for 1.35 ==
 Don't forget to always back up your database before upgrading!
 
@@ -39,6 +55,13 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 === Configuration changes for system administrators in 1.35 ===
 
 ==== New configuration ====
+
+* (repo) (T269666) wikibasePingback — Feature flag for turning pingback on or off.
+ The pingback will periodically send anonymous system information to mediawiki.org.
+ Default set to false.
+
+* (repo) (T269666) pingbackHost — The host to send pingback to.
+ Default set to https://www.mediawiki.org/beacon/event
 
 * (repo) (T246776) federatedPropertiesEnabled — Feature flag for turning
  federated properties on or off. Default set to false.
