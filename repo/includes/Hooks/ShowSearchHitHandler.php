@@ -60,11 +60,13 @@ class ShowSearchHitHandler implements ShowSearchHitHook, ShowSearchHitTitleHook 
 		$this->fallbackChainFactory = $fallbackChainFactory;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		EntityContentFactory $entityContentFactory
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new self(
-			$wikibaseRepo->getEntityContentFactory(),
+			$entityContentFactory,
 			$wikibaseRepo->getEntityIdLookup(),
 			$wikibaseRepo->getEntityLookup(),
 			$wikibaseRepo->getLanguageFallbackChainFactory()

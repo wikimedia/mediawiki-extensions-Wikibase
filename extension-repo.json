@@ -303,6 +303,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityData::factory",
 			"services": [
 				"HtmlCacheUpdater",
+				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.Logger",
 				"WikibaseRepo.RdfVocabulary",
@@ -584,6 +585,7 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\DeleteDispatcher",
 			"factory": "\\Wikibase\\Repo\\Hooks\\DeleteDispatcher::factory",
 			"services": [
+				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.Settings"
 			]
 		},
@@ -622,6 +624,7 @@
 				"HttpRequestFactory",
 				"ContentLanguage",
 				"StatsdDataFactory",
+				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.Logger",
 				"WikibaseRepo.Settings"
@@ -637,7 +640,10 @@
 		},
 		"ShowSearchHit": {
 			"class": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler",
-			"factory": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler::factory"
+			"factory": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler::factory",
+			"services": [
+				"WikibaseRepo.EntityContentFactory"
+			]
 		},
 		"ViewHooks": {
 			"class": "\\Wikibase\\View\\ViewHooks"

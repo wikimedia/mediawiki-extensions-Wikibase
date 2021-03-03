@@ -50,14 +50,16 @@ class EntityTerms extends ApiQueryBase {
 		$this->idLookup = $idLookup;
 	}
 
-	public static function factory( ApiQuery $apiQuery, string $moduleName ): self {
+	public static function factory(
+		ApiQuery $apiQuery,
+		string $moduleName
+	): self {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$termBuffer = $repo->getTermBuffer();
-		$entityIdLookup = $repo->getEntityContentFactory();
 
 		return new self(
 			$termBuffer,
-			$entityIdLookup,
+			$repo->getEntityIdLookup(),
 			$apiQuery,
 			$moduleName
 		);

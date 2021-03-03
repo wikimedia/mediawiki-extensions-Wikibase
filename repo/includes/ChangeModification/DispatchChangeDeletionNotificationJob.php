@@ -9,7 +9,6 @@ use MediaWiki\MediaWikiServices;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\ILBFactory;
 
@@ -44,8 +43,8 @@ class DispatchChangeDeletionNotificationJob extends DispatchChangeModificationNo
 		$this->archivedRevisionCount = $params['archivedRevisionCount'];
 	}
 
-	protected function initFromGlobalState( MediaWikiServices $mwServices, WikibaseRepo $repo ) {
-		parent::initFromGlobalState( $mwServices, $repo );
+	protected function initFromGlobalState( MediaWikiServices $mwServices ) {
+		parent::initFromGlobalState( $mwServices );
 
 		$this->batchSize = $mwServices->getMainConfig()->get( 'UpdateRowsPerQuery' );
 		$this->loadBalancerFactory = $mwServices->getDBLoadBalancerFactory();

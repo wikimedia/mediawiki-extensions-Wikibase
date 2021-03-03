@@ -42,6 +42,7 @@ use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 use Wikibase\Repo\Notifications\RepoEntityChange;
@@ -136,6 +137,17 @@ return [
 			$changeClasses,
 			RepoEntityChange::class,
 			WikibaseRepo::getLogger( $services )
+		);
+	},
+
+	'WikibaseRepo.EntityContentFactory' => function ( MediaWikiServices $services ): EntityContentFactory {
+		return new EntityContentFactory(
+			WikibaseRepo::getContentModelMappings( $services ),
+			WikibaseRepo::getEntityTypeDefinitions( $services )
+				->get( EntityTypeDefinitions::CONTENT_HANDLER_FACTORY_CALLBACK ),
+			WikibaseRepo::getEntitySourceDefinitions( $services ),
+			WikibaseRepo::getLocalEntitySource( $services ),
+			$services->getInterwikiLookup()
 		);
 	},
 

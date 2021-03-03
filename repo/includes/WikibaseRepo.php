@@ -519,17 +519,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.DataValueFactory' );
 	}
 
-	/**
-	 * @return EntityContentFactory
-	 */
-	public function getEntityContentFactory() {
-		return new EntityContentFactory(
-			self::getContentModelMappings(),
-			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::CONTENT_HANDLER_FACTORY_CALLBACK ),
-			self::getEntitySourceDefinitions(),
-			self::getLocalEntitySource(),
-			MediaWikiServices::getInstance()->getInterwikiLookup()
-		);
+	public static function getEntityContentFactory( ContainerInterface $services = null ): EntityContentFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityContentFactory' );
 	}
 
 	public static function getEntityTypeDefinitions( ContainerInterface $services = null ): EntityTypeDefinitions {
@@ -565,7 +557,7 @@ class WikibaseRepo {
 	public function getEntityTitleLookup() {
 		return new TypeDispatchingEntityTitleStoreLookup(
 			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_TITLE_STORE_LOOKUP_FACTORY_CALLBACK ),
-			$this->getEntityContentFactory()
+			self::getEntityContentFactory()
 		);
 	}
 
@@ -612,7 +604,7 @@ class WikibaseRepo {
 	 * @return EntityIdLookup
 	 */
 	public function getEntityIdLookup() {
-		return $this->getEntityContentFactory();
+		return self::getEntityContentFactory();
 	}
 
 	public function getLocalRepoWikiPageMetaDataAccessor(): WikiPageEntityMetaDataAccessor {
@@ -686,7 +678,7 @@ class WikibaseRepo {
 		return new MediawikiEditFilterHookRunner(
 			$this->getEntityNamespaceLookup(),
 			$this->getEntityTitleLookup(),
-			$this->getEntityContentFactory(),
+			self::getEntityContentFactory(),
 			$context
 		);
 	}

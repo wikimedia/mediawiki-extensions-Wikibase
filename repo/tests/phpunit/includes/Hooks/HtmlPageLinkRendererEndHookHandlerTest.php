@@ -69,7 +69,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 	}
 
 	public function overrideSpecialNewEntityLinkProvider() {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
 
 		foreach ( $entityContentFactory->getEntityTypes() as $entityType ) {
 			$entityHandler = $entityContentFactory->getContentHandlerForType( $entityType );

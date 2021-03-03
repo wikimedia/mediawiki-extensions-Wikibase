@@ -20,6 +20,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\Helpers\OutputPageRevisionIdReader;
@@ -161,6 +162,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		HttpRequestFactory $httpRequestFactory,
 		Language $contentLanguage,
 		IBufferingStatsdDataFactory $statsdDataFactory,
+		EntityContentFactory $entityContentFactory,
 		EntityIdParser $entityIdParser,
 		LoggerInterface $logger,
 		SettingsArray $settings
@@ -170,7 +172,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$termLanguages = $wikibaseRepo->getTermsLanguages();
 		$babelUserLanguageLookup = new BabelUserLanguageLookup();
-		$entityViewChecker = new OutputPageEntityViewChecker( $wikibaseRepo->getEntityContentFactory() );
+		$entityViewChecker = new OutputPageEntityViewChecker( $entityContentFactory );
 
 		return new self(
 			$httpRequestFactory,

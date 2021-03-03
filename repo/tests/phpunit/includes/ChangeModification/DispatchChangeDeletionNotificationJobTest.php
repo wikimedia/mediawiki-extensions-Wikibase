@@ -93,11 +93,9 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 	 * @return DispatchChangeDeletionNotificationJob
 	 */
 	private function getJobAndInitialize( Title $title, array $params, $logger, $factory ): DispatchChangeDeletionNotificationJob {
-		$repo = WikibaseRepo::getDefaultInstance();
-
 		$job = new DispatchChangeDeletionNotificationJob( $title, $params );
 		$job->initServices(
-			$repo->getEntityContentFactory(),
+			WikibaseRepo::getEntityContentFactory(),
 			$logger,
 			$factory
 		);
@@ -172,7 +170,7 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 		$revision = $store->saveEntity( $item, 'Q303', $this->getTestUser()->getUser() );
 
 		// get title
-		$contentFactory = $repo->getEntityContentFactory();
+		$contentFactory = WikibaseRepo::getEntityContentFactory();
 		$title = $contentFactory->getTitleForId( $revision->getEntity()->getId() );
 
 		// insert a wikipage for the item

@@ -7,6 +7,7 @@ use HttpError;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
@@ -53,6 +54,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 	public static function factory(
 		HtmlCacheUpdater $htmlCacheUpdater,
+		EntityContentFactory $entityContentFactory,
 		EntityIdParser $entityIdParser,
 		LoggerInterface $logger,
 		RdfVocabulary $rdfVocabulary,
@@ -71,7 +73,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$serializationService = new EntityDataSerializationService(
 			$wikibaseRepo->getStore()->getEntityLookup(),
 			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->getEntityContentFactory(),
+			$entityContentFactory,
 			$wikibaseRepo->getPropertyDataTypeLookup(),
 			$valueSnakRdfBuilderFactory,
 			$wikibaseRepo->getEntityRdfBuilderFactory(),
