@@ -171,7 +171,7 @@
 	"wikibase-client-data-bridge-edit-conflict-error-message": "Another user just edited this value and published their changes first. Your changes couldn't be applied. Please reload the page to retrieve the new value.",
 	"wikibase-client-data-bridge-unknown-error-heading": "Something went wrong",
 	"wikibase-client-data-bridge-unknown-error-message": "An error occurred and the selected value cannot be edited at the moment. Please try reloading.",
-	"wikibase-client-data-bridge-error-report": "<p>If the error persists, please [$1 report this issue] including the following information:</p>\n<ul>\n<li>$2</li>\n<li>$3 of $4</li>\n<li>Error code: $5</li>\n</ul>",
+	"wikibase-client-data-bridge-error-report": "<p>If the error persists, please [$1 report this issue] describing your actions and include the following information:</p>\n<ul>\n<li>$2</li>\n<li>$3 of $4</li>\n<li>Error code: $5</li>\n</ul>",
 	"wikibase-client-data-bridge-error-reload-bridge": "Reload",
 	"wikibase-client-data-bridge-error-reload-page": "Reload page",
 	"wikibase-client-data-bridge-error-go-back": "Go back",
