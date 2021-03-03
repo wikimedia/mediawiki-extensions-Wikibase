@@ -8,6 +8,7 @@ use EnhancedChangesList;
 use MediaWiki\Hook\EnhancedChangesListModifyBlockLineDataHook;
 use MediaWiki\Hook\EnhancedChangesListModifyLineDataHook;
 use MediaWiki\Hook\OldChangesListRecentChangesLineHook;
+use MediaWiki\User\UserNameUtils;
 use OldChangesList;
 use RecentChange;
 use UnexpectedValueException;
@@ -47,6 +48,7 @@ class ChangesListLinesHandler implements
 	}
 
 	public static function factory(
+		UserNameUtils $userNameUtils,
 		EntityIdParser $entityIdParser,
 		SettingsArray $clientSettings
 	): self {
@@ -57,7 +59,8 @@ class ChangesListLinesHandler implements
 			$entityIdParser
 		);
 		$formatter = new ChangeLineFormatter(
-			$wikibaseClient->newRepoLinker()
+			$wikibaseClient->newRepoLinker(),
+			$userNameUtils
 		);
 
 		return new self( $changeFactory, $formatter );

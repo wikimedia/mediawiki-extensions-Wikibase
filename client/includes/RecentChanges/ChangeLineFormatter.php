@@ -7,6 +7,7 @@ namespace Wikibase\Client\RecentChanges;
 use Language;
 use Linker;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\User\UserNameUtils;
 use Title;
 use User;
 use Wikibase\Client\RepoLinker;
@@ -27,8 +28,14 @@ class ChangeLineFormatter {
 	 */
 	private $repoLinker;
 
-	public function __construct( RepoLinker $repoLinker ) {
+	/**
+	 * @var UserNameUtils
+	 */
+	private $userNameUtils;
+
+	public function __construct( RepoLinker $repoLinker, UserNameUtils $userNameUtils ) {
 		$this->repoLinker = $repoLinker;
+		$this->userNameUtils = $userNameUtils;
 	}
 
 	public function format(
@@ -205,7 +212,7 @@ class ChangeLineFormatter {
 
 		$links = $this->buildUserLinksHTML( $userName );
 
-		if ( User::isIP( $userName ) ) {
+		if ( $this->userNameUtils->isIP( $userName ) ) {
 			return $this->formatIpUserLinksHTML( $links );
 		} else {
 			return $this->formatRegisteredUserLinksHTML( $links, $lang );
@@ -374,7 +381,7 @@ class ChangeLineFormatter {
 
 		$links['usertalk'] = $this->buildUserTalkLinkHTML( $userName );
 
-		if ( User::isIP( $userName ) ) {
+		if ( $this->userNameUtils->isIP( $userName ) ) {
 			$links['contribs'] = $this->buildUserContribsLinkHTML( $userName, $userName );
 		} else {
 			$links['user'] = $this->buildUserLinkHTML( $userName );
