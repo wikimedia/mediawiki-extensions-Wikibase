@@ -25,7 +25,7 @@ use Wikimedia\Rdbms\IResultWrapper;
  */
 class PageHistoryPagerHookHandler implements PageHistoryPager__doBatchLookupsHook {
 
- 	/** @var bool */
+	/** @var bool */
 	private $federatedPropertiesEnabled;
 
 	/** @var LinkTargetEntityIdLookup */

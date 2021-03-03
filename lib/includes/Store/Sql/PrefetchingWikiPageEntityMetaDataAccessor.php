@@ -22,7 +22,7 @@ use Wikibase\Lib\Store\LookupConstants;
 class PrefetchingWikiPageEntityMetaDataAccessor implements
 	EntityPrefetcher,
 	EntityStoreWatcher,
-    WikiPageEntityMetaDataAccessor
+	WikiPageEntityMetaDataAccessor
 {
 
 	/**

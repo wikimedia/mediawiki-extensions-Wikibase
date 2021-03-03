@@ -91,7 +91,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( Status::class, $status );
 		$this->assertEquals( $result->isValid(), $status->isOK(), 'isOK()' );
 
-		$this->assertEquals( count( $result->getErrors() ), count( $status->getErrorsArray() ), 'Error count:' );
+		$this->assertSame( count( $result->getErrors() ), count( $status->getErrorsArray() ), 'Error count:' );
 	}
 
 }

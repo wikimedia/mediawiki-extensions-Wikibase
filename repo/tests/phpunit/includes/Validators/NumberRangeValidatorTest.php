@@ -39,8 +39,8 @@ class NumberRangeValidatorTest extends \PHPUnit\Framework\TestCase {
 		if ( !$expected ) {
 			$errors = $result->getErrors();
 			$this->assertCount( 1, $errors, $message );
-			$this->assertTrue(
-				in_array( $errors[0]->getCode(), [ 'too-low', 'too-high' ] ),
+			$this->assertContains(
+				$errors[0]->getCode(), [ 'too-low', 'too-high' ],
 				$message . "\n" . $errors[0]->getCode()
 			);
 

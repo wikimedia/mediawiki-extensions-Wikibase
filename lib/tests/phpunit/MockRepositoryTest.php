@@ -342,7 +342,7 @@ class MockRepositoryTest extends TestCase {
 		}
 
 		// check that we found the right number of entities
-		$this->assertEquals( count( $expectedLabels ), count( $actualLabels ), 'number of entities found' );
+		$this->assertSame( count( $expectedLabels ), count( $actualLabels ), 'number of entities found' );
 
 		foreach ( $expectedLabels as $id => $labels ) {
 			// check that thew correct entity was found

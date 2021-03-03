@@ -55,7 +55,7 @@ class MembershipValidatorTest extends \PHPUnit\Framework\TestCase {
 		if ( !$expected ) {
 			$errors = $result->getErrors();
 			$this->assertCount( 1, $errors );
-			$this->assertTrue( in_array( $errors[0]->getCode(), [ 'not-allowed' ] ), $errors[0]->getCode() );
+			$this->assertContains( $errors[0]->getCode(), [ 'not-allowed' ], $errors[0]->getCode() );
 
 			$localizer = new ValidatorErrorLocalizer();
 			$msg = $localizer->getErrorMessage( $errors[0] );

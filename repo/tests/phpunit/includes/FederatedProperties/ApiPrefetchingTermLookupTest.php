@@ -39,7 +39,9 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 
 	private $data = [];
 
-	private $p18, $p31, $q42;
+	private $p18;
+	private $p31;
+	private $q42;
 
 	protected function setUp(): void {
 		$this->q42 = new ItemId( 'Q42' );

@@ -536,7 +536,7 @@ abstract class EntityContent extends AbstractContent {
 
 			if ( !$patched ) {
 				throw new PatcherException( 'Cannot create a redirect using content model '
-				                            . $this->getModel() . '!' );
+					. $this->getModel() . '!' );
 			}
 		} else {
 			if ( $this->isRedirect() ) {
