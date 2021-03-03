@@ -24,10 +24,8 @@ class EntityIdParserTest extends ServiceWiringTestCase {
 	}
 
 	public function testConstruction(): void {
-		$this->serviceContainer
-			->method( 'get' )
-			->with( 'WikibaseClient.EntityTypeDefinitions' )
-			->willReturn( new EntityTypeDefinitions( [
+		$this->mockService( 'WikibaseClient.EntityTypeDefinitions',
+			new EntityTypeDefinitions( [
 				'something' => [
 					EntityTypeDefinitions::ENTITY_ID_PATTERN => '/^S[1-9][0-9]*$/',
 					EntityTypeDefinitions::ENTITY_ID_BUILDER => $this->makeIdBuilder( '1000' ),

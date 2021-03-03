@@ -3,7 +3,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
-use Psr\Log\InvalidArgumentException;
 use Psr\Log\NullLogger;
 use TitleFactory;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
@@ -29,20 +28,14 @@ class PropertyOrderProviderTest extends ServiceWiringTestCase {
 	 * @dataProvider propertyOrderUrlProvider
 	 */
 	public function testConstruction( $url ): void {
-		$this->serviceContainer
-			->method( 'get' )
-			->willReturnCallback( function ( $id ) use ( $url ) {
-				switch ( $id ) {
-					case 'WikibaseClient.Settings':
-						return new SettingsArray(
-							[ 'propertyOrderUrl' => $url ]
-						);
-					case 'WikibaseClient.Logger':
-						return new NullLogger();
-					default:
-						throw new InvalidArgumentException( "Unexpected service name: $id" );
-				}
-			} );
+		$this->mockService( 'WikibaseClient.Settings',
+			new SettingsArray(
+				[ 'propertyOrderUrl' => $url ]
+			) );
+		if ( $url !== null ) {
+			$this->mockService( 'WikibaseClient.Logger',
+				new NullLogger() );
+		}
 
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getTitleFactory' )

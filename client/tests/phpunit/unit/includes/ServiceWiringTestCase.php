@@ -22,6 +22,12 @@ abstract class ServiceWiringTestCase extends TestCase {
 	 */
 	private $wiring;
 
+	/** @var mixed[] */
+	private $mockedServices;
+
+	/** @var null[] */
+	private $accessedServices;
+
 	/**
 	 * @var MockObject|MediaWikiServices
 	 */
@@ -31,7 +37,27 @@ abstract class ServiceWiringTestCase extends TestCase {
 		parent::setUp();
 
 		$this->wiring = $this->loadWiring();
+		$this->mockedServices = [];
+		$this->accessedServices = [];
 		$this->serviceContainer = $this->createMock( MediaWikiServices::class );
+		$this->serviceContainer->method( 'get' )
+			->willReturnCallback( function ( string $id ) {
+				$this->assertArrayNotHasKey( $id, $this->accessedServices,
+					"Service $id must not be used yet" );
+				$this->accessedServices[$id] = null;
+				$this->assertArrayHasKey( $id, $this->mockedServices,
+					"Service $id must be mocked" );
+				return $this->mockedServices[$id];
+			} );
+		$this->serviceContainer->expects( $this->never() )
+			->method( 'getService' ); // get() should be used instead
+	}
+
+	protected function tearDown(): void {
+		$this->assertEqualsCanonicalizing( array_keys( $this->mockedServices ), array_keys( $this->accessedServices ),
+			'Expected every mocked service to be used' );
+
+		parent::tearDown();
 	}
 
 	protected function getDefinition( $name ): callable {
@@ -43,6 +69,12 @@ abstract class ServiceWiringTestCase extends TestCase {
 
 	protected function getService( $name ) {
 		return $this->getDefinition( $name )( $this->serviceContainer );
+	}
+
+	protected function mockService( string $id, $service ) {
+		$this->assertArrayNotHasKey( $id, $this->mockedServices,
+			"Service $id must not be mocked already" );
+		$this->mockedServices[$id] = $service;
 	}
 
 	protected function configureHookContainer(
