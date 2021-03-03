@@ -41,37 +41,37 @@ jobs:
             DBTYPE: sqlite
             LANG: ru
             WB: both
-          php-versions: '7.3'
+          php-versions: '7.3.27'
         - env:
             DBTYPE: sqlite
             LANG: en
             WB: client
-          php-versions: '7.2'
+          php-versions: '7.2.34'
         - env:
-            DBTYPE: sqlite
+            DBTYPE: mysql
             LANG: en
             WB: repo
-          php-versions: '7.2'
+          php-versions: '7.2.34'
         - env:
             DBTYPE: sqlite
             LANG: ar
             WB: both
-          php-versions: '7.3'
+          php-versions: '7.3.27'
         - env:
-            DBTYPE: sqlite
+            DBTYPE: mysql
             LANG: en
             WB: both
-          php-versions: '7.2'
+          php-versions: '7.2.34'
         - env:
-            DBTYPE: sqlite
+            DBTYPE: mysql
             LANG: en
             WB: both
-          php-versions: '7.3'
+          php-versions: '7.3.27'
         - env:
-            DBTYPE: sqlite
+            DBTYPE: mysql
             LANG: en
             WB: both
-          php-versions: '7.4'
+          php-versions: '7.4.15'
     steps:
     - name: Checkout
       uses: actions/checkout@v2
