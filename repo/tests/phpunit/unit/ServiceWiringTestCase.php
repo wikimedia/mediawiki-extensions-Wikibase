@@ -109,18 +109,21 @@ abstract class ServiceWiringTestCase extends TestCase {
 	}
 
 	private function disallowDbAccess() {
-		$this->serviceContainer->method( 'getDBLoadBalancerFactory' )
-			->willReturnCallback( function() {
-				$lb = $this->createMock( ILoadBalancer::class );
-				$lb->expects( $this->never() )
-					->method( 'getConnection' );
-				$lb->expects( $this->never() )
-					->method( 'getConnectionRef' );
-				$lb->expects( $this->never() )
-					->method( 'getMaintenanceConnectionRef' );
-				$lb->method( 'getLocalDomainID' )
-					->willReturn( 'banana' );
+		$lb = $this->createMock( ILoadBalancer::class );
+		$lb->expects( $this->never() )
+			->method( 'getConnection' );
+		$lb->expects( $this->never() )
+			->method( 'getConnectionRef' );
+		$lb->expects( $this->never() )
+			->method( 'getMaintenanceConnectionRef' );
+		$lb->method( 'getLocalDomainID' )
+			->willReturn( 'banana' );
 
+		$this->serviceContainer->method( 'getDBLoadBalancer' )
+			->willReturn( $lb );
+
+		$this->serviceContainer->method( 'getDBLoadBalancerFactory' )
+			->willReturnCallback( function() use ( $lb ) {
 				$lbFactory = $this->createMock( LBFactory::class );
 				$lbFactory->method( 'getMainLB' )
 					->willReturn( $lb );
