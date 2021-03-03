@@ -81,7 +81,7 @@ class EchoNotificationsHandlers {
 		$settings = WikibaseClient::getSettings();
 
 		return new self(
-			$wikibaseClient->newRepoLinker(),
+			WikibaseClient::getRepoLinker(),
 			$wikibaseClient->getNamespaceChecker(),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),

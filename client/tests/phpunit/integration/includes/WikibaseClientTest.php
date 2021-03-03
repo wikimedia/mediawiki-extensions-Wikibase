@@ -22,7 +22,6 @@ use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\OtherProjectsSitesProvider;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
-use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySource;
@@ -143,11 +142,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetStringNormalizerReturnType() {
 		$returnValue = $this->getWikibaseClient()->getStringNormalizer();
 		$this->assertInstanceOf( StringNormalizer::class, $returnValue );
-	}
-
-	public function testNewRepoLinkerReturnType() {
-		$returnValue = $this->getWikibaseClient()->newRepoLinker();
-		$this->assertInstanceOf( RepoLinker::class, $returnValue );
 	}
 
 	public function testGetLanguageFallbackChainFactoryReturnType() {

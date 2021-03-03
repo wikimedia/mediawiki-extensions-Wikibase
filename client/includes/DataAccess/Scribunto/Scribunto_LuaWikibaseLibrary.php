@@ -595,8 +595,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	private function getRepoLinker() {
 		if ( !$this->repoLinker ) {
-			$wikibaseClient = WikibaseClient::getDefaultInstance();
-			$this->repoLinker = $wikibaseClient->newRepoLinker();
+			$this->repoLinker = WikibaseClient::getRepoLinker();
 		}
 		return $this->repoLinker;
 	}

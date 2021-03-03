@@ -6,6 +6,7 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
+use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
@@ -106,6 +107,17 @@ return [
 		return new CachingPropertyOrderProvider(
 			$innerProvider,
 			ObjectCache::getLocalClusterInstance()
+		);
+	},
+
+	'WikibaseClient.RepoLinker' => function ( MediaWikiServices $services ): RepoLinker {
+		$settings = WikibaseClient::getSettings( $services );
+
+		return new RepoLinker(
+			WikibaseClient::getEntitySourceDefinitions( $services ),
+			$settings->getSetting( 'repoUrl' ),
+			$settings->getSetting( 'repoArticlePath' ),
+			$settings->getSetting( 'repoScriptPath' )
 		);
 	},
 

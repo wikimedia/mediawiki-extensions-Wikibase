@@ -85,6 +85,7 @@ class InfoActionHookHandler implements InfoActionHook {
 
 	public static function factory(
 		EntityIdParser $idParser,
+		RepoLinker $repoLinker,
 		SettingsArray $clientSettings
 	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
@@ -100,7 +101,7 @@ class InfoActionHookHandler implements InfoActionHook {
 
 		return new self(
 			$namespaceChecker,
-			$wikibaseClient->newRepoLinker(),
+			$repoLinker,
 			$wikibaseClient->getStore()->getSiteLinkLookup(),
 			$clientSettings->getSetting( 'siteGlobalID' ),
 			$usageLookup,

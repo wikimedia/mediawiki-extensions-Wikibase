@@ -13,7 +13,9 @@
 	"APIListModules": {
 		"wblistentityusage": {
 			"class": "\\Wikibase\\Client\\Api\\ApiListEntityUsage",
-			"factory": "\\Wikibase\\Client\\Api\\ApiListEntityUsage::factory"
+			"services": [
+				"WikibaseClient.RepoLinker"
+			]
 		}
 	},
 	"APIMetaModules": {
@@ -38,7 +40,9 @@
 		},
 		"wbentityusage": {
 			"class": "\\Wikibase\\Client\\Api\\ApiPropsEntityUsage",
-			"factory": "\\Wikibase\\Client\\Api\\ApiPropsEntityUsage::factory"
+			"services": [
+				"WikibaseClient.RepoLinker"
+			]
 		}
 	},
 	"ExtensionFunctions": [
@@ -71,6 +75,7 @@
 			"services": [
 				"UserNameUtils",
 			  	"WikibaseClient.EntityIdParser",
+				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Settings"
 			]
 		},
@@ -101,6 +106,7 @@
 			"class": "\\Wikibase\\Client\\Hooks\\DeletePageNoticeCreator",
 			"factory": "\\Wikibase\\Client\\Hooks\\DeletePageNoticeCreator::factory",
 			"services": [
+				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Settings"
 			]
 		},
@@ -118,7 +124,8 @@
 			"class": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler::factory",
 			"services": [
-				"WikibaseClient.EntityIdParser"
+				"WikibaseClient.EntityIdParser",
+				"WikibaseClient.RepoLinker"
 			]
 		},
 		"InfoAction": {
@@ -126,6 +133,7 @@
 			"factory": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler::factory",
 			"services": [
 				"WikibaseClient.EntityIdParser",
+				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Settings"
 			]
 		},
@@ -139,6 +147,7 @@
 			"class": "\\Wikibase\\Client\\Hooks\\MovePageNotice",
 			"factory": "\\Wikibase\\Client\\Hooks\\MovePageNotice::factory",
 			"services": [
+				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Settings"
 			]
 		},
@@ -165,6 +174,7 @@
 			"factory": "\\Wikibase\\Client\\Hooks\\SkinAfterPortletHandler::factory",
 			"services": [
 				"WikibaseClient.EntityIdParser",
+				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Settings"
 			]
 		},
