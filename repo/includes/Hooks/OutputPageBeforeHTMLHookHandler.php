@@ -165,8 +165,8 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	 * @return self
 	 */
 	public static function factory(
-		HttpRequestFactory $httpRequestFactory,
 		Language $contentLanguage,
+		HttpRequestFactory $httpRequestFactory,
 		IBufferingStatsdDataFactory $statsdDataFactory,
 		EntityContentFactory $entityContentFactory,
 		EntityIdParser $entityIdParser,

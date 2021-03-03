@@ -37,7 +37,7 @@ class SpecialEntityUsage extends QueryPage {
 	 */
 	private $entityId = null;
 
-	public function __construct( EntityIdParser $idParser, LanguageConverterFactory $languageConverterFactory ) {
+	public function __construct( LanguageConverterFactory $languageConverterFactory, EntityIdParser $idParser ) {
 		parent::__construct( 'EntityUsage' );
 
 		$this->idParser = $idParser;

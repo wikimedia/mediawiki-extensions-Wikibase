@@ -660,8 +660,8 @@
 			"class": "Wikibase\\Repo\\Hooks\\OutputPageBeforeHTMLHookHandler",
 			"factory": "Wikibase\\Repo\\Hooks\\OutputPageBeforeHTMLHookHandler::factory",
 			"services": [
-				"HttpRequestFactory",
 				"ContentLanguage",
+				"HttpRequestFactory",
 				"StatsdDataFactory",
 				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityIdParser",
