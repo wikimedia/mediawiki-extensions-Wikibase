@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use ContentHandler;
 use FauxRequest;
 use HashSiteStore;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -59,14 +58,6 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		$this->tablesUsed = array_merge( $this->tablesUsed, $tables );
 
 		$this->siteStore = new HashSiteStore();
-	}
-
-	protected function tearDown(): void {
-		parent::tearDown();
-		// Cleaning ContentHandler cache because RepoHooks instantiate
-		// and cache those prior to changing the migration setting
-		// in testFailsAndDisplaysAnError_WhenTryToCreateSecondPropertyWithTheSameLabel
-		ContentHandler::cleanupHandlersCache();
 	}
 
 	protected function newSpecialPage() {
@@ -259,6 +250,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		];
 		$this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
+		$this->resetServices();
 		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-validator-label-with-description-conflict: label1, en, ' );

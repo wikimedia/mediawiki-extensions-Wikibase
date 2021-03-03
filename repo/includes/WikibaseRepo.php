@@ -112,7 +112,6 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
@@ -1135,31 +1134,22 @@ class WikibaseRepo {
 			$maxLength,
 			$languages,
 			self::getEntityIdParser(),
-			$this->getTermsCollisionDetectorFactory(),
+			self::getTermsCollisionDetectorFactory(),
 			$this->getTermLookup()
 		);
 	}
 
-	public function getTermsCollisionDetectorFactory() {
-		$loadBalancerFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$loadBalancer = $loadBalancerFactory->getMainLB();
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
-			MediaWikiServices::getInstance()->getMainWANObjectCache()
-		);
-
-		return new TermsCollisionDetectorFactory(
-			$loadBalancer,
-			$typeIdsStore
-		);
+	public static function getTermsCollisionDetectorFactory( ContainerInterface $services = null ): TermsCollisionDetectorFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.TermsCollisionDetectorFactory' );
 	}
 
 	public function getPropertyTermsCollisionDetector() {
-		return $this->getTermsCollisionDetectorFactory()->getTermsCollisionDetector( Property::ENTITY_TYPE );
+		return self::getTermsCollisionDetectorFactory()->getTermsCollisionDetector( Property::ENTITY_TYPE );
 	}
 
 	public function getItemTermsCollisionDetector() {
-		return $this->getTermsCollisionDetectorFactory()->getTermsCollisionDetector( Item::ENTITY_TYPE );
+		return self::getTermsCollisionDetectorFactory()->getTermsCollisionDetector( Item::ENTITY_TYPE );
 	}
 
 	/**

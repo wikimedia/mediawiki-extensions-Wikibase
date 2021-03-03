@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
-use ContentHandler;
 
 /**
  * @covers \Wikibase\Repo\Api\EditEntity
@@ -29,14 +28,6 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 		$this->tablesUsed[] = 'wbt_item_terms';
 	}
 
-	protected function tearDown(): void {
-		parent::tearDown();
-		// Cleaning ContentHandler cache because RepoHooks instantiate
-		// and cache those prior to changing the migration setting
-		// as part of each test-case
-		ContentHandler::cleanupHandlersCache();
-	}
-
 	public function testNewPropertyLabelConflict() {
 		$expectedFailureCode = 'modification-failed';
 		$params = [
@@ -53,6 +44,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 			'type' => ApiUsageException::class,
 			'code' => $expectedFailureCode,
 		];
+		$this->resetServices();
 		// Repeating the same request with the same label should fail.
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
@@ -92,6 +84,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 			'type' => ApiUsageException::class,
 			'code' => $expectedFailureCode,
 		];
+		$this->resetServices();
 		// Repeating the same request with the same label should fail.
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
@@ -106,6 +99,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 		];
 		$this->doApiRequestWithToken( $params );
 
+		$this->resetServices();
 		// Repeating the same request with the same label should not fail.
 		list( $result, , ) = $this->doApiRequestWithToken( $params );
 		$this->assertArrayHasKey( 'success', $result );
@@ -128,6 +122,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 			'type' => ApiUsageException::class,
 			'code' => $expectedFailureCode,
 		];
+		$this->resetServices();
 		// Repeating the same request with the same label and description should fail.
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
@@ -165,6 +160,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 			'type' => ApiUsageException::class,
 			'code' => 'modification-failed',
 		];
+		$this->resetServices();
 		// Repeating the same request with the same label and description should fail.
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
