@@ -72,12 +72,18 @@ jobs:
             LANG: en
             WB: both
           php-versions: '7.4.15'
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        ports:
+          - 3306:3306
+
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Set up MySQL
-      run: |
-        sudo /etc/init.d/mysql start
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
