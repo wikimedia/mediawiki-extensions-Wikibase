@@ -12,11 +12,9 @@ use Diff\Differ\OrderedListDiffer;
 use Exception;
 use HashBagOStuff;
 use IContextSource;
-use InvalidArgumentException;
 use JobQueueGroup;
 use Language;
 use LogicException;
-use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
@@ -186,11 +184,7 @@ use Wikibase\Repo\Search\Fields\NoFieldDefinitions;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
-use Wikibase\Repo\Store\LoggingIdGenerator;
-use Wikibase\Repo\Store\RateLimitingIdGenerator;
-use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlStore;
-use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
@@ -899,46 +893,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.Settings' );
 	}
 
-	public function newIdGenerator(): IdGenerator {
-		switch ( self::getSettings()->getSetting( 'idGenerator' ) ) {
-			case 'original':
-				$idGenerator = new SqlIdGenerator(
-					MediaWikiServices::getInstance()->getDBLoadBalancer(),
-					self::getSettings()->getSetting( 'reservedIds' ),
-					self::getSettings()->getSetting( 'idGeneratorSeparateDbConnection' )
-				);
-				break;
-			case 'mysql-upsert':
-				// We could make sure the 'upsert' generator is only being used with mysql dbs here,
-				// but perhaps that is an unnecessary check? People will realize when the DB query for
-				// ID selection fails anyway...
-				$idGenerator = new UpsertSqlIdGenerator(
-					MediaWikiServices::getInstance()->getDBLoadBalancer(),
-					self::getSettings()->getSetting( 'reservedIds' ),
-					self::getSettings()->getSetting( 'idGeneratorSeparateDbConnection' )
-				);
-				break;
-			default:
-				throw new InvalidArgumentException(
-					'idGenerator config option must be either \'original\' or \'mysql-upsert\''
-				);
-		}
-
-		if ( self::getSettings()->getSetting( 'idGeneratorRateLimiting' ) ) {
-			$idGenerator = new RateLimitingIdGenerator(
-				$idGenerator,
-				RequestContext::getMain()
-			);
-		}
-
-		if ( self::getSettings()->getSetting( 'idGeneratorLogging' ) ) {
-			$idGenerator = new LoggingIdGenerator(
-				$idGenerator,
-				LoggerFactory::getInstance( 'Wikibase.IdGenerator' )
-			);
-		}
-
-		return $idGenerator;
+	public static function getIdGenerator( ContainerInterface $services = null ): IdGenerator {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.IdGenerator' );
 	}
 
 	/**
@@ -958,7 +915,7 @@ class WikibaseRepo {
 				$this->getEntityIdLookup(),
 				$this->getEntityTitleLookup(),
 				$this->getEntityNamespaceLookup(),
-				$this->newIdGenerator(),
+				self::getIdGenerator(),
 				$this->getWikibaseServices(),
 				$localEntitySource
 			);

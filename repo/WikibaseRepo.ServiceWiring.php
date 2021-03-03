@@ -48,6 +48,11 @@ use Wikibase\Repo\Notifications\RepoEntityChange;
 use Wikibase\Repo\Notifications\RepoItemChange;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
+use Wikibase\Repo\Store\IdGenerator;
+use Wikibase\Repo\Store\LoggingIdGenerator;
+use Wikibase\Repo\Store\RateLimitingIdGenerator;
+use Wikibase\Repo\Store\Sql\SqlIdGenerator;
+use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -203,6 +208,50 @@ return [
 		$services->getHookContainer()->run( 'WikibaseRepoEntityTypes', [ &$entityTypes ] );
 
 		return new EntityTypeDefinitions( $entityTypes );
+	},
+
+	'WikibaseRepo.IdGenerator' => function ( MediaWikiServices $services ): IdGenerator {
+		$settings = WikibaseRepo::getSettings( $services );
+
+		switch ( $settings->getSetting( 'idGenerator' ) ) {
+			case 'original':
+				$idGenerator = new SqlIdGenerator(
+					$services->getDBLoadBalancer(),
+					$settings->getSetting( 'reservedIds' ),
+					$settings->getSetting( 'idGeneratorSeparateDbConnection' )
+				);
+				break;
+			case 'mysql-upsert':
+				// We could make sure the 'upsert' generator is only being used with mysql dbs here,
+				// but perhaps that is an unnecessary check? People will realize when the DB query for
+				// ID selection fails anyway...
+				$idGenerator = new UpsertSqlIdGenerator(
+					$services->getDBLoadBalancer(),
+					$settings->getSetting( 'reservedIds' ),
+					$settings->getSetting( 'idGeneratorSeparateDbConnection' )
+				);
+				break;
+			default:
+				throw new InvalidArgumentException(
+					'idGenerator config option must be either \'original\' or \'mysql-upsert\''
+				);
+		}
+
+		if ( $settings->getSetting( 'idGeneratorRateLimiting' ) ) {
+			$idGenerator = new RateLimitingIdGenerator(
+				$idGenerator,
+				RequestContext::getMain()
+			);
+		}
+
+		if ( $settings->getSetting( 'idGeneratorLogging' ) ) {
+			$idGenerator = new LoggingIdGenerator(
+				$idGenerator,
+				LoggerFactory::getInstance( 'Wikibase.IdGenerator' )
+			);
+		}
+
+		return $idGenerator;
 	},
 
 	'WikibaseRepo.KartographerEmbeddingHandler' => function ( MediaWikiServices $services ): ?CachingKartographerEmbeddingHandler {

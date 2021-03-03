@@ -309,8 +309,6 @@ return [
 	 *
 	 * @var string 'original' or 'mysql-upsert' depending on what implementation of IdGenerator
 	 * you wish to use.
-	 *
-	 * @see \Wikibase\Repo\WikibaseRepo::newIdGenerator
 	 */
 	'idGenerator' => 'original',
 
@@ -319,7 +317,6 @@ return [
 	 *
 	 * @var bool
 	 * @see https://phabricator.wikimedia.org/T213817
-	 * @see \Wikibase\Repo\WikibaseRepo::newIdGenerator
 	 */
 	'idGeneratorSeparateDbConnection' => false,
 
@@ -328,7 +325,6 @@ return [
 	 *
 	 * @var bool
 	 * @see https://phabricator.wikimedia.org/T268625
-	 * @see \Wikibase\Repo\WikibaseRepo::newIdGenerator
 	 */
 	'idGeneratorLogging' => false,
 
@@ -337,7 +333,6 @@ return [
 	 *
 	 * @var bool
 	 * @see https://phabricator.wikimedia.org/T272032
-	 * @see \Wikibase\Repo\WikibaseRepo::newIdGenerator
 	 */
 	'idGeneratorRateLimiting' => false,
 
