@@ -10,6 +10,7 @@ use WANObjectCache;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\StringNormalizer;
 use Wikimedia\Rdbms\LBFactory;
@@ -42,9 +43,13 @@ class TermStoreWriterFactoryTest extends TestCase {
 		string $method,
 		$expected
 	) {
+		$databaseTypeIdsStore = $this->createMock( DatabaseTypeIdsStore::class );
 		$factory = new TermStoreWriterFactory(
 			$entitySource,
 			$this->createMock( StringNormalizer::class ),
+			$databaseTypeIdsStore,
+			$databaseTypeIdsStore,
+			$databaseTypeIdsStore,
 			$this->getBasicStubLBFactory(),
 			$this->createMock( WANObjectCache::class ),
 			$this->createMock( JobQueueGroup::class ),
