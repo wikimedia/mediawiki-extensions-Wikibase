@@ -10,8 +10,10 @@ use ArrayAccess;
 use InvalidArgumentException;
 use LogicException;
 use MediaWiki\Permissions\PermissionManager;
+use MediaWiki\Revision\RevisionLookup;
 use OutOfBoundsException;
 use Status;
+use TitleFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -23,6 +25,7 @@ use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
 
 /**
@@ -90,14 +93,25 @@ class EntitySavingHelper extends EntityLoadingHelper {
 
 	public function __construct(
 		ApiBase $apiModule,
+		RevisionLookup $revisionLookup,
+		TitleFactory $titleFactory,
 		EntityIdParser $idParser,
 		EntityRevisionLookup $entityRevisionLookup,
+		EntityTitleStoreLookup $entityTitleStoreLookup,
 		ApiErrorReporter $errorReporter,
 		SummaryFormatter $summaryFormatter,
 		MediawikiEditEntityFactory $editEntityFactory,
 		PermissionManager $permissionManager
 	) {
-		parent::__construct( $apiModule, $idParser, $entityRevisionLookup, $errorReporter );
+		parent::__construct(
+			$apiModule,
+			$revisionLookup,
+			$titleFactory,
+			$idParser,
+			$entityRevisionLookup,
+			$entityTitleStoreLookup,
+			$errorReporter
+		);
 
 		$this->summaryFormatter = $summaryFormatter;
 		$this->editEntityFactory = $editEntityFactory;
@@ -175,13 +189,6 @@ class EntitySavingHelper extends EntityLoadingHelper {
 
 		$new = $params['new'] ?? null;
 		if ( $entityRevision === null ) {
-			if ( $baseRev > 0 ) {
-				$this->errorReporter->dieError(
-					'Could not find revision ' . $baseRev,
-					'nosuchrevid'
-				);
-			}
-
 			if ( !$this->isEntityCreationSupported() ) {
 				if ( !$entityId ) {
 					$this->errorReporter->dieError(

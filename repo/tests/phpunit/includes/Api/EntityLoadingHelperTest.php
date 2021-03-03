@@ -5,8 +5,12 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiBase;
 use ApiUsageException;
 use Exception;
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionLookup;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
+use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -19,6 +23,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\EntityLoadingHelper;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 
 /**
  * @covers \Wikibase\Repo\Api\EntityLoadingHelper
@@ -46,6 +51,20 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $params );
 
 		return $apiBase;
+	}
+
+	protected function getMockRevisionLookup( ?int $revisionId, ?RevisionRecord $revision ): RevisionLookup {
+		$revisionLookup = $this->createMock( RevisionLookup::class );
+		if ( $revisionId !== null ) {
+			$revisionLookup->method( 'getRevisionById' )
+				->with( $revisionId )
+				->willReturn( $revision );
+		} else {
+			$this->assertNull( $revision );
+			$revisionLookup->expects( $this->never() )
+				->method( 'getRevisionById' );
+		}
+		return $revisionLookup;
 	}
 
 	/**
@@ -78,6 +97,23 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 		}
 
 		return $mock;
+	}
+
+	protected function getMockEntityTitleStoreLookup(
+		?EntityId $entityId,
+		?Title $title
+	): EntityTitleStoreLookup {
+		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
+		if ( $entityId !== null ) {
+			$entityTitleStoreLookup->method( 'getTitleForId' )
+				->with( $entityId )
+				->willReturn( $title );
+		} else {
+			$this->assertNull( $title );
+			$entityTitleStoreLookup->expects( $this->never() )
+				->method( 'getTitleForId' );
+		}
+		return $entityTitleStoreLookup;
 	}
 
 	/**
@@ -138,21 +174,35 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 	 * @param array $config Associative configuration array. Known keys:
 	 *   - params: request parameters, as an associative array
 	 *   - entityId: The ID expected by getEntityRevisions
-	 *   - revision: EntityRevision to return from getEntityRevisions
+	 *   - entityRevision: EntityRevision to return from getEntityRevisions
 	 *   - exception: Exception to throw from getEntityRevisions
+	 *   - revisionId: The ID expected by RevisionLookup
+	 *   - revision: RevisionRecord to return from RevisionLookup
+	 *   - entityTitle: Title to return from EntityTitleStoreLookup
 	 *   - dieErrorCode: The error code expected by dieError
 	 *   - dieExceptionCode: The error code expected by dieException
 	 *
 	 * @return EntityLoadingHelper
 	 */
 	protected function newEntityLoadingHelper( array $config ) {
+		$services = MediaWikiServices::getInstance();
+
 		return new EntityLoadingHelper(
 			$this->getMockApiBase( $config['params'] ?? [] ),
+			$this->getMockRevisionLookup(
+				$config['revisionId'] ?? null,
+				$config['revision'] ?? null
+			),
+			$services->getTitleFactory(),
 			new ItemIdParser(),
 			$this->getMockEntityRevisionLookup(
 				$config['entityId'] ?? null,
-				$config['revision'] ?? null,
+				$config['entityRevision'] ?? null,
 				$config['exception'] ?? null
+			),
+			$this->getMockEntityTitleStoreLookup(
+				$config['entityId'] ?? null,
+				$config['entityTitle'] ?? null
 			),
 			$this->getMockErrorReporter(
 				$config['dieExceptionCode'] ?? null,
@@ -168,7 +218,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 
 		$helper = $this->newEntityLoadingHelper( [
 			'entityId' => $id,
-			'revision' => $revision,
+			'entityRevision' => $revision,
 		] );
 		$return = $helper->loadEntity( $id );
 
@@ -184,7 +234,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 		$helper = $this->newEntityLoadingHelper( [
 			'params' => $params,
 			'entityId' => $id,
-			'revision' => $revision,
+			'entityRevision' => $revision,
 		] );
 		$return = $helper->loadEntity();
 
@@ -200,7 +250,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 		$helper = $this->newEntityLoadingHelper( [
 			'params' => $params,
 			'entityId' => $id,
-			'revision' => $revision,
+			'entityRevision' => $revision,
 		] );
 
 		$entityByLinkedTitleLookup = $this->createMock( EntityByLinkedTitleLookup::class );
@@ -264,13 +314,15 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 		$helper->loadEntity( $id );
 	}
 
-	public function testLoadEntity_BadRevisionException() {
+	public function testLoadEntity_BadRevisionException_missingRevision() {
 		$id = new ItemId( 'Q1' );
 
 		$helper = $this->newEntityLoadingHelper( [
 			'entityId' => $id,
+			'revisionId' => 0,
+			'revision' => null,
 			'exception' => new BadRevisionException(),
-			'dieExceptionCode' => 'nosuchrevid'
+			'dieExceptionCode' => 'nosuchrevid',
 		] );
 
 		$this->expectException( ApiUsageException::class );

@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiUsageException;
 use LogicException;
+use MediaWiki\Revision\RevisionLookup;
+use TitleFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -16,6 +18,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -32,6 +35,12 @@ class EntityLoadingHelper {
 	 */
 	protected $apiModule;
 
+	/** @var RevisionLookup */
+	protected $revisionLookup;
+
+	/** @var TitleFactory */
+	protected $titleFactory;
+
 	/**
 	 * @var EntityIdParser
 	 */
@@ -41,6 +50,9 @@ class EntityLoadingHelper {
 	 * @var EntityRevisionLookup
 	 */
 	protected $entityRevisionLookup;
+
+	/** @var EntityTitleStoreLookup */
+	protected $entityTitleStoreLookup;
 
 	/**
 	 * @var ApiErrorReporter
@@ -64,13 +76,19 @@ class EntityLoadingHelper {
 
 	public function __construct(
 		ApiBase $apiModule,
+		RevisionLookup $revisionLookup,
+		TitleFactory $titleFactory,
 		EntityIdParser $idParser,
 		EntityRevisionLookup $entityRevisionLookup,
+		EntityTitleStoreLookup $entityTitleStoreLookup,
 		ApiErrorReporter $errorReporter
 	) {
 		$this->apiModule = $apiModule;
+		$this->revisionLookup = $revisionLookup;
+		$this->titleFactory = $titleFactory;
 		$this->idParser = $idParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
+		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
 		$this->errorReporter = $errorReporter;
 	}
 
@@ -145,7 +163,13 @@ class EntityLoadingHelper {
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$this->errorReporter->dieException( $ex, 'unresolved-redirect' );
 		} catch ( BadRevisionException $ex ) {
-			$this->errorReporter->dieException( $ex, 'nosuchrevid' );
+			if ( $this->revisionIdMatchesEntityId( $revId, $entityId ) ) {
+				// the revision exists and matches the entity ID, but stores no entity –
+				// treat as missing entity, not as bad revision ID error
+				return null;
+			} else {
+				$this->errorReporter->dieException( $ex, 'nosuchrevid' );
+			}
 		} catch ( StorageException $ex ) {
 			$this->errorReporter->dieException( $ex, 'cant-load-entity-content' );
 		}
@@ -242,6 +266,30 @@ class EntityLoadingHelper {
 		}
 
 		return $entityId;
+	}
+
+	/**
+	 * Whether the specified revision could theoretically contain the specified entity.
+	 *
+	 * This method is used when the EntityRevisionLookup has already reported that the revision does not actually contain that entity,
+	 * to decide whether that should be reported as a “bad revision” error (e.g. no such revision, belongs to a non-entity page, etc.)
+	 * or a “no such entity” condition (e.g. entity type stored in non-main slot and revision happens to contain no such slot).
+	 *
+	 * @param int $revId
+	 * @param EntityId $entityId
+	 * @return bool
+	 */
+	private function revisionIdMatchesEntityId( int $revId, EntityId $entityId ): bool {
+		$revision = $this->revisionLookup->getRevisionById( $revId );
+		if ( !$revision ) {
+			return false;
+		}
+		$revisionTitle = $this->titleFactory->newFromLinkTarget( $revision->getPageAsLinkTarget() );
+		$entityTitle = $this->entityTitleStoreLookup->getTitleForId( $entityId );
+		// Note: The $entityTitle may have a fragment!
+		// Title::equals() is the method that ignores it, which we want.
+		// Do not simply replace this with isSamePageAs() or isSameLinkAs().
+		return $entityTitle !== null && $revisionTitle->equals( $entityTitle );
 	}
 
 }

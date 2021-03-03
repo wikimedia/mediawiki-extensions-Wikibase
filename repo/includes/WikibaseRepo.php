@@ -1611,6 +1611,8 @@ class WikibaseRepo {
 	 * @return ApiHelperFactory
 	 */
 	public function getApiHelperFactory( IContextSource $context ) {
+		$services = MediaWikiServices::getInstance();
+
 		return new ApiHelperFactory(
 			$this->getEntityTitleLookup(),
 			$this->getExceptionLocalizer(),
@@ -1622,7 +1624,9 @@ class WikibaseRepo {
 			$this->getBaseDataModelSerializerFactory(),
 			$this->getAllTypesEntitySerializer(),
 			self::getEntityIdParser(),
-			MediaWikiServices::getInstance()->getPermissionManager(),
+			$services->getPermissionManager(),
+			$services->getRevisionLookup(),
+			$services->getTitleFactory(),
 			$this->getStore()->getEntityByLinkedTitleLookup(),
 			$this->getEntityFactory(),
 			$this->getEntityStore()

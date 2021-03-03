@@ -46,6 +46,8 @@ class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
+		$services = MediaWikiServices::getInstance();
+
 		return new ApiHelperFactory(
 			$this->createMock( EntityTitleStoreLookup::class ),
 			$this->createMock( ExceptionLocalizer::class ),
@@ -57,7 +59,9 @@ class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
 			$serializerFactory,
 			$this->createMock( Serializer::class ),
 			new ItemIdParser(),
-			MediaWikiServices::getInstance()->getPermissionManager()
+			$services->getPermissionManager(),
+			$services->getRevisionLookup(),
+			$services->getTitleFactory()
 		);
 	}
 
