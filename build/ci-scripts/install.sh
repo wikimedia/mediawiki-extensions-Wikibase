@@ -42,7 +42,7 @@ php maintenance/install.php \
     --dbtype $DBTYPE \
     --dbserver 127.0.0.1 \
     --dbuser root \
-    --dbname its_a_mw \
+    --dbpass root \
     --dbpath $(pwd) \
     --pass shie3Ekutaiy5Giebuwi \
     TravisWiki admin
