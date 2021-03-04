@@ -3,6 +3,7 @@
 		"authors": [
 			"Arystanbek",
 			"Fontan 030",
+			"Hedeyohu22",
 			"Нұрлан Рахымжанов"
 		]
 	},
@@ -53,5 +54,6 @@
 	"wikibase-otherprojects-beta-message": "Басқа жобалар бүйірлік тақтасы",
 	"wikibase-otherprojects-beta-description": "Бүйірлік тақтаға «{{int:wikibase-otherprojects}}» бөлімін қосу, ол {{WBREPONAME}} деректеріне негізделген Уикимедиа жобаларының сілтемелерін береді.",
 	"wikibase-sitelinks-sitename-columnheading": "Тіл",
-	"wikibase-sitelinks-link-columnheading": "Сілтенген бет"
+	"wikibase-sitelinks-link-columnheading": "Сілтенген бет",
+	"wikibase-client-data-bridge-error-report": "<p> Егер қате қайталана берсе, әрекеттеріңізді сипаттап осы мәселені келесі ақпаратты [$1қосып хабарлаңыз]: </p>\n\n<ul>\n<li>$2</li>\n<li>$3 / $4</li>\n<li>Қате коды: $5</li>\n</ul>"
 }
