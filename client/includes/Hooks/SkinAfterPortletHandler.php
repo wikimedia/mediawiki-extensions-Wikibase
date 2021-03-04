@@ -6,6 +6,7 @@ use Action;
 use MediaWiki\Skins\Hook\SkinAfterPortletHook;
 use Skin;
 use Wikibase\Client\RepoItemLinkGenerator;
+use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\SettingsArray;
@@ -31,6 +32,7 @@ class SkinAfterPortletHandler implements SkinAfterPortletHook {
 
 	public static function factory(
 		EntityIdParser $entityIdParser,
+		RepoLinker $repoLinker,
 		SettingsArray $clientSettings
 	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
@@ -38,7 +40,7 @@ class SkinAfterPortletHandler implements SkinAfterPortletHook {
 		return new self(
 			new RepoItemLinkGenerator(
 				$wikibaseClient->getNamespaceChecker(),
-				$wikibaseClient->newRepoLinker(),
+				$repoLinker,
 				$entityIdParser,
 				$wikibaseClient->getLangLinkSiteGroup(),
 				$clientSettings->getSetting( 'siteGlobalID' )

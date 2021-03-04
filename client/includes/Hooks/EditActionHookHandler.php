@@ -58,7 +58,8 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 	}
 
 	public static function factory(
-		EntityIdParser $idParser
+		EntityIdParser $idParser,
+		RepoLinker $repoLinker
 	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
@@ -70,7 +71,7 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 		);
 
 		return new self(
-			$wikibaseClient->newRepoLinker(),
+			$repoLinker,
 			$usageLookup,
 			$labelDescriptionLookupFactory,
 			$idParser

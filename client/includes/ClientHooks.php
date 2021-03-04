@@ -105,7 +105,7 @@ final class ClientHooks {
 		}
 
 		if ( $entityId !== null ) {
-			$repoLinker = $wbClient->newRepoLinker();
+			$repoLinker = WikibaseClient::getRepoLinker();
 
 			return [
 				'id' => 't-wikibase',
@@ -196,7 +196,7 @@ final class ClientHooks {
 
 		$handler = new SkinAfterBottomScriptsHandler(
 			$client->getContentLanguage()->getCode(),
-			$client->newRepoLinker(),
+			WikibaseClient::getRepoLinker(),
 			$client->getTermLookup(),
 			MediaWikiServices::getInstance()->getRevisionLookup()
 		);

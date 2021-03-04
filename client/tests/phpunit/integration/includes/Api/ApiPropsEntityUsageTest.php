@@ -162,7 +162,7 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 		$module = new ApiPropsEntityUsage(
 			$this->getQueryModule( $params, $titles ),
 			'entityusage',
-			WikibaseClient::getDefaultInstance()->newRepoLinker()
+			WikibaseClient::getRepoLinker()
 		);
 
 		$module->execute();

@@ -121,7 +121,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 	 * @return array[]
 	 */
 	private function callApiModule( array $params ) {
-		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
+		$repoLinker = WikibaseClient::getRepoLinker();
 		$module = new ApiListEntityUsage(
 			$this->getQueryModule( $params ),
 			'entityusage',

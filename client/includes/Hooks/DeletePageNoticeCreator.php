@@ -49,11 +49,11 @@ class DeletePageNoticeCreator implements ArticleDeleteAfterSuccessHook {
 	}
 
 	public static function factory(
+		RepoLinker $repoLinker,
 		SettingsArray $clientSettings
 	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
-		$repoLinker = $wikibaseClient->newRepoLinker();
 
 		return new self(
 			$siteLinkLookup,

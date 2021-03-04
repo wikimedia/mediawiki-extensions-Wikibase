@@ -15,6 +15,7 @@ use UnexpectedValueException;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
+use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\SettingsArray;
@@ -50,6 +51,7 @@ class ChangesListLinesHandler implements
 	public static function factory(
 		UserNameUtils $userNameUtils,
 		EntityIdParser $entityIdParser,
+		RepoLinker $repoLinker,
 		SettingsArray $clientSettings
 	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
@@ -59,7 +61,7 @@ class ChangesListLinesHandler implements
 			$entityIdParser
 		);
 		$formatter = new ChangeLineFormatter(
-			$wikibaseClient->newRepoLinker(),
+			$repoLinker,
 			$userNameUtils
 		);
 

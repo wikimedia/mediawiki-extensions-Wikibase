@@ -501,15 +501,14 @@ final class WikibaseClient {
 		return $this->getWikibaseServices()->getStringNormalizer();
 	}
 
-	public function newRepoLinker(): RepoLinker {
-		$settings = self::getSettings();
+	public static function getRepoLinker( ContainerInterface $services = null ): RepoLinker {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.RepoLinker' );
+	}
 
-		return new RepoLinker(
-			self::getEntitySourceDefinitions(),
-			$settings->getSetting( 'repoUrl' ),
-			$settings->getSetting( 'repoArticlePath' ),
-			$settings->getSetting( 'repoScriptPath' )
-		);
+	// compatibility alias for ArticlePlaceholder; TODO remove!
+	public static function newRepoLinker() {
+		return self::getRepoLinker();
 	}
 
 	public function getLanguageFallbackChainFactory(): LanguageFallbackChainFactory {
