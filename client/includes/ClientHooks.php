@@ -101,7 +101,7 @@ final class ClientHooks {
 		) {
 			// Try to load the item ID from Database, but only do so on non-article views,
 			// (where the article's OutputPage isn't available to us).
-			$entityId = self::getEntityIdForTitle( $title, $wbClient );
+			$entityId = self::getEntityIdForTitle( $title );
 		}
 
 		if ( $entityId !== null ) {
@@ -119,16 +119,14 @@ final class ClientHooks {
 
 	/**
 	 * @param Title $title
-	 * @param WikibaseClient $wbClient
-	 *
 	 * @return EntityId|null
 	 */
-	private static function getEntityIdForTitle( Title $title, WikibaseClient $wbClient ): ?EntityId {
+	private static function getEntityIdForTitle( Title $title ): ?EntityId {
 		if ( !self::isWikibaseEnabled( $title->getNamespace() ) ) {
 			return null;
 		}
 
-		$entityIdLookup = $wbClient->getEntityIdLookup();
+		$entityIdLookup = WikibaseClient::getEntityIdLookup();
 		return $entityIdLookup->getEntityIdForTitle( $title );
 	}
 

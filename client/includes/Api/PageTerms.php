@@ -52,10 +52,12 @@ class PageTerms extends ApiQueryBase {
 		$this->idLookup = $idLookup;
 	}
 
-	public static function factory( ApiQuery $apiQuery, string $moduleName ): self {
-		$client = WikibaseClient::getDefaultInstance();
-		$termBuffer = $client->getTermBuffer();
-		$entityIdLookup = $client->getEntityIdLookup();
+	public static function factory(
+		ApiQuery $apiQuery,
+		string $moduleName,
+		EntityIdLookup $entityIdLookup
+	): self {
+		$termBuffer = WikibaseClient::getDefaultInstance()->getTermBuffer();
 
 		return new self(
 			$termBuffer,

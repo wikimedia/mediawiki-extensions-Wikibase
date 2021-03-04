@@ -14,7 +14,9 @@ use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -25,6 +27,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
@@ -73,6 +76,18 @@ return [
 		return new EntityIdComposer(
 			WikibaseClient::getEntityTypeDefinitions( $services )
 				->get( EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK )
+		);
+	},
+
+	'WikibaseClient.EntityIdLookup' => function ( MediaWikiServices $services ): EntityIdLookup {
+		$entityTypeDefinitions = WikibaseClient::getEntityTypeDefinitions( $services );
+		return new ByTypeDispatchingEntityIdLookup(
+			$entityTypeDefinitions->get( EntityTypeDefinitions::CONTENT_MODEL_ID ),
+			$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_ID_LOOKUP_CALLBACK ),
+			new PagePropsEntityIdLookup(
+				$services->getDBLoadBalancer(),
+				WikibaseClient::getEntityIdParser( $services )
+			)
 		);
 	},
 
