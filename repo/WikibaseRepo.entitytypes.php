@@ -78,8 +78,7 @@ return [
 			);
 		},
 		Def::META_TAGS_CREATOR_CALLBACK => function ( $userLanguage ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
+			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
 			$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage( $userLanguage );
 			return new FingerprintableEntityMetaTagsCreator( $languageFallbackChain );
 		},
@@ -148,7 +147,7 @@ return [
 							WikibaseRepo::getEntityIdParser(),
 							new LanguageFallbackLabelDescriptionLookup(
 								$repo->getTermLookup(),
-								$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+								WikibaseRepo::getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
 							),
 							$repo->getEntityTypeToRepositoryMapping()
 						),
@@ -206,8 +205,7 @@ return [
 			);
 		},
 		Def::META_TAGS_CREATOR_CALLBACK => function ( Language $userLanguage ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
+			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
 			$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage( $userLanguage );
 			return new FingerprintableEntityMetaTagsCreator( $languageFallbackChain );
 		},
@@ -248,7 +246,7 @@ return [
 							WikibaseRepo::getEntityIdParser(),
 							new LanguageFallbackLabelDescriptionLookup(
 								$repo->getTermLookup(),
-								$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+								WikibaseRepo::getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
 							),
 							$repo->getEntityTypeToRepositoryMapping()
 						),

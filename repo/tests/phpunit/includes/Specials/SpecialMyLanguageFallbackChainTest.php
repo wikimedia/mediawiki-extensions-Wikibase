@@ -23,7 +23,7 @@ class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage(): SpecialMyLanguageFallbackChain {
 		return new SpecialMyLanguageFallbackChain(
-			WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
+			WikibaseRepo::getLanguageFallbackChainFactory()
 		);
 	}
 

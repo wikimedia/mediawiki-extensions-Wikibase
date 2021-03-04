@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -19,6 +20,8 @@ class ValueFormatterFactoryTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$this->mockService( 'WikibaseRepo.DataTypeDefinitions',
 			new DataTypeDefinitions( [] ) );
+		$this->mockService( 'WikibaseRepo.LanguageFallbackChainFactory',
+			new LanguageFallbackChainFactory() );
 
 		$this->assertInstanceOf(
 			OutputFormatValueFormatterFactory::class,

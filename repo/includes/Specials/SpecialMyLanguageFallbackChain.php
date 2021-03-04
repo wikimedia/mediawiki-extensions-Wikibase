@@ -11,7 +11,6 @@ use Language;
 use SpecialPage;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\TermLanguageFallbackChain;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Page for displaying the current language fallback chain for debugging.
@@ -37,12 +36,6 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 		parent::__construct( 'MyLanguageFallbackChain' );
 
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
-	}
-
-	public static function factory(): self {
-		return new self(
-			WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
-		);
 	}
 
 	/** @inheritDoc */

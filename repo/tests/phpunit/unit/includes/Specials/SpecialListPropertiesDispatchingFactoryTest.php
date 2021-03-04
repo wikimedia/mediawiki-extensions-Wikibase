@@ -9,6 +9,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
 use Wikibase\Repo\Specials\SpecialListProperties;
 use Wikibase\Repo\Specials\SpecialListPropertiesDispatchingFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Specials\SpecialListPropertiesDispatchingFactory
@@ -23,6 +24,7 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 	public function testFactoryNoFederation() {
 		$specialPage = SpecialListPropertiesDispatchingFactory::factory(
 			new DataTypeFactory( [] ),
+			WikibaseRepo::getLanguageFallbackChainFactory(),
 			new SettingsArray( [
 				'federatedPropertiesEnabled' => true,
 				'federatedPropertiesSourceScriptUrl' => 'https://wiki.example/w/',
@@ -35,6 +37,7 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 	public function testFactoryFederation() {
 		$specialPage = SpecialListPropertiesDispatchingFactory::factory(
 			new DataTypeFactory( [] ),
+			WikibaseRepo::getLanguageFallbackChainFactory(),
 			new SettingsArray( [ 'federatedPropertiesEnabled' => false ] )
 		);
 

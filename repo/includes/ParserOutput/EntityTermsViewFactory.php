@@ -7,7 +7,6 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
@@ -97,7 +96,7 @@ class EntityTermsViewFactory {
 		$repoSettings = WikibaseRepo::getSettings( $services );
 
 		return new TermboxView(
-			new LanguageFallbackChainFactory(),
+			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
 			new TermboxRemoteRenderer(
 				$services->getHttpRequestFactory(),
 				$repoSettings->getSetting( 'ssrServerUrl' ),

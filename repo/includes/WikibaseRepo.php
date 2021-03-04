@@ -854,11 +854,9 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return LanguageFallbackChainFactory
-	 */
-	public function getLanguageFallbackChainFactory() {
-		return $this->getWikibaseServices()->getLanguageFallbackChainFactory();
+	public static function getLanguageFallbackChainFactory( ContainerInterface $services = null ): LanguageFallbackChainFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.LanguageFallbackChainFactory' );
 	}
 
 	/**
@@ -866,7 +864,7 @@ class WikibaseRepo {
 	 */
 	public function getLanguageFallbackLabelDescriptionLookupFactory() {
 		return new LanguageFallbackLabelDescriptionLookupFactory(
-			$this->getLanguageFallbackChainFactory(),
+			self::getLanguageFallbackChainFactory(),
 			$this->getTermLookup(),
 			$this->getTermBuffer()
 		);
@@ -1059,7 +1057,7 @@ class WikibaseRepo {
 		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
 			$formatterFactoryCBs,
 			$this->getContentLanguage(),
-			new LanguageFallbackChainFactory()
+			self::getLanguageFallbackChainFactory()
 		);
 
 		// Create a new SnakFormatterFactory based on the specialized ValueFormatterFactory.
@@ -1678,7 +1676,7 @@ class WikibaseRepo {
 			$this->getEntityViewFactory(),
 			$this->getEntityMetaTagsCreatorFactory(),
 			$this->getEntityTitleLookup(),
-			$this->getLanguageFallbackChainFactory(),
+			self::getLanguageFallbackChainFactory(),
 			TemplateFactory::getDefaultInstance(),
 			$this->getEntityDataFormatProvider(),
 			// FIXME: Should this be done for all usages of this lookup, or is the impact of

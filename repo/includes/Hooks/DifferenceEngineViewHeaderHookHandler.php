@@ -55,11 +55,13 @@ class DifferenceEngineViewHeaderHookHandler implements DifferenceEngineViewHeade
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		LanguageFallbackChainFactory $languageFallbackChainFactory
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$wikibaseRepo->inFederatedPropertyMode(),
-			$wikibaseRepo->getLanguageFallbackChainFactory(),
+			$languageFallbackChainFactory,
 			$wikibaseRepo->getLinkTargetEntityIdLookup(),
 			new SummaryParsingPrefetchHelper( $wikibaseRepo->getPrefetchingTermLookup() )
 		);
