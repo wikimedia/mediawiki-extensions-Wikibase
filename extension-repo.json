@@ -236,6 +236,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialNewProperty::factory",
 			"services": [
 				"WikibaseRepo.DataTypeFactory",
+				"WikibaseRepo.PropertyTermsCollisionDetector",
 				"WikibaseRepo.Settings"
 			]
 		},

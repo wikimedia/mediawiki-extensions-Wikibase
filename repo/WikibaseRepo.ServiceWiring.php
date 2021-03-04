@@ -22,6 +22,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -56,6 +57,7 @@ use Wikibase\Repo\Store\LoggingIdGenerator;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
+use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -331,6 +333,11 @@ return [
 
 	'WikibaseRepo.Logger' => function ( MediaWikiServices $services ): LoggerInterface {
 		return LoggerFactory::getInstance( 'Wikibase' );
+	},
+
+	'WikibaseRepo.PropertyTermsCollisionDetector' => function ( MediaWikiServices $services ): TermsCollisionDetector {
+		return WikibaseRepo::getTermsCollisionDetectorFactory( $services )
+			->getTermsCollisionDetector( Property::ENTITY_TYPE );
 	},
 
 	'WikibaseRepo.PropertyValueExpertsModule' => function ( MediaWikiServices $services ): PropertyValueExpertsModule {

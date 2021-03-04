@@ -185,6 +185,7 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\Sql\SqlStore;
 use Wikibase\Repo\Store\Store;
+use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
 use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
@@ -1134,8 +1135,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.TermsCollisionDetectorFactory' );
 	}
 
-	public function getPropertyTermsCollisionDetector() {
-		return self::getTermsCollisionDetectorFactory()->getTermsCollisionDetector( Property::ENTITY_TYPE );
+	public static function getPropertyTermsCollisionDetector( ContainerInterface $services = null ): TermsCollisionDetector {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.PropertyTermsCollisionDetector' );
 	}
 
 	public function getItemTermsCollisionDetector() {

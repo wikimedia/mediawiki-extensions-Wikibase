@@ -52,7 +52,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getDataTypeFactory(),
-			$wikibaseRepo->getPropertyTermsCollisionDetector()
+			WikibaseRepo::getPropertyTermsCollisionDetector()
 		);
 	}
 
