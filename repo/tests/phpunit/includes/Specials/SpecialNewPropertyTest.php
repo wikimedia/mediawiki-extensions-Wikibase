@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use ContentHandler;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -41,14 +40,6 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 			'wbt_item_terms'
 		];
 		$this->tablesUsed = array_merge( $this->tablesUsed, $tables );
-	}
-
-	protected function tearDown(): void {
-		parent::tearDown();
-		// Cleaning ContentHandler cache because RepoHooks instantiate
-		// and cache those prior to changing the migration setting
-		// in testFailsAndDisplaysAnError_WhenTryToCreateSecondPropertyWithTheSameLabel
-		ContentHandler::cleanupHandlersCache();
 	}
 
 	protected function newSpecialPage() {
@@ -112,6 +103,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 		];
 		$this->executeSpecialPage( '', new \FauxRequest( $formData, true ) );
 
+		$this->resetServices();
 		list( $html ) = $this->executeSpecialPage( '', new \FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-validator-label-conflict: label, en, ' );
