@@ -47,8 +47,6 @@ class SnakSerializationRendererTest extends \PHPUnit\Framework\TestCase {
 	 * @return SnakSerializationRenderer
 	 */
 	private function getSnakRenderer() {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 		$snakFormatter->method( 'formatSnak' )
 			->willReturnCallback( function ( PropertyValueSnak $snak ) {
@@ -62,8 +60,9 @@ class SnakSerializationRendererTest extends \PHPUnit\Framework\TestCase {
 		$snakFormatter->method( 'getFormat' )
 			->willReturn( SnakFormatter::FORMAT_PLAIN );
 
-		$snakDeserializer = $wikibaseClient->getBaseDataModelDeserializerFactory()->newSnakDeserializer();
-		$snaksDeserializer = $wikibaseClient->getBaseDataModelDeserializerFactory()->newSnakListDeserializer();
+		$deserializerFactory = WikibaseClient::getBaseDataModelDeserializerFactory();
+		$snakDeserializer = $deserializerFactory->newSnakDeserializer();
+		$snaksDeserializer = $deserializerFactory->newSnakListDeserializer();
 
 		return new SnakSerializationRenderer(
 			$snakFormatter,

@@ -26,7 +26,6 @@ use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
@@ -295,11 +294,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame(
 			WikibaseClient::getDefaultInstance(),
 			WikibaseClient::getDefaultInstance() );
-	}
-
-	public function testGetExternalFormatDeserializerFactory() {
-		$deserializerFactory = $this->getWikibaseClient()->getBaseDataModelDeserializerFactory();
-		$this->assertInstanceOf( DeserializerFactory::class, $deserializerFactory );
 	}
 
 	public function testGetInternalFormatStatementDeserializer() {

@@ -17,6 +17,7 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -35,6 +36,13 @@ use Wikibase\Lib\WikibaseSettings;
 
 /** @phpcs-require-sorted-array */
 return [
+
+	'WikibaseClient.BaseDataModelDeserializerFactory' => function ( MediaWikiServices $services ): DeserializerFactory {
+		return new DeserializerFactory(
+			WikibaseClient::getDataValueDeserializer( $services ),
+			WikibaseClient::getEntityIdParser( $services )
+		);
+	},
 
 	'WikibaseClient.DataTypeDefinitions' => function ( MediaWikiServices $services ): DataTypeDefinitions {
 		$baseDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';

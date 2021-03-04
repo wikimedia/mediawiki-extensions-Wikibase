@@ -7,6 +7,7 @@ use ExtensionRegistry;
 use Parser;
 use Wikibase\Client\Api\ApiFormatReference;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\DeserializerFactory;
 
 /**
  * Do special hook registrations. These are affected by ordering issues and/or
@@ -80,8 +81,14 @@ class ExtensionLoadHandler {
 			'class' => ApiFormatReference::class,
 			'services' => [
 				'Parser',
+				'WikibaseClient.BaseDataModelDeserializerFactory'
 			],
-			'factory' => function ( ApiMain $apiMain, string $moduleName, Parser $parser ) {
+			'factory' => function (
+				ApiMain $apiMain,
+				string $moduleName,
+				Parser $parser,
+				DeserializerFactory $deserializerFactory
+			) {
 				$client = WikibaseClient::getDefaultInstance();
 
 				return new ApiFormatReference(
@@ -89,7 +96,7 @@ class ExtensionLoadHandler {
 					$moduleName,
 					$parser,
 					$client->getReferenceFormatterFactory(),
-					$client->getBaseDataModelDeserializerFactory()->newReferenceDeserializer()
+					$deserializerFactory->newReferenceDeserializer()
 				);
 			},
 		];

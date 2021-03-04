@@ -855,11 +855,11 @@ final class WikibaseClient {
 		);
 	}
 
-	public function getBaseDataModelDeserializerFactory(): DeserializerFactory {
-		return new DeserializerFactory(
-			self::getDataValueDeserializer(),
-			self::getEntityIdParser()
-		);
+	public static function getBaseDataModelDeserializerFactory(
+		ContainerInterface $services = null
+	): DeserializerFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.BaseDataModelDeserializerFactory' );
 	}
 
 	private function getInternalFormatDeserializerFactory(): InternalDeserializerFactory {
@@ -873,7 +873,7 @@ final class WikibaseClient {
 	private function getAllTypesEntityDeserializer(): DispatchableDeserializer {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = $this->getEntityDeserializerFactoryCallbacks();
-			$baseDeserializerFactory = $this->getBaseDataModelDeserializerFactory();
+			$baseDeserializerFactory = self::getBaseDataModelDeserializerFactory();
 			$deserializers = [];
 
 			foreach ( $deserializerFactoryCallbacks as $callback ) {
