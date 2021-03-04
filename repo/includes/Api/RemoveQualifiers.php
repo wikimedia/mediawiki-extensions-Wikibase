@@ -21,6 +21,8 @@ use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
  */
 class RemoveQualifiers extends ApiBase {
 
+	use FederatedPropertyApiValidatorTrait;
+
 	/**
 	 * @var StatementChangeOpFactory
 	 */
@@ -29,7 +31,7 @@ class RemoveQualifiers extends ApiBase {
 	/**
 	 * @var ApiErrorReporter
 	 */
-	private $errorReporter;
+	protected $errorReporter;
 
 	/**
 	 * @var StatementModificationHelper
@@ -51,16 +53,6 @@ class RemoveQualifiers extends ApiBase {
 	 */
 	private $entitySavingHelper;
 
-	/**
-	 * @param ApiMain $mainModule
-	 * @param string $moduleName
-	 * @param ApiErrorReporter $errorReporter
-	 * @param StatementChangeOpFactory $statementChangeOpFactory
-	 * @param StatementModificationHelper $modificationHelper
-	 * @param StatementGuidParser $guidParser
-	 * @param callable $resultBuilderInstantiator
-	 * @param callable $entitySavingHelperInstantiator
-	 */
 	public function __construct(
 		ApiMain $mainModule,
 		$moduleName,
@@ -69,7 +61,8 @@ class RemoveQualifiers extends ApiBase {
 		StatementModificationHelper $modificationHelper,
 		StatementGuidParser $guidParser,
 		callable $resultBuilderInstantiator,
-		callable $entitySavingHelperInstantiator
+		callable $entitySavingHelperInstantiator,
+		bool $federatedPropertiesEnabled
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -79,6 +72,7 @@ class RemoveQualifiers extends ApiBase {
 		$this->guidParser = $guidParser;
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
+		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
 	/**
@@ -90,6 +84,9 @@ class RemoveQualifiers extends ApiBase {
 
 		$guid = $params['claim'];
 		$entityId = $this->guidParser->parse( $guid )->getEntityId();
+
+		$this->validateAlteringEntityById( $entityId );
+
 		$entity = $this->entitySavingHelper->loadEntity( $entityId );
 
 		$summary = $this->modificationHelper->createSummary( $params, $this );

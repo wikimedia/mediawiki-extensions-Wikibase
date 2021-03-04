@@ -85,15 +85,19 @@ class LabelsProviderEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		$term = $this->lookupEntityLabel( $entityId );
 
 		// We can skip the potentially expensive exists() check if we found a term.
-		if ( $term !== null ) {
-			$label = $term->getText();
-		} elseif ( !$this->entityExistenceChecker->exists( $entityId ) ) {
+		if ( $term === null && !$this->entityExistenceChecker->exists( $entityId ) ) {
 			return $this->nonExistingEntityIdHtmlFormatter->formatEntityId( $entityId );
-		} else {
-			$label = $entityId->getSerialization();
 		}
 
-		$html = Html::element( 'a', $this->getAttributes( $entityId, $term ), $label );
+		if ( $term === null ) {
+			$label = $entityId->getSerialization();
+		} else {
+			$label = $term->getText();
+		}
+
+		$linkAttribs = $this->getAttributes( $entityId, $term );
+
+		$html = Html::element( 'a', $linkAttribs, $label );
 
 		if ( $term instanceof TermFallback ) {
 			$html .= $this->languageFallbackIndicator->getHtml( $term );

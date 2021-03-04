@@ -28,17 +28,13 @@ class SetDescription extends ModifyTerm {
 	 */
 	private $termChangeOpFactory;
 
-	/**
-	 * @param ApiMain $mainModule
-	 * @param string $moduleName
-	 * @param FingerprintChangeOpFactory $termChangeOpFactory
-	 */
 	public function __construct(
 		ApiMain $mainModule,
 		$moduleName,
-		FingerprintChangeOpFactory $termChangeOpFactory
+		FingerprintChangeOpFactory $termChangeOpFactory,
+		bool $federatedPropertiesEnabled
 	) {
-		parent::__construct( $mainModule, $moduleName );
+		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 
 		$this->termChangeOpFactory = $termChangeOpFactory;
 	}

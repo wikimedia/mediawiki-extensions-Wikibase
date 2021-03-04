@@ -34,19 +34,14 @@ class SetSiteLink extends ModifyEntity {
 	 */
 	private $badgeSerializationValidator;
 
-	/**
-	 * @param ApiMain $mainModule
-	 * @param string $moduleName
-	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
-	 * @param SiteLinkBadgeChangeOpSerializationValidator $badgeSerializationValidator
-	 */
 	public function __construct(
 		ApiMain $mainModule,
 		$moduleName,
 		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
-		SiteLinkBadgeChangeOpSerializationValidator $badgeSerializationValidator
+		SiteLinkBadgeChangeOpSerializationValidator $badgeSerializationValidator,
+		bool $federatedPropertiesEnabled
 	) {
-		parent::__construct( $mainModule, $moduleName );
+		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 
 		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
 		$this->badgeSerializationValidator = $badgeSerializationValidator;

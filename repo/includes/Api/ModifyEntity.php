@@ -33,6 +33,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 abstract class ModifyEntity extends ApiBase {
 
+	use FederatedPropertyApiValidatorTrait;
+
 	/**
 	 * @var StringNormalizer
 	 */
@@ -91,11 +93,12 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
+	 * @param bool $federatedPropertiesEnabled
 	 * @param string $modulePrefix
 	 *
 	 * @see ApiBase::__construct
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+	public function __construct( ApiMain $mainModule, $moduleName, bool $federatedPropertiesEnabled, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -122,6 +125,8 @@ abstract class ModifyEntity extends ApiBase {
 		$this->titleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
+
+		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
 	public function setServices( SiteLinkTargetProvider $siteLinkTargetProvider ) {
@@ -287,9 +292,11 @@ abstract class ModifyEntity extends ApiBase {
 		$user = $this->getUser();
 
 		$this->validateParameters( $params );
+		$entityId = $this->entitySavingHelper->getEntityIdFromParams( $params );
+		$this->validateAlteringEntityById( $entityId );
 
 		// Try to find the entity or fail and create it, or die in the process
-		$entity = $this->entitySavingHelper->loadEntity();
+		$entity = $this->entitySavingHelper->loadEntity( $entityId );
 		$entityRevId = $this->entitySavingHelper->getBaseRevisionId();
 
 		if ( $entity->getId() === null ) {

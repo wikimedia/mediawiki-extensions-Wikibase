@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
@@ -113,6 +115,7 @@ class EditEntity extends ModifyEntity {
 	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
 	 * @param EntityChangeOpProvider $entityChangeOpProvider
 	 * @param EditSummaryHelper $editSummaryHelper
+	 * @param bool $federatedPropertiesEnabled
 	 *
 	 */
 	public function __construct(
@@ -128,9 +131,10 @@ class EditEntity extends ModifyEntity {
 		StatementChangeOpFactory $statementChangeOpFactory,
 		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
 		EntityChangeOpProvider $entityChangeOpProvider,
-		EditSummaryHelper $editSummaryHelper
+		EditSummaryHelper $editSummaryHelper,
+		bool $federatedPropertiesEnabled
 	) {
-		parent::__construct( $mainModule, $moduleName );
+		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 
 		$this->termsLanguages = $termsLanguages;
 		$this->revisionLookup = $revisionLookup;

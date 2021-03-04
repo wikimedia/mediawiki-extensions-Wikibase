@@ -34,9 +34,10 @@ class SetAliases extends ModifyEntity {
 	public function __construct(
 		ApiMain $mainModule,
 		$moduleName,
-		FingerprintChangeOpFactory $termChangeOpFactory
+		FingerprintChangeOpFactory $termChangeOpFactory,
+		bool $federatedPropertiesEnabled
 	) {
-		parent::__construct( $mainModule, $moduleName );
+		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 		$this->termChangeOpFactory = $termChangeOpFactory;
 	}
 
