@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests;
 
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
-use MovePage;
 use TestSites;
 use Title;
 use Wikibase\DataModel\Entity\Item;
@@ -80,7 +79,9 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 	 * Moving a regular page into data NS onto an existing item
 	 */
 	public function testMovePreventionRegularToExistingData() {
-		$mp = new MovePage( $this->page->getTitle(), $this->itemTitle );
+		$mp = $this->getServiceContainer()
+			->getMovePageFactory()
+			->newMovePage( $this->page->getTitle(), $this->itemTitle );
 		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
 	}
 
@@ -92,7 +93,9 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 		$itemNamespace = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
 			->getEntityNamespace( 'item' );
 		$to = Title::newFromTextThrow( $this->page->getTitle()->getText(), $itemNamespace );
-		$mp = new MovePage( $this->page->getTitle(), $to );
+		$mp = $this->getServiceContainer()
+			->getMovePageFactory()
+			->newMovePage( $this->page->getTitle(), $to );
 		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
 	}
 
@@ -100,11 +103,13 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 	 * Moving a regular page into data NS to an empty (but valid) location
 	 */
 	public function testMovePreventionRegularToValidData() {
-		$mp = new MovePage(
-			$this->page->getTitle(),
-			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
-				->getTitleForId( new ItemId( 'Q42' ) )
-		);
+		$mp = $this->getServiceContainer()
+			->getMovePageFactory()
+			->newMovePage(
+				$this->page->getTitle(),
+				WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
+					->getTitleForId( new ItemId( 'Q42' ) )
+			);
 		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
 	}
 
@@ -112,7 +117,9 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 	 * Moving item page out of data NS onto an existing page
 	 */
 	public function testMovePreventionDataToExistingRegular() {
-		$mp = new MovePage( $this->itemTitle, $this->page->getTitle() );
+		$mp = $this->getServiceContainer()
+			->getMovePageFactory()
+			->newMovePage( $this->itemTitle, $this->page->getTitle() );
 		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
 	}
 
@@ -120,7 +127,9 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 	 * Moving item page out of data NS onto a non-existing page
 	 */
 	public function testMovePreventionDataToNonExistingRegular() {
-		$mp = new MovePage( $this->itemTitle, Title::newFromTextThrow( 'wbmovetestitem' ) );
+		$mp = $this->getServiceContainer()
+			->getMovePageFactory()
+			->newMovePage( $this->itemTitle, Title::newFromTextThrow( 'wbmovetestitem' ) );
 		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
 	}
 
@@ -130,10 +139,12 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 	public function testMovePreventionDataToInvalidData() {
 		$itemNamespace = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
 			->getEntityNamespace( 'item' );
-		$mp = new MovePage(
-			$this->itemTitle,
-			Title::newFromTextThrow( $this->page->getTitle()->getText(), $itemNamespace )
-		);
+		$mp = $this->getServiceContainer()
+			->getMovePageFactory()
+			->newMovePage(
+				$this->itemTitle,
+				Title::newFromTextThrow( $this->page->getTitle()->getText(), $itemNamespace )
+			);
 		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
 	}
 
@@ -141,11 +152,13 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 	 * Moving item to an valid location in the data NS
 	 */
 	public function testMovePreventionDataToValidData() {
-		$mp = new MovePage(
-			$this->itemTitle,
-			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
-				->getTitleForId( new ItemId( 'Q42' ) )
-		);
+		$mp = $this->getServiceContainer()
+			->getMovePageFactory()
+			->newMovePage(
+				$this->itemTitle,
+				WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
+					->getTitleForId( new ItemId( 'Q42' ) )
+			);
 		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
 	}
 
