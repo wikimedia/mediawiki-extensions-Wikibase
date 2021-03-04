@@ -83,9 +83,7 @@ jobs:
       with:
         mysql version: '5.7'
         mysql database: 'its_a_mw'
-        mysql root password: 'shie3Ekutaiy5Giebuwi'
-        mysql user: 'root'
-        mysql password: 'shie3Ekutaiy5Giebuwi'
+        mysql root password: 'root'
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
