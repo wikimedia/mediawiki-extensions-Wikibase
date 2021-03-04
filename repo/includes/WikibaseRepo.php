@@ -394,6 +394,7 @@ class WikibaseRepo {
 		self::$validatorBuilders = null;
 		self::$valueFormatterBuilders = null;
 		self::$snakFormatterBuilders = null;
+		ApiServiceFactory::resetClassStatics();
 	}
 
 	/**

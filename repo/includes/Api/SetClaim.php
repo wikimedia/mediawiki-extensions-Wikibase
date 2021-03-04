@@ -34,6 +34,8 @@ use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
  */
 class SetClaim extends ApiBase {
 
+	use FederatedPropertyApiValidatorTrait;
+
 	/**
 	 * @var StatementChangeOpFactory
 	 */
@@ -42,7 +44,7 @@ class SetClaim extends ApiBase {
 	/**
 	 * @var ApiErrorReporter
 	 */
-	private $errorReporter;
+	protected $errorReporter;
 
 	/**
 	 * @var Deserializer
@@ -89,7 +91,8 @@ class SetClaim extends ApiBase {
 		StatementModificationHelper $modificationHelper,
 		StatementGuidParser $guidParser,
 		callable $resultBuilderInstantiator,
-		callable $entitySavingHelperInstantiator
+		callable $entitySavingHelperInstantiator,
+		bool $federatedPropertiesEnabled
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -100,6 +103,7 @@ class SetClaim extends ApiBase {
 		$this->guidParser = $guidParser;
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
+		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
 	/**
@@ -133,6 +137,7 @@ class SetClaim extends ApiBase {
 		}
 
 		$entityId = $statementGuid->getEntityId();
+		$this->validateAlteringEntityById( $entityId );
 		$entity = $this->entitySavingHelper->loadEntity( $entityId );
 
 		if ( !( $entity instanceof StatementListProvidingEntity ) ) {
