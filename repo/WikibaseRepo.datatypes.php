@@ -280,7 +280,7 @@ return call_user_func( function() {
 				return $factory->buildStringValidators( $maxLength );
 			},
 			'parser-factory-callback' => function ( ParserOptions $options ) {
-				$normalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+				$normalizer = WikibaseRepo::getStringNormalizer();
 				return new StringParser( new WikibaseStringValueNormalizer( $normalizer ) );
 			},
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {

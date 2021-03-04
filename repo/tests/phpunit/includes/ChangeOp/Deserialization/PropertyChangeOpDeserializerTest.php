@@ -51,7 +51,7 @@ class PropertyChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			$wikibaseRepo->getExternalFormatStatementDeserializer(),
 			new SiteLinkTargetProvider( new HashSiteStore() ),
 			WikibaseRepo::getEntityIdParser(),
-			$wikibaseRepo->getStringNormalizer(),
+			WikibaseRepo::getStringNormalizer(),
 			[]
 		) );
 	}
