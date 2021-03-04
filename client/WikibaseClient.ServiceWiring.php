@@ -149,6 +149,43 @@ return [
 		return WikibaseSettings::getClientSettings();
 	},
 
+	'WikibaseClient.Site' => function ( MediaWikiServices $services ): Site {
+		$settings = WikibaseClient::getSettings( $services );
+		$globalId = $settings->getSetting( 'siteGlobalID' );
+		$localId = $settings->getSetting( 'siteLocalID' );
+
+		$site = $services->getSiteLookup()->getSite( $globalId );
+
+		$logger = WikibaseClient::getLogger( $services );
+
+		if ( !$site ) {
+			$logger->debug(
+				'WikibaseClient.ServiceWiring.php::WikibaseClient.Site: ' .
+				'Unable to resolve site ID {globalId}!',
+				[ 'globalId' => $globalId ]
+			);
+
+			$site = new MediaWikiSite();
+			$site->setGlobalId( $globalId );
+			$site->addLocalId( Site::ID_INTERWIKI, $localId );
+			$site->addLocalId( Site::ID_EQUIVALENT, $localId );
+		}
+
+		if ( !in_array( $localId, $site->getLocalIds() ) ) {
+			$logger->debug(
+				'WikibaseClient.ServiceWiring.php::WikibaseClient.Site: ' .
+				'The configured local id {localId} does not match any local IDs of site {globalId}: {localIds}',
+				[
+					'localId' => $localId,
+					'globalId' => $globalId,
+					'localIds' => json_encode( $site->getLocalIds() )
+				]
+			);
+		}
+
+		return $site;
+	},
+
 	'WikibaseClient.TermFallbackCache' => function ( MediaWikiServices $services ): TermFallbackCacheFacade {
 		return new TermFallbackCacheFacade(
 			WikibaseClient::getTermFallbackCacheFactory( $services )->getTermFallbackCache(),
