@@ -16,7 +16,7 @@ You need to be in possession of an SSH private key for which there is a associat
 
 The file `inventory.yml` contains a set of two differrent hosts, which can be used as targets for the test system setup:
  * `wikidata-federated-properties.wikidata-dev.eqiad.wmflabs` - the project's official cloud VPS test instance on https://horizon.wikimedia.org/
- * `federated-properties.vm` - a virtual machine on your computer
+ * `wikibase-federated-properties.vm` - a virtual machine on your computer
 
 ### Use your own test system on a VM
 #### Create
@@ -25,7 +25,7 @@ If you want to use a virtual machine to run the test system on your computer, pl
 ```
 $ sudo apt install vagrant virtualbox-qt
 
-# creates a Debian VM with 1024MB memory and 2 CPUs.
+# creates a Debian VM with 3GB memory and 2 CPUs.
 $ cd extensions/Wikibase/build/federated-properties/vagrant
 $ vagrant up
 ```
@@ -33,40 +33,40 @@ $ vagrant up
 #### Configure /etc/hosts
 In order to reach your newly created VM both via http and ssh, add a line to your `/etc/hosts` file:
 ```
-192.168.100.42 federated-properties.vm
+192.168.100.42 wikibase-federated-properties.vm
 ```
 You should now be able to ping your VM using the host name, instead of its IP address:
 ```
-$ ping federated-properties.vm
-PING federated-properties.vm (192.168.100.42) 56(84) bytes of data.
-64 bytes from federated-properties.vm (192.168.100.42): icmp_seq=1 ttl=64 time=0.259 ms
-64 bytes from federated-properties.vm (192.168.100.42): icmp_seq=2 ttl=64 time=0.160 ms
+$ ping wikibase-federated-properties.vm
+PING wikibase-federated-properties.vm (192.168.100.42) 56(84) bytes of data.
+64 bytes from wikibase-federated-properties.vm (192.168.100.42): icmp_seq=1 ttl=64 time=0.259 ms
+64 bytes from wikibase-federated-properties.vm (192.168.100.42): icmp_seq=2 ttl=64 time=0.160 ms
 ```
 
 #### Configure ssh
 
 Additionally, add a section to your `~/.ssh/config` file:
 ```
-Host federated-properties.vm
+Host wikibase-federated-properties.vm
   User vagrant
   IdentityFile <YOUR-PATH-TO-WIKIBASE>/build/federated-properties/vagrant/.vagrant/machines/default/virtualbox/private_key
 ```
 You should now be able to ssh into your VM without providing a username or an identy file:
 ```
-$ ssh federated-properties.vm
+$ ssh wikibase-federated-properties.vm
 
 [Long Debian Welcome message]
 
-vagrant@federated-properties:~$ exit
+vagrant@federatedProperties-vm:~$
 ```
 
 #### Run ansible
 
 ```sh
 $ cd extensions/Wikibase/build/federated-properties
-$ ansible-playbook fedProps.yml --limit federated-properties.vm
+$ ansible-playbook fedProps.yml --limit wikibase-federated-properties.vm
 ```
-Once the setup process has completed, you can access your newly installed Wikibase test system via http://federated-properties.vm:8080.
+Once the setup process has completed, you can access your newly installed Wikibase test system via http://wikibase-federated-properties.vm/ and the Wikidata Query Service via http://wikibase-federated-properties.vm:8834/.
 
 
 ### Use a cloud VPS instance
@@ -88,7 +88,7 @@ The `cleanup.yml` playbook removes most of the changes that the setup has caused
 $ cd extensions/Wikibase/build/federated-properties
 
 # cleanup the VM
-$ ansible-playbook cleanup.yml --limit federated-properties.vm
+$ ansible-playbook cleanup.yml --limit wikibase-federated-properties.vm
 
 # cleanup the cloud VPS instance
 ansible-playbook cleanup.yml --limit wikidata-federated-properties.wikidata-dev.eqiad.wmflabs

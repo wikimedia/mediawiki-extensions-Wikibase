@@ -26,6 +26,7 @@
         name: "{{ item }}"
         state: present
       loop:
+          - "setuptools"
           - "docker-compose"
 
     - name: Ensure user 'mediawiki' exists and belongs to the 'docker' group
@@ -67,6 +68,14 @@
           repo: "https://gerrit.wikimedia.org/r/mediawiki/core"
           dest: "{{ MW_PATH }}"
           version: "master"
+
+    - name: Ensure .htaccess is in place
+      copy:
+          src: "files/htaccess"
+          dest: "{{ MW_PATH }}/.htaccess"
+          mode: 0644
+      tags:
+          - source
 
     - name: Ensure symbolic link for script dir is in place
       file:

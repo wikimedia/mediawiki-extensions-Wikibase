@@ -76,6 +76,98 @@ In the current implementation, Federated Properties cannot be used in combinatio
 
 For the same reason, enabling Federated Properties and then turning off the feature is not supported once any statements have been added. Doing so will result in those properties displaying as deleted properties.
 
+### SPARQL Examples
+
+SPARQL is the language used to query the data within Wikibase. Using Federated Properties opens up the possibility to describe your data using the same constructs other Wikibase repositories use to describe their domain.
+
+The following SPARQL queries are examples on how you could setup your local instance with Federated Properties and issue queries to both your local and federated sparql endpoints.
+
+An introduction to SPARQL can be found [here](https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial).
+
+```
+# This example describes an example use case of Federated Properties
+# being used in conjunction with a Federated Query to Wikidata.
+#
+# In this example we have setup a local wikibase repository and created an
+# item with the federated property International Standard Name Identifier (P213)
+#
+# Running this query we are asking the local instance and the federated source wiki
+# to return all items that are identified by INSI "0000 0001 1364 8293" which on
+# wikidata.org returns Berlin and on your local instance could be just about anything.
+
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+SELECT ?item ?ISNI
+WHERE
+{
+  VALUES ?ISNI {"0000 0001 1364 8293"}
+  {
+    SELECT ?item ?ISNI
+    WHERE
+    {
+        ?item wdt:P213 ?ISNI;
+    }
+  }
+  UNION
+  {
+   SERVICE <https://query.wikidata.org/sparql> {
+     SELECT ?item ?ISNI
+     WHERE
+     {
+         ?item wdt:P213 ?ISNI;
+     }
+   }
+  }
+}
+```
+
+```
+# This example describes an example use case of Federated Properties
+# being used in conjunction with a Federated Query to Wikidata.
+#
+# In this example we are setting up a local wikibase repository for publications where
+# we have created a few items and assigned them the statement of P577 (Publication date).
+# With this setup we are querying the local database and the federated source wiki for
+# any written work (Q47461344) with a publication date after 2000-01-01.
+#
+# Uncomment row 31 to narrow down the search for a specific genre
+
+#defaultView:Timeline
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd-wd: <http://www.wikidata.org/entity/>
+
+SELECT ?item ?itemLabel ?pubDate ?image
+WHERE
+{
+  {
+    SELECT ?item ?itemLabel ?pubDate ?image
+    WHERE
+    {
+      ?item wdt:P577 ?pubDate .
+      OPTIONAL { ?item wdt:P18 ?image }
+      SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+    }
+  }
+  UNION
+  {
+   SERVICE <https://query.wikidata.org/sparql> {
+     SELECT ?item ?itemLabel ?pubDate ?image
+     WHERE
+     {
+     ?item wdt:P577 ?pubDate .
+     ?item wdt:P31 wd-wd:Q47461344 .
+     #?item wdt:P136 wd-wd:Q8261 . # genre novel (Q8261)
+     OPTIONAL { ?item wdt:P18 ?image }
+     SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+     }
+   }
+  }
+  FILTER (?pubDate > "2000-01-01T00:00:00+00:00"^^xsd:dateTime)
+}
+ORDER BY DESC(?pubDate)
+LIMIT 100
+```
+
 [Wikidata]: https://www.wikidata.org/wiki/Wikidata:Main_Page
 [federatedPropertiesSourceScriptUrl setting]: @ref repo_federatedPropertiesSourceScriptUrl
 [ADR about handling Federated Property IDs]: @ref adr_0010
