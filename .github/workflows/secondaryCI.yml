@@ -1,36 +1,9 @@
-name: CI
+name: Wikibase Secondary CI
 on:
   push:
     branches: [ master ]
 
 jobs:
-  filterChanges:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: git-filter-repo
-        uses: wmde/git-filter-repo-docker-action@v1
-        with:
-          privateKey: ${{ secrets.SSH_PRIVATE_KEY_CHANGES }}
-          targetOrg: wikimedia
-          targetRepo: wikibase-changes
-          targetBranch: main
-          filterArguments: >-
-            --force
-            --path=lib/includes/changes/
-            --path=lib/includes/Changes/
-            --path=lib/tests/phpunit/changes/
-            --path=lib/tests/phpunit/Changes/
-            --path lib/packages/wikibase/changes/
-            --path .mailmap
-            --path-rename=lib/includes/changes:src
-            --path-rename=lib/includes/Changes:src
-            --path-rename=lib/tests/phpunit/changes:tests
-            --path-rename=lib/tests/phpunit/Changes:tests
-            --path-rename lib/packages/wikibase/changes/:
-            --message-callback 'return re.sub(b"^changes: ", b"", message)'
   secondary-ci:
     runs-on: ubuntu-latest
     strategy:
@@ -75,13 +48,20 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Set up MySQL
+    - name: Shutdown Ubuntu MySQL (SUDO)
       run: |
-        sudo /etc/init.d/mysql start
+        sudo service mysql stop
+    - name: Set up MySQL
+      uses: mirromutth/mysql-action@v1.1
+      with:
+        mysql version: '5.7'
+        mysql database: 'its_a_mw'
+        mysql root password: 'root'
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php-versions }}
+        extensions: pdo_sqlite
     - name: Cache Composer cache
       uses: actions/cache@v2
       with:
