@@ -300,6 +300,31 @@ return call_user_func( function() {
 				'wikibase.Site',
 			],
 		],
+
+		'wikibase.federatedPropertiesLeavingSiteNotice' => $moduleTemplate + [
+				'packageFiles' => [
+					'wikibase.federatedPropertiesLeavingSiteNotice.js',
+					[
+						'name' => 'federatedPropertiesHostWikibase.json',
+						'callback' => function () {
+							return parse_url(
+								WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' ),
+								PHP_URL_HOST
+							);
+						},
+					]
+				],
+				'dependencies' => [
+					'oojs-ui',
+				],
+				'messages' => [
+					'wikibase-federated-properties-leaving-site-notice-cancel',
+					'wikibase-federated-properties-leaving-site-notice-continue',
+					'wikibase-federated-properties-leaving-site-notice-notice',
+					'wikibase-federated-properties-leaving-site-notice-header',
+					'wikibase-federated-properties-leaving-site-notice-checkbox-label'
+				]
+		],
 	];
 
 	return $modules;

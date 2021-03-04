@@ -16,6 +16,7 @@ use RequestContext;
 use SkinTemplate;
 use Title;
 use TitleValue;
+use User;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Content\ItemContent;
@@ -548,6 +549,16 @@ XML
 		unset( $settings['entityNamespaces'] );
 
 		return $settings;
+	}
+
+	public function testOnGetPreferences() {
+		$preferences = [];
+		$user = $this->createMock( User::class );
+		RepoHooks::onGetPreferences( $user, $preferences );
+
+		$this->assertArrayHasKey( 'wb-acknowledgedcopyrightversion', $preferences );
+		$this->assertArrayHasKey( 'wikibase-entitytermsview-showEntitytermslistview', $preferences );
+		$this->assertArrayHasKey( 'wb-dismissleavingsitenotice', $preferences );
 	}
 
 }
