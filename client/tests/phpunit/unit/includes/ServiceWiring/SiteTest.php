@@ -25,7 +25,7 @@ class SiteTest extends ServiceWiringTestCase {
 				'siteLocalID' => 'testlocalid',
 			] ) );
 		$site = $this->createMock( Site::class );
-		$site->expects( $this->exactly( 2 ) ) // TODO this is a bug, should be once()
+		$site->expects( $this->once() )
 			->method( 'getLocalIds' )
 			->willReturn( [
 				Site::ID_INTERWIKI => [ 'testlocalid' ],
