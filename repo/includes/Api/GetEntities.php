@@ -25,6 +25,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class GetEntities extends ApiBase {
 
+	use FederatedPropertyApiValidatorTrait;
+
 	/**
 	 * @var StringNormalizer
 	 */
@@ -53,7 +55,7 @@ class GetEntities extends ApiBase {
 	/**
 	 * @var ApiErrorReporter
 	 */
-	private $errorReporter;
+	protected $errorReporter;
 
 	/**
 	 * @var ResultBuilder
@@ -82,6 +84,7 @@ class GetEntities extends ApiBase {
 	 * @param ResultBuilder $resultBuilder
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityIdParser $idParser
+	 * @param bool $federatedPropertiesEnabled
 	 *
 	 * @see ApiBase::__construct
 	 */
@@ -96,7 +99,8 @@ class GetEntities extends ApiBase {
 		ApiErrorReporter $errorReporter,
 		ResultBuilder $resultBuilder,
 		EntityRevisionLookup $entityRevisionLookup,
-		EntityIdParser $idParser
+		EntityIdParser $idParser,
+		bool $federatedPropertiesEnabled
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -109,6 +113,7 @@ class GetEntities extends ApiBase {
 		$this->resultBuilder = $resultBuilder;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->idParser = $idParser;
+		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
 	/**
@@ -129,6 +134,9 @@ class GetEntities extends ApiBase {
 		$resolveRedirects = $params['redirects'] === 'yes';
 
 		$entityIds = $this->getEntityIdsFromParams( $params );
+		foreach ( $entityIds as $entityId ) {
+			$this->validateAlteringEntityById( $entityId );
+		}
 
 		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
 		$stats->updateCount( 'wikibase.repo.api.getentities.entities', count( $entityIds ) );
