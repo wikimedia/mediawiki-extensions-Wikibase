@@ -4,20 +4,17 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use MediaWikiTestCase;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @license GPL-2.0-or-later
  */
 abstract class FederatedPropertiesTestCase extends MediaWikiTestCase {
 
-	protected function setSourceWikiUnavailable() {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$settings->setSetting( 'federatedPropertiesSourceScriptUrl', '255.255.255.255/' );
+	use FederatedPropertiesTestTrait;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setFederatedPropertiesEnabled();
 	}
 
-	protected function setFederatedPropertiesEnabled() {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$settings->setSetting( 'federatedPropertiesEnabled', true );
-	}
 }

@@ -14,6 +14,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -104,6 +105,8 @@ class HtmlPageLinkRendererEndHookHandler {
 	 */
 	private $federatedPropertiesSourceScriptUrl;
 
+	private $federatedPropertiesEnabled;
+
 	/**
 	 * @return self
 	 */
@@ -125,7 +128,8 @@ class HtmlPageLinkRendererEndHookHandler {
 			$wikibaseRepo->getLanguageFallbackChainFactory(),
 			$wikibaseRepo->getEntityUrlLookup(),
 			$wikibaseRepo->getLinkTargetEntityIdLookup(),
-			$wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' )
+			$wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' ),
+			$wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesEnabled' )
 		);
 	}
 
@@ -180,7 +184,8 @@ class HtmlPageLinkRendererEndHookHandler {
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		EntityUrlLookup $entityUrlLookup,
 		LinkTargetEntityIdLookup $linkTargetEntityIdLookup,
-		?string $federatedPropertiesSourceScriptUrl
+		?string $federatedPropertiesSourceScriptUrl,
+		bool $federatedPropertiesEnabled
 	) {
 		$this->entityExistenceChecker = $entityExistenceChecker;
 		$this->entityIdParser = $entityIdParser;
@@ -193,6 +198,7 @@ class HtmlPageLinkRendererEndHookHandler {
 		$this->entityUrlLookup = $entityUrlLookup;
 		$this->linkTargetEntityIdLookup = $linkTargetEntityIdLookup;
 		$this->federatedPropertiesSourceScriptUrl = $federatedPropertiesSourceScriptUrl;
+		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
 	/**
@@ -350,7 +356,10 @@ class HtmlPageLinkRendererEndHookHandler {
 
 		// add wikibase styles in all cases, so we can format the link properly:
 		$out->addModuleStyles( [ 'wikibase.common' ] );
-
+		if ( $this->federatedPropertiesEnabled && $entityId instanceof PropertyId ) {
+			$customAttribs [ 'class' ] = $customAttribs [ 'class' ] == '' ? 'fedprop' : $customAttribs [ 'class' ] . ' fedprop';
+			$out->addModules( 'wikibase.federatedPropertiesLeavingSiteNotice' );
+		}
 		return true;
 	}
 
