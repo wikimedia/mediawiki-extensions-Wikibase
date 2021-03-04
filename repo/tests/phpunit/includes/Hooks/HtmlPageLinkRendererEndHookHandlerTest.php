@@ -23,16 +23,17 @@ use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageWithConversion;
 use Wikibase\Lib\Store\EntityExistenceChecker;
-use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityLinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\FederatedProperties\ApiRequestExecutionException;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler
@@ -436,24 +437,41 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiTestCase {
 		$this->assertEquals( 'some-other-class', $customAttribs['class'] );
 	}
 
-	/**
-	 * @return EntityIdLookup
-	 */
-	private function getEntityIdLookup() {
-		$entityIdLookup = $this->createMock( EntityIdLookup::class );
+	public function testFederatedPropertiesFailure() {
+		$customAttribs = [ 'class' => 'new another' ];
+		$html = 'change-me';
 
-		// TODO fixme or use the real one maybe?
-		$entityIdLookup->expects( $this->any() )
-			->method( 'getEntityIdForTitle' )
-			->will( $this->returnCallback( function( Title $title ) {
-				if ( preg_match( '/(^|EntityPage\/)(Q\d+)$/', $title->getText(), $m ) ) {
-					return new ItemId( $m[0] );
-				}
+		$this->entityUrlLookup->expects( $this->once() )
+			->method( 'getLinkUrl' )
+			->with( new ItemId( 'Q1' ) )
+			->willThrowException( new ApiRequestExecutionException() );
 
-				return null;
-			} ) );
+		$returnValue = $this->newInstance()->doHtmlPageLinkRendererEnd(
+			$this->getLinkRenderer(),
+			$this->newTitle( self::ITEM_WITH_LABEL ),
+			$text,
+			$customAttribs,
+			$this->newContext(),
+			$html
+		);
+		$this->assertTrue( $returnValue );
 
-		return $entityIdLookup;
+		// This will fallback to using the plain entity id as title and link text, and it will
+		// link via Special:EntityData (as we can't lookup namespaces).
+		$expectedAttribs = [
+			'href' => 'http://source.wiki/script/index.php?title=Special:EntityData/Q1',
+			'class' => 'another',
+			'title' => 'Q1'
+		];
+		$this->assertSame( 'Q1', $text );
+		$this->assertEquals( $expectedAttribs, $customAttribs );
+	}
+
+	public function testFactory() {
+		$this->assertInstanceOf(
+			HtmlPageLinkRendererEndHookHandler::class,
+			TestingAccessWrapper::newFromClass( HtmlPageLinkRendererEndHookHandler::class )->newFromGlobalState()
+		);
 	}
 
 	/**
@@ -545,7 +563,6 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiTestCase {
 
 		return new HtmlPageLinkRendererEndHookHandler(
 			$this->getEntityExistenceChecker( $isDeleted ),
-			$this->getEntityIdLookup(),
 			$entityIdParser,
 			$this->getTermLookup(),
 			$this->getEntityNamespaceLookup(),
@@ -559,7 +576,8 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiTestCase {
 				$entityIdParser,
 				$this->newMockEntitySourceDefinitions(),
 				$this->newMockEntitySource()
-			)
+			),
+			'http://source.wiki/script/'
 		);
 	}
 
