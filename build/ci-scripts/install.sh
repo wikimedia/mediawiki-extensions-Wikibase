@@ -37,7 +37,7 @@ if [ $? -gt 0 ]; then
 	composer install
 fi
 
-mysql -e 'create database its_a_mw;' -proot
+mysql -e 'create database its_a_mw;' -proot -h"127.0.0.1"
 php maintenance/install.php \
     --dbtype $DBTYPE \
     --dbuser root \
