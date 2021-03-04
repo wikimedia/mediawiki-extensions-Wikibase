@@ -599,11 +599,9 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return EntityIdLookup
-	 */
-	public function getEntityIdLookup() {
-		return self::getEntityContentFactory();
+	public static function getEntityIdLookup( ContainerInterface $services = null ): EntityIdLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityIdLookup' );
 	}
 
 	public function getLocalRepoWikiPageMetaDataAccessor(): WikiPageEntityMetaDataAccessor {
@@ -903,7 +901,7 @@ class WikibaseRepo {
 				self::getEntityChangeFactory(),
 				self::getEntityIdParser(),
 				self::getEntityIdComposer(),
-				$this->getEntityIdLookup(),
+				self::getEntityIdLookup(),
 				$this->getEntityTitleLookup(),
 				$this->getEntityNamespaceLookup(),
 				self::getIdGenerator(),
@@ -1406,7 +1404,7 @@ class WikibaseRepo {
 			$errorLocalizer,
 			self::getEntityIdParser(),
 			$siteLinkStore,
-			$this->getEntityIdLookup(),
+			self::getEntityIdLookup(),
 			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
 			$this->getFieldDefinitionsByType( Item::ENTITY_TYPE ),
 			$this->getPropertyDataTypeLookup(),
@@ -1469,7 +1467,7 @@ class WikibaseRepo {
 			$constraintProvider,
 			$errorLocalizer,
 			self::getEntityIdParser(),
-			$this->getEntityIdLookup(),
+			self::getEntityIdLookup(),
 			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
 			$propertyInfoStore,
 			$propertyInfoBuilder,

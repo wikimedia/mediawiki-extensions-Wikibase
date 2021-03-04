@@ -201,7 +201,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 
 		return new WikiPageEntityRedirectLookup(
 			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->getEntityIdLookup(),
+			WikibaseRepo::getEntityIdLookup(),
 			MediaWikiServices::getInstance()->getDBLoadBalancer()
 		);
 	}

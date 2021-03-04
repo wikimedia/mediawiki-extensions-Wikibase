@@ -958,7 +958,7 @@ final class RepoHooks {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$hookHandler = new SidebarBeforeOutputHookHandler(
 			WikibaseRepo::getSettings()->getSetting( 'conceptBaseUri' ),
-			$repo->getEntityIdLookup(),
+			WikibaseRepo::getEntityIdLookup(),
 			$repo->getEntityLookup(),
 			$repo->getEntityNamespaceLookup(),
 			WikibaseRepo::getLogger()
@@ -1055,7 +1055,7 @@ final class RepoHooks {
 		$mediaWikiServices = MediaWikiServices::getInstance();
 		$loadBalancer = $mediaWikiServices->getDBLoadBalancer();
 		$subscriptionLookup = new SqlSubscriptionLookup( $loadBalancer );
-		$entityIdLookup = $wikibaseRepo->getEntityIdLookup();
+		$entityIdLookup = WikibaseRepo::getEntityIdLookup( $mediaWikiServices );
 
 		$siteLookup = $mediaWikiServices->getSiteLookup();
 

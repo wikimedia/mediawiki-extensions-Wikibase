@@ -304,7 +304,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		}
 		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 			$wikibaseRepo->getEntityNamespaceLookup(),
-			$wikibaseRepo->getEntityIdLookup()
+			WikibaseRepo::getEntityIdLookup()
 		);
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(

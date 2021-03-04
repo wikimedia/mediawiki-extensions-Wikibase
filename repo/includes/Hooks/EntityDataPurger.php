@@ -43,10 +43,13 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
 	}
 
-	public static function factory( HtmlCacheUpdater $htmlCacheUpdater ): self {
+	public static function factory(
+		HtmlCacheUpdater $htmlCacheUpdater,
+		EntityIdLookup $entityIdLookup
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
-			$wikibaseRepo->getEntityIdLookup(),
+			$entityIdLookup,
 			$wikibaseRepo->getEntityDataUriManager(),
 			$htmlCacheUpdater,
 			'JobQueueGroup::singleton'

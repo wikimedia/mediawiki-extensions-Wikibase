@@ -217,7 +217,10 @@
 	"APIPropModules": {
 		"entityterms": {
 			"class": "\\Wikibase\\Repo\\Api\\EntityTerms",
-			"factory": "\\Wikibase\\Repo\\Api\\EntityTerms::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\EntityTerms::factory",
+			"services": [
+				"WikibaseRepo.EntityIdLookup"
+			]
 		}
 	},
 	"SpecialPages": {
@@ -593,7 +596,8 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\EntityDataPurger",
 			"factory": "\\Wikibase\\Repo\\Hooks\\EntityDataPurger::factory",
 			"services": [
-				"HtmlCacheUpdater"
+				"HtmlCacheUpdater",
+				"WikibaseRepo.EntityIdLookup"
 			]
 		},
 		"FederatedPropertiesSpecialPage": {
@@ -612,7 +616,10 @@
 		},
 		"LabelPrefetch": {
 			"class": "\\Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandler",
-			"factory": "\\Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandler::factory"
+			"factory": "\\Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandler::factory",
+			"services": [
+				"WikibaseRepo.EntityIdLookup"
+			]
 		},
 		"LibHooks": {
 			"class": "\\Wikibase\\Lib\\LibHooks"
@@ -642,7 +649,8 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler::factory",
 			"services": [
-				"WikibaseRepo.EntityContentFactory"
+				"WikibaseRepo.EntityContentFactory",
+				"WikibaseRepo.EntityIdLookup"
 			]
 		},
 		"ViewHooks": {
