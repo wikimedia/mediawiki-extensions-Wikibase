@@ -82,9 +82,10 @@ jobs:
       uses: mirromutth/mysql-action@v1.1
       with:
         mysql version: '5.7'
+        mysql database: 'its_a_mw'
         mysql root password:
-        mysql user: 'devuser'
-        mysql password: 'dummyroot'
+        mysql user: 'root'
+        mysql password: 'shie3Ekutaiy5Giebuwi'
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
