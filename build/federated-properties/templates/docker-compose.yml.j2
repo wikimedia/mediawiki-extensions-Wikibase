@@ -86,6 +86,7 @@ services:
     hostname: wdqs
     volumes:
       - query-service-data:/wdqs/data
+    tmpfs: /tmp
     environment:
       - WIKIBASE_HOST={{ SERVER_NAME }}
       - WDQS_HOST=wdqs

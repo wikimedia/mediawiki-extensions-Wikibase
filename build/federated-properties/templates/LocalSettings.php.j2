@@ -65,25 +65,26 @@ wfLoadExtension( 'cldr' );
 $wgWBRepoSettings['federatedPropertiesEnabled'] = true;
 $wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = "{{ SOURCE_REPO_SCHEME }}://{{ SOURCE_REPO_HOST }}/w/";
 
-$wgWBRepoSettings['entitySources'] = [
-	'local' => [
-		'entityNamespaces' => [ 'item' => 120 ],
-		'repoDatabase' => false,
-		'baseUri' => 'http://{{ SERVER_NAME }}/entity/',
-		'interwikiPrefix' => '',
-		'rdfNodeNamespacePrefix' => 'wd',
-		'rdfPredicateNamespacePrefix' => 'wdt',
-	],
-	'fedprops' => [
-		'entityNamespaces' => [ 'property' => 122 ],
-		'repoDatabase' => false,
-		'baseUri' => 'http://{{ SOURCE_REPO_HOST }}/entity/',
-		'interwikiPrefix' => 'wd',
-		'rdfNodeNamespacePrefix' => 'fpwd',
-		'rdfPredicateNamespacePrefix' => 'fpwd',
-	],
-];
-
+if('{{ FEDPROPS_INTERWIKI_PREFIX }}' !== 'wikidata') {
+	$wgWBRepoSettings['entitySources'] = [
+		'local' => [
+			'entityNamespaces' => [ 'item' => 120 ],
+			'repoDatabase' => false,
+			'baseUri' => 'http://{{ SERVER_NAME }}/entity/',
+			'interwikiPrefix' => '',
+			'rdfNodeNamespacePrefix' => 'wd',
+			'rdfPredicateNamespacePrefix' => 'wdt',
+		],
+		'fedprops' => [
+			'entityNamespaces' => [ 'property' => 122 ],
+			'repoDatabase' => false,
+			'baseUri' => 'http://{{ SOURCE_REPO_HOST }}/entity/',
+			'interwikiPrefix' => '{{ FEDPROPS_INTERWIKI_PREFIX }}',
+			'rdfNodeNamespacePrefix' => 'fpwd',
+			'rdfPredicateNamespacePrefix' => 'fpwd',
+		],
+	];
+}
 
 # simulate source API errors via request header
 if( isset ( $_SERVER['HTTP_X_FEDPROPS_SOURCEAPIRESPONSE'] ) ) {
