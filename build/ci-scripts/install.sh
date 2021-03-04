@@ -40,7 +40,7 @@ fi
 mysql -e 'create database its_a_mw;' -uroot -proot -h"127.0.0.1"
 php maintenance/install.php \
     --dbtype $DBTYPE \
-    --dbserver 127.0.0.1
+    --dbserver 127.0.0.1 \
     --dbuser root \
     --dbname its_a_mw \
     --dbpath $(pwd) \
