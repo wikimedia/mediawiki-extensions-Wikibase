@@ -64,6 +64,7 @@ class RebuildItemsPerSite extends Maintenance {
 
 		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$mwServices = MediaWikiServices::getInstance();
 		// Use an uncached EntityLookup here to avoid memory leaks
 		$entityLookup = $wikibaseRepo->getEntityLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY );
 		$store = $wikibaseRepo->getStore();
@@ -71,7 +72,7 @@ class RebuildItemsPerSite extends Maintenance {
 			$siteLinkTable,
 			$entityLookup,
 			$store->getEntityPrefetcher(),
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
+			$mwServices->getDBLoadBalancerFactory()
 		);
 
 		$builder->setReporter( $reporter );
@@ -87,7 +88,7 @@ class RebuildItemsPerSite extends Maintenance {
 		} else {
 			$stream = new SqlEntityIdPager(
 				$wikibaseRepo->getEntityNamespaceLookup(),
-				$wikibaseRepo->getEntityIdLookup(),
+				WikibaseRepo::getEntityIdLookup( $mwServices ),
 				[ 'item' ]
 			);
 		}

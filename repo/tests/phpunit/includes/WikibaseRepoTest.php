@@ -50,7 +50,6 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityExistenceChecker;
-use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -303,11 +302,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetEntityRedirectCheckerReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getEntityRedirectChecker();
 		$this->assertInstanceOf( EntityRedirectChecker::class, $returnValue );
-	}
-
-	public function testGetEntityIdLookupReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getEntityIdLookup();
-		$this->assertInstanceOf( EntityIdLookup::class, $returnValue );
 	}
 
 	public function testGetEntityRevisionLookupReturnType() {

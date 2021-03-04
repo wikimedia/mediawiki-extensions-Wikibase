@@ -107,23 +107,26 @@ class DumpRdf extends DumpEntities {
 	public function execute() {
 		if ( !$this->hasHadServicesSet ) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$mwServices = MediaWikiServices::getInstance();
+
 			$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 				$wikibaseRepo->getEntityNamespaceLookup(),
-				$wikibaseRepo->getEntityIdLookup(),
-				MediaWikiServices::getInstance()->getLinkCache()
+				WikibaseRepo::getEntityIdLookup( $mwServices ),
+				$mwServices->getLinkCache()
 			);
 
 			$this->setServices(
 				$sqlEntityIdPagerFactory,
 				$wikibaseRepo->getEnabledEntityTypes(),
-				WikibaseRepo::getSettings()->getSetting( 'entityTypesWithoutRdfOutput' ),
+				WikibaseRepo::getSettings( $mwServices )
+					->getSetting( 'entityTypesWithoutRdfOutput' ),
 				$wikibaseRepo->getStore()->getEntityPrefetcher(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
-				WikibaseRepo::getValueSnakRdfBuilderFactory(),
+				WikibaseRepo::getValueSnakRdfBuilderFactory( $mwServices ),
 				$wikibaseRepo->getEntityRdfBuilderFactory(),
 				$wikibaseRepo->getEntityRevisionLookup( $this->getEntityRevisionLookupCacheMode() ),
-				WikibaseRepo::getRdfVocabulary(),
-				WikibaseRepo::getEntityContentFactory()
+				WikibaseRepo::getRdfVocabulary( $mwServices ),
+				WikibaseRepo::getEntityContentFactory( $mwServices )
 			);
 		}
 		parent::execute();

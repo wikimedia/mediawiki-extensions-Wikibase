@@ -37,6 +37,7 @@ use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
@@ -168,6 +169,10 @@ return [
 			WikibaseRepo::getEntityTypeDefinitions( $services )
 				->get( EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK )
 		);
+	},
+
+	'WikibaseRepo.EntityIdLookup' => function ( MediaWikiServices $services ): EntityIdLookup {
+		return WikibaseRepo::getEntityContentFactory( $services );
 	},
 
 	'WikibaseRepo.EntityIdParser' => function ( MediaWikiServices $services ): EntityIdParser {
