@@ -2,6 +2,13 @@
 
 declare( strict_types = 1 );
 
+use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\MonolingualTextValue;
+use DataValues\QuantityValue;
+use DataValues\StringValue;
+use DataValues\TimeValue;
+use DataValues\UnknownValue;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
@@ -11,6 +18,7 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -42,6 +50,22 @@ return [
 			$dataTypes,
 			$settings->getSetting( 'disabledDataTypes' )
 		);
+	},
+
+	'WikibaseClient.DataValueDeserializer' => function ( MediaWikiServices $services ): DataValueDeserializer {
+		return new DataValueDeserializer( [
+			'string' => StringValue::class,
+			'unknown' => UnknownValue::class,
+			'globecoordinate' => GlobeCoordinateValue::class,
+			'monolingualtext' => MonolingualTextValue::class,
+			'quantity' => QuantityValue::class,
+			'time' => TimeValue::class,
+			'wikibase-entityid' => function ( $value ) use ( $services ) {
+				return isset( $value['id'] )
+					? new EntityIdValue( WikibaseClient::getEntityIdParser( $services )->parse( $value['id'] ) )
+					: EntityIdValue::newFromArray( $value );
+			},
+		] );
 	},
 
 	'WikibaseClient.EntityIdComposer' => function ( MediaWikiServices $services ): EntityIdComposer {

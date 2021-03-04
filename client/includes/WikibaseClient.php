@@ -4,12 +4,6 @@ namespace Wikibase\Client;
 
 use CentralIdLookup;
 use DataValues\Deserializers\DataValueDeserializer;
-use DataValues\Geo\Values\GlobeCoordinateValue;
-use DataValues\MonolingualTextValue;
-use DataValues\QuantityValue;
-use DataValues\StringValue;
-use DataValues\TimeValue;
-use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\DispatchingDeserializer;
@@ -63,7 +57,6 @@ use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
@@ -421,7 +414,7 @@ final class WikibaseClient {
 				$genericServices,
 				self::getEntityIdParser(),
 				self::getEntityIdComposer(),
-				$this->getDataValueDeserializer(),
+				self::getDataValueDeserializer(),
 				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
 				$this->getDataAccessSettings(),
 				$source,
@@ -870,14 +863,14 @@ final class WikibaseClient {
 
 	public function getBaseDataModelDeserializerFactory(): DeserializerFactory {
 		return new DeserializerFactory(
-			$this->getDataValueDeserializer(),
+			self::getDataValueDeserializer(),
 			self::getEntityIdParser()
 		);
 	}
 
 	private function getInternalFormatDeserializerFactory(): InternalDeserializerFactory {
 		return new InternalDeserializerFactory(
-			$this->getDataValueDeserializer(),
+			self::getDataValueDeserializer(),
 			self::getEntityIdParser(),
 			$this->getAllTypesEntityDeserializer()
 		);
@@ -936,20 +929,9 @@ final class WikibaseClient {
 		return $this->getWikibaseServices()->getCompactEntitySerializer();
 	}
 
-	private function getDataValueDeserializer(): DataValueDeserializer {
-		return new DataValueDeserializer( [
-			'string' => StringValue::class,
-			'unknown' => UnknownValue::class,
-			'globecoordinate' => GlobeCoordinateValue::class,
-			'monolingualtext' => MonolingualTextValue::class,
-			'quantity' => QuantityValue::class,
-			'time' => TimeValue::class,
-			'wikibase-entityid' => function ( $value ) {
-				return isset( $value['id'] )
-					? new EntityIdValue( self::getEntityIdParser()->parse( $value['id'] ) )
-					: EntityIdValue::newFromArray( $value );
-			},
-		] );
+	public static function getDataValueDeserializer( ContainerInterface $services = null ): DataValueDeserializer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.DataValueDeserializer' );
 	}
 
 	public function getOtherProjectsSidebarGeneratorFactory(): OtherProjectsSidebarGeneratorFactory {
