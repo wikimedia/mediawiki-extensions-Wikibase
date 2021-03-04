@@ -72,7 +72,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			$wikibaseRepo->newEditEntityFactory(),
 			$this->siteStore,
 			$this->getTermValidatorFactorMock(),
-			$wikibaseRepo->getItemTermsCollisionDetector()
+			WikibaseRepo::getItemTermsCollisionDetector()
 		);
 	}
 

@@ -228,6 +228,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialNewItem",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialNewItem::factory",
 			"services": [
+				"WikibaseRepo.ItemTermsCollisionDetector",
 				"WikibaseRepo.Settings"
 			]
 		},

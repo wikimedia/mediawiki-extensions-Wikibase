@@ -78,6 +78,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	}
 
 	public static function factory(
+		TermsCollisionDetector $itemTermsCollisionDetector,
 		SettingsArray $repoSettings
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -96,7 +97,7 @@ class SpecialNewItem extends SpecialNewEntity {
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->getTermValidatorFactory(),
-			$wikibaseRepo->getItemTermsCollisionDetector()
+			$itemTermsCollisionDetector
 		);
 	}
 

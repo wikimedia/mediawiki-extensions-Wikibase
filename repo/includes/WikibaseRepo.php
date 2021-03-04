@@ -1140,8 +1140,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.PropertyTermsCollisionDetector' );
 	}
 
-	public function getItemTermsCollisionDetector() {
-		return self::getTermsCollisionDetectorFactory()->getTermsCollisionDetector( Item::ENTITY_TYPE );
+	public static function getItemTermsCollisionDetector( ContainerInterface $services = null ): TermsCollisionDetector {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ItemTermsCollisionDetector' );
 	}
 
 	/**
