@@ -506,11 +506,6 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.RepoLinker' );
 	}
 
-	// compatibility alias for ArticlePlaceholder; TODO remove!
-	public static function newRepoLinker() {
-		return self::getRepoLinker();
-	}
-
 	public function getLanguageFallbackChainFactory(): LanguageFallbackChainFactory {
 		return $this->getWikibaseServices()->getLanguageFallbackChainFactory();
 	}
