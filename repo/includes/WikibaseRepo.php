@@ -101,6 +101,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
@@ -187,7 +188,6 @@ use Wikibase\Repo\Store\Sql\SqlStore;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
-use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
 use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
@@ -407,7 +407,7 @@ class WikibaseRepo {
 			$this->getEntityTitleTextLookup(),
 			$this->getEntityUrlLookup(),
 			$this->getEntityRedirectChecker(),
-			$this->getEntityTitleLookup(),
+			self::getEntityTitleLookup(),
 			self::getKartographerEmbeddingHandler(),
 			self::getSettings()->getSetting( 'useKartographerMaplinkInWikitext' ),
 			$thumbLimits
@@ -551,34 +551,34 @@ class WikibaseRepo {
 		return $this->getStore()->getEntityStoreWatcher();
 	}
 
-	/**
-	 * @return EntityTitleStoreLookup
-	 */
-	public function getEntityTitleLookup() {
-		return new TypeDispatchingEntityTitleStoreLookup(
-			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_TITLE_STORE_LOOKUP_FACTORY_CALLBACK ),
-			self::getEntityContentFactory()
-		);
+	public static function getEntityTitleLookup( ContainerInterface $services = null ): EntityTitleLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityTitleLookup' );
+	}
+
+	public static function getEntityTitleStoreLookup( ContainerInterface $services = null ): EntityTitleStoreLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityTitleStoreLookup' );
 	}
 
 	public function getEntityTitleTextLookup(): EntityTitleTextLookup {
 		return new TypeDispatchingTitleTextLookup(
 			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::TITLE_TEXT_LOOKUP_CALLBACK ),
-			new TitleLookupBasedEntityTitleTextLookup( $this->getEntityTitleLookup() )
+			new TitleLookupBasedEntityTitleTextLookup( self::getEntityTitleLookup() )
 		);
 	}
 
 	public function getEntityUrlLookup(): EntityUrlLookup {
 		return new TypeDispatchingUrlLookup(
 			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::URL_LOOKUP_CALLBACK ),
-			new TitleLookupBasedEntityUrlLookup( $this->getEntityTitleLookup() )
+			new TitleLookupBasedEntityUrlLookup( self::getEntityTitleLookup() )
 		);
 	}
 
 	public function getEntityArticleIdLookup(): EntityArticleIdLookup {
 		return new TypeDispatchingArticleIdLookup(
 			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ARTICLE_ID_LOOKUP_CALLBACK ),
-			new TitleLookupBasedEntityArticleIdLookup( $this->getEntityTitleLookup() )
+			new TitleLookupBasedEntityArticleIdLookup( self::getEntityTitleLookup() )
 		);
 	}
 
@@ -587,7 +587,7 @@ class WikibaseRepo {
 		return new TypeDispatchingExistenceChecker(
 			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::EXISTENCE_CHECKER_CALLBACK ),
 			new TitleLookupBasedEntityExistenceChecker(
-				$this->getEntityTitleLookup(),
+				self::getEntityTitleLookup(),
 				$services->getLinkBatchFactory()
 			)
 		);
@@ -596,7 +596,7 @@ class WikibaseRepo {
 	public function getEntityRedirectChecker(): EntityRedirectChecker {
 		return new TypeDispatchingRedirectChecker(
 			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::REDIRECT_CHECKER_CALLBACK ),
-			new TitleLookupBasedEntityRedirectChecker( $this->getEntityTitleLookup() )
+			new TitleLookupBasedEntityRedirectChecker( self::getEntityTitleLookup() )
 		);
 	}
 
@@ -663,7 +663,7 @@ class WikibaseRepo {
 			$user,
 			$this->newEditFilterHookRunner( $context ),
 			$this->getStore()->getEntityRedirectLookup(),
-			$this->getEntityTitleLookup()
+			self::getEntityTitleStoreLookup()
 		);
 	}
 
@@ -675,7 +675,7 @@ class WikibaseRepo {
 	private function newEditFilterHookRunner( IContextSource $context ) {
 		return new MediawikiEditFilterHookRunner(
 			$this->getEntityNamespaceLookup(),
-			$this->getEntityTitleLookup(),
+			self::getEntityTitleStoreLookup(),
 			self::getEntityContentFactory(),
 			$context
 		);
@@ -818,7 +818,7 @@ class WikibaseRepo {
 
 	public function getSiteLinkBadgeChangeOpSerializationValidator() {
 		return new SiteLinkBadgeChangeOpSerializationValidator(
-			$this->getEntityTitleLookup(),
+			self::getEntityTitleLookup(),
 			array_keys( self::getSettings()->getSetting( 'badgeItems' ) )
 		);
 	}
@@ -899,7 +899,7 @@ class WikibaseRepo {
 				self::getEntityIdParser(),
 				self::getEntityIdComposer(),
 				self::getEntityIdLookup(),
-				$this->getEntityTitleLookup(),
+				self::getEntityTitleStoreLookup(),
 				$this->getEntityNamespaceLookup(),
 				self::getIdGenerator(),
 				$this->getWikibaseServices(),
@@ -1034,7 +1034,7 @@ class WikibaseRepo {
 		// This needs to use an EntityIdPlainLinkFormatter as we want to mangle
 		// the links created in HtmlPageLinkRendererEndHookHandler afterwards (the links must not
 		// contain a display text: [[Item:Q1]] is fine but [[Item:Q1|Q1]] isn't).
-		$idFormatter = new EntityIdPlainLinkFormatter( $this->getEntityTitleLookup() );
+		$idFormatter = new EntityIdPlainLinkFormatter( self::getEntityTitleLookup() );
 
 		$formatterFactoryCBs = self::getDataTypeDefinitions()
 			->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE );
@@ -1096,7 +1096,7 @@ class WikibaseRepo {
 
 		return new WikiPageEntityStorePermissionChecker(
 			$this->getEntityNamespaceLookup(),
-			$this->getEntityTitleLookup(),
+			self::getEntityTitleLookup(),
 			MediaWikiServices::getInstance()->getPermissionManager(),
 			$wgAvailableRights
 		);
@@ -1177,7 +1177,7 @@ class WikibaseRepo {
 
 		return new MessageParameterFormatter(
 			$valueFormatterFactory->getValueFormatter( SnakFormatter::FORMAT_WIKI, $formatterOptions ),
-			new EntityIdLinkFormatter( $this->getEntityTitleLookup() ),
+			new EntityIdLinkFormatter( self::getEntityTitleLookup() ),
 			$this->getSiteLookup(),
 			$this->getUserLanguage()
 		);
@@ -1537,7 +1537,7 @@ class WikibaseRepo {
 		$services = MediaWikiServices::getInstance();
 
 		return new ApiHelperFactory(
-			$this->getEntityTitleLookup(),
+			self::getEntityTitleStoreLookup(),
 			$this->getExceptionLocalizer(),
 			$this->getPropertyDataTypeLookup(),
 			$this->getSiteLookup(),
@@ -1563,7 +1563,7 @@ class WikibaseRepo {
 	 */
 	public function newEditEntityFactory( IContextSource $context = null ) {
 		return new MediawikiEditEntityFactory(
-			$this->getEntityTitleLookup(),
+			self::getEntityTitleStoreLookup(),
 			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
@@ -1591,7 +1591,7 @@ class WikibaseRepo {
 			$this->getSummaryFormatter(),
 			$user,
 			$this->newItemRedirectCreationInteractor( $user, $context ),
-			$this->getEntityTitleLookup(),
+			self::getEntityTitleStoreLookup(),
 			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 	}
@@ -1621,7 +1621,7 @@ class WikibaseRepo {
 	 */
 	public function getEntityIdHtmlLinkFormatterFactory() {
 		$factory = new EntityIdHtmlLinkFormatterFactory(
-			$this->getEntityTitleLookup(),
+			self::getEntityTitleLookup(),
 			$this->getLanguageNameLookup(),
 			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK )
 		);
@@ -1666,7 +1666,7 @@ class WikibaseRepo {
 			SpecialPage::getTitleFor( 'EntityData' ),
 			$supportedExtensions,
 			self::getSettings()->getSetting( 'entityDataCachePaths' ),
-			$this->getEntityTitleLookup()
+			self::getEntityTitleLookup()
 		);
 	}
 
@@ -1676,7 +1676,7 @@ class WikibaseRepo {
 		return new EntityParserOutputGeneratorFactory(
 			$this->getEntityViewFactory(),
 			$this->getEntityMetaTagsCreatorFactory(),
-			$this->getEntityTitleLookup(),
+			self::getEntityTitleLookup(),
 			self::getLanguageFallbackChainFactory(),
 			TemplateFactory::getDefaultInstance(),
 			$this->getEntityDataFormatProvider(),

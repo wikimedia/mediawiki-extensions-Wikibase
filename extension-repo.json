@@ -196,7 +196,10 @@
 	"APIListModules": {
 		"wbsearch": {
 			"class": "\\Wikibase\\Repo\\Api\\QuerySearchEntities",
-			"factory": "\\Wikibase\\Repo\\Api\\QuerySearchEntities::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\QuerySearchEntities::factory",
+			"services": [
+				"WikibaseRepo.EntityTitleLookup"
+			]
 		},
 		"wbsubscribers": {
 			"class": "\\Wikibase\\Repo\\Api\\ListSubscribers",
@@ -230,6 +233,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialNewItem",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialNewItem::factory",
 			"services": [
+				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.ItemTermsCollisionDetector",
 				"WikibaseRepo.Settings"
 			]
@@ -239,6 +243,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialNewProperty::factory",
 			"services": [
 				"WikibaseRepo.DataTypeFactory",
+				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.PropertyTermsCollisionDetector",
 				"WikibaseRepo.Settings"
 			]
@@ -247,6 +252,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialItemByTitle",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialItemByTitle::factory",
 			"services": [
+				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Logger",
 				"WikibaseRepo.Settings"
 			]
@@ -260,13 +266,17 @@
 		},
 		"ItemDisambiguation": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation::factory"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation::factory",
+			"services": [
+				"WikibaseRepo.EntityTitleLookup"
+			]
 		},
 		"ItemsWithoutSitelinks": "Wikibase\\Repo\\Specials\\SpecialItemsWithoutSitelinks",
 		"SetLabel": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetLabel",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabel::factory",
 			"services": [
+				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings"
 			]
 		},
@@ -274,6 +284,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetDescription",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetDescription::factory",
 			"services": [
+				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings"
 			]
 		},
@@ -281,6 +292,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetAliases",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetAliases::factory",
 			"services": [
+				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings"
 			]
 		},
@@ -288,6 +300,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases::factory",
 			"services": [
+				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings"
 			]
 		},
@@ -295,6 +308,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink::factory",
 			"services": [
+				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings"
 			]
 		},
@@ -312,6 +326,7 @@
 				"HtmlCacheUpdater",
 				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.EntityTitleStoreLookup",
 				"WikibaseRepo.Logger",
 				"WikibaseRepo.RdfVocabulary",
 				"WikibaseRepo.Settings",
@@ -320,9 +335,9 @@
 		},
 		"EntityPage": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialEntityPage",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityPage::factory",
 			"services": [
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.EntityTitleLookup"
 			]
 		},
 		"MyLanguageFallbackChain": {
@@ -335,7 +350,8 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialMergeItems",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialMergeItems::factory",
 			"services": [
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.EntityTitleLookup"
 			]
 		},
 		"RedirectEntity": {
@@ -349,6 +365,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialAvailableBadges",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialAvailableBadges::factory",
 			"services": [
+				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.Settings"
 			]
@@ -357,6 +374,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialListPropertiesDispatchingFactory::factory",
 			"services": [
 				"WikibaseRepo.DataTypeFactory",
+				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.Settings"
 			]

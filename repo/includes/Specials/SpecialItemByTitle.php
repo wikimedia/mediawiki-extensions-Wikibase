@@ -93,6 +93,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	}
 
 	public static function factory(
+		EntityTitleLookup $entityTitleLookup,
 		LoggerInterface $logger,
 		SettingsArray $repoSettings
 	): self {
@@ -104,7 +105,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		);
 
 		return new self(
-			$wikibaseRepo->getEntityTitleLookup(),
+			$entityTitleLookup,
 			new LanguageNameLookup(),
 			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->getStore()->newSiteLinkStore(),

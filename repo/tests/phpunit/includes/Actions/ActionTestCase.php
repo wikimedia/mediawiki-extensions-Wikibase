@@ -404,7 +404,7 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 		$this->initTestItems();
 
 		$itemId = $this->getTestItemId( $handle );
-		$title = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $itemId );
+		$title = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $itemId );
 
 		$page = WikiPage::factory( $title );
 		return $page;

@@ -76,7 +76,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 	 * interfere with WikiPageEntityRedirectLookup (especially getRedirectIds).
 	 */
 	private function setUpNonEntityRedirect() {
-		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$entityTitleLookup = WikibaseRepo::getEntityTitleLookup();
 		$title = $entityTitleLookup->getTitleForId( $this->itemId );
 
 		$wikiText = '#REDIRECT [[' . $title->getFullText() . ']]';
@@ -197,10 +197,8 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getWikiPageEntityRedirectLookup() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		return new WikiPageEntityRedirectLookup(
-			$wikibaseRepo->getEntityTitleLookup(),
+			WikibaseRepo::getEntityTitleStoreLookup(),
 			WikibaseRepo::getEntityIdLookup(),
 			MediaWikiServices::getInstance()->getDBLoadBalancer()
 		);

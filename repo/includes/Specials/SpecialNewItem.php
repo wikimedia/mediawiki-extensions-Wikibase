@@ -78,6 +78,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	}
 
 	public static function factory(
+		EntityTitleLookup $entityTitleLookup,
 		TermsCollisionDetector $itemTermsCollisionDetector,
 		SettingsArray $repoSettings
 	): self {
@@ -93,7 +94,7 @@ class SpecialNewItem extends SpecialNewEntity {
 			$copyrightView,
 			$wikibaseRepo->getEntityNamespaceLookup(),
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityTitleLookup(),
+			$entityTitleLookup,
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->getTermValidatorFactory(),

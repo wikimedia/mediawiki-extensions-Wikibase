@@ -123,6 +123,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	}
 
 	public static function factory(
+		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -144,7 +145,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		return new self(
 			$copyrightView,
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityTitleLookup(),
+			$entityTitleLookup,
 			$wikibaseRepo->newEditEntityFactory(),
 			$siteLookup,
 			$siteLinkTargetProvider,

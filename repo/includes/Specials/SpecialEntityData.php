@@ -13,6 +13,7 @@ use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -56,6 +57,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		HtmlCacheUpdater $htmlCacheUpdater,
 		EntityContentFactory $entityContentFactory,
 		EntityIdParser $entityIdParser,
+		EntityTitleStoreLookup $entityTitleLookup,
 		LoggerInterface $logger,
 		RdfVocabulary $rdfVocabulary,
 		SettingsArray $repoSettings,
@@ -72,7 +74,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$serializationService = new EntityDataSerializationService(
 			$wikibaseRepo->getStore()->getEntityLookup(),
-			$wikibaseRepo->getEntityTitleLookup(),
+			$entityTitleLookup,
 			$entityContentFactory,
 			$wikibaseRepo->getPropertyDataTypeLookup(),
 			$valueSnakRdfBuilderFactory,

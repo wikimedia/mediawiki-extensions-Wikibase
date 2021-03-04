@@ -145,7 +145,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$obtainedEntity = $entityLookup->getEntity( $entityId );
 
-		$page = new WikiPage( $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $entityId ) );
+		$page = new WikiPage( WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $entityId ) );
 
 		$comment = $page->getRevisionRecord()->getComment( RevisionRecord::RAW );
 		$generatedSummary = $comment ? $comment->text : null;
@@ -236,7 +236,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 */
 	private function getEntityIdFormatter(): EntityIdFormatter {
 		if ( !$this->entityIdFormatter ) {
-			$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+			$titleLookup = WikibaseRepo::getEntityTitleLookup();
 			$this->entityIdFormatter = new EntityIdPlainLinkFormatter( $titleLookup );
 		}
 

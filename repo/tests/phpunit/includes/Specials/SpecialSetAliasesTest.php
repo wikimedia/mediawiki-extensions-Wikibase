@@ -35,7 +35,7 @@ class SpecialSetAliasesTest extends SpecialModifyTermTestCase {
 		return new SpecialSetAliases(
 			$copyrightView,
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityTitleLookup(),
+			WikibaseRepo::getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getEntityPermissionChecker()
 		);

@@ -49,7 +49,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 			$this->copyrightView,
 			new EntityNamespaceLookup( [ Property::ENTITY_TYPE => $namespaceNumber ] ),
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityTitleLookup(),
+			WikibaseRepo::getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getDataTypeFactory(),
 			WikibaseRepo::getPropertyTermsCollisionDetector()

@@ -127,7 +127,7 @@ class SearchEntities extends Maintenance {
 		foreach ( $results as $match ) {
 			$entityId = $match->getEntityId();
 
-			$title = $this->repo->getEntityTitleLookup()->getTitleForId( $entityId );
+			$title = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $entityId );
 			$displayLabel = $match->getDisplayLabel();
 			$out['rows'][] = [
 				'pageId' => $title->getArticleID(),

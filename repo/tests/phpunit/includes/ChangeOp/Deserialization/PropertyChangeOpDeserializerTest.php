@@ -45,7 +45,7 @@ class PropertyChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
 			new TermChangeOpSerializationValidator( new StaticContentLanguages( [ 'en' ] ) ),
 			new SiteLinkBadgeChangeOpSerializationValidator(
-				$wikibaseRepo->getEntityTitleLookup(),
+				WikibaseRepo::getEntityTitleLookup(),
 				[]
 			),
 			$wikibaseRepo->getExternalFormatStatementDeserializer(),

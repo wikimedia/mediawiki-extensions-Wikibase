@@ -68,6 +68,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 
 	public static function factory(
 		DataTypeFactory $dataTypeFactory,
+		EntityTitleLookup $entityTitleLookup,
 		TermsCollisionDetector $propertyTermsCollisionDetector,
 		SettingsArray $repoSettings
 	): self {
@@ -83,7 +84,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$copyrightView,
 			$wikibaseRepo->getEntityNamespaceLookup(),
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityTitleLookup(),
+			$entityTitleLookup,
 			$wikibaseRepo->newEditEntityFactory(),
 			$dataTypeFactory,
 			$propertyTermsCollisionDetector
