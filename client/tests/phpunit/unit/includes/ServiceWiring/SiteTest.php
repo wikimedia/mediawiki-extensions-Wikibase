@@ -44,6 +44,28 @@ class SiteTest extends ServiceWiringTestCase {
 		$this->assertSame( $site, $this->getService( 'WikibaseClient.Site' ) );
 	}
 
+	public function testFromSiteLookup_noLocalIds() {
+		$this->mockService( 'WikibaseClient.Settings',
+			new SettingsArray( [
+				'siteGlobalID' => 'testglobalid',
+				'siteLocalID' => 'testlocalid',
+			] ) );
+		$site = $this->createMock( Site::class );
+		$site->method( 'getLocalIds' )
+			->willReturn( [] ); // unusual but possible (T276619)
+		$siteLookup = $this->createMock( SiteLookup::class );
+		$siteLookup->expects( $this->once() )
+			->method( 'getSite' )
+			->willReturn( $site );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getSiteLookup' )
+			->willReturn( $siteLookup );
+		$this->mockService( 'WikibaseClient.Logger',
+			new NullLogger() );
+
+		$this->assertSame( $site, $this->getService( 'WikibaseClient.Site' ) );
+	}
+
 	public function testConstruction(): void {
 		$this->mockService( 'WikibaseClient.Settings',
 			new SettingsArray( [
