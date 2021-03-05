@@ -7,7 +7,6 @@ use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\StringNormalizer;
 
 /**
@@ -36,11 +35,6 @@ class GenericServices {
 	 * @var Serializer|null
 	 */
 	private $storageEntitySerializer;
-
-	/**
-	 * @var LanguageFallbackChainFactory
-	 */
-	private $languageFallbackChainFactory;
 
 	/**
 	 * @var StringNormalizer
@@ -137,17 +131,6 @@ class GenericServices {
 			// SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 			2 + 8
 		);
-	}
-
-	/**
-	 * @return LanguageFallbackChainFactory
-	 */
-	public function getLanguageFallbackChainFactory() {
-		if ( $this->languageFallbackChainFactory === null ) {
-			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory();
-		}
-
-		return $this->languageFallbackChainFactory;
 	}
 
 	/**

@@ -17,6 +17,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevision;
@@ -77,6 +78,9 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	 */
 	private $entitySource;
 
+	/** @var LanguageFallbackChainFactory */
+	private $languageFallbackChainFactory;
+
 	/** @var callable[] */
 	private $deserializerFactoryCallbacks;
 
@@ -122,6 +126,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		NameTableStore $slotRoleStore,
 		DataAccessSettings $dataAccessSettings,
 		EntitySource $entitySource,
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		array $deserializerFactoryCallbacks,
 		array $entityMetaDataAccessorCallbacks,
 		array $prefetchingTermLookupCallbacks,
@@ -141,6 +146,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		$this->slotRoleStore = $slotRoleStore;
 		$this->dataAccessSettings = $dataAccessSettings;
 		$this->entitySource = $entitySource;
+		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->deserializerFactoryCallbacks = $deserializerFactoryCallbacks;
 		$this->entityMetaDataAccessorCallbacks = $entityMetaDataAccessorCallbacks;
 		$this->prefetchingTermLookupCallbacks = $prefetchingTermLookupCallbacks;
@@ -318,7 +324,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		if ( $this->termSearchInteractorFactory === null ) {
 			$this->termSearchInteractorFactory = new MatchingTermsSearchInteractorFactory(
 				$this->getMatchingTermsLookup(),
-				$this->genericServices->getLanguageFallbackChainFactory(),
+				$this->languageFallbackChainFactory,
 				$this->getPrefetchingTermLookup()
 			);
 		}

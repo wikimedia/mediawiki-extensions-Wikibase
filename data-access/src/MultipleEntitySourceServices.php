@@ -191,10 +191,6 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 		return $this->genericServices->getCompactBaseDataModelSerializerFactory();
 	}
 
-	public function getLanguageFallbackChainFactory() {
-		return $this->genericServices->getLanguageFallbackChainFactory();
-	}
-
 	public function getStringNormalizer() {
 		return $this->genericServices->getStringNormalizer();
 	}
