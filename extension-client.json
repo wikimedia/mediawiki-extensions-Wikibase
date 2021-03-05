@@ -29,7 +29,10 @@
 	"APIPropModules": {
 		"pageterms": {
 			"class": "\\Wikibase\\Client\\Api\\PageTerms",
-			"factory": "\\Wikibase\\Client\\Api\\PageTerms::factory"
+			"factory": "\\Wikibase\\Client\\Api\\PageTerms::factory",
+		  	"services": [
+			  	"WikibaseClient.EntityIdLookup"
+			]
 		},
 		"description": {
 			"class": "\\Wikibase\\Client\\Api\\Description",

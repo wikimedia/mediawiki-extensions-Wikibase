@@ -339,7 +339,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		return new WikibaseLanguageIndependentLuaBindings(
 			$wikibaseClient->getStore()->getSiteLinkLookup(),
-			$wikibaseClient->getEntityIdLookup(),
+			WikibaseClient::getEntityIdLookup(),
 			$settings,
 			$this->getUsageAccumulator(),
 			$this->getEntityIdParser(),

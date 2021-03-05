@@ -43,10 +43,8 @@ use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
-use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\DataAccess\AliasTermBuffer;
-use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -154,11 +152,6 @@ final class WikibaseClient {
 	 * @var Deserializer|null
 	 */
 	private $entityDeserializer = null;
-
-	/**
-	 * @var EntityIdLookup|null
-	 */
-	private $entityIdLookup = null;
 
 	/**
 	 * @var ClientStore|null
@@ -520,7 +513,7 @@ final class WikibaseClient {
 				$this->getEntityChangeFactory(),
 				self::getEntityIdParser(),
 				self::getEntityIdComposer(),
-				$this->getEntityIdLookup(),
+				self::getEntityIdLookup(),
 				$this->getEntityNamespaceLookup(),
 				$this->getWikibaseServices(),
 				self::getSettings(),
@@ -1153,26 +1146,15 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.TermFallbackCacheFactory' );
 	}
 
-	public function getEntityIdLookup(): EntityIdLookup {
-		if ( $this->entityIdLookup === null ) {
-			$entityTypeDefinitions = self::getEntityTypeDefinitions();
-			$this->entityIdLookup = new ByTypeDispatchingEntityIdLookup(
-				$entityTypeDefinitions->get( EntityTypeDefinitions::CONTENT_MODEL_ID ),
-				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_ID_LOOKUP_CALLBACK ),
-				new PagePropsEntityIdLookup(
-					MediaWikiServices::getInstance()->getDBLoadBalancer(),
-					self::getEntityIdParser()
-				)
-			);
-		}
-
-		return $this->entityIdLookup;
+	public static function getEntityIdLookup( ContainerInterface $services = null ): EntityIdLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.EntityIdLookup' );
 	}
 
 	public function getDescriptionLookup(): DescriptionLookup {
 		if ( $this->descriptionLookup === null ) {
 			$this->descriptionLookup = new DescriptionLookup(
-				$this->getEntityIdLookup(),
+				self::getEntityIdLookup(),
 				$this->getTermBuffer(),
 				MediaWikiServices::getInstance()->getPageProps()
 			);
