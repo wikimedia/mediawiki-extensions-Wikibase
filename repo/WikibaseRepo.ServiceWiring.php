@@ -275,6 +275,11 @@ return [
 		return $idGenerator;
 	},
 
+	'WikibaseRepo.ItemTermsCollisionDetector' => function ( MediaWikiServices $services ): TermsCollisionDetector {
+		return WikibaseRepo::getTermsCollisionDetectorFactory( $services )
+			->getTermsCollisionDetector( Item::ENTITY_TYPE );
+	},
+
 	'WikibaseRepo.KartographerEmbeddingHandler' => function ( MediaWikiServices $services ): ?CachingKartographerEmbeddingHandler {
 		$settings = WikibaseRepo::getSettings( $services );
 		$config = $services->getMainConfig();
