@@ -118,11 +118,6 @@ class WikibaseContentLanguages {
 	}
 
 	public static function getDefaultMonolingualTextLanguages() {
-		// This has to be a superset of the language codes returned by
-		// wikibase.WikibaseContentLanguages.
-		// We don't want to have language codes in the suggester that are not
-		// supported by the backend. The other way round is currently acceptable,
-		// but will be fixed in T124758.
 		return new DifferenceContentLanguages(
 			new UnionContentLanguages(
 				self::getDefaultTermsLanguages(),
