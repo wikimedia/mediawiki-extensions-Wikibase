@@ -416,7 +416,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 	private function createTitleForEntity( EntityDocument $entity ) {
 		// NOTE: needs database access
 		$this->entityStore->assignFreshId( $entity );
-		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$titleLookup = WikibaseRepo::getEntityTitleStoreLookup();
 		$title = $titleLookup->getTitleForId( $entity->getId() );
 
 		if ( !$title->exists( Title::GAID_FOR_UPDATE ) ) {

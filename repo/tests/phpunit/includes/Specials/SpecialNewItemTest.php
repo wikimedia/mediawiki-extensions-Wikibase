@@ -68,7 +68,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			$this->copyrightView,
 			new EntityNamespaceLookup( [ Item::ENTITY_TYPE => $namespaceNumber ] ),
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityTitleLookup(),
+			WikibaseRepo::getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$this->siteStore,
 			$this->getTermValidatorFactorMock(),

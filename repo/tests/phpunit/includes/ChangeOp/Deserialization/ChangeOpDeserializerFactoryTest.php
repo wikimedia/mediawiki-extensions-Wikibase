@@ -67,7 +67,7 @@ class ChangeOpDeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
 			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
 			new TermChangeOpSerializationValidator( $wikibaseRepo->getTermsLanguages() ),
 			new SiteLinkBadgeChangeOpSerializationValidator(
-				$wikibaseRepo->getEntityTitleLookup(),
+				WikibaseRepo::getEntityTitleLookup(),
 				[]
 			),
 			$wikibaseRepo->getExternalFormatStatementDeserializer(),

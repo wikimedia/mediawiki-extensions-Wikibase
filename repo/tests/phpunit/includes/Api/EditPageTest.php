@@ -40,7 +40,7 @@ class EditPageTest extends WikibaseApiTestCase {
 		$data = $wikibaseRepo->getStorageEntitySerializer()->serialize( $item );
 		$text = json_encode( $data );
 
-		$title = $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $item->getId() );
+		$title = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $item->getId() );
 
 		// try to update the item with valid data via the edit action
 		$this->expectException( ApiUsageException::class );
@@ -58,7 +58,7 @@ class EditPageTest extends WikibaseApiTestCase {
 	 */
 	public function testEditTextInItemNamespace() {
 		$id = new ItemId( "Q1234567" );
-		$title = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $id );
+		$title = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $id );
 		$page = new WikiPage( $title );
 
 		$text = "hallo welt";

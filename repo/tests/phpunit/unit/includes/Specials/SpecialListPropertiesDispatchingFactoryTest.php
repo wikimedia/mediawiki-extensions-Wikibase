@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
 use Wikibase\Repo\Specials\SpecialListProperties;
 use Wikibase\Repo\Specials\SpecialListPropertiesDispatchingFactory;
@@ -24,6 +25,7 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 	public function testFactoryNoFederation() {
 		$specialPage = SpecialListPropertiesDispatchingFactory::factory(
 			new DataTypeFactory( [] ),
+			$this->createMock( EntityTitleLookup::class ),
 			WikibaseRepo::getLanguageFallbackChainFactory(),
 			new SettingsArray( [
 				'federatedPropertiesEnabled' => true,
@@ -37,6 +39,7 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 	public function testFactoryFederation() {
 		$specialPage = SpecialListPropertiesDispatchingFactory::factory(
 			new DataTypeFactory( [] ),
+			$this->createMock( EntityTitleLookup::class ),
 			WikibaseRepo::getLanguageFallbackChainFactory(),
 			new SettingsArray( [ 'federatedPropertiesEnabled' => false ] )
 		);

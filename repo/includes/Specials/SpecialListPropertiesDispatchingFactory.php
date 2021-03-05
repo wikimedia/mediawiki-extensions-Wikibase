@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Specials;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
 use Wikibase\Repo\WikibaseRepo;
@@ -26,6 +27,7 @@ class SpecialListPropertiesDispatchingFactory {
 	 */
 	public static function factory(
 		DataTypeFactory $dataTypeFactory,
+		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		SettingsArray $repoSettings
 	) {
@@ -49,7 +51,7 @@ class SpecialListPropertiesDispatchingFactory {
 			$wikibaseRepo->getStore()->getPropertyInfoLookup(),
 			$labelDescriptionLookup,
 			$entityIdFormatter,
-			$wikibaseRepo->getEntityTitleLookup(),
+			$entityTitleLookup,
 			$prefetchingTermLookup,
 			$languageFallbackChainFactory
 		);

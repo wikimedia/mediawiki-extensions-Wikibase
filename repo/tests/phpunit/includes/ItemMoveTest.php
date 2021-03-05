@@ -65,7 +65,7 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 		$this->entityRevision = $wikibaseRepo->getEntityStore()->saveEntity( $item, '', $this->getTestUser()->getUser(), EDIT_NEW );
 
 		$id = $this->entityRevision->getEntity()->getId();
-		$this->itemTitle = $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $id );
+		$this->itemTitle = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $id );
 
 		$title = Title::newFromTextThrow( 'wbmovetest', $this->getDefaultWikitextNS() );
 		$this->page = new WikiPage( $title );
@@ -107,7 +107,7 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 			->getMovePageFactory()
 			->newMovePage(
 				$this->page->getTitle(),
-				WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
+				WikibaseRepo::getEntityTitleStoreLookup()
 					->getTitleForId( new ItemId( 'Q42' ) )
 			);
 		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
@@ -156,7 +156,7 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 			->getMovePageFactory()
 			->newMovePage(
 				$this->itemTitle,
-				WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
+				WikibaseRepo::getEntityTitleStoreLookup()
 					->getTitleForId( new ItemId( 'Q42' ) )
 			);
 		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );

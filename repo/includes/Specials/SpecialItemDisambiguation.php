@@ -9,6 +9,7 @@ use WebRequest;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\ItemDisambiguation;
@@ -70,14 +71,16 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		$this->limit = $limit;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		EntityTitleLookup $entityTitleLookup
+	): self {
 		global $wgLang;
 
 		$languageCode = $wgLang->getCode();
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$languageNameLookup = new LanguageNameLookup( $languageCode );
 		$itemDisambiguation = new ItemDisambiguation(
-			$wikibaseRepo->getEntityTitleLookup(),
+			$entityTitleLookup,
 			$languageNameLookup,
 			$languageCode
 		);

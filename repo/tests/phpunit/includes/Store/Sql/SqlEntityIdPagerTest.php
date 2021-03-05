@@ -97,7 +97,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getRedirectRow( EntityRedirect $redirect ) {
-		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$entityTitleLookup = WikibaseRepo::getEntityTitleStoreLookup();
 
 		$redirectTitle = $entityTitleLookup->getTitleForId( $redirect->getEntityId() );
 		return [

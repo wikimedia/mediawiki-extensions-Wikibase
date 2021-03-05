@@ -41,6 +41,7 @@ class SpecialSetLabel extends SpecialModifyTerm {
 	}
 
 	public static function factory(
+		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -54,7 +55,7 @@ class SpecialSetLabel extends SpecialModifyTerm {
 		return new self(
 			$copyrightView,
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityTitleLookup(),
+			$entityTitleLookup,
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getEntityPermissionChecker()
 		);
