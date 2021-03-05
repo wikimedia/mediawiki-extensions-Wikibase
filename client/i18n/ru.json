@@ -130,12 +130,19 @@
 	"connected-redirect-category": "Перенаправления, связанные с элементом {{grammar:genitive|{{WBREPONAME}}}}",
 	"connected-redirect-category-desc": "Эта категория перечисляет страницы-перенаправления, которые связаны с элементом {{grammar:genitive|{{WBREPONAME}}}}.",
 	"wikibase-client-data-bridge-dialog-title": "Редактировать $1",
+	"wikibase-client-data-bridge-permissions-error-info": "Подробнее",
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Я исправил</strong> некорректное значение",
 	"wikibase-client-data-bridge-references-heading": "Примечания",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Вы не вошли в систему",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Войти или Зарегистрироваться",
 	"wikibase-client-data-bridge-license-heading": "Использование и лицензия",
 	"wikibase-client-data-bridge-license-body": "<p>Изменение этого значения также приведет к его изменению в {{WBREPONAME}} и, возможно, в вики на других языках.</p>\n<p>Нажимая \"{{int:$1}}\", вы соглашаетесь с [$2 условиями использования] и безоговорочно соглашаетесь опубликовать свой вклад в соответствии с [$3 $4].</p>",
+	"wikibase-client-data-bridge-saving-error-heading": "Невозможно сохранить изменения",
+	"wikibase-client-data-bridge-edit-conflict-error-heading": "Обнаружен конфликт редактирования",
+	"wikibase-client-data-bridge-unknown-error-heading": "Что-то пошло не так",
 	"wikibase-client-data-bridge-error-reload-bridge": "Перезагрузить",
 	"wikibase-client-data-bridge-error-reload-page": "Перезагрузить страницу",
-	"wikibase-client-data-bridge-error-go-back": "Вернуться назад"
+	"wikibase-client-data-bridge-error-go-back": "Вернуться назад",
+	"wikibase-client-data-bridge-error-retry-save": "Повторить сохранение",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Вы не вошли в систему"
 }
