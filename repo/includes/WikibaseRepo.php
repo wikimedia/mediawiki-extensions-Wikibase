@@ -823,11 +823,9 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return EntityChangeOpProvider
-	 */
-	public function getEntityChangeOpProvider() {
-		return new EntityChangeOpProvider( self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::CHANGEOP_DESERIALIZER_CALLBACK ) );
+	public static function getEntityChangeOpProvider( ContainerInterface $services = null ): EntityChangeOpProvider {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityChangeOpProvider' );
 	}
 
 	/**

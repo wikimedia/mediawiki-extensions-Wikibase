@@ -68,7 +68,6 @@ use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
-use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
@@ -355,11 +354,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetStatementGuidParser() {
 		$returnValue = WikibaseRepo::getStatementGuidParser();
 		$this->assertInstanceOf( StatementGuidParser::class, $returnValue );
-	}
-
-	public function testGetEntityChangeOpProvider() {
-		$provider = $this->getWikibaseRepo()->getEntityChangeOpProvider();
-		$this->assertInstanceOf( EntityChangeOpProvider::class, $provider );
 	}
 
 	public function testGetChangeOpDeserializerFactory() {

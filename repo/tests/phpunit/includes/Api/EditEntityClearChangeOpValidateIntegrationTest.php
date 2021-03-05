@@ -125,7 +125,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends MediaWikiIntegratio
 			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			WikibaseRepo::getEntityIdParser(),
 			WikibaseRepo::getDataTypeDefinitions()->getTypeIds(),
-			$wikibaseRepo->getEntityChangeOpProvider(),
+			WikibaseRepo::getEntityChangeOpProvider(),
 			new EditSummaryHelper(
 				new ChangedLanguagesCollector(),
 				new ChangedLanguagesCounter(),

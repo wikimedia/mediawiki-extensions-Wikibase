@@ -111,6 +111,7 @@ class EditEntity extends ModifyEntity {
 		ApiMain $mainModule,
 		string $moduleName,
 		DataTypeDefinitions $dataTypeDefinitions,
+		EntityChangeOpProvider $entityChangeOpProvider,
 		EntityIdParser $entityIdParser
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -121,7 +122,7 @@ class EditEntity extends ModifyEntity {
 			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$entityIdParser,
 			$dataTypeDefinitions->getTypeIds(),
-			$wikibaseRepo->getEntityChangeOpProvider(),
+			$entityChangeOpProvider,
 			new EditSummaryHelper(
 				new ChangedLanguagesCollector(),
 				new ChangedLanguagesCounter(),
