@@ -113,7 +113,7 @@ abstract class ModifyEntity extends ApiBase {
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
 		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
-		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
+		$this->stringNormalizer = WikibaseRepo::getStringNormalizer();
 		$this->enabledEntityTypes = WikibaseRepo::getLocalEntityTypes();
 
 		$this->entitySavingHelper->setEntityIdParam( 'id' );

@@ -732,11 +732,9 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return StringNormalizer
-	 */
-	public function getStringNormalizer() {
-		return $this->getWikibaseServices()->getStringNormalizer();
+	public static function getStringNormalizer( ContainerInterface $services = null ): StringNormalizer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.StringNormalizer' );
 	}
 
 	/**
@@ -848,7 +846,7 @@ class WikibaseRepo {
 				self::getSettings()->getSetting( 'specialSiteLinkGroups' )
 			),
 			self::getEntityIdParser(),
-			$this->getStringNormalizer(),
+			self::getStringNormalizer(),
 			self::getSettings()->getSetting( 'siteLinkGroups' )
 		);
 	}
@@ -1431,7 +1429,7 @@ class WikibaseRepo {
 	public function getNewTermStoreWriterFactory(): TermStoreWriterFactory {
 		return new TermStoreWriterFactory(
 			self::getLocalEntitySource(),
-			$this->getStringNormalizer(),
+			self::getStringNormalizer(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			MediaWikiServices::getInstance()->getMainWANObjectCache(),
 			JobQueueGroup::singleton(),

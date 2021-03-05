@@ -131,7 +131,8 @@ class GetEntities extends ApiBase {
 		IBufferingStatsdDataFactory $stats,
 		EntityIdParser $entityIdParser,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		SettingsArray $repoSettings
+		SettingsArray $repoSettings,
+		StringNormalizer $stringNormalizer
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
@@ -144,7 +145,7 @@ class GetEntities extends ApiBase {
 		return new self(
 			$apiMain,
 			$moduleName,
-			$wikibaseRepo->getStringNormalizer(),
+			$stringNormalizer,
 			$languageFallbackChainFactory,
 			$siteLinkTargetProvider,
 			$wikibaseRepo->getStore()->getEntityPrefetcher(),

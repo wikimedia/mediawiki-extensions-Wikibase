@@ -61,7 +61,6 @@ use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
-use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
@@ -323,11 +322,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetPropertyDataTypeLookupReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getPropertyDataTypeLookup();
 		$this->assertInstanceOf( PropertyDataTypeLookup::class, $returnValue );
-	}
-
-	public function testGetStringNormalizerReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getStringNormalizer();
-		$this->assertInstanceOf( StringNormalizer::class, $returnValue );
 	}
 
 	public function testGetEntityLookupReturnType() {

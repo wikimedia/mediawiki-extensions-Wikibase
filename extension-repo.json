@@ -76,7 +76,8 @@
 				"StatsdDataFactory",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.LanguageFallbackChainFactory",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.StringNormalizer"
 			]
 		},
 		"wblinktitles": {

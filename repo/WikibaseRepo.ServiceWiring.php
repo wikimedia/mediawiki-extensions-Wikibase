@@ -44,6 +44,7 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
@@ -423,6 +424,10 @@ return [
 
 	'WikibaseRepo.StatementGuidValidator' => function ( MediaWikiServices $services ): StatementGuidValidator {
 		return new StatementGuidValidator( WikibaseRepo::getEntityIdParser( $services ) );
+	},
+
+	'WikibaseRepo.StringNormalizer' => function ( MediaWikiServices $services ): StringNormalizer {
+		return new StringNormalizer();
 	},
 
 	'WikibaseRepo.TermFallbackCache' => function ( MediaWikiServices $services ): TermFallbackCacheFacade {
