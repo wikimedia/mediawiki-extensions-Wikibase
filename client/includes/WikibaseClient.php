@@ -492,13 +492,14 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.RepoLinker' );
 	}
 
-	public function getLanguageFallbackChainFactory(): LanguageFallbackChainFactory {
-		return $this->getWikibaseServices()->getLanguageFallbackChainFactory();
+	public static function getLanguageFallbackChainFactory( ContainerInterface $services = null ): LanguageFallbackChainFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.LanguageFallbackChainFactory' );
 	}
 
 	public function getLanguageFallbackLabelDescriptionLookupFactory(): LanguageFallbackLabelDescriptionLookupFactory {
 		return new LanguageFallbackLabelDescriptionLookupFactory(
-			$this->getLanguageFallbackChainFactory(),
+			self::getLanguageFallbackChainFactory(),
 			$this->getTermLookup(),
 			$this->getTermBuffer()
 		);
@@ -769,7 +770,7 @@ final class WikibaseClient {
 			$this->valueFormatterFactory = new OutputFormatValueFormatterFactory(
 				self::getDataTypeDefinitions()->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
 				$this->getContentLanguage(),
-				$this->getLanguageFallbackChainFactory()
+				self::getLanguageFallbackChainFactory()
 			);
 		}
 
@@ -971,7 +972,7 @@ final class WikibaseClient {
 
 	public function getDataAccessSnakFormatterFactory(): DataAccessSnakFormatterFactory {
 		return new DataAccessSnakFormatterFactory(
-			$this->getLanguageFallbackChainFactory(),
+			self::getLanguageFallbackChainFactory(),
 			$this->getSnakFormatterFactory(),
 			$this->getPropertyDataTypeLookup(),
 			$this->getRepoItemUriParser(),
@@ -1130,7 +1131,7 @@ final class WikibaseClient {
 	}
 
 	public function getDataAccessLanguageFallbackChain( Language $language ): TermLanguageFallbackChain {
-		return $this->getLanguageFallbackChainFactory()->newFromLanguage(
+		return self::getLanguageFallbackChainFactory()->newFromLanguage(
 			$language,
 			LanguageFallbackChainFactory::FALLBACK_ALL
 		);

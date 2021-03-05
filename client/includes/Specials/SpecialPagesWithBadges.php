@@ -10,6 +10,7 @@ use Skin;
 use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
@@ -61,12 +62,13 @@ class SpecialPagesWithBadges extends QueryPage {
 	}
 
 	public static function factory(
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		SettingsArray $clientSettings
 	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		return new self(
 			new LanguageFallbackLabelDescriptionLookupFactory(
-				$wikibaseClient->getLanguageFallbackChainFactory(),
+				$languageFallbackChainFactory,
 				$wikibaseClient->getTermLookup(),
 				$wikibaseClient->getTermBuffer()
 			),

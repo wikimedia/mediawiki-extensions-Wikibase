@@ -330,7 +330,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			WikibaseClient::getTermFallbackCache( $mediaWikiServices ),
 			new RedirectResolvingLatestRevisionLookup( $wikibaseClient->getStore()->getEntityRevisionLookup() ),
 			new LanguageFallbackLabelDescriptionLookupFactory(
-				$wikibaseClient->getLanguageFallbackChainFactory(),
+				WikibaseClient::getLanguageFallbackChainFactory( $mediaWikiServices ),
 				$wikibaseClient->getTermLookup()
 			),
 			$mediaWikiServices->getLanguageFactory(),
