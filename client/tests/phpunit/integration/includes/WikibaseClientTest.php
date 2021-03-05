@@ -63,6 +63,8 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		// https://phabricator.wikimedia.org/T243729
 		$this->disallowDBAccess();
 		$this->disallowHttpAccess();
+
+		$this->setService( 'SiteLookup', $this->getSiteLookup() );
 	}
 
 	private function disallowDBAccess() {
@@ -160,11 +162,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetSettingsReturnType() {
 		$returnValue = WikibaseClient::getSettings();
 		$this->assertInstanceOf( SettingsArray::class, $returnValue );
-	}
-
-	public function testGetSiteReturnType() {
-		$returnValue = $this->getWikibaseClient()->getSite();
-		$this->assertInstanceOf( Site::class, $returnValue );
 	}
 
 	public function testGetLangLinkHandlerFactoryReturnType() {

@@ -13,7 +13,6 @@ use JobQueueGroup;
 use Language;
 use LogicException;
 use MediaWiki\MediaWikiServices;
-use MediaWikiSite;
 use MWException;
 use ObjectCache;
 use Psr\Container\ContainerInterface;
@@ -157,11 +156,6 @@ final class WikibaseClient {
 	 * @var ClientStore|null
 	 */
 	private $store = null;
-
-	/**
-	 * @var Site|null
-	 */
-	private $site = null;
 
 	/**
 	 * @var string|null
@@ -649,45 +643,10 @@ final class WikibaseClient {
 	 *
 	 * If the configured site ID is not found in the sites table, a
 	 * new Site object is constructed from the configured ID.
-	 *
-	 * @throws MWException
 	 */
-	public function getSite(): Site {
-		if ( $this->site === null ) {
-			$settings = self::getSettings();
-			$globalId = $settings->getSetting( 'siteGlobalID' );
-			$localId = $settings->getSetting( 'siteLocalID' );
-
-			$this->site = $this->siteLookup->getSite( $globalId );
-
-			$logger = self::getLogger();
-
-			if ( !$this->site ) {
-				$logger->debug(
-					'{method}:  Unable to resolve site ID {globalId}!',
-					[ 'method' => __METHOD__, 'globalId' => $globalId ]
-				);
-
-				$this->site = new MediaWikiSite();
-				$this->site->setGlobalId( $globalId );
-				$this->site->addLocalId( Site::ID_INTERWIKI, $localId );
-				$this->site->addLocalId( Site::ID_EQUIVALENT, $localId );
-			}
-
-			if ( !in_array( $localId, $this->site->getLocalIds() ) ) {
-				$logger->debug(
-					'{method}: The configured local id {localId} does not match any local IDs of site {globalId}: {localIds}',
-					[
-						'method' => __METHOD__,
-						'localId' => $localId,
-						'globalId' => $globalId,
-						'localIds' => json_encode( $this->site->getLocalIds() )
-					]
-				);
-			}
-		}
-
-		return $this->site;
+	public static function getSite( ContainerInterface $services = null ): Site {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.Site' );
 	}
 
 	/**

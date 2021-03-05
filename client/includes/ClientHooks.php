@@ -242,7 +242,7 @@ final class ClientHooks {
 			function () {
 				$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-				$site = $wikibaseClient->getSite();
+				$site = WikibaseClient::getSite();
 				$currentSite = [
 					'globalSiteId' => $site->getGlobalId(),
 					'languageCode' => $site->getLanguageCode(),
