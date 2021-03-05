@@ -26,6 +26,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -128,6 +129,14 @@ return [
 		$services->getHookContainer()->run( 'WikibaseClientEntityTypes', [ &$entityTypes ] );
 
 		return new EntityTypeDefinitions( $entityTypes );
+	},
+
+	'WikibaseClient.LanguageFallbackChainFactory' => function ( MediaWikiServices $services ): LanguageFallbackChainFactory {
+		return new LanguageFallbackChainFactory(
+			$services->getLanguageFactory(),
+			$services->getLanguageConverterFactory(),
+			$services->getLanguageFallback()
+		);
 	},
 
 	'WikibaseClient.Logger' => function ( MediaWikiServices $services ): LoggerInterface {
