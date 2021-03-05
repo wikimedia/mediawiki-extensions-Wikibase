@@ -68,6 +68,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 
 	public static function factory(
 		DataTypeFactory $dataTypeFactory,
+		TermsCollisionDetector $propertyTermsCollisionDetector,
 		SettingsArray $repoSettings
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -85,7 +86,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$dataTypeFactory,
-			$wikibaseRepo->getPropertyTermsCollisionDetector()
+			$propertyTermsCollisionDetector
 		);
 	}
 
