@@ -1,0 +1,33 @@
+name: Filter Wikibase Changes
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  filterChanges:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: git-filter-repo
+        uses: wmde/git-filter-repo-docker-action@v1
+        with:
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY_CHANGES }}
+          targetOrg: wikimedia
+          targetRepo: wikibase-changes
+          targetBranch: main
+          filterArguments: >-
+            --force
+            --path=lib/includes/changes/
+            --path=lib/includes/Changes/
+            --path=lib/tests/phpunit/changes/
+            --path=lib/tests/phpunit/Changes/
+            --path lib/packages/wikibase/changes/
+            --path .mailmap
+            --path-rename=lib/includes/changes:src
+            --path-rename=lib/includes/Changes:src
+            --path-rename=lib/tests/phpunit/changes:tests
+            --path-rename=lib/tests/phpunit/Changes:tests
+            --path-rename lib/packages/wikibase/changes/:
+            --message-callback 'return re.sub(b"^changes: ", b"", message)'
