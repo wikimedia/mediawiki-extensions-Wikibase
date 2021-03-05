@@ -115,6 +115,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		InterwikiLookup $interwikiLookup,
 		SpecialPageFactory $specialPageFactory,
 		EntityIdParser $entityIdParser,
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		SettingsArray $repoSettings
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -131,7 +132,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 				return $wikibaseRepo->getEntityLinkFormatterFactory( $language );
 			},
 			$specialPageFactory,
-			$wikibaseRepo->getLanguageFallbackChainFactory(),
+			$languageFallbackChainFactory,
 			$wikibaseRepo->getEntityUrlLookup(),
 			$wikibaseRepo->getLinkTargetEntityIdLookup(),
 			$repoSettings->getSetting( 'federatedPropertiesSourceScriptUrl' ),

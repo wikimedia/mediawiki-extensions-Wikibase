@@ -45,7 +45,6 @@ use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -366,11 +365,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetChangeOpDeserializerFactory() {
 		$factory = $this->getWikibaseRepo()->getChangeOpDeserializerFactory();
 		$this->assertInstanceOf( ChangeOpDeserializerFactory::class, $factory );
-	}
-
-	public function testGetLanguageFallbackChainFactory() {
-		$returnValue = $this->getWikibaseRepo()->getLanguageFallbackChainFactory();
-		$this->assertInstanceOf( LanguageFallbackChainFactory::class, $returnValue );
 	}
 
 	public function testGetLanguageFallbackLabelDescriptionLookupFactory() {

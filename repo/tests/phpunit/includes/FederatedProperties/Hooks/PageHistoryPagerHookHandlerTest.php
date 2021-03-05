@@ -137,11 +137,6 @@ class PageHistoryPagerHookHandlerTest extends TestCase {
 			->willReturnOnConsecutiveCalls( ...$summaries );
 	}
 
-	public function testHookFactoryShouldWork() {
-		$hookHandler = PageHistoryPagerHookHandler::factory();
-		$this->assertInstanceOf( PageHistoryPagerHookHandler::class, $hookHandler );
-	}
-
 	public function testDoBatchLookups() {
 		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( 0x29a ) ) );
 		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( 12345 ) ) );

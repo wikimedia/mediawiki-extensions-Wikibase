@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Specials;
 
 use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
@@ -25,6 +26,7 @@ class SpecialListPropertiesDispatchingFactory {
 	 */
 	public static function factory(
 		DataTypeFactory $dataTypeFactory,
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		SettingsArray $repoSettings
 	) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -38,8 +40,7 @@ class SpecialListPropertiesDispatchingFactory {
 		$prefetchingTermLookup = $wikibaseRepo->getPrefetchingTermLookup();
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			$prefetchingTermLookup,
-			$wikibaseRepo->getLanguageFallbackChainFactory()
-				->newFromLanguage( $wikibaseRepo->getUserLanguage() )
+			$languageFallbackChainFactory->newFromLanguage( $wikibaseRepo->getUserLanguage() )
 		);
 		$entityIdFormatter = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory()
 			->getEntityIdFormatter( $wikibaseRepo->getUserLanguage() );
@@ -50,7 +51,7 @@ class SpecialListPropertiesDispatchingFactory {
 			$entityIdFormatter,
 			$wikibaseRepo->getEntityTitleLookup(),
 			$prefetchingTermLookup,
-			$wikibaseRepo->getLanguageFallbackChainFactory()
+			$languageFallbackChainFactory
 		);
 	}
 }

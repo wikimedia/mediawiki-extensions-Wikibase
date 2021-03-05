@@ -130,6 +130,7 @@ class GetEntities extends ApiBase {
 		string $moduleName,
 		IBufferingStatsdDataFactory $stats,
 		EntityIdParser $entityIdParser,
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		SettingsArray $repoSettings
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -144,7 +145,7 @@ class GetEntities extends ApiBase {
 			$apiMain,
 			$moduleName,
 			$wikibaseRepo->getStringNormalizer(),
-			$wikibaseRepo->getLanguageFallbackChainFactory(),
+			$languageFallbackChainFactory,
 			$siteLinkTargetProvider,
 			$wikibaseRepo->getStore()->getEntityPrefetcher(),
 			$repoSettings->getSetting( 'siteLinkGroups' ),

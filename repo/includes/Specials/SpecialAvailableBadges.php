@@ -60,6 +60,7 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 	}
 
 	public static function factory(
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		SettingsArray $repoSettings
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -67,7 +68,7 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 		return new self(
 			$wikibaseRepo->getPrefetchingTermLookup(),
 			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->getLanguageFallbackChainFactory(),
+			$languageFallbackChainFactory,
 			$repoSettings->getSetting( 'badgeItems' )
 		);
 	}

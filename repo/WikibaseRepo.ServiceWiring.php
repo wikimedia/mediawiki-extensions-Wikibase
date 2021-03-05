@@ -290,6 +290,14 @@ return [
 		}
 	},
 
+	'WikibaseRepo.LanguageFallbackChainFactory' => function ( MediaWikiServices $services ): LanguageFallbackChainFactory {
+		return new LanguageFallbackChainFactory(
+			$services->getLanguageFactory(),
+			$services->getLanguageConverterFactory(),
+			$services->getLanguageFallback()
+		);
+	},
+
 	'WikibaseRepo.LocalEntityNamespaceLookup' => function ( MediaWikiServices $services ): EntityNamespaceLookup {
 		$localEntitySource = WikibaseRepo::getLocalEntitySource( $services );
 		$nsIds = $localEntitySource->getEntityNamespaceIds();
@@ -415,7 +423,7 @@ return [
 		return new OutputFormatValueFormatterFactory(
 			$formatterFactoryCBs,
 			$services->getContentLanguage(),
-			new LanguageFallbackChainFactory()
+			WikibaseRepo::getLanguageFallbackChainFactory( $services )
 		);
 	},
 

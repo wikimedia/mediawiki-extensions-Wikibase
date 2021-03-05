@@ -27,6 +27,7 @@ use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\ParserOutput\TermboxView;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -124,7 +125,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$this->editability,
 			$this->isExternallyRendered,
 			$this->preferredLanguageLookup,
-			$this->entityViewChecker
+			$this->entityViewChecker,
+			WikibaseRepo::getLanguageFallbackChainFactory()
 		);
 	}
 

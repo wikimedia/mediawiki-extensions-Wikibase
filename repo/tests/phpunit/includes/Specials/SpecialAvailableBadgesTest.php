@@ -43,7 +43,7 @@ class SpecialAvailableBadgesTest extends SpecialPageTestBase {
 		return new SpecialAvailableBadges(
 			$prefetchingTermLookup,
 			$entityTitleLookup,
-			WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory(),
+			WikibaseRepo::getLanguageFallbackChainFactory(),
 			$badgeItems
 		);
 	}

@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\EntityFactory;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
@@ -116,6 +117,9 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	 */
 	private $entityViewChecker;
 
+	/** @var LanguageFallbackChainFactory */
+	private $languageFallbackChainFactory;
+
 	/** @var LoggerInterface */
 	private $logger;
 
@@ -135,6 +139,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$isExternallyRendered,
 		UserPreferredContentLanguagesLookup $userPreferredTermsLanguages,
 		OutputPageEntityViewChecker $entityViewChecker,
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		LoggerInterface $logger = null
 	) {
 		$this->httpRequestFactory = $httpRequestFactory;
@@ -152,6 +157,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$this->editability = $editability;
 		$this->userPreferredTermsLanguages = $userPreferredTermsLanguages;
 		$this->entityViewChecker = $entityViewChecker;
+		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -164,6 +170,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		IBufferingStatsdDataFactory $statsdDataFactory,
 		EntityContentFactory $entityContentFactory,
 		EntityIdParser $entityIdParser,
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		LoggerInterface $logger,
 		SettingsArray $settings
 	): self {
@@ -197,6 +204,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 				$contentLanguage->getCode()
 			),
 			$entityViewChecker,
+			$languageFallbackChainFactory,
 			$logger
 		);
 	}
@@ -326,12 +334,9 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	}
 
 	private function getExternallyRenderedEntityViewPlaceholderExpander( OutputPage $out ) {
-		$repo = WikibaseRepo::getDefaultInstance();
-		$languageFallbackChainFactory = $repo->getLanguageFallbackChainFactory();
-
 		return new ExternallyRenderedEntityViewPlaceholderExpander(
 			$out,
-			new TermboxRequestInspector( $languageFallbackChainFactory ),
+			new TermboxRequestInspector( $this->languageFallbackChainFactory ),
 			new TermboxRemoteRenderer(
 				$this->httpRequestFactory,
 				$this->repoSettings->getSetting( 'ssrServerUrl' ),
@@ -341,7 +346,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			),
 			$this->outputPageEntityIdReader,
 			new RepoSpecialPageLinker(),
-			$languageFallbackChainFactory,
+			$this->languageFallbackChainFactory,
 			new OutputPageRevisionIdReader(),
 			$this->repoSettings->getSetting( 'termboxUserSpecificSsrEnabled' )
 		);

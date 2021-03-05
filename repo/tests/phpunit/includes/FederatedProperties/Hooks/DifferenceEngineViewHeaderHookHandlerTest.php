@@ -68,11 +68,6 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 			->willReturn( $this->languageFallback );
 	}
 
-	public function testHookFactoryShouldWork() {
-		$hookHandler = DifferenceEngineViewHeaderHookHandler::factory();
-		$this->assertInstanceOf( DifferenceEngineViewHeaderHookHandler::class, $hookHandler );
-	}
-
 	public function testPrefetchesFederatedProperties() {
 
 		$itemId = new ItemId( "Q1" );
