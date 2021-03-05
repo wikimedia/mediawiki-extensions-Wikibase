@@ -16,6 +16,7 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolver;
@@ -74,6 +75,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockNameTableStore(),
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
+			new LanguageFallbackChainFactory(),
 			[ 'strval' ],
 			[],
 			[],
@@ -94,6 +96,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockNameTableStore(),
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
+			new LanguageFallbackChainFactory(),
 			[ null ],
 			[],
 			[],
@@ -111,6 +114,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockNameTableStore(),
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
+			new LanguageFallbackChainFactory(),
 			[],
 			[ null ],
 			[],
@@ -128,6 +132,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockNameTableStore(),
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
+			new LanguageFallbackChainFactory(),
 			[],
 			[],
 			[ null ],
@@ -160,6 +165,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 				'',
 				''
 			),
+			new LanguageFallbackChainFactory(),
 			[],
 			[],
 			[ 'item' => $customItemLookupCallback ],
@@ -180,6 +186,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockNameTableStore(),
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], '', '', '', '' ),
+			new LanguageFallbackChainFactory(),
 			[],
 			[],
 			[],
@@ -188,11 +195,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function newGenericServices() {
-		return new GenericServices(
-			new EntityTypeDefinitions( [] ),
-			[],
-			[]
-		);
+		return new GenericServices( new EntityTypeDefinitions( [] ) );
 	}
 
 	/**

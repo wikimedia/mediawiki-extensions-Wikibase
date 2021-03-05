@@ -4,7 +4,6 @@ namespace Wikibase\DataAccess;
 
 use Serializers\Serializer;
 use Wikibase\DataModel\SerializerFactory;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\StringNormalizer;
@@ -53,11 +52,6 @@ interface WikibaseServices extends DataAccessServices {
 	 * @return EntityStoreWatcher
 	 */
 	public function getEntityStoreWatcher();
-
-	/**
-	 * @return LanguageFallbackChainFactory
-	 */
-	public function getLanguageFallbackChainFactory();
 
 	/**
 	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
