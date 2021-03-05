@@ -1292,8 +1292,9 @@ class WikibaseRepo {
 	 *  they are made of, but no other entity types. Returns serializers that generate the full
 	 *  (expanded) serialization.
 	 */
-	public function getBaseDataModelSerializerFactory() {
-		return $this->getWikibaseServices()->getBaseDataModelSerializerFactory();
+	public static function getBaseDataModelSerializerFactory( ContainerInterface $services = null ): SerializerFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.BaseDataModelSerializerFactory' );
 	}
 
 	/**
@@ -1380,7 +1381,7 @@ class WikibaseRepo {
 	 * @return Serializer
 	 */
 	public function getStatementSerializer() {
-		return $this->getBaseDataModelSerializerFactory()->newStatementSerializer();
+		return self::getBaseDataModelSerializerFactory()->newStatementSerializer();
 	}
 
 	/**
@@ -1546,7 +1547,7 @@ class WikibaseRepo {
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->newEditEntityFactory( $context ),
-			$this->getBaseDataModelSerializerFactory(),
+			self::getBaseDataModelSerializerFactory(),
 			$this->getAllTypesEntitySerializer(),
 			self::getEntityIdParser(),
 			$services->getPermissionManager(),
