@@ -33,12 +33,12 @@ class EntityRedirect {
 	public function __construct( EntityId $entityId, EntityId $targetId ) {
 		if ( $entityId->getEntityType() !== $targetId->getEntityType() ) {
 			throw new InvalidArgumentException(
-				'$entityId and $targetId must refer to the same kind of entity.'
+				'$entityId (' . $entityId . ') and $targetId (' . $targetId . ') must refer to the same kind of entity.'
 			);
 		}
 
 		if ( $entityId->getSerialization() === $targetId->getSerialization() ) {
-			throw new InvalidArgumentException( '$entityId and $targetId can not be the same.' );
+			throw new InvalidArgumentException( '$entityId (' . $entityId . ') and $targetId can not be the same.' );
 		}
 
 		$this->entityId = $entityId;
