@@ -159,7 +159,7 @@
 	"wikibase-client-data-bridge-edit-conflict-error-message": "Un altr'utent l'hà apena mofificad quell valor chì e l'hà publicàa i modifiche inanz de ti. Impossibil aplicà i to modifiche. Carega anmò la pagina per recuperà el valor noeuv.",
 	"wikibase-client-data-bridge-unknown-error-heading": "Un quaicoss l'è andad mal",
 	"wikibase-client-data-bridge-unknown-error-message": "A l'è capitad un eror e 'l calor scernid foeura el po vesser minga modificad adess. Prova a caregall de noeuv.",
-	"wikibase-client-data-bridge-error-report": "<p>Se l'eror el persist, per piasè [$1 segnala el prodlema] includend i informazzion che vegnen:</p>\n<ul>\n<li>$2</li>\n<li>$3 de $4</li>\n<li>Codes de l'eror: $5</li>\n</ul>",
+	"wikibase-client-data-bridge-error-report": "<p>Se l'eror el persist, per piesè [$1 segnala el problema] descrivend i to azzion e includend 'ste informazzion chì:</p>\n<ul>\n<li>$2</li>\n<li>$3 de $4</li>\n<li>Codes de l'eror: $5</li>\n</ul>",
 	"wikibase-client-data-bridge-error-reload-bridge": "Carega de noeuv",
 	"wikibase-client-data-bridge-error-reload-page": "Carega de noeuv la pagina",
 	"wikibase-client-data-bridge-error-go-back": "Torna indree",

@@ -187,6 +187,7 @@
 	"wikibase-entitydata-title": "Духхера хаамаш",
 	"wikibase-parse-error": "Нийса доцу маьӀна.",
 	"wikibase-redirectentity-submit": "ДӀасахьажор",
+	"wikibase-api-no-external-page": "Арахьара сайт «$ 1» тӀехь кара цабо «$ 2» агӀонах хаам.",
 	"wikibase-api-no-such-sitelink": "'$1' cайтан тӀе иштта хьажорг цакарий",
 	"wikibase-restoreold": "меттахӀоттае",
 	"wikibase-entity-summary-restore": "МеттахӀоьттина {{GENDER:$4|декъашхочуьнан}} $3 верси  [[Special:Contributions/$4|$4]]",
