@@ -5,6 +5,7 @@ namespace Wikibase\Client\Hooks;
 use Action;
 use MediaWiki\Skins\Hook\SkinAfterPortletHook;
 use Skin;
+use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
@@ -32,6 +33,7 @@ class SkinAfterPortletHandler implements SkinAfterPortletHook {
 
 	public static function factory(
 		EntityIdParser $entityIdParser,
+		NamespaceChecker $namespaceChecker,
 		RepoLinker $repoLinker,
 		SettingsArray $clientSettings
 	): self {
@@ -39,7 +41,7 @@ class SkinAfterPortletHandler implements SkinAfterPortletHook {
 
 		return new self(
 			new RepoItemLinkGenerator(
-				$wikibaseClient->getNamespaceChecker(),
+				$namespaceChecker,
 				$repoLinker,
 				$entityIdParser,
 				$wikibaseClient->getLangLinkSiteGroup(),

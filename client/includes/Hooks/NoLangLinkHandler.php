@@ -34,14 +34,7 @@ class NoLangLinkHandler {
 	}
 
 	private static function factory(): self {
-		$settings = WikibaseClient::getSettings();
-
-		$namespaceChecker = new NamespaceChecker(
-			$settings->getSetting( 'excludeNamespaces' ),
-			$settings->getSetting( 'namespaces' )
-		);
-
-		return new self( $namespaceChecker );
+		return new self( WikibaseClient::getNamespaceChecker() );
 	}
 
 	public function __construct( NamespaceChecker $namespaceChecker ) {

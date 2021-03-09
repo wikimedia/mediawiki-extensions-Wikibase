@@ -44,11 +44,13 @@ class SidebarHookHandler implements
 		$this->badgeDisplay = $badgeDisplay;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		NamespaceChecker $namespaceChecker
+	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		return new self(
-			$wikibaseClient->getNamespaceChecker(),
+			$namespaceChecker,
 			$wikibaseClient->getLanguageLinkBadgeDisplay()
 		);
 	}
