@@ -14,6 +14,7 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use ValueParsers\NullParser;
+use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
@@ -92,6 +93,12 @@ return [
 			->run( 'WikibaseContentModelMapping', [ &$map ] );
 
 		return $map;
+	},
+
+	'WikibaseRepo.DataAccessSettings' => function ( MediaWikiServices $services ): DataAccessSettings {
+		return new DataAccessSettings(
+			WikibaseRepo::getSettings( $services )->getSetting( 'maxSerializedEntitySize' )
+		);
 	},
 
 	'WikibaseRepo.DataTypeDefinitions' => function ( MediaWikiServices $services ): DataTypeDefinitions {

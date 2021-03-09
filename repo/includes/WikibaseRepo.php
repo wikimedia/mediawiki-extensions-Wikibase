@@ -285,11 +285,6 @@ class WikibaseRepo {
 	 */
 	private static $snakFormatterBuilders = null;
 
-	/**
-	 * @var DataAccessSettings
-	 */
-	private $dataAccessSettings;
-
 	public static function resetClassStatics() {
 		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
 			throw new Exception(
@@ -1257,7 +1252,7 @@ class WikibaseRepo {
 			self::getEntityIdParser(),
 			$this->getStorageEntitySerializer(),
 			$this->getInternalFormatEntityDeserializer(),
-			self::getSettings()->getSetting( 'maxSerializedEntitySize' ) * 1024
+			self::getDataAccessSettings()->maxSerializedEntitySizeInBytes()
 		);
 	}
 
@@ -1938,7 +1933,7 @@ class WikibaseRepo {
 				self::getEntityIdComposer(),
 				self::getDataValueDeserializer(),
 				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
-				$this->getDataAccessSettings(),
+				self::getDataAccessSettings(),
 				$source,
 				self::getLanguageFallbackChainFactory(),
 				$entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
@@ -1950,13 +1945,9 @@ class WikibaseRepo {
 		return new MultipleEntitySourceServices( self::getEntitySourceDefinitions(), $genericServices, $singleSourceServices );
 	}
 
-	public function getDataAccessSettings() {
-		if ( $this->dataAccessSettings === null ) {
-			$this->dataAccessSettings = new DataAccessSettings(
-				self::getSettings()->getSetting( 'maxSerializedEntitySize' )
-			);
-		}
-		return $this->dataAccessSettings;
+	public static function getDataAccessSettings( ContainerInterface $services = null ): DataAccessSettings {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.DataAccessSettings' );
 	}
 
 	public static function getEntitySourceDefinitions( ContainerInterface $services = null ): EntitySourceDefinitions {
