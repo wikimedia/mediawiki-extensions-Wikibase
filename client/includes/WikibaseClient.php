@@ -478,8 +478,9 @@ final class WikibaseClient {
 		return $this->propertyDataTypeLookup;
 	}
 
-	public function getStringNormalizer(): StringNormalizer {
-		return $this->getWikibaseServices()->getStringNormalizer();
+	public function getStringNormalizer( ContainerInterface $services = null ): StringNormalizer {
+		return ( $services ?: MediawikiServices::getInstance() )
+				->get( 'WikibaseClient.StringNormalizer' );
 	}
 
 	public static function getRepoLinker( ContainerInterface $services = null ): RepoLinker {

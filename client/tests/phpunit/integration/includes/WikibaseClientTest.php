@@ -38,7 +38,6 @@ use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
-use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
@@ -136,11 +135,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetPropertyDataTypeLookupReturnType() {
 		$returnValue = $this->getWikibaseClient()->getPropertyDataTypeLookup();
 		$this->assertInstanceOf( PropertyDataTypeLookup::class, $returnValue );
-	}
-
-	public function testGetStringNormalizerReturnType() {
-		$returnValue = $this->getWikibaseClient()->getStringNormalizer();
-		$this->assertInstanceOf( StringNormalizer::class, $returnValue );
 	}
 
 	public function testGetLanguageFallbackLabelDescriptionLookupFactory() {
