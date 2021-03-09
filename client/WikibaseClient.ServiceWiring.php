@@ -25,6 +25,7 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -90,6 +91,16 @@ return [
 					: EntityIdValue::newFromArray( $value );
 			},
 		] );
+	},
+
+	'WikibaseClient.EntityDiffer' => function ( MediaWikiServices $services ): EntityDiffer {
+		$entityDiffer = new EntityDiffer();
+		$entityTypeDefinitions = WikibaseClient::getEntityTypeDefinitions( $services );
+		$builders = $entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_DIFFER_STRATEGY_BUILDER );
+		foreach ( $builders as $builder ) {
+			$entityDiffer->registerEntityDifferStrategy( $builder() );
+		}
+		return $entityDiffer;
 	},
 
 	'WikibaseClient.EntityIdComposer' => function ( MediaWikiServices $services ): EntityIdComposer {

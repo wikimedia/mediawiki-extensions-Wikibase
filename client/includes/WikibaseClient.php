@@ -904,7 +904,7 @@ final class WikibaseClient {
 		];
 
 		return new EntityChangeFactory(
-			$this->getEntityDiffer(),
+			self::getEntityDiffer(),
 			self::getEntityIdParser(),
 			$changeClasses,
 			EntityChange::class,
@@ -912,12 +912,9 @@ final class WikibaseClient {
 		);
 	}
 
-	private function getEntityDiffer(): EntityDiffer {
-		$entityDiffer = new EntityDiffer();
-		foreach ( self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_DIFFER_STRATEGY_BUILDER ) as $builder ) {
-			$entityDiffer->registerEntityDifferStrategy( call_user_func( $builder ) );
-		}
-		return $entityDiffer;
+	public static function getEntityDiffer( ContainerInterface $services = null ): EntityDiffer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.EntityDiffer' );
 	}
 
 	private function getStatementGroupRendererFactory(): StatementGroupRendererFactory {
