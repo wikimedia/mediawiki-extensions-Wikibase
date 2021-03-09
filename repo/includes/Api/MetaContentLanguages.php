@@ -9,7 +9,6 @@ use ApiQueryBase;
 use ExtensionRegistry;
 use MediaWiki\Languages\LanguageNameUtils;
 use Wikibase\Lib\WikibaseContentLanguages;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @license GPL-2.0-or-later
@@ -50,16 +49,15 @@ class MetaContentLanguages extends ApiQueryBase {
 	public static function factory(
 		ApiQuery $apiQuery,
 		string $moduleName,
-		LanguageNameUtils $languageNameUtils
+		LanguageNameUtils $languageNameUtils,
+		WikibaseContentLanguages $wikibaseContentLanguages
 	): self {
-		$repo = WikibaseRepo::getDefaultInstance();
-
 		// if CLDR is available, we expect to have some language name
 		// (falling back to English if necessary) for any content language
 		$expectKnownLanguageNames = ExtensionRegistry::getInstance()->isLoaded( 'cldr' );
 
 		return new self(
-			$repo->getWikibaseContentLanguages(),
+			$wikibaseContentLanguages,
 			$expectKnownLanguageNames,
 			$languageNameUtils,
 			$apiQuery,

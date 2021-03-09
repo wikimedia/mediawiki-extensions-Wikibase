@@ -2,7 +2,8 @@
 
 namespace Wikibase\Lib;
 
-use Hooks;
+use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\MediaWikiServices;
 use OutOfRangeException;
 
 /**
@@ -46,12 +47,20 @@ class WikibaseContentLanguages {
 		}
 	}
 
-	public static function getDefaultInstance() {
+	public static function getDefaultInstance( HookContainer $hookContainer = null ) {
+		if ( $hookContainer === null ) {
+			$hookContainer = MediaWikiServices::getInstance()->getHookContainer();
+		}
+
 		$contentLanguages = [];
 		$contentLanguages[self::CONTEXT_TERM] = self::getDefaultTermsLanguages();
 		$contentLanguages[self::CONTEXT_MONOLINGUAL_TEXT] = self::getDefaultMonolingualTextLanguages();
 
-		Hooks::runWithoutAbort( 'WikibaseContentLanguages', [ &$contentLanguages ] );
+		$hookContainer->run(
+			'WikibaseContentLanguages',
+			[ &$contentLanguages ],
+			[ 'abortable' => false ]
+		);
 
 		return new self( $contentLanguages );
 	}

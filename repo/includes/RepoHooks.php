@@ -993,8 +993,7 @@ final class RepoHooks {
 						'name' => 'resources/contentLanguages.json',
 						'callback' => function () {
 							return [
-								WikibaseContentLanguages::CONTEXT_MONOLINGUAL_TEXT => WikibaseRepo::getDefaultInstance()
-									->getWikibaseContentLanguages()
+								WikibaseContentLanguages::CONTEXT_MONOLINGUAL_TEXT => WikibaseRepo::getWikibaseContentLanguages()
 									->getContentLanguages( WikibaseContentLanguages::CONTEXT_MONOLINGUAL_TEXT )
 									->getLanguages(),
 							];

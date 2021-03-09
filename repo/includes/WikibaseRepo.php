@@ -246,11 +246,6 @@ class WikibaseRepo {
 	private $store = null;
 
 	/**
-	 * @var WikibaseContentLanguages|null
-	 */
-	private $wikibaseContentLanguages = null;
-
-	/**
 	 * @var CachingCommonsMediaFileNameLookup|null
 	 */
 	private $cachingCommonsMediaFileNameLookup = null;
@@ -1754,16 +1749,13 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.DataTypeDefinitions' );
 	}
 
-	public function getWikibaseContentLanguages(): WikibaseContentLanguages {
-		if ( $this->wikibaseContentLanguages === null ) {
-			$this->wikibaseContentLanguages = WikibaseContentLanguages::getDefaultInstance();
-		}
-
-		return $this->wikibaseContentLanguages;
+	public static function getWikibaseContentLanguages( ContainerInterface $services = null ): WikibaseContentLanguages {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.WikibaseContentLanguages' );
 	}
 
 	private function getMonolingualTextLanguages() {
-		return $this->getWikibaseContentLanguages()->getContentLanguages( WikibaseContentLanguages::CONTEXT_MONOLINGUAL_TEXT );
+		return self::getWikibaseContentLanguages()->getContentLanguages( WikibaseContentLanguages::CONTEXT_MONOLINGUAL_TEXT );
 	}
 
 	/**
@@ -1772,7 +1764,7 @@ class WikibaseRepo {
 	 * @return ContentLanguages
 	 */
 	public function getTermsLanguages() {
-		return $this->getWikibaseContentLanguages()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
+		return self::getWikibaseContentLanguages()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
 	}
 
 	/**

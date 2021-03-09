@@ -216,7 +216,8 @@
 			"class": "\\Wikibase\\Repo\\Api\\MetaContentLanguages",
 			"factory": "\\Wikibase\\Repo\\Api\\MetaContentLanguages::factory",
 			"services": [
-				"LanguageNameUtils"
+				"LanguageNameUtils",
+				"WikibaseRepo.WikibaseContentLanguages"
 			]
 		}
 	},
