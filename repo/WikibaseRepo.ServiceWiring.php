@@ -52,6 +52,7 @@ use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
+use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\EntityContentFactory;
@@ -539,6 +540,10 @@ return [
 			WikibaseRepo::getDataTypeDefinitions( $services )
 				->getRdfBuilderFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
 		);
+	},
+
+	'WikibaseRepo.WikibaseContentLanguages' => function ( MediaWikiServices $services ): WikibaseContentLanguages {
+		return WikibaseContentLanguages::getDefaultInstance( $services->getHookContainer() );
 	},
 
 ];
