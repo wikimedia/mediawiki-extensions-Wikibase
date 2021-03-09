@@ -76,6 +76,14 @@ return [
 		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT );
 	},
 
+	'WikibaseRepo.CompactBaseDataModelSerializerFactory' => function ( MediaWikiServices $services ): SerializerFactory {
+		return new SerializerFactory(
+			new DataValueSerializer(),
+			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+		);
+	},
+
 	'WikibaseRepo.ContentModelMappings' => function ( MediaWikiServices $services ): array {
 		$map = WikibaseRepo::getEntityTypeDefinitions( $services )
 			->get( EntityTypeDefinitions::CONTENT_MODEL_ID );

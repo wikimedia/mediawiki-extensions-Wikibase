@@ -1298,8 +1298,9 @@ class WikibaseRepo {
 	 *  they are made of, but no other entity types. Returns serializers that generate the most
 	 *  compact serialization.
 	 */
-	public function getCompactBaseDataModelSerializerFactory() {
-		return $this->getWikibaseServices()->getCompactBaseDataModelSerializerFactory();
+	public static function getCompactBaseDataModelSerializerFactory( ContainerInterface $services = null ): SerializerFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.CompactBaseDataModelSerializerFactory' );
 	}
 
 	/**

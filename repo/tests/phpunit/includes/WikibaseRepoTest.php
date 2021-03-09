@@ -27,7 +27,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -504,11 +503,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetExternalFormatDeserializerFactory() {
 		$deserializerFactory = $this->getWikibaseRepo()->getBaseDataModelDeserializerFactory();
 		$this->assertInstanceOf( DeserializerFactory::class, $deserializerFactory );
-	}
-
-	public function testGetCompactSerializerFactory() {
-		$serializerFactory = $this->getWikibaseRepo()->getCompactBaseDataModelSerializerFactory();
-		$this->assertInstanceOf( SerializerFactory::class, $serializerFactory );
 	}
 
 	public function testGetInternalFormatEntityDeserializer() {

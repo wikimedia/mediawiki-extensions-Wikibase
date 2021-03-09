@@ -325,6 +325,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityData::factory",
 			"services": [
 				"HtmlCacheUpdater",
+			  	"WikibaseRepo.CompactBaseDataModelSerializerFactory",
 				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.EntityTitleStoreLookup",
