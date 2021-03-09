@@ -143,11 +143,6 @@ final class WikibaseClient {
 	private $propertyDataTypeLookup = null;
 
 	/**
-	 * @var DataTypeFactory|null
-	 */
-	private $dataTypeFactory = null;
-
-	/**
 	 * @var Deserializer|null
 	 */
 	private $entityDeserializer = null;
@@ -337,7 +332,7 @@ final class WikibaseClient {
 			$valueFormatterBuilders,
 			$this->getStore()->getPropertyInfoLookup(),
 			$this->getPropertyDataTypeLookup(),
-			$this->getDataTypeFactory()
+			self::getDataTypeFactory()
 		);
 	}
 
@@ -362,12 +357,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.EntityTypeDefinitions' );
 	}
 
-	public function getDataTypeFactory(): DataTypeFactory {
-		if ( $this->dataTypeFactory === null ) {
-			$this->dataTypeFactory = new DataTypeFactory( self::getDataTypeDefinitions()->getValueTypes() );
-		}
-
-		return $this->dataTypeFactory;
+	public static function getDataTypeFactory( ContainerInterface $services = null ): DataTypeFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.DataTypeFactory' );
 	}
 
 	public static function getEntityIdParser( ContainerInterface $services = null ): EntityIdParser {
@@ -715,7 +707,7 @@ final class WikibaseClient {
 				self::getDataTypeDefinitions()->getSnakFormatterFactoryCallbacks(),
 				$this->getValueFormatterFactory(),
 				$this->getPropertyDataTypeLookup(),
-				$this->getDataTypeFactory()
+				self::getDataTypeFactory()
 			);
 		}
 

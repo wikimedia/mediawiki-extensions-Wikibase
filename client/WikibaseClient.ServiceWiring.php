@@ -27,6 +27,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
@@ -73,6 +74,12 @@ return [
 		return new DataTypeDefinitions(
 			$dataTypes,
 			$settings->getSetting( 'disabledDataTypes' )
+		);
+	},
+
+	'WikibaseClient.DataTypeFactory' => function ( MediaWikiServices $services ): DataTypeFactory {
+		return new DataTypeFactory(
+			WikibaseClient::getDataTypeDefinitions( $services )->getValueTypes()
 		);
 	},
 

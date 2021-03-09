@@ -30,7 +30,6 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
@@ -120,11 +119,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 
 		$second = WikibaseClient::getDefaultSnakFormatterBuilders();
 		$this->assertSame( $first, $second );
-	}
-
-	public function testGetDataTypeFactoryReturnType() {
-		$returnValue = $this->getWikibaseClient()->getDataTypeFactory();
-		$this->assertInstanceOf( DataTypeFactory::class, $returnValue );
 	}
 
 	public function testNewTermSearchInteractor() {
