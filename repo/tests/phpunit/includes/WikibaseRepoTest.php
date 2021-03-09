@@ -76,7 +76,6 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\PropertyInfoBuilder;
-use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\SnakFactory;
@@ -714,11 +713,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetRdfVocabulary() {
 		$factory = WikibaseRepo::getRdfVocabulary();
 		$this->assertInstanceOf( RdfVocabulary::class, $factory );
-	}
-
-	public function testGetEntityRdfBuilderFactory() {
-		$provider = $this->getWikibaseRepo()->getEntityRdfBuilderFactory();
-		$this->assertInstanceOf( EntityRdfBuilderFactory::class, $provider );
 	}
 
 	/**

@@ -261,11 +261,6 @@ class WikibaseRepo {
 	private $wikibaseServices = null;
 
 	/**
-	 * @var EntityRdfBuilderFactory|null
-	 */
-	private $entityRdfBuilderFactory = null;
-
-	/**
 	 * @var WikibaseRepo|null
 	 */
 	private static $instance = null;
@@ -1834,19 +1829,11 @@ class WikibaseRepo {
 		return $storage;
 	}
 
-	/**
-	 * @return EntityRdfBuilderFactory
-	 */
-	public function getEntityRdfBuilderFactory() {
-		if ( $this->entityRdfBuilderFactory === null ) {
-			$entityTypeDefinitions = self::getEntityTypeDefinitions();
-			$this->entityRdfBuilderFactory = new EntityRdfBuilderFactory(
-				$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_BUILDER_FACTORY_CALLBACK ),
-				$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES )
-			);
-		}
-
-		return $this->entityRdfBuilderFactory;
+	public static function getEntityRdfBuilderFactory(
+		ContainerInterface $services = null
+	): EntityRdfBuilderFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityRdfBuilderFactory' );
 	}
 
 	/**

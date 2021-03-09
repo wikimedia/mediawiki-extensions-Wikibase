@@ -55,6 +55,7 @@ use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 use Wikibase\Repo\Notifications\RepoEntityChange;
 use Wikibase\Repo\Notifications\RepoItemChange;
+use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -217,6 +218,15 @@ return [
 			$entityPatcher->registerEntityPatcherStrategy( $builder() );
 		}
 		return $entityPatcher;
+	},
+
+	'WikibaseRepo.EntityRdfBuilderFactory' => function ( MediaWikiServices $services ): EntityRdfBuilderFactory {
+		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
+
+		return new EntityRdfBuilderFactory(
+			$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_BUILDER_FACTORY_CALLBACK ),
+			$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES )
+		);
 	},
 
 	'WikibaseRepo.EntitySourceDefinitions' => function ( MediaWikiServices $services ): EntitySourceDefinitions {
