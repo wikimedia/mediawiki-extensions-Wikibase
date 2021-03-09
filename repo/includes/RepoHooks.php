@@ -388,7 +388,7 @@ final class RepoHooks {
 				if ( $centralIdLookup === null ) {
 					$centralUserId = 0;
 				} else {
-					$repoUser = $recentChange->getPerformer();
+					$repoUser = User::newFromIdentity( $recentChange->getPerformerIdentity() );
 					$centralUserId = $centralIdLookup->centralIdFromLocalUser(
 						$repoUser
 					);
