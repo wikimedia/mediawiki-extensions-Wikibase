@@ -55,6 +55,8 @@ use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
+use Wikibase\Lib\Units\UnitConverter;
+use Wikibase\Lib\Units\UnitStorage;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
@@ -77,6 +79,7 @@ use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\ObjectFactory;
 
 /** @phpcs-require-sorted-array */
 return [
@@ -515,6 +518,21 @@ return [
 
 	'WikibaseRepo.TypeIdsResolver' => function ( MediaWikiServices $services ): TypeIdsResolver {
 		return WikibaseRepo::getDatabaseTypeIdsStore( $services );
+	},
+
+	'WikibaseRepo.UnitConverter' => function ( MediaWikiServices $services ): ?UnitConverter {
+		$settings = WikibaseRepo::getSettings( $services );
+		if ( !$settings->hasSetting( 'unitStorage' ) ) {
+			return null;
+		}
+
+		// Creates configured unit storage.
+		$unitStorage = ObjectFactory::getObjectFromSpec( $settings->getSetting( 'unitStorage' ) );
+		if ( !( $unitStorage instanceof UnitStorage ) ) {
+			wfWarn( "Bad unit storage configuration, ignoring" );
+			return null;
+		}
+		return new UnitConverter( $unitStorage, $settings->getSetting( 'conceptBaseUri' ) );
 	},
 
 	'WikibaseRepo.ValueFormatterFactory' => function ( MediaWikiServices $services ): OutputFormatValueFormatterFactory {

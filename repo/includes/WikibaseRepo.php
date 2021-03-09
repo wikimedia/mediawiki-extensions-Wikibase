@@ -135,7 +135,6 @@ use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikibase\Lib\Units\UnitConverter;
-use Wikibase\Lib\Units\UnitStorage;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
@@ -200,7 +199,6 @@ use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
-use Wikimedia\ObjectFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -1814,35 +1812,9 @@ class WikibaseRepo {
 		return new SettingsValueProvider( self::getSettings(), $jsSetting, $phpSetting );
 	}
 
-	/**
-	 * Get configure unit converter.
-	 * @return null|UnitConverter Configured Unit converter, or null if none configured
-	 */
-	public function getUnitConverter() {
-		$unitStorage = $this->getUnitStorage();
-		if ( !$unitStorage ) {
-			return null;
-		}
-		return new UnitConverter( $unitStorage, self::getSettings()->getSetting( 'conceptBaseUri' ) );
-	}
-
-	/**
-	 * Creates configured unit storage. Configuration is in unitStorage parameter,
-	 * in getObjectFromSpec format.
-	 * @see ObjectFactory::getObjectFromSpec
-	 * @return null|UnitStorage Configured unit storage, or null
-	 */
-	private function getUnitStorage() {
-		if ( !self::getSettings()->hasSetting( 'unitStorage' ) ) {
-			return null;
-		}
-		$storage =
-			ObjectFactory::getObjectFromSpec( self::getSettings()->getSetting( 'unitStorage' ) );
-		if ( !( $storage instanceof UnitStorage ) ) {
-			wfWarn( "Bad unit storage configuration, ignoring" );
-			return null;
-		}
-		return $storage;
+	public static function getUnitConverter( ContainerInterface $services = null ): ?UnitConverter {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.UnitConverter' );
 	}
 
 	public static function getEntityRdfBuilderFactory(
