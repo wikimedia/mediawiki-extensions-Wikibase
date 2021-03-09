@@ -250,7 +250,6 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		];
 		$this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
-		$this->resetServices();
 		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-validator-label-with-description-conflict: label1, en, ' );

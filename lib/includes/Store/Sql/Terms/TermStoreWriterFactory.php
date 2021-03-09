@@ -33,6 +33,15 @@ class TermStoreWriterFactory {
 	 */
 	private $stringNormalizer;
 
+	/** @var TypeIdsAcquirer */
+	private $typeIdsAcquirer;
+
+	/** @var TypeIdsLookup */
+	private $typeIdsLookup;
+
+	/** @var TypeIdsResolver */
+	private $typeIdsResolver;
+
 	/**
 	 * @var ILBFactory
 	 */
@@ -56,6 +65,9 @@ class TermStoreWriterFactory {
 	public function __construct(
 		EntitySource $localEntitySource,
 		StringNormalizer $stringNormalizer,
+		TypeIdsAcquirer $typeIdsAcquirer,
+		TypeIdsLookup $typeIdsLookup,
+		TypeIdsResolver $typeIdsResolver,
 		ILBFactory $loadbalancerFactory,
 		WANObjectCache $wanCache,
 		JobQueueGroup $jobQueueGroup,
@@ -63,6 +75,9 @@ class TermStoreWriterFactory {
 	) {
 		$this->localEntitySource = $localEntitySource;
 		$this->stringNormalizer = $stringNormalizer;
+		$this->typeIdsAcquirer = $typeIdsAcquirer;
+		$this->typeIdsLookup = $typeIdsLookup;
+		$this->typeIdsResolver = $typeIdsResolver;
 		$this->loadbalancerFactory = $loadbalancerFactory;
 		$this->wanCache = $wanCache;
 		$this->jobQueueGroup = $jobQueueGroup;
@@ -74,12 +89,11 @@ class TermStoreWriterFactory {
 			throw new LogicException( 'Local entity source does not have items.' );
 		}
 
-		$typeIdsStore = $this->newTypeIdsStore();
 		return new DatabaseItemTermStoreWriter(
 			$this->loadbalancerFactory->getMainLB(),
 			$this->jobQueueGroup,
-			$this->newTermInLangIdsAcquirer( $typeIdsStore ),
-			$this->newTermInLangIdsResolver( $typeIdsStore, $typeIdsStore ),
+			$this->newTermInLangIdsAcquirer( $this->typeIdsAcquirer ),
+			$this->newTermInLangIdsResolver( $this->typeIdsResolver, $this->typeIdsLookup ),
 			$this->stringNormalizer
 		);
 	}
@@ -89,12 +103,11 @@ class TermStoreWriterFactory {
 			throw new LogicException( 'Local entity source does not have properties.' );
 		}
 
-		$typeIdsStore = $this->newTypeIdsStore();
 		return new DatabasePropertyTermStoreWriter(
 			$this->loadbalancerFactory->getMainLB(),
 			$this->jobQueueGroup,
-			$this->newTermInLangIdsAcquirer( $typeIdsStore ),
-			$this->newTermInLangIdsResolver( $typeIdsStore, $typeIdsStore ),
+			$this->newTermInLangIdsAcquirer( $this->typeIdsAcquirer ),
+			$this->newTermInLangIdsResolver( $this->typeIdsResolver, $this->typeIdsLookup ),
 			$this->stringNormalizer
 		);
 	}
@@ -114,13 +127,6 @@ class TermStoreWriterFactory {
 			$this->loadbalancerFactory,
 			$typeAcquirer,
 			$this->logger
-		);
-	}
-
-	private function newTypeIdsStore(): DatabaseTypeIdsStore {
-		return new DatabaseTypeIdsStore(
-			$this->loadbalancerFactory->getMainLB(),
-			$this->wanCache
 		);
 	}
 

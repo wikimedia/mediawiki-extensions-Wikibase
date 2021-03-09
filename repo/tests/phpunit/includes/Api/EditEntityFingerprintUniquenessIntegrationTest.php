@@ -44,7 +44,6 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 			'type' => ApiUsageException::class,
 			'code' => $expectedFailureCode,
 		];
-		$this->resetServices();
 		// Repeating the same request with the same label should fail.
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
@@ -84,7 +83,6 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 			'type' => ApiUsageException::class,
 			'code' => $expectedFailureCode,
 		];
-		$this->resetServices();
 		// Repeating the same request with the same label should fail.
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
@@ -99,7 +97,6 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 		];
 		$this->doApiRequestWithToken( $params );
 
-		$this->resetServices();
 		// Repeating the same request with the same label should not fail.
 		list( $result, , ) = $this->doApiRequestWithToken( $params );
 		$this->assertArrayHasKey( 'success', $result );
@@ -122,7 +119,6 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 			'type' => ApiUsageException::class,
 			'code' => $expectedFailureCode,
 		];
-		$this->resetServices();
 		// Repeating the same request with the same label and description should fail.
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
@@ -160,7 +156,6 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 			'type' => ApiUsageException::class,
 			'code' => 'modification-failed',
 		];
-		$this->resetServices();
 		// Repeating the same request with the same label and description should fail.
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}

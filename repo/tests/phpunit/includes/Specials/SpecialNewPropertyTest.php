@@ -103,7 +103,6 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 		];
 		$this->executeSpecialPage( '', new \FauxRequest( $formData, true ) );
 
-		$this->resetServices();
 		list( $html ) = $this->executeSpecialPage( '', new \FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-validator-label-conflict: label, en, ' );

@@ -46,6 +46,9 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\Store\Sql\Terms\TypeIdsAcquirer;
+use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
+use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TypeDispatchingRedirectChecker;
 use Wikibase\Lib\StringNormalizer;
@@ -103,6 +106,13 @@ return [
 	'WikibaseRepo.DataAccessSettings' => function ( MediaWikiServices $services ): DataAccessSettings {
 		return new DataAccessSettings(
 			WikibaseRepo::getSettings( $services )->getSetting( 'maxSerializedEntitySize' )
+		);
+	},
+
+	'WikibaseRepo.DatabaseTypeIdsStore' => function ( MediaWikiServices $services ): DatabaseTypeIdsStore {
+		return new DatabaseTypeIdsStore(
+			$services->getDBLoadBalancer(),
+			$services->getMainWANObjectCache()
 		);
 	},
 
@@ -489,16 +499,22 @@ return [
 	},
 
 	'WikibaseRepo.TermsCollisionDetectorFactory' => function ( MediaWikiServices $services ): TermsCollisionDetectorFactory {
-		$loadBalancer = $services->getDBLoadBalancer();
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
-			$services->getMainWANObjectCache()
-		);
-
 		return new TermsCollisionDetectorFactory(
-			$loadBalancer,
-			$typeIdsStore
+			$services->getDBLoadBalancer(),
+			WikibaseRepo::getTypeIdsLookup( $services )
 		);
+	},
+
+	'WikibaseRepo.TypeIdsAcquirer' => function ( MediaWikiServices $services ): TypeIdsAcquirer {
+		return WikibaseRepo::getDatabaseTypeIdsStore( $services );
+	},
+
+	'WikibaseRepo.TypeIdsLookup' => function ( MediaWikiServices $services ): TypeIdsLookup {
+		return WikibaseRepo::getDatabaseTypeIdsStore( $services );
+	},
+
+	'WikibaseRepo.TypeIdsResolver' => function ( MediaWikiServices $services ): TypeIdsResolver {
+		return WikibaseRepo::getDatabaseTypeIdsStore( $services );
 	},
 
 	'WikibaseRepo.ValueFormatterFactory' => function ( MediaWikiServices $services ): OutputFormatValueFormatterFactory {

@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use WANObjectCache;
+use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -17,9 +17,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class TermsCollisionDetectorFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getMainWANObjectCache' )
-			->willReturn( $this->createMock( WANObjectCache::class ) );
+		$this->mockService( 'WikibaseRepo.TypeIdsLookup',
+			$this->createMock( TypeIdsLookup::class ) );
 
 		$termsCollisionDetectorFactory = $this->getService( 'WikibaseRepo.TermsCollisionDetectorFactory' );
 
