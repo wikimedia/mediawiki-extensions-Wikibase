@@ -3,7 +3,8 @@
 namespace Wikibase\Client;
 
 use InvalidArgumentException;
-use MWNamespace;
+use MediaWiki\MediaWikiServices;
+use NamespaceInfo;
 
 /**
  * Checks if a namespace in Wikibase Client shall have wikibase links, etc., based on settings
@@ -24,13 +25,22 @@ class NamespaceChecker {
 	 */
 	private $enabledNamespaces;
 
+	/** @var NamespaceInfo */
+	private $namespaceInfo;
+
 	/**
 	 * @param int[] $excludedNamespaces
 	 * @param int[] $enabledNamespaces if empty, setting not in use and all namespaces enabled
+	 * @param NamespaceInfo|null $namespaceInfo falls back to default instance
 	 */
-	public function __construct( array $excludedNamespaces, array $enabledNamespaces = [] ) {
+	public function __construct(
+		array $excludedNamespaces,
+		array $enabledNamespaces = [],
+		NamespaceInfo $namespaceInfo = null
+	) {
 		$this->excludedNamespaces = $excludedNamespaces;
 		$this->enabledNamespaces = $enabledNamespaces;
+		$this->namespaceInfo = $namespaceInfo ?: MediaWikiServices::getInstance()->getNamespaceInfo();
 	}
 
 	/**
@@ -104,7 +114,7 @@ class NamespaceChecker {
 		$enabled = $this->enabledNamespaces;
 
 		if ( empty( $enabled ) ) {
-			$enabled = MWNamespace::getValidNamespaces();
+			$enabled = $this->namespaceInfo->getValidNamespaces();
 		}
 
 		return array_diff( $enabled, $this->excludedNamespaces );
