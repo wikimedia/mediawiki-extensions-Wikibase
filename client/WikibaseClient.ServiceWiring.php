@@ -6,6 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
+use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnknownValue;
@@ -23,6 +24,7 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -45,6 +47,14 @@ return [
 		return new DeserializerFactory(
 			WikibaseClient::getDataValueDeserializer( $services ),
 			WikibaseClient::getEntityIdParser( $services )
+		);
+	},
+
+	'WikibaseClient.CompactBaseDataModelSerializerFactory' => function ( MediaWikiServices $services ): SerializerFactory {
+		return new SerializerFactory(
+			new DataValueSerializer(),
+			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
 	},
 

@@ -866,8 +866,9 @@ final class WikibaseClient {
 	 * A factory returned has knowledge about items, properties, and the elements they are made of,
 	 * but no other entity types.
 	 */
-	public function getCompactBaseDataModelSerializerFactory(): SerializerFactory {
-		return $this->getWikibaseServices()->getCompactBaseDataModelSerializerFactory();
+	public static function getCompactBaseDataModelSerializerFactory( ContainerInterface $services = null ): SerializerFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.CompactBaseDataModelSerializerFactory' );
 	}
 
 	/**
