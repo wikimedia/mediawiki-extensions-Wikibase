@@ -33,6 +33,7 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
+use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
@@ -216,6 +217,10 @@ return [
 		}
 
 		return $site;
+	},
+
+	'WikibaseClient.StringNormalizer' => function ( MediaWikiServices $services ): StringNormalizer {
+		return new StringNormalizer();
 	},
 
 	'WikibaseClient.TermFallbackCache' => function ( MediaWikiServices $services ): TermFallbackCacheFacade {
