@@ -327,6 +327,7 @@
 				"HtmlCacheUpdater",
 				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.EntityRdfBuilderFactory",
 				"WikibaseRepo.EntityTitleStoreLookup",
 				"WikibaseRepo.Logger",
 				"WikibaseRepo.RdfVocabulary",

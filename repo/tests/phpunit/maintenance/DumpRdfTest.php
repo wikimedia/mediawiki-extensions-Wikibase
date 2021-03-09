@@ -156,7 +156,6 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			->with( array_diff( $existingEntityTypes, $entityTypesWithoutRdfOutput ), EntityIdPager::INCLUDE_REDIRECTS )
 			->willReturn( $mockEntityIdPager );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// Note: We are testing with the actual RDF bindings, so we can check for actual RDF output.
 		$rdfBuilder = WikibaseRepo::getValueSnakRdfBuilderFactory();
 
@@ -167,7 +166,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			new NullEntityPrefetcher(),
 			$this->getMockPropertyDataTypeLookup(),
 			$rdfBuilder,
-			$wikibaseRepo->getEntityRdfBuilderFactory(),
+			WikibaseRepo::getEntityRdfBuilderFactory(),
 			$mockRepo,
 			new RdfVocabulary(
 				[ '' => 'fooUri/' ],

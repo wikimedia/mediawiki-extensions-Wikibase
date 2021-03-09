@@ -111,7 +111,6 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// Note: We are testing with the actual RDF bindings. These should not change for well
 		// known data types. Mocking the bindings would be nice, but is complex and not needed.
 		$rdfBuilder = WikibaseRepo::getValueSnakRdfBuilderFactory();
@@ -122,7 +121,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			$entityContentFactory,
 			new InMemoryDataTypeLookup(),
 			$rdfBuilder,
-			$wikibaseRepo->getEntityRdfBuilderFactory(),
+			WikibaseRepo::getEntityRdfBuilderFactory(),
 			$entityDataFormatProvider,
 			$serializerFactory,
 			$serializerFactory->newItemSerializer(),
