@@ -100,6 +100,47 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 		}
 	}
 
+	/** @dataProvider provideServicesLists */
+	public function testServicesSorted( array $services ): void {
+		$sortedServices = $services;
+		usort( $sortedServices, function ( $serviceA, $serviceB ) {
+			$isClientServiceA = strpos( $serviceA, 'WikibaseClient.' ) === 0;
+			$isClientServiceB = strpos( $serviceB, 'WikibaseClient.' ) === 0;
+			if ( $isClientServiceA !== $isClientServiceB ) {
+				return $isClientServiceA ? 1 : -1;
+			}
+			return strcmp( $serviceA, $serviceB );
+		} );
+
+		$this->assertSame( $sortedServices, $services,
+			'Services should be sorted: first all MediaWiki services, then all Wikibase ones.' );
+	}
+
+	public function provideServicesLists(): iterable {
+		foreach ( $this->provideSpecifications() as $name => $specification ) {
+			if (
+				is_array( $specification ) &&
+				array_key_exists( 'services', $specification )
+			) {
+				yield $name => [ $specification['services'] ];
+			}
+		}
+	}
+
+	public function provideSpecifications(): iterable {
+		foreach ( $this->provideHookHandlerNames() as [ $hookHandlerName ] ) {
+			yield "HookHandlers/$hookHandlerName" => $this->getExtensionJson()['HookHandlers'][$hookHandlerName];
+		}
+
+		foreach ( $this->provideApiModuleListsAndNames() as [ $moduleList, $moduleName ] ) {
+			yield "$moduleList/$moduleName" => $this->getExtensionJson()[$moduleList][$moduleName];
+		}
+
+		foreach ( $this->provideSpecialPageNames() as [ $specialPageName ] ) {
+			yield "SpecialPages/$specialPageName" => $this->getExtensionJson()['SpecialPages'][$specialPageName];
+		}
+	}
+
 	public function testEchoNotificationsHandlers() {
 		EchoNotificationsHandlers::factory();
 		$this->assertTrue( true );
