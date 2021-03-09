@@ -424,7 +424,13 @@
 		}
 	},
 	"SpecialPages": {
-		"UnconnectedPages": "Wikibase\\Client\\Specials\\SpecialUnconnectedPages",
+		"UnconnectedPages": {
+			"class": "Wikibase\\Client\\Specials\\SpecialUnconnectedPages",
+			"services": [
+				"NamespaceInfo",
+				"WikibaseClient.NamespaceChecker"
+			]
+		},
 		"PagesWithBadges": {
 			"class": "Wikibase\\Client\\Specials\\SpecialPagesWithBadges",
 			"factory": "Wikibase\\Client\\Specials\\SpecialPagesWithBadges::factory",
