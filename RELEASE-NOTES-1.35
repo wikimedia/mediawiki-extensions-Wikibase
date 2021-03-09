@@ -41,8 +41,13 @@ on Wikidata and will be removed in upcoming releases.
 * (repo) tmpItemSearchMigrationStage
 * (repo) tmpPropertySearchMigrationStage
 
-On smaller wikibase instances this migration process will automatically be
-handled by running update.php. Don't forget to backup your database!
+When upgrading to 1.35 this migration will happen primarily in jobs that run on
+the repository. Therefore it might be necessary to execute runJobs.php until
+the new term storage has been fully populated or by increasing the job run rate
+by changing the value of $wgJobRunRate. On smaller Wikibase instances this
+migration process will automatically be handled by running update.php.
+
+Don't forget to backup your database!
 
 For more information:
 
