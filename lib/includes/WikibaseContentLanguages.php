@@ -89,6 +89,7 @@ class WikibaseContentLanguages {
 					'lns', // T263946
 					'mcp', // T263946
 					'mua', // T263946
+					'nan-hani', // T180771
 					'nge', // T263946
 					'nla', // T263946
 					'nmg', // T263946
