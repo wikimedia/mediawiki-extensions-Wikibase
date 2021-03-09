@@ -120,12 +120,10 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
-use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\Store\TypeDispatchingArticleIdLookup;
 use Wikibase\Lib\Store\TypeDispatchingExistenceChecker;
-use Wikibase\Lib\Store\TypeDispatchingRedirectChecker;
 use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
 use Wikibase\Lib\Store\TypeDispatchingUrlLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
@@ -396,7 +394,7 @@ class WikibaseRepo {
 			$this->getEntityExistenceChecker(),
 			$this->getEntityTitleTextLookup(),
 			$this->getEntityUrlLookup(),
-			$this->getEntityRedirectChecker(),
+			self::getEntityRedirectChecker(),
 			self::getEntityTitleLookup(),
 			self::getKartographerEmbeddingHandler(),
 			self::getSettings()->getSetting( 'useKartographerMaplinkInWikitext' ),
@@ -583,11 +581,9 @@ class WikibaseRepo {
 		);
 	}
 
-	public function getEntityRedirectChecker(): EntityRedirectChecker {
-		return new TypeDispatchingRedirectChecker(
-			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::REDIRECT_CHECKER_CALLBACK ),
-			new TitleLookupBasedEntityRedirectChecker( self::getEntityTitleLookup() )
-		);
+	public static function getEntityRedirectChecker( ContainerInterface $services = null ): EntityRedirectChecker {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityRedirectChecker' );
 	}
 
 	public static function getEntityIdLookup( ContainerInterface $services = null ): EntityIdLookup {

@@ -43,8 +43,11 @@ use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
+use Wikibase\Lib\Store\TypeDispatchingRedirectChecker;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
@@ -233,6 +236,16 @@ return [
 		return new EntityRdfBuilderFactory(
 			$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_BUILDER_FACTORY_CALLBACK ),
 			$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES )
+		);
+	},
+
+	'WikibaseRepo.EntityRedirectChecker' => function ( MediaWikiServices $services ): EntityRedirectChecker {
+		return new TypeDispatchingRedirectChecker(
+			WikibaseRepo::getEntityTypeDefinitions( $services )
+				->get( EntityTypeDefinitions::REDIRECT_CHECKER_CALLBACK ),
+			new TitleLookupBasedEntityRedirectChecker(
+				WikibaseRepo::getEntityTitleLookup( $services )
+			)
 		);
 	},
 
