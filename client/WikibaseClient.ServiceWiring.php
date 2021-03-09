@@ -13,7 +13,10 @@ use DataValues\UnknownValue;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
+use Wikibase\Client\CachingOtherProjectsSitesProvider;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
+use Wikibase\Client\OtherProjectsSitesGenerator;
+use Wikibase\Client\OtherProjectsSitesProvider;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\WikibaseClient;
@@ -152,6 +155,22 @@ return [
 
 	'WikibaseClient.Logger' => function ( MediaWikiServices $services ): LoggerInterface {
 		return LoggerFactory::getInstance( 'Wikibase' );
+	},
+
+	'WikibaseClient.OtherProjectsSitesProvider' => function ( MediaWikiServices $services ): OtherProjectsSitesProvider {
+		$settings = WikibaseClient::getSettings( $services );
+
+		return new CachingOtherProjectsSitesProvider(
+			new OtherProjectsSitesGenerator(
+				$services->getSiteLookup(),
+				$settings->getSetting( 'siteGlobalID' ),
+				$settings->getSetting( 'specialSiteLinkGroups' )
+			),
+			// TODO: Make configurable? Should be similar, maybe identical to sharedCacheType and
+			// sharedCacheDuration, but can not reuse these because this here is not shared.
+			ObjectCache::getLocalClusterInstance(),
+			60 * 60
+		);
 	},
 
 	'WikibaseClient.PropertyOrderProvider' => function ( MediaWikiServices $services ): CachingPropertyOrderProvider {

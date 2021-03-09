@@ -19,7 +19,6 @@ use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
-use Wikibase\Client\OtherProjectsSitesProvider;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Store\ClientStore;
@@ -267,11 +266,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetOtherProjectsSidebarGeneratorFactoryReturnType() {
 		$instance = $this->getWikibaseClient()->getOtherProjectsSidebarGeneratorFactory();
 		$this->assertInstanceOf( OtherProjectsSidebarGeneratorFactory::class, $instance );
-	}
-
-	public function testGetOtherProjectsSitesProvider() {
-		$returnValue = $this->getWikibaseClient()->getOtherProjectsSitesProvider();
-		$this->assertInstanceOf( OtherProjectsSitesProvider::class, $returnValue );
 	}
 
 	public function testGetDefaultInstance() {

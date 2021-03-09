@@ -267,7 +267,7 @@ return call_user_func( function() {
 	};
 
 	$defaults['otherProjectsLinks'] = function ( SettingsArray $settings ) {
-		$otherProjectsSitesProvider = WikibaseClient::getDefaultInstance()->getOtherProjectsSitesProvider();
+		$otherProjectsSitesProvider = WikibaseClient::getOtherProjectsSitesProvider();
 		return $otherProjectsSitesProvider->getOtherProjectsSiteIds( $settings->getSetting( 'siteLinkGroups' ) );
 	};
 
