@@ -171,7 +171,7 @@ return [
 				$repo->getEntityExistenceChecker(),
 				$repo->getEntityTitleTextLookup(),
 				$repo->getEntityUrlLookup(),
-				$repo->getEntityRedirectChecker()
+				WikibaseRepo::getEntityRedirectChecker()
 			);
 		},
 		Def::ENTITY_REFERENCE_EXTRACTOR_CALLBACK => function() {
@@ -272,7 +272,7 @@ return [
 				$repo->getEntityExistenceChecker(),
 				$repo->getEntityTitleTextLookup(),
 				$repo->getEntityUrlLookup(),
-				$repo->getEntityRedirectChecker()
+				WikibaseRepo::getEntityRedirectChecker()
 			);
 		},
 		Def::ENTITY_REFERENCE_EXTRACTOR_CALLBACK => function() {
