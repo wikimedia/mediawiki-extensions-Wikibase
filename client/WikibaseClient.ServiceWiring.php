@@ -18,6 +18,7 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
+use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataModel\DeserializerFactory;
@@ -56,6 +57,12 @@ return [
 			new DataValueSerializer(),
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+		);
+	},
+
+	'WikibaseClient.DataAccessSettings' => function ( MediaWikiServices $services ): DataAccessSettings {
+		return new DataAccessSettings(
+			WikibaseClient::getSettings( $services )->getSetting( 'maxSerializedEntitySize' )
 		);
 	},
 
