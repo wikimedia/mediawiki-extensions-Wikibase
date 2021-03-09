@@ -395,7 +395,7 @@ final class WikibaseClient {
 				self::getEntityIdComposer(),
 				self::getDataValueDeserializer(),
 				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
-				$this->getDataAccessSettings(),
+				self::getDataAccessSettings(),
 				$source,
 				self::getLanguageFallbackChainFactory(),
 				$entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
@@ -408,10 +408,9 @@ final class WikibaseClient {
 		return new MultipleEntitySourceServices( $entitySourceDefinitions, $genericServices, $singleSourceServices );
 	}
 
-	private function getDataAccessSettings() {
-		return new DataAccessSettings(
-			self::getSettings()->getSetting( 'maxSerializedEntitySize' )
-		);
+	public static function getDataAccessSettings( ContainerInterface $services = null ): DataAccessSettings {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.DataAccessSettings' );
 	}
 
 	/**
