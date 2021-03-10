@@ -35,6 +35,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
@@ -303,6 +304,15 @@ return [
 			hash( 'sha256', $services->getMainConfig()->get( 'SecretKey' ) ),
 			new TermFallbackCacheServiceFactory(),
 			$settings->getSetting( 'termFallbackCacheVersion' )
+		);
+	},
+
+	'WikibaseClient.ValueFormatterFactory' => function ( MediaWikiServices $services ): OutputFormatValueFormatterFactory {
+		return new OutputFormatValueFormatterFactory(
+			WikibaseClient::getDataTypeDefinitions( $services )
+				->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
+			$services->getContentLanguage(),
+			WikibaseClient::getLanguageFallbackChainFactory( $services )
 		);
 	},
 
