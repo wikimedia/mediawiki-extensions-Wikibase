@@ -32,6 +32,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
@@ -425,6 +426,11 @@ return [
 
 	'WikibaseRepo.Logger' => function ( MediaWikiServices $services ): LoggerInterface {
 		return LoggerFactory::getInstance( 'Wikibase' );
+	},
+
+	'WikibaseRepo.MonolingualTextLanguages' => function ( MediaWikiServices $services ): ContentLanguages {
+		return WikibaseRepo::getWikibaseContentLanguages( $services )
+			->getContentLanguages( WikibaseContentLanguages::CONTEXT_MONOLINGUAL_TEXT );
 	},
 
 	'WikibaseRepo.PropertyTermsCollisionDetector' => function ( MediaWikiServices $services ): TermsCollisionDetector {

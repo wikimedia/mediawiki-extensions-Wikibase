@@ -344,7 +344,7 @@ class WikibaseRepo {
 			self::getEntityIdParser(),
 			$urlSchemes,
 			$this->getItemVocabularyBaseUri(),
-			$this->getMonolingualTextLanguages(),
+			self::getMonolingualTextLanguages(),
 			$this->getCachingCommonsMediaFileNameLookup(),
 			new MediaWikiPageNameNormalizer(),
 			self::getSettings()->getSetting( 'geoShapeStorageApiEndpointUrl' ),
@@ -1774,8 +1774,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.WikibaseContentLanguages' );
 	}
 
-	private function getMonolingualTextLanguages() {
-		return self::getWikibaseContentLanguages()->getContentLanguages( WikibaseContentLanguages::CONTEXT_MONOLINGUAL_TEXT );
+	public static function getMonolingualTextLanguages( ContainerInterface $services = null ): ContentLanguages {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.MonolingualTextLanguages' );
 	}
 
 	/**
