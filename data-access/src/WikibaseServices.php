@@ -6,7 +6,6 @@ use Serializers\Serializer;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\StringNormalizer;
 
 /**
  * Interface of the top-level container/factory of data access services.
@@ -66,11 +65,6 @@ interface WikibaseServices extends DataAccessServices {
 	 *  compact serialization.
 	 */
 	public function getCompactBaseDataModelSerializerFactory();
-
-	/**
-	 * @return StringNormalizer
-	 */
-	public function getStringNormalizer();
 
 	/**
 	 * @return PrefetchingTermLookup

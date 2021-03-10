@@ -7,7 +7,6 @@ use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\StringNormalizer;
 
 /**
  * A container/factory of services which don't rely/require repository-specific configuration.
@@ -35,11 +34,6 @@ class GenericServices {
 	 * @var Serializer|null
 	 */
 	private $storageEntitySerializer;
-
-	/**
-	 * @var StringNormalizer
-	 */
-	private $stringNormalizer;
 
 	/**
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
@@ -131,17 +125,6 @@ class GenericServices {
 			// SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 			2 + 8
 		);
-	}
-
-	/**
-	 * @return StringNormalizer
-	 */
-	public function getStringNormalizer() {
-		if ( $this->stringNormalizer === null ) {
-			$this->stringNormalizer = new StringNormalizer();
-		}
-
-		return $this->stringNormalizer;
 	}
 
 }
