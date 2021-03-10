@@ -187,7 +187,8 @@ return [
 		$settings = WikibaseClient::getSettings( $services );
 		return new NamespaceChecker(
 			$settings->getSetting( 'excludeNamespaces' ),
-			$settings->getSetting( 'namespaces' )
+			$settings->getSetting( 'namespaces' ),
+			$services->getNamespaceInfo()
 		);
 	},
 
