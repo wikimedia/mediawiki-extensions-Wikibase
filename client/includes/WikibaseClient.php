@@ -866,8 +866,9 @@ final class WikibaseClient {
 	/**
 	 * Returns an entity serializer that generates the most compact serialization.
 	 */
-	public function getCompactEntitySerializer(): Serializer {
-		return $this->getWikibaseServices()->getCompactEntitySerializer();
+	public static function getCompactEntitySerializer( ContainerInterface $services = null ): Serializer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.CompactEntitySerializer' );
 	}
 
 	public static function getDataValueDeserializer( ContainerInterface $services = null ): DataValueDeserializer {

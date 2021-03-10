@@ -9,7 +9,6 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
 use ReflectionClass;
 use ReflectionMethod;
-use Serializers\Serializer;
 use Site;
 use SiteLookup;
 use Wikibase\Client\Changes\ChangeHandler;
@@ -271,11 +270,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetInternalFormatStatementDeserializer() {
 		$deserializer = $this->getWikibaseClient()->getInternalFormatStatementDeserializer();
 		$this->assertInstanceOf( Deserializer::class, $deserializer );
-	}
-
-	public function testGetCompactEntitySerializer() {
-		$serializer = $this->getWikibaseClient()->getCompactEntitySerializer();
-		$this->assertInstanceOf( Serializer::class, $serializer );
 	}
 
 	public function testGetChangeHandler() {
