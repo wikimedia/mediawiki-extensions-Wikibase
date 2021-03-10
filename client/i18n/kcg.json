@@ -85,7 +85,7 @@
 	"wikibase-client-data-bridge-edit-conflict-error-message": "A̱tyuta̱m a̱ghyang sii jhyuk a̱fi̱ng kani a̱ si̱ yet a̱son di̱ shei a̱ka̱shai nna. Á̱ si̱ si̱ mi̱n tyia̱ a̱ka̱shai ang na di̱n ta̱m bah. Ma̱sa̱kut bu nyia̱ lodi peji hu a shyia̱ a̱fi̱ng a̱fai ka.",
 	"wikibase-client-data-bridge-unknown-error-heading": "Kyang byian",
 	"wikibase-client-data-bridge-unknown-error-message": "Ghyuap si̱si̱ nnyia̱ a̱wot á̱ si̱ mi̱n jhyuk a̱fi̱ng khai ka mi̱ di̱ yong huni bah. Ma̱sa̱kut kwan a bu nyia̱ lodi.",
-	"wikibase-client-data-bridge-error-report": "<p>Ka̱ ghyuap hu ngya a̱son, ma̱sa̱kut [$1 tywei mat á̱lyiat nani] a bo mbeang nkhang nani:</p>\n<ul>\n<li>$2</li>\n<li>$3 si̱ $4</li>\n<li>Zwunzwuo ghyuap: $5</li>\n</ul>",
+	"wikibase-client-data-bridge-error-report": "<p>Ka̱ ghyuap hu ngya a̱son, ma̱sa̱kut [$1 tywei mat á̱lyiat nani] a kin gwa̱i nyiá̱ ang na a bu si̱ mbeang nkhang nani:</p>\n<ul>\n<li>$2</li>\n<li>$3 si̱ $4</li>\n<li>Zwunzwuo ghyuap: $5</li>\n</ul>",
 	"wikibase-client-data-bridge-error-reload-bridge": "Bu nyia̱ lodi",
 	"wikibase-client-data-bridge-error-reload-page": "Bu nyia̱ lodi peji hu",
 	"wikibase-client-data-bridge-error-go-back": "Bwuok nkat",
