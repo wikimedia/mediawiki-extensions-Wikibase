@@ -46,6 +46,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
@@ -502,6 +503,20 @@ return [
 		return new TermsCollisionDetectorFactory(
 			$services->getDBLoadBalancer(),
 			WikibaseRepo::getTypeIdsLookup( $services )
+		);
+	},
+
+	'WikibaseRepo.TermStoreWriterFactory' => function ( MediaWikiServices $services ): TermStoreWriterFactory {
+		return new TermStoreWriterFactory(
+			WikibaseRepo::getLocalEntitySource( $services ),
+			WikibaseRepo::getStringNormalizer( $services ),
+			WikibaseRepo::getTypeIdsAcquirer( $services ),
+			WikibaseRepo::getTypeIdsLookup( $services ),
+			WikibaseRepo::getTypeIdsResolver( $services ),
+			$services->getDBLoadBalancerFactory(),
+			$services->getMainWANObjectCache(),
+			JobQueueGroup::singleton(),
+			WikibaseRepo::getLogger( $services )
 		);
 	},
 

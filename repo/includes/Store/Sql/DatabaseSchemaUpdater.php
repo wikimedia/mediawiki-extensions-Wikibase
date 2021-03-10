@@ -318,7 +318,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$lbFactory->waitForReplication();
 
 		$rebuilder = new PropertyTermsRebuilder(
-			$wikibaseRepo->getNewTermStoreWriterFactory()->newPropertyTermStoreWriter(),
+			WikibaseRepo::getTermStoreWriterFactory()->newPropertyTermStoreWriter(),
 			$sqlEntityIdPagerFactory->newSqlEntityIdPager( [ 'property' ] ),
 			$reporter,
 			$reporter,
@@ -368,7 +368,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$lbFactory->waitForReplication();
 
 		$rebuilder = new ItemTermsRebuilder(
-			$wikibaseRepo->getNewTermStoreWriterFactory()->newItemTermStoreWriter(),
+			WikibaseRepo::getTermStoreWriterFactory()->newItemTermStoreWriter(),
 			self::newItemIdIterator( $highestId ),
 			$reporter,
 			$reporter,
