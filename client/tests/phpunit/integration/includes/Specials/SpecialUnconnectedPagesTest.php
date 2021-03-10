@@ -6,6 +6,7 @@ use SpecialPageTestBase;
 use Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * @covers \Wikibase\Client\Specials\SpecialUnconnectedPages
@@ -22,8 +23,12 @@ use Wikibase\Client\Specials\SpecialUnconnectedPages;
  */
 class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
-	protected function newSpecialPage() {
-		return new SpecialUnconnectedPages();
+	protected function newSpecialPage( NamespaceChecker $namespaceChecker = null ) {
+		$services = $this->getServiceContainer();
+		return new SpecialUnconnectedPages(
+			$services->getNamespaceInfo(),
+			$namespaceChecker ?: WikibaseClient::getNamespaceChecker( $services )
+		);
 	}
 
 	public function testExecuteDoesNotCauseFatalError() {
@@ -32,37 +37,14 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @dataProvider provideNamespaceChecker
-	 */
-	public function testNamespaceChecker( $namespace, $expected ) {
-		$page = $this->newSpecialPage();
-		$checker = new NamespaceChecker( [ 2, 4 ], [ 0 ] );
-		$page->setNamespaceChecker( $checker );
-		$this->assertEquals( $expected, $page->getNamespaceChecker()->isWikibaseEnabled( $namespace ) );
-	}
-
-	public function provideNamespaceChecker() {
-		return [
-			[ 0, true ],  // #0
-			[ 1, false ], // #1
-			[ 2, false ], // #2
-			[ 3, false ], // #3
-			[ 4, false ], // #4
-			[ 5, false ], // #5
-			[ 6, false ], // #6
-			[ 7, false ], // #7
-		];
-	}
-
-	/**
 	 * @dataProvider provideBuildConditionals
 	 */
 	public function testBuildConditionals( $text, $expected ) {
-		$page = $this->newSpecialPage();
-		$title = Title::newFromTextThrow( $text );
 		$checker = new NamespaceChecker( [ 2, 4 ], [ 0 ] );
+		$page = $this->newSpecialPage( $checker );
+		$title = Title::newFromTextThrow( $text );
 		$dbr = wfGetDB( DB_REPLICA );
-		$this->assertEquals( $expected, $page->buildConditionals( $dbr, $title, $checker ) );
+		$this->assertEquals( $expected, $page->buildConditionals( $dbr, $title ) );
 	}
 
 	public function provideBuildConditionals() {
