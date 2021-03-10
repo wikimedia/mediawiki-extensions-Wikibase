@@ -163,11 +163,6 @@ final class WikibaseClient {
 	private $snakFormatterFactory = null;
 
 	/**
-	 * @var OutputFormatValueFormatterFactory|null
-	 */
-	private $valueFormatterFactory = null;
-
-	/**
 	 * @var ClientParserOutputDataUpdater|null
 	 */
 	private $parserOutputDataUpdater = null;
@@ -704,7 +699,7 @@ final class WikibaseClient {
 		if ( $this->snakFormatterFactory === null ) {
 			$this->snakFormatterFactory = new OutputFormatSnakFormatterFactory(
 				self::getDataTypeDefinitions()->getSnakFormatterFactoryCallbacks(),
-				$this->getValueFormatterFactory(),
+				self::getValueFormatterFactory(),
 				$this->getPropertyDataTypeLookup(),
 				self::getDataTypeFactory()
 			);
@@ -717,16 +712,9 @@ final class WikibaseClient {
 	 * Returns a OutputFormatValueFormatterFactory the provides ValueFormatters
 	 * for different output formats.
 	 */
-	private function getValueFormatterFactory(): OutputFormatValueFormatterFactory {
-		if ( $this->valueFormatterFactory === null ) {
-			$this->valueFormatterFactory = new OutputFormatValueFormatterFactory(
-				self::getDataTypeDefinitions()->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
-				$this->getContentLanguage(),
-				self::getLanguageFallbackChainFactory()
-			);
-		}
-
-		return $this->valueFormatterFactory;
+	public static function getValueFormatterFactory( ContainerInterface $services = null ): OutputFormatValueFormatterFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.ValueFormatterFactory' );
 	}
 
 	private function getRepoItemUriParser(): EntityIdParser {
