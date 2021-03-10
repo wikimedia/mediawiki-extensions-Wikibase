@@ -89,7 +89,7 @@ class RebuildItemTerms extends Maintenance {
 		}
 
 		$rebuilder = new ItemTermsRebuilder(
-			$this->wikibaseRepo->getNewTermStoreWriterFactory()->newItemTermStoreWriter(),
+			WikibaseRepo::getTermStoreWriterFactory()->newItemTermStoreWriter(),
 			$iterator,
 			$this->getReporter(),
 			$this->getErrorReporter(),

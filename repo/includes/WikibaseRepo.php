@@ -12,7 +12,6 @@ use Diff\Differ\OrderedListDiffer;
 use Exception;
 use HashBagOStuff;
 use IContextSource;
-use JobQueueGroup;
 use Language;
 use LogicException;
 use MediaWiki\MediaWikiServices;
@@ -1401,7 +1400,7 @@ class WikibaseRepo {
 			return new ThrowingEntityTermStoreWriter();
 		}
 
-		return new PropertyTermStoreWriterAdapter( $this->getNewTermStoreWriterFactory()->newPropertyTermStoreWriter() );
+		return new PropertyTermStoreWriterAdapter( self::getTermStoreWriterFactory()->newPropertyTermStoreWriter() );
 	}
 
 	public function getItemTermStoreWriter(): EntityTermStoreWriter {
@@ -1409,21 +1408,12 @@ class WikibaseRepo {
 			return new ThrowingEntityTermStoreWriter();
 		}
 
-		return new ItemTermStoreWriterAdapter( $this->getNewTermStoreWriterFactory()->newItemTermStoreWriter() );
+		return new ItemTermStoreWriterAdapter( self::getTermStoreWriterFactory()->newItemTermStoreWriter() );
 	}
 
-	public function getNewTermStoreWriterFactory(): TermStoreWriterFactory {
-		return new TermStoreWriterFactory(
-			self::getLocalEntitySource(),
-			self::getStringNormalizer(),
-			self::getTypeIdsAcquirer(),
-			self::getTypeIdsLookup(),
-			self::getTypeIdsResolver(),
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
-			MediaWikiServices::getInstance()->getMainWANObjectCache(),
-			JobQueueGroup::singleton(),
-			self::getLogger()
-		);
+	public static function getTermStoreWriterFactory( ContainerInterface $services = null ): TermStoreWriterFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.TermStoreWriterFactory' );
 	}
 
 	/**
