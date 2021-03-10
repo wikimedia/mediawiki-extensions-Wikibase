@@ -15,6 +15,7 @@ use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Wikibase\Client\CachingOtherProjectsSitesProvider;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
+use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\OtherProjectsSitesGenerator;
 use Wikibase\Client\OtherProjectsSitesProvider;
 use Wikibase\Client\RepoLinker;
@@ -180,6 +181,14 @@ return [
 
 	'WikibaseClient.Logger' => function ( MediaWikiServices $services ): LoggerInterface {
 		return LoggerFactory::getInstance( 'Wikibase' );
+	},
+
+	'WikibaseClient.NamespaceChecker' => function ( MediaWikiServices $services ): NamespaceChecker {
+		$settings = WikibaseClient::getSettings( $services );
+		return new NamespaceChecker(
+			$settings->getSetting( 'excludeNamespaces' ),
+			$settings->getSetting( 'namespaces' )
+		);
 	},
 
 	'WikibaseClient.OtherProjectsSitesProvider' => function ( MediaWikiServices $services ): OtherProjectsSitesProvider {

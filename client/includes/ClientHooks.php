@@ -29,7 +29,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	protected static function isWikibaseEnabled( $namespace ) {
-		return WikibaseClient::getDefaultInstance()->getNamespaceChecker()->isWikibaseEnabled( $namespace );
+		return WikibaseClient::getNamespaceChecker()->isWikibaseEnabled( $namespace );
 	}
 
 	/**

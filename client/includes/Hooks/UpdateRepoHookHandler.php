@@ -71,11 +71,10 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	private $propagateChangesToRepo;
 
 	public static function factory(
+		NamespaceChecker $namespaceChecker,
 		SettingsArray $clientSettings
 	): ?self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
-		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
 
 		$repoDB = $wikibaseClient->getDatabaseDomainNameOfLocalRepo();
 		$jobQueueGroup = JobQueueGroup::singleton( $repoDB );

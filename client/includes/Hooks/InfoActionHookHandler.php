@@ -87,12 +87,12 @@ class InfoActionHookHandler implements InfoActionHook {
 	public static function factory(
 		EntityIdParser $idParser,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		NamespaceChecker $namespaceChecker,
 		RepoLinker $repoLinker,
 		SettingsArray $clientSettings
 	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
 		$usageLookup = $wikibaseClient->getStore()->getUsageLookup();
 		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
 			$languageFallbackChainFactory,

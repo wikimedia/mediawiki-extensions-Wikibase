@@ -173,11 +173,6 @@ final class WikibaseClient {
 	private $parserOutputDataUpdater = null;
 
 	/**
-	 * @var NamespaceChecker|null
-	 */
-	private $namespaceChecker = null;
-
-	/**
 	 * @var RestrictedEntityLookup|null
 	 */
 	private $restrictedEntityLookup = null;
@@ -738,22 +733,15 @@ final class WikibaseClient {
 		);
 	}
 
-	public function getNamespaceChecker(): NamespaceChecker {
-		if ( $this->namespaceChecker === null ) {
-			$settings = self::getSettings();
-			$this->namespaceChecker = new NamespaceChecker(
-				$settings->getSetting( 'excludeNamespaces' ),
-				$settings->getSetting( 'namespaces' )
-			);
-		}
-
-		return $this->namespaceChecker;
+	public static function getNamespaceChecker( ContainerInterface $services = null ): NamespaceChecker {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.NamespaceChecker' );
 	}
 
 	public function getLangLinkHandlerFactory(): LangLinkHandlerFactory {
 		return new LangLinkHandlerFactory(
 			$this->getLanguageLinkBadgeDisplay(),
-			$this->getNamespaceChecker(),
+			self::getNamespaceChecker(),
 			$this->getStore()->getSiteLinkLookup(),
 			$this->getStore()->getEntityLookup(),
 			$this->siteLookup,

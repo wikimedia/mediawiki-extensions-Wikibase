@@ -9,7 +9,6 @@ use Skin;
 use Title;
 use User;
 use Wikibase\Client\NamespaceChecker;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\SettingsArray;
 
 /**
@@ -37,11 +36,11 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 	}
 
 	public static function factory(
+		NamespaceChecker $namespaceChecker,
 		SettingsArray $clientSettings
 	): self {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		return new self(
-			$wikibaseClient->getNamespaceChecker(),
+			$namespaceChecker,
 			$clientSettings->getSetting( 'dataBridgeEnabled' )
 		);
 	}
