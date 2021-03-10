@@ -1359,13 +1359,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return Serializer
-	 */
-	public function getStatementSerializer() {
-		return self::getBaseDataModelSerializerFactory()->newStatementSerializer();
-	}
-
-	/**
 	 * @return DataValueDeserializer
 	 */
 	public static function getDataValueDeserializer( ContainerInterface $services = null ): DataValueDeserializer {

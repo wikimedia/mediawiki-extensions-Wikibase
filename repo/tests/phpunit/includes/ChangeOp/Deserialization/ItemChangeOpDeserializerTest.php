@@ -59,7 +59,8 @@ class ItemChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 		$property = new PropertyId( 'P7' );
 		$statement = new Statement( new PropertyNoValueSnak( $property ) );
-		$statementSerialization = WikibaseRepo::getDefaultInstance()->getStatementSerializer()->serialize( $statement );
+		$statementSerializer = WikibaseRepo::getBaseDataModelSerializerFactory()->newStatementSerializer();
+		$statementSerialization = $statementSerializer->serialize( $statement );
 
 		$pageTitle = 'Some Title';
 
