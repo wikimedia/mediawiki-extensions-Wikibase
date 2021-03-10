@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Modules\RepoAccessModule;
 use Wikibase\Lib\Modules\SitesModule;
 use Wikibase\Lib\WikibaseSettings;
@@ -23,7 +24,7 @@ return call_user_func( function() {
 		'mw.config.values.wbSiteDetails' => $moduleTemplate + [
 			'factory' => function () {
 				return new SitesModule(
-					WikibaseSettings::isClientEnabled() ? WikibaseSettings::getClientSettings() : null,
+					WikibaseSettings::isClientEnabled() ? WikibaseClient::getSettings() : null,
 					WikibaseSettings::isRepoEnabled() ? WikibaseSettings::getRepoSettings() : null,
 					MediaWikiServices::getInstance()->getSiteStore(),
 					MediaWikiServices::getInstance()->getLocalServerObjectCache()

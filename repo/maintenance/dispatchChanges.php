@@ -10,6 +10,7 @@ use MWException;
 use MWExceptionHandler;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Psr\Log\LoggerInterface;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\ChunkCache;
@@ -88,7 +89,7 @@ class DispatchChanges extends Maintenance {
 
 		// If this repo is also a client, make sure it dispatches also to itself.
 		if ( WikibaseSettings::isClientEnabled() ) {
-			$clientSettings = WikibaseSettings::getClientSettings();
+			$clientSettings = WikibaseClient::getSettings();
 			$repoName = $clientSettings->getSetting( 'repoSiteId' );
 			$repoDb = $clientSettings->getSetting( 'repoDatabase' );
 

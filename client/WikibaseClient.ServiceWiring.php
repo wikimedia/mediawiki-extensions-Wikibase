@@ -81,8 +81,7 @@ return [
 
 		$services->getHookContainer()->run( 'WikibaseClientDataTypes', [ &$dataTypes ] );
 
-		// TODO get $settings from $services
-		$settings = WikibaseSettings::getClientSettings();
+		$settings = WikibaseClient::getSettings( $services );
 
 		return new DataTypeDefinitions(
 			$dataTypes,

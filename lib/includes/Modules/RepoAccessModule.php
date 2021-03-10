@@ -7,6 +7,7 @@ namespace Wikibase\Lib\Modules;
 use ResourceLoader;
 use ResourceLoaderContext;
 use ResourceLoaderModule;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\WikibaseSettings;
 
 /**
@@ -34,7 +35,7 @@ class RepoAccessModule extends ResourceLoaderModule {
 		global $wgServer, $wgScriptPath, $wgArticlePath;
 
 		if ( WikibaseSettings::isClientEnabled() ) {
-			$settings = WikibaseSettings::getClientSettings();
+			$settings = WikibaseClient::getSettings();
 			$wbRepo = [
 				'url' => $settings->getSetting( 'repoUrl' ),
 				'scriptPath' => $settings->getSetting( 'repoScriptPath' ),

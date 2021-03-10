@@ -5,7 +5,7 @@ namespace Wikibase\Client\Hooks;
 use EchoAttributeManager;
 use EchoUserLocator;
 use Wikibase\Client\Notifications\PageConnectionPresentationModel;
-use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * Handlers for hooks (e.g. BeforeCreateEchoEvent) called when Echo extension
@@ -40,7 +40,8 @@ class EchoSetupHookHandlers {
 	 * @return self
 	 */
 	public static function factory() {
-		$settings = WikibaseSettings::getClientSettings();
+		// TODO: Convert to new hook handler definition and inject dependencies (T277169)
+		$settings = WikibaseClient::getSettings();
 
 		return new self(
 			$settings->getSetting( 'sendEchoNotification' ),
