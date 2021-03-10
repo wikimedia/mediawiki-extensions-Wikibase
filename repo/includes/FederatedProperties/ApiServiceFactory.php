@@ -28,6 +28,11 @@ class ApiServiceFactory {
 	 */
 	private static $apiEntityLookupInstance = null;
 
+	/**
+	 * @var ApiEntityNamespaceInfoLookup|null
+	 */
+	private static $apiEntityNamespaceInfoLookup = null;
+
 	public static function resetClassStatics() {
 		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
 			throw new Exception(
@@ -35,6 +40,7 @@ class ApiServiceFactory {
 			);
 		}
 		self::$apiEntityLookupInstance = null;
+		self::$apiEntityNamespaceInfoLookup = null;
 	}
 
 	public function __construct(
@@ -65,16 +71,19 @@ class ApiServiceFactory {
 		);
 	}
 
-	private function newApiEntityNamespaceInfoLookup(): ApiEntityNamespaceInfoLookup {
-		return new ApiEntityNamespaceInfoLookup(
-			$this->newFederatedPropertiesApiClient(),
-			WikibaseRepo::getDefaultInstance()->getContentModelMappings()
-		);
+	private function getApiEntityNamespaceInfoLookup(): ApiEntityNamespaceInfoLookup {
+		if ( self::$apiEntityNamespaceInfoLookup === null ) {
+			self::$apiEntityNamespaceInfoLookup = new ApiEntityNamespaceInfoLookup(
+				$this->newFederatedPropertiesApiClient(),
+				WikibaseRepo::getDefaultInstance()->getContentModelMappings()
+			);
+		}
+		return self::$apiEntityNamespaceInfoLookup;
 	}
 
 	public function newApiEntityTitleTextLookup(): ApiEntityTitleTextLookup {
 		return new ApiEntityTitleTextLookup(
-			$this->newApiEntityNamespaceInfoLookup()
+			$this->getApiEntityNamespaceInfoLookup()
 		);
 	}
 
@@ -87,17 +96,17 @@ class ApiServiceFactory {
 
 	public function newApiPropertyDataTypeLookup(): ApiPropertyDataTypeLookup {
 		return new ApiPropertyDataTypeLookup(
-			$this->newApiEntityLookup()
+			$this->getApiEntityLookup()
 		);
 	}
 
 	public function newApiPrefetchingTermLookup(): ApiPrefetchingTermLookup {
 		return new ApiPrefetchingTermLookup(
-			$this->newApiEntityLookup()
+			$this->getApiEntityLookup()
 		);
 	}
 
-	public function newApiEntityLookup(): ApiEntityLookup {
+	public function getApiEntityLookup(): ApiEntityLookup {
 		if ( self::$apiEntityLookupInstance === null ) {
 			self::$apiEntityLookupInstance = new ApiEntityLookup( $this->newFederatedPropertiesApiClient() );
 		}
@@ -105,7 +114,7 @@ class ApiServiceFactory {
 	}
 
 	public function newApiEntityExistenceChecker(): ApiEntityExistenceChecker {
-		return new ApiEntityExistenceChecker( $this->newApiEntityLookup() );
+		return new ApiEntityExistenceChecker( $this->getApiEntityLookup() );
 	}
 
 }

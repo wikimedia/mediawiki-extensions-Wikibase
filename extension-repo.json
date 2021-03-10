@@ -173,6 +173,10 @@
 		"ChangesSubscriptionSchemaUpdater": {
 			"class": "\\Wikibase\\Repo\\Store\\Sql\\ChangesSubscriptionSchemaUpdater"
 		},
+		"DifferenceEngineViewHeaderHookHandler": {
+			"class": "\\Wikibase\\Repo\\Hooks\\DifferenceEngineViewHeaderHookHandler",
+			"factory": "\\Wikibase\\Repo\\Hooks\\DifferenceEngineViewHeaderHookHandler::factory"
+		},
 		"FederatedPropertiesSpecialPage": {
 			"class": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler::newFromGlobalState"
@@ -183,6 +187,10 @@
 		"OutputPageJsConfig": {
 			"class": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler::newFromGlobalState"
+		},
+		"PageHistoryPagerHookHandler": {
+		  "class": "\\Wikibase\\Repo\\Hooks\\PageHistoryPagerHookHandler",
+		  "factory": "\\Wikibase\\Repo\\Hooks\\PageHistoryPagerHookHandler::factory"
 		}
 	},
 	"Hooks": {
@@ -199,6 +207,7 @@
 		"BeforePageDisplay": "\\Wikibase\\Repo\\RepoHooks::onBeforePageDisplay",
 		"BeforePageDisplayMobile": "\\Wikibase\\Repo\\RepoHooks::onBeforePageDisplayMobile",
 		"ContentModelCanBeUsedOn": "\\Wikibase\\Repo\\RepoHooks::onContentModelCanBeUsedOn",
+		"DifferenceEngineViewHeader": "DifferenceEngineViewHeaderHookHandler",
 		"ExtensionTypes": "LibHooks",
 		"FormatAutocomments": "\\Wikibase\\Repo\\RepoHooks::onFormat",
 		"GetPreferences": "\\Wikibase\\Repo\\RepoHooks::onGetPreferences",
@@ -211,6 +220,7 @@
 		"OutputPageBodyAttributes": "\\Wikibase\\Repo\\RepoHooks::onOutputPageBodyAttributes",
 		"OutputPageParserOutput": "\\Wikibase\\Repo\\RepoHooks::onOutputPageParserOutput",
 		"PageHistoryLineEnding": "\\Wikibase\\Repo\\RepoHooks::onPageHistoryLineEnding",
+		"PageHistoryPager::doBatchLookups": "PageHistoryPagerHookHandler",
 		"ParserFirstCallInit": "\\Wikibase\\Repo\\RepoHooks::onParserFirstCallInit",
 		"ParserOptionsRegister": "\\Wikibase\\Repo\\RepoHooks::onParserOptionsRegister",
 		"RecentChange_save": "\\Wikibase\\Repo\\RepoHooks::onRecentChangeSave",

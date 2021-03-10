@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * @covers \Wikibase\Repo\Hooks\LabelPrefetchHookHandlers
+ * @covers \Wikibase\Repo\Hooks\LabelPrefetchHookHandler
  *
  * @group Wikibase
  * @group Database
@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class LabelPrefetchHookHandlersTest extends LabelPrefetchHookHandlerTestBase {
+class LabelPrefetchHookHandlerTest extends LabelPrefetchHookHandlerTestBase {
 
 	public function testDoChangesListInitRows() {
 		$rows = [
