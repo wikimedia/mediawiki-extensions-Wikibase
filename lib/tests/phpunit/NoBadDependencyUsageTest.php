@@ -18,8 +18,8 @@ class NoBadDependencyUsageTest extends \PHPUnit\Framework\TestCase {
 		// Increasing these allowances is forbidden
 		$this->assertStringsNotInLib(
 			[
-				'WikibaseRepo' . '::' => 0,
-				'Wikibase\\Repo\\' => 0,
+				'WikibaseRepo' . '::' => 1,
+				'Wikibase\\Repo\\' => 1,
 				'Wikibase\\\\Repo\\\\' => 1,
 				'WikibaseClient' . '::' => 2,
 				'Wikibase\\Client\\' => 2,

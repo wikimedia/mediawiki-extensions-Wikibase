@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\SpecialPage\Hook\SpecialPage_initListHook;
-use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @license GPL-2.0-or-later
@@ -15,8 +15,9 @@ class FederatedPropertiesSpecialPageHookHandler implements SpecialPage_initListH
 	/** @var bool */
 	private $isFederatedPropertiesEnabled;
 
-	public function __construct( bool $isFederatedpropertiesEnabled ) {
-		$this->isFederatedPropertiesEnabled = $isFederatedpropertiesEnabled;
+	public function __construct( SettingsArray $settings ) {
+		$this->isFederatedPropertiesEnabled = $settings
+			->getSetting( 'federatedPropertiesEnabled' );
 	}
 
 	/**
@@ -29,9 +30,5 @@ class FederatedPropertiesSpecialPageHookHandler implements SpecialPage_initListH
 		if ( $this->isFederatedPropertiesEnabled && isset( $list[ 'NewProperty' ] ) ) {
 			unset( $list['NewProperty'] );
 		}
-	}
-
-	public static function factory(): self {
-		return new self( WikibaseSettings::getRepoSettings()->getSetting( 'federatedPropertiesEnabled' ) );
 	}
 }
