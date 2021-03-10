@@ -503,11 +503,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( Deserializer::class, $deserializer );
 	}
 
-	public function testGetEntitySerializer() {
-		$serializer = $this->getWikibaseRepo()->getAllTypesEntitySerializer();
-		$this->assertInstanceOf( Serializer::class, $serializer );
-	}
-
 	public function testGetCompactEntitySerializer() {
 		$serializer = $this->getWikibaseRepo()->getCompactEntitySerializer();
 		$this->assertInstanceOf( Serializer::class, $serializer );

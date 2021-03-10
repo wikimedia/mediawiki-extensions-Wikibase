@@ -1320,8 +1320,9 @@ class WikibaseRepo {
 	/**
 	 * @return Serializer Entity serializer that generates the full (expanded) serialization.
 	 */
-	public function getAllTypesEntitySerializer() {
-		return $this->getWikibaseServices()->getFullEntitySerializer();
+	public static function getAllTypesEntitySerializer( ContainerInterface $services = null ) {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.AllTypesEntitySerializer' );
 	}
 
 	/**
@@ -1548,9 +1549,9 @@ class WikibaseRepo {
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->newEditEntityFactory( $context ),
-			self::getBaseDataModelSerializerFactory(),
-			$this->getAllTypesEntitySerializer(),
-			self::getEntityIdParser(),
+			self::getBaseDataModelSerializerFactory( $services ),
+			self::getAllTypesEntitySerializer( $services ),
+			self::getEntityIdParser( $services ),
 			$services->getPermissionManager(),
 			$services->getRevisionLookup(),
 			$services->getTitleFactory(),
