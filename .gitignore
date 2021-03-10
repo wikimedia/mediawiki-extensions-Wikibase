@@ -7,7 +7,6 @@ node_modules/
 repo/tests/selenium/log/
 easyrdf/
 
-!.*
 .idea/
 
 .DS_Store
