@@ -359,7 +359,7 @@ describe( 'App', () => {
 			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.openAppOnPage( title );
-			DataBridgePage.bridge.waitForDisplayed( 5000 );
+			DataBridgePage.bridge.waitForDisplayed( 10000 );
 
 			const newValue = 'newValue';
 			DomUtil.setValue( DataBridgePage.value, newValue );
