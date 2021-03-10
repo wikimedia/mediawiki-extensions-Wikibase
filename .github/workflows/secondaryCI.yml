@@ -52,7 +52,7 @@ jobs:
       uses: mirromutth/mysql-action@v1.1
       with:
         mysql version: '5.7'
-        mysql database: 'its_a_mw'
+        mysql database: 'test_db_wiki'
         mysql root password: 'root'
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
@@ -90,6 +90,8 @@ jobs:
         password: ${{secrets.MAIL_PASSWORD}}
         subject: Github Action job failed for Wikibase
         # Literal body:
-        body: Job secondary-ci failed for php version ${{ matrix.php-versions }}!
+        body: >
+          Job secondary-ci failed for php version ${{ matrix.php-versions }}!
+          For more information see https://github.com/wikimedia/Wikibase/actions/workflows/secondaryCI.yml
         to: wikidata-ci-status@wikimedia.de
         from: Wikibase Github Action CI
