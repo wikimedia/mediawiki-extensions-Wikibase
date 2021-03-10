@@ -26,7 +26,9 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	protected function newSpecialPage( NamespaceChecker $namespaceChecker = null ) {
 		$services = $this->getServiceContainer();
 		return new SpecialUnconnectedPages(
+			$services->getDBLoadBalancer(),
 			$services->getNamespaceInfo(),
+			$services->getTitleFactory(),
 			$namespaceChecker ?: WikibaseClient::getNamespaceChecker( $services )
 		);
 	}

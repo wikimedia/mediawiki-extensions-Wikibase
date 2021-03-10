@@ -7,9 +7,11 @@ use NamespaceInfo;
 use QueryPage;
 use Skin;
 use Title;
+use TitleFactory;
 use Wikibase\Client\NamespaceChecker;
 use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -30,15 +32,22 @@ class SpecialUnconnectedPages extends QueryPage {
 	/** @var NamespaceInfo */
 	private $namespaceInfo;
 
+	/** @var TitleFactory */
+	private $titleFactory;
+
 	/** @var NamespaceChecker */
 	private $namespaceChecker;
 
 	public function __construct(
+		ILoadBalancer $loadBalancer,
 		NamespaceInfo $namespaceInfo,
+		TitleFactory $titleFactory,
 		NamespaceChecker $namespaceChecker
 	) {
 		parent::__construct( 'UnconnectedPages' );
+		$this->setDBLoadBalancer( $loadBalancer );
 		$this->namespaceInfo = $namespaceInfo;
+		$this->titleFactory = $titleFactory;
 		$this->namespaceChecker = $namespaceChecker;
 	}
 
@@ -92,7 +101,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @return array[]
 	 */
 	public function getQueryInfo() {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = $this->getDBLoadBalancer()->getConnectionRef( ILoadBalancer::DB_REPLICA );
 
 		$conds = $this->buildConditionals( $dbr );
 		$conds['page_is_redirect'] = 0;
@@ -149,8 +158,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @return string
 	 */
 	public function formatResult( $skin, $result ) {
-		// FIXME: This should use a TitleFactory.
-		$title = Title::newFromID( $result->value );
+		$title = $this->titleFactory->newFromID( $result->value );
 		$out = $this->getLinkRenderer()->makeKnownLink( $title );
 
 		if ( $result->page_num_iwlinks > 0 ) {
