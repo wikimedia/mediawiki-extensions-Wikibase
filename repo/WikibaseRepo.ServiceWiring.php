@@ -13,6 +13,8 @@ use DataValues\UnknownValue;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
+use Serializers\DispatchingSerializer;
+use Serializers\Serializer;
 use ValueParsers\NullParser;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
@@ -480,6 +482,19 @@ return [
 
 	'WikibaseRepo.StatementGuidValidator' => function ( MediaWikiServices $services ): StatementGuidValidator {
 		return new StatementGuidValidator( WikibaseRepo::getEntityIdParser( $services ) );
+	},
+
+	'WikibaseRepo.StorageEntitySerializer' => function ( MediaWikiServices $services ): Serializer {
+		$serializerFactoryCallbacks = WikibaseRepo::getEntityTypeDefinitions( $services )
+			->get( EntityTypeDefinitions::STORAGE_SERIALIZER_FACTORY_CALLBACK );
+		$baseSerializerFactory = WikibaseRepo::getBaseDataModelSerializerFactory( $services );
+		$serializers = [];
+
+		foreach ( $serializerFactoryCallbacks as $callback ) {
+			$serializers[] = $callback( $baseSerializerFactory );
+		}
+
+		return new DispatchingSerializer( $serializers );
 	},
 
 	'WikibaseRepo.StringNormalizer' => function ( MediaWikiServices $services ): StringNormalizer {
