@@ -946,20 +946,9 @@ final class WikibaseClient {
 		);
 	}
 
-	public function getOtherProjectsSitesProvider(): OtherProjectsSitesProvider {
-		$settings = self::getSettings();
-
-		return new CachingOtherProjectsSitesProvider(
-			new OtherProjectsSitesGenerator(
-				$this->siteLookup,
-				$settings->getSetting( 'siteGlobalID' ),
-				$settings->getSetting( 'specialSiteLinkGroups' )
-			),
-			// TODO: Make configurable? Should be similar, maybe identical to sharedCacheType and
-			// sharedCacheDuration, but can not reuse these because this here is not shared.
-			ObjectCache::getLocalClusterInstance(),
-			60 * 60
-		);
+	public static function getOtherProjectsSitesProvider( ContainerInterface $services = null ): OtherProjectsSitesProvider {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.OtherProjectsSitesProvider' );
 	}
 
 	private function getAffectedPagesFinder(): AffectedPagesFinder {
