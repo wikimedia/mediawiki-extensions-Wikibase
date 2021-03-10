@@ -45,12 +45,15 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRedirectChecker;
+use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
+use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TypeDispatchingRedirectChecker;
 use Wikibase\Lib\StringNormalizer;
@@ -359,6 +362,19 @@ return [
 	'WikibaseRepo.ItemTermsCollisionDetector' => function ( MediaWikiServices $services ): TermsCollisionDetector {
 		return WikibaseRepo::getTermsCollisionDetectorFactory( $services )
 			->getTermsCollisionDetector( Item::ENTITY_TYPE );
+	},
+
+	'WikibaseRepo.ItemTermStoreWriter' => function ( MediaWikiServices $services ): EntityTermStoreWriter {
+		if ( !in_array(
+			Item::ENTITY_TYPE,
+			WikibaseRepo::getLocalEntitySource( $services )->getEntityTypes()
+		) ) {
+			return new ThrowingEntityTermStoreWriter();
+		}
+
+		return new ItemTermStoreWriterAdapter(
+			WikibaseRepo::getTermStoreWriterFactory( $services )->newItemTermStoreWriter()
+		);
 	},
 
 	'WikibaseRepo.KartographerEmbeddingHandler' => function ( MediaWikiServices $services ): ?CachingKartographerEmbeddingHandler {
