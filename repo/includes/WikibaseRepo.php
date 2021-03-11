@@ -120,11 +120,9 @@ use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
-use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
-use Wikibase\Lib\Store\TypeDispatchingArticleIdLookup;
 use Wikibase\Lib\Store\TypeDispatchingExistenceChecker;
 use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
 use Wikibase\Lib\Store\TypeDispatchingUrlLookup;
@@ -560,11 +558,9 @@ class WikibaseRepo {
 		);
 	}
 
-	public function getEntityArticleIdLookup(): EntityArticleIdLookup {
-		return new TypeDispatchingArticleIdLookup(
-			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ARTICLE_ID_LOOKUP_CALLBACK ),
-			new TitleLookupBasedEntityArticleIdLookup( self::getEntityTitleLookup() )
-		);
+	public static function getEntityArticleIdLookup( ContainerInterface $services = null ): EntityArticleIdLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityArticleIdLookup' );
 	}
 
 	public function getEntityExistenceChecker(): EntityExistenceChecker {

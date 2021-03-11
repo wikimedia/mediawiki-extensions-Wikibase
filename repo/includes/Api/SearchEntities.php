@@ -93,6 +93,7 @@ class SearchEntities extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		EntityArticleIdLookup $entityArticleIdLookup,
 		EntitySourceDefinitions $entitySourceDefinitions
 	): self {
 		$repo = WikibaseRepo::getDefaultInstance();
@@ -111,7 +112,7 @@ class SearchEntities extends ApiBase {
 			$entitySourceDefinitions,
 			$repo->getEntityTitleTextLookup(),
 			$repo->getEntityUrlLookup(),
-			$repo->getEntityArticleIdLookup(),
+			$entityArticleIdLookup,
 			$apiHelperFactory->getErrorReporter( $mainModule )
 		);
 	}
