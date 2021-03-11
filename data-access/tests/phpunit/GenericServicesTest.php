@@ -6,7 +6,6 @@ use Serializers\Serializer;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\StringNormalizer;
 
 /**
  * @covers \Wikibase\DataAccess\GenericServices
@@ -67,21 +66,6 @@ class GenericServicesTest extends \PHPUnit\Framework\TestCase {
 	public function testGetCompactSerializerFactory() {
 		$services = $this->newGenericServices();
 		$this->assertInstanceOf( SerializerFactory::class, $services->getCompactBaseDataModelSerializerFactory() );
-	}
-
-	public function testGetStringNormalizer() {
-		$services = $this->newGenericServices();
-
-		$this->assertInstanceOf( StringNormalizer::class, $services->getStringNormalizer() );
-	}
-
-	public function testGetStringNormalizerReusesTheInstanceForMultipleCalls() {
-		$services = $this->newGenericServices();
-
-		$serviceOne = $services->getStringNormalizer();
-		$serviceTwo = $services->getStringNormalizer();
-
-		$this->assertSame( $serviceOne, $serviceTwo );
 	}
 
 	private function newGenericServices() {
