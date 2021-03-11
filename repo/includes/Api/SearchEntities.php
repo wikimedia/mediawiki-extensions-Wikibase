@@ -95,7 +95,8 @@ class SearchEntities extends ApiBase {
 		string $moduleName,
 		EntityArticleIdLookup $entityArticleIdLookup,
 		EntitySourceDefinitions $entitySourceDefinitions,
-		EntityTitleTextLookup $entityTitleTextLookup
+		EntityTitleTextLookup $entityTitleTextLookup,
+		EntityUrlLookup $entityUrlLookup
 	): self {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$entitySearchHelper = new TypeDispatchingEntitySearchHelper(
@@ -112,7 +113,7 @@ class SearchEntities extends ApiBase {
 			$repo->getTermsLanguages(),
 			$entitySourceDefinitions,
 			$entityTitleTextLookup,
-			$repo->getEntityUrlLookup(),
+			$entityUrlLookup,
 			$entityArticleIdLookup,
 			$apiHelperFactory->getErrorReporter( $mainModule )
 		);

@@ -49,7 +49,6 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -261,11 +260,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetEntityStoreWatcherReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getEntityStoreWatcher();
 		$this->assertInstanceOf( EntityStoreWatcher::class, $returnValue );
-	}
-
-	public function testGetEntityUrlLookupReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getEntityUrlLookup();
-		$this->assertInstanceOf( EntityUrlLookup::class, $returnValue );
 	}
 
 	public function testGetEntityRevisionLookupReturnType() {

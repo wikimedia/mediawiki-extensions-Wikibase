@@ -120,8 +120,6 @@ use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
-use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
-use Wikibase\Lib\Store\TypeDispatchingUrlLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
@@ -384,7 +382,7 @@ class WikibaseRepo {
 			self::getSettings()->getSetting( 'entitySchemaNamespace' ),
 			self::getEntityExistenceChecker(),
 			self::getEntityTitleTextLookup(),
-			$this->getEntityUrlLookup(),
+			self::getEntityUrlLookup(),
 			self::getEntityRedirectChecker(),
 			self::getEntityTitleLookup(),
 			self::getKartographerEmbeddingHandler(),
@@ -545,11 +543,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityTitleTextLookup' );
 	}
 
-	public function getEntityUrlLookup(): EntityUrlLookup {
-		return new TypeDispatchingUrlLookup(
-			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::URL_LOOKUP_CALLBACK ),
-			new TitleLookupBasedEntityUrlLookup( self::getEntityTitleLookup() )
-		);
+	public static function getEntityUrlLookup( ContainerInterface $services = null ): EntityUrlLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityUrlLookup' );
 	}
 
 	public static function getEntityArticleIdLookup( ContainerInterface $services = null ): EntityArticleIdLookup {
