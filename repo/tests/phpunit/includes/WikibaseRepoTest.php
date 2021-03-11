@@ -45,7 +45,6 @@ use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -275,11 +274,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetEntityUrlLookupReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getEntityUrlLookup();
 		$this->assertInstanceOf( EntityUrlLookup::class, $returnValue );
-	}
-
-	public function testGetEntityArticleIdLookupReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getEntityArticleIdLookup();
-		$this->assertInstanceOf( EntityArticleIdLookup::class, $returnValue );
 	}
 
 	public function testGetEntityExistenceCheckerReturnType() {

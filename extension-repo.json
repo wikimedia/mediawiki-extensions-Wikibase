@@ -134,6 +134,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\SearchEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\SearchEntities::factory",
 			"services": [
+				"WikibaseRepo.EntityArticleIdLookup",
 				"WikibaseRepo.EntitySourceDefinitions"
 			]
 		},
