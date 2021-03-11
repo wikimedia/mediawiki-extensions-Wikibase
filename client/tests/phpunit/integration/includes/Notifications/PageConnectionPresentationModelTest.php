@@ -11,7 +11,7 @@ use Message;
 use Title;
 use User;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
-use Wikibase\Client\Hooks\EchoSetupHookHandlers;
+use Wikibase\Client\Hooks\EchoSetupHookHandler;
 use Wikibase\Client\Notifications\PageConnectionPresentationModel;
 
 /**
@@ -62,11 +62,11 @@ class PageConnectionPresentationModelTest extends MediaWikiIntegrationTestCase {
 	public function testPresentationModel() {
 		global $wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons;
 
-		$handlers = new EchoSetupHookHandlers(
+		$handlers = new EchoSetupHookHandler(
 			true,
 			false
 		);
-		$handlers->doBeforeCreateEchoEvent(
+		$handlers->onBeforeCreateEchoEvent(
 			$wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons
 		);
 

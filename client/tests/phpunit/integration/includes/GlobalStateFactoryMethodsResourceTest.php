@@ -10,7 +10,6 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
-use Wikibase\Client\Hooks\EchoSetupHookHandlers;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Client\Hooks\ShortDescHandler;
 use Wikimedia\Rdbms\DBConnRef;
@@ -143,11 +142,6 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 
 	public function testEchoNotificationsHandlers() {
 		EchoNotificationsHandlers::factory();
-		$this->assertTrue( true );
-	}
-
-	public function testEchoSetupHookHandlers() {
-		EchoSetupHookHandlers::factory();
 		$this->assertTrue( true );
 	}
 

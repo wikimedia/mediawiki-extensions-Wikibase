@@ -5,10 +5,10 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 use ExtensionRegistry;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
-use Wikibase\Client\Hooks\EchoSetupHookHandlers;
+use Wikibase\Client\Hooks\EchoSetupHookHandler;
 
 /**
- * @covers \Wikibase\Client\Hooks\EchoSetupHookHandlers
+ * @covers \Wikibase\Client\Hooks\EchoSetupHookHandler
  *
  * @group Database
  * @group WikibaseClient
@@ -17,7 +17,7 @@ use Wikibase\Client\Hooks\EchoSetupHookHandlers;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class EchoSetupHookHandlersTest extends MediaWikiIntegrationTestCase {
+class EchoSetupHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function beforeCreateEchoEventProvider() {
 		return [
@@ -51,9 +51,9 @@ class EchoSetupHookHandlersTest extends MediaWikiIntegrationTestCase {
 		$categories = [];
 		$icons = [];
 
-		$handlers = new EchoSetupHookHandlers( $register, $icon );
+		$handlers = new EchoSetupHookHandler( $register, $icon );
 
-		$handlers->doBeforeCreateEchoEvent( $notifications, $categories, $icons );
+		$handlers->onBeforeCreateEchoEvent( $notifications, $categories, $icons );
 
 		$this->assertSame( $register, isset( $notifications[EchoNotificationsHandlers::NOTIFICATION_TYPE] ) );
 		$this->assertSame( $register, isset( $categories['wikibase-action'] ) );

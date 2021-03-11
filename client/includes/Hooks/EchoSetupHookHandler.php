@@ -5,7 +5,7 @@ namespace Wikibase\Client\Hooks;
 use EchoAttributeManager;
 use EchoUserLocator;
 use Wikibase\Client\Notifications\PageConnectionPresentationModel;
-use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * Handlers for hooks (e.g. BeforeCreateEchoEvent) called when Echo extension
@@ -15,7 +15,8 @@ use Wikibase\Client\WikibaseClient;
  * @author Matěj Suchánek
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class EchoSetupHookHandlers {
+class EchoSetupHookHandler
+	/* TODO this should implement an interface from Echo */ {
 
 	/**
 	 * @var bool
@@ -36,45 +37,25 @@ class EchoSetupHookHandlers {
 		$this->echoIcon = $echoIcon;
 	}
 
-	/**
-	 * @return self
-	 */
-	public static function factory() {
-		// TODO: Convert to new hook handler definition and inject dependencies (T277169)
-		$settings = WikibaseClient::getSettings();
-
+	public static function factory(
+		SettingsArray $clientSettings
+	): self {
 		return new self(
-			$settings->getSetting( 'sendEchoNotification' ),
-			$settings->getSetting( 'echoIcon' )
+			$clientSettings->getSetting( 'sendEchoNotification' ),
+			$clientSettings->getSetting( 'echoIcon' )
 		);
 	}
 
 	/**
 	 * Handler for BeforeCreateEchoEvent hook
 	 * @see https://www.mediawiki.org/wiki/Extension:Echo/BeforeCreateEchoEvent
-	 * @see doBeforeCreateEchoEvent
-	 *
-	 * @param array[] &$notifications
-	 * @param array[] &$notificationCategories
-	 * @param array[] &$icons
-	 */
-	public static function onBeforeCreateEchoEvent(
-		array &$notifications,
-		array &$notificationCategories,
-		array &$icons
-	) {
-		$self = self::factory();
-		$self->doBeforeCreateEchoEvent( $notifications, $notificationCategories, $icons );
-	}
-
-	/**
 	 * @see https://www.mediawiki.org/wiki/Notifications/Developer_guide
 	 *
 	 * @param array[] &$notifications
 	 * @param array[] &$notificationCategories
 	 * @param array[] &$icons
 	 */
-	public function doBeforeCreateEchoEvent(
+	public function onBeforeCreateEchoEvent(
 		array &$notifications,
 		array &$notificationCategories,
 		array &$icons
