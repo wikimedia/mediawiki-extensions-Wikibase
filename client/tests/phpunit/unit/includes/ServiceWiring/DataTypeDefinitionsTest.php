@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @coversNothing
@@ -14,6 +15,16 @@ use Wikibase\Lib\DataTypeDefinitions;
  * @license GPL-2.0-or-later
  */
 class DataTypeDefinitionsTest extends ServiceWiringTestCase {
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->mockService(
+			'WikibaseClient.Settings',
+			new SettingsArray( [
+				'disabledDataTypes' => []
+			] )
+		);
+	}
 
 	public function testConstruction(): void {
 		$this->assertInstanceOf(
