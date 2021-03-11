@@ -26,7 +26,6 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
-use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
@@ -327,11 +326,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetRestrictedEntityLookup() {
 		$restrictedEntityLookup = $this->getWikibaseClient()->getRestrictedEntityLookup();
 		$this->assertInstanceOf( RestrictedEntityLookup::class, $restrictedEntityLookup );
-	}
-
-	public function testGetEntityChangeFactory() {
-		$entityChangeFactory = $this->getWikibaseClient()->getEntityChangeFactory();
-		$this->assertInstanceOf( EntityChangeFactory::class, $entityChangeFactory );
 	}
 
 	public function testGetDataAccessLanguageFallbackChain() {

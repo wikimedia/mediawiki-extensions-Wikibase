@@ -31,9 +31,13 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -124,6 +128,22 @@ return [
 					: EntityIdValue::newFromArray( $value );
 			},
 		] );
+	},
+
+	'WikibaseClient.EntityChangeFactory' => function ( MediaWikiServices $services ): EntityChangeFactory {
+		// TODO: take this from a setting or registry.
+		$changeClasses = [
+			Item::ENTITY_TYPE => ItemChange::class,
+			// Other types of entities will use EntityChange
+		];
+
+		return new EntityChangeFactory(
+			WikibaseClient::getEntityDiffer( $services ),
+			WikibaseClient::getEntityIdParser( $services ),
+			$changeClasses,
+			EntityChange::class,
+			WikibaseClient::getLogger( $services )
+		);
 	},
 
 	'WikibaseClient.EntityDiffer' => function ( MediaWikiServices $services ): EntityDiffer {
