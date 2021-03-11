@@ -91,6 +91,7 @@ class SetReference extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		DeserializerFactory $deserializerFactory,
 		EntityIdParser $entityIdParser,
 		StatementGuidParser $statementGuidParser,
 		StatementGuidValidator $statementGuidValidator
@@ -109,7 +110,7 @@ class SetReference extends ApiBase {
 		return new self(
 			$mainModule,
 			$moduleName,
-			$wikibaseRepo->getBaseDataModelDeserializerFactory(),
+			$deserializerFactory,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
 			$changeOpFactoryProvider->getStatementChangeOpFactory(),
 			$modificationHelper,

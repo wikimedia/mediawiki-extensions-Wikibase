@@ -22,7 +22,6 @@ use Serializers\Serializer;
 use User;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -491,11 +490,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetEntityContentDataCodec() {
 		$codec = $this->getWikibaseRepo()->getEntityContentDataCodec();
 		$this->assertInstanceOf( EntityContentDataCodec::class, $codec );
-	}
-
-	public function testGetExternalFormatDeserializerFactory() {
-		$deserializerFactory = $this->getWikibaseRepo()->getBaseDataModelDeserializerFactory();
-		$this->assertInstanceOf( DeserializerFactory::class, $deserializerFactory );
 	}
 
 	public function testGetInternalFormatEntityDeserializer() {
