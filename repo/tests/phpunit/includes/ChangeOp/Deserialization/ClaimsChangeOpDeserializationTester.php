@@ -121,7 +121,7 @@ trait ClaimsChangeOpDeserializationTester {
 	}
 
 	private function getStatementSerializer() {
-		return WikibaseRepo::getDefaultInstance()->getStatementSerializer();
+		return WikibaseRepo::getBaseDataModelSerializerFactory()->newStatementSerializer();
 	}
 
 	/**

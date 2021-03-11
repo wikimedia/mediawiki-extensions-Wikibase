@@ -65,7 +65,8 @@ class PropertyChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 		$otherProperty = new PropertyId( 'P7' );
 		$statement = new Statement( new PropertyNoValueSnak( $otherProperty ) );
-		$statementSerialization = WikibaseRepo::getDefaultInstance()->getStatementSerializer()->serialize( $statement );
+		$statementSerializer = WikibaseRepo::getBaseDataModelSerializerFactory()->newStatementSerializer();
+		$statementSerialization = $statementSerializer->serialize( $statement );
 
 		$changeRequest = [
 			'aliases' => [ 'en' => [ 'language' => 'en', 'value' => $newAlias ] ],
