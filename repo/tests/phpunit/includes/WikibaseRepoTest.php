@@ -949,34 +949,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( ThrowingEntityTermStoreWriter::class, $writer );
 	}
 
-	public function testGetItemTermStoreWriter_withLocalItems() {
-		$repo = $this->getWikibaseRepo();
-		$writer = $repo->getItemTermStoreWriter();
-		$this->assertNotInstanceOf( ThrowingEntityTermStoreWriter::class, $writer );
-	}
-
-	public function testGetItemTermStoreWriter_withoutLocalItems() {
-		$this->settings->setSetting( 'localEntitySourceName', 'test' );
-		$this->entitySourceDefinitions = new EntitySourceDefinitions(
-			[
-				new EntitySource(
-					'test',
-					false,
-					[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
-					'',
-					'',
-					'',
-					''
-				),
-			],
-			$this->entityTypeDefinitions
-		);
-
-		$repo = $this->getWikibaseRepo();
-		$writer = $repo->getItemTermStoreWriter();
-		$this->assertInstanceOf( ThrowingEntityTermStoreWriter::class, $writer );
-	}
-
 	public function entitySourceBasedFederationProvider() {
 		return [
 			[ true ],

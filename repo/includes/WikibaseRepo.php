@@ -103,7 +103,6 @@ use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
-use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\LookupConstants;
@@ -1382,7 +1381,7 @@ class WikibaseRepo {
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		return new ItemHandler(
-			$this->getItemTermStoreWriter(),
+			self::getItemTermStoreWriter(),
 			$codec,
 			$constraintProvider,
 			$errorLocalizer,
@@ -1404,12 +1403,9 @@ class WikibaseRepo {
 		return new PropertyTermStoreWriterAdapter( self::getTermStoreWriterFactory()->newPropertyTermStoreWriter() );
 	}
 
-	public function getItemTermStoreWriter(): EntityTermStoreWriter {
-		if ( !in_array( Item::ENTITY_TYPE, self::getLocalEntitySource()->getEntityTypes() ) ) {
-			return new ThrowingEntityTermStoreWriter();
-		}
-
-		return new ItemTermStoreWriterAdapter( self::getTermStoreWriterFactory()->newItemTermStoreWriter() );
+	public static function getItemTermStoreWriter( ContainerInterface $services = null ): EntityTermStoreWriter {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ItemTermStoreWriter' );
 	}
 
 	public static function getTermStoreWriterFactory( ContainerInterface $services = null ): TermStoreWriterFactory {
