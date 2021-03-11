@@ -3,7 +3,6 @@
 
 module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-eslint' );
-	grunt.loadNpmTasks( 'grunt-jsonlint' );
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
 	grunt.loadNpmTasks( 'grunt-karma' );
 
@@ -23,13 +22,6 @@ module.exports = function ( grunt ) {
 				disallowBlankTranslations: false
 			},
 			all: 'i18n/'
-		},
-		jsonlint: {
-			all: [
-				'*.json',
-				'**/*.json',
-				'!node_modules/**'
-			]
 		},
 		karma: {
 			options: {
@@ -112,7 +104,7 @@ module.exports = function ( grunt ) {
 		}
 	} );
 
-	grunt.registerTask( 'test', [ 'eslint', 'jsonlint', 'banana', 'qunit' ] );
+	grunt.registerTask( 'test', [ 'eslint', 'banana', 'qunit' ] );
 	grunt.registerTask( 'qunit', 'karma' );
 	grunt.registerTask( 'default', 'test' );
 };
