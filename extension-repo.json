@@ -135,7 +135,8 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SearchEntities::factory",
 			"services": [
 				"WikibaseRepo.EntityArticleIdLookup",
-				"WikibaseRepo.EntitySourceDefinitions"
+				"WikibaseRepo.EntitySourceDefinitions",
+				"WikibaseRepo.EntityTitleTextLookup"
 			]
 		},
 		"wbsetaliases": {

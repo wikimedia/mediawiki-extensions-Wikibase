@@ -121,10 +121,8 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
-use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\Store\TypeDispatchingExistenceChecker;
-use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
 use Wikibase\Lib\Store\TypeDispatchingUrlLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
@@ -387,7 +385,7 @@ class WikibaseRepo {
 			$this->getEntityRevisionLookup(),
 			self::getSettings()->getSetting( 'entitySchemaNamespace' ),
 			$this->getEntityExistenceChecker(),
-			$this->getEntityTitleTextLookup(),
+			self::getEntityTitleTextLookup(),
 			$this->getEntityUrlLookup(),
 			self::getEntityRedirectChecker(),
 			self::getEntityTitleLookup(),
@@ -544,11 +542,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityTitleStoreLookup' );
 	}
 
-	public function getEntityTitleTextLookup(): EntityTitleTextLookup {
-		return new TypeDispatchingTitleTextLookup(
-			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::TITLE_TEXT_LOOKUP_CALLBACK ),
-			new TitleLookupBasedEntityTitleTextLookup( self::getEntityTitleLookup() )
-		);
+	public static function getEntityTitleTextLookup( ContainerInterface $services = null ): EntityTitleTextLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityTitleTextLookup' );
 	}
 
 	public function getEntityUrlLookup(): EntityUrlLookup {
@@ -1944,7 +1940,7 @@ class WikibaseRepo {
 	public function getEntityLinkFormatterFactory( Language $language ) {
 		return new EntityLinkFormatterFactory(
 			$language,
-			$this->getEntityTitleTextLookup(),
+			self::getEntityTitleTextLookup(),
 			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::LINK_FORMATTER_CALLBACK )
 		);
 	}

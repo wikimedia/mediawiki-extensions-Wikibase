@@ -158,8 +158,10 @@ return [
 			);
 		},
 		Def::LINK_FORMATTER_CALLBACK => function( Language $language ) {
-			$repo = WikibaseRepo::getDefaultInstance();
-			return new DefaultEntityLinkFormatter( $language, $repo->getEntityTitleTextLookup() );
+			return new DefaultEntityLinkFormatter(
+				$language,
+				WikibaseRepo::getEntityTitleTextLookup()
+			);
 		},
 		Def::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK => function( Language $language ) {
 			$repo = WikibaseRepo::getDefaultInstance();
@@ -169,7 +171,7 @@ return [
 				$languageLabelLookup,
 				$repo->getLanguageNameLookup(),
 				$repo->getEntityExistenceChecker(),
-				$repo->getEntityTitleTextLookup(),
+				WikibaseRepo::getEntityTitleTextLookup(),
 				$repo->getEntityUrlLookup(),
 				WikibaseRepo::getEntityRedirectChecker()
 			);
@@ -259,8 +261,10 @@ return [
 			);
 		},
 		Def::LINK_FORMATTER_CALLBACK => function( Language $language ) {
-			$repo = WikibaseRepo::getDefaultInstance();
-			return new DefaultEntityLinkFormatter( $language, $repo->getEntityTitleTextLookup() );
+			return new DefaultEntityLinkFormatter(
+				$language,
+				WikibaseRepo::getEntityTitleTextLookup()
+			);
 		},
 		Def::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK => function( Language $language ) {
 			$repo = WikibaseRepo::getDefaultInstance();
@@ -270,7 +274,7 @@ return [
 				$languageLabelLookup,
 				$repo->getLanguageNameLookup(),
 				$repo->getEntityExistenceChecker(),
-				$repo->getEntityTitleTextLookup(),
+				WikibaseRepo::getEntityTitleTextLookup(),
 				$repo->getEntityUrlLookup(),
 				WikibaseRepo::getEntityRedirectChecker()
 			);

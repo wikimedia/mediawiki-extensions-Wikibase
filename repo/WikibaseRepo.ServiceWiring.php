@@ -51,6 +51,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
@@ -60,8 +61,10 @@ use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
+use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TypeDispatchingArticleIdLookup;
 use Wikibase\Lib\Store\TypeDispatchingRedirectChecker;
+use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
@@ -336,6 +339,16 @@ return [
 			WikibaseRepo::getEntityTypeDefinitions( $services )
 				->get( EntityTypeDefinitions::ENTITY_TITLE_STORE_LOOKUP_FACTORY_CALLBACK ),
 			WikibaseRepo::getEntityContentFactory( $services )
+		);
+	},
+
+	'WikibaseRepo.EntityTitleTextLookup' => function ( MediaWikiServices $services ): EntityTitleTextLookup {
+		return new TypeDispatchingTitleTextLookup(
+			WikibaseRepo::getEntityTypeDefinitions( $services )
+				->get( EntityTypeDefinitions::TITLE_TEXT_LOOKUP_CALLBACK ),
+			new TitleLookupBasedEntityTitleTextLookup(
+				WikibaseRepo::getEntityTitleLookup( $services )
+			)
 		);
 	},
 
