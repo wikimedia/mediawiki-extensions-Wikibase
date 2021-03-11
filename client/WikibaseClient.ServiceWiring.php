@@ -13,6 +13,8 @@ use DataValues\UnknownValue;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
+use Serializers\DispatchingSerializer;
+use Serializers\Serializer;
 use Wikibase\Client\CachingOtherProjectsSitesProvider;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Client\NamespaceChecker;
@@ -65,6 +67,19 @@ return [
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
+	},
+
+	'WikibaseClient.CompactEntitySerializer' => function ( MediaWikiServices $services ): Serializer {
+		$serializerFactoryCallbacks = WikibaseClient::getEntityTypeDefinitions( $services )
+			->get( EntityTypeDefinitions::SERIALIZER_FACTORY_CALLBACK );
+		$baseSerializerFactory = WikibaseClient::getCompactBaseDataModelSerializerFactory( $services );
+		$serializers = [];
+
+		foreach ( $serializerFactoryCallbacks as $callback ) {
+			$serializers[] = $callback( $baseSerializerFactory );
+		}
+
+		return new DispatchingSerializer( $serializers );
 	},
 
 	'WikibaseClient.DataAccessSettings' => function ( MediaWikiServices $services ): DataAccessSettings {
