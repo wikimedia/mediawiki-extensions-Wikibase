@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Andrei Stroe",
+			"Andreyyshore",
 			"Danutz",
 			"Ladsgroup",
 			"Macofe",
@@ -161,7 +162,7 @@
 	"wikibase-newproperty-invalid-datatype": "Tip de date incorect.",
 	"wikibase-label-helppage": "Help:Etichetă",
 	"special-newitem": "Creare element nou",
-	"wikibase-newitem-summary": "Asigurați-vă că [[Special:Search|elementul nu există deja]]!<br />Ar trebui să creaţi o [[{{int:Wikibase-label-helppage}}|etichetă]] şi o [[{{int:Wikibase-description-helppage}}|descriere]] pentru fiecare nou element.",
+	"wikibase-newitem-summary": "Asigurați-vă că [[Special:Search|elementul nu există deja]]!<br />Ar trebui să creați o [[{{int:Wikibase-label-helppage}}|etichetă]] și o [[{{int:Wikibase-description-helppage}}|descriere]] pentru fiecare nou element.",
 	"wikibase-newitem-fieldset": "Creare element nou",
 	"wikibase-newitem-site": "Site-ul pentru prima pagină legată",
 	"wikibase-newitem-page": "Numele primei pagini legate",
