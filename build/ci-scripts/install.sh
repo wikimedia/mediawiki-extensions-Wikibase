@@ -37,7 +37,7 @@ if [ $? -gt 0 ]; then
 	composer install
 fi
 
-mysql -e 'create database its_a_mw;' -uroot -proot -h"127.0.0.1"
+mysql -e 'create database test_db_wiki;' -uroot -proot -h"127.0.0.1"
 php maintenance/install.php \
     --dbtype $DBTYPE \
     --dbserver 127.0.0.1 \
@@ -45,4 +45,4 @@ php maintenance/install.php \
     --dbpass root \
     --dbpath $(pwd) \
     --pass shie3Ekutaiy5Giebuwi \
-    TravisWiki admin
+    TestWiki admin
