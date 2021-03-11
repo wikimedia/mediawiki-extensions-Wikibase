@@ -75,7 +75,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			new DataValueSerializer(),
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
-		$this->deserializerFactory = $wikibaseRepo->getBaseDataModelDeserializerFactory();
+		$this->deserializerFactory = WikibaseRepo::getBaseDataModelDeserializerFactory();
 	}
 
 	/**

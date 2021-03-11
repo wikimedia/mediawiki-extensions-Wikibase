@@ -184,6 +184,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\SetReference",
 			"factory": "\\Wikibase\\Repo\\Api\\SetReference::factory",
 			"services": [
+				"WikibaseRepo.BaseDataModelDeserializerFactory",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"

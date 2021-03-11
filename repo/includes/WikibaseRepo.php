@@ -1244,15 +1244,11 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return DeserializerFactory A factory with knowledge about items, properties, and the
-	 *  elements they are made of, but no other entity types.
-	 */
-	public function getBaseDataModelDeserializerFactory() {
-		return new DeserializerFactory(
-			self::getDataValueDeserializer(),
-			self::getEntityIdParser()
-		);
+	public static function getBaseDataModelDeserializerFactory( ContainerInterface $services = null ): DeserializerFactory {
+		// Returns a factory with knowledge about items, properties, and the
+		// elements they are made of, but no other entity types.
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.BaseDataModelDeserializerFactory' );
 	}
 
 	/**
@@ -1294,7 +1290,7 @@ class WikibaseRepo {
 	private function getAllTypesEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK );
-			$baseDeserializerFactory = $this->getBaseDataModelDeserializerFactory();
+			$baseDeserializerFactory = self::getBaseDataModelDeserializerFactory();
 			$deserializers = [];
 
 			foreach ( $deserializerFactoryCallbacks as $callback ) {
@@ -1354,7 +1350,7 @@ class WikibaseRepo {
 	 * @return Deserializer
 	 */
 	public function getExternalFormatStatementDeserializer() {
-		return $this->getBaseDataModelDeserializerFactory()->newStatementDeserializer();
+		return self::getBaseDataModelDeserializerFactory()->newStatementDeserializer();
 	}
 
 	/**

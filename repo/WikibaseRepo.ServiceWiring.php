@@ -21,6 +21,7 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\MediaWiki\EntitySourceDocumentUrlProvider;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -99,6 +100,13 @@ return [
 		}
 
 		return new DispatchingSerializer( $serializers );
+	},
+
+	'WikibaseRepo.BaseDataModelDeserializerFactory' => function ( MediaWikiServices $services ): DeserializerFactory {
+		return new DeserializerFactory(
+			WikibaseRepo::getDataValueDeserializer( $services ),
+			WikibaseRepo::getEntityIdParser( $services )
+		);
 	},
 
 	'WikibaseRepo.BaseDataModelSerializerFactory' => function ( MediaWikiServices $services ): SerializerFactory {
