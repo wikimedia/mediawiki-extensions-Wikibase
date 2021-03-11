@@ -648,6 +648,7 @@
 			"services": [
 				"InterwikiLookup",
 				"SpecialPageFactory",
+				"WikibaseRepo.EntityExistenceChecker",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.Settings"

@@ -49,8 +49,7 @@ class RemoveDeletedItemsFromTermStore extends Maintenance {
 		$loadBalancer = $lbFactory->getMainLB();
 		$dbr = $loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
 		$dbw = $loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
-		$repo = WikibaseRepo::getDefaultInstance();
-		$entityExistenceChecker = $repo->getEntityExistenceChecker();
+		$entityExistenceChecker = WikibaseRepo::getEntityExistenceChecker( $services );
 		$logger = WikibaseRepo::getLogger( $services );
 		$innerTermStoreCleaner = new DatabaseInnerTermStoreCleaner( $logger );
 		$cleaner = new DatabaseUsageCheckingTermStoreCleaner( $loadBalancer, $innerTermStoreCleaner );

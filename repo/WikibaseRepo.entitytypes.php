@@ -170,7 +170,7 @@ return [
 			return new LabelsProviderEntityIdHtmlLinkFormatter(
 				$languageLabelLookup,
 				$repo->getLanguageNameLookup(),
-				$repo->getEntityExistenceChecker(),
+				WikibaseRepo::getEntityExistenceChecker(),
 				WikibaseRepo::getEntityTitleTextLookup(),
 				$repo->getEntityUrlLookup(),
 				WikibaseRepo::getEntityRedirectChecker()
@@ -273,7 +273,7 @@ return [
 			return new LabelsProviderEntityIdHtmlLinkFormatter(
 				$languageLabelLookup,
 				$repo->getLanguageNameLookup(),
-				$repo->getEntityExistenceChecker(),
+				WikibaseRepo::getEntityExistenceChecker(),
 				WikibaseRepo::getEntityTitleTextLookup(),
 				$repo->getEntityUrlLookup(),
 				WikibaseRepo::getEntityRedirectChecker()

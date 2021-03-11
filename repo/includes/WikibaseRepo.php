@@ -120,9 +120,7 @@ use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
-use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
-use Wikibase\Lib\Store\TypeDispatchingExistenceChecker;
 use Wikibase\Lib\Store\TypeDispatchingUrlLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
@@ -384,7 +382,7 @@ class WikibaseRepo {
 			$this->getEntityLookup(),
 			$this->getEntityRevisionLookup(),
 			self::getSettings()->getSetting( 'entitySchemaNamespace' ),
-			$this->getEntityExistenceChecker(),
+			self::getEntityExistenceChecker(),
 			self::getEntityTitleTextLookup(),
 			$this->getEntityUrlLookup(),
 			self::getEntityRedirectChecker(),
@@ -559,15 +557,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityArticleIdLookup' );
 	}
 
-	public function getEntityExistenceChecker(): EntityExistenceChecker {
-		$services = MediaWikiServices::getInstance();
-		return new TypeDispatchingExistenceChecker(
-			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::EXISTENCE_CHECKER_CALLBACK ),
-			new TitleLookupBasedEntityExistenceChecker(
-				self::getEntityTitleLookup(),
-				$services->getLinkBatchFactory()
-			)
-		);
+	public static function getEntityExistenceChecker( ContainerInterface $services = null ): EntityExistenceChecker {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityExistenceChecker' );
 	}
 
 	public static function getEntityRedirectChecker( ContainerInterface $services = null ): EntityRedirectChecker {

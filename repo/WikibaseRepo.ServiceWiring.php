@@ -46,6 +46,7 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
+use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRedirectChecker;
@@ -60,9 +61,11 @@ use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
+use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TypeDispatchingArticleIdLookup;
+use Wikibase\Lib\Store\TypeDispatchingExistenceChecker;
 use Wikibase\Lib\Store\TypeDispatchingRedirectChecker;
 use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
 use Wikibase\Lib\StringNormalizer;
@@ -255,6 +258,17 @@ return [
 			$entityDiffer->registerEntityDifferStrategy( $builder() );
 		}
 		return $entityDiffer;
+	},
+
+	'WikibaseRepo.EntityExistenceChecker' => function ( MediaWikiServices $services ): EntityExistenceChecker {
+		return new TypeDispatchingExistenceChecker(
+			WikibaseRepo::getEntityTypeDefinitions( $services )
+				->get( EntityTypeDefinitions::EXISTENCE_CHECKER_CALLBACK ),
+			new TitleLookupBasedEntityExistenceChecker(
+				WikibaseRepo::getEntityTitleLookup( $services ),
+				$services->getLinkBatchFactory()
+			)
+		);
 	},
 
 	'WikibaseRepo.EntityIdComposer' => function ( MediaWikiServices $services ): EntityIdComposer {
