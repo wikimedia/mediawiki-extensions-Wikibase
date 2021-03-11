@@ -1,44 +1,64 @@
-import { storiesOf } from '@storybook/vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
-storiesOf( 'IconMessageBox', module )
-	.addParameters( { component: IconMessageBox } )
-	.add( 'error', () => ( {
+
+export default {
+	title: 'IconMessageBox',
+	component: IconMessageBox,
+};
+
+export function error() {
+	return {
 		components: { IconMessageBox },
 		template:
-			`<div>
+			`
+				<div>
 				<IconMessageBox type="error">
 					Something went wrong!
 				</IconMessageBox>
-			</div>`,
-	} ) )
-	.add( 'error long', () => ( {
+				</div>`,
+	};
+}
+
+export function errorLong() {
+	return {
 		components: { IconMessageBox },
 		template:
-			`<div>
+			`
+				<div>
 				<IconMessageBox type="error">
 					{{ new Array( 42 ).fill( 'Something went wrong!' ).join( ' ' ) }}
 				</IconMessageBox>
-			</div>`,
-	} ) )
-	.add( 'error inline', () => ( {
+				</div>`,
+	};
+}
+
+export function errorInline() {
+	return {
 		components: { IconMessageBox },
 		template:
-			`<div>
+			`
+				<div>
 				<IconMessageBox type="error" :inline="true">
 					Something went wrong!
 				</IconMessageBox>
-			</div>`,
-	} ) )
-	.add( 'warning', () => ( {
+				</div>`,
+	};
+}
+
+export function warning() {
+	return {
 		components: { IconMessageBox },
 		template:
-			`<div>
+			`
+				<div>
 				<IconMessageBox type="warning">
 					I think you ought to know...
 				</IconMessageBox>
-			</div>`,
-	} ) )
-	.add( 'warning long', () => ( {
+				</div>`,
+	};
+}
+
+export function warningLong() {
+	return {
 		components: { IconMessageBox },
 		template:
 			`<div>
@@ -46,8 +66,11 @@ storiesOf( 'IconMessageBox', module )
 					{{ new Array( 42 ).fill( 'I think you ought to know...' ).join( ' ' ) }}
 				</IconMessageBox>
 			</div>`,
-	} ) )
-	.add( 'warning inline', () => ( {
+	};
+}
+
+export function warningInline() {
+	return {
 		components: { IconMessageBox },
 		template:
 			`<div>
@@ -55,8 +78,11 @@ storiesOf( 'IconMessageBox', module )
 					I think you ought to know...
 				</IconMessageBox>
 			</div>`,
-	} ) )
-	.add( 'notice', () => ( {
+	};
+}
+
+export function notice() {
+	return {
 		components: { IconMessageBox },
 		template:
 			`<div>
@@ -64,8 +90,11 @@ storiesOf( 'IconMessageBox', module )
 					Just to inform you...
 				</IconMessageBox>
 			</div>`,
-	} ) )
-	.add( 'notice long', () => ( {
+	};
+}
+
+export function noticeLong() {
+	return {
 		components: { IconMessageBox },
 		template:
 			`<div>
@@ -73,8 +102,11 @@ storiesOf( 'IconMessageBox', module )
 					{{ new Array( 42 ).fill( 'Just to inform you…' ).join( ' ' ) }}
 				</IconMessageBox>
 			</div>`,
-	} ) )
-	.add( 'notice inline', () => ( {
+	};
+}
+
+export function noticeInline() {
+	return {
 		components: { IconMessageBox },
 		template:
 			`<div>
@@ -82,4 +114,5 @@ storiesOf( 'IconMessageBox', module )
 					Just to inform you...
 				</IconMessageBox>
 			</div>`,
-	} ) );
+	};
+}

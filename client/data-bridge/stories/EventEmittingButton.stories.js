@@ -1,9 +1,12 @@
-import { storiesOf } from '@storybook/vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 
-storiesOf( 'EventEmittingButton', module )
-	.addParameters( { component: EventEmittingButton } )
-	.add( 'primaryProgressive L', () => ( {
+export default {
+	title: 'EventEmittingButton',
+	component: EventEmittingButton,
+};
+
+export function primaryProgressiveL() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -11,8 +14,11 @@ storiesOf( 'EventEmittingButton', module )
 				size="L"
 				message="primaryProgressive"
 			/>`,
-	} ) )
-	.add( 'primaryProgressive as link', () => ( {
+	};
+}
+
+export function primaryProgressiveAsLink() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -22,8 +28,11 @@ storiesOf( 'EventEmittingButton', module )
 				href="https://www.mediawiki.org/wiki/Wikidata_Bridge"
 				:preventDefault="false"
 			/>`,
-	} ) )
-	.add( 'primaryProgressive as link opening in new tab', () => ( {
+	};
+}
+
+export function primaryProgressiveAsLinkOpeningInNewTab() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -34,8 +43,11 @@ storiesOf( 'EventEmittingButton', module )
 				:newTab="true"
 				:preventDefault="false"
 			/>`,
-	} ) )
-	.add( 'squary primaryProgressive', () => ( {
+	};
+}
+
+export function squaryPrimaryProgressive() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -43,9 +55,12 @@ storiesOf( 'EventEmittingButton', module )
 				size="L"
 				:squary="true"
 				message="squary primaryProgressive"
-			/>`,
-	} ) )
-	.add( 'primaryProgressive M', () => ( {
+				/>`,
+	};
+}
+
+export function primaryProgressiveM() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -53,16 +68,23 @@ storiesOf( 'EventEmittingButton', module )
 				size="M"
 				message="primaryProgressive M"
 			/>`,
-	} ) )
-	.add( 'primaryProgressive XL', () => ( {
+	};
+}
+
+export function primaryProgressiveXL() {
+	return {
 		components: { EventEmittingButton },
-		template: `<EventEmittingButton
-			type="primaryProgressive"
-			size="XL"
-			message="primaryProgressive XL"
-		/>`,
-	} ) )
-	.add( 'primaryProgressive M full-width', () => ( {
+		template: `
+			<EventEmittingButton
+				type="primaryProgressive"
+				size="XL"
+				message="primaryProgressive XL"
+			/>`,
+	};
+}
+
+export function primaryProgressiveMFullWidth() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<div style="max-width: 25em; padding: 2em; border: 1px solid black;">
@@ -72,9 +94,12 @@ storiesOf( 'EventEmittingButton', module )
 					message="primaryProgressive M"
 					style="width: 100%"
 				/>
-			</div>`,
-	} ) )
-	.add( 'close M', () => ( {
+				</div>`,
+	};
+}
+
+export function closeM() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -82,8 +107,11 @@ storiesOf( 'EventEmittingButton', module )
 				size="M"
 				message="close"
 			/>`,
-	} ) )
-	.add( 'close L', () => ( {
+	};
+}
+
+export function closeL() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -91,8 +119,11 @@ storiesOf( 'EventEmittingButton', module )
 				size="L"
 				message="close"
 			/>`,
-	} ) )
-	.add( 'close XL', () => ( {
+	};
+}
+
+export function closeXL() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -100,8 +131,11 @@ storiesOf( 'EventEmittingButton', module )
 				size="XL"
 				message="close"
 			/>`,
-	} ) )
-	.add( 'close squary', () => ( {
+	};
+}
+
+export function closeSquary() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -109,9 +143,12 @@ storiesOf( 'EventEmittingButton', module )
 				size="L"
 				:squary="true"
 				message="close"
-			/>`,
-	} ) )
-	.add( 'primaryProgressive disabled', () => ( {
+				/>`,
+	};
+}
+
+export function primaryProgressiveDisabled() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -119,9 +156,12 @@ storiesOf( 'EventEmittingButton', module )
 				size="L"
 				message="disabled primaryProgressive"
 				:disabled="true"
-			/>`,
-	} ) )
-	.add( 'close disabled', () => ( {
+				/>`,
+	};
+}
+
+export function closeDisabled() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -129,9 +169,12 @@ storiesOf( 'EventEmittingButton', module )
 				size="L"
 				message="disabled close"
 				:disabled="true"
-			/>`,
-	} ) )
-	.add( 'neutral M', () => ( {
+				/>`,
+	};
+}
+
+export function neutralM() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -139,8 +182,11 @@ storiesOf( 'EventEmittingButton', module )
 				size="M"
 				message="Go back"
 			/>`,
-	} ) )
-	.add( 'back L', () => ( {
+	};
+}
+
+export function backL() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -148,8 +194,11 @@ storiesOf( 'EventEmittingButton', module )
 				size="L"
 				message="back"
 			/>`,
-	} ) )
-	.add( 'back RTL', () => ( {
+	};
+}
+
+export function backRTL() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -157,9 +206,12 @@ storiesOf( 'EventEmittingButton', module )
 				type="back"
 				size="L"
 				message="back"
-			/>`,
-	} ) )
-	.add( 'link M', () => ( {
+				/>`,
+	};
+}
+
+export function linkM() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -167,8 +219,11 @@ storiesOf( 'EventEmittingButton', module )
 				size="M"
 				message="Keep editing"
 			/>`,
-	} ) )
-	.add( 'link M disabled', () => ( {
+	};
+}
+
+export function linkMDisabled() {
+	return {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
@@ -177,4 +232,5 @@ storiesOf( 'EventEmittingButton', module )
 				message="Keep editing"
 				:disabled="true"
 			/>`,
-	} ) );
+	};
+}

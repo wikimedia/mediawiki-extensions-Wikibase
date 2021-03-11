@@ -1,17 +1,23 @@
-import { storiesOf } from '@storybook/vue';
 import ReferenceSection from '@/presentation/components/ReferenceSection';
 import useStore from './useStore';
 
-storiesOf( 'ReferenceSection', module )
-	.addParameters( { component: ReferenceSection } )
-	.addDecorator( useStore( {
-		renderedTargetReferences: [
-			'<span><a href="https://example.com" target="_blank">title</a>. foo.</span>',
-			'<span>bar. baz.</span>',
-		],
-	} ) )
-	.add( 'default', () => ( {
+export default {
+	title: 'ReferenceSection',
+	component: ReferenceSection,
+	decorators: [
+		useStore( {
+			renderedTargetReferences: [
+				'<span><a href="https://example.com" target="_blank">title</a>. foo.</span>',
+				'<span>bar. baz.</span>',
+			],
+		} ),
+	],
+};
+
+export function normal() {
+	return {
 		components: { ReferenceSection },
 		template:
 			'<ReferenceSection />',
-	} ) );
+	};
+}

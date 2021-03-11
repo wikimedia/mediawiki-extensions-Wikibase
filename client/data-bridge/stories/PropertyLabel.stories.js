@@ -1,10 +1,13 @@
-import { storiesOf } from '@storybook/vue';
 import PropertyLabel from '@/presentation/components/PropertyLabel';
 import loremIpsum from './loremIpsum';
 
-storiesOf( 'PropertyLabel', module )
-	.addParameters( { component: PropertyLabel } )
-	.add( 'basic', () => ( {
+export default {
+	title: 'PropertyLabel',
+	component: PropertyLabel,
+};
+
+export function basic() {
+	return {
 		data: () => ( {
 			term: {
 				value: 'taxon name',
@@ -20,9 +23,11 @@ storiesOf( 'PropertyLabel', module )
 					:htmlFor="htmlFor"
 				/>
 			</div>`,
-	} ) )
+	};
+}
 
-	.add( 'long values', () => ( {
+export function longValues() {
+	return {
 		data: () => ( {
 			term: {
 				value: loremIpsum( 3, '-' ),
@@ -38,9 +43,11 @@ storiesOf( 'PropertyLabel', module )
 					:htmlFor="htmlFor"
 				/>
 			</div>`,
-	} ) )
+	};
+}
 
-	.add( 'empty', () => ( {
+export function empty() {
+	return {
 		data: () => ( {
 			term: {
 				value: '',
@@ -56,9 +63,11 @@ storiesOf( 'PropertyLabel', module )
 					:htmlFor="htmlFor"
 				/>
 			</div>`,
-	} ) )
+	};
+}
 
-	.add( 'right-to-left', () => ( {
+export function rightToLeft() {
+	return {
 		data: () => ( {
 			term: {
 				value: 'שם מדעי',
@@ -74,4 +83,5 @@ storiesOf( 'PropertyLabel', module )
 					:htmlFor="htmlFor"
 				/>
 			</div>`,
-	} ) );
+	};
+}

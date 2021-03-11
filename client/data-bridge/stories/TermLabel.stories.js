@@ -1,9 +1,12 @@
-import { storiesOf } from '@storybook/vue';
 import TermLabel from '@/presentation/components/TermLabel';
 
-storiesOf( 'TermLabel', module )
-	.addParameters( { component: TermLabel } )
-	.add( 'English term in English paragraph', () => ( {
+export default {
+	title: 'TermLabel',
+	component: TermLabel,
+};
+
+export function EnglishTermInEnglishParagraph() {
+	return {
 		data: () => ( {
 			term: {
 				language: 'en',
@@ -18,8 +21,11 @@ storiesOf( 'TermLabel', module )
 				<TermLabel :term="term"/>
 				property.
 			</p>`,
-	} ) )
-	.add( 'Hebrew term in English paragraph', () => ( {
+	};
+}
+
+export function HebrewTermInEnglishParagraph() {
+	return {
 		data: () => ( {
 			term: {
 				language: 'he',
@@ -33,8 +39,11 @@ storiesOf( 'TermLabel', module )
 				<TermLabel :term="term"/> property,
 				whose label I got from English Wiktionary.
 			</p>`,
-	} ) )
-	.add( 'English term in Arabic paragraph', () => ( {
+	};
+}
+
+export function EnglishTermInArabicParagraph() {
+	return {
 		data: () => ( {
 			term: {
 				language: 'en',
@@ -48,8 +57,11 @@ storiesOf( 'TermLabel', module )
 				باستخدام ترجمة جوجل
 				ونعتذر عن أي أخطاء.
 			</p>`,
-	} ) )
-	.add( 'Persian name next to neutral characters', () => ( {
+	};
+}
+
+export function persianNameNextToNeutralCharacters() {
+	return {
 		data: () => ( {
 			term: {
 				language: 'fa',
@@ -70,4 +82,5 @@ storiesOf( 'TermLabel', module )
 					was a Persian scholar.
 				</dd>
 			</dl>`,
-	} ) );
+	};
+}

@@ -1,4 +1,3 @@
-import { storiesOf } from '@storybook/vue';
 import { boolean, number } from '@storybook/addon-knobs';
 import Loading from '@/presentation/components/Loading';
 import loremIpsum from './loremIpsum';
@@ -14,9 +13,13 @@ function getLoadingProps() {
 	};
 }
 
-storiesOf( 'Loading', module )
-	.addParameters( { component: Loading } )
-	.add( 'initializing', () => ( {
+export default {
+	title: 'Loading',
+	component: Loading,
+};
+
+export function initializing() {
+	return {
 		components: { Loading },
 		props: {
 			isInitializing: {
@@ -31,8 +34,11 @@ storiesOf( 'Loading', module )
 				:TIME_UNTIL_CONSIDERED_SLOW="TIME_UNTIL_CONSIDERED_SLOW"
 				:MINIMUM_TIME_OF_PROGRESS_ANIMATION="MINIMUM_TIME_OF_PROGRESS_ANIMATION"
 			>Content which may be slow</Loading>`,
-	} ) )
-	.add( 'saving', () => ( {
+	};
+}
+
+export function saving() {
+	return {
 		components: { Loading },
 		props: {
 			isSaving: {
@@ -55,4 +61,5 @@ storiesOf( 'Loading', module )
 					{{ loremIpsum( 6, '-' ) }}
 				</div>
 			</Loading>`,
-	} ) );
+	};
+}

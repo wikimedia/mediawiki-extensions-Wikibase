@@ -1,4 +1,3 @@
-import { storiesOf } from '@storybook/vue';
 import UserLink from '@/presentation/components/UserLink';
 
 const router = {
@@ -7,9 +6,13 @@ const router = {
 	},
 };
 
-storiesOf( 'UserLink', module )
-	.addParameters( { component: UserLink } )
-	.add( 'with link to user page', () => ( {
+export default {
+	title: 'UserLink',
+	component: UserLink,
+};
+
+export function withLinkToUserPage() {
+	return {
 		data: () => ( {
 			userId: 2799899,
 			userName: 'MediaWiki default',
@@ -24,9 +27,11 @@ storiesOf( 'UserLink', module )
 					:router="router"
 				/>.
 			</p>`,
-	} ) )
+	};
+}
 
-	.add( 'without link to user page', () => ( {
+export function withoutLinkToUserPage() {
+	return {
 		data: () => ( {
 			userId: 0,
 			userName: 'Meta-Wiki Welcome',
@@ -41,9 +46,11 @@ storiesOf( 'UserLink', module )
 					:router="router"
 				/>.
 			</p>`,
-	} ) )
+	};
+}
 
-	.add( 'bidirectionality behavior', () => ( {
+export function bidirectionalityBehavior() {
+	return {
 		data: () => ( {
 			userId: 1536453,
 			userName: 'علاء',
@@ -76,4 +83,5 @@ storiesOf( 'UserLink', module )
 				}
 				</component>
 			</dl>`,
-	} ) );
+	};
+}

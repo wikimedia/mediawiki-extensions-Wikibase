@@ -1,13 +1,18 @@
-import { storiesOf } from '@storybook/vue';
 import ErrorPermission from '@/presentation/components/ErrorPermission';
 import useStore from './useStore';
 
-storiesOf( 'ErrorPermission', module )
-	.addParameters( { component: ErrorPermission } )
-	.addDecorator( useStore( {
-		entityTitle: 'Q42',
-	} ) )
-	.add( 'two errors', () => ( {
+export default {
+	title: 'ErrorPermission',
+	component: ErrorPermission,
+	decorators: [
+		useStore( {
+			entityTitle: 'Q42',
+		} ),
+	],
+};
+
+export function twoErrors() {
+	return {
 		components: { ErrorPermission },
 		data: () => ( {
 			permissionErrors: [
@@ -29,8 +34,11 @@ storiesOf( 'ErrorPermission', module )
 			],
 		} ),
 		template: '<ErrorPermission :permissionErrors="permissionErrors" />',
-	} ) )
-	.add( 'one error', () => ( {
+	};
+}
+
+export function oneError() {
+	return {
 		components: { ErrorPermission },
 		data: () => ( {
 			permissionErrors: [
@@ -43,4 +51,5 @@ storiesOf( 'ErrorPermission', module )
 			],
 		} ),
 		template: '<ErrorPermission :permissionErrors="permissionErrors" />',
-	} ) );
+	};
+}

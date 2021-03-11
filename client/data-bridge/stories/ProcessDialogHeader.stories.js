@@ -1,36 +1,50 @@
-import { storiesOf } from '@storybook/vue';
-
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader';
 
-storiesOf( 'ProcessDialogHeader', module )
-	.addParameters( { component: ProcessDialogHeader } )
-	.add( 'without buttons or title', () => ( {
+export default {
+	title: 'ProcessDialogHeader',
+	component: ProcessDialogHeader,
+};
+
+export function withoutButtonsOrTitle() {
+	return {
 		components: { ProcessDialogHeader },
 		template: '<ProcessDialogHeader />',
-	} ) )
-	.add( 'with only title', () => ( {
+	};
+}
+
+export function withOnlyTitle() {
+	return {
 		components: { ProcessDialogHeader },
 		template:
 			`<ProcessDialogHeader>
 				<template slot="title">hello there</template>
 			</ProcessDialogHeader>`,
-	} ) )
-	.add( 'with only mock primary button', () => ( {
+	};
+}
+
+export function withOnlyMockPrimaryButton() {
+	return {
 		components: { ProcessDialogHeader },
 		template:
 			`<ProcessDialogHeader>
 				<template slot="primaryAction"><button style="background-color: cyan;">primary action</button></template>
 			</ProcessDialogHeader>`,
-	} ) )
-	.add( 'with mock buttons', () => ( {
+	};
+}
+
+export function withMockButtons() {
+	return {
 		components: { ProcessDialogHeader },
 		template:
 			`<ProcessDialogHeader>
 				<template slot="primaryAction"><button style="background-color: cyan;">primary action</button></template>
 				<template slot="safeAction"><button>safe action</button></template>
 			</ProcessDialogHeader>`,
-	} ) )
-	.add( 'with long labels', () => ( {
+	};
+}
+
+export function withLongLabels() {
+	return {
 		components: { ProcessDialogHeader },
 		template:
 			`<div style="max-width: 500px;">
@@ -40,8 +54,11 @@ storiesOf( 'ProcessDialogHeader', module )
 					<template slot="safeAction"><button>X</button></template>
 				</ProcessDialogHeader>
 			</div>`,
-	} ) )
-	.add( 'rtl with mock buttons', () => ( {
+	};
+}
+
+export function rtlWithMockButtons() {
+	return {
 		components: { ProcessDialogHeader },
 		template:
 			`<div dir="rtl">
@@ -51,4 +68,5 @@ storiesOf( 'ProcessDialogHeader', module )
 					<template slot="safeAction"><button>פעולה בטוחה</button></template>
 				</ProcessDialogHeader>
 			</div>`,
-	} ) );
+	};
+}
