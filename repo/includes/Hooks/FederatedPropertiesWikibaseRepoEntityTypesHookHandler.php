@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Hooks;
 
-use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @license GPL-2.0-or-later
@@ -47,7 +47,7 @@ class FederatedPropertiesWikibaseRepoEntityTypesHookHandler {
 
 	private static function factory(): self {
 		return new self(
-			WikibaseSettings::getRepoSettings()->getSetting( 'federatedPropertiesEnabled' ),
+			WikibaseRepo::getSettings()->getSetting( 'federatedPropertiesEnabled' ),
 			require __DIR__ . '/../../WikibaseRepo.FederatedProperties.entitytypes.php'
 		);
 	}

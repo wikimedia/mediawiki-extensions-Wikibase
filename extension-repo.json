@@ -635,7 +635,9 @@
 		},
 		"FederatedPropertiesSpecialPage": {
 			"class": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler",
-			"factory": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler::factory"
+			"services": [
+				"WikibaseRepo.Settings"
+			]
 		},
 		"HtmlPageLinkRendererEnd": {
 			"class": "\\Wikibase\\Repo\\Hooks\\HtmlPageLinkRendererEndHookHandler",

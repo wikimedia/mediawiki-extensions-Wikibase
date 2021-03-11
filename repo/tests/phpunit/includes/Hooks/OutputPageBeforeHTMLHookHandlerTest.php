@@ -20,7 +20,6 @@ use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
-use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;
@@ -113,7 +112,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		return new OutputPageBeforeHTMLHookHandler(
 			new NullHttpRequestFactory(),
 			new NullStatsdDataFactory(),
-			WikibaseSettings::getRepoSettings(),
+			WikibaseRepo::getSettings(),
 			TemplateFactory::getDefaultInstance(),
 			$this->userLanguageLookup,
 			$this->contentLanguages,

@@ -17,12 +17,12 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Tests\MockRepository;
-use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediawikiEditEntity;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -140,7 +140,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$permissionChecker = $this->getEntityPermissionChecker( $permissions );
-		$repoSettings = WikibaseSettings::getRepoSettings();
+		$repoSettings = WikibaseRepo::getSettings();
 		return new MediawikiEditEntity(
 			$titleLookup,
 			$mockRepository,

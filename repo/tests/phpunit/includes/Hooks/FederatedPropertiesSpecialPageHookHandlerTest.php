@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Hooks;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Hooks\FederatedPropertiesSpecialPageHookHandler;
 
 /**
@@ -15,13 +16,19 @@ use Wikibase\Repo\Hooks\FederatedPropertiesSpecialPageHookHandler;
  */
 class FederatedPropertiesSpecialPageHookHandlerTest extends TestCase {
 
+	private function getHookHandler( bool $fedPropsEnabled ): FederatedPropertiesSpecialPageHookHandler {
+		return new FederatedPropertiesSpecialPageHookHandler( new SettingsArray( [
+			'federatedPropertiesEnabled' => $fedPropsEnabled
+		] ) );
+	}
+
 	public function testGivenFedPropsSettingEnabled_NewPropertySpecialPageDoesNotExist() {
 		$mockList = [
 			'NewProperty' => 'Create a new property special page',
 			'OtherSpecialPAge' => 'Create some other Special page'
 		];
 
-		$hookHandler = new FederatedPropertiesSpecialPageHookHandler( true );
+		$hookHandler = $this->getHookHandler( true );
 		$hookHandler->onSpecialPage_initList( $mockList );
 
 		$this->assertfalse( isset( $mockList[ 'NewProperty' ] ) );
@@ -37,7 +44,7 @@ class FederatedPropertiesSpecialPageHookHandlerTest extends TestCase {
 			'OtherSpecialPAge' => 'Create some other Special page'
 		];
 
-		$hookHandler = new FederatedPropertiesSpecialPageHookHandler( false );
+		$hookHandler = $this->getHookHandler( false );
 		$hookHandler->onSpecialPage_initList( $mockList );//mockList should not change
 
 		$this->assertEquals( $expected, $mockList );

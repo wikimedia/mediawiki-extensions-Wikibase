@@ -5,6 +5,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Modules\RepoAccessModule;
 use Wikibase\Lib\Modules\SitesModule;
 use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @license GPL-2.0-or-later
@@ -25,7 +26,7 @@ return call_user_func( function() {
 			'factory' => function () {
 				return new SitesModule(
 					WikibaseSettings::isClientEnabled() ? WikibaseClient::getSettings() : null,
-					WikibaseSettings::isRepoEnabled() ? WikibaseSettings::getRepoSettings() : null,
+					WikibaseSettings::isRepoEnabled() ? WikibaseRepo::getSettings() : null,
 					MediaWikiServices::getInstance()->getSiteStore(),
 					MediaWikiServices::getInstance()->getLocalServerObjectCache()
 				);

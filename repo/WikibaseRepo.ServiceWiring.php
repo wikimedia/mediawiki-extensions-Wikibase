@@ -144,8 +144,7 @@ return [
 
 		$services->getHookContainer()->run( 'WikibaseRepoDataTypes', [ &$dataTypes ] );
 
-		// TODO get $settings from $services
-		$settings = WikibaseSettings::getRepoSettings();
+		$settings = WikibaseRepo::getSettings( $services );
 
 		return new DataTypeDefinitions(
 			$dataTypes,

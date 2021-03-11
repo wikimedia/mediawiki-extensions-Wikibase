@@ -256,7 +256,7 @@ abstract class DumpEntities extends Maintenance {
 				return;
 			}
 
-			// Don't use WikibaseRepo here as this is run very early on, thus
+			// Don't use WikibaseRepo or MediaWikiServices here as this is run very early on, thus
 			// the bootstrapping code is not ready yet (T202452).
 			$settings = WikibaseSettings::getRepoSettings();
 			$dumpDBDefaultGroup = $settings->getSetting( 'dumpDBDefaultGroup' );

@@ -6,6 +6,7 @@ use MediaWikiIntegrationTestCase;
 use MWNamespace;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @group Wikibase
@@ -193,7 +194,7 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 		];
 
 		if ( WikibaseSettings::isRepoEnabled() ) {
-			$repoSettings = WikibaseSettings::getRepoSettings();
+			$repoSettings = WikibaseRepo::getSettings();
 			$entityNamespaces = $repoSettings->getSetting( 'entityNamespaces' );
 			$namespaceNames = array_map( [ MWNamespace::class, 'getCanonicalName' ], $entityNamespaces );
 
