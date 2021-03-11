@@ -389,11 +389,13 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			self::$otherItemId = $badge->getId();
 		}
 
-		WikibaseRepo::getSettings()->setSetting( 'badgeItems', [
+		$settings = clone WikibaseRepo::getSettings( $this->getServiceContainer() );
+		$settings->setSetting( 'badgeItems', [
 			self::$gaItemId->getSerialization() => '',
 			self::$faItemId->getSerialization() => '',
 			'Q99999' => '', // Just in case we have a wrong config
 		] );
+		$this->setService( 'WikibaseRepo.Settings', $settings );
 
 		self::$hasSetup = true;
 	}

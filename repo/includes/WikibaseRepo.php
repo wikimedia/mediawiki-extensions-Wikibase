@@ -777,11 +777,11 @@ class WikibaseRepo {
 		);
 	}
 
-	public function getSiteLinkBadgeChangeOpSerializationValidator() {
-		return new SiteLinkBadgeChangeOpSerializationValidator(
-			self::getEntityTitleLookup(),
-			array_keys( self::getSettings()->getSetting( 'badgeItems' ) )
-		);
+	public static function getSiteLinkBadgeChangeOpSerializationValidator(
+		ContainerInterface $services = null
+	): SiteLinkBadgeChangeOpSerializationValidator {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.SiteLinkBadgeChangeOpSerializationValidator' );
 	}
 
 	public static function getEntityChangeOpProvider( ContainerInterface $services = null ): EntityChangeOpProvider {
@@ -802,7 +802,7 @@ class WikibaseRepo {
 			$changeOpFactoryProvider->getStatementChangeOpFactory(),
 			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
 			new TermChangeOpSerializationValidator( $this->getTermsLanguages() ),
-			$this->getSiteLinkBadgeChangeOpSerializationValidator(),
+			self::getSiteLinkBadgeChangeOpSerializationValidator(),
 			$this->getExternalFormatStatementDeserializer(),
 			new SiteLinkTargetProvider(
 				$this->getSiteLookup(),
