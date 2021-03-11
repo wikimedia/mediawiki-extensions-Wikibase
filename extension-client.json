@@ -125,6 +125,13 @@
 				"WikibaseClient.Settings"
 			]
 		},
+		"EchoSetup": {
+			"class": "\\Wikibase\\Client\\Hooks\\EchoSetupHookHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\EchoSetupHookHandler::factory",
+			"services": [
+				"WikibaseClient.Settings"
+			]
+		},
 		"EditAction": {
 			"class": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler::factory",
@@ -212,7 +219,9 @@
 			"UpdateRepo",
 			"DataUpdate"
 		],
-		"BeforeCreateEchoEvent": "\\Wikibase\\Client\\Hooks\\EchoSetupHookHandlers::onBeforeCreateEchoEvent",
+		"BeforeCreateEchoEvent": [
+			"EchoSetup"
+		],
 		"BeforePageDisplay": [
 			"BeforePageDisplay",
 			"Trivial"
