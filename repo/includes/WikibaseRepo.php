@@ -1238,7 +1238,7 @@ class WikibaseRepo {
 	public function getEntityContentDataCodec() {
 		return new EntityContentDataCodec(
 			self::getEntityIdParser(),
-			$this->getStorageEntitySerializer(),
+			self::getStorageEntitySerializer(),
 			$this->getInternalFormatEntityDeserializer(),
 			self::getDataAccessSettings()->maxSerializedEntitySizeInBytes()
 		);
@@ -1333,11 +1333,10 @@ class WikibaseRepo {
 
 	/**
 	 * Returns the entity serializer that generates serialization that is used in the storage layer.
-	 *
-	 * @return Serializer
 	 */
-	public function getStorageEntitySerializer() {
-		return $this->getWikibaseServices()->getStorageEntitySerializer();
+	public static function getStorageEntitySerializer( ContainerInterface $services = null ): Serializer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.StorageEntitySerializer' );
 	}
 
 	/**
