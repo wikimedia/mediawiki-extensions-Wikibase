@@ -22,6 +22,8 @@
 }
 
 .wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-section {
+	position: sticky;
+	top: 0;
 	margin-bottom: 0.3em;
 }
 

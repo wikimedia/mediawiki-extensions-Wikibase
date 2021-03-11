@@ -53,20 +53,6 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 		};
 		var view = ViewFactory.prototype.getEntityTermsView.call( this, startEditingController, value, $entitytermsview );
 		var $container = this._toolbarFactory.getToolbarContainer( view.element );
-		$container.sticknode( {
-			$container: view.$entitytermsforlanguagelistview,
-			autoWidth: true,
-			zIndex: 2
-		} )
-		.on( 'sticknodeupdate', function ( event ) {
-			if ( !$( event.target ).data( 'sticknode' ).isFixed() ) {
-				$container.css( 'width', 'auto' );
-			}
-		} );
-
-		view.element.on( 'entitytermsviewchange', function () {
-			$container.data( 'sticknode' ).refresh();
-		} );
 
 		view.element.on( 'entitytermsviewafterstartediting', function () {
 			// eslint-disable-next-line no-jquery/no-sizzle
@@ -106,8 +92,6 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 					duration: 'fast'
 				} );
 			}
-
-			$container.data( 'sticknode' ).refresh();
 		} );
 
 		var entityTermsChanger = this._entityChangersFactory.getEntityTermsChanger();

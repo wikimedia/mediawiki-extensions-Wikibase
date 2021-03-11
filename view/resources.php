@@ -216,7 +216,6 @@ return call_user_func( function() {
 				'resources/jquery/wikibase/jquery.wikibase.statementview.RankSelector.js',
 				'resources/jquery/wikibase/jquery.wikibase.siteselector.js',
 				'resources/jquery/ui/jquery.ui.tagadata.js',
-				'resources/jquery/jquery.sticknode.js',
 				'resources/jquery/jquery.removeClassByRegex.js',
 				'lib/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.js',
 				'resources/wikibase/utilities/wikibase.utilities.ui.js',
