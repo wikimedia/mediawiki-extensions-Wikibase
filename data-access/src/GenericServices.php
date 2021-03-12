@@ -31,11 +31,6 @@ class GenericServices {
 	private $compactEntitySerializer;
 
 	/**
-	 * @var Serializer|null
-	 */
-	private $storageEntitySerializer;
-
-	/**
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 */
 	public function __construct(
@@ -80,27 +75,6 @@ class GenericServices {
 		}
 
 		return $this->compactEntitySerializer;
-	}
-
-	/**
-	 * Returns the entity serializer that generates serialization that is used in the storage layer.
-	 *
-	 * @return Serializer
-	 */
-	public function getStorageEntitySerializer() {
-		if ( !isset( $this->storageEntitySerializer ) ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->get( EntityTypeDefinitions::STORAGE_SERIALIZER_FACTORY_CALLBACK );
-			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory();
-			$serializers = [];
-
-			foreach ( $serializerFactoryCallbacks as $callback ) {
-				$serializers[] = call_user_func( $callback, $baseSerializerFactory );
-			}
-
-			$this->storageEntitySerializer = new DispatchingSerializer( $serializers );
-		}
-
-		return $this->storageEntitySerializer;
 	}
 
 	/**

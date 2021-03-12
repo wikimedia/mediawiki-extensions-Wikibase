@@ -6,6 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use LogicException;
 use MediaWiki\Storage\NameTableStore;
 use PHPUnit\Framework\MockObject\MockObject;
+use Serializers\DispatchingSerializer;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PrefetchingTermLookup;
@@ -76,6 +77,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
+			new DispatchingSerializer(),
 			[ 'strval' ],
 			[],
 			[],
@@ -97,6 +99,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
+			new DispatchingSerializer(),
 			[ null ],
 			[],
 			[],
@@ -115,6 +118,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
+			new DispatchingSerializer(),
 			[],
 			[ null ],
 			[],
@@ -133,6 +137,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
+			new DispatchingSerializer(),
 			[],
 			[],
 			[ null ],
@@ -166,6 +171,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 				''
 			),
 			new LanguageFallbackChainFactory(),
+			new DispatchingSerializer(),
 			[],
 			[],
 			[ 'item' => $customItemLookupCallback ],
@@ -187,6 +193,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
+			new DispatchingSerializer(),
 			[],
 			[],
 			[],

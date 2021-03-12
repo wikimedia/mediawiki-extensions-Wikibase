@@ -1900,6 +1900,7 @@ class WikibaseRepo {
 				self::getDataAccessSettings(),
 				$source,
 				self::getLanguageFallbackChainFactory(),
+				self::getStorageEntitySerializer(),
 				$entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
 				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
 				$entityTypeDefinitions->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK ),

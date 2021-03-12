@@ -7,7 +7,7 @@ use Deserializers\DispatchingDeserializer;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Storage\NameTableStore;
-use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
+use Serializers\Serializer;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -38,7 +38,6 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup;
-use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -118,6 +117,9 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	/** @var EntityNamespaceLookup|null */
 	private $entityNamespaceLookup;
 
+	/** @var Serializer */
+	private $storageEntitySerializer;
+
 	public function __construct(
 		GenericServices $genericServices,
 		EntityIdParser $entityIdParser,
@@ -127,6 +129,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		DataAccessSettings $dataAccessSettings,
 		EntitySource $entitySource,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		Serializer $storageEntitySerializer,
 		array $deserializerFactoryCallbacks,
 		array $entityMetaDataAccessorCallbacks,
 		array $prefetchingTermLookupCallbacks,
@@ -147,6 +150,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		$this->dataAccessSettings = $dataAccessSettings;
 		$this->entitySource = $entitySource;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
+		$this->storageEntitySerializer = $storageEntitySerializer;
 		$this->deserializerFactoryCallbacks = $deserializerFactoryCallbacks;
 		$this->entityMetaDataAccessorCallbacks = $entityMetaDataAccessorCallbacks;
 		$this->prefetchingTermLookupCallbacks = $prefetchingTermLookupCallbacks;
@@ -232,15 +236,9 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	public function getEntityRevisionLookup() {
 		if ( $this->entityRevisionLookup === null ) {
-			if ( !WikibaseSettings::isRepoEnabled() ) {
-				$serializer = new ForbiddenSerializer( 'Entity serialization is not supported on the client!' );
-			} else {
-				$serializer = $this->genericServices->getStorageEntitySerializer();
-			}
-
 			$codec = new EntityContentDataCodec(
 				$this->entityIdParser,
-				$serializer,
+				$this->storageEntitySerializer,
 				$this->getEntityDeserializer(),
 				$this->dataAccessSettings->maxSerializedEntitySizeInBytes()
 			);

@@ -44,20 +44,6 @@ class GenericServicesTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $serializerOne, $serializerTwo );
 	}
 
-	public function testGetStorageEntitySerializer() {
-		$services = $this->newGenericServices();
-		$this->assertInstanceOf( Serializer::class, $services->getStorageEntitySerializer() );
-	}
-
-	public function testGetStorageEntitySerializerReusesTheInstanceForMultipleCalls() {
-		$services = $this->newGenericServices();
-
-		$serializerOne = $services->getStorageEntitySerializer();
-		$serializerTwo = $services->getStorageEntitySerializer();
-
-		$this->assertSame( $serializerOne, $serializerTwo );
-	}
-
 	public function testGetSerializerFactory() {
 		$services = $this->newGenericServices();
 		$this->assertInstanceOf( SerializerFactory::class, $services->getBaseDataModelSerializerFactory() );
