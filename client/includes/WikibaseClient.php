@@ -67,9 +67,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
-use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
@@ -449,7 +447,7 @@ final class WikibaseClient {
 	public function getStore(): ClientStore {
 		if ( $this->store === null ) {
 			$this->store = new DirectSqlStore(
-				$this->getEntityChangeFactory(),
+				self::getEntityChangeFactory(),
 				self::getEntityIdParser(),
 				self::getEntityIdComposer(),
 				self::getEntityIdLookup(),
@@ -825,20 +823,9 @@ final class WikibaseClient {
 		);
 	}
 
-	public function getEntityChangeFactory(): EntityChangeFactory {
-		//TODO: take this from a setting or registry.
-		$changeClasses = [
-			Item::ENTITY_TYPE => ItemChange::class,
-			// Other types of entities will use EntityChange
-		];
-
-		return new EntityChangeFactory(
-			self::getEntityDiffer(),
-			self::getEntityIdParser(),
-			$changeClasses,
-			EntityChange::class,
-			self::getLogger()
-		);
+	public static function getEntityChangeFactory( ContainerInterface $services = null ): EntityChangeFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.EntityChangeFactory' );
 	}
 
 	public static function getEntityDiffer( ContainerInterface $services = null ): EntityDiffer {
@@ -912,7 +899,7 @@ final class WikibaseClient {
 
 		$changeListTransformer = new ChangeRunCoalescer(
 			$this->getStore()->getEntityRevisionLookup(),
-			$this->getEntityChangeFactory(),
+			self::getEntityChangeFactory(),
 			$logger,
 			$settings->getSetting( 'siteGlobalID' )
 		);

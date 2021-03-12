@@ -168,7 +168,7 @@ class InjectRCRecordsJob extends Job {
 		$job = new self(
 			$mwServices->getDBLoadBalancerFactory(),
 			$wbServices->getStore()->getEntityChangeLookup(),
-			$wbServices->getEntityChangeFactory(),
+			WikibaseClient::getEntityChangeFactory( $mwServices ),
 			$wbServices->getRecentChangeFactory(),
 			$params
 		);
