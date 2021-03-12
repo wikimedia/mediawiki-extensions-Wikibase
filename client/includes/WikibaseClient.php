@@ -47,10 +47,7 @@ use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\GenericServices;
-use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -131,11 +128,6 @@ final class WikibaseClient {
 	 * @var SiteLookup
 	 */
 	private $siteLookup;
-
-	/**
-	 * @var WikibaseServices
-	 */
-	private $wikibaseServices;
 
 	/**
 	 * @var PropertyDataTypeLookup|null
@@ -362,40 +354,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.EntityIdComposer' );
 	}
 
-	public function getWikibaseServices(): WikibaseServices {
-		if ( $this->wikibaseServices === null ) {
-			$this->wikibaseServices = $this->newEntitySourceWikibaseServices();
-		}
-
-		return $this->wikibaseServices;
-	}
-
-	private function newEntitySourceWikibaseServices() {
-		$nameTableStoreFactory = MediaWikiServices::getInstance()->getNameTableStoreFactory();
-		$entityTypeDefinitions = self::getEntityTypeDefinitions();
-		$genericServices = new GenericServices( $entityTypeDefinitions );
-
-		$entitySourceDefinitions = self::getEntitySourceDefinitions();
-		$singleSourceServices = [];
-		foreach ( $entitySourceDefinitions->getSources() as $source ) {
-			// TODO: extract
-			$singleSourceServices[$source->getSourceName()] = new SingleEntitySourceServices(
-				$genericServices,
-				self::getEntityIdParser(),
-				self::getEntityIdComposer(),
-				self::getDataValueDeserializer(),
-				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
-				self::getDataAccessSettings(),
-				$source,
-				self::getLanguageFallbackChainFactory(),
-				$entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
-				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
-				$entityTypeDefinitions->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK ),
-				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK )
-			);
-		}
-
-		return new MultipleEntitySourceServices( $entitySourceDefinitions, $genericServices, $singleSourceServices );
+	public static function getWikibaseServices( ContainerInterface $services = null ): WikibaseServices {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.WikibaseServices' );
 	}
 
 	public static function getDataAccessSettings( ContainerInterface $services = null ): DataAccessSettings {
@@ -431,7 +392,7 @@ final class WikibaseClient {
 
 	private function getPrefetchingTermLookup(): PrefetchingTermLookup {
 		if ( !$this->prefetchingTermLookup ) {
-			$this->prefetchingTermLookup = $this->getWikibaseServices()->getPrefetchingTermLookup();
+			$this->prefetchingTermLookup = self::getWikibaseServices()->getPrefetchingTermLookup();
 		}
 
 		return $this->prefetchingTermLookup;
@@ -441,7 +402,7 @@ final class WikibaseClient {
 	 * XXX: This is not used by client itself, but is used by ArticlePlaceholder!
 	 */
 	public function newTermSearchInteractor( string $displayLanguageCode ): TermSearchInteractor {
-		return $this->getWikibaseServices()->getTermSearchInteractorFactory()
+		return self::getWikibaseServices()->getTermSearchInteractorFactory()
 			->newInteractor( $displayLanguageCode );
 	}
 
@@ -493,7 +454,7 @@ final class WikibaseClient {
 				self::getEntityIdComposer(),
 				self::getEntityIdLookup(),
 				$this->getEntityNamespaceLookup(),
-				$this->getWikibaseServices(),
+				self::getWikibaseServices(),
 				self::getSettings(),
 				$this->getDatabaseDomainNameOfLocalRepo(),
 				$this->getContentLanguage()->getCode()
@@ -1043,7 +1004,7 @@ final class WikibaseClient {
 	}
 
 	public function getEntityNamespaceLookup(): EntityNamespaceLookup {
-		return $this->getWikibaseServices()->getEntityNamespaceLookup();
+		return self::getWikibaseServices()->getEntityNamespaceLookup();
 	}
 
 	public function getDataAccessLanguageFallbackChain( Language $language ): TermLanguageFallbackChain {

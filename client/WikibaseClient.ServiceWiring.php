@@ -27,6 +27,10 @@ use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
+use Wikibase\DataAccess\GenericServices;
+use Wikibase\DataAccess\MultipleEntitySourceServices;
+use Wikibase\DataAccess\SingleEntitySourceServices;
+use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -328,6 +332,34 @@ return [
 			$services->getContentLanguage(),
 			WikibaseClient::getLanguageFallbackChainFactory( $services )
 		);
+	},
+
+	'WikibaseClient.WikibaseServices' => function ( MediaWikiServices $services ): WikibaseServices {
+		$nameTableStoreFactory = $services->getNameTableStoreFactory();
+		$entityTypeDefinitions = WikibaseClient::getEntityTypeDefinitions( $services );
+		$genericServices = new GenericServices( $entityTypeDefinitions );
+
+		$entitySourceDefinitions = WikibaseClient::getEntitySourceDefinitions( $services );
+		$singleSourceServices = [];
+		foreach ( $entitySourceDefinitions->getSources() as $source ) {
+			// TODO: extract
+			$singleSourceServices[$source->getSourceName()] = new SingleEntitySourceServices(
+				$genericServices,
+				WikibaseClient::getEntityIdParser( $services ),
+				WikibaseClient::getEntityIdComposer( $services ),
+				WikibaseClient::getDataValueDeserializer( $services ),
+				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
+				WikibaseClient::getDataAccessSettings( $services ),
+				$source,
+				WikibaseClient::getLanguageFallbackChainFactory( $services ),
+				$entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
+				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
+				$entityTypeDefinitions->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK ),
+				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK )
+			);
+		}
+
+		return new MultipleEntitySourceServices( $entitySourceDefinitions, $genericServices, $singleSourceServices );
 	},
 
 ];
