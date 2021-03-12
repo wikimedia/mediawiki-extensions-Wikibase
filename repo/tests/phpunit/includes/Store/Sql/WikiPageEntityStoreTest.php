@@ -63,9 +63,6 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	protected function tearDown(): void {
 		parent::tearDown();
 
-		// Make sure we never leave the testing WikibaseServices in place
-		$wikibaseRepo = TestingAccessWrapper::newFromObject( WikibaseRepo::getDefaultInstance() );
-		$wikibaseRepo->wikibaseServices = null;
 		// ContentHandler caches ContentHandler objects, but given we mess
 		// with the EntityContentDataCodec in there, we need to reset that.
 		ContentHandler::cleanupHandlersCache();

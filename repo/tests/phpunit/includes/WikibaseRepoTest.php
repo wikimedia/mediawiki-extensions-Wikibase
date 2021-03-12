@@ -931,11 +931,12 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		);
 		$this->settings->setSetting( 'useEntitySourceBasedFederation', $entitySourceBasedFederation );
 
-		$wikibaseRepo = $this->getWikibaseRepo();
+		// override services in preparation for getting the WikibaseServices below
+		$this->getWikibaseRepo();
 
 		// Make sure (as good as we can) that all functions can be called without
 		// exceptions/ fatals and nothing accesses the database or does http requests.
-		$wbRepoServices = $wikibaseRepo->getWikibaseServices();
+		$wbRepoServices = WikibaseRepo::getWikibaseServices();
 
 		$reflectionClass = new ReflectionClass( $wbRepoServices );
 		$publicMethods = $reflectionClass->getMethods( ReflectionMethod::IS_PUBLIC );
