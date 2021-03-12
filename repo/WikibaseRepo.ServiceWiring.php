@@ -79,6 +79,7 @@ use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Lib\Units\UnitStorage;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
@@ -566,6 +567,18 @@ return [
 
 	'WikibaseRepo.Settings' => function ( MediaWikiServices $services ): SettingsArray {
 		return WikibaseSettings::getRepoSettings();
+	},
+
+	'WikibaseRepo.SiteLinkBadgeChangeOpSerializationValidator' => function (
+		MediaWikiServices $services
+	): SiteLinkBadgeChangeOpSerializationValidator {
+		return new SiteLinkBadgeChangeOpSerializationValidator(
+			WikibaseRepo::getEntityTitleLookup( $services ),
+			array_keys(
+				WikibaseRepo::getSettings( $services )
+					->getSetting( 'badgeItems' )
+			)
+		);
 	},
 
 	'WikibaseRepo.StatementGuidParser' => function ( MediaWikiServices $services ): StatementGuidParser {

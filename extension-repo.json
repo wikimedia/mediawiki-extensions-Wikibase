@@ -195,7 +195,10 @@
 		},
 		"wbsetsitelink": {
 			"class": "\\Wikibase\\Repo\\Api\\SetSiteLink",
-			"factory": "\\Wikibase\\Repo\\Api\\SetSiteLink::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\SetSiteLink::factory",
+			"services": [
+				"WikibaseRepo.SiteLinkBadgeChangeOpSerializationValidator"
+			]
 		}
 	},
 	"APIListModules": {

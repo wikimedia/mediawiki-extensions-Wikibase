@@ -49,7 +49,11 @@ class SetSiteLink extends ModifyEntity {
 		$this->badgeSerializationValidator = $badgeSerializationValidator;
 	}
 
-	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+	public static function factory(
+		ApiMain $mainModule,
+		string $moduleName,
+		SiteLinkBadgeChangeOpSerializationValidator $siteLinkBadgeChangeOpSerializationValidator
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new self(
@@ -57,7 +61,7 @@ class SetSiteLink extends ModifyEntity {
 			$moduleName,
 			$wikibaseRepo->getChangeOpFactoryProvider()
 				->getSiteLinkChangeOpFactory(),
-			$wikibaseRepo->getSiteLinkBadgeChangeOpSerializationValidator(),
+			$siteLinkBadgeChangeOpSerializationValidator,
 			$wikibaseRepo->inFederatedPropertyMode()
 		);
 	}
