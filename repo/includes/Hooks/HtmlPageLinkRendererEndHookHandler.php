@@ -116,6 +116,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		SpecialPageFactory $specialPageFactory,
 		EntityExistenceChecker $entityExistenceChecker,
 		EntityIdParser $entityIdParser,
+		EntityUrlLookup $entityUrlLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		SettingsArray $repoSettings
 	): self {
@@ -134,7 +135,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 			},
 			$specialPageFactory,
 			$languageFallbackChainFactory,
-			$wikibaseRepo->getEntityUrlLookup(),
+			$entityUrlLookup,
 			$wikibaseRepo->getLinkTargetEntityIdLookup(),
 			$repoSettings->getSetting( 'federatedPropertiesSourceScriptUrl' ),
 			$repoSettings->getSetting( 'federatedPropertiesEnabled' )

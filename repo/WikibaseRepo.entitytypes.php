@@ -172,7 +172,7 @@ return [
 				$repo->getLanguageNameLookup(),
 				WikibaseRepo::getEntityExistenceChecker(),
 				WikibaseRepo::getEntityTitleTextLookup(),
-				$repo->getEntityUrlLookup(),
+				WikibaseRepo::getEntityUrlLookup(),
 				WikibaseRepo::getEntityRedirectChecker()
 			);
 		},
@@ -275,7 +275,7 @@ return [
 				$repo->getLanguageNameLookup(),
 				WikibaseRepo::getEntityExistenceChecker(),
 				WikibaseRepo::getEntityTitleTextLookup(),
-				$repo->getEntityUrlLookup(),
+				WikibaseRepo::getEntityUrlLookup(),
 				WikibaseRepo::getEntityRedirectChecker()
 			);
 		},
