@@ -262,7 +262,7 @@ return call_user_func( function() {
 				$complexValueHelper = ( $flags & RdfProducer::PRODUCE_FULL_VALUES ) ?
 					new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe ) : null;
 				$unitConverter = ( $flags & RdfProducer::PRODUCE_NORMALIZED_VALUES ) ?
-					WikibaseRepo::getDefaultInstance()->getUnitConverter() : null;
+					WikibaseRepo::getUnitConverter() : null;
 				return new QuantityRdfBuilder( $complexValueHelper, $unitConverter );
 			},
 			'search-index-data-formatter-callback' => function ( UnboundedQuantityValue $value ) {
