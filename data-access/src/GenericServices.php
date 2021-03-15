@@ -23,11 +23,6 @@ class GenericServices {
 	/**
 	 * @var Serializer|null
 	 */
-	private $entitySerializer;
-
-	/**
-	 * @var Serializer|null
-	 */
 	private $compactEntitySerializer;
 
 	/**
@@ -37,25 +32,6 @@ class GenericServices {
 		EntityTypeDefinitions $entityTypeDefinitions
 	) {
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
-	}
-
-	/**
-	 * @return Serializer Entity serializer that generates the full (expanded) serialization.
-	 */
-	public function getFullEntitySerializer() {
-		if ( !isset( $this->entitySerializer ) ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->get( EntityTypeDefinitions::SERIALIZER_FACTORY_CALLBACK );
-			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory();
-			$serializers = [];
-
-			foreach ( $serializerFactoryCallbacks as $callback ) {
-				$serializers[] = call_user_func( $callback, $baseSerializerFactory );
-			}
-
-			$this->entitySerializer = new DispatchingSerializer( $serializers );
-		}
-
-		return $this->entitySerializer;
 	}
 
 	/**

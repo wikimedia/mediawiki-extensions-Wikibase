@@ -23,13 +23,6 @@ interface WikibaseServices extends DataAccessServices {
 	public function getEntityNamespaceLookup();
 
 	/**
-	 * Returns the entity serializer instance that generates the full (expanded) serialization.
-	 *
-	 * @return Serializer
-	 */
-	public function getFullEntitySerializer();
-
-	/**
 	 * Returns the entity serializer instance that generates the most compact serialization.
 	 *
 	 * @return Serializer
