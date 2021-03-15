@@ -446,8 +446,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$itemTitle->expects( $this->once() )
 			->method( 'getNamespace' )
 			->willReturn(
-				WikibaseRepo::getDefaultInstance()
-					->getEntityNamespaceLookup()
+				WikibaseRepo::getEntityNamespaceLookup()
 					->getEntityNamespace( $type )
 			);
 

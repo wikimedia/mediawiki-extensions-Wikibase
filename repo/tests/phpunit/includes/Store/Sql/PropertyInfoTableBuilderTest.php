@@ -118,7 +118,7 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 			$propertyLookup,
 			$propertyInfoBuilder,
 			WikibaseRepo::getEntityIdComposer(),
-			$wikibaseRepo->getEntityNamespaceLookup()
+			WikibaseRepo::getEntityNamespaceLookup()
 		);
 		$builder->setBatchSize( 3 );
 

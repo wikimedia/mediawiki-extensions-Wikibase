@@ -52,7 +52,7 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 		$this->repo = WikibaseRepo::getDefaultInstance();
 		$this->entityStore = $this->repo->getEntityStore();
 
-		$namespaceLookup = $this->repo->getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 		$this->propertyNamespace = $namespaceLookup->getEntityNamespace( 'property' );
 		$this->itemNamespace = $namespaceLookup->getEntityNamespace( 'item' );
 	}

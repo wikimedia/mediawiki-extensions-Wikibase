@@ -156,7 +156,7 @@ class BotEditTest extends WikibaseApiTestCase {
 		//      edits were done in the same second.
 		$change = null;
 
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 		$itemNs = $entityNamespaceLookup->getEntityNamespace( 'item' );
 
 		foreach ( $rcResult[0]['query']['recentchanges'] as $rc ) {

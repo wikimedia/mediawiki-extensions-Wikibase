@@ -90,7 +90,7 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 	 * @todo test other types of entities too!
 	 */
 	public function testMovePreventionRegularToInvalidData() {
-		$itemNamespace = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
+		$itemNamespace = WikibaseRepo::getEntityNamespaceLookup()
 			->getEntityNamespace( 'item' );
 		$to = Title::newFromTextThrow( $this->page->getTitle()->getText(), $itemNamespace );
 		$mp = $this->getServiceContainer()
@@ -137,7 +137,7 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 	 * Moving item to an invalid location in the data NS
 	 */
 	public function testMovePreventionDataToInvalidData() {
-		$itemNamespace = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
+		$itemNamespace = WikibaseRepo::getEntityNamespaceLookup()
 			->getEntityNamespace( 'item' );
 		$mp = $this->getServiceContainer()
 			->getMovePageFactory()

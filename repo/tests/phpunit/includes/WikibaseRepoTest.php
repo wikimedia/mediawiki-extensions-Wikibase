@@ -44,7 +44,6 @@ use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -605,11 +604,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 			PropertyInfoStore::KEY_CANONICAL_URI => new PropertyId( 'P321' )
 		];
 		$this->assertEquals( $expected,  $builder->getPropertyIdMap() );
-	}
-
-	public function testGetEntityNamespaceLookup() {
-		$service = $this->getWikibaseRepo()->getEntityNamespaceLookup();
-		$this->assertInstanceOf( EntityNamespaceLookup::class, $service );
 	}
 
 	public function testGetEntityIdHtmlLinkFormatterFactory() {

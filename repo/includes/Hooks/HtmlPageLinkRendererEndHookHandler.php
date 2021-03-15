@@ -116,6 +116,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		SpecialPageFactory $specialPageFactory,
 		EntityExistenceChecker $entityExistenceChecker,
 		EntityIdParser $entityIdParser,
+		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityUrlLookup $entityUrlLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		SettingsArray $repoSettings
@@ -128,7 +129,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 			$entityExistenceChecker,
 			$entityIdParser,
 			$wikibaseRepo->getTermLookup(),
-			$wikibaseRepo->getEntityNamespaceLookup(),
+			$entityNamespaceLookup,
 			$interwikiLookup,
 			function ( $language ) use ( $wikibaseRepo ) {
 				return $wikibaseRepo->getEntityLinkFormatterFactory( $language );

@@ -258,12 +258,13 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
 		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();
+		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 
 		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
 			new WikiPageEntityMetaDataLookup(
-				$wikibaseRepo->getEntityNamespaceLookup(),
+				$entityNamespaceLookup,
 				new EntityIdLocalPartPageTableEntityQuery(
-					$wikibaseRepo->getEntityNamespaceLookup(),
+					$entityNamespaceLookup,
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
 				$propertySource
@@ -284,7 +285,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			new LegacyAdapterPropertyLookup( $entityLookup ),
 			$propertyInfoBuilder,
 			$wikibaseRepo->getEntityIdComposer(),
-			$wikibaseRepo->getEntityNamespaceLookup()
+			$entityNamespaceLookup
 		);
 		$builder->setReporter( $reporter );
 		$builder->setUseTransactions( false );
@@ -303,7 +304,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			return;
 		}
 		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
-			$wikibaseRepo->getEntityNamespaceLookup(),
+			WikibaseRepo::getEntityNamespaceLookup(),
 			WikibaseRepo::getEntityIdLookup()
 		);
 		$reporter = new ObservableMessageReporter();

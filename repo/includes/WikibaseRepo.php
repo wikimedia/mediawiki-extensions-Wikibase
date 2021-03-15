@@ -551,7 +551,7 @@ class WikibaseRepo {
 	}
 
 	public function getLocalRepoWikiPageMetaDataAccessor(): WikiPageEntityMetaDataAccessor {
-		$entityNamespaceLookup = $this->getEntityNamespaceLookup();
+		$entityNamespaceLookup = self::getEntityNamespaceLookup();
 		$repoName = ''; // Empty string here means this only works for the local repo
 		$dbName = false; // false means the local database
 		return new PrefetchingWikiPageEntityMetaDataAccessor(
@@ -619,7 +619,7 @@ class WikibaseRepo {
 	 */
 	private function newEditFilterHookRunner( IContextSource $context ) {
 		return new MediawikiEditFilterHookRunner(
-			$this->getEntityNamespaceLookup(),
+			self::getEntityNamespaceLookup(),
 			self::getEntityTitleStoreLookup(),
 			self::getEntityContentFactory(),
 			$context
@@ -843,7 +843,7 @@ class WikibaseRepo {
 				self::getEntityIdComposer(),
 				self::getEntityIdLookup(),
 				self::getEntityTitleStoreLookup(),
-				$this->getEntityNamespaceLookup(),
+				self::getEntityNamespaceLookup(),
 				self::getIdGenerator(),
 				self::getWikibaseServices(),
 				$localEntitySource
@@ -1038,7 +1038,7 @@ class WikibaseRepo {
 		global $wgAvailableRights;
 
 		return new WikiPageEntityStorePermissionChecker(
-			$this->getEntityNamespaceLookup(),
+			self::getEntityNamespaceLookup(),
 			self::getEntityTitleLookup(),
 			MediaWikiServices::getInstance()->getPermissionManager(),
 			$wgAvailableRights
@@ -1538,11 +1538,9 @@ class WikibaseRepo {
 		return self::getSettings()->getSetting( 'entityNamespaces' );
 	}
 
-	/**
-	 * @return EntityNamespaceLookup
-	 */
-	public function getEntityNamespaceLookup() {
-		return self::getWikibaseServices()->getEntityNamespaceLookup();
+	public static function getEntityNamespaceLookup( ContainerInterface $services = null ): EntityNamespaceLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityNamespaceLookup' );
 	}
 
 	public static function getLocalEntityNamespaceLookup( ContainerInterface $services = null ): EntityNamespaceLookup {
@@ -1899,7 +1897,7 @@ class WikibaseRepo {
 
 	public function getLinkTargetEntityIdLookup(): LinkTargetEntityIdLookup {
 		return new EntityLinkTargetEntityIdLookup(
-			$this->getEntityNamespaceLookup(),
+			self::getEntityNamespaceLookup(),
 			self::getEntityIdParser(),
 			self::getEntitySourceDefinitions(),
 			self::getLocalEntitySource()

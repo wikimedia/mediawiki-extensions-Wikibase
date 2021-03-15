@@ -68,8 +68,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		$wikibaseMobileNewTermboxStyles = [ 'wikibase.termbox.styles' ];
 		$wikibaseMobile = [ 'wikibase.mobile' ];
 
-		$entityNamespaces = WikibaseRepo::getDefaultInstance()
-			->getEntityNamespaceLookup()
+		$entityNamespaces = WikibaseRepo::getEntityNamespaceLookup()
 			->getEntityNamespaces();
 		$itemNamespace = $entityNamespaces['item'];
 
@@ -422,11 +421,7 @@ XML
 		$settings['entityNamespaces']['slottedEntityType'] = self::FAKE_NS_ID . '/someSlot';
 		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
 
-		// Reset the WikibaseRepo instance after touching config that services within depend on
-		WikibaseRepo::resetClassStatics();
-
-		// Make sure the setting was correctly set & service has been updated
-		$nsLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$nsLookup = WikibaseRepo::getEntityNamespaceLookup();
 		$type = $nsLookup->getEntityType( self::FAKE_NS_ID );
 		$this->assertSame( 'slottedEntityType', $type );
 		$this->assertSame( 'someSlot', $nsLookup->getEntitySlotRole( $type ) );

@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\Hook\OutputPageBeforeHTMLHook;
 use OutputPage;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\OutputPageJsConfigBuilder;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @license GPL-2.0-or-later
@@ -75,17 +75,17 @@ class OutputPageJsConfigHookHandler implements OutputPageBeforeHTMLHook {
 		$this->taintedReferencesEnabled = $taintedReferencesEnabled;
 	}
 
-	public static function factory(): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = WikibaseRepo::getSettings();
-
+	public static function factory(
+		EntityNamespaceLookup $entityNamespaceLookup,
+		SettingsArray $repoSettings
+	): self {
 		return new self(
-			$wikibaseRepo->getEntityNamespaceLookup(),
-			$settings->getSetting( 'dataRightsUrl' ),
-			$settings->getSetting( 'dataRightsText' ),
-			$settings->getSetting( 'badgeItems' ),
-			$settings->getSetting( 'string-limits' )['multilang']['length'],
-			$settings->getSetting( 'taintedReferencesEnabled' )
+			$entityNamespaceLookup,
+			$repoSettings->getSetting( 'dataRightsUrl' ),
+			$repoSettings->getSetting( 'dataRightsText' ),
+			$repoSettings->getSetting( 'badgeItems' ),
+			$repoSettings->getSetting( 'string-limits' )['multilang']['length'],
+			$repoSettings->getSetting( 'taintedReferencesEnabled' )
 		);
 	}
 

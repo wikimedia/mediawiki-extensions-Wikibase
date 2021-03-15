@@ -110,7 +110,7 @@ class DumpRdf extends DumpEntities {
 			$mwServices = MediaWikiServices::getInstance();
 
 			$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
-				$wikibaseRepo->getEntityNamespaceLookup(),
+				WikibaseRepo::getEntityNamespaceLookup( $mwServices ),
 				WikibaseRepo::getEntityIdLookup( $mwServices ),
 				$mwServices->getLinkCache()
 			);

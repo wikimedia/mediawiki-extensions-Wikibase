@@ -92,8 +92,7 @@ final class RepoHooks {
 	 * @param Skin $skin
 	 */
 	public static function onBeforePageDisplayMobile( OutputPage $out, Skin $skin ) {
-		$repo = WikibaseRepo::getDefaultInstance();
-		$entityNamespaceLookup = $repo->getEntityNamespaceLookup();
+		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 		$namespace = $out->getTitle()->getNamespace();
 		$isEntityTitle = $entityNamespaceLookup->isNamespaceWithEntities( $namespace );
 
@@ -126,7 +125,7 @@ final class RepoHooks {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$namespaces = $wikibaseRepo->getLocalEntityNamespaces();
-		$namespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 
 		// Register entity namespaces.
 		// Note that $wgExtraNamespaces and $wgNamespaceAliases have already been processed at this
@@ -183,8 +182,7 @@ final class RepoHooks {
 	}
 
 	private static function isNamespaceUsedByLocalEntities( $namespace ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$namespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 
 		// TODO: this logic seems badly misplaced, probably WikibaseRepo should be asked and be
 		// providing different and more appropriate EntityNamespaceLookup instance
@@ -731,7 +729,7 @@ final class RepoHooks {
 			return;
 		}
 
-		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 		$entityType = $namespaceLookup->getEntityType( $title->getNamespace() );
 		if ( $entityType === null ) {
 			return;
@@ -801,9 +799,7 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onContentModelCanBeUsedOn( $contentModel, LinkTarget $title, &$ok ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$namespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 		$contentModelIds = WikibaseRepo::getContentModelMappings();
 
 		// Find any entity type that is mapped to the title namespace
@@ -960,7 +956,7 @@ final class RepoHooks {
 			WikibaseRepo::getSettings()->getSetting( 'conceptBaseUri' ),
 			WikibaseRepo::getEntityIdLookup(),
 			$repo->getEntityLookup(),
-			$repo->getEntityNamespaceLookup(),
+			WikibaseRepo::getEntityNamespaceLookup(),
 			WikibaseRepo::getLogger()
 		);
 
@@ -1045,9 +1041,7 @@ final class RepoHooks {
 	 * @param array[] &$pageInfo
 	 */
 	public static function onInfoAction( IContextSource $context, array &$pageInfo ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$namespaceChecker = $wikibaseRepo->getEntityNamespaceLookup();
+		$namespaceChecker = WikibaseRepo::getEntityNamespaceLookup();
 		$title = $context->getTitle();
 
 		if ( !$title || !$namespaceChecker->isNamespaceWithEntities( $title->getNamespace() ) ) {
