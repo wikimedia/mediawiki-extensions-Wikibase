@@ -88,6 +88,7 @@
 	"wikibase-entity-summary-wbeditentity-create": "새 엔티티를 만듦",
 	"wikibase-entity-summary-wbeditentity-update": "엔티티를 바꿈",
 	"wikibase-entity-summary-wbeditentity-update-languages": "$3개 {{PLURAL:$3|언어}}의 레이블, 설명 및 다른 이름을 변경함",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "{{#commaseparatedlist: $3}}에 대한 레이블, 설명 및 다른 이름을 바꿈",
 	"wikibase-entity-summary-wbsetreference": "참고를 설정함",
 	"wikibase-entity-summary-wbsetreference-add": "주장에 참고를 추가함",
 	"wikibase-entity-summary-wbsetreference-set": "주장의 참고를 바꿈",

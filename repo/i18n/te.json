@@ -41,6 +41,7 @@
 	"wikibase-snakview-property-input-placeholder": "లక్షణం",
 	"wikibase-snakview-variations-somevalue-label": "తెలియని విలువ",
 	"wikibase-snakview-variations-novalue-label": "విలువ లేదు",
+	"wikibase-shortcopyrightwarning": "\"$1\" నొక్కి మీరు, [[$2|వినియోగ నియమాలను]] అంగీకరిస్తూ, $3 కింద మీ రచనను వెనక్కి తీసుకోలేని విధంగా విడుదల చేసేందుకు అంగీకరిస్తున్నారు.",
 	"wikibase-entityselector-more": "మరిన్ని",
 	"wikibase-validator-invalid": "చెల్లని విలువ",
 	"wikibase-validator-sitelink-conflict": "$1 లింకును ఈసరికే $2 అంశం వాడుతోంది. అవి సంబంధించినవి కాకపోతే, దాన్ని $2 నుండి తీసెయ్యవచ్చు. ఒకవేళ అవి సరిగ్గా అదే విషయానికి చెందినవైతే, వాటిని విలీనం చెయ్యవచ్చు.",

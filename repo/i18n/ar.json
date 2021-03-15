@@ -30,6 +30,7 @@
 			"بدارين",
 			"ديفيد",
 			"زكريا",
+			"علاء",
 			"محمد أحمد عبد الفتاح",
 			"مشعل الحربي"
 		]
@@ -405,7 +406,7 @@
 	"wikibase-special-mergeitems-error-prefix": "لم يمكن دمج الكائنات. وقع الخطأ التالي:",
 	"wikibase-listdatatypes-wikibase-item-head": "العنصر",
 	"wikibase-listdatatypes-wikibase-item-body": "رابط إلى بنود أخرى في المشروع. عند إدخال قيمة، سيتم البحث في المشروع \"البند\" مساحة الاسم لمطابقة البنود.",
-	"wikibase-listdatatypes-wikibase-property-head": "الخاصية",
+	"wikibase-listdatatypes-wikibase-property-head": "خاصية",
 	"wikibase-listdatatypes-wikibase-property-body": "وصلة للخصائص في المشروع. عندما يتم إدخال قيمة، فنطاق \"Property\" للمشروع سيتم البحث فيه عن الخصائص المطابقة.",
 	"wikibase-listdatatypes-commonsmedia-head": "الوسائط في كومنز",
 	"wikibase-listdatatypes-commonsmedia-body": "وصلة للملفات المخزنة في ويكيميديا كومنز. Wعندما يتم إدخال قيمة، فنطاق \"File\" على كومنز سيتم البحث فيه عن ملفات مطابقة.",
