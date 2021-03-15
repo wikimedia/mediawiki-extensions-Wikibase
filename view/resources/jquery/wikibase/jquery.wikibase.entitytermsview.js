@@ -354,11 +354,6 @@
 				value: this.options.value,
 				userLanguages: this.options.userLanguages
 			} );
-
-			this.$entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' )
-				.$header.sticknode( {
-					$container: this.$entitytermsforlanguagelistview
-				} );
 		},
 
 		_startEditing: function () {
@@ -427,7 +422,6 @@
 		 * @inheritdoc
 		 */
 		notification: function ( $content, additionalCssClasses ) {
-			var self = this;
 			if ( !this._$notification ) {
 				var $closeable = $( '<div>' ).closeable();
 
@@ -435,13 +429,7 @@
 
 				this._$notification.data( 'closeable', $closeable.data( 'closeable' ) );
 				this._$notification
-					.appendTo( this._getEntitytermsforlanguagelistview().$header )
-					.on( 'closeableupdate.' + this.widgetName, function () {
-						var sticknode = self.element.data( 'sticknode' );
-						if ( sticknode ) {
-							sticknode.refresh();
-						}
-					} );
+					.appendTo( this._getEntitytermsforlanguagelistview().$header );
 
 				var $headerTr = this._getEntitytermsforlanguagelistview().$header.children( 'tr' ).first();
 				this._$notification.children( 'td' ).attr( 'colspan', $headerTr.children().length );
