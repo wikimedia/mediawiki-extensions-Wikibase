@@ -16,20 +16,6 @@ use Wikibase\Lib\EntityTypeDefinitions;
  */
 class GenericServicesTest extends \PHPUnit\Framework\TestCase {
 
-	public function testGetEntitySerializer() {
-		$services = $this->newGenericServices();
-		$this->assertInstanceOf( Serializer::class, $services->getFullEntitySerializer() );
-	}
-
-	public function testGetEntitySerializerReusesTheInstanceForMultipleCalls() {
-		$services = $this->newGenericServices();
-
-		$serializerOne = $services->getFullEntitySerializer();
-		$serializerTwo = $services->getFullEntitySerializer();
-
-		$this->assertSame( $serializerOne, $serializerTwo );
-	}
-
 	public function testGetCompactEntitySerializer() {
 		$services = $this->newGenericServices();
 		$this->assertInstanceOf( Serializer::class, $services->getCompactEntitySerializer() );
