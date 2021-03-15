@@ -25,6 +25,7 @@ use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
 use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\GenericServices;
@@ -51,6 +52,7 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
@@ -183,6 +185,19 @@ return [
 	'WikibaseClient.EntityIdParser' => function ( MediaWikiServices $services ): EntityIdParser {
 		return new DispatchingEntityIdParser(
 			WikibaseClient::getEntityTypeDefinitions( $services )->getEntityIdBuilders()
+		);
+	},
+
+	'WikibaseClient.EntityNamespaceLookup' => function ( MediaWikiServices $services ): EntityNamespaceLookup {
+		return array_reduce(
+			WikibaseClient::getEntitySourceDefinitions( $services )->getSources(),
+			function ( EntityNamespaceLookup $nsLookup, EntitySource $source ): EntityNamespaceLookup {
+				return $nsLookup->merge( new EntityNamespaceLookup(
+					$source->getEntityNamespaceIds(),
+					$source->getEntitySlotNames()
+				) );
+			},
+			new EntityNamespaceLookup( [], [] )
 		);
 	},
 
