@@ -107,7 +107,6 @@ use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
-use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
@@ -118,7 +117,6 @@ use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
-use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
@@ -1342,12 +1340,9 @@ class WikibaseRepo {
 		);
 	}
 
-	public function getPropertyTermStoreWriter(): EntityTermStoreWriter {
-		if ( !in_array( Property::ENTITY_TYPE, self::getLocalEntitySource()->getEntityTypes() ) ) {
-			return new ThrowingEntityTermStoreWriter();
-		}
-
-		return new PropertyTermStoreWriterAdapter( self::getTermStoreWriterFactory()->newPropertyTermStoreWriter() );
+	public static function getPropertyTermStoreWriter( ContainerInterface $services = null ): EntityTermStoreWriter {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.PropertyTermStoreWriter' );
 	}
 
 	public static function getItemTermStoreWriter( ContainerInterface $services = null ): EntityTermStoreWriter {
@@ -1409,7 +1404,7 @@ class WikibaseRepo {
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		return new PropertyHandler(
-			$this->getPropertyTermStoreWriter(),
+			self::getPropertyTermStoreWriter(),
 			$codec,
 			$constraintProvider,
 			$errorLocalizer,
