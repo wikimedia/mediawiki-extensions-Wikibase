@@ -18,7 +18,7 @@
 		PARENT,
 		function ( contentLanguages ) {
 			this._languageCodes = contentLanguages;
-			this._languageMap = mw.config.get( 'wgULSLanguages' );
+			this._languageNameMap = mw.config.get( 'wgULSLanguages' );
 		}
 	);
 
@@ -35,7 +35,7 @@
 		 * @type {Object|null}
 		 * @private
 		 */
-		_languageMap: null,
+		_languageNameMap: null,
 
 		/**
 		 * @type {string[]|null}
@@ -54,10 +54,10 @@
 		 * @inheritdoc
 		 */
 		getName: function ( code ) {
-			return this._languageMap ? this._languageMap[ code ] : null;
+			return this._languageNameMap ? this._languageNameMap[ code ] : null;
 		},
 
-		getAllPairs: function () {
+		getLanguageNameMap: function () {
 			var map = {},
 				self = this;
 
