@@ -40,7 +40,7 @@
 			return;
 		}
 
-		availableLangs = contentLanguages.getAllPairs() || {};
+		availableLangs = contentLanguages.getLanguageNameMap() || {};
 		langWidget = OO.ui.infuse( $lang );
 		fields.forEach( function ( field ) {
 			field.$input = OO.ui.infuse( field.$element ).$input;

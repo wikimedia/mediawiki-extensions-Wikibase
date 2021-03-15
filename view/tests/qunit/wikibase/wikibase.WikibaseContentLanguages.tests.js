@@ -30,14 +30,14 @@
 		);
 	} );
 
-	QUnit.test( 'getAllPairs', function ( assert ) {
+	QUnit.test( 'getLanguageNameMap', function ( assert ) {
 		var ulsLanguageMap = {
 			en: 'English'
 		};
 
 		sandbox.stub( mw.config, 'get' ).returns( ulsLanguageMap );
 
-		var result = ( new wb.WikibaseContentLanguages( [ 'en' ] ) ).getAllPairs();
+		var result = ( new wb.WikibaseContentLanguages( [ 'en' ] ) ).getLanguageNameMap();
 		assert.strictEqual(
 			result.en,
 			ulsLanguageMap.en
