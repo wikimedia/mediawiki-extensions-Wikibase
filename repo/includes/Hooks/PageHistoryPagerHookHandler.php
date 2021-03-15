@@ -58,12 +58,13 @@ class PageHistoryPagerHookHandler implements PageHistoryPager__doBatchLookupsHoo
 	}
 
 	public static function factory(
-		LanguageFallbackChainFactory $languageFallbackChainFactory
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		PrefetchingTermLookup $prefetchingTermLookup
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$wikibaseRepo->inFederatedPropertyMode(),
-			$wikibaseRepo->getPrefetchingTermLookup(),
+			$prefetchingTermLookup,
 			$wikibaseRepo->getLinkTargetEntityIdLookup(),
 			$languageFallbackChainFactory
 		);

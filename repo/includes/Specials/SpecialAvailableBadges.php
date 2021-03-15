@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Page for listing all available badges.
@@ -62,12 +61,11 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 	public static function factory(
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		PrefetchingTermLookup $prefetchingTermLookup,
 		SettingsArray $repoSettings
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		return new self(
-			$wikibaseRepo->getPrefetchingTermLookup(),
+			$prefetchingTermLookup,
 			$entityTitleLookup,
 			$languageFallbackChainFactory,
 			$repoSettings->getSetting( 'badgeItems' )

@@ -882,21 +882,19 @@ class WikibaseRepo {
 	 * @return TermBuffer|AliasTermBuffer
 	 */
 	public function getTermBuffer() {
-		return $this->getPrefetchingTermLookup();
+		return self::getPrefetchingTermLookup();
 	}
 
 	/**
 	 * @return TermLookup
 	 */
 	public function getTermLookup() {
-		return $this->getPrefetchingTermLookup();
+		return self::getPrefetchingTermLookup();
 	}
 
-	/**
-	 * @return PrefetchingTermLookup
-	 */
-	public function getPrefetchingTermLookup() {
-		return self::getWikibaseServices()->getTermBuffer();
+	public static function getPrefetchingTermLookup( ContainerInterface $services = null ): PrefetchingTermLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.PrefetchingTermLookup' );
 	}
 
 	public function getItemUrlParser(): SuffixEntityIdParser {
@@ -1797,6 +1795,13 @@ class WikibaseRepo {
 	public static function getPropertyValueExpertsModule( ContainerInterface $services = null ): PropertyValueExpertsModule {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.PropertyValueExpertsModule' );
+	}
+
+	// DO NOT USE THIS SERVICE! This is just a temporary convenience placeholder until we finish migrating
+	// SingleEntitySourceServices. Will be removed with T277731
+	public static function getSingleEntitySourceServicesFactory( ContainerInterface $services = null ): callable {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.SingleEntitySourceServicesFactory' );
 	}
 
 	public static function getWikibaseServices( ContainerInterface $services = null ): WikibaseServices {

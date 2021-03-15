@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\Diff\Hook\DifferenceEngineViewHeaderHook;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
@@ -56,14 +57,15 @@ class DifferenceEngineViewHeaderHookHandler implements DifferenceEngineViewHeade
 	}
 
 	public static function factory(
-		LanguageFallbackChainFactory $languageFallbackChainFactory
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		PrefetchingTermLookup $prefetchingTermLookup
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$wikibaseRepo->inFederatedPropertyMode(),
 			$languageFallbackChainFactory,
 			$wikibaseRepo->getLinkTargetEntityIdLookup(),
-			new SummaryParsingPrefetchHelper( $wikibaseRepo->getPrefetchingTermLookup() )
+			new SummaryParsingPrefetchHelper( $prefetchingTermLookup )
 		);
 	}
 
