@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use HtmlCacheUpdater;
 use HttpError;
 use Psr\Log\LoggerInterface;
+use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Lib\SettingsArray;
@@ -58,6 +59,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 	public static function factory(
 		HtmlCacheUpdater $htmlCacheUpdater,
 		SerializerFactory $compactBaseDataModelSerializerFactory,
+		Serializer $compactEntitySerializer,
 		EntityContentFactory $entityContentFactory,
 		EntityIdParser $entityIdParser,
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
@@ -85,7 +87,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$entityRdfBuilderFactory,
 			$entityDataFormatProvider,
 			$compactBaseDataModelSerializerFactory,
-			$wikibaseRepo->getCompactEntitySerializer(),
+			$compactEntitySerializer,
 			$wikibaseRepo->getSiteLookup(),
 			$rdfVocabulary
 		);

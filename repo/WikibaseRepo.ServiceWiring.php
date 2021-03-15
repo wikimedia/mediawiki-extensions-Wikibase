@@ -158,6 +158,19 @@ return [
 		);
 	},
 
+	'WikibaseRepo.CompactEntitySerializer' => function ( MediaWikiServices $services ): Serializer {
+		$serializerFactoryCallbacks = WikibaseRepo::getEntityTypeDefinitions( $services )
+			->get( EntityTypeDefinitions::SERIALIZER_FACTORY_CALLBACK );
+		$baseSerializerFactory = WikibaseRepo::getCompactBaseDataModelSerializerFactory( $services );
+		$serializers = [];
+
+		foreach ( $serializerFactoryCallbacks as $callback ) {
+			$serializers[] = $callback( $baseSerializerFactory );
+		}
+
+		return new DispatchingSerializer( $serializers );
+	},
+
 	'WikibaseRepo.ContentModelMappings' => function ( MediaWikiServices $services ): array {
 		$map = WikibaseRepo::getEntityTypeDefinitions( $services )
 			->get( EntityTypeDefinitions::CONTENT_MODEL_ID );

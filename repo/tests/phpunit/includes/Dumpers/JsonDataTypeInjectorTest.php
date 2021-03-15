@@ -42,7 +42,7 @@ class JsonDataTypeInjectorTest extends TestCase {
 	 * @dataProvider entityProvider
 	 */
 	public function testShouldInjectDatatypesInSerialization( $entityDocument ) {
-		$serializer = WikibaseRepo::getDefaultInstance()->getCompactEntitySerializer();
+		$serializer = WikibaseRepo::getCompactEntitySerializer();
 		$serializedData = $serializer->serialize( $entityDocument );
 		$injector = new JsonDataTypeInjector(
 			new SerializationModifier(),

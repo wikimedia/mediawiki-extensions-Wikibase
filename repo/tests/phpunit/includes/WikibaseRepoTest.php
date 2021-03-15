@@ -18,7 +18,6 @@ use MediaWikiIntegrationTestCase;
 use ReflectionClass;
 use ReflectionMethod;
 use RequestContext;
-use Serializers\Serializer;
 use User;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -469,11 +468,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetInternalFormatEntityDeserializer() {
 		$deserializer = $this->getWikibaseRepo()->getInternalFormatEntityDeserializer();
 		$this->assertInstanceOf( Deserializer::class, $deserializer );
-	}
-
-	public function testGetCompactEntitySerializer() {
-		$serializer = $this->getWikibaseRepo()->getCompactEntitySerializer();
-		$this->assertInstanceOf( Serializer::class, $serializer );
 	}
 
 	public function testGetInternalFormatStatementDeserializer() {

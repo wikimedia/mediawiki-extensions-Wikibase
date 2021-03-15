@@ -1262,18 +1262,19 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return Serializer Entity serializer that generates the full (expanded) serialization.
+	 * Entity serializer that generates the full (expanded) serialization.
 	 */
-	public static function getAllTypesEntitySerializer( ContainerInterface $services = null ) {
+	public static function getAllTypesEntitySerializer( ContainerInterface $services = null ): Serializer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.AllTypesEntitySerializer' );
 	}
 
 	/**
-	 * @return Serializer Entity serializer that generates the most compact serialization.
+	 * Entity serializer that generates the most compact serialization.
 	 */
-	public function getCompactEntitySerializer() {
-		return self::getWikibaseServices()->getCompactEntitySerializer();
+	public static function getCompactEntitySerializer( ContainerInterface $services = null ): Serializer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.CompactEntitySerializer' );
 	}
 
 	/**
@@ -1617,7 +1618,7 @@ class WikibaseRepo {
 			// FIXME: Should this be done for all usages of this lookup, or is the impact of
 			// CachingPropertyInfoLookup enough?
 			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
-			$this->getCompactEntitySerializer(),
+			self::getCompactEntitySerializer(),
 			new EntityReferenceExtractorDelegator(
 				self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_REFERENCE_EXTRACTOR_CALLBACK ),
 				new StatementEntityReferenceExtractor( $this->getItemUrlParser() )
