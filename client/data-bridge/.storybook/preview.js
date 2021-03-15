@@ -1,6 +1,3 @@
-import { addDecorator, addParameters } from '@storybook/vue';
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import extendVueEnvironment from '@/presentation/extendVueEnvironment';
 import './storybook-global.scss';
 import Vue from 'vue';
@@ -10,22 +7,20 @@ Vue.config.warnHandler = ( err, _vm, trace ) => {
 	throw new Error( err + trace );
 };
 
-addDecorator( withA11y );
+export const decorators = [
+	() => ( {
+		template: '<div class="wb-db-app"><story/></div>',
+	} ),
+];
 
-addDecorator( withKnobs );
-
-addDecorator( () => ( {
-	template: '<div class="wb-db-app"><story/></div>',
-} ) );
-
-addParameters( {
+export const parameters = {
 	docs: {
 		inlineStories: true,
 	},
 	knobs: {
 		disableDebounce: true,
 	},
-} );
+};
 
 extendVueEnvironment(
 	{
