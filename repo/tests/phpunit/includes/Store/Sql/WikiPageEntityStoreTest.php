@@ -12,14 +12,12 @@ use MediaWiki\Revision\RevisionStore;
 use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use RawMessage;
-use ReflectionClass;
 use Serializers\Serializer;
 use Status;
 use Title;
 use User;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -348,40 +346,20 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$item = new Item();
 		$item->setLabel( 'en', 'ahaha' );
 
-		$wikibaseRepo = TestingAccessWrapper::newFromObject( WikibaseRepo::getDefaultInstance() );
-		$oldWikibaseServices = $wikibaseRepo->getWikibaseServices();
-
 		// This serializer will yield different (but valid) serializations
 		// for the same content by appending junk.
-		$storageEntitySerializer = $this->createMock( Serializer::class );
-		$storageEntitySerializer->method( 'serialize' )
-			->willReturnCallback( function( $object ) use ( $oldWikibaseServices ) {
+		$realSerializer = WikibaseRepo::getStorageEntitySerializer();
+		$mockSerializer = $this->createMock( Serializer::class );
+		$mockSerializer->method( 'serialize' )
+			->willReturnCallback( function( $object ) use ( $realSerializer ) {
 				static $c = 0;
 
-				return $oldWikibaseServices->getStorageEntitySerializer()->serialize( $object )
+				return $realSerializer->serialize( $object )
 					+ [ 'serializationArtifact' => $c++ ];
 			} );
 
-		$wikibaseServices = $this->createMock( WikibaseServices::class );
+		$this->setService( 'WikibaseRepo.StorageEntitySerializer', $mockSerializer );
 
-		// Point all WikibaseServices mock methods we don't care about to the real methods
-		$wikibaseServiceMethods = ( new ReflectionClass( WikibaseServices::class ) )->getMethods();
-		foreach ( $wikibaseServiceMethods as $method ) {
-			$method = $method->name;
-			if ( $method === 'getStorageEntitySerializer' ) {
-				continue;
-			}
-
-			$wikibaseServices->method( $method )
-				->willReturnCallback( function( ...$args ) use ( $oldWikibaseServices, $method ) {
-					return $oldWikibaseServices->$method( ...$args );
-				} );
-		}
-
-		$wikibaseServices->method( 'getStorageEntitySerializer' )
-			->willReturn( $storageEntitySerializer );
-
-		$wikibaseRepo->wikibaseServices = $wikibaseServices;
 		ContentHandler::cleanupHandlersCache();
 
 		/**
@@ -405,7 +383,6 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		// Even though the serialization (and thus the sha1) differs, we
 		// don't let the edit through as the underlying content didn't change.
 		$r2 = $store->saveEntity( $item, 'null edit', $user, EDIT_UPDATE );
-		$wikibaseRepo->wikibaseServices = null;
 
 		$this->assertSame( $r1->getRevisionId(), $r2->getRevisionId() );
 	}

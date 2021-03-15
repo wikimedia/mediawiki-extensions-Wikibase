@@ -29,6 +29,7 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
+use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
@@ -372,6 +373,7 @@ return [
 				WikibaseClient::getDataAccessSettings( $services ),
 				$source,
 				WikibaseClient::getLanguageFallbackChainFactory( $services ),
+				new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
 				$entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
 				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
 				$entityTypeDefinitions->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK ),
