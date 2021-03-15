@@ -444,7 +444,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		);
 
 		if ( !( $statement instanceof Statement ) ) {
-			$statementDeserializer = WikibaseRepo::getDefaultInstance()->getExternalFormatStatementDeserializer();
+			$statementDeserializer = WikibaseRepo::getExternalFormatStatementDeserializer();
 			$statement = $statementDeserializer->deserialize( $statement );
 		}
 

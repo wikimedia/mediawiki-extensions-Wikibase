@@ -10,6 +10,7 @@ use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnknownValue;
+use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\DispatchingDeserializer;
 use MediaWiki\Logger\LoggerFactory;
@@ -407,6 +408,10 @@ return [
 				WikibaseRepo::getEntityTitleLookup( $services )
 			)
 		);
+	},
+
+	'WikibaseRepo.ExternalFormatStatementDeserializer' => function ( MediaWikiServices $services ): Deserializer {
+		return WikibaseRepo::getBaseDataModelDeserializerFactory( $services )->newStatementDeserializer();
 	},
 
 	'WikibaseRepo.IdGenerator' => function ( MediaWikiServices $services ): IdGenerator {
