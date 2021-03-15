@@ -142,7 +142,7 @@ return call_user_func( function() {
 				[
 					'name' => 'termLanguages.json',
 					'callback' => function () {
-						return WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages();
+						return WikibaseRepo::getTermsLanguages()->getLanguages();
 					},
 				]
 			],

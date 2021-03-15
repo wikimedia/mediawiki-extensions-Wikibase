@@ -112,13 +112,14 @@ class EditEntity extends ModifyEntity {
 		string $moduleName,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityChangeOpProvider $entityChangeOpProvider,
-		EntityIdParser $entityIdParser
+		EntityIdParser $entityIdParser,
+		ContentLanguages $termsLanguages
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$mainModule,
 			$moduleName,
-			$wikibaseRepo->getTermsLanguages(),
+			$termsLanguages,
 			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$entityIdParser,
 			$dataTypeDefinitions->getTypeIds(),

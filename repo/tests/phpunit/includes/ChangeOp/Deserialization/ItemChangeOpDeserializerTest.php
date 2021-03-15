@@ -96,7 +96,7 @@ class ItemChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
 			$changeOpFactoryProvider->getStatementChangeOpFactory(),
 			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
-			new TermChangeOpSerializationValidator( $wikibaseRepo->getTermsLanguages() ),
+			new TermChangeOpSerializationValidator( WikibaseRepo::getTermsLanguages() ),
 			new SiteLinkBadgeChangeOpSerializationValidator(
 				WikibaseRepo::getEntityTitleLookup(),
 				[]

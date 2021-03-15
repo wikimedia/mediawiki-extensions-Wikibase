@@ -172,12 +172,12 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		EntityIdParser $entityIdParser,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		LoggerInterface $logger,
-		SettingsArray $settings
+		SettingsArray $settings,
+		ContentLanguages $termsLanguages
 	): self {
 		global $wgLang, $wgCookiePrefix;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$termLanguages = $wikibaseRepo->getTermsLanguages();
 		$babelUserLanguageLookup = new BabelUserLanguageLookup();
 		$entityViewChecker = new OutputPageEntityViewChecker( $entityContentFactory );
 
@@ -187,7 +187,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			$settings,
 			TemplateFactory::getDefaultInstance(),
 			$babelUserLanguageLookup,
-			$termLanguages,
+			$termsLanguages,
 			$wikibaseRepo->getEntityRevisionLookup(),
 			new LanguageNameLookup( $wgLang->getCode() ),
 			new OutputPageEntityIdReader(
@@ -199,7 +199,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			new OutputPageEditability(),
 			TermboxFlag::getInstance()->shouldRenderTermbox(),
 			new UserPreferredContentLanguagesLookup(
-				$termLanguages,
+				$termsLanguages,
 				$babelUserLanguageLookup,
 				$contentLanguage->getCode()
 			),

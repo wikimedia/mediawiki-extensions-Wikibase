@@ -647,6 +647,11 @@ return [
 		);
 	},
 
+	'WikibaseRepo.TermsLanguages' => function ( MediaWikiServices $services ): ContentLanguages {
+		return WikibaseRepo::getWikibaseContentLanguages( $services )
+			->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
+	},
+
 	'WikibaseRepo.TermStoreWriterFactory' => function ( MediaWikiServices $services ): TermStoreWriterFactory {
 		return new TermStoreWriterFactory(
 			WikibaseRepo::getLocalEntitySource( $services ),

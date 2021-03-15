@@ -72,7 +72,8 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	}
 
 	public static function factory(
-		EntityTitleLookup $entityTitleLookup
+		EntityTitleLookup $entityTitleLookup,
+		ContentLanguages $termsLanguages
 	): self {
 		global $wgLang;
 
@@ -85,7 +86,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$languageCode
 		);
 		return new self(
-			$wikibaseRepo->getTermsLanguages(),
+			$termsLanguages,
 			$languageNameLookup,
 			$itemDisambiguation,
 			new TypeDispatchingEntitySearchHelper(

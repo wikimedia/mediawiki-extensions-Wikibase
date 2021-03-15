@@ -410,7 +410,8 @@ class GetEntities extends ApiBase {
 				self::PARAM_ISMULTI => true,
 			],
 			'languages' => [
-				self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
+				// TODO inject TermsLanguages as a service
+				self::PARAM_TYPE => WikibaseRepo::getTermsLanguages()->getLanguages(),
 				self::PARAM_ISMULTI => true,
 			],
 			'languagefallback' => [
