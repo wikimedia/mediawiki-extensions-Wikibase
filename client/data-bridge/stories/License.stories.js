@@ -1,11 +1,15 @@
-import { storiesOf } from '@storybook/vue';
 import License from '@/presentation/components/License';
 
-storiesOf( 'License', module )
-	.addParameters( { component: License } )
-	.add( 'default', () => ( {
+export default {
+	title: 'License',
+	component: License,
+};
+
+export function normal() {
+	return {
 		components: { License },
 		template:
 			`<License
 			/>`,
-	} ) );
+	};
+}

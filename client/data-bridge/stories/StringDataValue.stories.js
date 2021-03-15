@@ -1,10 +1,13 @@
-import { storiesOf } from '@storybook/vue';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
 import loremIpsum from './loremIpsum';
 
-storiesOf( 'StringDataValue', module )
-	.addParameters( { component: StringDataValue } )
-	.add( 'basic', () => ( {
+export default {
+	title: 'StringDataValue',
+	component: StringDataValue,
+};
+
+export function basic() {
+	return {
 		data: () => ( {
 			sampleLabel: { value: 'lorem', language: 'la' },
 			sampleValue: { type: 'string', value: 'ipsum' },
@@ -23,9 +26,11 @@ storiesOf( 'StringDataValue', module )
 					:setDataValue="sampleSetter"
 				/>
 			</div>`,
-	} ) )
+	};
+}
 
-	.add( 'long values', () => ( {
+export function longValues() {
+	return {
 		data: () => ( {
 			sampleLabel: {
 				value: loremIpsum( 3, '-' ),
@@ -46,9 +51,11 @@ storiesOf( 'StringDataValue', module )
 			`<div>
 				<StringDataValue :label="sampleLabel" :dataValue="sampleValue" :setDataValue="sampleSetter"/>
 			</div>`,
-	} ) )
+	};
+}
 
-	.add( 'empty', () => ( {
+export function empty() {
+	return {
 		data: () => ( {
 			sampleLabel: { value: 'empty', language: 'en' },
 			sampleValue: { type: 'string', value: '' },
@@ -63,9 +70,11 @@ storiesOf( 'StringDataValue', module )
 			`<div>
 				<StringDataValue :label="sampleLabel" :dataValue="sampleValue" :setDataValue="sampleSetter"/>
 			</div>`,
-	} ) )
+	};
+}
 
-	.add( 'empty with placeholder', () => ( {
+export function emptyWithPlaceholder() {
+	return {
 		data: () => ( {
 			sampleLabel: { value: 'empty', language: 'en' },
 			sampleValue: { type: 'string', value: '' },
@@ -81,9 +90,11 @@ storiesOf( 'StringDataValue', module )
 			`<div>
 				<StringDataValue :label="sampleLabel" :dataValue="sampleValue" :placeholder="placeholder" :setDataValue="sampleSetter"/>
 			</div>`,
-	} ) )
+	};
+}
 
-	.add( 'maxlength=15', () => ( {
+export function maxlength15() {
+	return {
 		data: () => ( {
 			sampleLabel: { value: 'maxlength=15', language: 'en' },
 			sampleValue: { type: 'string', value: 'lorem ipsum' },
@@ -98,4 +109,5 @@ storiesOf( 'StringDataValue', module )
 			`<div>
 				<StringDataValue :label="sampleLabel" :dataValue="sampleValue" :setDataValue="sampleSetter" :maxlength="15"/>
 			</div>`,
-	} ) );
+	};
+}

@@ -1,14 +1,20 @@
-import { storiesOf } from '@storybook/vue';
 import ThankYou from '@/presentation/components/ThankYou';
 
-storiesOf( 'ThankYou', module )
-	.addParameters( { component: ThankYou } )
-	.add( 'default', () => ( {
+export default {
+	title: 'ThankYou',
+	component: ThankYou,
+};
+
+export function normal() {
+	return {
 		components: { ThankYou },
 		template:
 			'<ThankYou repoLink="https://example.com" />',
-	} ) )
-	.add( 'counting CTA clicks', () => ( {
+	};
+}
+
+export function countingCTAClicks() {
+	return {
 		components: { ThankYou },
 		data: () => ( {
 			clickCount: 0,
@@ -21,4 +27,5 @@ storiesOf( 'ThankYou', module )
 				/>
 				<p>You clicked the CTA {{ clickCount }} time(s) so far.</p>
 			</div>`,
-	} ) );
+	};
+}
