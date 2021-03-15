@@ -65,7 +65,7 @@
 			repoApi = new wb.api.RepoApi( mwApi, mw.config.get( 'wgUserLanguage' ) ),
 			userLanguages = wb.getUserLanguages(),
 			entityStore = buildEntityStore( repoApi, userLanguages[ 0 ] ),
-			contentLanguages = new wikibase.WikibaseContentLanguages(),
+			monolingualTextLanguages = wikibase.WikibaseContentLanguages.getMonolingualTextLanguages(),
 			formatterFactory = new ApiValueFormatterFactory(
 				new wb.api.FormatValueCaller(
 					repoApi,
@@ -107,7 +107,7 @@
 			toolbarFactory,
 			entityChangersFactory,
 			structureEditorFactory,
-			contentLanguages,
+			monolingualTextLanguages,
 			dataTypeStore,
 			new CachingEntityIdHtmlFormatter(
 				new DataValueBasedEntityIdHtmlFormatter( entityIdParser, htmlDataValueEntityIdFormatter )

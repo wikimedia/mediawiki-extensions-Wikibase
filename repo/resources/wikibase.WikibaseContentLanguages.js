@@ -7,7 +7,8 @@
 
 	var MODULE = wb;
 	var PARENT = util.ContentLanguages;
-	var contentLanguages = require( './contentLanguages.json' ).monolingualtext;
+	var monolingualTextLanguages = require( './contentLanguages.json' ).monolingualtext;
+	var termLanguages = require( './contentLanguages.json' ).term;
 
 	/**
 	 * @constructor
@@ -15,11 +16,19 @@
 	var SELF = MODULE.WikibaseContentLanguages = util.inherit(
 		'WbContentLanguages',
 		PARENT,
-		function () {
+		function ( contentLanguages ) {
 			this._languageCodes = contentLanguages;
 			this._languageMap = mw.config.get( 'wgULSLanguages' );
 		}
 	);
+
+	SELF.getMonolingualTextLanguages = function () {
+		return new SELF( monolingualTextLanguages );
+	};
+
+	SELF.getTermLanguages = function () {
+		return new SELF( termLanguages );
+	};
 
 	$.extend( SELF.prototype, {
 		/**

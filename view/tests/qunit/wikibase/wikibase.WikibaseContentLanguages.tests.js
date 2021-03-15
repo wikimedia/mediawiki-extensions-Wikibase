@@ -10,9 +10,10 @@
 	} );
 
 	QUnit.test( 'getAll', function ( assert ) {
-		var allLanguages = ( new wb.WikibaseContentLanguages() ).getAll();
+		var expectedLanguages = [ 'ar', 'de', 'en', 'ko' ],
+			allLanguages = ( new wb.WikibaseContentLanguages( expectedLanguages ) ).getAll();
 
-		[ 'ar', 'de', 'en', 'ko' ].forEach( function ( languageCode ) {
+		expectedLanguages.forEach( function ( languageCode ) {
 			assert.notStrictEqual( allLanguages.indexOf( languageCode ), -1 );
 		} );
 	} );
@@ -24,7 +25,7 @@
 		sandbox.stub( mw.config, 'get' ).returns( ulsLanguageMap );
 
 		assert.strictEqual(
-			( new wb.WikibaseContentLanguages() ).getName( 'eo' ),
+			( new wb.WikibaseContentLanguages( [ 'eo' ] ) ).getName( 'eo' ),
 			ulsLanguageMap.eo
 		);
 	} );
@@ -36,13 +37,29 @@
 
 		sandbox.stub( mw.config, 'get' ).returns( ulsLanguageMap );
 
-		var result = ( new wb.WikibaseContentLanguages() ).getAllPairs();
+		var result = ( new wb.WikibaseContentLanguages( [ 'en' ] ) ).getAllPairs();
 		assert.strictEqual(
 			result.en,
 			ulsLanguageMap.en
 		);
 
 		assert.notStrictEqual( result, ulsLanguageMap );
+	} );
+
+	QUnit.test( 'getMonolingualTextLanguages', function ( assert ) {
+		var allLanguages = ( wb.WikibaseContentLanguages.getMonolingualTextLanguages() ).getAll();
+
+		[ 'abe', 'de', 'en', 'ko' ].forEach( function ( languageCode ) {
+			assert.notStrictEqual( allLanguages.indexOf( languageCode ), -1 );
+		} );
+	} );
+
+	QUnit.test( 'getTermLanguages', function ( assert ) {
+		var allLanguages = ( wb.WikibaseContentLanguages.getTermLanguages() ).getAll();
+
+		[ 'bag', 'de', 'en', 'ko' ].forEach( function ( languageCode ) {
+			assert.notStrictEqual( allLanguages.indexOf( languageCode ), -1 );
+		} );
 	} );
 
 }( wikibase, sinon ) );
