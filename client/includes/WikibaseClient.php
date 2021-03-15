@@ -451,7 +451,7 @@ final class WikibaseClient {
 				self::getEntityIdParser(),
 				self::getEntityIdComposer(),
 				self::getEntityIdLookup(),
-				$this->getEntityNamespaceLookup(),
+				self::getEntityNamespaceLookup(),
 				self::getWikibaseServices(),
 				self::getSettings(),
 				$this->getDatabaseDomainNameOfLocalRepo(),
@@ -990,8 +990,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.PropertyOrderProvider' );
 	}
 
-	public function getEntityNamespaceLookup(): EntityNamespaceLookup {
-		return self::getWikibaseServices()->getEntityNamespaceLookup();
+	public static function getEntityNamespaceLookup( ContainerInterface $services = null ): EntityNamespaceLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.EntityNamespaceLookup' );
 	}
 
 	public function getDataAccessLanguageFallbackChain( Language $language ): TermLanguageFallbackChain {
