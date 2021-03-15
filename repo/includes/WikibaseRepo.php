@@ -6,7 +6,6 @@ use CentralIdLookup;
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
-use Deserializers\DispatchingDeserializer;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
 use Exception;
@@ -209,11 +208,6 @@ class WikibaseRepo {
 	 * @var PropertyDataTypeLookup|null
 	 */
 	private $propertyDataTypeLookup = null;
-
-	/**
-	 * @var Deserializer|null
-	 */
-	private $entityDeserializer = null;
 
 	/**
 	 * @var OutputFormatSnakFormatterFactory|null
@@ -1236,7 +1230,7 @@ class WikibaseRepo {
 		return new InternalDeserializerFactory(
 			self::getDataValueDeserializer(),
 			self::getEntityIdParser(),
-			$this->getAllTypesEntityDeserializer()
+			self::getAllTypesEntityDeserializer()
 		);
 	}
 
@@ -1260,25 +1254,12 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.CompactBaseDataModelSerializerFactory' );
 	}
 
-	/**
-	 * Returns a deserializer to deserialize entities in current serialization only.
-	 *
-	 * @return DispatchableDeserializer
-	 */
-	private function getAllTypesEntityDeserializer() {
-		if ( $this->entityDeserializer === null ) {
-			$deserializerFactoryCallbacks = self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK );
-			$baseDeserializerFactory = self::getBaseDataModelDeserializerFactory();
-			$deserializers = [];
-
-			foreach ( $deserializerFactoryCallbacks as $callback ) {
-				$deserializers[] = call_user_func( $callback, $baseDeserializerFactory );
-			}
-
-			$this->entityDeserializer = new DispatchingDeserializer( $deserializers );
-		}
-
-		return $this->entityDeserializer;
+	public static function getAllTypesEntityDeserializer(
+		ContainerInterface $services = null
+	): DispatchableDeserializer {
+		// Returns a deserializer to deserialize entities in current serialization only.
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.AllTypesEntityDeserializer' );
 	}
 
 	/**

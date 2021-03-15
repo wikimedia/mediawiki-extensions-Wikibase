@@ -10,6 +10,8 @@ use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnknownValue;
+use Deserializers\DispatchableDeserializer;
+use Deserializers\DispatchingDeserializer;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
@@ -104,6 +106,19 @@ use Wikimedia\ObjectFactory;
 
 /** @phpcs-require-sorted-array */
 return [
+
+	'WikibaseRepo.AllTypesEntityDeserializer' => function ( MediaWikiServices $services ): DispatchableDeserializer {
+		$deserializerFactoryCallbacks = WikibaseRepo::getEntityTypeDefinitions( $services )
+			->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK );
+		$baseDeserializerFactory = WikibaseRepo::getBaseDataModelDeserializerFactory( $services );
+		$deserializers = [];
+
+		foreach ( $deserializerFactoryCallbacks as $callback ) {
+			$deserializers[] = call_user_func( $callback, $baseDeserializerFactory );
+		}
+
+		return new DispatchingDeserializer( $deserializers );
+	},
 
 	'WikibaseRepo.AllTypesEntitySerializer' => function ( MediaWikiServices $services ): Serializer {
 		$serializerFactoryCallbacks = WikibaseRepo::getEntityTypeDefinitions( $services )
