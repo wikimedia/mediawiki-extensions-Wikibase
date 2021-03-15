@@ -109,6 +109,7 @@ class WikibaseContentLanguages {
 					'pap-aw', // T275682
 					'rmf', // T226701
 					'rwr', // T61905
+					'ryu', // T271215
 					'sjd', // T226701
 					'sje', // T146707
 					'sju', // T226701
