@@ -57,6 +57,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
+use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsAcquirer;
@@ -547,6 +548,19 @@ return [
 	'WikibaseRepo.PropertyTermsCollisionDetector' => function ( MediaWikiServices $services ): TermsCollisionDetector {
 		return WikibaseRepo::getTermsCollisionDetectorFactory( $services )
 			->getTermsCollisionDetector( Property::ENTITY_TYPE );
+	},
+
+	'WikibaseRepo.PropertyTermStoreWriter' => function ( MediaWikiServices $services ): EntityTermStoreWriter {
+		if ( !in_array(
+			Property::ENTITY_TYPE,
+			WikibaseRepo::getLocalEntitySource( $services )->getEntityTypes()
+		) ) {
+			return new ThrowingEntityTermStoreWriter();
+		}
+
+		return new PropertyTermStoreWriterAdapter(
+			WikibaseRepo::getTermStoreWriterFactory( $services )->newPropertyTermStoreWriter()
+		);
 	},
 
 	'WikibaseRepo.PropertyValueExpertsModule' => function ( MediaWikiServices $services ): PropertyValueExpertsModule {

@@ -53,7 +53,6 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
-use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
@@ -879,34 +878,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		if ( $method->getNumberOfRequiredParameters() === 0 ) {
 			$method->invoke( $wbRepo );
 		}
-	}
-
-	public function testGetPropertyTermStoreWriter_withLocalProperties() {
-		$repo = $this->getWikibaseRepo();
-		$writer = $repo->getPropertyTermStoreWriter();
-		$this->assertNotInstanceOf( ThrowingEntityTermStoreWriter::class, $writer );
-	}
-
-	public function testGetPropertyTermStoreWriter_withoutLocalProperties() {
-		$this->settings->setSetting( 'localEntitySourceName', 'test' );
-		$this->entitySourceDefinitions = new EntitySourceDefinitions(
-			[
-				new EntitySource(
-					'test',
-					false,
-					[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
-					'',
-					'',
-					'',
-					''
-				),
-			],
-			$this->entityTypeDefinitions
-		);
-
-		$repo = $this->getWikibaseRepo();
-		$writer = $repo->getPropertyTermStoreWriter();
-		$this->assertInstanceOf( ThrowingEntityTermStoreWriter::class, $writer );
 	}
 
 	public function entitySourceBasedFederationProvider() {
