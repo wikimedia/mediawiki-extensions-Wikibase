@@ -2,7 +2,8 @@
 
 namespace Wikibase\Lib;
 
-use Language;
+use MediaWiki\Languages\LanguageNameUtils;
+use MediaWiki\MediaWikiServices;
 
 /**
  * Provide languages supported as content languages based on MediaWiki's Language class.
@@ -13,10 +14,18 @@ use Language;
  */
 class MediaWikiContentLanguages implements ContentLanguages {
 
+	/** @var LanguageNameUtils */
+	private $languageNameUtils;
+
 	/**
 	 * @var string[]|null Array of language codes => language names.
 	 */
 	private $languageMap = null;
+
+	public function __construct( LanguageNameUtils $languageNameUtils = null ) {
+		$this->languageNameUtils = $languageNameUtils ?:
+			MediaWikiServices::getInstance()->getLanguageNameUtils();
+	}
 
 	/**
 	 * @return string[] Array of language codes supported as content language
@@ -39,7 +48,7 @@ class MediaWikiContentLanguages implements ContentLanguages {
 	 */
 	private function getLanguageMap() {
 		if ( $this->languageMap === null ) {
-			$this->languageMap = Language::fetchLanguageNames();
+			$this->languageMap = $this->languageNameUtils->getLanguageNames();
 		}
 
 		return $this->languageMap;

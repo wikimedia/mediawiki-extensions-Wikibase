@@ -771,7 +771,10 @@ return [
 	},
 
 	'WikibaseRepo.WikibaseContentLanguages' => function ( MediaWikiServices $services ): WikibaseContentLanguages {
-		return WikibaseContentLanguages::getDefaultInstance( $services->getHookContainer() );
+		return WikibaseContentLanguages::getDefaultInstance(
+			$services->getHookContainer(),
+			$services->getLanguageNameUtils()
+		);
 	},
 
 	'WikibaseRepo.WikibaseServices' => function ( MediaWikiServices $services ): WikibaseServices {
