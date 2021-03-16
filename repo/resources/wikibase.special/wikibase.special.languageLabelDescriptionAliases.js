@@ -3,11 +3,11 @@
  *
  * @license GPL-2.0-or-later
  */
-( function ( userLang, contentLanguages ) {
+( function ( userLang, getLanguageNameByCode ) {
 	'use strict';
 
 	$( function () {
-		var $lang, fields, fieldCount, availableLangs, langWidget;
+		var $lang, fields, fieldCount, langWidget;
 
 		$lang = $( document.getElementsByName( 'lang' ) ).closest( '.oo-ui-inputWidget' );
 		if ( $lang.length === 0 ) {
@@ -40,26 +40,21 @@
 			return;
 		}
 
-		availableLangs = contentLanguages.getLanguageNameMap() || {};
 		langWidget = OO.ui.infuse( $lang );
 		fields.forEach( function ( field ) {
 			field.$input = OO.ui.infuse( field.$element ).$input;
 		} );
 
 		function updatePlaceholders( languageCode ) {
-			var language = availableLangs[ languageCode ],
+			var languageName = getLanguageNameByCode( languageCode ) || '[' + languageCode + ']',
 				langDir = $.uls ? $.uls.data.getDir( languageCode ) : null;
-
-			if ( typeof language !== 'string' ) {
-				language = '[' + languageCode + ']';
-			}
 
 			fields.forEach( function ( field ) {
 				// The following messages can be used here:
 				// * wikibase-label-edit-placeholder-language-aware
 				// * wikibase-description-edit-placeholder-language-aware
 				// * wikibase-aliases-edit-placeholder-language-aware
-				field.$input.prop( 'placeholder', mw.msg( field.msgAware, language ) );
+				field.$input.prop( 'placeholder', mw.msg( field.msgAware, languageName ) );
 
 				if ( langDir ) {
 					field.$input.prop( 'dir', langDir );
@@ -72,4 +67,4 @@
 		langWidget.on( 'change', updatePlaceholders );
 	} );
 
-}( mw.config.values.wgUserLanguage, new window.wb.WikibaseContentLanguages() ) );
+}( mw.config.values.wgUserLanguage, wikibase.getLanguageNameByCode ) );
