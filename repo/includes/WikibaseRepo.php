@@ -32,10 +32,7 @@ use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\GenericServices;
-use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -231,11 +228,6 @@ class WikibaseRepo {
 	 * @var CachingCommonsMediaFileNameLookup|null
 	 */
 	private $cachingCommonsMediaFileNameLookup = null;
-
-	/**
-	 * @var WikibaseServices|null
-	 */
-	private $wikibaseServices = null;
 
 	/**
 	 * @var WikibaseRepo|null
@@ -640,7 +632,7 @@ class WikibaseRepo {
 	 * @return MatchingTermsLookupSearchInteractor
 	 */
 	public function newTermSearchInteractor( $displayLanguageCode ) {
-		return $this->getWikibaseServices()->getTermSearchInteractorFactory()->newInteractor(
+		return self::getWikibaseServices()->getTermSearchInteractorFactory()->newInteractor(
 			$displayLanguageCode
 		);
 	}
@@ -853,7 +845,7 @@ class WikibaseRepo {
 				self::getEntityTitleStoreLookup(),
 				$this->getEntityNamespaceLookup(),
 				self::getIdGenerator(),
-				$this->getWikibaseServices(),
+				self::getWikibaseServices(),
 				$localEntitySource
 			);
 		}
@@ -904,7 +896,7 @@ class WikibaseRepo {
 	 * @return PrefetchingTermLookup
 	 */
 	public function getPrefetchingTermLookup() {
-		return $this->getWikibaseServices()->getTermBuffer();
+		return self::getWikibaseServices()->getTermBuffer();
 	}
 
 	public function getItemUrlParser(): SuffixEntityIdParser {
@@ -1281,7 +1273,7 @@ class WikibaseRepo {
 	 * @return Serializer Entity serializer that generates the most compact serialization.
 	 */
 	public function getCompactEntitySerializer() {
-		return $this->getWikibaseServices()->getCompactEntitySerializer();
+		return self::getWikibaseServices()->getCompactEntitySerializer();
 	}
 
 	/**
@@ -1550,7 +1542,7 @@ class WikibaseRepo {
 	 * @return EntityNamespaceLookup
 	 */
 	public function getEntityNamespaceLookup() {
-		return $this->getWikibaseServices()->getEntityNamespaceLookup();
+		return self::getWikibaseServices()->getEntityNamespaceLookup();
 	}
 
 	public static function getLocalEntityNamespaceLookup( ContainerInterface $services = null ): EntityNamespaceLookup {
@@ -1819,42 +1811,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.PropertyValueExpertsModule' );
 	}
 
-	/**
-	 * @return WikibaseServices
-	 */
-	public function getWikibaseServices() {
-		if ( $this->wikibaseServices === null ) {
-			$this->wikibaseServices = $this->newEntitySourceWikibaseServices();
-		}
-
-		return $this->wikibaseServices;
-	}
-
-	private function newEntitySourceWikibaseServices() {
-		$nameTableStoreFactory = MediaWikiServices::getInstance()->getNameTableStoreFactory();
-		$entityTypeDefinitions = self::getEntityTypeDefinitions();
-		$genericServices = new GenericServices( $entityTypeDefinitions );
-
-		$singleSourceServices = [];
-		foreach ( self::getEntitySourceDefinitions()->getSources() as $source ) {
-			// TODO: extract
-			$singleSourceServices[$source->getSourceName()] = new SingleEntitySourceServices(
-				$genericServices,
-				self::getEntityIdParser(),
-				self::getEntityIdComposer(),
-				self::getDataValueDeserializer(),
-				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
-				self::getDataAccessSettings(),
-				$source,
-				self::getLanguageFallbackChainFactory(),
-				self::getStorageEntitySerializer(),
-				$entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
-				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
-				$entityTypeDefinitions->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK ),
-				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK )
-			);
-		}
-		return new MultipleEntitySourceServices( self::getEntitySourceDefinitions(), $genericServices, $singleSourceServices );
+	public static function getWikibaseServices( ContainerInterface $services = null ): WikibaseServices {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.WikibaseServices' );
 	}
 
 	public static function getDataAccessSettings( ContainerInterface $services = null ): DataAccessSettings {
