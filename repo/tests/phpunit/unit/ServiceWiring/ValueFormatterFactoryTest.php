@@ -21,7 +21,7 @@ class ValueFormatterFactoryTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.DataTypeDefinitions',
 			new DataTypeDefinitions( [] ) );
 		$this->mockService( 'WikibaseRepo.LanguageFallbackChainFactory',
-			new LanguageFallbackChainFactory() );
+			$this->createMock( LanguageFallbackChainFactory::class ) );
 
 		$this->assertInstanceOf(
 			OutputFormatValueFormatterFactory::class,
