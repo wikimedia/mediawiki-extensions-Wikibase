@@ -17,6 +17,10 @@
 		'WbContentLanguages',
 		PARENT,
 		function ( contentLanguages ) {
+			if ( !Array.isArray( contentLanguages ) ) {
+				throw new Error( 'Required parameter "contentLanguages" is not specified properly.' );
+			}
+
 			this._languageCodes = contentLanguages;
 			this._languageNameMap = mw.config.get( 'wgULSLanguages' );
 		}

@@ -9,6 +9,12 @@
 		}
 	} );
 
+	QUnit.test( 'constructor', function ( assert ) {
+		assert.throws( function () {
+			new wb.WikibaseContentLanguages(); // eslint-disable-line no-new
+		}, 'instantiated without a language list' );
+	} );
+
 	QUnit.test( 'getAll', function ( assert ) {
 		var expectedLanguages = [ 'ar', 'de', 'en', 'ko' ],
 			allLanguages = ( new wb.WikibaseContentLanguages( expectedLanguages ) ).getAll();
