@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataAccess;
 
-use Serializers\Serializer;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -21,13 +20,6 @@ interface WikibaseServices extends DataAccessServices {
 	 * @return EntityNamespaceLookup
 	 */
 	public function getEntityNamespaceLookup();
-
-	/**
-	 * Returns the entity serializer instance that generates the most compact serialization.
-	 *
-	 * @return Serializer
-	 */
-	public function getCompactEntitySerializer();
 
 	/**
 	 * Returns a service that can be registered as a watcher to changes to entity data.
