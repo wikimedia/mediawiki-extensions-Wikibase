@@ -66,6 +66,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param MediawikiEditEntityFactory $editEntityFactory
 	 * @param EntityPermissionChecker $permissionChecker
+	 * @param ContentLanguages $termsLanguages
 	 */
 	public function __construct(
 		$title,
@@ -73,7 +74,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediawikiEditEntityFactory $editEntityFactory,
-		EntityPermissionChecker $permissionChecker
+		EntityPermissionChecker $permissionChecker,
+		ContentLanguages $termsLanguages
 	) {
 		parent::__construct(
 			$title,
@@ -86,7 +88,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
-		$this->termsLanguages = $wikibaseRepo->getTermsLanguages();
+		$this->termsLanguages = $termsLanguages;
 		$this->permissionChecker = $permissionChecker;
 	}
 

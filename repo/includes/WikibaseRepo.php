@@ -783,7 +783,7 @@ class WikibaseRepo {
 			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
 			$changeOpFactoryProvider->getStatementChangeOpFactory(),
 			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
-			new TermChangeOpSerializationValidator( $this->getTermsLanguages() ),
+			new TermChangeOpSerializationValidator( self::getTermsLanguages() ),
 			self::getSiteLinkBadgeChangeOpSerializationValidator(),
 			self::getExternalFormatStatementDeserializer(),
 			new SiteLinkTargetProvider(
@@ -1058,7 +1058,7 @@ class WikibaseRepo {
 
 		$maxLength = $constraints['length'];
 
-		$languages = $this->getTermsLanguages()->getLanguages();
+		$languages = self::getTermsLanguages()->getLanguages();
 
 		return new TermValidatorFactory(
 			$maxLength,
@@ -1380,7 +1380,7 @@ class WikibaseRepo {
 	public function getFieldDefinitionsByType( $type ) {
 		$definitions = self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::SEARCH_FIELD_DEFINITIONS );
 		if ( isset( $definitions[$type] ) && is_callable( $definitions[$type] ) ) {
-			return call_user_func( $definitions[$type], $this->getTermsLanguages()->getLanguages(),
+			return call_user_func( $definitions[$type], self::getTermsLanguages()->getLanguages(),
 				self::getSettings() );
 		}
 		return new NoFieldDefinitions();
@@ -1701,11 +1701,10 @@ class WikibaseRepo {
 
 	/**
 	 * Get a ContentLanguages object holding the languages available for labels, descriptions and aliases.
-	 *
-	 * @return ContentLanguages
 	 */
-	public function getTermsLanguages() {
-		return self::getWikibaseContentLanguages()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
+	public static function getTermsLanguages( ContainerInterface $services = null ): ContentLanguages {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.TermsLanguages' );
 	}
 
 	/**

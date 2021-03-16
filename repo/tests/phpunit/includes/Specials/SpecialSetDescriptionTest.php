@@ -37,7 +37,8 @@ class SpecialSetDescriptionTest extends SpecialModifyTermTestCase {
 			$wikibaseRepo->getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
-			$wikibaseRepo->getEntityPermissionChecker()
+			$wikibaseRepo->getEntityPermissionChecker(),
+			WikibaseRepo::getTermsLanguages()
 		);
 	}
 

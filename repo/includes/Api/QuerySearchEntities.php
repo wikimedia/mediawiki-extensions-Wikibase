@@ -67,7 +67,8 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	public static function factory(
 		ApiQuery $apiQuery,
 		string $moduleName,
-		EntityTitleLookup $entityTitleLookup
+		EntityTitleLookup $entityTitleLookup,
+		ContentLanguages $termsLanguages
 	): self {
 		$repo = WikibaseRepo::getDefaultInstance();
 
@@ -79,7 +80,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 				$apiQuery->getRequest()
 			),
 			$entityTitleLookup,
-			$repo->getTermsLanguages(),
+			$termsLanguages,
 			$repo->getEnabledEntityTypes()
 		);
 	}

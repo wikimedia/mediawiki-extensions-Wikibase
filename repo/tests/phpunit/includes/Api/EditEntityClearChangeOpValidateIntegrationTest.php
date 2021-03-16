@@ -121,7 +121,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends MediaWikiIntegratio
 		return new EditEntity(
 			new \ApiMain( $request ),
 			'test',
-			$wikibaseRepo->getTermsLanguages(),
+			WikibaseRepo::getTermsLanguages(),
 			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			WikibaseRepo::getEntityIdParser(),
 			WikibaseRepo::getDataTypeDefinitions()->getTypeIds(),

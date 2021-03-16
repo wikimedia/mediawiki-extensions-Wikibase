@@ -44,7 +44,8 @@ abstract class ModifyTerm extends ModifyEntity {
 			parent::getAllowedParams(),
 			[
 				'language' => [
-					self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
+					// TODO inject TermsLanguages as a service
+					self::PARAM_TYPE => WikibaseRepo::getTermsLanguages()->getLanguages(),
 					self::PARAM_REQUIRED => true,
 				],
 				'value' => [

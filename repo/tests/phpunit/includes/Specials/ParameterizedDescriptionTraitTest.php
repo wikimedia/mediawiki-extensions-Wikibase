@@ -118,7 +118,8 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( SummaryFormatter::class ),
 			$this->createMock( EntityTitleLookup::class ),
 			$this->createMock( MediawikiEditEntityFactory::class ),
-			$this->createMock( EntityPermissionChecker::class )
+			$this->createMock( EntityPermissionChecker::class ),
+			$this->createMock( ContentLanguages::class )
 		);
 	}
 
@@ -128,7 +129,8 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( SummaryFormatter::class ),
 			$this->createMock( EntityTitleLookup::class ),
 			$this->createMock( MediawikiEditEntityFactory::class ),
-			$this->createMock( EntityPermissionChecker::class )
+			$this->createMock( EntityPermissionChecker::class ),
+			$this->createMock( ContentLanguages::class )
 		);
 	}
 
@@ -138,7 +140,8 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( SummaryFormatter::class ),
 			$this->createMock( EntityTitleLookup::class ),
 			$this->createMock( MediawikiEditEntityFactory::class ),
-			$this->createMock( EntityPermissionChecker::class )
+			$this->createMock( EntityPermissionChecker::class ),
+			$this->createMock( ContentLanguages::class )
 		);
 	}
 

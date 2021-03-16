@@ -221,7 +221,8 @@ class SetAliases extends ModifyEntity {
 					self::PARAM_ISMULTI => true,
 				],
 				'language' => [
-					self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
+					// TODO inject TermsLanguages as a service
+					self::PARAM_TYPE => WikibaseRepo::getTermsLanguages()->getLanguages(),
 					self::PARAM_REQUIRED => true,
 				],
 				'new' => [

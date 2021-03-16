@@ -31,7 +31,8 @@
 			"services": [
 				"WikibaseRepo.DataTypeDefinitions",
 				"WikibaseRepo.EntityChangeOpProvider",
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.TermsLanguages"
 			]
 		},
 		"wbcreateredirect": {
@@ -137,7 +138,8 @@
 				"WikibaseRepo.EntityArticleIdLookup",
 				"WikibaseRepo.EntitySourceDefinitions",
 				"WikibaseRepo.EntityTitleTextLookup",
-				"WikibaseRepo.EntityUrlLookup"
+				"WikibaseRepo.EntityUrlLookup",
+				"WikibaseRepo.TermsLanguages"
 			]
 		},
 		"wbsetaliases": {
@@ -207,7 +209,8 @@
 			"class": "\\Wikibase\\Repo\\Api\\QuerySearchEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\QuerySearchEntities::factory",
 			"services": [
-				"WikibaseRepo.EntityTitleLookup"
+				"WikibaseRepo.EntityTitleLookup",
+				"WikibaseRepo.TermsLanguages"
 			]
 		},
 		"wbsubscribers": {
@@ -278,7 +281,8 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation::factory",
 			"services": [
-				"WikibaseRepo.EntityTitleLookup"
+				"WikibaseRepo.EntityTitleLookup",
+				"WikibaseRepo.TermsLanguages"
 			]
 		},
 		"ItemsWithoutSitelinks": "Wikibase\\Repo\\Specials\\SpecialItemsWithoutSitelinks",
@@ -287,7 +291,8 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabel::factory",
 			"services": [
 				"WikibaseRepo.EntityTitleLookup",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.TermsLanguages"
 			]
 		},
 		"SetDescription": {
@@ -295,7 +300,8 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetDescription::factory",
 			"services": [
 				"WikibaseRepo.EntityTitleLookup",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.TermsLanguages"
 			]
 		},
 		"SetAliases": {
@@ -303,7 +309,8 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetAliases::factory",
 			"services": [
 				"WikibaseRepo.EntityTitleLookup",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.TermsLanguages"
 			]
 		},
 		"SetLabelDescriptionAliases": {
@@ -311,7 +318,8 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases::factory",
 			"services": [
 				"WikibaseRepo.EntityTitleLookup",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.TermsLanguages"
 			]
 		},
 		"SetSiteLink": {
@@ -681,7 +689,8 @@
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.Logger",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.TermsLanguages"
 			]
 		},
 		"OutputPageJsConfig": {

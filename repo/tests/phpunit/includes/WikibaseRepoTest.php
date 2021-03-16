@@ -33,7 +33,6 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
@@ -591,11 +590,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$service = $repo->getTermBuffer();
 		$this->assertSame( $service, $repo->getTermBuffer(), 'Second call should return same instance' );
 		$this->assertSame( $service, $repo->getTermLookup(), 'TermBuffer and TermLookup should be the same object' );
-	}
-
-	public function testGetTermsLanguages() {
-		$service = $this->getWikibaseRepo()->getTermsLanguages();
-		$this->assertInstanceOf( ContentLanguages::class, $service );
 	}
 
 	public function testNewPropertyInfoBuilder() {
