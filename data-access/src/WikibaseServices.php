@@ -40,13 +40,6 @@ interface WikibaseServices extends DataAccessServices {
 
 	/**
 	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
-	 *  they are made of, but no other entity types. Returns serializers that generate the full
-	 *  (expanded) serialization.
-	 */
-	public function getBaseDataModelSerializerFactory();
-
-	/**
-	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
 	 *  they are made of, but no other entity types. Returns serializers that generate the most
 	 *  compact serialization.
 	 */

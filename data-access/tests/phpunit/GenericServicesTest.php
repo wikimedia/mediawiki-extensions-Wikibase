@@ -30,11 +30,6 @@ class GenericServicesTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $serializerOne, $serializerTwo );
 	}
 
-	public function testGetSerializerFactory() {
-		$services = $this->newGenericServices();
-		$this->assertInstanceOf( SerializerFactory::class, $services->getBaseDataModelSerializerFactory() );
-	}
-
 	public function testGetCompactSerializerFactory() {
 		$services = $this->newGenericServices();
 		$this->assertInstanceOf( SerializerFactory::class, $services->getCompactBaseDataModelSerializerFactory() );
