@@ -54,15 +54,6 @@ class GenericServices {
 	}
 
 	/**
-	 * @return SerializerFactory Factory creating serializers that generate the full (expanded) serialization.
-	 * The factory returned has the knowledge about items, properties, and the elements they are made of,
-	 * but not about other entity types.
-	 */
-	public function getBaseDataModelSerializerFactory() {
-		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT );
-	}
-
-	/**
 	 * @return SerializerFactory Factory creating serializers that generate the most compact serialization.
 	 * The factory returned has the knowledge about items, properties, and the elements they are made of,
 	 * but not about other entity types.
