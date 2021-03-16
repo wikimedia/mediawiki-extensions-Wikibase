@@ -33,6 +33,8 @@ use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\DataAccess\PrefetchingTermLookupFactory;
+use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -890,6 +892,13 @@ class WikibaseRepo {
 	 */
 	public function getTermLookup() {
 		return self::getPrefetchingTermLookup();
+	}
+
+	public static function getPrefetchingTermLookupFactory(
+		ContainerInterface $services = null
+	): PrefetchingTermLookupFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.PrefetchingTermLookupFactory' );
 	}
 
 	public static function getPrefetchingTermLookup( ContainerInterface $services = null ): PrefetchingTermLookup {
@@ -1799,7 +1808,7 @@ class WikibaseRepo {
 
 	// DO NOT USE THIS SERVICE! This is just a temporary convenience placeholder until we finish migrating
 	// SingleEntitySourceServices. Will be removed with T277731
-	public static function getSingleEntitySourceServicesFactory( ContainerInterface $services = null ): callable {
+	public static function getSingleEntitySourceServicesFactory( ContainerInterface $services = null ): SingleEntitySourceServicesFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.SingleEntitySourceServicesFactory' );
 	}
