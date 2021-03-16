@@ -122,13 +122,8 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		);
 	}
 
-	/**
-	 * @return EntityNamespaceLookup
-	 */
-	private function getEntityNamespaceLookup() {
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
-
-		return $entityNamespaceLookup;
+	private function getEntityNamespaceLookup(): EntityNamespaceLookup {
+		return WikibaseRepo::getEntityNamespaceLookup();
 	}
 
 	protected function resolveLogicalRevision( $revision ) {

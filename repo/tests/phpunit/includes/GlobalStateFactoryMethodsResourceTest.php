@@ -9,11 +9,9 @@ use FauxRequest;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
-use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
-use Wikimedia\TestingAccessWrapper;
 
 /**
  * Test to assert that factory methods of hook service classes (and similar services)
@@ -157,11 +155,6 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 		foreach ( $this->provideSpecialPageNames() as [ $specialPageName ] ) {
 			yield "SpecialPages/$specialPageName" => $this->getExtensionJson()['SpecialPages'][$specialPageName];
 		}
-	}
-
-	public function testOutputPageJsConfigHookHandler(): void {
-		TestingAccessWrapper::newFromClass( OutputPageJsConfigHookHandler::class )
-			->factory();
 	}
 
 	public function testTermboxFlag(): void {

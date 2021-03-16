@@ -40,14 +40,13 @@ class PruneItemsPerSite extends Maintenance {
 			$this->fatalError( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
 		}
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		if ( !in_array( Item::ENTITY_TYPE, WikibaseRepo::getLocalEntitySource()->getEntityTypes() ) ) {
 			$this->fatalError(
 				"This script assumes Items to be part of the local entity source."
 			);
 		}
 
-		$itemNamespace = $wikibaseRepo->getEntityNamespaceLookup()->getEntityNamespace( Item::ENTITY_TYPE );
+		$itemNamespace = WikibaseRepo::getEntityNamespaceLookup()->getEntityNamespace( Item::ENTITY_TYPE );
 
 		$loadBalancerFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		$selectBatchSize = (int)$this->getOption( 'select-batch-size', 100000 );

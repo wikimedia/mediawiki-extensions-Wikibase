@@ -246,6 +246,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialNewItem",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialNewItem::factory",
 			"services": [
+				"WikibaseRepo.EntityNamespaceLookup",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.ItemTermsCollisionDetector",
 				"WikibaseRepo.Settings"
@@ -256,6 +257,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialNewProperty::factory",
 			"services": [
 				"WikibaseRepo.DataTypeFactory",
+				"WikibaseRepo.EntityNamespaceLookup",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.PropertyTermsCollisionDetector",
 				"WikibaseRepo.Settings"
@@ -663,6 +665,7 @@
 				"SpecialPageFactory",
 				"WikibaseRepo.EntityExistenceChecker",
 				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.EntityNamespaceLookup",
 				"WikibaseRepo.EntityUrlLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.Settings"
@@ -696,7 +699,11 @@
 		},
 		"OutputPageJsConfig": {
 			"class": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler",
-			"factory": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler::factory"
+			"factory": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler::factory",
+			"services": [
+				"WikibaseRepo.EntityNamespaceLookup",
+				"WikibaseRepo.Settings"
+			]
 		},
 		"PageHistoryPagerHookHandler": {
 			"class": "\\Wikibase\\Repo\\Hooks\\PageHistoryPagerHookHandler",

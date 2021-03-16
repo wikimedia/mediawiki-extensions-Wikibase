@@ -108,7 +108,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		//NOTE: we want to test integration of WikiPageEntityRevisionLookup and WikiPageEntityStore here!
 		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
 
-		$nsLookup = $wikibaseRepo->getEntityNamespaceLookup();
+		$nsLookup = WikibaseRepo::getEntityNamespaceLookup();
 
 		$localSource = new EntitySource(
 			'local',

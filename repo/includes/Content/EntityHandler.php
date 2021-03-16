@@ -448,7 +448,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return int
 	 */
 	final public function getEntityNamespace() {
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 
 		$ns = $entityNamespaceLookup->getEntityNamespace( $this->getEntityType() );
 
@@ -466,7 +466,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return string the role name of the slot
 	 */
 	final public function getEntitySlotRole() {
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 
 		return $entityNamespaceLookup->getEntitySlotRole( $this->getEntityType() );
 	}

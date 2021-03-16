@@ -329,6 +329,19 @@ return [
 		);
 	},
 
+	'WikibaseRepo.EntityNamespaceLookup' => function ( MediaWikiServices $services ): EntityNamespaceLookup {
+		return array_reduce(
+			WikibaseRepo::getEntitySourceDefinitions( $services )->getSources(),
+			function ( EntityNamespaceLookup $nsLookup, EntitySource $source ): EntityNamespaceLookup {
+				return $nsLookup->merge( new EntityNamespaceLookup(
+					$source->getEntityNamespaceIds(),
+					$source->getEntitySlotNames()
+				) );
+			},
+			new EntityNamespaceLookup( [], [] )
+		);
+	},
+
 	'WikibaseRepo.EntityPatcher' => function ( MediaWikiServices $services ): EntityPatcher {
 		$entityPatcher = new EntityPatcher();
 		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );

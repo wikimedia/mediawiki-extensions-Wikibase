@@ -87,7 +87,7 @@ class RebuildItemsPerSite extends Maintenance {
 			$stream->setExceptionHandler( new ReportingExceptionHandler( $reporter ) );
 		} else {
 			$stream = new SqlEntityIdPager(
-				$wikibaseRepo->getEntityNamespaceLookup(),
+				WikibaseRepo::getEntityNamespaceLookup(),
 				WikibaseRepo::getEntityIdLookup( $mwServices ),
 				[ 'item' ]
 			);

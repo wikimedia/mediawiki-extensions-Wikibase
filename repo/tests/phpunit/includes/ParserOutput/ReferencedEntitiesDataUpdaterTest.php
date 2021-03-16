@@ -108,12 +108,8 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	/**
-	 * @param string $entityType
-	 * @return int|null
-	 */
-	private function getEntityNamespace( $entityType ) {
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+	private function getEntityNamespace( string $entityType ): ?int {
+		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 
 		return $entityNamespaceLookup->getEntityNamespace( $entityType );
 	}
