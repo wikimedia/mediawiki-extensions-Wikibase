@@ -309,6 +309,29 @@ $specialPageAliases['lrc'] = [
 	'SetSiteLink' => [ 'میزوٙنکاری_ھوم_پئیڤأند_دیارگھ' ],
 ];
 
+/** Norwegian Bokmål (norsk bokmål) */
+$specialPageAliases['nb'] = [
+	'AvailableBadges' => [ 'Tilgjengelige_merker' ],
+	'EntityData' => [ 'Entitetsdata' ],
+	'EntityPage' => [ 'Entitetsside' ],
+	'GoToLinkedPage' => [ 'Gå_til_lenket_side', 'Gå_til_lenka_side' ],
+	'ItemByTitle' => [ 'Element_etter_tittel' ],
+	'ItemDisambiguation' => [ 'Elementpeker' ],
+	'ItemsWithoutSitelinks' => [ 'Elementer_uten_sidelenker' ],
+	'ListDatatypes' => [ 'Liste_over_datatyper' ],
+	'ListProperties' => [ 'Liste_over_egenskaper' ],
+	'MergeItems' => [ 'Slå_sammen_elementer' ],
+	'MyLanguageFallbackChain' => [ 'Min_språktilbakefallskjede' ],
+	'NewItem' => [ 'Opprett_element', 'Nytt_element' ],
+	'NewProperty' => [ 'Opprett_egenskap', 'Ny_egenskap' ],
+	'RedirectEntity' => [ 'Omdiriger_entitet', 'Entitetsomdirigering', 'Omdiriger_element', 'Elementomdirigering' ],
+	'SetAliases' => [ 'Sett_aliaser' ],
+	'SetDescription' => [ 'Sett_beskrivelse' ],
+	'SetLabel' => [ 'Sett_etikett' ],
+	'SetLabelDescriptionAliases' => [ 'Sett_etikett,_beskrivelse_og_alias' ],
+	'SetSiteLink' => [ 'Sett_sidelenke' ],
+];
+
 /** Macedonian (македонски) */
 $specialPageAliases['mk'] = [
 	'DispatchStats' => [ 'СтатистикиСпроведување' ],
@@ -348,6 +371,29 @@ $specialPageAliases['nl'] = [
 	'SetLabel' => [ 'LabelInstellen' ],
 	'SetLabelDescriptionAliases' => [ 'LabelbeschrijvingsaliassenInstellen' ],
 	'SetSiteLink' => [ 'SitekoppelingInstellen' ],
+];
+
+/** Norwegian Nynorsk (norsk nynorsk) */
+$specialPageAliases['nn'] = [
+	'AvailableBadges' => [ 'Tilgjengelige_merke' ],
+	'EntityData' => [ 'Entitetsdata' ],
+	'EntityPage' => [ 'Entitetsside' ],
+	'GoToLinkedPage' => [ 'Gå_til_lenkja_side', 'Gå_til_lenka_side' ],
+	'ItemByTitle' => [ 'Element_etter_tittel' ],
+	'ItemDisambiguation' => [ 'Elementpeikar' ],
+	'ItemsWithoutSitelinks' => [ 'Element_utan_sidelenkjer' ],
+	'ListDatatypes' => [ 'Liste_over_datatypar' ],
+	'ListProperties' => [ 'Liste_over_eigenskapar' ],
+	'MergeItems' => [ 'Slå_saman_element' ],
+	'MyLanguageFallbackChain' => [ 'Kjeda_mi_av_reservespråk' ],
+	'NewItem' => [ 'Opprett_element', 'Nytt_element' ],
+	'NewProperty' => [ 'Opprett_eigenskap', 'Ny_eigenskap' ],
+	'RedirectEntity' => [ 'Omdiriger_entitet', 'Entitetsomdirigering', 'Omdiriger_element', 'Elementomdirigering' ],
+	'SetAliases' => [ 'Sett_aliasar' ],
+	'SetDescription' => [ 'Sett_skildring' ],
+	'SetLabel' => [ 'Sett_etikett' ],
+	'SetLabelDescriptionAliases' => [ 'Sett_etikett,_skildring_og_alias' ],
+	'SetSiteLink' => [ 'Sett_sidelenkje' ],
 ];
 
 /** Sicilian (sicilianu) */

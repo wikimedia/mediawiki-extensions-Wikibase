@@ -104,10 +104,24 @@ $specialPageAliases['mk'] = [
 	'UnconnectedPages' => [ 'НесврзаниСтраници' ],
 ];
 
+/** Norwegian Bokmål (norsk bokmål) */
+$specialPageAliases['nb'] = [
+	'EntityUsage' => [ 'Entitetsbruk' ],
+	'PagesWithBadges' => [ 'Sider_med_merker' ],
+	'UnconnectedPages' => [ 'Ikke-tilknyttede_sider', 'Ikke-tilknytta_sider' ],
+];
+
 /** Dutch (Nederlands) */
 $specialPageAliases['nl'] = [
 	'UnconnectedPages' => [ 'OngekoppeldePaginas', 'OngekoppeldePagina\'s' ],
 	'PagesWithBadges' => [ 'PaginasMetBadges', 'Pagina\'sMetBadges' ],
+];
+
+/** Norwegian Nynorsk (norsk nynorsk) */
+$specialPageAliases['nn'] = [
+	'EntityUsage' => [ 'Entitetsbruk' ],
+	'PagesWithBadges' => [ 'Sider_med_merker' ],
+	'UnconnectedPages' => [ 'Ikkje-tilknytta_sider' ],
 ];
 
 /** Portuguese (português) */
