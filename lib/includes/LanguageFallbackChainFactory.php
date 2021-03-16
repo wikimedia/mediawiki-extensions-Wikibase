@@ -68,10 +68,15 @@ class LanguageFallbackChainFactory {
 		?LanguageConverterFactory $languageConverterFactory = null,
 		?LanguageFallback $languageFallback = null
 	) {
-		$services = MediaWikiServices::getInstance();
-		$this->languageFactory = $languageFactory ?: $services->getLanguageFactory();
-		$this->languageConverterFactory = $languageConverterFactory ?: $services->getLanguageConverterFactory();
-		$this->languageFallback = $languageFallback ?: $services->getLanguageFallback();
+		// note: do not extract MediaWikiServices::getInstance() into a variable –
+		// if all three services are given, the service container should never be loaded
+		// (important in unit tests, where it isn’t set up)
+		$this->languageFactory = $languageFactory ?:
+			MediaWikiServices::getInstance()->getLanguageFactory();
+		$this->languageConverterFactory = $languageConverterFactory ?:
+			MediaWikiServices::getInstance()->getLanguageConverterFactory();
+		$this->languageFallback = $languageFallback ?:
+			MediaWikiServices::getInstance()->getLanguageFallback();
 	}
 
 	/**
