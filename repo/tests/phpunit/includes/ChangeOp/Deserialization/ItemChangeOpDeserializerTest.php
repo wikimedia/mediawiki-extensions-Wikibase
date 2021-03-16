@@ -101,7 +101,7 @@ class ItemChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 				WikibaseRepo::getEntityTitleLookup(),
 				[]
 			),
-			$wikibaseRepo->getExternalFormatStatementDeserializer(),
+			WikibaseRepo::getExternalFormatStatementDeserializer(),
 			$this->newSiteLinkTargetProvider(),
 			WikibaseRepo::getEntityIdParser(),
 			WikibaseRepo::getStringNormalizer(),

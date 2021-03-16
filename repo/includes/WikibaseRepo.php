@@ -793,7 +793,7 @@ class WikibaseRepo {
 			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
 			new TermChangeOpSerializationValidator( $this->getTermsLanguages() ),
 			self::getSiteLinkBadgeChangeOpSerializationValidator(),
-			$this->getExternalFormatStatementDeserializer(),
+			self::getExternalFormatStatementDeserializer(),
 			new SiteLinkTargetProvider(
 				$this->getSiteLookup(),
 				self::getSettings()->getSetting( 'specialSiteLinkGroups' )
@@ -1303,11 +1303,10 @@ class WikibaseRepo {
 
 	/**
 	 * Returns a deserializer to deserialize statements in current serialization only.
-	 *
-	 * @return Deserializer
 	 */
-	public function getExternalFormatStatementDeserializer() {
-		return self::getBaseDataModelDeserializerFactory()->newStatementDeserializer();
+	public static function getExternalFormatStatementDeserializer( ContainerInterface $services = null ): Deserializer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ExternalFormatStatementDeserializer' );
 	}
 
 	/**

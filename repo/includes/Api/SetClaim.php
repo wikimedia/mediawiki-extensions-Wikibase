@@ -110,6 +110,7 @@ class SetClaim extends ApiBase {
 		string $moduleName,
 		IBufferingStatsdDataFactory $stats,
 		EntityIdParser $entityIdParser,
+		Deserializer $externalFormatStatementDeserializer,
 		StatementGuidParser $statementGuidParser,
 		StatementGuidValidator $statementGuidValidator
 	): self {
@@ -128,7 +129,7 @@ class SetClaim extends ApiBase {
 			$mainModule,
 			$moduleName,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
-			$wikibaseRepo->getExternalFormatStatementDeserializer(),
+			$externalFormatStatementDeserializer,
 			$changeOpFactoryProvider->getStatementChangeOpFactory(),
 			$modificationHelper,
 			$statementGuidParser,
