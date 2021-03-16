@@ -194,6 +194,27 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		);
 	}
 
+	public function testDoHtmlPageLinkRendererBegin_itemIsRedirected() {
+		$handler = $this->newInstance();
+		$title = $this->newTitle( self::ITEM_LABEL_NO_DESCRIPTION );
+		$title->mRedirect = true;
+		$text = $title->getFullText();
+		$customAttribs = [];
+		$context = $this->newContext();
+
+		$entityUrl = 'http://www.wikidata.org/wiki/Item:Q1';
+		$expectedHref = $entityUrl . '?redirect=no';
+		$this->entityUrlLookup->expects( $this->once() )
+			->method( 'getLinkUrl' )
+			->willReturn( $entityUrl );
+
+		$ret = $handler->doHtmlPageLinkRendererEnd(
+		$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+
+		$this->assertTrue( $ret );
+		$this->assertSame( $customAttribs['href'], $expectedHref );
+	}
+
 	public function testGivenIdFromOtherSourcesWithLabelAndDesc_labelAndIdAreUsedAsLinkTextAndLabelAndDescAreUsedInLinkTitle() {
 		$handler = $this->newInstance();
 

@@ -320,7 +320,11 @@ class HtmlPageLinkRendererEndHookHandler {
 			return true;
 		}
 
-		$customAttribs['href'] = $this->entityUrlLookup->getLinkUrl( $entityId );
+		if ( $target->isRedirect() ) {
+			$customAttribs['href'] = wfAppendQuery( $this->entityUrlLookup->getLinkUrl( $entityId ), [ 'redirect' => 'no' ] );
+		} else {
+			$customAttribs['href'] = $this->entityUrlLookup->getLinkUrl( $entityId );
+		}
 
 		if ( !$this->entityExistenceChecker->exists( $entityId ) ) {
 			// The link points to a non-existing entity.
