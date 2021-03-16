@@ -343,6 +343,7 @@
 			"services": [
 				"HtmlCacheUpdater",
 			  	"WikibaseRepo.CompactBaseDataModelSerializerFactory",
+				"WikibaseRepo.CompactEntitySerializer",
 				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.EntityRdfBuilderFactory",

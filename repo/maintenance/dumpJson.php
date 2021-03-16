@@ -98,7 +98,7 @@ class DumpJson extends DumpEntities {
 				$wikibaseRepo->getStore()->getEntityPrefetcher(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
 				$revisionLookup,
-				$wikibaseRepo->getCompactEntitySerializer()
+				WikibaseRepo::getCompactEntitySerializer( $mwServices )
 			);
 		}
 		parent::execute();
