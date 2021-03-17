@@ -125,14 +125,14 @@ class DataUpdateHookHandler implements
 	}
 
 	public function doLinksUpdateComplete( LinksUpdate $linksUpdate ): void {
-		$title = $linksUpdate->getTitle();
+		$pageId = $linksUpdate->mId;
 
 		$parserOutput = $linksUpdate->getParserOutput();
 		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput, $this->entityUsageFactory );
 
 		// Please note that page views that happen between the page save but before this is run will have
 		// their usages removed (as we might add the usages via onParserCacheSaveComplete before this is run).
-		$this->usageUpdater->replaceUsagesForPage( $title->getArticleID(), $usageAcc->getUsages() );
+		$this->usageUpdater->replaceUsagesForPage( $pageId, $usageAcc->getUsages() );
 	}
 
 	/**
