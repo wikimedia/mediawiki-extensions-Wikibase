@@ -9,9 +9,6 @@ originalDirectory=$(pwd)
 cd ..
 
 MW_BRANCH=master
-if [[ "$TRAVIS_BRANCH" =~ ^wmf/[0-9]+.* ]] || [[ "$TRAVIS_BRANCH" =~ ^REL[0-9]+_[0-9]+ ]]; then
-	MW_BRANCH="$TRAVIS_BRANCH"
-fi
 
 mkdir phase3
 wget -O- https://github.com/wikimedia/mediawiki/archive/$MW_BRANCH.tar.gz | tar -zxf - -C phase3 --strip-components 1
