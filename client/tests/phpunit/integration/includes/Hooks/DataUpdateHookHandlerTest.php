@@ -286,6 +286,16 @@ class DataUpdateHookHandlerTest extends \MediaWikiTestCase {
 		$handler->doLinksUpdateComplete( $linksUpdate );
 	}
 
+	public function testLinksUpdateComplete_noPageId() {
+		$title = $this->newTitle( 0, NS_MAIN, 'Oh no' );
+
+		$linksUpdate = $this->newLinksUpdate( $title, null );
+
+		// Assertions are done by the UsageUpdater mock
+		$handler = $this->newDataUpdateHookHandler( $title, null, false, true, false );
+		$handler->doLinksUpdateComplete( $linksUpdate );
+	}
+
 	/**
 	 * @dataProvider provideEntityUsages
 	 */
