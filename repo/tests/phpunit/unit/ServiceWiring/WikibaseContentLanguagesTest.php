@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Languages\LanguageNameUtils;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
@@ -22,6 +23,13 @@ class WikibaseContentLanguagesTest extends ServiceWiringTestCase {
 				$contentLanguages['test'] = $testLanguages;
 			} ],
 		] );
+		$languageNameUtils = $this->createMock( LanguageNameUtils::class );
+		$languageNameUtils->expects( $this->once() )
+			->method( 'getLanguageNames' )
+			->willReturn( [ 'en' => 'English' ] );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getLanguageNameUtils' )
+			->willReturn( $languageNameUtils );
 
 		/** @var WikibaseContentLanguages $wikibaseContentLanguages */
 		$wikibaseContentLanguages = $this->getService( 'WikibaseRepo.WikibaseContentLanguages' );

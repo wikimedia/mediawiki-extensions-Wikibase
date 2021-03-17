@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\MediaWikiServices;
 use OutOfRangeException;
 
@@ -47,14 +48,17 @@ class WikibaseContentLanguages {
 		}
 	}
 
-	public static function getDefaultInstance( HookContainer $hookContainer = null ) {
+	public static function getDefaultInstance(
+		HookContainer $hookContainer = null,
+		LanguageNameUtils $languageNameUtils = null
+	) {
 		if ( $hookContainer === null ) {
 			$hookContainer = MediaWikiServices::getInstance()->getHookContainer();
 		}
 
 		$contentLanguages = [];
-		$contentLanguages[self::CONTEXT_TERM] = self::getDefaultTermsLanguages();
-		$contentLanguages[self::CONTEXT_MONOLINGUAL_TEXT] = self::getDefaultMonolingualTextLanguages();
+		$contentLanguages[self::CONTEXT_TERM] = self::getDefaultTermsLanguages( $languageNameUtils );
+		$contentLanguages[self::CONTEXT_MONOLINGUAL_TEXT] = self::getDefaultMonolingualTextLanguages( $languageNameUtils );
 
 		$hookContainer->run(
 			'WikibaseContentLanguages',
@@ -65,11 +69,11 @@ class WikibaseContentLanguages {
 		return new self( $contentLanguages );
 	}
 
-	public static function getDefaultTermsLanguages() {
+	public static function getDefaultTermsLanguages( LanguageNameUtils $languageNameUtils = null ) {
 		// Note: this list is also the basis of getDefaultMonolingualTextLanguages(); custom
 		// (non-MediaWikiContentLanguages) terms languages also become monolingual text languages.
 		return new UnionContentLanguages(
-			new MediaWikiContentLanguages(),
+			new MediaWikiContentLanguages( $languageNameUtils ),
 			new StaticContentLanguages(
 				[
 					'bag', // T263946
@@ -127,10 +131,10 @@ class WikibaseContentLanguages {
 		);
 	}
 
-	public static function getDefaultMonolingualTextLanguages() {
+	public static function getDefaultMonolingualTextLanguages( LanguageNameUtils $languageNameUtils = null ) {
 		return new DifferenceContentLanguages(
 			new UnionContentLanguages(
-				self::getDefaultTermsLanguages(),
+				self::getDefaultTermsLanguages( $languageNameUtils ),
 				new StaticContentLanguages( [
 					// Special ISO 639-2 codes
 					'und', 'mis', 'mul', 'zxx',
