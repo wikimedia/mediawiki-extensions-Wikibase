@@ -3,7 +3,6 @@
 namespace Wikibase\DataAccess\Tests;
 
 use Wikibase\DataAccess\GenericServices;
-use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 
 /**
@@ -15,9 +14,8 @@ use Wikibase\Lib\EntityTypeDefinitions;
  */
 class GenericServicesTest extends \PHPUnit\Framework\TestCase {
 
-	public function testGetCompactSerializerFactory() {
-		$services = $this->newGenericServices();
-		$this->assertInstanceOf( SerializerFactory::class, $services->getCompactBaseDataModelSerializerFactory() );
+	public function testConstructor() {
+		$this->assertInstanceOf( GenericServices::class, $this->newGenericServices() );
 	}
 
 	private function newGenericServices() {
