@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
 use Language;
 use LuaSandboxFunction;
+use ParserOptions;
 use Scribunto_LuaEngine;
 use Scribunto_LuaStandaloneInterpreterFunction;
 use Wikibase\Client\DataAccess\Scribunto\LuaFunctionCallTracker;
@@ -303,6 +304,10 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		}
 		$parserOptions->registerWatcher(
 			function( $optionName ) use ( &$cacheSplit ) {
+				// We only care for options that affect the cache key (thus potentially performance)
+				if ( !in_array( $optionName, ParserOptions::allCacheVaryingOptions() ) ) {
+					return;
+				}
 				$this->assertSame( 'userlang', $optionName );
 				$cacheSplit = true;
 			}
