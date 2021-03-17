@@ -138,6 +138,16 @@ $magicWords['ml'] = [
 	'noexternallanglinks' => [ 0, 'ബാഹ്യഭാഷാകണ്ണികൾവേണ്ട' ],
 ];
 
+/** Norwegian Bokmål (norsk bokmål) */
+$magicWords['nb'] = [
+	'noexternallanglinks' => [ 0, 'ingenspråklenkerutenfra' ],
+	'property' => [ 0, 'egenskap' ],
+	'statements' => [ 0, 'påstander' ],
+	'shortdesc' => [ 1, 'KORTBESKRIVELSE' ],
+	'shortdesc_noreplace' => [ 0, 'ingenerstatning' ],
+	'commaSeparatedList' => [ 0, 'kommaadskiltliste' ],
+];
+
 /** Dutch (Nederlands) */
 $magicWords['nl'] = [
 	'noexternallanglinks' => [ 0, 'geenexternetaalkoppelingen', 'geenexternetaalverwijzingen' ],
@@ -147,6 +157,10 @@ $magicWords['nl'] = [
 /** Norwegian Nynorsk (norsk nynorsk) */
 $magicWords['nn'] = [
 	'noexternallanglinks' => [ 0, 'ingenspråklenkjerutanfrå' ],
+	'property' => [ 0, 'eigenskap' ],
+	'statements' => [ 0, 'påstandar' ],
+	'shortdesc' => [ 1, 'KORTSKILDRING' ],
+	'shortdesc_noreplace' => [ 0, 'ingenerstatning' ],
 ];
 
 /** Polish (polski) */

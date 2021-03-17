@@ -132,6 +132,17 @@ $namespaceNames['ko'] = [
 	WB_NS_QUERY_TALK => '쿼리토론',
 ];
 
+$namespaceNames['nb'] = [
+	WB_NS_ITEM      => 'Element',
+	WB_NS_ITEM_TALK => 'Elementdiskusjon',
+
+	WB_NS_PROPERTY      => 'Egenskap',
+	WB_NS_PROPERTY_TALK => 'Egenskapsdiskusjon',
+
+	WB_NS_QUERY      => 'Spørring',
+	WB_NS_QUERY_TALK => 'Spørringsdiskusjon',
+];
+
 $namespaceNames['nl'] = [
 	WB_NS_ITEM      => 'Item',
 	WB_NS_ITEM_TALK => 'Overleg_item',
@@ -141,6 +152,17 @@ $namespaceNames['nl'] = [
 
 	WB_NS_QUERY      => 'Zoekopdracht',
 	WB_NS_QUERY_TALK => 'Overleg_zoekopdracht',
+];
+
+$namespaceNames['nn'] = [
+	WB_NS_ITEM      => 'Element',
+	WB_NS_ITEM_TALK => 'Elementdiskusjon',
+
+	WB_NS_PROPERTY      => 'Eigenskap',
+	WB_NS_PROPERTY_TALK => 'Eigenskapsdiskusjon',
+
+	WB_NS_QUERY      => 'Spørjing',
+	WB_NS_QUERY_TALK => 'Spørjingsdiskusjon',
 ];
 
 $namespaceNames['ru'] = [
