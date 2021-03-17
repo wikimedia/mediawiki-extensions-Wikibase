@@ -42,7 +42,7 @@ use Wikimedia\Assert\Assert;
 
 /**
  * Collection of services for a single EntitySource.
- * Some GenericServices are injected alongside some more specific services for the EntitySource.
+ * Some generic services are injected alongside some more specific services for the EntitySource.
  * Various logic then pulls these services together into more composed services.
  *
  * TODO fixme, lots of things in this class bind to wikibase lib and mediawiki directly.
@@ -50,11 +50,6 @@ use Wikimedia\Assert\Assert;
  * @license GPL-2.0-or-later
  */
 class SingleEntitySourceServices implements EntityStoreWatcher {
-
-	/**
-	 * @var GenericServices
-	 */
-	private $genericServices;
 
 	/**
 	 * @var EntityIdParser
@@ -121,7 +116,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	private $storageEntitySerializer;
 
 	public function __construct(
-		GenericServices $genericServices,
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
 		Deserializer $dataValueDeserializer,
@@ -142,7 +136,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			$entityRevisionFactoryLookupCallbacks
 		);
 
-		$this->genericServices = $genericServices;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->dataValueDeserializer = $dataValueDeserializer;

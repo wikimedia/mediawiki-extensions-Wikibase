@@ -8,8 +8,8 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
 /**
  * Interface of the top-level container/factory of data access services.
  *
- * This is made up of DataAccessServices (which are repo or entity source specific),
- * and GenericServices (that doesn't currently have it's own interface)
+ * This is made up of DataAccessServices (which are repo or entity source specific)
+ * and a few other services that don't currently have their own interface.
  *
  * @license GPL-2.0-or-later
  */

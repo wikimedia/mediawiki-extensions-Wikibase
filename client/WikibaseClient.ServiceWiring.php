@@ -28,7 +28,6 @@ use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
-use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
 use Wikibase\DataAccess\SingleEntitySourceServices;
@@ -373,14 +372,12 @@ return [
 	'WikibaseClient.WikibaseServices' => function ( MediaWikiServices $services ): WikibaseServices {
 		$nameTableStoreFactory = $services->getNameTableStoreFactory();
 		$entityTypeDefinitions = WikibaseClient::getEntityTypeDefinitions( $services );
-		$genericServices = new GenericServices( $entityTypeDefinitions );
 
 		$entitySourceDefinitions = WikibaseClient::getEntitySourceDefinitions( $services );
 		$singleSourceServices = [];
 		foreach ( $entitySourceDefinitions->getSources() as $source ) {
 			// TODO: extract
 			$singleSourceServices[$source->getSourceName()] = new SingleEntitySourceServices(
-				$genericServices,
 				WikibaseClient::getEntityIdParser( $services ),
 				WikibaseClient::getEntityIdComposer( $services ),
 				WikibaseClient::getDataValueDeserializer( $services ),
@@ -396,7 +393,7 @@ return [
 			);
 		}
 
-		return new MultipleEntitySourceServices( $entitySourceDefinitions, $genericServices, $singleSourceServices );
+		return new MultipleEntitySourceServices( $entitySourceDefinitions, $singleSourceServices );
 	},
 
 ];
