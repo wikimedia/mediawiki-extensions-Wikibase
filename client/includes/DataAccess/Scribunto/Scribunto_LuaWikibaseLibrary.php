@@ -23,6 +23,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingClosestReferencedEntityIdLookup;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
@@ -143,13 +144,13 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return $this->snakSerializationRenderers[$type];
 	}
 
-	/**
-	 * @return TermLanguageFallbackChain
-	 */
-	private function getLanguageFallbackChain() {
+	private function getLanguageFallbackChain(): TermLanguageFallbackChain {
 		if ( $this->termFallbackChain === null ) {
-			$this->termFallbackChain = WikibaseClient::getDefaultInstance()->
-				getDataAccessLanguageFallbackChain( $this->getLanguage() );
+			$this->termFallbackChain = WikibaseClient::getLanguageFallbackChainFactory()
+				->newFromLanguage(
+					$this->getLanguage(),
+					LanguageFallbackChainFactory::FALLBACK_ALL
+				);
 		}
 
 		return $this->termFallbackChain;
