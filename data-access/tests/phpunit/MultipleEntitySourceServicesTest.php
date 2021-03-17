@@ -6,7 +6,6 @@ use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -144,7 +143,6 @@ class MultipleEntitySourceServicesTest extends TestCase {
 					''
 				)
 			], $entityTypeDefinitions ),
-			new GenericServices( $entityTypeDefinitions, [], [] ),
 			[ 'items' => $itemServices ]
 		);
 
@@ -174,7 +172,6 @@ class MultipleEntitySourceServicesTest extends TestCase {
 					''
 				)
 			], $entityTypeDefinitions ),
-			new GenericServices( $entityTypeDefinitions, [], [] ),
 			[ 'items' => $itemServices ]
 		);
 
@@ -234,7 +231,6 @@ class MultipleEntitySourceServicesTest extends TestCase {
 					''
 				)
 			], $entityTypeDefinitions ),
-			new GenericServices( $entityTypeDefinitions, [], [] ),
 			[ 'items' => $itemServices ]
 		);
 
@@ -275,7 +271,6 @@ class MultipleEntitySourceServicesTest extends TestCase {
 					''
 				),
 			], $entityTypeDefinitions ),
-			new GenericServices( $entityTypeDefinitions, [], [] ),
 			[]
 		);
 
@@ -359,7 +354,6 @@ class MultipleEntitySourceServicesTest extends TestCase {
 					'props'
 				),
 			], $entityTypeDefinitions ),
-			new GenericServices( $entityTypeDefinitions, [], [] ),
 			$perSourceServices
 		);
 	}

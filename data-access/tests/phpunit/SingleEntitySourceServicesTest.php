@@ -8,14 +8,12 @@ use MediaWiki\Storage\NameTableStore;
 use PHPUnit\Framework\MockObject\MockObject;
 use Serializers\DispatchingSerializer;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -69,7 +67,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenEntitySourceDoesNotProvideProperties_getPropertyInfoLookupThrowsException() {
 		$services = new SingleEntitySourceServices(
-			$this->newGenericServices(),
 			new BasicEntityIdParser(),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
@@ -91,7 +88,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 	public function testInvalidConstruction_deserializeFactoryCallbacks() {
 		$this->expectException( ParameterElementTypeException::class );
 		new SingleEntitySourceServices(
-			$this->newGenericServices(),
 			new BasicEntityIdParser(),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
@@ -110,7 +106,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 	public function testInvalidConstruction_entityMetaDataAccessorCallbacks() {
 		$this->expectException( ParameterElementTypeException::class );
 		new SingleEntitySourceServices(
-			$this->newGenericServices(),
 			new BasicEntityIdParser(),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
@@ -129,7 +124,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 	public function testInvalidConstruction_prefetchingTermLookupCallbacks() {
 		$this->expectException( ParameterElementTypeException::class );
 		new SingleEntitySourceServices(
-			$this->newGenericServices(),
 			new BasicEntityIdParser(),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
@@ -155,7 +149,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 		};
 
 		$services = new SingleEntitySourceServices(
-			$this->newGenericServices(),
 			new BasicEntityIdParser(),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
@@ -185,7 +178,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 
 	public function newSingleEntitySourceServices() {
 		return new SingleEntitySourceServices(
-			$this->newGenericServices(),
 			new BasicEntityIdParser(),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
@@ -199,10 +191,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			[],
 			[]
 		);
-	}
-
-	public function newGenericServices() {
-		return new GenericServices( new EntityTypeDefinitions( [] ) );
 	}
 
 	/**

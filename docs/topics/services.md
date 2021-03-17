@@ -29,7 +29,6 @@ In 2019 to implement database based [federation] for Wikimedia Commons more serv
 New service containers were created as the previous set no longer met the requirements of the initial stage of federation that was being targeted.
 
  - [MultipleEntitySourceServices] - Top-level container/factory of data access services implementing [WikibaseServices]
-   - [GenericServices]
    - [SingleEntitySourceServices] - Services for a single entity source
 
 Wiring for EntitySource based service containers is created from the [EntitySourceDefinitions] which is generated from:
@@ -41,7 +40,6 @@ Wiring for EntitySource based service containers is created from the [EntitySour
 [federation]: @ref md_docs_topics_federation
 [EntitySourceDefinitions]: @ref Wikibase::DataAccess::EntitySourceDefinitions
 [WikibaseServices]: @ref Wikibase::DataAccess::WikibaseServices
-[GenericServices]: @ref Wikibase::DataAccess::GenericServices
 [MultipleEntitySourceServices]: @ref Wikibase::DataAccess::MultipleEntitySourceServices
 [SingleEntitySourceServices]: @ref Wikibase::DataAccess::SingleEntitySourceServices
 [WikibaseRepo]: @ref Wikibase::Repo::WikibaseRepo

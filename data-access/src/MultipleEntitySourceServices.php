@@ -29,9 +29,6 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 	 */
 	private $entitySourceDefinitions;
 
-	/** @var GenericServices */
-	private $genericServices;
-
 	/**
 	 * @var SingleEntitySourceServices[] indexed by source name
 	 */
@@ -54,17 +51,14 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 
 	/**
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
-	 * @param GenericServices $genericServices
 	 * @param SingleEntitySourceServices[] $singleSourceServices indexed by source name
 	 */
 	public function __construct(
 		EntitySourceDefinitions $entitySourceDefinitions,
-		GenericServices $genericServices,
 		array $singleSourceServices
 	) {
 		Assert::parameterElementType( SingleEntitySourceServices::class, $singleSourceServices, '$singleSourceServices' );
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
-		$this->genericServices = $genericServices;
 		$this->singleSourceServices = $singleSourceServices;
 	}
 
