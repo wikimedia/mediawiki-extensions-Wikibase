@@ -98,7 +98,6 @@ use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCacheFactory;
-use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Lib\WikibaseContentLanguages;
 
 /**
@@ -993,13 +992,6 @@ final class WikibaseClient {
 	public static function getEntityNamespaceLookup( ContainerInterface $services = null ): EntityNamespaceLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntityNamespaceLookup' );
-	}
-
-	public function getDataAccessLanguageFallbackChain( Language $language ): TermLanguageFallbackChain {
-		return self::getLanguageFallbackChainFactory()->newFromLanguage(
-			$language,
-			LanguageFallbackChainFactory::FALLBACK_ALL
-		);
 	}
 
 	public static function getTermFallbackCache( ContainerInterface $services = null ): TermFallbackCacheFacade {

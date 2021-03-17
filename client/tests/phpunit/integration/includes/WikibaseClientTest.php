@@ -34,7 +34,6 @@ use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
-use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
 use Wikimedia\TestingAccessWrapper;
@@ -326,15 +325,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetRestrictedEntityLookup() {
 		$restrictedEntityLookup = $this->getWikibaseClient()->getRestrictedEntityLookup();
 		$this->assertInstanceOf( RestrictedEntityLookup::class, $restrictedEntityLookup );
-	}
-
-	public function testGetDataAccessLanguageFallbackChain() {
-		$lang = Language::factory( 'de' );
-		$fallbackChain = $this->getWikibaseClient()->getDataAccessLanguageFallbackChain( $lang );
-
-		$this->assertInstanceOf( TermLanguageFallbackChain::class, $fallbackChain );
-		// "de" falls back to "en"
-		$this->assertCount( 2, $fallbackChain->getFetchLanguageCodes() );
 	}
 
 	public function testGetDataAccessSnakFormatterFactory() {
