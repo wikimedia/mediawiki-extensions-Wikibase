@@ -171,10 +171,6 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 		return $this->entityNamespaceLookup;
 	}
 
-	public function getCompactEntitySerializer() {
-		return $this->genericServices->getCompactEntitySerializer();
-	}
-
 	public function getCompactBaseDataModelSerializerFactory() {
 		return $this->genericServices->getCompactBaseDataModelSerializerFactory();
 	}

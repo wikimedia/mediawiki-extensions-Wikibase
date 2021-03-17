@@ -3,8 +3,6 @@
 namespace Wikibase\DataAccess;
 
 use DataValues\Serializers\DataValueSerializer;
-use Serializers\DispatchingSerializer;
-use Serializers\Serializer;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 
@@ -21,36 +19,12 @@ class GenericServices {
 	private $entityTypeDefinitions;
 
 	/**
-	 * @var Serializer|null
-	 */
-	private $compactEntitySerializer;
-
-	/**
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 */
 	public function __construct(
 		EntityTypeDefinitions $entityTypeDefinitions
 	) {
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
-	}
-
-	/**
-	 * @return Serializer Entity serializer that that generates the most compact serialization
-	 */
-	public function getCompactEntitySerializer() {
-		if ( !isset( $this->compactEntitySerializer ) ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->get( EntityTypeDefinitions::SERIALIZER_FACTORY_CALLBACK );
-			$baseSerializerFactory = $this->getCompactBaseDataModelSerializerFactory();
-			$serializers = [];
-
-			foreach ( $serializerFactoryCallbacks as $callback ) {
-				$serializers[] = call_user_func( $callback, $baseSerializerFactory );
-			}
-
-			$this->compactEntitySerializer = new DispatchingSerializer( $serializers );
-		}
-
-		return $this->compactEntitySerializer;
 	}
 
 	/**
