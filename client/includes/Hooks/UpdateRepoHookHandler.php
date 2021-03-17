@@ -21,6 +21,7 @@ use Wikibase\Client\UpdateRepo\UpdateRepo;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use WikiPage;
@@ -71,12 +72,12 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	private $propagateChangesToRepo;
 
 	public static function factory(
+		EntitySource $entitySource,
 		NamespaceChecker $namespaceChecker,
 		SettingsArray $clientSettings
 	): ?self {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$repoDB = $wikibaseClient->getDatabaseDomainNameOfLocalRepo();
+		$repoDB = $entitySource->getDatabaseName();
 		$jobQueueGroup = JobQueueGroup::singleton( $repoDB );
 
 		if ( !$jobQueueGroup ) {
@@ -84,7 +85,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 			return null;
 		}
 
-		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
+		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkLookup();
 
 		return new self(
 			$namespaceChecker,
