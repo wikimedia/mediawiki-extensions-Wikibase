@@ -1213,15 +1213,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.BaseDataModelDeserializerFactory' );
 	}
 
-	/**
-	 * @return InternalDeserializerFactory
-	 */
-	private function getInternalFormatDeserializerFactory() {
-		return new InternalDeserializerFactory(
-			self::getDataValueDeserializer(),
-			self::getEntityIdParser(),
-			self::getAllTypesEntityDeserializer()
-		);
+	public static function getInternalFormatDeserializerFactory( ContainerInterface $services = null ): InternalDeserializerFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.InternalFormatDeserializerFactory' );
 	}
 
 	/**
@@ -1254,11 +1248,9 @@ class WikibaseRepo {
 
 	/**
 	 * Returns a deserializer to deserialize entities in both current and legacy serialization.
-	 *
-	 * @return Deserializer
 	 */
-	public function getInternalFormatEntityDeserializer() {
-		return $this->getInternalFormatDeserializerFactory()->newEntityDeserializer();
+	public function getInternalFormatEntityDeserializer(): Deserializer {
+		return self::getInternalFormatDeserializerFactory()->newEntityDeserializer();
 	}
 
 	/**
@@ -1287,11 +1279,9 @@ class WikibaseRepo {
 
 	/**
 	 * Returns a deserializer to deserialize statements in both current and legacy serialization.
-	 *
-	 * @return Deserializer
 	 */
-	public function getInternalFormatStatementDeserializer() {
-		return $this->getInternalFormatDeserializerFactory()->newStatementDeserializer();
+	public function getInternalFormatStatementDeserializer(): Deserializer {
+		return self::getInternalFormatDeserializerFactory()->newStatementDeserializer();
 	}
 
 	/**

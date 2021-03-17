@@ -41,6 +41,7 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
+use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
@@ -487,6 +488,14 @@ return [
 		}
 
 		return $idGenerator;
+	},
+
+	'WikibaseRepo.InternalFormatDeserializerFactory' => function ( MediaWikiServices $services ): InternalDeserializerFactory {
+		return new InternalDeserializerFactory(
+			WikibaseRepo::getDataValueDeserializer( $services ),
+			WikibaseRepo::getEntityIdParser( $services ),
+			WikibaseRepo::getAllTypesEntityDeserializer( $services )
+		);
 	},
 
 	'WikibaseRepo.ItemTermsCollisionDetector' => function ( MediaWikiServices $services ): TermsCollisionDetector {
