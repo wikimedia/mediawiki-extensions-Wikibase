@@ -64,6 +64,8 @@ class RdfVocabularyTest extends ServiceWiringTestCase {
 			->willReturn( new HashConfig( [
 				'DummyLanguageCodes' => [ 'd1' => 'dummy-1', ],
 			] ) );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getTitleFactory' );
 
 		/** @var RdfVocabulary $rdfVocabulary */
 		$rdfVocabulary = $this->getService( 'WikibaseRepo.RdfVocabulary' );

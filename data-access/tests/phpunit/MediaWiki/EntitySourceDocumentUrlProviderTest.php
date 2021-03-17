@@ -20,8 +20,10 @@ class EntitySourceDocumentUrlProviderTest extends MediaWikiIntegrationTestCase {
 
 	public function testGivenLocalWikiSource_urlOfLocalWikiIsUsed() {
 		$this->setService( 'InterwikiLookup', $this->createMock( InterwikiLookup::class ) );
-		$this->setContentLang( 'de' );
-		$this->setMwGlobals( 'wgArticlePath', 'http://foo.test/wiki/$1' );
+		$this->setMwGlobals( [
+			'wgLanguageCode' => 'de',
+			'wgArticlePath' => 'http://foo.test/wiki/$1',
+		] );
 
 		$sources = new EntitySourceDefinitions(
 			[ new EntitySource(
@@ -36,7 +38,7 @@ class EntitySourceDocumentUrlProviderTest extends MediaWikiIntegrationTestCase {
 			new EntityTypeDefinitions( [] )
 		);
 
-		$urlProvider = new EntitySourceDocumentUrlProvider();
+		$urlProvider = new EntitySourceDocumentUrlProvider( $this->getServiceContainer()->getTitleFactory() );
 
 		$this->assertEquals(
 			[ 'local' => 'http://foo.test/wiki/Spezial:EntityData/' ],
@@ -51,7 +53,7 @@ class EntitySourceDocumentUrlProviderTest extends MediaWikiIntegrationTestCase {
 			->with( 'nonlocal' )
 			->willReturn( $interwiki );
 		$this->setService( 'InterwikiLookup', $interwikiLookup );
-		$this->setContentLang( 'de' );
+		$this->setMwGlobals( 'wgLanguageCode', 'de' );
 
 		$sources = new EntitySourceDefinitions(
 			[ new EntitySource(
@@ -65,7 +67,7 @@ class EntitySourceDocumentUrlProviderTest extends MediaWikiIntegrationTestCase {
 			) ],
 		new EntityTypeDefinitions( [] ) );
 
-		$urlProvider = new EntitySourceDocumentUrlProvider();
+		$urlProvider = new EntitySourceDocumentUrlProvider( $this->getServiceContainer()->getTitleFactory() );
 
 		$this->assertEquals(
 			[ 'nonlocal' => 'http://other.test/wiki/Special:EntityData/' ],

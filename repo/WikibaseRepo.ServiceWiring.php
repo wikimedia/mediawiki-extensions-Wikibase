@@ -622,7 +622,7 @@ return [
 		$nodeNamespacePrefixes = $entitySourceDefinitions->getRdfNodeNamespacePrefixes();
 		$predicateNamespacePrefixes = $entitySourceDefinitions->getRdfPredicateNamespacePrefixes();
 
-		$urlProvider = new EntitySourceDocumentUrlProvider();
+		$urlProvider = new EntitySourceDocumentUrlProvider( $services->getTitleFactory() );
 		$canonicalDocumentUrls = $urlProvider->getCanonicalDocumentsUrls( $entitySourceDefinitions );
 
 		return new RdfVocabulary(

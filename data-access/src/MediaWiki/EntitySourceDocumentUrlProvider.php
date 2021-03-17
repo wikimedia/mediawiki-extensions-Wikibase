@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataAccess\MediaWiki;
 
-use Title;
+use TitleFactory;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 
 /**
@@ -10,13 +10,25 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
  */
 class EntitySourceDocumentUrlProvider {
 
+	/** @var TitleFactory */
+	private $titleFactory;
+
+	public function __construct( TitleFactory $titleFactory ) {
+		$this->titleFactory = $titleFactory;
+	}
+
 	public function getCanonicalDocumentsUrls( EntitySourceDefinitions $sourceDefinitions ) {
 		$documentUrls = [];
 
 		$sources = $sourceDefinitions->getSources();
 
 		foreach ( $sources as $source ) {
-			$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData', '', $source->getInterwikiPrefix() );
+			$entityDataTitle = $this->titleFactory->makeTitle(
+				NS_SPECIAL,
+				'EntityData',
+				'',
+				$source->getInterwikiPrefix()
+			);
 			$documentUrls[$source->getSourceName()] = $entityDataTitle->getCanonicalURL() . '/';
 		}
 
