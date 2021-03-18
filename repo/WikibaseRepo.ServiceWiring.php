@@ -46,6 +46,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
+use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
@@ -310,6 +311,13 @@ return [
 				$services->getLinkBatchFactory()
 			)
 		);
+	},
+
+	'WikibaseRepo.EntityFactory' => function ( MediaWikiServices $services ): EntityFactory {
+		$instantiators = WikibaseRepo::getEntityTypeDefinitions( $services )
+			->get( EntityTypeDefinitions::ENTITY_FACTORY_CALLBACK );
+
+		return new EntityFactory( $instantiators );
 	},
 
 	'WikibaseRepo.EntityIdComposer' => function ( MediaWikiServices $services ): EntityIdComposer {

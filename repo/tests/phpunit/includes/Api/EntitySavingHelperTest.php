@@ -401,7 +401,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		);
 
 		if ( $config['allowCreation'] ?? false ) {
-			$helper->setEntityFactory( WikibaseRepo::getDefaultInstance()->getEntityFactory() );
+			$helper->setEntityFactory( WikibaseRepo::getEntityFactory() );
 			$helper->setEntityStore( $this->getMockEntityStore() );
 		}
 

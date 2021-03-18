@@ -9,6 +9,7 @@ use ApiUsageException;
 use IBufferingStatsdDataFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOps;
@@ -31,19 +32,29 @@ class SetAliases extends ModifyEntity {
 	/** @var IBufferingStatsdDataFactory */
 	private $stats;
 
+	/** @var EntityFactory */
+	private $entityFactory;
+
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
 		FingerprintChangeOpFactory $termChangeOpFactory,
 		IBufferingStatsdDataFactory $stats,
-		bool $federatedPropertiesEnabled
+		bool $federatedPropertiesEnabled,
+		EntityFactory $entityFactory
 	) {
 		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 		$this->termChangeOpFactory = $termChangeOpFactory;
 		$this->stats = $stats;
+		$this->entityFactory = $entityFactory;
 	}
 
-	public static function factory( ApiMain $mainModule, string $moduleName, IBufferingStatsdDataFactory $stats ): self {
+	public static function factory(
+		ApiMain $mainModule,
+		string $moduleName,
+		IBufferingStatsdDataFactory $stats,
+		EntityFactory $entityFactory
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$mainModule,
@@ -51,7 +62,8 @@ class SetAliases extends ModifyEntity {
 			$wikibaseRepo->getChangeOpFactoryProvider()
 				->getFingerprintChangeOpFactory(),
 			$stats,
-			$wikibaseRepo->inFederatedPropertyMode()
+			$wikibaseRepo->inFederatedPropertyMode(),
+			$entityFactory
 		);
 	}
 
@@ -233,11 +245,9 @@ class SetAliases extends ModifyEntity {
 	}
 
 	protected function getEntityTypesWithAliases(): array {
-		// TODO inject me
-		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 		$supportedEntityTypes = [];
 		foreach ( $this->enabledEntityTypes as $entityType ) {
-			$testEntity = $entityFactory->newEmpty( $entityType );
+			$testEntity = $this->entityFactory->newEmpty( $entityType );
 			if ( $testEntity instanceof AliasesProvider ) {
 				$supportedEntityTypes[] = $entityType;
 			}

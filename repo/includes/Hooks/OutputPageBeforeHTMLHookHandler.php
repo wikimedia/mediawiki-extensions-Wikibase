@@ -169,6 +169,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		HttpRequestFactory $httpRequestFactory,
 		IBufferingStatsdDataFactory $statsdDataFactory,
 		EntityContentFactory $entityContentFactory,
+		EntityFactory $entityFactory,
 		EntityIdParser $entityIdParser,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		LoggerInterface $logger,
@@ -194,7 +195,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 				$entityViewChecker,
 				$entityIdParser
 			),
-			$wikibaseRepo->getEntityFactory(),
+			$entityFactory,
 			$wgCookiePrefix,
 			new OutputPageEditability(),
 			TermboxFlag::getInstance()->shouldRenderTermbox(),

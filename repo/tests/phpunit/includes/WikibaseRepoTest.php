@@ -35,7 +35,6 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
-use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
@@ -361,11 +360,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$array = WikibaseRepo::getContentModelMappings();
 		$this->assertIsArray( $array );
 		$this->assertContainsOnly( 'string', $array );
-	}
-
-	public function testGetEntityFactory() {
-		$entityFactory = $this->getWikibaseRepo()->getEntityFactory();
-		$this->assertInstanceOf( EntityFactory::class, $entityFactory );
 	}
 
 	private function getEntityTypeDefinitionsWithSubentities(): EntityTypeDefinitions {

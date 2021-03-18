@@ -1153,13 +1153,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.ContentModelMappings' );
 	}
 
-	/**
-	 * @return EntityFactory
-	 */
-	public function getEntityFactory() {
-		$instantiators = self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_FACTORY_CALLBACK );
-
-		return new EntityFactory( $instantiators );
+	public static function getEntityFactory( ContainerInterface $services = null ): EntityFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityFactory' );
 	}
 
 	/**
@@ -1476,7 +1472,7 @@ class WikibaseRepo {
 			$services->getRevisionLookup(),
 			$services->getTitleFactory(),
 			$this->getStore()->getEntityByLinkedTitleLookup(),
-			$this->getEntityFactory(),
+			self::getEntityFactory(),
 			$this->getEntityStore()
 		);
 	}
