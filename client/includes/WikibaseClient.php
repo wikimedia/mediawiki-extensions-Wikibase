@@ -952,18 +952,6 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.ItemAndPropertySource' );
 	}
 
-	public function getDatabaseDomainNameOfLocalRepo() {
-		$itemAndPropertySourceName = self::getSettings()->getSetting( 'itemAndPropertySourceName' );
-		$sources = self::getEntitySourceDefinitions()->getSources();
-		foreach ( $sources as $source ) {
-			if ( $source->getSourceName() === $itemAndPropertySourceName ) {
-				return $source->getDatabaseName();
-			}
-		}
-
-		throw new LogicException( 'No source configured: ' . $itemAndPropertySourceName );
-	}
-
 	public function getWikibaseContentLanguages(): WikibaseContentLanguages {
 		if ( $this->wikibaseContentLanguages === null ) {
 			$this->wikibaseContentLanguages = WikibaseContentLanguages::getDefaultInstance();
