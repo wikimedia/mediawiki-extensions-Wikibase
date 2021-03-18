@@ -744,7 +744,7 @@ class WikibaseRepo {
 		$snakValidator = new SnakValidator(
 			$this->getPropertyDataTypeLookup(),
 			self::getDataTypeFactory(),
-			$this->getDataTypeValidatorFactory()
+			self::getDataTypeValidatorFactory()
 		);
 
 		return new ChangeOpFactoryProvider(
@@ -1664,13 +1664,9 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return DataTypeValidatorFactory
-	 */
-	public function getDataTypeValidatorFactory() {
-		return new BuilderBasedDataTypeValidatorFactory(
-			self::getDataTypeDefinitions()->getValidatorFactoryCallbacks()
-		);
+	public static function getDataTypeValidatorFactory( ContainerInterface $services = null ): DataTypeValidatorFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.DataTypeValidatorFactory' );
 	}
 
 	public static function getDataTypeDefinitions( ContainerInterface $services = null ): DataTypeDefinitions {
