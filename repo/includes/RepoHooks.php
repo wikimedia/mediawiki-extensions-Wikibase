@@ -1012,6 +1012,7 @@ final class RepoHooks {
 					'resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js',
 				],
 				'dependencies' => [
+					'wikibase.getLanguageNameByCode',
 					'oojs-ui',
 				],
 				'messages' => [

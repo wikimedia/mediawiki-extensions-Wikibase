@@ -275,9 +275,6 @@ return call_user_func( function() {
 			'scripts' => [
 				'wikibase.special/wikibase.special.newEntity.js',
 			],
-			'dependencies' => [
-				'wikibase.WikibaseContentLanguages'
-			],
 			'styles' => [
 				'../../view/resources/wikibase/wikibase.less'
 			]
