@@ -69,7 +69,7 @@ local entityCache = initCache( 15 )
 -- 50 slot cache for statements
 local statementCache = initCache( 50 )
 
-function wikibase.setupInterface()
+function wikibase.setupInterface( settings )
 	local php = mw_interface
 	mw_interface = nil
 
@@ -156,7 +156,7 @@ function wikibase.setupInterface()
 			return nil
 		end
 
-		if not php.getSetting( 'allowArbitraryDataAccess' ) and id ~= wikibase.getEntityIdForCurrentPage() then
+		if not settings.allowArbitraryDataAccess and id ~= wikibase.getEntityIdForCurrentPage() then
 			error( 'Access to arbitrary entities has been disabled.', 2 )
 		end
 
@@ -173,7 +173,7 @@ function wikibase.setupInterface()
 	local function getEntityStatements( entityId, propertyId, funcName, rank )
 		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntityStatements.call' )
 
-		if not php.getSetting( 'allowArbitraryDataAccess' ) and entityId ~= wikibase.getEntityIdForCurrentPage() then
+		if not settings.allowArbitraryDataAccess and entityId ~= wikibase.getEntityIdForCurrentPage() then
 			error( 'Access to arbitrary entities has been disabled.', 2 )
 		end
 
@@ -345,7 +345,7 @@ function wikibase.setupInterface()
 
 		checkType( 'entityExists', 1, entityId, 'string' )
 
-		if not php.getSetting( 'allowArbitraryDataAccess' ) and entityId ~= wikibase.getEntityIdForCurrentPage() then
+		if not settings.allowArbitraryDataAccess and entityId ~= wikibase.getEntityIdForCurrentPage() then
 			error( 'Access to arbitrary entities has been disabled.', 2 )
 		end
 
@@ -446,7 +446,7 @@ function wikibase.setupInterface()
 			end
 		end
 
-		if not php.getSetting( 'allowArbitraryDataAccess' ) then
+		if not settings.allowArbitraryDataAccess then
 			error( 'Access to arbitrary entities has been disabled.', 2 )
 		end
 
@@ -456,8 +456,7 @@ function wikibase.setupInterface()
 	-- Returns the current site's global id
 	function wikibase.getGlobalSiteId()
 		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getGlobalSiteId.call' )
-
-		return php.getSetting( 'siteGlobalID' )
+		return settings.siteGlobalID
 	end
 
 	mw = mw or {}

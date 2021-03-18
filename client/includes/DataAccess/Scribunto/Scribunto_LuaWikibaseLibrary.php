@@ -400,7 +400,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'getEntity' => [ $this, 'getEntity' ],
 			'entityExists' => [ $this, 'entityExists' ],
 			'getEntityStatements' => [ $this, 'getEntityStatements' ],
-			'getSetting' => [ $this, 'getSetting' ],
 			'getEntityUrl' => [ $this, 'getEntityUrl' ],
 			'renderSnak' => [ $this, 'renderSnak' ],
 			'formatValue' => [ $this, 'formatValue' ],
@@ -420,8 +419,15 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'getEntityModuleName' => [ $this, 'getEntityModuleName' ],
 		];
 
+		$settings = WikibaseClient::getSettings();
+		// These settings will be exposed to the Lua module.
+		$options = [
+			'allowArbitraryDataAccess' => $settings->getSetting( 'allowArbitraryDataAccess' ),
+			'siteGlobalID' => $settings->getSetting( 'siteGlobalID' ),
+		];
+
 		return $this->getEngine()->registerInterface(
-			__DIR__ . '/mw.wikibase.lua', $lib, []
+			__DIR__ . '/mw.wikibase.lua', $lib, $options
 		);
 	}
 
@@ -560,18 +566,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkTypeOptional( 'getEntityId', 2, $globalSiteId, 'string', null );
 
 		return [ $this->getLanguageIndependentLuaBindings()->getEntityId( $pageTitle, $globalSiteId ) ];
-	}
-
-	/**
-	 * Wrapper for getSetting in WikibaseLanguageIndependentLuaBindings
-	 *
-	 * @param string $setting
-	 *
-	 * @return array
-	 */
-	public function getSetting( $setting ) {
-		$this->checkType( 'setting', 1, $setting, 'string' );
-		return [ $this->getLanguageIndependentLuaBindings()->getSetting( $setting ) ];
 	}
 
 	/**
