@@ -174,11 +174,6 @@ final class WikibaseClient {
 	private $termBuffer = null;
 
 	/**
-	 * @var PrefetchingTermLookup|null
-	 */
-	private $prefetchingTermLookup = null;
-
-	/**
 	 * @var SidebarLinkBadgeDisplay|null
 	 */
 	private $sidebarLinkBadgeDisplay = null;
@@ -387,7 +382,7 @@ final class WikibaseClient {
 	 */
 	public function getTermBuffer() {
 		if ( !$this->termBuffer ) {
-			$this->termBuffer = $this->getPrefetchingTermLookup();
+			$this->termBuffer = self::getPrefetchingTermLookup();
 		}
 
 		return $this->termBuffer;
@@ -395,7 +390,7 @@ final class WikibaseClient {
 
 	public function getTermLookup(): TermLookup {
 		if ( !$this->termLookup ) {
-			$this->termLookup = $this->getPrefetchingTermLookup();
+			$this->termLookup = self::getPrefetchingTermLookup();
 		}
 
 		return $this->termLookup;
@@ -408,12 +403,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.PrefetchingTermLookupFactory' );
 	}
 
-	private function getPrefetchingTermLookup(): PrefetchingTermLookup {
-		if ( !$this->prefetchingTermLookup ) {
-			$this->prefetchingTermLookup = self::getWikibaseServices()->getPrefetchingTermLookup();
-		}
-
-		return $this->prefetchingTermLookup;
+	public static function getPrefetchingTermLookup( ContainerInterface $services = null ): PrefetchingTermLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.PrefetchingTermLookup' );
 	}
 
 	/**

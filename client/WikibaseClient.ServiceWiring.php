@@ -24,11 +24,13 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
+use Wikibase\DataAccess\ByTypeDispatchingPrefetchingTermLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\PrefetchingTermLookupFactory;
 use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
 use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
@@ -261,6 +263,18 @@ return [
 			ObjectCache::getLocalClusterInstance(),
 			60 * 60
 		);
+	},
+
+	'WikibaseClient.PrefetchingTermLookup' => function ( MediaWikiServices $services ): PrefetchingTermLookup {
+		$entitySourceDefinitions = WikibaseClient::getEntitySourceDefinitions( $services );
+		$lookupFactory = WikibaseClient::getPrefetchingTermLookupFactory( $services );
+
+		$lookups = array_map(
+			[ $lookupFactory, 'getLookupForSource' ],
+			$entitySourceDefinitions->getEntityTypeToSourceMapping()
+		);
+
+		return new ByTypeDispatchingPrefetchingTermLookup( $lookups );
 	},
 
 	'WikibaseClient.PrefetchingTermLookupFactory' => function ( MediaWikiServices $services ): PrefetchingTermLookupFactory {
