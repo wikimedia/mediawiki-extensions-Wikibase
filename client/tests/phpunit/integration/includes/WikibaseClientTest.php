@@ -337,45 +337,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( SidebarLinkBadgeDisplay::class, $sidebarLinkBadgeDisplay );
 	}
 
-	public function testGetDatabaseDomainNameOfLocalRepo() {
-		$settings = clone WikibaseClient::getSettings();
-
-		$settings->setSetting( 'itemAndPropertySourceName', 'localrepo' );
-		$this->setService( 'WikibaseClient.Settings', $settings );
-
-		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
-		$this->setService( 'WikibaseClient.EntityTypeDefinitions', $entityTypeDefinitions );
-		$entitySourceDefinitions = new EntitySourceDefinitions(
-			[
-				new EntitySource(
-					'localrepo',
-					'repodb',
-					[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
-					'',
-					'',
-					'',
-					'repo'
-				),
-				new EntitySource(
-					'otherrepo',
-					'otherdb',
-					[ 'property' => [ 'namespaceId' => 321, 'slot' => 'main' ] ],
-					'',
-					'',
-					'',
-					'other'
-				),
-			],
-			$entityTypeDefinitions
-		);
-		$this->setService( 'WikibaseClient.EntitySourceDefinitions', $entitySourceDefinitions );
-		$wikibaseClient = new WikibaseClient(
-			$this->getSiteLookup()
-		);
-
-		$this->assertEquals( 'repodb', $wikibaseClient->getDatabaseDomainNameOfLocalRepo() );
-	}
-
 	public function testGetPropertyLabelResolver() {
 		$this->assertInstanceOf(
 			CachedDatabasePropertyLabelResolver::class,

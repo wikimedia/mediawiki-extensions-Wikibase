@@ -207,8 +207,9 @@
 			"class": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler::factory",
 			"services": [
-				"WikibaseClient.NamespaceChecker",
-				"WikibaseClient.Settings"
+			  	"WikibaseClient.ItemAndPropertySource",
+			  	"WikibaseClient.NamespaceChecker",
+			  	"WikibaseClient.Settings"
 			]
 		}
 	},

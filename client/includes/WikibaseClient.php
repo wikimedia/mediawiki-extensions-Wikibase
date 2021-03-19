@@ -466,7 +466,7 @@ final class WikibaseClient {
 				self::getEntityNamespaceLookup(),
 				self::getWikibaseServices(),
 				self::getSettings(),
-				$this->getDatabaseDomainNameOfLocalRepo(),
+				self::getItemAndPropertySource()->getDatabaseName(),
 				$this->getContentLanguage()->getCode()
 			);
 		}
@@ -929,7 +929,7 @@ final class WikibaseClient {
 
 	public function getRecentChangeFactory(): RecentChangeFactory {
 		$repoSite = $this->siteLookup->getSite(
-			$this->getDatabaseDomainNameOfLocalRepo()
+			self::getItemAndPropertySource()->getDatabaseName()
 		);
 		$interwikiPrefixes = ( $repoSite !== null ) ? $repoSite->getInterwikiIds() : [];
 		$interwikiPrefix = ( $interwikiPrefixes !== [] ) ? $interwikiPrefixes[0] : null;
@@ -947,19 +947,17 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @return string|false
-	 */
-	public function getDatabaseDomainNameOfLocalRepo() {
-		return $this->getEntitySourceOfLocalRepo()->getDatabaseName();
+	public static function getItemAndPropertySource( ContainerInterface $services = null ): EntitySource {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.ItemAndPropertySource' );
 	}
 
-	private function getEntitySourceOfLocalRepo(): EntitySource {
+	public function getDatabaseDomainNameOfLocalRepo() {
 		$itemAndPropertySourceName = self::getSettings()->getSetting( 'itemAndPropertySourceName' );
 		$sources = self::getEntitySourceDefinitions()->getSources();
 		foreach ( $sources as $source ) {
 			if ( $source->getSourceName() === $itemAndPropertySourceName ) {
-				return $source;
+				return $source->getDatabaseName();
 			}
 		}
 

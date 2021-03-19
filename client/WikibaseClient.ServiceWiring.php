@@ -228,6 +228,18 @@ return [
 		return new EntityTypeDefinitions( $entityTypes );
 	},
 
+	'WikibaseClient.ItemAndPropertySource' => function ( MediaWikiServices $services ): EntitySource {
+		$itemAndPropertySourceName = WikibaseClient::getSettings( $services )->getSetting( 'itemAndPropertySourceName' );
+		$sources = WikibaseClient::getEntitySourceDefinitions( $services )->getSources();
+		foreach ( $sources as $source ) {
+			if ( $source->getSourceName() === $itemAndPropertySourceName ) {
+				return $source;
+			}
+		}
+
+		throw new LogicException( 'No source configured: ' . $itemAndPropertySourceName );
+	},
+
 	'WikibaseClient.LanguageFallbackChainFactory' => function ( MediaWikiServices $services ): LanguageFallbackChainFactory {
 		return new LanguageFallbackChainFactory(
 			$services->getLanguageFactory(),
