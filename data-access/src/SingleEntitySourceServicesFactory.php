@@ -53,7 +53,6 @@ class SingleEntitySourceServicesFactory {
 	private $servicesBySource;
 
 	/**
-	 * SingleEntitySourceServicesFactory constructor.
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param Deserializer $dataValueDeserializer
@@ -61,6 +60,7 @@ class SingleEntitySourceServicesFactory {
 	 * @param DataAccessSettings $dataAccessSettings
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param Serializer $storageEntitySerializer
+	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,

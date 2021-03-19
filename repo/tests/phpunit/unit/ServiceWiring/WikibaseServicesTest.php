@@ -43,8 +43,6 @@ class WikibaseServicesTest extends ServiceWiringTestCase {
 
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 
-		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
-			$entityTypeDefinitions );
 		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions',
 			new EntitySourceDefinitions( $entitySources, $entityTypeDefinitions ) );
 		$this->mockService( 'WikibaseRepo.SingleEntitySourceServicesFactory',
