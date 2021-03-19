@@ -464,11 +464,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( EntityContentDataCodec::class, $codec );
 	}
 
-	public function testGetInternalFormatEntityDeserializer() {
-		$deserializer = $this->getWikibaseRepo()->getInternalFormatEntityDeserializer();
-		$this->assertInstanceOf( Deserializer::class, $deserializer );
-	}
-
 	public function testGetInternalFormatStatementDeserializer() {
 		$deserializer = $this->getWikibaseRepo()->getInternalFormatStatementDeserializer();
 		$this->assertInstanceOf( Deserializer::class, $deserializer );

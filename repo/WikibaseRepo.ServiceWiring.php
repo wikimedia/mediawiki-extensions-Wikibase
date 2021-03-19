@@ -497,6 +497,10 @@ return [
 		);
 	},
 
+	'WikibaseRepo.InternalFormatEntityDeserializer' => function ( MediaWikiServices $services ): Deserializer {
+		return WikibaseRepo::getInternalFormatDeserializerFactory( $services )->newEntityDeserializer();
+	},
+
 	'WikibaseRepo.ItemTermsCollisionDetector' => function ( MediaWikiServices $services ): TermsCollisionDetector {
 		return WikibaseRepo::getTermsCollisionDetectorFactory( $services )
 			->getTermsCollisionDetector( Item::ENTITY_TYPE );
