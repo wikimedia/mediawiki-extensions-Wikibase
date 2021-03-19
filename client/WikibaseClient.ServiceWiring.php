@@ -30,7 +30,7 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
-use Wikibase\DataAccess\SingleEntitySourceServices;
+use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -300,6 +300,24 @@ return [
 		return WikibaseSettings::getClientSettings();
 	},
 
+	// TODO: This service is just a convenience service to simplify the transition away from SingleEntitySourceServices,
+	// 		 and thus should eventually be removed. See T277731.
+	'WikibaseClient.SingleEntitySourceServicesFactory' => function (
+		MediaWikiServices $services
+	): SingleEntitySourceServicesFactory {
+		$entityTypeDefinitions = WikibaseClient::getEntityTypeDefinitions( $services );
+		return new SingleEntitySourceServicesFactory(
+			WikibaseClient::getEntityIdParser( $services ),
+			WikibaseClient::getEntityIdComposer( $services ),
+			WikibaseClient::getDataValueDeserializer( $services ),
+			$services->getNameTableStoreFactory(),
+			WikibaseClient::getDataAccessSettings( $services ),
+			WikibaseClient::getLanguageFallbackChainFactory( $services ),
+			new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
+			$entityTypeDefinitions
+		);
+	},
+
 	'WikibaseClient.Site' => function ( MediaWikiServices $services ): Site {
 		$settings = WikibaseClient::getSettings( $services );
 		$globalId = $settings->getSetting( 'siteGlobalID' );
@@ -370,27 +388,13 @@ return [
 	},
 
 	'WikibaseClient.WikibaseServices' => function ( MediaWikiServices $services ): WikibaseServices {
-		$nameTableStoreFactory = $services->getNameTableStoreFactory();
-		$entityTypeDefinitions = WikibaseClient::getEntityTypeDefinitions( $services );
-
 		$entitySourceDefinitions = WikibaseClient::getEntitySourceDefinitions( $services );
+		$singleEntitySourceServicesFactory = WikibaseClient::getSingleEntitySourceServicesFactory( $services );
+
 		$singleSourceServices = [];
 		foreach ( $entitySourceDefinitions->getSources() as $source ) {
-			// TODO: extract
-			$singleSourceServices[$source->getSourceName()] = new SingleEntitySourceServices(
-				WikibaseClient::getEntityIdParser( $services ),
-				WikibaseClient::getEntityIdComposer( $services ),
-				WikibaseClient::getDataValueDeserializer( $services ),
-				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
-				WikibaseClient::getDataAccessSettings( $services ),
-				$source,
-				WikibaseClient::getLanguageFallbackChainFactory( $services ),
-				new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
-				$entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
-				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
-				$entityTypeDefinitions->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK ),
-				$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK )
-			);
+			$singleSourceServices[$source->getSourceName()] = $singleEntitySourceServicesFactory
+				->getServicesForSource( $source );
 		}
 
 		return new MultipleEntitySourceServices( $entitySourceDefinitions, $singleSourceServices );

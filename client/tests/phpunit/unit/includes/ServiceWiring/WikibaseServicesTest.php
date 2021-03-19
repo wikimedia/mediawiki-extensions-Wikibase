@@ -2,16 +2,12 @@
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
-use DataValues\Deserializers\DataValueDeserializer;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\WikibaseServices;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 
 /**
  * @coversNothing
@@ -23,11 +19,6 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 class WikibaseServicesTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
-		$this->mockService( 'WikibaseClient.EntityTypeDefinitions',
-			new EntityTypeDefinitions( [
-				'something' => []
-			] ) );
-
 		$this->mockService( 'WikibaseClient.EntitySourceDefinitions',
 			new EntitySourceDefinitions(
 				[ new EntitySource(
@@ -42,24 +33,8 @@ class WikibaseServicesTest extends ServiceWiringTestCase {
 				new EntityTypeDefinitions( [] )
 			) );
 		$this->mockService(
-			'WikibaseClient.EntityIdParser',
-			$this->createMock( EntityIdParser::class )
-		);
-		$this->mockService(
-			'WikibaseClient.EntityIdComposer',
-			$this->createMock( EntityIdComposer::class )
-		);
-		$this->mockService(
-			'WikibaseClient.DataValueDeserializer',
-			$this->createMock( DataValueDeserializer::class )
-		);
-		$this->mockService(
-			'WikibaseClient.DataAccessSettings',
-			$this->createMock( DataAccessSettings::class )
-		);
-		$this->mockService(
-			'WikibaseClient.LanguageFallbackChainFactory',
-			$this->createMock( LanguageFallbackChainFactory::class )
+			'WikibaseClient.SingleEntitySourceServicesFactory',
+			$this->createMock( SingleEntitySourceServicesFactory::class )
 		);
 
 		$this->assertInstanceOf(
