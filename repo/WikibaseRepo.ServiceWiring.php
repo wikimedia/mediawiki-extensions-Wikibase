@@ -858,7 +858,6 @@ return [
 	},
 
 	'WikibaseRepo.WikibaseServices' => function ( MediaWikiServices $services ): WikibaseServices {
-		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
 		$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions( $services );
 		$singleEntitySourceServicesFactory = WikibaseRepo::getSingleEntitySourceServicesFactory( $services );
 

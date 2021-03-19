@@ -29,7 +29,6 @@ class PrefetchingTermLookupFactory {
 	private $lookupBySource;
 
 	/**
-	 * PrefetchingTermLookupFactory constructor.
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @param SingleEntitySourceServicesFactory $singleEntitySourceServicesFactory
