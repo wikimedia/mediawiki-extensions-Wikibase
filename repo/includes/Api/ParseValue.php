@@ -121,6 +121,7 @@ class ParseValue extends ApiBase {
 		string $moduleName,
 		IBufferingStatsdDataFactory $stats,
 		DataTypeFactory $dataTypeFactory,
+		DataTypeValidatorFactory $dataTypeValidatorFactory,
 		ValueParserFactory $valueParserFactory
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -131,7 +132,7 @@ class ParseValue extends ApiBase {
 			$moduleName,
 			$dataTypeFactory,
 			$valueParserFactory,
-			$wikibaseRepo->getDataTypeValidatorFactory(),
+			$dataTypeValidatorFactory,
 			$wikibaseRepo->getExceptionLocalizer(),
 			$wikibaseRepo->getValidatorErrorLocalizer(),
 			$wikibaseRepo->getPropertyDataTypeLookup(),

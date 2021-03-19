@@ -88,9 +88,11 @@ use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Lib\Units\UnitStorage;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 use Wikibase\Repo\Notifications\RepoEntityChange;
@@ -214,6 +216,12 @@ return [
 	'WikibaseRepo.DataTypeFactory' => function ( MediaWikiServices $services ): DataTypeFactory {
 		return new DataTypeFactory(
 			WikibaseRepo::getDataTypeDefinitions( $services )->getValueTypes()
+		);
+	},
+
+	'WikibaseRepo.DataTypeValidatorFactory' => function ( MediaWikiServices $services ): DataTypeValidatorFactory {
+		return new BuilderBasedDataTypeValidatorFactory(
+			WikibaseRepo::getDataTypeDefinitions( $services )->getValidatorFactoryCallbacks()
 		);
 	},
 

@@ -101,6 +101,7 @@
 			"services": [
 				"StatsdDataFactory",
 				"WikibaseRepo.DataTypeFactory",
+				"WikibaseRepo.DataTypeValidatorFactory",
 				"WikibaseRepo.ValueParserFactory"
 			]
 		},

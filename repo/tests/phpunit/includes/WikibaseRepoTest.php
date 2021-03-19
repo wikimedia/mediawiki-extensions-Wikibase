@@ -51,7 +51,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Api\ApiHelperFactory;
-use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
 use Wikibase\Repo\Content\EntityHandler;
@@ -612,11 +611,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetEntityParserOutputGeneratorFactory() {
 		$service = $this->getWikibaseRepo()->getEntityParserOutputGeneratorFactory();
 		$this->assertInstanceOf( EntityParserOutputGeneratorFactory::class, $service );
-	}
-
-	public function testGetDataTypeValidatorFactory() {
-		$service = $this->getWikibaseRepo()->getDataTypeValidatorFactory();
-		$this->assertInstanceOf( BuilderBasedDataTypeValidatorFactory::class, $service );
 	}
 
 	public function testGetDataTypeDefinitions() {
