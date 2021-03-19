@@ -29,6 +29,7 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
+use Wikibase\DataAccess\PrefetchingTermLookupFactory;
 use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
 use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\WikibaseServices;
@@ -259,6 +260,14 @@ return [
 			// sharedCacheDuration, but can not reuse these because this here is not shared.
 			ObjectCache::getLocalClusterInstance(),
 			60 * 60
+		);
+	},
+
+	'WikibaseClient.PrefetchingTermLookupFactory' => function ( MediaWikiServices $services ): PrefetchingTermLookupFactory {
+		return new PrefetchingTermLookupFactory(
+			WikibaseClient::getEntitySourceDefinitions( $services ),
+			WikibaseClient::getEntityTypeDefinitions( $services ),
+			WikibaseClient::getSingleEntitySourceServicesFactory( $services )
 		);
 	},
 
