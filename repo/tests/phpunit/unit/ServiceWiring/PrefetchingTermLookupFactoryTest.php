@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\PrefetchingTermLookupFactory;
+use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -16,21 +16,28 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
  *
  * @license GPL-2.0-or-later
  */
-class PrefetchingTermLookupTest extends ServiceWiringTestCase {
+class PrefetchingTermLookupFactoryTest extends ServiceWiringTestCase {
+
 	public function testConstruction(): void {
 		$this->mockService(
-			'WikibaseRepo.EntitySourceDefinitions',
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) )
+			'WikibaseRepo.EntityTypeDefinitions',
+			$this->createMock( EntityTypeDefinitions::class )
 		);
 
 		$this->mockService(
-			'WikibaseRepo.PrefetchingTermLookupFactory',
-			$this->createMock( PrefetchingTermLookupFactory::class )
+			'WikibaseRepo.EntitySourceDefinitions',
+			$this->createMock( EntitySourceDefinitions::class )
+		);
+
+		$this->mockService(
+			'WikibaseRepo.SingleEntitySourceServicesFactory',
+			$this->createMock( SingleEntitySourceServicesFactory::class )
 		);
 
 		$this->assertInstanceOf(
-			PrefetchingTermLookup::class,
-			$this->getService( 'WikibaseRepo.PrefetchingTermLookup' )
+			PrefetchingTermLookupFactory::class,
+			$this->getService( 'WikibaseRepo.PrefetchingTermLookupFactory' )
 		);
 	}
+
 }

@@ -6,8 +6,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use DataValues\Deserializers\DataValueDeserializer;
 use Serializers\Serializer;
 use Wikibase\DataAccess\DataAccessSettings;
-use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\SingleEntitySourceServices;
+use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -62,13 +61,9 @@ class SingleEntitySourceServicesFactoryTest extends ServiceWiringTestCase {
 			$this->createMock( Serializer::class )
 		);
 
-		$factory = $this->getService( 'WikibaseRepo.SingleEntitySourceServicesFactory' );
-		$mockSource = $this->createMock( EntitySource::class );
-
-		$this->assertIsCallable( $factory );
 		$this->assertInstanceOf(
-			SingleEntitySourceServices::class,
-			$factory( $mockSource )
+			SingleEntitySourceServicesFactory::class,
+			$this->getService( 'WikibaseRepo.SingleEntitySourceServicesFactory' )
 		);
 	}
 

@@ -26,9 +26,9 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\MediaWiki\EntitySourceDocumentUrlProvider;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
-use Wikibase\DataAccess\NullPrefetchingTermLookup;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\DataAccess\SingleEntitySourceServices;
+use Wikibase\DataAccess\PrefetchingTermLookupFactory;
+use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -114,7 +114,6 @@ use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\Assert\Assert;
 use Wikimedia\ObjectFactory;
 
 /** @phpcs-require-sorted-array */
@@ -125,11 +124,9 @@ return [
 			->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK );
 		$baseDeserializerFactory = WikibaseRepo::getBaseDataModelDeserializerFactory( $services );
 		$deserializers = [];
-
 		foreach ( $deserializerFactoryCallbacks as $callback ) {
 			$deserializers[] = call_user_func( $callback, $baseDeserializerFactory );
 		}
-
 		return new DispatchingDeserializer( $deserializers );
 	},
 
@@ -609,59 +606,23 @@ return [
 	},
 
 	'WikibaseRepo.PrefetchingTermLookup' => function ( MediaWikiServices $services ): PrefetchingTermLookup {
-		$prefetchingTermLookupCallbacks = WikibaseRepo::getEntityTypeDefinitions( $services )
-			->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK );
-		$singleEntitySourceServicesFactory = WikibaseRepo::getSingleEntitySourceServicesFactory( $services );
-
-		// TODO: Use a PrefetchingTermLookupFactory to encapsulate this logic. See Change Id Ib59d1988a189962
-		$getLookupOfType = function ( string $type, EntitySource $source ) use (
-			$prefetchingTermLookupCallbacks,
-			$singleEntitySourceServicesFactory
-		): PrefetchingTermLookup {
-			$callback = $prefetchingTermLookupCallbacks[ $type ];
-			// TODO: This currently passes an instance of SingleEntitySourceServices, as they are needed in callbacks
-			//		 in WikibaseLib and WikibaseMediaInfo, An example approach of how this might be avoided is present
-			//		 at Change Id Ib59d1988a189962
-			$lookup = call_user_func( $callback, $singleEntitySourceServicesFactory( $source ) );
-
-			Assert::postcondition(
-				$lookup instanceof PrefetchingTermLookup,
-				"Callback creating a lookup for $type must create an instance of PrefetchingTermLookup"
-			);
-
-			return $lookup;
-		};
-
-		// TODO: Use a PrefetchingTermLookupFactory to encapsulate this logic. See Change Id Ib59d1988a189962
-		$mapLookupsOfSource = function ( EntitySource $source ) use (
-			$prefetchingTermLookupCallbacks,
-			$getLookupOfType
-		): ByTypeDispatchingPrefetchingTermLookup {
-			$typesWithCustomLookups = array_keys( $prefetchingTermLookupCallbacks );
-			$lookupConstructorsByType = array_intersect( $typesWithCustomLookups, $source->getEntityTypes() );
-			$customLookups = array_combine(
-				$lookupConstructorsByType,
-				array_map( function ( string $type ) use (
-					$getLookupOfType,
-					$source
-				) {
-					return $getLookupOfType( $type, $source );
-				}, $lookupConstructorsByType )
-			);
-
-			return new ByTypeDispatchingPrefetchingTermLookup(
-				$customLookups,
-				new NullPrefetchingTermLookup()
-			);
-		};
+		$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions( $services );
+		$lookupFactory = WikibaseRepo::getPrefetchingTermLookupFactory( $services );
 
 		$lookups = array_map(
-			$mapLookupsOfSource,
-			WikibaseRepo::getEntitySourceDefinitions( $services )
-				->getEntityTypeToSourceMapping()
+			[ $lookupFactory, 'getLookupForSource' ],
+			$entitySourceDefinitions->getEntityTypeToSourceMapping()
 		);
 
 		return new ByTypeDispatchingPrefetchingTermLookup( $lookups );
+	},
+
+	'WikibaseRepo.PrefetchingTermLookupFactory' => function ( MediaWikiServices $services ): PrefetchingTermLookupFactory {
+		return new PrefetchingTermLookupFactory(
+			WikibaseRepo::getEntitySourceDefinitions( $services ),
+			WikibaseRepo::getEntityTypeDefinitions( $services ),
+			WikibaseRepo::getSingleEntitySourceServicesFactory( $services )
+		);
 	},
 
 	'WikibaseRepo.PropertyTermsCollisionDetector' => function ( MediaWikiServices $services ): TermsCollisionDetector {
@@ -721,36 +682,18 @@ return [
 	// 		 and thus should eventually be removed. See T277731.
 	'WikibaseRepo.SingleEntitySourceServicesFactory' => function (
 		MediaWikiServices $services
-	): callable {
+	): SingleEntitySourceServicesFactory {
 		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
-		$nameTableStoreFactory = $services->getNameTableStoreFactory();
-		$dependencies = [
+		return new SingleEntitySourceServicesFactory(
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getEntityIdComposer( $services ),
 			WikibaseRepo::getDataValueDeserializer( $services ),
-			// Will be replaced with SlotRoles for source
-			null,
+			$services->getNameTableStoreFactory(),
 			WikibaseRepo::getDataAccessSettings( $services ),
-			// Will be replaced with EntitySource
-			null,
 			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
 			WikibaseRepo::getStorageEntitySerializer( $services ),
-			$entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
-			$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
-			$entityTypeDefinitions->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK ),
-			$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK )
-		];
-
-		return function ( EntitySource $source ) use (
-			$nameTableStoreFactory,
-			$dependencies
-		): SingleEntitySourceServices {
-			// Replace nulls with source specific arguments
-			$dependencies[3] = $nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() );
-			$dependencies[5] = $source;
-
-			return new SingleEntitySourceServices( ...$dependencies );
-		};
+			$entityTypeDefinitions
+		);
 	},
 
 	'WikibaseRepo.SiteLinkBadgeChangeOpSerializationValidator' => function (
@@ -917,7 +860,8 @@ return [
 
 		$singleSourceServices = [];
 		foreach ( $entitySourceDefinitions->getSources() as $source ) {
-			$singleSourceServices[$source->getSourceName()] = $singleEntitySourceServicesFactory( $source );
+			$singleSourceServices[$source->getSourceName()] = $singleEntitySourceServicesFactory
+				->getServicesForSource( $source );
 		}
 		return new MultipleEntitySourceServices(
 			$entitySourceDefinitions,

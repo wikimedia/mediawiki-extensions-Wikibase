@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
-use Wikibase\DataAccess\SingleEntitySourceServices;
+use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -48,11 +48,7 @@ class WikibaseServicesTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions',
 			new EntitySourceDefinitions( $entitySources, $entityTypeDefinitions ) );
 		$this->mockService( 'WikibaseRepo.SingleEntitySourceServicesFactory',
-			function ( EntitySource $source ) use ( $entitySources ) {
-				$this->assertContains( $source, $entitySources );
-
-				return $this->createMock( SingleEntitySourceServices::class );
-			}
+			$this->createMock( SingleEntitySourceServicesFactory::class )
 		);
 
 		$this->assertInstanceOf(
