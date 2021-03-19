@@ -746,7 +746,7 @@ Whether changes on the repository should be displayed on Special:RecentChanges, 
 In contrast to [injectRecentChanges], this setting just removes the changes from the user interface.
 This is intended to temporarily prevent external changes from showing in order to find or fix some issue on a live site.
 
-DEFAULT: ```false```
+DEFAULT: ```true```
 
 #### recentChangesBatchSize {#client_recentChangesBatchSize}
 Number of `recentchanges` table rows to create in each InjectRCRecordsJob, a job used to send client wikis notifications about relevant changes to entities.
