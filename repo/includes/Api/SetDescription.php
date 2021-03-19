@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Api;
 use ApiMain;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOps;
@@ -28,26 +29,37 @@ class SetDescription extends ModifyTerm {
 	 * @var FingerprintChangeOpFactory
 	 */
 	private $termChangeOpFactory;
+	/**
+	 * @var EntityFactory
+	 */
+	private $entityFactory;
 
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
 		FingerprintChangeOpFactory $termChangeOpFactory,
-		bool $federatedPropertiesEnabled
+		bool $federatedPropertiesEnabled,
+		EntityFactory $entityFactory
 	) {
 		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 
 		$this->termChangeOpFactory = $termChangeOpFactory;
+		$this->entityFactory = $entityFactory;
 	}
 
-	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+	public static function factory(
+		ApiMain $mainModule,
+		string $moduleName,
+		EntityFactory $entityFactory
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$mainModule,
 			$moduleName,
 			$wikibaseRepo->getChangeOpFactoryProvider()
 				->getFingerprintChangeOpFactory(),
-			$wikibaseRepo->inFederatedPropertyMode()
+			$wikibaseRepo->inFederatedPropertyMode(),
+			$entityFactory
 		);
 	}
 
@@ -136,11 +148,9 @@ class SetDescription extends ModifyTerm {
 	}
 
 	protected function getEntityTypesWithDescriptions(): array {
-		// TODO inject me
-		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 		$supportedEntityTypes = [];
 		foreach ( $this->enabledEntityTypes as $entityType ) {
-			$testEntity = $entityFactory->newEmpty( $entityType );
+			$testEntity = $this->entityFactory->newEmpty( $entityType );
 			if ( $testEntity instanceof DescriptionsProvider ) {
 				$supportedEntityTypes[] = $entityType;
 			}

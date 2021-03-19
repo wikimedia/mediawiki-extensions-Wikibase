@@ -146,7 +146,8 @@
 			"class": "\\Wikibase\\Repo\\Api\\SetAliases",
 			"factory": "\\Wikibase\\Repo\\Api\\SetAliases::factory",
 			"services": [
-				"StatsdDataFactory"
+				"StatsdDataFactory",
+				"WikibaseRepo.EntityFactory"
 			]
 		},
 		"wbsetclaim": {
@@ -171,11 +172,17 @@
 		},
 		"wbsetdescription": {
 			"class": "\\Wikibase\\Repo\\Api\\SetDescription",
-			"factory": "\\Wikibase\\Repo\\Api\\SetDescription::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\SetDescription::factory",
+			"services": [
+			  "WikibaseRepo.EntityFactory"
+			]
 		},
 		"wbsetlabel": {
 			"class": "\\Wikibase\\Repo\\Api\\SetLabel",
-			"factory": "\\Wikibase\\Repo\\Api\\SetLabel::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\SetLabel::factory",
+			"services": [
+			  "WikibaseRepo.EntityFactory"
+			]
 		},
 		"wbsetqualifier": {
 			"class": "\\Wikibase\\Repo\\Api\\SetQualifier",
@@ -690,6 +697,7 @@
 				"HttpRequestFactory",
 				"StatsdDataFactory",
 				"WikibaseRepo.EntityContentFactory",
+				"WikibaseRepo.EntityFactory",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.Logger",
