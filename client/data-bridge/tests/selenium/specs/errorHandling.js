@@ -26,7 +26,7 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.error.waitForDisplayed( 5000 );
+		DataBridgePage.error.waitForDisplayed( 10000 );
 		assert.ok( DataBridgePage.error.isDisplayed() );
 		assert.ok( DataBridgePage.showsErrorUnknown() );
 
@@ -61,7 +61,7 @@ describe( 'App', () => {
 
 		NetworkUtil.disableNetwork();
 		DataBridgePage.launchApp();
-		DataBridgePage.error.waitForDisplayed();
+		DataBridgePage.error.waitForDisplayed( 10000 );
 
 		assert.ok( DataBridgePage.showsErrorUnknown() );
 
@@ -97,7 +97,7 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( 5000 );
+		DataBridgePage.bridge.waitForDisplayed( 10000 );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 
 		const newValue = 'newValue';
@@ -151,7 +151,7 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( 5000 );
+		DataBridgePage.bridge.waitForDisplayed( 10000 );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 
 		const newValue = 'newValue';
@@ -234,7 +234,7 @@ describe( 'App', () => {
 			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.openAppOnPage( title );
-			DataBridgePage.bridge.waitForDisplayed( 5000 );
+			DataBridgePage.bridge.waitForDisplayed( 10000 );
 
 			const newValue = 'newValue';
 			DomUtil.setValue( DataBridgePage.value, newValue );
