@@ -3,6 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Specials;
 
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
@@ -29,6 +30,7 @@ class SpecialListPropertiesDispatchingFactory {
 		DataTypeFactory $dataTypeFactory,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		PrefetchingTermLookup $prefetchingTermLookup,
 		SettingsArray $repoSettings
 	) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -39,7 +41,6 @@ class SpecialListPropertiesDispatchingFactory {
 			);
 		}
 
-		$prefetchingTermLookup = $wikibaseRepo->getPrefetchingTermLookup();
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			$prefetchingTermLookup,
 			$languageFallbackChainFactory->newFromLanguage( $wikibaseRepo->getUserLanguage() )

@@ -398,6 +398,7 @@
 			"services": [
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
+				"WikibaseRepo.PrefetchingTermLookup",
 				"WikibaseRepo.Settings"
 			]
 		},
@@ -407,6 +408,7 @@
 				"WikibaseRepo.DataTypeFactory",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
+				"WikibaseRepo.PrefetchingTermLookup",
 				"WikibaseRepo.Settings"
 			]
 		}
@@ -640,7 +642,8 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\DifferenceEngineViewHeaderHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\DifferenceEngineViewHeaderHookHandler::factory",
 			"services": [
-				"WikibaseRepo.LanguageFallbackChainFactory"
+				"WikibaseRepo.LanguageFallbackChainFactory",
+				"WikibaseRepo.PrefetchingTermLookup"
 			]
 		},
 		"DeleteDispatcher": {
@@ -684,7 +687,8 @@
 			"factory": "\\Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandler::factory",
 			"services": [
 				"WikibaseRepo.EntityIdLookup",
-				"WikibaseRepo.LanguageFallbackChainFactory"
+				"WikibaseRepo.LanguageFallbackChainFactory",
+				"WikibaseRepo.PrefetchingTermLookup"
 			]
 		},
 		"LibHooks": {
@@ -718,7 +722,8 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\PageHistoryPagerHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\PageHistoryPagerHookHandler::factory",
 			"services": [
-				"WikibaseRepo.LanguageFallbackChainFactory"
+				"WikibaseRepo.LanguageFallbackChainFactory",
+				"WikibaseRepo.PrefetchingTermLookup"
 			]
 		},
 		"ShowSearchHit": {
