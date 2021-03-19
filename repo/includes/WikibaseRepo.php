@@ -1204,7 +1204,7 @@ class WikibaseRepo {
 		return new EntityContentDataCodec(
 			self::getEntityIdParser(),
 			self::getStorageEntitySerializer(),
-			$this->getInternalFormatEntityDeserializer(),
+			self::getInternalFormatEntityDeserializer(),
 			self::getDataAccessSettings()->maxSerializedEntitySizeInBytes()
 		);
 	}
@@ -1252,8 +1252,9 @@ class WikibaseRepo {
 	/**
 	 * Returns a deserializer to deserialize entities in both current and legacy serialization.
 	 */
-	public function getInternalFormatEntityDeserializer(): Deserializer {
-		return self::getInternalFormatDeserializerFactory()->newEntityDeserializer();
+	public static function getInternalFormatEntityDeserializer( ContainerInterface $services = null ): Deserializer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.InternalFormatEntityDeserializer' );
 	}
 
 	/**
