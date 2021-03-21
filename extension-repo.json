@@ -686,6 +686,7 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandler::factory",
 			"services": [
+				"TitleFactory",
 				"WikibaseRepo.EntityIdLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.PrefetchingTermLookup"

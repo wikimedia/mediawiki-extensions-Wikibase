@@ -21,7 +21,6 @@ use Serializers\Serializer;
 use Site;
 use SiteLookup;
 use StubObject;
-use TitleFactory;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
@@ -888,7 +887,7 @@ final class WikibaseClient {
 	private function getAffectedPagesFinder(): AffectedPagesFinder {
 		return new AffectedPagesFinder(
 			$this->getStore()->getUsageLookup(),
-			new TitleFactory(),
+			MediaWikiServices::getInstance()->getTitleFactory(),
 			MediaWikiServices::getInstance()->getLinkBatchFactory(),
 			self::getSettings()->getSetting( 'siteGlobalID' ),
 			self::getLogger()
@@ -918,7 +917,7 @@ final class WikibaseClient {
 
 		return new ChangeHandler(
 			$this->getAffectedPagesFinder(),
-			new TitleFactory(),
+			MediaWikiServices::getInstance()->getTitleFactory(),
 			$pageUpdater,
 			$changeListTransformer,
 			$this->siteLookup,
