@@ -190,7 +190,7 @@ class ChangesSubscriptionTableBuilder {
 	 */
 	private function getSubscriptionsPerItemBatch( IDatabase $db, &$continuation = [] ) {
 		if ( empty( $continuation ) ) {
-			$continuationCondition = '1';
+			$continuationCondition = '1=1';
 		} else {
 			list( $fromItemId, $fromRowId ) = $continuation;
 			$continuationCondition = 'ips_item_id > ' . (int)$fromItemId

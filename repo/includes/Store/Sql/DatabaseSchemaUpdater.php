@@ -57,7 +57,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$db = $updater->getDB();
 		$type = $db->getType();
 
-		if ( $type !== 'mysql' && $type !== 'sqlite' ) {
+		if ( $type !== 'mysql' && $type !== 'sqlite' && $type !== 'postgres' ) {
 			wfWarn( "Database type '$type' is not supported by the Wikibase repository." );
 			return;
 		}
@@ -80,8 +80,8 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			'wb_items_per_site',
 			$this->getScriptPath( 'wb_items_per_site', $db->getType() )
 		);
-		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
-		if ( $db->getType() !== 'sqlite' ) {
+		// NOTE: This update is neither needed nor does it work on SQLite or Postgres.
+		if ( $db->getType() === 'mysql' ) {
 			// make ips_row_id BIGINT
 			$updater->modifyExtensionField(
 				'wb_items_per_site',
@@ -176,6 +176,9 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	}
 
 	private function updateItemsPerSiteTable( DatabaseUpdater $updater, IDatabase $db ) {
+		if ( $db->getType() == 'postgres' ) {
+			return;
+		}
 		// Make wb_items_per_site.ips_site_page VARCHAR(310) - T99459
 		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
 		if ( $db->getType() !== 'sqlite' ) {
@@ -202,8 +205,8 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 	private function updateChangesTable( DatabaseUpdater $updater, IDatabase $db ) {
 		// Make wb_changes.change_info MEDIUMBLOB - T108246
-		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
-		if ( $db->getType() !== 'sqlite' ) {
+		// NOTE: This update is neither needed nor does it work on SQLite or Postgres.
+		if ( $db->getType() === 'mysql' ) {
 			$updater->modifyExtensionField(
 				'wb_changes',
 				'change_info',
