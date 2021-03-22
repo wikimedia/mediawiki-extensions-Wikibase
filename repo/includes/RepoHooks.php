@@ -1158,10 +1158,6 @@ final class RepoHooks {
 		}
 	}
 
-	public static function onMediaWikiPHPUnitTestStartTest( $test ) {
-		WikibaseRepo::resetClassStatics();
-	}
-
 	/**
 	 * Register the parser functions.
 	 *

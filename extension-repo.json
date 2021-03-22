@@ -868,7 +868,6 @@
 		"ImportHandleRevisionXMLTag": "\\Wikibase\\Repo\\RepoHooks::onImportHandleRevisionXMLTag",
 		"InfoAction": "\\Wikibase\\Repo\\RepoHooks::onInfoAction",
 		"LoadExtensionSchemaUpdates": "DatabaseSchemaUpdater",
-		"MediaWikiPHPUnitTest::startTest": "\\Wikibase\\Repo\\RepoHooks::onMediaWikiPHPUnitTestStartTest",
 		"NamespaceIsMovable": "\\Wikibase\\Repo\\RepoHooks::onNamespaceIsMovable",
 		"OutputPageBeforeHTML": [
 			"OutputPageBeforeHTML",
