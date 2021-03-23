@@ -283,6 +283,7 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 			$changeLookup,
 			$changeFactory,
 			$rcFactory,
+			$this->getTitleFactoryMock(),
 			$spec->getParams()
 		) );
 
@@ -392,6 +393,7 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 			$changeLookup,
 			$changeFactory,
 			$rcFactory,
+			$this->getTitleFactoryMock(),
 			$params
 		) );
 
@@ -447,10 +449,10 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 			$changeLookup,
 			$changeFactory,
 			$rcFactory,
+			$this->getTitleFactoryMock(),
 			$params
 		);
 
-		$job->setTitleFactory( $this->getTitleFactoryMock() );
 		$job->setRecentChangesFinder( $rcDupeDetector );
 
 		$job->run();

@@ -114,6 +114,7 @@ class InjectRCRecordsJob extends Job {
 	 * @param EntityChangeLookup $changeLookup
 	 * @param EntityChangeFactory $changeFactory
 	 * @param RecentChangeFactory $rcFactory
+	 * @param TitleFactory $titleFactory
 	 * @param array $params Needs to have two keys: "change": the id of the change,
 	 *     "pages": array of pages, represented as $pageId => [ $namespace, $dbKey ].
 	 *
@@ -124,6 +125,7 @@ class InjectRCRecordsJob extends Job {
 		EntityChangeLookup $changeLookup,
 		EntityChangeFactory $changeFactory,
 		RecentChangeFactory $rcFactory,
+		TitleFactory $titleFactory,
 		array $params
 	) {
 		$title = Title::makeTitle( NS_SPECIAL, 'Badtitle/' . __CLASS__ );
@@ -156,8 +158,7 @@ class InjectRCRecordsJob extends Job {
 		$this->changeLookup = $changeLookup;
 		$this->changeFactory = $changeFactory;
 		$this->rcFactory = $rcFactory;
-
-		$this->titleFactory = new TitleFactory();
+		$this->titleFactory = $titleFactory;
 		$this->logger = new NullLogger();
 	}
 
@@ -170,6 +171,7 @@ class InjectRCRecordsJob extends Job {
 			$wbServices->getStore()->getEntityChangeLookup(),
 			WikibaseClient::getEntityChangeFactory( $mwServices ),
 			$wbServices->getRecentChangeFactory(),
+			$mwServices->getTitleFactory(),
 			$params
 		);
 
@@ -183,10 +185,6 @@ class InjectRCRecordsJob extends Job {
 
 	public function setRecentChangesFinder( RecentChangesFinder $rcDuplicateDetector ) {
 		$this->rcDuplicateDetector = $rcDuplicateDetector;
-	}
-
-	public function setTitleFactory( TitleFactory $titleFactory ) {
-		$this->titleFactory = $titleFactory;
 	}
 
 	public function setLogger( LoggerInterface $logger ) {

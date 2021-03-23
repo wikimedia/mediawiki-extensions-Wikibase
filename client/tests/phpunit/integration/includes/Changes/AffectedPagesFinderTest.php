@@ -532,7 +532,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 
 		$affectedPagesFinder = new AffectedPagesFinder(
 			$this->getSiteLinkUsageLookup( $pageTitle ),
-			new TitleFactory(),
+			$this->getTitleFactory(),
 			$this->getLinkBatchFactory(),
 			'enwiki',
 			null,

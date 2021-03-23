@@ -2,9 +2,9 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Hooks;
 
+use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\TestCase;
 use Title;
-use TitleFactory;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
@@ -80,7 +80,8 @@ abstract class LabelPrefetchHookHandlerTestBase extends TestCase {
 			->method( 'getEntityIds' )
 			->willReturnCallback( [ $this, 'titlesToIds' ] );
 
-		$titleFactory = new TitleFactory();
+		// TODO add a mock instead
+		$titleFactory = MediaWikiServices::getInstance()->getTitleFactory();
 
 		$fallbackChain = $this->createMock( TermLanguageFallbackChain::class );
 		$fallbackChain->method( 'getFetchLanguageCodes' )
