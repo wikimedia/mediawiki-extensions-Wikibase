@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Adeliine",
 			"Avjoska",
 			"Boxmein",
 			"Macofe",
@@ -13,7 +14,7 @@
 	"wikibase-entity-item": "üksus",
 	"wikibase-entity-property": "omadus",
 	"wikibase-entity-query": "päring",
-	"wikibase-edit": "redigeeri",
+	"wikibase-edit": "muuda",
 	"wikibase-save": "salvesta",
 	"wikibase-publish": "avalda",
 	"wikibase-cancel": "loobu",

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Adeliine",
 			"Avjoska",
 			"Pikne"
 		]
@@ -22,8 +23,8 @@
 	"wikibase-comment-sitelink-remove": "Eemaldatud keelelink $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|muudatus|muudatust}}",
 	"wikibase-dataitem": "Andmeüksus",
-	"wikibase-editlinks": "Redigeeri linke",
-	"wikibase-editlinkstitle": "Redigeeri keeltevahelisi linke",
+	"wikibase-editlinks": "Muuda linke",
+	"wikibase-editlinkstitle": "Muuda keelelinke",
 	"wikibase-addlinkstitle": "Lisa keeltevahelised lingid",
 	"wikibase-linkitem-addlinks": "Lisa lingid",
 	"wikibase-linkitem-alreadylinked": "Lehekülg, mida proovisid linkida on juba seotud keskse andmehoidla [$1 üksusega] ja viitab siin võrgukohas leheküljele [[$2]]. Üksusega saab siduda igast võrgukohast vaid ühe lehekülje. Palun vali muu lehekülg, millele linkida.",

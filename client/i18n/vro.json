@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Adeliine",
 			"Võrok"
 		]
 	},
@@ -9,6 +10,7 @@
 	"wikibase-dataitem": "Andmõütsüs",
 	"wikibase-editlinks": "Toimõndaq linke",
 	"wikibase-editlinkstitle": "Toimõndaq keelelinke",
+	"wikibase-linkitem-addlinks": "Panõq lingiq mano",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Käkiq ärq",
 	"wikibase-rc-hide-wikidata-show": "Näütäq",
