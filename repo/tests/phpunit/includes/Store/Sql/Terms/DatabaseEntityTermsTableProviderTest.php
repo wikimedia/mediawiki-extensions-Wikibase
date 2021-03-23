@@ -15,34 +15,27 @@ class DatabaseEntityTermsTableProviderTest extends TestCase {
 	public function provideEntityTypeAndExpectedOutput() {
 		return [
 			'item' => [
-				'alias' => 'foo',
 				'entityType' => 'item',
 				'expectedOutput' => [
 					[
-						"fooEntityTermsJoin" => [
-							"foo" => 'wbt_item_terms',
-							"fooTermInLangJoin" => [
-								"fooTermInLang" => 'wbt_term_in_lang',
-								"fooTextInLangJoin" => [
-									"fooTextInLang" => 'wbt_text_in_lang',
-									"fooTextJoin" => [ "fooText" => 'wbt_text' ]
-								]
-							]
-						]
+						'wbt_item_terms',
+						'wbt_term_in_lang',
+						'wbt_text_in_lang',
+						'wbt_text',
 					],
 					// join conditions
 					[
-						"fooTextJoin" => [
+						"wbt_text" => [
 							'JOIN',
-							"fooTextInLang.wbxl_text_id=fooText.wbx_id"
+							"wbxl_text_id=wbx_id"
 						],
-						"fooTextInLangJoin" => [
+						"wbt_text_in_lang" => [
 							'JOIN',
-							"fooTermInLang.wbtl_text_in_lang_id=fooTextInLang.wbxl_id"
+							"wbtl_text_in_lang_id=wbxl_id"
 						],
-						"fooTermInLangJoin" => [
+						"wbt_term_in_lang" => [
 							'JOIN',
-							"foo.wbit_term_in_lang_id=fooTermInLang.wbtl_id"
+							"wbit_term_in_lang_id=wbtl_id"
 						]
 					],
 					'wbit_item_id'
@@ -50,34 +43,27 @@ class DatabaseEntityTermsTableProviderTest extends TestCase {
 			],
 
 			'property' => [
-				'alias' => 'foo',
 				'entityType' => 'property',
 				'expectedOutput' => [
 					[
-						"fooEntityTermsJoin" => [
-							"foo" => 'wbt_property_terms',
-							"fooTermInLangJoin" => [
-								"fooTermInLang" => 'wbt_term_in_lang',
-								"fooTextInLangJoin" => [
-									"fooTextInLang" => 'wbt_text_in_lang',
-									"fooTextJoin" => [ "fooText" => 'wbt_text' ]
-								]
-							]
-						]
+						'wbt_property_terms',
+						'wbt_term_in_lang',
+						'wbt_text_in_lang',
+						'wbt_text',
 					],
 					// join conditions
 					[
-						"fooTextJoin" => [
+						"wbt_text" => [
 							'JOIN',
-							"fooTextInLang.wbxl_text_id=fooText.wbx_id"
+							"wbxl_text_id=wbx_id"
 						],
-						"fooTextInLangJoin" => [
+						"wbt_text_in_lang" => [
 							'JOIN',
-							"fooTermInLang.wbtl_text_in_lang_id=fooTextInLang.wbxl_id"
+							"wbtl_text_in_lang_id=wbxl_id"
 						],
-						"fooTermInLangJoin" => [
+						"wbt_term_in_lang" => [
 							'JOIN',
-							"foo.wbpt_term_in_lang_id=fooTermInLang.wbtl_id"
+							"wbpt_term_in_lang_id=wbtl_id"
 						]
 					],
 					'wbpt_property_id'
@@ -88,12 +74,11 @@ class DatabaseEntityTermsTableProviderTest extends TestCase {
 
 	/** @dataProvider provideEntityTypeAndExpectedOutput */
 	public function testGetEntityTermsTableAndJoinConditions(
-		$alias,
 		$entityType,
 		$expected
 	) {
 		$databaseEntityTermsTableProvider = new DatabaseEntityTermsTableProvider( $entityType );
-		$actual = $databaseEntityTermsTableProvider->getEntityTermsTableAndJoinConditions( $alias );
+		$actual = $databaseEntityTermsTableProvider->getEntityTermsTableAndJoinConditions();
 
 		$this->assertEquals( $expected, $actual );
 	}
