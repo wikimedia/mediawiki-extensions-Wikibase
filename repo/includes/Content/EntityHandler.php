@@ -410,7 +410,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param EntityId $id
 	 *
 	 * @throws InvalidArgumentException if $id refers to an entity of the wrong type.
-	 * @return Title
+	 * @return Title|null
 	 */
 	public function getTitleForId( EntityId $id ) {
 		if ( $id->getEntityType() !== $this->getEntityType() ) {

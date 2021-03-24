@@ -244,6 +244,9 @@ class EntityDataRequestHandler {
 
 			if ( $doc !== $canonicalDoc ) {
 				$url = $this->uriManager->getDocUrl( $entityId, $format, $revision );
+				if ( $url === null ) {
+					throw new HttpError( 400, $output->msg( 'wikibase-entitydata-bad-id', $id ) );
+				}
 				$output->redirect( $url, 301 );
 				return;
 			}
@@ -252,6 +255,9 @@ class EntityDataRequestHandler {
 		// if the format is HTML, redirect to the entity's wiki page
 		if ( $format === 'html' ) {
 			$url = $this->uriManager->getDocUrl( $entityId, 'html', $revision );
+			if ( $url === null ) {
+				throw new HttpError( 400, $output->msg( 'wikibase-entitydata-bad-id', $id ) );
+			}
 			$output->redirect( $url, 303 );
 			return;
 		}
@@ -259,6 +265,9 @@ class EntityDataRequestHandler {
 		// if redirection was force, redirect
 		if ( $redirectMode === 'force' ) {
 			$url = $this->uriManager->getDocUrl( $entityId, $format, $revision );
+			if ( $url === null ) {
+				throw new HttpError( 400, $output->msg( 'wikibase-entitydata-bad-id', $id ) );
+			}
 			$output->redirect( $url, 303 );
 			return;
 		}
@@ -354,6 +363,9 @@ class EntityDataRequestHandler {
 		$format = $this->getCanonicalFormat( $format );
 
 		$url = $this->uriManager->getDocUrl( $id, $format, $revision );
+		if ( $url === null ) {
+			throw new HttpError( 400, $output->msg( 'wikibase-entitydata-bad-id', $id->getSerialization() ) );
+		}
 		$output->redirect( $url, 303 );
 	}
 

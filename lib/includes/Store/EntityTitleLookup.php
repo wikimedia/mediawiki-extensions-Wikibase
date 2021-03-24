@@ -47,7 +47,7 @@ interface EntityTitleLookup {
 	 * @throws MWException
 	 * @throws OutOfBoundsException
 	 * @throws InvalidArgumentException
-	 * @return Title[]
+	 * @return (Title|null)[]
 	 */
 	public function getTitlesForIds( array $ids );
 

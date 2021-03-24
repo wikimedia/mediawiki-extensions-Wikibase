@@ -144,7 +144,7 @@ class EntityDataUriManager {
 	 * @param EntityId $id       The entity
 	 * @param string|null   $format   The (normalized) format name, or ''
 	 *
-	 * @return Title
+	 * @return Title|null
 	 */
 	public function getDocTitle( EntityId $id, $format = '' ) {
 		if ( $format === 'html' ) {
@@ -170,7 +170,7 @@ class EntityDataUriManager {
 	 * @param string|null $format   The (normalized) format name, or ''
 	 * @param int         $revision
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	public function getDocUrl( EntityId $id, $format = '', $revision = 0 ) {
 		$params = '';
@@ -180,6 +180,9 @@ class EntityDataUriManager {
 		}
 
 		$title = $this->getDocTitle( $id, $format );
+		if ( $title === null ) {
+			return null;
+		}
 		$url = $title->getFullURL( $params );
 		return $url;
 	}
