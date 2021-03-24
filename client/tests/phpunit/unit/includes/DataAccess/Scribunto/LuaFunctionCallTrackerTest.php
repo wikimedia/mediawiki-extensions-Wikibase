@@ -22,17 +22,20 @@ class LuaFunctionCallTrackerTest extends \PHPUnit\Framework\TestCase {
 			'logging disabled' => [
 				[],
 				false,
-				false
+				false,
+				1,
 			],
 			'per site group logging only' => [
 				[ 'fancy.wikibase.client.scribunto.doStuff.call' ],
 				true,
-				false
+				false,
+				1,
 			],
 			'per wiki logging only' => [
 				[ 'defancywiki.wikibase.client.scribunto.doStuff.call' ],
 				false,
-				true
+				true,
+				1,
 			],
 			'per wiki and per site group logging' => [
 				[
@@ -40,7 +43,8 @@ class LuaFunctionCallTrackerTest extends \PHPUnit\Framework\TestCase {
 					'fancy.wikibase.client.scribunto.doStuff.call'
 				],
 				true,
-				true
+				true,
+				0.1,
 			],
 		];
 	}
@@ -48,12 +52,17 @@ class LuaFunctionCallTrackerTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider incrementKeyProvider
 	 */
-	public function testIncrementKey( $expected, $trackLuaFunctionCallsPerSiteGroup, $trackLuaFunctionCallsPerWiki ) {
+	public function testIncrementKey( $expected,
+		$trackLuaFunctionCallsPerSiteGroup,
+		$trackLuaFunctionCallsPerWiki,
+		$trackLuaFunctionCallsSampleRate
+	) {
 		$statsdFactory = $this->createMock( StatsdDataFactoryInterface::class );
 
 		$keyBuffer = [];
 		$statsdFactory->expects( $this->exactly( count( $expected ) ) )
-			->method( 'increment' )
+			->method( 'updateCount' )
+				->with( $this->isType( 'string' ), 1 / $trackLuaFunctionCallsSampleRate )
 			->willReturnCallback( function ( $key ) use ( &$keyBuffer ) {
 				$keyBuffer[] = $key;
 			} );
@@ -62,7 +71,9 @@ class LuaFunctionCallTrackerTest extends \PHPUnit\Framework\TestCase {
 			$statsdFactory,
 			'defancywiki',
 			'fancy',
-			$trackLuaFunctionCallsPerSiteGroup, $trackLuaFunctionCallsPerWiki
+			$trackLuaFunctionCallsPerSiteGroup,
+			$trackLuaFunctionCallsPerWiki,
+			$trackLuaFunctionCallsSampleRate
 		);
 
 		$tracker->incrementKey( 'wikibase.client.scribunto.doStuff.call' );

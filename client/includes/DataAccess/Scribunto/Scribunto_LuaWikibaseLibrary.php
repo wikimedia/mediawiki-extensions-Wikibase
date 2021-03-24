@@ -224,7 +224,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 				$settings->getSetting( 'siteGlobalID' ),
 				WikibaseClient::getSiteGroup( $mwServices ),
 				$settings->getSetting( 'trackLuaFunctionCallsPerSiteGroup' ),
-				$settings->getSetting( 'trackLuaFunctionCallsPerWiki' )
+				$settings->getSetting( 'trackLuaFunctionCallsPerWiki' ),
+				$settings->getSetting( 'trackLuaFunctionCallsSampleRate' )
 			);
 		}
 
@@ -423,6 +424,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$options = [
 			'allowArbitraryDataAccess' => $settings->getSetting( 'allowArbitraryDataAccess' ),
 			'siteGlobalID' => $settings->getSetting( 'siteGlobalID' ),
+			'trackLuaFunctionCallsSampleRate' => $settings->getSetting( 'trackLuaFunctionCallsSampleRate' ),
 		];
 
 		return $this->getEngine()->registerInterface(

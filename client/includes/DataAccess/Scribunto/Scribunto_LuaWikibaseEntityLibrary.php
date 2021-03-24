@@ -129,7 +129,8 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 				$settings->getSetting( 'siteGlobalID' ),
 				WikibaseClient::getSiteGroup( $mwServices ),
 				$settings->getSetting( 'trackLuaFunctionCallsPerSiteGroup' ),
-				$settings->getSetting( 'trackLuaFunctionCallsPerWiki' )
+				$settings->getSetting( 'trackLuaFunctionCallsPerWiki' ),
+				$settings->getSetting( 'trackLuaFunctionCallsSampleRate' )
 			);
 		}
 
@@ -250,6 +251,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		// These settings will be exposed to the Lua module.
 		$options = [
 			'fineGrainedLuaTracking' => $settings->getSetting( 'fineGrainedLuaTracking' ),
+			'trackLuaFunctionCallsSampleRate' => $settings->getSetting( 'trackLuaFunctionCallsSampleRate' ),
 		];
 
 		return $this->getEngine()->registerInterface(

@@ -23,6 +23,7 @@ class Scribunto_LuaWikibaseStatsTest extends Scribunto_LuaWikibaseLibraryTestCas
 
 	private $oldTrackLuaFunctionCallsPerWiki;
 	private $oldTrackLuaFunctionCallsPerSiteGroup;
+	private $oldTrackLuaFunctionCallsSampleRate;
 
 	protected static $moduleName = 'LuaWikibaseStatsTest';
 
@@ -45,9 +46,14 @@ class Scribunto_LuaWikibaseStatsTest extends Scribunto_LuaWikibaseLibraryTestCas
 		$this->oldTrackLuaFunctionCallsPerSiteGroup = $settings->getSetting(
 			'trackLuaFunctionCallsPerSiteGroup'
 		);
+		$this->oldTrackLuaFunctionCallsSampleRate = $settings->getSetting(
+			'trackLuaFunctionCallsSampleRate'
+		);
 
 		$settings->setSetting( 'trackLuaFunctionCallsPerWiki', true );
 		$settings->setSetting( 'trackLuaFunctionCallsPerSiteGroup', false );
+		$settings->setSetting( 'trackLuaFunctionCallsPerSiteGroup', false );
+		$settings->setSetting( 'trackLuaFunctionCallsSampleRate', 1 );
 	}
 
 	protected function tearDown(): void {
@@ -61,6 +67,10 @@ class Scribunto_LuaWikibaseStatsTest extends Scribunto_LuaWikibaseLibraryTestCas
 		$settings->setSetting(
 			'trackLuaFunctionCallsPerSiteGroup',
 			$this->oldTrackLuaFunctionCallsPerSiteGroup
+		);
+		$settings->setSetting(
+			'trackLuaFunctionCallsSampleRate',
+			$this->oldTrackLuaFunctionCallsSampleRate
 		);
 
 		$siteId = $settings->getSetting( 'siteGlobalID' );

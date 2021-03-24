@@ -123,6 +123,7 @@ return call_user_func( function() {
 		'useKartographerMaplinkInWikitext' => false,
 		'trackLuaFunctionCallsPerSiteGroup' => false,
 		'trackLuaFunctionCallsPerWiki' => false,
+		'trackLuaFunctionCallsSampleRate' => 1,
 		'itemAndPropertySourceName' => 'local',
 		'entitySources' => [],
 

@@ -114,10 +114,16 @@ function wikibase.setupInterface( settings )
 		return entityModule.create( mw.clone( entity ) )
 	end
 
+	local function incrementStatsKey( key )
+		if math.random() <= settings.trackLuaFunctionCallsSampleRate then
+			php.incrementStatsKey( key )
+		end
+	end
+
 	-- Get the entity id for the current page. Cached.
 	-- Nil if not linked to an entity.
 	function wikibase.getEntityIdForCurrentPage()
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntityIdForCurrentPage.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntityIdForCurrentPage.call' )
 
 		if pageEntityId == false then
 			pageEntityId = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
@@ -133,7 +139,7 @@ function wikibase.setupInterface( settings )
 	-- @param {string} pageTitle
 	-- @param {string} [globalSiteId]
 	function wikibase.getEntityIdForTitle( pageTitle, globalSiteId )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntityIdForTitle.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntityIdForTitle.call' )
 
 		checkType( 'getEntityIdForTitle', 1, pageTitle, 'string' )
 		checkTypeMulti( 'getEntityIdForTitle', 2, globalSiteId, { 'string', 'nil' } )
@@ -146,7 +152,7 @@ function wikibase.setupInterface( settings )
 	--
 	-- @param {string} [id]
 	function wikibase.getEntity( id )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntity.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntity.call' )
 
 		checkTypeMulti( 'getEntity', 1, id, { 'string', 'nil' } )
 
@@ -171,7 +177,7 @@ function wikibase.setupInterface( settings )
 	-- @param {string} funcName for error logging
 	-- @param {string} rank Which statements to include. Either "best" or "all".
 	local function getEntityStatements( entityId, propertyId, funcName, rank )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntityStatements.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntityStatements.call' )
 
 		if not settings.allowArbitraryDataAccess and entityId ~= wikibase.getEntityIdForCurrentPage() then
 			error( 'Access to arbitrary entities has been disabled.', 2 )
@@ -183,7 +189,7 @@ function wikibase.setupInterface( settings )
 		local cacheKey = entityId .. '-' .. propertyId .. '-' .. rank
 		local statements = getFromCache( statementCache, cacheKey )
 		if statements == nil then
-			php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntityStatements.cache_miss' )
+			incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntityStatements.cache_miss' )
 
 			statements = php.getEntityStatements( entityId, propertyId, rank )
 			addToCache( statementCache, cacheKey, statements )
@@ -222,7 +228,7 @@ function wikibase.setupInterface( settings )
 	--
 	-- @param {string} [id]
 	function wikibase.getEntityUrl( id )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntityUrl.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntityUrl.call' )
 
 		checkTypeMulti( 'getEntityUrl', 1, id, { 'string', 'nil' } )
 
@@ -240,7 +246,7 @@ function wikibase.setupInterface( settings )
 	--
 	-- @param {string} [id]
 	function wikibase.getLabelWithLang( id )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getLabelWithLang.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.getLabelWithLang.call' )
 
 		checkTypeMulti( 'getLabelWithLang', 1, id, { 'string', 'nil' } )
 
@@ -271,7 +277,7 @@ function wikibase.setupInterface( settings )
 	-- @param {string} id
 	-- @param {string} languageCode
 	function wikibase.getLabelByLang( id, languageCode )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getLabelByLang.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.getLabelByLang.call' )
 
 		checkType( 'getLabelByLang', 1, id, 'string' )
 		checkType( 'getLabelByLang', 2, languageCode, 'string' )
@@ -284,7 +290,7 @@ function wikibase.setupInterface( settings )
 	--
 	-- @param {string} [id]
 	function wikibase.getDescriptionWithLang( id )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getDescriptionWithLang.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.getDescriptionWithLang.call' )
 
 		checkTypeMulti( 'getDescriptionWithLang', 1, id, { 'string', 'nil' } )
 
@@ -315,7 +321,7 @@ function wikibase.setupInterface( settings )
 	-- @param {string} itemId
 	-- @param {string} [globalSiteId]
 	function wikibase.getSitelink( itemId, globalSiteId )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getSitelink.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.getSitelink.call' )
 
 		checkType( 'getSitelink', 1, itemId, 'string' )
 		checkTypeMulti( 'getSitelink', 2, globalSiteId, { 'string', 'nil' } )
@@ -330,7 +336,7 @@ function wikibase.setupInterface( settings )
 	--
 	-- @param {string} entityIdSerialization
 	function wikibase.isValidEntityId( entityIdSerialization )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.isValidEntityId.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.isValidEntityId.call' )
 
 		checkType( 'isValidEntityId', 1, entityIdSerialization, 'string' )
 
@@ -341,7 +347,7 @@ function wikibase.setupInterface( settings )
 	--
 	-- @param {string} entityId
 	function wikibase.entityExists( entityId )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.entityExists.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.entityExists.call' )
 
 		checkType( 'entityExists', 1, entityId, 'string' )
 
@@ -356,7 +362,7 @@ function wikibase.setupInterface( settings )
 	--
 	-- @param {table} snakSerialization
 	function wikibase.renderSnak( snakSerialization )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.renderSnak.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.renderSnak.call' )
 
 		checkType( 'renderSnak', 1, snakSerialization, 'table' )
 
@@ -367,7 +373,7 @@ function wikibase.setupInterface( settings )
 	--
 	-- @param {table} snakSerialization
 	function wikibase.formatValue( snakSerialization )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.formatValue.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.formatValue.call' )
 
 		checkType( 'formatValue', 1, snakSerialization, 'table' )
 
@@ -378,7 +384,7 @@ function wikibase.setupInterface( settings )
 	--
 	-- @param {table} snaksSerialization
 	function wikibase.renderSnaks( snaksSerialization )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.renderSnaks.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.renderSnaks.call' )
 
 		checkType( 'renderSnaks', 1, snaksSerialization, 'table' )
 
@@ -389,7 +395,7 @@ function wikibase.setupInterface( settings )
 	--
 	-- @param {table} snaksSerialization
 	function wikibase.formatValues( snaksSerialization )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.formatValues.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.formatValues.call' )
 
 		checkType( 'formatValues', 1, snaksSerialization, 'table' )
 
@@ -400,7 +406,7 @@ function wikibase.setupInterface( settings )
 	--
 	-- @param {string} propertyLabelOrId
 	function wikibase.resolvePropertyId( propertyLabelOrId )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.resolvePropertyId.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.resolvePropertyId.call' )
 
 		checkType( 'resolvePropertyId', 1, propertyLabelOrId, 'string' )
 
@@ -411,7 +417,7 @@ function wikibase.setupInterface( settings )
 	--
 	-- @param {table} propertyIds
 	function wikibase.orderProperties( propertyIds )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.orderProperties.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.orderProperties.call' )
 
 		checkType( 'orderProperties', 1, propertyIds, 'table' )
 		return php.orderProperties( propertyIds )
@@ -419,7 +425,7 @@ function wikibase.setupInterface( settings )
 
 	-- Returns an ordered table of serialized property IDs
 	function wikibase.getPropertyOrder()
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getPropertyOrder.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.getPropertyOrder.call' )
 
 		return php.getPropertyOrder()
 	end
@@ -430,7 +436,7 @@ function wikibase.setupInterface( settings )
 	-- @param {string} propertyId
 	-- @param {table} toIds
 	function wikibase.getReferencedEntityId( fromEntityId, propertyId, toIds )
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getReferencedEntityId.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.getReferencedEntityId.call' )
 
 		checkType( 'getReferencedEntityId', 1, fromEntityId, 'string' )
 		checkType( 'getReferencedEntityId', 2, propertyId, 'string' )
@@ -455,7 +461,7 @@ function wikibase.setupInterface( settings )
 
 	-- Returns the current site's global id
 	function wikibase.getGlobalSiteId()
-		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getGlobalSiteId.call' )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.getGlobalSiteId.call' )
 		return settings.siteGlobalID
 	end
 
