@@ -145,7 +145,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 			$joinConditions,
 			$conditions,
 			$entityIdColumn
-		) = $this->getTermQueryParams( 'term', $termTypeId, $lang, $text );
+		) = $this->getTermQueryParams( $termTypeId, $lang, $text );
 
 		if ( !empty( $filterOnEntityIds ) ) {
 			$conditions[ $entityIdColumn ] = $filterOnEntityIds;
@@ -180,17 +180,17 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 		}
 	}
 
-	private function getTermQueryParams( $alias, $typeId, $lang, $text ) {
+	private function getTermQueryParams( $typeId, $lang, $text ) {
 		list(
 			$table,
 			$joinConditions,
 			$entityIdColumn
-		) = $this->databaseEntityTermsTableProvider->getEntityTermsTableAndJoinConditions( $alias );
+		) = $this->databaseEntityTermsTableProvider->getEntityTermsTableAndJoinConditions();
 
 		$conditions = [
-			"{$alias}TermInLang.wbtl_type_id" => $typeId,
-			"{$alias}TextInLang.wbxl_language" => $lang,
-			"{$alias}Text.wbx_text" => $text
+			"wbtl_type_id" => $typeId,
+			"wbxl_language" => $lang,
+			"wbx_text" => $text
 		];
 
 		return [ $table, $joinConditions, $conditions, $entityIdColumn ];

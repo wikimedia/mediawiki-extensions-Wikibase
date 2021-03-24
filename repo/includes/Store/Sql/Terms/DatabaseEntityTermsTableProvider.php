@@ -42,46 +42,31 @@ class DatabaseEntityTermsTableProvider {
 	/**
 	 * Constructs a table along the necessary joins with new store tables for selecting
 	 * entity terms referenced in $entityTermsTable through $entityTermsJoinColumn column.
-	 * @param  string $alias Alias for the entity terms table
-	 *  This will also be used as a prefix for inner aliases in join
-	 *  statements. The following aliases can be used externally to refer
-	 *  to these tables in furthe SQL statements:
-	 *  - {$alias}: alias for entity terms table (determined by $this->entityTermsTable)
-	 *  - {$alias}TermInLang: alias for wbt_terms_in_lang table
-	 *  - {$alias}TextInLang: alias for wbt_text_in_lang table
-	 *  - {$alias}Text: alias for wbt_text table
 	 * @return array with the following elements in order:
 	 *  - table: the final table (array, including the joins)
 	 *  - join conditions
 	 *  - entity id column: the column name that contains the entity id within the top-most entity terms table
-	 *  	this can be accessed inside other conditions as: "{$alias}.{$entityIdColumn}"
 	 */
-	public function getEntityTermsTableAndJoinConditions( string $alias ) {
+	public function getEntityTermsTableAndJoinConditions() {
 		$table = [
-			"{$alias}EntityTermsJoin" => [
-				"{$alias}" => $this->entityTermsTable,
-				"{$alias}TermInLangJoin" => [
-					"{$alias}TermInLang" => 'wbt_term_in_lang',
-					"{$alias}TextInLangJoin" => [
-						"{$alias}TextInLang" => 'wbt_text_in_lang',
-						"{$alias}TextJoin" => [ "{$alias}Text" => 'wbt_text' ]
-					]
-				]
-			]
+			$this->entityTermsTable,
+			'wbt_term_in_lang',
+			'wbt_text_in_lang',
+			'wbt_text',
 		];
 
 		$joinConditions = [
-			"{$alias}TextJoin" => [
+			"wbt_term_in_lang" => [
 				'JOIN',
-				"{$alias}TextInLang.wbxl_text_id={$alias}Text.wbx_id"
+				"{$this->entityTermsJoinColumn}=wbtl_id"
 			],
-			"{$alias}TextInLangJoin" => [
+			"wbt_text_in_lang" => [
 				'JOIN',
-				"{$alias}TermInLang.wbtl_text_in_lang_id={$alias}TextInLang.wbxl_id"
+				"wbtl_text_in_lang_id=wbxl_id"
 			],
-			"{$alias}TermInLangJoin" => [
+			"wbt_text" => [
 				'JOIN',
-				"{$alias}.{$this->entityTermsJoinColumn}={$alias}TermInLang.wbtl_id"
+				"wbxl_text_id=wbx_id"
 			]
 		];
 
