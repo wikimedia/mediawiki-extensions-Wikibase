@@ -32,8 +32,8 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 
 		$dbw = wfGetDB( DB_MASTER ); // writes to dummy tables
 
-		$dbw->delete( 'wb_changes', [ "1" ] );
-		$dbw->delete( 'wb_changes_dispatch', [ "1" ] );
+		$dbw->delete( 'wb_changes', [ "1=1" ] );
+		$dbw->delete( 'wb_changes_dispatch', [ "1=1" ] );
 
 		foreach ( $changes as $row ) {
 			if ( $row === null ) {

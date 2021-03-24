@@ -172,7 +172,7 @@ class PropertyInfoTableBuilder {
 				[
 					'page_id > ' . $pageId,
 					'page_namespace = ' . $propertyNamespace,
-					$this->shouldUpdateAllEntities ? '1' : 'pi_property_id IS NULL', // if not $all, only add missing entries
+					$this->shouldUpdateAllEntities ? '1=1' : 'pi_property_id IS NULL', // if not $all, only add missing entries
 				],
 				__METHOD__,
 				[
