@@ -496,7 +496,7 @@ class WikiPageEntityStore implements EntityStore {
 			[
 				'rev_page' => $revision->getPageId(),
 				'rev_id > ' . (int)$lastRevId
-				. ' OR rev_timestamp > ' . $dbw->addQuotes( $revision->getTimestamp() ),
+				. ' OR rev_timestamp > ' . $dbw->addQuotes( $dbw->timestamp( $revision->getTimestamp() ) ),
 				'NOT( ' . $revWhere['conds'] . ' )',
 			],
 			__METHOD__,

@@ -41,7 +41,7 @@ class SqlItemsWithoutSitelinksFinder implements ItemsWithoutSitelinksFinder {
 				'page_namespace' => $this->entityNamespaceLookup->getEntityNamespace( Item::ENTITY_TYPE ),
 				'page_is_redirect' => 0,
 				'pp_propname' => 'wb-sitelinks',
-				$dbr->buildStringCast( 'pp_value' ) => 0
+				$dbr->buildStringCast( 'pp_value' ) => '0'
 			],
 			__METHOD__,
 			[
