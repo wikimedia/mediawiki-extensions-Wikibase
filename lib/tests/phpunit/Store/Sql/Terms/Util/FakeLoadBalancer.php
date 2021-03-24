@@ -51,6 +51,10 @@ class FakeLoadBalancer extends LoadBalancer {
 		return ( $domain === false ) ? $this->getLocalDomainID() : (string)$domain;
 	}
 
+	public function reuseConnection( IDatabase $conn ) {
+		// no-op
+	}
+
 	public function __destruct() {
 		// no-op
 	}
