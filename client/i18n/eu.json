@@ -15,7 +15,7 @@
 	"wikibase-comment-add": "{{WBREPONAME}} elementua sortu da.",
 	"wikibase-comment-update": "{{WBREPONAME}} elementua aldatua",
 	"wikibase-comment-sitelink-add": "Hizkuntza loturak gehituak:$1",
-	"wikibase-comment-multi": "{{PLURAL:$1|aldaketa 1|$1 aldaketa}}",
+	"wikibase-comment-multi": "{{PLURAL:$1|aldaketa bat|$1 aldaketa}}",
 	"wikibase-dataitem": "{{WBREPONAME}} itema",
 	"wikibase-editlinks": "Aldatu loturak",
 	"wikibase-editlinkstitle": "Aldatu hizkuntzen arteko loturak",

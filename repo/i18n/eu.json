@@ -68,7 +68,7 @@
 	"wikibase-propertypage-datatype": "Datu mota",
 	"wikibase-propertypage-bad-datatype": "Datu mota ezezaguna:$1",
 	"wikibase-statementview-rank-normal": "Eremu arrunta",
-	"wikibase-statementview-references-counter": "{{PLURAL:$1|erreferentzia $1|$1 erreferentzia}}",
+	"wikibase-statementview-references-counter": "{{PLURAL:$1|Erreferentzia bat|$1 erreferentzia}}",
 	"wikibase-snakview-property-input-placeholder": "ezaugarri",
 	"wikibase-snakview-variations-somevalue-label": "balio ezezaguna",
 	"wikibase-snakview-variations-novalue-label": "baliorik ez",

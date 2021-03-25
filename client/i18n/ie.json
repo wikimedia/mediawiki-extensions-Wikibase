@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Fanjiayi",
+			"Mithridates",
 			"OIS",
 			"Stavanger7"
 		]
@@ -9,6 +10,7 @@
 	"wikibase-dataitem": "Element {{WBREPONAME}}",
 	"wikibase-editlinks": "Redacter ligamentes",
 	"wikibase-editlinkstitle": "Redacter interlingual ligamentes",
+	"wikibase-linkitem-addlinks": "Adjunter ligamentes",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ocultar",
 	"wikibase-rc-hide-wikidata-show": "Monstrar",
