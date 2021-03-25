@@ -25,6 +25,7 @@ class DumpEntitiesTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetEntityTypes_yieldsRelevantTypes(
 		array $expected,
+		string $expectedWarning,
 		array $existingEntityTypes,
 		array $entityTypesToExcludeFromOutput,
 		array $cliEntityTypes
@@ -47,6 +48,7 @@ class DumpEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$dumper->loadWithArgv( $argv );
 
 		$accessibleDumper = TestingAccessWrapper::newFromObject( $dumper );
+		$this->expectOutputString( $expectedWarning );
 
 		$this->assertSame( $expected, $accessibleDumper->getEntityTypes() );
 	}
@@ -54,12 +56,14 @@ class DumpEntitiesTest extends \PHPUnit\Framework\TestCase {
 	public function provideEntityTypeData() {
 		yield [
 			[ 'item', 'property' ],
+			'',
 			[ 'item', 'property' ],
 			[],
 			[]
 		];
 		yield [
 			[ 'item', 'property', 'lexeme' ],
+			'',
 			[ 'item', 'property', 'lexeme' ],
 			[],
 			[],
@@ -67,30 +71,49 @@ class DumpEntitiesTest extends \PHPUnit\Framework\TestCase {
 		];
 		yield [
 			[ 'lexeme' ],
+			'',
 			[ 'item', 'property', 'lexeme' ],
 			[],
 			[ 'lexeme' ]
 		];
 		yield [
 			[ 'item', 'property' ],
+			'',
 			[ 'item', 'property', 'lexeme' ],
 			[],
 			[ 'item', 'property' ]
 		];
 		yield [
 			[ 'item' ],
+			'',
 			[ 'item', 'property', 'lexeme' ],
 			[],
 			[ 'item' ]
 		];
+		yield 'Discard unknown entity type' => [
+			[ 'item' ],
+			"Warning: Unknown entity type banana.\n",
+			[ 'item', 'property', 'lexeme' ],
+			[],
+			[ 'item', 'banana' ]
+		];
+		yield 'Discard unknown entity types' => [
+			[],
+			"Warning: Unknown entity type banana.\nWarning: Unknown entity type chocolate.\n",
+			[ 'item', 'property', 'lexeme' ],
+			[],
+			[ 'banana', 'chocolate' ]
+		];
 		yield 'no output available for properties' => [
 			[ 'item' ],
+			'',
 			[ 'item', 'property' ],
 			[ 'property' ],
 			[]
 		];
 		yield 'no output available for properties, property type requested in CLI' => [
 			[],
+			'',
 			[ 'item', 'property' ],
 			[ 'property' ],
 			[ 'property' ]
