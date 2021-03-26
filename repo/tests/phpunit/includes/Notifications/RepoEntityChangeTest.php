@@ -90,7 +90,7 @@ class RepoEntityChangeTest extends ChangeRowTest {
 		$revRecord->setComment( CommentStoreComment::newUnsavedComment( 'Test!' ) );
 		$revRecord->setTimestamp( $timestamp );
 		$revRecord->setId( 5 );
-		$revRecord->setUser( new UserIdentityValue( 7, 'Mr. Kittens', 1 ) );
+		$revRecord->setUser( new UserIdentityValue( 7, 'Mr. Kittens' ) );
 		$revRecord->setPageId( 6 );
 
 		$entityChange->setRevisionInfo( $revRecord, 8 );
