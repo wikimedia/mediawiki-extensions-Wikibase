@@ -1,11 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Dhee jah",
+			"Dnshitobu",
 			"Masssly"
 		]
 	},
-	"wikibase-rc-hide-wikidata-hide": "Soɣima",
+	"wikibase-editlinks": "Malimi linki nim ŋɔ niŋ",
+	"wikibase-rc-hide-wikidata-hide": "Sɔɣama",
 	"wikibase-rc-hide-wikidata-show": "Wuhima",
-	"wikibase-rc-wikibase-edit-letter": "D"
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} maliniŋ"
 }
