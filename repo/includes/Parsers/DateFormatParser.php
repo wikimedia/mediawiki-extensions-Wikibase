@@ -116,7 +116,7 @@ class DateFormatParser extends StringValueParser {
 		}
 	}
 
-	// @codingStandardsIgnoreStart
+	// phpcs:disable Generic.Metrics.CyclomaticComplexity.MaxExceeded,Squiz.WhiteSpace.FunctionSpacing
 	/**
 	 * @see Language::sprintfDate
 	 *
@@ -282,7 +282,6 @@ class DateFormatParser extends StringValueParser {
 				case 'xoY':
 				case 'xtY':
 					throw new ParseException( 'Unsupported date format "' . $code . '"' );
-					break;
 
 				// Character with no meaning
 				default:
@@ -298,7 +297,7 @@ class DateFormatParser extends StringValueParser {
 
 		return $pattern . '$>iu';
 	}
-	// @codingStandardsIgnoreEnd
+	// phpcs:enable
 
 	/**
 	 * @return string Partial regular expression

@@ -8,7 +8,6 @@ use Title;
 /**
  * Minimal set of classes necessary to fulfill needs of parts of Wikibase relying on
  * the PageImages extension.
- * @codingStandardsIgnoreFile
  */
 
 class PageImages {

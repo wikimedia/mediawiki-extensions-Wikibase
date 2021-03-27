@@ -3,7 +3,6 @@
 /**
  * Minimal set of classes necessary to fulfill needs of parts of Wikibase relying on
  * the Echo extension.
- * @codingStandardsIgnoreFile
  */
 
 class EchoAttributeManager {

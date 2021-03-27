@@ -3,7 +3,6 @@
 /**
  * Minimal set of classes necessary to fulfill needs of parts of Wikibase relying on
  * the Math extension.
- * @codingStandardsIgnoreFile
  */
 
 class MathDataUpdater implements \Wikibase\Repo\ParserOutput\StatementDataUpdater {
