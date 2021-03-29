@@ -131,10 +131,10 @@ class EntityTermsTest extends MediaWikiLangTestCase {
 		$entityIds = $this->makeEntityIds( array_keys( $terms ) );
 
 		$module = new EntityTerms(
-			new FakePrefetchingTermLookup(),
-			$this->getEntityIdLookup( $entityIds ),
 			$this->getQueryModule( $params, $titles ),
-			'entityterms'
+			'entityterms',
+			$this->getEntityIdLookup( $entityIds ),
+			new FakePrefetchingTermLookup()
 		);
 
 		$module->execute();

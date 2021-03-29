@@ -21,7 +21,7 @@ use Wikibase\Lib\TermIndexEntry;
  * "capital city of the US", calling entityterms with titles=Q61 would include
  * that label and description in the response.
  *
- * @note This closely mirrors the Client pageterms API, except for the factory method.
+ * @note This closely mirrors the Client pageterms API, except for the services injected.
  *
  * @license GPL-2.0-or-later
  */
@@ -39,28 +39,14 @@ class EntityTerms extends ApiQueryBase {
 	private $idLookup;
 
 	public function __construct(
-		TermBuffer $termBuffer,
-		EntityIdLookup $idLookup,
 		ApiQuery $query,
-		string $moduleName
+		string $moduleName,
+		EntityIdLookup $idLookup,
+		TermBuffer $termBuffer
 	) {
 		parent::__construct( $query, $moduleName, 'wbet' );
 		$this->termBuffer = $termBuffer;
 		$this->idLookup = $idLookup;
-	}
-
-	public static function factory(
-		ApiQuery $apiQuery,
-		string $moduleName,
-		EntityIdLookup $entityIdLookup,
-		TermBuffer $termBuffer
-	): self {
-		return new self(
-			$termBuffer,
-			$entityIdLookup,
-			$apiQuery,
-			$moduleName
-		);
 	}
 
 	public function execute(): void {
