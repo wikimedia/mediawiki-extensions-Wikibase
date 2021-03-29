@@ -402,6 +402,27 @@ return [
 		return $site;
 	},
 
+	'WikibaseClient.SiteGroup' => function ( MediaWikiServices $services ): string {
+		$settings = WikibaseClient::getSettings( $services );
+		$siteGroup = $settings->getSetting( 'siteGroup' );
+
+		if ( !$siteGroup ) {
+			$siteId = $settings->getSetting( 'siteGlobalID' );
+
+			$site = $services->getSiteLookup()->getSite( $siteId );
+
+			if ( !$site ) {
+				// TODO we should log some warning here,
+				// but currently that breaks CI (T153729, T153597)
+				return Site::GROUP_NONE;
+			}
+
+			$siteGroup = $site->getGroup();
+		}
+
+		return $siteGroup;
+	},
+
 	'WikibaseClient.StringNormalizer' => function ( MediaWikiServices $services ): StringNormalizer {
 		return new StringNormalizer();
 	},
