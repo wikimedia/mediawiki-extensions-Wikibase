@@ -7,6 +7,8 @@
 			"Stavanger7"
 		]
 	},
+	"tooltip-t-wikibase": "Ligament a conexet articul del depositoria de data",
+	"wikibase-comment-update": "{{WBREPONAME}} articul changeat",
 	"wikibase-dataitem": "Element {{WBREPONAME}}",
 	"wikibase-editlinks": "Redacter ligamentes",
 	"wikibase-editlinkstitle": "Redacter interlingual ligamentes",

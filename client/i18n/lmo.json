@@ -148,7 +148,7 @@
 	"wikibase-client-data-bridge-deprecated-statement-error-head": "Adess la modifica del valor per $1 l'è minga suportada",
 	"wikibase-client-data-bridge-deprecated-statement-error-body": "El valor pee $1 o l'è <em>obsoleto</em> sciu {{WBREPONAME}}. Adsedess la modifca di valor <em>andegher</em> l'è minga suportada.",
 	"wikibase-client-data-bridge-ambiguous-statement-error-head": "La modifica de pussee d'un valor a l'istess temp l'è minga suportada",
-	"wikibase-client-data-bridge-ambiguous-statement-error-body": "Per el moment $1 el po vesser minga modificad perchè 'l gh'hà denter pussee d'un valor.",
+	"wikibase-client-data-bridge-ambiguous-statement-error-body": "Per intanta $1 el po vesser minga modificad perchè 'l gh'hà denter pussee d'un valor.",
 	"wikibase-client-data-bridge-somevalue-error-head": "Adess la modifica del valor per $1 l'è minga suportada",
 	"wikibase-client-data-bridge-somevalue-error-body": "$1 a l'è marcad come aventa un <i>valor conossud de nissun</i> in su {{WBREPONAME}}. Adess la modifica di valor marcad come <i>valor conossud de nissun</i> l'è minga possibil.",
 	"wikibase-client-data-bridge-novalue-error-head": "Adess la modifica del valor per $1 l'è minga suportada",

@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Byrial",
+			"C960657",
 			"Christian List",
 			"Fitoschido",
 			"Hede2000",
@@ -56,6 +57,8 @@
 	"datatypes-type-wikibase-property": "Egenskab",
 	"datatypes-type-commonsMedia": "Commons media-fil",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-calendar-gregorian": "gregoriansk",
+	"wikibase-time-calendar-julian": "juliansk",
 	"wikibase-time-precision-Gannum": "i $1 milliarder år",
 	"wikibase-time-precision-Mannum": "$1 million år e.v.t.",
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 år}} e.v.t.",

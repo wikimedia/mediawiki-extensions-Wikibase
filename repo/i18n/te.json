@@ -86,6 +86,7 @@
 	"wikibase-itemmerge-not-item": "ఇచ్చిన ఎన్టిటీ, అంశం కాదు.",
 	"wikibase-itemmerge-failed-modify": "అంశాలను విలీనం చెయ్యలేకపోయాం. ఘర్షణలేమైనా ఉంటే పరిష్కరించండి.",
 	"wikibase-itemmerge-cant-load-entity-content": "అంశాన్ని లోడు చెయ్యలేకపోయాం.",
+	"wikibase-itemmerge-cant-merge-self": "అంశాన్ని దానితోటే విలీనం చెయ్యజాలరు.",
 	"wikibase-dispatchstats-average": "సగటు",
 	"special-itemswithoutsitelinks": "సైటులింకులు లేని అంశాలు",
 	"wikibase-special-mergeitems-error-prefix": "ఆ అంశాలను విలీనం చెయ్యలేకపోయాం. కింది లోపం ఎదురైంది:",
@@ -96,6 +97,7 @@
 	"content-model-wikibase-item": "వికీబేస్ అంశం",
 	"right-item-term": "అంశపు విశేషాలను మార్చడం (లేబెళ్ళు, వివరణలు, అలియాసులు)",
 	"action-item-merge": "అంశాలను విలీనం చేసే",
+	"right-item-merge": "అంశాలను విలీనం చెయ్యడం",
 	"right-item-redirect": "అంశాల దారిమార్పులను సృష్టించడం",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "రద్దుచేయి"
 }
