@@ -1282,13 +1282,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * Returns a deserializer to deserialize statements in both current and legacy serialization.
-	 */
-	public function getInternalFormatStatementDeserializer(): Deserializer {
-		return self::getInternalFormatDeserializerFactory()->newStatementDeserializer();
-	}
-
-	/**
 	 * Returns a deserializer to deserialize statements in current serialization only.
 	 */
 	public static function getExternalFormatStatementDeserializer( ContainerInterface $services = null ): Deserializer {

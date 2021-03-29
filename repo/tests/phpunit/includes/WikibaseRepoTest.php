@@ -11,7 +11,6 @@ use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use DataValues\UnknownValue;
-use Deserializers\Deserializer;
 use LogicException;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
@@ -455,11 +454,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetEntityContentDataCodec() {
 		$codec = $this->getWikibaseRepo()->getEntityContentDataCodec();
 		$this->assertInstanceOf( EntityContentDataCodec::class, $codec );
-	}
-
-	public function testGetInternalFormatStatementDeserializer() {
-		$deserializer = $this->getWikibaseRepo()->getInternalFormatStatementDeserializer();
-		$this->assertInstanceOf( Deserializer::class, $deserializer );
 	}
 
 	public function testGetEntityChangeFactory() {
