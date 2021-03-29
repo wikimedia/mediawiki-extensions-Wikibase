@@ -146,7 +146,7 @@ return [
 							$repo->getEntityLookup(),
 							WikibaseRepo::getEntityIdParser(),
 							new LanguageFallbackLabelDescriptionLookup(
-								$repo->getTermLookup(),
+								WikibaseRepo::getTermLookup(),
 								WikibaseRepo::getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
 							),
 							$repo->getEntityTypeToRepositoryMapping()

@@ -26,7 +26,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -547,11 +546,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testNewItemMergeInteractor() {
 		$interactor = $this->getWikibaseRepo()->newItemMergeInteractor( new RequestContext() );
 		$this->assertInstanceOf( ItemMergeInteractor::class, $interactor );
-	}
-
-	public function testGetTermLookup() {
-		$service = $this->getWikibaseRepo()->getTermLookup();
-		$this->assertInstanceOf( TermLookup::class, $service );
 	}
 
 	public function testNewPropertyInfoBuilder() {

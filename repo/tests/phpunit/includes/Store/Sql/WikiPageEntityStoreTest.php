@@ -239,7 +239,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( [], array_diff( [ 'mw-replace' ], $r2tags ) );
 
 		// check that the term storage got updated (via a DataUpdate).
-		$termLookup = WikibaseRepo::getDefaultInstance()->getTermLookup();
+		$termLookup = WikibaseRepo::getTermLookup();
 		$this->assertSame( $termText, $termLookup->getLabel( $entityId, $termLang ) );
 	}
 
@@ -431,7 +431,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$this->assertRedirectPerPage( $q33, $oneId );
 
 		// check that the term storage got updated (via a DataUpdate).
-		$termLookup = WikibaseRepo::getDefaultInstance()->getTermLookup();
+		$termLookup = WikibaseRepo::getTermLookup();
 		$this->assertNull( $termLookup->getLabel( $oneId, $termLang ) );
 
 		// TODO: check notifications in wb_changes table!
@@ -892,7 +892,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		// TODO: check notifications in wb_changes table!
 
 		// check that the term storage got updated (via a DataUpdate).
-		$termLookup = WikibaseRepo::getDefaultInstance()->getTermLookup();
+		$termLookup = WikibaseRepo::getTermLookup();
 		try {
 			$label = $termLookup->getLabel( $entityId, 'en' );
 			$this->assertNull( $label );
