@@ -43,6 +43,7 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
@@ -735,6 +736,10 @@ return [
 
 	'WikibaseRepo.StringNormalizer' => function ( MediaWikiServices $services ): StringNormalizer {
 		return new StringNormalizer();
+	},
+
+	'WikibaseRepo.TermBuffer' => function ( MediaWikiServices $services ): TermBuffer {
+		return WikibaseRepo::getPrefetchingTermLookup( $services );
 	},
 
 	'WikibaseRepo.TermFallbackCache' => function ( MediaWikiServices $services ): TermFallbackCacheFacade {

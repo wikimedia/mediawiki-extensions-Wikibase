@@ -29,7 +29,6 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
-use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
@@ -553,18 +552,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetTermLookup() {
 		$service = $this->getWikibaseRepo()->getTermLookup();
 		$this->assertInstanceOf( TermLookup::class, $service );
-	}
-
-	public function testGetTermBuffer() {
-		$service = $this->getWikibaseRepo()->getTermBuffer();
-		$this->assertInstanceOf( TermBuffer::class, $service );
-	}
-
-	public function testGetTermBuffer_instance() {
-		$repo = $this->getWikibaseRepo();
-		$service = $repo->getTermBuffer();
-		$this->assertSame( $service, $repo->getTermBuffer(), 'Second call should return same instance' );
-		$this->assertSame( $service, $repo->getTermLookup(), 'TermBuffer and TermLookup should be the same object' );
 	}
 
 	public function testNewPropertyInfoBuilder() {

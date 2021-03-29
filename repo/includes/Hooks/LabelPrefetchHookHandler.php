@@ -70,10 +70,10 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 		TitleFactory $titleFactory,
 		EntityIdLookup $entityIdLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		PrefetchingTermLookup $prefetchingTermLookup
+		PrefetchingTermLookup $prefetchingTermLookup,
+		TermBuffer $termBuffer
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$termBuffer = $wikibaseRepo->getTermBuffer();
 		$termTypes = [ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION ];
 
 		return new self(

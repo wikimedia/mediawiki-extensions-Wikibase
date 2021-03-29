@@ -810,7 +810,7 @@ class WikibaseRepo {
 		return new LanguageFallbackLabelDescriptionLookupFactory(
 			self::getLanguageFallbackChainFactory(),
 			$this->getTermLookup(),
-			$this->getTermBuffer()
+			self::getTermBuffer()
 		);
 	}
 
@@ -881,10 +881,13 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @phan-suppress-next-line PhanTypeMismatchDeclaredReturn
 	 * @return TermBuffer|AliasTermBuffer
+	 * TODO: split AliasTermBuffer to its own service (T278690)
 	 */
-	public function getTermBuffer() {
-		return self::getPrefetchingTermLookup();
+	public static function getTermBuffer( ContainerInterface $services = null ): TermBuffer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.TermBuffer' );
 	}
 
 	/**

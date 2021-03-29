@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\TermIndexEntry;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Provides wikibase terms (labels, descriptions, aliases) for entity pages.
@@ -53,11 +52,9 @@ class EntityTerms extends ApiQueryBase {
 	public static function factory(
 		ApiQuery $apiQuery,
 		string $moduleName,
-		EntityIdLookup $entityIdLookup
+		EntityIdLookup $entityIdLookup,
+		TermBuffer $termBuffer
 	): self {
-		$repo = WikibaseRepo::getDefaultInstance();
-		$termBuffer = $repo->getTermBuffer();
-
 		return new self(
 			$termBuffer,
 			$entityIdLookup,
