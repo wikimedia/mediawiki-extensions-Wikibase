@@ -65,7 +65,6 @@ class TermFallback extends Term {
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * @param mixed $target
 	 *

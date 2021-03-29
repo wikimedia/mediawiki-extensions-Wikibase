@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Snak;
 
 use ArrayObject;
-use Comparable;
 use InvalidArgumentException;
 use Traversable;
 use Wikibase\DataModel\Internal\MapValueHasher;
@@ -18,7 +17,7 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
  */
-class SnakList extends ArrayObject implements Comparable {
+class SnakList extends ArrayObject {
 
 	/**
 	 * Maps snak hashes to their offsets.
@@ -123,7 +122,6 @@ class SnakList extends ArrayObject implements Comparable {
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * The comparison is done purely value based, ignoring the order of the elements in the array.
 	 *

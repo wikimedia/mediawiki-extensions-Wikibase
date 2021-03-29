@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel;
 
 use ArrayIterator;
-use Comparable;
 use Countable;
 use InvalidArgumentException;
 use Iterator;
@@ -23,7 +22,7 @@ use Wikibase\DataModel\Entity\ItemIdSet;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteLinkList implements IteratorAggregate, Countable, Comparable {
+class SiteLinkList implements IteratorAggregate, Countable {
 
 	/**
 	 * @var SiteLink[]
@@ -151,7 +150,6 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * @since 0.7.4
 	 *

@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel;
 
-use Comparable;
 use Countable;
 use InvalidArgumentException;
 use Wikibase\DataModel\Snak\Snak;
@@ -17,7 +16,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Reference implements Comparable, Countable {
+class Reference implements Countable {
 
 	/**
 	 * @var SnakList
@@ -91,7 +90,6 @@ class Reference implements Comparable, Countable {
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * The comparison is done purely value based, ignoring the order of the snaks.
 	 *

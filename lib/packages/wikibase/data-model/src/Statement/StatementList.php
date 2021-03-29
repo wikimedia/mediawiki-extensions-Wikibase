@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Statement;
 
 use ArrayIterator;
-use Comparable;
 use Countable;
 use InvalidArgumentException;
 use Iterator;
@@ -29,7 +28,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Kreuz
  */
-class StatementList implements IteratorAggregate, Comparable, Countable {
+class StatementList implements IteratorAggregate, Countable {
 
 	/**
 	 * @var Statement[]
@@ -267,7 +266,6 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * @param mixed $target
 	 *

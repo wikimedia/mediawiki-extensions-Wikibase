@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use Comparable;
 use InvalidArgumentException;
 
 /**
@@ -15,7 +14,7 @@ use InvalidArgumentException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-interface EntityDocument extends Comparable {
+interface EntityDocument {
 
 	/**
 	 * Returns a type identifier for the entity, e.g. "item" or "property".
@@ -60,7 +59,6 @@ interface EntityDocument extends Comparable {
 	public function isEmpty();
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * Two entities are considered equal if they are of the same type and have the same value. The
 	 * value does not include the id, so entities with the same value but different id are

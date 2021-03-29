@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Tests\Snak;
 
-use Comparable;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -300,10 +299,6 @@ class SnakListTest extends \PHPUnit\Framework\TestCase {
 				'Reordering must not mess up the lists internal state'
 			);
 		}
-	}
-
-	public function testComparableInterface() {
-		$this->assertInstanceOf( Comparable::class, new SnakList() );
 	}
 
 	/**

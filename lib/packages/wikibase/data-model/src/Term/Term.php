@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Term;
 
-use Comparable;
 use InvalidArgumentException;
 
 /**
@@ -13,7 +12,7 @@ use InvalidArgumentException;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Term implements Comparable {
+class Term {
 
 	/**
 	 * @var string Language code identifying the language of the text, but note that there is
@@ -60,7 +59,6 @@ class Term implements Comparable {
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * @param mixed $target
 	 *

@@ -74,7 +74,6 @@ abstract class SnakObject implements Snak {
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * @since 0.3
 	 *

@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 9.6.0 (development)
+## Version 9.6.0
 
 * `ReferenceList::addNewReference()`, `Statement::addNewReference()` and the `StatementList` constructor
   supported being called with a variadic argument list, with a single array argument,
@@ -10,6 +10,8 @@
   for instance, change `->addNewReference( [ $x, $y ] )` to `->addNewReference( $x, $y )`,
   and `->addNewReference( $snaks )` to `->addNewReference( ...$snaks )`.
 * `Statement`, `Reference`, `SnakList` and `Snak` no longer implement the `Hashable` and `Immutable` interfaces from `DataValues/DataValues`.
+* Removed usages of the `Comparable` interface
+* Made the library installable together with DataValues 3.x
 
 ## Version 9.5.1 (2020-06-03)
 

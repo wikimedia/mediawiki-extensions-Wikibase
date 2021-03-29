@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Statement;
 
-use Comparable;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 
@@ -16,7 +15,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class StatementGuid implements Comparable {
+class StatementGuid {
 
 	/**
 	 * The separator for the prefix and suffix of the GUID.

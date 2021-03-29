@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Term;
 
-use Comparable;
 use InvalidArgumentException;
 use OutOfBoundsException;
 
@@ -17,7 +16,7 @@ use OutOfBoundsException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  */
-class Fingerprint implements Comparable, LabelsProvider, DescriptionsProvider, AliasesProvider {
+class Fingerprint implements LabelsProvider, DescriptionsProvider, AliasesProvider {
 
 	/**
 	 * @deprecated since 2.5, use new Fingerprint() instead.
@@ -221,7 +220,6 @@ class Fingerprint implements Comparable, LabelsProvider, DescriptionsProvider, A
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * @since 0.7.4
 	 *

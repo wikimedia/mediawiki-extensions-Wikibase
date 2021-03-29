@@ -115,7 +115,6 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * @since 0.7.4
 	 *

@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use Comparable;
 use InvalidArgumentException;
 use Serializable;
 
@@ -12,7 +11,7 @@ use Serializable;
  *
  * @license GPL-2.0-or-later
  */
-abstract class EntityId implements Comparable, Serializable {
+abstract class EntityId implements Serializable {
 
 	protected $serialization;
 
@@ -195,7 +194,6 @@ abstract class EntityId implements Comparable, Serializable {
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * @since 0.5
 	 *
