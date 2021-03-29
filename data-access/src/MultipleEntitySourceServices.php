@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -45,9 +44,6 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 
 	/** @var EntityPrefetcher|null */
 	private $entityPrefetcher = null;
-
-	/** @var EntityNamespaceLookup|null */
-	private $entityNamespaceLookup = null;
 
 	/**
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
@@ -153,16 +149,6 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 		if ( $source !== null ) {
 			$this->singleSourceServices[$source->getSourceName()]->entityDeleted( $entityId );
 		}
-	}
-
-	public function getEntityNamespaceLookup(): EntityNamespaceLookup {
-		if ( $this->entityNamespaceLookup === null ) {
-			$this->entityNamespaceLookup = array_reduce( $this->singleSourceServices, function ( $nsLookup, $service ){
-				return $nsLookup->merge( $service->getEntityNamespaceLookup() );
-			}, new EntityNamespaceLookup( [], [] ) );
-		}
-
-		return $this->entityNamespaceLookup;
 	}
 
 	public function getTermBuffer() {
