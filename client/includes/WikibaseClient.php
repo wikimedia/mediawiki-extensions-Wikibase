@@ -54,7 +54,6 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -1091,7 +1090,7 @@ final class WikibaseClient {
 	}
 
 	private function getDatabaseDomainForPropertySource() {
-		$propertySource = $this->getPropertySource();
+		$propertySource = self::getPropertySource();
 
 		return $propertySource->getDatabaseName();
 	}
@@ -1110,14 +1109,9 @@ final class WikibaseClient {
 		return $itemSource;
 	}
 
-	private function getPropertySource() {
-		$propertySource = self::getEntitySourceDefinitions()->getSourceForEntityType( Property::ENTITY_TYPE );
-
-		if ( $propertySource === null ) {
-			throw new LogicException( 'No source providing Properties configured!' );
-		}
-
-		return $propertySource;
+	public static function getPropertySource( ContainerInterface $services = null ): EntitySource {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.PropertySource' );
 	}
 
 }
