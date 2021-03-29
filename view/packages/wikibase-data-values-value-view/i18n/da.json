@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Byrial",
+			"C960657",
 			"Joedalton",
 			"Jorn Ari",
 			"Peter Alberti",
@@ -14,8 +15,8 @@
 	"valueview-expert-globecoordinateinput-precision": "Præcision:",
 	"valueview-expert-globecoordinateinput-nullprecision": "uspecificeret",
 	"valueview-expert-globecoordinateinput-customprecision": "speciel ($1)",
-	"valueview-expert-timevalue-calendar-gregorian": "Gregoriansk",
-	"valueview-expert-timevalue-calendar-julian": "Juliansk",
+	"valueview-expert-timevalue-calendar-gregorian": "gregoriansk",
+	"valueview-expert-timevalue-calendar-julian": "juliansk",
 	"valueview-expert-timeinput-precision": "Præcision:",
 	"valueview-expert-timeinput-precision-year": "år",
 	"valueview-expert-timeinput-precision-month": "måned",
