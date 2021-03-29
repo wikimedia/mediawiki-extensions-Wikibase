@@ -35,7 +35,7 @@ describe( 'init', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		assert.ok( DataBridgePage.app.isDisplayed() );
+		assert.ok( DataBridgePage.app.isDisplayed( 10000 ) );
 	} );
 
 	it( 'indicates loading while app gathers its data', () => {
@@ -104,7 +104,7 @@ describe( 'init', () => {
 
 			DataBridgePage.openAppOnPage( title );
 
-			DataBridgePage.bridge.waitForDisplayed( 5000 );
+			DataBridgePage.bridge.waitForDisplayed( 10000 );
 			assert.ok( DataBridgePage.bridge.isDisplayed() );
 			assert.strictEqual( DataBridgePage.value.getValue(), stringPropertyExampleValue );
 		} );
@@ -170,7 +170,7 @@ describe( 'init', () => {
 
 			DataBridgePage.openAppOnPage( title );
 
-			DataBridgePage.bridge.waitForDisplayed();
+			DataBridgePage.bridge.waitForDisplayed( 10000 );
 			assert.ok( DataBridgePage.bridge.isDisplayed() );
 			assert.strictEqual( DataBridgePage.nthReference( 1 ).getText(), 'A. B. https://example.com.' );
 			assert.strictEqual( DataBridgePage.nthReference( 2 ).getText(), 'C.' );
@@ -222,7 +222,7 @@ describe( 'init', () => {
 
 				browser.waitUntil(
 					() => DataBridgePage.propertyLabel.getText() === expectedLabel,
-					5000,
+					10000,
 					`${DataBridgePage.propertyLabel.getText()} is not equal to ${expectedLabel}`
 				);
 			}
