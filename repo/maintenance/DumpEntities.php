@@ -267,11 +267,25 @@ abstract class DumpEntities extends Maintenance {
 		};
 	}
 
-	private function getEntityTypes() {
-		return array_diff(
+	/**
+	 * @return string[]
+	 */
+	private function getEntityTypes(): array {
+		$inputTypes = array_diff(
 			$this->getOption( 'entity-type', $this->existingEntityTypes ),
 			$this->entityTypesToExcludeFromOutput
 		);
+
+		$types = [];
+		foreach ( $inputTypes as $type ) {
+			if ( !in_array( $type, $this->existingEntityTypes ) ) {
+				$this->logMessage( "Warning: Unknown entity type $type." );
+				continue;
+			}
+			$types[] = $type;
+		}
+
+		return $types;
 	}
 
 	/**
