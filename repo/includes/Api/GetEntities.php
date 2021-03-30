@@ -19,6 +19,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\SiteLinkTargetProvider;
+use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -132,6 +133,7 @@ class GetEntities extends ApiBase {
 		EntityIdParser $entityIdParser,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		SettingsArray $repoSettings,
+		Store $store,
 		StringNormalizer $stringNormalizer
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -148,7 +150,8 @@ class GetEntities extends ApiBase {
 			$stringNormalizer,
 			$languageFallbackChainFactory,
 			$siteLinkTargetProvider,
-			$wikibaseRepo->getStore()->getEntityPrefetcher(),
+			// TODO move EntityPrefetcher to service container and inject that directly
+			$store->getEntityPrefetcher(),
 			$repoSettings->getSetting( 'siteLinkGroups' ),
 			$apiHelperFactory->getErrorReporter( $apiMain ),
 			$apiHelperFactory->getResultBuilder( $apiMain ),
@@ -253,8 +256,9 @@ class GetEntities extends ApiBase {
 	}
 
 	private function getItemByTitleHelper(): EntityByTitleHelper {
+		// TODO inject Store/EntityByLinkedTitleLookup and SiteLookup as services
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$siteLinkStore = $wikibaseRepo->getStore()->getEntityByLinkedTitleLookup();
+		$siteLinkStore = WikibaseRepo::getStore()->getEntityByLinkedTitleLookup();
 		return new EntityByTitleHelper(
 			$this,
 			$this->resultBuilder,

@@ -228,7 +228,7 @@ class FormatSnakValueTest extends ApiTestCase {
 		// Set up a Property
 		$this->testingProperty = new Property( null, null, 'string' );
 
-		$store = WikibaseRepo::getDefaultInstance()->getStore()->getEntityStore();
+		$store = WikibaseRepo::getStore()->getEntityStore();
 
 		// Save them, this will also automatically assign new IDs
 		$store->saveEntity( $this->testingItem, 'testing', $this->getTestUser()->getUser(), EDIT_NEW );

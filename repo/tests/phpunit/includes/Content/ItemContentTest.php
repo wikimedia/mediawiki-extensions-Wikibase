@@ -283,7 +283,7 @@ class ItemContentTest extends EntityContentTestCase {
 			$wikibaseRepo->getEntityConstraintProvider(),
 			$wikibaseRepo->getValidatorErrorLocalizer(),
 			WikibaseRepo::getEntityIdParser(),
-			$wikibaseRepo->getStore()->newSiteLinkStore(),
+			WikibaseRepo::getStore()->newSiteLinkStore(),
 			WikibaseRepo::getEntityIdLookup(),
 			$wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory(),
 			$this->createMock( FieldDefinitions::class ),

@@ -6,6 +6,7 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\Lib\Changes\ChangeStore;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -43,7 +44,13 @@ class StoreTest extends MediaWikiIntegrationTestCase {
 				new EntityNamespaceLookup( [] ),
 				$this->createMock( IdGenerator::class ),
 				$this->createMock( WikibaseServices::class ),
-				new EntitySource( 'testsource', 'testdb', [], '', '', '', '' )
+				new EntitySource( 'testsource', 'testdb', [], '', '', '', '' ),
+				new SettingsArray( [
+					'sharedCacheKeyPrefix' => 'wikibase_shared/testdb',
+					'sharedCacheKeyGroup' => 'testdb',
+					'sharedCacheType' => CACHE_NONE,
+					'sharedCacheDuration' => 60 * 60,
+				] )
 			)
 		];
 

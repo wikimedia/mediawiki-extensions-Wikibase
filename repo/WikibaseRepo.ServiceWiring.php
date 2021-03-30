@@ -110,7 +110,9 @@ use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\LoggingIdGenerator;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
+use Wikibase\Repo\Store\Sql\SqlStore;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
+use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
@@ -733,6 +735,24 @@ return [
 		}
 
 		return new DispatchingSerializer( $serializers );
+	},
+
+	'WikibaseRepo.Store' => function ( MediaWikiServices $services ): Store {
+		// TODO: the idea of local entity source seems not really suitable here. Store should probably
+		// get source definitions and pass the right source/sources to services it creates accordingly
+		// (as long as what it creates should not migrate to *SourceServices in the first place)
+		return new SqlStore(
+			WikibaseRepo::getEntityChangeFactory( $services ),
+			WikibaseRepo::getEntityIdParser( $services ),
+			WikibaseRepo::getEntityIdComposer( $services ),
+			WikibaseRepo::getEntityIdLookup( $services ),
+			WikibaseRepo::getEntityTitleStoreLookup( $services ),
+			WikibaseRepo::getEntityNamespaceLookup( $services ),
+			WikibaseRepo::getIdGenerator( $services ),
+			WikibaseRepo::getWikibaseServices( $services ),
+			WikibaseRepo::getLocalEntitySource( $services ),
+			WikibaseRepo::getSettings( $services )
+		);
 	},
 
 	'WikibaseRepo.StringNormalizer' => function ( MediaWikiServices $services ): StringNormalizer {

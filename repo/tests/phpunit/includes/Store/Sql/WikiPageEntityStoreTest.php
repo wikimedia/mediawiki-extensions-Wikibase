@@ -451,7 +451,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function assertRedirectPerPage( EntityId $expected, EntityId $entityId ) {
-		$entityRedirectLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRedirectLookup();
+		$entityRedirectLookup = WikibaseRepo::getStore()->getEntityRedirectLookup();
 
 		$targetId = $entityRedirectLookup->getRedirectForEntityId( $entityId );
 

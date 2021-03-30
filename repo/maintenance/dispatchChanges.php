@@ -231,7 +231,6 @@ class DispatchChanges extends Maintenance {
 			throw new MWException( "WikibaseRepository has not been loaded." );
 		}
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$repoSettings = WikibaseRepo::getSettings();
 		$defaultMaxTime = $repoSettings->getSetting( 'dispatchMaxTime' );
 
@@ -261,7 +260,7 @@ class DispatchChanges extends Maintenance {
 
 		$dispatcher = $this->newChangeDispatcher(
 			$clientWikis,
-			$wikibaseRepo->getStore()->getEntityChangeLookup(),
+			WikibaseRepo::getStore()->getEntityChangeLookup(),
 			$repoSettings,
 			WikibaseRepo::getLogger()
 		);

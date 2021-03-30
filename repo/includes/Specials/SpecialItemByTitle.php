@@ -12,6 +12,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
+use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -95,7 +96,8 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	public static function factory(
 		EntityTitleLookup $entityTitleLookup,
 		LoggerInterface $logger,
-		SettingsArray $repoSettings
+		SettingsArray $repoSettings,
+		Store $store
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
@@ -108,7 +110,8 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 			$entityTitleLookup,
 			new LanguageNameLookup(),
 			$wikibaseRepo->getSiteLookup(),
-			$wikibaseRepo->getStore()->newSiteLinkStore(),
+			// TODO move SiteLinkStore to service container and inject it directly
+			$store->newSiteLinkStore(),
 			$siteLinkTargetProvider,
 			$logger,
 			$repoSettings->getSetting( 'siteLinkGroups' )

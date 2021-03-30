@@ -17,6 +17,7 @@ use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -67,6 +68,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		LoggerInterface $logger,
 		RdfVocabulary $rdfVocabulary,
 		SettingsArray $repoSettings,
+		Store $store,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
 	): self {
 		global $wgUseCdn, $wgApiFrameOptions;
@@ -76,10 +78,12 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$entityDataFormatProvider = $wikibaseRepo->getEntityDataFormatProvider();
 
 		$entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup();
-		$entityRedirectLookup = $wikibaseRepo->getStore()->getEntityRedirectLookup();
+		// TODO move EntityRedirectLookup to service container and inject it directly
+		$entityRedirectLookup = $store->getEntityRedirectLookup();
 
 		$serializationService = new EntityDataSerializationService(
-			$wikibaseRepo->getStore()->getEntityLookup(),
+			// TODO move EntityLookup to service container and inject it directly
+			$store->getEntityLookup(),
 			$entityTitleLookup,
 			$entityContentFactory,
 			$wikibaseRepo->getPropertyDataTypeLookup(),

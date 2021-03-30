@@ -78,6 +78,7 @@
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.Settings",
+				"WikibaseRepo.Store",
 				"WikibaseRepo.StringNormalizer"
 			]
 		},
@@ -85,7 +86,9 @@
 			"class": "\\Wikibase\\Repo\\Api\\LinkTitles",
 			"factory": "\\Wikibase\\Repo\\Api\\LinkTitles::factory",
 			"services": [
-				"WikibaseRepo.Settings"
+				"SiteLookup",
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.Store"
 			]
 		},
 		"wbmergeitems": {
@@ -277,14 +280,16 @@
 			"services": [
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Logger",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.Store"
 			]
 		},
 		"GoToLinkedPage": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialGoToLinkedPage",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialGoToLinkedPage::factory",
 			"services": [
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.Store"
 			]
 		},
 		"ItemDisambiguation": {
@@ -361,6 +366,7 @@
 				"WikibaseRepo.Logger",
 				"WikibaseRepo.RdfVocabulary",
 				"WikibaseRepo.Settings",
+				"WikibaseRepo.Store",
 				"WikibaseRepo.ValueSnakRdfBuilderFactory"
 			]
 		},
@@ -409,7 +415,8 @@
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.PrefetchingTermLookup",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.Store"
 			]
 		}
 	},
@@ -635,8 +642,7 @@
 			]
 		},
 		"DatabaseSchemaUpdater": {
-			"class": "\\Wikibase\\Repo\\Store\\Sql\\DatabaseSchemaUpdater",
-			"factory": "\\Wikibase\\Repo\\Store\\Sql\\DatabaseSchemaUpdater::factory"
+			"class": "\\Wikibase\\Repo\\Store\\Sql\\DatabaseSchemaUpdater"
 		},
 		"DifferenceEngineViewHeaderHookHandler": {
 			"class": "\\Wikibase\\Repo\\Hooks\\DifferenceEngineViewHeaderHookHandler",

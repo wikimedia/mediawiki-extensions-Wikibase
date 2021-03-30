@@ -33,21 +33,6 @@ use Wikimedia\Rdbms\IDatabase;
 class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 	/**
-	 * @var Store
-	 */
-	private $store;
-
-	public function __construct( Store $store ) {
-		$this->store = $store;
-	}
-
-	public static function factory() {
-		$store = WikibaseRepo::getDefaultInstance()->getStore();
-
-		return new self( $store );
-	}
-
-	/**
 	 * Schema update to set up the needed database tables.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LoadExtensionSchemaUpdates
 	 *

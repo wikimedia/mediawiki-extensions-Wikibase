@@ -37,7 +37,8 @@ class SpecialItemsWithoutSitelinks extends SpecialWikibaseQueryPage {
 	 * @return EntityId[]
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
-		$itemsWithoutSitelinks = WikibaseRepo::getDefaultInstance()->getStore()->newItemsWithoutSitelinksFinder();
+		// TODO inject ItemsWithoutSitelinksFinder
+		$itemsWithoutSitelinks = WikibaseRepo::getStore()->newItemsWithoutSitelinksFinder();
 		return $itemsWithoutSitelinks->getItemsWithoutSitelinks( $limit, $offset );
 	}
 

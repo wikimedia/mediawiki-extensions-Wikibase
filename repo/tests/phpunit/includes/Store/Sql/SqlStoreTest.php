@@ -10,6 +10,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -72,7 +73,13 @@ class SqlStoreTest extends MediaWikiIntegrationTestCase {
 			new EntityNamespaceLookup( [] ),
 			$this->createMock( IdGenerator::class ),
 			$wikibaseServices,
-			new EntitySource( 'testsource', 'testdb', [], '', '', '', '' )
+			new EntitySource( 'testsource', 'testdb', [], '', '', '', '' ),
+			new SettingsArray( [
+				'sharedCacheKeyPrefix' => 'wikibase_shared/testdb',
+				'sharedCacheKeyGroup' => 'testdb',
+				'sharedCacheType' => CACHE_NONE,
+				'sharedCacheDuration' => 60 * 60,
+			] )
 		);
 	}
 

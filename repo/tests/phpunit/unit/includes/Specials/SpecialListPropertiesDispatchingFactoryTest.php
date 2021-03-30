@@ -31,7 +31,8 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 			new SettingsArray( [
 				'federatedPropertiesEnabled' => true,
 				'federatedPropertiesSourceScriptUrl' => 'https://wiki.example/w/',
-			] )
+			] ),
+			WikibaseRepo::getStore()
 		);
 
 		$this->assertInstanceOf( SpecialListFederatedProperties::class, $specialPage );
@@ -43,7 +44,8 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 			$this->createMock( EntityTitleLookup::class ),
 			WikibaseRepo::getLanguageFallbackChainFactory(),
 			WikibaseRepo::getPrefetchingTermLookup(),
-			new SettingsArray( [ 'federatedPropertiesEnabled' => false ] )
+			new SettingsArray( [ 'federatedPropertiesEnabled' => false ] ),
+			WikibaseRepo::getStore()
 		);
 
 		$this->assertInstanceOf( SpecialListProperties::class, $specialPage );

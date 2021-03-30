@@ -373,14 +373,14 @@ final class RepoHooks {
 		}
 
 		if ( $logType === null || ( $logType === 'delete' && $logAction === 'restore' ) ) {
-			$changeLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityChangeLookup();
+			$changeLookup = WikibaseRepo::getStore()->getEntityChangeLookup();
 
 			/** @var RepoEntityChange $change */
 			$change = $changeLookup->loadByRevisionId( $revId, EntityChangeLookup::FROM_MASTER );
 			'@phan-var RepoEntityChange $change';
 
 			if ( $change ) {
-				$changeStore = WikibaseRepo::getDefaultInstance()->getStore()->getChangeStore();
+				$changeStore = WikibaseRepo::getStore()->getChangeStore();
 
 				$centralIdLookup = CentralIdLookup::factoryNonLocal();
 				if ( $centralIdLookup === null ) {

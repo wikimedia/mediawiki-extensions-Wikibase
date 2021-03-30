@@ -64,7 +64,6 @@ use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\SnakFactory;
-use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\ValidatorBuilders;
 use Wikibase\Repo\Validators\CompositeValidator;
@@ -320,11 +319,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetSettingsReturnType() {
 		$returnValue = WikibaseRepo::getSettings();
 		$this->assertInstanceOf( SettingsArray::class, $returnValue );
-	}
-
-	public function testGetStoreReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getStore();
-		$this->assertInstanceOf( Store::class, $returnValue );
 	}
 
 	public function testGetSnakFormatterFactory() {

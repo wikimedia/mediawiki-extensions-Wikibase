@@ -95,7 +95,7 @@ class DumpJson extends DumpEntities {
 			$this->setServices(
 				$sqlEntityIdPagerFactory,
 				$wikibaseRepo->getEnabledEntityTypes(),
-				$wikibaseRepo->getStore()->getEntityPrefetcher(),
+				WikibaseRepo::getStore( $mwServices )->getEntityPrefetcher(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
 				$revisionLookup,
 				WikibaseRepo::getCompactEntitySerializer( $mwServices )

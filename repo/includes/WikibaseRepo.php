@@ -171,7 +171,6 @@ use Wikibase\Repo\Search\Fields\NoFieldDefinitions;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
-use Wikibase\Repo\Store\Sql\SqlStore;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
@@ -220,11 +219,6 @@ class WikibaseRepo {
 	 * @var ExceptionLocalizer|null
 	 */
 	private $exceptionLocalizer = null;
-
-	/**
-	 * @var Store|null
-	 */
-	private $store = null;
 
 	/**
 	 * @var CachingCommonsMediaFileNameLookup|null
@@ -416,7 +410,7 @@ class WikibaseRepo {
 	private function newWikibaseSnakFormatterBuilders( WikibaseValueFormatterBuilders $valueFormatterBuilders ) {
 		return new WikibaseSnakFormatterBuilders(
 			$valueFormatterBuilders,
-			$this->getStore()->getPropertyInfoLookup(),
+			self::getStore()->getPropertyInfoLookup(),
 			$this->getPropertyDataTypeLookup(),
 			self::getDataTypeFactory()
 		);
@@ -509,7 +503,7 @@ class WikibaseRepo {
 	 * @return EntityStoreWatcher
 	 */
 	public function getEntityStoreWatcher() {
-		return $this->getStore()->getEntityStoreWatcher();
+		return self::getStore()->getEntityStoreWatcher();
 	}
 
 	public static function getEntityTitleLookup( ContainerInterface $services = null ): EntityTitleLookup {
@@ -585,7 +579,7 @@ class WikibaseRepo {
 	 * @return EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup( $cache = Store::LOOKUP_CACHING_ENABLED ) {
-		return $this->getStore()->getEntityRevisionLookup( $cache );
+		return self::getStore()->getEntityRevisionLookup( $cache );
 	}
 
 	/**
@@ -609,7 +603,7 @@ class WikibaseRepo {
 			$this->getSummaryFormatter(),
 			$user,
 			$this->newEditFilterHookRunner( $context ),
-			$this->getStore()->getEntityRedirectLookup(),
+			self::getStore()->getEntityRedirectLookup(),
 			self::getEntityTitleStoreLookup()
 		);
 	}
@@ -643,7 +637,7 @@ class WikibaseRepo {
 	 * @return EntityStore
 	 */
 	public function getEntityStore() {
-		return $this->getStore()->getEntityStore();
+		return self::getStore()->getEntityStore();
 	}
 
 	/**
@@ -670,7 +664,7 @@ class WikibaseRepo {
 	}
 
 	private function newPropertyDataTypeLookupForLocalProperties(): PropertyDataTypeLookup {
-		$infoLookup = $this->getStore()->getPropertyInfoLookup();
+		$infoLookup = self::getStore()->getPropertyInfoLookup();
 		$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
 		return new PropertyInfoDataTypeLookup(
 			$infoLookup,
@@ -698,7 +692,7 @@ class WikibaseRepo {
 	 * @return EntityLookup
 	 */
 	public function getEntityLookup( $cache = Store::LOOKUP_CACHING_ENABLED, $lookupMode = LookupConstants::LATEST_FROM_REPLICA ) {
-		return $this->getStore()->getEntityLookup( $cache, $lookupMode );
+		return self::getStore()->getEntityLookup( $cache, $lookupMode );
 	}
 
 	public function getPropertyLookup( $cacheMode = Store::LOOKUP_CACHING_ENABLED ): PropertyLookup {
@@ -829,30 +823,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.IdGenerator' );
 	}
 
-	/**
-	 * @return Store
-	 */
-	public function getStore() {
-		if ( $this->store === null ) {
-			$localEntitySource = self::getLocalEntitySource();
-			// TODO: the idea of local entity source seems not really suitable here. Store should probably
-			// get source definitions and pass the right source/sources to services it creates accordingly
-			// (as long as what it creates should not migrate to *SourceServices in the first place)
-
-			$this->store = new SqlStore(
-				self::getEntityChangeFactory(),
-				self::getEntityIdParser(),
-				self::getEntityIdComposer(),
-				self::getEntityIdLookup(),
-				self::getEntityTitleStoreLookup(),
-				self::getEntityNamespaceLookup(),
-				self::getIdGenerator(),
-				self::getWikibaseServices(),
-				$localEntitySource
-			);
-		}
-
-		return $this->store;
+	public static function getStore( ContainerInterface $services = null ): Store {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.Store' );
 	}
 
 	public static function getLocalEntitySource( ContainerInterface $services = null ): EntitySource {
@@ -1097,7 +1070,7 @@ class WikibaseRepo {
 	 */
 	public function getEntityConstraintProvider() {
 		return new EntityConstraintProvider(
-			$this->getStore()->getSiteLinkConflictLookup()
+			self::getStore()->getSiteLinkConflictLookup()
 		);
 	}
 
@@ -1143,7 +1116,7 @@ class WikibaseRepo {
 		];
 
 		if ( self::getSettings()->getSetting( 'useChangesTable' ) ) {
-			$transmitters[] = new DatabaseChangeTransmitter( $this->getStore()->getChangeStore() );
+			$transmitters[] = new DatabaseChangeTransmitter( self::getStore()->getChangeStore() );
 		}
 
 		return new ChangeNotifier(
@@ -1302,7 +1275,7 @@ class WikibaseRepo {
 		$codec = $this->getEntityContentDataCodec();
 		$constraintProvider = $this->getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
-		$siteLinkStore = $this->getStore()->newSiteLinkStore();
+		$siteLinkStore = self::getStore()->newSiteLinkStore();
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		return new ItemHandler(
@@ -1379,7 +1352,7 @@ class WikibaseRepo {
 		$codec = $this->getEntityContentDataCodec();
 		$constraintProvider = $this->getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
-		$propertyInfoStore = $this->getStore()->getPropertyInfoStore();
+		$propertyInfoStore = self::getStore()->getPropertyInfoStore();
 		$propertyInfoBuilder = $this->newPropertyInfoBuilder();
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
@@ -1473,7 +1446,7 @@ class WikibaseRepo {
 			$services->getPermissionManager(),
 			$services->getRevisionLookup(),
 			$services->getTitleFactory(),
-			$this->getStore()->getEntityByLinkedTitleLookup(),
+			self::getStore( $services )->getEntityByLinkedTitleLookup(),
 			self::getEntityFactory(),
 			$this->getEntityStore()
 		);

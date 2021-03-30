@@ -366,9 +366,8 @@ return call_user_func( function() {
 				EntityMentionListener $tracker,
 				DedupeBag $dedupe
 			) {
-				$repo = WikibaseRepo::getDefaultInstance();
 				$uriPatternProvider = new FieldPropertyInfoProvider(
-					$repo->getStore()->getPropertyInfoLookup(),
+					WikibaseRepo::getStore()->getPropertyInfoLookup(),
 					PropertyInfoStore::KEY_CANONICAL_URI
 				);
 				return new ExternalIdentifierRdfBuilder( $vocab, $uriPatternProvider );

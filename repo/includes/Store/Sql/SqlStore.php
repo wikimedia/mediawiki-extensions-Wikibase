@@ -15,6 +15,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\CacheRetrievingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
@@ -173,6 +174,7 @@ class SqlStore implements Store {
 	 * @param IdGenerator $idGenerator
 	 * @param WikibaseServices $wikibaseServices Service container providing data access services
 	 * @param EntitySource $entitySource
+	 * @param SettingsArray $settings
 	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
@@ -183,7 +185,8 @@ class SqlStore implements Store {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		IdGenerator $idGenerator,
 		WikibaseServices $wikibaseServices,
-		EntitySource $entitySource
+		EntitySource $entitySource,
+		SettingsArray $settings
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
@@ -195,8 +198,6 @@ class SqlStore implements Store {
 		$this->wikibaseServices = $wikibaseServices;
 		$this->entitySource = $entitySource;
 
-		//TODO: inject settings
-		$settings = WikibaseRepo::getSettings();
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$this->cacheKeyGroup = $settings->getSetting( 'sharedCacheKeyGroup' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );

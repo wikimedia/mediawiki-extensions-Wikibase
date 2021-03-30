@@ -8,6 +8,7 @@ use ApiBase;
 use ApiMain;
 use Site;
 use SiteList;
+use SiteLookup;
 use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
@@ -15,6 +16,7 @@ use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
+use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Store\Store;
@@ -29,6 +31,9 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Addshore
  */
 class LinkTitles extends ApiBase {
+
+	/** @var SiteLinkStore */
+	private $siteLinkStore;
 
 	/**
 	 * @var SiteLinkTargetProvider
@@ -63,6 +68,7 @@ class LinkTitles extends ApiBase {
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
+		SiteLinkStore $siteLinkStore,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		ApiErrorReporter $errorReporter,
 		array $siteLinkGroups,
@@ -72,6 +78,7 @@ class LinkTitles extends ApiBase {
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
+		$this->siteLinkStore = $siteLinkStore;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 		$this->errorReporter = $errorReporter;
 		$this->siteLinkGroups = $siteLinkGroups;
@@ -83,19 +90,23 @@ class LinkTitles extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
-		SettingsArray $repoSettings
+		SiteLookup $siteLookup,
+		SettingsArray $repoSettings,
+		Store $store
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
 
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteLookup(),
+			$siteLookup,
 			$repoSettings->getSetting( 'specialSiteLinkGroups' )
 		);
 
 		return new self(
 			$mainModule,
 			$moduleName,
+			// TODO move SiteLinkStore to service container and inject it directly
+			$store->newSiteLinkStore(),
 			$siteLinkTargetProvider,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
 			$repoSettings->getSetting( 'siteLinkGroups' ),
@@ -134,9 +145,8 @@ class LinkTitles extends ApiBase {
 			$params['totitle']
 		);
 
-		$siteLinkStore = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkStore();
-		$fromId = $siteLinkStore->getItemIdForLink( $fromSite->getGlobalId(), $fromPage );
-		$toId = $siteLinkStore->getItemIdForLink( $toSite->getGlobalId(), $toPage );
+		$fromId = $this->siteLinkStore->getItemIdForLink( $fromSite->getGlobalId(), $fromPage );
+		$toId = $this->siteLinkStore->getItemIdForLink( $toSite->getGlobalId(), $toPage );
 
 		$siteLinkList = new SiteLinkList();
 		$flags = 0;
