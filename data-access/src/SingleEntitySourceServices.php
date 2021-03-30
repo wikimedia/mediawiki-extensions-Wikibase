@@ -275,6 +275,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			);
 			$repositoryName = '';
 			$databaseName = $this->entitySource->getDatabaseName();
+			$logger = LoggerFactory::getInstance( 'Wikibase' ); // TODO inject
 			$this->entityMetaDataAccessor = new PrefetchingWikiPageEntityMetaDataAccessor(
 				new TypeDispatchingWikiPageEntityMetaDataAccessor(
 					$this->entityMetaDataAccessorCallbacks,
@@ -284,13 +285,13 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 							$entityNamespaceLookup,
 							$this->slotRoleStore
 						),
-						$this->entitySource
+						$this->entitySource,
+						$logger
 					),
 					$databaseName,
 					$repositoryName
 				),
-				// TODO: inject?
-				LoggerFactory::getInstance( 'Wikibase' )
+				$logger
 			);
 		}
 

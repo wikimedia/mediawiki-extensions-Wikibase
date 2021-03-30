@@ -106,16 +106,12 @@ use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
-use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
-use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
-use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
-use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
@@ -546,26 +542,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityIdLookup' );
 	}
 
-	public function getLocalRepoWikiPageMetaDataAccessor(): WikiPageEntityMetaDataAccessor {
-		$entityNamespaceLookup = self::getEntityNamespaceLookup();
-		$repoName = ''; // Empty string here means this only works for the local repo
-		$dbName = false; // false means the local database
-		return new PrefetchingWikiPageEntityMetaDataAccessor(
-			new TypeDispatchingWikiPageEntityMetaDataAccessor(
-				self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
-				new WikiPageEntityMetaDataLookup(
-					$entityNamespaceLookup,
-					new EntityIdLocalPartPageTableEntityQuery(
-						$entityNamespaceLookup,
-						MediaWikiServices::getInstance()->getSlotRoleStore()
-					),
-					self::getLocalEntitySource()
-				),
-				$dbName,
-				$repoName
-			),
-			self::getLogger()
-		);
+	public static function getLocalRepoWikiPageMetaDataAccessor( ContainerInterface $services = null ): WikiPageEntityMetaDataAccessor {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.LocalRepoWikiPageMetaDataAccessor' );
 	}
 
 	/**

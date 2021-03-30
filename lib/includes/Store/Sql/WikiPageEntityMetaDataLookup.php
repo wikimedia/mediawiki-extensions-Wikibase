@@ -47,15 +47,11 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 */
 	private $entitySource;
 
-	/**
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 * @param PageTableEntityQuery $pageTableEntityConditionGenerator
-	 * @param EntitySource $entitySource
-	 */
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
 		PageTableEntityQuery $pageTableEntityConditionGenerator,
-		EntitySource $entitySource
+		EntitySource $entitySource,
+		LoggerInterface $logger = null
 	) {
 		$databaseName = $entitySource->getDatabaseName();
 
@@ -63,9 +59,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->pageTableEntityQuery = $pageTableEntityConditionGenerator;
 		$this->entitySource = $entitySource;
-
-		// TODO: Inject
-		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
+		$this->logger = $logger ?: LoggerFactory::getInstance( 'Wikibase' );
 	}
 
 	/**

@@ -69,11 +69,16 @@ use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
+use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
+use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
+use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
@@ -601,6 +606,32 @@ return [
 				return $types;
 			},
 			[]
+		);
+	},
+
+	'WikibaseRepo.LocalRepoWikiPageMetaDataAccessor' => function ( MediaWikiServices $services ): WikiPageEntityMetaDataAccessor {
+		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup( $services );
+		$repoName = ''; // Empty string here means this only works for the local repo
+		$dbName = false; // false means the local database
+		$logger = WikibaseRepo::getLogger( $services );
+
+		return new PrefetchingWikiPageEntityMetaDataAccessor(
+			new TypeDispatchingWikiPageEntityMetaDataAccessor(
+				WikibaseRepo::getEntityTypeDefinitions( $services )
+					->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
+				new WikiPageEntityMetaDataLookup(
+					$entityNamespaceLookup,
+					new EntityIdLocalPartPageTableEntityQuery(
+						$entityNamespaceLookup,
+						$services->getSlotRoleStore()
+					),
+					WikibaseRepo::getLocalEntitySource( $services ),
+					$logger
+				),
+				$dbName,
+				$repoName
+			),
+			$logger
 		);
 	},
 
