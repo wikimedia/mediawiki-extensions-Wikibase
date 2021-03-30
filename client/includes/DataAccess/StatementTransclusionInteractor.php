@@ -8,10 +8,10 @@ use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\Formatters\SnakFormatter;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * Renders the main Snaks associated with a given Property on an Entity.
@@ -82,7 +82,7 @@ class StatementTransclusionInteractor {
 	) {
 		try {
 			$entity = $this->entityLookup->getEntity( $entityId );
-		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+		} catch ( UnresolvedEntityRedirectException $ex ) {
 			// Continue as if nothing happened (for usage tracking purposes).
 			$entity = null;
 		}

@@ -10,9 +10,9 @@ use RequestContext;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -156,7 +156,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 				$this->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
 			}
 		} catch ( ItemMergeException $ex ) {
-			if ( $ex->getPrevious() instanceof RevisionedUnresolvedRedirectException ) {
+			if ( $ex->getPrevious() instanceof UnresolvedEntityRedirectException ) {
 				$this->showErrorHTML( $this->msg( 'wikibase-itemmerge-redirect' )->parse() );
 			} else {
 				$this->showExceptionMessage( $ex );
