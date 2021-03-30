@@ -23,7 +23,7 @@ use Wikibase\Lib\TermIndexEntry;
  * pageterms with titles=Washington_DC would include that label and description
  * in the response.
  *
- * @note This closely mirrors the Repo entityterms API, except for the factory method.
+ * @note This closely mirrors the Repo entityterms API, except for the services injected.
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

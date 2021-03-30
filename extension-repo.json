@@ -243,7 +243,6 @@
 	"APIPropModules": {
 		"entityterms": {
 			"class": "\\Wikibase\\Repo\\Api\\EntityTerms",
-			"factory": "\\Wikibase\\Repo\\Api\\EntityTerms::factory",
 			"services": [
 				"WikibaseRepo.EntityIdLookup",
 				"WikibaseRepo.TermBuffer"
