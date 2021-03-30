@@ -1,0 +1,77 @@
+<?php
+declare( strict_types = 1 );
+
+namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
+
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
+
+/**
+ * @coversNothing
+ *
+ * @group Wikibase
+ *
+ * @license GPL-2.0-or-later
+ */
+class ItemVocabularyBaseUriTest extends ServiceWiringTestCase {
+
+	private function getEntitySourceDefinitions( array $baseUriToEntityTypes ): EntitySourceDefinitions {
+		$length = count( $baseUriToEntityTypes );
+
+		return new EntitySourceDefinitions(
+			array_map(
+				function ( string $baseUri, array $entityTypes, int $idx ): EntitySource {
+					return new EntitySource(
+						'test' . $idx,
+						false,
+						array_fill_keys(
+							$entityTypes,
+							[ 'namespaceId' => $idx, 'slot' => 'main' ]
+						),
+						$baseUri,
+						'',
+						'',
+						''
+					);
+				},
+				array_keys( $baseUriToEntityTypes ),
+				$baseUriToEntityTypes,
+				$length > 0 ? range( 1, $length ) : []
+			),
+			new EntityTypeDefinitions( [] )
+		);
+	}
+
+	public function testReturnsEntitySourceBaseUri(): void {
+		$baseUri = 'test.test/items';
+
+		$this->mockService(
+			'WikibaseRepo.EntitySourceDefinitions',
+			$this->getEntitySourceDefinitions( [
+				'test.source/somethings' => [ 'something' ],
+				$baseUri => [ Item::ENTITY_TYPE ]
+			] )
+		);
+
+		$this->assertSame(
+			$baseUri,
+			$this->getService( 'WikibaseRepo.ItemVocabularyBaseUri' )
+		);
+	}
+
+	public function testThrowsWhenNoItemSourceDefined(): void {
+		$this->mockService(
+			'WikibaseRepo.EntitySourceDefinitions',
+			$this->getEntitySourceDefinitions( [
+				'test.source/somethings' => [ 'something' ]
+			] )
+		);
+
+		$this->expectException( 'LogicException' );
+
+		$this->getService( 'WikibaseRepo.ItemVocabularyBaseUri' );
+	}
+}

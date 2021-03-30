@@ -540,6 +540,19 @@ return [
 		);
 	},
 
+	'WikibaseRepo.ItemVocabularyBaseUri' => function ( MediaWikiServices $services ): string {
+		// TODO: We currently use the local repo concept URI here. This should be configurable,
+		//       to e.g. allow 3rd parties to use Wikidata as their vocabulary repo.
+		$itemSource = WikibaseRepo::getEntitySourceDefinitions( $services )
+			->getSourceForEntityType( Item::ENTITY_TYPE );
+
+		if ( $itemSource === null ) {
+			throw new LogicException( 'No source providing Items configured!' );
+		}
+
+		return $itemSource->getConceptBaseUri();
+	},
+
 	'WikibaseRepo.KartographerEmbeddingHandler' => function ( MediaWikiServices $services ): ?CachingKartographerEmbeddingHandler {
 		$settings = WikibaseRepo::getSettings( $services );
 		$config = $services->getMainConfig();
