@@ -245,7 +245,8 @@
 			"class": "\\Wikibase\\Repo\\Api\\EntityTerms",
 			"factory": "\\Wikibase\\Repo\\Api\\EntityTerms::factory",
 			"services": [
-				"WikibaseRepo.EntityIdLookup"
+				"WikibaseRepo.EntityIdLookup",
+				"WikibaseRepo.TermBuffer"
 			]
 		}
 	},
@@ -689,7 +690,8 @@
 				"TitleFactory",
 				"WikibaseRepo.EntityIdLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
-				"WikibaseRepo.PrefetchingTermLookup"
+				"WikibaseRepo.PrefetchingTermLookup",
+				"WikibaseRepo.TermBuffer"
 			]
 		},
 		"LibHooks": {
