@@ -199,18 +199,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider getSiteGroupProvider
-	 */
-	public function testGetSiteGroup( $expected, SettingsArray $settings, SiteLookup $siteLookup ) {
-		$this->setService( 'WikibaseClient.Settings', $settings );
-		$client = new WikibaseClient(
-			$siteLookup
-		);
-
-		$this->assertEquals( $expected, $client->getSiteGroup() );
-	}
-
-	/**
 	 * @return SiteLookup
 	 */
 	private function getSiteLookup() {
@@ -230,23 +218,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$siteStore->saveSite( $site );
 
 		return $siteStore;
-	}
-
-	public function getSiteGroupProvider() {
-		$settings = clone WikibaseClient::getSettings();
-		$settings->setSetting( 'siteGroup', null );
-		$settings->setSetting( 'siteGlobalID', 'enwiki' );
-
-		$settings2 = clone $settings;
-		$settings2->setSetting( 'siteGroup', 'wikivoyage' );
-		$settings2->setSetting( 'siteGlobalID', 'enwiki' );
-
-		$siteLookup = $this->getSiteLookup();
-
-		return [
-			[ 'wikipedia', $settings, $siteLookup ],
-			[ 'wikivoyage', $settings2, $siteLookup ]
-		];
 	}
 
 	public function testGetLanguageLinkBadgeDisplay() {

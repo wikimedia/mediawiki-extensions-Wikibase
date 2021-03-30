@@ -12,6 +12,7 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Client\Hooks\ShortDescHandler;
+use Wikibase\Client\WikibaseClient;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
@@ -35,6 +36,8 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 		// https://phabricator.wikimedia.org/T243729
 		$this->disallowDBAccess();
 		$this->disallowHttpAccess();
+		// Configure the site group so that it doesn’t need to fall back to the DB site store
+		$this->configureSiteGroup();
 	}
 
 	private function getExtensionJson(): array {
@@ -206,6 +209,12 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 				return $factory;
 			}
 		);
+	}
+
+	private function configureSiteGroup(): void {
+		$settings = clone WikibaseClient::getSettings( $this->getServiceContainer() );
+		$settings->setSetting( 'siteGroup', 'testgroup' );
+		$this->setService( 'WikibaseClient.Settings', $settings );
 	}
 
 	private function mockApiQuery(): ApiQuery {

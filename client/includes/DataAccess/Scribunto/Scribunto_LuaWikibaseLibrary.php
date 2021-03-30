@@ -217,13 +217,12 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private function getLuaFunctionCallTracker() {
 		if ( !$this->luaFunctionCallTracker ) {
 			$mwServices = MediaWikiServices::getInstance();
-			$wikibaseClient = WikibaseClient::getDefaultInstance();
-			$settings = WikibaseClient::getSettings();
+			$settings = WikibaseClient::getSettings( $mwServices );
 
 			$this->luaFunctionCallTracker = new LuaFunctionCallTracker(
 				$mwServices->getStatsdDataFactory(),
 				$settings->getSetting( 'siteGlobalID' ),
-				$wikibaseClient->getSiteGroup(),
+				WikibaseClient::getSiteGroup( $mwServices ),
 				$settings->getSetting( 'trackLuaFunctionCallsPerSiteGroup' ),
 				$settings->getSetting( 'trackLuaFunctionCallsPerWiki' )
 			);

@@ -142,11 +142,6 @@ final class WikibaseClient {
 	private $store = null;
 
 	/**
-	 * @var string|null
-	 */
-	private $siteGroup = null;
-
-	/**
 	 * @var OutputFormatSnakFormatterFactory|null
 	 */
 	private $snakFormatterFactory = null;
@@ -611,48 +606,18 @@ final class WikibaseClient {
 		$group = self::getSettings()->getSetting( 'languageLinkSiteGroup' );
 
 		if ( $group === null ) {
-			$group = $this->getSiteGroup();
+			$group = self::getSiteGroup();
 		}
 
 		return $group;
 	}
 
 	/**
-	 * Gets the site group ID from setting, which if not set then does
-	 * lookup in site store.
-	 *
-	 * @return string
-	 */
-	private function newSiteGroup() {
-		$settings = self::getSettings();
-		$siteGroup = $settings->getSetting( 'siteGroup' );
-
-		if ( !$siteGroup ) {
-			$siteId = $settings->getSetting( 'siteGlobalID' );
-
-			$site = $this->siteLookup->getSite( $siteId );
-
-			if ( !$site ) {
-				return true;
-			}
-
-			$siteGroup = $site->getGroup();
-		}
-
-		return $siteGroup;
-	}
-
-	/**
 	 * Get site group ID
-	 *
-	 * @return string
 	 */
-	public function getSiteGroup() {
-		if ( $this->siteGroup === null ) {
-			$this->siteGroup = $this->newSiteGroup();
-		}
-
-		return $this->siteGroup;
+	public static function getSiteGroup( ContainerInterface $services = null ): string {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.SiteGroup' );
 	}
 
 	/**
