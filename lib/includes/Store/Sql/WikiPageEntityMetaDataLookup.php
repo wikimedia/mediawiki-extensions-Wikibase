@@ -4,8 +4,8 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
-use MediaWiki\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use stdClass;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\EntityId;
@@ -59,7 +59,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->pageTableEntityQuery = $pageTableEntityConditionGenerator;
 		$this->entitySource = $entitySource;
-		$this->logger = $logger ?: LoggerFactory::getInstance( 'Wikibase' );
+		$this->logger = $logger ?: new NullLogger();
 	}
 
 	/**
