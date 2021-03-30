@@ -241,6 +241,17 @@ return [
 		throw new LogicException( 'No source configured: ' . $itemAndPropertySourceName );
 	},
 
+	'WikibaseClient.ItemSource' => function ( MediaWikiServices $services ): EntitySource {
+		$itemSource = WikibaseClient::getEntitySourceDefinitions( $services )
+			->getSourceForEntityType( Item::ENTITY_TYPE );
+
+		if ( $itemSource === null ) {
+			throw new LogicException( 'No source providing Items configured!' );
+		}
+
+		return $itemSource;
+	},
+
 	'WikibaseClient.LanguageFallbackChainFactory' => function ( MediaWikiServices $services ): LanguageFallbackChainFactory {
 		return new LanguageFallbackChainFactory(
 			$services->getLanguageFactory(),
