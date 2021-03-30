@@ -354,7 +354,7 @@ class WikibaseRepo {
 	 */
 	private function newWikibaseValueFormatterBuilders( array $thumbLimits ) {
 		return new WikibaseValueFormatterBuilders(
-			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
+			new FormatterLabelDescriptionLookupFactory( self::getTermLookup() ),
 			$this->getLanguageNameLookup(),
 			$this->getItemUrlParser(),
 			self::getSettings()->getSetting( 'geoShapeStorageBaseUrl' ),
@@ -809,7 +809,7 @@ class WikibaseRepo {
 	public function getLanguageFallbackLabelDescriptionLookupFactory() {
 		return new LanguageFallbackLabelDescriptionLookupFactory(
 			self::getLanguageFallbackChainFactory(),
-			$this->getTermLookup(),
+			self::getTermLookup(),
 			self::getTermBuffer()
 		);
 	}
@@ -890,11 +890,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.TermBuffer' );
 	}
 
-	/**
-	 * @return TermLookup
-	 */
-	public function getTermLookup() {
-		return self::getPrefetchingTermLookup();
+	public static function getTermLookup( ContainerInterface $services = null ): TermLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.TermLookup' );
 	}
 
 	public static function getPrefetchingTermLookupFactory(
@@ -1075,7 +1073,7 @@ class WikibaseRepo {
 			$languages,
 			self::getEntityIdParser(),
 			self::getTermsCollisionDetectorFactory(),
-			$this->getTermLookup()
+			self::getTermLookup()
 		);
 	}
 

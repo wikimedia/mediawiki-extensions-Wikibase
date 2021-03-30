@@ -119,7 +119,8 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityUrlLookup $entityUrlLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		SettingsArray $repoSettings
+		SettingsArray $repoSettings,
+		TermLookup $termLookup
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// NOTE: keep in sync with fallback chain construction in LabelPrefetchHookHandler::factory
@@ -128,7 +129,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		return new self(
 			$entityExistenceChecker,
 			$entityIdParser,
-			$wikibaseRepo->getTermLookup(),
+			$termLookup,
 			$entityNamespaceLookup,
 			$interwikiLookup,
 			function ( $language ) use ( $wikibaseRepo ) {

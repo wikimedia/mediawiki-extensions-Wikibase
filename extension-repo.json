@@ -680,7 +680,8 @@
 				"WikibaseRepo.EntityNamespaceLookup",
 				"WikibaseRepo.EntityUrlLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.TermLookup"
 			]
 		},
 		"LabelPrefetch": {

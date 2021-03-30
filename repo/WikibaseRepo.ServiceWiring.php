@@ -41,6 +41,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -759,6 +760,10 @@ return [
 			new TermFallbackCacheServiceFactory(),
 			$settings->getSetting( 'termFallbackCacheVersion' )
 		);
+	},
+
+	'WikibaseRepo.TermLookup' => function ( MediaWikiServices $services ): TermLookup {
+		return WikibaseRepo::getPrefetchingTermLookup( $services );
 	},
 
 	'WikibaseRepo.TermsCollisionDetectorFactory' => function ( MediaWikiServices $services ): TermsCollisionDetectorFactory {
