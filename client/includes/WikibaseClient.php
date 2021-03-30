@@ -4,9 +4,6 @@ namespace Wikibase\Client;
 
 use CentralIdLookup;
 use DataValues\Deserializers\DataValueDeserializer;
-use Deserializers\Deserializer;
-use Deserializers\DispatchableDeserializer;
-use Deserializers\DispatchingDeserializer;
 use ExtensionRegistry;
 use ExternalUserNames;
 use JobQueueGroup;
@@ -66,7 +63,6 @@ use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
@@ -130,11 +126,6 @@ final class WikibaseClient {
 	 * @var PropertyDataTypeLookup|null
 	 */
 	private $propertyDataTypeLookup = null;
-
-	/**
-	 * @var Deserializer|null
-	 */
-	private $entityDeserializer = null;
 
 	/**
 	 * @var ClientStore|null
@@ -716,44 +707,6 @@ final class WikibaseClient {
 	): DeserializerFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.BaseDataModelDeserializerFactory' );
-	}
-
-	private function getInternalFormatDeserializerFactory(): InternalDeserializerFactory {
-		return new InternalDeserializerFactory(
-			self::getDataValueDeserializer(),
-			self::getEntityIdParser(),
-			$this->getAllTypesEntityDeserializer()
-		);
-	}
-
-	private function getAllTypesEntityDeserializer(): DispatchableDeserializer {
-		if ( $this->entityDeserializer === null ) {
-			$deserializerFactoryCallbacks = $this->getEntityDeserializerFactoryCallbacks();
-			$baseDeserializerFactory = self::getBaseDataModelDeserializerFactory();
-			$deserializers = [];
-
-			foreach ( $deserializerFactoryCallbacks as $callback ) {
-				$deserializers[] = call_user_func( $callback, $baseDeserializerFactory );
-			}
-
-			$this->entityDeserializer = new DispatchingDeserializer( $deserializers );
-		}
-
-		return $this->entityDeserializer;
-	}
-
-	/**
-	 * Returns a deserializer to deserialize statements in both current and legacy serialization.
-	 */
-	public function getInternalFormatStatementDeserializer(): Deserializer {
-		return $this->getInternalFormatDeserializerFactory()->newStatementDeserializer();
-	}
-
-	/**
-	 * @return callable[]
-	 */
-	public function getEntityDeserializerFactoryCallbacks() {
-		return self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK );
 	}
 
 	/**

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Integration;
 
-use Deserializers\Deserializer;
 use HashSiteStore;
 use Language;
 use MediaWiki\Http\HttpRequestFactory;
@@ -234,11 +233,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame(
 			WikibaseClient::getDefaultInstance(),
 			WikibaseClient::getDefaultInstance() );
-	}
-
-	public function testGetInternalFormatStatementDeserializer() {
-		$deserializer = $this->getWikibaseClient()->getInternalFormatStatementDeserializer();
-		$this->assertInstanceOf( Deserializer::class, $deserializer );
 	}
 
 	public function testGetChangeHandler() {
