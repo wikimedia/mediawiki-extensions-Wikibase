@@ -317,7 +317,7 @@ class WikibaseRepo {
 			$this->getEntityLookup(),
 			self::getEntityIdParser(),
 			$urlSchemes,
-			$this->getItemVocabularyBaseUri(),
+			self::getItemVocabularyBaseUri(),
 			self::getMonolingualTextLanguages(),
 			$this->getCachingCommonsMediaFileNameLookup(),
 			new MediaWikiPageNameNormalizer(),
@@ -909,17 +909,14 @@ class WikibaseRepo {
 
 	public function getItemUrlParser(): SuffixEntityIdParser {
 		return new SuffixEntityIdParser(
-			$this->getItemVocabularyBaseUri(),
+			self::getItemVocabularyBaseUri(),
 			new ItemIdParser()
 		);
 	}
 
-	private function getItemVocabularyBaseUri(): string {
-		//@todo: We currently use the local repo concept URI here. This should be configurable,
-		// to e.g. allow 3rd parties to use Wikidata as their vocabulary repo.
-		return self::getEntitySourceDefinitions()
-			->getSourceForEntityType( Item::ENTITY_TYPE )
-			->getConceptBaseUri();
+	public static function getItemVocabularyBaseUri( ContainerInterface $services = null ): string {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ItemVocabularyBaseUri' );
 	}
 
 	public static function getValueFormatterFactory( ContainerInterface $services = null ): OutputFormatValueFormatterFactory {
