@@ -32,7 +32,6 @@ use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
-use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
 use Wikimedia\TestingAccessWrapper;
@@ -300,13 +299,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetSidebarLinkBadgeDisplay() {
 		$sidebarLinkBadgeDisplay = $this->getWikibaseClient()->getSidebarLinkBadgeDisplay();
 		$this->assertInstanceOf( SidebarLinkBadgeDisplay::class, $sidebarLinkBadgeDisplay );
-	}
-
-	public function testGetPropertyLabelResolver() {
-		$this->assertInstanceOf(
-			CachedDatabasePropertyLabelResolver::class,
-			$this->getWikibaseClient()->getPropertyLabelResolver()
-		);
 	}
 
 	/**

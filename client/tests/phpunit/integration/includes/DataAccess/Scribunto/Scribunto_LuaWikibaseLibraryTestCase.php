@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
-use Wikimedia\TestingAccessWrapper;
 
 if ( !ExtensionRegistry::getInstance()->isLoaded( 'Scribunto' ) ) {
 	/**
@@ -154,8 +153,6 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 	}
 
 	private function overridePropertyLabelResolver(): void {
-		$wikibaseClient = TestingAccessWrapper::newFromObject( WikibaseClient::getDefaultInstance() );
-
 		$propertyLabelResolver = $this->createMock( PropertyLabelResolver::class );
 		$propertyLabelResolver->method( 'getPropertyIdsForLabels' )
 			->willReturnCallback( function ( array $labels ): array {
@@ -167,7 +164,10 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 				return [];
 			} );
 
-		$wikibaseClient->propertyLabelResolver = $propertyLabelResolver;
+		$this->setService(
+			'WikibaseClient.PropertyLabelResolver',
+			$propertyLabelResolver
+		);
 	}
 
 	private function addMaplinkParserTag(): void {

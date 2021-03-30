@@ -26,7 +26,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
-use Wikimedia\TestingAccessWrapper;
 
 /**
  * Simple integration test for the {{#statements:…}} parser function.
@@ -90,8 +89,6 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 	}
 
 	private function maskPropertyLabelResolver( WikibaseClient $wikibaseClient ) {
-		$wikibaseClient = TestingAccessWrapper::newFromObject( $wikibaseClient );
-
 		$propertyLabelResolver = $this->createMock( PropertyLabelResolver::class );
 		$propertyLabelResolver->method( 'getPropertyIdsForLabels' )
 			->with( [ 'LuaTestStringProperty' ] )
@@ -99,7 +96,10 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 				[ 'LuaTestStringProperty' => new PropertyId( 'P342' ) ]
 			);
 
-		$wikibaseClient->propertyLabelResolver = $propertyLabelResolver;
+		$this->setService(
+			'WikibaseClient.PropertyLabelResolver',
+			$propertyLabelResolver
+		);
 	}
 
 	private function newParserOutputUsageAccumulator( ParserOutput $parserOutput ): ParserOutputUsageAccumulator {

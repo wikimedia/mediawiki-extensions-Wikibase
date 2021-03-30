@@ -44,6 +44,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\ItemChange;
@@ -58,6 +59,9 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
+use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
@@ -306,6 +310,46 @@ return [
 			WikibaseClient::getEntitySourceDefinitions( $services ),
 			WikibaseClient::getEntityTypeDefinitions( $services ),
 			WikibaseClient::getSingleEntitySourceServicesFactory( $services )
+		);
+	},
+
+	'WikibaseClient.PropertyLabelResolver' => function ( MediaWikiServices $services ): PropertyLabelResolver {
+		// Required services
+		$languageCode = $services->getContentLanguage()->getCode();
+
+		$settings = WikibaseClient::getSettings( $services );
+		$cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
+		$cacheType = $settings->getSetting( 'sharedCacheType' );
+		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
+
+		// Cache key needs to be language specific
+		$cacheKey = $cacheKeyPrefix . ':TermPropertyLabelResolver' . '/' . $languageCode;
+
+		$propertyDatabaseName = WikibaseClient::getPropertySource( $services )
+			->getDatabaseName();
+		$loadBalancer = $services->getDBLoadBalancerFactory()
+			->getMainLB( $propertyDatabaseName );
+		$wanObjectCache = $services->getMainWANObjectCache();
+
+		$typeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			$wanObjectCache,
+			$propertyDatabaseName
+		);
+
+		$databaseTermIdsResolver = new DatabaseTermInLangIdsResolver(
+			$typeIdsStore,
+			$typeIdsStore,
+			$loadBalancer,
+			$propertyDatabaseName
+		);
+
+		return new CachedDatabasePropertyLabelResolver(
+			$languageCode,
+			$databaseTermIdsResolver,
+			ObjectCache::getInstance( $cacheType ),
+			$cacheDuration,
+			$cacheKey
 		);
 	},
 
