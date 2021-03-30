@@ -52,7 +52,6 @@ use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
@@ -647,7 +646,7 @@ final class WikibaseClient {
 	}
 
 	private function getRepoItemUriParser(): EntityIdParser {
-		$itemConceptUriBase = $this->getItemSource()->getConceptBaseUri();
+		$itemConceptUriBase = self::getItemSource()->getConceptBaseUri();
 
 		return new SuffixEntityIdParser(
 			$itemConceptUriBase,
@@ -1064,14 +1063,9 @@ final class WikibaseClient {
 		return MediaWikiServices::getInstance()->getMainWANObjectCache();
 	}
 
-	private function getItemSource() {
-		$itemSource = self::getEntitySourceDefinitions()->getSourceForEntityType( Item::ENTITY_TYPE );
-
-		if ( $itemSource === null ) {
-			throw new LogicException( 'No source providing Items configured!' );
-		}
-
-		return $itemSource;
+	public static function getItemSource( ContainerInterface $services = null ): EntitySource {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.ItemSource' );
 	}
 
 	public static function getPropertySource( ContainerInterface $services = null ): EntitySource {
