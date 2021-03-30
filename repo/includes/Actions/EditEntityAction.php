@@ -251,6 +251,13 @@ class EditEntityAction extends ViewEntityAction {
 		$newerContent = $newerRevision->getContent( SlotRecord::MAIN );
 		$latestContent = $latestRevision->getContent( SlotRecord::MAIN );
 
+		if ( $newerContent->isRedirect() !== $latestContent->isRedirect() ) {
+			$this->getOutput()->addWikiMsg( $latestContent->isRedirect()
+				? 'wikibase-undo-redirect-latestredirect'
+				: 'wikibase-undo-redirect-latestnoredirect' );
+			return;
+		}
+
 		$restore = $req->getCheck( 'restore' );
 
 		$this->getOutput()->setPageTitle(

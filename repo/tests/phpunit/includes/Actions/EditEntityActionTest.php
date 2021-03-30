@@ -82,224 +82,221 @@ class EditEntityActionTest extends ActionTestCase {
 	public function provideUndoForm() {
 		// based upon well known test items defined in ActionTestCase::makeTestItemData
 
-		$cases = [
-			[ //0: edit, no parameters
-				'edit', // action
-				'Berlin', // handle
-				[], // params
-				false, // post
-				null, // user
-				'/id="[^"]*\bwb-item\b[^"]*"/', // htmlPattern: should show an item
-			],
+		yield 'edit, no parameters' => [
+			'edit', // action
+			'Berlin', // handle
+			[], // params
+			false, // post
+			null, // user
+			'/id="[^"]*\bwb-item\b[^"]*"/', // htmlPattern: should show an item
+		];
 
-			[ //1: submit, no parameters
-				'submit', // action
-				'Berlin', // handle
-				[], // params
-				false, // post
-				null, // user
-				'/id="[^"]*\bwb-item\b[^"]*"/', // htmlPattern: should show an item
-			],
+		yield 'submit, no parameters' => [
+			'submit', // action
+			'Berlin', // handle
+			[], // params
+			false, // post
+			null, // user
+			'/id="[^"]*\bwb-item\b[^"]*"/', // htmlPattern: should show an item
+		];
 
-			// -- show undo form -----------------------------------
-			[ //2: // undo form with legal undo
-				'edit', // action
-				'Berlin', // handle
-				[ // params
-					'undo' => 0, // current revision
-				],
-				false, // post
-				null, // user
-				'/undo-success/', // htmlPattern: should be a success
-				[ // expectedProps
-					'moduleStyles' => [ 'wikibase.common' ],
-				],
+		// -- show undo form -----------------------------------
+		yield 'undo form with legal undo' => [
+			'edit', // action
+			'Berlin', // handle
+			[ // params
+				'undo' => 0, // current revision
 			],
-
-			[ //3: // undo form with legal undo and undoafter
-				'edit', // action
-				'Berlin', // handle
-				[ // params
-					'undo' => 0, // current revision
-					'undoafter' => -1, // previous revision
-				],
-				false, // post
-				null, // user
-				'/undo-success/', // htmlPattern: should be a success
-				[ // expectedProps
-					'moduleStyles' => [ 'wikibase.common' ],
-				],
+			false, // post
+			null, // user
+			'/undo-success/', // htmlPattern: should be a success
+			[ // expectedProps
+				'moduleStyles' => [ 'wikibase.common' ],
 			],
+		];
 
-			[ //4: // undo form with illegal undo == undoafter
-				'edit', // action
-				'Berlin', // handle
-				[ // params
-					'undo' => -1, // previous revision
-					'undoafter' => -1, // previous revision
-				],
-				false, // post
-				null, // user
-				'/wikibase-undo-samerev/', // htmlPattern: should contain error
+		yield 'undo form with legal undo and undoafter' => [
+			'edit', // action
+			'Berlin', // handle
+			[ // params
+				'undo' => 0, // current revision
+				'undoafter' => -1, // previous revision
 			],
-
-			[ //5: // undo form with legal undoafter
-				'edit', // action
-				'Berlin', // handle
-				[ // params
-					'undoafter' => -1, // previous revision
-				],
-				false, // post
-				null, // user
-				'/undo-success/', // htmlPattern: should be a success
-				[ // expectedProps
-					'moduleStyles' => [ 'wikibase.common' ],
-				],
+			false, // post
+			null, // user
+			'/undo-success/', // htmlPattern: should be a success
+			[ // expectedProps
+				'moduleStyles' => [ 'wikibase.common' ],
 			],
+		];
 
-			[ //6: // undo form with illegal undo
-				'edit', // action
-				'Berlin', // handle
-				[ // params
-					'undo' => -2, // first revision
-				],
-				false, // post
-				null, // user
-				'/wikibase-undo-firstrev/', // htmlPattern: should contain error
+		yield 'undo form with illegal undo == undoafter' => [
+			'edit', // action
+			'Berlin', // handle
+			[ // params
+				'undo' => -1, // previous revision
+				'undoafter' => -1, // previous revision
 			],
+			false, // post
+			null, // user
+			'/wikibase-undo-samerev/', // htmlPattern: should contain error
+		];
 
-			[ //7: // undo form with illegal undoafter
-				'edit', // action
-				'Berlin', // handle
-				[ // params
-					'undoafter' => 0, // current revision
-				],
-				false, // post
-				null, // user
-				'/wikibase-undo-samerev/', // htmlPattern: should contain error
+		yield 'undo form with legal undoafter' => [
+			'edit', // action
+			'Berlin', // handle
+			[ // params
+				'undoafter' => -1, // previous revision
 			],
-
-			// -- show restore form -----------------------------------
-			[ //8: // restore form with legal restore
-				'edit', // action
-				'Berlin', // handle
-				[ // params
-					'restore' => -1, // previous revision
-				],
-				false, // post
-				null, // user
-				'/class="diff/', // htmlPattern: should be a success and contain a diff (undo-success is not shown for restore)
-				[ // expectedProps
-					'moduleStyles' => [ 'wikibase.common' ],
-				],
+			false, // post
+			null, // user
+			'/undo-success/', // htmlPattern: should be a success
+			[ // expectedProps
+				'moduleStyles' => [ 'wikibase.common' ],
 			],
+		];
 
-			[ //9: // restore form with illegal restore
-				'edit', // action
-				'Berlin', // handle
-				[ // params
-					'restore' => 0, // current revision
-				],
-				false, // post
-				null, // user
-				'/wikibase-undo-samerev/', // htmlPattern: should contain error
+		yield 'undo form with illegal undo' => [
+			'edit', // action
+			'Berlin', // handle
+			[ // params
+				'undo' => -2, // first revision
 			],
+			false, // post
+			null, // user
+			'/wikibase-undo-firstrev/', // htmlPattern: should contain error
+		];
 
-			// -- bad revision -----------------------------------
-			[ //10: // undo bad revision
-				'edit', // action
-				'Berlin', // handle
-				[ // params
-					'undo' => 12345678, // bad revision
-				],
-				false, // post
-				null, // user
-				'/undo-norev/', // htmlPattern: should contain error
+		yield 'undo form with illegal undoafter' => [
+			'edit', // action
+			'Berlin', // handle
+			[ // params
+				'undoafter' => 0, // current revision
 			],
+			false, // post
+			null, // user
+			'/wikibase-undo-samerev/', // htmlPattern: should contain error
+		];
 
-			[ //11: // undoafter bad revision with good undo
-				'edit', // action
-				'Berlin', // handle
-				[ // params
-					'undo' => 0, // current revision
-					'undoafter' => 12345678, // bad revision
-				],
-				false, // post
-				null, // user
-				'/undo-norev/', // htmlPattern: should contain error
+		// -- show restore form -----------------------------------
+		yield 'restore form with legal restore' => [
+			'edit', // action
+			'Berlin', // handle
+			[ // params
+				'restore' => -1, // previous revision
 			],
-
-			[ //12: // undoafter bad revision
-				'edit', // action
-				'Berlin', // handle
-				[ // params
-					'undoafter' => 12345678, // bad revision
-				],
-				false, // post
-				null, // user
-				'/undo-norev/', // htmlPattern: should contain error
+			false, // post
+			null, // user
+			'/class="diff/', // htmlPattern: should be a success and contain a diff (undo-success is not shown for restore)
+			[ // expectedProps
+				'moduleStyles' => [ 'wikibase.common' ],
 			],
+		];
 
-			[ //13: // restore bad revision
-				'edit', // action
-				'Berlin', // handle
-				[ // params
-					'restore' => 12345678, // bad revision
-				],
-				false, // post
-				null, // user
-				'/undo-norev/', // htmlPattern: should contain error
+		yield 'restore form with illegal restore' => [
+			'edit', // action
+			'Berlin', // handle
+			[ // params
+				'restore' => 0, // current revision
 			],
+			false, // post
+			null, // user
+			'/wikibase-undo-samerev/', // htmlPattern: should contain error
+		];
 
-			// -- bad page -----------------------------------
-			[ //14: // non-existing page
-				'edit', // action
-				Title::newFromText( 'XXX', $this->getItemNamespace() ),
-				[ // params
-					'restore' => [ 'London', 0 ], // ok revision
-				],
-				false, // post
-				null, // user
-				'/missing-article/', // htmlPattern: should contain error
+		// -- bad revision -----------------------------------
+		yield 'undo bad revision' => [
+			'edit', // action
+			'Berlin', // handle
+			[ // params
+				'undo' => 12345678, // bad revision
 			],
+			false, // post
+			null, // user
+			'/undo-norev/', // htmlPattern: should contain error
+		];
 
-			[ //15: // undo revision from different pages
-				'edit', // action class
-				'Berlin', // handle
-				[ // params
-					'undo' => [ 'London', 0 ], // wrong page
-				],
-				false, // post
-				null, // user
-				'/wikibase-undo-badpage/', // htmlPattern: should contain error
+		yield 'undoafter bad revision with good undo' => [
+			'edit', // action
+			'Berlin', // handle
+			[ // params
+				'undo' => 0, // current revision
+				'undoafter' => 12345678, // bad revision
 			],
+			false, // post
+			null, // user
+			'/undo-norev/', // htmlPattern: should contain error
+		];
 
-			[ //16: // undoafter revision from different pages
-				'edit', // action class
-				'Berlin', // handle
-				[ // params
-					'undoafter' => [ 'London', -1 ], // wrong page
-				],
-				false, // post
-				null, // user
-				'/wikibase-undo-badpage/', // htmlPattern: should contain error
+		yield 'undoafter bad revision' => [
+			'edit', // action
+			'Berlin', // handle
+			[ // params
+				'undoafter' => 12345678, // bad revision
 			],
+			false, // post
+			null, // user
+			'/undo-norev/', // htmlPattern: should contain error
+		];
 
-			[ //17: // restore revision from different pages
-				'edit', // action class
-				'Berlin', // handle
-				[ // params
-					'restore' => [ 'London', -1 ], // wrong page
-				],
-				false, // post
-				null, // user
-				'/wikibase-undo-badpage/', // htmlPattern: should contain error
+		yield 'restore bad revision' => [
+			'edit', // action
+			'Berlin', // handle
+			[ // params
+				'restore' => 12345678, // bad revision
 			],
+			false, // post
+			null, // user
+			'/undo-norev/', // htmlPattern: should contain error
+		];
 
+		// -- bad page -----------------------------------
+		yield 'non-existing page' => [
+			'edit', // action
+			Title::newFromText( 'XXX', $this->getItemNamespace() ),
+			[ // params
+				'restore' => [ 'London', 0 ], // ok revision
+			],
+			false, // post
+			null, // user
+			'/missing-article/', // htmlPattern: should contain error
+		];
+
+		yield 'undo revision from different pages' => [
+			'edit', // action class
+			'Berlin', // handle
+			[ // params
+				'undo' => [ 'London', 0 ], // wrong page
+			],
+			false, // post
+			null, // user
+			'/wikibase-undo-badpage/', // htmlPattern: should contain error
+		];
+
+		yield 'undoafter revision from different pages' => [
+			'edit', // action class
+			'Berlin', // handle
+			[ // params
+				'undoafter' => [ 'London', -1 ], // wrong page
+			],
+			false, // post
+			null, // user
+			'/wikibase-undo-badpage/', // htmlPattern: should contain error
+		];
+
+		yield 'restore revision from different pages' => [
+			'edit', // action class
+			'Berlin', // handle
+			[ // params
+				'restore' => [ 'London', -1 ], // wrong page
+			],
+			false, // post
+			null, // user
+			'/wikibase-undo-badpage/', // htmlPattern: should contain error
 		];
 
 		// -- show undo form for redirect -----------------------------------
-		$cases[] = [ //18: // undo form with legal undo
+		yield 'undo form for redirect with legal undo where latest revision is redirect' => [
 			'edit', // action
 			'Berlin2', // handle
 			[ // params
@@ -313,7 +310,89 @@ class EditEntityActionTest extends ActionTestCase {
 			],
 		];
 
-		return $cases;
+		yield 'undo form for redirect with legal undo and undoafter where latest revision is redirect' => [
+			'edit', // action
+			'Berlin2', // handle
+			[ // params
+				'undo' => 0, // current revision
+				'undoafter' => -4, // earlier revision where label was "London"
+			],
+			false, // post
+			null, // user
+			'/undo-success.*London<\/ins>/s', // htmlPattern: should be a success and add London (/s = PCRE_DOTALL)
+		];
+
+		yield 'undo form for redirect with legal undo where latest revision is not redirect' => [
+			'edit', // action
+			'Berlin3', // handle
+			[ // params
+				'undo' => 0, // current revision
+			],
+			false, // post
+			null, // user
+			'/undo-success.*USA<\/del>/s', // htmlPattern: should be a success and remove German description (/s = PCRE_DOTALL)
+			[ // expectedProps
+				'moduleStyles' => [ 'wikibase.common' ],
+			],
+		];
+
+		yield 'undo form for redirect with legal undo and undoafter where latest revision is not redirect' => [
+			'edit', // action
+			'Berlin3', // handle
+			[ // params
+				'undo' => 0, // current revision
+				'undoafter' => -4, // earlier revision identical to previous revision
+			],
+			false, // post
+			null, // user
+			'/undo-success.*USA<\/del>/s', // htmlPattern: should be a success and remove German description (/s = PCRE_DOTALL)
+		];
+
+		yield 'undo form for redirect with illegal undo where latest revision is redirect' => [
+			'edit', // action
+			'Berlin2', // handle
+			[ // params
+				'undo' => -1, // previous revision
+			],
+			false, // post
+			null, // user
+			'/wikibase-undo-redirect-latestredirect/', // htmlPattern: should contain error
+		];
+
+		yield 'undo form for redirect with illegal undo and undoafter where latest revision is redirect' => [
+			'edit', // action
+			'Berlin2', // handle
+			[ // params
+				'undo' => -1, // previous revision
+				'undoafter' => -4, // earlier revision
+			],
+			false, // post
+			null, // user
+			'/wikibase-undo-redirect-latestredirect/', // htmlPattern: should contain error
+		];
+
+		yield 'undo form for redirect with illegal undo where latest revision is not redirect' => [
+			'edit', // action
+			'Berlin3', // handle
+			[ // params
+				'undo' => -2, // revision that edited redirect target
+			],
+			false, // post
+			null, // user
+			'/wikibase-undo-redirect-latestnoredirect/', // htmlPattern: should contain error
+		];
+
+		yield 'undo form for redirect with illegal undo and undoafter where latest revision is not redirect' => [
+			'edit', // action
+			'Berlin3', // handle
+			[ // params
+				'undo' => -2, // revision with redirect target
+				'undoafter' => -4, // non-redirect revision
+			],
+			false, // post
+			null, // user
+			'/wikibase-undo-redirect-latestnoredirect/', // htmlPattern: should contain error
+		];
 	}
 
 	/**
@@ -333,292 +412,410 @@ class EditEntityActionTest extends ActionTestCase {
 
 	public function provideUndoSubmit() {
 		// based upon well known test items defined in ActionTestCase::makeTestItemData
-		return [
-			[ //0: submit with legal undo, but don't post
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'undo' => 0, // current revision
-				],
-				false, // post
-				null, // user
-				null, // htmlPattern
-				[
-					'redirect' => '/[&?]action=edit&undo=\d+/', // redirect to undo form
-				]
+		yield "submit with legal undo, but don't post" => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => 0, // current revision
 			],
+			false, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '/[&?]action=edit&undo=\d+/', // redirect to undo form
+			]
+		];
 
-			[ //1: submit with legal undo, but omit wpSave
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpEditToken' => true, // automatic token
-					'undo' => 0, // current revision
-				],
-				true, // post
-				null, // user
-				null, // htmlPattern
-				[
-					'redirect' => '/[&?]action=edit&undo=\d+/', // redirect to undo form
-				]
+		yield 'submit with legal undo, but omit wpSave' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpEditToken' => true, // automatic token
+				'undo' => 0, // current revision
 			],
+			true, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '/[&?]action=edit&undo=\d+/', // redirect to undo form
+			]
+		];
 
-			// -- show undo form -----------------------------------
-			[ //2: // undo form with legal undo
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'undo' => 0, // current revision
-				],
-				true, // post
-				null, // user
-				null, // htmlPattern
-				[
-					'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
-				],
+		// -- show undo form -----------------------------------
+		yield 'undo form with legal undo' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => 0, // current revision
 			],
-
-			[ //3: // undo form with legal undo and undoafter
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'undo' => 0, // current revision
-					'undoafter' => -1, // previous revision
-				],
-				true, // post
-				null, // user
-				null, // htmlPattern
-				[
-					'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
-				],
+			true, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
 			],
+		];
 
-			[ //4: // undo form with illegal undo == undoafter
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'undo' => -1, // previous revision
-					'undoafter' => -1, // previous revision
-				],
-				true, // post
-				null, // user
-				'/wikibase-undo-samerev/', // htmlPattern: should contain error
+		yield 'undo form with legal undo and undoafter' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => 0, // current revision
+				'undoafter' => -1, // previous revision
 			],
-
-			[ //5: // undo form with legal undoafter
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'undoafter' => -1, // previous revision
-				],
-				true, // post
-				null, // user
-				null, // htmlPattern
-				[
-					'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
-				],
+			true, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
 			],
+		];
 
-			[ //6: // undo form with illegal undo
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'undo' => -2, // first revision
-				],
-				true, // post
-				null, // user
-				'/wikibase-undo-firstrev/', // htmlPattern: should contain error
+		yield 'undo form with illegal undo == undoafter' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => -1, // previous revision
+				'undoafter' => -1, // previous revision
 			],
+			true, // post
+			null, // user
+			'/wikibase-undo-samerev/', // htmlPattern: should contain error
+		];
 
-			[ //7: // undo form with illegal undoafter
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'undoafter' => 0, // current revision
-				],
-				true, // post
-				null, // user
-				'/wikibase-undo-samerev/', // htmlPattern: should contain error
+		yield 'undo form with legal undoafter' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undoafter' => -1, // previous revision
 			],
-
-			// -- show restore form -----------------------------------
-			[ //8: // restore form with legal restore
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'restore' => -1, // previous revision
-				],
-				true, // post
-				null, // user
-				null, // htmlPattern
-				[
-					'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
-				],
+			true, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
 			],
+		];
 
-			[ //9: // restore form with illegal restore
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'restore' => 0, // current revision
-				],
-				true, // post
-				null, // user
-				'/wikibase-undo-samerev/', // htmlPattern: should contain error
+		yield 'undo form with illegal undo' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => -2, // first revision
 			],
+			true, // post
+			null, // user
+			'/wikibase-undo-firstrev/', // htmlPattern: should contain error
+		];
 
-			// -- bad revision -----------------------------------
-			[ //10: // undo bad revision
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'undo' => 12345678, // bad revision
-				],
-				true, // post
-				null, // user
-				'/undo-norev/', // htmlPattern: should contain error
+		yield 'undo form with illegal undoafter' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undoafter' => 0, // current revision
 			],
+			true, // post
+			null, // user
+			'/wikibase-undo-samerev/', // htmlPattern: should contain error
+		];
 
-			[ //11: // undoafter bad revision with good undo
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'undo' => 0, // current revision
-					'undoafter' => 12345678, // bad revision
-				],
-				true, // post
-				null, // user
-				'/undo-norev/', // htmlPattern: should contain error
+		// -- show restore form -----------------------------------
+		yield 'restore form with legal restore' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'restore' => -1, // previous revision
 			],
-
-			[ //12: // undoafter bad revision
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'undoafter' => 12345678, // bad revision
-				],
-				true, // post
-				null, // user
-				'/undo-norev/', // htmlPattern: should contain error
+			true, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
 			],
+		];
 
-			[ //13: // restore bad revision
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'restore' => 12345678, // bad revision
-				],
-				true, // post
-				null, // user
-				'/undo-norev/', // htmlPattern: should contain error
+		yield 'restore form with illegal restore' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'restore' => 0, // current revision
 			],
+			true, // post
+			null, // user
+			'/wikibase-undo-samerev/', // htmlPattern: should contain error
+		];
 
-			// -- bad page -----------------------------------
-			[ //14: // non-existing page
-				'submit', // action
-				Title::newFromText( 'XXX', $this->getItemNamespace() ),
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'restore' => [ 'London', 0 ], // ok revision
-				],
-				true, // post
-				null, // user
-				'/missing-article/', // htmlPattern: should contain error
+		// -- bad revision -----------------------------------
+		yield 'undo bad revision' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => 12345678, // bad revision
 			],
+			true, // post
+			null, // user
+			'/undo-norev/', // htmlPattern: should contain error
+		];
 
-			[ //15: // undo revision from different pages
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'undo' => [ 'London', 0 ], // wrong page
-				],
-				true, // post
-				null, // user
-				'/wikibase-undo-badpage/', // htmlPattern: should contain error
+		yield 'undoafter bad revision with good undo' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => 0, // current revision
+				'undoafter' => 12345678, // bad revision
 			],
+			true, // post
+			null, // user
+			'/undo-norev/', // htmlPattern: should contain error
+		];
 
-			[ //16: // undoafter revision from different pages
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'undoafter' => [ 'London', -1 ], // wrong page
-				],
-				true, // post
-				null, // user
-				'/wikibase-undo-badpage/', // htmlPattern: should contain error
+		yield 'undoafter bad revision' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undoafter' => 12345678, // bad revision
 			],
+			true, // post
+			null, // user
+			'/undo-norev/', // htmlPattern: should contain error
+		];
 
-			[ //17: // restore revision from different pages
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // automatic token
-					'restore' => [ 'London', -1 ], // wrong page
-				],
-				true, // post
-				null, // user
-				'/wikibase-undo-badpage/', // htmlPattern: should contain error
+		yield 'restore bad revision' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'restore' => 12345678, // bad revision
 			],
+			true, // post
+			null, // user
+			'/undo-norev/', // htmlPattern: should contain error
+		];
 
-			// -- bad token -----------------------------------
-			[ //18: submit with legal undo, but wrong token
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => 'xyz', // bad token
-					'undo' => 0, // current revision
-				],
-				true, // post
-				null, // user
-				'/token_suffix_mismatch/', // htmlPattern: should contain error
+		// -- bad page -----------------------------------
+		yield 'non-existing page' => [
+			'submit', // action
+			Title::newFromText( 'XXX', $this->getItemNamespace() ),
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'restore' => [ 'London', 0 ], // ok revision
 			],
+			true, // post
+			null, // user
+			'/missing-article/', // htmlPattern: should contain error
+		];
 
-			// -- incomplete form -----------------------------------
-			[ //19: submit without undo/undoafter/restore
-				'submit', // action
-				'Berlin', // handle
-				[ // params
-					'wpSave' => 1,
-					'wpEditToken' => true, // bad token
-				],
-				true, // post
-				null, // user
-				'/id="[^"]*\bwb-item\b[^"]*"/', // htmlPattern: should show item
+		yield 'undo revision from different pages' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => [ 'London', 0 ], // wrong page
 			],
+			true, // post
+			null, // user
+			'/wikibase-undo-badpage/', // htmlPattern: should contain error
+		];
 
+		yield 'undoafter revision from different pages' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undoafter' => [ 'London', -1 ], // wrong page
+			],
+			true, // post
+			null, // user
+			'/wikibase-undo-badpage/', // htmlPattern: should contain error
+		];
+
+		yield 'restore revision from different pages' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'restore' => [ 'London', -1 ], // wrong page
+			],
+			true, // post
+			null, // user
+			'/wikibase-undo-badpage/', // htmlPattern: should contain error
+		];
+
+		// -- bad token -----------------------------------
+		yield 'submit with legal undo, but wrong token' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => 'xyz', // bad token
+				'undo' => 0, // current revision
+			],
+			true, // post
+			null, // user
+			'/token_suffix_mismatch/', // htmlPattern: should contain error
+		];
+
+		// -- incomplete form -----------------------------------
+		yield 'submit without undo/undoafter/restore' => [
+			'submit', // action
+			'Berlin', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+			],
+			true, // post
+			null, // user
+			'/id="[^"]*\bwb-item\b[^"]*"/', // htmlPattern: should show item
+		];
+
+		// -- redirect -----------------------------------
+		yield 'submit for redirect with legal undo where latest revision is redirect' => [
+			'submit', // action
+			'Berlin2', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => 0, // current revision
+			],
+			true, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+			],
+		];
+
+		yield 'submit for redirect with legal undo and undoafter where latest revision is redirect' => [
+			'submit', // action
+			'Berlin2', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => 0, // current revision
+				'undoafter' => -4, // earlier revision
+			],
+			true, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+			],
+		];
+
+		yield 'submit for redirect with legal undo where latest revision is not redirect' => [
+			'submit', // action
+			'Berlin3', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => 0, // current revision
+			],
+			true, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+			],
+		];
+
+		yield 'submit for redirect with legal undo and undoafter where latest revision is not redirect' => [
+			'submit', // action
+			'Berlin3', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => 0, // current revision
+				'undoafter' => -4, // earlier revision
+			],
+			true, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+			],
+		];
+
+		yield 'submit for redirect with illegal undo where latest revision is redirect' => [
+			'submit', // action
+			'Berlin2', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => -1, // previous revision
+			],
+			true, // post
+			null, // user
+			'/wikibase-undo-redirect-latestredirect/', // htmlPattern: should contain error
+		];
+
+		yield 'submit for redirect with illegal undo and undoafter where latest revision is redirect' => [
+			'submit', // action
+			'Berlin2', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => -1, // previous revision
+				'undoafter' => -4, // earlier revision
+			],
+			true, // post
+			null, // user
+			'/wikibase-undo-redirect-latestredirect/', // htmlPattern: should contain error
+		];
+
+		yield 'submit for redirect with illegal undo where latest revision is not redirect' => [
+			'submit', // action
+			'Berlin3', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => -2,
+			],
+			true, // post
+			null, // user
+			'/wikibase-undo-redirect-latestnoredirect/', // htmlPattern: should contain error
+		];
+
+		yield 'submit for redirect with illegal undo and undoafter where latest revision is not redirect' => [
+			'submit', // action
+			'Berlin3', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => -2,
+				'undoafter' => -4,
+			],
+			true, // post
+			null, // user
+			'/wikibase-undo-redirect-latestnoredirect/', // htmlPattern: should contain error
 		];
 	}
 
@@ -711,81 +908,89 @@ class EditEntityActionTest extends ActionTestCase {
 	public function provideUndoRevisions() {
 		// based upon well known test items defined in ActionTestCase::makeTestItemData
 
-		return [
-			[ //0: undo last revision
-				'Berlin', //handle
-				[
-					'undo' => 0, // last revision
-				],
-				[ //expected
-					'descriptions' => [
-						'de' => 'Stadt in Brandenburg',
-						'en' => 'City in Germany',
-					],
+		yield 'undo last revision' => [
+			'Berlin', //handle
+			[
+				'undo' => 0, // last revision
+			],
+			[ //expected
+				'descriptions' => [
+					'de' => 'Stadt in Brandenburg',
+					'en' => 'City in Germany',
 				],
 			],
+		];
 
-			[ //1: undo previous revision
-				'Berlin', //handle
-				[
-					'undo' => -1, // previous revision
-				],
-				[ //expected
-					'descriptions' => [
-						'de' => 'Hauptstadt von Deutschland',
-					],
-				]
+		yield 'undo previous revision' => [
+			'Berlin', //handle
+			[
+				'undo' => -1, // previous revision
 			],
+			[ //expected
+				'descriptions' => [
+					'de' => 'Hauptstadt von Deutschland',
+				],
+			]
+		];
 
-			[ //2: undo last and previous revision
-				'Berlin', //handle
-				[
-					'undo' => 0, // current revision
-					'undoafter' => -2, // first revision
-				],
-				[ //expected
-					'descriptions' => [
-						'de' => 'Stadt in Deutschland',
-					],
-				]
+		yield 'undo last and previous revision' => [
+			'Berlin', //handle
+			[
+				'undo' => 0, // current revision
+				'undoafter' => -2, // first revision
 			],
+			[ //expected
+				'descriptions' => [
+					'de' => 'Stadt in Deutschland',
+				],
+			]
+		];
 
-			[ //3: undoafter first revision (conflict, no change)
-				'Berlin', //handle
-				[
-					'undoafter' => -2, // first revision
-				],
-				[ //expected
-					'descriptions' => [
-						'de' => 'Stadt in Deutschland',
-					],
-				]
+		yield 'undoafter first revision (conflict, no change)' => [
+			'Berlin', //handle
+			[
+				'undoafter' => -2, // first revision
 			],
+			[ //expected
+				'descriptions' => [
+					'de' => 'Stadt in Deutschland',
+				],
+			]
+		];
 
-			[ //4: restore previous revision
-				'Berlin', //handle
-				[
-					'restore' => -1, // previous revision
-				],
-				[ //expected
-					'descriptions' => [
-						'de' => 'Stadt in Brandenburg',
-						'en' => 'City in Germany',
-					],
-				]
+		yield 'restore previous revision' => [
+			'Berlin', //handle
+			[
+				'restore' => -1, // previous revision
 			],
+			[ //expected
+				'descriptions' => [
+					'de' => 'Stadt in Brandenburg',
+					'en' => 'City in Germany',
+				],
+			]
+		];
 
-			[ //5: restore first revision
-				'Berlin', //handle
-				[
-					'restore' => -2, // first revision
-				],
-				[ //expected
-					'descriptions' => [
-						'de' => 'Stadt in Deutschland',
-					],
-				]
+		yield 'restore first revision' => [
+			'Berlin', //handle
+			[
+				'restore' => -2, // first revision
 			],
+			[ //expected
+				'descriptions' => [
+					'de' => 'Stadt in Deutschland',
+				],
+			]
+		];
+
+		yield 'undo last revision and revert redirect' => [
+			'Berlin2', //handle
+			[
+				'undo' => 0, // current revision
+			],
+			[ //expected
+				'labels' => [],
+			]
 		];
 	}
 

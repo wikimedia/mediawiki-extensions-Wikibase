@@ -97,11 +97,36 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$items['Oslo'][] = $item;
 
 		$item = new Item();
-		$item->setLabel( 'de', 'Berlin' );
+		$item->setLabel( 'de', 'London' );
 		$items['Berlin2'][] = $item;
 
-		// HACK: this revision is a redirect
-		$items['Berlin2'][] = 'Berlin';
+		$items['Berlin2'][] = 'London'; // redirect to London
+
+		$item = new Item();
+		$item->setLabel( 'de', 'London' );
+		$items['Berlin2'][] = $item; // revert redirect
+
+		$item = new Item();
+		$items['Berlin2'][] = $item;
+
+		$items['Berlin2'][] = 'Berlin'; // redirect to Berlin
+
+		$item = new Item();
+		$item->setLabel( 'de', 'Berlin' );
+		$items['Berlin3'][] = $item;
+
+		$items['Berlin3'][] = 'London'; // redirect to London
+
+		$items['Berlin3'][] = 'Berlin'; // redirect to Berlin
+
+		$item = new Item();
+		$item->setLabel( 'de', 'Berlin' );
+		$items['Berlin3'][] = $item;
+
+		$item = new Item();
+		$item->setLabel( 'de', 'Berlin' );
+		$item->setDescription( 'de', 'Stadt in Maryland, USA' );
+		$items['Berlin3'][] = $item;
 
 		return $items;
 	}
@@ -227,7 +252,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 			$comment = "Changing test item";
 		}
 
-		// HACK: If $entity is a string, treat it as a redirect target.
+		// If $entity is a string, treat it as a redirect target.
 		// The redirect must not be the first revision.
 		if ( is_string( $entity ) ) {
 			if ( !$id ) {
