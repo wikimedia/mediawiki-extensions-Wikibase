@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataAccess;
 
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 
 /**
@@ -14,11 +13,6 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
  * @license GPL-2.0-or-later
  */
 interface WikibaseServices extends DataAccessServices {
-
-	/**
-	 * @return EntityNamespaceLookup
-	 */
-	public function getEntityNamespaceLookup();
 
 	/**
 	 * Returns a service that can be registered as a watcher to changes to entity data.

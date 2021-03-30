@@ -109,9 +109,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	/** @var callable[] */
 	private $entityRevisionLookupFactoryCallbacks;
 
-	/** @var EntityNamespaceLookup|null */
-	private $entityNamespaceLookup;
-
 	/** @var Serializer */
 	private $storageEntitySerializer;
 
@@ -183,20 +180,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	 */
 	public function getEntitySource(): EntitySource {
 		return $this->entitySource;
-	}
-
-	/**
-	 * @return EntityNamespaceLookup The EntityNamespaceLookup object for this EntitySource
-	 */
-	public function getEntityNamespaceLookup(): EntityNamespaceLookup {
-		if ( $this->entityNamespaceLookup === null ) {
-			$this->entityNamespaceLookup = new EntityNamespaceLookup(
-				$this->entitySource->getEntityNamespaceIds(),
-				$this->entitySource->getEntitySlotNames()
-			);
-		}
-
-		return $this->entityNamespaceLookup;
 	}
 
 	/**
@@ -286,7 +269,10 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	private function getEntityMetaDataAccessor() {
 		if ( $this->entityMetaDataAccessor === null ) {
-			$entityNamespaceLookup = $this->getEntityNamespaceLookup();
+			$entityNamespaceLookup = new EntityNamespaceLookup(
+				$this->entitySource->getEntityNamespaceIds(),
+				$this->entitySource->getEntitySlotNames()
+			);
 			$repositoryName = '';
 			$databaseName = $this->entitySource->getDatabaseName();
 			$this->entityMetaDataAccessor = new PrefetchingWikiPageEntityMetaDataAccessor(
