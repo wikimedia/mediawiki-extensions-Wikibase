@@ -404,7 +404,6 @@
 		},
 		"AvailableBadges": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialAvailableBadges",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialAvailableBadges::factory",
 			"services": [
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",

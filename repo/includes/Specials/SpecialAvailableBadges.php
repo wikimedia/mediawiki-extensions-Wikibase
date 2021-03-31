@@ -39,37 +39,23 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 	private $languageFallbackChainFactory;
 
 	/**
-	 * @param PrefetchingTermLookup $prefetchingTermLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
-	 * @param string[] $badgeItems
+	 * @param PrefetchingTermLookup $prefetchingTermLookup
+	 * @param SettingsArray $repoSettings
 	 */
 	public function __construct(
-		PrefetchingTermLookup $prefetchingTermLookup,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		array $badgeItems
+		PrefetchingTermLookup $prefetchingTermLookup,
+		SettingsArray $repoSettings
 	) {
 		parent::__construct( 'AvailableBadges' );
 
 		$this->prefetchingTermLookup = $prefetchingTermLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->badgeItems = $badgeItems;
+		$this->badgeItems = $repoSettings->getSetting( 'badgeItems' );
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
-	}
-
-	public static function factory(
-		EntityTitleLookup $entityTitleLookup,
-		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		PrefetchingTermLookup $prefetchingTermLookup,
-		SettingsArray $repoSettings
-	): self {
-		return new self(
-			$prefetchingTermLookup,
-			$entityTitleLookup,
-			$languageFallbackChainFactory,
-			$repoSettings->getSetting( 'badgeItems' )
-		);
 	}
 
 	/**
