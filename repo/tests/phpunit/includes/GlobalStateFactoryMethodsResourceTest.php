@@ -10,6 +10,7 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
 
@@ -31,6 +32,9 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 		// https://phabricator.wikimedia.org/T243729
 		$this->disallowDBAccess();
 		$this->disallowHttpAccess();
+
+		// reset singleton so no services are cached from when access was still allowed
+		WikibaseRepo::resetClassStatics();
 	}
 
 	private function getExtensionJson(): array {
