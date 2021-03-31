@@ -346,6 +346,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink::factory",
 			"services": [
 				"WikibaseRepo.EntityTitleLookup",
+				"WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory",
 				"WikibaseRepo.Settings"
 			]
 		},

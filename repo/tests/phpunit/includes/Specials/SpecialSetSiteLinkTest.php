@@ -76,7 +76,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		$copyrightView = new SpecialPageCopyrightView( new CopyrightMessageBuilder(), '', '' );
 
-		$labelDescriptionLookupFactory = $wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory();
+		$labelDescriptionLookupFactory = WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory();
 
 		return new SpecialSetSiteLink(
 			$copyrightView,

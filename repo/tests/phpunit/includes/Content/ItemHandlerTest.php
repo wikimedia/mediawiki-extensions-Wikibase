@@ -222,7 +222,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 			WikibaseRepo::getEntityIdParser(),
 			WikibaseRepo::getStore()->newSiteLinkStore(),
 			WikibaseRepo::getEntityIdLookup(),
-			$wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory(),
+			WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory(),
 			$this->createMock( FieldDefinitions::class ),
 			$this->getPropertyDataTypeLookup()
 		);

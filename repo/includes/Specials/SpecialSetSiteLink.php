@@ -124,6 +124,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 	public static function factory(
 		EntityTitleLookup $entityTitleLookup,
+		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		SettingsArray $repoSettings
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -141,7 +142,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$repoSettings->getSetting( 'dataRightsText' )
 		);
 
-		$labelDescriptionLookupFactory = $wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory();
 		return new self(
 			$copyrightView,
 			$wikibaseRepo->getSummaryFormatter(),
