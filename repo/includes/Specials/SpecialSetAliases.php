@@ -46,6 +46,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	}
 
 	public static function factory(
+		EntityPermissionChecker $entityPermissionChecker,
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,
 		ContentLanguages $termsLanguages
@@ -63,7 +64,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 			$wikibaseRepo->getSummaryFormatter(),
 			$entityTitleLookup,
 			$wikibaseRepo->newEditEntityFactory(),
-			$wikibaseRepo->getEntityPermissionChecker(),
+			$entityPermissionChecker,
 			$termsLanguages
 		);
 	}

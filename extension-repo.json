@@ -305,6 +305,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetLabel",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabel::factory",
 			"services": [
+				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermsLanguages"
@@ -314,6 +315,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetDescription",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetDescription::factory",
 			"services": [
+				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermsLanguages"
@@ -323,6 +325,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetAliases",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetAliases::factory",
 			"services": [
+				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermsLanguages"
@@ -332,6 +335,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases::factory",
 			"services": [
+				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermsLanguages"

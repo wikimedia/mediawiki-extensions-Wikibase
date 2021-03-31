@@ -94,6 +94,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	}
 
 	public static function factory(
+		EntityPermissionChecker $entityPermissionChecker,
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,
 		ContentLanguages $termsLanguages
@@ -113,7 +114,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getChangeOpFactoryProvider()->getFingerprintChangeOpFactory(),
 			$termsLanguages,
-			$wikibaseRepo->getEntityPermissionChecker()
+			$entityPermissionChecker
 		);
 	}
 
