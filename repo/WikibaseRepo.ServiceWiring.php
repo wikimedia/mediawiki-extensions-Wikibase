@@ -112,6 +112,7 @@ use Wikibase\Repo\Notifications\RepoItemChange;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\LoggingIdGenerator;
@@ -123,6 +124,7 @@ use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
+use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ObjectFactory;
@@ -378,6 +380,15 @@ return [
 			$entityPatcher->registerEntityPatcherStrategy( $builder() );
 		}
 		return $entityPatcher;
+	},
+
+	'WikibaseRepo.EntityPermissionChecker' => function ( MediaWikiServices $services ): EntityPermissionChecker {
+		return new WikiPageEntityStorePermissionChecker(
+			WikibaseRepo::getEntityNamespaceLookup( $services ),
+			WikibaseRepo::getEntityTitleLookup( $services ),
+			$services->getPermissionManager(),
+			$services->getMainConfig()->get( 'AvailableRights' )
+		);
 	},
 
 	'WikibaseRepo.EntityRdfBuilderFactory' => function ( MediaWikiServices $services ): EntityRdfBuilderFactory {

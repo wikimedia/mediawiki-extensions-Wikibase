@@ -169,7 +169,6 @@ use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
-use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -577,7 +576,7 @@ class WikibaseRepo {
 		return new ItemRedirectCreationInteractor(
 			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->getEntityStore(),
-			$this->getEntityPermissionChecker(),
+			self::getEntityPermissionChecker(),
 			$this->getSummaryFormatter(),
 			$user,
 			$this->newEditFilterHookRunner( $context ),
@@ -987,18 +986,9 @@ class WikibaseRepo {
 		return $formatter;
 	}
 
-	/**
-	 * @return EntityPermissionChecker
-	 */
-	public function getEntityPermissionChecker() {
-		global $wgAvailableRights;
-
-		return new WikiPageEntityStorePermissionChecker(
-			self::getEntityNamespaceLookup(),
-			self::getEntityTitleLookup(),
-			MediaWikiServices::getInstance()->getPermissionManager(),
-			$wgAvailableRights
-		);
+	public static function getEntityPermissionChecker( ContainerInterface $services = null ): EntityPermissionChecker {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityPermissionChecker' );
 	}
 
 	/**
@@ -1437,7 +1427,7 @@ class WikibaseRepo {
 			self::getEntityTitleStoreLookup(),
 			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->getEntityStore(),
-			$this->getEntityPermissionChecker(),
+			self::getEntityPermissionChecker(),
 			self::getEntityDiffer(),
 			self::getEntityPatcher(),
 			$this->newEditFilterHookRunner( $context ?: RequestContext::getMain() ),
@@ -1458,7 +1448,7 @@ class WikibaseRepo {
 			$this->getChangeOpFactoryProvider()->getMergeFactory(),
 			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->getEntityStore(),
-			$this->getEntityPermissionChecker(),
+			self::getEntityPermissionChecker(),
 			$this->getSummaryFormatter(),
 			$user,
 			$this->newItemRedirectCreationInteractor( $user, $context ),
