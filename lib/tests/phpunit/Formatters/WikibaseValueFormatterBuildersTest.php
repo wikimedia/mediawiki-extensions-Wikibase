@@ -214,6 +214,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 		];
 
 		$options = new FormatterOptions();
+		$options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
 
 		foreach ( $formats as $format ) {
 			foreach ( $functionNames as $function ) {
@@ -246,21 +247,21 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			'plain string' => [
 				'String',
 				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'foo bar' ),
 				'@^foo bar$@'
 			],
 			'wikitext string' => [
 				'String',
 				SnakFormatter::FORMAT_WIKI,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'foo[bar]' ),
 				'@^foo&#91;bar&#93;$@'
 			],
 			'html string' => [
 				'String',
 				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'foo<bar>' ),
 				'@^foo&lt;bar&gt;$@'
 			],
@@ -269,7 +270,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			'plain bad value' => [
 				'UnDeserializableValue',
 				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new UnDeserializableValue( 'foo bar', 'xyzzy', 'broken' ),
 				'@invalid@'
 			],
@@ -278,21 +279,21 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			'plain url' => [
 				'Url',
 				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'http://acme.com/' ),
 				'@^http://acme\.com/$@'
 			],
 			'wikitext url' => [
 				'Url',
 				SnakFormatter::FORMAT_WIKI,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'http://acme.com/' ),
 				'@^http://acme\.com/$@'
 			],
 			'html url' => [
 				'Url',
 				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'http://acme.com/' ),
 				'@^.*href="http://acme.com/".*$@'
 			],
@@ -308,14 +309,14 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			'item link (with entity lookup)' => [
 				'EntityId',
 				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'/^<a\b[^>]* href="[^"]*\bQ5">Label for Q5<\/a>.*$/', // compare mock object created in newBuilders()
 			],
 			'property link (with entity lookup)' => [
 				'EntityId',
 				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new EntityIdValue( new PropertyId( 'P5' ) ),
 				'/^<a\b[^>]* href="[^"]*\bP5">Label for P5<\/a>.*$/',
 			],
@@ -324,21 +325,21 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			'plain commons media' => [
 				'CommonsMedia',
 				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'Example.jpg' ),
 				'@^Example.jpg$@',
 			],
 			'html commons link' => [
 				'CommonsMedia',
 				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'Example.jpg' ),
 				'@^<a class="extiw" href="//commons\.wikimedia\.org/wiki/File:Example\.jpg">Example\.jpg</a>$@',
 			],
 			'html commons inline image' => [
 				'CommonsMedia',
 				SnakFormatter::FORMAT_HTML_VERBOSE,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'DOES-NOT-EXIST-dfsdf.jpg' ),
 				'@^<div.*>.*<a.*href="https://commons\.wikimedia\.org/.*DOES-NOT-EXIST.*>.*</div>$@s',
 			],
@@ -346,21 +347,21 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			'plain geo-shape' => [
 				'GeoShape',
 				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'Data:GeoShape.map' ),
 				'@^Data:GeoShape.map$@',
 			],
 			'html geo-shape' => [
 				'GeoShape',
 				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'Data:GeoShape.map' ),
 				'@^<a class="extiw" href="//commons\.wikimedia\.org/wiki/Data:GeoShape\.map">Data:GeoShape\.map</a>$@',
 			],
 			'wikitext geo-shape' => [
 				'GeoShape',
 				SnakFormatter::FORMAT_WIKI,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'Data:GeoShape.map' ),
 				'@' .
 				preg_quote(
@@ -372,21 +373,21 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			'plain tabular-data' => [
 				'TabularData',
 				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'Data:TabularData.tab' ),
 				'@^Data:TabularData.tab$@',
 			],
 			'html tabular-data' => [
 				'TabularData',
 				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'Data:TabularData.tab' ),
 				'@^<a class="extiw" href="//commons2\.wikimedia\.org/wiki/Data:TabularData\.tab">Data:TabularData\.tab</a>$@',
 			],
 			'wikitext tabular-data' => [
 				'TabularData',
 				SnakFormatter::FORMAT_WIKI,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'Data:TabularData.tab' ),
 				'@' . preg_quote(
 					'[//commons2.wikimedia.org/wiki/Data:TabularData.tab Data:TabularData.tab]',
@@ -397,21 +398,21 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			'plain entity-schema' => [
 				'EntitySchema',
 				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'E45' ),
 				'@^E45$@',
 			],
 			'html entity-schema' => [
 				'EntitySchema',
 				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'E45' ),
 				'@^<a href=".+?:E45">E45</a>$@',
 			],
 			'wikitext entity-schema' => [
 				'EntitySchema',
 				SnakFormatter::FORMAT_WIKI,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new StringValue( 'E45' ),
 				'@^\[\[.+?:E45\|E45]]$@',
 			],
@@ -419,14 +420,14 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			'plain coordinate' => [
 				'GlobeCoordinate',
 				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new GlobeCoordinateValue( new LatLongValue( -55.755786, 37.25633 ), 0.25 ),
 				'@^55°45\'S, 37°15\'E$@'
 			],
 			'wikitext coordinate' => [
 				'GlobeCoordinate',
 				SnakFormatter::FORMAT_WIKI,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new GlobeCoordinateValue( new LatLongValue( 1, 2 ), 1 ),
 				'@^<maplink latitude="1" longitude="2">{"type":"Feature","geometry":{"type":"Point","coordinates":\[2,1\]}}</maplink>$@'
 			],
@@ -472,7 +473,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			'a month in 1980' => [
 				'Time',
 				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new TimeValue(
 					'+1980-05-01T00:00:00Z',
 					0, 0, 0,
@@ -484,7 +485,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			'a gregorian day in 1520' => [
 				'Time',
 				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new TimeValue(
 					'+1520-05-01T00:00:00Z',
 					0, 0, 0,
@@ -496,7 +497,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			'a julian day in 1980' => [
 				'Time',
 				SnakFormatter::FORMAT_HTML_DIFF,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new TimeValue(
 					'+1980-05-01T00:00:00Z',
 					0, 0, 0,
@@ -555,14 +556,14 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			'plain item label' => [
 				'newEntityIdFormatter',
 				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@^Label for Q5$@'
 			],
 			'item link' => [
 				'newEntityIdFormatter',
 				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
+				$this->newFormatterOptions( 'en' ),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'/^.*Label for Q5.*$/'
 			]

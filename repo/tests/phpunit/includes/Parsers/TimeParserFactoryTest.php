@@ -250,14 +250,6 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function invalidInputProvider() {
 		return [
-			// Stuff that's not even a string
-			[ true ],
-			[ false ],
-			[ null ],
-			[ 4.2 ],
-			[ [] ],
-			[ 42 ],
-
 			// Strings that should not be recognozed as date time values
 			[ 'June June June' ],
 			[ '111 111 111' ],

@@ -14,7 +14,6 @@ use RepoGroup;
 use Title;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use ValueFormatters\ValueFormatterBase;
 
 /**
  * Formats the StringValue from a "commonsMedia" snak as a HTML thumbnail and a link to commons.
@@ -23,7 +22,7 @@ use ValueFormatters\ValueFormatterBase;
  * @author Adrian Heine
  * @author Marius Hoch
  */
-class CommonsInlineImageFormatter extends ValueFormatterBase {
+class CommonsInlineImageFormatter implements ValueFormatter {
 
 	private const FALLBACK_THUMBNAIL_WIDTH = 320; // 320 the was default hardcoded value. Removed in T224189
 
@@ -48,6 +47,11 @@ class CommonsInlineImageFormatter extends ValueFormatterBase {
 	private $thumbLimits;
 
 	/**
+	 * @var FormatterOptions
+	 */
+	private $options;
+
+	/**
 	 * @param ParserOptions $parserOptions Options for thumbnail size
 	 * @param array $thumbLimits Mapping of thumb number to the limit like [ 0 => 120, 1 => 240, ...]
 	 * @param FormatterOptions|null $options
@@ -60,9 +64,9 @@ class CommonsInlineImageFormatter extends ValueFormatterBase {
 		FormatterOptions $options = null,
 		RepoGroup $repoGroup = null
 	) {
-		parent::__construct( $options );
+		$this->options = $options ?: new FormatterOptions();
 
-		$languageCode = $this->getOption( ValueFormatter::OPT_LANG );
+		$languageCode = $this->options->getOption( ValueFormatter::OPT_LANG );
 		$this->language = Language::factory( $languageCode );
 		$this->repoGroup = $repoGroup ?: MediaWikiServices::getInstance()->getRepoGroup();
 		$this->parserOptions = $parserOptions;

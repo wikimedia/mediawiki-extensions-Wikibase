@@ -10,7 +10,6 @@ use InvalidArgumentException;
 use Message;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use ValueFormatters\ValueFormatterBase;
 
 /**
  * Formatter for rendering the details of a GlobeCoordinateValue (most useful for diffs) in HTML.
@@ -18,7 +17,7 @@ use ValueFormatters\ValueFormatterBase;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
+class GlobeCoordinateDetailsFormatter implements ValueFormatter {
 
 	/**
 	 * @var GlobeCoordinateFormatter
@@ -31,6 +30,11 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 	protected $vocabularyUriFormatter;
 
 	/**
+	 * @var FormatterOptions
+	 */
+	private $options;
+
+	/**
 	 * @param ValueFormatter $vocabularyUriFormatter
 	 * @param FormatterOptions|null $options
 	 */
@@ -38,10 +42,10 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 		ValueFormatter $vocabularyUriFormatter,
 		FormatterOptions $options = null
 	) {
-		parent::__construct( $options );
+		$this->options = $options ?: new FormatterOptions();
 
 		// TODO: What's a good default? Should this be locale dependant? Configurable?
-		$this->defaultOption( LatLongFormatter::OPT_FORMAT, LatLongFormatter::TYPE_DMS );
+		$this->options->defaultOption( LatLongFormatter::OPT_FORMAT, LatLongFormatter::TYPE_DMS );
 
 		$this->coordinateFormatter = new GlobeCoordinateFormatter( $this->options );
 
@@ -127,7 +131,7 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 	 * @return Message
 	 */
 	protected function getFieldLabel( $fieldName ) {
-		$lang = $this->getOption( ValueFormatter::OPT_LANG );
+		$lang = $this->options->getOption( ValueFormatter::OPT_LANG );
 
 		// Messages:
 		// wikibase-globedetails-latitude

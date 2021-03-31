@@ -13,7 +13,6 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\NumberLocalizer;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
-use ValueFormatters\ValueFormatterBase;
 
 /**
  * Formatter for rendering the details of a QuantityValue (most useful for diffs) in HTML.
@@ -22,7 +21,7 @@ use ValueFormatters\ValueFormatterBase;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class QuantityDetailsFormatter extends ValueFormatterBase {
+class QuantityDetailsFormatter implements ValueFormatter {
 
 	/**
 	 * @var QuantityFormatter
@@ -40,6 +39,11 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	private $vocabularyUriFormatter;
 
 	/**
+	 * @var FormatterOptions
+	 */
+	private $options;
+
+	/**
 	 * @param NumberLocalizer|null $numberLocalizer
 	 * @param ValueFormatter $vocabularyUriFormatter
 	 * @param FormatterOptions|null $options
@@ -49,7 +53,8 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 		ValueFormatter $vocabularyUriFormatter,
 		FormatterOptions $options = null
 	) {
-		parent::__construct( $options );
+		$this->options = $options ?: new FormatterOptions();
+		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
 
 		$decimalFormatter = new DecimalFormatter( $this->options, $numberLocalizer );
 		$this->vocabularyUriFormatter = $vocabularyUriFormatter;
@@ -167,7 +172,7 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 * @return Message
 	 */
 	private function getFieldLabel( $fieldName ) {
-		$lang = $this->getOption( ValueFormatter::OPT_LANG );
+		$lang = $this->options->getOption( ValueFormatter::OPT_LANG );
 
 		// Messages:
 		// wikibase-quantitydetails-amount

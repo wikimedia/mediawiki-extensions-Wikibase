@@ -6,7 +6,6 @@ use DataValues\TimeValue;
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use ValueFormatters\ValueFormatterBase;
 
 /**
  * A value formatter that creates a basic, single-line HTML representation of a TimeValue's date,
@@ -22,7 +21,7 @@ use ValueFormatters\ValueFormatterBase;
  * @author Thiemo Kreuz
  * @author Daniel Kinzler
  */
-class HtmlTimeFormatter extends ValueFormatterBase {
+class HtmlTimeFormatter implements ValueFormatter {
 
 	private const CALENDAR_KEYS = [
 		TimeValue::CALENDAR_GREGORIAN => 'wikibase-time-calendar-gregorian',
@@ -35,6 +34,11 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	private $dateTimeFormatter;
 
 	/**
+	 * @var FormatterOptions
+	 */
+	private $options;
+
+	/**
 	 * @param FormatterOptions|null $options
 	 * @param ValueFormatter $dateTimeFormatter A value formatter that accepts TimeValue objects and
 	 *  returns the formatted date and time, but not the calendar model. Must return HTML.
@@ -43,7 +47,8 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 		?FormatterOptions $options,
 		ValueFormatter $dateTimeFormatter
 	) {
-		parent::__construct( $options );
+		$this->options = $options ?: new FormatterOptions();
+		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
 
 		$this->dateTimeFormatter = $dateTimeFormatter;
 	}
@@ -139,7 +144,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	private function formatCalendarName( $calendarModel ) {
 		if ( array_key_exists( $calendarModel, self::CALENDAR_KEYS ) ) {
 			$key = self::CALENDAR_KEYS[$calendarModel];
-			$lang = $this->getOption( ValueFormatter::OPT_LANG );
+			$lang = $this->options->getOption( ValueFormatter::OPT_LANG );
 			$msg = wfMessage( $key )->inLanguage( $lang );
 
 			if ( $msg->exists() ) {

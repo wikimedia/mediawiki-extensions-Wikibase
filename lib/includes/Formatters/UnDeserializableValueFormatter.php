@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Formatters;
 
 use DataValues\DataValue;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatterBase;
+use ValueFormatters\ValueFormatter;
 
 /**
  * A ValueFormatter for UnDeserializableValue objects. It acts as a fallback when neither the
@@ -15,17 +15,22 @@ use ValueFormatters\ValueFormatterBase;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class UnDeserializableValueFormatter extends ValueFormatterBase {
+class UnDeserializableValueFormatter implements ValueFormatter {
 
 	private const OPT_MESSAGE_KEY = 'unDeserializableMessage';
+
+	/**
+	 * @var FormatterOptions
+	 */
+	private $options;
 
 	/**
 	 * @param FormatterOptions|null $options
 	 */
 	public function __construct( FormatterOptions $options = null ) {
-		parent::__construct( $options );
+		$this->options = $options ?: new FormatterOptions();
 
-		$this->defaultOption( self::OPT_MESSAGE_KEY, 'wikibase-undeserializable-value' );
+		$this->options->defaultOption( self::OPT_MESSAGE_KEY, 'wikibase-undeserializable-value' );
 	}
 
 	/**
@@ -36,7 +41,7 @@ class UnDeserializableValueFormatter extends ValueFormatterBase {
 	 * @return string Unescaped message text.
 	 */
 	public function format( $dataValue ) {
-		$languageCode = $this->options->getOption( self::OPT_LANG );
+		$languageCode = $this->options->getOption( ValueFormatter::OPT_LANG );
 		$messageKey = $this->options->getOption( self::OPT_MESSAGE_KEY );
 
 		return wfMessage( $messageKey )->inLanguage( $languageCode )->text();

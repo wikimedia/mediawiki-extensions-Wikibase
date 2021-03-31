@@ -8,7 +8,6 @@ use InvalidArgumentException;
 use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use ValueFormatters\ValueFormatterBase;
 
 /**
  * Formatter for rendering GlobeCoordinateValue via the Kartographer extensions.
@@ -16,7 +15,7 @@ use ValueFormatters\ValueFormatterBase;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class GlobeCoordinateKartographerFormatter extends ValueFormatterBase {
+class GlobeCoordinateKartographerFormatter implements ValueFormatter {
 
 	/**
 	 * @var ValueFormatter
@@ -34,6 +33,11 @@ class GlobeCoordinateKartographerFormatter extends ValueFormatterBase {
 	private $emitPreviewHtml;
 
 	/**
+	 * @var FormatterOptions
+	 */
+	private $options;
+
+	/**
 	 * @param FormatterOptions|null $options
 	 * @param ValueFormatter $coordinateFormatter
 	 * @param CachingKartographerEmbeddingHandler $cachingKartographerEmbeddingHandler
@@ -45,7 +49,8 @@ class GlobeCoordinateKartographerFormatter extends ValueFormatterBase {
 		CachingKartographerEmbeddingHandler $cachingKartographerEmbeddingHandler,
 		$emitPreviewHtml
 	) {
-		parent::__construct( $options );
+		$this->options = $options ?: new FormatterOptions();
+		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
 
 		$this->coordinateFormatter = $coordinateFormatter;
 		$this->cachingKartographerEmbeddingHandler = $cachingKartographerEmbeddingHandler;
@@ -70,7 +75,7 @@ class GlobeCoordinateKartographerFormatter extends ValueFormatterBase {
 
 		$html = '';
 
-		$lang = Language::factory( $this->getOption( self::OPT_LANG ) );
+		$lang = Language::factory( $this->options->getOption( ValueFormatter::OPT_LANG ) );
 
 		if ( !$this->emitPreviewHtml ) {
 			$kartographerHtml = $this->cachingKartographerEmbeddingHandler->getHtml( $value, $lang );
