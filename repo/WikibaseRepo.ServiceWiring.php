@@ -548,8 +548,6 @@ return [
 	},
 
 	'WikibaseRepo.ItemVocabularyBaseUri' => function ( MediaWikiServices $services ): string {
-		// TODO: We currently use the local repo concept URI here. This should be configurable,
-		//       to e.g. allow 3rd parties to use Wikidata as their vocabulary repo.
 		$itemSource = WikibaseRepo::getEntitySourceDefinitions( $services )
 			->getSourceForEntityType( Item::ENTITY_TYPE );
 
