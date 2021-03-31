@@ -97,16 +97,4 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function testGetGlobalSiteId() {
-		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings();
-
-		$this->assertEquals( 'enwiki', $wikibaseLuaEntityBindings->getGlobalSiteId() );
-	}
-
-	public function testGetLanguageCode() {
-		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings();
-
-		$this->assertEquals( 'es', $wikibaseLuaEntityBindings->getLanguageCode() );
-	}
-
 }

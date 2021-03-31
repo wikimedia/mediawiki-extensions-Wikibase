@@ -157,7 +157,7 @@ end
 local function getTermAndLang( entity, termType, langCode )
 	incrementStatsKey( 'wikibase.client.scribunto.entity.getTermAndLang.call' )
 
-	langCode = langCode or php.getLanguageCode()
+	langCode = langCode or settings.languageCode
 
 	if langCode == nil then
 		return nil, nil
@@ -233,7 +233,7 @@ function methodtable.getSitelink( entity, globalSiteId )
 		return nil
 	end
 
-	globalSiteId = globalSiteId or php.getGlobalSiteId()
+	globalSiteId = globalSiteId or settings.globalSiteId
 
 	if globalSiteId == nil then
 		return nil
