@@ -20,12 +20,12 @@ use RuntimeException;
 use Title;
 use User;
 use Wikibase\Client\Store\AddUsagesForPageJob;
+use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use WikiPage;
 
@@ -71,14 +71,13 @@ class DataUpdateHookHandler implements
 
 	public static function factory(
 		EntityIdParser $entityIdParser,
-		LoggerInterface $logger
+		LoggerInterface $logger,
+		ClientStore $store
 	): self {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
 		return new self(
-			$wikibaseClient->getStore()->getUsageUpdater(),
+			$store->getUsageUpdater(),
 			JobQueueGroup::singleton(),
-			$wikibaseClient->getStore()->getUsageLookup(),
+			$store->getUsageLookup(),
 			new EntityUsageFactory( $entityIdParser ),
 			$logger
 		);

@@ -11,6 +11,7 @@ use MediaWiki\Hook\EditPage__showStandardInputs_optionsHook;
 use MessageLocalizer;
 use OutputPage;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
@@ -61,11 +62,12 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 	public static function factory(
 		EntityIdParser $idParser,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		RepoLinker $repoLinker
+		RepoLinker $repoLinker,
+		ClientStore $store
 	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$usageLookup = $wikibaseClient->getStore()->getUsageLookup();
+		$usageLookup = $store->getUsageLookup();
 		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
 			$languageFallbackChainFactory,
 			$wikibaseClient->getTermLookup(),

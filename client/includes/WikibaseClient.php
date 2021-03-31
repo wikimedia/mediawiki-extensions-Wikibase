@@ -36,7 +36,6 @@ use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\DescriptionLookup;
-use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
@@ -123,11 +122,6 @@ final class WikibaseClient {
 	private $propertyDataTypeLookup = null;
 
 	/**
-	 * @var ClientStore|null
-	 */
-	private $store = null;
-
-	/**
 	 * @var OutputFormatSnakFormatterFactory|null
 	 */
 	private $snakFormatterFactory = null;
@@ -199,7 +193,7 @@ final class WikibaseClient {
 			$settings = self::getSettings();
 
 			$entityTitleLookup = new ClientSiteLinkTitleLookup(
-				$this->getStore()->getSiteLinkLookup(),
+				self::getStore()->getSiteLinkLookup(),
 				$settings->getSetting( 'siteGlobalID' )
 			);
 
@@ -221,7 +215,7 @@ final class WikibaseClient {
 				self::getTermFallbackCache(),
 				$settings->getSetting( 'sharedCacheDuration' ),
 				$this->getEntityLookup(),
-				$this->getStore()->getEntityRevisionLookup(),
+				self::getStore()->getEntityRevisionLookup(),
 				$settings->getSetting( 'entitySchemaNamespace' ),
 				new TitleLookupBasedEntityExistenceChecker(
 					$entityTitleLookup,
@@ -282,7 +276,7 @@ final class WikibaseClient {
 	private function newWikibaseSnakFormatterBuilders( WikibaseValueFormatterBuilders $valueFormatterBuilders ) {
 		return new WikibaseSnakFormatterBuilders(
 			$valueFormatterBuilders,
-			$this->getStore()->getPropertyInfoLookup(),
+			self::getStore()->getPropertyInfoLookup(),
 			$this->getPropertyDataTypeLookup(),
 			self::getDataTypeFactory()
 		);
@@ -350,7 +344,7 @@ final class WikibaseClient {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		return $this->getStore()->getEntityLookup();
+		return self::getStore()->getEntityLookup();
 	}
 
 	/**
@@ -394,7 +388,7 @@ final class WikibaseClient {
 
 	public function getPropertyDataTypeLookup(): PropertyDataTypeLookup {
 		if ( $this->propertyDataTypeLookup === null ) {
-			$infoLookup = $this->getStore()->getPropertyInfoLookup();
+			$infoLookup = self::getStore()->getPropertyInfoLookup();
 			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
 			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup(
 				$infoLookup,
@@ -429,42 +423,9 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * Returns an instance of the default store.
-	 */
-	public function getStore(): ClientStore {
-		if ( $this->store === null ) {
-			$this->store = new DirectSqlStore(
-				self::getEntityChangeFactory(),
-				self::getEntityIdParser(),
-				self::getEntityIdComposer(),
-				self::getEntityIdLookup(),
-				self::getEntityNamespaceLookup(),
-				self::getWikibaseServices(),
-				self::getSettings(),
-				self::getItemAndPropertySource()->getDatabaseName(),
-				$this->getContentLanguage()->getCode()
-			);
-		}
-
-		return $this->store;
-	}
-
-	/**
-	 * Overrides the default store to be used in the client app context.
-	 * This is intended for use by test cases.
-	 *
-	 * @param ClientStore|null $store
-	 *
-	 * @throws LogicException If MW_PHPUNIT_TEST is not defined, to avoid this
-	 * method being abused in production code.
-	 */
-	public function overrideStore( ClientStore $store = null ) {
-		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
-			throw new LogicException( 'Overriding the store instance is only supported in test mode' );
-		}
-
-		$this->store = $store;
+	public static function getStore( ContainerInterface $services = null ): ClientStore {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.Store' );
 	}
 
 	/**
@@ -640,8 +601,8 @@ final class WikibaseClient {
 		return new LangLinkHandlerFactory(
 			$this->getLanguageLinkBadgeDisplay(),
 			self::getNamespaceChecker(),
-			$this->getStore()->getSiteLinkLookup(),
-			$this->getStore()->getEntityLookup(),
+			self::getStore()->getSiteLinkLookup(),
+			self::getStore()->getEntityLookup(),
 			$this->siteLookup,
 			MediaWikiServices::getInstance()->getHookContainer(),
 			self::getLogger(),
@@ -654,8 +615,8 @@ final class WikibaseClient {
 		if ( $this->parserOutputDataUpdater === null ) {
 			$this->parserOutputDataUpdater = new ClientParserOutputDataUpdater(
 				$this->getOtherProjectsSidebarGeneratorFactory(),
-				$this->getStore()->getSiteLinkLookup(),
-				$this->getStore()->getEntityLookup(),
+				self::getStore()->getSiteLinkLookup(),
+				self::getStore()->getEntityLookup(),
 				new EntityUsageFactory( self::getEntityIdParser() ),
 				self::getSettings()->getSetting( 'siteGlobalID' ),
 				self::getLogger()
@@ -727,9 +688,9 @@ final class WikibaseClient {
 	public function getOtherProjectsSidebarGeneratorFactory(): OtherProjectsSidebarGeneratorFactory {
 		return new OtherProjectsSidebarGeneratorFactory(
 			self::getSettings(),
-			$this->getStore()->getSiteLinkLookup(),
+			self::getStore()->getSiteLinkLookup(),
 			$this->siteLookup,
-			$this->getStore()->getEntityLookup(),
+			self::getStore()->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			MediaWikiServices::getInstance()->getHookContainer(),
 			self::getLogger()
@@ -773,7 +734,7 @@ final class WikibaseClient {
 		$settings = self::getSettings();
 		return new Runner(
 			$this->getStatementGroupRendererFactory(),
-			$this->getStore()->getSiteLinkLookup(),
+			self::getStore()->getSiteLinkLookup(),
 			self::getEntityIdParser(),
 			$this->getRestrictedEntityLookup(),
 			$settings->getSetting( 'siteGlobalID' ),
@@ -788,7 +749,7 @@ final class WikibaseClient {
 
 	private function getAffectedPagesFinder(): AffectedPagesFinder {
 		return new AffectedPagesFinder(
-			$this->getStore()->getUsageLookup(),
+			self::getStore()->getUsageLookup(),
 			MediaWikiServices::getInstance()->getTitleFactory(),
 			MediaWikiServices::getInstance()->getLinkBatchFactory(),
 			self::getSettings()->getSetting( 'siteGlobalID' ),
@@ -811,7 +772,7 @@ final class WikibaseClient {
 		$pageUpdater->setRecentChangesBatchSize( $settings->getSetting( 'recentChangesBatchSize' ) );
 
 		$changeListTransformer = new ChangeRunCoalescer(
-			$this->getStore()->getEntityRevisionLookup(),
+			self::getStore()->getEntityRevisionLookup(),
 			self::getEntityChangeFactory(),
 			$logger,
 			$settings->getSetting( 'siteGlobalID' )

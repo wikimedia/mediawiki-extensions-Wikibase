@@ -8,6 +8,7 @@ use MediaWiki\Hook\InfoActionHook;
 use Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
@@ -89,11 +90,12 @@ class InfoActionHookHandler implements InfoActionHook {
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		NamespaceChecker $namespaceChecker,
 		RepoLinker $repoLinker,
-		SettingsArray $clientSettings
+		SettingsArray $clientSettings,
+		ClientStore $store
 	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$usageLookup = $wikibaseClient->getStore()->getUsageLookup();
+		$usageLookup = $store->getUsageLookup();
 		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
 			$languageFallbackChainFactory,
 			$wikibaseClient->getTermLookup(),
@@ -104,7 +106,7 @@ class InfoActionHookHandler implements InfoActionHook {
 		return new self(
 			$namespaceChecker,
 			$repoLinker,
-			$wikibaseClient->getStore()->getSiteLinkLookup(),
+			$store->getSiteLinkLookup(),
 			$clientSettings->getSetting( 'siteGlobalID' ),
 			$usageLookup,
 			$labelDescriptionLookupFactory,
