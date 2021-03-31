@@ -125,6 +125,7 @@ use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
 use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ObjectFactory;
@@ -873,6 +874,29 @@ return [
 			$services->getMainWANObjectCache(),
 			JobQueueGroup::singleton(),
 			WikibaseRepo::getLogger( $services )
+		);
+	},
+
+	'WikibaseRepo.TermValidatorFactory' => function ( MediaWikiServices $services ): TermValidatorFactory {
+		$settings = WikibaseRepo::getSettings( $services );
+
+		// Use the old deprecated setting if it exists
+		if ( $settings->hasSetting( 'multilang-limits' ) ) {
+			$constraints = $settings->getSetting( 'multilang-limits' );
+		} else {
+			$constraints = $settings->getSetting( 'string-limits' )['multilang'];
+		}
+
+		$maxLength = $constraints['length'];
+
+		$languages = WikibaseRepo::getTermsLanguages( $services )->getLanguages();
+
+		return new TermValidatorFactory(
+			$maxLength,
+			$languages,
+			WikibaseRepo::getEntityIdParser( $services ),
+			WikibaseRepo::getTermsCollisionDetectorFactory( $services ),
+			WikibaseRepo::getTermLookup( $services )
 		);
 	},
 
