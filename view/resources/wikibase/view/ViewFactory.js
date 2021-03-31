@@ -43,6 +43,7 @@
 	require( '../../../lib/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.js' );
 
 	// Plugins
+	require( '../../jquery/jquery.sticknode.js' );
 	require( '../../jquery/jquery.removeClassByRegex.js' );
 
 	/**

@@ -75,12 +75,13 @@
 
 .wikibase-entitytermsview .wikibase-toolbar-container {
 	width: auto;
-	height: 100%;
 }
 
 .wikibase-entitytermsview .wikibase-toolbar-container .wikibase-toolbar-container {
-	position: sticky;
-	z-index: 2;
+	position: relative;
+}
+
+.wikibase-entitytermsview .wikibase-toolbar-container {
 	background-color: #fff;
 }
 
