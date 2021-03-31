@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel;
 
-use Comparable;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdSet;
@@ -20,7 +19,7 @@ use Wikibase\DataModel\Entity\ItemIdSet;
  * @author Michał Łazowik
  * @author Thiemo Kreuz
  */
-class SiteLink implements Comparable {
+class SiteLink {
 
 	/**
 	 * @var string
@@ -107,7 +106,6 @@ class SiteLink implements Comparable {
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * @since 0.7.4
 	 *

@@ -73,7 +73,6 @@ class AliasGroupFallback extends AliasGroup {
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * @param mixed $target
 	 *

@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Term;
 
 use ArrayIterator;
-use Comparable;
 use Countable;
 use InvalidArgumentException;
 use Iterator;
@@ -20,7 +19,7 @@ use OutOfBoundsException;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TermList implements Countable, IteratorAggregate, Comparable {
+class TermList implements Countable, IteratorAggregate {
 
 	/**
 	 * @var Term[]
@@ -131,7 +130,6 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * @since 0.7.4
 	 *

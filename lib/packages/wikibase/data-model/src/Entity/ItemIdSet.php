@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Entity;
 
 use ArrayIterator;
-use Comparable;
 use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
@@ -17,7 +16,7 @@ use IteratorAggregate;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemIdSet implements IteratorAggregate, Countable, Comparable {
+class ItemIdSet implements IteratorAggregate, Countable {
 
 	/**
 	 * @var ItemId[]

@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Term;
 
-use Comparable;
 use Countable;
 use InvalidArgumentException;
 
@@ -16,7 +15,7 @@ use InvalidArgumentException;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class AliasGroup implements Comparable, Countable {
+class AliasGroup implements Countable {
 
 	/**
 	 * @var string Language code identifying the language of the aliases, but note that there is
@@ -82,7 +81,6 @@ class AliasGroup implements Comparable, Countable {
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * @param mixed $target
 	 *

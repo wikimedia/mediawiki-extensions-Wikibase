@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Statement;
 
-use Comparable;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\PropertyIdProvider;
@@ -20,7 +19,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class Statement implements Comparable, PropertyIdProvider {
+class Statement implements PropertyIdProvider {
 
 	/**
 	 * Rank enum. Higher values are more preferred.
@@ -272,7 +271,6 @@ class Statement implements Comparable, PropertyIdProvider {
 	}
 
 	/**
-	 * @see Comparable::equals
 	 *
 	 * @since 0.7.4
 	 *

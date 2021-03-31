@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel;
 
 use ArrayIterator;
-use Comparable;
 use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
@@ -25,7 +24,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @author Thiemo Kreuz
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class ReferenceList implements Comparable, Countable, IteratorAggregate, Serializable {
+class ReferenceList implements Countable, IteratorAggregate, Serializable {
 
 	/**
 	 * @var Reference[] Ordered list or references, indexed by SPL object hash.
@@ -286,8 +285,6 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	}
 
 	/**
-	 * @see Comparable::equals
-	 *
 	 * The comparison is done purely value based, ignoring the order of the elements in the array.
 	 *
 	 * @since 0.3
