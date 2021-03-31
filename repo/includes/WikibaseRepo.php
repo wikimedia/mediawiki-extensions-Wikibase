@@ -91,7 +91,6 @@ use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Lib\Store\EntityLinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -1839,13 +1838,9 @@ class WikibaseRepo {
 		);
 	}
 
-	public function getLinkTargetEntityIdLookup(): LinkTargetEntityIdLookup {
-		return new EntityLinkTargetEntityIdLookup(
-			self::getEntityNamespaceLookup(),
-			self::getEntityIdParser(),
-			self::getEntitySourceDefinitions(),
-			self::getLocalEntitySource()
-		);
+	public static function getLinkTargetEntityIdLookup( ContainerInterface $services = null ): LinkTargetEntityIdLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.LinkTargetEntityIdLookup' );
 	}
 
 }

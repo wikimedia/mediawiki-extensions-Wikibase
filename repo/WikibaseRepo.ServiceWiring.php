@@ -61,6 +61,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityLinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
@@ -68,6 +69,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
+use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
@@ -580,6 +582,15 @@ return [
 			$services->getLanguageFactory(),
 			$services->getLanguageConverterFactory(),
 			$services->getLanguageFallback()
+		);
+	},
+
+	'WikibaseRepo.LinkTargetEntityIdLookup' => function ( MediaWikiServices $services ): LinkTargetEntityIdLookup {
+		return new EntityLinkTargetEntityIdLookup(
+			WikibaseRepo::getEntityNamespaceLookup( $services ),
+			WikibaseRepo::getEntityIdParser( $services ),
+			WikibaseRepo::getEntitySourceDefinitions( $services ),
+			WikibaseRepo::getLocalEntitySource( $services )
 		);
 	},
 

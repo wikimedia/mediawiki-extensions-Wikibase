@@ -58,13 +58,14 @@ class DifferenceEngineViewHeaderHookHandler implements DifferenceEngineViewHeade
 
 	public static function factory(
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		LinkTargetEntityIdLookup $linkTargetEntityIdLookup,
 		PrefetchingTermLookup $prefetchingTermLookup
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$wikibaseRepo->inFederatedPropertyMode(),
 			$languageFallbackChainFactory,
-			$wikibaseRepo->getLinkTargetEntityIdLookup(),
+			$linkTargetEntityIdLookup,
 			new SummaryParsingPrefetchHelper( $prefetchingTermLookup )
 		);
 	}

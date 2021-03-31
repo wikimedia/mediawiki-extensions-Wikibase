@@ -650,6 +650,7 @@
 			"factory": "\\Wikibase\\Repo\\Hooks\\DifferenceEngineViewHeaderHookHandler::factory",
 			"services": [
 				"WikibaseRepo.LanguageFallbackChainFactory",
+				"WikibaseRepo.LinkTargetEntityIdLookup",
 				"WikibaseRepo.PrefetchingTermLookup"
 			]
 		},
@@ -686,6 +687,7 @@
 				"WikibaseRepo.EntityNamespaceLookup",
 				"WikibaseRepo.EntityUrlLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
+				"WikibaseRepo.LinkTargetEntityIdLookup",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermLookup"
 			]
@@ -733,6 +735,7 @@
 			"factory": "\\Wikibase\\Repo\\Hooks\\PageHistoryPagerHookHandler::factory",
 			"services": [
 				"WikibaseRepo.LanguageFallbackChainFactory",
+				"WikibaseRepo.LinkTargetEntityIdLookup",
 				"WikibaseRepo.PrefetchingTermLookup"
 			]
 		},
