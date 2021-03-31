@@ -43,7 +43,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
-use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\WikibaseSettings;
@@ -846,13 +845,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 				$publicMethod->invoke( $wbRepoServices );
 			}
 		}
-	}
-
-	public function testLinkTargetEntityIdLookup() {
-		$this->assertInstanceOf(
-			LinkTargetEntityIdLookup::class,
-			$this->getWikibaseRepo()->getLinkTargetEntityIdLookup()
-		);
 	}
 
 	/**
