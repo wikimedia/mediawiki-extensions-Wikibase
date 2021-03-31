@@ -192,6 +192,7 @@
 			"factory": "\\Wikibase\\Client\\Hooks\\SkinAfterPortletHandler::factory",
 			"services": [
 				"WikibaseClient.EntityIdParser",
+				"WikibaseClient.LangLinkSiteGroup",
 				"WikibaseClient.NamespaceChecker",
 				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Settings"

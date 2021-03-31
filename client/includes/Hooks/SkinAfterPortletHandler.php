@@ -8,7 +8,6 @@ use Skin;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\RepoLinker;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\SettingsArray;
 
@@ -33,18 +32,17 @@ class SkinAfterPortletHandler implements SkinAfterPortletHook {
 
 	public static function factory(
 		EntityIdParser $entityIdParser,
+		string $langLinkSiteGroup,
 		NamespaceChecker $namespaceChecker,
 		RepoLinker $repoLinker,
 		SettingsArray $clientSettings
 	): self {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
 		return new self(
 			new RepoItemLinkGenerator(
 				$namespaceChecker,
 				$repoLinker,
 				$entityIdParser,
-				$wikibaseClient->getLangLinkSiteGroup(),
+				$langLinkSiteGroup,
 				$clientSettings->getSetting( 'siteGlobalID' )
 			)
 		);

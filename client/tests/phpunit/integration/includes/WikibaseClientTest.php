@@ -165,38 +165,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider getLangLinkSiteGroupProvider
-	 */
-	public function testGetLangLinkSiteGroup( $expected, SettingsArray $settings, SiteLookup $siteLookup ) {
-		$this->setService( 'WikibaseClient.Settings', $settings );
-		$client = new WikibaseClient(
-			$siteLookup
-		);
-
-		$this->assertEquals( $expected, $client->getLangLinkSiteGroup() );
-	}
-
-	public function getLangLinkSiteGroupProvider() {
-		$siteLookup = $this->getSiteLookup();
-
-		$settings = clone WikibaseClient::getSettings();
-
-		$settings->setSetting( 'siteGroup', 'wikipedia' );
-		$settings->setSetting( 'siteGlobalID', 'enwiki' );
-		$settings->setSetting( 'languageLinkSiteGroup', null );
-
-		$settings2 = clone $settings;
-		$settings2->setSetting( 'siteGroup', 'wikipedia' );
-		$settings2->setSetting( 'siteGlobalID', 'enwiki' );
-		$settings2->setSetting( 'languageLinkSiteGroup', 'wikivoyage' );
-
-		return [
-			[ 'wikipedia', $settings, $siteLookup ],
-			[ 'wikivoyage', $settings2, $siteLookup ]
-		];
-	}
-
-	/**
 	 * @return SiteLookup
 	 */
 	private function getSiteLookup() {
