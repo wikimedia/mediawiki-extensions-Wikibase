@@ -582,17 +582,10 @@ final class WikibaseClient {
 	 * Returns the site group ID for the group to be used for language links.
 	 * This is typically the group the client wiki itself belongs to, but
 	 * can be configured to be otherwise using the languageLinkSiteGroup setting.
-	 *
-	 * @return string
 	 */
-	public function getLangLinkSiteGroup() {
-		$group = self::getSettings()->getSetting( 'languageLinkSiteGroup' );
-
-		if ( $group === null ) {
-			$group = self::getSiteGroup();
-		}
-
-		return $group;
+	public static function getLangLinkSiteGroup( ContainerInterface $services = null ): string {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.LangLinkSiteGroup' );
 	}
 
 	/**
@@ -653,7 +646,7 @@ final class WikibaseClient {
 			MediaWikiServices::getInstance()->getHookContainer(),
 			self::getLogger(),
 			self::getSettings()->getSetting( 'siteGlobalID' ),
-			$this->getLangLinkSiteGroup()
+			self::getLangLinkSiteGroup()
 		);
 	}
 

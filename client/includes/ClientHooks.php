@@ -240,13 +240,11 @@ final class ClientHooks {
 			$key,
 			$cache::TTL_DAY,
 			function () {
-				$wikibaseClient = WikibaseClient::getDefaultInstance();
-
 				$site = WikibaseClient::getSite();
 				$currentSite = [
 					'globalSiteId' => $site->getGlobalId(),
 					'languageCode' => $site->getLanguageCode(),
-					'langLinkSiteGroup' => $wikibaseClient->getLangLinkSiteGroup()
+					'langLinkSiteGroup' => WikibaseClient::getLangLinkSiteGroup()
 				];
 
 				return [ 'currentSite' => $currentSite ];

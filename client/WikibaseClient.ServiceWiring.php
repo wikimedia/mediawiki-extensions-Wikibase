@@ -256,6 +256,17 @@ return [
 		return $itemSource;
 	},
 
+	'WikibaseClient.LangLinkSiteGroup' => function ( MediaWikiServices $services ): string {
+		$group = WikibaseClient::getSettings( $services )
+			->getSetting( 'languageLinkSiteGroup' );
+
+		if ( $group === null ) {
+			$group = WikibaseClient::getSiteGroup( $services );
+		}
+
+		return $group;
+	},
+
 	'WikibaseClient.LanguageFallbackChainFactory' => function ( MediaWikiServices $services ): LanguageFallbackChainFactory {
 		return new LanguageFallbackChainFactory(
 			$services->getLanguageFactory(),
