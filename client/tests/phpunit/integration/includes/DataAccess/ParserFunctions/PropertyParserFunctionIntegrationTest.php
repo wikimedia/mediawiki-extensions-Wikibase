@@ -18,7 +18,6 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
-use Wikimedia\TestingAccessWrapper;
 
 /**
  * Simple integration test for the {{#property:…}} parser function.
@@ -67,8 +66,6 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 	}
 
 	private function maskPropertyLabelResolver( WikibaseClient $wikibaseClient ) {
-		$wikibaseClient = TestingAccessWrapper::newFromObject( $wikibaseClient );
-
 		$propertyLabelResolver = $this->createMock( PropertyLabelResolver::class );
 		$propertyLabelResolver->method( 'getPropertyIdsForLabels' )
 			->with( [ 'LuaTestStringProperty' ] )
@@ -76,7 +73,10 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 				[ 'LuaTestStringProperty' => new PropertyId( 'P342' ) ]
 			);
 
-		$wikibaseClient->propertyLabelResolver = $propertyLabelResolver;
+		$this->setService(
+			'WikibaseClient.PropertyLabelResolver',
+			$propertyLabelResolver
+		);
 	}
 
 	private function newParserOutputUsageAccumulator( ParserOutput $parserOutput ): ParserOutputUsageAccumulator {

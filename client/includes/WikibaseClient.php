@@ -11,7 +11,6 @@ use Language;
 use LogicException;
 use MediaWiki\MediaWikiServices;
 use MWException;
-use ObjectCache;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Serializers\Serializer;
@@ -83,9 +82,6 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
-use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
@@ -173,9 +169,6 @@ final class WikibaseClient {
 
 	/** @var DescriptionLookup|null */
 	private $descriptionLookup = null;
-
-	/** @var PropertyLabelResolver|null */
-	private $propertyLabelResolver = null;
 
 	/** @var ReferenceFormatterFactory|null */
 	private $referenceFormatterFactory = null;
@@ -762,7 +755,7 @@ final class WikibaseClient {
 
 	private function getStatementGroupRendererFactory(): StatementGroupRendererFactory {
 		return new StatementGroupRendererFactory(
-			$this->getPropertyLabelResolver(),
+			self::getPropertyLabelResolver(),
 			new SnaksFinder(),
 			$this->getRestrictedEntityLookup(),
 			$this->getDataAccessSnakFormatterFactory(),
@@ -934,26 +927,9 @@ final class WikibaseClient {
 		return $this->descriptionLookup;
 	}
 
-	public function getPropertyLabelResolver(): PropertyLabelResolver {
-		if ( $this->propertyLabelResolver === null ) {
-			$languageCode = $this->getContentLanguage()->getCode();
-			$settings = self::getSettings();
-			$cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
-			$cacheType = $settings->getSetting( 'sharedCacheType' );
-			$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
-
-			// Cache key needs to be language specific
-			$cacheKey = $cacheKeyPrefix . ':TermPropertyLabelResolver' . '/' . $languageCode;
-
-			$this->propertyLabelResolver = $this->getCachedDatabasePropertyLabelResolver(
-				$languageCode,
-				ObjectCache::getInstance( $cacheType ),
-				$cacheDuration,
-				$cacheKey
-			);
-		}
-
-		return $this->propertyLabelResolver;
+	public static function getPropertyLabelResolver( ContainerInterface $services = null ): PropertyLabelResolver {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.PropertyLabelResolver' );
 	}
 
 	public function getReferenceFormatterFactory(): ReferenceFormatterFactory {
@@ -970,50 +946,6 @@ final class WikibaseClient {
 		}
 
 		return $this->referenceFormatterFactory;
-	}
-
-	private function getCachedDatabasePropertyLabelResolver(
-		$languageCode,
-		$cache,
-		$cacheDuration,
-		$cacheKey
-	): CachedDatabasePropertyLabelResolver {
-		$loadBalancer = $this->getLoadBalancerForConfiguredPropertySource();
-		$wanObjectCache = $this->getWANObjectCache();
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
-			$wanObjectCache,
-			$this->getDatabaseDomainForPropertySource()
-		);
-		$databaseTermIdsResolver = new DatabaseTermInLangIdsResolver(
-			$typeIdsStore,
-			$typeIdsStore,
-			$loadBalancer,
-			$this->getDatabaseDomainForPropertySource()
-		);
-
-		return new CachedDatabasePropertyLabelResolver(
-			$languageCode,
-			$databaseTermIdsResolver,
-			$cache,
-			$cacheDuration,
-			$cacheKey
-		);
-	}
-
-	private function getLoadBalancerForConfiguredPropertySource() {
-		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		return $lbFactory->getMainLB( $this->getDatabaseDomainForPropertySource() );
-	}
-
-	private function getDatabaseDomainForPropertySource() {
-		$propertySource = self::getPropertySource();
-
-		return $propertySource->getDatabaseName();
-	}
-
-	private function getWANObjectCache() {
-		return MediaWikiServices::getInstance()->getMainWANObjectCache();
 	}
 
 	public static function getItemSource( ContainerInterface $services = null ): EntitySource {
