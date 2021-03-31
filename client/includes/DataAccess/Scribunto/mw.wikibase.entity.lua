@@ -16,6 +16,7 @@ local methodtable = {}
 local util = require 'libraryUtil'
 local checkType = util.checkType
 local checkTypeMulti = util.checkTypeMulti
+local settings = {}
 
 metatable.__index = methodtable
 
@@ -129,7 +130,7 @@ function Entity.create( data )
 	end
 
 	local entity = data
-	maskEntityTables( entity, php.getSetting( 'fineGrainedLuaTracking' ) )
+	maskEntityTables( entity, settings.fineGrainedLuaTracking )
 
 	setmetatable( entity, metatable )
 	return entity
@@ -382,6 +383,12 @@ function methodtable.formatStatements( entity, propertyLabelOrId, acceptableRank
 		propertyLabelOrId,
 		acceptableRanks
 	);
+end
+
+function Entity.setupInterface( options )
+    -- Remove setup function
+    Entity.setupInterface = nil
+    settings = options
 end
 
 mw.wikibase.entity = Entity
