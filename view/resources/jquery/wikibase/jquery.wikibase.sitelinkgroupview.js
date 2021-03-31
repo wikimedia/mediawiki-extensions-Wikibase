@@ -113,13 +113,26 @@
 		 * @see jQuery.ui.EditableTemplatedWidget.draw
 		 */
 		draw: function () {
-			var deferred = $.Deferred();
+			var self = this,
+				deferred = $.Deferred();
 
 			this.element.data( 'group', this.options.groupName );
 
+			if ( !this.$headingSection.data( 'sticknode' ) ) {
+				this.$headingSection.sticknode( {
+					$container: this.element
+				} );
+			}
+
 			if ( !this._$notification ) {
 				this.notification()
-				.appendTo( this.$headingSection );
+				.appendTo( this.$headingSection )
+				.on( 'closeableupdate.' + this.widgetName, function () {
+					var sticknode = self.element.data( 'sticknode' );
+					if ( sticknode ) {
+						sticknode.refresh();
+					}
+				} );
 			}
 
 			if ( !this.$sitelinklistview.data( 'sitelinklistview' ) ) {
