@@ -244,26 +244,18 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			'addDescriptionUsage' => [ $this, 'addDescriptionUsage' ],
 			'addSiteLinksUsage' => [ $this, 'addSiteLinksUsage' ],
 			'addOtherUsage' => [ $this, 'addOtherUsage' ],
-			'getSetting' => [ $this, 'getSetting' ],
 			'incrementStatsKey' => [ $this, 'incrementStatsKey' ],
 		];
 
-		return $this->getEngine()->registerInterface(
-			__DIR__ . '/mw.wikibase.entity.lua', $lib, []
-		);
-	}
-
-	/**
-	 * Wrapper for getSetting
-	 *
-	 * @param string $setting
-	 *
-	 * @return array
-	 */
-	public function getSetting( $setting ) {
-		$this->checkType( 'setting', 1, $setting, 'string' );
 		$settings = WikibaseClient::getSettings();
-		return [ $settings->getSetting( $setting ) ];
+		// These settings will be exposed to the Lua module.
+		$options = [
+			'fineGrainedLuaTracking' => $settings->getSetting( 'fineGrainedLuaTracking' ),
+		];
+
+		return $this->getEngine()->registerInterface(
+			__DIR__ . '/mw.wikibase.entity.lua', $lib, $options
+		);
 	}
 
 	/**
