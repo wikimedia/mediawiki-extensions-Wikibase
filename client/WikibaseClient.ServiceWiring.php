@@ -20,6 +20,8 @@ use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\OtherProjectsSitesGenerator;
 use Wikibase\Client\OtherProjectsSitesProvider;
+use Wikibase\Client\RecentChanges\RecentChangeFactory;
+use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
@@ -398,6 +400,28 @@ return [
 		}
 
 		return $propertySource;
+	},
+
+	'WikibaseClient.RecentChangeFactory' => function ( MediaWikiServices $services ): RecentChangeFactory {
+		$contentLanguage = $services->getContentLanguage();
+		$siteLookup = $services->getSiteLookup();
+		$repoSite = $siteLookup->getSite(
+			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName()
+		);
+		$interwikiPrefixes = ( $repoSite !== null ) ? $repoSite->getInterwikiIds() : [];
+		$interwikiPrefix = ( $interwikiPrefixes !== [] ) ? $interwikiPrefixes[0] : null;
+
+		return new RecentChangeFactory(
+			$contentLanguage,
+			new SiteLinkCommentCreator(
+				$contentLanguage,
+				$siteLookup,
+				WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' )
+			),
+			CentralIdLookup::factoryNonLocal(), // TODO get from $services (see T265767)
+			( $interwikiPrefix !== null ) ?
+				new ExternalUserNames( $interwikiPrefix, false ) : null
+		);
 	},
 
 	'WikibaseClient.RepoLinker' => function ( MediaWikiServices $services ): RepoLinker {

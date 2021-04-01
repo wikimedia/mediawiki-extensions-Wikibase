@@ -8,8 +8,6 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
 use ReflectionClass;
 use ReflectionMethod;
-use Site;
-use SiteLookup;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
@@ -18,7 +16,6 @@ use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
-use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -33,7 +30,6 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
-use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Client\WikibaseClient
@@ -54,7 +50,7 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$this->disallowDBAccess();
 		$this->disallowHttpAccess();
 
-		$this->setService( 'SiteLookup', $this->getSiteLookup() );
+		$this->setService( 'SiteLookup', new HashSiteStore() );
 	}
 
 	private function disallowDBAccess() {
@@ -158,28 +154,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( ClientParserOutputDataUpdater::class, $returnValue );
 	}
 
-	/**
-	 * @return SiteLookup
-	 */
-	private function getSiteLookup() {
-		$siteStore = new HashSiteStore();
-
-		$site = new Site();
-		$site->setGlobalId( 'enwiki' );
-		$site->setGroup( 'wikipedia' );
-
-		$siteStore->saveSite( $site );
-
-		$site = new Site();
-		$site->setGlobalId( 'repo' );
-		$site->setGroup( 'wikipedia' );
-		$site->addInterwikiId( 'repointerwiki' );
-
-		$siteStore->saveSite( $site );
-
-		return $siteStore;
-	}
-
 	public function testGetLanguageLinkBadgeDisplay() {
 		$returnValue = $this->getWikibaseClient()->getLanguageLinkBadgeDisplay();
 		$this->assertInstanceOf( LanguageLinkBadgeDisplay::class, $returnValue );
@@ -199,43 +173,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetChangeHandler() {
 		$handler = $this->getWikibaseClient()->getChangeHandler();
 		$this->assertInstanceOf( ChangeHandler::class, $handler );
-	}
-
-	public function testGetRecentChangeFactory() {
-		$settings = clone WikibaseClient::getSettings();
-
-		$settings->setSetting( 'itemAndPropertySourceName', 'localrepo' );
-		$this->setService( 'WikibaseClient.Settings', $settings );
-
-		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
-		$this->setService( 'WikibaseClient.EntityTypeDefinitions', $entityTypeDefinitions );
-		$entitySourceDefinitions = new EntitySourceDefinitions(
-			[
-				new EntitySource(
-					'localrepo',
-					'repo',
-					[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
-					'',
-					'',
-					'',
-					'repo'
-				)
-			],
-			$entityTypeDefinitions
-		);
-		$this->setService( 'WikibaseClient.EntitySourceDefinitions', $entitySourceDefinitions );
-		$wikibaseClient = new WikibaseClient(
-			$this->getSiteLookup()
-		);
-
-		$recentChangeFactory = $wikibaseClient->getRecentChangeFactory();
-		$this->assertInstanceOf( RecentChangeFactory::class, $recentChangeFactory );
-
-		$recentChangeFactory = TestingAccessWrapper::newFromObject( $recentChangeFactory );
-		$this->assertStringStartsWith(
-			'repointerwiki>',
-			$recentChangeFactory->externalUsernames->addPrefix( 'TestUser' )
-		);
 	}
 
 	public function testGetPropertyParserFunctionRunner() {
@@ -275,9 +212,7 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$entitySourceDefinitions = $this->getEntitySourceDefinitions();
 		$this->setService( 'WikibaseClient.EntitySourceDefinitions', $entitySourceDefinitions );
 
-		return new WikibaseClient(
-			$this->getSiteLookup()
-		);
+		return new WikibaseClient( new HashSiteStore() );
 	}
 
 	/**

@@ -2,10 +2,8 @@
 
 namespace Wikibase\Client;
 
-use CentralIdLookup;
 use DataValues\Deserializers\DataValueDeserializer;
 use ExtensionRegistry;
-use ExternalUserNames;
 use JobQueueGroup;
 use Language;
 use LogicException;
@@ -33,7 +31,6 @@ use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
-use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Usage\EntityUsageFactory;
@@ -789,24 +786,9 @@ final class WikibaseClient {
 		);
 	}
 
-	public function getRecentChangeFactory(): RecentChangeFactory {
-		$repoSite = $this->siteLookup->getSite(
-			self::getItemAndPropertySource()->getDatabaseName()
-		);
-		$interwikiPrefixes = ( $repoSite !== null ) ? $repoSite->getInterwikiIds() : [];
-		$interwikiPrefix = ( $interwikiPrefixes !== [] ) ? $interwikiPrefixes[0] : null;
-
-		return new RecentChangeFactory(
-			$this->getContentLanguage(),
-			new SiteLinkCommentCreator(
-				$this->getContentLanguage(),
-				$this->siteLookup,
-				self::getSettings()->getSetting( 'siteGlobalID' )
-			),
-			CentralIdLookup::factoryNonLocal(),
-			( $interwikiPrefix !== null ) ?
-				new ExternalUserNames( $interwikiPrefix, false ) : null
-		);
+	public static function getRecentChangeFactory( ContainerInterface $services = null ): RecentChangeFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.RecentChangeFactory' );
 	}
 
 	public static function getItemAndPropertySource( ContainerInterface $services = null ): EntitySource {
