@@ -1,6 +1,13 @@
 # Wikibase DataModel release notes
 
-## Version 9.6.0
+## Version 9.6.1 (TODO)
+
+* `Snak` now declares `getHash()` and `equals()` methods again,
+  which it used to inherit from the `Hashable` and `Immutable` interfaces prior to version 9.6.0.
+  (The methods were never removed from any specific classes,
+  but since `Snak` is an interface, Phan started complaining that the methods were unknown.)
+
+## Version 9.6.0 (2021-03-31)
 
 * `ReferenceList::addNewReference()`, `Statement::addNewReference()` and the `StatementList` constructor
   supported being called with a variadic argument list, with a single array argument,
