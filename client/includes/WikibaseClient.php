@@ -4,6 +4,7 @@ namespace Wikibase\Client;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use ExtensionRegistry;
+use ExternalUserNames;
 use JobQueueGroup;
 use Language;
 use LogicException;
@@ -789,6 +790,16 @@ final class WikibaseClient {
 	public static function getRecentChangeFactory( ContainerInterface $services = null ): RecentChangeFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.RecentChangeFactory' );
+	}
+
+	/**
+	 * Returns an {@link ExternalUserNames} that can be used to link to the
+	 * {@link getItemAndPropertySource item and property source},
+	 * if an interwiki prefix for that source (and its site) is known.
+	 */
+	public static function getExternalUserNames( ContainerInterface $services = null ): ?ExternalUserNames {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.ExternalUserNames' );
 	}
 
 	public static function getItemAndPropertySource( ContainerInterface $services = null ): EntitySource {
