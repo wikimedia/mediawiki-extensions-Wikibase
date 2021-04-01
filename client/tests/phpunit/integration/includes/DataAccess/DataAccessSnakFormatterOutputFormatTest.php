@@ -54,10 +54,9 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 		$store = new MockClientStore( 'de' );
 		$this->setService( 'WikibaseClient.Store', $store );
 
-		// Create a term lookup from the ovewritten EntityLookup or the MockClientStore one
-		$wikibaseClient->overrideTermLookup(
-			new EntityRetrievingTermLookup( $store->getEntityLookup() )
-		);
+		// Create a term lookup from the overwritten EntityLookup or the MockClientStore one
+		$this->setService( 'WikibaseClient.TermLookup',
+			new EntityRetrievingTermLookup( $store->getEntityLookup() ) );
 
 		$settings = WikibaseClient::getSettings();
 		$siteId = $settings->getSetting( 'siteGlobalID' );

@@ -7,7 +7,6 @@ use ExtensionRegistry;
 use ExternalUserNames;
 use JobQueueGroup;
 use Language;
-use LogicException;
 use MediaWiki\MediaWikiServices;
 use MWException;
 use Psr\Container\ContainerInterface;
@@ -133,11 +132,6 @@ final class WikibaseClient {
 	private $restrictedEntityLookup = null;
 
 	/**
-	 * @var TermLookup|null
-	 */
-	private $termLookup = null;
-
-	/**
 	 * @var SidebarLinkBadgeDisplay|null
 	 */
 	private $sidebarLinkBadgeDisplay = null;
@@ -198,7 +192,7 @@ final class WikibaseClient {
 			}
 
 			$this->valueFormatterBuilders = new WikibaseValueFormatterBuilders(
-				new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
+				new FormatterLabelDescriptionLookupFactory( self::getTermLookup() ),
 				new LanguageNameLookup( $this->getUserLanguage()->getCode() ),
 				self::getRepoItemUriParser(),
 				$settings->getSetting( 'geoShapeStorageBaseUrl' ),
@@ -348,12 +342,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.TermBuffer' );
 	}
 
-	public function getTermLookup(): TermLookup {
-		if ( !$this->termLookup ) {
-			$this->termLookup = self::getPrefetchingTermLookup();
-		}
-
-		return $this->termLookup;
+	public static function getTermLookup( ContainerInterface $services = null ): TermLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.TermLookup' );
 	}
 
 	public static function getPrefetchingTermLookupFactory(
@@ -408,7 +399,7 @@ final class WikibaseClient {
 	public function getLanguageFallbackLabelDescriptionLookupFactory(): LanguageFallbackLabelDescriptionLookupFactory {
 		return new LanguageFallbackLabelDescriptionLookupFactory(
 			self::getLanguageFallbackChainFactory(),
-			$this->getTermLookup(),
+			self::getTermLookup(),
 			self::getTermBuffer()
 		);
 	}
@@ -416,23 +407,6 @@ final class WikibaseClient {
 	public static function getStore( ContainerInterface $services = null ): ClientStore {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.Store' );
-	}
-
-	/**
-	 * Overrides the TermLookup to be used.
-	 * This is intended for use by test cases.
-	 *
-	 * @param TermLookup|null $lookup
-	 *
-	 * @throws LogicException If MW_PHPUNIT_TEST is not defined, to avoid this
-	 * method being abused in production code.
-	 */
-	public function overrideTermLookup( TermLookup $lookup = null ) {
-		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
-			throw new LogicException( 'Overriding TermLookup is only supported in test mode' );
-		}
-
-		$this->termLookup = $lookup;
 	}
 
 	/**

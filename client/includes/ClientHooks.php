@@ -177,11 +177,12 @@ final class ClientHooks {
 	 * @return bool Always true.
 	 */
 	public static function onSkinAfterBottomScripts( Skin $skin, &$html ) {
-		$client = WikibaseClient::getDefaultInstance();
-		$enabledNamespaces = WikibaseClient::getSettings()->getSetting( 'pageSchemaNamespaces' );
+		$services = MediaWikiServices::getInstance();
+		$enabledNamespaces = WikibaseClient::getSettings( $services )
+			->getSetting( 'pageSchemaNamespaces' );
 
 		$out = $skin->getOutput();
-		$entityId = self::parseEntityId( $client, $out->getProperty( 'wikibase_item' ) );
+		$entityId = self::parseEntityId( $out->getProperty( 'wikibase_item' ) );
 		$title = $out->getTitle();
 		if (
 			!$entityId ||
@@ -193,10 +194,10 @@ final class ClientHooks {
 		}
 
 		$handler = new SkinAfterBottomScriptsHandler(
-			$client->getContentLanguage()->getCode(),
-			WikibaseClient::getRepoLinker(),
-			$client->getTermLookup(),
-			MediaWikiServices::getInstance()->getRevisionLookup()
+			$services->getContentLanguage()->getCode(),
+			WikibaseClient::getRepoLinker( $services ),
+			WikibaseClient::getTermLookup( $services ),
+			$services->getRevisionLookup()
 		);
 		$revisionTimestamp = $out->getRevisionTimestamp();
 		$html .= $handler->createSchemaElement(
@@ -208,13 +209,7 @@ final class ClientHooks {
 		return true;
 	}
 
-	/**
-	 * @param WikibaseClient $client
-	 * @param string|null $prefixedId
-	 *
-	 * @return EntityId|null
-	 */
-	private static function parseEntityId( WikibaseClient $client, $prefixedId = null ) {
+	private static function parseEntityId( ?string $prefixedId ): ?EntityId {
 		if ( !$prefixedId ) {
 			return null;
 		}

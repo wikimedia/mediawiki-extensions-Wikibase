@@ -79,10 +79,9 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		$store->setEntityLookup( $entityLookup );
 		$this->setService( 'WikibaseClient.Store', $store );
 
-		// Create a term lookup from the ovewritten EntityLookup or the MockClientStore one
-		$wikibaseClient->overrideTermLookup(
-			new EntityRetrievingTermLookup( $entityLookup ?: $store->getEntityLookup() )
-		);
+		// Create a term lookup from the overwritten EntityLookup or the MockClientStore one
+		$this->setService( 'WikibaseClient.TermLookup',
+			new EntityRetrievingTermLookup( $entityLookup ?: $store->getEntityLookup() ) );
 
 		$settings = clone WikibaseClient::getSettings();
 		if ( self::$oldAllowArbitraryDataAccess === null ) {

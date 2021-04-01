@@ -28,7 +28,6 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider createSchemaProvider
 	 */
 	public function testCreateSchema( $revisionTimestamp, $image, $description, $expected ) {
-		$client = WikibaseClient::getDefaultInstance();
 		$repoLinker = new RepoLinker(
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'https://www.wikidata.org',
@@ -38,7 +37,7 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 		$handler = new SkinAfterBottomScriptsHandler(
 			'en',
 			$repoLinker,
-			$client->getTermLookup(),
+			WikibaseClient::getTermLookup(),
 			$this->createMockRevisionLookup( '1022523983' )
 		);
 

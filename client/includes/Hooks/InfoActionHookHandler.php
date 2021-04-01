@@ -14,6 +14,7 @@ use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
@@ -93,14 +94,15 @@ class InfoActionHookHandler implements InfoActionHook {
 		RepoLinker $repoLinker,
 		SettingsArray $clientSettings,
 		ClientStore $store,
-		TermBuffer $termBuffer
+		TermBuffer $termBuffer,
+		TermLookup $termLookup
 	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$usageLookup = $store->getUsageLookup();
 		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
 			$languageFallbackChainFactory,
-			$wikibaseClient->getTermLookup(),
+			$termLookup,
 			$termBuffer
 		);
 		$descriptionLookup = $wikibaseClient->getDescriptionLookup();

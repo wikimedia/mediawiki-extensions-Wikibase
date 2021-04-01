@@ -295,10 +295,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	private function newLanguageDependentLuaBindings() {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
 		$nonCachingLookup = new LanguageFallbackLabelDescriptionLookup(
-			$wikibaseClient->getTermLookup(),
+			WikibaseClient::getTermLookup(),
 			$this->getLanguageFallbackChain()
 		);
 
@@ -333,7 +331,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			new RedirectResolvingLatestRevisionLookup( $store->getEntityRevisionLookup() ),
 			new LanguageFallbackLabelDescriptionLookupFactory(
 				WikibaseClient::getLanguageFallbackChainFactory( $mediaWikiServices ),
-				$wikibaseClient->getTermLookup()
+				WikibaseClient::getTermLookup( $mediaWikiServices )
 			),
 			$mediaWikiServices->getLanguageFactory(),
 			$wikibaseClient->getTermsLanguages()

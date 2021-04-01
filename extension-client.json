@@ -142,7 +142,8 @@
 				"WikibaseClient.LanguageFallbackChainFactory",
 				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Store",
-				"WikibaseClient.TermBuffer"
+				"WikibaseClient.TermBuffer",
+				"WikibaseClient.TermLookup"
 			]
 		},
 		"InfoAction": {
@@ -155,7 +156,8 @@
 				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Settings",
 				"WikibaseClient.Store",
-				"WikibaseClient.TermBuffer"
+				"WikibaseClient.TermBuffer",
+				"WikibaseClient.TermLookup"
 			]
 		},
 		"Magic": {
@@ -458,7 +460,8 @@
 			"services": [
 				"WikibaseClient.LanguageFallbackChainFactory",
 				"WikibaseClient.Settings",
-				"WikibaseClient.TermBuffer"
+				"WikibaseClient.TermBuffer",
+				"WikibaseClient.TermLookup"
 			]
 		},
 		"EntityUsage": {
