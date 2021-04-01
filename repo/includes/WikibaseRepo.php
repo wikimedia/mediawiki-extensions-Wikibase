@@ -493,11 +493,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityPatcher' );
 	}
 
-	/**
-	 * @return EntityStoreWatcher
-	 */
-	public function getEntityStoreWatcher() {
-		return self::getStore()->getEntityStoreWatcher();
+	public static function getEntityStoreWatcher( ContainerInterface $services = null ): EntityStoreWatcher {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityStoreWatcher' );
 	}
 
 	public static function getEntityTitleLookup( ContainerInterface $services = null ): EntityTitleLookup {

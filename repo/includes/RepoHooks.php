@@ -263,7 +263,7 @@ final class RepoHooks {
 		EntityContent $content,
 		RevisionRecord $revision
 	) {
-		$watcher = WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher();
+		$watcher = WikibaseRepo::getEntityStoreWatcher();
 
 		// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
 		// May be redundant in some cases. Take care not to cause infinite regress.
@@ -315,7 +315,7 @@ final class RepoHooks {
 
 		// Notify storage/lookup services that the entity was deleted. Needed to track page-level deletion.
 		// May be redundant in some cases. Take care not to cause infinite regress.
-		$wikibaseRepo->getEntityStoreWatcher()->entityDeleted( $content->getEntityId() );
+		WikibaseRepo::getEntityStoreWatcher()->entityDeleted( $content->getEntityId() );
 
 		$notifier = $wikibaseRepo->getChangeNotifier();
 		$notifier->notifyOnPageDeleted( $content, $user, $logEntry->getTimestamp() );

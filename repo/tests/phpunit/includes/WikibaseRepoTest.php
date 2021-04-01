@@ -41,7 +41,6 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\WikibaseSettings;
@@ -242,11 +241,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetValueParserFactoryReturnType() {
 		$returnValue = WikibaseRepo::getValueParserFactory();
 		$this->assertInstanceOf( ValueParserFactory::class, $returnValue );
-	}
-
-	public function testGetEntityStoreWatcherReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getEntityStoreWatcher();
-		$this->assertInstanceOf( EntityStoreWatcher::class, $returnValue );
 	}
 
 	public function testGetEntityRevisionLookupReturnType() {
