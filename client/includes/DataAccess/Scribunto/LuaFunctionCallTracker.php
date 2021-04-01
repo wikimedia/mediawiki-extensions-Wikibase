@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\DataAccess\Scribunto;
 
+use InvalidArgumentException;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 
 /**
@@ -38,24 +39,36 @@ class LuaFunctionCallTracker {
 	private $trackLuaFunctionCallsPerWiki;
 
 	/**
+	 * @var float
+	 */
+	private $sampleRate;
+
+	/**
 	 * @param StatsdDataFactoryInterface $statsdDataFactory
 	 * @param string $siteId
 	 * @param string $siteGroup
 	 * @param bool $trackLuaFunctionCallsPerSiteGroup
 	 * @param bool $trackLuaFunctionCallsPerWiki
+	 * @param float $sampleRate A number in the range of [0, 1], representing
+	 *   the fraction of counter increments that will be reported from Lua.
 	 */
 	public function __construct(
 		StatsdDataFactoryInterface $statsdDataFactory,
 		$siteId,
 		$siteGroup,
 		$trackLuaFunctionCallsPerSiteGroup,
-		$trackLuaFunctionCallsPerWiki
+		$trackLuaFunctionCallsPerWiki,
+		$sampleRate
 	) {
 		$this->statsdDataFactory = $statsdDataFactory;
 		$this->siteId = $siteId;
 		$this->siteGroup = $siteGroup;
 		$this->trackLuaFunctionCallsPerSiteGroup = $trackLuaFunctionCallsPerSiteGroup;
 		$this->trackLuaFunctionCallsPerWiki = $trackLuaFunctionCallsPerWiki;
+		if ( $sampleRate < 0 || $sampleRate > 1 ) {
+			throw new InvalidArgumentException( '$sampleRate must be between 0 and 1.' );
+		}
+		$this->sampleRate = $sampleRate;
 	}
 
 	/**
@@ -64,10 +77,14 @@ class LuaFunctionCallTracker {
 	 * @param string $key
 	 */
 	public function incrementKey( $key ) {
+		if ( $this->sampleRate === 0 ) {
+			return;
+		}
 		$prefixedKeys = $this->getPrefixedKeys( $key );
+		$count = intval( 1 / $this->sampleRate );
 
 		foreach ( $prefixedKeys as $prefixedKey ) {
-			$this->statsdDataFactory->increment( $prefixedKey );
+			$this->statsdDataFactory->updateCount( $prefixedKey, $count );
 		}
 	}
 
