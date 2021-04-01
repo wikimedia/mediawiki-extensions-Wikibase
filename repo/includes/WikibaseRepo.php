@@ -774,15 +774,11 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.LanguageFallbackChainFactory' );
 	}
 
-	/**
-	 * @return LanguageFallbackLabelDescriptionLookupFactory
-	 */
-	public function getLanguageFallbackLabelDescriptionLookupFactory() {
-		return new LanguageFallbackLabelDescriptionLookupFactory(
-			self::getLanguageFallbackChainFactory(),
-			self::getTermLookup(),
-			self::getTermBuffer()
-		);
+	public static function getLanguageFallbackLabelDescriptionLookupFactory(
+		ContainerInterface $services = null
+	): LanguageFallbackLabelDescriptionLookupFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory' );
 	}
 
 	public static function getStatementGuidValidator( ContainerInterface $service = null ): StatementGuidValidator {
@@ -1232,7 +1228,7 @@ class WikibaseRepo {
 			self::getEntityIdParser(),
 			$siteLinkStore,
 			self::getEntityIdLookup(),
-			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
+			self::getLanguageFallbackLabelDescriptionLookupFactory(),
 			$this->getFieldDefinitionsByType( Item::ENTITY_TYPE ),
 			$this->getPropertyDataTypeLookup(),
 			$legacyFormatDetector
@@ -1309,7 +1305,7 @@ class WikibaseRepo {
 			$errorLocalizer,
 			self::getEntityIdParser(),
 			self::getEntityIdLookup(),
-			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
+			self::getLanguageFallbackLabelDescriptionLookupFactory(),
 			$propertyInfoStore,
 			$propertyInfoBuilder,
 			$this->getFieldDefinitionsByType( Property::ENTITY_TYPE ),

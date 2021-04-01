@@ -285,7 +285,7 @@ class ItemContentTest extends EntityContentTestCase {
 			WikibaseRepo::getEntityIdParser(),
 			WikibaseRepo::getStore()->newSiteLinkStore(),
 			WikibaseRepo::getEntityIdLookup(),
-			$wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory(),
+			WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory(),
 			$this->createMock( FieldDefinitions::class ),
 			$this->getPropertyDataTypeLookup()
 		);

@@ -42,7 +42,6 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\WikibaseSettings;
@@ -302,11 +301,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetChangeOpDeserializerFactory() {
 		$factory = $this->getWikibaseRepo()->getChangeOpDeserializerFactory();
 		$this->assertInstanceOf( ChangeOpDeserializerFactory::class, $factory );
-	}
-
-	public function testGetLanguageFallbackLabelDescriptionLookupFactory() {
-		$returnValue = $this->getWikibaseRepo()->getLanguageFallbackLabelDescriptionLookupFactory();
-		$this->assertInstanceOf( LanguageFallbackLabelDescriptionLookupFactory::class, $returnValue );
 	}
 
 	public function testGetStatementGuidValidator() {
