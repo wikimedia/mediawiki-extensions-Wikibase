@@ -104,7 +104,8 @@
 			"factory": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler::factory",
 			"services": [
 				"WikibaseClient.EntityIdParser",
-				"WikibaseClient.Logger"
+				"WikibaseClient.Logger",
+				"WikibaseClient.Store"
 			]
 		},
 		"DeletePageNoticeCreator": {
@@ -112,7 +113,8 @@
 			"factory": "\\Wikibase\\Client\\Hooks\\DeletePageNoticeCreator::factory",
 			"services": [
 				"WikibaseClient.RepoLinker",
-				"WikibaseClient.Settings"
+				"WikibaseClient.Settings",
+				"WikibaseClient.Store"
 			]
 		},
 		"LibHooks": {
@@ -138,7 +140,8 @@
 			"services": [
 				"WikibaseClient.EntityIdParser",
 				"WikibaseClient.LanguageFallbackChainFactory",
-				"WikibaseClient.RepoLinker"
+				"WikibaseClient.RepoLinker",
+				"WikibaseClient.Store"
 			]
 		},
 		"InfoAction": {
@@ -149,7 +152,8 @@
 				"WikibaseClient.LanguageFallbackChainFactory",
 				"WikibaseClient.NamespaceChecker",
 				"WikibaseClient.RepoLinker",
-				"WikibaseClient.Settings"
+				"WikibaseClient.Settings",
+				"WikibaseClient.Store"
 			]
 		},
 		"Magic": {
@@ -163,7 +167,8 @@
 			"factory": "\\Wikibase\\Client\\Hooks\\MovePageNotice::factory",
 			"services": [
 				"WikibaseClient.RepoLinker",
-				"WikibaseClient.Settings"
+				"WikibaseClient.Settings",
+				"WikibaseClient.Store"
 			]
 		},
 		"ParserFunctionRegistrant": {
@@ -210,7 +215,8 @@
 			"services": [
 			  	"WikibaseClient.ItemAndPropertySource",
 			  	"WikibaseClient.NamespaceChecker",
-			  	"WikibaseClient.Settings"
+			  	"WikibaseClient.Settings",
+				"WikibaseClient.Store"
 			]
 		}
 	},

@@ -166,16 +166,18 @@ class InjectRCRecordsJob extends Job {
 		$mwServices = MediaWikiServices::getInstance();
 		$wbServices = WikibaseClient::getDefaultInstance();
 
+		$store = WikibaseClient::getStore( $mwServices );
+
 		$job = new self(
 			$mwServices->getDBLoadBalancerFactory(),
-			$wbServices->getStore()->getEntityChangeLookup(),
+			$store->getEntityChangeLookup(),
 			WikibaseClient::getEntityChangeFactory( $mwServices ),
 			$wbServices->getRecentChangeFactory(),
 			$mwServices->getTitleFactory(),
 			$params
 		);
 
-		$job->setRecentChangesFinder( $wbServices->getStore()->getRecentChangesFinder() );
+		$job->setRecentChangesFinder( $store->getRecentChangesFinder() );
 
 		$job->setLogger( WikibaseClient::getLogger( $mwServices ) );
 		$job->setStats( $mwServices->getStatsdDataFactory() );

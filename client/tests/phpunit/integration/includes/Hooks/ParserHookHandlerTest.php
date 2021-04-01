@@ -40,19 +40,10 @@ class ParserHookHandlerTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$wikibaseClient = $this->resetWikibaseClient();
-		$store = $wikibaseClient->getStore();
+		$this->resetWikibaseClient();
 
-		if ( !( $store instanceof MockClientStore ) ) {
-			$store = new MockClientStore( 'de' );
-			$wikibaseClient->overrideStore( $store );
-		}
-
-		$this->assertInstanceOf(
-			MockClientStore::class,
-			$wikibaseClient->getStore(),
-			'Mocking the default ClientStore failed'
-		);
+		$store = new MockClientStore( 'de' );
+		$this->setService( 'WikibaseClient.Store', $store );
 	}
 
 	protected function tearDown(): void {

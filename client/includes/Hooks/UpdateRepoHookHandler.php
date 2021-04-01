@@ -17,10 +17,10 @@ use Psr\Log\LoggerInterface;
 use Title;
 use User;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\UpdateRepo\UpdateRepo;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -74,7 +74,8 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	public static function factory(
 		EntitySource $entitySource,
 		NamespaceChecker $namespaceChecker,
-		SettingsArray $clientSettings
+		SettingsArray $clientSettings,
+		ClientStore $store
 	): ?self {
 
 		$repoDB = $entitySource->getDatabaseName();
@@ -85,12 +86,10 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 			return null;
 		}
 
-		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkLookup();
-
 		return new self(
 			$namespaceChecker,
 			$jobQueueGroup,
-			$siteLinkLookup,
+			$store->getSiteLinkLookup(),
 			LoggerFactory::getInstance( 'UpdateRepo' ),
 			$repoDB,
 			$clientSettings->getSetting( 'siteGlobalID' ),

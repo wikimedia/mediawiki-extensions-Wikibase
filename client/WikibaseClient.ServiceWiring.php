@@ -21,6 +21,8 @@ use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\OtherProjectsSitesGenerator;
 use Wikibase\Client\OtherProjectsSitesProvider;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\Store\ClientStore;
+use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
@@ -487,6 +489,20 @@ return [
 		}
 
 		return $siteGroup;
+	},
+
+	'WikibaseClient.Store' => function ( MediaWikiServices $services ): ClientStore {
+		return new DirectSqlStore(
+			WikibaseClient::getEntityChangeFactory( $services ),
+			WikibaseClient::getEntityIdParser( $services ),
+			WikibaseClient::getEntityIdComposer( $services ),
+			WikibaseClient::getEntityIdLookup( $services ),
+			WikibaseClient::getEntityNamespaceLookup( $services ),
+			WikibaseClient::getWikibaseServices( $services ),
+			WikibaseClient::getSettings( $services ),
+			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName(),
+			$services->getContentLanguage()->getCode()
+		);
 	},
 
 	'WikibaseClient.StringNormalizer' => function ( MediaWikiServices $services ): StringNormalizer {

@@ -19,7 +19,6 @@ use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
-use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -128,11 +127,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetLanguageFallbackLabelDescriptionLookupFactory() {
 		$instance = $this->getWikibaseClient()->getLanguageFallbackLabelDescriptionLookupFactory();
 		$this->assertInstanceOf( LanguageFallbackLabelDescriptionLookupFactory::class, $instance );
-	}
-
-	public function testGetStoreReturnType() {
-		$returnValue = $this->getWikibaseClient()->getStore();
-		$this->assertInstanceOf( ClientStore::class, $returnValue );
 	}
 
 	public function testGetContentLanguageReturnType() {

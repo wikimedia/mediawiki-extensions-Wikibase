@@ -77,7 +77,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		$store = new MockClientStore( 'de' );
 		$entityLookup = static::getEntityLookup();
 		$store->setEntityLookup( $entityLookup );
-		$wikibaseClient->overrideStore( $store );
+		$this->setService( 'WikibaseClient.Store', $store );
 
 		// Create a term lookup from the ovewritten EntityLookup or the MockClientStore one
 		$wikibaseClient->overrideTermLookup(
@@ -123,14 +123,6 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		parent::setUp();
 
 		$this->doMock();
-
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
-		$this->assertInstanceOf(
-			MockClientStore::class,
-			$wikibaseClient->getStore(),
-			'Mocking the default ClientStore failed'
-		);
 
 		$this->setContentLang( 'de' );
 		$this->overridePropertyLabelResolver();

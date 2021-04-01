@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Tests\Unit\DataAccess;
+namespace Wikibase\Client\Tests\DataAccess;
 
 use DataValues\DecimalValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
@@ -10,6 +10,7 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use Language;
+use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\Tests\Mocks\MockClientStore;
@@ -40,7 +41,7 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCase {
+class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * Makes sure WikibaseClient uses our ClientStore mock
@@ -51,7 +52,7 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
 
 		$store = new MockClientStore( 'de' );
-		$wikibaseClient->overrideStore( $store );
+		$this->setService( 'WikibaseClient.Store', $store );
 
 		// Create a term lookup from the ovewritten EntityLookup or the MockClientStore one
 		$wikibaseClient->overrideTermLookup(

@@ -176,8 +176,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	private function getPropertyIdResolver() {
 		if ( $this->propertyIdResolver === null ) {
-			$wikibaseClient = WikibaseClient::getDefaultInstance();
-			$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
+			$entityLookup = WikibaseClient::getStore()->getEntityLookup();
 			$propertyLabelResolver = WikibaseClient::getPropertyLabelResolver();
 
 			$this->propertyIdResolver = new PropertyIdResolver(
@@ -305,7 +304,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		$labelDescriptionLookup = new CachingFallbackLabelDescriptionLookup(
 			WikibaseClient::getTermFallbackCache(),
-			new RedirectResolvingLatestRevisionLookup( $wikibaseClient->getStore()->getEntityRevisionLookup() ),
+			new RedirectResolvingLatestRevisionLookup( WikibaseClient::getStore()->getEntityRevisionLookup() ),
 			$nonCachingLookup,
 			$this->getLanguageFallbackChain()
 		);
@@ -326,11 +325,12 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private function newLanguageIndependentLuaBindings() {
 		$mediaWikiServices = MediaWikiServices::getInstance();
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = WikibaseClient::getSettings();
+		$settings = WikibaseClient::getSettings( $mediaWikiServices );
+		$store = WikibaseClient::getStore( $mediaWikiServices );
 
 		$termLookup = new CachingFallbackBasedTermLookup(
 			WikibaseClient::getTermFallbackCache( $mediaWikiServices ),
-			new RedirectResolvingLatestRevisionLookup( $wikibaseClient->getStore()->getEntityRevisionLookup() ),
+			new RedirectResolvingLatestRevisionLookup( $store->getEntityRevisionLookup() ),
 			new LanguageFallbackLabelDescriptionLookupFactory(
 				WikibaseClient::getLanguageFallbackChainFactory( $mediaWikiServices ),
 				$wikibaseClient->getTermLookup()
@@ -340,16 +340,16 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		);
 
 		return new WikibaseLanguageIndependentLuaBindings(
-			$wikibaseClient->getStore()->getSiteLinkLookup(),
-			WikibaseClient::getEntityIdLookup(),
+			$store->getSiteLinkLookup(),
+			WikibaseClient::getEntityIdLookup( $mediaWikiServices ),
 			$settings,
 			$this->getUsageAccumulator(),
 			$this->getEntityIdParser(),
 			$termLookup,
 			$wikibaseClient->getTermsLanguages(),
 			new EntityRetrievingClosestReferencedEntityIdLookup(
-				$wikibaseClient->getStore()->getEntityLookup(),
-				$wikibaseClient->getStore()->getEntityPrefetcher(),
+				$store->getEntityLookup(),
+				$store->getEntityPrefetcher(),
 				$settings->getSetting( 'referencedEntityIdMaxDepth' ),
 				$settings->getSetting( 'referencedEntityIdMaxReferencedEntityVisits' )
 			),

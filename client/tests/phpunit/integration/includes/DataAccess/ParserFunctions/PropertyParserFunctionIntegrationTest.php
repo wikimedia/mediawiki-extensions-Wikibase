@@ -44,17 +44,8 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
 		$this->maskPropertyLabelResolver( $wikibaseClient );
 
-		$store = $wikibaseClient->getStore();
-		if ( !( $store instanceof MockClientStore ) ) {
-			$store = new MockClientStore( 'de' );
-			$wikibaseClient->overrideStore( $store );
-		}
-
-		$this->assertInstanceOf(
-			MockClientStore::class,
-			$wikibaseClient->getStore(),
-			'Mocking the default ClientStore failed'
-		);
+		$store = new MockClientStore( 'de' );
+		$this->setService( 'WikibaseClient.Store', $store );
 
 		$this->setContentLang( 'de' );
 
