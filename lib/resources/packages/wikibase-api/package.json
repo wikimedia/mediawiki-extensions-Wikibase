@@ -1,42 +1,42 @@
 {
-  "name": "wikibase-api",
-  "description": "JavaScript client for the Wikibase Repository web API",
-  "version": "3.1.1",
-  "license": "GPL-2.0+",
-  "contributors": [
-    {
-      "name": "H. Snater",
-      "url": "http://www.snater.com"
-    },
-    {
-      "name": "Adrian Lang",
-      "email": "adrian.lang@wikimedia.de"
-    }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://gerrit.wikimedia.org/r/wikibase/javascript-api"
-  },
-  "bugs": {
-    "url": "https://phabricator.wikimedia.org/"
-  },
-  "scripts": {
-    "test": "grunt test"
-  },
-  "dependencies": {
-    "jquery": "^3.2.1",
-    "wikibase-data-values": "^0.10.0"
-  },
-  "devDependencies": {
-    "eslint-config-wikimedia": "0.14.3",
-    "grunt": "1.0.4",
-    "grunt-eslint": "22.0.0",
-    "grunt-karma": "^2.0.0",
-    "karma": "^1.7.0",
-    "karma-cli": "^1.0.1",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "karma-qunit": "^1.2.1",
-    "qunit": "^1.0.0",
-    "sinon": "^4.0.1"
-  }
+	"name": "wikibase-api",
+	"description": "JavaScript client for the Wikibase Repository web API",
+	"version": "3.1.1",
+	"license": "GPL-2.0+",
+	"contributors": [
+		{
+			"name": "H. Snater",
+			"url": "http://www.snater.com"
+		},
+		{
+			"name": "Adrian Lang",
+			"email": "adrian.lang@wikimedia.de"
+		}
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://gerrit.wikimedia.org/r/wikibase/javascript-api"
+	},
+	"bugs": {
+		"url": "https://phabricator.wikimedia.org/"
+	},
+	"scripts": {
+		"test": "grunt test"
+	},
+	"dependencies": {
+		"jquery": "^3.2.1",
+		"wikibase-data-values": "^0.10.0"
+	},
+	"devDependencies": {
+		"eslint-config-wikimedia": "0.14.3",
+		"grunt": "1.0.4",
+		"grunt-eslint": "22.0.0",
+		"grunt-karma": "^2.0.0",
+		"karma": "^1.7.0",
+		"karma-cli": "^1.0.1",
+		"karma-phantomjs-launcher": "^1.0.4",
+		"karma-qunit": "^1.2.1",
+		"qunit": "^1.0.0",
+		"sinon": "^4.0.1"
+	}
 }
