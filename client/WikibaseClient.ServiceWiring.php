@@ -49,6 +49,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\ItemChange;
@@ -531,6 +532,10 @@ return [
 
 	'WikibaseClient.StringNormalizer' => function ( MediaWikiServices $services ): StringNormalizer {
 		return new StringNormalizer();
+	},
+
+	'WikibaseClient.TermBuffer' => function ( MediaWikiServices $services ): TermBuffer {
+		return WikibaseClient::getPrefetchingTermLookup( $services );
 	},
 
 	'WikibaseClient.TermFallbackCache' => function ( MediaWikiServices $services ): TermFallbackCacheFacade {
