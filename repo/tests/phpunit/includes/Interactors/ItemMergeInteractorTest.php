@@ -134,7 +134,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 
 		//XXX: we may want or need to mock some of these services
 		$mergeFactory = new MergeFactory(
-			$wikibaseRepo->getEntityConstraintProvider(),
+			WikibaseRepo::getEntityConstraintProvider(),
 			$wikibaseRepo->getChangeOpFactoryProvider(),
 			new HashSiteStore( TestSites::getSites() )
 		);
