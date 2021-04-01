@@ -719,7 +719,7 @@ class WikibaseRepo {
 		);
 
 		return new ChangeOpFactoryProvider(
-			$this->getEntityConstraintProvider(),
+			self::getEntityConstraintProvider(),
 			new GuidGenerator(),
 			self::getStatementGuidValidator(),
 			self::getStatementGuidParser(),
@@ -1005,13 +1005,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.ItemTermsCollisionDetector' );
 	}
 
-	/**
-	 * @return EntityConstraintProvider
-	 */
-	public function getEntityConstraintProvider() {
-		return new EntityConstraintProvider(
-			self::getStore()->getSiteLinkConflictLookup()
-		);
+	public static function getEntityConstraintProvider( ContainerInterface $services = null ): EntityConstraintProvider {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityConstraintProvider' );
 	}
 
 	/**
@@ -1213,7 +1209,7 @@ class WikibaseRepo {
 
 	public function newItemHandler(): ItemHandler {
 		$codec = $this->getEntityContentDataCodec();
-		$constraintProvider = $this->getEntityConstraintProvider();
+		$constraintProvider = self::getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
 		$siteLinkStore = self::getStore()->newSiteLinkStore();
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
@@ -1290,7 +1286,7 @@ class WikibaseRepo {
 
 	public function newPropertyHandler(): PropertyHandler {
 		$codec = $this->getEntityContentDataCodec();
-		$constraintProvider = $this->getEntityConstraintProvider();
+		$constraintProvider = self::getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
 		$propertyInfoStore = self::getStore()->getPropertyInfoStore();
 		$propertyInfoBuilder = $this->newPropertyInfoBuilder();

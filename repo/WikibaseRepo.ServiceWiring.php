@@ -127,6 +127,7 @@ use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
 use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
+use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -303,6 +304,12 @@ return [
 		return new EntityChangeOpProvider(
 			WikibaseRepo::getEntityTypeDefinitions( $services )
 				->get( EntityTypeDefinitions::CHANGEOP_DESERIALIZER_CALLBACK )
+		);
+	},
+
+	'WikibaseRepo.EntityConstraintProvider' => function ( MediaWikiServices $services ): EntityConstraintProvider {
+		return new EntityConstraintProvider(
+			WikibaseRepo::getStore( $services )->getSiteLinkConflictLookup()
 		);
 	},
 
