@@ -237,6 +237,22 @@ return [
 		return new EntityTypeDefinitions( $entityTypes );
 	},
 
+	'WikibaseClient.ExternalUserNames' => function ( MediaWikiServices $services ): ?ExternalUserNames {
+		$siteLookup = $services->getSiteLookup();
+		$repoSite = $siteLookup->getSite(
+			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName()
+		);
+		if ( $repoSite === null ) {
+			return null;
+		}
+		$interwikiPrefixes = $repoSite->getInterwikiIds();
+		if ( $interwikiPrefixes === [] ) {
+			return null;
+		}
+		$interwikiPrefix = $interwikiPrefixes[0];
+		return new ExternalUserNames( $interwikiPrefix, false );
+	},
+
 	'WikibaseClient.ItemAndPropertySource' => function ( MediaWikiServices $services ): EntitySource {
 		$itemAndPropertySourceName = WikibaseClient::getSettings( $services )->getSetting( 'itemAndPropertySourceName' );
 		$sources = WikibaseClient::getEntitySourceDefinitions( $services )->getSources();
@@ -405,11 +421,6 @@ return [
 	'WikibaseClient.RecentChangeFactory' => function ( MediaWikiServices $services ): RecentChangeFactory {
 		$contentLanguage = $services->getContentLanguage();
 		$siteLookup = $services->getSiteLookup();
-		$repoSite = $siteLookup->getSite(
-			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName()
-		);
-		$interwikiPrefixes = ( $repoSite !== null ) ? $repoSite->getInterwikiIds() : [];
-		$interwikiPrefix = ( $interwikiPrefixes !== [] ) ? $interwikiPrefixes[0] : null;
 
 		return new RecentChangeFactory(
 			$contentLanguage,
@@ -419,8 +430,7 @@ return [
 				WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' )
 			),
 			CentralIdLookup::factoryNonLocal(), // TODO get from $services (see T265767)
-			( $interwikiPrefix !== null ) ?
-				new ExternalUserNames( $interwikiPrefix, false ) : null
+			WikibaseClient::getExternalUserNames( $services )
 		);
 	},
 
