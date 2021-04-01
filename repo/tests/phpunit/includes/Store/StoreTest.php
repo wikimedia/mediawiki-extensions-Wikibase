@@ -14,7 +14,6 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
-use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlStore;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
@@ -83,16 +82,6 @@ class StoreTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testGetChangeStore( Store $store ) {
 		$this->assertInstanceOf( ChangeStore::class, $store->getChangeStore() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetSiteLinkConflictLookup( Store $store ) {
-		$this->assertInstanceOf(
-			SiteLinkConflictLookup::class,
-			$store->getSiteLinkConflictLookup()
-		);
 	}
 
 	public function testLookupCacheConstantsHaveDistinctValues() {
