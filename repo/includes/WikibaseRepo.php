@@ -726,7 +726,7 @@ class WikibaseRepo {
 			self::getStatementGuidValidator(),
 			self::getStatementGuidParser(),
 			$snakValidator,
-			$this->getTermValidatorFactory(),
+			self::getTermValidatorFactory(),
 			$this->getSiteLookup(),
 			array_keys( self::getSettings()->getSetting( 'badgeItems' ) )
 		);
@@ -991,28 +991,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityPermissionChecker' );
 	}
 
-	/**
-	 * @return TermValidatorFactory
-	 */
-	public function getTermValidatorFactory() {
-		// Use the old deprecated setting if it exists
-		if ( self::getSettings()->hasSetting( 'multilang-limits' ) ) {
-			$constraints = self::getSettings()->getSetting( 'multilang-limits' );
-		} else {
-			$constraints = self::getSettings()->getSetting( 'string-limits' )['multilang'];
-		}
-
-		$maxLength = $constraints['length'];
-
-		$languages = self::getTermsLanguages()->getLanguages();
-
-		return new TermValidatorFactory(
-			$maxLength,
-			$languages,
-			self::getEntityIdParser(),
-			self::getTermsCollisionDetectorFactory(),
-			self::getTermLookup()
-		);
+	public static function getTermValidatorFactory( ContainerInterface $services = null ): TermValidatorFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.TermValidatorFactory' );
 	}
 
 	public static function getTermsCollisionDetectorFactory( ContainerInterface $services = null ): TermsCollisionDetectorFactory {

@@ -260,7 +260,8 @@
 				"WikibaseRepo.EntityNamespaceLookup",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.ItemTermsCollisionDetector",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.TermValidatorFactory"
 			]
 		},
 		"NewProperty": {
