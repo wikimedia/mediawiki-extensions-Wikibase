@@ -132,10 +132,10 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		$entityIds = $this->makeEntityIds( array_keys( $terms ) );
 
 		$module = new PageTerms(
-			new FakePrefetchingTermLookup(),
-			$this->getEntityIdLookup( $entityIds ),
 			$this->getQueryModule( $params, $titles ),
-			'pageterms'
+			'pageterms',
+			$this->getEntityIdLookup( $entityIds ),
+			new FakePrefetchingTermLookup()
 		);
 
 		$module->execute();

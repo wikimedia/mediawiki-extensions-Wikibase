@@ -41,28 +41,14 @@ class PageTerms extends ApiQueryBase {
 	private $idLookup;
 
 	public function __construct(
-		TermBuffer $termBuffer,
-		EntityIdLookup $idLookup,
 		ApiQuery $query,
-		string $moduleName
+		string $moduleName,
+		EntityIdLookup $idLookup,
+		TermBuffer $termBuffer
 	) {
 		parent::__construct( $query, $moduleName, 'wbpt' );
 		$this->termBuffer = $termBuffer;
 		$this->idLookup = $idLookup;
-	}
-
-	public static function factory(
-		ApiQuery $apiQuery,
-		string $moduleName,
-		EntityIdLookup $entityIdLookup,
-		TermBuffer $termBuffer
-	): self {
-		return new self(
-			$termBuffer,
-			$entityIdLookup,
-			$apiQuery,
-			$moduleName
-		);
 	}
 
 	public function execute(): void {
