@@ -34,7 +34,7 @@
 	"valueview-expert-timeinput-calendar": "לוח שנה:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "שפה (חובה):",
-	"valueview-expertextender-unitsuggester-label": "יחידה (אופציונלי):",
+	"valueview-expertextender-unitsuggester-label": "יחידה (לא חובה):",
 	"valueview-preview-label": "יוצג בתור:",
 	"valueview-preview-novalue": "לא הוכר שום ערך תקין",
 	"valueview-listrotator-manually": "הגדרה באופן ידני"
