@@ -4,8 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
-use Wikibase\Repo\Store\Store;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
@@ -19,12 +18,8 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 class EntityConstraintProviderTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$store = $this->createMock( Store::class );
-		$store->expects( $this->once() )
-			->method( 'getSiteLinkConflictLookup' )
-			->willReturn( $this->createMock( SqlSiteLinkConflictLookup::class ) );
-		$this->mockService( 'WikibaseRepo.Store',
-			$store );
+		$this->mockService( 'WikibaseRepo.EntityIdComposer',
+			new EntityIdComposer( [] ) );
 
 		$this->assertInstanceOf(
 			EntityConstraintProvider::class,

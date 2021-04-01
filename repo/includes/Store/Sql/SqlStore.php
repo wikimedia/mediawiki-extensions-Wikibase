@@ -43,7 +43,6 @@ use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
-use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -509,13 +508,6 @@ class SqlStore implements Store {
 			);
 		}
 		return $this->propertyInfoTable;
-	}
-
-	/**
-	 * @return SiteLinkConflictLookup
-	 */
-	public function getSiteLinkConflictLookup() {
-		return new SqlSiteLinkConflictLookup( $this->entityIdComposer );
 	}
 
 	/**

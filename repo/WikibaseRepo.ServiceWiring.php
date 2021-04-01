@@ -120,6 +120,7 @@ use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\LoggingIdGenerator;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
+use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlStore;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
 use Wikibase\Repo\Store\Store;
@@ -309,7 +310,7 @@ return [
 
 	'WikibaseRepo.EntityConstraintProvider' => function ( MediaWikiServices $services ): EntityConstraintProvider {
 		return new EntityConstraintProvider(
-			WikibaseRepo::getStore( $services )->getSiteLinkConflictLookup()
+			new SqlSiteLinkConflictLookup( WikibaseRepo::getEntityIdComposer( $services ) )
 		);
 	},
 

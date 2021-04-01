@@ -25,7 +25,6 @@ use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
-use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlStore;
 use Wikibase\Repo\Store\Store;
 
@@ -137,11 +136,6 @@ class SqlStoreTest extends MediaWikiIntegrationTestCase {
 	public function testGetPropertyInfoStore() {
 		$service = $this->newInstance()->getPropertyInfoStore();
 		$this->assertInstanceOf( PropertyInfoStore::class, $service );
-	}
-
-	public function testGetSiteLinkConflictLookup() {
-		$service = $this->newInstance()->getSiteLinkConflictLookup();
-		$this->assertInstanceOf( SiteLinkConflictLookup::class, $service );
 	}
 
 	public function testGetEntityPrefetcher() {
