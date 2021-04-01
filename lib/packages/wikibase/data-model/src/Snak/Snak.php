@@ -25,4 +25,16 @@ interface Snak extends Serializable, PropertyIdProvider {
 	 */
 	public function getType();
 
+	/**
+	 *
+	 * @return string
+	 */
+	public function getHash();
+
+	/**
+	 * @param mixed $value
+	 * @return boolean
+	 */
+	public function equals( $value );
+
 }
