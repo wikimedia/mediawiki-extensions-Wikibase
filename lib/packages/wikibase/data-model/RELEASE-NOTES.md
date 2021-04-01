@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 9.6.1 (TODO)
+## Version 9.6.1 (2021-04-01)
 
 * `Snak` now declares `getHash()` and `equals()` methods again,
   which it used to inherit from the `Hashable` and `Immutable` interfaces prior to version 9.6.0.
