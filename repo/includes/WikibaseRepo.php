@@ -23,7 +23,6 @@ use RequestContext;
 use Serializers\Serializer;
 use SiteLookup;
 use SpecialPage;
-use StubObject;
 use Title;
 use User;
 use ValueFormatters\FormatterOptions;
@@ -372,7 +371,7 @@ class WikibaseRepo {
 	 * @return LanguageNameLookup
 	 */
 	public function getLanguageNameLookup() {
-		return new LanguageNameLookup( $this->getUserLanguage()->getCode() );
+		return new LanguageNameLookup( self::getUserLanguage()->getCode() );
 	}
 
 	/**
@@ -434,23 +433,12 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @throws MWException when called to early
-	 * @return Language
+	 * @deprecated
+	 * @throws MWException when called too early
 	 */
-	public function getUserLanguage() {
-		global $wgLang;
-
-		// TODO: define a LanguageProvider service instead of using a global directly.
-		// NOTE: we cannot inject $wgLang in the constructor, because it may still be null
-		// when WikibaseRepo is initialized. In particular, the language object may not yet
-		// be there when the SetupAfterCache hook is run during bootstrapping.
-
-		if ( !$wgLang ) {
-			throw new MWException( 'Premature access: $wgLang is not yet initialized!' );
-		}
-
-		StubObject::unstub( $wgLang );
-		return $wgLang;
+	public static function getUserLanguage( ContainerInterface $services = null ): Language {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.UserLanguage' );
 	}
 
 	public static function getDataTypeFactory( ContainerInterface $services = null ): DataTypeFactory {
@@ -1039,7 +1027,7 @@ class WikibaseRepo {
 			$valueFormatterFactory->getValueFormatter( SnakFormatter::FORMAT_WIKI, $formatterOptions ),
 			new EntityIdLinkFormatter( self::getEntityTitleLookup() ),
 			$this->getSiteLookup(),
-			$this->getUserLanguage()
+			self::getUserLanguage()
 		);
 	}
 
@@ -1536,7 +1524,7 @@ class WikibaseRepo {
 	 * @return ViewFactory
 	 */
 	public function getViewFactory() {
-		$lang = $this->getUserLanguage();
+		$lang = self::getUserLanguage();
 
 		$statementGrouperBuilder = new StatementGrouperBuilder(
 			self::getSettings()->getSetting( 'statementSections' ),
