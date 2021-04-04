@@ -22,6 +22,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\Dumpers\JsonDataTypeInjector;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -555,6 +556,13 @@ class ResultBuilder {
 	}
 
 	private function getEntitySerializationWithMetaData( array $serialization ) {
+		$serializeEmptyListsAsObjects = WikibaseRepo::getSettings()->getSetting( 'tmpSerializeEmptyListsAsObjects' );
+
+		$arrayTypesStatementsInForms = [
+			'*/*/claims/*/*/references/*/snaks' => 'id',
+			'*/*/claims/*/*/qualifiers' => 'id',
+			'*/*/claims' => 'id', // statements on subentities
+		];
 		$arrayTypes = [
 			'aliases' => 'id',
 			'claims/*/*/references/*/snaks' => 'id',
@@ -564,6 +572,11 @@ class ResultBuilder {
 			'labels' => 'language',
 			'sitelinks' => 'site',
 		];
+
+		if ( $serializeEmptyListsAsObjects ) {
+			$arrayTypes += $arrayTypesStatementsInForms;
+		}
+
 		foreach ( $arrayTypes as $path => $keyName ) {
 			$serialization = $this->modifier->modifyUsingCallback(
 				$serialization,
@@ -590,6 +603,17 @@ class ResultBuilder {
 			);
 		}
 
+		$indexTagsStatementsInForms = [
+			'*/*/claims/*/*/qualifiers/*' => 'qualifiers',
+			'*/*/claims/*/*/qualifiers' => 'property',
+			'*/*/claims/*/*/qualifiers-order' => 'property',
+			'*/*/claims/*/*/references/*/snaks/*' => 'snak',
+			'*/*/claims/*/*/references/*/snaks' => 'property',
+			'*/*/claims/*/*/references/*/snaks-order' => 'property',
+			'*/*/claims/*/*/references' => 'reference',
+			'*/*/claims/*' => 'claim',
+			'*/*/claims' => 'property', // statements on subentities
+		];
 		$indexTags = [
 			'labels' => 'label',
 			'descriptions' => 'description',
@@ -607,6 +631,11 @@ class ResultBuilder {
 			'claims/*' => 'claim',
 			'claims' => 'property',
 		];
+
+		if ( $serializeEmptyListsAsObjects ) {
+			$indexTags += $indexTagsStatementsInForms;
+		}
+
 		foreach ( $indexTags as $path => $tag ) {
 			$serialization = $this->modifier->modifyUsingCallback(
 				$serialization,
