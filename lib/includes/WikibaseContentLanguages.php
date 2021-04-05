@@ -86,6 +86,8 @@ class WikibaseContentLanguages {
 					'bkm', // T263946
 					'bqz', // T263946
 					'byv', // T263946
+					'cak', // T278854
+					'cnh', // T278853
 					'dag', // T260037
 					'dua', // T263946
 					'eto', // T263946
@@ -111,6 +113,7 @@ class WikibaseContentLanguages {
 					'nod', // T93880
 					'ota', // T59342
 					'pap-aw', // T275682
+					'quc', // T278851
 					'rmf', // T226701
 					'rwr', // T61905
 					'ryu', // T271215
