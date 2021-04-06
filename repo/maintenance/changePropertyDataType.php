@@ -56,7 +56,7 @@ class ChangePropertyDataType extends Maintenance {
 
 		$propertyDataTypeChanger = new PropertyDataTypeChanger(
 			$repo->getEntityRevisionLookup(),
-			$repo->getEntityStore(),
+			WikibaseRepo::getEntityStore(),
 			WikibaseRepo::getDataTypeFactory()
 		);
 

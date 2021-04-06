@@ -42,7 +42,7 @@ class RemoveTermsInLanguage extends Maintenance {
 
 		$entityIdParser = WikibaseRepo::getEntityIdParser();
 		$entityRevisionLookup = $repo->getEntityRevisionLookup();
-		$entityStore = $repo->getEntityStore();
+		$entityStore = WikibaseRepo::getEntityStore();
 
 		foreach ( $idSerializations as $idSerialization ) {
 

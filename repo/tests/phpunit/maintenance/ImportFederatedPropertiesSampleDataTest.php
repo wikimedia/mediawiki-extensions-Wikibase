@@ -24,8 +24,7 @@ class ImportFederatedPropertiesSampleDataTest extends MaintenanceBaseTestCase {
 	}
 
 	public function testStoreEntityWithTermData() {
-		$repo = WikibaseRepo::getDefaultInstance();
-		$entityStore = $repo->getEntityStore();
+		$entityStore = WikibaseRepo::getEntityStore();
 
 		$maintenance = new ImportFederatedPropertiesSampleData();
 		$item = $maintenance->storeNewItemWithTermData( [ 'somelabel', 'somedescription' ], $entityStore );

@@ -561,7 +561,7 @@ class WikibaseRepo {
 	public function newItemRedirectCreationInteractor( User $user, IContextSource $context ) {
 		return new ItemRedirectCreationInteractor(
 			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
-			$this->getEntityStore(),
+			self::getEntityStore(),
 			self::getEntityPermissionChecker(),
 			$this->getSummaryFormatter(),
 			$user,
@@ -596,11 +596,9 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return EntityStore
-	 */
-	public function getEntityStore() {
-		return self::getStore()->getEntityStore();
+	public static function getEntityStore( ContainerInterface $services = null ): EntityStore {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityStore' );
 	}
 
 	/**
@@ -1372,7 +1370,7 @@ class WikibaseRepo {
 			$services->getTitleFactory(),
 			self::getStore( $services )->getEntityByLinkedTitleLookup(),
 			self::getEntityFactory(),
-			$this->getEntityStore()
+			self::getEntityStore()
 		);
 	}
 
@@ -1385,7 +1383,7 @@ class WikibaseRepo {
 		return new MediawikiEditEntityFactory(
 			self::getEntityTitleStoreLookup(),
 			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
-			$this->getEntityStore(),
+			self::getEntityStore(),
 			self::getEntityPermissionChecker(),
 			self::getEntityDiffer(),
 			self::getEntityPatcher(),
@@ -1406,7 +1404,7 @@ class WikibaseRepo {
 		return new ItemMergeInteractor(
 			$this->getChangeOpFactoryProvider()->getMergeFactory(),
 			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
-			$this->getEntityStore(),
+			self::getEntityStore(),
 			self::getEntityPermissionChecker(),
 			$this->getSummaryFormatter(),
 			$user,

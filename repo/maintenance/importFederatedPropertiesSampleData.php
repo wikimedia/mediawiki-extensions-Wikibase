@@ -37,8 +37,7 @@ class ImportFederatedPropertiesSampleData extends Maintenance {
 		$dataFile = $this->getOption( 'dataFile' );
 		$lineDelimiter = $this->getOption( 'delimiter', "\t" );
 
-		$repo = WikibaseRepo::getDefaultInstance();
-		$entityStore = $repo->getEntityStore();
+		$entityStore = WikibaseRepo::getEntityStore();
 
 		foreach ( $this->getDataToImport( $dataFile ) as $dataline ) {
 			if ( $dataline !== '' ) {
