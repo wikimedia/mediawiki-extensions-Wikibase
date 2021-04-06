@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo;
 
-use CentralIdLookup;
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
@@ -151,8 +150,6 @@ use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
-use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
-use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
@@ -1031,23 +1028,9 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return ChangeNotifier
-	 */
-	public function getChangeNotifier() {
-		$transmitters = [
-			new HookChangeTransmitter( 'WikibaseChangeNotification' ),
-		];
-
-		if ( self::getSettings()->getSetting( 'useChangesTable' ) ) {
-			$transmitters[] = new DatabaseChangeTransmitter( self::getStore()->getChangeStore() );
-		}
-
-		return new ChangeNotifier(
-			self::getEntityChangeFactory(),
-			$transmitters,
-			CentralIdLookup::factoryNonLocal()
-		);
+	public static function getChangeNotifier( ContainerInterface $services = null ): ChangeNotifier {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ChangeNotifier' );
 	}
 
 	/**

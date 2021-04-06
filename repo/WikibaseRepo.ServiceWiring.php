@@ -109,6 +109,9 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
+use Wikibase\Repo\Notifications\ChangeNotifier;
+use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
+use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\Notifications\RepoEntityChange;
 use Wikibase\Repo\Notifications\RepoItemChange;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
@@ -170,6 +173,24 @@ return [
 
 	'WikibaseRepo.BaseDataModelSerializerFactory' => function ( MediaWikiServices $services ): SerializerFactory {
 		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT );
+	},
+
+	'WikibaseRepo.ChangeNotifier' => function ( MediaWikiServices $services ): ChangeNotifier {
+		$transmitters = [
+			new HookChangeTransmitter( 'WikibaseChangeNotification' ),
+		];
+
+		$settings = WikibaseRepo::getSettings( $services );
+		if ( $settings->getSetting( 'useChangesTable' ) ) {
+			$changeStore = WikibaseRepo::getStore( $services )->getChangeStore();
+			$transmitters[] = new DatabaseChangeTransmitter( $changeStore );
+		}
+
+		return new ChangeNotifier(
+			WikibaseRepo::getEntityChangeFactory( $services ),
+			$transmitters,
+			CentralIdLookup::factoryNonLocal() // TODO inject (T265767)
+		);
 	},
 
 	'WikibaseRepo.CompactBaseDataModelSerializerFactory' => function ( MediaWikiServices $services ): SerializerFactory {

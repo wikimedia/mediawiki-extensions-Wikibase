@@ -55,7 +55,6 @@ use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
-use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Rdf\RdfVocabulary;
@@ -320,11 +319,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetChangeOpFactory() {
 		$returnValue = $this->getWikibaseRepo()->getChangeOpFactoryProvider();
 		$this->assertInstanceOf( ChangeOpFactoryProvider::class, $returnValue );
-	}
-
-	public function testGetChangeNotifier() {
-		$factory = $this->getWikibaseRepo()->getChangeNotifier();
-		$this->assertInstanceOf( ChangeNotifier::class, $factory );
 	}
 
 	public function testGetContentModelMappings() {
