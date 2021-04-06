@@ -55,7 +55,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	private function getPropertyIds(): array {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$propertyIds = [];
 
@@ -125,7 +125,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function testAddClaim() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$statements = $this->getStatements();
 
@@ -165,7 +165,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function testSetClaimWithTag() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$item = new Item();
 		$store->saveEntity( $item, 'setclaimtest', $this->user, EDIT_NEW );
@@ -181,7 +181,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	private function getInvalidCases() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$item = new Item();
 		$store->saveEntity( $item, 'setclaimtest', $this->user, EDIT_NEW );
@@ -289,7 +289,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function testSetClaimAtIndex() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$entity = new Item();
 
@@ -321,7 +321,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	public function testSetDuplicateMainSnakNoIgnore() {
 		$mainSnak = new PropertyValueSnak( self::$propertyIds[0], new StringValue( 'good' ) );
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$entity = new Item();
 		$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
@@ -343,7 +343,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	public function testSetDuplicateMainSnakWithIgnore() {
 		$mainSnak = new PropertyValueSnak( self::$propertyIds[0], new StringValue( 'good' ) );
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$entity = new Item();
 		$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
@@ -539,7 +539,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 * @note A hack is  in place in ChangeOpStatement to allow this
 	 */
 	public function testBugT60394SpecifiedIndexOutOfBounds() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		// Save new entity with empty statements:
 		$entity = new Item();
@@ -563,7 +563,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function testBadPropertyError() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$property = Property::newFromType( 'quantity' );
 		$property = $store->saveEntity( $property, '', $this->user, EDIT_NEW )->getEntity();

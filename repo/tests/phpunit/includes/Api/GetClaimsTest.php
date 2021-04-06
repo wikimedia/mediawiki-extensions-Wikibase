@@ -55,7 +55,7 @@ class GetClaimsTest extends ApiTestCase {
 	private function save( EntityDocument $entity ) {
 		$flags = $entity->getId() ? EDIT_UPDATE : EDIT_NEW;
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 
 		$rev = $store->saveEntity( $entity, '', $this->getTestUser()->getUser(), $flags );
 

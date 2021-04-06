@@ -408,7 +408,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 	 * @return Item
 	 */
 	private function createItemUsing( User $user ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$itemRevision = $store->saveEntity( new Item(), 'SetSiteLinkTest', $user, EDIT_NEW );
 		return $itemRevision->getEntity();
@@ -516,7 +516,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 	}
 
 	private function saveTestItem( Item $item ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$store->saveEntity( $item, 'SetAliasesTest: created test item', $this->getTestUser()->getUser() );
 	}

@@ -28,7 +28,7 @@ class GetEntitiesRedirectTest extends ApiTestCase {
 		$entity = new Item();
 		$entity->setLabel( 'en', $label );
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 		$rev = $store->saveEntity( $entity, 'GetEntitiesRedirectTest', $this->getTestUser()->getUser(), EDIT_NEW );
 		$id = $rev->getEntity()->getId();
 
@@ -40,7 +40,7 @@ class GetEntitiesRedirectTest extends ApiTestCase {
 
 		$redirect = new EntityRedirect( $id, $target );
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 		$store->saveRedirect( $redirect, 'GetEntitiesRedirectTest', $this->getTestUser()->getUser(), EDIT_UPDATE );
 
 		return $id;

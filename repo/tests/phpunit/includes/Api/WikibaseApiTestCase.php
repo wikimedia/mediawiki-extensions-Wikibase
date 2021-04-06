@@ -49,6 +49,10 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		);
 	}
 
+	protected function getEntityStore() {
+		return WikibaseRepo::getEntityStore();
+	}
+
 	private function setupUser() {
 		self::$users['wbeditor'] = $this->createTestUser();
 

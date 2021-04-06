@@ -14,7 +14,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -72,7 +71,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 	}
 
 	public function testRequests() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		foreach ( $this->statementProvider() as $statement ) {
 			$item = new Item();
@@ -112,7 +111,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 	}
 
 	public function testRemoveQualifiersWithTag() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 		$item = new Item();
 
 		$store->saveEntity( $item, '', $this->user, EDIT_NEW );

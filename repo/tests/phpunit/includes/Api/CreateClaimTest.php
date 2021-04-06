@@ -27,7 +27,7 @@ use Wikimedia\TestingAccessWrapper;
 class CreateClaimTest extends WikibaseApiTestCase {
 
 	protected function getNewItemAndProperty(): array {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$item = new Item();
 		$store->saveEntity( $item, 'test', $this->user, EDIT_NEW );

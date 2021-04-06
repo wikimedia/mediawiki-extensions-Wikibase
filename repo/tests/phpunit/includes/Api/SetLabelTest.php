@@ -9,7 +9,6 @@ use MediaWiki\MediaWikiServices;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Api\SetLabel
@@ -180,7 +179,7 @@ class SetLabelTest extends ModifyTermTestCase {
 	 * @return Item
 	 */
 	private function createItemUsing( User $user ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$itemRevision = $store->saveEntity( new Item(), 'SetSiteLinkTest', $user, EDIT_NEW );
 		return $itemRevision->getEntity();

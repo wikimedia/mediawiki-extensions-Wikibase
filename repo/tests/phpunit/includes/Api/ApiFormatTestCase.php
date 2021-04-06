@@ -87,7 +87,7 @@ abstract class ApiFormatTestCase extends MediaWikiIntegrationTestCase {
 	}
 
 	protected function storeNewProperty() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 
 		$property = Property::newFromType( 'string' );
 		$entityRevision = $store->saveEntity( $property, 'testing', $this->user, EDIT_NEW );
@@ -95,7 +95,7 @@ abstract class ApiFormatTestCase extends MediaWikiIntegrationTestCase {
 	}
 
 	protected function storeNewItem() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 
 		$item = new Item();
 		$entityRevision = $store->saveEntity( $item, 'testing', $this->user, EDIT_NEW );
@@ -105,7 +105,7 @@ abstract class ApiFormatTestCase extends MediaWikiIntegrationTestCase {
 	}
 
 	private function storePresetDataInStatement( EntityRevision $entityRevision, PropertyId $propertyId ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 
 		/** @var Item $item */
 		$item = $entityRevision->getEntity();

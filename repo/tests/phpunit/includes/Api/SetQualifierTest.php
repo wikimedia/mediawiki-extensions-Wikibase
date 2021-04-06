@@ -77,7 +77,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	 * @return Property
 	 */
 	protected function makeProperty( Property $property ): Property {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$store->saveEntity( $property, 'testing', $this->user, EDIT_NEW );
 		return $property;
@@ -87,7 +87,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		static $item = null;
 
 		if ( !$item ) {
-			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+			$store = $this->getEntityStore();
 
 			$newItem = new Item();
 			$store->saveEntity( $newItem, '', $this->user, EDIT_NEW );
