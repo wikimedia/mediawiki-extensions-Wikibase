@@ -46,7 +46,7 @@ class SpecialSetAliasesTest extends SpecialModifyTermTestCase {
 		$item = new Item();
 		$languageCode = 'en';
 		$item->setAliases( $languageCode, [ 'piped|alias' ] );
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 		$store->saveEntity( $item, __METHOD__, $this->getTestUser()->getUser(), EDIT_NEW );
 		$id = $item->getId();
 		$editRequest = new \FauxRequest( [ 'id' => $id, 'language' => $languageCode, 'value' => 'test' ], true );

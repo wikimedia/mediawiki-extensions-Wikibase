@@ -275,7 +275,6 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 
 		$this->insertEntities( [ $property, $item ] );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$pager = new SqlEntityIdPager(
 			WikibaseRepo::getEntityNamespaceLookup(),
 			WikibaseRepo::getEntityIdLookup()
@@ -286,7 +285,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 		$this->assertCount( 2, $ids );
 
 		/** @var WikiPageEntityStore $entityStore */
-		$entityStore = $wikibaseRepo->getEntityStore();
+		$entityStore = WikibaseRepo::getEntityStore();
 
 		$propertyPage = $entityStore->getWikiPageForEntity( $property->getId() );
 
@@ -318,10 +317,8 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 
 		$this->insertEntities( [ $property, $item ] );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		/** @var \Wikibase\Repo\Store\Sql\WikiPageEntityStore $entityStore */
-		$entityStore = $wikibaseRepo->getEntityStore();
+		$entityStore = WikibaseRepo::getEntityStore();
 
 		$itemPage = $entityStore->getWikiPageForEntity( $item->getId() );
 
@@ -346,14 +343,13 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 
 		$this->insertEntities( $entities );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$pager = new SqlEntityIdPager(
 			WikibaseRepo::getEntityNamespaceLookup(),
 			WikibaseRepo::getEntityIdLookup()
 		);
 
 		/** @var \Wikibase\Repo\Store\Sql\WikiPageEntityStore $entityStore */
-		$entityStore = $wikibaseRepo->getEntityStore();
+		$entityStore = WikibaseRepo::getEntityStore();
 
 		$itemPage = $entityStore->getWikiPageForEntity( $entities[2]->getId() );
 

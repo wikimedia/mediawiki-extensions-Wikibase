@@ -49,7 +49,7 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 			],
 		];
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 		$properties = [];
 
 		foreach ( $infos as $info ) {

@@ -58,7 +58,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				[ 'entityNamespaces' => [ 'item' => 120, 'property' => 122 ] ]
 			);
 
-			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+			$store = WikibaseRepo::getEntityStore();
 			for ( $i = 0; $i < 3; $i++ ) {
 				$this->data[] = $store->saveEntity( new Item(), 'WikiPageEntityMetaDataLookupTest', $user, EDIT_NEW );
 			}

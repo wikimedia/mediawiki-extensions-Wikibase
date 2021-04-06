@@ -282,7 +282,7 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 	}
 
 	private function createTestItem( EntityDocument $entity, $comment, $user, $flags ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 		$rev = $store->saveEntity( $entity, $comment, $user, $flags );
 
 		$result = $rev->getEntity();
@@ -306,7 +306,7 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 		$targetId = $this->getTestItemId( $targetHandle );
 		$redirect = new EntityRedirect( $entityId, $targetId );
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 		$revId = $store->saveRedirect( $redirect, $comment, $user, $flags );
 
 		$result = $redirect;

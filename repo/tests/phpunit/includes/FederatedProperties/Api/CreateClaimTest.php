@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Api\SetClaim
@@ -23,9 +22,6 @@ use Wikibase\Repo\WikibaseRepo;
 class CreateClaimTest extends FederatedPropertiesApiTestCase {
 
 	public function testFederatedPropertiesFailure() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$store = $wikibaseRepo->getEntityStore();
-
 		$entity = new Property( new PropertyId( 'P123' ), null, 'string' );
 		$entityId = $entity->getId();
 

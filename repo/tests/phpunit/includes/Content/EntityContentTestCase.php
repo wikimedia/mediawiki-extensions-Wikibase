@@ -48,7 +48,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 
 		$this->originalGroupPermissions = $wgGroupPermissions;
 
-		$this->entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$this->entityStore = WikibaseRepo::getEntityStore();
 	}
 
 	protected function tearDown(): void {
@@ -420,7 +420,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		$title = $titleLookup->getTitleForId( $entity->getId() );
 
 		if ( !$title->exists( Title::GAID_FOR_UPDATE ) ) {
-			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+			$store = WikibaseRepo::getEntityStore();
 			$store->saveEntity( $entity, 'test', $this->getTestUser()->getUser() );
 
 			// $title lies, make a new one
