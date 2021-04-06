@@ -11,6 +11,7 @@
 	"wikibase-deletedentity-property": "ДӀаяккина билгало",
 	"wikibase-deletedentity-query": "ДӀадаьккхина дехар",
 	"wikibase-error-unexpected": "ГӀалат: $1",
+	"wikibase-error-unknown": "ГӀалат даьлла.",
 	"wikibase-error-save-generic": "Ӏалаш ечу хенахь гӀалат даьлла, цундела хьан хийцам чекхбаккха цало.",
 	"wikibase-error-remove-generic": "ДӀайоккхучу хенахь гӀалат даьлла, цундела хьан хийцам чекхбаккха цало.",
 	"wikibase-error-save-timeout": "Тхан технически халонаш ю. Хьан Ӏалашдар кхочушдан йиш яц.",

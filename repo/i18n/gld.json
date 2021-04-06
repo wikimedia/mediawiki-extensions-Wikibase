@@ -6,5 +6,7 @@
 	},
 	"wikibase-edit": "калаори",
 	"wikibase-add": "ноӈгиори",
-	"wikibase-sitelinks-special": "Гой сайт"
+	"wikibase-description-empty": "Описание абани",
+	"wikibase-sitelinks-special": "Гой сайт",
+	"wikibase-statementview-rank-normal": "Нормальнай ранг"
 }
