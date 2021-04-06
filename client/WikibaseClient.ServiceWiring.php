@@ -44,10 +44,12 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Changes\EntityChange;
@@ -432,6 +434,16 @@ return [
 			),
 			CentralIdLookup::factoryNonLocal(), // TODO get from $services (see T265767)
 			WikibaseClient::getExternalUserNames( $services )
+		);
+	},
+
+	'WikibaseClient.RepoItemUriParser' => function ( MediaWikiServices $services ): EntityIdParser {
+		$itemConceptUriBase = WikibaseClient::getItemSource( $services )
+			->getConceptBaseUri();
+
+		return new SuffixEntityIdParser(
+			$itemConceptUriBase,
+			new ItemIdParser()
 		);
 	},
 

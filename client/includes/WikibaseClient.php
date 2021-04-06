@@ -45,11 +45,9 @@ use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\DisabledEntityTypesEntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
@@ -202,7 +200,7 @@ final class WikibaseClient {
 			$this->valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 				new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 				new LanguageNameLookup( $this->getUserLanguage()->getCode() ),
-				$this->getRepoItemUriParser(),
+				self::getRepoItemUriParser(),
 				$settings->getSetting( 'geoShapeStorageBaseUrl' ),
 				$settings->getSetting( 'tabularDataStorageBaseUrl' ),
 				self::getTermFallbackCache(),
@@ -575,13 +573,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.ValueFormatterFactory' );
 	}
 
-	private function getRepoItemUriParser(): EntityIdParser {
-		$itemConceptUriBase = self::getItemSource()->getConceptBaseUri();
-
-		return new SuffixEntityIdParser(
-			$itemConceptUriBase,
-			new ItemIdParser()
-		);
+	public static function getRepoItemUriParser( ContainerInterface $services = null ): EntityIdParser {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.RepoItemUriParser' );
 	}
 
 	public static function getNamespaceChecker( ContainerInterface $services = null ): NamespaceChecker {
@@ -716,7 +710,7 @@ final class WikibaseClient {
 			self::getLanguageFallbackChainFactory(),
 			$this->getSnakFormatterFactory(),
 			$this->getPropertyDataTypeLookup(),
-			$this->getRepoItemUriParser(),
+			self::getRepoItemUriParser(),
 			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
 			self::getSettings()->getSetting( 'allowDataAccessInUserLanguage' )
 		);
