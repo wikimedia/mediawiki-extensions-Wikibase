@@ -810,14 +810,14 @@ class WikibaseRepo {
 		return $this->snakFormatterFactory;
 	}
 
-	/**
-	 * @phan-suppress-next-line PhanTypeMismatchDeclaredReturn
-	 * @return TermBuffer|AliasTermBuffer
-	 * TODO: split AliasTermBuffer to its own service (T278690)
-	 */
 	public static function getTermBuffer( ContainerInterface $services = null ): TermBuffer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.TermBuffer' );
+	}
+
+	public static function getAliasTermBuffer( ContainerInterface $services = null ): AliasTermBuffer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.AliasTermBuffer' );
 	}
 
 	public static function getTermLookup( ContainerInterface $services = null ): TermLookup {
