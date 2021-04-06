@@ -745,14 +745,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.OtherProjectsSitesProvider' );
 	}
 
-	private function getAffectedPagesFinder(): AffectedPagesFinder {
-		return new AffectedPagesFinder(
-			self::getStore()->getUsageLookup(),
-			MediaWikiServices::getInstance()->getTitleFactory(),
-			MediaWikiServices::getInstance()->getLinkBatchFactory(),
-			self::getSettings()->getSetting( 'siteGlobalID' ),
-			self::getLogger()
-		);
+	public static function getAffectedPagesFinder( containerInterface $services = null ): AffectedPagesFinder {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.AffectedPagesFinder' );
 	}
 
 	public function getChangeHandler(): ChangeHandler {
@@ -777,7 +772,7 @@ final class WikibaseClient {
 		);
 
 		return new ChangeHandler(
-			$this->getAffectedPagesFinder(),
+			self::getAffectedPagesFinder(),
 			MediaWikiServices::getInstance()->getTitleFactory(),
 			$pageUpdater,
 			$changeListTransformer,

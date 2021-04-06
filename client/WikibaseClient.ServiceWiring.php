@@ -16,6 +16,7 @@ use Psr\Log\LoggerInterface;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Wikibase\Client\CachingOtherProjectsSitesProvider;
+use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\OtherProjectsSitesGenerator;
@@ -75,6 +76,16 @@ use Wikibase\Lib\WikibaseSettings;
 
 /** @phpcs-require-sorted-array */
 return [
+
+	'WikibaseClient.AffectedPagesFinder' => function ( MediaWikiServices $services ): AffectedPagesFinder {
+		return new AffectedPagesFinder(
+			WikibaseClient::getStore( $services )->getUsageLookup(),
+			$services->getTitleFactory(),
+			$services->getLinkBatchFactory(),
+			WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' ),
+			WikibaseClient::getLogger( $services )
+		);
+	},
 
 	'WikibaseClient.BaseDataModelDeserializerFactory' => function ( MediaWikiServices $services ): DeserializerFactory {
 		return new DeserializerFactory(
