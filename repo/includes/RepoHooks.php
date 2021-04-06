@@ -237,7 +237,7 @@ final class RepoHooks {
 				$revisionRecord
 			);
 
-			$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();
+			$notifier = WikibaseRepo::getChangeNotifier();
 			$parentId = $revisionRecord->getParentId();
 
 			if ( !$parentId ) {
@@ -302,7 +302,6 @@ final class RepoHooks {
 		?Content $content,
 		LogEntry $logEntry
 	) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
 
 		// Bail out if we are not looking at an entity
@@ -317,7 +316,7 @@ final class RepoHooks {
 		// May be redundant in some cases. Take care not to cause infinite regress.
 		WikibaseRepo::getEntityStoreWatcher()->entityDeleted( $content->getEntityId() );
 
-		$notifier = $wikibaseRepo->getChangeNotifier();
+		$notifier = WikibaseRepo::getChangeNotifier();
 		$notifier->notifyOnPageDeleted( $content, $user, $logEntry->getTimestamp() );
 	}
 
@@ -329,7 +328,6 @@ final class RepoHooks {
 	 * @param string $comment
 	 */
 	public static function onArticleUndelete( Title $title, $created, $comment ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
 
 		// Bail out if we are not looking at an entity
@@ -347,7 +345,7 @@ final class RepoHooks {
 			return;
 		}
 
-		$notifier = $wikibaseRepo->getChangeNotifier();
+		$notifier = WikibaseRepo::getChangeNotifier();
 		$notifier->notifyOnPageUndeleted( $revisionRecord );
 	}
 
