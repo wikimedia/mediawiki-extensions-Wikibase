@@ -140,11 +140,6 @@ final class WikibaseClient {
 	private $termLookup = null;
 
 	/**
-	 * @var TermBuffer|null
-	 */
-	private $termBuffer = null;
-
-	/**
 	 * @var SidebarLinkBadgeDisplay|null
 	 */
 	private $sidebarLinkBadgeDisplay = null;
@@ -346,14 +341,13 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @phan-suppress-next-line PhanTypeMismatchDeclaredReturn
 	 * @return TermBuffer|AliasTermBuffer
+	 * TODO: split AliasTermBuffer to its own service (T279073)
 	 */
-	public function getTermBuffer() {
-		if ( !$this->termBuffer ) {
-			$this->termBuffer = self::getPrefetchingTermLookup();
-		}
-
-		return $this->termBuffer;
+	public static function getTermBuffer( ContainerInterface $services = null ): TermBuffer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.TermBuffer' );
 	}
 
 	public function getTermLookup(): TermLookup {
@@ -417,7 +411,7 @@ final class WikibaseClient {
 		return new LanguageFallbackLabelDescriptionLookupFactory(
 			self::getLanguageFallbackChainFactory(),
 			$this->getTermLookup(),
-			$this->getTermBuffer()
+			self::getTermBuffer()
 		);
 	}
 
@@ -867,7 +861,7 @@ final class WikibaseClient {
 		if ( $this->descriptionLookup === null ) {
 			$this->descriptionLookup = new DescriptionLookup(
 				self::getEntityIdLookup(),
-				$this->getTermBuffer(),
+				self::getTermBuffer(),
 				MediaWikiServices::getInstance()->getPageProps()
 			);
 		}

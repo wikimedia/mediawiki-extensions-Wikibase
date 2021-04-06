@@ -9,7 +9,6 @@ use ApiQueryBase;
 use ApiResult;
 use InvalidArgumentException;
 use Title;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -55,10 +54,9 @@ class PageTerms extends ApiQueryBase {
 	public static function factory(
 		ApiQuery $apiQuery,
 		string $moduleName,
-		EntityIdLookup $entityIdLookup
+		EntityIdLookup $entityIdLookup,
+		TermBuffer $termBuffer
 	): self {
-		$termBuffer = WikibaseClient::getDefaultInstance()->getTermBuffer();
-
 		return new self(
 			$termBuffer,
 			$entityIdLookup,

@@ -16,6 +16,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
@@ -63,7 +64,8 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 		EntityIdParser $idParser,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		RepoLinker $repoLinker,
-		ClientStore $store
+		ClientStore $store,
+		TermBuffer $termBuffer
 	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
@@ -71,7 +73,7 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
 			$languageFallbackChainFactory,
 			$wikibaseClient->getTermLookup(),
-			$wikibaseClient->getTermBuffer()
+			$termBuffer
 		);
 
 		return new self(

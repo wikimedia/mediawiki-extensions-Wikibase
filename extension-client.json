@@ -31,7 +31,8 @@
 			"class": "\\Wikibase\\Client\\Api\\PageTerms",
 			"factory": "\\Wikibase\\Client\\Api\\PageTerms::factory",
 			"services": [
-				"WikibaseClient.EntityIdLookup"
+				"WikibaseClient.EntityIdLookup",
+				"WikibaseClient.TermBuffer"
 			]
 		},
 		"description": {
@@ -141,7 +142,8 @@
 				"WikibaseClient.EntityIdParser",
 				"WikibaseClient.LanguageFallbackChainFactory",
 				"WikibaseClient.RepoLinker",
-				"WikibaseClient.Store"
+				"WikibaseClient.Store",
+				"WikibaseClient.TermBuffer"
 			]
 		},
 		"InfoAction": {
@@ -153,7 +155,8 @@
 				"WikibaseClient.NamespaceChecker",
 				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Settings",
-				"WikibaseClient.Store"
+				"WikibaseClient.Store",
+				"WikibaseClient.TermBuffer"
 			]
 		},
 		"Magic": {
@@ -455,7 +458,8 @@
 			"factory": "Wikibase\\Client\\Specials\\SpecialPagesWithBadges::factory",
 			"services": [
 				"WikibaseClient.LanguageFallbackChainFactory",
-				"WikibaseClient.Settings"
+				"WikibaseClient.Settings",
+				"WikibaseClient.TermBuffer"
 			]
 		},
 		"EntityUsage": {
