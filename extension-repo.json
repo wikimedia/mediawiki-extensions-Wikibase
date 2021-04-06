@@ -247,6 +247,7 @@
 		"entityterms": {
 			"class": "\\Wikibase\\Repo\\Api\\EntityTerms",
 			"services": [
+				"WikibaseRepo.AliasTermBuffer",
 				"WikibaseRepo.EntityIdLookup",
 				"WikibaseRepo.TermBuffer"
 			]

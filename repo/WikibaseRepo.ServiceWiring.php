@@ -19,6 +19,7 @@ use Psr\Log\LoggerInterface;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use ValueParsers\NullParser;
+use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\ByTypeDispatchingPrefetchingTermLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
@@ -136,6 +137,10 @@ use Wikimedia\ObjectFactory;
 
 /** @phpcs-require-sorted-array */
 return [
+
+	'WikibaseRepo.AliasTermBuffer' => function ( MediaWikiServices $services ): AliasTermBuffer {
+		return WikibaseRepo::getPrefetchingTermLookup( $services );
+	},
 
 	'WikibaseRepo.AllTypesEntityDeserializer' => function ( MediaWikiServices $services ): DispatchableDeserializer {
 		$deserializerFactoryCallbacks = WikibaseRepo::getEntityTypeDefinitions( $services )
