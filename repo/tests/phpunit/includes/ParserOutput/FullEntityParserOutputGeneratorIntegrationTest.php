@@ -49,8 +49,7 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->repo = WikibaseRepo::getDefaultInstance();
-		$this->entityStore = $this->repo->getEntityStore();
+		$this->entityStore = WikibaseRepo::getEntityStore();
 
 		$namespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 		$this->propertyNamespace = $namespaceLookup->getEntityNamespace( 'property' );
@@ -147,7 +146,7 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 		$item->getStatements()->addNewStatement( new PropertyValueSnak( $property->getId(), new EntityIdValue( $redirectSourceId ) ) );
 
 		$user = $this->getTestUser()->getUser();
-		$store = $repo->getEntityStore();
+		$store = WikibaseRepo::getEntityStore( $mwServices );
 		$store->saveEntity( $property, 'test property', $user );
 		$store->saveEntity( $redirectSource, 'test item', $user );
 		$store->saveEntity( $redirectTarget, 'test item', $user );

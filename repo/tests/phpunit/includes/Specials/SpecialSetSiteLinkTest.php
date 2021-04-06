@@ -120,7 +120,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	}
 
 	private function createItems() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 		$user = $this->getTestUser()->getUser();
 
 		$badge = new Item();

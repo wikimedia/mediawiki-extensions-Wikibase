@@ -51,14 +51,14 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 	private static $testEntities = [];
 
 	protected function storeTestEntity( EntityDocument $entity ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 		$revision = $store->saveEntity( $entity, "storeTestEntity", $this->getTestUser()->getUser() );
 
 		return $revision;
 	}
 
 	protected function storeTestRedirect( EntityRedirect $redirect ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 		$revision = $store->saveRedirect( $redirect, "storeTestEntity", $this->getTestUser()->getUser() );
 
 		return $revision;

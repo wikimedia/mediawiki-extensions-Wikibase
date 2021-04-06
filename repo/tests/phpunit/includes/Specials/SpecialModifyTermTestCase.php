@@ -44,7 +44,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		$item->setAliases( $language, [ $termValue ] );
 
 		// save the item
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 		$store->saveEntity( $item, "testing", $this->getTestUser()->getUser(), EDIT_NEW | EntityContent::EDIT_IGNORE_CONSTRAINTS );
 
 		// return the id

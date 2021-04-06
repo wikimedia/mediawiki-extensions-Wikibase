@@ -52,7 +52,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 
 	private function setUpEntities() {
 		$user = $this->getTestUser()->getUser();
-		$entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$entityStore = WikibaseRepo::getEntityStore();
 
 		$item = new Item();
 		$entityStore->saveEntity( $item, "WikiPageEntityRedirectLookupTest", $user, EDIT_NEW );

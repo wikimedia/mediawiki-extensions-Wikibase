@@ -46,11 +46,9 @@ class SetClaimTest extends FederatedPropertiesApiTestCase {
 	}
 
 	public function testFederatedPropertiesFailure() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$this->setSourceWikiUnavailable();
 
-		$store = $wikibaseRepo->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 
 		$statement = new Statement( new PropertyNoValueSnak( new PropertyId( 'P626' ) ) );
 

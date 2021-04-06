@@ -161,9 +161,7 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 	 * @return WikiPage
 	 */
 	public function createItemWithPage() {
-		$repo = WikibaseRepo::getDefaultInstance();
-
-		$store = $repo->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 
 		// create a fake item
 		$item = new Item( new ItemId( 'Q303' ) );

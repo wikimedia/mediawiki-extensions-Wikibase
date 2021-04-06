@@ -52,8 +52,6 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 		//TODO: remove global TestSites DB setup once we can inject sites sanely.
 		static $hasSites = false;
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		if ( !$hasSites ) {
 			$sitesTable = MediaWikiServices::getInstance()->getSiteStore();
 			$sitesTable->clear();
@@ -62,7 +60,7 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$item = new Item();
-		$this->entityRevision = $wikibaseRepo->getEntityStore()->saveEntity( $item, '', $this->getTestUser()->getUser(), EDIT_NEW );
+		$this->entityRevision = WikibaseRepo::getEntityStore()->saveEntity( $item, '', $this->getTestUser()->getUser(), EDIT_NEW );
 
 		$id = $this->entityRevision->getEntity()->getId();
 		$this->itemTitle = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $id );
