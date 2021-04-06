@@ -32,7 +32,10 @@ class HookChangeTransmitterTest extends MediaWikiIntegrationTestCase {
 			],
 		] );
 
-		$transmitter = new HookChangeTransmitter( 'HookChangeTransmitterTest' );
+		$transmitter = new HookChangeTransmitter(
+			$this->getServiceContainer()->getHookContainer(),
+			'HookChangeTransmitterTest'
+		);
 		$transmitter->transmitChange( $change );
 
 		$this->assertTrue( $called, 'The hook function was not called' );
