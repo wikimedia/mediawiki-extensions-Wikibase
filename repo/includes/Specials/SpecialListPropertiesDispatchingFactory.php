@@ -45,10 +45,10 @@ class SpecialListPropertiesDispatchingFactory {
 
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			$prefetchingTermLookup,
-			$languageFallbackChainFactory->newFromLanguage( $wikibaseRepo->getUserLanguage() )
+			$languageFallbackChainFactory->newFromLanguage( WikibaseRepo::getUserLanguage() )
 		);
 		$entityIdFormatter = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory()
-			->getEntityIdFormatter( $wikibaseRepo->getUserLanguage() );
+			->getEntityIdFormatter( WikibaseRepo::getUserLanguage() );
 		return new SpecialListProperties(
 			$dataTypeFactory,
 			// TODO move PropertyInfoLookup to service container and inject it directly

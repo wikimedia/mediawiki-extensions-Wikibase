@@ -147,12 +147,13 @@ return [
 							WikibaseRepo::getEntityIdParser(),
 							new LanguageFallbackLabelDescriptionLookup(
 								WikibaseRepo::getTermLookup(),
-								WikibaseRepo::getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+								WikibaseRepo::getLanguageFallbackChainFactory()
+									->newFromLanguage( WikibaseRepo::getUserLanguage() )
 							),
 							$repo->getEntityTypeToRepositoryMapping()
 						),
 						new EntityTermSearchHelper(
-							$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() )
+							$repo->newTermSearchInteractor( WikibaseRepo::getUserLanguage()->getCode() )
 						)
 					]
 			);
@@ -248,12 +249,13 @@ return [
 							WikibaseRepo::getEntityIdParser(),
 							new LanguageFallbackLabelDescriptionLookup(
 								$repo->getTermLookup(),
-								WikibaseRepo::getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+								WikibaseRepo::getLanguageFallbackChainFactory()
+									->newFromLanguage( WikibaseRepo::getUserLanguage() )
 							),
 							$repo->getEntityTypeToRepositoryMapping()
 						),
 						new EntityTermSearchHelper(
-							$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() )
+							$repo->newTermSearchInteractor( WikibaseRepo::getUserLanguage()->getCode() )
 						)
 					]
 				),
