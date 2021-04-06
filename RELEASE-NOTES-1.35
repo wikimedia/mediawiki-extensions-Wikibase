@@ -4,8 +4,23 @@
 
 THIS IS NOT A RELEASE YET
 
-=== Changes since MediaWiki 1.35.0-wmde.0 ===
+=== Changes since Wikibase 1.35.0-wmde.0 ===
 
+* (T97146) Permit restoring redirects to discard entity data
+* (T271618) Catch wider exception type for unresolved redirects
+* (T153570) SubmitEntityAction: Pass 'undoafter' and 'restore' to doEditContent
+* (T97146) Handle error when mixing redirects in undo
+* (T270353) Fix Wikibase client Scribunto test ParserOption watcher
+* (T264929) Skip 0 page ID in hook handler
+* (T264929) Use LinksUpdate::$mId in hook handler
+* (T269871) Don't assume wbUserSpecifiedLanguages is always there
+* (T267502) Fix missing Wikibase CSS on undo and diff pages
+* (T217144) Fix watch-on-edit settings on grant-limited requests
+* (T259340) Remove check for valid MW language code in Lua
+* (T253812) Correct directionality and language of placeholders in New Item
+* (T256885) Fix limit not applied in case of language fallback
+* (T260853) TypeError on commons Title::newFromText returning null
+* (T255387) Redirected links should use redirect=no
 * (T269666) Create a Wikibase Pingback based on MW Pingback
 * (T254740) Prefetch entities as part of federated properties
 * (T258558) Error messages for API modules that will not work with federated properties
