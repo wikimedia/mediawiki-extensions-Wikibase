@@ -36,7 +36,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	private static $propertyId;
 
 	private function addStatementsAndSave( Item $item ): Item {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 		$store->saveEntity( $item, '', $this->user, EDIT_NEW );
 
 		if ( !isset( self::$propertyId ) ) {
@@ -180,7 +180,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	private function getNewProperty( string $type ): Property {
 		$property = Property::newFromType( $type );
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 		$store->saveEntity( $property, '', $this->user, EDIT_NEW );
 
 		return $property;

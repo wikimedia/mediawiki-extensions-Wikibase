@@ -44,11 +44,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		// XXX: This test doesn't mark tablesUsed so things created here will remain through all tests in the class.
 		if ( !isset( self::$hasSetup ) ) {
-			$store = $wikibaseRepo->getEntityStore();
+			$store = $this->getEntityStore();
 
 			$prop = Property::newFromType( 'string' );
 			$store->saveEntity( $prop, 'EditEntityTestP56', $this->user, EDIT_NEW );
@@ -743,10 +741,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$this->getTestUser()->getUser(),
 			EDIT_NEW
 		);
-	}
-
-	protected function getEntityStore() {
-		return WikibaseRepo::getDefaultInstance()->getEntityStore();
 	}
 
 	/**

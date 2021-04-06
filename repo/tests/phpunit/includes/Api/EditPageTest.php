@@ -28,8 +28,7 @@ class EditPageTest extends WikibaseApiTestCase {
 	 * @group API
 	 */
 	public function testEditItemDirectly() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$store = $wikibaseRepo->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$item = new Item(); //@todo: do this with all kinds of entities.
 		$item->setLabel( "en", "EditPageTest" );

@@ -55,8 +55,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$store = $wikibaseRepo->getEntityStore();
+		$store = $this->getEntityStore();
 
 		if ( !self::$propertyIds ) {
 			self::$propertyIds = [];
@@ -84,7 +83,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 * @return Statement
 	 */
 	private function getNewStatement( array $references ): Statement {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 		// Create a new empty item
 		$item = new Item();
 		$store->saveEntity( $item, '', $this->user, EDIT_NEW );

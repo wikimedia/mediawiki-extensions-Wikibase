@@ -368,11 +368,9 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		// XXX: This test doesn't mark tablesUsed so things created here will remain through all tests in the class.
 		if ( !isset( self::$hasSetup ) ) {
-			$store = $wikibaseRepo->getEntityStore();
+			$store = $this->getEntityStore();
 
 			$this->initTestEntities( [ 'StringProp', 'Leipzig', 'Berlin' ] );
 
@@ -692,7 +690,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	 * @return Item
 	 */
 	private function createItemUsing( User $user ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 
 		$itemRevision = $store->saveEntity( new Item(), 'SetSiteLinkTest', $user, EDIT_NEW );
 		return $itemRevision->getEntity();

@@ -15,7 +15,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -76,7 +75,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 		foreach ( $this->statementProvider() as $statement ) {
 			$item = new Item();
 
-			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+			$store = $this->getEntityStore();
 			$store->saveEntity( $item, '', $this->user, EDIT_NEW );
 
 			$guidGenerator = new GuidGenerator();
@@ -114,7 +113,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	public function testRemoveReferencesWithTag() {
 		$item = new Item();
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 		$store->saveEntity( $item, '', $this->user, EDIT_NEW );
 
 		$statement = $this->statementProvider()[1];

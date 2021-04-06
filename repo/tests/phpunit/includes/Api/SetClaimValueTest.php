@@ -66,7 +66,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	}
 
 	private function addStatementsAndSave( StatementListProvidingEntity $entity, PropertyId $propertyId ): StatementListProvidingEntity {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 		$store->saveEntity( $entity, '', $this->user, EDIT_NEW );
 
 		$snak = new PropertyValueSnak( $propertyId, new StringValue( 'o_O' ) );
@@ -83,7 +83,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$property = Property::newFromType( 'commonsMedia' );
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 		$store->saveEntity( $property, '', $this->user, EDIT_NEW );
 
 		$entity = $this->addStatementsAndSave( new Item(), $property->getId() );
@@ -106,7 +106,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	public function testSetClaimNewWithTag() {
 		$property = Property::newFromType( 'commonsMedia' );
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getEntityStore();
 		$store->saveEntity( $property, '', $this->user, EDIT_NEW );
 
 		$entity = $this->addStatementsAndSave( new Item(), $property->getId() );

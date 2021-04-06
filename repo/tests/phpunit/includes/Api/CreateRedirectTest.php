@@ -263,7 +263,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$interactor = $wikibaseRepo->newItemRedirectCreationInteractor( $user, $main->getContext() );
-		$store = $wikibaseRepo->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 
 		$store->saveEntity( $sourceItem, 'Created the source item', $user );
 		$store->deleteEntity( $sourceId, 'test reason', $user );
@@ -290,7 +290,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$interactor = $wikibaseRepo->newItemRedirectCreationInteractor( $user, $main->getContext() );
-		$store = $wikibaseRepo->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 
 		$store->saveEntity( $sourceItem, 'Created the source item', $user );
 		$store->deleteEntity( $sourceId, 'test reason', $user );

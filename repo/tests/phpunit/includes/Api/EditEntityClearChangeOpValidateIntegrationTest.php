@@ -172,7 +172,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends MediaWikiIntegratio
 	}
 
 	private function saveItem( Item $item ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 		$store->saveEntity( $item, __METHOD__, $this->getTestUser()->getUser() );
 	}
 
