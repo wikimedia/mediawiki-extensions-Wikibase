@@ -38,6 +38,7 @@
 			"class": "\\Wikibase\\Client\\Api\\Description",
 			"factory": "\\Wikibase\\Client\\Api\\Description::factory",
 			"services": [
+				"WikibaseClient.DescriptionLookup",
 				"WikibaseClient.Settings"
 			]
 		},
@@ -124,6 +125,7 @@
 			"class": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler::factory",
 			"services": [
+				"WikibaseClient.DescriptionLookup",
 				"WikibaseClient.Settings"
 			]
 		},
@@ -150,6 +152,7 @@
 			"class": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler::factory",
 			"services": [
+				"WikibaseClient.DescriptionLookup",
 				"WikibaseClient.EntityIdParser",
 				"WikibaseClient.LanguageFallbackChainFactory",
 				"WikibaseClient.NamespaceChecker",

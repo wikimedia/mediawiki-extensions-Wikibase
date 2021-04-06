@@ -5,7 +5,6 @@ namespace Wikibase\Client\Api;
 use ApiQuery;
 use ApiQueryBase;
 use Wikibase\Client\Store\DescriptionLookup;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\SettingsArray;
 
 /**
@@ -58,12 +57,12 @@ class Description extends ApiQueryBase {
 	public static function factory(
 		ApiQuery $apiQuery,
 		string $moduleName,
+		DescriptionLookup $descriptionLookup,
 		SettingsArray $clientSettings
 	): self {
-		$client = WikibaseClient::getDefaultInstance();
 		$allowLocalShortDesc = $clientSettings->getSetting( 'allowLocalShortDesc' );
 		$forceLocalShortDesc = $clientSettings->getSetting( 'forceLocalShortDesc' );
-		$descriptionLookup = $client->getDescriptionLookup();
+
 		return new self(
 			$apiQuery,
 			$moduleName,

@@ -11,7 +11,6 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -88,6 +87,7 @@ class InfoActionHookHandler implements InfoActionHook {
 	}
 
 	public static function factory(
+		DescriptionLookup $descriptionLookup,
 		EntityIdParser $idParser,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		NamespaceChecker $namespaceChecker,
@@ -97,15 +97,12 @@ class InfoActionHookHandler implements InfoActionHook {
 		TermBuffer $termBuffer,
 		TermLookup $termLookup
 	): self {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
 		$usageLookup = $store->getUsageLookup();
 		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
 			$languageFallbackChainFactory,
 			$termLookup,
 			$termBuffer
 		);
-		$descriptionLookup = $wikibaseClient->getDescriptionLookup();
 
 		return new self(
 			$namespaceChecker,
