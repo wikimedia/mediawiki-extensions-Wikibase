@@ -131,11 +131,13 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		$titles = $this->makeTitles( explode( '|', $params['titles'] ) );
 		$entityIds = $this->makeEntityIds( array_keys( $terms ) );
 
+		$termLookup = new FakePrefetchingTermLookup();
 		$module = new PageTerms(
 			$this->getQueryModule( $params, $titles ),
 			'pageterms',
+			$termLookup,
 			$this->getEntityIdLookup( $entityIds ),
-			new FakePrefetchingTermLookup()
+			$termLookup
 		);
 
 		$module->execute();

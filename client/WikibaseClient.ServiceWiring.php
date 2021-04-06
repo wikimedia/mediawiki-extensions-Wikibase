@@ -29,6 +29,7 @@ use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
 use Wikibase\DataAccess\ByTypeDispatchingPrefetchingTermLookup;
 use Wikibase\DataAccess\DataAccessSettings;
@@ -90,6 +91,10 @@ return [
 			WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' ),
 			WikibaseClient::getLogger( $services )
 		);
+	},
+
+	'WikibaseClient.AliasTermBuffer' => function ( MediaWikiServices $services ): AliasTermBuffer {
+		return WikibaseClient::getPrefetchingTermLookup( $services );
 	},
 
 	'WikibaseClient.BaseDataModelDeserializerFactory' => function ( MediaWikiServices $services ): DeserializerFactory {

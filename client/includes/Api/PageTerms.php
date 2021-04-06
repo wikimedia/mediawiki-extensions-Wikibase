@@ -29,9 +29,12 @@ use Wikibase\Lib\TermIndexEntry;
  */
 class PageTerms extends ApiQueryBase {
 
+	/** @var AliasTermBuffer */
+	private $aliasTermBuffer;
+
 	/**
 	 * @todo Use LabelDescriptionLookup for labels/descriptions, so we can apply language fallback.
-	 * @var TermBuffer|AliasTermBuffer
+	 * @var TermBuffer
 	 */
 	private $termBuffer;
 
@@ -43,10 +46,12 @@ class PageTerms extends ApiQueryBase {
 	public function __construct(
 		ApiQuery $query,
 		string $moduleName,
+		AliasTermBuffer $aliasTermBuffer,
 		EntityIdLookup $idLookup,
 		TermBuffer $termBuffer
 	) {
 		parent::__construct( $query, $moduleName, 'wbpt' );
+		$this->aliasTermBuffer = $aliasTermBuffer;
 		$this->termBuffer = $termBuffer;
 		$this->idLookup = $idLookup;
 	}
@@ -101,7 +106,7 @@ class PageTerms extends ApiQueryBase {
 						] );
 					}
 				} else {
-					$termTexts = $this->termBuffer->getPrefetchedAliases( $entityId, $languageCode ) ?: [];
+					$termTexts = $this->aliasTermBuffer->getPrefetchedAliases( $entityId, $languageCode ) ?: [];
 					foreach ( $termTexts as $termText ) {
 						$terms[] = new TermIndexEntry( [
 							TermIndexEntry::FIELD_ENTITY => $entityId,
