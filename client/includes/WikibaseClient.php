@@ -146,9 +146,6 @@ final class WikibaseClient {
 	 */
 	private $wikibaseContentLanguages = null;
 
-	/** @var DescriptionLookup|null */
-	private $descriptionLookup = null;
-
 	/** @var ReferenceFormatterFactory|null */
 	private $referenceFormatterFactory = null;
 
@@ -820,15 +817,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.EntityIdLookup' );
 	}
 
-	public function getDescriptionLookup(): DescriptionLookup {
-		if ( $this->descriptionLookup === null ) {
-			$this->descriptionLookup = new DescriptionLookup(
-				self::getEntityIdLookup(),
-				self::getTermBuffer(),
-				MediaWikiServices::getInstance()->getPageProps()
-			);
-		}
-		return $this->descriptionLookup;
+	public static function getDescriptionLookup( ContainerInterface $services = null ): DescriptionLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.DescriptionLookup' );
 	}
 
 	public static function getPropertyLabelResolver( ContainerInterface $services = null ): PropertyLabelResolver {

@@ -25,6 +25,7 @@ use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\ClientStore;
+use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\WikibaseClient;
@@ -161,6 +162,14 @@ return [
 					: EntityIdValue::newFromArray( $value );
 			},
 		] );
+	},
+
+	'WikibaseClient.DescriptionLookup' => function ( MediaWikiServices $services ): DescriptionLookup {
+		return new DescriptionLookup(
+			WikibaseClient::getEntityIdLookup( $services ),
+			WikibaseClient::getTermBuffer( $services ),
+			$services->getPageProps()
+		);
 	},
 
 	'WikibaseClient.EntityChangeFactory' => function ( MediaWikiServices $services ): EntityChangeFactory {
