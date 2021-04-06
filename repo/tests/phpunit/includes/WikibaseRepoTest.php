@@ -40,7 +40,6 @@ use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\WikibaseSettings;
@@ -260,11 +259,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testNewTermSearchInteractorReturnType() {
 		$returnValue = $this->getWikibaseRepo()->newTermSearchInteractor( '' );
 		$this->assertInstanceOf( TermSearchInteractor::class, $returnValue );
-	}
-
-	public function testGetEntityStoreReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getEntityStore();
-		$this->assertInstanceOf( EntityStore::class, $returnValue );
 	}
 
 	public function testGetPropertyDataTypeLookupReturnType() {

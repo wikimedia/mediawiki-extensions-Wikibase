@@ -51,7 +51,7 @@ class RemoveTermsInLanguageTest extends MaintenanceBaseTestCase {
 	protected function storeNewItem() {
 		$testUser = $this->getTestUser()->getUser();
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 
 		$item = new Item();
 		$item->setLabel( "en", "en-label" );

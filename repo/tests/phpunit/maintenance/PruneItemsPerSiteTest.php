@@ -75,7 +75,7 @@ class PruneItemsPerSiteTest extends MaintenanceBaseTestCase {
 	private function storeNewItem() {
 		$testUser = $this->getTestUser()->getUser();
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = WikibaseRepo::getEntityStore();
 
 		$item = new Item();
 		$item->addSiteLink( new SiteLink( 'dewiki', 'Katze' ) );
