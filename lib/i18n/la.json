@@ -1,8 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Demetrius Talpa",
 			"UV"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Vicipaedia"
+	"wikibase-sitelinks-wikipedia": "Vicipaedia",
+	"wikibase-time-precision-century": "$1. saeculum",
+	"wikibase-time-precision-BCE": "$1 a.C.n.",
+	"wikibase-time-precision-BCE-Gannum": "$1 billionem annorum a.C.n.",
+	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 annus|$1 anni}} a.C.n.",
+	"wikibase-time-precision-BCE-century": "$1. saeculum a.C.n.",
+	"wikibase-time-precision-BCE-10annum": "$1i a.C.n."
 }
