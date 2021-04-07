@@ -79,6 +79,7 @@ use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
+use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
 
 /** @phpcs-require-sorted-array */
@@ -626,6 +627,13 @@ return [
 				->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
 			$services->getContentLanguage(),
 			WikibaseClient::getLanguageFallbackChainFactory( $services )
+		);
+	},
+
+	'WikibaseClient.WikibaseContentLanguages' => function ( MediaWikiServices $services ): WikibaseContentLanguages {
+		return WikibaseContentLanguages::getDefaultInstance(
+			$services->getHookContainer(),
+			$services->getLanguageNameUtils()
 		);
 	},
 
