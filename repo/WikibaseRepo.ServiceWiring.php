@@ -46,6 +46,7 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
@@ -80,6 +81,7 @@ use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
@@ -405,6 +407,14 @@ return [
 		return new DispatchingEntityIdParser(
 			WikibaseRepo::getEntityTypeDefinitions( $services )->getEntityIdBuilders()
 		);
+	},
+
+	'WikibaseRepo.EntityLookup' => function ( MediaWikiServices $services ): EntityLookup {
+		return WikibaseRepo::getStore( $services )
+			->getEntityLookup(
+				Store::LOOKUP_CACHING_ENABLED,
+				LookupConstants::LATEST_FROM_REPLICA
+			);
 	},
 
 	'WikibaseRepo.EntityNamespaceLookup' => function ( MediaWikiServices $services ): EntityNamespaceLookup {
