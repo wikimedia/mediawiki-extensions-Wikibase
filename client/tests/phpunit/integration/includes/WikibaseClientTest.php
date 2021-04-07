@@ -27,7 +27,6 @@ use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
 
@@ -118,11 +117,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetPropertyDataTypeLookupReturnType() {
 		$returnValue = $this->getWikibaseClient()->getPropertyDataTypeLookup();
 		$this->assertInstanceOf( PropertyDataTypeLookup::class, $returnValue );
-	}
-
-	public function testGetLanguageFallbackLabelDescriptionLookupFactory() {
-		$instance = $this->getWikibaseClient()->getLanguageFallbackLabelDescriptionLookupFactory();
-		$this->assertInstanceOf( LanguageFallbackLabelDescriptionLookupFactory::class, $instance );
 	}
 
 	public function testGetContentLanguageReturnType() {
