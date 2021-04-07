@@ -69,6 +69,7 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
@@ -316,6 +317,16 @@ return [
 			$services->getLanguageFactory(),
 			$services->getLanguageConverterFactory(),
 			$services->getLanguageFallback()
+		);
+	},
+
+	'WikibaseClient.LanguageFallbackLabelDescriptionLookupFactory' => function (
+		MediaWikiServices $services
+	): LanguageFallbackLabelDescriptionLookupFactory {
+		return new LanguageFallbackLabelDescriptionLookupFactory(
+			WikibaseClient::getLanguageFallbackChainFactory( $services ),
+			WikibaseClient::getTermLookup( $services ),
+			WikibaseClient::getTermBuffer( $services )
 		);
 	},
 

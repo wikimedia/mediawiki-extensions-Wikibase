@@ -393,12 +393,11 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.LanguageFallbackChainFactory' );
 	}
 
-	public function getLanguageFallbackLabelDescriptionLookupFactory(): LanguageFallbackLabelDescriptionLookupFactory {
-		return new LanguageFallbackLabelDescriptionLookupFactory(
-			self::getLanguageFallbackChainFactory(),
-			self::getTermLookup(),
-			self::getTermBuffer()
-		);
+	public static function getLanguageFallbackLabelDescriptionLookupFactory(
+		ContainerInterface $services = null
+	): LanguageFallbackLabelDescriptionLookupFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.LanguageFallbackLabelDescriptionLookupFactory' );
 	}
 
 	public static function getStore( ContainerInterface $services = null ): ClientStore {
@@ -585,7 +584,7 @@ final class WikibaseClient {
 
 	public function getSidebarLinkBadgeDisplay(): SidebarLinkBadgeDisplay {
 		if ( $this->sidebarLinkBadgeDisplay === null ) {
-			$labelDescriptionLookupFactory = $this->getLanguageFallbackLabelDescriptionLookupFactory();
+			$labelDescriptionLookupFactory = self::getLanguageFallbackLabelDescriptionLookupFactory();
 			$badgeClassNames = self::getSettings()->getSetting( 'badgeClassNames' );
 			$lang = $this->getUserLanguage();
 
@@ -682,7 +681,7 @@ final class WikibaseClient {
 			$this->getSnakFormatterFactory(),
 			$this->getPropertyDataTypeLookup(),
 			self::getRepoItemUriParser(),
-			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
+			self::getLanguageFallbackLabelDescriptionLookupFactory(),
 			self::getSettings()->getSetting( 'allowDataAccessInUserLanguage' )
 		);
 	}
