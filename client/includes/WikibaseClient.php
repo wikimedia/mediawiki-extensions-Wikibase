@@ -137,11 +137,6 @@ final class WikibaseClient {
 	 */
 	private $valueFormatterBuilders = null;
 
-	/**
-	 * @var WikibaseContentLanguages|null
-	 */
-	private $wikibaseContentLanguages = null;
-
 	/** @var ReferenceFormatterFactory|null */
 	private $referenceFormatterFactory = null;
 
@@ -719,19 +714,17 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.ItemAndPropertySource' );
 	}
 
-	public function getWikibaseContentLanguages(): WikibaseContentLanguages {
-		if ( $this->wikibaseContentLanguages === null ) {
-			$this->wikibaseContentLanguages = WikibaseContentLanguages::getDefaultInstance();
-		}
-
-		return $this->wikibaseContentLanguages;
+	public static function getWikibaseContentLanguages( ContainerInterface $services = null ): WikibaseContentLanguages {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.WikibaseContentLanguages' );
 	}
 
 	/**
 	 * Get a ContentLanguages object holding the languages available for labels, descriptions and aliases.
 	 */
 	public function getTermsLanguages(): ContentLanguages {
-		return $this->getWikibaseContentLanguages()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
+		return self::getWikibaseContentLanguages()
+			->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
 	}
 
 	public function getRestrictedEntityLookup(): RestrictedEntityLookup {
