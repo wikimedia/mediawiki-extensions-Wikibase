@@ -28,7 +28,6 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Search\ExtendedResult;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Handler to format entities in the search results
@@ -58,21 +57,6 @@ class ShowSearchHitHandler implements ShowSearchHitHook, ShowSearchHitTitleHook 
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityLookup = $entityLookup;
 		$this->fallbackChainFactory = $fallbackChainFactory;
-	}
-
-	public static function factory(
-		EntityContentFactory $entityContentFactory,
-		EntityIdLookup $entityIdLookup,
-		LanguageFallbackChainFactory $languageFallbackChainFactory
-	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		return new self(
-			$entityContentFactory,
-			$entityIdLookup,
-			$wikibaseRepo->getEntityLookup(),
-			$languageFallbackChainFactory
-		);
 	}
 
 	/**

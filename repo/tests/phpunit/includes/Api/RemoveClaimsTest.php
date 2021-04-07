@@ -111,7 +111,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 			$this->makeTheRequest( [ $statement->getGuid() ] );
 
 			/** @var Item $obtainedItem */
-			$obtainedItem = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
+			$obtainedItem = WikibaseRepo::getEntityLookup()->getEntity( $item->getId() );
 			$obtainedStatements = $obtainedItem->getStatements();
 
 			$this->assertNull( $obtainedStatements->getFirstStatementWithGuid( $statement->getGuid() ) );
@@ -135,7 +135,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		$this->makeTheRequest( $guids );
 
 		/** @var Item $obtainedItem */
-		$obtainedItem = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
+		$obtainedItem = WikibaseRepo::getEntityLookup()->getEntity( $item->getId() );
 
 		$this->assertTrue( $obtainedItem->getStatements()->isEmpty() );
 	}

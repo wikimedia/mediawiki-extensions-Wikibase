@@ -509,7 +509,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$this->assertNotNull( $statement->getGuid(), 'Cannot search for statements with no GUID' );
 
 		/** @var StatementListProvider $entity */
-		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
+		$entity = WikibaseRepo::getEntityLookup()->getEntity( $entityId );
 
 		$statements = $entity->getStatements();
 		$savedStatement = $statements->getFirstStatementWithGuid( $statement->getGuid() );
@@ -528,7 +528,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$this->assertNotNull( $statement->getGuid(), 'Cannot search for statements with no GUID' );
 
 		/** @var StatementListProvider $entity */
-		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
+		$entity = WikibaseRepo::getEntityLookup()->getEntity( $entityId );
 
 		$statements = $entity->getStatements();
 		$this->assertNull( $statements->getFirstStatementWithGuid( $statement->getGuid() ) );

@@ -143,7 +143,7 @@ return [
 			return new CombinedEntitySearchHelper(
 					[
 						new EntityIdSearchHelper(
-							$repo->getEntityLookup(),
+							WikibaseRepo::getEntityLookup(),
 							WikibaseRepo::getEntityIdParser(),
 							new LanguageFallbackLabelDescriptionLookup(
 								WikibaseRepo::getTermLookup(),
@@ -245,7 +245,7 @@ return [
 				new CombinedEntitySearchHelper(
 					[
 						new EntityIdSearchHelper(
-							$repo->getEntityLookup(),
+							WikibaseRepo::getEntityLookup(),
 							WikibaseRepo::getEntityIdParser(),
 							new LanguageFallbackLabelDescriptionLookup(
 								$repo->getTermLookup(),

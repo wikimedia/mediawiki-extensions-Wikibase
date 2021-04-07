@@ -949,11 +949,10 @@ final class RepoHooks {
 	 * @return void
 	 */
 	public static function onSidebarBeforeOutput( Skin $skin, array &$sidebar ): void {
-		$repo = WikibaseRepo::getDefaultInstance();
 		$hookHandler = new SidebarBeforeOutputHookHandler(
 			WikibaseRepo::getSettings()->getSetting( 'conceptBaseUri' ),
 			WikibaseRepo::getEntityIdLookup(),
-			$repo->getEntityLookup(),
+			WikibaseRepo::getEntityLookup(),
 			WikibaseRepo::getEntityNamespaceLookup(),
 			WikibaseRepo::getLogger()
 		);

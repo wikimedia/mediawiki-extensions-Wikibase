@@ -39,7 +39,7 @@ class HTMLItemReferenceField extends \HTMLTextField {
 
 		parent::__construct( array_merge( $defaultValues, $params ) );
 
-		$this->entityLookup = $entityLookup ?: WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$this->entityLookup = $entityLookup ?: WikibaseRepo::getEntityLookup();
 	}
 
 	/**

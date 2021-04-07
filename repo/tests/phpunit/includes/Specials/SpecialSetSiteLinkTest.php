@@ -252,7 +252,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	}
 
 	public function testExecutePostModifySiteLink() {
-		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$lookup = WikibaseRepo::getEntityLookup();
 		$request = new FauxRequest( [
 			'id' => self::$itemId,
 			'site' => 'dewiki',
@@ -275,7 +275,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	}
 
 	public function testExecutePostRemoveSiteLink() {
-		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$lookup = WikibaseRepo::getEntityLookup();
 		$request = new FauxRequest( [
 			'id' => self::$itemId,
 			'site' => 'dewiki',
