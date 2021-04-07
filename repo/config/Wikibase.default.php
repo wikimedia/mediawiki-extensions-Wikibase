@@ -321,14 +321,6 @@ return [
 	'idGeneratorSeparateDbConnection' => false,
 
 	/**
-	 * Whether entity ID generator usage should be logged or not.
-	 *
-	 * @var bool
-	 * @see https://phabricator.wikimedia.org/T268625
-	 */
-	'idGeneratorLogging' => false,
-
-	/**
 	 * Whether rate limiting should be applied to the entity ID generator.
 	 *
 	 * @var bool

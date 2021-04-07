@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use InvalidArgumentException;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Repo\Store\LoggingIdGenerator;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
@@ -28,7 +27,6 @@ class IdGeneratorTest extends ServiceWiringTestCase {
 				'reservedIds' => $reservedIds,
 				'idGeneratorSeparateDbConnection' => true,
 				'idGeneratorRateLimiting' => false,
-				'idGeneratorLogging' => false,
 			] ) );
 
 		$idGenerator = $this->getService( 'WikibaseRepo.IdGenerator' );
@@ -47,7 +45,6 @@ class IdGeneratorTest extends ServiceWiringTestCase {
 				'reservedIds' => $reservedIds,
 				'idGeneratorSeparateDbConnection' => true,
 				'idGeneratorRateLimiting' => false,
-				'idGeneratorLogging' => false,
 			] ) );
 
 		$idGenerator = $this->getService( 'WikibaseRepo.IdGenerator' );
@@ -75,27 +72,11 @@ class IdGeneratorTest extends ServiceWiringTestCase {
 				'reservedIds' => [],
 				'idGeneratorSeparateDbConnection' => false,
 				'idGeneratorRateLimiting' => true,
-				'idGeneratorLogging' => false,
 			] ) );
 
 		$idGenerator = $this->getService( 'WikibaseRepo.IdGenerator' );
 
 		$this->assertInstanceOf( RateLimitingIdGenerator::class, $idGenerator );
-	}
-
-	public function testConstructionWithLogging() {
-		$this->mockService( 'WikibaseRepo.Settings',
-			new SettingsArray( [
-				'idGenerator' => 'original',
-				'reservedIds' => [],
-				'idGeneratorSeparateDbConnection' => false,
-				'idGeneratorRateLimiting' => false,
-				'idGeneratorLogging' => true,
-			] ) );
-
-		$idGenerator = $this->getService( 'WikibaseRepo.IdGenerator' );
-
-		$this->assertInstanceOf( LoggingIdGenerator::class, $idGenerator );
 	}
 
 }
