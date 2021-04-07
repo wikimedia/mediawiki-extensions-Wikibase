@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"AnakngAraw",
+			"GinawaSaHapon",
 			"Ianlopez1115",
 			"Jojit fb",
 			"Sky Harbor",
@@ -10,18 +11,18 @@
 		]
 	},
 	"wikibase-client-desc": "Kliyente para sa dugtong na Wikibase",
-	"tooltip-t-wikibase": "Kawing patungo sa konektadong aytem sa repositoryo ng datos",
-	"wikibase-comment-update": "Nagbago ang {{WBREPONAME}} item",
+	"tooltip-t-wikibase": "Link sa nakakonektang item sa repositoryo ng datos",
+	"wikibase-comment-update": "Binago ang {{WBREPONAME}} na item",
 	"wikibase-dataitem": "Item na {{WBREPONAME}}",
-	"wikibase-editlinks": "Baguhin ang mga kawing",
-	"wikibase-editlinkstitle": "Baguhin ang mga kawing inter-wika",
-	"wikibase-linkitem-addlinks": "Magdagdag ng kawing",
+	"wikibase-editlinks": "I-edit ang mga link",
+	"wikibase-editlinkstitle": "I-edit ang link sa ibang wika",
+	"wikibase-linkitem-addlinks": "Magdagdag ng link",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Itago",
 	"wikibase-rc-hide-wikidata-show": "Ipakita",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Pagbabagong ginawa sa pamamagitan ng {{WBREPONAME}}",
-	"wikibase-otherprojects": "Sa iba pang mga proyekto",
+	"wikibase-rc-wikibase-edit-title": "Pagbabagong ginawa gamit {{WBREPONAME}}",
+	"wikibase-otherprojects": "Sa iba pang proyekto",
 	"wikibase-sitelinks-sitename-columnheading": "Wika",
 	"wikibase-sitelinks-link-columnheading": "Artikulong nakakawing"
 }
