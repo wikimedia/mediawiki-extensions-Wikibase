@@ -401,7 +401,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 */
 	public function testInvalidRequest( string $itemHandle, ?string $guid, string $referenceValue, string $referenceHash, string $error ) {
 		$itemId = new ItemId( EntityTestHelper::getId( $itemHandle ) );
-		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
+		$item = WikibaseRepo::getEntityLookup()->getEntity( $itemId );
 
 		if ( $guid === null ) {
 			/** @var StatementListProvider $item */

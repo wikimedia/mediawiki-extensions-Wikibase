@@ -197,7 +197,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		$this->makeValidRequest( $params );
 
 		/** @var StatementListProvidingEntity $entity */
-		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
+		$entity = WikibaseRepo::getEntityLookup()->getEntity( $entityId );
 
 		$statements = $entity->getStatements();
 
@@ -225,7 +225,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	 */
 	public function testInvalidRequest( string $itemHandle, ?string $guid, string $propertyHande, string $snakType, $value, $error ) {
 		$itemId = new ItemId( EntityTestHelper::getId( $itemHandle ) );
-		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
+		$item = WikibaseRepo::getEntityLookup()->getEntity( $itemId );
 
 		$propertyId = EntityTestHelper::getId( $propertyHande );
 

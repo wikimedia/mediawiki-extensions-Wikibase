@@ -29,7 +29,7 @@ class RemoveTermsInLanguageTest extends MaintenanceBaseTestCase {
 	 */
 	public function testTermsOfLanguageAreRemoved() {
 		$entityId = $this->storeNewItem();
-		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$entityLookup = WikibaseRepo::getEntityLookup();
 
 		$this->maintenance->loadWithArgv( [ "--entity-id=" . $entityId, "--language=en" ] );
 		$this->maintenance->execute();

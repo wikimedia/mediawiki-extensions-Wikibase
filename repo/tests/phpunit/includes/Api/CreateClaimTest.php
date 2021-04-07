@@ -76,7 +76,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$this->assertEquals( 'value', $claim['mainsnak']['snaktype'] );
 
-		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
+		$item = WikibaseRepo::getEntityLookup()->getEntity( $item->getId() );
 
 		$this->assertNotNull( $item->getStatements()->getFirstStatementWithGuid( $claim['id'] ) );
 	}
@@ -253,7 +253,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		}
 
 		/** @var Item $obtainedItem */
-		$obtainedItem = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
+		$obtainedItem = WikibaseRepo::getEntityLookup()->getEntity( $item->getId() );
 
 		$this->assertTrue( $obtainedItem->getStatements()->isEmpty() );
 	}
@@ -302,7 +302,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$this->assertNotEquals( $firstGuid, $secondGuid );
 
-		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
+		$item = WikibaseRepo::getEntityLookup()->getEntity( $item->getId() );
 
 		$this->assertNotNull( $item->getStatements()->getFirstStatementWithGuid( $firstGuid ) );
 		$this->assertNotNull( $item->getStatements()->getFirstStatementWithGuid( $secondGuid ) );

@@ -50,7 +50,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 		list( , $webResponse ) = $this->executeSpecialPage( '', $request );
 
 		$entityId = $this->extractEntityIdFromUrl( $webResponse->getHeader( 'location' ) );
-		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
+		$entity = WikibaseRepo::getEntityLookup()->getEntity( $entityId );
 
 		$this->assertEntityMatchesFormData( $formData, $entity );
 	}

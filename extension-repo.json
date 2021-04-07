@@ -748,10 +748,10 @@
 		},
 		"ShowSearchHit": {
 			"class": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler",
-			"factory": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler::factory",
 			"services": [
 				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityIdLookup",
+				"WikibaseRepo.EntityLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory"
 			]
 		},
