@@ -18,6 +18,8 @@ use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use ValueParsers\NullParser;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\ByTypeDispatchingPrefetchingTermLookup;
@@ -55,7 +57,9 @@ use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
+use Wikibase\Lib\Formatters\EntityIdLinkFormatter;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\SettingsArray;
@@ -111,6 +115,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
+use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
@@ -726,6 +731,18 @@ return [
 
 	'WikibaseRepo.Logger' => function ( MediaWikiServices $services ): LoggerInterface {
 		return LoggerFactory::getInstance( 'Wikibase' );
+	},
+
+	'WikibaseRepo.MessageParameterFormatter' => function ( MediaWikiServices $services ): ValueFormatter {
+		$formatterOptions = new FormatterOptions();
+		$valueFormatterFactory = WikibaseRepo::getValueFormatterFactory( $services );
+
+		return new MessageParameterFormatter(
+			$valueFormatterFactory->getValueFormatter( SnakFormatter::FORMAT_WIKI, $formatterOptions ),
+			new EntityIdLinkFormatter( WikibaseRepo::getEntityTitleLookup( $services ) ),
+			$services->getSiteLookup(),
+			WikibaseRepo::getUserLanguage( $services )
+		);
 	},
 
 	'WikibaseRepo.MonolingualTextLanguages' => function ( MediaWikiServices $services ): ContentLanguages {

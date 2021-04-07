@@ -67,7 +67,6 @@ use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
-use Wikibase\Lib\Formatters\EntityIdLinkFormatter;
 use Wikibase\Lib\Formatters\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\Formatters\EntityIdValueFormatter;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
@@ -147,7 +146,6 @@ use Wikibase\Repo\Localizer\DispatchingExceptionLocalizer;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Localizer\GenericExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
-use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
@@ -866,7 +864,7 @@ class WikibaseRepo {
 	 */
 	public function getExceptionLocalizer() {
 		if ( $this->exceptionLocalizer === null ) {
-			$formatter = $this->getMessageParameterFormatter();
+			$formatter = self::getMessageParameterFormatter();
 			$localizers = $this->getExceptionLocalizers( $formatter );
 
 			$this->exceptionLocalizer = new DispatchingExceptionLocalizer( $localizers );
@@ -997,7 +995,7 @@ class WikibaseRepo {
 	 * @return ValidatorErrorLocalizer
 	 */
 	public function getValidatorErrorLocalizer() {
-		return new ValidatorErrorLocalizer( $this->getMessageParameterFormatter() );
+		return new ValidatorErrorLocalizer( self::getMessageParameterFormatter() );
 	}
 
 	/**
@@ -1011,19 +1009,10 @@ class WikibaseRepo {
 	 * Returns a ValueFormatter suitable for converting message parameters to wikitext.
 	 * The formatter is most likely implemented to dispatch to different formatters internally,
 	 * based on the type of the parameter.
-	 *
-	 * @return ValueFormatter
 	 */
-	private function getMessageParameterFormatter() {
-		$formatterOptions = new FormatterOptions();
-		$valueFormatterFactory = self::getValueFormatterFactory();
-
-		return new MessageParameterFormatter(
-			$valueFormatterFactory->getValueFormatter( SnakFormatter::FORMAT_WIKI, $formatterOptions ),
-			new EntityIdLinkFormatter( self::getEntityTitleLookup() ),
-			$this->getSiteLookup(),
-			self::getUserLanguage()
-		);
+	public static function getMessageParameterFormatter( ContainerInterface $services = null ): ValueFormatter {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.MessageParameterFormatter' );
 	}
 
 	public static function getChangeNotifier( ContainerInterface $services = null ): ChangeNotifier {
