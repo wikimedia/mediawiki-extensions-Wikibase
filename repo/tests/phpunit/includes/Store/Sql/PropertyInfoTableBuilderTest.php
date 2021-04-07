@@ -7,6 +7,7 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
@@ -107,7 +108,9 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 
 		// NOTE: We use the EntityStore from WikibaseRepo in initProperties,
 		//       so we should also use the EntityLookup from WikibaseRepo.
-		$propertyLookup = $wikibaseRepo->getPropertyLookup( Store::LOOKUP_CACHING_DISABLED );
+		$propertyLookup = new LegacyAdapterPropertyLookup(
+			WikibaseRepo::getStore()->getEntityLookup( Store::LOOKUP_CACHING_DISABLED )
+		);
 
 		$propertyInfoBuilder = new PropertyInfoBuilder( [
 			PropertyInfoLookup::KEY_FORMATTER_URL => new PropertyId( 'P1630' ),

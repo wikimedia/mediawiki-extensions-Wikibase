@@ -47,9 +47,7 @@ use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -673,10 +671,6 @@ class WikibaseRepo {
 			$lookupMode = LookupConstants::LATEST_FROM_REPLICA; // we already know it’s null, i.e. default, from earlier
 			return self::getStore()->getEntityLookup( $cache, $lookupMode );
 		}
-	}
-
-	public function getPropertyLookup( $cacheMode = Store::LOOKUP_CACHING_ENABLED ): PropertyLookup {
-		return new LegacyAdapterPropertyLookup( self::getStore()->getEntityLookup( $cacheMode ) );
 	}
 
 	/**
