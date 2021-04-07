@@ -192,7 +192,7 @@ final class WikibaseClient {
 				$settings->getSetting( 'tabularDataStorageBaseUrl' ),
 				self::getTermFallbackCache(),
 				$settings->getSetting( 'sharedCacheDuration' ),
-				$this->getEntityLookup(),
+				self::getEntityLookup(),
 				self::getStore()->getEntityRevisionLookup(),
 				$settings->getSetting( 'entitySchemaNamespace' ),
 				new TitleLookupBasedEntityExistenceChecker(
@@ -318,11 +318,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.DataAccessSettings' );
 	}
 
-	/**
-	 * @return EntityLookup
-	 */
-	private function getEntityLookup() {
-		return self::getStore()->getEntityLookup();
+	public static function getEntityLookup( ContainerInterface $services = null ): EntityLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.EntityLookup' );
 	}
 
 	public static function getTermBuffer( ContainerInterface $services = null ): TermBuffer {
@@ -355,7 +353,7 @@ final class WikibaseClient {
 	public function getPropertyDataTypeLookup(): PropertyDataTypeLookup {
 		if ( $this->propertyDataTypeLookup === null ) {
 			$infoLookup = self::getStore()->getPropertyInfoLookup();
-			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
+			$retrievingLookup = new EntityRetrievingDataTypeLookup( self::getEntityLookup() );
 			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup(
 				$infoLookup,
 				self::getLogger(),
@@ -546,7 +544,7 @@ final class WikibaseClient {
 			$this->getLanguageLinkBadgeDisplay(),
 			self::getNamespaceChecker(),
 			self::getStore()->getSiteLinkLookup(),
-			self::getStore()->getEntityLookup(),
+			self::getEntityLookup(),
 			$this->siteLookup,
 			MediaWikiServices::getInstance()->getHookContainer(),
 			self::getLogger(),
@@ -560,7 +558,7 @@ final class WikibaseClient {
 			$this->parserOutputDataUpdater = new ClientParserOutputDataUpdater(
 				$this->getOtherProjectsSidebarGeneratorFactory(),
 				self::getStore()->getSiteLinkLookup(),
-				self::getStore()->getEntityLookup(),
+				self::getEntityLookup(),
 				new EntityUsageFactory( self::getEntityIdParser() ),
 				self::getSettings()->getSetting( 'siteGlobalID' ),
 				self::getLogger()
@@ -634,7 +632,7 @@ final class WikibaseClient {
 			self::getSettings(),
 			self::getStore()->getSiteLinkLookup(),
 			$this->siteLookup,
-			self::getStore()->getEntityLookup(),
+			self::getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			MediaWikiServices::getInstance()->getHookContainer(),
 			self::getLogger()
@@ -740,7 +738,7 @@ final class WikibaseClient {
 		if ( $this->restrictedEntityLookup === null ) {
 			$settings = self::getSettings();
 			$disabledEntityTypesEntityLookup = new DisabledEntityTypesEntityLookup(
-				$this->getEntityLookup(),
+				self::getEntityLookup(),
 				$settings->getSetting( 'disabledAccessEntityTypes' )
 			);
 			$this->restrictedEntityLookup = new RestrictedEntityLookup(

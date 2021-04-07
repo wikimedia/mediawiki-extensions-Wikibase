@@ -56,6 +56,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -262,6 +263,10 @@ return [
 		return new DispatchingEntityIdParser(
 			WikibaseClient::getEntityTypeDefinitions( $services )->getEntityIdBuilders()
 		);
+	},
+
+	'WikibaseClient.EntityLookup' => function ( MediaWikiServices $services ): EntityLookup {
+		return WikibaseClient::getStore( $services )->getEntityLookup();
 	},
 
 	'WikibaseClient.EntityNamespaceLookup' => function ( MediaWikiServices $services ): EntityNamespaceLookup {
