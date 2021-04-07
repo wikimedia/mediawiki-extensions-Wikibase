@@ -63,8 +63,7 @@ interface Store {
 	 *        self::LOOKUP_CACHING_RETRIEVE_ONLY to get a lookup which reads from the cache, but doesn't store retrieved entities
 	 *        self::LOOKUP_CACHING_ENABLED to get a caching lookup (default)
 	 *
-	 * @param string $lookupMode One of the EntityRevisionLookup lookup mode constants
-	 * TODO this should perhaps not refer to EntityRevisionLookup
+	 * @param string $lookupMode One of LookupConstants::LATEST_FROM_*
 	 *
 	 * @return EntityLookup
 	 */
