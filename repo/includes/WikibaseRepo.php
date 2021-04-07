@@ -649,11 +649,11 @@ class WikibaseRepo {
 		// TODO enable deprecation warnings ASAP
 
 		if ( $lookupMode !== null ) {
-			/* wfDeprecated(
+			wfDeprecated(
 				__METHOD__ . ' with non-default $cache or $lookupMode',
 				'1.35',
 				'WikibaseRepo'
-			); */
+			);
 			$cache = $servicesOrCache;
 			return self::getStore()->getEntityLookup( $cache, $lookupMode );
 		}
@@ -666,11 +666,11 @@ class WikibaseRepo {
 			$services = $servicesOrCache;
 			return $services->get( 'WikibaseRepo.EntityLookup' );
 		} else {
-			/* wfDeprecated(
+			wfDeprecated(
 				__METHOD__ . ' with non-default $cache or $lookupMode',
 				'1.35',
 				'WikibaseRepo'
-			); */
+			);
 			$cache = $servicesOrCache;
 			$lookupMode = LookupConstants::LATEST_FROM_REPLICA; // we already know it’s null, i.e. default, from earlier
 			return self::getStore()->getEntityLookup( $cache, $lookupMode );
