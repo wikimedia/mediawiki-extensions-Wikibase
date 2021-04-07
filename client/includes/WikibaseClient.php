@@ -5,7 +5,6 @@ namespace Wikibase\Client;
 use DataValues\Deserializers\DataValueDeserializer;
 use ExtensionRegistry;
 use ExternalUserNames;
-use JobQueueGroup;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MWException;
@@ -17,8 +16,6 @@ use SiteLookup;
 use StubObject;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
-use Wikibase\Client\Changes\ChangeRunCoalescer;
-use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
@@ -708,36 +705,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.AffectedPagesFinder' );
 	}
 
-	public function getChangeHandler(): ChangeHandler {
-		$logger = self::getLogger();
-
-		$pageUpdater = new WikiPageUpdater(
-			JobQueueGroup::singleton(),
-			$logger,
-			MediaWikiServices::getInstance()->getStatsdDataFactory()
-		);
-
-		$settings = self::getSettings();
-
-		$pageUpdater->setPurgeCacheBatchSize( $settings->getSetting( 'purgeCacheBatchSize' ) );
-		$pageUpdater->setRecentChangesBatchSize( $settings->getSetting( 'recentChangesBatchSize' ) );
-
-		$changeListTransformer = new ChangeRunCoalescer(
-			self::getStore()->getEntityRevisionLookup(),
-			self::getEntityChangeFactory(),
-			$logger,
-			$settings->getSetting( 'siteGlobalID' )
-		);
-
-		return new ChangeHandler(
-			self::getAffectedPagesFinder(),
-			MediaWikiServices::getInstance()->getTitleFactory(),
-			$pageUpdater,
-			$changeListTransformer,
-			$this->siteLookup,
-			$logger,
-			$settings->getSetting( 'injectRecentChanges' )
-		);
+	public static function getChangeHandler( containerInterface $services = null ): ChangeHandler {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.ChangeHandler' );
 	}
 
 	public static function getRecentChangeFactory( ContainerInterface $services = null ): RecentChangeFactory {

@@ -146,7 +146,7 @@ class ChangeNotificationJob extends Job {
 	 */
 	private function getChangeHandler() {
 		if ( !$this->changeHandler ) {
-			$this->changeHandler = WikibaseClient::getDefaultInstance()->getChangeHandler();
+			$this->changeHandler = WikibaseClient::getChangeHandler();
 		}
 
 		return $this->changeHandler;

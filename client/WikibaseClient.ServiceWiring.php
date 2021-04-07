@@ -17,6 +17,9 @@ use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Wikibase\Client\CachingOtherProjectsSitesProvider;
 use Wikibase\Client\Changes\AffectedPagesFinder;
+use Wikibase\Client\Changes\ChangeHandler;
+use Wikibase\Client\Changes\ChangeRunCoalescer;
+use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\OtherProjectsSitesGenerator;
@@ -102,6 +105,38 @@ return [
 		return new DeserializerFactory(
 			WikibaseClient::getDataValueDeserializer( $services ),
 			WikibaseClient::getEntityIdParser( $services )
+		);
+	},
+
+	'WikibaseClient.ChangeHandler' => function ( MediaWikiServices $services ): ChangeHandler {
+		$logger = WikibaseClient::getLogger( $services );
+
+		$pageUpdater = new WikiPageUpdater(
+			JobQueueGroup::singleton(),
+			$logger,
+			$services->getStatsdDataFactory()
+		);
+
+		$settings = WikibaseClient::getSettings( $services );
+
+		$pageUpdater->setPurgeCacheBatchSize( $settings->getSetting( 'purgeCacheBatchSize' ) );
+		$pageUpdater->setRecentChangesBatchSize( $settings->getSetting( 'recentChangesBatchSize' ) );
+
+		$changeListTransformer = new ChangeRunCoalescer(
+			WikibaseClient::getStore( $services )->getEntityRevisionLookup(),
+			WikibaseClient::getEntityChangeFactory( $services ),
+			$logger,
+			$settings->getSetting( 'siteGlobalID' )
+		);
+
+		return new ChangeHandler(
+			WikibaseClient::getAffectedPagesFinder( $services ),
+			$services->getTitleFactory(),
+			$pageUpdater,
+			$changeListTransformer,
+			$services->getSiteLookup(),
+			$logger,
+			$settings->getSetting( 'injectRecentChanges' )
 		);
 	},
 

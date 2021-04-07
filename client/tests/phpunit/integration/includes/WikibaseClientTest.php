@@ -8,7 +8,6 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
 use ReflectionClass;
 use ReflectionMethod;
-use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
@@ -162,11 +161,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame(
 			WikibaseClient::getDefaultInstance(),
 			WikibaseClient::getDefaultInstance() );
-	}
-
-	public function testGetChangeHandler() {
-		$handler = $this->getWikibaseClient()->getChangeHandler();
-		$this->assertInstanceOf( ChangeHandler::class, $handler );
 	}
 
 	public function testGetPropertyParserFunctionRunner() {
