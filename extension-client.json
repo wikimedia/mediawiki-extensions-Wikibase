@@ -30,6 +30,7 @@
 		"pageterms": {
 			"class": "\\Wikibase\\Client\\Api\\PageTerms",
 			"services": [
+				"WikibaseClient.AliasTermBuffer",
 				"WikibaseClient.EntityIdLookup",
 				"WikibaseClient.TermBuffer"
 			]

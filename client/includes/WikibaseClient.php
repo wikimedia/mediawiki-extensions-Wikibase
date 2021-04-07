@@ -329,14 +329,14 @@ final class WikibaseClient {
 		return self::getStore()->getEntityLookup();
 	}
 
-	/**
-	 * @phan-suppress-next-line PhanTypeMismatchDeclaredReturn
-	 * @return TermBuffer|AliasTermBuffer
-	 * TODO: split AliasTermBuffer to its own service (T279073)
-	 */
 	public static function getTermBuffer( ContainerInterface $services = null ): TermBuffer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.TermBuffer' );
+	}
+
+	public static function getAliasTermBuffer( ContainerInterface $services = null ): AliasTermBuffer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.AliasTermBuffer' );
 	}
 
 	public static function getTermLookup( ContainerInterface $services = null ): TermLookup {
