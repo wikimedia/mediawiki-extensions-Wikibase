@@ -295,7 +295,7 @@ class WikibaseRepo {
 		$urlSchemes = self::getSettings()->getSetting( 'urlSchemes' );
 
 		return new ValidatorBuilders(
-			$this->getEntityLookup(),
+			self::getEntityLookup(),
 			self::getEntityIdParser(),
 			$urlSchemes,
 			self::getItemVocabularyBaseUri(),
@@ -342,7 +342,7 @@ class WikibaseRepo {
 			self::getSettings()->getSetting( 'tabularDataStorageBaseUrl' ),
 			self::getTermFallbackCache(),
 			self::getSettings()->getSetting( 'sharedCacheDuration' ),
-			$this->getEntityLookup(),
+			self::getEntityLookup(),
 			$this->getEntityRevisionLookup(),
 			self::getSettings()->getSetting( 'entitySchemaNamespace' ),
 			self::getEntityExistenceChecker(),
@@ -620,7 +620,7 @@ class WikibaseRepo {
 
 	private function newPropertyDataTypeLookupForLocalProperties(): PropertyDataTypeLookup {
 		$infoLookup = self::getStore()->getPropertyInfoLookup();
-		$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
+		$retrievingLookup = new EntityRetrievingDataTypeLookup( self::getEntityLookup() );
 		return new PropertyInfoDataTypeLookup(
 			$infoLookup,
 			self::getLogger(),
@@ -634,27 +634,55 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @see Store::getEntityLookup
+	 * Get a caching entity lookup that reads from a replica DB.
 	 *
-	 * @param string $cache One of Store::LOOKUP_CACHING_*
-	 *        Store::LOOKUP_CACHING_DISABLED to get an uncached direct lookup
-	 *        Store::LOOKUP_CACHING_RETRIEVE_ONLY to get a lookup which reads from the cache, but doesn't store retrieved entities
-	 *        Store::LOOKUP_CACHING_ENABLED to get a caching lookup (default)
-	 *
-	 * @param string $lookupMode One of LookupConstants::LATEST_FROM_*
-	 *
-	 * @return EntityLookup
+	 * If you need different caching or lookup modes, use {@link Store::getEntityLookup()} instead.
 	 */
-	public function getEntityLookup( $cache = Store::LOOKUP_CACHING_ENABLED, $lookupMode = LookupConstants::LATEST_FROM_REPLICA ) {
-		return self::getStore()->getEntityLookup( $cache, $lookupMode );
+	public static function getEntityLookup( $servicesOrCache = null, $lookupMode = null ): EntityLookup {
+		// For backwards compatibility, we temporarily support several calling conventions:
+		// getEntityLookup() – default $services, $cache, $lookupMode
+		// getEntityLookup( $services ) – default $cache, $lookupMode
+		// getEntityLookup( $cache, $lookupMode ) – default $services (deprecated)
+		// TODO remove all this and change the method syntax to the standard form
+		// public static function getEntityLookup( ContainerInterface $services = null ): EntityLookup
+
+		// TODO enable deprecation warnings ASAP
+
+		if ( $lookupMode !== null ) {
+			/* wfDeprecated(
+				__METHOD__ . ' with non-default $cache or $lookupMode',
+				'1.35',
+				'WikibaseRepo'
+			); */
+			$cache = $servicesOrCache;
+			return self::getStore()->getEntityLookup( $cache, $lookupMode );
+		}
+
+		if ( $servicesOrCache === null ) {
+			$servicesOrCache = MediaWikiServices::getInstance();
+		}
+
+		if ( $servicesOrCache instanceof ContainerInterface ) {
+			$services = $servicesOrCache;
+			return $services->get( 'WikibaseRepo.EntityLookup' );
+		} else {
+			/* wfDeprecated(
+				__METHOD__ . ' with non-default $cache or $lookupMode',
+				'1.35',
+				'WikibaseRepo'
+			); */
+			$cache = $servicesOrCache;
+			$lookupMode = LookupConstants::LATEST_FROM_REPLICA; // we already know it’s null, i.e. default, from earlier
+			return self::getStore()->getEntityLookup( $cache, $lookupMode );
+		}
 	}
 
 	public function getPropertyLookup( $cacheMode = Store::LOOKUP_CACHING_ENABLED ): PropertyLookup {
-		return new LegacyAdapterPropertyLookup( $this->getEntityLookup( $cacheMode ) );
+		return new LegacyAdapterPropertyLookup( self::getStore()->getEntityLookup( $cacheMode ) );
 	}
 
 	public function getItemLookup( $cacheMode = Store::LOOKUP_CACHING_ENABLED ): ItemLookup {
-		return new LegacyAdapterItemLookup( $this->getEntityLookup( $cacheMode ) );
+		return new LegacyAdapterItemLookup( self::getStore()->getEntityLookup( $cacheMode ) );
 	}
 
 	/**

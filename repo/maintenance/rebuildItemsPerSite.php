@@ -63,11 +63,10 @@ class RebuildItemsPerSite extends Maintenance {
 		);
 
 		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$mwServices = MediaWikiServices::getInstance();
-		// Use an uncached EntityLookup here to avoid memory leaks
-		$entityLookup = $wikibaseRepo->getEntityLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY );
 		$store = WikibaseRepo::getStore( $mwServices );
+		// Use an uncached EntityLookup here to avoid memory leaks
+		$entityLookup = $store->getEntityLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY );
 		$builder = new ItemsPerSiteBuilder(
 			$siteLinkTable,
 			$entityLookup,

@@ -14,6 +14,7 @@ use DataValues\UnknownValue;
 use LogicException;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
+use Psr\Container\ContainerInterface;
 use ReflectionClass;
 use ReflectionMethod;
 use RequestContext;
@@ -40,6 +41,7 @@ use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\WikibaseSettings;
@@ -59,6 +61,7 @@ use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\SnakFactory;
+use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\ValidatorBuilders;
 use Wikibase\Repo\Validators\CompositeValidator;
@@ -265,9 +268,56 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( PropertyDataTypeLookup::class, $returnValue );
 	}
 
-	public function testGetEntityLookupReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getEntityLookup();
-		$this->assertInstanceOf( EntityLookup::class, $returnValue );
+	public function testGetEntityLookup_default() {
+		$entityLookup = $this->createMock( EntityLookup::class );
+		$this->setService( 'WikibaseRepo.EntityLookup', $entityLookup );
+
+		$this->assertSame( $entityLookup, WikibaseRepo::getEntityLookup() );
+	}
+
+	public function testGetEntityLookup_withServices() {
+		$entityLookup = $this->createMock( EntityLookup::class );
+		$services = $this->createMock( ContainerInterface::class );
+		$services->expects( $this->once() )
+			->method( 'get' )
+			->with( 'WikibaseRepo.EntityLookup' )
+			->willReturn( $entityLookup );
+
+		$this->assertSame( $entityLookup, WikibaseRepo::getEntityLookup( $services ) );
+	}
+
+	public function testGetEntityLookup_withCache() {
+		$entityLookup = $this->createMock( EntityLookup::class );
+		$store = $this->createMock( Store::class );
+		$store->expects( $this->once() )
+			->method( 'getEntityLookup' )
+			->with( Store::LOOKUP_CACHING_DISABLED, LookupConstants::LATEST_FROM_REPLICA )
+			->willReturn( $entityLookup );
+		$this->setService( 'WikibaseRepo.Store', $store );
+
+		$this->hideDeprecated(
+			'Wikibase\Repo\WikibaseRepo::getEntityLookup with non-default $cache or $lookupMode'
+		);
+		$this->assertSame( $entityLookup,
+			$this->getWikibaseRepo()->getEntityLookup( Store::LOOKUP_CACHING_DISABLED ) );
+	}
+
+	public function testGetEntityLookup_withCacheAndLookupMode() {
+		$entityLookup = $this->createMock( EntityLookup::class );
+		$store = $this->createMock( Store::class );
+		$store->expects( $this->once() )
+			->method( 'getEntityLookup' )
+			->with( Store::LOOKUP_CACHING_DISABLED, LookupConstants::LATEST_FROM_MASTER )
+			->willReturn( $entityLookup );
+		$this->setService( 'WikibaseRepo.Store', $store );
+
+		$this->hideDeprecated(
+			'Wikibase\Repo\WikibaseRepo::getEntityLookup with non-default $cache or $lookupMode'
+		);
+		$this->assertSame( $entityLookup, $this->getWikibaseRepo()->getEntityLookup(
+			Store::LOOKUP_CACHING_DISABLED,
+			LookupConstants::LATEST_FROM_MASTER
+		) );
 	}
 
 	public function testGetSnakFactoryReturnType() {
