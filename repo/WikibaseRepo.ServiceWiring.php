@@ -37,11 +37,13 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
@@ -601,6 +603,13 @@ return [
 
 		return new ItemTermStoreWriterAdapter(
 			WikibaseRepo::getTermStoreWriterFactory( $services )->newItemTermStoreWriter()
+		);
+	},
+
+	'WikibaseRepo.ItemUrlParser' => function ( MediaWikiServices $services ): SuffixEntityIdParser {
+		return new SuffixEntityIdParser(
+			WikibaseRepo::getItemVocabularyBaseUri( $services ),
+			new ItemIdParser()
 		);
 	},
 

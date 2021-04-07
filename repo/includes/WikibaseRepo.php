@@ -37,7 +37,6 @@ use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
@@ -340,7 +339,7 @@ class WikibaseRepo {
 		return new WikibaseValueFormatterBuilders(
 			new FormatterLabelDescriptionLookupFactory( self::getTermLookup() ),
 			$this->getLanguageNameLookup(),
-			$this->getItemUrlParser(),
+			self::getItemUrlParser(),
 			self::getSettings()->getSetting( 'geoShapeStorageBaseUrl' ),
 			self::getSettings()->getSetting( 'tabularDataStorageBaseUrl' ),
 			self::getTermFallbackCache(),
@@ -834,11 +833,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.PrefetchingTermLookup' );
 	}
 
-	public function getItemUrlParser(): SuffixEntityIdParser {
-		return new SuffixEntityIdParser(
-			self::getItemVocabularyBaseUri(),
-			new ItemIdParser()
-		);
+	public static function getItemUrlParser( ContainerInterface $services = null ): SuffixEntityIdParser {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ItemUrlParser' );
 	}
 
 	public static function getItemVocabularyBaseUri( ContainerInterface $services = null ): string {
@@ -1485,7 +1482,7 @@ class WikibaseRepo {
 			self::getCompactEntitySerializer(),
 			new EntityReferenceExtractorDelegator(
 				self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_REFERENCE_EXTRACTOR_CALLBACK ),
-				new StatementEntityReferenceExtractor( $this->getItemUrlParser() )
+				new StatementEntityReferenceExtractor( self::getItemUrlParser() )
 			),
 			self::getKartographerEmbeddingHandler(),
 			$services->getStatsdDataFactory(),
