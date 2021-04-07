@@ -47,8 +47,6 @@ use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\ItemLookup;
-use Wikibase\DataModel\Services\Lookup\LegacyAdapterItemLookup;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyLookup;
@@ -679,10 +677,6 @@ class WikibaseRepo {
 
 	public function getPropertyLookup( $cacheMode = Store::LOOKUP_CACHING_ENABLED ): PropertyLookup {
 		return new LegacyAdapterPropertyLookup( self::getStore()->getEntityLookup( $cacheMode ) );
-	}
-
-	public function getItemLookup( $cacheMode = Store::LOOKUP_CACHING_ENABLED ): ItemLookup {
-		return new LegacyAdapterItemLookup( self::getStore()->getEntityLookup( $cacheMode ) );
 	}
 
 	/**
