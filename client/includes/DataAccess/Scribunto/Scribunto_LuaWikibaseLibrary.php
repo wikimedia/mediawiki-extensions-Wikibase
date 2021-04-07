@@ -176,7 +176,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	private function getPropertyIdResolver() {
 		if ( $this->propertyIdResolver === null ) {
-			$entityLookup = WikibaseClient::getStore()->getEntityLookup();
+			$entityLookup = WikibaseClient::getEntityLookup();
 			$propertyLabelResolver = WikibaseClient::getPropertyLabelResolver();
 
 			$this->propertyIdResolver = new PropertyIdResolver(
@@ -346,7 +346,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$termLookup,
 			$wikibaseClient->getTermsLanguages(),
 			new EntityRetrievingClosestReferencedEntityIdLookup(
-				$store->getEntityLookup(),
+				WikibaseClient::getEntityLookup( $mediaWikiServices ),
 				$store->getEntityPrefetcher(),
 				$settings->getSetting( 'referencedEntityIdMaxDepth' ),
 				$settings->getSetting( 'referencedEntityIdMaxReferencedEntityVisits' )
