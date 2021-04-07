@@ -21,6 +21,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class ChangeNotifierTest extends ServiceWiringTestCase {
 
 	public function testConstructionWithoutChangesTable(): void {
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getHookContainer' );
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
 				'useChangesTable' => false,
@@ -35,6 +37,8 @@ class ChangeNotifierTest extends ServiceWiringTestCase {
 	}
 
 	public function testConstructionWithChangesTable(): void {
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getHookContainer' );
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
 				'useChangesTable' => true,

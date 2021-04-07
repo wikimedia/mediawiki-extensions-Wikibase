@@ -183,7 +183,10 @@ return [
 
 	'WikibaseRepo.ChangeNotifier' => function ( MediaWikiServices $services ): ChangeNotifier {
 		$transmitters = [
-			new HookChangeTransmitter( 'WikibaseChangeNotification' ),
+			new HookChangeTransmitter(
+				$services->getHookContainer(),
+				'WikibaseChangeNotification'
+			),
 		];
 
 		$settings = WikibaseRepo::getSettings( $services );

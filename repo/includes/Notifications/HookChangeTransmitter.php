@@ -2,29 +2,27 @@
 
 namespace Wikibase\Repo\Notifications;
 
-use Hooks;
+use MediaWiki\HookContainer\HookContainer;
 use Wikibase\Lib\Changes\Change;
-use Wikimedia\Assert\Assert;
 
 /**
- * Change notification channel using MediaWiki's global scope Hook facility.
+ * Change notification channel using a MediaWiki hook container.
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class HookChangeTransmitter implements ChangeTransmitter {
 
+	/** @var HookContainer */
+	private $hookContainer;
+
 	/**
 	 * @var string
 	 */
 	private $hookName;
 
-	/**
-	 * @param string $hookName
-	 */
-	public function __construct( $hookName ) {
-		Assert::parameterType( 'string', $hookName, '$hookName' );
-
+	public function __construct( HookContainer $hookContainer, string $hookName ) {
+		$this->hookContainer = $hookContainer;
 		$this->hookName = $hookName;
 	}
 
@@ -34,7 +32,7 @@ class HookChangeTransmitter implements ChangeTransmitter {
 	 * @param Change $change
 	 */
 	public function transmitChange( Change $change ) {
-		Hooks::run( $this->hookName, [ $change ] );
+		$this->hookContainer->run( $this->hookName, [ $change ] );
 	}
 
 }
