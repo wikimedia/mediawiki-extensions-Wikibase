@@ -129,6 +129,7 @@ use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
+use Wikibase\Repo\EntityTypeDefinitionsFedPropsOverrider;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -598,6 +599,11 @@ return [
 		$entityTypes = array_merge_recursive( $baseEntityTypes, $repoEntityTypes );
 
 		$services->getHookContainer()->run( 'WikibaseRepoEntityTypes', [ &$entityTypes ] );
+
+		$settings = WikibaseRepo::getSettings( $services );
+		$overrider = EntityTypeDefinitionsFedPropsOverrider::factory( $settings->getSetting( 'federatedPropertiesEnabled' ) );
+
+		$entityTypes = $overrider->override( $entityTypes );
 
 		return new EntityTypeDefinitions( $entityTypes );
 	},
