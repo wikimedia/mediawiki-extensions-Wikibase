@@ -25,7 +25,6 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
-use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
@@ -107,11 +106,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 
 		$second = WikibaseClient::getDefaultSnakFormatterBuilders();
 		$this->assertSame( $first, $second );
-	}
-
-	public function testNewTermSearchInteractor() {
-		$interactor = $this->getWikibaseClient()->newTermSearchInteractor( 'en' );
-		$this->assertInstanceOf( TermSearchInteractor::class, $interactor );
 	}
 
 	public function testGetPropertyDataTypeLookupReturnType() {

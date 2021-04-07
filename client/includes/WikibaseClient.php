@@ -67,7 +67,6 @@ use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\Reference\WellKnownReferenceProperties;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
-use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
@@ -354,14 +353,6 @@ final class WikibaseClient {
 	public static function getPrefetchingTermLookup( ContainerInterface $services = null ): PrefetchingTermLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.PrefetchingTermLookup' );
-	}
-
-	/**
-	 * XXX: This is not used by client itself, but is used by ArticlePlaceholder!
-	 */
-	public function newTermSearchInteractor( string $displayLanguageCode ): TermSearchInteractor {
-		return self::getWikibaseServices()->getTermSearchInteractorFactory()
-			->newInteractor( $displayLanguageCode );
 	}
 
 	public function getPropertyDataTypeLookup(): PropertyDataTypeLookup {
