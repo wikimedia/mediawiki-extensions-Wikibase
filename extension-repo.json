@@ -821,8 +821,7 @@
 			"\\Wikibase\\Repo\\RepoHooks::registerUnitTests",
 			"LibHooks",
 			"ViewHooks"
-		],
-		"WikibaseRepoEntityTypes": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesWikibaseRepoEntityTypesHookHandler::onWikibaseRepoEntityTypes"
+		]
 	},
 	"RateLimits": {
 		"wikibase-idgenerator": {
