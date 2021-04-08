@@ -131,7 +131,6 @@ use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
-use Wikibase\Repo\Store\LoggingIdGenerator;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
@@ -581,13 +580,6 @@ return [
 			$idGenerator = new RateLimitingIdGenerator(
 				$idGenerator,
 				RequestContext::getMain()
-			);
-		}
-
-		if ( $settings->getSetting( 'idGeneratorLogging' ) ) {
-			$idGenerator = new LoggingIdGenerator(
-				$idGenerator,
-				LoggerFactory::getInstance( 'Wikibase.IdGenerator' )
 			);
 		}
 
