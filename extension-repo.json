@@ -108,6 +108,7 @@
 				"WikibaseRepo.DataTypeFactory",
 				"WikibaseRepo.DataTypeValidatorFactory",
 				"WikibaseRepo.ExceptionLocalizer",
+				"WikibaseRepo.ValidatorErrorLocalizer",
 				"WikibaseRepo.ValueParserFactory"
 			]
 		},

@@ -281,7 +281,7 @@ class ItemContentTest extends EntityContentTestCase {
 			new NullEntityTermStoreWriter(),
 			$wikibaseRepo->getEntityContentDataCodec(),
 			WikibaseRepo::getEntityConstraintProvider(),
-			$wikibaseRepo->getValidatorErrorLocalizer(),
+			WikibaseRepo::getValidatorErrorLocalizer(),
 			WikibaseRepo::getEntityIdParser(),
 			WikibaseRepo::getStore()->newSiteLinkStore(),
 			WikibaseRepo::getEntityIdLookup(),

@@ -152,6 +152,7 @@ use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
 use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\TermValidatorFactory;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ObjectFactory;
@@ -1053,6 +1054,11 @@ return [
 
 		StubObject::unstub( $wgLang );
 		return $wgLang;
+	},
+
+	'WikibaseRepo.ValidatorErrorLocalizer' => function ( MediaWikiServices $services ): ValidatorErrorLocalizer {
+		$formatter = WikibaseRepo::getMessageParameterFormatter( $services );
+		return new ValidatorErrorLocalizer( $formatter );
 	},
 
 	'WikibaseRepo.ValueFormatterFactory' => function ( MediaWikiServices $services ): OutputFormatValueFormatterFactory {
