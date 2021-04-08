@@ -64,6 +64,7 @@ use Wikibase\Lib\Formatters\EntityIdLinkFormatter;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
@@ -675,6 +676,11 @@ return [
 			WikibaseRepo::getTermLookup( $services ),
 			WikibaseRepo::getTermBuffer( $services )
 		);
+	},
+
+	'WikibaseRepo.LanguageNameLookup' => function ( MediaWikiServices $services ): LanguageNameLookup {
+		$userLanguage = WikibaseRepo::getUserLanguage( $services );
+		return new LanguageNameLookup( $userLanguage->getCode() );
 	},
 
 	'WikibaseRepo.LinkTargetEntityIdLookup' => function ( MediaWikiServices $services ): LinkTargetEntityIdLookup {

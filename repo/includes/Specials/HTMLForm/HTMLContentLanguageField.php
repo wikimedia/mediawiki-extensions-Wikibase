@@ -42,11 +42,10 @@ class HTMLContentLanguageField extends HTMLComboboxField {
 			);
 		}
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$contentLanguages = WikibaseRepo::getTermsLanguages();
 		$params['options'] = $this->constructOptions(
 			$contentLanguages->getLanguages(),
-			$wikibaseRepo->getLanguageNameLookup()
+			WikibaseRepo::getLanguageNameLookup()
 		);
 
 		parent::__construct( array_merge( $defaultParameters, $params ) );
