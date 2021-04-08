@@ -722,9 +722,9 @@ final class WikibaseClient {
 	/**
 	 * Get a ContentLanguages object holding the languages available for labels, descriptions and aliases.
 	 */
-	public function getTermsLanguages(): ContentLanguages {
-		return self::getWikibaseContentLanguages()
-			->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
+	public static function getTermsLanguages( ContainerInterface $services = null ): ContentLanguages {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.TermsLanguages' );
 	}
 
 	public function getRestrictedEntityLookup(): RestrictedEntityLookup {

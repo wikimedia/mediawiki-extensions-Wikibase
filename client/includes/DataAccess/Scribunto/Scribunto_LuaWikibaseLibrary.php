@@ -253,7 +253,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getPropertyDataTypeLookup(),
 			$this->getLanguageFallbackChain(),
 			$this->getLanguage(),
-			$wikibaseClient->getTermsLanguages(),
+			WikibaseClient::getTermsLanguages(),
 			$settings->getSetting( 'fineGrainedLuaTracking' ),
 			WikibaseClient::getLogger()
 		);
@@ -322,9 +322,9 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	private function newLanguageIndependentLuaBindings() {
 		$mediaWikiServices = MediaWikiServices::getInstance();
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = WikibaseClient::getSettings( $mediaWikiServices );
 		$store = WikibaseClient::getStore( $mediaWikiServices );
+		$termsLanguages = WikibaseClient::getTermsLanguages( $mediaWikiServices );
 
 		$termLookup = new CachingFallbackBasedTermLookup(
 			WikibaseClient::getTermFallbackCache( $mediaWikiServices ),
@@ -334,7 +334,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 				WikibaseClient::getTermLookup( $mediaWikiServices )
 			),
 			$mediaWikiServices->getLanguageFactory(),
-			$wikibaseClient->getTermsLanguages()
+			$termsLanguages
 		);
 
 		return new WikibaseLanguageIndependentLuaBindings(
@@ -344,7 +344,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$this->getUsageAccumulator(),
 			$this->getEntityIdParser(),
 			$termLookup,
-			$wikibaseClient->getTermsLanguages(),
+			$termsLanguages,
 			new EntityRetrievingClosestReferencedEntityIdLookup(
 				WikibaseClient::getEntityLookup( $mediaWikiServices ),
 				$store->getEntityPrefetcher(),

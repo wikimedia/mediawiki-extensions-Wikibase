@@ -63,6 +63,7 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\ItemChange;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -659,6 +660,11 @@ return [
 
 	'WikibaseClient.TermLookup' => function ( MediaWikiServices $services ): TermLookup {
 		return WikibaseClient::getPrefetchingTermLookup( $services );
+	},
+
+	'WikibaseClient.TermsLanguages' => function ( MediaWikiServices $services ): ContentLanguages {
+		return WikibaseClient::getWikibaseContentLanguages( $services )
+			->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
 	},
 
 	'WikibaseClient.ValueFormatterFactory' => function ( MediaWikiServices $services ): OutputFormatValueFormatterFactory {
