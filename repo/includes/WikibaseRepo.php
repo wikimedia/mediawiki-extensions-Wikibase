@@ -343,7 +343,7 @@ class WikibaseRepo {
 			self::getTermFallbackCache(),
 			self::getSettings()->getSetting( 'sharedCacheDuration' ),
 			self::getEntityLookup(),
-			$this->getEntityRevisionLookup(),
+			self::getEntityRevisionLookup(),
 			self::getSettings()->getSetting( 'entitySchemaNamespace' ),
 			self::getEntityExistenceChecker(),
 			self::getEntityTitleTextLookup(),
@@ -526,17 +526,34 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @see Store::getEntityRevisionLookup
+	 * Get a caching entity revision lookup.
 	 *
-	 * @param string $cache One of Store::LOOKUP_CACHING_*
-	 *        Store::LOOKUP_CACHING_DISABLED to get an uncached direct lookup
-	 *        Store::LOOKUP_CACHING_RETRIEVE_ONLY to get a lookup which reads from the cache, but doesn't store retrieved entities
-	 *        Store::LOOKUP_CACHING_ENABLED to get a caching lookup (default)
-	 *
-	 * @return EntityRevisionLookup
+	 * If you need different caching behavior, use {@link Store::getEntityRevisionLookup()} instead.
 	 */
-	public function getEntityRevisionLookup( $cache = Store::LOOKUP_CACHING_ENABLED ) {
-		return self::getStore()->getEntityRevisionLookup( $cache );
+	public static function getEntityRevisionLookup( $servicesOrCache = null ): EntityRevisionLookup {
+		// For backwards compatibility, we temporarily support several calling conventions:
+		// getEntityRevisionLookup() – default $services, $cache
+		// getEntityRevisionLookup( $services ) – default $cache
+		// getEntityRevisionLookup( $cache ) – default $services (deprecated)
+		// TODO remove all this and change the method syntax to the standard form
+		// public static function getEntityRevisionLookup( ContainerInterface $services = null ): EntityRevisionLookup
+
+		if ( $servicesOrCache === null ) {
+			$servicesOrCache = MediaWikiServices::getInstance();
+		}
+
+		if ( $servicesOrCache instanceof ContainerInterface ) {
+			$services = $servicesOrCache;
+			return $services->get( 'WikibaseRepo.EntityRevisionLookup' );
+		} else {
+			/* wfDeprecated(
+				__METHOD__ . ' with non-default $cache',
+				'1.37',
+				'WikibaseRepo'
+			); */
+			$cache = $servicesOrCache;
+			return self::getStore()->getEntityRevisionLookup( $cache );
+		}
 	}
 
 	/**
@@ -553,14 +570,16 @@ class WikibaseRepo {
 	 * @return ItemRedirectCreationInteractor
 	 */
 	public function newItemRedirectCreationInteractor( User $user, IContextSource $context ) {
+		$store = self::getStore();
+
 		return new ItemRedirectCreationInteractor(
-			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
+			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			self::getEntityStore(),
 			self::getEntityPermissionChecker(),
 			$this->getSummaryFormatter(),
 			$user,
 			$this->newEditFilterHookRunner( $context ),
-			self::getStore()->getEntityRedirectLookup(),
+			$store->getEntityRedirectLookup(),
 			self::getEntityTitleStoreLookup()
 		);
 	}
@@ -1349,6 +1368,7 @@ class WikibaseRepo {
 	 */
 	public function getApiHelperFactory( IContextSource $context ) {
 		$services = MediaWikiServices::getInstance();
+		$store = self::getStore( $services );
 
 		return new ApiHelperFactory(
 			self::getEntityTitleStoreLookup(),
@@ -1356,7 +1376,7 @@ class WikibaseRepo {
 			$this->getPropertyDataTypeLookup(),
 			$this->getSiteLookup(),
 			$this->getSummaryFormatter(),
-			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
+			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->newEditEntityFactory( $context ),
 			self::getBaseDataModelSerializerFactory( $services ),
 			self::getAllTypesEntitySerializer( $services ),
@@ -1364,7 +1384,7 @@ class WikibaseRepo {
 			$services->getPermissionManager(),
 			$services->getRevisionLookup(),
 			$services->getTitleFactory(),
-			self::getStore( $services )->getEntityByLinkedTitleLookup(),
+			$store->getEntityByLinkedTitleLookup(),
 			self::getEntityFactory(),
 			self::getEntityStore()
 		);
@@ -1378,7 +1398,8 @@ class WikibaseRepo {
 	public function newEditEntityFactory( IContextSource $context = null ) {
 		return new MediawikiEditEntityFactory(
 			self::getEntityTitleStoreLookup(),
-			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
+			self::getStore()
+				->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			self::getEntityStore(),
 			self::getEntityPermissionChecker(),
 			self::getEntityDiffer(),
@@ -1399,7 +1420,8 @@ class WikibaseRepo {
 
 		return new ItemMergeInteractor(
 			$this->getChangeOpFactoryProvider()->getMergeFactory(),
-			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
+			self::getStore()
+				->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			self::getEntityStore(),
 			self::getEntityPermissionChecker(),
 			$this->getSummaryFormatter(),

@@ -9,6 +9,7 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
@@ -64,6 +65,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		EntityContentFactory $entityContentFactory,
 		EntityIdParser $entityIdParser,
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
+		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleStoreLookup $entityTitleLookup,
 		LoggerInterface $logger,
 		RdfVocabulary $rdfVocabulary,
@@ -77,7 +79,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$entityDataFormatProvider = $wikibaseRepo->getEntityDataFormatProvider();
 
-		$entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup();
 		// TODO move EntityRedirectLookup to service container and inject it directly
 		$entityRedirectLookup = $store->getEntityRedirectLookup();
 

@@ -131,6 +131,7 @@ class GetEntities extends ApiBase {
 		string $moduleName,
 		IBufferingStatsdDataFactory $stats,
 		EntityIdParser $entityIdParser,
+		EntityRevisionLookup $entityRevisionLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		SettingsArray $repoSettings,
 		Store $store,
@@ -155,7 +156,7 @@ class GetEntities extends ApiBase {
 			$repoSettings->getSetting( 'siteLinkGroups' ),
 			$apiHelperFactory->getErrorReporter( $apiMain ),
 			$apiHelperFactory->getResultBuilder( $apiMain ),
-			$wikibaseRepo->getEntityRevisionLookup(),
+			$entityRevisionLookup,
 			$entityIdParser,
 			$stats,
 			$wikibaseRepo->inFederatedPropertyMode()

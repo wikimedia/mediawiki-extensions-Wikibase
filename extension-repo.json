@@ -32,6 +32,7 @@
 				"WikibaseRepo.DataTypeDefinitions",
 				"WikibaseRepo.EntityChangeOpProvider",
 				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.Store",
 				"WikibaseRepo.TermsLanguages"
 			]
 		},
@@ -76,6 +77,7 @@
 			"services": [
 				"StatsdDataFactory",
 				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.EntityRevisionLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.Store",
@@ -369,6 +371,7 @@
 				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.EntityRdfBuilderFactory",
+				"WikibaseRepo.EntityRevisionLookup",
 				"WikibaseRepo.EntityTitleStoreLookup",
 				"WikibaseRepo.Logger",
 				"WikibaseRepo.RdfVocabulary",
@@ -723,6 +726,7 @@
 				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityFactory",
 				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.EntityRevisionLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.Logger",
 				"WikibaseRepo.Settings",

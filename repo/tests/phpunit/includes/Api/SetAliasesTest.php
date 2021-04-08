@@ -522,7 +522,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 	}
 
 	private function getCurrentItemRevision( ItemId $id ) {
-		$lookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup();
+		$lookup = WikibaseRepo::getEntityRevisionLookup();
 
 		return $lookup->getEntityRevision( $id );
 	}

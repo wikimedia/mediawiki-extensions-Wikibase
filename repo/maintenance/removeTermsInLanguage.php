@@ -35,13 +35,11 @@ class RemoveTermsInLanguage extends Maintenance {
 			$this->fatalError( "You need to have Wikibase enabled in order to use this maintenance script!\n" );
 		}
 
-		$repo = WikibaseRepo::getDefaultInstance();
-
 		$idSerializations = $this->getOption( 'entity-id' );
 		$language = $this->getOption( 'language' );
 
 		$entityIdParser = WikibaseRepo::getEntityIdParser();
-		$entityRevisionLookup = $repo->getEntityRevisionLookup();
+		$entityRevisionLookup = WikibaseRepo::getEntityRevisionLookup();
 		$entityStore = WikibaseRepo::getEntityStore();
 
 		foreach ( $idSerializations as $idSerialization ) {

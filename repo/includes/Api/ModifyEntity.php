@@ -124,7 +124,7 @@ abstract class ModifyEntity extends ApiBase {
 		) );
 
 		// TODO: use the EntitySavingHelper to load the entity, instead of an EntityRevisionLookup.
-		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED );
+		$this->revisionLookup = WikibaseRepo::getStore()->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED );
 		$this->permissionChecker = WikibaseRepo::getEntityPermissionChecker();
 		$this->titleLookup = WikibaseRepo::getEntityTitleStoreLookup();
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );

@@ -110,7 +110,7 @@ class LinkTitles extends ApiBase {
 			$siteLinkTargetProvider,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
 			$repoSettings->getSetting( 'siteLinkGroups' ),
-			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
+			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getResultBuilder( $module );
 			},
