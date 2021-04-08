@@ -72,13 +72,14 @@ class SpecialMergeItems extends SpecialWikibasePage {
 
 	public static function factory(
 		EntityIdParser $entityIdParser,
-		EntityTitleLookup $entityTitleLookup
+		EntityTitleLookup $entityTitleLookup,
+		ExceptionLocalizer $exceptionLocalizer
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new self(
 			$entityIdParser,
-			$wikibaseRepo->getExceptionLocalizer(),
+			$exceptionLocalizer,
 			new TokenCheckInteractor( RequestContext::getMain()->getUser() ),
 			$wikibaseRepo->newItemMergeInteractor( RequestContext::getMain() ),
 			$entityTitleLookup

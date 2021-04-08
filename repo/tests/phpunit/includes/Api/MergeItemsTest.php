@@ -184,7 +184,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		);
 		$errorReporter = new ApiErrorReporter(
 			$main,
-			$wikibaseRepo->getExceptionLocalizer(),
+			WikibaseRepo::getExceptionLocalizer(),
 			Language::factory( 'en' )
 		);
 		return new MergeItems(

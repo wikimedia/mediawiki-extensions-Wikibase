@@ -105,6 +105,7 @@
 				"StatsdDataFactory",
 				"WikibaseRepo.DataTypeFactory",
 				"WikibaseRepo.DataTypeValidatorFactory",
+				"WikibaseRepo.ExceptionLocalizer",
 				"WikibaseRepo.ValueParserFactory"
 			]
 		},
@@ -395,14 +396,16 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialMergeItems::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.EntityTitleLookup"
+				"WikibaseRepo.EntityTitleLookup",
+				"WikibaseRepo.ExceptionLocalizer"
 			]
 		},
 		"RedirectEntity": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity::factory",
 			"services": [
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.ExceptionLocalizer"
 			]
 		},
 		"AvailableBadges": {

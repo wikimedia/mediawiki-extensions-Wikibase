@@ -138,14 +138,7 @@ use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
-use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
-use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
-use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
-use Wikibase\Repo\Localizer\DispatchingExceptionLocalizer;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
-use Wikibase\Repo\Localizer\GenericExceptionLocalizer;
-use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
-use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
@@ -201,11 +194,6 @@ class WikibaseRepo {
 	 * @var SummaryFormatter|null
 	 */
 	private $summaryFormatter = null;
-
-	/**
-	 * @var ExceptionLocalizer|null
-	 */
-	private $exceptionLocalizer = null;
 
 	/**
 	 * @var CachingCommonsMediaFileNameLookup|null
@@ -883,34 +871,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.RdfVocabulary' );
 	}
 
-	/**
-	 * @return ExceptionLocalizer
-	 */
-	public function getExceptionLocalizer() {
-		if ( $this->exceptionLocalizer === null ) {
-			$formatter = self::getMessageParameterFormatter();
-			$localizers = $this->getExceptionLocalizers( $formatter );
-
-			$this->exceptionLocalizer = new DispatchingExceptionLocalizer( $localizers );
-		}
-
-		return $this->exceptionLocalizer;
-	}
-
-	/**
-	 * @param ValueFormatter $formatter
-	 *
-	 * @return ExceptionLocalizer[]
-	 */
-	private function getExceptionLocalizers( ValueFormatter $formatter ) {
-		return [
-			'MessageException' => new MessageExceptionLocalizer(),
-			'ParseException' => new ParseExceptionLocalizer(),
-			'ChangeOpValidationException' => new ChangeOpValidationExceptionLocalizer( $formatter ),
-			'ChangeOpDeserializationException' => new ChangeOpDeserializationExceptionLocalizer(),
-			'ChangeOpApplyException' => new ChangeOpApplyExceptionLocalizer(),
-			'Exception' => new GenericExceptionLocalizer()
-		];
+	public static function getExceptionLocalizer( ContainerInterface $services = null ): ExceptionLocalizer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ExceptionLocalizer' );
 	}
 
 	/**
@@ -1352,7 +1315,7 @@ class WikibaseRepo {
 
 		return new ApiHelperFactory(
 			self::getEntityTitleStoreLookup(),
-			$this->getExceptionLocalizer(),
+			self::getExceptionLocalizer( $services ),
 			$this->getPropertyDataTypeLookup(),
 			$this->getSiteLookup(),
 			$this->getSummaryFormatter(),
