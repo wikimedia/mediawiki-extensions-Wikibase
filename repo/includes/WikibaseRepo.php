@@ -644,12 +644,10 @@ class WikibaseRepo {
 		// TODO remove all this and change the method syntax to the standard form
 		// public static function getEntityLookup( ContainerInterface $services = null ): EntityLookup
 
-		// TODO enable deprecation warnings ASAP
-
 		if ( $lookupMode !== null ) {
 			wfDeprecated(
 				__METHOD__ . ' with non-default $cache or $lookupMode',
-				'1.35',
+				'1.37',
 				'WikibaseRepo'
 			);
 			$cache = $servicesOrCache;
@@ -666,7 +664,7 @@ class WikibaseRepo {
 		} else {
 			wfDeprecated(
 				__METHOD__ . ' with non-default $cache or $lookupMode',
-				'1.35',
+				'1.37',
 				'WikibaseRepo'
 			);
 			$cache = $servicesOrCache;
