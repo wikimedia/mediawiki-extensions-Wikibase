@@ -7,6 +7,7 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Onoi\MessageReporter\MessageReporter;
+use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
 use Wikibase\Repo\Store\PropertyTermsRebuilder;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
@@ -71,7 +72,9 @@ class RebuildPropertyTerms extends Maintenance {
 			$this->getReporter(),
 			$this->getErrorReporter(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
-			$this->wikibaseRepo->getPropertyLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY ),
+			new LegacyAdapterPropertyLookup(
+				WikibaseRepo::getStore()->getEntityLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY )
+			),
 			(int)$this->getOption( 'batch-size', 250 ),
 			(int)$this->getOption( 'sleep', 10 )
 		);

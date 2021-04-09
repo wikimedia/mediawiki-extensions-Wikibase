@@ -314,7 +314,9 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			$reporter,
 			$reporter,
 			$lbFactory,
-			$wikibaseRepo->getPropertyLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY ),
+			new LegacyAdapterPropertyLookup(
+				WikibaseRepo::getStore()->getEntityLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY )
+			),
 			250,
 			2
 		);

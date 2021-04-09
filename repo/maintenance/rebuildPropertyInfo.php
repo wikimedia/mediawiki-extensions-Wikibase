@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Maintenance;
 
 use LoggedUpdateMaintenance;
 use Onoi\MessageReporter\ObservableMessageReporter;
+use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\Sql\PropertyInfoTableBuilder;
@@ -56,7 +57,7 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 				$propertySource->getDatabaseName(),
 				true
 			),
-			$wikibaseRepo->getPropertyLookup(),
+			new LegacyAdapterPropertyLookup( WikibaseRepo::getEntityLookup() ),
 			$wikibaseRepo->newPropertyInfoBuilder(),
 			WikibaseRepo::getEntityIdComposer(),
 			WikibaseRepo::getEntityNamespaceLookup()
