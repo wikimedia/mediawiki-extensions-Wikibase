@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\Repo\ChangeOp\Deserialization\AliasesChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
 use Wikibase\Repo\ChangeOp\Deserialization\ClaimsChangeOpDeserializer;
@@ -71,7 +72,7 @@ class ChangeOpDeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
 				[]
 			),
 			WikibaseRepo::getExternalFormatStatementDeserializer(),
-			new SiteLinkTargetProvider( $wikibaseRepo->getSiteLookup(), [] ),
+			new SiteLinkTargetProvider( MediaWikiServices::getInstance()->getSiteLookup(), [] ),
 			WikibaseRepo::getEntityIdParser(),
 			WikibaseRepo::getStringNormalizer(),
 			[]

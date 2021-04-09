@@ -65,7 +65,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$siteLookup = $wikibaseRepo->getSiteLookup();
+		$siteLookup = $this->getServiceContainer()->getSiteLookup();
 		$settings = WikibaseRepo::getSettings();
 
 		$siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();

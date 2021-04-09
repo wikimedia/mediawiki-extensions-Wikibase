@@ -993,7 +993,7 @@ class WikibaseRepo {
 	/**
 	 * @return SiteLookup
 	 */
-	public function getSiteLookup() {
+	private function getSiteLookup() {
 		return MediaWikiServices::getInstance()->getSiteLookup();
 	}
 

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\UpdateRepo;
 
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
 use Psr\Log\LoggerInterface;
 use SiteLookup;
@@ -53,17 +54,18 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 	}
 
 	protected function initRepoJobServicesFromGlobalState() {
+		$services = MediaWikiServices::getInstance();
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->initServices(
-			WikibaseRepo::getStore()->getEntityLookup(
+			WikibaseRepo::getStore( $services )->getEntityLookup(
 				Store::LOOKUP_CACHING_DISABLED,
 				LookupConstants::LATEST_FROM_MASTER
 			),
-			WikibaseRepo::getEntityStore(),
+			WikibaseRepo::getEntityStore( $services ),
 			$wikibaseRepo->getSummaryFormatter(),
 			LoggerFactory::getInstance( 'UpdateRepo' ),
-			$wikibaseRepo->getSiteLookup(),
+			$services->getSiteLookup(),
 			$wikibaseRepo->newEditEntityFactory()
 		);
 	}
