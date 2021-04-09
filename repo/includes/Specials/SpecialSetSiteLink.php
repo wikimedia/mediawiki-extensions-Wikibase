@@ -123,12 +123,12 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	}
 
 	public static function factory(
+		SiteLookup $siteLookup,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		SettingsArray $repoSettings
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$siteLookup = $wikibaseRepo->getSiteLookup();
 
 		$siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(

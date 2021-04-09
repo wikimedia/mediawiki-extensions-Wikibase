@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use IBufferingStatsdDataFactory;
+use SiteLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -76,6 +77,9 @@ class GetEntities extends ApiBase {
 	 */
 	private $idParser;
 
+	/** @var SiteLookup */
+	private $siteLookup;
+
 	/** @var IBufferingStatsdDataFactory */
 	private $stats;
 
@@ -108,6 +112,7 @@ class GetEntities extends ApiBase {
 		ResultBuilder $resultBuilder,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityIdParser $idParser,
+		SiteLookup $siteLookup,
 		IBufferingStatsdDataFactory $stats,
 		bool $federatedPropertiesEnabled
 	) {
@@ -122,6 +127,7 @@ class GetEntities extends ApiBase {
 		$this->resultBuilder = $resultBuilder;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->idParser = $idParser;
+		$this->siteLookup = $siteLookup;
 		$this->stats = $stats;
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
@@ -129,6 +135,7 @@ class GetEntities extends ApiBase {
 	public static function factory(
 		ApiMain $apiMain,
 		string $moduleName,
+		SiteLookup $siteLookup,
 		IBufferingStatsdDataFactory $stats,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -141,7 +148,7 @@ class GetEntities extends ApiBase {
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
 
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteLookup(),
+			$siteLookup,
 			$repoSettings->getSetting( 'specialSiteLinkGroups' )
 		);
 
@@ -158,6 +165,7 @@ class GetEntities extends ApiBase {
 			$apiHelperFactory->getResultBuilder( $apiMain ),
 			$entityRevisionLookup,
 			$entityIdParser,
+			$siteLookup,
 			$stats,
 			$wikibaseRepo->inFederatedPropertyMode()
 		);
@@ -257,14 +265,13 @@ class GetEntities extends ApiBase {
 	}
 
 	private function getItemByTitleHelper(): EntityByTitleHelper {
-		// TODO inject Store/EntityByLinkedTitleLookup and SiteLookup as services
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		// TODO inject Store/EntityByLinkedTitleLookup as services
 		$siteLinkStore = WikibaseRepo::getStore()->getEntityByLinkedTitleLookup();
 		return new EntityByTitleHelper(
 			$this,
 			$this->resultBuilder,
 			$siteLinkStore,
-			$wikibaseRepo->getSiteLookup(),
+			$this->siteLookup,
 			$this->stringNormalizer
 		);
 	}
