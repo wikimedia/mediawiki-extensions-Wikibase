@@ -530,11 +530,11 @@ class WikibaseRepo {
 			$services = $servicesOrCache;
 			return $services->get( 'WikibaseRepo.EntityRevisionLookup' );
 		} else {
-			/* wfDeprecated(
+			wfDeprecated(
 				__METHOD__ . ' with non-default $cache',
 				'1.37',
 				'WikibaseRepo'
-			); */
+			);
 			$cache = $servicesOrCache;
 			return self::getStore()->getEntityRevisionLookup( $cache );
 		}
