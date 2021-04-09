@@ -246,7 +246,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		);
 
 		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
-		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();
+		$propertyInfoBuilder = WikibaseRepo::getPropertyInfoBuilder();
 		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 
 		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
