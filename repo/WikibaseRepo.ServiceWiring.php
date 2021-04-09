@@ -120,7 +120,15 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
+use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
+use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
+use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
+use Wikibase\Repo\Localizer\DispatchingExceptionLocalizer;
+use Wikibase\Repo\Localizer\ExceptionLocalizer;
+use Wikibase\Repo\Localizer\GenericExceptionLocalizer;
+use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
+use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
@@ -549,6 +557,19 @@ return [
 				WikibaseRepo::getEntityTitleLookup( $services )
 			)
 		);
+	},
+
+	'WikibaseRepo.ExceptionLocalizer' => function ( MediaWikiServices $services ): ExceptionLocalizer {
+		$formatter = WikibaseRepo::getMessageParameterFormatter( $services );
+
+		return new DispatchingExceptionLocalizer( [
+			'MessageException' => new MessageExceptionLocalizer(),
+			'ParseException' => new ParseExceptionLocalizer(),
+			'ChangeOpValidationException' => new ChangeOpValidationExceptionLocalizer( $formatter ),
+			'ChangeOpDeserializationException' => new ChangeOpDeserializationExceptionLocalizer(),
+			'ChangeOpApplyException' => new ChangeOpApplyExceptionLocalizer(),
+			'Exception' => new GenericExceptionLocalizer(),
+		] );
 	},
 
 	'WikibaseRepo.ExternalFormatStatementDeserializer' => function ( MediaWikiServices $services ): Deserializer {
