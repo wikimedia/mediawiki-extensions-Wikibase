@@ -11,7 +11,6 @@ use Exception;
 use HashBagOStuff;
 use IContextSource;
 use Language;
-use LogicException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
@@ -615,7 +614,7 @@ class WikibaseRepo {
 
 	public function newPropertyDataTypeLookup(): PropertyDataTypeLookup {
 		if ( $this->inFederatedPropertyMode() ) {
-			return $this->newFederatedPropertiesServiceFactory()->newApiPropertyDataTypeLookup();
+			return self::getFederatedPropertiesServiceFactory()->newApiPropertyDataTypeLookup();
 		}
 
 		return $this->newPropertyDataTypeLookupForLocalProperties();
@@ -1723,33 +1722,13 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.Logger' );
 	}
 
-	/**
-	 * Guard against Federated properties services being constructed in wiring when feature is disabled.
-	 */
-	private function throwLogicExceptionIfFederatedPropertiesNotEnabledAndConfigured(): void {
-		if (
-			!$this->inFederatedPropertyMode() ||
-			!self::getSettings()->hasSetting( 'federatedPropertiesSourceScriptUrl' )
-		) {
-			throw new LogicException(
-				'Federated Property services should not be constructed when federatedProperties feature is not enabled or configured.'
-			);
-		}
-	}
-
 	public function inFederatedPropertyMode(): bool {
 		return self::getSettings()->getSetting( 'federatedPropertiesEnabled' );
 	}
 
-	public function newFederatedPropertiesServiceFactory(): ApiServiceFactory {
-		$this->throwLogicExceptionIfFederatedPropertiesNotEnabledAndConfigured();
-
-		global $wgServerName;
-
-		return new ApiServiceFactory(
-			self::getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' ),
-			$wgServerName
-		);
+	public static function getFederatedPropertiesServiceFactory( ContainerInterface $services = null ): ApiServiceFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.FederatedPropertiesServiceFactory' );
 	}
 
 	public static function getLinkTargetEntityIdLookup( ContainerInterface $services = null ): LinkTargetEntityIdLookup {

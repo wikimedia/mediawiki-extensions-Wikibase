@@ -25,16 +25,16 @@ return [
 			return new EntityArticleIdNullLookup();
 		},
 		Def::URL_LOOKUP_CALLBACK => function () {
-			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiEntityUrlLookup();
+			return WikibaseRepo::getFederatedPropertiesServiceFactory()->newApiEntityUrlLookup();
 		},
 		Def::TITLE_TEXT_LOOKUP_CALLBACK => function () {
-			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiEntityTitleTextLookup();
+			return WikibaseRepo::getFederatedPropertiesServiceFactory()->newApiEntityTitleTextLookup();
 		},
 		Def::ENTITY_SEARCH_CALLBACK => function() {
-			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiEntitySearchHelper();
+			return WikibaseRepo::getFederatedPropertiesServiceFactory()->newApiEntitySearchHelper();
 		},
 		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function() {
-			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiPrefetchingTermLookup();
+			return WikibaseRepo::getFederatedPropertiesServiceFactory()->newApiPrefetchingTermLookup();
 		},
 		Def::REDIRECT_CHECKER_CALLBACK => function () {
 			return new class implements EntityRedirectChecker {
@@ -44,7 +44,7 @@ return [
 			};
 		},
 		Def::EXISTENCE_CHECKER_CALLBACK => function () {
-			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiEntityExistenceChecker();
+			return WikibaseRepo::getFederatedPropertiesServiceFactory()->newApiEntityExistenceChecker();
 		},
 	]
 ];

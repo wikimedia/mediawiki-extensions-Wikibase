@@ -810,16 +810,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function testNewFederatedPropertiesServiceFactoryDoesntFatal() {
-		// Make sure (as good as we can) that all functions can be called without
-		// exceptions/ fatals and nothing accesses the database or does http requests.
-		$this->settings->setSetting( 'federatedPropertiesEnabled', true );
-		$wbRepo = $this->getWikibaseRepo();
-
-		$wbRepo->newFederatedPropertiesServiceFactory();
-		$this->addToAssertionCount( 1 );
-	}
-
 	public function provideParameterLessFunctionCallsForFederatedPropertiesThrowExceptionWhenDisabled() {
 		$methods = $this->getFederatedPropertyMethodNames();
 		return array_map(
@@ -896,7 +886,7 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getFederatedPropertyMethodNames() {
 		return [
-			'newFederatedPropertiesServiceFactory'
+			'getFederatedPropertiesServiceFactory'
 		];
 	}
 

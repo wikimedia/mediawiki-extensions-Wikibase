@@ -119,6 +119,7 @@ use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
+use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
@@ -574,6 +575,24 @@ return [
 
 	'WikibaseRepo.ExternalFormatStatementDeserializer' => function ( MediaWikiServices $services ): Deserializer {
 		return WikibaseRepo::getBaseDataModelDeserializerFactory( $services )->newStatementDeserializer();
+	},
+
+	'WikibaseRepo.FederatedPropertiesServiceFactory' => function ( MediaWikiServices $services ): ApiServiceFactory {
+		$settings = WikibaseRepo::getSettings( $services );
+
+		if (
+			!$settings->getSetting( 'federatedPropertiesEnabled' ) ||
+			!$settings->hasSetting( 'federatedPropertiesSourceScriptUrl' )
+		) {
+			throw new LogicException(
+				'Federated Property services should not be constructed when federatedProperties feature is not enabled or configured.'
+			);
+		}
+
+		return new ApiServiceFactory(
+			$settings->getSetting( 'federatedPropertiesSourceScriptUrl' ),
+			$services->getMainConfig()->get( 'ServerName' )
+		);
 	},
 
 	'WikibaseRepo.IdGenerator' => function ( MediaWikiServices $services ): IdGenerator {
