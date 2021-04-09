@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Diff;
 
-use Comparable;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 
@@ -14,7 +13,7 @@ use Diff\DiffOp\DiffOpChange;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Thiemo Kreuz
  */
-class ClaimDifference implements Comparable {
+class ClaimDifference {
 
 	/**
 	 * @var DiffOpChange|null
@@ -83,8 +82,6 @@ class ClaimDifference implements Comparable {
 	}
 
 	/**
-	 * @see Comparable::equals
-	 *
 	 * @param mixed $target
 	 *
 	 * @return bool

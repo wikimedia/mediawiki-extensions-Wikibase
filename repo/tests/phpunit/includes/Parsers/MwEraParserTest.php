@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Tests\Parsers;
 
+use DataValues\DataValue;
 use Language;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\MediaWikiServices;
 use ValueParsers\ParserOptions;
-use ValueParsers\Test\StringValueParserTest;
 use ValueParsers\ValueParser;
 use Wikibase\Repo\Parsers\MwEraParser;
 
@@ -18,8 +18,7 @@ use Wikibase\Repo\Parsers\MwEraParser;
  * @group TimeParsers
  * @license GPL-2.0-or-later
  */
-class MwEraParserTest extends StringValueParserTest {
-	use PHPUnit4CompatTrait;
+class MwEraParserTest extends \PHPUnit\Framework\TestCase {
 
 	/** @var LanguageFactory */
 	private $oldLangFactory;
@@ -142,6 +141,55 @@ class MwEraParserTest extends StringValueParserTest {
 			[ '-1 000 000', [ '-', '1 000 000' ] ],
 			[ '1 000 000 B.C.', [ '-', '1 000 000' ] ],
 		];
+	}
+
+	public function testSetAndGetOptions() {
+		$parser = $this->getInstance();
+
+		$parser->setOptions( new ParserOptions() );
+
+		$this->assertEquals( new ParserOptions(), $parser->getOptions() );
+
+		$options = new ParserOptions();
+		$options->setOption( 'someoption', 'someoption' );
+
+		$parser->setOptions( $options );
+
+		$this->assertEquals( $options, $parser->getOptions() );
+	}
+
+	/**
+	 * @dataProvider validInputProvider
+	 * @param mixed $value
+	 * @param mixed $expected
+	 * @param ValueParser|null $parser
+	 */
+	public function testParseWithValidInputs( $value, $expected, ValueParser $parser = null ) {
+		if ( $parser === null ) {
+			$parser = $this->getInstance();
+		}
+
+		$this->assertSmartEquals( $expected, $parser->parse( $value ) );
+	}
+
+	/**
+	 * @param DataValue|mixed $expected
+	 * @param DataValue|mixed $actual
+	 */
+	private function assertSmartEquals( $expected, $actual ) {
+		if ( $this->requireDataValue() ) {
+			if ( $expected instanceof DataValue && $actual instanceof DataValue ) {
+				$msg = "testing equals():\n"
+					. preg_replace( '/\s+/', ' ', print_r( $actual->toArray(), true ) ) . " should equal\n"
+					. preg_replace( '/\s+/', ' ', print_r( $expected->toArray(), true ) );
+			} else {
+				$msg = 'testing equals()';
+			}
+
+			$this->assertTrue( $expected->equals( $actual ), $msg );
+		} else {
+			$this->assertEquals( $expected, $actual );
+		}
 	}
 
 }

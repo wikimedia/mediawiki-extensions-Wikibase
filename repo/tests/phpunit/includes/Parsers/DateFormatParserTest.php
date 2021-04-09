@@ -2,10 +2,11 @@
 
 namespace Wikibase\Repo\Tests\Parsers;
 
+use DataValues\DataValue;
 use DataValues\TimeValue;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
-use ValueParsers\Test\StringValueParserTest;
+use ValueParsers\ValueParser;
 use Wikibase\Repo\Parsers\DateFormatParser;
 
 /**
@@ -17,10 +18,8 @@ use Wikibase\Repo\Parsers\DateFormatParser;
  * @group TimeParsers
  *
  * @license GPL-2.0-or-later
- * @author Thiemo Kreuz
  */
-class DateFormatParserTest extends StringValueParserTest {
-	use PHPUnit4CompatTrait;
+class DateFormatParserTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @see ValueParserTestBase::getInstance
@@ -187,8 +186,6 @@ class DateFormatParserTest extends StringValueParserTest {
 			'9 de novembro de 1876',
 		];
 
-		yield from parent::invalidInputProvider();
-
 		foreach ( $invalid as $value ) {
 			yield [ $value ];
 		}
@@ -306,6 +303,84 @@ class DateFormatParserTest extends StringValueParserTest {
 			'Valid date, second' => [ '1 9 2014, 40', 'j F Y, s' ],
 			'Valid date, minute:second' => [ '1 9 2014, 30:40', 'j F Y, i:s' ],
 		];
+	}
+
+	public function testSetAndGetOptions() {
+		$parser = $this->getInstance();
+
+		$parser->setOptions( new ParserOptions() );
+
+		$this->assertEquals( new ParserOptions(), $parser->getOptions() );
+
+		$options = new ParserOptions();
+		$options->setOption( 'someoption', 'someoption' );
+
+		$parser->setOptions( $options );
+
+		$this->assertEquals( $options, $parser->getOptions() );
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @dataProvider validInputProvider
+	 * @param mixed $value
+	 * @param mixed $expected
+	 * @param ValueParser|null $parser
+	 */
+	public function testParseWithValidInputs( $value, $expected, ValueParser $parser = null ) {
+		if ( $parser === null ) {
+			$parser = $this->getInstance();
+		}
+
+		$this->assertSmartEquals( $expected, $parser->parse( $value ) );
+	}
+
+	/**
+	 * @param DataValue|mixed $expected
+	 * @param DataValue|mixed $actual
+	 */
+	private function assertSmartEquals( $expected, $actual ) {
+		if ( $this->requireDataValue() ) {
+			if ( $expected instanceof DataValue && $actual instanceof DataValue ) {
+				$msg = "testing equals():\n"
+					. preg_replace( '/\s+/', ' ', print_r( $actual->toArray(), true ) ) . " should equal\n"
+					. preg_replace( '/\s+/', ' ', print_r( $expected->toArray(), true ) );
+			} else {
+				$msg = 'testing equals()';
+			}
+
+			$this->assertTrue( $expected->equals( $actual ), $msg );
+		} else {
+			$this->assertEquals( $expected, $actual );
+		}
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @dataProvider invalidInputProvider
+	 * @param mixed $value
+	 * @param ValueParser|null $parser
+	 */
+	public function testParseWithInvalidInputs( $value, ValueParser $parser = null ) {
+		if ( $parser === null ) {
+			$parser = $this->getInstance();
+		}
+
+		$this->expectException( 'ValueParsers\ParseException' );
+		$parser->parse( $value );
+	}
+
+	/**
+	 * Returns if the result of the parsing process should be checked to be a DataValue.
+	 *
+	 * @since 0.1
+	 *
+	 * @return bool
+	 */
+	protected function requireDataValue() {
+		return true;
 	}
 
 }

@@ -7,7 +7,6 @@ use Html;
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use ValueFormatters\ValueFormatterBase;
 
 /**
  * Formatter for rendering the details of a TimeValue (most useful for diffs) in HTML.
@@ -18,12 +17,17 @@ use ValueFormatters\ValueFormatterBase;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class TimeDetailsFormatter extends ValueFormatterBase {
+class TimeDetailsFormatter implements ValueFormatter {
 
 	/**
 	 * @var ValueFormatter A TimeValue formatter that outputs HTML.
 	 */
 	private $timeFormatter;
+
+	/**
+	 * @var FormatterOptions
+	 */
+	private $options;
 
 	/**
 	 * @param FormatterOptions|null $options
@@ -34,7 +38,8 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		FormatterOptions $options = null,
 		ValueFormatter $timeFormatter = null
 	) {
-		parent::__construct( $options );
+		$this->options = $options ?: new FormatterOptions();
+		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
 
 		$this->timeFormatter = $timeFormatter ?: new HtmlTimeFormatter(
 			$this->options,
@@ -196,7 +201,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 			$amount /= $precisionInSeconds;
 		}
 
-		$lang = $this->getOption( ValueFormatter::OPT_LANG );
+		$lang = $this->options->getOption( ValueFormatter::OPT_LANG );
 		// TODO: Use NumberLocalizer
 		$msg = wfMessage( $key, $amount )->inLanguage( $lang );
 		return htmlspecialchars( $msg->text() );
@@ -236,7 +241,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 * @return string
 	 */
 	private function msg( $key ) {
-		$lang = $this->getOption( ValueFormatter::OPT_LANG );
+		$lang = $this->options->getOption( ValueFormatter::OPT_LANG );
 		$msg = wfMessage( $key )->inLanguage( $lang );
 		return $msg->text();
 	}
