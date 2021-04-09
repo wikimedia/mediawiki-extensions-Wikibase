@@ -72,6 +72,7 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityLinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRedirectChecker;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
@@ -465,6 +466,11 @@ return [
 				WikibaseRepo::getEntityTitleLookup( $services )
 			)
 		);
+	},
+
+	'WikibaseRepo.EntityRevisionLookup' => function ( MediaWikiServices $services ): EntityRevisionLookup {
+		return WikibaseRepo::getStore( $services )
+			->getEntityRevisionLookup( Store::LOOKUP_CACHING_ENABLED );
 	},
 
 	'WikibaseRepo.EntitySourceDefinitions' => function ( MediaWikiServices $services ): EntitySourceDefinitions {

@@ -171,6 +171,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		EntityContentFactory $entityContentFactory,
 		EntityFactory $entityFactory,
 		EntityIdParser $entityIdParser,
+		EntityRevisionLookup $entityRevisionLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		LoggerInterface $logger,
 		SettingsArray $settings,
@@ -189,7 +190,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			TemplateFactory::getDefaultInstance(),
 			$babelUserLanguageLookup,
 			$termsLanguages,
-			$wikibaseRepo->getEntityRevisionLookup(),
+			$entityRevisionLookup,
 			new LanguageNameLookup( $wgLang->getCode() ),
 			new OutputPageEntityIdReader(
 				$entityViewChecker,

@@ -244,9 +244,38 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( ValueParserFactory::class, $returnValue );
 	}
 
-	public function testGetEntityRevisionLookupReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getEntityRevisionLookup();
-		$this->assertInstanceOf( EntityRevisionLookup::class, $returnValue );
+	public function testGetEntityRevisionLookup_default() {
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$this->setService( 'WikibaseRepo.EntityRevisionLookup', $entityRevisionLookup );
+
+		$this->assertSame( $entityRevisionLookup, WikibaseRepo::getEntityRevisionLookup() );
+	}
+
+	public function testGetEntityRevisionLookup_withServices() {
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$services = $this->createMock( ContainerInterface::class );
+		$services->expects( $this->once() )
+			->method( 'get' )
+			->with( 'WikibaseRepo.EntityRevisionLookup' )
+			->willReturn( $entityRevisionLookup );
+
+		$this->assertSame( $entityRevisionLookup, WikibaseRepo::getEntityRevisionLookup( $services ) );
+	}
+
+	public function testGetEntityRevisionLookup_withCache() {
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$store = $this->createMock( Store::class );
+		$store->expects( $this->once() )
+			->method( 'getEntityRevisionLookup' )
+			->with( Store::LOOKUP_CACHING_DISABLED )
+			->willReturn( $entityRevisionLookup );
+		$this->setService( 'WikibaseRepo.Store', $store );
+
+		$this->hideDeprecated(
+			'Wikibase\Repo\WikibaseRepo::getEntityRevisionLookup with non-default $cache'
+		);
+		$this->assertSame( $entityRevisionLookup,
+			$this->getWikibaseRepo()->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ) );
 	}
 
 	public function testNewRedirectCreationInteractorReturnType() {

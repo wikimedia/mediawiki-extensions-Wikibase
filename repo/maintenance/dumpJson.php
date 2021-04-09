@@ -88,14 +88,15 @@ class DumpJson extends DumpEntities {
 				WikibaseRepo::getEntityIdLookup( $mwServices ),
 				$mwServices->getLinkCache()
 			);
-			$revisionLookup = $wikibaseRepo->getEntityRevisionLookup(
+			$store = WikibaseRepo::getStore( $mwServices );
+			$revisionLookup = $store->getEntityRevisionLookup(
 				$this->getEntityRevisionLookupCacheMode()
 			);
 
 			$this->setServices(
 				$sqlEntityIdPagerFactory,
 				$wikibaseRepo->getEnabledEntityTypes(),
-				WikibaseRepo::getStore( $mwServices )->getEntityPrefetcher(),
+				$store->getEntityPrefetcher(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
 				$revisionLookup,
 				WikibaseRepo::getCompactEntitySerializer( $mwServices )
