@@ -1643,13 +1643,6 @@ class WikibaseRepo {
 		return array_fill_keys( $entityTypes, [ '' ] );
 	}
 
-	/**
-	 * @return string[] Associative array mapping repository or entity source names to base URIs of concept URIs.
-	 */
-	public function getConceptBaseUris() {
-		return self::getEntitySourceDefinitions()->getConceptBaseUris();
-	}
-
 	public static function getPropertyValueExpertsModule( ContainerInterface $services = null ): PropertyValueExpertsModule {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.PropertyValueExpertsModule' );

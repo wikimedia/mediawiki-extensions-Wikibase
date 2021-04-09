@@ -756,41 +756,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testGetConceptBaseUris() {
-		$this->entitySourceDefinitions = new EntitySourceDefinitions( [
-			new EntitySource(
-				'local',
-				false,
-				[
-					'foo' => [ 'namespaceId' => 200, 'slot' => 'main' ],
-					'bar' => [ 'namespaceId' => 220, 'slot' => 'main' ],
-				],
-				'http://local.wiki/entity/',
-				'',
-				'',
-				''
-			),
-			new EntitySource(
-				'bazwiki',
-				'bazdb',
-				[
-					'baz' => [ 'namespaceId' => 250, 'slot' => 'main' ],
-				],
-				'http://baz.wiki/entity/',
-				'baz',
-				'baz',
-				'bazwiki'
-			)
-		], $this->entityTypeDefinitions );
-
-		$wikibaseRepo = $this->getWikibaseRepo();
-
-		$this->assertEquals(
-			[ 'local' => 'http://local.wiki/entity/', 'bazwiki' => 'http://baz.wiki/entity/' ],
-			$wikibaseRepo->getConceptBaseUris()
-		);
-	}
-
 	public function testParameterLessFunctionCalls() {
 		// Make sure (as good as we can) that all functions can be called without
 		// exceptions/ fatals and nothing accesses the database or does http requests.
