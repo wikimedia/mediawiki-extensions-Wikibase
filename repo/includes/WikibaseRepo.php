@@ -652,7 +652,7 @@ class WikibaseRepo {
 		if ( $lookupMode !== null ) {
 			wfDeprecated(
 				__METHOD__ . ' with non-default $cache or $lookupMode',
-				'1.37',
+				'1.36',
 				'WikibaseRepo'
 			);
 			$cache = $servicesOrCache;
@@ -669,7 +669,7 @@ class WikibaseRepo {
 		} else {
 			wfDeprecated(
 				__METHOD__ . ' with non-default $cache or $lookupMode',
-				'1.37',
+				'1.36',
 				'WikibaseRepo'
 			);
 			$cache = $servicesOrCache;
