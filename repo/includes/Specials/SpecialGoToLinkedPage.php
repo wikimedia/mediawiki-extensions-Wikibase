@@ -80,17 +80,18 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 
 	public static function factory(
 		EntityIdParser $entityIdParser,
+		EntityLookup $entityLookup,
 		Store $store
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		// TODO move SiteLinkStore, EntityRedirectLookup and EntityLookup to service container
+		// TODO move SiteLinkStore and EntityRedirectLookup to service container
 		// and inject them directly instead of via Store
 		return new self(
 			$wikibaseRepo->getSiteLookup(),
 			$store->newSiteLinkStore(),
 			$store->getEntityRedirectLookup(),
 			$entityIdParser,
-			$store->getEntityLookup()
+			$entityLookup
 		);
 	}
 
