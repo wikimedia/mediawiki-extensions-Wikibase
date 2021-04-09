@@ -1,6 +1,9 @@
 {
 	"@metadata": {
-		"authors": []
+		"authors": [
+			"Adehertogh"
+		]
 	},
+	"wikibase-edit": "Te pikerel",
 	"wikibase-newentity-submit": "Rode"
 }
