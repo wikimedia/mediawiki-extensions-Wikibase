@@ -68,6 +68,7 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
+use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityLinkTargetEntityIdLookup;
@@ -363,6 +364,16 @@ return [
 	'WikibaseRepo.EntityConstraintProvider' => function ( MediaWikiServices $services ): EntityConstraintProvider {
 		return new EntityConstraintProvider(
 			new SqlSiteLinkConflictLookup( WikibaseRepo::getEntityIdComposer( $services ) )
+		);
+	},
+
+	'WikibaseRepo.EntityContentDataCodec' => function ( MediaWikiServices $services ): EntityContentDataCodec {
+		return new EntityContentDataCodec(
+			WikibaseRepo::getEntityIdParser( $services ),
+			WikibaseRepo::getStorageEntitySerializer( $services ),
+			WikibaseRepo::getInternalFormatEntityDeserializer( $services ),
+			WikibaseRepo::getDataAccessSettings( $services )
+				->maxSerializedEntitySizeInBytes()
 		);
 	},
 

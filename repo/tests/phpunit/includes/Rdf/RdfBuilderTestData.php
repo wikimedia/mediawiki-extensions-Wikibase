@@ -66,8 +66,7 @@ class RdfBuilderTestData {
 	 */
 	private function getCodec() {
 		if ( $this->codec === null ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$this->codec = $wikibaseRepo->getEntityContentDataCodec();
+			$this->codec = WikibaseRepo::getEntityContentDataCodec();
 		}
 
 		return $this->codec;
