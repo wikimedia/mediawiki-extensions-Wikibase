@@ -151,7 +151,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @return Language
 	 */
 	private function getLanguage() {
-		if ( $this->allowDataAccessInUserLanguage() ) {
+		if ( $this->allowDataAccessInUserLanguage() && $this->getParser() ) {
 			return $this->getParserOptions()->getUserLangObj();
 		}
 
@@ -235,8 +235,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		// They are member functions on a Lua table which is private to the module, thus
 		// these can't be called from user code, unless explicitly exposed in Lua.
 		$lib = [
-			'getGlobalSiteId' => [ $this, 'getGlobalSiteId' ],
-			'getLanguageCode' => [ $this, 'getLanguageCode' ],
 			'formatStatements' => [ $this, 'formatStatements' ],
 			'formatPropertyValues' => [ $this, 'formatPropertyValues' ],
 			'addStatementUsage' => [ $this, 'addStatementUsage' ],
@@ -252,29 +250,13 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		$options = [
 			'fineGrainedLuaTracking' => $settings->getSetting( 'fineGrainedLuaTracking' ),
 			'trackLuaFunctionCallsSampleRate' => $settings->getSetting( 'trackLuaFunctionCallsSampleRate' ),
+			'languageCode' => $this->getLanguage()->getCode(),
+			'globalSiteId' => $settings->getSetting( 'siteGlobalID' ),
 		];
 
 		return $this->getEngine()->registerInterface(
 			__DIR__ . '/mw.wikibase.entity.lua', $lib, $options
 		);
-	}
-
-	/**
-	 * Wrapper for getGlobalSiteId in WikibaseLuaEntityBindings
-	 *
-	 * @return string[]
-	 */
-	public function getGlobalSiteId() {
-		return [ $this->getImplementation()->getGlobalSiteId() ];
-	}
-
-	/**
-	 * Wrapper for getLanguageCode in WikibaseLuaEntityBindings
-	 *
-	 * @return string[]
-	 */
-	public function getLanguageCode() {
-		return [ $this->getImplementation()->getLanguageCode() ];
 	}
 
 	/**
