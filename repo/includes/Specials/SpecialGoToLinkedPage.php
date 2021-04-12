@@ -12,7 +12,6 @@ use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\Store\Store;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Enables accessing a linked page on a site by providing the item id and site
@@ -79,15 +78,15 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	}
 
 	public static function factory(
+		SiteLookup $siteLookup,
 		EntityIdParser $entityIdParser,
 		EntityLookup $entityLookup,
 		Store $store
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// TODO move SiteLinkStore and EntityRedirectLookup to service container
 		// and inject them directly instead of via Store
 		return new self(
-			$wikibaseRepo->getSiteLookup(),
+			$siteLookup,
 			$store->newSiteLinkStore(),
 			$store->getEntityRedirectLookup(),
 			$entityIdParser,

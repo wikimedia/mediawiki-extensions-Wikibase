@@ -13,7 +13,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Store\Store;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Enables accessing items by providing the identifier of a site and the title
@@ -94,22 +93,21 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	}
 
 	public static function factory(
+		SiteLookup $siteLookup,
 		EntityTitleLookup $entityTitleLookup,
 		LoggerInterface $logger,
 		SettingsArray $repoSettings,
 		Store $store
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteLookup(),
+			$siteLookup,
 			$repoSettings->getSetting( 'specialSiteLinkGroups' )
 		);
 
 		return new self(
 			$entityTitleLookup,
 			new LanguageNameLookup(),
-			$wikibaseRepo->getSiteLookup(),
+			$siteLookup,
 			// TODO move SiteLinkStore to service container and inject it directly
 			$store->newSiteLinkStore(),
 			$siteLinkTargetProvider,

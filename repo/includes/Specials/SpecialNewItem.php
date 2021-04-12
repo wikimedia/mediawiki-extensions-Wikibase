@@ -78,6 +78,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	}
 
 	public static function factory(
+		SiteLookup $siteLookup,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityTitleLookup $entityTitleLookup,
 		TermsCollisionDetector $itemTermsCollisionDetector,
@@ -98,7 +99,7 @@ class SpecialNewItem extends SpecialNewEntity {
 			$wikibaseRepo->getSummaryFormatter(),
 			$entityTitleLookup,
 			$wikibaseRepo->newEditEntityFactory(),
-			$wikibaseRepo->getSiteLookup(),
+			$siteLookup,
 			$termValidatorFactory,
 			$itemTermsCollisionDetector
 		);

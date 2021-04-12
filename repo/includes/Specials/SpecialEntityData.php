@@ -6,6 +6,7 @@ use HtmlCacheUpdater;
 use HttpError;
 use Psr\Log\LoggerInterface;
 use Serializers\Serializer;
+use SiteLookup;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -61,6 +62,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 	public static function factory(
 		HtmlCacheUpdater $htmlCacheUpdater,
+		SiteLookup $siteLookup,
 		SerializerFactory $compactBaseDataModelSerializerFactory,
 		Serializer $compactEntitySerializer,
 		EntityContentFactory $entityContentFactory,
@@ -94,7 +96,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$entityDataFormatProvider,
 			$compactBaseDataModelSerializerFactory,
 			$compactEntitySerializer,
-			$wikibaseRepo->getSiteLookup(),
+			$siteLookup,
 			$rdfVocabulary
 		);
 
