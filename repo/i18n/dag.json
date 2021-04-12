@@ -1,11 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alhassan Mohammed Awal",
 			"Amire80",
+			"Chirifo",
 			"Dnshitobu",
 			"Shahadusadik"
 		]
 	},
 	"wikibase-edit": "malniŋ",
-	"wikibase-add": "pahima"
+	"wikibase-add": "pahima",
+	"wikibase-description-empty": "Buɣisibu shɛli bi kahigi",
+	"wikibase-sitelinks-special": "Yaɣi din bala",
+	"wikibase-statementview-rank-normal": "dede zashe"
 }

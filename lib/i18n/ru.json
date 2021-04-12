@@ -85,7 +85,7 @@
 	"wikibase-time-precision-BCE-Mannum": "$1 миллион{{PLURAL:$1||ов|а}} лет до н.э.",
 	"wikibase-time-precision-BCE-annum": "$1 {{PLURAL:$1|год|года|лет}} до н.э.",
 	"wikibase-time-precision-BCE-millennium": "$1 тысячелети{{PLURAL:$1|е|й|я}} до н. э.",
-	"wikibase-time-precision-BCE-century": "$1 век{{PLURAL:$1||а|ов}} до н.э.",
+	"wikibase-time-precision-BCE-century": "$1 век до н.э.",
 	"wikibase-time-precision-BCE-10annum": "$1-е годы до н.э.",
 	"wikibase-snakformatter-valuetype-mismatch": "Тип значения «$1» не соответствует типу свойства «$2».",
 	"wikibase-snakformatter-property-not-found": "Свойство $1 не найдено, невозможно определить тип данных для использования.",
