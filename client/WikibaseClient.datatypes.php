@@ -62,9 +62,9 @@ return call_user_func( function() {
 			},
 		],
 		'VT:string' => [
-			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+			'formatter-factory-callback' => function( $format ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
-				return $factory->newStringFormatter( $format, $options );
+				return $factory->newStringFormatter( $format );
 			},
 		],
 		'PT:url' => [
@@ -80,9 +80,9 @@ return call_user_func( function() {
 			},
 		],
 		'PT:geo-shape' => [
-			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+			'formatter-factory-callback' => function( $format ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
-				return $factory->newGeoShapeFormatter( $format, $options );
+				return $factory->newGeoShapeFormatter( $format );
 			},
 		],
 		'PT:tabular-data' => [
@@ -109,9 +109,9 @@ return call_user_func( function() {
 			}
 		],
 		'PT:external-id' => [
-			'snak-formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+			'snak-formatter-factory-callback' => function( $format ) {
 				$factory = WikibaseClient::getDefaultSnakFormatterBuilders();
-				return $factory->newExternalIdentifierFormatter( $format, $options );
+				return $factory->newExternalIdentifierFormatter( $format );
 			},
 		],
 	];

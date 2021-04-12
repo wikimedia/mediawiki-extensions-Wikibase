@@ -80,6 +80,7 @@ class ComplexValueRdfHelper {
 		DataValue $value,
 		$normalized = false
 	) {
+		// @phan-suppress-next-line PhanUndeclaredMethod
 		$valueLName = $value->getHash();
 
 		$namespaces =

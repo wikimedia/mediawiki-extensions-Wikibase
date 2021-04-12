@@ -80,9 +80,8 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideNewExternalIdentifierFormatter
 	 */
 	public function testNewExternalIdentifierFormatter( Snak $snak, $format, $expected ) {
-		$options = new FormatterOptions();
 		$builders = $this->getWikibaseSnakFormatterBuilders();
-		$formatter = $builders->newExternalIdentifierFormatter( $format, $options );
+		$formatter = $builders->newExternalIdentifierFormatter( $format );
 		$actual = $formatter->formatSnak( $snak );
 		$this->assertSame( $expected, $actual );
 	}
@@ -92,7 +91,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit\Framework\TestCase {
 		$builders = $this->getWikibaseSnakFormatterBuilders();
 
 		$this->expectException( InvalidArgumentException::class );
-		$builders->newExternalIdentifierFormatter( 'unknown', $options );
+		$builders->newExternalIdentifierFormatter( 'unknown' );
 	}
 
 }

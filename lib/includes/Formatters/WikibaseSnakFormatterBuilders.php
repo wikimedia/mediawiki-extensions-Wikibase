@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Formatters;
 
 use InvalidArgumentException;
-use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\PropertyInfoSnakUrlExpander;
@@ -72,16 +71,15 @@ class WikibaseSnakFormatterBuilders {
 
 	/**
 	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
-	 * @param FormatterOptions $options
 	 *
 	 * @throws InvalidArgumentException
 	 * @return SnakFormatter
 	 */
-	public function newExternalIdentifierFormatter( $format, FormatterOptions $options ) {
+	public function newExternalIdentifierFormatter( $format ) {
 		if ( $format === SnakFormatter::FORMAT_PLAIN ) {
 			return new PropertyValueSnakFormatter(
 				$format,
-				$this->valueFormatterBuilders->newStringFormatter( $format, $options ),
+				$this->valueFormatterBuilders->newStringFormatter( $format ),
 				$this->dataTypeLookup,
 				$this->dataTypeFactory
 			);

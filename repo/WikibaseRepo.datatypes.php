@@ -123,9 +123,9 @@ return call_user_func( function() {
 					defined( 'MW_PHPUNIT_TEST' ) ? 'doNotCheckExistence' : 'checkExistence'
 				);
 			},
-			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+			'formatter-factory-callback' => function( $format ) {
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
-				return $factory->newGeoShapeFormatter( $format, $options );
+				return $factory->newGeoShapeFormatter( $format );
 			},
 			'rdf-builder-factory-callback' => function (
 				$flags,
@@ -283,9 +283,9 @@ return call_user_func( function() {
 				$normalizer = WikibaseRepo::getStringNormalizer();
 				return new StringParser( new WikibaseStringValueNormalizer( $normalizer ) );
 			},
-			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+			'formatter-factory-callback' => function( $format ) {
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
-				return $factory->newStringFormatter( $format, $options );
+				return $factory->newStringFormatter( $format );
 			},
 			'rdf-builder-factory-callback' => function (
 				$flags,
@@ -355,9 +355,9 @@ return call_user_func( function() {
 		],
 		'PT:external-id' => [
 			// NOTE: for 'formatter-factory-callback', we fall back to plain text formatting
-			'snak-formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+			'snak-formatter-factory-callback' => function( $format ) {
 				$factory = WikibaseRepo::getDefaultSnakFormatterBuilders();
-				return $factory->newExternalIdentifierFormatter( $format, $options );
+				return $factory->newExternalIdentifierFormatter( $format );
 			},
 			'rdf-builder-factory-callback' => function (
 				$mode,
