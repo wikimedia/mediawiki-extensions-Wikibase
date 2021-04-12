@@ -1388,8 +1388,9 @@ class WikibaseRepo {
 		return $factory;
 	}
 
-	public function getEntityViewFactory() {
-		return new DispatchingEntityViewFactory( self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::VIEW_FACTORY_CALLBACK ) );
+	public static function getEntityViewFactory( ContainerInterface $services = null ): DispatchingEntityViewFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityViewFactory' );
 	}
 
 	public function getEntityMetaTagsCreatorFactory() {
@@ -1431,7 +1432,7 @@ class WikibaseRepo {
 		$services = MediaWikiServices::getInstance();
 
 		return new EntityParserOutputGeneratorFactory(
-			$this->getEntityViewFactory(),
+			self::getEntityViewFactory(),
 			$this->getEntityMetaTagsCreatorFactory(),
 			self::getEntityTitleLookup(),
 			self::getLanguageFallbackChainFactory(),

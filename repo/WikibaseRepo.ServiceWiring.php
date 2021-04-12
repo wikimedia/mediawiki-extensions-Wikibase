@@ -140,6 +140,7 @@ use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\Notifications\RepoEntityChange;
 use Wikibase\Repo\Notifications\RepoItemChange;
+use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
@@ -573,6 +574,12 @@ return [
 			new TitleLookupBasedEntityUrlLookup(
 				WikibaseRepo::getEntityTitleLookup( $services )
 			)
+		);
+	},
+
+	'WikibaseRepo.EntityViewFactory' => function ( MediaWikiServices $services ): DispatchingEntityViewFactory {
+		return new DispatchingEntityViewFactory(
+			WikibaseRepo::getEntityTypeDefinitions( $services )->get( EntityTypeDefinitions::VIEW_FACTORY_CALLBACK )
 		);
 	},
 
