@@ -8,6 +8,7 @@ use ApiBase;
 use ApiMain;
 use ApiUsageException;
 use LogicException;
+use MediaWiki\MediaWikiServices;
 use MWContentSerializationException;
 use Status;
 use User;
@@ -119,7 +120,7 @@ abstract class ModifyEntity extends ApiBase {
 		$this->entitySavingHelper->setEntityIdParam( 'id' );
 
 		$this->setServices( new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteLookup(),
+			MediaWikiServices::getInstance()->getSiteLookup(),
 			$settings->getSetting( 'specialSiteLinkGroups' )
 		) );
 

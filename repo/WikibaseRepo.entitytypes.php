@@ -17,6 +17,7 @@
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -103,7 +104,7 @@ return [
 			$dedupe
 		) {
 			if ( $flavorFlags & RdfProducer::PRODUCE_SITELINKS ) {
-				$sites = WikibaseRepo::getDefaultInstance()->getSiteLookup()->getSites();
+				$sites = MediaWikiServices::getInstance()->getSiteLookup()->getSites();
 				// Since the only extra mapping needed for Items are site links,
 				// we just return the SiteLinksRdfBuilder directly,
 				// instead of defining an ItemRdfBuilder
