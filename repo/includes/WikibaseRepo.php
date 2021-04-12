@@ -316,7 +316,7 @@ class WikibaseRepo {
 	private function newWikibaseValueFormatterBuilders( array $thumbLimits ) {
 		return new WikibaseValueFormatterBuilders(
 			new FormatterLabelDescriptionLookupFactory( self::getTermLookup() ),
-			$this->getLanguageNameLookup(),
+			self::getLanguageNameLookup(),
 			self::getItemUrlParser(),
 			self::getSettings()->getSetting( 'geoShapeStorageBaseUrl' ),
 			self::getSettings()->getSetting( 'tabularDataStorageBaseUrl' ),
@@ -342,10 +342,11 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return LanguageNameLookup
+	 * @deprecated use {@link LanguageNameUtils} instead
 	 */
-	public function getLanguageNameLookup() {
-		return new LanguageNameLookup( self::getUserLanguage()->getCode() );
+	public static function getLanguageNameLookup( ContainerInterface $services = null ): LanguageNameLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.LanguageNameLookup' );
 	}
 
 	/**
@@ -1385,7 +1386,7 @@ class WikibaseRepo {
 	public function getEntityIdHtmlLinkFormatterFactory() {
 		$factory = new EntityIdHtmlLinkFormatterFactory(
 			self::getEntityTitleLookup(),
-			$this->getLanguageNameLookup(),
+			self::getLanguageNameLookup(),
 			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK )
 		);
 		if ( $this->inFederatedPropertyMode() ) {
@@ -1493,7 +1494,7 @@ class WikibaseRepo {
 			$this->getSiteLookup(),
 			self::getDataTypeFactory(),
 			TemplateFactory::getDefaultInstance(),
-			$this->getLanguageNameLookup(),
+			self::getLanguageNameLookup(),
 			new MediaWikiLanguageDirectionalityLookup(),
 			new MediaWikiNumberLocalizer( $lang ),
 			self::getSettings()->getSetting( 'siteLinkGroups' ),
