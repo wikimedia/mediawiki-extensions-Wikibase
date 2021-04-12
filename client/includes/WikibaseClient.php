@@ -403,6 +403,9 @@ final class WikibaseClient {
 		return MediaWikiServices::getInstance()->getContentLanguage();
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static function getUserLanguage( ContainerInterface $services = null ): Language {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.UserLanguage' );
