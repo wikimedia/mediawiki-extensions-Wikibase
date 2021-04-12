@@ -1150,7 +1150,7 @@ class WikibaseRepo {
 		$constraintProvider = self::getEntityConstraintProvider();
 		$errorLocalizer = self::getValidatorErrorLocalizer();
 		$siteLinkStore = self::getStore()->newSiteLinkStore();
-		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
+		$legacyFormatDetector = self::getLegacyFormatDetectorCallback();
 
 		return new ItemHandler(
 			self::getItemTermStoreWriter(),
@@ -1228,7 +1228,7 @@ class WikibaseRepo {
 		$errorLocalizer = self::getValidatorErrorLocalizer();
 		$propertyInfoStore = self::getStore()->getPropertyInfoStore();
 		$propertyInfoBuilder = self::getPropertyInfoBuilder();
-		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
+		$legacyFormatDetector = self::getLegacyFormatDetectorCallback();
 
 		return new PropertyHandler(
 			self::getPropertyTermStoreWriter(),
@@ -1250,36 +1250,10 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.PropertyInfoBuilder' );
 	}
 
-	private function getLegacyFormatDetectorCallback() {
-		$transformOnExport = self::getSettings()->getSetting( 'transformLegacyFormatOnExport' );
-
-		if ( !$transformOnExport ) {
-			return null;
-		}
-
-		/**
-		 * Detects blobs that may be using a legacy serialization format.
-		 * WikibaseRepo uses this for the $legacyExportFormatDetector parameter
-		 * when constructing EntityHandlers.
-		 *
-		 * @see WikibaseRepo::newItemHandler
-		 * @see WikibaseRepo::newPropertyHandler
-		 * @see EntityHandler::__construct
-		 *
-		 * @note: False positives (detecting a legacy format when really no legacy format was used)
-		 * are acceptable, false negatives (failing to detect a legacy format when one was used)
-		 * are not acceptable.
-		 *
-		 * @param string $blob
-		 * @param string $format
-		 *
-		 * @return bool True if $blob seems to be using a legacy serialization format.
-		 */
-		return function ( $blob, $format ) {
-			// The legacy serialization uses something like "entity":["item",21] or
-			// even "entity":"p21" for the entity ID.
-			return preg_match( '/"entity"\s*:/', $blob ) > 0;
-		};
+	/** @internal */
+	public static function getLegacyFormatDetectorCallback( ContainerInterface $services = null ): ?callable {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.LegacyFormatDetectorCallback' );
 	}
 
 	/**
