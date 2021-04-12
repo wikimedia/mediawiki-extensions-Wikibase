@@ -1,4 +1,3 @@
-import { storiesOf } from '@storybook/vue';
 import TaintedIcon from '@/presentation/components/TaintedIcon.vue';
 import { getters } from '@/store/getters';
 import Vue from 'vue';
@@ -9,8 +8,10 @@ Vue.use( Vuex );
 // eslint-disable-next-line no-console
 Vue.use( Track, { trackingFunction: console.log } );
 
-storiesOf( 'TaintedIcon', module )
-	.add( 'Just the icon', () => ( {
+export default { title: 'TaintedIcon' };
+
+export function justTheIcon() {
+	return {
 		components: { TaintedIcon },
 		store: new Vuex.Store( {
 			state: { statementsPopperIsOpen: { 'a-guid': false } },
@@ -18,4 +19,5 @@ storiesOf( 'TaintedIcon', module )
 		} ),
 		template:
 			'<p><TaintedIcon guid="a-guid"></TaintedIcon></p>',
-	} ) );
+	};
+}

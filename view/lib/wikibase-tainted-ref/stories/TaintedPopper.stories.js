@@ -1,4 +1,3 @@
-import { storiesOf } from '@storybook/vue';
 import TaintedPopper from '@/presentation/components/TaintedPopper.vue';
 import { getters } from '@/store/getters';
 import Vue from 'vue';
@@ -13,8 +12,10 @@ Vue.use( Message, { messageToTextFunction: ( key ) => {
 	return `(${key})`;
 } } );
 
-storiesOf( 'TaintedPopper', module )
-	.add( 'Popper component', () => ( {
+export default { title: 'TaintedPopper' };
+
+export function popperComponent() {
+	return {
 		components: { TaintedPopper },
 		store: new Vuex.Store( {
 			state: { helpLink: 'https://test.invalid' },
@@ -22,4 +23,5 @@ storiesOf( 'TaintedPopper', module )
 		} ),
 		template:
 			'<p><TaintedPopper guid="a-guid"></TaintedPopper></p>',
-	} ) );
+	};
+}
