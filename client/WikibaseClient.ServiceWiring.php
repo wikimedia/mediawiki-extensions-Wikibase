@@ -667,6 +667,21 @@ return [
 			->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
 	},
 
+	'WikibaseClient.UserLanguage' => function ( MediaWikiServices $services ): Language {
+		global $wgLang;
+
+		// TODO: define a LanguageProvider service instead of using a global directly.
+		// NOTE: The $wgLang global may still be null when the SetupAfterCache hook is
+		// run during bootstrapping.
+
+		if ( !$wgLang ) {
+			throw new MWException( 'Premature access: $wgLang is not yet initialized!' );
+		}
+
+		StubObject::unstub( $wgLang );
+		return $wgLang;
+	},
+
 	'WikibaseClient.ValueFormatterFactory' => function ( MediaWikiServices $services ): OutputFormatValueFormatterFactory {
 		return new OutputFormatValueFormatterFactory(
 			WikibaseClient::getDataTypeDefinitions( $services )
