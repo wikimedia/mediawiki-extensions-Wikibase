@@ -8,7 +8,6 @@ use Deserializers\DispatchableDeserializer;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
 use Exception;
-use HashBagOStuff;
 use IContextSource;
 use Language;
 use MediaWiki\MediaWikiServices;
@@ -188,11 +187,6 @@ class WikibaseRepo {
 	private $summaryFormatter = null;
 
 	/**
-	 * @var CachingCommonsMediaFileNameLookup|null
-	 */
-	private $cachingCommonsMediaFileNameLookup = null;
-
-	/**
 	 * @var WikibaseRepo|null
 	 */
 	private static $instance = null;
@@ -280,7 +274,7 @@ class WikibaseRepo {
 			$urlSchemes,
 			self::getItemVocabularyBaseUri(),
 			self::getMonolingualTextLanguages(),
-			$this->getCachingCommonsMediaFileNameLookup(),
+			self::getCachingCommonsMediaFileNameLookup(),
 			new MediaWikiPageNameNormalizer(),
 			self::getSettings()->getSetting( 'geoShapeStorageApiEndpointUrl' ),
 			self::getSettings()->getSetting( 'tabularDataStorageApiEndpointUrl' )
@@ -1497,18 +1491,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.TermsLanguages' );
 	}
 
-	/**
-	 * @return CachingCommonsMediaFileNameLookup
-	 */
-	private function getCachingCommonsMediaFileNameLookup() {
-		if ( $this->cachingCommonsMediaFileNameLookup === null ) {
-			$this->cachingCommonsMediaFileNameLookup = new CachingCommonsMediaFileNameLookup(
-				new MediaWikiPageNameNormalizer(),
-				new HashBagOStuff()
-			);
-		}
-
-		return $this->cachingCommonsMediaFileNameLookup;
+	public static function getCachingCommonsMediaFileNameLookup( ContainerInterface $services = null ): CachingCommonsMediaFileNameLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.CachingCommonsMediaFileNameLookup' );
 	}
 
 	public function getEntityTypesConfigValue() {
