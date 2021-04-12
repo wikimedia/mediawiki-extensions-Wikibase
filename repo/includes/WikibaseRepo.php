@@ -980,11 +980,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityConstraintProvider' );
 	}
 
-	/**
-	 * @return ValidatorErrorLocalizer
-	 */
-	public function getValidatorErrorLocalizer() {
-		return new ValidatorErrorLocalizer( self::getMessageParameterFormatter() );
+	public static function getValidatorErrorLocalizer( ContainerInterface $services = null ): ValidatorErrorLocalizer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ValidatorErrorLocalizer' );
 	}
 
 	/**
@@ -1150,7 +1148,7 @@ class WikibaseRepo {
 	public function newItemHandler(): ItemHandler {
 		$codec = self::getEntityContentDataCodec();
 		$constraintProvider = self::getEntityConstraintProvider();
-		$errorLocalizer = $this->getValidatorErrorLocalizer();
+		$errorLocalizer = self::getValidatorErrorLocalizer();
 		$siteLinkStore = self::getStore()->newSiteLinkStore();
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
@@ -1227,7 +1225,7 @@ class WikibaseRepo {
 	public function newPropertyHandler(): PropertyHandler {
 		$codec = self::getEntityContentDataCodec();
 		$constraintProvider = self::getEntityConstraintProvider();
-		$errorLocalizer = $this->getValidatorErrorLocalizer();
+		$errorLocalizer = self::getValidatorErrorLocalizer();
 		$propertyInfoStore = self::getStore()->getPropertyInfoStore();
 		$propertyInfoBuilder = self::getPropertyInfoBuilder();
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
