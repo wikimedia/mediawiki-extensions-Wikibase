@@ -120,6 +120,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
+use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
@@ -370,6 +371,15 @@ return [
 			WikibaseRepo::getLocalEntitySource( $services ),
 			$services->getInterwikiLookup()
 		);
+	},
+
+	'WikibaseRepo.EntityDataFormatProvider' => function ( MediaWikiServices $services ): EntityDataFormatProvider {
+		$formats = WikibaseRepo::getSettings( $services )->getSetting( 'entityDataFormats' );
+
+		$entityDataFormatProvider = new EntityDataFormatProvider();
+		$entityDataFormatProvider->setAllowedFormats( $formats );
+
+		return $entityDataFormatProvider;
 	},
 
 	'WikibaseRepo.EntityDiffer' => function ( MediaWikiServices $services ): EntityDiffer {

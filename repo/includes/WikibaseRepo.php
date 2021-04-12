@@ -1424,15 +1424,13 @@ class WikibaseRepo {
 		);
 	}
 
-	public function getEntityDataFormatProvider(): EntityDataFormatProvider {
-		$entityDataFormatProvider = new EntityDataFormatProvider();
-		$formats = self::getSettings()->getSetting( 'entityDataFormats' );
-		$entityDataFormatProvider->setAllowedFormats( $formats );
-		return $entityDataFormatProvider;
+	public static function getEntityDataFormatProvider( ContainerInterface $services = null ): EntityDataFormatProvider {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityDataFormatProvider' );
 	}
 
 	public function getEntityDataUriManager(): EntityDataUriManager {
-		$entityDataFormatProvider = $this->getEntityDataFormatProvider();
+		$entityDataFormatProvider = self::getEntityDataFormatProvider();
 
 		// build a mapping of formats to file extensions and include HTML
 		$supportedExtensions = [];
@@ -1462,7 +1460,7 @@ class WikibaseRepo {
 			self::getEntityTitleLookup(),
 			self::getLanguageFallbackChainFactory(),
 			TemplateFactory::getDefaultInstance(),
-			$this->getEntityDataFormatProvider(),
+			self::getEntityDataFormatProvider(),
 			// FIXME: Should this be done for all usages of this lookup, or is the impact of
 			// CachingPropertyInfoLookup enough?
 			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
