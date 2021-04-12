@@ -294,6 +294,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialGoToLinkedPage::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.EntityLookup",
 				"WikibaseRepo.Store"
 			]
 		},
@@ -371,6 +372,7 @@
 				"WikibaseRepo.CompactEntitySerializer",
 				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.EntityLookup",
 				"WikibaseRepo.EntityRdfBuilderFactory",
 				"WikibaseRepo.EntityRevisionLookup",
 				"WikibaseRepo.EntityTitleStoreLookup",

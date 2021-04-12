@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
@@ -64,6 +65,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		Serializer $compactEntitySerializer,
 		EntityContentFactory $entityContentFactory,
 		EntityIdParser $entityIdParser,
+		EntityLookup $entityLookup,
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleStoreLookup $entityTitleLookup,
@@ -83,8 +85,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$entityRedirectLookup = $store->getEntityRedirectLookup();
 
 		$serializationService = new EntityDataSerializationService(
-			// TODO move EntityLookup to service container and inject it directly
-			$store->getEntityLookup(),
+			$entityLookup,
 			$entityTitleLookup,
 			$entityContentFactory,
 			$wikibaseRepo->getPropertyDataTypeLookup(),
