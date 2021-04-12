@@ -112,8 +112,7 @@ class ViewEntityAction extends ViewAction {
 			return;
 		}
 		$subPagePrefix = $variables['wbEntityId'] . '.';
-		$repo = WikibaseRepo::getDefaultInstance();
-		$entityDataFormatProvider = $repo->getEntityDataFormatProvider();
+		$entityDataFormatProvider = WikibaseRepo::getEntityDataFormatProvider();
 		foreach ( $entityDataFormatProvider->getAllowedFormats() as $format ) {
 			$ext = $entityDataFormatProvider->getExtension( $format );
 			$mime = $entityDataFormatProvider->getMimeType( $format );

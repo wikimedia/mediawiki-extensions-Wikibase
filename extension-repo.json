@@ -378,6 +378,7 @@
 			  	"WikibaseRepo.CompactBaseDataModelSerializerFactory",
 				"WikibaseRepo.CompactEntitySerializer",
 				"WikibaseRepo.EntityContentFactory",
+				"WikibaseRepo.EntityDataFormatProvider",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.EntityLookup",
 				"WikibaseRepo.EntityRdfBuilderFactory",

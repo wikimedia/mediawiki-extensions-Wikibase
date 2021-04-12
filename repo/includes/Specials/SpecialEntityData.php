@@ -66,6 +66,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		SerializerFactory $compactBaseDataModelSerializerFactory,
 		Serializer $compactEntitySerializer,
 		EntityContentFactory $entityContentFactory,
+		EntityDataFormatProvider $entityDataFormatProvider,
 		EntityIdParser $entityIdParser,
 		EntityLookup $entityLookup,
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
@@ -80,8 +81,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 		global $wgUseCdn, $wgApiFrameOptions;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$entityDataFormatProvider = $wikibaseRepo->getEntityDataFormatProvider();
 
 		// TODO move EntityRedirectLookup to service container and inject it directly
 		$entityRedirectLookup = $store->getEntityRedirectLookup();
