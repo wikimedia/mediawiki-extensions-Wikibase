@@ -123,6 +123,7 @@ class ParseValue extends ApiBase {
 		DataTypeFactory $dataTypeFactory,
 		DataTypeValidatorFactory $dataTypeValidatorFactory,
 		ExceptionLocalizer $exceptionLocalizer,
+		PropertyDataTypeLookup $propertyDataTypeLookup,
 		ValidatorErrorLocalizer $validatorErrorLocalizer,
 		ValueParserFactory $valueParserFactory
 	): self {
@@ -137,7 +138,7 @@ class ParseValue extends ApiBase {
 			$dataTypeValidatorFactory,
 			$exceptionLocalizer,
 			$validatorErrorLocalizer,
-			$wikibaseRepo->getPropertyDataTypeLookup(),
+			$propertyDataTypeLookup,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
 			$stats
 		);

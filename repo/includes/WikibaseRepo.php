@@ -43,7 +43,6 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -74,7 +73,6 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\Modules\SettingsValueProvider;
-use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
@@ -171,11 +169,6 @@ class WikibaseRepo {
 	 * @var SnakFactory|null
 	 */
 	private $snakFactory = null;
-
-	/**
-	 * @var PropertyDataTypeLookup|null
-	 */
-	private $propertyDataTypeLookup = null;
 
 	/**
 	 * @var OutputFormatSnakFormatterFactory|null
@@ -379,7 +372,7 @@ class WikibaseRepo {
 		return new WikibaseSnakFormatterBuilders(
 			$valueFormatterBuilders,
 			self::getStore()->getPropertyInfoLookup(),
-			$this->getPropertyDataTypeLookup(),
+			self::getPropertyDataTypeLookup(),
 			self::getDataTypeFactory()
 		);
 	}
@@ -602,30 +595,9 @@ class WikibaseRepo {
 		return self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_STORE_FACTORY_CALLBACK );
 	}
 
-	public function getPropertyDataTypeLookup(): PropertyDataTypeLookup {
-		if ( $this->propertyDataTypeLookup === null ) {
-			$this->propertyDataTypeLookup = $this->newPropertyDataTypeLookup();
-		}
-
-		return $this->propertyDataTypeLookup;
-	}
-
-	public function newPropertyDataTypeLookup(): PropertyDataTypeLookup {
-		if ( $this->inFederatedPropertyMode() ) {
-			return self::getFederatedPropertiesServiceFactory()->newApiPropertyDataTypeLookup();
-		}
-
-		return $this->newPropertyDataTypeLookupForLocalProperties();
-	}
-
-	private function newPropertyDataTypeLookupForLocalProperties(): PropertyDataTypeLookup {
-		$infoLookup = self::getStore()->getPropertyInfoLookup();
-		$retrievingLookup = new EntityRetrievingDataTypeLookup( self::getEntityLookup() );
-		return new PropertyInfoDataTypeLookup(
-			$infoLookup,
-			self::getLogger(),
-			$retrievingLookup
-		);
+	public static function getPropertyDataTypeLookup( ContainerInterface $services = null ): PropertyDataTypeLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.PropertyDataTypeLookup' );
 	}
 
 	public static function getStringNormalizer( ContainerInterface $services = null ): StringNormalizer {
@@ -681,7 +653,7 @@ class WikibaseRepo {
 	public function getSnakFactory() {
 		if ( $this->snakFactory === null ) {
 			$this->snakFactory = new SnakFactory(
-				$this->getPropertyDataTypeLookup(),
+				self::getPropertyDataTypeLookup(),
 				self::getDataTypeFactory(),
 				self::getDataValueFactory()
 			);
@@ -710,7 +682,7 @@ class WikibaseRepo {
 	 */
 	public function getChangeOpFactoryProvider() {
 		$snakValidator = new SnakValidator(
-			$this->getPropertyDataTypeLookup(),
+			self::getPropertyDataTypeLookup(),
 			self::getDataTypeFactory(),
 			self::getDataTypeValidatorFactory()
 		);
@@ -813,7 +785,7 @@ class WikibaseRepo {
 			$this->snakFormatterFactory = new OutputFormatSnakFormatterFactory(
 				self::getDataTypeDefinitions()->getSnakFormatterFactoryCallbacks(),
 				self::getValueFormatterFactory(),
-				$this->getPropertyDataTypeLookup(),
+				self::getPropertyDataTypeLookup(),
 				self::getDataTypeFactory()
 			);
 		}
@@ -925,7 +897,7 @@ class WikibaseRepo {
 		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
 			[], // XXX: do we want $this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks()
 			$valueFormatterFactory,
-			$this->getPropertyDataTypeLookup(),
+			self::getPropertyDataTypeLookup(),
 			self::getDataTypeFactory()
 		);
 
@@ -1162,7 +1134,7 @@ class WikibaseRepo {
 			self::getEntityIdLookup(),
 			self::getLanguageFallbackLabelDescriptionLookupFactory(),
 			$this->getFieldDefinitionsByType( Item::ENTITY_TYPE ),
-			$this->getPropertyDataTypeLookup(),
+			self::getPropertyDataTypeLookup(),
 			$legacyFormatDetector
 		);
 	}
@@ -1268,7 +1240,7 @@ class WikibaseRepo {
 		return new ApiHelperFactory(
 			self::getEntityTitleStoreLookup(),
 			self::getExceptionLocalizer( $services ),
-			$this->getPropertyDataTypeLookup(),
+			self::getPropertyDataTypeLookup( $services ),
 			$this->getSiteLookup(),
 			$this->getSummaryFormatter(),
 			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
@@ -1410,7 +1382,7 @@ class WikibaseRepo {
 			self::getEntityDataFormatProvider(),
 			// FIXME: Should this be done for all usages of this lookup, or is the impact of
 			// CachingPropertyInfoLookup enough?
-			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
+			new InProcessCachingDataTypeLookup( self::getPropertyDataTypeLookup() ),
 			self::getCompactEntitySerializer(),
 			new EntityReferenceExtractorDelegator(
 				self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_REFERENCE_EXTRACTOR_CALLBACK ),
@@ -1438,7 +1410,7 @@ class WikibaseRepo {
 
 		$statementGrouperBuilder = new StatementGrouperBuilder(
 			self::getSettings()->getSetting( 'statementSections' ),
-			$this->getPropertyDataTypeLookup(),
+			self::getPropertyDataTypeLookup(),
 			self::getStatementGuidParser()
 		);
 

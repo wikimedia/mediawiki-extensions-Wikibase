@@ -10,6 +10,7 @@ use SiteLookup;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
@@ -73,6 +74,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleStoreLookup $entityTitleLookup,
 		LoggerInterface $logger,
+		PropertyDataTypeLookup $propertyDataTypeLookup,
 		RdfVocabulary $rdfVocabulary,
 		SettingsArray $repoSettings,
 		Store $store,
@@ -89,7 +91,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$entityLookup,
 			$entityTitleLookup,
 			$entityContentFactory,
-			$wikibaseRepo->getPropertyDataTypeLookup(),
+			$propertyDataTypeLookup,
 			$valueSnakRdfBuilderFactory,
 			$entityRdfBuilderFactory,
 			$entityDataFormatProvider,
