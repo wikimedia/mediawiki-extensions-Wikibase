@@ -25,7 +25,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -283,11 +282,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testNewTermSearchInteractorReturnType() {
 		$returnValue = $this->getWikibaseRepo()->newTermSearchInteractor( '' );
 		$this->assertInstanceOf( TermSearchInteractor::class, $returnValue );
-	}
-
-	public function testGetPropertyDataTypeLookupReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getPropertyDataTypeLookup();
-		$this->assertInstanceOf( PropertyDataTypeLookup::class, $returnValue );
 	}
 
 	public function testGetEntityLookup_default() {

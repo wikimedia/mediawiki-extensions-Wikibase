@@ -260,7 +260,7 @@ return [
 						)
 					]
 				),
-				$repo->getPropertyDataTypeLookup()
+				WikibaseRepo::getPropertyDataTypeLookup()
 			);
 		},
 		Def::LINK_FORMATTER_CALLBACK => function( Language $language ) {

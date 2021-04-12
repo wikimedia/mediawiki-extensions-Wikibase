@@ -49,6 +49,8 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
@@ -68,6 +70,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
+use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -910,6 +913,24 @@ return [
 			WikibaseRepo::getEntitySourceDefinitions( $services ),
 			WikibaseRepo::getEntityTypeDefinitions( $services ),
 			WikibaseRepo::getSingleEntitySourceServicesFactory( $services )
+		);
+	},
+
+	'WikibaseRepo.PropertyDataTypeLookup' => function ( MediaWikiServices $services ): PropertyDataTypeLookup {
+		$federatedPropertiesEnabled = WikibaseRepo::getSettings( $services )
+			->getSetting( 'federatedPropertiesEnabled' );
+		if ( $federatedPropertiesEnabled ) {
+			return WikibaseRepo::getFederatedPropertiesServiceFactory( $services )
+				->newApiPropertyDataTypeLookup();
+		}
+
+		$infoLookup = WikibaseRepo::getStore( $services )->getPropertyInfoLookup();
+		$entityLookup = WikibaseRepo::getEntityLookup( $services );
+		$retrievingLookup = new EntityRetrievingDataTypeLookup( $entityLookup );
+		return new PropertyInfoDataTypeLookup(
+			$infoLookup,
+			WikibaseRepo::getLogger( $services ),
+			$retrievingLookup
 		);
 	},
 

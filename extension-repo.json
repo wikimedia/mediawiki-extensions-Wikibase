@@ -109,6 +109,7 @@
 				"WikibaseRepo.DataTypeFactory",
 				"WikibaseRepo.DataTypeValidatorFactory",
 				"WikibaseRepo.ExceptionLocalizer",
+				"WikibaseRepo.PropertyDataTypeLookup",
 				"WikibaseRepo.ValidatorErrorLocalizer",
 				"WikibaseRepo.ValueParserFactory"
 			]
@@ -385,6 +386,7 @@
 				"WikibaseRepo.EntityRevisionLookup",
 				"WikibaseRepo.EntityTitleStoreLookup",
 				"WikibaseRepo.Logger",
+				"WikibaseRepo.PropertyDataTypeLookup",
 				"WikibaseRepo.RdfVocabulary",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.Store",
