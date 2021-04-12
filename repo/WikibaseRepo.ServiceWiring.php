@@ -41,6 +41,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
@@ -83,6 +84,8 @@ use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\LookupConstants;
+use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
@@ -135,6 +138,7 @@ use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\Notifications\RepoEntityChange;
 use Wikibase\Repo\Notifications\RepoItemChange;
+use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
@@ -828,6 +832,25 @@ return [
 			WikibaseRepo::getEntityTypeDefinitions( $services ),
 			WikibaseRepo::getSingleEntitySourceServicesFactory( $services )
 		);
+	},
+
+	'WikibaseRepo.PropertyInfoBuilder' => function ( MediaWikiServices $services ): PropertyInfoBuilder {
+		$settings = WikibaseRepo::getSettings( $services );
+		$propertyIdMap = [];
+
+		$formatterUrlProperty = $settings->getSetting( 'formatterUrlProperty' );
+		if ( $formatterUrlProperty !== null ) {
+			$propertyIdMap[PropertyInfoLookup::KEY_FORMATTER_URL] =
+				new PropertyId( $formatterUrlProperty );
+		}
+
+		$canonicalUriProperty = $settings->getSetting( 'canonicalUriProperty' );
+		if ( $canonicalUriProperty !== null ) {
+			$propertyIdMap[PropertyInfoStore::KEY_CANONICAL_URI] =
+				new PropertyId( $canonicalUriProperty );
+		}
+
+		return new PropertyInfoBuilder( $propertyIdMap );
 	},
 
 	'WikibaseRepo.PropertyTermsCollisionDetector' => function ( MediaWikiServices $services ): TermsCollisionDetector {

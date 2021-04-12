@@ -37,7 +37,6 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
@@ -94,8 +93,6 @@ use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\LookupConstants;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsAcquirer;
@@ -1238,7 +1235,7 @@ class WikibaseRepo {
 		$constraintProvider = self::getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
 		$propertyInfoStore = self::getStore()->getPropertyInfoStore();
-		$propertyInfoBuilder = $this->newPropertyInfoBuilder();
+		$propertyInfoBuilder = self::getPropertyInfoBuilder();
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		return new PropertyHandler(
@@ -1256,25 +1253,9 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return PropertyInfoBuilder
-	 */
-	public function newPropertyInfoBuilder() {
-		$propertyIdMap = [];
-
-		$formatterUrlProperty = self::getSettings()->getSetting( 'formatterUrlProperty' );
-		if ( $formatterUrlProperty !== null ) {
-			$propertyIdMap[PropertyInfoLookup::KEY_FORMATTER_URL] = new PropertyId(
-				$formatterUrlProperty
-			);
-		}
-
-		$canonicalUriProperty = self::getSettings()->getSetting( 'canonicalUriProperty' );
-		if ( $canonicalUriProperty !== null ) {
-			$propertyIdMap[PropertyInfoStore::KEY_CANONICAL_URI] = new PropertyId( $canonicalUriProperty );
-		}
-
-		return new PropertyInfoBuilder( $propertyIdMap );
+	public static function getPropertyInfoBuilder( ContainerInterface $services = null ): PropertyInfoBuilder {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.PropertyInfoBuilder' );
 	}
 
 	private function getLegacyFormatDetectorCallback() {

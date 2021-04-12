@@ -24,7 +24,6 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -42,8 +41,6 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
@@ -56,7 +53,6 @@ use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
-use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\SnakFactory;
@@ -582,21 +578,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testNewItemMergeInteractor() {
 		$interactor = $this->getWikibaseRepo()->newItemMergeInteractor( new RequestContext() );
 		$this->assertInstanceOf( ItemMergeInteractor::class, $interactor );
-	}
-
-	public function testNewPropertyInfoBuilder() {
-		$this->settings->setSetting( 'formatterUrlProperty', 'P123' );
-		$this->settings->setSetting( 'canonicalUriProperty', 'P321' );
-		$wikibaseRepo = $this->getWikibaseRepo();
-
-		$builder = $wikibaseRepo->newPropertyInfoBuilder();
-
-		$this->assertInstanceOf( PropertyInfoBuilder::class, $builder );
-		$expected = [
-			PropertyInfoLookup::KEY_FORMATTER_URL => new PropertyId( 'P123' ),
-			PropertyInfoStore::KEY_CANONICAL_URI => new PropertyId( 'P321' )
-		];
-		$this->assertEquals( $expected,  $builder->getPropertyIdMap() );
 	}
 
 	public function testGetEntityIdHtmlLinkFormatterFactory() {
