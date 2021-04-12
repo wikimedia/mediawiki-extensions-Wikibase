@@ -1331,10 +1331,11 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityViewFactory' );
 	}
 
-	public function getEntityMetaTagsCreatorFactory() {
-		return new DispatchingEntityMetaTagsCreatorFactory(
-			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::META_TAGS_CREATOR_CALLBACK )
-		);
+	public static function getEntityMetaTagsCreatorFactory(
+		ContainerInterface $services = null
+	): DispatchingEntityMetaTagsCreatorFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityMetaTagsCreatorFactory' );
 	}
 
 	public static function getEntityDataFormatProvider( ContainerInterface $services = null ): EntityDataFormatProvider {
@@ -1369,7 +1370,7 @@ class WikibaseRepo {
 
 		return new EntityParserOutputGeneratorFactory(
 			self::getEntityViewFactory(),
-			$this->getEntityMetaTagsCreatorFactory(),
+			self::getEntityMetaTagsCreatorFactory(),
 			self::getEntityTitleLookup(),
 			self::getLanguageFallbackChainFactory(),
 			TemplateFactory::getDefaultInstance(),
