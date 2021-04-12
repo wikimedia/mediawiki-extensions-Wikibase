@@ -57,9 +57,11 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\DisabledEntityTypesEntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -549,6 +551,18 @@ return [
 			$settings->getSetting( 'repoUrl' ),
 			$settings->getSetting( 'repoArticlePath' ),
 			$settings->getSetting( 'repoScriptPath' )
+		);
+	},
+
+	'WikibaseClient.RestrictedEntityLookup' => function ( MediaWikiServices $services ): RestrictedEntityLookup {
+		$settings = WikibaseClient::getSettings( $services );
+		$disabledEntityTypesEntityLookup = new DisabledEntityTypesEntityLookup(
+			WikibaseClient::getEntityLookup( $services ),
+			$settings->getSetting( 'disabledAccessEntityTypes' )
+		);
+		return new RestrictedEntityLookup(
+			$disabledEntityTypesEntityLookup,
+			$settings->getSetting( 'entityAccessLimit' )
 		);
 	},
 
