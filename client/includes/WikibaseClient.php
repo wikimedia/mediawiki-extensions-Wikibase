@@ -45,7 +45,6 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\DisabledEntityTypesEntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -65,7 +64,6 @@ use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -105,11 +103,6 @@ final class WikibaseClient {
 	 * @var SiteLookup
 	 */
 	private $siteLookup;
-
-	/**
-	 * @var PropertyDataTypeLookup|null
-	 */
-	private $propertyDataTypeLookup = null;
 
 	/**
 	 * @var OutputFormatSnakFormatterFactory|null
@@ -249,7 +242,7 @@ final class WikibaseClient {
 		return new WikibaseSnakFormatterBuilders(
 			$valueFormatterBuilders,
 			self::getStore()->getPropertyInfoLookup(),
-			$this->getPropertyDataTypeLookup(),
+			self::getPropertyDataTypeLookup(),
 			self::getDataTypeFactory()
 		);
 	}
@@ -344,18 +337,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.PrefetchingTermLookup' );
 	}
 
-	public function getPropertyDataTypeLookup(): PropertyDataTypeLookup {
-		if ( $this->propertyDataTypeLookup === null ) {
-			$infoLookup = self::getStore()->getPropertyInfoLookup();
-			$retrievingLookup = new EntityRetrievingDataTypeLookup( self::getEntityLookup() );
-			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup(
-				$infoLookup,
-				self::getLogger(),
-				$retrievingLookup
-			);
-		}
-
-		return $this->propertyDataTypeLookup;
+	public static function getPropertyDataTypeLookup( ContainerInterface $services = null ): PropertyDataTypeLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.PropertyDataTypeLookup' );
 	}
 
 	public static function getStringNormalizer( ContainerInterface $services = null ): StringNormalizer {
@@ -495,7 +479,7 @@ final class WikibaseClient {
 			$this->snakFormatterFactory = new OutputFormatSnakFormatterFactory(
 				self::getDataTypeDefinitions()->getSnakFormatterFactoryCallbacks(),
 				self::getValueFormatterFactory(),
-				$this->getPropertyDataTypeLookup(),
+				self::getPropertyDataTypeLookup(),
 				self::getDataTypeFactory()
 			);
 		}
@@ -648,7 +632,7 @@ final class WikibaseClient {
 		return new DataAccessSnakFormatterFactory(
 			self::getLanguageFallbackChainFactory(),
 			$this->getSnakFormatterFactory(),
-			$this->getPropertyDataTypeLookup(),
+			self::getPropertyDataTypeLookup(),
 			self::getRepoItemUriParser(),
 			self::getLanguageFallbackLabelDescriptionLookupFactory(),
 			self::getSettings()->getSetting( 'allowDataAccessInUserLanguage' )

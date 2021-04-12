@@ -18,7 +18,6 @@ use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
@@ -104,11 +103,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 
 		$second = WikibaseClient::getDefaultSnakFormatterBuilders();
 		$this->assertSame( $first, $second );
-	}
-
-	public function testGetPropertyDataTypeLookupReturnType() {
-		$returnValue = $this->getWikibaseClient()->getPropertyDataTypeLookup();
-		$this->assertInstanceOf( PropertyDataTypeLookup::class, $returnValue );
 	}
 
 	public function testGetContentLanguageReturnType() {

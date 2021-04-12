@@ -57,6 +57,8 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -69,6 +71,7 @@ use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -423,6 +426,17 @@ return [
 			WikibaseClient::getEntitySourceDefinitions( $services ),
 			WikibaseClient::getEntityTypeDefinitions( $services ),
 			WikibaseClient::getSingleEntitySourceServicesFactory( $services )
+		);
+	},
+
+	'WikibaseClient.PropertyDataTypeLookup' => function ( MediaWikiServices $services ): PropertyDataTypeLookup {
+		$infoLookup = WikibaseClient::getStore( $services )->getPropertyInfoLookup();
+		$entityLookup = WikibaseClient::getEntityLookup( $services );
+		$retrievingLookup = new EntityRetrievingDataTypeLookup( $entityLookup );
+		return new PropertyInfoDataTypeLookup(
+			$infoLookup,
+			WikibaseClient::getLogger( $services ),
+			$retrievingLookup
 		);
 	},
 
