@@ -38,7 +38,6 @@ use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\WikibaseSettings;
@@ -479,11 +478,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 			'WikibaseRepo.EntitySourceDefinitions',
 			$entitySourceDefinitions
 		);
-	}
-
-	public function testGetEntityContentDataCodec() {
-		$codec = $this->getWikibaseRepo()->getEntityContentDataCodec();
-		$this->assertInstanceOf( EntityContentDataCodec::class, $codec );
 	}
 
 	public function testGetEntityChangeFactory() {

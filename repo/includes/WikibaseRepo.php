@@ -1054,16 +1054,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.LocalEntityTypes' );
 	}
 
-	/**
-	 * @return EntityContentDataCodec
-	 */
-	public function getEntityContentDataCodec() {
-		return new EntityContentDataCodec(
-			self::getEntityIdParser(),
-			self::getStorageEntitySerializer(),
-			self::getInternalFormatEntityDeserializer(),
-			self::getDataAccessSettings()->maxSerializedEntitySizeInBytes()
-		);
+	public static function getEntityContentDataCodec( ContainerInterface $services = null ): EntityContentDataCodec {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityContentDataCodec' );
 	}
 
 	public static function getBaseDataModelDeserializerFactory( ContainerInterface $services = null ): DeserializerFactory {
@@ -1155,7 +1148,7 @@ class WikibaseRepo {
 	}
 
 	public function newItemHandler(): ItemHandler {
-		$codec = $this->getEntityContentDataCodec();
+		$codec = self::getEntityContentDataCodec();
 		$constraintProvider = self::getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
 		$siteLinkStore = self::getStore()->newSiteLinkStore();
@@ -1232,7 +1225,7 @@ class WikibaseRepo {
 	}
 
 	public function newPropertyHandler(): PropertyHandler {
-		$codec = $this->getEntityContentDataCodec();
+		$codec = self::getEntityContentDataCodec();
 		$constraintProvider = self::getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
 		$propertyInfoStore = self::getStore()->getPropertyInfoStore();

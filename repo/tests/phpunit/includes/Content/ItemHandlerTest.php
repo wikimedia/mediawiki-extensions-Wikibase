@@ -216,7 +216,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 
 		return new ItemHandler(
 			new NullEntityTermStoreWriter(),
-			$wikibaseRepo->getEntityContentDataCodec(),
+			WikibaseRepo::getEntityContentDataCodec(),
 			WikibaseRepo::getEntityConstraintProvider(),
 			$wikibaseRepo->getValidatorErrorLocalizer(),
 			WikibaseRepo::getEntityIdParser(),
