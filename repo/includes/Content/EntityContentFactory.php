@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Content;
 
-use Hooks;
 use InvalidArgumentException;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MWException;
@@ -14,10 +13,7 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikimedia\Assert\Assert;
 
@@ -29,7 +25,7 @@ use Wikimedia\Assert\Assert;
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
+class EntityContentFactory implements EntityTitleStoreLookup {
 
 	/**
 	 * @var string[] Entity type ID to content model ID mapping.
@@ -201,63 +197,6 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	private function entityNotFromLocalEntitySource( EntityId $id ): bool {
 		$entitySource = $this->entitySourceDefinitions->getSourceForEntityType( $id->getEntityType() );
 		return $entitySource->getSourceName() !== $this->localEntitySource->getSourceName();
-	}
-
-	/**
-	 * Returns the ID of the entity associated with the given page title.
-	 *
-	 * @note There is no guarantee that the EntityId returned by this method refers to
-	 * an existing entity.
-	 *
-	 * @param Title $title
-	 *
-	 * @return EntityId|null
-	 */
-	public function getEntityIdForTitle( Title $title ): ?EntityId {
-		$contentModel = $title->getContentModel();
-
-		Hooks::run( 'GetEntityContentModelForTitle', [ $title, &$contentModel ] );
-
-		try {
-			$handler = $this->getEntityHandlerForContentModel( $contentModel );
-			return $handler->getIdForTitle( $title );
-		} catch ( OutOfBoundsException $ex ) {
-			// Not an entity content model
-		} catch ( EntityIdParsingException $ex ) {
-			// @phan-suppress-previous-line PhanPluginDuplicateCatchStatementBody
-			// Not a valid entity page title.
-		}
-
-		return null;
-	}
-
-	/**
-	 * @see EntityIdLookup::getEntityIds
-	 *
-	 * @note the current implementation skips non-existing entities, but there is no guarantee
-	 * that this will always be the case.
-	 *
-	 * @param Title[] $titles
-	 *
-	 * @throws StorageException
-	 * @return EntityId[] Entity IDs, keyed by page IDs.
-	 */
-	public function getEntityIds( array $titles ): array {
-		$entityIds = [];
-
-		foreach ( $titles as $title ) {
-			$pageId = $title->getArticleID();
-
-			if ( $pageId > 0 ) {
-				$entityId = $this->getEntityIdForTitle( $title );
-
-				if ( $entityId !== null ) {
-					$entityIds[$pageId] = $entityId;
-				}
-			}
-		}
-
-		return $entityIds;
 	}
 
 	/**

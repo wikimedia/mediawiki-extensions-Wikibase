@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\ChangeModification\DispatchChangeDeletionNotificationJob;
-use Wikibase\Repo\Content\EntityContentFactory;
 
 /**
  * Hook for dispatching DeleteDispatchNotificationJob on repo which in turn will fetch archived revisions
@@ -19,34 +19,34 @@ class DeleteDispatcher implements ArticleDeleteCompleteHook {
 	/** @var callable */
 	private $jobQueueGroupFactory;
 
-	/** @var EntityContentFactory */
-	private $entityContentFactory;
+	/** @var EntityIdLookup */
+	private $entityIdLookup;
 
 	/** @var array */
 	private $localClientDatabases;
 
 	/**
 	 * @param callable $jobQueueGroupFactory
-	 * @param EntityContentFactory $entityContentFactory
+	 * @param EntityIdLookup $entityIdLookup
 	 * @param array $localClientDatabases
 	 */
 	public function __construct(
 		callable $jobQueueGroupFactory,
-		EntityContentFactory $entityContentFactory,
+		EntityIdLookup $entityIdLookup,
 		array $localClientDatabases
 	) {
 		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
-		$this->entityContentFactory = $entityContentFactory;
+		$this->entityIdLookup = $entityIdLookup;
 		$this->localClientDatabases = $localClientDatabases;
 	}
 
 	public static function factory(
-		EntityContentFactory $entityContentFactory,
+		EntityIdLookup $entityIdLookup,
 		SettingsArray $repoSettings
 	): self {
 		return new self(
 			'JobQueueGroup::singleton',
-			$entityContentFactory,
+			$entityIdLookup,
 			$repoSettings->getSetting( 'localClientDatabases' )
 		);
 	}
@@ -65,7 +65,7 @@ class DeleteDispatcher implements ArticleDeleteCompleteHook {
 		}
 
 		// Abort if not entityId
-		$entityId = $this->entityContentFactory->getEntityIdForTitle( $title );
+		$entityId = $this->entityIdLookup->getEntityIdForTitle( $title );
 		if ( $entityId === null ) {
 			return true;
 		}
