@@ -131,6 +131,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationVal
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\ContentHandlerEntityIdLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
@@ -752,6 +753,24 @@ return [
 		return WikibaseRepo::getInternalFormatDeserializerFactory( $services )->newEntityDeserializer();
 	},
 
+	'WikibaseRepo.ItemHandler' => function ( MediaWikiServices $services ): ItemHandler {
+		return new ItemHandler(
+			WikibaseRepo::getItemTermStoreWriter( $services ),
+			WikibaseRepo::getEntityContentDataCodec( $services ),
+			WikibaseRepo::getEntityConstraintProvider( $services ),
+			WikibaseRepo::getValidatorErrorLocalizer( $services ),
+			WikibaseRepo::getEntityIdParser( $services ),
+			WikibaseRepo::getStore( $services )
+				->newSiteLinkStore(),
+			WikibaseRepo::getEntityIdLookup( $services ),
+			WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory( $services ),
+			WikibaseRepo::getFieldDefinitionsFactory( $services )
+				->getFieldDefinitionsByType( Item::ENTITY_TYPE ),
+			WikibaseRepo::getPropertyDataTypeLookup( $services ),
+			WikibaseRepo::getLegacyFormatDetectorCallback( $services )
+		);
+	},
+
 	'WikibaseRepo.ItemTermsCollisionDetector' => function ( MediaWikiServices $services ): TermsCollisionDetector {
 		return WikibaseRepo::getTermsCollisionDetectorFactory( $services )
 			->getTermsCollisionDetector( Item::ENTITY_TYPE );
@@ -841,7 +860,7 @@ return [
 		 * WikibaseRepo uses this for the $legacyExportFormatDetector parameter
 		 * when constructing EntityHandlers.
 		 *
-		 * @see WikibaseRepo::newItemHandler
+		 * @see WikibaseRepo::getItemHandler
 		 * @see WikibaseRepo::newPropertyHandler
 		 * @see EntityHandler::__construct
 		 *

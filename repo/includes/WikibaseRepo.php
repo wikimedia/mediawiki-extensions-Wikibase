@@ -33,7 +33,6 @@ use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
@@ -1021,27 +1020,16 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.DataValueDeserializer' );
 	}
 
-	public function newItemHandler(): ItemHandler {
-		$codec = self::getEntityContentDataCodec();
-		$constraintProvider = self::getEntityConstraintProvider();
-		$errorLocalizer = self::getValidatorErrorLocalizer();
-		$siteLinkStore = self::getStore()->newSiteLinkStore();
-		$legacyFormatDetector = self::getLegacyFormatDetectorCallback();
+	public static function getItemHandler( ContainerInterface $services = null ): ItemHandler {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ItemHandler' );
+	}
 
-		return new ItemHandler(
-			self::getItemTermStoreWriter(),
-			$codec,
-			$constraintProvider,
-			$errorLocalizer,
-			self::getEntityIdParser(),
-			$siteLinkStore,
-			self::getEntityIdLookup(),
-			self::getLanguageFallbackLabelDescriptionLookupFactory(),
-			self::getFieldDefinitionsFactory()
-				->getFieldDefinitionsByType( Item::ENTITY_TYPE ),
-			self::getPropertyDataTypeLookup(),
-			$legacyFormatDetector
-		);
+	/**
+	 * @deprecated Use {@link getItemHandler()} instead.
+	 */
+	public function newItemHandler(): ItemHandler {
+		return self::getItemHandler();
 	}
 
 	public static function getPropertyTermStoreWriter( ContainerInterface $services = null ): EntityTermStoreWriter {

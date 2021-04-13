@@ -85,8 +85,7 @@ return [
 		},
 		Def::CONTENT_MODEL_ID => ItemContent::CONTENT_MODEL_ID,
 		Def::CONTENT_HANDLER_FACTORY_CALLBACK => function() {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			return $wikibaseRepo->newItemHandler();
+			return WikibaseRepo::getItemHandler();
 		},
 		Def::ENTITY_FACTORY_CALLBACK => function() {
 			return new Item();

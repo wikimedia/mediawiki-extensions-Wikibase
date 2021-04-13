@@ -151,8 +151,8 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					'custom-type' => 'wikibase-custom-type',
 				],
 				[
-					'item' => function() use ( $wikibaseRepo ) {
-						return $wikibaseRepo->newItemHandler();
+					'item' => function() {
+						return WikibaseRepo::getItemHandler();
 					},
 					'property' => function() use ( $wikibaseRepo ) {
 						return $wikibaseRepo->newPropertyHandler();
@@ -1013,8 +1013,8 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					'property' => PropertyContent::CONTENT_MODEL_ID,
 				],
 				[
-					'item' => function() use ( $wikibaseRepo ) {
-						return $wikibaseRepo->newItemHandler();
+					'item' => function() {
+						return WikibaseRepo::getItemHandler();
 					},
 					'property' => function() use ( $wikibaseRepo ) {
 						return $wikibaseRepo->newPropertyHandler();

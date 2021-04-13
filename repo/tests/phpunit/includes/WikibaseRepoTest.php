@@ -465,22 +465,9 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( EntityChangeFactory::class, $factory );
 	}
 
-	public function testNewItemHandler() {
-		$handler = $this->getWikibaseRepo()->newItemHandler();
-		$this->assertInstanceOf( EntityHandler::class, $handler );
-	}
-
 	public function testNewPropertyHandler() {
 		$handler = $this->getWikibaseRepo()->newPropertyHandler();
 		$this->assertInstanceOf( EntityHandler::class, $handler );
-	}
-
-	public function testNewItemHandler_noTransform() {
-		$this->settings->setSetting( 'transformLegacyFormatOnExport', false );
-		$wikibaseRepo = $this->getWikibaseRepo();
-
-		$handler = $wikibaseRepo->newItemHandler();
-		$this->assertNull( $handler->getLegacyExportFormatDetector() );
 	}
 
 	public function testNewPropertyHandler_noTransform() {
@@ -489,14 +476,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
 		$handler = $wikibaseRepo->newPropertyHandler();
 		$this->assertNull( $handler->getLegacyExportFormatDetector() );
-	}
-
-	public function testNewItemHandler_withTransform() {
-		$this->settings->setSetting( 'transformLegacyFormatOnExport', true );
-		$wikibaseRepo = $this->getWikibaseRepo();
-
-		$handler = $wikibaseRepo->newItemHandler();
-		$this->assertNotNull( $handler->getLegacyExportFormatDetector() );
 	}
 
 	public function testNewPropertyHandler_withTransform() {
