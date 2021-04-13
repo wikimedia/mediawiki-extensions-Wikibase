@@ -51,7 +51,6 @@ use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
-use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\ValidatorBuilders;
@@ -333,11 +332,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 			Store::LOOKUP_CACHING_DISABLED,
 			LookupConstants::LATEST_FROM_MASTER
 		) );
-	}
-
-	public function testGetSnakFactoryReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getSnakFactory();
-		$this->assertInstanceOf( SnakFactory::class, $returnValue );
 	}
 
 	public function testGetEntityIdParserReturnType() {

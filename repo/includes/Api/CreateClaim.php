@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\Repo\ChangeOp\ChangeOpMainSnak;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -75,6 +76,7 @@ class CreateClaim extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		EntityIdParser $entityIdParser,
+		SnakFactory $snakFactory,
 		StatementGuidValidator $statementGuidValidator
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -83,7 +85,7 @@ class CreateClaim extends ApiBase {
 		$errorReporter = $apiHelperFactory->getErrorReporter( $mainModule );
 
 		$modificationHelper = new StatementModificationHelper(
-			$wikibaseRepo->getSnakFactory(),
+			$snakFactory,
 			$entityIdParser,
 			$statementGuidValidator,
 			$errorReporter

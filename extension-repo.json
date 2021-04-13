@@ -22,6 +22,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\CreateClaim::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.SnakFactory",
 			  	"WikibaseRepo.StatementGuidValidator"
 			]
 		},
@@ -119,6 +120,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveClaims::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
 			]
@@ -128,6 +130,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveQualifiers::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
 			]
@@ -137,6 +140,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveReferences::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
 			]
@@ -167,6 +171,7 @@
 				"StatsdDataFactory",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.ExternalFormatStatementDeserializer",
+			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
 			]
@@ -176,6 +181,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SetClaimValue::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
 			]
@@ -199,6 +205,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SetQualifier::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
 			]
@@ -209,6 +216,7 @@
 			"services": [
 				"WikibaseRepo.BaseDataModelDeserializerFactory",
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
 			]

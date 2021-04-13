@@ -164,11 +164,6 @@ use Wikibase\View\ViewFactory;
 class WikibaseRepo {
 
 	/**
-	 * @var SnakFactory|null
-	 */
-	private $snakFactory = null;
-
-	/**
 	 * @var OutputFormatSnakFormatterFactory|null
 	 */
 	private $snakFormatterFactory = null;
@@ -640,19 +635,9 @@ class WikibaseRepo {
 		}
 	}
 
-	/**
-	 * @return SnakFactory
-	 */
-	public function getSnakFactory() {
-		if ( $this->snakFactory === null ) {
-			$this->snakFactory = new SnakFactory(
-				self::getPropertyDataTypeLookup(),
-				self::getDataTypeFactory(),
-				self::getDataValueFactory()
-			);
-		}
-
-		return $this->snakFactory;
+	public static function getSnakFactory( ContainerInterface $services = null ): SnakFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.SnakFactory' );
 	}
 
 	public static function getEntityIdParser( ContainerInterface $services = null ): EntityIdParser {
