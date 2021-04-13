@@ -12,6 +12,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\View\EntityIdFormatterFactory;
 
 /**
  * Factory to create Special:ListProperties based on whether federated properties
@@ -29,14 +30,13 @@ class SpecialListPropertiesDispatchingFactory {
 	 */
 	public static function factory(
 		DataTypeFactory $dataTypeFactory,
+		EntityIdFormatterFactory $entityIdFormatterFactory,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		PrefetchingTermLookup $prefetchingTermLookup,
 		SettingsArray $repoSettings,
 		Store $store
 	) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		if ( $repoSettings->getSetting( 'federatedPropertiesEnabled' ) ) {
 			return new SpecialListFederatedProperties(
 				$repoSettings->getSetting( 'federatedPropertiesSourceScriptUrl' )
@@ -47,7 +47,7 @@ class SpecialListPropertiesDispatchingFactory {
 			$prefetchingTermLookup,
 			$languageFallbackChainFactory->newFromLanguage( WikibaseRepo::getUserLanguage() )
 		);
-		$entityIdFormatter = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory()
+		$entityIdFormatter = $entityIdFormatterFactory
 			->getEntityIdFormatter( WikibaseRepo::getUserLanguage() );
 		return new SpecialListProperties(
 			$dataTypeFactory,

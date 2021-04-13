@@ -120,7 +120,6 @@ use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
-use Wikibase\Repo\FederatedProperties\WrappingEntityIdFormatterFactory;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
@@ -1295,19 +1294,11 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.LocalEntityNamespaceLookup' );
 	}
 
-	/**
-	 * @return EntityIdFormatterFactory
-	 */
-	public function getEntityIdHtmlLinkFormatterFactory() {
-		$factory = new EntityIdHtmlLinkFormatterFactory(
-			self::getEntityTitleLookup(),
-			self::getLanguageNameLookup(),
-			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK )
-		);
-		if ( $this->inFederatedPropertyMode() ) {
-			$factory = new WrappingEntityIdFormatterFactory( $factory );
-		}
-		return $factory;
+	public static function getEntityIdHtmlLinkFormatterFactory(
+		ContainerInterface $services = null
+	): EntityIdFormatterFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityIdHtmlLinkFormatterFactory' );
 	}
 
 	public static function getEntityViewFactory( ContainerInterface $services = null ): DispatchingEntityViewFactory {
@@ -1384,7 +1375,7 @@ class WikibaseRepo {
 		);
 
 		return new ViewFactory(
-			$this->getEntityIdHtmlLinkFormatterFactory(),
+			self::getEntityIdHtmlLinkFormatterFactory(),
 			new EntityIdLabelFormatterFactory(),
 			new WikibaseHtmlSnakFormatterFactory( $this->getSnakFormatterFactory() ),
 			$statementGrouperBuilder->getStatementGrouper(),
@@ -1473,7 +1464,7 @@ class WikibaseRepo {
 			ValueFormatter::OPT_LANG => $langCode
 		] );
 
-		$htmlFormatterFactory = $this->getEntityIdHtmlLinkFormatterFactory();
+		$htmlFormatterFactory = self::getEntityIdHtmlLinkFormatterFactory();
 		$entityIdFormatter = $htmlFormatterFactory->getEntityIdFormatter( $contextSource->getLanguage() );
 
 		$formatterFactory = $this->getSnakFormatterFactory();

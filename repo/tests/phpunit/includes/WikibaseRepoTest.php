@@ -45,7 +45,6 @@ use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
-use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
@@ -558,11 +557,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testNewItemMergeInteractor() {
 		$interactor = $this->getWikibaseRepo()->newItemMergeInteractor( new RequestContext() );
 		$this->assertInstanceOf( ItemMergeInteractor::class, $interactor );
-	}
-
-	public function testGetEntityIdHtmlLinkFormatterFactory() {
-		$service = $this->getWikibaseRepo()->getEntityIdHtmlLinkFormatterFactory();
-		$this->assertInstanceOf( EntityIdHtmlLinkFormatterFactory::class, $service );
 	}
 
 	public function testGetEntityParserOutputGeneratorFactory() {

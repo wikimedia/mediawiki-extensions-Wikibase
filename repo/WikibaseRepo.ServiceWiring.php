@@ -129,9 +129,11 @@ use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\ContentHandlerEntityIdLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\DataTypeValidatorFactory;
+use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
+use Wikibase\Repo\FederatedProperties\WrappingEntityIdFormatterFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
@@ -173,6 +175,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\View\EntityIdFormatterFactory;
 use Wikimedia\ObjectFactory;
 
 /** @phpcs-require-sorted-array */
@@ -477,6 +480,24 @@ return [
 			WikibaseRepo::getEntityTypeDefinitions( $services )
 				->get( EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK )
 		);
+	},
+
+	'WikibaseRepo.EntityIdHtmlLinkFormatterFactory' => function (
+		MediaWikiServices $services
+	): EntityIdFormatterFactory {
+		$factory = new EntityIdHtmlLinkFormatterFactory(
+			WikibaseRepo::getEntityTitleLookup( $services ),
+			WikibaseRepo::getLanguageNameLookup( $services ),
+			WikibaseRepo::getEntityTypeDefinitions( $services )
+				->get( EntityTypeDefinitions::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK )
+		);
+
+		$federatedPropertiesEnabled = WikibaseRepo::getSettings( $services )
+			->getSetting( 'federatedPropertiesEnabled' );
+
+		return $federatedPropertiesEnabled
+			? new WrappingEntityIdFormatterFactory( $factory )
+			: $factory;
 	},
 
 	'WikibaseRepo.EntityIdLookup' => function ( MediaWikiServices $services ): EntityIdLookup {

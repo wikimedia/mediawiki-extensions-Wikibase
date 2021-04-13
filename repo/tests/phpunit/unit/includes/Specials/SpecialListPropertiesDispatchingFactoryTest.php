@@ -25,6 +25,7 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 	public function testFactoryNoFederation() {
 		$specialPage = SpecialListPropertiesDispatchingFactory::factory(
 			new DataTypeFactory( [] ),
+			WikibaseRepo::getEntityIdHtmlLinkFormatterFactory(),
 			$this->createMock( EntityTitleLookup::class ),
 			WikibaseRepo::getLanguageFallbackChainFactory(),
 			WikibaseRepo::getPrefetchingTermLookup(),
@@ -41,6 +42,7 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 	public function testFactoryFederation() {
 		$specialPage = SpecialListPropertiesDispatchingFactory::factory(
 			new DataTypeFactory( [] ),
+			WikibaseRepo::getEntityIdHtmlLinkFormatterFactory(),
 			$this->createMock( EntityTitleLookup::class ),
 			WikibaseRepo::getLanguageFallbackChainFactory(),
 			WikibaseRepo::getPrefetchingTermLookup(),
