@@ -133,7 +133,6 @@ use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
-use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Search\Fields\FieldDefinitionsFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -1088,17 +1087,6 @@ class WikibaseRepo {
 	public static function getFieldDefinitionsFactory( ContainerInterface $services = null ): FieldDefinitionsFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.FieldDefinitionsFactory' );
-	}
-
-	/**
-	 * Get field definitions for entity depending on its type.
-	 * @deprecated Use {@link getFieldDefinitionsFactory()} instead.
-	 * @param string $type Entity type
-	 * @return FieldDefinitions
-	 */
-	public function getFieldDefinitionsByType( $type ) {
-		return self::getFieldDefinitionsFactory()
-			->getFieldDefinitionsByType( $type );
 	}
 
 	public function newPropertyHandler(): PropertyHandler {
