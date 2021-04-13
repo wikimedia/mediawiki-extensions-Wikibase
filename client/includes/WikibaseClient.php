@@ -43,7 +43,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\DataModel\Services\Lookup\DisabledEntityTypesEntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
@@ -108,11 +107,6 @@ final class WikibaseClient {
 	 * @var ClientParserOutputDataUpdater|null
 	 */
 	private $parserOutputDataUpdater = null;
-
-	/**
-	 * @var RestrictedEntityLookup|null
-	 */
-	private $restrictedEntityLookup = null;
 
 	/**
 	 * @var WikibaseValueFormatterBuilders|null
@@ -670,20 +664,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.TermsLanguages' );
 	}
 
-	public function getRestrictedEntityLookup(): RestrictedEntityLookup {
-		if ( $this->restrictedEntityLookup === null ) {
-			$settings = self::getSettings();
-			$disabledEntityTypesEntityLookup = new DisabledEntityTypesEntityLookup(
-				self::getEntityLookup(),
-				$settings->getSetting( 'disabledAccessEntityTypes' )
-			);
-			$this->restrictedEntityLookup = new RestrictedEntityLookup(
-				$disabledEntityTypesEntityLookup,
-				$settings->getSetting( 'entityAccessLimit' )
-			);
-		}
-
-		return $this->restrictedEntityLookup;
+	public static function getRestrictedEntityLookup( ContainerInterface $services = null ): RestrictedEntityLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.RestrictedEntityLookup' );
 	}
 
 	public static function getPropertyOrderProvider( ContainerInterface $services = null ): PropertyOrderProvider {

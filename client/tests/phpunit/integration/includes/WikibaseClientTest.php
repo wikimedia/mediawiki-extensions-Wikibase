@@ -17,7 +17,6 @@ use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
@@ -152,11 +151,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetPropertyParserFunctionRunner() {
 		$runner = $this->getWikibaseClient()->getPropertyParserFunctionRunner();
 		$this->assertInstanceOf( Runner::class, $runner );
-	}
-
-	public function testGetRestrictedEntityLookup() {
-		$restrictedEntityLookup = $this->getWikibaseClient()->getRestrictedEntityLookup();
-		$this->assertInstanceOf( RestrictedEntityLookup::class, $restrictedEntityLookup );
 	}
 
 	public function testGetDataAccessSnakFormatterFactory() {

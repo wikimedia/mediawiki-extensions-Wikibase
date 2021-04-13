@@ -53,7 +53,7 @@ class ParserHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function testStateCleared() {
 		$title = Title::newMainPage();
-		$restrictedEntityLookup = WikibaseClient::getDefaultInstance()->getRestrictedEntityLookup();
+		$restrictedEntityLookup = WikibaseClient::getRestrictedEntityLookup();
 
 		$popt = new ParserOptions( User::newFromId( 0 ), Language::factory( 'en' ) );
 
