@@ -12,7 +12,6 @@ use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
 use Title;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @license GPL-2.0-or-later
@@ -45,12 +44,12 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 
 	public static function factory(
 		HtmlCacheUpdater $htmlCacheUpdater,
+		EntityDataUriManager $entityDataUriManager,
 		EntityIdLookup $entityIdLookup
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$entityIdLookup,
-			$wikibaseRepo->getEntityDataUriManager(),
+			$entityDataUriManager,
 			$htmlCacheUpdater,
 			'JobQueueGroup::singleton'
 		);

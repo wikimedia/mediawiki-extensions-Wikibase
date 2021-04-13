@@ -17,12 +17,12 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
+use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\Store;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Special page to act as a data endpoint for the linked data web.
@@ -68,6 +68,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		Serializer $compactEntitySerializer,
 		EntityContentFactory $entityContentFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
+		EntityDataUriManager $entityDataUriManager,
 		EntityIdParser $entityIdParser,
 		EntityLookup $entityLookup,
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
@@ -81,8 +82,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
 	): self {
 		global $wgUseCdn, $wgApiFrameOptions;
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		// TODO move EntityRedirectLookup to service container and inject it directly
 		$entityRedirectLookup = $store->getEntityRedirectLookup();
@@ -107,7 +106,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
 
 		$entityDataRequestHandler = new EntityDataRequestHandler(
-			$wikibaseRepo->getEntityDataUriManager(),
+			$entityDataUriManager,
 			$htmlCacheUpdater,
 			$entityIdParser,
 			$entityRevisionLookup,
