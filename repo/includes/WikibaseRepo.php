@@ -134,7 +134,7 @@ use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
-use Wikibase\Repo\Search\Fields\NoFieldDefinitions;
+use Wikibase\Repo\Search\Fields\FieldDefinitionsFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
@@ -1037,7 +1037,8 @@ class WikibaseRepo {
 			$siteLinkStore,
 			self::getEntityIdLookup(),
 			self::getLanguageFallbackLabelDescriptionLookupFactory(),
-			$this->getFieldDefinitionsByType( Item::ENTITY_TYPE ),
+			self::getFieldDefinitionsFactory()
+				->getFieldDefinitionsByType( Item::ENTITY_TYPE ),
 			self::getPropertyDataTypeLookup(),
 			$legacyFormatDetector
 		);
@@ -1084,18 +1085,20 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.TypeIdsResolver' );
 	}
 
+	public static function getFieldDefinitionsFactory( ContainerInterface $services = null ): FieldDefinitionsFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.FieldDefinitionsFactory' );
+	}
+
 	/**
 	 * Get field definitions for entity depending on its type.
+	 * @deprecated Use {@link getFieldDefinitionsFactory()} instead.
 	 * @param string $type Entity type
 	 * @return FieldDefinitions
 	 */
 	public function getFieldDefinitionsByType( $type ) {
-		$definitions = self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::SEARCH_FIELD_DEFINITIONS );
-		if ( isset( $definitions[$type] ) && is_callable( $definitions[$type] ) ) {
-			return call_user_func( $definitions[$type], self::getTermsLanguages()->getLanguages(),
-				self::getSettings() );
-		}
-		return new NoFieldDefinitions();
+		return self::getFieldDefinitionsFactory()
+			->getFieldDefinitionsByType( $type );
 	}
 
 	public function newPropertyHandler(): PropertyHandler {
@@ -1116,7 +1119,8 @@ class WikibaseRepo {
 			self::getLanguageFallbackLabelDescriptionLookupFactory(),
 			$propertyInfoStore,
 			$propertyInfoBuilder,
-			$this->getFieldDefinitionsByType( Property::ENTITY_TYPE ),
+			self::getFieldDefinitionsFactory()
+				->getFieldDefinitionsByType( Property::ENTITY_TYPE ),
 			$legacyFormatDetector
 		);
 	}

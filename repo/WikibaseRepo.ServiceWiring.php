@@ -157,6 +157,7 @@ use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
+use Wikibase\Repo\Search\Fields\FieldDefinitionsFactory;
 use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -682,6 +683,14 @@ return [
 		return new ApiServiceFactory(
 			$settings->getSetting( 'federatedPropertiesSourceScriptUrl' ),
 			$services->getMainConfig()->get( 'ServerName' )
+		);
+	},
+
+	'WikibaseRepo.FieldDefinitionsFactory' => function ( MediaWikiServices $services ): FieldDefinitionsFactory {
+		return new FieldDefinitionsFactory(
+			WikibaseRepo::getEntityTypeDefinitions( $services ),
+			WikibaseRepo::getTermsLanguages( $services ),
+			WikibaseRepo::getSettings( $services )
 		);
 	},
 
