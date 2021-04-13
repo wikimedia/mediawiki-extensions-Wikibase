@@ -34,7 +34,7 @@ class SpecialSetDescriptionTest extends SpecialModifyTermTestCase {
 
 		return new SpecialSetDescription(
 			$copyrightView,
-			$wikibaseRepo->getSummaryFormatter(),
+			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			WikibaseRepo::getEntityPermissionChecker(),

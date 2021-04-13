@@ -65,6 +65,9 @@ use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\EntityIdLinkFormatter;
+use Wikibase\Lib\Formatters\EntityIdPlainLinkFormatter;
+use Wikibase\Lib\Formatters\EntityIdValueFormatter;
+use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -165,6 +168,7 @@ use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
 use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
+use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -1096,6 +1100,64 @@ return [
 
 	'WikibaseRepo.StringNormalizer' => function ( MediaWikiServices $services ): StringNormalizer {
 		return new StringNormalizer();
+	},
+
+	'WikibaseRepo.SummaryFormatter' => function ( MediaWikiServices $services ): SummaryFormatter {
+		// This needs to use an EntityIdPlainLinkFormatter as we want to mangle
+		// the links created in HtmlPageLinkRendererEndHookHandler afterwards (the links must not
+		// contain a display text: [[Item:Q1]] is fine but [[Item:Q1|Q1]] isn't).
+		$idFormatter = new EntityIdPlainLinkFormatter( WikibaseRepo::getEntityTitleLookup( $services ) );
+
+		$formatterFactoryCBs = WikibaseRepo::getDataTypeDefinitions( $services )
+			->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE );
+
+		// Iterate through all defined entity types and override the formatter for entity IDs.
+		foreach ( WikibaseRepo::getEntityTypeDefinitions( $services )->getEntityTypes() as $entityType ) {
+			$formatterFactoryCBs[ "PT:wikibase-$entityType" ] = function (
+				$format,
+				FormatterOptions $options ) use ( $idFormatter ) {
+				if ( $format === SnakFormatter::FORMAT_PLAIN ) {
+					return new EntityIdValueFormatter( $idFormatter );
+				} else {
+					return null;
+				}
+			};
+		}
+
+		$contentLanguage = $services->getContentLanguage();
+
+		// Create a new ValueFormatterFactory from entity definition overrides.
+		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
+			$formatterFactoryCBs,
+			$contentLanguage,
+			WikibaseRepo::getLanguageFallbackChainFactory( $services )
+		);
+
+		// Create a new SnakFormatterFactory based on the specialized ValueFormatterFactory.
+		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
+			[], // XXX: do we want DataTypeDefinitions::getSnakFormatterFactoryCallbacks()
+			$valueFormatterFactory,
+			WikibaseRepo::getPropertyDataTypeLookup( $services ),
+			WikibaseRepo::getDataTypeFactory( $services )
+		);
+
+		$options = new FormatterOptions();
+		$snakFormatter = $snakFormatterFactory->getSnakFormatter(
+			SnakFormatter::FORMAT_PLAIN,
+			$options
+		);
+		$valueFormatter = $valueFormatterFactory->getValueFormatter(
+			SnakFormatter::FORMAT_PLAIN,
+			$options
+		);
+
+		return new SummaryFormatter(
+			$idFormatter,
+			$valueFormatter,
+			$snakFormatter,
+			$contentLanguage,
+			WikibaseRepo::getEntityIdParser( $services )
+		);
 	},
 
 	'WikibaseRepo.TermBuffer' => function ( MediaWikiServices $services ): TermBuffer {

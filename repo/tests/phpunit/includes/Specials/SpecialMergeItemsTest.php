@@ -118,7 +118,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 */
 	protected function newSpecialPage() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$summaryFormatter = $wikibaseRepo->getSummaryFormatter();
+		$summaryFormatter = WikibaseRepo::getSummaryFormatter();
 
 		$mergeFactory = new MergeFactory(
 			WikibaseRepo::getEntityConstraintProvider(),

@@ -54,7 +54,6 @@ use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\Store\Store;
-use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\ValidatorBuilders;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\EntityExistsValidator;
@@ -369,11 +368,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetSnakFormatterFactory() {
 		$returnValue = $this->getWikibaseRepo()->getSnakFormatterFactory();
 		$this->assertInstanceOf( OutputFormatSnakFormatterFactory::class, $returnValue );
-	}
-
-	public function testGetSummaryFormatter() {
-		$returnValue = $this->getWikibaseRepo()->getSummaryFormatter();
-		$this->assertInstanceOf( SummaryFormatter::class, $returnValue );
 	}
 
 	public function testGetChangeOpFactory() {

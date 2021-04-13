@@ -106,8 +106,6 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	 * @return SpecialRedirectEntity
 	 */
 	protected function newSpecialPage() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$exceptionLocalizer = $this->createMock( ExceptionLocalizer::class );
 		$exceptionLocalizer->method( 'getExceptionMessage' )
 			->willReturnCallback( function( Exception $ex ) {
@@ -138,7 +136,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
-				$wikibaseRepo->getSummaryFormatter(),
+				WikibaseRepo::getSummaryFormatter(),
 				$this->user,
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository,

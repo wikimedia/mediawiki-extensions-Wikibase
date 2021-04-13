@@ -128,7 +128,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 			$user = $this->createMock( User::class );
 		}
 
-		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+		$summaryFormatter = WikibaseRepo::getSummaryFormatter();
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );

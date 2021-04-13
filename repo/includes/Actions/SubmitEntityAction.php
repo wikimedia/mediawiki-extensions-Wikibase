@@ -46,8 +46,7 @@ class SubmitEntityAction extends EditEntityAction {
 	public function __construct( Page $page, IContextSource $context = null ) {
 		parent::__construct( $page, $context );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$this->summaryFormatter = $wikibaseRepo->getSummaryFormatter();
+		$this->summaryFormatter = WikibaseRepo::getSummaryFormatter();
 	}
 
 	public function getName() {

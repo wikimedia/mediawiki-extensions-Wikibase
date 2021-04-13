@@ -63,7 +63,7 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 				LookupConstants::LATEST_FROM_MASTER
 			),
 			WikibaseRepo::getEntityStore( $services ),
-			$wikibaseRepo->getSummaryFormatter(),
+			WikibaseRepo::getSummaryFormatter( $services ),
 			LoggerFactory::getInstance( 'UpdateRepo' ),
 			$services->getSiteLookup(),
 			$wikibaseRepo->newEditEntityFactory()

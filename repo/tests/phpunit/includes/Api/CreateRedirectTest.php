@@ -124,7 +124,6 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 		$main = new ApiMain( $request, true );
 		$main->getContext()->setUser( $user );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$errorReporter = new ApiErrorReporter(
 			$main,
 			WikibaseRepo::getExceptionLocalizer(),
@@ -139,7 +138,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
-				$wikibaseRepo->getSummaryFormatter(),
+				WikibaseRepo::getSummaryFormatter(),
 				$user,
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository,

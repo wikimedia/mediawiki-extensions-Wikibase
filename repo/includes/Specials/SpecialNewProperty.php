@@ -71,7 +71,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityTitleLookup $entityTitleLookup,
 		TermsCollisionDetector $propertyTermsCollisionDetector,
-		SettingsArray $repoSettings
+		SettingsArray $repoSettings,
+		SummaryFormatter $summaryFormatter
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
@@ -84,7 +85,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 		return new self(
 			$copyrightView,
 			$entityNamespaceLookup,
-			$wikibaseRepo->getSummaryFormatter(),
+			$summaryFormatter,
 			$entityTitleLookup,
 			$wikibaseRepo->newEditEntityFactory(),
 			$dataTypeFactory,

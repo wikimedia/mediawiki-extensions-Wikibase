@@ -126,7 +126,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		SiteLookup $siteLookup,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
-		SettingsArray $repoSettings
+		SettingsArray $repoSettings,
+		SummaryFormatter $summaryFormatter
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
@@ -144,7 +145,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		return new self(
 			$copyrightView,
-			$wikibaseRepo->getSummaryFormatter(),
+			$summaryFormatter,
 			$entityTitleLookup,
 			$wikibaseRepo->newEditEntityFactory(),
 			$siteLookup,
