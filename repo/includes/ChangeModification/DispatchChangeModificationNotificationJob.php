@@ -11,7 +11,8 @@ use Psr\Log\LoggerInterface;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
-use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Repo\Content\ContentHandlerEntityIdLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -29,8 +30,8 @@ abstract class DispatchChangeModificationNotificationJob extends Job {
 	/** @var string[] */
 	private $localClientDatabases;
 
-	/** @var EntityContentFactory */
-	private $entityContentFactory;
+	/** @var EntityIdLookup */
+	private $entityIdLookup;
 
 	/** @var LoggerInterface */
 	protected $logger;
@@ -50,23 +51,23 @@ abstract class DispatchChangeModificationNotificationJob extends Job {
 		$this->localClientDatabases = $repoSettings->getSetting( 'localClientDatabases' );
 
 		$this->initServices(
-			WikibaseRepo::getEntityContentFactory( $mwServices ),
+			new ContentHandlerEntityIdLookup( WikibaseRepo::getEntityContentFactory( $mwServices ) ),
 			WikibaseRepo::getLogger( $mwServices ),
 			'JobQueueGroup::singleton'
 		);
 	}
 
 	/**
-	 * @param EntityContentFactory $entityContentFactory
+	 * @param EntityIdLookup $entityIdLookup
 	 * @param LoggerInterface $logger
 	 * @param callable $jobGroupFactory
 	 */
 	public function initServices(
-		EntityContentFactory $entityContentFactory,
+		EntityIdLookup $entityIdLookup,
 		LoggerInterface $logger,
 		callable $jobGroupFactory
 	) {
-		$this->entityContentFactory = $entityContentFactory;
+		$this->entityIdLookup = $entityIdLookup;
 		$this->logger = $logger;
 		$this->jobGroupFactory = $jobGroupFactory;
 	}
@@ -108,8 +109,7 @@ abstract class DispatchChangeModificationNotificationJob extends Job {
 		if ( empty( $this->localClientDatabases ) ) {
 			return true;
 		}
-
-		$entityId = $this->entityContentFactory->getEntityIdForTitle( $this->getTitle() );
+		$entityId = $this->entityIdLookup->getEntityIdForTitle( $this->getTitle() );
 
 		if ( $entityId === null ) {
 			$this->logger->warning( "Job should not be queued for non-entity pages." );

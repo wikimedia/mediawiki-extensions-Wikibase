@@ -95,7 +95,7 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 	private function getJobAndInitialize( Title $title, array $params, $logger, $factory ): DispatchChangeDeletionNotificationJob {
 		$job = new DispatchChangeDeletionNotificationJob( $title, $params );
 		$job->initServices(
-			WikibaseRepo::getEntityContentFactory(),
+			WikibaseRepo::getEntityIdLookup(),
 			$logger,
 			$factory
 		);

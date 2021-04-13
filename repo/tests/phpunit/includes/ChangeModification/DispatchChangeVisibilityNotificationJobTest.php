@@ -13,8 +13,8 @@ use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\ChangeModification\DispatchChangeVisibilityNotificationJob;
-use Wikibase\Repo\Content\EntityContentFactory;
 
 /**
  * @covers \Wikibase\Repo\ChangeModification\DispatchChangeVisibilityNotificationJob
@@ -193,7 +193,7 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 			]
 		);
 		$job->initServices(
-			$this->newEntityContentFactory(),
+			$this->newEntityIdLookup(),
 			new NullLogger(),
 			$this->newJobQueueGroupFactory( $jobQueueGroupFactoryCallCount, $wikiIds, $expectedJobParams )
 		);
@@ -241,15 +241,15 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 		};
 	}
 
-	private function newEntityContentFactory(): EntityContentFactory {
-		$entityContentFactory = $this->createMock( EntityContentFactory::class );
-		$entityContentFactory->expects( $this->once() )
+	private function newEntityIdLookup(): EntityIdLookup {
+		$entityIdLookup = $this->createMock( EntityIdLookup::class );
+		$entityIdLookup->expects( $this->once() )
 			->method( 'getEntityIdForTitle' )
 			->willReturnCallback( function ( Title $title ): EntityId {
 				return ( new BasicEntityIdParser() )->parse( $title->getText() );
 			} );
 
-		return $entityContentFactory;
+		return $entityIdLookup;
 	}
 
 	private function newRevisionLookup(): RevisionLookup {

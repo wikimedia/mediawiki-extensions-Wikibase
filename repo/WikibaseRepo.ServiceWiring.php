@@ -126,6 +126,7 @@ use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
+use Wikibase\Repo\Content\ContentHandlerEntityIdLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
@@ -451,7 +452,7 @@ return [
 	},
 
 	'WikibaseRepo.EntityIdLookup' => function ( MediaWikiServices $services ): EntityIdLookup {
-		return WikibaseRepo::getEntityContentFactory( $services );
+		return new ContentHandlerEntityIdLookup( WikibaseRepo::getEntityContentFactory( $services ) );
 	},
 
 	'WikibaseRepo.EntityIdParser' => function ( MediaWikiServices $services ): EntityIdParser {

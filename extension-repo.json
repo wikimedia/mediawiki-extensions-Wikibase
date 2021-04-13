@@ -683,7 +683,7 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\DeleteDispatcher",
 			"factory": "\\Wikibase\\Repo\\Hooks\\DeleteDispatcher::factory",
 			"services": [
-				"WikibaseRepo.EntityContentFactory",
+				"WikibaseRepo.EntityIdLookup",
 				"WikibaseRepo.Settings"
 			]
 		},

@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Hooks\DeleteDispatcher;
 use WikiPage;
 
@@ -31,23 +31,23 @@ class DeleteDispatcherTest extends TestCase {
 		$wikiPage->method( 'getTitle' )
 			->willReturn( $title );
 
-		$entityContentFactory = $this->createMock( EntityContentFactory::class );
-		$entityContentFactory->expects( $this->once() )
+		$entityIdLookup = $this->createMock( EntityIdLookup::class );
+		$entityIdLookup->expects( $this->once() )
 			->method( 'getEntityIdForTitle' )
 			->with( $title )
 			->willReturn( null );
 
-		$entityContentFactoryNotCalled = $this->newEntityContentFactoryNeverCalled();
+		$entityIdLookupNotCalled = $this->newEntityIdLookupNeverCalled();
 
 		$wikiPageNoTitle = $this->createMock( WikiPage::class );
 		$wikiPageNoTitle->method( 'getTitle' )
 			->willReturn( null );
 
 		return [
-			'no client databases' => [ 1, [], $wikiPage, $entityContentFactoryNotCalled ],
-			'no archive records' => [ 0,  $this->localClientDatabases, $wikiPage, $entityContentFactoryNotCalled ],
-			'wiki-page has no title' => [ 1, $this->localClientDatabases, $wikiPageNoTitle, $entityContentFactoryNotCalled ],
-			'not an entity page' => [ 1, $this->localClientDatabases, $wikiPage, $entityContentFactory ]
+			'no client databases' => [ 1, [], $wikiPage, $entityIdLookupNotCalled ],
+			'no archive records' => [ 0,  $this->localClientDatabases, $wikiPage, $entityIdLookupNotCalled ],
+			'wiki-page has no title' => [ 1, $this->localClientDatabases, $wikiPageNoTitle, $entityIdLookupNotCalled ],
+			'not an entity page' => [ 1, $this->localClientDatabases, $wikiPage, $entityIdLookup ]
 		];
 	}
 
@@ -56,17 +56,17 @@ class DeleteDispatcherTest extends TestCase {
 	 * @param int $archivedRecordsCount
 	 * @param string[] $clients
 	 * @param WikiPage $wikiPage
-	 * @param EntityContentFactory $entityContentFactory
+	 * @param EntityIdLookup $entityIdLookup
 	 */
 	public function testShouldNotSpawnDeleteDispatchJobAndAbortEarly(
 		int $archivedRecordsCount,
 		array $clients,
 		WikiPage $wikiPage,
-		EntityContentFactory $entityContentFactory
+		EntityIdLookup $entityIdLookup
 	) {
 		$deleteDispatcher = new DeleteDispatcher(
 			$this->newJobQueueGroupFactoryNeverCalled(),
-			$entityContentFactory,
+			$entityIdLookup,
 			$clients
 		);
 		$status = $deleteDispatcher->onArticleDeleteComplete(
@@ -91,13 +91,13 @@ class DeleteDispatcherTest extends TestCase {
 
 		$factory = $this->newJobQueueGroupFactory( $expectedJobParams );
 
-		$entityContentFactory = $this->createMock( EntityContentFactory::class );
-		$entityContentFactory->expects( $this->once() )
+		$entityIdLookup = $this->createMock( EntityIdLookup::class );
+		$entityIdLookup->expects( $this->once() )
 			->method( 'getEntityIdForTitle' )
 			->with( $title )
 			->willReturn( $entityId );
 
-		$deleteDispatcher = new DeleteDispatcher( $factory, $entityContentFactory, $this->localClientDatabases );
+		$deleteDispatcher = new DeleteDispatcher( $factory, $entityIdLookup, $this->localClientDatabases );
 
 		$wikiPage = $this->createMock( WikiPage::class );
 
@@ -118,11 +118,11 @@ class DeleteDispatcherTest extends TestCase {
 		);
 	}
 
-	private function newEntityContentFactoryNeverCalled() {
-		$entityContentFactory = $this->createMock( EntityContentFactory::class );
-		$entityContentFactory->expects( $this->never() )
+	private function newEntityIdLookupNeverCalled() {
+		$entityIdLookup = $this->createMock( EntityIdLookup::class );
+		$entityIdLookup->expects( $this->never() )
 			->method( 'getEntityIdForTitle' );
-		return $entityContentFactory;
+		return $entityIdLookup;
 	}
 
 	private function newJobQueueGroupFactoryNeverCalled() {
