@@ -643,6 +643,15 @@ return [
 		);
 	},
 
+	'WikibaseRepo.FulltextSearchTypes' => function ( MediaWikiServices $services ): array {
+		$searchTypeContexts = WikibaseRepo::getEntityTypeDefinitions( $services )
+			->get( EntityTypeDefinitions::FULLTEXT_SEARCH_CONTEXT );
+
+		return array_map( function ( $context ): string {
+			return is_callable( $context ) ? $context() : $context;
+		}, $searchTypeContexts );
+	},
+
 	'WikibaseRepo.IdGenerator' => function ( MediaWikiServices $services ): IdGenerator {
 		$settings = WikibaseRepo::getSettings( $services );
 

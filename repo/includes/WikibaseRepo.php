@@ -1590,17 +1590,11 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * Get entity search helper callbacks.
 	 * @return string[]
 	 */
-	public function getFulltextSearchTypes() {
-		$searchTypes = self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::FULLTEXT_SEARCH_CONTEXT );
-		foreach ( $searchTypes as $key => $value ) {
-			if ( is_callable( $value ) ) {
-				$searchTypes[$key] = $value();
-			}
-		}
-		return $searchTypes;
+	public static function getFulltextSearchTypes( ContainerInterface $services = null ): array {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.FulltextSearchTypes' );
 	}
 
 	public static function getTermFallbackCache( ContainerInterface $services = null ): TermFallbackCacheFacade {
