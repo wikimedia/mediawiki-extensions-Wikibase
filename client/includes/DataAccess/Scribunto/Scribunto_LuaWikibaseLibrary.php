@@ -241,11 +241,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	private function newEntityAccessor() {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = WikibaseClient::getSettings();
 		return new EntityAccessor(
 			$this->getEntityIdParser(),
-			$wikibaseClient->getRestrictedEntityLookup(),
+			WikibaseClient::getRestrictedEntityLookup(),
 			$this->getUsageAccumulator(),
 			WikibaseClient::getCompactEntitySerializer(),
 			WikibaseClient::getCompactBaseDataModelSerializerFactory()
