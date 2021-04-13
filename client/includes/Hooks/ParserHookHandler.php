@@ -8,7 +8,6 @@ use MediaWiki\Hook\ParserClearStateHook;
 use MediaWiki\Hook\ParserLimitReportPrepareHook;
 use Parser;
 use ParserOutput;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Lib\SettingsArray;
 
@@ -38,12 +37,11 @@ class ParserHookHandler implements
 	}
 
 	public static function factory(
+		RestrictedEntityLookup $restrictedEntityLookup,
 		SettingsArray $clientSettings
 	): self {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
 		return new self(
-			$wikibaseClient->getRestrictedEntityLookup(),
+			$restrictedEntityLookup,
 			$clientSettings->getSetting( 'entityAccessLimit' )
 		);
 	}

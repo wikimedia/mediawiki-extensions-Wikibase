@@ -585,7 +585,7 @@ final class WikibaseClient {
 		return new StatementGroupRendererFactory(
 			self::getPropertyLabelResolver(),
 			new SnaksFinder(),
-			$this->getRestrictedEntityLookup(),
+			self::getRestrictedEntityLookup(),
 			$this->getDataAccessSnakFormatterFactory(),
 			new EntityUsageFactory( self::getEntityIdParser() ),
 			MediaWikiServices::getInstance()->getLanguageConverterFactory(),
@@ -610,7 +610,7 @@ final class WikibaseClient {
 			$this->getStatementGroupRendererFactory(),
 			self::getStore()->getSiteLinkLookup(),
 			self::getEntityIdParser(),
-			$this->getRestrictedEntityLookup(),
+			self::getRestrictedEntityLookup(),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'allowArbitraryDataAccess' )
 		);

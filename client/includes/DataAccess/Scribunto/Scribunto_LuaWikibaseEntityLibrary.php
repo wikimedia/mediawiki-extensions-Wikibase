@@ -57,7 +57,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			$lang
 		);
 
-		$entityLookup = $wikibaseClient->getRestrictedEntityLookup();
+		$entityLookup = WikibaseClient::getRestrictedEntityLookup();
 
 		$propertyIdResolver = new PropertyIdResolver(
 			$entityLookup,
