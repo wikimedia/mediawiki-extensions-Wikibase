@@ -105,11 +105,6 @@ final class WikibaseClient {
 	private $siteLookup;
 
 	/**
-	 * @var OutputFormatSnakFormatterFactory|null
-	 */
-	private $snakFormatterFactory = null;
-
-	/**
 	 * @var ClientParserOutputDataUpdater|null
 	 */
 	private $parserOutputDataUpdater = null;
@@ -469,17 +464,9 @@ final class WikibaseClient {
 	 * Returns a OutputFormatSnakFormatterFactory the provides SnakFormatters
 	 * for different output formats.
 	 */
-	private function getSnakFormatterFactory(): OutputFormatSnakFormatterFactory {
-		if ( $this->snakFormatterFactory === null ) {
-			$this->snakFormatterFactory = new OutputFormatSnakFormatterFactory(
-				self::getDataTypeDefinitions()->getSnakFormatterFactoryCallbacks(),
-				self::getValueFormatterFactory(),
-				self::getPropertyDataTypeLookup(),
-				self::getDataTypeFactory()
-			);
-		}
-
-		return $this->snakFormatterFactory;
+	public static function getSnakFormatterFactory( ContainerInterface $services = null ): OutputFormatSnakFormatterFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.SnakFormatterFactory' );
 	}
 
 	/**
@@ -615,7 +602,7 @@ final class WikibaseClient {
 	public function getDataAccessSnakFormatterFactory(): DataAccessSnakFormatterFactory {
 		return new DataAccessSnakFormatterFactory(
 			self::getLanguageFallbackChainFactory(),
-			$this->getSnakFormatterFactory(),
+			self::getSnakFormatterFactory(),
 			self::getPropertyDataTypeLookup(),
 			self::getRepoItemUriParser(),
 			self::getLanguageFallbackLabelDescriptionLookupFactory(),

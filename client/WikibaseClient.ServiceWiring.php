@@ -70,6 +70,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
@@ -642,6 +643,16 @@ return [
 		}
 
 		return $siteGroup;
+	},
+
+	'WikibaseClient.SnakFormatterFactory' => function ( MediaWikiServices $services ): OutputFormatSnakFormatterFactory {
+		return new OutputFormatSnakFormatterFactory(
+			WikibaseClient::getDataTypeDefinitions( $services )
+				->getSnakFormatterFactoryCallbacks(),
+			WikibaseClient::getValueFormatterFactory( $services ),
+			WikibaseClient::getPropertyDataTypeLookup( $services ),
+			WikibaseClient::getDataTypeFactory( $services )
+		);
 	},
 
 	'WikibaseClient.Store' => function ( MediaWikiServices $services ): ClientStore {
