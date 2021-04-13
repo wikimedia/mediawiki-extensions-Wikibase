@@ -152,6 +152,7 @@ use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
+use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
@@ -1052,6 +1053,14 @@ return [
 				WikibaseRepo::getSettings( $services )
 					->getSetting( 'badgeItems' )
 			)
+		);
+	},
+
+	'WikibaseRepo.SnakFactory' => function ( MediaWikiServices $services ): SnakFactory {
+		return new SnakFactory(
+			WikibaseRepo::getPropertyDataTypeLookup( $services ),
+			WikibaseRepo::getDataTypeFactory( $services ),
+			WikibaseRepo::getDataValueFactory( $services )
 		);
 	},
 

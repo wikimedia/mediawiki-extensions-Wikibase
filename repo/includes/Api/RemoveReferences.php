@@ -14,6 +14,7 @@ use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -83,6 +84,7 @@ class RemoveReferences extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		EntityIdParser $entityIdParser,
+		SnakFactory $snakFactory,
 		StatementGuidParser $statementGuidParser,
 		StatementGuidValidator $statementGuidValidator
 	): self {
@@ -91,7 +93,7 @@ class RemoveReferences extends ApiBase {
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 		$modificationHelper = new StatementModificationHelper(
-			$wikibaseRepo->getSnakFactory(),
+			$snakFactory,
 			$entityIdParser,
 			$statementGuidValidator,
 			$apiHelperFactory->getErrorReporter( $mainModule )

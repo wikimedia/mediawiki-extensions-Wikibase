@@ -13,6 +13,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -96,6 +97,7 @@ class SetQualifier extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		EntityIdParser $entityIdParser,
+		SnakFactory $snakFactory,
 		StatementGuidParser $statementGuidParser,
 		StatementGuidValidator $statementGuidValidator
 	): self {
@@ -104,7 +106,7 @@ class SetQualifier extends ApiBase {
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 		$modificationHelper = new StatementModificationHelper(
-			$wikibaseRepo->getSnakFactory(),
+			$snakFactory,
 			$entityIdParser,
 			$statementGuidValidator,
 			$apiHelperFactory->getErrorReporter( $mainModule )
