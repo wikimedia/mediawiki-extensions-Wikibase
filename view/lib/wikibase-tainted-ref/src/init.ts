@@ -8,7 +8,7 @@ import ReferenceListChangeCounter from '@/ReferenceListChangeCounter';
 
 const RL_COMMON_MODULE_NAME = 'wikibase.tainted-ref';
 export default async (): Promise<void> => {
-	const mwWindow = window as MwWindow;
+	const mwWindow: MwWindow = window;
 	function messageToTextFunction( key: string ): string {
 		return mwWindow.mw.message( key ).text();
 	}

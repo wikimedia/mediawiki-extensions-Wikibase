@@ -116,14 +116,11 @@ interface JQUls {
 	data: UlsData;
 }
 
-interface MWJQueryExtension {
+export interface MWJQueryExtension {
 	uls?: JQUls;
 }
 
 interface MwWindow extends Window {
-	mw: MediaWiki;
-	OO: MwWindowOO;
-	$: JQueryStatic&MWJQueryExtension;
 }
 
 export default MwWindow;
