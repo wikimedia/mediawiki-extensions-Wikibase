@@ -146,6 +146,7 @@ use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\Notifications\RepoEntityChange;
 use Wikibase\Repo\Notifications\RepoItemChange;
+use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
@@ -466,6 +467,15 @@ return [
 				Store::LOOKUP_CACHING_ENABLED,
 				LookupConstants::LATEST_FROM_REPLICA
 			);
+	},
+
+	'WikibaseRepo.EntityMetaTagsCreatorFactory' => function (
+		MediaWikiServices $services
+	): DispatchingEntityMetaTagsCreatorFactory {
+		return new DispatchingEntityMetaTagsCreatorFactory(
+			WikibaseRepo::getEntityTypeDefinitions( $services )
+				->get( EntityTypeDefinitions::META_TAGS_CREATOR_CALLBACK )
+		);
 	},
 
 	'WikibaseRepo.EntityNamespaceLookup' => function ( MediaWikiServices $services ): EntityNamespaceLookup {
