@@ -133,6 +133,7 @@ use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
@@ -415,6 +416,31 @@ return [
 		$entityDataFormatProvider->setAllowedFormats( $formats );
 
 		return $entityDataFormatProvider;
+	},
+
+	'WikibaseRepo.EntityDataUriManager' => function ( MediaWikiServices $services ): EntityDataUriManager {
+		$entityDataFormatProvider = WikibaseRepo::getEntityDataFormatProvider( $services );
+
+		// build a mapping of formats to file extensions and include HTML
+		$supportedExtensions = [];
+		$supportedExtensions['html'] = 'html';
+		foreach ( $entityDataFormatProvider->getSupportedFormats() as $format ) {
+			$ext = $entityDataFormatProvider->getExtension( $format );
+
+			if ( $ext !== null ) {
+				$supportedExtensions[$format] = $ext;
+			}
+		}
+
+		return new EntityDataUriManager(
+			// TODO this should probably use SpecialPageFactory or TitleFactory,
+			// but neither of them seems to have a suitable method yet
+			SpecialPage::getTitleFor( 'EntityData' ),
+			$supportedExtensions,
+			WikibaseRepo::getSettings( $services )
+				->getSetting( 'entityDataCachePaths' ),
+			WikibaseRepo::getEntityTitleLookup( $services )
+		);
 	},
 
 	'WikibaseRepo.EntityDiffer' => function ( MediaWikiServices $services ): EntityDiffer {

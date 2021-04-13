@@ -19,7 +19,6 @@ use Psr\Log\LoggerInterface;
 use RequestContext;
 use Serializers\Serializer;
 use SiteLookup;
-use SpecialPage;
 use Title;
 use User;
 use ValueFormatters\FormatterOptions;
@@ -1343,26 +1342,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityDataFormatProvider' );
 	}
 
-	public function getEntityDataUriManager(): EntityDataUriManager {
-		$entityDataFormatProvider = self::getEntityDataFormatProvider();
-
-		// build a mapping of formats to file extensions and include HTML
-		$supportedExtensions = [];
-		$supportedExtensions['html'] = 'html';
-		foreach ( $entityDataFormatProvider->getSupportedFormats() as $format ) {
-			$ext = $entityDataFormatProvider->getExtension( $format );
-
-			if ( $ext !== null ) {
-				$supportedExtensions[$format] = $ext;
-			}
-		}
-
-		return new EntityDataUriManager(
-			SpecialPage::getTitleFor( 'EntityData' ),
-			$supportedExtensions,
-			self::getSettings()->getSetting( 'entityDataCachePaths' ),
-			self::getEntityTitleLookup()
-		);
+	public static function getEntityDataUriManager( ContainerInterface $services = null ): EntityDataUriManager {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityDataUriManager' );
 	}
 
 	public function getEntityParserOutputGeneratorFactory(): EntityParserOutputGeneratorFactory {

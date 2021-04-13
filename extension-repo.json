@@ -380,6 +380,7 @@
 				"WikibaseRepo.CompactEntitySerializer",
 				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityDataFormatProvider",
+				"WikibaseRepo.EntityDataUriManager",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.EntityLookup",
 				"WikibaseRepo.EntityRdfBuilderFactory",
@@ -692,6 +693,7 @@
 			"factory": "\\Wikibase\\Repo\\Hooks\\EntityDataPurger::factory",
 			"services": [
 				"HtmlCacheUpdater",
+				"WikibaseRepo.EntityDataUriManager",
 				"WikibaseRepo.EntityIdLookup"
 			]
 		},

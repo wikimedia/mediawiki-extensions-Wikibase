@@ -53,11 +53,10 @@ class PurgeEntityDataJob extends Job {
 	}
 
 	public static function newFromGlobalState( Title $unused, array $params ): self {
-		$repo = WikibaseRepo::getDefaultInstance();
 		$services = MediaWikiServices::getInstance();
 		return new self(
-			$repo->getEntityIdParser(),
-			$repo->getEntityDataUriManager(),
+			WikibaseRepo::getEntityIdParser( $services ),
+			WikibaseRepo::getEntityDataUriManager( $services ),
 			$services->getDBLoadBalancerFactory(),
 			$services->getHtmlCacheUpdater(),
 			$services->getMainConfig()->get( 'UpdateRowsPerQuery' ),
