@@ -167,7 +167,7 @@ class GetEntities extends ApiBase {
 			$entityIdParser,
 			$siteLookup,
 			$stats,
-			$wikibaseRepo->inFederatedPropertyMode()
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' )
 		);
 	}
 

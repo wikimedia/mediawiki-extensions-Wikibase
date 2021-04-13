@@ -22,6 +22,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
@@ -114,6 +115,7 @@ class SetClaim extends ApiBase {
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityIdParser $entityIdParser,
 		Deserializer $externalFormatStatementDeserializer,
+		SettingsArray $repoSettings,
 		SnakFactory $snakFactory,
 		StatementGuidParser $statementGuidParser,
 		StatementGuidValidator $statementGuidValidator
@@ -143,7 +145,7 @@ class SetClaim extends ApiBase {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
 			},
 			$stats,
-			$wikibaseRepo->inFederatedPropertyMode()
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' )
 		);
 	}
 

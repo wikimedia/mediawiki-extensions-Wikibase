@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
@@ -17,7 +18,6 @@ use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module to associate a page on a site with a Wikibase entity or remove an already made such association.
@@ -54,9 +54,9 @@ class SetSiteLink extends ModifyEntity {
 		ApiMain $mainModule,
 		string $moduleName,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
+		SettingsArray $repoSettings,
 		SiteLinkBadgeChangeOpSerializationValidator $siteLinkBadgeChangeOpSerializationValidator
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new self(
 			$mainModule,
@@ -64,7 +64,7 @@ class SetSiteLink extends ModifyEntity {
 			$changeOpFactoryProvider
 				->getSiteLinkChangeOpFactory(),
 			$siteLinkBadgeChangeOpSerializationValidator,
-			$wikibaseRepo->inFederatedPropertyMode()
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' )
 		);
 	}
 

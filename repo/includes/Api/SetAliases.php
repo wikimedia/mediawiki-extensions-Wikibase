@@ -10,6 +10,7 @@ use IBufferingStatsdDataFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Lib\EntityFactory;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
@@ -55,16 +56,16 @@ class SetAliases extends ModifyEntity {
 		string $moduleName,
 		IBufferingStatsdDataFactory $stats,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
-		EntityFactory $entityFactory
+		EntityFactory $entityFactory,
+		SettingsArray $repoSettings
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$mainModule,
 			$moduleName,
 			$changeOpFactoryProvider
 				->getFingerprintChangeOpFactory(),
 			$stats,
-			$wikibaseRepo->inFederatedPropertyMode(),
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
 			$entityFactory
 		);
 	}

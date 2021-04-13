@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Summary;
@@ -27,7 +28,6 @@ use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\Store\Store;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Derived class for API modules modifying a single entity identified by id xor a combination of
@@ -113,10 +113,10 @@ class EditEntity extends ModifyEntity {
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityChangeOpProvider $entityChangeOpProvider,
 		EntityIdParser $entityIdParser,
+		SettingsArray $settings,
 		Store $store,
 		ContentLanguages $termsLanguages
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$mainModule,
 			$moduleName,
@@ -130,7 +130,7 @@ class EditEntity extends ModifyEntity {
 				new ChangedLanguagesCounter(),
 				new NonLanguageBoundChangesCounter()
 			),
-			$wikibaseRepo->inFederatedPropertyMode()
+			$settings->getSetting( 'federatedPropertiesEnabled' )
 		);
 	}
 

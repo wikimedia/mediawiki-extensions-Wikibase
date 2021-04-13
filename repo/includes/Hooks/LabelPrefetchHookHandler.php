@@ -9,11 +9,11 @@ use TitleFactory;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\FederatedProperties\SummaryParsingPrefetchHelper;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -71,9 +71,9 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 		EntityIdLookup $entityIdLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		PrefetchingTermLookup $prefetchingTermLookup,
+		SettingsArray $repoSettings,
 		TermBuffer $termBuffer
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$termTypes = [ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION ];
 
 		return new self(
@@ -82,7 +82,7 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 			$titleFactory,
 			$termTypes,
 			$languageFallbackChainFactory,
-			$wikibaseRepo->inFederatedPropertyMode(),
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
 			new SummaryParsingPrefetchHelper( $prefetchingTermLookup )
 		);
 	}

@@ -13,6 +13,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
@@ -90,6 +91,7 @@ class RemoveClaims extends ApiBase {
 		string $moduleName,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityIdParser $entityIdParser,
+		SettingsArray $settings,
 		SnakFactory $snakFactory,
 		StatementGuidParser $statementGuidParser,
 		StatementGuidValidator $statementGuidValidator
@@ -117,7 +119,7 @@ class RemoveClaims extends ApiBase {
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
 			},
-			$wikibaseRepo->inFederatedPropertyMode()
+			$settings->getSetting( 'federatedPropertiesEnabled' )
 		);
 	}
 

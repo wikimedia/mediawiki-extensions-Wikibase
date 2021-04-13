@@ -8,12 +8,12 @@ use ApiMain;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\EntityFactory;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module to set the label for a Wikibase entity.
@@ -52,15 +52,15 @@ class SetLabel extends ModifyTerm {
 		ApiMain $mainModule,
 		string $moduleName,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
-		EntityFactory $entityFactory
+		EntityFactory $entityFactory,
+		SettingsArray $repoSettings
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$mainModule,
 			$moduleName,
 			$changeOpFactoryProvider
 				->getFingerprintChangeOpFactory(),
-			$wikibaseRepo->inFederatedPropertyMode(),
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
 			$entityFactory
 		);
 	}

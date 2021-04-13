@@ -23,6 +23,7 @@
 			"services": [
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.Settings",
 			  	"WikibaseRepo.SnakFactory",
 			  	"WikibaseRepo.StatementGuidValidator"
 			]
@@ -34,6 +35,7 @@
 				"WikibaseRepo.DataTypeDefinitions",
 				"WikibaseRepo.EntityChangeOpProvider",
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.Settings",
 				"WikibaseRepo.Store",
 				"WikibaseRepo.TermsLanguages"
 			]
@@ -124,6 +126,7 @@
 			"services": [
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.Settings",
 			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
@@ -135,6 +138,7 @@
 			"services": [
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.Settings",
 			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
@@ -146,6 +150,7 @@
 			"services": [
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.Settings",
 			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
@@ -168,7 +173,8 @@
 			"services": [
 				"StatsdDataFactory",
 				"WikibaseRepo.ChangeOpFactoryProvider",
-				"WikibaseRepo.EntityFactory"
+				"WikibaseRepo.EntityFactory",
+			  	"WikibaseRepo.Settings"
 			]
 		},
 		"wbsetclaim": {
@@ -179,6 +185,7 @@
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.ExternalFormatStatementDeserializer",
+			  	"WikibaseRepo.Settings",
 			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
@@ -190,6 +197,7 @@
 			"services": [
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.Settings",
 			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
@@ -200,7 +208,8 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SetDescription::factory",
 			"services": [
 				"WikibaseRepo.ChangeOpFactoryProvider",
-				"WikibaseRepo.EntityFactory"
+			  	"WikibaseRepo.EntityFactory",
+			  	"WikibaseRepo.Settings"
 			]
 		},
 		"wbsetlabel": {
@@ -208,7 +217,8 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SetLabel::factory",
 			"services": [
 				"WikibaseRepo.ChangeOpFactoryProvider",
-				"WikibaseRepo.EntityFactory"
+			  	"WikibaseRepo.EntityFactory",
+			  	"WikibaseRepo.Settings"
 			]
 		},
 		"wbsetqualifier": {
@@ -217,6 +227,7 @@
 			"services": [
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.Settings",
 			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
@@ -229,6 +240,7 @@
 				"WikibaseRepo.BaseDataModelDeserializerFactory",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
+			  	"WikibaseRepo.Settings",
 			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
@@ -239,6 +251,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SetSiteLink::factory",
 			"services": [
 				"WikibaseRepo.ChangeOpFactoryProvider",
+			  	"WikibaseRepo.Settings",
 				"WikibaseRepo.SiteLinkBadgeChangeOpSerializationValidator"
 			]
 		}
@@ -709,7 +722,8 @@
 			"services": [
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.LinkTargetEntityIdLookup",
-				"WikibaseRepo.PrefetchingTermLookup"
+				"WikibaseRepo.PrefetchingTermLookup",
+			  	"WikibaseRepo.Settings"
 			]
 		},
 		"DeleteDispatcher": {
@@ -759,6 +773,7 @@
 				"WikibaseRepo.EntityIdLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.PrefetchingTermLookup",
+			  	"WikibaseRepo.Settings",
 				"WikibaseRepo.TermBuffer"
 			]
 		},
@@ -796,7 +811,8 @@
 			"services": [
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.LinkTargetEntityIdLookup",
-				"WikibaseRepo.PrefetchingTermLookup"
+				"WikibaseRepo.PrefetchingTermLookup",
+			  	"WikibaseRepo.Settings"
 			]
 		},
 		"ShowSearchHit": {

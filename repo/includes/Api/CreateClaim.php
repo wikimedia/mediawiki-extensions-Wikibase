@@ -9,6 +9,7 @@ use ApiMain;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOpMainSnak;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
@@ -78,6 +79,7 @@ class CreateClaim extends ApiBase {
 		string $moduleName,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityIdParser $entityIdParser,
+		SettingsArray $settings,
 		SnakFactory $snakFactory,
 		StatementGuidValidator $statementGuidValidator
 	): self {
@@ -104,7 +106,7 @@ class CreateClaim extends ApiBase {
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
 			},
-			$wikibaseRepo->inFederatedPropertyMode()
+			$settings->getSetting( 'federatedPropertiesEnabled' )
 		);
 	}
 
