@@ -21,6 +21,7 @@ use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\OtherProjectsSitesGenerator;
 use Wikibase\Client\OtherProjectsSitesProvider;
@@ -553,6 +554,18 @@ return [
 
 	'WikibaseClient.Settings' => function ( MediaWikiServices $services ): SettingsArray {
 		return WikibaseSettings::getClientSettings();
+	},
+
+	'WikibaseClient.SidebarLinkBadgeDisplay' => function ( MediaWikiServices $services ): SidebarLinkBadgeDisplay {
+		$badgeClassNames = WikibaseClient::getSettings( $services )->getSetting( 'badgeClassNames' );
+		$labelDescriptionLookupFactory = WikibaseClient::getLanguageFallbackLabelDescriptionLookupFactory( $services );
+		$lang = WikibaseClient::getUserLanguage( $services );
+
+		return new SidebarLinkBadgeDisplay(
+			$labelDescriptionLookupFactory->newLabelDescriptionLookup( $lang ),
+			is_array( $badgeClassNames ) ? $badgeClassNames : [],
+			$lang
+		);
 	},
 
 	// TODO: This service is just a convenience service to simplify the transition away from SingleEntitySourceServices,

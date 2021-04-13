@@ -120,11 +120,6 @@ final class WikibaseClient {
 	private $restrictedEntityLookup = null;
 
 	/**
-	 * @var SidebarLinkBadgeDisplay|null
-	 */
-	private $sidebarLinkBadgeDisplay = null;
-
-	/**
 	 * @var WikibaseValueFormatterBuilders|null
 	 */
 	private $valueFormatterBuilders = null;
@@ -173,7 +168,7 @@ final class WikibaseClient {
 
 			$this->valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 				new FormatterLabelDescriptionLookupFactory( self::getTermLookup() ),
-				new LanguageNameLookup( $this->getUserLanguage()->getCode() ),
+				new LanguageNameLookup( self::getUserLanguage()->getCode() ),
 				self::getRepoItemUriParser(),
 				$settings->getSetting( 'geoShapeStorageBaseUrl' ),
 				$settings->getSetting( 'tabularDataStorageBaseUrl' ),
@@ -535,20 +530,9 @@ final class WikibaseClient {
 		return $this->parserOutputDataUpdater;
 	}
 
-	public function getSidebarLinkBadgeDisplay(): SidebarLinkBadgeDisplay {
-		if ( $this->sidebarLinkBadgeDisplay === null ) {
-			$labelDescriptionLookupFactory = self::getLanguageFallbackLabelDescriptionLookupFactory();
-			$badgeClassNames = self::getSettings()->getSetting( 'badgeClassNames' );
-			$lang = $this->getUserLanguage();
-
-			$this->sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay(
-				$labelDescriptionLookupFactory->newLabelDescriptionLookup( $lang ),
-				is_array( $badgeClassNames ) ? $badgeClassNames : [],
-				$lang
-			);
-		}
-
-		return $this->sidebarLinkBadgeDisplay;
+	public static function getSidebarLinkBadgeDisplay( ContainerInterface $service = null ): SidebarLinkBadgeDisplay {
+		return ( $service ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.SidebarLinkBadgeDisplay' );
 	}
 
 	public function getLanguageLinkBadgeDisplay(): LanguageLinkBadgeDisplay {

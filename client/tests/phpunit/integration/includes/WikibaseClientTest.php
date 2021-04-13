@@ -13,7 +13,6 @@ use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
-use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySource;
@@ -163,11 +162,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetDataAccessSnakFormatterFactory() {
 		$instance = $this->getWikibaseClient()->getDataAccessSnakFormatterFactory();
 		$this->assertInstanceOf( DataAccessSnakFormatterFactory::class, $instance );
-	}
-
-	public function testGetSidebarLinkBadgeDisplay() {
-		$sidebarLinkBadgeDisplay = $this->getWikibaseClient()->getSidebarLinkBadgeDisplay();
-		$this->assertInstanceOf( SidebarLinkBadgeDisplay::class, $sidebarLinkBadgeDisplay );
 	}
 
 	/**
