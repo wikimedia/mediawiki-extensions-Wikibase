@@ -49,7 +49,6 @@ use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Store\Store;
-use Wikibase\Repo\ValidatorBuilders;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\EntityExistsValidator;
 use Wikibase\Repo\ValueParserFactory;
@@ -138,21 +137,11 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testGetDefaultValidatorBuilders() {
-		$first = WikibaseRepo::getDefaultValidatorBuilders();
-		$this->assertInstanceOf( ValidatorBuilders::class, $first );
-
-		$second = WikibaseRepo::getDefaultValidatorBuilders();
-		$this->assertSame( $first, $second );
-	}
-
-	public function testNewValidatorBuilders() {
+	public function getDefaultValidatorBuilders() {
 		$valueToValidate = new EntityIdValue( new ItemId( 'Q123' ) );
 
-		$repo = $this->getWikibaseRepo();
-
-		$builders = $repo->newValidatorBuilders();
-		$this->assertInstanceOf( ValidatorBuilders::class, $builders );
+		$this->getWikibaseRepo(); // set up services
+		$builders = WikibaseRepo::getDefaultValidatorBuilders();
 
 		// We get the resulting ValueValidators and run them against our fake remote-repo
 		// custom-type EntityIdValue. We skip the existence check though, since we don't

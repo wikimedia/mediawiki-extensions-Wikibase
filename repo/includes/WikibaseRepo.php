@@ -11,7 +11,6 @@ use Exception;
 use IContextSource;
 use Language;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
 use ObjectCache;
 use Psr\Container\ContainerInterface;
@@ -162,11 +161,6 @@ class WikibaseRepo {
 	private static $instance = null;
 
 	/**
-	 * @var ValidatorBuilders|null
-	 */
-	private static $validatorBuilders = null;
-
-	/**
 	 * @var WikibaseValueFormatterBuilders|null
 	 */
 	private static $valueFormatterBuilders = null;
@@ -183,7 +177,6 @@ class WikibaseRepo {
 			);
 		}
 		self::$instance = null;
-		self::$validatorBuilders = null;
 		self::$valueFormatterBuilders = null;
 		self::$snakFormatterBuilders = null;
 		ApiServiceFactory::resetClassStatics();
@@ -215,40 +208,10 @@ class WikibaseRepo {
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
 	 * Program logic should use WikibaseRepo::getDataTypeValidatorFactory() instead!
-	 *
-	 * @return ValidatorBuilders
 	 */
-	public static function getDefaultValidatorBuilders() {
-		if ( self::$validatorBuilders === null ) {
-			$wikibaseRepo = self::getDefaultInstance();
-			self::$validatorBuilders = $wikibaseRepo->newValidatorBuilders();
-		}
-
-		return self::$validatorBuilders;
-	}
-
-	/**
-	 * Returns a low level factory object for creating validators for well known data types.
-	 *
-	 * @warning This is for use with getDefaultValidatorBuilders() during bootstrap only!
-	 * Program logic should use WikibaseRepo::getDataTypeValidatorFactory() instead!
-	 *
-	 * @return ValidatorBuilders
-	 */
-	public function newValidatorBuilders() {
-		$urlSchemes = self::getSettings()->getSetting( 'urlSchemes' );
-
-		return new ValidatorBuilders(
-			self::getEntityLookup(),
-			self::getEntityIdParser(),
-			$urlSchemes,
-			self::getItemVocabularyBaseUri(),
-			self::getMonolingualTextLanguages(),
-			self::getCachingCommonsMediaFileNameLookup(),
-			new MediaWikiPageNameNormalizer(),
-			self::getSettings()->getSetting( 'geoShapeStorageApiEndpointUrl' ),
-			self::getSettings()->getSetting( 'tabularDataStorageApiEndpointUrl' )
-		);
+	public static function getDefaultValidatorBuilders( ContainerInterface $services = null ): ValidatorBuilders {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.DefaultValidatorBuilders' );
 	}
 
 	/**
