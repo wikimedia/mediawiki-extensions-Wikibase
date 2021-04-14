@@ -1169,6 +1169,15 @@ return [
 		);
 	},
 
+	'WikibaseRepo.SnakFormatterFactory' => function ( MediaWikiServices $services ): OutputFormatSnakFormatterFactory {
+		return new OutputFormatSnakFormatterFactory(
+			WikibaseRepo::getDataTypeDefinitions( $services )->getSnakFormatterFactoryCallbacks(),
+			WikibaseRepo::getValueFormatterFactory( $services ),
+			WikibaseRepo::getPropertyDataTypeLookup( $services ),
+			WikibaseRepo::getDataTypeFactory( $services )
+		);
+	},
+
 	'WikibaseRepo.StatementGuidParser' => function ( MediaWikiServices $services ): StatementGuidParser {
 		return new StatementGuidParser( WikibaseRepo::getEntityIdParser( $services ) );
 	},

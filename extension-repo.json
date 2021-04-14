@@ -62,6 +62,7 @@
 				"StatsdDataFactory",
 				"WikibaseRepo.DataTypeFactory",
 			  	"WikibaseRepo.DataValueFactory",
+				"WikibaseRepo.SnakFormatterFactory",
 			  	"WikibaseRepo.ValueFormatterFactory"
 			]
 		},

@@ -157,11 +157,6 @@ use Wikibase\View\ViewFactory;
 class WikibaseRepo {
 
 	/**
-	 * @var OutputFormatSnakFormatterFactory|null
-	 */
-	private $snakFormatterFactory = null;
-
-	/**
 	 * @var WikibaseRepo|null
 	 */
 	private static $instance = null;
@@ -726,20 +721,10 @@ class WikibaseRepo {
 	/**
 	 * Returns a OutputFormatSnakFormatterFactory the provides SnakFormatters
 	 * for different output formats.
-	 *
-	 * @return OutputFormatSnakFormatterFactory
 	 */
-	public function getSnakFormatterFactory() {
-		if ( $this->snakFormatterFactory === null ) {
-			$this->snakFormatterFactory = new OutputFormatSnakFormatterFactory(
-				self::getDataTypeDefinitions()->getSnakFormatterFactoryCallbacks(),
-				self::getValueFormatterFactory(),
-				self::getPropertyDataTypeLookup(),
-				self::getDataTypeFactory()
-			);
-		}
-
-		return $this->snakFormatterFactory;
+	public static function getSnakFormatterFactory( ContainerInterface $services = null ): OutputFormatSnakFormatterFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.SnakFormatterFactory' );
 	}
 
 	public static function getTermBuffer( ContainerInterface $services = null ): TermBuffer {
@@ -1257,7 +1242,7 @@ class WikibaseRepo {
 		return new ViewFactory(
 			self::getEntityIdHtmlLinkFormatterFactory(),
 			new EntityIdLabelFormatterFactory(),
-			new WikibaseHtmlSnakFormatterFactory( $this->getSnakFormatterFactory() ),
+			new WikibaseHtmlSnakFormatterFactory( self::getSnakFormatterFactory() ),
 			$statementGrouperBuilder->getStatementGrouper(),
 			$propertyOrderProvider,
 			$this->getSiteLookup(),
@@ -1347,7 +1332,7 @@ class WikibaseRepo {
 		$htmlFormatterFactory = self::getEntityIdHtmlLinkFormatterFactory();
 		$entityIdFormatter = $htmlFormatterFactory->getEntityIdFormatter( $contextSource->getLanguage() );
 
-		$formatterFactory = $this->getSnakFormatterFactory();
+		$formatterFactory = self::getSnakFormatterFactory();
 		$detailedSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
 		$terseSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
 

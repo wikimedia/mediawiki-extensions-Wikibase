@@ -32,7 +32,6 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
@@ -354,11 +353,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetSettingsReturnType() {
 		$returnValue = WikibaseRepo::getSettings();
 		$this->assertInstanceOf( SettingsArray::class, $returnValue );
-	}
-
-	public function testGetSnakFormatterFactory() {
-		$returnValue = $this->getWikibaseRepo()->getSnakFormatterFactory();
-		$this->assertInstanceOf( OutputFormatSnakFormatterFactory::class, $returnValue );
 	}
 
 	public function testGetContentModelMappings() {
