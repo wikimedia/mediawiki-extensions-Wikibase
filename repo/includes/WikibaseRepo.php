@@ -1024,13 +1024,6 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.ItemHandler' );
 	}
 
-	/**
-	 * @deprecated Use {@link getItemHandler()} instead.
-	 */
-	public function newItemHandler(): ItemHandler {
-		return self::getItemHandler();
-	}
-
 	public static function getPropertyTermStoreWriter( ContainerInterface $services = null ): EntityTermStoreWriter {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.PropertyTermStoreWriter' );
