@@ -13,11 +13,11 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\SummaryFormatter;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Abstract special page for setting a value of a Wikibase entity.
@@ -59,17 +59,9 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 */
 	private $permissionChecker;
 
-	/**
-	 * @param string $title The title of the special page
-	 * @param SpecialPageCopyrightView $copyrightView
-	 * @param SummaryFormatter $summaryFormatter
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param MediawikiEditEntityFactory $editEntityFactory
-	 * @param EntityPermissionChecker $permissionChecker
-	 * @param ContentLanguages $termsLanguages
-	 */
 	public function __construct(
-		$title,
+		string $title,
+		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
@@ -85,8 +77,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			$editEntityFactory
 		);
 
-		// TODO inject ChangeOpFactoryProvider
-		$changeOpFactoryProvider = WikibaseRepo::getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
 		$this->termsLanguages = $termsLanguages;
 		$this->permissionChecker = $permissionChecker;

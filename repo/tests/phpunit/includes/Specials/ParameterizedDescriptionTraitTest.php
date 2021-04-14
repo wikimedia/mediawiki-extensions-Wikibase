@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Specials;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
@@ -114,6 +115,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 
 	private function newSpecialSetAliasesPage() {
 		return new SpecialSetAliases(
+			$this->createMock( ChangeOpFactoryProvider::class ),
 			$this->createMock( SpecialPageCopyrightView::class ),
 			$this->createMock( SummaryFormatter::class ),
 			$this->createMock( EntityTitleLookup::class ),
@@ -125,6 +127,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 
 	private function newSpecialSetLabelsPage() {
 		return new SpecialSetLabel(
+			$this->createMock( ChangeOpFactoryProvider::class ),
 			$this->createMock( SpecialPageCopyrightView::class ),
 			$this->createMock( SummaryFormatter::class ),
 			$this->createMock( EntityTitleLookup::class ),
@@ -136,6 +139,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 
 	private function newSpecialSetDescriptionPage() {
 		return new SpecialSetDescription(
+			$this->createMock( ChangeOpFactoryProvider::class ),
 			$this->createMock( SpecialPageCopyrightView::class ),
 			$this->createMock( SummaryFormatter::class ),
 			$this->createMock( EntityTitleLookup::class ),

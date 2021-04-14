@@ -11,6 +11,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
 use Wikibase\Lib\UserInputException;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
@@ -27,6 +28,7 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialSetAliases extends SpecialModifyTerm {
 
 	public function __construct(
+		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
@@ -36,6 +38,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	) {
 		parent::__construct(
 			'SetAliases',
+			$changeOpFactoryProvider,
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,
@@ -46,6 +49,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	}
 
 	public static function factory(
+		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityPermissionChecker $entityPermissionChecker,
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,
@@ -61,6 +65,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		);
 
 		return new self(
+			$changeOpFactoryProvider,
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,

@@ -9,6 +9,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
@@ -25,6 +26,7 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialSetLabel extends SpecialModifyTerm {
 
 	public function __construct(
+		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
@@ -34,6 +36,7 @@ class SpecialSetLabel extends SpecialModifyTerm {
 	) {
 		parent::__construct(
 			'SetLabel',
+			$changeOpFactoryProvider,
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,
@@ -44,6 +47,7 @@ class SpecialSetLabel extends SpecialModifyTerm {
 	}
 
 	public static function factory(
+		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityPermissionChecker $entityPermissionChecker,
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,
@@ -59,6 +63,7 @@ class SpecialSetLabel extends SpecialModifyTerm {
 		);
 
 		return new self(
+			$changeOpFactoryProvider,
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,

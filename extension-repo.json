@@ -339,6 +339,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetLabel",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabel::factory",
 			"services": [
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
@@ -350,6 +351,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetDescription",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetDescription::factory",
 			"services": [
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
@@ -361,6 +363,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetAliases",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetAliases::factory",
 			"services": [
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",

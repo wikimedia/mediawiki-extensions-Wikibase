@@ -33,6 +33,7 @@ class SpecialSetLabelTest extends SpecialModifyTermTestCase {
 		$copyrightView = new SpecialPageCopyrightView( new CopyrightMessageBuilder(), '', '' );
 
 		return new SpecialSetLabel(
+			WikibaseRepo::getChangeOpFactoryProvider(),
 			$copyrightView,
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
