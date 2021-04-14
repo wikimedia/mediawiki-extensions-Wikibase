@@ -243,8 +243,7 @@
 		"UnitTestsList": [
 			"\\Wikibase\\Repo\\RepoHooks::registerUnitTests",
 			"LibHooks"
-		],
-		"WikibaseRepoEntityTypes": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesWikibaseRepoEntityTypesHookHandler::onWikibaseRepoEntityTypes"
+		]
 	},
 	"callback": "\\Wikibase\\Lib\\LibHooks::onRegistration",
 	"manifest_version": 2

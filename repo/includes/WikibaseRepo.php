@@ -412,6 +412,9 @@ class WikibaseRepo {
 
 		$settings = WikibaseSettings::getRepoSettings();
 
+		$overrider = EntityTypeDefinitionsFedPropsOverrider::factory( $settings->getSetting( 'federatedPropertiesEnabled' ) );
+		$entityTypeDefinitionsArray = $overrider->override( $entityTypeDefinitionsArray );
+
 		$dataTypeDefinitions = new DataTypeDefinitions(
 			$dataTypeDefinitionsArray,
 			$settings->getSetting( 'disabledDataTypes' )
