@@ -80,7 +80,6 @@ class DumpJson extends DumpEntities {
 
 	public function execute() {
 		if ( !$this->hasHadServicesSet ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$mwServices = MediaWikiServices::getInstance();
 
 			$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
@@ -95,7 +94,7 @@ class DumpJson extends DumpEntities {
 
 			$this->setServices(
 				$sqlEntityIdPagerFactory,
-				$wikibaseRepo->getEnabledEntityTypes(),
+				WikibaseRepo::getEnabledEntityTypes( $mwServices ),
 				$store->getEntityPrefetcher(),
 				WikibaseRepo::getPropertyDataTypeLookup(),
 				$revisionLookup,

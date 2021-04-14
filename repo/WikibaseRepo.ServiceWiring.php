@@ -471,6 +471,27 @@ return [
 		);
 	},
 
+	'WikibaseRepo.EnabledEntityTypes' => function ( MediaWikiServices $services ): array {
+		$types = array_keys(
+			WikibaseRepo::getEntitySourceDefinitions( $services )
+				->getEntityTypeToSourceMapping()
+		);
+		$subEntityTypes = WikibaseRepo::getEntityTypeDefinitions( $services )
+			->get( EntityTypeDefinitions::SUB_ENTITY_TYPES );
+
+		return array_reduce(
+			$types,
+			function ( $carry, $x ) use ( $subEntityTypes ) {
+				$carry[] = $x;
+				if ( array_key_exists( $x, $subEntityTypes ) ) {
+					$carry = array_merge( $carry, $subEntityTypes[$x] );
+				}
+				return $carry;
+			},
+			[]
+		);
+	},
+
 	'WikibaseRepo.EntityArticleIdLookup' => function ( MediaWikiServices $services ): EntityArticleIdLookup {
 		return new TypeDispatchingArticleIdLookup(
 			WikibaseRepo::getEntityTypeDefinitions( $services )

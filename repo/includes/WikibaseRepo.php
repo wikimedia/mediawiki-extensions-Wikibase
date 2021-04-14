@@ -799,21 +799,9 @@ class WikibaseRepo {
 	 *  This list will also include any sub entity types of entity types defined in $wgWBRepoSettings['entityNamespaces'].
 	 *  Optionally the list also contains entity types from the configured foreign repositories.
 	 */
-	public function getEnabledEntityTypes() {
-		$types = array_keys( self::getEntitySourceDefinitions()->getEntityTypeToSourceMapping() );
-		$subEntityTypes = self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::SUB_ENTITY_TYPES );
-
-		return array_reduce(
-			$types,
-			function ( $carry, $x ) use ( $subEntityTypes ) {
-				$carry[] = $x;
-				if ( array_key_exists( $x, $subEntityTypes ) ) {
-					$carry = array_merge( $carry, $subEntityTypes[$x] );
-				}
-				return $carry;
-			},
-			[]
-		);
+	public static function getEnabledEntityTypes( ContainerInterface $services = null ): array {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EnabledEntityTypes' );
 	}
 
 	public static function getLocalEntityTypes( ContainerInterface $services = null ): array {

@@ -386,13 +386,11 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param array $response
 	 */
 	protected function assertResultHasEntityType( array $response ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		if ( isset( $response['entity'] ) ) {
 			if ( isset( $response['entity']['type'] ) ) {
 				$this->assertContains(
 					$response['entity']['type'],
-					$wikibaseRepo->getEnabledEntityTypes(),
+					WikibaseRepo::getEnabledEntityTypes(),
 					"Missing valid 'type' in response."
 				);
 			}
@@ -401,7 +399,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 				if ( isset( $entity['type'] ) ) {
 					$this->assertContains(
 						$entity['type'],
-						$wikibaseRepo->getEnabledEntityTypes(),
+						WikibaseRepo::getEnabledEntityTypes(),
 						"Missing valid 'type' in response."
 					);
 				}

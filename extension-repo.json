@@ -261,6 +261,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\QuerySearchEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\QuerySearchEntities::factory",
 			"services": [
+				"WikibaseRepo.EnabledEntityTypes",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.TermsLanguages"
 			]

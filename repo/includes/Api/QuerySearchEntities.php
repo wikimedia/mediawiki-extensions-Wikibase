@@ -67,6 +67,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	public static function factory(
 		ApiQuery $apiQuery,
 		string $moduleName,
+		array $enabledEntityTypes,
 		EntityTitleLookup $entityTitleLookup,
 		ContentLanguages $termsLanguages
 	): self {
@@ -81,7 +82,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 			),
 			$entityTitleLookup,
 			$termsLanguages,
-			$repo->getEnabledEntityTypes()
+			$enabledEntityTypes
 		);
 	}
 
