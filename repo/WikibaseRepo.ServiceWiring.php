@@ -174,6 +174,7 @@ use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
 use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
 use Wikibase\Repo\SummaryFormatter;
+use Wikibase\Repo\ValidatorBuilders;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -354,6 +355,28 @@ return [
 
 	'WikibaseRepo.DataValueFactory' => function ( MediaWikiServices $services ): DataValueFactory {
 		return new DataValueFactory( WikibaseRepo::getDataValueDeserializer( $services ) );
+	},
+
+	/**
+	 * Returns a low level factory object for creating validators for well known data types.
+	 *
+	 * @warning This is for use with {@link WikibaseRepo::getDefaultValidatorBuilders()} during bootstrap only!
+	 * Program logic should use {@link WikibaseRepo::getDataTypeValidatorFactory()} instead!
+	 */
+	'WikibaseRepo.DefaultValidatorBuilders' => function ( MediaWikiServices $services ): ValidatorBuilders {
+		$settings = WikibaseRepo::getSettings( $services );
+
+		return new ValidatorBuilders(
+			WikibaseRepo::getEntityLookup( $services ),
+			WikibaseRepo::getEntityIdParser( $services ),
+			$settings->getSetting( 'urlSchemes' ),
+			WikibaseRepo::getItemVocabularyBaseUri( $services ),
+			WikibaseRepo::getMonolingualTextLanguages( $services ),
+			WikibaseRepo::getCachingCommonsMediaFileNameLookup( $services ),
+			new MediaWikiPageNameNormalizer(), // TODO should probably inject an HttpRequestFactory here (or get from $services?)
+			$settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
+			$settings->getSetting( 'tabularDataStorageApiEndpointUrl' )
+		);
 	},
 
 	'WikibaseRepo.EntityArticleIdLookup' => function ( MediaWikiServices $services ): EntityArticleIdLookup {
