@@ -83,6 +83,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		EntityTitleLookup $entityTitleLookup,
 		TermsCollisionDetector $itemTermsCollisionDetector,
 		SettingsArray $repoSettings,
+		SummaryFormatter $summaryFormatter,
 		TermValidatorFactory $termValidatorFactory
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -96,7 +97,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		return new self(
 			$copyrightView,
 			$entityNamespaceLookup,
-			$wikibaseRepo->getSummaryFormatter(),
+			$summaryFormatter,
 			$entityTitleLookup,
 			$wikibaseRepo->newEditEntityFactory(),
 			$siteLookup,

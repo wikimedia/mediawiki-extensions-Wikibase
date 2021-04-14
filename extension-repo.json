@@ -277,6 +277,7 @@
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.ItemTermsCollisionDetector",
 				"WikibaseRepo.Settings",
+				"WikibaseRepo.SummaryFormatter",
 				"WikibaseRepo.TermValidatorFactory"
 			]
 		},
@@ -288,7 +289,8 @@
 				"WikibaseRepo.EntityNamespaceLookup",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.PropertyTermsCollisionDetector",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.SummaryFormatter"
 			]
 		},
 		"ItemByTitle": {
@@ -328,6 +330,7 @@
 				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
+				"WikibaseRepo.SummaryFormatter",
 				"WikibaseRepo.TermsLanguages"
 			]
 		},
@@ -338,6 +341,7 @@
 				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
+				"WikibaseRepo.SummaryFormatter",
 				"WikibaseRepo.TermsLanguages"
 			]
 		},
@@ -348,6 +352,7 @@
 				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
+				"WikibaseRepo.SummaryFormatter",
 				"WikibaseRepo.TermsLanguages"
 			]
 		},
@@ -358,6 +363,7 @@
 				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
+				"WikibaseRepo.SummaryFormatter",
 				"WikibaseRepo.TermsLanguages"
 			]
 		},
@@ -368,7 +374,8 @@
 				"SiteLookup",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.SummaryFormatter"
 			]
 		},
 		"ListDatatypes": {

@@ -97,6 +97,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		EntityPermissionChecker $entityPermissionChecker,
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,
+		SummaryFormatter $summaryFormatter,
 		ContentLanguages $termsLanguages
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -109,7 +110,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 
 		return new self(
 			$copyrightView,
-			$wikibaseRepo->getSummaryFormatter(),
+			$summaryFormatter,
 			$entityTitleLookup,
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getChangeOpFactoryProvider()->getFingerprintChangeOpFactory(),

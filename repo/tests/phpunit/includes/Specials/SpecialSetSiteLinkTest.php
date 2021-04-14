@@ -80,7 +80,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		return new SpecialSetSiteLink(
 			$copyrightView,
-			$wikibaseRepo->getSummaryFormatter(),
+			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$siteLookup,

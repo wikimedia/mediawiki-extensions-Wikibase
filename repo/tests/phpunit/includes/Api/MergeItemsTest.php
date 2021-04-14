@@ -159,8 +159,6 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$changeOpsFactoryProvider = new ChangeOpFactoryProvider(
 			$this->getConstraintProvider(),
 			new GuidGenerator(),
@@ -196,7 +194,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
-				$wikibaseRepo->getSummaryFormatter(),
+				WikibaseRepo::getSummaryFormatter(),
 				$main->getUser(),
 				$this->getMockRedirectCreationInteractor( $expectedRedirect ),
 				$this->getEntityTitleStoreLookup(),

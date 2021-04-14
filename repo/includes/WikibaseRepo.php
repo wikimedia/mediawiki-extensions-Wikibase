@@ -57,8 +57,6 @@ use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
-use Wikibase\Lib\Formatters\EntityIdPlainLinkFormatter;
-use Wikibase\Lib\Formatters\EntityIdValueFormatter;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\MediaWikiNumberLocalizer;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
@@ -167,11 +165,6 @@ class WikibaseRepo {
 	 * @var OutputFormatSnakFormatterFactory|null
 	 */
 	private $snakFormatterFactory = null;
-
-	/**
-	 * @var SummaryFormatter|null
-	 */
-	private $summaryFormatter = null;
 
 	/**
 	 * @var WikibaseRepo|null
@@ -538,7 +531,7 @@ class WikibaseRepo {
 			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			self::getEntityStore(),
 			self::getEntityPermissionChecker(),
-			$this->getSummaryFormatter(),
+			self::getSummaryFormatter(),
 			$user,
 			$this->newEditFilterHookRunner( $context ),
 			$store->getEntityRedirectLookup(),
@@ -828,76 +821,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.ExceptionLocalizer' );
 	}
 
-	/**
-	 * @return SummaryFormatter
-	 */
-	public function getSummaryFormatter() {
-		if ( $this->summaryFormatter === null ) {
-			$this->summaryFormatter = $this->newSummaryFormatter();
-		}
-
-		return $this->summaryFormatter;
-	}
-
-	/**
-	 * @return SummaryFormatter
-	 */
-	private function newSummaryFormatter() {
-		// This needs to use an EntityIdPlainLinkFormatter as we want to mangle
-		// the links created in HtmlPageLinkRendererEndHookHandler afterwards (the links must not
-		// contain a display text: [[Item:Q1]] is fine but [[Item:Q1|Q1]] isn't).
-		$idFormatter = new EntityIdPlainLinkFormatter( self::getEntityTitleLookup() );
-
-		$formatterFactoryCBs = self::getDataTypeDefinitions()
-			->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE );
-
-		// Iterate through all defined entity types and override the formatter for entity IDs.
-		foreach ( self::getEntityTypeDefinitions()->getEntityTypes() as $entityType ) {
-			$formatterFactoryCBs[ "PT:wikibase-$entityType" ] = function (
-				$format,
-				FormatterOptions $options ) use ( $idFormatter ) {
-				if ( $format === SnakFormatter::FORMAT_PLAIN ) {
-					return new EntityIdValueFormatter( $idFormatter );
-				} else {
-					return null;
-				}
-			};
-		}
-
-		// Create a new ValueFormatterFactory from entity definition overrides.
-		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
-			$formatterFactoryCBs,
-			$this->getContentLanguage(),
-			self::getLanguageFallbackChainFactory()
-		);
-
-		// Create a new SnakFormatterFactory based on the specialized ValueFormatterFactory.
-		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
-			[], // XXX: do we want $this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks()
-			$valueFormatterFactory,
-			self::getPropertyDataTypeLookup(),
-			self::getDataTypeFactory()
-		);
-
-		$options = new FormatterOptions();
-		$snakFormatter = $snakFormatterFactory->getSnakFormatter(
-			SnakFormatter::FORMAT_PLAIN,
-			$options
-		);
-		$valueFormatter = $valueFormatterFactory->getValueFormatter(
-			SnakFormatter::FORMAT_PLAIN,
-			$options
-		);
-
-		$formatter = new SummaryFormatter(
-			$idFormatter,
-			$valueFormatter,
-			$snakFormatter,
-			$this->getContentLanguage(),
-			self::getEntityIdParser()
-		);
-
-		return $formatter;
+	public static function getSummaryFormatter( ContainerInterface $services = null ): SummaryFormatter {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.SummaryFormatter' );
 	}
 
 	public static function getEntityPermissionChecker( ContainerInterface $services = null ): EntityPermissionChecker {
@@ -1220,7 +1146,7 @@ class WikibaseRepo {
 			self::getExceptionLocalizer( $services ),
 			self::getPropertyDataTypeLookup( $services ),
 			$this->getSiteLookup(),
-			$this->getSummaryFormatter(),
+			self::getSummaryFormatter( $services ),
 			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->newEditEntityFactory( $context ),
 			self::getBaseDataModelSerializerFactory( $services ),
@@ -1269,7 +1195,7 @@ class WikibaseRepo {
 				->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			self::getEntityStore(),
 			self::getEntityPermissionChecker(),
-			$this->getSummaryFormatter(),
+			self::getSummaryFormatter(),
 			$user,
 			$this->newItemRedirectCreationInteractor( $user, $context ),
 			self::getEntityTitleStoreLookup(),

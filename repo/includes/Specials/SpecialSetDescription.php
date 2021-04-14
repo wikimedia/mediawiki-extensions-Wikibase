@@ -47,6 +47,7 @@ class SpecialSetDescription extends SpecialModifyTerm {
 		EntityPermissionChecker $entityPermissionChecker,
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,
+		SummaryFormatter $summaryFormatter,
 		ContentLanguages $termsLanguages
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -59,7 +60,7 @@ class SpecialSetDescription extends SpecialModifyTerm {
 
 		return new self(
 			$copyrightView,
-			$wikibaseRepo->getSummaryFormatter(),
+			$summaryFormatter,
 			$entityTitleLookup,
 			$wikibaseRepo->newEditEntityFactory(),
 			$entityPermissionChecker,

@@ -49,6 +49,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		EntityPermissionChecker $entityPermissionChecker,
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,
+		SummaryFormatter $summaryFormatter,
 		ContentLanguages $termsLanguages
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -61,7 +62,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 
 		return new self(
 			$copyrightView,
-			$wikibaseRepo->getSummaryFormatter(),
+			$summaryFormatter,
 			$entityTitleLookup,
 			$wikibaseRepo->newEditEntityFactory(),
 			$entityPermissionChecker,
