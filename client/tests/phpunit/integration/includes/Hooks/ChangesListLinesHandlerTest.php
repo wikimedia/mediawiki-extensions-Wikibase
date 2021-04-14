@@ -7,7 +7,6 @@ use Language;
 use MediaWikiIntegrationTestCase;
 use OldChangesList;
 use RecentChange;
-use Title;
 use User;
 use Wikibase\Client\Hooks\ChangesListLinesHandler;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
@@ -44,14 +43,18 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 
 	private function getRecentChange( string $source, array $attributes = [] ): RecentChange {
 		$recentChange = new RecentChange;
-		$recentChange->setAttribs( array_merge( [ 'rc_source' => $source ], $attributes ) );
+		$recentChange->setAttribs( array_merge( [
+			'rc_source' => $source,
+			'rc_namespace' => NS_MAIN,
+			'rc_title' => 'Test',
+			'rc_cur_id' => 12,
+		], $attributes ) );
 		return $recentChange;
 	}
 
 	private function getWikibaseChange( array $attributes = [] ): RecentChange {
 		$recentChange = $this->getRecentChange( RecentChangeFactory::SRC_WIKIBASE, $attributes );
 		$recentChange->counter = 1;
-		$recentChange->mTitle = $this->createMock( Title::class );
 		return $recentChange;
 	}
 
