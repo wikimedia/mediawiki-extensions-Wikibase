@@ -63,6 +63,7 @@
 		"fix": "phpcbf",
 		"fix-modified": "bash build/phpcbfGitModified.sh",
 		"fix-committed": "bash build/phpcbfGitCommitted.sh",
+		"phan": "phan -d . --long-progress-bar",
 		"test": [
 			"composer validate --no-interaction",
 			"composer lint",
