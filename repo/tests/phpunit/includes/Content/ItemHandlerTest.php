@@ -162,7 +162,8 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	 * @return ItemHandler
 	 */
 	protected function getHandler( SettingsArray $settings = null ) {
-		return $this->getWikibaseRepo( $settings )->newItemHandler();
+		$this->getWikibaseRepo( $settings ); // updates services as needed
+		return WikibaseRepo::getItemHandler();
 	}
 
 	public function testAllowAutomaticIds() {
