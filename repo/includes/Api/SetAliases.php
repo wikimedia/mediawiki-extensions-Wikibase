@@ -12,6 +12,7 @@ use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -53,13 +54,14 @@ class SetAliases extends ModifyEntity {
 		ApiMain $mainModule,
 		string $moduleName,
 		IBufferingStatsdDataFactory $stats,
+		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityFactory $entityFactory
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$mainModule,
 			$moduleName,
-			$wikibaseRepo->getChangeOpFactoryProvider()
+			$changeOpFactoryProvider
 				->getFingerprintChangeOpFactory(),
 			$stats,
 			$wikibaseRepo->inFederatedPropertyMode(),

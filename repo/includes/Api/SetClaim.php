@@ -23,6 +23,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\ClaimSummaryBuilder;
 use Wikibase\Repo\Diff\ClaimDiffer;
@@ -110,6 +111,7 @@ class SetClaim extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		IBufferingStatsdDataFactory $stats,
+		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityIdParser $entityIdParser,
 		Deserializer $externalFormatStatementDeserializer,
 		SnakFactory $snakFactory,
@@ -118,7 +120,6 @@ class SetClaim extends ApiBase {
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 		$modificationHelper = new StatementModificationHelper(
 			$snakFactory,

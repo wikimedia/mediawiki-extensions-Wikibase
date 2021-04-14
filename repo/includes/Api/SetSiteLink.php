@@ -12,6 +12,7 @@ use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
@@ -52,6 +53,7 @@ class SetSiteLink extends ModifyEntity {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		SiteLinkBadgeChangeOpSerializationValidator $siteLinkBadgeChangeOpSerializationValidator
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -59,7 +61,7 @@ class SetSiteLink extends ModifyEntity {
 		return new self(
 			$mainModule,
 			$moduleName,
-			$wikibaseRepo->getChangeOpFactoryProvider()
+			$changeOpFactoryProvider
 				->getSiteLinkChangeOpFactory(),
 			$siteLinkBadgeChangeOpSerializationValidator,
 			$wikibaseRepo->inFederatedPropertyMode()

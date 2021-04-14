@@ -72,7 +72,7 @@ class StatementsMergerTest extends TestCase {
 	 */
 	private function newStatementsMerger() {
 		return new StatementsMerger(
-			WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()->getStatementChangeOpFactory()
+			WikibaseRepo::getChangeOpFactoryProvider()->getStatementChangeOpFactory()
 		);
 	}
 

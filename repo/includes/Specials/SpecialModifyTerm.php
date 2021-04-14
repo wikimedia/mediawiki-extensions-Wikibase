@@ -85,8 +85,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			$editEntityFactory
 		);
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+		// TODO inject ChangeOpFactoryProvider
+		$changeOpFactoryProvider = WikibaseRepo::getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
 		$this->termsLanguages = $termsLanguages;
 		$this->permissionChecker = $permissionChecker;

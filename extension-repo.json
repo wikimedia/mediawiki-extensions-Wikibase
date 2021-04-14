@@ -21,6 +21,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\CreateClaim",
 			"factory": "\\Wikibase\\Repo\\Api\\CreateClaim::factory",
 			"services": [
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.SnakFactory",
 			  	"WikibaseRepo.StatementGuidValidator"
@@ -120,6 +121,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\RemoveClaims",
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveClaims::factory",
 			"services": [
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
@@ -130,6 +132,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\RemoveQualifiers",
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveQualifiers::factory",
 			"services": [
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
@@ -140,6 +143,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\RemoveReferences",
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveReferences::factory",
 			"services": [
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
@@ -162,6 +166,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SetAliases::factory",
 			"services": [
 				"StatsdDataFactory",
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityFactory"
 			]
 		},
@@ -170,6 +175,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SetClaim::factory",
 			"services": [
 				"StatsdDataFactory",
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.ExternalFormatStatementDeserializer",
 			  	"WikibaseRepo.SnakFactory",
@@ -181,6 +187,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\SetClaimValue",
 			"factory": "\\Wikibase\\Repo\\Api\\SetClaimValue::factory",
 			"services": [
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
@@ -191,20 +198,23 @@
 			"class": "\\Wikibase\\Repo\\Api\\SetDescription",
 			"factory": "\\Wikibase\\Repo\\Api\\SetDescription::factory",
 			"services": [
-			  "WikibaseRepo.EntityFactory"
+				"WikibaseRepo.ChangeOpFactoryProvider",
+				"WikibaseRepo.EntityFactory"
 			]
 		},
 		"wbsetlabel": {
 			"class": "\\Wikibase\\Repo\\Api\\SetLabel",
 			"factory": "\\Wikibase\\Repo\\Api\\SetLabel::factory",
 			"services": [
-			  "WikibaseRepo.EntityFactory"
+				"WikibaseRepo.ChangeOpFactoryProvider",
+				"WikibaseRepo.EntityFactory"
 			]
 		},
 		"wbsetqualifier": {
 			"class": "\\Wikibase\\Repo\\Api\\SetQualifier",
 			"factory": "\\Wikibase\\Repo\\Api\\SetQualifier::factory",
 			"services": [
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
@@ -216,6 +226,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SetReference::factory",
 			"services": [
 				"WikibaseRepo.BaseDataModelDeserializerFactory",
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
@@ -226,6 +237,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\SetSiteLink",
 			"factory": "\\Wikibase\\Repo\\Api\\SetSiteLink::factory",
 			"services": [
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.SiteLinkBadgeChangeOpSerializationValidator"
 			]
 		}
@@ -361,6 +373,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases::factory",
 			"services": [
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
@@ -373,6 +386,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink::factory",
 			"services": [
 				"SiteLookup",
+				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory",
 				"WikibaseRepo.Settings",

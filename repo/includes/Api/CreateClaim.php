@@ -9,6 +9,7 @@ use ApiMain;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOpMainSnak;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\SnakFactory;
@@ -75,12 +76,12 @@ class CreateClaim extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityIdParser $entityIdParser,
 		SnakFactory $snakFactory,
 		StatementGuidValidator $statementGuidValidator
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
 		$errorReporter = $apiHelperFactory->getErrorReporter( $mainModule );
 

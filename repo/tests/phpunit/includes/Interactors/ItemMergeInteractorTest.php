@@ -129,13 +129,12 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			$user = $this->getTestUser()->getUser();
 		}
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$summaryFormatter = WikibaseRepo::getSummaryFormatter();
 
 		//XXX: we may want or need to mock some of these services
 		$mergeFactory = new MergeFactory(
 			WikibaseRepo::getEntityConstraintProvider(),
-			$wikibaseRepo->getChangeOpFactoryProvider(),
+			WikibaseRepo::getChangeOpFactoryProvider(),
 			new HashSiteStore( TestSites::getSites() )
 		);
 

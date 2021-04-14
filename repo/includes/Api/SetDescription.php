@@ -10,6 +10,7 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -50,13 +51,14 @@ class SetDescription extends ModifyTerm {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityFactory $entityFactory
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$mainModule,
 			$moduleName,
-			$wikibaseRepo->getChangeOpFactoryProvider()
+			$changeOpFactoryProvider
 				->getFingerprintChangeOpFactory(),
 			$wikibaseRepo->inFederatedPropertyMode(),
 			$entityFactory

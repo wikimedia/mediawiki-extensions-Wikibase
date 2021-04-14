@@ -36,8 +36,7 @@ class PropertyChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function getChangeOpDeserializer() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+		$changeOpFactoryProvider = WikibaseRepo::getChangeOpFactoryProvider();
 
 		return new PropertyChangeOpDeserializer( new ChangeOpDeserializerFactory(
 			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
