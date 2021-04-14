@@ -17,7 +17,6 @@ use Status;
 use Title;
 use User;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -27,7 +26,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
@@ -41,6 +39,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\Content\PropertyContent;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\WikiPageEntityStore;
@@ -160,10 +159,9 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					'custom-type' => function() use ( $wikibaseRepo ) {
 						return $this->newCustomEntityHandler();
 					},
-				],
-				new EntitySourceDefinitions( [ $localSource, $customSource ], new EntityTypeDefinitions( [] ) ),
-				$localSource
+				]
 			),
+			WikibaseRepo::getEntityTitleStoreLookup(),
 			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
 			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
@@ -786,6 +784,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	public function testAdjustFlagsForMCR( $flagsIn, $expected, $parentRevision, $slotRole ) {
 		$store = new WikiPageEntityStore(
 			$this->prophesize( EntityContentFactory::class )->reveal(),
+			$this->prophesize( EntityTitleStoreLookup::class )->reveal(),
 			$this->prophesize( IdGenerator::class )->reveal(),
 			$this->prophesize( EntityIdComposer::class )->reveal(),
 			$this->prophesize( RevisionStore::class )->reveal(),
@@ -1019,10 +1018,9 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					'property' => function() use ( $wikibaseRepo ) {
 						return $wikibaseRepo->newPropertyHandler();
 					},
-				],
-				new EntitySourceDefinitions( [ $itemSource ], new EntityTypeDefinitions( [] ) ),
-				$itemSource
+				]
 			),
+			WikibaseRepo::getEntityTitleStoreLookup(),
 			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
 			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
@@ -1055,10 +1053,9 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					'custom-type' => function() use ( $wikibaseRepo ) {
 						return $this->newCustomEntityHandler();
 					},
-				],
-				new EntitySourceDefinitions( [ $customSource ], new EntityTypeDefinitions( [] ) ),
-				$customSource
+				]
 			),
+			WikibaseRepo::getEntityTitleStoreLookup(),
 			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
 			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),

@@ -3,19 +3,15 @@
 namespace Wikibase\Repo\Tests\Content;
 
 use InvalidArgumentException;
-use MediaWiki\Interwiki\InterwikiLookup;
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use OutOfBoundsException;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\Content\PropertyContent;
@@ -43,9 +39,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 	public function testGetEntityContentModels( array $contentModelIds, array $callbacks ) {
 		$factory = new EntityContentFactory(
 			$contentModelIds,
-			$callbacks,
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			$this->getItemSource()
+			$callbacks
 		);
 
 		$this->assertEquals(
@@ -77,9 +71,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 
 		new EntityContentFactory(
 			$contentModelIds,
-			$callbacks,
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			$this->getItemSource()
+			$callbacks
 		);
 	}
 
@@ -131,95 +123,8 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 				'property' => function() use ( $wikibaseRepo ) {
 					return $wikibaseRepo->newPropertyHandler();
 				}
-			],
-			new EntitySourceDefinitions( [ $itemSource, $propertySource ], new EntityTypeDefinitions( [] ) ),
-			$itemSource,
-			MediaWikiServices::getInstance()->getInterwikiLookup()
+			]
 		);
-	}
-
-	public function testGetTitleForId() {
-		$factory = $this->newFactory();
-
-		$id = new PropertyId( 'P42' );
-		$title = $factory->getTitleForId( $id );
-
-		$this->assertEquals( 'P42', $title->getText() );
-
-		$expectedNs = $factory->getNamespaceForType( $id->getEntityType() );
-		$this->assertEquals( $expectedNs, $title->getNamespace() );
-	}
-
-	public function testGetTitleForId_nonLocalEntity() {
-		$lookup = $this->createMock( InterwikiLookup::class );
-		$lookup->method( 'isValidInterwiki' )
-			->willReturn( true );
-		$this->setService( 'InterwikiLookup', $lookup );
-
-		$factory = $this->newFactory();
-		$title = $factory->getTitleForId( new PropertyId( 'P42' ) );
-		$this->assertSame( 'propertywiki:Special:EntityPage/P42', $title->getFullText() );
-	}
-
-	public function testGetTitlesForIds_singleId() {
-		$factory = $this->newFactory();
-
-		$id = new PropertyId( 'P42' );
-		$titles = $factory->getTitlesForIds( [ $id ] );
-
-		$this->assertEquals( 'P42', $titles['P42']->getText() );
-
-		$expectedNs = $factory->getNamespaceForType( $id->getEntityType() );
-		$this->assertEquals( $expectedNs, $titles['P42']->getNamespace() );
-	}
-
-	public function testGetTitlesForIds_nonLocalEntity() {
-		$lookup = $this->createMock( InterwikiLookup::class );
-		$lookup->method( 'isValidInterwiki' )
-			->willReturn( true );
-		$this->setService( 'InterwikiLookup', $lookup );
-
-		$factory = $this->newFactory();
-		$titles = $factory->getTitlesForIds( [ new PropertyId( 'P42' ) ] );
-		$this->assertSame(
-			'propertywiki:Special:EntityPage/P42',
-			$titles['P42']->getFullText()
-		);
-	}
-
-	public function testGetTitlesForIds_multipleIdenticalIds() {
-		$factory = $this->newFactory();
-
-		$id = new PropertyId( 'P42' );
-		$titles = $factory->getTitlesForIds( [ $id, $id ] );
-
-		$this->assertCount( 1, $titles );
-		$this->assertEquals( 'P42', $titles['P42']->getText() );
-	}
-
-	public function testGetTitlesForIds_multipleDifferentIds() {
-		$factory = $this->newFactory();
-
-		$titles = $factory->getTitlesForIds( [
-			new PropertyId( 'P42' ),
-			new PropertyId( 'P43' ),
-			new ItemId( 'Q42' ),
-			new ItemId( 'Q43' )
-		] );
-
-		$this->assertCount( 4, $titles );
-		$this->assertEquals( 'P42', $titles['P42']->getText() );
-		$this->assertEquals( 'P43', $titles['P43']->getText() );
-		$this->assertEquals( 'Q42', $titles['Q42']->getText() );
-		$this->assertEquals( 'Q43', $titles['Q43']->getText() );
-	}
-
-	public function testGetTitlesForIds_emptyArray() {
-		$factory = $this->newFactory();
-
-		$titles = $factory->getTitlesForIds( [] );
-
-		$this->assertSame( [], $titles );
 	}
 
 	public function testGetNamespaceForType() {

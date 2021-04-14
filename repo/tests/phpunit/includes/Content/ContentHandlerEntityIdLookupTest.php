@@ -2,13 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Content\ContentHandlerEntityIdLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemContent;
@@ -66,10 +63,7 @@ class ContentHandlerEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 				'property' => function() use ( $wikibaseRepo ) {
 					return $wikibaseRepo->newPropertyHandler();
 				}
-			],
-			new EntitySourceDefinitions( [ $itemSource, $propertySource ], new EntityTypeDefinitions( [] ) ),
-			$itemSource,
-			MediaWikiServices::getInstance()->getInterwikiLookup()
+			]
 		);
 	}
 

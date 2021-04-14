@@ -73,9 +73,6 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			} );
 
 		$entityContentFactory = $this->createMock( EntityContentFactory::class );
-		// implements EntityTitleLookup but should never be used as such (T269603)
-		$entityContentFactory->expects( $this->never() )
-			->method( 'getTitleForId' );
 		// should also be unused since we configure no page props
 		$entityContentFactory->expects( $this->never() )
 			->method( 'newFromEntity' );

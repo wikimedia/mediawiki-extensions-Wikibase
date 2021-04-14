@@ -4,17 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Content;
 
-use InvalidArgumentException;
-use MediaWiki\Interwiki\InterwikiLookup;
-use MWException;
 use OutOfBoundsException;
-use Title;
-use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -25,7 +17,7 @@ use Wikimedia\Assert\Assert;
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class EntityContentFactory implements EntityTitleStoreLookup {
+class EntityContentFactory {
 
 	/**
 	 * @var string[] Entity type ID to content model ID mapping.
@@ -38,45 +30,24 @@ class EntityContentFactory implements EntityTitleStoreLookup {
 	private $entityHandlerFactoryCallbacks;
 
 	/**
-	 * @var InterwikiLookup|null
-	 */
-	private $interwikiLookup;
-
-	/**
 	 * @var EntityHandler[] Entity type ID to entity handler mapping.
 	 */
 	private $entityHandlers = [];
-
-	/** @var EntitySourceDefinitions */
-	private $entitySourceDefinitions;
-	/** @var EntitySource */
-	private $localEntitySource;
-	/** @var Title[] */
-	private $titleForIdCache;
 
 	/**
 	 * @param string[] $entityContentModels Entity type ID to content model ID mapping.
 	 * @param callable[] $entityHandlerFactoryCallbacks Entity type ID to callback mapping for
 	 *  creating ContentHandler objects.
-	 * @param EntitySourceDefinitions $entitySourceDefinitions
-	 * @param EntitySource $localEntitySource
-	 * @param InterwikiLookup|null $interwikiLookup
 	 */
 	public function __construct(
 		array $entityContentModels,
-		array $entityHandlerFactoryCallbacks,
-		EntitySourceDefinitions $entitySourceDefinitions,
-		EntitySource $localEntitySource,
-		InterwikiLookup $interwikiLookup = null
+		array $entityHandlerFactoryCallbacks
 	) {
 		Assert::parameterElementType( 'string', $entityContentModels, '$entityContentModels' );
 		Assert::parameterElementType( 'callable', $entityHandlerFactoryCallbacks, '$entityHandlerFactoryCallbacks' );
 
 		$this->entityContentModels = $entityContentModels;
 		$this->entityHandlerFactoryCallbacks = $entityHandlerFactoryCallbacks;
-		$this->entitySourceDefinitions = $entitySourceDefinitions;
-		$this->localEntitySource = $localEntitySource;
-		$this->interwikiLookup = $interwikiLookup;
 	}
 
 	/**
@@ -102,101 +73,6 @@ class EntityContentFactory implements EntityTitleStoreLookup {
 	 */
 	public function getEntityTypes(): array {
 		return array_keys( $this->entityContentModels );
-	}
-
-	/**
-	 * Returns the Title object for the item with provided id.
-	 *
-	 * @param EntityId $id
-	 *
-	 * @throws MWException
-	 * @throws OutOfBoundsException
-	 * @throws InvalidArgumentException
-	 * @return Title|null
-	 */
-	public function getTitleForId( EntityId $id ): ?Title {
-		if ( isset( $this->titleForIdCache[ $id->getSerialization() ] ) ) {
-			return $this->titleForIdCache[ $id->getSerialization() ];
-		}
-		$title = $this->getTitleForFederatedId( $id );
-		if ( $title ) {
-			$this->titleForIdCache[ $id->getSerialization() ] = $title;
-			return $title;
-		}
-
-		$handler = $this->getContentHandlerForType( $id->getEntityType() );
-		$title = $handler->getTitleForId( $id );
-		$this->titleForIdCache[ $id->getSerialization() ] = $title;
-		return $title;
-	}
-
-	/**
-	 * If the EntityId is federated, return a Title for it. Otherwise return null
-	 *
-	 * @param EntityId $id
-	 * @return null|Title
-	 */
-	private function getTitleForFederatedId( EntityId $id ): ?Title {
-		if ( $this->entityNotFromLocalEntitySource( $id ) ) {
-			$interwiki = $this->entitySourceDefinitions->getSourceForEntityType( $id->getEntityType() )->getInterwikiPrefix();
-			if ( $this->interwikiLookup && $this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
-				$pageName = 'EntityPage/' . $id->getSerialization();
-
-				// TODO: use a TitleFactory
-				$title = Title::makeTitle( NS_SPECIAL, $pageName, '', $interwiki );
-				$this->titleForIdCache[ $id->getSerialization() ] = $title;
-				return $title;
-			}
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns Title objects for the entities with provided ids
-	 *
-	 * @param EntityId[] $ids
-	 *
-	 * @throws MWException
-	 * @throws OutOfBoundsException
-	 * @throws InvalidArgumentException
-	 * @return (Title|null)[]
-	 */
-	public function getTitlesForIds( array $ids ): array {
-		Assert::parameterElementType( 'Wikibase\DataModel\Entity\EntityId', $ids, '$ids' );
-		$titles = [];
-		$idsByType = [];
-		// get whatever federated ids or cached ids we can, and batch the rest of the ids by type
-		foreach ( $ids as $id ) {
-			$idString = $id->getSerialization();
-			if ( isset( $this->titleForIdCache[$idString] ) ) {
-				$titles[$idString] = $this->titleForIdCache[$idString];
-				continue;
-			}
-			$title = $this->getTitleForFederatedId( $id );
-			if ( $title ) {
-				$titles[$idString] = $title;
-				continue;
-			}
-			$idsByType[ $id->getEntityType() ][] = $id;
-		}
-
-		foreach ( $idsByType as $entityType => $idsForType ) {
-			$handler = $this->getContentHandlerForType( $entityType );
-			$titlesForType = $handler->getTitlesForIds( $idsForType );
-			$titles += $titlesForType;
-		}
-
-		foreach ( $titles as $idString => $title ) {
-			$this->titleForIdCache[$idString] = $title;
-		}
-
-		return $titles;
-	}
-
-	private function entityNotFromLocalEntitySource( EntityId $id ): bool {
-		$entitySource = $this->entitySourceDefinitions->getSourceForEntityType( $id->getEntityType() );
-		return $entitySource->getSourceName() !== $this->localEntitySource->getSourceName();
 	}
 
 	/**

@@ -130,6 +130,7 @@ use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\ContentHandlerEntityIdLookup;
+use Wikibase\Repo\Content\ContentHandlerEntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\DataTypeValidatorFactory;
@@ -409,10 +410,7 @@ return [
 		return new EntityContentFactory(
 			WikibaseRepo::getContentModelMappings( $services ),
 			WikibaseRepo::getEntityTypeDefinitions( $services )
-				->get( EntityTypeDefinitions::CONTENT_HANDLER_FACTORY_CALLBACK ),
-			WikibaseRepo::getEntitySourceDefinitions( $services ),
-			WikibaseRepo::getLocalEntitySource( $services ),
-			$services->getInterwikiLookup()
+				->get( EntityTypeDefinitions::CONTENT_HANDLER_FACTORY_CALLBACK )
 		);
 	},
 
@@ -611,7 +609,12 @@ return [
 		return new TypeDispatchingEntityTitleStoreLookup(
 			WikibaseRepo::getEntityTypeDefinitions( $services )
 				->get( EntityTypeDefinitions::ENTITY_TITLE_STORE_LOOKUP_FACTORY_CALLBACK ),
-			WikibaseRepo::getEntityContentFactory( $services )
+			new ContentHandlerEntityTitleLookup(
+				WikibaseRepo::getEntityContentFactory( $services ),
+				WikibaseRepo::getEntitySourceDefinitions( $services ),
+				WikibaseRepo::getLocalEntitySource( $services ),
+				$services->getInterwikiLookup()
+			)
 		);
 	},
 
