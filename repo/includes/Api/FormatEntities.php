@@ -74,6 +74,7 @@ class FormatEntities extends ApiBase {
 		ApiMain $apiMain,
 		string $moduleName,
 		IBufferingStatsdDataFactory $dataFactory,
+		EntityIdFormatterFactory $entityIdFormatterFactory,
 		EntityIdParser $entityIdParser
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -82,7 +83,7 @@ class FormatEntities extends ApiBase {
 			$apiMain,
 			$moduleName,
 			$entityIdParser,
-			$wikibaseRepo->getEntityIdHtmlLinkFormatterFactory(),
+			$entityIdFormatterFactory,
 			$apiHelperFactory->getResultBuilder( $apiMain ),
 			$apiHelperFactory->getErrorReporter( $apiMain ),
 			$dataFactory

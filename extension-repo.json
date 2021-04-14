@@ -50,6 +50,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\FormatEntities::factory",
 			"services": [
 				"StatsdDataFactory",
+				"WikibaseRepo.EntityIdHtmlLinkFormatterFactory",
 				"WikibaseRepo.EntityIdParser"
 			]
 		},
@@ -453,6 +454,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialListPropertiesDispatchingFactory::factory",
 			"services": [
 				"WikibaseRepo.DataTypeFactory",
+				"WikibaseRepo.EntityIdHtmlLinkFormatterFactory",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.PrefetchingTermLookup",
