@@ -52,6 +52,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -127,6 +128,7 @@ use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\ContentHandlerEntityIdLookup;
@@ -175,6 +177,7 @@ use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
 use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
+use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\ValueParserFactory;
@@ -250,6 +253,28 @@ return [
 			WikibaseRepo::getEntityChangeFactory( $services ),
 			$transmitters,
 			CentralIdLookup::factoryNonLocal() // TODO inject (T265767)
+		);
+	},
+
+	'WikibaseRepo.ChangeOpFactoryProvider' => function ( MediaWikiServices $services ): ChangeOpFactoryProvider {
+		$snakValidator = new SnakValidator(
+			WikibaseRepo::getPropertyDataTypeLookup( $services ),
+			WikibaseRepo::getDataTypeFactory( $services ),
+			WikibaseRepo::getDataTypeValidatorFactory( $services )
+		);
+
+		return new ChangeOpFactoryProvider(
+			WikibaseRepo::getEntityConstraintProvider( $services ),
+			new GuidGenerator(),
+			WikibaseRepo::getStatementGuidValidator( $services ),
+			WikibaseRepo::getStatementGuidParser( $services ),
+			$snakValidator,
+			WikibaseRepo::getTermValidatorFactory( $services ),
+			$services->getSiteLookup(),
+			array_keys(
+				WikibaseRepo::getSettings( $services )
+					->getSetting( 'badgeItems' )
+			)
 		);
 	},
 

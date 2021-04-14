@@ -17,6 +17,7 @@ use Wikibase\Lib\Summary;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\CopyrightMessageBuilder;
@@ -94,6 +95,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	}
 
 	public static function factory(
+		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityPermissionChecker $entityPermissionChecker,
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,
@@ -113,7 +115,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$summaryFormatter,
 			$entityTitleLookup,
 			$wikibaseRepo->newEditEntityFactory(),
-			$wikibaseRepo->getChangeOpFactoryProvider()->getFingerprintChangeOpFactory(),
+			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
 			$termsLanguages,
 			$entityPermissionChecker
 		);

@@ -77,7 +77,7 @@ class StatementModificationHelperTest extends MediaWikiIntegrationTestCase {
 		$apiMain = new ApiMain();
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+		$changeOpFactoryProvider = WikibaseRepo::getChangeOpFactoryProvider();
 
 		$modificationHelper = new StatementModificationHelper(
 			WikibaseRepo::getSnakFactory(),

@@ -52,7 +52,7 @@ class ClaimsChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	private function newClaimsChangeOpDeserializer() {
 		return new ClaimsChangeOpDeserializer(
 			WikibaseRepo::getExternalFormatStatementDeserializer(),
-			WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()
+			WikibaseRepo::getChangeOpFactoryProvider()
 				->getStatementChangeOpFactory()
 		);
 	}

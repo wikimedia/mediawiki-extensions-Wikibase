@@ -41,7 +41,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Api\ApiHelperFactory;
-use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
@@ -361,11 +360,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetSnakFormatterFactory() {
 		$returnValue = $this->getWikibaseRepo()->getSnakFormatterFactory();
 		$this->assertInstanceOf( OutputFormatSnakFormatterFactory::class, $returnValue );
-	}
-
-	public function testGetChangeOpFactory() {
-		$returnValue = $this->getWikibaseRepo()->getChangeOpFactoryProvider();
-		$this->assertInstanceOf( ChangeOpFactoryProvider::class, $returnValue );
 	}
 
 	public function testGetContentModelMappings() {

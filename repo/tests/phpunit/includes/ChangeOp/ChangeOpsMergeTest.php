@@ -545,8 +545,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newRealStatementsMerger() {
-		return WikibaseRepo::getDefaultInstance()
-			->getChangeOpFactoryProvider()
+		return WikibaseRepo::getChangeOpFactoryProvider()
 			->getMergeFactory()
 			->getStatementsMerger();
 	}

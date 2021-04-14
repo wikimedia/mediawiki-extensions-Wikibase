@@ -68,7 +68,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$siteLookup = $this->getServiceContainer()->getSiteLookup();
 		$settings = WikibaseRepo::getSettings();
 
-		$siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
+		$siteLinkChangeOpFactory = WikibaseRepo::getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$siteLookup,
 			$settings->getSetting( 'specialSiteLinkGroups' )

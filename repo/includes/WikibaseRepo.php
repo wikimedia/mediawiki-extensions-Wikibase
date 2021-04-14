@@ -43,7 +43,6 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -140,7 +139,6 @@ use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
-use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
@@ -646,26 +644,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.StatementGuidParser' );
 	}
 
-	/**
-	 * @return ChangeOpFactoryProvider
-	 */
-	public function getChangeOpFactoryProvider() {
-		$snakValidator = new SnakValidator(
-			self::getPropertyDataTypeLookup(),
-			self::getDataTypeFactory(),
-			self::getDataTypeValidatorFactory()
-		);
-
-		return new ChangeOpFactoryProvider(
-			self::getEntityConstraintProvider(),
-			new GuidGenerator(),
-			self::getStatementGuidValidator(),
-			self::getStatementGuidParser(),
-			$snakValidator,
-			self::getTermValidatorFactory(),
-			$this->getSiteLookup(),
-			array_keys( self::getSettings()->getSetting( 'badgeItems' ) )
-		);
+	public static function getChangeOpFactoryProvider( ContainerInterface $services = null ): ChangeOpFactoryProvider {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ChangeOpFactoryProvider' );
 	}
 
 	public static function getSiteLinkBadgeChangeOpSerializationValidator(
@@ -686,7 +667,7 @@ class WikibaseRepo {
 	 * @return ChangeOpDeserializerFactory
 	 */
 	public function getChangeOpDeserializerFactory() {
-		$changeOpFactoryProvider = $this->getChangeOpFactoryProvider();
+		$changeOpFactoryProvider = self::getChangeOpFactoryProvider();
 
 		return new ChangeOpDeserializerFactory(
 			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
@@ -1170,7 +1151,7 @@ class WikibaseRepo {
 		$user = $context->getUser();
 
 		return new ItemMergeInteractor(
-			$this->getChangeOpFactoryProvider()->getMergeFactory(),
+			self::getChangeOpFactoryProvider()->getMergeFactory(),
 			self::getStore()
 				->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			self::getEntityStore(),

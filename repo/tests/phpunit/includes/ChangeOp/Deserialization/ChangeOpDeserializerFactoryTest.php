@@ -59,8 +59,7 @@ class ChangeOpDeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function newWikibaseChangeOpDeserializerFactory() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+		$changeOpFactoryProvider = WikibaseRepo::getChangeOpFactoryProvider();
 
 		return new ChangeOpDeserializerFactory(
 			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),

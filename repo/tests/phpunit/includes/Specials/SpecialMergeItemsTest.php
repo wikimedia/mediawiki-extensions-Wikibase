@@ -117,12 +117,11 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 * @return SpecialMergeItems
 	 */
 	protected function newSpecialPage() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$summaryFormatter = WikibaseRepo::getSummaryFormatter();
 
 		$mergeFactory = new MergeFactory(
 			WikibaseRepo::getEntityConstraintProvider(),
-			$wikibaseRepo->getChangeOpFactoryProvider(),
+			WikibaseRepo::getChangeOpFactoryProvider(),
 			new HashSiteStore( TestSites::getSites() )
 		);
 

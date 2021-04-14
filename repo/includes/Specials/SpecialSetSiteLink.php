@@ -16,6 +16,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
@@ -124,6 +125,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 	public static function factory(
 		SiteLookup $siteLookup,
+		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		SettingsArray $repoSettings,
@@ -131,7 +133,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
+		$siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$siteLookup,
 			$repoSettings->getSetting( 'specialSiteLinkGroups' )
