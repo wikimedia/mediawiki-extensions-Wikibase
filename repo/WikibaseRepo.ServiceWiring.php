@@ -68,6 +68,7 @@ use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\EntityIdLinkFormatter;
 use Wikibase\Lib\Formatters\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\Formatters\EntityIdValueFormatter;
+use Wikibase\Lib\Formatters\MediaWikiNumberLocalizer;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -76,6 +77,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityExistenceChecker;
@@ -118,6 +120,7 @@ use Wikibase\Lib\Store\TypeDispatchingExistenceChecker;
 use Wikibase\Lib\Store\TypeDispatchingRedirectChecker;
 use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
 use Wikibase\Lib\Store\TypeDispatchingUrlLookup;
+use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
@@ -137,6 +140,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
+use Wikibase\Repo\EntityIdLabelFormatterFactory;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\EntityTypeDefinitionsFedPropsOverrider;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
@@ -153,6 +157,8 @@ use Wikibase\Repo\Localizer\GenericExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
+use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
+use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
@@ -166,6 +172,7 @@ use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Search\Fields\FieldDefinitionsFactory;
 use Wikibase\Repo\SnakFactory;
+use Wikibase\Repo\StatementGrouperBuilder;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
@@ -186,8 +193,12 @@ use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\ValueParserFactory;
+use Wikibase\Repo\View\RepoSpecialPageLinker;
+use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityIdFormatterFactory;
+use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\ViewFactory;
 use Wikimedia\ObjectFactory;
 
 /** @phpcs-require-sorted-array */
@@ -1472,6 +1483,46 @@ return [
 		return new ValueSnakRdfBuilderFactory(
 			WikibaseRepo::getDataTypeDefinitions( $services )
 				->getRdfBuilderFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
+		);
+	},
+
+	'WikibaseRepo.ViewFactory' => function ( MediaWikiServices $services ): ViewFactory {
+		$lang = WikibaseRepo::getUserLanguage( $services );
+		$settings = WikibaseRepo::getSettings( $services );
+
+		$statementGrouperBuilder = new StatementGrouperBuilder(
+			$settings->getSetting( 'statementSections' ),
+			WikibaseRepo::getPropertyDataTypeLookup( $services ),
+			WikibaseRepo::getStatementGuidParser( $services )
+		);
+
+		$propertyOrderProvider = new CachingPropertyOrderProvider(
+			new WikiPagePropertyOrderProvider(
+				$services->getTitleFactory()
+					->newFromText( 'MediaWiki:Wikibase-SortedProperties' )
+			),
+			ObjectCache::getLocalClusterInstance()
+		);
+
+		return new ViewFactory(
+			WikibaseRepo::getEntityIdHtmlLinkFormatterFactory( $services ),
+			new EntityIdLabelFormatterFactory(),
+			new WikibaseHtmlSnakFormatterFactory(
+				WikibaseRepo::getSnakFormatterFactory( $services )
+			),
+			$statementGrouperBuilder->getStatementGrouper(),
+			$propertyOrderProvider,
+			$services->getSiteLookup(),
+			WikibaseRepo::getDataTypeFactory( $services ),
+			TemplateFactory::getDefaultInstance(),
+			WikibaseRepo::getLanguageNameLookup( $services ),
+			new MediaWikiLanguageDirectionalityLookup(),
+			new MediaWikiNumberLocalizer( $lang ),
+			$settings->getSetting( 'siteLinkGroups' ),
+			$settings->getSetting( 'specialSiteLinkGroups' ),
+			$settings->getSetting( 'badgeItems' ),
+			new MediaWikiLocalizedTextProvider( $lang ),
+			new RepoSpecialPageLinker()
 		);
 	},
 
