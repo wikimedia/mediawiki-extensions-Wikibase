@@ -92,7 +92,7 @@ return [
 		},
 		Def::CHANGEOP_DESERIALIZER_CALLBACK => function() {
 			return new ItemChangeOpDeserializer(
-				WikibaseRepo::getDefaultInstance()->getChangeOpDeserializerFactory()
+				WikibaseRepo::getChangeOpDeserializerFactory()
 			);
 		},
 		Def::RDF_BUILDER_FACTORY_CALLBACK => function(
@@ -221,7 +221,7 @@ return [
 		},
 		Def::CHANGEOP_DESERIALIZER_CALLBACK => function() {
 			return new PropertyChangeOpDeserializer(
-				WikibaseRepo::getDefaultInstance()->getChangeOpDeserializerFactory()
+				WikibaseRepo::getChangeOpDeserializerFactory()
 			);
 		},
 		Def::RDF_BUILDER_FACTORY_CALLBACK => function(

@@ -129,7 +129,9 @@ use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
+use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\ContentHandlerEntityIdLookup;
 use Wikibase\Repo\Content\ContentHandlerEntityTitleLookup;
@@ -166,6 +168,7 @@ use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Search\Fields\FieldDefinitionsFactory;
+use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -260,6 +263,27 @@ return [
 			WikibaseRepo::getEntityChangeFactory( $services ),
 			$transmitters,
 			CentralIdLookup::factoryNonLocal() // TODO inject (T265767)
+		);
+	},
+
+	'WikibaseRepo.ChangeOpDeserializerFactory' => function ( MediaWikiServices $services ): ChangeOpDeserializerFactory {
+		$changeOpFactoryProvider = WikibaseRepo::getChangeOpFactoryProvider( $services );
+		$settings = WikibaseRepo::getSettings( $services );
+
+		return new ChangeOpDeserializerFactory(
+			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
+			$changeOpFactoryProvider->getStatementChangeOpFactory(),
+			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
+			new TermChangeOpSerializationValidator( WikibaseRepo::getTermsLanguages( $services ) ),
+			WikibaseRepo::getSiteLinkBadgeChangeOpSerializationValidator( $services ),
+			WikibaseRepo::getExternalFormatStatementDeserializer( $services ),
+			new SiteLinkTargetProvider(
+				$services->getSiteLookup(),
+				$settings->getSetting( 'specialSiteLinkGroups' )
+			),
+			WikibaseRepo::getEntityIdParser( $services ),
+			WikibaseRepo::getStringNormalizer( $services ),
+			$settings->getSetting( 'siteLinkGroups' )
 		);
 	},
 
