@@ -8,7 +8,6 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
 use ReflectionClass;
 use ReflectionMethod;
-use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
@@ -151,11 +150,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetPropertyParserFunctionRunner() {
 		$runner = $this->getWikibaseClient()->getPropertyParserFunctionRunner();
 		$this->assertInstanceOf( Runner::class, $runner );
-	}
-
-	public function testGetDataAccessSnakFormatterFactory() {
-		$instance = $this->getWikibaseClient()->getDataAccessSnakFormatterFactory();
-		$this->assertInstanceOf( DataAccessSnakFormatterFactory::class, $instance );
 	}
 
 	/**
