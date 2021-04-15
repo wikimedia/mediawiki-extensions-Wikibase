@@ -6,15 +6,20 @@ module.exports = {
 		'plugin:vue/strongly-recommended',
 		'@wmde/wikimedia-typescript',
 	],
+
 	plugins: [
 		'filenames',
 	],
+
 	parser: 'vue-eslint-parser',
+
 	env: {
 		/* TODO: taken from eslint-config-wikimedia/client.json */
 		browser: true,
 	},
+
 	root: true,
+
 	rules: {
 		'function-paren-newline': [ 'error', 'consistent' ],
 		'filenames/match-exported': 'error',
@@ -53,13 +58,18 @@ module.exports = {
 		// for ResourceLoader `require`
 		'@typescript-eslint/no-require-imports': 'off',
 		'@typescript-eslint/no-var-requires': 'off',
+
+		'@typescript-eslint/ban-types': 'off',
 	},
+
 	overrides: [
 		{
 			files: [ '**/*.ts' ],
 			parser: 'vue-eslint-parser',
 			rules: {
 				'no-undef': 'off',
+				'no-use-before-define': 'off',
+				'@typescript-eslint/ban-types': 'off',
 			},
 		},
 		{
@@ -70,4 +80,8 @@ module.exports = {
 			},
 		},
 	],
+
+	parserOptions: {
+		parser: '@typescript-eslint/parser',
+	},
 };
