@@ -229,9 +229,10 @@ abstract class EntityContent extends AbstractContent {
 		$generateHtml = true
 	) {
 		// @todo: move this to the ContentHandler
-		$outputGenerator = WikibaseRepo::getDefaultInstance()->getEntityParserOutputGenerator(
-			$this->getValidUserLanguage( $options->getUserLangObj() )
-		);
+		$outputGenerator = WikibaseRepo::getEntityParserOutputGeneratorFactory()
+			->getEntityParserOutputGenerator(
+				$this->getValidUserLanguage( $options->getUserLangObj() )
+			);
 
 		$entityRevision = $this->getEntityRevision( $revisionId );
 

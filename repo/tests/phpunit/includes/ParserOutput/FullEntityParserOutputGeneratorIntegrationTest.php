@@ -106,7 +106,7 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 	}
 
 	private function newParserOutputGenerator() {
-		return WikibaseRepo::getDefaultInstance()->getEntityParserOutputGeneratorFactory()
+		return WikibaseRepo::getEntityParserOutputGeneratorFactory()
 			->getEntityParserOutputGenerator( Language::factory( 'en' ) );
 	}
 
@@ -129,7 +129,6 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 	public function testGetParserOutputIncludesLabelsOfRedirectEntityUsedAsStatementValue() {
 		$this->markTablesUsedForEntityEditing();
 
-		$repo = WikibaseRepo::getDefaultInstance();
 		$mwServices = MediaWikiServices::getInstance();
 
 		$property = new Property( new PropertyId( 'P93' ), null, 'wikibase-item' );
@@ -154,7 +153,8 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 		$revision = $store->saveEntity( $item, 'test item', $user );
 
 		$language = $mwServices->getLanguageFactory()->getLanguage( 'en' );
-		$entityParserOutputGenerator = $repo->getEntityParserOutputGenerator( $language );
+		$entityParserOutputGeneratorFactory = WikibaseRepo::getEntityParserOutputGeneratorFactory( $mwServices );
+		$entityParserOutputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator( $language );
 
 		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision );
 

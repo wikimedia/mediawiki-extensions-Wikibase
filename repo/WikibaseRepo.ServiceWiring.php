@@ -50,6 +50,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -142,6 +143,8 @@ use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\EntityIdLabelFormatterFactory;
+use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
+use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\EntityTypeDefinitionsFedPropsOverrider;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
@@ -167,6 +170,7 @@ use Wikibase\Repo\Notifications\RepoEntityChange;
 use Wikibase\Repo\Notifications\RepoItemChange;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
+use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
@@ -602,6 +606,38 @@ return [
 				) );
 			},
 			new EntityNamespaceLookup( [], [] )
+		);
+	},
+
+	'WikibaseRepo.EntityParserOutputGeneratorFactory' => function ( MediaWikiServices $services ): EntityParserOutputGeneratorFactory {
+		$settings = WikibaseRepo::getSettings( $services );
+
+		return new EntityParserOutputGeneratorFactory(
+			WikibaseRepo::getEntityViewFactory( $services ),
+			WikibaseRepo::getEntityMetaTagsCreatorFactory( $services ),
+			WikibaseRepo::getEntityTitleLookup( $services ),
+			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
+			TemplateFactory::getDefaultInstance(),
+			WikibaseRepo::getEntityDataFormatProvider( $services ),
+			// FIXME: Should this be done for all usages of this lookup, or is the impact of
+			// CachingPropertyInfoLookup enough?
+			new InProcessCachingDataTypeLookup(
+				WikibaseRepo::getPropertyDataTypeLookup( $services )
+			),
+			WikibaseRepo::getCompactEntitySerializer( $services ),
+			new EntityReferenceExtractorDelegator(
+				WikibaseRepo::getEntityTypeDefinitions( $services )
+					->get( EntityTypeDefinitions::ENTITY_REFERENCE_EXTRACTOR_CALLBACK ),
+				new StatementEntityReferenceExtractor(
+					WikibaseRepo::getItemUrlParser( $services )
+				)
+			),
+			WikibaseRepo::getKartographerEmbeddingHandler( $services ),
+			$services->getStatsdDataFactory(),
+			$services->getRepoGroup(),
+			$settings->getSetting( 'preferredGeoDataProperties' ),
+			$settings->getSetting( 'preferredPageImagesProperties' ),
+			$settings->getSetting( 'globeUris' )
 		);
 	},
 
