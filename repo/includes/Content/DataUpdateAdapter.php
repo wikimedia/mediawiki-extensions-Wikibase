@@ -7,6 +7,7 @@ use Exception;
 use InvalidArgumentException;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
+use Wikimedia\Rdbms\DBError;
 
 /**
  * A generic DataUpdate based on a callable passed to the constructor.
@@ -60,6 +61,11 @@ class DataUpdateAdapter extends DataUpdate {
 		} catch ( Exception $ex ) {
 			$this->exceptionHandler->handleException( $ex, 'data-update-failed',
 				'A data update callback triggered an exception' );
+			// DBErrors must be rethrown.
+			// https://www.mediawiki.org/wiki/Database_transactions#Use_of_transaction_rollback
+			if ( $ex instanceof DBError ) {
+				throw $ex;
+			}
 		}
 	}
 
