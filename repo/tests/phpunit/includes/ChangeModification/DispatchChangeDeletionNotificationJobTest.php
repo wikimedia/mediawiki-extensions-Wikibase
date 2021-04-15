@@ -168,8 +168,8 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 		$revision = $store->saveEntity( $item, 'Q303', $this->getTestUser()->getUser() );
 
 		// get title
-		$contentFactory = WikibaseRepo::getEntityContentFactory();
-		$title = $contentFactory->getTitleForId( $revision->getEntity()->getId() );
+		$entityTitleLookup = WikibaseRepo::getEntityTitleLookup();
+		$title = $entityTitleLookup->getTitleForId( $revision->getEntity()->getId() );
 
 		// insert a wikipage for the item
 		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup();

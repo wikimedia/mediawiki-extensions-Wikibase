@@ -26,6 +26,7 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\GenericEventDispatcher;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
 use WikiPage;
 
@@ -44,6 +45,11 @@ class WikiPageEntityStore implements EntityStore {
 	 * @var EntityContentFactory
 	 */
 	private $contentFactory;
+
+	/**
+	 * @var EntityTitleStoreLookup
+	 */
+	private $entityTitleStoreLookup;
 
 	/**
 	 * @var IdGenerator
@@ -75,6 +81,7 @@ class WikiPageEntityStore implements EntityStore {
 
 	/**
 	 * @param EntityContentFactory $contentFactory
+	 * @param EntityTitleStoreLookup $entityTitleStoreLookup
 	 * @param IdGenerator $idGenerator
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param RevisionStore $revisionStore A RevisionStore for the local database.
@@ -83,6 +90,7 @@ class WikiPageEntityStore implements EntityStore {
 	 */
 	public function __construct(
 		EntityContentFactory $contentFactory,
+		EntityTitleStoreLookup $entityTitleStoreLookup,
 		IdGenerator $idGenerator,
 		EntityIdComposer $entityIdComposer,
 		RevisionStore $revisionStore,
@@ -90,6 +98,7 @@ class WikiPageEntityStore implements EntityStore {
 		PermissionManager $permissionManager
 	) {
 		$this->contentFactory = $contentFactory;
+		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
 		$this->idGenerator = $idGenerator;
 
 		$this->dispatcher = new GenericEventDispatcher( EntityStoreWatcher::class );
@@ -438,7 +447,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @return Title|null
 	 */
 	private function getTitleForEntity( EntityId $entityId ) {
-		$title = $this->contentFactory->getTitleForId( $entityId );
+		$title = $this->entityTitleStoreLookup->getTitleForId( $entityId );
 		return $title;
 	}
 
