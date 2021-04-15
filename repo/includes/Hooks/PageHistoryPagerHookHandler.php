@@ -9,9 +9,9 @@ use MediaWiki\Hook\PageHistoryPager__doBatchLookupsHook;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Repo\FederatedProperties\SummaryParsingPrefetchHelper;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\IResultWrapper;
 
 //phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
@@ -60,11 +60,11 @@ class PageHistoryPagerHookHandler implements PageHistoryPager__doBatchLookupsHoo
 	public static function factory(
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		LinkTargetEntityIdLookup $linkTargetEntityIdLookup,
-		PrefetchingTermLookup $prefetchingTermLookup
+		PrefetchingTermLookup $prefetchingTermLookup,
+		SettingsArray $repoSettings
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
-			$wikibaseRepo->inFederatedPropertyMode(),
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
 			$prefetchingTermLookup,
 			$linkTargetEntityIdLookup,
 			$languageFallbackChainFactory

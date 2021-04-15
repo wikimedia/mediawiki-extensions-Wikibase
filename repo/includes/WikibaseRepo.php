@@ -1399,10 +1399,6 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.Logger' );
 	}
 
-	public function inFederatedPropertyMode(): bool {
-		return self::getSettings()->getSetting( 'federatedPropertiesEnabled' );
-	}
-
 	public static function getFederatedPropertiesServiceFactory( ContainerInterface $services = null ): ApiServiceFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.FederatedPropertiesServiceFactory' );

@@ -7,9 +7,9 @@ use MediaWiki\Diff\Hook\DifferenceEngineViewHeaderHook;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Repo\FederatedProperties\SummaryParsingPrefetchHelper;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Hook for prefetching and handling federated properties before links are rendered.
@@ -59,11 +59,11 @@ class DifferenceEngineViewHeaderHookHandler implements DifferenceEngineViewHeade
 	public static function factory(
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		LinkTargetEntityIdLookup $linkTargetEntityIdLookup,
-		PrefetchingTermLookup $prefetchingTermLookup
+		PrefetchingTermLookup $prefetchingTermLookup,
+		SettingsArray $repoSettings
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
-			$wikibaseRepo->inFederatedPropertyMode(),
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
 			$languageFallbackChainFactory,
 			$linkTargetEntityIdLookup,
 			new SummaryParsingPrefetchHelper( $prefetchingTermLookup )
