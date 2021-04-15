@@ -33,6 +33,7 @@ class SpecialSetAliasesTest extends SpecialModifyTermTestCase {
 		$copyrightView = new SpecialPageCopyrightView( new CopyrightMessageBuilder(), '', '' );
 
 		return new SpecialSetAliases(
+			WikibaseRepo::getChangeOpFactoryProvider(),
 			$copyrightView,
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
