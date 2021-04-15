@@ -135,6 +135,7 @@ use Wikibase\Repo\Content\ContentHandlerEntityIdLookup;
 use Wikibase\Repo\Content\ContentHandlerEntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
+use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
@@ -939,7 +940,7 @@ return [
 		 * when constructing EntityHandlers.
 		 *
 		 * @see WikibaseRepo::getItemHandler
-		 * @see WikibaseRepo::newPropertyHandler
+		 * @see WikibaseRepo::getPropertyHandler
 		 * @see EntityHandler::__construct
 		 *
 		 * @note: False positives (detecting a legacy format when really no legacy format was used)
@@ -1088,6 +1089,24 @@ return [
 			$infoLookup,
 			WikibaseRepo::getLogger( $services ),
 			$retrievingLookup
+		);
+	},
+
+	'WikibaseRepo.PropertyHandler' => function ( MediaWikiServices $services ): PropertyHandler {
+		return new PropertyHandler(
+			WikibaseRepo::getPropertyTermStoreWriter( $services ),
+			WikibaseRepo::getEntityContentDataCodec( $services ),
+			WikibaseRepo::getEntityConstraintProvider( $services ),
+			WikibaseRepo::getValidatorErrorLocalizer( $services ),
+			WikibaseRepo::getEntityIdParser( $services ),
+			WikibaseRepo::getEntityIdLookup( $services ),
+			WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory( $services ),
+			WikibaseRepo::getStore( $services )
+				->getPropertyInfoStore(),
+			WikibaseRepo::getPropertyInfoBuilder( $services ),
+			WikibaseRepo::getFieldDefinitionsFactory( $services )
+				->getFieldDefinitionsByType( Property::ENTITY_TYPE ),
+			WikibaseRepo::getLegacyFormatDetectorCallback( $services )
 		);
 	},
 

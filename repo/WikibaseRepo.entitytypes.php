@@ -214,8 +214,7 @@ return [
 		},
 		Def::CONTENT_MODEL_ID => PropertyContent::CONTENT_MODEL_ID,
 		Def::CONTENT_HANDLER_FACTORY_CALLBACK => function() {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			return $wikibaseRepo->newPropertyHandler();
+			return WikibaseRepo::getPropertyHandler();
 		},
 		Def::ENTITY_FACTORY_CALLBACK => function() {
 			return Property::newFromType( '' );

@@ -41,7 +41,6 @@ use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
-use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
@@ -439,27 +438,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetEntityChangeFactory() {
 		$factory = WikibaseRepo::getEntityChangeFactory();
 		$this->assertInstanceOf( EntityChangeFactory::class, $factory );
-	}
-
-	public function testNewPropertyHandler() {
-		$handler = $this->getWikibaseRepo()->newPropertyHandler();
-		$this->assertInstanceOf( EntityHandler::class, $handler );
-	}
-
-	public function testNewPropertyHandler_noTransform() {
-		$this->settings->setSetting( 'transformLegacyFormatOnExport', false );
-		$wikibaseRepo = $this->getWikibaseRepo();
-
-		$handler = $wikibaseRepo->newPropertyHandler();
-		$this->assertNull( $handler->getLegacyExportFormatDetector() );
-	}
-
-	public function testNewPropertyHandler_withTransform() {
-		$this->settings->setSetting( 'transformLegacyFormatOnExport', true );
-		$wikibaseRepo = $this->getWikibaseRepo();
-
-		$handler = $wikibaseRepo->newPropertyHandler();
-		$this->assertNotNull( $handler->getLegacyExportFormatDetector() );
 	}
 
 	private function getWikibaseRepo() {

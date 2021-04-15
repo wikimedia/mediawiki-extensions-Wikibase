@@ -14,6 +14,7 @@ use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityInstanceHolder;
 use Wikibase\Repo\Content\PropertyContent;
 use Wikibase\Repo\Content\PropertyHandler;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Content\PropertyHandler
@@ -119,7 +120,8 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 	 * @return PropertyHandler
 	 */
 	protected function getHandler( SettingsArray $settings = null ) {
-		return $this->getWikibaseRepo( $settings )->newPropertyHandler();
+		$this->getWikibaseRepo( $settings ); // updates services as needed
+		return WikibaseRepo::getPropertyHandler();
 	}
 
 	protected function newEntityContent( EntityDocument $entity = null ): EntityContent {

@@ -102,8 +102,6 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	 * @return array [ EntityStore, EntityLookup ]
 	 */
 	protected function createStoreAndLookup() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		//NOTE: we want to test integration of WikiPageEntityRevisionLookup and WikiPageEntityStore here!
 		$contentCodec = WikibaseRepo::getEntityContentDataCodec();
 
@@ -153,10 +151,10 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					'item' => function() {
 						return WikibaseRepo::getItemHandler();
 					},
-					'property' => function() use ( $wikibaseRepo ) {
-						return $wikibaseRepo->newPropertyHandler();
+					'property' => function() {
+						return WikibaseRepo::getPropertyHandler();
 					},
-					'custom-type' => function() use ( $wikibaseRepo ) {
+					'custom-type' => function() {
 						return $this->newCustomEntityHandler();
 					},
 				]
@@ -993,8 +991,6 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function createStoreForItemsOnly() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$itemSource = new EntitySource(
 			'local',
 			false,
@@ -1015,8 +1011,8 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					'item' => function() {
 						return WikibaseRepo::getItemHandler();
 					},
-					'property' => function() use ( $wikibaseRepo ) {
-						return $wikibaseRepo->newPropertyHandler();
+					'property' => function() {
+						return WikibaseRepo::getPropertyHandler();
 					},
 				]
 			),
