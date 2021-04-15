@@ -159,6 +159,10 @@ class SpecialUnconnectedPages extends QueryPage {
 	 */
 	public function formatResult( $skin, $result ) {
 		$title = $this->titleFactory->newFromID( $result->value );
+		if ( $title === null ) {
+			return false;
+		}
+
 		$out = $this->getLinkRenderer()->makeKnownLink( $title );
 
 		if ( $result->page_num_iwlinks > 0 ) {
