@@ -1002,13 +1002,6 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.PropertyHandler' );
 	}
 
-	/**
-	 * @deprecated Use {@link getPropertyHandler()} instead.
-	 */
-	public function newPropertyHandler(): PropertyHandler {
-		return self::getPropertyHandler();
-	}
-
 	public static function getPropertyInfoBuilder( ContainerInterface $services = null ): PropertyInfoBuilder {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.PropertyInfoBuilder' );
