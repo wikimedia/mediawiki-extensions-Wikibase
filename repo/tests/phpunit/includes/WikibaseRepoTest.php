@@ -41,7 +41,6 @@ use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
-use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Store\Store;
@@ -411,11 +410,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testNewItemMergeInteractor() {
 		$interactor = $this->getWikibaseRepo()->newItemMergeInteractor( new RequestContext() );
 		$this->assertInstanceOf( ItemMergeInteractor::class, $interactor );
-	}
-
-	public function testGetEntityParserOutputGeneratorFactory() {
-		$service = $this->getWikibaseRepo()->getEntityParserOutputGeneratorFactory();
-		$this->assertInstanceOf( EntityParserOutputGeneratorFactory::class, $service );
 	}
 
 	public function testGetDataTypeDefinitions() {

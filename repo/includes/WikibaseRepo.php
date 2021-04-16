@@ -35,7 +35,6 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -104,8 +103,6 @@ use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
-use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
-use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -132,7 +129,6 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\View\EntityIdFormatterFactory;
-use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 
 /**
@@ -1069,35 +1065,18 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityDataUriManager' );
 	}
 
-	public function getEntityParserOutputGeneratorFactory(): EntityParserOutputGeneratorFactory {
-		$services = MediaWikiServices::getInstance();
-
-		return new EntityParserOutputGeneratorFactory(
-			self::getEntityViewFactory(),
-			self::getEntityMetaTagsCreatorFactory(),
-			self::getEntityTitleLookup(),
-			self::getLanguageFallbackChainFactory(),
-			TemplateFactory::getDefaultInstance(),
-			self::getEntityDataFormatProvider(),
-			// FIXME: Should this be done for all usages of this lookup, or is the impact of
-			// CachingPropertyInfoLookup enough?
-			new InProcessCachingDataTypeLookup( self::getPropertyDataTypeLookup() ),
-			self::getCompactEntitySerializer(),
-			new EntityReferenceExtractorDelegator(
-				self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_REFERENCE_EXTRACTOR_CALLBACK ),
-				new StatementEntityReferenceExtractor( self::getItemUrlParser() )
-			),
-			self::getKartographerEmbeddingHandler(),
-			$services->getStatsdDataFactory(),
-			$services->getRepoGroup(),
-			self::getSettings()->getSetting( 'preferredGeoDataProperties' ),
-			self::getSettings()->getSetting( 'preferredPageImagesProperties' ),
-			self::getSettings()->getSetting( 'globeUris' )
-		);
+	public static function getEntityParserOutputGeneratorFactory(
+		ContainerInterface $services = null
+	): EntityParserOutputGeneratorFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityParserOutputGeneratorFactory' );
 	}
 
+	/**
+	 * @deprecated Use {@link getEntityParserOutputGeneratorFactory()} instead.
+	 */
 	public function getEntityParserOutputGenerator( Language $userLanguage ): EntityParserOutputGenerator {
-		return $this->getEntityParserOutputGeneratorFactory()
+		return self::getEntityParserOutputGeneratorFactory()
 			->getEntityParserOutputGenerator( $userLanguage );
 	}
 
