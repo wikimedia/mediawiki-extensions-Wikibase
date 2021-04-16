@@ -1084,14 +1084,6 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return (int|string)[] An array mapping entity type identifiers to
-	 * namespace numbers and optional slots.
-	 */
-	public function getLocalEntityNamespaces() {
-		return self::getSettings()->getSetting( 'entityNamespaces' );
-	}
-
 	public static function getEntityNamespaceLookup( ContainerInterface $services = null ): EntityNamespaceLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntityNamespaceLookup' );
