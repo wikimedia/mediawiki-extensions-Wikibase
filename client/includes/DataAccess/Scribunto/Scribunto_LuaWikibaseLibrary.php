@@ -264,9 +264,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return SnakSerializationRenderer
 	 */
 	private function newSnakSerializationRenderer( $type ) {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
-		$snakFormatterFactory = $wikibaseClient->getDataAccessSnakFormatterFactory();
+		$snakFormatterFactory = WikibaseClient::getDataAccessSnakFormatterFactory();
 		$snakFormatter = $snakFormatterFactory->newWikitextSnakFormatter(
 			$this->getLanguage(),
 			$this->getUsageAccumulator(),

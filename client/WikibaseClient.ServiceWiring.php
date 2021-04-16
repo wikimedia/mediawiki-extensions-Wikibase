@@ -20,6 +20,7 @@ use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
+use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\NamespaceChecker;
@@ -174,6 +175,17 @@ return [
 	'WikibaseClient.DataAccessSettings' => function ( MediaWikiServices $services ): DataAccessSettings {
 		return new DataAccessSettings(
 			WikibaseClient::getSettings( $services )->getSetting( 'maxSerializedEntitySize' )
+		);
+	},
+
+	'WikibaseClient.DataAccessSnakFormatterFactory' => function ( MediaWikiServices $services ): DataAccessSnakFormatterFactory {
+		return new DataAccessSnakFormatterFactory(
+			WikibaseClient::getLanguageFallbackChainFactory( $services ),
+			WikibaseClient::getSnakFormatterFactory( $services ),
+			WikibaseClient::getPropertyDataTypeLookup( $services ),
+			WikibaseClient::getRepoItemUriParser( $services ),
+			WikibaseClient::getLanguageFallbackLabelDescriptionLookupFactory( $services ),
+			Wikibaseclient::getSettings( $services )->getSetting( 'allowDataAccessInUserLanguage' )
 		);
 	},
 

@@ -586,22 +586,16 @@ final class WikibaseClient {
 			self::getPropertyLabelResolver(),
 			new SnaksFinder(),
 			self::getRestrictedEntityLookup(),
-			$this->getDataAccessSnakFormatterFactory(),
+			self::getDataAccessSnakFormatterFactory(),
 			new EntityUsageFactory( self::getEntityIdParser() ),
 			MediaWikiServices::getInstance()->getLanguageConverterFactory(),
 			self::getSettings()->getSetting( 'allowDataAccessInUserLanguage' )
 		);
 	}
 
-	public function getDataAccessSnakFormatterFactory(): DataAccessSnakFormatterFactory {
-		return new DataAccessSnakFormatterFactory(
-			self::getLanguageFallbackChainFactory(),
-			self::getSnakFormatterFactory(),
-			self::getPropertyDataTypeLookup(),
-			self::getRepoItemUriParser(),
-			self::getLanguageFallbackLabelDescriptionLookupFactory(),
-			self::getSettings()->getSetting( 'allowDataAccessInUserLanguage' )
-		);
+	public static function getDataAccessSnakFormatterFactory( ContainerInterface $services = null ): DataAccessSnakFormatterFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.DataAccessSnakFormatterFactory' );
 	}
 
 	public function getPropertyParserFunctionRunner(): Runner {
