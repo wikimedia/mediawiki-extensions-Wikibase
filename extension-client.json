@@ -196,8 +196,8 @@
 		},
 		"Sidebar": {
 			"class": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler::factory",
 			"services": [
+				"WikibaseClient.LanguageLinkBadgeDisplay",
 				"WikibaseClient.NamespaceChecker"
 			]
 		},

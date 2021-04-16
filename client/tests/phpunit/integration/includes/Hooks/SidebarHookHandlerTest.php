@@ -13,7 +13,6 @@ use RequestContext;
 use Skin;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarHookHandler;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\NamespaceChecker;
@@ -58,22 +57,6 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 		return new SettingsArray( $defaults );
 	}
 
-	/**
-	 * @param array $projects
-	 *
-	 * @return OtherProjectsSidebarGenerator
-	 */
-	private function getSidebarGenerator( array $projects ) {
-		$sidebarGenerator = $this->getMockBuilder( OtherProjectsSidebarGenerator::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$sidebarGenerator->method( 'buildProjectLinkSidebar' )
-			->willReturn( $projects );
-
-		return $sidebarGenerator;
-	}
-
 	private function newSidebarHookHandler() {
 		$en = Language::factory( 'en' );
 		$settings = $this->newSettings();
@@ -90,8 +73,8 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 
 		return new SidebarHookHandler(
-			$namespaceChecker,
-			$badgeDisplay
+			$badgeDisplay,
+			$namespaceChecker
 		);
 	}
 

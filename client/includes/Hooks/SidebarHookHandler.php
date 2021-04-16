@@ -13,7 +13,6 @@ use Skin;
 use Title;
 use Wikibase\Client\ClientHooks;
 use Wikibase\Client\NamespaceChecker;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * Handler for ParserOutput-related hooks.
@@ -37,22 +36,11 @@ class SidebarHookHandler implements
 	private $badgeDisplay;
 
 	public function __construct(
-		NamespaceChecker $namespaceChecker,
-		LanguageLinkBadgeDisplay $badgeDisplay
+		LanguageLinkBadgeDisplay $badgeDisplay,
+		NamespaceChecker $namespaceChecker
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->badgeDisplay = $badgeDisplay;
-	}
-
-	public static function factory(
-		NamespaceChecker $namespaceChecker
-	): self {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
-		return new self(
-			$namespaceChecker,
-			$wikibaseClient->getLanguageLinkBadgeDisplay()
-		);
 	}
 
 	/**
