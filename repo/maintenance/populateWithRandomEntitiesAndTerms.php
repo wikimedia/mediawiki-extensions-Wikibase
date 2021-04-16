@@ -179,7 +179,7 @@ class PopulateWithRandomEntitiesAndTerms extends Maintenance {
 		$descriptionTextGenerator = $this->createTextGenerator( $duplicationDegree );
 		$aliasTextGenerator = $this->createTextGenerator( $duplicationDegree );
 
-		$editEntityFactory = WikibaseRepo::getDefaultInstance()->newEditEntityFactory();
+		$editEntityFactory = WikibaseRepo::getEditEntityFactory();
 
 		for ( ; $nrOfEntities > 0; $nrOfEntities-- ) {
 			$entity = $entityType === 'item'

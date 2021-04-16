@@ -21,7 +21,6 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\Validators\TermValidatorFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Page for creating new Wikibase items.
@@ -79,6 +78,7 @@ class SpecialNewItem extends SpecialNewEntity {
 
 	public static function factory(
 		SiteLookup $siteLookup,
+		MediawikiEditEntityFactory $editEntityFactory,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityTitleLookup $entityTitleLookup,
 		TermsCollisionDetector $itemTermsCollisionDetector,
@@ -86,8 +86,6 @@ class SpecialNewItem extends SpecialNewEntity {
 		SummaryFormatter $summaryFormatter,
 		TermValidatorFactory $termValidatorFactory
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
 			$repoSettings->getSetting( 'dataRightsUrl' ),
@@ -99,7 +97,7 @@ class SpecialNewItem extends SpecialNewEntity {
 			$entityNamespaceLookup,
 			$summaryFormatter,
 			$entityTitleLookup,
-			$wikibaseRepo->newEditEntityFactory(),
+			$editEntityFactory,
 			$siteLookup,
 			$termValidatorFactory,
 			$itemTermsCollisionDetector

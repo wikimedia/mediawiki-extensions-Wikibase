@@ -22,7 +22,6 @@ use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\SummaryFormatter;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Special page for setting the sitepage of a Wikibase entity.
@@ -126,13 +125,12 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	public static function factory(
 		SiteLookup $siteLookup,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
+		MediawikiEditEntityFactory $editEntityFactory,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		SettingsArray $repoSettings,
 		SummaryFormatter $summaryFormatter
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$siteLookup,
@@ -149,7 +147,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,
-			$wikibaseRepo->newEditEntityFactory(),
+			$editEntityFactory,
 			$siteLookup,
 			$siteLinkTargetProvider,
 			$repoSettings->getSetting( 'siteLinkGroups' ),

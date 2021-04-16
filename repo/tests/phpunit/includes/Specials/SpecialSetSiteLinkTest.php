@@ -64,7 +64,6 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	private static $oldBadgeItemsSetting;
 
 	protected function newSpecialPage() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$siteLookup = $this->getServiceContainer()->getSiteLookup();
 		$settings = WikibaseRepo::getSettings();
 
@@ -82,7 +81,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			$copyrightView,
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
-			$wikibaseRepo->newEditEntityFactory(),
+			WikibaseRepo::getEditEntityFactory(),
 			$siteLookup,
 			$siteLinkTargetProvider,
 			[ 'wikipedia' ],

@@ -20,7 +20,6 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\SummaryFormatter;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Page for creating new Wikibase properties.
@@ -68,14 +67,13 @@ class SpecialNewProperty extends SpecialNewEntity {
 
 	public static function factory(
 		DataTypeFactory $dataTypeFactory,
+		MediawikiEditEntityFactory $editEntityFactory,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityTitleLookup $entityTitleLookup,
 		TermsCollisionDetector $propertyTermsCollisionDetector,
 		SettingsArray $repoSettings,
 		SummaryFormatter $summaryFormatter
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
 			$repoSettings->getSetting( 'dataRightsUrl' ),
@@ -87,7 +85,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$entityNamespaceLookup,
 			$summaryFormatter,
 			$entityTitleLookup,
-			$wikibaseRepo->newEditEntityFactory(),
+			$editEntityFactory,
 			$dataTypeFactory,
 			$propertyTermsCollisionDetector
 		);

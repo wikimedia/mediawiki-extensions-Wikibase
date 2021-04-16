@@ -17,7 +17,6 @@ use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\SummaryFormatter;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Special page for setting the aliases of a Wikibase entity.
@@ -50,14 +49,13 @@ class SpecialSetAliases extends SpecialModifyTerm {
 
 	public static function factory(
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
+		MediawikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $entityPermissionChecker,
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,
 		SummaryFormatter $summaryFormatter,
 		ContentLanguages $termsLanguages
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
 			$repoSettings->getSetting( 'dataRightsUrl' ),
@@ -69,7 +67,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,
-			$wikibaseRepo->newEditEntityFactory(),
+			$editEntityFactory,
 			$entityPermissionChecker,
 			$termsLanguages
 		);

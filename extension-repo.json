@@ -300,6 +300,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialNewItem::factory",
 			"services": [
 				"SiteLookup",
+				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityNamespaceLookup",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.ItemTermsCollisionDetector",
@@ -313,6 +314,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialNewProperty::factory",
 			"services": [
 				"WikibaseRepo.DataTypeFactory",
+				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityNamespaceLookup",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.PropertyTermsCollisionDetector",
@@ -355,6 +357,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabel::factory",
 			"services": [
 				"WikibaseRepo.ChangeOpFactoryProvider",
+				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
@@ -367,6 +370,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetDescription::factory",
 			"services": [
 				"WikibaseRepo.ChangeOpFactoryProvider",
+				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
@@ -379,6 +383,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetAliases::factory",
 			"services": [
 				"WikibaseRepo.ChangeOpFactoryProvider",
+				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
@@ -391,6 +396,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases::factory",
 			"services": [
 				"WikibaseRepo.ChangeOpFactoryProvider",
+				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityPermissionChecker",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
@@ -404,6 +410,7 @@
 			"services": [
 				"SiteLookup",
 				"WikibaseRepo.ChangeOpFactoryProvider",
+				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory",
 				"WikibaseRepo.Settings",
