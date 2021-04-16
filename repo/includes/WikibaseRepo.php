@@ -32,7 +32,6 @@ use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
@@ -998,28 +997,16 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.FieldDefinitionsFactory' );
 	}
 
-	public function newPropertyHandler(): PropertyHandler {
-		$codec = self::getEntityContentDataCodec();
-		$constraintProvider = self::getEntityConstraintProvider();
-		$errorLocalizer = self::getValidatorErrorLocalizer();
-		$propertyInfoStore = self::getStore()->getPropertyInfoStore();
-		$propertyInfoBuilder = self::getPropertyInfoBuilder();
-		$legacyFormatDetector = self::getLegacyFormatDetectorCallback();
+	public static function getPropertyHandler( ContainerInterface $services = null ): PropertyHandler {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.PropertyHandler' );
+	}
 
-		return new PropertyHandler(
-			self::getPropertyTermStoreWriter(),
-			$codec,
-			$constraintProvider,
-			$errorLocalizer,
-			self::getEntityIdParser(),
-			self::getEntityIdLookup(),
-			self::getLanguageFallbackLabelDescriptionLookupFactory(),
-			$propertyInfoStore,
-			$propertyInfoBuilder,
-			self::getFieldDefinitionsFactory()
-				->getFieldDefinitionsByType( Property::ENTITY_TYPE ),
-			$legacyFormatDetector
-		);
+	/**
+	 * @deprecated Use {@link getPropertyHandler()} instead.
+	 */
+	public function newPropertyHandler(): PropertyHandler {
+		return self::getPropertyHandler();
 	}
 
 	public static function getPropertyInfoBuilder( ContainerInterface $services = null ): PropertyInfoBuilder {

@@ -49,8 +49,6 @@ class ContentHandlerEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 			'propertywiki'
 		);
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		return new EntityContentFactory(
 			[
 				'item' => ItemContent::CONTENT_MODEL_ID,
@@ -60,8 +58,8 @@ class ContentHandlerEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 				'item' => function() {
 					return WikibaseRepo::getItemHandler();
 				},
-				'property' => function() use ( $wikibaseRepo ) {
-					return $wikibaseRepo->newPropertyHandler();
+				'property' => function() {
+					return WikibaseRepo::getPropertyHandler();
 				}
 			]
 		);
