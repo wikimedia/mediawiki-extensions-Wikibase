@@ -12,6 +12,4 @@ RUN addgroup --gid $GID runuser && adduser --uid $UID --gid $GID --disabled-pass
 
 RUN npm install --global npm@6.13.4
 
-RUN npm install --global @vue/cli@3.8.4
-
 USER runuser
