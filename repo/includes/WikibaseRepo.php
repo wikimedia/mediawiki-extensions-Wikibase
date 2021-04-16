@@ -113,7 +113,6 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
-use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
@@ -1070,14 +1069,6 @@ class WikibaseRepo {
 	): EntityParserOutputGeneratorFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntityParserOutputGeneratorFactory' );
-	}
-
-	/**
-	 * @deprecated Use {@link getEntityParserOutputGeneratorFactory()} instead.
-	 */
-	public function getEntityParserOutputGenerator( Language $userLanguage ): EntityParserOutputGenerator {
-		return self::getEntityParserOutputGeneratorFactory()
-			->getEntityParserOutputGenerator( $userLanguage );
 	}
 
 	public static function getViewFactory( ContainerInterface $services = null ): ViewFactory {
