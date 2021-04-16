@@ -69,10 +69,12 @@ use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\EntityIdLinkFormatter;
 use Wikibase\Lib\Formatters\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\Formatters\EntityIdValueFormatter;
+use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\MediaWikiNumberLocalizer;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
@@ -449,6 +451,39 @@ return [
 			new MediaWikiPageNameNormalizer(), // TODO should probably inject an HttpRequestFactory here (or get from $services?)
 			$settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
 			$settings->getSetting( 'tabularDataStorageApiEndpointUrl' )
+		);
+	},
+
+	/**
+	 * Returns a low level factory object for creating formatters for well known data types.
+	 *
+	 * @warning This is for use with {@link WikibaseRepo::getDefaultValueFormatterBuilders()} during bootstrap only!
+	 * Program logic should use {@link WikibaseRepo::getSnakFormatterFactory()} instead!
+	 */
+	'WikibaseRepo.DefaultValueFormatterBuilders' => function (
+		MediaWikiServices $services
+	): WikibaseValueFormatterBuilders {
+		$settings = WikibaseRepo::getSettings( $services );
+
+		return new WikibaseValueFormatterBuilders(
+			new FormatterLabelDescriptionLookupFactory( WikibaseRepo::getTermLookup( $services ) ),
+			WikibaseRepo::getLanguageNameLookup( $services ),
+			WikibaseRepo::getItemUrlParser( $services ),
+			$settings->getSetting( 'geoShapeStorageBaseUrl' ),
+			$settings->getSetting( 'tabularDataStorageBaseUrl' ),
+			WikibaseRepo::getTermFallbackCache( $services ),
+			$settings->getSetting( 'sharedCacheDuration' ),
+			WikibaseRepo::getEntityLookup( $services ),
+			WikibaseRepo::getEntityRevisionLookup( $services ),
+			$settings->getSetting( 'entitySchemaNamespace' ),
+			WikibaseRepo::getEntityExistenceChecker( $services ),
+			WikibaseRepo::getEntityTitleTextLookup( $services ),
+			WikibaseRepo::getEntityUrlLookup( $services ),
+			WikibaseRepo::getEntityRedirectChecker( $services ),
+			WikibaseRepo::getEntityTitleLookup( $services ),
+			WikibaseRepo::getKartographerEmbeddingHandler( $services ),
+			$settings->getSetting( 'useKartographerMaplinkInWikitext' ),
+			$services->getMainConfig()->get( 'ThumbLimits' )
 		);
 	},
 

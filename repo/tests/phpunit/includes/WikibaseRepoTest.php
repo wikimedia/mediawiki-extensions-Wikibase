@@ -33,7 +33,6 @@ use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
-use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -186,14 +185,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 			[ 'telnet://x', false ],
 			[ 'worldwind://x', false ],
 		];
-	}
-
-	public function testGetDefaultValueFormatterBuilders() {
-		$first = $this->getWikibaseRepo()->getDefaultValueFormatterBuilders();
-		$this->assertInstanceOf( WikibaseValueFormatterBuilders::class, $first );
-
-		$second = $this->getWikibaseRepo()->getDefaultValueFormatterBuilders();
-		$this->assertSame( $first, $second );
 	}
 
 	public function testGetDefaultSnakFormatterBuilders() {
