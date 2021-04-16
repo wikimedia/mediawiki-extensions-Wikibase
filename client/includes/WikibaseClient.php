@@ -3,7 +3,6 @@
 namespace Wikibase\Client;
 
 use DataValues\Deserializers\DataValueDeserializer;
-use ExtensionRegistry;
 use ExternalUserNames;
 use Language;
 use MediaWiki\MediaWikiServices;
@@ -148,13 +147,6 @@ final class WikibaseClient {
 
 			$services = MediaWikiServices::getInstance();
 
-			$kartographerEmbeddingHandler = null;
-			if ( $this->useKartographerGlobeCoordinateFormatter() ) {
-				$kartographerEmbeddingHandler = new CachingKartographerEmbeddingHandler(
-					$services->getParserFactory()->create()
-				);
-			}
-
 			$this->valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 				new FormatterLabelDescriptionLookupFactory( self::getTermLookup() ),
 				new LanguageNameLookup( self::getUserLanguage()->getCode() ),
@@ -174,7 +166,7 @@ final class WikibaseClient {
 				new TitleLookupBasedEntityUrlLookup( $entityTitleLookup ),
 				new TitleLookupBasedEntityRedirectChecker( $entityTitleLookup ),
 				$entityTitleLookup,
-				$kartographerEmbeddingHandler,
+				self::getKartographerEmbeddingHandler(),
 				$settings->getSetting( 'useKartographerMaplinkInWikitext' ),
 				$thumbLimits
 			);
@@ -183,17 +175,11 @@ final class WikibaseClient {
 		return $this->valueFormatterBuilders;
 	}
 
-	/**
-	 * @return bool
-	 */
-	private function useKartographerGlobeCoordinateFormatter() {
-		// FIXME: remove the global out of here
-		global $wgKartographerEnableMapFrame;
-
-		return self::getSettings()->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
-			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) &&
-			isset( $wgKartographerEnableMapFrame ) &&
-			$wgKartographerEnableMapFrame;
+	public static function getKartographerEmbeddingHandler(
+		ContainerInterface $services = null
+	): ?CachingKartographerEmbeddingHandler {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.KartographerEmbeddingHandler' );
 	}
 
 	/**
