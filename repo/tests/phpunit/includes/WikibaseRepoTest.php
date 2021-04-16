@@ -40,7 +40,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Api\ApiHelperFactory;
-use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
@@ -326,11 +325,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetStatementGuidParser() {
 		$returnValue = WikibaseRepo::getStatementGuidParser();
 		$this->assertInstanceOf( StatementGuidParser::class, $returnValue );
-	}
-
-	public function testGetChangeOpDeserializerFactory() {
-		$factory = $this->getWikibaseRepo()->getChangeOpDeserializerFactory();
-		$this->assertInstanceOf( ChangeOpDeserializerFactory::class, $factory );
 	}
 
 	public function testGetStatementGuidValidator() {

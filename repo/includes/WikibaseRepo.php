@@ -94,7 +94,6 @@ use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
-use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
@@ -610,29 +609,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityChangeOpProvider' );
 	}
 
-	/**
-	 * TODO: this should be probably cached?
-	 *
-	 * @return ChangeOpDeserializerFactory
-	 */
-	public function getChangeOpDeserializerFactory() {
-		$changeOpFactoryProvider = self::getChangeOpFactoryProvider();
-
-		return new ChangeOpDeserializerFactory(
-			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
-			$changeOpFactoryProvider->getStatementChangeOpFactory(),
-			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
-			new TermChangeOpSerializationValidator( self::getTermsLanguages() ),
-			self::getSiteLinkBadgeChangeOpSerializationValidator(),
-			self::getExternalFormatStatementDeserializer(),
-			new SiteLinkTargetProvider(
-				$this->getSiteLookup(),
-				self::getSettings()->getSetting( 'specialSiteLinkGroups' )
-			),
-			self::getEntityIdParser(),
-			self::getStringNormalizer(),
-			self::getSettings()->getSetting( 'siteLinkGroups' )
-		);
+	public static function getChangeOpDeserializerFactory( ContainerInterface $services = null ): ChangeOpDeserializerFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ChangeOpDeserializerFactory' );
 	}
 
 	public static function getLanguageFallbackChainFactory( ContainerInterface $services = null ): LanguageFallbackChainFactory {
