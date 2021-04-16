@@ -6,6 +6,7 @@ use SpecialPageTestBase;
 use Title;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Specials\SpecialAvailableBadges;
 use Wikibase\Repo\WikibaseRepo;
@@ -41,10 +42,10 @@ class SpecialAvailableBadgesTest extends SpecialPageTestBase {
 
 		$badgeItems = [ 'Q4' => 'test-badge' ];
 		return new SpecialAvailableBadges(
-			$prefetchingTermLookup,
 			$entityTitleLookup,
 			WikibaseRepo::getLanguageFallbackChainFactory(),
-			$badgeItems
+			$prefetchingTermLookup,
+			new SettingsArray( [ 'badgeItems' => $badgeItems ] )
 		);
 	}
 
