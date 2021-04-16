@@ -6,10 +6,9 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -29,16 +28,6 @@ class EditEntityFactoryTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.EntityTitleStoreLookup',
 			$this->createMock( EntityTitleStoreLookup::class )
-		);
-
-		$this->mockService(
-			'WikibaseRepo.EntityNamespaceLookup',
-			$this->createMock( EntityNamespaceLookup::class )
-		);
-
-		$this->mockService(
-			'WikibaseRepo.EntityContentFactory',
-			$this->createMock( EntityContentFactory::class )
 		);
 
 		$this->mockService(
@@ -64,6 +53,11 @@ class EditEntityFactoryTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.EntityPatcher',
 			$this->createMock( EntityPatcher::class )
+		);
+
+		$this->mockService(
+			'WikibaseRepo.EditFilterHookRunner',
+			$this->createMock( EditFilterHookRunner::class )
 		);
 
 		$this->mockService(

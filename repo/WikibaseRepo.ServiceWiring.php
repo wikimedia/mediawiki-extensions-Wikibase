@@ -143,6 +143,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\DataTypeValidatorFactory;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
@@ -452,26 +453,26 @@ return [
 	},
 
 	'WikibaseRepo.EditEntityFactory' => function ( MediaWikiServices $services ): MediawikiEditEntityFactory {
-		$entityTitleStoreLookup = WikibaseRepo::getEntityTitleStoreLookup( $services );
-
-		$editFilterHookRunner = new MediawikiEditFilterHookRunner(
-			WikibaseRepo::getEntityNamespaceLookup( $services ),
-			$entityTitleStoreLookup,
-			WikibaseRepo::getEntityContentFactory( $services ),
-			RequestContext::getMain()
-		);
-
 		return new MediawikiEditEntityFactory(
-			$entityTitleStoreLookup,
+			WikibaseRepo::getEntityTitleStoreLookup( $services ),
 			WikibaseRepo::getStore( $services )
 				->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			WikibaseRepo::getEntityStore( $services ),
 			WikibaseRepo::getEntityPermissionChecker( $services ),
 			WikibaseRepo::getEntityDiffer( $services ),
 			WikibaseRepo::getEntityPatcher( $services ),
-			$editFilterHookRunner,
+			WikibaseRepo::getEditFilterHookRunner( $services ),
 			$services->getStatsdDataFactory(),
 			WikibaseRepo::getSettings( $services )->getSetting( 'maxSerializedEntitySize' )
+		);
+	},
+
+	'WikibaseRepo.EditFilterHookRunner' => function ( MediaWikiServices $services ): EditFilterHookRunner {
+		return new MediawikiEditFilterHookRunner(
+			WikibaseRepo::getEntityNamespaceLookup( $services ),
+			WikibaseRepo::getEntityTitleStoreLookup( $services ),
+			WikibaseRepo::getEntityContentFactory( $services ),
+			RequestContext::getMain()
 		);
 	},
 

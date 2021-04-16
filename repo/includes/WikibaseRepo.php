@@ -102,7 +102,6 @@ use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
 use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
-use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -471,24 +470,15 @@ class WikibaseRepo {
 			self::getEntityPermissionChecker(),
 			self::getSummaryFormatter(),
 			$user,
-			$this->newEditFilterHookRunner( $context ),
+			self::getEditFilterHookRunner(),
 			$store->getEntityRedirectLookup(),
 			self::getEntityTitleStoreLookup()
 		);
 	}
 
-	/**
-	 * @param IContextSource $context
-	 *
-	 * @return EditFilterHookRunner
-	 */
-	private function newEditFilterHookRunner( IContextSource $context ) {
-		return new MediawikiEditFilterHookRunner(
-			self::getEntityNamespaceLookup(),
-			self::getEntityTitleStoreLookup(),
-			self::getEntityContentFactory(),
-			$context
-		);
+	public static function getEditFilterHookRunner( ContainerInterface $services = null ): EditFilterHookRunner {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EditFilterHookRunner' );
 	}
 
 	/**
