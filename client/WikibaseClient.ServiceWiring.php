@@ -20,6 +20,7 @@ use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
+use Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
@@ -74,9 +75,12 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
+use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
@@ -88,6 +92,10 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
+use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
+use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
+use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
@@ -226,6 +234,39 @@ return [
 					: EntityIdValue::newFromArray( $value );
 			},
 		] );
+	},
+
+	'WikibaseClient.DefaultValueFormatterBuilders' => function ( MediaWikiServices $services ): WikibaseValueFormatterBuilders {
+		$clientStore = WikibaseClient::getStore( $services );
+		$settings = WikibaseClient::getSettings( $services );
+		$entityTitleLookup = new ClientSiteLinkTitleLookup(
+			$clientStore->getSiteLinkLookup(),
+			$settings->getSetting( 'siteGlobalID' )
+		);
+
+		return new WikibaseValueFormatterBuilders(
+			new FormatterLabelDescriptionLookupFactory( WikibaseClient::getTermLookup( $services ) ),
+			new LanguageNameLookup( WikibaseClient::getUserLanguage( $services )->getCode() ),
+			WikibaseClient::getRepoItemUriParser( $services ),
+			$settings->getSetting( 'geoShapeStorageBaseUrl' ),
+			$settings->getSetting( 'tabularDataStorageBaseUrl' ),
+			WikibaseClient::getTermFallbackCache( $services ),
+			$settings->getSetting( 'sharedCacheDuration' ),
+			WikibaseClient::getEntityLookup( $services ),
+			$clientStore->getEntityRevisionLookup(),
+			$settings->getSetting( 'entitySchemaNamespace' ),
+			new TitleLookupBasedEntityExistenceChecker(
+				$entityTitleLookup,
+				$services->getLinkBatchFactory()
+			),
+			new TitleLookupBasedEntityTitleTextLookup( $entityTitleLookup ),
+			new TitleLookupBasedEntityUrlLookup( $entityTitleLookup ),
+			new TitleLookupBasedEntityRedirectChecker( $entityTitleLookup ),
+			$entityTitleLookup,
+			WikibaseClient::getKartographerEmbeddingHandler( $services ),
+			$settings->getSetting( 'useKartographerMaplinkInWikitext' ),
+			$services->getMainConfig()->get( 'ThumbLimits' )
+		);
 	},
 
 	'WikibaseClient.DescriptionLookup' => function ( MediaWikiServices $services ): DescriptionLookup {
