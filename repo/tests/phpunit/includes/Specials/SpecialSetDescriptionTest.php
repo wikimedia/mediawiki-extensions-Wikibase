@@ -28,8 +28,6 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialSetDescriptionTest extends SpecialModifyTermTestCase {
 
 	protected function newSpecialPage() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$copyrightView = new SpecialPageCopyrightView( new CopyrightMessageBuilder(), '', '' );
 
 		return new SpecialSetDescription(
@@ -37,7 +35,7 @@ class SpecialSetDescriptionTest extends SpecialModifyTermTestCase {
 			$copyrightView,
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
-			$wikibaseRepo->newEditEntityFactory(),
+			WikibaseRepo::getEditEntityFactory(),
 			WikibaseRepo::getEntityPermissionChecker(),
 			WikibaseRepo::getTermsLanguages()
 		);

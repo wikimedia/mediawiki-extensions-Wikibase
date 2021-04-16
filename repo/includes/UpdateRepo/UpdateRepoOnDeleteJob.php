@@ -55,7 +55,6 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 
 	protected function initRepoJobServicesFromGlobalState() {
 		$services = MediaWikiServices::getInstance();
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->initServices(
 			WikibaseRepo::getStore( $services )->getEntityLookup(
@@ -66,7 +65,7 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 			WikibaseRepo::getSummaryFormatter( $services ),
 			LoggerFactory::getInstance( 'UpdateRepo' ),
 			$services->getSiteLookup(),
-			$wikibaseRepo->newEditEntityFactory()
+			WikibaseRepo::getEditEntityFactory( $services )
 		);
 	}
 

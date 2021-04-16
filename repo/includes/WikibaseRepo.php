@@ -14,7 +14,6 @@ use MediaWiki\MediaWikiServices;
 use MWException;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
-use RequestContext;
 use Serializers\Serializer;
 use SiteLookup;
 use User;
@@ -1001,7 +1000,7 @@ class WikibaseRepo {
 			$this->getSiteLookup(),
 			self::getSummaryFormatter( $services ),
 			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
-			$this->newEditEntityFactory( $context ),
+			self::getEditEntityFactory( $services ),
 			self::getBaseDataModelSerializerFactory( $services ),
 			self::getAllTypesEntitySerializer( $services ),
 			self::getEntityIdParser( $services ),
@@ -1014,24 +1013,18 @@ class WikibaseRepo {
 		);
 	}
 
+	public static function getEditEntityFactory(
+		ContainerInterface $services = null
+	): MediawikiEditEntityFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EditEntityFactory' );
+	}
+
 	/**
-	 * @param IContextSource|null $context
-	 *
-	 * @return MediawikiEditEntityFactory
+	 * @deprecated use {@link getEditEntityFactory()} instead
 	 */
-	public function newEditEntityFactory( IContextSource $context = null ) {
-		return new MediawikiEditEntityFactory(
-			self::getEntityTitleStoreLookup(),
-			self::getStore()
-				->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
-			self::getEntityStore(),
-			self::getEntityPermissionChecker(),
-			self::getEntityDiffer(),
-			self::getEntityPatcher(),
-			$this->newEditFilterHookRunner( $context ?: RequestContext::getMain() ),
-			MediaWikiServices::getInstance()->getStatsdDataFactory(),
-			self::getSettings()->getSetting( 'maxSerializedEntitySize' )
-		);
+	public static function newEditEntityFactory( IContextSource $context = null ): MediawikiEditEntityFactory {
+		return self::getEditEntityFactory();
 	}
 
 	/**

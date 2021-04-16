@@ -24,7 +24,6 @@ use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\SummaryFormatter;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Special page for setting label, description and aliases of a Wikibase entity that features
@@ -96,14 +95,13 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 
 	public static function factory(
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
+		MediawikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $entityPermissionChecker,
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,
 		SummaryFormatter $summaryFormatter,
 		ContentLanguages $termsLanguages
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
 			$repoSettings->getSetting( 'dataRightsUrl' ),
@@ -114,7 +112,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,
-			$wikibaseRepo->newEditEntityFactory(),
+			$editEntityFactory,
 			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
 			$termsLanguages,
 			$entityPermissionChecker

@@ -62,14 +62,13 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 	protected function newSpecialPage() {
 		$namespaceNumber = 123;
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new SpecialNewItem(
 			$this->copyrightView,
 			new EntityNamespaceLookup( [ Item::ENTITY_TYPE => $namespaceNumber ] ),
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
-			$wikibaseRepo->newEditEntityFactory(),
+			WikibaseRepo::getEditEntityFactory(),
 			$this->siteStore,
 			$this->getTermValidatorFactorMock(),
 			WikibaseRepo::getItemTermsCollisionDetector()

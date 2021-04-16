@@ -50,7 +50,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 			new EntityNamespaceLookup( [ Property::ENTITY_TYPE => $namespaceNumber ] ),
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
-			$wikibaseRepo->newEditEntityFactory(),
+			WikibaseRepo::getEditEntityFactory(),
 			$wikibaseRepo->getDataTypeFactory(),
 			WikibaseRepo::getPropertyTermsCollisionDetector()
 		);
