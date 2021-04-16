@@ -106,7 +106,6 @@ class DumpRdf extends DumpEntities {
 
 	public function execute() {
 		if ( !$this->hasHadServicesSet ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$mwServices = MediaWikiServices::getInstance();
 
 			$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
@@ -118,7 +117,7 @@ class DumpRdf extends DumpEntities {
 
 			$this->setServices(
 				$sqlEntityIdPagerFactory,
-				$wikibaseRepo->getEnabledEntityTypes(),
+				WikibaseRepo::getEnabledEntityTypes( $mwServices ),
 				WikibaseRepo::getSettings( $mwServices )
 					->getSetting( 'entityTypesWithoutRdfOutput' ),
 				$store->getEntityPrefetcher(),

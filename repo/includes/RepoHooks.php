@@ -613,8 +613,6 @@ final class RepoHooks {
 			// To be verified that this keeps working once T200570 is done in MediaWiki itself.
 			$slots = $params['slots'] ?? [ SlotRecord::MAIN ];
 
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 			/**
 			 * Don't make Wikibase check if a user can execute when the namespace in question does
 			 * not refer to a namespace used locally for Wikibase entities.
@@ -625,7 +623,7 @@ final class RepoHooks {
 			}
 
 			$entityContentFactory = WikibaseRepo::getEntityContentFactory();
-			$entityTypes = $wikibaseRepo->getEnabledEntityTypes();
+			$entityTypes = WikibaseRepo::getEnabledEntityTypes();
 
 			foreach ( $entityContentFactory->getEntityContentModels() as $contentModel ) {
 				/** @var EntityHandler $handler */

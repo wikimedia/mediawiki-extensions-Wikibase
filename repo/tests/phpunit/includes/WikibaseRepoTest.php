@@ -38,7 +38,6 @@ use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
-use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
@@ -352,62 +351,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 				],
 			]
 		);
-	}
-
-	public function testGetEnabledEntityTypes() {
-		if ( !WikibaseSettings::isClientEnabled() ) {
-			$this->markTestSkipped( 'WikibaseClient must be enabled to run this test' );
-		}
-
-		$this->entityTypeDefinitions = $this->getEntityTypeDefinitionsWithSubentities();
-		$this->entitySourceDefinitions = new EntitySourceDefinitions(
-			[
-				new EntitySource(
-					'local',
-					false,
-					[
-						'foo' => [ 'namespaceId' => 200, 'slot' => 'main' ],
-						'bar' => [ 'namespaceId' => 220, 'slot' => 'main' ],
-					],
-					'',
-					'',
-					'',
-					''
-				),
-				new EntitySource(
-					'bazwiki',
-					'bazdb',
-					[
-						'baz' => [ 'namespaceId' => 250, 'slot' => 'main' ],
-					],
-					'',
-					'baz',
-					'baz',
-					'bazwiki'
-				),
-				new EntitySource(
-					'lexemewiki',
-					'bazdb',
-					[
-						'lexeme' => [ 'namespaceId' => 280, 'slot' => 'main' ],
-					],
-					'',
-					'lex',
-					'lex',
-					'lexwiki'
-				)
-			],
-			$this->entityTypeDefinitions
-		);
-
-		$wikibaseRepo = $this->getWikibaseRepo();
-
-		$enabled = $wikibaseRepo->getEnabledEntityTypes();
-		$this->assertContains( 'foo', $enabled );
-		$this->assertContains( 'bar', $enabled );
-		$this->assertContains( 'baz', $enabled );
-		$this->assertContains( 'lexeme', $enabled );
-		$this->assertContains( 'form', $enabled );
 	}
 
 	private function setEntityTypeDefinitions( EntityTypeDefinitions $entityTypeDefinitions ): void {
