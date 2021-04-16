@@ -40,7 +40,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Api\ApiHelperFactory;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
@@ -464,16 +463,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetApiHelperFactory() {
 		$factory = $this->getWikibaseRepo()->getApiHelperFactory( new RequestContext() );
 		$this->assertInstanceOf( ApiHelperFactory::class, $factory );
-	}
-
-	public function testNewEditEntityFactory() {
-		$factory = $this->getWikibaseRepo()->newEditEntityFactory( new RequestContext() );
-		$this->assertInstanceOf( MediawikiEditEntityFactory::class, $factory );
-	}
-
-	public function testNewEditEntityFactory_withoutContextParam() {
-		$factory = $this->getWikibaseRepo()->newEditEntityFactory();
-		$this->assertInstanceOf( MediawikiEditEntityFactory::class, $factory );
 	}
 
 	public function testNewItemMergeInteractor() {

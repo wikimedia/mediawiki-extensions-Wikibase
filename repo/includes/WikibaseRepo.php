@@ -1021,13 +1021,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @deprecated use {@link getEditEntityFactory()} instead
-	 */
-	public static function newEditEntityFactory( IContextSource $context = null ): MediawikiEditEntityFactory {
-		return self::getEditEntityFactory();
-	}
-
-	/**
 	 * @param IContextSource $context
 	 *
 	 * @return ItemMergeInteractor
