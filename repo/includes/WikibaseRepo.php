@@ -12,13 +12,11 @@ use IContextSource;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MWException;
-use ObjectCache;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use RequestContext;
 use Serializers\Serializer;
 use SiteLookup;
-use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -54,7 +52,6 @@ use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
-use Wikibase\Lib\Formatters\MediaWikiNumberLocalizer;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -66,7 +63,6 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\Modules\SettingsValueProvider;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityExistenceChecker;
@@ -89,7 +85,6 @@ use Wikibase\Lib\Store\Sql\Terms\TypeIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
-use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCacheFactory;
@@ -138,8 +133,6 @@ use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
-use Wikibase\Repo\View\RepoSpecialPageLinker;
-use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
@@ -1155,43 +1148,9 @@ class WikibaseRepo {
 			->getEntityParserOutputGenerator( $userLanguage );
 	}
 
-	/**
-	 * @return ViewFactory
-	 */
-	public function getViewFactory() {
-		$lang = self::getUserLanguage();
-
-		$statementGrouperBuilder = new StatementGrouperBuilder(
-			self::getSettings()->getSetting( 'statementSections' ),
-			self::getPropertyDataTypeLookup(),
-			self::getStatementGuidParser()
-		);
-
-		$propertyOrderProvider = new CachingPropertyOrderProvider(
-			new WikiPagePropertyOrderProvider(
-				Title::newFromText( 'MediaWiki:Wikibase-SortedProperties' )
-			),
-			ObjectCache::getLocalClusterInstance()
-		);
-
-		return new ViewFactory(
-			self::getEntityIdHtmlLinkFormatterFactory(),
-			new EntityIdLabelFormatterFactory(),
-			new WikibaseHtmlSnakFormatterFactory( self::getSnakFormatterFactory() ),
-			$statementGrouperBuilder->getStatementGrouper(),
-			$propertyOrderProvider,
-			$this->getSiteLookup(),
-			self::getDataTypeFactory(),
-			TemplateFactory::getDefaultInstance(),
-			self::getLanguageNameLookup(),
-			new MediaWikiLanguageDirectionalityLookup(),
-			new MediaWikiNumberLocalizer( $lang ),
-			self::getSettings()->getSetting( 'siteLinkGroups' ),
-			self::getSettings()->getSetting( 'specialSiteLinkGroups' ),
-			self::getSettings()->getSetting( 'badgeItems' ),
-			new MediaWikiLocalizedTextProvider( $lang ),
-			new RepoSpecialPageLinker()
-		);
+	public static function getViewFactory( ContainerInterface $services = null ): ViewFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ViewFactory' );
 	}
 
 	public static function getDataTypeValidatorFactory( ContainerInterface $services = null ): DataTypeValidatorFactory {

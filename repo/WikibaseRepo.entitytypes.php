@@ -64,8 +64,7 @@ return [
 			TermLanguageFallbackChain $fallbackChain,
 			EntityDocument $entity
 		) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$viewFactory = $wikibaseRepo->getViewFactory();
+			$viewFactory = WikibaseRepo::getViewFactory();
 			return $viewFactory->newItemView(
 				$language,
 				$fallbackChain,
@@ -193,8 +192,7 @@ return [
 			TermLanguageFallbackChain $fallbackChain,
 			EntityDocument $entity
 		) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$viewFactory = $wikibaseRepo->getViewFactory();
+			$viewFactory = WikibaseRepo::getViewFactory();
 			return $viewFactory->newPropertyView(
 				$language,
 				$fallbackChain,
