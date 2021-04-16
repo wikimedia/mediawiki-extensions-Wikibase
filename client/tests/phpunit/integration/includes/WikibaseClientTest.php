@@ -18,7 +18,6 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
-use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\SettingsArray;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
@@ -84,14 +83,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 				return $factory;
 			}
 		);
-	}
-
-	public function testGetDefaultValueFormatterBuilders() {
-		$first = WikibaseClient::getDefaultValueFormatterBuilders();
-		$this->assertInstanceOf( WikibaseValueFormatterBuilders::class, $first );
-
-		$second = WikibaseClient::getDefaultValueFormatterBuilders();
-		$this->assertSame( $first, $second );
 	}
 
 	public function testGetDefaultSnakFormatterBuilders() {

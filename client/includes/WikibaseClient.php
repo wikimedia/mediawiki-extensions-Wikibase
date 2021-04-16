@@ -14,7 +14,6 @@ use Site;
 use SiteLookup;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
-use Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
@@ -54,23 +53,17 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
-use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\Reference\WellKnownReferenceProperties;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
-use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
-use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
-use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
-use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCacheFactory;
@@ -107,72 +100,20 @@ final class WikibaseClient {
 	 */
 	private $parserOutputDataUpdater = null;
 
-	/**
-	 * @var WikibaseValueFormatterBuilders|null
-	 */
-	private $valueFormatterBuilders = null;
-
 	/** @var ReferenceFormatterFactory|null */
 	private $referenceFormatterFactory = null;
 
 	/**
+	 * Returns a low level factory object for creating formatters for well known data types.
+	 *
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
-	public static function getDefaultValueFormatterBuilders() {
-		global $wgThumbLimits;
-		return self::getDefaultInstance()->newWikibaseValueFormatterBuilders( $wgThumbLimits );
-	}
-
-	/**
-	 * Returns a low level factory object for creating formatters for well known data types.
-	 *
-	 * @warning This is for use with getDefaultValueFormatterBuilders() during bootstrap only!
-	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
-	 *
-	 * @param array $thumbLimits
-	 *
-	 * @return WikibaseValueFormatterBuilders
-	 */
-	private function newWikibaseValueFormatterBuilders( array $thumbLimits ) {
-		if ( $this->valueFormatterBuilders === null ) {
-			$settings = self::getSettings();
-
-			$entityTitleLookup = new ClientSiteLinkTitleLookup(
-				self::getStore()->getSiteLinkLookup(),
-				$settings->getSetting( 'siteGlobalID' )
-			);
-
-			$services = MediaWikiServices::getInstance();
-
-			$this->valueFormatterBuilders = new WikibaseValueFormatterBuilders(
-				new FormatterLabelDescriptionLookupFactory( self::getTermLookup() ),
-				new LanguageNameLookup( self::getUserLanguage()->getCode() ),
-				self::getRepoItemUriParser(),
-				$settings->getSetting( 'geoShapeStorageBaseUrl' ),
-				$settings->getSetting( 'tabularDataStorageBaseUrl' ),
-				self::getTermFallbackCache(),
-				$settings->getSetting( 'sharedCacheDuration' ),
-				self::getEntityLookup(),
-				self::getStore()->getEntityRevisionLookup(),
-				$settings->getSetting( 'entitySchemaNamespace' ),
-				new TitleLookupBasedEntityExistenceChecker(
-					$entityTitleLookup,
-					$services->getLinkBatchFactory()
-				),
-				new TitleLookupBasedEntityTitleTextLookup( $entityTitleLookup ),
-				new TitleLookupBasedEntityUrlLookup( $entityTitleLookup ),
-				new TitleLookupBasedEntityRedirectChecker( $entityTitleLookup ),
-				$entityTitleLookup,
-				self::getKartographerEmbeddingHandler(),
-				$settings->getSetting( 'useKartographerMaplinkInWikitext' ),
-				$thumbLimits
-			);
-		}
-
-		return $this->valueFormatterBuilders;
+	public static function getDefaultValueFormatterBuilders( ContainerInterface $services = null ): WikibaseValueFormatterBuilders {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.DefaultValueFormatterBuilders' );
 	}
 
 	public static function getKartographerEmbeddingHandler(
