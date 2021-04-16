@@ -73,6 +73,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -365,6 +366,26 @@ return [
 		}
 
 		return $itemSource;
+	},
+
+	'WikibaseClient.KartographerEmbeddingHandler' => function (
+		MediaWikiServices $services
+	): ?CachingKartographerEmbeddingHandler {
+		$settings = WikibaseClient::getSettings( $services );
+		$config = $services->getMainConfig();
+
+		if (
+			$settings->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
+			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) && // TODO T257586
+			$config->has( 'KartographerEnableMapFrame' ) &&
+			$config->get( 'KartographerEnableMapFrame' )
+		) {
+			return new CachingKartographerEmbeddingHandler(
+				$services->getParserFactory()->create()
+			);
+		} else {
+			return null;
+		}
 	},
 
 	'WikibaseClient.LangLinkSiteGroup' => function ( MediaWikiServices $services ): string {
