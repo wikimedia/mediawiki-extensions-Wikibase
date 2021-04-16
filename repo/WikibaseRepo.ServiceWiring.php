@@ -481,12 +481,12 @@ return [
 
 		return array_reduce(
 			$types,
-			function ( $carry, $x ) use ( $subEntityTypes ) {
-				$carry[] = $x;
-				if ( array_key_exists( $x, $subEntityTypes ) ) {
-					$carry = array_merge( $carry, $subEntityTypes[$x] );
+			function ( $entityTypes, $type ) use ( $subEntityTypes ) {
+				$entityTypes[] = $type;
+				if ( array_key_exists( $type, $subEntityTypes ) ) {
+					$entityTypes = array_merge( $entityTypes, $subEntityTypes[$type] );
 				}
-				return $carry;
+				return $entityTypes;
 			},
 			[]
 		);
