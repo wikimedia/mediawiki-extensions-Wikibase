@@ -33,10 +33,6 @@ class WikiPagePropertyOrderProvider extends WikiTextPropertyOrderProvider implem
 	 * @throws PropertyOrderProviderException
 	 */
 	protected function getPropertyOrderWikitext() {
-		if ( !$this->pageTitle ) {
-			throw new PropertyOrderProviderException( 'Not able to get a title' );
-		}
-
 		$wikiPage = WikiPage::factory( $this->pageTitle );
 
 		$pageContent = $wikiPage->getContent();
