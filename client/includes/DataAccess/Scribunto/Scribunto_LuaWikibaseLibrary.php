@@ -23,6 +23,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingClosestReferencedEntityIdLookup;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
@@ -859,8 +860,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	private function getLuaEntityModules() {
 		if ( !$this->luaEntityModules ) {
-			$wikibaseClient = WikibaseClient::getDefaultInstance();
-			$this->luaEntityModules = $wikibaseClient->getLuaEntityModules();
+			$this->luaEntityModules = WikibaseClient::getEntityTypeDefinitions()
+				->get( EntityTypeDefinitions::LUA_ENTITY_MODULE );
 		}
 		return $this->luaEntityModules;
 	}
