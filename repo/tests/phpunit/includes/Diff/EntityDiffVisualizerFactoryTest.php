@@ -6,12 +6,11 @@ use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
 use RequestContext;
 use SiteLookup;
-use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\ClaimDiffer;
-use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
 use Wikibase\Repo\Diff\EntityDiffVisualizer;
 use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Diff\EntityDiffVisualizerFactory
@@ -28,7 +27,7 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertInstanceOf(
 			BasicEntityDiffVisualizer::class,
-			$factory->newEntityDiffVisualizer()
+			$factory->newEntityDiffVisualizer( null, new RequestContext() )
 		);
 	}
 
@@ -37,7 +36,7 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertInstanceOf(
 			BasicEntityDiffVisualizer::class,
-			$factory->newEntityDiffVisualizer( 'item' )
+			$factory->newEntityDiffVisualizer( 'item', new RequestContext() )
 		);
 	}
 
@@ -50,7 +49,7 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 			},
 		] );
 
-		$this->assertSame( $dummyVisualizer, $factory->newEntityDiffVisualizer( 'item' ) );
+		$this->assertSame( $dummyVisualizer, $factory->newEntityDiffVisualizer( 'item', new RequestContext() ) );
 	}
 
 	public function testGivenInstantiatorDoesReturnDiffVisualizer_factoryThrowsException() {
@@ -62,7 +61,7 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$this->expectException( \LogicException::class );
 
-		$factory->newEntityDiffVisualizer( 'item' );
+		$factory->newEntityDiffVisualizer( 'item', new RequestContext() );
 	}
 
 	/**
@@ -88,11 +87,10 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function newFactory( array $instantiators = [] ) {
 		return new EntityDiffVisualizerFactory(
 			$instantiators,
-			new RequestContext(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			$this->getMockBuilder( ClaimDifferenceVisualizer::class )->disableOriginalConstructor()->getMock(),
 			$this->getMockBuilder( SiteLookup::class )->getMock(),
-			$this->getMockBuilder( EntityIdFormatter::class )->getMock()
+			WikibaseRepo::getEntityIdHTMLLinkFormatterFactory(),
+			WikibaseRepo::getSnakFormatterFactory()
 		);
 	}
 

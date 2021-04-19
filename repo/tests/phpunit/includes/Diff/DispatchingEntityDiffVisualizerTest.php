@@ -5,15 +5,15 @@ namespace Wikibase\Repo\Tests\Diff;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
 use Diff\DiffOp\Diff\Diff;
+use RequestContext;
 use SiteLookup;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
-use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\ClaimDiffer;
-use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
 use Wikibase\Repo\Diff\DispatchingEntityDiffVisualizer;
 use Wikibase\Repo\Diff\EntityDiffVisualizer;
 use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Diff\DispatchingEntityDiffVisualizer
@@ -42,7 +42,7 @@ class DispatchingEntityDiffVisualizerTest extends \PHPUnit\Framework\TestCase {
 			}
 		] );
 
-		$dispatchingVisualizer = new DispatchingEntityDiffVisualizer( $factory );
+		$dispatchingVisualizer = new DispatchingEntityDiffVisualizer( $factory, new RequestContext() );
 
 		$itemDiff = new EntityContentDiff( new ItemDiff(), new Diff(), 'item' );
 
@@ -52,11 +52,10 @@ class DispatchingEntityDiffVisualizerTest extends \PHPUnit\Framework\TestCase {
 	private function newFactory( array $instantiators ) {
 		return new EntityDiffVisualizerFactory(
 			$instantiators,
-			new \RequestContext(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			$this->getMockBuilder( ClaimDifferenceVisualizer::class )->disableOriginalConstructor()->getMock(),
 			$this->getMockBuilder( SiteLookup::class )->getMock(),
-			$this->getMockBuilder( EntityIdFormatter::class )->getMock()
+			WikibaseRepo::getEntityIdHtmlLinkFormatterFactory(),
+			WikibaseRepo::getSnakFormatterFactory()
 		);
 	}
 

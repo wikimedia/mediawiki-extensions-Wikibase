@@ -2,9 +2,14 @@
 
 namespace Wikibase\Repo\Diff;
 
-use MessageLocalizer;
+use IContextSource;
+use RequestContext;
 use SiteLookup;
-use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
+use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
+use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\View\EntityIdFormatterFactory;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -21,46 +26,38 @@ class EntityDiffVisualizerFactory {
 	private $entityDiffVisualizerInstantiators;
 
 	/**
-	 * @var MessageLocalizer
-	 */
-	private $messageLocalizer;
-
-	/**
 	 * @var ClaimDiffer
 	 */
 	private $claimDiffer;
 
 	/**
-	 * @var ClaimDifferenceVisualizer
-	 */
-	private $claimDiffView;
-
-	/**
 	 * @var SiteLookup
 	 */
 	private $siteLookup;
+	/**
+	 * @var EntityIdFormatterFactory
+	 */
+	private $entityIdFormatterFactory;
 
 	/**
-	 * @var EntityIdFormatter
+	 * @var OutputFormatSnakFormatterFactory
 	 */
-	private $entityIdFormatter;
+	private $snakFormatterFactory;
 
 	/**
 	 * @param callable[] $entityDiffVisualizerInstantiators Associative array mapping entity types (strings)
 	 * to callbacks instantiating EntityDiffVisualizer objects.
-	 * @param MessageLocalizer $messageLocalizer
 	 * @param ClaimDiffer $claimDiffer
-	 * @param ClaimDifferenceVisualizer $claimDiffView
 	 * @param SiteLookup $siteLookup
-	 * @param EntityIdFormatter $entityIdFormatter
+	 * @param EntityIdFormatterFactory $entityIdFormatterFactory
+	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
 	 */
 	public function __construct(
 		array $entityDiffVisualizerInstantiators,
-		MessageLocalizer $messageLocalizer,
 		ClaimDiffer $claimDiffer,
-		ClaimDifferenceVisualizer $claimDiffView,
 		SiteLookup $siteLookup,
-		EntityIdFormatter $entityIdFormatter
+		EntityIdFormatterFactory $entityIdFormatterFactory,
+		OutputFormatSnakFormatterFactory $snakFormatterFactory
 	) {
 		Assert::parameterElementType( 'callable', $entityDiffVisualizerInstantiators, '$entityDiffVisualizerInstantiators' );
 		Assert::parameterElementType(
@@ -70,37 +67,53 @@ class EntityDiffVisualizerFactory {
 		);
 
 		$this->entityDiffVisualizerInstantiators = $entityDiffVisualizerInstantiators;
-		$this->messageLocalizer = $messageLocalizer;
 		$this->claimDiffer = $claimDiffer;
-		$this->claimDiffView = $claimDiffView;
 		$this->siteLookup = $siteLookup;
-		$this->entityIdFormatter = $entityIdFormatter;
+		$this->entityIdFormatterFactory = $entityIdFormatterFactory;
+		$this->snakFormatterFactory = $snakFormatterFactory;
 	}
 
-	/**
-	 * @param string|null $type
-	 *
-	 * @return EntityDiffVisualizer
-	 */
-	public function newEntityDiffVisualizer( $type = null ) {
+	public function newEntityDiffVisualizer( ?string $type = null, ?IContextSource $context = null ): EntityDiffVisualizer {
+		if ( $context === null ) {
+			$context = RequestContext::getMain();
+		}
+		return $this->getEntityDiffVisualizer( $context, $type );
+	}
+
+	// TODO: To be removed after merging Ie2b5304fcb1bb080d8e3d726c3c046aaaa1ea22b in WikibaseLexeme
+	private function getEntityDiffVisualizer( IContextSource $context, ?string $type ): EntityDiffVisualizer {
+		$langCode = $context->getLanguage()->getCode();
+		$options = new FormatterOptions( [
+			//TODO: fallback chain
+			ValueFormatter::OPT_LANG => $langCode
+		] );
+		$entityIdFormatter = $this->entityIdFormatterFactory->getEntityIdFormatter( $context->getLanguage() );
+		$diffSnakView = new DifferencesSnakVisualizer(
+			$entityIdFormatter,
+			$this->snakFormatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options ),
+			$this->snakFormatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options ),
+			$langCode
+		);
+		$claimDiffView = new ClaimDifferenceVisualizer( $diffSnakView, $langCode );
+
 		if ( $type === null || !array_key_exists( $type, $this->entityDiffVisualizerInstantiators )
 		) {
 			return new BasicEntityDiffVisualizer(
-				$this->messageLocalizer,
+				$context,
 				$this->claimDiffer,
-				$this->claimDiffView,
+				$claimDiffView,
 				$this->siteLookup,
-				$this->entityIdFormatter
+				$entityIdFormatter
 			);
 		}
 
 		$visualizer = call_user_func(
 			$this->entityDiffVisualizerInstantiators[$type],
-			$this->messageLocalizer,
+			$context,
 			$this->claimDiffer,
-			$this->claimDiffView,
+			$claimDiffView,
 			$this->siteLookup,
-			$this->entityIdFormatter
+			$entityIdFormatter
 		);
 		Assert::postcondition(
 			$visualizer instanceof EntityDiffVisualizer,
@@ -109,5 +122,4 @@ class EntityDiffVisualizerFactory {
 
 		return $visualizer;
 	}
-
 }

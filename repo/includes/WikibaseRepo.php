@@ -17,7 +17,6 @@ use Psr\Log\LoggerInterface;
 use Serializers\Serializer;
 use SiteLookup;
 use User;
-use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
@@ -52,7 +51,6 @@ use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
-use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
@@ -97,8 +95,6 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\Diff\ClaimDiffer;
-use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
-use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
 use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
@@ -1105,40 +1101,14 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityRdfBuilderFactory' );
 	}
 
-	/**
-	 * @param IContextSource $contextSource
-	 * @return EntityDiffVisualizerFactory
-	 */
-	public function getEntityDiffVisualizerFactory( IContextSource $contextSource ) {
-		$langCode = $contextSource->getLanguage()->getCode();
-
-		$options = new FormatterOptions( [
-			//TODO: fallback chain
-			ValueFormatter::OPT_LANG => $langCode
-		] );
-
-		$htmlFormatterFactory = self::getEntityIdHtmlLinkFormatterFactory();
-		$entityIdFormatter = $htmlFormatterFactory->getEntityIdFormatter( $contextSource->getLanguage() );
-
-		$formatterFactory = self::getSnakFormatterFactory();
-		$detailedSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
-		$terseSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
+	public function getEntityDiffVisualizerFactory() {
 
 		return new EntityDiffVisualizerFactory(
 			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_DIFF_VISUALIZER_CALLBACK ),
-			$contextSource,
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			new ClaimDifferenceVisualizer(
-				new DifferencesSnakVisualizer(
-					$entityIdFormatter,
-					$detailedSnakFormatter,
-					$terseSnakFormatter,
-					$langCode
-				),
-				$langCode
-			),
 			$this->getSiteLookup(),
-			$entityIdFormatter
+			self::getEntityIdHtmlLinkFormatterFactory(),
+			self::getSnakFormatterFactory()
 		);
 	}
 
