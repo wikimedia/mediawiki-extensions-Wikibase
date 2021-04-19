@@ -34,7 +34,7 @@ Then(/^Rank selector menu should be visible$/) do
 end
 
 Then(/^Rank selector menu should not be visible$/) do
-  expect(on(ItemPage).rank_selector_menu_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).rank_selector_menu_element.when_not_present).not_to be_present
 end
 
 Then(/^Rank selector item for (.+) rank should be visible$/) do |rank|
@@ -42,7 +42,7 @@ Then(/^Rank selector item for (.+) rank should be visible$/) do |rank|
 end
 
 Then(/^Rank selector item for (.+) rank should not be visible$/) do |rank|
-  expect(on(ItemPage).rank_list[rank].item_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).rank_list[rank].item_element.when_not_present).not_to be_present
 end
 
 Then(/^Indicated rank for claim (\d+) in group (\d+) should be (.+)/) do |claim_index, group_index, rank|
