@@ -29,6 +29,7 @@ ENV['ITEM_ID_PREFIX'] = lenv.lookup(:item_id_prefix, default: -> { 'Q' })
 ENV['PROPERTY_ID_PREFIX'] = lenv.lookup(:property_id_prefix, default: -> { 'P' })
 ENV['LANGUAGE_CODE'] = lenv.lookup(:language_code, default: -> { 'en' })
 ENV['USES_CIRRUS_SEARCH'] = lenv.lookup(:uses_cirrus_search, default: 'false').to_s
+ENV['HEADLESS_CAPTURE_PATH'] = nil
 
 require_all File.dirname(__FILE__) + '/modules'
 require_all File.dirname(__FILE__) + '/pages'
