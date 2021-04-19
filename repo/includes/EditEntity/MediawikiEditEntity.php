@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\EditEntity;
 
+use IContextSource;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use MWException;
@@ -98,10 +99,13 @@ class MediawikiEditEntity implements EditEntity {
 	 */
 	private $status = null;
 
+	/** @var IContextSource */
+	private $context;
+
 	/**
-	 * @var User|null
+	 * @var User
 	 */
-	private $user = null;
+	private $user;
 
 	/**
 	 * @var Title|null
@@ -137,7 +141,7 @@ class MediawikiEditEntity implements EditEntity {
 	 * @param EntityPatcher $entityPatcher
 	 * @param EntityId|null $entityId the ID of the entity being edited.
 	 *        May be null when creating a new entity.
-	 * @param User $user the user performing the edit
+	 * @param IContextSource $context the request context for the edit
 	 * @param EditFilterHookRunner $editFilterHookRunner
 	 * @param int $maxSerializedEntitySize the maximal allowed entity size in Kilobytes
 	 * @param int $baseRevId the base revision ID for conflict checking.
@@ -156,7 +160,7 @@ class MediawikiEditEntity implements EditEntity {
 		EntityDiffer $entityDiffer,
 		EntityPatcher $entityPatcher,
 		?EntityId $entityId,
-		User $user,
+		IContextSource $context,
 		EditFilterHookRunner $editFilterHookRunner,
 		$maxSerializedEntitySize,
 		$baseRevId = 0,
@@ -172,7 +176,8 @@ class MediawikiEditEntity implements EditEntity {
 			$baseRevId = 0;
 		}
 
-		$this->user = $user;
+		$this->context = $context;
+		$this->user = $context->getUser();
 		$this->baseRevId = $baseRevId;
 
 		$this->errorType = 0;
@@ -715,7 +720,7 @@ class MediawikiEditEntity implements EditEntity {
 		}
 
 		try {
-			$hookStatus = $this->editFilterHookRunner->run( $newEntity, $this->user, $summary );
+			$hookStatus = $this->editFilterHookRunner->run( $newEntity, $this->context, $summary );
 		} catch ( EntityContentTooBigException $ex ) {
 			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
 			$this->status->error( wfMessage( 'wikibase-error-entity-too-big' )->sizeParams( $this->maxSerializedEntitySize * 1024 ) );

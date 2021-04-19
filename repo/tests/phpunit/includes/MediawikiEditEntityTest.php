@@ -2,9 +2,11 @@
 
 namespace Wikibase\Repo\Tests;
 
+use FauxRequest;
 use MediaWikiIntegrationTestCase;
 use ObjectCache;
 use ReflectionMethod;
+use RequestContext;
 use Status;
 use Title;
 use User;
@@ -135,6 +137,11 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		if ( $user === null ) {
 			$user = User::newFromName( 'EditEntityTestUser' );
 		}
+
+		$context = new RequestContext();
+		$context->setRequest( new FauxRequest() );
+		$context->setUser( $user );
+
 		if ( $editFilterHookRunner === null ) {
 			$editFilterHookRunner = $this->getMockEditFitlerHookRunner();
 		}
@@ -149,7 +156,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			new EntityDiffer(),
 			new EntityPatcher(),
 			$entityId,
-			$user,
+			$context,
 			$editFilterHookRunner,
 			$repoSettings['maxSerializedEntitySize'],
 			$baseRevId
