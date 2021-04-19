@@ -5,8 +5,6 @@ namespace Wikibase\Repo;
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
-use Diff\Comparer\ComparableComparer;
-use Diff\Differ\OrderedListDiffer;
 use Exception;
 use IContextSource;
 use Language;
@@ -90,7 +88,6 @@ use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
-use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
@@ -913,15 +910,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityRdfBuilderFactory' );
 	}
 
-	public function getEntityDiffVisualizerFactory() {
-
-		return new EntityDiffVisualizerFactory(
-			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_DIFF_VISUALIZER_CALLBACK ),
-			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			$this->getSiteLookup(),
-			self::getEntityIdHtmlLinkFormatterFactory(),
-			self::getSnakFormatterFactory()
-		);
+	public static function getEntityDiffVisualizerFactory( ContainerInterface $services = null ): EntityDiffVisualizerFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityDiffVisualizerFactory' );
 	}
 
 	/**

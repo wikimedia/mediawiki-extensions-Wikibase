@@ -13,6 +13,8 @@ use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\DispatchingDeserializer;
+use Diff\Comparer\ComparableComparer;
+use Diff\Differ\OrderedListDiffer;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
@@ -147,6 +149,8 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\DataTypeValidatorFactory;
+use Wikibase\Repo\Diff\ClaimDiffer;
+use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
@@ -665,6 +669,16 @@ return [
 			$entityDiffer->registerEntityDifferStrategy( $builder() );
 		}
 		return $entityDiffer;
+	},
+
+	'WikibaseRepo.EntityDiffVisualizerFactory' => function ( MediaWikiServices $services ): EntityDiffVisualizerFactory{
+		return new EntityDiffVisualizerFactory(
+			WikibaseRepo::getEntityTypeDefinitions( $services )->get( EntityTypeDefinitions::ENTITY_DIFF_VISUALIZER_CALLBACK ),
+			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
+			$services->getSiteLookup(),
+			WikibaseRepo::getEntityIdHtmlLinkFormatterFactory( $services ),
+			WikibaseRepo::getSnakFormatterFactory( $services )
+		);
 	},
 
 	'WikibaseRepo.EntityExistenceChecker' => function ( MediaWikiServices $services ): EntityExistenceChecker {
