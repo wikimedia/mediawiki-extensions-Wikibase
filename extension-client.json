@@ -98,6 +98,7 @@
 			"factory": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler::factory",
 			"services": [
 				"WikibaseClient.EntityIdParser",
+				"WikibaseClient.LangLinkHandlerFactory",
 				"WikibaseClient.NamespaceChecker"
 			]
 		},

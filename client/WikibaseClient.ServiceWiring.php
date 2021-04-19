@@ -23,6 +23,7 @@ use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
+use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
@@ -445,6 +446,20 @@ return [
 		} else {
 			return null;
 		}
+	},
+
+	'WikibaseClient.LangLinkHandlerFactory' => function ( MediaWikiServices $services ): LangLinkHandlerFactory {
+		return new LangLinkHandlerFactory(
+			WikibaseClient::getLanguageLinkBadgeDisplay( $services ),
+			WikibaseClient::getNamespaceChecker( $services ),
+			WikibaseClient::getStore( $services )->getSiteLinkLookup(),
+			WikibaseClient::getEntityLookup( $services ),
+			$services->getSiteLookup(),
+			$services->getHookContainer(),
+			WikibaseClient::getLogger( $services ),
+			WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' ),
+			WikibaseClient::getLangLinkSiteGroup( $services )
+		);
 	},
 
 	'WikibaseClient.LangLinkSiteGroup' => function ( MediaWikiServices $services ): string {

@@ -376,18 +376,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.NamespaceChecker' );
 	}
 
-	public function getLangLinkHandlerFactory(): LangLinkHandlerFactory {
-		return new LangLinkHandlerFactory(
-			self::getLanguageLinkBadgeDisplay(),
-			self::getNamespaceChecker(),
-			self::getStore()->getSiteLinkLookup(),
-			self::getEntityLookup(),
-			$this->siteLookup,
-			MediaWikiServices::getInstance()->getHookContainer(),
-			self::getLogger(),
-			self::getSettings()->getSetting( 'siteGlobalID' ),
-			self::getLangLinkSiteGroup()
-		);
+	public static function getLangLinkHandlerFactory( ContainerInterface $services = null ): LangLinkHandlerFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.LangLinkHandlerFactory' );
 	}
 
 	public function getParserOutputDataUpdater(): ClientParserOutputDataUpdater {

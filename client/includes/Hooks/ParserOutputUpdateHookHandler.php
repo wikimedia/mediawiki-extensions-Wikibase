@@ -54,13 +54,14 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 
 	public static function factory(
 		EntityIdParser $entityIdParser,
+		LangLinkHandlerFactory $langLinkHandlerFactory,
 		NamespaceChecker $namespaceChecker
 	): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		return new self(
 			$namespaceChecker,
-			$wikibaseClient->getLangLinkHandlerFactory(),
+			$langLinkHandlerFactory,
 			$wikibaseClient->getParserOutputDataUpdater(),
 			new EntityUsageFactory( $entityIdParser )
 		);
