@@ -10,7 +10,6 @@ use ReflectionClass;
 use ReflectionMethod;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
-use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\WikibaseClient;
@@ -111,11 +110,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetParserOutputDataUpdaterType() {
 		$returnValue = $this->getWikibaseClient()->getParserOutputDataUpdater();
 		$this->assertInstanceOf( ClientParserOutputDataUpdater::class, $returnValue );
-	}
-
-	public function testGetLanguageLinkBadgeDisplay() {
-		$returnValue = $this->getWikibaseClient()->getLanguageLinkBadgeDisplay();
-		$this->assertInstanceOf( LanguageLinkBadgeDisplay::class, $returnValue );
 	}
 
 	public function testGetOtherProjectsSidebarGeneratorFactoryReturnType() {

@@ -23,6 +23,7 @@ use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
+use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\OtherProjectsSitesGenerator;
@@ -471,6 +472,12 @@ return [
 			WikibaseClient::getLanguageFallbackChainFactory( $services ),
 			WikibaseClient::getTermLookup( $services ),
 			WikibaseClient::getTermBuffer( $services )
+		);
+	},
+
+	'WikibaseClient.LanguageLinkBadgeDisplay' => function ( MediaWikiServices $services ): LanguageLinkBadgeDisplay {
+		return new LanguageLinkBadgeDisplay(
+			WikibaseClient::getSidebarLinkBadgeDisplay( $services )
 		);
 	},
 

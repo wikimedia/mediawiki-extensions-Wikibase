@@ -378,7 +378,7 @@ final class WikibaseClient {
 
 	public function getLangLinkHandlerFactory(): LangLinkHandlerFactory {
 		return new LangLinkHandlerFactory(
-			$this->getLanguageLinkBadgeDisplay(),
+			self::getLanguageLinkBadgeDisplay(),
 			self::getNamespaceChecker(),
 			self::getStore()->getSiteLinkLookup(),
 			self::getEntityLookup(),
@@ -410,10 +410,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.SidebarLinkBadgeDisplay' );
 	}
 
-	public function getLanguageLinkBadgeDisplay(): LanguageLinkBadgeDisplay {
-		return new LanguageLinkBadgeDisplay(
-			$this->getSidebarLinkBadgeDisplay()
-		);
+	public static function getLanguageLinkBadgeDisplay( ContainerInterface $services = null ): LanguageLinkBadgeDisplay {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.LanguageLinkBadgeDisplay' );
 	}
 
 	public static function getBaseDataModelDeserializerFactory(
