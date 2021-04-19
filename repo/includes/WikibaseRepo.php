@@ -49,7 +49,6 @@ use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
-use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -145,11 +144,6 @@ class WikibaseRepo {
 	private static $instance = null;
 
 	/**
-	 * @var WikibaseValueFormatterBuilders|null
-	 */
-	private static $valueFormatterBuilders = null;
-
-	/**
 	 * @var WikibaseSnakFormatterBuilders|null
 	 */
 	private static $snakFormatterBuilders = null;
@@ -161,7 +155,6 @@ class WikibaseRepo {
 			);
 		}
 		self::$instance = null;
-		self::$valueFormatterBuilders = null;
 		self::$snakFormatterBuilders = null;
 		ApiServiceFactory::resetClassStatics();
 	}
@@ -201,50 +194,10 @@ class WikibaseRepo {
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
 	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
-	 *
-	 * @return WikibaseValueFormatterBuilders
 	 */
-	public static function getDefaultValueFormatterBuilders() {
-		if ( self::$valueFormatterBuilders === null ) {
-			global $wgThumbLimits;
-			$wikibaseRepo = self::getDefaultInstance();
-			self::$valueFormatterBuilders = $wikibaseRepo->newWikibaseValueFormatterBuilders( $wgThumbLimits );
-		}
-
-		return self::$valueFormatterBuilders;
-	}
-
-	/**
-	 * Returns a low level factory object for creating formatters for well known data types.
-	 *
-	 * @warning This is for use with getDefaultValueFormatterBuilders() during bootstrap only!
-	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
-	 *
-	 * @param array $thumbLimits
-	 *
-	 * @return WikibaseValueFormatterBuilders
-	 */
-	private function newWikibaseValueFormatterBuilders( array $thumbLimits ) {
-		return new WikibaseValueFormatterBuilders(
-			new FormatterLabelDescriptionLookupFactory( self::getTermLookup() ),
-			self::getLanguageNameLookup(),
-			self::getItemUrlParser(),
-			self::getSettings()->getSetting( 'geoShapeStorageBaseUrl' ),
-			self::getSettings()->getSetting( 'tabularDataStorageBaseUrl' ),
-			self::getTermFallbackCache(),
-			self::getSettings()->getSetting( 'sharedCacheDuration' ),
-			self::getEntityLookup(),
-			self::getEntityRevisionLookup(),
-			self::getSettings()->getSetting( 'entitySchemaNamespace' ),
-			self::getEntityExistenceChecker(),
-			self::getEntityTitleTextLookup(),
-			self::getEntityUrlLookup(),
-			self::getEntityRedirectChecker(),
-			self::getEntityTitleLookup(),
-			self::getKartographerEmbeddingHandler(),
-			self::getSettings()->getSetting( 'useKartographerMaplinkInWikitext' ),
-			$thumbLimits
-		);
+	public static function getDefaultValueFormatterBuilders( ContainerInterface $services = null ): WikibaseValueFormatterBuilders {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.DefaultValueFormatterBuilders' );
 	}
 
 	public static function getKartographerEmbeddingHandler( ContainerInterface $services = null ): ?CachingKartographerEmbeddingHandler {
