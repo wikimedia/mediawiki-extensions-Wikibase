@@ -74,6 +74,7 @@ use Wikibase\Lib\Formatters\MediaWikiNumberLocalizer;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
@@ -430,6 +431,15 @@ return [
 
 	'WikibaseRepo.DataValueFactory' => function ( MediaWikiServices $services ): DataValueFactory {
 		return new DataValueFactory( WikibaseRepo::getDataValueDeserializer( $services ) );
+	},
+
+	'WikibaseRepo.DefaultSnakFormatterBuilders' => function ( MediaWikiServices $services ): WikibaseSnakFormatterBuilders {
+		return new WikibaseSnakFormatterBuilders(
+			WikibaseRepo::getDefaultValueFormatterBuilders( $services ),
+			WikibaseRepo::getStore( $services )->getPropertyInfoLookup(),
+			WikibaseRepo::getPropertyDataTypeLookup( $services ),
+			WikibaseRepo::getDataTypeFactory( $services )
+		);
 	},
 
 	/**

@@ -143,11 +143,6 @@ class WikibaseRepo {
 	 */
 	private static $instance = null;
 
-	/**
-	 * @var WikibaseSnakFormatterBuilders|null
-	 */
-	private static $snakFormatterBuilders = null;
-
 	public static function resetClassStatics() {
 		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
 			throw new Exception(
@@ -155,7 +150,6 @@ class WikibaseRepo {
 			);
 		}
 		self::$instance = null;
-		self::$snakFormatterBuilders = null;
 		ApiServiceFactory::resetClassStatics();
 	}
 
@@ -215,37 +209,13 @@ class WikibaseRepo {
 
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
-	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
+	 * Program logic should use {@link WikibaseRepo::getSnakFormatterFactory()} instead!
 	 *
 	 * @return WikibaseSnakFormatterBuilders
 	 */
-	public static function getDefaultSnakFormatterBuilders() {
-		if ( self::$snakFormatterBuilders === null ) {
-			self::$snakFormatterBuilders = self::getDefaultInstance()->newWikibaseSnakFormatterBuilders(
-				self::getDefaultValueFormatterBuilders()
-			);
-		}
-
-		return self::$snakFormatterBuilders;
-	}
-
-	/**
-	 * Returns a low level factory object for creating formatters for well known data types.
-	 *
-	 * @warning This is for use with getDefaultValueFormatterBuilders() during bootstrap only!
-	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
-	 *
-	 * @param WikibaseValueFormatterBuilders $valueFormatterBuilders
-	 *
-	 * @return WikibaseSnakFormatterBuilders
-	 */
-	private function newWikibaseSnakFormatterBuilders( WikibaseValueFormatterBuilders $valueFormatterBuilders ) {
-		return new WikibaseSnakFormatterBuilders(
-			$valueFormatterBuilders,
-			self::getStore()->getPropertyInfoLookup(),
-			self::getPropertyDataTypeLookup(),
-			self::getDataTypeFactory()
-		);
+	public static function getDefaultSnakFormatterBuilders( ContainerInterface $services = null ): WikibaseSnakFormatterBuilders {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.DefaultSnakFormatterBuilders' );
 	}
 
 	public function __construct() {
