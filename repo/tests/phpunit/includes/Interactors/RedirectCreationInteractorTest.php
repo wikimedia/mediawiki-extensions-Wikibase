@@ -132,13 +132,14 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
+		$context->setUser( $user );
 
 		$interactor = new ItemRedirectCreationInteractor(
 			$this->mockRepository,
 			$this->mockRepository,
 			$this->getPermissionChecker(),
 			$summaryFormatter,
-			$user,
+			$context,
 			$this->getMockEditFilterHookRunner( $efHookCalls, $efHookStatus ),
 			$this->mockRepository,
 			$this->getMockEntityTitleLookup()
