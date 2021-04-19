@@ -85,12 +85,6 @@ final class WikibaseClient {
 	private static $defaultInstance = null;
 
 	/**
-	 * @warning only for use in getDefaultSnakFormatterBuilders()!
-	 * @var WikibaseSnakFormatterBuilders
-	 */
-	private static $defaultSnakFormatterBuilders = null;
-
-	/**
 	 * @var SiteLookup
 	 */
 	private $siteLookup;
@@ -125,37 +119,11 @@ final class WikibaseClient {
 
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
-	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
-	 *
-	 * @return WikibaseSnakFormatterBuilders
+	 * Program logic should use {@link WikibaseClient::getSnakFormatterFactory()} instead!
 	 */
-	public static function getDefaultSnakFormatterBuilders() {
-		if ( self::$defaultSnakFormatterBuilders === null ) {
-			self::$defaultSnakFormatterBuilders = self::getDefaultInstance()->newWikibaseSnakFormatterBuilders(
-				self::getDefaultValueFormatterBuilders()
-			);
-		}
-
-		return self::$defaultSnakFormatterBuilders;
-	}
-
-	/**
-	 * Returns a low level factory object for creating formatters for well known data types.
-	 *
-	 * @warning This is for use with getDefaultValueFormatterBuilders() during bootstrap only!
-	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
-	 *
-	 * @param WikibaseValueFormatterBuilders $valueFormatterBuilders
-	 *
-	 * @return WikibaseSnakFormatterBuilders
-	 */
-	private function newWikibaseSnakFormatterBuilders( WikibaseValueFormatterBuilders $valueFormatterBuilders ) {
-		return new WikibaseSnakFormatterBuilders(
-			$valueFormatterBuilders,
-			self::getStore()->getPropertyInfoLookup(),
-			self::getPropertyDataTypeLookup(),
-			self::getDataTypeFactory()
-		);
+	public static function getDefaultSnakFormatterBuilders( ContainerInterface $services = null ): WikibaseSnakFormatterBuilders {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.DefaultSnakFormatterBuilders' );
 	}
 
 	public function __construct(
@@ -334,7 +302,6 @@ final class WikibaseClient {
 	public static function getDefaultInstance( $reset = 'noreset' ) {
 		if ( $reset === 'reset' ) {
 			self::$defaultInstance = null;
-			self::$defaultSnakFormatterBuilders = null;
 		}
 
 		if ( self::$defaultInstance === null ) {
