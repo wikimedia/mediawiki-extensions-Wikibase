@@ -35,5 +35,5 @@ Then(/^Snaktype selector item for (.+) snaktype should be visible$/) do |snaktyp
 end
 
 Then(/^Snaktype selector item for (.+) snaktype should not be visible$/) do |snaktype|
-  expect(on(ItemPage).snaktype_list[snaktype].item_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).snaktype_list[snaktype].item_element.when_not_present).not_to be_present
 end

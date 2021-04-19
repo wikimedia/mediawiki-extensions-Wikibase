@@ -31,7 +31,7 @@ Then(/^Header edit button should be there$/) do
 end
 
 Then(/^Header edit button should not be there$/) do
-  expect(on(ItemPage).edit_header_link_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).edit_header_link_element.when_not_present).not_to be_present
 end
 
 Then(/^Header cancel button should be there$/) do
@@ -39,7 +39,7 @@ Then(/^Header cancel button should be there$/) do
 end
 
 Then(/^Header cancel button should not be there$/) do
-  expect(on(ItemPage).cancel_header_link_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).cancel_header_link_element.when_not_present).not_to be_present
 end
 
 Then(/^Header save button should be there$/) do
@@ -47,5 +47,5 @@ Then(/^Header save button should be there$/) do
 end
 
 Then(/^Header save button should not be there$/) do
-  expect(on(ItemPage).save_header_link_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).save_header_link_element.when_not_present).not_to be_present
 end
