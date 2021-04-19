@@ -38,12 +38,6 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 	 */
 	private $languageFallbackChainFactory;
 
-	/**
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
-	 * @param PrefetchingTermLookup $prefetchingTermLookup
-	 * @param SettingsArray $repoSettings
-	 */
 	public function __construct(
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
