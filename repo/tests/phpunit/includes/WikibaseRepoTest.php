@@ -340,18 +340,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$this->assertContainsOnly( 'string', $array );
 	}
 
-	private function getEntityTypeDefinitionsWithSubentities(): EntityTypeDefinitions {
-		return new EntityTypeDefinitions(
-			[
-				'lexeme' => [
-					EntityTypeDefinitions::SUB_ENTITY_TYPES => [
-						'form',
-					],
-				],
-			]
-		);
-	}
-
 	private function setEntityTypeDefinitions( EntityTypeDefinitions $entityTypeDefinitions ): void {
 		$this->setService(
 			'WikibaseRepo.EntityTypeDefinitions',
@@ -503,50 +491,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
 		$expected = new EntityIdValue( new ItemId( 'Q13' ) );
 		$this->assertEquals( $expected, $deserialized );
-	}
-
-	public function testGetEntityTypeToRepositoryMapping() {
-		$this->entityTypeDefinitions = $this->getEntityTypeDefinitionsWithSubentities();
-		$this->entitySourceDefinitions = new EntitySourceDefinitions(
-			[
-				new EntitySource(
-					'local',
-					false,
-					[
-						'foo' => [ 'namespaceId' => 200, 'slot' => 'main' ],
-						'bar' => [ 'namespaceId' => 220, 'slot' => 'main' ],
-					],
-					'',
-					'',
-					'',
-					''
-				),
-				new EntitySource(
-					'lexemewiki',
-					'bazdb',
-					[
-						'lexeme' => [ 'namespaceId' => 280, 'slot' => 'main' ],
-					],
-					'',
-					'lex',
-					'lex',
-					'lexwiki'
-				)
-			],
-			$this->entityTypeDefinitions
-		);
-
-		$wikibaseRepo = $this->getWikibaseRepo();
-
-		$this->assertEquals(
-			[
-				'foo' => [ '' ],
-				'bar' => [ '' ],
-				'lexeme' => [ '' ],
-				'form' => [ '' ],
-			],
-			$wikibaseRepo->getEntityTypeToRepositoryMapping()
-		);
 	}
 
 	public function testParameterLessFunctionCalls() {
