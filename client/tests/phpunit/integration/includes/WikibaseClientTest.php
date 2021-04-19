@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Integration;
 
 use HashSiteStore;
-use Language;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
 use ReflectionClass;
@@ -81,11 +80,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 				return $factory;
 			}
 		);
-	}
-
-	public function testGetContentLanguageReturnType() {
-		$returnValue = $this->getWikibaseClient()->getContentLanguage();
-		$this->assertInstanceOf( Language::class, $returnValue );
 	}
 
 	public function testGetSettingsReturnType() {

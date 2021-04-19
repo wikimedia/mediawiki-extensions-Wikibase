@@ -249,24 +249,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @throws MWException when called to early
-	 */
-	public function getContentLanguage(): Language {
-		/**
-		 * Before this constant is defined, custom config may not have been taken into account.
-		 * So try not to allow code to use a language before that point.
-		 * This code was explicitly mentioning the SetupAfterCache hook.
-		 * With services, that hook won't be a problem anymore.
-		 * So this check may well be unnecessary (but better safe than sorry).
-		 */
-		if ( !defined( 'MW_SERVICE_BOOTSTRAP_COMPLETE' ) ) {
-			throw new MWException( 'Premature access to MediaWiki ContentLanguage!' );
-		}
-
-		return MediaWikiServices::getInstance()->getContentLanguage();
-	}
-
-	/**
 	 * @deprecated
 	 */
 	public static function getUserLanguage( ContainerInterface $services = null ): Language {
