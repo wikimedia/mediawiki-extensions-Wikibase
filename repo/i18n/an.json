@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Carlos Cristia"
+			"Carlos Cristia",
+			"Willtron"
 		]
 	},
-	"wikibase-edit": "editar"
+	"wikibase-edit": "editar",
+	"wikibase-add": "adhibir"
 }

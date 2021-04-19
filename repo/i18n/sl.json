@@ -194,6 +194,7 @@
 	"wikibase-dispatchstats-site-id": "Spletna stran",
 	"wikibase-dispatchstats-pos": "Položaj",
 	"wikibase-dispatchstats-lag-num": "V delu",
+	"wikibase-history-title-with-label": "Zgodovina strani »$2« ($1)",
 	"special-listproperties": "Seznam Lastnosti",
 	"wikibase-listproperties-datatype": "Vrsta podatka:",
 	"wikibase-listproperties-submit": "Poišči",
@@ -222,5 +223,6 @@
 	"action-item-merge": "združi Objekte",
 	"right-item-merge": "Združi Objekte",
 	"action-property-create": "ustvari Lastnosti",
-	"wikibase-pageinfo-subscription-none": "Brez"
+	"wikibase-pageinfo-subscription-none": "Brez",
+	"wikibase-shortcopyrightwarning-heading": "Navedba licence"
 }
