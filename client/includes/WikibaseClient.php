@@ -393,7 +393,7 @@ final class WikibaseClient {
 	public function getParserOutputDataUpdater(): ClientParserOutputDataUpdater {
 		if ( $this->parserOutputDataUpdater === null ) {
 			$this->parserOutputDataUpdater = new ClientParserOutputDataUpdater(
-				$this->getOtherProjectsSidebarGeneratorFactory(),
+				self::getOtherProjectsSidebarGeneratorFactory(),
 				self::getStore()->getSiteLinkLookup(),
 				self::getEntityLookup(),
 				new EntityUsageFactory( self::getEntityIdParser() ),
@@ -445,16 +445,11 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.DataValueDeserializer' );
 	}
 
-	public function getOtherProjectsSidebarGeneratorFactory(): OtherProjectsSidebarGeneratorFactory {
-		return new OtherProjectsSidebarGeneratorFactory(
-			self::getSettings(),
-			self::getStore()->getSiteLinkLookup(),
-			$this->siteLookup,
-			self::getEntityLookup(),
-			$this->getSidebarLinkBadgeDisplay(),
-			MediaWikiServices::getInstance()->getHookContainer(),
-			self::getLogger()
-		);
+	public static function getOtherProjectsSidebarGeneratorFactory(
+		ContainerInterface $services = null
+	): OtherProjectsSidebarGeneratorFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.OtherProjectsSidebarGeneratorFactory' );
 	}
 
 	public static function getEntityChangeFactory( ContainerInterface $services = null ): EntityChangeFactory {

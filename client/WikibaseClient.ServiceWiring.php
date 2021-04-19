@@ -24,6 +24,7 @@ use Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\OtherProjectsSitesGenerator;
@@ -491,6 +492,20 @@ return [
 			$settings->getSetting( 'excludeNamespaces' ),
 			$settings->getSetting( 'namespaces' ),
 			$services->getNamespaceInfo()
+		);
+	},
+
+	'WikibaseClient.OtherProjectsSidebarGeneratorFactory' => function (
+		MediaWikiServices $services
+	): OtherProjectsSidebarGeneratorFactory {
+		return new OtherProjectsSidebarGeneratorFactory(
+			WikibaseClient::getSettings( $services ),
+			WikibaseClient::getStore( $services )->getSiteLinkLookup(),
+			$services->getSiteLookup(),
+			WikibaseClient::getEntityLookup( $services ),
+			WikibaseClient::getSidebarLinkBadgeDisplay( $services ),
+			$services->getHookContainer(),
+			WikibaseClient::getLogger( $services )
 		);
 	},
 
