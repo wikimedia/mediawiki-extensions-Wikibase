@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\EditEntity;
 
+use IContextSource;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
@@ -11,6 +12,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikimedia\Assert\Assert;
 
 /**
  * @license GPL-2.0-or-later
@@ -86,7 +88,8 @@ class MediawikiEditEntityFactory {
 	}
 
 	/**
-	 * @param User $user the user performing the edit
+	 * @param IContextSource|User $context The request context for the edit,
+	 * or, temporarily and for backwards compatibility only, the user performing the edit.
 	 * @param EntityId|null $entityId the id of the entity to edit
 	 * @param bool|int|null $baseRevId the base revision ID for conflict checking.
 	 *        Use 0 to indicate that the current revision should be used as the base revision,
@@ -99,11 +102,17 @@ class MediawikiEditEntityFactory {
 	 * @return EditEntity
 	 */
 	public function newEditEntity(
-		User $user,
+		$context,
 		EntityId $entityId = null,
 		$baseRevId = false,
 		$allowMasterConnection = true
 	) {
+		Assert::parameterType( [ IContextSource::class, User::class ], $context, '$context' );
+		if ( $context instanceof IContextSource ) {
+			$user = $context->getUser();
+		} else {
+			$user = $context;
+		}
 		$statsTimingPrefix = "wikibase.repo.EditEntity.timing";
 		return new StatsdSaveTimeRecordingEditEntity(
 			new MediawikiEditEntity( $this->titleLookup,

@@ -80,7 +80,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 */
 	protected function prepareEditEntity( EntityId $id = null, $baseRev = 0 ) {
 		$this->editEntity = $this->editEntityFactory->newEditEntity(
-			$this->getUser(),
+			$this->getContext(),
 			$id,
 			$baseRev,
 			$this->getRequest()->wasPosted()
