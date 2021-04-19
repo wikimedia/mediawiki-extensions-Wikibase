@@ -78,6 +78,7 @@ use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
@@ -234,6 +235,21 @@ return [
 					: EntityIdValue::newFromArray( $value );
 			},
 		] );
+	},
+
+	/**
+	 * Returns a low level factory object for creating formatters for well known data types.
+	 *
+	 * @warning This is for use with {@link WikibaseClient::getDefaultSnakFormatterBuilders()} during bootstrap only!
+	 * Program logic should use {@link WikibaseClient::getSnakFormatterFactory()} instead!
+	 */
+	'WikibaseClient.DefaultSnakFormatterBuilders' => function ( MediaWikiServices $services ): WikibaseSnakFormatterBuilders {
+		return new WikibaseSnakFormatterBuilders(
+			WikibaseClient::getDefaultValueFormatterBuilders( $services ),
+			WikibaseClient::getStore( $services )->getPropertyInfoLookup(),
+			WikibaseClient::getPropertyDataTypeLookup( $services ),
+			WikibaseClient::getDataTypeFactory( $services )
+		);
 	},
 
 	'WikibaseClient.DefaultValueFormatterBuilders' => function ( MediaWikiServices $services ): WikibaseValueFormatterBuilders {
