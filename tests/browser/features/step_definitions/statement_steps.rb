@@ -163,7 +163,7 @@ Then(/^Statements heading should be there$/) do
 end
 
 Then(/^Statements heading should not be there$/) do
-  expect(on(ItemPage).statements_heading_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).statements_heading_element.when_not_present).not_to be_present
 end
 
 Then(/^Statement help field should be there$/) do
@@ -175,7 +175,7 @@ Then(/^Statement add button should be there$/) do
 end
 
 Then(/^Statement add button should not be there$/) do
-  expect(on(ItemPage).add_statement_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).add_statement_element.when_not_present).not_to be_present
 end
 
 Then(/^Statement edit button for claim (.+) in group (.+) should be there$/) do |claim_index, group_index|
@@ -191,12 +191,12 @@ Then(/^Statement save button should be there$/) do
 end
 
 Then(/^Statement save button should not be there$/) do
-  expect(on(ItemPage).save_statement_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).save_statement_element.when_not_present).not_to be_present
 end
 
 Then(/^Statement save button should be disabled$/) do
   on(ItemPage) do |page|
-    expect(page.save_statement_element.when_not_visible).not_to be_visible
+    expect(page.save_statement_element.when_not_present).not_to be_present
     expect(page.save_statement_disabled_element.when_visible).to be_visible
   end
 end
@@ -206,7 +206,7 @@ Then(/^Statement cancel button should be there$/) do
 end
 
 Then(/^Statement cancel button should not be there$/) do
-  expect(on(ItemPage).cancel_statement_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).cancel_statement_element.when_not_present).not_to be_present
 end
 
 Then(/^Claim value input element should be there$/) do
@@ -214,7 +214,7 @@ Then(/^Claim value input element should be there$/) do
 end
 
 Then(/^Claim value input element should not be there$/) do
-  expect(on(ItemPage).claim_value_input_field_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).claim_value_input_field_element.when_not_present).not_to be_present
 end
 
 Then(/^Snak value input element should be there$/) do
@@ -222,7 +222,7 @@ Then(/^Snak value input element should be there$/) do
 end
 
 Then(/^Snak value input element should not be there$/) do
-  expect(on(ItemPage).snak_value_input_field.when_not_visible).not_to be_visible
+  expect(on(ItemPage).snak_value_input_field.when_not_present).not_to be_present
 end
 
 Then(/^Statement name of group (.+) should be the label of (.+)$/) do |group_index, handle|
