@@ -20,7 +20,6 @@ use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
-use Wikimedia\Assert\Assert;
 
 /**
  * An interactor implementing the use case of creating a redirect.
@@ -56,6 +55,9 @@ abstract class EntityRedirectCreationInteractor {
 	 */
 	private $summaryFormatter;
 
+	/** @var IContextSource */
+	private $context;
+
 	/**
 	 * @var User
 	 */
@@ -76,21 +78,17 @@ abstract class EntityRedirectCreationInteractor {
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,
 		SummaryFormatter $summaryFormatter,
-		$context,
+		IContextSource $context,
 		EditFilterHookRunner $editFilterHookRunner,
 		EntityRedirectLookup $entityRedirectLookup,
 		EntityTitleStoreLookup $entityTitleLookup
 	) {
-		Assert::parameterType( [ IContextSource::class, User::class ], $context, '$context' );
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
 		$this->permissionChecker = $permissionChecker;
 		$this->summaryFormatter = $summaryFormatter;
-		if ( $context instanceof IContextSource ) {
-			$this->user = $context->getUser();
-		} else {
-			$this->user = $context;
-		}
+		$this->context = $context;
+		$this->user = $context->getUser();
 		$this->editFilterHookRunner = $editFilterHookRunner;
 		$this->entityRedirectLookup = $entityRedirectLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
@@ -256,7 +254,7 @@ abstract class EntityRedirectCreationInteractor {
 			$flags |= EDIT_UPDATE;
 		}
 
-		$hookStatus = $this->editFilterHookRunner->run( $redirect, $this->user, $summary );
+		$hookStatus = $this->editFilterHookRunner->run( $redirect, $this->context, $summary );
 		if ( !$hookStatus->isOK() ) {
 			throw new RedirectCreationException(
 				'EditFilterHook stopped redirect creation',

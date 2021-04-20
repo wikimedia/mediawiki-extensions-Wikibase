@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\EditEntity;
 
+use IContextSource;
 use InvalidArgumentException;
 use RuntimeException;
 use Status;
-use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 
@@ -21,13 +21,13 @@ interface EditFilterHookRunner {
 	 * Call EditFilterMergedContent hook, if registered.
 	 *
 	 * @param EntityDocument|EntityRedirect|null $new The entity or redirect we are trying to save
-	 * @param User $user the user performing the edit
+	 * @param IContextSource $context The request context for the edit
 	 * @param string $summary The edit summary
 	 *
 	 * @throws RuntimeException
 	 * @throws InvalidArgumentException
 	 * @return Status
 	 */
-	public function run( $new, User $user, $summary );
+	public function run( $new, IContextSource $context, $summary );
 
 }

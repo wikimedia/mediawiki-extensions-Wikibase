@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\EditEntity;
 
+use IContextSource;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use Status;
-use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 
@@ -38,13 +38,13 @@ class StatsdTimeRecordingEditFilterHookRunner implements EditFilterHookRunner {
 
 	/**
 	 * @param null|EntityDocument|EntityRedirect $new
-	 * @param User $user
+	 * @param IContextSource $context
 	 * @param string $summary
 	 * @return Status
 	 */
-	public function run( $new, User $user, $summary ) {
+	public function run( $new, IContextSource $context, $summary ) {
 		$attemptSaveFilterStart = microtime( true );
-		$hookStatus = $this->hookRunner->run( $new, $user, $summary );
+		$hookStatus = $this->hookRunner->run( $new, $context, $summary );
 		$attemptSaveFilterEnd = microtime( true );
 
 		$this->stats->timing(

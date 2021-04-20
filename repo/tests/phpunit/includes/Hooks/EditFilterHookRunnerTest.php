@@ -32,10 +32,7 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
  */
 class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 
-	/**
-	 * @return MediawikiEditFilterHookRunner
-	 */
-	public function getEditFilterHookRunner( RequestContext $context ) {
+	public function getEditFilterHookRunner(): MediawikiEditFilterHookRunner {
 		$namespaceLookup = $this->getMockBuilder( EntityNamespaceLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -59,8 +56,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 		return new MediawikiEditFilterHookRunner(
 			$namespaceLookup,
 			$entityTitleLookup,
-			$entityContentFactory,
-			$context
+			$entityContentFactory
 		);
 	}
 
@@ -69,12 +65,13 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
+		$context->setUser( User::newFromName( 'EditFilterHookRunnerTestUser' ) );
 		$preContext = clone $context;
 
-		$runner = $this->getEditFilterHookRunner( $context );
+		$runner = $this->getEditFilterHookRunner();
 		$status = $runner->run(
 			new Item(),
-			User::newFromName( 'EditFilterHookRunnerTestUser' ),
+			$context,
 			'summary'
 		);
 		$this->assertTrue( $status->isGood() );
@@ -184,12 +181,13 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
+		$context->setUser( User::newFromName( 'EditFilterHookRunnerTestUser' ) );
 		$preContext = clone $context;
 
-		$runner = $this->getEditFilterHookRunner( $context );
+		$runner = $this->getEditFilterHookRunner();
 		$status = $runner->run(
 			$new,
-			User::newFromName( 'EditFilterHookRunnerTestUser' ),
+			$context,
 			'summary'
 		);
 		$this->assertEquals( $expected['status'], $status );

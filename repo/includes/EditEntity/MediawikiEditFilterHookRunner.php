@@ -10,7 +10,6 @@ use MutableContext;
 use RuntimeException;
 use Status;
 use Title;
-use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -42,51 +41,48 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 	 */
 	private $entityContentFactory;
 
-	/**
-	 * @var MutableContext
-	 */
-	private $context;
-
 	public function __construct(
 		EntityNamespaceLookup $namespaceLookup,
 		EntityTitleStoreLookup $titleLookup,
-		EntityContentFactory $entityContentFactory,
-		IContextSource $context
+		EntityContentFactory $entityContentFactory
 	) {
-		if ( !( $context instanceof MutableContext ) ) {
-			wfLogWarning( '$context is not an instanceof MutableContext.' );
-
-			$context = new DerivativeContext( $context );
-		}
-
 		$this->namespaceLookup = $namespaceLookup;
 		$this->titleLookup = $titleLookup;
 		$this->entityContentFactory = $entityContentFactory;
-		$this->context = $context;
 	}
 
 	/**
 	 * Call EditFilterMergedContent hook, if registered.
 	 *
 	 * @param EntityDocument|EntityRedirect|null $new The entity or redirect we are trying to save
-	 * @param User $user the user performing the edit
+	 * @param IContextSource $context The request context for the edit
 	 * @param string $summary The edit summary
 	 *
 	 * @throws RuntimeException
 	 * @throws InvalidArgumentException
 	 * @return Status
 	 */
-	public function run( $new, User $user, $summary ) {
+	public function run( $new, IContextSource $context, $summary ) {
 		$filterStatus = Status::newGood();
 
 		if ( !Hooks::isRegistered( 'EditFilterMergedContent' ) ) {
 			return $filterStatus;
 		}
 
+		if ( !( $context instanceof MutableContext ) ) {
+			wfLogWarning( '$context is not an instanceof MutableContext.' );
+
+			$context = new DerivativeContext( $context );
+		}
+
 		if ( $new instanceof EntityDocument ) {
 			$entityContent = $this->entityContentFactory->newFromEntity( $new );
 			$entityType = $new->getType();
-			$context = $this->getContextForEditFilter( $new->getId(), $entityType );
+			$context = $this->getContextForEditFilter(
+				$context,
+				$new->getId(),
+				$entityType
+			);
 
 		} elseif ( $new instanceof EntityRedirect ) {
 			$entityContent = $this->entityContentFactory->newFromRedirect( $new );
@@ -101,6 +97,7 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 			$entityType = $entityId->getEntityType();
 
 			$context = $this->getContextForEditFilter(
+				$context,
 				$entityId,
 				$entityType
 			);
@@ -112,7 +109,7 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 
 		if ( !Hooks::run(
 			'EditFilterMergedContent',
-			[ $context, $entityContent, &$filterStatus, $summary, $user, false, $slotRole ]
+			[ $context, $entityContent, &$filterStatus, $summary, $context->getUser(), false, $slotRole ]
 		) ) {
 			// Error messages etc. were handled inside the hook.
 			$filterStatus->setResult( false, $filterStatus->getValue() );
@@ -122,13 +119,13 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 	}
 
 	/**
+	 * @param IContextSource|MutableContext $context
 	 * @param EntityId|null $entityId
 	 * @param string $entityType
-	 *
-	 * @return MutableContext
+	 * @return IContextSource|MutableContext
 	 */
-	private function getContextForEditFilter( ?EntityId $entityId, $entityType ) {
-		$context = clone $this->context;
+	private function getContextForEditFilter( $context, ?EntityId $entityId, string $entityType ) {
+		$context = clone $context;
 		if ( $entityId !== null ) {
 			$title = $this->titleLookup->getTitleForId( $entityId );
 		} else {
