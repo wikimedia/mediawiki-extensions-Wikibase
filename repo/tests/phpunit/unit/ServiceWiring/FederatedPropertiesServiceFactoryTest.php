@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use HashConfig;
 use LogicException;
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
@@ -25,6 +26,12 @@ class FederatedPropertiesServiceFactoryTest extends ServiceWiringTestCase {
 				'federatedPropertiesEnabled' => true,
 				'federatedPropertiesSourceScriptUrl' => 'https://wiki.example/w/',
 			] ) );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getHttpRequestFactory' );
+		$this->mockService( 'WikibaseRepo.ContentModelMappings',
+			[] );
+		$this->mockService( 'WikibaseRepo.DataTypeDefinitions',
+			new DataTypeDefinitions( [] ) );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getMainConfig' )
 			->willReturn( new HashConfig( [
