@@ -6,6 +6,7 @@ use Onoi\MessageReporter\MessageReporter;
 use RuntimeException;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Repo\Content\DataUpdateAdapter;
+use Wikimedia\Rdbms\DBError;
 
 /**
  * @covers \Wikibase\Repo\Content\DataUpdateAdapter
@@ -29,6 +30,20 @@ class DataUpdateAdapterTest extends \PHPUnit\Framework\TestCase {
 
 		// Should call the callback provided to the constructor, which will throw an exception,
 		// which is then reported to $reporter via the ExceptionHandler.
+		$update->doUpdate();
+	}
+
+	public function testDoUpdateAvoidCatchingDbErrors() {
+		$reporter = $this->createMock( MessageReporter::class );
+		$reporter->expects( $this->once() )
+			->method( 'reportMessage' );
+
+		$update = new DataUpdateAdapter( function() {
+			throw new DBError( null, 'db error' );
+		} );
+		$update->setExceptionHandler( new ReportingExceptionHandler( $reporter ) );
+		$this->expectException( DBError::class );
+
 		$update->doUpdate();
 	}
 
