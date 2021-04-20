@@ -24,7 +24,6 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -35,7 +34,6 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
@@ -242,58 +240,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testNewTermSearchInteractorReturnType() {
 		$returnValue = $this->getWikibaseRepo()->newTermSearchInteractor( '' );
 		$this->assertInstanceOf( TermSearchInteractor::class, $returnValue );
-	}
-
-	public function testGetEntityLookup_default() {
-		$entityLookup = $this->createMock( EntityLookup::class );
-		$this->setService( 'WikibaseRepo.EntityLookup', $entityLookup );
-
-		$this->assertSame( $entityLookup, WikibaseRepo::getEntityLookup() );
-	}
-
-	public function testGetEntityLookup_withServices() {
-		$entityLookup = $this->createMock( EntityLookup::class );
-		$services = $this->createMock( ContainerInterface::class );
-		$services->expects( $this->once() )
-			->method( 'get' )
-			->with( 'WikibaseRepo.EntityLookup' )
-			->willReturn( $entityLookup );
-
-		$this->assertSame( $entityLookup, WikibaseRepo::getEntityLookup( $services ) );
-	}
-
-	public function testGetEntityLookup_withCache() {
-		$entityLookup = $this->createMock( EntityLookup::class );
-		$store = $this->createMock( Store::class );
-		$store->expects( $this->once() )
-			->method( 'getEntityLookup' )
-			->with( Store::LOOKUP_CACHING_DISABLED, LookupConstants::LATEST_FROM_REPLICA )
-			->willReturn( $entityLookup );
-		$this->setService( 'WikibaseRepo.Store', $store );
-
-		$this->hideDeprecated(
-			'Wikibase\Repo\WikibaseRepo::getEntityLookup with non-default $cache or $lookupMode'
-		);
-		$this->assertSame( $entityLookup,
-			$this->getWikibaseRepo()->getEntityLookup( Store::LOOKUP_CACHING_DISABLED ) );
-	}
-
-	public function testGetEntityLookup_withCacheAndLookupMode() {
-		$entityLookup = $this->createMock( EntityLookup::class );
-		$store = $this->createMock( Store::class );
-		$store->expects( $this->once() )
-			->method( 'getEntityLookup' )
-			->with( Store::LOOKUP_CACHING_DISABLED, LookupConstants::LATEST_FROM_MASTER )
-			->willReturn( $entityLookup );
-		$this->setService( 'WikibaseRepo.Store', $store );
-
-		$this->hideDeprecated(
-			'Wikibase\Repo\WikibaseRepo::getEntityLookup with non-default $cache or $lookupMode'
-		);
-		$this->assertSame( $entityLookup, $this->getWikibaseRepo()->getEntityLookup(
-			Store::LOOKUP_CACHING_DISABLED,
-			LookupConstants::LATEST_FROM_MASTER
-		) );
 	}
 
 	public function testGetEntityIdParserReturnType() {
