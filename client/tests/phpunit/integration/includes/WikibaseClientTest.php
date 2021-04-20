@@ -7,7 +7,6 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
 use ReflectionClass;
 use ReflectionMethod;
-use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -88,11 +87,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame(
 			WikibaseClient::getDefaultInstance(),
 			WikibaseClient::getDefaultInstance() );
-	}
-
-	public function testGetPropertyParserFunctionRunner() {
-		$runner = $this->getWikibaseClient()->getPropertyParserFunctionRunner();
-		$this->assertInstanceOf( Runner::class, $runner );
 	}
 
 	/**

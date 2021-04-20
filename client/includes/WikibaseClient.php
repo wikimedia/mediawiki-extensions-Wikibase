@@ -424,16 +424,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.DataAccessSnakFormatterFactory' );
 	}
 
-	public function getPropertyParserFunctionRunner(): Runner {
-		$settings = self::getSettings();
-		return new Runner(
-			self::getStatementGroupRendererFactory(),
-			self::getStore()->getSiteLinkLookup(),
-			self::getEntityIdParser(),
-			self::getRestrictedEntityLookup(),
-			$settings->getSetting( 'siteGlobalID' ),
-			$settings->getSetting( 'allowArbitraryDataAccess' )
-		);
+	public static function getPropertyParserFunctionRunner( ContainerInterface $services = null ): Runner {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.PropertyParserFunctionRunner' );
 	}
 
 	public static function getOtherProjectsSitesProvider( ContainerInterface $services = null ): OtherProjectsSitesProvider {

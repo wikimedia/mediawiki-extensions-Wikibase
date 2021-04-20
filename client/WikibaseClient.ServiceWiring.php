@@ -22,6 +22,7 @@ use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
+use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
 use Wikibase\Client\DataAccess\SnaksFinder;
@@ -648,6 +649,18 @@ return [
 		return new CachingPropertyOrderProvider(
 			$innerProvider,
 			ObjectCache::getLocalClusterInstance()
+		);
+	},
+
+	'WikibaseClient.PropertyParserFunctionRunner' => function ( MediaWikiServices $services ): Runner {
+		$settings = WikibaseClient::getSettings( $services );
+		return new Runner(
+			WikibaseClient::getStatementGroupRendererFactory( $services ),
+			WikibaseClient::getStore( $services )->getSiteLinkLookup(),
+			WikibaseClient::getEntityIdParser( $services ),
+			WikibaseClient::getRestrictedEntityLookup( $services ),
+			$settings->getSetting( 'siteGlobalID' ),
+			$settings->getSetting( 'allowArbitraryDataAccess' )
 		);
 	},
 

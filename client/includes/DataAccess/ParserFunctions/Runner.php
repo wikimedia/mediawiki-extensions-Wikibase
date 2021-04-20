@@ -172,7 +172,7 @@ class Runner {
 	 * @return array Wikitext in element 0, flags in named elements
 	 */
 	public static function renderEscapedPlainText( Parser $parser, PPFrame $frame, array $args ) {
-		$runner = WikibaseClient::getDefaultInstance()->getPropertyParserFunctionRunner();
+		$runner = WikibaseClient::getPropertyParserFunctionRunner();
 		return $runner->runPropertyParserFunction( $parser, $frame, $args );
 	}
 
@@ -184,7 +184,7 @@ class Runner {
 	 * @return array Wikitext in element 0, flags in named elements
 	 */
 	public static function renderRichWikitext( Parser $parser, PPFrame $frame, array $args ) {
-		$runner = WikibaseClient::getDefaultInstance()->getPropertyParserFunctionRunner();
+		$runner = WikibaseClient::getPropertyParserFunctionRunner();
 		return $runner->runPropertyParserFunction( $parser, $frame, $args, DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT );
 	}
 
