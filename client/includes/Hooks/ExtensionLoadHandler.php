@@ -6,7 +6,7 @@ use ApiMain;
 use ExtensionRegistry;
 use Parser;
 use Wikibase\Client\Api\ApiFormatReference;
-use Wikibase\Client\WikibaseClient;
+use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
 use Wikibase\DataModel\DeserializerFactory;
 
 /**
@@ -81,21 +81,21 @@ class ExtensionLoadHandler {
 			'class' => ApiFormatReference::class,
 			'services' => [
 				'Parser',
-				'WikibaseClient.BaseDataModelDeserializerFactory'
+				'WikibaseClient.BaseDataModelDeserializerFactory',
+				'WikibaseClient.ReferenceFormatterFactory',
 			],
 			'factory' => function (
 				ApiMain $apiMain,
 				string $moduleName,
 				Parser $parser,
-				DeserializerFactory $deserializerFactory
+				DeserializerFactory $deserializerFactory,
+				ReferenceFormatterFactory $referenceFormatterFactory
 			) {
-				$client = WikibaseClient::getDefaultInstance();
-
 				return new ApiFormatReference(
 					$apiMain,
 					$moduleName,
 					$parser,
-					$client->getReferenceFormatterFactory(),
+					$referenceFormatterFactory,
 					$deserializerFactory->newReferenceDeserializer()
 				);
 			},
