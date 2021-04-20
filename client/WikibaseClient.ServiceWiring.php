@@ -22,6 +22,7 @@ use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
+use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
@@ -81,6 +82,7 @@ use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\Formatters\Reference\WellKnownReferenceProperties;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -658,6 +660,19 @@ return [
 			),
 			CentralIdLookup::factoryNonLocal(), // TODO get from $services (see T265767)
 			WikibaseClient::getExternalUserNames( $services )
+		);
+	},
+
+	'WikibaseClient.ReferenceFormatterFactory' => function ( MediaWikiServices $services ): ReferenceFormatterFactory {
+		$logger = WikibaseClient::getLogger( $services );
+		return new ReferenceFormatterFactory(
+			WikibaseClient::getDataAccessSnakFormatterFactory( $services ),
+			WellKnownReferenceProperties::newFromArray(
+				WikibaseClient::getSettings( $services )
+					->getSetting( 'wellKnownReferencePropertyIds' ),
+				$logger
+			),
+			$logger
 		);
 	},
 

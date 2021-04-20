@@ -55,7 +55,6 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
-use Wikibase\Lib\Formatters\Reference\WellKnownReferenceProperties;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -93,9 +92,6 @@ final class WikibaseClient {
 	 * @var ClientParserOutputDataUpdater|null
 	 */
 	private $parserOutputDataUpdater = null;
-
-	/** @var ReferenceFormatterFactory|null */
-	private $referenceFormatterFactory = null;
 
 	/**
 	 * Returns a low level factory object for creating formatters for well known data types.
@@ -552,20 +548,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.PropertyLabelResolver' );
 	}
 
-	public function getReferenceFormatterFactory(): ReferenceFormatterFactory {
-		if ( $this->referenceFormatterFactory === null ) {
-			$logger = self::getLogger();
-			$this->referenceFormatterFactory = new ReferenceFormatterFactory(
-				$this->getDataAccessSnakFormatterFactory(),
-				WellKnownReferenceProperties::newFromArray(
-					self::getSettings()->getSetting( 'wellKnownReferencePropertyIds' ),
-					$logger
-				),
-				$logger
-			);
-		}
-
-		return $this->referenceFormatterFactory;
+	public static function getReferenceFormatterFactory( ContainerInterface $services = null ): ReferenceFormatterFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.ReferenceFormatterFactory' );
 	}
 
 	public static function getItemSource( ContainerInterface $services = null ): EntitySource {
