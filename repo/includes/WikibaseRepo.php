@@ -1112,9 +1112,8 @@ class WikibaseRepo {
 		return self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK );
 	}
 
-	public function getEntityLinkFormatterFactory( Language $language ) {
+	public function getEntityLinkFormatterFactory() {
 		return new EntityLinkFormatterFactory(
-			$language,
 			self::getEntityTitleTextLookup(),
 			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::LINK_FORMATTER_CALLBACK )
 		);
