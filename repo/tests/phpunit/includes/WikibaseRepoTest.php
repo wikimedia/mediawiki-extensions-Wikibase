@@ -30,7 +30,6 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -198,11 +197,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$context = new RequestContext();
 		$returnValue = $this->getWikibaseRepo()->newItemRedirectCreationInteractor( $user, $context );
 		$this->assertInstanceOf( ItemRedirectCreationInteractor::class, $returnValue );
-	}
-
-	public function testNewTermSearchInteractorReturnType() {
-		$returnValue = $this->getWikibaseRepo()->newTermSearchInteractor( '' );
-		$this->assertInstanceOf( TermSearchInteractor::class, $returnValue );
 	}
 
 	public function testGetEntityIdParserReturnType() {

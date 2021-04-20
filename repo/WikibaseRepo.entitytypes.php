@@ -137,8 +137,6 @@ return [
 			);
 		},
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
-			$repo = WikibaseRepo::getDefaultInstance();
-
 			return new CombinedEntitySearchHelper(
 					[
 						new EntityIdSearchHelper(
@@ -152,7 +150,9 @@ return [
 							WikibaseRepo::getEntityTypeToRepositoryMapping()
 						),
 						new EntityTermSearchHelper(
-							$repo->newTermSearchInteractor( WikibaseRepo::getUserLanguage()->getCode() )
+							WikibaseRepo::getWikibaseServices()
+								->getTermSearchInteractorFactory()
+								->newInteractor( WikibaseRepo::getUserLanguage()->getCode() )
 						)
 					]
 			);
@@ -236,8 +236,6 @@ return [
 			);
 		},
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
-			$repo = WikibaseRepo::getDefaultInstance();
-
 			return new PropertyDataTypeSearchHelper(
 				new CombinedEntitySearchHelper(
 					[
@@ -245,14 +243,16 @@ return [
 							WikibaseRepo::getEntityLookup(),
 							WikibaseRepo::getEntityIdParser(),
 							new LanguageFallbackLabelDescriptionLookup(
-								$repo->getTermLookup(),
+								WikibaseRepo::getTermLookup(),
 								WikibaseRepo::getLanguageFallbackChainFactory()
 									->newFromLanguage( WikibaseRepo::getUserLanguage() )
 							),
 							WikibaseRepo::getEntityTypeToRepositoryMapping()
 						),
 						new EntityTermSearchHelper(
-							$repo->newTermSearchInteractor( WikibaseRepo::getUserLanguage()->getCode() )
+							WikibaseRepo::getWikibaseServices()
+								->getTermSearchInteractorFactory()
+								->newInteractor( WikibaseRepo::getUserLanguage()->getCode() )
 						)
 					]
 				),

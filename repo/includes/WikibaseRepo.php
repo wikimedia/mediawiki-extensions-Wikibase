@@ -54,7 +54,6 @@ use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
-use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
@@ -359,17 +358,6 @@ class WikibaseRepo {
 	public static function getEditFilterHookRunner( ContainerInterface $services = null ): EditFilterHookRunner {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EditFilterHookRunner' );
-	}
-
-	/**
-	 * @param string $displayLanguageCode
-	 *
-	 * @return MatchingTermsLookupSearchInteractor
-	 */
-	public function newTermSearchInteractor( $displayLanguageCode ) {
-		return self::getWikibaseServices()->getTermSearchInteractorFactory()->newInteractor(
-			$displayLanguageCode
-		);
 	}
 
 	public static function getEntityStore( ContainerInterface $services = null ): EntityStore {
