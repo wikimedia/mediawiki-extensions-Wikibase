@@ -58,7 +58,6 @@ use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
-use Wikibase\Lib\Modules\SettingsValueProvider;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -1010,10 +1009,6 @@ class WikibaseRepo {
 			'deserializer-factory-functions'
 				=> $entityTypeDefinitions->get( EntityTypeDefinitions::JS_DESERIALIZER_FACTORY_FUNCTION )
 		];
-	}
-
-	public function getSettingsValueProvider( $jsSetting, $phpSetting ) {
-		return new SettingsValueProvider( self::getSettings(), $jsSetting, $phpSetting );
 	}
 
 	public static function getUnitConverter( ContainerInterface $services = null ): ?UnitConverter {
