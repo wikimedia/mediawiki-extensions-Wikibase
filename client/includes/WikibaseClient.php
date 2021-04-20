@@ -18,7 +18,6 @@ use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
-use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
@@ -431,16 +430,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.EntityDiffer' );
 	}
 
-	private function getStatementGroupRendererFactory(): StatementGroupRendererFactory {
-		return new StatementGroupRendererFactory(
-			self::getPropertyLabelResolver(),
-			new SnaksFinder(),
-			self::getRestrictedEntityLookup(),
-			self::getDataAccessSnakFormatterFactory(),
-			new EntityUsageFactory( self::getEntityIdParser() ),
-			MediaWikiServices::getInstance()->getLanguageConverterFactory(),
-			self::getSettings()->getSetting( 'allowDataAccessInUserLanguage' )
-		);
+	public static function getStatementGroupRendererFactory( ContainerInterface $services = null ): StatementGroupRendererFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.StatementGroupRendererFactory' );
 	}
 
 	public static function getDataAccessSnakFormatterFactory( ContainerInterface $services = null ): DataAccessSnakFormatterFactory {
@@ -451,7 +443,7 @@ final class WikibaseClient {
 	public function getPropertyParserFunctionRunner(): Runner {
 		$settings = self::getSettings();
 		return new Runner(
-			$this->getStatementGroupRendererFactory(),
+			self::getStatementGroupRendererFactory(),
 			self::getStore()->getSiteLinkLookup(),
 			self::getEntityIdParser(),
 			self::getRestrictedEntityLookup(),

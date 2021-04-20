@@ -22,7 +22,9 @@ use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
+use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
+use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
@@ -38,6 +40,7 @@ use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
+use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
@@ -808,6 +811,21 @@ return [
 			WikibaseClient::getValueFormatterFactory( $services ),
 			WikibaseClient::getPropertyDataTypeLookup( $services ),
 			WikibaseClient::getDataTypeFactory( $services )
+		);
+	},
+
+	'WikibaseClient.StatementGroupRendererFactory' => function ( MediaWikiServices $services ): StatementGroupRendererFactory {
+		return new StatementGroupRendererFactory(
+			WikibaseClient::getPropertyLabelResolver( $services ),
+			new SnaksFinder(),
+			WikibaseClient::getRestrictedEntityLookup( $services ),
+			WikibaseClient::getDataAccessSnakFormatterFactory( $services ),
+			new EntityUsageFactory(
+				WikibaseClient::getEntityIdParser( $services )
+			),
+			$services->getLanguageConverterFactory(),
+			WikibaseClient::getSettings( $services )
+				->getSetting( 'allowDataAccessInUserLanguage' )
 		);
 	},
 
