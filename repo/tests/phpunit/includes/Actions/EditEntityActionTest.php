@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Actions;
 
-use ApiQueryInfo;
 use MediaWiki\MediaWikiServices;
 use MWException;
 use Title;
@@ -1167,7 +1166,6 @@ class EditEntityActionTest extends ActionTestCase {
 	private function setUser( User $user ) {
 		if ( $user->getName() !== $this->user->getName() ) {
 			$this->user = $user;
-			ApiQueryInfo::resetTokenCache();
 		}
 	}
 }

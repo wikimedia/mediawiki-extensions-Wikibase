@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Actions;
 
 use Action;
-use ApiQueryInfo;
 use Article;
 use Exception;
 use FauxRequest;
@@ -45,14 +44,6 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 		] );
 
 		$this->setUserLang( 'qqx' );
-
-		ApiQueryInfo::resetTokenCache();
-	}
-
-	protected function tearDown(): void {
-		ApiQueryInfo::resetTokenCache();
-
-		parent::tearDown();
 	}
 
 	/**
