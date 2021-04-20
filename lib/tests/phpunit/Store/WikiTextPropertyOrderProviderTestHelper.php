@@ -26,8 +26,6 @@ class WikiTextPropertyOrderProviderTestHelper {
 				. "* [[d:P6]]\n"
 				. "* d:P7\n"
 				. "* {{p|8}}\n"
-				. "* {{P|P9}}\n"
-				. "* {{Q|P10}}\n"
 				. "* {{P|Q11}}",
 				[]
 			],
@@ -91,6 +89,15 @@ class WikiTextPropertyOrderProviderTestHelper {
 				. "* [[d:Property:P7]]\n"
 				. "* [[Q6|P1006]]",
 				[ 'P9' => 0, 'P8' => 1, 'P7' => 2 ]
+			],
+			'templates' => [
+				"* {{NiceTemplate|p7}}\n"
+				. "* {{NiceTemplate|P8}}\n"
+				. "* {{|P9}}\n"
+				. "* {{P|10}}\n"
+				. "* {{P11}}\n"
+				. "* {{C0nfusingT3mpl4te|P12}}\n",
+				[ 'P7' => 0, 'P8' => 1 ]
 			],
 		];
 	}
