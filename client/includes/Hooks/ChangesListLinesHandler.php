@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Hooks;
 
 use EnhancedChangesList;
+use Language;
 use MediaWiki\Hook\EnhancedChangesListModifyBlockLineDataHook;
 use MediaWiki\Hook\EnhancedChangesListModifyLineDataHook;
 use MediaWiki\Hook\OldChangesListRecentChangesLineHook;
@@ -16,7 +17,6 @@ use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RepoLinker;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\SettingsArray;
 
@@ -49,15 +49,15 @@ class ChangesListLinesHandler implements
 	}
 
 	public static function factory(
+		Language $contentLanguage,
 		UserNameUtils $userNameUtils,
 		EntityIdParser $entityIdParser,
 		RepoLinker $repoLinker,
 		SettingsArray $clientSettings
 	): self {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$changeFactory = new ExternalChangeFactory(
 			$clientSettings->getSetting( 'repoSiteId' ),
-			$wikibaseClient->getContentLanguage(),
+			$contentLanguage,
 			$entityIdParser
 		);
 		$formatter = new ChangeLineFormatter(
