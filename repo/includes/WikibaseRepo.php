@@ -150,7 +150,6 @@ class WikibaseRepo {
 			);
 		}
 		self::$instance = null;
-		ApiServiceFactory::resetClassStatics();
 	}
 
 	/**

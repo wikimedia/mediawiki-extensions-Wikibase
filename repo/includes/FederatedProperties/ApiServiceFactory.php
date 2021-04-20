@@ -3,7 +3,6 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
-use Exception;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use Wikibase\Repo\WikibaseRepo;
@@ -26,20 +25,12 @@ class ApiServiceFactory {
 	/**
 	 * @var ApiEntityLookup|null
 	 */
-	private static $apiEntityLookupInstance = null;
+	private $apiEntityLookupInstance = null;
 
 	/**
 	 * @var ApiEntityNamespaceInfoLookup|null
 	 */
-	private static $apiEntityNamespaceInfoLookup = null;
-
-	public static function resetClassStatics() {
-		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
-			throw new Exception( 'Cannot reset ApiServiceFactory class statics outside of tests.' );
-		}
-		self::$apiEntityLookupInstance = null;
-		self::$apiEntityNamespaceInfoLookup = null;
-	}
+	private $apiEntityNamespaceInfoLookup = null;
 
 	/**
 	 * ApiServiceFactory constructor.
@@ -79,13 +70,13 @@ class ApiServiceFactory {
 	 * @return ApiEntityNamespaceInfoLookup
 	 */
 	private function getApiEntityNamespaceInfoLookup(): ApiEntityNamespaceInfoLookup {
-		if ( self::$apiEntityNamespaceInfoLookup === null ) {
-			self::$apiEntityNamespaceInfoLookup = new ApiEntityNamespaceInfoLookup(
+		if ( $this->apiEntityNamespaceInfoLookup === null ) {
+			$this->apiEntityNamespaceInfoLookup = new ApiEntityNamespaceInfoLookup(
 				$this->newFederatedPropertiesApiClient(),
 				WikibaseRepo::getContentModelMappings()
 			);
 		}
-		return self::$apiEntityNamespaceInfoLookup;
+		return $this->apiEntityNamespaceInfoLookup;
 	}
 
 	public function newApiEntityTitleTextLookup(): ApiEntityTitleTextLookup {
@@ -118,10 +109,10 @@ class ApiServiceFactory {
 	 * @return ApiEntityLookup
 	 */
 	public function getApiEntityLookup(): ApiEntityLookup {
-		if ( self::$apiEntityLookupInstance === null ) {
-			self::$apiEntityLookupInstance = new ApiEntityLookup( $this->newFederatedPropertiesApiClient() );
+		if ( $this->apiEntityLookupInstance === null ) {
+			$this->apiEntityLookupInstance = new ApiEntityLookup( $this->newFederatedPropertiesApiClient() );
 		}
-		return self::$apiEntityLookupInstance;
+		return $this->apiEntityLookupInstance;
 	}
 
 	public function newApiEntityExistenceChecker(): ApiEntityExistenceChecker {
