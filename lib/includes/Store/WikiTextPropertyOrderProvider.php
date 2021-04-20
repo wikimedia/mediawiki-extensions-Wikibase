@@ -44,7 +44,7 @@ abstract class WikiTextPropertyOrderProvider implements PropertyOrderProvider {
 		$pageContent = preg_replace( '@<!--.*?-->@s', '', $pageContent );
 
 		preg_match_all(
-			'@^[*#]+\h*(?:\[\[(?:d:)?Property:)?(P\d+\b)@im',
+			'@^[*#]+\h*(?:\[\[(?:d:)?Property:)?(?:{{[a-z]+\|)?(P\d+\b)@im',
 			$pageContent,
 			$orderedPropertiesMatches,
 			PREG_PATTERN_ORDER
