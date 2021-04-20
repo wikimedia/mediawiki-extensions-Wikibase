@@ -125,7 +125,7 @@ return call_user_func( function() {
 					"name" => "config.json",
 					"callback" => function () {
 						return [
-							'entityTypes' => WikibaseRepo::getDefaultInstance()->getEntityTypesConfigValue()
+							'entityTypes' => WikibaseRepo::getEntityTypesConfigValue()
 						];
 					}
 				],
