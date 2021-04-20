@@ -96,7 +96,6 @@ use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
-use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
@@ -636,41 +635,9 @@ class WikibaseRepo {
 	 *
 	 * If you need different caching or lookup modes, use {@link Store::getEntityLookup()} instead.
 	 */
-	public static function getEntityLookup( $servicesOrCache = null, $lookupMode = null ): EntityLookup {
-		// For backwards compatibility, we temporarily support several calling conventions:
-		// getEntityLookup() – default $services, $cache, $lookupMode
-		// getEntityLookup( $services ) – default $cache, $lookupMode
-		// getEntityLookup( $cache, $lookupMode ) – default $services (deprecated)
-		// TODO remove all this and change the method syntax to the standard form
-		// public static function getEntityLookup( ContainerInterface $services = null ): EntityLookup
-
-		if ( $lookupMode !== null ) {
-			wfDeprecated(
-				__METHOD__ . ' with non-default $cache or $lookupMode',
-				'1.36',
-				'WikibaseRepo'
-			);
-			$cache = $servicesOrCache;
-			return self::getStore()->getEntityLookup( $cache, $lookupMode );
-		}
-
-		if ( $servicesOrCache === null ) {
-			$servicesOrCache = MediaWikiServices::getInstance();
-		}
-
-		if ( $servicesOrCache instanceof ContainerInterface ) {
-			$services = $servicesOrCache;
-			return $services->get( 'WikibaseRepo.EntityLookup' );
-		} else {
-			wfDeprecated(
-				__METHOD__ . ' with non-default $cache or $lookupMode',
-				'1.36',
-				'WikibaseRepo'
-			);
-			$cache = $servicesOrCache;
-			$lookupMode = LookupConstants::LATEST_FROM_REPLICA; // we already know it’s null, i.e. default, from earlier
-			return self::getStore()->getEntityLookup( $cache, $lookupMode );
-		}
+	public static function getEntityLookup( ContainerInterface $services = null ): EntityLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityLookup' );
 	}
 
 	public function getPropertyLookup( $cacheMode = Store::LOOKUP_CACHING_ENABLED ): PropertyLookup {
