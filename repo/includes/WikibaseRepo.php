@@ -1108,8 +1108,9 @@ class WikibaseRepo {
 	/**
 	 * @return callable[]
 	 */
-	public function getEntitySearchHelperCallbacks() {
-		return self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK );
+	public static function getEntitySearchHelperCallbacks( ContainerInterface $services = null ) {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntitySearchHelperCallbacks' );
 	}
 
 	public function getEntityLinkFormatterFactory( Language $language ) {

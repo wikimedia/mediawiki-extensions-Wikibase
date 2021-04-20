@@ -161,6 +161,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SearchEntities::factory",
 			"services": [
 				"WikibaseRepo.EntityArticleIdLookup",
+				"WikibaseRepo.EntitySearchHelperCallbacks",
 				"WikibaseRepo.EntitySourceDefinitions",
 				"WikibaseRepo.EntityTitleTextLookup",
 				"WikibaseRepo.EntityUrlLookup",
@@ -262,6 +263,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\QuerySearchEntities::factory",
 			"services": [
 				"WikibaseRepo.EnabledEntityTypes",
+				"WikibaseRepo.EntitySearchHelperCallbacks",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.TermsLanguages"
 			]
@@ -348,6 +350,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation::factory",
 			"services": [
+				"WikibaseRepo.EntitySearchHelperCallbacks",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.TermsLanguages"
 			]
