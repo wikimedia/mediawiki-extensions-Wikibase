@@ -6,5 +6,7 @@
 		]
 	},
 	"wikibase-edit": "editar",
-	"wikibase-add": "adhibir"
+	"wikibase-add": "adhibir",
+	"wikibase-label-empty": "Encara no s'ha definiu garra etiqueta",
+	"wikibase-sitelinks-special": "Atros sitios"
 }

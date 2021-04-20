@@ -161,7 +161,7 @@
 	"wikibase-client-data-bridge-edit-conflict-error-message": "Друг корисник штотуку ја уредил оваа вредност и ги објавил неговите промени попрво од вас. Не можев да ги спроведам вашите промени. Превчитајте ја страницата за да ја добиете новата вредност.",
 	"wikibase-client-data-bridge-unknown-error-heading": "Нешто не е во ред",
 	"wikibase-client-data-bridge-unknown-error-message": "Се јави грешка, а избраната вредност во мигов не може да се уредува. Обидете се со превчитување.",
-	"wikibase-client-data-bridge-error-report": "<p>Доколку грешката продолжи да се јавува, [$1 пријавете го проблемов], вклучувајќи ги следниве информации:</p>\n<ul>\n<li>$2</li>\n<li>$3 of $4</li>\n<li>Код на грешката: $5</li>\n</ul>",
+	"wikibase-client-data-bridge-error-report": "<p>Доколку грешката продолжи да се јавува, [$1 пријавете го проблемов], опишувајќи што направивте и вклучувајќи ги следниве информации:</p>\n<ul>\n<li>$2</li>\n<li>$3 of $4</li>\n<li>Код на грешката: $5</li>\n</ul>",
 	"wikibase-client-data-bridge-error-reload-bridge": "Превчитај",
 	"wikibase-client-data-bridge-error-reload-page": "Превчитај ја страницата",
 	"wikibase-client-data-bridge-error-go-back": "Назад",
