@@ -8,7 +8,6 @@ use MediaWikiIntegrationTestCase;
 use ReflectionClass;
 use ReflectionMethod;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
-use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySource;
@@ -84,20 +83,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetSettingsReturnType() {
 		$returnValue = WikibaseClient::getSettings();
 		$this->assertInstanceOf( SettingsArray::class, $returnValue );
-	}
-
-	public function testGetLangLinkHandlerFactoryReturnType() {
-		$settings = clone WikibaseClient::getSettings();
-
-		$settings->setSetting( 'itemAndPropertySourceName', 'test' );
-		$settings->setSetting( 'siteGroup', 'wikipedia' );
-		$settings->setSetting( 'siteGlobalID', 'enwiki' );
-		$settings->setSetting( 'languageLinkSiteGroup', 'wikipedia' );
-
-		$wikibaseClient = $this->getWikibaseClient( $settings );
-
-		$factory = $wikibaseClient->getLangLinkHandlerFactory();
-		$this->assertInstanceOf( LangLinkHandlerFactory::class, $factory );
 	}
 
 	public function testGetParserOutputDataUpdaterType() {
