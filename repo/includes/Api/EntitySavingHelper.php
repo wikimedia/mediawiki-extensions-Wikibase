@@ -345,7 +345,8 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		}
 
 		$params = $this->apiModule->extractRequestParams();
-		$user = $this->apiModule->getContext()->getUser();
+		$context = $this->apiModule->getContext();
+		$user = $context->getUser();
 
 		if ( isset( $params['bot'] ) && $params['bot'] &&
 			$this->permissionManager->userHasRight( $user, 'bot' )
@@ -360,7 +361,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		$tags = $params['tags'] ?? [];
 
 		$editEntityHandler = $this->editEntityFactory->newEditEntity(
-			$user,
+			$context,
 			$entity->getId(),
 			$this->baseRevisionId,
 			true

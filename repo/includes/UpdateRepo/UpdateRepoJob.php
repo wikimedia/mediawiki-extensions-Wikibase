@@ -2,8 +2,10 @@
 
 namespace Wikibase\Repo\UpdateRepo;
 
+use DerivativeContext;
 use Job;
 use Psr\Log\LoggerInterface;
+use RequestContext;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -141,7 +143,10 @@ abstract class UpdateRepoJob extends Job {
 
 		$summaryString = $this->summaryFormatter->formatSummary( $summary );
 
-		$editEntity = $this->editEntityFactory->newEditEntity( $user, $item->getId(), 0, true );
+		$context = new DerivativeContext( RequestContext::getMain() );
+		$context->setUser( $user );
+
+		$editEntity = $this->editEntityFactory->newEditEntity( $context, $item->getId(), 0, true );
 		$status = $editEntity->attemptSave(
 			$item,
 			$summaryString,

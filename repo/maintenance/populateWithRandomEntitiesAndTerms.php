@@ -2,8 +2,11 @@
 
 namespace Wikibase\Repo\Maintenance;
 
+use DerivativeContext;
 use Generator;
+use IContextSource;
 use Maintenance;
+use RequestContext;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -144,15 +147,12 @@ class PopulateWithRandomEntitiesAndTerms extends Maintenance {
 		);
 	}
 
-	/**
-	 * @return EntityId|null
-	 */
 	private function saveEntity(
 		EntityDocument $entity,
-		User $user,
+		IContextSource $context,
 		MediawikiEditEntityFactory $editEntityFactory
-	) {
-		$editEntity = $editEntityFactory->newEditEntity( $user );
+	): ?EntityId {
+		$editEntity = $editEntityFactory->newEditEntity( $context );
 
 		$status = $editEntity->attemptSave( $entity, self::SUMMARY_TEXT, EDIT_NEW, false );
 
@@ -172,7 +172,9 @@ class PopulateWithRandomEntitiesAndTerms extends Maintenance {
 	 * @return Generator
 	 */
 	private function createEntityGenerator( $entityType, $nrOfEntities, array $languages ) {
+		$context = new DerivativeContext( RequestContext::getMain() );
 		$user = User::newSystemUser( self::SCRIPT_USER_NAME, [ 'steal' => true ] );
+		$context->setUser( $user );
 		$duplicationDegree = $this->getDuplicationDegree();
 
 		$labelTextGenerator = $this->createTextGenerator();
@@ -193,7 +195,7 @@ class PopulateWithRandomEntitiesAndTerms extends Maintenance {
 				$this->addAliasesToEntity( $entity, $languages, $aliasTextGenerator );
 			}
 
-			$entityId = $this->saveEntity( $entity, $user, $editEntityFactory );
+			$entityId = $this->saveEntity( $entity, $context, $editEntityFactory );
 
 			if ( $entityId !== null ) {
 				yield $entityId;
