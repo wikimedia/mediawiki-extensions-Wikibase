@@ -1071,13 +1071,9 @@ class WikibaseRepo {
 	 *         Note: Currently entities of a given type are only provided by single source. This
 	 *         assumption can be changed in the future.
 	 */
-	public function getEntityTypeToRepositoryMapping() {
-		// Map all entity types to unprefixed repository.
-		// TODO: This is a bit of a hack but does the job for EntityIdSearchHelper as long as there are no
-		// prefixed IDs in the entity source realm. Probably EntityIdSearchHelper should be changed instead
-		// of getting this map passed from Repo
-		$entityTypes = array_keys( self::getEntitySourceDefinitions()->getEntityTypeToSourceMapping() );
-		return array_fill_keys( $entityTypes, [ '' ] );
+	public static function getEntityTypeToRepositoryMapping( ContainerInterface $services = null ): array {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityTypeToRepositoryMapping' );
 	}
 
 	public static function getPropertyValueExpertsModule( ContainerInterface $services = null ): PropertyValueExpertsModule {

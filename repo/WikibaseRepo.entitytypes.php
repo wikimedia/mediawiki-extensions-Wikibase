@@ -149,7 +149,7 @@ return [
 								WikibaseRepo::getLanguageFallbackChainFactory()
 									->newFromLanguage( WikibaseRepo::getUserLanguage() )
 							),
-							$repo->getEntityTypeToRepositoryMapping()
+							WikibaseRepo::getEntityTypeToRepositoryMapping()
 						),
 						new EntityTermSearchHelper(
 							$repo->newTermSearchInteractor( WikibaseRepo::getUserLanguage()->getCode() )
@@ -249,7 +249,7 @@ return [
 								WikibaseRepo::getLanguageFallbackChainFactory()
 									->newFromLanguage( WikibaseRepo::getUserLanguage() )
 							),
-							$repo->getEntityTypeToRepositoryMapping()
+							WikibaseRepo::getEntityTypeToRepositoryMapping()
 						),
 						new EntityTermSearchHelper(
 							$repo->newTermSearchInteractor( WikibaseRepo::getUserLanguage()->getCode() )
