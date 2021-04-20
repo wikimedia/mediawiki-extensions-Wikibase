@@ -9,11 +9,13 @@ use MediaWiki\MediaWikiServices;
 use PermissionsError;
 use PHPUnit\Framework\Error\Error;
 use RawMessage;
+use RequestContext;
 use SpecialPageTestBase;
 use Status;
 use TestSites;
 use Title;
 use User;
+use WebRequest;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Tests\MockRepository;
@@ -60,6 +62,9 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 * @var User|null
 	 */
 	private $user = null;
+
+	/** @var WebRequest */
+	private $request;
 
 	/**
 	 * @var EntityModificationTestHelper|null
@@ -147,6 +152,10 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 				return new RawMessage( '(@' . $text . '@)' );
 			} );
 
+		$context = new RequestContext();
+		$context->setRequest( $this->request );
+		$context->setUser( $this->user );
+
 		$titleLookup = $this->getEntityTitleLookup();
 		$specialPage = new SpecialMergeItems(
 			WikibaseRepo::getEntityIdParser(),
@@ -164,7 +173,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 						$this->mockRepository,
 						$this->getPermissionCheckers(),
 						$summaryFormatter,
-						$this->user,
+						$context,
 						$this->getMockEditFilterHookRunner(),
 						$this->mockRepository,
 						$this->getMockEntityTitleLookup()
@@ -211,14 +220,16 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'item-merge' => true, 'edit' => true ] ] );
 		}
 
-		// HACK: we need this in newSpecialPage, but executeSpecialPage doesn't pass the context on.
-		$this->user = $user;
-
 		if ( !isset( $params['wpEditToken'] ) ) {
 			$params['wpEditToken'] = $user->getEditToken();
 		}
 
 		$request = new \FauxRequest( $params, true );
+
+		// HACK: we need this in newSpecialPage, but executeSpecialPage doesn't pass the context on.
+		$this->user = $user;
+		$this->request = $request;
+
 		list( $html, ) = $this->executeSpecialPage( '', $request, 'qqx' );
 		return $html;
 	}

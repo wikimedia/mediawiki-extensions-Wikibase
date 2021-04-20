@@ -373,7 +373,7 @@ class WikibaseRepo {
 			self::getEntityStore(),
 			self::getEntityPermissionChecker(),
 			self::getSummaryFormatter(),
-			$user,
+			$context,
 			self::getEditFilterHookRunner(),
 			$store->getEntityRedirectLookup(),
 			self::getEntityTitleStoreLookup()

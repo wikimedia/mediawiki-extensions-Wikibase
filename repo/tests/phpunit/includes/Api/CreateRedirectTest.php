@@ -132,6 +132,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
+		$context->setUser( $user );
 
 		if ( !$interactor ) {
 			$interactor = new ItemRedirectCreationInteractor(
@@ -139,7 +140,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				WikibaseRepo::getSummaryFormatter(),
-				$user,
+				$context,
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository,
 				$this->getMockEntityTitleLookup()

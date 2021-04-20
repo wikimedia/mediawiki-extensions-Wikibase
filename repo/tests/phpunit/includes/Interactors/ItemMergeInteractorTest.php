@@ -3,9 +3,11 @@
 namespace Wikibase\Repo\Tests\Interactors;
 
 use ContentHandler;
+use FauxRequest;
 use HashSiteStore;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
+use RequestContext;
 use Status;
 use TestSites;
 use Title;
@@ -138,6 +140,10 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			new HashSiteStore( TestSites::getSites() )
 		);
 
+		$context = new RequestContext();
+		$context->setRequest( new FauxRequest() );
+		$context->setUser( $user );
+
 		$interactor = new ItemMergeInteractor(
 			$mergeFactory,
 			$this->mockRepository,
@@ -150,7 +156,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 				$this->mockRepository,
 				$this->getPermissionChecker(),
 				$summaryFormatter,
-				$user,
+				$context,
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository,
 				$this->getMockEntityTitleLookup()

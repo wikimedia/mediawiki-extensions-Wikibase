@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Interactors;
 
+use IContextSource;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -19,6 +20,7 @@ use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
+use Wikimedia\Assert\Assert;
 
 /**
  * An interactor implementing the use case of creating a redirect.
@@ -74,16 +76,21 @@ abstract class EntityRedirectCreationInteractor {
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,
 		SummaryFormatter $summaryFormatter,
-		User $user,
+		$context,
 		EditFilterHookRunner $editFilterHookRunner,
 		EntityRedirectLookup $entityRedirectLookup,
 		EntityTitleStoreLookup $entityTitleLookup
 	) {
+		Assert::parameterType( [ IContextSource::class, User::class ], $context, '$context' );
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
 		$this->permissionChecker = $permissionChecker;
 		$this->summaryFormatter = $summaryFormatter;
-		$this->user = $user;
+		if ( $context instanceof IContextSource ) {
+			$this->user = $context->getUser();
+		} else {
+			$this->user = $context;
+		}
 		$this->editFilterHookRunner = $editFilterHookRunner;
 		$this->entityRedirectLookup = $entityRedirectLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
