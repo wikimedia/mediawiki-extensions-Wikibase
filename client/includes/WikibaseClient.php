@@ -26,7 +26,6 @@ use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\DescriptionLookup;
-use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
@@ -86,11 +85,6 @@ final class WikibaseClient {
 	 * @var SiteLookup
 	 */
 	private $siteLookup;
-
-	/**
-	 * @var ClientParserOutputDataUpdater|null
-	 */
-	private $parserOutputDataUpdater = null;
 
 	/**
 	 * Returns a low level factory object for creating formatters for well known data types.
@@ -358,19 +352,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.LangLinkHandlerFactory' );
 	}
 
-	public function getParserOutputDataUpdater(): ClientParserOutputDataUpdater {
-		if ( $this->parserOutputDataUpdater === null ) {
-			$this->parserOutputDataUpdater = new ClientParserOutputDataUpdater(
-				self::getOtherProjectsSidebarGeneratorFactory(),
-				self::getStore()->getSiteLinkLookup(),
-				self::getEntityLookup(),
-				new EntityUsageFactory( self::getEntityIdParser() ),
-				self::getSettings()->getSetting( 'siteGlobalID' ),
-				self::getLogger()
-			);
-		}
-
-		return $this->parserOutputDataUpdater;
+	public static function getParserOutputDataUpdater( ContainerInterface $services = null ): ClientParserOutputDataUpdater {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.ParserOutputDataUpdater' );
 	}
 
 	public static function getSidebarLinkBadgeDisplay( ContainerInterface $service = null ): SidebarLinkBadgeDisplay {
