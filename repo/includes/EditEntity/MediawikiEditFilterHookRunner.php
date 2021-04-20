@@ -6,7 +6,6 @@ use DerivativeContext;
 use Hooks;
 use IContextSource;
 use InvalidArgumentException;
-use MutableContext;
 use RuntimeException;
 use Status;
 use Title;
@@ -69,12 +68,6 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 			return $filterStatus;
 		}
 
-		if ( !( $context instanceof MutableContext ) ) {
-			wfLogWarning( '$context is not an instanceof MutableContext.' );
-
-			$context = new DerivativeContext( $context );
-		}
-
 		if ( $new instanceof EntityDocument ) {
 			$entityContent = $this->entityContentFactory->newFromEntity( $new );
 			$entityType = $new->getType();
@@ -118,14 +111,12 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 		return $filterStatus;
 	}
 
-	/**
-	 * @param IContextSource|MutableContext $context
-	 * @param EntityId|null $entityId
-	 * @param string $entityType
-	 * @return IContextSource|MutableContext
-	 */
-	private function getContextForEditFilter( $context, ?EntityId $entityId, string $entityType ) {
-		$context = clone $context;
+	private function getContextForEditFilter(
+		IContextSource $context,
+		?EntityId $entityId,
+		string $entityType
+	): IContextSource {
+		$context = new DerivativeContext( $context );
 		if ( $entityId !== null ) {
 			$title = $this->titleLookup->getTitleForId( $entityId );
 		} else {
