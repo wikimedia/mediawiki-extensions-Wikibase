@@ -16,7 +16,6 @@ use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\Tests\Mocks\MockClientStore;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -28,7 +27,6 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
-use Wikimedia\TestingAccessWrapper;
 
 /**
  * Regression tests for the output produced by data access functionality.
@@ -121,19 +119,8 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 		WikibaseClient::getDefaultInstance( 'reset' );
 	}
 
-	/**
-	 * Given formatting values depends on the global config
-	 * of data types ("default" WikibaseClient instance is called all over the place
-	 * there), test input using URLs of units needs to use the correct URI base.
-	 * In order to get to there right values, this method mimics (private)
-	 * WikibaseClient::getRepoItemUriParser and WikibaseClient::getItemSource.
-	 */
 	private function getGlobalConceptBaseUriForUnits(): string {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$wikibaseClient = TestingAccessWrapper::newFromObject( $wikibaseClient );
-
-		/** @var EntitySource $itemSource */
-		$itemSource = $wikibaseClient->getItemSource();
+		$itemSource = WikibaseClient::getItemSource();
 		return $itemSource->getConceptBaseUri();
 	}
 
@@ -256,7 +243,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 	 */
 	public function testRichWikitextOutput( $expected, $snak ) {
 		// This is an integration test, use the global factory
-		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
+		$factory = WikibaseClient::getDataAccessSnakFormatterFactory();
 		$formatter = $factory->newWikitextSnakFormatter(
 			Language::factory( 'en' ),
 			$this->createMock( UsageAccumulator::class ),
@@ -329,7 +316,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 	 */
 	public function testEscapedPlainTextOutput( $expected, $snak ) {
 		// This is an integration test, use the global factory
-		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
+		$factory = WikibaseClient::getDataAccessSnakFormatterFactory();
 		$formatter = $factory->newWikitextSnakFormatter(
 			Language::factory( 'en' ),
 			$this->createMock( UsageAccumulator::class )

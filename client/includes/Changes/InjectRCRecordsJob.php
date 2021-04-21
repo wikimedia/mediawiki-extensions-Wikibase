@@ -164,7 +164,6 @@ class InjectRCRecordsJob extends Job {
 
 	public static function newFromGlobalState( Title $unused, array $params ) {
 		$mwServices = MediaWikiServices::getInstance();
-		$wbServices = WikibaseClient::getDefaultInstance();
 
 		$store = WikibaseClient::getStore( $mwServices );
 
