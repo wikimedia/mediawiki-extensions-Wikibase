@@ -6,7 +6,6 @@ use DataValues\Deserializers\DataValueDeserializer;
 use ExternalUserNames;
 use Language;
 use MediaWiki\MediaWikiServices;
-use MWException;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Serializers\Serializer;
@@ -74,12 +73,6 @@ use Wikibase\Lib\WikibaseContentLanguages;
  * @author Daniel Kinzler
  */
 final class WikibaseClient {
-
-	/**
-	 * @warning only for use in getDefaultInstance()!
-	 * @var WikibaseClient
-	 */
-	private static $defaultInstance = null;
 
 	/**
 	 * @var SiteLookup
@@ -248,38 +241,6 @@ final class WikibaseClient {
 	public static function getSettings( ContainerInterface $services = null ): SettingsArray {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.Settings' );
-	}
-
-	/**
-	 * Returns a new instance constructed from global settings.
-	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
-	 *
-	 * @throws MWException
-	 * @return self
-	 */
-	private static function newInstance() {
-		return new self(
-			MediaWikiServices::getInstance()->getSiteLookup()
-		);
-	}
-
-	/**
-	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
-	 *
-	 * @param string $reset Flag: Pass "reset" to reset the default instance
-	 *
-	 * @return self
-	 */
-	public static function getDefaultInstance( $reset = 'noreset' ) {
-		if ( $reset === 'reset' ) {
-			self::$defaultInstance = null;
-		}
-
-		if ( self::$defaultInstance === null ) {
-			self::$defaultInstance = self::newInstance();
-		}
-
-		return self::$defaultInstance;
 	}
 
 	public static function getLogger( ContainerInterface $services = null ): LoggerInterface {
