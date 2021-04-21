@@ -3,7 +3,6 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Hooks;
 
-use Language;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
@@ -107,9 +106,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 			$this->getTermLookup(),
 			$this->getEntityNamespaceLookup(),
 			$this->getInterwikiLookup(),
-			function () use ( $titleText ) {
-				return $this->getEntityLinkFormatterFactory( $titleText );
-			},
+			$this->getEntityLinkFormatterFactory( $titleText ),
 			MediaWikiServices::getInstance()->getSpecialPageFactory(),
 			$languageFallbackChainFactory,
 			$this->entityUrlLookup,
@@ -127,7 +124,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiInteg
 	private function getEntityLinkFormatterFactory( $titleText ) {
 		$titleTextLookup = $this->getEntityTitleTextLookup( $titleText );
 
-		return new EntityLinkFormatterFactory( Language::factory( 'en' ), $titleTextLookup, [
+		return new EntityLinkFormatterFactory( $titleTextLookup, [
 			'item' => function( $language ) use ( $titleTextLookup ) {
 				return new DefaultEntityLinkFormatter( $language, $titleTextLookup );
 			},

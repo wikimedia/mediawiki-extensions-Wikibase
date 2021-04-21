@@ -17,65 +17,47 @@ class EntityLinkFormatterFactory {
 	private $callbacks;
 
 	/**
-	 * @var EntityLinkFormatter[] map of entity types to EntityLinkFormatter
+	 * @var EntityLinkFormatter[][] map of entity types and language codes to EntityLinkFormatter
 	 */
 	private $cachedLinkFormatters = [];
 
 	/**
-	 * @var Language
-	 */
-	private $language;
-
-	/**
-	 * @param Language $language
+	 * @param EntityTitleTextLookup $entityTitleTextLookup
 	 * @param callable[] $callbacks maps entity type strings to callbacks returning LinkFormatter
 	 */
-	public function __construct( Language $language, EntityTitleTextLookup $entityTitleTextLookup, array $callbacks ) {
+	public function __construct( EntityTitleTextLookup $entityTitleTextLookup, array $callbacks ) {
 		Assert::parameterElementType( 'callable', $callbacks, '$callbacks' );
 
-		$this->language = $language;
-		$this->callbacks = array_merge( $callbacks, [ 'default' => function ( $language ) use ( $entityTitleTextLookup ) {
-			return new DefaultEntityLinkFormatter( $language, $entityTitleTextLookup );
-		} ] );
+		$this->callbacks = array_merge(
+			$callbacks,
+			[ 'default' => function ( Language $language ) use ( $entityTitleTextLookup ): EntityLinkFormatter {
+				return new DefaultEntityLinkFormatter( $language, $entityTitleTextLookup );
+			} ]
+		);
 	}
 
-	/**
-	 * @param string $type entity type
-	 * @return EntityLinkFormatter
-	 */
-	public function getLinkFormatter( $type ): EntityLinkFormatter {
-		Assert::parameterType( 'string', $type, '$type' );
-
-		if ( !isset( $this->callbacks[$type] ) ) {
-			return $this->getDefaultLinkFormatter();
+	public function getLinkFormatter( string $entityType, Language $language ): EntityLinkFormatter {
+		if ( !isset( $this->callbacks[$entityType] ) ) {
+			return $this->getDefaultLinkFormatter( $language );
 		}
 
-		return $this->getOrCreateLinkFormatter( $type );
+		return $this->getOrCreateLinkFormatter( $entityType, $language );
 	}
 
-	/**
-	 * @return EntityLinkFormatter
-	 */
-	public function getDefaultLinkFormatter() {
-		return $this->getOrCreateLinkFormatter( 'default' );
+	public function getDefaultLinkFormatter( Language $language ): EntityLinkFormatter {
+		return $this->getOrCreateLinkFormatter( 'default', $language );
 	}
 
-	/**
-	 * @param string $type
-	 * @return EntityLinkFormatter
-	 */
-	private function getOrCreateLinkFormatter( $type ) {
-		return $this->cachedLinkFormatters[$type] ?? $this->createAndCacheLinkFormatter( $type );
+	private function getOrCreateLinkFormatter( string $type, Language $language ): EntityLinkFormatter {
+		return $this->cachedLinkFormatters[$type][$language->getCode()]
+			?? $this->createAndCacheLinkFormatter( $type, $language );
 	}
 
-	/**
-	 * @param string $type
-	 * @return EntityLinkFormatter
-	 */
-	private function createAndCacheLinkFormatter( $type ) {
-		$this->cachedLinkFormatters[$type] = $this->callbacks[$type]( $this->language );
+	private function createAndCacheLinkFormatter( string $type, Language $language ): EntityLinkFormatter {
+		$langCode = $language->getCode();
+		$this->cachedLinkFormatters[$type][$langCode] = $this->callbacks[$type]( $language );
 
-		return $this->cachedLinkFormatters[$type];
+		return $this->cachedLinkFormatters[$type][$langCode];
 	}
 
 }
