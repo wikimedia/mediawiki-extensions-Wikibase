@@ -77,11 +77,6 @@ class EntityDiffVisualizerFactory {
 		if ( $context === null ) {
 			$context = RequestContext::getMain();
 		}
-		return $this->getEntityDiffVisualizer( $context, $type );
-	}
-
-	// TODO: To be removed after merging Ie2b5304fcb1bb080d8e3d726c3c046aaaa1ea22b in WikibaseLexeme
-	private function getEntityDiffVisualizer( IContextSource $context, ?string $type ): EntityDiffVisualizer {
 		$langCode = $context->getLanguage()->getCode();
 		$options = new FormatterOptions( [
 			//TODO: fallback chain
