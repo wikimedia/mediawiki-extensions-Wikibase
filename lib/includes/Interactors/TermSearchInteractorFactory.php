@@ -12,7 +12,7 @@ interface TermSearchInteractorFactory {
 	/**
 	 * @param string $displayLanguageCode
 	 *
-	 * @return TermSearchInteractor
+	 * @return ConfigurableTermSearchInteractor
 	 */
 	public function newInteractor( $displayLanguageCode );
 
