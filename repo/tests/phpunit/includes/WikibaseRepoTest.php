@@ -32,7 +32,6 @@ use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Rdf\RdfVocabulary;
@@ -279,11 +278,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 			],
 			$this->entityTypeDefinitions
 		);
-	}
-
-	public function testGetApiHelperFactory() {
-		$factory = $this->getWikibaseRepo()->getApiHelperFactory( new RequestContext() );
-		$this->assertInstanceOf( ApiHelperFactory::class, $factory );
 	}
 
 	public function testNewItemMergeInteractor() {

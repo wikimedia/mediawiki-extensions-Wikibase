@@ -12,7 +12,6 @@ use SiteLookup;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -65,14 +64,13 @@ class ListSubscribers extends ApiQueryBase {
 		ApiQuery $apiQuery,
 		string $moduleName,
 		SiteLookup $siteLookup,
+		ApiHelperFactory $apiHelperFactory,
 		EntityIdParser $entityIdParser
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelper = $wikibaseRepo->getApiHelperFactory( $apiQuery->getContext() );
 		return new self(
 			$apiQuery,
 			$moduleName,
-			$apiHelper->getErrorReporter( $apiQuery ),
+			$apiHelperFactory->getErrorReporter( $apiQuery ),
 			$entityIdParser,
 			$siteLookup
 		);

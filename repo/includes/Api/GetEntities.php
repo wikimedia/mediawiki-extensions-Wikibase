@@ -137,6 +137,7 @@ class GetEntities extends ApiBase {
 		string $moduleName,
 		SiteLookup $siteLookup,
 		IBufferingStatsdDataFactory $stats,
+		ApiHelperFactory $apiHelperFactory,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
@@ -144,9 +145,6 @@ class GetEntities extends ApiBase {
 		Store $store,
 		StringNormalizer $stringNormalizer
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
-
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$siteLookup,
 			$repoSettings->getSetting( 'specialSiteLinkGroups' )

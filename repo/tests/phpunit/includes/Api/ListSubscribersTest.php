@@ -85,9 +85,8 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 	 * @return array[]
 	 */
 	private function callApiModule( array $params ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiMain = $this->getQueryModule( $params );
-		$errorReporter = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() )
+		$errorReporter = WikibaseRepo::getApiHelperFactory()
 			->getErrorReporter( $apiMain );
 		$module = new ListSubscribers(
 			$apiMain,

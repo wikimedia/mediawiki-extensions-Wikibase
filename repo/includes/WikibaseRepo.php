@@ -805,33 +805,12 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.LegacyFormatDetectorCallback' );
 	}
 
-	/**
-	 * @param IContextSource $context
-	 *
-	 * @return ApiHelperFactory
-	 */
-	public function getApiHelperFactory( IContextSource $context ) {
-		$services = MediaWikiServices::getInstance();
-		$store = self::getStore( $services );
-
-		return new ApiHelperFactory(
-			self::getEntityTitleStoreLookup(),
-			self::getExceptionLocalizer( $services ),
-			self::getPropertyDataTypeLookup( $services ),
-			$this->getSiteLookup(),
-			self::getSummaryFormatter( $services ),
-			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
-			self::getEditEntityFactory( $services ),
-			self::getBaseDataModelSerializerFactory( $services ),
-			self::getAllTypesEntitySerializer( $services ),
-			self::getEntityIdParser( $services ),
-			$services->getPermissionManager(),
-			$services->getRevisionLookup(),
-			$services->getTitleFactory(),
-			$store->getEntityByLinkedTitleLookup(),
-			self::getEntityFactory(),
-			self::getEntityStore()
-		);
+	public static function getApiHelperFactory( /* TODO ContainerInterface */ $services = null ): ApiHelperFactory {
+		if ( !( $services instanceof ContainerInterface ) ) {
+			$services = null; // TODO remove this block
+		}
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ApiHelperFactory' );
 	}
 
 	public static function getEditEntityFactory(

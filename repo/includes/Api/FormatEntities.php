@@ -17,7 +17,6 @@ use RemexHtml\TreeBuilder\TreeBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityIdFormatterFactory;
 
 /**
@@ -74,11 +73,10 @@ class FormatEntities extends ApiBase {
 		ApiMain $apiMain,
 		string $moduleName,
 		IBufferingStatsdDataFactory $dataFactory,
+		ApiHelperFactory $apiHelperFactory,
 		EntityIdFormatterFactory $entityIdFormatterFactory,
 		EntityIdParser $entityIdParser
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
 		return new self(
 			$apiMain,
 			$moduleName,

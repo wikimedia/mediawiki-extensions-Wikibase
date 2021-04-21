@@ -20,7 +20,6 @@ use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Store\Store;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module to associate two pages on two different sites with a Wikibase item.
@@ -91,12 +90,10 @@ class LinkTitles extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		SiteLookup $siteLookup,
+		ApiHelperFactory $apiHelperFactory,
 		SettingsArray $repoSettings,
 		Store $store
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$siteLookup,
 			$repoSettings->getSetting( 'specialSiteLinkGroups' )

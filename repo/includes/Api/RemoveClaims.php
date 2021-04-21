@@ -20,7 +20,6 @@ use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\SnakFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for removing claims.
@@ -89,6 +88,7 @@ class RemoveClaims extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		ApiHelperFactory $apiHelperFactory,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityIdParser $entityIdParser,
 		SettingsArray $settings,
@@ -96,9 +96,6 @@ class RemoveClaims extends ApiBase {
 		StatementGuidParser $statementGuidParser,
 		StatementGuidValidator $statementGuidValidator
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-
 		$modificationHelper = new StatementModificationHelper(
 			$snakFactory,
 			$entityIdParser,

@@ -106,8 +106,7 @@ abstract class ModifyEntity extends ApiBase {
 	public function __construct( ApiMain $mainModule, string $moduleName, bool $federatedPropertiesEnabled, string $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
+		$apiHelperFactory = WikibaseRepo::getApiHelperFactory();
 		$settings = WikibaseRepo::getSettings();
 
 		//TODO: provide a mechanism to override the services
