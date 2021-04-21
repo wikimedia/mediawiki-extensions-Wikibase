@@ -60,7 +60,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 		parent::setUp();
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
-		$this->maskPropertyLabelResolver( $wikibaseClient );
+		$this->maskPropertyLabelResolver();
 
 		$store = new MockClientStore( 'de' );
 		$this->setService( 'WikibaseClient.Store', $store );
@@ -79,7 +79,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 		$settings->setSetting( 'useKartographerMaplinkInWikitext', true );
 	}
 
-	private function maskPropertyLabelResolver( WikibaseClient $wikibaseClient ) {
+	private function maskPropertyLabelResolver() {
 		$propertyLabelResolver = $this->createMock( PropertyLabelResolver::class );
 		$propertyLabelResolver->method( 'getPropertyIdsForLabels' )
 			->with( [ 'LuaTestStringProperty' ] )

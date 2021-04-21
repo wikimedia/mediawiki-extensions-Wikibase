@@ -360,7 +360,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	private function getEntityIdParser() {
 		if ( !$this->entityIdParser ) {
-			$wikibaseClient = WikibaseClient::getDefaultInstance();
 			$this->entityIdParser = WikibaseClient::getEntityIdParser();
 		}
 		return $this->entityIdParser;

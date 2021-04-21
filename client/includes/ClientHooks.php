@@ -88,7 +88,6 @@ final class ClientHooks {
 	 * @return string[]|null Array of link elements or Null if link cannot be created.
 	 */
 	public static function buildWikidataItemLink( Skin $skin ): ?array {
-		$wbClient = WikibaseClient::getDefaultInstance();
 		$title = $skin->getTitle();
 		$idString = $skin->getOutput()->getProperty( 'wikibase_item' );
 		$entityId = null;

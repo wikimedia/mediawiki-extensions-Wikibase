@@ -83,12 +83,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( SettingsArray::class, $returnValue );
 	}
 
-	public function testGetDefaultInstance() {
-		$this->assertSame(
-			WikibaseClient::getDefaultInstance(),
-			WikibaseClient::getDefaultInstance() );
-	}
-
 	/**
 	 * @return WikibaseClient
 	 */
