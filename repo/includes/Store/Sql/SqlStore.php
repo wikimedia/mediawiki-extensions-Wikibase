@@ -15,6 +15,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\CacheRetrievingEntityRevisionLookup;
@@ -321,7 +322,8 @@ class SqlStore implements Store {
 		$store->registerWatcher( $this->getEntityStoreWatcher() );
 
 		$store = new TypeDispatchingEntityStore(
-			WikibaseRepo::getDefaultInstance()->getEntityStoreFactoryCallbacks(),
+			WikibaseRepo::getEntityTypeDefinitions() // TODO inject
+				->get( EntityTypeDefinitions::ENTITY_STORE_FACTORY_CALLBACK ),
 			$store,
 			$this->getEntityRevisionLookup( self::LOOKUP_CACHING_DISABLED )
 		);

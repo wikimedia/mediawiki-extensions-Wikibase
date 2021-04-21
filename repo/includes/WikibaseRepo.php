@@ -361,13 +361,6 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityStore' );
 	}
 
-	/**
-	 * @return callable[]
-	 */
-	public function getEntityStoreFactoryCallbacks() {
-		return self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_STORE_FACTORY_CALLBACK );
-	}
-
 	public static function getPropertyDataTypeLookup( ContainerInterface $services = null ): PropertyDataTypeLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.PropertyDataTypeLookup' );
