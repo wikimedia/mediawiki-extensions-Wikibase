@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Diff;
 
+use IContextSource;
 use Wikibase\Repo\Content\EntityContentDiff;
 
 /**
@@ -17,8 +18,14 @@ class DispatchingEntityDiffVisualizer implements EntityDiffVisualizer {
 	 */
 	private $diffVisualizerFactory;
 
-	public function __construct( EntityDiffVisualizerFactory $diffVisualizerFactory ) {
+	/**
+	 * @var IContextSource
+	 */
+	private $context;
+
+	public function __construct( EntityDiffVisualizerFactory $diffVisualizerFactory, IContextSource $context ) {
 		$this->diffVisualizerFactory = $diffVisualizerFactory;
+		$this->context = $context;
 	}
 
 	/**
@@ -27,7 +34,8 @@ class DispatchingEntityDiffVisualizer implements EntityDiffVisualizer {
 	 */
 	public function visualizeEntityContentDiff( EntityContentDiff $diff ) {
 		$entityDiffVisualizer = $this->diffVisualizerFactory->newEntityDiffVisualizer(
-			$diff->getEntityType()
+			$diff->getEntityType(),
+			$this->context
 		);
 
 		return $entityDiffVisualizer->visualizeEntityContentDiff( $diff );

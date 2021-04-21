@@ -47,8 +47,8 @@ class EntityContentDiffView extends DifferenceEngine {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$entityDiffVisualizerFactory = $wikibaseRepo->getEntityDiffVisualizerFactory( $context );
-		$this->diffVisualizer = new DispatchingEntityDiffVisualizer( $entityDiffVisualizerFactory );
+		$entityDiffVisualizerFactory = $wikibaseRepo->getEntityDiffVisualizerFactory();
+		$this->diffVisualizer = new DispatchingEntityDiffVisualizer( $entityDiffVisualizerFactory, $context );
 	}
 
 	/**

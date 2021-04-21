@@ -50,8 +50,8 @@ class EditEntityAction extends ViewEntityAction {
 		parent::__construct( $page, $context );
 
 		$this->entityDiffVisualizer = new DispatchingEntityDiffVisualizer(
-			WikibaseRepo::getDefaultInstance()
-				->getEntityDiffVisualizerFactory( $this->getContext() )
+			WikibaseRepo::getDefaultInstance()->getEntityDiffVisualizerFactory(),
+			$this->getContext()
 		);
 	}
 
