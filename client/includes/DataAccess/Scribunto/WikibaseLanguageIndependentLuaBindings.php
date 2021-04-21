@@ -22,6 +22,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -92,18 +93,10 @@ class WikibaseLanguageIndependentLuaBindings {
 	private $siteId;
 
 	/**
-	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param EntityIdLookup $entityIdLookup
-	 * @param SettingsArray $settings
-	 * @param UsageAccumulator $usageAccumulator
-	 * @param EntityIdParser $entityIdParser
-	 * @param TermLookup $termLookup
-	 * @param ContentLanguages $termsLanguages
-	 * @param ReferencedEntityIdLookup $referencedEntityIdLookup
-	 * @param TitleFormatter $titleFormatter
-	 * @param TitleParser $titleParser
-	 * @param string $siteId
+	 * @var EntityRevisionLookup
 	 */
+	private $entityRevisionLookup;
+
 	public function __construct(
 		SiteLinkLookup $siteLinkLookup,
 		EntityIdLookup $entityIdLookup,
@@ -115,7 +108,8 @@ class WikibaseLanguageIndependentLuaBindings {
 		ReferencedEntityIdLookup $referencedEntityIdLookup,
 		TitleFormatter $titleFormatter,
 		TitleParser $titleParser,
-		$siteId
+		string $siteId,
+		EntityRevisionLookup $entityRevisionLookup
 	) {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->entityIdLookup = $entityIdLookup;
@@ -128,6 +122,7 @@ class WikibaseLanguageIndependentLuaBindings {
 		$this->titleFormatter = $titleFormatter;
 		$this->titleParser = $titleParser;
 		$this->siteId = $siteId;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 	}
 
 	/**
@@ -170,11 +165,7 @@ class WikibaseLanguageIndependentLuaBindings {
 			return null;
 		}
 
-		if ( $globalSiteId === $this->siteId ) {
-			$this->usageAccumulator->addTitleUsage( $itemId );
-		} else {
-			$this->usageAccumulator->addSiteLinksUsage( $itemId );
-		}
+		$this->trackUsageForSitelink( $globalSiteId, $itemId );
 
 		return $itemId->getSerialization();
 	}
@@ -259,14 +250,28 @@ class WikibaseLanguageIndependentLuaBindings {
 			return null;
 		}
 
-		if ( $globalSiteId === $this->siteId ) {
-			$this->usageAccumulator->addTitleUsage( $itemId );
-		} else {
-			$this->usageAccumulator->addSiteLinksUsage( $itemId );
+		$returnIdAsIs = function () use ( $itemId ) {
+			return $itemId;
+		};
+
+		// Using an EntityRevisionLookup here is weird because we aren't interested in the revision.
+		// It's an easy way to get to the redirect target though. Create an EntityRedirectLookup for client?
+		$itemIdAfterRedirectResolution = $this->entityRevisionLookup->getLatestRevisionId( $itemId )
+			->onConcreteRevision( $returnIdAsIs )
+			->onRedirect( function ( $revisionId, $redirectTarget ) {
+				return $redirectTarget;
+			} )
+			->onNonexistentEntity( $returnIdAsIs )
+			->map();
+
+		$this->trackUsageForSitelink( $globalSiteId, $itemIdAfterRedirectResolution );
+		if ( !$itemId->equals( $itemIdAfterRedirectResolution ) ) {
+			// it's a redirect. We want to know if anything happens to it.
+			$this->usageAccumulator->addAllUsage( $itemId );
 		}
 
 		$siteLinkRows = $this->siteLinkLookup->getLinks(
-			[ $itemId->getNumericId() ],
+			[ $itemIdAfterRedirectResolution->getNumericId() ],
 			[ $globalSiteId ]
 		);
 
@@ -295,6 +300,14 @@ class WikibaseLanguageIndependentLuaBindings {
 		}
 
 		return $res ? $res->getSerialization() : null;
+	}
+
+	private function trackUsageForSitelink( string $globalSiteId, ItemId $itemId ): void {
+		if ( $globalSiteId === $this->siteId ) {
+			$this->usageAccumulator->addTitleUsage( $itemId );
+		} else {
+			$this->usageAccumulator->addSiteLinksUsage( $itemId );
+		}
 	}
 
 }

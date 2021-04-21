@@ -351,7 +351,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			),
 			$mediaWikiServices->getTitleFormatter(),
 			$mediaWikiServices->getTitleParser(),
-			$settings->getSetting( 'siteGlobalID' )
+			$settings->getSetting( 'siteGlobalID' ),
+			$store->getEntityRevisionLookup()
 		);
 	}
 
