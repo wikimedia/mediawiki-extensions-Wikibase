@@ -2,6 +2,7 @@
 
 use Wikibase\Lib\Modules\DataTypesModule;
 use Wikibase\Lib\Modules\MediaWikiConfigModule;
+use Wikibase\Lib\Modules\SettingsValueProvider;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -99,7 +100,8 @@ return call_user_func( function() {
 		'mw.config.values.wbRefTabsEnabled' => $moduleTemplate + [
 			'class' => MediaWikiConfigModule::class,
 			'getconfigvalueprovider' => function () {
-				return WikibaseRepo::getDefaultInstance()->getSettingsValueProvider(
+				return new SettingsValueProvider(
+					WikibaseRepo::getSettings(),
 					'wbRefTabsEnabled',
 					'enableRefTabs'
 				);

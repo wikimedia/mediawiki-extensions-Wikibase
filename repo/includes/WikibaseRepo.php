@@ -58,7 +58,6 @@ use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
-use Wikibase\Lib\Modules\SettingsValueProvider;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -972,10 +971,6 @@ class WikibaseRepo {
 	public static function getEntityTypesConfigValue( ContainerInterface $services = null ): array {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntityTypesConfigValue' );
-	}
-
-	public function getSettingsValueProvider( $jsSetting, $phpSetting ) {
-		return new SettingsValueProvider( self::getSettings(), $jsSetting, $phpSetting );
 	}
 
 	public static function getUnitConverter( ContainerInterface $services = null ): ?UnitConverter {
