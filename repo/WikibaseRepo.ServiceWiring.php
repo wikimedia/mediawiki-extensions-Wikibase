@@ -158,6 +158,7 @@ use Wikibase\Repo\EntityTypeDefinitionsFedPropsOverrider;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 use Wikibase\Repo\FederatedProperties\WrappingEntityIdFormatterFactory;
+use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
@@ -692,6 +693,13 @@ return [
 	'WikibaseRepo.EntityIdParser' => function ( MediaWikiServices $services ): EntityIdParser {
 		return new DispatchingEntityIdParser(
 			WikibaseRepo::getEntityTypeDefinitions( $services )->getEntityIdBuilders()
+		);
+	},
+
+	'WikibaseRepo.EntityLinkFormatterFactory' => function ( MediaWikiServices $services ): EntityLinkFormatterFactory {
+		return new EntityLinkFormatterFactory(
+			WikibaseRepo::getEntityTitleTextLookup( $services ),
+			WikibaseRepo::getEntityTypeDefinitions( $services )->get( EntityTypeDefinitions::LINK_FORMATTER_CALLBACK )
 		);
 	},
 

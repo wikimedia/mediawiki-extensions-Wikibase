@@ -28,7 +28,6 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Handler for the HtmlPageLinkRendererEnd hook, used to change the default link text of links to
@@ -116,6 +115,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		SpecialPageFactory $specialPageFactory,
 		EntityExistenceChecker $entityExistenceChecker,
 		EntityIdParser $entityIdParser,
+		EntityLinkFormatterFactory $entityLinkFormatterFactory,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityUrlLookup $entityUrlLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
@@ -123,17 +123,13 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		SettingsArray $repoSettings,
 		TermLookup $termLookup
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		// NOTE: keep in sync with fallback chain construction in LabelPrefetchHookHandler::factory
-		$context = RequestContext::getMain();
-
 		return new self(
 			$entityExistenceChecker,
 			$entityIdParser,
 			$termLookup,
 			$entityNamespaceLookup,
 			$interwikiLookup,
-			$wikibaseRepo->getEntityLinkFormatterFactory(),
+			$entityLinkFormatterFactory,
 			$specialPageFactory,
 			$languageFallbackChainFactory,
 			$entityUrlLookup,

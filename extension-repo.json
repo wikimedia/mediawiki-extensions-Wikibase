@@ -770,6 +770,7 @@
 				"SpecialPageFactory",
 				"WikibaseRepo.EntityExistenceChecker",
 				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.EntityLinkFormatterFactory",
 				"WikibaseRepo.EntityNamespaceLookup",
 				"WikibaseRepo.EntityUrlLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",

@@ -1037,11 +1037,11 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntitySearchHelperCallbacks' );
 	}
 
-	public function getEntityLinkFormatterFactory() {
-		return new EntityLinkFormatterFactory(
-			self::getEntityTitleTextLookup(),
-			self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::LINK_FORMATTER_CALLBACK )
-		);
+	public static function getEntityLinkFormatterFactory(
+		ContainerInterface $services = null
+	): EntityLinkFormatterFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityLinkFormatterFactory' );
 	}
 
 	/**
