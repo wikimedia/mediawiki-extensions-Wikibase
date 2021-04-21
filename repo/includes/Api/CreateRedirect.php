@@ -74,10 +74,10 @@ class CreateRedirect extends ApiBase {
 		ApiMain $apiMain,
 		string $moduleName,
 		PermissionManager $permissionManager,
+		ApiHelperFactory $apiHelperFactory,
 		EntityIdParser $entityIdParser
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
 		return new self(
 			$apiMain,
 			$moduleName,

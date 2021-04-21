@@ -133,6 +133,7 @@ use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Lib\Units\UnitStorage;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
@@ -245,6 +246,29 @@ return [
 		}
 
 		return new DispatchingSerializer( $serializers );
+	},
+
+	'WikibaseRepo.ApiHelperFactory' => function ( MediaWikiServices $services ): ApiHelperFactory {
+		$store = WikibaseRepo::getStore( $services );
+
+		return new ApiHelperFactory(
+			WikibaseRepo::getEntityTitleStoreLookup( $services ),
+			WikibaseRepo::getExceptionLocalizer( $services ),
+			WikibaseRepo::getPropertyDataTypeLookup( $services ),
+			$services->getSiteLookup(),
+			WikibaseRepo::getSummaryFormatter( $services ),
+			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
+			WikibaseRepo::getEditEntityFactory( $services ),
+			WikibaseRepo::getBaseDataModelSerializerFactory( $services ),
+			WikibaseRepo::getAllTypesEntitySerializer( $services ),
+			WikibaseRepo::getEntityIdParser( $services ),
+			$services->getPermissionManager(),
+			$services->getRevisionLookup(),
+			$services->getTitleFactory(),
+			$store->getEntityByLinkedTitleLookup(),
+			WikibaseRepo::getEntityFactory( $services ),
+			WikibaseRepo::getEntityStore( $services )
+		);
 	},
 
 	'WikibaseRepo.BaseDataModelDeserializerFactory' => function ( MediaWikiServices $services ): DeserializerFactory {

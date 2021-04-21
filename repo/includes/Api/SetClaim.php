@@ -30,7 +30,6 @@ use Wikibase\Repo\ClaimSummaryBuilder;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikibase\Repo\SnakFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating or updating an entire Claim.
@@ -112,6 +111,7 @@ class SetClaim extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		IBufferingStatsdDataFactory $stats,
+		ApiHelperFactory $apiHelperFactory,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityIdParser $entityIdParser,
 		Deserializer $externalFormatStatementDeserializer,
@@ -120,9 +120,6 @@ class SetClaim extends ApiBase {
 		StatementGuidParser $statementGuidParser,
 		StatementGuidValidator $statementGuidValidator
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-
 		$modificationHelper = new StatementModificationHelper(
 			$snakFactory,
 			$entityIdParser,

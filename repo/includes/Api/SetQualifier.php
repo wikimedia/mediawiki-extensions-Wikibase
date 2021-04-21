@@ -16,7 +16,6 @@ use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\SnakFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
@@ -98,6 +97,7 @@ class SetQualifier extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		ApiHelperFactory $apiHelperFactory,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityIdParser $entityIdParser,
 		SettingsArray $repoSettings,
@@ -105,9 +105,6 @@ class SetQualifier extends ApiBase {
 		StatementGuidParser $statementGuidParser,
 		StatementGuidValidator $statementGuidValidator
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-
 		$modificationHelper = new StatementModificationHelper(
 			$snakFactory,
 			$entityIdParser,

@@ -21,6 +21,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\CreateClaim",
 			"factory": "\\Wikibase\\Repo\\Api\\CreateClaim::factory",
 			"services": [
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.Settings",
@@ -45,6 +46,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\CreateRedirect::factory",
 			"services": [
 				"PermissionManager",
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EntityIdParser"
 			]
 		},
@@ -53,6 +55,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\FormatEntities::factory",
 			"services": [
 				"StatsdDataFactory",
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EntityIdHtmlLinkFormatterFactory",
 				"WikibaseRepo.EntityIdParser"
 			]
@@ -62,6 +65,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\FormatSnakValue::factory",
 			"services": [
 				"StatsdDataFactory",
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.DataTypeFactory",
 			  	"WikibaseRepo.DataValueFactory",
 				"WikibaseRepo.SnakFormatterFactory",
@@ -72,6 +76,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\GetClaims",
 			"factory": "\\Wikibase\\Repo\\Api\\GetClaims::factory",
 			"services": [
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.StatementGuidParser",
 			  	"WikibaseRepo.StatementGuidValidator"
@@ -83,6 +88,7 @@
 			"services": [
 				"SiteLookup",
 				"StatsdDataFactory",
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.EntityRevisionLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
@@ -96,6 +102,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\LinkTitles::factory",
 			"services": [
 				"SiteLookup",
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.Store"
 			]
@@ -104,6 +111,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\MergeItems",
 			"factory": "\\Wikibase\\Repo\\Api\\MergeItems::factory",
 			"services": [
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EntityIdParser"
 			]
 		},
@@ -112,6 +120,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\ParseValue::factory",
 			"services": [
 				"StatsdDataFactory",
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.DataTypeFactory",
 				"WikibaseRepo.DataTypeValidatorFactory",
 				"WikibaseRepo.ExceptionLocalizer",
@@ -124,6 +133,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\RemoveClaims",
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveClaims::factory",
 			"services": [
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.Settings",
@@ -136,6 +146,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\RemoveQualifiers",
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveQualifiers::factory",
 			"services": [
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.Settings",
@@ -148,6 +159,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\RemoveReferences",
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveReferences::factory",
 			"services": [
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.Settings",
@@ -160,6 +172,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\SearchEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\SearchEntities::factory",
 			"services": [
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EntityArticleIdLookup",
 				"WikibaseRepo.EntitySearchHelperCallbacks",
 				"WikibaseRepo.EntitySourceDefinitions",
@@ -183,6 +196,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SetClaim::factory",
 			"services": [
 				"StatsdDataFactory",
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.ExternalFormatStatementDeserializer",
@@ -196,6 +210,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\SetClaimValue",
 			"factory": "\\Wikibase\\Repo\\Api\\SetClaimValue::factory",
 			"services": [
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.Settings",
@@ -226,6 +241,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\SetQualifier",
 			"factory": "\\Wikibase\\Repo\\Api\\SetQualifier::factory",
 			"services": [
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
 			  	"WikibaseRepo.Settings",
@@ -238,6 +254,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\SetReference",
 			"factory": "\\Wikibase\\Repo\\Api\\SetReference::factory",
 			"services": [
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.BaseDataModelDeserializerFactory",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
@@ -273,6 +290,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\ListSubscribers::factory",
 			"services": [
 				"SiteLookup",
+				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EntityIdParser"
 			]
 		}

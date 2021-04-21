@@ -26,7 +26,6 @@ use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\TypedValueFormatter;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for using value formatters.
@@ -100,14 +99,12 @@ class FormatSnakValue extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		IBufferingStatsdDataFactory $stats,
+		ApiHelperFactory $apiHelperFactory,
 		DataTypeFactory $dataTypeFactory,
 		DataValueFactory $dataValueFactory,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
 		OutputFormatValueFormatterFactory $valueFormatterFactory
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-
 		return new self(
 			$mainModule,
 			$moduleName,

@@ -93,6 +93,7 @@ class SearchEntities extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		ApiHelperFactory $apiHelperFactory,
 		EntityArticleIdLookup $entityArticleIdLookup,
 		array $entitySearchHelperCallbacks,
 		EntitySourceDefinitions $entitySourceDefinitions,
@@ -100,12 +101,10 @@ class SearchEntities extends ApiBase {
 		EntityUrlLookup $entityUrlLookup,
 		ContentLanguages $termsLanguages
 	): self {
-		$repo = WikibaseRepo::getDefaultInstance();
 		$entitySearchHelper = new TypeDispatchingEntitySearchHelper(
 			$entitySearchHelperCallbacks,
 			$mainModule->getRequest()
 		);
-		$apiHelperFactory = $repo->getApiHelperFactory( $mainModule->getContext() );
 
 		return new self(
 			$mainModule,

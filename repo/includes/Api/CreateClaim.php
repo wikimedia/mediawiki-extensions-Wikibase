@@ -14,7 +14,6 @@ use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOpMainSnak;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\SnakFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating claims.
@@ -77,14 +76,13 @@ class CreateClaim extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		ApiHelperFactory $apiHelperFactory,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityIdParser $entityIdParser,
 		SettingsArray $settings,
 		SnakFactory $snakFactory,
 		StatementGuidValidator $statementGuidValidator
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
 		$errorReporter = $apiHelperFactory->getErrorReporter( $mainModule );
 
 		$modificationHelper = new StatementModificationHelper(
