@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
-use MediaWikiIntegrationTestCase;
+use MediaWikiLangTestCase;
 use RequestContext;
 use Title;
 use Wikibase\DataAccess\EntitySource;
@@ -33,7 +33,7 @@ use Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler;
 /**
  * @license GPL-2.0-or-later
  */
-abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiIntegrationTestCase {
+abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangTestCase {
 
 	protected const ITEM_WITH_LABEL = 'Q1';
 	protected const ITEM_WITHOUT_LABEL = 'Q11';
