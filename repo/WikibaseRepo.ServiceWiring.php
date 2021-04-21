@@ -883,6 +883,15 @@ return [
 		return new EntityTypeDefinitions( $entityTypes );
 	},
 
+	'WikibaseRepo.EntityTypesConfigValue' => function ( MediaWikiServices $services ): array {
+		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
+		return [
+			'types' => $entityTypeDefinitions->getEntityTypes(),
+			'deserializer-factory-functions' => $entityTypeDefinitions
+				->get( EntityTypeDefinitions::JS_DESERIALIZER_FACTORY_FUNCTION )
+		];
+	},
+
 	'WikibaseRepo.EntityTypeToRepositoryMapping' => function ( MediaWikiServices $services ): array {
 		// Map all entity types to unprefixed repository.
 		// TODO: This is a bit of a hack but does the job for EntityIdSearchHelper as long as there are no

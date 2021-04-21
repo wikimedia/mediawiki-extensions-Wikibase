@@ -969,13 +969,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.CachingCommonsMediaFileNameLookup' );
 	}
 
-	public function getEntityTypesConfigValue() {
-		$entityTypeDefinitions = self::getEntityTypeDefinitions();
-		return [
-			'types' => $entityTypeDefinitions->getEntityTypes(),
-			'deserializer-factory-functions'
-				=> $entityTypeDefinitions->get( EntityTypeDefinitions::JS_DESERIALIZER_FACTORY_FUNCTION )
-		];
+	public static function getEntityTypesConfigValue( ContainerInterface $services = null ): array {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityTypesConfigValue' );
 	}
 
 	public function getSettingsValueProvider( $jsSetting, $phpSetting ) {
