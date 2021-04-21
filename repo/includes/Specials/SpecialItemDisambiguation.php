@@ -13,7 +13,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\ItemDisambiguation;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Enables accessing items by providing the label of the item and the language of the label.
@@ -72,13 +71,13 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	}
 
 	public static function factory(
+		array $entitySearchHelperCallbacks,
 		EntityTitleLookup $entityTitleLookup,
 		ContentLanguages $termsLanguages
 	): self {
 		global $wgLang;
 
 		$languageCode = $wgLang->getCode();
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$languageNameLookup = new LanguageNameLookup( $languageCode );
 		$itemDisambiguation = new ItemDisambiguation(
 			$entityTitleLookup,
@@ -90,7 +89,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$languageNameLookup,
 			$itemDisambiguation,
 			new TypeDispatchingEntitySearchHelper(
-				$wikibaseRepo->getEntitySearchHelperCallbacks(),
+				$entitySearchHelperCallbacks,
 				RequestContext::getMain()->getRequest()
 			)
 		);

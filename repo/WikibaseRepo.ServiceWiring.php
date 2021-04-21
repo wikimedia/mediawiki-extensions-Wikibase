@@ -800,6 +800,11 @@ return [
 			->getEntityRevisionLookup( Store::LOOKUP_CACHING_ENABLED );
 	},
 
+	'WikibaseRepo.EntitySearchHelperCallbacks' => function ( MediaWikiServices $services ): array {
+		return WikibaseRepo::getEntityTypeDefinitions( $services )
+			->get( EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK );
+	},
+
 	'WikibaseRepo.EntitySourceDefinitions' => function ( MediaWikiServices $services ): EntitySourceDefinitions {
 		$settings = WikibaseRepo::getSettings( $services );
 		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );

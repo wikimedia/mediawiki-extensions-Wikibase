@@ -10,7 +10,6 @@ use ApiQueryGeneratorBase;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module to search for Wikibase entities that can be used as a generator.
@@ -68,16 +67,15 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 		ApiQuery $apiQuery,
 		string $moduleName,
 		array $enabledEntityTypes,
+		array $entitySearchHelperCallbacks,
 		EntityTitleLookup $entityTitleLookup,
 		ContentLanguages $termsLanguages
 	): self {
-		$repo = WikibaseRepo::getDefaultInstance();
-
 		return new self(
 			$apiQuery,
 			$moduleName,
 			new TypeDispatchingEntitySearchHelper(
-				$repo->getEntitySearchHelperCallbacks(),
+				$entitySearchHelperCallbacks,
 				$apiQuery->getRequest()
 			),
 			$entityTitleLookup,

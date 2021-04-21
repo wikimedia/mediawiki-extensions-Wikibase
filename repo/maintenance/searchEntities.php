@@ -156,7 +156,7 @@ class SearchEntities extends Maintenance {
 		$engines = [
 			'sql' => function() {
 				return new TypeDispatchingEntitySearchHelper(
-					$this->repo->getEntitySearchHelperCallbacks(),
+					WikibaseRepo::getEntitySearchHelperCallbacks(),
 					new \FauxRequest()
 				);
 			}
