@@ -51,7 +51,7 @@ abstract class DumpEntities extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Generate a JSON dump from entities in the repository.' );
+		$this->addDescription( 'Generate a ' . $this->getDumpType() . ' dump from entities in the repository.' );
 
 		$this->addOption( 'list-file', "A file containing one entity ID per line.", false, true );
 		$this->addOption(
@@ -100,6 +100,12 @@ abstract class DumpEntities extends Maintenance {
 		$this->existingEntityTypes = $existingEntityTypes;
 		$this->entityTypesToExcludeFromOutput = $entityTypesToExcludeFromOutput;
 	}
+
+	/**
+	 * Used in description of script at command-line
+	 * @return string
+	 */
+	abstract protected function getDumpType(): string;
 
 	/**
 	 * Create concrete dumper instance

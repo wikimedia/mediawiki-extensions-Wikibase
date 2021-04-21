@@ -189,6 +189,9 @@ class DumpRdf extends DumpEntities {
 		);
 	}
 
+	protected function getDumpType(): string {
+		return "RDF";
+	}
 }
 
 $maintClass = DumpRdf::class;
