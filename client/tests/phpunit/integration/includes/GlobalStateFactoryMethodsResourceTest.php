@@ -38,9 +38,6 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 		$this->disallowHttpAccess();
 		// Configure the site group so that it doesn’t need to fall back to the DB site store
 		$this->configureSiteGroup();
-
-		// reset singleton so no services are cached from when access was still allowed
-		WikibaseClient::getDefaultInstance( 'reset' );
 	}
 
 	private function getExtensionJson(): array {

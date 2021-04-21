@@ -72,8 +72,6 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 	 * Makes sure WikibaseClient uses our ClientStore mock
 	 */
 	private function doMock() {
-		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
-
 		$store = new MockClientStore( 'de' );
 		$entityLookup = static::getEntityLookup();
 		$store->setEntityLookup( $entityLookup );
@@ -108,8 +106,6 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 	}
 
 	private function unMock() {
-		WikibaseClient::getDefaultInstance( 'reset' );
-
 		if ( self::$oldAllowArbitraryDataAccess !== null ) {
 			WikibaseClient::getSettings()->setSetting(
 				'allowArbitraryDataAccess',

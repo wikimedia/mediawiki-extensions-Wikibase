@@ -27,28 +27,11 @@ use Wikibase\Client\WikibaseClient;
  */
 class ParserHookHandlerTest extends MediaWikiIntegrationTestCase {
 
-	private function resetWikibaseClient(): WikibaseClient {
-		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
-
-		// clear any hook container or handler which might hold a stale
-		// RestrictedEntityLookup after we reset WikibaseClient
-		$this->resetServices();
-
-		return $wikibaseClient;
-	}
-
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->resetWikibaseClient();
-
 		$store = new MockClientStore( 'de' );
 		$this->setService( 'WikibaseClient.Store', $store );
-	}
-
-	protected function tearDown(): void {
-		$this->resetWikibaseClient();
-		parent::tearDown();
 	}
 
 	public function testStateCleared() {

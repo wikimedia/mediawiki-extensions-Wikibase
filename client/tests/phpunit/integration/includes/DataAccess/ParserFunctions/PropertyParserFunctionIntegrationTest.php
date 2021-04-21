@@ -41,7 +41,6 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 	protected function setUp(): void {
 		parent::setUp();
 
-		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
 		$this->maskPropertyLabelResolver();
 
 		$store = new MockClientStore( 'de' );
@@ -81,7 +80,6 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 		parent::tearDown();
 
 		$this->setAllowDataAccessInUserLanguage( $this->oldAllowDataAccessInUserLanguage );
-		WikibaseClient::getDefaultInstance( 'reset' );
 	}
 
 	/**
