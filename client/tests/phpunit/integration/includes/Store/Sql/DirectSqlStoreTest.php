@@ -44,8 +44,6 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
-
 		$wikibaseServices = $this->createMock( WikibaseServices::class );
 
 		$wikibaseServices->method( 'getEntityPrefetcher' )
@@ -68,11 +66,6 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 			wfWikiID(),
 			'en'
 		);
-	}
-
-	public static function tearDownAfterClass(): void {
-		// ensure we don’t leave an instance with non-default settings behind
-		WikibaseClient::getDefaultInstance( 'reset' );
 	}
 
 	/**

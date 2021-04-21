@@ -47,8 +47,6 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 	protected function setUp(): void {
 		parent::setUp();
 
-		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
-
 		$store = new MockClientStore( 'de' );
 		$this->setService( 'WikibaseClient.Store', $store );
 
@@ -111,12 +109,6 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 		$item->getSiteLinkList()->addNewSiteLink( $siteId, 'Linked page' );
 
 		$mockRepository->putEntity( $item );
-	}
-
-	protected function tearDown(): void {
-		parent::tearDown();
-
-		WikibaseClient::getDefaultInstance( 'reset' );
 	}
 
 	private function getGlobalConceptBaseUriForUnits(): string {

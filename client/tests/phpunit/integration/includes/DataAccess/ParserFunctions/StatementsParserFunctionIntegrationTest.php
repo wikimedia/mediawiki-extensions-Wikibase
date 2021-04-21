@@ -59,7 +59,6 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 	protected function setUp(): void {
 		parent::setUp();
 
-		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
 		$this->maskPropertyLabelResolver();
 
 		$store = new MockClientStore( 'de' );
@@ -107,8 +106,6 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 
 		$settings = WikibaseClient::getSettings();
 		$settings->setSetting( 'useKartographerMaplinkInWikitext', $this->oldUseKartographerMaplinkInWikitext );
-
-		WikibaseClient::getDefaultInstance( 'reset' );
 	}
 
 	/**
