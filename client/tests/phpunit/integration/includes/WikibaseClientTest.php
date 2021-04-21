@@ -8,7 +8,6 @@ use MediaWikiIntegrationTestCase;
 use ReflectionClass;
 use ReflectionMethod;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
-use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -83,11 +82,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetSettingsReturnType() {
 		$returnValue = WikibaseClient::getSettings();
 		$this->assertInstanceOf( SettingsArray::class, $returnValue );
-	}
-
-	public function testGetParserOutputDataUpdaterType() {
-		$returnValue = $this->getWikibaseClient()->getParserOutputDataUpdater();
-		$this->assertInstanceOf( ClientParserOutputDataUpdater::class, $returnValue );
 	}
 
 	public function testGetDefaultInstance() {

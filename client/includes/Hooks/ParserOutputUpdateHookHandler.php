@@ -12,7 +12,6 @@ use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
@@ -55,14 +54,13 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 	public static function factory(
 		EntityIdParser $entityIdParser,
 		LangLinkHandlerFactory $langLinkHandlerFactory,
-		NamespaceChecker $namespaceChecker
+		NamespaceChecker $namespaceChecker,
+		ClientParserOutputDataUpdater $parserOutputDataUpdater
 	): self {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
 		return new self(
 			$namespaceChecker,
 			$langLinkHandlerFactory,
-			$wikibaseClient->getParserOutputDataUpdater(),
+			$parserOutputDataUpdater,
 			new EntityUsageFactory( $entityIdParser )
 		);
 	}

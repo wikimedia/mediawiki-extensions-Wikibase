@@ -100,7 +100,8 @@
 			"services": [
 				"WikibaseClient.EntityIdParser",
 				"WikibaseClient.LangLinkHandlerFactory",
-				"WikibaseClient.NamespaceChecker"
+				"WikibaseClient.NamespaceChecker",
+				"WikibaseClient.ParserOutputDataUpdater"
 			]
 		},
 		"DataUpdate": {

@@ -33,6 +33,7 @@ use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\OtherProjectsSitesGenerator;
 use Wikibase\Client\OtherProjectsSitesProvider;
+use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\Client\RepoLinker;
@@ -542,6 +543,17 @@ return [
 			// sharedCacheDuration, but can not reuse these because this here is not shared.
 			ObjectCache::getLocalClusterInstance(),
 			60 * 60
+		);
+	},
+
+	'WikibaseClient.ParserOutputDataUpdater' => function ( MediaWikiServices $services ): ClientParserOutputDataUpdater {
+		return new ClientParserOutputDataUpdater(
+			WikibaseClient::getOtherProjectsSidebarGeneratorFactory( $services ),
+			WikibaseClient::getStore( $services )->getSiteLinkLookup(),
+			WikibaseClient::getEntityLookup( $services ),
+			new EntityUsageFactory( WikibaseClient::getEntityIdParser( $services ) ),
+			WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' ),
+			WikibaseClient::getLogger( $services )
 		);
 	},
 
