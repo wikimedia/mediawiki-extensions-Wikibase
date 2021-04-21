@@ -124,6 +124,9 @@ class DumpJson extends DumpEntities {
 		return $dumper;
 	}
 
+	protected function getDumpType(): string {
+		return "JSON";
+	}
 }
 
 $maintClass = DumpJson::class;
