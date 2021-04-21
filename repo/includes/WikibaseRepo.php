@@ -805,10 +805,7 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.LegacyFormatDetectorCallback' );
 	}
 
-	public static function getApiHelperFactory( /* TODO ContainerInterface */ $services = null ): ApiHelperFactory {
-		if ( !( $services instanceof ContainerInterface ) ) {
-			$services = null; // TODO remove this block
-		}
+	public static function getApiHelperFactory( ContainerInterface $services = null ): ApiHelperFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.ApiHelperFactory' );
 	}
