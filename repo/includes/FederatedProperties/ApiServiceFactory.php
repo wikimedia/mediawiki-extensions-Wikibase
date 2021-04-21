@@ -3,14 +3,23 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
+use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Logger\LoggerFactory;
-use MediaWiki\MediaWikiServices;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\DataTypeDefinitions;
 
 /**
  * @license GPL-2.0-or-later
  */
 class ApiServiceFactory {
+
+	/** @var HttpRequestFactory */
+	private $httpRequestFactory;
+
+	/** @var array */
+	private $contentModelMappings;
+
+	/** @var DataTypeDefinitions */
+	private $dataTypeDefinitions;
 
 	/**
 	 * @var string
@@ -32,15 +41,16 @@ class ApiServiceFactory {
 	 */
 	private $apiEntityNamespaceInfoLookup = null;
 
-	/**
-	 * ApiServiceFactory constructor.
-	 * @param string $federatedPropertiesSourceScriptUrl
-	 * @param string $serverName
-	 */
 	public function __construct(
+		HttpRequestFactory $httpRequestFactory,
+		array $contentModelMappings,
+		DataTypeDefinitions $dataTypeDefinitions,
 		string $federatedPropertiesSourceScriptUrl,
 		string $serverName
 	) {
+		$this->httpRequestFactory = $httpRequestFactory;
+		$this->contentModelMappings = $contentModelMappings;
+		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->federatedPropertiesSourceScriptUrl = $federatedPropertiesSourceScriptUrl;
 		$this->serverName = $serverName;
 	}
@@ -51,7 +61,7 @@ class ApiServiceFactory {
 
 	private function newFederatedPropertiesApiClient(): GenericActionApiClient {
 		return new GenericActionApiClient(
-			MediaWikiServices::getInstance()->getHttpRequestFactory(),
+			$this->httpRequestFactory,
 			$this->getUrlForScriptFile( 'api.php' ),
 			LoggerFactory::getInstance( 'Wikibase.FederatedProperties' ),
 			$this->serverName
@@ -61,7 +71,7 @@ class ApiServiceFactory {
 	public function newApiEntitySearchHelper(): ApiEntitySearchHelper {
 		return new ApiEntitySearchHelper(
 			$this->newFederatedPropertiesApiClient(),
-			WikibaseRepo::getDataTypeDefinitions()->getTypeIds()
+			$this->dataTypeDefinitions->getTypeIds()
 		);
 	}
 
@@ -73,7 +83,7 @@ class ApiServiceFactory {
 		if ( $this->apiEntityNamespaceInfoLookup === null ) {
 			$this->apiEntityNamespaceInfoLookup = new ApiEntityNamespaceInfoLookup(
 				$this->newFederatedPropertiesApiClient(),
-				WikibaseRepo::getContentModelMappings()
+				$this->contentModelMappings
 			);
 		}
 		return $this->apiEntityNamespaceInfoLookup;

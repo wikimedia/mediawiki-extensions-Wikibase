@@ -949,6 +949,9 @@ return [
 		}
 
 		return new ApiServiceFactory(
+			$services->getHttpRequestFactory(),
+			WikibaseRepo::getContentModelMappings( $services ),
+			WikibaseRepo::getDataTypeDefinitions( $services ),
 			$settings->getSetting( 'federatedPropertiesSourceScriptUrl' ),
 			$services->getMainConfig()->get( 'ServerName' )
 		);
