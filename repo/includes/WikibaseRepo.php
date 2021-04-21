@@ -323,30 +323,9 @@ class WikibaseRepo {
 	 *
 	 * If you need different caching behavior, use {@link Store::getEntityRevisionLookup()} instead.
 	 */
-	public static function getEntityRevisionLookup( $servicesOrCache = null ): EntityRevisionLookup {
-		// For backwards compatibility, we temporarily support several calling conventions:
-		// getEntityRevisionLookup() – default $services, $cache
-		// getEntityRevisionLookup( $services ) – default $cache
-		// getEntityRevisionLookup( $cache ) – default $services (deprecated)
-		// TODO remove all this and change the method syntax to the standard form
-		// public static function getEntityRevisionLookup( ContainerInterface $services = null ): EntityRevisionLookup
-
-		if ( $servicesOrCache === null ) {
-			$servicesOrCache = MediaWikiServices::getInstance();
-		}
-
-		if ( $servicesOrCache instanceof ContainerInterface ) {
-			$services = $servicesOrCache;
-			return $services->get( 'WikibaseRepo.EntityRevisionLookup' );
-		} else {
-			wfDeprecated(
-				__METHOD__ . ' with non-default $cache',
-				'1.37',
-				'WikibaseRepo'
-			);
-			$cache = $servicesOrCache;
-			return self::getStore()->getEntityRevisionLookup( $cache );
-		}
+	public static function getEntityRevisionLookup( ContainerInterface $services = null ): EntityRevisionLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityRevisionLookup' );
 	}
 
 	/**
