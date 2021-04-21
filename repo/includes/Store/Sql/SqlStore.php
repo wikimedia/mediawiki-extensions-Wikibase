@@ -381,7 +381,8 @@ class SqlStore implements Store {
 		$nonCachingLookup = $this->wikibaseServices->getEntityRevisionLookup();
 
 		$nonCachingLookup = new TypeDispatchingEntityRevisionLookup(
-			WikibaseRepo::getDefaultInstance()->getEntityRevisionLookupFactoryCallbacks(),
+			WikibaseRepo::getEntityTypeDefinitions() // TODO inject
+				->get( EntityTypeDefinitions::ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK ),
 			$nonCachingLookup
 		);
 

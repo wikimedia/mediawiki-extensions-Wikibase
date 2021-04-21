@@ -324,13 +324,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return callable[]
-	 */
-	public function getEntityRevisionLookupFactoryCallbacks() {
-		return self::getEntityTypeDefinitions()->get( EntityTypeDefinitions::ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK );
-	}
-
-	/**
 	 * @param User $user
 	 * @param IContextSource $context
 	 *
