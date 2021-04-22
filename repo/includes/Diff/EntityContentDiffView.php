@@ -45,9 +45,7 @@ class EntityContentDiffView extends DifferenceEngine {
 	public function __construct( $context = null, $old = 0, $new = 0, $rcid = 0, $refreshCache = false, $unhide = false ) {
 		parent::__construct( $context, $old, $new, $rcid, $refreshCache, $unhide );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$entityDiffVisualizerFactory = $wikibaseRepo->getEntityDiffVisualizerFactory();
+		$entityDiffVisualizerFactory = WikibaseRepo::getEntityDiffVisualizerFactory();
 		$this->diffVisualizer = new DispatchingEntityDiffVisualizer( $entityDiffVisualizerFactory, $context );
 	}
 
