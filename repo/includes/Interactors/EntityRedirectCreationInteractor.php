@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Interactors;
 
 use IContextSource;
-use RequestContext;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -70,7 +69,6 @@ abstract class EntityRedirectCreationInteractor {
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,
 		SummaryFormatter $summaryFormatter,
-		$context,
 		$editFilterHookRunner,
 		$entityRedirectLookup,
 		$entityTitleLookup = null
@@ -79,13 +77,9 @@ abstract class EntityRedirectCreationInteractor {
 		$this->entityStore = $entityStore;
 		$this->permissionChecker = $permissionChecker;
 		$this->summaryFormatter = $summaryFormatter;
-
-		// FIXME: Temporary compatibility code for Lexeme - restore typehinting
-		// 		  and remove $context
-		$hasContext = $context instanceof IContextSource;
-		$this->editFilterHookRunner = $hasContext ? $editFilterHookRunner : $context;
-		$this->entityRedirectLookup = $hasContext ? $entityRedirectLookup : $editFilterHookRunner;
-		$this->entityTitleLookup = $hasContext ? $entityTitleLookup : $entityRedirectLookup;
+		$this->editFilterHookRunner = $editFilterHookRunner;
+		$this->entityRedirectLookup = $entityRedirectLookup;
+		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
 	/**
@@ -107,13 +101,8 @@ abstract class EntityRedirectCreationInteractor {
 		EntityId $fromId,
 		EntityId $toId,
 		bool $bot,
-		?IContextSource $context = null
+		IContextSource $context
 	): EntityRedirect {
-		// FIXME: Temporary compatibility code for Lexeme - Ensure context is
-		// 		  passed and not optional or make sure there are no risks in
-		// 		  falling back to RequestContext
-		$context = $context ?? RequestContext::getMain();
-
 		$this->checkCompatible( $fromId, $toId );
 		$this->checkPermissions( $fromId, $context );
 
