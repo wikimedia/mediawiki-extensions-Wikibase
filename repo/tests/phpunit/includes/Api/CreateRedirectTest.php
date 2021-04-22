@@ -8,7 +8,6 @@ use FauxRequest;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
-use RequestContext;
 use Status;
 use Title;
 use User;
@@ -130,17 +129,12 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 			Language::factory( 'en' )
 		);
 
-		$context = new RequestContext();
-		$context->setRequest( new FauxRequest() );
-		$context->setUser( $user );
-
 		if ( !$interactor ) {
 			$interactor = new ItemRedirectCreationInteractor(
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				WikibaseRepo::getSummaryFormatter(),
-				$context,
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository,
 				$this->getMockEntityTitleLookup()

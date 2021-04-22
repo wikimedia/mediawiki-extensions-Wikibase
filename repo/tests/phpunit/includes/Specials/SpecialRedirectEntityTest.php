@@ -6,7 +6,6 @@ use Exception;
 use FauxRequest;
 use PHPUnit\Framework\Error\Error;
 use RawMessage;
-use RequestContext;
 use SpecialPageTestBase;
 use Status;
 use Title;
@@ -19,7 +18,6 @@ use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\TokenCheckException;
-use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Specials\SpecialRedirectEntity;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -133,20 +131,14 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 				return new RawMessage( '(@' . $text . '@)' );
 			} );
 
-		$context = new RequestContext();
-		$context->setRequest( $this->request );
-		$context->setUser( $this->user );
-
 		return new SpecialRedirectEntity(
 			WikibaseRepo::getEntityIdParser(),
 			$exceptionLocalizer,
-			new TokenCheckInteractor( $this->user ),
 			new ItemRedirectCreationInteractor(
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				WikibaseRepo::getSummaryFormatter(),
-				$context,
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository,
 				$this->getMockEntityTitleLookup()
@@ -170,11 +162,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 
 		$request = new FauxRequest( $params, true );
 
-		// HACK: we need this in newSpecialPage, but executeSpecialPage doesn't pass the context on.
-		$this->user = $user;
-		$this->request = $request;
-
-		list( $html, ) = $this->executeSpecialPage( '', $request, 'qqx' );
+		list( $html, ) = $this->executeSpecialPage( '', $request, 'qqx', $user );
 		return $html;
 	}
 

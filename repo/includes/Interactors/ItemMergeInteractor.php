@@ -2,8 +2,10 @@
 
 namespace Wikibase\Repo\Interactors;
 
+use IContextSource;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\PermissionManager;
+use RequestContext;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -129,6 +131,7 @@ class ItemMergeInteractor {
 	 * @param string[] $ignoreConflicts The kinds of conflicts to ignore
 	 * @param string|null $summary
 	 * @param bool $bot Mark the edit as bot edit
+	 * @param IContextSource|null $context ContextSource to pass down to createRedirect
 	 *
 	 * @return array A list of exactly two EntityRevision objects and a boolean. The first
 	 *  EntityRevision object represents the modified source item, the second one represents the
@@ -142,9 +145,15 @@ class ItemMergeInteractor {
 		ItemId $fromId,
 		ItemId $toId,
 		array $ignoreConflicts = [],
-		$summary = null,
-		$bot = false
+		?string $summary = null,
+		bool $bot = false,
+		?IContextSource $context = null
 	) {
+		// TODO: Temporary compatibility code: Ensure context is passed and not
+		// 		 optional or make sure there are no risks in falling back to
+		// 		 RequestContext. To be resolved in T280817
+		$context = $context ?? RequestContext::getMain();
+
 		$this->checkPermissions( $fromId );
 		$this->checkPermissions( $toId );
 
@@ -178,7 +187,7 @@ class ItemMergeInteractor {
 		$redirected = false;
 
 		if ( $this->isEmpty( $fromId ) ) {
-			$this->interactorRedirect->createRedirect( $fromId, $toId, $bot );
+			$this->interactorRedirect->createRedirect( $fromId, $toId, $bot, $context );
 			$redirected = true;
 		}
 

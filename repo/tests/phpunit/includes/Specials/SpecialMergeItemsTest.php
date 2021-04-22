@@ -9,7 +9,6 @@ use MediaWiki\MediaWikiServices;
 use PermissionsError;
 use PHPUnit\Framework\Error\Error;
 use RawMessage;
-use RequestContext;
 use SpecialPageTestBase;
 use Status;
 use TestSites;
@@ -152,10 +151,6 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 				return new RawMessage( '(@' . $text . '@)' );
 			} );
 
-		$context = new RequestContext();
-		$context->setRequest( $this->request );
-		$context->setUser( $this->user );
-
 		$titleLookup = $this->getEntityTitleLookup();
 		$specialPage = new SpecialMergeItems(
 			WikibaseRepo::getEntityIdParser(),
@@ -173,7 +168,6 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 						$this->mockRepository,
 						$this->getPermissionCheckers(),
 						$summaryFormatter,
-						$context,
 						$this->getMockEditFilterHookRunner(),
 						$this->mockRepository,
 						$this->getMockEntityTitleLookup()
