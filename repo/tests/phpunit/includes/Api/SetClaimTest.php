@@ -473,7 +473,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 			if ( $error ) {
 				/** @var \ApiMessage $msg */
 				$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
-				$this->assertEquals( $error, $msg->getApiCode(), 'Wrong error code: ' . $msg->toString() );
+				$this->assertEquals( $error, $msg->getApiCode(), 'Wrong error code: ' . $msg->plain() );
 			} else {
 				$this->fail( "Caused unexpected error!" . $ex );
 			}
