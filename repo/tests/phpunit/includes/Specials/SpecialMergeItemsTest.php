@@ -23,7 +23,6 @@ use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckException;
-use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\Repo\Specials\SpecialMergeItems;
@@ -56,11 +55,6 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 * @var MockRepository|null
 	 */
 	private $mockRepository = null;
-
-	/**
-	 * @var User|null
-	 */
-	private $user = null;
 
 	/** @var WebRequest */
 	private $request;
@@ -155,14 +149,12 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$specialPage = new SpecialMergeItems(
 			WikibaseRepo::getEntityIdParser(),
 			$exceptionLocalizer,
-			new TokenCheckInteractor( $this->user ),
 			new ItemMergeInteractor(
 				$mergeFactory,
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
-				$this->user,
 				new ItemRedirectCreationInteractor(
 						$this->mockRepository,
 						$this->mockRepository,
@@ -220,11 +212,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		$request = new \FauxRequest( $params, true );
 
-		// HACK: we need this in newSpecialPage, but executeSpecialPage doesn't pass the context on.
-		$this->user = $user;
-		$this->request = $request;
-
-		list( $html, ) = $this->executeSpecialPage( '', $request, 'qqx' );
+		list( $html, ) = $this->executeSpecialPage( '', $request, 'qqx', $user );
 		return $html;
 	}
 

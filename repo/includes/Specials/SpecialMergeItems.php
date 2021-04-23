@@ -45,11 +45,6 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	private $interactor;
 
 	/**
-	 * @var TokenCheckInteractor
-	 */
-	private $tokenCheck;
-
-	/**
 	 * @var EntityTitleLookup
 	 */
 	private $titleLookup;
@@ -57,7 +52,6 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	public function __construct(
 		EntityIdParser $idParser,
 		ExceptionLocalizer $exceptionLocalizer,
-		TokenCheckInteractor $tokenCheck,
 		ItemMergeInteractor $interactor,
 		EntityTitleLookup $titleLookup
 	) {
@@ -65,7 +59,6 @@ class SpecialMergeItems extends SpecialWikibasePage {
 
 		$this->idParser = $idParser;
 		$this->exceptionLocalizer = $exceptionLocalizer;
-		$this->tokenCheck = $tokenCheck;
 		$this->interactor = $interactor;
 		$this->titleLookup = $titleLookup;
 	}
@@ -80,7 +73,6 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		return new self(
 			$entityIdParser,
 			$exceptionLocalizer,
-			new TokenCheckInteractor( RequestContext::getMain()->getUser() ),
 			$wikibaseRepo->newItemMergeInteractor( RequestContext::getMain() ),
 			$entityTitleLookup
 		);
@@ -190,14 +182,15 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 * @param string $summary
 	 */
 	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary ) {
-		$this->tokenCheck->checkRequestToken( $this->getRequest(), 'wpEditToken' );
+		$tokenCheck = new TokenCheckInteractor( $this->getUser() );
+		$tokenCheck->checkRequestToken( $this->getRequest(), 'wpEditToken' );
 		$fromTitle = $this->titleLookup->getTitleForId( $fromId );
 		$toTitle = $this->titleLookup->getTitleForId( $toId );
 
 		/** @var EntityRevision $newRevisionFrom */
 		/** @var EntityRevision $newRevisionTo */
 		list( $newRevisionFrom, $newRevisionTo, )
-			= $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
+			= $this->interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, $summary );
 
 		$linkRenderer = $this->getLinkRenderer();
 		$this->getOutput()->addWikiMsg(

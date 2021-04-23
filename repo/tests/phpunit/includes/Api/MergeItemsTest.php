@@ -195,7 +195,6 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				WikibaseRepo::getSummaryFormatter(),
-				$main->getUser(),
 				$this->getMockRedirectCreationInteractor( $expectedRedirect ),
 				$this->getEntityTitleStoreLookup(),
 				MediaWikiServices::getInstance()->getPermissionManager()
