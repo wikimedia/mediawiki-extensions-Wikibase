@@ -155,7 +155,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @param Skin $skin
 	 * @param object $result
 	 *
-	 * @return string
+	 * @return string|bool
 	 */
 	public function formatResult( $skin, $result ) {
 		$title = $this->titleFactory->newFromID( $result->value );
