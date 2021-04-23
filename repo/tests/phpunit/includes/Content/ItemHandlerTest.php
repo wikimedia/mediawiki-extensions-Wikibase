@@ -213,8 +213,6 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	 * @return ItemHandler
 	 */
 	private function getItemHandlerWithMockedPropertyDataTypeLookup() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		return new ItemHandler(
 			new NullEntityTermStoreWriter(),
 			WikibaseRepo::getEntityContentDataCodec(),

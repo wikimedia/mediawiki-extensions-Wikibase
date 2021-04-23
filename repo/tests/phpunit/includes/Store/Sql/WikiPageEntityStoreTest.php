@@ -1028,8 +1028,6 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function createStoreForCustomEntitySource() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$customSource = new EntitySource(
 			'custom',
 			'customdb',
@@ -1046,7 +1044,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					'custom-type' => 'wikibase-custom-type',
 				],
 				[
-					'custom-type' => function() use ( $wikibaseRepo ) {
+					'custom-type' => function() {
 						return $this->newCustomEntityHandler();
 					},
 				]

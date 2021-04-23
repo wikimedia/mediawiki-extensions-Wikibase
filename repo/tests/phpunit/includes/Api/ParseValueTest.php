@@ -42,8 +42,6 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$exceptionLocalizer = WikibaseRepo::getExceptionLocalizer();
 		$validatorErrorLocalizer = WikibaseRepo::getValidatorErrorLocalizer();
 

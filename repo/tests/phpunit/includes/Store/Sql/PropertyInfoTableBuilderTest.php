@@ -85,7 +85,6 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testRebuildPropertyInfo() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$irrelevantPropertyNamespaceId = 200;
 		$irrelevantPropertySlotName = 'main';
 		$entitySource = new EntitySource(

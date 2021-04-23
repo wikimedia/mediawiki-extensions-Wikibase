@@ -164,7 +164,6 @@ return [
 			);
 		},
 		Def::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK => function( Language $language ) {
-			$repo = WikibaseRepo::getDefaultInstance();
 			$languageLabelLookupFactory = WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory();
 			$languageLabelLookup = $languageLabelLookupFactory->newLabelDescriptionLookup( $language );
 			return new LabelsProviderEntityIdHtmlLinkFormatter(
@@ -266,7 +265,6 @@ return [
 			);
 		},
 		Def::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK => function( Language $language ) {
-			$repo = WikibaseRepo::getDefaultInstance();
 			$languageLabelLookupFactory = WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory();
 			$languageLabelLookup = $languageLabelLookupFactory->newLabelDescriptionLookup( $language );
 			return new LabelsProviderEntityIdHtmlLinkFormatter(

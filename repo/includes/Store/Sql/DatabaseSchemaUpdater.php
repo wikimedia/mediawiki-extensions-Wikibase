@@ -224,7 +224,6 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	 * @param DatabaseUpdater $updater
 	 */
 	public static function rebuildPropertyInfo( DatabaseUpdater $updater ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$localEntitySourceName = WikibaseRepo::getSettings()->getSetting( 'localEntitySourceName' );
 		$propertySource = WikibaseRepo::getEntitySourceDefinitions()
 			->getSourceForEntityType( 'property' );
@@ -274,7 +273,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			$table,
 			new LegacyAdapterPropertyLookup( $entityLookup ),
 			$propertyInfoBuilder,
-			$wikibaseRepo->getEntityIdComposer(),
+			WikibaseRepo::getEntityIdComposer(),
 			$entityNamespaceLookup
 		);
 		$builder->setReporter( $reporter );
@@ -285,7 +284,6 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	}
 
 	public static function rebuildPropertyTerms( DatabaseUpdater $updater ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$localEntitySourceName = WikibaseRepo::getSettings()->getSetting( 'localEntitySourceName' );
 		$propertySource = WikibaseRepo::getEntitySourceDefinitions()
 			->getSourceForEntityType( 'property' );
@@ -326,7 +324,6 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	}
 
 	public static function rebuildItemTerms( DatabaseUpdater $updater ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$localEntitySourceName = WikibaseRepo::getSettings()->getSetting( 'localEntitySourceName' );
 		$itemSource = WikibaseRepo::getEntitySourceDefinitions()
 			->getSourceForEntityType( 'item' );

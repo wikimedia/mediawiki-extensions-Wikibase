@@ -23,11 +23,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
  */
 class RebuildPropertyTerms extends Maintenance {
 
-	/**
-	 * @var WikibaseRepo
-	 */
-	private $wikibaseRepo;
-
 	public function __construct() {
 		parent::__construct();
 
@@ -63,9 +58,6 @@ class RebuildPropertyTerms extends Maintenance {
 				1
 			);
 		}
-
-		$this->wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$rebuilder = new PropertyTermsRebuilder(
 			WikibaseRepo::getTermStoreWriterFactory()->newPropertyTermStoreWriter(),
 			$this->newEntityIdPager(),
