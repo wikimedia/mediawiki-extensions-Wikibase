@@ -69,9 +69,9 @@ abstract class EntityRedirectCreationInteractor {
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,
 		SummaryFormatter $summaryFormatter,
-		$editFilterHookRunner,
-		$entityRedirectLookup,
-		$entityTitleLookup = null
+		EditFilterHookRunner $editFilterHookRunner,
+		EntityRedirectLookup $entityRedirectLookup,
+		EntityTitleStoreLookup $entityTitleLookup
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
