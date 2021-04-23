@@ -334,7 +334,6 @@ class WikibaseRepo {
 			self::getEntityStore(),
 			self::getEntityPermissionChecker(),
 			self::getSummaryFormatter(),
-			$context,
 			self::getEditFilterHookRunner(),
 			$store->getEntityRedirectLookup(),
 			self::getEntityTitleStoreLookup()

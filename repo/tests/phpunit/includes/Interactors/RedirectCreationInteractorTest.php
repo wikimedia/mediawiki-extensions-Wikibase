@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Interactors;
 
 use FauxRequest;
+use IContextSource;
 use PHPUnit\Framework\MockObject\Matcher\InvokedRecorder;
 use RequestContext;
 use Status;
@@ -121,31 +122,19 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function newInteractor(
 		$efHookCalls = null,
-		Status $efHookStatus = null,
-		User $user = null
+		Status $efHookStatus = null
 	) {
-		if ( !$user ) {
-			$user = $this->createMock( User::class );
-		}
-
 		$summaryFormatter = WikibaseRepo::getSummaryFormatter();
 
-		$context = new RequestContext();
-		$context->setRequest( new FauxRequest() );
-		$context->setUser( $user );
-
-		$interactor = new ItemRedirectCreationInteractor(
+		return new ItemRedirectCreationInteractor(
 			$this->mockRepository,
 			$this->mockRepository,
 			$this->getPermissionChecker(),
 			$summaryFormatter,
-			$context,
 			$this->getMockEditFilterHookRunner( $efHookCalls, $efHookStatus ),
 			$this->mockRepository,
 			$this->getMockEntityTitleLookup()
 		);
-
-		return $interactor;
 	}
 
 	/**
@@ -165,6 +154,14 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		return $titleLookup;
 	}
 
+	private function getContext( User $user = null ): IContextSource {
+		$context = new RequestContext();
+		$context->setRequest( new FauxRequest() );
+		$context->setUser( $user ?? $this->createMock( User::class ) );
+
+		return $context;
+	}
+
 	public function createRedirectProvider_success() {
 		return [
 			'redirect empty entity' => [ new ItemId( 'Q11' ), new ItemId( 'Q12' ) ],
@@ -179,7 +176,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	public function testCreateRedirect_success( EntityId $fromId, EntityId $toId ) {
 		$interactor = $this->newInteractor( $this->once() );
 
-		$interactor->createRedirect( $fromId, $toId, false );
+		$interactor->createRedirect( $fromId, $toId, false, $this->getContext() );
 
 		try {
 			$this->mockRepository->getEntity( $fromId );
@@ -257,7 +254,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		$interactor = $this->newInteractor( null, $efStatus );
 
 		try {
-			$interactor->createRedirect( $fromId, $toId, false );
+			$interactor->createRedirect( $fromId, $toId, false, $this->getContext() );
 			$this->fail( 'createRedirect not fail with error ' . $expectedCode . ' as expected!' );
 		} catch ( RedirectCreationException $ex ) {
 			$this->assertEquals( $expectedCode, $ex->getErrorCode() );
@@ -271,8 +268,8 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 
 		$user = User::newFromName( 'UserWithoutPermission' );
 
-		$interactor = $this->newInteractor( null, null, $user );
-		$interactor->createRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ), false );
+		$interactor = $this->newInteractor( null, null );
+		$interactor->createRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ), false, $this->getContext( $user ) );
 	}
 
 }
