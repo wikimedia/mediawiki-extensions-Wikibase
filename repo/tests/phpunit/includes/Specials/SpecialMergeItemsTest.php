@@ -148,6 +148,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$titleLookup = $this->getEntityTitleLookup();
 		$specialPage = new SpecialMergeItems(
 			WikibaseRepo::getEntityIdParser(),
+			$titleLookup,
 			$exceptionLocalizer,
 			new ItemMergeInteractor(
 				$mergeFactory,
@@ -166,8 +167,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 				),
 				$titleLookup,
 				MediaWikiServices::getInstance()->getPermissionManager()
-			),
-			$titleLookup
+			)
 		);
 
 		$linkRenderer = $this->getMockBuilder( LinkRenderer::class )

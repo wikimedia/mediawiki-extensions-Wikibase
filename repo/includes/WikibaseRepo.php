@@ -6,7 +6,6 @@ use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Exception;
-use IContextSource;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MWException;
@@ -761,23 +760,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EditEntityFactory' );
 	}
 
-	/**
-	 * @param IContextSource $context
-	 *
-	 * @return ItemMergeInteractor
-	 */
-	public function newItemMergeInteractor( IContextSource $context ) {
-		return new ItemMergeInteractor(
-			self::getChangeOpFactoryProvider()->getMergeFactory(),
-			self::getStore()
-				->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
-			self::getEntityStore(),
-			self::getEntityPermissionChecker(),
-			self::getSummaryFormatter(),
-			self::getItemRedirectCreationInteractor(),
-			self::getEntityTitleStoreLookup(),
-			MediaWikiServices::getInstance()->getPermissionManager()
-		);
+	public function getItemMergeInteractor( ContainerInterface $services = null ): ItemMergeInteractor {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ItemMergeInteractor' );
 	}
 
 	public static function getEntityNamespaceLookup( ContainerInterface $services = null ): EntityNamespaceLookup {

@@ -164,6 +164,7 @@ use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 use Wikibase\Repo\FederatedProperties\WrappingEntityIdFormatterFactory;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
+use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
@@ -1085,6 +1086,21 @@ return [
 				->getFieldDefinitionsByType( Item::ENTITY_TYPE ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			WikibaseRepo::getLegacyFormatDetectorCallback( $services )
+		);
+	},
+
+	'WikibaseRepo.ItemMergeInteractor' => function ( MediaWikiServices $services ): ItemMergeInteractor {
+		return new ItemMergeInteractor(
+			WikibaseRepo::getChangeOpFactoryProvider( $services )
+				->getMergeFactory(),
+			WikibaseRepo::getStore( $services )
+				->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
+			WikibaseRepo::getEntityStore( $services ),
+			WikibaseRepo::getEntityPermissionChecker( $services ),
+			WikibaseRepo::getSummaryFormatter( $services ),
+			WikibaseRepo::getItemRedirectCreationInteractor( $services ),
+			WikibaseRepo::getEntityTitleStoreLookup( $services ),
+			$services->getPermissionManager()
 		);
 	},
 

@@ -16,7 +16,6 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
 use ReflectionClass;
 use ReflectionMethod;
-use RequestContext;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -30,7 +29,6 @@ use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Validators\CompositeValidator;
@@ -261,11 +259,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 			],
 			$this->entityTypeDefinitions
 		);
-	}
-
-	public function testNewItemMergeInteractor() {
-		$interactor = $this->getWikibaseRepo()->newItemMergeInteractor( new RequestContext() );
-		$this->assertInstanceOf( ItemMergeInteractor::class, $interactor );
 	}
 
 	public function testGetDataTypeDefinitions() {

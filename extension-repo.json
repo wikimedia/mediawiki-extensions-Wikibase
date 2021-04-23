@@ -113,7 +113,8 @@
 			"factory": "\\Wikibase\\Repo\\Api\\MergeItems::factory",
 			"services": [
 				"WikibaseRepo.ApiHelperFactory",
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.ItemMergeInteractor"
 			]
 		},
 		"wbparsevalue": {
@@ -486,11 +487,11 @@
 		},
 		"MergeItems": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialMergeItems",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialMergeItems::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.EntityTitleLookup",
-				"WikibaseRepo.ExceptionLocalizer"
+				"WikibaseRepo.ExceptionLocalizer",
+				"WikibaseRepo.ItemMergeInteractor"
 			]
 		},
 		"RedirectEntity": {
