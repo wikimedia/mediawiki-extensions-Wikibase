@@ -778,8 +778,6 @@ class WikibaseRepo {
 	 * @return ItemMergeInteractor
 	 */
 	public function newItemMergeInteractor( IContextSource $context ) {
-		$user = $context->getUser();
-
 		return new ItemMergeInteractor(
 			self::getChangeOpFactoryProvider()->getMergeFactory(),
 			self::getStore()
@@ -787,7 +785,6 @@ class WikibaseRepo {
 			self::getEntityStore(),
 			self::getEntityPermissionChecker(),
 			self::getSummaryFormatter(),
-			$user,
 			self::getItemRedirectCreationInteractor(),
 			self::getEntityTitleStoreLookup(),
 			MediaWikiServices::getInstance()->getPermissionManager()

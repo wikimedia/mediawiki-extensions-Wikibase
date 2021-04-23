@@ -6,6 +6,7 @@ use ContentHandler;
 use HashSiteStore;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
+use RequestContext;
 use Status;
 use TestSites;
 use Title;
@@ -119,16 +120,23 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		return $mock;
 	}
 
+	private function getContext( User $user = null ) {
+		if ( !$user ) {
+			$user = $this->getTestUser()->getUser();
+		}
+
+		$context = new RequestContext();
+		$context->setUser( $user );
+
+		return $context;
+	}
+
 	/**
 	 * @param User|null $user
 	 *
 	 * @return ItemMergeInteractor
 	 */
-	private function newInteractor( User $user = null ) {
-		if ( !$user ) {
-			$user = $this->getTestUser()->getUser();
-		}
-
+	private function newInteractor() {
 		$summaryFormatter = WikibaseRepo::getSummaryFormatter();
 
 		//XXX: we may want or need to mock some of these services
@@ -144,7 +152,6 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			$this->mockRepository,
 			$this->getPermissionChecker(),
 			$summaryFormatter,
-			$user,
 			new ItemRedirectCreationInteractor(
 				$this->mockRepository,
 				$this->mockRepository,
@@ -340,7 +347,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		$user = $this->getTestSysop()->getUser();
 		$user->addWatch( $entityTitleLookup->getTitleForId( $fromId ) );
 
-		$interactor->mergeItems( $fromId, $toId, $ignoreConflicts, 'CustomSummary' );
+		$interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, 'CustomSummary' );
 
 		$actualTo = $this->testHelper->getEntity( $toId );
 		$this->testHelper->assertEntityEquals( $expectedTo, $actualTo, 'modified target item' );
@@ -398,7 +405,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 	) {
 		try {
 			$interactor = $this->newInteractor();
-			$interactor->mergeItems( $fromId, $toId, $ignoreConflicts );
+			$interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts );
 
 			$this->fail( 'ItemMergeException expected' );
 		} catch ( ItemMergeException $ex ) {
@@ -433,7 +440,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 
 		try {
 			$interactor = $this->newInteractor();
-			$interactor->mergeItems( $fromId, $toId, $ignoreConflicts );
+			$interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts );
 
 			$this->fail( 'ItemMergeException expected' );
 		} catch ( ItemMergeException $ex ) {
@@ -449,8 +456,8 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		$fromId = new ItemId( 'Q1' );
 		$toId = new ItemId( 'Q2' );
 
-		$interactor = $this->newInteractor( $user );
-		$interactor->mergeItems( $fromId, $toId );
+		$interactor = $this->newInteractor();
+		$interactor->mergeItems( $fromId, $toId, $this->getContext( $user ) );
 	}
 
 	private function extractConcreteRevisionId( LatestRevisionIdResult $result ) {

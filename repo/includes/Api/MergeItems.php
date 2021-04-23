@@ -154,7 +154,7 @@ class MergeItems extends ApiBase {
 	 */
 	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, ?string $summary, bool $bot ): void {
 		list( $newRevisionFrom, $newRevisionTo, $redirected )
-			= $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $bot );
+			= $this->interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, $summary, $bot );
 
 		$this->resultBuilder->setValue( null, 'success', 1 );
 		$this->resultBuilder->setValue( null, 'redirected', (int)$redirected );
