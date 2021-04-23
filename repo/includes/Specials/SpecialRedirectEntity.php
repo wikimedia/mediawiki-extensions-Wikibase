@@ -36,16 +36,23 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	 */
 	private $interactor;
 
+	/**
+	 * @var TokenCheckInteractor
+	 */
+	private $tokenCheck;
+
 	public function __construct(
 		EntityIdParser $idParser,
 		ExceptionLocalizer $exceptionLocalizer,
-		ItemRedirectCreationInteractor $interactor
+		ItemRedirectCreationInteractor $interactor,
+		TokenCheckInteractor $tokenCheck
 	) {
 		parent::__construct( 'RedirectEntity' );
 
 		$this->idParser = $idParser;
 		$this->exceptionLocalizer = $exceptionLocalizer;
 		$this->interactor = $interactor;
+		$this->tokenCheck = $tokenCheck;
 	}
 
 	/**
@@ -118,8 +125,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	}
 
 	private function redirectEntity( EntityId $fromId, EntityId $toId ) {
-		$tokenCheck = new TokenCheckInteractor( $this->getUser() );
-		$tokenCheck->checkRequestToken( $this->getRequest(), 'wpEditToken' );
+		$this->tokenCheck->checkRequestToken( $this->getContext(), 'wpEditToken' );
 
 		$this->interactor->createRedirect( $fromId, $toId, false, $this->getContext() );
 

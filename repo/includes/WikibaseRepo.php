@@ -92,6 +92,7 @@ use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
+use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
@@ -758,6 +759,11 @@ class WikibaseRepo {
 	): MediawikiEditEntityFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EditEntityFactory' );
+	}
+
+	public static function getTokenCheckInteractor( ContainerInterface $services = null ): TokenCheckInteractor {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.TokenCheckInteractor' );
 	}
 
 	public static function getItemMergeInteractor( ContainerInterface $services = null ): ItemMergeInteractor {

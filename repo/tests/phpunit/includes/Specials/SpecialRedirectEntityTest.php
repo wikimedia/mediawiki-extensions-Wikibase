@@ -142,7 +142,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository,
 				$this->getMockEntityTitleLookup()
-			)
+			),
+			WikibaseRepo::getTokenCheckInteractor()
 		);
 	}
 

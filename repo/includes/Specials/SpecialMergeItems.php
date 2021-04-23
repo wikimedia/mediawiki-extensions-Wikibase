@@ -47,11 +47,17 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 */
 	private $titleLookup;
 
+	/**
+	 * @var TokenCheckInteractor
+	 */
+	private $tokenCheck;
+
 	public function __construct(
 		EntityIdParser $idParser,
 		EntityTitleLookup $titleLookup,
 		ExceptionLocalizer $exceptionLocalizer,
-		ItemMergeInteractor $interactor
+		ItemMergeInteractor $interactor,
+		TokenCheckInteractor $tokenCheck
 	) {
 		parent::__construct( 'MergeItems', 'item-merge' );
 
@@ -59,6 +65,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		$this->exceptionLocalizer = $exceptionLocalizer;
 		$this->interactor = $interactor;
 		$this->titleLookup = $titleLookup;
+		$this->tokenCheck = $tokenCheck;
 	}
 
 	public function doesWrites() {
@@ -165,8 +172,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 * @param string $summary
 	 */
 	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary ) {
-		$tokenCheck = new TokenCheckInteractor( $this->getUser() );
-		$tokenCheck->checkRequestToken( $this->getRequest(), 'wpEditToken' );
+		$this->tokenCheck->checkRequestToken( $this->getContext(), 'wpEditToken' );
 		$fromTitle = $this->titleLookup->getTitleForId( $fromId );
 		$toTitle = $this->titleLookup->getTitleForId( $toId );
 

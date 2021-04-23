@@ -2,8 +2,7 @@
 
 namespace Wikibase\Repo\Interactors;
 
-use User;
-use WebRequest;
+use IContextSource;
 
 /**
  * Interactor for checking edit tokens
@@ -14,18 +13,9 @@ use WebRequest;
 class TokenCheckInteractor {
 
 	/**
-	 * @var User
-	 */
-	private $user;
-
-	public function __construct( User $user ) {
-		$this->user = $user;
-	}
-
-	/**
-	 * Check the token sent via the given web request
+	 * Check the token sent via the given request context
 	 *
-	 * @param WebRequest $request
+	 * @param IContextSource $context
 	 * @param string $tokenParam
 	 * @param string|null $salt see User::matchEditToken
 	 *
@@ -35,7 +25,9 @@ class TokenCheckInteractor {
 	 * "mustposttoken" if the token was not sent via POST,
 	 * and "badtoken" if the token mismatches (e.g. when session data was lost).
 	 */
-	public function checkRequestToken( WebRequest $request, $tokenParam, $salt = null ) {
+	public function checkRequestToken( IContextSource $context, string $tokenParam, $salt = null ): void {
+		$request = $context->getRequest();
+
 		if ( !$request->getCheck( $tokenParam ) ) {
 			throw new TokenCheckException( 'Token required', 'missingtoken' );
 		}
@@ -45,8 +37,9 @@ class TokenCheckInteractor {
 		}
 
 		$token = $request->getText( $tokenParam );
+		$user = $context->getUser();
 
-		if ( !$this->user->matchEditToken( $token, $salt, $request ) ) {
+		if ( !$user->matchEditToken( $token, $salt, $request ) ) {
 			throw new TokenCheckException( 'Invalid token (or loss of session data)', 'badtoken' );
 		}
 	}
