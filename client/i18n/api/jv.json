@@ -12,7 +12,7 @@
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Yèn diurubaké, URL èntitas bakal ditambahaké",
 	"apihelp-query+wbentityusage-param-entities": "Balèkaké mligi kaca sing nganggo èntitas iki.",
 	"apihelp-query+wbentityusage-param-limit": "Akèhé pangunané èntitas sing kudu dibalèkaké.",
-	"apihelp-query+wbentityusage-example-simple": "Jupuk èntitas sing dienggo ing kaca <kbd>Tepas</kbd>.",
+	"apihelp-query+wbentityusage-example-simple": "Deleng èntitas kang kaanggo ing <kbd>Pendhapa</kbd>.",
 	"apihelp-query+wblistentityusage-description": "Mbalèkaké kabèh kaca sing nganggo ID èntitas iki.",
 	"apihelp-query+wblistentityusage-param-prop": "Properti sing kudu ditambahaké marang kasilé.",
 	"apihelp-query+wblistentityusage-param-entities": "Èntitas sing wis kasimpen.",
