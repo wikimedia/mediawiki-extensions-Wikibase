@@ -1,6 +1,6 @@
 # Wikibase DataModel Services release notes
 
-## Version 5.4.0 (under development)
+## Version 5.4.0 (2021-04-23)
 * Added `EntityRedirectLookup::FOR_UPDATE` constant
 * Added `EntityRedirectTargetLookup` (extracted from `EntityRedirectLookup`)
 
