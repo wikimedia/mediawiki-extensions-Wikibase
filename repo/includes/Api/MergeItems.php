@@ -18,7 +18,6 @@ use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationException;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @license GPL-2.0-or-later
@@ -79,15 +78,14 @@ class MergeItems extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		ApiHelperFactory $apiHelperFactory,
-		EntityIdParser $entityIdParser
+		EntityIdParser $entityIdParser,
+		ItemMergeInteractor $interactor
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		return new self(
 			$mainModule,
 			$moduleName,
 			$entityIdParser,
-			$wikibaseRepo->newItemMergeInteractor( $mainModule->getContext() ),
+			$interactor,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getResultBuilder( $module );
