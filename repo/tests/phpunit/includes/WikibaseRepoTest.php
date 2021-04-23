@@ -17,7 +17,6 @@ use MediaWikiIntegrationTestCase;
 use ReflectionClass;
 use ReflectionMethod;
 use RequestContext;
-use User;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -32,7 +31,6 @@ use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
-use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Validators\CompositeValidator;
@@ -187,15 +185,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetValueParserFactoryReturnType() {
 		$returnValue = WikibaseRepo::getValueParserFactory();
 		$this->assertInstanceOf( ValueParserFactory::class, $returnValue );
-	}
-
-	public function testNewRedirectCreationInteractorReturnType() {
-		$user = $this->getMockBuilder( User::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$context = new RequestContext();
-		$returnValue = $this->getWikibaseRepo()->newItemRedirectCreationInteractor( $user, $context );
-		$this->assertInstanceOf( ItemRedirectCreationInteractor::class, $returnValue );
 	}
 
 	public function testGetEntityIdParserReturnType() {

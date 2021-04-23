@@ -14,7 +14,6 @@ use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Serializers\Serializer;
 use SiteLookup;
-use User;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
@@ -320,24 +319,11 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityRevisionLookup' );
 	}
 
-	/**
-	 * @param User $user
-	 * @param IContextSource $context
-	 *
-	 * @return ItemRedirectCreationInteractor
-	 */
-	public function newItemRedirectCreationInteractor( User $user, IContextSource $context ) {
-		$store = self::getStore();
-
-		return new ItemRedirectCreationInteractor(
-			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
-			self::getEntityStore(),
-			self::getEntityPermissionChecker(),
-			self::getSummaryFormatter(),
-			self::getEditFilterHookRunner(),
-			$store->getEntityRedirectLookup(),
-			self::getEntityTitleStoreLookup()
-		);
+	public static function getItemRedirectCreationInteractor(
+		ContainerInterface $services = null
+	): ItemRedirectCreationInteractor {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ItemRedirectCreationInteractor' );
 	}
 
 	public static function getEditFilterHookRunner( ContainerInterface $services = null ): EditFilterHookRunner {
@@ -799,7 +785,7 @@ class WikibaseRepo {
 			self::getEntityPermissionChecker(),
 			self::getSummaryFormatter(),
 			$user,
-			$this->newItemRedirectCreationInteractor( $user, $context ),
+			self::getItemRedirectCreationInteractor(),
 			self::getEntityTitleStoreLookup(),
 			MediaWikiServices::getInstance()->getPermissionManager()
 		);

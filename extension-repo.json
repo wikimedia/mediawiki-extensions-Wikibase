@@ -47,7 +47,8 @@
 			"services": [
 				"PermissionManager",
 				"WikibaseRepo.ApiHelperFactory",
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.ItemRedirectCreationInteractor"
 			]
 		},
 		"wbformatentities": {
@@ -494,10 +495,10 @@
 		},
 		"RedirectEntity": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity::factory",
 			"services": [
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.ExceptionLocalizer"
+				"WikibaseRepo.ExceptionLocalizer",
+				"WikibaseRepo.ItemRedirectCreationInteractor"
 			]
 		},
 		"AvailableBadges": {

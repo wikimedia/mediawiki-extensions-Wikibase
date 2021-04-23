@@ -164,6 +164,7 @@ use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 use Wikibase\Repo\FederatedProperties\WrappingEntityIdFormatterFactory;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
+use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
@@ -1084,6 +1085,22 @@ return [
 				->getFieldDefinitionsByType( Item::ENTITY_TYPE ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			WikibaseRepo::getLegacyFormatDetectorCallback( $services )
+		);
+	},
+
+	'WikibaseRepo.ItemRedirectCreationInteractor' => function (
+		MediaWikiServices $services
+	): ItemRedirectCreationInteractor {
+		$store = WikibaseRepo::getStore( $services );
+
+		return new ItemRedirectCreationInteractor(
+			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
+			WikibaseRepo::getEntityStore( $services ),
+			WikibaseRepo::getEntityPermissionChecker( $services ),
+			WikibaseRepo::getSummaryFormatter( $services ),
+			WikibaseRepo::getEditFilterHookRunner( $services ),
+			$store->getEntityRedirectLookup(),
+			WikibaseRepo::getEntityTitleStoreLookup( $services )
 		);
 	},
 

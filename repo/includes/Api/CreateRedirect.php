@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationException;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating entity redirects.
@@ -75,15 +74,15 @@ class CreateRedirect extends ApiBase {
 		string $moduleName,
 		PermissionManager $permissionManager,
 		ApiHelperFactory $apiHelperFactory,
-		EntityIdParser $entityIdParser
+		EntityIdParser $entityIdParser,
+		ItemRedirectCreationInteractor $interactor
 	): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$apiMain,
 			$moduleName,
 			$entityIdParser,
 			$apiHelperFactory->getErrorReporter( $apiMain ),
-			$wikibaseRepo->newItemRedirectCreationInteractor( $apiMain->getUser(), $apiMain->getContext() ),
+			$interactor,
 			$permissionManager
 		);
 	}
