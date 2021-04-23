@@ -30,6 +30,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\Store\RevisionBasedEntityRedirectTargetLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
@@ -352,7 +353,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$mediaWikiServices->getTitleFormatter(),
 			$mediaWikiServices->getTitleParser(),
 			$settings->getSetting( 'siteGlobalID' ),
-			$store->getEntityRevisionLookup()
+			new RevisionBasedEntityRedirectTargetLookup( $store->getEntityRevisionLookup() )
 		);
 	}
 
