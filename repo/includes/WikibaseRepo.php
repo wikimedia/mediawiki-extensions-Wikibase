@@ -13,7 +13,6 @@ use MWException;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Serializers\Serializer;
-use SiteLookup;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
@@ -540,13 +539,6 @@ class WikibaseRepo {
 	public static function getValidatorErrorLocalizer( ContainerInterface $services = null ): ValidatorErrorLocalizer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.ValidatorErrorLocalizer' );
-	}
-
-	/**
-	 * @return SiteLookup
-	 */
-	private function getSiteLookup() {
-		return MediaWikiServices::getInstance()->getSiteLookup();
 	}
 
 	/**
