@@ -10,7 +10,6 @@ use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Serializers\Serializer;
 use Site;
-use SiteLookup;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
@@ -75,11 +74,6 @@ use Wikibase\Lib\WikibaseContentLanguages;
 final class WikibaseClient {
 
 	/**
-	 * @var SiteLookup
-	 */
-	private $siteLookup;
-
-	/**
 	 * Returns a low level factory object for creating formatters for well known data types.
 	 *
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
@@ -106,12 +100,6 @@ final class WikibaseClient {
 	public static function getDefaultSnakFormatterBuilders( ContainerInterface $services = null ): WikibaseSnakFormatterBuilders {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.DefaultSnakFormatterBuilders' );
-	}
-
-	public function __construct(
-		SiteLookup $siteLookup
-	) {
-		$this->siteLookup = $siteLookup;
 	}
 
 	public static function getDataTypeDefinitions( ContainerInterface $services = null ): DataTypeDefinitions {
