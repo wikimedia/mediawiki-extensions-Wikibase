@@ -45,7 +45,7 @@ class EntityTypeDefinitionsFedPropsOverrider {
 
 	public static function factory( bool $federatedPropertiesEnabled ): self {
 		return new EntityTypeDefinitionsFedPropsOverrider(
-			require __DIR__ . '../../WikibaseRepo.FederatedProperties.entitytypes.php',
+			require __DIR__ . '/../WikibaseRepo.FederatedProperties.entitytypes.php',
 			$federatedPropertiesEnabled
 		);
 	}
