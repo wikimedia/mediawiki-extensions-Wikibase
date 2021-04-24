@@ -37,7 +37,6 @@
 		},
 		"description": {
 			"class": "\\Wikibase\\Client\\Api\\Description",
-			"factory": "\\Wikibase\\Client\\Api\\Description::factory",
 			"services": [
 				"WikibaseClient.DescriptionLookup",
 				"WikibaseClient.Settings"
