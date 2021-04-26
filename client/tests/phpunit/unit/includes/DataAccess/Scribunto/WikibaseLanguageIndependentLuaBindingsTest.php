@@ -23,9 +23,8 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\HashSiteLinkStore;
-use Wikibase\Lib\Store\LatestRevisionIdResult;
+use Wikibase\Lib\Store\RevisionBasedEntityRedirectTargetLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -58,9 +57,9 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 	private $referencedEntityIdLookup;
 
 	/**
-	 * @var MockObject|EntityRevisionLookup
+	 * @var MockObject|RevisionBasedEntityRedirectTargetLookup
 	 */
-	private $entityRevisionLookup;
+	private $redirectTargetLookup;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -68,7 +67,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		$this->sitelinkLookup = $this->createStub( SiteLinkLookup::class );
 		$this->usageAccumulator = new HashUsageAccumulator();
 		$this->referencedEntityIdLookup = $this->createStub( ReferencedEntityIdLookup::class );
-		$this->entityRevisionLookup = $this->newMockEntityRevisionLookup();
+		$this->redirectTargetLookup = $this->newMockRevisionBasedEntityRedirectTargetLookup();
 	}
 
 	public function testConstructor() {
@@ -92,7 +91,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 			$mediaWikiServices->getTitleFormatter(),
 			$mediaWikiServices->getTitleParser(),
 			'enwiki',
-			$this->entityRevisionLookup
+			$this->redirectTargetLookup
 		);
 	}
 
@@ -118,7 +117,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 			$this->createMock( TitleFormatter::class ),
 			$this->createMock( TitleParser::class ),
 			'enwiki',
-			$this->newMockEntityRevisionLookup()
+			$this->newMockRevisionBasedEntityRedirectTargetLookup()
 		);
 
 		$this->assertSame(
@@ -244,7 +243,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 			$this->createMock( TitleFormatter::class ),
 			$this->createMock( TitleParser::class ),
 			'enwiki',
-			$this->newMockEntityRevisionLookup()
+			$this->newMockRevisionBasedEntityRedirectTargetLookup()
 		);
 
 		$this->assertSame( $expected, $bindings->getLabelByLanguage( $prefixedEntityId, $languageCode ) );
@@ -305,11 +304,11 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		$itemId = new ItemId( 'Q123' );
 		$redirectTargetId = new ItemId( 'Q321' );
 
-		$this->entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
-		$this->entityRevisionLookup->expects( $this->once() )
-			->method( 'getLatestRevisionId' )
+		$this->redirectTargetLookup = $this->createMock( RevisionBasedEntityRedirectTargetLookup::class );
+		$this->redirectTargetLookup->expects( $this->once() )
+			->method( 'getRedirectForEntityId' )
 			->with( $itemId )
-			->willReturn( LatestRevisionIdResult::redirect( 666, $redirectTargetId ) );
+			->willReturn( $redirectTargetId );
 
 		$this->sitelinkLookup = $this->createMock( SiteLinkLookup::class );
 		$this->sitelinkLookup->expects( $this->once() )
@@ -333,11 +332,11 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		$itemId = $item->getId();
 		$redirectTargetId = new ItemId( 'Q321' );
 
-		$this->entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
-		$this->entityRevisionLookup->expects( $this->once() )
-			->method( 'getLatestRevisionId' )
+		$this->redirectTargetLookup = $this->createMock( RevisionBasedEntityRedirectTargetLookup::class );
+		$this->redirectTargetLookup->expects( $this->once() )
+			->method( 'getRedirectForEntityId' )
 			->with( $itemId )
-			->willReturn( LatestRevisionIdResult::redirect( 666, $redirectTargetId ) );
+			->willReturn( $redirectTargetId );
 
 		$this->getWikibaseLanguageIndependentLuaBindings()
 			->getSiteLinkPageName( $itemId->getSerialization(), 'somewiki' );
@@ -452,12 +451,8 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		return $item;
 	}
 
-	private function newMockEntityRevisionLookup(): EntityRevisionLookup {
-		$lookup = $this->createMock( EntityRevisionLookup::class );
-		$lookup->method( 'getLatestRevisionId' )
-			->willReturn( LatestRevisionIdResult::concreteRevision( 666 ) );
-
-		return $lookup;
+	private function newMockRevisionBasedEntityRedirectTargetLookup(): RevisionBasedEntityRedirectTargetLookup {
+		return $this->createStub( RevisionBasedEntityRedirectTargetLookup::class );
 	}
 
 }

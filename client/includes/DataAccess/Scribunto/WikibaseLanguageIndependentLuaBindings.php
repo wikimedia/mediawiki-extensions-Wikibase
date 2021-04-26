@@ -22,7 +22,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\RevisionBasedEntityRedirectTargetLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -93,9 +93,9 @@ class WikibaseLanguageIndependentLuaBindings {
 	private $siteId;
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var RevisionBasedEntityRedirectTargetLookup
 	 */
-	private $entityRevisionLookup;
+	private $redirectTargetLookup;
 
 	public function __construct(
 		SiteLinkLookup $siteLinkLookup,
@@ -109,7 +109,7 @@ class WikibaseLanguageIndependentLuaBindings {
 		TitleFormatter $titleFormatter,
 		TitleParser $titleParser,
 		string $siteId,
-		EntityRevisionLookup $entityRevisionLookup
+		RevisionBasedEntityRedirectTargetLookup $redirectTargetLookup
 	) {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->entityIdLookup = $entityIdLookup;
@@ -122,7 +122,7 @@ class WikibaseLanguageIndependentLuaBindings {
 		$this->titleFormatter = $titleFormatter;
 		$this->titleParser = $titleParser;
 		$this->siteId = $siteId;
-		$this->entityRevisionLookup = $entityRevisionLookup;
+		$this->redirectTargetLookup = $redirectTargetLookup;
 	}
 
 	/**
@@ -250,19 +250,7 @@ class WikibaseLanguageIndependentLuaBindings {
 			return null;
 		}
 
-		$returnIdAsIs = function () use ( $itemId ) {
-			return $itemId;
-		};
-
-		// Using an EntityRevisionLookup here is weird because we aren't interested in the revision.
-		// It's an easy way to get to the redirect target though. Create an EntityRedirectLookup for client?
-		$itemIdAfterRedirectResolution = $this->entityRevisionLookup->getLatestRevisionId( $itemId )
-			->onConcreteRevision( $returnIdAsIs )
-			->onRedirect( function ( $revisionId, $redirectTarget ) {
-				return $redirectTarget;
-			} )
-			->onNonexistentEntity( $returnIdAsIs )
-			->map();
+		$itemIdAfterRedirectResolution = $this->redirectTargetLookup->getRedirectForEntityId( $itemId ) ?? $itemId;
 
 		$this->trackUsageForSitelink( $globalSiteId, $itemIdAfterRedirectResolution );
 		if ( !$itemId->equals( $itemIdAfterRedirectResolution ) ) {
