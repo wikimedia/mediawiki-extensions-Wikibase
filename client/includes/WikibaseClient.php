@@ -73,6 +73,10 @@ use Wikibase\Lib\WikibaseContentLanguages;
  */
 final class WikibaseClient {
 
+	private function __construct() {
+		// should not be instantiated
+	}
+
 	/**
 	 * Returns a low level factory object for creating formatters for well known data types.
 	 *
