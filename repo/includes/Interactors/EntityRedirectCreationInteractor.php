@@ -6,8 +6,8 @@ use IContextSource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -60,7 +60,7 @@ abstract class EntityRedirectCreationInteractor {
 	private $editFilterHookRunner;
 
 	/**
-	 * @var EntityRedirectLookup
+	 * @var EntityRedirectTargetLookup
 	 */
 	private $entityRedirectLookup;
 
@@ -70,7 +70,7 @@ abstract class EntityRedirectCreationInteractor {
 		EntityPermissionChecker $permissionChecker,
 		SummaryFormatter $summaryFormatter,
 		EditFilterHookRunner $editFilterHookRunner,
-		EntityRedirectLookup $entityRedirectLookup,
+		EntityRedirectTargetLookup $entityRedirectLookup,
 		EntityTitleStoreLookup $entityTitleLookup
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
@@ -182,7 +182,7 @@ abstract class EntityRedirectCreationInteractor {
 		try {
 			$redirect = $this->entityRedirectLookup->getRedirectForEntityId(
 				$entityId,
-				EntityRedirectLookup::FOR_UPDATE
+				EntityRedirectTargetLookup::FOR_UPDATE
 			);
 		} catch ( EntityRedirectLookupException $ex ) {
 			throw new RedirectCreationException(
