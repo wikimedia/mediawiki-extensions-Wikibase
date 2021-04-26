@@ -32,7 +32,8 @@
 			"services": [
 				"WikibaseClient.AliasTermBuffer",
 				"WikibaseClient.EntityIdLookup",
-				"WikibaseClient.TermBuffer"
+				"WikibaseClient.TermBuffer",
+				"WikibaseClient.TermsLanguages"
 			]
 		},
 		"description": {

@@ -45,6 +45,7 @@
 	"apihelp-query+pageterms-summary": "{{doc-apihelp-summary|query+pageterms}}",
 	"apihelp-query+pageterms-example-simple": "{{doc-apihelp-example|query+pageterms}}",
 	"apihelp-query+pageterms-example-label-en": "{{doc-apihelp-example|query+pageterms}}",
+	"apihelp-query+pageterms-param-language": "{{doc-apihelp-param|query+pageterms|language}}",
 	"apihelp-query+pageterms-param-terms": "{{doc-apihelp-param|query+pageterms|terms}}",
 	"apihelp-query+description-summary": "{{doc-apihelp-summary|query+description}}",
 	"apihelp-query+description-extended-description": "{{doc-apihelp-extended-description|query+description}}",
