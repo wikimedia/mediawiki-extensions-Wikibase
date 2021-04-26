@@ -182,7 +182,7 @@ abstract class EntityRedirectCreationInteractor {
 		try {
 			$redirect = $this->entityRedirectLookup->getRedirectForEntityId(
 				$entityId,
-				'for update'
+				EntityRedirectLookup::FOR_UPDATE
 			);
 		} catch ( EntityRedirectLookupException $ex ) {
 			throw new RedirectCreationException(
