@@ -117,8 +117,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 				WikibaseRepo::getEntityContentDataCodec(),
 				MediaWikiServices::getInstance()->getBlobStore()
 			),
-			MediaWikiServices::getInstance()->getRevisionStore(),
-			false
+			MediaWikiServices::getInstance()->getRevisionStore()
 		);
 	}
 
@@ -158,8 +157,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 				WikibaseRepo::getEntityContentDataCodec(),
 				MediaWikiServices::getInstance()->getBlobStore()
 			),
-			MediaWikiServices::getInstance()->getRevisionStore(),
-			false
+			MediaWikiServices::getInstance()->getRevisionStore()
 		);
 
 		$entityRevision = $lookup->getEntityRevision( $entityId, $revisionId, 'load-mode' );
@@ -221,8 +219,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$lookup = new WikiPageEntityRevisionLookup(
 			$metaDataLookup,
 			new WikiPageEntityDataLoader( $codec, $blobStore ),
-			$revisionStore,
-			false
+			$revisionStore
 		);
 
 		$entityRevision = $lookup->getEntityRevision( $entityId, $revisionId );
@@ -243,8 +240,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 				WikibaseRepo::getEntityContentDataCodec(),
 				MediaWikiServices::getInstance()->getBlobStore()
 			),
-			MediaWikiServices::getInstance()->getRevisionStore(),
-			false
+			MediaWikiServices::getInstance()->getRevisionStore()
 		);
 
 		$shouldFail = function () {
@@ -284,8 +280,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$lookup = new WikiPageEntityRevisionLookup(
 			$mockMetaDataAccessor,
 			new WikiPageEntityDataLoader( WikibaseRepo::getEntityContentDataCodec(), $mockBlobStore ),
-			$mockRevisionStore,
-			false
+			$mockRevisionStore
 		);
 
 		$result = $lookup->getEntityRevision( $entityId, 0, LookupConstants::LATEST_FROM_MASTER );
@@ -312,8 +307,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$lookup = new WikiPageEntityRevisionLookup(
 			$mockMetaDataAccessor,
 			new WikiPageEntityDataLoader( WikibaseRepo::getEntityContentDataCodec(), $mockBlobStore ),
-			$mockRevisionStore,
-			false
+			$mockRevisionStore
 		);
 
 		$this->expectException( StorageException::class );
@@ -373,8 +367,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$lookup = new WikiPageEntityRevisionLookup(
 			$mockMetaDataAccessor,
 			$entityDataLoader,
-			$revisionStore,
-			false
+			$revisionStore
 		);
 
 		try {
@@ -447,8 +440,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$lookup = new WikiPageEntityRevisionLookup(
 			$mockMetaDataAccessor,
 			$entityDataLoader,
-			$revisionStore,
-			false
+			$revisionStore
 		);
 
 		try {
@@ -485,8 +477,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$lookup = new WikiPageEntityRevisionLookup(
 			$mockMetaDataAccessor,
 			new WikiPageEntityDataLoader( WikibaseRepo::getEntityContentDataCodec(), $mockBlobStore ),
-			$mockRevisionStore,
-			false
+			$mockRevisionStore
 		);
 
 		$result = $lookup->getLatestRevisionId( $entityId, LookupConstants::LATEST_FROM_MASTER );

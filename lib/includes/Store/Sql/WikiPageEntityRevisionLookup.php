@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Store\Sql;
 
-use DBAccessBase;
 use IDBAccessObject;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Revision\RevisionStore;
@@ -30,7 +29,7 @@ use Wikimedia\Assert\Assert;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisionLookup {
+class WikiPageEntityRevisionLookup implements EntityRevisionLookup {
 
 	private const MAIN_SLOT = 'main';
 
@@ -54,20 +53,11 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 */
 	private $entityDataLoader;
 
-	/**
-	 * @param WikiPageEntityMetaDataAccessor $entityMetaDataAccessor
-	 * @param WikiPageEntityDataLoader $entityDataLoader
-	 * @param RevisionStore $revisionStore
-	 * @param string|bool $wiki The name of the wiki database to use (can be false for the local wiki)
-	 */
 	public function __construct(
 		WikiPageEntityMetaDataAccessor $entityMetaDataAccessor,
 		WikiPageEntityDataLoader $entityDataLoader,
-		RevisionStore $revisionStore,
-		$wiki = false
+		RevisionStore $revisionStore
 	) {
-		parent::__construct( $wiki );
-
 		$this->entityMetaDataAccessor = $entityMetaDataAccessor;
 		$this->revisionStore = $revisionStore;
 

@@ -136,8 +136,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 				$localSource
 			),
 			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
-			MediaWikiServices::getInstance()->getRevisionStore(),
-			false
+			MediaWikiServices::getInstance()->getRevisionStore()
 		);
 
 		$store = new WikiPageEntityStore(

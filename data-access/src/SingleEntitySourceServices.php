@@ -234,8 +234,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			$wikiPageEntityRevisionStoreLookup = new WikiPageEntityRevisionLookup(
 				$metaDataAccessor,
 				new WikiPageEntityDataLoader( $codec, $blobStoreFactory->newBlobStore( $databaseName ), $databaseName ),
-				$revisionStoreFactory->getRevisionStore( $databaseName ),
-				$databaseName
+				$revisionStoreFactory->getRevisionStore( $databaseName )
 			);
 
 			$this->entityRevisionLookup = new TypeDispatchingEntityRevisionLookup(
