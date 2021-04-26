@@ -1,8 +1,9 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
 use ApiUsageException;
 use LogicException;
 use MediaWiki\Revision\RevisionLookup;
@@ -29,11 +30,6 @@ use Wikimedia\Assert\Assert;
  * @author Daniel Kinzler
  */
 class EntityLoadingHelper {
-
-	/**
-	 * @var ApiBase
-	 */
-	protected $apiModule;
 
 	/** @var RevisionLookup */
 	protected $revisionLookup;
@@ -75,7 +71,6 @@ class EntityLoadingHelper {
 	private $entityIdParam = 'entity';
 
 	public function __construct(
-		ApiBase $apiModule,
 		RevisionLookup $revisionLookup,
 		TitleFactory $titleFactory,
 		EntityIdParser $idParser,
@@ -83,7 +78,6 @@ class EntityLoadingHelper {
 		EntityTitleStoreLookup $entityTitleStoreLookup,
 		ApiErrorReporter $errorReporter
 	) {
-		$this->apiModule = $apiModule;
 		$this->revisionLookup = $revisionLookup;
 		$this->titleFactory = $titleFactory;
 		$this->idParser = $idParser;
@@ -178,16 +172,17 @@ class EntityLoadingHelper {
 	}
 
 	/**
+	 *
+	 * @param array $requestParams the output of ApiBase::extractRequestParams()
 	 * @param EntityId|null $entityId ID of the entity to load. If not given, the ID is taken
 	 *        from the request parameters. If $entityId is given, it must be consistent with
 	 *        the 'baserevid' parameter.
 	 *
 	 * @return EntityDocument
 	 */
-	public function loadEntity( EntityId $entityId = null ) {
+	public function loadEntity( array $requestParams, EntityId $entityId = null ) {
 		if ( !$entityId ) {
-			$params = $this->apiModule->extractRequestParams();
-			$entityId = $this->getEntityIdFromParams( $params );
+			$entityId = $this->getEntityIdFromParams( $requestParams );
 		}
 
 		if ( !$entityId ) {

@@ -178,7 +178,7 @@ class SetClaim extends ApiBase {
 
 		$entityId = $statementGuid->getEntityId();
 		$this->validateAlteringEntityById( $entityId );
-		$entity = $this->entitySavingHelper->loadEntity( $entityId );
+		$entity = $this->entitySavingHelper->loadEntity( $params, $entityId );
 
 		if ( !( $entity instanceof StatementListProvidingEntity ) ) {
 			$this->errorReporter->dieError( 'The given entity cannot contain statements', 'not-supported' );

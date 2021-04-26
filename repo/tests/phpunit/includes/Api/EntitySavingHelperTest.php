@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use ApiBase;
 use ApiUsageException;
 use FauxRequest;
 use LogicException;
@@ -100,7 +101,12 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	}
 
 	protected function getMockApiBase( array $params ) {
-		$api = parent::getMockApiBase( $params );
+		$api = $this->getMockBuilder( ApiBase::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$api->method( 'extractRequestParams' )
+			->willReturn( $params );
 
 		$api->method( 'getContext' )
 			->willReturn( $this->newContext( $params ) );
@@ -122,7 +128,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			'params' => [ 'new' => 'item' ],
 		] );
 
-		$return = $helper->loadEntity();
+		$return = $helper->loadEntity( [ 'new' => 'item' ] );
 		$this->assertInstanceOf( Item::class, $return );
 		$this->assertNotNull( $return->getId(), 'New item should have a fresh ID' );
 
@@ -143,7 +149,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			'EntityIdParser' => WikibaseRepo::getEntityIdParser()
 		] );
 
-		$return = $helper->loadEntity();
+		$return = $helper->loadEntity( [ 'entity' => 'M7' ] );
 		$this->assertInstanceOf( MediaInfo::class, $return );
 		$this->assertSame( 'M7', $return->getId()->getSerialization() );
 
@@ -161,7 +167,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		] );
 
 		$this->expectException( ApiUsageException::class );
-		$helper->loadEntity();
+		$helper->loadEntity( [ 'new' => 'item' ] );
 	}
 
 	public function provideLoadEntity_fail() {
@@ -197,7 +203,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		] );
 
 		$this->expectException( ApiUsageException::class );
-		$helper->loadEntity();
+		$helper->loadEntity( $params );
 	}
 
 	public function testLoadEntity_baserevid() {
@@ -216,7 +222,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			'entityRevision' => $revision,
 		] );
 
-		$return = $helper->loadEntity( $itemId );
+		$return = $helper->loadEntity( [ 'baserevid' => 17 ], $itemId );
 		$this->assertSame( $entity, $return );
 
 		$this->assertSame( 17, $helper->getBaseRevisionId() );
@@ -241,7 +247,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		] );
 
 		$this->expectException( ApiUsageException::class );
-		$helper->loadEntity( $id );
+		$helper->loadEntity( [ 'baserevid' => $revisionId ], $id );
 	}
 
 	public function testLoadEntity_BadRevisionException_entityWithoutTitle() {
@@ -262,7 +268,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		] );
 
 		$this->expectException( ApiUsageException::class );
-		$helper->loadEntity( $id );
+		$helper->loadEntity( [ 'baserevid' => $revisionId ], $id );
 	}
 
 	public function testLoadEntity_BadRevisionException_matches() {
@@ -284,7 +290,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			'allowCreation' => true,
 		] );
 
-		$return = $helper->loadEntity( $id );
+		$return = $helper->loadEntity( [ 'baserevid' => $revisionId ], $id );
 		$this->assertNotNull( $return, 'should return an empty entity' );
 		$this->assertTrue( $return->isEmpty(), 'entity should be empty' );
 
