@@ -122,7 +122,7 @@ class DataBridgePage extends Page {
 
 	open( title ) {
 		super.openTitle( title );
-		Util.waitForModuleState( 'wikibase.client.data-bridge.app', 'ready', 10000 );
+		Util.waitForModuleState( 'wikibase.client.data-bridge.app', 'ready', 20000 );
 	}
 
 	openAppOnPage( title ) {
@@ -132,7 +132,7 @@ class DataBridgePage extends Page {
 
 	launchApp() {
 		this.overloadedLink.click();
-		this.app.waitForDisplayed( 10000 );
+		this.app.waitForDisplayed( 20000 );
 		WarningAnonymousEdit.dismiss();
 	}
 

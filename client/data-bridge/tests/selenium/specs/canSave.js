@@ -75,7 +75,7 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( 10000 );
+		DataBridgePage.bridge.waitForDisplayed( 20000 );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 		assert.strictEqual( DataBridgePage.value.getValue(), stringPropertyExampleValue );
 
@@ -150,7 +150,7 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( 10000 );
+		DataBridgePage.bridge.waitForDisplayed( 20000 );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 
 		const newValue = 'newValue';
