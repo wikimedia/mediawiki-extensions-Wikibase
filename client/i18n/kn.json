@@ -4,7 +4,8 @@
 			"Anoop rao",
 			"Omshivaprakash",
 			"Shushruth",
-			"VASANTH S.N."
+			"VASANTH S.N.",
+			"ಮಲ್ನಾಡಾಚ್ ಕೊಂಕ್ಣೊ"
 		]
 	},
 	"tooltip-t-wikibase": "ಸಂಪರ್ಕ ಮಾಹಿತಿ ಸಂಗ್ರಹ ಐಟಂಗೆ ಲಿಂಕ್ ಮಾಡಿ",
@@ -12,6 +13,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} ವಸ್ತು",
 	"wikibase-editlinks": "ಕೊಂಡಿಗಳನ್ನು ಸಂಪಾದಿಸಿ",
 	"wikibase-editlinkstitle": "ಅಂತರ್‍ಭಾಷೀಯ ಕೊಂಡಿಗಳನ್ನು ಸಂಪಾದಿಸು",
+	"wikibase-linkitem-addlinks": "ಕೊಂಡಿಗಳನ್ನು ಸೇರಿಸಿ",
 	"wikibase-linkitem-confirmitem-button": "ಧೃಡಪಡಿಸು",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ಅಡಗಿಸು",

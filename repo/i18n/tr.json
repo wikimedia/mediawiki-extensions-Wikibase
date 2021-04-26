@@ -293,7 +293,7 @@
 	"special-mergeitems": "İki ögeyi birleştir",
 	"wikibase-mergeitems-intro": "Eğer iki ögeyi birleştirirseniz tüm etiketler, tanımlar, diğer adlar, site bağlantıları ve ifadeler bir ögeden diğer ögeye taşınır.",
 	"wikibase-mergeitems-fromid": "Birleştirilecek kimlik",
-	"wikibase-mergeitems-toid": "Birleştirilecek kimlik",
+	"wikibase-mergeitems-toid": "Birleşecek kimlik",
 	"wikibase-mergeitems-submit": "Ögeleri birleştir",
 	"wikibase-mergeitems-success": "$1 ögesi $3 ile birleştirildi ve yönlendirildi.",
 	"wikibase-itemmerge-redirect": "Bu ögeler zaten birleştirilmiş olabilir.",
