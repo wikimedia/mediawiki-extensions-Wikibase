@@ -205,13 +205,6 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @inheritDoc
-	 */
-	public function clear() {
-		$this->newSiteLinkStore()->clear();
-	}
-
-	/**
 	 * @see Store::newSiteLinkStore
 	 *
 	 * @return SiteLinkStore

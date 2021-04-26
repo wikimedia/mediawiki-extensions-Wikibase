@@ -43,11 +43,6 @@ interface Store {
 	public function getEntityByLinkedTitleLookup();
 
 	/**
-	 * Removes all data from the store.
-	 */
-	public function clear();
-
-	/**
 	 * @return ItemsWithoutSitelinksFinder
 	 */
 	public function newItemsWithoutSitelinksFinder();

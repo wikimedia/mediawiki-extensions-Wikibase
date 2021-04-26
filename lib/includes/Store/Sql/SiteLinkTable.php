@@ -284,25 +284,6 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	}
 
 	/**
-	 * @see SiteLinkStore::clear
-	 *
-	 * @return boolean Success indicator
-	 * @throws MWException
-	 */
-	public function clear() {
-		if ( $this->readonly ) {
-			throw new MWException( 'Cannot write when in readonly mode' );
-		}
-
-		$dbw = $this->getConnection( DB_MASTER );
-
-		$dbw->delete( $this->table, '*', __METHOD__ );
-
-		$this->releaseConnection( $dbw );
-		return true;
-	}
-
-	/**
 	 * @see SiteLinkLookup::getLinks
 	 *
 	 * @param int[] $numericIds Numeric (unprefixed) item ids
