@@ -1294,6 +1294,7 @@ return [
 						$services->getSlotRoleStore()
 					),
 					WikibaseRepo::getLocalEntitySource( $services ),
+					$services->getDBLoadBalancerFactory(),
 					$logger
 				),
 				$dbName,

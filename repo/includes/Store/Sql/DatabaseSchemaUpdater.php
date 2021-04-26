@@ -257,6 +257,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
 				$propertySource,
+				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 				WikibaseRepo::getLogger()
 			),
 			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
