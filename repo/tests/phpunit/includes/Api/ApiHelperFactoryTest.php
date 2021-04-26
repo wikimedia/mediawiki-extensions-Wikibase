@@ -85,6 +85,10 @@ class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
 		$api->method( 'getLanguage' )
 			->willReturn( $language );
 
+		$api->method( 'isWriteMode' )->willReturn( true );
+
+		$api->method( 'needsToken' )->willReturn( false );
+
 		return $api;
 	}
 
