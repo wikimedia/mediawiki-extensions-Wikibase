@@ -9,7 +9,6 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
-use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 
 /**
@@ -26,11 +25,6 @@ class SqlSiteLinkConflictLookupTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-
-		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->markTestSkipped( "Skipping because WikibaseClient does not have '
-				. 'a local site link table." );
-		}
 
 		$this->tablesUsed[] = 'wb_items_per_site';
 

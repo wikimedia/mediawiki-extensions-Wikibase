@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Tests\Changes\ChangeRowTest;
 use Wikibase\Lib\Tests\Changes\TestChanges;
-use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Notifications\RepoEntityChange;
 
 /**
@@ -75,12 +74,6 @@ class RepoEntityChangeTest extends ChangeRowTest {
 	}
 
 	public function testSetRevisionInfo() {
-		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->markTestSkipped(
-				'Need to be able to create entity content in order to test with Revision objects.'
-			);
-		}
-
 		$id = new ItemId( 'Q7' );
 		$entityChange = $this->newEntityChange( $id );
 		$timestamp = '20140523' . '174422';
