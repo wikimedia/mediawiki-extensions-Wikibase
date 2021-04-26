@@ -126,7 +126,7 @@ class RemoveReferences extends ApiBase {
 
 		$this->validateAlteringEntityById( $entityId );
 
-		$entity = $this->entitySavingHelper->loadEntity( $entityId );
+		$entity = $this->entitySavingHelper->loadEntity( $params, $entityId );
 		$summary = $this->modificationHelper->createSummary( $params, $this );
 
 		$claim = $this->modificationHelper->getStatementFromEntity( $guid, $entity );

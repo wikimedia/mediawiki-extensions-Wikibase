@@ -115,7 +115,7 @@ class CreateClaim extends ApiBase {
 		$entityId = $this->entitySavingHelper->getEntityIdFromParams( $params );
 		$this->validateAlteringEntityById( $entityId );
 
-		$entity = $this->entitySavingHelper->loadEntity( $entityId );
+		$entity = $this->entitySavingHelper->loadEntity( $params, $entityId );
 
 		$propertyId = $this->modificationHelper->getEntityIdFromString( $params['property'] );
 		if ( !( $propertyId instanceof PropertyId ) ) {

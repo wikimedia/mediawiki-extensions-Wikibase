@@ -139,7 +139,7 @@ class SetQualifier extends ApiBase {
 		$entityId = $this->guidParser->parse( $params['claim'] )->getEntityId();
 		$this->validateAlteringEntityById( $entityId );
 
-		$entity = $this->entitySavingHelper->loadEntity( $entityId );
+		$entity = $this->entitySavingHelper->loadEntity( $params, $entityId );
 
 		$summary = $this->modificationHelper->createSummary( $params, $this );
 

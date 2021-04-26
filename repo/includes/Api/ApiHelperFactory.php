@@ -246,7 +246,6 @@ class ApiHelperFactory {
 	 */
 	public function getEntityLoadingHelper( ApiBase $apiBase ) {
 		$helper = new EntityLoadingHelper(
-			$apiBase,
 			$this->revisionLookup,
 			$this->titleFactory,
 			$this->idParser,

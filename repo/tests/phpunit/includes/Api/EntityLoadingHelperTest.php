@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiBase;
 use ApiUsageException;
 use Exception;
 use MediaWiki\MediaWikiServices;
@@ -36,22 +35,6 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
  * @author Daniel Kinzler
  */
 class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
-
-	/**
-	 * @param array $params
-	 *
-	 * @return ApiBase|MockObject
-	 */
-	protected function getMockApiBase( array $params ) {
-		$apiBase = $this->getMockBuilder( ApiBase::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$apiBase->method( 'extractRequestParams' )
-			->willReturn( $params );
-
-		return $apiBase;
-	}
 
 	protected function getMockRevisionLookup( ?int $revisionId, ?RevisionRecord $revision ): RevisionLookup {
 		$revisionLookup = $this->createMock( RevisionLookup::class );
@@ -188,7 +171,6 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 		$services = MediaWikiServices::getInstance();
 
 		return new EntityLoadingHelper(
-			$this->getMockApiBase( $config['params'] ?? [] ),
 			$this->getMockRevisionLookup(
 				$config['revisionId'] ?? null,
 				$config['revision'] ?? null
@@ -220,7 +202,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 			'entityId' => $id,
 			'entityRevision' => $revision,
 		] );
-		$return = $helper->loadEntity( $id );
+		$return = $helper->loadEntity( [], $id );
 
 		$this->assertSame( $entity, $return );
 	}
@@ -236,7 +218,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 			'entityId' => $id,
 			'entityRevision' => $revision,
 		] );
-		$return = $helper->loadEntity();
+		$return = $helper->loadEntity( $params );
 
 		$this->assertSame( $entity, $return );
 	}
@@ -261,7 +243,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 
 		$helper->setEntityByLinkedTitleLookup( $entityByLinkedTitleLookup );
 
-		$return = $helper->loadEntity();
+		$return = $helper->loadEntity( $params );
 		$this->assertSame( $entity, $return );
 	}
 
@@ -273,7 +255,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$this->expectException( ApiUsageException::class );
-		$helper->loadEntity();
+		$helper->loadEntity( $params );
 	}
 
 	public function testLoadEntity_noId() {
@@ -283,7 +265,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$this->expectException( ApiUsageException::class );
-		$helper->loadEntity();
+		$helper->loadEntity( [] );
 	}
 
 	public function testLoadEntity_NotFound() {
@@ -295,7 +277,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$this->expectException( ApiUsageException::class );
-		$helper->loadEntity( $id );
+		$helper->loadEntity( [], $id );
 	}
 
 	public function testLoadEntity_UnresolvedRedirectException() {
@@ -311,7 +293,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$this->expectException( ApiUsageException::class );
-		$helper->loadEntity( $id );
+		$helper->loadEntity( [], $id );
 	}
 
 	public function testLoadEntity_BadRevisionException_missingRevision() {
@@ -326,7 +308,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$this->expectException( ApiUsageException::class );
-		$helper->loadEntity( $id );
+		$helper->loadEntity( [], $id );
 	}
 
 	public function testLoadEntity_StorageException() {
@@ -339,7 +321,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$this->expectException( ApiUsageException::class );
-		$helper->loadEntity( $id );
+		$helper->loadEntity( [], $id );
 	}
 
 }

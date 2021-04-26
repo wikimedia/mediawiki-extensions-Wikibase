@@ -122,7 +122,7 @@ class SetClaimValue extends ApiBase {
 		$guid = $params['claim'];
 		$entityId = $this->guidParser->parse( $guid )->getEntityId();
 		$this->validateAlteringEntityById( $entityId );
-		$entity = $this->entitySavingHelper->loadEntity( $entityId );
+		$entity = $this->entitySavingHelper->loadEntity( $params, $entityId );
 
 		$claim = $this->modificationHelper->getStatementFromEntity( $guid, $entity );
 
