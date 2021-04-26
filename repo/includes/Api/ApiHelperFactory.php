@@ -207,7 +207,8 @@ class ApiHelperFactory {
 	 */
 	public function getEntitySavingHelper( ApiBase $apiBase ) {
 		$helper = new EntitySavingHelper(
-			$apiBase,
+			$apiBase->isWriteMode(),
+			$apiBase->needsToken(),
 			$this->revisionLookup,
 			$this->titleFactory,
 			$this->idParser,

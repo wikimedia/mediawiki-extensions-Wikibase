@@ -232,7 +232,13 @@ class LinkTitles extends ApiBase {
 			return Status::newGood( true );
 		} else {
 			// Do the actual save, or if it don't exist yet create it.
-			return $this->entitySavingHelper->attemptSaveEntity( $item, $summary, $flags );
+			return $this->entitySavingHelper->attemptSaveEntity(
+				$item,
+				$summary,
+				$this->extractRequestParams(),
+				$this->getContext(),
+				$flags
+			);
 		}
 	}
 

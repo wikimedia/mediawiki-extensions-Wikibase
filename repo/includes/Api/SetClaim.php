@@ -195,7 +195,7 @@ class SetClaim extends ApiBase {
 		$changeop = $this->statementChangeOpFactory->newSetStatementOp( $statement, $index );
 		$this->modificationHelper->applyChangeOp( $changeop, $entity, $summary );
 
-		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary );
+		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, $params, $this->getContext() );
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->resultBuilder->markSuccess();
 		$this->resultBuilder->addStatement( $statement );

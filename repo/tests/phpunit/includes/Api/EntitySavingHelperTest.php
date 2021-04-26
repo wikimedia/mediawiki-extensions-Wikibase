@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiBase;
 use ApiUsageException;
 use FauxRequest;
 use LogicException;
@@ -100,20 +99,6 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		return $mock;
 	}
 
-	protected function getMockApiBase( array $params ) {
-		$api = $this->getMockBuilder( ApiBase::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$api->method( 'extractRequestParams' )
-			->willReturn( $params );
-
-		$api->method( 'getContext' )
-			->willReturn( $this->newContext( $params ) );
-
-		return $api;
-	}
-
 	private function newContext( array $params ) {
 		$context = new RequestContext();
 		$context->setUser( $this->createMock( User::class ) );
@@ -123,40 +108,42 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	}
 
 	public function testLoadEntity_create_from_type() {
+		$params = [ 'new' => 'item' ];
 		$helper = $this->newEntitySavingHelper( [
 			'allowCreation' => true,
 			'params' => [ 'new' => 'item' ],
 		] );
 
-		$return = $helper->loadEntity( [ 'new' => 'item' ] );
+		$return = $helper->loadEntity( $params );
 		$this->assertInstanceOf( Item::class, $return );
 		$this->assertNotNull( $return->getId(), 'New item should have a fresh ID' );
 
 		$this->assertSame( 0, $helper->getBaseRevisionId() );
 		$this->assertSame( EDIT_NEW, $helper->getSaveFlags() );
 
-		$status = $helper->attemptSaveEntity( $return, 'Testing' );
+		$status = $helper->attemptSaveEntity( $return, 'Testing', $params, $this->newContext( $params ) );
 		$this->assertTrue( $status->isGood(), 'isGood()' );
 	}
 
 	public function testLoadEntity_create_from_id() {
 		$this->skipIfEntityTypeNotKnown( 'mediainfo' );
+		$params = [ 'entity' => 'M7' ];
 
 		$helper = $this->newEntitySavingHelper( [
 			'allowCreation' => true,
-			'params' => [ 'entity' => 'M7' ],
+			'params' => $params,
 			'entityId' => new MediaInfoId( 'M7' ),
 			'EntityIdParser' => WikibaseRepo::getEntityIdParser()
 		] );
 
-		$return = $helper->loadEntity( [ 'entity' => 'M7' ] );
+		$return = $helper->loadEntity( $params );
 		$this->assertInstanceOf( MediaInfo::class, $return );
 		$this->assertSame( 'M7', $return->getId()->getSerialization() );
 
 		$this->assertSame( 0, $helper->getBaseRevisionId() );
 		$this->assertSame( EDIT_NEW, $helper->getSaveFlags() );
 
-		$status = $helper->attemptSaveEntity( $return, 'Testing' );
+		$status = $helper->attemptSaveEntity( $return, 'Testing', $params, $this->newContext( $params ) );
 		$this->assertTrue( $status->isGood(), 'isGood()' );
 	}
 
@@ -312,7 +299,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		$summary = 'A String Summary';
 		$flags = 0;
 
-		$status = $helper->attemptSaveEntity( $entity, $summary, $flags );
+		$status = $helper->attemptSaveEntity( $entity, $summary, [], $this->newContext( [] ), $flags );
 		$this->assertTrue( $status->isGood(), 'isGood()' );
 	}
 
@@ -323,7 +310,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		] );
 
 		$this->expectException( LogicException::class );
-		$helper->attemptSaveEntity( new Item(), '' );
+		$helper->attemptSaveEntity( new Item(), '', [], $this->newContext( [] ) );
 	}
 
 	/**
@@ -340,7 +327,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		] );
 
 		$this->expectException( ApiUsageException::class );
-		$helper->attemptSaveEntity( new Item(), '' );
+		$helper->attemptSaveEntity( new Item(), '', [], $this->newContext( [] ) );
 	}
 
 	public function errorStatusProvider() {
@@ -372,13 +359,10 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	 * @return EntitySavingHelper
 	 */
 	protected function newEntitySavingHelper( array $config ) {
-		$apiModule = $this->getMockApiBase( $config['params'] ?? [] );
-		$apiModule->method( 'isWriteMode' )
-			->willReturn( $config['writeMode'] ?? true );
-
 		$services = MediaWikiServices::getInstance();
 		$helper = new EntitySavingHelper(
-			$apiModule,
+			$config['writeMode'] ?? true,
+			'csrf',
 			$this->getMockRevisionLookup(
 				$config['revisionId'] ?? null,
 				$config['revision'] ?? null
