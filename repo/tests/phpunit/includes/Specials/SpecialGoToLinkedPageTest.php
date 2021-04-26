@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\Specials\SpecialGoToLinkedPage;
 
@@ -64,11 +64,8 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		return new HashSiteStore( [ $dewiki ] );
 	}
 
-	/**
-	 * @return EntityRedirectLookup
-	 */
-	private function getEntityRedirectLookup() {
-		$mock = $this->createMock( EntityRedirectLookup::class );
+	private function getEntityRedirectTargetLookup(): EntityRedirectTargetLookup {
+		$mock = $this->createMock( EntityRedirectTargetLookup::class );
 		$mock->method( 'getRedirectForEntityId' )
 			->willReturnCallback( function( ItemId $id ) {
 				if ( $id->getSerialization() === 'Q24' ) {
@@ -119,7 +116,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		return new SpecialGoToLinkedPage(
 			$this->getMockSiteLookup(),
 			$this->getMockSiteLinkLookup(),
-			$this->getEntityRedirectLookup(),
+			$this->getEntityRedirectTargetLookup(),
 			$this->getEntityIdParser(),
 			$this->getEntityLookup()
 		);
