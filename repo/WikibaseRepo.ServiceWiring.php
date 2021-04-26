@@ -607,7 +607,10 @@ return [
 
 	'WikibaseRepo.EntityConstraintProvider' => function ( MediaWikiServices $services ): EntityConstraintProvider {
 		return new EntityConstraintProvider(
-			new SqlSiteLinkConflictLookup( WikibaseRepo::getEntityIdComposer( $services ) )
+			new SqlSiteLinkConflictLookup(
+				$services->getDBLoadBalancer(),
+				WikibaseRepo::getEntityIdComposer( $services )
+			)
 		);
 	},
 

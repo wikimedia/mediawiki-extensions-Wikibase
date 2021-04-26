@@ -11,6 +11,7 @@ use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
+use Wikimedia\Rdbms\LoadBalancerSingle;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup
@@ -84,7 +85,10 @@ class SqlSiteLinkConflictLookupTest extends MediaWikiIntegrationTestCase {
 			},
 		] );
 
-		return new SqlSiteLinkConflictLookup( $entityIdComposer );
+		return new SqlSiteLinkConflictLookup(
+			new LoadBalancerSingle( [ 'connection' => $this->db ] ),
+			$entityIdComposer
+		);
 	}
 
 }
