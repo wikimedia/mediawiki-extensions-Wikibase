@@ -146,7 +146,7 @@ class RemoveClaims extends ApiBase {
 			$this->errorReporter->dieException( $e, 'failed-save' );
 		}
 
-		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary );
+		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, $params, $this->getContext() );
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->resultBuilder->markSuccess();
 		$this->resultBuilder->setList( null, 'claims', $params['claim'], 'claim' );
