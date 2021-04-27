@@ -172,16 +172,4 @@ class SiteLinkTableTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( [], $this->siteLinkTable->getSiteLinksForItem( $item->getId() ) );
 	}
 
-	/**
-	 * @dataProvider itemProvider
-	 */
-	public function testClear( Item $item ) {
-		$this->siteLinkTable->saveLinksOfItem( $item );
-		$this->assertTrue(
-			$this->siteLinkTable->clear() !== false
-		);
-
-		$this->assertSame( [], $this->siteLinkTable->getSiteLinksForItem( $item->getId() ) );
-	}
-
 }

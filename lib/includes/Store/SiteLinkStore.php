@@ -31,11 +31,4 @@ interface SiteLinkStore extends SiteLinkLookup, EntityByLinkedTitleLookup {
 	 */
 	public function deleteLinksOfItem( ItemId $itemId );
 
-	/**
-	 * Clears all sitelinks from the cache.
-	 *
-	 * @return bool Success indicator
-	 */
-	public function clear();
-
 }
