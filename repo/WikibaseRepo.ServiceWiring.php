@@ -166,6 +166,7 @@ use Wikibase\Repo\FederatedProperties\WrappingEntityIdFormatterFactory;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
+use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
@@ -1677,6 +1678,10 @@ return [
 			WikibaseRepo::getTermsCollisionDetectorFactory( $services ),
 			WikibaseRepo::getTermLookup( $services )
 		);
+	},
+
+	'WikibaseRepo.TokenCheckInteractor' => function ( MediaWikiServices $services ): TokenCheckInteractor {
+		return new TokenCheckInteractor();
 	},
 
 	'WikibaseRepo.TypeIdsAcquirer' => function ( MediaWikiServices $services ): TypeIdsAcquirer {

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Interactors;
 
 use FauxRequest;
+use RequestContext;
 use User;
 use Wikibase\Repo\Interactors\TokenCheckException;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
@@ -41,11 +42,12 @@ class TokenCheckInteractorTest extends \PHPUnit\Framework\TestCase {
 			'tokentest' => 'VALID'
 		];
 
-		$user = $this->getMockUser();
-		$request = new FauxRequest( $data, true );
+		$context = new RequestContext();
+		$context->setRequest( new FauxRequest( $data, true ) );
+		$context->setUser( $this->getMockUser() );
 
-		$checker = new TokenCheckInteractor( $user );
-		$checker->checkRequestToken( $request, 'tokentest' );
+		$checker = new TokenCheckInteractor();
+		$checker->checkRequestToken( $context, 'tokentest' );
 
 		$this->assertTrue( true ); // make PHPUnit happy
 	}
@@ -62,13 +64,14 @@ class TokenCheckInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider tokenFailureProvider
 	 */
 	public function testCheckToken_failure( $data, $wasPosted, $expected ) {
-		$request = new FauxRequest( $data, $wasPosted );
+		$context = new RequestContext();
+		$context->setRequest( new FauxRequest( $data, $wasPosted ) );
+		$context->setUser( $this->getMockUser() );
 
-		$user = $this->getMockUser();
-		$checker = new TokenCheckInteractor( $user );
+		$checker = new TokenCheckInteractor();
 
 		try {
-			$checker->checkRequestToken( $request, 'tokentest' );
+			$checker->checkRequestToken( $context, 'tokentest' );
 			$this->fail( 'check did not throw a TokenCheckException as expected' );
 		} catch ( TokenCheckException $ex ) {
 			$this->assertEquals( $expected, $ex->getErrorCode() );

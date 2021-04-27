@@ -167,7 +167,8 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 				),
 				$titleLookup,
 				MediaWikiServices::getInstance()->getPermissionManager()
-			)
+			),
+			WikibaseRepo::getTokenCheckInteractor()
 		);
 
 		$linkRenderer = $this->getMockBuilder( LinkRenderer::class )
