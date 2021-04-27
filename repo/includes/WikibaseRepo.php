@@ -66,6 +66,7 @@ use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
+use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsAcquirer;
@@ -442,6 +443,11 @@ class WikibaseRepo {
 	public static function getSnakFormatterFactory( ContainerInterface $services = null ): OutputFormatSnakFormatterFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.SnakFormatterFactory' );
+	}
+
+	public static function getMatchingTermsLookupFactory( ContainerInterface $services = null ): MatchingTermsLookupFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.MatchingTermsLookupFactory' );
 	}
 
 	public static function getTermBuffer( ContainerInterface $services = null ): TermBuffer {
