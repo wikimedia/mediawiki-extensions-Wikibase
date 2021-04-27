@@ -760,7 +760,7 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EditEntityFactory' );
 	}
 
-	public function getItemMergeInteractor( ContainerInterface $services = null ): ItemMergeInteractor {
+	public static function getItemMergeInteractor( ContainerInterface $services = null ): ItemMergeInteractor {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.ItemMergeInteractor' );
 	}
