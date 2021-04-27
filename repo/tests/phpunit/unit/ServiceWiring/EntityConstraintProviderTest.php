@@ -18,6 +18,8 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 class EntityConstraintProviderTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getDBLoadBalancer' );
 		$this->mockService( 'WikibaseRepo.EntityIdComposer',
 			new EntityIdComposer( [] ) );
 

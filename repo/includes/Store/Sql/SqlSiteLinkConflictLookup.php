@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use DBAccessBase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * @license GPL-2.0-or-later
@@ -15,16 +15,21 @@ use Wikimedia\Rdbms\IDatabase;
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflictLookup {
+class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
+
+	/** @var ILoadBalancer */
+	private $loadBalancer;
 
 	/**
 	 * @var EntityIdComposer
 	 */
 	private $entityIdComposer;
 
-	public function __construct( EntityIdComposer $entityIdComposer ) {
-		parent::__construct();
-
+	public function __construct(
+		ILoadBalancer $loadBalancer,
+		EntityIdComposer $entityIdComposer
+	) {
+		$this->loadBalancer = $loadBalancer;
 		$this->entityIdComposer = $entityIdComposer;
 	}
 
@@ -46,7 +51,7 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 		if ( $db ) {
 			$dbr = $db;
 		} else {
-			$dbr = $this->getConnection( DB_REPLICA );
+			$dbr = $this->loadBalancer->getConnectionRef( ILoadBalancer::DB_REPLICA );
 		}
 
 		$anyOfTheLinks = '';
@@ -91,10 +96,6 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 				),
 				'sitePage' => $link->ips_site_page,
 			];
-		}
-
-		if ( !$db ) {
-			$this->releaseConnection( $dbr );
 		}
 
 		return $conflicts;
