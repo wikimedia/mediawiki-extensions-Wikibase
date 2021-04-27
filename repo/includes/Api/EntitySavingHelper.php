@@ -41,6 +41,11 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	public const NO_FRESH_ID = 'noFreshId';
 
 	/**
+	 * @var ApiBase
+	 */
+	protected $apiModule;
+
+	/**
 	 * @var SummaryFormatter
 	 */
 	private $summaryFormatter;
@@ -104,7 +109,6 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		PermissionManager $permissionManager
 	) {
 		parent::__construct(
-			$apiModule,
 			$revisionLookup,
 			$titleFactory,
 			$idParser,
@@ -113,6 +117,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 			$errorReporter
 		);
 
+		$this->apiModule = $apiModule;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->editEntityFactory = $editEntityFactory;
 		$this->permissionManager = $permissionManager;
@@ -156,22 +161,20 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 *
 	 * @return EntityDocument
 	 */
-	public function loadEntity( ?EntityId $entityId = null, $assignFreshId = self::ASSIGN_FRESH_ID ): EntityDocument {
+	public function loadEntity( array $requestParams, ?EntityId $entityId = null, $assignFreshId = self::ASSIGN_FRESH_ID ): EntityDocument {
 		if ( !in_array( $assignFreshId, [ self::ASSIGN_FRESH_ID, self::NO_FRESH_ID ] ) ) {
 			throw new InvalidArgumentException(
 				'$assignFreshId must be either of the EntitySavingHelper::ASSIGN_FRESH_ID/NO_FRESH_ID constants.'
 			);
 		}
 
-		$params = $this->apiModule->extractRequestParams();
-
 		if ( !$entityId ) {
-			$entityId = $this->getEntityIdFromParams( $params );
+			$entityId = $this->getEntityIdFromParams( $requestParams );
 		}
 
 		// If a base revision is given, use if for consistency!
-		$baseRev = isset( $params['baserevid'] )
-			? (int)$params['baserevid']
+		$baseRev = isset( $requestParams['baserevid'] )
+			? (int)$requestParams['baserevid']
 			: 0;
 
 		if ( $entityId ) {
@@ -187,7 +190,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 			$entityRevision = null;
 		}
 
-		$new = $params['new'] ?? null;
+		$new = $requestParams['new'] ?? null;
 		if ( $entityRevision === null ) {
 			if ( !$this->isEntityCreationSupported() ) {
 				if ( !$entityId ) {

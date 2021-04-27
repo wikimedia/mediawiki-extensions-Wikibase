@@ -354,7 +354,8 @@ abstract class ModifyEntity extends ApiBase {
 	 * @throws ApiUsageException
 	 */
 	private function loadEntityFromSavingHelper( ?EntityId $entityId ): EntityDocument {
-		$entity = $this->entitySavingHelper->loadEntity( $entityId, EntitySavingHelper::NO_FRESH_ID );
+		$params = $this->extractRequestParams();
+		$entity = $this->entitySavingHelper->loadEntity( $params, $entityId, EntitySavingHelper::NO_FRESH_ID );
 
 		if ( $entity->getId() === null ) {
 			// Make sure the user is allowed to create an entity before attempting to assign an id
@@ -367,7 +368,7 @@ abstract class ModifyEntity extends ApiBase {
 				$this->errorReporter->dieStatus( $permStatus, 'permissiondenied' );
 			}
 
-			$entity = $this->entitySavingHelper->loadEntity( $entityId, EntitySavingHelper::ASSIGN_FRESH_ID );
+			$entity = $this->entitySavingHelper->loadEntity( $params, $entityId, EntitySavingHelper::ASSIGN_FRESH_ID );
 		}
 
 		return $entity;

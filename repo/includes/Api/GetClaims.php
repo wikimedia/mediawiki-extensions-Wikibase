@@ -129,7 +129,7 @@ class GetClaims extends ApiBase {
 		}
 
 		/** @var EntityId $entityId */
-		$entity = $this->entityLoadingHelper->loadEntity( $entityId );
+		$entity = $this->entityLoadingHelper->loadEntity( $params, $entityId );
 
 		$statements = $this->getStatements( $entity, $guid );
 		$this->resultBuilder->addStatements( $statements, null, $params['props'] );
