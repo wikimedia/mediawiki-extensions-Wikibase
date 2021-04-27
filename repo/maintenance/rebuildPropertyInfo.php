@@ -47,7 +47,6 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 			[ $this, 'report' ]
 		);
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$propertySource = WikibaseRepo::getEntitySourceDefinitions()
 			->getSourceForEntityType( 'property' );
 

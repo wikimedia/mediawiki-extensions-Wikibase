@@ -35,7 +35,6 @@ use Wikibase\Repo\ParserOutput\PlaceholderExpander\TermboxRequestInspector;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 use Wikibase\View\ToolbarEditSectionGenerator;
@@ -179,7 +178,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	): self {
 		global $wgLang, $wgCookiePrefix;
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$babelUserLanguageLookup = new BabelUserLanguageLookup();
 		$entityViewChecker = new OutputPageEntityViewChecker( $entityContentFactory );
 

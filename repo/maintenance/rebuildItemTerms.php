@@ -23,11 +23,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
  */
 class RebuildItemTerms extends Maintenance {
 
-	/**
-	 * @var WikibaseRepo
-	 */
-	private $wikibaseRepo;
-
 	public function __construct() {
 		parent::__construct();
 
@@ -78,7 +73,6 @@ class RebuildItemTerms extends Maintenance {
 			);
 		}
 
-		$this->wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		if (
 			$this->getOption( 'from-id' ) === null &&
 			$this->getOption( 'to-id' ) === null &&

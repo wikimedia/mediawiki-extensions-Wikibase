@@ -44,14 +44,13 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 
 	protected function newSpecialPage() {
 		$namespaceNumber = 123;
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new SpecialNewProperty(
 			$this->copyrightView,
 			new EntityNamespaceLookup( [ Property::ENTITY_TYPE => $namespaceNumber ] ),
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
 			WikibaseRepo::getEditEntityFactory(),
-			$wikibaseRepo->getDataTypeFactory(),
+			WikibaseRepo::getDataTypeFactory(),
 			WikibaseRepo::getPropertyTermsCollisionDetector()
 		);
 	}

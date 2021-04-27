@@ -43,9 +43,6 @@ class ChangePropertyDataType extends Maintenance {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->fatalError( "You need to have Wikibase enabled in order to use this maintenance script!\n" );
 		}
-
-		$repo = WikibaseRepo::getDefaultInstance();
-
 		$propertyIdSerialization = $this->getOption( 'property-id' );
 		$newDataType = $this->getOption( 'new-data-type' );
 		try {

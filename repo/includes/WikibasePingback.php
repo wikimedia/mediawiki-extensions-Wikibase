@@ -101,7 +101,7 @@ class WikibasePingback {
 		$this->config = $config ?: RequestContext::getMain()->getConfig();
 		$this->logger = $logger ?: LoggerFactory::getInstance( __CLASS__ );
 		$this->extensionRegistry = $extensionRegistry ?: ExtensionRegistry::getInstance();
-		$this->wikibaseRepoSettings = $wikibaseRepoSettings ?: WikibaseRepo::getDefaultInstance()->getSettings();
+		$this->wikibaseRepoSettings = $wikibaseRepoSettings ?: WikibaseRepo::getSettings();
 		$this->requestFactory = $requestFactory ?: MediaWikiServices::getInstance()->getHttpRequestFactory();
 		$this->loadBalancerFactory = $loadBalancerFactory ?: MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 

@@ -28,11 +28,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
 class SearchEntities extends Maintenance {
 
 	/**
-	 * @var WikibaseRepo
-	 */
-	private $repo;
-
-	/**
 	 * @var EntitySearchHelper
 	 */
 	private $searchHelper;
@@ -55,19 +50,10 @@ class SearchEntities extends Maintenance {
 	}
 
 	/**
-	 * Set wikibase repo to be used, e.g. for testing.
-	 * @param WikibaseRepo $repo
-	 */
-	public function setRepo( WikibaseRepo $repo ) {
-		$this->repo = $repo;
-	}
-
-	/**
 	 * Do the actual work. All child classes will need to implement this
 	 */
 	public function execute() {
 		$engine = $this->getOption( 'engine', 'sql' );
-		$this->repo = WikibaseRepo::getDefaultInstance();
 		$this->searchHelper = $this->getSearchHelper( $engine );
 
 		$callback = [ $this, 'doSearch' ];
@@ -162,7 +148,7 @@ class SearchEntities extends Maintenance {
 			}
 		];
 
-		Hooks::run( 'WikibaseSearchEntitiesEngines', [ $this->repo, &$engines ] );
+		Hooks::run( 'WikibaseSearchEntitiesEngines', [ new WikibaseRepo(), &$engines ] );
 
 		if ( !isset( $engines[$engine] ) ) {
 			throw new MWException( "Unknown engine: $engine, valid values: "

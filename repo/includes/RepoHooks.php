@@ -558,7 +558,6 @@ final class RepoHooks {
 	 * @param array &$bodyAttrs
 	 */
 	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $skin, array &$bodyAttrs ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$outputPageEntityIdReader = new OutputPageEntityIdReader(
 			new OutputPageEntityViewChecker( WikibaseRepo::getEntityContentFactory() ),
 			WikibaseRepo::getEntityIdParser()
