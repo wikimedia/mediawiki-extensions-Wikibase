@@ -260,8 +260,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 				WikibaseRepo::getLogger()
 			),
 			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
-			MediaWikiServices::getInstance()->getRevisionStore(),
-			false
+			MediaWikiServices::getInstance()->getRevisionStore()
 		);
 
 		$cachingEntityLookup = new CachingEntityRevisionLookup(
