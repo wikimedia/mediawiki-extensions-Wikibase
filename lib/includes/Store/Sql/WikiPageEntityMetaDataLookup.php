@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use InvalidArgumentException;
-use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use stdClass;
@@ -11,7 +10,6 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\LookupConstants;
-use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\DBQueryError;
 use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -57,17 +55,9 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		PageTableEntityQuery $pageTableEntityConditionGenerator,
 		EntitySource $entitySource,
-		$lbFactoryOrLogger = null,
+		ILBFactory $lbFactory,
 		LoggerInterface $logger = null
 	) {
-		Assert::parameterType( [ ILBFactory::class, LoggerInterface::class, 'null' ], $lbFactoryOrLogger, '$lbFactoryOrLogger' );
-		if ( $lbFactoryOrLogger instanceof ILBFactory ) {
-			$lbFactory = $lbFactoryOrLogger;
-		} else {
-			$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-			$logger = $lbFactoryOrLogger;
-		}
-
 		$databaseName = $entitySource->getDatabaseName();
 
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
