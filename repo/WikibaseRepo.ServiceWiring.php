@@ -78,6 +78,9 @@ use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
+use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
+use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
+use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
@@ -1647,6 +1650,32 @@ return [
 			$services->getDBLoadBalancer(),
 			WikibaseRepo::getTypeIdsLookup( $services )
 		);
+	},
+
+	'WikibaseRepo.TermSearchInteractorFactory' => function (
+		MediaWikiServices $services
+	): TermSearchInteractorFactory {
+		$sources = WikibaseRepo::getEntitySourceDefinitions( $services )
+			->getEntityTypeToSourceMapping();
+
+		$prefetchingTermLookupFactory = WikibaseRepo::getPrefetchingTermLookupFactory( $services );
+		$matchingTermLookupFactory = WikibaseRepo::getMatchingTermsLookupFactory( $services );
+		$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory( $services );
+
+		return new DispatchingTermSearchInteractorFactory( array_map(
+			function ( EntitySource $source ) use (
+				$prefetchingTermLookupFactory,
+				$matchingTermLookupFactory,
+				$languageFallbackChainFactory
+			): MatchingTermsSearchInteractorFactory {
+				return new MatchingTermsSearchInteractorFactory(
+					$matchingTermLookupFactory->getLookupForDatabase( $source->getDatabaseName() ),
+					$languageFallbackChainFactory,
+					$prefetchingTermLookupFactory->getLookupForSource( $source )
+				);
+			},
+			$sources
+		) );
 	},
 
 	'WikibaseRepo.TermsLanguages' => function ( MediaWikiServices $services ): ContentLanguages {

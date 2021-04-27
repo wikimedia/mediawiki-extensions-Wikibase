@@ -6,8 +6,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
-use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
-use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -35,9 +33,6 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 
 	/** @var EntityRevisionLookup|null */
 	private $entityRevisionLookup = null;
-
-	/** @var TermSearchInteractorFactory|null */
-	private $termSearchInteractorFactory = null;
 
 	/** @var PrefetchingTermLookup|null */
 	private $prefetchingTermLookup = null;
@@ -71,21 +66,6 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 		}
 
 		return $this->entityRevisionLookup;
-	}
-
-	public function getTermSearchInteractorFactory() {
-		if ( $this->termSearchInteractorFactory === null ) {
-			$factoriesByType = [];
-
-			/** @var EntitySource $source */
-			foreach ( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() as $entityType => $source ) {
-				$factoriesByType[$entityType] = $this->singleSourceServices[$source->getSourceName()]->getTermSearchInteractorFactory();
-			}
-
-			$this->termSearchInteractorFactory = new DispatchingTermSearchInteractorFactory( $factoriesByType );
-		}
-
-		return $this->termSearchInteractorFactory;
 	}
 
 	public function getPrefetchingTermLookup() {

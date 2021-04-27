@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -38,7 +37,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 	public function provideSimpleServiceGetters() {
 		return [
 			[ 'getEntityRevisionLookup', EntityRevisionLookup::class, true ],
-			[ 'getTermSearchInteractorFactory', TermSearchInteractorFactory::class, true ],
 			[ 'getPrefetchingTermLookup', PrefetchingTermLookup::class, true ],
 			[ 'getEntityPrefetcher', EntityPrefetcher::class, true ],
 			[ 'getPropertyInfoLookup', PropertyInfoLookup::class, true ],

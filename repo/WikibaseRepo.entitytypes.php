@@ -150,8 +150,7 @@ return [
 							WikibaseRepo::getEntityTypeToRepositoryMapping()
 						),
 						new EntityTermSearchHelper(
-							WikibaseRepo::getWikibaseServices()
-								->getTermSearchInteractorFactory()
+							WikibaseRepo::getTermSearchInteractorFactory()
 								->newInteractor( WikibaseRepo::getUserLanguage()->getCode() )
 						)
 					]
@@ -249,8 +248,7 @@ return [
 							WikibaseRepo::getEntityTypeToRepositoryMapping()
 						),
 						new EntityTermSearchHelper(
-							WikibaseRepo::getWikibaseServices()
-								->getTermSearchInteractorFactory()
+							WikibaseRepo::getTermSearchInteractorFactory()
 								->newInteractor( WikibaseRepo::getUserLanguage()->getCode() )
 						)
 					]

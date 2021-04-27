@@ -47,6 +47,7 @@ use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
+use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
@@ -448,6 +449,11 @@ class WikibaseRepo {
 	public static function getMatchingTermsLookupFactory( ContainerInterface $services = null ): MatchingTermsLookupFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.MatchingTermsLookupFactory' );
+	}
+
+	public static function getTermSearchInteractorFactory( ContainerInterface $services = null ): TermSearchInteractorFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.TermSearchInteractorFactory' );
 	}
 
 	public static function getTermBuffer( ContainerInterface $services = null ): TermBuffer {
