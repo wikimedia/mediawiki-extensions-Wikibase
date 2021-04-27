@@ -4,6 +4,7 @@
 			"Fanjiayi",
 			"Mithridates",
 			"OIS",
+			"Renan",
 			"Stavanger7"
 		]
 	},
@@ -18,6 +19,8 @@
 	"wikibase-rc-hide-wikidata-show": "Monstrar",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} redacter",
+	"entityusage": "Págines que usa un entitá",
+	"entityusage-summary": "Ti págine lista li págines que usa li entitá specificat (e.g. Q42). Li liste es monstrat per órdine descendente del ID del págine, de ti-ci forme li págines max nov es listat prim.",
 	"wikibase-otherprojects": "In altri projectes",
 	"wikibase-client-data-bridge-dialog-title": "Redacter $1"
 }

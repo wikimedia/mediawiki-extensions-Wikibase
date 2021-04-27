@@ -102,7 +102,7 @@
 	"wikibase-sitelinks-link-columnheading": "Pagina conligada",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Connession}} con {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Avìsom quand che un quaivun el conet una pagina che hoo cread {{GENDER:|mi}} a 'n element {{WBREPONAME}}.",
-	"notification-header-page-connection": "La pagina <strong>$3</strong> l'èra {{GENDER:$2|connessa}} {{PLURAL:$4|-1=a 'n element {{WBREPONAME}}|a l'element {{WBREPONAME}} $4}}, indoe i dati important per l'argoment podet vesser mucciad.",
+	"notification-header-page-connection": "La pagina <strong>$3</strong> l'è stada {{GENDER:$2|connessa}} {{PLURAL:$4|-1=a 'n element {{WBREPONAME}}|a l'element {{WBREPONAME}} $4}}, indove i dati important per l'argoment i poden vesser muciad.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|un'altra pagina|alter $4 pagine|100=99+ alter pagine}} inn {{GENDER:$2|stade conesse}} a di element {{WBREPONAME}}, indoe poden vesser mucciàd i dati importanti di argoment.",
 	"notification-link-text-view-item": "{{GENDER:$1|Varda}} i modifiche",
 	"notification-subject-page-connection": "Una pagina in su {{SITENAME}} che {{GENDER:$3|t'hee cread}} l'è stada {{GENDER:$2|conèssa}} a 'n element {{WBREPONAME}}",
