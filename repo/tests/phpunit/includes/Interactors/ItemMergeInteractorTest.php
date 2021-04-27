@@ -345,7 +345,8 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$user = $this->getTestSysop()->getUser();
-		$user->addWatch( $entityTitleLookup->getTitleForId( $fromId ) );
+		$watchlistManager = MediaWikiServices::getInstance()->getWatchlistManager();
+		$watchlistManager->addWatch( $user, $entityTitleLookup->getTitleForId( $fromId ) );
 
 		$interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, 'CustomSummary' );
 
@@ -364,7 +365,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$this->assertTrue(
-			$user->isWatched( $entityTitleLookup->getTitleForId( $toId ) ),
+			$watchlistManager->isWatched( $user, $entityTitleLookup->getTitleForId( $toId ) ),
 			'Item merged into is being watched'
 		);
 	}

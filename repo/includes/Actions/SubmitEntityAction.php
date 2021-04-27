@@ -12,8 +12,6 @@ use MWException;
 use Page;
 use Status;
 use Title;
-use User;
-use WatchAction;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\SummaryFormatter;
@@ -321,11 +319,14 @@ class SubmitEntityAction extends EditEntityAction {
 	private function doWatch( Title $title ) {
 		$user = $this->getUser();
 
+		$services = MediaWikiServices::getInstance();
+		$userOptionsLookup = $services->getUserOptionsLookup();
+		$watchlistManager = $services->getWatchlistManager();
 		if ( $user->isRegistered()
-			&& $user->getOption( 'watchdefault' )
-			&& !$user->isWatched( $title, User::IGNORE_USER_RIGHTS )
+			&& $userOptionsLookup->getOption( $user, 'watchdefault' )
+			&& !$watchlistManager->isWatchedIgnoringRights( $user, $title )
 		) {
-			WatchAction::doWatch( $title, $user, User::IGNORE_USER_RIGHTS );
+			$watchlistManager->addWatchIgnoringRights( $user, $title );
 		}
 	}
 

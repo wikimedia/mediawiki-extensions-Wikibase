@@ -8,12 +8,12 @@ use InvalidArgumentException;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
+use MediaWiki\Watchlist\WatchlistManager;
 use MWException;
 use RecentChange;
 use Status;
 use Title;
 use User;
-use WatchAction;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -80,6 +80,11 @@ class WikiPageEntityStore implements EntityStore {
 	private $permissionManager;
 
 	/**
+	 * @var WatchlistManager
+	 */
+	private $watchlistManager;
+
+	/**
 	 * @param EntityContentFactory $contentFactory
 	 * @param EntityTitleStoreLookup $entityTitleStoreLookup
 	 * @param IdGenerator $idGenerator
@@ -87,6 +92,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param RevisionStore $revisionStore A RevisionStore for the local database.
 	 * @param EntitySource $entitySource
 	 * @param PermissionManager $permissionManager
+	 * @param WatchlistManager $watchlistManager
 	 */
 	public function __construct(
 		EntityContentFactory $contentFactory,
@@ -95,7 +101,8 @@ class WikiPageEntityStore implements EntityStore {
 		EntityIdComposer $entityIdComposer,
 		RevisionStore $revisionStore,
 		EntitySource $entitySource,
-		PermissionManager $permissionManager
+		PermissionManager $permissionManager,
+		WatchlistManager $watchlistManager
 	) {
 		$this->contentFactory = $contentFactory;
 		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
@@ -109,6 +116,8 @@ class WikiPageEntityStore implements EntityStore {
 		$this->entitySource = $entitySource;
 
 		$this->permissionManager = $permissionManager;
+
+		$this->watchlistManager = $watchlistManager;
 	}
 
 	private function assertCanStoreEntity( EntityId $id ) {
@@ -536,14 +545,14 @@ class WikiPageEntityStore implements EntityStore {
 		if (
 			$user->isRegistered() &&
 			$title &&
-			( $watch != $user->isWatched( $title, User::IGNORE_USER_RIGHTS ) )
+			( $watch != $this->watchlistManager->isWatchedIgnoringRights( $user, $title ) )
 		) {
 			if ( $watch ) {
 				// Allow adding to watchlist even if user('s session) lacks 'editmywatchlist'
 				// (e.g. due to bot password or OAuth grants)
-				WatchAction::doWatch( $title, $user, User::IGNORE_USER_RIGHTS );
+				$this->watchlistManager->addWatchIgnoringRights( $user, $title );
 			} else {
-				WatchAction::doUnwatch( $title, $user );
+				$this->watchlistManager->removeWatch( $user, $title );
 			}
 		}
 	}
@@ -563,7 +572,7 @@ class WikiPageEntityStore implements EntityStore {
 		$this->assertCanStoreEntity( $id );
 
 		$title = $this->getTitleForEntity( $id );
-		return ( $title && $user->isWatched( $title, User::IGNORE_USER_RIGHTS ) );
+		return ( $title && $this->watchlistManager->isWatchedIgnoringRights( $user, $title ) );
 	}
 
 }

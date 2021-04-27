@@ -306,15 +306,17 @@ class SqlStore implements Store {
 	private function newEntityStore() {
 		$contentFactory = WikibaseRepo::getEntityContentFactory();
 		$entityTitleStoreLookup = WikibaseRepo::getEntityTitleStoreLookup();
+		$services = MediaWikiServices::getInstance();
 
 		$store = new WikiPageEntityStore(
 			$contentFactory,
 			$entityTitleStoreLookup,
 			$this->idGenerator,
 			$this->entityIdComposer,
-			MediaWikiServices::getInstance()->getRevisionStore(),
+			$services->getRevisionStore(),
 			$this->entitySource,
-			MediaWikiServices::getInstance()->getPermissionManager()
+			$services->getPermissionManager(),
+			$services->getWatchlistManager()
 		);
 		$store->registerWatcher( $this->getEntityStoreWatcher() );
 

@@ -165,7 +165,8 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$localSource,
-			MediaWikiServices::getInstance()->getPermissionManager()
+			MediaWikiServices::getInstance()->getPermissionManager(),
+			MediaWikiServices::getInstance()->getWatchlistManager()
 		);
 
 		return [ $store, $lookup ];
@@ -788,7 +789,8 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			$this->prophesize( EntityIdComposer::class )->reveal(),
 			$this->prophesize( RevisionStore::class )->reveal(),
 			new EntitySource( 'test', 'testdb', [], '', '', '', '' ),
-			MediaWikiServices::getInstance()->getPermissionManager()
+			MediaWikiServices::getInstance()->getPermissionManager(),
+			MediaWikiServices::getInstance()->getWatchlistManager()
 		);
 		$store = TestingAccessWrapper::newFromObject( $store );
 
@@ -1022,7 +1024,8 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$itemSource,
-			MediaWikiServices::getInstance()->getPermissionManager()
+			MediaWikiServices::getInstance()->getPermissionManager(),
+			MediaWikiServices::getInstance()->getWatchlistManager()
 		);
 
 		return $store;
@@ -1055,7 +1058,8 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$customSource,
-			MediaWikiServices::getInstance()->getPermissionManager()
+			MediaWikiServices::getInstance()->getPermissionManager(),
+			MediaWikiServices::getInstance()->getWatchlistManager()
 		);
 
 		return $store;
