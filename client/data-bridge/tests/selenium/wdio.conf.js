@@ -56,6 +56,7 @@ exports.config = {
 	// from the same test should run tests.
 	//
 	maxInstances: 1,
+	services: [ 'devtools' ],
 
 	capabilities: [ {
 		// maxInstances can get overwritten per capability. So if you have an in-house Selenium
