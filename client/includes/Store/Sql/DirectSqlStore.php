@@ -330,8 +330,13 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getSiteLinkLookup() {
 		if ( $this->siteLinkLookup === null ) {
+			$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory(); // TODO inject
 			$this->siteLinkLookup = new CachingSiteLinkLookup(
-				new SiteLinkTable( 'wb_items_per_site', true, $this->repoWiki ),
+				new SiteLinkTable(
+					'wb_items_per_site',
+					true,
+					$lbFactory->getMainLB( $this->repoWiki )
+				),
 				new HashBagOStuff()
 			);
 		}
