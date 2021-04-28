@@ -35,7 +35,7 @@ describe( 'init', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		assert.ok( DataBridgePage.app.isDisplayed( 10000 ) );
+		assert.ok( DataBridgePage.app.isDisplayed( 20000 ) );
 	} );
 
 	it( 'indicates loading while app gathers its data', () => {
@@ -71,7 +71,7 @@ describe( 'init', () => {
 			},
 			{
 				interval: 500,
-				timeout: 10000,
+				timeout: 20000,
 			}
 		);
 		DataBridgePage.loadingBar.waitForExist( undefined, true );
@@ -104,7 +104,7 @@ describe( 'init', () => {
 
 			DataBridgePage.openAppOnPage( title );
 
-			DataBridgePage.bridge.waitForDisplayed( 10000 );
+			DataBridgePage.bridge.waitForDisplayed( 20000 );
 			assert.ok( DataBridgePage.bridge.isDisplayed() );
 			assert.strictEqual( DataBridgePage.value.getValue(), stringPropertyExampleValue );
 		} );
@@ -170,7 +170,7 @@ describe( 'init', () => {
 
 			DataBridgePage.openAppOnPage( title );
 
-			DataBridgePage.bridge.waitForDisplayed( 10000 );
+			DataBridgePage.bridge.waitForDisplayed( 20000 );
 			assert.ok( DataBridgePage.bridge.isDisplayed() );
 			assert.strictEqual( DataBridgePage.nthReference( 1 ).getText(), 'A. B. https://example.com.' );
 			assert.strictEqual( DataBridgePage.nthReference( 2 ).getText(), 'C.' );
@@ -222,7 +222,7 @@ describe( 'init', () => {
 
 				browser.waitUntil(
 					() => DataBridgePage.propertyLabel.getText() === expectedLabel,
-					10000,
+					20000,
 					`${DataBridgePage.propertyLabel.getText()} is not equal to ${expectedLabel}`
 				);
 			}
@@ -279,7 +279,7 @@ describe( 'init', () => {
 
 				DataBridgePage.open( title );
 				DataBridgePage.overloadedLink.click();
-				DataBridgePage.app.waitForDisplayed( 10000 );
+				DataBridgePage.app.waitForDisplayed( 20000 );
 
 				assert.ok( WarningAnonymousEdit.root.isDisplayed() );
 
@@ -312,7 +312,7 @@ describe( 'init', () => {
 
 				DataBridgePage.open( title );
 				DataBridgePage.overloadedLink.click();
-				DataBridgePage.app.waitForDisplayed( 10000 );
+				DataBridgePage.app.waitForDisplayed( 20000 );
 
 				assert.ok( WarningAnonymousEdit.root.isDisplayed() );
 
@@ -351,7 +351,7 @@ describe( 'init', () => {
 
 			DataBridgePage.open( title );
 			DataBridgePage.overloadedLink.click();
-			DataBridgePage.bridge.waitForDisplayed( 10000 );
+			DataBridgePage.bridge.waitForDisplayed( 20000 );
 			assert.ok( !WarningAnonymousEdit.root.isDisplayed() );
 		} );
 	} );
