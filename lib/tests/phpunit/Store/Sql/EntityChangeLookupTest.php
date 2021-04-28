@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
+use LoadBalancerSingle;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -25,7 +26,7 @@ use Wikibase\Lib\WikibaseSettings;
  */
 class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 
-	private function newEntityChangeLookup( $wiki ) {
+	private function newEntityChangeLookup() {
 		return new EntityChangeLookup(
 			new EntityChangeFactory(
 				new EntityDiffer(),
@@ -33,7 +34,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 				[ 'item' => EntityChange::class ]
 			),
 			new ItemIdParser(),
-			$wiki
+			LoadBalancerSingle::newFromConnection( $this->db )
 		);
 	}
 
@@ -43,7 +44,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 			->method( 'getId' )
 			->willReturn( 42 );
 
-		$changeLookup = $this->newEntityChangeLookup( 'doesntmatterwiki' );
+		$changeLookup = $this->newEntityChangeLookup();
 
 		$this->assertSame( 42, $changeLookup->getRecordId( $change ) );
 	}
@@ -88,7 +89,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 		}
 		$start = $this->offsetStart( $start );
 
-		$lookup = $this->newEntityChangeLookup( wfWikiID() );
+		$lookup = $this->newEntityChangeLookup();
 
 		$changes = $lookup->loadChunk( $start, $size );
 
@@ -101,7 +102,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 	public function testLoadByChangeIds() {
 		$start = $this->offsetStart( 3 );
 
-		$lookup = $this->newEntityChangeLookup( wfWikiID() );
+		$lookup = $this->newEntityChangeLookup();
 
 		$changes = $lookup->loadByChangeIds( [ $start, $start + 1, $start + 4 ] );
 		list( $changeOne, $changeTwo, $changeThree ) = $this->getEntityChanges();
@@ -127,7 +128,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 		$changeStore = new SqlChangeStore( MediaWikiServices::getInstance()->getDBLoadBalancer() );
 		$changeStore->saveChange( $expected );
 
-		$lookup = $this->newEntityChangeLookup( wfWikiID() );
+		$lookup = $this->newEntityChangeLookup();
 
 		$change = $lookup->loadByRevisionId( 342342 );
 
@@ -139,7 +140,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
 		}
 
-		$lookup = $this->newEntityChangeLookup( wfWikiID() );
+		$lookup = $this->newEntityChangeLookup();
 
 		$changes = $lookup->loadByRevisionId( PHP_INT_MAX );
 		$this->assertNull( $changes );

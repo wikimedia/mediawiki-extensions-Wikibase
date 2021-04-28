@@ -457,7 +457,12 @@ class DirectSqlStore implements ClientStore {
 	 * @return EntityChangeLookup
 	 */
 	public function getEntityChangeLookup() {
-		return new EntityChangeLookup( $this->entityChangeFactory, $this->entityIdParser, $this->repoWiki );
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory(); // TODO inject
+		return new EntityChangeLookup(
+			$this->entityChangeFactory,
+			$this->entityIdParser,
+			$lbFactory->getMainLB( $this->repoWiki )
+		);
 	}
 
 }
