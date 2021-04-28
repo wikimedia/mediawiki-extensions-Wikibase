@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Store\Sql;
 
-use DBAccessBase;
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use stdClass;
@@ -11,7 +11,10 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\LookupConstants;
+use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\DBQueryError;
+use Wikimedia\Rdbms\ILBFactory;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * Service for looking up meta data about one or more entities as needed for
@@ -25,7 +28,7 @@ use Wikimedia\Rdbms\DBQueryError;
  * @author Daniel Kinzler
  * @author Marius Hoch < hoo@online.de >
  */
-class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntityMetaDataAccessor {
+class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 
 	/**
 	 * @var EntityNamespaceLookup
@@ -47,18 +50,30 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 */
 	private $entitySource;
 
+	/** @var ILoadBalancer */
+	private $loadBalancer;
+
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
 		PageTableEntityQuery $pageTableEntityConditionGenerator,
 		EntitySource $entitySource,
+		$lbFactoryOrLogger = null,
 		LoggerInterface $logger = null
 	) {
+		Assert::parameterType( [ ILBFactory::class, LoggerInterface::class, 'null' ], $lbFactoryOrLogger, '$lbFactoryOrLogger' );
+		if ( $lbFactoryOrLogger instanceof ILBFactory ) {
+			$lbFactory = $lbFactoryOrLogger;
+		} else {
+			$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+			$logger = $lbFactoryOrLogger;
+		}
+
 		$databaseName = $entitySource->getDatabaseName();
 
-		parent::__construct( $databaseName );
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->pageTableEntityQuery = $pageTableEntityConditionGenerator;
 		$this->entitySource = $entitySource;
+		$this->loadBalancer = $lbFactory->getMainLB( $databaseName );
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -80,7 +95,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		$this->assertCanHandleEntityIds( $entityIds );
 
 		if ( $mode !== LookupConstants::LATEST_FROM_MASTER ) {
-			$rows = $this->selectRevisionInformationMultiple( $entityIds, DB_REPLICA );
+			$rows = $this->selectRevisionInformationMultiple( $entityIds, ILoadBalancer::DB_REPLICA );
 		}
 
 		if ( $mode !== LookupConstants::LATEST_FROM_REPLICA ) {
@@ -96,7 +111,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 			if ( $loadFromMaster ) {
 				$rows = array_merge(
 					$rows,
-					$this->selectRevisionInformationMultiple( $loadFromMaster, DB_MASTER )
+					$this->selectRevisionInformationMultiple( $loadFromMaster, ILoadBalancer::DB_MASTER )
 				);
 			}
 		}
@@ -123,7 +138,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	) {
 		$this->assertCanHandleEntityId( $entityId );
 
-		$row = $this->selectRevisionInformationById( $entityId, $revisionId, DB_REPLICA );
+		$row = $this->selectRevisionInformationById( $entityId, $revisionId, ILoadBalancer::DB_REPLICA );
 
 		if ( !$row && $mode !== LookupConstants::LATEST_FROM_REPLICA ) {
 			// Try loading from master, unless the caller only wants replica data.
@@ -136,7 +151,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 				]
 			);
 
-			$row = $this->selectRevisionInformationById( $entityId, $revisionId, DB_MASTER );
+			$row = $this->selectRevisionInformationById( $entityId, $revisionId, ILoadBalancer::DB_MASTER );
 		}
 
 		return $row;
@@ -160,7 +175,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		$this->assertCanHandleEntityIds( $entityIds );
 
 		if ( $mode !== LookupConstants::LATEST_FROM_MASTER ) {
-			$revisionIds = $this->selectLatestRevisionIdsMultiple( $entityIds, DB_REPLICA );
+			$revisionIds = $this->selectLatestRevisionIdsMultiple( $entityIds, ILoadBalancer::DB_REPLICA );
 		}
 
 		if ( $mode !== LookupConstants::LATEST_FROM_REPLICA ) {
@@ -176,7 +191,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 			if ( $loadFromMaster ) {
 				$revisionIds = array_merge(
 					$revisionIds,
-					$this->selectLatestRevisionIdsMultiple( $loadFromMaster, DB_MASTER )
+					$this->selectLatestRevisionIdsMultiple( $loadFromMaster, ILoadBalancer::DB_MASTER )
 				);
 			}
 		}
@@ -231,7 +246,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @return stdClass|bool a raw database row object, or false if no such entity revision exists.
 	 */
 	private function selectRevisionInformationById( EntityId $entityId, $revisionId, $connType ) {
-		$db = $this->getConnection( $connType );
+		$db = $this->loadBalancer->getConnectionRef( $connType );
 
 		$rows = $this->pageTableEntityQuery->selectRows(
 			$this->selectFields(),
@@ -239,8 +254,6 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 			[ $entityId ],
 			$db
 		);
-
-		$this->releaseConnection( $db );
 
 		return $this->processRows( [ $entityId ], $rows )[$entityId->getSerialization()];
 	}
@@ -257,7 +270,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 *  could not be found.
 	 */
 	private function selectRevisionInformationMultiple( array $entityIds, $connType ) {
-		$db = $this->getConnection( $connType );
+		$db = $this->loadBalancer->getConnectionRef( $connType );
 
 		$rows = $this->pageTableEntityQuery->selectRows(
 			$this->selectFields(),
@@ -265,8 +278,6 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 			$entityIds,
 			$db
 		);
-
-		$this->releaseConnection( $db );
 
 		return $this->processRows( $entityIds, $rows );
 	}
@@ -283,7 +294,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * or false if an entity could not be found (including if the page is a redirect).
 	 */
 	private function selectLatestRevisionIdsMultiple( array $entityIds, $connType ) {
-		$db = $this->getConnection( $connType );
+		$db = $this->loadBalancer->getConnectionRef( $connType );
 
 		$rows = $this->pageTableEntityQuery->selectRows(
 			[ 'page_title', 'page_latest', 'page_is_redirect' ],
@@ -291,8 +302,6 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 			$entityIds,
 			$db
 		);
-
-		$this->releaseConnection( $db );
 
 		return array_map(
 			function ( $revisionInformation ) {

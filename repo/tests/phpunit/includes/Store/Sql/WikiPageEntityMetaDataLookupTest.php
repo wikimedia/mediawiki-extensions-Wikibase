@@ -18,9 +18,12 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * This test needs to be in repo, although the class is in lib as we can't alter
@@ -93,7 +96,8 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				$namespaceLookup,
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
-			$this->newEntitySource()
+			$this->newEntitySource(),
+			new LBFactorySingle( [ 'connection' => $this->db ] )
 		);
 	}
 
@@ -118,33 +122,23 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * This mock uses the real code except for DBAccessBase::getConnection
+	 * This injects a fake load balancer (factory).
 	 *
-	 * @param int $selectCount Number of mocked/lagged DBAccessBase::getConnection::select calls
-	 * @param int $getConnectionCount Number of WikiPageEntityMetaDataLookup::getConnection calls
+	 * @param int $selectCount Number of mocked/lagged IDatabase::select calls
+	 * @param int $getConnectionRefCount Number of ILoadBalancer::getConnectionRef calls
 	 *
 	 * @return WikiPageEntityMetaDataLookup
 	 */
-	private function getLookupWithLaggedConnection( $selectCount, $getConnectionCount ) {
+	private function getLookupWithLaggedConnection( $selectCount, $getConnectionRefCount ) {
 		$nsLookup = $this->getEntityNamespaceLookup();
-		$lookup = $this->getMockBuilder( WikiPageEntityMetaDataLookup::class )
-			->setConstructorArgs( [
-				$nsLookup,
-				new EntityIdLocalPartPageTableEntityQuery(
-					$nsLookup,
-					MediaWikiServices::getInstance()->getSlotRoleStore()
-				),
-				$this->newEntitySource()
-			] )
-			->setMethods( [ 'getConnection' ] )
-			->getMock();
 
-		$lookup->expects( $this->exactly( $getConnectionCount ) )
-			->method( 'getConnection' )
+		$loadBalancer = $this->createMock( ILoadBalancer::class );
+		$loadBalancer->expects( $this->exactly( $getConnectionRefCount ) )
+			->method( 'getConnectionRef' )
 			->willReturnCallback( function( $id ) use ( $selectCount ) {
-				$db = $realDB = wfGetDB( DB_MASTER );
+				$db = $realDB = $this->db;
 
-				if ( $id === DB_REPLICA ) {
+				if ( $id === ILoadBalancer::DB_REPLICA ) {
 					// This is a (fake) lagged database connection.
 					$db = $this->getLaggedDatabase( $realDB, $selectCount );
 				}
@@ -152,7 +146,15 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				return $db;
 			} );
 
-		return $lookup;
+		return new WikiPageEntityMetaDataLookup(
+			$nsLookup,
+			new EntityIdLocalPartPageTableEntityQuery(
+				$nsLookup,
+				MediaWikiServices::getInstance()->getSlotRoleStore()
+			),
+			$this->newEntitySource(),
+			new FakeLBFactory( [ 'lb' => $loadBalancer ] )
+		);
 	}
 
 	/**
@@ -389,7 +391,8 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				$namespaceLookup,
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
-			$itemSource
+			$itemSource,
+			new LBFactorySingle( [ 'connection' => $this->db ] )
 		);
 	}
 

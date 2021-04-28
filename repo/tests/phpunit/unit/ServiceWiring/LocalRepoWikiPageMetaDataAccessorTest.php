@@ -31,6 +31,8 @@ class LocalRepoWikiPageMetaDataAccessorTest extends ServiceWiringTestCase {
 			new NullLogger() );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getSlotRoleStore' );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getDBLoadBalancerFactory' );
 
 		$this->assertInstanceOf(
 			WikiPageEntityMetaDataAccessor::class,

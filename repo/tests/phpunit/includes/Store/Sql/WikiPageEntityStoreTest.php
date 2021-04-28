@@ -44,6 +44,7 @@ use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Rdbms\LBFactorySingle;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -133,7 +134,8 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					$nsLookup,
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
-				$localSource
+				$localSource,
+				new LBFactorySingle( [ 'connection' => $this->db ] )
 			),
 			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
 			MediaWikiServices::getInstance()->getRevisionStore()

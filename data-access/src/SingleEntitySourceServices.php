@@ -285,6 +285,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 							$this->slotRoleStore
 						),
 						$this->entitySource,
+						MediaWikiServices::getInstance()->getDBLoadBalancerFactory(), // TODO inject
 						$logger
 					),
 					$databaseName,
