@@ -37,10 +37,9 @@ describe( 'App', () => {
 		browser.waitUntil( () => DataBridgePage.closeButton.isClickable() );
 		DataBridgePage.closeButton.click();
 
-		DataBridgePage.app.waitForExist(
-			undefined,
-			true,
-			'App still exists in the DOM after clicking the close button'
-		);
+		DataBridgePage.app.waitForExist( {
+			reverse: true,
+			timeoutMsg: 'App still exists in the DOM after clicking the close button',
+		} );
 	} );
 } );

@@ -75,7 +75,9 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( 20000 );
+		DataBridgePage.bridge.waitForDisplayed( {
+			timeout: 20000,
+		} );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 		assert.strictEqual( DataBridgePage.value.getValue(), stringPropertyExampleValue );
 
@@ -101,12 +103,16 @@ describe( 'App', () => {
 		DataBridgePage.thankYouButton.click();
 		browser.switchWindow( title );
 
-		DataBridgePage.app.waitForDisplayed(
-			5000,
-			true,
-			'App is still being displayed after clicking the save button'
-		);
-		DataBridgePage.app.waitForExist( 5000, true, 'App still exists in the DOM after clicking the save button' );
+		DataBridgePage.app.waitForDisplayed( {
+			timeout: 5000,
+			reverse: true,
+			timeoutMsg: 'App is still being displayed after clicking the save button',
+		} );
+		DataBridgePage.app.waitForExist( {
+			timeout: 5000,
+			reverse: true,
+			timeoutMsg: 'App still exists in the DOM after clicking the save button',
+		} );
 
 		const entity = browser.call( () => WikibaseApi.getEntity( entityId ) );
 		const actualValueAtServer = entity.claims[ propertyId ][ 0 ].mainsnak.datavalue.value;
@@ -150,7 +156,9 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( 20000 );
+		DataBridgePage.bridge.waitForDisplayed( {
+			timeout: 20000,
+		} );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 
 		const newValue = 'newValue';
@@ -163,7 +171,11 @@ describe( 'App', () => {
 		DataBridgePage.licensePopup.waitForDisplayed();
 
 		DataBridgePage.licenseCloseButton.click();
-		DataBridgePage.licensePopup.waitForDisplayed( null, true, 'License still visible after being dismissed' );
+		DataBridgePage.licensePopup.waitForDisplayed( {
+			timeout: null,
+			reverse: true,
+			timeoutMsg: 'License still visible after being dismissed',
+		} );
 
 		// show License again
 		DataBridgePage.saveButton.click();
@@ -176,11 +188,11 @@ describe( 'App', () => {
 		DataBridgePage.thankYouScreen.waitForDisplayed();
 		DataBridgePage.closeButton.click();
 
-		DataBridgePage.app.waitForDisplayed(
-			5000,
-			true,
-			'App is still being displayed after clicking the save button'
-		);
+		DataBridgePage.app.waitForDisplayed( {
+			timeout: 5000,
+			reverse: true,
+			timeoutMsg: 'App is still being displayed after clicking the save button',
+		} );
 
 		const entity = browser.call( () => WikibaseApi.getEntity( entityId ) );
 		const actualValuesAtServer = entity.claims[ propertyId ];

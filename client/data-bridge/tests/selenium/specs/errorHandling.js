@@ -26,7 +26,9 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.error.waitForDisplayed( 20000 );
+		DataBridgePage.error.waitForDisplayed( {
+			timeout: 20000,
+		} );
 		assert.ok( DataBridgePage.error.isDisplayed() );
 		assert.ok( DataBridgePage.showsErrorUnknown() );
 
@@ -61,13 +63,17 @@ describe( 'App', () => {
 
 		NetworkUtil.disableNetwork();
 		DataBridgePage.launchApp();
-		DataBridgePage.error.waitForDisplayed( 20000 );
+		DataBridgePage.error.waitForDisplayed( {
+			timeout: 20000,
+		} );
 
 		assert.ok( DataBridgePage.showsErrorUnknown() );
 
 		NetworkUtil.enableNetwork();
 		DataBridgePage.errorUnknownRelaunch.click();
-		DataBridgePage.app.waitForDisplayed( 20000 );
+		DataBridgePage.app.waitForDisplayed( {
+			timeout: 20000,
+		} );
 		WarningAnonymousEdit.dismiss();
 		DataBridgePage.bridge.waitForDisplayed();
 	} );
@@ -97,7 +103,9 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( 20000 );
+		DataBridgePage.bridge.waitForDisplayed( {
+			timeout: 20000,
+		} );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 
 		const newValue = 'newValue';
@@ -151,7 +159,9 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( 20000 );
+		DataBridgePage.bridge.waitForDisplayed( {
+			timeout: 20000,
+		} );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 
 		const newValue = 'newValue';
@@ -215,7 +225,9 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( 20000 );
+		DataBridgePage.bridge.waitForDisplayed( {
+			timeout: 20000,
+		} );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 
 		const newValue = 'newValue';
@@ -248,7 +260,9 @@ describe( 'App', () => {
 		// show ErrorSaving screen
 		DataBridgePage.error.waitForDisplayed();
 
-		DataBridgePage.errorSavingBackButton.waitForDisplayed( undefined, true );
+		DataBridgePage.errorSavingBackButton.waitForDisplayed( {
+			reverse: true,
+		} );
 		DataBridgePage.headerBackButton.waitForDisplayed();
 		DataBridgePage.headerBackButton.click();
 
@@ -285,7 +299,9 @@ describe( 'App', () => {
 			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.openAppOnPage( title );
-			DataBridgePage.bridge.waitForDisplayed( 20000 );
+			DataBridgePage.bridge.waitForDisplayed( {
+				timeout: 20000,
+			} );
 
 			const newValue = 'newValue';
 			DomUtil.setValue( DataBridgePage.value, newValue );
@@ -331,7 +347,9 @@ describe( 'App', () => {
 				DomUtil.setValue( LoginPage.username, browser.config.mwUser );
 				DomUtil.setValue( LoginPage.password, browser.config.mwPwd );
 				LoginPage.loginButton.click();
-				LoginPage.username.waitForDisplayed( undefined, /* reverse: */ true );
+				LoginPage.username.waitForDisplayed( {
+					reverse: true,
+				} );
 			} );
 
 			// app should have returned from error in the meantime
@@ -410,7 +428,9 @@ describe( 'App', () => {
 			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.openAppOnPage( title );
-			DataBridgePage.bridge.waitForDisplayed( 20000 );
+			DataBridgePage.bridge.waitForDisplayed( {
+				timeout: 20000,
+			} );
 
 			const newValue = 'newValue';
 			DomUtil.setValue( DataBridgePage.value, newValue );
@@ -439,7 +459,9 @@ describe( 'App', () => {
 
 			ErrorSavingEditConflict.reloadButton.click();
 
-			DataBridgePage.app.waitForDisplayed( undefined, /* reverse */ true );
+			DataBridgePage.app.waitForDisplayed( {
+				reverse: true,
+			} );
 		} );
 
 		it( 'reloads on close button click', () => {
@@ -447,7 +469,9 @@ describe( 'App', () => {
 
 			DataBridgePage.closeButton.click();
 
-			DataBridgePage.app.waitForDisplayed( undefined, /* reverse */ true );
+			DataBridgePage.app.waitForDisplayed( {
+				reverse: true,
+			} );
 		} );
 	} );
 

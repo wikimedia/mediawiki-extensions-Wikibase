@@ -132,7 +132,9 @@ class DataBridgePage extends Page {
 
 	launchApp() {
 		this.overloadedLink.click();
-		this.app.waitForDisplayed( 20000 );
+		this.app.waitForDisplayed( {
+			timeout: 20000,
+		} );
 		WarningAnonymousEdit.dismiss();
 	}
 
