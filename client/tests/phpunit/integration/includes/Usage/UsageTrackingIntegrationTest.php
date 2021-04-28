@@ -76,7 +76,7 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function runJobs() {
+	private function runRefreshLinksJobs() {
 		MediaWikiServices::getInstance()->getJobRunner()->run( [
 			'type'     => 'refreshLinks',
 			'maxJobs'  => false,
@@ -89,7 +89,7 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		$page = WikiPage::factory( $title );
 		$page->doDeleteArticleReal( 'TEST', $this->getTestSysop()->getUser() );
 
-		$this->runJobs();
+		$this->runRefreshLinksJobs();
 
 		$title->resetArticleID( false );
 	}
@@ -102,7 +102,7 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		$page = WikiPage::factory( $title );
 		$page->doEditContent( $content, 'TEST', $flags );
 
-		$this->runJobs();
+		$this->runRefreshLinksJobs();
 
 		$title->resetArticleID( false );
 	}
