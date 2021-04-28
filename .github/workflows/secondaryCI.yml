@@ -11,40 +11,54 @@ jobs:
       matrix:
         include:
         - env:
+            MW_BRANCH: master
             DBTYPE: sqlite
             LANG: ru
             WB: both
           php-versions: '7.3.27'
         - env:
+            MW_BRANCH: master
             DBTYPE: sqlite
             LANG: en
             WB: client
           php-versions: '7.2.34'
         - env:
+            MW_BRANCH: master
             DBTYPE: mysql
             LANG: en
             WB: repo
           php-versions: '7.2.34'
         - env:
+            MW_BRANCH: master
             DBTYPE: sqlite
             LANG: ar
             WB: both
           php-versions: '7.3.27'
         - env:
+            MW_BRANCH: master
             DBTYPE: mysql
             LANG: en
             WB: both
           php-versions: '7.2.34'
         - env:
+            MW_BRANCH: master
             DBTYPE: mysql
             LANG: en
             WB: both
           php-versions: '7.3.27'
         - env:
+            MW_BRANCH: master
             DBTYPE: mysql
             LANG: en
             WB: both
           php-versions: '7.4.15'
+       # Be compatible with the previous MediaWiki release branch
+        - env:
+            MW_BRANCH: REL1_36
+            DBTYPE: mysql
+            LANG: ru
+            WB: both
+          php-versions: '7.3.27'
     steps:
     - name: Checkout
       uses: actions/checkout@v2

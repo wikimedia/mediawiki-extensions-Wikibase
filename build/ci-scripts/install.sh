@@ -8,17 +8,15 @@ originalDirectory=$(pwd)
 
 cd ..
 
-MW_BRANCH=master
-
 mkdir phase3
 wget -O- https://github.com/wikimedia/mediawiki/archive/$MW_BRANCH.tar.gz | tar -zxf - -C phase3 --strip-components 1
 
 cd phase3/extensions
 
 if [ "$WB" != "repo" ]; then
-	git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Scribunto.git --depth 1
+	git clone -b $MW_BRANCH https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Scribunto.git --depth 1
 fi
-git clone https://gerrit.wikimedia.org/r/mediawiki/extensions/cldr --depth 1
+git clone -b $MW_BRANCH https://gerrit.wikimedia.org/r/mediawiki/extensions/cldr --depth 1
 
 cp -rT $originalDirectory Wikibase
 
