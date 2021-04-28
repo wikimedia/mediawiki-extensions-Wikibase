@@ -135,20 +135,20 @@ class WikibaseLanguageIndependentLuaBindings {
 	 */
 	public function getEntityId( $pageTitle, $globalSiteId ) {
 		$globalSiteId = $globalSiteId ?: $this->siteId;
-		$itemId = null;
+		$entityId = null;
 
 		if ( $globalSiteId === $this->siteId ) {
 			$title = Title::newFromDBkey( $pageTitle );
 			if ( $title !== null ) {
-				$itemId = $this->entityIdLookup->getEntityIdForTitle( $title );
+				$entityId = $this->entityIdLookup->getEntityIdForTitle( $title );
 			}
 		}
 
-		if ( !$itemId ) {
-			$itemId = $this->siteLinkLookup->getItemIdForLink( $globalSiteId, $pageTitle );
+		if ( !$entityId ) {
+			$entityId = $this->siteLinkLookup->getItemIdForLink( $globalSiteId, $pageTitle );
 		}
 
-		if ( !$itemId ) {
+		if ( !$entityId ) {
 			try {
 				$normalizedPageTitle = $this->normalizePageTitle( $pageTitle );
 			} catch ( MalformedTitleException $e ) {
@@ -158,16 +158,16 @@ class WikibaseLanguageIndependentLuaBindings {
 			if ( $normalizedPageTitle === $pageTitle ) {
 				return null;
 			}
-			$itemId = $this->siteLinkLookup->getItemIdForLink( $globalSiteId, $normalizedPageTitle );
+			$entityId = $this->siteLinkLookup->getItemIdForLink( $globalSiteId, $normalizedPageTitle );
 		}
 
-		if ( !$itemId ) {
+		if ( !$entityId ) {
 			return null;
 		}
 
-		$this->trackUsageForSitelink( $globalSiteId, $itemId );
+		$this->trackUsageForTitleOrSitelink( $globalSiteId, $entityId );
 
-		return $itemId->getSerialization();
+		return $entityId->getSerialization();
 	}
 
 	/**
@@ -252,7 +252,7 @@ class WikibaseLanguageIndependentLuaBindings {
 
 		$itemIdAfterRedirectResolution = $this->redirectTargetLookup->getRedirectForEntityId( $itemId ) ?? $itemId;
 
-		$this->trackUsageForSitelink( $globalSiteId, $itemIdAfterRedirectResolution );
+		$this->trackUsageForTitleOrSitelink( $globalSiteId, $itemIdAfterRedirectResolution );
 		if ( !$itemId->equals( $itemIdAfterRedirectResolution ) ) {
 			// it's a redirect. We want to know if anything happens to it.
 			$this->usageAccumulator->addAllUsage( $itemId );
@@ -290,11 +290,11 @@ class WikibaseLanguageIndependentLuaBindings {
 		return $res ? $res->getSerialization() : null;
 	}
 
-	private function trackUsageForSitelink( string $globalSiteId, ItemId $itemId ): void {
+	private function trackUsageForTitleOrSitelink( string $globalSiteId, EntityId $entityId ): void {
 		if ( $globalSiteId === $this->siteId ) {
-			$this->usageAccumulator->addTitleUsage( $itemId );
+			$this->usageAccumulator->addTitleUsage( $entityId );
 		} else {
-			$this->usageAccumulator->addSiteLinksUsage( $itemId );
+			$this->usageAccumulator->addSiteLinksUsage( $entityId );
 		}
 	}
 
