@@ -8,10 +8,9 @@ use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
 use Wikibase\Repo\Store\Store;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityIdFormatterFactory;
 
 /**
@@ -33,6 +32,7 @@ class SpecialListPropertiesDispatchingFactory {
 		EntityIdFormatterFactory $entityIdFormatterFactory,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		PrefetchingTermLookup $prefetchingTermLookup,
 		SettingsArray $repoSettings,
 		Store $store
@@ -43,18 +43,12 @@ class SpecialListPropertiesDispatchingFactory {
 			);
 		}
 
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
-			$prefetchingTermLookup,
-			$languageFallbackChainFactory->newFromLanguage( WikibaseRepo::getUserLanguage() )
-		);
-		$entityIdFormatter = $entityIdFormatterFactory
-			->getEntityIdFormatter( WikibaseRepo::getUserLanguage() );
 		return new SpecialListProperties(
 			$dataTypeFactory,
 			// TODO move PropertyInfoLookup to service container and inject it directly
 			$store->getPropertyInfoLookup(),
-			$labelDescriptionLookup,
-			$entityIdFormatter,
+			$labelDescriptionLookupFactory,
+			$entityIdFormatterFactory,
 			$entityTitleLookup,
 			$prefetchingTermLookup,
 			$languageFallbackChainFactory

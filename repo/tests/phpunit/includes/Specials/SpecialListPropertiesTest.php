@@ -12,7 +12,7 @@ use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
@@ -98,21 +98,15 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		);
 		$termLookup = $this->getPrefetchingTermLookup();
 		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
-			$termLookup,
-			$languageFallbackChainFactory->newFromLanguage(
-				$language,
-				LanguageFallbackChainFactory::FALLBACK_ALL
-			)
-		);
-		$entityIdFormatter = $entityIdFormatterFactory->getEntityIdFormatter(
-			$language
+		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
+			$languageFallbackChainFactory,
+			$termLookup
 		);
 		$specialPage = new SpecialListProperties(
 			$this->getDataTypeFactory(),
 			$this->getPropertyInfoStore(),
-			$labelDescriptionLookup,
-			$entityIdFormatter,
+			$labelDescriptionLookupFactory,
+			$entityIdFormatterFactory,
 			$this->getEntityTitleLookup(),
 			$termLookup,
 			$languageFallbackChainFactory
