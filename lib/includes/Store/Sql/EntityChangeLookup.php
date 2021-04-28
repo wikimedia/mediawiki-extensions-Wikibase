@@ -2,12 +2,12 @@
 
 namespace Wikibase\Lib\Store\Sql;
 
-use DBAccessBase;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\ChunkAccess;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -16,7 +16,7 @@ use Wikimedia\Rdbms\IResultWrapper;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
+class EntityChangeLookup implements ChunkAccess {
 
 	/**
 	 * Flag to indicate that we need to query a master database.
@@ -35,20 +35,17 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 	 */
 	private $entityIdParser;
 
-	/**
-	 * @param EntityChangeFactory $entityChangeFactory
-	 * @param EntityIdParser $entityIdParser
-	 * @param string|bool $wiki The target wiki's name. This must be an ID
-	 * that LBFactory can understand.
-	 */
+	/** @var ILoadBalancer */
+	private $loadBalancer;
+
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
 		EntityIdParser $entityIdParser,
-		$wiki = false
+		ILoadBalancer $loadBalancer
 	) {
-		parent::__construct( $wiki );
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
+		$this->loadBalancer = $loadBalancer;
 	}
 
 	/**
@@ -129,7 +126,7 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 	 * @return EntityChange[]
 	 */
 	private function loadChanges( array $where, array $options, $method, $mode = DB_REPLICA ) {
-		$dbr = $this->getConnection( $mode );
+		$dbr = $this->loadBalancer->getConnectionRef( $mode );
 
 		$rows = $dbr->select(
 			'wb_changes',
