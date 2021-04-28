@@ -156,7 +156,8 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$defaultFormat,
 			0,
 			$useCdn,
-			$apiFrameOptions
+			$apiFrameOptions,
+			[]
 		);
 	}
 

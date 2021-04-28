@@ -1547,6 +1547,11 @@ return [
 		return new StringNormalizer();
 	},
 
+	'WikibaseRepo.SubEntityTypesMap' => function ( MediaWikiServices $services ): array {
+		return WikibaseRepo::getEntityTypeDefinitions( $services )
+			->get( EntityTypeDefinitions::SUB_ENTITY_TYPES );
+	},
+
 	'WikibaseRepo.SummaryFormatter' => function ( MediaWikiServices $services ): SummaryFormatter {
 		// This needs to use an EntityIdPlainLinkFormatter as we want to mangle
 		// the links created in HtmlPageLinkRendererEndHookHandler afterwards (the links must not

@@ -469,6 +469,7 @@
 				"WikibaseRepo.RdfVocabulary",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.Store",
+				"WikibaseRepo.SubEntityTypesMap",
 				"WikibaseRepo.ValueSnakRdfBuilderFactory"
 			]
 		},

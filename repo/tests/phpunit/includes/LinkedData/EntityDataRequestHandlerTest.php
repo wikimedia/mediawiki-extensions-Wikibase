@@ -22,6 +22,8 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
@@ -54,6 +56,16 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	private $obLevel;
 
+	/**
+	 * @var EntityRevisionLookup
+	 */
+	private $entityRevisionLookup;
+
+	/**
+	 * @var string[][]
+	 */
+	private $subEntityTypesMap;
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -62,6 +74,9 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->setMwGlobals( 'wgLanguageCode', 'qqx' );
 
 		$this->obLevel = ob_get_level();
+
+		$this->entityRevisionLookup = null; // `newHandler` uses a MockRepository unless this is set
+		$this->subEntityTypesMap = [];
 	}
 
 	protected function tearDown(): void {
@@ -188,7 +203,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			$uriManager,
 			$mockHtmlCacheUpdater,
 			WikibaseRepo::getEntityIdParser(),
-			$mockRepository,
+			$this->entityRevisionLookup ?? $mockRepository,
 			$mockRepository,
 			$service,
 			$entityDataFormatProvider,
@@ -197,7 +212,8 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			'json',
 			1800,
 			false,
-			null
+			null,
+			$this->subEntityTypesMap
 		);
 
 		return $handler;
@@ -384,7 +400,6 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		$params = [];
 		$subpage = 'Q42.json';
 		$output = $this->makeOutputPage( $params, [] );
-		$request = $output->getRequest();
 		/** @var FauxRequest $request */
 		$request = $output->getRequest();
 		'@phan-var FauxRequest $request';
@@ -401,6 +416,36 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertStringContainsString( 'no-cache', $response->getHeader( 'Cache-Control' ) );
 		$this->assertStringContainsString( 'private', $response->getHeader( 'Cache-Control' ) );
+	}
+
+	public function testGivenUnresolvableSubEntityRedirect_throwsHttpError() {
+		$subEntityType = 'someSubEntityType';
+		$subEntityId = $this->createStub( EntityId::class ); // e.g. a Form or Sense
+		$subEntityId->method( 'getEntityType' )->willReturn( $subEntityType );
+		$subEntityId->method( 'getSerialization' )->willReturn( 'L123-F1' );
+
+		$parentEntityType = 'someTopLevelEntityType';
+		$parentRedirectTarget = $this->createStub( EntityId::class ); // e.g. a Lexeme
+		$parentRedirectTarget->method( 'getEntityType' )->willReturn( $parentEntityType );
+		$parentRedirectTarget->method( 'getSerialization' )->willReturn( 'L456' );
+
+		$this->subEntityTypesMap = [ $parentEntityType => [ $subEntityType ] ];
+		$revision = 777;
+		$output = $this->makeOutputPage( [], [] );
+
+		$this->entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$this->entityRevisionLookup->expects( $this->once() )
+			->method( 'getEntityRevision' )
+			->with( $subEntityId, $revision )
+			->willThrowException( new RevisionedUnresolvedRedirectException(
+				$subEntityId,
+				$parentRedirectTarget
+			) );
+
+		$this->expectException( HttpError::class );
+		$this->expectExceptionMessage( 'wikibase-entitydata-unresolvable-sub-entity-redirect: L123-F1, L456' );
+
+		$this->newHandler()->showData( $output->getRequest(), $output, 'json', $subEntityId, $revision );
 	}
 
 	//TODO: test canHandleRequest
