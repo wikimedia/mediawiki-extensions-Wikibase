@@ -907,7 +907,8 @@ return call_user_func( function() {
 				'wikibase.WikibaseContentLanguages',
 				'wikibase.getUserLanguages',
 				'mw.config.values.wbRepo',
-				'vue'
+				'vue',
+				'vuex'
 			],
 			// 'messages' are declared by ./resources.json via TermboxModule.
 		],
