@@ -2,11 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"OIS",
+			"Renan",
 			"Stavanger7"
 		]
 	},
 	"wikibase-edit": "redacter",
-	"wikibase-add": "adjunter",
+	"wikibase-add": "addir",
+	"wikibase-label-empty": "Nequant etiquette definit",
+	"wikibase-description-empty": "Nequant descrition definit",
 	"wikibase-sitelinks-special": "Altri sites",
 	"wikibase-statementview-rank-normal": "Normal rang"
 }

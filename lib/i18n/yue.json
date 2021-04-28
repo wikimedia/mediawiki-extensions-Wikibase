@@ -2,8 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Obonggi",
+			"Sun8908",
 			"Yueman"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "維基百科"
+	"wikibase-sitelinks-wikipedia": "維基百科",
+	"wikibase-entity-summary-wbcreateclaim-create": "加咗聲稱"
 }
