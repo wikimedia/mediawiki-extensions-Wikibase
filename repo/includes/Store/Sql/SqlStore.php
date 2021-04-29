@@ -537,7 +537,8 @@ class SqlStore implements Store {
 		return new EntityChangeLookup(
 			$this->entityChangeFactory,
 			$this->entityIdParser,
-			MediaWikiServices::getInstance()->getDBLoadBalancer() // TODO inject
+			MediaWikiServices::getInstance()->getDBLoadBalancer(), // TODO inject
+			false
 		);
 	}
 
