@@ -5,11 +5,11 @@ namespace Wikibase\View\Tests;
 use HashSiteStore;
 use InvalidArgumentException;
 use Language;
-use ValueFormatters\BasicNumberLocalizer;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\Formatters\NumberLocalizerFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
@@ -76,7 +76,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			$templateFactory,
 			$languageNameLookup,
 			$this->createMock( LanguageDirectionalityLookup::class ),
-			new BasicNumberLocalizer(),
+			$this->createMock( NumberLocalizerFactory::class ),
 			[],
 			[],
 			[],

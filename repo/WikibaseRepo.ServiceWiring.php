@@ -72,7 +72,7 @@ use Wikibase\Lib\Formatters\EntityIdLinkFormatter;
 use Wikibase\Lib\Formatters\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\Formatters\EntityIdValueFormatter;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
-use Wikibase\Lib\Formatters\MediaWikiNumberLocalizer;
+use Wikibase\Lib\Formatters\NumberLocalizerFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -1342,6 +1342,12 @@ return [
 			->getContentLanguages( WikibaseContentLanguages::CONTEXT_MONOLINGUAL_TEXT );
 	},
 
+	'WikibaseRepo.NumberLocalizerFactory' => function ( MediaWikiServices $services ): NumberLocalizerFactory {
+		return new NumberLocalizerFactory(
+			$services->getLanguageFactory()
+		);
+	},
+
 	'WikibaseRepo.PrefetchingTermLookup' => function ( MediaWikiServices $services ): PrefetchingTermLookup {
 		$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions( $services );
 		$lookupFactory = WikibaseRepo::getPrefetchingTermLookupFactory( $services );
@@ -1843,7 +1849,7 @@ return [
 			TemplateFactory::getDefaultInstance(),
 			WikibaseRepo::getLanguageNameLookup( $services ),
 			new MediaWikiLanguageDirectionalityLookup(),
-			new MediaWikiNumberLocalizer( $lang ),
+			WikibaseRepo::getNumberLocalizerFactory( $services ),
 			$settings->getSetting( 'siteLinkGroups' ),
 			$settings->getSetting( 'specialSiteLinkGroups' ),
 			$settings->getSetting( 'badgeItems' ),

@@ -43,6 +43,7 @@ use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
+use Wikibase\Lib\Formatters\NumberLocalizerFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
@@ -804,6 +805,11 @@ class WikibaseRepo {
 	): EntityParserOutputGeneratorFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntityParserOutputGeneratorFactory' );
+	}
+
+	public static function getNumberLocalizerFactory( ContainerInterface $services = null ): NumberLocalizerFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.NumberLocalizerFactory' );
 	}
 
 	public static function getViewFactory( ContainerInterface $services = null ): ViewFactory {

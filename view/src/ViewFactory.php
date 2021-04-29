@@ -5,9 +5,9 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use Language;
 use SiteLookup;
-use ValueFormatters\NumberLocalizer;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\Formatters\NumberLocalizerFactory;
 use Wikibase\Lib\Formatters\SnakFormat;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageNameLookup;
@@ -77,11 +77,6 @@ class ViewFactory {
 	private $languageDirectionalityLookup;
 
 	/**
-	 * @var NumberLocalizer
-	 */
-	private $numberLocalizer;
-
-	/**
 	 * @var string[]
 	 */
 	private $siteLinkGroups;
@@ -107,6 +102,11 @@ class ViewFactory {
 	private $specialPageLinker;
 
 	/**
+	 * @var NumberLocalizerFactory
+	 */
+	private $numberLocalizerFactory;
+
+	/**
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
@@ -117,7 +117,7 @@ class ViewFactory {
 	 * @param TemplateFactory $templateFactory
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
-	 * @param NumberLocalizer $numberLocalizer
+	 * @param NumberLocalizerFactory $numberLocalizerFactory
 	 * @param string[] $siteLinkGroups
 	 * @param string[] $specialSiteLinkGroups
 	 * @param string[] $badgeItems
@@ -137,7 +137,7 @@ class ViewFactory {
 		TemplateFactory $templateFactory,
 		LanguageNameLookup $languageNameLookup,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
-		NumberLocalizer $numberLocalizer,
+		NumberLocalizerFactory $numberLocalizerFactory,
 		array $siteLinkGroups,
 		array $specialSiteLinkGroups,
 		array $badgeItems,
@@ -160,7 +160,7 @@ class ViewFactory {
 		$this->templateFactory = $templateFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
-		$this->numberLocalizer = $numberLocalizer;
+		$this->numberLocalizerFactory = $numberLocalizerFactory;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
@@ -201,6 +201,7 @@ class ViewFactory {
 		TermLanguageFallbackChain $termFallbackChain,
 		CacheableEntityTermsView $entityTermsView
 	) {
+		$numberLocalizer = $this->numberLocalizerFactory->getForLanguage( $language );
 		$editSectionGenerator = $this->newToolbarEditSectionGenerator();
 
 		$statementSectionsView = $this->newStatementSectionsView(
@@ -215,7 +216,7 @@ class ViewFactory {
 			$editSectionGenerator,
 			$this->plainTextIdFormatterFactory->getEntityIdFormatter( $language ),
 			$this->languageNameLookup,
-			$this->numberLocalizer,
+			$numberLocalizer,
 			$this->badgeItems,
 			$this->specialSiteLinkGroups,
 			$this->textProvider
@@ -303,6 +304,7 @@ class ViewFactory {
 		TermLanguageFallbackChain $termFallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
+		$numberLocalizer = $this->numberLocalizerFactory->getForLanguageCode( $languageCode );
 		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
 			$languageCode,
 			$termFallbackChain
@@ -319,7 +321,7 @@ class ViewFactory {
 		$statementHtmlGenerator = new StatementHtmlGenerator(
 			$this->templateFactory,
 			$snakHtmlGenerator,
-			$this->numberLocalizer,
+			$numberLocalizer,
 			$this->textProvider
 		);
 
