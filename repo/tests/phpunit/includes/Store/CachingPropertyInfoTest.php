@@ -12,6 +12,7 @@ use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
+use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * Integration tests for both CacheAwarePropertyInfoStore and CachingPropertyInfoLookup.
@@ -39,6 +40,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 	private function newPropertyInfoTable() {
 		return new PropertyInfoTable(
 			$this->getEntityComposer(),
+			LBFactorySingle::newFromConnection( $this->db ),
 			false,
 			true
 		);

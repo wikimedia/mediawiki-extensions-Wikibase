@@ -16,6 +16,7 @@ use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Store\Sql\PropertyInfoTableBuilder;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\PropertyInfoTableBuilder
@@ -99,6 +100,7 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 
 		$table = new PropertyInfoTable(
 			WikibaseRepo::getEntityIdComposer(),
+			LBFactorySingle::newFromConnection( $this->db ),
 			$entitySource->getDatabaseName(),
 			true
 		);
