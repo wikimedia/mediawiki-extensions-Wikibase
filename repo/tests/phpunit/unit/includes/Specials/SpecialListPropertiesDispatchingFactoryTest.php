@@ -28,6 +28,7 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 			WikibaseRepo::getEntityIdHtmlLinkFormatterFactory(),
 			$this->createMock( EntityTitleLookup::class ),
 			WikibaseRepo::getLanguageFallbackChainFactory(),
+			WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory(),
 			WikibaseRepo::getPrefetchingTermLookup(),
 			new SettingsArray( [
 				'federatedPropertiesEnabled' => true,
@@ -45,6 +46,7 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 			WikibaseRepo::getEntityIdHtmlLinkFormatterFactory(),
 			$this->createMock( EntityTitleLookup::class ),
 			WikibaseRepo::getLanguageFallbackChainFactory(),
+			WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory(),
 			WikibaseRepo::getPrefetchingTermLookup(),
 			new SettingsArray( [ 'federatedPropertiesEnabled' => false ] ),
 			WikibaseRepo::getStore()

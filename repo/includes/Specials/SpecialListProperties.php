@@ -7,14 +7,13 @@ use HTMLForm;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Repo\DataTypeSelector;
+use Wikibase\View\EntityIdFormatterFactory;
 
 /**
  * Special page to list properties by data type
@@ -41,19 +40,9 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	private $propertyInfoLookup;
 
 	/**
-	 * @var LanguageFallbackLabelDescriptionLookup
-	 */
-	private $labelDescriptionLookup;
-
-	/**
 	 * @var string
 	 */
 	private $dataType;
-
-	/**
-	 * @var EntityIdFormatter
-	 */
-	private $entityIdFormatter;
 
 	/**
 	 * @var EntityTitleLookup
@@ -70,11 +59,21 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	private $languageFallbackChainFactory;
 
+	/**
+	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 */
+	private $labelDescriptionLookupFactory;
+
+	/**
+	 * @var EntityIdFormatterFactory
+	 */
+	private $entityIdFormatterFactory;
+
 	public function __construct(
 		DataTypeFactory $dataTypeFactory,
 		PropertyInfoLookup $propertyInfoLookup,
-		LabelDescriptionLookup $labelDescriptionLookup,
-		EntityIdFormatter $entityIdFormatter,
+		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		EntityIdFormatterFactory $entityIdFormatterFactory,
 		EntityTitleLookup $titleLookup,
 		PrefetchingTermLookup $prefetchingTermLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory
@@ -83,8 +82,8 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->propertyInfoLookup = $propertyInfoLookup;
-		$this->labelDescriptionLookup = $labelDescriptionLookup;
-		$this->entityIdFormatter = $entityIdFormatter;
+		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
+		$this->entityIdFormatterFactory = $entityIdFormatterFactory;
 		$this->titleLookup = $titleLookup;
 		$this->prefetchingTermLookup = $prefetchingTermLookup;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
@@ -172,11 +171,17 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	protected function formatRow( EntityId $propertyId ) {
 		$title = $this->titleLookup->getTitleForId( $propertyId );
+		$language = $this->getLanguage();
+
 		if ( !$title->exists() ) {
-			return $this->entityIdFormatter->formatEntityId( $propertyId );
+			return $this->entityIdFormatterFactory
+				->getEntityIdFormatter( $language )
+				->formatEntityId( $propertyId );
 		}
 
-		$labelTerm = $this->labelDescriptionLookup->getLabel( $propertyId );
+		$labelTerm = $this->labelDescriptionLookupFactory
+			->newLabelDescriptionLookup( $language )
+			->getLabel( $propertyId );
 
 		$row = Html::rawElement(
 			'a',

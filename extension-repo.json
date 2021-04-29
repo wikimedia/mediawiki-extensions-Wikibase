@@ -520,6 +520,7 @@
 				"WikibaseRepo.EntityIdHtmlLinkFormatterFactory",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
+				"WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory",
 				"WikibaseRepo.PrefetchingTermLookup",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.Store"
