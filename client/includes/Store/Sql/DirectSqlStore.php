@@ -17,7 +17,6 @@ use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -58,11 +57,6 @@ class DirectSqlStore implements ClientStore {
 	private $entityIdParser;
 
 	/**
-	 * @var EntityIdComposer
-	 */
-	private $entityIdComposer;
-
-	/**
 	 * @var string|bool The symbolic database name of the repo wiki or false for the local wiki.
 	 */
 	private $repoWiki;
@@ -80,22 +74,12 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @var string
 	 */
-	private $languageCode;
-
-	/**
-	 * @var string
-	 */
 	private $cacheKeyPrefix;
 
 	/**
 	 * @var string
 	 */
 	private $cacheKeyGroup;
-
-	/**
-	 * @var int|string
-	 */
-	private $cacheType;
 
 	/**
 	 * @var int
@@ -176,38 +160,31 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
-	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param WikibaseServices $wikibaseServices
 	 * @param SettingsArray $settings
 	 * @param string|bool $repoWiki The symbolic database name of the repo wiki or false for the
 	 * local wiki.
-	 * @param string $languageCode
 	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
 		EntityIdParser $entityIdParser,
-		EntityIdComposer $entityIdComposer,
 		EntityIdLookup $entityIdLookup,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		WikibaseServices $wikibaseServices,
 		SettingsArray $settings,
-		$repoWiki,
-		$languageCode
+		$repoWiki
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
-		$this->entityIdComposer = $entityIdComposer;
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->wikibaseServices = $wikibaseServices;
 		$this->repoWiki = $repoWiki;
-		$this->languageCode = $languageCode;
 
 		// @TODO: split the class so it needs less injection
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$this->cacheKeyGroup = $settings->getSetting( 'sharedCacheKeyGroup' );
-		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
 		$this->disabledUsageAspects = $settings->getSetting( 'disabledUsageAspects' );

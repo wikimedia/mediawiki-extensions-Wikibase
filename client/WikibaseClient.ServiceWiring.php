@@ -858,13 +858,11 @@ return [
 		return new DirectSqlStore(
 			WikibaseClient::getEntityChangeFactory( $services ),
 			WikibaseClient::getEntityIdParser( $services ),
-			WikibaseClient::getEntityIdComposer( $services ),
 			WikibaseClient::getEntityIdLookup( $services ),
 			WikibaseClient::getEntityNamespaceLookup( $services ),
 			WikibaseClient::getWikibaseServices( $services ),
 			WikibaseClient::getSettings( $services ),
-			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName(),
-			$services->getContentLanguage()->getCode()
+			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName()
 		);
 	},
 

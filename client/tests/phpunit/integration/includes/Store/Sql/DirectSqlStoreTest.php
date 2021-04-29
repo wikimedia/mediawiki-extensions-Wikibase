@@ -15,7 +15,6 @@ use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
-use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -58,13 +57,11 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 		return new DirectSqlStore(
 			$entityChangeFactory,
 			new ItemIdParser(),
-			new EntityIdComposer( [] ),
 			$this->createMock( EntityIdLookup::class ),
 			new EntityNamespaceLookup( [] ),
 			$wikibaseServices,
 			WikibaseClient::getSettings(),
-			wfWikiID(),
-			'en'
+			wfWikiID()
 		);
 	}
 

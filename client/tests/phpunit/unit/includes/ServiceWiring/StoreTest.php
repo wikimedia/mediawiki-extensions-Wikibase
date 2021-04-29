@@ -4,13 +4,11 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
-use Language;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -30,8 +28,6 @@ class StoreTest extends ServiceWiringTestCase {
 			$this->createMock( EntityChangeFactory::class ) );
 		$this->mockService( 'WikibaseClient.EntityIdParser',
 			new ItemIdParser() );
-		$this->mockService( 'WikibaseClient.EntityIdComposer',
-			new EntityIdComposer( [] ) );
 		$this->mockService( 'WikibaseClient.EntityIdLookup',
 			$this->createMock( EntityIdLookup::class ) );
 		$this->mockService( 'WikibaseClient.EntityNamespaceLookup',
@@ -61,13 +57,6 @@ class StoreTest extends ServiceWiringTestCase {
 				'',
 				''
 			) );
-		$language = $this->createMock( Language::class );
-		$language->expects( $this->once() )
-			->method( 'getCode' )
-			->willReturn( 'en' );
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getContentLanguage' )
-			->willReturn( $language );
 
 		$this->assertInstanceOf(
 			DirectSqlStore::class,
