@@ -58,6 +58,7 @@
 	"scripts": {
 		"test": [
 			"composer validate --no-interaction",
+			"@cs",
 			"phpunit",
 			"covers-validator"
 		],
@@ -67,7 +68,6 @@
 		],
 		"fix": "phpcbf",
 		"ci": [
-			"@cs",
 			"@test"
 		]
 	}
