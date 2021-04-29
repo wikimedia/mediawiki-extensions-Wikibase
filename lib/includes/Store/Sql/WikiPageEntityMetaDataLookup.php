@@ -51,6 +51,11 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	/** @var ILoadBalancer */
 	private $loadBalancer;
 
+	/**
+	 * @var false|string
+	 */
+	private $databaseName;
+
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
 		PageTableEntityQuery $pageTableEntityConditionGenerator,
@@ -58,12 +63,12 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 		ILBFactory $lbFactory,
 		LoggerInterface $logger = null
 	) {
-		$databaseName = $entitySource->getDatabaseName();
+		$this->databaseName = $entitySource->getDatabaseName();
 
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->pageTableEntityQuery = $pageTableEntityConditionGenerator;
 		$this->entitySource = $entitySource;
-		$this->loadBalancer = $lbFactory->getMainLB( $databaseName );
+		$this->loadBalancer = $lbFactory->getMainLB( $this->databaseName );
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -236,7 +241,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 * @return stdClass|bool a raw database row object, or false if no such entity revision exists.
 	 */
 	private function selectRevisionInformationById( EntityId $entityId, $revisionId, $connType ) {
-		$db = $this->loadBalancer->getConnectionRef( $connType );
+		$db = $this->loadBalancer->getConnectionRef( $connType, [], $this->databaseName );
 
 		$rows = $this->pageTableEntityQuery->selectRows(
 			$this->selectFields(),
@@ -260,7 +265,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 *  could not be found.
 	 */
 	private function selectRevisionInformationMultiple( array $entityIds, $connType ) {
-		$db = $this->loadBalancer->getConnectionRef( $connType );
+		$db = $this->loadBalancer->getConnectionRef( $connType, [], $this->databaseName );
 
 		$rows = $this->pageTableEntityQuery->selectRows(
 			$this->selectFields(),
@@ -284,7 +289,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 * or false if an entity could not be found (including if the page is a redirect).
 	 */
 	private function selectLatestRevisionIdsMultiple( array $entityIds, $connType ) {
-		$db = $this->loadBalancer->getConnectionRef( $connType );
+		$db = $this->loadBalancer->getConnectionRef( $connType, [], $this->databaseName );
 
 		$rows = $this->pageTableEntityQuery->selectRows(
 			[ 'page_title', 'page_latest', 'page_is_redirect' ],
