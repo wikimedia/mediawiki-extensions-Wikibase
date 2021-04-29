@@ -335,7 +335,8 @@ class DirectSqlStore implements ClientStore {
 				new SiteLinkTable(
 					'wb_items_per_site',
 					true,
-					$lbFactory->getMainLB( $this->repoWiki )
+					$lbFactory->getMainLB( $this->repoWiki ),
+					$this->repoWiki
 				),
 				new HashBagOStuff()
 			);
