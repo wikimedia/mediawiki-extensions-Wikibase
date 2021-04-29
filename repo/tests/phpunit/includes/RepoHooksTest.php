@@ -132,7 +132,6 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		$settings['entityNamespaces']['fakeEntityType'] = self::FAKE_NS_ID;
 		$settings['termboxEnabled'] = $useNewTermbox;
 		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
-		WikibaseRepo::resetClassStatics();
 
 		RepoHooks::onBeforePageDisplayMobile(
 			$outputPage,
@@ -437,8 +436,6 @@ XML
 
 		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
 
-		WikibaseRepo::resetClassStatics();
-
 		$canBeMoved = true;
 
 		RepoHooks::onNamespaceIsMovable( $itemNamespace, $canBeMoved );
@@ -456,8 +453,6 @@ XML
 
 		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
 
-		WikibaseRepo::resetClassStatics();
-
 		$canBeMoved = true;
 
 		RepoHooks::onNamespaceIsMovable( $mainNamespace, $canBeMoved );
@@ -474,8 +469,6 @@ XML
 		$settings['localEntitySourceName'] = 'props';
 
 		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
-
-		WikibaseRepo::resetClassStatics();
 
 		$canBeMoved = true;
 
@@ -495,8 +488,6 @@ XML
 
 		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
 
-		WikibaseRepo::resetClassStatics();
-
 		$canBeMoved = true;
 
 		RepoHooks::onNamespaceIsMovable( $itemNamespace, $canBeMoved );
@@ -513,8 +504,6 @@ XML
 		$settings['localEntitySourceName'] = 'items';
 
 		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
-
-		WikibaseRepo::resetClassStatics();
 
 		$canBeMoved = true;
 

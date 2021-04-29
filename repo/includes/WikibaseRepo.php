@@ -5,7 +5,6 @@ namespace Wikibase\Repo;
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
-use Exception;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MWException;
@@ -127,20 +126,6 @@ use Wikibase\View\ViewFactory;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class WikibaseRepo {
-
-	/**
-	 * @var WikibaseRepo|null
-	 */
-	private static $instance = null;
-
-	public static function resetClassStatics() {
-		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
-			throw new Exception(
-				'Cannot reset WikibaseRepo class statics outside of tests.'
-			);
-		}
-		self::$instance = null;
-	}
 
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!

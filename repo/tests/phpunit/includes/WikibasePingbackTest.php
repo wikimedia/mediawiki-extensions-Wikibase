@@ -15,7 +15,6 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\Repo\WikibasePingback;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  *
@@ -38,7 +37,6 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		$settings['wikibasePingback'] = true;
 		$settings['pingbackHost'] = 'http://localhost/event/beacon';
 		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
-		WikibaseRepo::resetClassStatics();
 		$this->tablesUsed[] = 'updatelog';
 	}
 
