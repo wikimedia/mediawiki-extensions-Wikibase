@@ -9,6 +9,7 @@ use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -57,6 +58,8 @@ class StoreTest extends ServiceWiringTestCase {
 				'',
 				''
 			) );
+		$this->mockService( 'WikibaseClient.TermBuffer',
+			$this->createMock( TermBuffer::class ) );
 
 		$this->assertInstanceOf(
 			DirectSqlStore::class,

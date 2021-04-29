@@ -19,6 +19,7 @@ use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
@@ -158,11 +159,18 @@ class DirectSqlStore implements ClientStore {
 	private $allowLocalShortDesc;
 
 	/**
+	 * @var TermBuffer
+	 */
+	private $termBuffer;
+
+	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntityIdLookup $entityIdLookup
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param WikibaseServices $wikibaseServices
 	 * @param SettingsArray $settings
+	 * @param TermBuffer $termBuffer
 	 * @param string|bool $repoWiki The symbolic database name of the repo wiki or false for the
 	 * local wiki.
 	 */
@@ -173,6 +181,7 @@ class DirectSqlStore implements ClientStore {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		WikibaseServices $wikibaseServices,
 		SettingsArray $settings,
+		TermBuffer $termBuffer,
 		$repoWiki
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
@@ -180,6 +189,7 @@ class DirectSqlStore implements ClientStore {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->wikibaseServices = $wikibaseServices;
+		$this->termBuffer = $termBuffer;
 		$this->repoWiki = $repoWiki;
 
 		// @TODO: split the class so it needs less injection
@@ -267,7 +277,7 @@ class DirectSqlStore implements ClientStore {
 					$this->allowLocalShortDesc,
 					new DescriptionLookup(
 						$this->entityIdLookup,
-						$this->wikibaseServices->getTermBuffer(),
+						$this->termBuffer,
 						$services->getPageProps()
 					),
 					$services->getLinkBatchFactory(),

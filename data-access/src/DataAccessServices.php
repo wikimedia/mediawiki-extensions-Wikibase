@@ -3,7 +3,6 @@
 namespace Wikibase\DataAccess;
 
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
-use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
@@ -34,10 +33,5 @@ interface DataAccessServices {
 	 * @return PropertyInfoLookup
 	 */
 	public function getPropertyInfoLookup();
-
-	/**
-	 * @return TermBuffer
-	 */
-	public function getTermBuffer();
 
 }

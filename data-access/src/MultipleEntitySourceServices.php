@@ -131,8 +131,4 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 		}
 	}
 
-	public function getTermBuffer() {
-		return $this->getPrefetchingTermLookup();
-	}
-
 }
