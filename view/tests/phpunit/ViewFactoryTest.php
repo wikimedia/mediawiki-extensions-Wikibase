@@ -14,13 +14,13 @@ use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Repo\LocalizedTextProviderFactory;
 use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\HtmlSnakFormatterFactory;
 use Wikibase\View\ItemView;
 use Wikibase\View\LanguageDirectionalityLookup;
-use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\PropertyView;
 use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\StatementSectionsView;
@@ -80,7 +80,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			[],
 			[],
 			[],
-			$this->createMock( LocalizedTextProvider::class ),
+			$this->createMock( LocalizedTextProviderFactory::class ),
 			$this->createMock( SpecialPageLinker::class )
 		);
 	}

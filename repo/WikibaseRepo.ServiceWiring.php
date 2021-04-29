@@ -173,6 +173,7 @@ use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
+use Wikibase\Repo\LocalizedTextProviderFactory;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
@@ -183,7 +184,6 @@ use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
-use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
@@ -1285,6 +1285,14 @@ return [
 		);
 	},
 
+	'WikibaseRepo.LocalizedTextProviderFactory' => function (
+		MediaWikiServices $services
+	): LocalizedTextProviderFactory {
+		return new LocalizedTextProviderFactory(
+			$services->getLanguageFactory()
+		);
+	},
+
 	'WikibaseRepo.LocalRepoWikiPageMetaDataAccessor' => function ( MediaWikiServices $services ): WikiPageEntityMetaDataAccessor {
 		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup( $services );
 		$repoName = ''; // Empty string here means this only works for the local repo
@@ -1819,7 +1827,6 @@ return [
 	},
 
 	'WikibaseRepo.ViewFactory' => function ( MediaWikiServices $services ): ViewFactory {
-		$lang = WikibaseRepo::getUserLanguage( $services );
 		$settings = WikibaseRepo::getSettings( $services );
 
 		$statementGrouperBuilder = new StatementGrouperBuilder(
@@ -1853,7 +1860,7 @@ return [
 			$settings->getSetting( 'siteLinkGroups' ),
 			$settings->getSetting( 'specialSiteLinkGroups' ),
 			$settings->getSetting( 'badgeItems' ),
-			new MediaWikiLocalizedTextProvider( $lang ),
+			WikibaseRepo::getLocalizedTextProviderFactory( $services ),
 			new RepoSpecialPageLinker()
 		);
 	},
