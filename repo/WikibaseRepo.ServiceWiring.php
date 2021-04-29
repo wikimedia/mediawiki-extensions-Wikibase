@@ -102,6 +102,7 @@ use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\LookupConstants;
+use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
@@ -1310,6 +1311,15 @@ return [
 
 	'WikibaseRepo.Logger' => function ( MediaWikiServices $services ): LoggerInterface {
 		return LoggerFactory::getInstance( 'Wikibase' );
+	},
+
+	'WikibaseRepo.MatchingTermsLookupFactory' => function ( MediaWikiServices $services ): MatchingTermsLookupFactory {
+		return new MatchingTermsLookupFactory(
+			WikibaseRepo::getEntityIdComposer( $services ),
+			$services->getDBLoadBalancerFactory(),
+			WikibaseRepo::getLogger( $services ),
+			$services->getMainWANObjectCache()
+		);
 	},
 
 	'WikibaseRepo.MessageParameterFormatter' => function ( MediaWikiServices $services ): ValueFormatter {
