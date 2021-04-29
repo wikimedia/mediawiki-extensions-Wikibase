@@ -13,6 +13,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Repo\LocalizedTextProviderFactory;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -92,11 +93,6 @@ class ViewFactory {
 	private $badgeItems;
 
 	/**
-	 * @var LocalizedTextProvider
-	 */
-	private $textProvider;
-
-	/**
 	 * @var SpecialPageLinker
 	 */
 	private $specialPageLinker;
@@ -105,6 +101,11 @@ class ViewFactory {
 	 * @var NumberLocalizerFactory
 	 */
 	private $numberLocalizerFactory;
+
+	/**
+	 * @var LocalizedTextProviderFactory
+	 */
+	private $textProviderFactory;
 
 	/**
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
@@ -121,7 +122,7 @@ class ViewFactory {
 	 * @param string[] $siteLinkGroups
 	 * @param string[] $specialSiteLinkGroups
 	 * @param string[] $badgeItems
-	 * @param LocalizedTextProvider $textProvider
+	 * @param LocalizedTextProviderFactory $textProviderFactory
 	 * @param SpecialPageLinker $specialPageLinker
 	 *
 	 * @throws InvalidArgumentException
@@ -141,7 +142,7 @@ class ViewFactory {
 		array $siteLinkGroups,
 		array $specialSiteLinkGroups,
 		array $badgeItems,
-		LocalizedTextProvider $textProvider,
+		LocalizedTextProviderFactory $textProviderFactory,
 		SpecialPageLinker $specialPageLinker
 	) {
 		if ( !$this->hasValidOutputFormat( $htmlIdFormatterFactory, 'text/html' )
@@ -164,7 +165,7 @@ class ViewFactory {
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
-		$this->textProvider = $textProvider;
+		$this->textProviderFactory = $textProviderFactory;
 		$this->specialPageLinker = $specialPageLinker;
 	}
 
@@ -201,8 +202,9 @@ class ViewFactory {
 		TermLanguageFallbackChain $termFallbackChain,
 		CacheableEntityTermsView $entityTermsView
 	) {
+		$textProvider = $this->textProviderFactory->getForLanguage( $language );
 		$numberLocalizer = $this->numberLocalizerFactory->getForLanguage( $language );
-		$editSectionGenerator = $this->newToolbarEditSectionGenerator();
+		$editSectionGenerator = $this->newToolbarEditSectionGenerator( $textProvider );
 
 		$statementSectionsView = $this->newStatementSectionsView(
 			$language->getCode(),
@@ -219,7 +221,7 @@ class ViewFactory {
 			$numberLocalizer,
 			$this->badgeItems,
 			$this->specialSiteLinkGroups,
-			$this->textProvider
+			$textProvider
 		);
 
 		return new ItemView(
@@ -230,7 +232,7 @@ class ViewFactory {
 			$language->getCode(),
 			$siteLinksView,
 			$this->siteLinkGroups,
-			$this->textProvider
+			$textProvider
 		);
 	}
 
@@ -249,10 +251,11 @@ class ViewFactory {
 		TermLanguageFallbackChain $termFallbackChain,
 		CacheableEntityTermsView $entityTermsView
 	) {
+		$textProvider = $this->textProviderFactory->getForLanguage( $language );
 		$statementSectionsView = $this->newStatementSectionsView(
 			$language->getCode(),
 			$termFallbackChain,
-			$this->newToolbarEditSectionGenerator()
+			$this->newToolbarEditSectionGenerator( $textProvider )
 		);
 
 		return new PropertyView(
@@ -262,7 +265,7 @@ class ViewFactory {
 			$statementSectionsView,
 			$this->dataTypeFactory,
 			$language->getCode(),
-			$this->textProvider
+			$textProvider
 		);
 	}
 
@@ -278,6 +281,7 @@ class ViewFactory {
 		TermLanguageFallbackChain $termFallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
+		$textProvider = $this->textProviderFactory->getForLanguageCode( $languageCode );
 		$statementGroupListView = $this->newStatementGroupListView(
 			$languageCode,
 			$termFallbackChain,
@@ -288,7 +292,7 @@ class ViewFactory {
 			$this->templateFactory,
 			$this->statementGrouper,
 			$statementGroupListView,
-			$this->textProvider
+			$textProvider
 		);
 	}
 
@@ -304,6 +308,7 @@ class ViewFactory {
 		TermLanguageFallbackChain $termFallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
+		$textProvider = $this->textProviderFactory->getForLanguageCode( $languageCode );
 		$numberLocalizer = $this->numberLocalizerFactory->getForLanguageCode( $languageCode );
 		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
 			$languageCode,
@@ -316,13 +321,13 @@ class ViewFactory {
 			$this->templateFactory,
 			$snakFormatter,
 			$propertyIdFormatter,
-			$this->textProvider
+			$textProvider
 		);
 		$statementHtmlGenerator = new StatementHtmlGenerator(
 			$this->templateFactory,
 			$snakHtmlGenerator,
 			$numberLocalizer,
-			$this->textProvider
+			$textProvider
 		);
 
 		return new StatementGroupListView(
@@ -334,11 +339,13 @@ class ViewFactory {
 		);
 	}
 
-	private function newToolbarEditSectionGenerator(): ToolbarEditSectionGenerator {
+	private function newToolbarEditSectionGenerator(
+		LocalizedTextProvider $textProvider
+	): ToolbarEditSectionGenerator {
 		return new ToolbarEditSectionGenerator(
 			$this->specialPageLinker,
 			$this->templateFactory,
-			$this->textProvider
+			$textProvider
 		);
 	}
 

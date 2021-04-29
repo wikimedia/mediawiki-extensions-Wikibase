@@ -812,6 +812,11 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.NumberLocalizerFactory' );
 	}
 
+	public static function getLocalizedTextProviderFactory( ContainerInterface $services = null ): LocalizedTextProviderFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.LocalizedTextProviderFactory' );
+	}
+
 	public static function getViewFactory( ContainerInterface $services = null ): ViewFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.ViewFactory' );

@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Language;
 use Title;
 use TitleFactory;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -17,6 +16,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
+use Wikibase\Repo\LocalizedTextProviderFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\View\ViewFactory;
 
@@ -30,8 +30,6 @@ use Wikibase\View\ViewFactory;
 class ViewFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$this->mockService( 'WikibaseRepo.UserLanguage',
-			$this->createMock( Language::class ) );
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
 				'statementSections' => [],
@@ -65,6 +63,10 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.NumberLocalizerFactory',
 			$this->createMock( NumberLocalizerFactory::class )
+		);
+		$this->mockService(
+			'WikibaseRepo.LocalizedTextProviderFactory',
+			$this->createMock( LocalizedTextProviderFactory::class )
 		);
 
 		$this->assertInstanceOf(
