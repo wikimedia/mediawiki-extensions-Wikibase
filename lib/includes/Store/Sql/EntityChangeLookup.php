@@ -38,14 +38,28 @@ class EntityChangeLookup implements ChunkAccess {
 	/** @var ILoadBalancer */
 	private $loadBalancer;
 
+	/**
+	 * @var string|bool The symbolic database name of the repo wiki or false for the local wiki.
+	 */
+	private $repoWiki;
+
+	/**
+	 * @param EntityChangeFactory $entityChangeFactory
+	 * @param EntityIdParser $entityIdParser
+	 * @param ILoadBalancer $loadBalancer
+	 * @param string|bool $repoWiki The target wiki's name. This must be an ID
+	 * that LBFactory can understand.
+	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
 		EntityIdParser $entityIdParser,
-		ILoadBalancer $loadBalancer
+		ILoadBalancer $loadBalancer,
+		$repoWiki = false
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->loadBalancer = $loadBalancer;
+		$this->repoWiki = $repoWiki;
 	}
 
 	/**
@@ -126,7 +140,7 @@ class EntityChangeLookup implements ChunkAccess {
 	 * @return EntityChange[]
 	 */
 	private function loadChanges( array $where, array $options, $method, $mode = DB_REPLICA ) {
-		$dbr = $this->loadBalancer->getConnectionRef( $mode );
+		$dbr = $this->loadBalancer->getConnectionRef( $mode, [], $this->repoWiki );
 
 		$rows = $dbr->select(
 			'wb_changes',

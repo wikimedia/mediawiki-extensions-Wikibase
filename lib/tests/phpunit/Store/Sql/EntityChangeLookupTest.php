@@ -13,6 +13,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Lib\WikibaseSettings;
+use WikiMap;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\EntityChangeLookup
@@ -34,7 +35,8 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 				[ 'item' => EntityChange::class ]
 			),
 			new ItemIdParser(),
-			LoadBalancerSingle::newFromConnection( $this->db )
+			LoadBalancerSingle::newFromConnection( $this->db ),
+			WikiMap::getCurrentWikiId()
 		);
 	}
 
