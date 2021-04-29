@@ -143,29 +143,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
-	 *
-	 * @throws MWException
-	 * @return self
-	 */
-	private static function newInstance() {
-		return new self();
-	}
-
-	/**
-	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
-	 *
-	 * @return self
-	 */
-	public static function getDefaultInstance() {
-		if ( self::$instance === null ) {
-			self::$instance = self::newInstance();
-		}
-
-		return self::$instance;
-	}
-
-	/**
 	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
 	 * Program logic should use WikibaseRepo::getDataTypeValidatorFactory() instead!
 	 */
