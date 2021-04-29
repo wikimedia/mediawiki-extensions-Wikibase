@@ -91,8 +91,11 @@ class DispatchChanges extends Maintenance {
 		if ( WikibaseSettings::isClientEnabled() ) {
 			$clientSettings = WikibaseClient::getSettings();
 			$repoName = $clientSettings->getSetting( 'repoSiteId' );
-			$repoDb = $clientSettings->getSetting( 'repoDatabase' );
 
+			$repoDb = false;
+			if ( $clientSettings->hasSetting( 'repoDatabase' ) ) {
+				$repoDb = $clientSettings->getSetting( 'repoDatabase' );
+			}
 			if ( $repoDb === false ) {
 				$repoDb = MediaWikiServices::getInstance()->getMainConfig()->get( 'DBname' );
 			}
