@@ -15,20 +15,16 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
-use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
-use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
@@ -91,9 +87,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	/** @var EntityRevisionLookup|null */
 	private $entityRevisionLookup = null;
-
-	/** @var TermSearchInteractorFactory|null */
-	private $termSearchInteractorFactory = null;
 
 	/** @var PrefetchingTermLookup|null */
 	private $prefetchingTermLookup = null;
@@ -296,38 +289,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		}
 
 		return $this->entityMetaDataAccessor;
-	}
-
-	public function getTermSearchInteractorFactory(): TermSearchInteractorFactory {
-		if ( $this->termSearchInteractorFactory === null ) {
-			$this->termSearchInteractorFactory = new MatchingTermsSearchInteractorFactory(
-				$this->getMatchingTermsLookup(),
-				$this->languageFallbackChainFactory,
-				$this->getPrefetchingTermLookup()
-			);
-		}
-
-		return $this->termSearchInteractorFactory;
-	}
-
-	private function getMatchingTermsLookup(): MatchingTermsLookup {
-		$mediaWikiServices = MediaWikiServices::getInstance();
-		$logger = LoggerFactory::getInstance( 'Wikibase' );
-		$repoDbDomain = $this->entitySource->getDatabaseName();
-		$loadBalancer = $mediaWikiServices->getDBLoadBalancerFactory()->getMainLB( $repoDbDomain );
-		$databaseTypeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
-			$mediaWikiServices->getMainWANObjectCache(),
-			$repoDbDomain,
-			$logger
-		);
-		return new DatabaseMatchingTermsLookup(
-			$loadBalancer,
-			$databaseTypeIdsStore,
-			$databaseTypeIdsStore,
-			$this->entityIdComposer,
-			$logger
-		);
 	}
 
 	public function getPrefetchingTermLookup() {

@@ -12,15 +12,10 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Interactors\TermSearchInteractor;
-use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
-use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
@@ -58,38 +53,6 @@ class MultipleEntitySourceServicesTest extends TestCase {
 		$propertyRevisionLookup->method( $this->anything() )
 			->willThrowException( new LogicException( 'This service should not be used' ) );
 		return $propertyRevisionLookup;
-	}
-
-	public function testGetTermSearchInteractorFactoryGeneratesInteractorsReturningResultsForConfiguredSources() {
-		$itemResult = new TermSearchResult( new Term( 'en', 'test' ), TermIndexEntry::TYPE_LABEL, new ItemId( 'Q123' ) );
-
-		$itemInteractor = $this->createMock( TermSearchInteractor::class );
-		$itemInteractor->method( 'searchForEntities' )
-			->willReturn( $itemResult );
-
-		$itemInteractorFactory = $this->createMock( TermSearchInteractorFactory::class );
-		$itemInteractorFactory->method( 'newInteractor' )
-			->willReturn( $itemInteractor );
-
-		$itemServices = $this->createMock( SingleEntitySourceServices::class );
-		$itemServices->method( 'getTermSearchInteractorFactory' )
-			->willReturn( $itemInteractorFactory );
-
-		$dummyInteractorFactory = $this->createMock( TermSearchInteractorFactory::class );
-		$dummyInteractorFactory->method( 'newInteractor' )
-			->willReturn( $this->createMock( TermSearchInteractor::class ) );
-
-		$propertyServices = $this->createMock( SingleEntitySourceServices::class );
-		$propertyServices->method( 'getTermSearchInteractorFactory' )
-			->willReturn( $dummyInteractorFactory );
-
-		$services = $this->newMultipleEntitySourceServices( [ 'items' => $itemServices, 'props' => $propertyServices ] );
-
-		$interactor = $services->getTermSearchInteractorFactory()->newInteractor( 'en' );
-
-		$searchResult = $interactor->searchForEntities( 'test', 'en', 'item', [ TermIndexEntry::TYPE_LABEL ] );
-
-		$this->assertEquals( $itemResult, $searchResult );
 	}
 
 	public function testGetPrefetchingTermLookupReturnsLookupBufferingDataOfSourceEntities() {
