@@ -1,4 +1,3 @@
-<http://foreign.test/P2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology#Property> .
 <http://foreign.test/P2> <http://wikiba.se/ontology#claim> <http://foreign.test/prop/P2> .
 <http://foreign.test/P2> <http://wikiba.se/ontology#directClaim> <http://foreign.test/prop/direct/P2> .
 <http://foreign.test/P2> <http://wikiba.se/ontology#novalue> <http://foreign.test/prop/novalue/P2> .

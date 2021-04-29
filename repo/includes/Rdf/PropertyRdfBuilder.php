@@ -215,9 +215,7 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 		$this->writer->about(
 			$this->vocabulary->entityNamespaceNames[$repositoryName],
 			$propertyLName
-		)->a( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getEntityTypeName( $property->getType() ) );
-
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'propertyType' )
+		)->say( RdfVocabulary::NS_ONTOLOGY, 'propertyType' )
 			->is( $this->vocabulary->getDataTypeURI( $property ) );
 
 		$this->writePropertyPredicates(
