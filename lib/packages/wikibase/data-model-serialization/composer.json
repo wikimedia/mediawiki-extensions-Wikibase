@@ -61,10 +61,10 @@
 	"scripts": {
 		"test": [
 			"composer validate --no-interaction",
+			"@cs",
 			"phpunit"
 		],
 		"ci": [
-			"@cs",
 			"@test"
 		],
 		"cs": [
