@@ -29,7 +29,11 @@ class SqlSiteLinkConflictLookupTest extends MediaWikiIntegrationTestCase {
 
 		$this->tablesUsed[] = 'wb_items_per_site';
 
-		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
+		$siteLinkTable = new SiteLinkTable(
+			'wb_items_per_site',
+			false,
+			LoadBalancerSingle::newFromConnection( $this->db )
+		);
 
 		$siteLinks = new SiteLinkList( [
 			new SiteLink( 'dewiki', 'Katze' ),

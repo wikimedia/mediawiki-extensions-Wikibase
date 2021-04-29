@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Lib\WikibaseSettings;
+use Wikimedia\Rdbms\LoadBalancerSingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\SiteLinkTable
@@ -35,7 +36,11 @@ class SiteLinkTableTest extends MediaWikiIntegrationTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local site link table." );
 		}
 
-		$this->siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
+		$this->siteLinkTable = new SiteLinkTable(
+			'wb_items_per_site',
+			false,
+			LoadBalancerSingle::newFromConnection( $this->db )
+		);
 		$this->tablesUsed[] = 'wb_items_per_site';
 	}
 
