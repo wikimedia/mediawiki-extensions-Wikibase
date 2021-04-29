@@ -63,7 +63,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	/**
 	 * @param SettingsArray|null $settings
 	 *
-	 * @return WikibaseRepo
+	 * @throws \Exception
 	 */
 	protected function getWikibaseRepo( SettingsArray $settings = null ) {
 		$repoSettings = WikibaseRepo::getSettings()->getArrayCopy();
@@ -95,8 +95,6 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 			) ],
 			$entityTypeDefinitions
 		) );
-
-		return new WikibaseRepo();
 	}
 
 	/**
