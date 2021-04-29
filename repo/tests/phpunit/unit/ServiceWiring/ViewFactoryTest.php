@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\Formatters\NumberLocalizerFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageNameLookup;
@@ -61,6 +62,10 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 			new DataTypeFactory( [] ) );
 		$this->mockService( 'WikibaseRepo.LanguageNameLookup',
 			new LanguageNameLookup() );
+		$this->mockService(
+			'WikibaseRepo.NumberLocalizerFactory',
+			$this->createMock( NumberLocalizerFactory::class )
+		);
 
 		$this->assertInstanceOf(
 			ViewFactory::class,
