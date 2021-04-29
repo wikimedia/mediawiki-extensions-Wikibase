@@ -27,7 +27,6 @@ use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
-use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
@@ -87,9 +86,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	/** @var EntityRevisionLookup|null */
 	private $entityRevisionLookup = null;
-
-	/** @var PrefetchingTermLookup|null */
-	private $prefetchingTermLookup = null;
 
 	/**
 	 * @var PrefetchingWikiPageEntityMetaDataAccessor|null
@@ -289,39 +285,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		}
 
 		return $this->entityMetaDataAccessor;
-	}
-
-	public function getPrefetchingTermLookup() {
-		if ( $this->prefetchingTermLookup === null ) {
-			$this->prefetchingTermLookup = new ByTypeDispatchingPrefetchingTermLookup(
-				$this->getPrefetchingTermLookups(),
-				new NullPrefetchingTermLookup()
-			);
-		}
-
-		return $this->prefetchingTermLookup;
-	}
-
-	/**
-	 * @return PrefetchingItemTermLookup[] indexed by entity type
-	 */
-	private function getPrefetchingTermLookups(): array {
-		$typesWithCustomLookups = array_keys( $this->prefetchingTermLookupCallbacks );
-
-		$lookupConstructorsByType = array_intersect( $typesWithCustomLookups, $this->entitySource->getEntityTypes() );
-		$customLookups = [];
-		foreach ( $lookupConstructorsByType as $type ) {
-			$callback = $this->prefetchingTermLookupCallbacks[$type];
-			$lookup = call_user_func( $callback, $this );
-
-			Assert::postcondition(
-				$lookup instanceof PrefetchingTermLookup,
-				"Callback creating a lookup for $type must create an instance of PrefetchingTermLookup"
-			);
-
-			$customLookups[$type] = $lookup;
-		}
-		return $customLookups;
 	}
 
 	public function getEntityPrefetcher() {
