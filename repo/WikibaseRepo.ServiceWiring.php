@@ -1371,8 +1371,7 @@ return [
 	'WikibaseRepo.PrefetchingTermLookupFactory' => function ( MediaWikiServices $services ): PrefetchingTermLookupFactory {
 		return new PrefetchingTermLookupFactory(
 			WikibaseRepo::getEntitySourceDefinitions( $services ),
-			WikibaseRepo::getEntityTypeDefinitions( $services ),
-			WikibaseRepo::getSingleEntitySourceServicesFactory( $services )
+			WikibaseRepo::getEntityTypeDefinitions( $services )
 		);
 	},
 

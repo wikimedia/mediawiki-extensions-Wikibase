@@ -34,8 +34,7 @@ class PrefetchingTermLookupFactoryTest extends TestCase {
 
 		$lookupFactory = new PrefetchingTermLookupFactory(
 			$entitySourceDefinitions,
-			$entityTypeDefinitions,
-			$this->createMock( SingleEntitySourceServicesFactory::class )
+			$entityTypeDefinitions
 		);
 
 		$this->assertSame( $mockLookup, $lookupFactory->getLookupForType( 'something' ) );

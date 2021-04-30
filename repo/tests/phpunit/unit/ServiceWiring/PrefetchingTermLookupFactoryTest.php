@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\PrefetchingTermLookupFactory;
-use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -27,11 +26,6 @@ class PrefetchingTermLookupFactoryTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.EntitySourceDefinitions',
 			$this->createMock( EntitySourceDefinitions::class )
-		);
-
-		$this->mockService(
-			'WikibaseRepo.SingleEntitySourceServicesFactory',
-			$this->createMock( SingleEntitySourceServicesFactory::class )
 		);
 
 		$this->assertInstanceOf(

@@ -18,7 +18,7 @@
  */
 
 use MediaWiki\MediaWikiServices;
-use Wikibase\DataAccess\SingleEntitySourceServices;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -188,8 +188,11 @@ return [
 				new StatementEntityReferenceExtractor( WikibaseRepo::getItemUrlParser() )
 			] );
 		},
-		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( SingleEntitySourceServices $entitySourceServices ) {
-			$termIdsResolver = $entitySourceServices->getTermInLangIdsResolver();
+		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( EntitySource $entitySource ) {
+			$termIdsResolver = WikibaseRepo::getSingleEntitySourceServicesFactory()
+				->getServicesForSource( $entitySource )
+				->getTermInLangIdsResolver();
+
 			return new PrefetchingItemTermLookup( $termIdsResolver );
 		},
 	],
@@ -289,11 +292,12 @@ return [
 		Def::ENTITY_REFERENCE_EXTRACTOR_CALLBACK => function() {
 			return new StatementEntityReferenceExtractor( WikibaseRepo::getItemUrlParser() );
 		},
-		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( SingleEntitySourceServices $entitySourceServices ) {
-			global $wgSecretKey;
-
+		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( EntitySource $entitySource ) {
 			$mwServices = MediaWikiServices::getInstance();
-			$cacheSecret = hash( 'sha256', $wgSecretKey );
+			$entitySourceServices = WikibaseRepo::getSingleEntitySourceServicesFactory( $mwServices )
+				->getServicesForSource( $entitySource );
+
+			$cacheSecret = hash( 'sha256', $mwServices->getMainConfig()->get( 'SecretKey' ) );
 			$bagOStuff = $mwServices->getLocalServerObjectCache();
 
 			$prefetchingPropertyTermLookup = new PrefetchingPropertyTermLookup(
