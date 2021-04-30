@@ -9,7 +9,11 @@ use FauxRequest;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
+use ReflectionClass;
+use ReflectionMethod;
+use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
 
@@ -154,6 +158,33 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 
 		foreach ( $this->provideSpecialPageNames() as [ $specialPageName ] ) {
 			yield "SpecialPages/$specialPageName" => $this->getExtensionJson()['SpecialPages'][$specialPageName];
+		}
+	}
+
+	/** @dataProvider provideWikibaseServicesMethods */
+	public function testWikibaseServicesMethod( string $methodName ) {
+		$settings = clone WikibaseRepo::getSettings();
+		$settings->setSetting(
+			'repositories',
+			[ '' => [
+				'database' => 'dummy',
+				'base-uri' => null,
+				'prefix-mapping' => [ '' => '' ],
+				'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
+			] ]
+		);
+		$this->setService( 'WikibaseRepo.Settings', $settings );
+
+		$wikibaseServices = WikibaseRepo::getWikibaseServices();
+
+		$wikibaseServices->$methodName();
+		$this->addToAssertionCount( 1 );
+	}
+
+	public function provideWikibaseServicesMethods(): iterable {
+		$reflectionClass = new ReflectionClass( WikibaseServices::class );
+		foreach ( $reflectionClass->getMethods( ReflectionMethod::IS_PUBLIC ) as $method ) {
+			yield $method->getName() => [ $method->getName() ];
 		}
 	}
 

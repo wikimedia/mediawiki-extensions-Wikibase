@@ -2,408 +2,104 @@
 
 namespace Wikibase\Repo\Tests;
 
-use DataValues\DataValue;
-use DataValues\Geo\Values\GlobeCoordinateValue;
-use DataValues\Geo\Values\LatLongValue;
-use DataValues\MonolingualTextValue;
-use DataValues\QuantityValue;
-use DataValues\StringValue;
-use DataValues\TimeValue;
-use DataValues\UnboundedQuantityValue;
-use DataValues\UnknownValue;
-use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
+use Psr\Container\ContainerInterface;
 use ReflectionClass;
 use ReflectionMethod;
-use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Statement\StatementGuidParser;
-use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
-use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\DataTypeDefinitions;
-use Wikibase\Lib\DataTypeFactory;
-use Wikibase\Lib\DataValueFactory;
-use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\SettingsArray;
-use Wikibase\Repo\Rdf\RdfVocabulary;
-use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
-use Wikibase\Repo\Validators\CompositeValidator;
-use Wikibase\Repo\Validators\EntityExistsValidator;
-use Wikibase\Repo\ValueParserFactory;
+use ReflectionNamedType;
+use ReflectionType;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\Rdbms\ILoadBalancer;
-use Wikimedia\Rdbms\LBFactory;
 
 /**
  * @covers \Wikibase\Repo\WikibaseRepo
  *
  * @group Wikibase
- * @group Database
  *
  * @license GPL-2.0-or-later
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
  */
 class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
-	/**
-	 * @var SettingsArray
-	 */
-	private $settings;
-
-	/**
-	 * @var EntityTypeDefinitions
-	 */
-	private $entityTypeDefinitions;
-
-	/**
-	 * @var EntitySourceDefinitions
-	 */
-	private $entitySourceDefinitions;
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		// WikibaseRepo service getters should never access the database or do http requests
-		// https://phabricator.wikimedia.org/T243729
-		$this->disallowDBAccess();
-		$this->disallowHttpAccess();
-
-		$this->settings = new SettingsArray( WikibaseRepo::getSettings()->getArrayCopy() );
-		$this->entityTypeDefinitions = new EntityTypeDefinitions( [] );
-		$this->entitySourceDefinitions = $this->getDefaultEntitySourceDefinitions( 'local' );
+	/** @dataProvider provideMethods */
+	public function testMethodSignature( ReflectionMethod $method ): void {
+		$this->assertTrue( $method->isPublic(),
+			'service accessor must be public' );
+		$this->assertTrue( $method->isStatic(),
+			'service accessor must be static' );
+		$this->assertStringStartsWith( 'get', $method->getName(),
+			'service accessor must be a getter' );
+		$this->assertTrue( $method->hasReturnType(),
+			'service accessor must declare return type' );
 	}
 
-	private function disallowDBAccess() {
-		$this->setService(
-			'DBLoadBalancerFactory',
-			function() {
-				$lb = $this->createMock( ILoadBalancer::class );
-				$lb->expects( $this->never() )
-					->method( 'getConnection' );
-				$lb->expects( $this->never() )
-					->method( 'getConnectionRef' );
-				$lb->expects( $this->never() )
-					->method( 'getMaintenanceConnectionRef' );
-				$lb->method( 'getLocalDomainID' )
-					->willReturn( 'banana' );
+	/** @dataProvider provideMethods */
+	public function testMethodWithDefaultServiceContainer( ReflectionMethod $method ): void {
+		$methodName = $method->getName();
+		$serviceName = 'WikibaseRepo.' . substr( $methodName, 3 );
+		$expectedService = $this->createValue( $method->getReturnType() );
+		$this->setService( $serviceName, $expectedService );
 
-				$lbFactory = $this->createMock( LBFactory::class );
-				$lbFactory->method( 'getMainLB' )
-					->willReturn( $lb );
+		$actualService = WikibaseRepo::$methodName();
 
-				return $lbFactory;
-			}
-		);
+		$this->assertSame( $expectedService, $actualService,
+			'should return service from MediaWikiServices' );
 	}
 
-	private function disallowHttpAccess() {
-		$this->setService(
-			'HttpRequestFactory',
-			function() {
-				$factory = $this->createMock( HttpRequestFactory::class );
-				$factory->expects( $this->never() )
-					->method( 'create' );
-				$factory->expects( $this->never() )
-					->method( 'request' );
-				$factory->expects( $this->never() )
-					->method( 'get' );
-				$factory->expects( $this->never() )
-					->method( 'post' );
-				return $factory;
-			}
-		);
+	/** @dataProvider provideMethods */
+	public function testMethodWithCustomServiceContainer( ReflectionMethod $method ): void {
+		$methodName = $method->getName();
+		$serviceName = 'WikibaseRepo.' . substr( $methodName, 3 );
+		$expectedService = $this->createValue( $method->getReturnType() );
+		$services = $this->createMock( ContainerInterface::class );
+		$services->expects( $this->once() )
+			->method( 'get' )
+			->with( $serviceName )
+			->willReturn( $expectedService );
+
+		$actualService = WikibaseRepo::$methodName( $services );
+
+		$this->assertSame( $expectedService, $actualService,
+			'should return service from injected container' );
 	}
 
-	public function getDefaultValidatorBuilders() {
-		$valueToValidate = new EntityIdValue( new ItemId( 'Q123' ) );
+	public function provideMethods(): iterable {
+		$reflectionClass = new ReflectionClass( WikibaseRepo::class );
+		$methods = $reflectionClass->getMethods();
 
-		$this->getWikibaseRepo(); // set up services
-		$builders = WikibaseRepo::getDefaultValidatorBuilders();
-
-		// We get the resulting ValueValidators and run them against our fake remote-repo
-		// custom-type EntityIdValue. We skip the existence check though, since we don't
-		// have a mock lookup in place.
-		$entityValidators = $builders->buildEntityValidators();
-		foreach ( $entityValidators as $validator ) {
-			if ( $validator instanceof EntityExistsValidator ) {
+		foreach ( $methods as $method ) {
+			if ( $method->isConstructor() ) {
 				continue;
 			}
-
-			$result = $validator->validate( $valueToValidate );
-			$this->assertTrue( $result->isValid(), get_class( $validator ) );
+			yield $method->getName() => [ $method ];
 		}
 	}
 
-	/**
-	 * @dataProvider urlSchemesProvider
-	 */
-	public function testDefaultUrlValidators( $input, $expected ) {
-		$validatorBuilders = WikibaseRepo::getDefaultValidatorBuilders();
-		$urlValidator = new CompositeValidator( $validatorBuilders->buildUrlValidators() );
-		$result = $urlValidator->validate( new StringValue( $input ) );
-		$this->assertSame( $expected, $result->isValid() );
-	}
-
-	public function urlSchemesProvider() {
-		return [
-			[ 'bzr://x', true ],
-			[ 'cvs://x', true ],
-			[ 'ftp://x', true ],
-			[ 'git://x', true ],
-			[ 'http://x', true ],
-			[ 'https://x', true ],
-			[ 'irc://x', true ],
-			[ 'mailto:x@x', true ],
-			[ 'ssh://x', true ],
-			[ 'svn://x', true ],
-
-			// Supported by UrlSchemeValidators, but not enabled by default.
-			[ 'ftps://x', false ],
-			[ 'gopher://x', false ],
-			[ 'ircs://x', false ],
-			[ 'mms://x', false ],
-			[ 'nntp://x', false ],
-			[ 'redis://x', false ],
-			[ 'sftp://x', false ],
-			[ 'telnet://x', false ],
-			[ 'worldwind://x', false ],
-		];
-	}
-
-	public function testGetDataTypeFactoryReturnType() {
-		$returnValue = WikibaseRepo::getDataTypeFactory();
-		$this->assertInstanceOf( DataTypeFactory::class, $returnValue );
-	}
-
-	public function testGetValueParserFactoryReturnType() {
-		$returnValue = WikibaseRepo::getValueParserFactory();
-		$this->assertInstanceOf( ValueParserFactory::class, $returnValue );
-	}
-
-	public function testGetEntityIdParserReturnType() {
-		$returnValue = WikibaseRepo::getEntityIdParser();
-		$this->assertInstanceOf( EntityIdParser::class, $returnValue );
-	}
-
-	public function testGetStatementGuidParser() {
-		$returnValue = WikibaseRepo::getStatementGuidParser();
-		$this->assertInstanceOf( StatementGuidParser::class, $returnValue );
-	}
-
-	public function testGetStatementGuidValidator() {
-		$returnValue = WikibaseRepo::getStatementGuidValidator();
-		$this->assertInstanceOf( StatementGuidValidator::class, $returnValue );
-	}
-
-	public function testGetSettingsReturnType() {
-		$returnValue = WikibaseRepo::getSettings();
-		$this->assertInstanceOf( SettingsArray::class, $returnValue );
-	}
-
-	public function testGetContentModelMappings() {
-		$array = WikibaseRepo::getContentModelMappings();
-		$this->assertIsArray( $array );
-		$this->assertContainsOnly( 'string', $array );
-	}
-
-	private function setEntityTypeDefinitions( EntityTypeDefinitions $entityTypeDefinitions ): void {
-		$this->setService(
-			'WikibaseRepo.EntityTypeDefinitions',
-			$entityTypeDefinitions
-		);
-	}
-
-	private function setRepoSettings( SettingsArray $settings ): void {
-		$this->setService( 'WikibaseRepo.Settings', $settings );
-	}
-
-	private function setEntitySourceDefinitions( EntitySourceDefinitions $entitySourceDefinitions ): void {
-		$this->setService(
-			'WikibaseRepo.EntitySourceDefinitions',
-			$entitySourceDefinitions
-		);
-	}
-
-	public function testGetEntityChangeFactory() {
-		$factory = WikibaseRepo::getEntityChangeFactory();
-		$this->assertInstanceOf( EntityChangeFactory::class, $factory );
-	}
-
-	private function getWikibaseRepo() {
-		$this->setEntityTypeDefinitions( $this->entityTypeDefinitions );
-		$this->setRepoSettings( $this->settings );
-		$this->setEntitySourceDefinitions( $this->entitySourceDefinitions );
-	}
-
-	private function getDefaultEntitySourceDefinitions( string $sourceName ) {
-		return new EntitySourceDefinitions(
-			[
-				new EntitySource(
-					$sourceName,
-					false,
-					[
-						'item' => [ 'namespaceId' => 100, 'slot' => 'main' ],
-						'property' => [ 'namespaceId' => 200, 'slot' => 'main' ],
-					],
-					'',
-					'',
-					'',
-					''
-				)
-			],
-			$this->entityTypeDefinitions
-		);
-	}
-
-	public function testGetDataTypeDefinitions() {
-		$dataTypeDefinitions = WikibaseRepo::getDataTypeDefinitions();
-		$this->assertInstanceOf( DataTypeDefinitions::class, $dataTypeDefinitions );
-	}
-
-	public function testGetValueSnakRdfBuilderFactory() {
-		$factory = WikibaseRepo::getValueSnakRdfBuilderFactory();
-		$this->assertInstanceOf( ValueSnakRdfBuilderFactory::class, $factory );
-	}
-
-	public function testGetRdfVocabulary() {
-		$factory = WikibaseRepo::getRdfVocabulary();
-		$this->assertInstanceOf( RdfVocabulary::class, $factory );
-	}
-
-	/**
-	 * @return DataValueFactory
-	 */
-	private function getDataValueFactory() {
-		$this->entityTypeDefinitions = new EntityTypeDefinitions( [
-			'item' => [
-				EntityTypeDefinitions::ENTITY_ID_PATTERN => ItemId::PATTERN,
-				EntityTypeDefinitions::ENTITY_ID_BUILDER => function ( $serialization ) {
-					return new ItemId( $serialization );
-				},
-			],
-		] );
-
-		$this->setEntityTypeDefinitions( $this->entityTypeDefinitions );
-		return WikibaseRepo::getDataValueFactory();
-	}
-
-	public function dataValueProvider() {
-		return [
-			'string' => [ new StringValue( 'Test' ) ],
-			'unknown' => [ new UnknownValue( [ 'foo' => 'bar' ] ) ],
-			'globecoordinate' => [ new GlobeCoordinateValue( new LatLongValue( 2, 3 ), 1 ) ],
-			'monolingualtext' => [ new MonolingualTextValue( 'als', 'Test' ) ],
-			'unbounded quantity' => [ UnboundedQuantityValue::newFromNumber( 2 ) ],
-			'quantity' => [ QuantityValue::newFromNumber( 2 ) ],
-			'time' => [ new TimeValue(
-				'+1980-10-07T17:33:22Z',
-				0,
-				0,
-				1,
-				TimeValue::PRECISION_DAY,
-				TimeValue::CALENDAR_GREGORIAN
-			) ],
-			'wikibase-entityid' => [ new EntityIdValue( new ItemId( 'Q13' ) ) ],
-		];
-	}
-
-	/**
-	 * @dataProvider dataValueProvider
-	 */
-	public function testDataValueSerializationDeserializationRoundtrip( DataValue $expected ) {
-		$service = $this->getDataValueFactory();
-		$deserialized = $service->newFromArray( $expected->toArray() );
-
-		$this->assertEquals( $expected, $deserialized );
-	}
-
-	public function entityIdValueSerializationProvider() {
-		return [
-			'legacy' => [ [
-				'entity-type' => 'item',
-				'numeric-id' => 13,
-			] ],
-			'intermediate' => [ [
-				'entity-type' => 'item',
-				'numeric-id' => 13,
-				'id' => 'Q13',
-			] ],
-			'new' => [ [
-				'id' => 'Q13',
-			] ],
-		];
-	}
-
-	/**
-	 * @dataProvider entityIdValueSerializationProvider
-	 */
-	public function testEntityIdValueDeserialization( array $serialization ) {
-		$service = $this->getDataValueFactory();
-		$deserialized = $service->newFromArray( [
-			'type' => 'wikibase-entityid',
-			'value' => $serialization,
-		] );
-
-		$expected = new EntityIdValue( new ItemId( 'Q13' ) );
-		$this->assertEquals( $expected, $deserialized );
-	}
-
-	public function entitySourceBasedFederationProvider() {
-		return [
-			[ true ],
-			[ false ],
-		];
-	}
-
-	/**
-	 * @dataProvider entitySourceBasedFederationProvider
-	 */
-	public function testWikibaseServicesParameterLessFunctionCalls( $entitySourceBasedFederation ) {
-		$this->settings->setSetting(
-			'repositories',
-			[ '' => [
-				'database' => 'dummy',
-				'base-uri' => null,
-				'prefix-mapping' => [ '' => '' ],
-				'entity-namespaces' => $this->settings->getSetting( 'entityNamespaces' ),
-			] ]
-		);
-		$this->settings->setSetting( 'useEntitySourceBasedFederation', $entitySourceBasedFederation );
-
-		// override services in preparation for getting the WikibaseServices below
-		$this->getWikibaseRepo();
-
-		// Make sure (as good as we can) that all functions can be called without
-		// exceptions/ fatals and nothing accesses the database or does http requests.
-		$wbRepoServices = WikibaseRepo::getWikibaseServices();
-
-		$reflectionClass = new ReflectionClass( $wbRepoServices );
-		$publicMethods = $reflectionClass->getMethods( ReflectionMethod::IS_PUBLIC );
-
-		foreach ( $publicMethods as $publicMethod ) {
-			if ( $publicMethod->getNumberOfRequiredParameters() === 0 ) {
-				$publicMethod->invoke( $wbRepoServices );
+	private function createValue( ReflectionType $type ) {
+		// (in PHP 8.0, account for $type being a ReflectionUnionType here)
+		$this->assertInstanceOf( ReflectionNamedType::class, $type );
+		/** @var ReflectionNamedType $type */
+		if ( $type->allowsNull() ) {
+			return null;
+		}
+		if ( $type->isBuiltin() ) {
+			switch ( $type->getName() ) {
+				case 'bool':
+					return true;
+				case 'int':
+					return 0;
+				case 'float':
+					return 0.0;
+				case 'string':
+					return '';
+				case 'array':
+				case 'iterable':
+					return [];
+				case 'callable':
+					return 'is_null';
+				default:
+					$this->assertTrue( false, "unknown builtin type {$type->getName()}" );
 			}
 		}
-	}
-
-	/**
-	 * These methods should throw a Runtime exception when called without enabling the feature.
-	 * @return string[]
-	 */
-	private function getFederatedPropertyMethodNames() {
-		return [
-			'getFederatedPropertiesServiceFactory'
-		];
-	}
-
-	public function testGetEntitySourceDefinitions() {
-		$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions();
-		$this->assertInstanceOf( EntitySourceDefinitions::class, $entitySourceDefinitions );
+		return $this->createMock( $type->getName() );
 	}
 
 }

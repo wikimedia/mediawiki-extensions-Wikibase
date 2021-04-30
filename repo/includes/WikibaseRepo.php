@@ -904,7 +904,7 @@ class WikibaseRepo {
 	/**
 	 * @return callable[]
 	 */
-	public static function getEntitySearchHelperCallbacks( ContainerInterface $services = null ) {
+	public static function getEntitySearchHelperCallbacks( ContainerInterface $services = null ): array {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntitySearchHelperCallbacks' );
 	}
