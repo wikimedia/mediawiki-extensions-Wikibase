@@ -9,10 +9,13 @@ use FauxRequest;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
+use ReflectionClass;
+use ReflectionMethod;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Client\Hooks\ShortDescHandler;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\WikibaseServices;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
@@ -140,6 +143,21 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 
 		foreach ( $this->provideSpecialPageNames() as [ $specialPageName ] ) {
 			yield "SpecialPages/$specialPageName" => $this->getExtensionJson()['SpecialPages'][$specialPageName];
+		}
+	}
+
+	/** @dataProvider provideWikibaseServicesMethods */
+	public function testWikibaseServicesMethod( string $methodName ) {
+		$wikibaseServices = WikibaseClient::getWikibaseServices();
+
+		$wikibaseServices->$methodName();
+		$this->addToAssertionCount( 1 );
+	}
+
+	public function provideWikibaseServicesMethods(): iterable {
+		$reflectionClass = new ReflectionClass( WikibaseServices::class );
+		foreach ( $reflectionClass->getMethods( ReflectionMethod::IS_PUBLIC ) as $method ) {
+			yield $method->getName() => [ $method->getName() ];
 		}
 	}
 
