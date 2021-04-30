@@ -23,9 +23,4 @@ interface WikibaseServices extends DataAccessServices {
 	 */
 	public function getEntityStoreWatcher();
 
-	/**
-	 * @return PrefetchingTermLookup
-	 */
-	public function getPrefetchingTermLookup();
-
 }

@@ -34,9 +34,6 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 	/** @var EntityRevisionLookup|null */
 	private $entityRevisionLookup = null;
 
-	/** @var PrefetchingTermLookup|null */
-	private $prefetchingTermLookup = null;
-
 	/** @var EntityPrefetcher|null */
 	private $entityPrefetcher = null;
 
@@ -66,21 +63,6 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 		}
 
 		return $this->entityRevisionLookup;
-	}
-
-	public function getPrefetchingTermLookup() {
-		if ( $this->prefetchingTermLookup === null ) {
-			$lookupsByType = [];
-
-			/** @var EntitySource $source */
-			foreach ( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() as $entityType => $source ) {
-				$lookupsByType[$entityType] = $this->singleSourceServices[$source->getSourceName()]->getPrefetchingTermLookup();
-			}
-
-			$this->prefetchingTermLookup = new ByTypeDispatchingPrefetchingTermLookup( $lookupsByType );
-		}
-
-		return $this->prefetchingTermLookup;
 	}
 
 	public function getEntityPrefetcher() {

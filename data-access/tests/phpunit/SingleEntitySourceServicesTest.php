@@ -8,10 +8,8 @@ use MediaWiki\Storage\NameTableStore;
 use PHPUnit\Framework\MockObject\MockObject;
 use Serializers\DispatchingSerializer;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -37,7 +35,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 	public function provideSimpleServiceGetters() {
 		return [
 			[ 'getEntityRevisionLookup', EntityRevisionLookup::class, true ],
-			[ 'getPrefetchingTermLookup', PrefetchingTermLookup::class, true ],
 			[ 'getEntityPrefetcher', EntityPrefetcher::class, true ],
 			[ 'getPropertyInfoLookup', PropertyInfoLookup::class, true ],
 			[ 'getEntitySource', EntitySource::class, true ],
@@ -135,43 +132,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			[ null ],
 			[]
 		);
-	}
-
-	public function testGivenCustomLookupConstructingCallbacks_getPrefetchingTermLookupReturnsCustomLookup() {
-		$customLookup = $this->createMock( PrefetchingTermLookup::class );
-		$customLookup->method( $this->anything() )
-			->willReturn( 'CUSTOM' );
-
-		$customItemLookupCallback = function() use ( $customLookup ) {
-			return $customLookup;
-		};
-
-		$services = new SingleEntitySourceServices(
-			new BasicEntityIdParser(),
-			new EntityIdComposer( [] ),
-			new DataValueDeserializer( [] ),
-			$this->getMockNameTableStore(),
-			DataAccessSettingsFactory::anySettings(),
-			new EntitySource(
-				'source',
-				'sourcedb',
-				[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
-				'',
-				'',
-				'',
-				''
-			),
-			new LanguageFallbackChainFactory(),
-			new DispatchingSerializer(),
-			[],
-			[],
-			[ 'item' => $customItemLookupCallback ],
-			[]
-		);
-
-		$lookup = $services->getPrefetchingTermLookup();
-
-		$this->assertSame( 'CUSTOM', $lookup->getLabel( new ItemId( 'Q123' ), 'fake' ) );
 	}
 
 	public function newSingleEntitySourceServices() {
