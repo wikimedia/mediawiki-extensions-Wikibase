@@ -47,7 +47,7 @@ class SpecialEntityPage extends SpecialWikibasePage {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->allowedQueryParameters = [
 			'action',
-			'revision',
+			'oldid',
 		];
 	}
 

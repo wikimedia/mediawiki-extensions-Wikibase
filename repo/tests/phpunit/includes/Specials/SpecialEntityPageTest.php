@@ -93,9 +93,9 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 	public function provideQueryArgumentsToSpecialPage() {
 		return [
 			'no query arguments' => [ [], '' ],
-			'supported query argument' => [ [ 'revision' => 123 ], '?revision=123' ],
+			'supported query argument' => [ [ 'oldid' => 123 ], '?oldid=123' ],
 			'unsupported query argument' => [ [ 'foo' => 'bar' ], '' ],
-			'mixed' => [ [ 'revision' => 123, 'foo' => 'bar' ], '?revision=123' ],
+			'mixed' => [ [ 'oldid' => 123, 'foo' => 'bar' ], '?oldid=123' ],
 		];
 	}
 
