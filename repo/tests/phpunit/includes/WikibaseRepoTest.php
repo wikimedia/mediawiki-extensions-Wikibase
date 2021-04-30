@@ -11,7 +11,6 @@ use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use DataValues\UnknownValue;
-use LogicException;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
 use ReflectionClass;
@@ -238,7 +237,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$this->setEntityTypeDefinitions( $this->entityTypeDefinitions );
 		$this->setRepoSettings( $this->settings );
 		$this->setEntitySourceDefinitions( $this->entitySourceDefinitions );
-		return new WikibaseRepo();
 	}
 
 	private function getDefaultEntitySourceDefinitions( string $sourceName ) {
@@ -352,56 +350,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
 		$expected = new EntityIdValue( new ItemId( 'Q13' ) );
 		$this->assertEquals( $expected, $deserialized );
-	}
-
-	public function testParameterLessFunctionCalls() {
-		// Make sure (as good as we can) that all functions can be called without
-		// exceptions/ fatals and nothing accesses the database or does http requests.
-		$wbRepo = $this->getWikibaseRepo();
-
-		$reflectionClass = new ReflectionClass( $wbRepo );
-		$publicMethods = $reflectionClass->getMethods( ReflectionMethod::IS_PUBLIC );
-		$federatedPropertyMethods = $this->getFederatedPropertyMethodNames();
-
-		foreach ( $publicMethods as $publicMethod ) {
-			if ( in_array( $publicMethod->name, $federatedPropertyMethods ) ) {
-				// These methods always throw an exception if the feature is disabled
-				// These methods are checked in testParameterLessFunctionCallsForFederatedProperties
-				continue;
-			}
-			$this->invokeMethodIfNoRequiredParameters( $wbRepo, $publicMethod );
-		}
-	}
-
-	public function provideParameterLessFunctionCallsForFederatedPropertiesThrowExceptionWhenDisabled() {
-		$methods = $this->getFederatedPropertyMethodNames();
-		return array_map(
-			function( $a ) {
-				return [ $a ];
-			},
-			$methods
-		);
-	}
-
-	/**
-	 * @dataProvider provideParameterLessFunctionCallsForFederatedPropertiesThrowExceptionWhenDisabled
-	 */
-	public function testParameterLessFunctionCallsForFederatedPropertiesThrowExceptionWhenDisabled( $methodName ) {
-		// Make sure (as good as we can) that all functions can be called without
-		// exceptions/ fatals and nothing accesses the database or does http requests.
-		$this->settings->setSetting( 'federatedPropertiesEnabled', false );
-		$wbRepo = $this->getWikibaseRepo();
-
-		$reflectionClass = new ReflectionClass( $wbRepo );
-
-		$this->expectException( LogicException::class );
-		$this->invokeMethodIfNoRequiredParameters( $wbRepo, $reflectionClass->getMethod( $methodName ) );
-	}
-
-	private function invokeMethodIfNoRequiredParameters( $wbRepo, $method ) {
-		if ( $method->getNumberOfRequiredParameters() === 0 ) {
-			$method->invoke( $wbRepo );
-		}
 	}
 
 	public function entitySourceBasedFederationProvider() {

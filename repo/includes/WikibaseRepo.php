@@ -170,8 +170,7 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.DefaultSnakFormatterBuilders' );
 	}
 
-	public function __construct() {
-		// TODO remove
+	private function __construct() {
 	}
 
 	/**
