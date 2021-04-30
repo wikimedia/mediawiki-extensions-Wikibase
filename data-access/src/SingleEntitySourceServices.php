@@ -335,6 +335,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		if ( $this->propertyInfoLookup === null ) {
 			$this->propertyInfoLookup = new PropertyInfoTable(
 				$this->entityIdComposer,
+				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(), // TODO inject
 				$this->entitySource->getDatabaseName(),
 				false
 			);

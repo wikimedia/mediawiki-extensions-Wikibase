@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\WikibaseSettings;
+use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\PropertyInfoTable
@@ -38,6 +39,7 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 	private function newPropertyInfoTable( bool $allowWrites = true ) {
 		return new PropertyInfoTable(
 			$this->getEntityComposer(),
+			LBFactorySingle::newFromConnection( $this->db ),
 			false,
 			$allowWrites
 		);

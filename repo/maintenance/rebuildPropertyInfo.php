@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Maintenance;
 
 use LoggedUpdateMaintenance;
+use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -53,6 +54,7 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 		$builder = new PropertyInfoTableBuilder(
 			new PropertyInfoTable(
 				WikibaseRepo::getEntityIdComposer(),
+				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 				$propertySource->getDatabaseName(),
 				true
 			),
