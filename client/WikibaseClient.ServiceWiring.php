@@ -389,7 +389,10 @@ return [
 	},
 
 	'WikibaseClient.EntityTypeDefinitions' => function ( MediaWikiServices $services ): EntityTypeDefinitions {
-		$entityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
+		$baseEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
+		$clientEntityTypes = require __DIR__ . '/WikibaseClient.entitytypes.php';
+
+		$entityTypes = array_merge_recursive( $baseEntityTypes, $clientEntityTypes );
 
 		$services->getHookContainer()->run( 'WikibaseClientEntityTypes', [ &$entityTypes ] );
 

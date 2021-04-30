@@ -18,6 +18,7 @@
  */
 
 use MediaWiki\MediaWikiServices;
+use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -25,8 +26,15 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter;
+use Wikibase\Lib\SimpleCacheWithBagOStuff;
+use Wikibase\Lib\StatsdRecordingSimpleCache;
+use Wikibase\Lib\Store\CachingPrefetchingTermLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
+use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\Api\CombinedEntitySearchHelper;
 use Wikibase\Repo\Api\EntityIdSearchHelper;
 use Wikibase\Repo\Api\EntityTermSearchHelper;
@@ -180,6 +188,10 @@ return [
 				new StatementEntityReferenceExtractor( WikibaseRepo::getItemUrlParser() )
 			] );
 		},
+		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( SingleEntitySourceServices $entitySourceServices ) {
+			$termIdsResolver = $entitySourceServices->getTermInLangIdsResolver();
+			return new PrefetchingItemTermLookup( $termIdsResolver );
+		},
 	],
 	'property' => [
 		Def::STORAGE_SERIALIZER_FACTORY_CALLBACK => function( SerializerFactory $serializerFactory ) {
@@ -276,6 +288,47 @@ return [
 		},
 		Def::ENTITY_REFERENCE_EXTRACTOR_CALLBACK => function() {
 			return new StatementEntityReferenceExtractor( WikibaseRepo::getItemUrlParser() );
+		},
+		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( SingleEntitySourceServices $entitySourceServices ) {
+			global $wgSecretKey;
+
+			$mwServices = MediaWikiServices::getInstance();
+			$cacheSecret = hash( 'sha256', $wgSecretKey );
+			$bagOStuff = $mwServices->getLocalServerObjectCache();
+
+			$prefetchingPropertyTermLookup = new PrefetchingPropertyTermLookup(
+				$entitySourceServices->getTermInLangIdsResolver()
+			);
+
+			// If MediaWiki has no local server cache available, return the raw lookup.
+			if ( $bagOStuff instanceof EmptyBagOStuff ) {
+				return $prefetchingPropertyTermLookup;
+			}
+
+			$cache = new SimpleCacheWithBagOStuff(
+				$bagOStuff,
+				'wikibase.prefetchingPropertyTermLookup.',
+				$cacheSecret
+			);
+			$cache = new StatsdRecordingSimpleCache(
+				$cache,
+				$mwServices->getStatsdDataFactory(),
+				[
+					'miss' => 'wikibase.prefetchingPropertyTermLookupCache.miss',
+					'hit' => 'wikibase.prefetchingPropertyTermLookupCache.hit'
+				]
+			);
+			$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup(
+				$entitySourceServices->getEntityRevisionLookup()
+			);
+
+			return new CachingPrefetchingTermLookup(
+				$cache,
+				$prefetchingPropertyTermLookup,
+				$redirectResolvingRevisionLookup,
+				WikibaseContentLanguages::getDefaultInstance()
+					->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
+			);
 		},
 	]
 ];
