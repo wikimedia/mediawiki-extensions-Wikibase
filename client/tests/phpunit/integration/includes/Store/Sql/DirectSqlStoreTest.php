@@ -10,12 +10,12 @@ use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\NullPrefetchingTermLookup;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -51,8 +51,6 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $this->createMock( EntityRevisionLookup::class ) );
 		$wikibaseServices->method( 'getPropertyInfoLookup' )
 			->willReturn( new MockPropertyInfoLookup() );
-		$wikibaseServices->method( 'getTermBuffer' )
-			->willReturn( new NullPrefetchingTermLookup() );
 
 		return new DirectSqlStore(
 			$entityChangeFactory,
@@ -61,6 +59,7 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 			new EntityNamespaceLookup( [] ),
 			$wikibaseServices,
 			WikibaseClient::getSettings(),
+			$this->createMock( TermBuffer::class ),
 			wfWikiID()
 		);
 	}

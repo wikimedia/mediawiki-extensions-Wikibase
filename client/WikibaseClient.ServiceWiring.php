@@ -862,6 +862,7 @@ return [
 			WikibaseClient::getEntityNamespaceLookup( $services ),
 			WikibaseClient::getWikibaseServices( $services ),
 			WikibaseClient::getSettings( $services ),
+			WikibaseClient::getTermBuffer( $services ),
 			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName()
 		);
 	},
