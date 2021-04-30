@@ -14,7 +14,6 @@
 <acme/EntityData/P1> <http://schema.org/version> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <acme/EntityData/P1> <http://schema.org/dateModified> "2000-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <fooUri/P1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology#Property> .
-<fooUri/P1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology#Property> .
 <fooUri/P1> <http://wikiba.se/ontology#propertyType> <http://wikiba.se/ontology#String> .
 <fooUri/P1> <http://wikiba.se/ontology#directClaim> <fooUri/prop/direct/P1> .
 <fooUri/P1> <http://wikiba.se/ontology#claim> <fooUri/prop/P1> .
@@ -49,7 +48,6 @@ _:f729ec2c4c82a523276b17ef11d5258d <http://www.w3.org/2002/07/owl#someValuesFrom
 <fooUri/statement/GUID1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology#BestRank> .
 <fooUri/statement/GUID1> <http://wikiba.se/ontology#rank> <http://wikiba.se/ontology#NormalRank> .
 <fooUri/statement/GUID1> <fooUri/prop/statement/P999> _:de3b866f06858ed4a2efd4d8de6edf8e .
-<fooUri/P12> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology#Property> .
 <fooUri/P12> <http://wikiba.se/ontology#propertyType> <http://wikiba.se/ontology#String> .
 <fooUri/P12> <http://wikiba.se/ontology#directClaim> <fooUri/prop/direct/P12> .
 <fooUri/P12> <http://wikiba.se/ontology#claim> <fooUri/prop/P12> .
