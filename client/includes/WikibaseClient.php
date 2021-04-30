@@ -387,12 +387,12 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.OtherProjectsSitesProvider' );
 	}
 
-	public static function getAffectedPagesFinder( containerInterface $services = null ): AffectedPagesFinder {
+	public static function getAffectedPagesFinder( ContainerInterface $services = null ): AffectedPagesFinder {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.AffectedPagesFinder' );
 	}
 
-	public static function getChangeHandler( containerInterface $services = null ): ChangeHandler {
+	public static function getChangeHandler( ContainerInterface $services = null ): ChangeHandler {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.ChangeHandler' );
 	}
