@@ -20,10 +20,6 @@ class PrefetchingTermLookupFactory {
 	 */
 	private $entityTypeDefinitions;
 	/**
-	 * @var SingleEntitySourceServicesFactory
-	 */
-	private $singleEntitySourceServicesFactory;
-	/**
 	 * @var array
 	 */
 	private $lookupBySource;
@@ -31,16 +27,13 @@ class PrefetchingTermLookupFactory {
 	/**
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
-	 * @param SingleEntitySourceServicesFactory $singleEntitySourceServicesFactory
 	 */
 	public function __construct(
 		EntitySourceDefinitions $entitySourceDefinitions,
-		EntityTypeDefinitions $entityTypeDefinitions,
-		SingleEntitySourceServicesFactory $singleEntitySourceServicesFactory
+		EntityTypeDefinitions $entityTypeDefinitions
 	) {
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
-		$this->singleEntitySourceServicesFactory = $singleEntitySourceServicesFactory;
 
 		$this->lookupBySource = [];
 	}
@@ -62,8 +55,7 @@ class PrefetchingTermLookupFactory {
 		);
 
 		$callback = $prefetchingTermLookupCallbacks[ $type ];
-		$sourceServices = $this->singleEntitySourceServicesFactory->getServicesForSource( $entitySource );
-		$lookup = call_user_func( $callback, $sourceServices );
+		$lookup = call_user_func( $callback, $entitySource );
 
 		Assert::postcondition(
 			$lookup instanceof PrefetchingTermLookup,

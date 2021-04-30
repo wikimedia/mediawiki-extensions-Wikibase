@@ -18,7 +18,8 @@ declare( strict_types=1 );
  */
 
 use MediaWiki\MediaWikiServices;
-use Wikibase\DataAccess\SingleEntitySourceServices;
+use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
@@ -30,17 +31,21 @@ use Wikibase\Lib\WikibaseContentLanguages;
 
 return [
 	'item' => [
-		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( SingleEntitySourceServices $entitySourceServices ) {
-			$termIdsResolver = $entitySourceServices->getTermInLangIdsResolver();
+		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( EntitySource $entitySource ) {
+			$termIdsResolver = WikibaseClient::getSingleEntitySourceServicesFactory()
+				->getServicesForSource( $entitySource )
+				->getTermInLangIdsResolver();
+
 			return new PrefetchingItemTermLookup( $termIdsResolver );
 		},
 	],
 	'property' => [
-		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( SingleEntitySourceServices $entitySourceServices ) {
-			global $wgSecretKey;
-
+		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( EntitySource $entitySource ) {
 			$mwServices = MediaWikiServices::getInstance();
-			$cacheSecret = hash( 'sha256', $wgSecretKey );
+			$entitySourceServices = WikibaseClient::getSingleEntitySourceServicesFactory( $mwServices )
+				->getServicesForSource( $entitySource );
+
+			$cacheSecret = hash( 'sha256', $mwServices->getMainConfig()->get( 'SecretKey' ) );
 			$bagOStuff = $mwServices->getLocalServerObjectCache();
 
 			$prefetchingPropertyTermLookup = new PrefetchingPropertyTermLookup(
