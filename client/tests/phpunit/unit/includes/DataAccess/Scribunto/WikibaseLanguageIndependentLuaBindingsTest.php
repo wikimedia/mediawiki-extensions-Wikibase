@@ -61,10 +61,16 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 	 */
 	private $redirectTargetLookup;
 
+	/**
+	 * @var MockObject|EntityIdLookup
+	 */
+	private $entityIdLookup;
+
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->sitelinkLookup = $this->createStub( SiteLinkLookup::class );
+		$this->entityIdLookup = $this->createStub( EntityIdLookup::class );
 		$this->usageAccumulator = new HashUsageAccumulator();
 		$this->referencedEntityIdLookup = $this->createStub( ReferencedEntityIdLookup::class );
 		$this->redirectTargetLookup = $this->newMockRevisionBasedEntityRedirectTargetLookup();
@@ -81,7 +87,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 
 		return new WikibaseLanguageIndependentLuaBindings(
 			$this->sitelinkLookup,
-			$this->createMock( EntityIdLookup::class ),
+			$this->entityIdLookup,
 			new SettingsArray(),
 			$this->usageAccumulator,
 			new BasicEntityIdParser,
@@ -166,6 +172,21 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 
 		$id = $wikibaseLuaBindings->getEntityId( 'Rome', 'frwiki' );
 		$this->assertNull( $id );
+	}
+
+	public function testGetEntityForNonItem() {
+		$expectedId = 'M123';
+		$entityId = $this->createStub( EntityId::class ); // e.g. a MediaInfo ID
+		$entityId->method( 'getSerialization' )->willReturn( $expectedId );
+
+		$this->entityIdLookup->expects( $this->once() )
+			->method( 'getEntityIdForTitle' )
+			->willReturn( $entityId );
+
+		$this->assertSame(
+			$expectedId,
+			$this->getWikibaseLanguageIndependentLuaBindings()->getEntityId( 'some page', 'enwiki' )
+		);
 	}
 
 	public function getLabelByLanguageProvider() {
