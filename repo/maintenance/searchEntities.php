@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Maintenance;
 
-use Hooks;
 use Maintenance;
 use MWException;
 use OrderedStreamingForkController;
@@ -148,15 +147,9 @@ class SearchEntities extends Maintenance {
 			}
 		];
 
-		Hooks::run( 'WikibaseSearchEntitiesEngines', [ new WikibaseRepo(), &$engines ] );
-
 		if ( !isset( $engines[$engine] ) ) {
 			throw new MWException( "Unknown engine: $engine, valid values: "
 				. implode( ", ", array_keys( $engines ) ) );
-		}
-
-		if ( !is_callable( $engines[$engine] ) ) {
-			throw new MWException( "Bad engine callback for $engine" );
 		}
 
 		return $engines[$engine]();

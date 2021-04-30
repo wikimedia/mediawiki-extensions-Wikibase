@@ -106,12 +106,6 @@ Allows extensions to add custom EntityByLinkedTitleLookup services.
 Parameters:
 * &$lookup
 
-#### WikibaseSearchEntitiesEngines {#WikibaseSearchEntitiesEngines}
-
-Parameters:
-* $repo
-* &$engines
-
 Client
 ------------------------------------------------------------
 
