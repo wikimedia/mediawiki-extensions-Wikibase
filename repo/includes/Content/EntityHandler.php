@@ -14,7 +14,6 @@ use MWContentSerializationException;
 use MWException;
 use ParserCache;
 use ParserOutput;
-use Revision;
 use SearchEngine;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -557,26 +556,25 @@ abstract class EntityHandler extends ContentHandler {
 	/**
 	 * @see ContentHandler::getUndoContent
 	 *
-	 * @param Revision|Content $latest The current text
-	 * @param Revision|Content $newer The revision to undo
-	 * @param Revision|Content $older Must be an earlier revision than $newer
+	 * @param Content $latestContent The current text
+	 * @param Content $newerContent The revision to undo
+	 * @param Content $olderContent Must be an earlier revision than $newer
 	 * @param bool $undoIsLatest Set to true if $newer is from the current revision (since 1.32)
 	 *
 	 * @return EntityContent|bool Content on success, false on failure
 	 */
-	public function getUndoContent( $latest, $newer, $older, $undoIsLatest = false ) {
-		$latestContent = ( $latest instanceof Revision ) ? $latest->getContent() : $latest;
-		$newerContent = ( $newer instanceof Revision ) ? $newer->getContent() : $newer;
-		$olderContent = ( $older instanceof Revision ) ? $older->getContent() : $older;
+	public function getUndoContent(
+		Content $latestContent,
+		Content $newerContent,
+		Content $olderContent,
+		$undoIsLatest = false
+	) {
 		if (
 			!$latestContent instanceof EntityContent
 			|| !$newerContent instanceof EntityContent
 			|| !$olderContent instanceof EntityContent
 		) {
 			return false;
-		}
-		if ( $latest instanceof Revision && $newer instanceof Revision ) {
-			$undoIsLatest = ( $latest->getId() === $newer->getId() );
 		}
 
 		if ( $undoIsLatest ) {

@@ -11,7 +11,6 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MWException;
 use ParserOutput;
-use Revision;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesError;
 use Wikibase\Repo\WikibaseRepo;
@@ -63,20 +62,15 @@ class EntityContentDiffView extends DifferenceEngine {
 	/**
 	 * Get a header for a specified revision.
 	 *
-	 * @param Revision|RevisionRecord $rev Pasing Revision is deprecated since 1.35
+	 * @param RevisionRecord $rev
 	 * @param string $complete 'complete' to get the header wrapped depending
 	 *        the visibility of the revision and a link to edit the page.
 	 *
 	 * @return string HTML fragment
 	 */
-	public function getRevisionHeader( $rev, $complete = '' ) {
+	public function getRevisionHeader( RevisionRecord $rev, $complete = '' ) {
 		//NOTE: This must be kept in sync with the parent implementation.
 		//      Perhaps some parts could be factored out to reduce code duplication.
-
-		if ( $rev instanceof Revision ) {
-			wfDeprecated( __METHOD__ . ' with Revision objects', '1.35' );
-			$rev = $rev->getRevisionRecord();
-		}
 
 		$lang = $this->getLanguage();
 		$user = $this->getUser();
