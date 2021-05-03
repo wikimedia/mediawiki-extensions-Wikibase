@@ -206,6 +206,7 @@ class WikibaseContentLanguages {
 					'ojp', // T195816
 					'ojp-hani', // T195816
 					'ojp-hira', // T195816
+					'oma', // T265296
 					'ood', // T155423
 					'otk', // T137809
 					'peo', // T189427
