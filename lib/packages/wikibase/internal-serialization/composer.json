@@ -54,6 +54,7 @@
 	"scripts": {
 		"test": [
 			"composer validate --no-interaction",
+			"@cs",
 			"phpunit"
 		],
 		"cs": [
@@ -62,7 +63,6 @@
 		],
 		"fix": "phpcbf",
 		"ci": [
-			"@cs",
 			"@test"
 		]
 	}
