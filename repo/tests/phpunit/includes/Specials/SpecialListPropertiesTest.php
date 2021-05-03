@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use Language;
 use SpecialPageTestBase;
 use Title;
 use Wikibase\DataAccess\PrefetchingTermLookup;
@@ -10,7 +9,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -87,14 +85,8 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 	protected function newSpecialPage() {
-		$language = Language::factory( 'en-gb' );
-
-		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->never() )
-			->method( 'getName' );
 		$entityIdFormatterFactory = new EntityIdHtmlLinkFormatterFactory(
-			$this->getEntityTitleLookup(),
-			$languageNameLookup
+			$this->getEntityTitleLookup()
 		);
 		$termLookup = $this->getPrefetchingTermLookup();
 		$languageFallbackChainFactory = new LanguageFallbackChainFactory();

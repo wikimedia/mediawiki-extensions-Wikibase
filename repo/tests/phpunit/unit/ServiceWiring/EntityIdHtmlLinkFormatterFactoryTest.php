@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
@@ -25,11 +24,6 @@ class EntityIdHtmlLinkFormatterFactoryTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.EntityTitleLookup',
 			$this->createMock( EntityTitleLookup::class )
-		);
-
-		$this->mockService(
-			'WikibaseRepo.LanguageNameLookup',
-			$this->createMock( LanguageNameLookup::class )
 		);
 
 		$this->mockService(
