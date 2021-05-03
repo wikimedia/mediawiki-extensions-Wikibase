@@ -105,6 +105,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolverFactory;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
@@ -900,6 +901,16 @@ return [
 			hash( 'sha256', $services->getMainConfig()->get( 'SecretKey' ) ),
 			new TermFallbackCacheServiceFactory(),
 			$settings->getSetting( 'termFallbackCacheVersion' )
+		);
+	},
+
+	'WikibaseClient.TermInLangIdsResolverFactory' => function (
+		MediaWikiServices $services
+	): TermInLangIdsResolverFactory {
+		return new TermInLangIdsResolverFactory(
+			$services->getDBLoadBalancerFactory(),
+			WikibaseClient::getLogger( $services ),
+			$services->getMainWANObjectCache()
 		);
 	},
 
