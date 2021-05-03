@@ -12,12 +12,9 @@
 
 .wb-langlinks-link > a:before {
 	content: '';
-	background-image: url( images/edit.png );
-	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/edit.svg );
+	background-image: url( images/edit.svg );
 	background-position: left top;
 	background-repeat: no-repeat;
-	-webkit-background-size: 10px 10px;
 	background-size: 10px 10px;
 	display: inline-block;
 	width: 10px;
