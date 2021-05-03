@@ -65,16 +65,17 @@ describe( 'init', () => {
 		browser.setNetworkConditions( { latency: 100, throughput: 1000 } );
 
 		DataBridgePage.launchApp();
-		browser.waitUntil(
-			() => {
-				return DataBridgePage.loadingBar.isDisplayed();
-			},
-			{
+		browser.waitUntil( () => {
+			return DataBridgePage.loadingBar.isDisplayed();
+		}, {
+			timeout: {
 				interval: 500,
 				timeout: 20000,
-			}
-		);
-		DataBridgePage.loadingBar.waitForExist( undefined, true );
+			},
+		} );
+		DataBridgePage.loadingBar.waitForExist( {
+			reverse: true,
+		} );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 	} );
 
@@ -104,7 +105,9 @@ describe( 'init', () => {
 
 			DataBridgePage.openAppOnPage( title );
 
-			DataBridgePage.bridge.waitForDisplayed( 20000 );
+			DataBridgePage.bridge.waitForDisplayed( {
+				timeout: 20000,
+			} );
 			assert.ok( DataBridgePage.bridge.isDisplayed() );
 			assert.strictEqual( DataBridgePage.value.getValue(), stringPropertyExampleValue );
 		} );
@@ -170,7 +173,9 @@ describe( 'init', () => {
 
 			DataBridgePage.openAppOnPage( title );
 
-			DataBridgePage.bridge.waitForDisplayed( 20000 );
+			DataBridgePage.bridge.waitForDisplayed( {
+				timeout: 20000,
+			} );
 			assert.ok( DataBridgePage.bridge.isDisplayed() );
 			assert.strictEqual( DataBridgePage.nthReference( 1 ).getText(), 'A. B. https://example.com.' );
 			assert.strictEqual( DataBridgePage.nthReference( 2 ).getText(), 'C.' );
@@ -220,11 +225,10 @@ describe( 'init', () => {
 				DataBridgePage.launchApp();
 				DataBridgePage.bridge.waitForDisplayed();
 
-				browser.waitUntil(
-					() => DataBridgePage.propertyLabel.getText() === expectedLabel,
-					20000,
-					`${DataBridgePage.propertyLabel.getText()} is not equal to ${expectedLabel}`
-				);
+				browser.waitUntil( () => DataBridgePage.propertyLabel.getText() === expectedLabel, {
+					timeout: 20000,
+					timeoutMsg: `${DataBridgePage.propertyLabel.getText()} is not equal to ${expectedLabel}`,
+				} );
 			}
 
 			it( 'uses the label from the page content language', () => {
@@ -279,7 +283,9 @@ describe( 'init', () => {
 
 				DataBridgePage.open( title );
 				DataBridgePage.overloadedLink.click();
-				DataBridgePage.app.waitForDisplayed( 20000 );
+				DataBridgePage.app.waitForDisplayed( {
+					timeout: 20000,
+				} );
 
 				assert.ok( WarningAnonymousEdit.root.isDisplayed() );
 
@@ -312,12 +318,16 @@ describe( 'init', () => {
 
 				DataBridgePage.open( title );
 				DataBridgePage.overloadedLink.click();
-				DataBridgePage.app.waitForDisplayed( 20000 );
+				DataBridgePage.app.waitForDisplayed( {
+					timeout: 20000,
+				} );
 
 				assert.ok( WarningAnonymousEdit.root.isDisplayed() );
 
 				WarningAnonymousEdit.loginButton.click();
-				DataBridgePage.app.waitForDisplayed( undefined, true ); // wait until not displayed
+				DataBridgePage.app.waitForDisplayed( {
+					reverse: true,
+				} ); // wait until not displayed
 				assert.equal( browser.execute( () => {
 					return window.mw.config.get( 'wgCanonicalNamespace' ) + ':'
 						+ window.mw.config.get( 'wgCanonicalSpecialPageName' );
@@ -351,7 +361,9 @@ describe( 'init', () => {
 
 			DataBridgePage.open( title );
 			DataBridgePage.overloadedLink.click();
-			DataBridgePage.bridge.waitForDisplayed( 20000 );
+			DataBridgePage.bridge.waitForDisplayed( {
+				timeout: 20000,
+			} );
 			assert.ok( !WarningAnonymousEdit.root.isDisplayed() );
 		} );
 	} );

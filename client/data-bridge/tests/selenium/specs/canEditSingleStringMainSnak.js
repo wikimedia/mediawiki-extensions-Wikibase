@@ -30,7 +30,9 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( 20000 );
+		DataBridgePage.bridge.waitForDisplayed( {
+			timeout: 20000,
+		} );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 		assert.strictEqual( DataBridgePage.value.getValue(), stringPropertyExampleValue );
 
@@ -43,12 +45,11 @@ describe( 'App', () => {
 		browser.keys( extraCharacters );
 
 		const expectedContent = `${stringPropertyExampleValue}${extraCharacters}`;
-		browser.waitUntil(
-			() => {
-				return DataBridgePage.value.getValue() === expectedContent;
-			},
-			5000,
-			`${DataBridgePage.value.getValue()} is not equal to ${expectedContent}`
-		);
+		browser.waitUntil( () => {
+			return DataBridgePage.value.getValue() === expectedContent;
+		}, {
+			timeout: 5000,
+			timeoutMsg: `${DataBridgePage.value.getValue()} is not equal to ${expectedContent}`,
+		} );
 	} );
 } );

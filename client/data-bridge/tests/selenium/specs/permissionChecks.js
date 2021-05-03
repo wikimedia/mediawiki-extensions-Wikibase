@@ -92,7 +92,9 @@ describe( 'permission checks', () => {
 			browser.deleteCookies();
 
 			DataBridgePage.openAppOnPage( title );
-			DataBridgePage.error.waitForDisplayed( 20000 );
+			DataBridgePage.error.waitForDisplayed( {
+				timeout: 20000,
+			} );
 
 			assert.ok( DataBridgePage.showsErrorPermission() );
 			assert.equal( DataBridgePage.permissionErrors.length, 1 );
@@ -112,7 +114,9 @@ describe( 'permission checks', () => {
 		it( 'show a permission error when opening bridge', () => {
 			LoginPage.loginAdmin();
 			DataBridgePage.openAppOnPage( title );
-			DataBridgePage.error.waitForDisplayed( 20000 );
+			DataBridgePage.error.waitForDisplayed( {
+				timeout: 20000,
+			} );
 
 			assert.ok( DataBridgePage.showsErrorPermission() );
 			// client and repo on the same installation so we expect a "blocked user" from both

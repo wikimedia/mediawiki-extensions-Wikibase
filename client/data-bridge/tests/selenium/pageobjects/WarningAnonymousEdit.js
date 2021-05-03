@@ -15,7 +15,9 @@ class WarningAnonymousEdit {
 	dismiss() {
 		if ( this.root.isDisplayed() ) {
 			this.proceedButton.click();
-			this.root.waitForDisplayed( undefined, true );
+			this.root.waitForDisplayed( {
+				reverse: true,
+			} );
 		}
 	}
 }
