@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Formatters;
 
 use InvalidArgumentException;
@@ -9,6 +11,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\MessageInLanguageProvider;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -41,6 +44,9 @@ class OutputFormatSnakFormatterFactory {
 	 */
 	private $dataTypeFactory;
 
+	/** @var MessageInLanguageProvider */
+	private $messageInLanguageProvider;
+
 	/**
 	 * @param callable[] $snakFormatterConstructorCallbacks An associative array mapping property
 	 *        data type IDs to callbacks. The callbacks will be invoked with two parameters: the
@@ -49,12 +55,14 @@ class OutputFormatSnakFormatterFactory {
 	 * @param OutputFormatValueFormatterFactory $valueFormatterFactory
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param DataTypeFactory $dataTypeFactory
+	 * @param MessageInLanguageProvider $messageInLanguageProvider
 	 */
 	public function __construct(
 		array $snakFormatterConstructorCallbacks,
 		OutputFormatValueFormatterFactory $valueFormatterFactory,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
-		DataTypeFactory $dataTypeFactory
+		DataTypeFactory $dataTypeFactory,
+		MessageInLanguageProvider $messageInLanguageProvider
 	) {
 		Assert::parameterElementType(
 			'callable',
@@ -66,6 +74,7 @@ class OutputFormatSnakFormatterFactory {
 		$this->valueFormatterFactory = $valueFormatterFactory;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
+		$this->messageInLanguageProvider = $messageInLanguageProvider;
 	}
 
 	/**
@@ -133,14 +142,8 @@ class OutputFormatSnakFormatterFactory {
 		return $snakFormatter;
 	}
 
-	/**
-	 * @param string $key
-	 * @param string $languageCode
-	 *
-	 * @return Message
-	 */
-	private function getMessage( $key, $languageCode ) {
-		return wfMessage( $key )->inLanguage( $languageCode );
+	private function getMessage( string $key, string $languageCode ): Message {
+		return $this->messageInLanguageProvider->msgInLang( $key, $languageCode );
 	}
 
 	/**

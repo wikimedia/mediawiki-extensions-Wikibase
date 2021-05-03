@@ -54,6 +54,7 @@ use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -483,6 +484,11 @@ final class WikibaseClient {
 	public static function getPropertySource( ContainerInterface $services = null ): EntitySource {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.PropertySource' );
+	}
+
+	public static function getMessageInLanguageProvider( ContainerInterface $services = null ): MessageInLanguageProvider {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.MessageInLanguageProvider' );
 	}
 
 }

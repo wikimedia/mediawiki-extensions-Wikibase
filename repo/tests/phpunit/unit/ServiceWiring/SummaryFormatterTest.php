@@ -11,6 +11,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\SummaryFormatter;
@@ -47,6 +48,8 @@ class SummaryFormatterTest extends ServiceWiringTestCase {
 			new InMemoryDataTypeLookup() );
 		$this->mockService( 'WikibaseRepo.DataTypeFactory',
 			new DataTypeFactory( [] ) );
+		$this->mockService( 'WikibaseRepo.MessageInLanguageProvider',
+			$this->createMock( MessageInLanguageProvider::class ) );
 		$this->mockService( 'WikibaseRepo.EntityIdParser',
 			new ItemIdParser() );
 

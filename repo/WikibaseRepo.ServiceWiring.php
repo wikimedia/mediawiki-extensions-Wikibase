@@ -83,6 +83,8 @@ use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
+use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SettingsArray;
@@ -1333,6 +1335,10 @@ return [
 		);
 	},
 
+	'WikibaseRepo.MessageInLanguageProvider' => function ( MediaWikiServices $services ): MessageInLanguageProvider {
+		return new MediaWikiMessageInLanguageProvider();
+	},
+
 	'WikibaseRepo.MessageParameterFormatter' => function ( MediaWikiServices $services ): ValueFormatter {
 		$formatterOptions = new FormatterOptions();
 		$valueFormatterFactory = WikibaseRepo::getValueFormatterFactory( $services );
@@ -1526,7 +1532,8 @@ return [
 			WikibaseRepo::getDataTypeDefinitions( $services )->getSnakFormatterFactoryCallbacks(),
 			WikibaseRepo::getValueFormatterFactory( $services ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
-			WikibaseRepo::getDataTypeFactory( $services )
+			WikibaseRepo::getDataTypeFactory( $services ),
+			WikibaseRepo::getMessageInLanguageProvider( $services )
 		);
 	},
 
@@ -1614,7 +1621,8 @@ return [
 			[], // XXX: do we want DataTypeDefinitions::getSnakFormatterFactoryCallbacks()
 			$valueFormatterFactory,
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
-			WikibaseRepo::getDataTypeFactory( $services )
+			WikibaseRepo::getDataTypeFactory( $services ),
+			WikibaseRepo::getMessageInLanguageProvider( $services )
 		);
 
 		$options = new FormatterOptions();
