@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Formatters\SnakFormatter;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 
@@ -25,13 +24,8 @@ class EntityIdHtmlLinkFormatterFactoryTest extends TestCase {
 	private function getFormatterFactory() {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
 
-		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->never() )
-			->method( 'getName' );
-
 		return new EntityIdHtmlLinkFormatterFactory(
-			$titleLookup,
-			$languageNameLookup
+			$titleLookup
 		);
 	}
 
@@ -52,10 +46,6 @@ class EntityIdHtmlLinkFormatterFactoryTest extends TestCase {
 	public function testPassesLanguageToFormatterCallbacks() {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
 
-		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->never() )
-			->method( 'getName' );
-
 		$language = Language::factory( 'en' );
 
 		$callbackMock = $this->getMockBuilder( \stdClass::class )
@@ -72,7 +62,6 @@ class EntityIdHtmlLinkFormatterFactoryTest extends TestCase {
 
 		$factory = new EntityIdHtmlLinkFormatterFactory(
 			$titleLookup,
-			$languageNameLookup,
 			[ 'foo' => $callbackMock ]
 		);
 

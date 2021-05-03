@@ -723,7 +723,6 @@ return [
 	): EntityIdFormatterFactory {
 		$factory = new EntityIdHtmlLinkFormatterFactory(
 			WikibaseRepo::getEntityTitleLookup( $services ),
-			WikibaseRepo::getLanguageNameLookup( $services ),
 			WikibaseRepo::getEntityTypeDefinitions( $services )
 				->get( EntityTypeDefinitions::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK )
 		);

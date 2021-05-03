@@ -8,7 +8,6 @@ use Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Formatters\NonExistingEntityIdHtmlFormatter;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\UnknownTypeEntityIdHtmlLinkFormatter;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikimedia\Assert\Assert;
@@ -27,25 +26,18 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 	private $titleLookup;
 
 	/**
-	 * @var LanguageNameLookup
-	 */
-	private $languageNameLookup;
-
-	/**
 	 * @var callable[]
 	 */
 	private $formatterCallbacks;
 
 	public function __construct(
 		EntityTitleLookup $titleLookup,
-		LanguageNameLookup $languageNameLookup,
 		array $formatterCallbacks = []
 	) {
 		Assert::parameterElementType( 'callable', $formatterCallbacks, '$formatterCallbacks' );
 
 		$this->formatterCallbacks = $formatterCallbacks;
 		$this->titleLookup = $titleLookup;
-		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**
