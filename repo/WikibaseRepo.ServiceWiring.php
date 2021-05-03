@@ -115,6 +115,7 @@ use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolverFactory;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
@@ -1669,6 +1670,16 @@ return [
 			hash( 'sha256', $services->getMainConfig()->get( 'SecretKey' ) ),
 			new TermFallbackCacheServiceFactory(),
 			$settings->getSetting( 'termFallbackCacheVersion' )
+		);
+	},
+
+	'WikibaseRepo.TermInLangIdsResolverFactory' => function (
+		MediaWikiServices $services
+	): TermInLangIdsResolverFactory {
+		return new TermInLangIdsResolverFactory(
+			$services->getDBLoadBalancerFactory(),
+			WikibaseRepo::getLogger( $services ),
+			$services->getMainWANObjectCache()
 		);
 	},
 
