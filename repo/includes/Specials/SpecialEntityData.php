@@ -79,6 +79,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		RdfVocabulary $rdfVocabulary,
 		SettingsArray $repoSettings,
 		Store $store,
+		array $subEntityTypesMap,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
 	): self {
 		global $wgUseCdn, $wgApiFrameOptions;
@@ -118,7 +119,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$defaultFormat,
 			$maxAge,
 			$wgUseCdn,
-			$wgApiFrameOptions
+			$wgApiFrameOptions,
+			$subEntityTypesMap
 		);
 
 		return new self( $entityDataRequestHandler, $entityDataFormatProvider );

@@ -108,6 +108,11 @@ class EntityDataRequestHandler {
 	private $entityTypesWithoutRdfOutput;
 
 	/**
+	 * @var string[][]
+	 */
+	private $subEntityTypesMap;
+
+	/**
 	 * @param EntityDataUriManager $uriManager
 	 * @param HtmlCacheUpdater $htmlCacheUpdater
 	 * @param EntityIdParser $entityIdParser
@@ -121,6 +126,7 @@ class EntityDataRequestHandler {
 	 * @param int $maxAge number of seconds to cache entity data
 	 * @param bool $useCdn do we have web caches configured?
 	 * @param string|null $frameOptionsHeader for X-Frame-Options
+	 * @param string[][] $subEntityTypesMap
 	 */
 	public function __construct(
 		EntityDataUriManager $uriManager,
@@ -135,7 +141,8 @@ class EntityDataRequestHandler {
 		$defaultFormat,
 		$maxAge,
 		$useCdn,
-		$frameOptionsHeader
+		$frameOptionsHeader,
+		array $subEntityTypesMap
 	) {
 		$this->uriManager = $uriManager;
 		$this->htmlCacheUpdater = $htmlCacheUpdater;
@@ -150,6 +157,7 @@ class EntityDataRequestHandler {
 		$this->maxAge = $maxAge;
 		$this->useCdn = $useCdn;
 		$this->frameOptionsHeader = $frameOptionsHeader;
+		$this->subEntityTypesMap = $subEntityTypesMap;
 	}
 
 	/**
@@ -400,6 +408,8 @@ class EntityDataRequestHandler {
 				throw new HttpError( 404, $msg );
 			}
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+			$this->validateRedirectability( $id, $ex->getRedirectTargetId() );
+
 			$redirectRevision = new RedirectRevision(
 				new EntityRedirect( $id, $ex->getRedirectTargetId() ),
 				$ex->getRevisionId(), $ex->getRevisionTimestamp()
@@ -452,6 +462,25 @@ class EntityDataRequestHandler {
 		}
 
 		return [ $entityRevision, $redirectRevision ];
+	}
+
+	private function validateRedirectability( EntityId $id, EntityId $redirectTargetId ): void {
+		if ( $this->isSubEntityTypeOf( $id->getEntityType(), $redirectTargetId->getEntityType() ) ) {
+			throw new HttpError(
+				404,
+				wfMessage(
+					'wikibase-entitydata-unresolvable-sub-entity-redirect',
+					$id->getSerialization(),
+					$redirectTargetId->getSerialization()
+				)
+			);
+		}
+	}
+
+	private function isSubEntityTypeOf( string $sourceType, string $targetType ): bool {
+		return $sourceType !== $targetType &&
+			array_key_exists( $targetType, $this->subEntityTypesMap ) &&
+			in_array( $sourceType, $this->subEntityTypesMap[$targetType] );
 	}
 
 	/**
