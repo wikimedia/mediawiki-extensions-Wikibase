@@ -1871,7 +1871,7 @@ return [
 			$services->getSiteLookup(),
 			WikibaseRepo::getDataTypeFactory( $services ),
 			TemplateFactory::getDefaultInstance(),
-			WikibaseRepo::getLanguageNameLookup( $services ),
+			WikibaseRepo::getLanguageNameLookupFactory( $services ),
 			new MediaWikiLanguageDirectionalityLookup(),
 			WikibaseRepo::getNumberLocalizerFactory( $services ),
 			$settings->getSetting( 'siteLinkGroups' ),

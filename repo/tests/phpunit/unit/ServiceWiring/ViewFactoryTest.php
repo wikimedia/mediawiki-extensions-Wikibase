@@ -13,7 +13,7 @@ use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Formatters\NumberLocalizerFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
-use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\LocalizedTextProviderFactory;
@@ -58,8 +58,8 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 			$this->createMock( OutputFormatSnakFormatterFactory::class ) );
 		$this->mockService( 'WikibaseRepo.DataTypeFactory',
 			new DataTypeFactory( [] ) );
-		$this->mockService( 'WikibaseRepo.LanguageNameLookup',
-			new LanguageNameLookup() );
+		$this->mockService( 'WikibaseRepo.LanguageNameLookupFactory',
+			new LanguageNameLookupFactory() );
 		$this->mockService(
 			'WikibaseRepo.NumberLocalizerFactory',
 			$this->createMock( NumberLocalizerFactory::class )

@@ -12,6 +12,7 @@ use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Formatters\NumberLocalizerFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\LocalizedTextProviderFactory;
@@ -64,6 +65,9 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->never() )
 			->method( 'getName' );
+		$languageNameLookupFactory = $this->createMock( LanguageNameLookupFactory::class );
+		$languageNameLookupFactory->method( 'getForLanguage' )
+			->willReturn( $languageNameLookup );
 
 		return new ViewFactory(
 			$htmlFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_HTML ),
@@ -74,7 +78,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			new HashSiteStore(),
 			new DataTypeFactory( [] ),
 			$templateFactory,
-			$languageNameLookup,
+			$languageNameLookupFactory,
 			$this->createMock( LanguageDirectionalityLookup::class ),
 			$this->createMock( NumberLocalizerFactory::class ),
 			[],

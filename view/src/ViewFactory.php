@@ -10,7 +10,7 @@ use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Formatters\NumberLocalizerFactory;
 use Wikibase\Lib\Formatters\SnakFormat;
 use Wikibase\Lib\Formatters\SnakFormatter;
-use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\LocalizedTextProviderFactory;
@@ -68,9 +68,9 @@ class ViewFactory {
 	private $templateFactory;
 
 	/**
-	 * @var LanguageNameLookup
+	 * @var LanguageNameLookupFactory
 	 */
-	private $languageNameLookup;
+	private $languageNameLookupFactory;
 
 	/**
 	 * @var LanguageDirectionalityLookup
@@ -116,7 +116,7 @@ class ViewFactory {
 	 * @param SiteLookup $siteLookup
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param TemplateFactory $templateFactory
-	 * @param LanguageNameLookup $languageNameLookup
+	 * @param LanguageNameLookupFactory $languageNameLookupFactory
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param NumberLocalizerFactory $numberLocalizerFactory
 	 * @param string[] $siteLinkGroups
@@ -136,7 +136,7 @@ class ViewFactory {
 		SiteLookup $siteLookup,
 		DataTypeFactory $dataTypeFactory,
 		TemplateFactory $templateFactory,
-		LanguageNameLookup $languageNameLookup,
+		LanguageNameLookupFactory $languageNameLookupFactory,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		NumberLocalizerFactory $numberLocalizerFactory,
 		array $siteLinkGroups,
@@ -159,7 +159,7 @@ class ViewFactory {
 		$this->siteLookup = $siteLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->templateFactory = $templateFactory;
-		$this->languageNameLookup = $languageNameLookup;
+		$this->languageNameLookupFactory = $languageNameLookupFactory;
 		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
 		$this->numberLocalizerFactory = $numberLocalizerFactory;
 		$this->siteLinkGroups = $siteLinkGroups;
@@ -217,7 +217,7 @@ class ViewFactory {
 			$this->siteLookup->getSites(),
 			$editSectionGenerator,
 			$this->plainTextIdFormatterFactory->getEntityIdFormatter( $language ),
-			$this->languageNameLookup,
+			$this->languageNameLookupFactory->getForLanguage( $language ),
 			$numberLocalizer,
 			$this->badgeItems,
 			$this->specialSiteLinkGroups,
