@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Language;
-use Wikibase\Client\Tests\Unit\ServiceWiringTest;
+use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 
 /**
  * @coversNothing
@@ -14,7 +14,7 @@ use Wikibase\Client\Tests\Unit\ServiceWiringTest;
  *
  * @license GPL-2.0-or-later
  */
-class UserLanguageTest extends ServiceWiringTest {
+class UserLanguageTest extends ServiceWiringTestCase {
 
 	private $cachedLang;
 
