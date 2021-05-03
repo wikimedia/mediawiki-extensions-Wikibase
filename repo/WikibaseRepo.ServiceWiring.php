@@ -112,6 +112,7 @@ use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
@@ -514,17 +515,23 @@ return [
 		MediaWikiServices $services
 	): WikibaseValueFormatterBuilders {
 		$settings = WikibaseRepo::getSettings( $services );
+		$revisionLookup = WikibaseRepo::getEntityRevisionLookup( $services );
+		$termFallbackCache = WikibaseRepo::getTermFallbackCache( $services );
 
 		return new WikibaseValueFormatterBuilders(
-			new FormatterLabelDescriptionLookupFactory( WikibaseRepo::getTermLookup( $services ) ),
+			new FormatterLabelDescriptionLookupFactory(
+				WikibaseRepo::getTermLookup( $services ),
+				$termFallbackCache,
+				new RedirectResolvingLatestRevisionLookup( $revisionLookup )
+			),
 			WikibaseRepo::getLanguageNameLookup( $services ),
 			WikibaseRepo::getItemUrlParser( $services ),
 			$settings->getSetting( 'geoShapeStorageBaseUrl' ),
 			$settings->getSetting( 'tabularDataStorageBaseUrl' ),
-			WikibaseRepo::getTermFallbackCache( $services ),
+			$termFallbackCache,
 			$settings->getSetting( 'sharedCacheDuration' ),
 			WikibaseRepo::getEntityLookup( $services ),
-			WikibaseRepo::getEntityRevisionLookup( $services ),
+			$revisionLookup,
 			$settings->getSetting( 'entitySchemaNamespace' ),
 			WikibaseRepo::getEntityExistenceChecker( $services ),
 			WikibaseRepo::getEntityTitleTextLookup( $services ),

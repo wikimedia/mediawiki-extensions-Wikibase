@@ -83,13 +83,15 @@ describe( 'Lua Wikibase integration', () => {
 		await mindy.edit( `Module:${module}`, {
 			text: `
 				local p = {}
-				local dataValue = { type = 'wikibase-entityid', value = { ['entity-type'] = 'item', id = '${testItemId}' } }
-				local snak = { datatype = 'wikibase-item', property = 'P435739845', snaktype = 'value', datavalue = dataValue }
 				p.getLabel = function( frame ) return mw.wikibase.getLabel( frame.args[ 1 ] ) end
 				p.getLabelByLang = function( frame ) return mw.wikibase.getLabelByLang( frame.args[ 1 ], 'en' ) end
 				p.getEntity_labels = function() return mw.wikibase.getEntity( '${testItemId}' ).labels.de.value end
 				p.getDescription = function() return mw.wikibase.getDescription( '${testItemId}' ) end
-				p.formatValue = function() return mw.wikibase.formatValue( snak ) end
+				p.formatItemIdValue = function( frame )
+					local dataValue = { type = 'wikibase-entityid', value = { ['entity-type'] = 'item', id = frame.args[1] } }
+					local snak = { datatype = 'wikibase-item', property = 'P435739845', snaktype = 'value', datavalue = dataValue }
+					return mw.wikibase.formatValue( snak )
+				end
 				return p
 				`,
 			contentmodel: 'Scribunto',
@@ -164,7 +166,7 @@ describe( 'Lua Wikibase integration', () => {
 
 	it( 'formatValue can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( `{{#invoke:${module}|formatValue}}`, pageTitle );
+		await writeTextToPage( `{{#invoke:${module}|formatItemIdValue|${testItemId}}}`, pageTitle );
 		const response = await parsePage( pageTitle );
 		assert.match( response.parse.text, new RegExp( englishLabel + '|' + germanLabel ) );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
@@ -174,6 +176,14 @@ describe( 'Lua Wikibase integration', () => {
 		for ( const usageAspect of otherUsageAspects ) {
 			assert.match( usageAspect, /^L(\..*)?$/ );
 		}
+	} );
+
+	it( 'formatValue uses the label of the redirect target for a redirected item', async () => {
+		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
+		await writeTextToPage( `{{#invoke:${module}|formatItemIdValue|${redirectedItemId}}}`, pageTitle );
+		const response = await parsePage( pageTitle );
+		assert.match( response.parse.text, new RegExp( englishLabel + '|' + germanLabel ) );
+		// TODO usage tracking for redirects: T280910
 	} );
 
 	function writeTextToPage( text, pageTitle ) {

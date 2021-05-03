@@ -102,6 +102,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
@@ -272,17 +273,23 @@ return [
 			$clientStore->getSiteLinkLookup(),
 			$settings->getSetting( 'siteGlobalID' )
 		);
+		$termFallbackCache = WikibaseClient::getTermFallbackCache( $services );
+		$revisionLookup = $clientStore->getEntityRevisionLookup();
 
 		return new WikibaseValueFormatterBuilders(
-			new FormatterLabelDescriptionLookupFactory( WikibaseClient::getTermLookup( $services ) ),
+			new FormatterLabelDescriptionLookupFactory(
+				WikibaseClient::getTermLookup( $services ),
+				$termFallbackCache,
+				new RedirectResolvingLatestRevisionLookup( $revisionLookup )
+			),
 			new LanguageNameLookup( WikibaseClient::getUserLanguage( $services )->getCode() ),
 			WikibaseClient::getRepoItemUriParser( $services ),
 			$settings->getSetting( 'geoShapeStorageBaseUrl' ),
 			$settings->getSetting( 'tabularDataStorageBaseUrl' ),
-			WikibaseClient::getTermFallbackCache( $services ),
+			$termFallbackCache,
 			$settings->getSetting( 'sharedCacheDuration' ),
 			WikibaseClient::getEntityLookup( $services ),
-			$clientStore->getEntityRevisionLookup(),
+			$revisionLookup,
 			$settings->getSetting( 'entitySchemaNamespace' ),
 			new TitleLookupBasedEntityExistenceChecker(
 				$entityTitleLookup,
