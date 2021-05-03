@@ -15,7 +15,6 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolver;
 use Wikimedia\Assert\ParameterElementTypeException;
 
 /**
@@ -38,7 +37,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			[ 'getEntityPrefetcher', EntityPrefetcher::class, true ],
 			[ 'getPropertyInfoLookup', PropertyInfoLookup::class, true ],
 			[ 'getEntitySource', EntitySource::class, true ],
-			[ 'getTermInLangIdsResolver', TermInLangIdsResolver::class, false ],
 		];
 	}
 

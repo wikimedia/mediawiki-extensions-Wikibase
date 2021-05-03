@@ -25,8 +25,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
@@ -169,34 +167,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	 */
 	public function getEntitySource(): EntitySource {
 		return $this->entitySource;
-	}
-
-	/**
-	 * It would be nice to only return hint against the TermInLangIdsResolver interface here,
-	 * but current users need a method only provided by DatabaseTermInLangIdsResolver
-	 * @return DatabaseTermInLangIdsResolver
-	 */
-	public function getTermInLangIdsResolver(): DatabaseTermInLangIdsResolver {
-		$mediaWikiServices = MediaWikiServices::getInstance();
-		$logger = LoggerFactory::getInstance( 'Wikibase' );
-
-		$databaseName = $this->entitySource->getDatabaseName();
-		$loadBalancer = $mediaWikiServices->getDBLoadBalancerFactory()
-			->getMainLB( $databaseName );
-
-		$databaseTypeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
-			$mediaWikiServices->getMainWANObjectCache(),
-			$databaseName,
-			$logger
-		);
-		return new DatabaseTermInLangIdsResolver(
-			$databaseTypeIdsStore,
-			$databaseTypeIdsStore,
-			$loadBalancer,
-			$databaseName,
-			$logger
-		);
 	}
 
 	public function getEntityRevisionLookup() {
