@@ -298,8 +298,15 @@ class DataBridgePage extends Page {
 			return; // don't change size if window has right dimensions already
 		}
 
-		browser.setWindowSize( targetWidth, targetHeight );
-		browser.pause( 1000 ); // wait for resize animations to complete
+		browser.emulateDevice( {
+			viewport: {
+				width: targetWidth, // <number> page width in pixels.
+				height: targetHeight, // <number> page height in pixels.
+			},
+			userAgent: `acting like a ${mobile ? 'narrow' : 'wide'} viewport`,
+		} );
+		// FIXME: reenable if tests become flaky and we still need that pause:
+		// browser.pause( 1000 ); // wait for resize animations to complete
 	}
 }
 
