@@ -50,6 +50,7 @@ use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\SettingsArray;
@@ -153,11 +154,16 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @deprecated use {@link LanguageNameUtils} instead
+	 * @deprecated use @{link LanguageNameLookupFactory} or {@link LanguageNameUtils} instead
 	 */
 	public static function getLanguageNameLookup( ContainerInterface $services = null ): LanguageNameLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.LanguageNameLookup' );
+	}
+
+	public static function getLanguageNameLookupFactory( ContainerInterface $services = null ): LanguageNameLookupFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.LanguageNameLookupFactory' );
 	}
 
 	/**

@@ -83,6 +83,7 @@ use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
@@ -1203,7 +1204,12 @@ return [
 
 	'WikibaseRepo.LanguageNameLookup' => function ( MediaWikiServices $services ): LanguageNameLookup {
 		$userLanguage = WikibaseRepo::getUserLanguage( $services );
-		return new LanguageNameLookup( $userLanguage->getCode() );
+		return WikibaseRepo::getLanguageNameLookupFactory( $services )
+			->getForLanguage( $userLanguage );
+	},
+
+	'WikibaseRepo.LanguageNameLookupFactory' => function ( MediaWikiServices $services ): LanguageNameLookupFactory {
+		return new LanguageNameLookupFactory();
 	},
 
 	'WikibaseRepo.LegacyFormatDetectorCallback' => function ( MediaWikiServices $services ): ?callable {
