@@ -92,6 +92,8 @@ use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
+use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
@@ -511,6 +513,10 @@ return [
 		return LoggerFactory::getInstance( 'Wikibase' );
 	},
 
+	'WikibaseClient.MessageInLanguageProvider' => function ( MediaWikiServices $services ): MessageInLanguageProvider {
+		return new MediaWikiMessageInLanguageProvider();
+	},
+
 	'WikibaseClient.NamespaceChecker' => function ( MediaWikiServices $services ): NamespaceChecker {
 		$settings = WikibaseClient::getSettings( $services );
 		return new NamespaceChecker(
@@ -837,7 +843,8 @@ return [
 				->getSnakFormatterFactoryCallbacks(),
 			WikibaseClient::getValueFormatterFactory( $services ),
 			WikibaseClient::getPropertyDataTypeLookup( $services ),
-			WikibaseClient::getDataTypeFactory( $services )
+			WikibaseClient::getDataTypeFactory( $services ),
+			WikibaseClient::getMessageInLanguageProvider( $services )
 		);
 	},
 

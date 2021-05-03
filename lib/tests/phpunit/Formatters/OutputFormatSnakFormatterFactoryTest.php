@@ -5,12 +5,16 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use Language;
+use LanguageQqx;
+use Message;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\DataTypeFactory;
@@ -20,6 +24,7 @@ use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\MessageInLanguageProvider;
 
 /**
  * @covers \Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory
@@ -55,11 +60,19 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		$dataTypeLookup->method( 'getDataTypeIdForProperty' )
 			->willReturn( $dataType );
 
+		$messageInLanguageProvider = $this->createMock( MessageInLanguageProvider::class );
+		$messageInLanguageProvider->method( 'msgInLang' )
+			->willReturnCallback( function ( $key, $lang, ...$params ) {
+				// ignore $lang, always use qqx
+				return new Message( $key, $params, new LanguageQqx() );
+			} );
+
 		return new OutputFormatSnakFormatterFactory(
 			$snakFormatterCallbacks,
 			$valueFormatterFactory,
 			$dataTypeLookup,
-			new DataTypeFactory( [ 'string' => 'string', 'commonsMedia' => 'string' ] )
+			new DataTypeFactory( [ 'string' => 'string', 'commonsMedia' => 'string' ] ),
+			$messageInLanguageProvider
 		);
 	}
 
@@ -151,6 +164,27 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $formatter->formatSnak( $snak ) );
 	}
 
+	public function getSnakFormatterProvider_notValueSnak(): iterable {
+		yield 'unknown value' => [
+			PropertySomeValueSnak::class,
+			'wikibase-snakview-snaktypeselector-somevalue',
+		];
+
+		yield 'no value' => [
+			PropertyNoValueSnak::class,
+			'wikibase-snakview-snaktypeselector-novalue',
+		];
+	}
+
+	/** @dataProvider getSnakFormatterProvider_notValueSnak */
+	public function testGetSnakFormatter_notValueSnak( string $snakClass, string $expected ) {
+		$factory = $this->newOutputFormatSnakFormatterFactory( 'string' );
+		$formatter = $factory->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, new FormatterOptions() );
+
+		$snak = new $snakClass( new PropertyId( 'P5' ) );
+		$this->assertStringContainsString( $expected, $formatter->formatSnak( $snak ) );
+	}
+
 	public function getSnakFormatterProvider_options() {
 		return [
 			'default' => [
@@ -198,7 +232,8 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 			[],
 			$valueFormatterFactory,
 			new InMemoryDataTypeLookup(),
-			new DataTypeFactory( [] )
+			new DataTypeFactory( [] ),
+			$this->createMock( MessageInLanguageProvider::class )
 		);
 		$factory->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, new FormatterOptions() );
 	}

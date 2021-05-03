@@ -50,6 +50,7 @@ use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
@@ -947,6 +948,11 @@ class WikibaseRepo {
 	public static function getLinkTargetEntityIdLookup( ContainerInterface $services = null ): LinkTargetEntityIdLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.LinkTargetEntityIdLookup' );
+	}
+
+	public static function getMessageInLanguageProvider( ContainerInterface $services = null ): MessageInLanguageProvider {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.MessageInLanguageProvider' );
 	}
 
 }

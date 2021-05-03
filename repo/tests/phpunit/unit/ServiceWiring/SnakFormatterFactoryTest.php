@@ -9,6 +9,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -39,6 +40,8 @@ class SnakFormatterFactoryTest extends ServiceWiringTestCase {
 			'WikibaseRepo.DataTypeFactory',
 			$this->createMock( DataTypeFactory::class )
 		);
+		$this->mockService( 'WikibaseRepo.MessageInLanguageProvider',
+			$this->createMock( MessageInLanguageProvider::class ) );
 
 		$this->assertInstanceOf(
 			OutputFormatSnakFormatterFactory::class,
