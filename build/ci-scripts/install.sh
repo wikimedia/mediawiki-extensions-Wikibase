@@ -2,8 +2,6 @@
 
 set -x
 
-PHPVERSION=`phpenv version-name`
-
 originalDirectory=$(pwd)
 
 cd ..
