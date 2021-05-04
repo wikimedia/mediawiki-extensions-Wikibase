@@ -32,9 +32,8 @@ use Wikibase\Lib\WikibaseContentLanguages;
 return [
 	'item' => [
 		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( EntitySource $entitySource ) {
-			$termIdsResolver = WikibaseClient::getSingleEntitySourceServicesFactory()
-				->getServicesForSource( $entitySource )
-				->getTermInLangIdsResolver();
+			$termIdsResolver = WikibaseClient::getTermInLangIdsResolverFactory()
+				->getResolverForDatabase( $entitySource->getDatabaseName() );
 
 			return new PrefetchingItemTermLookup( $termIdsResolver );
 		},
@@ -47,10 +46,10 @@ return [
 
 			$cacheSecret = hash( 'sha256', $mwServices->getMainConfig()->get( 'SecretKey' ) );
 			$bagOStuff = $mwServices->getLocalServerObjectCache();
+			$termIdsResolver = WikibaseClient::getTermInLangIdsResolverFactory()
+				->getResolverForDatabase( $entitySource->getDatabaseName() );
 
-			$prefetchingPropertyTermLookup = new PrefetchingPropertyTermLookup(
-				$entitySourceServices->getTermInLangIdsResolver()
-			);
+			$prefetchingPropertyTermLookup = new PrefetchingPropertyTermLookup( $termIdsResolver );
 
 			// If MediaWiki has no local server cache available, return the raw lookup.
 			if ( $bagOStuff instanceof EmptyBagOStuff ) {

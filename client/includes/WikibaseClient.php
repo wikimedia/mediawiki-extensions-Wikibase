@@ -60,6 +60,7 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
+use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolverFactory;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCacheFactory;
@@ -484,6 +485,13 @@ final class WikibaseClient {
 	public static function getPropertySource( ContainerInterface $services = null ): EntitySource {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.PropertySource' );
+	}
+
+	public static function getTermInLangIdsResolverFactory(
+		ContainerInterface $services = null
+	): TermInLangIdsResolverFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.TermInLangIdsResolverFactory' );
 	}
 
 	public static function getMessageInLanguageProvider( ContainerInterface $services = null ): MessageInLanguageProvider {
