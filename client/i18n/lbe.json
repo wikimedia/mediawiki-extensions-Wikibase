@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Soul Train"
+		]
+	},
+	"tooltip-t-wikibase": "Баран репозиторданавусса дахӀанасса затрайн",
+	"wikibase-dataitem": "Зат {{WBREPONAME}}",
+	"wikibase-editlinks": "Баранду дакьин дан",
+	"wikibase-editlinkstitle": "Дакьин дан чил мазурдил баранду",
+	"wikibase-linkitem-addlinks": "Баранду ялун дулун"
+}

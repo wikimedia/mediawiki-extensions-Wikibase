@@ -349,6 +349,7 @@
 	"wikibase-entitydata-storage-error": "$1 varlığı yüklenemedi.",
 	"wikibase-entitydata-title": "Varlık Verisi",
 	"wikibase-entitydata-text": "Bu sayfa varlık değerlerine bağlı bir arayüz sağlar. Lütfen alt sayfa söz dizimini kullanrak bir varlık kimlik numarası belirtin.\n* İçerik istemcinizin Kabul başlığına dayalı olarak uygulanır. Bu varlık verisinin, istemciniz tarafından tercih edilen biçimde sağlanacağı anlamına gelir. Bu durumda bir web tarayıcısında HTML olacağından dolayı, tarayıcınızın bu bağlantıyı normal varlık sayfasına yönlendirmesi şeklinde olacaktır.\n* Varlık ID numarasına uygun dosya uzantısı ekleyerek veri biçimini belirli bir türde talep edebilirsiniz: Q23.json veriyi JSON biçimine döndürürken, Q23.ttl RDF/Turtle biçimine ve bunun gibi biçimlere döndürür. Desteklenen biçimler şunlardır: $1.",
+	"wikibase-entitydata-unresolvable-sub-entity-redirect": "\"$1\" için yönlendirme çözülemiyor. Ana birim, \"$2\" birimine yönlendiriyor.",
 	"special-entitypage": "Varlık sayfası",
 	"wikibase-entitypage-title": "Varlık Sayfası",
 	"wikibase-entitypage-text": "Bu sayfa ait olduğu depodaki varlık sayfasına yönlendirilecektir. Lütfen alt sayfa söz dizimini kullanarak URL için kimlik numarasını sağlayın.",

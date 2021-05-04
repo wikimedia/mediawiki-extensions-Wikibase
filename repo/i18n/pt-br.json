@@ -347,6 +347,7 @@
 	"wikibase-entitydata-storage-error": "Falha ao carregar a entidade $1.",
 	"wikibase-entitydata-title": "Dados da Entidade",
 	"wikibase-entitydata-text": "Esta página fornece uma interface de dados vinculados aos valores da entidade. Insira o ID da entidade na URL, utilizando sintaxe de sub página.\n* A aplicação de negociação de conteúdo é baseada no cabeçalho de aceite do seu cliente. Isto significa que o dado da entidade será fornecido no formato preferido pelo seu cliente. Para um navegador web, isto será HTML, fazendo seu navegador ser redirecionado a uma página de entidade regular.\n* Você pode solicitar explicitamente um formato de dado específico acrescentando a extensão de arquivo apropriada ao identificador de entidade: Q23.json retornará os dados no formato JSON, Q23.ttl retornará dados em formato RDF/Turtle, e assim por diante. Formatos suportados são: $1.",
+	"wikibase-entitydata-unresolvable-sub-entity-redirect": "Incapaz de resolver o redirecionamento para \"$1\". A entidade pai foi redirecionada para \"$2\".",
 	"special-entitypage": "Página da entidade",
 	"wikibase-entitypage-title": "Página da Entidade",
 	"wikibase-entitypage-text": "Esta página redireciona para a página de entidade no repositório ao qual pertence. Forneça o ID da entidade no URL, usando a sintaxe da subpágina.",
