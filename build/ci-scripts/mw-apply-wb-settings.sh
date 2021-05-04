@@ -2,7 +2,7 @@
 
 set -x
 
-cd ../phase3
+cd ../mediawiki
 
 function apply_client_settings {
   echo '$wgEnableWikibaseClient = true;' >> LocalSettings.php
