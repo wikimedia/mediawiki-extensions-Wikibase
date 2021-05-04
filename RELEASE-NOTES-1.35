@@ -1,11 +1,12 @@
 = Wikibase 1.35 =
 
-== Wikibase 1.35.1-wmde.1 ==
+== Wikibase 1.35.2-wmde.1 ==
 
-THIS IS NOT A RELEASE YET
+This is a security and maintenance release of the Wikibase 1.35 branch.
 
 === Changes since Wikibase 1.35.0-wmde.0 ===
 
+* (T280124) FedProps: ensure FedProps EntityTypeDefinitions are loaded last
 * (T97146) Permit restoring redirects to discard entity data
 * (T271618) Catch wider exception type for unresolved redirects
 * (T153570) SubmitEntityAction: Pass 'undoafter' and 'restore' to doEditContent
