@@ -71,6 +71,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolverFactory;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
@@ -959,6 +960,13 @@ class WikibaseRepo {
 	public static function getMessageInLanguageProvider( ContainerInterface $services = null ): MessageInLanguageProvider {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.MessageInLanguageProvider' );
+	}
+
+	public static function getTermInLangIdsResolverFactory(
+		ContainerInterface $services = null
+	): TermInLangIdsResolverFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.TermInLangIdsResolverFactory' );
 	}
 
 }
