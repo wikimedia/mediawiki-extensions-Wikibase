@@ -2,6 +2,6 @@
 
 set -ex
 
-cd ../phase3/tests/phpunit
+cd ../mediawiki/tests/phpunit
 
 php phpunit.php --group Wikibase

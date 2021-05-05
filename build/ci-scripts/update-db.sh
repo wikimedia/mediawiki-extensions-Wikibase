@@ -2,6 +2,6 @@
 
 set -x
 
-cd ../phase3
+cd ../mediawiki
 
 php maintenance/update.php --quick

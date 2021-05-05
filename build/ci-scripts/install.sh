@@ -6,10 +6,10 @@ originalDirectory=$(pwd)
 
 cd ..
 
-mkdir phase3
-wget -O- https://github.com/wikimedia/mediawiki/archive/$MW_BRANCH.tar.gz | tar -zxf - -C phase3 --strip-components 1
+mkdir mediawiki
+wget -O- https://github.com/wikimedia/mediawiki/archive/$MW_BRANCH.tar.gz | tar -zxf - -C mediawiki --strip-components 1
 
-cd phase3/extensions
+cd mediawiki/extensions
 
 if [ "$WB" != "repo" ]; then
 	git clone -b $MW_BRANCH https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Scribunto.git --depth 1
