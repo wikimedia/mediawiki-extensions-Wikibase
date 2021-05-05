@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Integration\Usage;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\Client\Usage\EntityUsage;
@@ -77,12 +76,7 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function runRefreshLinksJobs() {
-		MediaWikiServices::getInstance()->getJobRunner()->run( [
-			'type'     => 'refreshLinks',
-			'maxJobs'  => false,
-			'maxTime'  => false,
-			'throttle' => false,
-		] );
+		$this->runJobs( [ 'minJobs' => 0 ], [ 'type' => 'refreshLinks' ] );
 	}
 
 	private function deletePage( Title $title ) {
