@@ -6,7 +6,7 @@ use ChangesList;
 use DerivativeContext;
 use HamcrestPHPUnitIntegration;
 use Language;
-use Linker;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWikiLangTestCase;
 use RecentChange;
@@ -40,6 +40,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 	protected $userNameUtils;
 
+	protected $linkRenderer;
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -59,6 +61,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		);
 
 		$this->userNameUtils = $this->getServiceContainer()->getUserNameUtils();
+
+		$this->linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 	}
 
 	/**
@@ -78,15 +82,17 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			new BasicEntityIdParser()
 		);
 		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
+		$title = $recentChange->getTitle();
 
 		$formatter = new ChangeLineFormatter(
 			$this->repoLinker,
-			$this->userNameUtils
+			$this->userNameUtils,
+			$this->linkRenderer
 		);
 
 		$formattedLine = $formatter->format(
 			$externalChange,
-			$recentChange->getTitle(),
+			$title,
 			$recentChange->counter,
 			$changesList->recentChangesFlags( [ 'wikibase-edit' => true ], '' ),
 			Language::factory( 'en' ),
@@ -113,7 +119,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	public function testFormatDataForEnhancedLine( array $expectedTags, array $patterns, RecentChange $recentChange ) {
 		$formatter = new ChangeLineFormatter(
 			$this->repoLinker,
-			$this->userNameUtils
+			$this->userNameUtils,
+			$this->linkRenderer
 		);
 
 		// Use the actual setting, because out handler for the FormatAutocomment hook will check
@@ -194,7 +201,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	public function testFormatDataForEnhancedBlockLine( array $expectedTags, array $patterns, RecentChange $recentChange ) {
 		$formatter = new ChangeLineFormatter(
 			$this->repoLinker,
-			$this->userNameUtils
+			$this->userNameUtils,
+			$this->linkRenderer
 		);
 
 		// Use the actual setting, because out handler for the FormatAutocomment hook will check
@@ -207,10 +215,10 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			new BasicEntityIdParser()
 		);
 		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
-
+		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 		$data = [
 			'untouchedKey' => 'foo',
-			'articleLink' => Linker::link( $recentChange->getTitle() ),
+			'articleLink' => $linkRenderer->makeKnownLink( $recentChange->getTitle() ),
 			'characterDiff' => '(0)',
 			'separatorAftercharacterDiff' => '. .',
 		];

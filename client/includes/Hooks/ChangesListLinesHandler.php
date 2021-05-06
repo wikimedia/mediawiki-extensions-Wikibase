@@ -9,6 +9,7 @@ use Language;
 use MediaWiki\Hook\EnhancedChangesListModifyBlockLineDataHook;
 use MediaWiki\Hook\EnhancedChangesListModifyLineDataHook;
 use MediaWiki\Hook\OldChangesListRecentChangesLineHook;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\User\UserNameUtils;
 use OldChangesList;
 use RecentChange;
@@ -62,7 +63,8 @@ class ChangesListLinesHandler implements
 		);
 		$formatter = new ChangeLineFormatter(
 			$repoLinker,
-			$userNameUtils
+			$userNameUtils,
+			MediaWikiServices::getInstance()->getLinkRenderer()
 		);
 
 		return new self( $changeFactory, $formatter );
@@ -100,7 +102,8 @@ class ChangesListLinesHandler implements
 			);
 			$lang = $changesList->getLanguage();
 			$user = $changesList->getUser();
-			$line = $this->formatter->format( $externalChange, $rc->getTitle(), $rc->counter, $flag, $lang, $user );
+			$title = $rc->getTitle();
+			$line = $this->formatter->format( $externalChange, $title, $rc->counter, $flag, $lang, $user );
 
 			$s = $line;
 		}

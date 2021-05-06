@@ -6,6 +6,7 @@ namespace Wikibase\Client\RecentChanges;
 
 use Language;
 use Linker;
+use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\User\UserNameUtils;
 use Title;
@@ -33,9 +34,15 @@ class ChangeLineFormatter {
 	 */
 	private $userNameUtils;
 
-	public function __construct( RepoLinker $repoLinker, UserNameUtils $userNameUtils ) {
+	/**
+	 * @var LinkRenderer
+	 */
+	private $linkRenderer;
+
+	public function __construct( RepoLinker $repoLinker, UserNameUtils $userNameUtils, LinkRenderer $linkRenderer ) {
 		$this->repoLinker = $repoLinker;
 		$this->userNameUtils = $userNameUtils;
+		$this->linkRenderer = $linkRenderer;
 	}
 
 	public function format(
@@ -56,8 +63,8 @@ class ChangeLineFormatter {
 
 		$formattedHTMLLine .= $this->getChangeSeparatorHTML();
 		$formattedHTMLLine .= $flag . ' ';
-		// @fixme: deprecated method, use \LinkRenderer
-		$link = Linker::link( $title );
+		$link = $this->linkRenderer->makeKnownLink( $title );
+
 		$formattedHTMLLine .= "<span class=\"mw-title\">$link</span>";
 
 		if ( $changeType !== 'remove' ) {
