@@ -7,7 +7,6 @@ use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
-use SiteLookup;
 use Title;
 use TitleFactory;
 use Wikibase\Client\Changes\AffectedPagesFinder;
@@ -80,7 +79,6 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			$titleFactory,
 			$updater ?: new MockPageUpdater(),
 			$this->getChangeRunCoalescer(),
-			$this->createMock( SiteLookup::class ),
 			new NullLogger(),
 			true
 		);
@@ -607,7 +605,6 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			$titleFactory,
 			$updater,
 			$this->getChangeRunCoalescer(),
-			$this->createMock( SiteLookup::class ),
 			new NullLogger()
 		);
 
