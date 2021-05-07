@@ -88,7 +88,7 @@
 	"wikibase-entity-summary-wbcreateclaim-create": "Кхоьллина дехар",
 	"wikibase-entity-summary-wbsetclaim-update": "{{PLURAL:$3|Хийцина тӀедожор}}",
 	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|1=Кхоьллина дехар|Кхоьллина дехарш}}",
-	"wikibase-entity-summary-clientsitelink-update": "АгӀо кхечухьа яьккхина (цӀе хийцина) [$3] → [$4]",
+	"wikibase-entity-summary-clientsitelink-update": "АгӀо кхечухьа йаьккхина (цӀе хийцина) [$3] → [$4]",
 	"wikibase-entity-summary-clientsitelink-remove": "[$3] чуьра агӀо дӀаяьккхина",
 	"wikibase-entity-summary-wbsetqualifier-add": "{{PLURAL:$1|ТӀетоьхна квалификатор}}",
 	"wikibase-entity-summary-wbsetqualifier-update": "{{PLURAL:$1|Хийцина квалификатор}}",

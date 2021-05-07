@@ -29,5 +29,6 @@
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} тоадар",
 	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} чу даь хувцамаш.",
 	"wikibase-watchlist-show-changes-pref": "Хьахьокха хувцамаш {{grammar:genitive|{{WBREPONAME}}}} чура керда хувцамаш гойтача",
+	"wikibase-pageinfo-entity-usage": "Укх оагӀона чура {{WBREPONAME}}",
 	"wikibase-otherprojects": "Кхыйола проекташ чу"
 }
