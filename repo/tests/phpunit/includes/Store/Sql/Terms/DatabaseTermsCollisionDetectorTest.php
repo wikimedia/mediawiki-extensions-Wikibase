@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\Sql\Terms\StaticTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Repo\Store\Sql\Terms\DatabaseTermsCollisionDetector;
+use Wikibase\Repo\Tests\WikibaseTablesUsed;
 use Wikimedia\Rdbms\LoadBalancerSingle;
 
 /**
@@ -19,6 +20,8 @@ use Wikimedia\Rdbms\LoadBalancerSingle;
  * @license GPL-2.0-or-later
  */
 class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
+
+	use WikibaseTablesUsed;
 
 	private const TYPE_LABEL = 1;
 	private const TYPE_DESCRIPTION = 2;
@@ -53,12 +56,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->tablesUsed[] = 'wbt_type';
-		$this->tablesUsed[] = 'wbt_text';
-		$this->tablesUsed[] = 'wbt_text_in_lang';
-		$this->tablesUsed[] = 'wbt_term_in_lang';
-		$this->tablesUsed[] = 'wbt_property_terms';
-		$this->tablesUsed[] = 'wbt_item_terms';
+		$this->markAnyTermsStorageUsed();
 
 		$this->typeIdsLookup = new StaticTypeIdsStore( [
 			'label' => self::TYPE_LABEL,
