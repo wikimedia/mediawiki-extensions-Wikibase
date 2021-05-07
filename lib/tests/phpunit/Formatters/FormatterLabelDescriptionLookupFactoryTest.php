@@ -14,7 +14,10 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageWithConversion;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Lib\Tests\FakeCache;
 
 /**
  * @covers \Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory
@@ -32,12 +35,24 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 	 * @dataProvider provideGetLabelDescriptionLookup
 	 */
 	public function testGetLabelDescriptionLookup( TermLookup $termLookup, FormatterOptions $options, $expectedLabel ) {
-		$factory = new FormatterLabelDescriptionLookupFactory( $termLookup );
+		$itemId = new ItemId( 'Q1' );
+		$redirectResolvingLatestRevisionLookup = $this->createStub( RedirectResolvingLatestRevisionLookup::class );
+		$redirectResolvingLatestRevisionLookup->method( 'lookupLatestRevisionResolvingRedirect' )
+			->willReturn( [
+				123, // some non-null revision id
+				$itemId
+			] );
+
+		$factory = new FormatterLabelDescriptionLookupFactory(
+			$termLookup,
+			new TermFallbackCacheFacade( new FakeCache(), 9999 ),
+			$redirectResolvingLatestRevisionLookup
+		);
 		$labelDescriptionLookup = $factory->getLabelDescriptionLookup( $options );
 
 		$this->assertInstanceOf( LabelDescriptionLookup::class, $labelDescriptionLookup );
 
-		$term = $labelDescriptionLookup->getLabel( new ItemId( 'Q1' ) );
+		$term = $labelDescriptionLookup->getLabel( $itemId );
 		$this->assertEquals( $expectedLabel, $term->getText() );
 	}
 
@@ -94,7 +109,11 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 	 */
 	public function testGetLabelDescriptionLookup_failure( FormatterOptions $options ) {
 		$termLookup = $this->createMock( TermLookup::class );
-		$factory = new FormatterLabelDescriptionLookupFactory( $termLookup );
+		$factory = new FormatterLabelDescriptionLookupFactory(
+			$termLookup,
+			$this->createStub( TermFallbackCacheFacade::class ),
+			$this->createStub( RedirectResolvingLatestRevisionLookup::class )
+		);
 
 		$this->expectException( InvalidArgumentException::class );
 		$factory->getLabelDescriptionLookup( $options );

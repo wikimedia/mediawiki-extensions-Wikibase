@@ -38,7 +38,9 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
+use Wikibase\Lib\Tests\FakeCache;
 
 /**
  * @covers \Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders
@@ -101,8 +103,21 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 				return '/wiki/' . $id->getSerialization();
 			} );
 
+		$redirectResolvingLatestRevisionLookup = $this->createStub( RedirectResolvingLatestRevisionLookup::class );
+		$redirectResolvingLatestRevisionLookup->method( 'lookupLatestRevisionResolvingRedirect' )
+			->willReturnCallback( function ( EntityId $id ) {
+				return [
+					123, // some non-null revision id
+					$id
+				];
+			} );
+
 		return new WikibaseValueFormatterBuilders(
-			new FormatterLabelDescriptionLookupFactory( $termLookup ),
+			new FormatterLabelDescriptionLookupFactory(
+				$termLookup,
+				new TermFallbackCacheFacade( new FakeCache(), 999 ),
+				$redirectResolvingLatestRevisionLookup
+			),
 			$languageNameLookup,
 			new ItemIdParser(),
 			self::GEO_SHAPE_STORAGE_FRONTEND_URL,

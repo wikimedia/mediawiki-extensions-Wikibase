@@ -8,7 +8,10 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
@@ -34,8 +37,24 @@ class FormatterLabelDescriptionLookupFactory {
 	 */
 	private $termLookup;
 
-	public function __construct( TermLookup $termLookup ) {
+	/**
+	 * @var TermFallbackCacheFacade
+	 */
+	private $termFallbackCache;
+
+	/**
+	 * @var RedirectResolvingLatestRevisionLookup
+	 */
+	private $redirectResolvingLatestRevisionLookup;
+
+	public function __construct(
+		TermLookup $termLookup,
+		TermFallbackCacheFacade $cache,
+		RedirectResolvingLatestRevisionLookup $redirectResolvingLatestRevisionLookup
+	) {
 		$this->termLookup = $termLookup;
+		$this->termFallbackCache = $cache;
+		$this->redirectResolvingLatestRevisionLookup = $redirectResolvingLatestRevisionLookup;
 	}
 
 	/**
@@ -63,7 +82,12 @@ class FormatterLabelDescriptionLookupFactory {
 				'with an instance of TermLanguageFallbackChain.' );
 		}
 
-		return new LanguageFallbackLabelDescriptionLookup( $this->termLookup, $fallbackChain );
+		return new CachingFallbackLabelDescriptionLookup(
+			$this->termFallbackCache,
+			$this->redirectResolvingLatestRevisionLookup,
+			new LanguageFallbackLabelDescriptionLookup( $this->termLookup, $fallbackChain ),
+			$fallbackChain
+		);
 	}
 
 	private function newLanguageLabelDescriptionLookup( FormatterOptions $options ) {
