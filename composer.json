@@ -66,7 +66,7 @@
 		],
 		"fix-modified": "bash build/phpcbfGitModified.sh",
 		"fix-committed": "bash build/phpcbfGitCommitted.sh",
-		"phan": "phan -d . --long-progress-bar",
+		"phan": "phan -d . --long-progress-bar --allow-polyfill-parser",
 		"test": [
 			"composer validate --no-interaction",
 			"composer lint",
