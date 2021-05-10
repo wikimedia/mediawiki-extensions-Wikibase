@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\StringValue;
+use File;
 use ParserOutput;
 use RepoGroup;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -33,6 +34,20 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 				return $id->getSerialization() === 'P1';
 			} );
 		$repoGroup = $this->createMock( RepoGroup::class );
+		$repoGroup->method( 'findFile' )
+			->willReturnCallback( function( string $fileName ) {
+				if ( $fileName === 'Exists.png' ) {
+					$file = $this->createMock( File::class );
+					$file->expects( $this->once() )
+						->method( 'getSha1' )
+						->willReturn( 'ccde261bb2a1d49e1c9bfd06847f9a8c2b640fe9' );
+					$file->expects( $this->once() )
+						->method( 'getTimestamp' )
+						->willReturn( '20121026200049' );
+					return $file;
+				}
+				return false;
+			} );
 
 		return new ImageLinksDataUpdater( $matcher, $repoGroup );
 	}
@@ -51,18 +66,12 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider imageLinksProvider
 	 */
-	public function testUpdateParserOutput( StatementList $statements, array $expected ) {
-		$actual = [];
-
-		$parserOutput = $this->getMockBuilder( ParserOutput::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$parserOutput->expects( $this->exactly( count( $expected ) ) )
-			->method( 'addImage' )
-			->willReturnCallback( function( $name ) use ( &$actual ) {
-				$actual[] = $name;
-			} );
-
+	public function testUpdateParserOutput(
+		StatementList $statements,
+		array $expectedFiles,
+		array $expectedFileSearchOptions
+	) {
+		$parserOutput = new ParserOutput();
 		$instance = $this->newInstance();
 
 		foreach ( $statements as $statement ) {
@@ -70,7 +79,8 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		}
 
 		$instance->updateParserOutput( $parserOutput );
-		$this->assertSame( $expected, $actual );
+		$this->assertSame( $expectedFiles, array_keys( $parserOutput->getImages() ) );
+		$this->assertSame( $expectedFileSearchOptions, $parserOutput->getFileSearchOptions() );
 	}
 
 	public function imageLinksProvider() {
@@ -83,10 +93,36 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$this->addStatement( $set2, '2a.jpg' );
 		$this->addStatement( $set2, '2b.jpg' );
 
+		$set3 = new StatementList();
+		$this->addStatement( $set3, '2a.jpg' );
+		$this->addStatement( $set3, 'Exists.png' );
+
 		return [
-			[ new StatementList(), [] ],
-			[ $set1, [ '1.jpg' ] ],
-			[ $set2, [ '2a.jpg', '2b.jpg' ] ],
+			[ new StatementList(), [], [] ],
+			[
+				$set1,
+				[ '1.jpg' ],
+				[ '1.jpg' => [ 'time' => false, 'sha1' => false ] ]
+			],
+			[
+				$set2,
+				[ '2a.jpg', '2b.jpg' ],
+				[
+					'2a.jpg' => [ 'time' => false, 'sha1' => false ],
+					'2b.jpg' => [ 'time' => false, 'sha1' => false ],
+				],
+			],
+			[
+				$set3,
+				[ '2a.jpg', 'Exists.png' ],
+				[
+					'2a.jpg' => [ 'time' => false, 'sha1' => false ],
+					'Exists.png' => [
+						'time' => '20121026200049',
+						'sha1' => 'ccde261bb2a1d49e1c9bfd06847f9a8c2b640fe9',
+					]
+				]
+			],
 		];
 	}
 

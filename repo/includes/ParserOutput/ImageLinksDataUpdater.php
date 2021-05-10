@@ -83,8 +83,8 @@ class ImageLinksDataUpdater implements StatementDataUpdater {
 
 			$parserOutput->addImage(
 				$fileName,
-				$file ? $file->getSha1() : false,
-				$file ? $file->getTimestamp() : false
+				$file ? $file->getTimestamp() : false,
+				$file ? $file->getSha1() : false
 			);
 		}
 	}
