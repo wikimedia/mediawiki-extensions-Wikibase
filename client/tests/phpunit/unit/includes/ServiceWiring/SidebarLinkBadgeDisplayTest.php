@@ -6,7 +6,7 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Language;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
-use Wikibase\Client\Tests\Unit\ServiceWiringTest;
+use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -21,7 +21,7 @@ use Wikibase\Lib\TermLanguageFallbackChain;
  *
  * @license GPL-2.0-or-later
  */
-class SidebarLinkBadgeDisplayTest extends ServiceWiringTest {
+class SidebarLinkBadgeDisplayTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
 		$fallbackChain = $this->createMock( TermLanguageFallbackChain::class );

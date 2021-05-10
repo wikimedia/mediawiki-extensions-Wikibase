@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
 use Wikibase\Repo\SnakFactory;
-use Wikibase\Repo\Tests\Unit\ServiceWiringTest;
+use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
  * @coversNothing
@@ -17,7 +17,7 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTest;
  *
  * @license GPL-2.0-or-later
  */
-class SnakFactoryTest extends ServiceWiringTest {
+class SnakFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
 		$this->mockService(
