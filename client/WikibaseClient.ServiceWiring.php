@@ -169,7 +169,6 @@ return [
 			$services->getTitleFactory(),
 			$pageUpdater,
 			$changeListTransformer,
-			$services->getSiteLookup(),
 			$logger,
 			$settings->getSetting( 'injectRecentChanges' )
 		);

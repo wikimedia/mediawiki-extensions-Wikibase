@@ -5,7 +5,6 @@ namespace Wikibase\Client\Changes;
 use Hooks;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
-use SiteLookup;
 use Title;
 use TitleFactory;
 use Wikibase\Client\Usage\PageEntityUsages;
@@ -44,11 +43,6 @@ class ChangeHandler {
 	private $changeRunCoalescer;
 
 	/**
-	 * @var SiteLookup
-	 */
-	private $siteLookup;
-
-	/**
 	 * @var LoggerInterface
 	 */
 	private $logger;
@@ -63,7 +57,6 @@ class ChangeHandler {
 	 * @param TitleFactory $titleFactory
 	 * @param PageUpdater $updater
 	 * @param ChangeRunCoalescer $changeRunCoalescer
-	 * @param SiteLookup $siteLookup
 	 * @param LoggerInterface $logger
 	 * @param bool $injectRecentChanges
 	 *
@@ -74,7 +67,6 @@ class ChangeHandler {
 		TitleFactory $titleFactory,
 		PageUpdater $updater,
 		ChangeRunCoalescer $changeRunCoalescer,
-		SiteLookup $siteLookup,
 		LoggerInterface $logger,
 		$injectRecentChanges = true
 	) {
@@ -86,7 +78,6 @@ class ChangeHandler {
 		$this->titleFactory = $titleFactory;
 		$this->updater = $updater;
 		$this->changeRunCoalescer = $changeRunCoalescer;
-		$this->siteLookup = $siteLookup;
 		$this->logger = $logger;
 		$this->injectRecentChanges = $injectRecentChanges;
 	}
