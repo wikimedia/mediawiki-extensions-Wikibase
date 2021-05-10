@@ -2,11 +2,11 @@
 
 namespace Wikibase\Client\Store\Sql;
 
+use PageProps;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * Lookup of EntityIds based on wikibase_item entries in the page_props table.
@@ -17,9 +17,9 @@ use Wikimedia\Rdbms\ILoadBalancer;
 class PagePropsEntityIdLookup implements EntityIdLookup {
 
 	/**
-	 * @var ILoadBalancer
+	 * @var PageProps
 	 */
-	private $loadBalancer;
+	private $pageProps;
 
 	/**
 	 * @var EntityIdParser
@@ -27,10 +27,10 @@ class PagePropsEntityIdLookup implements EntityIdLookup {
 	private $idParser;
 
 	public function __construct(
-		ILoadBalancer $loadBalancer,
+		PageProps $pageProps,
 		EntityIdParser $idParser
 	) {
-		$this->loadBalancer = $loadBalancer;
+		$this->pageProps = $pageProps;
 		$this->idParser = $idParser;
 	}
 
@@ -42,33 +42,8 @@ class PagePropsEntityIdLookup implements EntityIdLookup {
 	 * @return EntityId[]
 	 */
 	public function getEntityIds( array $titles ) {
-		$db = $this->loadBalancer->getConnection( DB_REPLICA );
-
-		$pageIds = array_map(
-			function ( Title $title ) {
-				return $title->getArticleID();
-			},
-			$titles
-		);
-
-		$res = $db->select(
-			'page_props',
-			[ 'pp_page', 'pp_value' ],
-			[
-				'pp_page' => $pageIds,
-				'pp_propname' => 'wikibase_item',
-			],
-			__METHOD__
-		);
-
-		$entityIds = [];
-
-		foreach ( $res as $row ) {
-			$entityIds[$row->pp_page] = $this->idParser->parse( $row->pp_value );
-		}
-
-		$this->loadBalancer->reuseConnection( $db );
-		return $entityIds;
+		return array_map( [ $this->idParser, 'parse' ],
+			$this->pageProps->getProperties( $titles, 'wikibase_item' ) );
 	}
 
 	/**

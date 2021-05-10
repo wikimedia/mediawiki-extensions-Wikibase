@@ -351,7 +351,7 @@ return [
 			$entityTypeDefinitions->get( EntityTypeDefinitions::CONTENT_MODEL_ID ),
 			$entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_ID_LOOKUP_CALLBACK ),
 			new PagePropsEntityIdLookup(
-				$services->getDBLoadBalancer(),
+				$services->getPageProps(),
 				WikibaseClient::getEntityIdParser( $services )
 			)
 		);
