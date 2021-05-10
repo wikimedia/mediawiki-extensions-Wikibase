@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Klenje",
 			"Tocaibon"
 		]
 	},
@@ -9,10 +10,11 @@
 	"wikibase-dataitem": "Element {{WBREPONAME}}",
 	"wikibase-editlinks": "Modifiche i leams",
 	"wikibase-editlinkstitle": "Modifiche i leams cun altris lenghis",
+	"wikibase-linkitem-addlinks": "Zonte teams",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Plate",
 	"wikibase-rc-hide-wikidata-show": "Mostre",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Modifiche fate su {{WBREPONAME}}",
-	"wikibase-otherprojects": "Altris progjets"
+	"wikibase-otherprojects": "In altris progjets"
 }

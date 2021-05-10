@@ -3,6 +3,7 @@
 		"authors": [
 			"Arystanbek",
 			"BaRaN6161 TURK",
+			"Cobija",
 			"Fitoschido",
 			"Incelemeelemani",
 			"Joseph",
@@ -50,7 +51,7 @@
 	"datatypes-type-string": "Dize",
 	"datatypes-type-quantity": "Miktar",
 	"datatypes-type-monolingualtext": "Tek dilli metin",
-	"datatypes-type-multilingualtext": "Çok dilli metin",
+	"datatypes-type-multilingualtext": "Çokdilli metin",
 	"datatypes-type-number": "Sayı",
 	"datatypes-type-mediawiki-title": "MediaWiki başlığı",
 	"datatypes-type-unknown": "Belirtilmemiş",
