@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
+use MediaWiki\Page\PageIdentity;
 use MediaWiki\Rest\Entity\SearchResultPageIdentityValue;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\DescriptionProviderHookHandler;
@@ -49,8 +50,8 @@ class DescriptionProviderHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function provideDescriptionProviderTestData() {
 		$pageIdentities = [
-			1 => new SearchResultPageIdentityValue( 1, NS_MAIN, '' ),
-			2 => new SearchResultPageIdentityValue( 2, NS_MAIN, '' )
+			1 => new SearchResultPageIdentityValue( 1, NS_MAIN, 'One', PageIdentity::LOCAL ),
+			2 => new SearchResultPageIdentityValue( 2, NS_MAIN, 'Two', PageIdentity::LOCAL )
 		];
 		yield [
 			$pageIdentities,
