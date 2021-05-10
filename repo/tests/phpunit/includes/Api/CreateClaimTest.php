@@ -32,7 +32,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		$item = new Item();
 		$store->saveEntity( $item, 'test', $this->user, EDIT_NEW );
 
-		$property = Property::newFromType( 'commonsMedia' );
+		$property = Property::newFromType( 'string' );
 		$store->saveEntity( $property, 'test', $this->user, EDIT_NEW );
 
 		return [ $item, $property ];
@@ -59,7 +59,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'entity' => $item->getId()->getSerialization(),
 			'snaktype' => 'value',
 			'property' => $property->getId()->getSerialization(),
-			'value' => '"Foo.png"',
+			'value' => '"Foo"',
 		];
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
@@ -93,7 +93,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'entity' => $item->getId()->getSerialization(),
 			'snaktype' => 'value',
 			'property' => $property->getId()->getSerialization(),
-			'value' => '"Foo.png"',
+			'value' => '"Foo"',
 		] );
 	}
 
@@ -106,7 +106,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'entity' => 'q123456789',
 			'snaktype' => 'value',
 			'property' => '-',
-			'value' => '"Foo.png"',
+			'value' => '"Foo"',
 		];
 		$argLists[] = [ 'no-such-entity', $params ];
 
@@ -116,7 +116,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'entity' => 'i123',
 			'snaktype' => 'value',
 			'property' => '-',
-			'value' => '"Foo.png"',
+			'value' => '"Foo"',
 		];
 		$argLists[] = [ 'invalid-entity-id', $params ];
 
@@ -126,7 +126,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'entity' => '-',
 			'snaktype' => 'value',
 			'property' => 'i123',
-			'value' => '"Foo.png"',
+			'value' => '"Foo"',
 		];
 		$argLists[] = [ 'invalid-entity-id', $params ];
 
@@ -136,7 +136,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'entity' => '-',
 			'snaktype' => 'value',
 			'property' => 'p1',
-			'value' => 'Foo.png',
+			'value' => 'Foo',
 		];
 		$argLists[] = [ 'invalid-snak', $params ];
 
@@ -146,7 +146,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'entity' => '-',
 			'snaktype' => 'hax',
 			'property' => '-',
-			'value' => '"Foo.png"',
+			'value' => '"Foo"',
 		];
 		$argLists[] = [
 			$this->logicalOr(
@@ -163,7 +163,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 				'entity' => '-',
 				'snaktype' => 'value',
 				'property' => '-',
-				'value' => '"Foo.png"',
+				'value' => '"Foo"',
 			];
 
 			unset( $params[$requiredParam] );
@@ -270,7 +270,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'entity' => $item->getId()->getSerialization(),
 			'snaktype' => 'value',
 			'property' => $property->getId()->getSerialization(),
-			'value' => '"Foo.png"',
+			'value' => '"Foo"',
 		];
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
@@ -286,7 +286,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'entity' => $item->getId()->getSerialization(),
 			'snaktype' => 'value',
 			'property' => $property->getId()->getSerialization(),
-			'value' => '"Bar.jpg"',
+			'value' => '"Bar"',
 			'baserevid' => $revId
 		];
 
