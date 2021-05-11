@@ -59,6 +59,7 @@ jobs:
             LANG: ru
             WB: both
           php-versions: '7.3.27'
+    continue-on-error: ${{ matrix.env.MW_BRANCH == 'REL1_36' }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -95,7 +96,7 @@ jobs:
       run: |
         bash ./build/ci-scripts/script.sh
     - name: Send mail
-      if: ${{ failure() }}
+      if: ${{ failure() && matrix.env.MW_BRANCH != 'REL1_36' }}
       uses: dawidd6/action-send-mail@v2
       with:
         server_address: smtp.gmail.com
