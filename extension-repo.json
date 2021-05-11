@@ -919,7 +919,7 @@
 		"ShowSearchHit": "ShowSearchHit",
 		"ShowSearchHitTitle": "ShowSearchHit",
 		"SidebarBeforeOutput": "\\Wikibase\\Repo\\RepoHooks::onSidebarBeforeOutput",
-		"SkinTemplateNavigation": "\\Wikibase\\Repo\\RepoHooks::onPageTabs",
+		"SkinTemplateNavigation::Universal": "\\Wikibase\\Repo\\RepoHooks::onPageTabs",
 		"SpecialPage_initList": "FederatedPropertiesSpecialPage",
 		"SpecialPage_reorderPages": "\\Wikibase\\Repo\\RepoHooks::onSpecialPageReorderPages",
 		"TitleGetRestrictionTypes": "\\Wikibase\\Repo\\RepoHooks::onTitleGetRestrictionTypes",
