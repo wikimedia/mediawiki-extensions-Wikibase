@@ -7,15 +7,15 @@
 		]
 	},
 	"tooltip-t-wikibase": "Link bə elementon repozitoriyə rımuz",
-	"wikibase-comment-update": "{{WBREPONAME}} element degiş be",
-	"wikibase-dataitem": "çı {{WBREPONAME}} element",
-	"wikibase-editlinks": "Keçidon sərost bıkə",
-	"wikibase-editlinkstitle": "Çı zıvınəarə keçidon sərost bıkə",
-	"wikibase-linkitem-addlinks": "Linkon əlovəkə",
+	"wikibase-comment-update": "{{WBREPONAME}} елемент овахтә бе",
+	"wikibase-dataitem": "че {{WBREPONAME}} елемент",
+	"wikibase-editlinks": "Линкон сәрост быкә",
+	"wikibase-editlinkstitle": "Че зывонарә линкон сәрост быкә",
+	"wikibase-linkitem-addlinks": "Линкон әловәкә",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "Niyo kardə",
-	"wikibase-rc-hide-wikidata-show": "Nişo doy",
-	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} dəqiş karde",
-	"wikibase-otherprojects": "Co naxşənədə"
+	"wikibase-rc-hide-wikidata-hide": "Нијо кардә",
+	"wikibase-rc-hide-wikidata-show": "Нишо дој",
+	"wikibase-rc-wikibase-edit-letter": "Д",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} овахте",
+	"wikibase-otherprojects": "Ҹо нахшонәдә"
 }

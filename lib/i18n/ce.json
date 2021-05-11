@@ -14,7 +14,7 @@
 	"wikibase-error-unknown": "ГӀалат даьлла.",
 	"wikibase-error-save-generic": "Ӏалаш ечу хенахь гӀалат даьлла, цундела хьан хийцам чекхбаккха цало.",
 	"wikibase-error-remove-generic": "ДӀайоккхучу хенахь гӀалат даьлла, цундела хьан хийцам чекхбаккха цало.",
-	"wikibase-error-save-timeout": "Тхан технически халонаш ю. Хьан Ӏалашдар кхочушдан йиш яц.",
+	"wikibase-error-save-timeout": "Тхан технически халонаш йу. Хьан Ӏалашдар кхочушдан йиш йац.",
 	"wikibase-error-remove-timeout": "Тхан техникин халонаш ю. Хьан дӀаяккхар кхочушдан йиш яц.",
 	"wikibase-error-ui-no-external-page": "Кара цайо оцу сайтан чохь иштта цӀе йолу агӀо.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (транслитераци)",

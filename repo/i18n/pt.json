@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Athena in Wonderland",
+			"Emma Franzen",
 			"Fúlvio",
 			"Hamilton Abreu",
 			"He7d3r",
@@ -336,6 +337,7 @@
 	"wikibase-entitydata-storage-error": "O carregamento da entidade $1 falhou.",
 	"wikibase-entitydata-title": "Dados da entidade",
 	"wikibase-entitydata-text": "Esta página fornece uma interface de dados ligados, com os valores de entidades. Forneça o identificador da entidade no URL, por favor, usando a sintaxe de subpáginas.\n* Aplica-se a negociação de conteúdo com base no cabeçalho Accept do seu cliente. Isto significa que os dados da entidade serão fornecidos no formato preferido do seu cliente. Para um ''browser'', será HTML, o que causa que o seu ''browser'' seja reencaminhado para a página normal da entidade.\n* Pode pedir explicitamente um formato de dados específico, se adicionar ao identificador da entidade a extensão de ficheiro adequada: Q23.json devolverá dados no formato JSON, Q23.ttl devolverá RDF/Turtle, e assim por diante.\nOs formatos suportados são: $1.",
+	"wikibase-entitydata-unresolvable-sub-entity-redirect": "Incapaz de resolver o redirecionamento para \"$1\". A entidade pai foi redirecionada para \"$2\".",
 	"special-entitypage": "Página da entidade",
 	"wikibase-entitypage-title": "Página da Entidade",
 	"wikibase-entitypage-text": "Esta página redireciona para a página da entidade no repositório ao qual ela pertence. Forneça o identificador da entidade no URL, por favor, usando a sintaxe de subpáginas.",
