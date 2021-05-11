@@ -480,7 +480,7 @@ final class RepoHooks {
 
 	/**
 	 * Alter the structured navigation links in SkinTemplates.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateNavigation
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateNavigation::Universal
 	 *
 	 * @param SkinTemplate $skinTemplate
 	 * @param array[] &$links
