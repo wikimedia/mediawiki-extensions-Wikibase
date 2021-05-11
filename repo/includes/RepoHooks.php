@@ -482,10 +482,12 @@ final class RepoHooks {
 	 * Alter the structured navigation links in SkinTemplates.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateNavigation::Universal
 	 *
+	 * @todo T282549 Consider moving some of this logic into a place where it can be more adequately tested
+	 *
 	 * @param SkinTemplate $skinTemplate
 	 * @param array[] &$links
 	 */
-	public static function onPageTabs( SkinTemplate $skinTemplate, array &$links ) {
+	public static function onSkinTemplateNavigationUniversal( SkinTemplate $skinTemplate, array &$links ) {
 		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
 
 		$title = $skinTemplate->getRelevantTitle();

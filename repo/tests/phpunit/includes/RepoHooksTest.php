@@ -685,4 +685,21 @@ XML
 		$this->assertArrayEquals( $expected, $rateLimits, false, true );
 	}
 
+	public function testOnSkinTemplateNavigationUniversal_doesNotAlterLinksOnNonEntityContentModelPages() {
+		$links = [
+			'views' => [
+				'edit' => 'http://foo.com/edit',
+				'viewsource' => 'http://foo.com/viewsource',
+			]
+		];
+		$expectedLinks = $links;
+		$skinTemplate = $this->createMock( SkinTemplate::class );
+		$title = $this->createMock( Title::class );
+		$title->method( 'getContentModel' )->willReturn( CONTENT_MODEL_WIKITEXT );
+		$skinTemplate->method( 'getRelevantTitle' )->willReturn( $title );
+
+		RepoHooks::onSkinTemplateNavigationUniversal( $skinTemplate, $links );
+		$this->assertArrayEquals( $expectedLinks, $links );
+	}
+
 }
