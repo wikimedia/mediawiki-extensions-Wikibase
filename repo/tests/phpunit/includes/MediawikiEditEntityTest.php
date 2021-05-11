@@ -484,15 +484,16 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			$user = User::createNew( $user->getName() );
 		}
 
-		$remove = array_diff( $user->getGroups(), $groups );
-		$add = array_diff( $groups, $user->getGroups() );
+		$userGroupManager = $this->getServiceContainer()->getUserGroupManager();
+		$remove = array_diff( $userGroupManager->getUserGroups( $user ), $groups );
+		$add = array_diff( $groups, $userGroupManager->getUserGroups( $user ) );
 
 		foreach ( $remove as $group ) {
-			$user->removeGroup( $group );
+			$userGroupManager->removeUserFromGroup( $user, $group );
 		}
 
 		foreach ( $add as $group ) {
-			$user->addGroup( $group );
+			$userGroupManager->addUserToGroup( $user, $group );
 		}
 	}
 
