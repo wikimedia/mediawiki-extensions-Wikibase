@@ -57,7 +57,7 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		$this->insertPageProps( $db, 22, $q22 );
 
 		$lookup = new PagePropsEntityIdLookup(
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			MediaWikiServices::getInstance()->getPageProps(),
 			new ItemIdParser()
 		);
 		$this->assertEquals( $q22, $lookup->getEntityIdForTitle( $title22 ) );
@@ -83,7 +83,7 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		];
 
 		$lookup = new PagePropsEntityIdLookup(
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			MediaWikiServices::getInstance()->getPageProps(),
 			new ItemIdParser()
 		);
 		$actual = $lookup->getEntityIds( [ $title22, $title99, $title11 ] );
