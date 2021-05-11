@@ -247,6 +247,7 @@ return call_user_func( function() {
 				'dataValues.DataValue', // For snakview
 				'jquery.animateWithEvent',
 				'jquery.event.special.eachchange',
+				'jquery.spinner', //For snakview
 				'jquery.ui',
 				'jquery.ui.suggester',
 				'jquery.util.getDirectionality',

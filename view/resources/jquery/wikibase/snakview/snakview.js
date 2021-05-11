@@ -259,7 +259,7 @@
 
 			// Display spinner as long as the ValueView is loading:
 			this.$snakValue.empty().append(
-				$( '<div>' ).append( $( '<span>' ).addClass( 'mw-small-spinner' ) )
+				$.createSpinner( 'small' )
 			);
 
 			// The "value" variation contains experts that depend on the property and value type. Must
