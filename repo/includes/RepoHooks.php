@@ -7,7 +7,6 @@ use ApiEditPage;
 use ApiModuleManager;
 use ApiQuery;
 use ApiQuerySiteinfo;
-use CentralIdLookup;
 use Content;
 use ContentHandler;
 use ExtensionRegistry;
@@ -25,7 +24,6 @@ use PageProps;
 use Parser;
 use ParserOptions;
 use ParserOutput;
-use RecentChange;
 use ResourceLoader;
 use Skin;
 use SkinTemplate;
@@ -39,7 +37,6 @@ use Wikibase\Lib\LibHooks;
 use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\Api\MetaDataBridgeConfig;
 use Wikibase\Repo\Content\EntityContent;
@@ -48,7 +45,6 @@ use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Hooks\SidebarBeforeOutputHookHandler;
-use Wikibase\Repo\Notifications\RepoEntityChange;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TermboxVersionParserCacheValueRejector;
@@ -347,53 +343,6 @@ final class RepoHooks {
 
 		$notifier = WikibaseRepo::getChangeNotifier();
 		$notifier->notifyOnPageUndeleted( $revisionRecord );
-	}
-
-	/**
-	 * Nasty hack to inject information from RC into the change notification saved earlier
-	 * by the onRevisionFromEditComplete hook handler.
-	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/RecentChange_save
-	 *
-	 * @todo find a better way to do this!
-	 *
-	 * @param RecentChange $recentChange
-	 */
-	public static function onRecentChangeSave( RecentChange $recentChange ) {
-		$logType = $recentChange->getAttribute( 'rc_log_type' );
-		$logAction = $recentChange->getAttribute( 'rc_log_action' );
-		$revId = $recentChange->getAttribute( 'rc_this_oldid' );
-
-		if ( $revId <= 0 ) {
-			// If we don't have a revision ID, we have no chance to find the right change to update.
-			// NOTE: As of February 2015, RC entries for undeletion have rc_this_oldid = 0.
-			return;
-		}
-
-		if ( $logType === null || ( $logType === 'delete' && $logAction === 'restore' ) ) {
-			$changeLookup = WikibaseRepo::getStore()->getEntityChangeLookup();
-
-			/** @var RepoEntityChange $change */
-			$change = $changeLookup->loadByRevisionId( $revId, EntityChangeLookup::FROM_MASTER );
-			'@phan-var RepoEntityChange $change';
-
-			if ( $change ) {
-				$changeStore = WikibaseRepo::getStore()->getChangeStore();
-
-				$centralIdLookup = CentralIdLookup::factoryNonLocal();
-				if ( $centralIdLookup === null ) {
-					$centralUserId = 0;
-				} else {
-					$repoUser = User::newFromIdentity( $recentChange->getPerformerIdentity() );
-					$centralUserId = $centralIdLookup->centralIdFromLocalUser(
-						$repoUser
-					);
-				}
-
-				$change->setMetadataFromRC( $recentChange, $centralUserId );
-				$changeStore->saveChange( $change );
-			}
-		}
 	}
 
 	/**

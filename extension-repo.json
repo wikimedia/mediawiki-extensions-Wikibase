@@ -853,6 +853,13 @@
 			  	"WikibaseRepo.Settings"
 			]
 		},
+		"RecentChangeSave": {
+			"class": "\\Wikibase\\Repo\\Hooks\\RecentChangeSaveHookHandler",
+			"factory": "\\Wikibase\\Repo\\Hooks\\RecentChangeSaveHookHandler::factory",
+			"services": [
+				"WikibaseRepo.Store"
+			]
+		},
 		"ShowSearchHit": {
 			"class": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler",
 			"services": [
@@ -907,7 +914,7 @@
 		"PageHistoryPager::doBatchLookups": "PageHistoryPagerHookHandler",
 		"ParserFirstCallInit": "\\Wikibase\\Repo\\RepoHooks::onParserFirstCallInit",
 		"ParserOptionsRegister": "\\Wikibase\\Repo\\RepoHooks::onParserOptionsRegister",
-		"RecentChange_save": "\\Wikibase\\Repo\\RepoHooks::onRecentChangeSave",
+		"RecentChange_save": "RecentChangeSave",
 		"RejectParserCacheValue": "\\Wikibase\\Repo\\RepoHooks::onRejectParserCacheValue",
 		"ResourceLoaderRegisterModules": [
 			"\\Wikibase\\Repo\\RepoHooks::onResourceLoaderRegisterModules",
