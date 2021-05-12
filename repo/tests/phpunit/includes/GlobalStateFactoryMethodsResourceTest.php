@@ -11,6 +11,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
 
@@ -179,6 +180,16 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 					->method( 'getMaintenanceConnectionRef' );
 				$lb->method( 'getLocalDomainID' )
 					->willReturn( 'banana' );
+
+				// This LazyConnectionRef will use our mocked LoadBalancer when actually
+				// trying to connect, thus using it for DB queries will fail.
+				$lazyDb = new DBConnRef(
+					$lb,
+					[ 'dummy', 'dummy', 'dummy', 'dummy' ],
+					DB_REPLICA
+				);
+				$lb->method( 'getLazyConnectionRef' )
+					->willReturn( $lazyDb );
 
 				$lbFactory = $this->createMock( LBFactory::class );
 				$lbFactory->method( 'getMainLB' )
