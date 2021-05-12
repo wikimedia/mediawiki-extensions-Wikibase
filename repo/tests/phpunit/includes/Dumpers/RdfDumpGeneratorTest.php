@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -21,11 +22,14 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Dumpers\RdfDumpGenerator;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
-use Wikibase\Repo\Rdf\NullEntityRdfBuilder;
+use Wikibase\Repo\Rdf\FullStatementRdfBuilderFactory;
+use Wikibase\Repo\Rdf\ItemRdfBuilder;
 use Wikibase\Repo\Rdf\PropertyRdfBuilder;
-use Wikibase\Repo\Rdf\RdfProducer;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\SiteLinksRdfBuilder;
+use Wikibase\Repo\Rdf\TermsRdfBuilder;
+use Wikibase\Repo\Rdf\TruthyStatementRdfBuilderFactory;
+use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 use Wikibase\Repo\WikibaseRepo;
@@ -115,18 +119,56 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 				$mentionedEntityTracker,
 				$dedupe
 			) use ( $siteLookup ) {
-				if ( $flavorFlags & RdfProducer::PRODUCE_SITELINKS ) {
-					$sites = $siteLookup->getSites();
-					$builder = new SiteLinksRdfBuilder( $vocabulary, $writer, $sites );
-					$builder->setDedupeBag( $dedupe );
-					return $builder;
-				}
-				return new NullEntityRdfBuilder();
+				$this->setService( 'SiteLookup', $siteLookup );
+				$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $this->getTestData()->getMockRepository() );
+				$services = $this->getServiceContainer();
+				$sites = $services->getSiteLookup()->getSites();
+				$propertyDataLookup = WikibaseRepo::getPropertyDataTypeLookup();
+				$valueSnakRdfBuilderFactory = new ValueSnakRdfBuilderFactory(
+					WikibaseRepo::getDataTypeDefinitions( $services )
+						->getRdfBuilderFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
+				);
+
+				$truthyStatementRdfBuilderFactory = new TruthyStatementRdfBuilderFactory(
+					$dedupe,
+					$vocabulary,
+					$writer,
+					$valueSnakRdfBuilderFactory,
+					$mentionedEntityTracker,
+					$propertyDataLookup
+				);
+				$fullStatementRdfBuilderFactory = new FullStatementRdfBuilderFactory(
+					$vocabulary,
+					$writer,
+					$valueSnakRdfBuilderFactory,
+					$mentionedEntityTracker,
+					$dedupe,
+					$propertyDataLookup
+				);
+				$siteLinksRdfBuilder = new SiteLinksRdfBuilder( $vocabulary, $writer, $sites );
+				$siteLinksRdfBuilder->setDedupeBag( $dedupe );
+
+				$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
+				$termsRdfBuilder = new TermsRdfBuilder(
+					$vocabulary,
+					$writer,
+					$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES )
+				);
+
+				return new ItemRdfBuilder(
+					$flavorFlags,
+					$siteLinksRdfBuilder,
+					$termsRdfBuilder,
+					$truthyStatementRdfBuilderFactory,
+					$fullStatementRdfBuilderFactory
+				);
 			},
 			'property' => function(
 				$flavorFlags,
 				RdfVocabulary $vocabulary,
-				RdfWriter $writer
+				RdfWriter $writer,
+				$mentionedEntityTracker,
+				$dedupe
 			) {
 				return new PropertyRdfBuilder(
 					$vocabulary,

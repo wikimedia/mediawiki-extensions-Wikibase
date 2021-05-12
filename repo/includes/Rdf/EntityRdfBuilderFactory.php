@@ -101,14 +101,4 @@ class EntityRdfBuilderFactory {
 		return $builders;
 	}
 
-	/**
-	 * Produce new TermRdfWriter
-	 * @param RdfVocabulary $vocabulary
-	 * @param RdfWriter $writer
-	 * @return TermsRdfBuilder
-	 */
-	public function getTermRdfBuilder( RdfVocabulary $vocabulary, RdfWriter $writer ) {
-		return new TermsRdfBuilder( $vocabulary, $writer, $this->labelPredicates );
-	}
-
 }
