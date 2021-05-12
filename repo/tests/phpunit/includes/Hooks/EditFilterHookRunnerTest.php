@@ -66,7 +66,6 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
 		$context->setUser( User::newFromName( 'EditFilterHookRunnerTestUser' ) );
-		$preContext = clone $context;
 
 		$runner = $this->getEditFilterHookRunner();
 		$status = $runner->run(
@@ -75,11 +74,6 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 			'summary'
 		);
 		$this->assertTrue( $status->isGood() );
-		$this->assertEquals(
-			$preContext,
-			$context,
-			'Context should not be altered'
-		);
 	}
 
 	public function runData() {
@@ -182,7 +176,6 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
 		$context->setUser( User::newFromName( 'EditFilterHookRunnerTestUser' ) );
-		$preContext = clone $context;
 
 		$runner = $this->getEditFilterHookRunner();
 		$status = $runner->run(
@@ -191,12 +184,6 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 			'summary'
 		);
 		$this->assertEquals( $expected['status'], $status );
-
-		$this->assertEquals(
-			$preContext,
-			$context,
-			'Context should not be altered'
-		);
 	}
 
 }
