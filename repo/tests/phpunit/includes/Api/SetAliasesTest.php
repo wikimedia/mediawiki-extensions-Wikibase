@@ -330,6 +330,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 
 	public function testUserCannotSetAliasesWhenTheyLackPermission() {
 		$user = $this->createUserWithGroup( 'all-permission' );
+		$services = $this->getServiceContainer();
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'item-term' => false ],
@@ -337,7 +338,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
 		] );
 
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
+		$services->resetServiceForTesting( 'PermissionManager' );
 
 		// And an item
 		$newItem = $this->createItemUsing( $user );
@@ -349,10 +350,10 @@ class SetAliasesTest extends ModifyTermTestCase {
 		];
 
 		// Make sure our user is no longer allowed to edit terms.
-		$user->removeGroup( 'all-permission' );
-		$user->addGroup( 'no-permission' );
+		$services->getUserGroupManager()->removeUserFromGroup( $user, 'all-permission' );
+		$services->getUserGroupManager()->addUserToGroup( $user, 'no-permission' );
 
-		MediaWikiServices::getInstance()->getPermissionManager()->invalidateUsersRightsCache( $user );
+		$services->getPermissionManager()->invalidateUsersRightsCache( $user );
 
 		$this->doTestQueryExceptions(
 			$this->getAddAliasRequestParams( $newItem->getId() ),

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
-use MediaWiki\MediaWikiServices;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -40,6 +39,8 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 	 * @todo try to do this without messing with the globals, or at least without hardcoding them.
 	 */
 	protected function applyPermissions( array $permissions = null, array $groups = null ) {
+		$userGroupManager = $this->getServiceContainer()->getUserGroupManager();
+
 		if ( !$permissions ) {
 			return;
 		}
@@ -47,13 +48,13 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 		$this->user->addToDatabase();
 
 		if ( is_array( $groups ) ) {
-			$oldGroups = $this->user->getGroups();
+			$oldGroups = $userGroupManager->getUserGroups( $this->user );
 			foreach ( $oldGroups as $group ) {
-				$this->user->removeGroup( $group );
+				$userGroupManager->removeUserFromGroup( $this->user, $group );
 			}
 
 			foreach ( $groups as $group ) {
-				$this->user->addGroup( $group );
+				$userGroupManager->addUserToGroup( $this->user, $group );
 			}
 		}
 
@@ -64,10 +65,10 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 		}
 
 		// reset rights cache
-		$this->user->addGroup( "dummy" );
-		$this->user->removeGroup( "dummy" );
+		$userGroupManager->addUserToGroup( $this->user, "dummy" );
+		$userGroupManager->removeUserFromGroup( $this->user, "dummy" );
 
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
+		$this->getServiceContainer()->resetServiceForTesting( 'PermissionManager' );
 	}
 
 	protected function doPermissionsTest(
