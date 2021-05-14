@@ -121,6 +121,12 @@
 
 			this.element.tabs();
 
+			// Sets manual mode when user selects it after selecting another tab
+			$manualLink.on( 'click', function () {
+				new mw.Api().saveOption( 'wb-reftabs-mode', 'manual' ); // for future page views
+				mw.user.options.set( 'wb-reftabs-mode', 'manual' ); // for this page view
+			} );
+
 			// TODO: Figure out why templateParams classes in options obj doesn't work
 			this.element.addClass( 'wikibase-referenceview-tabs' );
 
