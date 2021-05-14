@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Notifications;
 
 use CentralIdLookup;
+use Exception;
 use InvalidArgumentException;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
@@ -81,7 +82,8 @@ class ChangeNotifier {
 		$change = $this->changeFactory->newFromUpdate( EntityChange::REMOVE, $content->getEntity() );
 		'@phan-var RepoEntityChange $change';
 		$change->setTimestamp( $timestamp );
-		$change->setMetadataFromUser(
+		$this->setEntityChangeUserInfo(
+			$change,
 			$user,
 			$this->getCentralUserId( $user )
 		);
@@ -113,7 +115,8 @@ class ChangeNotifier {
 		$change = $this->changeFactory->newFromUpdate( EntityChange::RESTORE, null, $content->getEntity() );
 		'@phan-var RepoEntityChange $change';
 
-		$change->setRevisionInfo(
+		$this->setEntityChangeRevisionInfo(
+			$change,
 			$revisionRecord,
 			/* Will get set below in setMetadataFromUser */ 0
 		);
@@ -123,7 +126,8 @@ class ChangeNotifier {
 		$change->setTimestamp( wfTimestampNow() );
 
 		$user = User::newFromIdentity( $revisionRecord->getUser() );
-		$change->setMetadataFromUser(
+		$this->setEntityChangeUserInfo(
+			$change,
 			$user,
 			$this->getCentralUserId( $user )
 		);
@@ -157,7 +161,8 @@ class ChangeNotifier {
 		/** @var RepoEntityChange $change */
 		$change = $this->changeFactory->newFromUpdate( EntityChange::ADD, null, $content->getEntity() );
 		'@phan-var RepoEntityChange $change';
-		$change->setRevisionInfo(
+		$this->setEntityChangeRevisionInfo(
+			$change,
 			$revisionRecord,
 			$this->getCentralUserId( User::newFromIdentity( $revisionRecord->getUser() ) )
 		);
@@ -194,7 +199,8 @@ class ChangeNotifier {
 			return null;
 		}
 
-		$change->setRevisionInfo(
+		$this->setEntityChangeRevisionInfo(
+			$change,
 			$current,
 			$this->getCentralUserId( User::newFromIdentity( $current->getUser() ) )
 		);
@@ -262,6 +268,65 @@ class ChangeNotifier {
 		foreach ( $this->changeTransmitters as $transmitter ) {
 			$transmitter->transmitChange( $change );
 		}
+	}
+
+	/**
+	 * @param EntityChange $change
+	 * @param User $user User that made change
+	 * @param int $centralUserId Central user ID, or 0 if unknown or not applicable
+	 *   (see docs/change-propagation.md)
+	 */
+	private function setEntityChangeUserInfo( EntityChange $change, User $user, $centralUserId ): void {
+		$change->addUserMetadata(
+			$user->getId(),
+			$user->getName(),
+			$centralUserId
+		);
+
+		// TODO: init page_id etc in getMetadata, not here!
+		$metadata = array_merge( [
+			'page_id' => 0,
+			'rev_id' => 0,
+			'parent_id' => 0,
+		],
+			$change->getMetadata()
+		);
+
+		$change->setMetadata( $metadata );
+	}
+
+	/**
+	 * @param EntityChange $change
+	 * @param RevisionRecord $revision Revision to populate EntityChange from
+	 * @param int $centralUserId Central user ID, or 0 if unknown or not applicable
+	 *   (see docs/change-propagation.md)
+	 */
+	private function setEntityChangeRevisionInfo( EntityChange $change, RevisionRecord $revision, int $centralUserId ): void {
+		$change->setFields( [
+			'revision_id' => $revision->getId(),
+			'time' => $revision->getTimestamp(),
+		] );
+
+		if ( !$change->hasField( 'object_id' ) ) {
+			throw new Exception(
+				'EntityChange::setRevisionInfo() called without calling setEntityId() first!'
+			);
+		}
+
+		$comment = $revision->getComment();
+		$change->setMetadata( [
+			'page_id' => $revision->getPageId(),
+			'parent_id' => $revision->getParentId(),
+			'comment' => $comment ? $comment->text : null,
+			'rev_id' => $revision->getId(),
+		] );
+
+		$user = $revision->getUser();
+		$change->addUserMetadata(
+			$user ? $user->getId() : 0,
+			$user ? $user->getName() : '',
+			$centralUserId
+		);
 	}
 
 }
