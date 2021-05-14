@@ -5,7 +5,6 @@ const assert = require( 'assert' );
 const WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
 const EntityPage = require( 'wdio-wikibase/pageobjects/entity.page' );
 const ItemPage = require( 'wdio-wikibase/pageobjects/item.page' );
-const Page = require( 'wdio-mediawiki/Page' );
 
 describe( 'item', function () {
 
@@ -67,16 +66,12 @@ describe( 'item', function () {
 	} );
 
 	// skip this until further investigation of flakiness T227266
-	it.only( 'old revisions do not have an edit link', function () {
+	it.skip( 'old revisions do not have an edit link', function () {
 		const itemId = browser.call( () => WikibaseApi.createItem( Util.getTestString( 'T95406-' ) ) );
-		const entity = browser.call( () => WikibaseApi.getEntity( itemId ) );
 
 		EntityPage.open( itemId );
-		browser.pause( 1100 );
 		ItemPage.editItemDescription( 'revision 1' );
-		( new Page() ).openTitle( `Special:EntityPage/${itemId}`, { oldid: entity.lastrevid } );
-
-		browser.pause( 1000 );
+		ItemPage.goToPreviousRevision();
 		assert( !ItemPage.editButton.isExisting() );
 	} );
 } );
