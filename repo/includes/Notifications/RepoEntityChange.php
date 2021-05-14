@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Notifications;
 
 use Exception;
 use MediaWiki\Revision\RevisionRecord;
-use RecentChange;
 use User;
 use Wikibase\Lib\Changes\EntityChange;
 
@@ -12,34 +11,6 @@ use Wikibase\Lib\Changes\EntityChange;
  * @license GPL-2.0-or-later
  */
 class RepoEntityChange extends EntityChange {
-
-	/**
-	 * @param RecentChange $rc
-	 * @param int $centralUserId Central user ID, or 0 if unknown or not applicable
-	 *   (see docs/change-propagation.wiki)
-	 *
-	 * @todo rename to setRecentChangeInfo
-	 */
-	public function setMetadataFromRC( RecentChange $rc, $centralUserId ) {
-		$this->setFields( [
-			'revision_id' => $rc->getAttribute( 'rc_this_oldid' ),
-			'time' => $rc->getAttribute( 'rc_timestamp' ),
-		] );
-
-		$this->setMetadata( [
-			'bot' => $rc->getAttribute( 'rc_bot' ),
-			'page_id' => $rc->getAttribute( 'rc_cur_id' ),
-			'rev_id' => $rc->getAttribute( 'rc_this_oldid' ),
-			'parent_id' => $rc->getAttribute( 'rc_last_oldid' ),
-			'comment' => $rc->getAttribute( 'rc_comment' ),
-		] );
-
-		$this->addUserMetadata(
-			$rc->getAttribute( 'rc_user' ),
-			$rc->getAttribute( 'rc_user_text' ),
-			$centralUserId
-		);
-	}
 
 	/**
 	 * @todo rename to setUserInfo

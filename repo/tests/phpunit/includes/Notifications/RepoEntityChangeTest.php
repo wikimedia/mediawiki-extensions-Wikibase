@@ -34,45 +34,6 @@ class RepoEntityChangeTest extends ChangeRowTest {
 		$change->setRevisionInfo( $revision, 3 );
 	}
 
-	public function testSetMetadataFromRC() {
-		$timestamp = '20140523' . '174422';
-
-		$row = (object)[
-			'rc_last_oldid' => 3,
-			'rc_this_oldid' => 5,
-			'rc_user' => 7,
-			'rc_user_text' => 'Mr. Kittens',
-			'rc_timestamp' => $timestamp,
-			'rc_cur_id' => 6,
-			'rc_bot' => 1,
-			'rc_deleted' => 0,
-			// The faked-up RecentChange row needs to have the proper fields for
-			// MediaWiki core change Ic3a434c0.
-			'rc_comment' => 'Test!',
-			'rc_comment_text' => 'Test!',
-			'rc_comment_data' => null,
-		];
-
-		$rc = RecentChange::newFromRow( $row );
-
-		$entityChange = $this->newEntityChange( new ItemId( 'Q7' ) );
-		$entityChange->setMetadataFromRC( $rc, 8 );
-
-		$this->assertSame( 5, $entityChange->getField( 'revision_id' ), 'revision_id' );
-		$this->assertSame( 7, $entityChange->getField( 'user_id' ), 'user_id' );
-		$this->assertSame( 'Q7', $entityChange->getObjectId(), 'object_id' );
-		$this->assertSame( $timestamp, $entityChange->getTime(), 'timestamp' );
-		$this->assertSame( 'Test!', $entityChange->getComment(), 'comment' );
-
-		$metadata = $entityChange->getMetadata();
-		$this->assertSame( 8, $metadata['central_user_id'], 'central_user_id' );
-		$this->assertSame( 3, $metadata['parent_id'], 'parent_id' );
-		$this->assertSame( 6, $metadata['page_id'], 'page_id' );
-		$this->assertSame( 5, $metadata['rev_id'], 'rev_id' );
-		$this->assertSame( 1, $metadata['bot'], 'bot' );
-		$this->assertSame( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
-	}
-
 	public function testSetRevisionInfo() {
 		$id = new ItemId( 'Q7' );
 		$entityChange = $this->newEntityChange( $id );
