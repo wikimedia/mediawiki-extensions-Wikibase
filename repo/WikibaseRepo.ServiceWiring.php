@@ -60,7 +60,9 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
@@ -192,8 +194,6 @@ use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
-use Wikibase\Repo\Notifications\RepoEntityChange;
-use Wikibase\Repo\Notifications\RepoItemChange;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
@@ -601,7 +601,7 @@ return [
 	'WikibaseRepo.EntityChangeFactory' => function ( MediaWikiServices $services ): EntityChangeFactory {
 		//TODO: take this from a setting or registry.
 		$changeClasses = [
-			Item::ENTITY_TYPE => RepoItemChange::class,
+			Item::ENTITY_TYPE => ItemChange::class,
 			// Other types of entities will use EntityChange
 		];
 
@@ -609,7 +609,7 @@ return [
 			WikibaseRepo::getEntityDiffer( $services ),
 			WikibaseRepo::getEntityIdParser( $services ),
 			$changeClasses,
-			RepoEntityChange::class,
+			EntityChange::class,
 			WikibaseRepo::getLogger( $services )
 		);
 	},

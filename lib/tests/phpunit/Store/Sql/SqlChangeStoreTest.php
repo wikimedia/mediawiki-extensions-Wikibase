@@ -42,7 +42,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 		$changeWithDiff->setCompactDiff( ( new EntityDiffChangedAspectsFactory() )->newEmpty() );
 
 		$changeWithDataFromRC = $factory->newForEntity( EntityChange::REMOVE, new ItemId( 'Q123' ) );
-		// the fields and metadata mirror RepoEntityChange::setMetadataFromRC()
+		// the fields and metadata mirror those added in RecentChangeSaveHookHandler
 		$changeWithDataFromRC->setFields( [
 			'revision_id' => 343,
 			'time' => $time,
