@@ -321,6 +321,7 @@
 	"wikibase-entitydata-storage-error": "Impossibil caregà l'entità $1.",
 	"wikibase-entitydata-title": "Dati de l'entità",
 	"wikibase-entitydata-text": "Questa pagina chì la forniss un'interfacia di dati conligad ai valor de l'entità. Per piesè forniss  l'ID de l'entità in l'URL, drovand la sintassi sottopagina.\n* La negozziazzion di contegnud la se aplica a segonda de l'intestazzion 'Accept' del client. Per dì che   i dati de l'entità i sarann fornid in del formato preferid del client. Per un browser web, chesschì el sarà HTML, che redirigerà el to programa de navigazzion vers la pagina regolar de l'entità.\n* Te podet domandà in manera esplicità un cert formad de dati cont el sgiontagh l'estension adatta del'ID de l'entità: Q23.json el darà indree i dati in formad JSON, Q23.ttl el darà indree RDF/Turtle, e vìa inscì. I formad suportad inn $1",
+	"wikibase-entitydata-unresolvable-sub-entity-redirect": "Impossibil risolver la redirezzion per \"$ 1\". L'entità principal l'è stada rimandada a \"$ 2\".",
 	"special-entitypage": "Pagina de l'entità",
 	"wikibase-entitypage-title": "Pagina dell'entità",
 	"wikibase-entitypage-text": "Questa pagina chì la redirinsg a l'entità de la pagina in d'un archivi che la ghe parten. Per piesé fornìss l'ID de l'entità in de l'URL cont el doprà la sintassi sotpagina.",
