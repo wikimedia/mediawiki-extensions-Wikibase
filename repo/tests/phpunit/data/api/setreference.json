@@ -1,20 +1,20 @@
 {
-  "$propertyIdUnderTest": [
-    {
-      "snaktype": "value",
-      "property": "$propertyIdUnderTest",
-      "datavalue": {
-        "type": "string",
-        "value": "Val1"
-      }
-    },
-    {
-      "snaktype": "value",
-      "property": "$propertyIdUnderTest",
-      "datavalue": {
-        "type": "string",
-        "value": "Val2"
-      }
-    }
-  ]
+	"$propertyIdUnderTest": [
+		{
+			"snaktype": "value",
+			"property": "$propertyIdUnderTest",
+			"datavalue": {
+				"type": "string",
+				"value": "Val1"
+			}
+		},
+		{
+			"snaktype": "value",
+			"property": "$propertyIdUnderTest",
+			"datavalue": {
+				"type": "string",
+				"value": "Val2"
+			}
+		}
+	]
 }

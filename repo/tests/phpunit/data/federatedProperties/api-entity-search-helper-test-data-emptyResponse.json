@@ -1,5 +1,5 @@
 {
-  "searchinfo": { "search": "nonExistingProperty" },
-  "search": [],
-  "success": 1
+	"searchinfo": { "search": "nonExistingProperty" },
+	"search": [],
+	"success": 1
 }
