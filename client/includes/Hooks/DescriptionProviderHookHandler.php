@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Hooks;
 
-use MediaWiki\Rest\Entity\SearchResultPageIdentity;
+use MediaWiki\Page\PageIdentity;
 use MediaWiki\Rest\Hook\SearchResultProvideDescriptionHook;
 use Title;
 use Wikibase\Client\Store\DescriptionLookup;
@@ -45,7 +45,7 @@ class DescriptionProviderHookHandler implements SearchResultProvideDescriptionHo
 			$sources = [ DescriptionLookup::SOURCE_CENTRAL, DescriptionLookup::SOURCE_LOCAL ];
 		}
 
-		$pageIdTitles = array_map( function ( SearchResultPageIdentity $identity ) {
+		$pageIdTitles = array_map( function ( PageIdentity $identity ) {
 			return Title::makeTitle( $identity->getNamespace(), $identity->getDBkey() );
 		}, $pageIdentities );
 
