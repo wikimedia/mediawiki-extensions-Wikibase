@@ -4,7 +4,7 @@
 		"wikimedia/mocha"
 	],
 	"rules": {
-		"comma-dangle": ["error", "always-multiline"],
+		"comma-dangle": [ "error", "always-multiline" ],
 		"mocha/no-sibling-hooks": "off"
 	}
 }

@@ -1,30 +1,30 @@
 {
-    "entities": {
-        "P18": {
-            "datatype": "commonsMedia",
-            "id": "P18",
-            "labels": {
-                "de": {
-                    "language": "de",
-                    "value": "Bild"
-                },
-                "en": {
-                    "language": "en",
-                    "value": "image"
-                }
-            },
-            "descriptions": {
-                "en": {
-                    "language": "en",
-                    "value": "image of relevant illustration of the subject"
-                },
-                "de": {
-                    "language": "de",
-                    "value": "Foto, Grafik etc. des Objekts"
-                }
-            },
-            "type": "property"
-        }
-    },
-    "success": 1
+	"entities": {
+		"P18": {
+			"datatype": "commonsMedia",
+			"id": "P18",
+			"labels": {
+				"de": {
+					"language": "de",
+					"value": "Bild"
+				},
+				"en": {
+					"language": "en",
+					"value": "image"
+				}
+			},
+			"descriptions": {
+				"en": {
+					"language": "en",
+					"value": "image of relevant illustration of the subject"
+				},
+				"de": {
+					"language": "de",
+					"value": "Foto, Grafik etc. des Objekts"
+				}
+			},
+			"type": "property"
+		}
+	},
+	"success": 1
 }

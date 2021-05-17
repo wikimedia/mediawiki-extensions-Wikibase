@@ -75,8 +75,8 @@
 			]
 		},
 		"ChangesListLines": {
-			"class" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler",
-			"factory" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler::factory",
+			"class": "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler::factory",
 			"services": [
 				"ContentLanguage",
 				"UserNameUtils",
@@ -224,9 +224,9 @@
 			"class": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler::factory",
 			"services": [
-			  	"WikibaseClient.ItemAndPropertySource",
-			  	"WikibaseClient.NamespaceChecker",
-			  	"WikibaseClient.Settings",
+				"WikibaseClient.ItemAndPropertySource",
+				"WikibaseClient.NamespaceChecker",
+				"WikibaseClient.Settings",
 				"WikibaseClient.Store"
 			]
 		}
@@ -485,7 +485,7 @@
 		"WikibaseLib": "lib/i18n"
 	},
 	"ExtensionMessagesFiles": {
-		"Wikibaseclientalias" : "client/WikibaseClient.i18n.alias.php",
+		"Wikibaseclientalias": "client/WikibaseClient.i18n.alias.php",
 		"wikibaseclientmagic": "client/WikibaseClient.i18n.magic.php"
 	},
 	"callback": "\\Wikibase\\Lib\\LibHooks::onRegistration",

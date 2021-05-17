@@ -1,16 +1,16 @@
 {
-  "--title": "Wikibase View - Documentation",
-  "--output": "docs",
-  "--processes": "0",
-  "--warnings-exit-nonzero": true,
-  "--builtin-classes": true,
-  "--external": "HTMLDocument,Window,MouseEvent,KeyboardEvent,File,jQuery,jQuery.Promise,jQuery.Event",
-  "--warnings": ["-all"],
-  "--exclude": [
-	  "view/lib/wikibase-termbox",
-	  "view/lib/wikibase-tainted-ref"
-  ],
-  "--": [
-    "view/"
-  ]
+	"--title": "Wikibase View - Documentation",
+	"--output": "docs",
+	"--processes": "0",
+	"--warnings-exit-nonzero": true,
+	"--builtin-classes": true,
+	"--external": "HTMLDocument,Window,MouseEvent,KeyboardEvent,File,jQuery,jQuery.Promise,jQuery.Event",
+	"--warnings": [ "-all" ],
+	"--exclude": [
+		"view/lib/wikibase-termbox",
+		"view/lib/wikibase-tainted-ref"
+	],
+	"--": [
+		"view/"
+	]
 }

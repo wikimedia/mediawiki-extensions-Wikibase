@@ -75,7 +75,7 @@
 							"latitude": 12.125,
 							"longitude": 67.25,
 							"precision": 0.0625,
-							"globe": "http:\/\/www.wikidata.org\/entity\/Q2"
+							"globe": "http://www.wikidata.org/entity/Q2"
 						},
 						"type": "globecoordinate"
 					}
@@ -180,7 +180,7 @@
 							"before": 0,
 							"after": 0,
 							"precision": 9,
-							"calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+							"calendarmodel": "http://www.wikidata.org/entity/Q1985727"
 						},
 						"type": "time"
 					}
@@ -197,7 +197,7 @@
 					"property": "P9",
 					"datatype": "url",
 					"datavalue": {
-						"value": "http:\/\/url.acme.test\\badurl?chars=\\привет< >\"",
+						"value": "http://url.acme.test\\badurl?chars=\\привет< >\"",
 						"type": "string"
 					}
 				},
