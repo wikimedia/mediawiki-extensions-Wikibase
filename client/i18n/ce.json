@@ -4,7 +4,7 @@
 			"Умар"
 		]
 	},
-	"wikibase-client-desc": "Wikibase шорян клиент",
+	"wikibase-client-desc": "Wikibase шорйан клиент",
 	"tooltip-t-wikibase": "Йихкина элементан хьажорг хаамийн репозитори",
 	"wikibase-after-page-move": "Викихаамаш чохь [$1 карлайаккха] хьой цӀе хийцина агӀона хьажорг.",
 	"wikibase-after-page-move-queued": "ХӀара агӀо чохь йолу [$1 {{grammar:genitive|{{WBREPONAME}}}} чура элемент] ша карлаяьккина хила мега.",
@@ -38,7 +38,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Ахьа авторизаци йан йеза",
 	"wikibase-linkitem-not-loggedin": "И функци лела йа йиш хилийта ахьа хьай цӀерца болх ба беза хӀокху вики чох а, [$1 Викихаамаш чохь а].",
 	"wikibase-linkitem-success-link": "АгӀонаш кхиамца [$1 Викихаамаш чохь] вовшахтесна.",
-	"limitreport-entityaccesscount": "Чуяьхна Викибазан хӀумнийн дукхалла",
+	"limitreport-entityaccesscount": "Чуйаьхна Викибазан хӀумнийн дукхалла",
 	"limitreport-entityaccesscount-value": "$1/$2",
 	"wikibase-property-notfound": "Билгало «$1» ца карайо",
 	"wikibase-rc-hide-wikidata": "$1 Викихаамаш",
@@ -80,6 +80,7 @@
 	"wikibase-pageinfo-entity-usage-D": "Цхьаболу хаамаш",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Хаам: $1",
 	"wikibase-pageinfo-entity-usage-T": "Корта",
+	"wikibase-pageinfo-entity-usage-C": "Цхьадолу тӀечӀагӀдарш",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Хаам: $1",
 	"wikibase-pageinfo-entity-usage-X": "Духхера массо хаамаш",
 	"wikibase-pageinfo-entity-usage-O": "Кхин (ДӀахьедар)",
@@ -99,5 +100,11 @@
 	"wikibase-client-data-bridge-dialog-title": "Хийца $1",
 	"wikibase-client-data-bridge-permissions-error-info": "Ма-дарра",
 	"wikibase-client-data-bridge-references-heading": "Билгалдахарш",
-	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Системин чугӀо"
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Системин чугӀо",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "ЧугӀо йа дӀайаздар кхолла",
+	"wikibase-client-data-bridge-license-heading": "Лелор а, лицензи а",
+	"wikibase-client-data-bridge-saving-error-heading": "Хийцамаш Ӏалашбан цало",
+	"wikibase-client-data-bridge-edit-conflict-error-heading": "Тодаран девнаш карийна",
+	"wikibase-client-data-bridge-unknown-error-heading": "Цхьа хӀума нийса дац",
+	"wikibase-client-data-bridge-error-retry-save": "Йуха Ӏалашйе"
 }

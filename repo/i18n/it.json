@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajeje Brazorf",
 			"Albe Albe460",
 			"Alexmar983",
 			"Anto",
@@ -288,7 +289,7 @@
 	"wikibase-itemmerge-failed-modify": "Impossibile unire gli elementi, risolvi tutti i conflitti prima.",
 	"wikibase-itemmerge-no-such-entity": "Elemento non trovato.",
 	"wikibase-itemmerge-cant-load-entity-content": "Errore durante il caricamento dell'elemento.",
-	"wikibase-itemmerge-cant-merge-self": "Impossibile unire un elemento con se stesso.",
+	"wikibase-itemmerge-cant-merge-self": "Impossibile unire un elemento con sé stesso.",
 	"wikibase-tokencheck-missingtoken": "Richiesto token di modifica.",
 	"wikibase-tokencheck-mustposttoken": "La modifica è possibile solo utilizzando richieste POST.",
 	"wikibase-tokencheck-badtoken": "Token di modifica non valido (forse la tua sessione è scaduta).",
@@ -346,7 +347,7 @@
 	"wikibase-redirectentity-fromid": "L'ID da cui reindirizzare",
 	"wikibase-redirectentity-toid": "L'ID a cui reindirizzare",
 	"wikibase-redirectentity-submit": "Reindirizza",
-	"wikibase-redirect-source-and-target-are-the-same": "Non è possibile reindirizzare un'entità a se stessa",
+	"wikibase-redirect-source-and-target-are-the-same": "Non è possibile reindirizzare un'entità a sé stessa",
 	"special-mylanguagefallbackchain": "Catena delle lingue di riserva",
 	"wikibase-mylanguagefallbackchain-text": "La catena delle lingue di riserva che usi per visualizzare le etichette delle entità è mostrata di seguito.",
 	"wikibase-mylanguagefallbackchain-babel": "Puoi modificarla inserendo <nowiki>{{#babel: }}</nowiki> nella {{GENDER:$1|tua}} [[Special:MyPage|pagina utente]].",

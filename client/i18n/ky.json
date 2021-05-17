@@ -1,12 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bosogo",
 			"Growingup",
 			"Janatkg"
 		]
 	},
 	"wikibase-editlinks": "Шилтемелерди оңдоо",
+	"wikibase-editlinkstitle": "Тилдер аралык шилтемелерди түзөтүү",
+	"wikibase-linkitem-addlinks": "Шилтемелерди кошуу",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Жашыруу",
 	"wikibase-rc-hide-wikidata-show": "Көрсөтүү",
+	"wikibase-rc-wikibase-edit-letter": "М",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} оңдоо",
+	"wikibase-otherprojects": "Башка долбоорлордо",
 	"wikibase-sitelinks-sitename-columnheading": "Тил"
 }
