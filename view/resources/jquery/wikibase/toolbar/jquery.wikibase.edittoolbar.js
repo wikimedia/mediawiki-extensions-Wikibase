@@ -140,9 +140,9 @@
 			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( this._buttons, function ( buttonName, $button ) {
 				$button.off( '.' + self.widgetName );
-				wbtooltip = $button.data( 'wbtooltip' );
-				if ( wbtooltip ) {
-					wbtooltip.destroy();
+				var buttonWbtooltip = $button.data( 'wbtooltip' );
+				if ( buttonWbtooltip ) {
+					buttonWbtooltip.destroy();
 				}
 				$button.data( 'wikibase-toolbarbutton' ).destroy();
 			} );
