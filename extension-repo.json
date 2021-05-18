@@ -87,6 +87,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\GetEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\GetEntities::factory",
 			"services": [
+				"LocalServerObjectCache",
 				"SiteLookup",
 				"StatsdDataFactory",
 				"WikibaseRepo.ApiHelperFactory",
@@ -102,6 +103,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\LinkTitles",
 			"factory": "\\Wikibase\\Repo\\Api\\LinkTitles::factory",
 			"services": [
+				"LocalServerObjectCache",
 				"SiteLookup",
 				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.Settings",

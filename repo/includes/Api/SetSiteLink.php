@@ -198,13 +198,13 @@ class SetSiteLink extends ModifyEntity {
 	 * @inheritDoc
 	 */
 	protected function getAllowedParams(): array {
-		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+		$siteIds = $this->siteLinkTargetProvider->getSiteListGlobalIdentifiers( $this->siteLinkGroups );
 
 		return array_merge(
 			parent::getAllowedParams(),
 			[
 				'linksite' => [
-					self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+					self::PARAM_TYPE => $siteIds,
 					self::PARAM_REQUIRED => true,
 				],
 				'linktitle' => [
