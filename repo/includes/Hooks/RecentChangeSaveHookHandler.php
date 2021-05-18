@@ -1,0 +1,80 @@
+<?php
+
+declare( strict_types=1 );
+
+namespace Wikibase\Repo\Hooks;
+
+use CentralIdLookup;
+use RecentChange;
+use User;
+use Wikibase\Lib\Changes\ChangeStore;
+use Wikibase\Lib\Store\Sql\EntityChangeLookup;
+use Wikibase\Repo\Notifications\RepoEntityChange;
+use Wikibase\Repo\Store\Store;
+
+//phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
+/**
+ * Nasty hack to inject information from RC into the change notification saved earlier
+ * by the onRevisionFromEditComplete hook handler.
+ *
+ * @license GPL-2.0-or-later
+ */
+class RecentChangeSaveHookHandler {
+
+	private $changeLookup;
+
+	private $changeStore;
+
+	private $centralIdLookup;
+
+	public function __construct(
+		EntityChangeLookup $changeLookup,
+		ChangeStore $changeStore,
+		?CentralIdLookup $centralIdLookup
+	) {
+		$this->changeLookup = $changeLookup;
+		$this->changeStore = $changeStore;
+		$this->centralIdLookup = $centralIdLookup;
+	}
+
+	public static function factory( Store $store ): self {
+		return new self(
+			$store->getEntityChangeLookup(),
+			$store->getChangeStore(),
+			CentralIdLookup::factoryNonLocal()
+		);
+	}
+
+	public function onRecentChange_save( RecentChange $recentChange ): void {
+		$logType = $recentChange->getAttribute( 'rc_log_type' );
+		$logAction = $recentChange->getAttribute( 'rc_log_action' );
+		$revId = $recentChange->getAttribute( 'rc_this_oldid' );
+
+		if ( $revId <= 0 ) {
+			// If we don't have a revision ID, we have no chance to find the right change to update.
+			// NOTE: As of February 2015, RC entries for undeletion have rc_this_oldid = 0.
+			return;
+		}
+
+		if ( $logType === null || ( $logType === 'delete' && $logAction === 'restore' ) ) {
+			/** @var RepoEntityChange $change */
+			$change = $this->changeLookup->loadByRevisionId( $revId, EntityChangeLookup::FROM_MASTER );
+			'@phan-var RepoEntityChange $change';
+
+			if ( $change ) {
+				if ( $this->centralIdLookup === null ) {
+					$centralUserId = 0;
+				} else {
+					$repoUser = User::newFromIdentity( $recentChange->getPerformerIdentity() );
+					$centralUserId = $this->centralIdLookup->centralIdFromLocalUser(
+						$repoUser
+					);
+				}
+
+				$change->setMetadataFromRC( $recentChange, $centralUserId );
+				$this->changeStore->saveChange( $change );
+			}
+		}
+	}
+
+}
