@@ -35,9 +35,7 @@ describe( 'On mobile', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( {
-			timeout: 20000,
-		} );
+		DataBridgePage.bridge.waitForDisplayed();
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 
 		const newValue = 'newValue';
