@@ -53,6 +53,8 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'rc_last_oldid' => 776,
 			'rc_this_oldid' => 777,
 			'rc_comment' => 'edit summary',
+			'rc_user' => 321,
+			'rc_user_text' => 'some_user',
 		];
 		$recentChange = $this->newStubRecentChangeWithAttributes( $recentChangeAttrs );
 		$entityChange = $this->newEntityChange();

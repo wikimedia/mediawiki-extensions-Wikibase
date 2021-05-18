@@ -142,7 +142,7 @@ class EntityChange extends DiffChange {
 	 * @param int $centralUserId Central user ID, or 0 if unknown or not applicable
 	 *   (see docs/change-propagation.wiki)
 	 */
-	protected function addUserMetadata( $repoUserId, $repoUserText, $centralUserId ) {
+	public function addUserMetadata( int $repoUserId, string $repoUserText, int $centralUserId ) {
 		$this->setFields( [
 			'user_id' => $repoUserId,
 		] );

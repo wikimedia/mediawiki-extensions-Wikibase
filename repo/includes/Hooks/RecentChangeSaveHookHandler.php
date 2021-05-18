@@ -8,6 +8,7 @@ use CentralIdLookup;
 use RecentChange;
 use User;
 use Wikibase\Lib\Changes\ChangeStore;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Notifications\RepoEntityChange;
 use Wikibase\Repo\Store\Store;
@@ -71,10 +72,31 @@ class RecentChangeSaveHookHandler {
 					);
 				}
 
-				$change->setMetadataFromRC( $recentChange, $centralUserId );
+				$this->setChangeMetaData( $change, $recentChange, $centralUserId );
 				$this->changeStore->saveChange( $change );
 			}
 		}
+	}
+
+	private function setChangeMetaData( EntityChange $change, RecentChange $rc, int $centralUserId ): void {
+		$change->setFields( [
+			'revision_id' => $rc->getAttribute( 'rc_this_oldid' ),
+			'time' => $rc->getAttribute( 'rc_timestamp' ),
+		] );
+
+		$change->setMetadata( [
+			'bot' => $rc->getAttribute( 'rc_bot' ),
+			'page_id' => $rc->getAttribute( 'rc_cur_id' ),
+			'rev_id' => $rc->getAttribute( 'rc_this_oldid' ),
+			'parent_id' => $rc->getAttribute( 'rc_last_oldid' ),
+			'comment' => $rc->getAttribute( 'rc_comment' ),
+		] );
+
+		$change->addUserMetadata(
+			$rc->getAttribute( 'rc_user' ),
+			$rc->getAttribute( 'rc_user_text' ),
+			$centralUserId
+		);
 	}
 
 }
