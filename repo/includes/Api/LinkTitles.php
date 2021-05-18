@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use BagOStuff;
 use Site;
 use SiteList;
 use SiteLookup;
@@ -89,6 +90,7 @@ class LinkTitles extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		BagOStuff $siteLinkTargetProviderCache,
 		SiteLookup $siteLookup,
 		ApiHelperFactory $apiHelperFactory,
 		SettingsArray $repoSettings,
@@ -96,7 +98,8 @@ class LinkTitles extends ApiBase {
 	): self {
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$siteLookup,
-			$repoSettings->getSetting( 'specialSiteLinkGroups' )
+			$repoSettings->getSetting( 'specialSiteLinkGroups' ),
+			$siteLinkTargetProviderCache
 		);
 
 		return new self(
@@ -279,11 +282,11 @@ class LinkTitles extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getAllowedParams(): array {
-		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+		$siteIds = $this->siteLinkTargetProvider->getSiteListGlobalIdentifiers( $this->siteLinkGroups );
 
 		return array_merge( parent::getAllowedParams(), [
 			'tosite' => [
-				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				self::PARAM_TYPE => $siteIds,
 				self::PARAM_REQUIRED => true,
 			],
 			'totitle' => [
@@ -291,7 +294,7 @@ class LinkTitles extends ApiBase {
 				self::PARAM_REQUIRED => true,
 			],
 			'fromsite' => [
-				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				self::PARAM_TYPE => $siteIds,
 				self::PARAM_REQUIRED => true,
 			],
 			'fromtitle' => [

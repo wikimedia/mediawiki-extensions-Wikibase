@@ -120,7 +120,8 @@ abstract class ModifyEntity extends ApiBase {
 
 		$this->setServices( new SiteLinkTargetProvider(
 			MediaWikiServices::getInstance()->getSiteLookup(),
-			$settings->getSetting( 'specialSiteLinkGroups' )
+			$settings->getSetting( 'specialSiteLinkGroups' ),
+			MediaWikiServices::getInstance()->getLocalServerObjectCache()
 		) );
 
 		// TODO: use the EntitySavingHelper to load the entity, instead of an EntityRevisionLookup.
@@ -448,11 +449,11 @@ abstract class ModifyEntity extends ApiBase {
 	 * @return array[]
 	 */
 	private function getAllowedParamsForSiteLink(): array {
-		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+		$siteIds = $this->siteLinkTargetProvider->getSiteListGlobalIdentifiers( $this->siteLinkGroups );
 
 		return [
 			'site' => [
-				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				self::PARAM_TYPE => $siteIds,
 			],
 			'title' => [
 				self::PARAM_TYPE => 'string',
