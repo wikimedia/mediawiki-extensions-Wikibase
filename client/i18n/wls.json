@@ -7,5 +7,9 @@
 	"wikibase-dataitem": "ki te {{WBREPONAME}}",
 	"wikibase-editlinks": "Fetogi te 'u no'o",
 	"wikibase-editlinkstitle": "Fetogi te 'u no'o lea",
-	"wikibase-linkitem-addlinks": "No'o fo'ou"
+	"wikibase-linkitem-addlinks": "No'o fo'ou",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Fakahā",
+	"wikibase-rc-wikibase-edit-letter": "F",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} fetogi"
 }
