@@ -2,9 +2,12 @@
 
 namespace Wikibase\Repo\Tests\Notifications;
 
+use CommentStoreComment;
 use Content;
+use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\User\UserIdentityValue;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Title;
@@ -305,6 +308,48 @@ class ChangeNotifierTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $revisionId, $change->getField( 'revision_id' ) );
 		$this->assertSame( $timestamp, $change->getTime() );
 		$this->assertSame( 'wikibase-item~remove', $change->getType() );
+	}
+
+	public function testNotifyOnPageModified_setsChangeMetadata() {
+		$timestamp = '20140523' . '174822';
+		$revId = 12345;
+		$parentRevId = $revId - 1;
+
+		$itemId = new ItemId( 'Q12' );
+		$oldContent = $this->makeItemContent( $itemId );
+		$parent = $this->makeRevision( $oldContent, $this->makeUser( 'ChangeNotifierTestUser' ), $parentRevId, $timestamp );
+
+		$content = $this->makeItemContent( $itemId );
+		/** @var Item $item */
+		$item = $content->getEntity();
+		$item->setLabel( 'en', 'Foo' );
+		$revRecord = new MutableRevisionRecord( Title::newFromTextThrow( 'Required workaround' ) );
+		$revRecord->setComment( CommentStoreComment::newUnsavedComment( 'Test!' ) );
+		$revRecord->setTimestamp( $timestamp );
+		$revRecord->setId( $revId );
+		$revRecord->setParentId( $parentRevId );
+		$revRecord->setUser( new UserIdentityValue( 7, 'Mr. Kittens' ) );
+		$revRecord->setPageId( 6 );
+		$revRecord->setContent( SlotRecord::MAIN, $content );
+
+		$notifier = $this->getChangeNotifier();
+		$entityChange = $notifier->notifyOnPageModified(
+			$revRecord,
+			$parent
+		);
+
+		$this->assertSame( $revId, $entityChange->getField( 'revision_id' ), 'revision_id' );
+		$this->assertSame( 7, $entityChange->getField( 'user_id' ), 'user_id' );
+		$this->assertSame( $itemId->getSerialization(), $entityChange->getObjectId(), 'object_id' );
+		$this->assertSame( $timestamp, $entityChange->getTime(), 'timestamp' );
+		$this->assertSame( 'Test!', $entityChange->getComment(), 'comment' );
+
+		$metadata = $entityChange->getMetadata();
+		$this->assertSame( -7, $metadata['central_user_id'], 'central_user_id' );
+		$this->assertSame( $revId, $metadata['rev_id'], 'rev_id' );
+		$this->assertSame( $parentRevId, $metadata['parent_id'], 'parent_id' );
+		$this->assertSame( 6, $metadata['page_id'], 'page_id' );
+		$this->assertSame( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
 	}
 
 }
