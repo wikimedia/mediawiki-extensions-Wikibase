@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use BagOStuff;
 use IBufferingStatsdDataFactory;
 use SiteLookup;
 use Wikibase\DataModel\Entity\EntityId;
@@ -135,6 +136,7 @@ class GetEntities extends ApiBase {
 	public static function factory(
 		ApiMain $apiMain,
 		string $moduleName,
+		BagOStuff $siteLinkTargetProviderCache,
 		SiteLookup $siteLookup,
 		IBufferingStatsdDataFactory $stats,
 		ApiHelperFactory $apiHelperFactory,
@@ -147,7 +149,8 @@ class GetEntities extends ApiBase {
 	): self {
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$siteLookup,
-			$repoSettings->getSetting( 'specialSiteLinkGroups' )
+			$repoSettings->getSetting( 'specialSiteLinkGroups' ),
+			$siteLinkTargetProviderCache
 		);
 
 		return new self(
@@ -392,7 +395,7 @@ class GetEntities extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getAllowedParams(): array {
-		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+		$siteIds = $this->siteLinkTargetProvider->getSiteListGlobalIdentifiers( $this->siteLinkGroups );
 
 		return array_merge( parent::getAllowedParams(), [
 			'ids' => [
@@ -400,7 +403,7 @@ class GetEntities extends ApiBase {
 				self::PARAM_ISMULTI => true,
 			],
 			'sites' => [
-				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				self::PARAM_TYPE => $siteIds,
 				self::PARAM_ISMULTI => true,
 				self::PARAM_ALLOW_DUPLICATES => true
 			],
@@ -433,7 +436,7 @@ class GetEntities extends ApiBase {
 				self::PARAM_DFLT => false
 			],
 			'sitefilter' => [
-				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				self::PARAM_TYPE => $siteIds,
 				self::PARAM_ISMULTI => true,
 				self::PARAM_ALLOW_DUPLICATES => true
 			],
