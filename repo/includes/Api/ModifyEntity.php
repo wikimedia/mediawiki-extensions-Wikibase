@@ -8,7 +8,6 @@ use ApiBase;
 use ApiMain;
 use ApiUsageException;
 use LogicException;
-use MediaWiki\MediaWikiServices;
 use MWContentSerializationException;
 use Status;
 use User;
@@ -118,11 +117,7 @@ abstract class ModifyEntity extends ApiBase {
 
 		$this->entitySavingHelper->setEntityIdParam( 'id' );
 
-		$this->setServices( new SiteLinkTargetProvider(
-			MediaWikiServices::getInstance()->getSiteLookup(),
-			$settings->getSetting( 'specialSiteLinkGroups' ),
-			MediaWikiServices::getInstance()->getLocalServerObjectCache()
-		) );
+		$this->setServices( WikibaseRepo::getSiteLinkTargetProvider() );
 
 		// TODO: use the EntitySavingHelper to load the entity, instead of an EntityRevisionLookup.
 		$this->revisionLookup = WikibaseRepo::getStore()->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED );

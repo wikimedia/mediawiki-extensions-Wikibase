@@ -6,10 +6,8 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
-use BagOStuff;
 use Site;
 use SiteList;
-use SiteLookup;
 use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
@@ -90,17 +88,11 @@ class LinkTitles extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
-		BagOStuff $siteLinkTargetProviderCache,
-		SiteLookup $siteLookup,
 		ApiHelperFactory $apiHelperFactory,
 		SettingsArray $repoSettings,
+		SiteLinkTargetProvider $siteLinkTargetProvider,
 		Store $store
 	): self {
-		$siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$siteLookup,
-			$repoSettings->getSetting( 'specialSiteLinkGroups' ),
-			$siteLinkTargetProviderCache
-		);
 
 		return new self(
 			$mainModule,

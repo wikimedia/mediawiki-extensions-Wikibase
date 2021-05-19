@@ -359,6 +359,13 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.SiteLinkBadgeChangeOpSerializationValidator' );
 	}
 
+	public static function getSiteLinkTargetProvider(
+		ContainerInterface $services = null
+	): SiteLinkTargetProvider {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.SiteLinkTargetProvider' );
+	}
+
 	public static function getEntityChangeOpProvider( ContainerInterface $services = null ): EntityChangeOpProvider {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntityChangeOpProvider' );
