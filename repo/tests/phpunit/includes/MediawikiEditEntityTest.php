@@ -105,7 +105,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			$expects = $this->any();
 		}
 		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
-			->setMethods( [ 'run' ] )
+			->onlyMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
 		$runner->expects( $expects )

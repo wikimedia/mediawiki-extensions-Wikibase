@@ -219,51 +219,40 @@ class DateFormatParser extends StringValueParser {
 				case 'a':
 				case 'g':
 				case 'h':
-
 				// Full, formatted dates
 				case 'c':
 				case 'r':
 				case 'U':
-
 				// Day of the week
 				case 'D':
 				case 'l':
 				case 'N':
 				case 'w':
-
 				// Timezone
 				case 'e':
 				case 'O':
 				case 'P':
 				case 'T':
 				case 'Z':
-
 				// Daylight saving time ("1" if true)
 				case 'I':
-
 				// Leap year ("1" if true)
 				case 'L':
-
 				// Number of days in the current month
 				case 't':
 				case 'xit':
 				case 'xjt':
-
 				// Week number
 				case 'W':
-
 				// "Hebrew" and "Roman" modifiers
 				case 'xh':
 				case 'xr':
-
 				// 2-digit year
 				case 'y':
 				case 'xiy':
-
 				// Day of the year
 				case 'z':
 				case 'xiz':
-
 				// Day, month and year in incompatible calendar models (Hebrew, Iranian, and others)
 				case 'xiF':
 				case 'xij':

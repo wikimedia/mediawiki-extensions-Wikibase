@@ -330,7 +330,7 @@ class DescriptionTest extends TestCase {
 
 		$module = $this->getMockBuilder( Description::class )
 			->disableOriginalConstructor()
-			->setMethods( [ 'getParameter', 'getPageSet', 'getMain',
+			->onlyMethods( [ 'getParameter', 'getPageSet', 'getMain',
 							'setContinueEnumParameter', 'getResult' ] )
 			->getMock();
 		$modulePrivate = TestingAccessWrapper::newFromObject( $module );

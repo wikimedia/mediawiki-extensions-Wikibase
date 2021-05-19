@@ -255,7 +255,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 				new HashSiteStore( $sites ),
 				$cache
 			] )
-			->setMethods( [ 'makeScript' ] )
+			->onlyMethods( [ 'makeScript' ] )
 			->getMock();
 	}
 

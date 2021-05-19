@@ -80,7 +80,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function getMockParserOutput( $num ) {
 		$mockParser = $this->getMockBuilder( ParserOutput::class )
-			->setMethods( [ 'addTrackingCategory' ] )
+			->onlyMethods( [ 'addTrackingCategory' ] )
 			->getMock();
 		$mockParser->expects( $this->exactly( $num ) )
 			->method( 'addTrackingCategory' );

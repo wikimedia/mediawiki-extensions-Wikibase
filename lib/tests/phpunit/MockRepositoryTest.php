@@ -703,7 +703,7 @@ class MockRepositoryTest extends TestCase {
 
 	private function getUserMock(): User {
 		$u = $this->getMockBuilder( User::class )
-			->setMethods( [ 'getName' ] )
+			->onlyMethods( [ 'getName' ] )
 			->getMock();
 		$u->method( 'getName' )->willReturn( __CLASS__ );
 		return $u;

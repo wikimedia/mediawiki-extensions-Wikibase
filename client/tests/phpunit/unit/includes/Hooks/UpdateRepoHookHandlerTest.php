@@ -193,7 +193,7 @@ class UpdateRepoHookHandlerTest extends TestCase {
 
 		$jobQueue = $this->getMockBuilder( JobQueue::class )
 			->disableOriginalConstructor()
-			->setMethods( [ 'supportsDelayedJobs' ] )
+			->onlyMethods( [ 'supportsDelayedJobs' ] )
 			->getMockForAbstractClass();
 		$jobQueue->method( 'supportsDelayedJobs' )
 			->willReturn( true );
