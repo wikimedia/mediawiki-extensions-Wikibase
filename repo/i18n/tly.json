@@ -7,8 +7,13 @@
 		]
 	},
 	"wikibase-edit": "сәрост карде",
+	"wikibase-save": "огәтеј",
 	"wikibase-cancel": "ləğv karde",
 	"wikibase-add": "әловәкә",
+	"wikibase-save-inprogress": "Огәтејдә...",
+	"wikibase-remove-inprogress": "Моледә...",
+	"wikibase-entitytermsforlanguagelistview-label": "Ном",
+	"wikibase-entitytermsforlanguagelistview-language": "Зывон",
 	"wikibase-label-empty": "Ном ни",
 	"wikibase-description-empty": "Ном-нышон нывыштә быәни",
 	"wikibase-sitelinks-special": "Ҹо сајтон",

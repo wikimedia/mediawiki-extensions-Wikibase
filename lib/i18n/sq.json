@@ -12,6 +12,7 @@
 	"wikibase-deletedentity-property": "Fshiu Veti",
 	"wikibase-deletedentity-query": "Fshiu kërkim",
 	"wikibase-error-unexpected": "Gabim: $1.",
+	"wikibase-error-unknown": "Ndodhi një gabim.",
 	"wikibase-error-save-generic": "S’u bë dot ruajtje, për shkak të një gabimi.",
 	"wikibase-error-remove-generic": "S’u bë dot heqje, për shkak të një gabimi.",
 	"wikibase-error-save-timeout": "Kemi vështirësi teknike. Ju lutemi, riprovoni.",
@@ -137,6 +138,6 @@
 	"wikibase-property-summary-wbeditentity-create": "Krijoi një Veti të re",
 	"wikibase-property-summary-wbeditentity-create-property": "Krijoi një Veti të re",
 	"wikibase-property-summary-wbeditentity-update": "Ndryshoi një Veti",
-	"wikibase-property-summary-wbeditentity-override": "Pastroi një Veti",
+	"wikibase-property-summary-wbeditentity-override": "Spastroi një Veti",
 	"wikibase-property-summary-special-create-property": "Krijoi një Veti [$2] me {{PLURAL:$1|vlerë|vlera}}"
 }
