@@ -194,6 +194,7 @@ use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
+use Wikibase\Repo\Notifications\WikiPageActionEntityChangeFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
@@ -322,9 +323,11 @@ return [
 		}
 
 		return new ChangeNotifier(
-			WikibaseRepo::getEntityChangeFactory( $services ),
-			$transmitters,
-			CentralIdLookup::factoryNonLocal() // TODO inject (T265767)
+			new WikiPageActionEntityChangeFactory(
+				WikibaseRepo::getEntityChangeFactory( $services ),
+				CentralIdLookup::factoryNonLocal() // TODO inject (T265767)
+			),
+			$transmitters
 		);
 	},
 
