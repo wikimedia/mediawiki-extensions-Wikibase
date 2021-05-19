@@ -38,9 +38,7 @@ describe( 'bail-out', () => {
 		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 		DataBridgePage.openAppOnPage( title );
-		DataBridgePage.error.waitForDisplayed( {
-			timeout: 20000,
-		} );
+		DataBridgePage.error.waitForDisplayed();
 
 		assert.ok( /\burl\b/.test( DataBridgePage.error.getText() ) );
 		testBailoutActions();

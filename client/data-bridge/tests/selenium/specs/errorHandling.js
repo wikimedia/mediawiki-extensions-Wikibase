@@ -26,9 +26,7 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.error.waitForDisplayed( {
-			timeout: 20000,
-		} );
+		DataBridgePage.error.waitForDisplayed();
 		assert.ok( DataBridgePage.error.isDisplayed() );
 		assert.ok( DataBridgePage.showsErrorUnknown() );
 
@@ -63,17 +61,13 @@ describe( 'App', () => {
 
 		NetworkUtil.disableNetwork();
 		DataBridgePage.launchApp();
-		DataBridgePage.error.waitForDisplayed( {
-			timeout: 20000,
-		} );
+		DataBridgePage.error.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
 
 		assert.ok( DataBridgePage.showsErrorUnknown() );
 
 		NetworkUtil.enableNetwork();
 		DataBridgePage.errorUnknownRelaunch.click();
-		DataBridgePage.app.waitForDisplayed( {
-			timeout: 20000,
-		} );
+		DataBridgePage.app.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
 		WarningAnonymousEdit.dismiss();
 		DataBridgePage.bridge.waitForDisplayed();
 	} );
@@ -103,9 +97,7 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( {
-			timeout: 20000,
-		} );
+		DataBridgePage.bridge.waitForDisplayed();
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 
 		const newValue = 'newValue';
@@ -115,7 +107,7 @@ describe( 'App', () => {
 
 		// show License
 		DataBridgePage.saveButton.click();
-		DataBridgePage.licensePopup.waitForDisplayed();
+		DataBridgePage.licensePopup.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
 
 		// lose internet connection
 		NetworkUtil.disableNetwork();
@@ -124,7 +116,7 @@ describe( 'App', () => {
 		DataBridgePage.saveButton.click();
 
 		// show ErrorSaving screen
-		DataBridgePage.error.waitForDisplayed();
+		DataBridgePage.error.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
 
 		assert.ok( DataBridgePage.showsErrorSaving() );
 
@@ -159,9 +151,7 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( {
-			timeout: 20000,
-		} );
+		DataBridgePage.bridge.waitForDisplayed();
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 
 		const newValue = 'newValue';
@@ -171,7 +161,7 @@ describe( 'App', () => {
 
 		// show License
 		DataBridgePage.saveButton.click();
-		DataBridgePage.licensePopup.waitForDisplayed();
+		DataBridgePage.licensePopup.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
 
 		// lose internet connection
 		NetworkUtil.disableNetwork();
@@ -224,9 +214,7 @@ describe( 'App', () => {
 			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.openAppOnPage( title );
-			DataBridgePage.bridge.waitForDisplayed( {
-				timeout: 20000,
-			} );
+			DataBridgePage.bridge.waitForDisplayed();
 
 			const newValue = 'newValue';
 			DomUtil.setValue( DataBridgePage.value, newValue );
@@ -234,7 +222,7 @@ describe( 'App', () => {
 			DataBridgePage.editDecision( 'replace' ).click();
 
 			DataBridgePage.saveButton.click();
-			DataBridgePage.licensePopup.waitForDisplayed();
+			DataBridgePage.licensePopup.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
 
 			// log out
 			browser.deleteCookies();
@@ -250,7 +238,7 @@ describe( 'App', () => {
 			// go back, try again
 			ErrorSavingAssertUser.clickBackButton();
 			DataBridgePage.saveButton.click();
-			DataBridgePage.licensePopup.waitForDisplayed();
+			DataBridgePage.licensePopup.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
 			DataBridgePage.saveButton.click();
 			DataBridgePage.error.waitForDisplayed();
 
@@ -353,9 +341,7 @@ describe( 'App', () => {
 			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.openAppOnPage( title );
-			DataBridgePage.bridge.waitForDisplayed( {
-				timeout: 20000,
-			} );
+			DataBridgePage.bridge.waitForDisplayed();
 
 			const newValue = 'newValue';
 			DomUtil.setValue( DataBridgePage.value, newValue );
@@ -363,7 +349,7 @@ describe( 'App', () => {
 			DataBridgePage.editDecision( 'replace' ).click();
 
 			DataBridgePage.saveButton.click();
-			DataBridgePage.licensePopup.waitForDisplayed();
+			DataBridgePage.licensePopup.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
 
 			// clear the item, removing the target statement
 			browser.call( () => Api.bot().then( ( bot ) => bot.request( {

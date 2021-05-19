@@ -75,9 +75,7 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( {
-			timeout: 20000,
-		} );
+		DataBridgePage.bridge.waitForDisplayed();
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 		assert.strictEqual( DataBridgePage.value.getValue(), stringPropertyExampleValue );
 
@@ -104,12 +102,12 @@ describe( 'App', () => {
 		browser.switchWindow( title );
 
 		DataBridgePage.app.waitForDisplayed( {
-			timeout: 5000,
+			timeout: browser.config.nonApiTimeout,
 			reverse: true,
 			timeoutMsg: 'App is still being displayed after clicking the save button',
 		} );
 		DataBridgePage.app.waitForExist( {
-			timeout: 5000,
+			timeout: browser.config.nonApiTimeout,
 			reverse: true,
 			timeoutMsg: 'App still exists in the DOM after clicking the save button',
 		} );
@@ -156,9 +154,7 @@ describe( 'App', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		DataBridgePage.bridge.waitForDisplayed( {
-			timeout: 20000,
-		} );
+		DataBridgePage.bridge.waitForDisplayed();
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 
 		const newValue = 'newValue';
@@ -189,7 +185,7 @@ describe( 'App', () => {
 		DataBridgePage.closeButton.click();
 
 		DataBridgePage.app.waitForDisplayed( {
-			timeout: 5000,
+			timeout: browser.config.nonApiTimeout,
 			reverse: true,
 			timeoutMsg: 'App is still being displayed after clicking the save button',
 		} );
