@@ -35,7 +35,7 @@ describe( 'init', () => {
 
 		DataBridgePage.openAppOnPage( title );
 
-		assert.ok( DataBridgePage.app.isDisplayed( 20000 ) );
+		assert.ok( DataBridgePage.app.isDisplayed() );
 	} );
 
 	it( 'indicates loading while app gathers its data', () => {
