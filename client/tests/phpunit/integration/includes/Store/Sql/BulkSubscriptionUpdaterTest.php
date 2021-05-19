@@ -194,12 +194,12 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function truncateEntityUsage() {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 		$db->delete( EntityUsageTable::DEFAULT_TABLE_NAME, '*' );
 	}
 
 	private function putEntityUsage( array $entries ) {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 
 		$db->startAtomic( __METHOD__ );
 
@@ -218,12 +218,12 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function truncateSubscriptions() {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 		$db->delete( 'wb_changes_subscription', '*' );
 	}
 
 	private function putSubscriptions( array $entries ) {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 
 		$db->startAtomic( __METHOD__ );
 
@@ -240,7 +240,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function fetchAllSubscriptions() {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 
 		$res = $db->select( 'wb_changes_subscription', "*", '', __METHOD__ );
 

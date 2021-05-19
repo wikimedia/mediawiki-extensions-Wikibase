@@ -105,12 +105,12 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function truncateItemPerSite() {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 		$db->delete( 'wb_items_per_site', '*' );
 	}
 
 	private function putItemPerSite( array $entries ) {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 
 		$db->startAtomic( __METHOD__ );
 
@@ -127,7 +127,7 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function fetchAllSubscriptions() {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 
 		$res = $db->select( self::TABLE_NAME, "*", '', __METHOD__ );
 

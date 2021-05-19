@@ -196,7 +196,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 				// Surprisingly it's not too rare not to happen in production: T247553
 
 				$dbw = $this->getLoadBalancer()->getConnection(
-					ILoadBalancer::DB_MASTER,
+					ILoadBalancer::DB_PRIMARY,
 					[],
 					false,
 					ILoadBalancer::CONN_TRX_AUTOCOMMIT
@@ -268,7 +268,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	}
 
 	private function getDbMaster() {
-		return $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_MASTER );
+		return $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_PRIMARY );
 	}
 
 	/**

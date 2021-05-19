@@ -29,7 +29,7 @@ class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 		if ( !$setUp ) {
 			$setUp = true;
 
-			$dbw = wfGetDB( DB_MASTER );
+			$dbw = wfGetDB( DB_PRIMARY );
 
 			$dbw->delete( 'page', '*' );
 			$dbw->delete( 'page_props', '*' );

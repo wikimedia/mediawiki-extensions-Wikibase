@@ -241,7 +241,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @return IDatabase A connection to the repo's master database
 	 */
 	private function getRepoMaster(): IDatabase {
-		return $this->getRepoLB()->getConnectionRef( DB_MASTER, [], $this->repoDB );
+		return $this->getRepoLB()->getConnectionRef( DB_PRIMARY, [], $this->repoDB );
 	}
 
 	/**

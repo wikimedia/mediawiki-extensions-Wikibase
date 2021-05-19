@@ -38,7 +38,7 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 
 		if ( $entity instanceof Item ) {
 			// TODO: do not use global state
-			$db = wfGetDB( DB_MASTER );
+			$db = wfGetDB( DB_PRIMARY );
 
 			$conflicts = $this->siteLinkConflictLookup->getConflictsForItem( $entity, $db );
 

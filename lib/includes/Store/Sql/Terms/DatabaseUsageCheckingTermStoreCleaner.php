@@ -38,7 +38,7 @@ class DatabaseUsageCheckingTermStoreCleaner implements TermStoreCleaner {
 	 * @param array $termInLangIds
 	 */
 	public function cleanTermInLangIds( array $termInLangIds ): void {
-		$dbw = $this->loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
+		$dbw = $this->loadBalancer->getConnection( ILoadBalancer::DB_PRIMARY );
 		$dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
 
 		$dbw->startAtomic( __METHOD__ );

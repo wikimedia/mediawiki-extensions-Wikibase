@@ -80,7 +80,7 @@ class SqlSubscriptionManagerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function fetchAllSubscriptions() {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 
 		$res = $db->select( 'wb_changes_subscription', "*", '', __METHOD__ );
 

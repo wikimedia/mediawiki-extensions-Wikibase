@@ -48,7 +48,7 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetEntityIdForTitle() {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 
 		$title22 = $this->makeTitle( 22 );
 		$title99 = $this->makeTitle( 99 );
@@ -65,7 +65,7 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetEntityIds() {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 
 		$title11 = $this->makeTitle( 11 );
 		$title22 = $this->makeTitle( 22 );

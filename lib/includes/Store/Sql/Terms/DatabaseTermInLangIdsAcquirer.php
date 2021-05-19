@@ -381,7 +381,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	private function restoreCleanedUpIds( array $termsArray, array $termInLangIds = [] ) {
 		$uniqueTermIds = array_values( array_unique( $termInLangIds ) );
 
-		$dbMaster = $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_MASTER );
+		$dbMaster = $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_PRIMARY );
 		$persistedTermIds = $dbMaster->selectFieldValues(
 			'wbt_term_in_lang',
 			'wbtl_id',

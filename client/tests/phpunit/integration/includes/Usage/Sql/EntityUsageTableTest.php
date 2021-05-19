@@ -56,7 +56,7 @@ class EntityUsageTableTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getEntityUsageTable( $batchSize = 1000 ) {
-		return new EntityUsageTable( new ItemIdParser(), wfGetDB( DB_MASTER ), $batchSize );
+		return new EntityUsageTable( new ItemIdParser(), wfGetDB( DB_PRIMARY ), $batchSize );
 	}
 
 	public function testAddUsages() {

@@ -50,7 +50,7 @@ abstract class DatabaseTermStoreWriterBase {
 	}
 
 	private function getDbw(): IDatabase {
-		return $this->loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
+		return $this->loadBalancer->getConnection( ILoadBalancer::DB_PRIMARY );
 	}
 
 	protected function delete( Int32EntityId $entityId ): void {

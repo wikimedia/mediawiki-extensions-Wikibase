@@ -42,7 +42,7 @@ class LockManagerSqlChangeDispatchCoordinatorTest extends MediaWikiIntegrationTe
 	}
 
 	private function resetChangesTable( $id = 23 ) {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 
 		$row = [
 			'change_id' => $id,

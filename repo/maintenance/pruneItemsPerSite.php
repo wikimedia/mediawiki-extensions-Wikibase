@@ -60,7 +60,7 @@ class PruneItemsPerSite extends Maintenance {
 		int $selectBatchSize
 	) {
 		$dbr = $loadBalancerFactory->getMainLB()->getConnection( DB_REPLICA, [ 'vslow' ] );
-		$dbw = $loadBalancerFactory->getMainLB()->getConnection( DB_MASTER );
+		$dbw = $loadBalancerFactory->getMainLB()->getConnection( DB_PRIMARY );
 
 		$maxIpsRowId = (int)$dbr->selectField( 'wb_items_per_site', 'MAX(ips_row_id)', '', __METHOD__ );
 		// Add 1%, but at least 50, to the maxIpsRowId to use, for items created during the script run
