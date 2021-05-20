@@ -75,7 +75,14 @@ class EntityChange extends DiffChange {
 		$info = $this->getInfo( $cache );
 
 		if ( array_key_exists( 'metadata', $info ) ) {
-			return $info['metadata'];
+			return array_merge(
+				[ // these may be expected to be set by consuming code
+					'page_id' => 0,
+					'rev_id' => 0,
+					'parent_id' => 0,
+				],
+				$info['metadata']
+			);
 		}
 
 		return [];
