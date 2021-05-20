@@ -9,9 +9,9 @@ use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use RecentChange;
 use Wikibase\Lib\Changes\ChangeStore;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Hooks\RecentChangeSaveHookHandler;
-use Wikibase\Repo\Notifications\RepoEntityChange;
 
 /**
  * @covers \Wikibase\Repo\Hooks\RecentChangeSaveHookHandler
@@ -126,8 +126,8 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		return $rc;
 	}
 
-	private function newEntityChange(): RepoEntityChange {
-		return new RepoEntityChange( [ 'type' => 'wikibase-someEntity~update' ] );
+	private function newEntityChange(): EntityChange {
+		return new EntityChange( [ 'type' => 'wikibase-someEntity~update' ] );
 	}
 
 }

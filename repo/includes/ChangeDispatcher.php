@@ -14,7 +14,6 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Store\ChunkAccess;
 use Wikibase\Repo\Notifications\ChangeNotificationSender;
-use Wikibase\Repo\Notifications\RepoItemChange;
 use Wikibase\Repo\Store\ChangeDispatchCoordinator;
 use Wikibase\Repo\Store\SubscriptionLookup;
 
@@ -357,7 +356,7 @@ class ChangeDispatcher {
 	 * @return bool
 	 */
 	private function isRelevantChange( Change $change, $siteID ) {
-		if ( $change instanceof ItemChange || $change instanceof RepoItemChange ) {
+		if ( $change instanceof ItemChange ) {
 			$siteLinkDiff = $change->getSiteLinkDiff();
 
 			if ( isset( $siteLinkDiff[ $siteID ] ) ) {

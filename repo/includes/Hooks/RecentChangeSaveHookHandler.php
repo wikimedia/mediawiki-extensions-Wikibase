@@ -10,7 +10,6 @@ use User;
 use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
-use Wikibase\Repo\Notifications\RepoEntityChange;
 use Wikibase\Repo\Store\Store;
 
 //phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
@@ -58,9 +57,7 @@ class RecentChangeSaveHookHandler {
 		}
 
 		if ( $logType === null || ( $logType === 'delete' && $logAction === 'restore' ) ) {
-			/** @var RepoEntityChange $change */
 			$change = $this->changeLookup->loadByRevisionId( $revId, EntityChangeLookup::FROM_MASTER );
-			'@phan-var RepoEntityChange $change';
 
 			if ( $change ) {
 				if ( $this->centralIdLookup === null ) {
