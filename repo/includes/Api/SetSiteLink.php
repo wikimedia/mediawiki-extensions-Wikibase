@@ -18,6 +18,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\Repo\SiteLinkTargetProvider;
 
 /**
  * API module to associate a page on a site with a Wikibase entity or remove an already made such association.
@@ -37,17 +38,24 @@ class SetSiteLink extends ModifyEntity {
 	 */
 	private $badgeSerializationValidator;
 
+	/**
+	 * @var SiteLinkTargetProvider
+	 */
+	protected $siteLinkTargetProvider;
+
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
 		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
 		SiteLinkBadgeChangeOpSerializationValidator $badgeSerializationValidator,
+		SiteLinkTargetProvider $siteLinkTargetProvider,
 		bool $federatedPropertiesEnabled
 	) {
 		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 
 		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
 		$this->badgeSerializationValidator = $badgeSerializationValidator;
+		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 	}
 
 	public static function factory(
@@ -55,7 +63,8 @@ class SetSiteLink extends ModifyEntity {
 		string $moduleName,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		SettingsArray $repoSettings,
-		SiteLinkBadgeChangeOpSerializationValidator $siteLinkBadgeChangeOpSerializationValidator
+		SiteLinkBadgeChangeOpSerializationValidator $siteLinkBadgeChangeOpSerializationValidator,
+		SiteLinkTargetProvider $siteLinkTargetProvider
 	): self {
 
 		return new self(
@@ -64,6 +73,7 @@ class SetSiteLink extends ModifyEntity {
 			$changeOpFactoryProvider
 				->getSiteLinkChangeOpFactory(),
 			$siteLinkBadgeChangeOpSerializationValidator,
+			$siteLinkTargetProvider,
 			$repoSettings->getSetting( 'federatedPropertiesEnabled' )
 		);
 	}
@@ -198,7 +208,7 @@ class SetSiteLink extends ModifyEntity {
 	 * @inheritDoc
 	 */
 	protected function getAllowedParams(): array {
-		$siteIds = $this->siteLinkTargetProvider->getSiteListGlobalIdentifiers( $this->siteLinkGroups );
+		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getList( $this->siteLinkGroups );
 
 		return array_merge(
 			parent::getAllowedParams(),

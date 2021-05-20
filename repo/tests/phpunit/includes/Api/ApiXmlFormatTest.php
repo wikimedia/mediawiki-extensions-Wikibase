@@ -8,6 +8,7 @@ use DOMXPath;
 use HashSiteStore;
 use MediaWiki\MediaWikiServices;
 use TestSites;
+use Wikibase\Lib\Tests\FakeCache;
 use Wikibase\Repo\Api\EditEntity;
 use Wikibase\Repo\Api\GetClaims;
 use Wikibase\Repo\Api\GetEntities;
@@ -18,6 +19,7 @@ use Wikibase\Repo\Api\SetLabel;
 use Wikibase\Repo\Api\SetQualifier;
 use Wikibase\Repo\Api\SetReference;
 use Wikibase\Repo\Api\SetSiteLink;
+use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\SiteLinkTargetProvider;
 
 /**
@@ -184,11 +186,12 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'linktitle' => 'Japan',
 			// TODO: Test badges in output.
 		];
-
+		$siteTargetProvider = new SiteLinkTargetProvider( new HashSiteStore( TestSites::getSites() ), [] );
+		$this->setService( 'WikibaseRepo.SiteLinkTargetProvider', $siteTargetProvider );
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( SetSiteLink::class, 'wbsetsitelink', $params, true );
-		$siteTargetProvider = new SiteLinkTargetProvider( new HashSiteStore( TestSites::getSites() ), [] );
-		$module->setServices( $siteTargetProvider );
+		$siteLinkGlobalIdentifiersProvider = new SiteLinkGlobalIdentifiersProvider( $siteTargetProvider, new FakeCache() );
+		$module->setServices( $siteLinkGlobalIdentifiersProvider );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 		//If a URL has been added just remove it as it is not always present
@@ -205,7 +208,8 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( SetSiteLink::class, 'wbsetsitelink', $params, true );
-		$module->setServices( $siteTargetProvider );
+		$siteLinkGlobalIdentifiersProvider = new SiteLinkGlobalIdentifiersProvider( $siteTargetProvider, new FakeCache() );
+		$module->setServices( $siteLinkGlobalIdentifiersProvider );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
