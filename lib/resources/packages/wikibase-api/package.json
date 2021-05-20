@@ -24,7 +24,7 @@
 		"test": "grunt test"
 	},
 	"dependencies": {
-		"jquery": "^3.2.1",
+		"jquery": "3.6.0",
 		"wikibase-data-values": "^0.10.0"
 	},
 	"devDependencies": {
