@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>QUnit Tests</title>
+<link rel="stylesheet" href="../node_modules/qunit/qunit/qunit.css">
+<script src="../node_modules/qunit/qunit/qunit.js"></script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
+
+	<!-- Vendor -->
+	<script src="../node_modules/jquery/dist/jquery.js"></script>
+	<script src="../node_modules/sinon/pkg/sinon.js"></script>
+
+	<!-- Source -->
+	<script src="../src/namespace.js"></script>
+	<script src="../src/RepoApi.js"></script>
+	<script src="../src/RepoApiError.js"></script>
+	<!-- Tests -->
+	<script src="config.test.js"></script>
+	<script src="mediaWiki.mock.js"></script>
+	<script src="RepoApi.tests.js"></script>
+	<script src="RepoApiError.tests.js"></script>
+</body>
+</html>

@@ -1,21 +1,21 @@
 {
 	"root": true,
 	"extends": [
-		"wikimedia/client",
+		"wikimedia/client-es5",
+		"wikimedia/mediawiki",
 		"wikimedia/jquery"
 	],
 	"globals": {
-		"mw": "readonly",
-		"module": "readonly",
-		"util": "readonly",
 		"wikibase": "readonly"
 	},
 	"rules": {
 		"max-len": "off",
 		"no-underscore-dangle": "off",
 		"no-use-before-define": [ "error", "nofunc" ],
-		"one-var": "off",
 		"operator-linebreak": "off",
-		"vars-on-top": "off"
+		"jsdoc/check-alignment": "off",
+		"jsdoc/newline-after-description": "off",
+		"jsdoc/require-returns": "off",
+		"jsdoc/require-returns-check": "off"
 	}
 }
