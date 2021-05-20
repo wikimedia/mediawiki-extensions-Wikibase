@@ -250,7 +250,7 @@ class ItemContentTest extends EntityContentTestCase {
 
 		$itemContent = $this->getMockBuilder( ItemContent::class )
 			->setConstructorArgs( [ new EntityInstanceHolder( $item ) ] )
-			->setMethods( [ 'getContentHandler' ] )
+			->onlyMethods( [ 'getContentHandler' ] )
 			->getMock();
 
 		$handler = $this->getItemHandler();

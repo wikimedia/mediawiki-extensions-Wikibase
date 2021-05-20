@@ -152,7 +152,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 					true
 				]
 			)
-			->setMethods( [
+			->onlyMethods( [
 					'hasWikibaseChangesEnabled',
 					'addWikibaseConditions'
 				] )

@@ -113,7 +113,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getMockEditFitlerHookRunner() {
 		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
-			->setMethods( [ 'run' ] )
+			->onlyMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
 		$runner->method( 'run' )

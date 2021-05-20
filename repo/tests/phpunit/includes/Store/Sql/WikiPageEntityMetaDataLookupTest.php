@@ -162,7 +162,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getLaggedDatabase( IDatabase $realDB, $selectCount ) {
 		$db = $this->getMockBuilder( IDatabase::class )
-			->setMethods( [ 'select', 'selectRow' ] )
+			->onlyMethods( [ 'select', 'selectRow' ] )
 			->setProxyTarget( $realDB )
 			->getMockForAbstractClass();
 

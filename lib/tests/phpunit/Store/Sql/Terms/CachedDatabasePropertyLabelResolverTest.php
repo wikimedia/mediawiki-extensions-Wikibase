@@ -152,9 +152,11 @@ class CachedDatabasePropertyLabelResolverTest extends MediaWikiIntegrationTestCa
 	private function getMockedDatabaseTermIdsResolver( $termsArrayPerPropertyId ) {
 		$dbTermIdsResolver = $this->getMockBuilder( DatabaseTermInLangIdsResolver::class )
 						   ->disableOriginalConstructor()
-						   ->setMethods( [
+						   ->addMethods( [
 							   'resolveTermIds',
 							   'resolveGroupedTermIds',
+						   ] )
+						   ->onlyMethods( [
 							   'resolveTermsViaJoin'
 						   ] )
 						   ->getMock();

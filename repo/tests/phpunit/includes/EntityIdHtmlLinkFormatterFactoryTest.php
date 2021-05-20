@@ -49,7 +49,7 @@ class EntityIdHtmlLinkFormatterFactoryTest extends TestCase {
 		$language = Language::factory( 'en' );
 
 		$callbackMock = $this->getMockBuilder( \stdClass::class )
-			->setMethods( [ '__invoke' ] )
+			->addMethods( [ '__invoke' ] )
 			->getMock();
 		$callbackMock->expects( $this->once() )
 			->method( '__invoke' )

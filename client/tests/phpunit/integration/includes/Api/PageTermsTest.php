@@ -52,7 +52,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 
 		$query = $this->getMockBuilder( ApiQuery::class )
 			->setConstructorArgs( [ $main, $params['action'] ] )
-			->setMethods( [ 'getPageSet' ] )
+			->onlyMethods( [ 'getPageSet' ] )
 			->getMock();
 
 		$query->method( 'getPageSet' )

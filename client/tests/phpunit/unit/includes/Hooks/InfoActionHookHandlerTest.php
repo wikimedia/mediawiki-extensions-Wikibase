@@ -186,7 +186,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$repoLinker = $this->getMockBuilder( RepoLinker::class )
 			->disableOriginalConstructor()
-			->setMethods( [ 'buildEntityLink' ] )
+			->onlyMethods( [ 'buildEntityLink' ] )
 			->getMock();
 
 		$repoLinker->method( 'buildEntityLink' )

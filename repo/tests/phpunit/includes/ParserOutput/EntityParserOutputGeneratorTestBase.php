@@ -110,7 +110,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 	 */
 	protected function getEntityView() {
 		$entityView = $this->getMockBuilder( EntityDocumentView::class )
-			->setMethods( [
+			->onlyMethods( [
 				'getTitleHtml',
 				'getContent'
 			] )
@@ -149,7 +149,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 	 */
 	protected function getMetaTags( $title, $description ) {
 		$entityMetaTagsCreator = $this->getMockBuilder( EntityMetaTagsCreator::class )
-			->setMethods( [
+			->onlyMethods( [
 				'getMetaTags',
 			] )
 			->disableOriginalConstructor()

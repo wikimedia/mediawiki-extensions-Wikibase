@@ -75,7 +75,7 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	public function testEscaping() {
 		$value = $this->getMockBuilder( GlobeCoordinateValue::class )
-			->setMethods( [ 'getLatitude', 'getLongitude', 'getPrecision' ] )
+			->onlyMethods( [ 'getLatitude', 'getLongitude', 'getPrecision' ] )
 			->setConstructorArgs( [ new LatLongValue( 0, 0 ), null, '<GLOBE>' ] )
 			->getMock();
 		$value->method( 'getLatitude' )

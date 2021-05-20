@@ -80,7 +80,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	 */
 	public function getMockEditFilterHookRunner() {
 		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
-			->setMethods( [ 'run' ] )
+			->onlyMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->method( 'run' )

@@ -104,7 +104,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 			$hookReturn = Status::newGood();
 		}
 		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
-			->setMethods( [ 'run' ] )
+			->onlyMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $invokeCount )

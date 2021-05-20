@@ -19,10 +19,10 @@ use Wikimedia\Assert\PostconditionException;
 class ServiceByTypeDispatcherTest extends TestCase {
 
 	public function provideTestConstruction() {
-		yield[ true, stdClass::class, [], new stdClass() ];
-		yield[ true, stdClass::class, [ 'type' => $this->getSomeServiceReturningCallback() ], new stdClass() ];
-		yield[ false, stdClass::class, [ $this->getSomeServiceReturningCallback() ], new stdClass() ];
-		yield[ false, stdClass::class, [ null ], new stdClass() ];
+		yield [ true, stdClass::class, [], new stdClass() ];
+		yield [ true, stdClass::class, [ 'type' => $this->getSomeServiceReturningCallback() ], new stdClass() ];
+		yield [ false, stdClass::class, [ $this->getSomeServiceReturningCallback() ], new stdClass() ];
+		yield [ false, stdClass::class, [ null ], new stdClass() ];
 		yield 'default not matching type' => [ false, EntityUrlLookup::class, [], new stdClass() ];
 	}
 

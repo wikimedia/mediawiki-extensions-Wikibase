@@ -128,8 +128,7 @@ class EntityChangeTest extends ChangeRowTest {
 	 */
 	public function testAddUserMetadata( $repoUserId, $repoUserText, $centralUserId ) {
 		$entityChange = $this->getMockBuilder( EntityChange::class )
-			->setMethods( [
-				'getCentralIdLookup',
+			->onlyMethods( [
 				'setFields',
 				'setMetadata',
 			] )

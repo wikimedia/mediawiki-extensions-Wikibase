@@ -45,7 +45,6 @@ class UrlSchemeValidators {
 			case 'svn':
 			case 'telnet':
 			case 'worldwind':
-
 			// Additional VCS schemes not supported by MediaWiki. "bzr" is GNU Bazaar from Canonical
 			// Ltd. See https://phabricator.wikimedia.org/T146692
 			case 'bzr':

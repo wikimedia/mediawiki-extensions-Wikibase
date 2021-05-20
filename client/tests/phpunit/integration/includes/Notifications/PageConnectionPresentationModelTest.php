@@ -43,7 +43,7 @@ class PageConnectionPresentationModelTest extends MediaWikiIntegrationTestCase {
 		$methods = [ 'getAgent', 'getBundleHash', 'getExtraParam', 'getTitle', 'getType' ];
 		$event = $this->getMockBuilder( EchoEvent::class )
 			->disableOriginalConstructor()
-			->setMethods( $methods )
+			->onlyMethods( $methods )
 			->getMock();
 		$event->method( 'getAgent' )
 			->willReturn( $agent );
