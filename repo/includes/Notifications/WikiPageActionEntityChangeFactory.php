@@ -142,17 +142,6 @@ class WikiPageActionEntityChangeFactory {
 			$user->getName(),
 			$centralUserId
 		);
-
-		// TODO: init page_id etc in getMetadata, not here!
-		$metadata = array_merge( [
-			'page_id' => 0,
-			'rev_id' => 0,
-			'parent_id' => 0,
-		],
-			$change->getMetadata()
-		);
-
-		$change->setMetadata( $metadata );
 	}
 
 	/**

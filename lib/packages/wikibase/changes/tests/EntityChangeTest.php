@@ -71,13 +71,13 @@ class EntityChangeTest extends ChangeRowTest {
 			'rev_id' => 23,
 			'user_text' => '171.80.182.208',
 		] );
-		$this->assertEquals(
+		$this->assertHasMetaData(
 			[
 				'rev_id' => 23,
 				'user_text' => '171.80.182.208',
 				'comment' => $entityChange->getComment(), // the comment field is magically initialized
 			],
-			$entityChange->getMetadata()
+			$entityChange
 		);
 
 		// override some fields, keep others
@@ -85,14 +85,29 @@ class EntityChangeTest extends ChangeRowTest {
 			'rev_id' => 25,
 			'comment' => 'foo',
 		] );
-		$this->assertEquals(
+		$this->assertHasMetaData(
 			[
 				'rev_id' => 25,
 				'user_text' => '171.80.182.208',
 				'comment' => 'foo', // the comment field is not magically initialized
 			],
-			$entityChange->getMetadata()
+			$entityChange
 		);
+	}
+
+	public function testGivenNonEmptyMetadata_getMetaDataInitializesRequiredFields() {
+		$entityChange = $this->newEntityChange( new ItemId( 'Q13' ) );
+
+		$entityChange->setMetadata( [
+			'user_text' => 'kitten',
+		] );
+
+		$this->assertHasMetaData( [
+			'user_text' => 'kitten',
+			'page_id' => 0,
+			'rev_id' => 0,
+			'parent_id' => 0,
+		], $entityChange );
 	}
 
 	public function testGetEmptyMetadata() {
@@ -222,6 +237,14 @@ class EntityChangeTest extends ChangeRowTest {
 		$change = new EntityChange( [ 'info' => $info ] );
 		$change->setField( 'info', $change->getSerializedInfo() );
 		$this->assertEquals( $info, $change->getInfo() );
+	}
+
+	private function assertHasMetaData( array $data, EntityChange $change ) {
+		$meta = $change->getMetadata();
+
+		foreach ( $data as $key => $value ) {
+			$this->assertSame( $value, $meta[$key] );
+		}
 	}
 
 }

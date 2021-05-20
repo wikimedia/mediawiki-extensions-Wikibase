@@ -130,6 +130,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		$metadata = [
 			'rev_id' => 2,
 			'parent_id' => 3,
+			'page_id' => 4,
 			'user_text' => 'RecentChangeFactoryTestUser',
 			'comment' => 'Actual Comment'
 		];
