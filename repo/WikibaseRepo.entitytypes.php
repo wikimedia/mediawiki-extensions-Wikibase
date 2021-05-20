@@ -57,7 +57,7 @@ use Wikibase\Repo\ParserOutput\EntityTermsViewFactory;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\Rdf\FullStatementRdfBuilderFactory;
 use Wikibase\Repo\Rdf\ItemRdfBuilder;
-use Wikibase\Repo\Rdf\PropertyRdfBuilder;
+use Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\SiteLinksRdfBuilder;
 use Wikibase\Repo\Rdf\TermsRdfBuilder;
@@ -277,7 +277,7 @@ return [
 			$mentionedEntityTracker,
 			$dedupe
 		) {
-			return new PropertyRdfBuilder(
+			return new PropertySpecificComponentsRdfBuilder(
 				$vocabulary,
 				$writer,
 				WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes()

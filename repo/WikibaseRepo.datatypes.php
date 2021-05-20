@@ -47,7 +47,7 @@ use Wikibase\Repo\Parsers\WikibaseStringValueNormalizer;
 use Wikibase\Repo\Rdf\DedupeBag;
 use Wikibase\Repo\Rdf\EntityMentionListener;
 use Wikibase\Repo\Rdf\JulianDateTimeValueCleaner;
-use Wikibase\Repo\Rdf\PropertyRdfBuilder;
+use Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder;
 use Wikibase\Repo\Rdf\RdfProducer;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\Values\CommonsMediaRdfBuilder;
@@ -111,7 +111,7 @@ return call_user_func( function() {
 				return new CommonsMediaRdfBuilder( $vocab );
 			},
 			'rdf-data-type' => function() {
-				return PropertyRdfBuilder::OBJECT_PROPERTY;
+				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
 			},
 		],
 		'PT:geo-shape' => [
@@ -137,7 +137,7 @@ return call_user_func( function() {
 				return new GeoShapeRdfBuilder( $vocab );
 			},
 			'rdf-data-type' => function() {
-				return PropertyRdfBuilder::OBJECT_PROPERTY;
+				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
 			},
 		],
 		'PT:tabular-data' => [
@@ -163,7 +163,7 @@ return call_user_func( function() {
 				return new TabularDataRdfBuilder( $vocab );
 			},
 			'rdf-data-type' => function() {
-				return PropertyRdfBuilder::OBJECT_PROPERTY;
+				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
 			},
 		],
 		'PT:entity-schema' => [
@@ -350,7 +350,7 @@ return call_user_func( function() {
 				return new ObjectUriRdfBuilder();
 			},
 			'rdf-data-type' => function() {
-				return PropertyRdfBuilder::OBJECT_PROPERTY;
+				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
 			},
 		],
 		'PT:external-id' => [
@@ -428,7 +428,7 @@ return call_user_func( function() {
 				return $factory->newEntityIdFormatter( $format, $options );
 			},
 			'rdf-data-type' => function() {
-				return PropertyRdfBuilder::OBJECT_PROPERTY;
+				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
 			},
 		],
 		'PT:wikibase-property' => [
@@ -460,7 +460,7 @@ return call_user_func( function() {
 				return $factory->newEntityIdFormatter( $format, $options );
 			},
 			'rdf-data-type' => function() {
-				return PropertyRdfBuilder::OBJECT_PROPERTY;
+				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
 			},
 		]
 	];
