@@ -2,14 +2,11 @@
 
 namespace Wikibase\Repo\Notifications;
 
-use CentralIdLookup;
-use Exception;
 use InvalidArgumentException;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use User;
 use Wikibase\Lib\Changes\EntityChange;
-use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Repo\Content\EntityContent;
 use Wikimedia\Assert\Assert;
 
@@ -23,31 +20,18 @@ use Wikimedia\Assert\Assert;
 class ChangeNotifier {
 
 	/**
-	 * @var EntityChangeFactory
-	 */
-	private $changeFactory;
-
-	/**
 	 * @var ChangeTransmitter[]
 	 */
 	private $changeTransmitters;
 
 	/**
-	 * @var CentralIdLookup|null
+	 * @var WikiPageActionEntityChangeFactory
 	 */
-	private $centralIdLookup;
+	private $changeFactory;
 
-	/**
-	 * @param EntityChangeFactory $changeFactory
-	 * @param ChangeTransmitter[] $changeTransmitters
-	 * @param CentralIdLookup|null $centralIdLookup CentralIdLookup, or null if
-	 *   this repository is not connected to a central user system,
-	 *   see CentralIdLookup::factoryNonLocal.
-	 */
 	public function __construct(
-		EntityChangeFactory $changeFactory,
-		array $changeTransmitters,
-		?CentralIdLookup $centralIdLookup
+		WikiPageActionEntityChangeFactory $changeFactory,
+		array $changeTransmitters
 	) {
 		Assert::parameterElementType(
 			ChangeTransmitter::class,
@@ -57,7 +41,6 @@ class ChangeNotifier {
 
 		$this->changeFactory = $changeFactory;
 		$this->changeTransmitters = $changeTransmitters;
-		$this->centralIdLookup = $centralIdLookup;
 	}
 
 	/**
@@ -78,13 +61,7 @@ class ChangeNotifier {
 			return null;
 		}
 
-		$change = $this->changeFactory->newFromUpdate( EntityChange::REMOVE, $content->getEntity() );
-		$change->setTimestamp( $timestamp );
-		$this->setEntityChangeUserInfo(
-			$change,
-			$user,
-			$this->getCentralUserId( $user )
-		);
+		$change = $this->changeFactory->newForPageDeleted( $content, $user, $timestamp );
 
 		$this->transmitChange( $change );
 
@@ -109,24 +86,7 @@ class ChangeNotifier {
 			return null;
 		}
 
-		$change = $this->changeFactory->newFromUpdate( EntityChange::RESTORE, null, $content->getEntity() );
-
-		$this->setEntityChangeRevisionInfo(
-			$change,
-			$revisionRecord,
-			/* Will get set below in setMetadataFromUser */ 0
-		);
-
-		// We don't want the change entries of newly undeleted pages to have
-		// the timestamp of the original change.
-		$change->setTimestamp( wfTimestampNow() );
-
-		$user = User::newFromIdentity( $revisionRecord->getUser() );
-		$this->setEntityChangeUserInfo(
-			$change,
-			$user,
-			$this->getCentralUserId( $user )
-		);
+		$change = $this->changeFactory->newForPageUndeleted( $content, $revisionRecord );
 
 		$this->transmitChange( $change );
 
@@ -154,12 +114,7 @@ class ChangeNotifier {
 			return null;
 		}
 
-		$change = $this->changeFactory->newFromUpdate( EntityChange::ADD, null, $content->getEntity() );
-		$this->setEntityChangeRevisionInfo(
-			$change,
-			$revisionRecord,
-			$this->getCentralUserId( User::newFromIdentity( $revisionRecord->getUser() ) )
-		);
+		$change = $this->changeFactory->newForPageCreated( $content, $revisionRecord );
 
 		// FIXME: RecentChangeSaveHookHandler currently adds to the change later!
 		$this->transmitChange( $change );
@@ -182,72 +137,21 @@ class ChangeNotifier {
 		if ( $current->getParentId() !== $parent->getId() ) {
 			throw new InvalidArgumentException( '$parent->getId() must be the same as $current->getParentId()!' );
 		}
+		/** @var EntityContent $parentContent */
+		$parentContent = $parent->getContent( SlotRecord::MAIN );
+		'@phan-var EntityContent $parentContent';
+		$content = $current->getContent( SlotRecord::MAIN );
 
-		$change = $this->getChangeForModification(
-			$parent->getContent( SlotRecord::MAIN ),
-			$current->getContent( SlotRecord::MAIN )
-		);
-
-		if ( !$change ) {
-			// nothing to do
-			return null;
+		if ( $parentContent->isRedirect() && $content->isRedirect() ) {
+			return null; // TODO: notify the client about changes to redirects!
 		}
 
-		$this->setEntityChangeRevisionInfo(
-			$change,
-			$current,
-			$this->getCentralUserId( User::newFromIdentity( $current->getUser() ) )
-		);
+		$change = $this->changeFactory->newForPageModified( $current, $parentContent );
 
 		// FIXME: RepoHooks::onRecentChangeSave currently adds to the change later!
 		$this->transmitChange( $change );
 
 		return $change;
-	}
-
-	/**
-	 * @param User $user Repository user
-	 *
-	 * @return int Central user ID, or 0
-	 */
-	private function getCentralUserId( User $user ) {
-		if ( $this->centralIdLookup ) {
-			return $this->centralIdLookup->centralIdFromLocalUser( $user );
-		}
-
-		return 0;
-	}
-
-	/**
-	 * Returns a EntityChange based on the old and new content object, taking
-	 * redirects into consideration.
-	 *
-	 * @todo Notify the client about changes to redirects explicitly.
-	 *
-	 * @param EntityContent $oldContent
-	 * @param EntityContent $newContent
-	 *
-	 * @return EntityChange|null
-	 */
-	private function getChangeForModification( EntityContent $oldContent, EntityContent $newContent ) {
-		$oldEntity = $oldContent->isRedirect() ? null : $oldContent->getEntity();
-		$newEntity = $newContent->isRedirect() ? null : $newContent->getEntity();
-
-		if ( $oldEntity === null && $newEntity === null ) {
-			// Old and new versions are redirects. Nothing to do.
-			return null;
-		} elseif ( $newEntity === null ) {
-			// The new version is a redirect. For now, treat that as a deletion.
-			$action = EntityChange::REMOVE;
-		} elseif ( $oldEntity === null ) {
-			// The old version is a redirect. For now, treat that like restoring the entity.
-			$action = EntityChange::RESTORE;
-		} else {
-			// No redirects involved
-			$action = EntityChange::UPDATE;
-		}
-
-		return $this->changeFactory->newFromUpdate( $action, $oldEntity, $newEntity );
 	}
 
 	/**
@@ -259,65 +163,6 @@ class ChangeNotifier {
 		foreach ( $this->changeTransmitters as $transmitter ) {
 			$transmitter->transmitChange( $change );
 		}
-	}
-
-	/**
-	 * @param EntityChange $change
-	 * @param User $user User that made change
-	 * @param int $centralUserId Central user ID, or 0 if unknown or not applicable
-	 *   (see docs/change-propagation.md)
-	 */
-	private function setEntityChangeUserInfo( EntityChange $change, User $user, $centralUserId ): void {
-		$change->addUserMetadata(
-			$user->getId(),
-			$user->getName(),
-			$centralUserId
-		);
-
-		// TODO: init page_id etc in getMetadata, not here!
-		$metadata = array_merge( [
-			'page_id' => 0,
-			'rev_id' => 0,
-			'parent_id' => 0,
-		],
-			$change->getMetadata()
-		);
-
-		$change->setMetadata( $metadata );
-	}
-
-	/**
-	 * @param EntityChange $change
-	 * @param RevisionRecord $revision Revision to populate EntityChange from
-	 * @param int $centralUserId Central user ID, or 0 if unknown or not applicable
-	 *   (see docs/change-propagation.md)
-	 */
-	private function setEntityChangeRevisionInfo( EntityChange $change, RevisionRecord $revision, int $centralUserId ): void {
-		$change->setFields( [
-			'revision_id' => $revision->getId(),
-			'time' => $revision->getTimestamp(),
-		] );
-
-		if ( !$change->hasField( 'object_id' ) ) {
-			throw new Exception(
-				'EntityChange::setRevisionInfo() called without calling setEntityId() first!'
-			);
-		}
-
-		$comment = $revision->getComment();
-		$change->setMetadata( [
-			'page_id' => $revision->getPageId(),
-			'parent_id' => $revision->getParentId(),
-			'comment' => $comment ? $comment->text : null,
-			'rev_id' => $revision->getId(),
-		] );
-
-		$user = $revision->getUser();
-		$change->addUserMetadata(
-			$user ? $user->getId() : 0,
-			$user ? $user->getName() : '',
-			$centralUserId
-		);
 	}
 
 }
