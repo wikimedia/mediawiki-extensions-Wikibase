@@ -24,6 +24,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
+use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
@@ -53,11 +55,14 @@ use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\ParserOutput\EntityTermsViewFactory;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
-use Wikibase\Repo\Rdf\NullEntityRdfBuilder;
+use Wikibase\Repo\Rdf\FullStatementRdfBuilderFactory;
+use Wikibase\Repo\Rdf\ItemRdfBuilder;
 use Wikibase\Repo\Rdf\PropertyRdfBuilder;
-use Wikibase\Repo\Rdf\RdfProducer;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\SiteLinksRdfBuilder;
+use Wikibase\Repo\Rdf\TermsRdfBuilder;
+use Wikibase\Repo\Rdf\TruthyStatementRdfBuilderFactory;
+use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\FingerprintableEntityMetaTagsCreator;
 use Wikimedia\Purtle\RdfWriter;
@@ -109,16 +114,47 @@ return [
 			$mentionedEntityTracker,
 			$dedupe
 		) {
-			if ( $flavorFlags & RdfProducer::PRODUCE_SITELINKS ) {
-				$sites = MediaWikiServices::getInstance()->getSiteLookup()->getSites();
-				// Since the only extra mapping needed for Items are site links,
-				// we just return the SiteLinksRdfBuilder directly,
-				// instead of defining an ItemRdfBuilder
-				$builder = new SiteLinksRdfBuilder( $vocabulary, $writer, $sites );
-				$builder->setDedupeBag( $dedupe );
-				return $builder;
-			}
-			return new NullEntityRdfBuilder();
+			$services = MediaWikiServices::getInstance();
+			$sites = $services->getSiteLookup()->getSites();
+			$propertyDataLookup = WikibaseRepo::getPropertyDataTypeLookup();
+			$valueSnakRdfBuilderFactory = new ValueSnakRdfBuilderFactory(
+				WikibaseRepo::getDataTypeDefinitions( $services )
+					->getRdfBuilderFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
+			);
+
+			$truthyStatementRdfBuilderFactory = new TruthyStatementRdfBuilderFactory(
+				$dedupe,
+				$vocabulary,
+				$writer,
+				$valueSnakRdfBuilderFactory,
+				$mentionedEntityTracker,
+				$propertyDataLookup
+			);
+			$fullStatementRdfBuilderFactory = new FullStatementRdfBuilderFactory(
+				$vocabulary,
+				$writer,
+				$valueSnakRdfBuilderFactory,
+				$mentionedEntityTracker,
+				$dedupe,
+				$propertyDataLookup
+			);
+			$siteLinksRdfBuilder = new SiteLinksRdfBuilder( $vocabulary, $writer, $sites );
+			$siteLinksRdfBuilder->setDedupeBag( $dedupe );
+
+			$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
+			$termsRdfBuilder = new TermsRdfBuilder(
+				$vocabulary,
+				$writer,
+				$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES )
+			);
+
+			return new ItemRdfBuilder(
+				$flavorFlags,
+				$siteLinksRdfBuilder,
+				$termsRdfBuilder,
+				$truthyStatementRdfBuilderFactory,
+				$fullStatementRdfBuilderFactory
+			);
 		},
 		Def::ENTITY_DIFF_VISUALIZER_CALLBACK => function (
 			MessageLocalizer $messageLocalizer,

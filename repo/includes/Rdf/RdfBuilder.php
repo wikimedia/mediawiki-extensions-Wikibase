@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Rdf;
 
+use MediaWiki\MediaWikiServices;
 use SplQueue;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -9,7 +10,9 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -114,7 +117,12 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$this->entityContentFactory = $entityContentFactory;
 
 		// XXX: move construction of sub-builders to a factory class.
-		$this->builders[] = $entityRdfBuilderFactory->getTermRdfBuilder( $vocabulary, $writer );
+		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( MediaWikiServices::getInstance() );
+		$this->builders[] = new TermsRdfBuilder(
+			$vocabulary,
+			$writer,
+			$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES )
+		);
 
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_TRUTHY_STATEMENTS ) ) {
 			$this->builders[] = $this->newTruthyStatementRdfBuilder();
@@ -402,8 +410,11 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			$this->entityRdfBuilders[$type]->addEntity( $entity );
 		}
 
-		foreach ( $this->builders as $builder ) {
-			$builder->addEntity( $entity );
+		// TODO: Remove this when all entities start using logic similar to ItemRdfBuilder
+		if ( $type !== 'item' ) {
+			foreach ( $this->builders as $builder ) {
+				$builder->addEntity( $entity );
+			}
 		}
 
 		$this->entityResolved( $entity->getId() );
@@ -475,9 +486,11 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		if ( !empty( $this->entityRdfBuilders[$type] ) ) {
 			$this->entityRdfBuilders[$type]->addEntityStub( $entity );
 		}
-
-		foreach ( $this->builders as $builder ) {
-			$builder->addEntityStub( $entity );
+		// TODO: Remove this when all entities start using logic similar to ItemRdfBuilder
+		if ( $type !== 'item' ) {
+			foreach ( $this->builders as $builder ) {
+				$builder->addEntityStub( $entity );
+			}
 		}
 	}
 
