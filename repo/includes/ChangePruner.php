@@ -176,7 +176,7 @@ class ChangePruner {
 	 * @return int the number of changes deleted.
 	 */
 	private function pruneChanges( $until ) {
-		$dbw = $this->lbFactory->getMainLB()->getConnection( DB_MASTER );
+		$dbw = $this->lbFactory->getMainLB()->getConnection( DB_PRIMARY );
 
 		$dbw->delete(
 			'wb_changes',

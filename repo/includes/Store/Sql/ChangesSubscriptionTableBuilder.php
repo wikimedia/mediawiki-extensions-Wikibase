@@ -133,7 +133,7 @@ class ChangesSubscriptionTableBuilder {
 	 * @return int The number of subscriptions inserted.
 	 */
 	private function processSubscriptionBatch( &$continuation = [] ) {
-		$db = $this->loadBalancer->getConnection( DB_MASTER );
+		$db = $this->loadBalancer->getConnection( DB_PRIMARY );
 
 		$subscriptionsPerItemBatch = $this->getSubscriptionsPerItemBatch( $db, $continuation );
 

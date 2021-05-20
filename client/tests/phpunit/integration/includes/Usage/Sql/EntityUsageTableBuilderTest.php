@@ -65,7 +65,7 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function putWikidataItemPageProps( array $entries ) {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 
 		$db->startAtomic( __METHOD__ );
 
@@ -81,7 +81,7 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function fetchAllUsageStrings() {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 
 		$res = $db->select( EntityUsageTable::DEFAULT_TABLE_NAME, '*', '', __METHOD__ );
 

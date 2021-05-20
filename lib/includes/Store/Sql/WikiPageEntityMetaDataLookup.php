@@ -106,7 +106,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 			if ( $loadFromMaster ) {
 				$rows = array_merge(
 					$rows,
-					$this->selectRevisionInformationMultiple( $loadFromMaster, ILoadBalancer::DB_MASTER )
+					$this->selectRevisionInformationMultiple( $loadFromMaster, ILoadBalancer::DB_PRIMARY )
 				);
 			}
 		}
@@ -138,7 +138,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 		if ( !$row && $mode !== LookupConstants::LATEST_FROM_REPLICA ) {
 			// Try loading from master, unless the caller only wants replica data.
 			$this->logger->debug(
-				'{method}: try to load {entityId} with {revisionId} from DB_MASTER.',
+				'{method}: try to load {entityId} with {revisionId} from DB_PRIMARY.',
 				[
 					'method' => __METHOD__,
 					'entityId' => $entityId,
@@ -146,7 +146,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 				]
 			);
 
-			$row = $this->selectRevisionInformationById( $entityId, $revisionId, ILoadBalancer::DB_MASTER );
+			$row = $this->selectRevisionInformationById( $entityId, $revisionId, ILoadBalancer::DB_PRIMARY );
 		}
 
 		return $row;
@@ -186,7 +186,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 			if ( $loadFromMaster ) {
 				$revisionIds = array_merge(
 					$revisionIds,
-					$this->selectLatestRevisionIdsMultiple( $loadFromMaster, ILoadBalancer::DB_MASTER )
+					$this->selectLatestRevisionIdsMultiple( $loadFromMaster, ILoadBalancer::DB_PRIMARY )
 				);
 			}
 		}
@@ -235,7 +235,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 *
 	 * @param EntityId $entityId The entity to query the DB for.
 	 * @param int $revisionId The desired revision id
-	 * @param int $connType DB_REPLICA or DB_MASTER
+	 * @param int $connType DB_REPLICA or DB_PRIMARY
 	 *
 	 * @throws DBQueryError If the query fails.
 	 * @return stdClass|bool a raw database row object, or false if no such entity revision exists.
@@ -258,7 +258,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 * Returns an array like entityid -> object or false (if not found).
 	 *
 	 * @param EntityId[] $entityIds The entities to query the DB for.
-	 * @param int $connType DB_REPLICA or DB_MASTER
+	 * @param int $connType DB_REPLICA or DB_PRIMARY
 	 *
 	 * @throws DBQueryError If the query fails.
 	 * @return (stdClass|false)[] Array mapping entity ID serializations to either objects or false if an entity
@@ -282,7 +282,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 * Returns an array like entityid -> int or false (if not found).
 	 *
 	 * @param EntityId[] $entityIds The entities to query the DB for.
-	 * @param int $connType DB_REPLICA or DB_MASTER
+	 * @param int $connType DB_REPLICA or DB_PRIMARY
 	 *
 	 * @throws DBQueryError If the query fails.
 	 * @return array Array mapping entity ID serializations to either ints

@@ -48,7 +48,7 @@ class SqlChangeStore implements ChangeStore {
 	private function updateChange( ChangeRow $change ) {
 		$values = $this->getValues( $change );
 
-		$dbw = $this->loadBalancer->getConnection( DB_MASTER );
+		$dbw = $this->loadBalancer->getConnection( DB_PRIMARY );
 
 		$dbw->update(
 			'wb_changes',
@@ -63,7 +63,7 @@ class SqlChangeStore implements ChangeStore {
 	private function insertChange( ChangeRow $change ) {
 		$values = $this->getValues( $change );
 
-		$dbw = $this->loadBalancer->getConnection( DB_MASTER );
+		$dbw = $this->loadBalancer->getConnection( DB_PRIMARY );
 
 		$dbw->insert( 'wb_changes', $values, __METHOD__ );
 		$change->setField( 'id', $dbw->insertId() );

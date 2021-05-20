@@ -40,8 +40,8 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 
 	public function addDBDataOnce() {
 		// We need to initially empty the table
-		wfGetDB( DB_MASTER )->delete( 'page', '*', __METHOD__ );
-		wfGetDB( DB_MASTER )->delete( 'redirect', '*', __METHOD__ );
+		wfGetDB( DB_PRIMARY )->delete( 'page', '*', __METHOD__ );
+		wfGetDB( DB_PRIMARY )->delete( 'redirect', '*', __METHOD__ );
 	}
 
 	/**
@@ -58,7 +58,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 			$pageRows[] = $this->getPageRow( $redirect->getEntityId(), true );
 		}
 
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		$dbw->insert(
 			'page',
 			$pageRows,

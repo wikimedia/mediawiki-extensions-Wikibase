@@ -30,7 +30,7 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 		$changes = $data['changes'];
 		$states = $data['states'];
 
-		$dbw = wfGetDB( DB_MASTER ); // writes to dummy tables
+		$dbw = wfGetDB( DB_PRIMARY ); // writes to dummy tables
 
 		$dbw->delete( 'wb_changes', [ "1=1" ] );
 		$dbw->delete( 'wb_changes_dispatch', [ "1=1" ] );
@@ -467,7 +467,7 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testHasNoStats() {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 
 		$dbw->delete( 'wb_changes', '*' );
 		$dbw->delete( 'wb_changes_dispatch', '*' );

@@ -124,7 +124,7 @@ class EntityUsageTableBuilder {
 		] );
 
 		$loadBalancer = $this->lbFactory->getMainLB();
-		$db = $loadBalancer->getConnection( DB_MASTER );
+		$db = $loadBalancer->getConnection( DB_PRIMARY );
 
 		$entityPerPage = $this->getUsageBatch( $db, $fromPageId );
 

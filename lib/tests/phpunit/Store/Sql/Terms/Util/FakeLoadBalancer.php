@@ -32,10 +32,10 @@ class FakeLoadBalancer extends LoadBalancer {
 		switch ( $i ) {
 			case ILoadBalancer::DB_REPLICA:
 				return $this->dbr;
-			case ILoadBalancer::DB_MASTER:
+			case ILoadBalancer::DB_PRIMARY:
 				return $this->dbw;
 			default:
-				throw new InvalidArgumentException( 'only DB_REPLICA and DB_MASTER supported' );
+				throw new InvalidArgumentException( 'only DB_REPLICA and DB_PRIMARY supported' );
 		}
 	}
 

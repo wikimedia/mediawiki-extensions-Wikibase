@@ -151,7 +151,7 @@ class WikibasePingback {
 	private function markSent() {
 		$dbw = $this->loadBalancerFactory
 			->getMainLB()
-			->getConnection( DB_MASTER );
+			->getConnection( DB_PRIMARY );
 
 		$timestamp = MWTimestamp::time();
 
@@ -180,7 +180,7 @@ class WikibasePingback {
 
 		$dbw = $this->loadBalancerFactory
 			->getMainLB()
-			->getConnection( DB_MASTER );
+			->getConnection( DB_PRIMARY );
 
 		if ( !$dbw->lock( $this->key, __METHOD__, 0 ) ) {
 			return false;  // already in progress
@@ -290,7 +290,7 @@ class WikibasePingback {
 				$id = MWCryptRand::generateHex( 32 );
 				$dbw = $this->loadBalancerFactory
 					->getMainLB()
-					->getConnection( DB_MASTER );
+					->getConnection( DB_PRIMARY );
 				$dbw->insert(
 					'updatelog',
 					[ 'ul_key' => 'WikibasePingback', 'ul_value' => $id ],

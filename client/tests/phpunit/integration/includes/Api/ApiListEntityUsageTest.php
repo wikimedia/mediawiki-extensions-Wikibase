@@ -34,7 +34,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 	}
 
 	public function addDBDataOnce() {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 		$dump = [
 			'page' => [
 				[
@@ -63,7 +63,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 	}
 
 	public static function insertEntityUsageData() {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 		$dump = [
 			'wbc_entity_usage' => [
 				[

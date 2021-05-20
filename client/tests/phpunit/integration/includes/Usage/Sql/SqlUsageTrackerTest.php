@@ -67,7 +67,7 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function putUsages( $pageId, array $usages ) {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 		$updater = new EntityUsageTable( new ItemIdParser(), $db );
 		return $updater->addUsages( $pageId, $usages );
 	}

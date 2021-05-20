@@ -125,7 +125,7 @@ class EntityChangeLookup implements ChunkAccess {
 				'LIMIT' => 1
 			],
 			__METHOD__,
-			$mode === self::FROM_MASTER ? DB_MASTER : DB_REPLICA
+			$mode === self::FROM_MASTER ? DB_PRIMARY : DB_REPLICA
 		);
 
 		return $change[0] ?? null;
@@ -135,7 +135,7 @@ class EntityChangeLookup implements ChunkAccess {
 	 * @param array $where
 	 * @param array $options
 	 * @param string $method
-	 * @param int $mode (DB_REPLICA or DB_MASTER)
+	 * @param int $mode (DB_REPLICA or DB_PRIMARY)
 	 *
 	 * @return EntityChange[]
 	 */

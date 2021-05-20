@@ -118,7 +118,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 			throw new EntityRedirectLookupException( $entityId, null, $ex );
 		}
 
-		$forUpdate = $forUpdate === EntityRedirectLookup::FOR_UPDATE ? DB_MASTER : DB_REPLICA;
+		$forUpdate = $forUpdate === EntityRedirectLookup::FOR_UPDATE ? DB_PRIMARY : DB_REPLICA;
 
 		try {
 			$db = $this->loadBalancer->getConnection( $forUpdate );

@@ -31,7 +31,7 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 	}
 
 	public function addDBData() {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 		$dump = [
 			'wb_changes_subscription' => [
 				[

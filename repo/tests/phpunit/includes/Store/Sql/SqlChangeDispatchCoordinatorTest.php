@@ -65,7 +65,7 @@ class SqlChangeDispatchCoordinatorTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function resetChangesTable( $id = 23 ) {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 
 		$row = [
 			'change_id' => $id,
@@ -82,12 +82,12 @@ class SqlChangeDispatchCoordinatorTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function insertChangesDispatchRows( array $rows ) {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		$dbw->insert( 'wb_changes_dispatch', array_values( $rows ), __METHOD__ );
 	}
 
 	private function fetchChangesDispatchRows( $where = '' ) {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		$res = $dbw->select( 'wb_changes_dispatch', '*', $where, __METHOD__, [ 'ORDER BY' => 'chd_site' ] );
 
 		$rows = [];

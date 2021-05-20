@@ -506,7 +506,7 @@ class WikiPageEntityStore implements EntityStore {
 		}
 
 		// Scan through the revision table
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		$revWhere = ActorMigration::newMigration()->getWhere( $dbw, 'rev_user', $user );
 		$res = $dbw->select(
 			[ 'revision' ] + $revWhere['tables'],

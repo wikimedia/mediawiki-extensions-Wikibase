@@ -162,7 +162,7 @@ class TestDispatchCoordinator extends Maintenance {
 	}
 
 	private function createFakeTables( $maxIter ) {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		$tables = [ 'wb_changes_dispatch', 'wb_changes' ];
 		foreach ( $tables as $table ) {
 			$dbw->duplicateTableStructure( $table, self::TABLE_PREFIX . $table, true );

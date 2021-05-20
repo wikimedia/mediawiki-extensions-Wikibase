@@ -153,7 +153,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 	}
 
 	private function addReallyDoQueryData() {
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 		$dump = [
 			'page' => [
 				[

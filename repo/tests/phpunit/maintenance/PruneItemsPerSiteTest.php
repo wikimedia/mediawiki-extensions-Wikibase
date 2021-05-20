@@ -31,7 +31,7 @@ class PruneItemsPerSiteTest extends MaintenanceBaseTestCase {
 		$this->tablesUsed[] = 'page';
 		$this->tablesUsed[] = 'wb_items_per_site';
 
-		wfGetDB( DB_MASTER )->delete( 'wb_items_per_site', '*', __METHOD__ );
+		wfGetDB( DB_PRIMARY )->delete( 'wb_items_per_site', '*', __METHOD__ );
 	}
 
 	public function batchSizeProvider() {
@@ -90,7 +90,7 @@ class PruneItemsPerSiteTest extends MaintenanceBaseTestCase {
 		static $c = 0;
 		$c++;
 
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		$dbw->insert(
 			'wb_items_per_site',
 			[

@@ -51,7 +51,7 @@ class ChangeDeletionNotificationJob extends ChangeModificationNotificationJob {
 	 */
 	protected function modifyChanges( array $relevantChanges ): void {
 
-		$dbw = $this->lbFactory->getMainLB()->getConnection( DB_MASTER );
+		$dbw = $this->lbFactory->getMainLB()->getConnection( DB_PRIMARY );
 
 		foreach ( array_chunk( $relevantChanges, $this->batchSize ) as $rcIdBatch ) {
 			$dbw->delete(

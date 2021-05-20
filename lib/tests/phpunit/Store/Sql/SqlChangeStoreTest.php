@@ -107,7 +107,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
-		$db = $lb->getConnection( DB_MASTER );
+		$db = $lb->getConnection( DB_PRIMARY );
 
 		$db->delete( 'wb_changes', '*', __METHOD__ );
 		$this->tablesUsed[] = 'wb_changes';
@@ -145,7 +145,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
-		$db = $lb->getConnection( DB_MASTER );
+		$db = $lb->getConnection( DB_PRIMARY );
 
 		$db->delete( 'wb_changes', '*', __METHOD__ );
 		$this->tablesUsed[] = 'wb_changes';

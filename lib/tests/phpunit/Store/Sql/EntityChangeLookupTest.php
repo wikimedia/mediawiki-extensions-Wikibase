@@ -173,7 +173,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 	 * @return int
 	 */
 	private function offsetStart( $start ) {
-		$changeIdOffset = (int)wfGetDB( DB_MASTER )->selectField(
+		$changeIdOffset = (int)wfGetDB( DB_PRIMARY )->selectField(
 			'wb_changes',
 			'MIN( change_id )',
 			// First change inserted by this test
