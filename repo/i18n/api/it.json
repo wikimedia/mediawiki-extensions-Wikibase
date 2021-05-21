@@ -73,7 +73,7 @@
 	"apihelp-wbremovereferences-summary": "Rimuove uno o più riferimenti della stessa dichiarazione.",
 	"apihelp-wbremovereferences-param-statement": "Un GUID che identifica la dichiarazione per cui si sta impostando un riferimento",
 	"apihelp-wbsearchentities-param-search": "Ricerca di questo testo.",
-	"apihelp-wbsearchentities-param-language": "Ricerca in questa lingua.",
+	"apihelp-wbsearchentities-param-language": "Ricerca in questa lingua. Questo influisce solo su come vengono selezionate le entità, non sulla lingua in cui vengono restituiti i risultati: questo è controllato dal parametro \"uselang\".",
 	"apihelp-wbsearchentities-param-strictlanguage": "Se disabilitare la lingua di riserva",
 	"apihelp-wbsearchentities-param-type": "Cerca per questo tipo di entità.",
 	"apihelp-wbsearchentities-param-limit": "Numero massimo di risultati",

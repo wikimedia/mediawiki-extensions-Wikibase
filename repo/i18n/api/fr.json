@@ -172,7 +172,7 @@
 	"apihelp-wbsearchentities-summary": "Recherche des entités en utilisant les libellés et les alias.",
 	"apihelp-wbsearchentities-extended-description": "Renvoie un libellé et la description de l'entité dans la langue de l’utilisateur si cela est possible.\nRenvoie les détails du terme correspondant.\nLe texte du terme correspondant est aussi présent dans la clé des alias s’il est différent du libellé affiché.",
 	"apihelp-wbsearchentities-param-search": "Rechercher ce texte.",
-	"apihelp-wbsearchentities-param-language": "Rechercher dans cette langue.",
+	"apihelp-wbsearchentities-param-language": "Rechercher dans cette langue. Cela affecte uniquement comment les entités sont sélectionnées, non pas la langue dans laquelle les résultats sont renvoyés : cela est contrôlé par le paramètre « uselang ».",
 	"apihelp-wbsearchentities-param-strictlanguage": "S’il faut désactiver la langue de secours",
 	"apihelp-wbsearchentities-param-type": "Rechercher ce type d’entité.",
 	"apihelp-wbsearchentities-param-props": "Renvoyer ces propriétés pour chaque entité.",
