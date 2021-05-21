@@ -5,8 +5,12 @@
 		]
 	},
 	"tooltip-t-wikibase": "Баран репозиторданавусса дахӀанасса затрайн",
+	"wikibase-comment-update": "БутӀа {{WBREPONAME}} даххана хуну дур",
 	"wikibase-dataitem": "Зат {{WBREPONAME}}",
 	"wikibase-editlinks": "Баранду дакьин дан",
 	"wikibase-editlinkstitle": "Дакьин дан чил мазурдил баранду",
-	"wikibase-linkitem-addlinks": "Баранду ялун дулун"
+	"wikibase-linkitem-addlinks": "Баранду ялун дулун",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-wikibase-edit-letter": "Х",
+	"wikibase-rc-wikibase-edit-title": "Даххана щаву {{WBREPONAME}}"
 }

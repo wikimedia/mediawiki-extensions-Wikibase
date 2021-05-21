@@ -128,7 +128,7 @@
 	"apihelp-wbsearchentities-description": "Sucht nach Objekten mithilfe von Bezeichnungen, Aliasse oder Kennungen.\nGibt eine Bezeichnung und Beschreibung für das Objekt in der Benutzersprache zurück, falls möglich.\nGibt Einzelheiten des entsprechenden Begriffs zurück.\nDer entsprechende Begriffstext ist auch im Aliasschlüssel vorhanden, falls er von der angezeigten Bezeichnung abweicht.",
 	"apihelp-wbsearchentities-summary": "Sucht nach Objekten, die Bezeichnungen und Aliasse verwenden.",
 	"apihelp-wbsearchentities-param-search": "Nach diesem Text suchen.",
-	"apihelp-wbsearchentities-param-language": "In dieser Sprache suchen.",
+	"apihelp-wbsearchentities-param-language": "In dieser Sprache suchen. Dies wirkt sich nur darauf aus, wie Entitäten ausgewählt werden, nicht auf die Sprache, in der die Ergebnisse zurückgegeben werden: Dies wird durch den Parameter „uselang“ gesteuert.",
 	"apihelp-wbsearchentities-param-strictlanguage": "Ob der Sprach-Fallback deaktiviert werden soll",
 	"apihelp-wbsearchentities-param-type": "Sucht nach diesem Objekttyp.",
 	"apihelp-wbsearchentities-param-props": "Gibt diese Eigenschaften für jedes Objekt zurück.",

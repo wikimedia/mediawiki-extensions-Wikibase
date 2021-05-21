@@ -159,7 +159,7 @@
 	"apihelp-wbsearchentities-summary": "Pesquisa por entidades usando rótulos e nomes alternativos.",
 	"apihelp-wbsearchentities-extended-description": "Retorna um rótulo e uma descrição para a entidade no idioma do usuário, se possível.\nRetorna os detalhes do termo correspondente.\nO texto do termo correspondente também está presente na chave de alias se diferente da etiqueta de exibição.",
 	"apihelp-wbsearchentities-param-search": "Pesquisar este texto.",
-	"apihelp-wbsearchentities-param-language": "Pesquisar neste idioma.",
+	"apihelp-wbsearchentities-param-language": "Pesquise neste idioma. Isso afeta apenas como as entidades são selecionadas, não o idioma no qual os resultados são retornados: isso é controlado pelo parâmetro \"uselang\".",
 	"apihelp-wbsearchentities-param-strictlanguage": "Indica se deseja desativar o retorno da linguagem",
 	"apihelp-wbsearchentities-param-type": "Pesquisa por este tipo de entidade.",
 	"apihelp-wbsearchentities-param-props": "Retorne essas propriedades para cada entidade.",
