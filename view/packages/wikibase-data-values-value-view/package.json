@@ -42,7 +42,6 @@
 	},
 	"dependencies": {
 		"jquery": "^3.2.1",
-		"jquery-client": "^2.0.0",
 		"jquery-migrate": "^3.0.1",
 		"jquery-ui": "https://github.com/jquery/jquery-ui/archive/1.9.2.tar.gz",
 		"wikibase-data-values": "^0.10.0"

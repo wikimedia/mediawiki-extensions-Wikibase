@@ -31,7 +31,6 @@ module.exports = function ( grunt ) {
 					'node_modules/jquery-ui/ui/jquery.ui.widget.js',
 					'node_modules/jquery-ui/ui/jquery.ui.position.js',
 					'node_modules/jquery-ui/ui/jquery.ui.menu.js',
-					'node_modules/jquery-client/jquery.client.js',
 					'node_modules/jquery-migrate/dist/jquery-migrate.js',
 
 					'node_modules/sinon/pkg/sinon.js',
