@@ -53,6 +53,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -696,6 +697,11 @@ class WikibaseRepo {
 	public static function getTermStoreWriterFactory( ContainerInterface $services = null ): TermStoreWriterFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.TermStoreWriterFactory' );
+	}
+
+	public static function getRepoDomainDbFactory( ContainerInterface $services = null ): RepoDomainDbFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.RepoDomainDbFactory' );
 	}
 
 	/**

@@ -90,6 +90,7 @@ use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
@@ -1497,6 +1498,15 @@ return [
 			WikibaseRepo::getDataTypeDefinitions( $services )->getRdfTypeUris(),
 			$repoSettings->getSetting( 'pagePropertiesRdf' ) ?: [],
 			$repoSettings->getSetting( 'rdfDataRightsUrl' )
+		);
+	},
+
+	'WikibaseRepo.RepoDomainDbFactory' => function ( MediaWikiServices $services ): RepoDomainDbFactory {
+		$lbFactory = $services->getDBLoadBalancerFactory();
+
+		return new RepoDomainDbFactory(
+			$lbFactory,
+			$lbFactory->getLocalDomainID()
 		);
 	},
 
