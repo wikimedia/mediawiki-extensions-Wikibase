@@ -39,13 +39,13 @@ but are also published separately.
 Where possible, sections of Wikibase Lib will be extracted into separate libraries.
 Dependencies on MediaWiki are removed
 (or replaced with suitable MediaWiki libraries, e. g. [wikimedia/timestamp][] instead of `wfTimestamp()`).
-Their source code is moved from subdirecties of `lib/includes/` and `lib/tests/phpunit/` into a subdirectory of `lib/packages/`
+Their source code is moved from subdirectories of `lib/includes/` and `lib/tests/phpunit/` into a subdirectory of `lib/packages/`
 (adjusting the paths in extension `AutoloadNamespaces` and elsewhere),
 named after the prospective Composer package name,
 and a `composer.json` file is added there.
 The [git filter-repo][] tool can then be used to extract a subset of the Wikibase Git history with only the changes relevant to the new library;
 this new read-only repository can be used as the VCS source of the Composer package,
-and is automatically updated through a GitHub action (see `.github/workflows/main.yml`).
+and is automatically updated through a GitHub action (see e.g. `.github/workflows/filterChanges.yml`).
 The Decoupling Hike team demonstrated these steps for the [wikibase/changes][] library;
 see [T256058][] and related tasks for details.
 
