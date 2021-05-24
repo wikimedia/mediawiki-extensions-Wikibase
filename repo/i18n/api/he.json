@@ -157,7 +157,7 @@
 	"apihelp-wbsearchentities-summary": "חיפוש ישויות באמצעות תוויות וכינויים.",
 	"apihelp-wbsearchentities-extended-description": "החזרת תווית ותיאור לישות בשפת המשתמש אם אפשר.\nהחזרת פרטים של האיבר שהתאים.\nטקסט האיבר שהתאים נמצא גם במפתח הכינויים אם הוא שונה מהתווית להצגה.",
 	"apihelp-wbsearchentities-param-search": "חיפוש עבור הטקסט הזה.",
-	"apihelp-wbsearchentities-param-language": "חיפוש עבור שפה זו.",
+	"apihelp-wbsearchentities-param-language": "לחפש בשפה הזאת. זה משפיע רק על איך הישויות נבחרות, ולא על השפה שבה התוצאות מוחזרות: זה נבחר באמצעות הפרמטר \"uselang\".",
 	"apihelp-wbsearchentities-param-strictlanguage": "האם לכבות את גיבוי השפה",
 	"apihelp-wbsearchentities-param-type": "חיפוש הסוג הזה של ישות.",
 	"apihelp-wbsearchentities-param-props": "החזרת המאפיינים האלה עבור כל ישות.",

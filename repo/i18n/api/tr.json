@@ -163,7 +163,7 @@
 	"apihelp-wbsearchentities-summary": "Etiketleri ve takma adları kullanan varlıkları arar.",
 	"apihelp-wbsearchentities-extended-description": "Mümkünse kullanıcı için bir etiket ve açıklama döndürür.\nEşleşen terimin ayrıntılarını döndürür.\nEşleşen terim metni, görüntüleme etiketinden farklıysa takma ad tuşunda da bulunur.",
 	"apihelp-wbsearchentities-param-search": "Bu metni arayın.",
-	"apihelp-wbsearchentities-param-language": "Bu dilde arayın.",
+	"apihelp-wbsearchentities-param-language": "Bu dilde arayın. Bu, sonuçların döndürüldüğü dili değil, yalnızca varlıkların nasıl seçildiğini etkiler: bu, \"uselang\" parametresi tarafından kontrol edilir.",
 	"apihelp-wbsearchentities-param-strictlanguage": "Dil yedeğini devre dışı bırakıp bırakmayacağınız",
 	"apihelp-wbsearchentities-param-type": "Bu tür varlığı arayın.",
 	"apihelp-wbsearchentities-param-props": "Her varlık için bu özellikleri döndürün.",

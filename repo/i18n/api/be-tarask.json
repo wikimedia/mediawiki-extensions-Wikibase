@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Red Winged Duck",
+			"Renessaince",
 			"SaldırganSincap"
 		]
 	},
@@ -73,7 +74,7 @@
 	"apihelp-wbgetentities-description": "Атрымлівае зьвесткі для некалькіх элемэнтаў Вікібазы.",
 	"apihelp-wbgetentities-summary": "Атрымлівае зьвесткі для некалькіх элемэнтаў Вікібазы.",
 	"apihelp-wbgetentities-param-ids": "Ідэнтыфікатары элемэнтаў, зь якіх атрымаць зьвесткі",
-	"apihelp-wbgetentities-param-sites": "Ідэнтыфікатар сайту, на якім знаходзіцца адпаведная старонка\nУжывайце разам з <code>title</code>, але падавайце толькі адзін сайт для некалькіх назваў ці некалькі сайтаў для адной назвы.",
+	"apihelp-wbgetentities-param-sites": "Ідэнтыфікатар сайту, на якім знаходзіцца адпаведная старонка.\nУжывайце разам з <code>title</code>, але падавайце толькі адзін сайт для некалькіх назваў ці некалькі сайтаў для адной назвы.",
 	"apihelp-wbgetentities-param-titles": "Назва адпаведнай старонкі.\nУжывайце разам з <code>sites</code>, але падавайце толькі адзін сайт для некалькіх назваў ці некалькі сайтаў для адной назвы.",
 	"apihelp-wbgetentities-param-redirects": "Ці маюць перанакіраваньні выконвацца.\nКалі «не», перанакіраваньні будуць разглядацца як выдаленыя элемэнты.",
 	"apihelp-wbgetentities-param-props": "Назвы ўласьцівасьцяў для атрыманьня з кожнага элемэнту.\nДалей будуць фільтравацца паводле пададзеных моваў.",
@@ -150,7 +151,7 @@
 	"apihelp-wbsearchentities-summary": "Шукае элемэнты паводле метак і псэўданімаў.",
 	"apihelp-wbsearchentities-extended-description": "Вяртае метку і апісаньне для элемэнту на мове ўдзельніка, калі магчыма.\nВяртае падрабязнасьці адпаведнага тэрміну.\nТэкст адпаведнага тэрміну таксама прысутнічае ў ключы псэўданімаў, калі адрозьніваецца ад меткі для адлюстраваньня.",
 	"apihelp-wbsearchentities-param-search": "Шукаць гэты тэкст.",
-	"apihelp-wbsearchentities-param-language": "Шукаць на гэтай мове.",
+	"apihelp-wbsearchentities-param-language": "Шукаць на гэтай мове. Гэта ўплывае толькі на тое, як адбіраюцца сутнасьці, а не на мову, якой выводзяцца вынікі: гэтым кіруе парамэтар „uselang“.",
 	"apihelp-wbsearchentities-param-strictlanguage": "Ці адключаць запасную мову",
 	"apihelp-wbsearchentities-param-type": "Шукаць такі тып элемэнтаў.",
 	"apihelp-wbsearchentities-param-props": "Вярнуць гэтыя ўласьцівасьці для кожнага элемэнту.",
