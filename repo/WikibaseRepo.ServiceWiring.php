@@ -91,6 +91,7 @@ use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -203,6 +204,7 @@ use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Search\Fields\FieldDefinitionsFactory;
+use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\StatementGrouperBuilder;
@@ -342,11 +344,7 @@ return [
 			new TermChangeOpSerializationValidator( WikibaseRepo::getTermsLanguages( $services ) ),
 			WikibaseRepo::getSiteLinkBadgeChangeOpSerializationValidator( $services ),
 			WikibaseRepo::getExternalFormatStatementDeserializer( $services ),
-			new SiteLinkTargetProvider(
-				$services->getSiteLookup(),
-				$settings->getSetting( 'specialSiteLinkGroups' ),
-				$services->getLocalServerObjectCache()
-			),
+			WikibaseRepo::getSiteLinkTargetProvider( $services ),
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getStringNormalizer( $services ),
 			$settings->getSetting( 'siteLinkGroups' )
@@ -1536,13 +1534,26 @@ return [
 		);
 	},
 
+	'WikibaseRepo.SiteLinkGlobalIdentifiersProvider' => function (
+		MediaWikiServices $services
+	): SiteLinkGlobalIdentifiersProvider {
+		$cacheSecret = hash( 'sha256', $services->getMainConfig()->get( 'SecretKey' ) );
+		return new SiteLinkGlobalIdentifiersProvider(
+			WikibaseRepo::getSiteLinkTargetProvider( $services ),
+			new SimpleCacheWithBagOStuff(
+				$services->getLocalServerObjectCache(),
+				'wikibase.siteLinkGlobalIdentifiersProvider.',
+				$cacheSecret
+			)
+		);
+	},
+
 	'WikibaseRepo.SiteLinkTargetProvider' => function (
 		MediaWikiServices $services
 	): SiteLinkTargetProvider {
 		return new SiteLinkTargetProvider(
 			$services->getSiteLookup(),
-			WikibaseRepo::getSettings( $services )->getSetting( 'specialSiteLinkGroups' ),
-			$services->getLocalServerObjectCache()
+			WikibaseRepo::getSettings( $services )->getSetting( 'specialSiteLinkGroups' )
 		);
 	},
 

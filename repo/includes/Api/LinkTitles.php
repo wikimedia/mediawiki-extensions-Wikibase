@@ -17,6 +17,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Store\Store;
 
@@ -37,6 +38,11 @@ class LinkTitles extends ApiBase {
 	 * @var SiteLinkTargetProvider
 	 */
 	private $siteLinkTargetProvider;
+
+	/**
+	 * @var SiteLinkGlobalIdentifiersProvider
+	 */
+	private $siteLinkGlobalIdentifiersProvider;
 
 	/**
 	 * @var ApiErrorReporter
@@ -67,6 +73,7 @@ class LinkTitles extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		SiteLinkStore $siteLinkStore,
+		SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		ApiErrorReporter $errorReporter,
 		array $siteLinkGroups,
@@ -78,6 +85,7 @@ class LinkTitles extends ApiBase {
 
 		$this->siteLinkStore = $siteLinkStore;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
+		$this->siteLinkGlobalIdentifiersProvider = $siteLinkGlobalIdentifiersProvider;
 		$this->errorReporter = $errorReporter;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->revisionLookup = $revisionLookup;
@@ -90,6 +98,7 @@ class LinkTitles extends ApiBase {
 		string $moduleName,
 		ApiHelperFactory $apiHelperFactory,
 		SettingsArray $repoSettings,
+		SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		Store $store
 	): self {
@@ -99,6 +108,7 @@ class LinkTitles extends ApiBase {
 			$moduleName,
 			// TODO move SiteLinkStore to service container and inject it directly
 			$store->newSiteLinkStore(),
+			$siteLinkGlobalIdentifiersProvider,
 			$siteLinkTargetProvider,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
 			$repoSettings->getSetting( 'siteLinkGroups' ),
@@ -274,7 +284,7 @@ class LinkTitles extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getAllowedParams(): array {
-		$siteIds = $this->siteLinkTargetProvider->getSiteListGlobalIdentifiers( $this->siteLinkGroups );
+		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getList( $this->siteLinkGroups );
 
 		return array_merge( parent::getAllowedParams(), [
 			'tosite' => [

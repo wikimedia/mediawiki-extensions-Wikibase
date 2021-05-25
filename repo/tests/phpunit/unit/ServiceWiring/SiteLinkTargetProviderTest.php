@@ -20,8 +20,6 @@ class SiteLinkTargetProviderTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getSiteLookup' );
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getLocalServerObjectCache' );
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
 				'specialSiteLinkGroups' => [],

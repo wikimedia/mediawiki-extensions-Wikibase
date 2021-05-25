@@ -359,6 +359,13 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.SiteLinkBadgeChangeOpSerializationValidator' );
 	}
 
+	public static function getSiteLinkGlobalIdentifiersProvider(
+		ContainerInterface $services = null
+	): SiteLinkGlobalIdentifiersProvider {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.SiteLinkGlobalIdentifiersProvider' );
+	}
+
 	public static function getSiteLinkTargetProvider(
 		ContainerInterface $services = null
 	): SiteLinkTargetProvider {

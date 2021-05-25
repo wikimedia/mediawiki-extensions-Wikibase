@@ -21,7 +21,7 @@ use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpResult;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
-use Wikibase\Repo\SiteLinkTargetProvider;
+use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\Store;
@@ -45,9 +45,9 @@ abstract class ModifyEntity extends ApiBase {
 	protected $stringNormalizer;
 
 	/**
-	 * @var SiteLinkTargetProvider
+	 * @var SiteLinkGlobalIdentifiersProvider
 	 */
-	protected $siteLinkTargetProvider;
+	protected $siteLinkGlobalIdentifiersProvider;
 
 	/**
 	 * @var EntityTitleStoreLookup
@@ -117,7 +117,7 @@ abstract class ModifyEntity extends ApiBase {
 
 		$this->entitySavingHelper->setEntityIdParam( 'id' );
 
-		$this->setServices( WikibaseRepo::getSiteLinkTargetProvider() );
+		$this->setServices( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider() );
 
 		// TODO: use the EntitySavingHelper to load the entity, instead of an EntityRevisionLookup.
 		$this->revisionLookup = WikibaseRepo::getStore()->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED );
@@ -129,8 +129,8 @@ abstract class ModifyEntity extends ApiBase {
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
-	public function setServices( SiteLinkTargetProvider $siteLinkTargetProvider ): void {
-		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
+	public function setServices( SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider ): void {
+		$this->siteLinkGlobalIdentifiersProvider = $siteLinkGlobalIdentifiersProvider;
 	}
 
 	protected function getTitleLookup(): EntityTitleStoreLookup {
@@ -444,7 +444,7 @@ abstract class ModifyEntity extends ApiBase {
 	 * @return array[]
 	 */
 	private function getAllowedParamsForSiteLink(): array {
-		$siteIds = $this->siteLinkTargetProvider->getSiteListGlobalIdentifiers( $this->siteLinkGroups );
+		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getList( $this->siteLinkGroups );
 
 		return [
 			'site' => [

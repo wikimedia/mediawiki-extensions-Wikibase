@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\StringNormalizer;
-use Wikibase\Repo\SiteLinkTargetProvider;
+use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -43,9 +43,9 @@ class GetEntities extends ApiBase {
 	private $languageFallbackChainFactory;
 
 	/**
-	 * @var SiteLinkTargetProvider
+	 * @var SiteLinkGlobalIdentifiersProvider
 	 */
-	private $siteLinkTargetProvider;
+	private $siteLinkGlobalIdentifiersProvider;
 
 	/**
 	 * @var EntityPrefetcher
@@ -88,7 +88,7 @@ class GetEntities extends ApiBase {
 	 * @param string $moduleName
 	 * @param StringNormalizer $stringNormalizer
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
-	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
+	 * @param SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider
 	 * @param EntityPrefetcher $entityPrefetcher
 	 * @param string[] $siteLinkGroups
 	 * @param ApiErrorReporter $errorReporter
@@ -105,7 +105,7 @@ class GetEntities extends ApiBase {
 		string $moduleName,
 		StringNormalizer $stringNormalizer,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		SiteLinkTargetProvider $siteLinkTargetProvider,
+		SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider,
 		EntityPrefetcher $entityPrefetcher,
 		array $siteLinkGroups,
 		ApiErrorReporter $errorReporter,
@@ -120,7 +120,7 @@ class GetEntities extends ApiBase {
 
 		$this->stringNormalizer = $stringNormalizer;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
-		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
+		$this->siteLinkGlobalIdentifiersProvider = $siteLinkGlobalIdentifiersProvider;
 		$this->entityPrefetcher = $entityPrefetcher;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->errorReporter = $errorReporter;
@@ -142,7 +142,7 @@ class GetEntities extends ApiBase {
 		EntityRevisionLookup $entityRevisionLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		SettingsArray $repoSettings,
-		SiteLinkTargetProvider $siteLinkTargetProvider,
+		SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider,
 		Store $store,
 		StringNormalizer $stringNormalizer
 	): self {
@@ -151,7 +151,7 @@ class GetEntities extends ApiBase {
 			$moduleName,
 			$stringNormalizer,
 			$languageFallbackChainFactory,
-			$siteLinkTargetProvider,
+			$siteLinkGlobalIdentifiersProvider,
 			// TODO move EntityPrefetcher to service container and inject that directly
 			$store->getEntityPrefetcher(),
 			$repoSettings->getSetting( 'siteLinkGroups' ),
@@ -388,7 +388,7 @@ class GetEntities extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getAllowedParams(): array {
-		$siteIds = $this->siteLinkTargetProvider->getSiteListGlobalIdentifiers( $this->siteLinkGroups );
+		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getList( $this->siteLinkGroups );
 
 		return array_merge( parent::getAllowedParams(), [
 			'ids' => [
