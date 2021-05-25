@@ -344,7 +344,8 @@ return [
 			WikibaseRepo::getExternalFormatStatementDeserializer( $services ),
 			new SiteLinkTargetProvider(
 				$services->getSiteLookup(),
-				$settings->getSetting( 'specialSiteLinkGroups' )
+				$settings->getSetting( 'specialSiteLinkGroups' ),
+				$services->getLocalServerObjectCache()
 			),
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getStringNormalizer( $services ),

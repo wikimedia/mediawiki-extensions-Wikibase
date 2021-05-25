@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo;
 
+use BagOStuff;
+use HashBagOStuff;
 use Site;
 use SiteList;
 use SiteLookup;
@@ -22,12 +24,19 @@ class SiteLinkTargetProvider {
 	private $specialSiteGroups;
 
 	/**
+	 * @var BagOStuff
+	 */
+	private $cache;
+
+	/**
 	 * @param SiteLookup $siteLookup
 	 * @param string[] $specialSiteGroups
+	 * @param BagOStuff|null $cache
 	 */
-	public function __construct( SiteLookup $siteLookup, array $specialSiteGroups = [] ) {
+	public function __construct( SiteLookup $siteLookup, array $specialSiteGroups = [], BagOStuff $cache = null ) {
 		$this->siteLookup = $siteLookup;
 		$this->specialSiteGroups = $specialSiteGroups;
+		$this->cache = $cache ?? new HashBagOStuff();
 	}
 
 	/**
@@ -53,6 +62,21 @@ class SiteLinkTargetProvider {
 		}
 
 		return $sites;
+	}
+
+	public function getSiteListGlobalIdentifiers( array $groups ) {
+		$key = $this->cache->makeKey(
+			'wikibase-site-link-target-provider',
+			'global-identifiers',
+			implode( ',', $groups )
+		);
+		return $this->cache->getWithSetCallback(
+			$key,
+			3600,
+			function () use ( $groups ) {
+				return $this->getSiteList( $groups )->getGlobalIdentifiers();
+			}
+		);
 	}
 
 	/**
