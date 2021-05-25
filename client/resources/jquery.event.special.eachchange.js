@@ -9,14 +9,6 @@
 	 */
 	var EVENT_ID = 'jqueryEventSpecialEachchange';
 
-	/**
-	 * Name(s) of events that are in fact supported by the client.
-	 *
-	 * @property {string}
-	 * @ignore
-	 */
-	var inputEvent = null;
-
 	var triggeredHandlers = [];
 
 	/**
@@ -77,27 +69,6 @@
 	}
 
 	/**
-	 * Returns a string of on or more event names to be used for detecting any instant changes of an
-	 * input box. This should be just 'input' in recent browsers.
-	 *
-	 * @ignore
-	 *
-	 * @return {string}
-	 */
-	function getInputEvent() {
-		// IE (at least <= version 9) does not trigger input event when pressing backspace
-		// (version <= 8 does not support input event at all anyway)
-		if ( $.client.profile().name === 'msie' && $.client.profile().versionNumber >= 9 ) {
-			return 'input keyup';
-		}
-
-		var fallbackEvents = 'keyup keydown blur cut paste mousedown mouseup mouseout',
-			$input = $( '<input>' ),
-			supported = 'oninput' in $input[ 0 ];
-		return ( supported ) ? 'input' : fallbackEvents;
-	}
-
-	/**
 	 * eachchange jQuery event
 	 *
 	 * The `eachchange` event catches all designated input events. In recent browsers, it basically
@@ -114,7 +85,6 @@
 	 *
 	 * @class jQuery.event.special.eachchange
 	 * @extends jQuery.Event
-	 * @uses jQuery.client
 	 * @license GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
@@ -122,15 +92,11 @@
 	 * @param {string} previousValue
 	 */
 	$.event.special.eachchange = {
-		setup: function ( data, namespaces, eventHandle ) {
-			inputEvent = getInputEvent();
-		},
-
 		add: function ( handleObj ) {
 			var eventData = $.data( this, EVENT_ID + handleObj.namespace ),
 				$elem = $( this ),
 				eventId = EVENT_ID + handleObj.namespace,
-				eventNameString = assignNamespace( inputEvent, eventId );
+				eventNameString = assignNamespace( 'input', eventId );
 
 			if ( !eventData ) {
 				eventData = { handlers: [], prevVal: getValue( $elem ) };
