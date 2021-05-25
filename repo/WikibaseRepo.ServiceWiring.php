@@ -1536,6 +1536,16 @@ return [
 		);
 	},
 
+	'WikibaseRepo.SiteLinkTargetProvider' => function (
+		MediaWikiServices $services
+	): SiteLinkTargetProvider {
+		return new SiteLinkTargetProvider(
+			$services->getSiteLookup(),
+			WikibaseRepo::getSettings( $services )->getSetting( 'specialSiteLinkGroups' ),
+			$services->getLocalServerObjectCache()
+		);
+	},
+
 	'WikibaseRepo.SnakFactory' => function ( MediaWikiServices $services ): SnakFactory {
 		return new SnakFactory(
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),

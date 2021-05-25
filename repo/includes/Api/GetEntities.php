@@ -6,7 +6,6 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
-use BagOStuff;
 use IBufferingStatsdDataFactory;
 use SiteLookup;
 use Wikibase\DataModel\Entity\EntityId;
@@ -136,7 +135,6 @@ class GetEntities extends ApiBase {
 	public static function factory(
 		ApiMain $apiMain,
 		string $moduleName,
-		BagOStuff $siteLinkTargetProviderCache,
 		SiteLookup $siteLookup,
 		IBufferingStatsdDataFactory $stats,
 		ApiHelperFactory $apiHelperFactory,
@@ -144,15 +142,10 @@ class GetEntities extends ApiBase {
 		EntityRevisionLookup $entityRevisionLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		SettingsArray $repoSettings,
+		SiteLinkTargetProvider $siteLinkTargetProvider,
 		Store $store,
 		StringNormalizer $stringNormalizer
 	): self {
-		$siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$siteLookup,
-			$repoSettings->getSetting( 'specialSiteLinkGroups' ),
-			$siteLinkTargetProviderCache
-		);
-
 		return new self(
 			$apiMain,
 			$moduleName,
