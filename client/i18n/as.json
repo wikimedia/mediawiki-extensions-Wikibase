@@ -37,5 +37,6 @@
 	"wikibase-watchlist-show-changes-pref": "আপোনাৰ লক্ষ্য-তালিকাত {{WBREPONAME}} সম্পাদনাসমূহ দেখুৱাব",
 	"wikibase-unconnectedpages-submit": "যাওক",
 	"wikibase-pageinfo-description-central": "গোলকীয় বিৱৰণ",
+	"wikibase-pageinfo-entity-usage": "এই পৃষ্ঠাত ব্যৱহৃত {{WBREPONAME}} আইটেমসমূহ",
 	"wikibase-otherprojects": "আন প্ৰকল্পসমূহত"
 }
