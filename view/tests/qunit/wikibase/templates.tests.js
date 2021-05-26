@@ -45,10 +45,6 @@
 		 * Test template definitions and expected results according to the parameters specified
 		 * above. Empty string represent combinations that would result in invalid HTML causing an
 		 * error to be thrown.
-		 * Expected result may be an array. Since IE's HTML parsing does not strip invalid HTML
-		 * structure in multiple cases, it will not throw errors treating the HTML structure as
-		 * valid. While the first array value represents the normally expected result, the second
-		 * value represents the result expected for IE.
 		 *
 		 * @type {Array}
 		 */
@@ -69,8 +65,8 @@
 					'text param text',
 					'text &lt;div&gt;&lt;/div&gt; text',
 					'text <div>text</div> text',
-					[ '', 'text <tr></tr> text' ],
-					[ '', 'text <td><span>text</span></td> text' ],
+					'',
+					'',
 					'text text with&amp;nbsp;spaces text'
 				],
 				'<div>$1</div>': [
@@ -98,20 +94,20 @@
 					'<div><div>text with&amp;nbsp;spaces</div></div>'
 				],
 				'<tr>$1</tr>': [
-					[ '', '<tr>param</tr>' ],
-					[ '', '<tr><div></div></tr>' ],
-					[ '', '<tr><div>text</div></tr>' ],
+					'',
+					'',
+					'',
 					'',
 					'<tr><td><span>text</span></td></tr>',
-					[ '', '<tr>text with&amp;nbsp;spaces</tr>' ]
+					''
 				],
 				'<table>$1</table>': [
-					[ '', '<table>param</table>' ],
-					[ '', '<table><div></div></table>' ],
-					[ '', '<table><div>text</div></table>' ],
+					'',
+					'',
+					'',
 					'<table><tbody><tr></tr></tbody></table>',
 					'',
-					[ '', '<table>text with&amp;nbsp;spaces</table>' ]
+					''
 				],
 				'text<div>$1</div>': [
 					'text<div>param</div>',
@@ -159,7 +155,7 @@
 		 *
 		 * @param {Array} params
 		 * @param {string} template
-		 * @param {string|Array} expected
+		 * @param {string} expected
 		 */
 		var verifyTemplate = function ( params, template, expected ) {
 			var key = 'test';
@@ -196,10 +192,6 @@
 					paramMessage += 'jQuery object';
 				}
 			} );
-
-			if ( Array.isArray( expected ) ) {
-				expected = ( $.client.profile().name === 'msie' ) ? expected[ 1 ] : expected[ 0 ];
-			}
 
 			if ( expected === '' ) {
 				assert.throws(
