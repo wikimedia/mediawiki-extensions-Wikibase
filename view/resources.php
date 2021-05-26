@@ -492,9 +492,6 @@ return call_user_func( function() {
 			'scripts' => [
 				'jquery.event/jquery.event.special.eachchange.js'
 			],
-			'dependencies' => [
-				'jquery.client',
-			],
 		],
 
 		'dataValues.DataValue' => $wikibaseDatavaluesSrcPaths + [
