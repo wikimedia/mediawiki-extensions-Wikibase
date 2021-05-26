@@ -30,9 +30,9 @@ class UnitConverterTest extends ServiceWiringTestCase {
 					'class' => '\\Wikibase\\Lib\\Units\\JsonUnitStorage',
 					'args' => [ 'somedir' ]
 				],
-				'conceptBaseUri' => 'someUri'
 			]
 		);
+		$this->mockService( 'WikibaseRepo.ItemVocabularyBaseUri', 'url' );
 		$this->assertInstanceOf(
 			UnitConverter::class,
 			$this->getService( 'WikibaseRepo.UnitConverter' )
