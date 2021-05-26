@@ -6,7 +6,6 @@ namespace Wikibase\Repo\Tests;
 
 use ApiMain;
 use ApiQuerySiteinfo;
-use ConfigFactory;
 use DerivativeContext;
 use Exception;
 use ImportStringSource;
@@ -29,7 +28,6 @@ use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\RepoHooks;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\WikibaseRepo;
-use WikiImporter;
 use Wikimedia\AtEase\AtEase;
 
 /**
@@ -304,7 +302,7 @@ XML
 		$this->getSettings()->setSetting( 'allowEntityImport', $allowImport );
 
 		$source = new ImportStringSource( $xml );
-		$importer = new WikiImporter( $source, ConfigFactory::getDefaultInstance()->makeConfig( 'main' ) );
+		$importer = $this->getServiceContainer()->getWikiImporterFactory()->getWikiImporter( $source );
 
 		$importer->setNoticeCallback( function() {
 			// Do nothing for now. Could collect and compare notices.
