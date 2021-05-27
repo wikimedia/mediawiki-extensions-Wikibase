@@ -44,8 +44,11 @@ class PagePropsEntityIdLookup implements EntityIdLookup {
 	 * @return EntityId[]
 	 */
 	public function getEntityIds( array $titles ): array {
+		$pages = array_filter( $titles, function( Title $title ): bool {
+			return $title->canExist();
+		} );
 		return array_map( [ $this->idParser, 'parse' ],
-			$this->pageProps->getProperties( $titles, 'wikibase_item' ) );
+			$this->pageProps->getProperties( $pages, 'wikibase_item' ) );
 	}
 
 	/**

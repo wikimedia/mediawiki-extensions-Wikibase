@@ -6,6 +6,7 @@ namespace Wikibase\Client\Tests\Integration\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
+use PageProps;
 use Title;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
@@ -31,9 +32,11 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		parent::setUp();
 	}
 
-	private function makeTitle( int $pageId ): Title {
-		$title = Title::makeTitle( NS_MAIN, 'No' . $pageId );
-		$title->resetArticleID( $pageId );
+	private function makeTitle( int $pageId, int $ns = NS_MAIN ): Title {
+		$title = Title::makeTitle( $ns, 'No' . $pageId );
+		if ( $title->canExist() ) {
+			$title->resetArticleID( $pageId );
+		}
 
 		return $title;
 	}
@@ -92,6 +95,25 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		ksort( $actual );
 
 		$this->assertEquals( $expected, $actual );
+	}
+
+	public function testIntegratesWithPageProps(): void {
+		$page = $this->makeTitle( 11 );
+		$special = $this->makeTitle( 22, NS_SPECIAL );
+
+		$mockPageProps = $this->createMock( PageProps::class );
+		$mockPageProps
+			->expects( $this->once() )
+			->method( 'getProperties' )
+			->with( [ $page ] )
+			->willReturn( [] );
+
+		$lookup = new PagePropsEntityIdLookup(
+			$mockPageProps,
+			new ItemIdParser()
+		);
+
+		$lookup->getEntityIds( [ $page, $special ] );
 	}
 
 }
