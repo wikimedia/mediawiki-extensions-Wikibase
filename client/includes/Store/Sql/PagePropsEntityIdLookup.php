@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Client\Store\Sql;
 
 use PageProps;
@@ -41,19 +43,15 @@ class PagePropsEntityIdLookup implements EntityIdLookup {
 	 *
 	 * @return EntityId[]
 	 */
-	public function getEntityIds( array $titles ) {
+	public function getEntityIds( array $titles ): array {
 		return array_map( [ $this->idParser, 'parse' ],
 			$this->pageProps->getProperties( $titles, 'wikibase_item' ) );
 	}
 
 	/**
 	 * @see EntityIdLookup::getEntityIdForTitle
-	 *
-	 * @param Title $title
-	 *
-	 * @return EntityId|null
 	 */
-	public function getEntityIdForTitle( Title $title ) {
+	public function getEntityIdForTitle( Title $title ): ?EntityId {
 		$entityIds = $this->getEntityIds( [ $title ] );
 
 		return reset( $entityIds ) ?: null;

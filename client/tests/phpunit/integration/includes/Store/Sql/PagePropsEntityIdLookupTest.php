@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Client\Tests\Integration\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
@@ -29,14 +31,14 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		parent::setUp();
 	}
 
-	private function makeTitle( $pageId ) {
+	private function makeTitle( int $pageId ): Title {
 		$title = Title::makeTitle( NS_MAIN, 'No' . $pageId );
 		$title->resetArticleID( $pageId );
 
 		return $title;
 	}
 
-	private function insertPageProps( IDatabase $db, $pageId, EntityId $entityId ) {
+	private function insertPageProps( IDatabase $db, int $pageId, EntityId $entityId ): void {
 		$db->insert(
 			'page_props',
 			[
@@ -47,7 +49,7 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testGetEntityIdForTitle() {
+	public function testGetEntityIdForTitle(): void {
 		$db = wfGetDB( DB_PRIMARY );
 
 		$title22 = $this->makeTitle( 22 );
@@ -64,7 +66,7 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertNull( $lookup->getEntityIdForTitle( $title99 ) );
 	}
 
-	public function testGetEntityIds() {
+	public function testGetEntityIds(): void {
 		$db = wfGetDB( DB_PRIMARY );
 
 		$title11 = $this->makeTitle( 11 );
