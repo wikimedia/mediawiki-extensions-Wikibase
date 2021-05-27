@@ -55,7 +55,7 @@
 	"entityusage-summary": "Šī lapa uzskaita lapas, kas izmanto norādīto vienumu (piemēram, Q42). Saraksts ir sakārtots dilstošā secībā pēc lapas ID, tāpēc jaunākās lapas parādās sākumā.",
 	"wikibase-entityusage-invalid-id": "$1 nav derīgs entītijas ID",
 	"wikibase-entityusage-legend": "Lapu saraksts, kuras izmanto norādīto entītiju",
-	"wikibase-entityusage-entity": "Entītija:",
+	"wikibase-entityusage-entity": "Vienums:",
 	"wikibase-entityusage-submit": "Rādīt lapas",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} ieraksta ID",
 	"wikibase-pageinfo-entity-id-none": "Nav",

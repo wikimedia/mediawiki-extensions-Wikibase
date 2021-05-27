@@ -12,6 +12,7 @@
 		]
 	},
 	"wikibase-desc": "Strukturēto datu repozitorijs",
+	"wikibase-entity": "Vienums",
 	"wikibase-entity-item": "vienums",
 	"wikibase-entity-property": "īpašība",
 	"wikibase-entity-query": "vaicājums",
