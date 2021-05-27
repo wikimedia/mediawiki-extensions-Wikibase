@@ -1822,7 +1822,7 @@ return [
 			wfWarn( "Bad unit storage configuration, ignoring" );
 			return null;
 		}
-		return new UnitConverter( $unitStorage, $settings->getSetting( 'conceptBaseUri' ) );
+		return new UnitConverter( $unitStorage, WikibaseRepo::getItemVocabularyBaseUri( $services ) );
 	},
 
 	'WikibaseRepo.UserLanguage' => function ( MediaWikiServices $services ): Language {
