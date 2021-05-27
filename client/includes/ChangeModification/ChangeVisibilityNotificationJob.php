@@ -6,8 +6,9 @@ namespace Wikibase\Client\ChangeModification;
 
 use MediaWiki\MediaWikiServices;
 use Title;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
+use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikimedia\Assert\Assert;
-use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Job for notifying a client wiki of a batch of revision visibility changes on the repository.
@@ -23,13 +24,13 @@ class ChangeVisibilityNotificationJob extends ChangeModificationNotificationJob 
 	/**
 	 * Constructs a ChangeVisibilityNotificationJob for the repo revisions given.
 	 *
-	 * @param ILBFactory $lbFactory
+	 * @param ClientDomainDb $clientDb
 	 * @param int $batchSize
 	 * @param array $params Contains the name of the repo, revisionIdentifiersJson to redact
 	 *   and the visibilityBitFlag to set.
 	 */
-	public function __construct( ILBFactory $lbFactory, int $batchSize, array $params = [] ) {
-		parent::__construct( 'ChangeVisibilityNotification', $lbFactory, $params );
+	public function __construct( ClientDomainDb $clientDb, int $batchSize, array $params = [] ) {
+		parent::__construct( 'ChangeVisibilityNotification', $clientDb, $params );
 
 		Assert::parameter(
 			isset( $params['visibilityBitFlag'] ),
@@ -42,9 +43,11 @@ class ChangeVisibilityNotificationJob extends ChangeModificationNotificationJob 
 
 	public static function newFromGlobalState( Title $unused, array $params ) {
 		$mwServices = MediaWikiServices::getInstance();
+		$lbFactory = $mwServices->getDBLoadBalancerFactory();
 
+		$clientDomainDbFactory = new ClientDomainDbFactory( $lbFactory );
 		return new self(
-			$mwServices->getDBLoadBalancerFactory(),
+			$clientDomainDbFactory->newLocalDb(),
 			$mwServices->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			$params
 		);
@@ -56,7 +59,7 @@ class ChangeVisibilityNotificationJob extends ChangeModificationNotificationJob 
 	protected function modifyChanges( array $relevantChanges ): void {
 		$visibilityBitFlag = $this->params['visibilityBitFlag'];
 
-		$dbw = $this->lbFactory->getMainLB()->getConnection( DB_PRIMARY );
+		$dbw = $this->clientDb->connections()->getWriteConnection();
 
 		foreach ( array_chunk( $relevantChanges, $this->batchSize ) as $rcIdBatch ) {
 			$dbw->update(
@@ -66,7 +69,7 @@ class ChangeVisibilityNotificationJob extends ChangeModificationNotificationJob 
 				__METHOD__
 			);
 
-			$this->lbFactory->waitForReplication();
+			$this->clientDb->replication()->waitForAllAffectedClusters();
 		}
 	}
 

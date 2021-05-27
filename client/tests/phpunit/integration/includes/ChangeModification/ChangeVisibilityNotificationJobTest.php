@@ -15,6 +15,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
+use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 
 /**
  * @covers \Wikibase\Client\ChangeModification\ChangeVisibilityNotificationJob
@@ -34,7 +36,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 		$this->initRecentChanges();
 
 		$job = new ChangeVisibilityNotificationJob(
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			$this->getClientDomainDb(),
 			MediaWikiServices::getInstance()->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			[
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( $revisionIdentifiers ),
@@ -77,7 +79,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 		$additionalRecentChange->save();
 
 		$job = new ChangeVisibilityNotificationJob(
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			$this->getClientDomainDb(),
 			MediaWikiServices::getInstance()->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			[
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( [
@@ -139,7 +141,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 
 	public function testToString() {
 		$job = new ChangeVisibilityNotificationJob(
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			$this->getClientDomainDb(),
 			MediaWikiServices::getInstance()->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			[
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( [
@@ -150,5 +152,12 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 		);
 
 		$this->assertRegExp( '/^ChangeVisibilityNotification/', $job->toString() );
+	}
+
+	private function getClientDomainDb(): ClientDomainDb {
+		$mwServices = MediaWikiServices::getInstance();
+		$lbFactory = $mwServices->getDBLoadBalancerFactory();
+
+		return ( new ClientDomainDbFactory( $lbFactory ) )->newLocalDb();
 	}
 }

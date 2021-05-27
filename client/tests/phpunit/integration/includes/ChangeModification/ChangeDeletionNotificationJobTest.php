@@ -6,6 +6,8 @@ namespace Wikibase\Client\Tests\Integration\ChangeModification;
 use MediaWiki\MediaWikiServices;
 use Wikibase\Client\ChangeModification\ChangeDeletionNotificationJob;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
+use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 
 /**
  * @covers \Wikibase\Client\ChangeModification\ChangeDeletionNotificationJob
@@ -44,9 +46,16 @@ class ChangeDeletionNotificationJobTest extends RecentChangesModificationTest {
 		$this->assertSame( $expectedCount, $revisionCount, 'Too many revisions deleted' );
 	}
 
+	private function getClientDomainDb(): ClientDomainDb {
+		$mwServices = MediaWikiServices::getInstance();
+		$lbFactory = $mwServices->getDBLoadBalancerFactory();
+
+		return ( new ClientDomainDbFactory( $lbFactory ) )->newLocalDb();
+	}
+
 	public function testToString(): void {
 		$job = new ChangeDeletionNotificationJob(
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			$this->getClientDomainDb(),
 			MediaWikiServices::getInstance()->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			[
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( [
@@ -66,7 +75,7 @@ class ChangeDeletionNotificationJobTest extends RecentChangesModificationTest {
 		$beforeCount = $this->countRevisions();
 
 		$job = new ChangeDeletionNotificationJob(
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			$this->getClientDomainDb(),
 			MediaWikiServices::getInstance()->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			[
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( $revisionIdentifiers )
