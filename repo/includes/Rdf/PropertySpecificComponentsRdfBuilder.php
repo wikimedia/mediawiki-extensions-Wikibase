@@ -7,12 +7,19 @@ use Wikibase\DataModel\Entity\Property;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * Factory to return Rdf builders for special parts of properties
+ * Rdfbuilder to create the triples
+ * that describe:
+ * - the datatypes of properties
+ * - the predicates that will be used when creating value triples
+ * - classes for making novalue statements
+ *
+ * This RDF builder should only write content for properties
+ * and should do nothing for other entities.
  *
  * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */
-class PropertyRdfBuilder implements EntityRdfBuilder {
+class PropertySpecificComponentsRdfBuilder implements EntityRdfBuilder {
 
 	public const OBJECT_PROPERTY = 'ObjectProperty';
 	private const DATATYPE_PROPERTY = 'DatatypeProperty';

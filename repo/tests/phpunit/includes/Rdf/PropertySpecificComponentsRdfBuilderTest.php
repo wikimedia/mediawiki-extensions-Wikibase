@@ -2,11 +2,12 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
-use Wikibase\Repo\Rdf\PropertyRdfBuilder;
+use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers \Wikibase\Repo\Rdf\PropertyRdfBuilder
+ * @covers \Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf
@@ -14,7 +15,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */
-class PropertyRdfBuilderTest extends \PHPUnit\Framework\TestCase {
+class PropertySpecificComponentsRdfBuilderTest extends TestCase {
 
 	/**
 	 * @var NTriplesRdfTestHelper
@@ -51,12 +52,12 @@ class PropertyRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @param RdfWriter $writer
 	 *
-	 * @return PropertyRdfBuilder
+	 * @return PropertySpecificComponentsRdfBuilder
 	 */
 	private function newBuilder( RdfWriter $writer ) {
 		$vocabulary = $this->getTestData()->getVocabulary();
 
-		return new PropertyRdfBuilder(
+		return new PropertySpecificComponentsRdfBuilder(
 			$vocabulary,
 			$writer
 		);

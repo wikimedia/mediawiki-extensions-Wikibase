@@ -20,7 +20,7 @@ use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\FullStatementRdfBuilderFactory;
 use Wikibase\Repo\Rdf\HashDedupeBag;
 use Wikibase\Repo\Rdf\ItemRdfBuilder;
-use Wikibase\Repo\Rdf\PropertyRdfBuilder;
+use Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder;
 use Wikibase\Repo\Rdf\RdfBuilder;
 use Wikibase\Repo\Rdf\RdfProducer;
 use Wikibase\Repo\Rdf\RdfVocabulary;
@@ -157,7 +157,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 				$mentionedEntityTracker,
 				$dedupe
 			) {
-				return new PropertyRdfBuilder(
+				return new PropertySpecificComponentsRdfBuilder(
 					$vocabulary,
 					$writer,
 					WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes()
