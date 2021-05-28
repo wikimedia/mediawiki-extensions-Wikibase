@@ -413,7 +413,8 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		// TODO: Remove this when all entities start using logic similar to ItemRdfBuilder
 		if (
 			$type !== 'item' &&
-			$type !== 'property'
+			$type !== 'property' &&
+			$type !== 'mediainfo'
 		) {
 			foreach ( $this->builders as $builder ) {
 				$builder->addEntity( $entity );
@@ -490,7 +491,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			$this->entityRdfBuilders[$type]->addEntityStub( $entity );
 		}
 		// TODO: Remove this when all entities start using logic similar to ItemRdfBuilder
-		if ( $type !== 'item' ) {
+		if ( $type !== 'item' && $type !== 'mediainfo' ) {
 			foreach ( $this->builders as $builder ) {
 				$builder->addEntityStub( $entity );
 			}
