@@ -411,7 +411,10 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		}
 
 		// TODO: Remove this when all entities start using logic similar to ItemRdfBuilder
-		if ( $type !== 'item' ) {
+		if (
+			$type !== 'item' &&
+			$type !== 'property'
+		) {
 			foreach ( $this->builders as $builder ) {
 				$builder->addEntity( $entity );
 			}

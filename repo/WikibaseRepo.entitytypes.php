@@ -57,6 +57,7 @@ use Wikibase\Repo\ParserOutput\EntityTermsViewFactory;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\Rdf\FullStatementRdfBuilderFactory;
 use Wikibase\Repo\Rdf\ItemRdfBuilder;
+use Wikibase\Repo\Rdf\PropertyRdfBuilder;
 use Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\SiteLinksRdfBuilder;
@@ -277,10 +278,47 @@ return [
 			$mentionedEntityTracker,
 			$dedupe
 		) {
-			return new PropertySpecificComponentsRdfBuilder(
+			$services = MediaWikiServices::getInstance();
+			$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
+			$propertyDataLookup = WikibaseRepo::getPropertyDataTypeLookup();
+			$valueSnakRdfBuilderFactory = new ValueSnakRdfBuilderFactory(
+				WikibaseRepo::getDataTypeDefinitions( $services )
+					->getRdfBuilderFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
+			);
+
+			$termsRdfBuilder = new TermsRdfBuilder(
 				$vocabulary,
 				$writer,
-				WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes()
+				$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES )
+			);
+
+			$truthyStatementRdfBuilderFactory = new TruthyStatementRdfBuilderFactory(
+				$dedupe,
+				$vocabulary,
+				$writer,
+				$valueSnakRdfBuilderFactory,
+				$mentionedEntityTracker,
+				$propertyDataLookup
+			);
+			$fullStatementRdfBuilderFactory = new FullStatementRdfBuilderFactory(
+				$vocabulary,
+				$writer,
+				$valueSnakRdfBuilderFactory,
+				$mentionedEntityTracker,
+				$dedupe,
+				$propertyDataLookup
+			);
+
+			$propertySpecificRdfBuilder = new PropertySpecificComponentsRdfBuilder(
+				$vocabulary,
+				$writer,
+				WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes() );
+			return new PropertyRdfBuilder(
+				$flavorFlags,
+				$truthyStatementRdfBuilderFactory,
+				$fullStatementRdfBuilderFactory,
+				$termsRdfBuilder,
+				$propertySpecificRdfBuilder
 			);
 		},
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
