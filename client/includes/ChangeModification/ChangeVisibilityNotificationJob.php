@@ -6,8 +6,8 @@ namespace Wikibase\Client\ChangeModification;
 
 use MediaWiki\MediaWikiServices;
 use Title;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
-use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -43,11 +43,9 @@ class ChangeVisibilityNotificationJob extends ChangeModificationNotificationJob 
 
 	public static function newFromGlobalState( Title $unused, array $params ) {
 		$mwServices = MediaWikiServices::getInstance();
-		$lbFactory = $mwServices->getDBLoadBalancerFactory();
 
-		$clientDomainDbFactory = new ClientDomainDbFactory( $lbFactory );
 		return new self(
-			$clientDomainDbFactory->newLocalDb(),
+			WikibaseClient::getClientDomainDbFactory()->newLocalDb(),
 			$mwServices->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			$params
 		);

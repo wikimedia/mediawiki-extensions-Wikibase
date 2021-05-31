@@ -95,6 +95,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
+use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -171,6 +172,14 @@ return [
 			$changeListTransformer,
 			$logger,
 			$settings->getSetting( 'injectRecentChanges' )
+		);
+	},
+
+	'WikibaseClient.ClientDomainDbFactory' => function( MediaWikiServices $services ): ClientDomainDbFactory {
+		$lbFactory = $services->getDBLoadBalancerFactory();
+
+		return new ClientDomainDbFactory(
+			$lbFactory
 		);
 	},
 
