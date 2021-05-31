@@ -65,7 +65,7 @@
 	"apihelp-wbremovereferences-param-bot": "A szerkesztés botszerkesztésnek jelölése. Csak akkor van hatása, ha a felhasználó tagja a „{{int:group-bot}}” csoportnak.",
 	"apihelp-wbremovereferences-param-summary": "A szerkesztési összefoglaló.\nElé kerül egy automatikusan generált megjegyzés. Az automatikus megjegyzés és az összefoglaló együttes hossza legfeljebb 260 bájt (az ékezetes karakterek két bájtot foglalnak el). A limitet túllépő összefoglaló vége le lesz vágva.",
 	"apihelp-wbsearchentities-param-search": "Keresés erre a szövegre.",
-	"apihelp-wbsearchentities-param-language": "Keresés ezen a nyelven.",
+	"apihelp-wbsearchentities-param-language": "Keresés ezen a nyelven. Ez csak az entitások kiválasztását befolyásolja, az eredmény nyelvét nem: az a <var>uselang</var> paraméterrel módosítható.",
 	"apihelp-wbsearchentities-param-limit": "Eredmények maximális száma",
 	"apihelp-wbsearchentities-example-1": "Keresés „abc”-re angolul, alapértelmezett típussal és limittel",
 	"apihelp-wbsearchentities-example-2": "Keresés „abc”-re angolul 50-es limittel",

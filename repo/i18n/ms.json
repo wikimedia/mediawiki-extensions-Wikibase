@@ -134,7 +134,7 @@
 	"wikibase-itemdisambiguation-submit": "Cari",
 	"wikibase-itemdisambiguation-nothing-found": "Maaf, tiada perkara dengan label itu dijumpai.",
 	"wikibase-itemdisambiguation-create": "Anda boleh [$1 mencipta perkara ini].",
-	"wikibase-itemdisambiguation-invalid-langcode": "Maaf, kod bahasa yang anda berikan itu tidak dikenali oleh sistem. Sila gunakan kod yang sah seperti \"en\".",
+	"wikibase-itemdisambiguation-invalid-langcode": "Maaf, kod bahasa yang diberikan tidak dikenali oleh sistem. Sila gunakan kod bahasa yang sah seperti \"ms\".",
 	"wikibase-itemdisambiguation-description": "Nilai-nilai yang digunakan untuk mencari mestilah entri teks yang lengkap. Bahasa itu sekadar pengenal, seperti \"en\".",
 	"special-newproperty": "Cipta sifat baru",
 	"wikibase-newproperty-summary": "Pastikan supaya [[Special:PropertyDisambiguation|sifat itu sudah wujud]]!<br />Anda harus membuat [[{{int:Wikibase-label-helppage}}|label]] dan [[{{int:Wikibase-description-helppage}}|keterangan]] untuk semua sifat baru, dan juga jenis sifat yang sah.",

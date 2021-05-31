@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Akamycoco",
+			"Iyumu"
+		]
+	},
+	"tooltip-t-wikibase": "napadjadjaljudjaljun anga a pasa ta papacaingan na sinanriverivan a saseqetjan ta vecik",
+	"wikibase-comment-update": "pinatjaumaljan anga {{WBREPONAME}}\nsinarariverivan",
+	"wikibase-dataitem": "{{WBREPONAME}} sinanrarivrivan",
+	"wikibase-editlinks": "sipadjadjaljun ta rinasutjan a vecik",
+	"wikibase-editlinkstitle": "padjadjaljun a remasudj ta namaka\nkaizuazua a kay",
+	"wikibase-linkitem-addlinks": "sipazulju a padjaljun",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "qemilja",
+	"wikibase-rc-hide-wikidata-show": "sepaqailjungan",
+	"wikibase-rc-wikibase-edit-letter": "sinansupuan nua tinnau",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} remasutj ta vincikan",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} sinanrarivrivan ID",
+	"wikibase-otherprojects": "a zumanga a namapenetj a vekatj",
+	"wikibase-client-data-bridge-dialog-title": "remasudj ta vincikan $1"
+}
