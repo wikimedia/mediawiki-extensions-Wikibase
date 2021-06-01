@@ -18,7 +18,7 @@
 	],
 	"support": {
 		"issues": "https://phabricator.wikimedia.org/",
-		"irc": "irc://irc.freenode.net/wikidata"
+		"irc": "irc://irc.libera.chat/wikidata"
 	},
 	"require": {
 		"php": ">=7.2.0",

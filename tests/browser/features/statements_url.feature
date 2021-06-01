@@ -72,7 +72,7 @@ Feature: Using url properties in statements
   Examples:
     | value |
     | ftp://ftp-stud.hs-esslingen.de/pub |
-    | irc://irc.freenode.net/ |
+    | irc://irc.libera.chat/ |
     | mailto:mail@example.com |
     | http://عربي.امارات/en/ |
 
