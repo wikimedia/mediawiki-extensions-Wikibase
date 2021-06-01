@@ -52,7 +52,7 @@ class UrlSchemeValidatorsTest extends \MediaWikiTestCase {
 			[ 'https', 'https://ko.wikipedia.org/wiki/전_(요리)' ],
 			[ 'ftp', 'ftp://acme.com' ],
 			[ 'ftp', 'ftp://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ],
-			[ 'irc', 'irc://chat.freenode.net/gimp' ],
+			[ 'irc', 'irc://irc.libera.chat/vim' ],
 			[ 'bzr', 'bzr://archonproject.bzr.sourceforge.net/bzrroot/archonproject' ],
 			[ 'cvs', 'cvs://pserver:anonymous@cvs.delorie.com/cvs/djgpp' ],
 			[ 'mailto', 'mailto:foo@bar' ],
