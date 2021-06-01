@@ -10,11 +10,15 @@
 	},
 	"wikibase-edit": "uah",
 	"wikibase-add": "tambahin",
+	"wikibase-entitytermsforlanguagelistview-language": "Basa",
 	"wikibase-label-empty": "nenten wénten label",
 	"wikibase-description-empty": "Nénten madué daging",
+	"wikibase-content-language-edit-label": "Basa:",
 	"wikibase-sitelinks-special": "Situs lianan",
 	"wikibase-referenceview-tabs-manual": "Manual",
 	"wikibase-statementview-rank-normal": "Tincapan sane sedeng",
 	"wikibase-itembytitle-submit": "Rereh",
-	"wikibase-itemdisambiguation-submit": "Rereh"
+	"wikibase-itemdisambiguation-submit": "Rereh",
+	"wikibase-newentity-language": "Basa:",
+	"wikibase-modifyterm-language": "Kode basa:"
 }
