@@ -19,7 +19,7 @@ script: composer ci
 notifications:
   irc:
     channels:
-      - "chat.freenode.net#wikidata-feed"
+      - "irc.libera.chat#wikidata-feed"
     on_success: change
     on_failure: always
     template:
