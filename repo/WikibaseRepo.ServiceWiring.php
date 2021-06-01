@@ -90,6 +90,7 @@ use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
+use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
@@ -1506,7 +1507,8 @@ return [
 
 		return new RepoDomainDbFactory(
 			$lbFactory,
-			$lbFactory->getLocalDomainID()
+			$lbFactory->getLocalDomainID(),
+			[ DomainDb::LOAD_GROUP_FROM_REPO ]
 		);
 	},
 

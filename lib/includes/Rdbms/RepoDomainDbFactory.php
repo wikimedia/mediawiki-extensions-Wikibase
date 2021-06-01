@@ -22,13 +22,19 @@ class RepoDomainDbFactory {
 	 */
 	private $lbFactory;
 
-	public function __construct( ILBFactory $lbFactory, string $repoDomain ) {
+	/**
+	 * @var string[]
+	 */
+	private $loadGroups;
+
+	public function __construct( ILBFactory $lbFactory, string $repoDomain, array $loadGroups = [] ) {
 		if ( $repoDomain === '' ) {
 			throw new InvalidArgumentException( '"$repoDomain" must not be empty' );
 		}
 
 		$this->repoDomain = $repoDomain;
 		$this->lbFactory = $lbFactory;
+		$this->loadGroups = $loadGroups;
 	}
 
 	/**
@@ -39,7 +45,8 @@ class RepoDomainDbFactory {
 	public function newRepoDb(): RepoDomainDb {
 		return new RepoDomainDb(
 			$this->lbFactory,
-			$this->repoDomain
+			$this->repoDomain,
+			$this->loadGroups
 		);
 	}
 
