@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Rdf;
 
-use MediaWiki\MediaWikiServices;
 use SplQueue;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -10,9 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Content\EntityContentFactory;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -116,22 +113,6 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$this->dedupeBag = $dedupeBag;
 		$this->entityContentFactory = $entityContentFactory;
 
-		// XXX: move construction of sub-builders to a factory class.
-		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( MediaWikiServices::getInstance() );
-		$this->builders[] = new TermsRdfBuilder(
-			$vocabulary,
-			$writer,
-			$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES )
-		);
-
-		if ( $this->shouldProduce( RdfProducer::PRODUCE_TRUTHY_STATEMENTS ) ) {
-			$this->builders[] = $this->newTruthyStatementRdfBuilder();
-		}
-
-		if ( $this->shouldProduce( RdfProducer::PRODUCE_ALL_STATEMENTS ) ) {
-			$this->builders[] = $this->newFullStatementRdfBuilder();
-		}
-
 		$this->entityRdfBuilders = $entityRdfBuilderFactory->getEntityRdfBuilders(
 			$flavor,
 			$vocabulary,
@@ -139,49 +120,6 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			$this,
 			$dedupeBag
 		);
-	}
-
-	/**
-	 * @param int $flavorFlags Flavor flags to use for this builder
-	 * @return SnakRdfBuilder
-	 */
-	private function newSnakBuilder( $flavorFlags ) {
-		$statementValueBuilder = $this->valueSnakRdfBuilderFactory->getValueSnakRdfBuilder(
-			$flavorFlags,
-			$this->vocabulary,
-			$this->writer,
-			$this,
-			$this->dedupeBag
-		);
-		$snakBuilder = new SnakRdfBuilder( $this->vocabulary, $statementValueBuilder, $this->propertyLookup );
-		$snakBuilder->setEntityMentionListener( $this );
-
-		return $snakBuilder;
-	}
-
-	/**
-	 * @return EntityRdfBuilder
-	 */
-	private function newTruthyStatementRdfBuilder() {
-		//NOTE: currently, the only simple values are supported in truthy mode!
-		$simpleSnakBuilder = $this->newSnakBuilder( $this->produceWhat & ~RdfProducer::PRODUCE_FULL_VALUES );
-		$statementBuilder = new TruthyStatementRdfBuilder( $this->vocabulary, $this->writer, $simpleSnakBuilder );
-
-		return $statementBuilder;
-	}
-
-	/**
-	 * @return EntityRdfBuilder
-	 */
-	private function newFullStatementRdfBuilder() {
-		$snakBuilder = $this->newSnakBuilder( $this->produceWhat );
-
-		$builder = new FullStatementRdfBuilder( $this->vocabulary, $this->writer, $snakBuilder );
-		$builder->setDedupeBag( $this->dedupeBag );
-		$builder->setProduceQualifiers( $this->shouldProduce( RdfProducer::PRODUCE_QUALIFIERS ) );
-		$builder->setProduceReferences( $this->shouldProduce( RdfProducer::PRODUCE_REFERENCES ) );
-
-		return $builder;
 	}
 
 	/**
@@ -410,17 +348,6 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			$this->entityRdfBuilders[$type]->addEntity( $entity );
 		}
 
-		// TODO: Remove this when all entities start using logic similar to ItemRdfBuilder
-		if (
-			$type !== 'item' &&
-			$type !== 'property' &&
-			$type !== 'mediainfo'
-		) {
-			foreach ( $this->builders as $builder ) {
-				$builder->addEntity( $entity );
-			}
-		}
-
 		$this->entityResolved( $entity->getId() );
 	}
 
@@ -489,12 +416,6 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$type = $entity->getType();
 		if ( !empty( $this->entityRdfBuilders[$type] ) ) {
 			$this->entityRdfBuilders[$type]->addEntityStub( $entity );
-		}
-		// TODO: Remove this when all entities start using logic similar to ItemRdfBuilder
-		if ( $type !== 'item' && $type !== 'mediainfo' ) {
-			foreach ( $this->builders as $builder ) {
-				$builder->addEntityStub( $entity );
-			}
 		}
 	}
 
