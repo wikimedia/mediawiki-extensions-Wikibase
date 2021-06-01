@@ -26,7 +26,7 @@ deploy:
 notifications:
   irc:
     channels:
-      - "chat.freenode.net#wikidata-feed"
+      - "irc.libera.chat#wikidata-feed"
     on_success: never
     on_failure: always
     template:
