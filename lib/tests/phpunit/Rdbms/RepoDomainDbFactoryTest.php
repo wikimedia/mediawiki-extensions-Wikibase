@@ -6,6 +6,9 @@ namespace Wikibase\Lib\Tests;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikimedia\Rdbms\ILBFactory;
@@ -30,11 +33,17 @@ class RepoDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $repoDomainId;
 
+	/**
+	 * @var MockObject|EntitySourceDefinitions
+	 */
+	private $entitySourceDefinitions;
+
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->lbFactory = $this->createStub( ILBFactory::class );
 		$this->repoDomainId = 'repo';
+		$this->entitySourceDefinitions = $this->createStub( EntitySourceDefinitions::class );
 	}
 
 	public function testNewRepoDb() {
@@ -48,6 +57,25 @@ class RepoDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 			DomainDb::class,
 			$factory->newRepoDb()
 		);
+	}
+
+	public function testNewForEntityType() {
+		$expectedDbName = 'itemRepoDb';
+
+		$itemSource = $this->createMock( EntitySource::class );
+		$itemSource->expects( $this->once() )
+			->method( 'getDatabaseName' )
+			->willReturn( $expectedDbName );
+
+		$this->entitySourceDefinitions = $this->createMock( EntitySourceDefinitions::class );
+		$this->entitySourceDefinitions->expects( $this->once() )
+			->method( 'getSourceForEntityType' )
+			->with( Item::ENTITY_TYPE )
+			->willReturn( $itemSource );
+
+		$this->lbFactory = $this->newMockLBFactoryForDomain( $expectedDbName );
+
+		$this->newFactory()->newForEntityType( ITEM::ENTITY_TYPE );
 	}
 
 	public function testDomainMustNotBeEmpty() {
@@ -71,7 +99,8 @@ class RepoDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function newFactory() {
 		return new RepoDomainDbFactory(
 			$this->lbFactory,
-			$this->repoDomainId
+			$this->repoDomainId,
+			$this->entitySourceDefinitions
 		);
 	}
 

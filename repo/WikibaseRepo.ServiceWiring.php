@@ -1508,6 +1508,7 @@ return [
 		return new RepoDomainDbFactory(
 			$lbFactory,
 			$lbFactory->getLocalDomainID(),
+			WikibaseRepo::getEntitySourceDefinitions( $services ),
 			[ DomainDb::LOAD_GROUP_FROM_REPO ]
 		);
 	},
