@@ -8,9 +8,10 @@ use HtmlCacheUpdater;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\PurgeEntityDataJob;
-use Wikimedia\Rdbms\LBFactorySingle;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\PurgeEntityDataJob
@@ -107,7 +108,7 @@ class PurgeEntityDataJobTest extends MediaWikiIntegrationTestCase {
 		$job = new PurgeEntityDataJob(
 			new ItemIdParser(),
 			$entityDataUriManager,
-			LBFactorySingle::newFromConnection( $this->db ),
+			$this->getRepoDb(),
 			$htmlCacheUpdater,
 			1,
 			[
@@ -133,7 +134,7 @@ class PurgeEntityDataJobTest extends MediaWikiIntegrationTestCase {
 		$job = new PurgeEntityDataJob(
 			new ItemIdParser(),
 			$entityDataUriManager,
-			LBFactorySingle::newFromConnection( $this->db ),
+			$this->getRepoDb(),
 			$htmlCacheUpdater,
 			100,
 			[
@@ -145,6 +146,10 @@ class PurgeEntityDataJobTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$job->run();
+	}
+
+	private function getRepoDb(): RepoDomainDb {
+		return WikibaseRepo::getRepoDomainDbFactory()->newRepoDb();
 	}
 
 }
