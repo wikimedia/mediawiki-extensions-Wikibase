@@ -6,7 +6,8 @@ namespace Wikibase\Client\ChangeModification;
 
 use MediaWiki\MediaWikiServices;
 use Title;
-use Wikimedia\Rdbms\ILBFactory;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
+use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 
 /**
  * Job for notifying a client wiki of a batch of revision deletions on the repository.
@@ -21,12 +22,12 @@ class ChangeDeletionNotificationJob extends ChangeModificationNotificationJob {
 	/**
 	 * Constructs a ChangeDeletionNotificationJob for the repo revisions given.
 	 *
-	 * @param ILBFactory $lbFactory
+	 * @param ClientDomainDb $clientDb
 	 * @param int $batchSize
 	 * @param array $params Contains the name of the repo, revisionIdentifiersJson to redact
 	 */
-	public function __construct( ILBFactory $lbFactory, int $batchSize, array $params = [] ) {
-		parent::__construct( 'ChangeDeletionNotification', $lbFactory, $params );
+	public function __construct( ClientDomainDb $clientDb, int $batchSize, array $params = [] ) {
+		parent::__construct( 'ChangeDeletionNotification', $clientDb, $params );
 
 		$this->batchSize = $batchSize;
 	}
@@ -38,9 +39,10 @@ class ChangeDeletionNotificationJob extends ChangeModificationNotificationJob {
 	 */
 	public static function newFromGlobalState( Title $unused, array $params ) {
 		$mwServices = MediaWikiServices::getInstance();
+		$clientDomainDbFactory = new ClientDomainDbFactory( $mwServices->getDBLoadBalancerFactory() );
 
 		return new self(
-			$mwServices->getDBLoadBalancerFactory(),
+			$clientDomainDbFactory->newLocalDb(),
 			$mwServices->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			$params
 		);
@@ -51,7 +53,7 @@ class ChangeDeletionNotificationJob extends ChangeModificationNotificationJob {
 	 */
 	protected function modifyChanges( array $relevantChanges ): void {
 
-		$dbw = $this->lbFactory->getMainLB()->getConnection( DB_PRIMARY );
+		$dbw = $this->clientDb->connections()->getWriteConnection();
 
 		foreach ( array_chunk( $relevantChanges, $this->batchSize ) as $rcIdBatch ) {
 			$dbw->delete(
@@ -60,7 +62,7 @@ class ChangeDeletionNotificationJob extends ChangeModificationNotificationJob {
 				__METHOD__
 			);
 
-			$this->lbFactory->waitForReplication();
+			$this->clientDb->replication()->waitForAllAffectedClusters();
 		}
 	}
 

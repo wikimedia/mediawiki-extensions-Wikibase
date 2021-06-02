@@ -34,4 +34,8 @@ class ReplicationWaiter {
 		$this->lbFactory->waitForReplication( [ 'domain' => $this->domainId ] );
 	}
 
+	public function waitForAllAffectedClusters(): void {
+		$this->lbFactory->waitForReplication();
+	}
+
 }

@@ -17,22 +17,30 @@ use Wikimedia\Rdbms\LBFactory;
  */
 class ReplicationWaiterTest extends \PHPUnit\Framework\TestCase {
 
-	private function getMockLbFactory( $expectedDomain ) {
-		$mock = $this->createMock( LBFactory::class );
-		$mock->expects( $this->once() )
-			->method( 'waitForReplication' )
-			->with( [ 'domain' => $expectedDomain ] );
-
-		return $mock;
-	}
-
 	public function testWait() {
 		$domain = 'imadomain';
-		$lbFactory = $this->getMockLbFactory( $domain );
+		$lbFactory = $this->createMock( LBFactory::class );
+		$lbFactory->expects( $this->once() )
+			->method( 'waitForReplication' )
+			->with( [ 'domain' => $domain ] );
 
 		$sut = new ReplicationWaiter( $lbFactory, $domain );
 
 		$sut->wait();
 	}
 
+	public function testWaitAll() {
+		$domain = 'imadomain';
+		$lbFactory = $this->createMock( LBFactory::class );
+		$lbFactory->expects( $this->once() )
+			->method( 'waitForReplication' )
+			->with() // TODO this matches anything, it seems not possible to assert that no arguments were passed
+			->willReturnCallback( function( $options ) {
+				$this->assertSame( [], $options );
+			} );
+
+		$sut = new ReplicationWaiter( $lbFactory, $domain );
+
+		$sut->waitForAllAffectedClusters();
+	}
 }
