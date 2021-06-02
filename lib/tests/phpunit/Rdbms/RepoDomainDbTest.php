@@ -19,15 +19,20 @@ class RepoDomainDbTest extends \PHPUnit\Framework\TestCase {
 
 	public function testValidConstructionAndGetters() {
 		$domain = 'imarepo';
-		new RepoDomainDb( $this->newLbFactoryForDomain( $domain ), $domain );
+		$mainLb = $this->createStub( ILoadBalancer::class );
+
+		$db = new RepoDomainDb( $this->newLbFactoryForDomain( $domain, $mainLb ), $domain );
+
+		$this->assertSame( $domain, $db->domain() );
+		$this->assertSame( $mainLb, $db->loadBalancer() );
 	}
 
-	private function newLbFactoryForDomain( string $domain ): ILBFactory {
+	private function newLbFactoryForDomain( string $domain, ILoadBalancer $mainLb ): ILBFactory {
 		$lbFactory = $this->createMock( ILBFactory::class );
-		$lbFactory->expects( $this->once() )
+		$lbFactory->expects( $this->atLeastOnce() )
 			->method( 'getMainLB' )
 			->with( $domain )
-			->willReturn( $this->createStub( ILoadBalancer::class ) );
+			->willReturn( $mainLb );
 
 		return $lbFactory;
 	}
