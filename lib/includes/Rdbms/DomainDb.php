@@ -7,6 +7,7 @@ namespace Wikibase\Lib\Rdbms;
 use Wikimedia\Rdbms\ConnectionManager;
 use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * Encapsulation of access to MediaWiki DB related functionality that is commonly used in Wikibase.
@@ -32,24 +33,30 @@ abstract class DomainDb {
 	private $domainId;
 
 	/**
-	 * @var ConnectionManager
-	 */
-	private $connectionManager;
-
-	/**
 	 * @var ReplicationWaiter
 	 */
 	private $replicationWaiter;
 
+	/**
+	 * @var string[]
+	 */
+	private $loadGroups;
+
+	/**
+	 * @var ?SessionConsistentConnectionManager
+	 */
+	private $sessionConsistentConnectionManager = null;
+
+	/**
+	 * @var ?ConnectionManager
+	 */
+	private $connectionManager = null;
+
 	public function __construct( ILBFactory $lbFactory, string $domainId, array $loadGroups = [] ) {
 		$this->lbFactory = $lbFactory;
 		$this->domainId = $domainId;
+		$this->loadGroups = $loadGroups;
 
-		$this->connectionManager = new ConnectionManager(
-			$lbFactory->getMainLB( $domainId ),
-			$domainId,
-			$loadGroups
-		);
 		$this->replicationWaiter = new ReplicationWaiter(
 			$lbFactory,
 			$domainId
@@ -57,10 +64,32 @@ abstract class DomainDb {
 	}
 
 	/**
-	 * WARNING: Do _not_ override the load-groups in individual method calls on ConnectionManager.
+	 * WARNING: Do _not_ override the load-groups in individual method calls on SessionConsistentConnectionManager.
+	 * Instead add them to the factory method!
+	 */
+	public function sessionConsistentConnections(): SessionConsistentConnectionManager {
+		if ( $this->sessionConsistentConnectionManager === null ) {
+			$this->sessionConsistentConnectionManager = new SessionConsistentConnectionManager(
+				$this->lbFactory->getMainLB( $this->domainId ),
+				$this->domainId,
+				$this->loadGroups
+			);
+		}
+		return $this->sessionConsistentConnectionManager;
+	}
+
+	/**
+	 * WARNING: Do _not_ override the load-groups in individual method calls on ConnectionManager!
 	 * Instead add them to the factory method!
 	 */
 	public function connections(): ConnectionManager {
+		if ( $this->connectionManager === null ) {
+			$this->connectionManager = new ConnectionManager(
+				$this->lbFactory->getMainLB( $this->domainId ),
+				$this->domainId,
+				$this->loadGroups
+			);
+		}
 		return $this->connectionManager;
 	}
 

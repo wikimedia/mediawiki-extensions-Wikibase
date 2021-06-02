@@ -7,9 +7,10 @@ use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\NullMessageReporter;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
-use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
@@ -22,11 +23,6 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  * @author Daniel Kinzler
  */
 class BulkSubscriptionUpdater {
-
-	/**
-	 * @var ILBFactory
-	 */
-	private $lbFactory;
 
 	/**
 	 * @var SessionConsistentConnectionManager
@@ -44,11 +40,9 @@ class BulkSubscriptionUpdater {
 	private $subscriberWikiId;
 
 	/**
-	 * @var string|false The repo wiki's id, as used by the LoadBalancer. Used for wait for replicas.
-	 *                   False indicates to use the local wiki's database, and is the default
-	 *                   for the repoWiki setting.
+	 * @var RepoDomainDb
 	 */
-	private $repoWiki;
+	private $repoDb;
 
 	/**
 	 * @var int
@@ -66,46 +60,33 @@ class BulkSubscriptionUpdater {
 	private $progressReporter;
 
 	/**
-	 * @param ILBFactory $lbFactory Load balancer factory, used to wait for replication.
-	 * @param SessionConsistentConnectionManager $localConnectionManager Connection manager for DB
-	 * connections to the local wiki.
-	 * @param SessionConsistentConnectionManager $repoConnectionManager Connection manager for DB
-	 * connections to the repo.
+	 * @param ClientDomainDb $clientDb DB manager for DB connections to the local wiki.
+	 * @param RepoDomainDb $repoDb DB manager for DB connections to the repo.
 	 * @param string $subscriberWikiId The local wiki's global ID, to be used as the subscriber ID
 	 * in the repo's subscription table.
-	 * @param string|false $repoWiki The repo wiki's id, as used by the LoadBalancer.
-	 *                               False (default of the repoWiki setting) indicates to
-	 *                               use local wiki database.
 	 * @param int $batchSize
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		ILBFactory $lbFactory,
-		SessionConsistentConnectionManager $localConnectionManager,
-		SessionConsistentConnectionManager $repoConnectionManager,
+		ClientDomainDb $clientDb,
+		RepoDomainDb $repoDb,
 		$subscriberWikiId,
-		$repoWiki,
 		$batchSize = 1000
 	) {
 		if ( !is_string( $subscriberWikiId ) ) {
 			throw new InvalidArgumentException( '$subscriberWikiId must be a string' );
 		}
 
-		if ( !is_string( $repoWiki ) && $repoWiki !== false ) {
-			throw new InvalidArgumentException( '$repoWiki must be a string or false' );
-		}
-
 		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
 			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
 		}
 
-		$this->lbFactory = $lbFactory;
-		$this->localConnectionManager = $localConnectionManager;
-		$this->repoConnectionManager = $repoConnectionManager;
+		$this->localConnectionManager = $clientDb->sessionConsistentConnections();
+		$this->repoConnectionManager = $repoDb->sessionConsistentConnections();
+		$this->repoDb = $repoDb;
 
 		$this->subscriberWikiId = $subscriberWikiId;
-		$this->repoWiki = $repoWiki;
 		$this->batchSize = $batchSize;
 
 		$this->exceptionHandler = new LogWarningExceptionHandler();
@@ -131,7 +112,7 @@ class BulkSubscriptionUpdater {
 		$continuation = $startEntity ? [ $startEntity->getSerialization() ] : null;
 
 		while ( true ) {
-			$this->lbFactory->waitForReplication( [ 'domain' => $this->repoWiki ] );
+			$this->repoDb->replication()->wait();
 
 			$count = $this->processUpdateBatch( $continuation );
 
@@ -274,7 +255,7 @@ class BulkSubscriptionUpdater {
 		$this->repoConnectionManager->prepareForUpdates();
 
 		while ( true ) {
-			$this->lbFactory->waitForReplication( [ 'domain' => $this->repoWiki ] );
+			$this->repoDb->replication()->wait();
 
 			$count = $this->processDeletionBatch( $continuation );
 
