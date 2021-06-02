@@ -95,7 +95,7 @@
 	"wikibase-undo-nocontent": "לא ניתן לטעון את התוכן של הגרסה $2 של הדף $1",
 	"wikibase-undo-redirect-latestredirect": "אי־אפשר לבטל עריכה שאינה הפניה אם הגרסה החדשה ביותר היא הפניה",
 	"wikibase-undo-redirect-latestnoredirect": "לא ניתן לבטל עריכת הפניה אם הגרסה החדשה ביותר היא לא הפניה",
-	"wikibase-summary-generated": "תקציר (יתווסף לתקציר המחולל אוטומטי):",
+	"wikibase-summary-generated": "תקציר (יתווסף לתקציר שמחולל אוטומטית):",
 	"wikibase-disambiguation-title": "פירושונים עבור \"$1\"",
 	"wikibase-aliases-input-help-message": "כדי שיהיה קל יותר למצוא את הישות הזה, אפשר להזין שמות חלופיים.",
 	"wikibase-propertypage-datatype": "סוג נתונים",
