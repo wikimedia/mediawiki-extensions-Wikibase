@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use ChangeTags;
-use ContentHandler;
 use Exception;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
@@ -59,14 +58,6 @@ use Wikimedia\TestingAccessWrapper;
 class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
 	private const FAKE_NS_ID = 654;
-
-	protected function tearDown(): void {
-		parent::tearDown();
-
-		// ContentHandler caches ContentHandler objects, but given we mess
-		// with the EntityContentDataCodec in there, we need to reset that.
-		ContentHandler::cleanupHandlersCache();
-	}
 
 	/**
 	 * @return EntityHandler
@@ -354,8 +345,6 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			} );
 
 		$this->setService( 'WikibaseRepo.StorageEntitySerializer', $mockSerializer );
-
-		ContentHandler::cleanupHandlersCache();
 
 		/**
 		 * @var WikiPageEntityStore $store
