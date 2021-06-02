@@ -17,6 +17,9 @@ use Wikimedia\Rdbms\ILBFactory;
  */
 abstract class DomainDb {
 
+	public const LOAD_GROUP_FROM_CLIENT = 'from-client';
+	public const LOAD_GROUP_FROM_REPO = 'from-repo';
+
 	/**
 	 * @var ConnectionManager
 	 */
@@ -27,10 +30,11 @@ abstract class DomainDb {
 	 */
 	private $replicationWaiter;
 
-	public function __construct( ILBFactory $lbFactory, string $domainId ) {
+	public function __construct( ILBFactory $lbFactory, string $domainId, array $loadGroups = [] ) {
 		$this->connectionManager = new ConnectionManager(
 			$lbFactory->getMainLB( $domainId ),
-			$domainId
+			$domainId,
+			$loadGroups
 		);
 		$this->replicationWaiter = new ReplicationWaiter(
 			$lbFactory,
@@ -38,6 +42,10 @@ abstract class DomainDb {
 		);
 	}
 
+	/**
+	 * WARNING: Do _not_ override the load-groups in individual method calls on ConnectionManager.
+	 * Instead add them to the factory method!
+	 */
 	public function connections(): ConnectionManager {
 		return $this->connectionManager;
 	}

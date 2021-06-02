@@ -16,8 +16,14 @@ class ClientDomainDbFactory {
 	 */
 	private $lbFactory;
 
-	public function __construct( ILBFactory $lbFactory ) {
+	/**
+	 * @var string[]
+	 */
+	private $loadGroups;
+
+	public function __construct( ILBFactory $lbFactory, array $loadGroups = [] ) {
 		$this->lbFactory = $lbFactory;
+		$this->loadGroups = $loadGroups;
 	}
 
 	public function newLocalDb(): ClientDomainDb {
@@ -25,7 +31,8 @@ class ClientDomainDbFactory {
 
 		return new ClientDomainDb(
 			$this->lbFactory,
-			$localDomain
+			$localDomain,
+			$this->loadGroups
 		);
 	}
 

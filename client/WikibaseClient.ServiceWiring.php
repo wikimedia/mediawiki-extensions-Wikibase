@@ -96,6 +96,7 @@ use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
+use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -179,7 +180,8 @@ return [
 		$lbFactory = $services->getDBLoadBalancerFactory();
 
 		return new ClientDomainDbFactory(
-			$lbFactory
+			$lbFactory,
+			[ DomainDb::LOAD_GROUP_FROM_CLIENT ]
 		);
 	},
 
