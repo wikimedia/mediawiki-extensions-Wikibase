@@ -3,10 +3,10 @@
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use ConfigFactory;
-use ContentHandler;
 use FauxRequest;
 use IContextSource;
 use Language;
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 use PHPUnit\Framework\TestCase;
 use Skin;
@@ -152,7 +152,9 @@ class SkinAfterPortletHandlerTest extends TestCase {
 		$title->method( 'getNamespace' )
 			->willReturn( 0 );
 
-		$contentHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKITEXT );
+		$contentHandler = MediaWikiServices::getInstance()
+			->getContentHandlerFactory()
+			->getContentHandler( CONTENT_MODEL_WIKITEXT );
 
 		$wikiPage = $this->getMockBuilder( WikiPage::class )
 			->disableOriginalConstructor()
