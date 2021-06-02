@@ -80,7 +80,8 @@ class RdfVocabularyTest extends ServiceWiringTestCase {
 		$this->assertSame( 'https://local.test/prop/statement/', $rdfVocabulary->getNamespaceURI( 'lps' ) );
 		$this->assertSame( 'https://other.test/reference/', $rdfVocabulary->getNamespaceURI( 'oref' ) );
 		$testProperty = new Property( null, null, 'test' );
-		$this->assertSame( 'https://rdf.test/Datatype', $rdfVocabulary->getDataTypeURI( $testProperty ) );
+		$testType = $testProperty->getDataTypeId();
+		$this->assertSame( 'https://rdf.test/Datatype', $rdfVocabulary->getDataTypeURI( $testType ) );
 	}
 
 }

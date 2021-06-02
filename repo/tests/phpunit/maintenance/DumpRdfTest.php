@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Maintenance;
 
 use DataValues\StringValue;
-use MediaWikiLangTestCase;
+use MediaWikiIntegrationTestCase;
 use TestSites;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -52,7 +52,7 @@ require_once __DIR__ . '/../../../maintenance/dumpRdf.php';
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class DumpRdfTest extends MediaWikiLangTestCase {
+class DumpRdfTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -158,7 +158,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 
 		// Note: We are testing with the actual RDF bindings, so we can check for actual RDF output.
 		$rdfBuilder = WikibaseRepo::getValueSnakRdfBuilderFactory();
-
+		$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $this->getMockPropertyDataTypeLookup() );
 		$dumpScript->setServices(
 			$sqlEntityIdPagerFactory,
 			$existingEntityTypes,

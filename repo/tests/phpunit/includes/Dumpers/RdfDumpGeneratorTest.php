@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevision;
@@ -203,10 +204,13 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 					$propertyDataLookup
 				);
 
+				$dataTypeLookup = $this->getPropertyDataTypeLookup();
 				$propertySpecificRdfBuilder = new PropertySpecificComponentsRdfBuilder(
 					$vocabulary,
 					$writer,
-					WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes() );
+					$dataTypeLookup,
+					WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes()
+				);
 				return new PropertyRdfBuilder(
 					$flavorFlags,
 					$truthyStatementRdfBuilderFactory,
@@ -216,6 +220,13 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 				);
 			}
 		];
+	}
+
+	private function getPropertyDataTypeLookup() {
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P10' ), 'Wibblywobbly' ); // see phpunit/data/rdf/RdfDumpGenerator
+
+		return $dataTypeLookup;
 	}
 
 	/**

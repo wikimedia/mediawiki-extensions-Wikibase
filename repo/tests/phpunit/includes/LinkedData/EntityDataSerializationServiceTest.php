@@ -17,6 +17,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevision;
@@ -414,6 +415,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		array $unexpectedDataExpressions,
 		$expectedMimeType
 	) {
+		$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $this->getMockPropertyDataTypeLookup() );
 		$service = $this->newService();
 		list( $data, $mimeType ) = $service->getSerializedData(
 			$format,
@@ -432,6 +434,21 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		foreach ( $unexpectedDataExpressions as $key => $unexpectedDataRegex ) {
 			$this->assertNotRegExp( $unexpectedDataRegex, $data, "unexpected: $key" );
 		}
+	}
+
+	/**
+	 * @return PropertyDataTypeLookup
+	 */
+	private function getMockPropertyDataTypeLookup() {
+		$mockDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
+		$mockDataTypeLookup->method( 'getDataTypeIdForProperty' )
+			->willReturnCallback( function( PropertyId $id ) {
+				if ( $id->getSerialization() === 'P999' ) {
+					throw new PropertyDataTypeLookupException( $id );
+				}
+				return 'string';
+			} );
+		return $mockDataTypeLookup;
 	}
 
 }
