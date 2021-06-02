@@ -55,6 +55,7 @@ use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\MessageInLanguageProvider;
+use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -497,6 +498,11 @@ final class WikibaseClient {
 	public static function getMessageInLanguageProvider( ContainerInterface $services = null ): MessageInLanguageProvider {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.MessageInLanguageProvider' );
+	}
+
+	public static function getClientDomainDbFactory( ContainerInterface $services = null ): ClientDomainDbFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.ClientDomainDbFactory' );
 	}
 
 }

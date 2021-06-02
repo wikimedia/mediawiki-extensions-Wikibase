@@ -6,8 +6,8 @@ namespace Wikibase\Client\ChangeModification;
 
 use MediaWiki\MediaWikiServices;
 use Title;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
-use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 
 /**
  * Job for notifying a client wiki of a batch of revision deletions on the repository.
@@ -39,10 +39,9 @@ class ChangeDeletionNotificationJob extends ChangeModificationNotificationJob {
 	 */
 	public static function newFromGlobalState( Title $unused, array $params ) {
 		$mwServices = MediaWikiServices::getInstance();
-		$clientDomainDbFactory = new ClientDomainDbFactory( $mwServices->getDBLoadBalancerFactory() );
 
 		return new self(
-			$clientDomainDbFactory->newLocalDb(),
+			WikibaseClient::getClientDomainDbFactory()->newLocalDb(),
 			$mwServices->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			$params
 		);
