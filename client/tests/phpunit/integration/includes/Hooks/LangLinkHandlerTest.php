@@ -98,7 +98,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 			),
 			$siteStore,
 			'srwiki',
-			'wikipedia'
+			[ 'wikipedia' ]
 		);
 	}
 

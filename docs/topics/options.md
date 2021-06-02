@@ -745,6 +745,12 @@ ID of the site group to be shown as language links.
 
 DEFAULT: `null` (That is the site's own site group.)
 
+#### languageLinkAllowedSiteGroups
+List of allowed group of sitelinks to be shown as language links.
+For example for Wikimedia Commons, this can be `commons` and `wikipedia`.
+
+DEFAULT: `null` (Meaning value of languageLinkSiteGroup will be the only allowed group)
+
 #### badgeClassNames
 A list of additional CSS class names for site links that have badges.
 

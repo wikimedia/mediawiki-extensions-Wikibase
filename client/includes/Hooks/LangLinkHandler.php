@@ -46,9 +46,9 @@ class LangLinkHandler {
 	private $siteId;
 
 	/**
-	 * @var string
+	 * @var string[]
 	 */
-	private $siteGroup;
+	private $siteGroups;
 
 	/**
 	 * @param LanguageLinkBadgeDisplay $badgeDisplay
@@ -56,22 +56,22 @@ class LangLinkHandler {
 	 * @param SiteLinksForDisplayLookup $siteLinkForDisplayLookup
 	 * @param SiteLookup $siteLookup
 	 * @param string $siteId The global site ID for the local wiki
-	 * @param string $siteGroup The ID of the site group to use for showing language links.
+	 * @param string[] $siteGroups The ID of the site groups to use for showing language links.
 	 */
 	public function __construct(
 		LanguageLinkBadgeDisplay $badgeDisplay,
 		NamespaceChecker $namespaceChecker,
 		SiteLinksForDisplayLookup $siteLinkForDisplayLookup,
 		SiteLookup $siteLookup,
-		$siteId,
-		$siteGroup
+		string $siteId,
+		array $siteGroups
 	) {
 		$this->badgeDisplay = $badgeDisplay;
 		$this->namespaceChecker = $namespaceChecker;
 		$this->siteLinksForDisplayLookup = $siteLinkForDisplayLookup;
 		$this->siteLookup = $siteLookup;
 		$this->siteId = $siteId;
-		$this->siteGroup = $siteGroup;
+		$this->siteGroups = $siteGroups;
 	}
 
 	/**
@@ -260,15 +260,12 @@ class LangLinkHandler {
 		if ( !$this->useRepoLinks( $title, $out ) ) {
 			return [];
 		}
-
-		$allowedGroups = [ $this->siteGroup ];
-
 		$onPageLinks = $out->getLanguageLinks();
 		$onPageLinks = $this->localLinksToArray( $onPageLinks );
 
 		$repoLinks = $this->siteLinksForDisplayLookup->getSiteLinksForPageTitle( $title );
 
-		$repoLinks = $this->filterRepoLinksByGroup( $repoLinks, $allowedGroups );
+		$repoLinks = $this->filterRepoLinksByGroup( $repoLinks, $this->siteGroups );
 		$repoLinks = $this->suppressRepoLinks( $out, $repoLinks );
 
 		$repoLinks = array_diff_key( $repoLinks, $onPageLinks ); // remove local links

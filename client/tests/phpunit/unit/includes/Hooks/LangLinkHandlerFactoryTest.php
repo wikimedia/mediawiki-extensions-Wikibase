@@ -34,7 +34,7 @@ class LangLinkHandlerFactoryTest extends \MediaWikiUnitTestCase {
 			$this->createMock( HookContainer::class ),
 			$this->createMock( LoggerInterface::class ),
 			'srwiki',
-			'wikipedia'
+			[ 'wikipedia' ]
 		);
 
 		$langLinkHandler = $factory->getLangLinkHandler( $this->createMock( UsageAccumulator::class ) );

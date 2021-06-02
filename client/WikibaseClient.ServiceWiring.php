@@ -488,7 +488,7 @@ return [
 			$services->getHookContainer(),
 			WikibaseClient::getLogger( $services ),
 			WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' ),
-			WikibaseClient::getLangLinkSiteGroup( $services )
+			WikibaseClient::getLangLinkSiteGroups( $services )
 		);
 	},
 
@@ -501,6 +501,15 @@ return [
 		}
 
 		return $group;
+	},
+
+	'WikibaseClient.LangLinkSiteGroups' => function ( MediaWikiServices $services ): array {
+		$groups = WikibaseClient::getSettings( $services )->getSetting( 'languageLinkAllowedSiteGroups' );
+		if ( $groups === null ) {
+			$groups = [ WikibaseClient::getLangLinkSiteGroup( $services ) ];
+		}
+
+		return $groups;
 	},
 
 	'WikibaseClient.LanguageFallbackChainFactory' => function ( MediaWikiServices $services ): LanguageFallbackChainFactory {

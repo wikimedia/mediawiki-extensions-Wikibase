@@ -268,6 +268,17 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * Returns the site group IDs for the group to be used for language links.
+	 * This is typically the group the client wiki itself belongs to, but
+	 * can be configured to be otherwise using the languageLinkSiteGroup setting.
+	 * It can also be configured to be more than one group.
+	 */
+	public static function getLangLinkSiteGroups( ContainerInterface $services = null ): array {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.LangLinkSiteGroups' );
+	}
+
+	/**
 	 * Get site group ID
 	 */
 	public static function getSiteGroup( ContainerInterface $services = null ): string {
