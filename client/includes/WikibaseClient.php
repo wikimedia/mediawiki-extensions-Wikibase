@@ -56,6 +56,7 @@ use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -503,6 +504,11 @@ final class WikibaseClient {
 	public static function getClientDomainDbFactory( ContainerInterface $services = null ): ClientDomainDbFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.ClientDomainDbFactory' );
+	}
+
+	public static function getRepoDomainDbFactory( ContainerInterface $services = null ): RepoDomainDbFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.RepoDomainDbFactory' );
 	}
 
 }

@@ -97,6 +97,7 @@ use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikibase\Lib\Rdbms\DomainDb;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -727,6 +728,17 @@ return [
 				$logger
 			),
 			$logger
+		);
+	},
+
+	'WikibaseClient.RepoDomainDbFactory' => function ( MediaWikiServices $services ): RepoDomainDbFactory {
+		$lbFactory = $services->getDBLoadBalancerFactory();
+
+		return new RepoDomainDbFactory(
+			$lbFactory,
+			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName(),
+			WikibaseClient::getEntitySourceDefinitions( $services ),
+			[ DomainDb::LOAD_GROUP_FROM_CLIENT ]
 		);
 	},
 
