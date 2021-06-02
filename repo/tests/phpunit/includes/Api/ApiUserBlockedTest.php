@@ -28,7 +28,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		$this->block = new DatabaseBlock( [
 			'address' => $testuser,
 			'reason' => 'testing in ' . __CLASS__,
-			'by' => $testuser->getId(),
+			'by' => $testuser,
 		] );
 		$this->block->insert();
 		$this->initTestEntities( [ 'StringProp', 'Berlin', 'Oslo' ] );
