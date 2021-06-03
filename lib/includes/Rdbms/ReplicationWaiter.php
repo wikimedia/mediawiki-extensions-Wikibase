@@ -30,12 +30,17 @@ class ReplicationWaiter {
 		$this->domainId = $domainId;
 	}
 
-	public function wait(): void {
-		$this->lbFactory->waitForReplication( [ 'domain' => $this->domainId ] );
+	public function wait( ?int $timeout = null ): void {
+		$this->lbFactory->waitForReplication( array_filter( [
+			'domain' => $this->domainId,
+			'timeout' => $timeout,
+		] ) );
 	}
 
-	public function waitForAllAffectedClusters(): void {
-		$this->lbFactory->waitForReplication();
+	public function waitForAllAffectedClusters( ?int $timeout = null ): void {
+		$this->lbFactory->waitForReplication( array_filter( [
+			'timeout' => $timeout,
+		] ) );
 	}
 
 }

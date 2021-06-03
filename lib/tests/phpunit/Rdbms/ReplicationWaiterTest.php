@@ -29,6 +29,19 @@ class ReplicationWaiterTest extends \PHPUnit\Framework\TestCase {
 		$sut->wait();
 	}
 
+	public function testWaitWithTimeout() {
+		$domain = 'imadomain';
+		$timeout = 1000;
+		$lbFactory = $this->createMock( LBFactory::class );
+		$lbFactory->expects( $this->once() )
+			->method( 'waitForReplication' )
+			->with( [ 'domain' => $domain, 'timeout' => $timeout ] );
+
+		$sut = new ReplicationWaiter( $lbFactory, $domain );
+
+		$sut->wait( $timeout );
+	}
+
 	public function testWaitAll() {
 		$domain = 'imadomain';
 		$lbFactory = $this->createMock( LBFactory::class );
@@ -42,5 +55,18 @@ class ReplicationWaiterTest extends \PHPUnit\Framework\TestCase {
 		$sut = new ReplicationWaiter( $lbFactory, $domain );
 
 		$sut->waitForAllAffectedClusters();
+	}
+
+	public function testWaitAllWithTimeout() {
+		$domain = 'imadomain';
+		$timeout = 2000;
+		$lbFactory = $this->createMock( LBFactory::class );
+		$lbFactory->expects( $this->once() )
+			->method( 'waitForReplication' )
+			->with( [ 'timeout' => $timeout ] );
+
+		$sut = new ReplicationWaiter( $lbFactory, $domain );
+
+		$sut->waitForAllAffectedClusters( $timeout );
 	}
 }
