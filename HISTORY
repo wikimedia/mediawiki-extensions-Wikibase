@@ -1,0 +1,248 @@
+Change notes from older releases. For current info, see RELEASE-NOTES-1.37.
+
+= Wikibase 1.35 =
+
+== Wikibase 1.35.2-wmde.1 ==
+
+This is a security and maintenance release of the Wikibase 1.35 branch.
+
+=== Changes since Wikibase 1.35.0-wmde.0 ===
+
+* (T280124) FedProps: ensure FedProps EntityTypeDefinitions are loaded last
+* (T97146) Permit restoring redirects to discard entity data
+* (T271618) Catch wider exception type for unresolved redirects
+* (T153570) SubmitEntityAction: Pass 'undoafter' and 'restore' to doEditContent
+* (T97146) Handle error when mixing redirects in undo
+* (T270353) Fix Wikibase client Scribunto test ParserOption watcher
+* (T264929) Skip 0 page ID in hook handler
+* (T264929) Use LinksUpdate::$mId in hook handler
+* (T269871) Don't assume wbUserSpecifiedLanguages is always there
+* (T267502) Fix missing Wikibase CSS on undo and diff pages
+* (T217144) Fix watch-on-edit settings on grant-limited requests
+* (T259340) Remove check for valid MW language code in Lua
+* (T253812) Correct directionality and language of placeholders in New Item
+* (T256885) Fix limit not applied in case of language fallback
+* (T260853) TypeError on commons Title::newFromText returning null
+* (T255387) Redirected links should use redirect=no
+* (T269666) Create a Wikibase Pingback based on MW Pingback
+* (T254740) Prefetch entities as part of federated properties
+* (T258558) Error messages for API modules that will not work with federated properties
+* (T255756, T258565) Handling failed requests to the federation source Wiki
+* (T246125, T251102) Notifications for redirects to Wikidata in Federated Properties MVP
+* (T246871) Changes to RDF dumping when federated properties are enabled
+* (T257907) Automatically alter entitysources configuration for Wikidata.org values for
+ fed props when pointing at wikidata.org
+* (T255581) Changes to Special:ListDatatypes when federation is enabled
+
+== Upgrading notes for 1.35 ==
+Don't forget to always back up your database before upgrading!
+
+Some specific notes for Wikibase 1.35 upgrades are below:
+
+The term storage in Wikibase has seen significant changes and has been under
+migration on Wikidata from the old wb_terms table to the new normalized model
+for a significant period of time.
+
+In April of 2019 the Wikidata team adopted a migration strategy (T220480)
+where the two storage models would be living side by side for the period of
+the migration. The migration has happened for reads and writes which has been
+controlled by a set of temporary variables that determine which storage will
+be used. Since March of 2020 wikidata was set to not read from the old
+wb_terms table anymore and during fall of 2020 the wb_terms table was
+officially dropped (T208425) on the development branch.
+
+The following configuration settings have been added to support this migration
+on Wikidata and will be removed in upcoming releases.
+
+* (repo) tmpPropertyTermsMigrationStage
+* (repo) tmpItemTermsMigrationStages
+* (repo) tmpItemSearchMigrationStage
+* (repo) tmpPropertySearchMigrationStage
+
+When upgrading to 1.35 this migration will happen primarily in jobs that run on
+the repository. Therefore it might be necessary to execute runJobs.php until
+the new term storage has been fully populated or by increasing the job run rate
+by changing the value of $wgJobRunRate. On smaller Wikibase instances this
+migration process will automatically be handled by running update.php.
+
+Don't forget to backup your database!
+
+For more information:
+
+https://phabricator.wikimedia.org/phame/post/view/195/coming_to_terms_with_change/
+https://lists.wikimedia.org/pipermail/wikidata/2020-March/013901.html
+
+For a general manual to upgrade MediaWiki see:
+https://www.mediawiki.org/wiki/Manual:Upgrading
+
+=== Configuration changes for system administrators in 1.35 ===
+
+==== New configuration ====
+
+* (repo) (T269666) wikibasePingback — Feature flag for turning pingback on or off.
+ The pingback will periodically send anonymous system information to mediawiki.org.
+ Default set to false.
+
+* (repo) (T269666) pingbackHost — The host to send pingback to.
+ Default set to https://www.mediawiki.org/beacon/event
+
+* (repo) (T246776) federatedPropertiesEnabled — Feature flag for turning
+ federated properties on or off. Default set to false.
+
+* (repo) (T246776) federatedPropertiesSourceScriptUrl — Host script url for
+ federated properties feature. Example: https://www.wikidata.org/w/
+
+* (repo) (T235032) dataBridgeEnabled — Enable the repo parts of the Data
+ Bridge Feature; see the corresponding client setting for more information.
+ Default set to false.
+
+* (repo) propagateChangeVisibility — Whether to propagate changes in revision
+ visibility to client wikis. Default set to false.
+
+* (repo) changeVisibilityNotificationClientRCMaxAge — Value of the
+ `$wgRCMaxAge` setting, which specifies the max age (in seconds) of entries
+ in the `recentchanges` table, on the client wikis.
+
+* (repo) changeVisibilityNotificationJobBatchSize — Batch size (how many
+ revisions per job) to use when pushing `ChangeVisibilityNotification` jobs.
+
+==== Changed configuration ====
+* (repo) idBlacklist renamed to reservedIds
+
+* (repo & client) (T256238) sharedCacheKeyPrefix — default cache key prefix
+ changed as WBL_VERSION was removed
+
+* (T232248) Change default siteLinkGroups to only show local and fully
+ functional sitelink groups
+
+==== Removed configuration ====
+* (repo) (T245860) useEntitySourceBasedFederation
+* (client) (T245860) useEntitySourceBasedFederation
+
+=== New user-facing features in 1.35 ===
+* Adds experimental support for federated properties
+* (T254114, T254541) Property order: Allow using # as well as or instead of *
+
+=== External library changes in 1.35 ===
+
+==== New external libraries ====
+* Added guzzlehttp/guzzle 6.0.0
+
+==== Changed external libraries ====
+* Updated data-values/geo from 3.0.1 to 4.2.1
+* Updated wikibase/data-model from 9.0.1 to 9.5.1
+* Updated wikibase/data-model-services from 3.15.0 to 5.1
+* Updated diff/diff from 2.3.0 to 3.2.0
+
+==== Removed external libraries ====
+* Removed wikibase/term-store 1.0.0
+
+=== Bug fixes in 1.35 ===
+* (T258507) Fix bug that causes wrong prefixes in RDF output
+* (T254476) Change 'Edit link' color to make it WCAG compliant
+* (T255078) Fix entity id lookup for interwiki special page links
+* (T251880) Special:Search RevisionedUnresolvedRedirectException logspam
+* (T216369) Fix watching new entities on existing pages
+* (T252803) Fix core's TitleFactory not being used correctly
+* (T249565) Do not try to drop wb_items_per_site when wb_terms doesn't exist
+* (T248147) Fix Database::normalizeUpsertKeys called with deprecated parameter
+* (T247985) Fix 'max' to Int32EntityId::MAX conversion
+* (T247553, T246898) Do not lock rows when there's no term returned
+* (T247553, T246898) Store item terms at late as possible to avoid deadlocks
+* (T245062) Do not try to load label in unknown languages in Lua
+* (T244129) Add missing wbeditentity summary messages for clients
+* (T237984) Fix incorrect deletion of rows in DatabaseTermIdsCleaner
+* (T243944, T243705) wb_terms: Fix incorrect deletion of rows
+
+=== Action API changes in 1.35 ===
+
+* (T257658) EntityTerms module added allowing for the following query
+ Example: "action=query&prop=entityterms"
+
+=== Languages updated in 1.35 ===
+Wikibase supports over 300 languages. Many localisations are updated regularly.
+Below only new and removed languages are listed, as well as changes to languages
+because of Phabricator reports.
+
+New monolingual support:
+
+* (T155424) Abza abq-latn
+* (T234330) Sama bdr
+* (T210311) Chakma ccp
+* (T240097) Chukchi ckt
+* (T220284) Kalinago crb
+* (T240098) Dagbani dag
+* (T234761) Tungag lcm
+* (T235468) Pattani Malay mfa
+* (T165648) Guernésiais nrf-gg
+* (T165648) Jèrriais nrf-je
+* (T250246) Naskapi nsk
+* (T230881) Pali pi-sidd
+* (T222426) Rumantsch rm-puter
+* (T222426) Rumantsch rm-rumgr
+* (T222426) Rumantsch rm-surmiran
+* (T222426) Rumantsch rm-sursilv
+* (T222426) Rumantsch rm-sutsilv
+* (T222426) Rumantsch rm-vallader
+* (T226701) Finnish Kalo rmf
+* (T230881) Pali sa-sidd
+* (T220284) Taíno tnq
+* (T239411) Wallisian wls
+
+Monolingual entries removed as they are now natively supported by MediaWiki:
+
+* (T201269) Amis ami
+* (T251369) Ladin lld
+* (T248299) Inari Sami smn
+* (T251369) Seediq (Taroko) trv
+
+=== Breaking changes in 1.35 ===
+* Updated minimum PHP version from 5.6.99 to 7.2.0
+* (T257658) removing special pageterms behavior on repo wikis, use entityterms
+ instead.
+
+* (T138104) Special:EntityData now serializes empty descriptions/aliases or
+ sitelinks as empty objects instead of empty arrays
+
+=== Deprecations in 1.35 ===
+* (T249561) Deprecate Revision in:
+ Wikibase\Repo\Diff\EntityContentDiffView::getRevisionHeader
+* (T208425) wb_terms will get dropped.
+ this made the following methods deprecated:
+* Wikibase\Repo\Store\Store::getLegacyEntityTermStoreReader
+* Wikibase\Repo\Store\Store::getLegacyEntityTermStoreWriter
+* Wikibase\Repo\Store\Store::getLabelConflictFinder
+* Wikibase\Repo\Store\Store::getTermIndex
+* Wikibase\Lib\Tests\Store\MockTermIndex
+* Wikibase\Lib\Store\TermIndex
+* Wikibase\Lib\Store\Sql\TermSqlIndex
+* Wikibase\Lib\Store\NullTermIndex
+* Wikibase\Lib\Store\LegacyEntityTermStoreReader
+
+=== Other changes in 1.35 ===
+* Wikibase\StoreFactory has been removed
+* (T242096) Wikibase\Lib\Store\MultiTermStoreWriter has been removed
+* (T254283) Wikibase\Lib\Store\EntityInfo and related classes removed
+
+* (T256238) Constant WBC_VERSION has been removed
+* (T256238) Constant WBL_VERSION has been removed
+* (T256238) Constant WB_VERSION has been removed
+
+== Online documentation ==
+Installation instructions and FAQ
+
+		https://www.mediawiki.org/wiki/Wikibase
+
+Developer documentation of Wikibase 1.35
+
+		https://doc.wikimedia.org/Wikibase/REL1_35/
+
+== Mailing list ==
+Discussion regarding the development of Wikidata
+
+		https://lists.wikimedia.org/mailman/listinfo/wikidata-tech
+
+== IRC help ==
+
+Questions related to wikibase and wikidata can be asked in #wikibase or
+#wikidata on irc.freenode.net.
