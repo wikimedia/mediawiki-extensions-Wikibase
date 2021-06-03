@@ -43,19 +43,26 @@ class SetSiteLink extends ModifyEntity {
 	 */
 	protected $siteLinkTargetProvider;
 
+	/**
+	 * @var string[]
+	 */
+	private $sandboxEntityIds;
+
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
 		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
 		SiteLinkBadgeChangeOpSerializationValidator $badgeSerializationValidator,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
-		bool $federatedPropertiesEnabled
+		bool $federatedPropertiesEnabled,
+		array $sandboxEntityIds
 	) {
 		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 
 		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
 		$this->badgeSerializationValidator = $badgeSerializationValidator;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
+		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
 
 	public static function factory(
@@ -74,7 +81,8 @@ class SetSiteLink extends ModifyEntity {
 				->getSiteLinkChangeOpFactory(),
 			$siteLinkBadgeChangeOpSerializationValidator,
 			$siteLinkTargetProvider,
-			$repoSettings->getSetting( 'federatedPropertiesEnabled' )
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
+			$repoSettings->getSetting( 'sandboxEntityIds' )
 		);
 	}
 
@@ -232,23 +240,25 @@ class SetSiteLink extends ModifyEntity {
 	 * @inheritDoc
 	 */
 	protected function getExamplesMessages(): array {
+		$id = $this->sandboxEntityIds[ 'mainItem' ];
+
 		return [
-			'action=wbsetsitelink&id=Q42&linksite=enwiki&linktitle=Hydrogen'
-			=> 'apihelp-wbsetsitelink-example-1',
-			'action=wbsetsitelink&id=Q42&linksite=enwiki&linktitle=Hydrogen&summary=Loves%20Oxygen'
-			=> 'apihelp-wbsetsitelink-example-2',
+			'action=wbsetsitelink&id=' . $id . '&linksite=enwiki&linktitle=Hydrogen'
+			=> [ 'apihelp-wbsetsitelink-example-1', $id ],
+			'action=wbsetsitelink&id=' . $id . '&linksite=enwiki&linktitle=Hydrogen&summary=Loves%20Oxygen'
+			=> [ 'apihelp-wbsetsitelink-example-2', $id ],
 			'action=wbsetsitelink&site=enwiki&title=Hydrogen&linksite=dewiki&linktitle=Wasserstoff'
 			=> 'apihelp-wbsetsitelink-example-3',
 			'action=wbsetsitelink&site=enwiki&title=Hydrogen&linksite=dewiki'
 			=> 'apihelp-wbsetsitelink-example-4',
 			'action=wbsetsitelink&site=enwiki&title=Hydrogen&linksite=plwiki&linktitle=Wodór&badges=Q149'
 			=> 'apihelp-wbsetsitelink-example-5',
-			'action=wbsetsitelink&id=Q42&linksite=plwiki&badges=Q2|Q149'
-			=> 'apihelp-wbsetsitelink-example-6',
-			'action=wbsetsitelink&id=Q42&linksite=plwiki&linktitle=Warszawa'
-			=> 'apihelp-wbsetsitelink-example-7',
-			'action=wbsetsitelink&id=Q42&linksite=plwiki&linktitle=Wodór&badges='
-			=> 'apihelp-wbsetsitelink-example-8',
+			'action=wbsetsitelink&id=' . $id . '&linksite=plwiki&badges=Q2|Q149'
+			=> [ 'apihelp-wbsetsitelink-example-6', $id ],
+			'action=wbsetsitelink&id=' . $id . '&linksite=plwiki&linktitle=Warszawa'
+			=> [ 'apihelp-wbsetsitelink-example-7', $id ],
+			'action=wbsetsitelink&id=' . $id . '&linksite=plwiki&linktitle=Wodór&badges='
+			=> [ 'apihelp-wbsetsitelink-example-8', $id ],
 		];
 	}
 

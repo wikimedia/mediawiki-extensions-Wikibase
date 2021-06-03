@@ -131,7 +131,8 @@ class EditEntityClearChangeOpValidateIntegrationTest extends MediaWikiIntegratio
 				new ChangedLanguagesCounter(),
 				new NonLanguageBoundChangesCounter()
 			),
-			false
+			false,
+			[ 'mainItem' => 'Q42' ]
 		);
 	}
 

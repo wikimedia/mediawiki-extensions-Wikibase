@@ -35,17 +35,24 @@ class SetLabel extends ModifyTerm {
 	 */
 	private $entityFactory;
 
+	/**
+	 * @var string[]
+	 */
+	private $sandboxEntityIds;
+
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
 		FingerprintChangeOpFactory $termChangeOpFactory,
 		bool $federatedPropertiesEnabled,
-		EntityFactory $entityFactory
+		EntityFactory $entityFactory,
+		array $sandboxEntityIds
 	) {
 		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 
 		$this->termChangeOpFactory = $termChangeOpFactory;
 		$this->entityFactory = $entityFactory;
+		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
 
 	public static function factory(
@@ -61,7 +68,8 @@ class SetLabel extends ModifyTerm {
 			$changeOpFactoryProvider
 				->getFingerprintChangeOpFactory(),
 			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
-			$entityFactory
+			$entityFactory,
+			$repoSettings->getSetting( 'sandboxEntityIds' )
 		);
 	}
 
@@ -127,9 +135,11 @@ class SetLabel extends ModifyTerm {
 	 * @inheritDoc
 	 */
 	protected function getExamplesMessages(): array {
+		$id = $this->sandboxEntityIds[ 'mainItem' ];
+
 		return [
-			'action=wbsetlabel&id=Q42&language=en&value=Wikimedia&format=jsonfm'
-				=> 'apihelp-wbsetlabel-example-1',
+			'action=wbsetlabel&id=' . $id . '&language=en&value=Wikimedia&format=jsonfm'
+				=> [ 'apihelp-wbsetlabel-example-1', $id ],
 			'action=wbsetlabel&site=enwiki&title=Earth&language=en&value=Earth'
 				=> 'apihelp-wbsetlabel-example-2',
 		];

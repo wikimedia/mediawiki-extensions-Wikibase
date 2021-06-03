@@ -12,6 +12,7 @@ use MediaWiki\Permissions\PermissionManager;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 
@@ -43,6 +44,9 @@ class CreateRedirect extends ApiBase {
 	 */
 	private $permissionManager;
 
+	/** @var string[] */
+	private $sandboxEntityIds;
+
 	/**
 	 * @see ApiBase::__construct
 	 *
@@ -59,7 +63,8 @@ class CreateRedirect extends ApiBase {
 		EntityIdParser $idParser,
 		ApiErrorReporter $errorReporter,
 		ItemRedirectCreationInteractor $interactor,
-		PermissionManager $permissionManager
+		PermissionManager $permissionManager,
+		array $sandboxEntityIds
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -67,6 +72,7 @@ class CreateRedirect extends ApiBase {
 		$this->errorReporter = $errorReporter;
 		$this->interactor = $interactor;
 		$this->permissionManager = $permissionManager;
+		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
 
 	public static function factory(
@@ -75,7 +81,8 @@ class CreateRedirect extends ApiBase {
 		PermissionManager $permissionManager,
 		ApiHelperFactory $apiHelperFactory,
 		EntityIdParser $entityIdParser,
-		ItemRedirectCreationInteractor $interactor
+		ItemRedirectCreationInteractor $interactor,
+		SettingsArray $settings
 	): self {
 		return new self(
 			$apiMain,
@@ -83,7 +90,8 @@ class CreateRedirect extends ApiBase {
 			$entityIdParser,
 			$apiHelperFactory->getErrorReporter( $apiMain ),
 			$interactor,
-			$permissionManager
+			$permissionManager,
+			$settings->getSetting( 'sandboxEntityIds' )
 		);
 	}
 
@@ -186,9 +194,12 @@ class CreateRedirect extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getExamplesMessages(): array {
+		$from = $this->sandboxEntityIds['mainItem'];
+		$to = $this->sandboxEntityIds['auxItem'];
+
 		return [
-			'action=wbcreateredirect&from=Q11&to=Q12'
-				=> 'apihelp-wbcreateredirect-example-1',
+			'action=wbcreateredirect&from=' . $from . '&to=' . $to
+				=> [ 'apihelp-wbcreateredirect-example-1', $from, $to ],
 		];
 	}
 
