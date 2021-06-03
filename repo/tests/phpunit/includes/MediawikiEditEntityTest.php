@@ -726,8 +726,9 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			$user->addToDatabase();
 		}
 
-		$user->setOption( 'watchdefault', $watchdefault );
-		$user->setOption( 'watchcreations', $watchcreations );
+		$userOptionsManager = $this->getServiceContainer()->getUserOptionsManager();
+		$userOptionsManager->setOption( $user, 'watchdefault', $watchdefault );
+		$userOptionsManager->setOption( $user, 'watchcreations', $watchcreations );
 
 		$item = new Item();
 		$item->setLabel( "en", "Test" );

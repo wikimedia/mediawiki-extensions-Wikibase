@@ -52,9 +52,10 @@ class BabelUserLanguageLookupTest extends MediaWikiIntegrationTestCase {
 		// Required to not be anonymous
 		$user->setId( 1 );
 		$user->setName( 'UserLanguageLookupTest-TestUser' );
-		$user->setOption( 'language', $usersLanguage );
+		$userOptionsManager = $this->getServiceContainer()->getUserOptionsManager();
+		$userOptionsManager->setOption( $user, 'language', $usersLanguage );
 		// Not a real option, just to manipulate the double class
-		$user->setOption( 'babelLanguages', $babelLanguages );
+		$userOptionsManager->setOption( $user, 'babelLanguages', $babelLanguages );
 		$userLanguageLookup = new BabelUserLanguageLookupDouble( $user );
 
 		$this->assertEquals( $allExpected, array_values(

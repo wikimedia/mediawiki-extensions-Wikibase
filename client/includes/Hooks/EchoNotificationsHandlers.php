@@ -6,6 +6,8 @@ use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use EchoEvent;
+use MediaWiki\MediaWikiServices;
+use MediaWiki\User\UserOptionsManager;
 use Title;
 use User;
 use Wikibase\Client\NamespaceChecker;
@@ -39,6 +41,11 @@ class EchoNotificationsHandlers {
 	private $namespaceChecker;
 
 	/**
+	 * @var UserOptionsManager
+	 */
+	private $userOptionsManager;
+
+	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -56,6 +63,7 @@ class EchoNotificationsHandlers {
 	/**
 	 * @param RepoLinker $repoLinker
 	 * @param NamespaceChecker $namespaceChecker
+	 * @param UserOptionsManager $userOptionsManager
 	 * @param string $siteId
 	 * @param bool $sendEchoNotification
 	 * @param string $repoSiteName
@@ -63,12 +71,14 @@ class EchoNotificationsHandlers {
 	public function __construct(
 		RepoLinker $repoLinker,
 		NamespaceChecker $namespaceChecker,
+		UserOptionsManager $userOptionsManager,
 		$siteId,
 		$sendEchoNotification,
 		$repoSiteName
 	) {
 		$this->repoLinker = $repoLinker;
 		$this->namespaceChecker = $namespaceChecker;
+		$this->userOptionsManager = $userOptionsManager;
 		$this->siteId = $siteId;
 		$this->sendEchoNotification = $sendEchoNotification;
 		$this->repoSiteName = $repoSiteName;
@@ -82,6 +92,7 @@ class EchoNotificationsHandlers {
 		return new self(
 			WikibaseClient::getRepoLinker(),
 			WikibaseClient::getNamespaceChecker(),
+			MediaWikiServices::getInstance()->getUserOptionsManager(),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),
 			$settings->getSetting( 'repoSiteName' )
@@ -118,7 +129,11 @@ class EchoNotificationsHandlers {
 	 */
 	public function doLocalUserCreated( User $user, $autocreated ) {
 		if ( $this->sendEchoNotification === true ) {
-			$user->setOption( 'echo-subscriptions-web-wikibase-action', true );
+			$this->userOptionsManager->setOption(
+				$user,
+				'echo-subscriptions-web-wikibase-action',
+				true
+			);
 			$user->saveSettings();
 		}
 	}

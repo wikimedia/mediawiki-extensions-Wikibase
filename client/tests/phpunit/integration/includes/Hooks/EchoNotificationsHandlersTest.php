@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use ExtensionRegistry;
+use MediaWiki\User\UserOptionsManager;
 use MediaWikiIntegrationTestCase;
 use Title;
 use User;
@@ -35,6 +36,11 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 	 */
 	private $namespaceChecker;
 
+	/**
+	 * @var UserOptionsManager
+	 */
+	private $userOptionsManager;
+
 	protected function setUp(): void {
 		parent::setUp();
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
@@ -54,6 +60,10 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 		$this->namespaceChecker
 			->method( 'isWikibaseEnabled' )
 			->willReturn( true );
+
+		$this->userOptionsManager = $this->getMockBuilder( UserOptionsManager::class )
+			->disableOriginalConstructor()
+			->getMock();
 	}
 
 	/**
@@ -65,6 +75,7 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 		return new EchoNotificationsHandlers(
 			$this->repoLinker,
 			$this->namespaceChecker,
+			$this->userOptionsManager,
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),
 			'repoSiteName'
@@ -202,22 +213,23 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider localUserCreatedProvider
 	 */
 	public function testLocalUserCreated( $enabled, $times, $auto ) {
-		$handlers = new EchoNotificationsHandlers(
-			$this->repoLinker,
-			$this->namespaceChecker,
-			'enwiki',
-			$enabled,
-			'repoSiteName'
-		);
-
 		$user = $this->getMockBuilder( User::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$user->expects( $this->exactly( $times ) )
+		$this->userOptionsManager->expects( $this->exactly( $times ) )
 			->method( 'setOption' );
 		$user->expects( $this->exactly( $times ) )
 			->method( 'saveSettings' );
+
+		$handlers = new EchoNotificationsHandlers(
+			$this->repoLinker,
+			$this->namespaceChecker,
+			$this->userOptionsManager,
+			'enwiki',
+			$enabled,
+			'repoSiteName'
+		);
 
 		$handlers->doLocalUserCreated( $user, $auto );
 	}
