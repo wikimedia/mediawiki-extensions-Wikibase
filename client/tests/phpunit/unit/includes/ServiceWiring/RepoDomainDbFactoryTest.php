@@ -41,4 +41,27 @@ class RepoDomainDbFactoryTest extends ServiceWiringTestCase {
 		);
 	}
 
+	public function testConstructionWithLocalRepo(): void {
+		$this->mockService(
+			'WikibaseClient.EntitySourceDefinitions',
+			$this->createStub( EntitySourceDefinitions::class )
+		);
+		$this->mockService( 'WikibaseClient.ItemAndPropertySource',
+			new EntitySource(
+				'repo',
+				false,
+				[],
+				'',
+				'',
+				'',
+				''
+			)
+		);
+
+		$this->assertInstanceOf(
+			RepoDomainDbFactory::class,
+			$this->getService( 'WikibaseClient.RepoDomainDbFactory' )
+		);
+	}
+
 }
