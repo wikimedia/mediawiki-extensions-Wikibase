@@ -201,6 +201,14 @@ Should a separate DB connection be used to generate entity IDs?  (See @ref md_do
 
 DEFAULT: ```false```
 
+#### sandboxEntityIds
+Entity ids to be used in various live examples.
+
+These entities will be affected by changes made through those
+examples, such as edits made by the API sandbox.
+
+DEFAULT: ```[ 'mainItem' => 'Q999999998', 'auxItem' => 'Q999999999']```
+
 #### badgeItems
 Items allowed to be used as badges.
 
