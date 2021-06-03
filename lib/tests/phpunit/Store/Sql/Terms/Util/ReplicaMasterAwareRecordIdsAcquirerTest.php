@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store\Sql\Terms\Util;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
 use Wikimedia\Rdbms\DatabaseSqlite;
 use Wikimedia\Rdbms\IDatabase;
@@ -167,7 +168,7 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 		$lbFactory = new FakeLBFactory( [ 'lb' => $loadBalancer ] );
 
 		return new ReplicaMasterAwareRecordIdsAcquirer(
-			$lbFactory,
+			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() ),
 			self::TABLE_NAME,
 			self::ID_COLUMN,
 			null,

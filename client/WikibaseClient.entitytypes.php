@@ -20,6 +20,8 @@ declare( strict_types=1 );
 use MediaWiki\MediaWikiServices;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
@@ -33,7 +35,7 @@ return [
 	'item' => [
 		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( EntitySource $entitySource ) {
 			$termIdsResolver = WikibaseClient::getTermInLangIdsResolverFactory()
-				->getResolverForDatabase( $entitySource->getDatabaseName() );
+				->getResolverForEntityType( Item::ENTITY_TYPE );
 
 			return new PrefetchingItemTermLookup( $termIdsResolver );
 		},
@@ -47,7 +49,7 @@ return [
 			$cacheSecret = hash( 'sha256', $mwServices->getMainConfig()->get( 'SecretKey' ) );
 			$bagOStuff = $mwServices->getLocalServerObjectCache();
 			$termIdsResolver = WikibaseClient::getTermInLangIdsResolverFactory()
-				->getResolverForDatabase( $entitySource->getDatabaseName() );
+				->getResolverForEntityType( Property::ENTITY_TYPE );
 
 			$prefetchingPropertyTermLookup = new PrefetchingPropertyTermLookup( $termIdsResolver );
 

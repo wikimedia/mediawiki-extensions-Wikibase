@@ -7,6 +7,7 @@ namespace Wikibase\Lib\Store;
 use Psr\Log\LoggerInterface;
 use WANObjectCache;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikimedia\Rdbms\ILBFactory;
@@ -58,17 +59,19 @@ class MatchingTermsLookupFactory {
 	 * @param string|false $dbName The name of the database to use (use false for the local db)
 	 */
 	public function getLookupForDatabase( $dbName ): MatchingTermsLookup {
-		$loadBalancer = $this->loadBalancerFactory->getMainLB( $dbName );
+		$repoDb = new RepoDomainDb( // TODO inject RepoDomainDbFactory and create from there instead
+			$this->loadBalancerFactory,
+			$dbName ?: $this->loadBalancerFactory->getLocalDomainID() // $dbName === false means local domain
+		);
 
 		$databaseTypeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
+			$repoDb,
 			$this->objectCache,
-			$dbName,
 			$this->logger
 		);
 
 		return new DatabaseMatchingTermsLookup(
-			$loadBalancer,
+			$repoDb,
 			$databaseTypeIdsStore,
 			$databaseTypeIdsStore,
 			$this->entityIdComposer,

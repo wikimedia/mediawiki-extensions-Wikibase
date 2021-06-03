@@ -3,12 +3,13 @@
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\StaticTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikimedia\Rdbms\DatabaseSqlite;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\LoadBalancerSingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver
@@ -18,6 +19,8 @@ use Wikimedia\Rdbms\LoadBalancerSingle;
  * @license GPL-2.0-or-later
  */
 class DatabaseTermInLangIdsResolverTest extends TestCase {
+
+	use LocalRepoDbTestHelper;
 
 	private const TYPE_LABEL = 1;
 	private const TYPE_DESCRIPTION = 2;
@@ -69,7 +72,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			LoadBalancerSingle::newFromConnection( $this->db )
+			$this->newRepoDb()
 		);
 		$terms = $resolver->resolveTermInLangIds( [ $termInLang1Id, $termInLang2Id, $termInLang3Id ] );
 
@@ -188,7 +191,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			LoadBalancerSingle::newFromConnection( $this->db )
+			$this->newRepoDb()
 		);
 		$terms = $resolver->resolveTermInLangIds(
 			$termInLangIds,
@@ -203,7 +206,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			LoadBalancerSingle::newFromConnection( $this->db )
+			$this->newRepoDb()
 		);
 
 		$this->assertSame( [], $resolver->resolveTermInLangIds( [] ) );
@@ -235,7 +238,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			LoadBalancerSingle::newFromConnection( $this->db )
+			$this->newRepoDb()
 		);
 		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id ],
@@ -261,7 +264,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			LoadBalancerSingle::newFromConnection( $this->db )
+			$this->newRepoDb()
 		);
 
 		$this->assertSame( [], $resolver->resolveGroupedTermInLangIds( [] ) );
@@ -271,7 +274,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			LoadBalancerSingle::newFromConnection( $this->db )
+			$this->newRepoDb()
 		);
 
 		$this->assertSame(
@@ -306,7 +309,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			LoadBalancerSingle::newFromConnection( $this->db )
+			$this->newRepoDb()
 		);
 		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id ],
@@ -356,7 +359,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			LoadBalancerSingle::newFromConnection( $this->db )
+			$this->newRepoDb()
 		);
 		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id, $termInLang3Id ],
@@ -435,7 +438,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			LoadBalancerSingle::newFromConnection( $this->db )
+			$this->newRepoDb()
 		);
 
 		$termIds = $resolver->resolveTermsViaJoin(
@@ -488,7 +491,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			LoadBalancerSingle::newFromConnection( $this->db )
+			$this->newRepoDb()
 		);
 		$terms = $resolver->resolveGroupedTermInLangIds(
 			[
@@ -520,6 +523,10 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 			],
 		], $terms['Q3'] );
 		$this->assertSame( [], $terms['Q4'] );
+	}
+
+	private function newRepoDb(): RepoDomainDb {
+		return $this->getRepoDomainDbFactoryForDb( $this->db )->newRepoDb();
 	}
 
 }

@@ -15,9 +15,9 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\StringNormalizer;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\MockJobQueueFactory;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter
@@ -30,6 +30,7 @@ use Wikimedia\Rdbms\LBFactorySingle;
 class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 
 	use DatabaseTermStoreWriterTestGetTermsTrait;
+	use LocalRepoDbTestHelper;
 
 	/** @var PropertyId */
 	private $p1;
@@ -82,15 +83,14 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 			$jobQueue = JobQueueGroup::singleton();
 		}
 
-		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
-		$loadBalancer = $lbFactory->getMainLB();
+		$repoDb = $this->getRepoDomainDbFactoryForDb( $this->db )->newRepoDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
+			$repoDb,
 			WANObjectCache::newEmpty()
 		);
-		return new DatabasePropertyTermStoreWriter( $loadBalancer, $jobQueue,
-			new DatabaseTermInLangIdsAcquirer( $lbFactory, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ),
+		return new DatabasePropertyTermStoreWriter( $repoDb, $jobQueue,
+			new DatabaseTermInLangIdsAcquirer( $repoDb, $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $repoDb ),
 			new StringNormalizer()
 		);
 	}

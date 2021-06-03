@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\CleanTermsIfUnusedJob;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
@@ -17,9 +18,9 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\StringNormalizer;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\MockJobQueueFactory;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter
@@ -32,6 +33,7 @@ use Wikimedia\Rdbms\LBFactorySingle;
 class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 
 	use DatabaseTermStoreWriterTestGetTermsTrait;
+	use LocalRepoDbTestHelper;
 
 	/** @var ItemId */
 	private $i1;
@@ -88,16 +90,15 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 			$jobQueue = JobQueueGroup::singleton();
 		}
 
-		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
-		$loadBalancer = $lbFactory->getMainLB();
+		$repoDb = $this->newRepoDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
+			$repoDb,
 			WANObjectCache::newEmpty()
 		);
 
-		return new DatabaseItemTermStoreWriter( $loadBalancer, $jobQueue,
-			new DatabaseTermInLangIdsAcquirer( $lbFactory, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ),
+		return new DatabaseItemTermStoreWriter( $repoDb, $jobQueue,
+			new DatabaseTermInLangIdsAcquirer( $repoDb, $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $repoDb ),
 			new StringNormalizer()
 		);
 	}
@@ -301,15 +302,14 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 	public function testT237984UnexpectedMissingTextRow() {
 		$itemStoreWriter = $this->getItemTermStoreWriter();
 
-		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
-		$loadBalancer = $lbFactory->getMainLB();
+		$repoDb = $this->newRepoDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
+			$repoDb,
 			WANObjectCache::newEmpty()
 		);
-		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter( $loadBalancer, JobQueueGroup::singleton(),
-			new DatabaseTermInLangIdsAcquirer( $lbFactory, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ), new StringNormalizer()
+		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter( $repoDb, JobQueueGroup::singleton(),
+			new DatabaseTermInLangIdsAcquirer( $repoDb, $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $repoDb ), new StringNormalizer()
 		);
 
 		$propertyTermStoreWriter->storeTerms( new PropertyId( 'P12' ), new Fingerprint(
@@ -330,6 +330,10 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 
 	private function insertItemTermRow( int $itemid, int $termInLangId ): void {
 		$this->db->insert( 'wbt_item_terms', [ 'wbit_item_id' => $itemid, 'wbit_term_in_lang_id' => $termInLangId ] );
+	}
+
+	private function newRepoDb(): RepoDomainDb {
+		return $this->getRepoDomainDbFactoryForDb( $this->db )->newRepoDb();
 	}
 
 }

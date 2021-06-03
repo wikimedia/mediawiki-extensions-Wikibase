@@ -14,6 +14,8 @@ class FakeLBFactory extends LBFactory {
 	/** @var ILoadBalancer */
 	private $lb;
 
+	private const LOCAL_DOMAIN_ID = 'local-domain-id';
+
 	/**
 	 * @param array $params should contain 'lb' ILoadBalancer instance
 	 */
@@ -24,7 +26,7 @@ class FakeLBFactory extends LBFactory {
 	}
 
 	public function newMainLB( $domain = false, $owner = null ) {
-		if ( $domain === false ) {
+		if ( $domain === false || $domain === self::LOCAL_DOMAIN_ID ) {
 			return $this->lb;
 		} else {
 			throw new InvalidArgumentException( 'only local domain supported' );
@@ -60,7 +62,7 @@ class FakeLBFactory extends LBFactory {
 	}
 
 	public function getLocalDomainID() {
-		return '';
+		return self::LOCAL_DOMAIN_ID;
 	}
 
 	public function __destruct() {

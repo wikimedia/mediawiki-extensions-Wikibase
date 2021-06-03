@@ -7,8 +7,8 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolverFactory
@@ -19,6 +19,9 @@ use Wikimedia\Rdbms\LBFactorySingle;
  * @license GPL-2.0-or-later
  */
 class TermInLangIdsResolverFactoryTest extends MediaWikiIntegrationTestCase {
+
+	use LocalRepoDbTestHelper;
+
 	private const MOCK_LANG_LABELS = [
 		'de' => 'Hallo Welt',
 		'en' => 'Hello World',
@@ -81,12 +84,12 @@ class TermInLangIdsResolverFactoryTest extends MediaWikiIntegrationTestCase {
 		}, self::MOCK_LANG_LABELS );
 
 		$factory = new TermInLangIdsResolverFactory(
-			LBFactorySingle::newFromConnection( $this->db ),
+			$this->getRepoDomainDbFactoryForDb( $this->db ),
 			new NullLogger(),
 			MediaWikiServices::getInstance()->getMainWANObjectCache()
 		);
 
-		$resolver = $factory->getResolverForDatabase( false );
+		$resolver = $factory->getResolverForEntityType( 'some-entity-type' );
 
 		$this->assertSame( [
 			'label' => $expectedTerms

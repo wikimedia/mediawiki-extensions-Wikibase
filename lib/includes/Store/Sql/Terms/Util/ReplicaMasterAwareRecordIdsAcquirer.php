@@ -5,8 +5,8 @@ namespace Wikibase\Lib\Store\Sql\Terms\Util;
 use Exception;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
@@ -29,9 +29,9 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	public const FLAG_IGNORE_REPLICA = 0x1;
 
 	/**
-	 * @var ILBFactory
+	 * @var RepoDomainDb
 	 */
-	private $lbFactory;
+	private $repoDb;
 
 	/**
 	 * @var string
@@ -59,7 +59,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	private $waitForReplicationTimeout;
 
 	/**
-	 * @param ILBFactory $lbFactory
+	 * @param RepoDomainDb $repoDb
 	 * @param string $table the name of the table this acquirer is for
 	 * @param string $idColumn the name of the column that contains the desired ids
 	 * @param LoggerInterface|null $logger
@@ -67,23 +67,19 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 * @param int $waitForReplicationTimeout in seconds, the timeout on waiting for replication
 	 */
 	public function __construct(
-		ILBFactory $lbFactory,
+		RepoDomainDb $repoDb,
 		$table,
 		$idColumn,
 		LoggerInterface $logger = null,
 		$flags = 0x0,
 		$waitForReplicationTimeout = 2
 	) {
-		$this->lbFactory = $lbFactory;
+		$this->repoDb = $repoDb;
 		$this->table = $table;
 		$this->idColumn = $idColumn;
 		$this->logger = $logger ?? new NullLogger();
 		$this->flags = $flags;
 		$this->waitForReplicationTimeout = $waitForReplicationTimeout;
-	}
-
-	private function getLoadBalancer(): ILoadBalancer {
-		return $this->lbFactory->getMainLB();
 	}
 
 	/**
@@ -195,12 +191,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 				// gets stuck in an infinite loop. To avoid this, we read it with CONN_TRX_AUTOCOMMIT
 				// Surprisingly it's not too rare not to happen in production: T247553
 
-				$dbw = $this->getLoadBalancer()->getConnection(
-					ILoadBalancer::DB_PRIMARY,
-					[],
-					false,
-					ILoadBalancer::CONN_TRX_AUTOCOMMIT
-				);
+				$dbw = $this->repoDb->connections()->getWriteConnection( ILoadBalancer::CONN_TRX_AUTOCOMMIT );
 
 				$insertedRecords = array_merge(
 					$insertedRecords,
@@ -248,9 +239,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		// If not all needed records exist in replica,
 		// try wait for replication and fetch again from replica
 		if ( !empty( $neededRecords ) ) {
-			$this->lbFactory->waitForReplication( [
-				'timeout' => $this->waitForReplicationTimeout
-			] );
+			$this->repoDb->replication()->waitForAllAffectedClusters( $this->waitForReplicationTimeout );
 
 			$existingRecords = array_merge(
 				$existingRecords,
@@ -264,11 +253,11 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	}
 
 	private function getDbReplica() {
-		return $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_REPLICA );
+		return $this->repoDb->connections()->getReadConnection();
 	}
 
 	private function getDbMaster() {
-		return $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_PRIMARY );
+		return $this->repoDb->connections()->getWriteConnection();
 	}
 
 	/**

@@ -205,6 +205,8 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 				$lbFactory = $this->createMock( LBFactory::class );
 				$lbFactory->method( 'getMainLB' )
 					->willReturn( $lb );
+				$lbFactory->method( 'getLocalDomainID' )
+					->willReturn( 'banana' );
 
 				return $lbFactory;
 			}

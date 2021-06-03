@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermIndexEntry;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Rdbms\LBFactorySingle;
 
@@ -30,6 +31,9 @@ use Wikimedia\Rdbms\LBFactorySingle;
  * @license GPL-2.0-or-later
  */
 class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
+
+	use LocalRepoDbTestHelper;
+
 	/**
 	 * @var LBFactorySingle
 	 */
@@ -64,18 +68,18 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 
 		$this->lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		$this->objectCache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$repoDb = $this->getRepoDomainDbFactoryForDb( $this->db )->newRepoDb();
 
-		$loadBalancer = $this->lbFactory->getMainLB();
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
+			$repoDb,
 			$this->objectCache
 		);
 
 		$itemTermStoreWriter = new DatabaseItemTermStoreWriter(
-			$loadBalancer,
+			$repoDb,
 			JobQueueGroup::singleton(),
-			new DatabaseTermInLangIdsAcquirer( $this->lbFactory, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ),
+			new DatabaseTermInLangIdsAcquirer( $repoDb, $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $repoDb ),
 			new StringNormalizer()
 		);
 

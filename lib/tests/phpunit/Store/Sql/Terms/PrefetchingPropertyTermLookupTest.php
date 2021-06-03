@@ -17,6 +17,7 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
 use Wikibase\Lib\StringNormalizer;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\MockJobQueueFactory;
 use Wikibase\Lib\WikibaseSettings;
 
@@ -29,6 +30,8 @@ use Wikibase\Lib\WikibaseSettings;
  * @license GPL-2.0-or-later
  */
 class PrefetchingPropertyTermLookupTest extends MediaWikiIntegrationTestCase {
+
+	use LocalRepoDbTestHelper;
 
 	/** @var PrefetchingPropertyTermLookup */
 	private $lookup;
@@ -54,25 +57,25 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiIntegrationTestCase {
 
 		$this->tablesUsed = array_merge( $this->tablesUsed, $tables );
 
-		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$repoDb = $this->getRepoDomainDbFactoryForDb( $this->db )->newRepoDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
+			$repoDb,
 			MediaWikiServices::getInstance()->getMainWANObjectCache()
 		);
 		$termIdsStore = new DatabaseTermInLangIdsResolver(
 			$typeIdsStore,
 			$typeIdsStore,
-			$loadBalancer
+			$repoDb
 		);
 		$this->lookup = new PrefetchingPropertyTermLookup(
 			$termIdsStore
 		);
 
 		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter(
-			$loadBalancer,
+			$repoDb,
 			( new MockJobQueueFactory( $this ) )->getMockJobQueue(),
 			new DatabaseTermInLangIdsAcquirer(
-				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+				$repoDb,
 				$typeIdsStore
 			),
 			$termIdsStore,
