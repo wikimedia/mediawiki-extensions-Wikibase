@@ -152,6 +152,8 @@ abstract class ServiceWiringTestCase extends TestCase {
 				$lbFactory = $this->createMock( LBFactory::class );
 				$lbFactory->method( 'getMainLB' )
 					->willReturn( $lb );
+				$lbFactory->method( 'getLocalDomainID' )
+					->willReturn( 'clientDbDomain' );
 
 				return $lbFactory;
 			} );

@@ -736,7 +736,7 @@ return [
 
 		return new RepoDomainDbFactory(
 			$lbFactory,
-			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName(),
+			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName() ?: $lbFactory->getLocalDomainID(),
 			WikibaseClient::getEntitySourceDefinitions( $services ),
 			[ DomainDb::LOAD_GROUP_FROM_CLIENT ]
 		);
