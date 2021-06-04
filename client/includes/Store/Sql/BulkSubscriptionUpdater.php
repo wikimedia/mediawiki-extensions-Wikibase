@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Client\Store\Sql;
 
 use InvalidArgumentException;
@@ -71,14 +73,10 @@ class BulkSubscriptionUpdater {
 	public function __construct(
 		ClientDomainDb $clientDb,
 		RepoDomainDb $repoDb,
-		$subscriberWikiId,
-		$batchSize = 1000
+		string $subscriberWikiId,
+		int $batchSize = 1000
 	) {
-		if ( !is_string( $subscriberWikiId ) ) {
-			throw new InvalidArgumentException( '$subscriberWikiId must be a string' );
-		}
-
-		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
+		if ( $batchSize < 1 ) {
 			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
 		}
 

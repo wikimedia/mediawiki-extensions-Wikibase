@@ -1,10 +1,12 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Client\Tests\Integration\Store\Sql;
 
 use MediaWikiIntegrationTestCase;
 use Onoi\MessageReporter\MessageReporter;
-use PHPUnit\Framework\MockObject\Matcher\Invocation;
+use PHPUnit\Framework\MockObject\Rule\InvokedCount;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\WikibaseClient;
@@ -41,7 +43,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return BulkSubscriptionUpdater
 	 */
-	private function getBulkSubscriptionUpdater( $batchSize = 10 ) {
+	private function getBulkSubscriptionUpdater( $batchSize = 10 ): BulkSubscriptionUpdater {
 		return new BulkSubscriptionUpdater(
 			WikibaseClient::getClientDomainDbFactory()->newLocalDb(),
 			WikibaseClient::getRepoDomainDbFactory()->newRepoDb(),
@@ -50,7 +52,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testPurgeSubscriptions() {
+	public function testPurgeSubscriptions(): void {
 		$this->truncateEntityUsage();
 		$this->truncateSubscriptions();
 		$this->putSubscriptions( [
@@ -82,7 +84,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public function testPurgeSubscriptions_startItem() {
+	public function testPurgeSubscriptions_startItem(): void {
 		$this->truncateEntityUsage();
 		$this->putSubscriptions( [
 			[ 'P11', 'dewiki' ],
@@ -115,7 +117,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public function testUpdateSubscriptions() {
+	public function testUpdateSubscriptions(): void {
 		$this->truncateEntityUsage();
 		$this->putSubscriptions( [
 			[ 'P11', 'dewiki' ],
@@ -152,7 +154,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public function testUpdateSubscriptions_startItem() {
+	public function testUpdateSubscriptions_startItem(): void {
 		$this->truncateEntityUsage();
 		$this->putSubscriptions( [
 			[ 'P11', 'dewiki' ],
@@ -187,12 +189,12 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	private function truncateEntityUsage() {
+	private function truncateEntityUsage(): void {
 		$db = wfGetDB( DB_PRIMARY );
 		$db->delete( EntityUsageTable::DEFAULT_TABLE_NAME, '*' );
 	}
 
-	private function putEntityUsage( array $entries ) {
+	private function putEntityUsage( array $entries ): void {
 		$db = wfGetDB( DB_PRIMARY );
 
 		$db->startAtomic( __METHOD__ );
@@ -211,12 +213,12 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		$db->endAtomic( __METHOD__ );
 	}
 
-	private function truncateSubscriptions() {
+	private function truncateSubscriptions(): void {
 		$db = wfGetDB( DB_PRIMARY );
 		$db->delete( 'wb_changes_subscription', '*' );
 	}
 
-	private function putSubscriptions( array $entries ) {
+	private function putSubscriptions( array $entries ): void {
 		$db = wfGetDB( DB_PRIMARY );
 
 		$db->startAtomic( __METHOD__ );
@@ -233,7 +235,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		$db->endAtomic( __METHOD__ );
 	}
 
-	private function fetchAllSubscriptions() {
+	private function fetchAllSubscriptions(): array {
 		$db = wfGetDB( DB_PRIMARY );
 
 		$res = $db->select( 'wb_changes_subscription', "*", '', __METHOD__ );
@@ -246,12 +248,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		return $subscriptions;
 	}
 
-	/**
-	 * @param Invocation $matcher
-	 *
-	 * @return ExceptionHandler
-	 */
-	private function getExceptionHandler( $matcher ) {
+	private function getExceptionHandler( InvokedCount $matcher ): ExceptionHandler {
 		$mock = $this->createMock( ExceptionHandler::class );
 		$mock->expects( $matcher )
 			->method( 'handleException' );
@@ -259,12 +256,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		return $mock;
 	}
 
-	/**
-	 * @param Invocation $matcher
-	 *
-	 * @return MessageReporter
-	 */
-	private function getMessageReporter( $matcher ) {
+	private function getMessageReporter( InvokedCount $matcher ): MessageReporter {
 		$mock = $this->createMock( MessageReporter::class );
 		$mock->expects( $matcher )
 			->method( 'reportMessage' );
