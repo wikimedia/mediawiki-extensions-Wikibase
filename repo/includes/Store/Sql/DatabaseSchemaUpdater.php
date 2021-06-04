@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use DatabaseUpdater;
-use HashBagOStuff;
 use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
 use MediaWiki\MediaWikiServices;
 use MWException;
@@ -11,14 +10,6 @@ use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterItemLookup;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
-use Wikibase\Lib\Store\CachingEntityRevisionLookup;
-use Wikibase\Lib\Store\EntityRevisionCache;
-use Wikibase\Lib\Store\RevisionBasedEntityLookup;
-use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
-use Wikibase\Lib\Store\Sql\PropertyInfoTable;
-use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
-use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
-use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\RangeTraversable;
 use Wikibase\Repo\Store\ItemTermsRebuilder;
 use Wikibase\Repo\Store\PropertyTermsRebuilder;
@@ -173,78 +164,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			$file = $this->getScriptPath( $table, $type );
 
 			$updater->addExtensionTable( $table, $file );
-
-			// populate the table after creating it
-			$updater->addExtensionUpdate( [
-				[ __CLASS__, 'rebuildPropertyInfo' ]
-			] );
 		}
-	}
-
-	/**
-	 * Wrapper for invoking PropertyInfoTableBuilder from DatabaseUpdater
-	 * during a database update.
-	 *
-	 * @param DatabaseUpdater $updater
-	 */
-	public static function rebuildPropertyInfo( DatabaseUpdater $updater ) {
-		$localEntitySourceName = WikibaseRepo::getSettings()->getSetting( 'localEntitySourceName' );
-		$propertySource = WikibaseRepo::getEntitySourceDefinitions()
-			->getSourceForEntityType( 'property' );
-		if ( $propertySource->getSourceName() !== $localEntitySourceName ) {
-			// Foreign properties, skip this part
-			return;
-		}
-		$reporter = new ObservableMessageReporter();
-		$reporter->registerReporterCallback(
-			function ( $msg ) use ( $updater ) {
-				$updater->output( "..." . $msg . "\n" );
-			}
-		);
-
-		$table = new PropertyInfoTable(
-			WikibaseRepo::getEntityIdComposer(),
-			WikibaseRepo::getRepoDomainDbFactory()->newForEntitySource( $propertySource ),
-			true
-		);
-
-		$contentCodec = WikibaseRepo::getEntityContentDataCodec();
-		$propertyInfoBuilder = WikibaseRepo::getPropertyInfoBuilder();
-		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
-
-		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
-			new WikiPageEntityMetaDataLookup(
-				$entityNamespaceLookup,
-				new EntityIdLocalPartPageTableEntityQuery(
-					$entityNamespaceLookup,
-					MediaWikiServices::getInstance()->getSlotRoleStore()
-				),
-				$propertySource,
-				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
-				WikibaseRepo::getLogger()
-			),
-			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
-			MediaWikiServices::getInstance()->getRevisionStore()
-		);
-
-		$cachingEntityLookup = new CachingEntityRevisionLookup(
-			new EntityRevisionCache( new HashBagOStuff() ),
-			$wikiPageEntityLookup
-		);
-		$entityLookup = new RevisionBasedEntityLookup( $cachingEntityLookup );
-
-		$builder = new PropertyInfoTableBuilder(
-			$table,
-			new LegacyAdapterPropertyLookup( $entityLookup ),
-			$propertyInfoBuilder,
-			WikibaseRepo::getEntityIdComposer(),
-			$entityNamespaceLookup
-		);
-		$builder->setReporter( $reporter );
-		$builder->setUseTransactions( false );
-
-		$updater->output( 'Populating ' . $table->getTableName() . "\n" );
-		$builder->rebuildPropertyInfo();
 	}
 
 	public static function rebuildPropertyTerms( DatabaseUpdater $updater ) {
