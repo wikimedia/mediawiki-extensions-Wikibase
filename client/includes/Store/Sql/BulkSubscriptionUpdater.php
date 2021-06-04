@@ -11,8 +11,6 @@ use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
-use Wikibase\Lib\Reporting\ExceptionHandler;
-use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
@@ -52,11 +50,6 @@ class BulkSubscriptionUpdater {
 	private $batchSize;
 
 	/**
-	 * @var ExceptionHandler
-	 */
-	private $exceptionHandler;
-
-	/**
 	 * @var MessageReporter
 	 */
 	private $progressReporter;
@@ -87,16 +80,11 @@ class BulkSubscriptionUpdater {
 		$this->subscriberWikiId = $subscriberWikiId;
 		$this->batchSize = $batchSize;
 
-		$this->exceptionHandler = new LogWarningExceptionHandler();
 		$this->progressReporter = new NullMessageReporter();
 	}
 
 	public function setProgressReporter( MessageReporter $progressReporter ) {
 		$this->progressReporter = $progressReporter;
-	}
-
-	public function setExceptionHandler( ExceptionHandler $exceptionHandler ) {
-		$this->exceptionHandler = $exceptionHandler;
 	}
 
 	/**

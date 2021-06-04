@@ -9,7 +9,6 @@ use Onoi\MessageReporter\CallbackMessageReporter;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\WikibaseSettings;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false
@@ -76,7 +75,6 @@ class UpdateSubscriptions extends Maintenance {
 		);
 
 		$updater->setProgressReporter( $reporter );
-		$updater->setExceptionHandler( new ReportingExceptionHandler( $reporter ) );
 
 		if ( $this->getOption( 'purge' ) ) {
 			$updater->purgeSubscriptions( $startItem );
