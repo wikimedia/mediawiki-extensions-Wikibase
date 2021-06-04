@@ -3,9 +3,10 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Repo\Store\SubscriptionLookup;
+use Wikimedia\Rdbms\ConnectionManager;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * Implementation of SubscriptionLookup based on a database table.
@@ -16,12 +17,12 @@ use Wikimedia\Rdbms\ILoadBalancer;
 class SqlSubscriptionLookup implements SubscriptionLookup {
 
 	/**
-	 * @var ILoadBalancer
+	 * @var ConnectionManager
 	 */
-	private $dbLoadBalancer;
+	private $repoConnections;
 
-	public function __construct( ILoadBalancer $dbLoadBalancer ) {
-		$this->dbLoadBalancer = $dbLoadBalancer;
+	public function __construct( RepoDomainDb $repoDomainDb ) {
+		$this->repoConnections = $repoDomainDb->connections();
 	}
 
 	/**
@@ -38,7 +39,7 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 			return [];
 		}
 
-		$dbr = $this->dbLoadBalancer->getConnection( DB_REPLICA );
+		$dbr = $this->repoConnections->getReadConnection();
 
 		// NOTE: non-Item ids are ignored, since only items can be subscribed to
 		//       via sitelinks.
@@ -51,7 +52,7 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 			$linkedEntityIds[$id] = $entityIds[$id];
 		}
 
-		$this->dbLoadBalancer->reuseConnection( $dbr );
+		$this->repoConnections->releaseConnection( $dbr );
 
 		return $linkedEntityIds;
 	}
@@ -65,7 +66,7 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	 */
 	public function getSubscribers( EntityId $idToCheck ) {
 		$where = [ 'cs_entity_id' => $idToCheck->getSerialization() ];
-		$dbr = $this->dbLoadBalancer->getConnection( DB_REPLICA );
+		$dbr = $this->repoConnections->getReadConnection();
 
 		$subscriptions = $dbr->selectFieldValues(
 			'wb_changes_subscription',
@@ -74,7 +75,7 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 			__METHOD__
 		);
 
-		$this->dbLoadBalancer->reuseConnection( $dbr );
+		$this->repoConnections->releaseConnection( $dbr );
 
 		return $subscriptions;
 	}
