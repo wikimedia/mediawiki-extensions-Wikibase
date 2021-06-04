@@ -177,7 +177,7 @@ class BulkSubscriptionUpdater {
 		if ( empty( $continuation ) ) {
 			$continuationCondition = '1';
 		} else {
-			list( $fromEntityId ) = $continuation;
+			[ $fromEntityId ] = $continuation;
 			$continuationCondition = 'eu_entity_id > ' . $dbr->addQuotes( $fromEntityId );
 		}
 
@@ -279,7 +279,7 @@ class BulkSubscriptionUpdater {
 			return 0;
 		}
 
-		list( $minId, $maxId, $count ) = $deletionRange;
+		[ $minId, $maxId, $count ] = $deletionRange;
 		$this->deleteSubscriptionRange( $minId, $maxId );
 
 		return $count;
@@ -300,7 +300,7 @@ class BulkSubscriptionUpdater {
 		];
 
 		if ( !empty( $continuation ) ) {
-			list( $fromEntityId ) = $continuation;
+			[ $fromEntityId ] = $continuation;
 			$conditions[] = 'cs_entity_id > ' . $dbr->addQuotes( $fromEntityId );
 		}
 
