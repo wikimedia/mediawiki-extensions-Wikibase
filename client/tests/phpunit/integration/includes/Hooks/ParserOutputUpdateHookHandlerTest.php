@@ -151,7 +151,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	private function newSettings() {
 		$defaults = [
 			'siteGlobalID' => 'enwiki',
-			'languageLinkSiteGroup' => 'wikipedia',
+			'languageLinkAllowedSiteGroups' => [ 'wikipedia' ],
 			'namespaces' => [ NS_MAIN, NS_CATEGORY ],
 			'otherProjectsLinks' => [ 'commonswiki' ],
 		];
@@ -461,7 +461,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( HookContainer::class ),
 			new NullLogger(),
 			$settings->getSetting( 'siteGlobalID' ),
-			$settings->getSetting( 'languageLinkSiteGroup' )
+			$settings->getSetting( 'languageLinkAllowedSiteGroups' )
 		);
 	}
 

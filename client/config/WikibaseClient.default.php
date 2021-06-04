@@ -31,6 +31,7 @@ return call_user_func( function() {
 		// but we will need to make sure the caching works good enough
 		'siteLocalID' => $wgLanguageCode,
 		'languageLinkSiteGroup' => null,
+		'languageLinkAllowedSiteGroups' => null,
 		'injectRecentChanges' => true,
 		'showExternalRecentChanges' => true,
 		'sendEchoNotification' => false,

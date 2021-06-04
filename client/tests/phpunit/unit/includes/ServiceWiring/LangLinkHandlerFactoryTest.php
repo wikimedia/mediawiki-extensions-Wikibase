@@ -48,8 +48,8 @@ class LangLinkHandlerFactoryTest extends ServiceWiringTestCase {
 			new SettingsArray( [
 				'siteGlobalID' => 'testwiki',
 			] ) );
-		$this->mockService( 'WikibaseClient.LangLinkSiteGroup',
-			'' );
+		$this->mockService( 'WikibaseClient.LangLinkSiteGroups',
+			[ '' ] );
 
 		$this->assertInstanceOf(
 			LangLinkHandlerFactory::class,

@@ -57,9 +57,9 @@ class LangLinkHandlerFactory {
 	private $siteId;
 
 	/**
-	 * @var string
+	 * @var string[]
 	 */
-	private $siteGroup;
+	private $siteGroups;
 
 	/**
 	 * @param LanguageLinkBadgeDisplay $badgeDisplay
@@ -70,7 +70,7 @@ class LangLinkHandlerFactory {
 	 * @param HookContainer $hookContainer
 	 * @param LoggerInterface $logger
 	 * @param string $siteId The global site ID for the local wiki
-	 * @param string $siteGroup The ID of the site group to use for showing language links.
+	 * @param string[] $siteGroups The ID of the site group to use for showing language links.
 	 */
 	public function __construct(
 		LanguageLinkBadgeDisplay $badgeDisplay,
@@ -80,8 +80,8 @@ class LangLinkHandlerFactory {
 		SiteLookup $siteLookup,
 		HookContainer $hookContainer,
 		LoggerInterface $logger,
-		$siteId,
-		$siteGroup
+		string $siteId,
+		array $siteGroups
 	) {
 		$this->badgeDisplay = $badgeDisplay;
 		$this->namespaceChecker = $namespaceChecker;
@@ -91,7 +91,7 @@ class LangLinkHandlerFactory {
 		$this->hooksContainer = $hookContainer;
 		$this->logger = $logger;
 		$this->siteId = $siteId;
-		$this->siteGroup = $siteGroup;
+		$this->siteGroups = $siteGroups;
 	}
 
 	/**
@@ -113,7 +113,7 @@ class LangLinkHandlerFactory {
 			),
 			$this->siteLookup,
 			$this->siteId,
-			$this->siteGroup
+			$this->siteGroups
 		);
 	}
 }
