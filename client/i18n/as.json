@@ -33,11 +33,16 @@
 	"wikibase-rc-show-wikidata-pref": "শেহতীয়া সালসলনিত {{WBREPONAME}} সম্পাদনাসমূহ দেখুৱাওক",
 	"wikibase-rc-wikibase-edit-letter": "ড",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} সম্পাদনা",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} সম্পাদনা",
 	"wikibase-replicationnote": "অনুগ্ৰহ কৰি লক্ষ্য কৰিব যে এই সালসলনি সকলো ৱিকিতে দৃশ্যমান হ'বলৈ কেইবামিনিটো লাগিব পাৰে।",
 	"wikibase-watchlist-show-changes-pref": "আপোনাৰ লক্ষ্য-তালিকাত {{WBREPONAME}} সম্পাদনাসমূহ দেখুৱাব",
 	"unconnectedpages": "কাৰো সৈতে সংযোজিত নথকা পৃষ্ঠাসমূহ",
-	"wikibase-unconnectedpages-submit": "যাওক",
+	"wikibase-unconnectedpages-submit": "পৃষ্ঠা দেখুৱাওক",
+	"pageswithbadges": "বেজ থকা পৃষ্ঠাসমূহ",
 	"wikibase-pageinfo-description-central": "গোলকীয় বিৱৰণ",
 	"wikibase-pageinfo-entity-usage": "এই পৃষ্ঠাত ব্যৱহৃত {{WBREPONAME}} আইটেমসমূহ",
+	"wikibase-pageinfo-entity-usage-T": "শিৰোনাম",
+	"wikibase-pageinfo-entity-usage-C": "কিছু বিবৃতি",
+	"wikibase-pageinfo-entity-usage-C-with-modifier": "বিবৃতি: $1",
 	"wikibase-otherprojects": "আন প্ৰকল্পসমূহত"
 }
