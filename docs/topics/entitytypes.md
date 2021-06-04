@@ -56,6 +56,8 @@ The entity types repository is an associative array mapping entity type identifi
   * A callable that returns a [ChangeOpDeserializer] instance for change requests to the entity of this type
 * rdf-builder-factory-callback (repo only)
   * A callable that returns a [EntityRdfBuilder] instance. See [EntityRdfBuilderFactory::getEntityRdfBuilders] for arguments in the callback
+* rdf-builder-stub-factory-callback (repo only)
+  * A callable that returns a [EntityStubRdfBuilder] instance. See [EntityStubRdfBuilderFactory::getEntityStubRdfBuilders] for arguments in the callback
 * rdf-builder-label-predicates (repo only)
   * List on pairs [ns,local] specifying predicates for RDF export of labels for this entity.
 * entity-search-callback (repo only)
