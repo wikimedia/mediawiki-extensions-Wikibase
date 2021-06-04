@@ -135,17 +135,6 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			'wb_changes',
 			$this->getScriptPath( 'wb_changes', $type )
 		);
-
-		if ( $type === 'mysql' && !$updater->updateRowExists( 'ChangeChangeObjectId.sql' ) ) {
-			$updater->addExtensionUpdate( [
-				'applyPatch',
-				$this->getUpdateScriptPath( 'ChangeChangeObjectId', $type ),
-				true
-			] );
-
-			$updater->insertUpdateRow( 'ChangeChangeObjectId.sql' );
-		}
-
 		$updater->addExtensionTable(
 			'wb_changes_dispatch',
 			$this->getScriptPath( 'wb_changes_dispatch', $type )
