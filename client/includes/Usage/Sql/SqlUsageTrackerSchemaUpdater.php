@@ -36,15 +36,6 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 				[ __CLASS__, 'fillUsageTable' ],
 			] );
 		} else {
-			// This update is neither needed nor does it work on SQLite or Postgres.
-			if ( $db->getType() === 'mysql' ) {
-				$script = $this->getUpdateScriptPath( 'entity_usage-alter-aspect-varbinary-37', $db->getType() );
-				$updater->modifyExtensionField( $table, 'eu_aspect', $script );
-			}
-
-			$script = $this->getUpdateScriptPath( 'entity_usage-drop-entity_type', $db->getType() );
-			$updater->dropExtensionField( $table, 'eu_entity_type', $script );
-
 			$script = $this->getUpdateScriptPath( 'entity_usage-drop-touched', $db->getType() );
 			$updater->dropExtensionField( $table, 'eu_touched', $script );
 		}
