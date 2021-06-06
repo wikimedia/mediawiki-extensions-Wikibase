@@ -85,6 +85,12 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	private $entityRdfBuilders;
 
 	/**
+	 * Entity-specific stub RDF builders to apply when building RDF for an entity.
+	 * @var EntityStubRdfBuilder[]
+	 */
+	private $entityStubRdfBuilders;
+
+	/**
 	 * @param RdfVocabulary $vocabulary
 	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
 	 * @param PropertyDataTypeLookup $propertyLookup
@@ -93,6 +99,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @param RdfWriter $writer
 	 * @param DedupeBag $dedupeBag
 	 * @param EntityContentFactory $entityContentFactory
+	 * @param EntityStubRdfBuilderFactory|null $entityStubRdfBuilderFactory
 	 */
 	public function __construct(
 		RdfVocabulary $vocabulary,
@@ -102,7 +109,8 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$flavor,
 		RdfWriter $writer,
 		DedupeBag $dedupeBag,
-		EntityContentFactory $entityContentFactory
+		EntityContentFactory $entityContentFactory,
+		EntityStubRdfBuilderFactory $entityStubRdfBuilderFactory = null
 	) {
 		$this->entitiesToOutput = new SplQueue();
 		$this->vocabulary = $vocabulary;
@@ -120,6 +128,13 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			$this,
 			$dedupeBag
 		);
+
+		if ( $entityStubRdfBuilderFactory !== null ) {
+			$this->entityStubRdfBuilders = $entityStubRdfBuilderFactory->getEntityStubRdfBuilders(
+				$vocabulary,
+				$writer
+			);
+		}
 	}
 
 	/**
@@ -324,6 +339,24 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	}
 
 	/**
+	 * Adds meta-information about an entity id (such as the ID and type) to the RDF graph.
+	 *
+	 * @todo extract into MetaDataRdfBuilder
+	 *
+	 * @param EntityId $entityId
+	 */
+	private function addEntityMetaDataNew( EntityId $entityId ) {
+		$entityLName = $this->vocabulary->getEntityLName( $entityId );
+		$entityRepoName = $this->vocabulary->getEntityRepositoryName( $entityId );
+
+		$this->writer->about(
+			$this->vocabulary->entityNamespaceNames[$entityRepoName],
+			$entityLName
+		)
+			->a( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getEntityTypeName( $entityId->getEntityType() ) );
+	}
+
+	/**
 	 * Add an entity to the RDF graph, including all supported structural components
 	 * of the entity and its sub entities.
 	 *
@@ -383,7 +416,13 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 					continue;
 				}
 
-				$this->addEntityStub( $entity );
+				// TODO: Remove the if statement when both stub classes for property and item are ready
+				// TODO: Remove the old addEntityStub and rename addEntityStubNew to addEntityStub
+				if ( $entity->getType() == 'property' ) {
+					$this->addEntityStubNew( $id );
+				} else {
+					$this->addEntityStub( $entity );
+				}
 			} catch ( UnresolvedEntityRedirectException $ex ) {
 				// NOTE: this may add more entries to the end of entitiesResolved
 				$target = $ex->getRedirectTargetId();
@@ -416,6 +455,22 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$type = $entity->getType();
 		if ( !empty( $this->entityRdfBuilders[$type] ) ) {
 			$this->entityRdfBuilders[$type]->addEntityStub( $entity );
+		}
+	}
+
+	/**
+	 * Adds stub information for the given EntityId to the RDF graph.
+	 * Stub information means meta information and labels.
+	 *
+	 * @param EntityId $entityId
+	 */
+	public function addEntityStubNew( EntityId $entityId ) {
+		// TODO: Remove the old addEntityMetaData and rename this one to addEntityMetaData
+		$this->addEntityMetaDataNew( $entityId );
+
+		$type = $entityId->getEntityType();
+		if ( !empty( $this->entityStubRdfBuilders[ $type ] ) ) {
+			$this->entityStubRdfBuilders[ $type ]->addEntityStub( $entityId );
 		}
 	}
 

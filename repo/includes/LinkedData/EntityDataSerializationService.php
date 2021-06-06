@@ -21,6 +21,7 @@ use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
 use Wikibase\Repo\Rdf\HashDedupeBag;
 use Wikibase\Repo\Rdf\RdfBuilder;
 use Wikibase\Repo\Rdf\RdfProducer;
@@ -101,6 +102,11 @@ class EntityDataSerializationService {
 	 */
 	private $entityRdfBuilderFactory;
 
+	/**
+	 * @var EntityStubRdfBuilderFactory
+	 */
+	private $entityStubRdfBuilderFactory;
+
 	public function __construct(
 		EntityLookup $entityLookup,
 		EntityTitleStoreLookup $entityTitleStoreLookup,
@@ -108,6 +114,7 @@ class EntityDataSerializationService {
 		PropertyDataTypeLookup $propertyLookup,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
+		EntityStubRdfBuilderFactory $entityStubRdfBuilderFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		SerializerFactory $serializerFactory,
 		Serializer $entitySerializer,
@@ -120,6 +127,7 @@ class EntityDataSerializationService {
 		$this->propertyLookup = $propertyLookup;
 		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
 		$this->entityRdfBuilderFactory = $entityRdfBuilderFactory;
+		$this->entityStubRdfBuilderFactory = $entityStubRdfBuilderFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->serializerFactory = $serializerFactory;
 		$this->entitySerializer = $entitySerializer;
@@ -365,7 +373,8 @@ class EntityDataSerializationService {
 			$this->getFlavor( $flavorName ),
 			$rdfWriter,
 			new HashDedupeBag(),
-			$this->entityContentFactory
+			$this->entityContentFactory,
+			$this->entityStubRdfBuilderFactory
 		);
 
 		return $rdfBuilder;

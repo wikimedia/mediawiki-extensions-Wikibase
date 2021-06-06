@@ -19,6 +19,7 @@ use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -73,6 +74,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		EntityLookup $entityLookup,
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
 		EntityRevisionLookup $entityRevisionLookup,
+		EntityStubRdfBuilderFactory $entityStubRdfBuilderFactory,
 		EntityTitleStoreLookup $entityTitleLookup,
 		LoggerInterface $logger,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
@@ -94,6 +96,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$propertyDataTypeLookup,
 			$valueSnakRdfBuilderFactory,
 			$entityRdfBuilderFactory,
+			$entityStubRdfBuilderFactory,
 			$entityDataFormatProvider,
 			$compactBaseDataModelSerializerFactory,
 			$compactEntitySerializer,

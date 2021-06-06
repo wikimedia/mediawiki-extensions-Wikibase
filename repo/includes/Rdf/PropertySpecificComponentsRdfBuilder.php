@@ -20,7 +20,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */
-class PropertySpecificComponentsRdfBuilder implements EntityRdfBuilder {
+class PropertySpecificComponentsRdfBuilder {
 
 	public const OBJECT_PROPERTY = 'ObjectProperty';
 	private const DATATYPE_PROPERTY = 'DatatypeProperty';
@@ -253,20 +253,6 @@ class PropertySpecificComponentsRdfBuilder implements EntityRdfBuilder {
 	 * @param EntityDocument $entity
 	 */
 	public function addEntity( EntityDocument $entity ) {
-		if ( !$entity instanceof Property ) {
-			return;
-		}
-
-		$this->addProperty( $entity );
-	}
-
-	/**
-	 * Map some aspects of a property to the RDF graph, as it should appear in the stub
-	 * representation of the property.
-	 *
-	 * @param EntityDocument $entity
-	 */
-	public function addEntityStub( EntityDocument $entity ) {
 		if ( !$entity instanceof Property ) {
 			return;
 		}

@@ -134,6 +134,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			new InMemoryDataTypeLookup(),
 			$rdfBuilder,
 			WikibaseRepo::getEntityRdfBuilderFactory(),
+			WikibaseRepo::getEntityStubRdfBuilderFactory(),
 			$entityDataFormatProvider,
 			$serializerFactory,
 			$serializerFactory->newItemSerializer(),

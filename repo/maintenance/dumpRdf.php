@@ -11,6 +11,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Dumpers\DumpGenerator;
 use Wikibase\Repo\Dumpers\RdfDumpGenerator;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
@@ -50,6 +51,10 @@ class DumpRdf extends DumpEntities {
 	 * @var EntityRdfBuilderFactory
 	 */
 	private $entityRdfBuilderFactory;
+	/**
+	 * @var EntityStubRdfBuilderFactory
+	 */
+	private $entityStubRdfBuilderFactory;
 
 	/**
 	 * @var RdfVocabulary
@@ -85,6 +90,7 @@ class DumpRdf extends DumpEntities {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
+		EntityStubRdfBuilderFactory $entityStubRdfBuilderFactory,
 		EntityRevisionLookup $entityRevisionLookup,
 		RdfVocabulary $rdfVocabulary,
 		EntityContentFactory $entityContentFactory
@@ -98,6 +104,7 @@ class DumpRdf extends DumpEntities {
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
 		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
 		$this->entityRdfBuilderFactory = $entityRdfBuilderFactory;
+		$this->entityStubRdfBuilderFactory = $entityStubRdfBuilderFactory;
 		$this->revisionLookup = $entityRevisionLookup;
 		$this->rdfVocabulary = $rdfVocabulary;
 		$this->entityContentFactory = $entityContentFactory;
@@ -124,6 +131,7 @@ class DumpRdf extends DumpEntities {
 				WikibaseRepo::getPropertyDataTypeLookup(),
 				WikibaseRepo::getValueSnakRdfBuilderFactory( $mwServices ),
 				WikibaseRepo::getEntityRdfBuilderFactory( $mwServices ),
+				WikibaseRepo::getEntityStubRdfBuilderFactory( $mwServices ),
 				$store->getEntityRevisionLookup( $this->getEntityRevisionLookupCacheMode() ),
 				WikibaseRepo::getRdfVocabulary( $mwServices ),
 				WikibaseRepo::getEntityContentFactory( $mwServices )
@@ -182,6 +190,7 @@ class DumpRdf extends DumpEntities {
 			$this->propertyDatatypeLookup,
 			$this->valueSnakRdfBuilderFactory,
 			$this->entityRdfBuilderFactory,
+			$this->entityStubRdfBuilderFactory,
 			$this->entityPrefetcher,
 			$this->rdfVocabulary,
 			$this->entityContentFactory,

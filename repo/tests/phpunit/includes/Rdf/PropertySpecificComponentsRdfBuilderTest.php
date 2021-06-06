@@ -96,14 +96,4 @@ class PropertySpecificComponentsRdfBuilderTest extends TestCase {
 
 		$this->assertOrCreateNTriples( 'P2_all_foreignsource', $writer );
 	}
-
-	public function testAddEntityStub() {
-		$entity = $this->getTestData()->getEntity( 'P2' );
-
-		$writer = $this->getTestData()->getNTriplesWriter();
-		$this->newBuilder( $writer )->addEntityStub( $entity );
-
-		$this->assertOrCreateNTriples( 'P2_all_foreignsource', $writer );
-	}
-
 }

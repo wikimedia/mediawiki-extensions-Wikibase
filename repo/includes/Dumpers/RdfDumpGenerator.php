@@ -14,6 +14,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
 use Wikibase\Repo\Rdf\HashDedupeBag;
 use Wikibase\Repo\Rdf\RdfBuilder;
 use Wikibase\Repo\Rdf\RdfProducer;
@@ -196,6 +197,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param PropertyDataTypeLookup     $propertyLookup
 	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
 	 * @param EntityRdfBuilderFactory    $entityRdfBuilderFactory
+	 * @param EntityStubRdfBuilderFactory   $entityStubRdfBuilderFactory
 	 * @param EntityPrefetcher           $entityPrefetcher
 	 * @param RdfVocabulary              $vocabulary
 	 * @param EntityContentFactory       $entityContentFactory
@@ -212,6 +214,7 @@ class RdfDumpGenerator extends DumpGenerator {
 		PropertyDataTypeLookup $propertyLookup,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
+		EntityStubRdfBuilderFactory $entityStubRdfBuilderFactory,
 		EntityPrefetcher $entityPrefetcher,
 		RdfVocabulary $vocabulary,
 		EntityContentFactory $entityContentFactory,
@@ -230,7 +233,8 @@ class RdfDumpGenerator extends DumpGenerator {
 			self::getFlavorFlags( $flavor ),
 			$rdfWriter,
 			new HashDedupeBag(),
-			$entityContentFactory
+			$entityContentFactory,
+			$entityStubRdfBuilderFactory
 		);
 
 		return new self( $output, $entityRevisionLookup, $rdfBuilder, $entityPrefetcher );

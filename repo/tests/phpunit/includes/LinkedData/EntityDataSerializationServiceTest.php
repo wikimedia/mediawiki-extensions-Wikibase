@@ -8,6 +8,7 @@ use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -119,6 +120,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 			$dataTypeLookup,
 			$rdfBuilder,
 			WikibaseRepo::getEntityRdfBuilderFactory(),
+			WikibaseRepo::getEntityStubRdfBuilderFactory(),
 			new EntityDataFormatProvider(),
 			$serializerFactory,
 			$serializerFactory->newItemSerializer(),
@@ -416,6 +418,10 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		$expectedMimeType
 	) {
 		$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $this->getMockPropertyDataTypeLookup() );
+		$inMemoryTermLookup = new InMemoryPrefetchingTermLookup();
+		$p5 = new PropertyId( 'P5' );
+		$inMemoryTermLookup->setData( [ $this->getMockRepository()->getEntity( $p5 ) ] );
+		$this->setService( 'WikibaseRepo.PrefetchingTermLookup', $inMemoryTermLookup );
 		$service = $this->newService();
 		list( $data, $mimeType ) = $service->getSerializedData(
 			$format,

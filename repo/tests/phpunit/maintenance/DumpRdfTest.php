@@ -167,6 +167,7 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 			$this->getMockPropertyDataTypeLookup(),
 			$rdfBuilder,
 			WikibaseRepo::getEntityRdfBuilderFactory(),
+			WikibaseRepo::getEntityStubRdfBuilderFactory(),
 			$mockRepo,
 			new RdfVocabulary(
 				[ '' => 'fooUri/' ],

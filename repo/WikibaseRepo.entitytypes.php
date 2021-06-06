@@ -59,6 +59,7 @@ use Wikibase\Repo\Rdf\FullStatementRdfBuilderFactory;
 use Wikibase\Repo\Rdf\ItemRdfBuilder;
 use Wikibase\Repo\Rdf\PropertyRdfBuilder;
 use Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder;
+use Wikibase\Repo\Rdf\PropertyStubRdfBuilder;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\SiteLinksRdfBuilder;
 use Wikibase\Repo\Rdf\TermsRdfBuilder;
@@ -323,6 +324,27 @@ return [
 				$fullStatementRdfBuilderFactory,
 				$termsRdfBuilder,
 				$propertySpecificRdfBuilder
+			);
+		},
+		Def::RDF_BUILDER_STUB_FACTORY_CALLBACK => function(
+			RdfVocabulary $vocabulary,
+			RdfWriter $writer
+		) {
+			$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions();
+			$labelPredicates = $entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES );
+			$prefetchingLookup = WikibaseRepo::getPrefetchingTermLookup();
+			$propertyDataLookup = WikibaseRepo::getPropertyDataTypeLookup();
+			$termsLanguages = WikibaseRepo::getTermsLanguages();
+			$dataTypes = WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes();
+
+			return new PropertyStubRdfBuilder(
+				$prefetchingLookup,
+				$propertyDataLookup,
+				$termsLanguages,
+				$vocabulary,
+				$writer,
+				$dataTypes,
+				$labelPredicates
 			);
 		},
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {

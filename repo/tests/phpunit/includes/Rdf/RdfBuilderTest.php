@@ -8,9 +8,13 @@ use SiteLookup;
 use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -18,11 +22,13 @@ use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Rdf\DedupeBag;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
 use Wikibase\Repo\Rdf\FullStatementRdfBuilderFactory;
 use Wikibase\Repo\Rdf\HashDedupeBag;
 use Wikibase\Repo\Rdf\ItemRdfBuilder;
 use Wikibase\Repo\Rdf\PropertyRdfBuilder;
 use Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder;
+use Wikibase\Repo\Rdf\PropertyStubRdfBuilder;
 use Wikibase\Repo\Rdf\RdfBuilder;
 use Wikibase\Repo\Rdf\RdfProducer;
 use Wikibase\Repo\Rdf\RdfVocabulary;
@@ -85,6 +91,46 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			} );
 
 		return $entityTitleLookup;
+	}
+
+	/**
+	 * @return PropertyDataTypeLookup
+	 */
+	private function getPropertyDataTypeLookup() {
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		 // see phpunit/data/rdf/entities and rdf/RdfBuilder
+		for ( $i = 2; $i <= 11; $i++ ) {
+			$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P' . $i ), 'string' );
+		}
+
+		return $dataTypeLookup;
+	}
+
+	/**
+	 * @return PrefetchingTermLookup
+	 */
+	private function getPrefetchingTermLookup() {
+		$prefetchingLookup = $this->createMock( PrefetchingTermLookup::class );
+		// This should not be hardcoded here. Should be somehow part of RdfBuilderTestData.
+		$prefetchingLookup->method( 'getLabels' )
+			->willReturnCallback( function( EntityId $entityId ) {
+				$terms = [
+					"P2" => [ "en" => "Property2" ],
+					"P3" => [ "en" => "Property3" ],
+					"P4" => [ "en" => "Property4" ],
+					"P5" => [ "en" => "Property5" ],
+					"P6" => [ "en" => "Property6" ],
+					"P7" => [ "en" => "Property7" ],
+					"P8" => [ "en" => "Property8" ],
+					"P9" => [ "en" => "Property9" ],
+					"P10" => [ "en" => "Property10" ],
+					"P11" => [ "en" => "Property11" ]
+				];
+				return $terms[ $entityId->getSerialization() ];
+			} );
+
+		$prefetchingLookup->method( 'getDescriptions' )->willReturn( [] );
+		return $prefetchingLookup;
 	}
 
 	/**
@@ -209,6 +255,42 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
+	 * Returns the mapping of entity types used in tests to callbacks instantiating EntityStubRdfBuilder
+	 * instances.
+	 *
+	 * @see EntityTypeDefinitions::getStubRdfBuilderFactoryCallbacks
+	 *
+	 * @return callable[]
+	 */
+	private function getStubRdfBuilderFactoryCallbacks() {
+		return [
+			'property' => function(
+				RdfVocabulary $vocabulary,
+				RdfWriter $writer
+			) {
+				$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions();
+				$labelPredicates = $entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES );
+				$this->setService( 'WikibaseRepo.PrefetchingTermLookup', $this->getPrefetchingTermLookup() );
+				$prefetchingLookup = WikibaseRepo::getPrefetchingTermLookup();
+				$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $this->getTestData()->getMockRepository() );
+				$propertyDataLookup = WikibaseRepo::getPropertyDataTypeLookup();
+				$termsLanguages = WikibaseRepo::getTermsLanguages();
+				$dataTypes = WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes();
+
+				return new PropertyStubRdfBuilder(
+					$prefetchingLookup,
+					$propertyDataLookup,
+					$termsLanguages,
+					$vocabulary,
+					$writer,
+					$dataTypes,
+					$labelPredicates
+				);
+			},
+		];
+	}
+
+	/**
 	 * @param int           $produce One of the RdfProducer::PRODUCE_... constants.
 	 * @param DedupeBag     $dedup
 	 * @param RdfVocabulary $vocabulary
@@ -237,6 +319,8 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$valueBuilderFactory = WikibaseRepo::getValueSnakRdfBuilderFactory();
 		$entityRdfBuilderFactory = new EntityRdfBuilderFactory( $this->getRdfBuilderFactoryCallbacks( $siteLookup ), [] );
 		$emitter = new NTriplesRdfWriter();
+		$entityStubRdfBuilderFactory = new EntityStubRdfBuilderFactory( $this->getStubRdfBuilderFactoryCallbacks( $vocabulary, $emitter ) );
+
 		$builder = new RdfBuilder(
 			$vocabulary ?: $this->getTestData()->getVocabulary(),
 			$valueBuilderFactory,
@@ -245,7 +329,8 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			$produce,
 			$emitter,
 			$dedup,
-			$entityContentFactory
+			$entityContentFactory,
+			$entityStubRdfBuilderFactory
 		);
 
 		$builder->startDocument();

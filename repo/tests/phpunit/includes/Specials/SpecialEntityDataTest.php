@@ -99,6 +99,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$dataTypeLookup,
 			$rdfBuilder,
 			WikibaseRepo::getEntityRdfBuilderFactory(),
+			WikibaseRepo::getEntityStubRdfBuilderFactory(),
 			$entityDataFormatProvider,
 			$serializerFactory,
 			$serializerFactory->newItemSerializer(),
