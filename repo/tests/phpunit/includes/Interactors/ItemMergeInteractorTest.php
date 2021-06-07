@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Interactors;
 
-use ContentHandler;
 use HashSiteStore;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
@@ -113,7 +112,9 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 
 		$mock->method( 'getTitleForId' )
 			->willReturnCallback( function( EntityId $id ) {
-				$contentHandler = ContentHandler::getForModelID( ItemContent::CONTENT_MODEL_ID );
+				$contentHandler = $this->getServiceContainer()
+					->getContentHandlerFactory()
+					->getContentHandler( ItemContent::CONTENT_MODEL_ID );
 				return $contentHandler->getTitleForId( $id );
 			} );
 

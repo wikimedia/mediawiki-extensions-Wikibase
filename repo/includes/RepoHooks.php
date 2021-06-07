@@ -8,7 +8,6 @@ use ApiModuleManager;
 use ApiQuery;
 use ApiQuerySiteinfo;
 use Content;
-use ContentHandler;
 use ExtensionRegistry;
 use HistoryPager;
 use IContextSource;
@@ -575,9 +574,11 @@ final class RepoHooks {
 			$entityContentFactory = WikibaseRepo::getEntityContentFactory();
 			$entityTypes = WikibaseRepo::getEnabledEntityTypes();
 
+			$contentHandlerFactory = MediaWikiServices::getInstance()->getContentHandlerFactory();
+
 			foreach ( $entityContentFactory->getEntityContentModels() as $contentModel ) {
 				/** @var EntityHandler $handler */
-				$handler = ContentHandler::getForModelID( $contentModel );
+				$handler = $contentHandlerFactory->getContentHandler( $contentModel );
 				'@phan-var EntityHandler $handler';
 
 				if ( !in_array( $handler->getEntityType(), $entityTypes ) ) {
