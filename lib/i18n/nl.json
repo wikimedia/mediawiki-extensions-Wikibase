@@ -23,6 +23,7 @@
 	"wikibase-deletedentity-property": "Verwijderde eigenschap",
 	"wikibase-deletedentity-query": "Verwijderde zoekopdracht",
 	"wikibase-error-unexpected": "Fout: $1.",
+	"wikibase-error-unknown": "Er is een fout opgetreden.",
 	"wikibase-error-save-generic": "Kon het niet opslaan vanwege een fout.",
 	"wikibase-error-remove-generic": "Kon niet verwijderen vanwege een fout.",
 	"wikibase-error-save-timeout": "Wij ondervinden technische problemen. Probeer het opnieuw.",

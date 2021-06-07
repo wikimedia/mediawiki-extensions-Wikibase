@@ -416,9 +416,12 @@
 	"wikibase-entity-not-viewable": "De gegeven inhoud van het type \"$1\" is niet een Entiteit en kan niet worden weergegeven door Wikibase.",
 	"wikibase-pageinfo-subscription": "Wiki's geabonneerd op deze entiteit",
 	"wikibase-pageinfo-subscription-none": "Geen",
+	"wikibase-entity-save-error-heading": "Er is iets misgegaan",
 	"wikibase-tainted-ref-popper-text": "De waarde van deze verklaring is gewijzigd, maar de referentie is hetzelfde gebleven. Je kunt deze waarschuwing verwijderen als de referentie nog steeds correct is.",
 	"wikibase-tainted-ref-popper-title": "Referentie/waarde komt mogelijk niet overeen",
 	"wikibase-tainted-ref-popper-help-link-text": "Hulp",
 	"wikibase-tainted-ref-popper-remove-warning": "Waarschuwing verwijderen",
-	"wikibase-federated-properties-search-api-error-message": "Eigenschappen tijdelijk niet beschikbaar"
+	"wikibase-federated-properties-search-api-error-message": "Eigenschappen tijdelijk niet beschikbaar",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Annuleren",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Opnieuw proberen"
 }

@@ -412,7 +412,7 @@
 	"wikibase-conflict-patched": "您的编辑已被整合为最新版本。",
 	"wikibase-save-unresolved-redirect": "尝试保存更改时遇到未解决的从$1重定向到$2的重定向。",
 	"wikibase-restoreold": "还原",
-	"wikibase-entity-summary-restore": "还原[[Special:Contributions/$4|{{GENDER:$4|$4}}]]的版本$3",
+	"wikibase-entity-summary-restore": "还原到[[Special:Contributions/$4|{{GENDER:$4|$4}}]]的版本$3",
 	"wikibase-entity-summary-undo": "撤销[[Special:Contributions/$4|{{GENDER:$4|$4}}]]（[[User talk:$4|讨论]]）的版本$3",
 	"wikibase-non-entity-diff": "不能比较实体与非实体内容之间的差异。",
 	"wikibase-no-direct-editing": "名字空间$1禁止直接编辑",
