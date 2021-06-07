@@ -1311,7 +1311,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'user' => [ 1, 60 ],
 		] ] );
 		$this->setMwGlobals( 'wgMainCacheType', 'hash' );
-		WikibaseRepo::getSettings()->setSetting( 'idGeneratorRateLimiting', true );
 
 		$params = [
 			'action' => 'wbeditentity',

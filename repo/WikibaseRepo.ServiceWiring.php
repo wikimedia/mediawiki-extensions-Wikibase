@@ -582,14 +582,10 @@ return [
 				);
 		}
 
-		if ( $settings->getSetting( 'idGeneratorRateLimiting' ) ) {
-			$idGenerator = new RateLimitingIdGenerator(
-				$idGenerator,
-				RequestContext::getMain()
-			);
-		}
-
-		return $idGenerator;
+		return new RateLimitingIdGenerator(
+			$idGenerator,
+			RequestContext::getMain()
+		);
 	},
 
 	'WikibaseRepo.InternalFormatDeserializerFactory' => function ( MediaWikiServices $services ): InternalDeserializerFactory {

@@ -26,15 +26,24 @@ class IdGeneratorTest extends ServiceWiringTestCase {
 				'idGenerator' => 'original',
 				'reservedIds' => $reservedIds,
 				'idGeneratorSeparateDbConnection' => true,
-				'idGeneratorRateLimiting' => false,
 			] ) );
 
 		$idGenerator = $this->getService( 'WikibaseRepo.IdGenerator' );
 
-		$this->assertInstanceOf( SqlIdGenerator::class, $idGenerator );
+		$this->assertInstanceOf( RateLimitingIdGenerator::class, $idGenerator );
+
+		// the inner generator of the RateLimitingIdGenerator is private
+		// we need to use TestingAccessWrapper to reach that property
 		$idGenerator = TestingAccessWrapper::newFromObject( $idGenerator );
-		$this->assertSame( $reservedIds, $idGenerator->reservedIds );
-		$this->assertSame( true, $idGenerator->separateDbConnection );
+
+		$this->assertInstanceOf( SqlIdGenerator::class, $idGenerator->idGenerator );
+
+		// the inner properties of SqlIdGenerator are private
+		// we need to use TestingAccessWrapper to reach those
+		$innerGenerator = TestingAccessWrapper::newFromObject( $idGenerator->idGenerator );
+
+		$this->assertSame( $reservedIds, $innerGenerator->reservedIds );
+		$this->assertSame( true, $innerGenerator->separateDbConnection );
 	}
 
 	public function testConstructionMysqlUpsert() {
@@ -44,15 +53,21 @@ class IdGeneratorTest extends ServiceWiringTestCase {
 				'idGenerator' => 'mysql-upsert',
 				'reservedIds' => $reservedIds,
 				'idGeneratorSeparateDbConnection' => true,
-				'idGeneratorRateLimiting' => false,
 			] ) );
 
 		$idGenerator = $this->getService( 'WikibaseRepo.IdGenerator' );
 
-		$this->assertInstanceOf( UpsertSqlIdGenerator::class, $idGenerator );
+		$this->assertInstanceOf( RateLimitingIdGenerator::class, $idGenerator );
+
+		// Look at the 1st test to see the purpose of this
 		$idGenerator = TestingAccessWrapper::newFromObject( $idGenerator );
-		$this->assertSame( $reservedIds, $idGenerator->reservedIds );
-		$this->assertSame( true, $idGenerator->separateDbConnection );
+
+		$this->assertInstanceOf( UpsertSqlIdGenerator::class, $idGenerator->idGenerator );
+
+		$innerGenerator = TestingAccessWrapper::newFromObject( $idGenerator->idGenerator );
+
+		$this->assertSame( $reservedIds, $innerGenerator->reservedIds );
+		$this->assertSame( true, $innerGenerator->separateDbConnection );
 	}
 
 	public function testConstructionUnknownType() {
@@ -71,7 +86,6 @@ class IdGeneratorTest extends ServiceWiringTestCase {
 				'idGenerator' => 'original',
 				'reservedIds' => [],
 				'idGeneratorSeparateDbConnection' => false,
-				'idGeneratorRateLimiting' => true,
 			] ) );
 
 		$idGenerator = $this->getService( 'WikibaseRepo.IdGenerator' );
