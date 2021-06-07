@@ -5,9 +5,6 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\Tests\Rdbms;
 
 use IDatabase;
-use PHPUnit\Framework\TestCase;
-use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikimedia\Rdbms\LBFactorySingle;
 
@@ -23,20 +20,8 @@ trait LocalRepoDbTestHelper {
 
 		return new RepoDomainDbFactory(
 			$lbFactory,
-			$domainId,
-			$this->newStubEntitySourcesForDomain( $domainId )
+			$domainId
 		);
-	}
-
-	private function newStubEntitySourcesForDomain( string $dbName ): EntitySourceDefinitions {
-		/** @var $this TestCase */
-		$entitySource = $this->createStub( EntitySource::class );
-		$entitySource->method( 'getDatabaseName' )->willReturn( $dbName );
-
-		$entitySourceDefinitions = $this->createMock( EntitySourceDefinitions::class );
-		$entitySourceDefinitions->method( 'getSourceForEntityType' )->willReturn( $entitySource );
-
-		return $entitySourceDefinitions;
 	}
 
 }

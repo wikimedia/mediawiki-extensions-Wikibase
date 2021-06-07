@@ -6,7 +6,6 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 
 /**
@@ -19,10 +18,6 @@ use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 class RepoDomainDbFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
-		$this->mockService(
-			'WikibaseClient.EntitySourceDefinitions',
-			$this->createStub( EntitySourceDefinitions::class )
-		);
 		$this->mockService( 'WikibaseClient.ItemAndPropertySource',
 			new EntitySource(
 				'repo',
@@ -42,10 +37,6 @@ class RepoDomainDbFactoryTest extends ServiceWiringTestCase {
 	}
 
 	public function testConstructionWithLocalRepo(): void {
-		$this->mockService(
-			'WikibaseClient.EntitySourceDefinitions',
-			$this->createStub( EntitySourceDefinitions::class )
-		);
 		$this->mockService( 'WikibaseClient.ItemAndPropertySource',
 			new EntitySource(
 				'repo',

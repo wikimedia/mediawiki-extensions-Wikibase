@@ -5,7 +5,7 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\Rdbms;
 
 use InvalidArgumentException;
-use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\EntitySource;
 use Wikimedia\Rdbms\ILBFactory;
 
 /**
@@ -24,11 +24,6 @@ class RepoDomainDbFactory {
 	private $lbFactory;
 
 	/**
-	 * @var EntitySourceDefinitions
-	 */
-	private $entitySources;
-
-	/**
 	 * @var string[]
 	 */
 	private $loadGroups;
@@ -36,7 +31,6 @@ class RepoDomainDbFactory {
 	public function __construct(
 		ILBFactory $lbFactory,
 		string $repoDomain,
-		EntitySourceDefinitions $entitySources,
 		array $loadGroups = []
 	) {
 		if ( $repoDomain === '' ) {
@@ -45,7 +39,6 @@ class RepoDomainDbFactory {
 
 		$this->lbFactory = $lbFactory;
 		$this->repoDomain = $repoDomain;
-		$this->entitySources = $entitySources;
 		$this->loadGroups = $loadGroups;
 	}
 
@@ -58,10 +51,9 @@ class RepoDomainDbFactory {
 		return $this->newForDomain( $this->repoDomain );
 	}
 
-	public function newForEntityType( string $type ): RepoDomainDb {
+	public function newForEntitySource( EntitySource $entitySource ): RepoDomainDb {
 		return $this->newForDomain(
-			$this->entitySources->getSourceForEntityType( $type )
-				->getDatabaseName() ?: $this->lbFactory->getLocalDomainID() // db name === false means local db
+			$entitySource->getDatabaseName() ?: $this->lbFactory->getLocalDomainID() // db name === false means local db
 		);
 	}
 

@@ -227,7 +227,7 @@ return [
 		},
 		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( EntitySource $entitySource ) {
 			$termIdsResolver = WikibaseRepo::getTermInLangIdsResolverFactory()
-				->getResolverForEntityType( Item::ENTITY_TYPE );
+				->getResolverForEntitySource( $entitySource );
 
 			return new PrefetchingItemTermLookup( $termIdsResolver );
 		},
@@ -377,7 +377,7 @@ return [
 			$cacheSecret = hash( 'sha256', $mwServices->getMainConfig()->get( 'SecretKey' ) );
 			$bagOStuff = $mwServices->getLocalServerObjectCache();
 			$termIdsResolver = WikibaseRepo::getTermInLangIdsResolverFactory( $mwServices )
-				->getResolverForEntityType( Property::ENTITY_TYPE );
+				->getResolverForEntitySource( $entitySource );
 
 			$prefetchingPropertyTermLookup = new PrefetchingPropertyTermLookup( $termIdsResolver );
 
