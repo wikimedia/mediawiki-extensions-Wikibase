@@ -7,9 +7,11 @@ use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use WANObjectCache;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
@@ -20,7 +22,6 @@ use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\MatchingTermsLookupFactory
@@ -35,9 +36,9 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 	use LocalRepoDbTestHelper;
 
 	/**
-	 * @var LBFactorySingle
+	 * @var RepoDomainDbFactory
 	 */
-	private $lbFactory;
+	private $dbFactory;
 
 	/**
 	 * @var WANObjectCache
@@ -66,9 +67,9 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 		$this->tablesUsed[] = 'wbt_term_in_lang';
 		$this->tablesUsed[] = 'wbt_item_terms';
 
-		$this->lbFactory = LBFactorySingle::newFromConnection( $this->db );
+		$this->dbFactory = $this->getRepoDomainDbFactoryForDb( $this->db );
 		$this->objectCache = MediaWikiServices::getInstance()->getMainWANObjectCache();
-		$repoDb = $this->getRepoDomainDbFactoryForDb( $this->db )->newRepoDb();
+		$repoDb = $this->dbFactory->newRepoDb();
 
 		$typeIdsStore = new DatabaseTypeIdsStore(
 			$repoDb,
@@ -99,12 +100,17 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 			new EntityIdComposer( [
 				Item::ENTITY_TYPE => [ ItemId::class, 'newFromRepositoryAndNumber' ]
 			] ),
-			$this->lbFactory,
+			$this->dbFactory,
 			new NullLogger(),
 			$this->objectCache
 		);
 
-		$matchingTermsLookup = $factory->getLookupForDatabase( false );
+		$itemSource = $this->createMock( EntitySource::class );
+		$itemSource->expects( $this->once() )
+			->method( 'getDatabaseName' )
+			->willReturn( false ); // false means local db
+
+		$matchingTermsLookup = $factory->getLookupForSource( $itemSource );
 
 		$criteria = new TermIndexSearchCriteria( [
 			'termText' => self::MOCK_ITEM_LABELS['Q100']

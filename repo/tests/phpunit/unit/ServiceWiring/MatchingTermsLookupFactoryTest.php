@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -28,9 +29,10 @@ class MatchingTermsLookupFactoryTest extends ServiceWiringTestCase {
 			$this->createMock( LoggerInterface::class )
 		);
 
-		$this->serviceContainer
-			->expects( $this->once() )
-			->method( 'getDBLoadBalancerFactory' );
+		$this->mockService(
+			'WikibaseRepo.RepoDomainDbFactory',
+			$this->createStub( RepoDomainDbFactory::class )
+		);
 
 		$this->serviceContainer
 			->expects( $this->once() )

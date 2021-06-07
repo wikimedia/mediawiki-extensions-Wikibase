@@ -1346,7 +1346,7 @@ return [
 	'WikibaseRepo.MatchingTermsLookupFactory' => function ( MediaWikiServices $services ): MatchingTermsLookupFactory {
 		return new MatchingTermsLookupFactory(
 			WikibaseRepo::getEntityIdComposer( $services ),
-			$services->getDBLoadBalancerFactory(),
+			WikibaseRepo::getRepoDomainDbFactory( $services ),
 			WikibaseRepo::getLogger( $services ),
 			$services->getMainWANObjectCache()
 		);
@@ -1755,7 +1755,7 @@ return [
 				$languageFallbackChainFactory
 			): MatchingTermsSearchInteractorFactory {
 				return new MatchingTermsSearchInteractorFactory(
-					$matchingTermLookupFactory->getLookupForDatabase( $source->getDatabaseName() ),
+					$matchingTermLookupFactory->getLookupForSource( $source ),
 					$languageFallbackChainFactory,
 					$prefetchingTermLookupFactory->getLookupForSource( $source )
 				);
