@@ -6,10 +6,10 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 use JobQueueGroup;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
 use Wikibase\Lib\StringNormalizer;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * Base class for item/property TermStoreWriters.
@@ -23,8 +23,8 @@ abstract class DatabaseTermStoreWriterBase {
 	use FingerprintableEntityTermStoreTrait;
 	use StatsdMonitoring;
 
-	/** @var ILoadBalancer */
-	private $loadBalancer;
+	/** @var RepoDomainDb */
+	private $repoDb;
 
 	/** @var TermInLangIdsAcquirer */
 	private $termInLangIdsAcquirer;
@@ -39,10 +39,10 @@ abstract class DatabaseTermStoreWriterBase {
 	private $jobQueueGroup;
 
 	public function __construct(
-		ILoadBalancer $loadBalancer, JobQueueGroup $jobQueueGroup, TermInLangIdsAcquirer $termInLangIdsAcquirer,
+		RepoDomainDb $repoDb, JobQueueGroup $jobQueueGroup, TermInLangIdsAcquirer $termInLangIdsAcquirer,
 		TermInLangIdsResolver $termInLangIdsResolver, StringNormalizer $stringNormalizer
 	) {
-		$this->loadBalancer = $loadBalancer;
+		$this->repoDb = $repoDb;
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->termInLangIdsAcquirer = $termInLangIdsAcquirer;
 		$this->termInLangIdsResolver = $termInLangIdsResolver;
@@ -50,7 +50,7 @@ abstract class DatabaseTermStoreWriterBase {
 	}
 
 	private function getDbw(): IDatabase {
-		return $this->loadBalancer->getConnection( ILoadBalancer::DB_PRIMARY );
+		return $this->repoDb->connections()->getWriteConnection();
 	}
 
 	protected function delete( Int32EntityId $entityId ): void {

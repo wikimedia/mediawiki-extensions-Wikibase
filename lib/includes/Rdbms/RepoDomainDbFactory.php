@@ -61,7 +61,7 @@ class RepoDomainDbFactory {
 	public function newForEntityType( string $type ): RepoDomainDb {
 		return $this->newForDomain(
 			$this->entitySources->getSourceForEntityType( $type )
-				->getDatabaseName()
+				->getDatabaseName() ?: $this->lbFactory->getLocalDomainID() // db name === false means local db
 		);
 	}
 

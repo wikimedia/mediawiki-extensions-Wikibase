@@ -5,9 +5,8 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
-use Wikimedia\Rdbms\ILBFactory;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * A {@link TermInLangIdsAcquirer} implementation using the database tables
@@ -24,9 +23,9 @@ use Wikimedia\Rdbms\ILoadBalancer;
 class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 
 	/**
-	 * @var ILBFactory
+	 * @var RepoDomainDb
 	 */
-	private $lbFactory;
+	private $repoDb;
 
 	/**
 	 * @var TypeIdsAcquirer
@@ -36,17 +35,12 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	/** @var LoggerInterface */
 	private $logger;
 
-	/**
-	 * @param ILBFactory $lbFactory
-	 * @param TypeIdsAcquirer $typeIdsAcquirer
-	 * @param LoggerInterface|null $logger
-	 */
 	public function __construct(
-		ILBFactory $lbFactory,
+		RepoDomainDb $repoDb,
 		TypeIdsAcquirer $typeIdsAcquirer,
 		LoggerInterface $logger = null
 	) {
-		$this->lbFactory = $lbFactory;
+		$this->repoDb = $repoDb;
 		$this->typeIdsAcquirer = $typeIdsAcquirer;
 		$this->logger = $logger ?? new NullLogger();
 	}
@@ -68,10 +62,6 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 		$this->restoreCleanedUpIds( $termsArray, $termInLangIds );
 
 		return $termInLangIds;
-	}
-
-	private function getLoadBalancer(): ILoadBalancer {
-		return $this->lbFactory->getMainLB();
 	}
 
 	/**
@@ -381,7 +371,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	private function restoreCleanedUpIds( array $termsArray, array $termInLangIds = [] ) {
 		$uniqueTermIds = array_values( array_unique( $termInLangIds ) );
 
-		$dbMaster = $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_PRIMARY );
+		$dbMaster = $this->repoDb->connections()->getWriteConnection();
 		$persistedTermIds = $dbMaster->selectFieldValues(
 			'wbt_term_in_lang',
 			'wbtl_id',
@@ -404,13 +394,13 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 		$ignoreReplica = false
 	): array {
 		$textIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
-			$this->lbFactory, 'wbt_text', 'wbx_id', $this->logger,
+			$this->repoDb, 'wbt_text', 'wbx_id', $this->logger,
 			$ignoreReplica ? ReplicaMasterAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
 		$textInLangIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
-			$this->lbFactory, 'wbt_text_in_lang', 'wbxl_id', $this->logger,
+			$this->repoDb, 'wbt_text_in_lang', 'wbxl_id', $this->logger,
 			$ignoreReplica ? ReplicaMasterAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
 		$termInLangIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
-			$this->lbFactory, 'wbt_term_in_lang', 'wbtl_id', $this->logger,
+			$this->repoDb, 'wbt_term_in_lang', 'wbtl_id', $this->logger,
 			$ignoreReplica ? ReplicaMasterAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
 
 		$termsArray = $this->mapToTextIds( $termsArray, $textIdsAcquirer );

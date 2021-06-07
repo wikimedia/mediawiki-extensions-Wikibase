@@ -4,8 +4,9 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 
 /**
@@ -27,18 +28,13 @@ class PropertyLabelResolverTest extends ServiceWiringTestCase {
 			] )
 		);
 
-		$this->mockService(
-			'WikibaseClient.PropertySource',
-			new EntitySource(
-				'test',
-				'test',
-				[],
-				'',
-				'',
-				'',
-				''
-			)
-		);
+		$repoDb = $this->createStub( RepoDomainDb::class );
+		$dbFactory = $this->createMock( RepoDomainDbFactory::class );
+		$dbFactory->expects( $this->once() )
+			->method( 'newForEntityType' )
+			->with( 'property' )
+			->willReturn( $repoDb );
+		$this->mockService( 'WikibaseClient.RepoDomainDbFactory', $dbFactory );
 
 		$this->assertInstanceOf(
 			PropertyLabelResolver::class,

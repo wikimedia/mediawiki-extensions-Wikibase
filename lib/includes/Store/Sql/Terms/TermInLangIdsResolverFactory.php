@@ -6,58 +6,50 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 
 use Psr\Log\LoggerInterface;
 use WANObjectCache;
-use Wikimedia\Rdbms\ILBFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 
 /**
  * @license GPL-2.0-or-later
  */
 class TermInLangIdsResolverFactory {
+
 	/**
-	 * @var ILBFactory
+	 * @var RepoDomainDbFactory
 	 */
-	private $loadBalancerFactory;
+	private $dbFactory;
+
 	/**
 	 * @var LoggerInterface
 	 */
 	private $logger;
+
 	/**
 	 * @var WANObjectCache
 	 */
 	private $objectCache;
 
-	/**
-	 * @param ILBFactory $loadBalancerFactory
-	 * @param LoggerInterface $logger
-	 * @param WANObjectCache $objectCache
-	 */
 	public function __construct(
-		ILBFactory $loadBalancerFactory,
+		RepoDomainDbFactory $dbFactory,
 		LoggerInterface $logger,
 		WANObjectCache $objectCache
 	) {
-		$this->loadBalancerFactory = $loadBalancerFactory;
 		$this->logger = $logger;
 		$this->objectCache = $objectCache;
+		$this->dbFactory = $dbFactory;
 	}
 
-	/**
-	 * @param string|false $dbName The name of the database to use (use false for the local db)
-	 */
-	public function getResolverForDatabase( $dbName ): DatabaseTermInLangIdsResolver {
-		$loadBalancer = $this->loadBalancerFactory
-			->getMainLB( $dbName );
+	public function getResolverForEntityType( string $entityType ): DatabaseTermInLangIdsResolver {
+		$db = $this->dbFactory->newForEntityType( $entityType );
 
 		$databaseTypeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
+			$db,
 			$this->objectCache,
-			$dbName,
 			$this->logger
 		);
 		return new DatabaseTermInLangIdsResolver(
 			$databaseTypeIdsStore,
 			$databaseTypeIdsStore,
-			$loadBalancer,
-			$dbName,
+			$db,
 			$this->logger
 		);
 	}

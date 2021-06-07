@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
@@ -18,10 +19,9 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermIndexEntry;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikimedia\Rdbms\DatabaseSqlite;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILBFactory;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup
@@ -31,20 +31,23 @@ use Wikimedia\Rdbms\LBFactorySingle;
  * @license GPL-2.0-or-later
  */
 class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
+
+	use LocalRepoDbTestHelper;
+
 	/**
 	 * @var IDatabase
 	 */
 	private $sqliteDb;
 
 	/**
-	 * @var ILBFactory
+	 * @var DomainDb
 	 */
-	private $lbFactory;
+	private $repoDb;
 
 	protected function setUp(): void {
 		// We can't use the mediawiki integration test since we union temp tables.
 		$this->sqliteDb = $this->setUpNewDb();
-		$this->lbFactory = LBFactorySingle::newFromConnection( $this->sqliteDb );
+		$this->repoDb = $this->getRepoDomainDbFactoryForDb( $this->sqliteDb )->newRepoDb();
 	}
 
 	private function setUpNewDb() {
@@ -204,9 +207,8 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 
 	private function getMatchingTermsLookup() {
 		$store = new DatabaseTypeIdsStore(
-			$this->lbFactory->getMainLB(),
+			$this->repoDb,
 			MediaWikiServices::getInstance()->getMainWANObjectCache(),
-			false,
 			new NullLogger()
 		);
 
@@ -219,7 +221,7 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 			},
 		] );
 		return new DatabaseMatchingTermsLookup(
-			$this->lbFactory->getMainLB(),
+			$this->repoDb,
 			$store,
 			$store,
 			$composer,
@@ -230,15 +232,15 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 	private function getItemTermStoreWriter() {
 		$logger = new NullLogger();
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$this->lbFactory->getMainLB(),
+			$this->repoDb,
 			MediaWikiServices::getInstance()->getMainWANObjectCache()
 		);
 
-		return new DatabaseItemTermStoreWriter( $this->lbFactory->getMainLB(),
+		return new DatabaseItemTermStoreWriter( $this->repoDb,
 			JobQueueGroup::singleton(),
-			new DatabaseTermInLangIdsAcquirer( $this->lbFactory, $typeIdsStore, $logger ),
+			new DatabaseTermInLangIdsAcquirer( $this->repoDb, $typeIdsStore, $logger ),
 			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore,
-				$this->lbFactory->getMainLB(), false, $logger ), new StringNormalizer()
+				$this->repoDb, $logger ), new StringNormalizer()
 		);
 	}
 

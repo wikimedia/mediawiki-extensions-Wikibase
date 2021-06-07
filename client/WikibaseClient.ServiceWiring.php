@@ -637,23 +637,18 @@ return [
 		// Cache key needs to be language specific
 		$cacheKey = $cacheKeyPrefix . ':TermPropertyLabelResolver' . '/' . $languageCode;
 
-		$propertyDatabaseName = WikibaseClient::getPropertySource( $services )
-			->getDatabaseName();
-		$loadBalancer = $services->getDBLoadBalancerFactory()
-			->getMainLB( $propertyDatabaseName );
+		$repoDb = WikibaseClient::getRepoDomainDbFactory( $services )->newForEntityType( Property::ENTITY_TYPE );
 		$wanObjectCache = $services->getMainWANObjectCache();
 
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
-			$wanObjectCache,
-			$propertyDatabaseName
+			$repoDb,
+			$wanObjectCache
 		);
 
 		$databaseTermIdsResolver = new DatabaseTermInLangIdsResolver(
 			$typeIdsStore,
 			$typeIdsStore,
-			$loadBalancer,
-			$propertyDatabaseName
+			$repoDb
 		);
 
 		return new CachedDatabasePropertyLabelResolver(
@@ -946,7 +941,7 @@ return [
 		MediaWikiServices $services
 	): TermInLangIdsResolverFactory {
 		return new TermInLangIdsResolverFactory(
-			$services->getDBLoadBalancerFactory(),
+			WikibaseClient::getRepoDomainDbFactory( $services ),
 			WikibaseClient::getLogger( $services ),
 			$services->getMainWANObjectCache()
 		);

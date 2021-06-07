@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use stdClass;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
-use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -26,11 +26,8 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 	/** @var TypeIdsLookup */
 	private $typeIdsLookup;
 
-	/** @var ILoadBalancer */
-	private $lb;
-
-	/** @var bool|string */
-	private $databaseDomain;
+	/** @var RepoDomainDb */
+	private $db;
 
 	/** @var LoggerInterface */
 	private $logger;
@@ -38,24 +35,15 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 	/** @var string[] stash of data returned from the {@link TypeIdsResolver} */
 	private $typeNames = [];
 
-	/**
-	 * @param TypeIdsResolver $typeIdsResolver
-	 * @param TypeIdsLookup $typeIdsLookup
-	 * @param ILoadBalancer $lb
-	 * @param string|bool $databaseDomain
-	 * @param LoggerInterface|null $logger
-	 */
 	public function __construct(
 		TypeIdsResolver $typeIdsResolver,
 		TypeIdsLookup $typeIdsLookup,
-		ILoadBalancer $lb,
-		$databaseDomain = false,
-		LoggerInterface $logger = null
+		RepoDomainDb $db,
+		?LoggerInterface $logger = null
 	) {
 		$this->typeIdsResolver = $typeIdsResolver;
 		$this->typeIdsLookup = $typeIdsLookup;
-		$this->lb = $lb;
-		$this->databaseDomain = $databaseDomain;
+		$this->db = $db;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -232,7 +220,7 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 	}
 
 	private function getDbr() {
-		return $this->lb->getConnection( ILoadBalancer::DB_REPLICA, [], $this->databaseDomain );
+		return $this->db->connections()->getReadConnection();
 	}
 
 }

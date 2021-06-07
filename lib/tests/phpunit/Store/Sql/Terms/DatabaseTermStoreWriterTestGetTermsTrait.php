@@ -13,7 +13,6 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
-use Wikimedia\Rdbms\LoadBalancerSingle;
 
 /**
  * Trait for code reuse between DatabaseItemTermStoreWriterTest and DatabasePropertyTermStoreWriterTest
@@ -26,15 +25,15 @@ use Wikimedia\Rdbms\LoadBalancerSingle;
 trait DatabaseTermStoreWriterTestGetTermsTrait {
 
 	private function getTerms( Int32EntityId $entityId, $termsTable, $termInLangField, $idField ): Fingerprint {
-		$loadBalancer = LoadBalancerSingle::newFromConnection( $this->db );
+		$repoDb = $this->getRepoDomainDbFactoryForDb( $this->db )->newRepoDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
+			$repoDb,
 			WANObjectCache::newEmpty()
 		);
 		$termInLangIdsResolver = new DatabaseTermInLangIdsResolver(
 			$typeIdsStore,
 			$typeIdsStore,
-			$loadBalancer
+			$repoDb
 		);
 
 		$termInLangIds = $this->db->selectFieldValues(

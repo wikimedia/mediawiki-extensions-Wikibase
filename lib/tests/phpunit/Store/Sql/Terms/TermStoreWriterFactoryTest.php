@@ -10,11 +10,10 @@ use WANObjectCache;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\StringNormalizer;
-use Wikimedia\Rdbms\LBFactory;
-use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory
@@ -50,7 +49,7 @@ class TermStoreWriterFactoryTest extends TestCase {
 			$databaseTypeIdsStore,
 			$databaseTypeIdsStore,
 			$databaseTypeIdsStore,
-			$this->getBasicStubLBFactory(),
+			$this->newStubRepoDb(),
 			$this->createMock( WANObjectCache::class ),
 			$this->createMock( JobQueueGroup::class ),
 			$this->createMock( LoggerInterface::class )
@@ -77,12 +76,8 @@ class TermStoreWriterFactoryTest extends TestCase {
 		return new EntitySource( 'empty', false, $entityTypeData, '', '', '', '' );
 	}
 
-	private function getBasicStubLBFactory() {
-		$lbFactory = $this->createStub( LBFactory::class );
-		$lbFactory->method( 'getMainLB' )->willReturn(
-			$this->createMock( LoadBalancer::class )
-		);
-		return $lbFactory;
+	private function newStubRepoDb() {
+		return $this->createStub( RepoDomainDb::class );
 	}
 
 }

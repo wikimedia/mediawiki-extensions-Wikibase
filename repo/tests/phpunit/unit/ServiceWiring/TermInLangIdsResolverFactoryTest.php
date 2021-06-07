@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Psr\Log\LoggerInterface;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolverFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -24,11 +25,12 @@ class TermInLangIdsResolverFactoryTest extends ServiceWiringTestCase {
 
 		$this->serviceContainer
 			->expects( $this->once() )
-			->method( 'getDBLoadBalancerFactory' );
-
-		$this->serviceContainer
-			->expects( $this->once() )
 			->method( 'getMainWANObjectCache' );
+
+		$this->mockService(
+			'WikibaseRepo.RepoDomainDbFactory',
+			$this->createStub( RepoDomainDbFactory::class )
+		);
 
 		$this->assertInstanceOf(
 			TermInLangIdsResolverFactory::class,

@@ -414,7 +414,7 @@ return [
 
 	'WikibaseRepo.DatabaseTypeIdsStore' => function ( MediaWikiServices $services ): DatabaseTypeIdsStore {
 		return new DatabaseTypeIdsStore(
-			$services->getDBLoadBalancer(),
+			WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
 			$services->getMainWANObjectCache()
 		);
 	},
@@ -1722,7 +1722,7 @@ return [
 		MediaWikiServices $services
 	): TermInLangIdsResolverFactory {
 		return new TermInLangIdsResolverFactory(
-			$services->getDBLoadBalancerFactory(),
+			WikibaseRepo::getRepoDomainDbFactory( $services ),
 			WikibaseRepo::getLogger( $services ),
 			$services->getMainWANObjectCache()
 		);
@@ -1777,7 +1777,7 @@ return [
 			WikibaseRepo::getTypeIdsAcquirer( $services ),
 			WikibaseRepo::getTypeIdsLookup( $services ),
 			WikibaseRepo::getTypeIdsResolver( $services ),
-			$services->getDBLoadBalancerFactory(),
+			WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
 			$services->getMainWANObjectCache(),
 			JobQueueGroup::singleton(),
 			WikibaseRepo::getLogger( $services )

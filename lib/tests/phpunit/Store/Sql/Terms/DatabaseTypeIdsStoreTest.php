@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 use HashBagOStuff;
 use MediaWikiIntegrationTestCase;
 use WANObjectCache;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Rdbms\DBConnRef;
@@ -38,9 +39,12 @@ class DatabaseTypeIdsStoreTest extends MediaWikiIntegrationTestCase {
 				return new DBConnRef( $loadBalancer, $this->db, $i );
 			}
 		);
+		$repoDb = $this->createMock( RepoDomainDb::class );
+		$repoDb->method( 'loadbalancer' )->willReturn( $loadBalancer );
+
 		$cache = new WANObjectCache( [ 'cache' => new HashBagOStuff() ] );
 		$this->typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
+			$repoDb,
 			$cache
 		);
 	}

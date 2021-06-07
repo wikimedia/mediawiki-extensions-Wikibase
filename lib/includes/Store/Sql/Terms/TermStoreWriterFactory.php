@@ -12,8 +12,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\StringNormalizer;
-use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Factory for creating writer objects relating to the 2019 SQL based terms storage.
@@ -43,9 +43,9 @@ class TermStoreWriterFactory {
 	private $typeIdsResolver;
 
 	/**
-	 * @var ILBFactory
+	 * @var RepoDomainDb
 	 */
-	private $loadbalancerFactory;
+	private $repoDb;
 
 	/**
 	 * @var WANObjectCache
@@ -68,7 +68,7 @@ class TermStoreWriterFactory {
 		TypeIdsAcquirer $typeIdsAcquirer,
 		TypeIdsLookup $typeIdsLookup,
 		TypeIdsResolver $typeIdsResolver,
-		ILBFactory $loadbalancerFactory,
+		RepoDomainDb $repoDb,
 		WANObjectCache $wanCache,
 		JobQueueGroup $jobQueueGroup,
 		LoggerInterface $logger
@@ -78,7 +78,7 @@ class TermStoreWriterFactory {
 		$this->typeIdsAcquirer = $typeIdsAcquirer;
 		$this->typeIdsLookup = $typeIdsLookup;
 		$this->typeIdsResolver = $typeIdsResolver;
-		$this->loadbalancerFactory = $loadbalancerFactory;
+		$this->repoDb = $repoDb;
 		$this->wanCache = $wanCache;
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->logger = $logger;
@@ -90,7 +90,7 @@ class TermStoreWriterFactory {
 		}
 
 		return new DatabaseItemTermStoreWriter(
-			$this->loadbalancerFactory->getMainLB(),
+			$this->repoDb,
 			$this->jobQueueGroup,
 			$this->newTermInLangIdsAcquirer( $this->typeIdsAcquirer ),
 			$this->newTermInLangIdsResolver( $this->typeIdsResolver, $this->typeIdsLookup ),
@@ -104,7 +104,7 @@ class TermStoreWriterFactory {
 		}
 
 		return new DatabasePropertyTermStoreWriter(
-			$this->loadbalancerFactory->getMainLB(),
+			$this->repoDb,
 			$this->jobQueueGroup,
 			$this->newTermInLangIdsAcquirer( $this->typeIdsAcquirer ),
 			$this->newTermInLangIdsResolver( $this->typeIdsResolver, $this->typeIdsLookup ),
@@ -116,15 +116,14 @@ class TermStoreWriterFactory {
 		return new DatabaseTermInLangIdsResolver(
 			$typeResolver,
 			$typeLookup,
-			$this->loadbalancerFactory->getMainLB(),
-			false,
+			$this->repoDb,
 			$this->logger
 		);
 	}
 
 	private function newTermInLangIdsAcquirer( TypeIdsAcquirer $typeAcquirer ): TermInLangIdsAcquirer {
 		return new DatabaseTermInLangIdsAcquirer(
-			$this->loadbalancerFactory,
+			$this->repoDb,
 			$typeAcquirer,
 			$this->logger
 		);
