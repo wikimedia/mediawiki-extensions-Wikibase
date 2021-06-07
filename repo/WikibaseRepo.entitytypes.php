@@ -309,10 +309,14 @@ return [
 				$propertyDataLookup
 			);
 
+			$dataTypeLookup = WikibaseRepo::getPropertyDataTypeLookup();
 			$propertySpecificRdfBuilder = new PropertySpecificComponentsRdfBuilder(
 				$vocabulary,
 				$writer,
-				WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes() );
+				$dataTypeLookup,
+				WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes()
+			);
+
 			return new PropertyRdfBuilder(
 				$flavorFlags,
 				$truthyStatementRdfBuilderFactory,

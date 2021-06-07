@@ -7,7 +7,6 @@ use OutOfBoundsException;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Statement\Statement;
 use Wikimedia\Assert\Assert;
 
@@ -413,20 +412,18 @@ class RdfVocabulary {
 	/**
 	 * Get Wikibase property data type Uri for ontology
 	 *
-	 * @param Property $prop
+	 * @param string $dataTypeId
 	 *
 	 * @return string
 	 */
-	public function getDataTypeURI( Property $prop ) {
-		$type = $prop->getDataTypeId();
-
-		if ( !isset( $this->dataTypeUris[$type] ) ) {
+	public function getDataTypeURI( string $dataTypeId ) {
+		if ( !isset( $this->dataTypeUris[$dataTypeId] ) ) {
 			// if the requested type has no URI in $this->dataTypeUris, add a generic one
-			$name = preg_replace( '/\W+/', '', ucwords( strtr( $type, '-', ' ' ) ) );
-			$this->dataTypeUris[$type] = $this->namespaces[self::NS_ONTOLOGY] . $name;
+			$name = preg_replace( '/\W+/', '', ucwords( strtr( $dataTypeId, '-', ' ' ) ) );
+			$this->dataTypeUris[$dataTypeId] = $this->namespaces[self::NS_ONTOLOGY] . $name;
 		}
 
-		return $this->dataTypeUris[$type];
+		return $this->dataTypeUris[$dataTypeId];
 	}
 
 	/**

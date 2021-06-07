@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Rdf;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -39,10 +40,21 @@ class PropertySpecificComponentsRdfBuilder implements EntityRdfBuilder {
 	 */
 	private $dataTypes;
 
-	public function __construct( RdfVocabulary $vocabulary, RdfWriter $writer, array $dataTypes = [] ) {
+	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $dataTypeLookup;
+
+	public function __construct(
+		RdfVocabulary $vocabulary,
+		RdfWriter $writer,
+		PropertyDataTypeLookup $dataTypeLookup,
+		array $dataTypes = []
+	) {
 		$this->vocabulary = $vocabulary;
 		$this->writer = $writer;
 		$this->dataTypes = $dataTypes;
+		$this->dataTypeLookup = $dataTypeLookup;
 	}
 
 	/**
@@ -218,12 +230,13 @@ class PropertySpecificComponentsRdfBuilder implements EntityRdfBuilder {
 		$id = $property->getId();
 		$propertyLName = $this->vocabulary->getEntityLName( $id );
 		$repositoryName = $this->vocabulary->getEntityRepositoryName( $id );
+		$dataTypeId = $this->dataTypeLookup->getDataTypeIdForProperty( $id );
 
 		$this->writer->about(
 			$this->vocabulary->entityNamespaceNames[$repositoryName],
 			$propertyLName
 		)->say( RdfVocabulary::NS_ONTOLOGY, 'propertyType' )
-			->is( $this->vocabulary->getDataTypeURI( $property ) );
+			->is( $this->vocabulary->getDataTypeURI( $dataTypeId ) );
 
 		$this->writePropertyPredicates(
 			$propertyLName,

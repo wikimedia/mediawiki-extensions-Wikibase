@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -56,11 +58,21 @@ class PropertySpecificComponentsRdfBuilderTest extends TestCase {
 	 */
 	private function newBuilder( RdfWriter $writer ) {
 		$vocabulary = $this->getTestData()->getVocabulary();
+		$dataTypeLookup = $this->getPropertyDataTypeLookup();
 
 		return new PropertySpecificComponentsRdfBuilder(
 			$vocabulary,
-			$writer
-		);
+			$writer,
+			$dataTypeLookup,
+			[]
+ );
+	}
+
+	private function getPropertyDataTypeLookup() {
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P2' ), 'string' ); // see phpunit/data/rdf/entities
+
+		return $dataTypeLookup;
 	}
 
 	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {

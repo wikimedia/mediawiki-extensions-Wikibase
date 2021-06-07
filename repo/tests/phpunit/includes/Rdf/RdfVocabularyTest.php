@@ -137,16 +137,18 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetDataTypeURI() {
 		$property = Property::newFromType( 'some-type' );
+		$type = $property->getDataTypeId();
 		$vocab = $this->newInstance();
 
 		// test generic uri construction
-		$actual = $vocab->getDataTypeURI( $property );
+		$actual = $vocab->getDataTypeURI( $type );
 		$expected = $vocab->getNamespaceURI( RdfVocabulary::NS_ONTOLOGY ) . 'SomeType';
 		$this->assertSame( $expected, $actual );
 
 		// test a type for which we have explicitly defined a uri
 		$property = Property::newFromType( 'acme' );
-		$actual = $vocab->getDataTypeURI( $property );
+		$type = $property->getDataTypeId();
+		$actual = $vocab->getDataTypeURI( $type );
 		$this->assertSame( 'http://acme.test/vocab/ACME', $actual );
 	}
 
