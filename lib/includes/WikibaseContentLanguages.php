@@ -90,6 +90,7 @@ class WikibaseContentLanguages {
 					'cnh', // T278853
 					'dag', // T260037
 					'dua', // T263946
+					'en-us', // T154589
 					'eto', // T263946
 					'etu', // T263946
 					'ewo', // T263946
@@ -111,6 +112,7 @@ class WikibaseContentLanguages {
 					'nnh', // T263946
 					'nnz', // T263946
 					'nod', // T93880
+					'osa-latn', // T265297
 					'ota', // T59342
 					'pap-aw', // T275682
 					'quc', // T278851
@@ -126,6 +128,7 @@ class WikibaseContentLanguages {
 					'tvu', // T263946
 					'vut', // T263946
 					'wes', // T263946
+					'wya', // T283364
 					'yas', // T263946
 					'yat', // T263946
 					'yav', // T263946
