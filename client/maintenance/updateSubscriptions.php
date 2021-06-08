@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase;
 
 use Maintenance;
@@ -46,9 +48,8 @@ class UpdateSubscriptions extends Maintenance {
 	 * @see Maintenance::execute
 	 *
 	 * @throws EntityIdParsingException
-	 * @return bool
 	 */
-	public function execute() {
+	public function execute(): bool {
 		if ( !WikibaseSettings::isClientEnabled() ) {
 			$this->fatalError(
 				'You need to have WikibaseClient enabled in order to use this maintenance script!'
@@ -87,10 +88,8 @@ class UpdateSubscriptions extends Maintenance {
 
 	/**
 	 * Outputs a message vis the output() method.
-	 *
-	 * @param string $msg
 	 */
-	public function report( $msg ) {
+	public function report( string $msg ) {
 		$this->output( "$msg\n" );
 	}
 
