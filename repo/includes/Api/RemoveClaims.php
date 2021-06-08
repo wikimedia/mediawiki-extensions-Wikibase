@@ -62,6 +62,11 @@ class RemoveClaims extends ApiBase {
 	 */
 	private $entitySavingHelper;
 
+	/**
+	 * @var string[]
+	 */
+	private $sandboxEntityIds;
+
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
@@ -71,7 +76,8 @@ class RemoveClaims extends ApiBase {
 		StatementGuidParser $guidParser,
 		callable $resultBuilderInstantiator,
 		callable $entitySavingHelperInstantiator,
-		bool $federatedPropertiesEnabled
+		bool $federatedPropertiesEnabled,
+		array $sandboxEntityIds
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -83,6 +89,7 @@ class RemoveClaims extends ApiBase {
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
+		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
 
 	public static function factory(
@@ -116,7 +123,8 @@ class RemoveClaims extends ApiBase {
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
 			},
-			$settings->getSetting( 'federatedPropertiesEnabled' )
+			$settings->getSetting( 'federatedPropertiesEnabled' ),
+			$settings->getSetting( 'sandboxEntityIds' )
 		);
 	}
 
@@ -271,10 +279,12 @@ class RemoveClaims extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getExamplesMessages(): array {
+		$guid = $this->sandboxEntityIds[ 'mainItem' ] . '$D8404CDA-25E4-4334-AF13-A3290BCD9C0N';
+
 		return [
-			'action=wbremoveclaims&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N&token=foobar'
+			'action=wbremoveclaims&claim=' . $guid . '&token=foobar'
 				. '&baserevid=7201010'
-				=> 'apihelp-wbremoveclaims-example-1',
+				=> [ 'apihelp-wbremoveclaims-example-1', $guid ]
 		];
 	}
 

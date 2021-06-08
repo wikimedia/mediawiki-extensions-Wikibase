@@ -55,6 +55,11 @@ class SetClaimValue extends ApiBase {
 	 */
 	private $entitySavingHelper;
 
+	/**
+	 * @var string[]
+	 */
+	private $sandboxEntityIds;
+
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
@@ -64,7 +69,8 @@ class SetClaimValue extends ApiBase {
 		StatementGuidParser $guidParser,
 		callable $resultBuilderInstantiator,
 		callable $entitySavingHelperInstantiator,
-		bool $federatedPropertiesEnabled
+		bool $federatedPropertiesEnabled,
+		array $sandboxEntityIds
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -75,6 +81,7 @@ class SetClaimValue extends ApiBase {
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
+		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
 
 	public static function factory(
@@ -108,7 +115,8 @@ class SetClaimValue extends ApiBase {
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
 			},
-			$repoSettings->getSetting( 'federatedPropertiesEnabled' )
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
+			$repoSettings->getSetting( 'sandboxEntityIds' )
 		);
 	}
 
@@ -206,10 +214,12 @@ class SetClaimValue extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getExamplesMessages(): array {
+		$guid = $this->sandboxEntityIds[ 'mainItem' ] . '$D8404CDA-25E4-4334-AF13-A3290BCD9C0F';
+
 		return [
-			'action=wbsetclaimvalue&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&snaktype=value'
+			'action=wbsetclaimvalue&claim=' . $guid . '&snaktype=value'
 				. '&value={"entity-type":"item","numeric-id":1}&token=foobar&baserevid=7201010'
-				=> 'apihelp-wbsetclaimvalue-example-1',
+				=> [ 'apihelp-wbsetclaimvalue-example-1', $guid ],
 		];
 	}
 

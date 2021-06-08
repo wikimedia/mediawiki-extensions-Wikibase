@@ -48,7 +48,8 @@
 				"PermissionManager",
 				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.ItemRedirectCreationInteractor"
+				"WikibaseRepo.ItemRedirectCreationInteractor",
+				"WikibaseRepo.Settings"
 			]
 		},
 		"wbformatentities": {
@@ -116,7 +117,8 @@
 			"services": [
 				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.ItemMergeInteractor"
+				"WikibaseRepo.ItemMergeInteractor",
+				"WikibaseRepo.Settings"
 			]
 		},
 		"wbparsevalue": {

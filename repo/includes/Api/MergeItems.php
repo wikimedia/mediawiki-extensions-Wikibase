@@ -13,6 +13,7 @@ use LogicException;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
 use Wikibase\Repo\Interactors\ItemMergeException;
@@ -48,6 +49,11 @@ class MergeItems extends ApiBase {
 	private $resultBuilder;
 
 	/**
+	 * @var string[]
+	 */
+	private $sandboxEntityIds;
+
+	/**
 	 * @see ApiBase::__construct
 	 *
 	 * @param ApiMain $mainModule
@@ -63,7 +69,8 @@ class MergeItems extends ApiBase {
 		EntityIdParser $idParser,
 		ItemMergeInteractor $interactor,
 		ApiErrorReporter $errorReporter,
-		callable $resultBuilderInstantiator
+		callable $resultBuilderInstantiator,
+		array $sandboxEntityIds
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -72,6 +79,8 @@ class MergeItems extends ApiBase {
 
 		$this->errorReporter = $errorReporter;
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
+
+		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
 
 	public static function factory(
@@ -79,7 +88,8 @@ class MergeItems extends ApiBase {
 		string $moduleName,
 		ApiHelperFactory $apiHelperFactory,
 		EntityIdParser $entityIdParser,
-		ItemMergeInteractor $interactor
+		ItemMergeInteractor $interactor,
+		SettingsArray $settings
 	): self {
 		return new self(
 			$mainModule,
@@ -89,7 +99,8 @@ class MergeItems extends ApiBase {
 			$apiHelperFactory->getErrorReporter( $mainModule ),
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getResultBuilder( $module );
-			}
+			},
+			$settings->getSetting( 'sandboxEntityIds' )
 		);
 	}
 
@@ -237,15 +248,16 @@ class MergeItems extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getExamplesMessages(): array {
+		$from = $this->sandboxEntityIds[ 'mainItem' ];
+		$to = $this->sandboxEntityIds[ 'auxItem' ];
+
 		return [
-			'action=wbmergeitems&fromid=Q42&toid=Q222' =>
-				'apihelp-wbmergeitems-example-1',
-			'action=wbmergeitems&fromid=Q555&toid=Q3' =>
-				'apihelp-wbmergeitems-example-2',
-			'action=wbmergeitems&fromid=Q66&toid=Q99&ignoreconflicts=sitelink' =>
-				'apihelp-wbmergeitems-example-3',
-			'action=wbmergeitems&fromid=Q66&toid=Q99&ignoreconflicts=sitelink|description' =>
-				'apihelp-wbmergeitems-example-4',
+			'action=wbmergeitems&fromid=' . $from . '&toid=' . $to =>
+				[ 'apihelp-wbmergeitems-example-1', $from, $to ],
+			'action=wbmergeitems&fromid=' . $from . '&toid=' . $to . '&ignoreconflicts=sitelink' =>
+				[ 'apihelp-wbmergeitems-example-3', $from, $to ],
+			'action=wbmergeitems&fromid=' . $from . '&toid=' . $to . '&ignoreconflicts=sitelink|description' =>
+				[ 'apihelp-wbmergeitems-example-4', $from, $to ],
 		];
 	}
 

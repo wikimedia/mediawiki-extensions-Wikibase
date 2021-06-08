@@ -72,19 +72,10 @@ class EditEntity extends ModifyEntity {
 	private $editSummaryHelper;
 
 	/**
-	 * @see ModifyEntity::__construct
-	 *
-	 * @param ApiMain $mainModule
-	 * @param string $moduleName
-	 * @param ContentLanguages $termsLanguages
-	 * @param EntityRevisionLookup $revisionLookup
-	 * @param EntityIdParser $idParser
-	 * @param string[] $propertyDataTypes
-	 * @param EntityChangeOpProvider $entityChangeOpProvider
-	 * @param EditSummaryHelper $editSummaryHelper
-	 * @param bool $federatedPropertiesEnabled
-	 *
+	 * @var string[]
 	 */
+	private $sandboxEntityIds;
+
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
@@ -94,7 +85,8 @@ class EditEntity extends ModifyEntity {
 		array $propertyDataTypes,
 		EntityChangeOpProvider $entityChangeOpProvider,
 		EditSummaryHelper $editSummaryHelper,
-		bool $federatedPropertiesEnabled
+		bool $federatedPropertiesEnabled,
+		array $sandboxEntityIds
 	) {
 		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 
@@ -105,6 +97,7 @@ class EditEntity extends ModifyEntity {
 
 		$this->entityChangeOpProvider = $entityChangeOpProvider;
 		$this->editSummaryHelper = $editSummaryHelper;
+		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
 
 	public static function factory(
@@ -130,7 +123,8 @@ class EditEntity extends ModifyEntity {
 				new ChangedLanguagesCounter(),
 				new NonLanguageBoundChangesCounter()
 			),
-			$settings->getSetting( 'federatedPropertiesEnabled' )
+			$settings->getSetting( 'federatedPropertiesEnabled' ),
+			$settings->getSetting( 'sandboxEntityIds' )
 		);
 	}
 
@@ -460,6 +454,8 @@ class EditEntity extends ModifyEntity {
 	 * @inheritDoc
 	 */
 	protected function getExamplesMessages(): array {
+		$id = $this->sandboxEntityIds[ 'mainItem' ];
+
 		return [
 			// Creating new entities
 			'action=wbeditentity&new=item&data={}'
@@ -474,36 +470,36 @@ class EditEntity extends ModifyEntity {
 				. '"datatype":"string"}'
 				=> 'apihelp-wbeditentity-example-3',
 			// Clearing entities
-			'action=wbeditentity&clear=true&id=Q42&data={}'
-				=> 'apihelp-wbeditentity-example-4',
-			'action=wbeditentity&clear=true&id=Q42&data={'
+			'action=wbeditentity&clear=true&id=' . $id . '&data={}'
+				=> [ 'apihelp-wbeditentity-example-4', $id ],
+			'action=wbeditentity&clear=true&id=' . $id . '&data={'
 				. '"labels":{"en":{"language":"en","value":"en-value"}}}'
-				=> 'apihelp-wbeditentity-example-5',
+				=> [ 'apihelp-wbeditentity-example-5', $id ],
 			// Adding term
-			'action=wbeditentity&id=Q42&data='
+			'action=wbeditentity&id=' . $id . '&data='
 				. '{"labels":[{"language":"no","value":"Bar","add":""}]}'
 				=> 'apihelp-wbeditentity-example-11',
 			// Removing term
-			'action=wbeditentity&id=Q42&data='
+			'action=wbeditentity&id=' . $id . '&data='
 				. '{"labels":[{"language":"en","value":"Foo","remove":""}]}'
 				=> 'apihelp-wbeditentity-example-12',
 			// Setting stuff
-			'action=wbeditentity&id=Q42&data={'
+			'action=wbeditentity&id=' . $id . '&data={'
 				. '"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}'
 				=> 'apihelp-wbeditentity-example-6',
-			'action=wbeditentity&id=Q42&data={'
+			'action=wbeditentity&id=' . $id . '&data={'
 				. '"descriptions":{"nb":{"language":"nb","value":"nb-Description-Here"}}}'
 				=> 'apihelp-wbeditentity-example-7',
-			'action=wbeditentity&id=Q42&data={"claims":[{"mainsnak":{"snaktype":"value",'
+			'action=wbeditentity&id=' . $id . '&data={"claims":[{"mainsnak":{"snaktype":"value",'
 				. '"property":"P56","datavalue":{"value":"ExampleString","type":"string"}},'
 				. '"type":"statement","rank":"normal"}]}'
 				=> 'apihelp-wbeditentity-example-8',
-			'action=wbeditentity&id=Q42&data={"claims":['
-				. '{"id":"Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F","remove":""},'
-				. '{"id":"Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","remove":""}]}'
+			'action=wbeditentity&id=' . $id . '&data={"claims":['
+				. '{"id":"' . $id . '$D8404CDA-25E4-4334-AF13-A3290BCD9C0F","remove":""},'
+				. '{"id":"' . $id . '$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","remove":""}]}'
 				=> 'apihelp-wbeditentity-example-9',
-			'action=wbeditentity&id=Q42&data={"claims":[{'
-				. '"id":"Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","mainsnak":{"snaktype":"value",'
+			'action=wbeditentity&id=' . $id . '&data={"claims":[{'
+				. '"id":"' . $id . '$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","mainsnak":{"snaktype":"value",'
 				. '"property":"P56","datavalue":{"value":"ChangedString","type":"string"}},'
 				. '"type":"statement","rank":"normal"}]}'
 				=> 'apihelp-wbeditentity-example-10',

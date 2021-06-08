@@ -60,6 +60,11 @@ class RemoveQualifiers extends ApiBase {
 	 */
 	private $entitySavingHelper;
 
+	/**
+	 * @var string[]
+	 */
+	private $sandboxEntityIds;
+
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
@@ -69,7 +74,8 @@ class RemoveQualifiers extends ApiBase {
 		StatementGuidParser $guidParser,
 		callable $resultBuilderInstantiator,
 		callable $entitySavingHelperInstantiator,
-		bool $federatedPropertiesEnabled
+		bool $federatedPropertiesEnabled,
+		array $sandboxEntityIds
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -80,6 +86,7 @@ class RemoveQualifiers extends ApiBase {
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
+		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
 
 	public static function factory(
@@ -113,7 +120,8 @@ class RemoveQualifiers extends ApiBase {
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
 			},
-			$repoSettings->getSetting( 'federatedPropertiesEnabled' )
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
+			$repoSettings->getSetting( 'sandboxEntityIds' )
 		);
 	}
 
@@ -253,11 +261,14 @@ class RemoveQualifiers extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getExamplesMessages(): array {
+		$guid = $this->sandboxEntityIds[ 'mainItem' ] . '$D8404CDA-25E4-4334-AF13-A3290BCD9C0F';
+		$hash = '1eb8793c002b1d9820c833d234a1b54c8e94187e';
+
 		return [
-			'action=wbremovequalifiers&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F'
-				. '&references=1eb8793c002b1d9820c833d234a1b54c8e94187e&token=foobar'
+			'action=wbremovequalifiers&claim=' . $guid
+				. '&references=' . $hash . '&token=foobar'
 				. '&baserevid=7201010'
-				=> 'apihelp-wbremovequalifiers-example-1',
+				=> [ 'apihelp-wbremovequalifiers-example-1', $hash, $guid ],
 		];
 	}
 

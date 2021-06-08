@@ -66,6 +66,11 @@ class SetReference extends ApiBase {
 	 */
 	private $entitySavingHelper;
 
+	/**
+	 * @var string[]
+	 */
+	private $sandboxEntityIds;
+
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
@@ -76,7 +81,8 @@ class SetReference extends ApiBase {
 		StatementGuidParser $guidParser,
 		callable $resultBuilderInstantiator,
 		callable $entitySavingHelperInstantiator,
-		bool $federatedPropertiesEnabled
+		bool $federatedPropertiesEnabled,
+		array $sandboxEntityIds
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -88,6 +94,7 @@ class SetReference extends ApiBase {
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
+		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
 
 	public static function factory(
@@ -123,7 +130,8 @@ class SetReference extends ApiBase {
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
 			},
-			$repoSettings->getSetting( 'federatedPropertiesEnabled' )
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
+			$repoSettings->getSetting( 'sandboxEntityIds' )
 		);
 	}
 
@@ -274,20 +282,23 @@ class SetReference extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getExamplesMessages(): array {
+		$guid = $this->sandboxEntityIds[ 'mainItem' ] . '$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF';
+		$hash = '1eb8793c002b1d9820c833d234a1b54c8e94187e';
+
 		return [
-			'action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&snaks='
+			'action=wbsetreference&statement=' . $guid . '&snaks='
 				. '{"P212":[{"snaktype":"value","property":"P212","datavalue":{"type":"string",'
 				. '"value":"foo"}}]}&baserevid=7201010&token=foobar'
-				=> 'apihelp-wbsetreference-example-1',
-			'action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF'
-				. '&reference=1eb8793c002b1d9820c833d234a1b54c8e94187e&snaks='
+				=> [ 'apihelp-wbsetreference-example-1', $guid ],
+			'action=wbsetreference&statement=' . $guid . ''
+				. '&reference=' . $hash . '&snaks='
 				. '{"P212":[{"snaktype":"value","property":"P212","datavalue":{"type":"string",'
 				. '"value":"bar"}}]}&baserevid=7201010&token=foobar'
-				=> 'apihelp-wbsetreference-example-2',
-			'action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&snaks='
+				=> [ 'apihelp-wbsetreference-example-2', $guid, $hash ],
+			'action=wbsetreference&statement=' . $guid . '&snaks='
 				. '{"P212":[{"snaktype":"novalue","property":"P212"}]}'
 				. '&index=0&baserevid=7201010&token=foobar'
-				=> 'apihelp-wbsetreference-example-3',
+				=> [ 'apihelp-wbsetreference-example-3', $guid ],
 		];
 	}
 

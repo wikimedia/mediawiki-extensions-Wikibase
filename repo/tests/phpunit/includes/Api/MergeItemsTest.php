@@ -202,7 +202,8 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 			$errorReporter,
 			function ( $module ) use ( $apiResultBuilder ) {
 				return $apiResultBuilder;
-			}
+			},
+			[ 'mainItem' => 'Q100', 'auxItem' => 'Q200' ]
 		);
 	}
 

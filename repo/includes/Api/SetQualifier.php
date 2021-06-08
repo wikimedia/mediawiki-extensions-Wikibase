@@ -60,6 +60,11 @@ class SetQualifier extends ApiBase {
 	private $entitySavingHelper;
 
 	/**
+	 * @var string[]
+	 */
+	private $sandboxEntityIds;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param callable $errorReporterInstantiator
@@ -80,7 +85,8 @@ class SetQualifier extends ApiBase {
 		StatementGuidParser $guidParser,
 		callable $resultBuilderInstantiator,
 		callable $entitySavingHelperInstantiator,
-		bool $federatedPropertiesEnabled
+		bool $federatedPropertiesEnabled,
+		array $sandboxEntityIds
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -92,6 +98,7 @@ class SetQualifier extends ApiBase {
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
+		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
 
 	public static function factory(
@@ -127,7 +134,8 @@ class SetQualifier extends ApiBase {
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
 			},
-			$repoSettings->getSetting( 'federatedPropertiesEnabled' )
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
+			$repoSettings->getSetting( 'sandboxEntityIds' )
 		);
 	}
 
@@ -284,8 +292,10 @@ class SetQualifier extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getExamplesMessages(): array {
+		$guid = $this->sandboxEntityIds[ 'mainItem' ] . '$4554c0f4-47b2-1cd9-2db9-aa270064c9f3';
+
 		return [
-			'action=wbsetqualifier&claim=Q2$4554c0f4-47b2-1cd9-2db9-aa270064c9f3&property=P1'
+			'action=wbsetqualifier&claim=' . $guid . '&property=P1'
 				. '&value="GdyjxP8I6XB3"&snaktype=value&token=foobar'
 				=> 'apihelp-wbsetqualifier-example-1',
 		];

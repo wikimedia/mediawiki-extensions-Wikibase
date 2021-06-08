@@ -81,6 +81,11 @@ class SetClaim extends ApiBase {
 	/** @var IBufferingStatsdDataFactory */
 	private $stats;
 
+	/**
+	 * @var string[]
+	 */
+	private $sandboxEntityIds;
+
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
@@ -92,7 +97,8 @@ class SetClaim extends ApiBase {
 		callable $resultBuilderInstantiator,
 		callable $entitySavingHelperInstantiator,
 		IBufferingStatsdDataFactory $stats,
-		bool $federatedPropertiesEnabled
+		bool $federatedPropertiesEnabled,
+		array $sandboxEntityIds
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -105,6 +111,7 @@ class SetClaim extends ApiBase {
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 		$this->stats = $stats;
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
+		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
 
 	public static function factory(
@@ -142,7 +149,8 @@ class SetClaim extends ApiBase {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
 			},
 			$stats,
-			$repoSettings->getSetting( 'federatedPropertiesEnabled' )
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
+			$repoSettings->getSetting( 'sandboxEntityIds' )
 		);
 	}
 
@@ -338,16 +346,18 @@ class SetClaim extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getExamplesMessages(): array {
+		$guid = $this->sandboxEntityIds[ 'mainItem' ] . '$5627445f-43cb-ed6d-3adb-760e85bd17ee';
+
 		return [
-			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee",'
+			'action=wbsetclaim&claim={"id":"' . $guid . '",'
 				. '"type":"claim","mainsnak":{"snaktype":"value","property":"P1",'
 				. '"datavalue":{"value":"City","type":"string"}}}'
 				=> 'apihelp-wbsetclaim-example-1',
-			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee",'
+			'action=wbsetclaim&claim={"id":"' . $guid . '",'
 				. '"type":"claim","mainsnak":{"snaktype":"value","property":"P1",'
 				. '"datavalue":{"value":"City","type":"string"}}}&index=0'
 				=> 'apihelp-wbsetclaim-example-2',
-			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee",'
+			'action=wbsetclaim&claim={"id":"' . $guid . '",'
 				. '"type":"statement","mainsnak":{"snaktype":"value","property":"P1",'
 				. '"datavalue":{"value":"City","type":"string"}},'
 				. '"references":[{"snaks":{"P2":[{"snaktype":"value","property":"P2",'

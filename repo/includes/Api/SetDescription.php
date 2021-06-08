@@ -35,17 +35,24 @@ class SetDescription extends ModifyTerm {
 	 */
 	private $entityFactory;
 
+	/**
+	 * @var string[]
+	 */
+	private $sandboxEntityIds;
+
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
 		FingerprintChangeOpFactory $termChangeOpFactory,
 		bool $federatedPropertiesEnabled,
-		EntityFactory $entityFactory
+		EntityFactory $entityFactory,
+		array $sandboxEntityIds
 	) {
 		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 
 		$this->termChangeOpFactory = $termChangeOpFactory;
 		$this->entityFactory = $entityFactory;
+		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
 
 	public static function factory(
@@ -61,7 +68,8 @@ class SetDescription extends ModifyTerm {
 			$changeOpFactoryProvider
 				->getFingerprintChangeOpFactory(),
 			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
-			$entityFactory
+			$entityFactory,
+			$repoSettings->getSetting( 'sandboxEntityIds' )
 		);
 	}
 
@@ -127,9 +135,11 @@ class SetDescription extends ModifyTerm {
 	 * @inheritDoc
 	 */
 	protected function getExamplesMessages(): array {
+		$id = $this->sandboxEntityIds[ 'mainItem' ];
+
 		return [
-			'action=wbsetdescription&id=Q42&language=en&value=An%20encyclopedia%20that%20everyone%20can%20edit'
-				=> 'apihelp-wbsetdescription-example-1',
+			'action=wbsetdescription&id=' . $id . '&language=en&value=An%20encyclopedia%20that%20everyone%20can%20edit'
+				=> [ 'apihelp-wbsetdescription-example-1', $id ],
 			'action=wbsetdescription&site=enwiki&title=Wikipedia&language=en&value=An%20encyclopedia%20that%20everyone%20can%20edit'
 				=> 'apihelp-wbsetdescription-example-2',
 		];

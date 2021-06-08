@@ -97,7 +97,8 @@ class StatementModificationHelperTest extends MediaWikiIntegrationTestCase {
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
 			},
-			false
+			false,
+			[ 'mainItem' => 'Q42' ]
 		);
 	}
 

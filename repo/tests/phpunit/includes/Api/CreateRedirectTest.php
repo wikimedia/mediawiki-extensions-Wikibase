@@ -147,7 +147,8 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 			new BasicEntityIdParser(),
 			$errorReporter,
 			$interactor,
-			MediaWikiServices::getInstance()->getPermissionManager()
+			MediaWikiServices::getInstance()->getPermissionManager(),
+			[ 'mainItem' => 'Q100', 'auxItem' => 'Q200' ]
 		);
 	}
 
