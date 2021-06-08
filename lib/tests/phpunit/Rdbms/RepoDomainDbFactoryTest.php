@@ -7,12 +7,9 @@ namespace Wikibase\Lib\Tests;
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikimedia\Rdbms\ILBFactory;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * @covers \Wikibase\Lib\Rdbms\RepoDomainDbFactory
@@ -33,17 +30,11 @@ class RepoDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $repoDomainId;
 
-	/**
-	 * @var MockObject|EntitySourceDefinitions
-	 */
-	private $entitySourceDefinitions;
-
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->lbFactory = $this->createStub( ILBFactory::class );
 		$this->repoDomainId = 'repo';
-		$this->entitySourceDefinitions = $this->createStub( EntitySourceDefinitions::class );
 	}
 
 	public function testNewRepoDb() {
@@ -59,7 +50,7 @@ class RepoDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function testNewForEntityType() {
+	public function testNewForEntitySource() {
 		$expectedDbName = 'itemRepoDb';
 
 		$itemSource = $this->createMock( EntitySource::class );
@@ -67,17 +58,11 @@ class RepoDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 			->method( 'getDatabaseName' )
 			->willReturn( $expectedDbName );
 
-		$this->entitySourceDefinitions = $this->createMock( EntitySourceDefinitions::class );
-		$this->entitySourceDefinitions->expects( $this->once() )
-			->method( 'getSourceForEntityType' )
-			->with( Item::ENTITY_TYPE )
-			->willReturn( $itemSource );
+		$this->lbFactory = $this->createStub( ILBFactory::class );
 
-		$this->lbFactory = $this->newMockLBFactoryForDomain( $expectedDbName );
+		$db = $this->newFactory()->newForEntitySource( $itemSource );
 
-		$repoDb = $this->newFactory()->newForEntityType( ITEM::ENTITY_TYPE );
-
-		$repoDb->connections();
+		$this->assertSame( $expectedDbName, $db->domain() );
 	}
 
 	public function testDomainMustNotBeEmpty() {
@@ -88,20 +73,10 @@ class RepoDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->newFactory();
 	}
 
-	private function newMockLBFactoryForDomain( string $domain ) {
-		$mock = $this->createMock( ILBFactory::class );
-		$mock->expects( $this->once() )
-			->method( 'getMainLB' )
-			->with( $domain )
-			->willReturn( $this->createStub( ILoadBalancer::class ) );
-		return $mock;
-	}
-
 	private function newFactory() {
 		return new RepoDomainDbFactory(
 			$this->lbFactory,
-			$this->repoDomainId,
-			$this->entitySourceDefinitions
+			$this->repoDomainId
 		);
 	}
 

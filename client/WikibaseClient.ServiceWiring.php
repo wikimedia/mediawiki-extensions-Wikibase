@@ -637,7 +637,8 @@ return [
 		// Cache key needs to be language specific
 		$cacheKey = $cacheKeyPrefix . ':TermPropertyLabelResolver' . '/' . $languageCode;
 
-		$repoDb = WikibaseClient::getRepoDomainDbFactory( $services )->newForEntityType( Property::ENTITY_TYPE );
+		$repoDb = WikibaseClient::getRepoDomainDbFactory( $services )
+			->newForEntitySource( WikibaseClient::getPropertySource( $services ) );
 		$wanObjectCache = $services->getMainWANObjectCache();
 
 		$typeIdsStore = new DatabaseTypeIdsStore(
@@ -741,7 +742,6 @@ return [
 		return new RepoDomainDbFactory(
 			$lbFactory,
 			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName() ?: $lbFactory->getLocalDomainID(),
-			WikibaseClient::getEntitySourceDefinitions( $services ),
 			[ DomainDb::LOAD_GROUP_FROM_CLIENT ]
 		);
 	},
