@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWikiIntegrationTestCase;
@@ -26,24 +28,15 @@ class ItemsPerSiteBuilderTest extends MediaWikiIntegrationTestCase {
 
 	private const BATCH_SIZE = 5;
 
-	/**
-	 * @return ItemId
-	 */
-	private function getTestItemId() {
+	private function getTestItemId(): ItemId {
 		return new ItemId( 'Q1234' );
 	}
 
-	/**
-	 * @return Item
-	 */
-	private function getTestItem() {
+	private function getTestItem(): Item {
 		return new Item( $this->getTestItemId() );
 	}
 
-	/**
-	 * @return SiteLinkTable
-	 */
-	private function getSiteLinkTable() {
+	private function getSiteLinkTable(): SiteLinkTable {
 		$mock = $this->getMockBuilder( SiteLinkTable::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -57,10 +50,7 @@ class ItemsPerSiteBuilderTest extends MediaWikiIntegrationTestCase {
 		return $mock;
 	}
 
-	/**
-	 * @return EntityLookup
-	 */
-	private function getEntityLookup() {
+	private function getEntityLookup(): EntityLookup {
 		$mock = $this->createMock( EntityLookup::class );
 
 		$item = $this->getTestItem();
@@ -72,10 +62,7 @@ class ItemsPerSiteBuilderTest extends MediaWikiIntegrationTestCase {
 		return $mock;
 	}
 
-	/**
-	 * @return ItemsPerSiteBuilder
-	 */
-	private function getItemsPerSiteBuilder() {
+	private function getItemsPerSiteBuilder(): ItemsPerSiteBuilder {
 		return new ItemsPerSiteBuilder(
 			$this->getSiteLinkTable(),
 			$this->getEntityLookup(),
@@ -84,10 +71,7 @@ class ItemsPerSiteBuilderTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	/**
-	 * @return EntityIdPager
-	 */
-	private function getEntityIdPager() {
+	private function getEntityIdPager(): EntityIdPager {
 		$mock = $this->createMock( EntityIdPager::class );
 
 		$itemIds = [
@@ -116,7 +100,7 @@ class ItemsPerSiteBuilderTest extends MediaWikiIntegrationTestCase {
 		return $mock;
 	}
 
-	public function testRebuild() {
+	public function testRebuild(): void {
 		$itemsPerSiteBuilder = $this->getItemsPerSiteBuilder();
 		$itemsPerSiteBuilder->setBatchSize( self::BATCH_SIZE );
 
