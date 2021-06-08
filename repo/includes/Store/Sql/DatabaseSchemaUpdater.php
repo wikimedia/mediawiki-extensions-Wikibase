@@ -66,15 +66,6 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			'wb_items_per_site',
 			$this->getScriptPath( 'wb_items_per_site', $db->getType() )
 		);
-		// NOTE: This update is neither needed nor does it work on SQLite or Postgres.
-		if ( $db->getType() === 'mysql' ) {
-			// make ips_row_id BIGINT
-			$updater->modifyExtensionField(
-				'wb_items_per_site',
-				'ips_row_id',
-				$this->getUpdateScriptPath( 'MakeRowIDsBig', $db->getType() )
-			);
-		}
 
 		$this->updateItemsPerSiteTable( $updater, $db );
 		$this->updateChangesTable( $updater, $db );
