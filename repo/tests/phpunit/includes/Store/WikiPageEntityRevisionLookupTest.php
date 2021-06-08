@@ -17,6 +17,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\DivergingEntityIdException;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevision;
@@ -67,6 +68,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 
 	private function getMetaDataLookup() {
 		$nsLookup = $this->getEntityNamespaceLookup();
+		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		return new WikiPageEntityMetaDataLookup(
 			$nsLookup,
 			new EntityIdLocalPartPageTableEntityQuery(
@@ -85,7 +87,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 				'',
 				''
 			),
-			new LBFactorySingle( [ 'connection' => $this->db ] )
+			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() )
 		);
 	}
 
