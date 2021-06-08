@@ -17,7 +17,9 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 
 ==== New configuration ====
 
-* (repo) (T12345)
+* (repo) (T219215) sandboxEntityIds — Entity ids to be used in various live
+ examples. These entities will be affected by changes made through those
+ examples, such as edits made by the API sandbox.
 
 ==== Changed configuration ====
 

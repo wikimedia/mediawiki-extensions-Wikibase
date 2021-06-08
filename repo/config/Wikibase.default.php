@@ -361,4 +361,16 @@ return [
 	 * in the json output of wbgetentities for lexemes
 	 */
 	'tmpSerializeEmptyListsAsObjects' => false,
+
+	/**
+	 * @note The entities set in this configuration are subject to data
+	 * modification and may be relabeled, removed, or merged with each other.
+	 *
+	 * @var string[]
+	 * @see https://phabricator.wikimedia.org/T219215
+	 */
+	'sandboxEntityIds' => [
+		'mainItem' => 'Q999999998',
+		'auxItem' => 'Q999999999'
+	]
 ];
