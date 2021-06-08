@@ -73,11 +73,13 @@ class RebuildItemsPerSite extends Maintenance {
 		$store = WikibaseRepo::getStore( $mwServices );
 		// Use an uncached EntityLookup here to avoid memory leaks
 		$entityLookup = $store->getEntityLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY );
+		$domainDB = WikibaseRepo::getRepoDomainDbFactory( $mwServices )->newRepoDb();
+
 		$builder = new ItemsPerSiteBuilder(
 			$siteLinkTable,
 			$entityLookup,
 			$store->getEntityPrefetcher(),
-			$mwServices->getDBLoadBalancerFactory()
+			$domainDB
 		);
 
 		$builder->setReporter( $reporter );
