@@ -50,14 +50,6 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 		$this->addChangesTable( $updater, $type );
 
-		if ( $db->tableExists( 'wb_aliases', __METHOD__ ) ) {
-			// Update from 0.1.
-			$updater->dropExtensionTable( 'wb_items_per_site' );
-			$updater->dropExtensionTable( 'wb_items' );
-			$updater->dropExtensionTable( 'wb_aliases' );
-			$updater->dropExtensionTable( 'wb_texts_per_lang' );
-		}
-
 		$updater->addExtensionTable(
 			'wb_id_counters',
 			$this->getScriptPath( 'wb_id_counters', $db->getType() )
