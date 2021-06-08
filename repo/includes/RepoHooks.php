@@ -1001,8 +1001,7 @@ final class RepoHooks {
 		}
 
 		$mediaWikiServices = MediaWikiServices::getInstance();
-		$loadBalancer = $mediaWikiServices->getDBLoadBalancer();
-		$subscriptionLookup = new SqlSubscriptionLookup( $loadBalancer );
+		$subscriptionLookup = new SqlSubscriptionLookup( WikibaseRepo::getRepoDomainDbFactory( $mediaWikiServices )->newRepoDb() );
 		$entityIdLookup = WikibaseRepo::getEntityIdLookup( $mediaWikiServices );
 
 		$siteLookup = $mediaWikiServices->getSiteLookup();

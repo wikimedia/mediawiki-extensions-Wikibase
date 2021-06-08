@@ -200,7 +200,7 @@ class DispatchChanges extends Maintenance {
 			$clientWikis
 		);
 		$subscriptionLookup = new SqlSubscriptionLookup(
-			MediaWikiServices::getInstance()->getDBLoadBalancer()
+			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()
 		);
 
 		$dispatcher = new ChangeDispatcher(
