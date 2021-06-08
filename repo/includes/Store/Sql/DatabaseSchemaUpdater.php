@@ -154,14 +154,6 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 				$this->getUpdateScriptPath( 'MakeIpsSitePageLarger', $db->getType() )
 			);
 		}
-
-		// creates wb_item_per_site.ips_row_id.
-		$updater->addExtensionField(
-			'wb_items_per_site',
-			'ips_row_id',
-			$this->getUpdateScriptPath( 'AddRowIDs', $db->getType() )
-		);
-
 		$updater->dropExtensionIndex(
 			'wb_items_per_site',
 			'wb_ips_site_page',
