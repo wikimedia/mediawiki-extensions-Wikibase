@@ -37,10 +37,13 @@ class ClientDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$factory = $this->newFactory();
 
+		$clientDb = $factory->newLocalDb();
 		$this->assertInstanceOf(
 			ClientDomainDb::class,
-			$factory->newLocalDb()
+			$clientDb
 		);
+
+		$clientDb->connections();
 	}
 
 	private function newMockLBFactoryForDomain( string $domain ) {

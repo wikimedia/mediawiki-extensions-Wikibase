@@ -48,7 +48,7 @@ class RepoDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function testNewRepoDb() {
 		$repoDomainId = 'someRepoDomain';
-		$this->lbFactory = $this->newMockLBFactoryForDomain( $repoDomainId );
+		$this->lbFactory = $this->createMock( ILBFactory::class );
 		$this->repoDomainId = $repoDomainId;
 
 		$factory = $this->newFactory();
@@ -75,7 +75,9 @@ class RepoDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$this->lbFactory = $this->newMockLBFactoryForDomain( $expectedDbName );
 
-		$this->newFactory()->newForEntityType( ITEM::ENTITY_TYPE );
+		$repoDb = $this->newFactory()->newForEntityType( ITEM::ENTITY_TYPE );
+
+		$repoDb->connections();
 	}
 
 	public function testDomainMustNotBeEmpty() {
@@ -92,7 +94,6 @@ class RepoDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 			->method( 'getMainLB' )
 			->with( $domain )
 			->willReturn( $this->createStub( ILoadBalancer::class ) );
-
 		return $mock;
 	}
 

@@ -3,14 +3,12 @@
 namespace Wikibase;
 
 use Maintenance;
-use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false
 	? getenv( 'MW_INSTALL_PATH' )
@@ -58,7 +56,6 @@ class UpdateSubscriptions extends Maintenance {
 		}
 
 		$settings = WikibaseClient::getSettings();
-		$repoDB = WikibaseClient::getItemAndPropertySource()->getDatabaseName();
 		$clientId = $settings->getSetting( 'siteGlobalID' );
 
 		$idParser = WikibaseClient::getEntityIdParser();
@@ -68,13 +65,12 @@ class UpdateSubscriptions extends Maintenance {
 
 		$reporter = new CallbackMessageReporter( [ $this, 'report' ] );
 
-		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		$clientDb = WikibaseClient::getClientDomainDbFactory()->newLocalDb();
+		$repoDb = WikibaseClient::getRepoDomainDbFactory()->newRepoDb();
 		$updater = new BulkSubscriptionUpdater(
-			$lbFactory,
-			new SessionConsistentConnectionManager( $lbFactory->getMainLB() ),
-			new SessionConsistentConnectionManager( $lbFactory->getMainLB( $repoDB ), $repoDB ),
+			$clientDb,
+			$repoDb,
 			$clientId,
-			$repoDB,
 			$this->mBatchSize
 		);
 

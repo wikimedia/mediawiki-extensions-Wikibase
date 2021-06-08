@@ -7,11 +7,10 @@ use Onoi\MessageReporter\MessageReporter;
 use PHPUnit\Framework\MockObject\Matcher\Invocation;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LBFactorySingle;
-use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * @covers \Wikibase\Client\Store\Sql\BulkSubscriptionUpdater
@@ -43,15 +42,10 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	 * @return BulkSubscriptionUpdater
 	 */
 	private function getBulkSubscriptionUpdater( $batchSize = 10 ) {
-		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
-		$loadBalancer = $lbFactory->getMainLB();
-
 		return new BulkSubscriptionUpdater(
-			$lbFactory,
-			new SessionConsistentConnectionManager( $loadBalancer, false ),
-			new SessionConsistentConnectionManager( $loadBalancer, false ),
+			WikibaseClient::getClientDomainDbFactory()->newLocalDb(),
+			WikibaseClient::getRepoDomainDbFactory()->newRepoDb(),
 			'testwiki',
-			false,
 			$batchSize
 		);
 	}
@@ -204,7 +198,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		$db->startAtomic( __METHOD__ );
 
 		foreach ( $entries as $entry ) {
-			list( $entityId, $pageId ) = $entry;
+			[ $entityId, $pageId ] = $entry;
 			$aspect = 'X';
 
 			$db->insert( EntityUsageTable::DEFAULT_TABLE_NAME, [
@@ -228,7 +222,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		$db->startAtomic( __METHOD__ );
 
 		foreach ( $entries as $entry ) {
-			list( $entityId, $subscriberId ) = $entry;
+			[ $entityId, $subscriberId ] = $entry;
 
 			$db->insert( 'wb_changes_subscription', [
 				'cs_entity_id' => $entityId,
