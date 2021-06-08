@@ -363,6 +363,10 @@ final class RepoHooks {
 			'type' => 'api'
 		];
 
+		$preferences['wb-reftabs-mode'] = [
+			'type' => 'api'
+		];
+
 		$preferences['wikibase-entitytermsview-showEntitytermslistview'] = [
 			'type' => 'toggle',
 			'label-message' => 'wikibase-setting-entitytermsview-showEntitytermslistview',
