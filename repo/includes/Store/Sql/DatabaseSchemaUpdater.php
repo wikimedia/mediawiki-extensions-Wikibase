@@ -204,8 +204,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 		$table = new PropertyInfoTable(
 			WikibaseRepo::getEntityIdComposer(),
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
-			$propertySource->getDatabaseName(),
+			WikibaseRepo::getRepoDomainDbFactory()->newForEntitySource( $propertySource ),
 			true
 		);
 

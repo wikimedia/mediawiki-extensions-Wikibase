@@ -507,8 +507,7 @@ class SqlStore implements Store {
 		if ( $this->propertyInfoTable === null ) {
 			$this->propertyInfoTable = new PropertyInfoTable(
 				$this->entityIdComposer,
-				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(), // TODO inject
-				$this->entitySource->getDatabaseName(),
+				WikibaseRepo::getRepoDomainDbFactory()->newForEntitySource( $this->entitySource ),
 				true
 			);
 		}
