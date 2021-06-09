@@ -13,6 +13,31 @@ namespace Wikibase\Lib\Serialization;
 class SerializationModifier {
 
 	/**
+	 * @param array $array The array to modify.
+	 * @param (callable|callable[])[] $modifications Mapping from paths to modifications.
+	 * Array keys are paths:
+	 *     Element keys should be separated with / characters.
+	 *     * characters can be used to match all keys at a given level.
+	 *     Empty string can be used to modify $array directly.
+	 *     Examples:
+	 *         ''
+	 *         'foo/*'
+	 *         'root/entities/*\/statement/references/*\/snaks/*'
+	 * Elements are callbacks or lists of callbacks:
+	 *  Callback accepts 1 parameter which is the element to touch
+	 *  Callback should return the altered element
+	 * @return array The altered array.
+	 */
+	public function modifyUsingCallbacks( array $array, array $modifications ): array {
+		foreach ( $modifications as $path => $callbacks ) {
+			foreach ( (array)$callbacks as $callback ) {
+				$array = $this->modifyUsingCallback( $array, $path, $callback );
+			}
+		}
+		return $array;
+	}
+
+	/**
 	 * @param array $array the array to modify
 	 * @param null|string $path the path that we want to modify.
 	 *     Element keys should be separated with / characters.
@@ -28,7 +53,7 @@ class SerializationModifier {
 	 *
 	 * @return array the altered array
 	 */
-	public function modifyUsingCallback( array $array, $path, $callback ) {
+	private function modifyUsingCallback( array $array, $path, $callback ) {
 		$elementsToTouch = $this->getElementsMatchingPath(
 			$array,
 			$this->getPathParts( $path )
