@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Repo\Maintenance;
 
 use Maintenance;
@@ -49,7 +51,7 @@ class RebuildItemsPerSite extends Maintenance {
 	/**
 	 * @inheritDoc
 	 */
-	public function execute() {
+	public function execute(): void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
 			exit;
@@ -102,10 +104,8 @@ class RebuildItemsPerSite extends Maintenance {
 
 	/**
 	 * Outputs a message vis the output() method.
-	 *
-	 * @param string $msg
 	 */
-	public function report( $msg ) {
+	public function report( string $msg ): void {
 		$this->output( "$msg\n" );
 	}
 

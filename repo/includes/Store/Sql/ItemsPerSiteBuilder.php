@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Repo\Store\Sql;
 
 use Onoi\MessageReporter\MessageReporter;
@@ -63,23 +65,18 @@ class ItemsPerSiteBuilder {
 		$this->lbFactory = $lbFactory;
 	}
 
-	/**
-	 * @param int $batchSize
-	 */
-	public function setBatchSize( $batchSize ) {
+	public function setBatchSize( int $batchSize ): void {
 		$this->batchSize = $batchSize;
 	}
 
 	/**
-	 * Sets the reporter to use for reporting preogress.
-	 *
-	 * @param MessageReporter $reporter
+	 * Sets the reporter to use for reporting progress.
 	 */
-	public function setReporter( MessageReporter $reporter ) {
+	public function setReporter( MessageReporter $reporter ): void {
 		$this->reporter = $reporter;
 	}
 
-	public function rebuild( EntityIdPager $entityIdPager ) {
+	public function rebuild( EntityIdPager $entityIdPager ): void {
 		$this->report( 'Start rebuild...' );
 
 		$total = 0;
@@ -98,10 +95,8 @@ class ItemsPerSiteBuilder {
 
 	/**
 	 * @param EntityId[] $itemIds
-	 *
-	 * @return int
 	 */
-	private function rebuildSiteLinks( array $itemIds ) {
+	private function rebuildSiteLinks( array $itemIds ): int {
 		$this->entityPrefetcher->prefetch( $itemIds );
 
 		$c = 0;
@@ -131,10 +126,7 @@ class ItemsPerSiteBuilder {
 		return $c;
 	}
 
-	/**
-	 * @param string $msg
-	 */
-	private function report( $msg ) {
+	private function report( string $msg ): void {
 		if ( $this->reporter ) {
 			$this->reporter->reportMessage( $msg );
 		}
