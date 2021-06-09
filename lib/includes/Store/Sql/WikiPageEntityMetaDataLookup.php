@@ -13,7 +13,6 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikimedia\Rdbms\DBQueryError;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Service for looking up meta data about one or more entities as needed for
@@ -58,20 +57,13 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		PageTableEntityQuery $pageTableEntityConditionGenerator,
 		EntitySource $entitySource,
-		$lbFactoryOrRepoDb,
+		RepoDomainDb $repoDb,
 		LoggerInterface $logger = null
 	) {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->pageTableEntityQuery = $pageTableEntityConditionGenerator;
 		$this->entitySource = $entitySource;
-		if ( $lbFactoryOrRepoDb instanceof ILBFactory ) {
-			$this->repoDb = new RepoDomainDb(
-				$lbFactoryOrRepoDb,
-				$entitySource->getDatabaseName() ?: $lbFactoryOrRepoDb->getLocalDomainID()
-			);
-		} else {
-			$this->repoDb = $lbFactoryOrRepoDb;
-		}
+		$this->repoDb = $repoDb;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
