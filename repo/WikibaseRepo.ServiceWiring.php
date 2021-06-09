@@ -203,6 +203,7 @@ use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Search\Fields\FieldDefinitionsFactory;
@@ -908,6 +909,14 @@ return [
 
 	'WikibaseRepo.EntityStoreWatcher' => function ( MediaWikiServices $services ): EntityStoreWatcher {
 		return WikibaseRepo::getStore( $services )->getEntityStoreWatcher();
+	},
+
+	'WikibaseRepo.EntityStubRdfBuilderFactory' => function ( MediaWikiServices $services ): EntityStubRdfBuilderFactory {
+		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
+
+		return new EntityStubRdfBuilderFactory(
+			$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_BUILDER_STUB_FACTORY_CALLBACK )
+		);
 	},
 
 	'WikibaseRepo.EntityTitleLookup' => function ( MediaWikiServices $services ): EntityTitleLookup {
