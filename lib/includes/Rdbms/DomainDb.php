@@ -15,7 +15,7 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  * which would otherwise be needed to have access to the same functionality.
  *
  * Do not type hint against this abstract class in Wikibase services. Instead, use either
- * ClientDomainDb or RepoDomainDb depending on the context.
+ * ClientDomainDb or RepoDomainDb depending on what kind of wiki is being accessed.
  *
  * @author Addshore
  * @license GPL-2.0-or-later
