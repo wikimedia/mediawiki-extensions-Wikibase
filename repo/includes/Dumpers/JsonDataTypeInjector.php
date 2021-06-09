@@ -34,58 +34,19 @@ class JsonDataTypeInjector {
 	}
 
 	public function injectEntitySerializationWithDataTypes( array $serialization ) {
-		$modifyPaths = [
-			'claims/*/*/mainsnak',
-			'*/*/claims/*/*/mainsnak', // statements on subentities
-		];
-		$groupedSnakModifyPaths = [
-			'claims/*/*/qualifiers',
-			'claims/*/*/references/*/snaks',
-			'*/*/claims/*/*/qualifiers',
-			'*/*/claims/*/*/references/*/snaks',
-		];
-		foreach ( $modifyPaths as $modifyPath ) {
-			$serialization = $this->modifier->modifyUsingCallback(
-				$serialization,
-				$modifyPath,
-				$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
-			);
-		}
+		$callback = $this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup );
+		$groupedCallback = $this->callbackFactory->getCallbackToAddDataTypeToSnaksGroupedByProperty( $this->dataTypeLookup );
 
-		foreach ( $groupedSnakModifyPaths as $groupedSnakModifyPath ) {
-			$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
-				$serialization,
-				$groupedSnakModifyPath
-			);
-		}
-		return $serialization;
-	}
-
-	/**
-	 * @param array $array
-	 * @param string $path
-	 *
-	 * @return array
-	 */
-	public function getArrayWithDataTypesInGroupedSnakListAtPath( array $array, $path ) {
-		return $this->modifier->modifyUsingCallback(
-			$array,
-			$path,
-			$this->callbackFactory->getCallbackToAddDataTypeToSnaksGroupedByProperty( $this->dataTypeLookup )
-		);
-	}
-
-	/**
-	 * @param array $array
-	 * @param string $path
-	 *
-	 * @return array
-	 */
-	public function getArrayWithDataTypesInSnakAtPath( array $array, $path ) {
-		return $this->modifier->modifyUsingCallback(
-			$array,
-			$path,
-			$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
+		return $this->modifier->modifyUsingCallbacks(
+			$serialization,
+			[
+				'claims/*/*/mainsnak' => $callback,
+				'*/*/claims/*/*/mainsnak' => $callback, // statements on subentities
+				'claims/*/*/qualifiers' => $groupedCallback,
+				'claims/*/*/references/*/snaks' => $groupedCallback,
+				'*/*/claims/*/*/qualifiers' => $groupedCallback,
+				'*/*/claims/*/*/references/*/snaks' => $groupedCallback,
+			]
 		);
 	}
 }

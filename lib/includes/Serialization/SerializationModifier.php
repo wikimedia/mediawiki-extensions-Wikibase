@@ -8,151 +8,111 @@ namespace Wikibase\Lib\Serialization;
  * This could easily be factored out into a library.
  *
  * @license GPL-2.0-or-later
- * @author Addshore
  */
 class SerializationModifier {
 
 	/**
-	 * @param array $array the array to modify
-	 * @param null|string $path the path that we want to modify.
+	 * @param array $array The array to modify.
+	 * @param (callable|callable[])[] $modifications Mapping from paths to modifications.
+	 * Array keys are paths:
 	 *     Element keys should be separated with / characters.
 	 *     * characters can be used to match all keys at a given level.
-	 *     null can be used to modify $array directly.
+	 *     Empty string can be used to modify $array directly.
 	 *     Examples:
-	 *         null
+	 *         ''
 	 *         'foo/*'
 	 *         'root/entities/*\/statement/references/*\/snaks/*'
-	 * @param callable $callback
+	 *     More specific paths always run first (e.g. foo/bar before foo),
+	 *     so that array elements added by callbacks are never matched against other paths.
+	 * Elements are callbacks or lists of callbacks:
 	 *  Callback accepts 1 parameter which is the element to touch
 	 *  Callback should return the altered element
-	 *
-	 * @return array the altered array
+	 * @return array The altered array.
 	 */
-	public function modifyUsingCallback( array $array, $path, $callback ) {
-		$elementsToTouch = $this->getElementsMatchingPath(
-			$array,
-			$this->getPathParts( $path )
-		);
-
-		foreach ( $elementsToTouch as $key => $element ) {
-			$newElement = call_user_func( $callback, $element );
-			$this->setArrayValueAtKey( $array, $key, $newElement );
-		}
-
+	public function modifyUsingCallbacks( array $array, array $modifications ): array {
+		$this->modifyUsingUnflattenedCallbacks( $array, $this->unflattenPaths( $modifications ) );
 		return $array;
 	}
 
 	/**
-	 * @param array $array
-	 * @param string $path
-	 * @param mixed $value
-	 */
-	private function setArrayValueAtKey( array &$array, $path, $value ) {
-		$current = &$array;
-		$pathParts = $this->getPathParts( $path );
-
-		foreach ( $pathParts as $key ) {
-			$current = &$current[$key];
-		}
-
-		$current = $value;
-	}
-
-	/**
-	 * Method to get elements that match the path given.
-	 * This is called recursively along with getElementsForAllKeys and getElementsForKey
-	 * The number of calls depends on the depth of the array.
+	 * Iterates the value and modifications and runs all the needed sub-modifications,
+	 * then runs the modifications of the current array level ('' key), if any.
 	 *
-	 * @param array $array
-	 * @param string[] $pathElements
-	 * @param string $currentPath
-	 *
-	 * @return array
+	 * @param mixed $value The value to modify (usually an array except on leaf nodes).
+	 * @param array $modifications Modifications as returned by {@link unflattenPaths}.
 	 */
-	private function getElementsMatchingPath( array $array, array $pathElements, $currentPath = '' ) {
-		$elements = [];
+	private function modifyUsingUnflattenedCallbacks( &$value, array $modifications ): void {
+		$rootModifications = $modifications[''] ?? [];
+		unset( $modifications[''] );
 
-		if ( empty( $pathElements ) ) {
-			$elements[$currentPath] = $array;
-		} else {
-			$currentKey = array_shift( $pathElements );
-
-			if ( $currentKey === '*' ) {
-				$elements = array_merge(
-					$elements,
-					$this->getElementsForAllKeys( $array, $pathElements, $currentPath )
-				);
+		if ( is_array( $value ) ) {
+			if ( array_key_exists( '*', $modifications ) ) {
+				$starModifications = $modifications['*'];
+				foreach ( $value as $key => &$subValue ) {
+					if ( array_key_exists( $key, $modifications ) ) {
+						$keyModifications = $modifications[$key];
+						$subModifications = array_merge_recursive( $keyModifications, $starModifications );
+					} else {
+						$subModifications = $starModifications;
+					}
+					$this->modifyUsingUnflattenedCallbacks( $subValue, $subModifications );
+				}
 			} else {
-				$elements = array_merge(
-					$elements,
-					$this->getElementsForKey( $array, $pathElements, $currentPath, $currentKey )
-				);
+				foreach ( $modifications as $key => $subModifications ) {
+					if ( array_key_exists( $key, $value ) ) {
+						$this->modifyUsingUnflattenedCallbacks( $value[$key], $subModifications );
+					}
+				}
 			}
 		}
 
-		return $elements;
-	}
-
-	/**
-	 * @param array $array
-	 * @param string[] $pathElements
-	 * @param string $currentPath
-	 *
-	 * @return array
-	 */
-	private function getElementsForAllKeys( array $array, array $pathElements, $currentPath ) {
-		$elements = [];
-
-		foreach ( array_keys( $array ) as $arrayKey ) {
-			$elements = array_merge(
-				$elements,
-				$this->getElementsForKey( $array, $pathElements, $currentPath, $arrayKey )
-			);
+		foreach ( (array)$rootModifications as $callback ) {
+			$value = $callback( $value );
 		}
-
-		return $elements;
 	}
 
 	/**
-	 * @param array $array
-	 * @param string[] $pathElements
-	 * @param string $currentPath
-	 * @param string $key
+	 * Turn a flat array with paths as keys into a nested structure.
 	 *
+	 * Example input:
+	 *
+	 *     [
+	 *         '' => 'cb0',
+	 *         'claims' => 'cb1',
+	 *         'claims/foo' => 'cb2',
+	 *         'claims/*\/bar' => 'cb3',
+	 *         'label' => 'cb4',
+	 *     ]
+	 *
+	 * Example output:
+	 *
+	 *     [
+	 *         '' => 'cb0',
+	 *         'claims' => [
+	 *             '' => 'cb1',
+	 *             'foo' => [ '' => 'cb2' ],
+	 *             '*' => [
+	 *                 'bar' => [ '' => 'cb3' ],
+	 *             ],
+	 *         ],
+	 *         'label' => [ '' => 'cb4' ],
+	 *     ]
+	 *
+	 * @param array $array
 	 * @return array
 	 */
-	private function getElementsForKey( array $array, array $pathElements, $currentPath, $key ) {
-		$elements = [];
-
-		if ( isset( $array[$key] ) ) {
-			$thisPath = $this->getJoinedPath( $currentPath, $key );
-
-			if ( is_array( $array[$key] ) ) {
-				$elements = array_merge(
-					$elements,
-					$this->getElementsMatchingPath( $array[$key], $pathElements, $thisPath )
-				);
-			} else {
-				$elements[$thisPath] = $array[$key];
+	private function unflattenPaths( array $array ): array {
+		$unflattened = [];
+		foreach ( $array as $key => $value ) {
+			unset( $subArray );
+			$subArray = &$unflattened;
+			foreach ( $this->getPathParts( $key ) as $pathPart ) {
+				// @phan-suppress-next-line PhanTypeInvalidDimOffset subArray is created implicitly
+				$subArray = &$subArray[$pathPart];
 			}
-
+			$subArray[''] = $value;
 		}
-
-		return $elements;
-	}
-
-	/**
-	 * @param string $prefix
-	 * @param string $key
-	 *
-	 * @return string
-	 */
-	private function getJoinedPath( $prefix, $key ) {
-		if ( $prefix === '' ) {
-			return $key;
-		}
-
-		return $prefix . '/' . $key;
+		return $unflattened;
 	}
 
 	/**
@@ -160,7 +120,7 @@ class SerializationModifier {
 	 *
 	 * @return string[]
 	 */
-	private function getPathParts( $path ) {
+	private function getPathParts( ?string $path ): array {
 		if ( $path === null || $path === '' ) {
 			return [];
 		}

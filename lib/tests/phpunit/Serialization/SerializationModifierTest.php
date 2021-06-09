@@ -1,8 +1,11 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Tests\Serialization;
 
 use Wikibase\Lib\Serialization\SerializationModifier;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Lib\Serialization\SerializationModifier
@@ -14,17 +17,14 @@ use Wikibase\Lib\Serialization\SerializationModifier;
  */
 class SerializationModifierTest extends \PHPUnit\Framework\TestCase {
 
-	/**
-	 * @return SerializationModifier
-	 */
-	private function newSerializationModifier() {
+	private function newSerializationModifier(): SerializationModifier {
 		return new SerializationModifier();
 	}
 
-	public function provideKeyValueInjection() {
+	public function providePathAndCallback(): iterable {
 		return [
 			[
-				null,
+				'',
 				function( $value ) {
 					$value['foo'] = 'bar';
 					return $value;
@@ -177,12 +177,137 @@ class SerializationModifierTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideKeyValueInjection
+	 * @dataProvider providePathAndCallback
 	 */
-	public function testInjectKeyValue( $path, $callback, $array, $expectedArray ) {
+	public function testSingleCallback(
+		string $path,
+		callable $callback,
+		array $array,
+		array $expectedArray
+	): void {
 		$injector = $this->newSerializationModifier();
-		$alteredArray = $injector->modifyUsingCallback( $array, $path, $callback );
+		$alteredArray = $injector->modifyUsingCallbacks( $array, [ $path => $callback ] );
 		$this->assertEquals( $expectedArray, $alteredArray );
+	}
+
+	public function provideCallbacks(): iterable {
+		$typeEntityCallback = function ( $value ) {
+			$value['type'] = 'entity';
+			return $value;
+		};
+		$typeLabelCallback = function ( $value ) {
+			$value['type'] = 'label';
+			return $value;
+		};
+
+		yield 'add types in multiple places' => [
+			'callbacks' => [
+				'' => $typeEntityCallback,
+				'labels/*' => $typeLabelCallback,
+			],
+			'array' => [
+				'labels' => [
+					'en' => [ 'language' => 'en', 'value' => 'label' ],
+					'de' => [ 'language' => 'de', 'value' => 'Label' ],
+				],
+			],
+			'alteredArray' => [
+				'type' => 'entity',
+				'labels' => [
+					'en' => [ 'language' => 'en', 'value' => 'label', 'type' => 'label' ],
+					'de' => [ 'language' => 'de', 'value' => 'Label', 'type' => 'label' ],
+				],
+			],
+		];
+
+		yield 'add types in overlapping places, more specific path first' => [
+			[
+				'*/*/labels/*' => $typeLabelCallback,
+				'' => $typeEntityCallback,
+			],
+			'array' => [
+				'subentities' => [
+					[
+						'labels' => [
+							'en' => [ 'language' => 'en', 'value' => 'label' ],
+						],
+					],
+				],
+			],
+			'alteredArray' => [
+				'type' => 'entity',
+				'subentities' => [
+					[
+						'labels' => [
+							'en' => [ 'language' => 'en', 'value' => 'label', 'type' => 'label' ],
+						],
+					],
+				],
+			],
+		];
+
+		yield 'add types in overlapping places, less specific path first' => [
+			[
+				'' => $typeEntityCallback,
+				'*/*/labels/*' => $typeLabelCallback,
+			],
+			'array' => [
+				'subentities' => [
+					[
+						'labels' => [
+							'en' => [ 'language' => 'en', 'value' => 'label' ],
+						],
+					],
+				],
+			],
+			'alteredArray' => [
+				'type' => 'entity',
+				'subentities' => [
+					[
+						'labels' => [
+							'en' => [ 'language' => 'en', 'value' => 'label', 'type' => 'label' ],
+						],
+					],
+				],
+			],
+		];
+	}
+
+	/** @dataProvider provideCallbacks */
+	public function testCallbacks(
+		array $callbacks,
+		array $array,
+		array $expectedArray
+	): void {
+		$injector = $this->newSerializationModifier();
+		$alteredArray = $injector->modifyUsingCallbacks( $array, $callbacks );
+		$this->assertEquals( $expectedArray, $alteredArray );
+	}
+
+	public function testUnflattenPaths() {
+		$array = [
+			'' => 'cb0',
+			'claims' => 'cb1',
+			'claims/foo' => 'cb2',
+			'claims/*/bar' => 'cb3',
+			'label' => 'cb4',
+		];
+		$expected = [
+			'' => 'cb0',
+			'claims' => [
+				'' => 'cb1',
+				'foo' => [ '' => 'cb2' ],
+				'*' => [
+					'bar' => [ '' => 'cb3' ],
+				],
+			],
+			'label' => [ '' => 'cb4' ],
+		];
+
+		$actual = TestingAccessWrapper::newFromObject( $this->newSerializationModifier() )
+			->unflattenPaths( $array );
+
+		$this->assertSame( $expected, $actual );
 	}
 
 }
