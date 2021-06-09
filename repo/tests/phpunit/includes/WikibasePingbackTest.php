@@ -11,6 +11,7 @@ use MWTimestamp;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use TestLogger;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
@@ -139,6 +140,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		$requestFactory->expects( $expectation )
 			->method( 'post' )
 			->willReturn( true );
+		$lbFactory = new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] );
 
 		return new WikibasePingback(
 			null,
@@ -146,7 +148,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 			null,
 			null,
 			$requestFactory,
-			new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] ),
+			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() ),
 			self::TEST_KEY
 		);
 	}
@@ -163,7 +165,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		$extensions = $extensions ?: $this->createMock( ExtensionRegistry::class );
 		$wikibaseRepoSettings = $wikibaseRepoSettings ?: $this->createMock( SettingsArray::class );
 		$requestFactory = $requestFactory ?: $this->createMock( HTTPRequestFactory::class );
-		$loadBalancerFactory = new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] );
+		$lbFactory = new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] );
 
 		$wikibaseRepoSettings
 			->method( 'getSetting' )
@@ -182,7 +184,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 			$extensions,
 			$wikibaseRepoSettings,
 			$requestFactory,
-			$loadBalancerFactory
+			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() )
 		);
 	}
 

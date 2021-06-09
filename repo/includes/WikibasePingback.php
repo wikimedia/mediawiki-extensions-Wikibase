@@ -16,8 +16,9 @@ use ObjectCache;
 use Psr\Log\LoggerInterface;
 use RequestContext;
 use SiteStats;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\SettingsArray;
-use Wikimedia\Rdbms\LBFactory;
+use Wikimedia\Rdbms\ConnectionManager;
 
 /**
  * Send information about this Wikibase instance to TODO.
@@ -76,9 +77,9 @@ class WikibasePingback {
 	private $requestFactory;
 
 	/**
-	 * @var LBFactory|null
+	 * @var ConnectionManager
 	 */
-	private $loadBalancerFactory;
+	private $repoConnections;
 
 	/**
 	 * @param Config|null $config
@@ -86,7 +87,7 @@ class WikibasePingback {
 	 * @param ExtensionRegistry|null $extensionRegistry
 	 * @param SettingsArray|null $wikibaseRepoSettings
 	 * @param HttpRequestFactory|null $requestFactory
-	 * @param LBFactory|null $loadBalancerFactory
+	 * @param RepoDomainDb|null $repoDomainDb
 	 * @param string|null $key
 	 */
 	public function __construct(
@@ -95,7 +96,7 @@ class WikibasePingback {
 		ExtensionRegistry $extensionRegistry = null,
 		SettingsArray $wikibaseRepoSettings = null,
 		HTTPRequestFactory $requestFactory = null,
-		LBFactory $loadBalancerFactory = null,
+		RepoDomainDb $repoDomainDb = null,
 		string $key = null
 	) {
 		$this->config = $config ?: RequestContext::getMain()->getConfig();
@@ -103,7 +104,8 @@ class WikibasePingback {
 		$this->extensionRegistry = $extensionRegistry ?: ExtensionRegistry::getInstance();
 		$this->wikibaseRepoSettings = $wikibaseRepoSettings ?: WikibaseRepo::getSettings();
 		$this->requestFactory = $requestFactory ?: MediaWikiServices::getInstance()->getHttpRequestFactory();
-		$this->loadBalancerFactory = $loadBalancerFactory ?: MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		$this->repoConnections = $repoDomainDb ? $repoDomainDb->connections() :
+			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()->connections();
 
 		$this->key = $key ?: 'WikibasePingback-' . MW_VERSION;
 		$this->host = $this->wikibaseRepoSettings->getSetting( 'pingbackHost' );
@@ -122,9 +124,7 @@ class WikibasePingback {
 	 * @return bool
 	 */
 	private function checkIfSent() {
-		$dbr = $this->loadBalancerFactory
-			->getMainLB()
-			->getConnection( DB_REPLICA );
+		$dbr = $this->repoConnections->getReadConnection();
 
 		$timestamp = $dbr->selectField(
 			'updatelog',
@@ -149,9 +149,7 @@ class WikibasePingback {
 	 * @return bool
 	 */
 	private function markSent() {
-		$dbw = $this->loadBalancerFactory
-			->getMainLB()
-			->getConnection( DB_PRIMARY );
+		$dbw = $this->repoConnections->getWriteConnection();
 
 		$timestamp = MWTimestamp::time();
 
@@ -178,9 +176,7 @@ class WikibasePingback {
 			return false;  // throttled
 		}
 
-		$dbw = $this->loadBalancerFactory
-			->getMainLB()
-			->getConnection( DB_PRIMARY );
+		$dbw = $this->repoConnections->getWriteConnection();
 
 		if ( !$dbw->lock( $this->key, __METHOD__, 0 ) ) {
 			return false;  // already in progress
@@ -279,18 +275,14 @@ class WikibasePingback {
 	 */
 	private function getOrCreatePingbackId() {
 		if ( !$this->id ) {
-			$dbr = $this->loadBalancerFactory
-				->getMainLB()
-				->getConnection( DB_REPLICA );
+			$dbr = $this->repoConnections->getReadConnection();
 
 			$id = $dbr->selectField(
 				'updatelog', 'ul_value', [ 'ul_key' => 'WikibasePingback' ], __METHOD__ );
 
 			if ( $id === false ) {
 				$id = MWCryptRand::generateHex( 32 );
-				$dbw = $this->loadBalancerFactory
-					->getMainLB()
-					->getConnection( DB_PRIMARY );
+				$dbw = $this->repoConnections->getWriteConnection();
 				$dbw->insert(
 					'updatelog',
 					[ 'ul_key' => 'WikibasePingback', 'ul_value' => $id ],
