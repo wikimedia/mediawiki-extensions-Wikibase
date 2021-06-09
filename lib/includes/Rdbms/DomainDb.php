@@ -14,6 +14,9 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  * Using this class means in most cases only 1 service need be injected into a service instead of 3+
  * which would otherwise be needed to have access to the same functionality.
  *
+ * Do not type hint against this abstract class in Wikibase services. Instead, use either
+ * ClientDomainDb or RepoDomainDb depending on the context.
+ *
  * @author Addshore
  * @license GPL-2.0-or-later
  */
