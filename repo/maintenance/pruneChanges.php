@@ -3,12 +3,13 @@
 namespace Wikibase\Repo\Maintenance;
 
 use Maintenance;
-use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\ChangePruner;
 use Wikibase\Repo\PidLock;
+use Wikibase\Repo\WikibaseRepo;
+use WikiMap;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 require_once $basePath . '/maintenance/Maintenance.php';
@@ -47,7 +48,7 @@ class PruneChanges extends Maintenance {
 		}
 
 		$force = $this->getOption( 'force', false );
-		$pidLock = new PidLock( 'WBpruneChanges', wfWikiID() );
+		$pidLock = new PidLock( 'WBpruneChanges', WikiMap::getCurrentWikiId() );
 
 		if ( !$pidLock->getLock( $force ) ) {
 			$this->output( date( 'H:i:s' ) . " already running, exiting\n" );
@@ -55,7 +56,7 @@ class PruneChanges extends Maintenance {
 		}
 
 		$changePruner = new ChangePruner(
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb(),
 			$this->mBatchSize,
 			$this->getKeepSeconds(),
 			$this->getGraceSeconds(),
