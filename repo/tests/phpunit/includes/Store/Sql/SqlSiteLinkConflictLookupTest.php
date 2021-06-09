@@ -8,8 +8,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
+use Wikimedia\Rdbms\LBFactorySingle;
 use Wikimedia\Rdbms\LoadBalancerSingle;
 
 /**
@@ -32,7 +34,10 @@ class SqlSiteLinkConflictLookupTest extends MediaWikiIntegrationTestCase {
 		$siteLinkTable = new SiteLinkTable(
 			'wb_items_per_site',
 			false,
-			LoadBalancerSingle::newFromConnection( $this->db )
+			new RepoDomainDb(
+				LBFactorySingle::newFromConnection( $this->db ),
+				$this->db->getDomainID()
+			)
 		);
 
 		$siteLinks = new SiteLinkList( [

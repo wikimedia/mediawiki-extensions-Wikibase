@@ -68,7 +68,7 @@ class RebuildItemsPerSite extends Maintenance {
 		$siteLinkTable = new SiteLinkTable(
 			'wb_items_per_site',
 			false,
-			$mwServices->getDBLoadBalancer()
+			WikibaseRepo::getRepoDomainDbFactory( $mwServices )->newRepoDb()
 		);
 		$store = WikibaseRepo::getStore( $mwServices );
 		// Use an uncached EntityLookup here to avoid memory leaks

@@ -21,6 +21,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
@@ -322,8 +323,10 @@ class DirectSqlStore implements ClientStore {
 				new SiteLinkTable(
 					'wb_items_per_site',
 					true,
-					$lbFactory->getMainLB( $this->repoWiki ),
-					$this->repoWiki
+					new RepoDomainDb( // TODO inject
+						$lbFactory,
+						$this->repoWiki ?: $lbFactory->getLocalDomainID()
+					)
 				),
 				new HashBagOStuff()
 			);

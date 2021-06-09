@@ -7,9 +7,10 @@ use MediaWikiIntegrationTestCase;
 use TitleValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LoadBalancerSingle;
+use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\SiteLinkTable
@@ -39,7 +40,10 @@ class SiteLinkTableTest extends MediaWikiIntegrationTestCase {
 		$this->siteLinkTable = new SiteLinkTable(
 			'wb_items_per_site',
 			false,
-			LoadBalancerSingle::newFromConnection( $this->db )
+			new RepoDomainDb(
+				LBFactorySingle::newFromConnection( $this->db ),
+				$this->db->getDomainID()
+			)
 		);
 		$this->tablesUsed[] = 'wb_items_per_site';
 	}

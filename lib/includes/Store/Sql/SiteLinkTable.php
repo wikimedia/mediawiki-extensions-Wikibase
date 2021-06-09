@@ -10,10 +10,10 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * Represents a lookup database table for sitelinks.
@@ -40,33 +40,24 @@ class SiteLinkTable implements SiteLinkStore {
 	 */
 	protected $readonly;
 
-	/** @var ILoadBalancer */
-	protected $loadBalancer;
-
-	/**
-	 * @var string|bool The symbolic database name of the repo wiki or false for the local wiki.
-	 */
-	private $repoWiki;
+	/** @var RepoDomainDb */
+	private $db;
 
 	/**
 	 * @param string $table The table to use for the sitelinks
 	 * @param bool $readonly Whether the table can be modified.
-	 * @param ILoadBalancer $loadBalancer Which database / wiki to connect to.
-	 * @param string|bool $repoWiki The wiki's database to connect to.
-	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
+	 * @param RepoDomainDb $db
 	 */
 	public function __construct(
 		string $table,
 		bool $readonly,
-		ILoadBalancer $loadBalancer,
-		$repoWiki = false
+		RepoDomainDb $db
 	) {
 		$this->table = $table;
 		$this->readonly = $readonly;
-		$this->loadBalancer = $loadBalancer;
+		$this->db = $db;
 		// TODO: Inject
 		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
-		$this->repoWiki = $repoWiki;
 	}
 
 	/**
@@ -117,7 +108,7 @@ class SiteLinkTable implements SiteLinkStore {
 		}
 
 		$ok = true;
-		$dbw = $this->loadBalancer->getConnectionRef( ILoadBalancer::DB_PRIMARY, [], $this->repoWiki );
+		$dbw = $this->db->connections()->getWriteConnectionRef();
 
 		if ( $linksToDelete ) {
 			$this->logger->debug(
@@ -225,7 +216,7 @@ class SiteLinkTable implements SiteLinkStore {
 			throw new MWException( 'Cannot write when in readonly mode' );
 		}
 
-		$dbw = $this->loadBalancer->getConnectionRef( ILoadBalancer::DB_PRIMARY, [], $this->repoWiki );
+		$dbw = $this->db->connections()->getWriteConnectionRef();
 
 		$dbw->delete(
 			$this->table,
@@ -254,9 +245,9 @@ class SiteLinkTable implements SiteLinkStore {
 		// We store page titles with spaces instead of underscores
 		$pageTitle = str_replace( '_', ' ', $pageTitle );
 
-		$db = $this->loadBalancer->getConnectionRef( ILoadBalancer::DB_REPLICA, [], $this->repoWiki );
+		$dbr = $this->db->connections()->getReadConnectionRef();
 
-		$result = $db->selectRow(
+		$result = $dbr->selectRow(
 			$this->table,
 			[ 'ips_item_id' ],
 			[
@@ -291,7 +282,7 @@ class SiteLinkTable implements SiteLinkStore {
 	 * @note The arrays returned by this method do not contain badges!
 	 */
 	public function getLinks( array $numericIds = [], array $siteIds = [], array $pageNames = [] ) {
-		$dbr = $this->loadBalancer->getConnectionRef( ILoadBalancer::DB_REPLICA, [], $this->repoWiki );
+		$dbr = $this->db->connections()->getReadConnectionRef();
 
 		$conditions = [];
 
@@ -342,7 +333,7 @@ class SiteLinkTable implements SiteLinkStore {
 	public function getSiteLinksForItem( ItemId $itemId ) {
 		$numericId = $itemId->getNumericId();
 
-		$dbr = $this->loadBalancer->getConnectionRef( ILoadBalancer::DB_REPLICA, [], $this->repoWiki );
+		$dbr = $this->db->connections()->getReadConnectionRef();
 
 		$rows = $dbr->select(
 			$this->table,

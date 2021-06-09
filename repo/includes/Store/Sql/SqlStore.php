@@ -213,7 +213,7 @@ class SqlStore implements Store {
 		return new SiteLinkTable(
 			'wb_items_per_site',
 			false,
-			MediaWikiServices::getInstance()->getDBLoadBalancer() // TODO inject
+			WikibaseRepo::getRepoDomainDbFactory()->newForEntitySource( $this->entitySource )
 		);
 	}
 
