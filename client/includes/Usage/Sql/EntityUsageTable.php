@@ -7,19 +7,19 @@ namespace Wikibase\Client\Usage\Sql;
 use ArrayIterator;
 use InvalidArgumentException;
 use MediaWiki\Logger\LoggerFactory;
-use MediaWiki\MediaWikiServices;
 use MWException;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Traversable;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikimedia\Rdbms\DBUnexpectedError;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Helper class for updating the wbc_entity_usage table.
@@ -45,14 +45,9 @@ class EntityUsageTable {
 	private $writeConnection;
 
 	/**
-	 * @var IDatabase
+	 * @var ClientDomainDb
 	 */
-	private $readConnection;
-
-	/**
-	 * @var ILBFactory
-	 */
-	private $loadBalancerFactory;
+	private $db;
 
 	/**
 	 * @var int
@@ -98,14 +93,14 @@ class EntityUsageTable {
 		}
 
 		$this->idParser = $idParser;
+		// Several places inject read connection instead. Fix those.
 		$this->writeConnection = $writeConnection;
 		$this->batchSize = $batchSize;
 		$this->tableName = $tableName ?: self::DEFAULT_TABLE_NAME;
 		$this->addUsagesBatchSize = $addUsagesBatchSize;
 
 		//TODO: Inject
-		$this->loadBalancerFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$this->readConnection = $this->loadBalancerFactory->getMainLB()->getConnection( DB_REPLICA );
+		$this->db = WikibaseClient::getClientDomainDbFactory()->newLocalDb();
 		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
 	}
 
@@ -202,9 +197,8 @@ class EntityUsageTable {
 			$this->writeConnection->insert( $this->tableName, $rows, __METHOD__, [ 'IGNORE' ] );
 			$c += $this->writeConnection->affectedRows();
 
-			// Wait for all database replicas to be updated, but only for the affected client wiki. The
-			// "domain" argument is documented at ILBFactory::waitForReplication.
-			$this->loadBalancerFactory->waitForReplication( [ 'domain' => wfWikiID() ] );
+			// Wait for all database replicas to be updated, but only for the affected client wiki.
+			$this->db->replication()->wait();
 		}
 
 		return $c;
@@ -217,7 +211,7 @@ class EntityUsageTable {
 	 * @return EntityUsage[] EntityUsage identity string => EntityUsage
 	 */
 	public function queryUsages( int $pageId ): array {
-		$res = $this->readConnection->select(
+		$res = $this->db->connections()->getReadConnectionRef()->select(
 			$this->tableName,
 			[ 'eu_aspect', 'eu_entity_id' ],
 			[ 'eu_page_id' => $pageId ],
@@ -328,7 +322,7 @@ class EntityUsageTable {
 			$where['eu_aspect'] = $aspects;
 		}
 
-		$res = $this->readConnection->select(
+		$res = $this->db->connections()->getReadConnectionRef()->select(
 			$this->tableName,
 			[ 'eu_page_id', 'eu_entity_id', 'eu_aspect' ],
 			$where,
@@ -414,13 +408,14 @@ class EntityUsageTable {
 	private function getUsedEntityIdStrings( array $idStrings ): array {
 		// Note: We need to use one (sub)query per entity here, per T116404
 		$subQueries = $this->getUsedEntityIdStringsQueries( $idStrings );
+		$readConnection = $this->db->connections()->getReadConnectionRef();
 
-		if ( $this->readConnection->getType() === 'mysql' ) {
-			 return $this->getUsedEntityIdStringsMySql( $subQueries );
+		if ( $readConnection->getType() === 'mysql' ) {
+			return $this->getUsedEntityIdStringsMySql( $subQueries, $readConnection );
 		} else {
 			$values = [];
 			foreach ( $subQueries as $sql ) {
-				$res = $this->readConnection->query( $sql, __METHOD__ );
+				$res = $readConnection->query( $sql, __METHOD__ );
 				if ( $res->numRows() ) {
 					$values[] = $res->current()->eu_entity_id;
 				}
@@ -437,9 +432,10 @@ class EntityUsageTable {
 	 */
 	private function getUsedEntityIdStringsQueries( array $idStrings ): array {
 		$subQueries = [];
+		$readConnection = $this->db->connections()->getReadConnectionRef();
 
 		foreach ( $idStrings as $idString ) {
-			$subQueries[] = $this->readConnection->selectSQLText(
+			$subQueries[] = $readConnection->selectSQLText(
 				$this->tableName,
 				'eu_entity_id',
 				[ 'eu_entity_id' => $idString ],
@@ -460,7 +456,7 @@ class EntityUsageTable {
 	 * @return int[]
 	 */
 	private function getPrimaryKeys( array $where, string $method ): array {
-		$rowIds = $this->readConnection->selectFieldValues(
+		$rowIds = $this->db->connections()->getReadConnectionRef()->selectFieldValues(
 			$this->tableName,
 			'eu_row_id',
 			$where,
@@ -472,16 +468,19 @@ class EntityUsageTable {
 
 	/**
 	 * @param string[] $subQueries
+	 * @param IDatabase $readConnection must have type MySQL
 	 * @return string[]
 	 */
-	private function getUsedEntityIdStringsMySql( array $subQueries ): array {
+	private function getUsedEntityIdStringsMySql(
+		array $subQueries,
+		IDatabase $readConnection
+	): array {
 		$values = [];
 
 		// On MySQL we can UNION up queries and run them at once
 		foreach ( array_chunk( $subQueries, $this->batchSize ) as $queryChunks ) {
-			$sql = $this->readConnection->unionQueries( $queryChunks, true );
-
-			$res = $this->readConnection->query( $sql, __METHOD__ );
+			$sql = $readConnection->unionQueries( $queryChunks, true );
+			$res = $readConnection->query( $sql, __METHOD__ );
 			foreach ( $res as $row ) {
 				$values[] = $row->eu_entity_id;
 			}
