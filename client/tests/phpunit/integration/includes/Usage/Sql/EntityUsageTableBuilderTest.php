@@ -9,6 +9,8 @@ use Onoi\MessageReporter\MessageReporter;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
+use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikimedia\Rdbms\LBFactorySingle;
 
@@ -42,9 +44,14 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 			99 => '--broken--',
 		] );
 
+		$domainDbFactory = new ClientDomainDbFactory(
+			LBFactorySingle::newFromConnection( $this->db ),
+			[ DomainDb::LOAD_GROUP_FROM_CLIENT ]
+		);
+
 		$primer = new EntityUsageTableBuilder(
 			new ItemIdParser(),
-			LBFactorySingle::newFromConnection( $this->db ),
+			$domainDbFactory->newLocalDb(),
 			2
 		);
 		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 3 ) ) );
