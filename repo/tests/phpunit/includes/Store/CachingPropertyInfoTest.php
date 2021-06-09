@@ -8,6 +8,7 @@ use WANObjectCache;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -38,10 +39,10 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newPropertyInfoTable() {
+		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		return new PropertyInfoTable(
 			$this->getEntityComposer(),
-			LBFactorySingle::newFromConnection( $this->db ),
-			false,
+			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() ),
 			true
 		);
 	}

@@ -6,12 +6,11 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILBFactory;
-use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -26,11 +25,10 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 	/** @var EntityIdComposer */
 	private $entityIdComposer;
 
-	/** @var ILoadBalancer */
-	private $loadBalancer;
-
-	/** @var string */
-	private $dbName;
+	/**
+	 * @var RepoDomainDb
+	 */
+	private $db;
 
 	/** @var string */
 	private $tableName;
@@ -40,21 +38,18 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 
 	/**
 	 * @param EntityIdComposer $entityIdComposer
-	 * @param ILBFactory $lbFactory
-	 * @param string|bool $databaseName For the property source
+	 * @param RepoDomainDb $db
 	 * @param bool $allowWrites Should writes be allowed to the table? false in cases that a remote property source is being used.
 	 *
 	 * TODO split this more cleanly into a lookup and a writer, and then $allowWrites would not be needed?
 	 */
 	public function __construct(
 		EntityIdComposer $entityIdComposer,
-		ILBFactory $lbFactory,
-		$databaseName,
+		RepoDomainDb $db,
 		bool $allowWrites
 	) {
 		$this->entityIdComposer = $entityIdComposer;
-		$this->loadBalancer = $lbFactory->getMainLB( $databaseName );
-		$this->dbName = $databaseName;
+		$this->db = $db;
 		$this->tableName = 'wb_property_info';
 		$this->allowWrites = $allowWrites;
 	}
@@ -261,11 +256,11 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 	 * on the database table.
 	 */
 	public function getWriteConnection(): IDatabase {
-		return $this->loadBalancer->getConnectionRef( ILoadBalancer::DB_PRIMARY, [], $this->dbName );
+		return $this->db->connections()->getWriteConnectionRef();
 	}
 
 	private function getReadConnection(): IDatabase {
-		return $this->loadBalancer->getConnectionRef( ILoadBalancer::DB_REPLICA, [], $this->dbName );
+		return $this->db->connections()->getReadConnectionRef();
 	}
 
 	/**

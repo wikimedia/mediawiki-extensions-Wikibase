@@ -4,11 +4,11 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use DataValues\StringValue;
 use MediaWikiIntegrationTestCase;
-use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -86,22 +86,10 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testRebuildPropertyInfo() {
-		$irrelevantPropertyNamespaceId = 200;
-		$irrelevantPropertySlotName = 'main';
-		$entitySource = new EntitySource(
-			'testsource',
-			false,
-			[ 'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => $irrelevantPropertySlotName ] ],
-			'',
-			'',
-			'',
-			''
-		);
-
+		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		$table = new PropertyInfoTable(
 			WikibaseRepo::getEntityIdComposer(),
-			LBFactorySingle::newFromConnection( $this->db ),
-			$entitySource->getDatabaseName(),
+			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() ),
 			true
 		);
 		$this->resetPropertyInfoTable( $table );

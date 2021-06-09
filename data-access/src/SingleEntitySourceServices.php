@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevision;
@@ -266,10 +267,13 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			throw new \LogicException( 'Entity source: ' . $this->entitySource->getSourceName() . ' does no provide properties' );
 		}
 		if ( $this->propertyInfoLookup === null ) {
+			$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 			$this->propertyInfoLookup = new PropertyInfoTable(
 				$this->entityIdComposer,
-				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(), // TODO inject
-				$this->entitySource->getDatabaseName(),
+				new RepoDomainDb(
+					$lbFactory,
+					$this->entitySource->getDatabaseName() ?: $lbFactory->getLocalDomainID()
+				),
 				false
 			);
 		}
