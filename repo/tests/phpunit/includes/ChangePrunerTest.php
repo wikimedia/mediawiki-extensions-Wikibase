@@ -8,6 +8,7 @@ use MediaWikiIntegrationTestCase;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Repo\ChangePruner;
 use Wikimedia\Rdbms\LBFactorySingle;
@@ -25,30 +26,30 @@ class ChangePrunerTest extends MediaWikiIntegrationTestCase {
 
 	private $messages = [];
 
-	private $lbFactory;
+	private $repoDomainDb;
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->lbFactory = LBFactorySingle::newFromConnection( $this->db );
+		$this->repoDomainDb = new RepoDomainDb( LBFactorySingle::newFromConnection( $this->db ), $this->db->getDomainID() );
 	}
 
 	public function testConstructorWithInvalidBatchSize() {
 		$this->expectException( InvalidArgumentException::class );
-		new ChangePruner( $this->lbFactory, 0, 0, 0, false );
+		new ChangePruner( $this->repoDomainDb, 0, 0, 0, false );
 	}
 
 	public function testConstructorWithInvalidKeepSeconds() {
 		$this->expectException( InvalidArgumentException::class );
-		new ChangePruner( $this->lbFactory, 1, -1, 0, false );
+		new ChangePruner( $this->repoDomainDb, 1, -1, 0, false );
 	}
 
 	public function testConstructorWithInvalidGraceSeconds() {
 		$this->expectException( InvalidArgumentException::class );
-		new ChangePruner( $this->lbFactory, 1, 0, -1, false );
+		new ChangePruner( $this->repoDomainDb, 1, 0, -1, false );
 	}
 
 	public function testPrune() {
-		$pruner = new ChangePruner( $this->lbFactory, 1, 1, 1, false );
+		$pruner = new ChangePruner( $this->repoDomainDb, 1, 1, 1, false );
 
 		$this->db->delete( 'wb_changes', '*' );
 

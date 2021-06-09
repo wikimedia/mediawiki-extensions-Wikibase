@@ -5,7 +5,7 @@ namespace Wikibase\Repo;
 use InvalidArgumentException;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\NullMessageReporter;
-use Wikimedia\Rdbms\ILBFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 
 /**
  * Handles pruning wb_changes table, used by pruneChanges maintenance script.
@@ -16,9 +16,9 @@ use Wikimedia\Rdbms\ILBFactory;
 class ChangePruner {
 
 	/**
-	 * @var ILBFactory
+	 * @var RepoDomainDb
 	 */
-	private $lbFactory;
+	private $db;
 
 	/**
 	 * @var int
@@ -46,7 +46,7 @@ class ChangePruner {
 	private $messageReporter;
 
 	/**
-	 * @param ILBFactory $lbFactory
+	 * @param RepoDomainDb $db
 	 * @param int $batchSize
 	 * @param int $keepSeconds
 	 * @param int $graceSeconds
@@ -55,7 +55,7 @@ class ChangePruner {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		ILBFactory $lbFactory,
+		RepoDomainDb $db,
 		$batchSize,
 		$keepSeconds,
 		$graceSeconds,
@@ -73,7 +73,7 @@ class ChangePruner {
 			throw new InvalidArgumentException( '$graceSeconds must be a non-negative integer' );
 		}
 
-		$this->lbFactory = $lbFactory;
+		$this->db = $db;
 		$this->batchSize = $batchSize;
 		$this->keepSeconds = $keepSeconds;
 		$this->graceSeconds = $graceSeconds;
@@ -87,9 +87,7 @@ class ChangePruner {
 	 */
 	public function prune() {
 		while ( true ) {
-			$this->lbFactory->waitForReplication( [
-				'domain' => $this->lbFactory->getLocalDomainID(),
-			] );
+			$this->db->replication()->wait();
 
 			$until = $this->getCutoffTimestamp();
 
@@ -118,7 +116,7 @@ class ChangePruner {
 		$until = time() - $this->keepSeconds;
 
 		if ( !$this->ignoreDispatch ) {
-			$dbr = $this->lbFactory->getMainLB()->getConnection( DB_REPLICA );
+			$dbr = $this->db->connections()->getReadConnection();
 			$row = $dbr->selectRow(
 				[ 'wb_changes_dispatch', 'wb_changes' ],
 				'min(change_time) as timestamp',
@@ -153,7 +151,7 @@ class ChangePruner {
 	 * @return string MediaWiki concatenated string timestamp
 	 */
 	private function limitCutoffTimestamp( $until ) {
-		$dbr = $this->lbFactory->getMainLB()->getConnection( DB_REPLICA );
+		$dbr = $this->db->connections()->getReadConnection();
 		$changeTime = $dbr->selectField(
 			'wb_changes',
 			'change_time',
@@ -176,7 +174,7 @@ class ChangePruner {
 	 * @return int the number of changes deleted.
 	 */
 	private function pruneChanges( $until ) {
-		$dbw = $this->lbFactory->getMainLB()->getConnection( DB_PRIMARY );
+		$dbw = $this->db->connections()->getWriteConnection();
 
 		$dbw->delete(
 			'wb_changes',
