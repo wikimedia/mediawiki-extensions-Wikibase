@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseUpdater;
@@ -21,7 +23,7 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	 *
 	 * @param DatabaseUpdater $updater DatabaseUpdater subclass
 	 */
-	public function onLoadExtensionSchemaUpdates( $updater ) {
+	public function onLoadExtensionSchemaUpdates( $updater ): void {
 		$table = EntityUsageTable::DEFAULT_TABLE_NAME;
 		$db = $updater->getDB();
 
@@ -43,10 +45,8 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 	/**
 	 * Static wrapper for EntityUsageTableBuilder::fillUsageTable
-	 *
-	 * @param DatabaseUpdater $dbUpdater
 	 */
-	public static function fillUsageTable( DatabaseUpdater $dbUpdater ) {
+	public static function fillUsageTable( DatabaseUpdater $dbUpdater ): void {
 		$idParser = WikibaseClient::getEntityIdParser();
 
 		$primer = new EntityUsageTableBuilder(
@@ -66,11 +66,11 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$primer->fillUsageTable();
 	}
 
-	private function getUpdateScriptPath( $name, $type ) {
+	private function getUpdateScriptPath( string $name, string $type ): string {
 		return $this->getScriptPath( 'archives/' . $name, $type );
 	}
 
-	private function getScriptPath( $name, $type ) {
+	private function getScriptPath( string $name, string $type ): string {
 		$types = [
 			$type,
 			'mysql'

@@ -1,10 +1,11 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Client\Tests\Integration\Usage\Sql;
 
 use MediaWikiIntegrationTestCase;
 use Onoi\MessageReporter\MessageReporter;
-use PHPUnit\Framework\MockObject\Matcher\Invocation;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -31,7 +32,7 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 		parent::setUp();
 	}
 
-	public function testFillUsageTable() {
+	public function testFillUsageTable(): void {
 		$this->putWikidataItemPageProps( [
 			11 => 'Q11',
 			22 => 'Q22',
@@ -64,7 +65,7 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	private function putWikidataItemPageProps( array $entries ) {
+	private function putWikidataItemPageProps( array $entries ): void {
 		$db = wfGetDB( DB_PRIMARY );
 
 		$db->startAtomic( __METHOD__ );
@@ -80,7 +81,10 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 		$db->endAtomic( __METHOD__ );
 	}
 
-	private function fetchAllUsageStrings() {
+	/**
+	 * @return string[]
+	 */
+	private function fetchAllUsageStrings(): array {
 		$db = wfGetDB( DB_PRIMARY );
 
 		$res = $db->select( EntityUsageTable::DEFAULT_TABLE_NAME, '*', '', __METHOD__ );
@@ -95,12 +99,7 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 		return $usages;
 	}
 
-	/**
-	 * @param Invocation $matcher
-	 *
-	 * @return ExceptionHandler
-	 */
-	private function getExceptionHandler( $matcher ) {
+	private function getExceptionHandler( $matcher ): ExceptionHandler {
 		$mock = $this->createMock( ExceptionHandler::class );
 		$mock->expects( $matcher )
 			->method( 'handleException' );
@@ -108,12 +107,7 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 		return $mock;
 	}
 
-	/**
-	 * @param Invocation $matcher
-	 *
-	 * @return MessageReporter
-	 */
-	private function getMessageReporter( $matcher ) {
+	private function getMessageReporter( $matcher ): MessageReporter {
 		$mock = $this->createMock( MessageReporter::class );
 		$mock->expects( $matcher )
 			->method( 'reportMessage' );

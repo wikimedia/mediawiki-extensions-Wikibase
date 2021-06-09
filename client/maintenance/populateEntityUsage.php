@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase;
 
 use LoggedUpdateMaintenance;
@@ -36,10 +38,8 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 
 	/**
 	 * @see LoggedUpdateMaintenance::doDBUpdates
-	 *
-	 * @return boolean
 	 */
-	public function doDBUpdates() {
+	public function doDBUpdates(): bool {
 		if ( !WikibaseSettings::isClientEnabled() ) {
 			$this->output( "You need to have WikibaseClient enabled in order to use this maintenance script!\n\n" );
 			exit;
@@ -64,19 +64,15 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 
 	/**
 	 * @see LoggedUpdateMaintenance::getUpdateKey
-	 *
-	 * @return string
 	 */
-	public function getUpdateKey() {
+	public function getUpdateKey(): string {
 		return 'Wikibase\PopulateEntityUsage';
 	}
 
 	/**
-	 * Outputs a message vis the output() method.
-	 *
-	 * @param string $msg
+	 * Outputs a message via the output() method.
 	 */
-	public function report( $msg ) {
+	public function report( string $msg ): void {
 		$this->output( "$msg\n" );
 	}
 
