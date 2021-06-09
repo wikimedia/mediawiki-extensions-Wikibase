@@ -6,9 +6,31 @@
 		"en": {
 			"language": "en",
 			"value": "Instance of"
+		},
+		"de": {
+			"language": "de",
+			"value": "ist ein(e)"
 		}
 	},
-	"descriptions": {},
-	"aliases": {},
+	"descriptions": {
+		"en": {
+			"language": "en",
+			"value": "that class of which this subject is a particular example and member. (Subject typically an individual member with Proper Name label.) Different from P279 (subclass of)"
+		},
+		"de": {
+			"language": "de",
+			"value": "Ausprägung oder Exemplar einer Sache, Mitglied einer Klasse. Zu unterscheiden von P279 (Unterklasse von)."
+		}
+	},
+	"aliases": {
+		"en": [ {
+			"language": "en",
+			"value": "is a"
+		} ],
+		"de": [ {
+			"language": "de",
+			"value": "war ein(e)"
+		} ]
+	},
 	"claims": {}
 }
