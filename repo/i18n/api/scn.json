@@ -97,7 +97,6 @@
 	"apihelp-wbmergeitems-param-summary": "Lu riassuntu dû canciamentu.\nCi veni misu davanti nu cummentu giniratu autumaticamenti. Lu lìmiti di lunghizza di lu cummentu autumàticu nzèmmula ô riassuntu è di 260 caràttiri. Accura chi zocchegghiè chi passa stu lìmiti veni tagghiatu.",
 	"apihelp-wbmergeitems-param-bot": "Marca stu canciamentu comu bot. Stu flag di l'URL veni rispittatu sulu si l'utenti apparteni ô gruppu \"bot\".",
 	"apihelp-wbmergeitems-example-1": "Junci li dati di Q42 nta Q222",
-	"apihelp-wbmergeitems-example-2": "Junci li dati di Q555 nta Q3",
 	"apihelp-wbmergeitems-example-3": "Junci li dati di Q66 nta Q99 gnurannu cunflitti evintuali nta l'etichetti",
 	"apihelp-wbmergeitems-example-4": "Junci li dati di Q66 nta Q99 gnurannu cunflitti evintuali nta l'etichetti e ntê discrizzioni",
 	"apihelp-wbparsevalue-description": "Analizza sintatticamenti li valuri adupirannu nu ValueParser.",

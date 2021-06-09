@@ -112,7 +112,6 @@
 	"apihelp-wbmergeitems-param-summary": "O resumo da edição.\nSerá antecedido por um comentário gerado automaticamente. O tamanho limite do comentário automático mais o resumo é 260 caracteres. Tudo o que exceder este limite será cortado.",
 	"apihelp-wbmergeitems-param-bot": "Marcar esta edição como uma edição por robô. Esta etiqueta URL só será respeitada se o utilizador pertencer ao grupo \"robôs\".",
 	"apihelp-wbmergeitems-example-1": "Funde os dados de <samp>Q42</samp> nos de <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "Funde os dados de <samp>Q555</samp> nos de <samp>Q3</samp>",
 	"apihelp-wbmergeitems-example-3": "Funde os dados de <samp>Q66</samp> nos de <samp>Q99</samp>, ignorando qualquer conflito nas hiperligações intersites",
 	"apihelp-wbmergeitems-example-4": "Funde os dados de <samp>Q66</samp> nos de <samp>Q99</samp>, ignorando qualquer conflito nas hiperligações intersites e nas descrições",
 	"apihelp-wbparsevalue-description": "Analisa os valores usando um analisador de valores (<code>ValueParser</code>)",

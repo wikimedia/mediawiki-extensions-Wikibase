@@ -104,7 +104,6 @@
 	"apihelp-wbmergeitems-param-summary": "Sommario pe' l'edizione.\nSarrà pre'appiso 'a nu cummento automatecamente criato. 'O lemmeto 'e luongo 'e n'autocommento nziem'a sommario fosse 260 carattere. Pe' piacere stateve accuorte ca tutto pe' coppa fosse nu lemmeto 'e passa e ferma.",
 	"apihelp-wbmergeitems-param-bot": "Nzegna stu cagnamiento comm'a nu bot. Sta bannera 'URL sarrà surtanto rispettata si l'utente appartene a 'o gruppo \"bot\".",
 	"apihelp-wbmergeitems-example-1": "Aunisce date 'a Q42 int'o Q222",
-	"apihelp-wbmergeitems-example-2": "Aunisce date 'a Q555 int'a Q3",
 	"apihelp-wbmergeitems-example-3": "Aunisce data 'a Q66 int'a Q99 gnuranno ogne cunflitto 'e sitelink",
 	"apihelp-wbmergeitems-example-4": "Aunisce date 'a Q66 int'a Q99 gnuranno ogne etichetta 'e cunflitto e sitelink",
 	"apihelp-wbparsevalue-description": "Scagna valure ausanno 'o ValueParser",

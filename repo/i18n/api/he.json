@@ -112,7 +112,6 @@
 	"apihelp-wbmergeitems-param-summary": "תקציר העריכה.\nלתחילתו תצורף הערה שמיוצרת אוטומטית. מגבלת האורך של ההערה האוטומטית יחד עם תקציר העריכה היא 260 תווים. יש לשים לב לכך שכל דבר מעבר לכך ייחתך.",
 	"apihelp-wbmergeitems-param-bot": "סימון העריכה בתור בוט. דגל ה־URL הזה יכובד רק אם המשתמש שייך לקבוצה \"bot\".",
 	"apihelp-wbmergeitems-example-1": "מיזוג נתונים מ־<samp>Q42</samp> ל־<samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "מיזוג נתונים מ־<samp>Q555</samp> ל־<samp>Q3</samp>.",
 	"apihelp-wbmergeitems-example-3": "מיזוג נתונים מ־<samp>Q66</samp> ל־<samp>Q99</samp> תוך כדי התעלמות מכל קישורי האתר המתנגשים",
 	"apihelp-wbmergeitems-example-4": "מיזוג נתונים מ־<samp>Q66</samp> ל־<samp>Q99</samp> תוך כדי התעלמות מכל קישורי האתר והתיאורים המתנגשים",
 	"apihelp-wbparsevalue-description": "פענוח ערכים באמצעות <code>ValueParser</code>.",

@@ -118,7 +118,6 @@
 	"apihelp-wbmergeitems-param-summary": "Değişiklik özeti.\nOtomatik olarak oluşturulan bir yorumun başına gelecektir. Özetle birlikte otomatik kaydın uzunluğu 260 karakterdir. Sınırın üstündeki her şeyin silineceğini unutmayın.",
 	"apihelp-wbmergeitems-param-bot": "Bu düzenlemeyi bot olarak işaretleyin. Bu URL işaretine yalnızca kullanıcı \"bot\" grubuna aitse saygı gösterilir.",
 	"apihelp-wbmergeitems-example-1": "<samp>Q42</samp> ile <samp>Q222</samp> arasındaki verileri birleştirir",
-	"apihelp-wbmergeitems-example-2": "<samp>Q555</samp> ile <samp>Q3</samp> arasındaki verileri birleştirir",
 	"apihelp-wbmergeitems-example-3": "Çakışan site bağlantılarını yok sayarak <samp>Q66</samp> ile <samp>Q99</samp> verilerini birleştirir",
 	"apihelp-wbmergeitems-example-4": "Çakışan site bağlantılarını ve açıklamaları yok sayarak <samp>Q66</samp> ile <samp>Q99</samp> verilerini birleştirir",
 	"apihelp-wbparsevalue-description": "Değerleri bir <code>ValueParser</code> kullanarak ayrıştırır.",

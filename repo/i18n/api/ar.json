@@ -120,7 +120,6 @@
 	"apihelp-wbmergeitems-param-summary": "ملخص التعديل.\nستتم إضافته بعد تعليق مولد تلقائيا. حد الطول للتعليق التلقائي مع الملخص هو 260 حرف. انتبه إلى أن كل شيء فوق هذا الحد ستتم إزالته.",
 	"apihelp-wbmergeitems-param-bot": "علم على هذا التعديل كبوت. علم المسار هذا سيتم احترامه فقط إذا ما كان المستخدم ينتمي للمجموعة \"bot\".",
 	"apihelp-wbmergeitems-example-1": "يدمج البيانات من <samp>Q42</samp> إلى <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "يدمج البيانات من <samp>Q555</samp> إلى <samp>Q3</samp>",
 	"apihelp-wbmergeitems-example-3": "يدمج البيانات من <samp>Q66</samp> إلى <samp>Q99</samp> متجاهلا أي وصلات موقع متعارضة",
 	"apihelp-wbmergeitems-example-4": "يدمج البيانات من <samp>Q66</samp> إلى <samp>Q99</samp> متجاهلا أي وصلات موقع ووصوفات متعارضة",
 	"apihelp-wbparsevalue-description": "يحلل القيم مستخدما <code>ValueParser</code>.",

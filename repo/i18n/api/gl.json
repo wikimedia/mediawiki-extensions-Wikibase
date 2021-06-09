@@ -113,7 +113,6 @@
 	"apihelp-wbmergeitems-param-summary": "Resumo da edición.\nEngadirase un comentario xenerado automaticamente. O límite de lonxitude do autocomentario xunto co seu resumo é de 260 caracteres. Teña en conta que todo o que exceda dese límite non será tido en conta.",
 	"apihelp-wbmergeitems-param-bot": "Marcar esta edición como bot. Esta etiqueta de URL só será respectada se o usuario pertence ó grupo \"bot\".",
 	"apihelp-wbmergeitems-example-1": "Fusiona datos desde <samp>Q42</samp> en <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "Fusiona datos desde <samp>Q555</samp> en <samp>Q3</samp>",
 	"apihelp-wbmergeitems-example-3": "Fusiona datos desde <samp>Q66</samp> en <samp>Q99</samp> ignorando calquera ligazón de sitio conflitiva",
 	"apihelp-wbmergeitems-example-4": "Fusiona datos desde <samp>Q66</samp> en <samp>Q99</samp> ignorando calquera ligazón de sitio ou descricións conflitivas",
 	"apihelp-wbparsevalue-description": "Analiza valores usando un <code>ValueParser</code> (analizador de valores).",

@@ -62,7 +62,6 @@
 	"apihelp-wbmergeitems-param-fromid": "L'ID da cui unire",
 	"apihelp-wbmergeitems-param-toid": "L'ID dove unire",
 	"apihelp-wbmergeitems-example-1": "Unisce dati da <samp>Q42</samp> in <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "Unisce dati da <samp>Q555</samp> in <samp>Q3</samp>",
 	"apihelp-wbparsevalue-param-parser": "ID del <code>ValueParser</code> da utilizzare. <span class=\"apihelp-deprecated\">Deprecato</span>. Usa invece il parametro <var>datatype</var>.",
 	"apihelp-wbparsevalue-param-values": "I valori da analizzare",
 	"apihelp-wbremoveclaims-description": "Rimuove asserzioni Wikibase.",

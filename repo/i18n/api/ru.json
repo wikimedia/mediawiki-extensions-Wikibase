@@ -45,7 +45,6 @@
 	"apihelp-wbmergeitems-param-summary": "Описание изменения.\nБудет добавлено к началу автоматически сгенерированного комментария. Лимит на длину автокомментария с описанием правки — 260 символов. Учтите, что всё свыше этого лимита будет опущено.",
 	"apihelp-wbmergeitems-param-bot": "Отметить правку как правку бота. Этот флаг URL-адреса будет считаться действительным только в случае, если пользователь принадлежит к группе «бот».",
 	"apihelp-wbmergeitems-example-1": "Объединяет данные из <samp>Q42</samp> в <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "Объединяет данные из <samp>Q555</samp> в <samp>Q3</samp>",
 	"apihelp-wbmergeitems-example-3": "Объединяет данные из <samp>Q66</samp> в <samp>Q99</samp>, игнорируя любые конфликтующие ссылки",
 	"apihelp-wbparsevalue-description": "Анализирует значения, используя <code>ValueParser</code>.",
 	"apihelp-wbparsevalue-summary": "Анализирует значения, используя <code>ValueParser</code>.",

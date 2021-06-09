@@ -95,7 +95,6 @@
 	"apihelp-wbmergeitems-param-summary": "Muudatuse resümee.\nSelle ette lisatakse automaatselt koostatud kommentaar. Automaatne kommentaar ja resümee võivad kokku olla pikkusega kuni 260 märki. Pane tähele, et resümeest jääb välja kõik, mis seda määra ületab.",
 	"apihelp-wbmergeitems-param-bot": "Märgi robotimuudatuseks.\nSelle URL-sildiga arvestatakse vaid juhul, kui kasutaja kuulub robotite rühma.",
 	"apihelp-wbmergeitems-example-1": "Liida üksuse <samp>Q42</samp> andmed üksusega <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "Liida üksuse <samp>Q555</samp> andmed üksusega <samp>Q3</samp>",
 	"apihelp-wbmergeitems-example-3": "Liida üksuse <samp>Q66</samp> andmed üksusega <samp>Q99</samp> ja eira kõiki võrgukohalinkide konflikte",
 	"apihelp-wbmergeitems-example-4": "Liida üksuse <samp>Q66</samp> andmed üksusega <samp>Q99</samp> ning eira kõiki võrgukohalinkide ja kirjelduste konflikte",
 	"apihelp-wbparsevalue-description": "Parsib väärtused komponendi <code>ValueParser</code> abil.",

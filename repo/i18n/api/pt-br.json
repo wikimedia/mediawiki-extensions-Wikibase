@@ -114,7 +114,6 @@
 	"apihelp-wbmergeitems-param-summary": "Resumo para a edição. \nSerá antecedido por um comentário gerado automaticamente. O limite de comprimento do comentário automático juntamente com o sumário é de 260 caracteres. Esteja ciente de que tudo que exceder este limite será cortado.",
 	"apihelp-wbmergeitems-param-bot": "Marcar esta edição como sendo feita por um robô. Esta etiqueta URL só será respeitado se o usuário pertencer ao grupo \"robô\".",
 	"apihelp-wbmergeitems-example-1": "Mesclar dados de <samp>Q42</samp> em <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "Mesclar dados de <samp>Q555</samp> em <samp>Q3</samp>",
 	"apihelp-wbmergeitems-example-3": "Mesclar dados de <samp>Q66</samp> em <samp>Q99</samp> ignorando qualquer conflito de sitelinks",
 	"apihelp-wbmergeitems-example-4": "Mesclar dados de <samp>Q66</samp> em <samp>Q99</samp> ignorando qualquer conflito de sitelinks e descrições",
 	"apihelp-wbparsevalue-description": "Analisar valores usando um <code>ValueParser</code>.",

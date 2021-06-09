@@ -116,7 +116,6 @@
 	"apihelp-wbmergeitems-param-summary": "Ringkasan untuk penyuntingan.\nAkan dilampirkan dengan komentar yang dihasilkan secara otomatis. Batas panjang dari komentar otomatis dengan ringkasannya adalah 260 huruf. Perhatikan bahwa pemotongan akan dilakukan jika sudah melebihi batas.",
 	"apihelp-wbmergeitems-param-bot": "Tandai suntingan ini sebagai bot. Panji Lokator Sumber Seragam (URL) hanya akan dipercaya jika pengguna masuk ke kelompok \"bot\".",
 	"apihelp-wbmergeitems-example-1": "Menggabungkan data dari Q42 ke dalam Q222",
-	"apihelp-wbmergeitems-example-2": "Gabungkan data dari Q555 ke Q3",
 	"apihelp-wbmergeitems-example-3": "Menggabungkan data dari Q66 ke dalam Q99 dan abaikan semua pranala interwiki yang bertentangan",
 	"apihelp-wbmergeitems-example-4": "Menggabungkan data dari Q66 ke dalam Q99 dan abaikan semua pranala interwiki dan deskripsi yang bertentangan",
 	"apihelp-wbparsevalue-description": "Menguraikan nilai dengan menggunakan sebuah ValueParser.",

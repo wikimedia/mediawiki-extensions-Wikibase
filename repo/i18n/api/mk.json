@@ -81,7 +81,6 @@
 	"apihelp-wbmergeitems-param-summary": "Краток опис на уредувањето.\nЌе му биде приложена автоматски создадена прибелешка. Прибелешката и краткиот опис заедно не треба да надминуваат 260 знаци. Имајте на ум дека сите знаци над таа граница ќе бидат отстранети.",
 	"apihelp-wbmergeitems-param-bot": "Означи го уредувањево како бот. Оваа URL-ознака ќе се почитува само ако корисникот припаѓа на групата „бот“.",
 	"apihelp-wbmergeitems-example-1": "Ги спојува податоците од <samp>Q42</samp> во <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "Ги спојува податоците од <samp>Q555</samp> во <samp>Q3</samp>",
 	"apihelp-wbmergeitems-example-3": "Ги спојува податоците од <samp>Q66</samp> во <samp>Q99</samp>, занемарувајќи ги можните спротиставени викиврски",
 	"apihelp-wbmergeitems-example-4": "Ги спојува податоците од <samp>Q66</samp> во <samp>Q99</samp>, занемарувајќи ги можните спротиставени викиврски",
 	"apihelp-wbparsevalue-param-values": "Вредностите за раслченување",

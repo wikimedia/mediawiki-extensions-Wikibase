@@ -112,7 +112,6 @@
 	"apihelp-wbmergeitems-param-summary": "Resume de la edición.\nPrefixaráse con un comentariu xeneráu automáticamente. La llende de llonxitú del comentariu automáticu xunto col resume ye de 260 caráuteres. Ten en cuenta que tolo que pase d'esa llende va cortase.",
 	"apihelp-wbmergeitems-param-bot": "Marcar esta edición como bot. Esta marca d'URL sólo se respetará si l'usuariu pertenez al grupu \"bot\".",
 	"apihelp-wbmergeitems-example-1": "Fusiona datos dende <samp>Q42</samp> en <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "Fusiona datos dende <samp>Q555</samp> en <samp>Q3</samp>",
 	"apihelp-wbmergeitems-example-3": "Fusiona datos dende <samp>Q66</samp> en <samp>Q99</samp> inorando cualquier enllaz de sitiu conflictivu",
 	"apihelp-wbmergeitems-example-4": "Fusiona datos dende <samp>Q66</samp> en <samp>Q99</samp> inorando cualquier enllaz de sitiu o descripción conflictiva",
 	"apihelp-wbparsevalue-description": "Analiza valores usando un <code>ValueParser</code>.",

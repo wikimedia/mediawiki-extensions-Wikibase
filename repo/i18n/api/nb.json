@@ -112,7 +112,6 @@
 	"apihelp-wbmergeitems-param-summary": "Sammendrag for redigeringen.\nVil legges til en automatisk generert kommentar. Lengdebegrensningen for den automatiske kommentaren sammen med dette sammendraget er 260 tegn. Vær oppmerksom på at alt over den grensa vil kuttes vekk.",
 	"apihelp-wbmergeitems-param-bot": "Merk denne redigeringen som en botredigering. Dette URL-flagget vil bare respekteres om brukeren tilhører brukergruppa «bot».",
 	"apihelp-wbmergeitems-example-1": "Slår sammen data fra <samp>Q42</samp> til <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "Slår sammen data fra <samp>Q555</samp> til <samp>Q3</samp>",
 	"apihelp-wbmergeitems-example-3": "Slår sammen data fra <samp>Q66</samp> til <samp>Q99</samp> og ignorerer konflikterende sidelenker",
 	"apihelp-wbmergeitems-example-4": "Slår sammen data fra <samp>Q66</samp> til <samp>Q99</samp> og ignorerer konflikterende sidelenker og beskrivelser",
 	"apihelp-wbparsevalue-description": "Parser verdier med en <code>ValueParser</code>.",

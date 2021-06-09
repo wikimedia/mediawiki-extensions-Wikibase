@@ -119,7 +119,6 @@
 	"apihelp-wbmergeitems-param-summary": "Sammanfattning av redigeringen.\nKommer att föregås av en automatiskt genererad kommentar. Längden på autokommentaren tillsammans med sammanfattningen är 260 tecken. Var medveten om att allting utöver den gränsen kommer att kapas.",
 	"apihelp-wbmergeitems-param-bot": "Markera denna redigering som en bot. Denna webbadressflagga kommer bara att respekteras om användaren tillhör gruppen \"bot\".",
 	"apihelp-wbmergeitems-example-1": "Sammanfogar data från <samp>Q42</samp> in i <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "Sammanfogar data från <samp>Q555</samp> in i <samp>Q3</samp>",
 	"apihelp-wbmergeitems-example-3": "Sammanfoga data från <samp>Q66</samp> till <samp>Q99</samp> och ignorera alla motstridiga webbplatslänkar",
 	"apihelp-wbmergeitems-example-4": "Sammanfoga data från <samp>Q66</samp> till <samp>Q99</samp> och ignorera alla motstridiga webbplatslänkar och beskrivningar",
 	"apihelp-wbparsevalue-description": "Tolkar värden med en <code>ValueParser</code>.",

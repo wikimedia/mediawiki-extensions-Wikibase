@@ -127,7 +127,6 @@
 	"apihelp-wbmergeitems-param-summary": "Résumé de la modification.\nSera préfixé par un commentaire généré automatiquement. La taille limite du commentaire automatique ajouté au résumé est de 260 caractères. Notez bien que tout ce qui est au-delà de cette limite sera tronqué.",
 	"apihelp-wbmergeitems-param-bot": "Marquer cette modification comme faite par robot. Cette marque d’URL sera respectée uniquement si l’utilisateur appartient au groupe « {{int:group-bot}} ».",
 	"apihelp-wbmergeitems-example-1": "Fusionne les données de <samp>Q42</samp> dans <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "Fusionne les données de <samp>Q555</samp> dans <samp>Q3</samp>",
 	"apihelp-wbmergeitems-example-3": "Fusionne les données de <samp>Q66</samp> dans <samp>Q99</samp> en ignorant les conflits de liens de site",
 	"apihelp-wbmergeitems-example-4": "Fusionne les données de <samp>Q66</samp> dans <samp>Q99</samp> en ignorant les conflits de liens de site et de description",
 	"apihelp-wbparsevalue-description": "Analyse les valeurs en utilisant un <code>ValueParser</code>.",

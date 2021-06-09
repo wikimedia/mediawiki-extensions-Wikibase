@@ -106,7 +106,6 @@
 	"apihelp-wbmergeitems-param-summary": "Samenvatting van de bewerking.\nZal worden voorafgegaan door automatisch gegenereerd commentaar. De maximale lengte van het automatisch gegenereerde commentaar plus de samenvatting is 260 tekens. Wees u ervan bewust dat alles boven die limiet zal worden afgeknipt.",
 	"apihelp-wbmergeitems-param-bot": "Deze bewerking als botbewerking markeren. Deze URL-markering zal alleen in acht worden genomen indien de gebruiker tot de groep \"bot\" behoort.",
 	"apihelp-wbmergeitems-example-1": "Voegt gegevens van <samp>Q42</samp> samen naar <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "Gegevens van <samp>Q555</samp> samenvoegen naar <samp>Q3</samp>",
 	"apihelp-wbmergeitems-example-3": "Voegt gegevens van <samp>Q66</samp> samen in <samp>Q99</samp> waarbij conflicterende sitekoppelingen worden genegeerd",
 	"apihelp-wbmergeitems-example-4": "Voegt gegevens van <samp>Q66</samp> samen in <samp>Q99</samp> waarbij conflicterende sitekoppelingen en beschrijvingen worden genegeerd",
 	"apihelp-wbparsevalue-description": "Verwerkt waarden met een <code>ValueParser</code> (waardeverwerker).",

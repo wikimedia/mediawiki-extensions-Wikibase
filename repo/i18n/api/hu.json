@@ -48,7 +48,6 @@
 	"apihelp-wbmergeitems-param-summary": "A szerkesztési összefoglaló.\nElé kerül egy automatikusan generált megjegyzés. Az automatikus megjegyzés és az összefoglaló együttes hossza legfeljebb 260 bájt (az ékezetes karakterek két bájtot foglalnak el). A limitet túllépő összefoglaló vége le lesz vágva.",
 	"apihelp-wbmergeitems-param-bot": "A szerkesztés botszerkesztésnek jelölése. Csak akkor van hatása, ha a felhasználó tagja a „{{int:group-bot}}” csoportnak.",
 	"apihelp-wbmergeitems-example-1": "A <samp>Q42</samp> elem beolvasztása a <samp>Q222</samp> elembe",
-	"apihelp-wbmergeitems-example-2": "A <samp>Q555</samp> elem beolvasztása a <samp>Q3</samp> elembe",
 	"apihelp-wbparsevalue-param-parser": "A használandó <code>ValueParser</code> azonosítója. <span class=\"apihelp-deprecated\">Elavult.</span> Használd a <var>datatype</var> paraméter helyette.",
 	"apihelp-wbparsevalue-param-datatype": "A feldolgozandó érték adattípusa. Meghatározza a használandó feldolgozót.",
 	"apihelp-wbparsevalue-param-values": "A feldolgozandó adatok",

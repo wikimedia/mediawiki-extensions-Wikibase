@@ -116,7 +116,6 @@
 	"apihelp-wbmergeitems-param-summary": "編輯的摘要。\n會自動產生註釋來附加在開頭。摘要與自動註釋的共同長度限制是 260 個字元，請注意超出限制的任何內容將會被去除。",
 	"apihelp-wbmergeitems-param-bot": "標註此為機器人編輯。該 URL 標記僅會在使用者隸屬「bot」群組時採用。",
 	"apihelp-wbmergeitems-example-1": "將資料從 <samp>Q42</samp> 合併至 <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "將資料從 <samp>Q555</samp> 合併至 <samp>Q3</samp>",
 	"apihelp-wbmergeitems-example-3": "將資料從 <samp>Q66</samp> 合併至 <samp>Q99</samp>，並忽略任何衝突的網站連結",
 	"apihelp-wbmergeitems-example-4": "將資料從 <samp>Q66</samp> 合併至 <samp>Q99</samp>，並忽略任何衝突的網站連結與描述",
 	"apihelp-wbparsevalue-description": "使用 <code>ValueParser</code> 的解析值。",

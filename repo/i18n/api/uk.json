@@ -118,7 +118,6 @@
 	"apihelp-wbmergeitems-param-summary": "Опис редагування.\nАвтоматично згенерований коментар додасться на початку. Обмеження на довжину автоматичного коментаря й опису разом складає 260 символів. Майте на увазі, що все понад цей ліміт буде обрізано.",
 	"apihelp-wbmergeitems-param-bot": "Позначити це як редагування бота. Ця позначка URL буде дійсною, лише якщо користувач належить до групи «бот».",
 	"apihelp-wbmergeitems-example-1": "Об'єднує дані з <samp>Q42</samp> у <samp>Q222</samp>",
-	"apihelp-wbmergeitems-example-2": "Об'єднує дані з <samp>Q555</samp> у <samp>Q3</samp>",
 	"apihelp-wbmergeitems-example-3": "Об'єднує дані з <samp>Q66</samp> у <samp>Q99</samp>, ігноруючи будь-які конфліктні посилання на сайти",
 	"apihelp-wbmergeitems-example-4": "Об'єднує дані з  <samp>Q66</samp> у <samp>Q99</samp>, ігноруючи будь-які конфліктні посилання на сайти та описи",
 	"apihelp-wbparsevalue-description": "Аналізує значення, використовуючи <code>ValueParser</code>.",
