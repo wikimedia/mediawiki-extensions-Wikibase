@@ -1,6 +1,7 @@
 <?php
 
 declare( strict_types = 1 );
+
 namespace Wikibase\Repo\ChangeModification;
 
 use BatchRowIterator;
@@ -9,8 +10,9 @@ use MediaWiki\MediaWikiServices;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\Assert;
-use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Job for fetching and dispatching RepoRevisionIdentifiers marked for deletion for client databases
@@ -28,8 +30,10 @@ class DispatchChangeDeletionNotificationJob extends DispatchChangeModificationNo
 	/** @var int */
 	private $pageId;
 
-	/** @var ILBFactory */
-	private $loadBalancerFactory;
+	/**
+	 * @var RepoDomainDb
+	 */
+	private $db;
 
 	public function __construct( Title $title, array $params = [] ) {
 		parent::__construct( 'DispatchChangeDeletionNotification', $title, $params );
@@ -43,17 +47,15 @@ class DispatchChangeDeletionNotificationJob extends DispatchChangeModificationNo
 		$this->archivedRevisionCount = $params['archivedRevisionCount'];
 	}
 
-	protected function initFromGlobalState( MediaWikiServices $mwServices ) {
+	protected function initFromGlobalState( MediaWikiServices $mwServices ): void {
 		parent::initFromGlobalState( $mwServices );
 
 		$this->batchSize = $mwServices->getMainConfig()->get( 'UpdateRowsPerQuery' );
-		$this->loadBalancerFactory = $mwServices->getDBLoadBalancerFactory();
+		$this->db = WikibaseRepo::getRepoDomainDbFactory( $mwServices )->newRepoDb();
 	}
 
-	private function getArchiveRows( int &$processed, int &$staleRecords, string $entityIdSerialization ) {
-		$dbr = $this->loadBalancerFactory
-			->getMainLB()
-			->getConnectionRef( DB_REPLICA );
+	private function getArchiveRows( int &$processed, int &$staleRecords, string $entityIdSerialization ): array {
+		$dbr = $this->db->connections()->getReadConnectionRef();
 
 		$iterator = new BatchRowIterator(
 			$dbr,
