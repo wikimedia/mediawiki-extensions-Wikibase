@@ -320,6 +320,14 @@ return [
 	 */
 	'idGeneratorSeparateDbConnection' => false,
 
+	/**
+	 * Number to increase for ping limiter in case creating an entity errors in API
+	 *
+	 * @var int
+	 * @see https://phabricator.wikimedia.org/T284538
+	 */
+	'idGeneratorInErrorPingLimiter' => 0,
+
 	'entityTypesWithoutRdfOutput' => [],
 
 	'entitySources' => [],
