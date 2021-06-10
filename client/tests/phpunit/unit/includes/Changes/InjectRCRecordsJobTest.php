@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Client\Tests\Integration\Changes;
+namespace Wikibase\Client\Tests\Unit\Changes;
 
-use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use RecentChange;
 use Title;
 use TitleFactory;
@@ -31,12 +31,10 @@ use Wikimedia\TestingAccessWrapper;
  * @group WikibaseClient
  * @group WikibaseChange
  *
- * @group Database
- *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
+class InjectRCRecordsJobTest extends TestCase {
 
 	/**
 	 * @return RecentChangeFactory|MockObject
