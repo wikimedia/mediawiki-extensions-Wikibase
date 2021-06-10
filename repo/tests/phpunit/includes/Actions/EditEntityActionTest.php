@@ -692,7 +692,7 @@ class EditEntityActionTest extends ActionTestCase {
 			],
 			true, // post
 			null, // user
-			'/token_suffix_mismatch/', // htmlPattern: should contain error
+			'/session_fail_preview/', // htmlPattern: should contain error
 		];
 
 		// -- incomplete form -----------------------------------
