@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Repo\Store\Sql;
 
 use DatabaseUpdater;
@@ -109,11 +111,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		}
 	}
 
-	/**
-	 * @param DatabaseUpdater $updater
-	 * @param string $type
-	 */
-	private function addChangesTable( DatabaseUpdater $updater, $type ) {
+	private function addChangesTable( DatabaseUpdater $updater, string $type ): void {
 		$updater->addExtensionTable(
 			'wb_changes',
 			$this->getScriptPath( 'wb_changes', $type )
@@ -292,11 +290,8 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 	/**
 	 * Static wrapper for EntityUsageTableBuilder::fillUsageTable
-	 *
-	 * @param DatabaseUpdater $dbUpdater
-	 * @param string $table
 	 */
-	public static function fillSubscriptionTable( DatabaseUpdater $dbUpdater, $table ) {
+	public static function fillSubscriptionTable( DatabaseUpdater $dbUpdater, string $table ): void {
 		$primer = new ChangesSubscriptionTableBuilder(
 			// would be nice to pass in $dbUpdater->getDB().
 			MediaWikiServices::getInstance()->getDBLoadBalancer(),

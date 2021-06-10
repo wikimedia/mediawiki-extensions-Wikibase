@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Store\Sql;
 
 use InvalidArgumentException;
@@ -79,7 +81,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 * @return (stdClass|bool)[] Array mapping entity ID serializations to either objects or false if an entity
 	 *  could not be found.
 	 */
-	public function loadRevisionInformation( array $entityIds, $mode ) {
+	public function loadRevisionInformation( array $entityIds, $mode ): array {
 		$rows = [];
 
 		$this->assertCanHandleEntityIds( $entityIds );
@@ -163,7 +165,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 * @return (int|bool)[] Array mapping entity ID serializations to revision IDs
 	 * or false if an entity could not be found (including if the page is a redirect).
 	 */
-	public function loadLatestRevisionIds( array $entityIds, $mode ) {
+	public function loadLatestRevisionIds( array $entityIds, $mode ): array {
 		$revisionIds = [];
 
 		$this->assertCanHandleEntityIds( $entityIds );
@@ -200,13 +202,13 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 *
 	 * @throws InvalidArgumentException When some of $entityIds cannot be handled by this lookup
 	 */
-	private function assertCanHandleEntityIds( array $entityIds ) {
+	private function assertCanHandleEntityIds( array $entityIds ): void {
 		foreach ( $entityIds as $entityId ) {
 			$this->assertCanHandleEntityId( $entityId );
 		}
 	}
 
-	private function assertCanHandleEntityId( EntityId $entityId ) {
+	private function assertCanHandleEntityId( EntityId $entityId ): void {
 		if ( !in_array( $entityId->getEntityType(), $this->entitySource->getEntityTypes() ) ) {
 			throw new InvalidArgumentException(
 				'Could not load data from the database of entity source: ' .
@@ -220,7 +222,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 *
 	 * @return string[]
 	 */
-	private function selectFields() {
+	private function selectFields(): array {
 		 // XXX: This could just call RevisionStore::getQueryInfo and
 		//  use the list of fields from there.
 		return [
@@ -241,7 +243,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 * @throws DBQueryError If the query fails.
 	 * @return stdClass|bool a raw database row object, or false if no such entity revision exists.
 	 */
-	private function selectRevisionInformationById( EntityId $entityId, $revisionId, $db ) {
+	private function selectRevisionInformationById( EntityId $entityId, int $revisionId, IDatabase $db ) {
 		$rows = $this->pageTableEntityQuery->selectRows(
 			$this->selectFields(),
 			[ 'revision' => [ 'INNER JOIN', [ 'rev_page=page_id', 'rev_id' => $revisionId ] ] ],
@@ -263,7 +265,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 * @return (stdClass|false)[] Array mapping entity ID serializations to either objects or false if an entity
 	 *  could not be found.
 	 */
-	private function selectRevisionInformationMultiple( array $entityIds, IDatabase $db ) {
+	private function selectRevisionInformationMultiple( array $entityIds, IDatabase $db ): array {
 		$rows = $this->pageTableEntityQuery->selectRows(
 			$this->selectFields(),
 			[ 'revision' => [ 'INNER JOIN', 'page_latest=rev_id' ] ],
@@ -285,7 +287,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 * @return array Array mapping entity ID serializations to either ints
 	 * or false if an entity could not be found (including if the page is a redirect).
 	 */
-	private function selectLatestRevisionIdsMultiple( array $entityIds, IDatabase $db ) {
+	private function selectLatestRevisionIdsMultiple( array $entityIds, IDatabase $db ): array {
 		$rows = $this->pageTableEntityQuery->selectRows(
 			[ 'page_title', 'page_latest', 'page_is_redirect' ],
 			[],
@@ -319,7 +321,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 * @return (stdClass|false)[] Array mapping entity ID serializations to either objects or false if an entity
 	 *  is not present in $res.
 	 */
-	private function processRows( array $entityIds, array $rows ) {
+	private function processRows( array $entityIds, array $rows ): array {
 		$result = [];
 		foreach ( $entityIds as $entityId ) {
 			// $rows is indexed by page titles without repository prefix but we want to keep prefixes
