@@ -201,6 +201,14 @@ Should a separate DB connection be used to generate entity IDs?  (See @ref md_do
 
 DEFAULT: ```false```
 
+#### idGeneratorInErrorPingLimiter {#repo_idGeneratorInErrorPingLimiter}
+Attempt to create an entity locks an entity id (for items, it would be Q####) and if saving fails due to validation issues for example, that id would be wasted.
+This config helps by adding a bigger number to ratelimit and slow them down to avoid bots wasting significant number of Q-ids by sending faulty data over and over again.
+Value of this config determines how much the user is going to be penalized for an error in creation of entities.
+Zero means no penalty. The higher value, the heavier the penalty would be.
+
+DEFAULT: 0
+
 #### sandboxEntityIds
 Entity ids to be used in various live examples.
 
