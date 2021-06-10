@@ -10,9 +10,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
-use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
-use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
 
 /**
@@ -63,11 +62,13 @@ class ItemsPerSiteBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getItemsPerSiteBuilder(): ItemsPerSiteBuilder {
+		$mockDomainDb = $this->createMock( RepoDomainDb::class );
+
 		return new ItemsPerSiteBuilder(
 			$this->getSiteLinkTable(),
 			$this->getEntityLookup(),
 			new NullEntityPrefetcher(),
-			new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] )
+			$mockDomainDb
 		);
 	}
 

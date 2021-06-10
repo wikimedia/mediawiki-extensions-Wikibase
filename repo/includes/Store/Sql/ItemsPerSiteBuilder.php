@@ -11,8 +11,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
-use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Utility class for rebuilding the wb_items_per_site table.
@@ -49,20 +49,20 @@ class ItemsPerSiteBuilder {
 	private $batchSize = 100;
 
 	/**
-	 * @var ILBFactory
+	 * @var RepoDomainDb
 	 */
-	private $lbFactory;
+	private $db;
 
 	public function __construct(
 		SiteLinkTable $siteLinkTable,
 		EntityLookup $entityLookup,
 		EntityPrefetcher $entityPrefetcher,
-		ILBFactory $lbFactory
+		RepoDomainDb $db
 	) {
 		$this->siteLinkTable = $siteLinkTable;
 		$this->entityLookup = $entityLookup;
 		$this->entityPrefetcher = $entityPrefetcher;
-		$this->lbFactory = $lbFactory;
+		$this->db = $db;
 	}
 
 	public function setBatchSize( int $batchSize ): void {
@@ -119,9 +119,7 @@ class ItemsPerSiteBuilder {
 			$c++;
 		}
 		// Wait for the replicas, just in case we e.g. hit a range of ids which need a lot of writes.
-		$this->lbFactory->waitForReplication( [
-			'domain' => $this->lbFactory->getLocalDomainID(),
-		] );
+		$this->db->replication()->wait();
 
 		return $c;
 	}
