@@ -24,10 +24,12 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Dumpers\RdfDumpGenerator;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
 use Wikibase\Repo\Rdf\FullStatementRdfBuilderFactory;
 use Wikibase\Repo\Rdf\ItemRdfBuilder;
 use Wikibase\Repo\Rdf\PropertyRdfBuilder;
 use Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder;
+use Wikibase\Repo\Rdf\PropertyStubRdfBuilder;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\SiteLinksRdfBuilder;
 use Wikibase\Repo\Rdf\TermsRdfBuilder;
@@ -222,6 +224,42 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
+	/**
+	 * Returns the mapping of entity types used in tests to callbacks instantiating EntityStubRdfBuilder
+	 * instances.
+	 *
+	 * @see EntityTypeDefinitions::getStubRdfBuilderFactoryCallbacks
+	 *
+	 * @return callable[]
+	 */
+	private function getStubRdfBuilderFactoryCallbacks() {
+		return [
+			'property' => function(
+				RdfVocabulary $vocabulary,
+				RdfWriter $writer
+			) {
+				$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions();
+				$labelPredicates = $entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES );
+				//$this->setService( 'WikibaseRepo.PrefetchingTermLookup', $this->getTestData()->getMockRepository() );
+				$prefetchingLookup = WikibaseRepo::getPrefetchingTermLookup();
+				//$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $this->getTestData()->getMockRepository() );
+				$propertyDataLookup = WikibaseRepo::getPropertyDataTypeLookup();
+				$termsLanguages = WikibaseRepo::getTermsLanguages();
+				$dataTypes = WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes();
+
+				return new PropertyStubRdfBuilder(
+					$prefetchingLookup,
+					$propertyDataLookup,
+					$termsLanguages,
+					$vocabulary,
+					$writer,
+					$dataTypes,
+					$labelPredicates
+				);
+			},
+		];
+	}
+
 	private function getPropertyDataTypeLookup() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P10' ), 'Wibblywobbly' ); // see phpunit/data/rdf/RdfDumpGenerator
@@ -260,6 +298,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 		// Note: we test against the actual RDF bindings here, so we get actual RDF.
 		$rdfBuilderFactory = WikibaseRepo::getValueSnakRdfBuilderFactory();
 		$entityRdfBuilderFactory = new EntityRdfBuilderFactory( $this->getRdfBuilderFactoryCallbacks( $siteLookup ), [] );
+		$entityStubRdfBuilderFactory = new EntityStubRdfBuilderFactory( $this->getStubRdfBuilderFactoryCallbacks() );
 
 		return RdfDumpGenerator::createDumpGenerator(
 			'ntriples',
@@ -269,6 +308,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 			$dataTypeLookup,
 			$rdfBuilderFactory,
 			$entityRdfBuilderFactory,
+			$entityStubRdfBuilderFactory,
 			new NullEntityPrefetcher(),
 			new RdfVocabulary(
 				[ 'test' => self::URI_BASE, 'foreign' => 'http://foreign.test/', ],

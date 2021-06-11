@@ -107,6 +107,7 @@ use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Search\Fields\FieldDefinitionsFactory;
@@ -882,6 +883,13 @@ class WikibaseRepo {
 	): EntityRdfBuilderFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntityRdfBuilderFactory' );
+	}
+
+	public static function getEntityStubRdfBuilderFactory(
+		ContainerInterface $services = null
+	): EntityStubRdfBuilderFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityStubRdfBuilderFactory' );
 	}
 
 	public static function getEntityDiffVisualizerFactory( ContainerInterface $services = null ): EntityDiffVisualizerFactory {

@@ -468,6 +468,7 @@
 				"WikibaseRepo.EntityLookup",
 				"WikibaseRepo.EntityRdfBuilderFactory",
 				"WikibaseRepo.EntityRevisionLookup",
+				"WikibaseRepo.EntityStubRdfBuilderFactory",
 				"WikibaseRepo.EntityTitleStoreLookup",
 				"WikibaseRepo.Logger",
 				"WikibaseRepo.PropertyDataTypeLookup",

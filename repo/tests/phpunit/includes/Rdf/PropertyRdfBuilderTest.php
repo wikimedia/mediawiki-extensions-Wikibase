@@ -77,21 +77,6 @@ class PropertyRdfBuilderTest extends TestCase {
 		];
 	}
 
-	/**
-	 * @dataProvider provideAddEntityStub
-	 */
-	public function testAddEntityStub( $flavorFlags, $item ) {
-		$this->termsRdfBuilder->expects( $this->atLeastOnce() )->method( 'addEntityStub' );
-		$builder = $this->getBuilder( $flavorFlags );
-		$builder->addEntityStub( $item );
-	}
-
-	public function provideAddEntityStub(): array {
-		return [
-			"No flavors selected" => [ 0, $this->getTestProperty() ]
-		];
-	}
-
 	private function getBuilder( $flavorFlags ): PropertyRdfBuilder {
 		return new PropertyRdfBuilder(
 			$flavorFlags,

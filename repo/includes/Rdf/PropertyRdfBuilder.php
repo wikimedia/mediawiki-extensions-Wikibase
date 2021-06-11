@@ -52,16 +52,7 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 		$this->propertySpecificComponentsRdfBuilder->addEntity( $entity );
 	}
 
+	/* Done in PropertyStubRdfBuilder */
 	public function addEntityStub( EntityDocument $entity ): void {
-		if ( $this->truthyStatementRdfBuilder ) {
-			$this->truthyStatementRdfBuilder->addEntityStub( $entity );
-		}
-
-		if ( $this->fullStatementRdfBuilder ) {
-			$this->fullStatementRdfBuilder->addEntityStub( $entity );
-		}
-
-		$this->termsRdfBuilder->addEntityStub( $entity );
-		$this->propertySpecificComponentsRdfBuilder->addEntityStub( $entity );
 	}
 }
