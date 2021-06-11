@@ -16,14 +16,12 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Rdbms\LBFactorySingle;
@@ -41,10 +39,6 @@ use Wikimedia\Rdbms\LBFactorySingle;
 class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 
 	protected function newStore() {
-		$entityChangeFactory = $this->getMockBuilder( EntityChangeFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
-
 		$wikibaseServices = $this->createMock( WikibaseServices::class );
 
 		$wikibaseServices->method( 'getEntityPrefetcher' )
@@ -55,7 +49,6 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 			->willReturn( new MockPropertyInfoLookup() );
 
 		return new DirectSqlStore(
-			$entityChangeFactory,
 			new ItemIdParser(),
 			$this->createMock( EntityIdLookup::class ),
 			new EntityNamespaceLookup( [] ),
@@ -91,7 +84,6 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 			[ 'getUsageLookup', UsageLookup::class ],
 			[ 'getEntityIdLookup', EntityIdLookup::class ],
 			[ 'getEntityPrefetcher', EntityPrefetcher::class ],
-			[ 'getEntityChangeLookup', EntityChangeLookup::class ],
 			[ 'getRecentChangesFinder', RecentChangesFinder::class ],
 		];
 	}

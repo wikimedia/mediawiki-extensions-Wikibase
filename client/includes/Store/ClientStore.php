@@ -12,7 +12,6 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 
 /**
  * Client store interface.
@@ -81,10 +80,5 @@ interface ClientStore {
 	 * @return UsageUpdater
 	 */
 	public function getUsageUpdater();
-
-	/**
-	 * @return EntityChangeLookup
-	 */
-	public function getEntityChangeLookup();
 
 }

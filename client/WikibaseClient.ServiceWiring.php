@@ -106,6 +106,7 @@ use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
@@ -337,6 +338,15 @@ return [
 			$changeClasses,
 			EntityChange::class,
 			WikibaseClient::getLogger( $services )
+		);
+	},
+
+	'WikibaseClient.EntityChangeLookup' => function ( MediaWikiServices $services ): EntityChangeLookup {
+		return new EntityChangeLookup(
+			WikibaseClient::getEntityChangeFactory( $services ),
+			WikibaseClient::getEntityIdParser( $services ),
+			WikibaseClient::getRepoDomainDbFactory( $services )
+				->newForEntitySource( WikibaseClient::getItemAndPropertySource( $services ) )
 		);
 	},
 
@@ -899,7 +909,6 @@ return [
 
 	'WikibaseClient.Store' => function ( MediaWikiServices $services ): ClientStore {
 		return new DirectSqlStore(
-			WikibaseClient::getEntityChangeFactory( $services ),
 			WikibaseClient::getEntityIdParser( $services ),
 			WikibaseClient::getEntityIdLookup( $services ),
 			WikibaseClient::getEntityNamespaceLookup( $services ),

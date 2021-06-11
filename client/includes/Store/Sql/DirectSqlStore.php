@@ -20,7 +20,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
@@ -33,7 +32,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
@@ -47,11 +45,6 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  * @author Daniel Kinzler
  */
 class DirectSqlStore implements ClientStore {
-
-	/**
-	 * @var EntityChangeFactory
-	 */
-	private $entityChangeFactory;
 
 	/**
 	 * @var EntityIdParser
@@ -160,7 +153,6 @@ class DirectSqlStore implements ClientStore {
 	private $termBuffer;
 
 	public function __construct(
-		EntityChangeFactory $entityChangeFactory,
 		EntityIdParser $entityIdParser,
 		EntityIdLookup $entityIdLookup,
 		EntityNamespaceLookup $entityNamespaceLookup,
@@ -169,7 +161,6 @@ class DirectSqlStore implements ClientStore {
 		TermBuffer $termBuffer,
 		RepoDomainDb $repoDb
 	) {
-		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
@@ -418,17 +409,6 @@ class DirectSqlStore implements ClientStore {
 			$this->getUsageTracker(),
 			$this->getUsageLookup(),
 			$this->getSubscriptionManager()
-		);
-	}
-
-	/**
-	 * @return EntityChangeLookup
-	 */
-	public function getEntityChangeLookup() {
-		return new EntityChangeLookup(
-			$this->entityChangeFactory,
-			$this->entityIdParser,
-			$this->repoDb
 		);
 	}
 
