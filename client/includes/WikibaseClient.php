@@ -62,6 +62,7 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
+use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolverFactory;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
@@ -375,6 +376,11 @@ final class WikibaseClient {
 	public static function getEntityChangeFactory( ContainerInterface $services = null ): EntityChangeFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntityChangeFactory' );
+	}
+
+	public static function getEntityChangeLookup( ContainerInterface $services = null ): EntityChangeLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.EntityChangeLookup' );
 	}
 
 	public static function getEntityDiffer( ContainerInterface $services = null ): EntityDiffer {

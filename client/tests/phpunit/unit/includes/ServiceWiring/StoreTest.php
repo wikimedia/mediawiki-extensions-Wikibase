@@ -10,7 +10,6 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -26,8 +25,6 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 class StoreTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$this->mockService( 'WikibaseClient.EntityChangeFactory',
-			$this->createMock( EntityChangeFactory::class ) );
 		$this->mockService( 'WikibaseClient.EntityIdParser',
 			new ItemIdParser() );
 		$this->mockService( 'WikibaseClient.EntityIdLookup',

@@ -86,8 +86,8 @@ class ChangeNotificationJob extends Job {
 			);
 
 			// load actual change records from the changes table
-			// TODO: allow mock store for testing!
-			$changeLookup = WikibaseClient::getStore()->getEntityChangeLookup();
+			// TODO: allow mock lookup for testing!
+			$changeLookup = WikibaseClient::getEntityChangeLookup();
 			$this->changes = $changeLookup->loadByChangeIds( $ids );
 
 			$this->logger->debug(
