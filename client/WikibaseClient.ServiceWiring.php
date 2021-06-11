@@ -906,7 +906,8 @@ return [
 			WikibaseClient::getWikibaseServices( $services ),
 			WikibaseClient::getSettings( $services ),
 			WikibaseClient::getTermBuffer( $services ),
-			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName()
+			WikibaseClient::getRepoDomainDbFactory( $services )
+				->newForEntitySource( WikibaseClient::getItemAndPropertySource( $services ) )
 		);
 	},
 
