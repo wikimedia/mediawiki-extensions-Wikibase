@@ -5,9 +5,9 @@ namespace Wikibase\Lib\Store\Sql;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\ChunkAccess;
 use Wikimedia\Assert\Assert;
-use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -35,31 +35,22 @@ class EntityChangeLookup implements ChunkAccess {
 	 */
 	private $entityIdParser;
 
-	/** @var ILoadBalancer */
-	private $loadBalancer;
-
-	/**
-	 * @var string|bool The symbolic database name of the repo wiki or false for the local wiki.
-	 */
-	private $repoWiki;
+	/** @var RepoDomainDb */
+	private $db;
 
 	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
-	 * @param ILoadBalancer $loadBalancer
-	 * @param string|bool $repoWiki The target wiki's name. This must be an ID
-	 * that LBFactory can understand.
+	 * @param RepoDomainDb $db
 	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
 		EntityIdParser $entityIdParser,
-		ILoadBalancer $loadBalancer,
-		$repoWiki = false
+		RepoDomainDb $db
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
-		$this->loadBalancer = $loadBalancer;
-		$this->repoWiki = $repoWiki;
+		$this->db = $db;
 	}
 
 	/**
@@ -140,9 +131,13 @@ class EntityChangeLookup implements ChunkAccess {
 	 * @return EntityChange[]
 	 */
 	private function loadChanges( array $where, array $options, $method, $mode = DB_REPLICA ) {
-		$dbr = $this->loadBalancer->getConnectionRef( $mode, [], $this->repoWiki );
+		if ( $mode === DB_REPLICA ) {
+			$db = $this->db->connections()->getReadConnectionRef();
+		} else {
+			$db = $this->db->connections()->getWriteConnectionRef();
+		}
 
-		$rows = $dbr->select(
+		$rows = $db->select(
 			'wb_changes',
 			[
 				'change_id', 'change_type', 'change_time', 'change_object_id',

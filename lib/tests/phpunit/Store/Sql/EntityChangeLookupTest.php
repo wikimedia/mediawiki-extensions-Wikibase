@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
-use LoadBalancerSingle;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -10,10 +9,11 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Lib\WikibaseSettings;
-use WikiMap;
+use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\EntityChangeLookup
@@ -28,6 +28,7 @@ use WikiMap;
 class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 
 	private function newEntityChangeLookup() {
+		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		return new EntityChangeLookup(
 			new EntityChangeFactory(
 				new EntityDiffer(),
@@ -35,8 +36,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 				[ 'item' => EntityChange::class ]
 			),
 			new ItemIdParser(),
-			LoadBalancerSingle::newFromConnection( $this->db ),
-			WikiMap::getCurrentWikiId()
+			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() )
 		);
 	}
 

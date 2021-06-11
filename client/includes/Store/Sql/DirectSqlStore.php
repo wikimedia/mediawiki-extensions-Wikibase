@@ -457,8 +457,7 @@ class DirectSqlStore implements ClientStore {
 		return new EntityChangeLookup(
 			$this->entityChangeFactory,
 			$this->entityIdParser,
-			$lbFactory->getMainLB( $this->repoWiki ),
-			$this->repoWiki
+			new RepoDomainDb( $lbFactory, $this->repoWiki ?: $lbFactory->getLocalDomainID() )
 		);
 	}
 
