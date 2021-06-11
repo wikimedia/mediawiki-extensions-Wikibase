@@ -819,7 +819,8 @@ return [
 			WikibaseClient::getDataAccessSettings( $services ),
 			WikibaseClient::getLanguageFallbackChainFactory( $services ),
 			new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
-			$entityTypeDefinitions
+			$entityTypeDefinitions,
+			WikibaseClient::getRepoDomainDbFactory( $services )
 		);
 	},
 

@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 
 /**
  * @coversNothing
@@ -53,6 +54,11 @@ class SingleEntitySourceServicesFactoryTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseClient.LanguageFallbackChainFactory',
 			$this->createMock( LanguageFallbackChainFactory::class )
+		);
+
+		$this->mockService(
+			'WikibaseClient.RepoDomainDbFactory',
+			$this->createMock( RepoDomainDbFactory::class )
 		);
 
 		$this->assertInstanceOf(

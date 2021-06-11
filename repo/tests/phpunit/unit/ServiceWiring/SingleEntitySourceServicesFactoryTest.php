@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -59,6 +60,11 @@ class SingleEntitySourceServicesFactoryTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.StorageEntitySerializer',
 			$this->createMock( Serializer::class )
+		);
+
+		$this->mockService(
+			'WikibaseRepo.RepoDomainDbFactory',
+			$this->createMock( RepoDomainDbFactory::class )
 		);
 
 		$this->assertInstanceOf(

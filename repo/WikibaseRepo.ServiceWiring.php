@@ -1540,7 +1540,8 @@ return [
 			WikibaseRepo::getDataAccessSettings( $services ),
 			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
 			WikibaseRepo::getStorageEntitySerializer( $services ),
-			$entityTypeDefinitions
+			$entityTypeDefinitions,
+			WikibaseRepo::getRepoDomainDbFactory( $services )
 		);
 	},
 

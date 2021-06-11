@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 
 /**
  * @license GPL-2.0-or-later
@@ -51,17 +52,11 @@ class SingleEntitySourceServicesFactory {
 	 * @var array
 	 */
 	private $servicesBySource;
-
 	/**
-	 * @param EntityIdParser $entityIdParser
-	 * @param EntityIdComposer $entityIdComposer
-	 * @param Deserializer $dataValueDeserializer
-	 * @param NameTableStoreFactory $nameTableStoreFactory
-	 * @param DataAccessSettings $dataAccessSettings
-	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
-	 * @param Serializer $storageEntitySerializer
-	 * @param EntityTypeDefinitions $entityTypeDefinitions
+	 * @var RepoDomainDbFactory
 	 */
+	private $repoDomainDbFactory;
+
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
@@ -70,7 +65,8 @@ class SingleEntitySourceServicesFactory {
 		DataAccessSettings $dataAccessSettings,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		Serializer $storageEntitySerializer,
-		EntityTypeDefinitions $entityTypeDefinitions
+		EntityTypeDefinitions $entityTypeDefinitions,
+		RepoDomainDbFactory $repoDomainDbFactory
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
@@ -80,6 +76,7 @@ class SingleEntitySourceServicesFactory {
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->storageEntitySerializer = $storageEntitySerializer;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
+		$this->repoDomainDbFactory = $repoDomainDbFactory;
 
 		$this->servicesBySource = [];
 	}
@@ -104,6 +101,7 @@ class SingleEntitySourceServicesFactory {
 			$source,
 			$this->languageFallbackChainFactory,
 			$this->storageEntitySerializer,
+			$this->repoDomainDbFactory->newForEntitySource( $source ),
 			$this->entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
 			$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
 			$this->entityTypeDefinitions->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK ),

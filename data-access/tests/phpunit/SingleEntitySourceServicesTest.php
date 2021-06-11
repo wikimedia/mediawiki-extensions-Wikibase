@@ -13,9 +13,11 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikimedia\Assert\ParameterElementTypeException;
+use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * @covers \Wikibase\DataAccess\SingleEntitySourceServices
@@ -68,6 +70,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
+			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
 			[ 'strval' ],
 			[],
 			[],
@@ -89,6 +92,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
+			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
 			[ null ],
 			[],
 			[],
@@ -107,6 +111,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
+			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
 			[],
 			[ null ],
 			[],
@@ -125,6 +130,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
+			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
 			[],
 			[],
 			[ null ],
@@ -142,6 +148,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntitySource( 'source', 'sourcedb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
+			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
 			[],
 			[],
 			[],

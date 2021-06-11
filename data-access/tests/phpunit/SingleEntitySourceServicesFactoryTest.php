@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 
 /**
  * @license GPL-2.0-or-later
@@ -45,7 +46,8 @@ class SingleEntitySourceServicesFactoryTest extends TestCase {
 				DataAccessSettings::class,
 				LanguageFallbackChainFactory::class,
 				Serializer::class,
-				EntityTypeDefinitions::class
+				EntityTypeDefinitions::class,
+				RepoDomainDbFactory::class
 			]
 		);
 

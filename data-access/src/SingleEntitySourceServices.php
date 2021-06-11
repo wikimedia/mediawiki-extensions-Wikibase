@@ -103,6 +103,11 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	/** @var Serializer */
 	private $storageEntitySerializer;
 
+	/**
+	 * @var RepoDomainDb
+	 */
+	private $repoDb;
+
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
@@ -112,6 +117,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		EntitySource $entitySource,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		Serializer $storageEntitySerializer,
+		RepoDomainDb $repoDb,
 		array $deserializerFactoryCallbacks,
 		array $entityMetaDataAccessorCallbacks,
 		array $prefetchingTermLookupCallbacks,
@@ -132,6 +138,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		$this->entitySource = $entitySource;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->storageEntitySerializer = $storageEntitySerializer;
+		$this->repoDb = $repoDb;
 		$this->deserializerFactoryCallbacks = $deserializerFactoryCallbacks;
 		$this->entityMetaDataAccessorCallbacks = $entityMetaDataAccessorCallbacks;
 		$this->prefetchingTermLookupCallbacks = $prefetchingTermLookupCallbacks;
@@ -249,7 +256,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 							$this->slotRoleStore
 						),
 						$this->entitySource,
-						new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() ), // TODO inject
+						$this->repoDb,
 						$logger
 					),
 					$databaseName,
@@ -271,13 +278,9 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			throw new \LogicException( 'Entity source: ' . $this->entitySource->getSourceName() . ' does no provide properties' );
 		}
 		if ( $this->propertyInfoLookup === null ) {
-			$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 			$this->propertyInfoLookup = new PropertyInfoTable(
 				$this->entityIdComposer,
-				new RepoDomainDb(
-					$lbFactory,
-					$this->entitySource->getDatabaseName() ?: $lbFactory->getLocalDomainID()
-				),
+				$this->repoDb,
 				false
 			);
 		}
