@@ -11,6 +11,7 @@ use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -48,18 +49,25 @@ class StoreTest extends ServiceWiringTestCase {
 				'enableImplicitDescriptionUsage' => false,
 				'allowLocalShortDesc' => false,
 			] ) );
-		$this->mockService( 'WikibaseClient.ItemAndPropertySource',
-			new EntitySource(
-				'test',
-				'testdb',
-				[],
-				'',
-				'',
-				'',
-				''
-			) );
 		$this->mockService( 'WikibaseClient.TermBuffer',
 			$this->createMock( TermBuffer::class ) );
+		$itemAndPropertySource = new EntitySource(
+			'test',
+			'testdb',
+			[],
+			'',
+			'',
+			'',
+			''
+		);
+		$this->mockService( 'WikibaseClient.ItemAndPropertySource',
+			$itemAndPropertySource );
+		$repoDomainDbFactory = $this->createMock( RepoDomainDbFactory::class );
+		$repoDomainDbFactory->expects( $this->once() )
+			->method( 'newForEntitySource' )
+			->with( $itemAndPropertySource );
+		$this->mockService( 'WikibaseClient.RepoDomainDbFactory',
+			$repoDomainDbFactory );
 
 		$this->assertInstanceOf(
 			DirectSqlStore::class,

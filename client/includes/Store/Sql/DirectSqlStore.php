@@ -59,14 +59,9 @@ class DirectSqlStore implements ClientStore {
 	private $entityIdParser;
 
 	/**
-	 * @var string|bool The symbolic database name of the repo wiki or false for the local wiki.
+	 * @var RepoDomainDb
 	 */
-	private $repoWiki;
-
-	/**
-	 * @var SessionConsistentConnectionManager|null
-	 */
-	private $repoConnectionManager = null;
+	private $repoDb;
 
 	/**
 	 * @var SessionConsistentConnectionManager|null
@@ -164,17 +159,6 @@ class DirectSqlStore implements ClientStore {
 	 */
 	private $termBuffer;
 
-	/**
-	 * @param EntityChangeFactory $entityChangeFactory
-	 * @param EntityIdParser $entityIdParser
-	 * @param EntityIdLookup $entityIdLookup
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 * @param WikibaseServices $wikibaseServices
-	 * @param SettingsArray $settings
-	 * @param TermBuffer $termBuffer
-	 * @param string|bool $repoWiki The symbolic database name of the repo wiki or false for the
-	 * local wiki.
-	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
 		EntityIdParser $entityIdParser,
@@ -183,7 +167,7 @@ class DirectSqlStore implements ClientStore {
 		WikibaseServices $wikibaseServices,
 		SettingsArray $settings,
 		TermBuffer $termBuffer,
-		$repoWiki
+		RepoDomainDb $repoDb
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
@@ -191,7 +175,7 @@ class DirectSqlStore implements ClientStore {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->wikibaseServices = $wikibaseServices;
 		$this->termBuffer = $termBuffer;
-		$this->repoWiki = $repoWiki;
+		$this->repoDb = $repoDb;
 
 		// @TODO: split the class so it needs less injection
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
@@ -226,15 +210,7 @@ class DirectSqlStore implements ClientStore {
 	 * @return SessionConsistentConnectionManager
 	 */
 	private function getRepoConnectionManager() {
-		if ( $this->repoConnectionManager === null ) {
-			$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-			$this->repoConnectionManager = new SessionConsistentConnectionManager(
-				$lbFactory->getMainLB( $this->repoWiki ),
-				$this->repoWiki
-			);
-		}
-
-		return $this->repoConnectionManager;
+		return $this->repoDb->sessionConsistentConnections();
 	}
 
 	/**
@@ -318,15 +294,11 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getSiteLinkLookup() {
 		if ( $this->siteLinkLookup === null ) {
-			$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory(); // TODO inject
 			$this->siteLinkLookup = new CachingSiteLinkLookup(
 				new SiteLinkTable(
 					'wb_items_per_site',
 					true,
-					new RepoDomainDb( // TODO inject
-						$lbFactory,
-						$this->repoWiki ?: $lbFactory->getLocalDomainID()
-					)
+					$this->repoDb
 				),
 				new HashBagOStuff()
 			);
@@ -453,11 +425,10 @@ class DirectSqlStore implements ClientStore {
 	 * @return EntityChangeLookup
 	 */
 	public function getEntityChangeLookup() {
-		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory(); // TODO inject
 		return new EntityChangeLookup(
 			$this->entityChangeFactory,
 			$this->entityIdParser,
-			new RepoDomainDb( $lbFactory, $this->repoWiki ?: $lbFactory->getLocalDomainID() )
+			$this->repoDb
 		);
 	}
 
