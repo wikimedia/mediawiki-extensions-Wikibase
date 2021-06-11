@@ -14,9 +14,9 @@ use SiteLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\SerializerFactory;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Repo\Content\EntityContentFactory;
@@ -45,11 +45,6 @@ use Wikimedia\Purtle\RdfWriterFactory;
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
  */
 class EntityDataSerializationService {
-
-	/**
-	 * @var EntityLookup|null
-	 */
-	private $entityLookup = null;
 
 	/** @var EntityTitleStoreLookup */
 	private $entityTitleStoreLookup;
@@ -106,9 +101,13 @@ class EntityDataSerializationService {
 	 * @var EntityStubRdfBuilderFactory
 	 */
 	private $entityStubRdfBuilderFactory;
+	/**
+	 * @var EntityRevisionLookup
+	 */
+	private $entityRevisionLookup;
 
 	public function __construct(
-		EntityLookup $entityLookup,
+		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleStoreLookup $entityTitleStoreLookup,
 		EntityContentFactory $entityContentFactory,
 		PropertyDataTypeLookup $propertyLookup,
@@ -121,7 +120,7 @@ class EntityDataSerializationService {
 		SiteLookup $siteLookup,
 		RdfVocabulary $rdfVocabulary
 	) {
-		$this->entityLookup = $entityLookup;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
 		$this->entityContentFactory = $entityContentFactory;
 		$this->propertyLookup = $propertyLookup;
@@ -230,7 +229,7 @@ class EntityDataSerializationService {
 			$rdfBuilder->addEntityPageProps( $entityRevision->getEntity() );
 
 			$rdfBuilder->addEntity( $entityRevision->getEntity() );
-			$rdfBuilder->resolveMentionedEntities( $this->entityLookup );
+			$rdfBuilder->resolveMentionedEntities();
 		}
 
 		if ( $flavor !== 'dump' ) {
@@ -374,7 +373,8 @@ class EntityDataSerializationService {
 			$rdfWriter,
 			new HashDedupeBag(),
 			$this->entityContentFactory,
-			$this->entityStubRdfBuilderFactory
+			$this->entityStubRdfBuilderFactory,
+			$this->entityRevisionLookup
 		);
 
 		return $rdfBuilder;

@@ -420,7 +420,9 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $this->getMockPropertyDataTypeLookup() );
 		$inMemoryTermLookup = new InMemoryPrefetchingTermLookup();
 		$p5 = new PropertyId( 'P5' );
+		$q23 = new ItemId( 'Q23' );
 		$inMemoryTermLookup->setData( [ $this->getMockRepository()->getEntity( $p5 ) ] );
+		$inMemoryTermLookup->setData( [ $this->getMockRepository()->getEntity( $q23 ) ] );
 		$this->setService( 'WikibaseRepo.PrefetchingTermLookup', $inMemoryTermLookup );
 		$service = $this->newService();
 		list( $data, $mimeType ) = $service->getSerializedData(
