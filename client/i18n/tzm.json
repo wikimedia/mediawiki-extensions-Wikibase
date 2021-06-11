@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Hakim1bal",
 			"Mohamed Belarhzali"
 		]
 	},
-	"wikibase-rc-hide-wikidata-show": "Sken"
+	"wikibase-linkitem-addlinks": "Rnu isɣunen",
+	"wikibase-rc-hide-wikidata-show": "Sken",
+	"wikibase-rc-wikibase-edit-letter": "D"
 }
