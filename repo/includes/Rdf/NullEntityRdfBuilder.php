@@ -15,7 +15,4 @@ class NullEntityRdfBuilder implements EntityRdfBuilder {
 	public function addEntity( EntityDocument $entity ) {
 	}
 
-	public function addEntityStub( EntityDocument $entity ) {
-	}
-
 }

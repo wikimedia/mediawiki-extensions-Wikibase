@@ -68,22 +68,4 @@ class ItemRdfBuilder implements EntityRdfBuilder {
 			$this->termsRdfBuilder->addEntity( $entity );
 		}
 	}
-
-	public function addEntityStub( EntityDocument $entity ) {
-		if ( $this->siteLinksRdfBuilder ) {
-			$this->siteLinksRdfBuilder->addEntityStub( $entity );
-		}
-
-		if ( $this->truthyStatementRdfBuilder ) {
-			$this->truthyStatementRdfBuilder->addEntityStub( $entity );
-		}
-
-		if ( $this->fullStatementRdfBuilder ) {
-			$this->fullStatementRdfBuilder->addEntityStub( $entity );
-		}
-
-		if ( $this->termsRdfBuilder ) {
-			$this->termsRdfBuilder->addEntityStub( $entity );
-		}
-	}
 }

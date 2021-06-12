@@ -16,7 +16,7 @@ use Wikimedia\Purtle\RdfWriter;
  *
  * @license GPL-2.0-or-later
  */
-class RdfBuilder implements EntityMentionListener {
+class RdfBuilder implements EntityRdfBuilder, EntityStubRdfBuilder, EntityMentionListener {
 
 	/**
 	 * A list of entities mentioned/touched to or by this builder.

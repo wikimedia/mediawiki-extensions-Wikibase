@@ -164,28 +164,4 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 		}
 	}
 
-	/**
-	 * Add the entity's labels and descriptions to the RDF graph.
-	 *
-	 * @see EntityRdfBuilder::addEntityStub
-	 *
-	 * @param EntityDocument $entity the entity to output.
-	 * @suppress PhanTypeMismatchArgument
-	 */
-	public function addEntityStub( EntityDocument $entity ) {
-		$entityId = $entity->getId();
-		$entityLName = $this->vocabulary->getEntityLName( $entityId );
-		$entityRepoName = $this->vocabulary->getEntityRepositoryName( $entityId );
-		$entityNamespace = $this->vocabulary->entityNamespaceNames[$entityRepoName];
-
-		if ( $entity instanceof LabelsProvider ) {
-			$this->addLabels( $entityNamespace, $entityLName, $entity->getLabels(),
-				$this->getLabelPredicates( $entity ) );
-		}
-
-		if ( $entity instanceof DescriptionsProvider ) {
-			$this->addDescriptions( $entityNamespace, $entityLName, $entity->getDescriptions() );
-		}
-	}
-
 }
