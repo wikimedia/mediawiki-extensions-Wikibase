@@ -6,7 +6,6 @@ namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseUpdater;
 use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
-use MediaWiki\MediaWikiServices;
 use MWException;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Wikibase\Client\WikibaseClient;
@@ -52,7 +51,7 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$primer = new EntityUsageTableBuilder(
 			$idParser,
 			// TODO: Would be nice to pass in $dbUpdater->getDB().
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
+			WikibaseClient::getClientDomainDbFactory()->newLocalDb()
 		);
 
 		$primer->setProgressReporter(

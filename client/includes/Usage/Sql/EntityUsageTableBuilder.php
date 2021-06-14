@@ -11,10 +11,10 @@ use Onoi\MessageReporter\NullMessageReporter;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -38,11 +38,6 @@ class EntityUsageTableBuilder {
 	private $idParser;
 
 	/**
-	 * @var ILBFactory
-	 */
-	private $lbFactory;
-
-	/**
 	 * @var string
 	 */
 	private $usageTableName;
@@ -63,11 +58,16 @@ class EntityUsageTableBuilder {
 	private $progressReporter;
 
 	/**
+	 * @var ClientDomainDb
+	 */
+	private $domainDb;
+
+	/**
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		EntityIdParser $idParser,
-		ILBFactory $lbFactory,
+		ClientDomainDb $domainDb,
 		int $batchSize = 1000,
 		?string $usageTableName = null
 	) {
@@ -76,7 +76,7 @@ class EntityUsageTableBuilder {
 		}
 
 		$this->idParser = $idParser;
-		$this->lbFactory = $lbFactory;
+		$this->domainDb = $domainDb;
 		$this->batchSize = $batchSize;
 		$this->usageTableName = $usageTableName ?: EntityUsageTable::DEFAULT_TABLE_NAME;
 
@@ -110,12 +110,10 @@ class EntityUsageTableBuilder {
 	 * @return int The number of entity usages inserted.
 	 */
 	private function processUsageBatch( int &$fromPageId = 0 ): int {
-		$this->lbFactory->waitForReplication( [
-			'domain' => $this->lbFactory->getLocalDomainID(),
-		] );
+		$this->domainDb->replication()->wait();
 
-		$loadBalancer = $this->lbFactory->getMainLB();
-		$db = $loadBalancer->getConnection( DB_PRIMARY );
+		$connections = $this->domainDb->connections();
+		$db = $connections->getWriteConnection();
 
 		$entityPerPage = $this->getUsageBatch( $db, $fromPageId );
 
@@ -128,7 +126,7 @@ class EntityUsageTableBuilder {
 		// Update $fromPageId to become the first page ID of the next batch.
 		$fromPageId = max( array_keys( $entityPerPage ) ) + 1;
 
-		$loadBalancer->reuseConnection( $db );
+		$connections->releaseConnection( $db );
 
 		return $count;
 	}

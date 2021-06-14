@@ -5,7 +5,6 @@ declare( strict_types=1 );
 namespace Wikibase;
 
 use LoggedUpdateMaintenance;
-use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\Client\WikibaseClient;
@@ -51,7 +50,7 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 
 		$builder = new EntityUsageTableBuilder(
 			WikibaseClient::getEntityIdParser(),
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			WikibaseClient::getClientDomainDbFactory()->newLocalDb(),
 			$this->mBatchSize
 		);
 
