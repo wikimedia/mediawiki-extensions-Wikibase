@@ -92,7 +92,7 @@ class OutputPageEditabilityTest extends TestCase {
 
 		$title = $this->createMock( Title::class );
 		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
-		$title->expects( $this->once() )
+		$title->expects( $this->any() )
 			->method( 'exists' )
 			->willReturn( true );
 		$title->method( 'getRestrictions' )->willReturn( [] );
@@ -127,7 +127,7 @@ class OutputPageEditabilityTest extends TestCase {
 		$title = $this->createMock( Title::class );
 		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
 		$title->method( 'getRestrictions' )->willReturn( [] );
-		$title->expects( $this->once() )
+		$title->expects( $this->any() )
 			->method( 'exists' )
 			->willReturn( true );
 
@@ -158,7 +158,7 @@ class OutputPageEditabilityTest extends TestCase {
 		$title = $this->createMock( Title::class );
 		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
 		$title->method( 'getRestrictions' )->willReturn( [] );
-		$title->expects( $this->once() )
+		$title->expects( $this->any() )
 			->method( 'exists' )
 			->willReturn( false );
 
