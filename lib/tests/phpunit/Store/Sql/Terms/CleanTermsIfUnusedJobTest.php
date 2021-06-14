@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Store\Sql\Terms\CleanTermsIfUnusedJob;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreCleaner;
+use Wikibase\Lib\WikibaseSettings;
 
 /**
  * @group Wikibase
@@ -16,6 +17,9 @@ class CleanTermsIfUnusedJobTest extends MediaWikiIntegrationTestCase {
 	private $params;
 
 	protected function setUp(): void {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
+		}
 		parent::setUp();
 		$this->termInLangId = 'cat_terminlang';
 		$this->params = [ CleanTermsIfUnusedJob::TERM_IN_LANG_IDS => [ $this->termInLangId ] ];

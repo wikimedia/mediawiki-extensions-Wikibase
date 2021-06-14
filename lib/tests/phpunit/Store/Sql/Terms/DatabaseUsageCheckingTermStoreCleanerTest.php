@@ -3,10 +3,11 @@
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use MediaWikiIntegrationTestCase;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseUsageCheckingTermStoreCleaner;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LoadBalancerSingle;
+use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner
@@ -32,8 +33,8 @@ class DatabaseUsageCheckingTermStoreCleanerTest extends MediaWikiIntegrationTest
 	}
 
 	private function getCleaner(): DatabaseUsageCheckingTermStoreCleaner {
-		$loadBalancer = LoadBalancerSingle::newFromConnection( $this->db );
-		return new DatabaseUsageCheckingTermStoreCleaner( $loadBalancer, $this->innerCleaner );
+		$repoDomainDb = new RepoDomainDb( LBFactorySingle::newFromConnection( $this->db ), $this->db->getDomainID() );
+		return new DatabaseUsageCheckingTermStoreCleaner( $repoDomainDb, $this->innerCleaner );
 	}
 
 	public function testCleaningUnsharedTermInLangUsesInnerCleaner() {

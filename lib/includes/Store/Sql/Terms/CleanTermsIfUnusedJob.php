@@ -43,10 +43,13 @@ class CleanTermsIfUnusedJob extends Job {
 	}
 
 	public static function getJobSpecificationNoTitle( array $params ): CleanTermsIfUnusedJob {
-		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$repoDomainDb = MediaWikiServices::getInstance()
+			->get( 'WikibaseRepo.RepoDomainDbFactory' )
+			->newRepoDb();
+
 		$logger = LoggerFactory::getInstance( 'Wikibase' );
 		$innerTermStoreCleaner = new DatabaseInnerTermStoreCleaner( $logger );
-		$cleaner = new DatabaseUsageCheckingTermStoreCleaner( $loadBalancer, $innerTermStoreCleaner );
+		$cleaner = new DatabaseUsageCheckingTermStoreCleaner( $repoDomainDb, $innerTermStoreCleaner );
 		return new self( $cleaner, $params );
 	}
 
