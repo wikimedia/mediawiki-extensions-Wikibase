@@ -1327,6 +1327,7 @@ return [
 		$dbName = false; // false means the local database
 		$logger = WikibaseRepo::getLogger( $services );
 
+		$entitySource = WikibaseRepo::getLocalEntitySource( $services );
 		return new PrefetchingWikiPageEntityMetaDataAccessor(
 			new TypeDispatchingWikiPageEntityMetaDataAccessor(
 				WikibaseRepo::getEntityTypeDefinitions( $services )
@@ -1337,8 +1338,8 @@ return [
 						$entityNamespaceLookup,
 						$services->getSlotRoleStore()
 					),
-					WikibaseRepo::getLocalEntitySource( $services ),
-					$services->getDBLoadBalancerFactory(),
+					$entitySource,
+					WikibaseRepo::getRepoDomainDbFactory( $services )->newForEntitySource( $entitySource ),
 					$logger
 				),
 				$dbName,

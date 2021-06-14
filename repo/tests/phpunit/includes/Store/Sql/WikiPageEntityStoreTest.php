@@ -25,6 +25,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
@@ -118,6 +119,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			''
 		);
 
+		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		$lookup = new WikiPageEntityRevisionLookup(
 			new WikiPageEntityMetaDataLookup(
 				$nsLookup,
@@ -126,7 +128,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
 				$localSource,
-				new LBFactorySingle( [ 'connection' => $this->db ] )
+				new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() )
 			),
 			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
 			MediaWikiServices::getInstance()->getRevisionStore()

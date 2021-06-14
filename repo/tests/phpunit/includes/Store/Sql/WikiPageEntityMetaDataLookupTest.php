@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\LookupConstants;
@@ -90,6 +91,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 			$namespaceLookup = $this->getEntityNamespaceLookup();
 		}
 
+		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		return new WikiPageEntityMetaDataLookup(
 			$namespaceLookup,
 			new EntityIdLocalPartPageTableEntityQuery(
@@ -97,7 +99,10 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
 			$this->newEntitySource(),
-			new LBFactorySingle( [ 'connection' => $this->db ] )
+			new RepoDomainDb(
+				$lbFactory,
+				$lbFactory->getLocalDomainID()
+			)
 		);
 	}
 
@@ -146,6 +151,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				return $db;
 			} );
 
+		$lbFactory = new FakeLBFactory( [ 'lb' => $loadBalancer ] );
 		return new WikiPageEntityMetaDataLookup(
 			$nsLookup,
 			new EntityIdLocalPartPageTableEntityQuery(
@@ -153,7 +159,10 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
 			$this->newEntitySource(),
-			new FakeLBFactory( [ 'lb' => $loadBalancer ] )
+			new RepoDomainDb(
+				$lbFactory,
+				$lbFactory->getLocalDomainID()
+			)
 		);
 	}
 
@@ -385,6 +394,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$namespaceLookup = $this->getEntityNamespaceLookup();
+		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		return new WikiPageEntityMetaDataLookup(
 			$namespaceLookup,
 			new EntityIdLocalPartPageTableEntityQuery(
@@ -392,7 +402,10 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
 			$itemSource,
-			new LBFactorySingle( [ 'connection' => $this->db ] )
+			new RepoDomainDb(
+				$lbFactory,
+				$lbFactory->getLocalDomainID()
+			)
 		);
 	}
 

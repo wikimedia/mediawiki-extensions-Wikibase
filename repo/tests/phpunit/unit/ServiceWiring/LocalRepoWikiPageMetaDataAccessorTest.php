@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use Psr\Log\NullLogger;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
@@ -27,12 +28,14 @@ class LocalRepoWikiPageMetaDataAccessorTest extends ServiceWiringTestCase {
 			new EntityTypeDefinitions( [] ) );
 		$this->mockService( 'WikibaseRepo.LocalEntitySource',
 			$this->createMock( EntitySource::class ) );
+		$this->mockService(
+			'WikibaseRepo.RepoDomainDbFactory',
+			$this->createMock( RepoDomainDbFactory::class )
+		);
 		$this->mockService( 'WikibaseRepo.Logger',
 			new NullLogger() );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getSlotRoleStore' );
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getDBLoadBalancerFactory' );
 
 		$this->assertInstanceOf(
 			WikiPageEntityMetaDataAccessor::class,
