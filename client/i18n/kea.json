@@ -1,11 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Quintino Lopes Castro Tavares"
+			"Quintino Lopes Castro Tavares",
+			"Waldyrious"
 		]
 	},
 	"tooltip-t-wikibase": "Ligason pa elementu na repositóriu di dadus",
 	"wikibase-dataitem": "Elementu {{WBREPONAME}}",
 	"wikibase-editlinks": "Muda liganson di iperlinks",
-	"wikibase-editlinkstitle": "Edita ligasons interlínguas"
+	"wikibase-editlinkstitle": "Edita ligasons interlínguas",
+	"wikibase-linkitem-addlinks": "Adisiona ligasons",
+	"wikibase-rc-hide-wikidata-hide": "Sukundi",
+	"wikibase-rc-hide-wikidata-show": "Mostra",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Mudansa di {{WBREPONAME}}"
 }

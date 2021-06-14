@@ -3,6 +3,7 @@
 		"authors": [
 			"Chrumps",
 			"InternerowyGołąb",
+			"Kareyac",
 			"Matma Rex"
 		]
 	},
@@ -12,9 +13,9 @@
 	"apihelp-wbcreateclaim-param-value": "Wartość łącznika podczas tworzenia stwierdzenia z łącznikiem, który ma wartość",
 	"apihelp-wbcreateclaim-param-snaktype": "Typ łącznika",
 	"apihelp-wbcreateclaim-example-1": "Tworzy stwierdzenie dla elementu <samp>Q42</samp> właściwości <samp>P9001</samp> z łącznikiem „{{int:wikibase-snakview-snaktypeselector-novalue}}”.",
-	"apihelp-wbcreateclaim-example-3": "Tworzy stwierdzenie dla elementu <samp>Q42</samp> właściwości <samp>P9003</samp> z wartością elementu <samp>Q1</samp>",
+	"apihelp-wbcreateclaim-example-3": "Tworzy stwierdzenie dla elementu <samp>$1</samp> właściwości <samp>P9003</samp> z wartością elementu <samp>Q1</samp>",
 	"apihelp-wbcreateredirect-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „{{int:group-bot}}”.",
-	"apihelp-wbcreateredirect-example-1": "Zamień <samp>Q11</samp> na przekierowanie do <samp>Q12</samp>",
+	"apihelp-wbcreateredirect-example-1": "Zamień <samp>$1</samp> na przekierowanie do <samp>$2</samp>",
 	"apihelp-wbeditentity-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „{{int:group-bot}}”.",
 	"apihelp-wbeditentity-example-2": "Utwórz nowy element i ustaw etykiety dla <var>de</var> i <var>en</var>",
 	"apihelp-wbeditentity-example-11": "Dodaje etykietę, nie zastępując jej, jeśli już istnieje",
@@ -27,7 +28,7 @@
 	"apihelp-wbmergeitems-description": "Łączy wiele elementów.",
 	"apihelp-wbmergeitems-summary": "Łączy wiele elementów.",
 	"apihelp-wbmergeitems-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „bot”.",
-	"apihelp-wbmergeitems-example-1": "Łączy dane z <samp>Q42</samp> do <samp>Q222</samp>",
+	"apihelp-wbmergeitems-example-1": "Łączy dane z <samp>$1</samp> do <samp>$2</samp>",
 	"apihelp-wbparsevalue-description": "Parsuje wartości za pomocą <code>ValueParser</code>.",
 	"apihelp-wbparsevalue-param-values": "Wartości do parsowania",
 	"apihelp-wbparsevalue-param-options": "Opcje, których powinien używać parser. Dostarczone jako obiekt JSON.",
@@ -74,7 +75,7 @@
 	"apihelp-wbsetreference-description": "Tworzy odnośnik lub ustawia wartość już istniejącego.",
 	"apihelp-wbsetreference-summary": "Tworzy odnośnik lub ustawia wartość istniejącego.",
 	"apihelp-wbsetreference-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „bot”.",
-	"apihelp-wbsetreference-example-1": "Tworzy nowy odnośnik dla stwierdzenia z GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF",
+	"apihelp-wbsetreference-example-1": "Tworzy nowy odnośnik dla stwierdzenia z GUID $1",
 	"apihelp-wbsetsitelink-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „bot”.",
 	"apihelp-wbsetsitelink-param-linksite": "Identyfikator strony, na którą przekierowują linki",
 	"apihelp-wbsetsitelink-example-2": "Dodaj link do Angielskiej strony \"Hydrogen\" do elementu z ID \"Q42\", jeśli link nie istnieje. Dodaj też etykietę \"Kocha Tlen\" w opisie zmian.",
