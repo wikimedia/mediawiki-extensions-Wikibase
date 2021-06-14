@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use InvalidArgumentException;
@@ -83,10 +85,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		return WikibaseRepo::getEntityNamespaceLookup();
 	}
 
-	/**
-	 * @return WikiPageEntityMetaDataLookup
-	 */
-	private function getWikiPageEntityMetaDataLookup( $namespaceLookup = null ) {
+	private function getWikiPageEntityMetaDataLookup( $namespaceLookup = null ): WikiPageEntityMetaDataLookup {
 		if ( $namespaceLookup === null ) {
 			$namespaceLookup = $this->getEntityNamespaceLookup();
 		}
@@ -106,7 +105,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function newEntitySource() {
+	private function newEntitySource(): EntitySource {
 		$irrelevantItemNamespaceId = 100;
 		$irrelevantPropertyNamespaceId = 200;
 		$irrelevantItemSlotName = 'main';
@@ -131,10 +130,8 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @param int $selectCount Number of mocked/lagged IDatabase::select calls
 	 * @param int $getConnectionRefCount Number of ILoadBalancer::getConnectionRef calls
-	 *
-	 * @return WikiPageEntityMetaDataLookup
 	 */
-	private function getLookupWithLaggedConnection( $selectCount, $getConnectionRefCount ) {
+	private function getLookupWithLaggedConnection( int $selectCount, int $getConnectionRefCount ): WikiPageEntityMetaDataLookup {
 		$nsLookup = $this->getEntityNamespaceLookup();
 
 		$loadBalancer = $this->createMock( ILoadBalancer::class );
@@ -196,7 +193,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		return $db;
 	}
 
-	public function testLoadRevisionInformationById_latest() {
+	public function testLoadRevisionInformationById_latest(): void {
 		$entityRevision = $this->data[0];
 
 		$result = $this->getWikiPageEntityMetaDataLookup()
@@ -207,7 +204,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( 'main', $result->role_name );
 	}
 
-	public function testLoadRevisionInformationById_masterFallback() {
+	public function testLoadRevisionInformationById_masterFallback(): void {
 		$entityRevision = $this->data[0];
 
 		// Make sure we have two calls to getConnection: One that asks for a
@@ -224,7 +221,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $entityRevision->getRevisionId(), $result->page_latest );
 	}
 
-	public function testLoadRevisionInformationById_noFallback() {
+	public function testLoadRevisionInformationById_noFallback(): void {
 		$entityRevision = $this->data[0];
 
 		// Should do only one getConnection call.
@@ -240,7 +237,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertFalse( $result );
 	}
 
-	public function testLoadRevisionInformationById_old() {
+	public function testLoadRevisionInformationById_old(): void {
 		$entityRevision = $this->data[2];
 
 		$result = $this->getWikiPageEntityMetaDataLookup()
@@ -254,7 +251,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $entityRevision->getRevisionId(), $result->page_latest );
 	}
 
-	public function testLoadRevisionInformationById_wrongRevision() {
+	public function testLoadRevisionInformationById_wrongRevision(): void {
 		$entityRevision = $this->data[2];
 
 		$result = $this->getWikiPageEntityMetaDataLookup()
@@ -266,7 +263,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertFalse( $result );
 	}
 
-	public function testLoadRevisionInformationById_notFound() {
+	public function testLoadRevisionInformationById_notFound(): void {
 		$result = $this->getWikiPageEntityMetaDataLookup()
 			->loadRevisionInformationByRevisionId(
 				new ItemId( 'Q823487354' ),
@@ -280,7 +277,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 	 * @param EntityId[] $entityIds
 	 * @param stdClass[] $result
 	 */
-	private function assertRevisionInformation( array $entityIds, array $result ) {
+	private function assertRevisionInformation( array $entityIds, array $result ): void {
 		$serializedEntityIds = [];
 		foreach ( $entityIds as $entityId ) {
 			$serializedEntityIds[] = $entityId->getSerialization();
@@ -304,7 +301,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertCount( count( $entityIds ), $result );
 	}
 
-	public function testLoadRevisionInformation() {
+	public function testLoadRevisionInformation(): void {
 		$entityIds = [
 			$this->data[0]->getEntity()->getId(),
 			$this->data[1]->getEntity()->getId(),
@@ -324,7 +321,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( 'main', $result[$key]->role_name );
 	}
 
-	public function testLoadRevisionInformation_masterFallback() {
+	public function testLoadRevisionInformation_masterFallback(): void {
 		$entityIds = [
 			$this->data[0]->getEntity()->getId(),
 			$this->data[1]->getEntity()->getId(),
@@ -344,7 +341,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertRevisionInformation( $entityIds, $result );
 	}
 
-	public function testLoadRevisionInformation_unknownNamespace() {
+	public function testLoadRevisionInformation_unknownNamespace(): void {
 		$entityId = $this->data[0]->getEntity()->getId();
 		$namespaceLookup = new EntityNamespaceLookup( [] );
 		$metaDataLookup = $this->getWikiPageEntityMetaDataLookup( $namespaceLookup );
@@ -356,7 +353,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testGivenEntityFromOtherSource_loadRevisionInformationThrowsException() {
+	public function testGivenEntityFromOtherSource_loadRevisionInformationThrowsException(): void {
 		$lookup = $this->newLookupForEntitySourceProvidingItemsOnly();
 
 		$this->expectException( InvalidArgumentException::class );
@@ -366,7 +363,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testGivenEntityFromOtherSource_loadRevisionInformationByRevisionIdThrowsException() {
+	public function testGivenEntityFromOtherSource_loadRevisionInformationByRevisionIdThrowsException(): void {
 		$lookup = $this->newLookupForEntitySourceProvidingItemsOnly();
 
 		$this->expectException( InvalidArgumentException::class );
@@ -377,7 +374,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function newLookupForEntitySourceProvidingItemsOnly() {
+	private function newLookupForEntitySourceProvidingItemsOnly(): WikiPageEntityMetaDataLookup {
 		$irrelevantItemNamespaceId = 100;
 		$irrelevantItemSlotName = 'main';
 
@@ -413,7 +410,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 	 * @param EntityId[] $entityIds array of four entity IDs; the third entry (index 2) should not exist
 	 * @param (int|bool)[] $result
 	 */
-	private function assertLatestRevisionIds( array $entityIds, array $result ) {
+	private function assertLatestRevisionIds( array $entityIds, array $result ): void {
 		$serializedEntityIds = [];
 		foreach ( $entityIds as $entityId ) {
 			$serializedEntityIds[] = $entityId->getSerialization();
@@ -437,7 +434,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertCount( count( $entityIds ), $result );
 	}
 
-	public function testLoadLatestRevisionIds() {
+	public function testLoadLatestRevisionIds(): void {
 		$entityIds = [
 			$this->data[0]->getEntity()->getId(),
 			$this->data[1]->getEntity()->getId(),
@@ -454,7 +451,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertLatestRevisionIds( $entityIds, $result );
 	}
 
-	public function testLoadLatestRevisionIds_masterFallback() {
+	public function testLoadLatestRevisionIds_masterFallback(): void {
 		$entityIds = [
 			$this->data[0]->getEntity()->getId(),
 			$this->data[1]->getEntity()->getId(),
@@ -474,7 +471,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertLatestRevisionIds( $entityIds, $result );
 	}
 
-	public function testLoadLatestRevisionIds_unknownNamespace() {
+	public function testLoadLatestRevisionIds_unknownNamespace(): void {
 		$entityId = $this->data[0]->getEntity()->getId();
 		$namespaceLookup = new EntityNamespaceLookup( [] );
 		$metaDataLookup = $this->getWikiPageEntityMetaDataLookup( $namespaceLookup );
@@ -486,7 +483,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testLoadLatestRevisionIds_noResultForRedirect() {
+	public function testLoadLatestRevisionIds_noResultForRedirect(): void {
 		$entityId = $this->redirectId;
 
 		$result = $this->getWikiPageEntityMetaDataLookup()
@@ -498,7 +495,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( [ $entityId->getSerialization() => false ], $result );
 	}
 
-	public function testGivenEntityFromOtherSource_loadLatestRevisionIdsThrowsException() {
+	public function testGivenEntityFromOtherSource_loadLatestRevisionIdsThrowsException(): void {
 		$lookup = $this->newLookupForEntitySourceProvidingItemsOnly();
 
 		$this->expectException( InvalidArgumentException::class );

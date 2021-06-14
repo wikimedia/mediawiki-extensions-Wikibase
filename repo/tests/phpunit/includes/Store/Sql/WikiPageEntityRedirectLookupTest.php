@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use ContentHandler;
@@ -50,7 +52,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	private function setUpEntities() {
+	private function setUpEntities(): void {
 		$user = $this->getTestUser()->getUser();
 		$entityStore = WikibaseRepo::getEntityStore();
 
@@ -75,7 +77,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 	 * Create a redirect from a non-Entity NS to the entity created, to make sure this doesn't
 	 * interfere with WikiPageEntityRedirectLookup (especially getRedirectIds).
 	 */
-	private function setUpNonEntityRedirect() {
+	private function setUpNonEntityRedirect(): void {
 		$entityTitleLookup = WikibaseRepo::getEntityTitleLookup();
 		$title = $entityTitleLookup->getTitleForId( $this->itemId );
 
@@ -91,24 +93,24 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testGetRedirectForEntityId() {
+	public function testGetRedirectForEntityId(): void {
 		$res = $this->getWikiPageEntityRedirectLookup()->getRedirectForEntityId( $this->redirectItemIds[0] );
 
 		$this->assertEquals( $this->itemId, $res );
 	}
 
-	public function testGetRedirectForEntityId_entityDoesNotExist() {
+	public function testGetRedirectForEntityId_entityDoesNotExist(): void {
 		$this->expectException( EntityRedirectLookupException::class );
 		$this->getWikiPageEntityRedirectLookup()->getRedirectForEntityId( new ItemId( 'Q48758903' ) );
 	}
 
-	public function testGetRedirectForEntityId_entityNotARedirect() {
+	public function testGetRedirectForEntityId_entityNotARedirect(): void {
 		$res = $this->getWikiPageEntityRedirectLookup()->getRedirectForEntityId( $this->itemId );
 
 		$this->assertNull( $res );
 	}
 
-	public function testGetRedirectForEntityId_itemsInMainNamespace() {
+	public function testGetRedirectForEntityId_itemsInMainNamespace(): void {
 		$row = [
 			'page_id' => 10,
 			'rd_namespace' => NS_MAIN,
@@ -126,10 +128,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( new ItemId( 'Q10' ), $redirect );
 	}
 
-	/**
-	 * @return EntityTitleStoreLookup
-	 */
-	private function getMockEntityTitleLookup() {
+	private function getMockEntityTitleLookup(): EntityTitleStoreLookup {
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$entityTitleLookup->method( 'getTitleForId' )
@@ -140,10 +139,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		return $entityTitleLookup;
 	}
 
-	/**
-	 * @return EntityIdLookup
-	 */
-	private function getMockEntityIdLookup() {
+	private function getMockEntityIdLookup(): EntityIdLookup {
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 
 		$entityIdLookup->method( 'getEntityIdForTitle' )
@@ -154,12 +150,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		return $entityIdLookup;
 	}
 
-	/**
-	 * @param array $row
-	 *
-	 * @return ILoadBalancer
-	 */
-	private function getMockLoadBalancer( array $row ) {
+	private function getMockLoadBalancer( array $row ): ILoadBalancer {
 		$db = $this->getMockDatabase( $row );
 
 		$loadBalancer = $this->createMock( ILoadBalancer::class );
@@ -170,12 +161,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		return $loadBalancer;
 	}
 
-	/**
-	 * @param array $row
-	 *
-	 * @return IDatabase
-	 */
-	private function getMockDatabase( array $row ) {
+	private function getMockDatabase( array $row ): IDatabase {
 		$db = $this->createMock( IDatabase::class );
 
 		$db->method( 'selectRow' )
@@ -184,19 +170,19 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		return $db;
 	}
 
-	public function testGetRedirectIds() {
+	public function testGetRedirectIds(): void {
 		$res = $this->getWikiPageEntityRedirectLookup()->getRedirectIds( $this->itemId );
 
 		$this->assertEquals( $this->redirectItemIds, $res );
 	}
 
-	public function testGetRedirectIds_entityDoesNotExist() {
+	public function testGetRedirectIds_entityDoesNotExist(): void {
 		$res = $this->getWikiPageEntityRedirectLookup()->getRedirectIds( new ItemId( 'Q48758903' ) );
 
 		$this->assertSame( [], $res );
 	}
 
-	private function getWikiPageEntityRedirectLookup() {
+	private function getWikiPageEntityRedirectLookup(): WikiPageEntityRedirectLookup {
 		return new WikiPageEntityRedirectLookup(
 			WikibaseRepo::getEntityTitleStoreLookup(),
 			WikibaseRepo::getEntityIdLookup(),

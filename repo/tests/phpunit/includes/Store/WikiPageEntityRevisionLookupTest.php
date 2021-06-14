@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Store;
 
 use MediaWiki\MediaWikiServices;
@@ -52,21 +54,21 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 	 */
 	private static $testEntities = [];
 
-	protected function storeTestEntity( EntityDocument $entity ) {
+	protected function storeTestEntity( EntityDocument $entity ): EntityRevision {
 		$store = WikibaseRepo::getEntityStore();
 		$revision = $store->saveEntity( $entity, "storeTestEntity", $this->getTestUser()->getUser() );
 
 		return $revision;
 	}
 
-	protected function storeTestRedirect( EntityRedirect $redirect ) {
+	protected function storeTestRedirect( EntityRedirect $redirect ): int {
 		$store = WikibaseRepo::getEntityStore();
 		$revision = $store->saveRedirect( $redirect, "storeTestEntity", $this->getTestUser()->getUser() );
 
 		return $revision;
 	}
 
-	private function getMetaDataLookup() {
+	private function getMetaDataLookup(): WikiPageEntityMetaDataLookup {
 		$nsLookup = $this->getEntityNamespaceLookup();
 		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		return new WikiPageEntityMetaDataLookup(
@@ -96,10 +98,8 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 	 *
 	 * @param EntityRevision[] $entityRevisions
 	 * @param EntityRedirect[] $entityRedirects
-	 *
-	 * @return EntityRevisionLookup
 	 */
-	protected function newEntityRevisionLookup( array $entityRevisions, array $entityRedirects ) {
+	protected function newEntityRevisionLookup( array $entityRevisions, array $entityRedirects ): EntityRevisionLookup {
 		// make sure all test entities are in the database.
 
 		foreach ( $entityRevisions as $entityRev ) {
@@ -129,7 +129,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		return WikibaseRepo::getEntityNamespaceLookup();
 	}
 
-	protected function resolveLogicalRevision( $revision ) {
+	protected function resolveLogicalRevision( $revision ): int {
 		if ( is_int( $revision ) && isset( self::$testEntities[$revision] ) ) {
 			$revision = self::$testEntities[$revision]->getRevisionId();
 		}
@@ -137,7 +137,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		return $revision;
 	}
 
-	public function testGetEntityRevision_byRevisionIdWithMode() {
+	public function testGetEntityRevision_byRevisionIdWithMode(): void {
 		// Needed to fill the database.
 		$this->newEntityRevisionLookup( $this->getTestRevisions(), [] );
 
@@ -169,7 +169,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$this->assertSame( $revisionId, $entityRevision->getRevisionId() );
 	}
 
-	public function testGetEntityRevision_fromAlternativeSlot() {
+	public function testGetEntityRevision_fromAlternativeSlot(): void {
 		$entity = new Item( new ItemId( 'Q765' ) );
 		$entityId = $entity->getId();
 		$revisionId = 117;
@@ -231,7 +231,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$this->assertSame( $revisionId, $entityRevision->getRevisionId() );
 	}
 
-	public function testGetLatestRevisionId_Redirect_ReturnsRedirectResultWithCorrectData() {
+	public function testGetLatestRevisionId_Redirect_ReturnsRedirectResultWithCorrectData(): void {
 		$entityId = new ItemId( 'Q1' );
 		$redirectsTo = new ItemId( 'Q2' );
 		$entityRedirect = new EntityRedirect( $entityId, $redirectsTo );
@@ -265,7 +265,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$this->assertEquals( $redirectRevisionId, $gotRevisionId );
 	}
 
-	public function testGetEntityRevision_ReturnsNullForNonExistingRevision() {
+	public function testGetEntityRevision_ReturnsNullForNonExistingRevision(): void {
 		$entityId = new ItemId( 'Q6654' );
 
 		/** @var MockObject|RevisionStore $mockRevisionStore */
@@ -291,7 +291,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$this->assertNull( $result );
 	}
 
-	public function testGetEntityRevision_ThrowsWhenRequestingSpecificNonExistingEntityRevision() {
+	public function testGetEntityRevision_ThrowsWhenRequestingSpecificNonExistingEntityRevision(): void {
 		$entityId = new ItemId( 'Q6654' );
 		$revId = 9876;
 
@@ -318,7 +318,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$lookup->getEntityRevision( $entityId, $revId, LookupConstants::LATEST_FROM_MASTER );
 	}
 
-	public function testGetEntityRevision_ThrowsWhenFoundEntityRevisionContainsDivergingEntityId() {
+	public function testGetEntityRevision_ThrowsWhenFoundEntityRevisionContainsDivergingEntityId(): void {
 		// For all we know this only happened IRL with MediaInfo entities.
 		// The following would be MediaInfoId consequently.
 		$newEntityId = $this->getMockEntityId( 'M1235' );
@@ -387,7 +387,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		}
 	}
 
-	public function testGetLatestRevisionId_ThrowsWhenFoundRevisionContainsInconsistentRedirectIndication() {
+	public function testGetLatestRevisionId_ThrowsWhenFoundRevisionContainsInconsistentRedirectIndication(): void {
 		// For all we know this only happened IRL with MediaInfo entities.
 		// The following would be MediaInfoId consequently.
 		$entityId = $this->getMockEntityId( 'M1234' );
@@ -462,7 +462,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		}
 	}
 
-	public function testGetLatestRevisionId_ReturnsNullForNonExistingEntityRevision() {
+	public function testGetLatestRevisionId_ReturnsNullForNonExistingEntityRevision(): void {
 		$entityId = new ItemId( 'Q6654' );
 
 		/** @var MockObject|RevisionStore $mockRevisionStore */
@@ -500,7 +500,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			)->map();
 	}
 
-	private function getMockEntityId( $idString ) {
+	private function getMockEntityId( string $idString ) {
 		$entityId = $this->createMock( EntityId::class );
 		$entityId->method( '__toString' )->willReturn( $idString );
 		$entityId->method( 'getSerialization' )->willReturn( $idString );

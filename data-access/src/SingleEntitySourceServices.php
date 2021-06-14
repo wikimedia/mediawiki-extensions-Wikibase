@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\DataAccess;
 
 use Deserializers\Deserializer;
@@ -13,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -140,7 +143,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		array $entityMetaDataAccessorCallbacks,
 		array $prefetchingTermLookupCallbacks,
 		array $entityRevisionFactoryLookupCallbacks
-	) {
+	): void {
 		Assert::parameterElementType(
 			'callable',
 			$deserializerFactoryCallbacks,
@@ -170,7 +173,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		return $this->entitySource;
 	}
 
-	public function getEntityRevisionLookup() {
+	public function getEntityRevisionLookup(): EntityRevisionLookup {
 		if ( $this->entityRevisionLookup === null ) {
 			$codec = new EntityContentDataCodec(
 				$this->entityIdParser,
@@ -206,7 +209,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		return $this->entityRevisionLookup;
 	}
 
-	private function getEntityDeserializer() {
+	private function getEntityDeserializer(): Deserializer {
 		$deserializerFactory = new DeserializerFactory(
 			$this->dataValueDeserializer,
 			$this->entityIdParser
@@ -226,7 +229,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		return $internalDeserializerFactory->newEntityDeserializer();
 	}
 
-	private function getEntityMetaDataAccessor() {
+	private function getEntityMetaDataAccessor(): PrefetchingWikiPageEntityMetaDataAccessor {
 		if ( $this->entityMetaDataAccessor === null ) {
 			$entityNamespaceLookup = new EntityNamespaceLookup(
 				$this->entitySource->getEntityNamespaceIds(),
@@ -259,11 +262,11 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		return $this->entityMetaDataAccessor;
 	}
 
-	public function getEntityPrefetcher() {
+	public function getEntityPrefetcher(): EntityPrefetcher {
 		return $this->getEntityMetaDataAccessor();
 	}
 
-	public function getPropertyInfoLookup() {
+	public function getPropertyInfoLookup(): PropertyInfoLookup {
 		if ( !in_array( Property::ENTITY_TYPE, $this->entitySource->getEntityTypes() ) ) {
 			throw new \LogicException( 'Entity source: ' . $this->entitySource->getSourceName() . ' does no provide properties' );
 		}
@@ -281,7 +284,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		return $this->propertyInfoLookup;
 	}
 
-	public function entityUpdated( EntityRevision $entityRevision ) {
+	public function entityUpdated( EntityRevision $entityRevision ): void {
 		// TODO: should this become more "generic" and somehow enumerate all services and
 		// update all of these which are instances of EntityStoreWatcher?
 
@@ -292,7 +295,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		}
 	}
 
-	public function redirectUpdated( EntityRedirect $entityRedirect, $revisionId ) {
+	public function redirectUpdated( EntityRedirect $entityRedirect, $revisionId ): void {
 		// TODO: should this become more "generic" and somehow enumerate all services and
 		// update all of these which are instances of EntityStoreWatcher?
 
@@ -303,7 +306,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		}
 	}
 
-	public function entityDeleted( EntityId $entityId ) {
+	public function entityDeleted( EntityId $entityId ): void {
 		// TODO: should this become more "generic" and somehow enumerate all services and
 		// update all of these which are instances of EntityStoreWatcher?
 
