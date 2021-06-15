@@ -540,15 +540,9 @@ class MediawikiEditEntity implements EditEntity {
 	 */
 	public function isTokenOK( $token ) {
 		$tokenOk = $this->user->matchEditToken( $token );
-		$tokenOkExceptSuffix = $this->user->matchEditTokenNoSuffix( $token );
 
 		if ( !$tokenOk ) {
-			if ( $tokenOkExceptSuffix ) {
-				$this->status->fatal( 'token_suffix_mismatch' );
-			} else {
-				$this->status->fatal( 'session_fail_preview' );
-			}
-
+			$this->status->fatal( 'session_fail_preview' );
 			$this->errorType |= EditEntity::TOKEN_ERROR;
 			return false;
 		}

@@ -299,15 +299,9 @@ class SubmitEntityAction extends EditEntityAction {
 	private function getEditTokenStatus( $editToken ) {
 		$status = Status::newGood();
 		$user = $this->getUser();
-
 		if ( !$user->matchEditToken( $editToken ) ) {
-			if ( $user->matchEditTokenNoSuffix( $editToken ) ) {
-				$status = Status::newFatal( 'token_suffix_mismatch' );
-			} else {
-				$status = Status::newFatal( 'session_fail_preview' );
-			}
+			$status = Status::newFatal( 'session_fail_preview' );
 		}
-
 		return $status;
 	}
 
