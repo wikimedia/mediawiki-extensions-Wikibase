@@ -307,7 +307,6 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			'user' => [ 1, 60 ],
 		] ] );
 		$this->setMwGlobals( 'wgMainCacheType', 'hash' );
-		WikibaseRepo::getSettings()->setSetting( 'idGeneratorRateLimiting', true );
 
 		$formData = [
 			SpecialNewItem::FIELD_LANG => 'en',
