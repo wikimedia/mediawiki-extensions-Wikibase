@@ -109,7 +109,19 @@ services:
     depends_on:
       - wdqs
 
+  elasticsearch:
+    image: docker-registry.wikimedia.org/dev/stretch-elasticsearch:0.1.0
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200
+      - 9300
+
 volumes:
   mediawiki-mysql-data:
   mediawiki-images-data:
   query-service-data:
+  esdata:
+      driver: local

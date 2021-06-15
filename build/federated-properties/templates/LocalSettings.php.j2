@@ -101,3 +101,12 @@ if( isset ( $_SERVER['HTTP_X_FEDPROPS_SOURCEAPIRESPONSE'] ) ) {
       $wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = 'http://notFound.404';
    }
 }
+
+# WikibaseCirrusSearch / Elastic
+wfLoadExtension( 'WikibaseCirrusSearch' );
+wfLoadExtension( 'CirrusSearch' );
+wfLoadExtension( 'Elastica' );
+
+require_once "$IP/extensions/CirrusSearch/tests/jenkins/FullyFeaturedConfig.php";
+$wgCirrusSearchServers = [ 'elasticsearch' ];
+$wgWBCSUseCirrus = true;
