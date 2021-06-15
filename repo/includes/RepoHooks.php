@@ -400,10 +400,9 @@ final class RepoHooks {
 	public static function onPageHistoryLineEnding( HistoryPager $history, $row, &$html, array $classes ) {
 		// Note: This assumes that HistoryPager::getTitle returns a Title.
 		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
-
-		$wikiPage = $history->getWikiPage();
 		$services = MediaWikiServices::getInstance();
 
+		$wikiPage = $services->getWikiPageFactory()->newFromTitle( $history->getTitle() );
 		$revisionRecord = $services->getRevisionFactory()->newRevisionFromRow( $row );
 		$linkTarget = $revisionRecord->getPageAsLinkTarget();
 

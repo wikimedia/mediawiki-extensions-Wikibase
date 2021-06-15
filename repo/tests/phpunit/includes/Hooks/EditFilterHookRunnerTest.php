@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 use Content;
 use FauxRequest;
 use IContextSource;
+use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Status;
@@ -156,8 +157,9 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 			User $user,
 			$minoredit
 		) use ( $expected, $inputStatus ) {
+			$wikiPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $context->getTitle() );
 			$this->assertSame( $expected['title'], $context->getTitle()->getFullText() );
-			$this->assertSame( $context->getTitle(), $context->getWikiPage()->getTitle() );
+			$this->assertSame( $context->getTitle(), $wikiPage->getTitle() );
 			$this->assertSame( $expected['namespace'], $context->getTitle()->getNamespace() );
 			$this->assertEquals( new ItemContent( new EntityInstanceHolder( new Item() ) ), $content );
 			$this->assertTrue( $status->isGood() );
