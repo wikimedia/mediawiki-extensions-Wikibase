@@ -78,7 +78,7 @@ Monolingual entries removed as they are now natively supported by MediaWiki:
 
 === Other changes in 1.37 ===
 
-* (T12345) ...
+* (T272032, T274157) Rate limiting for ID generator is now enforced in all installations.
 
 == Online documentation ==
 
