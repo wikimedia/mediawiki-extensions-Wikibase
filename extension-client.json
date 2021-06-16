@@ -89,7 +89,7 @@
 			"class": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler::factory",
 			"services": [
-				"DBLoadBalancer",
+				"WikibaseClient.ClientDomainDbFactory",
 				"WikibaseClient.Settings"
 			]
 		},
