@@ -16,7 +16,7 @@ You need to be in possession of an SSH private key for which there is an associa
 
 The file `inventory.yml` contains a set of hosts, which can be used as targets for the test system setup:
  * `wikibase-federated-properties.vm` - a virtual machine on your computer
- * `wikidata-federated-properties.wikidata-dev.eqiad.wmflabs` - the project's official cloud VPS test instance
+ * `wikidata-federated-properties.wikidata-dev.eqiad1.wikimedia.cloud` - the project's official cloud VPS test instance
  * `fedprops-euspecies.wikidata-dev.eqiad.wmflabs` - a demo system created in https://phabricator.wikimedia.org/T256457
  * `fedprops-opennext.wikidata-dev.eqiad.wmflabs` - a demo system created in https://phabricator.wikimedia.org/T256457
 
@@ -87,7 +87,7 @@ Once the setup process has completed, you can access your newly installed Wikiba
 Set up your VPS instance on https://horizon.wikimedia.org and a web proxy to reach it from the internet, then:
 ```sh
 $ cd extensions/Wikibase/build/federated-properties
-$ ansible-playbook fedProps.yml --limit wikidata-federated-properties.wikidata-dev.eqiad.wmflabs
+$ ansible-playbook fedProps.yml --limit wikidata-federated-properties.wikidata-dev.eqiad1.wikimedia.cloud
 ```
 
 Once the setup process has completed, you can access the newly installed Wikibase test system via https://wikidata-federated-properties.wmflabs.org.
@@ -103,7 +103,7 @@ $ cd extensions/Wikibase/build/federated-properties
 $ ansible-playbook cleanup.yml --limit wikibase-federated-properties.vm
 
 # cleanup the cloud VPS instance
-ansible-playbook cleanup.yml --limit wikidata-federated-properties.wikidata-dev.eqiad.wmflabs
+ansible-playbook cleanup.yml --limit wikidata-federated-properties.wikidata-dev.eqiad1.wikimedia.cloud
 
 # cleanup both simultaneously
 ansible-playbook cleanup.yml

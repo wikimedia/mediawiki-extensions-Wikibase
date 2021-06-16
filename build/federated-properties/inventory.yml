@@ -1,6 +1,6 @@
 test_systems:
   hosts:
-    wikidata-federated-properties.wikidata-dev.eqiad.wmflabs:
+    wikidata-federated-properties.wikidata-dev.eqiad1.wikimedia.cloud:
       SCHEME: "https"
       SERVER_NAME: "wikidata-federated-properties.wmflabs.org"
       PORT: ""
