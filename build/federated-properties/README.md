@@ -10,7 +10,7 @@ $ ansible --version
 ansible 2.9.6
 ```
 
-You need to be in possession of an SSH private key for which there is a associated user that is authorized to perform the operations.
+You need to be in possession of an SSH private key for which there is an associated user that is authorized to perform the operations.
 
 ### Inventory
 
@@ -53,7 +53,7 @@ Host wikibase-federated-properties.vm
   User vagrant
   IdentityFile <YOUR-PATH-TO-WIKIBASE>/build/federated-properties/vagrant/.vagrant/machines/default/virtualbox/private_key
 ```
-You should now be able to ssh into your VM without providing a username or an identy file:
+You should now be able to ssh into your VM without providing a username or an identity file:
 ```
 $ ssh wikibase-federated-properties.vm
 
@@ -111,7 +111,7 @@ ansible-playbook cleanup.yml
 
 ### Interwiki links
 
-For the federated properties to render correctly on a wikibase installation using a manual configuration of entitysources we need to have a row in the interwiki table pointing to the correct federtated source wiki.
+For the federated properties to render correctly on a wikibase installation using a manual configuration of entitysources we need to have a row in the interwiki table pointing to the correct federated source wiki.
 
 This can be manually inserted using the following example where ```wdbeta``` is used.
 
