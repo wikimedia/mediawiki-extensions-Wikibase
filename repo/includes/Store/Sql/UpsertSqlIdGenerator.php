@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use RuntimeException;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -24,10 +25,8 @@ use Wikimedia\Rdbms\ILoadBalancer;
  */
 class UpsertSqlIdGenerator implements IdGenerator {
 
-	/**
-	 * @var ILoadBalancer
-	 */
-	private $loadBalancer;
+	/** @var RepoDomainDb */
+	private $db;
 
 	/**
 	 * @var int[][]
@@ -47,16 +46,16 @@ class UpsertSqlIdGenerator implements IdGenerator {
 	private $separateDbConnection;
 
 	/**
-	 * @param ILoadBalancer $loadBalancer
+	 * @param RepoDomainDb $db
 	 * @param int[][] $reservedIds
 	 * @param bool $separateDbConnection
 	 */
 	public function __construct(
-		ILoadBalancer $loadBalancer,
+		RepoDomainDb $db,
 		array $reservedIds = [],
 		$separateDbConnection = false
 	) {
-		$this->loadBalancer = $loadBalancer;
+		$this->db = $db;
 		$this->reservedIds = $reservedIds;
 		$this->separateDbConnection = $separateDbConnection;
 	}
@@ -72,7 +71,7 @@ class UpsertSqlIdGenerator implements IdGenerator {
 	 */
 	public function getNewId( $type ) {
 		$flags = ( $this->separateDbConnection === true ) ? ILoadBalancer::CONN_TRX_AUTOCOMMIT : 0;
-		$database = $this->loadBalancer->getConnection( DB_PRIMARY, [], false, $flags );
+		$database = $this->db->connections()->getWriteConnection( $flags );
 
 		$idGenerations = 0;
 		do {
@@ -86,7 +85,7 @@ class UpsertSqlIdGenerator implements IdGenerator {
 
 		} while ( $this->idIsReserved( $type, $id ) );
 
-		$this->loadBalancer->reuseConnection( $database );
+		$this->db->connections()->releaseConnection( $database );
 
 		return $id;
 	}

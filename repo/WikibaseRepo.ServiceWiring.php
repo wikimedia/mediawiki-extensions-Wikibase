@@ -1059,7 +1059,7 @@ return [
 		switch ( $settings->getSetting( 'idGenerator' ) ) {
 			case 'original':
 				$idGenerator = new SqlIdGenerator(
-					$services->getDBLoadBalancer(),
+					WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
 					$settings->getSetting( 'reservedIds' ),
 					$settings->getSetting( 'idGeneratorSeparateDbConnection' )
 				);
@@ -1069,7 +1069,7 @@ return [
 				// but perhaps that is an unnecessary check? People will realize when the DB query for
 				// ID selection fails anyway...
 				$idGenerator = new UpsertSqlIdGenerator(
-					$services->getDBLoadBalancer(),
+					WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
 					$settings->getSetting( 'reservedIds' ),
 					$settings->getSetting( 'idGeneratorSeparateDbConnection' )
 				);

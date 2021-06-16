@@ -91,6 +91,13 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		return $id;
 	}
 
+	private function getRepoDomainDb(): RepoDomainDb {
+		return new RepoDomainDb(
+			LBFactorySingle::newFromConnection( $this->db ),
+			$this->db->getDomainID()
+		);
+	}
+
 	/**
 	 * @return array [ EntityStore, EntityLookup ]
 	 */
@@ -154,7 +161,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 				]
 			),
 			WikibaseRepo::getEntityTitleStoreLookup(),
-			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
+			new SqlIdGenerator( $this->getRepoDomainDb() ),
 			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$localSource,
@@ -1011,7 +1018,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 				]
 			),
 			WikibaseRepo::getEntityTitleStoreLookup(),
-			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
+			new SqlIdGenerator( $this->getRepoDomainDb() ),
 			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$itemSource,
@@ -1045,7 +1052,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 				]
 			),
 			WikibaseRepo::getEntityTitleStoreLookup(),
-			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
+			new SqlIdGenerator( $this->getRepoDomainDb() ),
 			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$customSource,
