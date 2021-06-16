@@ -2,9 +2,11 @@
 
 namespace Wikibase\Repo\Tests;
 
+use ApiMain;
 use ApiQuerySiteinfo;
 use ConfigFactory;
 use DerivativeContext;
+use Exception;
 use ImportStringSource;
 use MediaWiki\Linker\LinkTarget;
 use MediaWikiIntegrationTestCase;
@@ -18,10 +20,12 @@ use Title;
 use TitleValue;
 use User;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Repo\Api\EditEntity;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\RepoHooks;
+use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use WikiImporter;
 use Wikimedia\AtEase\AtEase;
@@ -700,6 +704,83 @@ XML
 
 		RepoHooks::onSkinTemplateNavigationUniversal( $skinTemplate, $links );
 		$this->assertArrayEquals( $expectedLinks, $links );
+	}
+
+	public function testOnApiMainOnExceptionIncrementPing() {
+		$this->getSettings()->setSetting( 'idGeneratorInErrorPingLimiter', 10 );
+		$user = $this->getMockBuilder( User::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$user->expects( $this->once() )
+			->method( 'pingLimiter' )
+			->with( RateLimitingIdGenerator::RATELIMIT_NAME, 10 );
+
+		$apiModule = $this->getMockBuilder( EditEntity::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$apiModule->method( 'isFreshIdAssigned' )
+			->willreturn( true );
+
+		$apiMain = $this->getMockBuilder( ApiMain::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$apiMain->method( 'getModule' )
+			->willreturn( $apiModule );
+		$apiMain->method( 'getUser' )
+			->willreturn( $user );
+
+		RepoHooks::onApiMainOnException( $apiMain, new Exception( 'foo' ) );
+	}
+
+	public function testOnApiMainOnExceptionNoop() {
+		$this->getSettings()->setSetting( 'idGeneratorInErrorPingLimiter', 10 );
+		$user = $this->getMockBuilder( User::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$user->expects( $this->never() )
+			->method( 'pingLimiter' );
+
+		$apiModule = $this->getMockBuilder( EditEntity::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$apiModule->method( 'isFreshIdAssigned' )
+			->willreturn( false );
+
+		$apiMain = $this->getMockBuilder( ApiMain::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$apiMain->method( 'getModule' )
+			->willreturn( $apiModule );
+		$apiMain->method( 'getUser' )
+			->willreturn( $user );
+
+		RepoHooks::onApiMainOnException( $apiMain, new Exception( 'foo' ) );
+	}
+
+	public function testOnApiMainOnExceptionNoopOnDisabledConfig() {
+		$this->getSettings()->setSetting( 'idGeneratorInErrorPingLimiter', 0 );
+		$user = $this->getMockBuilder( User::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$user->expects( $this->never() )
+			->method( 'pingLimiter' );
+
+		$apiModule = $this->getMockBuilder( EditEntity::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$apiModule
+			->expects( $this->never() )
+			->method( 'isFreshIdAssigned' );
+
+		$apiMain = $this->getMockBuilder( ApiMain::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$apiMain->method( 'getModule' )
+			->willreturn( $apiModule );
+		$apiMain->method( 'getUser' )
+			->willreturn( $user );
+
+		RepoHooks::onApiMainOnException( $apiMain, new Exception( 'foo' ) );
 	}
 
 }

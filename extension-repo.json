@@ -884,6 +884,7 @@
 		"APIQuerySiteInfoStatisticsInfo": "\\Wikibase\\Repo\\RepoHooks::onAPIQuerySiteInfoStatisticsInfo",
 		"AbuseFilter-contentToString": "\\Wikibase\\Repo\\RepoHooks::onAbuseFilterContentToString",
 		"ApiCheckCanExecute": "\\Wikibase\\Repo\\RepoHooks::onApiCheckCanExecute",
+		"ApiMain::onException": "\\Wikibase\\Repo\\RepoHooks::onApiMainOnException",
 		"ApiMaxLagInfo": "\\Wikibase\\Repo\\RepoHooks::onApiMaxLagInfo",
 		"ApiQuery::moduleManager": "\\Wikibase\\Repo\\RepoHooks::onApiQueryModuleManager",
 		"ArticleDeleteComplete": [

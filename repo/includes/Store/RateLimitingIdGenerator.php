@@ -13,6 +13,8 @@ use Wikibase\Lib\Store\StorageException;
  */
 class RateLimitingIdGenerator implements IdGenerator {
 
+	public const RATELIMIT_NAME = 'wikibase-idgenerator';
+
 	/** @var IdGenerator */
 	private $idGenerator;
 
@@ -28,7 +30,7 @@ class RateLimitingIdGenerator implements IdGenerator {
 	}
 
 	public function getNewId( $type ) {
-		if ( $this->contextSource->getUser()->pingLimiter( 'wikibase-idgenerator' ) ) {
+		if ( $this->contextSource->getUser()->pingLimiter( self::RATELIMIT_NAME ) ) {
 			throw new StorageException( Status::newFatal( 'actionthrottledtext' ) );
 		}
 

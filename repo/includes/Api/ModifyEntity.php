@@ -95,6 +95,11 @@ abstract class ModifyEntity extends ApiBase {
 	protected $enabledEntityTypes;
 
 	/**
+	 * @var bool
+	 */
+	private $isFreshIdAssigned;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param bool $federatedPropertiesEnabled
@@ -127,6 +132,7 @@ abstract class ModifyEntity extends ApiBase {
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
 
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
+		$this->isFreshIdAssigned = false;
 	}
 
 	public function setServices( SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider ): void {
@@ -367,9 +373,19 @@ abstract class ModifyEntity extends ApiBase {
 			}
 
 			$entity = $this->entitySavingHelper->loadEntity( $params, $entityId, EntitySavingHelper::ASSIGN_FRESH_ID );
+			$this->isFreshIdAssigned = true;
 		}
 
 		return $entity;
+	}
+
+	/**
+	 * Return whether a fresh id is assigned or not.
+	 *
+	 * @return bool false if fresh id is not assigned, true otherwise
+	 */
+	public function isFreshIdAssigned(): bool {
+		return $this->isFreshIdAssigned;
 	}
 
 	/**
