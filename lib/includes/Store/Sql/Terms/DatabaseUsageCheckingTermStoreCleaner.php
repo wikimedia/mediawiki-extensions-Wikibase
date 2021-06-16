@@ -3,7 +3,7 @@
 declare( strict_types=1 );
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use Wikimedia\Rdbms\ILoadBalancer;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 
 /**
  * @license GPL-2.0-or-later
@@ -17,13 +17,14 @@ class DatabaseUsageCheckingTermStoreCleaner implements TermStoreCleaner {
 	 * @var DatabaseInnerTermStoreCleaner
 	 */
 	private $innerCleaner;
-	/**
-	 * @var ILoadBalancer
-	 */
-	private $loadBalancer;
 
-	public function __construct( ILoadBalancer $loadbalancer, DatabaseInnerTermStoreCleaner $innerCleaner ) {
-		$this->loadBalancer = $loadbalancer;
+	/**
+	 * @var RepoDomainDb
+	 */
+	private $repoDomainDb;
+
+	public function __construct( RepoDomainDb $repoDomainDb, DatabaseInnerTermStoreCleaner $innerCleaner ) {
+		$this->repoDomainDb = $repoDomainDb;
 		$this->innerCleaner = $innerCleaner;
 	}
 
@@ -38,8 +39,9 @@ class DatabaseUsageCheckingTermStoreCleaner implements TermStoreCleaner {
 	 * @param array $termInLangIds
 	 */
 	public function cleanTermInLangIds( array $termInLangIds ): void {
-		$dbw = $this->loadBalancer->getConnection( ILoadBalancer::DB_PRIMARY );
-		$dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
+
+		$dbw = $this->repoDomainDb->connections()->getWriteConnection();
+		$dbr = $this->repoDomainDb->connections()->getReadConnection();
 
 		$dbw->startAtomic( __METHOD__ );
 		$unusedTermInLangIds = $this->findActuallyUnusedTermInLangIds( $termInLangIds, $dbw );
