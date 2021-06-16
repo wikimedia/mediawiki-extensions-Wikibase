@@ -317,7 +317,7 @@
 	"apihelp-wbsetsitelink-example-4": "Remover o sitelink alemão do item",
 	"apihelp-wbsetsitelink-example-5": "Adicionar um sitelink para a página em polonês \"Wodór\" ao item vinculado com a página em inglês \"Hydrogen\", com um emblema apontando para o item com ID \"Q149\"",
 	"apihelp-wbsetsitelink-example-6": "Altere os emblemas do link para a página polaca do item com a identificação <samp>$1</samp> para dois emblemas apontando para os itens com IDs \"Q2\" e \"Q149\" sem fornecer o título do link",
-	"apihelp-wbsetsitelink-example-7": "Altere o link para a página polonesa do item com o ID <samp>$1</samp sem alterar seus emblemas",
+	"apihelp-wbsetsitelink-example-7": "Altere o link para a página polonesa do item com o ID <samp>$1</samp> sem alterar seus emblemas",
 	"apihelp-wbsetsitelink-example-8": "Altere o link para a página polonesa do item com o ID <samp>$1</samp> e remova todos os seus emblemas",
 	"apihelp-wbformatentities-summary": "Formata IDs de entidade para HTML.",
 	"apihelp-wbformatentities-extended-description": "A linguagem pode ser especificada com o parâmetro global <var>uselang</var>.",
