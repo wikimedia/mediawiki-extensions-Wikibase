@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Store;
 
 use LogicException;
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Onoi\MessageReporter\SpyMessageReporter;
 use Wikibase\DataModel\Entity\Item;
@@ -19,6 +18,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Store\ItemTermsRebuilder;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Store\ItemTermsRebuilder
@@ -72,7 +72,7 @@ class ItemTermsRebuilderTest extends MediaWikiIntegrationTestCase {
 			$this->itemIds,
 			$this->progressReporter,
 			$this->errorReporter,
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb(),
 			$this->newItemLookup(),
 			1,
 			0
@@ -159,20 +159,13 @@ class ItemTermsRebuilderTest extends MediaWikiIntegrationTestCase {
 
 	public function testErrorsAreReported() {
 		$itemTermStoreWriter = $this->createMock( ItemTermStoreWriter::class );
-		$itemTermStoreWriter->expects( $this->exactly( 2 ) )
+		$itemTermStoreWriter->expects( $this->exactly( 1 ) )
 			->method( 'storeTerms' )
 			->willThrowException( new TermStoreException() );
+		$this->expectException( TermStoreException::class );
 		$this->itemTermStoreWriter = $itemTermStoreWriter;
 
 		$this->newRebuilder()->rebuild();
-
-		$this->assertSame(
-			[
-				'Failed to save terms of item: Q1',
-				'Failed to save terms of item: Q2',
-			],
-			$this->errorReporter->getMessages()
-		);
 	}
 
 	public function testProgressIsReportedEachBatch() {

@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Maintenance;
 
 use ExtensionRegistry;
 use Maintenance;
-use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
@@ -63,7 +62,7 @@ class RebuildPropertyTerms extends Maintenance {
 			$this->newEntityIdPager(),
 			$this->getReporter(),
 			$this->getErrorReporter(),
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb(),
 			new LegacyAdapterPropertyLookup(
 				WikibaseRepo::getStore()->getEntityLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY )
 			),

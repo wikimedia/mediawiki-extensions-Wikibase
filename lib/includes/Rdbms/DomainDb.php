@@ -101,6 +101,29 @@ abstract class DomainDb {
 	}
 
 	/**
+	 * Only used in batch writing (replication aware).
+	 * See https://www.mediawiki.org/wiki/Database_transactions#Splitting_writes_into_multiple_transactions
+	 *
+	 * @param string $fname Caller name (e.g. __METHOD__)
+	 * @return mixed A value to pass to commitAndWaitForReplication()
+	 */
+	public function getEmptyTransactionTicket( string $fname ) {
+		return $this->lbFactory->getEmptyTransactionTicket( $fname );
+	}
+
+	/**
+	 * Only used in batch writing (replication aware).
+	 * See https://www.mediawiki.org/wiki/Database_transactions#Splitting_writes_into_multiple_transactions
+	 *
+	 * @param string $fname Caller name (e.g. __METHOD__)
+	 * @param mixed $ticket Result of getEmptyTransactionTicket()
+	 * @return bool True if the wait was successful, false on timeout
+	 */
+	public function commitAndWaitForReplication( string $fname, $ticket ): bool {
+		return $this->lbFactory->commitAndWaitForReplication( $fname, $ticket );
+	}
+
+	/**
 	 * @deprecated Don't use this unless it needs to be passed to a service we don't control
 	 */
 	public function loadBalancer(): ILoadBalancer {

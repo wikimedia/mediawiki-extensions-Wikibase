@@ -6,7 +6,6 @@ namespace Wikibase\Repo\Store\Sql;
 
 use DatabaseUpdater;
 use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
-use MediaWiki\MediaWikiServices;
 use MWException;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Entity\ItemId;
@@ -185,15 +184,15 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		);
 
 		// Tables have potentially only just been created and we may need to wait, T268944
-		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$lbFactory->waitForReplication();
+		$db = WikibaseRepo::getRepoDomainDbFactory()->newForEntitySource( $propertySource );
+		$db->replication()->wait();
 
 		$rebuilder = new PropertyTermsRebuilder(
 			WikibaseRepo::getTermStoreWriterFactory()->newPropertyTermStoreWriter(),
 			$sqlEntityIdPagerFactory->newSqlEntityIdPager( [ 'property' ] ),
 			$reporter,
 			$reporter,
-			$lbFactory,
+			$db,
 			new LegacyAdapterPropertyLookup(
 				WikibaseRepo::getStore()->getEntityLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY )
 			),
@@ -233,15 +232,15 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$highestId = (int)$highestId->id_value;
 
 		// Tables have potentially only just been created and we may need to wait, T268944
-		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$lbFactory->waitForReplication();
+		$db = WikibaseRepo::getRepoDomainDbFactory()->newForEntitySource( $itemSource );
+		$db->replication()->wait();
 
 		$rebuilder = new ItemTermsRebuilder(
 			WikibaseRepo::getTermStoreWriterFactory()->newItemTermStoreWriter(),
 			self::newItemIdIterator( $highestId ),
 			$reporter,
 			$reporter,
-			$lbFactory,
+			$db,
 			new LegacyAdapterItemLookup(
 				WikibaseRepo::getStore()->getEntityLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY )
 			),

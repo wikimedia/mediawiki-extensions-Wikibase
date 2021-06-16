@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Store;
 
 use LogicException;
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Onoi\MessageReporter\SpyMessageReporter;
 use Wikibase\DataModel\Entity\Property;
@@ -19,6 +18,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Store\PropertyTermsRebuilder;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Store\PropertyTermsRebuilder
@@ -65,7 +65,7 @@ class PropertyTermsRebuilderTest extends MediaWikiIntegrationTestCase {
 			$this->newIdPager(),
 			$this->progressReporter,
 			$this->errorReporter,
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb(),
 			$this->newPropertyLookup(),
 			1,
 			0
@@ -158,20 +158,13 @@ class PropertyTermsRebuilderTest extends MediaWikiIntegrationTestCase {
 
 	public function testErrorsAreReported() {
 		$propertyTermStoreWriter = $this->createMock( PropertyTermStoreWriter::class );
-		$propertyTermStoreWriter->expects( $this->exactly( 2 ) )
+		$propertyTermStoreWriter->expects( $this->exactly( 1 ) )
 			->method( 'storeTerms' )
 			->willThrowException( new TermStoreException() );
 		$this->propertyTermStoreWriter = $propertyTermStoreWriter;
+		$this->expectException( TermStoreException::class );
 
 		$this->newRebuilder()->rebuild();
-
-		$this->assertSame(
-			[
-				'Failed to save terms of property: P1',
-				'Failed to save terms of property: P2',
-			],
-			$this->errorReporter->getMessages()
-		);
 	}
 
 	public function testProgressIsReportedEachBatch() {
