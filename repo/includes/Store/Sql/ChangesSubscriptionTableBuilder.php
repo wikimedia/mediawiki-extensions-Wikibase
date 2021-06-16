@@ -8,10 +8,10 @@ use Onoi\MessageReporter\NullMessageReporter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -25,9 +25,9 @@ use Wikimedia\Rdbms\IResultWrapper;
 class ChangesSubscriptionTableBuilder {
 
 	/**
-	 * @var ILoadBalancer
+	 * @var RepoDomainDb
 	 */
-	private $loadBalancer;
+	private $db;
 
 	/**
 	 * @var EntityIdComposer
@@ -60,7 +60,7 @@ class ChangesSubscriptionTableBuilder {
 	private $verbosity;
 
 	/**
-	 * @param ILoadBalancer $loadBalancer
+	 * @param RepoDomainDb $db
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param string $tableName
 	 * @param int $batchSize
@@ -69,7 +69,7 @@ class ChangesSubscriptionTableBuilder {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		ILoadBalancer $loadBalancer,
+		RepoDomainDb $db,
 		EntityIdComposer $entityIdComposer,
 		$tableName,
 		$batchSize,
@@ -88,7 +88,7 @@ class ChangesSubscriptionTableBuilder {
 				. ' or "standard".' );
 		}
 
-		$this->loadBalancer = $loadBalancer;
+		$this->db = $db;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->tableName = $tableName;
 		$this->batchSize = $batchSize;
@@ -133,7 +133,7 @@ class ChangesSubscriptionTableBuilder {
 	 * @return int The number of subscriptions inserted.
 	 */
 	private function processSubscriptionBatch( &$continuation = [] ) {
-		$db = $this->loadBalancer->getConnection( DB_PRIMARY );
+		$db = $this->db->connections()->getWriteConnection();
 
 		$subscriptionsPerItemBatch = $this->getSubscriptionsPerItemBatch( $db, $continuation );
 
@@ -143,7 +143,7 @@ class ChangesSubscriptionTableBuilder {
 
 		$count = $this->insertSubscriptionBatch( $db, $subscriptionsPerItemBatch );
 
-		$this->loadBalancer->reuseConnection( $db );
+		$this->db->connections()->releaseConnection( $db );
 
 		return $count;
 	}
