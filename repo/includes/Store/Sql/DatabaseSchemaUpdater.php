@@ -220,10 +220,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			}
 		);
 
-		$highestId = MediaWikiServices::getInstance()
-			->getDBLoadBalancer()
-			->getConnection( DB_REPLICA )
-			->selectRow(
+		$highestId = $updater->getDB()->selectRow(
 				'wb_id_counters',
 				'id_value',
 				[ 'id_type' => 'wikibase-item' ],
@@ -293,8 +290,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	 */
 	public static function fillSubscriptionTable( DatabaseUpdater $dbUpdater, string $table ): void {
 		$primer = new ChangesSubscriptionTableBuilder(
-			// would be nice to pass in $dbUpdater->getDB().
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb(),
 			WikibaseRepo::getEntityIdComposer(),
 			$table,
 			1000

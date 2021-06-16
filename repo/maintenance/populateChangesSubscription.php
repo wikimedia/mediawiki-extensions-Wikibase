@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Maintenance;
 
 use LoggedUpdateMaintenance;
-use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
@@ -63,7 +62,7 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 		);
 
 		$builder = new ChangesSubscriptionTableBuilder(
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb(),
 			WikibaseRepo::getEntityIdComposer(),
 			'wb_changes_subscription',
 			$this->mBatchSize,
