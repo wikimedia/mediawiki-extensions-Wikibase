@@ -1740,7 +1740,7 @@ return [
 
 	'WikibaseRepo.TermsCollisionDetectorFactory' => function ( MediaWikiServices $services ): TermsCollisionDetectorFactory {
 		return new TermsCollisionDetectorFactory(
-			$services->getDBLoadBalancer(),
+			WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
 			WikibaseRepo::getTypeIdsLookup( $services )
 		);
 	},

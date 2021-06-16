@@ -2,26 +2,26 @@
 
 namespace Wikibase\Repo\Store;
 
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Repo\Store\Sql\Terms\DatabaseTermsCollisionDetector;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * @license GPL-2.0-or-later
  */
 class TermsCollisionDetectorFactory {
 
-	/** @var ILoadBalancer */
-	private $loadBalancer;
+	/** @var RepoDomainDb */
+	private $db;
 
 	/** @var TypeIdsLookup */
 	private $typeIdsLookup;
 
 	public function __construct(
-		ILoadBalancer $loadBalancer,
+		RepoDomainDb $db,
 		TypeIdsLookup $typeIdsLookup
 	) {
-		$this->loadBalancer = $loadBalancer;
+		$this->db = $db;
 		$this->typeIdsLookup = $typeIdsLookup;
 	}
 
@@ -32,7 +32,7 @@ class TermsCollisionDetectorFactory {
 	public function getDatabaseTermsCollisionDetector( string $entityType ): DatabaseTermsCollisionDetector {
 		return new DatabaseTermsCollisionDetector(
 			$entityType,
-			$this->loadBalancer,
+			$this->db,
 			$this->typeIdsLookup
 		);
 	}

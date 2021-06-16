@@ -5,11 +5,12 @@ namespace Wikibase\Repo\Tests\Store\Sql\Terms;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\StaticTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Repo\Store\Sql\Terms\DatabaseTermsCollisionDetector;
 use Wikibase\Repo\Tests\WikibaseTablesUsed;
-use Wikimedia\Rdbms\LoadBalancerSingle;
+use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\Terms\DatabaseTermsCollisionDetector
@@ -134,7 +135,10 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 	private function makeTestSubject( $entityType ) {
 		return new DatabaseTermsCollisionDetector(
 			$entityType,
-			LoadBalancerSingle::newFromConnection( $this->db ),
+			new RepoDomainDb(
+				LBFactorySingle::newFromConnection( $this->db ),
+				$this->db->getDomainID()
+			),
 			$this->typeIdsLookup
 		);
 	}

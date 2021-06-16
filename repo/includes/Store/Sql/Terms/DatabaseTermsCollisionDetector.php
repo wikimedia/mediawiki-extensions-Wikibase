@@ -8,9 +8,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Repo\Store\TermsCollisionDetector;
-use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * Queries db term store for collisions on terms
@@ -22,8 +23,8 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 	/** @var string */
 	private $entityType;
 
-	/** @var ILoadBalancer */
-	private $loadBalancer;
+	/** @var RepoDomainDb */
+	private $db;
 
 	/** @var TypeIdsLookup */
 	private $typeIdsLookup;
@@ -33,14 +34,14 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 
 	/**
 	 * @param string $entityType one of the two supported types: Item::ENTITY_TYPE or Property::ENTITY_TYPE
-	 * @param ILoadBalancer $loadBalancer
+	 * @param RepoDomainDb $db
 	 * @param TypeIdsLookup $typeIdsLookup
 	 *
 	 * @throws InvalidArgumentException when non supported entity type is given
 	 */
 	public function __construct(
 		string $entityType,
-		ILoadBalancer $loadBalancer,
+		RepoDomainDb $db,
 		TypeIdsLookup $typeIdsLookup
 	) {
 		if ( !in_array( $entityType, [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] ) ) {
@@ -51,7 +52,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 
 		$this->databaseEntityTermsTableProvider = new DatabaseEntityTermsTableProvider( $entityType );
 		$this->entityType = $entityType;
-		$this->loadBalancer = $loadBalancer;
+		$this->db = $db;
 		$this->typeIdsLookup = $typeIdsLookup;
 	}
 
@@ -196,7 +197,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 		return [ $table, $joinConditions, $conditions, $entityIdColumn ];
 	}
 
-	private function getDbr() {
-		return $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA, [] );
+	private function getDbr(): IDatabase {
+		return $this->db->connections()->getReadConnectionRef();
 	}
 }
