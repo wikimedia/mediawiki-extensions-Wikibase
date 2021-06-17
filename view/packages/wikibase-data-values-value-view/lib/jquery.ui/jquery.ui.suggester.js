@@ -619,7 +619,7 @@ $.widget( 'ui.suggester', {
 	_updateMenuVisibility: function() {
 		if ( !this.options.menu.hasVisibleItems( true ) ) {
 			this._close();
-		} else {
+		} else if ( this.element.is( ':focus' ) ) {
 			this._open();
 		}
 	},

@@ -27,6 +27,7 @@
 		return $( '<input/>' )
 			.addClass( 'test_suggester' )
 			.appendTo( 'body' )
+			.focus()
 			.suggester( options );
 	};
 
