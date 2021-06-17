@@ -1,3 +1,5 @@
+setup:
+	ansible-galaxy install -r requirements.yml
 test:
 	ansible-playbook fedProps.yml --limit wikidata-federated-properties.wikidata-dev.eqiad1.wikimedia.cloud
 vm:

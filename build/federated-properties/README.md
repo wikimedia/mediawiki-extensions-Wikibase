@@ -69,7 +69,7 @@ vagrant@federatedProperties-vm:~$
 The easiest way to run ansible is using the Makefile
 ```sh
 cd extensions/Wikibase/build/federated-properties
-make cloud
+make setup && make cloud
 ```
 
 `cloud` can be replaced with another instance identifer (see the Makefile).
@@ -77,8 +77,9 @@ make cloud
 ### Local VM
 
 ```sh
-$ cd extensions/Wikibase/build/federated-properties
-$ ansible-playbook fedProps.yml --limit wikibase-federated-properties.vm
+cd extensions/Wikibase/build/federated-properties
+ansible-galaxy install -r requirements.yml
+ansible-playbook fedProps.yml --limit wikibase-federated-properties.vm
 ```
 Once the setup process has completed, you can access your newly installed Wikibase test system via http://wikibase-federated-properties.vm/ and the Wikidata Query Service via http://wikibase-federated-properties.vm:8834/.
 
@@ -86,8 +87,9 @@ Once the setup process has completed, you can access your newly installed Wikiba
 
 Set up your VPS instance on https://horizon.wikimedia.org and a web proxy to reach it from the internet, then:
 ```sh
-$ cd extensions/Wikibase/build/federated-properties
-$ ansible-playbook fedProps.yml --limit wikidata-federated-properties.wikidata-dev.eqiad1.wikimedia.cloud
+cd extensions/Wikibase/build/federated-properties
+ansible-galaxy install -r requirements.yml
+ansible-playbook fedProps.yml --limit wikidata-federated-properties.wikidata-dev.eqiad1.wikimedia.cloud
 ```
 
 Once the setup process has completed, you can access the newly installed Wikibase test system via https://wikidata-federated-properties.wmflabs.org.
@@ -97,10 +99,11 @@ Once the setup process has completed, you can access the newly installed Wikibas
 The `cleanup.yml` playbook removes most of the changes that the setup has caused:
 
 ```sh
-$ cd extensions/Wikibase/build/federated-properties
+cd extensions/Wikibase/build/federated-properties
+ansible-galaxy install -r requirements.yml
 
 # cleanup the VM
-$ ansible-playbook cleanup.yml --limit wikibase-federated-properties.vm
+ansible-playbook cleanup.yml --limit wikibase-federated-properties.vm
 
 # cleanup the cloud VPS instance
 ansible-playbook cleanup.yml --limit wikidata-federated-properties.wikidata-dev.eqiad1.wikimedia.cloud

@@ -17,21 +17,6 @@ log_all () {
 # start
 log_all "########### $(date) ###########"
 
-for i in \
-     skins/Vector \
-     extensions/UniversalLanguageSelector \
-     extensions/cldr \
-     extensions/Wikibase \
-     extensions/WikibaseCirrusSearch \
-     extensions/CirrusSearch \
-     extensions/Elastica \
-     . ; do
-  log "## updating ${MW_PATH}/$i" "${UPDATE_LOG} ${GIT_LOG}"
-  cd ${MW_PATH}/$i
-  git pull origin master 2>> $ERROR_LOG | tee -a ${GIT_LOG}
-  git submodule update --init 2>> $ERROR_LOG | tee -a ${GIT_LOG}
-done
-
 log "## running composer update" ${UPDATE_LOG}
 cd {{ MW_PATH }}
 /usr/bin/composer update 2>&1 | tee -a ${COMPOSER_LOG}
