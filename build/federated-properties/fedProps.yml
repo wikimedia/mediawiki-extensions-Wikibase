@@ -95,6 +95,9 @@
           - "extensions/UniversalLanguageSelector"
           - "extensions/cldr"
           - "extensions/Wikibase"
+          - "extensions/WikibaseCirrusSearch"
+          - "extensions/Elastica"
+          - "extensions/CirrusSearch"
 
     - name: Ensure composer.local.json is in place
       copy:
@@ -171,9 +174,18 @@
           group: "www-data"
           mode: 0640
 
-    - name: execute update.php inside wikibase container
+    - name: Execute update.php inside wikibase container
       command: "docker exec wikibase php maintenance/update.php"
       changed_when: false
+
+    - name: Update ElasticSearch index config
+      command: "docker exec wikibase php extensions/CirrusSearch/maintenance/UpdateSearchIndexConfig.php --reindexAndRemoveOk --indexIdentifier=now"
+
+    - name: Update ElasticSearch index
+      command: "docker exec wikibase php extensions/CirrusSearch/maintenance/ForceSearchIndex.php"
+
+    - name: Run mediawiki jobs for elastic
+      command: "docker exec wikibase php maintenance/runJobs.php"
 
     - name: Ensure update script runs every five minutes, from 6am to 9pm
       cron:
