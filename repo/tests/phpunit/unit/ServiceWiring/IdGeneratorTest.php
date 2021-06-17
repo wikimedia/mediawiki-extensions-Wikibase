@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use InvalidArgumentException;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
@@ -27,6 +28,11 @@ class IdGeneratorTest extends ServiceWiringTestCase {
 				'reservedIds' => $reservedIds,
 				'idGeneratorSeparateDbConnection' => true,
 			] ) );
+		$dbFactory = $this->createMock( RepoDomainDbFactory::class );
+		$dbFactory->expects( $this->once() )
+			->method( 'newRepoDb' );
+		$this->mockService( 'WikibaseRepo.RepoDomainDbFactory',
+			$dbFactory );
 
 		$idGenerator = $this->getService( 'WikibaseRepo.IdGenerator' );
 
@@ -54,6 +60,11 @@ class IdGeneratorTest extends ServiceWiringTestCase {
 				'reservedIds' => $reservedIds,
 				'idGeneratorSeparateDbConnection' => true,
 			] ) );
+		$dbFactory = $this->createMock( RepoDomainDbFactory::class );
+		$dbFactory->expects( $this->once() )
+			->method( 'newRepoDb' );
+		$this->mockService( 'WikibaseRepo.RepoDomainDbFactory',
+			$dbFactory );
 
 		$idGenerator = $this->getService( 'WikibaseRepo.IdGenerator' );
 
@@ -87,6 +98,11 @@ class IdGeneratorTest extends ServiceWiringTestCase {
 				'reservedIds' => [],
 				'idGeneratorSeparateDbConnection' => false,
 			] ) );
+		$dbFactory = $this->createMock( RepoDomainDbFactory::class );
+		$dbFactory->expects( $this->once() )
+			->method( 'newRepoDb' );
+		$this->mockService( 'WikibaseRepo.RepoDomainDbFactory',
+			$dbFactory );
 
 		$idGenerator = $this->getService( 'WikibaseRepo.IdGenerator' );
 

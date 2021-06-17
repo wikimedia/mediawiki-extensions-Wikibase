@@ -2,9 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
+use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator
@@ -27,7 +28,7 @@ class UpsertSqlIdGeneratorTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetNewId_noReservedIds() {
-		$generator = new UpsertSqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() );
+		$generator = new UpsertSqlIdGenerator( $this->getRepoDomainDb() );
 
 		$id = $generator->getNewId( 'wikibase-upsert-kittens' );
 		$this->assertSame( 1, $id );
@@ -35,7 +36,7 @@ class UpsertSqlIdGeneratorTest extends MediaWikiIntegrationTestCase {
 
 	public function testReservedIds() {
 		$generator = new UpsertSqlIdGenerator(
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			$this->getRepoDomainDb(),
 			[ 'wikibase-upsert-reserved' => [ 1, 2 ] ]
 		);
 
@@ -45,12 +46,19 @@ class UpsertSqlIdGeneratorTest extends MediaWikiIntegrationTestCase {
 
 	public function testReservedIds_onlyAppliesForSpecifiedEntityType() {
 		$generator = new UpsertSqlIdGenerator(
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			$this->getRepoDomainDb(),
 			[ 'wikibase-upsert-reserved' => [ 1, 2 ] ]
 		);
 
 		$id = $generator->getNewId( 'wikibase-upsert-non-reserved' );
 		$this->assertSame( 1, $id );
+	}
+
+	private function getRepoDomainDb(): RepoDomainDb {
+		return new RepoDomainDb(
+			LBFactorySingle::newFromConnection( $this->db ),
+			$this->db->getDomainID()
+		);
 	}
 
 }
