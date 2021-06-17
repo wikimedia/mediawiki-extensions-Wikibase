@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\ItemLookup;
 use Wikibase\DataModel\Services\Lookup\ItemLookupException;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
-use Wikimedia\Rdbms\ILBFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 
 /**
  * @license GPL-2.0-or-later
@@ -24,8 +24,8 @@ class ItemTermsRebuilder {
 	private $progressReporter;
 	/** @var MessageReporter */
 	private $errorReporter;
-	/** @var ILBFactory */
-	private $loadBalancerFactory;
+	/** @var RepoDomainDb */
+	private $db;
 	/** @var ItemLookup */
 	private $itemLookup;
 	/** @var int */
@@ -38,7 +38,7 @@ class ItemTermsRebuilder {
 	 * @param $itemIdIterable
 	 * @param MessageReporter $progressReporter
 	 * @param MessageReporter $errorReporter
-	 * @param ILBFactory $loadBalancerFactory
+	 * @param RepoDomainDb $db
 	 * @param ItemLookup $itemLookup
 	 * @param int $batchSize
 	 * @param int $batchSpacingInSeconds
@@ -48,7 +48,7 @@ class ItemTermsRebuilder {
 		$itemIdIterable,
 		MessageReporter $progressReporter,
 		MessageReporter $errorReporter,
-		ILBFactory $loadBalancerFactory,
+		RepoDomainDb $db,
 		ItemLookup $itemLookup,
 		$batchSize,
 		$batchSpacingInSeconds
@@ -57,14 +57,14 @@ class ItemTermsRebuilder {
 		$this->itemIds = $itemIdIterable;
 		$this->progressReporter = $progressReporter;
 		$this->errorReporter = $errorReporter;
-		$this->loadBalancerFactory = $loadBalancerFactory;
+		$this->db = $db;
 		$this->itemLookup = $itemLookup;
 		$this->batchSize = $batchSize;
 		$this->batchSpacingInSeconds = $batchSpacingInSeconds;
 	}
 
 	public function rebuild() {
-		$ticket = $this->loadBalancerFactory->getEmptyTransactionTicket( __METHOD__ );
+		$ticket = $this->db->getEmptyTransactionTicket( __METHOD__ );
 
 		foreach ( $this->getIdBatches() as $itemIds ) {
 			$this->progressReporter->reportMessage(
@@ -73,7 +73,7 @@ class ItemTermsRebuilder {
 
 			$this->rebuildTermsForBatch( $itemIds );
 
-			$success = $this->loadBalancerFactory->commitAndWaitForReplication( __METHOD__, $ticket );
+			$success = $this->db->commitAndWaitForReplication( __METHOD__, $ticket );
 			if ( !$success ) {
 				$this->errorReporter->reportMessage(
 					'commitAndWaitForReplication() timed out, aborting'
@@ -126,13 +126,11 @@ class ItemTermsRebuilder {
 		try {
 			$this->itemTermStoreWriter->storeTerms( $item->getId(), $item->getFingerprint() );
 		} catch ( Exception $ex ) {
-			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->errorReporter->reportMessage(
 				'Failed to save terms of item: ' . $item->getId()->getSerialization()
 			);
-			return;
+			throw $ex;
 		}
-		$this->loadBalancerFactory->commitMasterChanges( __METHOD__ );
 	}
 
 }

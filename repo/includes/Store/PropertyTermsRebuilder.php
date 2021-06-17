@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\SeekableEntityIdPager;
 use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
-use Wikimedia\Rdbms\ILBFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 
 /**
  * @license GPL-2.0-or-later
@@ -23,8 +23,8 @@ class PropertyTermsRebuilder {
 	private $progressReporter;
 	/** @var MessageReporter */
 	private $errorReporter;
-	/** @var ILBFactory */
-	private $loadBalancerFactory;
+	/** @var RepoDomainDb */
+	private $db;
 	/** @var PropertyLookup */
 	private $propertyLookup;
 	/** @var int */
@@ -37,7 +37,7 @@ class PropertyTermsRebuilder {
 	 * @param SeekableEntityIdPager $idPager
 	 * @param MessageReporter $progressReporter
 	 * @param MessageReporter $errorReporter
-	 * @param ILBFactory $loadBalancerFactory
+	 * @param RepoDomainDb $db
 	 * @param PropertyLookup $propertyLookup
 	 * @param int $batchSize
 	 * @param int $batchSpacingInSeconds
@@ -47,7 +47,7 @@ class PropertyTermsRebuilder {
 		SeekableEntityIdPager $idPager,
 		MessageReporter $progressReporter,
 		MessageReporter $errorReporter,
-		ILBFactory $loadBalancerFactory,
+		RepoDomainDb $db,
 		PropertyLookup $propertyLookup,
 		$batchSize,
 		$batchSpacingInSeconds
@@ -56,14 +56,14 @@ class PropertyTermsRebuilder {
 		$this->idPager = $idPager;
 		$this->progressReporter = $progressReporter;
 		$this->errorReporter = $errorReporter;
-		$this->loadBalancerFactory = $loadBalancerFactory;
+		$this->db = $db;
 		$this->propertyLookup = $propertyLookup;
 		$this->batchSize = $batchSize;
 		$this->batchSpacingInSeconds = $batchSpacingInSeconds;
 	}
 
 	public function rebuild() {
-		$ticket = $this->loadBalancerFactory->getEmptyTransactionTicket( __METHOD__ );
+		$ticket = $this->db->getEmptyTransactionTicket( __METHOD__ );
 
 		while ( true ) {
 			$propertyIds = $this->idPager->fetchIds( $this->batchSize );
@@ -74,7 +74,7 @@ class PropertyTermsRebuilder {
 
 			$this->rebuildTermsForBatch( $propertyIds );
 
-			$success = $this->loadBalancerFactory->commitAndWaitForReplication( __METHOD__, $ticket );
+			$success = $this->db->commitAndWaitForReplication( __METHOD__, $ticket );
 
 			$this->progressReporter->reportMessage(
 				'Processed up to page '
@@ -106,13 +106,11 @@ class PropertyTermsRebuilder {
 		try {
 			$this->propertyTermStoreWriter->storeTerms( $property->getId(), $property->getFingerprint() );
 		} catch ( Exception $ex ) {
-			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->errorReporter->reportMessage(
 				'Failed to save terms of property: ' . $property->getId()->getSerialization()
 			);
-			return;
+			throw $ex;
 		}
-		$this->loadBalancerFactory->commitMasterChanges( __METHOD__ );
 	}
 
 }
