@@ -8,6 +8,8 @@ use Site;
 use SiteLookup;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -17,6 +19,9 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\RedirectRevision;
+use Wikibase\Lib\Tests\MockEntityRevisionLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\WikibaseRepo;
@@ -280,6 +285,74 @@ class RdfBuilderTestData {
 		];
 	}
 
+	public function getMockTermLookup(): PrefetchingTermLookup {
+		$termLookup = new InMemoryPrefetchingTermLookup();
+		$entities = [];
+		foreach ( self::getTestProperties() as $propertyTypeMapping ) {
+			/** @var PropertyId $id */
+			$id = $propertyTypeMapping[0];
+			$fingerprint = new Fingerprint();
+			$fingerprint->setLabel( 'en', 'Property' . $id->getNumericId() );
+			$property = new Property( $id,
+				$fingerprint,
+				$propertyTypeMapping[1] );
+
+			$entities[] = $property;
+		}
+		$itemId = new ItemId( 'Q42' );
+		$fingerprint = new Fingerprint();
+		$fingerprint->setLabel( 'en', 'Item42' );
+		$fingerprint->setAliasGroup( 'en', [ 'Item42' ] );
+		$q42 = new Item( $itemId, $fingerprint );
+		$entities[] = $q42;
+		$q2 = $this->getEntity( 'Q2' );
+		$entities[] = $q2;
+		$termLookup->setData( $entities );
+		return $termLookup;
+	}
+
+	public function getMockEntityRevsionLookup() {
+		$revisionNumber = 1;
+		$q42string = 'Q42';
+		$q4242 = 'Q4242';
+		$q42Id = new ItemId( $q42string );
+		$redirects = [
+			$q4242 => new RedirectRevision(
+				new EntityRedirect( new ItemId( $q4242 ),
+					$q42Id ),
+				$revisionNumber
+			)
+		];
+
+		$entities = [];
+		foreach ( self::getTestProperties() as $propertyTypeMapping ) {
+			$revisionNumber++;
+			/** @var PropertyId $id */
+			$id = $propertyTypeMapping[0];
+			$fingerprint = new Fingerprint();
+			$fingerprint->setLabel( 'en', 'Property' . $id->getNumericId() );
+			$property = new Property( $id,
+				$fingerprint,
+				$propertyTypeMapping[1] );
+
+			$entities[ $id->getSerialization() ][$revisionNumber] = new EntityRevision(
+				$property,
+				$revisionNumber
+			);
+		}
+
+		$revisionNumber++;
+		$fingerprint = new Fingerprint();
+		$fingerprint->setLabel( 'en', 'Item42' );
+		$q42Item = new Item( $q42Id, $fingerprint );
+		$entities[ $q42Id->getSerialization() ][$revisionNumber] = new EntityRevision(
+			$q42Item,
+			$revisionNumber
+		);
+
+		return new MockEntityRevisionLookup( $redirects, $entities );
+	}
+
 	/**
 	 * Construct mock repository matching the test data.
 	 *
@@ -300,14 +373,6 @@ class RdfBuilderTestData {
 			$entity = new Property( $id, $fingerprint, $type );
 			$repo->putEntity( $entity );
 		}
-
-		$q42 = new ItemId( 'Q42' );
-		$fingerprint = new Fingerprint();
-		$fingerprint->setLabel( 'en', 'Item42' );
-		$entity = new Item( $q42, $fingerprint );
-		$repo->putEntity( $entity );
-
-		$repo->putRedirect( new EntityRedirect( new ItemId( 'Q4242' ), $q42 ) );
 
 		return $repo;
 	}

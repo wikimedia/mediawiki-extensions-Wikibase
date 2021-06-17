@@ -90,7 +90,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$entityRedirectLookup = $store->getEntityRedirectLookup();
 
 		$serializationService = new EntityDataSerializationService(
-			$entityLookup,
+			$entityRevisionLookup,
 			$entityTitleLookup,
 			$entityContentFactory,
 			$propertyDataTypeLookup,

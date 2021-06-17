@@ -26,6 +26,7 @@ use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
 use Wikibase\Repo\Rdf\FullStatementRdfBuilderFactory;
 use Wikibase\Repo\Rdf\HashDedupeBag;
 use Wikibase\Repo\Rdf\ItemRdfBuilder;
+use Wikibase\Repo\Rdf\ItemStubRdfBuilder;
 use Wikibase\Repo\Rdf\PropertyRdfBuilder;
 use Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder;
 use Wikibase\Repo\Rdf\PropertyStubRdfBuilder;
@@ -124,7 +125,8 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 					"P8" => [ "en" => "Property8" ],
 					"P9" => [ "en" => "Property9" ],
 					"P10" => [ "en" => "Property10" ],
-					"P11" => [ "en" => "Property11" ]
+					"P11" => [ "en" => "Property11" ],
+					"Q2" => [ "en" => "Q2" ]
 				];
 				return $terms[ $entityId->getSerialization() ];
 			} );
@@ -264,22 +266,34 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getStubRdfBuilderFactoryCallbacks() {
 		return [
+			'item' => function(
+				RdfVocabulary $vocabulary,
+				RdfWriter $writer
+			) {
+				$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions();
+				$labelPredicates = $entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES );
+				$languageCodes = WikibaseRepo::getTermsLanguages()->getLanguages();
+
+				return new ItemStubRdfBuilder(
+					$this->getTestData()->getMockTermLookup(),
+					$vocabulary,
+					$writer,
+					$labelPredicates,
+					$languageCodes
+				);
+			},
 			'property' => function(
 				RdfVocabulary $vocabulary,
 				RdfWriter $writer
 			) {
 				$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions();
 				$labelPredicates = $entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES );
-				$this->setService( 'WikibaseRepo.PrefetchingTermLookup', $this->getPrefetchingTermLookup() );
-				$prefetchingLookup = WikibaseRepo::getPrefetchingTermLookup();
-				$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $this->getTestData()->getMockRepository() );
-				$propertyDataLookup = WikibaseRepo::getPropertyDataTypeLookup();
 				$termsLanguages = WikibaseRepo::getTermsLanguages();
 				$dataTypes = WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes();
 
 				return new PropertyStubRdfBuilder(
-					$prefetchingLookup,
-					$propertyDataLookup,
+					$this->getTestData()->getMockTermLookup(),
+					$this->getTestData()->getMockRepository(),
 					$termsLanguages,
 					$vocabulary,
 					$writer,
@@ -319,7 +333,9 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$valueBuilderFactory = WikibaseRepo::getValueSnakRdfBuilderFactory();
 		$entityRdfBuilderFactory = new EntityRdfBuilderFactory( $this->getRdfBuilderFactoryCallbacks( $siteLookup ), [] );
 		$emitter = new NTriplesRdfWriter();
-		$entityStubRdfBuilderFactory = new EntityStubRdfBuilderFactory( $this->getStubRdfBuilderFactoryCallbacks( $vocabulary, $emitter ) );
+		$entityStubRdfBuilderFactory = new EntityStubRdfBuilderFactory( $this->getStubRdfBuilderFactoryCallbacks() );
+
+		$entityRevisionLookup = $this->getTestData()->getMockEntityRevsionLookup();
 
 		$builder = new RdfBuilder(
 			$vocabulary ?: $this->getTestData()->getVocabulary(),
@@ -330,7 +346,8 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			$emitter,
 			$dedup,
 			$entityContentFactory,
-			$entityStubRdfBuilderFactory
+			$entityStubRdfBuilderFactory,
+			$entityRevisionLookup
 		);
 
 		$builder->startDocument();
@@ -406,8 +423,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testAddEntityStub() {
-		$entity = $this->getEntityData( 'Q2' );
-
+		$entityId = $this->getEntityData( 'Q2' )->getId();
 		$builder = $this->newRdfBuilder(
 			RdfProducer::PRODUCE_ALL_STATEMENTS |
 			RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
@@ -417,7 +433,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			RdfProducer::PRODUCE_VERSION_INFO |
 			RdfProducer::PRODUCE_FULL_VALUES
 		);
-		$builder->addEntityStub( $entity );
+		$builder->addEntityStub( $entityId );
 
 		$this->helper->assertNTriplesEqualsDataset( [ 'Q2_stub' ], $builder->getRDF() );
 	}
@@ -512,7 +528,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 				RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES,
 				[ 'Q4_meta', 'Q4_direct_foreignsource_properties', 'Q4_referenced' ]
 			],
-			[
+			"q10" => [
 				'Q10',
 				RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES,
 				'Q10_redirect_foreignsource_properties'
@@ -525,7 +541,6 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testRdfOptions( $entityName, $produceOption, $dataSetNames ) {
 		$entity = $this->getEntityData( $entityName );
-
 		$builder = $this->newRdfBuilder( $produceOption );
 		$builder->addEntity( $entity );
 		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2013-10-04T03:31:05Z" );

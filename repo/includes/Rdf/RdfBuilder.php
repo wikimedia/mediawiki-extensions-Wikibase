@@ -6,9 +6,8 @@ use SplQueue;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -17,7 +16,7 @@ use Wikimedia\Purtle\RdfWriter;
  *
  * @license GPL-2.0-or-later
  */
-class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
+class RdfBuilder implements EntityMentionListener {
 
 	/**
 	 * A list of entities mentioned/touched to or by this builder.
@@ -85,10 +84,20 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	private $entityRdfBuilders;
 
 	/**
+	 * Entity-specific stub RDF builders factory
+	 * @var EntityStubRdfBuilderFactory|null
+	 */
+	private $entityStubRdfBuilderFactory;
+
+	/**
 	 * Entity-specific stub RDF builders to apply when building RDF for an entity.
 	 * @var EntityStubRdfBuilder[]
 	 */
 	private $entityStubRdfBuilders;
+	/**
+	 * @var EntityRevisionLookup
+	 */
+	private $entityRevisionLookup;
 
 	/**
 	 * @param RdfVocabulary $vocabulary
@@ -110,7 +119,8 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		RdfWriter $writer,
 		DedupeBag $dedupeBag,
 		EntityContentFactory $entityContentFactory,
-		EntityStubRdfBuilderFactory $entityStubRdfBuilderFactory = null
+		EntityStubRdfBuilderFactory $entityStubRdfBuilderFactory,
+		EntityRevisionLookup $entityRevisionLookup
 	) {
 		$this->entitiesToOutput = new SplQueue();
 		$this->vocabulary = $vocabulary;
@@ -120,6 +130,8 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$this->produceWhat = $flavor;
 		$this->dedupeBag = $dedupeBag;
 		$this->entityContentFactory = $entityContentFactory;
+		$this->entityStubRdfBuilderFactory = $entityStubRdfBuilderFactory;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 
 		$this->entityRdfBuilders = $entityRdfBuilderFactory->getEntityRdfBuilders(
 			$flavor,
@@ -129,12 +141,10 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			$dedupeBag
 		);
 
-		if ( $entityStubRdfBuilderFactory !== null ) {
-			$this->entityStubRdfBuilders = $entityStubRdfBuilderFactory->getEntityStubRdfBuilders(
-				$vocabulary,
-				$writer
-			);
-		}
+		$this->entityStubRdfBuilders = $this->entityStubRdfBuilderFactory->getEntityStubRdfBuilders(
+			$vocabulary,
+			$writer
+		);
 	}
 
 	/**
@@ -320,32 +330,13 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	}
 
 	/**
-	 * Adds meta-information about an entity (such as the ID and type) to the RDF graph.
-	 *
-	 * @todo extract into MetaDataRdfBuilder
-	 *
-	 * @param EntityDocument $entity
-	 */
-	private function addEntityMetaData( EntityDocument $entity ) {
-		$entityId = $entity->getId();
-		$entityLName = $this->vocabulary->getEntityLName( $entityId );
-		$entityRepoName = $this->vocabulary->getEntityRepositoryName( $entityId );
-
-		$this->writer->about(
-			$this->vocabulary->entityNamespaceNames[$entityRepoName],
-			$entityLName
-		)
-			->a( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getEntityTypeName( $entity->getType() ) );
-	}
-
-	/**
 	 * Adds meta-information about an entity id (such as the ID and type) to the RDF graph.
 	 *
 	 * @todo extract into MetaDataRdfBuilder
 	 *
 	 * @param EntityId $entityId
 	 */
-	private function addEntityMetaDataNew( EntityId $entityId ) {
+	private function addEntityMetaData( EntityId $entityId ) {
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 		$entityRepoName = $this->vocabulary->getEntityRepositoryName( $entityId );
 
@@ -374,7 +365,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @param EntityDocument $entity the entity to output.
 	 */
 	private function addSingleEntity( EntityDocument $entity ) {
-		$this->addEntityMetaData( $entity );
+		$this->addEntityMetaData( $entity->getId() );
 
 		$type = $entity->getType();
 		if ( !empty( $this->entityRdfBuilders[$type] ) ) {
@@ -396,11 +387,11 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	/**
 	 * Add stubs for any entities that were previously mentioned (e.g. as properties
 	 * or data values).
-	 *
-	 * @param EntityLookup $entityLookup
 	 */
-	public function resolveMentionedEntities( EntityLookup $entityLookup ) {
+	public function resolveMentionedEntities() {
 		$hasRedirect = false;
+
+		// TODO: Mark all entitiesResolved for prefetching
 
 		foreach ( $this->entitiesResolved as $id ) {
 			// $value is true if the entity has already been resolved,
@@ -409,25 +400,33 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 				continue;
 			}
 
-			try {
-				$entity = $entityLookup->getEntity( $id );
-
-				if ( !$entity ) {
-					continue;
+			$lookupResult = $this->entityRevisionLookup->getLatestRevisionId( $id );
+			$lookupStatus = $lookupResult->onNonexistentEntity(
+				function () {
+					return 'nonexistent';
 				}
-
-				// TODO: Remove the if statement when both stub classes for property and item are ready
-				// TODO: Remove the old addEntityStub and rename addEntityStubNew to addEntityStub
-				if ( $entity->getType() == 'property' ) {
-					$this->addEntityStubNew( $id );
-				} else {
-					$this->addEntityStub( $entity );
+			)->onConcreteRevision(
+				function () {
+					return 'concrete revision';
 				}
-			} catch ( UnresolvedEntityRedirectException $ex ) {
-				// NOTE: this may add more entries to the end of entitiesResolved
-				$target = $ex->getRedirectTargetId();
-				$this->addEntityRedirect( $id, $target );
-				$hasRedirect = true;
+			)->onRedirect(
+				function ( $revisionId, $redirectsTo ) {
+					return $redirectsTo;
+				}
+			)->map();
+
+			switch ( $lookupStatus ) {
+				case 'nonexistent':
+					continue 2;
+				case 'concrete revision':
+					$this->addEntityStub( $id );
+					break;
+				default:
+					// NOTE: this may add more entries to the end of entitiesResolved;
+					$this->addEntityRedirect( $id,
+						$lookupStatus );
+					$hasRedirect = true;
+					break;
 			}
 		}
 
@@ -439,22 +438,8 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			// redirect targets. The regress will eventually terminate even for circular
 			// redirect chains, because the second time an entity ID is encountered, it
 			// will be marked as already resolved.
-			$this->resolveMentionedEntities( $entityLookup );
-		}
-	}
-
-	/**
-	 * Adds stub information for the given Entity to the RDF graph.
-	 * Stub information means meta information and labels.
-	 *
-	 * @param EntityDocument $entity
-	 */
-	public function addEntityStub( EntityDocument $entity ) {
-		$this->addEntityMetaData( $entity );
-
-		$type = $entity->getType();
-		if ( !empty( $this->entityRdfBuilders[$type] ) ) {
-			$this->entityRdfBuilders[$type]->addEntityStub( $entity );
+			// @phan-suppress-next-line PhanPossiblyInfiniteRecursionSameParams
+			$this->resolveMentionedEntities();
 		}
 	}
 
@@ -464,9 +449,8 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 *
 	 * @param EntityId $entityId
 	 */
-	public function addEntityStubNew( EntityId $entityId ) {
-		// TODO: Remove the old addEntityMetaData and rename this one to addEntityMetaData
-		$this->addEntityMetaDataNew( $entityId );
+	public function addEntityStub( EntityId $entityId ) {
+		$this->addEntityMetaData( $entityId );
 
 		$type = $entityId->getEntityType();
 		if ( !empty( $this->entityStubRdfBuilders[ $type ] ) ) {

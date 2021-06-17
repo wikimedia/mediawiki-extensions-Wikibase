@@ -234,7 +234,8 @@ class RdfDumpGenerator extends DumpGenerator {
 			$rdfWriter,
 			new HashDedupeBag(),
 			$entityContentFactory,
-			$entityStubRdfBuilderFactory
+			$entityStubRdfBuilderFactory,
+			$entityRevisionLookup
 		);
 
 		return new self( $output, $entityRevisionLookup, $rdfBuilder, $entityPrefetcher );

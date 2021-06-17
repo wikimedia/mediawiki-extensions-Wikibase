@@ -57,6 +57,7 @@ use Wikibase\Repo\ParserOutput\EntityTermsViewFactory;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\Rdf\FullStatementRdfBuilderFactory;
 use Wikibase\Repo\Rdf\ItemRdfBuilder;
+use Wikibase\Repo\Rdf\ItemStubRdfBuilder;
 use Wikibase\Repo\Rdf\PropertyRdfBuilder;
 use Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder;
 use Wikibase\Repo\Rdf\PropertyStubRdfBuilder;
@@ -156,6 +157,23 @@ return [
 				$termsRdfBuilder,
 				$truthyStatementRdfBuilderFactory,
 				$fullStatementRdfBuilderFactory
+			);
+		},
+		Def::RDF_BUILDER_STUB_FACTORY_CALLBACK => function(
+			RdfVocabulary $vocabulary,
+			RdfWriter $writer
+		) {
+			$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions();
+			$labelPredicates = $entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES );
+			$termLookup = WikibaseRepo::getPrefetchingTermLookup();
+			$languageCodes = WikibaseRepo::getTermsLanguages()->getLanguages();
+
+			return new ItemStubRdfBuilder(
+				$termLookup,
+				$vocabulary,
+				$writer,
+				$labelPredicates,
+				$languageCodes
 			);
 		},
 		Def::ENTITY_DIFF_VISUALIZER_CALLBACK => function (
