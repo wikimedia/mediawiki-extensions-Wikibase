@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
@@ -18,8 +19,10 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 class EntityConstraintProviderTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getDBLoadBalancer' );
+		$dbFactory = $this->createMock( RepoDomainDbFactory::class );
+		$dbFactory->expects( $this->once() )
+			->method( 'newRepoDb' );
+		$this->mockService( 'WikibaseRepo.RepoDomainDbFactory', $dbFactory );
 		$this->mockService( 'WikibaseRepo.EntityIdComposer',
 			new EntityIdComposer( [] ) );
 
