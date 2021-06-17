@@ -51,8 +51,4 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 
 		$this->propertySpecificComponentsRdfBuilder->addEntity( $entity );
 	}
-
-	/* Done in PropertyStubRdfBuilder */
-	public function addEntityStub( EntityDocument $entity ): void {
-	}
 }
