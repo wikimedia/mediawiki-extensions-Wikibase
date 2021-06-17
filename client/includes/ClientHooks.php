@@ -238,7 +238,7 @@ final class ClientHooks {
 				$currentSite = [
 					'globalSiteId' => $site->getGlobalId(),
 					'languageCode' => $site->getLanguageCode(),
-					'langLinkSiteGroup' => $site->getGroup()
+					'langLinkSiteGroup' => WikibaseClient::getLangLinkSiteGroup()
 				];
 
 				return [ 'currentSite' => $currentSite ];
