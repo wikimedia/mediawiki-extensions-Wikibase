@@ -12,7 +12,6 @@ use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 use Wikimedia\Rdbms\LBFactorySingle;
-use Wikimedia\Rdbms\LoadBalancerSingle;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup
@@ -89,7 +88,7 @@ class SqlSiteLinkConflictLookupTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		return new SqlSiteLinkConflictLookup(
-			new LoadBalancerSingle( [ 'connection' => $this->db ] ),
+			new RepoDomainDb( LBFactorySingle::newFromConnection( $this->db ), $this->db->getDomainID() ),
 			$entityIdComposer
 		);
 	}

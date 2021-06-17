@@ -5,9 +5,9 @@ namespace Wikibase\Repo\Store\Sql;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * @license GPL-2.0-or-later
@@ -17,8 +17,8 @@ use Wikimedia\Rdbms\ILoadBalancer;
  */
 class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 
-	/** @var ILoadBalancer */
-	private $loadBalancer;
+	/** @var RepoDomainDb */
+	private $db;
 
 	/**
 	 * @var EntityIdComposer
@@ -26,10 +26,10 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 	private $entityIdComposer;
 
 	public function __construct(
-		ILoadBalancer $loadBalancer,
+		RepoDomainDb $db,
 		EntityIdComposer $entityIdComposer
 	) {
-		$this->loadBalancer = $loadBalancer;
+		$this->db = $db;
 		$this->entityIdComposer = $entityIdComposer;
 	}
 
@@ -51,7 +51,7 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 		if ( $db ) {
 			$dbr = $db;
 		} else {
-			$dbr = $this->loadBalancer->getConnectionRef( ILoadBalancer::DB_REPLICA );
+			$dbr = $this->db->connections()->getReadConnectionRef();
 		}
 
 		$anyOfTheLinks = '';
