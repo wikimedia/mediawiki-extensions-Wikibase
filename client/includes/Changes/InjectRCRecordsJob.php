@@ -16,9 +16,9 @@ use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikimedia\Assert\Assert;
-use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Job for injecting RecentChange records representing changes on the Wikibase repository.
@@ -31,9 +31,9 @@ use Wikimedia\Rdbms\ILBFactory;
 class InjectRCRecordsJob extends Job {
 
 	/**
-	 * @var ILBFactory
+	 * @var ClientDomainDb
 	 */
-	private $lbFactory;
+	private $db;
 
 	/**
 	 * @var EntityChangeLookup
@@ -110,7 +110,7 @@ class InjectRCRecordsJob extends Job {
 	 * Constructs an InjectRCRecordsJob for injecting a change into the recentchanges feed
 	 * for the given pages.
 	 *
-	 * @param ILBFactory $lbFactory
+	 * @param ClientDomainDb $domainDb
 	 * @param EntityChangeLookup $changeLookup
 	 * @param EntityChangeFactory $changeFactory
 	 * @param RecentChangeFactory $rcFactory
@@ -121,7 +121,7 @@ class InjectRCRecordsJob extends Job {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		ILBFactory $lbFactory,
+		ClientDomainDb $domainDb,
 		EntityChangeLookup $changeLookup,
 		EntityChangeFactory $changeFactory,
 		RecentChangeFactory $rcFactory,
@@ -154,7 +154,7 @@ class InjectRCRecordsJob extends Job {
 			'$params[\'pages\']'
 		);
 
-		$this->lbFactory = $lbFactory;
+		$this->db = $domainDb;
 		$this->changeLookup = $changeLookup;
 		$this->changeFactory = $changeFactory;
 		$this->rcFactory = $rcFactory;
@@ -168,7 +168,7 @@ class InjectRCRecordsJob extends Job {
 		$store = WikibaseClient::getStore( $mwServices );
 
 		$job = new self(
-			$mwServices->getDBLoadBalancerFactory(),
+			WikibaseClient::getClientDomainDbFactory( $mwServices )->newLocalDb(),
 			WikibaseClient::getEntityChangeLookup( $mwServices ),
 			WikibaseClient::getEntityChangeFactory( $mwServices ),
 			WikibaseClient::getRecentChangeFactory( $mwServices ),
@@ -264,7 +264,9 @@ class InjectRCRecordsJob extends Job {
 
 		$rcAttribs = $this->rcFactory->prepareChangeAttributes( $change );
 
-		$trxToken = $this->lbFactory->getEmptyTransactionTicket( __METHOD__ );
+		$dbw = $this->db->connections()->getWriteConnection();
+
+		$dbw->startAtomic( __METHOD__ );
 
 		foreach ( $titles as $title ) {
 			if ( !$title->exists() ) {
@@ -283,11 +285,10 @@ class InjectRCRecordsJob extends Job {
 			}
 		}
 
-		// Wait for all database replicas to be updated, but only for the affected client wiki. The
-		// "domain" argument is documented at ILBFactory::waitForReplication.
-		$this->lbFactory->commitAndWaitForReplication( __METHOD__, $trxToken, [ 'domain' => wfWikiID() ] );
-
+		$dbw->endAtomic( __METHOD__ );
 		$this->incrementStats( 'InjectRCRecords.run.titles', count( $titles ) );
+
+		$this->db->connections()->releaseConnection( $dbw );
 
 		return true;
 	}

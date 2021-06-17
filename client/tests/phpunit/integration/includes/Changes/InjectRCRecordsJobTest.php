@@ -18,8 +18,10 @@ use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Changes\ItemChange;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
-use Wikimedia\Rdbms\ILBFactory;
+use Wikimedia\Rdbms\ConnectionManager;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -180,10 +182,17 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @return ILBFactory
+	 * @return ClientDomainDb
 	 */
-	private function getLBFactoryMock() {
-		return $this->createMock( ILBFactory::class );
+	private function getClientDomainDbMock( IDatabase $dbWrite = null ): ClientDomainDb {
+		$dbWrite = $dbWrite ?: $this->createMock( IDatabase::class );
+
+		$connectionManager = $this->createMock( ConnectionManager::class );
+		$connectionManager->method( 'getWriteConnection' )->willReturn( $dbWrite );
+		$mock = $this->createMock( ClientDomainDb::class );
+		$mock->method( 'connections' )->willReturn( $connectionManager );
+
+		return $mock;
 	}
 
 	public function provideMakeJobSpecification() {
@@ -279,7 +288,7 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 
 		/** @var InjectRCRecordsJob $job */
 		$job = TestingAccessWrapper::newFromObject( new InjectRCRecordsJob(
-			$this->getLBFactoryMock(),
+			$this->getClientDomainDbMock(),
 			$changeLookup,
 			$changeFactory,
 			$rcFactory,
@@ -389,7 +398,7 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 
 		/** @var InjectRCRecordsJob $job */
 		$job = TestingAccessWrapper::newFromObject( new InjectRCRecordsJob(
-			$this->getLBFactoryMock(),
+			$this->getClientDomainDbMock(),
 			$changeLookup,
 			$changeFactory,
 			$rcFactory,
@@ -444,8 +453,16 @@ class InjectRCRecordsJobTest extends MediaWikiIntegrationTestCase {
 			]
 		];
 
+		$dbWrite = $this->createMock( IDatabase::class );
+
+		$dbWrite->expects( $this->once() )
+			->method( 'startAtomic' );
+
+		$dbWrite->expects( $this->once() )
+			->method( 'endAtomic' );
+
 		$job = new InjectRCRecordsJob(
-			$this->getLBFactoryMock(),
+			$this->getClientDomainDbMock( $dbWrite ),
 			$changeLookup,
 			$changeFactory,
 			$rcFactory,
