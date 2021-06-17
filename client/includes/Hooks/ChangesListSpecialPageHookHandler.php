@@ -10,9 +10,9 @@ use MediaWiki\SpecialPage\Hook\ChangesListSpecialPageQueryHook;
 use User;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * @license GPL-2.0-or-later
@@ -43,11 +43,11 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 	}
 
 	public static function factory(
-		ILoadBalancer $loadBalancer,
+		ClientDomainDbFactory $dbFactory,
 		SettingsArray $clientSettings
 	): self {
 		return new self(
-			$loadBalancer->getLazyConnectionRef( DB_REPLICA ),
+			$dbFactory->newLocalDb()->connections()->getLazyReadConnectionRef(),
 			$clientSettings->getSetting( 'showExternalRecentChanges' )
 		);
 	}
@@ -80,7 +80,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 	public static function onChangesListSpecialPageStructuredFilters( $special ) {
 		$services = MediaWikiServices::getInstance();
 		$handler = self::factory(
-			$services->getDBLoadBalancer(),
+			WikibaseClient::getClientDomainDbFactory( $services ),
 			WikibaseClient::getSettings( $services )
 		);
 		// The *user-facing* filter is only registered if external changes
