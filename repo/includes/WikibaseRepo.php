@@ -100,6 +100,7 @@ use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
@@ -995,6 +996,13 @@ class WikibaseRepo {
 	): TermInLangIdsResolverFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.TermInLangIdsResolverFactory' );
+	}
+
+	public static function getEntityDataSerializationService(
+		ContainerInterface $services = null
+	): EntityDataSerializationService {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityDataSerializationService' );
 	}
 
 }

@@ -458,25 +458,15 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityData::factory",
 			"services": [
 				"HtmlCacheUpdater",
-				"SiteLookup",
-				"WikibaseRepo.CompactBaseDataModelSerializerFactory",
-				"WikibaseRepo.CompactEntitySerializer",
-				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityDataFormatProvider",
+				"WikibaseRepo.EntityDataSerializationService",
 				"WikibaseRepo.EntityDataUriManager",
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.EntityLookup",
-				"WikibaseRepo.EntityRdfBuilderFactory",
 				"WikibaseRepo.EntityRevisionLookup",
-				"WikibaseRepo.EntityStubRdfBuilderFactory",
-				"WikibaseRepo.EntityTitleStoreLookup",
 				"WikibaseRepo.Logger",
-				"WikibaseRepo.PropertyDataTypeLookup",
-				"WikibaseRepo.RdfVocabulary",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.Store",
-				"WikibaseRepo.SubEntityTypesMap",
-				"WikibaseRepo.ValueSnakRdfBuilderFactory"
+				"WikibaseRepo.SubEntityTypesMap"
 			]
 		},
 		"EntityPage": {
