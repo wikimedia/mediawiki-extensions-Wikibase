@@ -6,9 +6,9 @@ namespace Wikibase\Lib\Store\Sql;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\ChangeStore;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\DBQueryError;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * @license GPL-2.0-or-later
@@ -17,12 +17,12 @@ use Wikimedia\Rdbms\ILoadBalancer;
 class SqlChangeStore implements ChangeStore {
 
 	/**
-	 * @var ILoadBalancer
+	 * @var RepoDomainDb
 	 */
-	private $loadBalancer;
+	private $repoDomainDb;
 
-	public function __construct( ILoadBalancer $loadBalancer ) {
-		$this->loadBalancer = $loadBalancer;
+	public function __construct( RepoDomainDb $repoDomainDb ) {
+		$this->repoDomainDb = $repoDomainDb;
 	}
 
 	/**
@@ -48,7 +48,7 @@ class SqlChangeStore implements ChangeStore {
 	private function updateChange( ChangeRow $change ) {
 		$values = $this->getValues( $change );
 
-		$dbw = $this->loadBalancer->getConnection( DB_PRIMARY );
+		$dbw = $this->repoDomainDb->connections()->getWriteConnection();
 
 		$dbw->update(
 			'wb_changes',
@@ -57,18 +57,18 @@ class SqlChangeStore implements ChangeStore {
 			__METHOD__
 		);
 
-		$this->loadBalancer->reuseConnection( $dbw );
+		$this->repoDomainDb->connections()->releaseConnection( $dbw );
 	}
 
 	private function insertChange( ChangeRow $change ) {
 		$values = $this->getValues( $change );
 
-		$dbw = $this->loadBalancer->getConnection( DB_PRIMARY );
+		$dbw = $this->repoDomainDb->connections()->getWriteConnection();
 
 		$dbw->insert( 'wb_changes', $values, __METHOD__ );
 		$change->setField( 'id', $dbw->insertId() );
 
-		$this->loadBalancer->reuseConnection( $dbw );
+		$this->repoDomainDb->connections()->releaseConnection( $dbw );
 	}
 
 	/**
