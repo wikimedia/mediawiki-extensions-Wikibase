@@ -15,6 +15,7 @@
 	"apihelp-query+pageterms-example-simple": "Få alla termer associerade med sidan 'London', på användarens språk.",
 	"apihelp-query+pageterms-example-label-en": "Få etiketter och alias associerade med sidan 'London', på engelska.",
 	"apihelp-query+pageterms-param-terms": "Den typen av termer som ska hämtas, t.ex. 'description'. Om ej angivt returneras alla typer.",
+	"apihelp-query+description-summary": "Få en kort beskrivning, även kallad undertitel, som förklarar vad målsidan handlar om.",
 	"apihelp-query+description-example": "Hämta beskrivningen för sidan \"London\".",
 	"apihelp-query+description-example-central": "Hämta beskrivningen för sidan \"London\", helst den centrala beskrivningen om det finns någon.",
 	"apihelp-query+wikibase-description": "Hämta information om Wikibase-klienten och det tillhörande Wikibase-centralförvaret.",

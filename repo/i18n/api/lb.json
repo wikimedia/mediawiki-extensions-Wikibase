@@ -12,7 +12,7 @@
 	"apihelp-wbmergeitems-summary": "Fusionéiert méi Elementer.",
 	"apihelp-wbmergeitems-param-summary": "Resumé fir d'Ännerung.\nEng automatesch generéiert Bemierkung gëtt virdru gesat. D'Limite vun der Längt vun der automatescher Bemierkung zesumme mam Resumé ass 260 Zeechen. Denkt drun datt alles wat iwwer déi Limite erausgeet automatesch ofgeschnidde gëtt.",
 	"apihelp-wbmergeitems-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"Bot\" gehéiert.",
-	"apihelp-wbmergeitems-example-1": "Fusionéiert Date vun <samp>Q42</samp> an <samp>Q222</samp>",
+	"apihelp-wbmergeitems-example-1": "Fusionéiert Date vun <samp>$1</samp> an <samp>$2</samp>",
 	"apihelp-wbremovequalifiers-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"{{int:group-bot}}\" gehéiert.",
 	"apihelp-wbremovereferences-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"{{int:group-bot}}\" gehéiert.",
 	"apihelp-wbsearchentities-param-search": "No dësem Text sichen.",
