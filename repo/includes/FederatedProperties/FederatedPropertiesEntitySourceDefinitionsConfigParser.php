@@ -69,7 +69,6 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParser {
 			return $definitions;
 		}
 
-		$definitions->getSources();
 		$defaultLocal = $this->getLocalEntitySource( $definitions->getSources() );
 
 		$entityTypes = $defaultLocal->getEntityTypes();
