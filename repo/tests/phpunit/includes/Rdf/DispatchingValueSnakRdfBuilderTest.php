@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use DataValues\StringValue;
+use Psr\Log\Test\TestLogger;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\Rdf\DispatchingValueSnakRdfBuilder;
@@ -45,6 +46,22 @@ class DispatchingValueSnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$dispatchingBuilder->addValue( $writer, $namespace, $lname, 'foo', 'v', $snak );
 		$dispatchingBuilder->addValue( $writer, $namespace, $lname, 'bar', 'v', $snak );
+	}
+
+	public function testAddValue_unknownType() {
+		$writer = $this->createMock( RdfWriter::class );
+		$namespace = 'xx';
+		$lname = 'yy';
+
+		$propertyId = new PropertyId( 'P123' );
+		$snak = new PropertyValueSnak( $propertyId, new StringValue( 'xyz' ) );
+
+		$logger = new TestLogger();
+		$dispatchingBuilder = new DispatchingValueSnakRdfBuilder( [], $logger );
+
+		$dispatchingBuilder->addValue( $writer, $namespace, $lname, 'foo', 'v', $snak );
+
+		$this->assertTrue( $logger->hasWarningRecords() );
 	}
 
 }

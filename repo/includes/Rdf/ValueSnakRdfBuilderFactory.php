@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Rdf;
 
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -19,16 +21,21 @@ class ValueSnakRdfBuilderFactory {
 	 */
 	private $factoryCallbacks;
 
+	/** @var LoggerInterface */
+	private $logger;
+
 	/**
 	 * @param callable[] $factoryCallbacks Factory callback functions as returned by
 	 *        DataTypeDefinitions::getRdfBuilderFactoryCallbacks(). Callbacks will be invoked
 	 *        with the signature ($mode, RdfVocabulary, EntityMentionListener) and must
 	 *        return a ValueSnakRdfBuilder (or null).
+	 * @param LoggerInterface|null $logger
 	 */
-	public function __construct( array $factoryCallbacks ) {
+	public function __construct( array $factoryCallbacks, LoggerInterface $logger = null ) {
 		Assert::parameterElementType( 'callable', $factoryCallbacks, '$factoryCallbacks' );
 
 		$this->factoryCallbacks = $factoryCallbacks;
+		$this->logger = $logger ?: new NullLogger();
 	}
 
 	/**
@@ -57,7 +64,7 @@ class ValueSnakRdfBuilderFactory {
 			$dedupe
 		);
 
-		return new DispatchingValueSnakRdfBuilder( $builders );
+		return new DispatchingValueSnakRdfBuilder( $builders, $this->logger );
 	}
 
 	/**

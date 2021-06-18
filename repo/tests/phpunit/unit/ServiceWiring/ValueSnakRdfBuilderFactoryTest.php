@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use InvalidArgumentException;
+use Psr\Log\NullLogger;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
@@ -26,6 +27,8 @@ class ValueSnakRdfBuilderFactoryTest extends ServiceWiringTestCase {
 					},
 				],
 			] ) );
+		$this->mockService( 'WikibaseRepo.Logger',
+			new NullLogger() );
 
 		$valueSnakRdfBuilderFactory = $this
 			->getService( 'WikibaseRepo.ValueSnakRdfBuilderFactory' );
@@ -43,6 +46,8 @@ class ValueSnakRdfBuilderFactoryTest extends ServiceWiringTestCase {
 					'rdf-builder-factory-callback' => true,
 				],
 			] ) );
+		$this->mockService( 'WikibaseRepo.Logger',
+			new NullLogger() );
 
 		$this->expectException( InvalidArgumentException::class );
 		$this->getService( 'WikibaseRepo.ValueSnakRdfBuilderFactory' );
