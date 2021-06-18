@@ -110,3 +110,18 @@ wfLoadExtension( 'Elastica' );
 require_once "$IP/extensions/CirrusSearch/tests/jenkins/FullyFeaturedConfig.php";
 $wgCirrusSearchServers = [ 'elasticsearch' ];
 $wgWBCSUseCirrus = true;
+
+# Spam protection
+wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/QuestyCaptcha' ]);
+
+$wgCaptchaQuestions = [
+	'What\'s the name of the feature that we are testing on this test system?' => [ 'Federated Properties', 'FeddyProps' ],
+	'What does WB stand for?' => 'Wikibase'
+];
+$wgCaptchaTriggers['createaccount'] = true;
+
+# Only logged in users have the move permission, so only logged in users can edit the MAIN and TALK namespaces
+$wgNamespaceProtection[NS_MAIN] = ['move'];
+$wgNamespaceProtection[NS_TALK] = ['move'];
+$wgNamespaceProtection[NS_USER] = ['move'];
+$wgNamespaceProtection[NS_USER_TALK] = ['move'];

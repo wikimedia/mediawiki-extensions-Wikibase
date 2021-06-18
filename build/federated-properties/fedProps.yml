@@ -9,6 +9,7 @@
     WIKIBASE_CIRRUS_SEARCH_PATH: "extensions/WikibaseCirrusSearch"
     ELASTICA_PATH: "extensions/Elastica"
     CIRRUS_SEARCH_PATH: "extensions/CirrusSearch"
+    CONFIRM_EDIT_PATH: "extensions/ConfirmEdit"
   roles:
     - role: git_updater
       vars:
@@ -21,6 +22,7 @@
           - "{{ MW_PATH }}/{{ WIKIBASE_CIRRUS_SEARCH_PATH }}"
           - "{{ MW_PATH }}/{{ ELASTICA_PATH }}"
           - "{{ MW_PATH }}/{{ CIRRUS_SEARCH_PATH }}"
+          - "{{ MW_PATH }}/{{ CONFIRM_EDIT_PATH }}"
         USERNAME: mediawiki
   tasks:
     - name: Ensure essential system packages are installed
@@ -119,6 +121,7 @@
           - "{{ WIKIBASE_CIRRUS_SEARCH_PATH }}"
           - "{{ ELASTICA_PATH }}"
           - "{{ CIRRUS_SEARCH_PATH }}"
+          - "{{ CONFIRM_EDIT_PATH }}"
 
     - name: Ensure composer.local.json is in place
       copy:
