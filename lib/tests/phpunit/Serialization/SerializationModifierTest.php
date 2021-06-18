@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Serialization;
 
 use Wikibase\Lib\Serialization\SerializationModifier;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Lib\Serialization\SerializationModifier
@@ -281,6 +282,32 @@ class SerializationModifierTest extends \PHPUnit\Framework\TestCase {
 		$injector = $this->newSerializationModifier();
 		$alteredArray = $injector->modifyUsingCallbacks( $array, $callbacks );
 		$this->assertEquals( $expectedArray, $alteredArray );
+	}
+
+	public function testUnflattenPaths() {
+		$array = [
+			'' => 'cb0',
+			'claims' => 'cb1',
+			'claims/foo' => 'cb2',
+			'claims/*/bar' => 'cb3',
+			'label' => 'cb4',
+		];
+		$expected = [
+			'' => 'cb0',
+			'claims' => [
+				'' => 'cb1',
+				'foo' => [ '' => 'cb2' ],
+				'*' => [
+					'bar' => [ '' => 'cb3' ],
+				],
+			],
+			'label' => [ '' => 'cb4' ],
+		];
+
+		$actual = TestingAccessWrapper::newFromObject( $this->newSerializationModifier() )
+			->unflattenPaths( $array );
+
+		$this->assertSame( $expected, $actual );
 	}
 
 }
