@@ -33,8 +33,8 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Tests\MockRepository;
-use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Maintenance\DumpRdf;
+use Wikibase\Repo\Rdf\RdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -157,26 +157,26 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $mockEntityIdPager );
 
 		// Note: We are testing with the actual RDF bindings, so we can check for actual RDF output.
-		$rdfBuilder = WikibaseRepo::getValueSnakRdfBuilderFactory();
 		$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $this->getMockPropertyDataTypeLookup() );
 		$dumpScript->setServices(
 			$sqlEntityIdPagerFactory,
 			$existingEntityTypes,
 			$entityTypesWithoutRdfOutput,
 			new NullEntityPrefetcher(),
-			$this->getMockPropertyDataTypeLookup(),
-			$rdfBuilder,
-			WikibaseRepo::getEntityRdfBuilderFactory(),
-			WikibaseRepo::getEntityStubRdfBuilderFactory(),
 			$mockRepo,
-			new RdfVocabulary(
-				[ '' => 'fooUri/' ],
-				[ '' => 'acme/EntityData/' ],
-				new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-				[ '' => '' ],
-				[ '' => '' ]
-			),
-			$this->createMock( EntityContentFactory::class )
+			new RdfBuilderFactory(
+				new RdfVocabulary(
+					[ '' => 'fooUri/' ],
+					[ '' => 'acme/EntityData/' ],
+					new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+					[ '' => '' ],
+					[ '' => '' ]
+				),
+				WikibaseRepo::getEntityRdfBuilderFactory(),
+				WikibaseRepo::getEntityContentFactory(),
+				WikibaseRepo::getEntityStubRdfBuilderFactory(),
+				$mockRepo
+			)
 		);
 
 		return $dumpScript;

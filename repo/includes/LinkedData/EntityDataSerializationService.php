@@ -16,17 +16,12 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Repo\Api\ResultBuilder;
-use Wikibase\Repo\Content\EntityContentFactory;
-use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
-use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
 use Wikibase\Repo\Rdf\HashDedupeBag;
 use Wikibase\Repo\Rdf\RdfBuilder;
+use Wikibase\Repo\Rdf\RdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfProducer;
-use Wikibase\Repo\Rdf\RdfVocabulary;
-use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikimedia\Purtle\RdfWriterFactory;
 
@@ -48,9 +43,6 @@ class EntityDataSerializationService {
 
 	/** @var EntityTitleStoreLookup */
 	private $entityTitleStoreLookup;
-
-	/** @var EntityContentFactory */
-	private $entityContentFactory;
 
 	/**
 	 * @var SerializerFactory
@@ -83,55 +75,26 @@ class EntityDataSerializationService {
 	private $siteLookup;
 
 	/**
-	 * @var RdfVocabulary
+	 * @var RdfBuilderFactory
 	 */
-	private $rdfVocabulary;
-
-	/**
-	 * @var ValueSnakRdfBuilderFactory
-	 */
-	private $valueSnakRdfBuilderFactory;
-
-	/**
-	 * @var EntityRdfBuilderFactory
-	 */
-	private $entityRdfBuilderFactory;
-
-	/**
-	 * @var EntityStubRdfBuilderFactory
-	 */
-	private $entityStubRdfBuilderFactory;
-	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $entityRevisionLookup;
+	private $rdfBuilderFactory;
 
 	public function __construct(
-		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleStoreLookup $entityTitleStoreLookup,
-		EntityContentFactory $entityContentFactory,
 		PropertyDataTypeLookup $propertyLookup,
-		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
-		EntityRdfBuilderFactory $entityRdfBuilderFactory,
-		EntityStubRdfBuilderFactory $entityStubRdfBuilderFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		SerializerFactory $serializerFactory,
 		Serializer $entitySerializer,
 		SiteLookup $siteLookup,
-		RdfVocabulary $rdfVocabulary
+		RdfBuilderFactory $rdfBuilderFactory
 	) {
-		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
-		$this->entityContentFactory = $entityContentFactory;
 		$this->propertyLookup = $propertyLookup;
-		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
-		$this->entityRdfBuilderFactory = $entityRdfBuilderFactory;
-		$this->entityStubRdfBuilderFactory = $entityStubRdfBuilderFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->serializerFactory = $serializerFactory;
 		$this->entitySerializer = $entitySerializer;
 		$this->siteLookup = $siteLookup;
-		$this->rdfVocabulary = $rdfVocabulary;
+		$this->rdfBuilderFactory = $rdfBuilderFactory;
 
 		$this->rdfWriterFactory = new RdfWriterFactory();
 	}
@@ -364,20 +327,7 @@ class EntityDataSerializationService {
 
 		$rdfWriter = $this->rdfWriterFactory->getWriter( $format );
 
-		$rdfBuilder = new RdfBuilder(
-			$this->rdfVocabulary,
-			$this->valueSnakRdfBuilderFactory,
-			$this->propertyLookup,
-			$this->entityRdfBuilderFactory,
-			$this->getFlavor( $flavorName ),
-			$rdfWriter,
-			new HashDedupeBag(),
-			$this->entityContentFactory,
-			$this->entityStubRdfBuilderFactory,
-			$this->entityRevisionLookup
-		);
-
-		return $rdfBuilder;
+		return $this->rdfBuilderFactory->getRdfBuilder( $this->getFlavor( $flavorName ), new HashDedupeBag(), $rdfWriter );
 	}
 
 	/**

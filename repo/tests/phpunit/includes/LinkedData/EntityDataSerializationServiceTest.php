@@ -27,6 +27,7 @@ use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
+use Wikibase\Repo\Rdf\RdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -113,18 +114,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		// known data types. Mocking the bindings would be nice, but is complex and not needed.
 		$rdfBuilder = WikibaseRepo::getValueSnakRdfBuilderFactory();
 
-		return new EntityDataSerializationService(
-			$this->getMockRepository(),
-			$entityTitleStoreLookup,
-			$entityContentFactory,
-			$dataTypeLookup,
-			$rdfBuilder,
-			WikibaseRepo::getEntityRdfBuilderFactory(),
-			WikibaseRepo::getEntityStubRdfBuilderFactory(),
-			new EntityDataFormatProvider(),
-			$serializerFactory,
-			$serializerFactory->newItemSerializer(),
-			new HashSiteStore(),
+		$rdfBuilderFactory = new RdfBuilderFactory(
 			new RdfVocabulary(
 				[ 'items' => self::URI_BASE, 'props' => self::URI_BASE_PROPS, ],
 				[ 'items' => self::URI_DATA, 'props' => self::URI_DATA_PROPS, ],
@@ -150,7 +140,21 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 				], new EntityTypeDefinitions( [] ) ),
 				[ 'items' => 'wd', 'props' => 'pro', ],
 				[ 'items' => '', 'props' => 'pro', ]
-			)
+			),
+			WikibaseRepo::getEntityRdfBuilderFactory(),
+			$entityContentFactory,
+			WikibaseRepo::getEntityStubRdfBuilderFactory(),
+			$this->getMockRepository()
+		);
+
+		return new EntityDataSerializationService(
+			$entityTitleStoreLookup,
+			$dataTypeLookup,
+			new EntityDataFormatProvider(),
+			$serializerFactory,
+			$serializerFactory->newItemSerializer(),
+			new HashSiteStore(),
+			$rdfBuilderFactory
 		);
 	}
 
