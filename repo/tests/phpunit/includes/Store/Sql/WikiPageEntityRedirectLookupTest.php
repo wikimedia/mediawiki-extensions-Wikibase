@@ -5,7 +5,6 @@ declare( strict_types=1 );
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use ContentHandler;
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
@@ -13,12 +12,13 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Rdbms\ConnectionManager;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
 use WikiPage;
 
 /**
@@ -120,7 +120,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		$entityRedirectLookup = new WikiPageEntityRedirectLookup(
 			$this->getMockEntityTitleLookup(),
 			$this->getMockEntityIdLookup(),
-			$this->getMockLoadBalancer( $row )
+			$this->getMockRepoDomainDb( $row )
 		);
 
 		$redirect = $entityRedirectLookup->getRedirectForEntityId( new ItemId( 'Q2' ) );
@@ -150,15 +150,18 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		return $entityIdLookup;
 	}
 
-	private function getMockLoadBalancer( array $row ): ILoadBalancer {
+	private function getMockRepoDomainDb( array $row ): RepoDomainDb {
 		$db = $this->getMockDatabase( $row );
-
-		$loadBalancer = $this->createMock( ILoadBalancer::class );
-
-		$loadBalancer->method( 'getConnection' )
-			->willReturn( $db );
-
-		return $loadBalancer;
+		$connections = $this->createMock( ConnectionManager::class );
+		$methods = [ 'getReadConnection', 'getWriteConnection', 'getReadConnectionRef', 'getWriteConnectionRef' ];
+		foreach ( $methods as $method ) {
+			$connections->method( $method )
+				->willReturn( $db );
+		}
+		$repoDomainDb = $this->createMock( RepoDomainDb::class );
+		$repoDomainDb->method( 'connections' )
+			->willReturn( $connections );
+		return $repoDomainDb;
 	}
 
 	private function getMockDatabase( array $row ): IDatabase {
@@ -186,7 +189,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		return new WikiPageEntityRedirectLookup(
 			WikibaseRepo::getEntityTitleStoreLookup(),
 			WikibaseRepo::getEntityIdLookup(),
-			MediaWikiServices::getInstance()->getDBLoadBalancer()
+			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()
 		);
 	}
 

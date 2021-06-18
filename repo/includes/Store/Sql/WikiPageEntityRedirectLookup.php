@@ -7,9 +7,9 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * @license GPL-2.0-or-later
@@ -27,19 +27,17 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 	 */
 	private $entityIdLookup;
 
-	/**
-	 * @var ILoadBalancer
-	 */
-	private $loadBalancer;
+	/** @var RepoDomainDb */
+	private $repoDb;
 
 	public function __construct(
 		EntityTitleStoreLookup $entityTitleLookup,
 		EntityIdLookup $entityIdLookup,
-		ILoadBalancer $loadBalancer
+		RepoDomainDb $repoDb
 	) {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityIdLookup = $entityIdLookup;
-		$this->loadBalancer = $loadBalancer;
+		$this->repoDb = $repoDb;
 	}
 
 	/**
@@ -59,7 +57,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 		}
 
 		try {
-			$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
+			$dbr = $this->repoDb->connections()->getReadConnection();
 		} catch ( MWException $ex ) {
 			throw new EntityRedirectLookupException( $targetId, null, $ex );
 		}
@@ -81,7 +79,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 		);
 
 		try {
-			$this->loadBalancer->reuseConnection( $dbr );
+			$this->repoDb->connections()->releaseConnection( $dbr );
 		} catch ( MWException $ex ) {
 			throw new EntityRedirectLookupException( $targetId, null, $ex );
 		}
@@ -118,10 +116,12 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 			throw new EntityRedirectLookupException( $entityId, null, $ex );
 		}
 
-		$forUpdate = $forUpdate === EntityRedirectLookup::FOR_UPDATE ? DB_PRIMARY : DB_REPLICA;
-
 		try {
-			$db = $this->loadBalancer->getConnection( $forUpdate );
+			if ( $forUpdate === EntityRedirectLookup::FOR_UPDATE ) {
+				$db = $this->repoDb->connections()->getWriteConnection();
+			} else {
+				$db = $this->repoDb->connections()->getReadConnection();
+			}
 		} catch ( MWException $ex ) {
 			throw new EntityRedirectLookupException( $entityId, null, $ex );
 		}
@@ -141,7 +141,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 		);
 
 		try {
-			$this->loadBalancer->reuseConnection( $db );
+			$this->repoDb->connections()->releaseConnection( $db );
 		} catch ( MWException $ex ) {
 			throw new EntityRedirectLookupException( $entityId, null, $ex );
 		}
