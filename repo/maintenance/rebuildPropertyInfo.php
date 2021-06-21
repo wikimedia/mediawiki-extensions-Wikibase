@@ -58,7 +58,6 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 			),
 			new LegacyAdapterPropertyLookup( WikibaseRepo::getEntityLookup() ),
 			WikibaseRepo::getPropertyInfoBuilder(),
-			WikibaseRepo::getEntityIdComposer(),
 			WikibaseRepo::getEntityNamespaceLookup()
 		);
 		$builder->setReporter( $reporter );
