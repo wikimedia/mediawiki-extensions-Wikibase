@@ -4,6 +4,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\Lib\Tests;
 
+use IDatabase;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -16,6 +17,13 @@ use Wikimedia\Rdbms\ILoadBalancer;
  * @license GPL-2.0-or-later
  */
 class RepoDomainDbTest extends \PHPUnit\Framework\TestCase {
+
+	public function testConvenienceMethod(): void {
+		$db = $this->createMock( IDatabase::class );
+		$domainDB = RepoDomainDb::newFromTestConnection( $db );
+
+		$this->assertInstanceOf( RepoDomainDb::class, $domainDB );
+	}
 
 	public function testValidConstructionAndGetters() {
 		$domain = 'imarepo';
