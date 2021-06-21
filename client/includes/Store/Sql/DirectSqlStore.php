@@ -20,13 +20,13 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -57,9 +57,9 @@ class DirectSqlStore implements ClientStore {
 	private $repoDb;
 
 	/**
-	 * @var SessionConsistentConnectionManager|null
+	 * @var ClientDomainDb
 	 */
-	private $localConnectionManager = null;
+	private $clientDb;
 
 	/**
 	 * @var string
@@ -90,11 +90,6 @@ class DirectSqlStore implements ClientStore {
 	 * @var EntityIdLookup
 	 */
 	private $entityIdLookup;
-
-	/**
-	 * @var EntityNamespaceLookup
-	 */
-	private $entityNamespaceLookup = null;
 
 	/**
 	 * @var PropertyInfoLookup|null
@@ -155,18 +150,18 @@ class DirectSqlStore implements ClientStore {
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityIdLookup $entityIdLookup,
-		EntityNamespaceLookup $entityNamespaceLookup,
 		WikibaseServices $wikibaseServices,
 		SettingsArray $settings,
 		TermBuffer $termBuffer,
-		RepoDomainDb $repoDb
+		RepoDomainDb $repoDb,
+		ClientDomainDb $clientDb
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdLookup = $entityIdLookup;
-		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->wikibaseServices = $wikibaseServices;
 		$this->termBuffer = $termBuffer;
 		$this->repoDb = $repoDb;
+		$this->clientDb = $clientDb;
 
 		// @TODO: split the class so it needs less injection
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
@@ -211,13 +206,7 @@ class DirectSqlStore implements ClientStore {
 	 * @return SessionConsistentConnectionManager
 	 */
 	private function getLocalConnectionManager() {
-		if ( $this->localConnectionManager === null ) {
-			$this->localConnectionManager = new SessionConsistentConnectionManager(
-				MediaWikiServices::getInstance()->getDBLoadBalancer()
-			);
-		}
-
-		return $this->localConnectionManager;
+		return $this->clientDb->sessionConsistentConnections();
 	}
 
 	/**
