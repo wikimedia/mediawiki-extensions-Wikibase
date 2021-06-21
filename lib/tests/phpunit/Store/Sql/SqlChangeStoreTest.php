@@ -31,6 +31,22 @@ use Wikimedia\Rdbms\LBFactorySingle;
  */
 class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 
+	public function setUp(): void {
+		parent::setUp();
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
+		}
+		$this->db->delete( 'wb_changes', '*', __METHOD__ );
+		$this->tablesUsed[] = 'wb_changes';
+	}
+
+	private function newSqlChangeStore(): SqlChangeStore {
+		return new SqlChangeStore( new RepoDomainDb(
+			LBFactorySingle::newFromConnection( $this->db ),
+			$this->db->getDomainID()
+		) );
+	}
+
 	public function saveChangeInsertProvider() {
 		$factory = $this->getEntityChangeFactory();
 
@@ -103,17 +119,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider saveChangeInsertProvider
 	 */
 	public function testSaveChange_insert( array $expected, EntityChange $change ) {
-		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
-		}
-
-		$this->db->delete( 'wb_changes', '*', __METHOD__ );
-		$this->tablesUsed[] = 'wb_changes';
-
-		$store = new SqlChangeStore( new RepoDomainDb(
-			LBFactorySingle::newFromConnection( $this->db ),
-			$this->db->getDomainID()
-		) );
+		$store = $this->newSqlChangeStore();
 		$store->saveChange( $change );
 
 		$res = $this->db->select( 'wb_changes', '*', [], __METHOD__ );
@@ -141,21 +147,11 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testSaveChange_update() {
-		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
-		}
-
-		$this->db->delete( 'wb_changes', '*', __METHOD__ );
-		$this->tablesUsed[] = 'wb_changes';
-
 		$factory = $this->getEntityChangeFactory();
 		$change = $factory->newForEntity( EntityChange::ADD, new ItemId( 'Q21389475' ) );
 		$change->setField( 'time', wfTimestampNow() );
 
-		$store = new SqlChangeStore( new RepoDomainDb(
-			LBFactorySingle::newFromConnection( $this->db ),
-			$this->db->getDomainID()
-		) );
+		$store = $this->newSqlChangeStore();
 		$store->saveChange( $change );
 		$expected = [
 			'change_id' => (string)$change->getId(),
