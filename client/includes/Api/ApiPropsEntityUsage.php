@@ -189,7 +189,9 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 					EntityUsage::STATEMENT_USAGE,
 					EntityUsage::ALL_USAGE,
 					EntityUsage::OTHER_USAGE,
-				]
+				],
+				// These messages are also reused for the same values in the ApiListEntityUsageModule
+				ApiBase::PARAM_HELP_MSG_PER_VALUE => [],
 			],
 			'entities' => [
 				ApiBase::PARAM_ISMULTI => true,
