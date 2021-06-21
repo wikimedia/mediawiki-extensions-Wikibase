@@ -99,20 +99,23 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		}
 	}
 
-	/**
-	 * @param array $params
-	 *
-	 * @return ApiQuery
-	 */
-	private function getQueryModule( array $params ) {
+	private function getListEntityUsageModule( array $params ): ApiListEntityUsage {
+		$repoLinker = WikibaseClient::getRepoLinker();
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest( $params, true ) );
 
 		$main = new ApiMain( $context );
 
-		$query = new ApiQuery( $main, $params['action'] );
+		$listEntityUsageModule = new ApiListEntityUsage(
+			new ApiQuery( $main, $params['action'] ),
+			'entityusage',
+			$repoLinker
+		);
 
-		return $query;
+		$continuationManager = new \ApiContinuationManager( $main, [ $listEntityUsageModule ] );
+		$main->setContinuationManager( $continuationManager );
+
+		return $listEntityUsageModule;
 	}
 
 	/**
@@ -121,12 +124,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 	 * @return array[]
 	 */
 	private function callApiModule( array $params ) {
-		$repoLinker = WikibaseClient::getRepoLinker();
-		$module = new ApiListEntityUsage(
-			$this->getQueryModule( $params ),
-			'entityusage',
-			$repoLinker
-		);
+		$module = $this->getListEntityUsageModule( $params );
 
 		$module->execute();
 
@@ -203,6 +201,27 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 					]
 				] ],
 			],
+			'correctly finish pageination step between two pages' => [
+				[
+					'action' => 'query',
+					'query' => 'entityusage',
+					'wbeuentities' => 'Q3|Q4|Q5',
+					'wbeulimit' => 2
+				],
+				[
+					"11" => [
+						"ns" => 0,
+						"title" => "Vienna",
+						"pageid" => 11,
+						"entityusage" => [
+							"Q3" => [ "aspects" => [
+								"O",
+								"S"
+							] ],
+						]
+					]
+				]
+			]
 		];
 	}
 
