@@ -7,7 +7,6 @@ use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseUsageCheckingTermStoreCleaner;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner
@@ -33,7 +32,7 @@ class DatabaseUsageCheckingTermStoreCleanerTest extends MediaWikiIntegrationTest
 	}
 
 	private function getCleaner(): DatabaseUsageCheckingTermStoreCleaner {
-		$repoDomainDb = new RepoDomainDb( LBFactorySingle::newFromConnection( $this->db ), $this->db->getDomainID() );
+		$repoDomainDb = RepoDomainDb::newFromTestConnection( $this->db );
 		return new DatabaseUsageCheckingTermStoreCleaner( $repoDomainDb, $this->innerCleaner );
 	}
 

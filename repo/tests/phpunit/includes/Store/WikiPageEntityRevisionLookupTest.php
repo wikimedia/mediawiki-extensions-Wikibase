@@ -34,7 +34,6 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Tests\EntityRevisionLookupTestCase;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup
@@ -70,7 +69,6 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 
 	private function getMetaDataLookup(): WikiPageEntityMetaDataLookup {
 		$nsLookup = $this->getEntityNamespaceLookup();
-		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		return new WikiPageEntityMetaDataLookup(
 			$nsLookup,
 			new EntityIdLocalPartPageTableEntityQuery(
@@ -89,7 +87,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 				'',
 				''
 			),
-			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() )
+			RepoDomainDb::newFromTestConnection( $this->db )
 		);
 	}
 

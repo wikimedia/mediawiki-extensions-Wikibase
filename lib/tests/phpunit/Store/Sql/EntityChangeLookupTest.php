@@ -12,7 +12,6 @@ use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\EntityChangeLookup
@@ -27,7 +26,6 @@ use Wikimedia\Rdbms\LBFactorySingle;
 class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 
 	private function newEntityChangeLookup() {
-		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		return new EntityChangeLookup(
 			new EntityChangeFactory(
 				new EntityDiffer(),
@@ -35,7 +33,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 				[ 'item' => EntityChange::class ]
 			),
 			new ItemIdParser(),
-			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() )
+			RepoDomainDb::newFromTestConnection( $this->db )
 		);
 	}
 
@@ -83,10 +81,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
 		}
 
-		$changeStore = new SqlChangeStore( new RepoDomainDb(
-			LBFactorySingle::newFromConnection( $this->db ),
-			$this->db->getDomainID()
-		) );
+		$changeStore = new SqlChangeStore( RepoDomainDb::newFromTestConnection( $this->db ) );
 		foreach ( $changesToStore as $change ) {
 			$change->setField( 'id', null ); // Null the id as we save the same changes multiple times
 			$changeStore->saveChange( $change );
@@ -129,10 +124,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 		$expected->setField( 'revision_id', 342342 );
 		$expected->setField( 'id', null ); // Null the id as we save the same changes multiple times
 
-		$changeStore = new SqlChangeStore( new RepoDomainDb(
-			LBFactorySingle::newFromConnection( $this->db ),
-			$this->db->getDomainID()
-		) );
+		$changeStore = new SqlChangeStore( RepoDomainDb::newFromTestConnection( $this->db ) );
 		$changeStore->saveChange( $expected );
 
 		$lookup = $this->newEntityChangeLookup();

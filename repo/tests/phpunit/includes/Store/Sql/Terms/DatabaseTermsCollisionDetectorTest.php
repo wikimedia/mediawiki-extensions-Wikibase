@@ -10,7 +10,6 @@ use Wikibase\Lib\Store\Sql\Terms\StaticTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Repo\Store\Sql\Terms\DatabaseTermsCollisionDetector;
 use Wikibase\Repo\Tests\WikibaseTablesUsed;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\Terms\DatabaseTermsCollisionDetector
@@ -135,10 +134,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 	private function makeTestSubject( $entityType ) {
 		return new DatabaseTermsCollisionDetector(
 			$entityType,
-			new RepoDomainDb(
-				LBFactorySingle::newFromConnection( $this->db ),
-				$this->db->getDomainID()
-			),
+			RepoDomainDb::newFromTestConnection( $this->db ),
 			$this->typeIdsLookup
 		);
 	}

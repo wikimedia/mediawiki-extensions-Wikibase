@@ -10,7 +10,6 @@ use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Repo\ChangePruner;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Repo\ChangePruner
@@ -29,7 +28,7 @@ class ChangePrunerTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->repoDomainDb = new RepoDomainDb( LBFactorySingle::newFromConnection( $this->db ), $this->db->getDomainID() );
+		$this->repoDomainDb = RepoDomainDb::newFromTestConnection( $this->db );
 	}
 
 	public function testConstructorWithInvalidBatchSize() {
@@ -75,10 +74,7 @@ class ChangePrunerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function addTestChanges() {
-		$changeStore = new SqlChangeStore( new RepoDomainDb(
-			LBFactorySingle::newFromConnection( $this->db ),
-			$this->db->getDomainID()
-		) );
+		$changeStore = new SqlChangeStore( $this->repoDomainDb );
 
 		$change = new EntityChange( $this->getChangeRowData( '20150101000005' ) );
 		$changeStore->saveChange( $change );

@@ -15,7 +15,6 @@ use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\SqlChangeStore
@@ -41,10 +40,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newSqlChangeStore(): SqlChangeStore {
-		return new SqlChangeStore( new RepoDomainDb(
-			LBFactorySingle::newFromConnection( $this->db ),
-			$this->db->getDomainID()
-		) );
+		return new SqlChangeStore( RepoDomainDb::newFromTestConnection( $this->db ) );
 	}
 
 	public function saveChangeInsertProvider() {

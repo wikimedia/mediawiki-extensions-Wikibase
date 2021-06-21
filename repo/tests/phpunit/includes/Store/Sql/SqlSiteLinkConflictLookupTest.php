@@ -11,7 +11,6 @@ use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup
@@ -33,10 +32,7 @@ class SqlSiteLinkConflictLookupTest extends MediaWikiIntegrationTestCase {
 		$siteLinkTable = new SiteLinkTable(
 			'wb_items_per_site',
 			false,
-			new RepoDomainDb(
-				LBFactorySingle::newFromConnection( $this->db ),
-				$this->db->getDomainID()
-			)
+			RepoDomainDb::newFromTestConnection( $this->db )
 		);
 
 		$siteLinks = new SiteLinkList( [
@@ -88,7 +84,7 @@ class SqlSiteLinkConflictLookupTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		return new SqlSiteLinkConflictLookup(
-			new RepoDomainDb( LBFactorySingle::newFromConnection( $this->db ), $this->db->getDomainID() ),
+			RepoDomainDb::newFromTestConnection( $this->db ),
 			$entityIdComposer
 		);
 	}

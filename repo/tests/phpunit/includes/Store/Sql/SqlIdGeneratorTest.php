@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\SqlIdGenerator
@@ -49,10 +48,7 @@ class SqlIdGeneratorTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getRepoDomainDb(): RepoDomainDb {
-		return new RepoDomainDb(
-			LBFactorySingle::newFromConnection( $this->db ),
-			$this->db->getDomainID()
-		);
+		return RepoDomainDb::newFromTestConnection( $this->db );
 	}
 
 }

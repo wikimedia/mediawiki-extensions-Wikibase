@@ -12,7 +12,6 @@ use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\PropertyInfoTable
@@ -38,10 +37,9 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newPropertyInfoTable( bool $allowWrites = true ) {
-		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		return new PropertyInfoTable(
 			$this->getEntityComposer(),
-			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() ),
+			RepoDomainDb::newFromTestConnection( $this->db ),
 			$allowWrites
 		);
 	}

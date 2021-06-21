@@ -26,7 +26,6 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * This test needs to be in repo, although the class is in lib as we can't alter
@@ -90,7 +89,6 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 			$namespaceLookup = $this->getEntityNamespaceLookup();
 		}
 
-		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		return new WikiPageEntityMetaDataLookup(
 			$namespaceLookup,
 			new EntityIdLocalPartPageTableEntityQuery(
@@ -98,10 +96,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
 			$this->newEntitySource(),
-			new RepoDomainDb(
-				$lbFactory,
-				$lbFactory->getLocalDomainID()
-			)
+			RepoDomainDb::newFromTestConnection( $this->db )
 		);
 	}
 
@@ -391,7 +386,6 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$namespaceLookup = $this->getEntityNamespaceLookup();
-		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		return new WikiPageEntityMetaDataLookup(
 			$namespaceLookup,
 			new EntityIdLocalPartPageTableEntityQuery(
@@ -399,10 +393,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
 			$itemSource,
-			new RepoDomainDb(
-				$lbFactory,
-				$lbFactory->getLocalDomainID()
-			)
+			RepoDomainDb::newFromTestConnection( $this->db )
 		);
 	}
 

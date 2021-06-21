@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator
@@ -55,10 +54,7 @@ class UpsertSqlIdGeneratorTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getRepoDomainDb(): RepoDomainDb {
-		return new RepoDomainDb(
-			LBFactorySingle::newFromConnection( $this->db ),
-			$this->db->getDomainID()
-		);
+		return RepoDomainDb::newFromTestConnection( $this->db );
 	}
 
 }

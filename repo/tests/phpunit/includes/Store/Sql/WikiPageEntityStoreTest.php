@@ -44,7 +44,6 @@ use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\Rdbms\LBFactorySingle;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -92,10 +91,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getRepoDomainDb(): RepoDomainDb {
-		return new RepoDomainDb(
-			LBFactorySingle::newFromConnection( $this->db ),
-			$this->db->getDomainID()
-		);
+		return RepoDomainDb::newFromTestConnection( $this->db );
 	}
 
 	/**
@@ -126,7 +122,6 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			''
 		);
 
-		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
 		$lookup = new WikiPageEntityRevisionLookup(
 			new WikiPageEntityMetaDataLookup(
 				$nsLookup,
@@ -135,7 +130,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
 				$localSource,
-				new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() )
+				RepoDomainDb::newFromTestConnection( $this->db )
 			),
 			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
 			MediaWikiServices::getInstance()->getRevisionStore()
