@@ -245,7 +245,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			$repositoryName = '';
 			$databaseName = $this->entitySource->getDatabaseName();
 			$logger = LoggerFactory::getInstance( 'Wikibase' ); // TODO inject
-			$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 			$this->entityMetaDataAccessor = new PrefetchingWikiPageEntityMetaDataAccessor(
 				new TypeDispatchingWikiPageEntityMetaDataAccessor(
 					$this->entityMetaDataAccessorCallbacks,
