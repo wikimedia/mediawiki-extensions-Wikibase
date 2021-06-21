@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Client\Api;
 
 use ApiBase;
@@ -25,12 +27,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	 */
 	private $repoLinker;
 
-	/**
-	 * @param ApiQuery $query
-	 * @param string $moduleName
-	 * @param RepoLinker $repoLinker
-	 */
-	public function __construct( ApiQuery $query, $moduleName, RepoLinker $repoLinker ) {
+	public function __construct( ApiQuery $query, string $moduleName, RepoLinker $repoLinker ) {
 		parent::__construct( $query, $moduleName, 'wbeu' );
 
 		$this->repoLinker = $repoLinker;
@@ -41,18 +38,15 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	 *
 	 * @param ApiPageSet $resultPageSet
 	 */
-	public function executeGenerator( $resultPageSet ) {
+	public function executeGenerator( $resultPageSet ): void {
 		$this->run( $resultPageSet );
 	}
 
-	public function execute() {
+	public function execute(): void {
 		$this->run();
 	}
 
-	/**
-	 * @param ApiPageSet|null $resultPageSet
-	 */
-	public function run( ApiPageSet $resultPageSet = null ) {
+	public function run( ApiPageSet $resultPageSet = null ): void {
 		$params = $this->extractRequestParams();
 		$res = $this->doQuery( $params, $resultPageSet );
 		if ( !$res ) {
@@ -63,12 +57,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		$this->formatResult( $res, $params['limit'], $prop, $resultPageSet );
 	}
 
-	/**
-	 * @param object $row
-	 *
-	 * @return array
-	 */
-	private function addPageData( $row ) {
+	private function addPageData( object $row ): array {
 		$pageData = [];
 		$title = Title::makeTitle( $row->page_namespace, $row->page_title );
 		self::addTitleInfo( $pageData, $title );
@@ -76,18 +65,12 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		return $pageData;
 	}
 
-	/**
-	 * @param IResultWrapper $res
-	 * @param int $limit
-	 * @param array $prop
-	 * @param ApiPageSet|null $resultPageSet
-	 */
 	private function formatResult(
 		IResultWrapper $res,
-		$limit,
+		int $limit,
 		array $prop,
 		ApiPageSet $resultPageSet = null
-	) {
+	): void {
 		$entry = [];
 		$count = 0;
 		$result = $this->getResult();
@@ -129,12 +112,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		}
 	}
 
-	/**
-	 * @param array $entry
-	 * @param object $row
-	 * @param bool $url
-	 */
-	private function buildEntry( &$entry, $row, $url ) {
+	private function buildEntry( array &$entry, object $row, bool $url ): void {
 		$entry[$row->eu_entity_id] = [ 'aspects' => [ $row->eu_aspect ] ];
 		if ( $url ) {
 			$entry[$row->eu_entity_id]['url'] = $this->repoLinker->getPageUrl(
@@ -147,24 +125,16 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	}
 
 	/**
-	 * @param object $row
 	 * @param int|string $pageId
-	 * @param array $entry
-	 * @param object $result
-	 *
-	 * @return bool
 	 */
-	private function formatPageData( $row, $pageId, array $entry, $result ) {
+	private function formatPageData( object $row, $pageId, array $entry, object $result ): bool {
 		$pageData = $this->addPageData( $row );
 		$result->addValue( [ 'query', 'pages' ], intval( $pageId ), $pageData );
 		$fit = $this->addPageSubItems( $pageId, $entry );
 		return $fit;
 	}
 
-	/**
-	 * @param object $row
-	 */
-	private function setContinueFromRow( $row ) {
+	private function setContinueFromRow( object $row ): void {
 		$this->setContinueEnumParameter(
 			'continue',
 			"{$row->eu_page_id}|{$row->eu_entity_id}|{$row->eu_aspect}"
@@ -175,20 +145,12 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	 * @see ApiQueryBase::getCacheMode
 	 *
 	 * @param array $params
-	 *
-	 * @return string
 	 */
-	public function getCacheMode( $params ) {
+	public function getCacheMode( $params ): string {
 		return 'public';
 	}
 
-	/**
-	 * @param array $params
-	 * @param ApiPageSet|null $resultPageSet
-	 *
-	 * @return IResultWrapper|null
-	 */
-	public function doQuery( array $params, ApiPageSet $resultPageSet = null ) {
+	public function doQuery( array $params, ApiPageSet $resultPageSet = null ): ?IResultWrapper {
 		if ( !$params['entities'] ) {
 			return null;
 		}
@@ -229,10 +191,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		return $res;
 	}
 
-	/**
-	 * @param string $continueParam
-	 */
-	private function addContinue( $continueParam ) {
+	private function addContinue( string $continueParam ): void {
 		$db = $this->getDB();
 		list( $pageContinueSql, $entityContinueSql, $aspectContinueSql ) = explode( '|', $continueParam, 3 );
 		$pageContinueSql = (int)$pageContinueSql;
@@ -249,7 +208,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		);
 	}
 
-	public function getAllowedParams() {
+	public function getAllowedParams(): array {
 		return [
 			'prop' => [
 				ApiBase::PARAM_ISMULTI => true,
@@ -287,7 +246,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		];
 	}
 
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		return [
 			'action=query&list=wblistentityusage&wbeuentities=Q2'
 				=> 'apihelp-query+wblistentityusage-example-simple',
@@ -298,7 +257,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		];
 	}
 
-	public function getHelpUrls() {
+	public function getHelpUrls(): string {
 		return 'https://www.mediawiki.org/wiki/Special:MyLanguage/Wikibase/API';
 	}
 
