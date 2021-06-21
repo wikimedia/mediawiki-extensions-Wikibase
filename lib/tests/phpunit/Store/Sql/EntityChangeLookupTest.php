@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -84,7 +83,10 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
 		}
 
-		$changeStore = new SqlChangeStore( MediaWikiServices::getInstance()->getDBLoadBalancer() );
+		$changeStore = new SqlChangeStore( new RepoDomainDb(
+			LBFactorySingle::newFromConnection( $this->db ),
+			$this->db->getDomainID()
+		) );
 		foreach ( $changesToStore as $change ) {
 			$change->setField( 'id', null ); // Null the id as we save the same changes multiple times
 			$changeStore->saveChange( $change );
@@ -127,7 +129,10 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 		$expected->setField( 'revision_id', 342342 );
 		$expected->setField( 'id', null ); // Null the id as we save the same changes multiple times
 
-		$changeStore = new SqlChangeStore( MediaWikiServices::getInstance()->getDBLoadBalancer() );
+		$changeStore = new SqlChangeStore( new RepoDomainDb(
+			LBFactorySingle::newFromConnection( $this->db ),
+			$this->db->getDomainID()
+		) );
 		$changeStore->saveChange( $expected );
 
 		$lookup = $this->newEntityChangeLookup();

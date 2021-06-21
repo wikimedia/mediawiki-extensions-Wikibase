@@ -3,7 +3,6 @@
 declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Store\Sql;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -13,8 +12,10 @@ use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Changes\ItemChange;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Lib\WikibaseSettings;
+use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\SqlChangeStore
@@ -106,16 +107,16 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
 		}
 
-		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
-		$db = $lb->getConnection( DB_PRIMARY );
-
-		$db->delete( 'wb_changes', '*', __METHOD__ );
+		$this->db->delete( 'wb_changes', '*', __METHOD__ );
 		$this->tablesUsed[] = 'wb_changes';
 
-		$store = new SqlChangeStore( $lb );
+		$store = new SqlChangeStore( new RepoDomainDb(
+			LBFactorySingle::newFromConnection( $this->db ),
+			$this->db->getDomainID()
+		) );
 		$store->saveChange( $change );
 
-		$res = $db->select( 'wb_changes', '*', [], __METHOD__ );
+		$res = $this->db->select( 'wb_changes', '*', [], __METHOD__ );
 
 		$this->assertSame( 1, $res->numRows(), 'row count' );
 
@@ -144,17 +145,17 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
 		}
 
-		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
-		$db = $lb->getConnection( DB_PRIMARY );
-
-		$db->delete( 'wb_changes', '*', __METHOD__ );
+		$this->db->delete( 'wb_changes', '*', __METHOD__ );
 		$this->tablesUsed[] = 'wb_changes';
 
 		$factory = $this->getEntityChangeFactory();
 		$change = $factory->newForEntity( EntityChange::ADD, new ItemId( 'Q21389475' ) );
 		$change->setField( 'time', wfTimestampNow() );
 
-		$store = new SqlChangeStore( $lb );
+		$store = new SqlChangeStore( new RepoDomainDb(
+			LBFactorySingle::newFromConnection( $this->db ),
+			$this->db->getDomainID()
+		) );
 		$store->saveChange( $change );
 		$expected = [
 			'change_id' => (string)$change->getId(),
@@ -169,7 +170,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 		$change->setField( 'time', '20121026200049' );
 		$store->saveChange( $change );
 
-		$res = $db->select( 'wb_changes', '*', [], __METHOD__ );
+		$res = $this->db->select( 'wb_changes', '*', [], __METHOD__ );
 
 		$this->assertSame( 1, $res->numRows(), 'row count' );
 

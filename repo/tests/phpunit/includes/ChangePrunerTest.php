@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests;
 
 use InvalidArgumentException;
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\ObservableMessageReporter;
@@ -76,7 +75,10 @@ class ChangePrunerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function addTestChanges() {
-		$changeStore = new SqlChangeStore( MediaWikiServices::getInstance()->getDBLoadBalancer() );
+		$changeStore = new SqlChangeStore( new RepoDomainDb(
+			LBFactorySingle::newFromConnection( $this->db ),
+			$this->db->getDomainID()
+		) );
 
 		$change = new EntityChange( $this->getChangeRowData( '20150101000005' ) );
 		$changeStore->saveChange( $change );

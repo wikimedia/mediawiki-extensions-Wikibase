@@ -547,7 +547,10 @@ class SqlStore implements Store {
 	 * @return SqlChangeStore
 	 */
 	public function getChangeStore() {
-		return new SqlChangeStore( MediaWikiServices::getInstance()->getDBLoadBalancer() );
+		return new SqlChangeStore(
+			WikibaseRepo::getRepoDomainDbFactory()
+				->newForEntitySource( $this->entitySource )
+		);
 	}
 
 }
