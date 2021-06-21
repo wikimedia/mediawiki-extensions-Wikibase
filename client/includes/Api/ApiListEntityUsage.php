@@ -279,7 +279,17 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 					EntityUsage::STATEMENT_USAGE,
 					EntityUsage::ALL_USAGE,
 					EntityUsage::OTHER_USAGE,
-				]
+				],
+				// This reuses the message from the ApiPropsEntityUsage module to avoid needless duplication
+				ApiBase::PARAM_HELP_MSG_PER_VALUE => [
+					EntityUsage::SITELINK_USAGE => 'apihelp-query+wbentityusage-paramvalue-aspect-S',
+					EntityUsage::LABEL_USAGE => 'apihelp-query+wbentityusage-paramvalue-aspect-L',
+					EntityUsage::DESCRIPTION_USAGE => 'apihelp-query+wbentityusage-paramvalue-aspect-D',
+					EntityUsage::TITLE_USAGE => 'apihelp-query+wbentityusage-paramvalue-aspect-T',
+					EntityUsage::STATEMENT_USAGE => 'apihelp-query+wbentityusage-paramvalue-aspect-C',
+					EntityUsage::ALL_USAGE => 'apihelp-query+wbentityusage-paramvalue-aspect-X',
+					EntityUsage::OTHER_USAGE => 'apihelp-query+wbentityusage-paramvalue-aspect-O',
+				],
 			],
 			'entities' => [
 				ApiBase::PARAM_ISMULTI => true,
