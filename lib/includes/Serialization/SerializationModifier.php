@@ -23,12 +23,18 @@ class SerializationModifier {
 	 *         ''
 	 *         'foo/*'
 	 *         'root/entities/*\/statement/references/*\/snaks/*'
+	 *     More specific paths always run first (e.g. foo/bar before foo),
+	 *     so that array elements added by callbacks are never matched against other paths.
 	 * Elements are callbacks or lists of callbacks:
 	 *  Callback accepts 1 parameter which is the element to touch
 	 *  Callback should return the altered element
 	 * @return array The altered array.
 	 */
 	public function modifyUsingCallbacks( array $array, array $modifications ): array {
+		uksort( $modifications, function ( string $k1, string $k2 ): int {
+			return substr_count( $k2, '/' ) - substr_count( $k1, '/' );
+		} );
+
 		foreach ( $modifications as $path => $callbacks ) {
 			foreach ( (array)$callbacks as $callback ) {
 				$array = $this->modifyUsingCallback( $array, $path, $callback );
