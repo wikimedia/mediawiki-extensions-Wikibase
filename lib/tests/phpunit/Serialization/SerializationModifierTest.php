@@ -244,6 +244,32 @@ class SerializationModifierTest extends \PHPUnit\Framework\TestCase {
 				],
 			],
 		];
+
+		yield 'add types in overlapping places, less specific path first' => [
+			[
+				'' => $typeEntityCallback,
+				'*/*/labels/*' => $typeLabelCallback,
+			],
+			'array' => [
+				'subentities' => [
+					[
+						'labels' => [
+							'en' => [ 'language' => 'en', 'value' => 'label' ],
+						],
+					],
+				],
+			],
+			'alteredArray' => [
+				'type' => 'entity',
+				'subentities' => [
+					[
+						'labels' => [
+							'en' => [ 'language' => 'en', 'value' => 'label', 'type' => 'label' ],
+						],
+					],
+				],
+			],
+		];
 	}
 
 	/** @dataProvider provideCallbacks */
