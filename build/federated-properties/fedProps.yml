@@ -1,6 +1,27 @@
 - hosts: test_systems
   name: "Setup and run a test system with a 'Federated Properties' enabled instance of Wikibase"
   become: yes
+  vars:
+    VECTOR_PATH: "skins/Vector"
+    ULS_PATH: "extensions/UniversalLanguageSelector"
+    CLDR_PATH: "extensions/cldr"
+    WIKIBASE_PATH: "extensions/Wikibase"
+    WIKIBASE_CIRRUS_SEARCH_PATH: "extensions/WikibaseCirrusSearch"
+    ELASTICA_PATH: "extensions/Elastica"
+    CIRRUS_SEARCH_PATH: "extensions/CirrusSearch"
+  roles:
+    - role: git_updater
+      vars:
+        git_directories:
+          - "{{ MW_PATH }}"
+          - "{{ MW_PATH }}/{{ VECTOR_PATH }}"
+          - "{{ MW_PATH }}/{{ ULS_PATH }}"
+          - "{{ MW_PATH }}/{{ CLDR_PATH }}"
+          - "{{ MW_PATH }}/{{ WIKIBASE_PATH }}"
+          - "{{ MW_PATH }}/{{ WIKIBASE_CIRRUS_SEARCH_PATH }}"
+          - "{{ MW_PATH }}/{{ ELASTICA_PATH }}"
+          - "{{ MW_PATH }}/{{ CIRRUS_SEARCH_PATH }}"
+        USERNAME: mediawiki
   tasks:
     - name: Ensure essential system packages are installed
       package:
@@ -91,13 +112,13 @@
           dest: "{{ MW_PATH }}/{{ item }}"
           version: "master"
       loop:
-          - "skins/Vector"
-          - "extensions/UniversalLanguageSelector"
-          - "extensions/cldr"
-          - "extensions/Wikibase"
-          - "extensions/WikibaseCirrusSearch"
-          - "extensions/Elastica"
-          - "extensions/CirrusSearch"
+          - "{{ VECTOR_PATH }}"
+          - "{{ ULS_PATH }}"
+          - "{{ CLDR_PATH }}"
+          - "{{ WIKIBASE_PATH }}"
+          - "{{ WIKIBASE_CIRRUS_SEARCH_PATH }}"
+          - "{{ ELASTICA_PATH }}"
+          - "{{ CIRRUS_SEARCH_PATH }}"
 
     - name: Ensure composer.local.json is in place
       copy:
