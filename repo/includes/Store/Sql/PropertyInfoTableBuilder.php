@@ -46,11 +46,6 @@ class PropertyInfoTableBuilder {
 	private $reporter = null;
 
 	/**
-	 * @var bool
-	 */
-	private $useTransactions = true;
-
-	/**
 	 * Whether all entries should be updated, or only missing entries
 	 *
 	 * @var bool
@@ -100,17 +95,6 @@ class PropertyInfoTableBuilder {
 	}
 
 	/**
-	 * Enables or disables transactions.
-	 * The only good reason to disable transactions is to be able to
-	 * run the rebuild inside an already existing transaction.
-	 *
-	 * @param bool $useTransactions
-	 */
-	public function setUseTransactions( $useTransactions ) {
-		$this->useTransactions = $useTransactions;
-	}
-
-	/**
 	 * Rebuild the property info entries.
 	 * Use the rebuildPropertyInfo.php maintenance script to invoke this from the command line.
 	 *
@@ -154,9 +138,7 @@ class PropertyInfoTableBuilder {
 			// as that would cause the site to be rendered read only.
 			$lbFactory->commitAndWaitForReplication( __METHOD__, $ticket );
 
-			if ( $this->useTransactions ) {
-				$dbw->startAtomic( __METHOD__ );
-			}
+			$dbw->startAtomic( __METHOD__ );
 
 			$props = $dbw->select(
 				$tables,
@@ -183,9 +165,7 @@ class PropertyInfoTableBuilder {
 				$c++;
 			}
 
-			if ( $this->useTransactions ) {
-				$dbw->endAtomic( __METHOD__ );
-			}
+			$dbw->endAtomic( __METHOD__ );
 
 			$this->reportMessage( "Updated $c properties, up to page ID $pageId." );
 			$total += $c;
