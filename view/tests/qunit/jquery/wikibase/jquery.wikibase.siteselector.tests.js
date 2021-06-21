@@ -91,7 +91,11 @@
 	var newTestSiteSelector = function ( options ) {
 		options = $.extend( { source: sites }, options || {} );
 
-		return $( '<input>' ).addClass( 'test-siteselector' ).siteselector( options );
+		return $( '<input>' )
+			.addClass( 'test-siteselector' )
+			.appendTo( 'body' )
+			.focus()
+			.siteselector( options );
 	};
 
 	QUnit.module( 'jquery.wikibase.siteselector', QUnit.newMwEnvironment( {
