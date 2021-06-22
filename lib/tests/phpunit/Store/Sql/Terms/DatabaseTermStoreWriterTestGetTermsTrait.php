@@ -25,7 +25,7 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 trait DatabaseTermStoreWriterTestGetTermsTrait {
 
 	private function getTerms( Int32EntityId $entityId, $termsTable, $termInLangField, $idField ): Fingerprint {
-		$repoDb = $this->getRepoDomainDbFactoryForDb( $this->db )->newRepoDb();
+		$repoDb = $this->getRepoDomainDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
 			$repoDb,
 			WANObjectCache::newEmpty()

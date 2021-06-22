@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\CleanTermsIfUnusedJob;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
@@ -90,7 +89,7 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 			$jobQueue = JobQueueGroup::singleton();
 		}
 
-		$repoDb = $this->newRepoDb();
+		$repoDb = $this->getRepoDomainDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
 			$repoDb,
 			WANObjectCache::newEmpty()
@@ -302,7 +301,7 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 	public function testT237984UnexpectedMissingTextRow() {
 		$itemStoreWriter = $this->getItemTermStoreWriter();
 
-		$repoDb = $this->newRepoDb();
+		$repoDb = $this->getRepoDomainDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
 			$repoDb,
 			WANObjectCache::newEmpty()
@@ -330,10 +329,6 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 
 	private function insertItemTermRow( int $itemid, int $termInLangId ): void {
 		$this->db->insert( 'wbt_item_terms', [ 'wbit_item_id' => $itemid, 'wbit_term_in_lang_id' => $termInLangId ] );
-	}
-
-	private function newRepoDb(): RepoDomainDb {
-		return $this->getRepoDomainDbFactoryForDb( $this->db )->newRepoDb();
 	}
 
 }

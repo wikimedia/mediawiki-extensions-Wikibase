@@ -23,8 +23,8 @@ trait LocalRepoDbTestHelper {
 		);
 	}
 
-	public function getRepoDomainDbFactoryForDb( IDatabase $db ): RepoDomainDbFactory {
-		$lbFactory = LBFactorySingle::newFromConnection( $db );
+	public function getRepoDomainDbFactory( IDatabase $db = null ): RepoDomainDbFactory {
+		$lbFactory = LBFactorySingle::newFromConnection( $db ?: $this->db );
 		$domainId = $lbFactory->getLocalDomainID();
 
 		return new RepoDomainDbFactory(

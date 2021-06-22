@@ -67,7 +67,7 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 		$this->tablesUsed[] = 'wbt_term_in_lang';
 		$this->tablesUsed[] = 'wbt_item_terms';
 
-		$this->dbFactory = $this->getRepoDomainDbFactoryForDb( $this->db );
+		$this->dbFactory = $this->getRepoDomainDbFactory();
 		$this->objectCache = MediaWikiServices::getInstance()->getMainWANObjectCache();
 		$repoDb = $this->dbFactory->newRepoDb();
 

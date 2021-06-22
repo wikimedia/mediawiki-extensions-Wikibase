@@ -35,7 +35,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 
 	protected function setUp(): void {
 		$this->db = $this->setUpNewDb();
-		$this->repoDb = $this->getRepoDomainDbFactoryForDb( $this->db )->newRepoDb();
+		$this->repoDb = $this->getRepoDomainDb();
 	}
 
 	private function setUpNewDb() {
