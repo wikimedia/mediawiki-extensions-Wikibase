@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use Wikibase\Repo\Store\Sql\SqlChangeDispatchCoordinator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\SqlChangeDispatchCoordinator
@@ -29,9 +29,8 @@ class SqlChangeDispatchCoordinatorTest extends MediaWikiIntegrationTestCase {
 
 	private function getCoordinator() {
 		$coordinator = new SqlChangeDispatchCoordinator(
-			false,
 			'TestRepo',
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb(),
 			new NullLogger()
 		);
 

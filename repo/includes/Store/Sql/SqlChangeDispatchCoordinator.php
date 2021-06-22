@@ -10,12 +10,10 @@ use MWException;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\NullMessageReporter;
 use Psr\Log\LoggerInterface;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Repo\Store\ChangeDispatchCoordinator;
-use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\DBUnexpectedError;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILBFactory;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * SQL based implementation of ChangeDispatchCoordinator;
@@ -89,19 +87,14 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	private $messageReporter;
 
 	/**
-	 * @var string|false The logical name of the repository's database
-	 */
-	private $repoDB;
-
-	/**
 	 * @var string The repo's global wiki ID
 	 */
 	private $repoSiteId;
 
 	/**
-	 * @var ILBFactory
+	 * @var RepoDomainDb
 	 */
-	private $LBFactory;
+	private $db;
 
 	/**
 	 * @var StatsdDataFactoryInterface
@@ -114,25 +107,20 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	private $logger;
 
 	/**
-	 * @param string|false $repoDB
 	 * @param string $repoSiteId The repo's global wiki ID
-	 * @param ILBFactory $LBFactory
+	 * @param RepoDomainDb $db
 	 * @param LoggerInterface $logger
 	 */
 	public function __construct(
-		$repoDB,
 		string $repoSiteId,
-		ILBFactory $LBFactory,
+		RepoDomainDb $db,
 		LoggerInterface $logger
 	) {
-		Assert::parameterType( 'string|boolean', $repoDB, '$repoDB' );
-
-		$this->repoDB = $repoDB;
 		$this->repoSiteId = $repoSiteId;
 
 		$this->stats = MediaWikiServices::getInstance()->getPerDbNameStatsdDataFactory();
 		$this->messageReporter = new NullMessageReporter();
-		$this->LBFactory = $LBFactory;
+		$this->db = $db;
 		$this->logger = $logger;
 	}
 
@@ -231,27 +219,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
-	 * @return ILoadBalancer the repo's database load balancer.
-	 */
-	private function getRepoLB(): ILoadBalancer {
-		return $this->LBFactory->getMainLB( $this->repoDB );
-	}
-
-	/**
-	 * @return IDatabase A connection to the repo's master database
-	 */
-	private function getRepoMaster(): IDatabase {
-		return $this->getRepoLB()->getConnectionRef( DB_PRIMARY, [], $this->repoDB );
-	}
-
-	/**
-	 * @return IDatabase A connection to the repo's replica database
-	 */
-	private function getRepoReplica(): IDatabase {
-		return $this->getRepoLB()->getConnectionRef( DB_REPLICA, [], $this->repoDB );
-	}
-
-	/**
 	 * Selects a client wiki and locks it. If no suitable client wiki can be found,
 	 * this method returns null.
 	 *
@@ -330,7 +297,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @see selectClient()
 	 */
 	private function getCandidateClients(): array {
-		$dbr = $this->getRepoReplica();
+		$dbr = $this->db->connections()->getReadConnectionRef();
 
 		// XXX: subject to clock skew. Use DB based "now" time?
 		$freshDispatchTime = wfTimestamp( TS_MW, $this->now() - $this->dispatchInterval );
@@ -384,7 +351,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @throws DBUnexpectedError
 	 */
 	public function initState( array $clientWikiDBs ): void {
-		$dbr = $this->getRepoReplica();
+		$dbr = $this->db->connections()->getReadConnectionRef();
 
 		$trackedSiteIds = $dbr->selectFieldValues(
 			$this->stateTable,
@@ -399,7 +366,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			return;
 		}
 
-		$dbw = $this->getRepoMaster();
+		$dbw = $this->db->connections()->getWriteConnectionRef();
 		foreach ( $untracked as $siteID => $wikiDB ) {
 			$siteID = (string)$siteID;
 			$state = [
@@ -444,7 +411,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	public function lockClient( string $siteID ) {
 		$this->trace( "Trying $siteID" );
 
-		$dbr = $this->getRepoReplica();
+		$dbr = $this->db->connections()->getReadConnectionRef();
 
 		try {
 			$this->trace( 'Loaded repo db master' );
@@ -510,34 +477,33 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$wikiDB = $state['chd_db'];
 
 		// start transaction
-		$db = $this->getRepoMaster();
-		$db->begin( __METHOD__ );
+		$dbw = $this->db->connections()->getWriteConnectionRef();
+		$dbw->begin( __METHOD__ );
 
 		try {
 			$lock = $this->getClientLockName( $siteID );
-			$this->releaseClientLock( $db, $lock );
+			$this->releaseClientLock( $dbw, $lock );
 
 			$state['chd_lock'] = null;
 			$state['chd_touched'] = wfTimestamp( TS_MW, $this->now() );
 			//XXX: use the DB's time to avoid clock skew?
 
 			// insert state record with the new state.
-			$db->update(
+			$dbw->update(
 				$this->stateTable,
 				$state,
 				[ 'chd_site' => $state['chd_site'] ],
 				__METHOD__
 			);
 		} catch ( Exception $ex ) {
-			$db->rollback( __METHOD__ );
+			$dbw->rollback( __METHOD__ );
 			throw $ex;
 		}
-		$db->commit( __METHOD__ );
+		$dbw->commit( __METHOD__ );
 
-		// Wait for all database replicas to be updated, but only for repo db. The
-		// "domain" argument is documented at ILBFactory::waitForReplication.
+		// Wait for all database replicas to be updated, but only for repo db.
 		$waitForReplicationStartTime = ( microtime( true ) );
-		$this->LBFactory->waitForReplication( [ 'domain' => $this->repoDB ] );
+		$this->db->replication()->wait();
 		$waitForReplicationTime = microtime( true ) - $waitForReplicationStartTime;
 		$this->stats->timing(
 			'wikibase.repo.SqlChangeDispatchCoordinator.releaseClient-waitForReplication-time',
@@ -571,7 +537,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @return bool whether the lock was engaged successfully.
 	 */
 	protected function engageClientLock( string $lock ): bool {
-		$dbw = $this->getRepoMaster();
+		$dbw = $this->db->connections()->getWriteConnectionRef();
 
 		if ( isset( $this->engageClientLockOverride ) ) {
 			$success = call_user_func( $this->engageClientLockOverride, $dbw, $lock );

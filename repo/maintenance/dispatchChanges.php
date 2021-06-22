@@ -22,6 +22,7 @@ use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 use Wikibase\Repo\Store\Sql\SqlChangeDispatchCoordinator;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\Repo\WikibaseRepo;
+use WikiMap;
 use Wikimedia\Assert\Assert;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -357,24 +358,21 @@ class DispatchChanges extends Maintenance {
 	 */
 	private function getCoordinator( SettingsArray $settings, LoggerInterface $logger ) {
 		$services = MediaWikiServices::getInstance();
-		$repoID = wfWikiID();
+		$repoID = WikiMap::getCurrentWikiId();
 		$lockManagerName = $settings->getSetting( 'dispatchingLockManager' );
-		$LBFactory = $services->getDBLoadBalancerFactory();
 		if ( $lockManagerName !== null ) {
 			$lockManager = $services->getLockManagerGroupFactory()
-				->getLockManagerGroup( wfWikiID() )->get( $lockManagerName );
+				->getLockManagerGroup( $repoID )->get( $lockManagerName );
 			return new LockManagerSqlChangeDispatchCoordinator(
 				$lockManager,
-				$LBFactory,
+				WikibaseRepo::getRepoDomainDbFactory()->newRepoDb(),
 				$logger,
-				$settings->getSetting( 'changesDatabase' ),
 				$repoID
 			);
 		} else {
 			return new SqlChangeDispatchCoordinator(
-				$settings->getSetting( 'changesDatabase' ),
 				$repoID,
-				$LBFactory,
+				WikibaseRepo::getRepoDomainDbFactory()->newRepoDb(),
 				$logger
 			);
 		}
