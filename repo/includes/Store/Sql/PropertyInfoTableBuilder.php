@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\MessageReporter;
 use RuntimeException;
 use Wikibase\DataModel\Entity\Property;
@@ -109,7 +108,7 @@ class PropertyInfoTableBuilder {
 			throw new RuntimeException( __METHOD__ . ' can not run with no Property namespace defined.' );
 		}
 
-		$dbw = $this->propertyInfoTable->getWriteConnection();
+		$dbw = $this->propertyInfoTable->getDomainDb()->connections()->getWriteConnectionRef();
 
 		$total = 0;
 
@@ -128,15 +127,13 @@ class PropertyInfoTableBuilder {
 			];
 		}
 
-		// @TODO: Inject the LBFactory
-		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$ticket = $lbFactory->getEmptyTransactionTicket( __METHOD__ );
+		$ticket = $this->propertyInfoTable->getDomainDb()->getEmptyTransactionTicket( __METHOD__ );
 		$pageId = 1;
 
 		while ( true ) {
 			// Make sure we are not running too far ahead of the replicas,
 			// as that would cause the site to be rendered read only.
-			$lbFactory->commitAndWaitForReplication( __METHOD__, $ticket );
+			$this->propertyInfoTable->getDomainDb()->commitAndWaitForReplication( __METHOD__, $ticket );
 
 			$dbw->startAtomic( __METHOD__ );
 

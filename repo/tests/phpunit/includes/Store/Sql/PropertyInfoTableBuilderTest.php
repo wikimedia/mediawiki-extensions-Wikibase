@@ -80,7 +80,7 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function resetPropertyInfoTable( PropertyInfoTable $table ) {
-		$dbw = $table->getWriteConnection();
+		$dbw = $table->getDomainDb()->connections()->getWriteConnectionRef();
 		$dbw->delete( 'wb_property_info', '*' );
 	}
 

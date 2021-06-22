@@ -248,19 +248,23 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 		}
 	}
 
-	/**
-	 * Returns a database connection suitable for writing to the database that
-	 * contains the property info table.
-	 *
-	 * This is for use for closely related classes that want to operate directly
-	 * on the database table.
-	 */
-	public function getWriteConnection(): IDatabase {
+	private function getWriteConnection(): IDatabase {
 		return $this->db->connections()->getWriteConnectionRef();
 	}
 
 	private function getReadConnection(): IDatabase {
 		return $this->db->connections()->getReadConnectionRef();
+	}
+
+	/**
+	 * Returns a database wrapper suitable for working with the database that
+	 * contains the property info table.
+	 *
+	 * This is for use by closely related classes that want to operate directly
+	 * on the database table.
+	 */
+	public function getDomainDb(): RepoDomainDb {
+		return $this->db;
 	}
 
 	/**
