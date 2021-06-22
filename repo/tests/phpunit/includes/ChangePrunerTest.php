@@ -7,8 +7,8 @@ use MediaWikiIntegrationTestCase;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Changes\EntityChange;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\ChangePruner;
 
 /**
@@ -22,13 +22,15 @@ use Wikibase\Repo\ChangePruner;
  */
 class ChangePrunerTest extends MediaWikiIntegrationTestCase {
 
+	use LocalRepoDbTestHelper;
+
 	private $messages = [];
 
 	private $repoDomainDb;
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->repoDomainDb = RepoDomainDb::newFromTestConnection( $this->db );
+		$this->repoDomainDb = $this->getRepoDomainDb();
 	}
 
 	public function testConstructorWithInvalidBatchSize() {

@@ -3,9 +3,9 @@
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use MediaWikiIntegrationTestCase;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseUsageCheckingTermStoreCleaner;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\WikibaseSettings;
 
 /**
@@ -17,6 +17,8 @@ use Wikibase\Lib\WikibaseSettings;
  * @license GPL-2.0-or-later
  */
 class DatabaseUsageCheckingTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
+
+	use LocalRepoDbTestHelper;
 
 	private $innerCleaner;
 
@@ -32,7 +34,7 @@ class DatabaseUsageCheckingTermStoreCleanerTest extends MediaWikiIntegrationTest
 	}
 
 	private function getCleaner(): DatabaseUsageCheckingTermStoreCleaner {
-		$repoDomainDb = RepoDomainDb::newFromTestConnection( $this->db );
+		$repoDomainDb = $this->getRepoDomainDb();
 		return new DatabaseUsageCheckingTermStoreCleaner( $repoDomainDb, $this->innerCleaner );
 	}
 

@@ -19,7 +19,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\DivergingEntityIdException;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevision;
@@ -33,6 +32,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Tests\EntityRevisionLookupTestCase;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -47,6 +47,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  */
 class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
+
+	use LocalRepoDbTestHelper;
 
 	/**
 	 * @var EntityRevision[]
@@ -87,7 +89,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 				'',
 				''
 			),
-			RepoDomainDb::newFromTestConnection( $this->db )
+			$this->getRepoDomainDb()
 		);
 	}
 

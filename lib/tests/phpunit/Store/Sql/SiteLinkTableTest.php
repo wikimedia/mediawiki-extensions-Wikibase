@@ -7,10 +7,9 @@ use MediaWikiIntegrationTestCase;
 use TitleValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\SiteLinkTable
@@ -24,6 +23,8 @@ use Wikimedia\Rdbms\LBFactorySingle;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SiteLinkTableTest extends MediaWikiIntegrationTestCase {
+
+	use LocalRepoDbTestHelper;
 
 	/**
 	 * @var SiteLinkTable
@@ -40,10 +41,7 @@ class SiteLinkTableTest extends MediaWikiIntegrationTestCase {
 		$this->siteLinkTable = new SiteLinkTable(
 			'wb_items_per_site',
 			false,
-			new RepoDomainDb(
-				LBFactorySingle::newFromConnection( $this->db ),
-				$this->db->getDomainID()
-			)
+			$this->getRepoDomainDb()
 		);
 		$this->tablesUsed[] = 'wb_items_per_site';
 	}

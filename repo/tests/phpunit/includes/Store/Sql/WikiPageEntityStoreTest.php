@@ -25,7 +25,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
@@ -35,6 +34,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Content\ItemContent;
@@ -56,6 +56,8 @@ use Wikimedia\TestingAccessWrapper;
  * @author Daniel Kinzler
  */
 class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
+
+	use LocalRepoDbTestHelper;
 
 	private const FAKE_NS_ID = 654;
 
@@ -88,10 +90,6 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			->willReturn( 'custom-type' );
 
 		return $id;
-	}
-
-	private function getRepoDomainDb(): RepoDomainDb {
-		return RepoDomainDb::newFromTestConnection( $this->db );
 	}
 
 	/**
@@ -130,7 +128,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
 				$localSource,
-				RepoDomainDb::newFromTestConnection( $this->db )
+				$this->getRepoDomainDb()
 			),
 			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
 			MediaWikiServices::getInstance()->getRevisionStore()

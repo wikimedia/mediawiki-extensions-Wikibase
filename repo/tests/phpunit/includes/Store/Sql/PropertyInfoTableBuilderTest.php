@@ -8,10 +8,10 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Store\Sql\PropertyInfoTableBuilder;
 use Wikibase\Repo\Store\Store;
@@ -30,6 +30,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  */
 class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
+
+	use LocalRepoDbTestHelper;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -87,7 +89,7 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 	public function testRebuildPropertyInfo() {
 		$table = new PropertyInfoTable(
 			WikibaseRepo::getEntityIdComposer(),
-			RepoDomainDb::newFromTestConnection( $this->db ),
+			$this->getRepoDomainDb(),
 			true
 		);
 		$this->resetPropertyInfoTable( $table );

@@ -8,11 +8,11 @@ use WANObjectCache;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 
 /**
  * Integration tests for both CacheAwarePropertyInfoStore and CachingPropertyInfoLookup.
@@ -31,6 +31,8 @@ use Wikibase\Lib\Store\Sql\PropertyInfoTable;
  */
 class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 
+	use LocalRepoDbTestHelper;
+
 	protected function setUp(): void {
 		parent::setUp();
 		$this->tablesUsed[] = 'wb_property_info';
@@ -40,7 +42,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 	private function newPropertyInfoTable() {
 		return new PropertyInfoTable(
 			$this->getEntityComposer(),
-			RepoDomainDb::newFromTestConnection( $this->db ),
+			$this->getRepoDomainDb(),
 			true
 		);
 	}
