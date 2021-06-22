@@ -15,6 +15,8 @@ use User;
 use Wikibase\Client\Hooks\UpdateRepoHookHandler;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
+use Wikibase\Lib\Rdbms\ReplicationWaiter;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use WikiPage;
 
@@ -221,11 +223,20 @@ class UpdateRepoHookHandlerTest extends TestCase {
 			->with( 'clientwiki', 'UpdateRepoHookHandlersTest' )
 			->willReturn( $itemId );
 
+		$replicationWaiter = $this->createMock( ReplicationWaiter::class );
+		$replicationWaiter->method( 'getMaxLag' )
+			->willReturn( [ '', -1, 0 ] );
+
+		$clientDb = $this->createMock( ClientDomainDb::class );
+		$clientDb->method( 'replication' )
+			->willReturn( $replicationWaiter );
+
 		return new UpdateRepoHookHandler(
 			$namespaceChecker,
 			$jobQueueGroup,
 			$siteLinkLookup,
 			new NullLogger(),
+			$clientDb,
 			'repowiki',
 			'clientwiki',
 			$propagateChangesToRepo

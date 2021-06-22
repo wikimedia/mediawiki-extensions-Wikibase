@@ -224,6 +224,7 @@
 			"class": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler::factory",
 			"services": [
+				"WikibaseClient.ClientDomainDbFactory",
 				"WikibaseClient.ItemAndPropertySource",
 				"WikibaseClient.NamespaceChecker",
 				"WikibaseClient.Settings",

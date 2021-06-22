@@ -11,6 +11,8 @@ use Title;
 use User;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
+use Wikibase\Lib\Rdbms\ReplicationWaiter;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -55,6 +57,12 @@ class UpdateRepoOnDeleteTest extends \PHPUnit\Framework\TestCase {
 
 		if ( !$updateRepo ) {
 			$data = $this->getFakeData();
+			$replicationWaiter = $this->createMock( ReplicationWaiter::class );
+			$replicationWaiter->method( 'getMaxLag' )
+				->willReturn( [ '', -1, 0 ] );
+			$clientDb = $this->createMock( ClientDomainDb::class );
+			$clientDb->method( 'replication' )
+				->willReturn( $replicationWaiter );
 
 			$updateRepo = new UpdateRepoOnDelete(
 				$data['repoDB'],
@@ -62,6 +70,7 @@ class UpdateRepoOnDeleteTest extends \PHPUnit\Framework\TestCase {
 				// without... PHP is fun!
 				clone $data['siteLinkLookup'],
 				new NullLogger(),
+				$clientDb,
 				$data['user'],
 				$data['siteId'],
 				$data['title']

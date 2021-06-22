@@ -5,6 +5,7 @@ namespace Wikibase\Client\UpdateRepo;
 use MediaWiki\User\UserIdentity;
 use Psr\Log\LoggerInterface;
 use Title;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -33,12 +34,13 @@ class UpdateRepoOnMove extends UpdateRepo {
 		$repoDB,
 		SiteLinkLookup $siteLinkLookup,
 		LoggerInterface $logger,
+		ClientDomainDb $clientDomainDb,
 		UserIdentity $user,
 		$siteId,
 		Title $oldTitle,
 		Title $newTitle
 	) {
-		parent::__construct( $repoDB, $siteLinkLookup, $logger, $user, $siteId, $oldTitle );
+		parent::__construct( $repoDB, $siteLinkLookup, $logger, $clientDomainDb, $user, $siteId, $oldTitle );
 		$this->newTitle = $newTitle;
 	}
 
