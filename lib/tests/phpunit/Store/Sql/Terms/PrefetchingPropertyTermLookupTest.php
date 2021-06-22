@@ -57,7 +57,7 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiIntegrationTestCase {
 
 		$this->tablesUsed = array_merge( $this->tablesUsed, $tables );
 
-		$repoDb = $this->getRepoDomainDbFactoryForDb( $this->db )->newRepoDb();
+		$repoDb = $this->getRepoDomainDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
 			$repoDb,
 			MediaWikiServices::getInstance()->getMainWANObjectCache()

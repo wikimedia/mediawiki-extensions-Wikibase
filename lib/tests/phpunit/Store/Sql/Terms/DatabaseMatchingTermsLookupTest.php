@@ -47,7 +47,7 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		// We can't use the mediawiki integration test since we union temp tables.
 		$this->sqliteDb = $this->setUpNewDb();
-		$this->repoDb = $this->getRepoDomainDbFactoryForDb( $this->sqliteDb )->newRepoDb();
+		$this->repoDb = $this->getRepoDomainDb( $this->sqliteDb );
 	}
 
 	private function setUpNewDb() {

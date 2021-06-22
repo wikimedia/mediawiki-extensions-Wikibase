@@ -83,7 +83,7 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 			$jobQueue = JobQueueGroup::singleton();
 		}
 
-		$repoDb = $this->getRepoDomainDbFactoryForDb( $this->db )->newRepoDb();
+		$repoDb = $this->getRepoDomainDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
 			$repoDb,
 			WANObjectCache::newEmpty()
