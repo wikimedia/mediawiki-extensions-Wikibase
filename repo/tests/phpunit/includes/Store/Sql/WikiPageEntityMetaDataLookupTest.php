@@ -21,6 +21,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\FakeResultWrapper;
@@ -41,6 +42,8 @@ use Wikimedia\Rdbms\ILoadBalancer;
  * @author Marius Hoch < hoo@online.de >
  */
 class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
+
+	use LocalRepoDbTestHelper;
 
 	/**
 	 * @var EntityRevision[]
@@ -96,7 +99,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
 			$this->newEntitySource(),
-			RepoDomainDb::newFromTestConnection( $this->db )
+			$this->getRepoDomainDb()
 		);
 	}
 
@@ -393,7 +396,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
 			$itemSource,
-			RepoDomainDb::newFromTestConnection( $this->db )
+			$this->getRepoDomainDb()
 		);
 	}
 

@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWikiIntegrationTestCase;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 
 /**
@@ -19,6 +19,8 @@ use Wikibase\Repo\Store\Sql\SqlIdGenerator;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SqlIdGeneratorTest extends MediaWikiIntegrationTestCase {
+
+	use LocalRepoDbTestHelper;
 
 	public function testGetNewId_noReservedIds() {
 		$generator = new SqlIdGenerator( $this->getRepoDomainDb() );
@@ -46,9 +48,4 @@ class SqlIdGeneratorTest extends MediaWikiIntegrationTestCase {
 		$id = $generator->getNewId( 'wikibase-non-reserved' );
 		$this->assertSame( 1, $id );
 	}
-
-	private function getRepoDomainDb(): RepoDomainDb {
-		return RepoDomainDb::newFromTestConnection( $this->db );
-	}
-
 }

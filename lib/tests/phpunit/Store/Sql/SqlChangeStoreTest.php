@@ -12,8 +12,8 @@ use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Changes\ItemChange;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\WikibaseSettings;
 
 /**
@@ -30,6 +30,8 @@ use Wikibase\Lib\WikibaseSettings;
  */
 class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 
+	use LocalRepoDbTestHelper;
+
 	public function setUp(): void {
 		parent::setUp();
 		if ( !WikibaseSettings::isRepoEnabled() ) {
@@ -40,7 +42,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newSqlChangeStore(): SqlChangeStore {
-		return new SqlChangeStore( RepoDomainDb::newFromTestConnection( $this->db ) );
+		return new SqlChangeStore( $this->getRepoDomainDb() );
 	}
 
 	public function saveChangeInsertProvider() {

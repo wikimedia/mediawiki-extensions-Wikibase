@@ -8,9 +8,9 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\WikibaseSettings;
 
 /**
@@ -26,6 +26,8 @@ use Wikibase\Lib\WikibaseSettings;
  */
 class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 
+	use LocalRepoDbTestHelper;
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -39,7 +41,7 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 	private function newPropertyInfoTable( bool $allowWrites = true ) {
 		return new PropertyInfoTable(
 			$this->getEntityComposer(),
-			RepoDomainDb::newFromTestConnection( $this->db ),
+			$this->getRepoDomainDb(),
 			$allowWrites
 		);
 	}

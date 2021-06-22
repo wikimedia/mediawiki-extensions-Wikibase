@@ -8,8 +8,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 
 /**
@@ -24,6 +24,8 @@ use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
  */
 class SqlSiteLinkConflictLookupTest extends MediaWikiIntegrationTestCase {
 
+	use LocalRepoDbTestHelper;
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -32,7 +34,7 @@ class SqlSiteLinkConflictLookupTest extends MediaWikiIntegrationTestCase {
 		$siteLinkTable = new SiteLinkTable(
 			'wb_items_per_site',
 			false,
-			RepoDomainDb::newFromTestConnection( $this->db )
+			$this->getRepoDomainDb()
 		);
 
 		$siteLinks = new SiteLinkList( [
@@ -84,7 +86,7 @@ class SqlSiteLinkConflictLookupTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		return new SqlSiteLinkConflictLookup(
-			RepoDomainDb::newFromTestConnection( $this->db ),
+			$this->getRepoDomainDb(),
 			$entityIdComposer
 		);
 	}

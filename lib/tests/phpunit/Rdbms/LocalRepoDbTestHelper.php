@@ -5,14 +5,23 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\Tests\Rdbms;
 
 use IDatabase;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
- * Trait to be used in Lib integration tests to get a RepoDbFactory where we cannot use the repo/client service getters.
+ * Trait to get a RepoDbFactory/RepoDomainDb where we cannot use service getters.
  * @license GPL-2.0-or-later
  */
 trait LocalRepoDbTestHelper {
+
+	public function getRepoDomainDb( IDatabase $db = null ): RepoDomainDb {
+		$lbFactory = LBFactorySingle::newFromConnection( $db ?: $this->db );
+		return new RepoDomainDb(
+			$lbFactory,
+			$lbFactory->getLocalDomainID()
+		);
+	}
 
 	public function getRepoDomainDbFactoryForDb( IDatabase $db ): RepoDomainDbFactory {
 		$lbFactory = LBFactorySingle::newFromConnection( $db );

@@ -16,15 +16,14 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Client\Store\Sql\DirectSqlStore
@@ -37,6 +36,8 @@ use Wikimedia\Rdbms\LBFactorySingle;
  * @author Daniel Kinzler
  */
 class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
+
+	use LocalRepoDbTestHelper;
 
 	protected function newStore() {
 		$wikibaseServices = $this->createMock( WikibaseServices::class );
@@ -55,10 +56,7 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 			$wikibaseServices,
 			WikibaseClient::getSettings(),
 			$this->createMock( TermBuffer::class ),
-			new RepoDomainDb(
-				LBFactorySingle::newFromConnection( $this->db ),
-				$this->db->getDomainID()
-			)
+			$this->getRepoDomainDb()
 		);
 	}
 

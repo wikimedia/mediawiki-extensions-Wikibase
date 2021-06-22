@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWikiIntegrationTestCase;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
 
 /**
@@ -18,6 +18,8 @@ use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
  * @license GPL-2.0-or-later
  */
 class UpsertSqlIdGeneratorTest extends MediaWikiIntegrationTestCase {
+
+	use LocalRepoDbTestHelper;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -51,10 +53,6 @@ class UpsertSqlIdGeneratorTest extends MediaWikiIntegrationTestCase {
 
 		$id = $generator->getNewId( 'wikibase-upsert-non-reserved' );
 		$this->assertSame( 1, $id );
-	}
-
-	private function getRepoDomainDb(): RepoDomainDb {
-		return RepoDomainDb::newFromTestConnection( $this->db );
 	}
 
 }
