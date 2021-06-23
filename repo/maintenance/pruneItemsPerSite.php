@@ -6,10 +6,10 @@ namespace Wikibase\Repo\Maintenance;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILBFactory;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -49,18 +49,19 @@ class PruneItemsPerSite extends Maintenance {
 		$itemNamespace = WikibaseRepo::getEntityNamespaceLookup()->getEntityNamespace( Item::ENTITY_TYPE );
 
 		$loadBalancerFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		$db = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb();
 		$selectBatchSize = (int)$this->getOption( 'select-batch-size', 100000 );
 
-		$this->prune( $loadBalancerFactory, $itemNamespace, $selectBatchSize );
+		$this->prune( $db, $itemNamespace, $selectBatchSize );
 	}
 
 	private function prune(
-		ILBFactory $loadBalancerFactory,
+		RepoDomainDb $db,
 		int $itemNamespace,
 		int $selectBatchSize
 	) {
-		$dbr = $loadBalancerFactory->getMainLB()->getConnection( DB_REPLICA, [ 'vslow' ] );
-		$dbw = $loadBalancerFactory->getMainLB()->getConnection( DB_PRIMARY );
+		$dbr = $db->connections()->getReadConnectionRef( [ 'vslow' ] );
+		$dbw = $db->connections()->getWriteConnectionRef();
 
 		$maxIpsRowId = (int)$dbr->selectField( 'wb_items_per_site', 'MAX(ips_row_id)', '', __METHOD__ );
 		// Add 1%, but at least 50, to the maxIpsRowId to use, for items created during the script run
@@ -75,7 +76,7 @@ class PruneItemsPerSite extends Maintenance {
 			if ( $rowsToDelete ) {
 				$affectedRows = $this->deleteRows( $dbw, $rowsToDelete );
 				$this->output( "Deleted $affectedRows rows.\n" );
-				$loadBalancerFactory->waitForReplication();
+				$db->replication()->wait();
 			}
 
 			$startRowId = $endRowId;
