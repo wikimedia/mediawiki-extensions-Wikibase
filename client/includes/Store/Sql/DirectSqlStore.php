@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Store\Sql;
 
 use HashBagOStuff;
@@ -17,6 +19,7 @@ use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -32,7 +35,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
@@ -175,12 +177,7 @@ class DirectSqlStore implements ClientStore {
 		$this->allowLocalShortDesc = $settings->getSetting( 'allowLocalShortDesc' );
 	}
 
-	/**
-	 * @see ClientStore::getSubscriptionManager
-	 *
-	 * @return SubscriptionManager
-	 */
-	public function getSubscriptionManager() {
+	public function getSubscriptionManager(): SubscriptionManager {
 		if ( $this->subscriptionManager === null ) {
 			$connectionManager = $this->getRepoConnectionManager();
 			$this->subscriptionManager = new SqlSubscriptionManager( $connectionManager );
@@ -190,40 +187,26 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
-	 * Returns a LoadBalancer that acts as a factory for connections to the repo wiki's
-	 * database.
-	 *
-	 * @return SessionConsistentConnectionManager
+	 * Returns a factory for connections to the repo wiki's database.
 	 */
-	private function getRepoConnectionManager() {
+	private function getRepoConnectionManager(): SessionConsistentConnectionManager {
 		return $this->repoDb->sessionConsistentConnections();
 	}
 
 	/**
-	 * Returns a LoadBalancer that acts as a factory for connections to the client wiki's
-	 * database.
-	 *
-	 * @return SessionConsistentConnectionManager
+	 * Returns a factory for connections to the client wiki's database.
 	 */
-	private function getClientConnectionManager() {
+	private function getClientConnectionManager(): SessionConsistentConnectionManager {
 		return $this->clientDb->sessionConsistentConnections();
 	}
 
-	/**
-	 * @return RecentChangesFinder
-	 */
-	public function getRecentChangesFinder() {
+	public function getRecentChangesFinder(): RecentChangesFinder {
 		return new RecentChangesFinder(
 			$this->getClientConnectionManager()
 		);
 	}
 
-	/**
-	 * @see ClientStore::getUsageLookup
-	 *
-	 * @return UsageLookup
-	 */
-	public function getUsageLookup() {
+	public function getUsageLookup(): UsageLookup {
 		if ( $this->usageLookup === null ) {
 			$this->usageLookup = $this->getUsageTracker();
 			if ( $this->enableImplicitDescriptionUsage ) {
@@ -247,12 +230,7 @@ class DirectSqlStore implements ClientStore {
 		return $this->usageLookup;
 	}
 
-	/**
-	 * @see ClientStore::getUsageTracker
-	 *
-	 * @return SqlUsageTracker
-	 */
-	public function getUsageTracker() {
+	public function getUsageTracker(): SqlUsageTracker {
 		if ( $this->usageTracker === null ) {
 			$connectionManager = $this->getClientConnectionManager();
 			$this->usageTracker = new SqlUsageTracker(
@@ -267,12 +245,7 @@ class DirectSqlStore implements ClientStore {
 		return $this->usageTracker;
 	}
 
-	/**
-	 * @see ClientStore::getSiteLinkLookup
-	 *
-	 * @return SiteLinkLookup
-	 */
-	public function getSiteLinkLookup() {
+	public function getSiteLinkLookup(): SiteLinkLookup {
 		if ( $this->siteLinkLookup === null ) {
 			$this->siteLinkLookup = new CachingSiteLinkLookup(
 				new SiteLinkTable(
@@ -288,25 +261,16 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
-	 * @see ClientStore::getEntityLookup
-	 *
 	 * The EntityLookup returned by this method will resolve redirects.
-	 *
-	 * @return EntityLookup
 	 */
-	public function getEntityLookup() {
+	public function getEntityLookup(): EntityLookup {
 		$revisionLookup = $this->getEntityRevisionLookup();
 		$revisionBasedLookup = new RevisionBasedEntityLookup( $revisionLookup );
 		$resolvingLookup = new RedirectResolvingEntityLookup( $revisionBasedLookup );
 		return $resolvingLookup;
 	}
 
-	/**
-	 * @see ClientStore::getEntityRevisionLookup
-	 *
-	 * @return EntityRevisionLookup
-	 */
-	public function getEntityRevisionLookup() {
+	public function getEntityRevisionLookup(): EntityRevisionLookup {
 		if ( $this->entityRevisionLookup === null ) {
 			$this->entityRevisionLookup = $this->newEntityRevisionLookup();
 		}
@@ -314,10 +278,7 @@ class DirectSqlStore implements ClientStore {
 		return $this->entityRevisionLookup;
 	}
 
-	/**
-	 * @return EntityRevisionLookup
-	 */
-	private function newEntityRevisionLookup() {
+	private function newEntityRevisionLookup(): EntityRevisionLookup {
 		// NOTE: Keep cache key in sync with SqlStore::newEntityRevisionLookup in WikibaseRepo
 		$cacheKeyPrefix = $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
 
@@ -349,18 +310,12 @@ class DirectSqlStore implements ClientStore {
 
 	/**
 	 * @deprecated use WikibaseClient::getEntityLookup instead
-	 * @return EntityIdLookup
 	 */
-	public function getEntityIdLookup() {
+	public function getEntityIdLookup(): EntityIdLookup {
 		return $this->entityIdLookup;
 	}
 
-	/**
-	 * @see ClientStore::getPropertyInfoLookup
-	 *
-	 * @return PropertyInfoLookup
-	 */
-	public function getPropertyInfoLookup() {
+	public function getPropertyInfoLookup(): PropertyInfoLookup {
 		if ( $this->propertyInfoLookup === null ) {
 			$propertyInfoLookup = $this->wikibaseServices->getPropertyInfoLookup();
 
@@ -382,17 +337,11 @@ class DirectSqlStore implements ClientStore {
 		return $this->propertyInfoLookup;
 	}
 
-	/**
-	 * @return PrefetchingWikiPageEntityMetaDataAccessor
-	 */
-	public function getEntityPrefetcher() {
+	public function getEntityPrefetcher(): EntityPrefetcher {
 		return $this->wikibaseServices->getEntityPrefetcher();
 	}
 
-	/**
-	 * @return UsageUpdater
-	 */
-	public function getUsageUpdater() {
+	public function getUsageUpdater(): UsageUpdater {
 		return new UsageUpdater(
 			$this->siteId,
 			$this->getUsageTracker(),
