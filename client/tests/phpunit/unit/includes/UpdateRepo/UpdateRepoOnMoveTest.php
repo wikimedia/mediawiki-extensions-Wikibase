@@ -11,6 +11,8 @@ use Title;
 use User;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
+use Wikibase\Lib\Rdbms\ReplicationWaiter;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -57,6 +59,12 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 		static $updateRepo = null;
 
 		if ( !$updateRepo ) {
+			$replicationWaiter = $this->createMock( ReplicationWaiter::class );
+			$replicationWaiter->method( 'getMaxLag' )
+				->willReturn( [ '', -1, 0 ] );
+			$clientDb = $this->createMock( ClientDomainDb::class );
+			$clientDb->method( 'replication' )
+				->willReturn( $replicationWaiter );
 			$moveData = $this->getFakeMoveData();
 
 			$updateRepo = new UpdateRepoOnMove(
@@ -65,6 +73,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 				// without... PHP is fun!
 				clone $moveData['siteLinkLookup'],
 				new NullLogger(),
+				$clientDb,
 				$moveData['user'],
 				$moveData['siteId'],
 				$moveData['oldTitle'],

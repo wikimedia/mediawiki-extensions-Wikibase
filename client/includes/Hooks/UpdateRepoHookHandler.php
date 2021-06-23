@@ -22,6 +22,8 @@ use Wikibase\Client\UpdateRepo\UpdateRepo;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
 use Wikibase\DataAccess\EntitySource;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
+use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use WikiPage;
@@ -57,6 +59,11 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	private $logger;
 
 	/**
+	 * @var ClientDomainDb
+	 */
+	private $clientDb;
+
+	/**
 	 * @var string
 	 */
 	private $repoDatabase;
@@ -72,6 +79,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	private $propagateChangesToRepo;
 
 	public static function factory(
+		ClientDomainDbFactory $clientDomainDbFactory,
 		EntitySource $entitySource,
 		NamespaceChecker $namespaceChecker,
 		SettingsArray $clientSettings,
@@ -91,6 +99,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 			$jobQueueGroup,
 			$store->getSiteLinkLookup(),
 			LoggerFactory::getInstance( 'UpdateRepo' ),
+			$clientDomainDbFactory->newLocalDb(),
 			$repoDB,
 			$clientSettings->getSetting( 'siteGlobalID' ),
 			$clientSettings->getSetting( 'propagateChangesToRepo' )
@@ -111,6 +120,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		JobQueueGroup $jobQueueGroup,
 		SiteLinkLookup $siteLinkLookup,
 		LoggerInterface $logger,
+		ClientDomainDb $clientDb,
 		$repoDatabase,
 		$siteGlobalID,
 		$propagateChangesToRepo
@@ -119,6 +129,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->logger = $logger;
+		$this->clientDb = $clientDb;
 
 		$this->repoDatabase = $repoDatabase;
 		$this->siteGlobalID = $siteGlobalID;
@@ -144,6 +155,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 			$this->repoDatabase,
 			$this->siteLinkLookup,
 			$this->logger,
+			$this->clientDb,
 			$user,
 			$this->siteGlobalID,
 			Title::newFromLinkTarget( $title )
@@ -159,6 +171,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 			$this->repoDatabase,
 			$this->siteLinkLookup,
 			$this->logger,
+			$this->clientDb,
 			$user,
 			$this->siteGlobalID,
 			Title::newFromLinkTarget( $old ),
