@@ -912,12 +912,12 @@ return [
 		return new DirectSqlStore(
 			WikibaseClient::getEntityIdParser( $services ),
 			WikibaseClient::getEntityIdLookup( $services ),
-			WikibaseClient::getEntityNamespaceLookup( $services ),
 			WikibaseClient::getWikibaseServices( $services ),
 			WikibaseClient::getSettings( $services ),
 			WikibaseClient::getTermBuffer( $services ),
 			WikibaseClient::getRepoDomainDbFactory( $services )
-				->newForEntitySource( WikibaseClient::getItemAndPropertySource( $services ) )
+				->newForEntitySource( WikibaseClient::getItemAndPropertySource( $services ) ),
+			WikibaseClient::getClientDomainDbFactory( $services )->newLocalDb()
 		);
 	},
 

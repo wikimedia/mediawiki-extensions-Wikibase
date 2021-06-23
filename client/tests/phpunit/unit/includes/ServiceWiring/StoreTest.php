@@ -10,10 +10,10 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 
 /**
  * @coversNothing
@@ -29,8 +29,6 @@ class StoreTest extends ServiceWiringTestCase {
 			new ItemIdParser() );
 		$this->mockService( 'WikibaseClient.EntityIdLookup',
 			$this->createMock( EntityIdLookup::class ) );
-		$this->mockService( 'WikibaseClient.EntityNamespaceLookup',
-			new EntityNamespaceLookup( [] ) );
 		$this->mockService( 'WikibaseClient.WikibaseServices',
 			$this->createMock( WikibaseServices::class ) );
 		$this->mockService( 'WikibaseClient.Settings',
@@ -65,6 +63,11 @@ class StoreTest extends ServiceWiringTestCase {
 			->with( $itemAndPropertySource );
 		$this->mockService( 'WikibaseClient.RepoDomainDbFactory',
 			$repoDomainDbFactory );
+		$clientDomainDbFactory = $this->createMock( ClientDomainDbFactory::class );
+		$clientDomainDbFactory->expects( $this->once() )
+			->method( 'newLocalDb' );
+		$this->mockService( 'WikibaseClient.ClientDomainDbFactory',
+			$clientDomainDbFactory );
 
 		$this->assertInstanceOf(
 			DirectSqlStore::class,
