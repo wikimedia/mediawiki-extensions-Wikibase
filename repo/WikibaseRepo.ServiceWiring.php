@@ -30,6 +30,7 @@ use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataAccess\MediaWiki\EntitySourceDocumentUrlProvider;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\PrefetchingTermLookup;
@@ -728,12 +729,13 @@ return [
 
 	'WikibaseRepo.EntityExistenceChecker' => function ( MediaWikiServices $services ): EntityExistenceChecker {
 		return new TypeDispatchingExistenceChecker(
-			WikibaseRepo::getEntityTypeDefinitions( $services )
-				->get( EntityTypeDefinitions::EXISTENCE_CHECKER_CALLBACK ),
+			WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
+				->getServiceBySourceAndType( EntityTypeDefinitions::EXISTENCE_CHECKER_CALLBACK ),
 			new TitleLookupBasedEntityExistenceChecker(
 				WikibaseRepo::getEntityTitleLookup( $services ),
 				$services->getLinkBatchFactory()
-			)
+			),
+			new EntitySourceLookup( WikibaseRepo::getEntitySourceDefinitions( $services ) )
 		);
 	},
 

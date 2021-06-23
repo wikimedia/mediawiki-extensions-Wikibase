@@ -4,7 +4,10 @@ declare( strict_types=1 );
 
 namespace Wikibase\Lib\Tests\Store;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityExistenceChecker;
@@ -19,44 +22,78 @@ use Wikibase\Lib\Store\TypeDispatchingExistenceChecker;
  */
 class TypeDispatchingExistenceCheckerTest extends TestCase {
 
+	/**
+	 * @var array
+	 */
+	private $callbacks;
+
+	/**
+	 * @var MockObject|EntityExistenceChecker
+	 */
+	private $defaultChecker;
+
+	/**
+	 * @var MockObject|EntitySourceLookup
+	 */
+	private $entitySourceLookup;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->callbacks = [];
+		$this->defaultChecker = $this->createStub( EntityExistenceChecker::class );
+		$this->entitySourceLookup = $this->createStub( EntitySourceLookup::class );
+	}
+
 	public function testGivenNoExistenceCheckerDefinedForEntityType_usesDefaultChecker() {
 		$entityId = new PropertyId( 'P123' );
 		$exists = true;
 
-		$defaultChecker = $this->createMock( EntityExistenceChecker::class );
-		$defaultChecker->expects( $this->once() )
+		$this->defaultChecker = $this->createMock( EntityExistenceChecker::class );
+		$this->defaultChecker->expects( $this->once() )
 			->method( 'exists' )
 			->with( $entityId )
 			->willReturn( $exists );
 
-		$existenceChecker = new TypeDispatchingExistenceChecker(
-			[ 'item' => function () {
-				return $this->newNeverCalledMockChecker();
-			} ],
-			$defaultChecker
-		);
+		$this->callbacks = [
+			'someSource' => [
+				'item' => function () {
+					return $this->newNeverCalledMockChecker();
+				}
+			],
+		];
 
-		$this->assertSame( $exists, $existenceChecker->exists( $entityId ) );
+		$this->assertSame( $exists, $this->newDispatchingExistenceChecker()->exists( $entityId ) );
 	}
 
-	public function testGivenExistenceCheckerDefinedForEntityType_usesRespectiveExistenceChecker() {
+	public function testGivenExistenceCheckerDefinedForEntitySourceAndType_usesRespectiveExistenceChecker() {
 		$entityId = new PropertyId( 'P321' );
 		$exists = false;
 
-		$existenceChecker = new TypeDispatchingExistenceChecker(
-			[ 'property' => function () use ( $entityId, $exists ) {
-				$propertyExistenceChecker = $this->createMock( EntityExistenceChecker::class );
-				$propertyExistenceChecker->expects( $this->once() )
-					->method( 'exists' )
-					->with( $entityId )
-					->willReturn( $exists );
+		$this->defaultChecker = $this->newNeverCalledMockChecker();
 
-				return $propertyExistenceChecker;
-			} ],
-			$this->newNeverCalledMockChecker()
-		);
+		$this->entitySourceLookup = $this->createMock( EntitySourceLookup::class );
+		$propertySourceName = 'propertySource';
+		$this->entitySourceLookup->expects( $this->once() )
+			->method( 'getEntitySourceById' )
+			->with( $entityId )
+			->willReturn( $this->newEntitySourceWithName( $propertySourceName ) );
 
-		$this->assertSame( $exists, $existenceChecker->exists( $entityId ) );
+		$this->callbacks = [
+			$propertySourceName => [
+				'property' => function () use ( $entityId, $exists ) {
+					$propertyExistenceChecker = $this->createMock( EntityExistenceChecker::class );
+					$propertyExistenceChecker->expects( $this->once() )
+						->method( 'exists' )
+						->with( $entityId )
+						->willReturn( $exists );
+
+					return $propertyExistenceChecker;
+				}
+			],
+		];
+
+		$this->assertSame( $exists, $this->newDispatchingExistenceChecker()->exists( $entityId ) );
 	}
 
 	private function newNeverCalledMockChecker(): EntityExistenceChecker {
@@ -70,25 +107,33 @@ class TypeDispatchingExistenceCheckerTest extends TestCase {
 		$itemIds = [ new ItemId( 'Q123' ), new ItemId( 'Q456' ) ];
 		$propertyIds = [ new PropertyId( 'P123' ), new PropertyId( 'P456' ) ];
 
+		$itemSourceName = 'itemSource';
+		$this->entitySourceLookup = $this->createMock( EntitySourceLookup::class );
+		$this->entitySourceLookup
+			->method( 'getEntitySourceById' )
+			->willReturn( $this->newEntitySourceWithName( $itemSourceName ) );
+
 		$itemChecker = $this->createMock( EntityExistenceChecker::class );
 		$itemChecker->expects( $this->once() )
 			->method( 'existsBatch' )
 			->with( $itemIds )
 			->willReturn( [ 'Q123' => true, 'Q456' => false ] );
-		$propertyChecker = $this->createMock( EntityExistenceChecker::class );
-		$propertyChecker->expects( $this->once() )
+
+		$this->defaultChecker = $this->createMock( EntityExistenceChecker::class );
+		$this->defaultChecker->expects( $this->once() )
 			->method( 'existsBatch' )
 			->with( $propertyIds )
 			->willReturn( [ 'P123' => true, 'P456' => false ] );
 
-		$existenceChecker = new TypeDispatchingExistenceChecker(
-			[ 'item' => function () use ( $itemChecker ) {
-				return $itemChecker;
-			} ],
-			$propertyChecker
-		);
+		$this->callbacks = [
+			$itemSourceName => [
+				'item' => function () use ( $itemChecker ) {
+					return $itemChecker;
+				}
+			],
+		];
 
-		$result = $existenceChecker->existsBatch( array_merge( $itemIds, $propertyIds ) );
+		$result = $this->newDispatchingExistenceChecker()->existsBatch( array_merge( $itemIds, $propertyIds ) );
 
 		$expected = [
 			'Q123' => true,
@@ -97,6 +142,18 @@ class TypeDispatchingExistenceCheckerTest extends TestCase {
 			'P456' => false,
 		];
 		$this->assertSame( $expected, $result );
+	}
+
+	private function newDispatchingExistenceChecker(): TypeDispatchingExistenceChecker {
+		return new TypeDispatchingExistenceChecker(
+			$this->callbacks,
+			$this->defaultChecker,
+			$this->entitySourceLookup
+		);
+	}
+
+	private function newEntitySourceWithName( string $name ): EntitySource {
+		return new EntitySource( $name, false, [], '', '', '', '' );
 	}
 
 }

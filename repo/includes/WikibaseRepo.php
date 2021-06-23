@@ -40,6 +40,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityFactory;
+use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\NumberLocalizerFactory;
@@ -216,6 +217,11 @@ class WikibaseRepo {
 	public static function getEntityTypeDefinitions( ContainerInterface $services = null ): EntityTypeDefinitions {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntityTypeDefinitions' );
+	}
+
+	public static function getEntitySourceAndTypeDefinitions( ContainerInterface $services = null ): EntitySourceAndTypeDefinitions {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntitySourceAndTypeDefinitions' );
 	}
 
 	public static function getEntityChangeFactory( ContainerInterface $services = null ): EntityChangeFactory {
