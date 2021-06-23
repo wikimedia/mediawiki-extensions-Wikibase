@@ -456,9 +456,9 @@
 		"UnconnectedPages": {
 			"class": "Wikibase\\Client\\Specials\\SpecialUnconnectedPages",
 			"services": [
-				"DBLoadBalancer",
 				"NamespaceInfo",
 				"TitleFactory",
+				"WikibaseClient.ClientDomainDbFactory",
 				"WikibaseClient.NamespaceChecker"
 			]
 		},

@@ -9,9 +9,10 @@ use Skin;
 use Title;
 use TitleFactory;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
+use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -38,17 +39,21 @@ class SpecialUnconnectedPages extends QueryPage {
 	/** @var NamespaceChecker */
 	private $namespaceChecker;
 
+	/** @var ClientDomainDb */
+	private $db;
+
 	public function __construct(
-		ILoadBalancer $loadBalancer,
 		NamespaceInfo $namespaceInfo,
 		TitleFactory $titleFactory,
+		ClientDomainDbFactory $db,
 		NamespaceChecker $namespaceChecker
 	) {
 		parent::__construct( 'UnconnectedPages' );
-		$this->setDBLoadBalancer( $loadBalancer );
 		$this->namespaceInfo = $namespaceInfo;
 		$this->titleFactory = $titleFactory;
 		$this->namespaceChecker = $namespaceChecker;
+		$this->db = $db->newLocalDb();
+		$this->setDBLoadBalancer( $this->db->loadBalancer() );
 	}
 
 	/**
@@ -101,7 +106,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @return array[]
 	 */
 	public function getQueryInfo() {
-		$dbr = $this->getDBLoadBalancer()->getConnectionRef( ILoadBalancer::DB_REPLICA );
+		$dbr = $this->db->connections()->getReadConnectionRef();
 
 		$conds = $this->buildConditionals( $dbr );
 		$conds['page_is_redirect'] = 0;
