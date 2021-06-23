@@ -200,12 +200,12 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
-	 * Returns a LoadBalancer that acts as a factory for connections to the local (client) wiki's
+	 * Returns a LoadBalancer that acts as a factory for connections to the client wiki's
 	 * database.
 	 *
 	 * @return SessionConsistentConnectionManager
 	 */
-	private function getLocalConnectionManager() {
+	private function getClientConnectionManager() {
 		return $this->clientDb->sessionConsistentConnections();
 	}
 
@@ -214,7 +214,7 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getRecentChangesFinder() {
 		return new RecentChangesFinder(
-			$this->getLocalConnectionManager()
+			$this->getClientConnectionManager()
 		);
 	}
 
@@ -254,7 +254,7 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getUsageTracker() {
 		if ( $this->usageTracker === null ) {
-			$connectionManager = $this->getLocalConnectionManager();
+			$connectionManager = $this->getClientConnectionManager();
 			$this->usageTracker = new SqlUsageTracker(
 				$this->entityIdParser,
 				$connectionManager,
