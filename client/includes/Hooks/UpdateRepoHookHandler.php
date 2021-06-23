@@ -7,6 +7,7 @@ namespace Wikibase\Client\Hooks;
 use Content;
 use JobQueueGroup;
 use MediaWiki\Hook\PageMoveCompleteHook;
+use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\Linker\LinkTarget;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
@@ -74,6 +75,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	private $propagateChangesToRepo;
 
 	public static function factory(
+		JobQueueGroupFactory $jobQueueGroupFactory,
 		ClientDomainDbFactory $clientDomainDbFactory,
 		EntitySource $entitySource,
 		NamespaceChecker $namespaceChecker,
@@ -82,12 +84,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	): ?self {
 
 		$repoDB = $entitySource->getDatabaseName();
-		$jobQueueGroup = JobQueueGroup::singleton( $repoDB );
-
-		if ( !$jobQueueGroup ) {
-			wfLogWarning( "Failed to acquire a JobQueueGroup for $repoDB" );
-			return null;
-		}
+		$jobQueueGroup = $jobQueueGroupFactory->makeJobQueueGroup( $repoDB );
 
 		return new self(
 			$namespaceChecker,
