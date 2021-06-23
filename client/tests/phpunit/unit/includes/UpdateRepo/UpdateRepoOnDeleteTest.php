@@ -65,7 +65,6 @@ class UpdateRepoOnDeleteTest extends \PHPUnit\Framework\TestCase {
 				->willReturn( $replicationWaiter );
 
 			$updateRepo = new UpdateRepoOnDelete(
-				$data['repoDB'],
 				// Nobody knows why we need to clone over here, but it's not working
 				// without... PHP is fun!
 				clone $data['siteLinkLookup'],

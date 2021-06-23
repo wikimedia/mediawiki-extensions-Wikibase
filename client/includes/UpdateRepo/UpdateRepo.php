@@ -23,11 +23,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 abstract class UpdateRepo {
 
 	/**
-	 * @var string
-	 */
-	private $repoDB;
-
-	/**
 	 * @var UserIdentity
 	 */
 	protected $user;
@@ -63,7 +58,6 @@ abstract class UpdateRepo {
 	private $entityId = false;
 
 	/**
-	 * @param string $repoDB IDatabase name of the repo
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param LoggerInterface $logger
 	 * @param UserIdentity $user
@@ -71,7 +65,6 @@ abstract class UpdateRepo {
 	 * @param Title $title Title in the client that has been changed
 	 */
 	public function __construct(
-		$repoDB,
 		SiteLinkLookup $siteLinkLookup,
 		LoggerInterface $logger,
 		ClientDomainDb $clientDb,
@@ -79,7 +72,6 @@ abstract class UpdateRepo {
 		$siteId,
 		Title $title
 	) {
-		$this->repoDB = $repoDB;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->logger = $logger;
 		$this->user = $user;

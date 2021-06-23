@@ -237,7 +237,6 @@ class UpdateRepoHookHandlerTest extends TestCase {
 			$siteLinkLookup,
 			new NullLogger(),
 			$clientDb,
-			'repowiki',
 			'clientwiki',
 			$propagateChangesToRepo
 		);
