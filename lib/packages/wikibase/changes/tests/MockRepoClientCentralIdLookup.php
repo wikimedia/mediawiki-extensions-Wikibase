@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Changes;
 
 use CentralIdLookup;
+use MediaWiki\User\UserIdentity;
 use MWException;
 use User;
 
@@ -40,25 +41,25 @@ class MockRepoClientCentralIdLookup extends CentralIdLookup {
 		}
 	}
 
-	public function isAttached( User $user, $wikiId = null ) {
+	public function isAttached( $user, $wikiId = null ): bool {
 		return true;
 	}
 
 	public function lookupCentralIds(
-		array $idToName, $audience = CentralIdLookup::AUDIENCE_PUBLIC, $flags = CentralIdLookup::READ_NORMAL
-	) {
+		array $idToName, $audience = self::AUDIENCE_PUBLIC, $flags = self::READ_NORMAL
+	): array {
 		throw new MWException( 'Not implemented' );
 	}
 
 	public function lookupUserNames(
-		array $nameToId, $audience = CentralIdLookup::AUDIENCE_PUBLIC, $flags = CentralIdLookup::READ_NORMAL
-	) {
+		array $nameToId, $audience = self::AUDIENCE_PUBLIC, $flags = self::READ_NORMAL
+	): array {
 		throw new MWException( 'Not implemented' );
 	}
 
 	public function localUserFromCentralId(
-		$id, $audience = CentralIdLookup::AUDIENCE_PUBLIC, $flags = CentralIdLookup::READ_NORMAL
-	) {
+		$id, $audience = self::AUDIENCE_PUBLIC, $flags = self::READ_NORMAL
+	): ?UserIdentity {
 		if ( $id >= 0 ) {
 			// Invalid central ID
 			return null;
@@ -70,8 +71,8 @@ class MockRepoClientCentralIdLookup extends CentralIdLookup {
 	}
 
 	public function centralIdFromLocalUser(
-		User $user, $audience = CentralIdLookup::AUDIENCE_PUBLIC, $flags = CentralIdLookup::READ_NORMAL
-	) {
+		$user, $audience = self::AUDIENCE_PUBLIC, $flags = self::READ_NORMAL
+	): int {
 		$localUserId = $user->getId();
 
 		return $localUserId * $this->toCentralFactor;
