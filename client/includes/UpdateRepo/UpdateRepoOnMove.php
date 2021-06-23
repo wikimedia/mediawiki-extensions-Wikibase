@@ -22,7 +22,6 @@ class UpdateRepoOnMove extends UpdateRepo {
 	private $newTitle;
 
 	/**
-	 * @param string $repoDB Database name of the repo
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param LoggerInterface $logger
 	 * @param UserIdentity $user
@@ -31,7 +30,6 @@ class UpdateRepoOnMove extends UpdateRepo {
 	 * @param Title $newTitle
 	 */
 	public function __construct(
-		$repoDB,
 		SiteLinkLookup $siteLinkLookup,
 		LoggerInterface $logger,
 		ClientDomainDb $clientDomainDb,
@@ -40,7 +38,7 @@ class UpdateRepoOnMove extends UpdateRepo {
 		Title $oldTitle,
 		Title $newTitle
 	) {
-		parent::__construct( $repoDB, $siteLinkLookup, $logger, $clientDomainDb, $user, $siteId, $oldTitle );
+		parent::__construct( $siteLinkLookup, $logger, $clientDomainDb, $user, $siteId, $oldTitle );
 		$this->newTitle = $newTitle;
 	}
 

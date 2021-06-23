@@ -68,7 +68,6 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 			$moveData = $this->getFakeMoveData();
 
 			$updateRepo = new UpdateRepoOnMove(
-				$moveData['repoDB'],
 				// Nobody knows why we need to clone over here, but it's not working
 				// without... PHP is fun!
 				clone $moveData['siteLinkLookup'],

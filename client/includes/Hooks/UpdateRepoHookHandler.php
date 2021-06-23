@@ -66,11 +66,6 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	/**
 	 * @var string
 	 */
-	private $repoDatabase;
-
-	/**
-	 * @var string
-	 */
 	private $siteGlobalID;
 
 	/**
@@ -100,7 +95,6 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 			$store->getSiteLinkLookup(),
 			LoggerFactory::getInstance( 'UpdateRepo' ),
 			$clientDomainDbFactory->newLocalDb(),
-			$repoDB,
 			$clientSettings->getSetting( 'siteGlobalID' ),
 			$clientSettings->getSetting( 'propagateChangesToRepo' )
 		);
@@ -111,7 +105,6 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	 * @param JobQueueGroup $jobQueueGroup
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param LoggerInterface $logger
-	 * @param string $repoDatabase
 	 * @param string $siteGlobalID
 	 * @param bool $propagateChangesToRepo
 	 */
@@ -121,7 +114,6 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		SiteLinkLookup $siteLinkLookup,
 		LoggerInterface $logger,
 		ClientDomainDb $clientDb,
-		$repoDatabase,
 		$siteGlobalID,
 		$propagateChangesToRepo
 	) {
@@ -131,7 +123,6 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		$this->logger = $logger;
 		$this->clientDb = $clientDb;
 
-		$this->repoDatabase = $repoDatabase;
 		$this->siteGlobalID = $siteGlobalID;
 		$this->propagateChangesToRepo = $propagateChangesToRepo;
 	}
@@ -152,7 +143,6 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		LinkTarget $title
 	): UpdateRepoOnDelete {
 		return new UpdateRepoOnDelete(
-			$this->repoDatabase,
 			$this->siteLinkLookup,
 			$this->logger,
 			$this->clientDb,
@@ -168,7 +158,6 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		Linktarget $new
 	): UpdateRepoOnMove {
 		return new UpdateRepoOnMove(
-			$this->repoDatabase,
 			$this->siteLinkLookup,
 			$this->logger,
 			$this->clientDb,
