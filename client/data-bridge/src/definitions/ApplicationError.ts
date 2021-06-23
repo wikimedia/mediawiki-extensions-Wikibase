@@ -20,6 +20,7 @@ export enum ErrorTypes {
 	EDIT_CONFLICT = 'EDIT_CONFLICT',
 	BAD_TAGS = 'BAD_TAGS',
 	NO_SUCH_REVID = 'NO_SUCH_REVID',
+	CENTRALAUTH_BADTOKEN = 'CENTRALAUTH_BADTOKEN',
 }
 
 export interface ApplicationErrorBase {
@@ -28,7 +29,8 @@ export interface ApplicationErrorBase {
 }
 
 interface InitializationError extends ApplicationErrorBase {
-	type: ErrorTypes.INITIALIZATION_ERROR;
+	type: ErrorTypes.INITIALIZATION_ERROR
+	| ErrorTypes.CENTRALAUTH_BADTOKEN;
 	info: object;
 }
 

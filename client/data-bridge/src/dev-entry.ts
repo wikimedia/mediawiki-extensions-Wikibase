@@ -97,6 +97,9 @@ services.set( 'tracker', {
 	trackError( type: string ): void {
 		console.info( `Tracking error: '${type}'` );
 	},
+	trackRecoveredError( type: string ): void {
+		console.info( `Tracking recovered error: '${type}'` );
+	},
 	trackUnknownError( type: string ): void {
 		console.info( `Tracking unknown error: '${type}'` );
 	},

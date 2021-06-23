@@ -17,6 +17,10 @@ export default class DataBridgeTrackerService implements BridgeTracker {
 		this.tracker.increment( `error.all.${errorTypeFormatter( type )}` );
 	}
 
+	public trackRecoveredError( type: string ): void {
+		this.tracker.increment( `error.recovered.${errorTypeFormatter( type )}` );
+	}
+
 	public trackUnknownError( type: string ): void {
 		this.tracker.increment( `error.unknown.${errorTypeFormatter( type )}` );
 	}
