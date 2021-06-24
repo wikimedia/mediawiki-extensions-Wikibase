@@ -20,6 +20,7 @@ export default class ApiPropertyDataTypeRepository implements PropertyDatatypeRe
 			action: 'wbgetentities',
 			props: new Set( [ 'datatype' ] ),
 			ids: new Set( [ entityId ] ),
+			errorformat: 'raw',
 			formatversion: 2,
 		} ).catch( convertNoSuchEntityError );
 		const entity = getApiEntity( response, entityId ) as EntityWithDataType;

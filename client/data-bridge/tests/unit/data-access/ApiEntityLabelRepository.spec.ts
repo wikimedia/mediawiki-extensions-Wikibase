@@ -70,6 +70,7 @@ describe( 'ApiEntityLabelRepository', () => {
 					ids: new Set( [ id ] ),
 					languages: new Set( [ languageFor ] ),
 					languagefallback: true,
+					errorformat: 'raw',
 					formatversion: 2,
 				} );
 			},

@@ -32,10 +32,11 @@ describe( 'ApiRenderReferencesRepository', function () {
 				expect( api.get ).toHaveBeenCalledTimes( 1 );
 				expect( api.get ).toHaveBeenCalledWith( {
 					action: 'wbformatreference',
-					outputformat: 'html',
-					style: 'internal-data-bridge',
-					formatversion: 2,
 					reference: JSON.stringify( references[ 0 ] ),
+					style: 'internal-data-bridge',
+					outputformat: 'html',
+					errorformat: 'raw',
+					formatversion: 2,
 					uselang: language,
 				} );
 				expect( result ).toStrictEqual( [
@@ -81,26 +82,29 @@ describe( 'ApiRenderReferencesRepository', function () {
 		expect( api.get ).toHaveBeenCalledTimes( 3 );
 		expect( api.get ).toHaveBeenCalledWith( {
 			action: 'wbformatreference',
-			outputformat: 'html',
-			style: 'internal-data-bridge',
-			formatversion: 2,
 			reference: JSON.stringify( references[ 0 ] ),
+			style: 'internal-data-bridge',
+			outputformat: 'html',
+			errorformat: 'raw',
+			formatversion: 2,
 			uselang: language,
 		} );
 		expect( api.get ).toHaveBeenCalledWith( {
 			action: 'wbformatreference',
-			outputformat: 'html',
-			style: 'internal-data-bridge',
-			formatversion: 2,
 			reference: JSON.stringify( references[ 1 ] ),
+			style: 'internal-data-bridge',
+			outputformat: 'html',
+			errorformat: 'raw',
+			formatversion: 2,
 			uselang: language,
 		} );
 		expect( api.get ).toHaveBeenCalledWith( {
 			action: 'wbformatreference',
-			outputformat: 'html',
-			style: 'internal-data-bridge',
-			formatversion: 2,
 			reference: JSON.stringify( references[ 2 ] ),
+			style: 'internal-data-bridge',
+			outputformat: 'html',
+			errorformat: 'raw',
+			formatversion: 2,
 			uselang: language,
 		} );
 

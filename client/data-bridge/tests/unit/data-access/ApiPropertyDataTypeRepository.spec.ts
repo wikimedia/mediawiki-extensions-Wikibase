@@ -39,8 +39,9 @@ describe( 'ApiPropertyDataTypeRepository', () => {
 				expect( api.get ).toHaveBeenCalledTimes( 1 );
 				expect( api.get ).toHaveBeenCalledWith( {
 					action: 'wbgetentities',
-					ids: new Set( [ id ] ),
 					props: new Set( [ 'datatype' ] ),
+					ids: new Set( [ id ] ),
+					errorformat: 'raw',
 					formatversion: 2,
 				} );
 			},

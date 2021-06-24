@@ -20,8 +20,8 @@ export default class ApiRepoConfigRepository implements WikibaseRepoConfigReposi
 		const response = await this.api.get( {
 			action: 'query',
 			meta: new Set( [ 'wbdatabridgeconfig' ] ),
-			formatversion: 2,
 			errorformat: 'raw',
+			formatversion: 2,
 		} );
 		if ( this.responseWarnsAboutDisabledRepoConfiguration( response ) ) {
 			throw new TechnicalProblem( 'Result indicates repo API is disabled (see dataBridgeEnabled).' );

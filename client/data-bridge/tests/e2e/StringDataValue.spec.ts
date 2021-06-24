@@ -167,6 +167,7 @@ describe( 'string data value', () => {
 				languagefallback: true,
 				languages: [ pageLanguage ],
 				props: [ 'labels', 'datatype', 'info', 'claims' ],
+				errorformat: 'raw',
 				formatversion: '2',
 			} );
 		} );
@@ -213,6 +214,7 @@ describe( 'string data value', () => {
 				languagefallback: true,
 				languages: [ pageLanguage ],
 				props: [ 'labels', 'datatype', 'info', 'claims' ],
+				errorformat: 'raw',
 				formatversion: '2',
 			} );
 		} );
@@ -267,6 +269,7 @@ describe( 'string data value', () => {
 				languagefallback: true,
 				languages: [ pageLanguage ],
 				props: [ 'labels', 'datatype', 'info', 'claims' ],
+				errorformat: 'raw',
 				formatversion: '2',
 			} );
 		} );

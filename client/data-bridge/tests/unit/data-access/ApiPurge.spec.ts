@@ -15,10 +15,11 @@ describe( 'ApiPurge', () => {
 			() => {
 				expect( api.post ).toHaveBeenCalledTimes( 1 );
 				expect( api.post ).toHaveBeenCalledWith( {
-					forcelinkupdate: true,
-					formatversion: 2,
 					action: 'purge',
 					titles: mockTitles,
+					forcelinkupdate: true,
+					errorformat: 'raw',
+					formatversion: 2,
 				} );
 			},
 		);

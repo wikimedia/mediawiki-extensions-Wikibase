@@ -30,6 +30,7 @@ export default class ApiRenderReferencesRepository implements ReferencesRenderin
 			reference: JSON.stringify( reference ),
 			style: 'internal-data-bridge',
 			outputformat: 'html',
+			errorformat: 'raw',
 			formatversion: 2,
 			uselang: this.language,
 		} );

@@ -16,10 +16,11 @@ export default class ApiPurge implements MediaWikiPurge {
 		}
 		return Promise.resolve(
 			this.api.post( {
-				forcelinkupdate: true,
-				formatversion: 2,
 				action: 'purge',
 				titles,
+				forcelinkupdate: true,
+				errorformat: 'raw',
+				formatversion: 2,
 			} ),
 		);
 	}
