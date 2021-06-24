@@ -39,6 +39,7 @@ $cfg['directory_list'] = array_merge(
 		'lib/maintenance',
 		'view/src',
 		'lib/packages/wikibase/changes/src',
+		'lib/packages/wikibase/federated-properties/src',
 	]
 );
 
