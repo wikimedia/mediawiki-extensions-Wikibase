@@ -5,5 +5,8 @@
 		]
 	},
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Jeeʹres ǩiõlid",
-	"wikibase-diffview-link": "liiŋk"
+	"wikibase-entitytermsforlanguagelistview-language": "Ǩiõll",
+	"wikibase-content-language-edit-label": "Ǩiõll:",
+	"wikibase-diffview-link": "liiŋk",
+	"wikibase-newentity-language": "Ǩiõll:"
 }

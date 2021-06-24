@@ -5,5 +5,8 @@
 		]
 	},
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Eará gielaide",
-	"wikibase-diffview-link": "liŋkkat"
+	"wikibase-entitytermsforlanguagelistview-language": "Giella",
+	"wikibase-content-language-edit-label": "Giella:",
+	"wikibase-diffview-link": "liŋkkat",
+	"wikibase-newentity-language": "Giella:"
 }
