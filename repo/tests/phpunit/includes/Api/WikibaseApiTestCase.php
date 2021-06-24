@@ -81,34 +81,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	}
 
 	/**
-	 * Appends an edit token to a request.
-	 *
-	 * @param array $params
-	 * @param array|null $session
-	 * @param User|null $user
-	 * @param string $tokenType
-	 *
-	 * @throws ApiUsageException
-	 * @return array( array|null $resultData, WebRequest $request, array $sessionArray )
-	 */
-	protected function doApiRequestWithToken(
-		array $params,
-		array $session = null,
-		User $user = null,
-		$tokenType = 'csrf'
-	) {
-		if ( !$user ) {
-			$user = \RequestContext::getMain()->getUser();
-		}
-
-		if ( !array_key_exists( 'token', $params ) ) {
-			$params['token'] = $user->getEditToken();
-		}
-
-		return $this->doApiRequest( $params, $session, false, $user, $tokenType );
-	}
-
-	/**
 	 * @param string[] $handles
 	 * @param string[] $idMap
 	 */
