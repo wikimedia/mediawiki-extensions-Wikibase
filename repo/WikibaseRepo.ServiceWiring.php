@@ -177,6 +177,8 @@ use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\EntityTypeDefinitionsFedPropsOverrider;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
+use Wikibase\Repo\FederatedProperties\BaseUriExtractor;
+use Wikibase\Repo\FederatedProperties\FederatedPropertiesAwareDispatchingEntityIdParser;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 use Wikibase\Repo\FederatedProperties\WrappingEntityIdFormatterFactory;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
@@ -775,9 +777,22 @@ return [
 	},
 
 	'WikibaseRepo.EntityIdParser' => function ( MediaWikiServices $services ): EntityIdParser {
-		return new DispatchingEntityIdParser(
+
+		$settings = WikibaseRepo::getSettings( $services );
+		$dispatchingEntityIdParser = new DispatchingEntityIdParser(
 			WikibaseRepo::getEntityTypeDefinitions( $services )->getEntityIdBuilders()
 		);
+
+		if ( $settings->getSetting( 'federatedPropertiesEnabled' ) ) {
+			$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions( $services );
+			return new FederatedPropertiesAwareDispatchingEntityIdParser(
+				$dispatchingEntityIdParser,
+				new BaseUriExtractor(),
+				$entitySourceDefinitions
+			);
+		}
+
+		return $dispatchingEntityIdParser;
 	},
 
 	'WikibaseRepo.EntityLinkFormatterFactory' => function ( MediaWikiServices $services ): EntityLinkFormatterFactory {
