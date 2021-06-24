@@ -182,6 +182,7 @@ use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\LocalizedTextProviderFactory;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
@@ -660,6 +661,23 @@ return [
 		$entityDataFormatProvider->setAllowedFormats( $formats );
 
 		return $entityDataFormatProvider;
+	},
+
+	'WikibaseRepo.EntityDataSerializationService' => function ( MediaWikiServices $services ): EntityDataSerializationService {
+		return new EntityDataSerializationService(
+			WikibaseRepo::getEntityRevisionLookup(),
+			WikibaseRepo::getEntityTitleStoreLookup(),
+			WikibaseRepo::getEntityContentFactory(),
+			WikibaseRepo::getPropertyDataTypeLookup(),
+			WikibaseRepo::getValueSnakRdfBuilderFactory(),
+			WikibaseRepo::getEntityRdfBuilderFactory(),
+			WikibaseRepo::getEntityStubRdfBuilderFactory(),
+			WikibaseRepo::getEntityDataFormatProvider(),
+			WikibaseRepo::getBaseDataModelSerializerFactory(),
+			WikibaseRepo::getAllTypesEntitySerializer(),
+			$services->getSiteLookup(),
+			WikibaseRepo::getRdfVocabulary()
+		);
 	},
 
 	'WikibaseRepo.EntityDataUriManager' => function ( MediaWikiServices $services ): EntityDataUriManager {
@@ -1523,7 +1541,7 @@ return [
 	},
 
 	// TODO: This service is just a convenience service to simplify the transition away from SingleEntitySourceServices,
-	// 		 and thus should eventually be removed. See T277731.
+	//       and thus should eventually be removed. See T277731.
 	'WikibaseRepo.SingleEntitySourceServicesFactory' => function (
 		MediaWikiServices $services
 	): SingleEntitySourceServicesFactory {
