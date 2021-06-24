@@ -43,7 +43,11 @@ class WikiPagePropertyOrderProviderTest extends MediaWikiIntegrationTestCase {
 	private function makeWikiPage( $name, $text ) {
 		$title = Title::newFromTextThrow( $name );
 		$wikiPage = WikiPage::factory( $title );
-		$wikiPage->doEditContent( new WikitextContent( $text ), 'test' );
+		$wikiPage->doUserEditContent(
+			new WikitextContent( $text ),
+			$this->getTestUser()->getUser(),
+			'test'
+		);
 	}
 
 	public function testGetPropertyOrder_pageDoesNotExist() {

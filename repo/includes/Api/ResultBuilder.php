@@ -1045,7 +1045,7 @@ class ResultBuilder {
 	/**
 	 * Adds the ID of the new revision from the Status object to the API result structure.
 	 * The status value is expected to be structured in the way that EditEntity::attemptSave()
-	 * resp WikiPage::doEditContent() do it: as an array, with an EntityRevision object in the
+	 * resp WikiPage::doUserEditContent() do it: as an array, with an EntityRevision object in the
 	 *  'revision' field. If $oldRevId is set and the latest edit was null, a 'nochange' flag
 	 *  is also added.
 	 *

@@ -52,7 +52,7 @@ abstract class EntityContent extends AbstractContent {
 	/**
 	 * Flag for use with prepareSave(), indicating that no pre-save validation should be applied.
 	 * Can be passed in via EditEntity::attemptSave, EntityStore::saveEntity,
-	 * as well as WikiPage::doEditContent()
+	 * as well as WikiPage::doUserEditContent()
 	 *
 	 * @note: must not collide with the EDIT_XXX flags defined by MediaWiki core in Defines.php.
 	 */

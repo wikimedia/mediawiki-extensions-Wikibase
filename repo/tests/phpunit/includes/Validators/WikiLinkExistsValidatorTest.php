@@ -30,7 +30,11 @@ class WikiLinkExistsValidatorTest extends MediaWikiIntegrationTestCase {
 
 		$article = new Article( $title );
 		$page = $article->getPage();
-		$page->doEditContent( new WikitextContent( 'Some [[link]]' ), 'summary' );
+		$page->doUserEditContent(
+			new WikitextContent( 'Some [[link]]' ),
+			$this->getTestUser()->getUser(),
+			'summary'
+		);
 
 		$validator = new WikiLinkExistsValidator( NS_PROJECT );
 

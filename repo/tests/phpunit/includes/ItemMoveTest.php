@@ -67,7 +67,11 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 
 		$title = Title::newFromTextThrow( 'wbmovetest', $this->getDefaultWikitextNS() );
 		$this->page = new WikiPage( $title );
-		$this->page->doEditContent( new WikitextContent( 'foobar' ), 'test' );
+		$this->page->doUserEditContent(
+			new WikitextContent( 'foobar' ),
+			$this->getTestUser()->getUser(),
+			'test'
+		);
 	}
 
 	/**

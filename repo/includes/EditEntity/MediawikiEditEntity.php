@@ -361,7 +361,7 @@ class MediawikiEditEntity implements EditEntity {
 	 * Get the status object. Only defined after attemptSave() was called.
 	 *
 	 * After a successful save, the Status object's value field will contain an array,
-	 * just like the status returned by WikiPage::doEditContent(). Well known fields
+	 * just like the status returned by WikiPage::doUserEditContent(). Well known fields
 	 * in the status value are:
 	 *
 	 *  - new: bool whether the edit created a new page
@@ -618,7 +618,7 @@ class MediawikiEditEntity implements EditEntity {
 	 *
 	 * @param EntityDocument $newEntity
 	 * @param string $summary The edit summary.
-	 * @param int $flags The EDIT_XXX flags as used by WikiPage::doEditContent().
+	 * @param int $flags The EDIT_XXX flags as used by WikiPage::doUserEditContent().
 	 *        Additionally, the EntityContent::EDIT_XXX constants can be used.
 	 * @param string|bool $token Edit token to check, or false to disable the token check.
 	 *                                Null will fail the token text, as will the empty string.
@@ -633,7 +633,7 @@ class MediawikiEditEntity implements EditEntity {
 	 * @throws MWException
 	 * @throws ReadOnlyError
 	 *
-	 * @see    WikiPage::doEditContent
+	 * @see    WikiPage::doUserEditContent
 	 * @see    EntityStore::saveEntity
 	 */
 	public function attemptSave( EntityDocument $newEntity, $summary, $flags, $token, $watch = null, array $tags = [] ) {

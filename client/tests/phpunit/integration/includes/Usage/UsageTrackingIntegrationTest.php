@@ -94,7 +94,12 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		$flags = $title->exists() ? EDIT_UPDATE : EDIT_NEW;
 
 		$page = WikiPage::factory( $title );
-		$page->doEditContent( $content, 'TEST', $flags );
+		$page->doUserEditContent(
+			$content,
+			$this->getTestUser()->getUser(),
+			'TEST',
+			$flags
+		);
 
 		$this->runRefreshLinksJobs();
 
