@@ -24,6 +24,7 @@ export default class ApiEntityLabelRepository implements EntityLabelRepository {
 			ids: new Set( [ entityId ] ),
 			languages: new Set( [ this.forLanguageCode ] ),
 			languagefallback: true,
+			errorformat: 'raw',
 			formatversion: 2,
 		} ).catch( convertNoSuchEntityError );
 		const entity = getApiEntity( response, entityId ) as EntityWithLabels;

@@ -386,9 +386,10 @@ describe( 'app', () => {
 			expect( clientApiPost ).toHaveBeenCalledTimes( 1 );
 			expect( clientApiPost ).toHaveBeenCalledWith( {
 				action: 'purge',
-				forcelinkupdate: true,
-				formatversion: 2,
 				titles: [ pageTitle ],
+				forcelinkupdate: true,
+				errorformat: 'raw',
+				formatversion: 2,
 			} );
 
 			const editReferences = select(
@@ -726,6 +727,7 @@ describe( 'app', () => {
 				reference: JSON.stringify( reference ),
 				style: 'internal-data-bridge',
 				outputformat: 'html',
+				errorformat: 'raw',
 				formatversion: 2,
 				uselang: contentLanguage,
 			} );
