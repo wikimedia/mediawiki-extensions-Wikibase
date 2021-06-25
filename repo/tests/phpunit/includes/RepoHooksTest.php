@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests;
 
 use ApiMain;
@@ -379,13 +381,13 @@ XML
 		$this->assertSame( [ 'wb' => true ], $used );
 		$this->assertTrue( $pOpts->isSafeToCache() );
 		$this->assertRegExp(
-			'/(?:^|!)wb=' . preg_quote( EntityHandler::PARSER_VERSION, '/' ) . '(?:!|$)/',
+			'/(?:^|!)wb=' . EntityHandler::PARSER_VERSION . '(?:!|$)/',
 			$pOpts->optionsHash( [ 'wb' ] )
 		);
 
 		$pOpts2 = ParserOptions::newCanonical( 'canonical' );
 		$this->assertRegExp(
-			'/(?:^|!)wb=' . preg_quote( EntityHandler::PARSER_VERSION, '/' ) . '(?:!|$)/',
+			'/(?:^|!)wb=' . EntityHandler::PARSER_VERSION . '(?:!|$)/',
 			$pOpts2->optionsHash( [ 'wb' ] )
 		);
 	}
