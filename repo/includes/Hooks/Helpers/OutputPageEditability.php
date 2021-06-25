@@ -2,10 +2,7 @@
 
 namespace Wikibase\Repo\Hooks\Helpers;
 
-use MediaWiki\MediaWikiServices;
 use OutputPage;
-use Title;
-use User;
 
 /**
  * Determined (likely) editability of an OutputPage by inspecting this god object's properties.
@@ -21,23 +18,8 @@ class OutputPageEditability {
 	 * @return bool
 	 */
 	public function validate( OutputPage $out ) {
-		return $this->isProbablyEditable( $out->getUser(), $out->getTitle() )
+		return $out->getUser()->probablyCan( 'edit', $out->getTitle() )
 			&& $this->isEditView( $out );
-	}
-
-	/**
-	 * This is duplicated from
-	 * @see OutputPage::getJSVars - wgIsProbablyEditable
-	 *
-	 * @param User $user
-	 * @param Title $title
-	 *
-	 * @return bool
-	 */
-	private function isProbablyEditable( User $user, Title $title ) {
-		$pm = MediaWikiServices::getInstance()->getPermissionManager();
-		return $pm->quickUserCan( 'edit', $user, $title )
-			&& ( $title->exists() || $pm->quickUserCan( 'create', $user, $title ) );
 	}
 
 	/**
