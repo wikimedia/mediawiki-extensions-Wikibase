@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
@@ -8,6 +10,7 @@ use HttpError;
 use SpecialPageExecutor;
 use SpecialPageTestBase;
 use Title;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Specials\SpecialEntityPage;
@@ -42,13 +45,13 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
 
 		$titleLookup->method( 'getTitleForId' )
-			->willReturnCallback( function ( $id ) {
+			->willReturnCallback( function ( EntityId $id ) {
 				$title = $this->createMock( Title::class );
 
 				$title->method( 'getFullURL' )
 					->willReturnCallback(
 						function ( $query ) use ( $id ) {
-							$base = strstr( $id, ':' )
+							$base = $id->isForeign()
 								? self::FOREIGN_ENTITY_PAGE_URL
 								: self::LOCAL_ENTITY_PAGE_URL;
 							return wfAppendQuery( $base, $query );
