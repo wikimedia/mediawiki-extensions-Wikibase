@@ -430,6 +430,49 @@ XML
 		$this->assertSame( 'someSlot', $nsLookup->getEntitySlotRole( $type ) );
 	}
 
+	public function testOnSetupAfterCache() {
+
+		global $wgWBRepoSettings, $wgNamespaceContentModels, $wgContentHandlers;
+
+		$settings = $wgWBRepoSettings;
+
+		$settings['entitySources'] = [
+			'local' => [
+				'entityNamespaces' => [
+					'item' => WB_NS_ITEM,
+					'property' => WB_NS_PROPERTY . '/property',
+				],
+				'repoDatabase' => 'repoDb',
+				'baseUri' => 'http://concept/',
+				'rdfNodeNamespacePrefix' => 'wd',
+				'rdfPredicateNamespacePrefix' => 'wd',
+				'interwikiPrefix' => 'testwiki',
+			],
+		];
+		$settings['localEntitySourceName'] = 'local';
+		unset( $settings['entityNamespaces'], $settings['repositories'] );
+
+		$this->setMwGlobals( [
+			'wgWBRepoSettings' => $settings,
+			'wgNamespaceContentModels' => [],
+			'wgContentHandlers' => [],
+		] );
+
+		$contentModelMappings = [
+			'item' => 'wikibase-item',
+			'property' => 'wikibase-property',
+		];
+		$this->setService(
+			'WikibaseRepo.ContentModelMappings',
+			$contentModelMappings
+		);
+
+		RepoHooks::onSetupAfterCache();
+
+		$this->assertSame( [ WB_NS_ITEM => 'wikibase-item' ], $wgNamespaceContentModels );
+		$this->assertSame( array_values( $contentModelMappings ), array_keys( $wgContentHandlers ) );
+	}
+
 	public function testGivenLocalEntityNamespace_onNamespaceIsMovableBlocksMovingPagesInThatNamespace() {
 		$itemNamespace = 120;
 		$propertyNamespace = 200;
