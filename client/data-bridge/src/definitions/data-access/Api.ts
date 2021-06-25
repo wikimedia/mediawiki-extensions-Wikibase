@@ -100,3 +100,8 @@ export interface ApiBlockedError extends ApiError {
 		blockinfo: ApiBlockedErrorBlockInfo;
 	};
 }
+
+export interface ApiBadtokenError extends ApiError {
+	code: 'badtoken';
+	params: string[];
+}

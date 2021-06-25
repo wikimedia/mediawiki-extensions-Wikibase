@@ -1,4 +1,5 @@
 import { DataValue } from '@wmde/wikibase-datamodel-types';
+import ApiErrors from '@/data-access/error/ApiErrors';
 import SavingError from '@/data-access/error/SavingError';
 import Vue from 'vue';
 import { Store } from 'vuex';
@@ -16,6 +17,7 @@ import { RootMutations } from '@/store/mutations';
 import Term from '@/datamodel/Term';
 import { entityModule } from './entity';
 import { statementModule } from '@/store/statements';
+import { ApiError, ApiBadtokenError } from '@/definitions/data-access/Api';
 import { MissingPermissionsError } from '@/definitions/data-access/BridgePermissionsRepository';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import ServiceContainer from '@/services/ServiceContainer';
@@ -62,29 +64,60 @@ RootActions
 
 		this.dispatch( 'requestAndSetTargetLabel', information.propertyId );
 
-		return Promise.all( [
-			this.store.$services.get( 'wikibaseRepoConfigRepository' ).getRepoConfiguration(),
-			this.store.$services.get( 'editAuthorizationChecker' ).canUseBridgeForItemAndPage(
-				information.entityTitle,
-				information.pageTitle,
-			),
-			this.store.$services.get( 'propertyDatatypeRepository' ).getDataType( information.propertyId ),
-			this.entityModule.dispatch(
-				'entityInit',
-				{ entity: information.entityId },
-			),
-		] ).then(
-			( results ) => this.dispatch( 'initBridgeWithRemoteData', { information, results } ),
-			( error ) => {
-				this.commit( 'addApplicationErrors', [ { type: ErrorTypes.INITIALIZATION_ERROR, info: error } ] );
-				throw error;
-			},
-		).then( () => {
-			this.commit(
-				'setApplicationStatus',
-				ApplicationStatus.READY,
-			);
-		} );
+		const hasCentralauthBadtokenError = ( error: unknown ): boolean => {
+			if ( !( error instanceof ApiErrors ) ) {
+				return false;
+			}
+			return error.errors.some( ( apiError: ApiError ): boolean => {
+				if ( apiError.code !== 'badtoken' ) {
+					return false;
+				}
+				return ( apiError as ApiBadtokenError ).params[ 0 ] === 'apierror-centralauth-badtoken';
+			} );
+		};
+
+		const getRemoteData = (): Promise<[WikibaseRepoConfiguration, MissingPermissionsError[], string, void]> => {
+			return Promise.all( [
+				this.store.$services.get( 'wikibaseRepoConfigRepository' ).getRepoConfiguration(),
+				this.store.$services.get( 'editAuthorizationChecker' ).canUseBridgeForItemAndPage(
+					information.entityTitle,
+					information.pageTitle,
+				),
+				this.store.$services.get( 'propertyDatatypeRepository' ).getDataType( information.propertyId ),
+				this.entityModule.dispatch(
+					'entityInit',
+					{ entity: information.entityId },
+				),
+			] );
+		};
+
+		return getRemoteData()
+			.catch( ( error ) => {
+				if ( !hasCentralauthBadtokenError( error ) ) {
+					throw error;
+				}
+				// retry once (T295064)
+				return getRemoteData()
+					.then( ( data ) => {
+						this.store.$services.get( 'tracker' ).trackRecoveredError( ErrorTypes.CENTRALAUTH_BADTOKEN );
+						return data;
+					} );
+			} )
+			.then(
+				( results ) => this.dispatch( 'initBridgeWithRemoteData', { information, results } ),
+				( error ) => {
+					const type = hasCentralauthBadtokenError( error )
+						? ErrorTypes.CENTRALAUTH_BADTOKEN
+						: ErrorTypes.INITIALIZATION_ERROR;
+					this.commit( 'addApplicationErrors', [ { type, info: error } ] );
+					throw error;
+				},
+			).then( () => {
+				this.commit(
+					'setApplicationStatus',
+					ApplicationStatus.READY,
+				);
+			} );
 	}
 
 	public async initBridgeWithRemoteData( {

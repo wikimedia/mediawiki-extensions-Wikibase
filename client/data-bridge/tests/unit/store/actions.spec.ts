@@ -23,6 +23,8 @@ import {
 import { inject } from 'vuex-smart-module';
 import { RootActions } from '@/store/actions';
 import AppInformation from '@/definitions/AppInformation';
+import ApiErrors from '../../../src/data-access/error/ApiErrors';
+import { ApiBadtokenError } from '../../../src/definitions/data-access/Api';
 import newMockServiceContainer from '../services/newMockServiceContainer';
 import newMockTracker from '../../util/newMockTracker';
 import newApplicationState from './newApplicationState';
@@ -275,6 +277,82 @@ describe( 'root/actions', () => {
 
 		} );
 
+		it( 'Retries initialization once on CentralAuth badtoken error', async () => {
+			const propertyId = 'P42';
+			const entityTitle = 'Douglas Adams';
+			const pageTitle = 'South_Pole_Telescope';
+			const entityId = 'Q42';
+			const information = newMockAppInformation( {
+				propertyId,
+				entityTitle,
+				pageTitle,
+				entityId,
+			} );
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				commit: jest.fn(),
+				dispatch,
+			} );
+
+			const mockWikibaseRepoError = new ApiErrors( [ {
+				code: 'badtoken',
+				params: [ 'apierror-centralauth-badtoken' ],
+			} as ApiBadtokenError ] );
+			const mockWikibaseRepoConfig = {};
+			const wikibaseRepoConfigRepository = {
+				getRepoConfiguration: jest.fn()
+					.mockRejectedValueOnce( mockWikibaseRepoError )
+					.mockResolvedValue( mockWikibaseRepoConfig ),
+			};
+			const mockListOfAuthorizationErrors: MissingPermissionsError[] = [];
+			const editAuthorizationChecker = {
+				canUseBridgeForItemAndPage: jest.fn().mockResolvedValue( mockListOfAuthorizationErrors ),
+			};
+			const propertyDataType = 'string';
+			const propertyDatatypeRepository: PropertyDatatypeRepository = {
+				getDataType: jest.fn().mockResolvedValue( propertyDataType ),
+			};
+			const tracker = newMockTracker();
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					wikibaseRepoConfigRepository,
+					editAuthorizationChecker,
+					propertyDatatypeRepository,
+					tracker,
+				} ),
+			};
+			const ignoredEntityInitResult = {};
+			const entityModuleDispatch = jest.fn().mockResolvedValue( ignoredEntityInitResult );
+
+			// @ts-ignore
+			actions.entityModule = {
+				dispatch: entityModuleDispatch,
+			};
+
+			await actions.initBridge( information );
+			expect( wikibaseRepoConfigRepository.getRepoConfiguration ).toHaveBeenCalled();
+			expect( editAuthorizationChecker.canUseBridgeForItemAndPage ).toHaveBeenCalledWith(
+				entityTitle,
+				pageTitle,
+			);
+			expect( propertyDatatypeRepository.getDataType ).toHaveBeenCalledWith( propertyId );
+			expect( entityModuleDispatch ).toHaveBeenCalledWith( 'entityInit', { entity: entityId } );
+			expect( dispatch ).toHaveBeenCalledTimes( 2 );
+			expect( dispatch.mock.calls[ 1 ][ 0 ] ).toBe( 'initBridgeWithRemoteData' );
+			expect( dispatch.mock.calls[ 1 ][ 1 ] ).toStrictEqual( {
+				information,
+				results: [
+					mockWikibaseRepoConfig,
+					mockListOfAuthorizationErrors,
+					propertyDataType,
+					ignoredEntityInitResult,
+				],
+			} );
+			expect( tracker.trackRecoveredError ).toHaveBeenCalledWith( ErrorTypes.CENTRALAUTH_BADTOKEN );
+		} );
+
 		it( 'Commits to addApplicationErrors if there is an error', async () => {
 			const information = newMockAppInformation();
 			const commit = jest.fn();
@@ -305,6 +383,44 @@ describe( 'root/actions', () => {
 				'addApplicationErrors',
 				[ {
 					type: ErrorTypes.INITIALIZATION_ERROR,
+					info: error,
+				} ],
+			);
+		} );
+
+		it( 'Commits repeated CentralAuth badtoken error as custom type', async () => {
+			const information = newMockAppInformation();
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				commit,
+				dispatch: jest.fn(),
+			} );
+			const error = new ApiErrors( [ {
+				code: 'badtoken',
+				params: [ 'apierror-centralauth-badtoken' ],
+			} as ApiBadtokenError ] );
+			const wikibaseRepoConfigRepository = {
+				getRepoConfiguration: jest.fn().mockRejectedValue( error ),
+			};
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					wikibaseRepoConfigRepository,
+					editAuthorizationChecker,
+					propertyDatatypeRepository,
+				} ),
+			};
+
+			// @ts-ignore
+			actions.entityModule = {
+				dispatch: jest.fn(),
+			};
+			await expect( actions.initBridge( information ) ).rejects.toBe( error );
+			expect( commit ).toHaveBeenCalledWith(
+				'addApplicationErrors',
+				[ {
+					type: ErrorTypes.CENTRALAUTH_BADTOKEN,
 					info: error,
 				} ],
 			);
