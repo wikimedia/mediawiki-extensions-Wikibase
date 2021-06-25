@@ -51,7 +51,7 @@ class RecentChangeFactory {
 	 * @param SiteLinkCommentCreator $siteLinkCommentCreator
 	 * @param CentralIdLookup|null $centralIdLookup CentralIdLookup, or null if
 	 *   this repository is not connected to a central user system (see
-	 *   CentralIdLookup::factoryNonLocal).
+	 *   CentralIdLookupFactory::getNonLocalLookup).
 	 * @param ExternalUserNames|null $externalUsernames
 	 */
 	public function __construct(

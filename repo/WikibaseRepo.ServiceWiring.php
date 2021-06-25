@@ -331,7 +331,7 @@ return [
 		return new ChangeNotifier(
 			new WikiPageActionEntityChangeFactory(
 				WikibaseRepo::getEntityChangeFactory( $services ),
-				CentralIdLookup::factoryNonLocal() // TODO inject (T265767)
+				$services->getCentralIdLookupFactory()->getNonLocalLookup()
 			),
 			$transmitters
 		);

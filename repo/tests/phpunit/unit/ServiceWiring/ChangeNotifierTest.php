@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use MediaWiki\User\CentralId\CentralIdLookupFactory;
 use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\SettingsArray;
@@ -29,6 +30,12 @@ class ChangeNotifierTest extends ServiceWiringTestCase {
 			] ) );
 		$this->mockService( 'WikibaseRepo.EntityChangeFactory',
 			$this->createMock( EntityChangeFactory::class ) );
+		$centralIdLookupFactory = $this->createMock( CentralIdLookupFactory::class );
+		$centralIdLookupFactory->expects( $this->once() )
+			->method( 'getNonLocalLookup' );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getCentralIdLookupFactory' )
+			->willReturn( $centralIdLookupFactory );
 
 		$this->assertInstanceOf(
 			ChangeNotifier::class,
