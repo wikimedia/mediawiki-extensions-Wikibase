@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\View\Tests\Module;
 
 use ResourceLoaderContext;
@@ -45,7 +47,7 @@ class TemplateModuleTest extends \PHPUnit\Framework\TestCase {
 			$this->markTestSkipped( "Can't test the modified hash, if we can't touch the file" );
 		}
 
-		clearstatcache( $file );
+		clearstatcache();
 		$newSummary = $instance->getDefinitionSummary( $context );
 
 		$this->assertNotEquals( $oldSummary['mtime'], $newSummary['mtime'] );
