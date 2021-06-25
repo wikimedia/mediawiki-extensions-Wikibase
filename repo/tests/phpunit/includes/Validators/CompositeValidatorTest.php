@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Validators;
 
 use DataValues\StringValue;
@@ -52,7 +54,7 @@ class CompositeValidatorTest extends \PHPUnit\Framework\TestCase {
 
 		foreach ( $errors as $error ) {
 			$msg = $localizer->getErrorMessage( $error );
-			$this->assertTrue( $msg->exists(), $msg );
+			$this->assertTrue( $msg->exists(), $msg->getKey() );
 		}
 	}
 

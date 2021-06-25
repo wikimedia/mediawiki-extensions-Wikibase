@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Validators;
 
 use InvalidArgumentException;
@@ -82,7 +84,7 @@ class EntityExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 
 		$localizer = new ValidatorErrorLocalizer();
 		$msg = $localizer->getErrorMessage( $errors[0] );
-		$this->assertTrue( $msg->exists(), $msg );
+		$this->assertTrue( $msg->exists(), $msg->getKey() );
 	}
 
 	public function provideValidate_exception() {
