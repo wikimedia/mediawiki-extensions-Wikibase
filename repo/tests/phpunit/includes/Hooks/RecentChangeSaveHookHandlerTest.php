@@ -42,7 +42,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$this->changeLookup = $this->createStub( EntityChangeLookup::class );
 		$this->changeStore = $this->createStub( ChangeStore::class );
-		$this->centralIdLookup = null; // CentralIdLookup::factoryNonLocal() may return null in the hook's factory function
+		$this->centralIdLookup = null; // CentralIdLookupFactory::getNonLocalLookup() may return null in the hook's factory function
 	}
 
 	public function testGivenRecentChangeForEntityChange_addsMetaDataToEntityChange() {

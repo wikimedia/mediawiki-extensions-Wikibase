@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
+use MediaWiki\User\CentralId\CentralIdLookupFactory;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Lib\SettingsArray;
@@ -24,6 +25,12 @@ class RecentChangeFactoryTest extends ServiceWiringTestCase {
 			new SettingsArray( [
 				'siteGlobalID' => 'client',
 			] ) );
+		$centralIdLookupFactory = $this->createMock( CentralIdLookupFactory::class );
+		$centralIdLookupFactory->expects( $this->once() )
+			->method( 'getNonLocalLookup' );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getCentralIdLookupFactory' )
+			->willReturn( $centralIdLookupFactory );
 		$this->mockService( 'WikibaseClient.ExternalUserNames',
 			null );
 

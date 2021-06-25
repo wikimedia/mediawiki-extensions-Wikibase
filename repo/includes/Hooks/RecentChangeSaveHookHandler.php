@@ -5,6 +5,7 @@ declare( strict_types=1 );
 namespace Wikibase\Repo\Hooks;
 
 use CentralIdLookup;
+use MediaWiki\User\CentralId\CentralIdLookupFactory;
 use RecentChange;
 use User;
 use Wikibase\Lib\Changes\ChangeStore;
@@ -37,11 +38,14 @@ class RecentChangeSaveHookHandler {
 		$this->centralIdLookup = $centralIdLookup;
 	}
 
-	public static function factory( Store $store ): self {
+	public static function factory(
+		CentralIdLookupFactory $centralIdLookupFactory,
+		Store $store
+	): self {
 		return new self(
 			$store->getEntityChangeLookup(),
 			$store->getChangeStore(),
-			CentralIdLookup::factoryNonLocal()
+			$centralIdLookupFactory->getNonLocalLookup()
 		);
 	}
 

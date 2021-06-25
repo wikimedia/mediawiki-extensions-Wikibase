@@ -728,7 +728,7 @@ return [
 				$siteLookup,
 				WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' )
 			),
-			CentralIdLookup::factoryNonLocal(), // TODO get from $services (see T265767)
+			$services->getCentralIdLookupFactory()->getNonLocalLookup(),
 			WikibaseClient::getExternalUserNames( $services )
 		);
 	},
