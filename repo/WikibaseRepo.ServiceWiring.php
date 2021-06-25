@@ -68,6 +68,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityFactory;
+use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\EntityIdLinkFormatter;
@@ -892,6 +893,30 @@ return [
 	'WikibaseRepo.EntitySearchHelperCallbacks' => function ( MediaWikiServices $services ): array {
 		return WikibaseRepo::getEntityTypeDefinitions( $services )
 			->get( EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK );
+	},
+
+	// This service is largely a copy of WikibaseRepo.EntityTypeDefinitions. As soon as all federated properties services use
+	// EntitySourceAndTypeDefinitions, WikibaseRepo.EntityTypeDefinitions will likely no longer need federated properties specific
+	// overrides.
+	'WikibaseRepo.EntitySourceAndTypeDefinitions' => function ( MediaWikiServices $services ): EntitySourceAndTypeDefinitions {
+		$baseEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
+		$repoEntityTypes = require __DIR__ . '/WikibaseRepo.entitytypes.php';
+
+		$entityTypes = array_merge_recursive( $baseEntityTypes, $repoEntityTypes );
+
+		$services->getHookContainer()->run( 'WikibaseRepoEntityTypes', [ &$entityTypes ] );
+
+		$settings = WikibaseRepo::getSettings( $services );
+		$overrider = EntityTypeDefinitionsFedPropsOverrider::factory( $settings->getSetting( 'federatedPropertiesEnabled' ) );
+
+		$apiEntityTypeDefinitions = new EntityTypeDefinitions( $overrider->override( $entityTypes ) );
+		$dbEntityTypeDefinitions = new EntityTypeDefinitions( $entityTypes );
+
+		return new EntitySourceAndTypeDefinitions(
+			$dbEntityTypeDefinitions,
+			$apiEntityTypeDefinitions,
+			WikibaseRepo::getEntitySourceDefinitions( $services )->getSources()
+		);
 	},
 
 	'WikibaseRepo.EntitySourceDefinitions' => function ( MediaWikiServices $services ): EntitySourceDefinitions {
