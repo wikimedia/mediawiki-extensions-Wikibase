@@ -112,7 +112,7 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 			'only Q3' => [
 				[
 					'action' => 'query',
-					'query' => 'subscribers',
+					'list' => 'wbsubscribers',
 					'wblsentities' => 'Q3',
 				],
 				[
@@ -128,7 +128,7 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 			'two wikis in two entities' => [
 				[
 					'action' => 'query',
-					'query' => 'subscribers',
+					'list' => 'wbsubscribers',
 					'wblsentities' => 'Q3|Q5',
 				],
 				[
@@ -150,7 +150,7 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 			'continue' => [
 				[
 					'action' => 'query',
-					'query' => 'subscribers',
+					'list' => 'wbsubscribers',
 					'wblsentities' => 'Q3|Q5',
 					'wblscontinue' => 'Q3|enwiki',
 				],
