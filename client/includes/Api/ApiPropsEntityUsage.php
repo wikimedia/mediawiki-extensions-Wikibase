@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Client\Api;
 
 use ApiBase;
@@ -23,18 +25,13 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 	 */
 	private $repoLinker = null;
 
-	/**
-	 * @param ApiQuery $query
-	 * @param string $moduleName
-	 * @param RepoLinker $repoLinker
-	 */
-	public function __construct( ApiQuery $query, $moduleName, RepoLinker $repoLinker ) {
+	public function __construct( ApiQuery $query, string $moduleName, RepoLinker $repoLinker ) {
 		parent::__construct( $query, $moduleName, 'wbeu' );
 
 		$this->repoLinker = $repoLinker;
 	}
 
-	public function execute() {
+	public function execute(): void {
 		$params = $this->extractRequestParams();
 		$res = $this->doQuery( $params );
 		if ( !$res ) {
@@ -45,12 +42,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 		$this->formatResult( $res, $params['limit'], $prop );
 	}
 
-	/**
-	 * @param IResultWrapper $res
-	 * @param int $limit
-	 * @param array $prop
-	 */
-	private function formatResult( IResultWrapper $res, $limit, array $prop ) {
+	private function formatResult( IResultWrapper $res, int $limit, array $prop ): void {
 		$currentPageId = null;
 		$entry = [];
 		$count = 0;
@@ -95,10 +87,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 		}
 	}
 
-	/**
-	 * @param object $row
-	 */
-	private function setContinueFromRow( $row ) {
+	private function setContinueFromRow( object $row ): void {
 		$this->setContinueEnumParameter(
 			'continue',
 			"{$row->eu_page_id}|{$row->eu_entity_id}|{$row->eu_aspect}"
@@ -109,19 +98,12 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 	 * @see ApiQueryBase::getCacheMode
 	 *
 	 * @param array $params
-	 *
-	 * @return string
 	 */
-	public function getCacheMode( $params ) {
+	public function getCacheMode( $params ): string {
 		return 'public';
 	}
 
-	/**
-	 * @param array $params
-	 *
-	 * @return IResultWrapper|null
-	 */
-	public function doQuery( array $params ) {
+	public function doQuery( array $params ): ?IResultWrapper {
 		$pages = $this->getPageSet()->getGoodTitles();
 		if ( !$pages ) {
 			return null;
@@ -170,7 +152,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 		return $res;
 	}
 
-	public function getAllowedParams() {
+	public function getAllowedParams(): array {
 		return [
 			'prop' => [
 				ApiBase::PARAM_ISMULTI => true,
@@ -207,14 +189,14 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 		];
 	}
 
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		return [
 			'action=query&prop=wbentityusage&titles=Main%20Page'
 				=> 'apihelp-query+wbentityusage-example-simple',
 		];
 	}
 
-	public function getHelpUrls() {
+	public function getHelpUrls(): string {
 		return 'https://www.mediawiki.org/wiki/Special:MyLanguage/Wikibase/API#wbentityusage';
 	}
 

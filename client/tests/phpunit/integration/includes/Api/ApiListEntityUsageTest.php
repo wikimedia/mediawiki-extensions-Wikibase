@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Client\Tests\Integration\Api;
 
 use ApiMain;
@@ -33,7 +35,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		self::insertEntityUsageData();
 	}
 
-	public function addDBDataOnce() {
+	public function addDBDataOnce(): void {
 		$db = wfGetDB( DB_PRIMARY );
 		$dump = [
 			'page' => [
@@ -62,7 +64,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		}
 	}
 
-	public static function insertEntityUsageData() {
+	public static function insertEntityUsageData(): void {
 		$db = wfGetDB( DB_PRIMARY );
 		$dump = [
 			'wbc_entity_usage' => [
@@ -118,12 +120,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		return $listEntityUsageModule;
 	}
 
-	/**
-	 * @param array $params
-	 *
-	 * @return array[]
-	 */
-	private function callApiModule( array $params ) {
+	private function callApiModule( array $params ): array {
 		$module = $this->getListEntityUsageModule( $params );
 
 		$module->execute();
@@ -137,7 +134,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		return $data;
 	}
 
-	public function entityUsageProvider() {
+	public function entityUsageProvider(): array {
 		return [
 			'only Q3' => [
 				[
@@ -228,7 +225,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 	/**
 	 * @dataProvider entityUsageProvider
 	 */
-	public function testEntityUsage( array $params, array $expected ) {
+	public function testEntityUsage( array $params, array $expected ): void {
 		$result = $this->callApiModule( $params );
 
 		if ( isset( $result['error'] ) ) {
