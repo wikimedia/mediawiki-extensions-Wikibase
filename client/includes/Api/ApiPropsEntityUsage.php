@@ -124,7 +124,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 
 		if ( $params['continue'] !== null ) {
 			$db = $this->getDB();
-			list( $pageContinueSql, $entityContinueSql, $aspectContinueSql ) = explode( '|', $params['continue'], 3 );
+			[ $pageContinueSql, $entityContinueSql, $aspectContinueSql ] = explode( '|', $params['continue'], 3 );
 			$pageContinue = (int)$pageContinueSql;
 			$entityContinue = $db->addQuotes( $entityContinueSql );
 			$aspectContinue = $db->addQuotes( $aspectContinueSql );

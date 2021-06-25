@@ -193,7 +193,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 	private function addContinue( string $continueParam ): void {
 		$db = $this->getDB();
-		list( $pageContinueSql, $entityContinueSql, $aspectContinueSql ) = explode( '|', $continueParam, 3 );
+		[ $pageContinueSql, $entityContinueSql, $aspectContinueSql ] = explode( '|', $continueParam, 3 );
 		$pageContinueSql = (int)$pageContinueSql;
 		$entityContinueSql = $db->addQuotes( $entityContinueSql );
 		$aspectContinueSql = $db->addQuotes( $aspectContinueSql );
