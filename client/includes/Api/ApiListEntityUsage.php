@@ -88,11 +88,10 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		array $prop,
 		ApiPageSet $resultPageSet = null
 	) {
-		$currentPageId = null;
 		$entry = [];
 		$count = 0;
 		$result = $this->getResult();
-		$prRow = null;
+		$previousRow = null;
 
 		foreach ( $res as $row ) {
 			if ( ++$count > $limit ) {
@@ -106,9 +105,9 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 				$resultPageSet->processDbRow( $row );
 			}
 
-			if ( $currentPageId !== null && $row->eu_page_id !== $currentPageId ) {
-				// Let's add the data and check if it needs continuation
-				$fit = $this->formatPageData( $prRow, $currentPageId, $entry, $result );
+			if ( $previousRow !== null && $row->eu_page_id !== $previousRow->eu_page_id ) {
+				// finish previous entry: Let's add the data and check if it needs continuation
+				$fit = $this->formatPageData( $previousRow, $previousRow->eu_page_id, $entry, $result );
 				if ( !$fit ) {
 					$this->setContinueFromRow( $row );
 					break;
@@ -116,8 +115,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 				$entry = [];
 			}
 
-			$currentPageId = $row->eu_page_id;
-			$prRow = $row;
+			$previousRow = $row;
 
 			if ( array_key_exists( $row->eu_entity_id, $entry ) ) {
 				$entry[$row->eu_entity_id]['aspects'][] = $row->eu_aspect;
@@ -127,8 +125,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 		}
 		if ( $entry ) {
-			// @phan-suppress-next-line PhanPossiblyUndeclaredVariable
-			$this->formatPageData( $row, $currentPageId, $entry, $result );
+			$this->formatPageData( $previousRow, $previousRow->eu_page_id, $entry, $result );
 		}
 	}
 
