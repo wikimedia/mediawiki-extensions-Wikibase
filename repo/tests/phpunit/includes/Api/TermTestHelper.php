@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Api;
 
 use Wikibase\Repo\WikibaseRepo;
@@ -11,14 +13,24 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class TermTestHelper {
 
-	public static function makeOverlyLongString( $text = "Test", $length = null ) {
+	/**
+	 * Return a string that is guaranteed to be longer than the given length.
+	 *
+	 * @param string $text Repeated to build the string.
+	 * @param int|null $length Defaults to the configured maximum length for
+	 * multilanguage strings (labels, descriptions, etc.).
+	 */
+	public static function makeOverlyLongString(
+		string $text = "Test",
+		int $length = null
+	): string {
 		if ( $length === null ) {
 			$limits = WikibaseRepo::getSettings()
 				->getSetting( 'string-limits' )['multilang'];
 			$length = $limits['length'];
 		}
 
-		$rep = $length / strlen( $text ) + 1;
+		$rep = (int)ceil( ( $length + 1 ) / strlen( $text ) );
 		$s = str_repeat( $text, $rep );
 
 		return $s;
