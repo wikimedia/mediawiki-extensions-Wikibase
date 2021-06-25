@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiResult;
@@ -99,7 +101,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function removeMetaData( array $array ) {
 		foreach ( $array as $key => &$value ) {
-			if ( substr( $key, 0, 1 ) === '_' ) {
+			if ( substr( (string)$key, 0, 1 ) === '_' ) {
 				unset( $array[$key] );
 			} else {
 				if ( is_array( $value ) ) {
