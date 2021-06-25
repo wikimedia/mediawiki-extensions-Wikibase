@@ -14,6 +14,9 @@ use Wikimedia\Assert\Assert;
  */
 class EntitySource {
 
+	public const TYPE_DB = 'db';
+	public const TYPE_API = 'api';
+
 	/**
 	 * @var string
 	 */
@@ -56,6 +59,11 @@ class EntitySource {
 	private $interwikiPrefix;
 
 	/**
+	 * @var string
+	 */
+	private $type;
+
+	/**
 	 * @param string $name Unique name for the source for a given configuration / site, used for indexing the sources internally.
 	 *        This does not have to be a wikiname, sitename or dbname, it can for example just be 'properties'.
 	 * @param string|false $databaseName The name of the database to use (use false for the local db)
@@ -65,6 +73,7 @@ class EntitySource {
 	 * @param string $rdfNodeNamespacePrefix
 	 * @param string $rdfPredicateNamespacePrefix
 	 * @param string $interwikiPrefix
+	 * @param string $type
 	 */
 	public function __construct(
 		$name,
@@ -73,7 +82,8 @@ class EntitySource {
 		$conceptBaseUri,
 		$rdfNodeNamespacePrefix,
 		$rdfPredicateNamespacePrefix,
-		$interwikiPrefix
+		$interwikiPrefix,
+		string $type = self::TYPE_DB
 	) {
 		Assert::parameterType( 'string', $name, '$name' );
 		Assert::parameter( is_string( $databaseName ) || $databaseName === false, '$databaseName', 'must be a string or false' );
@@ -89,6 +99,7 @@ class EntitySource {
 		$this->rdfNodeNamespacePrefix = $rdfNodeNamespacePrefix;
 		$this->rdfPredicateNamespacePrefix = $rdfPredicateNamespacePrefix;
 		$this->interwikiPrefix = $interwikiPrefix;
+		$this->type = $type;
 
 		$this->setEntityTypeData( $entityNamespaceIdsAndSlots );
 	}
@@ -169,6 +180,10 @@ class EntitySource {
 
 	public function getInterwikiPrefix() {
 		return $this->interwikiPrefix;
+	}
+
+	public function getType(): string {
+		return $this->type;
 	}
 
 }
