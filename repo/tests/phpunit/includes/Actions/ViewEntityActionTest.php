@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Actions;
 
 use MediaWiki\MediaWikiServices;
@@ -233,7 +235,12 @@ class ViewEntityActionTest extends ActionTestCase {
 	}
 
 	private function assertNotHasLinkAlternate( OutputPage $output ) {
-		$this->assertStringNotContainsString( 'rel="alternate"', $output->getLinkHeader() );
+		$linkHeader = $output->getLinkHeader();
+		if ( $linkHeader ) {
+			$this->assertStringNotContainsString( 'rel="alternate"', $linkHeader );
+		} else {
+			$this->addToAssertionCount( 1 );
+		}
 	}
 
 }
