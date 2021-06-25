@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Hooks;
 
 use MediaWikiIntegrationTestCase;
@@ -25,7 +27,7 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider doOutputPageBeforeHtmlRegisterConfigProvider
 	 */
-	public function testDoOutputPageBeforeHtmlRegisterConfig( array $expected, Title $title, $message ) {
+	public function testDoOutputPageBeforeHtmlRegisterConfig( array $expected, Title $title, string $message ) {
 		$entityNamespaceLookup = new EntityNamespaceLookup( [ $title->getNamespace() ] );
 
 		$hookHandler = new OutputPageJsConfigHookHandler(
@@ -57,7 +59,7 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$title = $this->getTitleForId( $entityId );
 
 		return [
-			[ $expected, $title, true, 'config vars added to OutputPage' ]
+			[ $expected, $title, 'config vars added to OutputPage' ]
 		];
 	}
 
