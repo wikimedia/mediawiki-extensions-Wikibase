@@ -665,18 +665,18 @@ return [
 
 	'WikibaseRepo.EntityDataSerializationService' => function ( MediaWikiServices $services ): EntityDataSerializationService {
 		return new EntityDataSerializationService(
-			WikibaseRepo::getEntityRevisionLookup(),
-			WikibaseRepo::getEntityTitleStoreLookup(),
-			WikibaseRepo::getEntityContentFactory(),
-			WikibaseRepo::getPropertyDataTypeLookup(),
-			WikibaseRepo::getValueSnakRdfBuilderFactory(),
-			WikibaseRepo::getEntityRdfBuilderFactory(),
-			WikibaseRepo::getEntityStubRdfBuilderFactory(),
-			WikibaseRepo::getEntityDataFormatProvider(),
-			WikibaseRepo::getBaseDataModelSerializerFactory(),
-			WikibaseRepo::getAllTypesEntitySerializer(),
+			WikibaseRepo::getEntityRevisionLookup( $services ),
+			WikibaseRepo::getEntityTitleStoreLookup( $services ),
+			WikibaseRepo::getEntityContentFactory( $services ),
+			WikibaseRepo::getPropertyDataTypeLookup( $services ),
+			WikibaseRepo::getValueSnakRdfBuilderFactory( $services ),
+			WikibaseRepo::getEntityRdfBuilderFactory( $services ),
+			WikibaseRepo::getEntityStubRdfBuilderFactory( $services ),
+			WikibaseRepo::getEntityDataFormatProvider( $services ),
+			WikibaseRepo::getBaseDataModelSerializerFactory( $services ),
+			WikibaseRepo::getAllTypesEntitySerializer( $services ),
 			$services->getSiteLookup(),
-			WikibaseRepo::getRdfVocabulary()
+			WikibaseRepo::getRdfVocabulary( $services )
 		);
 	},
 
