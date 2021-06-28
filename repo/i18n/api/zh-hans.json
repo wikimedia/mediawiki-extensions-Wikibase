@@ -164,7 +164,7 @@
 	"apihelp-wbsearchentities-summary": "使用标签和别名搜索实体。",
 	"apihelp-wbsearchentities-extended-description": "返回用户语言中的实体标签和描述。\n返回匹配关键词的详细信息。\n当匹配词文本与显示的标签不同时，它也会存在于别名关键词中。",
 	"apihelp-wbsearchentities-param-search": "搜索此文本。",
-	"apihelp-wbsearchentities-param-language": "在此语言搜索。",
+	"apihelp-wbsearchentities-param-language": "在此语言搜索。这仅影响实体的选择方式，而不影响返回结果的语言：这由“uselang”参数控制。",
 	"apihelp-wbsearchentities-param-strictlanguage": "是否禁用语言备选",
 	"apihelp-wbsearchentities-param-type": "搜索实体的这种类型。",
 	"apihelp-wbsearchentities-param-props": "为每个实体返回这些属性。",

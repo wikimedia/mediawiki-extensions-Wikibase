@@ -60,6 +60,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "{{PLURAL:$1|Дададзена ці выдалена|Дададзены ці выдалены}} дад. {{PLURAL:$1|назва|назвы}} [$2]",
 	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|Дададзена|Дададзены}} дад. {{PLURAL:$1|назва|назвы}} [$2]",
 	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|Выдалена|Выдалены}} дад. {{PLURAL:$1|назва|назвы}} [$2]",
+	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Змяніць метку, апісанне і сінонімы  — [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add": "Дададзена спасылка на праект [$2]",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Выдалена спасылка на праект [$2]",
 	"wikibase-entity-summary-wbcreateclaim-value": "{{PLURAL:$1|Створаная заява|Створаныя заявы}}",

@@ -2,11 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Gadarawamo",
-			"Misteld"
+			"Misteld",
+			"Samatics"
 		]
 	},
 	"wikibase-edit": "Diọdo",
-	"wikibase-add": "Yidogo",
+	"wikibase-add": "yidogo",
 	"wikibase-label-empty": "Ohia pepope ma tin to fi",
 	"wikibase-description-empty": "Nuyijlẹdonugo de matin",
 	"wikibase-sitelinks-special": "Nọtẹn intanẹti tọn devo lẹ",

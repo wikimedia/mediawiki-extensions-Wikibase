@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajeje Brazorf",
 			"Gmelfi",
 			"Pippinu",
 			"Sarvaturi"
@@ -58,6 +59,7 @@
 	"pageswithbadges": "Pàggini cu distintivi",
 	"wikibase-pageinfo-entity-id": "ID dû suggetttu supra a {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Nuddu",
+	"wikibase-pageinfo-entity-usage-T": "Tìtulu",
 	"wikibase-property-render-error": "Nun s'arriniscìu a rènniri lu valuri dâ prupità $1: $2",
 	"wikibase-otherprojects": "Àutri pruggetti",
 	"wikibase-otherprojects-beta-message": "Sbarra latirali di l'àutri pruggetti",

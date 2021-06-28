@@ -218,5 +218,6 @@
 	"wikibase-tainted-ref-popper-title": "Магчымая неадпаведнасць зноскі значэнню",
 	"wikibase-tainted-ref-popper-help-link-title": "Старонка даведкі для гэтага тыпу абмежавання",
 	"wikibase-tainted-ref-popper-help-link-text": "Даведка",
-	"wikibase-tainted-ref-popper-remove-warning": "Прыбраць папярэджанне"
+	"wikibase-tainted-ref-popper-remove-warning": "Прыбраць папярэджанне",
+	"special-setlabeldescriptionaliases-parameterized": "Дадаць метку, апісанне і сінонімы — $1"
 }
