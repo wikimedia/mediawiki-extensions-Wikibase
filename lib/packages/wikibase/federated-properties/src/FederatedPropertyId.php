@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Wikibase\Repo\FederatedProperties;
+namespace Wikibase\Lib\FederatedProperties;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
