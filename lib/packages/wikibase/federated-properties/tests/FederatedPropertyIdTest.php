@@ -1,13 +1,14 @@
 <?php
 declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\FederatedProperties;
+namespace Wikibase\Lib\Tests\FederatedProperties;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\FederatedProperties\FederatedPropertyId;
+use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 
 /**
+ * @covers \Wikibase\Lib\FederatedProperties\FederatedPropertyId
  * @group Wikibase
  * @license GPL-2.0-or-later
  */
