@@ -572,8 +572,6 @@ class EntityDataRequestHandler {
 		$mode = 'public';
 		$response->header( 'Cache-Control: ' . $mode . ', s-maxage=' . $sMaxAge . ', max-age=' . $maxAge );
 
-		ob_clean(); // remove anything that might already be in the output buffer.
-
 		print $data;
 
 		// exit normally here, keeping all levels of output buffering.
