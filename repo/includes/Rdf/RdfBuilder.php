@@ -335,7 +335,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityStubRdfBuilder, EntityMentio
 	public function resolveMentionedEntities(): void {
 		$hasRedirect = false;
 
-		// TODO: Mark all entitiesResolved for prefetching
+		$this->markStubEntityDataForPrefetching( $this->entitiesResolved );
 
 		foreach ( $this->entitiesResolved as $id ) {
 			// $value is true if the entity has already been resolved,
@@ -392,6 +392,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityStubRdfBuilder, EntityMentio
 	 * Stub information means meta information and labels.
 	 */
 	public function addEntityStub( EntityId $entityId ): void {
+		$this->markStubEntityDataForPrefetching( [ $entityId ] );
 		$this->addEntityMetaData( $entityId );
 
 		$type = $entityId->getEntityType();
@@ -434,6 +435,21 @@ class RdfBuilder implements EntityRdfBuilder, EntityStubRdfBuilder, EntityMentio
 			->say( RdfVocabulary::NS_SCHEMA_ORG, 'softwareVersion' )->value( RdfVocabulary::FORMAT_VERSION )
 			->say( RdfVocabulary::NS_SCHEMA_ORG, 'dateModified' )->value( wfTimestamp( TS_ISO_8601, $timestamp ), 'xsd', 'dateTime' )
 			->say( 'owl', 'imports' )->is( RdfVocabulary::getOntologyURI() );
+	}
+
+	private function markStubEntityDataForPrefetching( array $entityIds ): void {
+		foreach ( $entityIds as $id ) {
+			if ( !( $id instanceof EntityId ) ) {
+				continue;
+			}
+			$type = $id->getEntityType();
+			if (
+				!empty( $this->entityStubRdfBuilders[$type] )
+				&& $this->entityStubRdfBuilders[$type] instanceof PrefetchingEntityStubRdfBuilder
+			) {
+				$this->entityStubRdfBuilders[$type]->markForPrefetchingEntityStub( $id );
+			}
+		}
 	}
 
 }

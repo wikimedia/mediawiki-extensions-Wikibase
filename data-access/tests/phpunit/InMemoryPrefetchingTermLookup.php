@@ -11,8 +11,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\TermTypes;
 
 /**
- * A PrefetchingTermLookup providing stub TermLookup functionality, i.e. doing no prefetching and
- * providing stubbed responses.
+ * A PrefetchingTermLookup looking up terms for a set of entities stored in memory,
+ * and using no other / external data source.
  *
  * Provided for use in tests only.
  *
@@ -23,6 +23,18 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 	/** @var (string|string[])[][] */
 	private $buffer;
 	private $entityData;
+	private $loadEntitiesIfNotPrefetched;
+
+	/**
+	 * @param bool $loadEntitiesIfNotPrefetched If true, normal get terms methods
+	 * will return data regardless of whether those terms were prefetched or not.
+	 * If false, data must be prefetched to be returned.
+	 * This can be used to test that the class is being used correctly
+	 * (terms are always prefetched before being accessed).
+	 */
+	public function __construct( bool $loadEntitiesIfNotPrefetched = true ) {
+		$this->loadEntitiesIfNotPrefetched = $loadEntitiesIfNotPrefetched;
+	}
 
 	/**
 	 * Takes a list of entities that to provide termLookups for
@@ -71,6 +83,9 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 	}
 
 	private function getFromEntityData( EntityId $id, $type, $lang ): ?string {
+		if ( !array_key_exists( $id->getSerialization(), $this->entityData ) ) {
+			return null;
+		}
 		if ( $type === TermTypes::TYPE_LABEL ) {
 			$termList = $this->entityData[$id->getSerialization()]->getLabels();
 		}
@@ -103,18 +118,29 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 	}
 
 	public function getLabel( EntityId $entityId, $languageCode ) {
-		return $this->getFromEntityData( $entityId, TermTypes::TYPE_LABEL, $languageCode );
+		if ( $this->loadEntitiesIfNotPrefetched ) {
+			return $this->getFromEntityData( $entityId, TermTypes::TYPE_LABEL, $languageCode );
+		}
+		return $this->getPrefetchedTerm( $entityId, TermTypes::TYPE_LABEL, $languageCode );
 	}
 
 	public function getLabels( EntityId $entityId, array $languageCodes ) {
 		$labels = [];
 
 		foreach ( $languageCodes as $lang ) {
-			$result = $this->getFromEntityData(
-				$entityId,
-				TermTypes::TYPE_LABEL,
-				$lang
-			);
+			if ( $this->loadEntitiesIfNotPrefetched ) {
+				$result = $this->getFromEntityData(
+					$entityId,
+					TermTypes::TYPE_LABEL,
+					$lang
+				);
+			} else {
+				$result = $this->getPrefetchedTerm(
+					$entityId,
+					TermTypes::TYPE_LABEL,
+					$lang
+				);
+			}
 			if ( $result !== null ) {
 				$labels[$lang] = $result;
 			}
@@ -124,14 +150,21 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 	}
 
 	public function getDescription( EntityId $entityId, $languageCode ) {
-		return $this->getFromEntityData( $entityId, TermTypes::TYPE_DESCRIPTION, $languageCode );
+		if ( $this->loadEntitiesIfNotPrefetched ) {
+			return $this->getFromEntityData( $entityId, TermTypes::TYPE_DESCRIPTION, $languageCode );
+		}
+		return $this->getPrefetchedTerm( $entityId, TermTypes::TYPE_DESCRIPTION, $languageCode );
 	}
 
 	public function getDescriptions( EntityId $entityId, array $languageCodes ) {
 		$descriptions = [];
 
 		foreach ( $languageCodes as $lang ) {
-			$result = $this->getFromEntityData( $entityId, TermTypes::TYPE_DESCRIPTION, $lang );
+			if ( $this->loadEntitiesIfNotPrefetched ) {
+				$result = $this->getFromEntityData( $entityId, TermTypes::TYPE_DESCRIPTION, $lang );
+			} else {
+				$result = $this->getPrefetchedTerm( $entityId, TermTypes::TYPE_DESCRIPTION, $lang );
+			}
 			if ( $result !== null ) {
 				$descriptions[$lang] = $result;
 			}
