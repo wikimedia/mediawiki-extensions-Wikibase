@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Store\Sql;
 
 use LockManager;
 use Psr\Log\LoggerInterface;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * SQL-based implementation of ChangeDispatchCoordinator when there is a
@@ -24,20 +24,18 @@ class LockManagerSqlChangeDispatchCoordinator extends SqlChangeDispatchCoordinat
 
 	/**
 	 * @param LockManager $lockManager
-	 * @param ILBFactory $LBFactory
+	 * @param RepoDomainDb $db
 	 * @param LoggerInterface $logger
-	 * @param string|false $repoDB
 	 * @param string $repoSiteId The repo's global wiki ID
 	 */
 	public function __construct(
 		LockManager $lockManager,
-		ILBFactory $LBFactory,
+		RepoDomainDb $db,
 		LoggerInterface $logger,
-		$repoDB,
 		string $repoSiteId
 	) {
 		$this->lockManager = $lockManager;
-		parent::__construct( $repoDB, $repoSiteId, $LBFactory, $logger );
+		parent::__construct( $repoSiteId, $db, $logger );
 	}
 
 	/**

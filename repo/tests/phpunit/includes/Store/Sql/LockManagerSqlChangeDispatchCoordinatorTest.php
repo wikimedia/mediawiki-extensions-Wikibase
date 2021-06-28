@@ -1,11 +1,12 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Store\Sql;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use NullLockManager;
 use Psr\Log\NullLogger;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 
 /**
@@ -19,6 +20,8 @@ use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
  * @license GPL-2.0-or-later
  */
 class LockManagerSqlChangeDispatchCoordinatorTest extends MediaWikiIntegrationTestCase {
+
+	use LocalRepoDbTestHelper;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -34,16 +37,13 @@ class LockManagerSqlChangeDispatchCoordinatorTest extends MediaWikiIntegrationTe
 		$lockManager = new NullLockManager( [] );
 		return new LockManagerSqlChangeDispatchCoordinator(
 			$lockManager,
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			$this->getRepoDomainDb(),
 			new NullLogger(),
-			false,
 			'TestRepo'
 		);
 	}
 
 	private function resetChangesTable( $id = 23 ) {
-		$dbw = wfGetDB( DB_PRIMARY );
-
 		$row = [
 			'change_id' => $id,
 			'change_type' => 'test',
@@ -54,8 +54,8 @@ class LockManagerSqlChangeDispatchCoordinatorTest extends MediaWikiIntegrationTe
 			'change_info' => '',
 		];
 
-		$dbw->delete( 'wb_changes', '*', __METHOD__ );
-		$dbw->insert( 'wb_changes', $row, __METHOD__ );
+		$this->db->delete( 'wb_changes', '*', __METHOD__ );
+		$this->db->insert( 'wb_changes', $row, __METHOD__ );
 	}
 
 	public function testBasicLockManager() {

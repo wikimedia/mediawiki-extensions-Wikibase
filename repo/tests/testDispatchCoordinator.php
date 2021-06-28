@@ -15,6 +15,7 @@ use Wikibase\Repo\Store\ChangeDispatchCoordinator;
 use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 use Wikibase\Repo\Store\Sql\SqlChangeDispatchCoordinator;
 use Wikibase\Repo\WikibaseRepo;
+use WikiMap;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -84,26 +85,24 @@ class TestDispatchCoordinator extends Maintenance {
 	 * @return ChangeDispatchCoordinator
 	 */
 	private function createCoordinator( SettingsArray $settings ) {
-		$repoID = wfWikiID();
+		$repoID = WikiMap::getCurrentWikiId();
 		$lockManagerName = $this->getOption(
 			'lock',
 			$settings->getSetting( 'dispatchingLockManager' )
 		);
 		if ( $lockManagerName !== null ) {
 			$lockManager = MediaWikiServices::getInstance()->getLockManagerGroupFactory()
-				->getLockManagerGroup( wfWikiID() )->get( $lockManagerName );
+				->getLockManagerGroup( $repoID )->get( $lockManagerName );
 			$coordinator = new LockManagerSqlChangeDispatchCoordinator(
 				$lockManager,
-				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+				WikibaseRepo::getRepoDomainDbFactory()->newRepoDb(),
 				new NullLogger(),
-				$settings->getSetting( 'changesDatabase' ),
 				$repoID
 			);
 		} else {
 			$coordinator = new SqlChangeDispatchCoordinator(
-				$settings->getSetting( 'changesDatabase' ),
 				$repoID,
-				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+				WikibaseRepo::getRepoDomainDbFactory()->newRepoDb(),
 				new NullLogger()
 			);
 		}
