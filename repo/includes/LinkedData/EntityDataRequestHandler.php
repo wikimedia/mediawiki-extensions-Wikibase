@@ -616,8 +616,6 @@ class EntityDataRequestHandler {
 			$response->header( 'Cache-Control: private, no-cache, s-maxage=0' );
 		}
 
-		ob_clean(); // remove anything that might already be in the output buffer.
-
 		print $data;
 
 		// exit normally here, keeping all levels of output buffering.
