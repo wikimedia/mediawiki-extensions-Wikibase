@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\Lib\EntityTypeDefinitions;
 
@@ -60,7 +61,16 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 				'rdfNodeNamespacePrefix' => 'sdc',
 				'rdfPredicateNamespacePrefix' => 'sdc',
 				'interwikiPrefix' => 'commons'
-			]
+			],
+			'apiSource' => [
+				'type' => 'api',
+				'entityNamespaces' => [ 'item' => 100, 'property' => 200 ],
+				'repoDatabase' => false,
+				'baseUri' => 'http://wikidorta.xyz/entity/',
+				'rdfNodeNamespacePrefix' => 'wdo',
+				'rdfPredicateNamespacePrefix' => 'wdo',
+				'interwikiPrefix' => 'wikidorta'
+			],
 		];
 
 		$parser = new EntitySourceDefinitionsConfigParser();
@@ -69,9 +79,10 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 
 		$sources = $sourceDefinitions->getSources();
 
-		$this->assertCount( 2, $sources );
+		$this->assertCount( 3, $sources );
 
 		$this->assertSame( 'wikidata', $sources[0]->getSourceName() );
+		$this->assertSame( EntitySource::TYPE_DB, $sources[0]->getType() );
 		$this->assertSame( 'wikidatadb', $sources[0]->getDatabaseName() );
 		$this->assertSame( [ 'item', 'property' ], $sources[0]->getEntityTypes() );
 		$this->assertSame( 'wikidata', $sources[0]->getInterwikiPrefix() );
@@ -80,12 +91,15 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 		$this->assertEquals( [ 'item' => 'main', 'property' => 'main' ], $sources[0]->getEntitySlotNames() );
 
 		$this->assertSame( 'commons', $sources[1]->getSourceName() );
+		$this->assertSame( EntitySource::TYPE_DB, $sources[1]->getType() );
 		$this->assertSame( 'commonsdb', $sources[1]->getDatabaseName() );
 		$this->assertEquals( [ 'mediainfo' ], $sources[1]->getEntityTypes() );
 		$this->assertSame( 'commons', $sources[1]->getInterwikiPrefix() );
 		$this->assertSame( 'http://commons.xyz/entity/', $sources[1]->getConceptBaseUri() );
 		$this->assertEquals( [ 'mediainfo' => 100 ], $sources[1]->getEntityNamespaceIds() );
 		$this->assertEquals( [ 'mediainfo' => 'mediainfo' ], $sources[1]->getEntitySlotNames() );
+
+		$this->assertSame( EntitySource::TYPE_API, $sources[2]->getType() );
 	}
 
 	/**

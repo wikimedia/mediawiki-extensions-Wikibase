@@ -66,6 +66,10 @@ class EntitySourceDefinitions {
 			$sourceNamesProvided[] = $sourceName;
 
 			foreach ( $source->getEntityTypes() as $type ) {
+				if ( $source->getType() === EntitySource::TYPE_API ) {
+					continue; // it's ok to have more than one entity source per entity type if it's an api source
+				}
+
 				if ( array_key_exists( $type, $entityTypesProvided ) ) {
 					throw new \InvalidArgumentException(
 						'Entity type "' . $type . '" has already been defined in source: "' . $entityTypesProvided[$type] . '"'

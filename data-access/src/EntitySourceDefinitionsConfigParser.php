@@ -42,7 +42,8 @@ class EntitySourceDefinitionsConfigParser {
 				$sourceData['baseUri'],
 				$sourceData['rdfNodeNamespacePrefix'],
 				$sourceData['rdfPredicateNamespacePrefix'],
-				$sourceData['interwikiPrefix']
+				$sourceData['interwikiPrefix'],
+				$sourceData['type'] ?? EntitySource::TYPE_DB
 			);
 		}
 
