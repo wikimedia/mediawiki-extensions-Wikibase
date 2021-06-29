@@ -212,4 +212,18 @@ class EntitySourceTest extends TestCase {
 		$this->assertEquals( [ 'item' => 'main', 'property' => 'other' ], $source->getEntitySlotNames() );
 	}
 
+	public function testGetType() {
+		$source = new EntitySource(
+			'test',
+			'foodb',
+			[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 200, 'slot' => 'other' ] ],
+			'concept:',
+			'wd',
+			'',
+			'testwiki',
+			EntitySource::TYPE_API
+		);
+		$this->assertEquals( EntitySource::TYPE_API, $source->getType() );
+	}
+
 }
