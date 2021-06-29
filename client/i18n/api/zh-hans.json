@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"GuoPC",
 			"Liuxinyu970226",
 			"Shizhao",
 			"列维劳德"
@@ -9,6 +10,11 @@
 	"apihelp-query+wbentityusage-description": "返回指定页面中使用的所有实体ID。",
 	"apihelp-query+wbentityusage-summary": "返回指定页面使用的所有实体ID。",
 	"apihelp-query+wbentityusage-param-aspect": "只返回使用这一方面的实体ID。",
+	"apihelp-query+wbentityusage-paramvalue-aspect-S": "实体站点链接已使用",
+	"apihelp-query+wbentityusage-paramvalue-aspect-L": "实体标签已使用",
+	"apihelp-query+wbentityusage-paramvalue-aspect-D": "实体描述已使用",
+	"apihelp-query+wbentityusage-paramvalue-aspect-T": "对应该实体的本地页面标题已使用",
+	"apihelp-query+wbentityusage-paramvalue-aspect-C": "实体语句已使用",
 	"apihelp-query+wbentityusage-param-prop": "要添加至结果的属性。",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "如果启用，将添加实体的url",
 	"apihelp-query+wbentityusage-param-entities": "只返回使用了这些实体的页面。",
