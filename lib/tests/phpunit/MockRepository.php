@@ -611,7 +611,7 @@ class MockRepository implements
 	 */
 	private function updateMaxNumericId( EntityId $id ) {
 		if ( !( $id instanceof Int32EntityId ) ) {
-			throw new StorageException( 'This class does not support non-numeric entity types' );
+			return;
 		}
 
 		$this->maxEntityId = max( $this->maxEntityId, $id->getNumericId() );
