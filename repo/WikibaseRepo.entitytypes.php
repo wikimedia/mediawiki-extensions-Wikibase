@@ -24,6 +24,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
+use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
@@ -350,15 +351,17 @@ return [
 			RdfVocabulary $vocabulary,
 			RdfWriter $writer
 		) {
+
 			$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions();
 			$labelPredicates = $entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES );
-			$prefetchingLookup = WikibaseRepo::getPrefetchingTermLookup();
+			$entityLookup = WikibaseRepo::getEntityLookup();
+			$termLookup = new EntityRetrievingTermLookup( $entityLookup );
 			$propertyDataLookup = WikibaseRepo::getPropertyDataTypeLookup();
 			$termsLanguages = WikibaseRepo::getTermsLanguages();
 			$dataTypes = WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes();
 
 			return new PropertyStubRdfBuilder(
-				$prefetchingLookup,
+				$termLookup,
 				$propertyDataLookup,
 				$termsLanguages,
 				$vocabulary,
