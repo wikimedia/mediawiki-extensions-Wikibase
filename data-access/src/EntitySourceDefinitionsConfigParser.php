@@ -3,7 +3,7 @@
 namespace Wikibase\DataAccess;
 
 use InvalidArgumentException;
-use MWNamespace;
+use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikimedia\Assert\Assert;
 
@@ -129,7 +129,9 @@ class EntitySourceDefinitionsConfigParser {
 		} else {
 			// TODO: this is evil, can we get around this without binding to MediaWiki?
 			// Or should this class go to some other place, where coupling is not an issue?
-			$ns = MWNamespace::getCanonicalIndex( strtolower( $m[1] ) );
+			$ns = MediaWikiServices::getInstance()
+				->getNamespaceInfo()
+				->getCanonicalIndex( strtolower( $m[1] ) );
 		}
 
 		if ( !is_int( $ns ) ) {
