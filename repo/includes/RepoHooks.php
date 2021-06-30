@@ -114,7 +114,7 @@ final class RepoHooks {
 	 * Handler for the SetupAfterCache hook, completing the content and namespace setup.
 	 * This updates the $wgContentHandlers and $wgNamespaceContentModels registries
 	 * according to information provided by entity type definitions and the entityNamespaces
-	 * setting.
+	 * setting for the local entity source.
 	 *
 	 * @throws MWException
 	 */
@@ -122,8 +122,7 @@ final class RepoHooks {
 		global $wgContentHandlers,
 			$wgNamespaceContentModels;
 
-		$settings = WikibaseRepo::getSettings();
-		$namespaces = $settings->getSetting( 'entityNamespaces' );
+		$namespaces = WikibaseRepo::getLocalEntitySource()->getEntityNamespaceIds();
 		$namespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 
 		// Register entity namespaces.
@@ -137,7 +136,7 @@ final class RepoHooks {
 			// XXX: we should probably not just ignore $entityTypes that don't match $contentModelIds.
 			if ( !isset( $wgNamespaceContentModels[$namespace] )
 				&& isset( $contentModelIds[$entityType] )
-				&& $namespaceLookup->getEntitySlotRole( $namespace ) === 'main'
+				&& $namespaceLookup->getEntitySlotRole( $entityType ) === 'main'
 			) {
 				$wgNamespaceContentModels[$namespace] = $contentModelIds[$entityType];
 			}
