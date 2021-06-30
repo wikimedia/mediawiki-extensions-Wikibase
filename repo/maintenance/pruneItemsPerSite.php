@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Maintenance;
 
 use Maintenance;
-use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\WikibaseSettings;
@@ -48,7 +47,6 @@ class PruneItemsPerSite extends Maintenance {
 
 		$itemNamespace = WikibaseRepo::getEntityNamespaceLookup()->getEntityNamespace( Item::ENTITY_TYPE );
 
-		$loadBalancerFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		$db = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb();
 		$selectBatchSize = (int)$this->getOption( 'select-batch-size', 100000 );
 
