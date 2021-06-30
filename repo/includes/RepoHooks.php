@@ -806,8 +806,7 @@ final class RepoHooks {
 
 		$data['wikibase-propertytypes'] = $propertyTypes;
 
-		$conceptBaseUri = $repoSettings->getSetting( 'conceptBaseUri' );
-		$data['wikibase-conceptbaseuri'] = $conceptBaseUri;
+		$data['wikibase-conceptbaseuri'] = WikibaseRepo::getLocalEntitySource()->getConceptBaseUri();
 
 		$geoShapeStorageBaseUrl = $repoSettings->getSetting( 'geoShapeStorageBaseUrl' );
 		$data['wikibase-geoshapestoragebaseurl'] = $geoShapeStorageBaseUrl;
@@ -905,7 +904,7 @@ final class RepoHooks {
 	 */
 	public static function onSidebarBeforeOutput( Skin $skin, array &$sidebar ): void {
 		$hookHandler = new SidebarBeforeOutputHookHandler(
-			WikibaseRepo::getSettings()->getSetting( 'conceptBaseUri' ),
+			WikibaseRepo::getLocalEntitySource()->getConceptBaseUri(),
 			WikibaseRepo::getEntityIdLookup(),
 			WikibaseRepo::getEntityLookup(),
 			WikibaseRepo::getEntityNamespaceLookup(),

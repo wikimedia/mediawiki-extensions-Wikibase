@@ -22,22 +22,39 @@ use Wikibase\Lib\EntityTypeDefinitions;
 class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 
 	private function getRepoSettings() {
+		$defaultTestEntitySource = [
+			'repoDatabase' => 'testdb',
+			'entityNamespaces' => [ 'item' => 123 ],
+			'rdfNodeNamespacePrefix' => '',
+			'rdfPredicateNamespacePrefix' => '',
+			'interwikiPrefix' => '',
+		];
+
 		return [
 			[
 				'baseUrl' => '//www.example.com',
-				'conceptBaseUri' => 'http://www.example.com/entity',
+				'entitySources' => [
+					'test' =>
+						$defaultTestEntitySource + [ 'conceptBaseUri' => 'http://www.example.com/entity' ],
+				],
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '',
 			],
 			[
 				'baseUrl' => '//example.com/',
-				'conceptBaseUri' => 'http://example.com/entity',
+				'entitySources' => [
+					'test' =>
+						$defaultTestEntitySource + [ 'conceptBaseUri' => 'http://example.com/entity' ],
+				],
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '',
 			],
 			[
 				'baseUrl' => 'http://www.example.com',
-				'conceptBaseUri' => '',
+				'entitySources' => [
+					'test' =>
+						$defaultTestEntitySource + [ 'conceptBaseUri' => '' ],
+				],
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '/w',
 			]
@@ -52,7 +69,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 						'test',
 						'testdb',
 						[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
-						$settings['conceptBaseUri'],
+						$settings['entitySources']['test']['conceptBaseUri'],
 						'',
 						'',
 						''
