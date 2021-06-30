@@ -1,10 +1,10 @@
-# 18) Keep Wikibase master compatible with last stable Mediawiki Core {#adr_0018}
+# 20) Keep Wikibase master Mediawiki Core master {#adr_0020}
 
-Date: 28-04-2021
+Date: 30-06-2021
 
 ## Status
 
-**rejected**
+accepted
 
 ## Context
 
@@ -14,7 +14,7 @@ Wikibase is currently only tested to be compatible with Mediawiki core and other
 
 We want to give 3rd party Wikibase users regular 6 monthly releases.
 
-MediaWiki release are currently not that regular; in part due to delays caused by the Covid-19 pandemic.
+MediaWiki release are currently not that regular.
 
 We intend to produce new Wikibase features on a more regular basis than 6 monthly and we want these to be available to users
 as soon as possible. Both for users to benefit from new features but also to shorten our development feedback cycles.
@@ -47,12 +47,9 @@ needed for the Wikibase release for non-WMF users.
 
 ## Decision
 
-Ensure that Wikibase `master` maintains compatibility with the last stable release of MediaWiki core.
+Only ensure Wikibase remains compatible with MediaWiki master. Do not enforce compatibility with last stable version of MediaWiki.
 
 ## Consequences
-
-- Tooling will be required to help developers not break compatibility.
-  - There should be automated tests to ensure that compatibility isn't broken.
-  - Developers' local workflows will have to be adapted to make it easier to check compatibility.
-- When features of MediaWiki core are used that are newer than the latest stable release some compatibility layer must be used
-- When we cut the next Wikibase release in Fall 2021 we should have to do no extra work to ensure compatibility.
+- When we cut the next Wikibase release in Fall 2021 we should allow for time to:
+  - determine which features need to be backported
+  - backport the feature code and any intermediate code upon which it depends
