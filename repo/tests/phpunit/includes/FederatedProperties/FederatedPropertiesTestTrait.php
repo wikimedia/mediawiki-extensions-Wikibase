@@ -26,28 +26,26 @@ trait FederatedPropertiesTestTrait {
 	protected function setFederatedPropertiesEnabled() {
 		$this->setWbSetting( 'federatedPropertiesEnabled', true );
 
-		$this->setWbSetting( 'entitySources', array_merge(
-			[
-				'local' => [
-					'entityNamespaces' => [ 'item' => 120 ],
-					'repoDatabase' => false,
-					'baseUri' => 'http://wikidata-federated-properties.wmflabs.org/entity/',
-					'interwikiPrefix' => '',
-					'rdfNodeNamespacePrefix' => 'wd',
-					'rdfPredicateNamespacePrefix' => 'wdt',
-				],
-				'fedprops' => [
-					'entityNamespaces' => [ 'property' => 122 ],
-					'type' => 'api',
-					'repoDatabase' => false,
-					'baseUri' => $this->getFederatedPropertiesSourceConceptUri(),
-					'interwikiPrefix' => 'wikidatabeta',
-					'rdfNodeNamespacePrefix' => 'fpwd',
-					'rdfPredicateNamespacePrefix' => 'fpwd',
-				],
+		$this->setWbSetting( 'entitySources', [
+			'local' => [
+				'entityNamespaces' => [ 'item' => 120 ],
+				'repoDatabase' => false,
+				'baseUri' => 'http://wikidata-federated-properties.wmflabs.org/entity/',
+				'interwikiPrefix' => '',
+				'rdfNodeNamespacePrefix' => 'wd',
+				'rdfPredicateNamespacePrefix' => 'wdt',
 			],
-			WikibaseRepo::getSettings()->getSetting( 'entitySources' )
-		) );
+			'fedprops' => [
+				'entityNamespaces' => [ 'property' => 122 ],
+				'type' => 'api',
+				'repoDatabase' => false,
+				'baseUri' => $this->getFederatedPropertiesSourceConceptUri(),
+				'interwikiPrefix' => 'wikidatabeta',
+				'rdfNodeNamespacePrefix' => 'fpwd',
+				'rdfPredicateNamespacePrefix' => 'fpwd',
+			],
+		] );
+		$this->setWbSetting( 'localEntitySourceName', 'local' );
 	}
 
 	public function newFederatedPropertyIdFromPId( string $pId ) {

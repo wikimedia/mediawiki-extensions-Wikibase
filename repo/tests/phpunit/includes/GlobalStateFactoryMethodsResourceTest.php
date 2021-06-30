@@ -164,18 +164,6 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 
 	/** @dataProvider provideWikibaseServicesMethods */
 	public function testWikibaseServicesMethod( string $methodName ) {
-		$settings = clone WikibaseRepo::getSettings();
-		$settings->setSetting(
-			'repositories',
-			[ '' => [
-				'database' => 'dummy',
-				'base-uri' => null,
-				'prefix-mapping' => [ '' => '' ],
-				'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
-			] ]
-		);
-		$this->setService( 'WikibaseRepo.Settings', $settings );
-
 		$wikibaseServices = WikibaseRepo::getWikibaseServices();
 
 		$wikibaseServices->$methodName();

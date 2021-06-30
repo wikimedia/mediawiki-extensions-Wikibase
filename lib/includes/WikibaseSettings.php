@@ -3,7 +3,6 @@
 namespace Wikibase\Lib;
 
 use ExtensionRegistry;
-use Hooks;
 use MWException;
 
 /**
@@ -54,20 +53,13 @@ class WikibaseSettings {
 		$twoDArrayMerge = [ 'string-limits', 'pagePropertiesRdf' ];
 		$falseMeansRemove = [ 'urlSchemes', 'canonicalLanguageCodes', 'globeUris' ];
 
-		$settings = self::mergeSettings(
+		return self::mergeSettings(
 			$repoSettings,
 			$wgWBRepoSettings ?? [],
 			$overrideArrays,
 			$twoDArrayMerge,
 			$falseMeansRemove
 		);
-
-		$entityNamespaces = self::buildEntityNamespaceConfigurations( $settings );
-
-		Hooks::run( 'WikibaseRepoEntityNamespaces', [ &$entityNamespaces ] );
-
-		self::applyEntityNamespacesToSettings( $settings, $entityNamespaces );
-		return $settings;
 	}
 
 	/**
@@ -94,15 +86,7 @@ class WikibaseSettings {
 			require __DIR__ . '/../../client/config/WikibaseClient.default.php'
 		);
 
-		$settings = self::mergeSettings( $clientSettings, $wgWBClientSettings ?? [] );
-
-		$entityNamespaces = self::buildEntityNamespaceConfigurations( $settings );
-
-		Hooks::run( 'WikibaseClientEntityNamespaces', [ &$entityNamespaces ] );
-
-		self::applyEntityNamespacesToSettings( $settings, $entityNamespaces );
-
-		return $settings;
+		return self::mergeSettings( $clientSettings, $wgWBClientSettings ?? [] );
 	}
 
 	/**
@@ -185,51 +169,4 @@ class WikibaseSettings {
 		}
 		return array_merge( $defaultValue, $value );
 	}
-
-	/**
-	 * @throws MWException in case of a misconfiguration
-	 * @return int[] An array mapping entity type identifiers to namespace numbers.
-	 */
-	private static function buildEntityNamespaceConfigurations( SettingsArray $settings ) {
-		if ( !$settings->hasSetting( 'repositories' ) && !$settings->hasSetting( 'entityNamespaces' ) ) {
-			throw new MWException( 'Wikibase: Incomplete configuration: '
-				. 'The \'entityNamespaces\' setting has to be set to an '
-				. 'array mapping entity types to namespace IDs. '
-				. 'See Wikibase.example.php for details and examples.' );
-		}
-
-		$namespaces = $settings->hasSetting( 'entityNamespaces' )
-			? $settings->getSetting( 'entityNamespaces' )
-			: self::getEntityNamespacesFromRepositorySettings( $settings->getSetting( 'repositories' ) );
-
-		return $namespaces;
-	}
-
-	private static function getEntityNamespacesFromRepositorySettings( array $repositorySettings ) {
-		return array_reduce(
-			$repositorySettings,
-			function ( array $result, array $repoSettings ) {
-				return array_merge( $result, $repoSettings['entityNamespaces'] );
-			},
-			[]
-		);
-	}
-
-	private static function applyEntityNamespacesToSettings( SettingsArray $settings, array $entityNamespaces ) {
-		if ( $settings->hasSetting( 'entityNamespaces' ) ) {
-			$settings->setSetting( 'entityNamespaces', $entityNamespaces );
-			return;
-		}
-
-		$repositorySettings = $settings->getSetting( 'repositories' );
-		$namespacesDefinedForRepositories = self::getEntityNamespacesFromRepositorySettings( $repositorySettings );
-
-		$namespacesInNoRepository = array_diff_key( $entityNamespaces, $namespacesDefinedForRepositories );
-
-		if ( $namespacesInNoRepository ) {
-			$repositorySettings['']['entityNamespaces'] += $namespacesInNoRepository;
-			$settings->setSetting( 'repositories', $repositorySettings );
-		}
-	}
-
 }

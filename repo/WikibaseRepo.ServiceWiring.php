@@ -171,7 +171,6 @@ use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\EntityIdLabelFormatterFactory;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
-use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 use Wikibase\Repo\EntityTypesConfigFeddyPropsAugmenter;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\BaseUriExtractor;
@@ -937,27 +936,23 @@ return [
 		$settings = WikibaseRepo::getSettings( $services );
 		$subEntityTypesMapper = WikibaseRepo::getSubEntityTypesMapper( $services );
 
-		if ( $settings->hasSetting( 'entitySources' ) && !empty( $settings->getSetting( 'entitySources' ) ) ) {
-			$configParser = new EntitySourceDefinitionsConfigParser();
+		$configParser = new EntitySourceDefinitionsConfigParser();
 
-			return $configParser->newDefinitionsFromConfigArray(
-				$settings->getSetting( 'entitySources' ),
-				$subEntityTypesMapper
-			);
-		}
+		$entitySourceDefinitions = $configParser->newDefinitionsFromConfigArray(
+			$settings->getSetting( 'entitySources' ),
+			$subEntityTypesMapper
+		);
 
-		$parser = new EntitySourceDefinitionsLegacyRepoSettingsParser();
-
-		if ( $settings->getSetting( 'federatedPropertiesEnabled' ) ) {
+		if ( count( $entitySourceDefinitions->getSources() ) === 1 && $settings->getSetting( 'federatedPropertiesEnabled' ) ) {
 			$configParser = new FederatedPropertiesEntitySourceDefinitionsConfigParser( $settings );
 
 			return $configParser->initializeDefaults(
-				$parser->newDefinitionsFromSettings( $settings, $subEntityTypesMapper ),
+				$entitySourceDefinitions,
 				$subEntityTypesMapper
 			);
 		}
 
-		return $parser->newDefinitionsFromSettings( $settings, $subEntityTypesMapper );
+		return $entitySourceDefinitions;
 	},
 
 	'WikibaseRepo.EntityStore' => function ( MediaWikiServices $services ): EntityStore {

@@ -529,15 +529,6 @@ If entities are stored in alternative slots, the syntax <namespace>/<slot> can b
 
 EXAMPLE: ```['item' => 0, 'property' => 120, 'slottedEntity' => '123/slotname']```
 
-#### foreignRepositories {#foreignRepositories}
-An associative array mapping foreign repository names to settings relevant to the particular repository.
-Each repository's settings are an associative array containing the following keys:
-
- - 'entityNamespaces' - A map of entity type identifiers (strings) that the local wiki supports from the foreign repository to namespaces (IDs or canonical names) related to pages of entities of the given type on foreign repository's wiki. If entities are stored in alternative slots, the syntax <namespace>/<slot> can be used to define which slot to use.
- - 'repoDatabase' - A symbolic database identifier (string) that MediaWiki's LBFactory class understands.
- - 'baseUri' - A base URI (string) for concept URIs. It should contain scheme and authority part of the URI.
- - 'prefixMapping' - A prefix mapping array, see also docs/foreign-entity-ids.wiki in the DataModel component.
-
 #### unitStorage
 Definition for unit conversion storage.
 

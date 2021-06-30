@@ -123,7 +123,17 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 					'wgDBname' => 'mw_mywiki',
 					'wgWBRepoSettings' => [
 						'localEntitySourceName' => 'local',
-						'entityNamespaces' => [ 'item' => 303 ],
+						'entitySources' => [
+							'local' => [
+								'repoDatabase' => false,
+								'entityNamespaces' => [ 'item' => 303 ],
+								'baseUri' => 'http://www.acme.com/entity/',
+								'rdfNodeNamespacePrefix' => 'wd',
+								'rdfPredicateNamespacePrefix' => '',
+								'interwikiPrefix' => '',
+								'type' => 'db',
+							],
+						],
 					],
 				],
 				true, // $repoIsLocal
@@ -176,7 +186,20 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 					'wgArticlePath' => '/mywiki',
 					'wgScriptPath' => '/mediawiki',
 					'wgDBname' => 'mw_mywiki',
-					'wgWBRepoSettings' => [ 'entityNamespaces' => [ 'item' => 303 ] ],
+					'wgWBRepoSettings' => [
+						'localEntitySourceName' => 'local',
+						'entitySources' => [
+							'local' => [
+								'repoDatabase' => false,
+								'entityNamespaces' => [ 'item' => 303 ],
+								'baseUri' => 'http://www.acme.com/entity/',
+								'rdfNodeNamespacePrefix' => 'wd',
+								'rdfPredicateNamespacePrefix' => '',
+								'interwikiPrefix' => '',
+								'type' => 'db',
+							],
+						],
+					],
 				],
 				true, // $repoIsLocal
 				[ // $expected

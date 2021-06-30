@@ -21,6 +21,7 @@ use Title;
 use TitleValue;
 use User;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Api\EditEntity;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Content\ItemContent;
@@ -117,8 +118,6 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		int $namespace,
 		bool $useNewTermbox
 	) {
-		global $wgWBRepoSettings;
-
 		$title = $this->createMock( Title::class );
 		$title->expects( $this->once() )
 			->method( 'getNamespace' )
@@ -130,12 +129,12 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		$outputPage = new OutputPage( $context );
 		$skin = $this->createMock( SkinTemplate::class );
 
-		// we can’t use $this->getSettings()->setSetting() for entityNamespaces,
-		// those are only read when the WikibaseRepo singleton is created
-		$settings = $wgWBRepoSettings;
-		$settings['entityNamespaces']['fakeEntityType'] = self::FAKE_NS_ID;
+		$entityNamespaces = WikibaseRepo::getEntityNamespaceLookup()->getEntityNamespaces();
+		$entityNamespaces += [ 'fakeEntityType' => self::FAKE_NS_ID ];
+		$this->setService( 'WikibaseRepo.EntityNamespaceLookup',
+			new EntityNamespaceLookup( $entityNamespaces ) );
+		$settings = WikibaseRepo::getSettings();
 		$settings['termboxEnabled'] = $useNewTermbox;
-		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
 
 		RepoHooks::onBeforePageDisplayMobile(
 			$outputPage,
@@ -418,11 +417,12 @@ XML
 	}
 
 	private function setupTestOnContentModelCanBeUsedOn() {
-		global $wgWBRepoSettings;
 		// Create a fake entity type for testOnContentModelCanBeUsedOn
-		$settings = $wgWBRepoSettings;
-		$settings['entityNamespaces']['slottedEntityType'] = self::FAKE_NS_ID . '/someSlot';
-		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+		$settings = WikibaseRepo::getSettings();
+		$entitySources = $settings->getSetting( 'entitySources' );
+		$localEntitySourceName = $settings->getSetting( 'localEntitySourceName' );
+		$entitySources[$localEntitySourceName]['entityNamespaces']['slottedEntityType'] = self::FAKE_NS_ID . '/someSlot';
+		$settings->setSetting( 'entitySources', $entitySources );
 
 		$nsLookup = WikibaseRepo::getEntityNamespaceLookup();
 		$type = $nsLookup->getEntityType( self::FAKE_NS_ID );
@@ -450,7 +450,6 @@ XML
 			],
 		];
 		$settings['localEntitySourceName'] = 'local';
-		unset( $settings['entityNamespaces'], $settings['repositories'] );
 
 		$this->setMwGlobals( [
 			'wgWBRepoSettings' => $settings,
@@ -582,15 +581,6 @@ XML
 				'interwikiPrefix' => 'pwiki',
 			],
 		];
-		$settings['repositories'] = [
-			'items' => [
-				'entityNamespaces' => [ 'item' => $itemNamespace ],
-			],
-			'props' => [
-				'entityNamespaces' => [ 'property' => $propertyNamespace ],
-			],
-		];
-		unset( $settings['entityNamespaces'] );
 
 		return $settings;
 	}

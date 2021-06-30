@@ -9,8 +9,11 @@
  * @license GPL-2.0-or-later
  */
 
+use Wikibase\Lib\SettingsArray;
+
 global $wgCdnMaxAge;
 
+/** @phan-file-suppress PhanUnextractableAnnotation */
 return [
 	// feature flag for federated properties
 	'federatedPropertiesEnabled' => false,
@@ -34,10 +37,6 @@ return [
 	'termboxUserSpecificSsrEnabled' => true,
 
 	'reservedIds' => [],
-
-	// List of supported entity types, mapping entity type identifiers to namespace IDs.
-	// This setting is used to enable entity types.
-	'entityNamespaces' => [],
 
 	// List of entity types that (temporarily) can not be changed; identifiers per EntityDocument::getType()
 	'readOnlyEntityTypes' => [],
@@ -259,9 +258,6 @@ return [
 		'wb-identifiers' => [ 'name' => 'identifiers', 'type' => 'integer' ],
 	],
 
-	// Map of foreign repository names to repository-specific settings such as "supportedEntityTypes"
-	'foreignRepositories' => [],
-
 	// URL of geo shape storage API endpoint
 	'geoShapeStorageApiEndpointUrl' => 'https://commons.wikimedia.org/w/api.php',
 
@@ -330,7 +326,9 @@ return [
 
 	'entityTypesWithoutRdfOutput' => [],
 
-	'entitySources' => [],
+	'entitySources' => function ( SettingsArray $settings ) {
+		throw new Exception( 'entitySources must be configured manually (or use the example settings)' );
+	},
 
 	'localEntitySourceName' => 'local',
 

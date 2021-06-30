@@ -201,8 +201,6 @@ return call_user_func( function() {
 		throw new Exception( 'entitySources must be configured for non-repo client wikis' );
 	};
 
-	$defaults['entityNamespaces'] = []; // unused but needed by WikibaseSettings; TODO remove
-
 	$defaults['itemAndPropertySourceName'] = function ( SettingsArray $settings ) {
 		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
 			return WikibaseRepo::getSettings()->getSetting( 'localEntitySourceName' );

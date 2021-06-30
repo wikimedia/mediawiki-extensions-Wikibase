@@ -12,6 +12,9 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
+use MediaWiki\MediaWikiServices;
+use Wikibase\Lib\SettingsArray;
+
 if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
@@ -36,9 +39,28 @@ call_user_func( function() {
 	$wgExtraNamespaces[WB_NS_PROPERTY] = 'Property';
 	$wgExtraNamespaces[WB_NS_PROPERTY_TALK] = 'Property_talk';
 
-	// Tell Wikibase which namespace to use for which kind of entity
-	$wgWBRepoSettings['entityNamespaces']['item'] = WB_NS_ITEM;
-	$wgWBRepoSettings['entityNamespaces']['property'] = WB_NS_PROPERTY;
+	$wgWBRepoSettings['entitySources'] = function ( SettingsArray $settings ) {
+		global $wgServer;
+
+		$entityNamespaces = [
+			'item' => WB_NS_ITEM,
+			'property' => WB_NS_PROPERTY,
+		];
+
+		$hookContainer = MediaWikiServices::getInstance()->getHookContainer();
+		$hookContainer->run( 'WikibaseRepoEntityNamespaces', [ &$entityNamespaces ] );
+
+		return [
+			$settings->getSetting( 'localEntitySourceName' ) => [
+				'entityNamespaces' => $entityNamespaces,
+				'repoDatabase' => false,
+				'baseUri' => $wgServer . '/entity/',
+				'rdfNodeNamespacePrefix' => 'wd',
+				'rdfPredicateNamespacePrefix' => '',
+				'interwikiPrefix' => '',
+			],
+		];
+	};
 
 	// Make sure we use the same keys on repo and clients, so we can share cached objects.
 	$wgWBRepoSettings['sharedCacheKeyPrefix'] = $wgDBname . ':WBL';
@@ -80,8 +102,19 @@ $wgExtraNamespaces[WB_NS_PROPERTY] = 'Property';
 $wgExtraNamespaces[WB_NS_PROPERTY_TALK] = 'Property_talk';
 
 // Tell Wikibase which namespace to use for which kind of entity
-$wgWBRepoSettings['entityNamespaces']['item'] = NS_MAIN; // <=== Use main namespace for items!!!
-$wgWBRepoSettings['entityNamespaces']['property'] = WB_NS_PROPERTY; // use custom namespace
+$wgWBRepoSettings['entitySources'] = [
+	'local' => [
+		'entityNamespaces' => [
+			'item' => NS_MAIN, // <=== Use main namespace for items!!!
+			'property' => WB_NS_PROPERTY, // use custom namespace
+		],
+		'repoDatabase' => $wgDBname,
+		'baseUri' => $wgServer . '/entity/',
+		'rdfNodeNamespacePrefix' => 'wd',
+		'rdfPredicateNamespacePrefix' => '',
+		'interwikiPrefix' => '',
+	],
+];
 
 // No need to mess with $wgNamespacesToBeSearchedDefault, the main namespace will be searched per default.
 
