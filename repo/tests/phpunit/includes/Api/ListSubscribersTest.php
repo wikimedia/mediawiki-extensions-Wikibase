@@ -74,7 +74,7 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 
 		$main = new ApiMain( $context );
 
-		$query = new ApiQuery( $main, $params['action'] );
+		$query = $main->getModuleManager()->getModule( 'query' );
 
 		return $query;
 	}

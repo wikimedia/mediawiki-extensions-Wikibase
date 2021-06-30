@@ -40,7 +40,7 @@ class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$context->setLanguage( 'en-ca' );
 		$context->setRequest( new FauxRequest( $params, true ) );
 		$main = new ApiMain( $context );
-		return new ApiQuery( $main, 'wbsearch' );
+		return $main->getModuleManager()->getModule( 'query' );
 	}
 
 	/**

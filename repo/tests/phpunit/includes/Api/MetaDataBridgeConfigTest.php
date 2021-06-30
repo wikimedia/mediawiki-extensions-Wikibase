@@ -123,7 +123,7 @@ class MetaDataBridgeConfigTest extends MediaWikiIntegrationTestCase {
 		$context->setLanguage( 'qqx' );
 		$context->setRequest( new FauxRequest() );
 		$main = new ApiMain( $context );
-		$query = new ApiQuery( $main, 'query' );
+		$query = $main->getModuleManager()->getModule( 'query' );
 
 		return $query;
 	}

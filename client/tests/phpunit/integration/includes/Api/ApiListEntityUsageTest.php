@@ -5,7 +5,6 @@ declare( strict_types=1 );
 namespace Wikibase\Client\Tests\Integration\Api;
 
 use ApiMain;
-use ApiQuery;
 use FauxRequest;
 use MediaWikiLangTestCase;
 use RequestContext;
@@ -109,7 +108,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		$main = new ApiMain( $context );
 
 		$listEntityUsageModule = new ApiListEntityUsage(
-			new ApiQuery( $main, $params['action'] ),
+			$main->getModuleManager()->getModule( 'query' ),
 			'entityusage',
 			$repoLinker
 		);

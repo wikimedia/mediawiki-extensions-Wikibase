@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Integration\Api;
 
 use ApiMain;
-use ApiQuery;
 use ApiTestContext;
 use FauxRequest;
 use MediaWikiIntegrationTestCase;
@@ -50,7 +49,7 @@ class ApiClientInfoTest extends MediaWikiIntegrationTestCase {
 
 		$context = $this->apiContext->newTestContext( $request, $user );
 		$apiMain = new ApiMain( $context, true );
-		$apiQuery = new ApiQuery( $apiMain, 'wikibase' );
+		$apiQuery = $apiMain->getModuleManager()->getModule( 'query' );
 
 		$apiModule = new ApiClientInfo( $apiQuery, 'query', $this->getSettings() );
 
