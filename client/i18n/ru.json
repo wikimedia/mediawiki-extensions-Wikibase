@@ -131,6 +131,7 @@
 	"connected-redirect-category-desc": "Эта категория перечисляет страницы-перенаправления, которые связаны с элементом {{grammar:genitive|{{WBREPONAME}}}}.",
 	"wikibase-client-data-bridge-dialog-title": "Редактировать $1",
 	"wikibase-client-data-bridge-permissions-error-info": "Подробнее",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "Неизвестная ошибка разрешения",
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Я исправил</strong> некорректное значение",
 	"wikibase-client-data-bridge-references-heading": "Примечания",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Вы не вошли в систему",
@@ -144,5 +145,6 @@
 	"wikibase-client-data-bridge-error-reload-page": "Перезагрузить страницу",
 	"wikibase-client-data-bridge-error-go-back": "Вернуться назад",
 	"wikibase-client-data-bridge-error-retry-save": "Повторить сохранение",
+	"wikibase-client-data-bridge-thank-you-head": "Спасибо за вашу правку!",
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Вы не вошли в систему"
 }
