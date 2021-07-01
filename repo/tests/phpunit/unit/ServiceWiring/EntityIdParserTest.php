@@ -2,9 +2,14 @@
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
+use Wikibase\Lib\SettingsArray;
+use Wikibase\Repo\FederatedProperties\FederatedPropertiesAwareDispatchingEntityIdParser;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -27,6 +32,11 @@ class EntityIdParserTest extends ServiceWiringTestCase {
 				]
 			] ) );
 
+		$this->mockService( 'WikibaseRepo.Settings',
+			new SettingsArray( [
+				'federatedPropertiesEnabled' => false,
+			] ) );
+
 		/** @var EntityIdParser $entityIdParser */
 		$entityIdParser = $this->getService( 'WikibaseRepo.EntityIdParser' );
 		$this->assertInstanceOf( EntityIdParser::class, $entityIdParser );
@@ -34,6 +44,55 @@ class EntityIdParserTest extends ServiceWiringTestCase {
 		$entityId = $entityIdParser->parse( 'T123' );
 		$this->assertInstanceOf( ItemId::class, $entityId );
 		$this->assertSame( 'Q1000123', $entityId->getSerialization() );
+	}
+
+	public function testConstructionWhenFederatedPropertiesIsEnabled() {
+		$entityTypeDefinitions = new EntityTypeDefinitions( [
+			'test' => [
+				EntityTypeDefinitions::ENTITY_ID_PATTERN => '/^T[1-9][0-9]*$/',
+				EntityTypeDefinitions::ENTITY_ID_BUILDER => function ( $serialization ) {
+					return new ItemId( 'Q1000' . substr( $serialization, 1 ) );
+				},
+			]
+		] );
+
+		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions', $entityTypeDefinitions );
+
+		$this->mockService( 'WikibaseRepo.Settings',
+			new SettingsArray( [
+				'federatedPropertiesEnabled' => true,
+			] ) );
+
+		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions',
+			new EntitySourceDefinitions( [
+				new EntitySource(
+					'local',
+					false,
+					[],
+					'http://www.localhost.org/entity/',
+					'',
+					'',
+					''
+				),
+				new EntitySource(
+					'wikidorta',
+					false,
+					[],
+					'http://www.wikidorta.org/shmentity/',
+					'',
+					'',
+					'',
+					EntitySource::TYPE_API
+				)
+			], $entityTypeDefinitions ) );
+
+		/** @var EntityIdParser $entityIdParser */
+		$entityIdParser = $this->getService( 'WikibaseRepo.EntityIdParser' );
+		$this->assertInstanceOf( FederatedPropertiesAwareDispatchingEntityIdParser::class, $entityIdParser );
+
+		$entityId = $entityIdParser->parse( 'http://www.wikidorta.org/shmentity/P123' );
+		$this->assertInstanceOf( FederatedPropertyId::class, $entityId );
+		$this->assertSame( 'http://www.wikidorta.org/shmentity/P123', $entityId->getSerialization() );
 	}
 
 }
