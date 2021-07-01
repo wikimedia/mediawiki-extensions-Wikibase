@@ -67,6 +67,53 @@ class SetLabelTest extends ModifyTermTestCase {
 		}
 	}
 
+	public function testSetLabelOnRedirectRevision() {
+		// Create an item
+		list( $result, , ) = $this->doApiRequestWithToken( $this->getCreateItemAndSetLabelRequestParams() );
+		$id = $result['entity']['id'];
+
+		// Add some data to it and record its base rev
+		$setupParams = [
+			'action' => 'wbeditentity',
+			'id' => $id,
+			'data' => '{"descriptions":{"en":{"language":"en","value":"SetLabelOnRedirectRevision2"}}}',
+		];
+		list( $result, , ) = $this->doApiRequestWithToken( $setupParams );
+		$baserevId = $result['entity']['lastrevid'];
+
+		// Create another item as future target of redirect
+		list( $result, , ) = $this->doApiRequestWithToken( $this->getCreateItemAndSetLabelRequestParams() );
+		$newId = $result['entity']['id'];
+
+		// Clear the first item
+		$setupParams = [
+			'action' => 'wbeditentity',
+			'id' => $id,
+			'clear' => true,
+			'data' => '{}'
+		];
+		$this->doApiRequestWithToken( $setupParams );
+
+		// Redirect the first item to the second item
+		$setupParams = [
+			'action' => 'wbcreateredirect',
+			'from' => $id,
+			'to' => $newId,
+		];
+		$this->doApiRequestWithToken( $setupParams );
+
+		// Try to set label on the now-redirect item with baserevid of the non-redirect content
+		$params = [
+			'action' => 'wbsetlabel',
+			'id' => $id,
+			'language' => 'en',
+			'value' => 'a different label',
+			'baserevid' => $baserevId
+		];
+		$expectedException = [ 'type' => ApiUsageException::class, 'code' => 'unresolved-redirect' ];
+		$this->doTestQueryExceptions( $params, $expectedException );
+	}
+
 	/**
 	 * @dataProvider provideData
 	 */
