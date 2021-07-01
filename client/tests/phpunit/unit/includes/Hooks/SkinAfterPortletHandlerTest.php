@@ -7,10 +7,10 @@ use FauxRequest;
 use IContextSource;
 use Language;
 use MediaWiki\MediaWikiServices;
+use MockTitleTrait;
 use OutputPage;
 use PHPUnit\Framework\TestCase;
 use Skin;
-use Title;
 use Wikibase\Client\Hooks\SkinAfterPortletHandler;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoItemLinkGenerator;
@@ -32,6 +32,7 @@ use WikiPage;
  * @author Marius Hoch < hoo@online.de >
  */
 class SkinAfterPortletHandlerTest extends TestCase {
+	use MockTitleTrait;
 
 	public function testDoSkinAfterPortlet_editLink() {
 		$handler = $this->getHookHandler();
@@ -144,14 +145,7 @@ class SkinAfterPortletHandlerTest extends TestCase {
 	private function getContext( $action ) {
 		$request = new FauxRequest( [ 'action' => $action ] );
 
-		$title = $this->createMock( Title::class );
-		$title->method( 'exists' )
-			->willReturn( true );
-		$title->method( 'canExist' )
-			->willReturn( true );
-		$title->method( 'getNamespace' )
-			->willReturn( 0 );
-
+		$title = $this->makeMockTitle( 'Page' );
 		$contentHandler = MediaWikiServices::getInstance()
 			->getContentHandlerFactory()
 			->getContentHandler( CONTENT_MODEL_WIKITEXT );
