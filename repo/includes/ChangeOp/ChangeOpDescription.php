@@ -166,7 +166,6 @@ class ChangeOpDescription extends ChangeOpBase {
 			return $result;
 		}
 
-		// TODO: Don't bind against LabelsProvider here, rather use general builders for validators
 		if ( $entity instanceof LabelsProvider ) {
 			$validator = $this->termValidatorFactory->getLabelDescriptionNotEqualValidator();
 
