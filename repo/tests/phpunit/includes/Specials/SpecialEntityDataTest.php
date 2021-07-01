@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Specials;
 
 use DataValues\Serializers\DataValueSerializer;
@@ -51,7 +53,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	private const URI_BASE = 'http://acme.test/';
 	private const URI_DATA = 'http://data.acme.test/';
 
-	protected function newSpecialPage() {
+	protected function newSpecialPage(): SpecialEntityData {
 		$page = new SpecialEntityData(
 			$this->newRequestHandler(),
 			$this->newEntityDataFormatProvider()
@@ -64,7 +66,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		return $page;
 	}
 
-	private function newRequestHandler() {
+	private function newRequestHandler(): EntityDataRequestHandler {
 		$mockRepository = EntityDataTestProvider::getMockRepository();
 
 		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
@@ -165,7 +167,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		);
 	}
 
-	public function provideExecute() {
+	public function provideExecute(): iterable {
 		$cases = EntityDataTestProvider::provideHandleRequest();
 
 		foreach ( $cases as $n => $case ) {
@@ -191,13 +193,13 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	 * @param array  $expHeaders  Expected HTTP response headers
 	 */
 	public function testExecute(
-		$subpage,
+		string $subpage,
 		array $params,
 		array $headers,
-		$expRegExp,
-		$expCode = 200,
+		string $expRegExp,
+		int $expCode = 200,
 		array $expHeaders = []
-	) {
+	): void {
 		$request = new FauxRequest( $params );
 		$request->setRequestURL( $this->newSpecialPage()->getPageTitle( $subpage )->getLocalURL( $params ) );
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset
@@ -225,14 +227,14 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		}
 	}
 
-	private function newEntityDataFormatProvider() {
+	private function newEntityDataFormatProvider(): EntityDataFormatProvider {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$entityDataFormatProvider->setAllowedFormats( [ 'json', 'rdfxml', 'ntriples' ] );
 
 		return $entityDataFormatProvider;
 	}
 
-	public function testEntityDataFormatProvider() {
+	public function testEntityDataFormatProvider(): void {
 		$this->setContentLang( Language::factory( 'en' ) );
 		$request = new FauxRequest();
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset

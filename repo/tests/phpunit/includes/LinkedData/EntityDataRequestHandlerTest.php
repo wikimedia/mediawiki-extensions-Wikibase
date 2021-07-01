@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\LinkedData;
 
 use DataValues\Serializers\DataValueSerializer;
@@ -94,10 +96,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		parent::tearDown();
 	}
 
-	/**
-	 * @return EntityDataRequestHandler
-	 */
-	protected function newHandler() {
+	protected function newHandler(): EntityDataRequestHandler {
 		global $wgScriptPath;
 
 		$mockRepository = EntityDataTestProvider::getMockRepository();
@@ -226,10 +225,8 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @param array $params
 	 * @param string[] $headers
-	 *
-	 * @return OutputPage
 	 */
-	protected function makeOutputPage( array $params, array $headers ) {
+	protected function makeOutputPage( array $params, array $headers ): OutputPage {
 		// construct request
 		$request = new FauxRequest( $params );
 		$request->setRequestURL( 'https://repo.example/wiki/Special:EntityData/Q1.ttl' );
@@ -266,13 +263,13 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @param string[] $expectedHeaders Expected HTTP response headers.
 	 */
 	public function testHandleRequest(
-		$subpage,
+		string $subpage,
 		array $params,
 		array $headers,
-		$expectedOutput,
-		$expectedStatusCode = 200,
+		string $expectedOutput,
+		int $expectedStatusCode = 200,
 		array $expectedHeaders = []
-	) {
+	): void {
 		$output = $this->makeOutputPage( $params, $headers );
 		$request = $output->getRequest();
 
@@ -313,7 +310,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( '*', $response->getHeader( 'Access-Control-Allow-Origin' ) );
 	}
 
-	public function testHandleRequestWith304() {
+	public function testHandleRequestWith304(): void {
 		$output = $this->makeOutputPage( [], [ 'If-Modified-Since' => '20131213141516' ] );
 		$request = $output->getRequest();
 
@@ -332,7 +329,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( '*', $response->getHeader( 'Access-Control-Allow-Origin' ) );
 	}
 
-	public function provideHttpContentNegotiation() {
+	public function provideHttpContentNegotiation(): iterable {
 		$q13 = new ItemId( 'Q13' );
 		return [
 			'No Accept Header' => [
@@ -363,8 +360,8 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testHttpContentNegotiation(
 		EntityId $id,
 		array $headers,
-		$expectedRedirectSuffix
-	) {
+		string $expectedRedirectSuffix
+	): void {
 		/** @var FauxResponse $response */
 		$output = $this->makeOutputPage( [], $headers );
 		$request = $output->getRequest();
@@ -379,7 +376,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testCacheHeaderIsSetWithRevision() {
+	public function testCacheHeaderIsSetWithRevision(): void {
 		$params = [ 'revision' => EntityDataTestProvider::ITEM_REVISION_ID ];
 		$subpage = 'Q42.json';
 		$output = $this->makeOutputPage( $params, [] );
@@ -400,7 +397,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertStringContainsString( 'public', $response->getHeader( 'Cache-Control' ) );
 	}
 
-	public function testCacheHeaderIsNotSetWithoutRevision() {
+	public function testCacheHeaderIsNotSetWithoutRevision(): void {
 		$params = [];
 		$subpage = 'Q42.json';
 		$output = $this->makeOutputPage( $params, [] );
@@ -422,7 +419,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertStringContainsString( 'private', $response->getHeader( 'Cache-Control' ) );
 	}
 
-	public function testGivenUnresolvableSubEntityRedirect_throwsHttpError() {
+	public function testGivenUnresolvableSubEntityRedirect_throwsHttpError(): void {
 		$subEntityType = 'someSubEntityType';
 		$subEntityId = $this->createStub( EntityId::class ); // e.g. a Form or Sense
 		$subEntityId->method( 'getEntityType' )->willReturn( $subEntityType );

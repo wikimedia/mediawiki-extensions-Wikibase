@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Maintenance;
 
 use DataValues\StringValue;
@@ -65,7 +67,7 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 	private function getDumpRdf(
 		array $existingEntityTypes,
 		array $entityTypesWithoutRdfOutput
-	) {
+	): DumpRdf {
 		$dumpScript = new DumpRdf();
 
 		$mockRepo = new MockRepository();
@@ -182,7 +184,7 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 		return $dumpScript;
 	}
 
-	public function dumpParameterProvider() {
+	public function dumpParameterProvider(): iterable {
 		return [
 			'dump everything' => [
 				[ 'item', 'property' ],
@@ -217,9 +219,9 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 		array $existingEntityTypes,
 		array $entityTypesWithoutRdfOutput,
 		array $opts,
-		$expectedLogFile,
-		$expectedOutFile
-	) {
+		string $expectedLogFile,
+		string $expectedOutFile
+	): void {
 		$dumpScript = $this->getDumpRdf( $existingEntityTypes, $entityTypesWithoutRdfOutput );
 
 		$logFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpRdfTest" );
@@ -253,7 +255,7 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider getRedirectModeProvider
 	 */
-	public function testGetRedirectMode( $expected, $redirectOnly ) {
+	public function testGetRedirectMode( string $expected, bool $redirectOnly ): void {
 		/** @var DumpRdf $dumpScript */
 		$dumpScript = TestingAccessWrapper::newFromObject( new DumpRdf() );
 
@@ -267,7 +269,7 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $expected, $dumpScript->getRedirectMode() );
 	}
 
-	public function getRedirectModeProvider() {
+	public function getRedirectModeProvider(): iterable {
 		return [
 			[
 				EntityIdPager::INCLUDE_REDIRECTS,
@@ -280,10 +282,7 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	/**
-	 * @return PropertyDataTypeLookup
-	 */
-	private function getMockPropertyDataTypeLookup() {
+	private function getMockPropertyDataTypeLookup(): PropertyDataTypeLookup {
 		$mockDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$mockDataTypeLookup->method( 'getDataTypeIdForProperty' )
 			->willReturnCallback( function( PropertyId $id ) {
@@ -295,7 +294,7 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 		return $mockDataTypeLookup;
 	}
 
-	private function fixLineEndings( $string ) {
+	private function fixLineEndings( string $string ): string {
 		return preg_replace( '~(*BSR_ANYCRLF)\R~', "\n", $string );
 	}
 

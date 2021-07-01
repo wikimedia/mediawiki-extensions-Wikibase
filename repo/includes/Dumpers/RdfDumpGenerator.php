@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Dumpers;
 
 use InvalidArgumentException;
@@ -39,9 +41,9 @@ class RdfDumpGenerator extends DumpGenerator {
 	private $entityRevisionLookup;
 
 	/**
-	 * @var int Fixed timestamp for tests.
+	 * @var int Fixed timestamp for tests (0 means current time).
 	 */
-	private $timestamp;
+	private $timestamp = 0;
 
 	/**
 	 * @param resource             $out
@@ -68,7 +70,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	/**
 	 * Do something before dumping data
 	 */
-	protected function preDump() {
+	protected function preDump(): void {
 		$this->rdfBuilder->startDocument();
 		$this->rdfBuilder->addDumpHeader( $this->timestamp );
 
@@ -79,7 +81,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	/**
 	 * Do something after dumping data
 	 */
-	protected function postDump() {
+	protected function postDump(): void {
 		$this->rdfBuilder->finishDocument();
 
 		$footer = $this->rdfBuilder->getRDF();
@@ -95,7 +97,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @throws StorageException
 	 * @return string|null RDF
 	 */
-	protected function generateDumpForEntityId( EntityId $entityId ) {
+	protected function generateDumpForEntityId( EntityId $entityId ): ?string {
 		try {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
 
@@ -136,14 +138,11 @@ class RdfDumpGenerator extends DumpGenerator {
 		return $rdf;
 	}
 
-	/**
-	 * @param int $timestamp
-	 */
-	public function setTimestamp( $timestamp ) {
-		$this->timestamp = (int)$timestamp;
+	public function setTimestamp( int $timestamp ): void {
+		$this->timestamp = $timestamp;
 	}
 
-	private static function getRdfWriter( $name, BNodeLabeler $labeler = null ) {
+	private static function getRdfWriter( string $name, BNodeLabeler $labeler = null ) {
 		$factory = new RdfWriterFactory();
 		$format = $factory->getFormatName( $name );
 
@@ -157,12 +156,9 @@ class RdfDumpGenerator extends DumpGenerator {
 	/**
 	 * Get the producer setting for the given flavor.
 	 *
-	 * @param string|null $flavorName
-	 *
-	 * @return int
 	 * @throws InvalidArgumentException
 	 */
-	private static function getFlavorFlags( $flavorName ) {
+	private static function getFlavorFlags( string $flavorName ): int {
 		//Note: RdfProducer::PRODUCE_VERSION_INFO is not needed here as dumps
 		// include that per default.
 
@@ -196,9 +192,9 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @return static
 	 */
 	public static function createDumpGenerator(
-		$format,
+		string $format,
 		$output,
-		$flavor,
+		string $flavor,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityPrefetcher $entityPrefetcher,
 		?BNodeLabeler $labeler,

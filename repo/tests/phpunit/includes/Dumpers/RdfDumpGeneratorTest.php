@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Dumpers;
 
 use HashSiteStore;
@@ -16,6 +18,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevision;
@@ -72,10 +75,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	/**
-	 * @return SiteLookup
-	 */
-	public function getSiteLookup() {
+	public function getSiteLookup(): SiteLookup {
 		$list = [];
 
 		$wiki = new Site();
@@ -112,11 +112,9 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * TODO: move to RdfBuilderTestData?
 	 *
-	 * @param SiteLookup $siteLookup
-	 *
 	 * @return callable[]
 	 */
-	private function getRdfBuilderFactoryCallbacks( SiteLookup $siteLookup ) {
+	private function getRdfBuilderFactoryCallbacks( SiteLookup $siteLookup ): array {
 		return [
 			'item' => function(
 				$flavorFlags,
@@ -233,7 +231,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return callable[]
 	 */
-	private function getStubRdfBuilderFactoryCallbacks() {
+	private function getStubRdfBuilderFactoryCallbacks(): array {
 		return [
 			'property' => function(
 				RdfVocabulary $vocabulary,
@@ -261,7 +259,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	private function getPropertyDataTypeLookup() {
+	private function getPropertyDataTypeLookup(): PropertyDataTypeLookup {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P10' ), 'Wibblywobbly' ); // see phpunit/data/rdf/RdfDumpGenerator
 
@@ -273,10 +271,9 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 	 * @param EntityDocument[] $entities
 	 * @param EntityId[] $redirects
 	 *
-	 * @return RdfDumpGenerator
 	 * @throws MWException
 	 */
-	protected function newDumpGenerator( $flavor, array $entityRevisions = [], array $redirects = [] ) {
+	protected function newDumpGenerator( string $flavor, array $entityRevisions = [], array $redirects = [] ): RdfDumpGenerator {
 		$out = fopen( 'php://output', 'w' );
 
 		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
@@ -340,7 +337,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function idProvider() {
+	public function idProvider(): iterable {
 		$p10 = new PropertyId( 'P10' );
 		$q30 = new ItemId( 'Q30' );
 		$q40 = new ItemId( 'Q40' );
@@ -359,7 +356,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider idProvider
 	 */
-	public function testGenerateDump( array $ids, $flavor, $dumpname ) {
+	public function testGenerateDump( array $ids, string $flavor, string $dumpname ): void {
 		$jsonTest = new JsonDumpGeneratorTest();
 		$entityRevisions = $jsonTest->makeEntityRevisions( $ids );
 		$redirects = [ 'Q4242' => new ItemId( 'Q42' ) ];
@@ -376,7 +373,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 		$this->helper->assertNTriplesEquals( $expected, $actual );
 	}
 
-	public function testReferenceDedup() {
+	public function testReferenceDedup(): void {
 		$entityRevisions = [];
 
 		$entityRevisions['Q7'] = new EntityRevision(
