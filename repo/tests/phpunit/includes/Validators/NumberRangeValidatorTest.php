@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Validators;
 
 use Wikibase\Repo\Validators\NumberRangeValidator;
@@ -46,7 +48,7 @@ class NumberRangeValidatorTest extends \PHPUnit\Framework\TestCase {
 
 			$localizer = new ValidatorErrorLocalizer();
 			$msg = $localizer->getErrorMessage( $errors[0] );
-			$this->assertTrue( $msg->exists(), $msg );
+			$this->assertTrue( $msg->exists(), $msg->getKey() );
 		}
 	}
 

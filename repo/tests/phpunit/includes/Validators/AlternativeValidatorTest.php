@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Validators;
 
 use Wikibase\Repo\Validators\AlternativeValidator;
@@ -47,7 +49,7 @@ class AlternativeValidatorTest extends \PHPUnit\Framework\TestCase {
 
 		foreach ( $errors as $error ) {
 			$msg = $localizer->getErrorMessage( $error );
-			$this->assertTrue( $msg->exists(), $msg );
+			$this->assertTrue( $msg->exists(), $msg->getKey() );
 		}
 	}
 
