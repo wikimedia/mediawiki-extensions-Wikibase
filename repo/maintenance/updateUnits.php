@@ -80,8 +80,7 @@ class UpdateUnits extends Maintenance {
 		if ( !$endPoint ) {
 			$this->fatalError( 'SPARQL endpoint not defined' );
 		}
-		$this->setBaseUri( $this->getOption( 'base-uri',
-			$repoSettings->getSetting( 'conceptBaseUri' ) ) );
+		$this->setBaseUri( $this->getOption( 'base-uri', WikibaseRepo::getItemVocabularyBaseUri() ) );
 		$this->client = new SparqlClient( $endPoint, MediaWikiServices::getInstance()->getHttpRequestFactory() );
 		$this->client->appendUserAgent( __CLASS__ );
 
