@@ -455,6 +455,18 @@
 		},
 
 		/**
+		 * When the input is focused,
+		 * don’t open suggestions again if an entity was already selected.
+		 *
+		 * @protected
+		 *
+		 * @return {boolean}
+		 */
+		_shouldSearch: function () {
+			return this._selectedEntity === null;
+		},
+
+		/**
 		 * @inheritdoc
 		 * @protected
 		 */
