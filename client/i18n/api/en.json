@@ -45,6 +45,7 @@
 	"apihelp-query+pageterms-summary": "Get the {{WBREPONAME}} terms (typically labels, descriptions and aliases) associated with a page via a sitelink.",
 	"apihelp-query+pageterms-example-simple": "Get all terms associated with the page 'London', in the user language.",
 	"apihelp-query+pageterms-example-label-en": "Get labels and aliases associated with the page 'London', in English.",
+	"apihelp-query+pageterms-param-language": "The language code to get terms in. If not specified, the user language is used.",
 	"apihelp-query+pageterms-param-terms": "The types of terms to get, e.g. 'description', each returned as an array of strings keyed by their type, e.g. {\"description\": [\"foo\"]}. If not specified, all types are returned.",
 	"apihelp-query+description-summary": "Get a short description a.k.a. subtitle explaining what the target page is about.",
 	"apihelp-query+description-extended-description": "The description is plain text, on a single line, but otherwise arbitrary (potentially including raw HTML tags, which also should be interpreted as plain text). It must not be used in HTML unescaped!",

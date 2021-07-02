@@ -190,6 +190,7 @@
 	"apihelp-wbsearchentities-example-5": "Search for \"alphabet\" in English language omitting url parameter",
 	"apihelp-wbsearchentities-example-6": "Search for \"Q1234\" in English language, to match the entity ID.",
 	"apihelp-query+entityterms-summary": "Get the terms (labels, descriptions and aliases) of the entity on this page.",
+	"apihelp-query+entityterms-param-language": "The language code to get terms in. If not specified, the user language is used.",
 	"apihelp-query+entityterms-param-terms": "The types of terms to get, e.g. 'description', each returned as an array of strings keyed by their type, e.g. {\"description\": [\"foo\"]}. If not specified, all types are returned.",
 	"apihelp-query+entityterms-example-item": "Get labels and aliases of item Q84.",
 	"apihelp-query+wbcontentlanguages-summary": "Returns information about the content languages Wikibase accepts in different contexts.",

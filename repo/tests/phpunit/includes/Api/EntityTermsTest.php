@@ -15,6 +15,8 @@ use Wikibase\DataAccess\Tests\FakePrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Api\EntityTerms;
 
@@ -121,6 +123,15 @@ class EntityTermsTest extends MediaWikiLangTestCase {
 	}
 
 	/**
+	 * @return ContentLanguages
+	 */
+	private function getContentLanguages() {
+		return new StaticContentLanguages(
+			[ 'de', 'en' ]
+		);
+	}
+
+	/**
 	 * @param array $params
 	 * @param array[] $terms
 	 *
@@ -136,7 +147,8 @@ class EntityTermsTest extends MediaWikiLangTestCase {
 			'entityterms',
 			$termLookup,
 			$this->getEntityIdLookup( $entityIds ),
-			$termLookup
+			$termLookup,
+			$this->getContentLanguages()
 		);
 
 		$module->execute();
@@ -238,12 +250,63 @@ class EntityTermsTest extends MediaWikiLangTestCase {
 			]
 		];
 
+		yield 'with language' => [
+			[
+				'action' => 'query',
+				'prop' => 'entityterms',
+				'titles' => 'Q11|Q22',
+				'wbetlanguage' => 'de',
+				'wbetterms' => 'label|description',
+			],
+			$terms,
+			[
+				11 => [
+					'entityterms' => [
+						'label' => [ 'Q11 de label' ],
+						'description' => [ 'Q11 de description' ],
+					]
+				],
+				22 => [
+					'entityterms' => [
+						'label' => [ 'Q22 de label' ],
+						'description' => [ 'Q22 de description' ],
+					]
+				],
+			]
+		];
+
 		yield 'with uselang' => [
 			[
 				'action' => 'query',
 				'prop' => 'entityterms',
 				'titles' => 'Q11|Q22',
 				'uselang' => 'de',
+				'wbetterms' => 'label|description',
+			],
+			$terms,
+			[
+				11 => [
+					'entityterms' => [
+						'label' => [ 'Q11 de label' ],
+						'description' => [ 'Q11 de description' ],
+					]
+				],
+				22 => [
+					'entityterms' => [
+						'label' => [ 'Q22 de label' ],
+						'description' => [ 'Q22 de description' ],
+					]
+				],
+			]
+		];
+
+		yield 'with language and uselang (language overrides uselang)' => [
+			[
+				'action' => 'query',
+				'prop' => 'entityterms',
+				'titles' => 'Q11|Q22',
+				'wbetlanguage' => 'de',
+				'uselang' => 'en',
 				'wbetterms' => 'label|description',
 			],
 			$terms,

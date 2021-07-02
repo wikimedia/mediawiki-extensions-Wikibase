@@ -16,6 +16,8 @@ use Wikibase\DataAccess\Tests\FakePrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityIdLookup;
 
 /**
@@ -122,6 +124,15 @@ class PageTermsTest extends MediaWikiLangTestCase {
 	}
 
 	/**
+	 * @return ContentLanguages
+	 */
+	private function getContentLanguages() {
+		return new StaticContentLanguages(
+			[ 'de', 'en' ]
+		);
+	}
+
+	/**
 	 * @param array $params
 	 * @param array[] $terms
 	 *
@@ -137,7 +148,8 @@ class PageTermsTest extends MediaWikiLangTestCase {
 			'pageterms',
 			$termLookup,
 			$this->getEntityIdLookup( $entityIds ),
-			$termLookup
+			$termLookup,
+			$this->getContentLanguages()
 		);
 
 		$module->execute();
@@ -239,12 +251,63 @@ class PageTermsTest extends MediaWikiLangTestCase {
 			]
 		];
 
+		yield 'with language' => [
+			[
+				'action' => 'query',
+				'prop' => 'pageterms',
+				'titles' => 'No11|No22',
+				'wbptlanguage' => 'de',
+				'wbptterms' => 'label|description',
+			],
+			$terms,
+			[
+				11 => [
+					'terms' => [
+						'label' => [ 'Q11 de label' ],
+						'description' => [ 'Q11 de description' ],
+					]
+				],
+				22 => [
+					'terms' => [
+						'label' => [ 'Q22 de label' ],
+						'description' => [ 'Q22 de description' ],
+					]
+				],
+			]
+		];
+
 		yield 'with uselang' => [
 			[
 				'action' => 'query',
 				'prop' => 'pageterms',
 				'titles' => 'No11|No22',
 				'uselang' => 'de',
+				'wbptterms' => 'label|description',
+			],
+			$terms,
+			[
+				11 => [
+					'terms' => [
+						'label' => [ 'Q11 de label' ],
+						'description' => [ 'Q11 de description' ],
+					]
+				],
+				22 => [
+					'terms' => [
+						'label' => [ 'Q22 de label' ],
+						'description' => [ 'Q22 de description' ],
+					]
+				],
+			]
+		];
+
+		yield 'with language and uselang (language overrides uselang)' => [
+			[
+				'action' => 'query',
+				'prop' => 'pageterms',
+				'titles' => 'No11|No22',
+				'wbptlanguage' => 'de',
+				'uselang' => 'en',
 				'wbptterms' => 'label|description',
 			],
 			$terms,

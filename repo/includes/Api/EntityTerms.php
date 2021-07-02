@@ -12,6 +12,7 @@ use Title;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\TermIndexEntry;
 
@@ -41,17 +42,24 @@ class EntityTerms extends ApiQueryBase {
 	 */
 	private $idLookup;
 
+	/**
+	 * @var ContentLanguages
+	 */
+	private $termsLanguages;
+
 	public function __construct(
 		ApiQuery $query,
 		string $moduleName,
 		AliasTermBuffer $aliasTermBuffer,
 		EntityIdLookup $idLookup,
-		TermBuffer $termBuffer
+		TermBuffer $termBuffer,
+		ContentLanguages $termsLanguages
 	) {
 		parent::__construct( $query, $moduleName, 'wbet' );
 		$this->aliasTermBuffer = $aliasTermBuffer;
 		$this->termBuffer = $termBuffer;
 		$this->idLookup = $idLookup;
+		$this->termsLanguages = $termsLanguages;
 	}
 
 	public function execute(): void {
@@ -69,11 +77,12 @@ class EntityTerms extends ApiQueryBase {
 
 		$continue = $params['continue'];
 		$termTypes = $params['terms'] ?? TermIndexEntry::$validTermTypes;
+		$languageCode = $params['language'] === 'uselang' ? $this->getLanguage()->getCode() : $params['language'];
 
 		$pagesToEntityIds = $this->getEntityIdsForTitles( $titles, $continue );
 		$entityToPageMap = $this->getEntityToPageMap( $pagesToEntityIds );
 
-		$terms = $this->getTermsOfEntities( $pagesToEntityIds, $termTypes, $this->getLanguage()->getCode() );
+		$terms = $this->getTermsOfEntities( $pagesToEntityIds, $termTypes, $languageCode );
 
 		$termGroups = $this->groupTermsByPageAndType( $entityToPageMap, $terms );
 
@@ -250,6 +259,11 @@ class EntityTerms extends ApiQueryBase {
 			'continue' => [
 				self::PARAM_HELP_MSG => 'api-help-param-continue',
 				self::PARAM_TYPE => 'integer',
+			],
+			'language' => [
+				self::PARAM_HELP_MSG => 'apihelp-query+entityterms-param-language',
+				self::PARAM_DFLT => 'uselang',
+				self::PARAM_TYPE => array_merge( [ 'uselang' ], $this->termsLanguages->getLanguages() ),
 			],
 			'terms' => [
 				self::PARAM_TYPE => TermIndexEntry::$validTermTypes,
