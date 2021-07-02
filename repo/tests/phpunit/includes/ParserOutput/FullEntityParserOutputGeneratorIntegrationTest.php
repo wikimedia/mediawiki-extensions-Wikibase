@@ -68,7 +68,7 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 			new PropertyId( $propertyId ),
 			QuantityValue::newFromNumber(
 				1,
-				WikibaseRepo::getSettings()->getSetting( 'conceptBaseUri' ) . $unitItemId
+				WikibaseRepo::getItemVocabularyBaseUri() . $unitItemId
 			)
 		) );
 

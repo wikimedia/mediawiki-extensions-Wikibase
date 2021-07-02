@@ -141,8 +141,7 @@ class AddUnitConversions extends Maintenance {
 			$this->fatalError( 'SPARQL endpoint should be supplied in config or parameters' );
 		}
 
-		$baseUri = $this->getOption( 'base-uri',
-				$settings->getSetting( 'conceptBaseUri' ) );
+		$baseUri = $this->getOption( 'base-uri', WikibaseRepo::getItemVocabularyBaseUri() );
 
 		$this->client = new SparqlClient( $endPoint, MediaWikiServices::getInstance()->getHttpRequestFactory() );
 		$this->client->appendUserAgent( __CLASS__ );
