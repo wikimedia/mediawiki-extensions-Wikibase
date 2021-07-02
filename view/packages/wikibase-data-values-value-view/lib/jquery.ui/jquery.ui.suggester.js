@@ -311,7 +311,7 @@ $.widget( 'ui.suggester', {
 
 		this.element
 		.on( 'click.suggester', function( event ) {
-			if ( !self.isSearching() ) {
+			if ( !self.isSearching() && self._shouldSearch() ) {
 				self._updateMenuVisibility();
 			}
 		} )
@@ -449,6 +449,20 @@ $.widget( 'ui.suggester', {
 	 */
 	isSearching: function() {
 		return this._searching !== false;
+	},
+
+	/**
+	 * Returns whether a search should start when the input is focused.
+	 *
+	 * Always returns true by default,
+	 * but may be overridden in subclasses to sometimes skip searching.
+	 *
+	 * @protected
+	 *
+	 * @return {boolean}
+	 */
+	_shouldSearch: function() {
+		return true;
 	},
 
 	/**
