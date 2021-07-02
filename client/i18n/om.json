@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ahrada2016",
 			"Hagos",
 			"Maammee",
 			"Oromoo",
@@ -13,6 +14,7 @@
 	"wikibase-editlinks": "Geessituuwwan gulaali",
 	"wikibase-editlinkstitle": "Geessitu afaani gara afaani gulaali",
 	"wikibase-linkitem-addlinks": "Geessituuwwan dabali",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "Dhoksi",
 	"wikibase-rc-hide-wikidata-show": "Agarsiisi",
 	"wikibase-rc-wikibase-edit-letter": "D",
