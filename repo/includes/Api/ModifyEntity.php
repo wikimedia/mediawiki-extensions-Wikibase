@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
@@ -194,11 +195,16 @@ abstract class ModifyEntity extends ApiBase {
 			// TODO: use the EntitySavingHelper to load the entity, instead of an EntityRevisionLookup.
 			// TODO: consolidate with StatementModificationHelper::applyChangeOp
 			// FIXME: this EntityRevisionLookup is uncached, we may be loading the Entity several times!
-			$currentEntityRevision = $this->revisionLookup->getEntityRevision(
-				$entity->getId(),
-				0,
-				 LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK
-			);
+			try {
+				$currentEntityRevision = $this->revisionLookup->getEntityRevision(
+					$entity->getId(),
+					0,
+					LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK
+				);
+			} catch ( RevisionedUnresolvedRedirectException $ex ) {
+				$this->errorReporter->dieException( $ex, 'unresolved-redirect' );
+			}
+
 			if ( $currentEntityRevision ) {
 				$currentEntityResult = $changeOp->validate( $currentEntityRevision->getEntity() );
 				if ( !$currentEntityResult->isValid() ) {
