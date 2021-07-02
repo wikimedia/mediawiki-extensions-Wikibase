@@ -10,6 +10,7 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\TypeDispatchingExistenceChecker;
 
@@ -21,86 +22,48 @@ use Wikibase\Lib\Store\TypeDispatchingExistenceChecker;
  * @license GPL-2.0-or-later
  */
 class TypeDispatchingExistenceCheckerTest extends TestCase {
-
-	/**
-	 * @var array
-	 */
-	private $callbacks;
-
-	/**
-	 * @var MockObject|EntityExistenceChecker
-	 */
-	private $defaultChecker;
-
 	/**
 	 * @var MockObject|EntitySourceLookup
 	 */
 	private $entitySourceLookup;
 
+	/**
+	 * @var MockObject|ServiceBySourceAndTypeDispatcher
+	 */
+	private $serviceBySourceAndTypeDispatcher;
+
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->callbacks = [];
-		$this->defaultChecker = $this->createStub( EntityExistenceChecker::class );
 		$this->entitySourceLookup = $this->createStub( EntitySourceLookup::class );
-	}
-
-	public function testGivenNoExistenceCheckerDefinedForEntityType_usesDefaultChecker() {
-		$entityId = new PropertyId( 'P123' );
-		$exists = true;
-
-		$this->defaultChecker = $this->createMock( EntityExistenceChecker::class );
-		$this->defaultChecker->expects( $this->once() )
-			->method( 'exists' )
-			->with( $entityId )
-			->willReturn( $exists );
-
-		$this->callbacks = [
-			'someSource' => [
-				'item' => function () {
-					return $this->newNeverCalledMockChecker();
-				}
-			],
-		];
-
-		$this->assertSame( $exists, $this->newDispatchingExistenceChecker()->exists( $entityId ) );
+		$this->serviceBySourceAndTypeDispatcher = $this->createStub( ServiceBySourceAndTypeDispatcher::class );
 	}
 
 	public function testGivenExistenceCheckerDefinedForEntitySourceAndType_usesRespectiveExistenceChecker() {
 		$entityId = new PropertyId( 'P321' );
 		$exists = false;
 
-		$this->defaultChecker = $this->newNeverCalledMockChecker();
-
 		$this->entitySourceLookup = $this->createMock( EntitySourceLookup::class );
+		$this->serviceBySourceAndTypeDispatcher = $this->createMock( ServiceBySourceAndTypeDispatcher::class );
 		$propertySourceName = 'propertySource';
-		$this->entitySourceLookup->expects( $this->once() )
+
+		$propertyExistenceChecker = $this->createMock( EntityExistenceChecker::class );
+		$propertyExistenceChecker->expects( $this->once() )
+			->method( 'exists' )
+			->with( $entityId )
+			->willReturn( $exists );
+
+		$this->entitySourceLookup->expects( $this->atLeastOnce() )
 			->method( 'getEntitySourceById' )
 			->with( $entityId )
 			->willReturn( $this->newEntitySourceWithName( $propertySourceName ) );
 
-		$this->callbacks = [
-			$propertySourceName => [
-				'property' => function () use ( $entityId, $exists ) {
-					$propertyExistenceChecker = $this->createMock( EntityExistenceChecker::class );
-					$propertyExistenceChecker->expects( $this->once() )
-						->method( 'exists' )
-						->with( $entityId )
-						->willReturn( $exists );
-
-					return $propertyExistenceChecker;
-				}
-			],
-		];
+		$this->serviceBySourceAndTypeDispatcher->expects( $this->once() )
+			->method( 'getServiceForSourceAndType' )
+			->with( $propertySourceName, 'property' )
+			->willReturn( $propertyExistenceChecker );
 
 		$this->assertSame( $exists, $this->newDispatchingExistenceChecker()->exists( $entityId ) );
-	}
-
-	private function newNeverCalledMockChecker(): EntityExistenceChecker {
-		$existenceChecker = $this->createMock( EntityExistenceChecker::class );
-		$existenceChecker->expects( $this->never() )->method( $this->anything() );
-
-		return $existenceChecker;
 	}
 
 	public function testExistsBatch() {
@@ -108,10 +71,19 @@ class TypeDispatchingExistenceCheckerTest extends TestCase {
 		$propertyIds = [ new PropertyId( 'P123' ), new PropertyId( 'P456' ) ];
 
 		$itemSourceName = 'itemSource';
+		$propertySourceName = 'propertySource';
 		$this->entitySourceLookup = $this->createMock( EntitySourceLookup::class );
+		$this->serviceBySourceAndTypeDispatcher = $this->createMock( ServiceBySourceAndTypeDispatcher::class );
+
 		$this->entitySourceLookup
 			->method( 'getEntitySourceById' )
-			->willReturn( $this->newEntitySourceWithName( $itemSourceName ) );
+			->withConsecutive( [ $itemIds[0] ], [ $itemIds[1] ], [ $propertyIds[0] ], [ $propertyIds[1] ] )
+			->willReturnOnConsecutiveCalls(
+				$this->newEntitySourceWithName( $itemSourceName ),
+				$this->newEntitySourceWithName( $itemSourceName ),
+				$this->newEntitySourceWithName( $propertySourceName ),
+				$this->newEntitySourceWithName( $propertySourceName )
+			);
 
 		$itemChecker = $this->createMock( EntityExistenceChecker::class );
 		$itemChecker->expects( $this->once() )
@@ -119,19 +91,16 @@ class TypeDispatchingExistenceCheckerTest extends TestCase {
 			->with( $itemIds )
 			->willReturn( [ 'Q123' => true, 'Q456' => false ] );
 
-		$this->defaultChecker = $this->createMock( EntityExistenceChecker::class );
-		$this->defaultChecker->expects( $this->once() )
+		$propertyChecker = $this->createMock( EntityExistenceChecker::class );
+		$propertyChecker->expects( $this->once() )
 			->method( 'existsBatch' )
 			->with( $propertyIds )
 			->willReturn( [ 'P123' => true, 'P456' => false ] );
 
-		$this->callbacks = [
-			$itemSourceName => [
-				'item' => function () use ( $itemChecker ) {
-					return $itemChecker;
-				}
-			],
-		];
+		$this->serviceBySourceAndTypeDispatcher->expects( $this->exactly( 2 ) )
+			->method( 'getServiceForSourceAndType' )
+			->withConsecutive( [ $itemSourceName, 'item' ], [ $propertySourceName, 'property' ] )
+			->willReturnOnConsecutiveCalls( $itemChecker, $propertyChecker );
 
 		$result = $this->newDispatchingExistenceChecker()->existsBatch( array_merge( $itemIds, $propertyIds ) );
 
@@ -146,9 +115,8 @@ class TypeDispatchingExistenceCheckerTest extends TestCase {
 
 	private function newDispatchingExistenceChecker(): TypeDispatchingExistenceChecker {
 		return new TypeDispatchingExistenceChecker(
-			$this->callbacks,
-			$this->defaultChecker,
-			$this->entitySourceLookup
+			$this->entitySourceLookup,
+			$this->serviceBySourceAndTypeDispatcher
 		);
 	}
 

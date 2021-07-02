@@ -6,6 +6,7 @@ namespace Wikibase\Lib\Store;
 
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 
 /**
  * @license GPL-2.0-or-later
@@ -13,35 +14,30 @@ use Wikibase\DataModel\Entity\EntityId;
 class TypeDispatchingExistenceChecker implements EntityExistenceChecker {
 
 	/**
-	 * @var callable[][]
-	 */
-	private $callbacks;
-
-	/**
-	 * @var EntityExistenceChecker
-	 */
-	private $defaultExistenceChecker;
-
-	/**
 	 * @var EntitySourceLookup
 	 */
 	private $entitySourceLookup;
 
+	/**
+	 * @var ServiceBySourceAndTypeDispatcher
+	 */
+	private $serviceBySourceAndTypeDispatcher;
+
 	public function __construct(
-		array $callbacks,
-		EntityExistenceChecker $defaultExistenceChecker,
-		EntitySourceLookup $entitySourceLookup
+		EntitySourceLookup $entitySourceLookup,
+		ServiceBySourceAndTypeDispatcher $serviceBySourceAndTypeDispatcher
 	) {
-		$this->callbacks = $callbacks;
-		$this->defaultExistenceChecker = $defaultExistenceChecker;
 		$this->entitySourceLookup = $entitySourceLookup;
+		$this->serviceBySourceAndTypeDispatcher = $serviceBySourceAndTypeDispatcher;
 	}
 
 	public function exists( EntityId $id ): bool {
 		$entitySource = $this->entitySourceLookup->getEntitySourceById( $id );
 
-		return $this->getServiceForSourceAndType( $entitySource->getSourceName(), $id->getEntityType() )
-			->exists( $id );
+		return $this->serviceBySourceAndTypeDispatcher->getServiceForSourceAndType(
+			$entitySource->getSourceName(),
+			$id->getEntityType()
+		)->exists( $id );
 	}
 
 	public function existsBatch( array $ids ): array {
@@ -53,17 +49,11 @@ class TypeDispatchingExistenceChecker implements EntityExistenceChecker {
 		$ret = [];
 		foreach ( $idsBySourceNameAndType as $sourceName => $idsForSource ) {
 			foreach ( $idsForSource as $type => $idsForType ) {
-				$ret += $this->getServiceForSourceAndType( $sourceName, $type )
+				$ret += $this->serviceBySourceAndTypeDispatcher->getServiceForSourceAndType( $sourceName, $type )
 					->existsBatch( $idsForType );
 			}
 		}
 		return $ret;
-	}
-
-	private function getServiceForSourceAndType( string $sourceName, string $entityType ) {
-		return isset( $this->callbacks[$sourceName][$entityType] ) ?
-			$this->callbacks[$sourceName][$entityType]() :
-			$this->defaultExistenceChecker;
 	}
 
 }
