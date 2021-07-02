@@ -175,7 +175,7 @@ use Wikibase\Repo\EntityIdLabelFormatterFactory;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
-use Wikibase\Repo\EntityTypeDefinitionsFedPropsOverrider;
+use Wikibase\Repo\EntityTypesConfigFeddyPropsAugmenter;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\BaseUriExtractor;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesAwareDispatchingEntityIdParser;
@@ -924,9 +924,9 @@ return [
 		$services->getHookContainer()->run( 'WikibaseRepoEntityTypes', [ &$entityTypes ] );
 
 		$settings = WikibaseRepo::getSettings( $services );
-		$overrider = EntityTypeDefinitionsFedPropsOverrider::factory( $settings->getSetting( 'federatedPropertiesEnabled' ) );
+		$augmenter = EntityTypesConfigFeddyPropsAugmenter::factory( $settings->getSetting( 'federatedPropertiesEnabled' ) );
 
-		$apiEntityTypeDefinitions = new EntityTypeDefinitions( $overrider->override( $entityTypes ) );
+		$apiEntityTypeDefinitions = new EntityTypeDefinitions( $augmenter->override( $entityTypes ) );
 		$dbEntityTypeDefinitions = new EntityTypeDefinitions( $entityTypes );
 
 		return new EntitySourceAndTypeDefinitions(
@@ -1013,11 +1013,6 @@ return [
 		$entityTypes = array_merge_recursive( $baseEntityTypes, $repoEntityTypes );
 
 		$services->getHookContainer()->run( 'WikibaseRepoEntityTypes', [ &$entityTypes ] );
-
-		$settings = WikibaseRepo::getSettings( $services );
-		$overrider = EntityTypeDefinitionsFedPropsOverrider::factory( $settings->getSetting( 'federatedPropertiesEnabled' ) );
-
-		$entityTypes = $overrider->override( $entityTypes );
 
 		return new EntityTypeDefinitions( $entityTypes );
 	},

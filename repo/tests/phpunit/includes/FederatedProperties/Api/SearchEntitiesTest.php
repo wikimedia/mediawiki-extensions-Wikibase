@@ -19,6 +19,7 @@ namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 class SearchEntitiesTest extends FederatedPropertiesApiTestCase {
 
 	public function testFederatedPropertiesFailure() {
+		$this->markTestSkipped( 'Will be revisited. see: T286060' );
 		$this->setSourceWikiUnavailable();
 
 		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-search-api-error-message' ) );

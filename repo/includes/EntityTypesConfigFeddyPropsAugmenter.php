@@ -15,12 +15,11 @@ use function wfArrayPlus2d;
  *
  * @license GPL-2.0-or-later
  */
-class EntityTypeDefinitionsFedPropsOverrider {
+class EntityTypesConfigFeddyPropsAugmenter {
 	private $fedPropsEntityTypeDefinitions;
 	private $fedPropsEnabled;
 
 	/**
-	 * EntityTypeDefinitionsFedPropsOverrider constructor.
 	 * @param array $fedPropsEntityTypeDefinitions
 	 * @param bool $fedPropsEnabled
 	 */
@@ -44,7 +43,7 @@ class EntityTypeDefinitionsFedPropsOverrider {
 	}
 
 	public static function factory( bool $federatedPropertiesEnabled ): self {
-		return new EntityTypeDefinitionsFedPropsOverrider(
+		return new EntityTypesConfigFeddyPropsAugmenter(
 			require __DIR__ . '/../WikibaseRepo.FederatedProperties.entitytypes.php',
 			$federatedPropertiesEnabled
 		);
