@@ -9,21 +9,14 @@
  * @license GPL-2.0-or-later
  */
 
-if ( !defined( 'MEDIAWIKI' ) ) {
-	die( "Not an entry point.\n" );
+if ( function_exists( 'wfLoadExtension' ) ) {
+	wfLoadExtension( 'WikibaseClient', __DIR__ . '/../extension-client.json' );
+	wfWarn(
+		'Deprecated PHP entry point used for Wikibase Client extension. ' .
+		'Please use wfLoadExtension instead, see' .
+		'https://www.mediawiki.org/wiki/Extension_registration for more details.'
+	);
+	return true;
 }
 
-// load parts already converted to extension registration
-wfLoadExtension( 'WikibaseClient', __DIR__ . '/../extension-client.json' );
-
-call_user_func( function() {
-	global $wgExtensionMessagesFiles,
-		$wgMessagesDirs;
-
-	// i18n messages, kept for backward compatibility (T256245)
-	$wgMessagesDirs['wikibaseclient'] = __DIR__ . '/i18n';
-	$wgMessagesDirs['wikibaseclientapi'] = __DIR__ . '/i18n/api';
-	$wgMessagesDirs['WikibaseLib'] = __DIR__ . '/../lib/i18n';
-	$wgExtensionMessagesFiles['Wikibaseclientalias'] = __DIR__ . '/WikibaseClient.i18n.alias.php';
-	$wgExtensionMessagesFiles['wikibaseclientmagic'] = __DIR__ . '/WikibaseClient.i18n.magic.php';
-} );
+die( 'This version of the Wikibase client extension requires MediaWiki 1.35+' );
