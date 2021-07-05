@@ -126,7 +126,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
-			[ 'P342#L.de', 'Q32487#O', 'Q32487#C.P342' ],
+			[ 'P342#L.de', 'Q32487#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -138,7 +138,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
-			[ 'Q32487#O', 'Q32487#C.P342' ],
+			[ 'Q32487#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -150,7 +150,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
-			[ 'Q32488#O', 'Q32488#C.P342' ],
+			[ 'Q32488#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -165,7 +165,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
-			[ 'Q32489#O', 'Q32489#C.P342' ],
+			[ 'Q32489#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -177,7 +177,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
-			[ 'Q1234567#O', 'Q1234567#C.P342' ],
+			[ 'Q1234567#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -202,7 +202,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
-			[ 'Q999#O', 'Q999#C.P666' ],
+			[ 'Q999#C.P666' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -217,7 +217,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
-			[ 'Q32487#O' ], // 'Q32487#C.P2147483645' is not tracked, as P2147483645 doesn't exist
+			[], // 'Q32487#C.P2147483645' is not tracked, as P2147483645 doesn't exist
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}

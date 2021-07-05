@@ -8,7 +8,9 @@ use Title;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 use WikitextContent;
 
@@ -108,19 +110,22 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testUpdateUsage() {
+		// Create property
+		$propertyIdString = $this->storeNewProperty()->getSerialization();
+
 		// Create a new page that uses Q11.
 		$text = "Just some text\n";
-		$text .= "using a property: {{#property:doesNotExist|from=Q11}}\n";
+		$text .= "using a property: {{#property:$propertyIdString|from=Q11}}\n";
 		$this->updatePage( $this->articleTitle, $text );
 
 		// Check that the usage of Q11 is tracked.
 		$expected = [
-			new EntityUsage( new ItemId( 'Q11' ), EntityUsage::OTHER_USAGE ),
+			new EntityUsage( new ItemId( 'Q11' ), EntityUsage::STATEMENT_USAGE, $propertyIdString ),
 		];
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
 
 		// Create the template we'll use below.
-		$text = "{{#property:doesNotExist|from=Q22}}\n";
+		$text = "{{#property:$propertyIdString|from=Q22}}\n";
 		$this->updatePage( $this->templateTitle, $text );
 
 		// Change page content to use the template instead of {{#property}} directly.
@@ -131,18 +136,18 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		// Check that Q22, used via the template, is now tracked.
 		// Check that Q11 is no longer tracked, due to timestamp-based pruning.
 		$expected = [
-			new EntityUsage( new ItemId( 'Q22' ), EntityUsage::OTHER_USAGE ),
+			new EntityUsage( new ItemId( 'Q22' ), EntityUsage::STATEMENT_USAGE, $propertyIdString ),
 		];
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
 
 		// Change the template to use Q33.
-		$text = "{{#property:doesNotExist|from=Q33}}\n";
+		$text = "{{#property:$propertyIdString|from=Q33}}\n";
 		$this->updatePage( $this->templateTitle, $text );
 
 		// Check that Q33, now used via the template, is tracked.
 		// Check that Q22 is no longer tracked, due to timestamp-based pruning.
 		$expected = [
-			new EntityUsage( new ItemId( 'Q33' ), EntityUsage::OTHER_USAGE ),
+			new EntityUsage( new ItemId( 'Q33' ), EntityUsage::STATEMENT_USAGE, $propertyIdString ),
 		];
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
 
@@ -151,6 +156,14 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 
 		// Make sure tracking has been removed for all usages on the deleted page.
 		$this->assertTrackedUsages( [], $this->articleTitle );
+	}
+
+	protected function storeNewProperty() {
+		$store = WikibaseRepo::getEntityStore();
+
+		$property = Property::newFromType( 'string' );
+		$entityRevision = $store->saveEntity( $property, 'testing', $this->getTestUser()->getUser(), EDIT_NEW );
+		return $entityRevision->getEntity()->getId();
 	}
 
 	/**
