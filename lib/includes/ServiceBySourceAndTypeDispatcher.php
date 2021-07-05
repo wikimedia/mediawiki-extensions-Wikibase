@@ -16,7 +16,7 @@ class ServiceBySourceAndTypeDispatcher {
 	private $callbacks;
 
 	/**
-	 * Map of entity types to services that were created by the respective callback
+	 * Map of entity source names and types to services that were created by the respective callback
 	 * @var array[]
 	 */
 	private $services;
@@ -25,8 +25,8 @@ class ServiceBySourceAndTypeDispatcher {
 	private $serviceType;
 
 	/**
-	 * @param string $type type of the dispatched services, i.e. type of the default service and the return value of the callbacks
-	 * @param array[][] $callbacks map of entity types to callbacks creating the service to be used
+	 * @param string $type type of the dispatched services, i.e. type of the return value of the callbacks
+	 * @param array[][] $callbacks map of entity source names and types to callbacks creating the service to be used
 	 */
 	public function __construct( string $type, array $callbacks ) {
 		Assert::parameterElementType( 'array', $callbacks, '$callbacks' );
