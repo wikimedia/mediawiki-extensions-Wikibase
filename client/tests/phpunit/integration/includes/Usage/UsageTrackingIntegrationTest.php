@@ -6,7 +6,10 @@ use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\WikibaseSettings;
 use WikiPage;
 use WikitextContent;
@@ -56,6 +59,15 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		$this->oldEntityNamespaces = WikibaseClient::getEntityNamespaceLookup()->getEntityNamespaces();
 		$settings->setSetting( 'allowDataTransclusion', true );
 		$settings->setSetting( 'entityNamespaces', [ 'item' => 0 ] );
+
+		$entityLookup = $this->createMock( EntityLookup::class );
+		$entityLookup->method( 'hasEntity' )
+			->willReturnCallback( static function ( EntityId $id ) {
+				// statement usage is only tracked for existing properties,
+				// so pretend all properties exist
+				return $id instanceof PropertyId;
+			} );
+		$this->setService( 'WikibaseClient.EntityLookup', $entityLookup );
 
 		$ns = $this->getDefaultWikitextNS();
 		$this->articleTitle = Title::makeTitle( $ns, 'UsageTrackingIntegrationTest_Article' );
@@ -109,17 +121,17 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 	public function testUpdateUsage() {
 		// Create a new page that uses Q11.
 		$text = "Just some text\n";
-		$text .= "using a property: {{#property:doesNotExist|from=Q11}}\n";
+		$text .= "using a property: {{#property:P123|from=Q11}}\n";
 		$this->updatePage( $this->articleTitle, $text );
 
 		// Check that the usage of Q11 is tracked.
 		$expected = [
-			new EntityUsage( new ItemId( 'Q11' ), EntityUsage::OTHER_USAGE ),
+			new EntityUsage( new ItemId( 'Q11' ), EntityUsage::STATEMENT_USAGE, 'P123' ),
 		];
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
 
 		// Create the template we'll use below.
-		$text = "{{#property:doesNotExist|from=Q22}}\n";
+		$text = "{{#property:P123|from=Q22}}\n";
 		$this->updatePage( $this->templateTitle, $text );
 
 		// Change page content to use the template instead of {{#property}} directly.
@@ -130,18 +142,18 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		// Check that Q22, used via the template, is now tracked.
 		// Check that Q11 is no longer tracked, due to timestamp-based pruning.
 		$expected = [
-			new EntityUsage( new ItemId( 'Q22' ), EntityUsage::OTHER_USAGE ),
+			new EntityUsage( new ItemId( 'Q22' ), EntityUsage::STATEMENT_USAGE, 'P123' ),
 		];
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
 
 		// Change the template to use Q33.
-		$text = "{{#property:doesNotExist|from=Q33}}\n";
+		$text = "{{#property:P123|from=Q33}}\n";
 		$this->updatePage( $this->templateTitle, $text );
 
 		// Check that Q33, now used via the template, is tracked.
 		// Check that Q22 is no longer tracked, due to timestamp-based pruning.
 		$expected = [
-			new EntityUsage( new ItemId( 'Q33' ), EntityUsage::OTHER_USAGE ),
+			new EntityUsage( new ItemId( 'Q33' ), EntityUsage::STATEMENT_USAGE, 'P123' ),
 		];
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
 

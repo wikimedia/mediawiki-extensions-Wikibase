@@ -93,9 +93,6 @@ class StatementTransclusionInteractor {
 			return '';
 		}
 
-		// Currently statement usage implies other usage.
-		$this->usageAccumulator->addOtherUsage( $entityId );
-
 		// If the entity doesn't exist, we just want to resolve the property id
 		// for usage tracking purposes, so don't let the exception bubble up.
 		$shouldThrow = $entity !== null;
