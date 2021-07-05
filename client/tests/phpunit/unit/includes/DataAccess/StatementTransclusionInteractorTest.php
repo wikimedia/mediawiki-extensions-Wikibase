@@ -63,7 +63,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $result );
 
 		$this->assertEquals(
-			[ 'Q42#O', 'Q42#C.P1337' ],
+			[ 'Q42#C.P1337' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -86,7 +86,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $exceptionThrown, 'PropertyLabelNotResolvedException exception thrown' );
 
 		$this->assertEquals(
-			[ 'Q42#O' ],
+			[],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -100,7 +100,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( '', $renderer->render( new ItemId( 'Q42' ), 'P1337' ) );
 
 		$this->assertEquals(
-			[ 'Q42#O', 'Q42#C.P1337' ],
+			[ 'Q42#C.P1337' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -117,7 +117,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( '', $renderer->render( new ItemId( 'Q43' ), 'P1337' ) );
 
 		$this->assertEquals(
-			[ 'Q43#O', 'Q43#C.P1337' ],
+			[ 'Q43#C.P1337' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -134,7 +134,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( '', $renderer->render( new ItemId( 'Q43333' ), 'P1337' ) );
 
 		$this->assertEquals(
-			[ 'Q43333#O', 'Q43333#C.P1337' ],
+			[ 'Q43333#C.P1337' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}

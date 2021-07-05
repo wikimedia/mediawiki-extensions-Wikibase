@@ -213,7 +213,6 @@ class EntityAccessor {
 
 		$propertyId = new PropertyId( $propertyIdSerialization );
 		$this->usageAccumulator->addStatementUsage( $entityId, $propertyId );
-		$this->usageAccumulator->addOtherUsage( $entityId );
 
 		try {
 			$entity = $this->entityLookup->getEntity( $entityId );
