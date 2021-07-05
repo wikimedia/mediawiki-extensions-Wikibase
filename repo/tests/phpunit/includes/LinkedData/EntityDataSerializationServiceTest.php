@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\LinkedData;
 
 use DataValues\Serializers\DataValueSerializer;
@@ -57,10 +59,8 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 	 * - Redirect Q2233 -> Q23
 	 * - Redirect Q222333 -> Q23
 	 * - Property P5 (item reference)
-	 *
-	 * @return MockRepository
 	 */
-	private function getMockRepository() {
+	private function getMockRepository(): MockRepository {
 		$mockRepo = new MockRepository();
 
 		$p5 = new Property( new PropertyId( 'P5' ), null, 'wikibase-item' );
@@ -88,7 +88,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		return $mockRepo;
 	}
 
-	private function newService() {
+	private function newService(): EntityDataSerializationService {
 		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$dataTypeLookup->method( 'getDataTypeIdForProperty' )
 			->willReturn( 'wikibase-item' );
@@ -158,7 +158,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function provideGetSerializedData() {
+	public function provideGetSerializedData(): iterable {
 		$mockRepo = $this->getMockRepository();
 		$entityRevQ42 = $mockRepo->getEntityRevision( new ItemId( 'Q42' ) );
 		$entityRevQ23 = $mockRepo->getEntityRevision( new ItemId( 'Q23' ) );
@@ -412,15 +412,15 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideGetSerializedData
 	 */
 	public function testGetSerializedData(
-		$format,
+		string $format,
 		EntityRevision $entityRev,
 		?RedirectRevision $followedRedirect,
 		array $incomingRedirects,
-		$flavor,
+		?string $flavor,
 		array $expectedDataExpressions,
 		array $unexpectedDataExpressions,
-		$expectedMimeType
-	) {
+		string $expectedMimeType
+	): void {
 		$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $this->getMockPropertyDataTypeLookup() );
 		$inMemoryTermLookup = new InMemoryPrefetchingTermLookup();
 		$p5 = new PropertyId( 'P5' );
@@ -449,10 +449,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	/**
-	 * @return PropertyDataTypeLookup
-	 */
-	private function getMockPropertyDataTypeLookup() {
+	private function getMockPropertyDataTypeLookup(): PropertyDataTypeLookup {
 		$mockDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$mockDataTypeLookup->method( 'getDataTypeIdForProperty' )
 			->willReturnCallback( function( PropertyId $id ) {

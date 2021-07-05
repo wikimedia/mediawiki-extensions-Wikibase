@@ -1,23 +1,18 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Rdf;
 
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use SiteLookup;
-use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Rdf\DedupeBag;
@@ -82,60 +77,6 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @return EntityTitleLookup
-	 */
-	private function getEntityTitleLookup() {
-		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
-		$entityTitleLookup->method( 'getTitleForId' )
-			->willReturnCallback( function ( EntityId $entityId ) {
-				return Title::newFromTextThrow( $entityId->getSerialization() );
-			} );
-
-		return $entityTitleLookup;
-	}
-
-	/**
-	 * @return PropertyDataTypeLookup
-	 */
-	private function getPropertyDataTypeLookup() {
-		$dataTypeLookup = new InMemoryDataTypeLookup();
-		 // see phpunit/data/rdf/entities and rdf/RdfBuilder
-		for ( $i = 2; $i <= 11; $i++ ) {
-			$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P' . $i ), 'string' );
-		}
-
-		return $dataTypeLookup;
-	}
-
-	/**
-	 * @return PrefetchingTermLookup
-	 */
-	private function getPrefetchingTermLookup() {
-		$prefetchingLookup = $this->createMock( PrefetchingTermLookup::class );
-		// This should not be hardcoded here. Should be somehow part of RdfBuilderTestData.
-		$prefetchingLookup->method( 'getLabels' )
-			->willReturnCallback( function( EntityId $entityId ) {
-				$terms = [
-					"P2" => [ "en" => "Property2" ],
-					"P3" => [ "en" => "Property3" ],
-					"P4" => [ "en" => "Property4" ],
-					"P5" => [ "en" => "Property5" ],
-					"P6" => [ "en" => "Property6" ],
-					"P7" => [ "en" => "Property7" ],
-					"P8" => [ "en" => "Property8" ],
-					"P9" => [ "en" => "Property9" ],
-					"P10" => [ "en" => "Property10" ],
-					"P11" => [ "en" => "Property11" ],
-					"Q2" => [ "en" => "Q2" ]
-				];
-				return $terms[ $entityId->getSerialization() ];
-			} );
-
-		$prefetchingLookup->method( 'getDescriptions' )->willReturn( [] );
-		return $prefetchingLookup;
-	}
-
-	/**
 	 * Returns the mapping of entity types used in tests to callbacks instantiating EntityRdfBuilder
 	 * instances, that are configured to use services configured for test purposes (e.g. SiteLookup).
 	 *
@@ -147,7 +88,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return callable[]
 	 */
-	private function getRdfBuilderFactoryCallbacks( SiteLookup $siteLookup ) {
+	private function getRdfBuilderFactoryCallbacks( SiteLookup $siteLookup ): array {
 		return [
 			'item' => function(
 				$flavorFlags,
@@ -264,7 +205,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return callable[]
 	 */
-	private function getStubRdfBuilderFactoryCallbacks() {
+	private function getStubRdfBuilderFactoryCallbacks(): array {
 		return [
 			'item' => function(
 				RdfVocabulary $vocabulary,
@@ -308,14 +249,12 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	 * @param int           $produce One of the RdfProducer::PRODUCE_... constants.
 	 * @param DedupeBag     $dedup
 	 * @param RdfVocabulary $vocabulary
-	 *
-	 * @return RdfBuilder
 	 */
 	private function newRdfBuilder(
-		$produce,
+		int $produce,
 		DedupeBag $dedup = null,
 		RdfVocabulary $vocabulary = null
-	) {
+	): RdfBuilder {
 		if ( $dedup === null ) {
 			$dedup = new HashDedupeBag();
 		}
@@ -354,16 +293,12 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * Load entity from JSON
-	 *
-	 * @param string $idString
-	 *
-	 * @return EntityDocument
 	 */
-	public function getEntityData( $idString ) {
+	public function getEntityData( string $idString ): EntityDocument {
 		return $this->getTestData()->getEntity( $idString );
 	}
 
-	public function provideAddEntity() {
+	public function provideAddEntity(): iterable {
 		$rdfTests = [
 			[ 'Q1', 'Q1_info' ],
 			[ 'Q2', [ 'Q2_meta', 'Q2_version', 'Q2_stub', 'Q2_aliases' ] ],
@@ -410,7 +345,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideAddEntity
 	 */
-	public function testAddEntity( $entityName, $dataSetNames ) {
+	public function testAddEntity( string $entityName, $dataSetNames ): void {
 		$entity = $this->getEntityData( $entityName );
 
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL );
@@ -420,7 +355,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$this->helper->assertNTriplesEqualsDataset( $dataSetNames, $builder->getRDF() );
 	}
 
-	public function testAddEntityStub() {
+	public function testAddEntityStub(): void {
 		$entityId = $this->getEntityData( 'Q2' )->getId();
 		$builder = $this->newRdfBuilder(
 			RdfProducer::PRODUCE_ALL_STATEMENTS |
@@ -436,7 +371,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$this->helper->assertNTriplesEqualsDataset( [ 'Q2_stub' ], $builder->getRDF() );
 	}
 
-	public function testAddSubEntity() {
+	public function testAddSubEntity(): void {
 		$mainEntity = $this->getEntityData( 'Q2' );
 		$subEntity = $this->getEntityData( 'Q3' );
 
@@ -452,7 +387,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testAddEntityRedirect() {
+	public function testAddEntityRedirect(): void {
 		$builder = self::newRdfBuilder( 0 );
 
 		$q1 = new ItemId( 'Q1' );
@@ -464,7 +399,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$this->helper->assertNTriplesEquals( $expected, $builder->getRDF() );
 	}
 
-	public function getProduceOptions() {
+	public function getProduceOptions(): iterable {
 		return [
 			[
 				'Q4_no_prefixed_ids',
@@ -537,7 +472,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider getProduceOptions
 	 */
-	public function testRdfOptions( $entityName, $produceOption, $dataSetNames ) {
+	public function testRdfOptions( string $entityName, int $produceOption, $dataSetNames ): void {
 		$entity = $this->getEntityData( $entityName );
 		$builder = $this->newRdfBuilder( $produceOption );
 		$builder->addEntity( $entity );
@@ -546,14 +481,14 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$this->helper->assertNTriplesEqualsDataset( $dataSetNames, $builder->getRDF() );
 	}
 
-	public function testDumpHeader() {
+	public function testDumpHeader(): void {
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_VERSION_INFO );
 		$builder->addDumpHeader( 1426110695 );
 		$dataSetNames = 'dumpheader';
 		$this->helper->assertNTriplesEqualsDataset( $dataSetNames, $builder->getRDF() );
 	}
 
-	public function testDeduplication() {
+	public function testDeduplication(): void {
 		$bag = new HashDedupeBag();
 
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, $bag );
@@ -567,7 +502,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$this->helper->assertNTriplesEqualsDataset( 'Q7_Q9_dedup_foreignsource_properties', $data1 . $data2 );
 	}
 
-	public function getProps() {
+	public function getProps(): iterable {
 		return [
 			'simple prop' => [
 				'prop1',
@@ -621,7 +556,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	 * @param string $name Datafile name
 	 * @param array $props Property config
 	 */
-	public function testPageProps( $name, $props ) {
+	public function testPageProps( string $name, array $props ): void {
 		$vocab = new RdfVocabulary(
 			[ '' => RdfBuilderTestData::URI_BASE ],
 			[ '' => RdfBuilderTestData::URI_DATA ],
@@ -646,7 +581,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$this->helper->assertNTriplesEqualsDataset( $name, $data );
 	}
 
-	public function testPagePropsNone() {
+	public function testPagePropsNone(): void {
 		// Props disabled by flag
 		$props = [
 			'claims' => [ 'name' => 'rdf-claims' ]

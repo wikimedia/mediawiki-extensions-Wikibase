@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Maintenance;
 
 use MediaWiki\MediaWikiServices;
@@ -62,7 +64,7 @@ class DumpRdf extends DumpEntities {
 		EntityPrefetcher $entityPrefetcher,
 		EntityRevisionLookup $entityRevisionLookup,
 		RdfBuilderFactory $rdfBuilderFactory
-	) {
+	): void {
 		parent::setDumpEntitiesServices(
 			$sqlEntityIdPagerFactory,
 			$existingEntityTypes,
@@ -74,7 +76,7 @@ class DumpRdf extends DumpEntities {
 		$this->rdfBuilderFactory = $rdfBuilderFactory;
 	}
 
-	public function execute() {
+	public function execute(): void {
 		if ( !$this->hasHadServicesSet ) {
 			$mwServices = MediaWikiServices::getInstance();
 
@@ -117,10 +119,8 @@ class DumpRdf extends DumpEntities {
 	 * Create concrete dumper instance
 	 *
 	 * @param resource $output
-	 *
-	 * @return DumpGenerator
 	 */
-	protected function createDumper( $output ) {
+	protected function createDumper( $output ): DumpGenerator {
 		$flavor = $this->getOption( 'flavor', 'full-dump' );
 		if ( !in_array( $flavor, [ 'full-dump', 'truthy-dump' ] ) ) {
 			$this->fatalError( 'Invalid flavor: ' . $flavor );

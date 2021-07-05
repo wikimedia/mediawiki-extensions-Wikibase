@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\LinkedData;
 
 use ApiFormatBase;
@@ -112,12 +114,12 @@ class EntityDataSerializationService {
 	 * @throws MWException
 	 */
 	public function getSerializedData(
-		$format,
+		string $format,
 		EntityRevision $entityRevision,
 		RedirectRevision $followedRedirect = null,
 		array $incomingRedirects = [],
-		$flavor = null
-	) {
+		?string $flavor = null
+	): array {
 
 		$formatName = $this->entityDataFormatProvider->getFormatName( $format );
 
@@ -160,8 +162,8 @@ class EntityDataSerializationService {
 		?RedirectRevision $followedRedirect,
 		array $incomingRedirects,
 		RdfBuilder $rdfBuilder,
-		$flavor = null
-	) {
+		?string $flavor = null
+	): string {
 		$rdfBuilder->startDocument();
 		$redir = null;
 
@@ -219,7 +221,7 @@ class EntityDataSerializationService {
 		?EntityRedirect $followedRedirect,
 		array $incomingRedirects,
 		RdfBuilder $rdfBuilder
-	) {
+	): void {
 		foreach ( $incomingRedirects as $rId ) {
 			// don't add the followed redirect again
 			if ( !$followedRedirect || !$followedRedirect->getEntityId()->equals( $rId ) ) {
@@ -232,10 +234,8 @@ class EntityDataSerializationService {
 	 * Returns an ApiMain module that acts as a context for the formatting and serialization.
 	 *
 	 * @param string $format The desired output format, as a format name that ApiBase understands.
-	 *
-	 * @return ApiMain
 	 */
-	private function newApiMain( $format ) {
+	private function newApiMain( string $format ): ApiMain {
 		// Fake request params to ApiMain, with forced format parameters.
 		// We can override additional parameters here, as needed.
 		$params = [
@@ -260,11 +260,11 @@ class EntityDataSerializationService {
 	 * @return ApiFormatBase|null A suitable result printer, or null
 	 *           if the given format is not supported by the API.
 	 */
-	private function createApiSerializer( $formatName ) {
+	private function createApiSerializer( string $formatName ): ?ApiFormatBase {
 		//MediaWiki formats
 		$api = $this->newApiMain( $formatName );
 		$formatNames = $api->getModuleManager()->getNames( 'format' );
-		if ( $formatName !== null && in_array( $formatName, $formatNames ) ) {
+		if ( in_array( $formatName, $formatNames ) ) {
 			return $api->createPrinterByName( $formatName );
 		}
 
@@ -274,12 +274,9 @@ class EntityDataSerializationService {
 	/**
 	 * Get the producer setting for current data format
 	 *
-	 * @param string|null $flavorName
-	 *
-	 * @return int
 	 * @throws MWException
 	 */
-	private function getFlavor( $flavorName ) {
+	private function getFlavor( ?string $flavorName ): int {
 		switch ( $flavorName ) {
 			case 'simple':
 				return RdfProducer::PRODUCE_TRUTHY_STATEMENTS
@@ -318,7 +315,7 @@ class EntityDataSerializationService {
 	 * @return RdfBuilder|null A suitable result printer, or null
 	 *   if the given format is not supported.
 	 */
-	private function createRdfBuilder( $format, $flavorName = null ) {
+	private function createRdfBuilder( string $format, ?string $flavorName ): ?RdfBuilder {
 		$canonicalFormat = $this->rdfWriterFactory->getFormatName( $format );
 
 		if ( !$canonicalFormat ) {
@@ -340,10 +337,8 @@ class EntityDataSerializationService {
 	 * @param ApiFormatBase $printer The output printer that will be used for serialization.
 	 *   Used to provide context for generating the ApiResult, and may also be manipulated
 	 *   to fine-tune the output.
-	 *
-	 * @return ApiResult
 	 */
-	private function generateApiResult( EntityRevision $entityRevision, ApiFormatBase $printer ) {
+	private function generateApiResult( EntityRevision $entityRevision, ApiFormatBase $printer ): ApiResult {
 		$res = $printer->getResult();
 
 		// Make sure result is empty. May still be full if this
@@ -379,7 +374,7 @@ class EntityDataSerializationService {
 	private function getApiSerialization(
 		EntityRevision $entityRevision,
 		ApiFormatBase $printer
-	) {
+	): string {
 		// NOTE: The way the ApiResult is provided to $printer is somewhat
 		//       counter-intuitive. Basically, the relevant ApiResult object
 		//       is owned by the ApiMain module provided by newApiMain().
