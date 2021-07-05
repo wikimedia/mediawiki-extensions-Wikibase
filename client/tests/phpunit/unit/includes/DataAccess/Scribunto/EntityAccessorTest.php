@@ -253,7 +253,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSameSize( $expected, $actual );
 		$this->assertEquals( $expected, $actual );
 
-		$this->assertEquals( [ 'Q123099#C.P65', 'Q123099#O' ], array_keys( $usages->getUsages() ) );
+		$this->assertEquals( [ 'Q123099#C.P65' ], array_keys( $usages->getUsages() ) );
 		$this->assertFalse(
 			$this->hasUsage( $usages->getUsages(), $item->getId(), EntityUsage::ALL_USAGE ), 'all usage'
 		);
