@@ -137,7 +137,6 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		} else {
 			$this->assertArrayHasKey( 'Q885588#L.de', $usages );
 		}
-		$this->assertArrayHasKey( 'Q32488#O', $usages );
 		$this->assertArrayHasKey( 'Q32488#C.P456', $usages );
 
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
@@ -196,7 +195,6 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		} else {
 			$this->assertArrayHasKey( 'Q885588#L.de', $usages );
 		}
-		$this->assertArrayHasKey( 'Q32488#O', $usages );
 		$this->assertArrayHasKey( 'Q32488#C.P456', $usages );
 
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
