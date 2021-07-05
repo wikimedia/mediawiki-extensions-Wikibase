@@ -132,7 +132,7 @@ class SpecialUnconnectedPages extends QueryPage {
 				// Could even filter or sort by it via pp_sortkey.
 				'page_props' => [
 					'LEFT JOIN',
-					[ 'page_id = pp_page', "pp_propname = 'wikibase_item'" ]
+					[ 'page_id = pp_page', 'pp_propname' => [ 'wikibase_item', 'expectedUnconnectedPage' ] ]
 				],
 			]
 		];

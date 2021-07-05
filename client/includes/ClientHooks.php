@@ -155,6 +155,10 @@ final class ClientHooks {
 		];
 	}
 
+	public static function onGetDoubleUnderscoreIDs( &$doubleUnderscoreIDs ) {
+		$doubleUnderscoreIDs[] = 'expectedUnconnectedPage';
+	}
+
 	/**
 	 * Add morelikewithwikibase keyword.
 	 * @param $config
