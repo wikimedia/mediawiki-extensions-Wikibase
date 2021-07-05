@@ -6,7 +6,6 @@ use Language;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\DataModel\Snak\Snak;
@@ -93,16 +92,21 @@ class StatementTransclusionInteractor {
 			return '';
 		}
 
-		// If the entity doesn't exist, we just want to resolve the property id
-		// for usage tracking purposes, so don't let the exception bubble up.
-		$shouldThrow = $entity !== null;
+		try {
+			$propertyId = $this->propertyIdResolver->resolvePropertyId(
+				$propertyLabelOrId,
+				$this->language->getCode()
+			);
 
-		$propertyId = $this->resolvePropertyId( $propertyLabelOrId, $shouldThrow );
-
-		if ( $propertyId ) {
-			// XXX: This means we only track a statement usage if the property id /label
+			// This means we only track a statement usage if the property ID/label
 			// can be resolved. This requires the property to exist!
 			$this->usageAccumulator->addStatementUsage( $entityId, $propertyId );
+		} catch ( PropertyLabelNotResolvedException $propertyLabelNotResolvedException ) {
+			// If the entity doesn't exist, we just want to resolve the property id
+			// for usage tracking purposes, so don't let the exception bubble up.
+			if ( $entity !== null ) {
+				throw $propertyLabelNotResolvedException;
+			}
 		}
 
 		if ( $entity === null ) {
@@ -116,31 +120,6 @@ class StatementTransclusionInteractor {
 		);
 
 		return $this->formatSnaks( $snaks );
-	}
-
-	/**
-	 * @param string $propertyLabelOrId property label or ID (Pxxx)
-	 * @param bool $shouldThrow Whether PropertyLabelNotResolvedException should be thrown
-	 *
-	 * @return PropertyId|null
-	 *
-	 * @throws PropertyLabelNotResolvedException
-	 */
-	private function resolvePropertyId( $propertyLabelOrId, $shouldThrow ) {
-		try {
-			$propertyId = $this->propertyIdResolver->resolvePropertyId(
-				$propertyLabelOrId,
-				$this->language->getCode()
-			);
-		} catch ( PropertyLabelNotResolvedException $propertyLabelNotResolvedException ) {
-			if ( !$shouldThrow ) {
-				return null;
-			}
-
-			throw $propertyLabelNotResolvedException;
-		}
-
-		return $propertyId;
 	}
 
 	/**
