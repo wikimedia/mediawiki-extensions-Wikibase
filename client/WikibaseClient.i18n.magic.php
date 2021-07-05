@@ -17,6 +17,7 @@ $magicWords['en'] = [
 	'shortdesc' => [ 1, 'SHORTDESC' ],
 	'shortdesc_noreplace' => [ 0, 'noreplace' ],
 	'commaSeparatedList' => [ 0, 'commaseparatedlist' ],
+	'expectedUnconnectedPage' => [ 1, '__EXPECTED_UNCONNECTED_PAGE__' ],
 ];
 
 /** Arabic (العربية) */

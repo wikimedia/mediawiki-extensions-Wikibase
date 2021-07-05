@@ -63,6 +63,10 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		$queryInfo = $page->getQueryInfo();
 		$this->assertIsArray( $queryInfo );
 		$this->assertNotEmpty( $queryInfo );
+		$this->assertStringContainsString(
+			'expectedUnconnectedPage',
+			json_encode( $queryInfo['join_conds']['page_props'] )
+		);
 		$this->assertArrayHasKey( 'conds', $queryInfo );
 	}
 
