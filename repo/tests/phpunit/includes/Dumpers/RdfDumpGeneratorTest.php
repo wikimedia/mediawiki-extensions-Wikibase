@@ -30,6 +30,7 @@ use Wikibase\Repo\Rdf\ItemRdfBuilder;
 use Wikibase\Repo\Rdf\PropertyRdfBuilder;
 use Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder;
 use Wikibase\Repo\Rdf\PropertyStubRdfBuilder;
+use Wikibase\Repo\Rdf\RdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\SiteLinksRdfBuilder;
 use Wikibase\Repo\Rdf\TermsRdfBuilder;
@@ -296,20 +297,11 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 		$siteLookup = $this->getSiteLookup();
 
 		// Note: we test against the actual RDF bindings here, so we get actual RDF.
-		$rdfBuilderFactory = WikibaseRepo::getValueSnakRdfBuilderFactory();
+		$valueSnakRdfBuilderFactory = WikibaseRepo::getValueSnakRdfBuilderFactory();
 		$entityRdfBuilderFactory = new EntityRdfBuilderFactory( $this->getRdfBuilderFactoryCallbacks( $siteLookup ), [] );
 		$entityStubRdfBuilderFactory = new EntityStubRdfBuilderFactory( $this->getStubRdfBuilderFactoryCallbacks() );
 
-		return RdfDumpGenerator::createDumpGenerator(
-			'ntriples',
-			$out,
-			$flavor,
-			$entityRevisionLookup,
-			$dataTypeLookup,
-			$rdfBuilderFactory,
-			$entityRdfBuilderFactory,
-			$entityStubRdfBuilderFactory,
-			new NullEntityPrefetcher(),
+		$rdfBuilderFactory = new RdfBuilderFactory(
 			new RdfVocabulary(
 				[ 'test' => self::URI_BASE, 'foreign' => 'http://foreign.test/', ],
 				[ 'test' => self::URI_DATA, 'foreign' => 'http://data.foreign.test/' ],
@@ -331,7 +323,20 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 				[ 'test' => '', 'foreign' => 'foreign' ],
 				[ 'test' => 'en-x-test' ]
 			),
-			$this->createMock( EntityContentFactory::class )
+			$entityRdfBuilderFactory,
+			$this->createMock( EntityContentFactory::class ),
+			$entityStubRdfBuilderFactory,
+			$entityRevisionLookup
+		);
+
+		return RdfDumpGenerator::createDumpGenerator(
+			'ntriples',
+			$out,
+			$flavor,
+			$entityRevisionLookup,
+			new NullEntityPrefetcher(),
+			null,
+			$rdfBuilderFactory
 		);
 	}
 

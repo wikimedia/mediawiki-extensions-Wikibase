@@ -339,8 +339,6 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 
 		$builder = new RdfBuilder(
 			$vocabulary ?: $this->getTestData()->getVocabulary(),
-			$valueBuilderFactory,
-			$this->getTestData()->getMockRepository(),
 			$entityRdfBuilderFactory,
 			$produce,
 			$emitter,

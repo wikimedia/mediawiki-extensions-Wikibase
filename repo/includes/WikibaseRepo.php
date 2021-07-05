@@ -110,6 +110,7 @@ use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
+use Wikibase\Repo\Rdf\RdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Search\Fields\FieldDefinitionsFactory;
@@ -1008,6 +1009,13 @@ class WikibaseRepo {
 	): EntityDataSerializationService {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntityDataSerializationService' );
+	}
+
+	public static function getRdfBuilderFactory(
+		ContainerInterface $services = null
+	): RdfBuilderFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.RdfBuilderFactory' );
 	}
 
 }

@@ -6,7 +6,6 @@ use SplQueue;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikimedia\Purtle\RdfWriter;
@@ -49,30 +48,9 @@ class RdfBuilder implements EntityRdfBuilder, EntityStubRdfBuilder, EntityMentio
 	private $writer;
 
 	/**
-	 * @var DedupeBag
-	 */
-	private $dedupeBag;
-
-	/**
-	 * RDF builders to apply when building RDF for an entity.
-	 * @var EntityRdfBuilder[]
-	 */
-	private $builders = [];
-
-	/**
 	 * @var RdfVocabulary
 	 */
 	private $vocabulary;
-
-	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	private $propertyLookup;
-
-	/**
-	 * @var ValueSnakRdfBuilderFactory
-	 */
-	private $valueSnakRdfBuilderFactory;
 
 	/** @var EntityContentFactory */
 	private $entityContentFactory;
@@ -101,19 +79,16 @@ class RdfBuilder implements EntityRdfBuilder, EntityStubRdfBuilder, EntityMentio
 
 	/**
 	 * @param RdfVocabulary $vocabulary
-	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
-	 * @param PropertyDataTypeLookup $propertyLookup
 	 * @param EntityRdfBuilderFactory $entityRdfBuilderFactory
 	 * @param int $flavor
 	 * @param RdfWriter $writer
 	 * @param DedupeBag $dedupeBag
 	 * @param EntityContentFactory $entityContentFactory
 	 * @param EntityStubRdfBuilderFactory|null $entityStubRdfBuilderFactory
+	 * @param EntityRevisionLookup $entityRevisionLookup
 	 */
 	public function __construct(
 		RdfVocabulary $vocabulary,
-		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
-		PropertyDataTypeLookup $propertyLookup,
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
 		$flavor,
 		RdfWriter $writer,
@@ -124,11 +99,8 @@ class RdfBuilder implements EntityRdfBuilder, EntityStubRdfBuilder, EntityMentio
 	) {
 		$this->entitiesToOutput = new SplQueue();
 		$this->vocabulary = $vocabulary;
-		$this->propertyLookup = $propertyLookup;
-		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
 		$this->writer = $writer;
 		$this->produceWhat = $flavor;
-		$this->dedupeBag = $dedupeBag;
 		$this->entityContentFactory = $entityContentFactory;
 		$this->entityStubRdfBuilderFactory = $entityStubRdfBuilderFactory;
 		$this->entityRevisionLookup = $entityRevisionLookup;

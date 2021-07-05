@@ -29,6 +29,7 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
+use Wikibase\Repo\Rdf\RdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -125,20 +126,8 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 
 		// Note: We are testing with the actual RDF bindings. These should not change for well
 		// known data types. Mocking the bindings would be nice, but is complex and not needed.
-		$rdfBuilder = WikibaseRepo::getValueSnakRdfBuilderFactory();
 
-		$service = new EntityDataSerializationService(
-			$mockRepository,
-			$entityTitleStoreLookup,
-			$entityContentFactory,
-			new InMemoryDataTypeLookup(),
-			$rdfBuilder,
-			WikibaseRepo::getEntityRdfBuilderFactory(),
-			WikibaseRepo::getEntityStubRdfBuilderFactory(),
-			$entityDataFormatProvider,
-			$serializerFactory,
-			$serializerFactory->newItemSerializer(),
-			new HashSiteStore(),
+		$rdfBuilderFactory = new RdfBuilderFactory(
 			new RdfVocabulary(
 				[ 'test' => EntityDataSerializationServiceTest::URI_BASE ],
 				[ 'test' => EntityDataSerializationServiceTest::URI_DATA ],
@@ -155,7 +144,21 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 				], new EntityTypeDefinitions( [] ) ),
 				[ 'test' => 'wd' ],
 				[ 'test' => '' ]
-			)
+			),
+			WikibaseRepo::getEntityRdfBuilderFactory(),
+			$entityContentFactory,
+			WikibaseRepo::getEntityStubRdfBuilderFactory(),
+			$mockRepository
+		);
+
+		$service = new EntityDataSerializationService(
+			$entityTitleStoreLookup,
+			new InMemoryDataTypeLookup(),
+			$entityDataFormatProvider,
+			$serializerFactory,
+			$serializerFactory->newItemSerializer(),
+			new HashSiteStore(),
+			$rdfBuilderFactory
 		);
 
 		$entityDataFormatProvider->setAllowedFormats(

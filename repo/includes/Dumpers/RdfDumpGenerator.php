@@ -7,19 +7,14 @@ use MWContentSerializationException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Repo\Content\EntityContentFactory;
-use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
-use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
 use Wikibase\Repo\Rdf\HashDedupeBag;
 use Wikibase\Repo\Rdf\RdfBuilder;
+use Wikibase\Repo\Rdf\RdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfProducer;
-use Wikibase\Repo\Rdf\RdfVocabulary;
-use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikimedia\Purtle\BNodeLabeler;
 use Wikimedia\Purtle\RdfWriterFactory;
 
@@ -190,53 +185,31 @@ class RdfDumpGenerator extends DumpGenerator {
 	}
 
 	/**
-	 * @param string                     $format
-	 * @param resource                   $output
-	 * @param string                     $flavor Either "full" or "truthy"
-	 * @param EntityRevisionLookup       $entityRevisionLookup
-	 * @param PropertyDataTypeLookup     $propertyLookup
-	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
-	 * @param EntityRdfBuilderFactory    $entityRdfBuilderFactory
-	 * @param EntityStubRdfBuilderFactory   $entityStubRdfBuilderFactory
-	 * @param EntityPrefetcher           $entityPrefetcher
-	 * @param RdfVocabulary              $vocabulary
-	 * @param EntityContentFactory       $entityContentFactory
-	 * @param BNodeLabeler|null          $labeler
+	 * @param string $format
+	 * @param resource $output
+	 * @param string $flavor Either "full" or "truthy"
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityPrefetcher $entityPrefetcher
+	 * @param BNodeLabeler|null $labeler
+	 * @param RdfBuilderFactory $rdfBuilderFactory
 	 *
 	 * @return static
-	 * @throws InvalidArgumentException
 	 */
 	public static function createDumpGenerator(
 		$format,
 		$output,
 		$flavor,
 		EntityRevisionLookup $entityRevisionLookup,
-		PropertyDataTypeLookup $propertyLookup,
-		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
-		EntityRdfBuilderFactory $entityRdfBuilderFactory,
-		EntityStubRdfBuilderFactory $entityStubRdfBuilderFactory,
 		EntityPrefetcher $entityPrefetcher,
-		RdfVocabulary $vocabulary,
-		EntityContentFactory $entityContentFactory,
-		BNodeLabeler $labeler = null
+		?BNodeLabeler $labeler,
+		RdfBuilderFactory $rdfBuilderFactory
 	) {
 		$rdfWriter = self::getRdfWriter( $format, $labeler );
 		if ( !$rdfWriter ) {
 			throw new InvalidArgumentException( "Unknown format: $format" );
 		}
 
-		$rdfBuilder = new RdfBuilder(
-			$vocabulary,
-			$valueSnakRdfBuilderFactory,
-			$propertyLookup,
-			$entityRdfBuilderFactory,
-			self::getFlavorFlags( $flavor ),
-			$rdfWriter,
-			new HashDedupeBag(),
-			$entityContentFactory,
-			$entityStubRdfBuilderFactory,
-			$entityRevisionLookup
-		);
+		$rdfBuilder = $rdfBuilderFactory->getRdfBuilder( self::getFlavorFlags( $flavor ), new HashDedupeBag(), $rdfWriter );
 
 		return new self( $output, $entityRevisionLookup, $rdfBuilder, $entityPrefetcher );
 	}

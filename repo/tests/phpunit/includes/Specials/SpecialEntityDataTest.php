@@ -25,6 +25,7 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
+use Wikibase\Repo\Rdf\RdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Specials\SpecialEntityData;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -92,18 +93,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		// known data types. Mocking the bindings would be nice, but is complex and not needed.
 		$rdfBuilder = WikibaseRepo::getValueSnakRdfBuilderFactory();
 
-		$serializationService = new EntityDataSerializationService(
-			$mockRepository,
-			$entityTitleStoreLookup,
-			$entityContentFactory,
-			$dataTypeLookup,
-			$rdfBuilder,
-			WikibaseRepo::getEntityRdfBuilderFactory(),
-			WikibaseRepo::getEntityStubRdfBuilderFactory(),
-			$entityDataFormatProvider,
-			$serializerFactory,
-			$serializerFactory->newItemSerializer(),
-			new HashSiteStore(),
+		$rdfBuilderFactory = new RdfBuilderFactory(
 			new RdfVocabulary(
 				[ 'test' => self::URI_BASE ],
 				[ 'test' => self::URI_DATA ],
@@ -120,7 +110,20 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 				], new EntityTypeDefinitions( [] ) ),
 				[ 'test' => '' ],
 				[ 'test' => '' ]
-			)
+			),
+			WikibaseRepo::getEntityRdfBuilderFactory(),
+			$entityContentFactory,
+			WikibaseRepo::getEntityStubRdfBuilderFactory(),
+			$mockRepository
+		);
+		$serializationService = new EntityDataSerializationService(
+			$entityTitleStoreLookup,
+			$dataTypeLookup,
+			$entityDataFormatProvider,
+			$serializerFactory,
+			$serializerFactory->newItemSerializer(),
+			new HashSiteStore(),
+			$rdfBuilderFactory
 		);
 
 		$formats = [ 'json', 'rdfxml', 'ntriples', 'turtle' ];

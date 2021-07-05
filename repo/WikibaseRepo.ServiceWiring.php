@@ -209,6 +209,7 @@ use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
+use Wikibase\Repo\Rdf\RdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Search\Fields\FieldDefinitionsFactory;
@@ -669,18 +670,13 @@ return [
 
 	'WikibaseRepo.EntityDataSerializationService' => function ( MediaWikiServices $services ): EntityDataSerializationService {
 		return new EntityDataSerializationService(
-			WikibaseRepo::getEntityRevisionLookup( $services ),
 			WikibaseRepo::getEntityTitleStoreLookup( $services ),
-			WikibaseRepo::getEntityContentFactory( $services ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
-			WikibaseRepo::getValueSnakRdfBuilderFactory( $services ),
-			WikibaseRepo::getEntityRdfBuilderFactory( $services ),
-			WikibaseRepo::getEntityStubRdfBuilderFactory( $services ),
 			WikibaseRepo::getEntityDataFormatProvider( $services ),
 			WikibaseRepo::getBaseDataModelSerializerFactory( $services ),
 			WikibaseRepo::getAllTypesEntitySerializer( $services ),
 			$services->getSiteLookup(),
-			WikibaseRepo::getRdfVocabulary( $services )
+			WikibaseRepo::getRdfBuilderFactory( $services )
 		);
 	},
 
@@ -1539,6 +1535,16 @@ return [
 
 	'WikibaseRepo.PropertyValueExpertsModule' => function ( MediaWikiServices $services ): PropertyValueExpertsModule {
 		return new PropertyValueExpertsModule( WikibaseRepo::getDataTypeDefinitions( $services ) );
+	},
+
+	'WikibaseRepo.RdfBuilderFactory' => function ( MediaWikiServices $services ): RdfBuilderFactory {
+		return new RdfBuilderFactory(
+			WikibaseRepo::getRdfVocabulary( $services ),
+			WikibaseRepo::getEntityRdfBuilderFactory( $services ),
+			WikibaseRepo::getEntityContentFactory( $services ),
+			WikibaseRepo::getEntityStubRdfBuilderFactory( $services ),
+			WikibaseRepo::getEntityRevisionLookup( $services )
+		);
 	},
 
 	'WikibaseRepo.RdfVocabulary' => function ( MediaWikiServices $services ): RdfVocabulary {
