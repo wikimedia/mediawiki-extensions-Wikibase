@@ -34,6 +34,7 @@
 	"apihelp-query+pageterms-summary": "קבלת מושגי {{WBREPONAME}} (בדרך־כלל תוויות, תיאורים, וכינויים) שמשויכים לדף דרך קישור אתר.",
 	"apihelp-query+pageterms-example-simple": "קבלת כל האיברים המשויכים לדף \"London\", בשפה של המשתמש.",
 	"apihelp-query+pageterms-example-label-en": "קבלת תוויות וכינויים שמשויעכים לדף 'London', באנגלית.",
+	"apihelp-query+pageterms-param-language": "קוד השפה שצריך לקבל מונחים בה. אם זה לא מצוין, תשמש שפת המשתמש.",
 	"apihelp-query+pageterms-param-terms": "איזה סוג של איברים לקבל, למשל \"description\", כל אחד מהם מוחזר בתור מערך של מחרוזות עם סוגים בתור מפתחות, למשל <span dir=\"ltr\">{\"description\": [\"foo\"]}</span>. אם לא צוין, יוחזרו כל הסוגים.",
 	"apihelp-query+description-summary": "קבלת תיאור קצר, כלומר כותרת־משנה שמסבירה במה עוסק דף היעד.",
 	"apihelp-query+description-extended-description": "התיאור הוא טקסט רגיל בשורה אחת. הוא יכול לכלול תגי HTML, שגם הם יפורשו כטקסט רגיל. אין להשתמש בו בקוד HTML ללא חילוף!",

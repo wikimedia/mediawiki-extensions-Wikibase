@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Menachem.Moreira"
+			"Menachem.Moreira",
+			"WikiiiTranslator"
 		]
 	},
+	"wikibase-edit": "trocar",
 	"wikibase-sitelink-page-edit-placeholder": "pajina",
 	"wikibase-itembytitle-lookup-page": "Pajina:",
 	"wikibase-itembytitle-submit": "Bushkar",

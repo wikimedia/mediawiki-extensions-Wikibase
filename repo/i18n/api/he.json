@@ -169,6 +169,7 @@
 	"apihelp-wbsearchentities-example-5": "חיפוש \"alphabet\" בשפה האנגלית ללא הפרמטר url",
 	"apihelp-wbsearchentities-example-6": "חיפוש עבור \"Q1234\" בשפה אנגלית, כדי להתאים למזהה של הישות.",
 	"apihelp-query+entityterms-summary": "קבלת איברים (תוויות, תיאורים, וכיוניים) של הישות בדף הזה.",
+	"apihelp-query+entityterms-param-language": "קוד השפה שצריך לקבל מונחים בה. אם זה לא מצוין, תשמש שפת המשתמש.",
 	"apihelp-query+entityterms-param-terms": "איזה סוג של איברים לקבל, למשל \"description\", כל אחד מהם מוחזר בתור מערך של מחרוזות עם סוגים בתור מפתחות, למשל <span dir=\"ltr\">{\"description\": [\"foo\"]}</span>. אם לא צוין, יוחזרו כל הסוגים.",
 	"apihelp-query+entityterms-example-item": "קבלת תוויות וכינויים של הפריט Q84.",
 	"apihelp-query+wbcontentlanguages-summary": "מחזיר מידע על שפות התוכן של שוויקיבייס מקבל בהקשרים שונים.",
