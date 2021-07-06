@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -33,7 +34,7 @@ class EntitySourceLookupTest extends TestCase {
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
 			NewEntitySource::havingName( 'some other source' )->build(),
 			$expectedSource,
-		] ) );
+		] ), [] );
 
 		$this->assertSame( $expectedSource, $lookup->getEntitySourceById( $entityId ) );
 	}
@@ -47,7 +48,7 @@ class EntitySourceLookupTest extends TestCase {
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
 			NewEntitySource::havingName( 'some other source' )->build(),
 			$expectedSource,
-		] ) );
+		] ), [] );
 
 		$this->assertSame( $expectedSource, $lookup->getEntitySourceById( $id ) );
 	}
@@ -57,7 +58,7 @@ class EntitySourceLookupTest extends TestCase {
 			NewEntitySource::havingName( 'im a property source' )
 				->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 121, 'slot' => 'main' ] ] )
 				->build(),
-		] ) );
+		] ), [] );
 
 		$this->expectException( LogicException::class );
 
@@ -73,10 +74,30 @@ class EntitySourceLookupTest extends TestCase {
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
 			NewEntitySource::havingName( 'some other source' )->build(),
 			$expectedSource,
-		] ) );
+		] ), [] );
 
 		$this->expectException( LogicException::class );
 		$lookup->getEntitySourceById( $entityId );
+	}
+
+	public function testGivenSubEntityId_returnsParentEntitySource() {
+		$subEntityId = $this->createStub( EntityId::class );
+		$subEntityId->method( 'getSerialization' )->willReturn( 'L123-F123' );
+		$subEntityId->method( 'getEntityType' )->willReturn( 'form' );
+
+		$expectedSource = NewEntitySource::havingName( 'lexeme source' )
+			->withEntityNamespaceIdsAndSlots( [ 'lexeme' => [ 'namespaceId' => 121, 'slot' => 'main' ] ] )
+			->build();
+
+		$lookup = new EntitySourceLookup(
+			$this->newEntitySourceDefinitionsFromSources( [
+				NewEntitySource::havingName( 'some other source' )->build(),
+				$expectedSource,
+			] ),
+			[ 'lexeme' => [ 'form', 'sense' ] ]
+		);
+
+		$this->assertSame( $expectedSource, $lookup->getEntitySourceById( $subEntityId ) );
 	}
 
 	private function newEntitySourceDefinitionsFromSources( array $sources ): EntitySourceDefinitions {

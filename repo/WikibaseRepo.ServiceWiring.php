@@ -733,7 +733,10 @@ return [
 				WikibaseRepo::getEntityTitleLookup( $services ),
 				$services->getLinkBatchFactory()
 			),
-			new EntitySourceLookup( WikibaseRepo::getEntitySourceDefinitions( $services ) )
+			new EntitySourceLookup(
+				WikibaseRepo::getEntitySourceDefinitions( $services ),
+				WikibaseRepo::getSubEntityTypesMap( $services )
+			)
 		);
 	},
 

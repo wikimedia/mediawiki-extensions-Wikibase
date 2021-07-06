@@ -1018,4 +1018,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.RdfBuilderFactory' );
 	}
 
+	public static function getSubEntityTypesMap( ContainerInterface $services = null ): array {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.SubEntityTypesMap' );
+	}
+
 }
