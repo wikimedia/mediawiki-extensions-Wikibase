@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
-use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @license GPL-2.0-or-later
@@ -37,21 +37,23 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 	 * @see SiteLinkConflictLookup::getConflictsForItem
 	 *
 	 * @param Item $item
-	 * @param IDatabase|null $db
+	 * @param int|null $db
 	 *
 	 * @return array[] An array of arrays, each with the keys "siteId", "itemId" and "sitePage".
 	 */
-	public function getConflictsForItem( Item $item, IDatabase $db = null ) {
+	public function getConflictsForItem( Item $item, int $db = null ) {
 		$siteLinks = $item->getSiteLinkList();
 
 		if ( $siteLinks->isEmpty() ) {
 			return [];
 		}
 
-		if ( $db ) {
-			$dbr = $db;
-		} else {
+		if ( !$db || $db === DB_REPLICA ) {
 			$dbr = $this->db->connections()->getReadConnectionRef();
+		} elseif ( $db === DB_PRIMARY ) {
+			$dbr = $this->db->connections()->getWriteConnectionRef();
+		} else {
+			throw new InvalidArgumentException( '$db must be either DB_REPLICA or DB_PRIMARY' );
 		}
 
 		$anyOfTheLinks = '';
