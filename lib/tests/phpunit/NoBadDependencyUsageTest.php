@@ -18,12 +18,12 @@ class NoBadDependencyUsageTest extends \PHPUnit\Framework\TestCase {
 		// Increasing these allowances is forbidden
 		$this->assertStringsNotInLib(
 			[
-				'WikibaseRepo' . '::' => 1,
+				'WikibaseRepo::' => 1,
 				'Wikibase\\Repo\\' => 1,
-				'Wikibase\\\\Repo\\\\' => 1,
-				'WikibaseClient' . '::' => 2,
+				'Wikibase\\\\Repo\\\\' => 0,
+				'WikibaseClient::' => 2,
 				'Wikibase\\Client\\' => 2,
-				'Wikibase\\\\Client\\\\' => 1,
+				'Wikibase\\\\Client\\\\' => 0,
 			]
 		);
 	}
@@ -68,14 +68,23 @@ class NoBadDependencyUsageTest extends \PHPUnit\Framework\TestCase {
 		 * @var SplFileInfo $fileInfo
 		 */
 		foreach ( new RecursiveIteratorIterator( $directoryIterator, RecursiveIteratorIterator::SELF_FIRST ) as $fileInfo ) {
-			if ( $fileInfo->isFile() && substr( $fileInfo->getFilename(), -4 ) === '.php' ) {
-				$text = file_get_contents( $fileInfo->getPathname() );
-				$text = preg_replace( '@/\*.*?\*/@s', '', $text );
+			if ( !$fileInfo->isFile() ) {
+				continue;
+			}
+			if ( $fileInfo->getExtension() !== 'php' ) {
+				continue;
+			}
+			$path = $fileInfo->getRealPath();
+			if ( $path === __FILE__ ) {
+				continue;
+			}
 
-				foreach ( $strings as $string ) {
-					if ( strpos( $text, $string ) !== false ) {
-						$counts[$string]++;
-					}
+			$text = file_get_contents( $path );
+			$text = preg_replace( '@/\*.*?\*/@s', '', $text );
+
+			foreach ( $strings as $string ) {
+				if ( strpos( $text, $string ) !== false ) {
+					$counts[$string]++;
 				}
 			}
 		}
