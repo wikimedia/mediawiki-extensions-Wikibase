@@ -20,7 +20,7 @@ class NoBadDependencyUsageTest extends \PHPUnit\Framework\TestCase {
 			[
 				// MediaWiki RDBMS – use DomainDb instead
 				'LoadBalancer' => 10,
-				'LBFactory' => 14,
+				'LBFactory' => 13,
 				'wfGetDB' => 0,
 				'wfGetLB' => 0,
 				// references to repo or client
@@ -87,6 +87,7 @@ class NoBadDependencyUsageTest extends \PHPUnit\Framework\TestCase {
 
 			$text = file_get_contents( $path );
 			$text = preg_replace( '@/\*.*?\*/@s', '', $text );
+			$text = preg_replace( '@//.*$@m', '', $text );
 
 			foreach ( $strings as $string ) {
 				if ( strpos( $text, $string ) !== false ) {
