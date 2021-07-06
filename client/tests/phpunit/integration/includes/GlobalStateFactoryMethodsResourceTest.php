@@ -241,7 +241,8 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 		$request = new FauxRequest();
 		$ctx = new ApiTestContext();
 		$ctx = $ctx->newTestContext( $request );
-		return new ApiQuery( new ApiMain( $ctx ), 'query' );
+		$apiMain = new ApiMain( $ctx );
+		return $apiMain->getModuleManager()->getModule( 'query' );
 	}
 
 }

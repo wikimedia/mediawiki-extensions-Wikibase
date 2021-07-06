@@ -255,7 +255,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 	}
 
 	private function mockApiQuery(): ApiQuery {
-		return new ApiQuery( $this->mockApiMain(), 'query' );
+		return $this->mockApiMain()->getModuleManager()->getModule( 'query' );
 	}
 
 }

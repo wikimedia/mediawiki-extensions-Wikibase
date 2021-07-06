@@ -69,7 +69,7 @@ class MetaContentLanguagesTest extends TestCase {
 		$context->setLanguage( 'de' );
 		$context->setRequest( new FauxRequest( $params ) );
 		$main = new ApiMain( $context );
-		$query = new ApiQuery( $main, 'query' );
+		$query = $main->getModuleManager()->getModule( 'query' );
 
 		return $query;
 	}
