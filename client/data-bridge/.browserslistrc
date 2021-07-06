@@ -1,8 +1,7 @@
-last 2 Chrome versions
-IE >=11
-last 2 Firefox versions
-Safari >=5.1
-last 2 Opera versions
-iOS >=6.1
-Android >=4.1
-defaults
+# Browserslist configuration of browsers with basic level of support.
+# Please see https://www.mediawiki.org/wiki/Compatibility#Mobile and
+# https://github.com/wikimedia/browserslist-config-wikimedia/
+# See also browsers definition in ResourceLoader startup module
+# in MediaWiki core 'resources/src/startup/startup.js'.
+
+extends browserslist-config-wikimedia/modern
