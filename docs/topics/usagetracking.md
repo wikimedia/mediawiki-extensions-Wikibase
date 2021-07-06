@@ -40,7 +40,7 @@ Entity usage on client pages is tracked using the following codes (each represen
  - description (D.xx) - The entity's description in language xx is used.
  - title (T) - The title of the local page corresponding to the entity is used.
  - statements (C) - Certain statements (identified by their property id) from the entity are used.
- - other (O) - Something else about the entity is used. This currently implicates statement and description usage.
+ - other (O) - Something else about the entity is used. This currently implies alias usage and entity existence checks.
  - all (X) - All aspects of an entity are or may be used.
 
 Changes result in updates to pages that use the respective entity based on the aspect that is used.
