@@ -35,7 +35,6 @@ class RepoNoBadUsageTest extends NoBadUsageTest {
 			],
 			'wfGetDB' => [
 				// TODO fix these, this should really be an empty array
-				'includes/Store/Sql/WikiPageEntityStore.php' => 1,
 				'tests/' => true,
 			],
 			'wfGetLB' => [],

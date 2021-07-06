@@ -19,6 +19,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -85,6 +86,11 @@ class WikiPageEntityStore implements EntityStore {
 	private $watchlistManager;
 
 	/**
+	 * @var RepoDomainDb
+	 */
+	private $db;
+
+	/**
 	 * @param EntityContentFactory $contentFactory
 	 * @param EntityTitleStoreLookup $entityTitleStoreLookup
 	 * @param IdGenerator $idGenerator
@@ -93,6 +99,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param EntitySource $entitySource
 	 * @param PermissionManager $permissionManager
 	 * @param WatchlistManager $watchlistManager
+	 * @param RepoDomainDb $repoDomainDb
 	 */
 	public function __construct(
 		EntityContentFactory $contentFactory,
@@ -102,7 +109,8 @@ class WikiPageEntityStore implements EntityStore {
 		RevisionStore $revisionStore,
 		EntitySource $entitySource,
 		PermissionManager $permissionManager,
-		WatchlistManager $watchlistManager
+		WatchlistManager $watchlistManager,
+		RepoDomainDb $repoDomainDb
 	) {
 		$this->contentFactory = $contentFactory;
 		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
@@ -118,6 +126,7 @@ class WikiPageEntityStore implements EntityStore {
 		$this->permissionManager = $permissionManager;
 
 		$this->watchlistManager = $watchlistManager;
+		$this->db = $repoDomainDb;
 	}
 
 	private function assertCanStoreEntity( EntityId $id ) {
@@ -506,7 +515,7 @@ class WikiPageEntityStore implements EntityStore {
 		}
 
 		// Scan through the revision table
-		$dbw = wfGetDB( DB_PRIMARY );
+		$dbw = $this->db->connections()->getWriteConnectionRef();
 		$revWhere = ActorMigration::newMigration()->getWhere( $dbw, 'rev_user', $user );
 		$res = $dbw->select(
 			[ 'revision' ] + $revWhere['tables'],
