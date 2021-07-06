@@ -7,6 +7,7 @@ namespace Wikibase\Lib\Tests;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\Tests\NewEntitySource;
 use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
@@ -39,25 +40,10 @@ class EntitySourceAndTypeDefinitionsTest extends TestCase {
 				]
 			] ),
 			[
-				new EntitySource(
-					'local',
-					false,
-					[],
-					'',
-					'',
-					'',
-					''
-				),
-				new EntitySource(
-					'wikidorta',
-					false,
-					[],
-					'',
-					'',
-					'',
-					'',
-					EntitySource::TYPE_API
-				)
+				NewEntitySource::havingName( 'local' )->build(),
+				NewEntitySource::havingName( 'wikidorta' )
+					->withType( EntitySource::TYPE_API )
+					->build(),
 			]
 		);
 

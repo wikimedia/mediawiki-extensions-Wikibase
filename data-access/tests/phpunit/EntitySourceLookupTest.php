@@ -24,16 +24,14 @@ use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 class EntitySourceLookupTest extends TestCase {
 
 	public function testGivenUriEntityId_returnsEntitySourceWithMatchingConceptUri() {
-		$expectedSource = $this->newEntitySourceFromArray(
-			[
-				'conceptBaseUri' => 'http://wikidata.org/entity/',
-				'type' => EntitySource::TYPE_API
-			]
-		);
+		$expectedSource = NewEntitySource::create()
+			->withConceptBaseUri( 'http://wikidata.org/entity/' )
+			->withType( EntitySource::TYPE_API )
+			->build();
 		$entityId = new FederatedPropertyId( 'http://wikidata.org/entity/P123' );
 
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
-			$this->newEntitySourceFromArray( [ 'name' => 'some other source' ] ),
+			NewEntitySource::havingName( 'some other source' )->build(),
 			$expectedSource,
 		] ) );
 
@@ -42,13 +40,12 @@ class EntitySourceLookupTest extends TestCase {
 
 	public function testGivenUnprefixedEntityId_returnsDbEntitySourceForEntityType() {
 		$id = new PropertyId( 'P123' );
-		$expectedSource = $this->newEntitySourceFromArray( [
-			'name' => 'im a db source!',
-			'entityNamespaceIdsAndSlots' => [ 'property' => [ 'namespaceId' => 121, 'slot' => 'main' ] ],
-		] );
+		$expectedSource = NewEntitySource::havingName( 'im a db source!' )
+			->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 121, 'slot' => 'main' ] ] )
+			->build();
 
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
-			$this->newEntitySourceFromArray( [ 'name' => 'some other source' ] ),
+			NewEntitySource::havingName( 'some other source' )->build(),
 			$expectedSource,
 		] ) );
 
@@ -57,10 +54,9 @@ class EntitySourceLookupTest extends TestCase {
 
 	public function testGivenEntityIdWithNoMatchingSource_throwsException() {
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
-			$this->newEntitySourceFromArray( [
-				'name' => 'im a property source',
-				'entityNamespaceIdsAndSlots' => [ 'property' => [ 'namespaceId' => 121, 'slot' => 'main' ] ],
-			] ),
+			NewEntitySource::havingName( 'im a property source' )
+				->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 121, 'slot' => 'main' ] ] )
+				->build(),
 		] ) );
 
 		$this->expectException( LogicException::class );
@@ -68,29 +64,14 @@ class EntitySourceLookupTest extends TestCase {
 		$lookup->getEntitySourceById( new ItemId( 'Q666' ) );
 	}
 
-	private function newEntitySourceFromArray( array $sourceConfig ): EntitySource {
-		return new EntitySource(
-			$sourceConfig['name'] ?? 'some name',
-			false,
-			$sourceConfig['entityNamespaceIdsAndSlots'] ?? [],
-			$sourceConfig['conceptBaseUri'] ?? 'http://some-uri/',
-			'',
-			'',
-			'',
-			$sourceConfig['type'] ?? EntitySource::TYPE_DB
-		);
-	}
-
 	public function testGivenUriEntityId_WithMatchingConceptUri_ButWithDBEntitySource_throws() {
-		$expectedSource = $this->newEntitySourceFromArray(
-			[
-				'conceptBaseUri' => 'http://wikidata.org/entity/',
-			]
-		);
+		$expectedSource = NewEntitySource::havingName( 'expected source' )
+			->withConceptBaseUri( 'http://wikidata.org/entity/' )
+			->build();
 		$entityId = new FederatedPropertyId( 'http://wikidata.org/entity/P123' );
 
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
-			$this->newEntitySourceFromArray( [ 'name' => 'some other source' ] ),
+			NewEntitySource::havingName( 'some other source' )->build(),
 			$expectedSource,
 		] ) );
 
