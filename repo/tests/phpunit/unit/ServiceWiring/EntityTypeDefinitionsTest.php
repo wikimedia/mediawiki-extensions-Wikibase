@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -18,7 +17,6 @@ class EntityTypeDefinitionsTest extends ServiceWiringTestCase {
 
 	public function setUp(): void {
 		parent::setUp();
-		$this->mockService( 'WikibaseRepo.Settings', new SettingsArray( [ 'federatedPropertiesEnabled' => false ] ) );
 	}
 
 	public function testConstruction(): void {

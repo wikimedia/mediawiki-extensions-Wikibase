@@ -4,17 +4,17 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\EntityTypeDefinitionsFedPropsOverrider;
+use Wikibase\Repo\EntityTypesConfigFeddyPropsAugmenter;
 
 /**
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class EntityTypeDefinitionsFedPropsOverriderTest extends TestCase {
+class EntityTypesConfigFeddyPropsAugmenterTest extends TestCase {
 
 	public function testGivenFedPropsSettingDisabled_doesNothing() {
-		$overrider = new EntityTypeDefinitionsFedPropsOverrider(
+		$augmenter = new EntityTypesConfigFeddyPropsAugmenter(
 			[
 				'property' => [
 					'some-service' => 'foo'
@@ -28,13 +28,13 @@ class EntityTypeDefinitionsFedPropsOverriderTest extends TestCase {
 			]
 		];
 
-		$newEntityTypeDefinitions = $overrider->override( $originalEntityTypeDefinitions );
+		$newEntityTypeDefinitions = $augmenter->override( $originalEntityTypeDefinitions );
 
 		$this->assertEquals( $originalEntityTypeDefinitions, $newEntityTypeDefinitions );
 	}
 
 	public function testGivenFedPropsSettingEnabled_overridesDefinedServices() {
-		$overrider = new EntityTypeDefinitionsFedPropsOverrider(
+		$augmenter = new EntityTypesConfigFeddyPropsAugmenter(
 			[
 				'property' => [
 					'some-service' => 'foo'
@@ -49,7 +49,7 @@ class EntityTypeDefinitionsFedPropsOverriderTest extends TestCase {
 			]
 		];
 
-		$entityTypeDefinitions = $overrider->override( $entityTypeDefinitions );
+		$entityTypeDefinitions = $augmenter->override( $entityTypeDefinitions );
 
 		$this->assertEquals( [ 'property' => [
 			'some-service' => 'foo',
@@ -58,8 +58,8 @@ class EntityTypeDefinitionsFedPropsOverriderTest extends TestCase {
 	}
 
 	public function testFactoryReturnsObjectOfCorrectType() {
-		$overrider = EntityTypeDefinitionsFedPropsOverrider::factory( true );
-		$this->assertInstanceOf( EntityTypeDefinitionsFedPropsOverrider::class, $overrider );
+		$augmenter = EntityTypesConfigFeddyPropsAugmenter::factory( true );
+		$this->assertInstanceOf( EntityTypesConfigFeddyPropsAugmenter::class, $augmenter );
 	}
 
 }
