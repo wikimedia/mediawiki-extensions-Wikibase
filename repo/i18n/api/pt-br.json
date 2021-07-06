@@ -171,6 +171,7 @@
 	"apihelp-wbsearchentities-example-5": "Procure por \"alphabet\" em língua inglesa omitindo o parâmetro url",
 	"apihelp-wbsearchentities-example-6": "Pesquisar \"Q1234\" em inglês, para corresponder ao identificador da entidade.",
 	"apihelp-query+entityterms-summary": "Obter os termos (rótulos, descrições e nomes alternativos) da entidade nesta página.",
+	"apihelp-query+entityterms-param-language": "O código do idioma no qual os termos serão inseridos. Se não for especificado, o idioma do usuário será usado.",
 	"apihelp-query+entityterms-param-terms": "Os tipos de termos a serem obtidos, p.ex. 'description' ,cada um retornou uma matriz de cadeias com chave por seu tipo, e. {\"description\": [\"foo\"]}. Se não for especificado, todos os tipos são devolvidos.",
 	"apihelp-query+entityterms-example-item": "Obtenha rótulos e nomes alternativos do item Q84.",
 	"apihelp-query+wbcontentlanguages-summary": "Devolve informação sobre os idiomas de conteúdo que a extensão Wikibase aceita em diferentes contextos.",

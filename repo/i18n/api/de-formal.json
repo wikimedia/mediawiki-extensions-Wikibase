@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Killarnee"
+		]
+	},
+	"apihelp-query+entityterms-param-language": "Der Sprachcode, in dem Begriffe abgerufen werden sollen. Wenn nicht angegeben, wird die Benutzersprache verwendet."
+}

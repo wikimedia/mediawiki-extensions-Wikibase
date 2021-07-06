@@ -3,6 +3,7 @@
 		"authors": [
 			"Dgstranz",
 			"Fitoschido",
+			"Jackiezelaya",
 			"Macofe",
 			"Tiberius1701"
 		]
@@ -10,6 +11,13 @@
 	"apihelp-query+wbentityusage-description": "Devuelve todos los identificadores de entidad utilizados en las páginas dadas.",
 	"apihelp-query+wbentityusage-summary": "Devuelve todos los identificadores de entidades utilizados en las páginas indicadas.",
 	"apihelp-query+wbentityusage-param-aspect": "Devolver solo los identificadores de entidad que utilizaron este aspecto.",
+	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Se utilizan los enlaces de sitio de la entidad.",
+	"apihelp-query+wbentityusage-paramvalue-aspect-L": "Se usa la etiqueta de la entidad",
+	"apihelp-query+wbentityusage-paramvalue-aspect-D": "Se utiliza la descripción de la entidad.",
+	"apihelp-query+wbentityusage-paramvalue-aspect-T": "Se utiliza el título de la página local correspondiente a la entidad",
+	"apihelp-query+wbentityusage-paramvalue-aspect-C": "Se usan instrucciones de la entidad",
+	"apihelp-query+wbentityusage-paramvalue-aspect-X": "Todos los aspectos de una entidad son o pueden usarse",
+	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Se usa algo más sobre la entidad. Esto implica actualmente el uso de instrucciones y alias y comprobaciones explícitas de la existencia de la entidad.",
 	"apihelp-query+wbentityusage-param-prop": "Propiedades que añadir al resultado.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Si está activado, se añadirá el URL de la entidad",
 	"apihelp-query+wbentityusage-param-entities": "Devolver solo la página que utilizó estas entidades.",
@@ -29,6 +37,7 @@
 	"apihelp-query+pageterms-summary": "Obtener los términos de {{WBREPONAME}} (normalmente, etiquetas, descripciones y alias) asociados con una página mediante un enlace de sitio. En la propia página de entidad, se usan directamente los términos. Advertencia: en un wiki repositorio, este módulo solo funciona directamente en las páginas de entidad, no en las páginas conectadas a un elemento mediante un enlace de sitio. Esto puede cambiar en el futuro.",
 	"apihelp-query+pageterms-example-simple": "Obtener todos los términos asociados con la página 'London', en el idioma del usuario.",
 	"apihelp-query+pageterms-example-label-en": "Obtener etiquetas y alias asociados con la página 'London', en inglés.",
+	"apihelp-query+pageterms-param-language": "Código de idioma en el que se va a obtener los términos. Si no se especifica, se utiliza el idioma del usuario.",
 	"apihelp-query+pageterms-param-terms": "Los tipos de términos que se deben obtener; p. ej., \"description\", cada uno de los cuales devuelto como una matriz de cadenas con claves según su tipo; p. ej., {\"description\": [\"foo\"]}. Si no se especifica, se devolverán todos los tipos.",
 	"apihelp-query+description-summary": "Obtener una descripción breve o subtítulo que explica el tema de la página de destino.",
 	"apihelp-query+description-extended-description": "La descripción está en texto sin formato, en una sola línea, pero, por lo demás, arbitraria (puede incluir etiquetas HTML sin procesar, que también se deben interpretar como texto sin formato). ¡No debe usarse en HTML sin escapar!",

@@ -35,6 +35,7 @@
 	"apihelp-query+pageterms-summary": "Obtenir les termes de {{WBREPONAME}} (typiquement, les libellés, descriptions et alias) associés à une page via un lien de site.",
 	"apihelp-query+pageterms-example-simple": "Obtenir tous les termes associés avec la page 'London', dans la langue de l’utilisateur.",
 	"apihelp-query+pageterms-example-label-en": "Obtenir les libellés et les alias associés avec la page 'London', en anglais.",
+	"apihelp-query+pageterms-param-language": "Le code de langue dans lequel obtenir les conditions. Si non spécifié, la langue de l’utilisateur est utilisée.",
 	"apihelp-query+pageterms-param-terms": "Les types de termes à obtenir, par exemple 'description', chacun étant retourné en tant que tableau de chaînes accédées avec une clé égale au type cherché, par exemple  {\"description\": [\"foo\"]}. Si non spécifié, tous les types sont renvoyés.",
 	"apihelp-query+description-summary": "Obtenez une brève description sous-titre a.k.a expliquant ce qu'est la page cible.",
 	"apihelp-query+description-extended-description": "La description est du texte sans mise en forme, tenant sur une seule ligne, et par ailleurs arbitraire (potentiellement avec des balises HTML, qui seront interprétées comme du texte sans mise en forme). A ne pas utiliser à l'intérieur de HTML protégé !",

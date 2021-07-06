@@ -40,7 +40,7 @@
 	"wikibase-comment-unlink": "تم فصل ارتباط هذه الصفحة من عنصر {{WBREPONAME}}. تمت إزالة وصلات اللغة.",
 	"wikibase-comment-restore": "تم استرجاع عنصر {{WBREPONAME}} المرتبط. وصلات اللغة أعيدت.",
 	"wikibase-comment-update": "تغيير عنصر {{WBREPONAME}}",
-	"wikibase-comment-sitelink-add": "وصلة اللغة المُضافة:$1",
+	"wikibase-comment-sitelink-add": "وصلة اللغة المضافة:$1",
 	"wikibase-comment-sitelink-change": "تم تعديل وصلة اللغة من $1 إلى $2",
 	"wikibase-comment-sitelink-remove": "وصلة اللغة المُلغاة:$1",
 	"wikibase-comment-multi": "{{PLURAL:$1|لا تعديلات|تعديل|تعديلين|$1 تعديلات|$1 تعديلاً|$1 تعديل}}",

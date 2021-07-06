@@ -184,6 +184,7 @@
 	"apihelp-wbsearchentities-example-5": "Rechercher « alphabet » en anglais sans le paramètre d’URL",
 	"apihelp-wbsearchentities-example-6": "Rechercher « Q1234 » en anglais, pour correspondre à l’ID de l’entité.",
 	"apihelp-query+entityterms-summary": "Obtenir les termes (étiquettes, descriptions et alias) de l'entité sur cette page.",
+	"apihelp-query+entityterms-param-language": "Le code de langue dans lequel obtenir les conditions. Si non spécifié, la langue de l’utilisateur est utilisée.",
 	"apihelp-query+entityterms-param-terms": "Types des termes à récupérer, par exemple 'description', chacun valeur renvoyée est un tableau de chaînes ayant pour clé le type, par exemple {\"description\": [\"foo\"]}. Si non spécifié, tous les types sont renvoyés.",
 	"apihelp-query+entityterms-example-item": "Obtenir les libellés et les alias de l’élément Q84.",
 	"apihelp-query+wbcontentlanguages-summary": "Retourne des informations sur les langues de contenu acceptées par Wikibase dans les différents contextes.",

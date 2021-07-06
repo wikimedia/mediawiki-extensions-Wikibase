@@ -36,6 +36,7 @@
 	"apihelp-query+pageterms-summary": "Obtenha os termos {{WBREPONAME}} (geralmente rótulos, descrições e alias) associados a uma página por meio de um link de site.",
 	"apihelp-query+pageterms-example-simple": "Obtenha todos os termos associados à página 'London', no idioma do usuário.",
 	"apihelp-query+pageterms-example-label-en": "Obtenha rótulos e alias associados à página 'London', em inglês.",
+	"apihelp-query+pageterms-param-language": "O código do idioma no qual os termos serão inseridos. Se não for especificado, o idioma do usuário será usado.",
 	"apihelp-query+pageterms-param-terms": "Os tipos de termos a serem obtidos, p.ex. 'description' ,cada um retornou uma matriz de cadeias com chave por seu tipo, e. {\"description\": [\"foo\"]}. Se não for especificado, todos os tipos são devolvidos.",
 	"apihelp-query+description-summary": "Obter uma descrição breve, isto é, um subtítulo que explica o objetivo da página de destino.",
 	"apihelp-query+description-extended-description": "A descrição é texto simples, numa única linha, mas em tudo o resto arbitrária (possivelmente incluindo elementos de HTML puro, que também devem ser interpretados como texto simples). Não pode ser usada no interior de HTML sem escapes!",

@@ -33,6 +33,7 @@
 	"apihelp-query+pageterms-summary": "Pigghie le termine {{WBREPONAME}} (normalmende etichette, descriziune e alias) associate a 'na pàgene ausanne 'nu collegamende a 'u site.",
 	"apihelp-query+pageterms-example-simple": "Pigghie tutte le vôsce associate cu 'a pàgene 'London', jndr'à lènghe de l'utende.",
 	"apihelp-query+pageterms-example-label-en": "Pigghie le atichette e le alias associate a 'a pàgene 'London', in inglese.",
+	"apihelp-query+pageterms-param-language": "'U codece d'a lènghe pe pigghià le termine. Ce no specifecate, avène ausate 'a lènghe de l'utende.",
 	"apihelp-query+pageterms-param-terms": "Le tipe de le termine da pigghià, pe esembie 'description', ognune turnate cumme 'na matrice de stringhe cu chiave 'u tipe lore, pe esembie {\"description\": [\"foo\"]}. Ce non g'avène specificate, avènene restituite tutte le tipe.",
 	"apihelp-query+description-summary": "Pigghie 'na descrizione corte a.k.a. sottotitole spieganne qual è 'a pàgene de destinazione.",
 	"apihelp-query+description-extended-description": "'A descrizione jè 'nu teste semblice, sus a 'na sola linèe, o anghe arbitrarie (ca tène potenzialmende le tag HTML grezze, ca avessera essere 'nderpretate cumme teste piane). Non g'adda essere ausate jndr'à l'HTML cumme teste senze escape!",
