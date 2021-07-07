@@ -850,7 +850,7 @@ final class RepoHooks {
 	 * @param array[] &$data
 	 */
 	public static function onAPIQuerySiteInfoStatisticsInfo( array &$data ) {
-		$stats = new DispatchStats();
+		$stats = new DispatchStats( WikibaseRepo::getRepoDomainDbFactory()->newRepoDb() );
 		$stats->load();
 		if ( $stats->hasStats() ) {
 			$data['dispatch'] = [
@@ -1036,7 +1036,7 @@ final class RepoHooks {
 			return;
 		}
 
-		$stats = new DispatchStats();
+		$stats = new DispatchStats( WikibaseRepo::getRepoDomainDbFactory()->newRepoDb() );
 		$stats->load();
 		$median = $stats->getMedian();
 

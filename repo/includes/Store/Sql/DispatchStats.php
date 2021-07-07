@@ -2,6 +2,9 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
+use stdClass;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
+
 /**
  * Utility class for collecting dispatch statistics.
  * Note that you must call load() before accessing any getters.
@@ -13,19 +16,28 @@ namespace Wikibase\Repo\Store\Sql;
 class DispatchStats {
 
 	/**
-	 * @var \stdClass[]|null
+	 * @var stdClass[]|null
 	 */
 	private $clientStates = null;
 
 	/**
-	 * @var \stdClass|null
+	 * @var stdClass|null
 	 */
 	private $changeStats = null;
 
 	/**
-	 * @var \stdClass|null
+	 * @var stdClass|null
 	 */
 	private $average = null;
+
+	/**
+	 * @var RepoDomainDb
+	 */
+	private $db;
+
+	public function __construct( RepoDomainDb $repoDomainDb ) {
+		$this->db = $repoDomainDb;
+	}
 
 	/**
 	 * Loads the current dispatch status from the database and calculates statistics.
@@ -36,7 +48,7 @@ class DispatchStats {
 	 * @return int the number of client wikis.
 	 */
 	public function load( $now = 0 ) {
-		$db = wfGetDB( DB_REPLICA ); // XXX: use master?
+		$db = $this->db->connections()->getReadConnectionRef();
 
 		$now = wfTimestamp( TS_UNIX, $now );
 
@@ -154,7 +166,7 @@ class DispatchStats {
 	 *            determined, but the lag is large.
 	 * * chd_lock: the name of the lock currently in effect for that wiki
 	 *
-	 * @return \stdClass[]|null A list of objects representing the dispatch state
+	 * @return stdClass[]|null A list of objects representing the dispatch state
 	 *         for each client wiki.
 	 */
 	public function getClientStates() {
@@ -176,7 +188,7 @@ class DispatchStats {
 	 *
 	 * See getClientStates() for the structure of the status object.
 	 *
-	 * @return \stdClass|null
+	 * @return stdClass|null
 	 */
 	public function getFreshest() {
 		return $this->clientStates ? end( $this->clientStates ) : null;
@@ -188,7 +200,7 @@ class DispatchStats {
 	 *
 	 * See getClientStates() for the structure of the status object.
 	 *
-	 * @return \stdClass|null
+	 * @return stdClass|null
 	 */
 	public function getStalest() {
 		return $this->clientStates ? reset( $this->clientStates ) : null;
@@ -200,7 +212,7 @@ class DispatchStats {
 	 *
 	 * See getClientStates() for the structure of the status object.
 	 *
-	 * @return \stdClass|null
+	 * @return stdClass|null
 	 */
 	public function getMedian() {
 		if ( empty( $this->clientStates ) ) {
@@ -222,7 +234,7 @@ class DispatchStats {
 	 *            have already been pruned. This indicates that the average could not be
 	 *            determined, but the lag is large.
 	 *
-	 * @return \stdClass
+	 * @return stdClass
 	 */
 	public function getAverage() {
 		return $this->average;
