@@ -12,10 +12,10 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
@@ -92,8 +92,6 @@ class MultipleEntitySourceServicesTest extends TestCase {
 		$itemServices->method( 'getEntityPrefetcher' )
 			->willReturn( $itemPrefetcher );
 
-		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
-
 		$services = new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [
 				new EntitySource(
@@ -105,7 +103,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 					'',
 					''
 				)
-			], $entityTypeDefinitions ),
+			], new SubEntityTypesMapper( [] ) ),
 			[ 'items' => $itemServices ]
 		);
 
@@ -133,7 +131,6 @@ class MultipleEntitySourceServicesTest extends TestCase {
 	}
 
 	public function testGivenNoSourceProvidingProperties_getPropertyInfoLookupThrowsException() {
-		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		$services = new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [
 				new EntitySource(
@@ -145,7 +142,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 					'',
 					''
 				),
-			], $entityTypeDefinitions ),
+			], new SubEntityTypesMapper( [] ) ),
 			[]
 		);
 
@@ -207,7 +204,6 @@ class MultipleEntitySourceServicesTest extends TestCase {
 	 * @return MultipleEntitySourceServices
 	 */
 	private function newMultipleEntitySourceServices( array $perSourceServices ) {
-		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		return new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [
 				new EntitySource(
@@ -228,7 +224,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 					'prop',
 					'props'
 				),
-			], $entityTypeDefinitions ),
+			], new SubEntityTypesMapper( [] ) ),
 			$perSourceServices
 		);
 	}

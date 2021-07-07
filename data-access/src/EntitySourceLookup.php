@@ -21,11 +21,11 @@ class EntitySourceLookup {
 	/**
 	 * @var SubEntityTypesMapper
 	 */
-	private $subEntityTypesMap;
+	private $subEntityTypesMapper;
 
-	public function __construct( EntitySourceDefinitions $entitySourceDefinitions, SubEntityTypesMapper $subEntityTypesMap ) {
+	public function __construct( EntitySourceDefinitions $entitySourceDefinitions, SubEntityTypesMapper $subEntityTypesMapper ) {
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
-		$this->subEntityTypesMap = $subEntityTypesMap;
+		$this->subEntityTypesMapper = $subEntityTypesMapper;
 	}
 
 	public function getEntitySourceById( EntityId $id ): EntitySource {
@@ -40,7 +40,7 @@ class EntitySourceLookup {
 
 		foreach ( $this->entitySourceDefinitions->getSources() as $source ) {
 			$idType = $id->getEntityType();
-			$topLevelEntityType = $this->subEntityTypesMap->getParentEntityType( $idType ) ?? $idType;
+			$topLevelEntityType = $this->subEntityTypesMapper->getParentEntityType( $idType ) ?? $idType;
 
 			// TODO this returns the first entity source that is not an api source that has this entity type. In the case there is more than
 			// one configured, this could be bad.

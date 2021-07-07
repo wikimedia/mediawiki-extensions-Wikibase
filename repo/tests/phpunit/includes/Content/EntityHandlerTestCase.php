@@ -27,6 +27,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Content\EntityInstanceHolder;
@@ -93,7 +94,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 				'',
 				''
 			) ],
-			$entityTypeDefinitions
+			new SubEntityTypesMapper( [] )
 		) );
 	}
 

@@ -936,14 +936,14 @@ return [
 
 	'WikibaseRepo.EntitySourceDefinitions' => function ( MediaWikiServices $services ): EntitySourceDefinitions {
 		$settings = WikibaseRepo::getSettings( $services );
-		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
+		$subEntityTypesMapper = WikibaseRepo::getSubEntityTypesMapper( $services );
 
 		if ( $settings->hasSetting( 'entitySources' ) && !empty( $settings->getSetting( 'entitySources' ) ) ) {
 			$configParser = new EntitySourceDefinitionsConfigParser();
 
 			return $configParser->newDefinitionsFromConfigArray(
 				$settings->getSetting( 'entitySources' ),
-				$entityTypeDefinitions
+				$subEntityTypesMapper
 			);
 		}
 
@@ -953,12 +953,12 @@ return [
 			$configParser = new FederatedPropertiesEntitySourceDefinitionsConfigParser( $settings );
 
 			return $configParser->initializeDefaults(
-				$parser->newDefinitionsFromSettings( $settings, $entityTypeDefinitions ),
-				$entityTypeDefinitions
+				$parser->newDefinitionsFromSettings( $settings, $subEntityTypesMapper ),
+				$subEntityTypesMapper
 			);
 		}
 
-		return $parser->newDefinitionsFromSettings( $settings, $entityTypeDefinitions );
+		return $parser->newDefinitionsFromSettings( $settings, $subEntityTypesMapper );
 	},
 
 	'WikibaseRepo.EntityStore' => function ( MediaWikiServices $services ): EntityStore {

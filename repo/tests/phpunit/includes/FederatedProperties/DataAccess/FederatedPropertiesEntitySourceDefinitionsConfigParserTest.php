@@ -8,8 +8,8 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 
 /**
@@ -36,11 +36,11 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParserTest extends TestCas
 		$defaultSettings = new SettingsArray( $this->defaultArraySettings );
 
 		$parser = new FederatedPropertiesEntitySourceDefinitionsConfigParser( $defaultSettings );
-		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
+		$subEntityTypesMapper = new SubEntityTypesMapper( [] );
 
 		$parser->initializeDefaults(
-			new EntitySourceDefinitions( [ $nonDefaultEntitySourceName ], $entityTypeDefinitions ),
-			$entityTypeDefinitions
+			new EntitySourceDefinitions( [ $nonDefaultEntitySourceName ], $subEntityTypesMapper ),
+			$subEntityTypesMapper
 		);
 	}
 
@@ -49,11 +49,11 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParserTest extends TestCas
 	 */
 	public function testFederatedPropertiesInitializesDefaults(
 		EntitySourceDefinitions $sourceDefinitions,
-		EntityTypeDefinitions $entityTypeDefinitions,
+		SubEntityTypesMapper $subEntityTypesMapper,
 		SettingsArray $settings,
 		array $expectedEntitySourceArray ) {
 		$parser = new FederatedPropertiesEntitySourceDefinitionsConfigParser( $settings );
-		$newSourceDefinitions = $parser->initializeDefaults( $sourceDefinitions, $entityTypeDefinitions );
+		$newSourceDefinitions = $parser->initializeDefaults( $sourceDefinitions, $subEntityTypesMapper );
 
 		$propertySource = $newSourceDefinitions->getSourceForEntityType( 'property' );
 
@@ -96,22 +96,22 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParserTest extends TestCas
 			'mediainfo' => [ 'namespaceId' => 123, 'slot' => 'main' ]
 		] );
 
-		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
+		$subEntityTypesMapper = new SubEntityTypesMapper( [] );
 
 		$defaultSettings = new SettingsArray( $this->defaultArraySettings );
 
 		return [
 			'default' => [
-				new EntitySourceDefinitions( [ $defaultLocal ], $entityTypeDefinitions ),
-				$entityTypeDefinitions,
+				new EntitySourceDefinitions( [ $defaultLocal ], $subEntityTypesMapper ),
+				$subEntityTypesMapper,
 				$defaultSettings,
 				[
 					'item' => $this->getDefaultEntitySource( [ 'item' => [ 'namespaceId' => 120, 'slot' => 'main' ] ] )
 				]
 			],
 			'defaultWithMediaInfo' => [
-				new EntitySourceDefinitions( [ $mediainfoLocal ], $entityTypeDefinitions ),
-				$entityTypeDefinitions,
+				new EntitySourceDefinitions( [ $mediainfoLocal ], $subEntityTypesMapper ),
+				$subEntityTypesMapper,
 				$defaultSettings,
 				[
 					'item' => $this->getDefaultEntitySource( [

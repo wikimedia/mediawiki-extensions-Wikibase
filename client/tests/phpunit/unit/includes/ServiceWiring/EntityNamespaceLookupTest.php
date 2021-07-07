@@ -6,8 +6,8 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @coversNothing
@@ -33,7 +33,7 @@ class EntityNamespaceLookupTest extends ServiceWiringTestCase {
 			},
 			$entityNSDefinitions,
 			range( 0, count( $entityNSDefinitions ) - 1 )
-		), new EntityTypeDefinitions( [] ) );
+		), new SubEntityTypesMapper( [] ) );
 	}
 
 	public function testConstruction(): void {

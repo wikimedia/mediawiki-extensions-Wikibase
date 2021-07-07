@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Tests\Rdf;
 use Closure;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Rdf\EntityStubRdfBuilder;
 use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
@@ -27,7 +27,7 @@ class EntityStubRdfBuilderFactoryTest extends TestCase {
 		$vocab = new RdfVocabulary(
 			[ '' => RdfBuilderTestData::URI_BASE ],
 			[ '' => RdfBuilderTestData::URI_DATA ],
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 			[ '' => '' ],
 			[ '' => '' ]
 		);

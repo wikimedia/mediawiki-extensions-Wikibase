@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
 
 /**
@@ -28,7 +28,7 @@ class EntitySourceDefinitionsLegacyRepoSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();
@@ -61,7 +61,7 @@ class EntitySourceDefinitionsLegacyRepoSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();
@@ -101,7 +101,7 @@ class EntitySourceDefinitionsLegacyRepoSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();
@@ -127,7 +127,7 @@ class EntitySourceDefinitionsLegacyRepoSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();
@@ -157,7 +157,7 @@ class EntitySourceDefinitionsLegacyRepoSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();
@@ -181,7 +181,7 @@ class EntitySourceDefinitionsLegacyRepoSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();

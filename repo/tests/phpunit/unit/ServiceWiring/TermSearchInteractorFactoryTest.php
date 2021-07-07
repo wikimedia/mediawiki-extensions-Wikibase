@@ -5,10 +5,10 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\PrefetchingTermLookupFactory;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -23,7 +23,7 @@ class TermSearchInteractorFactoryTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$this->mockService(
 			'WikibaseRepo.EntitySourceDefinitions',
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) )
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) )
 		);
 
 		$this->mockService(

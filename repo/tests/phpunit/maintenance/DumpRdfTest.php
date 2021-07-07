@@ -33,7 +33,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Maintenance\DumpRdf;
 use Wikibase\Repo\Rdf\RdfBuilderFactory;
@@ -170,7 +170,7 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 				new RdfVocabulary(
 					[ '' => 'fooUri/' ],
 					[ '' => 'acme/EntityData/' ],
-					new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+					new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 					[ '' => '' ],
 					[ '' => '' ]
 				),

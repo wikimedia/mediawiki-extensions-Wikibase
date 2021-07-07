@@ -23,7 +23,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -141,7 +140,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 						'',
 						''
 					)
-				], new EntityTypeDefinitions( [] ) ),
+				], new SubEntityTypesMapper( [] ) ),
 				[ 'test' => 'wd' ],
 				[ 'test' => '' ]
 			),

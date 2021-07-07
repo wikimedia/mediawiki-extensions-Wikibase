@@ -20,7 +20,7 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @covers \Wikibase\Client\RecentChanges\ChangeLineFormatter
@@ -54,7 +54,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		] );
 
 		$this->repoLinker = new RepoLinker(
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 			'http://www.wikidata.org',
 			'/wiki/$1',
 			'/w'

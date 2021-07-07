@@ -8,7 +8,7 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @covers \Wikibase\Client\RepoLinker
@@ -75,7 +75,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 						''
 					)
 				],
-				new EntityTypeDefinitions( [] )
+				new SubEntityTypesMapper( [] )
 			),
 			$settings['baseUrl'],
 			$settings['articlePath'],
@@ -267,7 +267,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 						''
 					),
 				],
-				new EntityTypeDefinitions( [] )
+				new SubEntityTypesMapper( [] )
 			),
 			'BASE_URI',
 			'ARTICLE_PATH',

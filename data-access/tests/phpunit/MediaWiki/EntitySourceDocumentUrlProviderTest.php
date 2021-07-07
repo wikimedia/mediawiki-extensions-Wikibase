@@ -7,7 +7,7 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\MediaWiki\EntitySourceDocumentUrlProvider;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @covers \Wikibase\DataAccess\MediaWiki\EntitySourceDocumentUrlProvider
@@ -35,7 +35,7 @@ class EntitySourceDocumentUrlProviderTest extends MediaWikiIntegrationTestCase {
 				'',
 				''
 			) ],
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$urlProvider = new EntitySourceDocumentUrlProvider( $this->getServiceContainer()->getTitleFactory() );
@@ -65,7 +65,7 @@ class EntitySourceDocumentUrlProviderTest extends MediaWikiIntegrationTestCase {
 				'',
 				'nonlocal'
 			) ],
-		new EntityTypeDefinitions( [] ) );
+		new SubEntityTypesMapper( [] ) );
 
 		$urlProvider = new EntitySourceDocumentUrlProvider( $this->getServiceContainer()->getTitleFactory() );
 

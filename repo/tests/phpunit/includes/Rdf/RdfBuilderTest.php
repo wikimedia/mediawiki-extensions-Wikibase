@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Rdf\DedupeBag;
@@ -562,7 +563,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			[ '' => RdfBuilderTestData::URI_DATA ],
 			new EntitySourceDefinitions( [
 				new EntitySource( '', 'somedb', [ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' )
-			], new EntityTypeDefinitions( [] ) ),
+			], new SubEntityTypesMapper( [] ) ),
 			[ '' => '' ],
 			[ '' => '' ],
 			[],
@@ -589,7 +590,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$vocab = new RdfVocabulary(
 			[ '' => RdfBuilderTestData::URI_BASE ],
 			[ '' => RdfBuilderTestData::URI_DATA ],
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 			[ '' => '' ],
 			[ '' => '' ],
 			[],

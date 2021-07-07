@@ -6,7 +6,7 @@ use DataValues\StringValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\Values\GeoShapeRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
@@ -38,7 +38,7 @@ class GeoShapeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://test/item/' ],
 			[ '' => 'http://test/data/' ],
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 			[ '' => '' ],
 			[ '' => '' ]
 		);

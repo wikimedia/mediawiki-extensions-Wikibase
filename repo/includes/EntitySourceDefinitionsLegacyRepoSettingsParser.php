@@ -7,8 +7,8 @@ use MWException;
 use MWNamespace;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * TODO: alternatively, the logic could go to the "static constructor" of EntitySourceDefinitions class?
@@ -17,7 +17,7 @@ use Wikibase\Lib\SettingsArray;
  */
 class EntitySourceDefinitionsLegacyRepoSettingsParser {
 
-	public function newDefinitionsFromSettings( SettingsArray $settings, EntityTypeDefinitions $entityTypeDefinitions ) {
+	public function newDefinitionsFromSettings( SettingsArray $settings, SubEntityTypesMapper $subEntityTypesMapper ) {
 		$localEntityNamespaces = $settings->getSetting( 'entityNamespaces' );
 		$localDatabaseName = $settings->getSetting( 'changesDatabase' );
 		$localConceptBaseUri = $settings->getSetting( 'conceptBaseUri' );
@@ -69,7 +69,7 @@ class EntitySourceDefinitionsLegacyRepoSettingsParser {
 			);
 		}
 
-		return new EntitySourceDefinitions( $sources, $entityTypeDefinitions );
+		return new EntitySourceDefinitions( $sources, $subEntityTypesMapper );
 	}
 
 	private function splitNamespaceAndSlot( $namespaceAndSlot ) {

@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Rdf;
 
 use Closure;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Rdf\DedupeBag;
 use Wikibase\Repo\Rdf\EntityMentionListener;
 use Wikibase\Repo\Rdf\NullDedupeBag;
@@ -41,7 +41,7 @@ class ValueSnakRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 		$vocab = new RdfVocabulary(
 			[ ''  => RdfBuilderTestData::URI_BASE ],
 			[ '' => RdfBuilderTestData::URI_DATA ],
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 			[ '' => '' ],
 			[ '' => '' ]
 		);

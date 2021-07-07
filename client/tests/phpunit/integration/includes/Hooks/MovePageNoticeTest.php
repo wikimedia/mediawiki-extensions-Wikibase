@@ -10,8 +10,8 @@ use Wikibase\Client\Hooks\MovePageNotice;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @covers \Wikibase\Client\Hooks\MovePageNotice
@@ -38,7 +38,7 @@ class MovePageNoticeTest extends MediaWikiIntegrationTestCase {
 		$scriptPath = '';
 
 		return new RepoLinker(
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 			$baseUrl,
 			$articlePath,
 			$scriptPath

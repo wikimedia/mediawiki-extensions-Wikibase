@@ -21,7 +21,6 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -110,7 +109,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 						'',
 						''
 					)
-				], new EntityTypeDefinitions( [] ) ),
+				], new SubEntityTypesMapper( [] ) ),
 				[ 'test' => '' ],
 				[ 'test' => '' ]
 			),

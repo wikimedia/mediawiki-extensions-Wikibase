@@ -12,12 +12,12 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
@@ -129,7 +129,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 					'o',
 					'otherwiki'
 				)
-			], new EntityTypeDefinitions( [] ) ),
+			], new SubEntityTypesMapper( [] ) ),
 			$this->newMockTitleTextLookup(),
 			$this->newMockUrlLookup(),
 			$this->newMockArticleIdLookup(),
@@ -394,7 +394,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 						''
 					)
 				],
-				new EntityTypeDefinitions( [] )
+				new SubEntityTypesMapper( [] )
 			),
 			$this->newMockTitleTextLookup(),
 			$this->newMockUrlLookup(),

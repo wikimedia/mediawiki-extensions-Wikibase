@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -43,7 +43,7 @@ class LocalEntitySourceTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( $settingsArray ) );
 		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions',
-			new EntitySourceDefinitions( $mockEntitySources, new EntityTypeDefinitions( [] ) ) );
+			new EntitySourceDefinitions( $mockEntitySources, new SubEntityTypesMapper( [] ) ) );
 
 		$localEntitySource = $this->getService( 'WikibaseRepo.LocalEntitySource' );
 

@@ -9,7 +9,7 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Content\ContentHandlerEntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemContent;
@@ -72,7 +72,7 @@ class ContentHandlerEntityTitleLookupTest extends MediaWikiIntegrationTestCase {
 
 		return new ContentHandlerEntityTitleLookup(
 			$this->newFactory(),
-			new EntitySourceDefinitions( [ $itemSource, $propertySource ], new EntityTypeDefinitions( [] ) ),
+			new EntitySourceDefinitions( [ $itemSource, $propertySource ], new SubEntityTypesMapper( [] ) ),
 			$itemSource,
 			MediaWikiServices::getInstance()->getInterwikiLookup()
 		);

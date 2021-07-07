@@ -7,8 +7,8 @@ use InvalidArgumentException;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * A class to initialize default entitySource values for federated properties
@@ -60,10 +60,10 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParser {
 	 * based on what we know of the setup of www.wikidata.org
 	 *
 	 * @param EntitySourceDefinitions $definitions
-	 * @param EntityTypeDefinitions $entityTypeDefinitions
+	 * @param SubEntityTypesMapper $subEntityTypesMapper
 	 * @return EntitySourceDefinitions
 	 */
-	public function initializeDefaults( EntitySourceDefinitions $definitions, EntityTypeDefinitions $entityTypeDefinitions ) {
+	public function initializeDefaults( EntitySourceDefinitions $definitions, SubEntityTypesMapper $subEntityTypesMapper ) {
 
 		if ( $this->sourceScriptUrl !== 'https://www.wikidata.org/w/' ) {
 			return $definitions;
@@ -107,6 +107,6 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParser {
 			EntitySource::TYPE_API
 		);
 
-		return new EntitySourceDefinitions( [ $newLocal, $fedPropsSource ], $entityTypeDefinitions );
+		return new EntitySourceDefinitions( [ $newLocal, $fedPropsSource ], $subEntityTypesMapper );
 	}
 }

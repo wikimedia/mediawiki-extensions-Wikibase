@@ -7,7 +7,7 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\WikibaseServices;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @coversNothing
@@ -30,7 +30,7 @@ class WikibaseServicesTest extends ServiceWiringTestCase {
 					'',
 					'item'
 				) ],
-				new EntityTypeDefinitions( [] )
+				new SubEntityTypesMapper( [] )
 			) );
 		$this->mockService(
 			'WikibaseClient.SingleEntitySourceServicesFactory',

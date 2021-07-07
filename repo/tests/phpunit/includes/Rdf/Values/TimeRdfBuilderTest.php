@@ -6,7 +6,7 @@ use DataValues\TimeValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Rdf\HashDedupeBag;
 use Wikibase\Repo\Rdf\JulianDateTimeValueCleaner;
 use Wikibase\Repo\Rdf\RdfVocabulary;
@@ -171,7 +171,7 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://acme.com/item/' ],
 			[ '' => 'http://acme.com/data/' ],
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 			[ '' => '' ],
 			[ '' => '' ]
 		);

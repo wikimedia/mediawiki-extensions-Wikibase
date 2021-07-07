@@ -22,9 +22,9 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\RedirectRevision;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -137,7 +137,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 						'pro',
 						'p'
 					),
-				], new EntityTypeDefinitions( [] ) ),
+				], new SubEntityTypesMapper( [] ) ),
 				[ 'items' => 'wd', 'props' => 'pro', ],
 				[ 'items' => '', 'props' => 'pro', ]
 			),

@@ -8,7 +8,7 @@ use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @covers \Wikibase\Client\RepoItemLinkGenerator
@@ -29,7 +29,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$scriptPath = '';
 
 		return new RepoLinker(
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 			$baseUrl,
 			$articlePath,
 			$scriptPath

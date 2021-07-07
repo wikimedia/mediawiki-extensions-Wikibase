@@ -24,6 +24,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Dumpers\RdfDumpGenerator;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
@@ -315,7 +316,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 						'',
 						''
 					)
-				], new EntityTypeDefinitions( [] ) ),
+				], new SubEntityTypesMapper( [] ) ),
 				[ 'test' => 'wd', 'foreign' => 'foreign' ],
 				[ 'test' => '', 'foreign' => 'foreign' ],
 				[ 'test' => 'en-x-test' ]

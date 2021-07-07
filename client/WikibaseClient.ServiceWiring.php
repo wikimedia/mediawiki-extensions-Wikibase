@@ -117,6 +117,7 @@ use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
@@ -407,16 +408,17 @@ return [
 	// the way these are configured in Repo and in Client parts
 	'WikibaseClient.EntitySourceDefinitions' => function ( MediaWikiServices $services ): EntitySourceDefinitions {
 		$settings = WikibaseClient::getSettings( $services );
-		$entityTypeDefinitions = WikibaseClient::getEntityTypeDefinitions( $services );
+		$subEntityTypesMapper = new SubEntityTypesMapper( WikibaseClient::getEntityTypeDefinitions( $services )
+			->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) );
 
 		if ( $settings->hasSetting( 'entitySources' ) && !empty( $settings->getSetting( 'entitySources' ) ) ) {
 			$configParser = new EntitySourceDefinitionsConfigParser();
 
-			return $configParser->newDefinitionsFromConfigArray( $settings->getSetting( 'entitySources' ), $entityTypeDefinitions );
+			return $configParser->newDefinitionsFromConfigArray( $settings->getSetting( 'entitySources' ), $subEntityTypesMapper );
 		}
 
 		$parser = new EntitySourceDefinitionsLegacyClientSettingsParser();
-		return $parser->newDefinitionsFromSettings( $settings, $entityTypeDefinitions );
+		return $parser->newDefinitionsFromSettings( $settings, $subEntityTypesMapper );
 	},
 
 	'WikibaseClient.EntityTypeDefinitions' => function ( MediaWikiServices $services ): EntityTypeDefinitions {

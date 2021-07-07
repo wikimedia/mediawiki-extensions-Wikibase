@@ -9,7 +9,7 @@ use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @coversNothing
@@ -36,7 +36,7 @@ class ItemSourceTest extends ServiceWiringTestCase {
 					''
 				)
 			],
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 	}
 
