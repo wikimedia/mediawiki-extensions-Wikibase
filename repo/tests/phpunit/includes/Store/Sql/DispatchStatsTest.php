@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWikiIntegrationTestCase;
 use stdClass;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\Store\Sql\DispatchStats;
 
 /**
@@ -18,6 +19,8 @@ use Wikibase\Repo\Store\Sql\DispatchStats;
  */
 class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 
+	use LocalRepoDbTestHelper;
+
 	/**
 	 * Creates and loads a DispatchStats object, injecting test data into
 	 * the database as needed.
@@ -30,10 +33,8 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 		$changes = $data['changes'];
 		$states = $data['states'];
 
-		$dbw = wfGetDB( DB_PRIMARY ); // writes to dummy tables
-
-		$dbw->delete( 'wb_changes', [ "1=1" ] );
-		$dbw->delete( 'wb_changes_dispatch', [ "1=1" ] );
+		$this->db->delete( 'wb_changes', [ "1=1" ] );
+		$this->db->delete( 'wb_changes_dispatch', [ "1=1" ] );
 
 		foreach ( $changes as $row ) {
 			if ( $row === null ) {
@@ -52,7 +53,7 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 				$row['change_info'] = ''; // ugh
 			}
 
-			$dbw->insert( 'wb_changes',
+			$this->db->insert( 'wb_changes',
 				$row,
 				__METHOD__
 			);
@@ -63,13 +64,13 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 				continue;
 			}
 
-			$dbw->insert( 'wb_changes_dispatch',
+			$this->db->insert( 'wb_changes_dispatch',
 				$row,
 				__METHOD__
 			);
 		}
 
-		$stats = new DispatchStats();
+		$stats = new DispatchStats( $this->getRepoDomainDb( $this->db ) );
 		$stats->load( $now );
 		return $stats;
 	}
@@ -462,17 +463,15 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 		$this->assertTrue( $stats->hasStats() );
 
 		// No stats there before load has been called.
-		$unloadedStats = new DispatchStats();
+		$unloadedStats = new DispatchStats( $this->getRepoDomainDb( $this->db ) );
 		$this->assertFalse( $unloadedStats->hasStats() );
 	}
 
 	public function testHasNoStats() {
-		$dbw = wfGetDB( DB_PRIMARY );
+		$this->db->delete( 'wb_changes', '*' );
+		$this->db->delete( 'wb_changes_dispatch', '*' );
 
-		$dbw->delete( 'wb_changes', '*' );
-		$dbw->delete( 'wb_changes_dispatch', '*' );
-
-		$stats = new DispatchStats();
+		$stats = new DispatchStats( $this->getRepoDomainDb( $this->db ) );
 		$stats->load( time() );
 
 		$this->assertFalse( $stats->hasStats() ); // Still no stats as the table is empty
