@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @covers \Wikibase\DataAccess\EntitySourceLookup
@@ -34,7 +35,7 @@ class EntitySourceLookupTest extends TestCase {
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
 			NewEntitySource::havingName( 'some other source' )->build(),
 			$expectedSource,
-		] ), [] );
+		] ), new SubEntityTypesMapper( [] ) );
 
 		$this->assertSame( $expectedSource, $lookup->getEntitySourceById( $entityId ) );
 	}
@@ -48,7 +49,7 @@ class EntitySourceLookupTest extends TestCase {
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
 			NewEntitySource::havingName( 'some other source' )->build(),
 			$expectedSource,
-		] ), [] );
+		] ), new SubEntityTypesMapper( [] ) );
 
 		$this->assertSame( $expectedSource, $lookup->getEntitySourceById( $id ) );
 	}
@@ -58,7 +59,7 @@ class EntitySourceLookupTest extends TestCase {
 			NewEntitySource::havingName( 'im a property source' )
 				->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 121, 'slot' => 'main' ] ] )
 				->build(),
-		] ), [] );
+		] ), new SubEntityTypesMapper( [] ) );
 
 		$this->expectException( LogicException::class );
 
@@ -74,7 +75,7 @@ class EntitySourceLookupTest extends TestCase {
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
 			NewEntitySource::havingName( 'some other source' )->build(),
 			$expectedSource,
-		] ), [] );
+		] ), new SubEntityTypesMapper( [] ) );
 
 		$this->expectException( LogicException::class );
 		$lookup->getEntitySourceById( $entityId );
@@ -94,7 +95,7 @@ class EntitySourceLookupTest extends TestCase {
 				NewEntitySource::havingName( 'some other source' )->build(),
 				$expectedSource,
 			] ),
-			[ 'lexeme' => [ 'form', 'sense' ] ]
+			new SubEntityTypesMapper( [ 'lexeme' => [ 'form', 'sense' ] ] )
 		);
 
 		$this->assertSame( $expectedSource, $lookup->getEntitySourceById( $subEntityId ) );

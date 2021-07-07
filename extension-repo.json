@@ -472,7 +472,7 @@
 				"WikibaseRepo.Logger",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.Store",
-				"WikibaseRepo.SubEntityTypesMap"
+				"WikibaseRepo.SubEntityTypesMapper"
 			]
 		},
 		"EntityPage": {

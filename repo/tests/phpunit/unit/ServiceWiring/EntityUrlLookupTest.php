@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityUrlLookup;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -53,8 +54,8 @@ class EntityUrlLookupTest extends ServiceWiringTestCase {
 			)
 		);
 		$this->mockService(
-			'WikibaseRepo.SubEntityTypesMap',
-			[]
+			'WikibaseRepo.SubEntityTypesMapper',
+			new SubEntityTypesMapper( [] )
 		);
 
 		/** @var EntityUrlLookup $entityUrlLookup */

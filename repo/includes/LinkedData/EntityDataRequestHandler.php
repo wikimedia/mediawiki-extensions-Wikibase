@@ -20,6 +20,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikimedia\Http\HttpAcceptNegotiator;
 use Wikimedia\Http\HttpAcceptParser;
 
@@ -108,7 +109,7 @@ class EntityDataRequestHandler {
 	private $entityTypesWithoutRdfOutput;
 
 	/**
-	 * @var string[][]
+	 * @var SubEntityTypesMapper
 	 */
 	private $subEntityTypesMap;
 
@@ -126,7 +127,7 @@ class EntityDataRequestHandler {
 	 * @param int $maxAge number of seconds to cache entity data
 	 * @param bool $useCdn do we have web caches configured?
 	 * @param string|null $frameOptionsHeader for X-Frame-Options
-	 * @param string[][] $subEntityTypesMap
+	 * @param SubEntityTypesMapper $subEntityTypesMap
 	 */
 	public function __construct(
 		EntityDataUriManager $uriManager,
@@ -142,7 +143,7 @@ class EntityDataRequestHandler {
 		$maxAge,
 		$useCdn,
 		$frameOptionsHeader,
-		array $subEntityTypesMap
+		SubEntityTypesMapper $subEntityTypesMap
 	) {
 		$this->uriManager = $uriManager;
 		$this->htmlCacheUpdater = $htmlCacheUpdater;
@@ -465,7 +466,7 @@ class EntityDataRequestHandler {
 	}
 
 	private function validateRedirectability( EntityId $id, EntityId $redirectTargetId ): void {
-		if ( $this->isSubEntityTypeOf( $id->getEntityType(), $redirectTargetId->getEntityType() ) ) {
+		if ( $this->subEntityTypesMap->getParentEntityType( $id->getEntityType() ) === $redirectTargetId->getEntityType() ) {
 			throw new HttpError(
 				404,
 				wfMessage(
@@ -475,12 +476,6 @@ class EntityDataRequestHandler {
 				)
 			);
 		}
-	}
-
-	private function isSubEntityTypeOf( string $sourceType, string $targetType ): bool {
-		return $sourceType !== $targetType &&
-			array_key_exists( $targetType, $this->subEntityTypesMap ) &&
-			in_array( $sourceType, $this->subEntityTypesMap[$targetType] );
 	}
 
 	/**

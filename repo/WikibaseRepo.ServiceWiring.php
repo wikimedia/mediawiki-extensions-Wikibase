@@ -143,6 +143,7 @@ use Wikibase\Lib\Store\TypeDispatchingRedirectChecker;
 use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
@@ -728,7 +729,7 @@ return [
 		return new SourceAndTypeDispatchingExistenceChecker(
 			new EntitySourceLookup(
 				WikibaseRepo::getEntitySourceDefinitions( $services ),
-				WikibaseRepo::getSubEntityTypesMap( $services )
+				WikibaseRepo::getSubEntityTypesMapper( $services )
 			),
 			new ServiceBySourceAndTypeDispatcher(
 				EntityExistenceChecker::class,
@@ -1043,7 +1044,7 @@ return [
 			),
 			new EntitySourceLookup(
 				WikibaseRepo::getEntitySourceDefinitions( $services ),
-				WikibaseRepo::getSubEntityTypesMap( $services )
+				WikibaseRepo::getSubEntityTypesMapper( $services )
 			)
 		);
 	},
@@ -1703,9 +1704,9 @@ return [
 		return new StringNormalizer();
 	},
 
-	'WikibaseRepo.SubEntityTypesMap' => function ( MediaWikiServices $services ): array {
-		return WikibaseRepo::getEntityTypeDefinitions( $services )
-			->get( EntityTypeDefinitions::SUB_ENTITY_TYPES );
+	'WikibaseRepo.SubEntityTypesMapper' => function ( MediaWikiServices $services ): SubEntityTypesMapper {
+		return new SubEntityTypesMapper( WikibaseRepo::getEntityTypeDefinitions( $services )
+			->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) );
 	},
 
 	'WikibaseRepo.SummaryFormatter' => function ( MediaWikiServices $services ): SummaryFormatter {

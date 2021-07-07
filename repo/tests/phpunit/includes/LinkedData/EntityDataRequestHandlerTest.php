@@ -26,6 +26,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
@@ -216,7 +217,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			1800,
 			false,
 			null,
-			$this->subEntityTypesMap
+			new SubEntityTypesMapper( $this->subEntityTypesMap )
 		);
 
 		return $handler;

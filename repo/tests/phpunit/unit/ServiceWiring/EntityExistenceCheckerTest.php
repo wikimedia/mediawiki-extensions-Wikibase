@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityExistenceChecker;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -56,8 +57,8 @@ class EntityExistenceCheckerTest extends ServiceWiringTestCase {
 			)
 		);
 		$this->mockService(
-			'WikibaseRepo.SubEntityTypesMap',
-			[]
+			'WikibaseRepo.SubEntityTypesMapper',
+			new SubEntityTypesMapper( [] )
 		);
 
 		/** @var EntityExistenceChecker $entityExistenceChecker */

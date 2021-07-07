@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
@@ -61,7 +62,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		LoggerInterface $logger,
 		SettingsArray $repoSettings,
 		Store $store,
-		array $subEntityTypesMap
+		SubEntityTypesMapper $subEntityTypesMap
 	): self {
 		global $wgUseCdn, $wgApiFrameOptions;
 
