@@ -237,7 +237,8 @@ class SqlStore implements Store {
 	 */
 	public function newItemsWithoutSitelinksFinder() {
 		return new SqlItemsWithoutSitelinksFinder(
-			$this->entityNamespaceLookup
+			$this->entityNamespaceLookup,
+			WikibaseRepo::getRepoDomainDbFactory()->newForEntitySource( $this->entitySource )
 		);
 	}
 

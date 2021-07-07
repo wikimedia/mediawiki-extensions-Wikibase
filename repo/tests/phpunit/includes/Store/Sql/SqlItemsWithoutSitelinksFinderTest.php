@@ -6,6 +6,7 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder;
 
 /**
@@ -22,6 +23,8 @@ use Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder;
  */
 class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 
+	use LocalRepoDbTestHelper;
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -29,7 +32,7 @@ class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 		if ( !$setUp ) {
 			$setUp = true;
 
-			$dbw = wfGetDB( DB_PRIMARY );
+			$dbw = $this->db;
 
 			$dbw->delete( 'page', '*' );
 			$dbw->delete( 'page_props', '*' );
@@ -103,7 +106,8 @@ class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 
 	private function getSqlItemsWithoutSitelinksFinder() {
 		return new SqlItemsWithoutSitelinksFinder(
-			new EntityNamespaceLookup( [ Item::ENTITY_TYPE => 123 ] )
+			new EntityNamespaceLookup( [ Item::ENTITY_TYPE => 123 ] ),
+			$this->getRepoDomainDb( $this->db )
 		);
 	}
 

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Store\Sql;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 
@@ -21,8 +22,17 @@ class SqlItemsWithoutSitelinksFinder implements ItemsWithoutSitelinksFinder {
 	 */
 	private $entityNamespaceLookup;
 
-	public function __construct( EntityNamespaceLookup $entityNamespaceLookup ) {
+	/**
+	 * @var RepoDomainDb
+	 */
+	private $db;
+
+	public function __construct(
+		EntityNamespaceLookup $entityNamespaceLookup,
+		RepoDomainDb $repoDomainDb
+	) {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
+		$this->db = $repoDomainDb;
 	}
 
 	/**
@@ -32,7 +42,7 @@ class SqlItemsWithoutSitelinksFinder implements ItemsWithoutSitelinksFinder {
 	 * @return ItemId[]
 	 */
 	public function getItemsWithoutSitelinks( $limit = 50, $offset = 0 ) {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = $this->db->connections()->getReadConnectionRef();
 
 		$itemIdSerializations = $dbr->selectFieldValues(
 			[ 'page', 'page_props' ],
