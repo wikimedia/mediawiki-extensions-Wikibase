@@ -66,6 +66,10 @@ class EntityExistenceCheckerTest extends ServiceWiringTestCase {
 				$entitySourceDefinitions->getSources()
 			)
 		);
+		$this->mockService(
+			'WikibaseRepo.SubEntityTypesMap',
+			[]
+		);
 
 		/** @var EntityExistenceChecker $entityExistenceChecker */
 		$entityExistenceChecker = $this->getService( 'WikibaseRepo.EntityExistenceChecker' );
