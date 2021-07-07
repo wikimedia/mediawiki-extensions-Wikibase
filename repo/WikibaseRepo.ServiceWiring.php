@@ -94,6 +94,7 @@ use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
@@ -120,6 +121,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\Store\SourceAndTypeDispatchingUrlLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
@@ -136,12 +138,10 @@ use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
-use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\Store\TypeDispatchingArticleIdLookup;
 use Wikibase\Lib\Store\TypeDispatchingExistenceChecker;
 use Wikibase\Lib\Store\TypeDispatchingRedirectChecker;
 use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
-use Wikibase\Lib\Store\TypeDispatchingUrlLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
@@ -1037,11 +1037,15 @@ return [
 	},
 
 	'WikibaseRepo.EntityUrlLookup' => function ( MediaWikiServices $services ): EntityUrlLookup {
-		return new TypeDispatchingUrlLookup(
-			WikibaseRepo::getEntityTypeDefinitions( $services )
-				->get( EntityTypeDefinitions::URL_LOOKUP_CALLBACK ),
-			new TitleLookupBasedEntityUrlLookup(
-				WikibaseRepo::getEntityTitleLookup( $services )
+		return new SourceAndTypeDispatchingUrlLookup(
+			new ServiceBySourceAndTypeDispatcher(
+				EntityUrlLookup::class,
+				WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
+					->getServiceBySourceAndType( EntityTypeDefinitions::URL_LOOKUP_CALLBACK )
+			),
+			new EntitySourceLookup(
+				WikibaseRepo::getEntitySourceDefinitions( $services ),
+				WikibaseRepo::getSubEntityTypesMap( $services )
 			)
 		);
 	},

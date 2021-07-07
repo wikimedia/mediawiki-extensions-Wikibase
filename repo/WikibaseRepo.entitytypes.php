@@ -36,6 +36,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
+use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\Api\CombinedEntitySearchHelper;
@@ -252,6 +253,9 @@ return [
 
 			return new PrefetchingItemTermLookup( $termIdsResolver );
 		},
+		Def::URL_LOOKUP_CALLBACK => function () {
+			return new TitleLookupBasedEntityUrlLookup( WikibaseRepo::getEntityTitleLookup() );
+		},
 	],
 	'property' => [
 		Def::STORAGE_SERIALIZER_FACTORY_CALLBACK => function( SerializerFactory $serializerFactory ) {
@@ -455,6 +459,9 @@ return [
 				WikibaseContentLanguages::getDefaultInstance()
 					->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
 			);
+		},
+		Def::URL_LOOKUP_CALLBACK => function () {
+			return new TitleLookupBasedEntityUrlLookup( WikibaseRepo::getEntityTitleLookup() );
 		},
 	]
 ];
