@@ -12,16 +12,16 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\Store\EntityExistenceChecker;
-use Wikibase\Lib\Store\TypeDispatchingExistenceChecker;
+use Wikibase\Lib\Store\SourceAndTypeDispatchingExistenceChecker;
 
 /**
- * @covers \Wikibase\Lib\Store\TypeDispatchingExistenceChecker
+ * @covers \Wikibase\Lib\Store\SourceAndTypeDispatchingExistenceChecker
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class TypeDispatchingExistenceCheckerTest extends TestCase {
+class SourceAndTypeDispatchingExistenceCheckerTest extends TestCase {
 	/**
 	 * @var MockObject|EntitySourceLookup
 	 */
@@ -113,8 +113,8 @@ class TypeDispatchingExistenceCheckerTest extends TestCase {
 		$this->assertSame( $expected, $result );
 	}
 
-	private function newDispatchingExistenceChecker(): TypeDispatchingExistenceChecker {
-		return new TypeDispatchingExistenceChecker(
+	private function newDispatchingExistenceChecker(): SourceAndTypeDispatchingExistenceChecker {
+		return new SourceAndTypeDispatchingExistenceChecker(
 			$this->entitySourceLookup,
 			$this->serviceBySourceAndTypeDispatcher
 		);
