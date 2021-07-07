@@ -38,7 +38,7 @@ $.valueview = $.valueview || {};
 			expertDefinition = constructorOrExpertDefinition;
 		}
 
-		if ( !$.isFunction( base ) ) {
+		if ( typeof base !== 'function' ) {
 			throw new Error( 'The expert\'s base must be a constructor function' );
 		}
 
