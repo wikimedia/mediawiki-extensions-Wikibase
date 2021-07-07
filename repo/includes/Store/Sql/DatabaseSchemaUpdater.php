@@ -172,9 +172,11 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			// Foreign properties, skip this part
 			return;
 		}
+		$db = WikibaseRepo::getRepoDomainDbFactory()->newForEntitySource( $propertySource );
 		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 			WikibaseRepo::getEntityNamespaceLookup(),
-			WikibaseRepo::getEntityIdLookup()
+			WikibaseRepo::getEntityIdLookup(),
+			$db
 		);
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
@@ -184,7 +186,6 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		);
 
 		// Tables have potentially only just been created and we may need to wait, T268944
-		$db = WikibaseRepo::getRepoDomainDbFactory()->newForEntitySource( $propertySource );
 		$db->replication()->wait();
 
 		$rebuilder = new PropertyTermsRebuilder(
