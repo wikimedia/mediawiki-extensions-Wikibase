@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\PrefetchingTermLookupFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
@@ -24,11 +23,6 @@ class TermSearchInteractorFactoryTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.EntitySourceDefinitions',
 			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) )
-		);
-
-		$this->mockService(
-			'WikibaseRepo.PrefetchingTermLookupFactory',
-			$this->createMock( PrefetchingTermLookupFactory::class )
 		);
 
 		$this->mockService(

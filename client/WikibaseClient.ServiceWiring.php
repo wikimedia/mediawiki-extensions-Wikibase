@@ -46,16 +46,16 @@ use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
-use Wikibase\DataAccess\ByTypeDispatchingPrefetchingTermLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\DataAccess\PrefetchingTermLookupFactory;
 use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
 use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
+use Wikibase\DataAccess\SourceAndTypeDispatchingPrefetchingTermLookup;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -99,6 +99,7 @@ use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -616,21 +617,17 @@ return [
 	},
 
 	'WikibaseClient.PrefetchingTermLookup' => function ( MediaWikiServices $services ): PrefetchingTermLookup {
-		$entitySourceDefinitions = WikibaseClient::getEntitySourceDefinitions( $services );
-		$lookupFactory = WikibaseClient::getPrefetchingTermLookupFactory( $services );
-
-		$lookups = array_map(
-			[ $lookupFactory, 'getLookupForSource' ],
-			$entitySourceDefinitions->getEntityTypeToSourceMapping()
-		);
-
-		return new ByTypeDispatchingPrefetchingTermLookup( $lookups );
-	},
-
-	'WikibaseClient.PrefetchingTermLookupFactory' => function ( MediaWikiServices $services ): PrefetchingTermLookupFactory {
-		return new PrefetchingTermLookupFactory(
-			WikibaseClient::getEntitySourceDefinitions( $services ),
-			WikibaseClient::getEntityTypeDefinitions( $services )
+		return new SourceAndTypeDispatchingPrefetchingTermLookup(
+			new ServiceBySourceAndTypeDispatcher(
+				PrefetchingTermLookup::class,
+				WikibaseClient::getEntitySourceAndTypeDefinitions( $services )
+					->getServiceBySourceAndType( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK )
+			),
+			new EntitySourceLookup(
+				WikibaseClient::getEntitySourceDefinitions( $services ),
+				new SubEntityTypesMapper( WikibaseClient::getEntityTypeDefinitions( $services )
+				->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) )
+			)
 		);
 	},
 

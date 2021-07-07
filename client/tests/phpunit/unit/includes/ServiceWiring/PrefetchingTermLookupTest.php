@@ -6,7 +6,8 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\DataAccess\PrefetchingTermLookupFactory;
+use Wikibase\Lib\EntitySourceAndTypeDefinitions;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
@@ -23,9 +24,20 @@ class PrefetchingTermLookupTest extends ServiceWiringTestCase {
 			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) )
 		);
 
+		$sourceAndTypeDefinitions = $this->createMock( EntitySourceAndTypeDefinitions::class );
+		$sourceAndTypeDefinitions->expects( $this->once() )
+			->method( 'getServiceBySourceAndType' )
+			->with( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK )
+			->willReturn( [
+				'some-source' => [ 'some-entity-type' => function () {
+					return $this->createStub( PrefetchingTermLookup::class );
+				} ]
+			] );
+		$this->mockService( 'WikibaseClient.EntitySourceAndTypeDefinitions', $sourceAndTypeDefinitions );
+
 		$this->mockService(
-			'WikibaseClient.PrefetchingTermLookupFactory',
-			$this->createMock( PrefetchingTermLookupFactory::class )
+			'WikibaseClient.EntityTypeDefinitions',
+			new EntityTypeDefinitions( [] )
 		);
 
 		$this->assertInstanceOf(
