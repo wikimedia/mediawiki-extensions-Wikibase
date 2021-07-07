@@ -85,6 +85,7 @@ class DumpJson extends DumpEntities {
 			$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 				WikibaseRepo::getEntityNamespaceLookup( $mwServices ),
 				WikibaseRepo::getEntityIdLookup( $mwServices ),
+				WikibaseRepo::getRepoDomainDbFactory( $mwServices )->newRepoDb(),
 				$mwServices->getLinkCache()
 			);
 			$store = WikibaseRepo::getStore( $mwServices );

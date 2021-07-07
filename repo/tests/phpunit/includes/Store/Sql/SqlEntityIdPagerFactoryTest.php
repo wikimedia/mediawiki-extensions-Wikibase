@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
@@ -23,7 +24,8 @@ class SqlEntityIdPagerFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testNewSqlEntityIdPager() {
 		$factory = new SqlEntityIdPagerFactory(
 			new EntityNamespaceLookup( [] ),
-			$this->getMockEntityIdLookup()
+			$this->getMockEntityIdLookup(),
+			$this->createMock( RepoDomainDb::class )
 		);
 		$pager = $factory->newSqlEntityIdPager();
 

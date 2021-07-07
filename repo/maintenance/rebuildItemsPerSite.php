@@ -96,6 +96,7 @@ class RebuildItemsPerSite extends Maintenance {
 			$stream = new SqlEntityIdPager(
 				WikibaseRepo::getEntityNamespaceLookup( $mwServices ),
 				WikibaseRepo::getEntityIdLookup( $mwServices ),
+				$domainDB,
 				[ 'item' ]
 			);
 		}

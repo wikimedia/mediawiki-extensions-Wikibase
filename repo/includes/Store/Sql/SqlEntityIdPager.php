@@ -7,6 +7,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\DataModel\Services\EntityId\SeekableEntityIdPager;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikimedia\Assert\Assert;
@@ -50,10 +51,17 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 	 * @var int|null
 	 */
 	private $cutoffPosition = null;
+
 	/**
 	 * @var EntityIdLookup
 	 */
 	private $entityIdLookup;
+
+	/**
+	 * @var RepoDomainDb
+	 */
+	private $db;
+
 	/**
 	 * @var LinkCache|null
 	 */
@@ -62,6 +70,7 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 	/**
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param EntityIdLookup $entityIdLookup
+	 * @param RepoDomainDb $repoDomainDb
 	 * @param string[] $entityTypes The desired entity types, or empty array for any type.
 	 * @param string $redirectMode A EntityIdPager::XXX_REDIRECTS constant (default is NO_REDIRECTS).
 	 * @param LinkCache|null $linkCache
@@ -69,6 +78,7 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityIdLookup $entityIdLookup,
+		RepoDomainDb $repoDomainDb,
 		array $entityTypes = [],
 		$redirectMode = EntityIdPager::NO_REDIRECTS,
 		LinkCache $linkCache = null
@@ -79,6 +89,7 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 		$this->entityTypes = $entityTypes;
 		$this->redirectMode = $redirectMode;
 		$this->entityIdLookup = $entityIdLookup;
+		$this->db = $repoDomainDb;
 		$this->linkCache = $linkCache;
 	}
 
@@ -109,7 +120,7 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 			$orderBy = 'rd_from ASC';
 		}
 
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = $this->db->connections()->getReadConnectionRef();
 		$fields = array_unique( array_merge( LinkCache::getSelectFields(),
 				[ 'page_id', 'page_title', 'page_namespace' ] ) );
 		$rows = $dbr->select(
