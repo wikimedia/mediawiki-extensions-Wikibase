@@ -3,8 +3,9 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Repo\Store\Sql\DispatchStats;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Page for displaying diagnostics about the dispatch process.
@@ -14,8 +15,12 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SpecialDispatchStats extends SpecialWikibasePage {
 
-	public function __construct() {
+	/** @var RepoDomainDb */
+	private $db;
+
+	public function __construct( RepoDomainDbFactory $dbFactory ) {
 		parent::__construct( 'DispatchStats' );
+		$this->db = $dbFactory->newRepoDb();
 	}
 
 	protected function outputRow( $data, $tag = 'td', $attr = [] ) {
@@ -64,7 +69,7 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 
 		$lang = $this->getContext()->getLanguage();
 
-		$stats = new DispatchStats( WikibaseRepo::getRepoDomainDbFactory()->newRepoDb() );
+		$stats = new DispatchStats( $this->db );
 		$stats->load();
 
 		$this->getOutput()->addHTML( Html::rawElement( 'p', [],

@@ -453,7 +453,12 @@
 				"WikibaseRepo.DataTypeDefinitions"
 			]
 		},
-		"DispatchStats": "Wikibase\\Repo\\Specials\\SpecialDispatchStats",
+		"DispatchStats": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialDispatchStats",
+			"services": [
+				"WikibaseRepo.RepoDomainDbFactory"
+			]
+		},
 		"EntityData": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialEntityData",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityData::factory",
