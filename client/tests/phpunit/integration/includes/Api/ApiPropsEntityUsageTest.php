@@ -31,11 +31,10 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 		$this->tablesUsed[] = 'wbc_entity_usage';
 		parent::setUp();
 
-		self::insertEntityUsageData();
+		$this->insertEntityUsageData();
 	}
 
 	public function addDBDataOnce() {
-		$db = wfGetDB( DB_PRIMARY );
 		$dump = [
 			'page' => [
 				[
@@ -53,18 +52,17 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 
 		foreach ( $dump as $table => $rows ) {
 			// Clean everything
-			$db->delete( $table, '*' );
+			$this->db->delete( $table, '*' );
 
 			foreach ( $rows as $row ) {
 				$title = Title::newFromTextThrow( $row['page_title'], $row['page_namespace'] );
 				$page = WikiPage::factory( $title );
-				$page->insertOn( $db, $row['page_id'] );
+				$page->insertOn( $this->db, $row['page_id'] );
 			}
 		}
 	}
 
-	public static function insertEntityUsageData() {
-		$db = wfGetDB( DB_PRIMARY );
+	private function insertEntityUsageData() {
 		$dump = [
 			'wbc_entity_usage' => [
 				[
@@ -92,10 +90,10 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 
 		foreach ( $dump as $table => $rows ) {
 			// Clean everything
-			$db->delete( $table, '*' );
+			$this->db->delete( $table, '*' );
 
 			foreach ( $rows as $row ) {
-				$db->insert( $table, $row );
+				$this->db->insert( $table, $row );
 			}
 		}
 	}

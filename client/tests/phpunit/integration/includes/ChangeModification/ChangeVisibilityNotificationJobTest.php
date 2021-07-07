@@ -23,6 +23,7 @@ use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
  *
  * @group Wikibase
  * @group WikibaseChange
+ * @group Database
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch
@@ -103,9 +104,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 			return;
 		}
 
-		$dbr = wfGetDB( DB_REPLICA );
-
-		$rcRedactedCount = $dbr->selectRowCount(
+		$rcRedactedCount = $this->db->selectRowCount(
 			'recentchanges',
 			'rc_deleted',
 			[
@@ -121,15 +120,13 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 	 * Make sure rows for titles that are not in $expectedRedactedTitles didn't get changed.
 	 */
 	private function assertOtherTitlesUntouched( array $expectedRedactedTitles ) {
-		$dbr = wfGetDB( DB_REPLICA );
-
 		// Count the rows that have rc_deleted set that are not in $expectedRedactedTitles
 		$where = [ 'rc_deleted > 0' ];
 		if ( $expectedRedactedTitles ) {
-			$where[] = 'rc_title NOT IN (' . $dbr->makeList( $expectedRedactedTitles ) . ')';
+			$where[] = 'rc_title NOT IN (' . $this->db->makeList( $expectedRedactedTitles ) . ')';
 		}
 
-		$rcFalsePositiveCount = $dbr->selectRowCount(
+		$rcFalsePositiveCount = $this->db->selectRowCount(
 			'recentchanges',
 			'rc_deleted',
 			$where,

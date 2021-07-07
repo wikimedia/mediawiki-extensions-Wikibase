@@ -186,55 +186,47 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function truncateEntityUsage(): void {
-		$db = wfGetDB( DB_PRIMARY );
-		$db->delete( EntityUsageTable::DEFAULT_TABLE_NAME, '*' );
+		$this->db->delete( EntityUsageTable::DEFAULT_TABLE_NAME, '*' );
 	}
 
 	private function putEntityUsage( array $entries ): void {
-		$db = wfGetDB( DB_PRIMARY );
-
-		$db->startAtomic( __METHOD__ );
+		$this->db->startAtomic( __METHOD__ );
 
 		foreach ( $entries as $entry ) {
 			[ $entityId, $pageId ] = $entry;
 			$aspect = 'X';
 
-			$db->insert( EntityUsageTable::DEFAULT_TABLE_NAME, [
+			$this->db->insert( EntityUsageTable::DEFAULT_TABLE_NAME, [
 				'eu_entity_id' => $entityId,
 				'eu_aspect' => $aspect,
 				'eu_page_id' => (int)$pageId,
 			], __METHOD__ );
 		}
 
-		$db->endAtomic( __METHOD__ );
+		$this->db->endAtomic( __METHOD__ );
 	}
 
 	private function truncateSubscriptions(): void {
-		$db = wfGetDB( DB_PRIMARY );
-		$db->delete( 'wb_changes_subscription', '*' );
+		$this->db->delete( 'wb_changes_subscription', '*' );
 	}
 
 	private function putSubscriptions( array $entries ): void {
-		$db = wfGetDB( DB_PRIMARY );
-
-		$db->startAtomic( __METHOD__ );
+		$this->db->startAtomic( __METHOD__ );
 
 		foreach ( $entries as $entry ) {
 			[ $entityId, $subscriberId ] = $entry;
 
-			$db->insert( 'wb_changes_subscription', [
+			$this->db->insert( 'wb_changes_subscription', [
 				'cs_entity_id' => $entityId,
 				'cs_subscriber_id' => $subscriberId,
 			], __METHOD__ );
 		}
 
-		$db->endAtomic( __METHOD__ );
+		$this->db->endAtomic( __METHOD__ );
 	}
 
 	private function fetchAllSubscriptions(): array {
-		$db = wfGetDB( DB_PRIMARY );
-
-		$res = $db->select( 'wb_changes_subscription', "*", '', __METHOD__ );
+		$res = $this->db->select( 'wb_changes_subscription', "*", '', __METHOD__ );
 
 		$subscriptions = [];
 		foreach ( $res as $row ) {

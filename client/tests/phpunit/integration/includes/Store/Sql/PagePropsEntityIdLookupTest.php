@@ -12,7 +12,6 @@ use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers \Wikibase\Client\Store\Sql\PagePropsEntityIdLookup
@@ -41,8 +40,8 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		return $title;
 	}
 
-	private function insertPageProps( IDatabase $db, int $pageId, EntityId $entityId ): void {
-		$db->insert(
+	private function insertPageProps( int $pageId, EntityId $entityId ): void {
+		$this->db->insert(
 			'page_props',
 			[
 				'pp_page' => $pageId,
@@ -53,13 +52,11 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetEntityIdForTitle(): void {
-		$db = wfGetDB( DB_PRIMARY );
-
 		$title22 = $this->makeTitle( 22 );
 		$title99 = $this->makeTitle( 99 );
 
 		$q22 = new ItemId( 'Q22' );
-		$this->insertPageProps( $db, 22, $q22 );
+		$this->insertPageProps( 22, $q22 );
 
 		$lookup = new PagePropsEntityIdLookup(
 			MediaWikiServices::getInstance()->getPageProps(),
@@ -70,8 +67,6 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetEntityIds(): void {
-		$db = wfGetDB( DB_PRIMARY );
-
 		$title11 = $this->makeTitle( 11 );
 		$title22 = $this->makeTitle( 22 );
 		$title99 = $this->makeTitle( 99 );
@@ -79,8 +74,8 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		$q11 = new ItemId( 'Q11' );
 		$q22 = new ItemId( 'Q22' );
 
-		$this->insertPageProps( $db, 11, $q11 );
-		$this->insertPageProps( $db, 22, $q22 );
+		$this->insertPageProps( 11, $q11 );
+		$this->insertPageProps( 22, $q22 );
 
 		$expected = [
 			11 => $q11,

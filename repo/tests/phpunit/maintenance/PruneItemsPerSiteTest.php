@@ -16,6 +16,7 @@ require_once __DIR__ . '/../../../maintenance/pruneItemsPerSite.php';
  * @covers \Wikibase\Repo\Maintenance\PruneItemsPerSite
  *
  * @group Wikibase
+ * @group Database
  *
  * @license GPL-2.0-or-later
  */
@@ -31,7 +32,7 @@ class PruneItemsPerSiteTest extends MaintenanceBaseTestCase {
 		$this->tablesUsed[] = 'page';
 		$this->tablesUsed[] = 'wb_items_per_site';
 
-		wfGetDB( DB_PRIMARY )->delete( 'wb_items_per_site', '*', __METHOD__ );
+		$this->db->delete( 'wb_items_per_site', '*', __METHOD__ );
 	}
 
 	public function batchSizeProvider() {
@@ -52,14 +53,13 @@ class PruneItemsPerSiteTest extends MaintenanceBaseTestCase {
 		$this->maintenance->loadWithArgv( [ '--select-batch-size', $selectBatchSize ] );
 		$this->maintenance->execute();
 
-		$dbr = wfGetDB( DB_REPLICA );
-		$existingItemRowCount = $dbr->selectRowCount(
+		$existingItemRowCount = $this->db->selectRowCount(
 			'wb_items_per_site',
 			'*',
 			[ 'ips_item_id' => $entityId->getNumericId() ],
 			__METHOD__
 		);
-		$allRowCount = $dbr->selectRowCount(
+		$allRowCount = $this->db->selectRowCount(
 			'wb_items_per_site',
 			'*',
 			'',
@@ -90,8 +90,7 @@ class PruneItemsPerSiteTest extends MaintenanceBaseTestCase {
 		static $c = 0;
 		$c++;
 
-		$dbw = wfGetDB( DB_PRIMARY );
-		$dbw->insert(
+		$this->db->insert(
 			'wb_items_per_site',
 			[
 				[

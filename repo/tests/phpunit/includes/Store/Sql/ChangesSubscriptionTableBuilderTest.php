@@ -102,31 +102,26 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function truncateItemPerSite() {
-		$db = wfGetDB( DB_PRIMARY );
-		$db->delete( 'wb_items_per_site', '*' );
+		$this->db->delete( 'wb_items_per_site', '*' );
 	}
 
 	private function putItemPerSite( array $entries ) {
-		$db = wfGetDB( DB_PRIMARY );
-
-		$db->startAtomic( __METHOD__ );
+		$this->db->startAtomic( __METHOD__ );
 
 		foreach ( $entries as $entry ) {
 			list( $itemId, $siteId ) = $entry;
-			$db->insert( 'wb_items_per_site', [
+			$this->db->insert( 'wb_items_per_site', [
 				'ips_item_id' => (int)$itemId,
 				'ips_site_id' => $siteId,
 				'ips_site_page' => 'Page_about_Q' . $itemId . '_on_' . $siteId,
 			], __METHOD__ );
 		}
 
-		$db->endAtomic( __METHOD__ );
+		$this->db->endAtomic( __METHOD__ );
 	}
 
 	private function fetchAllSubscriptions() {
-		$db = wfGetDB( DB_PRIMARY );
-
-		$res = $db->select( self::TABLE_NAME, "*", '', __METHOD__ );
+		$res = $this->db->select( self::TABLE_NAME, "*", '', __METHOD__ );
 
 		$subscriptions = [];
 		foreach ( $res as $row ) {
