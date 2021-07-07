@@ -14,6 +14,8 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
+use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 
 /**
  * A special page that lists client wiki pages that use a given entity ID from the repository, and
@@ -32,16 +34,24 @@ class SpecialEntityUsage extends QueryPage {
 	/** @var LanguageConverterFactory */
 	private $languageConverterFactory;
 
+	/** @var ClientDomainDb */
+	private $db;
+
 	/**
 	 * @var EntityId|null
 	 */
 	private $entityId = null;
 
-	public function __construct( LanguageConverterFactory $languageConverterFactory, EntityIdParser $idParser ) {
+	public function __construct(
+		LanguageConverterFactory $languageConverterFactory,
+		ClientDomainDbFactory $dbFactory,
+		EntityIdParser $idParser
+	) {
 		parent::__construct( 'EntityUsage' );
 
 		$this->idParser = $idParser;
 		$this->languageConverterFactory = $languageConverterFactory;
+		$this->db = $dbFactory->newLocalDb();
 	}
 
 	/**
@@ -124,7 +134,7 @@ class SpecialEntityUsage extends QueryPage {
 	public function getQueryInfo() {
 		$joinConds = [ 'wbc_entity_usage' => [ 'JOIN', [ 'page_id = eu_page_id' ] ] ];
 		$conds = [ 'eu_entity_id' => $this->entityId->getSerialization() ];
-		$groupConcat = wfGetDB( DB_REPLICA )->buildGroupConcatField(
+		$groupConcat = $this->db->connections()->getReadConnectionRef()->buildGroupConcatField(
 			'|',
 			'wbc_entity_usage',
 			'eu_aspect',

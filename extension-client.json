@@ -481,6 +481,7 @@
 			"class": "Wikibase\\Client\\Specials\\SpecialEntityUsage",
 			"services": [
 				"LanguageConverterFactory",
+				"WikibaseClient.ClientDomainDbFactory",
 				"WikibaseClient.EntityIdParser"
 			]
 		}
