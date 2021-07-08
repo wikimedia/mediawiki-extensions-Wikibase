@@ -80,6 +80,7 @@ use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\StringNormalizer;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikibase\Lib\Units\UnitConverter;
@@ -1018,9 +1019,9 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.RdfBuilderFactory' );
 	}
 
-	public static function getSubEntityTypesMap( ContainerInterface $services = null ): array {
+	public static function getSubEntityTypesMapper( ContainerInterface $services = null ): SubEntityTypesMapper {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WikibaseRepo.SubEntityTypesMap' );
+			->get( 'WikibaseRepo.SubEntityTypesMapper' );
 	}
 
 }

@@ -6,6 +6,7 @@ namespace Wikibase\DataAccess;
 
 use LogicException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @license GPL-2.0-or-later
@@ -18,11 +19,11 @@ class EntitySourceLookup {
 	private $entitySourceDefinitions;
 
 	/**
-	 * @var array
+	 * @var SubEntityTypesMapper
 	 */
 	private $subEntityTypesMap;
 
-	public function __construct( EntitySourceDefinitions $entitySourceDefinitions, array $subEntityTypesMap ) {
+	public function __construct( EntitySourceDefinitions $entitySourceDefinitions, SubEntityTypesMapper $subEntityTypesMap ) {
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
 		$this->subEntityTypesMap = $subEntityTypesMap;
 	}
@@ -38,26 +39,17 @@ class EntitySourceLookup {
 		}
 
 		foreach ( $this->entitySourceDefinitions->getSources() as $source ) {
-			$entityType = $this->getTopLevelEntityType( $id->getEntityType() );
+			$idType = $id->getEntityType();
+			$topLevelEntityType = $this->subEntityTypesMap->getParentEntityType( $idType ) ?? $idType;
 
 			// TODO this returns the first entity source that is not an api source that has this entity type. In the case there is more than
 			// one configured, this could be bad.
-			if ( $source->getType() === EntitySource::TYPE_DB && in_array( $entityType, $source->getEntityTypes() ) ) {
+			if ( $source->getType() === EntitySource::TYPE_DB && in_array( $topLevelEntityType, $source->getEntityTypes() ) ) {
 				return $source;
 			}
 		}
 
 		throw new LogicException( 'Could not find a matching entity source for id: "' . $id->getSerialization() . '"' );
-	}
-
-	private function getTopLevelEntityType( string $type ): string {
-		foreach ( $this->subEntityTypesMap as $topLevelType => $subEntityTypes ) {
-			if ( in_array( $type, $subEntityTypes ) ) {
-				return $topLevelType;
-			}
-		}
-
-		return $type;
 	}
 
 }

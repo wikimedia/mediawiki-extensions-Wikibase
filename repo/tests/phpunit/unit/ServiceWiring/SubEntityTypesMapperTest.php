@@ -14,7 +14,7 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
  *
  * @license GPL-2.0-or-later
  */
-class SubEntityTypesMapTest extends ServiceWiringTestCase {
+class SubEntityTypesMapperTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
 		$this->mockService(
@@ -30,9 +30,9 @@ class SubEntityTypesMapTest extends ServiceWiringTestCase {
 			] )
 		);
 
-		$this->assertEquals(
-			[ 'lexeme' => [ 'form', 'sense' ] ],
-			$this->getService( 'WikibaseRepo.SubEntityTypesMap' )
+		$this->assertSame(
+			'lexeme',
+			$this->getService( 'WikibaseRepo.SubEntityTypesMapper' )->getParentEntityType( 'form' )
 		);
 	}
 
