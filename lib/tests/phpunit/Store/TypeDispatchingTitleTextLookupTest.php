@@ -2,8 +2,12 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataAccess\EntitySourceLookup;
+use Wikibase\DataAccess\Tests\NewEntitySource;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
 
@@ -16,51 +20,55 @@ use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
  */
 class TypeDispatchingTitleTextLookupTest extends TestCase {
 
-	public function testGivenNoLookupDefinedForEntityType_usesDefaultLookup() {
-		$entityId = new PropertyId( 'P123' );
-		$titleText = 'Property:P123';
+	/**
+	 * @var MockObject|EntitySourceLookup
+	 */
+	private $entitySourceLookup;
 
-		$defaultLookup = $this->createMock( EntityTitleTextLookup::class );
-		$defaultLookup->expects( $this->once() )
-			->method( 'getPrefixedText' )
-			->with( $entityId )
-			->willReturn( $titleText );
+	/**
+	 * @var MockObject|ServiceBySourceAndTypeDispatcher
+	 */
+	private $serviceBySourceAndTypeDispatcher;
 
-		$lookup = new TypeDispatchingTitleTextLookup(
-			[ 'item' => function () {
-				return $this->newNeverCalledMockLookup();
-			} ],
-			$defaultLookup
-		);
+	protected function setUp(): void {
+		parent::setUp();
 
-		$this->assertSame( $titleText, $lookup->getPrefixedText( $entityId ) );
+		$this->entitySourceLookup = $this->createStub( EntitySourceLookup::class );
+		$this->serviceBySourceAndTypeDispatcher = $this->createStub( ServiceBySourceAndTypeDispatcher::class );
 	}
 
 	public function testGivenLookupDefinedForEntityType_usesRespectiveLookup() {
 		$entityId = new PropertyId( 'P321' );
 		$titleText = 'Property:P321';
+		$propertySourceName = 'propertySource';
 
-		$lookup = new TypeDispatchingTitleTextLookup(
-			[ 'property' => function () use ( $entityId, $titleText ) {
-				$propertyTitleTextLookup = $this->createMock( EntityTitleTextLookup::class );
-				$propertyTitleTextLookup->expects( $this->once() )
-					->method( 'getPrefixedText' )
-					->with( $entityId )
-					->willReturn( $titleText );
+		$this->propertyTitleTextLookup = $this->createMock( EntityTitleTextLookup::class );
+		$this->entitySourceLookup = $this->createMock( EntitySourceLookup::class );
+		$this->serviceBySourceAndTypeDispatcher = $this->createMock( ServiceBySourceAndTypeDispatcher::class );
 
-				return $propertyTitleTextLookup;
-			} ],
-			$this->newNeverCalledMockLookup()
-		);
+		$this->propertyTitleTextLookup->expects( $this->once() )
+			->method( 'getPrefixedText' )
+			->with( $entityId )
+			->willReturn( $titleText );
 
-		$this->assertSame( $titleText, $lookup->getPrefixedText( $entityId ) );
+		$this->entitySourceLookup->expects( $this->atLeastOnce() )
+			->method( 'getEntitySourceById' )
+			->with( $entityId )
+			->willReturn( NewEntitySource::havingName( $propertySourceName )->build() );
+
+		$this->serviceBySourceAndTypeDispatcher->expects( $this->once() )
+			->method( 'getServiceForSourceAndType' )
+			->with( $propertySourceName, 'property' )
+			->willReturn( $this->propertyTitleTextLookup );
+
+		$this->assertSame( $titleText, $this->newDispatchingTitleTextLookup()->getPrefixedText( $entityId ) );
 	}
 
-	private function newNeverCalledMockLookup(): EntityTitleTextLookup {
-		$lookup = $this->createMock( EntityTitleTextLookup::class );
-		$lookup->expects( $this->never() )->method( $this->anything() );
-
-		return $lookup;
+	private function newDispatchingTitleTextLookup(): TypeDispatchingTitleTextLookup {
+		return new TypeDispatchingTitleTextLookup(
+			$this->entitySourceLookup,
+			$this->serviceBySourceAndTypeDispatcher
+		);
 	}
 
 }

@@ -2,8 +2,9 @@
 
 namespace Wikibase\Lib\Store;
 
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\ServiceByTypeDispatcher;
+use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 
 /**
  * @license GPL-2.0-or-later
@@ -11,16 +12,26 @@ use Wikibase\Lib\ServiceByTypeDispatcher;
 class TypeDispatchingTitleTextLookup implements EntityTitleTextLookup {
 
 	/**
-	 * @var ServiceByTypeDispatcher
+	 * @var ServiceBySourceAndTypeDispatcher
 	 */
-	private $serviceDispatcher;
+	private $serviceBySourceAndTypeDispatcher;
 
-	public function __construct( array $callbacks, EntityTitleTextLookup $defaultLookup ) {
-		$this->serviceDispatcher = new ServiceByTypeDispatcher( EntityTitleTextLookup::class, $callbacks, $defaultLookup );
+	/**
+	 * @var EntitySourceLookup
+	 */
+	private $entitySourceLookup;
+
+	public function __construct(
+		EntitySourceLookup $entitySourceLookup,
+		ServiceBySourceAndTypeDispatcher $serviceBySourceAndTypeDispatcher
+	) {
+		$this->entitySourceLookup = $entitySourceLookup;
+		$this->serviceBySourceAndTypeDispatcher = $serviceBySourceAndTypeDispatcher;
 	}
 
 	public function getPrefixedText( EntityId $id ): ?string {
-		return $this->serviceDispatcher->getServiceForType( $id->getEntityType() )
+		$entitySource = $this->entitySourceLookup->getEntitySourceById( $id );
+		return $this->serviceBySourceAndTypeDispatcher->getServiceForSourceAndType( $entitySource->getSourceName(), $id->getEntityType() )
 			->getPrefixedText( $id );
 	}
 

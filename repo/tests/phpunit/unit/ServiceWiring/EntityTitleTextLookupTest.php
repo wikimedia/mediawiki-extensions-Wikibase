@@ -4,11 +4,14 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\NewEntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -22,21 +25,42 @@ class EntityTitleTextLookupTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
 		$itemId = new ItemId( 'Q123' );
-		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
-			new EntityTypeDefinitions( [
-				Item::ENTITY_TYPE => [
-					EntityTypeDefinitions::TITLE_TEXT_LOOKUP_CALLBACK => function () use ( $itemId ) {
-						$entityTitleTextLookup = $this->createMock( EntityTitleTextLookup::class );
-						$entityTitleTextLookup->expects( $this->once() )
-							->method( 'getPrefixedText' )
-							->with( $itemId )
-							->willReturn( 'Test_item:Q123' );
-						return $entityTitleTextLookup;
-					},
-				],
-			] ) );
-		$this->mockService( 'WikibaseRepo.EntityTitleLookup',
-			$this->createMock( EntityTitleLookup::class ) );
+
+		$sources = [
+			NewEntitySource::havingName( 'itemSource' )
+				->withEntityNamespaceIdsAndSlots( [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] )
+				->withConceptBaseUri( 'http://wikidorta.org/schmentity/' )
+				->build()
+		];
+
+		$this->mockService(
+			'WikibaseRepo.EntitySourceDefinitions',
+			new EntitySourceDefinitions( $sources, new SubEntityTypesMapper( [] ) )
+		);
+
+		$this->mockService( 'WikibaseRepo.EntitySourceAndTypeDefinitions',
+			new EntitySourceAndTypeDefinitions(
+				new EntityTypeDefinitions( [
+					Item::ENTITY_TYPE => [
+						EntityTypeDefinitions::TITLE_TEXT_LOOKUP_CALLBACK => function () use ( $itemId ) {
+							$entityTitleTextLookup = $this->createMock( EntityTitleTextLookup::class );
+							$entityTitleTextLookup->expects( $this->once() )
+								->method( 'getPrefixedText' )
+								->with( $itemId )
+								->willReturn( 'Test_item:Q123' );
+							return $entityTitleTextLookup;
+						},
+					],
+				] ),
+				$this->createStub( EntityTypeDefinitions::class ),
+				$sources
+			)
+		);
+
+		$this->mockService(
+			'WikibaseRepo.SubEntityTypesMapper',
+			new SubEntityTypesMapper( [] )
+		);
 
 		/** @var EntityTitleTextLookup $entityTitleTextLookup */
 		$entityTitleTextLookup = $this->getService( 'WikibaseRepo.EntityTitleTextLookup' );

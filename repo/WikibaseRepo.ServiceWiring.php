@@ -137,7 +137,6 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
-use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TypeDispatchingArticleIdLookup;
 use Wikibase\Lib\Store\TypeDispatchingRedirectChecker;
 use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
@@ -996,10 +995,14 @@ return [
 
 	'WikibaseRepo.EntityTitleTextLookup' => function ( MediaWikiServices $services ): EntityTitleTextLookup {
 		return new TypeDispatchingTitleTextLookup(
-			WikibaseRepo::getEntityTypeDefinitions( $services )
-				->get( EntityTypeDefinitions::TITLE_TEXT_LOOKUP_CALLBACK ),
-			new TitleLookupBasedEntityTitleTextLookup(
-				WikibaseRepo::getEntityTitleLookup( $services )
+			new EntitySourceLookup(
+				WikibaseRepo::getEntitySourceDefinitions( $services ),
+				WikibaseRepo::getSubEntityTypesMapper( $services )
+			),
+			new ServiceBySourceAndTypeDispatcher(
+				EntityTitleTextLookup::class,
+				WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
+				->getServiceBySourceAndType( EntityTypeDefinitions::TITLE_TEXT_LOOKUP_CALLBACK )
 			)
 		);
 	},
