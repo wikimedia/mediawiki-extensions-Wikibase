@@ -135,7 +135,6 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
-use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TypeDispatchingArticleIdLookup;
@@ -727,15 +726,14 @@ return [
 
 	'WikibaseRepo.EntityExistenceChecker' => function ( MediaWikiServices $services ): EntityExistenceChecker {
 		return new TypeDispatchingExistenceChecker(
-			WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
-				->getServiceBySourceAndType( EntityTypeDefinitions::EXISTENCE_CHECKER_CALLBACK ),
-			new TitleLookupBasedEntityExistenceChecker(
-				WikibaseRepo::getEntityTitleLookup( $services ),
-				$services->getLinkBatchFactory()
-			),
 			new EntitySourceLookup(
 				WikibaseRepo::getEntitySourceDefinitions( $services ),
 				WikibaseRepo::getSubEntityTypesMap( $services )
+			),
+			new ServiceBySourceAndTypeDispatcher(
+				EntityExistenceChecker::class,
+				WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
+				->getServiceBySourceAndType( EntityTypeDefinitions::EXISTENCE_CHECKER_CALLBACK )
 			)
 		);
 	},

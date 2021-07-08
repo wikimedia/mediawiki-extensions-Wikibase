@@ -36,6 +36,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
+use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Lib\WikibaseContentLanguages;
@@ -256,6 +257,13 @@ return [
 		Def::URL_LOOKUP_CALLBACK => function () {
 			return new TitleLookupBasedEntityUrlLookup( WikibaseRepo::getEntityTitleLookup() );
 		},
+		Def::EXISTENCE_CHECKER_CALLBACK => function () {
+			$services = MediaWikiServices::getInstance();
+			return new TitleLookupBasedEntityExistenceChecker(
+				WikibaseRepo::getEntityTitleLookup( $services ),
+				$services->getLinkBatchFactory()
+			);
+		},
 	],
 	'property' => [
 		Def::STORAGE_SERIALIZER_FACTORY_CALLBACK => function( SerializerFactory $serializerFactory ) {
@@ -462,6 +470,13 @@ return [
 		},
 		Def::URL_LOOKUP_CALLBACK => function () {
 			return new TitleLookupBasedEntityUrlLookup( WikibaseRepo::getEntityTitleLookup() );
+		},
+		Def::EXISTENCE_CHECKER_CALLBACK => function () {
+			$services = MediaWikiServices::getInstance();
+			return new TitleLookupBasedEntityExistenceChecker(
+				WikibaseRepo::getEntityTitleLookup( $services ),
+				$services->getLinkBatchFactory()
+			);
 		},
 	]
 ];
