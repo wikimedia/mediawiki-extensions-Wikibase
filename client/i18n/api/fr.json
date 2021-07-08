@@ -15,7 +15,7 @@
 	"apihelp-query+wbentityusage-paramvalue-aspect-T": "Le titre de la page locale correspondant à l’entité est utilisé",
 	"apihelp-query+wbentityusage-paramvalue-aspect-C": "Les déclarations de l’entité sont utilisées",
 	"apihelp-query+wbentityusage-paramvalue-aspect-X": "Tous les aspects d’une entité sont ou peuvent être utilisés",
-	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Quelque chose d’autre sur l’entité est utilisé. Cela implique actuellement l’utilisation de déclaration et d’alias et des vérifications explicites pour l’existence d’entité.",
+	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Quelque chose d’autre sur l’entité est utilisé. Cela implique actuellement l’utilisation d’alias et des vérifications explicites pour l’existence d’entité.",
 	"apihelp-query+wbentityusage-param-prop": "Propriétés à ajouter au résultat.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Si activé, l’URL de l’entité sera ajoutée",
 	"apihelp-query+wbentityusage-param-entities": "Renvoyer uniquement la page qui utilise ces entités.",
