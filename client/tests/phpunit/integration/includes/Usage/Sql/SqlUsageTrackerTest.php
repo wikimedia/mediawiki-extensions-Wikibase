@@ -61,14 +61,12 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function getUsages( $pageId ) {
-		$db = wfGetDB( DB_REPLICA );
-		$updater = new EntityUsageTable( new ItemIdParser(), $db );
+		$updater = new EntityUsageTable( new ItemIdParser(), $this->db );
 		return $updater->queryUsages( $pageId );
 	}
 
 	public function putUsages( $pageId, array $usages ) {
-		$db = wfGetDB( DB_PRIMARY );
-		$updater = new EntityUsageTable( new ItemIdParser(), $db );
+		$updater = new EntityUsageTable( new ItemIdParser(), $this->db );
 		return $updater->addUsages( $pageId, $usages );
 	}
 

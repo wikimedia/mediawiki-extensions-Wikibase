@@ -434,7 +434,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 
 		$this->assertContains( $dummyTag,
-			ChangeTags::getTags( wfGetDB( DB_PRIMARY ), null, $lastRevid ) );
+			ChangeTags::getTags( $this->db, null, $lastRevid ) );
 	}
 
 	private function getLastRevIdFromResult( array $result ) {

@@ -141,7 +141,7 @@ abstract class RecentChangesModificationTest extends MediaWikiIntegrationTestCas
 	 * All changes have a unique rc_title value to make them easy to identify.
 	 */
 	protected function initRecentChanges() {
-		wfGetDB( DB_PRIMARY )->delete( 'recentchanges', '*' );
+		$this->db->delete( 'recentchanges', '*' );
 		$changes = [
 			[
 				'rc_timestamp' => '20111111111111',

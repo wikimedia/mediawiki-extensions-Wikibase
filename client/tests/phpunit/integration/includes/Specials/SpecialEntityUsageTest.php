@@ -21,6 +21,7 @@ use WikiPage;
  * @group SpecialPage
  * @group WikibaseSpecialPage
  * @group Wikibase
+ * @group Database
  *
  * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gmail.com>
@@ -111,7 +112,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 	}
 
 	public function testReallyDoQuery() {
-		if ( wfGetDB( DB_REPLICA )->getType() === 'mysql' &&
+		if ( $this->db->getType() === 'mysql' &&
 			$this->usesTemporaryTables()
 		) {
 			$this->markTestSkipped( 'MySQL does not allow self-joins on temporary tables' );
@@ -153,7 +154,6 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 	}
 
 	private function addReallyDoQueryData() {
-		$db = wfGetDB( DB_PRIMARY );
 		$dump = [
 			'page' => [
 				[
@@ -193,15 +193,15 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 
 		foreach ( $dump as $table => $rows ) {
 			// Clean everything
-			$db->delete( $table, '*' );
+			$this->db->delete( $table, '*' );
 
 			foreach ( $rows as $row ) {
 				if ( $table === 'page' ) {
 					$title = Title::newFromTextThrow( $row['page_title'], $row['page_namespace'] );
 					$page = WikiPage::factory( $title );
-					$page->insertOn( $db, $row['page_id'] );
+					$page->insertOn( $this->db, $row['page_id'] );
 				} else {
-					$db->insert( $table, $row );
+					$this->db->insert( $table, $row );
 				}
 			}
 		}

@@ -29,9 +29,7 @@ class SqlSubscriptionLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function insertSubscriptions( array $rows ) {
-		$dbw = wfGetDB( DB_PRIMARY );
-
-		$dbw->insert( 'wb_changes_subscription', $rows, __METHOD__ );
+		$this->db->insert( 'wb_changes_subscription', $rows, __METHOD__ );
 	}
 
 	public function testGetSubscriptions() {
