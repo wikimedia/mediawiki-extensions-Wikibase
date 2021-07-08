@@ -33,10 +33,7 @@ class RepoNoBadUsageTest extends NoBadUsageTest {
 				'tests/phpunit/includes/GlobalStateFactoryMethodsResourceTest.php' => 1, // mock
 				'tests/phpunit/unit/ServiceWiringTestCase.php' => true, // mock
 			],
-			'wfGetDB' => [
-				// TODO fix these, this should really be an empty array
-				'tests/' => true,
-			],
+			'wfGetDB' => [],
 			'wfGetLB' => [],
 		];
 	}
