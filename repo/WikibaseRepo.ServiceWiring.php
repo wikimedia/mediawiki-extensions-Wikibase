@@ -121,6 +121,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\Store\SourceAndTypeDispatchingExistenceChecker;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingUrlLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
@@ -138,7 +139,6 @@ use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TypeDispatchingArticleIdLookup;
-use Wikibase\Lib\Store\TypeDispatchingExistenceChecker;
 use Wikibase\Lib\Store\TypeDispatchingRedirectChecker;
 use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
@@ -725,7 +725,7 @@ return [
 	},
 
 	'WikibaseRepo.EntityExistenceChecker' => function ( MediaWikiServices $services ): EntityExistenceChecker {
-		return new TypeDispatchingExistenceChecker(
+		return new SourceAndTypeDispatchingExistenceChecker(
 			new EntitySourceLookup(
 				WikibaseRepo::getEntitySourceDefinitions( $services ),
 				WikibaseRepo::getSubEntityTypesMap( $services )

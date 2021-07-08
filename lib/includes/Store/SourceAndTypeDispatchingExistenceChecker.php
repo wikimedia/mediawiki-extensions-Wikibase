@@ -11,7 +11,7 @@ use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 /**
  * @license GPL-2.0-or-later
  */
-class TypeDispatchingExistenceChecker implements EntityExistenceChecker {
+class SourceAndTypeDispatchingExistenceChecker implements EntityExistenceChecker {
 
 	/**
 	 * @var EntitySourceLookup
