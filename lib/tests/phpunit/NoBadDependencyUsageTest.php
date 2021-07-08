@@ -18,6 +18,12 @@ class NoBadDependencyUsageTest extends \PHPUnit\Framework\TestCase {
 		// Increasing these allowances is forbidden
 		$this->assertStringsNotInLib(
 			[
+				// MediaWiki RDBMS – use DomainDb instead
+				'LoadBalancer' => 10,
+				'LBFactory' => 14,
+				'wfGetDB' => 0,
+				'wfGetLB' => 0,
+				// references to repo or client
 				'WikibaseRepo::' => 1,
 				'Wikibase\\Repo\\' => 1,
 				'Wikibase\\\\Repo\\\\' => 0,
