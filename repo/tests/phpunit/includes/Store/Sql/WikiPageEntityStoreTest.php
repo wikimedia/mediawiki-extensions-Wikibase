@@ -110,15 +110,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			'',
 			''
 		);
-		$customSource = new EntitySource(
-			'custom',
-			'customdb',
-			[ 'custom-type' => [ 'namespaceId' => 666, 'slot' => 'main' ] ],
-			'',
-			'c',
-			'c',
-			''
-		);
+		$db = $this->getRepoDomainDb( $this->db );
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			new WikiPageEntityMetaDataLookup(
@@ -128,7 +120,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
 				$localSource,
-				$this->getRepoDomainDb()
+				$db
 			),
 			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
 			MediaWikiServices::getInstance()->getRevisionStore()
@@ -154,12 +146,13 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 				]
 			),
 			WikibaseRepo::getEntityTitleStoreLookup(),
-			new SqlIdGenerator( $this->getRepoDomainDb() ),
+			new SqlIdGenerator( $db ),
 			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$localSource,
 			MediaWikiServices::getInstance()->getPermissionManager(),
-			MediaWikiServices::getInstance()->getWatchlistManager()
+			MediaWikiServices::getInstance()->getWatchlistManager(),
+			$db
 		);
 
 		return [ $store, $lookup ];
@@ -781,7 +774,8 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			$this->prophesize( RevisionStore::class )->reveal(),
 			new EntitySource( 'test', 'testdb', [], '', '', '', '' ),
 			MediaWikiServices::getInstance()->getPermissionManager(),
-			MediaWikiServices::getInstance()->getWatchlistManager()
+			MediaWikiServices::getInstance()->getWatchlistManager(),
+			$this->getRepoDomainDb( $this->db )
 		);
 		$store = TestingAccessWrapper::newFromObject( $store );
 
@@ -994,6 +988,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			'',
 			''
 		);
+		$db = $this->getRepoDomainDb( $this->db );
 
 		$store = new WikiPageEntityStore(
 			new EntityContentFactory(
@@ -1011,12 +1006,13 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 				]
 			),
 			WikibaseRepo::getEntityTitleStoreLookup(),
-			new SqlIdGenerator( $this->getRepoDomainDb() ),
+			new SqlIdGenerator( $db ),
 			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$itemSource,
 			MediaWikiServices::getInstance()->getPermissionManager(),
-			MediaWikiServices::getInstance()->getWatchlistManager()
+			MediaWikiServices::getInstance()->getWatchlistManager(),
+			$db
 		);
 
 		return $store;
@@ -1032,6 +1028,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			'',
 			''
 		);
+		$db = $this->getRepoDomainDb( $this->db );
 
 		$store = new WikiPageEntityStore(
 			new EntityContentFactory(
@@ -1045,12 +1042,13 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 				]
 			),
 			WikibaseRepo::getEntityTitleStoreLookup(),
-			new SqlIdGenerator( $this->getRepoDomainDb() ),
+			new SqlIdGenerator( $db ),
 			WikibaseRepo::getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$customSource,
 			MediaWikiServices::getInstance()->getPermissionManager(),
-			MediaWikiServices::getInstance()->getWatchlistManager()
+			MediaWikiServices::getInstance()->getWatchlistManager(),
+			$db
 		);
 
 		return $store;
