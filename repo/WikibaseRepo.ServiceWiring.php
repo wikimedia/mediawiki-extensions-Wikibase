@@ -122,6 +122,7 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingExistenceChecker;
+use Wikibase\Lib\Store\SourceAndTypeDispatchingRedirectChecker;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingUrlLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
@@ -136,9 +137,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
-use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TypeDispatchingArticleIdLookup;
-use Wikibase\Lib\Store\TypeDispatchingRedirectChecker;
 use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
@@ -890,11 +889,15 @@ return [
 	},
 
 	'WikibaseRepo.EntityRedirectChecker' => function ( MediaWikiServices $services ): EntityRedirectChecker {
-		return new TypeDispatchingRedirectChecker(
-			WikibaseRepo::getEntityTypeDefinitions( $services )
-				->get( EntityTypeDefinitions::REDIRECT_CHECKER_CALLBACK ),
-			new TitleLookupBasedEntityRedirectChecker(
-				WikibaseRepo::getEntityTitleLookup( $services )
+		return new SourceAndTypeDispatchingRedirectChecker(
+			new ServiceBySourceAndTypeDispatcher(
+				EntityRedirectChecker::class,
+				WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
+					->getServiceBySourceAndType( EntityTypeDefinitions::REDIRECT_CHECKER_CALLBACK )
+			),
+			new EntitySourceLookup(
+				WikibaseRepo::getEntitySourceDefinitions( $services ),
+				WikibaseRepo::getSubEntityTypesMapper( $services )
 			)
 		);
 	},
