@@ -159,7 +159,7 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetUnusedEntities() {
-		$this->lookupTester->testGetUnusedEntities();
+		$this->lookupTester->testGetUnusedEntities( $this->db );
 	}
 
 }

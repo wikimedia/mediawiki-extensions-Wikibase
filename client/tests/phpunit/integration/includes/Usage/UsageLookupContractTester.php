@@ -9,6 +9,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * Helper class for testing UsageLookup implementations,
@@ -160,7 +161,7 @@ class UsageLookupContractTester {
 		Assert::assertSame( [], array_slice( $actual, count( $expected ) ), $message . 'Extra entries found!' );
 	}
 
-	public function testGetUnusedEntities() {
+	public function testGetUnusedEntities( IDatabase $db ) {
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
 		$q6 = new ItemId( 'Q6' );
@@ -176,7 +177,7 @@ class UsageLookupContractTester {
 		Assert::assertSame( [], $this->lookup->getUnusedEntities( [ $q4 ] ), 'Q4 should not be unused' );
 
 		$entityIds = [ $q4, $q6 ];
-		if ( wfGetDB( DB_REPLICA )->getType() === 'mysql' ) {
+		if ( $db->getType() === 'mysql' ) {
 			// On MySQL we use UNIONs on the table… as the table is temporary that
 			// doesn't work in unit tests.
 			// https://dev.mysql.com/doc/refman/5.7/en/temporary-table-problems.html

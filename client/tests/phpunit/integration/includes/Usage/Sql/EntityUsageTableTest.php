@@ -9,7 +9,6 @@ use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers \Wikibase\Client\Usage\Sql\EntityUsageTable
@@ -56,7 +55,7 @@ class EntityUsageTableTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getEntityUsageTable( $batchSize = 1000 ) {
-		return new EntityUsageTable( new ItemIdParser(), wfGetDB( DB_PRIMARY ), $batchSize );
+		return new EntityUsageTable( new ItemIdParser(), $this->db, $batchSize );
 	}
 
 	public function testAddUsages() {
@@ -306,7 +305,7 @@ class EntityUsageTableTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertSame( [], $usageTable->getUnusedEntities( [ $q4 ] ), 'Q4 should not be unused' );
 
-		if ( wfGetDB( DB_REPLICA )->getType() === 'mysql' ) {
+		if ( $this->db->getType() === 'mysql' ) {
 			// On MySQL we use UNIONs on the table… as the table is temporary that
 			// doesn't work in unit tests.
 			// https://dev.mysql.com/doc/refman/5.7/en/temporary-table-problems.html
@@ -324,11 +323,9 @@ class EntityUsageTableTest extends MediaWikiIntegrationTestCase {
 	 * @param array[] $rows
 	 */
 	private function assertUsageTableContains( array $rows ) {
-		$db = wfGetDB( DB_REPLICA );
-
 		foreach ( $rows as $row ) {
 			$name = preg_replace( '/\s+/s', ' ', print_r( $row, true ) );
-			$this->assertTrue( $this->rowExists( $db, $row ), "Missing row: $name" );
+			$this->assertTrue( $this->rowExists( $row ), "Missing row: $name" );
 		}
 	}
 
@@ -336,22 +333,19 @@ class EntityUsageTableTest extends MediaWikiIntegrationTestCase {
 	 * @param array[] $rows
 	 */
 	private function assertUsageTableDoesNotContain( array $rows ) {
-		$db = wfGetDB( DB_REPLICA );
-
 		foreach ( $rows as $row ) {
 			$name = preg_replace( '/\s+/s', ' ', print_r( $row, true ) );
-			$this->assertFalse( $this->rowExists( $db, $row ), "Unexpected row: $name" );
+			$this->assertFalse( $this->rowExists( $row ), "Unexpected row: $name" );
 		}
 	}
 
 	/**
-	 * @param IDatabase $db
 	 * @param array $conditions
 	 *
 	 * @return bool
 	 */
-	private function rowExists( IDatabase $db, array $conditions ) {
-		$count = $db->selectRowCount( EntityUsageTable::DEFAULT_TABLE_NAME, '*', $conditions );
+	private function rowExists( array $conditions ) {
+		$count = $this->db->selectRowCount( EntityUsageTable::DEFAULT_TABLE_NAME, '*', $conditions );
 		return $count > 0;
 	}
 

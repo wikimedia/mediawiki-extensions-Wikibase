@@ -73,28 +73,24 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function putWikidataItemPageProps( array $entries ): void {
-		$db = wfGetDB( DB_PRIMARY );
-
-		$db->startAtomic( __METHOD__ );
+		$this->db->startAtomic( __METHOD__ );
 
 		foreach ( $entries as $pageId => $entityId ) {
-			$db->insert( 'page_props', [
+			$this->db->insert( 'page_props', [
 				'pp_page' => (int)$pageId,
 				'pp_propname' => 'wikibase_item',
 				'pp_value' => (string)$entityId
 			], __METHOD__ );
 		}
 
-		$db->endAtomic( __METHOD__ );
+		$this->db->endAtomic( __METHOD__ );
 	}
 
 	/**
 	 * @return string[]
 	 */
 	private function fetchAllUsageStrings(): array {
-		$db = wfGetDB( DB_PRIMARY );
-
-		$res = $db->select( EntityUsageTable::DEFAULT_TABLE_NAME, '*', '', __METHOD__ );
+		$res = $this->db->select( EntityUsageTable::DEFAULT_TABLE_NAME, '*', '', __METHOD__ );
 
 		$usages = [];
 		foreach ( $res as $row ) {

@@ -40,10 +40,7 @@ class ClientNoBadUsageTest extends NoBadUsageTest {
 				'tests/phpunit/integration/includes/ChangeModification/ChangeVisibilityNotificationJobTest.php' => 1, // make DomainDb
 				'tests/phpunit/unit/includes/ServiceWiringTestCase.php' => true, // mock
 			],
-			'wfGetDB' => [
-				// TODO fix these, this should really be an empty array
-				'tests/' => true,
-			],
+			'wfGetDB' => [],
 			'wfGetLB' => [],
 		];
 	}

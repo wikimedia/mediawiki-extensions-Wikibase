@@ -235,7 +235,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 
 		$conds = [];
 		$hookHandler->addWikibaseConditions(
-			wfGetDB( DB_REPLICA ),
+			$this->getDatabase(),
 			$conds
 		);
 
