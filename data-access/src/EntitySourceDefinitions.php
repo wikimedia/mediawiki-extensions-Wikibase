@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataAccess;
 
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikimedia\Assert\Assert;
 
@@ -40,19 +39,13 @@ class EntitySourceDefinitions {
 
 	/**
 	 * @param EntitySource[] $sources with unique names. An single entity type can not be used in two different sources.
-	 * @param $subEntityTypesMapper
+	 * @param SubEntityTypesMapper $subEntityTypesMapper
 	 */
-	public function __construct( array $sources, $subEntityTypesMapper ) {
+	public function __construct( array $sources, SubEntityTypesMapper $subEntityTypesMapper ) {
 		Assert::parameterElementType( EntitySource::class, $sources, '$sources' );
 		$this->assertNoDuplicateSourcesOrEntityTypes( $sources );
 		$this->sources = $sources;
-
-		// FIXME: necessary backwards compatibility hack with Lexeme and QualityConstraints. Will be removed in a follow-up.
-		if ( $subEntityTypesMapper instanceof EntityTypeDefinitions ) {
-			$this->subEntityTypesMapper = new SubEntityTypesMapper( $subEntityTypesMapper->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) );
-		} else { // it already is a SubEntityTypesMap
-			$this->subEntityTypesMapper = $subEntityTypesMapper;
-		}
+		$this->subEntityTypesMapper = $subEntityTypesMapper;
 	}
 
 	/**
