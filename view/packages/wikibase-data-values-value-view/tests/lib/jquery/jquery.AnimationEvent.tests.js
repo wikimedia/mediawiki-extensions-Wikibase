@@ -95,7 +95,7 @@
 
 	QUnit.test( 'ANIMATION_STEPS', function( assert ) {
 		assert.ok(
-			$.isArray( AnimationEvent.ANIMATION_STEPS ),
+			Array.isArray( AnimationEvent.ANIMATION_STEPS ),
 			'Is an array.'
 		);
 		// This might be kind of pointless, but simply make sure that no one changes this without

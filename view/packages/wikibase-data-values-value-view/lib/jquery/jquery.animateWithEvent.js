@@ -60,12 +60,12 @@ jQuery.fn.animateWithEvent = ( function () {
 			// Predefined animation, e.g. "fadeIn" would forward to jQuery.fn.fadeIn( options )
 			animationFunction = animationProperties;
 			animationProperties = false;
-			if ( !$.isFunction( $.fn[ animationFunction ] ) ) {
+			if ( typeof $.fn[ animationFunction ] !== 'function' ) {
 				throw new Error( 'jQuery.fn."' + animationFunction + '" is not a function.' );
 			}
 		}
 
-		if ( $.isFunction( options ) || !options ) {
+		if ( typeof options === 'function' || !options ) {
 			startCallback = options;
 			options = {};
 		}

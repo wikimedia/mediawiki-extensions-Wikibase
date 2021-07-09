@@ -10,7 +10,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 * @throws {Error} if the provided argument is not a `jQuery.valueview.Expert` constructor.
 	 */
 	function assertIsExpertConstructor( Expert ) {
-		if ( !( $.isFunction( Expert ) && Expert.prototype instanceof $.valueview.Expert ) ) {
+		if ( !( typeof Expert === 'function' && Expert.prototype instanceof $.valueview.Expert ) ) {
 			throw new Error( 'Invalid jQuery.valueview.Expert constructor' );
 		}
 	}

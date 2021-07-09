@@ -93,7 +93,7 @@ $.widget( 'ui.ooMenu', {
 	 */
 	_setOption: function( key, value ) {
 		if ( key === 'items' || key === 'customItems' ) {
-			if ( !$.isArray( value ) ) {
+			if ( !Array.isArray( value ) ) {
 				throw new Error( key + ' needs to be an array' );
 			}
 
@@ -179,7 +179,7 @@ $.widget( 'ui.ooMenu', {
 		if ( item instanceof $.ui.ooMenu.CustomItem ) {
 			$item.addClass( 'ui-ooMenu-customItem' );
 
-			if ( $.isFunction( item.getAction() ) ) {
+			if ( typeof item.getAction() === 'function' ) {
 				$item.addClass( 'ui-ooMenu-customItem-action' );
 			}
 
@@ -390,7 +390,7 @@ $.widget( 'ui.ooMenu', {
 
 		if ( item instanceof $.ui.ooMenu.CustomItem ) {
 			var action = item.getAction();
-			if ( $.isFunction( action ) ) {
+			if ( typeof action === 'function' ) {
 				action();
 			}
 		}
@@ -542,7 +542,7 @@ CustomItem = util.inherit(
 		 * @return {Function|boolean}
 		 */
 		getVisibility: function( menu ) {
-			if ( $.isFunction( this._visibility ) ) {
+			if ( typeof this._visibility === 'function' ) {
 				return this._visibility( menu );
 			}
 			return this._visibility !== false;
@@ -552,7 +552,7 @@ CustomItem = util.inherit(
 		 * @param {Function|boolean|null} [visibility]
 		 */
 		setVisibility: function( visibility ) {
-			this._visibility = $.isFunction( visibility ) || typeof visibility === 'boolean'
+			this._visibility = typeof visibility === 'function' || typeof visibility === 'boolean'
 				? visibility
 				: null;
 		},
@@ -568,7 +568,7 @@ CustomItem = util.inherit(
 		 * @param {Function|null} [action]
 		 */
 		setAction: function( action ) {
-			this._action = $.isFunction( action ) ? action : null;
+			this._action = typeof action === 'function' ? action : null;
 		},
 
 		/**

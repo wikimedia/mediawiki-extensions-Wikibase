@@ -355,7 +355,7 @@ $.widget( 'ui.inputextender', {
 			this._$extension = $extension;
 			$extension.appendTo( $( 'body' ) );
 
-			if ( $.isFunction( this.options.initCallback ) ) {
+			if ( typeof this.options.initCallback === 'function' ) {
 				$extension.show();
 				this.options.initCallback.call( this, $extension );
 				$extension.hide();
@@ -403,7 +403,7 @@ $.widget( 'ui.inputextender', {
 			{
 				duration: 100,
 				complete: function() {
-					if ( $.isFunction( callback ) ) {
+					if ( typeof callback === 'function' ) {
 						callback();
 					}
 				}
@@ -431,7 +431,7 @@ $.widget( 'ui.inputextender', {
 				duration: 100,
 				complete: function() {
 					inputExtendersWithVisibleExtension.remove( self );
-					if ( $.isFunction( callback ) ) {
+					if ( typeof callback === 'function' ) {
 						callback();
 					}
 				}

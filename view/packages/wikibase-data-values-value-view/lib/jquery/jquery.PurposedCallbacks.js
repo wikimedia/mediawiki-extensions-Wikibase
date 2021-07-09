@@ -107,7 +107,7 @@
 				// NOTE: We can't remove( callbacks ) even though it is documented to work this way.
 				//  This is a bug (behavior not according to jQuery API documentation) which is
 				//  still present in jQuery 2.0
-				callbacks = $.isArray( callbacks ) ? callbacks : [ callbacks ];
+				callbacks = Array.isArray( callbacks ) ? callbacks : [ callbacks ];
 				callbackForPurpose.remove.apply( callbackForPurpose, callbacks );
 			}
 			return this;
@@ -174,7 +174,7 @@
 		 *         here is not one of them.
 		 */
 		this.fireWith = function( context, purposes, args ) {
-			if ( !$.isArray( purposes ) ) {
+			if ( !Array.isArray( purposes ) ) {
 				purposes = [ purposes ];
 			}
 			args = args || [];

@@ -581,7 +581,7 @@
 
 			var expectedVisibility = true;
 
-			if ( $.isFunction( testSets[i][1] ) ) {
+			if ( typeof testSets[i][1] === 'function' ) {
 				expectedVisibility = testSets[i][1]();
 			} else if ( typeof testSets[i][1] === 'boolean' ) {
 				expectedVisibility = testSets[i][1];
@@ -595,7 +595,7 @@
 
 			assert.strictEqual(
 				item.getAction(),
-				$.isFunction( testSets[i][2] ) ? testSets[i][2] : null,
+				typeof testSets[i][2] === 'function' ? testSets[i][2] : null,
 				'Test set #' + i + ': Verified getAction() return value.'
 			);
 

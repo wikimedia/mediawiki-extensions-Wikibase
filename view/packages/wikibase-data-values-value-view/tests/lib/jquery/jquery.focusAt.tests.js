@@ -24,8 +24,9 @@
 	QUnit.module( 'jquery.focusAt' );
 
 	QUnit.test( 'plugin initialization', function( assert ) {
-		assert.ok(
-			$.isFunction( $.fn.focusAt ),
+		assert.strictEqual(
+			typeof $.fn.focusAt,
+			'function',
 			'"jQuery.focusAt" is available'
 		);
 	} );

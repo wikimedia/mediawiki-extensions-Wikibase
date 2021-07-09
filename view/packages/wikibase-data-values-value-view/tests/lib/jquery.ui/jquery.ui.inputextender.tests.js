@@ -287,7 +287,7 @@
 		var instances = $.ui.inputextender.getInstancesWithVisibleExtensions();
 
 		assert.ok(
-			$.isArray( instances ) && instances.length === 0,
+			Array.isArray( instances ) && instances.length === 0,
 			'Returns empty array initially, before having any instances.'
 		);
 

@@ -37,7 +37,7 @@
 		var pcf = PurposedCallbacks().facade();
 
 		assert.ok(
-			$.isArray( pcf.purposes() ) && pcf.purposes().length === 0,
+			Array.isArray( pcf.purposes() ) && pcf.purposes().length === 0,
 			'Returns an empty array.'
 		);
 
