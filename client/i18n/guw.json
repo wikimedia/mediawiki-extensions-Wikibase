@@ -2,13 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Gadarawamo",
-			"Misteld"
+			"Misteld",
+			"Samatics"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} nuzinzanlẹ",
-	"wikibase-editlinks": "Jla Nọtẹn intanẹti tọn ehe do",
-	"wikibase-editlinkstitle": "Basi Jladona Nọtẹn intanẹti tọn ogbe wunmẹwunmẹ tọn lẹ",
-	"wikibase-linkitem-addlinks": "Gọ Nọtẹn intanẹti naẹ",
+	"wikibase-editlinks": "Jla Nọtẹn Intẹnẹt tọn ehe do",
+	"wikibase-editlinkstitle": "Basi Jladona Nọtẹn Intẹnẹt tọn ogbe wunmẹwunmẹ tọn lẹ",
+	"wikibase-linkitem-addlinks": "Gọ Nọtẹn Intẹnẹt naẹ",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Whla",
 	"wikibase-rc-hide-wikidata-show": "Dohia",
