@@ -46,36 +46,6 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 			]
 		];
 
-		yield 'no local repo, no values set' => [
-			[ // $settings
-			],
-			[ // $wg
-				'wgServer' => 'http://www.acme.com',
-				'wgArticlePath' => '/mywiki',
-				'wgScriptPath' => '/mediawiki',
-				'wgDBname' => 'mw_mywiki',
-			],
-			false, // $repoIsLocal
-			[ // $expected
-				'repoUrl' => '//www.wikidata.org',   // hardcoded default
-				'repoArticlePath' => '/wiki/$1', // hardcoded default
-				'repoScriptPath' => '/w', // hardcoded default
-				'siteGlobalID' => 'mw_mywiki',
-				'repositories' => [
-					'' => [
-						'repoDatabase' => null,
-						'baseUri' => '//www.wikidata.org/entity/',
-						'entityNamespaces' => [
-							'item' => 0,
-							'property' => 120,
-						],
-					],
-				],
-				'changesDatabase' => null,
-				'sharedCacheKeyPrefix' => 'wikibase_shared/mw_mywiki',
-			]
-		];
-
 		yield 'local repo, all values set' => [
 			[ // $settings
 				'repoUrl' => 'http://acme.com',
@@ -174,22 +144,6 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				]
 			];
 		}
-
-		yield 'derive repoNamespaces and entityNamespaces' => [
-			[ // $settings
-			],
-			[ // $wg
-			],
-			false, // $repoIsLocal
-			[ // $expected
-				'repoNamespaces' => [ 'item' => '', 'property' => 'Property' ],
-				'repositories' => [
-					'' => [
-						'entityNamespaces' => [ 'item' => 0, 'property' => 120 ],
-					],
-				],
-			]
-		];
 
 		if ( WikibaseSettings::isRepoEnabled() ) {
 			$repoSettings = WikibaseRepo::getSettings();
