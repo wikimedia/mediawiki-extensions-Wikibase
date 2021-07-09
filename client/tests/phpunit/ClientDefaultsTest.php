@@ -6,7 +6,6 @@ use MediaWikiIntegrationTestCase;
 use MWNamespace;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\WikibaseSettings;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @group Wikibase
@@ -27,6 +26,16 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				'repoDatabase' => 'foo',
 				'changesDatabase' => 'doo',
 				'sharedCacheKeyPrefix' => 'wikibase_shared/',
+				'entitySources' => [
+					'local' => [
+						'repoDatabase' => 'foo',
+						'entityNamespaces' => [ 'item' => 120 ],
+						'baseUri' => 'http://acme.com/',
+						'rdfNodeNamespacePrefix' => 'a',
+						'rdfPredicateNamespacePrefix' => '',
+						'interwikiPrefix' => 'repo',
+					],
+				],
 			],
 			[ // $wg
 				'wgServer' => 'http://www.acme.com',
@@ -43,6 +52,16 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				'repoDatabase' => 'foo',
 				'changesDatabase' => 'doo',
 				'sharedCacheKeyPrefix' => 'wikibase_shared/',
+				'entitySources' => [
+					'local' => [
+						'repoDatabase' => 'foo',
+						'entityNamespaces' => [ 'item' => 120 ],
+						'baseUri' => 'http://acme.com/',
+						'rdfNodeNamespacePrefix' => 'a',
+						'rdfPredicateNamespacePrefix' => '',
+						'interwikiPrefix' => 'repo',
+					],
+				],
 			]
 		];
 
@@ -55,6 +74,16 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				'repoDatabase' => 'foo',
 				'changesDatabase' => 'doo',
 				'sharedCacheKeyPrefix' => 'foo:WBL/',
+				'entitySources' => [
+					'local' => [
+						'repoDatabase' => 'foo',
+						'entityNamespaces' => [ 'item' => 120 ],
+						'baseUri' => 'http://acme.com/',
+						'rdfNodeNamespacePrefix' => 'a',
+						'rdfPredicateNamespacePrefix' => '',
+						'interwikiPrefix' => 'repo',
+					],
+				],
 			],
 			[ // $wg
 				'wgServer' => 'http://www.acme.com',
@@ -71,6 +100,16 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				'repoDatabase' => 'foo',
 				'changesDatabase' => 'doo',
 				'sharedCacheKeyPrefix' => 'foo:WBL/',
+				'entitySources' => [
+					'local' => [
+						'repoDatabase' => 'foo',
+						'entityNamespaces' => [ 'item' => 120 ],
+						'baseUri' => 'http://acme.com/',
+						'rdfNodeNamespacePrefix' => 'a',
+						'rdfPredicateNamespacePrefix' => '',
+						'interwikiPrefix' => 'repo',
+					],
+				],
 			]
 		];
 
@@ -84,6 +123,7 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 					'wgScriptPath' => '/mediawiki',
 					'wgDBname' => 'mw_mywiki',
 					'wgWBRepoSettings' => [
+						'localEntitySourceName' => 'local',
 						'entityNamespaces' => [ 'item' => 303 ],
 					],
 				],
@@ -93,10 +133,16 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 					'repoArticlePath' => '/mywiki',
 					'repoScriptPath' => '/mediawiki',
 					'siteGlobalID' => 'mw_mywiki',
-					'repositories' => [
-						'' => [
+					'repoNamespaces' => [ 'item' => MWNamespace::getCanonicalName( 303 ) ],
+					'entitySources' => [
+						'local' => [
 							'repoDatabase' => false,
+							'entityNamespaces' => [ 'item' => '303/main' ],
 							'baseUri' => 'http://www.acme.com/entity/',
+							'rdfNodeNamespacePrefix' => 'wd',
+							'rdfPredicateNamespacePrefix' => '',
+							'interwikiPrefix' => '',
+							'type' => 'db',
 						],
 					],
 					'changesDatabase' => false,
@@ -107,11 +153,12 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 
 		yield 'derive changesDatabase' => [
 			[ // $settings
-				'repositories' => [
-					'' => [
-						'repoDatabase' => 'mw_foowiki'
+				'entitySources' => [
+					'foo' => [
+						'repoDatabase' => 'mw_foowiki',
 					],
 				],
+				'itemAndPropertySourceName' => 'foo',
 			],
 			[ // $wg
 			],
@@ -144,34 +191,14 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				]
 			];
 		}
-
-		if ( WikibaseSettings::isRepoEnabled() ) {
-			$repoSettings = WikibaseRepo::getSettings();
-			$entityNamespaces = $repoSettings->getSetting( 'entityNamespaces' );
-			$namespaceNames = array_map( [ MWNamespace::class, 'getCanonicalName' ], $entityNamespaces );
-
-			yield 'default repoNamespaces and entityNamespaces' => [
-				[], // $settings
-				[], // $wg
-				true, // $repoIsLocal
-				[ // $expected
-					'repoNamespaces' => $namespaceNames,
-					'repositories' => [
-						'' => [
-							'entityNamespaces' => $entityNamespaces,
-						],
-					],
-				]
-			];
-		}
 	}
 
 	/**
 	 * @dataProvider settingsProvider
 	 */
 	public function testDefaults( array $settings, array $wg, $repoIsLocal, $expected ) {
-		$this->markTestSkipped( 'flaky, see T214761' );
 		$this->setMwGlobals( $wg );
+		$this->clearHook( 'WikibaseRepoEntityNamespaces' );
 
 		$defaults = require __DIR__ . '/../../config/WikibaseClient.default.php';
 

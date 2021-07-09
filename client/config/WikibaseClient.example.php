@@ -52,16 +52,18 @@ if ( false ) {
 	define( 'WB_REPO_NS_ITEM', $baseRepoNs );
 	define( 'WB_REPO_NS_PROPERTY', $baseRepoNs + 2 );
 
-	$wgWBClientSettings['repositories'] = [
-		'' => [
+	$wgWBClientSettings['entitySources'] = [
+		'local' => [
 			'repoDatabase' => 'repo',
 			'baseUri' => $wgWBClientSettings['repoUrl'] . '/entity',
 			'entityNamespaces' => [
 				'item' => WB_REPO_NS_ITEM,
 				'property' => WB_REPO_NS_PROPERTY
 			],
-			'prefixMapping' => [ '' => '' ],
-		]
+			'rdfNodeNamespacePrefix' => 'wd',
+			'rdfPredicateNamespacePrefix' => '',
+			'interwikiPrefix' => '',
+		],
 	];
 }
 

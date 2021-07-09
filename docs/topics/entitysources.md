@@ -11,7 +11,6 @@ Entity source configuration is controlled by a configuration option called `enti
 If you do not specifically set configuration some defaults will be generated for you by the following classes:
  - [EntitySourceDefinitionsConfigParser]
  - [EntitySourceDefinitionsLegacyRepoSettingsParser]
- - [EntitySourceDefinitionsLegacyClientSettingsParser]
 
 ## Configuration
 
@@ -90,4 +89,3 @@ $wgWBClientSettings['entitySources'] = $entitySources;
 [EntitySourceDefinitions]: @ref Wikibase::DataAccess::EntitySourceDefinitions
 [EntitySourceDefinitionsConfigParser]: @ref Wikibase::Repo::EntitySourceDefinitionsConfigParser
 [EntitySourceDefinitionsLegacyRepoSettingsParser]: @ref Wikibase::Repo::EntitySourceDefinitionsLegacyRepoSettingsParser
-[EntitySourceDefinitionsLegacyClientSettingsParser]: @ref Wikibase::Client::EntitySourceDefinitionsLegacyClientSettingsParser
