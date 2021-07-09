@@ -6,8 +6,8 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Api\ConceptUriSearchHelper;
 use Wikibase\Repo\Api\EntitySearchHelper;
 
@@ -36,7 +36,7 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 				'',
 				''
 			) ],
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 	}
 

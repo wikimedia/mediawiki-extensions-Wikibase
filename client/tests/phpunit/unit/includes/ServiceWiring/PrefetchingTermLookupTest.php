@@ -7,7 +7,7 @@ use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\PrefetchingTermLookupFactory;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @coversNothing
@@ -20,7 +20,7 @@ class PrefetchingTermLookupTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$this->mockService(
 			'WikibaseClient.EntitySourceDefinitions',
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) )
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) )
 		);
 
 		$this->mockService(

@@ -9,8 +9,8 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\FederatedProperties\BaseUriExtractor;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesAwareDispatchingEntityIdParser;
 
@@ -66,9 +66,6 @@ class FederatedPropertiesAwareDispatchingEntityIdParserTest extends TestCase {
 
 	private function getFederatedPropertiesAwareDispatchingEntityIdParser( $dispatchingParser
 	): FederatedPropertiesAwareDispatchingEntityIdParser {
-		$callback1 = function () {
-			return $this->createStub( EntityArticleIdLookup::class );
-		};
 		$definitions = new EntitySourceDefinitions(
 			[
 				new EntitySource(
@@ -101,11 +98,7 @@ class FederatedPropertiesAwareDispatchingEntityIdParserTest extends TestCase {
 					EntitySource::TYPE_API
 				)
 			],
-			new EntityTypeDefinitions( [
-				'property' => [
-					EntityTypeDefinitions::ARTICLE_ID_LOOKUP_CALLBACK => $callback1,
-				]
-			] )
+			new SubEntityTypesMapper( [] )
 		);
 		$fpParser = new FederatedPropertiesAwareDispatchingEntityIdParser( $dispatchingParser, new BaseUriExtractor(), $definitions );
 

@@ -11,7 +11,7 @@ use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @covers \Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler
@@ -29,7 +29,7 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testCreateSchema( $revisionTimestamp, $image, $description, $expected ) {
 		$repoLinker = new RepoLinker(
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 			'https://www.wikidata.org',
 			'/wiki/$1',
 			'/w'

@@ -8,8 +8,8 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\DataTypeDefinitions;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -54,7 +54,7 @@ class RdfVocabularyTest extends ServiceWiringTestCase {
 			new EntitySourceDefinitions( [
 				$localEntitySource,
 				$otherEntitySource,
-			], new EntityTypeDefinitions( [] ) ) );
+			], new SubEntityTypesMapper( [] ) ) );
 		$this->mockService( 'WikibaseRepo.DataTypeDefinitions',
 			new DataTypeDefinitions( [
 				'PT:test' => [ 'rdf-uri' => 'https://rdf.test/Datatype' ],

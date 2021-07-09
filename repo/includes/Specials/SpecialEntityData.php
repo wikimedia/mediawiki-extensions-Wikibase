@@ -62,7 +62,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		LoggerInterface $logger,
 		SettingsArray $repoSettings,
 		Store $store,
-		SubEntityTypesMapper $subEntityTypesMap
+		SubEntityTypesMapper $subEntityTypesMapper
 	): self {
 		global $wgUseCdn, $wgApiFrameOptions;
 
@@ -88,7 +88,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$maxAge,
 			$wgUseCdn,
 			$wgApiFrameOptions,
-			$subEntityTypesMap
+			$subEntityTypesMapper
 		);
 
 		return new self( $entityDataRequestHandler, $entityDataFormatProvider );

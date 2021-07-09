@@ -32,4 +32,8 @@ class SubEntityTypesMapper {
 		return null;
 	}
 
+	public function getSubEntityTypes( string $type ): array {
+		return $this->typeMap[$type] ?? [];
+	}
+
 }

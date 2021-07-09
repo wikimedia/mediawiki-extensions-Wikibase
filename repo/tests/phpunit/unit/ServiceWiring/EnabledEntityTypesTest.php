@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -62,7 +63,7 @@ class EnabledEntityTypesTest extends ServiceWiringTestCase {
 					'lex',
 					'lexwiki'
 				)
-			], $entityTypeDefinitions ) );
+			], new SubEntityTypesMapper( $entityTypeDefinitions->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) ) ) );
 		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
 			$entityTypeDefinitions );
 

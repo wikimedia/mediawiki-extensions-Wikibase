@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Rdf\NullEntityMentionListener;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\Values\EntityIdRdfBuilder;
@@ -51,7 +51,7 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					'',
 					''
 				)
-			], new EntityTypeDefinitions( [] ) ),
+			], new SubEntityTypesMapper( [] ) ),
 			[ 'test' => '' ],
 			[ 'test' => '' ]
 		);

@@ -7,8 +7,8 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @coversNothing
@@ -42,7 +42,7 @@ class ItemAndPropertySourceTest extends ServiceWiringTestCase {
 						'other'
 					)
 				],
-				new EntityTypeDefinitions( [] )
+				new SubEntityTypesMapper( [] )
 			)
 		);
 		$this->mockService( 'WikibaseClient.Settings',

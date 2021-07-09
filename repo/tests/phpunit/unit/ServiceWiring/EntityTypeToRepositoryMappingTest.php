@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -63,9 +63,7 @@ class EntityTypeToRepositoryMappingTest extends ServiceWiringTestCase {
 					''
 				);
 			}, array_keys( $sourcesToTypes ), $sourcesToTypes ),
-			new EntityTypeDefinitions( array_map( function ( array $subtypes ): array {
-				return [ EntityTypeDefinitions::SUB_ENTITY_TYPES => $subtypes ];
-			}, $typesToSubtypes ) )
+			new SubEntityTypesMapper( $typesToSubtypes )
 		);
 	}
 

@@ -4,8 +4,8 @@ namespace Wikibase\Client\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @covers \Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser
@@ -29,7 +29,7 @@ class EntitySourceDefinitionsLegacyClientSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();
@@ -64,7 +64,7 @@ class EntitySourceDefinitionsLegacyClientSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();
@@ -106,7 +106,7 @@ class EntitySourceDefinitionsLegacyClientSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();
@@ -150,7 +150,7 @@ class EntitySourceDefinitionsLegacyClientSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();
@@ -183,7 +183,7 @@ class EntitySourceDefinitionsLegacyClientSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();
@@ -218,7 +218,7 @@ class EntitySourceDefinitionsLegacyClientSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();
@@ -247,7 +247,7 @@ class EntitySourceDefinitionsLegacyClientSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();
@@ -279,7 +279,7 @@ class EntitySourceDefinitionsLegacyClientSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();
@@ -306,7 +306,7 @@ class EntitySourceDefinitionsLegacyClientSettingsParserTest extends TestCase {
 
 		$sourceDefinitions = $parser->newDefinitionsFromSettings(
 			new SettingsArray( $settings ),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 
 		$sources = $sourceDefinitions->getSources();

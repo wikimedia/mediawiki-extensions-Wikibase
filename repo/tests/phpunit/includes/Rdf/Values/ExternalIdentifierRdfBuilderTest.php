@@ -6,8 +6,8 @@ use DataValues\StringValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\PropertyInfoProvider;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\Values\ExternalIdentifierRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
@@ -46,7 +46,7 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$vocabulary = new RdfVocabulary(
 			[ '' => '<BASE>' ],
 			[ '' => '<DATA>' ],
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 			[ '' => '' ],
 			[ '' => '' ]
 		);

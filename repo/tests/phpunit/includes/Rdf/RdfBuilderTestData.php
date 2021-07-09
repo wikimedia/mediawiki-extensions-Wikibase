@@ -17,10 +17,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\RedirectRevision;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Lib\Tests\MockEntityRevisionLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Rdf\RdfVocabulary;
@@ -188,7 +188,7 @@ class RdfBuilderTestData {
 						''
 					),
 				],
-				new EntityTypeDefinitions( [] )
+				new SubEntityTypesMapper( [] )
 			),
 			[ 'wikidata' => '', 'foreign' => 'foreign' ],
 			[ 'wikidata' => '', 'foreign' => 'foreign' ],

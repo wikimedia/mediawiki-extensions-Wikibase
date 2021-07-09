@@ -7,7 +7,7 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -41,10 +41,8 @@ class WikibaseServicesTest extends ServiceWiringTestCase {
 			)
 		];
 
-		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
-
 		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions',
-			new EntitySourceDefinitions( $entitySources, $entityTypeDefinitions ) );
+			new EntitySourceDefinitions( $entitySources, new SubEntityTypesMapper( [] ) ) );
 		$this->mockService( 'WikibaseRepo.SingleEntitySourceServicesFactory',
 			$this->createMock( SingleEntitySourceServicesFactory::class )
 		);

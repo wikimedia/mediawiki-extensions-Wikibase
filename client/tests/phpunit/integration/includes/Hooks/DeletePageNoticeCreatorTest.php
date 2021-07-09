@@ -8,8 +8,8 @@ use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @covers \Wikibase\Client\Hooks\DeletePageNoticeCreator
@@ -35,7 +35,7 @@ class DeletePageNoticeCreatorTest extends MediaWikiIntegrationTestCase {
 		$scriptPath = '';
 
 		return new RepoLinker(
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 			$baseUrl,
 			$articlePath,
 			$scriptPath

@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesAwareDispatchingEntityIdParser;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -84,7 +85,7 @@ class EntityIdParserTest extends ServiceWiringTestCase {
 					'',
 					EntitySource::TYPE_API
 				)
-			], $entityTypeDefinitions ) );
+			], new SubEntityTypesMapper( [] ) ) );
 
 		/** @var EntityIdParser $entityIdParser */
 		$entityIdParser = $this->getService( 'WikibaseRepo.EntityIdParser' );

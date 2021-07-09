@@ -33,7 +33,7 @@ class EntityUrlLookupTest extends ServiceWiringTestCase {
 		];
 		$this->mockService(
 			'WikibaseRepo.EntitySourceDefinitions',
-			new EntitySourceDefinitions( $sources, $this->createStub( EntityTypeDefinitions::class ) )
+			new EntitySourceDefinitions( $sources, new SubEntityTypesMapper( [] ) )
 		);
 		$this->mockService( 'WikibaseRepo.EntitySourceAndTypeDefinitions',
 			new EntitySourceAndTypeDefinitions(

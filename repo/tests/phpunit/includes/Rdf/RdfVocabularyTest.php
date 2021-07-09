@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 
 /**
@@ -50,7 +50,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 					'other',
 					''
 				),
-			], new EntityTypeDefinitions( [] ) ),
+			], new SubEntityTypesMapper( [] ) ),
 			[ 'localwiki' => 'wd', 'otherwiki' => 'other' ],
 			[ 'localwiki' => '', 'otherwiki' => 'other' ]
 		);
@@ -81,7 +81,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 					'other',
 					''
 				),
-			], new EntityTypeDefinitions( [] ) ),
+			], new SubEntityTypesMapper( [] ) ),
 			[ 'localwiki' => 'wd', 'otherwiki' => 'other' ],
 			[ 'localwiki' => '', 'otherwiki' => 'other' ]
 		);
@@ -110,7 +110,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 					'other',
 					''
 				),
-			], new EntityTypeDefinitions( [] ) ),
+			], new SubEntityTypesMapper( [] ) ),
 			[ 'localwiki' => 'wd', 'otherwiki' => 'other' ],
 			[ 'localwiki' => '', 'otherwiki' => 'other' ],
 			[ 'German' => 'de' ],

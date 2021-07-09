@@ -43,4 +43,33 @@ class SubEntityTypesMapperTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
+	/**
+	 * @dataProvider subTypesProvider
+	 */
+	public function testGetSubEntityTypes( array $typeMap, string $givenType, array $subTypes ): void {
+		$map = new SubEntityTypesMapper( $typeMap );
+
+		$this->assertSame( $subTypes, $map->getSubEntityTypes( $givenType ) );
+	}
+
+	public function subTypesProvider() {
+		yield 'top level type without sub types' => [
+			'typeMap' => [ 'property' => [] ],
+			'givenType' => 'property',
+			'subTypes' => [],
+		];
+
+		yield 'top level type with sub types' => [
+			'typeMap' => [ 'property' => [], 'lexeme' => [ 'form', 'sense' ] ],
+			'givenType' => 'lexeme',
+			'subTypes' => [ 'form', 'sense' ],
+		];
+
+		yield 'unknown type' => [
+			'typeMap' => [ 'property' => [] ],
+			'givenType' => 'potato',
+			'subTypes' => [],
+		];
+	}
+
 }

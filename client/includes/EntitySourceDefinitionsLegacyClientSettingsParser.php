@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use MWNamespace;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * TODO: alternatively, the logic could go to the "static constructor" of EntitySourceDefinitions class?
@@ -16,7 +16,7 @@ use Wikibase\Lib\SettingsArray;
  */
 class EntitySourceDefinitionsLegacyClientSettingsParser {
 
-	public function newDefinitionsFromSettings( SettingsArray $settings, EntityTypeDefinitions $entityTypeDefinitions ) {
+	public function newDefinitionsFromSettings( SettingsArray $settings, SubEntityTypesMapper $subEntityTypesMapper ) {
 		$repoSettingsArray = $settings->hasSetting( 'foreignRepositories' )
 			? $settings->getSetting( 'foreignRepositories' )
 			: $settings->getSetting( 'repositories' );
@@ -83,7 +83,7 @@ class EntitySourceDefinitionsLegacyClientSettingsParser {
 			);
 		}
 
-		return new EntitySourceDefinitions( $sources, $entityTypeDefinitions );
+		return new EntitySourceDefinitions( $sources, $subEntityTypesMapper );
 	}
 
 	private function splitNamespaceAndSlot( $namespaceAndSlot ) {

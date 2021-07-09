@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -41,7 +41,7 @@ class ItemVocabularyBaseUriTest extends ServiceWiringTestCase {
 				$baseUriToEntityTypes,
 				$length > 0 ? range( 1, $length ) : []
 			),
-			new EntityTypeDefinitions( [] )
+			new SubEntityTypesMapper( [] )
 		);
 	}
 

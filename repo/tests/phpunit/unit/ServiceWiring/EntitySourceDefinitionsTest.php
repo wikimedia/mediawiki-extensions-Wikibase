@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -19,8 +19,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 
 	private function mockServices( array $settingsArray ) {
-		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
-			new EntityTypeDefinitions( [] ) );
+		$this->mockService( 'WikibaseRepo.SubEntityTypesMapper',
+			new SubEntityTypesMapper( [] ) );
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( $settingsArray ) );
 	}

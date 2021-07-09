@@ -12,6 +12,7 @@ use Wikibase\DataAccess\PrefetchingTermLookupFactory;
 use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikimedia\Assert\ParameterAssertionException;
 use Wikimedia\Assert\PostconditionException;
 use Wikimedia\Assert\PreconditionException;
@@ -30,7 +31,7 @@ class PrefetchingTermLookupFactoryTest extends TestCase {
 		] );
 		$entitySourceDefinitions = $this->getEntitySourceDefinitions( [
 			'test' => [ 'something' ]
-		], $entityTypeDefinitions );
+		] );
 
 		$lookupFactory = new PrefetchingTermLookupFactory(
 			$entitySourceDefinitions,
@@ -73,7 +74,7 @@ class PrefetchingTermLookupFactoryTest extends TestCase {
 		$exception
 	): void {
 		$entityTypeDefinitions = $this->getPrefetchCallbackDefinitions( $prefetchCallbackDefs );
-		$entitySourceDefinitions = $this->getEntitySourceDefinitions( $entitySourceDefs, $entityTypeDefinitions );
+		$entitySourceDefinitions = $this->getEntitySourceDefinitions( $entitySourceDefs );
 
 		$lookupFactory = new PrefetchingTermLookupFactory(
 			$entitySourceDefinitions,
@@ -115,7 +116,7 @@ class PrefetchingTermLookupFactoryTest extends TestCase {
 	public function testGetLookupForSourceReturnsNullLookup(): void {
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		$entitySource = $this->getEntitySource( 'test', [ 'something' ] );
-		$entitySourceDefinitions = new EntitySourceDefinitions( [ $entitySource ], $entityTypeDefinitions );
+		$entitySourceDefinitions = new EntitySourceDefinitions( [ $entitySource ], new SubEntityTypesMapper( [] ) );
 
 		$lookupFactory = new PrefetchingTermLookupFactory(
 			$entitySourceDefinitions,
@@ -132,7 +133,7 @@ class PrefetchingTermLookupFactoryTest extends TestCase {
 
 	public function testGetLookupForSourceThrows(): void {
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
-		$entitySourceDefinitions = new EntitySourceDefinitions( [], $entityTypeDefinitions );
+		$entitySourceDefinitions = new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) );
 
 		$lookupFactory = new PrefetchingTermLookupFactory(
 			$entitySourceDefinitions,
@@ -148,7 +149,7 @@ class PrefetchingTermLookupFactoryTest extends TestCase {
 	public function testGetLookupForSourceCachesBySource(): void {
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		$entitySource = $this->getEntitySource( 'test', [ 'something' ] );
-		$entitySourceDefinitions = new EntitySourceDefinitions( [ $entitySource ], $entityTypeDefinitions );
+		$entitySourceDefinitions = new EntitySourceDefinitions( [ $entitySource ], new SubEntityTypesMapper( [] ) );
 
 		$lookupFactory = new PrefetchingTermLookupFactory(
 			$entitySourceDefinitions,
@@ -167,7 +168,7 @@ class PrefetchingTermLookupFactoryTest extends TestCase {
 			'item' => new FakePrefetchingTermLookup()
 		] );
 		$entitySource = $this->getEntitySource( 'test', [ 'item' ] );
-		$entitySourceDefinitions = new EntitySourceDefinitions( [ $entitySource ], $entityTypeDefinitions );
+		$entitySourceDefinitions = new EntitySourceDefinitions( [ $entitySource ], new SubEntityTypesMapper( [] ) );
 
 		$lookupFactory = new PrefetchingTermLookupFactory(
 			$entitySourceDefinitions,
@@ -209,14 +210,11 @@ class PrefetchingTermLookupFactoryTest extends TestCase {
 		);
 	}
 
-	private function getEntitySourceDefinitions(
-		array $entitySourceToTypes,
-		EntityTypeDefinitions $entityTypeDefinitions
-	): EntitySourceDefinitions {
+	private function getEntitySourceDefinitions( array $entitySourceToTypes ): EntitySourceDefinitions {
 		return new EntitySourceDefinitions( array_map(
 			[ $this, 'getEntitySource' ],
 			array_keys( $entitySourceToTypes ),
 			$entitySourceToTypes
-		), $entityTypeDefinitions );
+		), new SubEntityTypesMapper( [] ) );
 	}
 }

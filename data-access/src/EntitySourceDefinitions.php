@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess;
 
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -33,19 +34,25 @@ class EntitySourceDefinitions {
 	private $sourceToRdfPredicateNamespacePrefixMap = null;
 
 	/**
-	 * @var string[] Associative array mapping "sub entity type" name to the name of its "parent" entity type
+	 * @var SubEntityTypesMapper
 	 */
-	private $subEntityTypeMap;
+	private $subEntityTypesMapper;
 
 	/**
 	 * @param EntitySource[] $sources with unique names. An single entity type can not be used in two different sources.
-	 * @param EntityTypeDefinitions $entityTypeDefinitions
+	 * @param $subEntityTypesMapper
 	 */
-	public function __construct( array $sources, EntityTypeDefinitions $entityTypeDefinitions ) {
+	public function __construct( array $sources, $subEntityTypesMapper ) {
 		Assert::parameterElementType( EntitySource::class, $sources, '$sources' );
 		$this->assertNoDuplicateSourcesOrEntityTypes( $sources );
 		$this->sources = $sources;
-		$this->subEntityTypeMap = $this->buildSubEntityTypeMap( $entityTypeDefinitions );
+
+		// FIXME: necessary backwards compatibility hack with Lexeme and QualityConstraints. Will be removed in a follow-up.
+		if ( $subEntityTypesMapper instanceof EntityTypeDefinitions ) {
+			$this->subEntityTypesMapper = new SubEntityTypesMapper( $subEntityTypesMapper->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) );
+		} else { // it already is a SubEntityTypesMap
+			$this->subEntityTypesMapper = $subEntityTypesMapper;
+		}
 	}
 
 	/**
@@ -81,19 +88,6 @@ class EntitySourceDefinitions {
 		}
 	}
 
-	private function buildSubEntityTypeMap( EntityTypeDefinitions $entityTypeDefinitions ) {
-		$subEntityTypes = $entityTypeDefinitions->get( EntityTypeDefinitions::SUB_ENTITY_TYPES );
-
-		$subEntityTypeMap = [];
-		foreach ( $subEntityTypes as $type => $subTypes ) {
-			foreach ( $subTypes as $subType ) {
-				$subEntityTypeMap[$subType] = $type;
-			}
-		}
-
-		return $subEntityTypeMap;
-	}
-
 	public function getSources() {
 		return $this->sources;
 	}
@@ -106,9 +100,7 @@ class EntitySourceDefinitions {
 	 * @return EntitySource|null EntitySource or null if no EntitySource configured for the type
 	 */
 	public function getSourceForEntityType( string $entityType ): ?EntitySource {
-		if ( array_key_exists( $entityType, $this->subEntityTypeMap ) ) {
-			$entityType = $this->subEntityTypeMap[$entityType];
-		}
+		$entityType = $this->subEntityTypesMapper->getParentEntityType( $entityType ) ?? $entityType;
 
 		$entityTypeToSourceMapping = $this->getEntityTypeToSourceMapping();
 		if ( array_key_exists( $entityType, $entityTypeToSourceMapping ) ) {
@@ -136,9 +128,8 @@ class EntitySourceDefinitions {
 				$this->entityTypeToSourceMapping[$type] = $source;
 			}
 		}
-		foreach ( $this->subEntityTypeMap as $subEntityType => $mainEntityType ) {
-			// Only add sub entities that are enabled to be mapping
-			if ( array_key_exists( $mainEntityType, $this->entityTypeToSourceMapping ) ) {
+		foreach ( $this->entityTypeToSourceMapping as $mainEntityType => $source ) {
+			foreach ( $this->subEntityTypesMapper->getSubEntityTypes( $mainEntityType ) as $subEntityType ) {
 				$this->entityTypeToSourceMapping[$subEntityType] = $this->entityTypeToSourceMapping[$mainEntityType];
 			}
 		}

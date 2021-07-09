@@ -12,7 +12,6 @@ use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Lib\SubEntityTypesMapper;
 
@@ -102,7 +101,7 @@ class EntitySourceLookupTest extends TestCase {
 	}
 
 	private function newEntitySourceDefinitionsFromSources( array $sources ): EntitySourceDefinitions {
-		return new EntitySourceDefinitions( $sources, $this->createStub( EntityTypeDefinitions::class ) );
+		return new EntitySourceDefinitions( $sources, new SubEntityTypesMapper( [] ) );
 	}
 
 }
