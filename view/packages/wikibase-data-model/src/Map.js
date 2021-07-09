@@ -19,9 +19,9 @@
 var SELF = function WbDataModelMap( ItemConstructor, map ) {
 	map = map || {};
 
-	if( !$.isFunction( ItemConstructor ) ) {
+	if( typeof ItemConstructor !== 'function' ) {
 		throw new Error( 'Item constructor needs to be a Function' );
-	} else if( !$.isFunction( ItemConstructor.prototype.equals ) ) {
+	} else if( typeof ItemConstructor.prototype.equals !== 'function' ) {
 		throw new Error( 'Map item prototype needs equals() method' );
 	}
 

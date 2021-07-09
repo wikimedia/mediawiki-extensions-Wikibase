@@ -23,9 +23,9 @@ module.exports = util.inherit(
 	'WbDataModelList',
 	PARENT,
 	function( ItemConstructor, items ) {
-		if( !$.isFunction( ItemConstructor ) ) {
+		if( typeof ItemConstructor !== 'function' ) {
 			throw new Error( 'Item constructor needs to be a Function' );
-		} else if( !$.isFunction( ItemConstructor.prototype.equals ) ) {
+		} else if( typeof ItemConstructor.prototype.equals !== 'function' ) {
 			throw new Error( 'List item prototype needs equals() method' );
 		}
 

@@ -27,11 +27,11 @@ module.exports = util.inherit(
 	'WbDataModelSet',
 	PARENT,
 	function( ItemConstructor, itemKeyFunctionName, items ) {
-		if( !$.isFunction( ItemConstructor ) ) {
+		if( typeof ItemConstructor !== 'function' ) {
 			throw new Error( 'Item constructor needs to be a Function' );
-		} else if( !$.isFunction( ItemConstructor.prototype.equals ) ) {
+		} else if( typeof ItemConstructor.prototype.equals !== 'function' ) {
 			throw new Error( 'List item prototype needs equals() method' );
-		} else if( !$.isFunction( ItemConstructor.prototype[itemKeyFunctionName] ) ) {
+		} else if( typeof ItemConstructor.prototype[itemKeyFunctionName] !== 'function' ) {
 			throw new Error( 'Missing ' + itemKeyFunctionName + '() in list item prototype to '
 				+ ' receive the item key from' );
 		}
