@@ -9,7 +9,7 @@
  * @throws {Error} if the provided argument is not a valueParsers.ValueParser constructor.
  */
 function assertIsValueParserConstructor( Parser ) {
-	if( !( $.isFunction( Parser ) && Parser.prototype instanceof vp.ValueParser ) ) {
+	if( !( typeof Parser === 'function' && Parser.prototype instanceof vp.ValueParser ) ) {
 		throw new Error( 'Invalid ValueParser constructor' );
 	}
 }
