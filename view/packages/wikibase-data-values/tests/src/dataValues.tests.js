@@ -11,7 +11,7 @@
 		var dvs = dv.getDataValues();
 		assert.expect( dvs.length * 2 + 1 );
 
-		assert.ok( $.isArray( dvs ), 'Returns an array' );
+		assert.ok( Array.isArray( dvs ), 'Returns an array' );
 
 		for ( var i = 0, s = dvs.length; i < s; i++ ) {
 			assert.ok(

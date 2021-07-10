@@ -69,7 +69,7 @@
 			var self = this;
 
 			$.each( this, function( property, value ) {
-				if( property.substring( 0, 4 ) === 'test' && $.isFunction( self[property] ) ) {
+				if( property.substring( 0, 4 ) === 'test' && typeof self[property] === 'function' ) {
 					QUnit.test(
 						property,
 						function( assert ) {
@@ -100,7 +100,7 @@
 						: '',
 					done = assert.async();
 
-				if( $.isArray( expected ) ) {
+				if( Array.isArray( expected ) ) {
 					expectedValue = expected[0];
 					expectedDataValue = expected[1];
 				} else {

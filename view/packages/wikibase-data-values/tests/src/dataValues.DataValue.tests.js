@@ -84,7 +84,7 @@
 			var self = this;
 
 			$.each( this, function( property, value ) {
-				if ( property.substring( 0, 4 ) === 'test' && $.isFunction( self[property] ) ) {
+				if ( property.substring( 0, 4 ) === 'test' && typeof self[property] === 'function' ) {
 					QUnit.test(
 						property,
 						function( assert ) {
@@ -137,7 +137,7 @@
 			var fnNewFromJSON = this.getConstructor().newFromJSON;
 
 			assert.ok(
-				$.isFunction( fnNewFromJSON ),
+				typeof fnNewFromJSON === 'function',
 				'has a related newFromJSON function'
 			);
 		},
