@@ -69,7 +69,7 @@ class GlobeCoordinateDetailsFormatter implements ValueFormatter {
 		}
 
 		$html = '';
-		$html .= Html::element( 'h4',
+		$html .= Html::element( 'b',
 			[ 'class' => 'wb-details wb-globe-details wb-globe-rendered' ],
 			$this->coordinateFormatter->format( $value )
 		);

@@ -92,7 +92,7 @@ class QuantityDetailsFormatter implements ValueFormatter {
 		}
 
 		$html = '';
-		$html .= Html::element( 'h4',
+		$html .= Html::element( 'b',
 			[ 'class' => 'wb-details wb-quantity-details wb-quantity-rendered' ],
 			$this->quantityFormatter->format( $value )
 		);

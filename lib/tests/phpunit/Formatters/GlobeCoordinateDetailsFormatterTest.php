@@ -54,7 +54,7 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 				$options,
 				'@' . implode( '.*',
 					[
-						'<h4[^<>]*>[^<>]*50[^<>]+11[^<>]*</h4>',
+						'<b[^<>]*>[^<>]*50[^<>]+11[^<>]*</b>',
 						'<td[^<>]*>[^<>]*50[^<>]*</td>',
 						'<td[^<>]*>[^<>]*11[^<>]*</td>',
 						'<td[^<>]*>[^<>]*1[^<>]*</td>',

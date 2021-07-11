@@ -54,7 +54,7 @@ class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 				QuantityValue::newFromNumber( '+5', '1', '+6', '+4' ),
 				'@' . implode( '.*',
 					[
-						'<h4[^<>]*>[^<>]*\b5\b[^<>]*1[^<>]*</h4>',
+						'<b[^<>]*>[^<>]*\b5\b[^<>]*1[^<>]*</b>',
 						'<td[^<>]*>[^<>]*\b5\b[^<>]*</td>',
 						'<td[^<>]*>[^<>]*\b6\b[^<>]*</td>',
 						'<td[^<>]*>[^<>]*\b4\b[^<>]*</td>',
@@ -64,7 +64,7 @@ class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 			],
 			[
 				UnboundedQuantityValue::newFromNumber( '+5', '1' ),
-				'@<h4[^<>]*>5</h4>'
+				'@<b[^<>]*>5</b>'
 					. '.*<td[^<>]*>5</td>'
 					. '.*<td[^<>]*>1</td>@s'
 			],
