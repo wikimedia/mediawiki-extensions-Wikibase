@@ -28,12 +28,10 @@ var SELF = function WbDataModelGroup(
 	if( key === undefined ) {
 		throw new Error( 'Key may not be undefined' );
 	}
-	if( !$.isFunction( GroupableCollectionConstructor ) ) {
+	if( typeof GroupableCollectionConstructor !== 'function' ) {
 		throw new Error( 'Item container constructor needs to be a Function' );
 	}
-	if( !$.isFunction(
-		GroupableCollectionConstructor.prototype[groupableCollectionGetKeysFunctionName]
-	) ) {
+	if( typeof GroupableCollectionConstructor.prototype[groupableCollectionGetKeysFunctionName] !== 'function' ) {
 		throw new Error( 'Missing ' + GroupableCollectionConstructor + '() in container item '
 			+ 'prototype to receive the item key from' );
 	}

@@ -66,7 +66,7 @@ $.extend( SELF.prototype, {
 	 * @throws {Error} when texts is not an array.
 	 */
 	setTexts: function( texts ) {
-		if( !$.isArray( texts ) ) {
+		if( !Array.isArray( texts ) ) {
 			throw new Error( 'texts needs to be an array of strings' );
 		}
 		this._texts = texts;
