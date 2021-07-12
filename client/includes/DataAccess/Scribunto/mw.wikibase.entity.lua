@@ -98,21 +98,12 @@ end
 -- Function to mask an entity's subtables in order to log access and prevent modifications
 --
 -- @param {table} entity
--- @param {bool} fineGrainedTracking
-local function maskEntityTables( entity, fineGrainedTracking )
-	if fineGrainedTracking then
-		maskEntityTable( entity, 'claims', addStatementUsage )
-		maskEntityTable( entity, 'labels', php.addLabelUsage )
-		maskEntityTable( entity, 'sitelinks', php.addSiteLinksUsage )
-		maskEntityTable( entity, 'descriptions', php.addDescriptionUsage )
-		maskEntityTable( entity, 'aliases', php.addOtherUsage )
-	else
-		maskEntityTable( entity, 'claims', noUsageTracking )
-		maskEntityTable( entity, 'labels', noUsageTracking )
-		maskEntityTable( entity, 'sitelinks', noUsageTracking )
-		maskEntityTable( entity, 'descriptions', noUsageTracking )
-		maskEntityTable( entity, 'aliases', noUsageTracking )
-	end
+local function maskEntityTables( entity )
+	maskEntityTable( entity, 'claims', addStatementUsage )
+	maskEntityTable( entity, 'labels', php.addLabelUsage )
+	maskEntityTable( entity, 'sitelinks', php.addSiteLinksUsage )
+	maskEntityTable( entity, 'descriptions', php.addDescriptionUsage )
+	maskEntityTable( entity, 'aliases', php.addOtherUsage )
 end
 
 -- Create new entity object from given data
@@ -136,7 +127,7 @@ function Entity.create( data )
 	end
 
 	local entity = data
-	maskEntityTables( entity, settings.fineGrainedLuaTracking )
+	maskEntityTables( entity )
 
 	setmetatable( entity, metatable )
 	return entity

@@ -321,19 +321,8 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
 	}
 
-	public function fineGrainedLuaTrackingProvider() {
-		return [
-			[ true, [ 'Q885588#L' ] ],
-			[ false, [ 'Q32488#X', 'Q885588#L' ] ],
-		];
-	}
-
-	/**
-	 * @dataProvider fineGrainedLuaTrackingProvider
-	 */
-	public function testRenderSnak_languageFallback( $fineGrainedTracking, $expectedUsage ) {
+	public function testRenderSnak_languageFallback() {
 		$this->setAllowDataAccessInUserLanguage( true );
-		$this->setFineGrainedLuaTracking( $fineGrainedTracking );
 		$cacheSplit = false;
 		$lang = Language::factory( 'ku' );
 
@@ -348,7 +337,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 		// All languages in the fallback chain from 'ku' to 'ku-latn' count as "used".
 		$usage = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
-		$this->assertSame( $expectedUsage, array_keys( $usage ) );
+		$this->assertSame( [ 'Q885588#L' ], array_keys( $usage ) );
 
 		$this->assertSame( true, $cacheSplit );
 	}
@@ -612,11 +601,6 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	private function setAllowDataAccessInUserLanguage( bool $value ) {
 		$settings = WikibaseClient::getSettings();
 		$settings->setSetting( 'allowDataAccessInUserLanguage', $value );
-	}
-
-	private function setFineGrainedLuaTracking( bool $value ) {
-		$settings = WikibaseClient::getSettings();
-		$settings->setSetting( 'fineGrainedLuaTracking', $value );
 	}
 
 }

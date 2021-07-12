@@ -246,7 +246,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		$settings = WikibaseClient::getSettings();
 		// These settings will be exposed to the Lua module.
 		$options = [
-			'fineGrainedLuaTracking' => $settings->getSetting( 'fineGrainedLuaTracking' ),
 			'trackLuaFunctionCallsSampleRate' => $settings->getSetting( 'trackLuaFunctionCallsSampleRate' ),
 			'languageCode' => $this->getLanguage()->getCode(),
 			'globalSiteId' => $settings->getSetting( 'siteGlobalID' ),

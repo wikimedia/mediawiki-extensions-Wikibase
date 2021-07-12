@@ -50,7 +50,6 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		EntityLookup $entityLookup = null,
 		UsageAccumulator $usageAccumulator = null,
 		$langCode = 'en',
-		$fineGrainedTracking = true,
 		$logger = null
 	) {
 		$language = Language::factory( $langCode );
@@ -81,7 +80,6 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 			$fallbackChain,
 			$language,
 			new StaticContentLanguages( [ 'de', $langCode, 'es', 'ja' ] ),
-			$fineGrainedTracking,
 			$logger
 		);
 	}
@@ -108,30 +106,19 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function getEntity_usageProvider() {
-		return [
-			[ true ],
-			[ false ]
-		];
-	}
-
-	/**
-	 * @dataProvider getEntity_usageProvider
-	 */
-	public function testGetEntity_usage( $fineGrainedTracking ) {
+	public function testGetEntity_usage() {
 		$item = $this->getItem();
 		$itemId = $item->getId();
 
 		$entityLookup = new MockRepository();
 
 		$usages = new HashUsageAccumulator();
-		$entityAccessor = $this->getEntityAccessor( $entityLookup, $usages, 'en', $fineGrainedTracking );
+		$entityAccessor = $this->getEntityAccessor( $entityLookup, $usages, 'en' );
 
 		$entityAccessor->getEntity( $itemId->getSerialization() );
 		// Only access to specific labels/claims/etc will result in actual usage
-		$this->assertEquals(
-			$this->hasUsage( $usages->getUsages(), $item->getId(), EntityUsage::ALL_USAGE ),
-			!$fineGrainedTracking
+		$this->assertFalse(
+			$this->hasUsage( $usages->getUsages(), $item->getId(), EntityUsage::ALL_USAGE )
 		);
 	}
 
@@ -482,7 +469,6 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 			$entityLookup,
 			null,
 			'en',
-			true,
 			$logger
 		);
 
