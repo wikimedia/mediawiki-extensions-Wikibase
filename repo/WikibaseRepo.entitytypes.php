@@ -26,8 +26,8 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Lib\DataTypeDefinitions;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
@@ -37,6 +37,7 @@ use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
+use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Lib\WikibaseContentLanguages;
@@ -264,6 +265,11 @@ return [
 				$services->getLinkBatchFactory()
 			);
 		},
+		Def::TITLE_TEXT_LOOKUP_CALLBACK => function () {
+			return new TitleLookupBasedEntityTitleTextLookup(
+				WikibaseRepo::getEntityTitleLookup()
+			);
+		},
 	],
 	'property' => [
 		Def::STORAGE_SERIALIZER_FACTORY_CALLBACK => function( SerializerFactory $serializerFactory ) {
@@ -476,6 +482,11 @@ return [
 			return new TitleLookupBasedEntityExistenceChecker(
 				WikibaseRepo::getEntityTitleLookup( $services ),
 				$services->getLinkBatchFactory()
+			);
+		},
+		Def::TITLE_TEXT_LOOKUP_CALLBACK => function () {
+			return new TitleLookupBasedEntityTitleTextLookup(
+				WikibaseRepo::getEntityTitleLookup()
 			);
 		},
 	]
