@@ -17,97 +17,95 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 
-	public function settingsProvider() {
-		$cases = [
-			[ // #0: no local repo, all values set
-				[ // $settings
-					'repoUrl' => 'http://acme.com',
-					'repoArticlePath' => '/wiki',
-					'repoScriptPath' => '/w',
-					'siteGlobalID' => 'mywiki',
-					'repoDatabase' => 'foo',
-					'changesDatabase' => 'doo',
-					'sharedCacheKeyPrefix' => 'wikibase_shared/',
-				],
-				[ // $wg
-					'wgServer' => 'http://www.acme.com',
-					'wgArticlePath' => '/mywiki',
-					'wgScriptPath' => '/mediawiki',
-					'wgDBname' => 'mw_mywiki',
-				],
-				false, // $repoIsLocal
-				[ // $expected
-					'repoUrl' => 'http://acme.com',
-					'repoArticlePath' => '/wiki',
-					'repoScriptPath' => '/w',
-					'siteGlobalID' => 'mywiki',
-					'repoDatabase' => 'foo',
-					'changesDatabase' => 'doo',
-					'sharedCacheKeyPrefix' => 'wikibase_shared/',
-				]
+	public function settingsProvider(): iterable {
+		yield 'no local repo, all values set' => [
+			[ // $settings
+				'repoUrl' => 'http://acme.com',
+				'repoArticlePath' => '/wiki',
+				'repoScriptPath' => '/w',
+				'siteGlobalID' => 'mywiki',
+				'repoDatabase' => 'foo',
+				'changesDatabase' => 'doo',
+				'sharedCacheKeyPrefix' => 'wikibase_shared/',
 			],
+			[ // $wg
+				'wgServer' => 'http://www.acme.com',
+				'wgArticlePath' => '/mywiki',
+				'wgScriptPath' => '/mediawiki',
+				'wgDBname' => 'mw_mywiki',
+			],
+			false, // $repoIsLocal
+			[ // $expected
+				'repoUrl' => 'http://acme.com',
+				'repoArticlePath' => '/wiki',
+				'repoScriptPath' => '/w',
+				'siteGlobalID' => 'mywiki',
+				'repoDatabase' => 'foo',
+				'changesDatabase' => 'doo',
+				'sharedCacheKeyPrefix' => 'wikibase_shared/',
+			]
+		];
 
-			[ // #1: no local repo, no values set
-				[ // $settings
-				],
-				[ // $wg
-					'wgServer' => 'http://www.acme.com',
-					'wgArticlePath' => '/mywiki',
-					'wgScriptPath' => '/mediawiki',
-					'wgDBname' => 'mw_mywiki',
-				],
-				false, // $repoIsLocal
-				[ // $expected
-					'repoUrl' => '//www.wikidata.org',   // hardcoded default
-					'repoArticlePath' => '/wiki/$1', // hardcoded default
-					'repoScriptPath' => '/w', // hardcoded default
-					'siteGlobalID' => 'mw_mywiki',
-					'repositories' => [
-						'' => [
-							'repoDatabase' => null,
-							'baseUri' => '//www.wikidata.org/entity/',
-							'entityNamespaces' => [
-								'item' => 0,
-								'property' => 120,
-							],
+		yield 'no local repo, no values set' => [
+			[ // $settings
+			],
+			[ // $wg
+				'wgServer' => 'http://www.acme.com',
+				'wgArticlePath' => '/mywiki',
+				'wgScriptPath' => '/mediawiki',
+				'wgDBname' => 'mw_mywiki',
+			],
+			false, // $repoIsLocal
+			[ // $expected
+				'repoUrl' => '//www.wikidata.org',   // hardcoded default
+				'repoArticlePath' => '/wiki/$1', // hardcoded default
+				'repoScriptPath' => '/w', // hardcoded default
+				'siteGlobalID' => 'mw_mywiki',
+				'repositories' => [
+					'' => [
+						'repoDatabase' => null,
+						'baseUri' => '//www.wikidata.org/entity/',
+						'entityNamespaces' => [
+							'item' => 0,
+							'property' => 120,
 						],
 					],
-					'changesDatabase' => null,
-					'sharedCacheKeyPrefix' => 'wikibase_shared/mw_mywiki',
-				]
-			],
+				],
+				'changesDatabase' => null,
+				'sharedCacheKeyPrefix' => 'wikibase_shared/mw_mywiki',
+			]
+		];
 
-			[ // #2: local repo, all values set
-				[ // $settings
-					'repoUrl' => 'http://acme.com',
-					'repoArticlePath' => '/wiki',
-					'repoScriptPath' => '/w',
-					'siteGlobalID' => 'mywiki',
-					'repoDatabase' => 'foo',
-					'changesDatabase' => 'doo',
-					'sharedCacheKeyPrefix' => 'foo:WBL/',
-				],
-				[ // $wg
-					'wgServer' => 'http://www.acme.com',
-					'wgArticlePath' => '/mywiki',
-					'wgScriptPath' => '/mediawiki',
-					'wgDBname' => 'mw_mywiki',
-				],
-				true, // $repoIsLocal
-				[ // $expected
-					'repoUrl' => 'http://acme.com',
-					'repoArticlePath' => '/wiki',
-					'repoScriptPath' => '/w',
-					'siteGlobalID' => 'mywiki',
-					'repoDatabase' => 'foo',
-					'changesDatabase' => 'doo',
-					'sharedCacheKeyPrefix' => 'foo:WBL/',
-				]
+		yield 'local repo, all values set' => [
+			[ // $settings
+				'repoUrl' => 'http://acme.com',
+				'repoArticlePath' => '/wiki',
+				'repoScriptPath' => '/w',
+				'siteGlobalID' => 'mywiki',
+				'repoDatabase' => 'foo',
+				'changesDatabase' => 'doo',
+				'sharedCacheKeyPrefix' => 'foo:WBL/',
 			],
+			[ // $wg
+				'wgServer' => 'http://www.acme.com',
+				'wgArticlePath' => '/mywiki',
+				'wgScriptPath' => '/mediawiki',
+				'wgDBname' => 'mw_mywiki',
+			],
+			true, // $repoIsLocal
+			[ // $expected
+				'repoUrl' => 'http://acme.com',
+				'repoArticlePath' => '/wiki',
+				'repoScriptPath' => '/w',
+				'siteGlobalID' => 'mywiki',
+				'repoDatabase' => 'foo',
+				'changesDatabase' => 'doo',
+				'sharedCacheKeyPrefix' => 'foo:WBL/',
+			]
 		];
 
 		if ( WikibaseSettings::isRepoEnabled() ) {
-			$cases[] = [ // #3: local repo, no values set
+			yield 'local repo, no values set' => [
 				[ // $settings
 				],
 				[ // $wg
@@ -137,7 +135,7 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 			];
 		}
 
-		$cases[] = [ // #4: derive changesDatabase
+		yield 'derive changesDatabase' => [
 			[ // $settings
 				'repositories' => [
 					'' => [
@@ -154,7 +152,7 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 		];
 
 		if ( WikibaseSettings::isRepoEnabled() ) {
-			$cases[] = [ // #5: sharedCacheKeyPrefix explicitly set
+			yield 'sharedCacheKeyPrefix explicitly set' => [
 				[ // $settings
 					'sharedCacheKeyPrefix' => 'wikibase_shared/wikidata_1_25wmf24'
 				],
@@ -177,7 +175,7 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 			];
 		}
 
-		$cases[] = [ // #6: derive repoNamespaces and entityNamespaces
+		yield 'derive repoNamespaces and entityNamespaces' => [
 			[ // $settings
 			],
 			[ // $wg
@@ -198,7 +196,7 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 			$entityNamespaces = $repoSettings->getSetting( 'entityNamespaces' );
 			$namespaceNames = array_map( [ MWNamespace::class, 'getCanonicalName' ], $entityNamespaces );
 
-			$cases[] = [ // #7: default repoNamespaces and entityNamespaces
+			yield 'default repoNamespaces and entityNamespaces' => [
 				[], // $settings
 				[], // $wg
 				true, // $repoIsLocal
@@ -212,8 +210,6 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				]
 			];
 		}
-
-		return $cases;
 	}
 
 	/**
