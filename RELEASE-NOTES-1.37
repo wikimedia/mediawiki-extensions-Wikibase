@@ -7,6 +7,15 @@ This is not a release yet!
 Don't forget to always back up your database before upgrading!
 Some specific notes for Wikibase 1.37 upgrades are below:
 
+When upgrading to 1.37 from 1.35 or 1.36 we supply a simple php script
+for administrators to run before the actual update happens.
+The script gives recommended settings based on the current configuration.
+You can download it from https://phabricator.wikimedia.org/P16814
+and save it in the Wikibase folder of your mediawiki installation.
+
+Execute it as a normal maintenance script and replace the legacy repositories
+configuration with the new entitySources one.
+
 ...
 
 For a general manual to upgrade MediaWiki see:
@@ -17,6 +26,8 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 
 ==== New configuration ====
 
+* (client) (T285471) Clients are now required to specify entitySources,
+ which replaces the legacy configuration option repositories.
 * (repo) (T219215) sandboxEntityIds — Entity ids to be used in various live
  examples. These entities will be affected by changes made through those
  examples, such as edits made by the API sandbox.
@@ -27,7 +38,8 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 
 ==== Removed configuration ====
 
-* (repo) (T12345) ...
+* (client) (T285471) repositories has been removed.
+* (client) (T286539) repoNamespaces has been removed
 
 === New user-facing features in 1.37 ===
 
