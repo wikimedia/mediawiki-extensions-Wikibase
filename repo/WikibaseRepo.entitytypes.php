@@ -37,6 +37,7 @@ use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
+use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
@@ -265,6 +266,9 @@ return [
 				$services->getLinkBatchFactory()
 			);
 		},
+		Def::REDIRECT_CHECKER_CALLBACK => function () {
+			return new TitleLookupBasedEntityRedirectChecker( WikibaseRepo::getEntityTitleLookup() );
+		},
 		Def::TITLE_TEXT_LOOKUP_CALLBACK => function () {
 			return new TitleLookupBasedEntityTitleTextLookup(
 				WikibaseRepo::getEntityTitleLookup()
@@ -483,6 +487,9 @@ return [
 				WikibaseRepo::getEntityTitleLookup( $services ),
 				$services->getLinkBatchFactory()
 			);
+		},
+		Def::REDIRECT_CHECKER_CALLBACK => function () {
+			return new TitleLookupBasedEntityRedirectChecker( WikibaseRepo::getEntityTitleLookup() );
 		},
 		Def::TITLE_TEXT_LOOKUP_CALLBACK => function () {
 			return new TitleLookupBasedEntityTitleTextLookup(
