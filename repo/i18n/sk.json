@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Dušan Kreheľ",
 			"KuboF",
 			"Ladsgroup",
 			"Lexected",
@@ -11,6 +12,7 @@
 		]
 	},
 	"wikibase-desc": "Štruktúrované úložisko dát",
+	"wikibase-entity": "Položka",
 	"wikibase-entity-item": "Položka",
 	"wikibase-entity-property": "Vlastnosť",
 	"wikibase-entity-query": "Dopyt",
@@ -19,12 +21,18 @@
 	"wikibase-publish": "zverejniť",
 	"wikibase-cancel": "zrušiť",
 	"wikibase-add": "pridať",
+	"wikibase-addqualifier": "pridať kvalifikátor",
 	"wikibase-addreference": "pridať referenciu",
 	"wikibase-save-inprogress": "ukladá sa",
 	"wikibase-publish-inprogress": "Zverejňuje sa....",
 	"wikibase-remove-inprogress": "Odstraňovanie...",
+	"wikibase-statementlistview-add": "pridaj hodnotu",
+	"wikibase-statementlistview-add-tooltip": "Pridaj novú hodnotu",
 	"wikibase-statementgrouplistview-add": "pridať výrok",
 	"wikibase-statementgrouplistview-add-tooltip": "Pridať nový výrok",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "V iných jazyky",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Konfigurácia",
+	"wikibase-setting-entitytermsview-showEntitytermslistview": "Zobraziť počas načítania štítky, aliasy a popisy vo všetkých mojich jazykoch stránky",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Tiež známe ako",
 	"wikibase-entitytermsforlanguagelistview-description": "Popis",
 	"wikibase-entitytermsforlanguagelistview-label": "Štítok",
