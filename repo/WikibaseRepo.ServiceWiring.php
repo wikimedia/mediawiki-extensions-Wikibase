@@ -912,9 +912,6 @@ return [
 			->get( EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK );
 	},
 
-	// This service is largely a copy of WikibaseRepo.EntityTypeDefinitions. As soon as all federated properties services use
-	// EntitySourceAndTypeDefinitions, WikibaseRepo.EntityTypeDefinitions will likely no longer need federated properties specific
-	// overrides.
 	'WikibaseRepo.EntitySourceAndTypeDefinitions' => function ( MediaWikiServices $services ): EntitySourceAndTypeDefinitions {
 		$baseEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
 		$repoEntityTypes = require __DIR__ . '/WikibaseRepo.entitytypes.php';
