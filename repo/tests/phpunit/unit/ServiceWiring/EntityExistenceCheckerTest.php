@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\NewEntitySource;
 use Wikibase\DataModel\Entity\Item;
@@ -40,19 +41,20 @@ class EntityExistenceCheckerTest extends ServiceWiringTestCase {
 
 		$this->mockService( 'WikibaseRepo.EntitySourceAndTypeDefinitions',
 			new EntitySourceAndTypeDefinitions(
-				new EntityTypeDefinitions( [
-					Item::ENTITY_TYPE => [
-						EntityTypeDefinitions::EXISTENCE_CHECKER_CALLBACK => function () use ( $itemId ) {
-							$entityExistenceChecker = $this->createMock( EntityExistenceChecker::class );
-							$entityExistenceChecker->expects( $this->once() )
-								->method( 'exists' )
-								->with( $itemId )
-								->willReturn( true );
-							return $entityExistenceChecker;
-						},
-					],
-				] ),
-				$this->createStub( EntityTypeDefinitions::class ),
+				[
+					EntitySource::TYPE_DB => new EntityTypeDefinitions( [
+						Item::ENTITY_TYPE => [
+							EntityTypeDefinitions::EXISTENCE_CHECKER_CALLBACK => function () use ( $itemId ) {
+								$entityExistenceChecker = $this->createMock( EntityExistenceChecker::class );
+								$entityExistenceChecker->expects( $this->once() )
+									->method( 'exists' )
+									->with( $itemId )
+									->willReturn( true );
+								return $entityExistenceChecker;
+							},
+						],
+					] ),
+				],
 				$sources
 			)
 		);

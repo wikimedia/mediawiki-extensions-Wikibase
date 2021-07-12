@@ -4,8 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib;
 
-use LogicException;
+use InvalidArgumentException;
 use Wikibase\DataAccess\EntitySource;
+use Wikimedia\Assert\Assert;
 
 /**
  * @license GPL-2.0-or-later
@@ -13,44 +14,55 @@ use Wikibase\DataAccess\EntitySource;
 class EntitySourceAndTypeDefinitions {
 
 	/**
-	 * @var EntityTypeDefinitions
+	 * @var EntityTypeDefinitions[]
 	 */
-	private $databaseEntityTypeDefinitions;
-
-	/**
-	 * @var EntityTypeDefinitions
-	 */
-	private $apiEntityTypeDefinitions;
+	private $entityTypeDefinitionsBySourceType;
 
 	/**
 	 * @var EntitySource[]
 	 */
 	private $entitySources;
 
+	/**
+	 * @param EntityTypeDefinitions[] $entityTypeDefinitionsBySourceType maps entity source type to EntityTypeDefinitions
+	 * @param EntitySource[] $entitySources
+	 */
 	public function __construct(
-		EntityTypeDefinitions $databaseEntityTypeDefinitions,
-		EntityTypeDefinitions $apiEntityTypeDefinitions,
+		array $entityTypeDefinitionsBySourceType,
 		array $entitySources
 	) {
-		$this->databaseEntityTypeDefinitions = $databaseEntityTypeDefinitions;
-		$this->apiEntityTypeDefinitions = $apiEntityTypeDefinitions;
+		Assert::parameterElementType(
+			EntityTypeDefinitions::class,
+			$entityTypeDefinitionsBySourceType,
+			'$entityTypeDefinitionsBySourceType'
+		);
+		Assert::parameterElementType(
+			EntitySource::class,
+			$entitySources,
+			'$entitySources'
+		);
+		$this->assertNoUnknownEntitySourceTypes( $entityTypeDefinitionsBySourceType, $entitySources );
+
 		$this->entitySources = $entitySources;
+		$this->entityTypeDefinitionsBySourceType = $entityTypeDefinitionsBySourceType;
 	}
 
 	public function getServiceBySourceAndType( string $serviceName ): array {
 		$services = [];
 
 		foreach ( $this->entitySources as $source ) {
-			if ( $source->getType() === EntitySource::TYPE_DB ) {
-				$services[$source->getSourceName()] = $this->databaseEntityTypeDefinitions->get( $serviceName );
-			} elseif ( $source->getType() === EntitySource::TYPE_API ) {
-				$services[$source->getSourceName()] = $this->apiEntityTypeDefinitions->get( $serviceName );
-			} else {
-				throw new LogicException( 'unknown type of entity source: "' . $source->getType() . '"' );
-			}
+			$services[$source->getSourceName()] = $this->entityTypeDefinitionsBySourceType[$source->getType()]->get( $serviceName );
 		}
 
 		return $services;
+	}
+
+	private function assertNoUnknownEntitySourceTypes( array $entityTypeDefinitionsBySourceType, array $entitySources ) {
+		foreach ( $entitySources as $source ) {
+			if ( !array_key_exists( $source->getType(), $entityTypeDefinitionsBySourceType ) ) {
+				throw new InvalidArgumentException( 'unknown type of entity source: "' . $source->getType() . '"' );
+			}
+		}
 	}
 
 }

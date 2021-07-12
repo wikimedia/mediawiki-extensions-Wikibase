@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Tests;
 
-use LogicException;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\Tests\NewEntitySource;
@@ -29,16 +29,18 @@ class EntitySourceAndTypeDefinitionsTest extends TestCase {
 			return $this->createStub( EntityArticleIdLookup::class );
 		};
 		$definitions = new EntitySourceAndTypeDefinitions(
-			new EntityTypeDefinitions( [
-				'property' => [
-					EntityTypeDefinitions::ARTICLE_ID_LOOKUP_CALLBACK => $callback1,
-				]
-			] ),
-			new EntityTypeDefinitions( [
-				'property' => [
-					EntityTypeDefinitions::ARTICLE_ID_LOOKUP_CALLBACK => $callback2,
-				]
-			] ),
+			[
+				EntitySource::TYPE_DB => new EntityTypeDefinitions( [
+					'property' => [
+						EntityTypeDefinitions::ARTICLE_ID_LOOKUP_CALLBACK => $callback1,
+					]
+				] ),
+				EntitySource::TYPE_API => new EntityTypeDefinitions( [
+					'property' => [
+						EntityTypeDefinitions::ARTICLE_ID_LOOKUP_CALLBACK => $callback2,
+					]
+				] )
+			],
 			[
 				NewEntitySource::havingName( 'local' )->build(),
 				NewEntitySource::havingName( 'wikidorta' )
@@ -61,18 +63,33 @@ class EntitySourceAndTypeDefinitionsTest extends TestCase {
 		);
 	}
 
-	public function testGivenUnknownSourceType_throwsLogicException(): void {
-		$sourceWithUndefinedType = $this->createMock( EntitySource::class );
-		$sourceWithUndefinedType->method( 'getType' )->willReturn( 'blergh' );
+	/**
+	 * @dataProvider invalidConstructorArgsProvider
+	 */
+	public function testConstructionWithInvalidArgs( array $definitionsByType, array $sources ): void {
+		$this->expectException( InvalidArgumentException::class );
 
-		$definitions = new EntitySourceAndTypeDefinitions(
-			$this->createStub( EntityTypeDefinitions::class ),
-			$this->createStub( EntityTypeDefinitions::class ),
-			[ $sourceWithUndefinedType ]
+		new EntitySourceAndTypeDefinitions(
+			$definitionsByType,
+			$sources
 		);
+	}
 
-		$this->expectException( LogicException::class );
-		$definitions->getServiceBySourceAndType( 'some service' );
+	public function invalidConstructorArgsProvider() {
+		yield 'source with undefined type' => [
+			'definitionsByType' => [ EntitySource::TYPE_DB => $this->createStub( EntityTypeDefinitions::class ) ],
+			'sources' => [ NewEntitySource::create()->withType( 'blergh' )->build() ],
+		];
+
+		yield 'sources param contains non-EntitySource object' => [
+			'definitionsByType' => [ EntitySource::TYPE_DB => $this->createStub( EntityTypeDefinitions::class ) ],
+			'sources' => [ 'i am not an entity source' ],
+		];
+
+		yield 'entityTypeDefinitionsBySourceType array contains non-EntityTypeDefinitions object' => [
+			'definitionsByType' => [ EntitySource::TYPE_DB => 'i am not an entity type def object' ],
+			'sources' => [ NewEntitySource::create()->build() ],
+		];
 	}
 
 }
