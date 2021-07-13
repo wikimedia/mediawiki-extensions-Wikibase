@@ -155,7 +155,6 @@ class DispatchChanges extends Maintenance {
 		SettingsArray $settings,
 		LoggerInterface $logger
 	) {
-		$repoDB = $settings->getSetting( 'changesDatabase' );
 		$batchChunkFactor = $settings->getSetting( 'dispatchBatchChunkFactor' );
 		$batchCacheFactor = $settings->getSetting( 'dispatchBatchCacheFactor' );
 
@@ -196,7 +195,6 @@ class DispatchChanges extends Maintenance {
 		$coordinator->setRandomness( $randomness );
 
 		$notificationSender = new JobQueueChangeNotificationSender(
-			$repoDB,
 			$logger,
 			$clientWikis
 		);

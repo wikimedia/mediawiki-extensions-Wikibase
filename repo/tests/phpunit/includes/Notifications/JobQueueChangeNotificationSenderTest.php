@@ -42,7 +42,6 @@ class JobQueueChangeNotificationSenderTest extends \PHPUnit\Framework\TestCase {
 					foreach ( $jobs as $job ) {
 						$params = $job->getParams();
 
-						$this->assertSame( 'repo-db', $params['repo'] );
 						$this->assertContainsOnly( 'int', $params['changeIds'] );
 					}
 				}
@@ -54,7 +53,6 @@ class JobQueueChangeNotificationSenderTest extends \PHPUnit\Framework\TestCase {
 		};
 
 		return new JobQueueChangeNotificationSender(
-			'repo-db',
 			new NullLogger(),
 			[ 'site-id-0' => 'database-name-0' ],
 			$batchSize,
