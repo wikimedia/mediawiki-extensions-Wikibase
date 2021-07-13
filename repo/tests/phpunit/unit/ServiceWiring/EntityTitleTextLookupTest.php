@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\NewEntitySource;
 use Wikibase\DataModel\Entity\Item;
@@ -40,19 +41,20 @@ class EntityTitleTextLookupTest extends ServiceWiringTestCase {
 
 		$this->mockService( 'WikibaseRepo.EntitySourceAndTypeDefinitions',
 			new EntitySourceAndTypeDefinitions(
-				new EntityTypeDefinitions( [
-					Item::ENTITY_TYPE => [
-						EntityTypeDefinitions::TITLE_TEXT_LOOKUP_CALLBACK => function () use ( $itemId ) {
-							$entityTitleTextLookup = $this->createMock( EntityTitleTextLookup::class );
-							$entityTitleTextLookup->expects( $this->once() )
-								->method( 'getPrefixedText' )
-								->with( $itemId )
-								->willReturn( 'Test_item:Q123' );
-							return $entityTitleTextLookup;
-						},
-					],
-				] ),
-				$this->createStub( EntityTypeDefinitions::class ),
+				[
+					EntitySource::TYPE_DB => new EntityTypeDefinitions( [
+						Item::ENTITY_TYPE => [
+							EntityTypeDefinitions::TITLE_TEXT_LOOKUP_CALLBACK => function () use ( $itemId ) {
+								$entityTitleTextLookup = $this->createMock( EntityTitleTextLookup::class );
+								$entityTitleTextLookup->expects( $this->once() )
+									->method( 'getPrefixedText' )
+									->with( $itemId )
+									->willReturn( 'Test_item:Q123' );
+								return $entityTitleTextLookup;
+							},
+						],
+					] ),
+				],
 				$sources
 			)
 		);
