@@ -13,34 +13,13 @@ use Wikibase\Repo\EntityTypesConfigFeddyPropsAugmenter;
  */
 class EntityTypesConfigFeddyPropsAugmenterTest extends TestCase {
 
-	public function testGivenFedPropsSettingDisabled_doesNothing() {
-		$augmenter = new EntityTypesConfigFeddyPropsAugmenter(
-			[
-				'property' => [
-					'some-service' => 'foo'
-				]
-			],
-			false
-		);
-		$originalEntityTypeDefinitions = [
-			'property' => [
-				'some-service' => 'bar'
-			]
-		];
-
-		$newEntityTypeDefinitions = $augmenter->override( $originalEntityTypeDefinitions );
-
-		$this->assertEquals( $originalEntityTypeDefinitions, $newEntityTypeDefinitions );
-	}
-
 	public function testGivenFedPropsSettingEnabled_overridesDefinedServices() {
 		$augmenter = new EntityTypesConfigFeddyPropsAugmenter(
 			[
 				'property' => [
 					'some-service' => 'foo'
 				]
-			],
-			true
+			]
 		);
 		$entityTypeDefinitions = [
 			'property' => [
@@ -58,7 +37,7 @@ class EntityTypesConfigFeddyPropsAugmenterTest extends TestCase {
 	}
 
 	public function testFactoryReturnsObjectOfCorrectType() {
-		$augmenter = EntityTypesConfigFeddyPropsAugmenter::factory( true );
+		$augmenter = EntityTypesConfigFeddyPropsAugmenter::factory();
 		$this->assertInstanceOf( EntityTypesConfigFeddyPropsAugmenter::class, $augmenter );
 	}
 

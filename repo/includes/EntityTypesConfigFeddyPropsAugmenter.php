@@ -6,7 +6,7 @@ namespace Wikibase\Repo;
 use function wfArrayPlus2d;
 
 /**
- * Service that modifies entity type definitions when federated properties is enabled.
+ * Service that modifies entity type definitions for federated properties.
  * This service is intended to be no longer needed once we improve the way we handle
  * EntityTypeDefinitions see: T280153
  *
@@ -17,15 +17,9 @@ use function wfArrayPlus2d;
  */
 class EntityTypesConfigFeddyPropsAugmenter {
 	private $fedPropsEntityTypeDefinitions;
-	private $fedPropsEnabled;
 
-	/**
-	 * @param array $fedPropsEntityTypeDefinitions
-	 * @param bool $fedPropsEnabled
-	 */
-	public function __construct( array $fedPropsEntityTypeDefinitions, bool $fedPropsEnabled ) {
+	public function __construct( array $fedPropsEntityTypeDefinitions ) {
 		$this->fedPropsEntityTypeDefinitions = $fedPropsEntityTypeDefinitions;
-		$this->fedPropsEnabled = $fedPropsEnabled;
 	}
 
 	/**
@@ -33,19 +27,15 @@ class EntityTypesConfigFeddyPropsAugmenter {
 	 * @return array Map from entity types to entity definitions
 	 */
 	public function override( array $existingEntityTypes ) {
-		if ( $this->fedPropsEnabled ) {
-			return wfArrayPlus2d(
-				$this->fedPropsEntityTypeDefinitions,
-				$existingEntityTypes
-			);
-		}
-		return $existingEntityTypes;
+		return wfArrayPlus2d(
+			$this->fedPropsEntityTypeDefinitions,
+			$existingEntityTypes
+		);
 	}
 
-	public static function factory( bool $federatedPropertiesEnabled ): self {
+	public static function factory(): self {
 		return new EntityTypesConfigFeddyPropsAugmenter(
-			require __DIR__ . '/../WikibaseRepo.FederatedProperties.entitytypes.php',
-			$federatedPropertiesEnabled
+			require __DIR__ . '/../WikibaseRepo.FederatedProperties.entitytypes.php'
 		);
 	}
 }

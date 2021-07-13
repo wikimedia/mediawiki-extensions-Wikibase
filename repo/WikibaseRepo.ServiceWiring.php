@@ -925,10 +925,10 @@ return [
 
 		$entityTypeDefinitionsBySourceType = [ EntitySource::TYPE_DB => new EntityTypeDefinitions( $entityTypes ) ];
 
-		$fedPropsEnabled = WikibaseRepo::getSettings( $services )->getSetting( 'federatedPropertiesEnabled' );
-		if ( $fedPropsEnabled ) {
-			$augmenter = EntityTypesConfigFeddyPropsAugmenter::factory( $fedPropsEnabled );
-			$entityTypeDefinitionsBySourceType[EntitySource::TYPE_API] = new EntityTypeDefinitions( $augmenter->override( $entityTypes ) );
+		if ( WikibaseRepo::getSettings( $services )->getSetting( 'federatedPropertiesEnabled' ) ) {
+			$entityTypeDefinitionsBySourceType[EntitySource::TYPE_API] = new EntityTypeDefinitions(
+				EntityTypesConfigFeddyPropsAugmenter::factory()->override( $entityTypes )
+			);
 		}
 
 		return new EntitySourceAndTypeDefinitions(
