@@ -9,16 +9,16 @@ use Wikibase\DataAccess\Tests\NewEntitySource;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
-use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
+use Wikibase\Lib\Store\SourceAndTypeDispatchingTitleTextLookup;
 
 /**
- * @covers \Wikibase\Lib\Store\TypeDispatchingTitleTextLookup
+ * @covers \Wikibase\Lib\Store\SourceAndTypeDispatchingTitleTextLookup
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class TypeDispatchingTitleTextLookupTest extends TestCase {
+class SourceAndTypeDispatchingTitleTextLookupTest extends TestCase {
 
 	/**
 	 * @var MockObject|EntitySourceLookup
@@ -64,8 +64,8 @@ class TypeDispatchingTitleTextLookupTest extends TestCase {
 		$this->assertSame( $titleText, $this->newDispatchingTitleTextLookup()->getPrefixedText( $entityId ) );
 	}
 
-	private function newDispatchingTitleTextLookup(): TypeDispatchingTitleTextLookup {
-		return new TypeDispatchingTitleTextLookup(
+	private function newDispatchingTitleTextLookup(): SourceAndTypeDispatchingTitleTextLookup {
+		return new SourceAndTypeDispatchingTitleTextLookup(
 			$this->entitySourceLookup,
 			$this->serviceBySourceAndTypeDispatcher
 		);

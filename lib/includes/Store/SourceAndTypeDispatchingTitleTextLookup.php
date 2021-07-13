@@ -9,7 +9,7 @@ use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 /**
  * @license GPL-2.0-or-later
  */
-class TypeDispatchingTitleTextLookup implements EntityTitleTextLookup {
+class SourceAndTypeDispatchingTitleTextLookup implements EntityTitleTextLookup {
 
 	/**
 	 * @var ServiceBySourceAndTypeDispatcher

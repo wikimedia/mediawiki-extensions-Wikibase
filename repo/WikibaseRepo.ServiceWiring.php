@@ -123,6 +123,7 @@ use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingExistenceChecker;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingRedirectChecker;
+use Wikibase\Lib\Store\SourceAndTypeDispatchingTitleTextLookup;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingUrlLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
@@ -138,7 +139,6 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
 use Wikibase\Lib\Store\TypeDispatchingArticleIdLookup;
-use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -995,7 +995,7 @@ return [
 	},
 
 	'WikibaseRepo.EntityTitleTextLookup' => function ( MediaWikiServices $services ): EntityTitleTextLookup {
-		return new TypeDispatchingTitleTextLookup(
+		return new SourceAndTypeDispatchingTitleTextLookup(
 			new EntitySourceLookup(
 				WikibaseRepo::getEntitySourceDefinitions( $services ),
 				WikibaseRepo::getSubEntityTypesMapper( $services )
