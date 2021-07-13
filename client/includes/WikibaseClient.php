@@ -47,6 +47,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
@@ -526,6 +527,11 @@ final class WikibaseClient {
 	public static function getRepoDomainDbFactory( ContainerInterface $services = null ): RepoDomainDbFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.RepoDomainDbFactory' );
+	}
+
+	public static function getEntitySourceAndTypeDefinitions( ContainerInterface $services = null ): EntitySourceAndTypeDefinitions {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.EntitySourceAndTypeDefinitions' );
 	}
 
 }
