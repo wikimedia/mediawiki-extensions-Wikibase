@@ -1,6 +1,6 @@
-# 20) Keep Wikibase master Mediawiki Core master {#adr_0020}
+# 20) Keep Wikibase master compatible with Mediawiki Core master {#adr_0020}
 
-Date: 30-06-2021
+Date: 2021-06-30
 
 ## Status
 

@@ -1,6 +1,6 @@
 # 18) Keep Wikibase master compatible with last stable Mediawiki Core {#adr_0018}
 
-Date: 28-04-2021
+Date: 2021-04-28
 
 ## Status
 
