@@ -1091,6 +1091,10 @@ return [
 			$services->getHttpRequestFactory(),
 			WikibaseRepo::getContentModelMappings( $services ),
 			WikibaseRepo::getDataTypeDefinitions( $services ),
+			new EntitySourceLookup(
+				WikibaseRepo::getEntitySourceDefinitions( $services ),
+				WikibaseRepo::getSubEntityTypesMapper( $services )
+			),
 			$settings->getSetting( 'federatedPropertiesSourceScriptUrl' ),
 			$services->getMainConfig()->get( 'ServerName' )
 		);

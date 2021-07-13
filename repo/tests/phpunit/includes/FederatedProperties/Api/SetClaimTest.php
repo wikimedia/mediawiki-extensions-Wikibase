@@ -7,7 +7,6 @@ use DataValues\Serializers\DataValueSerializer;
 use FormatJson;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -30,10 +29,10 @@ use Wikibase\Repo\WikibaseRepo;
 class SetClaimTest extends FederatedPropertiesApiTestCase {
 
 	public function testAlteringPropertiesIsNotSupported() {
-		$entity = new Property( new PropertyId( 'P123' ), null, 'string' );
+		$entity = new Property( $this->newFederatedPropertyIdFromPId( 'P123' ), null, 'string' );
 		$entityId = $entity->getId();
 
-		$statement = new Statement( new PropertyNoValueSnak( new PropertyId( 'P626' ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( $this->newFederatedPropertyIdFromPId( 'P626' ) ) );
 		$guidGenerator = new GuidGenerator();
 		$guid = $guidGenerator->newGuid( $entityId );
 		$statement->setGuid( $guid );
@@ -50,7 +49,7 @@ class SetClaimTest extends FederatedPropertiesApiTestCase {
 
 		$store = WikibaseRepo::getEntityStore();
 
-		$statement = new Statement( new PropertyNoValueSnak( new PropertyId( 'P626' ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( $this->newFederatedPropertyIdFromPId( 'P626' ) ) );
 
 		$entity = new Item();
 		$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );

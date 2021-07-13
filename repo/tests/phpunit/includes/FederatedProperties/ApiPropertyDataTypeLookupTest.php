@@ -4,8 +4,13 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\EntitySourceLookup;
+use Wikibase\DataAccess\Tests\NewEntitySource;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
+use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\FederatedProperties\ApiEntityLookup;
 use Wikibase\Repo\FederatedProperties\ApiPropertyDataTypeLookup;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
@@ -23,10 +28,10 @@ class ApiPropertyDataTypeLookupTest extends TestCase {
 	use HttpResponseMockerTrait;
 
 	public function testGetDataTypeIdForProperty() {
-		$propertyId = new PropertyId( 'P666' );
+		$propertyId = new FederatedPropertyId( 'http://wikidata.org/entity/P666' );
 		$apiResultFile = __DIR__ . '/../../data/federatedProperties/wbgetentities-property-datatype.json';
 		$expected = 'secretEvilDataType';
-		$apiEntityLookup = new ApiEntityLookup( $this->getApiClient( $apiResultFile ) );
+		$apiEntityLookup = new ApiEntityLookup( $this->getApiClient( $apiResultFile ), $this->newMockEntitySourceLookup() );
 
 		$apiEntityLookup->fetchEntities( [ $propertyId ] );
 
@@ -36,9 +41,10 @@ class ApiPropertyDataTypeLookupTest extends TestCase {
 	}
 
 	public function testGivenPropertyDoesNotExist_throwsException() {
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new FederatedPropertyId( 'http://wikidata.org/entity/P1' );
 		$apiEntityLookup = new ApiEntityLookup(
-			$this->getApiClient( __DIR__ . '/../../data/federatedProperties/wbgetentities-p1-missing.json' )
+			$this->getApiClient( __DIR__ . '/../../data/federatedProperties/wbgetentities-p1-missing.json' ),
+			$this->newMockEntitySourceLookup()
 		);
 		$lookup = new ApiPropertyDataTypeLookup(
 			$apiEntityLookup
@@ -56,6 +62,16 @@ class ApiPropertyDataTypeLookupTest extends TestCase {
 		$client->method( 'get' )
 			->willReturn( $this->newMockResponse( file_get_contents( $responseDataFile ), 200 ) );
 		return $client;
+	}
+
+	private function newMockEntitySourceLookup(): EntitySourceLookup {
+		$source = NewEntitySource::havingName( 'some source' )
+			->withConceptBaseUri( 'http://wikidata.org/entity/' )
+			->withType( EntitySource::TYPE_API )
+			->build();
+		$subEntityTypesMapper = new SubEntityTypesMapper( [] );
+		$entitySourceDefinition = new EntitySourceDefinitions( [ $source ], $subEntityTypesMapper );
+		return new EntitySourceLookup( $entitySourceDefinition, $subEntityTypesMapper );
 	}
 
 }

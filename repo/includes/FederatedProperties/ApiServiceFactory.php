@@ -5,6 +5,7 @@ namespace Wikibase\Repo\FederatedProperties;
 
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Logger\LoggerFactory;
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\Lib\DataTypeDefinitions;
 
 /**
@@ -41,16 +42,23 @@ class ApiServiceFactory {
 	 */
 	private $apiEntityNamespaceInfoLookup = null;
 
+	/**
+	 * @var EntitySourceLookup
+	 */
+	private $entitySourceLookup;
+
 	public function __construct(
 		HttpRequestFactory $httpRequestFactory,
 		array $contentModelMappings,
 		DataTypeDefinitions $dataTypeDefinitions,
+		EntitySourceLookup $entitySourceLookup,
 		string $federatedPropertiesSourceScriptUrl,
 		string $serverName
 	) {
 		$this->httpRequestFactory = $httpRequestFactory;
 		$this->contentModelMappings = $contentModelMappings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
+		$this->entitySourceLookup = $entitySourceLookup;
 		$this->federatedPropertiesSourceScriptUrl = $federatedPropertiesSourceScriptUrl;
 		$this->serverName = $serverName;
 	}
@@ -120,7 +128,7 @@ class ApiServiceFactory {
 	 */
 	public function getApiEntityLookup(): ApiEntityLookup {
 		if ( $this->apiEntityLookupInstance === null ) {
-			$this->apiEntityLookupInstance = new ApiEntityLookup( $this->newFederatedPropertiesApiClient() );
+			$this->apiEntityLookupInstance = new ApiEntityLookup( $this->newFederatedPropertiesApiClient(), $this->entitySourceLookup );
 		}
 		return $this->apiEntityLookupInstance;
 	}
