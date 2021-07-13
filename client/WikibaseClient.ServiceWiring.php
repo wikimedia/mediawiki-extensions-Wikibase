@@ -82,6 +82,7 @@ use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
@@ -400,6 +401,13 @@ return [
 				) );
 			},
 			new EntityNamespaceLookup( [], [] )
+		);
+	},
+
+	'WikibaseClient.EntitySourceAndTypeDefinitions' => function ( MediaWikiServices $services ): EntitySourceAndTypeDefinitions {
+		return new EntitySourceAndTypeDefinitions(
+			[ EntitySource::TYPE_DB => WikibaseClient::getEntityTypeDefinitions( $services ) ],
+			WikibaseClient::getEntitySourceDefinitions( $services )->getSources()
 		);
 	},
 
