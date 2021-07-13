@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Dicto23456",
+			"Gramo6",
 			"Macofe",
 			"Tkalyn"
 		]
@@ -9,6 +10,7 @@
 	"wikibase-edit": "едітовати",
 	"wikibase-add": "додати",
 	"wikibase-sitelink-page-edit-placeholder": "сторінка",
+	"wikibase-statementview-rank-normal": "Обычайный ранґ",
 	"wikibase-itembytitle-lookup-page": "Сторінка:",
 	"wikibase-itemdisambiguation-lookup-language": "Код языка:",
 	"wikibase-modifyterm-language": "Код языка:"
