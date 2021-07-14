@@ -29,7 +29,6 @@ use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\DataAccess\PrefetchingTermLookupFactory;
 use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
@@ -182,13 +181,6 @@ final class WikibaseClient {
 	public static function getTermLookup( ContainerInterface $services = null ): TermLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.TermLookup' );
-	}
-
-	public static function getPrefetchingTermLookupFactory(
-		ContainerInterface $services = null
-	): PrefetchingTermLookupFactory {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WikibaseClient.PrefetchingTermLookupFactory' );
 	}
 
 	public static function getPrefetchingTermLookup( ContainerInterface $services = null ): PrefetchingTermLookup {

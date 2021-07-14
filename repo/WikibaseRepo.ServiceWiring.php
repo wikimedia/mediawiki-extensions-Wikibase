@@ -25,7 +25,6 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueParsers\NullParser;
 use Wikibase\DataAccess\AliasTermBuffer;
-use Wikibase\DataAccess\ByTypeDispatchingPrefetchingTermLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -34,8 +33,8 @@ use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataAccess\MediaWiki\EntitySourceDocumentUrlProvider;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\DataAccess\PrefetchingTermLookupFactory;
 use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
+use Wikibase\DataAccess\SourceAndTypeDispatchingPrefetchingTermLookup;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -1447,21 +1446,17 @@ return [
 	},
 
 	'WikibaseRepo.PrefetchingTermLookup' => function ( MediaWikiServices $services ): PrefetchingTermLookup {
-		$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions( $services );
-		$lookupFactory = WikibaseRepo::getPrefetchingTermLookupFactory( $services );
-
-		$lookups = array_map(
-			[ $lookupFactory, 'getLookupForSource' ],
-			$entitySourceDefinitions->getEntityTypeToSourceMapping()
-		);
-
-		return new ByTypeDispatchingPrefetchingTermLookup( $lookups );
-	},
-
-	'WikibaseRepo.PrefetchingTermLookupFactory' => function ( MediaWikiServices $services ): PrefetchingTermLookupFactory {
-		return new PrefetchingTermLookupFactory(
-			WikibaseRepo::getEntitySourceDefinitions( $services ),
-			WikibaseRepo::getEntityTypeDefinitions( $services )
+		return new SourceAndTypeDispatchingPrefetchingTermLookup(
+			new ServiceBySourceAndTypeDispatcher(
+				PrefetchingTermLookup::class,
+				WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
+					->getServiceBySourceAndType( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK )
+			),
+			new EntitySourceLookup(
+				WikibaseRepo::getEntitySourceDefinitions( $services ),
+				new SubEntityTypesMapper( WikibaseRepo::getEntityTypeDefinitions( $services )
+				->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) )
+			)
 		);
 	},
 
@@ -1822,20 +1817,18 @@ return [
 		$sources = WikibaseRepo::getEntitySourceDefinitions( $services )
 			->getEntityTypeToSourceMapping();
 
-		$prefetchingTermLookupFactory = WikibaseRepo::getPrefetchingTermLookupFactory( $services );
 		$matchingTermLookupFactory = WikibaseRepo::getMatchingTermsLookupFactory( $services );
 		$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory( $services );
 
 		return new DispatchingTermSearchInteractorFactory( array_map(
 			function ( EntitySource $source ) use (
-				$prefetchingTermLookupFactory,
 				$matchingTermLookupFactory,
 				$languageFallbackChainFactory
 			): MatchingTermsSearchInteractorFactory {
 				return new MatchingTermsSearchInteractorFactory(
 					$matchingTermLookupFactory->getLookupForSource( $source ),
 					$languageFallbackChainFactory,
-					$prefetchingTermLookupFactory->getLookupForSource( $source )
+					WikibaseRepo::getPrefetchingTermLookup()
 				);
 			},
 			$sources
