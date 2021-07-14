@@ -6,7 +6,8 @@
 			"Bjakupi",
 			"Liridon",
 			"Matěj Suchánek",
-			"Olsi"
+			"Olsi",
+			"Vyolla"
 		]
 	},
 	"wikibase-client-desc": "Klient për zgjerimin Wikibase",
@@ -33,6 +34,7 @@
 	"wikibase-linkitem-alreadylinked": "Faqja që donit të lidhnit i është bashkëngjitur tashmë një [$1 objekti] te depoja qendrore e të dhënave që është e lidhur me [[$2]] në këtë sajt. Objektet mund të kenë të bashkëngjitur vetëm një faqe për sajt. Ju lutemi, zgjidhni një faqe tjetër për ta lidhur.",
 	"wikibase-linkitem-close": "Mbylleni dialogun dhe ringarkoni faqen",
 	"wikibase-linkitem-failure": "Ndodhi një gabim i panjohur teksa provohej të lidhej faqja e dhënë.",
+	"wikibase-linkitem-failed-modify": "Nuk mund të lidhen faqet: dështoi në bashkimin e artikujve përkatës në {{WBREPONAME}}.",
 	"wikibase-linkitem-title": "Lidhje me faqe",
 	"wikibase-linkitem-linkpage": "Lidheni me faqe",
 	"wikibase-linkitem-selectlink": "Ju lutemi, përzgjidhni një sajt dhe një faqe që dëshironi të lidhni te kjo faqe.",
@@ -104,15 +106,20 @@
 	"wikibase-otherprojects-beta-message": "Anështyllë projektesh të tjera",
 	"wikibase-otherprojects-beta-description": "Shton te anështylla një ndarje \"{{int:wikibase-otherprojects}}\" që furnizon lidhje për te projekte të tjerë Wikimedia të bazuar në të dhëna {{WBREPONAME}}.",
 	"wikibase-sitelinks-sitename-columnheading": "Gjuhë",
-	"wikibase-sitelinks-link-columnheading": "Lidhi një faqe",
+	"wikibase-sitelinks-link-columnheading": "Faqe e lidhur",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Lidhje|Lidhje}} me {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Njoftomë, kur dikush lidh një faqe {{GENDER:|Krijova}} te një objekt {{WBREPONAME}}.",
-	"notification-header-page-connection": "Faqja <strong>$3</strong> u {{GENDER:$2|lidh}} te {{PLURAL:$4|-1=një objekt {{WBREPONAME}}|objekti {{WBREPONAME}}  $4}}, i cili përmban të dhëna që lidhen me temën.",
-	"notification-bundle-header-page-connection": "<strong>$3</strong> dhe {{PLURAL:$4|një faqe tjetër|$4 faqe të tjera|100=99+ faqe të tjera} u {{GENDER:$2|lidhën}} te objekte {{WBREPONAME}}.",
+	"notification-header-page-connection": "Faqja <strong>$3</strong> ishte {{GENDER:$2|i lidhur}} me {{PLURAL:$4|-1=një artikull{{WBREPONAME}}|artikulli{{WBREPONAME}}$4}}, ku mund të mblidhen të dhëna të rëndësishme për temën.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> dhe {{PLURAL:$4|një faqe tjetër|$4 faqe të tjera|100=99+ faqe të tjera}} ishin {{GENDER:$2|i lidhur}} me artikujt {{WBREPONAME}}, ku mund të mblidhen të dhëna të rëndësishme për temat.",
 	"notification-link-text-view-item": "{{GENDER:$1|Shiheni}} objektin",
 	"notification-subject-page-connection": "Një faqe te {{SITENAME}} që {{GENDER:$3|keni krijuar}} u {{GENDER:$2|lidh}} me një objekt {{WBREPONAME}}",
 	"unresolved-property-category": "Faqe me veti të paftilluara",
 	"unresolved-property-category-desc": "Kjo kategori paraqet faqe që përmbajnë referenca vetish {{WBREPONAME}} që s’mund të gjenden as sipas ID-sh, as sipas etiketash vetie.",
 	"connected-redirect-category": "Ridrejtime të lidhura me një objekt {{WBREPONAME}}",
-	"connected-redirect-category-desc": "Kjo kategori paraqet faqe ridrejtimesh që janë lidhur te një objekt {{WBREPONAME}}."
+	"connected-redirect-category-desc": "Kjo kategori paraqet faqe ridrejtimesh që janë lidhur te një objekt {{WBREPONAME}}.",
+	"wikibase-client-data-bridge-dialog-title": "Redaktoni $1",
+	"wikibase-client-data-bridge-permissions-error": "Ju nuk keni leje për të redaktuar këtë vlerë, për sa vijon {{PLURAL:$1|arsye|arsyet}}:",
+	"wikibase-client-data-bridge-permissions-error-info": "Më shumë detaje",
+	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>Kjo vlerë është aktualisht [$1 e mbrojtur plotësisht]në{{WBREPONAME}} dhe mund të redaktohet vetëm nga [$2 administratorë].</strong>",
+	"wikibase-client-data-bridge-protected-on-repo-body": "<p><strong>Pse mbrohet kjo vlerë?</strong></p>\n<ul>\n<li> Disa formate dhe artikuj (dhe vlerat e tyre përkatëse) janë përgjithmonë [$1 mbrojtura] për shkak të dukshmërisë. Ndonjëherë, ato mbrohen për shkak të [$2 mosmarrëveshjeve për redaktimin]. Shumica e artikujve mund të redaktohet nga çdokush.</li> \n<li> Arsyeja e mbrojtjes mund të gjendet në regjistrin [$3 mbrojtjes].</li> </ul> \n<p> <strong>Çfarë mund të bëj?</strong></p> \n<ul><li>[$4 Diskutoni këtë artikull] me të tjerët.</li></ul>"
 }
