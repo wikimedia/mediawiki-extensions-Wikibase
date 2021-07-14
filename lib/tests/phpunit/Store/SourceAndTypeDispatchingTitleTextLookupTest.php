@@ -1,4 +1,5 @@
 <?php
+declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Tests\Store;
 
@@ -37,7 +38,7 @@ class SourceAndTypeDispatchingTitleTextLookupTest extends TestCase {
 		$this->serviceBySourceAndTypeDispatcher = $this->createStub( ServiceBySourceAndTypeDispatcher::class );
 	}
 
-	public function testGivenLookupDefinedForEntityType_usesRespectiveLookup() {
+	public function testGivenLookupDefinedForEntityType_usesRespectiveLookup(): void {
 		$entityId = new PropertyId( 'P321' );
 		$titleText = 'Property:P321';
 		$propertySourceName = 'propertySource';
