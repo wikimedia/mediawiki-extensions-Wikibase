@@ -72,7 +72,7 @@ $wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = "{{ SOURCE_REPO_SCHEME
 if('{{ FEDPROPS_INTERWIKI_PREFIX }}' !== 'wikidata') {
 	$wgWBRepoSettings['entitySources'] = [
 		'local' => [
-			'entityNamespaces' => [ 'item' => 120 ],
+			'entityNamespaces' => [ 'item' => 120, 'property' => 122 ],
 			'repoDatabase' => false,
 			'baseUri' => 'http://{{ SERVER_NAME }}/entity/',
 			'interwikiPrefix' => '',
