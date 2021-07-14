@@ -168,27 +168,18 @@ return call_user_func( function() {
 	};
 
 	$defaults['repositories'] = function ( SettingsArray $settings ) {
-		// XXX: Default to having Items in the main namespace, and properties in NS 120.
-		// That is the live setup at wikidata.org, it is NOT consistent with the example settings!
-		// FIXME: throw an exception, instead of making assumptions that may brak the site in strange ways!
-		$entityNamespaces = [
-			'item' => 0,
-			'property' => 120
-		];
 		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
-			$entityNamespaces = WikibaseRepo::getSettings()->getSetting( 'entityNamespaces' );
+			return [
+				'' => [
+					'repoDatabase' => false,
+					'baseUri' => $settings->getSetting( 'repoUrl' ) . '/entity/',
+					'entityNamespaces' => WikibaseRepo::getSettings()->getSetting( 'entityNamespaces' ),
+					'prefixMapping' => [ '' => '' ],
+				]
+			];
 		}
 
-		return [
-			'' => [
-				// Use false (meaning the local wiki's database) if this wiki is the repo,
-				// otherwise default to null (meaning we can't access the repo's DB directly).
-				'repoDatabase' => $settings->getSetting( 'thisWikiIsTheRepo' ) ? false : null,
-				'baseUri' => $settings->getSetting( 'repoUrl' ) . '/entity/',
-				'entityNamespaces' => $entityNamespaces,
-				'prefixMapping' => [ '' => '' ],
-			]
-		];
+		throw new Exception( 'repositories must be configured for non-repo client wikis' );
 	};
 
 	$defaults['repoSiteName'] = function ( SettingsArray $settings ) {
