@@ -41,7 +41,7 @@ class ChangeNotificationJobTest extends MediaWikiIntegrationTestCase {
 	public function testToString( array $changeIds, $regex ) {
 		$job = new ChangeNotificationJob(
 			Title::newMainPage(),
-			[ 'repo' => 'repo-db', 'changeIds' => $changeIds ]
+			[ 'changeIds' => $changeIds ]
 		);
 
 		// toString used to fail on some platforms if a job contained a non-primitive parameter.
