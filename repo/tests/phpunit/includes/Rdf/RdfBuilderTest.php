@@ -217,7 +217,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 				$languageCodes = WikibaseRepo::getTermsLanguages()->getLanguages();
 
 				return new ItemStubRdfBuilder(
-					$this->getTestData()->getMockTermLookup(),
+					$this->getTestData()->getMockTermLookup( false ),
 					$vocabulary,
 					$writer,
 					$labelPredicates,

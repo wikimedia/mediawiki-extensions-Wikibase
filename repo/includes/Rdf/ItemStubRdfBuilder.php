@@ -7,18 +7,21 @@ namespace Wikibase\Repo\Rdf;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Term\TermTypes;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
  * @license GPL-2.0-or-later
  */
-class ItemStubRdfBuilder implements EntityStubRdfBuilder {
+class ItemStubRdfBuilder implements PrefetchingEntityStubRdfBuilder {
 
 	private $termLookup;
 	private $vocabulary;
 	private $writer;
 	private $languageCodes;
 	private $labelPredicates;
+	/** @var EntityId[] using serialization as key to avoid duplicates */
+	private $idsToPrefetch = [];
 
 	/**
 	 * ItemStubRdfBuilder constructor.
@@ -44,6 +47,8 @@ class ItemStubRdfBuilder implements EntityStubRdfBuilder {
 	}
 
 	public function addEntityStub( EntityId $id ) {
+		$this->prefetchEntityStubData();
+
 		$descriptions = $this->termLookup->getDescriptions(
 			$id,
 			$this->languageCodes
@@ -118,4 +123,24 @@ class ItemStubRdfBuilder implements EntityStubRdfBuilder {
 		}
 	}
 
+	public function markForPrefetchingEntityStub( EntityId $id ): void {
+		$this->idsToPrefetch[$id->getSerialization()] = $id;
+	}
+
+	private function prefetchEntityStubData(): void {
+		if ( $this->idsToPrefetch === [] ) {
+			return;
+		}
+
+		$this->termLookup->prefetchTerms(
+			array_values( $this->idsToPrefetch ),
+			[
+				TermTypes::TYPE_DESCRIPTION,
+				TermTypes::TYPE_LABEL,
+			],
+			$this->languageCodes
+		);
+
+		$this->idsToPrefetch = [];
+	}
 }

@@ -285,8 +285,8 @@ class RdfBuilderTestData {
 		];
 	}
 
-	public function getMockTermLookup(): PrefetchingTermLookup {
-		$termLookup = new InMemoryPrefetchingTermLookup();
+	public function getMockTermLookup( bool $loadEntitiesIfNotPrefetched = true ): PrefetchingTermLookup {
+		$termLookup = new InMemoryPrefetchingTermLookup( $loadEntitiesIfNotPrefetched );
 		$entities = [];
 		foreach ( self::getTestProperties() as $propertyTypeMapping ) {
 			/** @var PropertyId $id */
