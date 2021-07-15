@@ -6,13 +6,14 @@
 			"Besnik b",
 			"Ladsgroup",
 			"Liridon",
+			"Ritam",
 			"Vyolla"
 		]
 	},
-	"wikibase-desc": "Depozitimi i strukturuar i të dhënave",
-	"wikibase-entity": "entitet",
-	"wikibase-entity-item": "artikull",
-	"wikibase-entity-property": "tipar",
+	"wikibase-desc": "Depozitimi i të dhënave të strukturuara",
+	"wikibase-entity": "Entitet",
+	"wikibase-entity-item": "Artikull",
+	"wikibase-entity-property": "Tipar",
 	"wikibase-entity-query": "Pyetje e fshirë",
 	"wikibase-edit": "redakto",
 	"wikibase-save": "ruaje",
