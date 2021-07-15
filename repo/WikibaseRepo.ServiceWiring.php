@@ -1819,16 +1819,19 @@ return [
 
 		$matchingTermLookupFactory = WikibaseRepo::getMatchingTermsLookupFactory( $services );
 		$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory( $services );
+		$prefetchingTermLookup = WikibaseRepo::getPrefetchingTermLookup( $services );
 
 		return new DispatchingTermSearchInteractorFactory( array_map(
 			function ( EntitySource $source ) use (
 				$matchingTermLookupFactory,
-				$languageFallbackChainFactory
+				$languageFallbackChainFactory,
+				$prefetchingTermLookup
 			): MatchingTermsSearchInteractorFactory {
+
 				return new MatchingTermsSearchInteractorFactory(
 					$matchingTermLookupFactory->getLookupForSource( $source ),
 					$languageFallbackChainFactory,
-					WikibaseRepo::getPrefetchingTermLookup()
+					$prefetchingTermLookup
 				);
 			},
 			$sources
