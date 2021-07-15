@@ -77,7 +77,7 @@ class TimeParserFactory {
 		$parsers = [];
 
 		// Year-month parser must be first, otherwise "May 2014" may be parsed as "2014-05-01".
-		$parsers[] = new YearMonthTimeParser( $this->monthNameProvider, $this->options );
+		$parsers[] = new YearMonthTimeParser( $this->monthNameProvider, $this->options, $eraParser );
 		$parsers[] = $isoTimestampParser;
 		$parsers[] = new MwTimeIsoParser( $this->options );
 		$parsers[] = new YearMonthDayTimeParser( $eraParser, $this->options );
