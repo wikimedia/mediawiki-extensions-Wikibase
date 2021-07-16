@@ -25,7 +25,7 @@
 	"apihelp-query+wbentityusage-paramvalue-aspect-T": "The title of the local page corresponding to the entity is used",
 	"apihelp-query+wbentityusage-paramvalue-aspect-C": "Statements from the entity are used",
 	"apihelp-query+wbentityusage-paramvalue-aspect-X": "All aspects of an entity are or may be used",
-	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Something else about the entity is used. This currently implies statement and alias usage and explicit checks for entity existence.",
+	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Something else about the entity is used. This currently implies alias usage and explicit checks for entity existence.",
 	"apihelp-query+wbentityusage-param-prop": "Properties to add to the result.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "If enabled url of entity will be added",
 	"apihelp-query+wbentityusage-param-entities": "Only return page that used these entities.",

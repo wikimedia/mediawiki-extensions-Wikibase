@@ -67,8 +67,7 @@ class EntityUsage {
 	 * the specific usage flags together with the "other" flag are equivalent
 	 * to the "all" flag ( S + T + L + O = X or rather O = X - S - T - L ).
 	 *
-	 * Due to migration efforts, this is currently used redundantly with
-	 * STATEMENT_USAGE or DESCRIPTION_USAGE, as they were only added later.
+	 * This currently covers alias usage and entity existence checks.
 	 */
 	const OTHER_USAGE = 'O';
 
