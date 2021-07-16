@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use MockHttpTrait;
+use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -24,6 +25,37 @@ trait FederatedPropertiesTestTrait {
 
 	protected function setFederatedPropertiesEnabled() {
 		$this->setWbSetting( 'federatedPropertiesEnabled', true );
+
+		$this->setWbSetting( 'entitySources', array_merge(
+			[
+				'local' => [
+					'entityNamespaces' => [ 'item' => 120 ],
+					'repoDatabase' => false,
+					'baseUri' => 'http://wikidata-federated-properties.wmflabs.org/entity/',
+					'interwikiPrefix' => '',
+					'rdfNodeNamespacePrefix' => 'wd',
+					'rdfPredicateNamespacePrefix' => 'wdt',
+				],
+				'fedprops' => [
+					'entityNamespaces' => [ 'property' => 122 ],
+					'type' => 'api',
+					'repoDatabase' => false,
+					'baseUri' => $this->getFederatedPropertiesSourceConceptUri(),
+					'interwikiPrefix' => 'wikidatabeta',
+					'rdfNodeNamespacePrefix' => 'fpwd',
+					'rdfPredicateNamespacePrefix' => 'fpwd',
+				],
+			],
+			WikibaseRepo::getSettings()->getSetting( 'entitySources' )
+		) );
+	}
+
+	public function newFederatedPropertyIdFromPId( string $pId ) {
+		return new FederatedPropertyId( $this->getFederatedPropertiesSourceConceptUri() . $pId );
+	}
+
+	private function getFederatedPropertiesSourceConceptUri(): string {
+		return 'http://wikidata.beta.wmflabs.org/entity/';
 	}
 
 	private function setWbSetting( string $name, $value ) {

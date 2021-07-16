@@ -17,7 +17,7 @@ use NullStatsdDataFactory;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
@@ -64,6 +64,11 @@ class FormatSnakValue extends ApiBase {
 	private $stats;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	/**
 	 * @see ApiBase::__construct
 	 *
 	 * @param ApiMain $mainModule
@@ -74,6 +79,7 @@ class FormatSnakValue extends ApiBase {
 	 * @param DataValueFactory $dataValueFactory
 	 * @param ApiErrorReporter $apiErrorReporter
 	 * @param IBufferingStatsdDataFactory|null $stats
+	 * @param EntityIdParser $entityIdParser
 	 */
 	public function __construct(
 		ApiMain $mainModule,
@@ -83,7 +89,8 @@ class FormatSnakValue extends ApiBase {
 		DataTypeFactory $dataTypeFactory,
 		DataValueFactory $dataValueFactory,
 		ApiErrorReporter $apiErrorReporter,
-		IBufferingStatsdDataFactory $stats = null
+		?IBufferingStatsdDataFactory $stats,
+		EntityIdParser $entityIdParser
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -93,6 +100,7 @@ class FormatSnakValue extends ApiBase {
 		$this->dataValueFactory = $dataValueFactory;
 		$this->errorReporter = $apiErrorReporter;
 		$this->stats = $stats ?: new NullStatsdDataFactory();
+		$this->entityIdParser = $entityIdParser;
 	}
 
 	public static function factory(
@@ -102,6 +110,7 @@ class FormatSnakValue extends ApiBase {
 		ApiHelperFactory $apiHelperFactory,
 		DataTypeFactory $dataTypeFactory,
 		DataValueFactory $dataValueFactory,
+		EntityIdParser $entityIdParser,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
 		OutputFormatValueFormatterFactory $valueFormatterFactory
 	): self {
@@ -113,7 +122,8 @@ class FormatSnakValue extends ApiBase {
 			$dataTypeFactory,
 			$dataValueFactory,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
-			$stats
+			$stats,
+			$entityIdParser
 		);
 	}
 
@@ -209,7 +219,7 @@ class FormatSnakValue extends ApiBase {
 
 	private function decodeSnak( string $propertyIdSerialization, DataValue $dataValue ): PropertyValueSnak {
 		try {
-			$propertyId = new PropertyId( $propertyIdSerialization );
+			$propertyId = $this->entityIdParser->parse( $propertyIdSerialization );
 		} catch ( InvalidArgumentException $ex ) {
 			$this->errorReporter->dieException( $ex, 'badpropertyid' );
 		}
