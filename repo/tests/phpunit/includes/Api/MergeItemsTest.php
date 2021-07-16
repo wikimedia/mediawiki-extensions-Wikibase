@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use ApiUsageException;
+use ChangeTags;
 use FauxRequest;
 use HashSiteStore;
 use Language;
@@ -320,11 +321,14 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testMergeRequest( $pre1, $pre2, $expectedFrom, $expectedTo, $expectRedirect, $ignoreConflicts = null ) {
 		// -- set up params ---------------------------------
+		$tag = __METHOD__ . '-tag';
+		ChangeTags::defineTag( $tag );
 		$params = [
 			'action' => 'wbmergeitems',
 			'fromid' => 'Q1',
 			'toid' => 'Q2',
 			'summary' => 'CustomSummary!',
+			'tags' => $tag,
 		];
 		if ( $ignoreConflicts !== null ) {
 			$params['ignoreconflicts'] = $ignoreConflicts;
@@ -351,6 +355,8 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 
 		// -- check the edit summaries --------------------------------------------
 		$this->assertEditSummariesCorrect( $result );
+
+		$this->assertEditsAreTagged( $result, $tag );
 	}
 
 	private function assertResultCorrect( array $result ) {
@@ -390,6 +396,11 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$this->entityModificationTestHelper->assertRevisionSummary( '/CustomSummary/', $result['from']['lastrevid'] );
 		$this->entityModificationTestHelper->assertRevisionSummary( [ 'wbmergeitems' ], $result['to']['lastrevid'] );
 		$this->entityModificationTestHelper->assertRevisionSummary( '/CustomSummary/', $result['to']['lastrevid'] );
+	}
+
+	private function assertEditsAreTagged( array $result, string $tag ) {
+		$this->assertContains( $tag, $this->mockRepository->getLogEntry( $result['from']['lastrevid'] )['tags'] );
+		$this->assertContains( $tag, $this->mockRepository->getLogEntry( $result['to']['lastrevid'] )['tags'] );
 	}
 
 	public function provideExceptionParamsData() {

@@ -349,7 +349,9 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		$watchlistManager = MediaWikiServices::getInstance()->getWatchlistManager();
 		$watchlistManager->addWatch( $user, $entityTitleLookup->getTitleForId( $fromId ) );
 
-		$interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, 'CustomSummary' );
+		$tag = __METHOD__ . '-tag';
+
+		$interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, 'CustomSummary', false, [ $tag ] );
 
 		$actualTo = $this->testHelper->getEntity( $toId );
 		$this->testHelper->assertEntityEquals( $expectedTo, $actualTo, 'modified target item' );
@@ -369,6 +371,11 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			$watchlistManager->isWatched( $user, $entityTitleLookup->getTitleForId( $toId ) ),
 			'Item merged into is being watched'
 		);
+
+		$this->assertContains( $tag, $this->mockRepository->getLatestLogEntryFor( $fromId )['tags'],
+			'Edit on item merged from is tagged' );
+		$this->assertContains( $tag, $this->mockRepository->getLogEntry( $toRevId )['tags'],
+			'Edit on item merged into is tagged' );
 	}
 
 	private function assertRedirectWorks( $expectedFrom, ItemId $fromId, ItemId $toId ) {

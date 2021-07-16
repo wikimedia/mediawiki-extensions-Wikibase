@@ -131,6 +131,7 @@
 	"apihelp-wbmergeitems-param-toid": "The ID to merge to",
 	"apihelp-wbmergeitems-param-ignoreconflicts": "Array of elements of the item to ignore conflicts for. Can only contain values of \"<var>description</var>\", \"<var>sitelink</var>\" and \"<var>statement</var>\"",
 	"apihelp-wbmergeitems-param-summary": "Summary for the edit.\nWill be prepended by an automatically generated comment. The length limit of the autocomment together with the summary is 260 characters. Be aware that everything above that limit will be cut off.",
+	"apihelp-wbmergeitems-param-tags": "Change tags to apply to the revisions.",
 	"apihelp-wbmergeitems-param-bot": "Mark this edit as bot. This URL flag will only be respected if the user belongs to the group \"bot\".",
 	"apihelp-wbmergeitems-example-1": "Merges data from <samp>$1</samp> into <samp>$2</samp>",
 	"apihelp-wbmergeitems-example-3": "Merges data from <samp>$1</samp> into <samp>$2</samp> ignoring any conflicting sitelinks",

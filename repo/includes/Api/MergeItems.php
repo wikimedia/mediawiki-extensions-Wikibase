@@ -133,7 +133,7 @@ class MergeItems extends ApiBase {
 				$ignoreConflicts = [];
 			}
 
-			$this->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $params['bot'] );
+			$this->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $params['bot'], $params['tags'] ?: [] );
 		} catch ( EntityIdParsingException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-entity-id' );
 		} catch ( ItemMergeException | RedirectCreationException $ex ) {
@@ -147,12 +147,13 @@ class MergeItems extends ApiBase {
 	 * @param string[] $ignoreConflicts
 	 * @param string|null $summary
 	 * @param bool $bot
+	 * @param string[] $tags Already permission checked via self::PARAM_TYPE => 'tags'
 	 * @throws ItemMergeException
 	 * @throws RedirectCreationException
 	 */
-	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, ?string $summary, bool $bot ): void {
+	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, ?string $summary, bool $bot, array $tags ): void {
 		list( $newRevisionFrom, $newRevisionTo, $redirected )
-			= $this->interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, $summary, $bot );
+			= $this->interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, $summary, $bot, $tags );
 
 		$this->resultBuilder->setValue( null, 'success', 1 );
 		$this->resultBuilder->setValue( null, 'redirected', (int)$redirected );
@@ -221,6 +222,10 @@ class MergeItems extends ApiBase {
 			],
 			'summary' => [
 				self::PARAM_TYPE => 'string',
+			],
+			'tags' => [
+				self::PARAM_TYPE => 'tags',
+				self::PARAM_ISMULTI => true,
 			],
 			'bot' => [
 				self::PARAM_TYPE => 'boolean',

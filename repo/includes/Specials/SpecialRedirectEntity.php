@@ -127,7 +127,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	private function redirectEntity( EntityId $fromId, EntityId $toId ) {
 		$this->tokenCheck->checkRequestToken( $this->getContext(), 'wpEditToken' );
 
-		$this->interactor->createRedirect( $fromId, $toId, false, $this->getContext() );
+		$this->interactor->createRedirect( $fromId, $toId, false, [], $this->getContext() );
 
 		$this->getOutput()->addWikiMsg(
 			'wikibase-redirectentity-success',

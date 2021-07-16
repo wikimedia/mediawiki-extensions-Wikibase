@@ -19,6 +19,7 @@ use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
+use Wikimedia\Assert\Assert;
 
 /**
  * An interactor implementing the use case of creating a redirect.
@@ -90,19 +91,30 @@ abstract class EntityRedirectCreationInteractor {
 	 * @param EntityId $toId The ID of the entity the redirect should point to. The Entity must
 	 * exist and must not be a redirect.
 	 * @param bool $bot Whether the edit should be marked as bot
+	 * @param string[] $tags
 	 * @param IContextSource|null $context The context to pass to the edit filter hook and check permissions
 	 *
 	 * @return EntityRedirect
 	 * @throws RedirectCreationException If creating the redirect fails. Calling code may use
 	 * RedirectCreationException::getErrorCode() to get further information about the cause of
 	 * the failure. An explanation of the error codes can be obtained from getErrorCodeInfo().
+	 * @suppress PhanCommentParamWithoutRealParam
 	 */
 	public function createRedirect(
 		EntityId $fromId,
 		EntityId $toId,
 		bool $bot,
-		IContextSource $context
+		$tagsOrContext,
+		IContextSource $context = null
 	): EntityRedirect {
+		Assert::parameterType( [ 'array', IContextSource::class ], $tagsOrContext, '$tagsOrContext' );
+		if ( $tagsOrContext instanceof IContextSource ) {
+			$tags = [];
+			$context = $tagsOrContext;
+		} else {
+			$tags = $tagsOrContext;
+		}
+
 		$this->checkCompatible( $fromId, $toId );
 		$this->checkPermissions( $fromId, $context );
 
@@ -114,7 +126,7 @@ abstract class EntityRedirectCreationInteractor {
 		$summary->addAutoCommentArgs( $fromId->getSerialization(), $toId->getSerialization() );
 
 		$redirect = new EntityRedirect( $fromId, $toId );
-		$this->saveRedirect( $redirect, $summary, $context, $bot );
+		$this->saveRedirect( $redirect, $summary, $context, $bot, $tags );
 
 		return $redirect;
 	}
@@ -233,7 +245,8 @@ abstract class EntityRedirectCreationInteractor {
 		EntityRedirect $redirect,
 		FormatableSummary $summary,
 		IContextSource $context,
-		bool $bot
+		bool $bot,
+		array $tags
 	): void {
 		$summary = $this->summaryFormatter->formatSummary( $summary );
 		$flags = 0;
@@ -262,7 +275,9 @@ abstract class EntityRedirectCreationInteractor {
 				$redirect,
 				$summary,
 				$context->getUser(),
-				$flags
+				$flags,
+				false,
+				$tags
 			);
 		} catch ( StorageException $ex ) {
 			throw new RedirectCreationException( $ex->getMessage(), 'cant-redirect', [], $ex );

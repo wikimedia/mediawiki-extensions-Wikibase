@@ -153,6 +153,7 @@
 	"apihelp-wbmergeitems-param-toid": "{{doc-apihelp-param|wbmergeitems|toid}}",
 	"apihelp-wbmergeitems-param-ignoreconflicts": "{{doc-apihelp-param|wbmergeitems|ignoreconflicts}}",
 	"apihelp-wbmergeitems-param-summary": "{{doc-apihelp-param|wbmergeitems|summary}}",
+	"apihelp-wbmergeitems-param-tags": "{{doc-apihelp-param|wbmergeitems|tags|info=Note that merging items makes several edits, which is why the message says “revisions” and not “revision” as in e.g. {{msg-mw|apihelp-wbeditentity-param-tags}}.}}",
 	"apihelp-wbmergeitems-param-bot": "{{doc-apihelp-param|wbmergeitems|bot}}",
 	"apihelp-wbmergeitems-example-1": "{{doc-apihelp-example|wbmergeitems|params=* $1 - Entity id to merge data from\n* $2 - Entity id to merge data into|paramstart=3}}",
 	"apihelp-wbmergeitems-example-3": "{{doc-apihelp-example|wbmergeitems|params=* $1 - Entity id to merge data from\n* $2 - Entity id to merge data into|paramstart=3}}",

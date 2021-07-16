@@ -66,9 +66,10 @@ class StatsdSaveTimeRecordingEntityStore implements EntityStore {
 		$summary,
 		User $user,
 		$flags = 0,
-		$baseRevId = false
+		$baseRevId = false,
+		array $tags = []
 	) {
-		return $this->entityStore->saveRedirect( $redirect, $summary, $user, $flags, $baseRevId );
+		return $this->entityStore->saveRedirect( $redirect, $summary, $user, $flags, $baseRevId, $tags );
 	}
 
 	public function deleteEntity( EntityId $entityId, $reason, User $user ) {

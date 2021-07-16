@@ -118,13 +118,16 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 		$id2 = new PropertyId( 'P2' );
 		$redirect = new EntityRedirect( $id, $id2 );
 		$user = $this->newUser();
+		$flags = EDIT_MINOR;
+		$baseRevId = 0;
+		$tags = [ 'tag' ];
 		$store = new TypeDispatchingEntityStore(
 			[],
-			$this->newDefaultService( 'saveRedirect', [ $redirect, 'summary', $user ] ),
+			$this->newDefaultService( 'saveRedirect', [ $redirect, 'summary', $user, $flags, $baseRevId, $tags ] ),
 			$this->newEntityRevisionLookup()
 		);
 
-		$result = $store->saveRedirect( $redirect, 'summary', $user );
+		$result = $store->saveRedirect( $redirect, 'summary', $user, $flags, $baseRevId, $tags );
 		$this->assertSame( 'fromDefaultService', $result );
 	}
 
@@ -133,13 +136,16 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 		$id2 = new PropertyId( 'P2' );
 		$redirect = new EntityRedirect( $id, $id2 );
 		$user = $this->newUser();
+		$flags = EDIT_MINOR;
+		$baseRevId = 0;
+		$tags = [ 'tag' ];
 		$store = new TypeDispatchingEntityStore(
 			[
-				'property' => function ( EntityStore $defaultService ) use ( $redirect, $user ) {
+				'property' => function ( EntityStore $defaultService ) use ( $redirect, $user, $flags, $baseRevId, $tags ) {
 					$customService = $this->createMock( EntityStore::class );
 					$customService->expects( $this->once() )
 						->method( 'saveRedirect' )
-						->with( $redirect, 'summary', $user )
+						->with( $redirect, 'summary', $user, $flags, $baseRevId, $tags )
 						->willReturn( 'fromCustomService' );
 					return $customService;
 				},
@@ -148,7 +154,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 			$this->newEntityRevisionLookup()
 		);
 
-		$result = $store->saveRedirect( $redirect, 'summary', $user );
+		$result = $store->saveRedirect( $redirect, 'summary', $user, $flags, $baseRevId, $tags );
 		$this->assertSame( 'fromCustomService', $result );
 	}
 

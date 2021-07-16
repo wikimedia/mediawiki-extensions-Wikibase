@@ -218,7 +218,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
 		// check that the tags were applied
 		$r2tags = ChangeTags::getTags( $this->db, null, $r2->getRevisionId() );
-		$this->assertSame( [], array_diff( [ 'mw-replace' ], $r2tags ) );
+		$this->assertContains( 'mw-replace', $r2tags );
 
 		// check that the term storage got updated (via a DataUpdate).
 		$termLookup = WikibaseRepo::getTermLookup();
@@ -390,7 +390,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$q33 = new ItemId( 'Q33' );
 		$redirect = new EntityRedirect( $oneId, $q33 );
 
-		$redirectRevId = $store->saveRedirect( $redirect, 'redirect one', $user, EDIT_UPDATE );
+		$redirectRevId = $store->saveRedirect( $redirect, 'redirect one', $user, EDIT_UPDATE, false, [ 'mw-replace' ] );
 
 		// FIXME: use the $lookup to check this, once EntityLookup supports redirects.
 		$revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
@@ -409,6 +409,10 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$this->assertRedirectPerPage( $q33, $oneId );
+
+		// check that the tags were applied
+		$redirectRevTags = ChangeTags::getTags( $this->db, null, $redirectRevId );
+		$this->assertContains( 'mw-replace', $redirectRevTags );
 
 		// check that the term storage got updated (via a DataUpdate).
 		$termLookup = WikibaseRepo::getTermLookup();
