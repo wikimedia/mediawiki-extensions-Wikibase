@@ -1,8 +1,18 @@
 = Wikibase 1.35 =
 
-== Wikibase 1.35.2-wmde.1 ==
+== Wikibase 1.35.3-wmde.2 ==
 
 This is a security and maintenance release of the Wikibase 1.35 branch.
+
+=== Changes since Wikibase 1.35.0-wmde.1 ===
+
+* (T282154) EntityDataRequestHandler: Remove ob_clean() call
+* (T283040) Update documentation of usage aspects
+* (T286193) Drop subscribing to "other" aspect when using statements
+* (T283040) Update Usage Aspect values documented in API help pages
+* (T280491) Update watir version for ruby browser tests
+* (T258184) OtherProjectsSidebarGenerator::buildProjectLinkSidebarFromItemId
+ was added because it's still used by ArticlePlaceholder
 
 === Changes since Wikibase 1.35.0-wmde.0 ===
 
