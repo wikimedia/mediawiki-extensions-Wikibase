@@ -116,7 +116,6 @@
 			"factory": "\\Wikibase\\Repo\\Api\\MergeItems::factory",
 			"services": [
 				"WikibaseRepo.ApiHelperFactory",
-				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.ItemMergeInteractor",
 				"WikibaseRepo.Settings"
 			]

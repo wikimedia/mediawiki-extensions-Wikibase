@@ -10,7 +10,6 @@ use ApiUsageException;
 use Exception;
 use InvalidArgumentException;
 use LogicException;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\SettingsArray;
@@ -27,11 +26,6 @@ use Wikibase\Repo\Interactors\RedirectCreationException;
  * @author Lucie-Aimée Kaffee
  */
 class MergeItems extends ApiBase {
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
 
 	/**
 	 * @var ApiErrorReporter
@@ -58,7 +52,6 @@ class MergeItems extends ApiBase {
 	 *
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param EntityIdParser $idParser
 	 * @param ItemMergeInteractor $interactor
 	 * @param ApiErrorReporter $errorReporter
 	 * @param callable $resultBuilderInstantiator
@@ -66,7 +59,6 @@ class MergeItems extends ApiBase {
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
-		EntityIdParser $idParser,
 		ItemMergeInteractor $interactor,
 		ApiErrorReporter $errorReporter,
 		callable $resultBuilderInstantiator,
@@ -74,7 +66,6 @@ class MergeItems extends ApiBase {
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
-		$this->idParser = $idParser;
 		$this->interactor = $interactor;
 
 		$this->errorReporter = $errorReporter;
@@ -87,14 +78,12 @@ class MergeItems extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		ApiHelperFactory $apiHelperFactory,
-		EntityIdParser $entityIdParser,
 		ItemMergeInteractor $interactor,
 		SettingsArray $settings
 	): self {
 		return new self(
 			$mainModule,
 			$moduleName,
-			$entityIdParser,
 			$interactor,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
 			function ( $module ) use ( $apiHelperFactory ) {

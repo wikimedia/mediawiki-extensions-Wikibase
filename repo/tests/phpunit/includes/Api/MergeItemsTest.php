@@ -188,7 +188,6 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		return new MergeItems(
 			$main,
 			'wbmergeitems',
-			new ItemIdParser(),
 			new ItemMergeInteractor(
 				$changeOpsFactoryProvider->getMergeFactory(),
 				$this->mockRepository,
