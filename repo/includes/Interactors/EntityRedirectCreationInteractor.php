@@ -19,7 +19,6 @@ use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
-use Wikimedia\Assert\Assert;
 
 /**
  * An interactor implementing the use case of creating a redirect.
@@ -98,23 +97,14 @@ abstract class EntityRedirectCreationInteractor {
 	 * @throws RedirectCreationException If creating the redirect fails. Calling code may use
 	 * RedirectCreationException::getErrorCode() to get further information about the cause of
 	 * the failure. An explanation of the error codes can be obtained from getErrorCodeInfo().
-	 * @suppress PhanCommentParamWithoutRealParam
 	 */
 	public function createRedirect(
 		EntityId $fromId,
 		EntityId $toId,
 		bool $bot,
-		$tagsOrContext,
-		IContextSource $context = null
+		array $tags,
+		IContextSource $context
 	): EntityRedirect {
-		Assert::parameterType( [ 'array', IContextSource::class ], $tagsOrContext, '$tagsOrContext' );
-		if ( $tagsOrContext instanceof IContextSource ) {
-			$tags = [];
-			$context = $tagsOrContext;
-		} else {
-			$tags = $tagsOrContext;
-		}
-
 		$this->checkCompatible( $fromId, $toId );
 		$this->checkPermissions( $fromId, $context );
 
