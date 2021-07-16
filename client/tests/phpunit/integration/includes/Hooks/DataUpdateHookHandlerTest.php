@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use JobQueueGroup;
@@ -36,16 +38,14 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @param bool $prune whether pruneUsagesForPage() should be used
 	 * @param bool $add whether addUsagesForPage() should be used
 	 * @param bool $replace whether replaceUsagesForPage() should be used
-	 *
-	 * @return UsageUpdater
 	 */
 	private function newUsageUpdater(
 		Title $title,
 		array $expectedUsages = null,
-		$prune = true,
-		$add = true,
-		$replace = false
-	) {
+		bool $prune = true,
+		bool $add = true,
+		bool $replace = false
+	): UsageUpdater {
 		$usageUpdater = $this->getMockBuilder( UsageUpdater::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -90,8 +90,8 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	private function newJobScheduler(
 		Title $title,
 		array $expectedUsages = null,
-		$useJobQueue = false
-	) {
+		bool $useJobQueue = false
+	): JobQueueGroup {
 		$jobScheduler = $this->getMockBuilder( JobQueueGroup::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -129,15 +129,9 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		return $jobScheduler;
 	}
 
-	/**
-	 * @param Title $title
-	 * @param array|null $currentUsages
-	 *
-	 * @return UsageLookup
-	 */
 	private function newUsageLookup(
 		array $currentUsages = null
-	) {
+	): UsageLookup {
 		$usageLookup = $this->getMockBuilder( UsageLookup::class )
 			->getMock();
 		$currentUsages = ( $currentUsages == null ) ? [] : $currentUsages;
@@ -154,20 +148,17 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @param bool $prune whether pruneUsagesForPage() should be used
 	 * @param bool $asyncAdd whether addUsagesForPage() should be called via the job queue
 	 * @param bool $replace whether replaceUsagesForPage() should be used
-	 *
-	 * @return DataUpdateHookHandler
 	 */
 	private function newDataUpdateHookHandler(
 		Title $title,
 		array $expectedUsages = null,
-		$prune = true,
-		$asyncAdd = false,
-		$replace = false,
-		array $currentUsages = null
-	) {
+		bool $prune = true,
+		bool $asyncAdd = false,
+		bool $replace = false
+	): DataUpdateHookHandler {
 		$usageUpdater = $this->newUsageUpdater( $title, $expectedUsages, $prune, !$asyncAdd, $replace );
 		$jobScheduler = $this->newJobScheduler( $title, $expectedUsages, $asyncAdd );
-		$usageLookup = $this->newUsageLookup( $currentUsages );
+		$usageLookup = $this->newUsageLookup();
 
 		return new DataUpdateHookHandler(
 			$usageUpdater,
@@ -179,10 +170,8 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param EntityUsage[]|null $usages
-	 *
-	 * @return ParserOutput
 	 */
-	private function newParserOutput( array $usages = null ) {
+	private function newParserOutput( array $usages = null ): ParserOutput {
 		$output = new ParserOutput();
 
 		if ( $usages ) {
@@ -199,14 +188,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		return $output;
 	}
 
-	/**
-	 * @param int $id
-	 * @param int $ns
-	 * @param string $text
-	 *
-	 * @return Title
-	 */
-	private function newTitle( $id, $ns, $text ) {
+	private function newTitle( int $id, int $ns, string $text ): Title {
 		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -226,10 +208,8 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @param Title $title
 	 * @param EntityUsage[]|null $usages
-	 *
-	 * @return LinksUpdate
 	 */
-	private function newLinksUpdate( Title $title, array $usages = null ) {
+	private function newLinksUpdate( Title $title, array $usages = null ): LinksUpdate {
 		$pout = $this->newParserOutput( $usages );
 
 		$linksUpdate = $this->getMockBuilder( LinksUpdate::class )
@@ -247,7 +227,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		return $linksUpdate;
 	}
 
-	public function provideEntityUsages() {
+	public function provideEntityUsages(): array {
 		return [
 			'usage' => [
 				[
@@ -266,7 +246,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideEntityUsages
 	 */
-	public function testLinksUpdateComplete( $usages ) {
+	public function testLinksUpdateComplete( ?array $usages ): void {
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
 		$linksUpdate = $this->newLinksUpdate( $title, $usages );
@@ -276,7 +256,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$handler->doLinksUpdateComplete( $linksUpdate );
 	}
 
-	public function testLinksUpdateComplete_noPageId() {
+	public function testLinksUpdateComplete_noPageId(): void {
 		$title = $this->newTitle( 0, NS_MAIN, 'Oh no' );
 
 		$linksUpdate = $this->newLinksUpdate( $title, null );
@@ -289,7 +269,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideEntityUsages
 	 */
-	public function testDoParserCacheSaveComplete( $usages ) {
+	public function testDoParserCacheSaveComplete( ?array $usages ): void {
 		$parserOutput = $this->newParserOutput( $usages );
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
@@ -298,7 +278,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$handler->onParserCacheSaveComplete( null, $parserOutput, $title, null, null );
 	}
 
-	public function testDoParserCacheSaveCompleteNoChangeEntityUsage() {
+	public function testDoParserCacheSaveCompleteNoChangeEntityUsage(): void {
 		$usages = [
 			'Q1#S' => new EntityUsage( new ItemId( 'Q1' ), EntityUsage::SITELINK_USAGE )
 		];
@@ -322,7 +302,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$handler->onParserCacheSaveComplete( null, $parserOutput, $title, null, null );
 	}
 
-	public function testDoParserCacheSaveCompletePartialUpdate() {
+	public function testDoParserCacheSaveCompletePartialUpdate(): void {
 		$newUsages = [
 			'Q1#S' => new EntityUsage( new ItemId( 'Q1' ), EntityUsage::SITELINK_USAGE ),
 			'Q2#O' => new EntityUsage( new ItemId( 'Q2' ), EntityUsage::OTHER_USAGE ),
@@ -356,7 +336,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$handler->onParserCacheSaveComplete( null, $parserOutput, $title, null, null );
 	}
 
-	public function testDoArticleDeleteComplete() {
+	public function testDoArticleDeleteComplete(): void {
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
 		// Assertions are done by the UsageUpdater mock

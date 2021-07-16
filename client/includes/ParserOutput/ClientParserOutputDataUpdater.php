@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\ParserOutput;
 
 use InvalidArgumentException;
@@ -70,13 +72,9 @@ class ClientParserOutputDataUpdater {
 		SiteLinkLookup $siteLinkLookup,
 		EntityLookup $entityLookup,
 		EntityUsageFactory $entityUsageFactory,
-		$siteId,
+		string $siteId,
 		LoggerInterface $logger = null
 	) {
-		if ( !is_string( $siteId ) ) {
-			throw new InvalidArgumentException( '$siteId must be a string.' );
-		}
-
 		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
 		$this->entityLookup = $entityLookup;
 		$this->siteLinkLookup = $siteLinkLookup;
@@ -87,11 +85,8 @@ class ClientParserOutputDataUpdater {
 
 	/**
 	 * Add wikibase_item parser output property
-	 *
-	 * @param Title $title
-	 * @param ParserOutput $out
 	 */
-	public function updateItemIdProperty( Title $title, ParserOutput $out ) {
+	public function updateItemIdProperty( Title $title, ParserOutput $out ): void {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId ) {
@@ -106,11 +101,8 @@ class ClientParserOutputDataUpdater {
 
 	/**
 	 * Add tracking category if the page is a redirect and is connected to an item
-	 *
-	 * @param Title $title
-	 * @param ParserOutput $out
 	 */
-	public function updateTrackingCategories( Title $title, ParserOutput $out ) {
+	public function updateTrackingCategories( Title $title, ParserOutput $out ): void {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId && $title->isRedirect() ) {
@@ -118,7 +110,7 @@ class ClientParserOutputDataUpdater {
 		}
 	}
 
-	public function updateOtherProjectsLinksData( Title $title, ParserOutput $out ) {
+	public function updateOtherProjectsLinksData( Title $title, ParserOutput $out ): void {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId ) {
@@ -132,7 +124,7 @@ class ClientParserOutputDataUpdater {
 		}
 	}
 
-	public function updateBadgesProperty( Title $title, ParserOutput $out ) {
+	public function updateBadgesProperty( Title $title, ParserOutput $out ): void {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		// first reset all badges in case one got removed
@@ -147,7 +139,7 @@ class ClientParserOutputDataUpdater {
 		}
 	}
 
-	private function setBadgesProperty( ItemId $itemId, ParserOutput $out ) {
+	private function setBadgesProperty( ItemId $itemId, ParserOutput $out ): void {
 		/** @var Item $item */
 		$item = $this->entityLookup->getEntity( $itemId );
 		'@phan-var Item|null $item';
@@ -173,12 +165,7 @@ class ClientParserOutputDataUpdater {
 		}
 	}
 
-	/**
-	 * @param Title $title
-	 *
-	 * @return ItemId|null
-	 */
-	private function getItemIdForTitle( Title $title ) {
+	private function getItemIdForTitle( Title $title ): ?ItemId {
 		return $this->siteLinkLookup->getItemIdForLink(
 			$this->siteId,
 			$title->getPrefixedText()

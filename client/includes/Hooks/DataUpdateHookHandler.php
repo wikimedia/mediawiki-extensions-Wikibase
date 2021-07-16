@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Hooks;
 
 use Content;
@@ -206,7 +208,7 @@ class DataUpdateHookHandler implements
 	 * @throws InvalidArgumentException
 	 * @return EntityUsage[]
 	 */
-	private function reindexEntityUsages( array $usages ) {
+	private function reindexEntityUsages( array $usages ): array {
 		$reindexed = [];
 
 		foreach ( $usages as $usage ) {

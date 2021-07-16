@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use Deserializers\Exceptions\DeserializationException;
@@ -100,10 +102,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	private $luaEntityModules = null;
 
-	/**
-	 * @return WikibaseLanguageIndependentLuaBindings
-	 */
-	private function getLanguageIndependentLuaBindings() {
+	private function getLanguageIndependentLuaBindings(): WikibaseLanguageIndependentLuaBindings {
 		if ( $this->languageIndependentLuaBindings === null ) {
 			$this->languageIndependentLuaBindings = $this->newLanguageIndependentLuaBindings();
 		}
@@ -111,10 +110,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return $this->languageIndependentLuaBindings;
 	}
 
-	/**
-	 * @return WikibaseLanguageDependentLuaBindings
-	 */
-	private function getLanguageDependentLuaBindings() {
+	private function getLanguageDependentLuaBindings(): WikibaseLanguageDependentLuaBindings {
 		if ( $this->languageDependentLuaBindings === null ) {
 			$this->languageDependentLuaBindings = $this->newLanguageDependentLuaBindings();
 		}
@@ -122,10 +118,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return $this->languageDependentLuaBindings;
 	}
 
-	/**
-	 * @return EntityAccessor
-	 */
-	private function getEntityAccessor() {
+	private function getEntityAccessor(): EntityAccessor {
 		if ( $this->entityAccessor === null ) {
 			$this->entityAccessor = $this->newEntityAccessor();
 		}
@@ -135,10 +128,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	/**
 	 * @param string $type One of DataAccessSnakFormatterFactory::TYPE_*
-	 *
-	 * @return SnakSerializationRenderer
 	 */
-	private function getSnakSerializationRenderer( $type ) {
+	private function getSnakSerializationRenderer( string $type ): SnakSerializationRenderer {
 		if ( !array_key_exists( $type, $this->snakSerializationRenderers ) ) {
 			$this->snakSerializationRenderers[$type] = $this->newSnakSerializationRenderer( $type );
 		}
@@ -158,10 +149,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return $this->termFallbackChain;
 	}
 
-	/**
-	 * @return ParserOutputUsageAccumulator
-	 */
-	public function getUsageAccumulator() {
+	public function getUsageAccumulator(): ParserOutputUsageAccumulator {
 		if ( $this->usageAccumulator === null ) {
 			$parserOutput = $this->getParser()->getOutput();
 			$this->usageAccumulator = new ParserOutputUsageAccumulator(
@@ -173,10 +161,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return $this->usageAccumulator;
 	}
 
-	/**
-	 * @return PropertyIdResolver
-	 */
-	private function getPropertyIdResolver() {
+	private function getPropertyIdResolver(): PropertyIdResolver {
 		if ( $this->propertyIdResolver === null ) {
 			$entityLookup = WikibaseClient::getEntityLookup();
 			$propertyLabelResolver = WikibaseClient::getPropertyLabelResolver();
@@ -201,10 +186,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * Please note, that this splits the parser cache by user language, if
 	 * allowDataAccessInUserLanguage is true.
-	 *
-	 * @return Language
 	 */
-	private function getLanguage() {
+	private function getLanguage(): Language {
 		if ( $this->allowDataAccessInUserLanguage() ) {
 			return $this->getParserOptions()->getUserLangObj();
 		}
@@ -212,10 +195,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return MediaWikiServices::getInstance()->getContentLanguage();
 	}
 
-	/**
-	 * @return LuaFunctionCallTracker
-	 */
-	private function getLuaFunctionCallTracker() {
+	private function getLuaFunctionCallTracker(): LuaFunctionCallTracker {
 		if ( !$this->luaFunctionCallTracker ) {
 			$mwServices = MediaWikiServices::getInstance();
 			$settings = WikibaseClient::getSettings( $mwServices );
@@ -233,16 +213,13 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return $this->luaFunctionCallTracker;
 	}
 
-	/**
-	 * @return bool
-	 */
-	private function allowDataAccessInUserLanguage() {
+	private function allowDataAccessInUserLanguage(): bool {
 		$settings = WikibaseClient::getSettings();
 
 		return $settings->getSetting( 'allowDataAccessInUserLanguage' );
 	}
 
-	private function newEntityAccessor() {
+	private function newEntityAccessor(): EntityAccessor {
 		$settings = WikibaseClient::getSettings();
 		return new EntityAccessor(
 			$this->getEntityIdParser(),
@@ -262,10 +239,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	/**
 	 * @param string $type One of DataAccessSnakFormatterFactory::TYPE_*
-	 *
-	 * @return SnakSerializationRenderer
 	 */
-	private function newSnakSerializationRenderer( $type ) {
+	private function newSnakSerializationRenderer( string $type ): SnakSerializationRenderer {
 		$snakFormatterFactory = WikibaseClient::getDataAccessSnakFormatterFactory();
 		$snakFormatter = $snakFormatterFactory->newWikitextSnakFormatter(
 			$this->getLanguage(),
@@ -293,7 +268,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		);
 	}
 
-	private function newLanguageDependentLuaBindings() {
+	private function newLanguageDependentLuaBindings(): WikibaseLanguageDependentLuaBindings {
 		$nonCachingLookup = new LanguageFallbackLabelDescriptionLookup(
 			WikibaseClient::getTermLookup(),
 			$this->getLanguageFallbackChain()
@@ -319,7 +294,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		);
 	}
 
-	private function newLanguageIndependentLuaBindings() {
+	private function newLanguageIndependentLuaBindings(): WikibaseLanguageIndependentLuaBindings {
 		$mediaWikiServices = MediaWikiServices::getInstance();
 		$settings = WikibaseClient::getSettings( $mediaWikiServices );
 		$store = WikibaseClient::getStore( $mediaWikiServices );
@@ -357,10 +332,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		);
 	}
 
-	/**
-	 * @return EntityIdParser
-	 */
-	private function getEntityIdParser() {
+	private function getEntityIdParser(): EntityIdParser {
 		if ( !$this->entityIdParser ) {
 			$this->entityIdParser = WikibaseClient::getEntityIdParser();
 		}
@@ -369,9 +341,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	/**
 	 * @throws \ScribuntoException
-	 * @return EntityId
 	 */
-	private function parseUserGivenEntityId( $idSerialization ) {
+	private function parseUserGivenEntityId( string $idSerialization ): EntityId {
 		try {
 			return $this->getEntityIdParser()->parse( $idSerialization );
 		} catch ( EntityIdParsingException $ex ) {
@@ -432,12 +403,9 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for getEntity in EntityAccessor
 	 *
-	 * @param string $prefixedEntityId
-	 *
 	 * @throws ScribuntoException
-	 * @return array
 	 */
-	public function getEntity( $prefixedEntityId ) {
+	public function getEntity( string $prefixedEntityId ): array {
 		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
 
 		try {
@@ -458,14 +426,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for getReferencedEntityId in WikibaseLanguageIndependentLuaBindings
 	 *
-	 * @param string $prefixedFromEntityId
-	 * @param string $prefixedPropertyId
 	 * @param string[] $prefixedToIds
 	 *
 	 * @throws ScribuntoException
-	 * @return array
 	 */
-	public function getReferencedEntityId( $prefixedFromEntityId, $prefixedPropertyId, $prefixedToIds ) {
+	public function getReferencedEntityId( string $prefixedFromEntityId, string $prefixedPropertyId, array $prefixedToIds ): array {
 		$parserOutput = $this->getEngine()->getParser()->getOutput();
 		$key = 'wikibase-referenced-entity-id-limit';
 
@@ -503,12 +468,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for entityExists in EntityAccessor
 	 *
-	 * @param string $prefixedEntityId
-	 *
 	 * @throws ScribuntoException
 	 * @return bool[]
 	 */
-	public function entityExists( $prefixedEntityId ) {
+	public function entityExists( string $prefixedEntityId ): array {
 		$this->checkType( 'entityExists', 1, $prefixedEntityId, 'string' );
 
 		try {
@@ -524,14 +487,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for getEntityStatements in EntityAccessor
 	 *
-	 * @param string $prefixedEntityId
-	 * @param string $propertyId
 	 * @param string $rank Which statements to include. Either "best" or "all".
 	 *
 	 * @throws ScribuntoException
-	 * @return array
 	 */
-	public function getEntityStatements( $prefixedEntityId, $propertyId, $rank ) {
+	public function getEntityStatements( string $prefixedEntityId, string $propertyId, string $rank ): array {
 		$this->checkType( 'getEntityStatements', 1, $prefixedEntityId, 'string' );
 		$this->checkType( 'getEntityStatements', 2, $propertyId, 'string' );
 		$this->checkType( 'getEntityStatements', 3, $rank, 'string' );
@@ -553,13 +513,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	/**
 	 * Wrapper for getEntityId in WikibaseLanguageIndependentLuaBindings
-	 *
-	 * @param string $pageTitle
-	 * @param string|null $globalSiteId
-	 *
-	 * @return array
 	 */
-	public function getEntityId( $pageTitle, $globalSiteId = null ) {
+	public function getEntityId( string $pageTitle, string $globalSiteId = null ): array {
 		$this->checkType( 'getEntityId', 1, $pageTitle, 'string' );
 		$this->checkTypeOptional( 'getEntityId', 2, $globalSiteId, 'string', null );
 
@@ -571,7 +526,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @return string[]|null[]
 	 */
-	public function getEntityUrl( $entityIdSerialization ) {
+	public function getEntityUrl( string $entityIdSerialization ): array {
 		$this->checkType( 'getEntityUrl', 1, $entityIdSerialization, 'string' );
 
 		try {
@@ -585,28 +540,23 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return [ $url ];
 	}
 
-	/**
-	 * @return RepoLinker
-	 */
-	private function getRepoLinker() {
+	private function getRepoLinker(): RepoLinker {
 		if ( !$this->repoLinker ) {
 			$this->repoLinker = WikibaseClient::getRepoLinker();
 		}
 		return $this->repoLinker;
 	}
 
-	public function setRepoLinker( RepoLinker $repoLinker ) {
+	public function setRepoLinker( RepoLinker $repoLinker ): void {
 		$this->repoLinker = $repoLinker;
 	}
 
 	/**
 	 * Wrapper for getLabel in WikibaseLanguageDependentLuaBindings
 	 *
-	 * @param string $prefixedEntityId
-	 *
 	 * @return string[]|null[]
 	 */
-	public function getLabel( $prefixedEntityId ) {
+	public function getLabel( string $prefixedEntityId ): array {
 		$this->checkType( 'getLabel', 1, $prefixedEntityId, 'string' );
 
 		return $this->getLanguageDependentLuaBindings()->getLabel( $prefixedEntityId );
@@ -615,12 +565,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for getLabelByLanguage in WikibaseLanguageIndependentLuaBindings
 	 *
-	 * @param string $prefixedEntityId
-	 * @param string $languageCode
 	 *
 	 * @return string[]|null[]
 	 */
-	public function getLabelByLanguage( $prefixedEntityId, $languageCode ) {
+	public function getLabelByLanguage( string $prefixedEntityId, string $languageCode ): array {
 		$this->checkType( 'getLabelByLanguage', 1, $prefixedEntityId, 'string' );
 		$this->checkType( 'getLabelByLanguage', 2, $languageCode, 'string' );
 
@@ -630,11 +578,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for getDescription in WikibaseLanguageDependentLuaBindings
 	 *
-	 * @param string $prefixedEntityId
 	 *
 	 * @return string[]|null[]
 	 */
-	public function getDescription( $prefixedEntityId ) {
+	public function getDescription( string $prefixedEntityId ): array {
 		$this->checkType( 'getDescription', 1, $prefixedEntityId, 'string' );
 
 		return $this->getLanguageDependentLuaBindings()->getDescription( $prefixedEntityId );
@@ -643,12 +590,9 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for getSiteLinkPageName in WikibaseLanguageIndependentLuaBindings
 	 *
-	 * @param string $prefixedItemId
-	 * @param string|null $globalSiteId
-	 *
 	 * @return string[]
 	 */
-	public function getSiteLinkPageName( $prefixedItemId, $globalSiteId ) {
+	public function getSiteLinkPageName( string $prefixedItemId, ?string $globalSiteId ): array {
 		$this->checkType( 'getSiteLinkPageName', 1, $prefixedItemId, 'string' );
 		$this->checkTypeOptional( 'getSiteLinkPageName', 2, $globalSiteId, 'string', null );
 
@@ -658,12 +602,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for WikibaseLanguageIndependentLuaBindings::isValidEntityId
 	 *
-	 * @param string $entityIdSerialization
-	 *
 	 * @throws ScribuntoException
 	 * @return bool[] One bool telling whether the entity id is valid (parseable).
 	 */
-	public function isValidEntityId( $entityIdSerialization ) {
+	public function isValidEntityId( string $entityIdSerialization ): array {
 		$this->checkType( 'isValidEntityId', 1, $entityIdSerialization, 'string' );
 
 		return [ $this->getLanguageIndependentLuaBindings()->isValidEntityId( $entityIdSerialization ) ];
@@ -672,12 +614,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for SnakSerializationRenderer::renderSnak, set to output wikitext escaped plain text.
 	 *
-	 * @param array $snakSerialization
-	 *
 	 * @throws ScribuntoException
 	 * @return string[] Wikitext
 	 */
-	public function renderSnak( $snakSerialization ) {
+	public function renderSnak( array $snakSerialization ): array {
 		$this->checkType( 'renderSnak', 1, $snakSerialization, 'table' );
 
 		try {
@@ -694,12 +634,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for SnakSerializationRenderer::renderSnak, set to output rich wikitext.
 	 *
-	 * @param array $snakSerialization
-	 *
 	 * @throws ScribuntoException
 	 * @return string[] Wikitext
 	 */
-	public function formatValue( $snakSerialization ) {
+	public function formatValue( array $snakSerialization ): array {
 		$this->checkType( 'formatValue', 1, $snakSerialization, 'table' );
 
 		try {
@@ -721,7 +659,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @throws ScribuntoException
 	 * @return string[] Wikitext
 	 */
-	public function renderSnaks( $snaksSerialization ) {
+	public function renderSnaks( array $snaksSerialization ): array {
 		$this->checkType( 'renderSnaks', 1, $snaksSerialization, 'table' );
 
 		try {
@@ -743,7 +681,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @throws ScribuntoException
 	 * @return string[] Wikitext
 	 */
-	public function formatValues( $snaksSerialization ) {
+	public function formatValues( array $snaksSerialization ): array {
 		$this->checkType( 'formatValues', 1, $snaksSerialization, 'table' );
 
 		try {
@@ -760,11 +698,9 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for PropertyIdResolver
 	 *
-	 * @param string $propertyLabelOrId
-	 *
 	 * @return string[]|null[]
 	 */
-	public function resolvePropertyId( $propertyLabelOrId ) {
+	public function resolvePropertyId( string $propertyLabelOrId ): array {
 		$this->checkType( 'resolvePropertyId', 1, $propertyLabelOrId, 'string' );
 		try {
 			$propertyId = $this->getPropertyIdResolver()->resolvePropertyId(
@@ -783,7 +719,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @return array[]
 	 */
-	public function orderProperties( array $propertyIds ) {
+	public function orderProperties( array $propertyIds ): array {
 		if ( $propertyIds === [] ) {
 			return [ [] ];
 		}
@@ -813,26 +749,23 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * Return the order of properties as provided by the PropertyOrderProvider
 	 * @return array[] either int[][] or null[][]
 	 */
-	public function getPropertyOrder() {
+	public function getPropertyOrder(): array {
 		return [ $this->getPropertyOrderProvider()->getPropertyOrder() ];
 	}
 
 	/**
 	 * Increment the given stats key.
-	 *
-	 * @param string $key
 	 */
-	public function incrementStatsKey( $key ) {
+	public function incrementStatsKey( string $key ): void {
 		$this->getLuaFunctionCallTracker()->incrementKey( $key );
 	}
 
 	/**
 	 * Get the entity module name to use for the entity with this ID.
 	 *
-	 * @param string $prefixedEntityId
 	 * @return string[]
 	 */
-	public function getEntityModuleName( $prefixedEntityId ) {
+	public function getEntityModuleName( string $prefixedEntityId ): array {
 		$this->checkType( 'getEntityModuleName', 1, $prefixedEntityId, 'string' );
 
 		try {
@@ -845,21 +778,18 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return [ $moduleName ];
 	}
 
-	/**
-	 * @return PropertyOrderProvider
-	 */
-	private function getPropertyOrderProvider() {
+	private function getPropertyOrderProvider(): PropertyOrderProvider {
 		if ( !$this->propertyOrderProvider ) {
 			$this->propertyOrderProvider = WikibaseClient::getPropertyOrderProvider();
 		}
 		return $this->propertyOrderProvider;
 	}
 
-	public function setPropertyOrderProvider( PropertyOrderProvider $propertyOrderProvider ) {
+	public function setPropertyOrderProvider( PropertyOrderProvider $propertyOrderProvider ): void {
 		$this->propertyOrderProvider = $propertyOrderProvider;
 	}
 
-	private function getLuaEntityModules() {
+	private function getLuaEntityModules(): array {
 		if ( !$this->luaEntityModules ) {
 			$this->luaEntityModules = WikibaseClient::getEntityTypeDefinitions()
 				->get( EntityTypeDefinitions::LUA_ENTITY_MODULE );
