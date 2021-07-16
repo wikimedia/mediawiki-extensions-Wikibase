@@ -26,7 +26,6 @@ use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
 use Wikibase\Client\DataAccess\SnaksFinder;
-use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
@@ -406,28 +405,22 @@ return [
 	},
 
 	'WikibaseClient.EntitySourceAndTypeDefinitions' => function ( MediaWikiServices $services ): EntitySourceAndTypeDefinitions {
+		// note: when adding support for further entity source types here,
+		// also adjust the default 'entitySources' setting to copy sources of those types from the repo
 		return new EntitySourceAndTypeDefinitions(
 			[ EntitySource::TYPE_DB => WikibaseClient::getEntityTypeDefinitions( $services ) ],
 			WikibaseClient::getEntitySourceDefinitions( $services )->getSources()
 		);
 	},
 
-	// TODO: current settings (especially (foreign) repositories blob) might be quite confusing
-	// Having a "entitySources" or so setting might be better, and would also allow unifying
-	// the way these are configured in Repo and in Client parts
 	'WikibaseClient.EntitySourceDefinitions' => function ( MediaWikiServices $services ): EntitySourceDefinitions {
 		$settings = WikibaseClient::getSettings( $services );
 		$subEntityTypesMapper = new SubEntityTypesMapper( WikibaseClient::getEntityTypeDefinitions( $services )
 			->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) );
 
-		if ( $settings->hasSetting( 'entitySources' ) && !empty( $settings->getSetting( 'entitySources' ) ) ) {
-			$configParser = new EntitySourceDefinitionsConfigParser();
+		$configParser = new EntitySourceDefinitionsConfigParser();
 
-			return $configParser->newDefinitionsFromConfigArray( $settings->getSetting( 'entitySources' ), $subEntityTypesMapper );
-		}
-
-		$parser = new EntitySourceDefinitionsLegacyClientSettingsParser();
-		return $parser->newDefinitionsFromSettings( $settings, $subEntityTypesMapper );
+		return $configParser->newDefinitionsFromConfigArray( $settings->getSetting( 'entitySources' ), $subEntityTypesMapper );
 	},
 
 	'WikibaseClient.EntityTypeDefinitions' => function ( MediaWikiServices $services ): EntityTypeDefinitions {

@@ -3,6 +3,7 @@
 use MediaWiki\MediaWikiServices;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\WikibaseRepo;
@@ -125,8 +126,6 @@ return call_user_func( function() {
 		'trackLuaFunctionCallsPerSiteGroup' => false,
 		'trackLuaFunctionCallsPerWiki' => false,
 		'trackLuaFunctionCallsSampleRate' => 1,
-		'itemAndPropertySourceName' => 'local',
-		'entitySources' => [],
 
 		'dataBridgeEnabled' => false, # if true, the next setting must also be specified
 		# 'dataBridgeHrefRegExp' => '^http://localhost/index\.php/(Item:(Q[1-9][0-9]*)).*#(P[1-9][0-9]*)$',
@@ -167,19 +166,49 @@ return call_user_func( function() {
 		return WikibaseSettings::isRepoEnabled();
 	};
 
-	$defaults['repositories'] = function ( SettingsArray $settings ) {
+	$defaults['entitySources'] = function ( SettingsArray $settings ) {
 		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
-			return [
-				'' => [
-					'repoDatabase' => false,
-					'baseUri' => $settings->getSetting( 'repoUrl' ) . '/entity/',
-					'entityNamespaces' => WikibaseRepo::getSettings()->getSetting( 'entityNamespaces' ),
-					'prefixMapping' => [ '' => '' ],
-				]
-			];
+			// copy the repo’s effective entitySources setting
+			$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions();
+			$entitySources = [];
+
+			foreach ( $entitySourceDefinitions->getSources() as $source ) {
+				if ( $source->getType() !== EntitySource::TYPE_DB ) {
+					// WikibaseClient.EntitySourceAndTypeDefinitions service wiring can’t parse other types yet
+					continue;
+				}
+
+				$entityNamespaces = [];
+				foreach ( $source->getEntityTypes() as $entityType ) {
+					$entityNamespaces[$entityType] = $source->getEntityNamespaceIds()[$entityType]
+						. '/' . $source->getEntitySlotNames()[$entityType];
+				}
+
+				$entitySources[$source->getSourceName()] = [
+					'repoDatabase' => $source->getDatabaseName(),
+					'entityNamespaces' => $entityNamespaces,
+					'baseUri' => $source->getConceptBaseUri(),
+					'rdfNodeNamespacePrefix' => $source->getRdfNodeNamespacePrefix(),
+					'rdfPredicateNamespacePrefix' => $source->getRdfPredicateNamespacePrefix(),
+					'interwikiPrefix' => $source->getInterwikiPrefix(),
+					'type' => $source->getType(),
+				];
+			}
+
+			return $entitySources;
 		}
 
-		throw new Exception( 'repositories must be configured for non-repo client wikis' );
+		throw new Exception( 'entitySources must be configured for non-repo client wikis' );
+	};
+
+	$defaults['entityNamespaces'] = []; // unused but needed by WikibaseSettings; TODO remove
+
+	$defaults['itemAndPropertySourceName'] = function ( SettingsArray $settings ) {
+		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
+			return WikibaseRepo::getSettings()->getSetting( 'localEntitySourceName' );
+		}
+
+		return 'local';
 	};
 
 	$defaults['repoSiteName'] = function ( SettingsArray $settings ) {
@@ -224,14 +253,13 @@ return call_user_func( function() {
 	};
 
 	$defaults['changesDatabase'] = function ( SettingsArray $settings ) {
-		// Per default, the database for tracking changes is the local repo's database.
-		// Note that the value for the repoDatabase setting may be calculated dynamically,
-		// see above in 'repositories' setting.
 		if ( $settings->hasSetting( 'repoDatabase' ) ) {
+			// TODO probably remove this? repoDatabase setting is ancient (see Ibbdb5d0317)
 			return $settings->getSetting( 'repoDatabase' );
 		}
-		$repositorySettings = $settings->getSetting( 'repositories' );
-		return $repositorySettings['']['repoDatabase'];
+		$entitySources = $settings->getSetting( 'entitySources' );
+		$itemAndPropertySourceName = $settings->getSetting( 'itemAndPropertySourceName' );
+		return $entitySources[$itemAndPropertySourceName]['repoDatabase'];
 	};
 
 	$defaults['siteGlobalID'] = function ( SettingsArray $settings ) {
@@ -241,13 +269,13 @@ return call_user_func( function() {
 	};
 
 	$defaults['repoSiteId'] = function( SettingsArray $settings ) {
-		// If repoDatabase is set, then default is same as repoDatabase
-		// otherwise, defaults to siteGlobalID
 		if ( $settings->hasSetting( 'repoDatabase' ) ) {
+			// TODO probably remove this? repoDatabase setting is ancient (see Ibbdb5d0317)
 			$repoDatabase = $settings->getSetting( 'repoDatabase' );
 		} else {
-			$repositorySettings = $settings->getSetting( 'repositories' );
-			$repoDatabase = $repositorySettings['']['repoDatabase'];
+			$entitySources = $settings->getSetting( 'entitySources' );
+			$itemAndPropertySourceName = $settings->getSetting( 'itemAndPropertySourceName' );
+			$repoDatabase = $entitySources[$itemAndPropertySourceName]['repoDatabase'];
 		}
 
 		return ( $repoDatabase === false )

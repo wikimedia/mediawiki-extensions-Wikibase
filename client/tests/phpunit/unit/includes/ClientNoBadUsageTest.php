@@ -17,12 +17,10 @@ class ClientNoBadUsageTest extends NoBadUsageTest {
 		return [
 			// don’t reference repo in client
 			'WikibaseRepo::' => [
-				'config/WikibaseClient.default.php' => 2, // both guarded by thisWikiIsTheRepo
-				'tests/phpunit/ClientDefaultsTest.php' => 1, // guarded by isRepoEnabled()
+				'config/WikibaseClient.default.php' => 3, // all guarded by thisWikiIsTheRepo
 			],
 			'Wikibase\\Repo\\' => [
 				'config/WikibaseClient.default.php' => 1, // see above
-				'tests/phpunit/ClientDefaultsTest.php' => 1, // see above
 			],
 			'Wikibase\\\\Repo\\\\' => [],
 			// don’t use MediaWiki RDBMS – use our RDBMS instead (DomainDb etc.)

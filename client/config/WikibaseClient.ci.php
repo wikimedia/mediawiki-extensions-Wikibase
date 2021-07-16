@@ -26,15 +26,17 @@ $wgWBClientSettings['dataBridgeEditTags'] = [ 'Data Bridge' ];
 // if this is a Client-only wiki, configure a fake Repo
 if ( !( $wgEnableWikibaseRepo ?? true ) ) {
 	$wgWBClientSettings['repoUrl'] = 'https://ci.wikibase.example';
-	$wgWBClientSettings['repositories'] = [
-		'' => [
+	$wgWBClientSettings['entitySources'] = [
+		'local' => [
 			'repoDatabase' => 'repo',
 			'baseUri' => $wgWBClientSettings['repoUrl'] . '/entity',
 			'entityNamespaces' => [
 				'item' => 120,
 				'property' => 122,
 			],
-			'prefixMapping' => [ '' => '' ],
-		]
+			'rdfNodeNamespacePrefix' => 'wd',
+			'rdfPredicateNamespacePrefix' => '',
+			'interwikiPrefix' => '',
+		],
 	];
 }
