@@ -15,8 +15,7 @@ use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\RepoLinker;
-use Wikibase\Client\Usage\EntityUsageFactory;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingLanguageFallbackLabelDescriptionLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
@@ -68,7 +67,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private $termFallbackChain = null;
 
 	/**
-	 * @var ParserOutputUsageAccumulator|null
+	 * @var UsageAccumulator|null
 	 */
 	private $usageAccumulator = null;
 
@@ -149,13 +148,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return $this->termFallbackChain;
 	}
 
-	public function getUsageAccumulator(): ParserOutputUsageAccumulator {
+	public function getUsageAccumulator(): UsageAccumulator {
 		if ( $this->usageAccumulator === null ) {
 			$parserOutput = $this->getParser()->getOutput();
-			$this->usageAccumulator = new ParserOutputUsageAccumulator(
-				$parserOutput,
-				new EntityUsageFactory( WikibaseClient::getEntityIdParser() )
-			);
+			$usageAccumulatorFactory = WikibaseClient::getUsageAccumulatorFactory();
+			$this->usageAccumulator = $usageAccumulatorFactory->newFromParserOutput( $parserOutput );
 		}
 
 		return $this->usageAccumulator;

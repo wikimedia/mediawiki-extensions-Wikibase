@@ -98,19 +98,19 @@
 			"class": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler::factory",
 			"services": [
-				"WikibaseClient.EntityIdParser",
 				"WikibaseClient.LangLinkHandlerFactory",
 				"WikibaseClient.NamespaceChecker",
-				"WikibaseClient.ParserOutputDataUpdater"
+				"WikibaseClient.ParserOutputDataUpdater",
+				"WikibaseClient.UsageAccumulatorFactory"
 			]
 		},
 		"DataUpdate": {
 			"class": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler::factory",
 			"services": [
-				"WikibaseClient.EntityIdParser",
 				"WikibaseClient.Logger",
-				"WikibaseClient.Store"
+				"WikibaseClient.Store",
+				"WikibaseClient.UsageAccumulatorFactory"
 			]
 		},
 		"DeletePageNoticeCreator": {

@@ -10,9 +10,7 @@ use ParserOutput;
 use Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
-use Wikibase\Client\Usage\EntityUsageFactory;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Client\Usage\UsageAccumulatorFactory;
 
 /**
  * @license GPL-2.0-or-later
@@ -35,33 +33,33 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 	private $parserOutputDataUpdater;
 
 	/**
-	 * @var EntityUsageFactory
+	 * @var UsageAccumulatorFactory
 	 */
-	private $entityUsageFactory;
+	private $usageAccumulatorFactory;
 
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		LangLinkHandlerFactory $langLinkHandlerFactory,
 		ClientParserOutputDataUpdater $parserOutputDataUpdater,
-		EntityUsageFactory $entityUsageFactory
+		UsageAccumulatorFactory $usageAccumulatorFactory
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->langLinkHandlerFactory = $langLinkHandlerFactory;
 		$this->parserOutputDataUpdater = $parserOutputDataUpdater;
-		$this->entityUsageFactory = $entityUsageFactory;
+		$this->usageAccumulatorFactory = $usageAccumulatorFactory;
 	}
 
 	public static function factory(
-		EntityIdParser $entityIdParser,
 		LangLinkHandlerFactory $langLinkHandlerFactory,
 		NamespaceChecker $namespaceChecker,
-		ClientParserOutputDataUpdater $parserOutputDataUpdater
+		ClientParserOutputDataUpdater $parserOutputDataUpdater,
+		UsageAccumulatorFactory $usageAccumulatorFactory
 	): self {
 		return new self(
 			$namespaceChecker,
 			$langLinkHandlerFactory,
 			$parserOutputDataUpdater,
-			new EntityUsageFactory( $entityIdParser )
+			$usageAccumulatorFactory
 		);
 	}
 
@@ -92,7 +90,7 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 			return;
 		}
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $parserOutput, $this->entityUsageFactory );
+		$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutput( $parserOutput );
 		$langLinkHandler = $this->langLinkHandlerFactory->getLangLinkHandler( $usageAccumulator );
 		$useRepoLinks = $langLinkHandler->useRepoLinks( $title, $parserOutput );
 

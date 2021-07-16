@@ -42,6 +42,8 @@ use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\Usage\EntityUsageFactory;
+use Wikibase\Client\Usage\UsageAccumulatorFactory;
+use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
@@ -603,7 +605,7 @@ return [
 			WikibaseClient::getOtherProjectsSidebarGeneratorFactory( $services ),
 			WikibaseClient::getStore( $services )->getSiteLinkLookup(),
 			WikibaseClient::getEntityLookup( $services ),
-			new EntityUsageFactory( WikibaseClient::getEntityIdParser( $services ) ),
+			WikibaseClient::getUsageAccumulatorFactory( $services ),
 			WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' ),
 			WikibaseClient::getLogger( $services )
 		);
@@ -899,9 +901,7 @@ return [
 			new SnaksFinder(),
 			WikibaseClient::getRestrictedEntityLookup( $services ),
 			WikibaseClient::getDataAccessSnakFormatterFactory( $services ),
-			new EntityUsageFactory(
-				WikibaseClient::getEntityIdParser( $services )
-			),
+			WikibaseClient::getUsageAccumulatorFactory( $services ),
 			$services->getLanguageConverterFactory(),
 			WikibaseClient::getSettings( $services )
 				->getSetting( 'allowDataAccessInUserLanguage' )
@@ -965,6 +965,16 @@ return [
 	'WikibaseClient.TermsLanguages' => function ( MediaWikiServices $services ): ContentLanguages {
 		return WikibaseClient::getWikibaseContentLanguages( $services )
 			->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
+	},
+
+	'WikibaseClient.UsageAccumulatorFactory' => function ( MediaWikiServices $services ): UsageAccumulatorFactory {
+		$usageModifierLimits = WikibaseClient::getSettings( $services )->getSetting(
+			'entityUsageModifierLimits'
+		);
+		return new UsageAccumulatorFactory(
+			new EntityUsageFactory( WikibaseClient::getEntityIdParser( $services ) ),
+			new UsageDeduplicator( $usageModifierLimits )
+		);
 	},
 
 	'WikibaseClient.UserLanguage' => function ( MediaWikiServices $services ): Language {

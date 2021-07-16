@@ -23,6 +23,8 @@ use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\EntityUsageFactory;
+use Wikibase\Client\Usage\UsageAccumulatorFactory;
+use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -159,6 +161,13 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		return new SettingsArray( $defaults );
 	}
 
+	private function newUsageAccumulatorFactory(): UsageAccumulatorFactory {
+		return new UsageAccumulatorFactory(
+			new EntityUsageFactory( new BasicEntityIdParser() ),
+			new UsageDeduplicator( [] )
+		);
+	}
+
 	private function newParserOutputUpdateHookHandler( array $siteLinkData ) {
 		$settings = $this->newSettings();
 
@@ -175,7 +184,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$namespaceChecker,
 			$langLinkHandlerFactory,
 			$parserOutputDataUpdater,
-			new EntityUsageFactory( new BasicEntityIdParser() )
+			$this->newUsageAccumulatorFactory()
 		);
 	}
 
@@ -389,7 +398,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$namespaceChecker,
 			$langLinkHandlerFactory,
 			$this->newParserOutputDataUpdater( $mockRepo, [ $itemId => [ $siteLink ] ] ),
-			$this->createMock( EntityUsageFactory::class )
+			$this->newUsageAccumulatorFactory()
 		);
 
 		$title = Title::makeTitle( NS_MAIN, 'Foobarium' );
@@ -444,7 +453,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo, $siteLinkData ),
 			$mockRepo,
 			$mockRepo,
-			new EntityUsageFactory( new BasicEntityIdParser() ),
+			$this->newUsageAccumulatorFactory(),
 			$settings->getSetting( 'siteGlobalID' )
 		);
 	}

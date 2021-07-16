@@ -7,7 +7,7 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\Client\Usage\UsageAccumulatorFactory;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\SettingsArray;
@@ -28,8 +28,7 @@ class StatementGroupRendererFactoryTest extends ServiceWiringTestCase {
 			$this->createMock( RestrictedEntityLookup::class ) );
 		$this->mockService( 'WikibaseClient.DataAccessSnakFormatterFactory',
 			$this->createMock( DataAccessSnakFormatterFactory::class ) );
-		$this->mockService( 'WikibaseClient.EntityIdParser',
-			new ItemIdParser() );
+		$this->mockService( 'WikibaseClient.UsageAccumulatorFactory', $this->createMock( UsageAccumulatorFactory::class ) );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getLanguageConverterFactory' );
 		$this->mockService( 'WikibaseClient.Settings',

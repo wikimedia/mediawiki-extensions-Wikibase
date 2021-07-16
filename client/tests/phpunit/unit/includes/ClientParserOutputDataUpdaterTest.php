@@ -13,7 +13,8 @@ use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\EntityUsageFactory;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulatorFactory;
+use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -78,13 +79,16 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$this->getOtherProjectsSidebarGeneratorFactory( $otherProjects ),
 			$this->mockRepo,
 			$this->mockRepo,
-			$this->newEntityUsageFactory(),
+			$this->newUsageAccumulatorFactory(),
 			'srwiki'
 		);
 	}
 
-	private function newEntityUsageFactory(): EntityUsageFactory {
-		return new EntityUsageFactory( new BasicEntityIdParser() );
+	private function newUsageAccumulatorFactory(): UsageAccumulatorFactory {
+		return new UsageAccumulatorFactory(
+			new EntityUsageFactory( new BasicEntityIdParser() ),
+			new UsageDeduplicator( [] )
+		);
 	}
 
 	/**
@@ -148,10 +152,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function assertUsageTracking( ItemId $id, $aspect, ParserOutput $parserOutput ): void {
-		$usageAcc = new ParserOutputUsageAccumulator(
-			$parserOutput,
-			$this->newEntityUsageFactory()
-		);
+		$usageAcc = $this->newUsageAccumulatorFactory()->newFromParserOutput( $parserOutput );
 		$usage = $usageAcc->getUsages();
 		$expected = new EntityUsage( $id, $aspect );
 
@@ -263,7 +264,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$this->getOtherProjectsSidebarGeneratorFactory( [] ),
 			$siteLinkLookup,
 			$mockRepoNoSiteLinks,
-			$this->newEntityUsageFactory(),
+			$this->newUsageAccumulatorFactory(),
 			'srwiki',
 			$logger
 		);
@@ -291,7 +292,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$this->getOtherProjectsSidebarGeneratorFactory( [] ),
 			$siteLinkLookup,
 			new MockRepository(),
-			$this->newEntityUsageFactory(),
+			$this->newUsageAccumulatorFactory(),
 			'srwiki',
 			$logger
 		);

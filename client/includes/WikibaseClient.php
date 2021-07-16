@@ -24,6 +24,7 @@ use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\DescriptionLookup;
+use Wikibase\Client\Usage\UsageAccumulatorFactory;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
@@ -524,6 +525,11 @@ final class WikibaseClient {
 	public static function getEntitySourceAndTypeDefinitions( ContainerInterface $services = null ): EntitySourceAndTypeDefinitions {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntitySourceAndTypeDefinitions' );
+	}
+
+	public static function getUsageAccumulatorFactory( ContainerInterface $services = null ): UsageAccumulatorFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.UsageAccumulatorFactory' );
 	}
 
 }

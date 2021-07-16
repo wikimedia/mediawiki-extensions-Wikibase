@@ -9,7 +9,7 @@ use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\Client\Usage\UsageAccumulatorFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\HashSiteLinkStore;
@@ -34,14 +34,13 @@ class ParserOutputDataUpdaterTest extends ServiceWiringTestCase {
 			$store );
 		$this->mockService( 'WikibaseClient.EntityLookup',
 			new InMemoryEntityLookup() );
-		$this->mockService( 'WikibaseClient.EntityIdParser',
-			new ItemIdParser() );
 		$this->mockService( 'WikibaseClient.Settings',
 			new SettingsArray( [
 				'siteGlobalID' => 'testwiki',
 			] ) );
 		$this->mockService( 'WikibaseClient.Logger',
 			new NullLogger() );
+		$this->mockService( 'WikibaseClient.UsageAccumulatorFactory', $this->createMock( UsageAccumulatorFactory::class ) );
 
 		$this->assertInstanceOf(
 			ClientParserOutputDataUpdater::class,

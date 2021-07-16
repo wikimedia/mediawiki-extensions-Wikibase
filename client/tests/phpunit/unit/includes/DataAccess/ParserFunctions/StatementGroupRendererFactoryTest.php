@@ -19,7 +19,8 @@ use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\VariantsAwareRenderer;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Usage\EntityUsageFactory;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulatorFactory;
+use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -141,10 +142,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testTitleUsageTracking( string $wikitextType, string $expectedWikitext, bool $titleUsageExpected ): void {
 		$parser = $this->getParser();
-		$usageAccumulator = new ParserOutputUsageAccumulator(
-			$parser->getOutput(),
-			new EntityUsageFactory( new BasicEntityIdParser() )
-		);
+		$usageAccumulator = $this->newUsageAccumulatorFactory()->newFromParserOutput( $parser->getOutput() );
 
 		$this->getStatementGroupRendererFactory()
 			->newRendererFromParser( $parser, $wikitextType )
@@ -170,10 +168,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$rendererFactory = $this->getStatementGroupRendererFactory( $allowDataAccessInUserLanguage );
 		$renderer = $rendererFactory->newRendererFromParser( $parser, DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator(
-			$parser->getOutput(),
-			new EntityUsageFactory( new BasicEntityIdParser() )
-		);
+		$usageAccumulator = $this->newUsageAccumulatorFactory()->newFromParserOutput( $parser->getOutput() );
 
 		$renderer->render( new ItemId( 'Q1' ), 'P1' );
 
@@ -219,7 +214,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 				new ItemIdParser(),
 				$this->getLanguageFallbackLabelDescriptionLookupFactory()
 			),
-			new EntityUsageFactory( new BasicEntityIdParser() ),
+			$this->newUsageAccumulatorFactory(),
 			$this->createMock( LanguageConverterFactory::class ),
 			$allowDataAccessInUserLanguage
 		);
@@ -249,9 +244,16 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 				new ItemIdParser(),
 				$this->getLanguageFallbackLabelDescriptionLookupFactory()
 			),
-			new EntityUsageFactory( new BasicEntityIdParser() ),
+			$this->newUsageAccumulatorFactory(),
 			MediaWikiServices::getInstance()->getLanguageConverterFactory(),
 			$allowDataAccessInUserLanguage
+		);
+	}
+
+	private function newUsageAccumulatorFactory(): UsageAccumulatorFactory {
+		return new UsageAccumulatorFactory(
+			new EntityUsageFactory( new BasicEntityIdParser() ),
+			new UsageDeduplicator( [] )
 		);
 	}
 

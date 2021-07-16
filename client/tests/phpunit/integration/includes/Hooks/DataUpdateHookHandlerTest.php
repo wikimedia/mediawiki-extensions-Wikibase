@@ -13,7 +13,8 @@ use Wikibase\Client\Hooks\DataUpdateHookHandler;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\EntityUsageFactory;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulatorFactory;
+use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
@@ -164,7 +165,14 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$usageUpdater,
 			$jobScheduler,
 			$usageLookup,
-			new EntityUsageFactory( new BasicEntityIdParser() )
+			$this->newUsageAccumulatorFactory()
+		);
+	}
+
+	private function newUsageAccumulatorFactory(): UsageAccumulatorFactory {
+		return new UsageAccumulatorFactory(
+			new EntityUsageFactory( new BasicEntityIdParser() ),
+			new UsageDeduplicator( [] )
 		);
 	}
 
@@ -175,10 +183,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$output = new ParserOutput();
 
 		if ( $usages ) {
-			$acc = new ParserOutputUsageAccumulator(
-				$output,
-				new EntityUsageFactory( new BasicEntityIdParser() )
-			);
+			$acc = $this->newUsageAccumulatorFactory()->newFromParserOutput( $output );
 
 			foreach ( $usages as $u ) {
 				$acc->addUsage( $u );
@@ -297,7 +302,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$usageUpdater,
 			$jobScheduler,
 			$usageLookup,
-			new EntityUsageFactory( new BasicEntityIdParser() )
+			$this->newUsageAccumulatorFactory()
 		);
 		$handler->onParserCacheSaveComplete( null, $parserOutput, $title, null, null );
 	}
@@ -331,7 +336,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$usageUpdater,
 			$jobScheduler,
 			$usageLookup,
-			new EntityUsageFactory( new BasicEntityIdParser() )
+			$this->newUsageAccumulatorFactory()
 		);
 		$handler->onParserCacheSaveComplete( null, $parserOutput, $title, null, null );
 	}

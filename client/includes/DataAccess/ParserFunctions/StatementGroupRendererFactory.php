@@ -13,9 +13,8 @@ use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
-use Wikibase\Client\Usage\EntityUsageFactory;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulatorFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 
@@ -52,9 +51,9 @@ class StatementGroupRendererFactory {
 	private $dataAccessSnakFormatterFactory;
 
 	/**
-	 * @var EntityUsageFactory
+	 * @var UsageAccumulatorFactory
 	 */
-	private $entityUsageFactory;
+	private $usageAccumulatorFactory;
 
 	/**
 	 * @var LanguageConverterFactory
@@ -71,7 +70,7 @@ class StatementGroupRendererFactory {
 		SnaksFinder $snaksFinder,
 		EntityLookup $entityLookup,
 		DataAccessSnakFormatterFactory $dataAccessSnakFormatterFactory,
-		EntityUsageFactory $entityUsageFactory,
+		UsageAccumulatorFactory $usageAccumulatorFactory,
 		LanguageConverterFactory $langConvFactory,
 		bool $allowDataAccessInUserLanguage
 	) {
@@ -79,7 +78,7 @@ class StatementGroupRendererFactory {
 		$this->snaksFinder = $snaksFinder;
 		$this->entityLookup = $entityLookup;
 		$this->dataAccessSnakFormatterFactory = $dataAccessSnakFormatterFactory;
-		$this->entityUsageFactory = $entityUsageFactory;
+		$this->usageAccumulatorFactory = $usageAccumulatorFactory;
 		$this->langConvFactory = $langConvFactory;
 		$this->allowDataAccessInUserLanguage = $allowDataAccessInUserLanguage;
 	}
@@ -92,7 +91,7 @@ class StatementGroupRendererFactory {
 		Parser $parser,
 		string $type = DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT
 	): StatementGroupRenderer {
-		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput(), $this->entityUsageFactory );
+		$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutput( $parser->getOutput() );
 
 		if ( $this->allowDataAccessInUserLanguage ) {
 			// Use the user's language.

@@ -14,7 +14,9 @@ use User;
 use Wikibase\Client\Tests\Integration\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\Tests\Mocks\MockClientStore;
 use Wikibase\Client\Usage\EntityUsageFactory;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulatorFactory;
+use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -92,11 +94,12 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 		);
 	}
 
-	private function newParserOutputUsageAccumulator( ParserOutput $parserOutput ): ParserOutputUsageAccumulator {
-		return new ParserOutputUsageAccumulator(
-			$parserOutput,
-			new EntityUsageFactory( new BasicEntityIdParser() )
+	private function newParserOutputUsageAccumulator( ParserOutput $parserOutput ): UsageAccumulator {
+		$factory = new UsageAccumulatorFactory(
+			new EntityUsageFactory( new BasicEntityIdParser() ),
+			new UsageDeduplicator( [] )
 		);
+		return $factory->newFromParserOutput( $parserOutput );
 	}
 
 	protected function tearDown(): void {
