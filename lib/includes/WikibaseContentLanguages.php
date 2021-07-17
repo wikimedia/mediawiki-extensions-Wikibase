@@ -155,6 +155,7 @@ class WikibaseContentLanguages {
 					'brx', // T155369
 					'cal', // T266423
 					'ccp', // T210311
+					'cdo-hani', // T180771
 					'chn', // T155370
 					'ckt', // T240097
 					'clc', // T222020
@@ -178,6 +179,8 @@ class WikibaseContentLanguages {
 					'gmy', // T155421
 					'gsw-fr', // T262922
 					'hai', // T138131
+					'hak-hans', // T180771
+					'hak-hant', // T180771
 					'haz', // T155374
 					'hbo', // T155368
 					'ja-hani', // T195816
