@@ -63,7 +63,7 @@ class SkinAfterPortletHandler implements SkinAfterPortletHook {
 	}
 
 	/**
-	 * Sets the the appropriate languages action link (edit|add) or none for this title and context
+	 * Sets the appropriate languages action link (edit|add) or none for this title and context
 	 *
 	 * @see RepoItemLinkGenerator::getLink()
 	 *

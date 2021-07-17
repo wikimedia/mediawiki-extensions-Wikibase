@@ -77,7 +77,7 @@ class ApiEntityLookup {
 	}
 
 	/**
-	 * Getter for the the federated entity result data.
+	 * Getter for the federated entity result data.
 	 * If not currently in cache it will make a new request.
 	 * @param EntityId $entityId
 	 * @return array containing the part of the wbgetentities response for the given entity id
