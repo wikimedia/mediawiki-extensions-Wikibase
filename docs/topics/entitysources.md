@@ -30,6 +30,7 @@ Configuration of each source is an associative array containing the following ke
  - `interwikiPrefix`: An interwiki prefix configured in the local wiki referring to the wiki related to the entity source.
  - `rdfNodeNamespacePrefix`: A prefix used in RDF turtle node namespaces, e.g. 'wd' would result in namespaces like 'wd' for the entity namespace, and 'wdt' for the direct claim namespace, whereas 'sdc' prefix would result in the namespaces 'sdc' and 'sdct' accordingly.
  - `rdfPredicateNamespacePrefix`: A prefix used in RDF turtle predicate namespaces, e.g. '' would result in namespaces like 'ps' for the simple value claim namespace, whereas 'sdc' prefix would result in the namespace 'sdcps'.
+ - `type`: Type of source of the entities. It can be `db` if the entity source is a local database and `api` if the entity is from a federated source. see [Federated Properties]. The default value is `db`.
 
 ### Single entity source example
 
@@ -44,6 +45,7 @@ $entitySources = [
         'interwikiPrefix' => 'SOME_INTERWIKI',
         'rdfNodeNamespacePrefix' => 'SOME_NODERDFPREFIX',
         'rdfPredicateNamespacePrefix' => 'SOME_PREDICATERDFPREFIX',
+        'type' => 'db'
     ],
 ];
 $wgWBRepoSettings['entitySources'] = $entitySources;
@@ -84,6 +86,7 @@ $wgWBClientSettings['entitySources'] = $entitySources;
 ```
 
 [federation]: @ref md_docs_topics_federation
+[Federated Properties]: @ref md_docs_components_repo-federated-properties
 [client repo relationship]: @ref md_docs_topics_repo-client-relationship
 [EntitySource]: @ref Wikibase::DataAccess::EntitySource
 [EntitySourceDefinitions]: @ref Wikibase::DataAccess::EntitySourceDefinitions
