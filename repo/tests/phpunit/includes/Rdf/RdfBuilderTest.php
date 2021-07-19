@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Rdf;
 
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
+use RequestContext;
 use SiteLookup;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -14,6 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SubEntityTypesMapper;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Rdf\DedupeBag;
@@ -55,6 +57,11 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	 */
 	private $helper;
 
+	/**
+	 * @var WikibaseSettings
+	 */
+	private $settings;
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -66,6 +73,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$this->helper->setAllBlanksEqual( false );
+		$this->settings = clone WikibaseRepo::getSettings();
 	}
 
 	/**
@@ -214,7 +222,12 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			) {
 				$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions();
 				$labelPredicates = $entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES );
-				$languageCodes = WikibaseRepo::getTermsLanguages()->getLanguages();
+				if ( $this->settings->getSetting( 'tmpUseRequestLanguagesForRdfOutput' ) === true ) {
+					$languageFallbackFactory = WikibaseRepo::getLanguageFallbackChainFactory();
+					$languageCodes = $languageFallbackFactory->newFromContext( RequestContext::getMain() )->getFetchLanguageCodes();
+				} else {
+					$languageCodes = WikibaseRepo::getTermsLanguages()->getLanguages();
+				}
 
 				return new ItemStubRdfBuilder(
 					$this->getTestData()->getMockTermLookup( false ),
@@ -357,6 +370,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testAddEntityStub(): void {
+		$this->settings->setSetting( 'tmpUseRequestLanguagesForRdfOutput', false );
 		$entityId = $this->getEntityData( 'Q2' )->getId();
 		$builder = $this->newRdfBuilder(
 			RdfProducer::PRODUCE_ALL_STATEMENTS |
@@ -370,6 +384,24 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$builder->addEntityStub( $entityId );
 
 		$this->helper->assertNTriplesEqualsDataset( [ 'Q2_stub' ], $builder->getRDF() );
+	}
+
+	public function testAddEntityStubLangSet(): void {
+		$this->settings->setSetting( 'tmpUseRequestLanguagesForRdfOutput', true );
+		$this->setUserLang( 'de' );
+		$entityId = $this->getEntityData( 'Q2' )->getId();
+		$builder = $this->newRdfBuilder(
+			RdfProducer::PRODUCE_ALL_STATEMENTS |
+			RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
+			RdfProducer::PRODUCE_QUALIFIERS |
+			RdfProducer::PRODUCE_REFERENCES |
+			RdfProducer::PRODUCE_SITELINKS |
+			RdfProducer::PRODUCE_VERSION_INFO |
+			RdfProducer::PRODUCE_FULL_VALUES
+		);
+		$builder->addEntityStub( $entityId );
+
+		$this->helper->assertNTriplesEqualsDataset( [ 'Q2_stub_request_languages' ], $builder->getRDF() );
 	}
 
 	public function testAddSubEntity(): void {

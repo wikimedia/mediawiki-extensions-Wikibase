@@ -30,6 +30,7 @@ use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\Store\CachingPrefetchingTermLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
@@ -172,7 +173,12 @@ return [
 			$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions();
 			$labelPredicates = $entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES );
 			$termLookup = WikibaseRepo::getPrefetchingTermLookup();
-			$languageCodes = WikibaseRepo::getTermsLanguages()->getLanguages();
+			if ( WikibaseRepo::getSettings()->getSetting( 'tmpUseRequestLanguagesForRdfOutput' ) === true ) {
+				$languageFallbackFactory = WikibaseRepo::getLanguageFallbackChainFactory();
+				$languageCodes = $languageFallbackFactory->newFromContext( RequestContext::getMain() )->getFetchLanguageCodes();
+			} else {
+				$languageCodes = WikibaseRepo::getTermsLanguages()->getLanguages();
+			}
 
 			return new ItemStubRdfBuilder(
 				$termLookup,
@@ -379,8 +385,14 @@ return [
 			$entityLookup = WikibaseRepo::getEntityLookup();
 			$termLookup = new EntityRetrievingTermLookup( $entityLookup );
 			$propertyDataLookup = WikibaseRepo::getPropertyDataTypeLookup();
-			$termsLanguages = WikibaseRepo::getTermsLanguages();
 			$dataTypes = WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes();
+			if ( WikibaseRepo::getSettings()->getSetting( 'tmpUseRequestLanguagesForRdfOutput' ) === true ) {
+				$languageFallbackFactory = WikibaseRepo::getLanguageFallbackChainFactory();
+				$languageCodes = $languageFallbackFactory->newFromContext( RequestContext::getMain() )->getFetchLanguageCodes();
+				$termsLanguages = new StaticContentLanguages( $languageCodes );
+			} else {
+				$termsLanguages = WikibaseRepo::getTermsLanguages();
+			}
 
 			return new PropertyStubRdfBuilder(
 				$termLookup,
