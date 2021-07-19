@@ -18,6 +18,7 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Tests\MockRepository;
@@ -131,20 +132,17 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	/**
-	 * @param $params
-	 * @param EntityLookup $entityLookup
-	 * @param EntityStore $entityStore
-	 * @param SummaryFormatter $summaryFormatter
-	 * @param string $normalizedPageName
-	 * @param Item $titleItem
-	 * @param EntityRevisionLookup|null $editEntityLookup
-	 * @param EntityStore|null $editEntityStore
-	 *
-	 * @return UpdateRepoOnMoveJob
-	 */
-	private function getJob( $params, $entityLookup, $entityStore, $summaryFormatter,
-		$normalizedPageName, $titleItem, $editEntityLookup = null, $editEntityStore = null ) {
+	private function getJob(
+		array $params,
+		EntityLookup $entityLookup,
+		EntityStore $entityStore,
+		SummaryFormatter $summaryFormatter,
+		string $normalizedPageName,
+		Item $titleItem,
+		EntityRevisionLookup $editEntityLookup = null,
+		EntityStore $editEntityStore = null,
+		array $tags = []
+	): UpdateRepoOnMoveJob {
 
 		if ( !isset( $editEntityLookup ) ) {
 			$editEntityLookup = $entityLookup;
@@ -171,7 +169,10 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 				$this->getMockEditFitlerHookRunner(),
 				new NullStatsdDataFactory(),
 				PHP_INT_MAX
-			)
+			),
+			new SettingsArray( [
+				'updateRepoTags' => $tags,
+			] )
 		);
 		return $job;
 	}
@@ -202,8 +203,19 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 			'newTitle' => 'New page name',
 			'user' => $user->getName()
 		];
+		$tags = [ 'tag 1', 'tag 2' ];
 
-		$job = $this->getJob( $params, $mockRepository, $mockRepository, $this->getSummaryFormatter(), $normalizedPageName, $item );
+		$job = $this->getJob(
+			$params,
+			$mockRepository,
+			$mockRepository,
+			$this->getSummaryFormatter(),
+			$normalizedPageName,
+			$item,
+			null,
+			null,
+			$tags
+		);
 		$job->run();
 
 		/** @var Item $item */
@@ -219,6 +231,14 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 			$item->getSiteLinkList()->getBySiteId( 'enwiki' )->getBadges(),
 			[ new ItemId( 'Q42' ) ]
 		);
+
+		if ( $expected !== 'Old page name' ) {
+			$this->assertSame(
+				$tags,
+				$mockRepository->getLatestLogEntryFor( $item->getId() )['tags'],
+				'Edit tagged'
+			);
+		}
 	}
 
 	/** @var MockObject|EntityLookup */
