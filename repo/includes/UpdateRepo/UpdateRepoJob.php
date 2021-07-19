@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\UpdateRepo;
 
 use DerivativeContext;
@@ -60,7 +62,7 @@ abstract class UpdateRepoJob extends Job {
 		LoggerInterface $logger,
 		MediawikiEditEntityFactory $editEntityFactory,
 		SettingsArray $settings
-	) {
+	): void {
 		$this->entityLookup = $entityLookup;
 		$this->entityStore = $entityStore;
 		$this->summaryFormatter = $summaryFormatter;
@@ -72,37 +74,24 @@ abstract class UpdateRepoJob extends Job {
 	/**
 	 * Initialize repo services from global state.
 	 */
-	abstract protected function initRepoJobServicesFromGlobalState();
+	abstract protected function initRepoJobServicesFromGlobalState(): void;
 
 	/**
 	 * Get a Summary object for the edit
-	 *
-	 * @return FormatableSummary
 	 */
-	abstract public function getSummary();
+	abstract public function getSummary(): FormatableSummary;
 
 	/**
 	 * Whether the propagated update is valid (and thus should be applied)
-	 *
-	 * @param Item $item
-	 *
-	 * @return bool
 	 */
-	abstract protected function verifyValid( Item $item );
+	abstract protected function verifyValid( Item $item ): bool;
 
 	/**
 	 * Apply the changes needed to the given Item.
-	 *
-	 * @param Item $item
-	 *
-	 * @return bool
 	 */
-	abstract protected function applyChanges( Item $item );
+	abstract protected function applyChanges( Item $item ): bool;
 
-	/**
-	 * @return Item|null
-	 */
-	private function getItem() {
+	private function getItem(): ?Item {
 		$params = $this->getParams();
 		$itemId = new ItemId( $params['entityId'] );
 		try {
@@ -137,13 +126,8 @@ abstract class UpdateRepoJob extends Job {
 
 	/**
 	 * Save the new version of the given item.
-	 *
-	 * @param Item $item
-	 * @param User $user
-	 *
-	 * @return bool
 	 */
-	private function saveChanges( Item $item, User $user ) {
+	private function saveChanges( Item $item, User $user ): bool {
 		$summary = $this->getSummary();
 		$itemId = $item->getId();
 
@@ -178,11 +162,9 @@ abstract class UpdateRepoJob extends Job {
 	}
 
 	/**
-	 * @param string $name
-	 *
 	 * @return User|bool
 	 */
-	private function getUser( $name ) {
+	private function getUser( string $name ) {
 		$user = User::newFromName( $name );
 		if ( !$user || !$user->isRegistered() ) {
 			$this->logger->debug( 'User {name} doesn\'t exist.', [ 'name' => $name ] );

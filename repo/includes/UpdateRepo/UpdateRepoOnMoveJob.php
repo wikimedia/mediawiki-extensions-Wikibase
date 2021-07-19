@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\UpdateRepo;
 
 use MediaWiki\Logger\LoggerFactory;
@@ -11,6 +13,7 @@ use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\LookupConstants;
@@ -59,7 +62,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 		$this->initRepoJobServicesFromGlobalState();
 	}
 
-	protected function initRepoJobServicesFromGlobalState() {
+	protected function initRepoJobServicesFromGlobalState(): void {
 		$services = MediaWikiServices::getInstance();
 
 		$this->initServices(
@@ -84,7 +87,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 		SiteLookup $siteLookup,
 		MediawikiEditEntityFactory $editEntityFactory,
 		SettingsArray $settings
-	) {
+	): void {
 		$this->initRepoJobServices(
 			$entityLookup,
 			$entityStore,
@@ -98,13 +101,8 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 
 	/**
 	 * Get a SiteLink for a specific item and site
-	 *
-	 * @param Item $item
-	 * @param string $globalId
-	 *
-	 * @return SiteLink|null
 	 */
-	private function getSiteLink( Item $item, $globalId ) {
+	private function getSiteLink( Item $item, string $globalId ): ?SiteLink {
 		try {
 			return $item->getSiteLinkList()->getBySiteId( $globalId );
 		} catch ( OutOfBoundsException $e ) {
@@ -114,10 +112,8 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 
 	/**
 	 * Get a Summary object for the edit
-	 *
-	 * @return Summary
 	 */
-	public function getSummary() {
+	public function getSummary(): FormatableSummary {
 		$params = $this->getParams();
 		$siteId = $params['siteId'];
 		$oldPage = $params['oldTitle'];
@@ -163,12 +159,8 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 
 	/**
 	 * Whether the propagated update is valid (and thus should be applied)
-	 *
-	 * @param Item $item
-	 *
-	 * @return bool
 	 */
-	protected function verifyValid( Item $item ) {
+	protected function verifyValid( Item $item ): bool {
 		$params = $this->getParams();
 		$siteId = $params['siteId'];
 		$oldPage = $params['oldTitle'];
@@ -194,10 +186,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 		return true;
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	protected function applyChanges( Item $item ) {
+	protected function applyChanges( Item $item ): bool {
 		$params = $this->getParams();
 		$siteId = $params['siteId'];
 		$oldSiteLink = $this->getSiteLink( $item, $siteId );

@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
 use HashSiteStore;
@@ -62,12 +64,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	/**
-	 * @param string $normalizedPageName
-	 *
-	 * @return SiteLookup
-	 */
-	private function getSiteLookup( $normalizedPageName ) {
+	private function getSiteLookup( string $normalizedPageName ): SiteLookup {
 		$enwiki = $this->createMock( Site::class );
 		$enwiki->method( 'getGlobalId' )
 			->willReturn( 'enwiki' );
@@ -77,12 +74,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 		return new HashSiteStore( [ $enwiki ] );
 	}
 
-	/**
-	 * @param ItemId $itemId
-	 *
-	 * @return EntityTitleStoreLookup
-	 */
-	private function getEntityTitleLookup( ItemId $itemId ) {
+	private function getEntityTitleLookup( ItemId $itemId ): EntityTitleStoreLookup {
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->method( 'getTitleForId' )
 			->with( $itemId )
@@ -91,10 +83,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 		return $entityTitleLookup;
 	}
 
-	/**
-	 * @return EntityPermissionChecker
-	 */
-	private function getEntityPermissionChecker() {
+	private function getEntityPermissionChecker(): EntityPermissionChecker {
 		$entityPermissionChecker = $this->createMock( EntityPermissionChecker::class );
 		$entityPermissionChecker->method( 'getPermissionStatusForEntity' )
 			->willReturn( Status::newGood() );
@@ -102,17 +91,11 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 		return $entityPermissionChecker;
 	}
 
-	/**
-	 * @return SummaryFormatter
-	 */
-	private function getSummaryFormatter() {
+	private function getSummaryFormatter(): SummaryFormatter {
 		return $this->createMock( SummaryFormatter::class );
 	}
 
-	/**
-	 * @return EditFilterHookRunner
-	 */
-	private function getMockEditFitlerHookRunner() {
+	private function getMockEditFitlerHookRunner(): EditFilterHookRunner {
 		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
 			->onlyMethods( [ 'run' ] )
 			->disableOriginalConstructor()
@@ -122,7 +105,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 		return $runner;
 	}
 
-	public function runProvider() {
+	public function runProvider(): iterable {
 		return [
 			[ 'New page name', 'New page name', 'Old page name' ],
 			// Client normalization gets applied
@@ -179,11 +162,8 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider runProvider
-	 * @param string $expected
-	 * @param string $normalizedPageName
-	 * @param string $oldTitle
 	 */
-	public function testRun( $expected, $normalizedPageName, $oldTitle ) {
+	public function testRun( string $expected, string $normalizedPageName, string $oldTitle ) {
 		$user = User::newFromName( 'UpdateRepo' );
 
 		// Needed as UpdateRepoOnMoveJob instantiates a User object
