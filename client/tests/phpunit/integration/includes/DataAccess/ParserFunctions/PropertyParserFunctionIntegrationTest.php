@@ -19,6 +19,7 @@ use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 
 /**
@@ -74,7 +75,8 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 	private function newParserOutputUsageAccumulator( ParserOutput $parserOutput ): UsageAccumulator {
 		$factory = new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [] )
+			new UsageDeduplicator( [] ),
+			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 		return $factory->newFromParserOutput( $parserOutput );
 	}

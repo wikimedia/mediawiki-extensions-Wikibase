@@ -18,6 +18,7 @@ use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 
 /**
  * @covers \Wikibase\Client\Hooks\DataUpdateHookHandler
@@ -172,7 +173,8 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	private function newUsageAccumulatorFactory(): UsageAccumulatorFactory {
 		return new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [] )
+			new UsageDeduplicator( [] ),
+			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 	}
 

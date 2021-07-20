@@ -6,10 +6,11 @@ namespace Wikibase\Client\Tests\Unit\Usage;
 
 use ParserOutput;
 use Wikibase\Client\Usage\EntityUsageFactory;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulatorFactory;
 use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 
 /**
  * @license GPL-2.0-or-later
@@ -23,11 +24,12 @@ class UsageAccumulatorFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGetParserOutputUsageAccumulator(): void {
 		$factory = new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [] )
+			new UsageDeduplicator( [] ),
+			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 
 		$fakeParserOutput = $this->createStub( ParserOutput::class );
 
-		$this->assertInstanceOf( ParserOutputUsageAccumulator::class, $factory->newFromParserOutput( $fakeParserOutput ) );
+		$this->assertInstanceOf( UsageAccumulator::class, $factory->newFromParserOutput( $fakeParserOutput ) );
 	}
 }

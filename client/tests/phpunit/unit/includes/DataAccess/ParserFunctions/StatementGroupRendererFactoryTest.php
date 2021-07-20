@@ -29,6 +29,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -253,7 +254,8 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function newUsageAccumulatorFactory(): UsageAccumulatorFactory {
 		return new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [] )
+			new UsageDeduplicator( [] ),
+			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 	}
 

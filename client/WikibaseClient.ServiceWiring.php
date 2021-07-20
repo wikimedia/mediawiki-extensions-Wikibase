@@ -109,6 +109,7 @@ use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\Store\RevisionBasedEntityRedirectTargetLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
@@ -973,7 +974,10 @@ return [
 		);
 		return new UsageAccumulatorFactory(
 			new EntityUsageFactory( WikibaseClient::getEntityIdParser( $services ) ),
-			new UsageDeduplicator( $usageModifierLimits )
+			new UsageDeduplicator( $usageModifierLimits ),
+			new RevisionBasedEntityRedirectTargetLookup(
+				WikibaseClient::getStore( $services )->getEntityRevisionLookup()
+			)
 		);
 	},
 

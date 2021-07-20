@@ -18,6 +18,7 @@ use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -87,7 +88,8 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	private function newUsageAccumulatorFactory(): UsageAccumulatorFactory {
 		return new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [] )
+			new UsageDeduplicator( [] ),
+			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 	}
 
