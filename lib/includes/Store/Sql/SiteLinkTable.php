@@ -273,33 +273,30 @@ class SiteLinkTable implements SiteLinkStore {
 	}
 
 	/**
-	 * @see SiteLinkLookup::getLinks
-	 *
-	 * @param int[] $numericIds Numeric (unprefixed) item ids
-	 * @param string[] $siteIds
-	 * @param string[] $pageNames
-	 *
-	 * @return array[]
 	 * @note The arrays returned by this method do not contain badges!
 	 */
-	public function getLinks( array $numericIds = [], array $siteIds = [], array $pageNames = [] ) {
-		$dbr = $this->db->connections()->getReadConnectionRef();
-
+	public function getLinks( ?array $numericIds = null, ?array $siteIds = null, ?array $pageNames = null ) {
 		$conditions = [];
 
-		if ( $numericIds !== [] ) {
+		if ( $numericIds !== null ) {
 			$conditions['ips_item_id'] = $numericIds;
 		}
 
-		if ( $siteIds !== [] ) {
+		if ( $siteIds !== null ) {
 			$conditions['ips_site_id'] = $siteIds;
 		}
 
-		if ( $pageNames !== [] ) {
+		if ( $pageNames !== null ) {
 			$conditions['ips_site_page'] = $pageNames;
 		}
 
-		if ( $numericIds === [] && $pageNames === [] ) {
+		foreach ( $conditions as $condition ) {
+			if ( $condition === [] ) {
+				return [];
+			}
+		}
+
+		if ( $numericIds === null && $pageNames === null ) {
 			$this->logger->warning(
 				__METHOD__ . ': querying for all links of one or more sites, this is expensive! (T276762)',
 				[
@@ -309,6 +306,7 @@ class SiteLinkTable implements SiteLinkStore {
 			);
 		}
 
+		$dbr = $this->db->connections()->getReadConnectionRef();
 		$links = $dbr->select(
 			$this->table,
 			[

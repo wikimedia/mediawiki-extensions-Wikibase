@@ -180,9 +180,9 @@ class MockRepositoryTest extends TestCase {
 		return [
 			'all' => [
 				$items,
-				'numericIds' => [],
-				'siteIds' => [],
-				'pageNames' => [],
+				'numericIds' => null,
+				'siteIds' => null,
+				'pageNames' => null,
 				'expectedLinks' => [
 					[ 'enwiki', 'Foo', 1 ],
 					[ 'dewiki', 'Bar', 1 ],
@@ -192,7 +192,7 @@ class MockRepositoryTest extends TestCase {
 			],
 			'mismatch' => [
 				$items,
-				'numericIds' => [],
+				'numericIds' => null,
 				'siteIds' => [ 'enwiki' ],
 				'pageNames' => [ 'Xoo' ],
 				'expectedLinks' => []
@@ -200,8 +200,8 @@ class MockRepositoryTest extends TestCase {
 			'by item' => [
 				$items,
 				'numericIds' => [ 1 ],
-				'siteIds' => [],
-				'pageNames' => [],
+				'siteIds' => null,
+				'pageNames' => null,
 				'expectedLinks' => [
 					[ 'enwiki', 'Foo', 1 ],
 					[ 'dewiki', 'Bar', 1 ],
@@ -209,9 +209,9 @@ class MockRepositoryTest extends TestCase {
 			],
 			'by site' => [
 				$items,
-				'numericIds' => [],
+				'numericIds' => null,
 				'siteIds' => [ 'enwiki' ],
-				'pageNames' => [],
+				'pageNames' => null,
 				'expectedLinks' => [
 					[ 'enwiki', 'Foo', 1 ],
 					[ 'enwiki', 'Bar', 2 ],
@@ -219,8 +219,8 @@ class MockRepositoryTest extends TestCase {
 			],
 			'by page' => [
 				$items,
-				'numericIds' => [],
-				'siteIds' => [],
+				'numericIds' => null,
+				'siteIds' => null,
 				'pageNames' => [ 'Bar' ],
 				'expectedLinks' => [
 					[ 'dewiki', 'Bar', 1 ],
@@ -229,7 +229,7 @@ class MockRepositoryTest extends TestCase {
 			],
 			'by site and page' => [
 				$items,
-				'numericIds' => [],
+				'numericIds' => null,
 				'siteIds' => [ 'dewiki' ],
 				'pageNames' => [ 'Bar' ],
 				'expectedLinks' => [
@@ -244,9 +244,9 @@ class MockRepositoryTest extends TestCase {
 	 */
 	public function testGetLinks(
 		array $items,
-		array $numericIds,
-		array $siteIds,
-		array $pageNames,
+		?array $numericIds,
+		?array $siteIds,
+		?array $pageNames,
 		array $expectedLinks
 	) {
 		foreach ( $items as $item ) {

@@ -68,9 +68,9 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 		// #0: all ---------
 		$cases[] = [
 			$items,
-			[], // items
-			[], // sites
-			[], // pages
+			null, // items
+			null, // sites
+			null, // pages
 			[ // expected
 				[ 'enwiki', 'Foo', 1 ],
 				[ 'dewiki', 'Bar', 1 ],
@@ -82,7 +82,7 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 		// #1: mismatch ---------
 		$cases[] = [
 			$items,
-			[], // items
+			null, // items
 			[ 'enwiki' ], // sites
 			[ 'Xoo' ], // pages
 			[] // expected
@@ -92,8 +92,8 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 		$cases[] = [
 			$items,
 			[ 1 ], // items
-			[], // sites
-			[], // pages
+			null, // sites
+			null, // pages
 			[ // expected
 				[ 'enwiki', 'Foo', 1 ],
 				[ 'dewiki', 'Bar', 1 ],
@@ -103,9 +103,9 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 		// #3: by site ---------
 		$cases[] = [
 			$items,
-			[], // items
+			null, // items
 			[ 'enwiki' ], // sites
-			[], // pages
+			null, // pages
 			[ // expected
 				[ 'enwiki', 'Foo', 1 ],
 				[ 'enwiki', 'Bar', 2 ],
@@ -115,8 +115,8 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 		// #4: by page ---------
 		$cases[] = [
 			$items,
-			[], // items
-			[], // sites
+			null, // items
+			null, // sites
 			[ 'Bar' ], // pages
 			[ // expected
 				[ 'dewiki', 'Bar', 1 ],
@@ -127,12 +127,21 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 		// #5: by site and page ---------
 		$cases[] = [
 			$items,
-			[], // items
+			null, // items
 			[ 'dewiki' ], // sites
 			[ 'Bar' ], // pages
 			[ // expected
 				[ 'dewiki', 'Bar', 1 ],
 			]
+		];
+
+		// #6: empty condition
+		$cases[] = [
+			$items,
+			[], // items
+			null, // sites
+			null, // pages
+			[] // expected
 		];
 
 		return $cases;
@@ -141,7 +150,7 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideGetLinks
 	 */
-	public function testGetLinks( array $items, array $itemIds, array $sites, array $pages, array $expectedLinks ) {
+	public function testGetLinks( array $items, ?array $itemIds, ?array $sites, ?array $pages, array $expectedLinks ) {
 		$siteLinkStore = new HashSiteLinkStore();
 
 		foreach ( $items as $item ) {
