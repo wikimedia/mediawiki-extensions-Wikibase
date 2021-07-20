@@ -6,8 +6,11 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use HashConfig;
 use LogicException;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\NewEntitySource;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -37,6 +40,15 @@ class FederatedPropertiesServiceFactoryTest extends ServiceWiringTestCase {
 			->willReturn( new HashConfig( [
 				'ServerName' => 'https://other-wiki.example/w/',
 			] ) );
+		$source = NewEntitySource::havingName( 'some source' )
+			->withConceptBaseUri( 'http://wikidata.org/entity/' )
+			->build();
+		$subEntityTypesMapper = new SubEntityTypesMapper( [] );
+		$this->mockService(
+			'WikibaseRepo.EntitySourceDefinitions',
+			new EntitySourceDefinitions( [ $source ], $subEntityTypesMapper )
+		);
+		$this->mockService( 'WikibaseRepo.SubEntityTypesMapper', $subEntityTypesMapper );
 
 		$this->assertInstanceOf(
 			ApiServiceFactory::class,

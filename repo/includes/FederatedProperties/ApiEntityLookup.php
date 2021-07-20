@@ -3,7 +3,9 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -12,6 +14,11 @@ use Wikimedia\Assert\Assert;
  * @license GPL-2.0-or-later
  */
 class ApiEntityLookup {
+
+	/**
+	 * @var EntitySourceLookup
+	 */
+	private $entitySourceLookup;
 
 	/**
 	 * @var GenericActionApiClient
@@ -24,8 +31,9 @@ class ApiEntityLookup {
 	 */
 	private $lookupCache = [];
 
-	public function __construct( GenericActionApiClient $api ) {
+	public function __construct( GenericActionApiClient $api, EntitySourceLookup $entitySourceLookup ) {
 		$this->api = $api;
+		$this->entitySourceLookup = $entitySourceLookup;
 	}
 
 	/**
@@ -33,7 +41,7 @@ class ApiEntityLookup {
 	 * @param EntityId[] $entityIds
 	 */
 	public function fetchEntities( array $entityIds ): void {
-		Assert::parameterElementType( EntityId::class, $entityIds, '$entityIds' );
+		Assert::parameterElementType( FederatedPropertyId::class, $entityIds, '$entityIds' );
 
 		// Fetch up to 50 entities each time
 		$entityIdBatches = array_chunk( $entityIds, 50 );
@@ -51,19 +59,21 @@ class ApiEntityLookup {
 	 */
 	private function getEntitiesToFetch( array $entityIds ): array {
 		return array_filter( $entityIds, function ( $id ) {
-			return !array_key_exists( $id->getSerialization(), $this->lookupCache );
+			return !array_key_exists( $this->stripConceptBaseUriFromId( $id ), $this->lookupCache );
 		} );
 	}
 
 	/**
-	 * @param EntityId[] $entityIds
+	 * @param EntityId[] $federatedEntityIds
 	 * @return array the json_decoded part of the wbgetentities API response for the entity.
 	 */
-	private function getEntities( array $entityIds ) {
-		if ( empty( $entityIds ) ) {
+	private function getEntities( array $federatedEntityIds ) {
+		if ( empty( $federatedEntityIds ) ) {
 			return [];
 		}
-		Assert::parameterElementType( EntityId::class, $entityIds, '$entityIds' );
+		Assert::parameterElementType( FederatedPropertyId::class, $federatedEntityIds, '$entityIds' );
+
+		$entityIds = $this->getFederatedEntityIdsWithoutPrefix( $federatedEntityIds );
 
 		$response = $this->api->get( [
 			'action' => 'wbgetentities',
@@ -79,16 +89,35 @@ class ApiEntityLookup {
 	/**
 	 * Getter for the federated entity result data.
 	 * If not currently in cache it will make a new request.
-	 * @param EntityId $entityId
+	 * @param EntityId $federatedEntityId
 	 * @return array containing the part of the wbgetentities response for the given entity id
 	 */
-	public function getResultPartForId( EntityId $entityId ): array {
-		if ( !array_key_exists( $entityId->getSerialization(), $this->lookupCache ) ) {
-			wfDebugLog( 'Wikibase', 'Entity ' . $entityId->getSerialization() . ' not prefetched.' );
-			$this->fetchEntities( [ $entityId ] );
+	public function getResultPartForId( EntityId $federatedEntityId ): array {
+		if ( !array_key_exists( $this->stripConceptBaseUriFromId( $federatedEntityId ), $this->lookupCache ) ) {
+			wfDebugLog( 'Wikibase', 'Entity ' . $federatedEntityId->getSerialization() . ' not prefetched.' );
+			$this->fetchEntities( [ $federatedEntityId ] );
 		}
 
-		return $this->lookupCache[ $entityId->getSerialization() ];
+		return $this->lookupCache[ $this->stripConceptBaseUriFromId( $federatedEntityId ) ];
 	}
 
+	/**
+	 * @param EntityId[] $federatedEntityIds
+	 * @return string[]
+	 */
+	public function getFederatedEntityIdsWithoutPrefix( array $federatedEntityIds ): array {
+		return array_map( [ $this, 'stripConceptBaseUriFromId' ], $federatedEntityIds );
+	}
+
+	/**
+	 * @param EntityId $id
+	 * @return string
+	 */
+	private function stripConceptBaseUriFromId( EntityId $id ): string {
+		return str_replace(
+			$this->entitySourceLookup->getEntitySourceById( $id )->getConceptBaseUri(),
+			'',
+			$id->getSerialization()
+		);
+	}
 }
