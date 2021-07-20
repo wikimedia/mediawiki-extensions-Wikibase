@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use MediaWiki\Logger\LoggerFactory;
 use MWException;
 use Psr\Log\LoggerInterface;
+use RuntimeException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -296,6 +297,16 @@ class SiteLinkTable implements SiteLinkStore {
 
 		if ( $pageNames !== [] ) {
 			$conditions['ips_site_page'] = $pageNames;
+		}
+
+		if ( $numericIds === [] && $pageNames === [] ) {
+			$this->logger->warning(
+				__METHOD__ . ': querying for all links of one or more sites, this is expensive! (T276762)',
+				[
+					'siteIds' => $siteIds,
+					'exception' => new RuntimeException()
+				]
+			);
 		}
 
 		$links = $dbr->select(
