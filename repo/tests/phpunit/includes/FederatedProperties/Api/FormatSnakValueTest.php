@@ -26,7 +26,7 @@ class FormatSnakValueTest extends FederatedPropertiesApiTestCase {
 			'action' => 'wbformatvalue',
 			'generate' => 'text/plain',
 			'datavalue' => '{ "value": "test", "type": "string" }',
-			'property' => 'P854',
+			'property' => $this->newFederatedPropertyIdFromPId( 'P123' )->getSerialization(),
 			'options' => json_encode( [ 'lang' => 'qqx' ] ),
 		];
 
