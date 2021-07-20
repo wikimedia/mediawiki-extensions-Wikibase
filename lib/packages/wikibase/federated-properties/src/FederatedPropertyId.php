@@ -4,17 +4,17 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\FederatedProperties;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @license GPL-2.0-or-later
  */
-class FederatedPropertyId extends EntityId {
+class FederatedPropertyId extends PropertyId {
 
 	public function __construct( $serialization ) {
 		self::assertValidSerialization( $serialization );
-		parent::__construct( $serialization );
+		$this->serialization = $serialization;
 	}
 
 	public function serialize(): ?string {
