@@ -41,7 +41,7 @@ class MockRepoClientCentralIdLookup extends CentralIdLookup {
 		}
 	}
 
-	public function isAttached( $user, $wikiId = null ): bool {
+	public function isAttached( UserIdentity $user, $wikiId = null ): bool {
 		return true;
 	}
 
@@ -71,7 +71,7 @@ class MockRepoClientCentralIdLookup extends CentralIdLookup {
 	}
 
 	public function centralIdFromLocalUser(
-		$user, $audience = self::AUDIENCE_PUBLIC, $flags = self::READ_NORMAL
+		UserIdentity $user, $audience = self::AUDIENCE_PUBLIC, $flags = self::READ_NORMAL
 	): int {
 		$localUserId = $user->getId();
 
