@@ -19,7 +19,6 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * @covers \Wikibase\Repo\Content\EntityContent
@@ -431,30 +430,6 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		$this->assertTrue( $title->exists( Title::GAID_FOR_UPDATE ), 'sanity check: exists()' );
 
 		return $title;
-	}
-
-	public function testGetSecondaryDataUpdates() {
-		$entityContent = $this->newBlank();
-		$title = $this->createTitleForEntity( $entityContent->getEntity() );
-
-		// NOTE: $title->exists() must be true.
-		$updates = $entityContent->getSecondaryDataUpdates( $title );
-
-		$this->assertDataUpdates( $updates );
-	}
-
-	public function testGetDeletionUpdates() {
-		$entityContent = $this->newBlank();
-		$title = $this->createTitleForEntity( $entityContent->getEntity() );
-
-		$updates = $entityContent->getDeletionUpdates( WikiPage::factory( $title ) );
-
-		$this->assertDataUpdates( $updates );
-	}
-
-	private function assertDataUpdates( $updates ) {
-		$this->assertIsArray( $updates );
-		$this->assertContainsOnlyInstancesOf( 'DataUpdate', $updates );
 	}
 
 	public function entityRedirectProvider() {
