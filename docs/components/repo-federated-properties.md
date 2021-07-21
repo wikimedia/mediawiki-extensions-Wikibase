@@ -25,6 +25,7 @@ $wgWBRepoSettings['entitySources'] = [
 		'interwikiPrefix' => '',
 		'rdfNodeNamespacePrefix' => 'wd',
 		'rdfPredicateNamespacePrefix' => 'wdt',
+		'type' => 'db'
 	],
 	'fedprops' => [
 		'entityNamespaces' => [ 'property' => 122 ],
@@ -33,12 +34,13 @@ $wgWBRepoSettings['entitySources'] = [
 		'interwikiPrefix' => 'wikidatabeta',
 		'rdfNodeNamespacePrefix' => 'fpwd',
 		'rdfPredicateNamespacePrefix' => 'fpwd',
+		'type' => 'api'
 	],
 ];
 ```
 
-The two configurations contain separate sources for the local `item` and federated `property`. The `entityNamespaces` for these entities must always match the namespace mapping that exists on the local wiki.
-So if the local Property namespace is 122, and your federating to wikidata.org with a Property namespace of 120, your `entityNamespaces` value for Properties would be 122.
+The two configurations contain separate sources for the local `item` and federated `property`. The `type` provides the source type of these entities, here `db` for `item` and `api` for federated`property`.
+The `entityNamespaces` for these entities must always match the namespace mapping that exists on the local wiki. So if the local Property namespace is 122, and your federating to wikidata.org with a Property namespace of 120, your `entityNamespaces` value for Properties would be 122.
 
 The `interwikiPrefix` is a configuration to support links between MediaWiki instances. This also depend on the configuration on each instance and should point to a wiki defined in the `interwiki` table  For more information on interwiki links see https://www.mediawiki.org/wiki/Manual:Interwiki.
 If this is not done various links will not be correctly rendered.
