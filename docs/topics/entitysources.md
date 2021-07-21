@@ -10,17 +10,13 @@ Entity source configuration is controlled by a configuration option called `enti
 
 If you do not specifically set configuration some defaults will be generated for you by the following classes:
  - [EntitySourceDefinitionsConfigParser]
- - [EntitySourceDefinitionsLegacyRepoSettingsParser]
 
 ## Configuration
 
 An entitysource is an associative array mapping entity source names to settings relevant to the particular source.
 
-DEFAULT: Populated with a local default from existing settings:
- - [entityNamespaces](#entityNamespaces)
- - [changesDatabase](#changesDatabase)
- - [conceptBaseUri](#conceptBaseUri)
-And with foreign repos using the `foreignRepositories` setting. (@ref md_docs_topics_options)
+DEFAULT: None, must be configured.
+The _example_ (not default!) settings configure a local entity source with items in namespace 120, properties in namespace 122, and extension-defined entity types in namespaces according to the `WikibaseRepoEntityNamespaces` hook.
 
 Configuration of each source is an associative array containing the following keys:
 
@@ -49,8 +45,13 @@ $entitySources = [
     ],
 ];
 $wgWBRepoSettings['entitySources'] = $entitySources;
+$wgWBRepoSettings['localEntitySourceName'] = 'myrepo';
 $wgWBClientSettings['entitySources'] = $entitySources;
+$wgWBClientSettings['itemAndPropertySourceName'] = 'myrepo';
 ```
+
+Note that additional entity types defined by extensions will not work out of the box in this configuration:
+you must explicitly configure them in the `entityNamespaces` of the entity source.
 
 ### Wikimedia Commons & Wikidata example
 
@@ -82,7 +83,9 @@ $entitySources = [
     ],
 ];
 $wgWBRepoSettings['entitySources'] = $entitySources;
+$wgWBRepoSettings['localEntitySourceName'] = $isThisCommons ? 'commons' : 'wikidata';
 $wgWBClientSettings['entitySources'] = $entitySources;
+$wgWBClientSettings['itemAndPropertySourceName'] = 'wikidata';
 ```
 
 [federation]: @ref md_docs_topics_federation
@@ -91,4 +94,3 @@ $wgWBClientSettings['entitySources'] = $entitySources;
 [EntitySource]: @ref Wikibase::DataAccess::EntitySource
 [EntitySourceDefinitions]: @ref Wikibase::DataAccess::EntitySourceDefinitions
 [EntitySourceDefinitionsConfigParser]: @ref Wikibase::Repo::EntitySourceDefinitionsConfigParser
-[EntitySourceDefinitionsLegacyRepoSettingsParser]: @ref Wikibase::Repo::EntitySourceDefinitionsLegacyRepoSettingsParser
