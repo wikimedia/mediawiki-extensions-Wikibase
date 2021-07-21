@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
@@ -35,7 +37,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	private $luaFunctionCallTracker = null;
 
-	private function getImplementation() {
+	private function getImplementation(): WikibaseLuaEntityBindings {
 		if ( !$this->wbLibrary ) {
 			$this->wbLibrary = $this->newImplementation();
 		}
@@ -43,7 +45,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		return $this->wbLibrary;
 	}
 
-	private function newImplementation() {
+	private function newImplementation(): WikibaseLuaEntityBindings {
 		$lang = $this->getLanguage();
 		$snakFormatterFactory = WikibaseClient::getDataAccessSnakFormatterFactory();
 		$plainTextSnakFormatter = $snakFormatterFactory->newWikitextSnakFormatter(
@@ -90,16 +92,10 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		);
 	}
 
-	/**
-	 * @param DataAccessSnakFormatterFactory $snakFormatterFactory
-	 * @param Language $lang
-	 *
-	 * @return WikitextPreprocessingSnakFormatter
-	 */
 	private function newRichWikitextSnakFormatter(
 		DataAccessSnakFormatterFactory $snakFormatterFactory,
 		Language $lang
-	) {
+	): WikitextPreprocessingSnakFormatter {
 		$innerFormatter = $snakFormatterFactory->newWikitextSnakFormatter(
 			$lang,
 			$this->getUsageAccumulator(),
@@ -114,10 +110,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		);
 	}
 
-	/**
-	 * @return LuaFunctionCallTracker
-	 */
-	private function getLuaFunctionCallTracker() {
+	private function getLuaFunctionCallTracker(): LuaFunctionCallTracker {
 		if ( !$this->luaFunctionCallTracker ) {
 			$mwServices = MediaWikiServices::getInstance();
 			$settings = WikibaseClient::getSettings( $mwServices );
@@ -145,10 +138,8 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * Please note, that this splits the parser cache by user language, if
 	 * allowDataAccessInUserLanguage is true.
-	 *
-	 * @return Language
 	 */
-	private function getLanguage() {
+	private function getLanguage(): Language {
 		if ( $this->allowDataAccessInUserLanguage() && $this->getParser() ) {
 			return $this->getParserOptions()->getUserLangObj();
 		}
@@ -156,19 +147,13 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		return MediaWikiServices::getInstance()->getContentLanguage();
 	}
 
-	/**
-	 * @return bool
-	 */
-	private function allowDataAccessInUserLanguage() {
+	private function allowDataAccessInUserLanguage(): bool {
 		$settings = WikibaseClient::getSettings();
 
 		return $settings->getSetting( 'allowDataAccessInUserLanguage' );
 	}
 
-	/**
-	 * @return ParserOutputUsageAccumulator
-	 */
-	public function getUsageAccumulator() {
+	public function getUsageAccumulator(): ParserOutputUsageAccumulator {
 		return new ParserOutputUsageAccumulator(
 			$this->getParser()->getOutput(),
 			new EntityUsageFactory( WikibaseClient::getEntityIdParser() )
@@ -181,7 +166,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @param string $entityId The Entity from which the statements were accessed.
 	 * @param string $propertyId Property id of the statements accessed.
 	 */
-	public function addStatementUsage( $entityId, $propertyId ) {
+	public function addStatementUsage( string $entityId, string $propertyId ): void {
 		$this->getImplementation()->addStatementUsage( $entityId, $propertyId );
 	}
 
@@ -191,7 +176,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @param string $entityId The Entity from which the labels were accessed.
 	 * @param string $langCode Language code of the labels accessed.
 	 */
-	public function addLabelUsage( $entityId, $langCode ) {
+	public function addLabelUsage( string $entityId, string $langCode ): void {
 		$this->getImplementation()->addLabelUsage( $entityId, $langCode );
 	}
 
@@ -201,7 +186,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @param string $entityId The Entity from which the descriptions were accessed.
 	 * @param string $langCode Language code of the descriptions accessed.
 	 */
-	public function addDescriptionUsage( $entityId, $langCode ) {
+	public function addDescriptionUsage( string $entityId, string $langCode ): void {
 		$this->getImplementation()->addDescriptionUsage( $entityId, $langCode );
 	}
 
@@ -210,7 +195,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @param string $entityId The Entity from which the sitelinks were accessed.
 	 */
-	public function addSiteLinksUsage( $entityId ) {
+	public function addSiteLinksUsage( string $entityId ): void {
 		$this->getImplementation()->addSiteLinksUsage( $entityId );
 	}
 
@@ -219,7 +204,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @param string $entityId The Entity from which something was accessed.
 	 */
-	public function addOtherUsage( $entityId ) {
+	public function addOtherUsage( string $entityId ): void {
 		$this->getImplementation()->addOtherUsage( $entityId );
 	}
 
@@ -268,7 +253,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @throws ScribuntoException
 	 * @return string[]|null[]
 	 */
-	public function formatPropertyValues( $entityId, $propertyLabelOrId, array $acceptableRanks = null ) {
+	public function formatPropertyValues( string $entityId, string $propertyLabelOrId, array $acceptableRanks = null ): array {
 		$this->checkType( 'formatPropertyValues', 0, $entityId, 'string' );
 		// Use 1 as index for the property id, as the first parameter comes from
 		// internals of mw.wikibase.entity (an index of 2 might confuse users
@@ -304,7 +289,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @throws ScribuntoException
 	 * @return string[]|null[]
 	 */
-	public function formatStatements( $entityId, $propertyLabelOrId, array $acceptableRanks = null ) {
+	public function formatStatements( string $entityId, string $propertyLabelOrId, array $acceptableRanks = null ): array {
 		$this->checkType( 'formatStatements', 0, $entityId, 'string' );
 		// Use 1 as index for the property id, as the first parameter comes from
 		// internals of mw.wikibase.entity (an index of 2 might confuse users
@@ -331,10 +316,8 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 
 	/**
 	 * Increment the given stats key.
-	 *
-	 * @param string $key
 	 */
-	public function incrementStatsKey( $key ) {
+	public function incrementStatsKey( string $key ): void {
 		$this->getLuaFunctionCallTracker()->incrementKey( $key );
 	}
 

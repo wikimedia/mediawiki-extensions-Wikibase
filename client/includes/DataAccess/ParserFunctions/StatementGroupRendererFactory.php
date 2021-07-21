@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\DataAccess\ParserFunctions;
 
 use Language;
@@ -64,15 +66,6 @@ class StatementGroupRendererFactory {
 	 */
 	private $allowDataAccessInUserLanguage;
 
-	/**
-	 * @param PropertyLabelResolver $propertyLabelResolver
-	 * @param SnaksFinder $snaksFinder
-	 * @param EntityLookup $entityLookup
-	 * @param DataAccessSnakFormatterFactory $dataAccessSnakFormatterFactory
-	 * @param EntityUsageFactory $entityUsageFactory
-	 * @param LanguageConverterFactory $langConvFactory
-	 * @param bool $allowDataAccessInUserLanguage
-	 */
 	public function __construct(
 		PropertyLabelResolver $propertyLabelResolver,
 		SnaksFinder $snaksFinder,
@@ -80,7 +73,7 @@ class StatementGroupRendererFactory {
 		DataAccessSnakFormatterFactory $dataAccessSnakFormatterFactory,
 		EntityUsageFactory $entityUsageFactory,
 		LanguageConverterFactory $langConvFactory,
-		$allowDataAccessInUserLanguage
+		bool $allowDataAccessInUserLanguage
 	) {
 		$this->propertyLabelResolver = $propertyLabelResolver;
 		$this->snaksFinder = $snaksFinder;
@@ -94,10 +87,11 @@ class StatementGroupRendererFactory {
 	/**
 	 * @param Parser $parser
 	 * @param string $type One of DataAccessSnakFormatterFactory::TYPE_*
-	 *
-	 * @return StatementGroupRenderer
 	 */
-	public function newRendererFromParser( Parser $parser, $type = DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT ) {
+	public function newRendererFromParser(
+		Parser $parser,
+		string $type = DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT
+	): StatementGroupRenderer {
 		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput(), $this->entityUsageFactory );
 
 		if ( $this->allowDataAccessInUserLanguage ) {
@@ -138,16 +132,14 @@ class StatementGroupRendererFactory {
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param ParserOutput $parserOutput
 	 * @param Title $title
-	 *
-	 * @return LanguageAwareRenderer
 	 */
 	private function newLanguageAwareRenderer(
-		$type,
+		string $type,
 		Language $language,
 		UsageAccumulator $usageAccumulator,
 		ParserOutput $parserOutput,
 		Title $title
-	) {
+	): LanguageAwareRenderer {
 		$snakFormatter = $this->dataAccessSnakFormatterFactory->newWikitextSnakFormatter(
 			$language,
 			$usageAccumulator,
@@ -183,16 +175,14 @@ class StatementGroupRendererFactory {
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param ParserOutput $parserOutput
 	 * @param Title $title
-	 *
-	 * @return LanguageAwareRenderer
 	 */
 	private function getLanguageAwareRendererFromCode(
-		$type,
-		$languageCode,
+		string $type,
+		string $languageCode,
 		UsageAccumulator $usageAccumulator,
 		ParserOutput $parserOutput,
 		Title $title
-	) {
+	): LanguageAwareRenderer {
 		if ( !isset( $this->languageAwareRenderers[$languageCode] ) ) {
 			$this->languageAwareRenderers[$languageCode] = $this->newLanguageAwareRenderer(
 				$type,
@@ -216,12 +206,12 @@ class StatementGroupRendererFactory {
 	 * @return VariantsAwareRenderer
 	 */
 	private function newVariantsAwareRenderer(
-		$type,
+		string $type,
 		array $variants,
 		UsageAccumulator $usageAccumulator,
 		ParserOutput $parserOutput,
 		Title $title
-	) {
+	): VariantsAwareRenderer {
 		$languageAwareRenderers = [];
 
 		foreach ( $variants as $variant ) {
@@ -239,12 +229,8 @@ class StatementGroupRendererFactory {
 
 	/**
 	 * Check whether variants are used in this parser run.
-	 *
-	 * @param Parser $parser
-	 *
-	 * @return bool
 	 */
-	private function isParserUsingVariants( Parser $parser ) {
+	private function isParserUsingVariants( Parser $parser ): bool {
 		$parserOptions = $parser->getOptions();
 
 		return $parser->getOutputType() === Parser::OT_HTML
@@ -252,12 +238,7 @@ class StatementGroupRendererFactory {
 			&& !$parserOptions->getDisableContentConversion();
 	}
 
-	/**
-	 * @param Parser $parser
-	 *
-	 * @return bool
-	 */
-	private function useVariants( Parser $parser ) {
+	private function useVariants( Parser $parser ): bool {
 		return $this->isParserUsingVariants( $parser )
 			&& $this->langConvFactory->getLanguageConverter( $parser->getTargetLanguage() )->hasVariants();
 	}

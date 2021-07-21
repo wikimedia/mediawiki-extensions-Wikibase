@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Unit;
 
 use ParserOutput;
@@ -38,7 +40,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return Item[]
 	 */
-	private function getItems() {
+	private function getItems(): array {
 		$items = [];
 
 		$item = new Item( new ItemId( 'Q1' ) );
@@ -64,10 +66,8 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param string[] $otherProjects
-	 *
-	 * @return ClientParserOutputDataUpdater
 	 */
-	private function newInstance( array $otherProjects = [] ) {
+	private function newInstance( array $otherProjects = [] ): ClientParserOutputDataUpdater {
 		$this->mockRepo = new MockRepository();
 
 		foreach ( $this->getItems() as $item ) {
@@ -89,10 +89,8 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param string[] $otherProjects
-	 *
-	 * @return OtherProjectsSidebarGeneratorFactory
 	 */
-	private function getOtherProjectsSidebarGeneratorFactory( array $otherProjects ) {
+	private function getOtherProjectsSidebarGeneratorFactory( array $otherProjects ): OtherProjectsSidebarGeneratorFactory {
 		$generator = $this->getOtherProjectsSidebarGenerator( $otherProjects );
 
 		$factory = $this->getMockBuilder( OtherProjectsSidebarGeneratorFactory::class )
@@ -105,13 +103,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		return $factory;
 	}
 
-	/**
-	 * @param string $prefixedText
-	 * @param bool $isRedirect
-	 *
-	 * @return Title
-	 */
-	private function getTitle( $prefixedText, $isRedirect = false ) {
+	private function getTitle( string $prefixedText, bool $isRedirect = false ): Title {
 		$title = $this->createMock( Title::class );
 
 		$title->expects( $this->once() )
@@ -126,10 +118,8 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param string[] $otherProjects
-	 *
-	 * @return OtherProjectsSidebarGenerator
 	 */
-	private function getOtherProjectsSidebarGenerator( array $otherProjects ) {
+	private function getOtherProjectsSidebarGenerator( array $otherProjects ): OtherProjectsSidebarGenerator {
 		$generator = $this->getMockBuilder( OtherProjectsSidebarGenerator::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -140,7 +130,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		return $generator;
 	}
 
-	public function testUpdateItemIdProperty() {
+	public function testUpdateItemIdProperty(): void {
 		$parserOutput = new ParserOutput();
 
 		$titleText = 'Foo sr';
@@ -157,7 +147,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertUsageTracking( $itemId, EntityUsage::SITELINK_USAGE, $parserOutput );
 	}
 
-	private function assertUsageTracking( ItemId $id, $aspect, ParserOutput $parserOutput ) {
+	private function assertUsageTracking( ItemId $id, $aspect, ParserOutput $parserOutput ): void {
 		$usageAcc = new ParserOutputUsageAccumulator(
 			$parserOutput,
 			$this->newEntityUsageFactory()
@@ -168,7 +158,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertContainsEquals( $expected, $usage );
 	}
 
-	public function testUpdateItemIdPropertyForUnconnectedPage() {
+	public function testUpdateItemIdPropertyForUnconnectedPage(): void {
 		$parserOutput = new ParserOutput();
 
 		$titleText = 'Foo xx';
@@ -185,7 +175,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider updateOtherProjectsLinksDataProvider
 	 */
-	public function testUpdateOtherProjectsLinksData( $expected, $otherProjects, $titleText ) {
+	public function testUpdateOtherProjectsLinksData( array $expected, array $otherProjects, string $titleText ): void {
 		$parserOutput = new ParserOutput();
 		$title = $this->getTitle( $titleText );
 
@@ -197,7 +187,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $extensionData );
 	}
 
-	public function updateOtherProjectsLinksDataProvider() {
+	public function updateOtherProjectsLinksDataProvider(): array {
 		return [
 			'other project exists, page has site link' => [
 				[ 'project' => 'catswiki' ],
@@ -222,7 +212,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public function testUpdateBadgesProperty() {
+	public function testUpdateBadgesProperty(): void {
 		$parserOutput = new ParserOutput();
 
 		$title = $this->getTitle( 'Talk:Foo sr' );
@@ -236,7 +226,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function testUpdateBadgesProperty_removesPreviousData() {
+	public function testUpdateBadgesProperty_removesPreviousData(): void {
 		$parserOutput = new ParserOutput();
 		$parserOutput->setProperty( 'wikibase-badge-Q17', true );
 
@@ -251,7 +241,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function testUpdateBadgesProperty_inconsistentSiteLinkLookupEmptySiteLinkList() {
+	public function testUpdateBadgesProperty_inconsistentSiteLinkLookupEmptySiteLinkList(): void {
 		$parserOutput = new ParserOutput();
 
 		$title = $this->getTitle( 'Foo sr' );
@@ -285,7 +275,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( LogLevel::WARNING, $logs[0][0] );
 	}
 
-	public function testUpdateBadgesProperty_inconsistentSiteLinkLookupNoSuchEntity() {
+	public function testUpdateBadgesProperty_inconsistentSiteLinkLookupNoSuchEntity(): void {
 		$parserOutput = new ParserOutput();
 
 		$title = $this->getTitle( 'Foo sr' );
@@ -313,7 +303,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( LogLevel::WARNING, $logs[0][0] );
 	}
 
-	public function updateTrackingCategoriesDataProvider() {
+	public function updateTrackingCategoriesDataProvider(): array {
 		return [
 			[ 'Foo sr', false, 0 ],
 			[ 'Foo sr', true, 1 ],
@@ -325,7 +315,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider updateTrackingCategoriesDataProvider
 	 */
-	public function testUpdateTrackingCategories( $titleText, $isRedirect, $expected ) {
+	public function testUpdateTrackingCategories( string $titleText, bool $isRedirect, int $expected ): void {
 		$parserOutput = $this->createMock( ParserOutput::class );
 		$parserOutput->expects( $this->exactly( $expected ) )
 			->method( 'addTrackingCategory' );

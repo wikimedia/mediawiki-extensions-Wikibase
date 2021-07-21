@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Unit\DataAccess\ParserFunctions;
 
 use Language;
@@ -51,7 +53,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider wikitextTypeProvider
 	 */
-	public function testNewRendererFromParser_forWikitextType( $type ) {
+	public function testNewRendererFromParser_forWikitextType( string $type ): void {
 		$parser = $this->getParser( 'zh', 'es', true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
@@ -60,14 +62,14 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( LanguageAwareRenderer::class, $renderer );
 	}
 
-	public function wikitextTypeProvider() {
+	public function wikitextTypeProvider(): iterable {
 		return [
 			[ DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT ],
 			[ DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT ],
 		];
 	}
 
-	public function testNewRenderer_contentConversionDisabled() {
+	public function testNewRenderer_contentConversionDisabled(): void {
 		$parser = $this->getParser( 'zh', 'es', false, true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
@@ -76,7 +78,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( LanguageAwareRenderer::class, $renderer );
 	}
 
-	public function testNewRenderer_titleConversionDisabled() {
+	public function testNewRenderer_titleConversionDisabled(): void {
 		$parser = $this->getParser( 'zh', 'es', false, false, true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
@@ -88,7 +90,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider newRenderer_forParserFormatProvider
 	 */
-	public function testNewRenderer_forParserFormat( $languageCode, $format ) {
+	public function testNewRenderer_forParserFormat( string $languageCode, int $format ): void {
 		$parser = $this->getParser( $languageCode, 'es', false, false, false, $format );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
@@ -97,7 +99,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( LanguageAwareRenderer::class, $renderer );
 	}
 
-	public function newRenderer_forParserFormatProvider() {
+	public function newRenderer_forParserFormatProvider(): array {
 		return [
 			[ 'ku', Parser::OT_PLAIN ],
 			[ 'zh', Parser::OT_WIKI ],
@@ -105,7 +107,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public function testNewRenderer_forNonVariantLanguage() {
+	public function testNewRenderer_forNonVariantLanguage(): void {
 		$parser = $this->getParser( 'en', 'es', true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
@@ -114,7 +116,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( LanguageAwareRenderer::class, $renderer );
 	}
 
-	public function testNewRender_forVariantLanguage() {
+	public function testNewRender_forVariantLanguage(): void {
 		$parser = $this->getParser( 'zh' );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
@@ -126,7 +128,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideWikitextTypes
 	 */
-	public function testRenderOutput( $wikitextType, $expectedWikitext, $titleUsageExpected ) {
+	public function testRenderOutput( string $wikitextType, string $expectedWikitext, bool $titleUsageExpected ): void {
 		$wikitext = $this->getStatementGroupRendererFactory()
 			->newRendererFromParser( $this->getParser(), $wikitextType )
 			->render( new ItemId( 'Q1' ), 'P1' );
@@ -137,7 +139,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideWikitextTypes
 	 */
-	public function testTitleUsageTracking( $wikitextType, $expectedWikitext, $titleUsageExpected ) {
+	public function testTitleUsageTracking( string $wikitextType, string $expectedWikitext, bool $titleUsageExpected ): void {
 		$parser = $this->getParser();
 		$usageAccumulator = new ParserOutputUsageAccumulator(
 			$parser->getOutput(),
@@ -152,7 +154,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $titleUsageExpected, array_key_exists( 'Q7#T', $usages ) );
 	}
 
-	public function provideWikitextTypes() {
+	public function provideWikitextTypes(): array {
 		return [
 			[ DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT, 'Kittens!', false ],
 			[ DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT, '<span><span>Kittens!</span></span>', true ],
@@ -162,7 +164,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider allowDataAccessInUserLanguageProvider
 	 */
-	public function testNewRenderer_usageTracking( $allowDataAccessInUserLanguage ) {
+	public function testNewRenderer_usageTracking( bool $allowDataAccessInUserLanguage ): void {
 		$parser = $this->getParser( 'en', 'es', true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory( $allowDataAccessInUserLanguage );
@@ -186,7 +188,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider allowDataAccessInUserLanguageProvider
 	 */
-	public function testNewRendererFromParser_languageOption( $allowDataAccessInUserLanguage ) {
+	public function testNewRendererFromParser_languageOption( bool $allowDataAccessInUserLanguage ): void {
 		$labelResolver = $this->getMockBuilder( PropertyLabelResolver::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -224,14 +226,14 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory->newRendererFromParser( $this->getParser( 'de', 'es' ) );
 	}
 
-	public function allowDataAccessInUserLanguageProvider() {
+	public function allowDataAccessInUserLanguageProvider(): array {
 		return [
 			[ true ],
 			[ false ],
 		];
 	}
 
-	private function getStatementGroupRendererFactory( $allowDataAccessInUserLanguage = false ) {
+	private function getStatementGroupRendererFactory( bool $allowDataAccessInUserLanguage = false ): StatementGroupRendererFactory {
 		$labelResolver = $this->getMockBuilder( PropertyLabelResolver::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -253,10 +255,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	/**
-	 * @return SnaksFinder
-	 */
-	private function getSnaksFinder() {
+	private function getSnaksFinder(): SnaksFinder {
 		$snakListFinder = $this->createMock( SnaksFinder::class );
 
 		$snakListFinder->method( 'findSnaks' )
@@ -273,14 +272,11 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		return $snakListFinder;
 	}
 
-	private function getLanguageFallbackChainFactory() {
+	private function getLanguageFallbackChainFactory(): LanguageFallbackChainFactory {
 		return new LanguageFallbackChainFactory();
 	}
 
-	/**
-	 * @return OutputFormatSnakFormatterFactory
-	 */
-	private function getSnakFormatterFactory() {
+	private function getSnakFormatterFactory(): OutputFormatSnakFormatterFactory {
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 
 		$snakFormatter->method( 'formatSnak' )
@@ -296,10 +292,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		return $snakFormatterFactory;
 	}
 
-	/**
-	 * @return EntityLookup
-	 */
-	private function getEntityLookup() {
+	private function getEntityLookup(): EntityLookup {
 		$entityLookup = $this->createMock( EntityLookup::class );
 
 		$entityLookup->method( 'getEntity' )
@@ -314,13 +307,13 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getParser(
-		$languageCode = 'en',
-		$userLanguageCode = 'es',
-		$interfaceMessage = false,
-		$disableContentConversion = false,
-		$disableTitleConversion = false,
-		$outputType = Parser::OT_HTML
-	) {
+		string $languageCode = 'en',
+		string $userLanguageCode = 'es',
+		bool $interfaceMessage = false,
+		bool $disableContentConversion = false,
+		bool $disableTitleConversion = false,
+		int $outputType = Parser::OT_HTML
+	): Parser {
 		$parserOptions = $this->getParserOptions(
 			$languageCode,
 			$userLanguageCode,
@@ -337,9 +330,9 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		return $parser;
 	}
 
-	private function getParserOptions( $languageCode, $userLanguageCode, $interfaceMessage,
-		$disableContentConversion, $disableTitleConversion
-	) {
+	private function getParserOptions( string $languageCode, string $userLanguageCode, bool $interfaceMessage,
+		bool $disableContentConversion, bool $disableTitleConversion
+	): ParserOptions {
 		$language = Language::factory( $languageCode );
 		$userLanguage = Language::factory( $userLanguageCode );
 
@@ -352,7 +345,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		return $parserOptions;
 	}
 
-	private function getLanguageFallbackLabelDescriptionLookupFactory() {
+	private function getLanguageFallbackLabelDescriptionLookupFactory(): LanguageFallbackLabelDescriptionLookupFactory {
 		$languageFallbackLabelDescriptionLookup = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookup::class )
 			->disableOriginalConstructor()
 			->getMock();

@@ -158,12 +158,6 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertArrayHasKey( 'Q885588#L.ku-arab', $usage );
 	}
 
-	public function testGetEntityInvalidIdType() {
-		$this->expectException( ScribuntoException::class );
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$luaWikibaseLibrary->getEntity( [] );
-	}
-
 	public function testGetEntityInvalidEntityId() {
 		$this->expectException( ScribuntoException::class );
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
