@@ -390,4 +390,12 @@ return [
 	 * @see https://phabricator.wikimedia.org/T286773
 	 */
 	'viewUiTags' => [],
+
+	/**
+	 * Tags for edits made via the termbox.
+	 *
+	 * @var string[]
+	 * @see https://phabricator.wikimedia.org/T286775
+	 */
+	'termboxTags' => [],
 ];

@@ -432,6 +432,11 @@ List of tags to be added to edits made via the main frontend (WikibaseView).
 
 DEFAULT: `[]`
 
+#### termboxTags
+List of tags to be added to edits made via Termbox v2 (see [termboxEnabled]).
+
+DEFAULT: `[]`
+
 ### Miscellaneous
 
 #### dataRightsText
