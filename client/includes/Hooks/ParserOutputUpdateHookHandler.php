@@ -38,8 +38,8 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 	private $usageAccumulatorFactory;
 
 	public function __construct(
-		NamespaceChecker $namespaceChecker,
 		LangLinkHandlerFactory $langLinkHandlerFactory,
+		NamespaceChecker $namespaceChecker,
 		ClientParserOutputDataUpdater $parserOutputDataUpdater,
 		UsageAccumulatorFactory $usageAccumulatorFactory
 	) {
@@ -47,20 +47,6 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 		$this->langLinkHandlerFactory = $langLinkHandlerFactory;
 		$this->parserOutputDataUpdater = $parserOutputDataUpdater;
 		$this->usageAccumulatorFactory = $usageAccumulatorFactory;
-	}
-
-	public static function factory(
-		LangLinkHandlerFactory $langLinkHandlerFactory,
-		NamespaceChecker $namespaceChecker,
-		ClientParserOutputDataUpdater $parserOutputDataUpdater,
-		UsageAccumulatorFactory $usageAccumulatorFactory
-	): self {
-		return new self(
-			$namespaceChecker,
-			$langLinkHandlerFactory,
-			$parserOutputDataUpdater,
-			$usageAccumulatorFactory
-		);
 	}
 
 	/**
