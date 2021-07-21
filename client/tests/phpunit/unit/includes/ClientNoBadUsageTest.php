@@ -17,7 +17,7 @@ class ClientNoBadUsageTest extends NoBadUsageTest {
 		return [
 			// don’t reference repo in client
 			'WikibaseRepo::' => [
-				'config/WikibaseClient.default.php' => 3, // all guarded by thisWikiIsTheRepo
+				'config/WikibaseClient.default.php' => 2, // all guarded by thisWikiIsTheRepo
 			],
 			'Wikibase\\Repo\\' => [
 				'config/WikibaseClient.default.php' => 1, // see above

@@ -647,23 +647,6 @@ This setting can also be set to an i18n message key and will be handled as a mes
 
 DEFAULT: [$wgSitename]
 
-#### repoNamespaces
-An array telling the client wiki which namespaces on the repository are used for which entity type.
-
-This is given as an associative array mapping entity type IDs such as Item::ENTITY_TYPE, to namespace names.
-This information is used when constructing links to entities on the repository.
-
-DEFAULT: (items in main namespace):
-```
-[
-    'item' => "",
-    'property' => 'Property'
-]
-```
-
-Most Wikibases do not use the main namespace.
-The example settings file does not use the main namespace.
-
 ### Urls, URIs & Paths
 
 #### repoUrl

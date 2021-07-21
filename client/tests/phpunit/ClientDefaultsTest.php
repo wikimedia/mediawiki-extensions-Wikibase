@@ -3,7 +3,6 @@
 namespace Wikibase\Tests;
 
 use MediaWikiIntegrationTestCase;
-use MWNamespace;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\WikibaseSettings;
 
@@ -133,7 +132,6 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 					'repoArticlePath' => '/mywiki',
 					'repoScriptPath' => '/mediawiki',
 					'siteGlobalID' => 'mw_mywiki',
-					'repoNamespaces' => [ 'item' => MWNamespace::getCanonicalName( 303 ) ],
 					'entitySources' => [
 						'local' => [
 							'repoDatabase' => false,

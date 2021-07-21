@@ -233,25 +233,6 @@ return call_user_func( function() {
 		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgScriptPath'] : '/w';
 	};
 
-	$defaults['repoNamespaces'] = function ( SettingsArray $settings ) {
-		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
-			// if this is the repo wiki, look up the namespace names based on the entityNamespaces setting
-			$namespaceNames = array_map(
-				[ MWNamespace::class, 'getCanonicalName' ],
-				WikibaseRepo::getSettings()->getSetting( 'entityNamespaces' )
-			);
-			return $namespaceNames;
-		} else {
-			// XXX: Default to having Items in the main namespace, and properties in the 'Property' namespace.
-			// That is the live setup at wikidata.org, it is NOT consistent with the example settings!
-			// FIXME: throw an exception, instead of making assumptions that may brak the site in strange ways!
-			return [
-				'item' => '',
-				'property' => 'Property'
-			];
-		}
-	};
-
 	$defaults['changesDatabase'] = function ( SettingsArray $settings ) {
 		if ( $settings->hasSetting( 'repoDatabase' ) ) {
 			// TODO probably remove this? repoDatabase setting is ancient (see Ibbdb5d0317)
