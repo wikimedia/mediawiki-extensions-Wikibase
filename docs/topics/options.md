@@ -821,17 +821,6 @@ DEFAULT: `https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?title=Wi
 
 ### Miscellaneous
 
-#### repositories
-An associative array mapping repository names to settings relevant to the particular repository.
-
-Local repository is identified using the empty string as its name.
-Each repository's settings are an associative array containing the following keys:
-
- - 'entityNamespaces': A map of entity type identifiers (strings) that the local wiki supports from the foreign repository to namespaces (IDs or canonical names) related to pages of entities of the given type on foreign repository's wiki. If entities are stored in alternative slots, the syntax <namespace>/<slot> can be used to define which slot to use.
- - 'repoDatabase': A symbolic database identifier (string) that MediaWiki's LBFactory class understands. Note that `false` would mean “this wiki's database”!
- - 'baseUri': A base URI (string) for concept URIs. It should contain scheme and authority part of the URI.
- - 'prefixMapping': A prefix mapping array, see also docs/foreign-entity-ids.wiki in the DataModel component.
-
 #### itemAndPropertySourceName
 Name of the providing Item and Property definitions (data is used from here, including sitelinks).
 

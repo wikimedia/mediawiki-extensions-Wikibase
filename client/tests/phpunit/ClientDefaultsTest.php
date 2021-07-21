@@ -233,20 +233,7 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 
 		foreach ( $expected as $key => $exp ) {
 			$actual = $settings->getSetting( $key );
-
-			if ( $key === 'repositories' ) {
-				$this->assertRepositorySettingsEqual( $exp, $actual );
-				continue;
-			}
-
 			$this->assertSame( $exp, $actual, "Setting $key" );
-		}
-	}
-
-	private function assertRepositorySettingsEqual( $expected, $actual ) {
-		foreach ( $expected as $repoName => $expectedRepoSettings ) {
-			$actualToCompare = array_intersect_key( $actual[$repoName], $expectedRepoSettings );
-			$this->assertSame( $expectedRepoSettings, $actualToCompare );
 		}
 	}
 
