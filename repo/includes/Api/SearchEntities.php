@@ -95,16 +95,12 @@ class SearchEntities extends ApiBase {
 		string $moduleName,
 		ApiHelperFactory $apiHelperFactory,
 		EntityArticleIdLookup $entityArticleIdLookup,
-		array $entitySearchHelperCallbacks,
+		EntitySearchHelper $entitySearchHelper,
 		EntitySourceDefinitions $entitySourceDefinitions,
 		EntityTitleTextLookup $entityTitleTextLookup,
 		EntityUrlLookup $entityUrlLookup,
 		ContentLanguages $termsLanguages
 	): self {
-		$entitySearchHelper = new TypeDispatchingEntitySearchHelper(
-			$entitySearchHelperCallbacks,
-			$mainModule->getRequest()
-		);
 
 		return new self(
 			$mainModule,

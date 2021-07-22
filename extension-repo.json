@@ -180,7 +180,7 @@
 			"services": [
 				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EntityArticleIdLookup",
-				"WikibaseRepo.EntitySearchHelperCallbacks",
+				"WikibaseRepo.EntitySearchHelper",
 				"WikibaseRepo.EntitySourceDefinitions",
 				"WikibaseRepo.EntityTitleTextLookup",
 				"WikibaseRepo.EntityUrlLookup",
