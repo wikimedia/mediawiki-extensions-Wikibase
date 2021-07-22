@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Usage;
 
 use ParserOutput;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * This implementation of the UsageAccumulator interface acts as a wrapper around
@@ -35,14 +34,10 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	public function __construct(
 		ParserOutput $parserOutput,
 		EntityUsageFactory $entityUsageFactory,
-		UsageDeduplicator $deduplicator = null
+		UsageDeduplicator $deduplicator
 	) {
 		$this->parserOutput = $parserOutput;
-		// TODO: Inject it properly
-		$usageModifierLimits = WikibaseClient::getSettings()->getSetting(
-			'entityUsageModifierLimits'
-		);
-		$this->usageDeduplicator = $deduplicator ?: new UsageDeduplicator( $usageModifierLimits );
+		$this->usageDeduplicator = $deduplicator;
 		$this->entityUsageFactory = $entityUsageFactory;
 	}
 

@@ -32,7 +32,8 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 		$parserOutput = new ParserOutput();
 		$acc = new ParserOutputUsageAccumulator(
 			$parserOutput,
-			$this->newEntityUsageFactory()
+			$this->newEntityUsageFactory(),
+			new UsageDeduplicator( [] )
 		);
 		$tester = new UsageAccumulatorContractTester( $acc );
 
