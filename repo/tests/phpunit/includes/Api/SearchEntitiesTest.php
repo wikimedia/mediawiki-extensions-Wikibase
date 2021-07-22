@@ -182,13 +182,6 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			new Term( 'fr', 'ADisplayLabel' )
 		);
 
-		$foreignItemMatch = new TermSearchResult(
-			new Term( 'de', 'SomeText' ),
-			'label',
-			new ItemId( 'foreign:Q333' ),
-			new Term( 'de', 'SomeText' )
-		);
-
 		$propertyMatch = new TermSearchResult(
 			new Term( 'en', 'PropertyLabel' ),
 			'label',
