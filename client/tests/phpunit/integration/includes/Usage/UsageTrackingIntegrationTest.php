@@ -41,11 +41,6 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 	 */
 	private $oldAllowDataTransclusion;
 
-	/**
-	 * @var int[]
-	 */
-	private $oldEntityNamespaces;
-
 	protected function setUp(): void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( 'Integration test requires repo and client extension to be active on the same wiki.' );
@@ -56,9 +51,7 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 
 		$settings = WikibaseClient::getSettings();
 		$this->oldAllowDataTransclusion = $settings->getSetting( 'allowDataTransclusion' );
-		$this->oldEntityNamespaces = WikibaseClient::getEntityNamespaceLookup()->getEntityNamespaces();
 		$settings->setSetting( 'allowDataTransclusion', true );
-		$settings->setSetting( 'entityNamespaces', [ 'item' => 0 ] );
 
 		$entityLookup = $this->createMock( EntityLookup::class );
 		$entityLookup->method( 'hasEntity' )
@@ -80,10 +73,6 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		WikibaseClient::getSettings()->setSetting(
 			'allowDataTransclusion',
 			$this->oldAllowDataTransclusion
-		);
-		WikibaseClient::getSettings()->setSetting(
-			'entityNamespaces',
-			$this->oldEntityNamespaces
 		);
 	}
 

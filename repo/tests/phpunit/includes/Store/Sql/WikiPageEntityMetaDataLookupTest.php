@@ -61,11 +61,6 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		if ( !$this->data ) {
 			$user = $this->getTestUser()->getUser();
 
-			$this->mergeMwGlobalArrayValue(
-				'wgWBRepoSettings',
-				[ 'entityNamespaces' => [ 'item' => 120, 'property' => 122 ] ]
-			);
-
 			$store = WikibaseRepo::getEntityStore();
 			for ( $i = 0; $i < 3; $i++ ) {
 				$this->data[] = $store->saveEntity( new Item(), 'WikiPageEntityMetaDataLookupTest', $user, EDIT_NEW );
