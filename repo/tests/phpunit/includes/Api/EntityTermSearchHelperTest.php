@@ -23,9 +23,6 @@ use Wikibase\Repo\Api\EntityTermSearchHelper;
 class EntityTermSearchHelperTest extends \PHPUnit\Framework\TestCase {
 
 	private const EXISTING_LOCAL_ITEM = 'Q111';
-	private const DEFAULT_LANGUAGE = 'pt';
-	private const DEFAULT_LABEL = 'ptLabel';
-	private const DEFAULT_DESCRIPTION = 'ptDescription';
 
 	/**
 	 * @param string $search
