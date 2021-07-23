@@ -18,7 +18,7 @@ use Wikibase\Repo\Api\EntitySearchHelper;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class CombinedEntitySearchHelperUnitTest extends \PHPUnit\Framework\TestCase {
+class CombinedEntitySearchHelperTest extends \PHPUnit\Framework\TestCase {
 
 	public function testInternalSearchHelperReceivesCorrectParameters() {
 		$q33 = [ 'Q33' => new TermSearchResult( new Term( 'en', 'foo33' ), 'match', new ItemId( 'Q33' ) ) ];
