@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Api;
 
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikimedia\Assert\Assert;
 
 /**
  * Helper class to search for entities by ID
@@ -20,6 +21,8 @@ class CombinedEntitySearchHelper implements EntitySearchHelper {
 	 * @param array $searchHelpers ordered array of EntitySearchHelpers to be used.
 	 */
 	public function __construct( array $searchHelpers ) {
+		Assert::parameterElementType( EntitySearchHelper::class, $searchHelpers, '$searchHelpers' );
+
 		$this->searchHelpers = $searchHelpers;
 	}
 
