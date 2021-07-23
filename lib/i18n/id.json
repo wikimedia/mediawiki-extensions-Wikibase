@@ -14,7 +14,7 @@
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Butir yang telah dihapus",
 	"wikibase-deletedentity-property": "Atribut yang telah dihapus",
-	"wikibase-deletedentity-query": "permintaan (''query'') yang telah dihapus",
+	"wikibase-deletedentity-query": "Kueri yang telah dihapus",
 	"wikibase-error-unexpected": "Galat: $1.",
 	"wikibase-error-unknown": "Terjadi sebuah galat.",
 	"wikibase-error-save-generic": "Tidak bisa menyimpan dikarenakan sebuah galat.",

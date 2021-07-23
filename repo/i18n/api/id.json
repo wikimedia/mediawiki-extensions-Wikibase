@@ -5,13 +5,14 @@
 			"Daud I.F. Argana",
 			"Farras",
 			"Macofe",
+			"RXerself",
 			"Rachmat04",
 			"SaldırganSincap"
 		]
 	},
-	"apihelp-wbavailablebadges-description": "Permintaan (''query'') atas butir lencana yang tersedia",
+	"apihelp-wbavailablebadges-description": "Kueri atas butir lencana yang tersedia",
 	"apihelp-wbavailablebadges-summary": "Meminta butir lencana yang tersedia.",
-	"apihelp-wbavailablebadges-example-1": "Permintaan (''query'') untuk semua butir lencana yang tersedia",
+	"apihelp-wbavailablebadges-example-1": "Kueri untuk semua butir lencana yang tersedia",
 	"apihelp-wbcreateclaim-description": "Buat klaim Wikibase",
 	"apihelp-wbcreateclaim-summary": "Membuat klaim Wikibase.",
 	"apihelp-wbcreateclaim-param-baserevid": "Penanda angka untuk perbaikan berdasarkan perubahan yang terjadi.\nIni digunakan untuk melacak konflik yang terjadi saat penyimpanan.",
