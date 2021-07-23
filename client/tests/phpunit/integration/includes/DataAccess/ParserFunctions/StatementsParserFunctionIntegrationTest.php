@@ -23,6 +23,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -97,7 +98,8 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 	private function newParserOutputUsageAccumulator( ParserOutput $parserOutput ): UsageAccumulator {
 		$factory = new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [] )
+			new UsageDeduplicator( [] ),
+			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 		return $factory->newFromParserOutput( $parserOutput );
 	}

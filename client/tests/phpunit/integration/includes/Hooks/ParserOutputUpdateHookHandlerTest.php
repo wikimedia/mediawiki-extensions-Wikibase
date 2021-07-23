@@ -29,6 +29,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;
@@ -164,7 +165,8 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	private function newUsageAccumulatorFactory(): UsageAccumulatorFactory {
 		return new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [] )
+			new UsageDeduplicator( [] ),
+			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 	}
 
