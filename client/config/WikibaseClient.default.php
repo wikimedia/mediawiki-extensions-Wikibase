@@ -238,14 +238,9 @@ return call_user_func( function() {
 	};
 
 	$defaults['repoSiteId'] = function( SettingsArray $settings ) {
-		if ( $settings->hasSetting( 'repoDatabase' ) ) {
-			// TODO probably remove this? repoDatabase setting is ancient (see Ibbdb5d0317)
-			$repoDatabase = $settings->getSetting( 'repoDatabase' );
-		} else {
-			$entitySources = $settings->getSetting( 'entitySources' );
-			$itemAndPropertySourceName = $settings->getSetting( 'itemAndPropertySourceName' );
-			$repoDatabase = $entitySources[$itemAndPropertySourceName]['repoDatabase'];
-		}
+		$entitySources = $settings->getSetting( 'entitySources' );
+		$itemAndPropertySourceName = $settings->getSetting( 'itemAndPropertySourceName' );
+		$repoDatabase = $entitySources[$itemAndPropertySourceName]['repoDatabase'];
 
 		return ( $repoDatabase === false )
 			? $settings->getSetting( 'siteGlobalID' )

@@ -41,6 +41,7 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 * (client) (T285471) repositories has been removed.
 * (client) (T286539) repoNamespaces has been removed.
 * (repo+client) (T285473) changesDatabase has been removed.
+* (client) (T287242) repoDatabase has been removed.
 
 === New user-facing features in 1.37 ===
 

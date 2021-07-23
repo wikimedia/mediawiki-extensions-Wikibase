@@ -22,7 +22,6 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				'repoArticlePath' => '/wiki',
 				'repoScriptPath' => '/w',
 				'siteGlobalID' => 'mywiki',
-				'repoDatabase' => 'foo',
 				'sharedCacheKeyPrefix' => 'wikibase_shared/',
 				'entitySources' => [
 					'local' => [
@@ -47,7 +46,6 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				'repoArticlePath' => '/wiki',
 				'repoScriptPath' => '/w',
 				'siteGlobalID' => 'mywiki',
-				'repoDatabase' => 'foo',
 				'sharedCacheKeyPrefix' => 'wikibase_shared/',
 				'entitySources' => [
 					'local' => [
@@ -68,7 +66,6 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				'repoArticlePath' => '/wiki',
 				'repoScriptPath' => '/w',
 				'siteGlobalID' => 'mywiki',
-				'repoDatabase' => 'foo',
 				'sharedCacheKeyPrefix' => 'foo:WBL/',
 				'entitySources' => [
 					'local' => [
@@ -93,7 +90,6 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				'repoArticlePath' => '/wiki',
 				'repoScriptPath' => '/w',
 				'siteGlobalID' => 'mywiki',
-				'repoDatabase' => 'foo',
 				'sharedCacheKeyPrefix' => 'foo:WBL/',
 				'entitySources' => [
 					'local' => [
