@@ -1,7 +1,10 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Api;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -19,6 +22,15 @@ use Wikibase\Repo\Api\EntitySearchHelper;
  * @author Addshore
  */
 class CombinedEntitySearchHelperTest extends \PHPUnit\Framework\TestCase {
+
+	public function testWithInvalidConstructorArgs(): void {
+		$this->expectException( InvalidArgumentException::class );
+
+		new CombinedEntitySearchHelper( [
+			$this->createStub( EntitySearchHelper::class ),
+			'a potato'
+		] );
+	}
 
 	public function testInternalSearchHelperReceivesCorrectParameters() {
 		$q33 = [ 'Q33' => new TermSearchResult( new Term( 'en', 'foo33' ), 'match', new ItemId( 'Q33' ) ) ];
