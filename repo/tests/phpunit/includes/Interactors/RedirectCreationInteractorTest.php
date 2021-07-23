@@ -176,13 +176,14 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	public function testCreateRedirect_success( EntityId $fromId, EntityId $toId ) {
 		$interactor = $this->newInteractor( $this->once() );
 
-		$interactor->createRedirect( $fromId, $toId, false, $this->getContext() );
+		$interactor->createRedirect( $fromId, $toId, false, [ 'tag' ], $this->getContext() );
 
 		try {
 			$this->mockRepository->getEntity( $fromId );
 			$this->fail( 'getEntity( ' . $fromId->getSerialization() . ' ) did not throw an UnresolvedRedirectException' );
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$this->assertEquals( $toId->getSerialization(), $ex->getRedirectTargetId()->getSerialization() );
+			$this->assertSame( [ 'tag' ], $this->mockRepository->getLatestLogEntryFor( $fromId )['tags'] );
 		}
 	}
 
@@ -254,7 +255,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		$interactor = $this->newInteractor( null, $efStatus );
 
 		try {
-			$interactor->createRedirect( $fromId, $toId, false, $this->getContext() );
+			$interactor->createRedirect( $fromId, $toId, false, [], $this->getContext() );
 			$this->fail( 'createRedirect not fail with error ' . $expectedCode . ' as expected!' );
 		} catch ( RedirectCreationException $ex ) {
 			$this->assertEquals( $expectedCode, $ex->getErrorCode() );
@@ -269,7 +270,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		$user = User::newFromName( 'UserWithoutPermission' );
 
 		$interactor = $this->newInteractor( null, null );
-		$interactor->createRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ), false, $this->getContext( $user ) );
+		$interactor->createRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ), false, [], $this->getContext( $user ) );
 	}
 
 }

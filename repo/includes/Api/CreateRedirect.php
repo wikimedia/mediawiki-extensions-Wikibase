@@ -124,7 +124,7 @@ class CreateRedirect extends ApiBase {
 	 * @throws RedirectCreationException
 	 */
 	private function createRedirect( EntityId $fromId, EntityId $toId, bool $bot, ApiResult $result ): void {
-		$this->interactor->createRedirect( $fromId, $toId, $bot, $this->getContext() );
+		$this->interactor->createRedirect( $fromId, $toId, $bot, [], $this->getContext() ); // TODO pass through $tags (T229918)
 
 		$result->addValue( null, 'success', 1 );
 		$result->addValue( null, 'redirect', $toId->getSerialization() );

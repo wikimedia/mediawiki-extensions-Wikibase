@@ -522,11 +522,12 @@ class MockRepository implements
 	 * @param User $user
 	 * @param int $flags
 	 * @param int|bool $baseRevisionId
+	 * @param string[] $tags
 	 *
 	 * @throws StorageException If the given type of entity does not support redirects
 	 * @return int The revision id created by storing the redirect
 	 */
-	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevisionId = false ) {
+	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevisionId = false, array $tags = [] ) {
 		if ( !( $redirect->getEntityId() instanceof ItemId ) ) {
 			throw new StorageException( 'Entity type does not support redirects: ' . $redirect->getEntityId()->getEntityType() );
 		}
@@ -534,7 +535,7 @@ class MockRepository implements
 		$this->putRedirect( $redirect );
 
 		$revisionId = ++$this->maxRevisionId;
-		$this->putLog( $revisionId, $redirect->getEntityId(), $summary, $user->getName() );
+		$this->putLog( $revisionId, $redirect->getEntityId(), $summary, $user->getName(), $tags );
 
 		return $revisionId;
 	}

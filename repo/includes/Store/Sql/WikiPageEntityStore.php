@@ -281,6 +281,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param User $user
 	 * @param int $flags
 	 * @param int|bool $baseRevId
+	 * @param string[] $tags
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws StorageException
@@ -291,7 +292,8 @@ class WikiPageEntityStore implements EntityStore {
 		$summary,
 		User $user,
 		$flags = 0,
-		$baseRevId = false
+		$baseRevId = false,
+		array $tags = []
 	) {
 		$this->assertCanStoreEntity( $redirect->getEntityId() );
 		$this->assertCanStoreEntity( $redirect->getTargetId() );
@@ -303,8 +305,7 @@ class WikiPageEntityStore implements EntityStore {
 				' to ' . $redirect->getTargetId()->getSerialization() );
 		}
 
-		// TODO pass $tags into saveEntityContent()
-		$revision = $this->saveEntityContent( $content, $user, $summary, $flags, $baseRevId );
+		$revision = $this->saveEntityContent( $content, $user, $summary, $flags, $baseRevId, $tags );
 
 		$this->dispatcher->dispatch( 'redirectUpdated', $redirect, $revision->getId() );
 

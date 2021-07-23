@@ -77,6 +77,9 @@ interface EntityStore {
 	 * @param int $flags EDIT_XXX flags, as defined for WikiPage::doEditContent.
 	 * @param int|bool $baseRevId the revision ID $entity is based on. Saving should fail if
 	 * $baseRevId is no longer the current revision.
+	 * @param string[] $tags Change tags to add to the edit.
+	 * Callers are responsible for permission checks
+	 * (typically using {@link ChangeTags::canAddTagsAccompanyingChange}).
 	 *
 	 * @see WikiPage::doEditContent
 	 *
@@ -84,7 +87,7 @@ interface EntityStore {
 	 * @throws StorageException
 	 * @throws PermissionsError
 	 */
-	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevId = false );
+	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevId = false, array $tags = [] );
 
 	/**
 	 * Deletes the given entity in some underlying storage mechanism.

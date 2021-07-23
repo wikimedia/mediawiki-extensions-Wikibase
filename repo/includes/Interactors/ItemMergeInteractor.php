@@ -125,6 +125,9 @@ class ItemMergeInteractor {
 	 * @param string[] $ignoreConflicts The kinds of conflicts to ignore
 	 * @param string|null $summary
 	 * @param bool $bot Mark the edit as bot edit
+	 * @param string[] $tags Change tags to add to the edit.
+	 * Callers are responsible for permission checks
+	 * (typically using {@link ChangeTags::canAddTagsAccompanyingChange}).
 	 *
 	 * @return array A list of exactly two EntityRevision objects and a boolean. The first
 	 *  EntityRevision object represents the modified source item, the second one represents the
@@ -140,7 +143,8 @@ class ItemMergeInteractor {
 		IContextSource $context,
 		array $ignoreConflicts = [],
 		?string $summary = null,
-		bool $bot = false
+		bool $bot = false,
+		array $tags = []
 	) {
 		$user = $context->getUser();
 		$this->checkPermissions( $fromId, $user );
@@ -170,13 +174,13 @@ class ItemMergeInteractor {
 			throw new ItemMergeException( $e->getMessage(), 'failed-modify', $e );
 		}
 
-		$result = $this->attemptSaveMerge( $fromItem, $toItem, $summary, $user, $bot );
+		$result = $this->attemptSaveMerge( $fromItem, $toItem, $summary, $user, $bot, $tags );
 		$this->updateWatchlistEntries( $fromId, $toId );
 
 		$redirected = false;
 
 		if ( $this->isEmpty( $fromId ) ) {
-			$this->interactorRedirect->createRedirect( $fromId, $toId, $bot, $context );
+			$this->interactorRedirect->createRedirect( $fromId, $toId, $bot, $tags, $context );
 			$redirected = true;
 		}
 
@@ -258,21 +262,22 @@ class ItemMergeInteractor {
 	 * @param Item $toItem
 	 * @param string|null $summary
 	 * @param bool $bot
+	 * @param string[] $tags
 	 *
 	 * @return array A list of exactly two EntityRevision objects. The first one represents the
 	 *  modified source item, the second one represents the modified target item.
 	 */
-	private function attemptSaveMerge( Item $fromItem, Item $toItem, $summary, User $user, $bot ) {
+	private function attemptSaveMerge( Item $fromItem, Item $toItem, ?string $summary, User $user, bool $bot, array $tags ) {
 		$toSummary = $this->getSummary( 'to', $toItem->getId(), $summary );
-		$fromRev = $this->saveItem( $fromItem, $toSummary, $user, $bot );
+		$fromRev = $this->saveItem( $fromItem, $toSummary, $user, $bot, $tags );
 
 		$fromSummary = $this->getSummary( 'from', $fromItem->getId(), $summary );
-		$toRev = $this->saveItem( $toItem, $fromSummary, $user, $bot );
+		$toRev = $this->saveItem( $toItem, $fromSummary, $user, $bot, $tags );
 
 		return [ $fromRev, $toRev ];
 	}
 
-	private function saveItem( Item $item, FormatableSummary $summary, User $user, $bot ) {
+	private function saveItem( Item $item, FormatableSummary $summary, User $user, bool $bot, array $tags ) {
 		// Given we already check all constraints in ChangeOpsMerge, it's
 		// fine to ignore them here. This is also needed to not run into
 		// the constraints we're supposed to ignore (see ChangeOpsMerge::removeConflictsWithEntity
@@ -287,7 +292,9 @@ class ItemMergeInteractor {
 				$item,
 				$this->summaryFormatter->formatSummary( $summary ),
 				$user,
-				$flags
+				$flags,
+				false,
+				$tags
 			);
 		} catch ( StorageException $ex ) {
 			throw new ItemMergeException( $ex->getMessage(), 'failed-save', $ex );

@@ -109,14 +109,16 @@ class TypeDispatchingEntityStore implements EntityStore {
 		$summary,
 		User $user,
 		$flags = 0,
-		$baseRevId = false
+		$baseRevId = false,
+		array $tags = []
 	) {
 		return $this->getStore( $redirect->getEntityId()->getEntityType() )->saveRedirect(
 			$redirect,
 			$summary,
 			$user,
 			$flags,
-			$baseRevId
+			$baseRevId,
+			$tags
 		);
 	}
 
