@@ -23,18 +23,24 @@ trait FederatedPropertiesTestTrait {
 		$this->setWbSetting( 'federatedPropertiesSourceScriptUrl', '255.255.255.255/' );
 	}
 
-	protected function setFederatedPropertiesEnabled() {
+	protected function setFederatedPropertiesEnabled( bool $withLocalPropertySource = false ): void {
 		$this->setWbSetting( 'federatedPropertiesEnabled', true );
 
+		$localEntitySource = [
+			'entityNamespaces' => [ 'item' => 120 ],
+			'repoDatabase' => false,
+			'baseUri' => 'http://wikidata-federated-properties.wmflabs.org/entity/',
+			'interwikiPrefix' => '',
+			'rdfNodeNamespacePrefix' => 'wd',
+			'rdfPredicateNamespacePrefix' => 'wdt',
+		];
+
+		if ( $withLocalPropertySource ) {
+			$localEntitySource['entityNamespaces']['property'] = 122;
+		}
+
 		$this->setWbSetting( 'entitySources', [
-			'local' => [
-				'entityNamespaces' => [ 'item' => 120 ],
-				'repoDatabase' => false,
-				'baseUri' => 'http://wikidata-federated-properties.wmflabs.org/entity/',
-				'interwikiPrefix' => '',
-				'rdfNodeNamespacePrefix' => 'wd',
-				'rdfPredicateNamespacePrefix' => 'wdt',
-			],
+			'local' => $localEntitySource,
 			'fedprops' => [
 				'entityNamespaces' => [ 'property' => 122 ],
 				'type' => 'api',
