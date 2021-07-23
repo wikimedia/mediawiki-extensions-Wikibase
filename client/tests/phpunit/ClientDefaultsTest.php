@@ -23,7 +23,6 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				'repoScriptPath' => '/w',
 				'siteGlobalID' => 'mywiki',
 				'repoDatabase' => 'foo',
-				'changesDatabase' => 'doo',
 				'sharedCacheKeyPrefix' => 'wikibase_shared/',
 				'entitySources' => [
 					'local' => [
@@ -49,7 +48,6 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				'repoScriptPath' => '/w',
 				'siteGlobalID' => 'mywiki',
 				'repoDatabase' => 'foo',
-				'changesDatabase' => 'doo',
 				'sharedCacheKeyPrefix' => 'wikibase_shared/',
 				'entitySources' => [
 					'local' => [
@@ -71,7 +69,6 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				'repoScriptPath' => '/w',
 				'siteGlobalID' => 'mywiki',
 				'repoDatabase' => 'foo',
-				'changesDatabase' => 'doo',
 				'sharedCacheKeyPrefix' => 'foo:WBL/',
 				'entitySources' => [
 					'local' => [
@@ -97,7 +94,6 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 				'repoScriptPath' => '/w',
 				'siteGlobalID' => 'mywiki',
 				'repoDatabase' => 'foo',
-				'changesDatabase' => 'doo',
 				'sharedCacheKeyPrefix' => 'foo:WBL/',
 				'entitySources' => [
 					'local' => [
@@ -153,28 +149,10 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 							'type' => 'db',
 						],
 					],
-					'changesDatabase' => false,
 					'sharedCacheKeyPrefix' => 'wikibase_shared/mw_mywiki',
 				]
 			];
 		}
-
-		yield 'derive changesDatabase' => [
-			[ // $settings
-				'entitySources' => [
-					'foo' => [
-						'repoDatabase' => 'mw_foowiki',
-					],
-				],
-				'itemAndPropertySourceName' => 'foo',
-			],
-			[ // $wg
-			],
-			false, // $repoIsLocal
-			[ // $expected
-				'changesDatabase' => 'mw_foowiki',
-			]
-		];
 
 		if ( WikibaseSettings::isRepoEnabled() ) {
 			yield 'sharedCacheKeyPrefix explicitly set' => [
@@ -207,7 +185,6 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 					'repoArticlePath' => '/mywiki',
 					'repoScriptPath' => '/mediawiki',
 					'siteGlobalID' => 'mw_mywiki',
-					'changesDatabase' => false,
 					'sharedCacheKeyPrefix' => 'wikibase_shared/wikidata_1_25wmf24',
 				]
 			];

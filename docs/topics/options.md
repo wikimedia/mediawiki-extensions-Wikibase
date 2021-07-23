@@ -50,12 +50,6 @@ If this is `true`, the pruneChanges.php script should run periodically to remove
 
 DEFAULT: ```true```
 
-#### changesDatabase {#changesDatabase}
-The database that changes are recorded to by a repo for processing by clients.
-
- - This must be set to a symbolic database identifier that MediaWiki's LBFactory class understands; `false` means that the wiki's own database shall be used.
- - On the client this is normally the same database as the repo db.
-
 ### Storage URLs
 
 #### geoShapeStorageBaseUrl
