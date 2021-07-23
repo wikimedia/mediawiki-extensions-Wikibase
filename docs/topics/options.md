@@ -563,24 +563,23 @@ The behaviour is unpredicted if it is disabled after it was enabled.
 
 DEFAULT: ```false```
 
-### federatedPropertiesSourceScriptUrl {#repo_federatedPropertiesSourceScriptUrl}
+#### federatedPropertiesSourceScriptUrl {#repo_federatedPropertiesSourceScriptUrl}
 A url path for the location of the source wikibase instance.
 The set url path should allow access to both `index.php` and `api.php`
 
 DEFAULT: ```https://www.wikidata.org/w/```
 
-### changeVisibilityNotificationClientRCMaxAge {#repo_changeVisibilityNotificationClientRCMaxAge}
+#### changeVisibilityNotificationClientRCMaxAge {#repo_changeVisibilityNotificationClientRCMaxAge}
 Value of the `$wgRCMaxAge` setting, which specifies the max age (in seconds) of entries in the `recentchanges` table, on the client wikis.
 
 DEFAULT: [$wgRCMaxAge].
 
-### changeVisibilityNotificationJobBatchSize {#repo_changeVisibilityNotificationJobBatchSize}
+#### changeVisibilityNotificationJobBatchSize {#repo_changeVisibilityNotificationJobBatchSize}
 Batch size (how many revisions per job) to use when pushing `ChangeVisibilityNotification` jobs to clients.
 
 DEFAULT: ```3```.
 
-
-### deleteNotificationClientRCMaxAge {#repo_deleteNotificationClientRCMaxAge}
+#### deleteNotificationClientRCMaxAge {#repo_deleteNotificationClientRCMaxAge}
 Value of the `$wgRCMaxAge` setting, which specifies the max age (in seconds) of entries in the `recentchanges` table, on the client wikis.
 
 Example: On entity-page deletion the DeleteDispatcher hook is called and creates a DispatchChangeDeletionNotification job which in turn collects the revision rows from `archive` using this threshold.
