@@ -19,21 +19,17 @@ use Wikibase\Repo\FederatedProperties\ApiEntityTitleTextLookup;
  */
 class ApiEntityTitleTextLookupTest extends TestCase {
 
-	public function provideTestGetFullUrl() {
+	public function provideTestGetPrefixedText() {
 		return [
-			[
-				'Property',
-				new FederatedPropertyId( 'http://wikidata.org/entity/P789', 'P789' ),
-				'Property:http://wikidata.org/entity/P789' // This is obvs wrong but reflects the current behavior. Fixed in a follow-up.
-			],
+			[ 'Property', new FederatedPropertyId( 'http://wikidata.org/entity/P789', 'P789' ), 'Property:P789' ],
 			[ null, new FederatedPropertyId( 'http://wikidata.org/entity/P666', 'P666' ), null ],
 		];
 	}
 
 	/**
-	 * @dataProvider provideTestGetFullUrl
+	 * @dataProvider provideTestGetPrefixedText
 	 */
-	public function testGetFullUrl( $namespaceName, $entityId, $expected ) {
+	public function testGetPrefixedText( $namespaceName, $entityId, $expected ) {
 		$lookup = new ApiEntityTitleTextLookup(
 			$this->getApiEntityNamespaceInfoLookup( $namespaceName )
 		);

@@ -36,11 +36,11 @@ class ApiEntityTitleTextLookup implements EntityTitleTextLookup {
 		return $this->getTitleString( $namespaceName, $id );
 	}
 
-	private function getTitleString( $namespaceName, EntityId $id ) {
+	private function getTitleString( $namespaceName, FederatedPropertyId $id ) {
 		if ( $namespaceName === '' ) {
 			return $id->getSerialization();
 		}
-		return $namespaceName . ':' . $id->getSerialization();
+		return $namespaceName . ':' . $id->getRemoteIdSerialization();
 	}
 
 }
