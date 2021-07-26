@@ -98,6 +98,8 @@ The entity types repository is an associative array mapping entity type identifi
   * A callable for creating an [EntityExistenceChecker] for entities of this type, called without arguments.
 * redirect-checker-callback (repo only)
   * A callable for creating an [EntityRedirectChecker] for entities of this type, called without arguments.
+* property-data-type-lookup-callback (repo only)
+  * A callable for creating an [PropertyDataTypeLookup] for entities of the property type, called without arguments.
 
 Extensions that wish to register an entity type should use the [WikibaseRepoEntityTypes] and/or [WikibaseClientEntityTypes] hooks to provide additional entity type definitions. (See @ref md_docs_topics_hooks-php)
 

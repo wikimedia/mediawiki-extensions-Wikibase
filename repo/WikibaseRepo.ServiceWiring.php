@@ -51,7 +51,6 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -90,12 +89,12 @@ use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
-use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
+use Wikibase\Lib\SourceDispatchingPropertyDataTypeLookup;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -1488,20 +1487,17 @@ return [
 	},
 
 	'WikibaseRepo.PropertyDataTypeLookup' => function ( MediaWikiServices $services ): PropertyDataTypeLookup {
-		$federatedPropertiesEnabled = WikibaseRepo::getSettings( $services )
-			->getSetting( 'federatedPropertiesEnabled' );
-		if ( $federatedPropertiesEnabled ) {
-			return WikibaseRepo::getFederatedPropertiesServiceFactory( $services )
-				->newApiPropertyDataTypeLookup();
-		}
-
-		$infoLookup = WikibaseRepo::getStore( $services )->getPropertyInfoLookup();
-		$entityLookup = WikibaseRepo::getEntityLookup( $services );
-		$retrievingLookup = new EntityRetrievingDataTypeLookup( $entityLookup );
-		return new PropertyInfoDataTypeLookup(
-			$infoLookup,
-			WikibaseRepo::getLogger( $services ),
-			$retrievingLookup
+		return new SourceDispatchingPropertyDataTypeLookup(
+			new EntitySourceLookup(
+				WikibaseRepo::getEntitySourceDefinitions( $services ),
+				new SubEntityTypesMapper( WikibaseRepo::getEntityTypeDefinitions( $services )
+				->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) )
+			),
+			new ServiceBySourceAndTypeDispatcher(
+				PropertyDataTypeLookup::class,
+				WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
+					->getServiceBySourceAndType( EntityTypeDefinitions::PROPERTY_DATA_TYPE_LOOKUP_CALLBACK )
+			)
 		);
 	},
 
