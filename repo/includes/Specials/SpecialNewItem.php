@@ -53,6 +53,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	private $termsCollisionDetector;
 
 	public function __construct(
+		array $tags,
 		SpecialPageCopyrightView $copyrightView,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		SummaryFormatter $summaryFormatter,
@@ -65,6 +66,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		parent::__construct(
 			'NewItem',
 			'createpage',
+			$tags,
 			$copyrightView,
 			$entityNamespaceLookup,
 			$summaryFormatter,
@@ -93,6 +95,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		);
 
 		return new self(
+			$repoSettings->getSetting( 'specialPageTags' ),
 			$copyrightView,
 			$entityNamespaceLookup,
 			$summaryFormatter,

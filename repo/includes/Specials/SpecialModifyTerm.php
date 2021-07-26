@@ -61,6 +61,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 
 	public function __construct(
 		string $title,
+		array $tags,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
@@ -71,6 +72,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	) {
 		parent::__construct(
 			$title,
+			$tags,
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,

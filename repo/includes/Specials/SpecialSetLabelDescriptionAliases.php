@@ -72,6 +72,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	private $aliases = [];
 
 	public function __construct(
+		array $tags,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
@@ -82,6 +83,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	) {
 		parent::__construct(
 			'SetLabelDescriptionAliases',
+			$tags,
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,
@@ -109,6 +111,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		);
 
 		return new self(
+			$repoSettings->getSetting( 'specialPageTags' ),
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,

@@ -42,6 +42,8 @@ use Wikibase\Repo\Validators\UniquenessViolation;
 class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestBase {
 	use HtmlAssertionHelpers;
 
+	private const TAGS = [ 'mw-replace' ];
+
 	private static $languageCodes = [ 'en', 'de', 'de-ch', 'ii', 'zh' ];
 
 	protected function setUp(): void {
@@ -58,6 +60,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$copyrightView = new SpecialPageCopyrightView( new CopyrightMessageBuilder(), '', '' );
 
 		return new SpecialSetLabelDescriptionAliases(
+			self::TAGS,
 			$copyrightView,
 			$this->getSummaryFormatter(),
 			$this->getEntityTitleLookup(),
@@ -242,6 +245,9 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$actualEntity = $this->mockRepository->getEntity( $id );
 		$actualFingerprint = $actualEntity->getFingerprint();
 		$this->assetFingerprintEquals( $expectedFingerprint, $actualFingerprint );
+
+		$tags = $this->mockRepository->getLatestLogEntryFor( $id )['tags'];
+		$this->assertArrayEquals( self::TAGS, $tags );
 	}
 
 	public function testAllFormFieldsRendered_WhenPageRendered() {
@@ -355,6 +361,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			->willReturn( $error );
 
 		return new SpecialSetLabelDescriptionAliases(
+			[],
 			$copyrightView,
 			$this->getSummaryFormatter(),
 			$this->getEntityTitleLookup(),

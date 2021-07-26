@@ -41,6 +41,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 	/**
 	 * @param string $title The title of the special page
+	 * @param string[] $tags List of tags to add to edits
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
@@ -48,6 +49,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 */
 	public function __construct(
 		$title,
+		array $tags,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
@@ -56,6 +58,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		parent::__construct(
 			$title,
 			'edit',
+			$tags,
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,

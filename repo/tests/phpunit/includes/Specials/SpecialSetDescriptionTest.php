@@ -31,6 +31,7 @@ class SpecialSetDescriptionTest extends SpecialModifyTermTestCase {
 		$copyrightView = new SpecialPageCopyrightView( new CopyrightMessageBuilder(), '', '' );
 
 		return new SpecialSetDescription(
+			[],
 			WikibaseRepo::getChangeOpFactoryProvider(),
 			$copyrightView,
 			WikibaseRepo::getSummaryFormatter(),

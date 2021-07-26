@@ -25,6 +25,9 @@ use Wikibase\Repo\WikibaseRepo;
  */
 abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 
+	/** @var string[] */
+	private $tags;
+
 	/**
 	 * @var SpecialPageCopyrightView
 	 */
@@ -53,6 +56,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	/**
 	 * @param string $title The title of the special page
 	 * @param string $restriction The required user right
+	 * @param string[] $tags List of tags to add to edits
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
@@ -61,12 +65,14 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	public function __construct(
 		$title,
 		$restriction,
+		array $tags,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediawikiEditEntityFactory $editEntityFactory
 	) {
 		parent::__construct( $title, $restriction );
+		$this->tags = $tags;
 		$this->copyrightView = $copyrightView;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->entityTitleLookup = $entityTitleLookup;
@@ -183,7 +189,9 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 			$entity,
 			$this->summaryFormatter->formatSummary( $summary ),
 			$flags,
-			$token
+			$token,
+			null,
+			$this->tags
 		);
 
 		return $status;

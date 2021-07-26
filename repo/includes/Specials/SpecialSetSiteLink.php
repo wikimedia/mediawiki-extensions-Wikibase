@@ -83,6 +83,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	private $badges;
 
 	/**
+	 * @param string[] $tags List of tags to add to edits
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
@@ -95,6 +96,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
 	 */
 	public function __construct(
+		array $tags,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
@@ -108,6 +110,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	) {
 		parent::__construct(
 			'SetSiteLink',
+			$tags,
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,
@@ -144,6 +147,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		);
 
 		return new self(
+			$repoSettings->getSetting( 'specialPageTags' ),
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,

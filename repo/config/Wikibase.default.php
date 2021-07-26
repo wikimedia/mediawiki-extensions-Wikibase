@@ -398,4 +398,12 @@ return [
 	 * @see https://phabricator.wikimedia.org/T286775
 	 */
 	'termboxTags' => [],
+
+	/**
+	 * Tags for edits made via special pages.
+	 *
+	 * @var string[]
+	 * @see https://phabricator.wikimedia.org/T286774
+	 */
+	'specialPageTags' => [],
 ];

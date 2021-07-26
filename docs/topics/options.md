@@ -437,6 +437,12 @@ List of tags to be added to edits made via Termbox v2 (see [termboxEnabled]).
 
 DEFAULT: `[]`
 
+#### specialPageTags
+List of tags to be added to edits made via special pages:
+Special:NewItem, Special:SetLabel, etc.
+
+DEFAULT: `[]`
+
 ### Miscellaneous
 
 #### dataRightsText

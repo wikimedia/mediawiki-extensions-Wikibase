@@ -56,6 +56,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		$namespaceNumber = 123;
 
 		return new SpecialNewItem(
+			self::TAGS,
 			$this->copyrightView,
 			new EntityNamespaceLookup( [ Item::ENTITY_TYPE => $namespaceNumber ] ),
 			WikibaseRepo::getSummaryFormatter(),

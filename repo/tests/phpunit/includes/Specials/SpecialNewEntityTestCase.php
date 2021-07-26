@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use ChangeTags;
 use CommentStoreComment;
 use FauxRequest;
 use MediaWiki\Block\AbstractBlock;
@@ -22,6 +23,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 	use HtmlAssertionHelpers;
+
+	protected const TAGS = [ 'mw-replace' ];
 
 	/**
 	 * @var SpecialPageCopyrightView|MockObject
@@ -50,8 +53,11 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 		list( , $webResponse ) = $this->executeSpecialPage( '', $request );
 
 		$entityId = $this->extractEntityIdFromUrl( $webResponse->getHeader( 'location' ) );
-		$entity = WikibaseRepo::getEntityLookup()->getEntity( $entityId );
+		$title = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $entityId );
+		$tags = ChangeTags::getTags( $this->db, null, $title->getLatestRevID() );
+		$this->assertArrayEquals( self::TAGS, $tags );
 
+		$entity = WikibaseRepo::getEntityLookup()->getEntity( $entityId );
 		$this->assertEntityMatchesFormData( $formData, $entity );
 	}
 

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use ChangeTags;
 use FauxRequest;
 use FauxResponse;
 use Hamcrest\Matcher;
@@ -37,6 +38,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	use HamcrestPHPUnitIntegration;
+
+	private const TAGS = [ 'mw-replace' ];
 
 	/**
 	 * @var array
@@ -78,6 +81,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$labelDescriptionLookupFactory = WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory();
 
 		return new SpecialSetSiteLink(
+			self::TAGS,
 			$copyrightView,
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
@@ -271,6 +275,10 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			$item->getSiteLinkList()->getBySiteId( 'dewiki' )->getPageName(),
 			"Should contain new site link"
 		);
+
+		$title = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $item->getId() );
+		$tags = ChangeTags::getTags( $this->db, null, $title->getLatestRevID() );
+		$this->assertArrayEquals( self::TAGS, $tags );
 	}
 
 	public function testExecutePostRemoveSiteLink() {

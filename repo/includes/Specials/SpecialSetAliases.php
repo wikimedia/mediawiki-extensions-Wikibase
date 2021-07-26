@@ -27,6 +27,7 @@ use Wikibase\Repo\SummaryFormatter;
 class SpecialSetAliases extends SpecialModifyTerm {
 
 	public function __construct(
+		array $tags,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
@@ -37,6 +38,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	) {
 		parent::__construct(
 			'SetAliases',
+			$tags,
 			$changeOpFactoryProvider,
 			$copyrightView,
 			$summaryFormatter,
@@ -63,6 +65,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		);
 
 		return new self(
+			$repoSettings->getSetting( 'specialPageTags' ),
 			$changeOpFactoryProvider,
 			$copyrightView,
 			$summaryFormatter,

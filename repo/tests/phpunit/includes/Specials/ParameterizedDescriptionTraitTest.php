@@ -115,6 +115,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 
 	private function newSpecialSetAliasesPage() {
 		return new SpecialSetAliases(
+			[],
 			$this->createMock( ChangeOpFactoryProvider::class ),
 			$this->createMock( SpecialPageCopyrightView::class ),
 			$this->createMock( SummaryFormatter::class ),
@@ -127,6 +128,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 
 	private function newSpecialSetLabelsPage() {
 		return new SpecialSetLabel(
+			[],
 			$this->createMock( ChangeOpFactoryProvider::class ),
 			$this->createMock( SpecialPageCopyrightView::class ),
 			$this->createMock( SummaryFormatter::class ),
@@ -139,6 +141,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 
 	private function newSpecialSetDescriptionPage() {
 		return new SpecialSetDescription(
+			[],
 			$this->createMock( ChangeOpFactoryProvider::class ),
 			$this->createMock( SpecialPageCopyrightView::class ),
 			$this->createMock( SummaryFormatter::class ),
@@ -151,6 +154,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 
 	private function newSpecialSpecialSetLabelDescriptionAliases() {
 		return new SpecialSetLabelDescriptionAliases(
+			[],
 			$this->createMock( SpecialPageCopyrightView::class ),
 			$this->createMock( SummaryFormatter::class ),
 			$this->createMock( EntityTitleLookup::class ),
