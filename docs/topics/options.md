@@ -735,11 +735,6 @@ Whether to track Lua function calls with a per-sitegroup key, like `MediaWiki.wi
 #### trackLuaFunctionCallsPerWiki
 Whether to track Lua function calls with a per-site key, like `MediaWiki.dewiki.wikibase.client.scribunto.wikibase.functionName.call`.
 
-#### fineGrainedLuaTracking
-Enable fine-grained tracking on entities accessed through Lua in client.
-
-Not all (X) usage will be recorded, but each aspect will be recorded individually based on actual usage.
-
 ### Sitelinks
 
 #### languageLinkSiteGroup
