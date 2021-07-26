@@ -28,7 +28,7 @@ class ApiPropertyDataTypeLookupTest extends TestCase {
 	use HttpResponseMockerTrait;
 
 	public function testGetDataTypeIdForProperty() {
-		$propertyId = new FederatedPropertyId( 'http://wikidata.org/entity/P666' );
+		$propertyId = new FederatedPropertyId( 'http://wikidata.org/entity/P666', 'P666' );
 		$apiResultFile = __DIR__ . '/../../data/federatedProperties/wbgetentities-property-datatype.json';
 		$expected = 'secretEvilDataType';
 		$apiEntityLookup = new ApiEntityLookup( $this->getApiClient( $apiResultFile ), $this->newMockEntitySourceLookup() );
@@ -41,7 +41,7 @@ class ApiPropertyDataTypeLookupTest extends TestCase {
 	}
 
 	public function testGivenPropertyDoesNotExist_throwsException() {
-		$p1 = new FederatedPropertyId( 'http://wikidata.org/entity/P1' );
+		$p1 = new FederatedPropertyId( 'http://wikidata.org/entity/P1', 'P1' );
 		$apiEntityLookup = new ApiEntityLookup(
 			$this->getApiClient( __DIR__ . '/../../data/federatedProperties/wbgetentities-p1-missing.json' ),
 			$this->newMockEntitySourceLookup()

@@ -35,13 +35,17 @@ class FederatedPropertiesAwareDispatchingEntityIdParserTest extends TestCase {
 
 	public function testParserReturnsFederatedPropertyId(): void {
 		$dispatchingParser = $this->createMock( DispatchingEntityIdParser::class );
-		$idSerialization = 'http://www.wikidata.org/entity/P12';
+		$remoteIdSerialization = 'P12';
+		$idSerialization = "http://www.wikidata.org/entity/$remoteIdSerialization";
 		$dispatchingParser->expects( $this->never() )->method( 'parse' );
 		$fpParser = $this->getFederatedPropertiesAwareDispatchingEntityIdParser( $dispatchingParser );
 
 		$entityId = $fpParser->parse( $idSerialization );
 
 		$this->assertInstanceOf( FederatedPropertyId::class, $entityId );
+
+		/** @var $entityId FederatedPropertyId */
+		$this->assertSame( $remoteIdSerialization, $entityId->getRemoteIdSerialization() );
 	}
 
 	public function testParserThrowsWhenConceptURIisNotKnown(): void {

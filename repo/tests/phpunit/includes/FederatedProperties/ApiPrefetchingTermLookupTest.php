@@ -48,8 +48,8 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	private const CONCEPT_BASE_URI = 'http://wikidata.org/entity/';
 
 	protected function setUp(): void {
-		$this->fp18 = new FederatedPropertyId( 'http://wikidata.org/entity/P18' );
-		$this->fp31 = new FederatedPropertyId( 'http://wikidata.org/entity/P31' );
+		$this->fp18 = new FederatedPropertyId( 'http://wikidata.org/entity/P18', 'P18' );
+		$this->fp31 = new FederatedPropertyId( 'http://wikidata.org/entity/P31', 'P31' );
 
 		parent::setUp();
 		// Load data files once at the start of tests rather than for each test case
@@ -65,25 +65,25 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	public function entityIdsWithLanguagesAndExpectedLabelsProvider() {
 		return [
 			'p18-en' => [
-				'http://wikidata.org/entity/P18',
+				new FederatedPropertyId( 'http://wikidata.org/entity/P18', 'P18' ),
 				[ 'en' ],
 				$this->responseDataFiles[ 'p18-en' ],
 				[ 'en' => 'image' ]
 			],
 			'p18-en-de' => [
-				'http://wikidata.org/entity/P18',
+				new FederatedPropertyId( 'http://wikidata.org/entity/P18', 'P18' ),
 				[ 'en', 'de' ],
 				$this->responseDataFiles[ 'p18-en-de' ],
 				[ 'en' => 'image', 'de' => 'Bild' ]
 			],
 			'p31-en' => [
-				'http://wikidata.org/entity/P31',
+				new FederatedPropertyId( 'http://wikidata.org/entity/P31', 'P31' ),
 				[ 'en' ],
 				$this->responseDataFiles[ 'p31-en' ],
 				[ 'en' => 'instance of' ]
 			],
 			'p31-en-de' => [
-				'http://wikidata.org/entity/P31',
+				new FederatedPropertyId( 'http://wikidata.org/entity/P31', 'P31' ),
 				[ 'en', 'de' ],
 				$this->responseDataFiles[ 'p31-en-de' ],
 				[ 'en' => 'instance of', 'de' => 'ist ein(e)' ]
@@ -94,9 +94,8 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	/**
 	 * @dataProvider entityIdsWithLanguagesAndExpectedLabelsProvider
 	 */
-	public function testGetLabels( $federatedPropertyIdString, $languages, $responseFile, $expectedLabels ) {
+	public function testGetLabels( $entityId, $languages, $responseFile, $expectedLabels ) {
 		$entitySourceLookup = $this->newMockEntitySourceLookup();
-		$entityId = new FederatedPropertyId( $federatedPropertyIdString );
 		$entityIdStringWithoutPrefix = $this->stripConceptBaseUriFromId(
 			$entityId->getSerialization(),
 			self::CONCEPT_BASE_URI
@@ -135,13 +134,13 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 
 	public function descriptionsTestProvider() {
 		yield 'en description' => [
-			new FederatedPropertyId( 'http://wikidata.org/entity/P18' ),
+			new FederatedPropertyId( 'http://wikidata.org/entity/P18', 'P18' ),
 			[ 'en' ],
 			$this->responseDataFiles[ 'p18-en-de' ],
 			[ 'en' => 'image of relevant illustration of the subject' ]
 		];
 		yield 'en and de descriptions' => [
-			new FederatedPropertyId( 'http://wikidata.org/entity/P18' ),
+			new FederatedPropertyId( 'http://wikidata.org/entity/P18', 'P18' ),
 			[ 'en', 'de' ],
 			$this->responseDataFiles[ 'p18-en-de' ],
 			[ 'en' => 'image of relevant illustration of the subject', 'de' => 'Foto, Grafik etc. des Objekts' ]
@@ -157,7 +156,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		);
 
 		$this->expectException( \BadMethodCallException::class );
-		$apiLookup->getPrefetchedAliases( new FederatedPropertyId( 'http://wikidata.org/entity/P1' ), 'someLanguage' );
+		$apiLookup->getPrefetchedAliases( new FederatedPropertyId( 'http://wikidata.org/entity/P1', 'P1' ), 'someLanguage' );
 	}
 
 	public function testPrefetchTermsAndGetPrefetchedTerm() {

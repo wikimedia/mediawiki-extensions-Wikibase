@@ -56,7 +56,7 @@ trait FederatedPropertiesTestTrait {
 	}
 
 	protected function newFederatedPropertyIdFromPId( string $pId ): FederatedPropertyId {
-		return new FederatedPropertyId( $this->getFederatedPropertiesSourceConceptUri() . $pId );
+		return new FederatedPropertyId( $this->getFederatedPropertiesSourceConceptUri() . $pId, $pId );
 	}
 
 	private function getFederatedPropertiesSourceConceptUri(): string {

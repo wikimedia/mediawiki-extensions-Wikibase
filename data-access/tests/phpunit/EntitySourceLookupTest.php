@@ -29,7 +29,7 @@ class EntitySourceLookupTest extends TestCase {
 			->withConceptBaseUri( 'http://wikidata.org/entity/' )
 			->withType( EntitySource::TYPE_API )
 			->build();
-		$entityId = new FederatedPropertyId( 'http://wikidata.org/entity/P123' );
+		$entityId = new FederatedPropertyId( 'http://wikidata.org/entity/P123', 'P123' );
 
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
 			NewEntitySource::havingName( 'some other source' )->build(),
@@ -69,7 +69,7 @@ class EntitySourceLookupTest extends TestCase {
 		$expectedSource = NewEntitySource::havingName( 'expected source' )
 			->withConceptBaseUri( 'http://wikidata.org/entity/' )
 			->build();
-		$entityId = new FederatedPropertyId( 'http://wikidata.org/entity/P123' );
+		$entityId = new FederatedPropertyId( 'http://wikidata.org/entity/P123', 'P123' );
 
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
 			NewEntitySource::havingName( 'some other source' )->build(),

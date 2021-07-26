@@ -12,9 +12,18 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class FederatedPropertyId extends PropertyId {
 
-	public function __construct( $serialization ) {
-		self::assertValidSerialization( $serialization );
-		$this->serialization = $serialization;
+	private $remoteId;
+
+	/**
+	 * @param string $uriSerialization The concept URI serialization of the ID
+	 * @param string $remoteId The ID as it is referred to on the federation source, e.g. 'P31' for serialization
+	 *        'http://www.wikidata.org/entity/P31'.
+	 */
+	public function __construct( string $uriSerialization, string $remoteId ) {
+		self::assertValidSerialization( $uriSerialization );
+
+		$this->serialization = $uriSerialization;
+		$this->remoteId = $remoteId;
 	}
 
 	public function serialize(): ?string {
@@ -34,5 +43,15 @@ class FederatedPropertyId extends PropertyId {
 		if ( filter_var( $serialization, FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED ) === false ) {
 			throw new InvalidArgumentException( 'FederatedPropertyId Serialization should be a URI with a path' );
 		}
+	}
+
+	/**
+	 * The ID as it is referred to on the federation source, e.g. 'P31' for serialization 'http://www.wikidata.org/entity/P31'.
+	 *
+	 * This method must only be used when communicating with the federation source, but never to represent a FederatedPropertyId locally,
+	 * because removing the concept base URI prefix makes the ID ambiguous.
+	 */
+	public function getRemoteIdSerialization(): string {
+		return $this->remoteId;
 	}
 }

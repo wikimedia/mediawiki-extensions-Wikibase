@@ -81,7 +81,7 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 			$termSearchResult = new TermSearchResult(
 				$this->getMatchedTerm( $result['match'] ),
 				$result['match']['type'],
-				new FederatedPropertyId( $this->entitySource->getConceptBaseUri() . $result['id'] ),
+				new FederatedPropertyId( $this->entitySource->getConceptBaseUri() . $result['id'], $result['id'] ),
 				array_key_exists( 'label', $result ) ? new Term( $languageCode, $result['label'] ) : null,
 				array_key_exists( 'description', $result ) ? new Term( $languageCode, $result['description'] ) : null,
 				[

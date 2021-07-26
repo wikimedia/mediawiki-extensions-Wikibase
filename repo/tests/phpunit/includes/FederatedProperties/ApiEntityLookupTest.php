@@ -49,10 +49,10 @@ class ApiEntityLookupTest extends TestCase {
 			$content = file_get_contents( __DIR__ . '/../../data/federatedProperties/' . $file );
 			$this->data[$file] = json_decode( $content, true );
 		}
-		$this->fp1 = new FederatedPropertyId( self::CONCEPT_BASE_URI . 'P1' );
-		$this->fp11 = new FederatedPropertyId( self::CONCEPT_BASE_URI . 'P11' );
-		$this->fp18 = new FederatedPropertyId( self::CONCEPT_BASE_URI . 'P18' );
-		$this->fp31 = new FederatedPropertyId( self::CONCEPT_BASE_URI . 'P31' );
+		$this->fp1 = new FederatedPropertyId( self::CONCEPT_BASE_URI . 'P1', 'P1' );
+		$this->fp11 = new FederatedPropertyId( self::CONCEPT_BASE_URI . 'P11', 'P11' );
+		$this->fp18 = new FederatedPropertyId( self::CONCEPT_BASE_URI . 'P18', 'P18' );
+		$this->fp31 = new FederatedPropertyId( self::CONCEPT_BASE_URI . 'P31', 'P31' );
 	}
 
 	public function testFetchEntitiesDoesNotAllowStrings() {
@@ -136,7 +136,7 @@ class ApiEntityLookupTest extends TestCase {
 		// Generate a list of 60 ids to fetch, as 50 is the batch size
 		$toFetch = [];
 		foreach ( range( 1, 60 ) as $number ) {
-			$toFetch[] = new FederatedPropertyId( 'http://wikidata.org/entity/P' . $number );
+			$toFetch[] = new FederatedPropertyId( 'http://wikidata.org/entity/P' . $number, "P$number" );
 		}
 
 		$apiEntityLookup = new ApiEntityLookup( $api, $entitySourceLookup );

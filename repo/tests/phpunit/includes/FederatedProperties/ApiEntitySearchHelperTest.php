@@ -209,7 +209,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 				$resultToTest->getMatchedTermType()
 			);
 			$this->assertEquals(
-				new FederatedPropertyId( self::CONCEPT_BASE_URI . $expectedResult->id ),
+				new FederatedPropertyId( self::CONCEPT_BASE_URI . $expectedResult->id, $expectedResult->id ),
 				$resultToTest->getEntityId()
 			);
 			$this->assertEquals(

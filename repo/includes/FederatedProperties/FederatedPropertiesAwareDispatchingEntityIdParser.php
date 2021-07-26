@@ -51,21 +51,25 @@ class FederatedPropertiesAwareDispatchingEntityIdParser implements EntityIdParse
 	 */
 	public function parse( $idSerialization ): EntityId {
 		if ( $this->looksLikeURI( $idSerialization ) ) {
-			if ( !$this->checkIfBaseURIisDefinedApiEntitySource( $idSerialization ) ) {
+			$entitySource = $this->getEntitySourceForConceptURI( $idSerialization );
+			if ( $entitySource === null ) {
 				throw new EntityIdParsingException( 'No entity source configured for this base URI for id ' . $idSerialization );
-			} else {
-				return new FederatedPropertyId( $idSerialization );
 			}
-		} else {
-			return $this->parser->parse( $idSerialization );
+
+			return new FederatedPropertyId(
+				$idSerialization,
+				$this->getSerializationWithoutConceptBaseURI( $idSerialization, $entitySource )
+			);
 		}
+
+		return $this->parser->parse( $idSerialization );
 	}
 
 	private function looksLikeURI( $idSerialization ): bool {
 		return ( filter_var( $idSerialization, FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED ) !== false );
 	}
 
-	private function checkIfBaseURIisDefinedApiEntitySource( $idSerialization ): bool {
+	private function getEntitySourceForConceptURI( $idSerialization ): ?EntitySource {
 		$baseUri = $this->baseUriExtractor->getBaseUriFromSerialization( $idSerialization );
 		$conceptBaseURIsToSources = array_flip( $this->entitySourceDefinitions->getConceptBaseUris() );
 
@@ -73,11 +77,16 @@ class FederatedPropertiesAwareDispatchingEntityIdParser implements EntityIdParse
 			$sources = $this->entitySourceDefinitions->getSources();
 			foreach ( $sources as $source ) {
 				if ( $source->getSourceName() === $conceptBaseURIsToSources[ $baseUri ] ) {
-					return $source->getType() === EntitySource::TYPE_API;
+					return $source->getType() === EntitySource::TYPE_API ? $source : null;
 				}
 			}
 		}
-		return false;
+
+		return null;
+	}
+
+	private function getSerializationWithoutConceptBaseURI( string $idSerialization, EntitySource $entitySource ) {
+		return substr( $idSerialization, strlen( $entitySource->getConceptBaseUri() ) );
 	}
 
 }
