@@ -5,12 +5,7 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use LogicException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\EntitySourceLookup;
-use Wikibase\DataAccess\Tests\NewEntitySource;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
-use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\FederatedProperties\ApiEntityLookup;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
 use Wikibase\Repo\Tests\HttpResponseMockerTrait;
@@ -57,8 +52,7 @@ class ApiEntityLookupTest extends TestCase {
 
 	public function testFetchEntitiesDoesNotAllowStrings() {
 		$apiEntityLookup = new ApiEntityLookup(
-			$this->createMock( GenericActionApiClient::class ),
-			$this->createMock( EntitySourceLookup::class )
+			$this->createMock( GenericActionApiClient::class )
 		);
 		$this->expectException( ParameterElementTypeException::class );
 		$apiEntityLookup->fetchEntities( [ 'http://wikidata.org/entity/P1', 'http://wikidata.org/entity/P2' ] );
@@ -66,8 +60,7 @@ class ApiEntityLookupTest extends TestCase {
 
 	public function testGetResultForIdReturnsEntityResponseData() {
 		$api = $this->newMockApi( $this->responseDataFiles['p18-en'], [ 'P18' ] );
-		$entitySourceLookup = $this->newMockEntitySourceLookup();
-		$apiEntityLookup = new ApiEntityLookup( $api, $entitySourceLookup );
+		$apiEntityLookup = new ApiEntityLookup( $api );
 		$apiEntityLookup->fetchEntities( [ $this->fp18 ] );
 
 		$this->assertEquals(
@@ -78,8 +71,7 @@ class ApiEntityLookupTest extends TestCase {
 
 	public function testGivenEntityIsMissing_GetResultPartForIdReturnsMissing() {
 		$api = $this->newMockApi( $this->responseDataFiles['p1-missing'], [ 'P1' ] );
-		$entitySourceLookup = $this->newMockEntitySourceLookup();
-		$apiEntityLookup = new ApiEntityLookup( $api, $entitySourceLookup );
+		$apiEntityLookup = new ApiEntityLookup( $api );
 		$apiEntityLookup->fetchEntities( [ $this->fp1 ] );
 
 		$this->assertEquals(
@@ -91,8 +83,7 @@ class ApiEntityLookupTest extends TestCase {
 	public function testGivenEntityHasNotBeenFetched_GetResultPartForIdThrowsException() {
 		$this->markTestSkipped( 'This is desired behaviour, but not yet implemented. T253125.' );
 		$apiEntityLookup = new ApiEntityLookup( $this->createMock(
-			GenericActionApiClient::class ),
-			$this->createMock( EntitySourceLookup::class )
+			GenericActionApiClient::class )
 		);
 		$this->expectException( LogicException::class );
 		$apiEntityLookup->getResultPartForId( $this->fp11 );
@@ -100,8 +91,7 @@ class ApiEntityLookupTest extends TestCase {
 
 	public function testGivenEntityHasNotBeenFetched_GetResultPartForIdFetches() {
 		$api = $this->newMockApi( $this->responseDataFiles['p18-en'], [ 'P18' ] );
-		$entitySourceLookup = $this->newMockEntitySourceLookup();
-		$apiEntityLookup = new ApiEntityLookup( $api, $entitySourceLookup );
+		$apiEntityLookup = new ApiEntityLookup( $api );
 		$resultPart = $apiEntityLookup->getResultPartForId( $this->fp18 );
 		$this->assertEquals(
 			$this->data[$this->responseDataFiles['p18-en']]['entities']['P18'],
@@ -111,7 +101,7 @@ class ApiEntityLookupTest extends TestCase {
 
 	public function testFetchEntitiesDoesNotRepeatedlyFetchEntities() {
 		$api = $this->newMockApi( $this->responseDataFiles['p18-en'], [ 'P18' ] );
-		$apiEntityLookup = new ApiEntityLookup( $api, $this->newMockEntitySourceLookup() );
+		$apiEntityLookup = new ApiEntityLookup( $api );
 
 		$apiEntityLookup->fetchEntities( [ $this->fp18 ] );
 		$apiEntityLookup->fetchEntities( [ $this->fp18 ] ); // should not trigger another api call
@@ -131,7 +121,6 @@ class ApiEntityLookupTest extends TestCase {
 				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p18-en' ] ] ), 200 ),
 				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p31-en-de' ] ] ), 200 )
 			);
-		$entitySourceLookup = $this->newMockEntitySourceLookup();
 
 		// Generate a list of 60 ids to fetch, as 50 is the batch size
 		$toFetch = [];
@@ -139,7 +128,7 @@ class ApiEntityLookupTest extends TestCase {
 			$toFetch[] = new FederatedPropertyId( 'http://wikidata.org/entity/P' . $number, "P$number" );
 		}
 
-		$apiEntityLookup = new ApiEntityLookup( $api, $entitySourceLookup );
+		$apiEntityLookup = new ApiEntityLookup( $api );
 		$apiEntityLookup->fetchEntities( $toFetch );
 
 		// Fetching out results that were mocked though not result in an exception, which means the results were correctly merged
@@ -160,9 +149,7 @@ class ApiEntityLookupTest extends TestCase {
 				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p18-en' ] ] ), 200 )
 			);
 
-		$entitySourceLookup = $this->newMockEntitySourceLookup();
-
-		$entityLookup = new ApiEntityLookup( $api, $entitySourceLookup );
+		$entityLookup = new ApiEntityLookup( $api );
 
 		$entityLookup->fetchEntities( [ $this->fp1 ] );
 		$entityLookup->fetchEntities( [ $this->fp1, $this->fp18 ] );
@@ -185,16 +172,6 @@ class ApiEntityLookupTest extends TestCase {
 			'props' => 'labels|descriptions|datatype',
 			'format' => 'json'
 		];
-	}
-
-	private function newMockEntitySourceLookup(): EntitySourceLookup {
-		$source = NewEntitySource::havingName( 'some source' )
-			->withConceptBaseUri( self::CONCEPT_BASE_URI )
-			->withType( EntitySource::TYPE_API )
-			->build();
-		$subEntityTypesMapper = new SubEntityTypesMapper( [] );
-		$entitySourceDefinition = new EntitySourceDefinitions( [ $source ], $subEntityTypesMapper );
-		return new EntitySourceLookup( $entitySourceDefinition, $subEntityTypesMapper );
 	}
 
 }

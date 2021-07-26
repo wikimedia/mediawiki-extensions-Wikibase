@@ -4,14 +4,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\EntitySourceLookup;
-use Wikibase\DataAccess\Tests\NewEntitySource;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
-use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\FederatedProperties\ApiEntityLookup;
 use Wikibase\Repo\FederatedProperties\ApiPrefetchingTermLookup;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
@@ -94,16 +88,10 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	/**
 	 * @dataProvider entityIdsWithLanguagesAndExpectedLabelsProvider
 	 */
-	public function testGetLabels( $entityId, $languages, $responseFile, $expectedLabels ) {
-		$entitySourceLookup = $this->newMockEntitySourceLookup();
-		$entityIdStringWithoutPrefix = $this->stripConceptBaseUriFromId(
-			$entityId->getSerialization(),
-			self::CONCEPT_BASE_URI
-		);
+	public function testGetLabels( FederatedPropertyId $entityId, $languages, $responseFile, $expectedLabels ) {
 		$apiLookup = new ApiPrefetchingTermLookup(
 			new ApiEntityLookup(
-				$this->newMockApi( [ $entityIdStringWithoutPrefix ], $responseFile ),
-				$entitySourceLookup
+				$this->newMockApi( [ $entityId->getRemoteIdSerialization() ], $responseFile )
 			)
 		);
 		$labels = $apiLookup->getLabels( $entityId, $languages );
@@ -113,16 +101,10 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	/**
 	 * @dataProvider descriptionsTestProvider
 	 */
-	public function testGetDescriptions( EntityId $entityId, $languages, $responseFile, $expectedDescriptions ) {
-		$entitySourceLookup = $this->newMockEntitySourceLookup();
-		$entityIdStringWithoutPrefix = $this->stripConceptBaseUriFromId(
-			$entityId->getSerialization(),
-			self::CONCEPT_BASE_URI
-		);
+	public function testGetDescriptions( FederatedPropertyId $entityId, $languages, $responseFile, $expectedDescriptions ) {
 		$apiLookup = new ApiPrefetchingTermLookup(
 			new ApiEntityLookup(
-				$this->newMockApi( [ $entityIdStringWithoutPrefix ], $responseFile ),
-				$entitySourceLookup
+				$this->newMockApi( [ $entityId->getRemoteIdSerialization() ], $responseFile )
 			)
 		);
 
@@ -150,8 +132,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	public function testGetPrefetchedAliases() {
 		$apiLookup = new ApiPrefetchingTermLookup(
 			new ApiEntityLookup(
-				$this->createMock( GenericActionApiClient::class ),
-				$this->newMockEntitySourceLookup()
+				$this->createMock( GenericActionApiClient::class )
 			)
 		);
 
@@ -166,7 +147,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		);
 
 		$apiLookup = new ApiPrefetchingTermLookup(
-			new ApiEntityLookup( $api, $this->newMockEntitySourceLookup() )
+			new ApiEntityLookup( $api )
 		);
 
 		$apiLookup->prefetchTerms( [ $this->fp18, $this->fp31 ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
@@ -191,7 +172,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 			);
 
 		$apiLookup = new ApiPrefetchingTermLookup(
-			new ApiEntityLookup( $api, $this->newMockEntitySourceLookup() )
+			new ApiEntityLookup( $api )
 		);
 		$apiLookup->prefetchTerms( [ $this->fp18 ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
 		$this->assertSame( 'image', $apiLookup->getLabel( $this->fp18, 'en' ) );
@@ -219,7 +200,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 			);
 
 		$apiLookup = new ApiPrefetchingTermLookup(
-			new ApiEntityLookup( $api, $this->newMockEntitySourceLookup() )
+			new ApiEntityLookup( $api )
 		);
 
 		// prefetch P18 first and verify the label
@@ -241,7 +222,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		);
 
 		$apiLookup = new ApiPrefetchingTermLookup(
-			new ApiEntityLookup( $api, $this->newMockEntitySourceLookup() )
+			new ApiEntityLookup( $api )
 		);
 
 		// prefetch only language 'en' for P18 first
@@ -262,8 +243,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	public function testGetPrefetchedTerm_notPrefetched() {
 		$apiLookup = new ApiPrefetchingTermLookup(
 			new ApiEntityLookup(
-				$this->createMock( GenericActionApiClient::class ),
-				$this->newMockEntitySourceLookup()
+				$this->createMock( GenericActionApiClient::class )
 			)
 		);
 		$this->assertNull( $apiLookup->getPrefetchedTerm( $this->fp18, TermTypes::TYPE_LABEL, 'en' ) );
@@ -276,7 +256,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 			$this->responseDataFiles[ 'p18-p31-en' ]
 		);
 
-		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $api, $this->newMockEntitySourceLookup() ) );
+		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $api ) );
 		$apiLookup->prefetchTerms(
 			[ $this->fp18, $this->fp31 ],
 			[ TermTypes::TYPE_LABEL ],
@@ -291,7 +271,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 			[ 'P18' ],
 			$this->responseDataFiles[ 'p18-en' ]
 		);
-		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $api, $this->newMockEntitySourceLookup() ) );
+		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $api ) );
 
 		$apiLookup->prefetchTerms( [ $this->fp18 ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
 		$apiLookup->prefetchTerms( [ $this->fp18 ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
@@ -319,21 +299,4 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		return $api;
 	}
 
-	private function newMockEntitySourceLookup(): EntitySourceLookup {
-		$source = NewEntitySource::havingName( 'some source' )
-			->withConceptBaseUri( self::CONCEPT_BASE_URI )
-			->withType( EntitySource::TYPE_API )
-			->build();
-		$subEntityTypesMapper = new SubEntityTypesMapper( [] );
-		$entitySourceDefinition = new EntitySourceDefinitions( [ $source ], $subEntityTypesMapper );
-		return new EntitySourceLookup( $entitySourceDefinition, $subEntityTypesMapper );
-	}
-
-	private function stripConceptBaseUriFromId( string $id, string $conceptBaseUri ): string {
-		return str_replace(
-			$conceptBaseUri,
-			'',
-			$id
-		);
-	}
 }

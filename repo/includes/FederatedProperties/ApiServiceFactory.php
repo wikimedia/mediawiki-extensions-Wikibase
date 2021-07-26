@@ -139,7 +139,7 @@ class ApiServiceFactory {
 	 */
 	public function getApiEntityLookup(): ApiEntityLookup {
 		if ( $this->apiEntityLookupInstance === null ) {
-			$this->apiEntityLookupInstance = new ApiEntityLookup( $this->newFederatedPropertiesApiClient(), $this->entitySourceLookup );
+			$this->apiEntityLookupInstance = new ApiEntityLookup( $this->newFederatedPropertiesApiClient() );
 		}
 		return $this->apiEntityLookupInstance;
 	}
