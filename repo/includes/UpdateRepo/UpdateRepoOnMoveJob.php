@@ -11,6 +11,7 @@ use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Summary;
@@ -70,7 +71,8 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 			WikibaseRepo::getSummaryFormatter( $services ),
 			LoggerFactory::getInstance( 'UpdateRepo' ),
 			$services->getSiteLookup(),
-			WikibaseRepo::getEditEntityFactory( $services )
+			WikibaseRepo::getEditEntityFactory( $services ),
+			WikibaseRepo::getSettings( $services )
 		);
 	}
 
@@ -80,14 +82,16 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 		SummaryFormatter $summaryFormatter,
 		LoggerInterface $logger,
 		SiteLookup $siteLookup,
-		MediawikiEditEntityFactory $editEntityFactory
+		MediawikiEditEntityFactory $editEntityFactory,
+		SettingsArray $settings
 	) {
 		$this->initRepoJobServices(
 			$entityLookup,
 			$entityStore,
 			$summaryFormatter,
 			$logger,
-			$editEntityFactory
+			$editEntityFactory,
+			$settings
 		);
 		$this->siteLookup = $siteLookup;
 	}

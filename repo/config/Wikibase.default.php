@@ -378,5 +378,13 @@ return [
 	'sandboxEntityIds' => [
 		'mainItem' => 'Q999999998',
 		'auxItem' => 'Q999999999'
-	]
+	],
+
+	/**
+	 * Tags for edits made via UpdateRepo jobs.
+	 *
+	 * @var string[]
+	 * @see https://phabricator.wikimedia.org/T286772
+	 */
+	'updateRepoTags' => [],
 ];

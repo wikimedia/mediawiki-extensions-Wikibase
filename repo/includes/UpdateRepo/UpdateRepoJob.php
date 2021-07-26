@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Lib\FormatableSummary;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\SummaryFormatter;
@@ -49,18 +50,23 @@ abstract class UpdateRepoJob extends Job {
 	 */
 	private $editEntityFactory;
 
+	/** @var string[] */
+	private $tags;
+
 	protected function initRepoJobServices(
 		EntityLookup $entityLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
 		LoggerInterface $logger,
-		MediawikiEditEntityFactory $editEntityFactory
+		MediawikiEditEntityFactory $editEntityFactory,
+		SettingsArray $settings
 	) {
 		$this->entityLookup = $entityLookup;
 		$this->entityStore = $entityStore;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->logger = $logger;
 		$this->editEntityFactory = $editEntityFactory;
+		$this->tags = $settings->getSetting( 'updateRepoTags' );
 	}
 
 	/**
@@ -153,7 +159,8 @@ abstract class UpdateRepoJob extends Job {
 			EDIT_UPDATE,
 			false,
 			// Don't (un)watch any pages here, as the user didn't explicitly kick this off
-			$this->entityStore->isWatching( $user, $itemId )
+			$this->entityStore->isWatching( $user, $itemId ),
+			$this->tags
 		);
 
 		if ( !$status->isOK() ) {

@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
@@ -156,6 +157,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 			'title' => $oldTitle,
 			'user' => $user->getName()
 		];
+		$tags = [ 'tag 1', 'tag 2' ];
 
 		$job = new UpdateRepoOnDeleteJob( Title::newMainPage(), $params );
 		$job->initServices(
@@ -174,7 +176,10 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 				$this->getMockEditFitlerHookRunner(),
 				new NullStatsdDataFactory(),
 				PHP_INT_MAX
-			)
+			),
+			new SettingsArray( [
+				'updateRepoTags' => $tags,
+			] )
 		);
 
 		$job->run();
@@ -186,6 +191,14 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 			$item->getSiteLinkList()->hasLinkWithSiteId( 'enwiki' ),
 			'Sitelink has been removed.'
 		);
+
+		if ( $expected ) {
+			$this->assertSame(
+				$tags,
+				$mockRepository->getLatestLogEntryFor( $item->getId() )['tags'],
+				'Edit has been tagged.'
+			);
+		}
 	}
 
 }

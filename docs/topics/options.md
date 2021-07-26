@@ -429,6 +429,19 @@ DEFAULT: ```true```
 It only comes into effect if the general [termboxEnabled] is `true`.
 If disabled, user-specific termbox markup will only be created by client-side rendering after initial displaying of the generic termbox markup.
 
+### Tags
+
+These settings define [change tags][Help:Tags] that should be added to different edits.
+All of them default to the empty list, meaning that no tags are added by default;
+when you configure them, you also have to create those tags via Special:Tags.
+
+#### updateRepoTags
+List of tags to be added to edits made via jobs enqueued by client wikis,
+to update sitelinks when connected pages on the client are moved or deleted.
+(Note that this is a _repo_ setting: the same list of tags is used for updates coming from all client wikis.)
+
+DEFAULT: `[]`
+
 ### Miscellaneous
 
 #### dataRightsText
@@ -911,6 +924,7 @@ DEFAULT: array mapping each well-known name to `null`.
 [ObjectFactory]: https://www.mediawiki.org/wiki/ObjectFactory
 [page property]: https://www.mediawiki.org/wiki/Manual:Page_props_table
 [Scribunto]: (https://www.mediawiki.org/wiki/Scribunto)
+[Help:Tags]: https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Tags
 [siteLinkGroups]: #common_siteLinkGroups
 [entitySources]: #common_entitySources
 [sharedCacheKeyPrefix]: #common_sharedCacheKeyPrefix
