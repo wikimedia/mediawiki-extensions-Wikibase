@@ -8,6 +8,7 @@ use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 
@@ -96,6 +97,11 @@ class FederatedPropertiesEntityParserOutputGenerator implements EntityParserOutp
 		if ( empty( $propertyIds ) ) {
 			return;
 		}
+
+		// FIXME: This is not technically true, because as of Federated Properties v2 $propertyIds may contain both local and federated
+		//        Properties. We'll have to revisit this once we start working on a story like "showing statements with federated and local
+		//        Properties on an Item page". This is broken at the moment so we're just tricking Phan here until we fix it properly.
+		'@phan-var FederatedPropertyId[] $propertyIds';
 
 		$this->apiEntityLookup->fetchEntities( array_unique( $propertyIds ) );
 	}

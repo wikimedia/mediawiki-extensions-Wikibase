@@ -3,10 +3,11 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Repo\FederatedProperties\ApiEntityTitleTextLookup;
 use Wikibase\Repo\FederatedProperties\ApiEntityUrlLookup;
 
@@ -20,9 +21,12 @@ use Wikibase\Repo\FederatedProperties\ApiEntityUrlLookup;
 class ApiEntityUrlLookupTest extends TestCase {
 
 	public function provideTestGetUrl() {
-		yield [ 'Q123', new ItemId( 'Q123' ), 'https://pretend.url/w/index.php?title=Q123' ];
-		yield [ 'Item:Q456', new ItemId( 'Q456' ), 'https://pretend.url/w/index.php?title=Item%3AQ456' ];
-		yield [ null, new PropertyId( 'P666' ), null ];
+		yield [
+			'P123',
+			new FederatedPropertyId( 'https://pretend.url/entity/P123', 'P123' ),
+			'https://pretend.url/w/index.php?title=P123'
+		];
+		yield [ null, new FederatedPropertyId( 'https://pretend.url/entity/P666', 'P666' ), null ];
 	}
 
 	/**
@@ -45,6 +49,28 @@ class ApiEntityUrlLookupTest extends TestCase {
 			'https://pretend.url/w/'
 		);
 		$this->assertSame( $expected, $lookup->getLinkUrl( $entityId ) );
+	}
+
+	public function testGivenNotAFederatedPropertyId_getFullUrlThrows(): void {
+		$lookup = new ApiEntityUrlLookup(
+			$this->createStub( ApiEntityTitleTextLookup::class ),
+			'https://pretend.url/w/'
+		);
+
+		$this->expectException( InvalidArgumentException::class );
+
+		$lookup->getFullUrl( new PropertyId( 'P666' ) );
+	}
+
+	public function testGivenNotAFederatedPropertyId_getLinkUrlThrows(): void {
+		$lookup = new ApiEntityUrlLookup(
+			$this->createStub( ApiEntityTitleTextLookup::class ),
+			'https://pretend.url/w/'
+		);
+
+		$this->expectException( InvalidArgumentException::class );
+
+		$lookup->getLinkUrl( new PropertyId( 'P666' ) );
 	}
 
 	private function getApiEntityTitleTextLookup( ?string $prefixedText ) {

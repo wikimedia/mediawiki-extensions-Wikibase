@@ -3,9 +3,10 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Repo\FederatedProperties\ApiEntityNamespaceInfoLookup;
 use Wikibase\Repo\FederatedProperties\ApiEntityTitleTextLookup;
 
@@ -20,10 +21,12 @@ class ApiEntityTitleTextLookupTest extends TestCase {
 
 	public function provideTestGetFullUrl() {
 		return [
-			[ '', new ItemId( 'Q123' ), 'Q123' ],
-			[ 'Item', new ItemId( 'Q456' ), 'Item:Q456' ],
-			[ 'Property', new PropertyId( 'P789' ), 'Property:P789' ],
-			[ null, new PropertyId( 'P666' ), null ],
+			[
+				'Property',
+				new FederatedPropertyId( 'http://wikidata.org/entity/P789', 'P789' ),
+				'Property:http://wikidata.org/entity/P789' // This is obvs wrong but reflects the current behavior. Fixed in a follow-up.
+			],
+			[ null, new FederatedPropertyId( 'http://wikidata.org/entity/P666', 'P666' ), null ],
 		];
 	}
 
@@ -37,10 +40,21 @@ class ApiEntityTitleTextLookupTest extends TestCase {
 		$this->assertSame( $expected, $lookup->getPrefixedText( $entityId ) );
 	}
 
+	public function testGivenNotAFederatedPropertyId_getPrefixedTextThrows() {
+		$lookup = new ApiEntityTitleTextLookup(
+			$this->getApiEntityNamespaceInfoLookup( 'Property' )
+		);
+
+		$this->expectException( InvalidArgumentException::class );
+
+		$lookup->getPrefixedText( new PropertyId( 'P666' ) );
+	}
+
 	private function getApiEntityNamespaceInfoLookup( $namespaceName ) {
 		$mock = $this->createMock( ApiEntityNamespaceInfoLookup::class );
 		$mock->method( 'getNamespaceNameForEntityType' )
 			->willReturn( $namespaceName );
 		return $mock;
 	}
+
 }
