@@ -17,11 +17,6 @@ use Wikibase\Lib\Changes\Change;
 class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 
 	/**
-	 * @var string|bool
-	 */
-	private $repoDB;
-
-	/**
 	 * @var string[] Mapping of site IDs to database names.
 	 */
 	private $wikiDBNames;
@@ -42,20 +37,17 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 	private $logger;
 
 	/**
-	 * @param string|bool $repoDB
 	 * @param LoggerInterface $logger
 	 * @param string[] $wikiDBNames An associative array mapping site IDs to logical database names.
 	 * @param int $batchSize Number of changes to push per job.
 	 * @param callable|null $jobQueueGroupFactory Function that returns a JobQueueGroup for a given wiki.
 	 */
 	public function __construct(
-		$repoDB,
 		LoggerInterface $logger,
 		array $wikiDBNames = [],
 		$batchSize = 50,
 		$jobQueueGroupFactory = null
 	) {
-		$this->repoDB = $repoDB;
 		$this->wikiDBNames = $wikiDBNames;
 		$this->batchSize = $batchSize;
 		$this->jobQueueGroupFactory = $jobQueueGroupFactory ?: [ JobQueueGroup::class, 'singleton' ];
@@ -115,7 +107,6 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 		);
 
 		$params = [
-			'repo' => $this->repoDB,
 			'changeIds' => $changeIds,
 
 			/**
