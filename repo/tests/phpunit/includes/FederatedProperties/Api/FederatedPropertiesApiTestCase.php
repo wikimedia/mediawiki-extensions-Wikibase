@@ -15,8 +15,14 @@ abstract class FederatedPropertiesApiTestCase extends WikibaseApiTestCase {
 
 	use FederatedPropertiesTestTrait;
 
+	/**
+	 * @var bool Test without local properties by default. Can be overridden by subclasses in setUp before calling parent::setUp()
+	 */
+	protected $withLocalPropertySource = false;
+
 	protected function setUp(): void {
 		parent::setUp();
-		$this->setFederatedPropertiesEnabled();
+		$this->setFederatedPropertiesEnabled( $this->withLocalPropertySource );
 	}
+
 }
