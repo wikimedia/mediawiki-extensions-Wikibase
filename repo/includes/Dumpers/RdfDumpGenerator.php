@@ -17,6 +17,7 @@ use Wikibase\Repo\Rdf\HashDedupeBag;
 use Wikibase\Repo\Rdf\RdfBuilder;
 use Wikibase\Repo\Rdf\RdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfProducer;
+use Wikibase\Repo\Rdf\UnknownFlavorException;
 use Wikimedia\Purtle\BNodeLabeler;
 use Wikimedia\Purtle\RdfWriterFactory;
 
@@ -156,7 +157,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	/**
 	 * Get the producer setting for the given flavor.
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws UnknownFlavorException
 	 */
 	private static function getFlavorFlags( string $flavorName ): int {
 		//Note: RdfProducer::PRODUCE_VERSION_INFO is not needed here as dumps
@@ -177,7 +178,7 @@ class RdfDumpGenerator extends DumpGenerator {
 				return RdfProducer::PRODUCE_TRUTHY_STATEMENTS;
 		}
 
-		throw new InvalidArgumentException( "Unsupported flavor: $flavorName" );
+		throw new UnknownFlavorException( $flavorName, [ 'full-dump', 'truthy-dump' ] );
 	}
 
 	/**
@@ -189,6 +190,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param BNodeLabeler|null $labeler
 	 * @param RdfBuilderFactory $rdfBuilderFactory
 	 *
+	 * @throws UnknownFlavorException
 	 * @return static
 	 */
 	public static function createDumpGenerator(

@@ -21,6 +21,7 @@ use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\SubEntityTypesMapper;
+use Wikibase\Repo\Rdf\UnknownFlavorException;
 use Wikimedia\Http\HttpAcceptNegotiator;
 use Wikimedia\Http\HttpAcceptParser;
 
@@ -545,13 +546,24 @@ class EntityDataRequestHandler {
 			$incomingRedirects = $this->getIncomingRedirects( $entityRevision->getEntity()->getId() );
 		}
 
-		list( $data, $contentType ) = $this->serializationService->getSerializedData(
-			$format,
-			$entityRevision,
-			$followedRedirectRevision,
-			$incomingRedirects,
-			$flavor
-		);
+		try {
+			list( $data, $contentType ) = $this->serializationService->getSerializedData(
+				$format,
+				$entityRevision,
+				$followedRedirectRevision,
+				$incomingRedirects,
+				$flavor
+			);
+		} catch ( UnknownFlavorException $e ) {
+			$knownFlavors = $e->getKnownFlavors();
+			throw new HttpError(
+				400,
+				$output->msg( 'wikibase-entitydata-bad-flavor' )
+					->plaintextParams( $e->getUnknownFlavor() )
+					->numParams( count( $knownFlavors ) )
+					->plaintextParams( implode( '|', $knownFlavors ) )
+			);
+		}
 
 		$output->disable();
 		$this->outputData(

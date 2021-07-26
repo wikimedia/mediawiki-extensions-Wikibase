@@ -11,6 +11,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Dumpers\DumpGenerator;
 use Wikibase\Repo\Dumpers\RdfDumpGenerator;
 use Wikibase\Repo\Rdf\RdfBuilderFactory;
+use Wikibase\Repo\Rdf\UnknownFlavorException;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\BNodeLabeler;
@@ -123,9 +124,6 @@ class DumpRdf extends DumpEntities {
 	 */
 	protected function createDumper( $output ): DumpGenerator {
 		$flavor = $this->getOption( 'flavor', 'full-dump' );
-		if ( !in_array( $flavor, [ 'full-dump', 'truthy-dump' ] ) ) {
-			$this->fatalError( 'Invalid flavor: ' . $flavor );
-		}
 
 		$labeler = null;
 		$partId = $this->getOption( 'part-id' );
@@ -141,15 +139,19 @@ class DumpRdf extends DumpEntities {
 			}
 		}
 
-		return RdfDumpGenerator::createDumpGenerator(
-			$this->getOption( 'format', 'ttl' ),
-			$output,
-			$flavor,
-			$this->revisionLookup,
-			$this->entityPrefetcher,
-			$labeler,
-			$this->rdfBuilderFactory
-		);
+		try {
+			return RdfDumpGenerator::createDumpGenerator(
+				$this->getOption( 'format', 'ttl' ),
+				$output,
+				$flavor,
+				$this->revisionLookup,
+				$this->entityPrefetcher,
+				$labeler,
+				$this->rdfBuilderFactory
+			);
+		} catch ( UnknownFlavorException $e ) {
+			$this->fatalError( $e->getMessage() );
+		}
 	}
 
 	protected function getDumpType(): string {

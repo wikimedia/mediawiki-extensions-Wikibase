@@ -24,6 +24,7 @@ use Wikibase\Repo\Rdf\HashDedupeBag;
 use Wikibase\Repo\Rdf\RdfBuilder;
 use Wikibase\Repo\Rdf\RdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfProducer;
+use Wikibase\Repo\Rdf\UnknownFlavorException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikimedia\Purtle\RdfWriterFactory;
 
@@ -111,6 +112,7 @@ class EntityDataSerializationService {
 	 * @param string|null $flavor The type of the output provided by serializer
 	 *
 	 * @return array tuple of ( $data, $contentType )
+	 * @throws UnknownFlavorException
 	 * @throws MWException
 	 */
 	public function getSerializedData(
@@ -274,7 +276,7 @@ class EntityDataSerializationService {
 	/**
 	 * Get the producer setting for current data format
 	 *
-	 * @throws MWException
+	 * @throws UnknownFlavorException
 	 */
 	private function getFlavor( ?string $flavorName ): int {
 		switch ( $flavorName ) {
@@ -303,7 +305,7 @@ class EntityDataSerializationService {
 				return RdfProducer::PRODUCE_ALL;
 		}
 
-		throw new MWException( "Unsupported flavor: $flavorName" );
+		throw new UnknownFlavorException( $flavorName, [ 'simple', 'dump', 'long', 'full' ] );
 	}
 
 	/**
@@ -312,6 +314,7 @@ class EntityDataSerializationService {
 	 * @param string $format The desired serialization format, as a format name understood by ApiBase or RdfWriterFactory
 	 * @param string|null $flavorName Flavor name (used for RDF output)
 	 *
+	 * @throws UnknownFlavorException
 	 * @return RdfBuilder|null A suitable result printer, or null
 	 *   if the given format is not supported.
 	 */

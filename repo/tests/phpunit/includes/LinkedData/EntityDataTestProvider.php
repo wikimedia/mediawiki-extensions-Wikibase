@@ -514,6 +514,14 @@ class EntityDataTestProvider {
 			]
 		];
 
+		$cases['Invalid flavor'] = [
+			'',
+			[ 'id' => 'Q42', 'format' => 'ntriples', 'flavor' => 'invalid' ],
+			[],
+			'!wikibase-entitydata-bad-flavor: invalid!',
+			400,
+		];
+
 		$cases['RDF output not available for properties'] = [
 			'',
 			[ 'id' => 'P42', 'format' => 'rdf' ],
