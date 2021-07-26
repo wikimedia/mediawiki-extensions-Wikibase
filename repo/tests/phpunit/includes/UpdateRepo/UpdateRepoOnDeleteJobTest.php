@@ -60,12 +60,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	/**
-	 * @param bool $titleExists
-	 *
-	 * @return SiteLookup
-	 */
-	private function getSiteLookup( $titleExists ) {
+	private function getSiteLookup( bool $titleExists ): SiteLookup {
 		$enwiki = $this->createMock( Site::class );
 		$enwiki->method( 'getGlobalId' )
 			->willReturn( 'enwiki' );
@@ -76,12 +71,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 		return new HashSiteStore( [ $enwiki ] );
 	}
 
-	/**
-	 * @param ItemId $itemId
-	 *
-	 * @return EntityTitleStoreLookup
-	 */
-	private function getEntityTitleLookup( ItemId $itemId ) {
+	private function getEntityTitleLookup( ItemId $itemId ): EntityTitleStoreLookup {
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->method( 'getTitleForId' )
 			->with( $itemId )
@@ -90,10 +80,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 		return $entityTitleLookup;
 	}
 
-	/**
-	 * @return EntityPermissionChecker
-	 */
-	private function getEntityPermissionChecker() {
+	private function getEntityPermissionChecker(): EntityPermissionChecker {
 		$entityPermissionChecker = $this->createMock( EntityPermissionChecker::class );
 		$entityPermissionChecker->method( 'getPermissionStatusForEntity' )
 				->willReturn( Status::newGood() );
@@ -101,17 +88,11 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 		return $entityPermissionChecker;
 	}
 
-	/**
-	 * @return SummaryFormatter
-	 */
-	private function getSummaryFormatter() {
+	private function getSummaryFormatter(): SummaryFormatter {
 		return $this->createMock( SummaryFormatter::class );
 	}
 
-	/**
-	 * @return EditFilterHookRunner
-	 */
-	private function getMockEditFitlerHookRunner() {
+	private function getMockEditFitlerHookRunner(): EditFilterHookRunner {
 		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
 			->onlyMethods( [ 'run' ] )
 			->disableOriginalConstructor()
@@ -121,7 +102,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 		return $runner;
 	}
 
-	public function runProvider() {
+	public function runProvider(): iterable {
 		return [
 			[ true, false, 'Delete me' ],
 			// The title on client still exists, so don't unlink
@@ -133,12 +114,8 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider runProvider
-	 *
-	 * @param bool $expected
-	 * @param bool $titleExists
-	 * @param string $oldTitle
 	 */
-	public function testRun( $expected, $titleExists, $oldTitle ) {
+	public function testRun( bool $expected, bool $titleExists, string $oldTitle ) {
 		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Delete me', [ new ItemId( 'Q42' ) ] );
 
