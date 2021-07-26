@@ -29,9 +29,6 @@ class WikibaseSettings {
 	}
 
 	/**
-	 * @note This runs the WikibaseRepoEntityNamespaces hook to allow extensions to modify
-	 *       the repo 'entityNamespaces' setting.
-	 *
 	 * @throws MWException
 	 *
 	 * @return SettingsArray

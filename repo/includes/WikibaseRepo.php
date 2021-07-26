@@ -579,10 +579,13 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EnabledEntityTypes' );
 	}
 
+	/**
+	 * @return string[] List of entity type identifiers (typically "item" and "property")
+	 *  that are configured in WikibaseRepo.entitytypes.php and enabled via the
+	 *  entityNamespaces setting within the local entity source.
+	 *  This list will also include any sub entity types of entity types enabled in that way.
+	 */
 	public static function getLocalEntityTypes( ContainerInterface $services = null ): array {
-		// List of entity and sub-entity type identifiers (typically "item" and "property")
-		// that are configured in WikibaseRepo.entitytypes.php and enabled via the
-		// $wgWBRepoSettings['entityNamespaces'] setting.
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.LocalEntityTypes' );
 	}
