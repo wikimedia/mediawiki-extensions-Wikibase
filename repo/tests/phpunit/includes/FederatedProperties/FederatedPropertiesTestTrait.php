@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
+use Exception;
 use MockHttpTrait;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Repo\WikibaseRepo;
@@ -54,7 +55,7 @@ trait FederatedPropertiesTestTrait {
 		$this->setWbSetting( 'localEntitySourceName', 'local' );
 	}
 
-	public function newFederatedPropertyIdFromPId( string $pId ) {
+	protected function newFederatedPropertyIdFromPId( string $pId ): FederatedPropertyId {
 		return new FederatedPropertyId( $this->getFederatedPropertiesSourceConceptUri() . $pId );
 	}
 
@@ -70,6 +71,42 @@ trait FederatedPropertiesTestTrait {
 	private function setWbSettingInSettings( string $name, $value ) {
 		$settings = WikibaseRepo::getSettings();
 		$settings->setSetting( $name, $value );
+	}
+
+	/**
+	 * @param array $requestResponsePairs - list of [ $requestParams, $jsonResponse ] pairs. The former are used to match request URL, the
+	 *        latter are used as the response body.
+	 */
+	protected function mockSourceApiRequests( array $requestResponsePairs ): void {
+		$this->installMockHttp( function ( $url ) use ( $requestResponsePairs ) {
+			return $this->makeFakeHttpRequest(
+				json_encode( $this->matchResponseToUrl( $url, $requestResponsePairs ) ),
+				200,
+				[ 'some' => 'header' ] // MwHttpRequestToResponseInterfaceAdapter needs this to be non-empty.
+			);
+		} );
+	}
+
+	/**
+	 * Little homebrew url params matcher. It might make sense to look into a url matching and/or proper request mocking library instead.
+	 */
+	private function matchResponseToUrl( string $url, array $requestResponsePairs ): array {
+		parse_str(
+			parse_url( $url, PHP_URL_QUERY ),
+			$urlParams
+		);
+
+		foreach ( $requestResponsePairs as [ $requestParams, $response ] ) {
+			foreach ( $requestParams as $name => $value ) {
+				if ( $urlParams[$name] !== $value ) {
+					continue 2; // mismatch, continue with the next request/response pair
+				}
+			}
+
+			return $response; // all params matched!
+		}
+
+		throw new Exception( "No mock request defined for url: '$url'" );
 	}
 
 	/**
