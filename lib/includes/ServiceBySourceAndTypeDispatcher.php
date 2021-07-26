@@ -51,7 +51,9 @@ class ServiceBySourceAndTypeDispatcher {
 
 			return $this->services[$sourceName][$entityType];
 		}
-		throw new LogicException( 'Unable to find Service callback for Entity Type ' . $entityType . ' for Source ' . $sourceName );
+		throw new LogicException(
+			'Unable to find ' . $this->serviceType . ' Service callback for Entity Type ' . $entityType . ' for Source ' . $sourceName
+		);
 	}
 
 	public function getServiceForSourceAndType( string $sourceName, string $entityType, array $callbackArgs = [] ) {
