@@ -85,6 +85,7 @@ use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\Api\ApiHelperFactory;
+use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
@@ -946,6 +947,11 @@ class WikibaseRepo {
 	public static function getEntitySearchHelperCallbacks( ContainerInterface $services = null ): array {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntitySearchHelperCallbacks' );
+	}
+
+	public static function getEntitySearchHelper( ContainerInterface $services = null ): EntitySearchHelper {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntitySearchHelper' );
 	}
 
 	public static function getEntityLinkFormatterFactory(
