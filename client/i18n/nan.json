@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ianbu",
+			"Ripunn",
 			"唐吉訶德的侍從"
 		]
 	},
@@ -13,6 +14,7 @@
 	"wikibase-addlinkstitle": "Ka-thiam kî-thaⁿ gú-giân ê liân-kiat",
 	"wikibase-linkitem-addlinks": "Ka-thiam liân-kiat",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Om khí-lâi",
 	"wikibase-rc-hide-wikidata-show": "hiàn",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} siu-kái",

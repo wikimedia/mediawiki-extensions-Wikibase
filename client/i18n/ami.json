@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Akamycoco",
 			"Vickylin77s"
 		]
 	},
@@ -9,6 +10,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} kamok",
 	"wikibase-editlinks": "  misinanot tongod",
 	"wikibase-editlinkstitle": "  misinanot to katatongod no caay kalecad a sowal",
+	"wikibase-linkitem-addlinks": "sincng links",
 	"wikibase-linkitem-input-page": " o felih",
 	"wikibase-rc-hide-wikidata": "$1 a {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": " himed",

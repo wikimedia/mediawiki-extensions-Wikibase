@@ -110,6 +110,7 @@
 	"apihelp-wbmergeitems-param-toid": "לאיזה מזהה למזג",
 	"apihelp-wbmergeitems-param-ignoreconflicts": "מערך של מרכיבים של פריט שבהם צריך להתעלם מהתנגשויות. יכול להכיל רק את הערכים של \"<var>description</var>\"‏, \"<var>sitelink</var>\" ו־\"<var>statement</var>\"",
 	"apihelp-wbmergeitems-param-summary": "תקציר העריכה.\nלתחילתו תצורף הערה שמיוצרת אוטומטית. מגבלת האורך של ההערה האוטומטית יחד עם תקציר העריכה היא 260 תווים. יש לשים לב לכך שכל דבר מעבר לכך ייחתך.",
+	"apihelp-wbmergeitems-param-tags": "אילו תגי שינוי להחיל על הגרסה.",
 	"apihelp-wbmergeitems-param-bot": "סימון העריכה בתור בוט. דגל ה־URL הזה יכובד רק אם המשתמש שייך לקבוצה \"bot\".",
 	"apihelp-wbmergeitems-example-1": "מיזוג נתונים מ־<samp>$1</samp> ל־<samp>$2</samp>",
 	"apihelp-wbmergeitems-example-3": "מיזוג נתונים מ־<samp>$1</samp> ל־<samp>$2</samp> תוך כדי התעלמות מכל קישורי האתר המתנגשים",

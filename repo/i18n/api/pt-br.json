@@ -112,6 +112,7 @@
 	"apihelp-wbmergeitems-param-toid": "Mesclar para o ID",
 	"apihelp-wbmergeitems-param-ignoreconflicts": "Array de elementos do item para os quais os conflitos serão ignorados. Só pode conter valores de \"<var>description</var>\", \"<var>sitelink</var>\" e \"<var>statement</var>\"",
 	"apihelp-wbmergeitems-param-summary": "Resumo para a edição. \nSerá antecedido por um comentário gerado automaticamente. O limite de comprimento do comentário automático juntamente com o sumário é de 260 caracteres. Esteja ciente de que tudo que exceder este limite será cortado.",
+	"apihelp-wbmergeitems-param-tags": "Alterar as marcações para aplicar às revisões.",
 	"apihelp-wbmergeitems-param-bot": "Marcar esta edição como sendo feita por um robô. Esta etiqueta URL só será respeitado se o usuário pertencer ao grupo \"robô\".",
 	"apihelp-wbmergeitems-example-1": "Mesclar dados de <samp>$1</samp> em <samp>$2</samp>",
 	"apihelp-wbmergeitems-example-3": "Mesclar dados de <samp>$1</samp> em <samp>$2</samp> ignorando qualquer conflito de sitelinks",
