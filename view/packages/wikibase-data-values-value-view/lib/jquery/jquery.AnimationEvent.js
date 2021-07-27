@@ -50,7 +50,7 @@
 		if ( !( this instanceof SELF ) ) {
 			return new SELF( animationPurpose, props );
 		}
-		if ( typeof animationPurpose !== 'string' || $.trim( animationPurpose ) === '' ) {
+		if ( typeof animationPurpose !== 'string' || animationPurpose.trim() === '' ) {
 			throw new Error( 'An animation purpose has to be stated' );
 		}
 
