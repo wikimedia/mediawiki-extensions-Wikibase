@@ -85,10 +85,12 @@ class ApiServiceFactory {
 	}
 
 	public function newApiEntitySearchHelper(): ApiEntitySearchHelper {
+		$apiSources = new ApiEntitySources( $this->entitySourceDefinitions );
+
 		return new ApiEntitySearchHelper(
 			$this->newFederatedPropertiesApiClient(),
 			$this->dataTypeDefinitions->getTypeIds(),
-			$this->entitySourceDefinitions
+			$apiSources->getApiPropertySource()
 		);
 	}
 
