@@ -125,6 +125,7 @@
 	"apihelp-wbmergeitems-param-toid": "L’ID vers lequel fusionner",
 	"apihelp-wbmergeitems-param-ignoreconflicts": "Tableau d’éléments de l’objet pour lesquels ignorer les conflits. Peut contenir uniquement des valeurs de « <var>description</var> », « <var>sitelink</var> » ou « <var>statement</var> »",
 	"apihelp-wbmergeitems-param-summary": "Résumé de la modification.\nSera préfixé par un commentaire généré automatiquement. La taille limite du commentaire automatique ajouté au résumé est de 260 caractères. Notez bien que tout ce qui est au-delà de cette limite sera tronqué.",
+	"apihelp-wbmergeitems-param-tags": "Modifier les marques à appliquer aux révisions.",
 	"apihelp-wbmergeitems-param-bot": "Marquer cette modification comme faite par robot. Cette marque d’URL sera respectée uniquement si l’utilisateur appartient au groupe « {{int:group-bot}} ».",
 	"apihelp-wbmergeitems-example-1": "Fusionne les données de <samp>$1</samp> dans <samp>$2</samp>",
 	"apihelp-wbmergeitems-example-3": "Fusionne les données de <samp>$1</samp> dans <samp>$2</samp> en ignorant les conflits de liens de site",

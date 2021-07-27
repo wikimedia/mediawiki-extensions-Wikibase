@@ -362,6 +362,7 @@
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 – $2, chuyển đổi từ $3 – $4",
 	"wikibase-api-unresolved-redirect": "Số thực thể này chỉ đến một trang đổi hướng; các trang đổi hướng không được hỗ trợ trong ngữ cảnh này.",
 	"wikibase-api-no-such-sitelink": "Không tìm thấy trang dịch vụ “$1” khi sửa đổi các phù hiệu.",
+	"wikibase-api-not-recognized-siteid": "Không nhận được định danh site được cung cấp.",
 	"wikibase-api-target-not-empty": "Chỉ có thể tạo đổi hướng từ một mục chưa tồn tại hoặc mục đã xóa.",
 	"wikibase-api-target-is-redirect": "Không thể đổi hướng đến một thực thể cũng đổi hướng.",
 	"wikibase-api-target-is-incompatible": "Không thể đổi hướng đến một thực thể loại khác.",

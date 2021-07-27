@@ -194,6 +194,7 @@
 	"wikibase-parse-error-entity-id": "Няправільны ідэнтыфікатар сутнасці.",
 	"wikibase-parse-error-quantity": "Значэнне колькасці мае няправільны фармат.",
 	"wikibase-parse-error-time": "Значэнне часу мае няправільны фармат.",
+	"wikibase-api-failed-save": "Памылка пры захаванні.",
 	"wikibase-conflict-patched": "Ваша праўка ўнесена ў апошнюю версію.",
 	"wikibase-restoreold": "аднавіць",
 	"wikibase-entity-summary-restore": "Адноўлена версія $3 з дапамогай [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",

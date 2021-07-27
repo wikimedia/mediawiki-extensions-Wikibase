@@ -340,6 +340,7 @@
 	"wikibase-mylanguagefallbackchain-text": "La cadena de llengües alternatives que s'utilitza per mostrar les etiquetes de les entitats es mostra a continuació.",
 	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 - $2",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, convertit de $3 - $4",
+	"wikibase-api-failed-save": "No s'ha pogut desar.",
 	"wikibase-api-not-recognized-datatype": "S'esperava un tipus de dades, però hi manca o bé no és reconeguda.",
 	"wikibase-api-tags-invalid": "El paràmetre d'etiquetes no és vàlid.",
 	"wikibase-api-target-not-empty": "No es pot crear una redirecció per sobre d'una entitat buida o eliminada.",

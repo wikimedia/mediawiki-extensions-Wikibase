@@ -350,6 +350,7 @@
 	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 – $2",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 – $2, átalakítva $3 – $4 nyelvről",
 	"wikibase-api-unresolved-redirect": "A megadott entitásazonosító egy átirányításra hivatkozik, ami nem támogatott ebben a kontextusban.",
+	"wikibase-api-failed-save": "A mentés meghiúsult.",
 	"wikibase-api-illegal-entity-remove": "Nem lehet entitásokat törölni legfelső szintű <var>remove</var> kulcs megadásával.",
 	"wikibase-api-illegal-id-or-site-page-selector": "Vagy egy entitás-<var>id</var>-t, vagy egy <var>site</var> és egy <var>page</var> kombinációját kell megadnod, de nem mindkettőt.",
 	"wikibase-api-illegal-ids-or-sites-titles-selector": "Vagy elemazonosítókat („ids”) adj meg, vagy oldalak („sites”) és címek („titles”) párjait a kapcsolódó lapok használatához",

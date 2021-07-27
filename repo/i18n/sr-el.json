@@ -274,6 +274,7 @@
 	"special-mylanguagefallbackchain": "Moj jezički lanac",
 	"wikibase-mylanguagefallbackchain-babel": "Možete ga urediti dodavanjem <nowiki>{{#babel: }}</nowiki> na {{GENDER:$1|svoju}} [[Special:MyPage|korisničku stranicu]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, pretvoreno iz $3 - $4",
+	"wikibase-api-failed-save": "Spremanje nije uspelo.",
 	"wikibase-api-no-external-page": "Sajt spoljnog klijenta „$1” nije dao informacije o stranici za „$2”.",
 	"wikibase-api-no-such-entity": "Nije moguće pronaći entitet sa ID-om „$1”",
 	"wikibase-restoreold": "vrati",

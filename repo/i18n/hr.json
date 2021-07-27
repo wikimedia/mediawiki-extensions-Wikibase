@@ -178,6 +178,7 @@
 	"wikibase-parse-error-coordinate": "Vrijednost koordinate nije ispravna",
 	"wikibase-parse-error-quantity": "Vrijednost količine nije ispravna.",
 	"wikibase-parse-error-time": "Vremenska vrijednost nije ispravna.",
+	"wikibase-api-editconflict": "Sukob uređivanja. Nije bilo moguće prikrpati se trenutačnoj inačici.",
 	"wikibase-api-no-external-page": "Na klijentu \"$1\" nema informacija o stranici \"$2\".",
 	"wikibase-api-no-such-sitelink": "Nije moguće pronaći takve poveznice",
 	"wikibase-restoreold": "vrati",
