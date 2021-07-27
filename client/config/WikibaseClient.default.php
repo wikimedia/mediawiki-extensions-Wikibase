@@ -229,16 +229,6 @@ return call_user_func( function() {
 		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgScriptPath'] : '/w';
 	};
 
-	$defaults['changesDatabase'] = function ( SettingsArray $settings ) {
-		if ( $settings->hasSetting( 'repoDatabase' ) ) {
-			// TODO probably remove this? repoDatabase setting is ancient (see Ibbdb5d0317)
-			return $settings->getSetting( 'repoDatabase' );
-		}
-		$entitySources = $settings->getSetting( 'entitySources' );
-		$itemAndPropertySourceName = $settings->getSetting( 'itemAndPropertySourceName' );
-		return $entitySources[$itemAndPropertySourceName]['repoDatabase'];
-	};
-
 	$defaults['siteGlobalID'] = function ( SettingsArray $settings ) {
 		// The database name is a sane default for the site ID.
 		// On Wikimedia sites, this is always correct.
