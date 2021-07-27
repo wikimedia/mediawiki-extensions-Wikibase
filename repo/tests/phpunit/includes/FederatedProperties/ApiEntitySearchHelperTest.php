@@ -5,11 +5,10 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\NewEntitySource;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\FederatedProperties\ApiEntitySearchHelper;
 use Wikibase\Repo\FederatedProperties\ApiRequestException;
@@ -58,32 +57,16 @@ class ApiEntitySearchHelperTest extends TestCase {
 		if ( $dataTypes === null ) {
 			$dataTypes = WikibaseRepo::getDataTypeDefinitions()->getTypeIds();
 		}
-		$entitySourceDefinitions = new EntitySourceDefinitions(
-			[
-				new EntitySource(
-					'local',
-					'somedb',
-					[ 'property' => [ 'namespaceId' => 122, 'slot' => 'main' ] ],
-					self::CONCEPT_BASE_URI,
-					'',
-					'wd',
-					'wd',
-					'db'
-				),
-				new EntitySource(
-					'fedprops',
-					false,
-					[ 'property' => [ 'namespaceId' => 122, 'slot' => 'main' ] ],
-					self::CONCEPT_BASE_URI,
-					'',
-					'fpwd',
-					'fpwd',
-					'api'
-				)
-			],
-			new SubEntityTypesMapper( [] )
+
+		return new ApiEntitySearchHelper(
+			$api,
+			$dataTypes,
+			NewEntitySource::havingName( 'feddy prop source' )
+				->withType( EntitySource::TYPE_API )
+				->withConceptBaseUri( self::CONCEPT_BASE_URI )
+				->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 122, 'slot' => 'main' ] ] )
+				->build()
 		);
-		return new ApiEntitySearchHelper( $api, $dataTypes, $entitySourceDefinitions );
 	}
 
 	private function setupTestApi( &$params, $langCode, $responseDataFile, $statusCode = 200 ) {
