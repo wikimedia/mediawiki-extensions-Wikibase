@@ -4,9 +4,11 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
 use InvalidArgumentException;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
@@ -34,6 +36,11 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 	private $api;
 
 	/**
+	 * @var EntitySourceDefinitions
+	 */
+	private $entitySourceDefinitions;
+
+	/**
 	 * @var array
 	 */
 	private $typesEnabled = [];
@@ -42,8 +49,9 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 	 * @param GenericActionApiClient $api
 	 * @param string[] $enabledDataTypes
 	 */
-	public function __construct( GenericActionApiClient $api, array $enabledDataTypes ) {
+	public function __construct( GenericActionApiClient $api, array $enabledDataTypes, EntitySourceDefinitions $entitySourceDefinitions ) {
 		$this->api = $api;
+		$this->entitySourceDefinitions = $entitySourceDefinitions;
 		foreach ( $enabledDataTypes as $dataType ) {
 			$this->typesEnabled[$dataType] = true;
 		}
@@ -63,10 +71,20 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 	 */
 	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit, $strictLanguage ) {
 		$allResults = [];
-
 		if ( $entityType !== Property::ENTITY_TYPE ) {
 			throw new InvalidArgumentException( 'Wrong argument passed in. Entity type must be a property' );
 		}
+		$sources = $this->entitySourceDefinitions->getSources();
+		foreach ( $sources as $source ) {
+			if ( $source->getType() === EntitySource::TYPE_API && in_array( Property::ENTITY_TYPE, $source->getEntityTypes() ) ) {
+				$conceptBaseUri = $source->getConceptBaseUri();
+			}
+		}
+
+		if ( !isset( $conceptBaseUri ) ) {
+			return $allResults;
+		}
+
 		$jsonResult = $this->makeRequest( $text, $languageCode, $entityType, $limit, $strictLanguage );
 		$filteredResult = $this->filterRequest( $jsonResult, $limit );
 
@@ -74,7 +92,7 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 			$termSearchResult = new TermSearchResult(
 				$this->getMatchedTerm( $result['match'] ),
 				$result['match']['type'],
-				new PropertyId( $result['id'] ),
+				new FederatedPropertyId( $conceptBaseUri . $result['id'] ),
 				array_key_exists( 'label', $result ) ? new Term( $languageCode, $result['label'] ) : null,
 				array_key_exists( 'description', $result ) ? new Term( $languageCode, $result['description'] ) : null,
 				[

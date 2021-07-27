@@ -4,9 +4,12 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\FederatedProperties\ApiEntitySearchHelper;
 use Wikibase\Repo\FederatedProperties\ApiRequestException;
@@ -25,6 +28,8 @@ use Wikibase\Repo\WikibaseRepo;
 class ApiEntitySearchHelperTest extends TestCase {
 
 	use HttpResponseMockerTrait;
+
+	private const CONCEPT_BASE_URI = 'https://wikidata.beta.wmflabs.org/entity/';
 
 	private $responseDataFiles = [
 		'api-entity-search-helper-test-data-emptyResponse.json',
@@ -53,7 +58,32 @@ class ApiEntitySearchHelperTest extends TestCase {
 		if ( $dataTypes === null ) {
 			$dataTypes = WikibaseRepo::getDataTypeDefinitions()->getTypeIds();
 		}
-		return new ApiEntitySearchHelper( $api, $dataTypes );
+		$entitySourceDefinitions = new EntitySourceDefinitions(
+			[
+				new EntitySource(
+					'local',
+					'somedb',
+					[ 'property' => [ 'namespaceId' => 122, 'slot' => 'main' ] ],
+					self::CONCEPT_BASE_URI,
+					'',
+					'wd',
+					'wd',
+					'db'
+				),
+				new EntitySource(
+					'fedprops',
+					false,
+					[ 'property' => [ 'namespaceId' => 122, 'slot' => 'main' ] ],
+					self::CONCEPT_BASE_URI,
+					'',
+					'fpwd',
+					'fpwd',
+					'api'
+				)
+			],
+			new SubEntityTypesMapper( [] )
+		);
+		return new ApiEntitySearchHelper( $api, $dataTypes, $entitySourceDefinitions );
 	}
 
 	private function setupTestApi( &$params, $langCode, $responseDataFile, $statusCode = 200 ) {
@@ -196,7 +226,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 				$resultToTest->getMatchedTermType()
 			);
 			$this->assertEquals(
-				new PropertyId( $expectedResult->id ),
+				new FederatedPropertyId( self::CONCEPT_BASE_URI . $expectedResult->id ),
 				$resultToTest->getEntityId()
 			);
 			$this->assertEquals(

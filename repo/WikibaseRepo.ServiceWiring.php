@@ -1107,15 +1107,17 @@ return [
 				'Federated Property services should not be constructed when federatedProperties feature is not enabled or configured.'
 			);
 		}
+		$entitySourceDefinition = WikibaseRepo::getEntitySourceDefinitions( $services );
 
 		return new ApiServiceFactory(
 			$services->getHttpRequestFactory(),
 			WikibaseRepo::getContentModelMappings( $services ),
 			WikibaseRepo::getDataTypeDefinitions( $services ),
 			new EntitySourceLookup(
-				WikibaseRepo::getEntitySourceDefinitions( $services ),
+				$entitySourceDefinition,
 				WikibaseRepo::getSubEntityTypesMapper( $services )
 			),
+			$entitySourceDefinition,
 			$settings->getSetting( 'federatedPropertiesSourceScriptUrl' ),
 			$services->getMainConfig()->get( 'ServerName' )
 		);
