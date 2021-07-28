@@ -90,7 +90,8 @@
 			globalSiteId: null,
 			namespaceNumber: null,
 			repoArticlePath: null,
-			langLinkSiteGroup: null
+			langLinkSiteGroup: null,
+			tags: []
 		},
 
 		/**
@@ -371,7 +372,11 @@
 			this.targetArticle = $( '#wbclient-linkItem-page' ).val();
 
 			this._pageConnector = new PageConnector(
-				new wb.api.RepoApi( this.mwApiForRepo, mw.config.get( 'wgUserLanguage' ) ),
+				new wb.api.RepoApi(
+					this.mwApiForRepo,
+					mw.config.get( 'wgUserLanguage' ),
+					this.options.tags
+				),
 				this.options.globalSiteId,
 				this.options.pageTitle,
 				this.targetSite,

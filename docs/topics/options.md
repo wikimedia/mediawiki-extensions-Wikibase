@@ -429,7 +429,7 @@ These settings define [change tags][Help:Tags] that should be added to different
 All of them default to the empty list, meaning that no tags are added by default;
 when you configure them, you also have to create those tags via Special:Tags.
 
-#### updateRepoTags
+#### updateRepoTags {#repo_updateRepoTags}
 List of tags to be added to edits made via jobs enqueued by client wikis,
 to update sitelinks when connected pages on the client are moved or deleted.
 (Note that this is a _repo_ setting: the same list of tags is used for updates coming from all client wikis.)
@@ -807,7 +807,7 @@ Regular expression to match edit links for which the Data Bridge is enabled.
 Uses JavaScript syntax, with the first capturing group containing the title of the entity, the second one containing the entity ID (usually a part of the first capturing group) and the third one containing the property ID to edit.
 Mandatory if [client dataBridgeEnabled] is set to `true` – there is no default value.
 
-####dataBridgeEditTags
+####dataBridgeEditTags {#client_dataBridgeEditTags}
 A list of tags for tracking edits through the Data Bridge.
 
 Optional if [client dataBridgeEnabled] is set to `true`, with a default value of ```[]```.
@@ -819,6 +819,22 @@ The URL for link to where the users can report errors with the Data Bridge.
 It may have a `<body>` placeholder which will be replaced with some text containing more information about the error.
 
 DEFAULT: `https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?title=Wikidata+Bridge+error&description=${body}&tags=Wikidata-Bridge`
+
+### Tags
+
+These settings define [change tags][Help:Tags] that should be added to different edits.
+All of them default to the empty list, meaning that no tags are added by default;
+when you configure them, you also have to create those tags on the target repository via Special:Tags.
+
+#### linkItemTags
+List of tags to be added to edits made via the sitelink management UI (linking a page to another page).
+Due to caching, changes to this setting may take up to a day to take effect.
+
+DEFAULT: `[]`
+
+See also these related settings:
+- [dataBridgeEditTags]
+- [updateRepoTags]
 
 ### Miscellaneous
 
@@ -918,8 +934,10 @@ DEFAULT: array mapping each well-known name to `null`.
 [entitySources]: #common_entitySources
 [sharedCacheKeyPrefix]: #common_sharedCacheKeyPrefix
 [termboxEnabled]: #repo_termboxEnabled
+[updateRepoTags]: #repo_updateRepoTags
 [client dataBridgeEnabled]: #client_dataBridgeEnabled
 [dataBridgeHrefRegExp]: #client_dataBridgeHrefRegExp
+[dataBridgeEditTags]: #client_dataBridgeEditTags
 [injectRecentChanges]: #client_injectRecentChanges
 [localClientDatabases]: #client_localClientDatabases
 [recentChangesBatchSize]: #client_recentChangesBatchSize
