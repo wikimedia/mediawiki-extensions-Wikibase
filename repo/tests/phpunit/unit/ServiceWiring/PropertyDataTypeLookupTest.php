@@ -4,14 +4,11 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Psr\Log\NullLogger;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\Lib\PropertyInfoDataTypeLookup;
-use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Repo\FederatedProperties\ApiPropertyDataTypeLookup;
-use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
-use Wikibase\Repo\Store\Store;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\Lib\EntitySourceAndTypeDefinitions;
+use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -23,44 +20,30 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
  */
 class PropertyDataTypeLookupTest extends ServiceWiringTestCase {
 
-	public function testLocalProperties(): void {
-		$this->mockService( 'WikibaseRepo.Settings',
-			new SettingsArray( [
-				'federatedPropertiesEnabled' => false,
-			] ) );
-		$propertyInfoLookup = $this->createMock( PropertyInfoLookup::class );
-		$store = $this->createMock( Store::class );
-		$store->expects( $this->once() )
-			->method( 'getPropertyInfoLookup' )
-			->willReturn( $propertyInfoLookup );
-		$this->mockService( 'WikibaseRepo.Store',
-			$store );
-		$this->mockService( 'WikibaseRepo.EntityLookup',
-			$this->createMock( EntityLookup::class ) );
-		$this->mockService( 'WikibaseRepo.Logger',
-			new NullLogger() );
+	public function testConstruction(): void {
+		$this->mockService(
+			'WikibaseRepo.EntitySourceDefinitions',
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) )
+		);
+
+		$sourceAndTypeDefinitions = $this->createMock( EntitySourceAndTypeDefinitions::class );
+		$sourceAndTypeDefinitions->expects( $this->once() )
+			->method( 'getServiceBySourceAndType' )
+			->with( EntityTypeDefinitions::PROPERTY_DATA_TYPE_LOOKUP_CALLBACK )
+			->willReturn( [
+				'some-source' => [ 'property' => function () {
+					return $this->createStub( PrefetchingTermLookup::class );
+				} ]
+			] );
+		$this->mockService( 'WikibaseRepo.EntitySourceAndTypeDefinitions', $sourceAndTypeDefinitions );
+
+		$this->mockService(
+			'WikibaseRepo.EntityTypeDefinitions',
+			new EntityTypeDefinitions( [] )
+		);
 
 		$this->assertInstanceOf(
-			PropertyInfoDataTypeLookup::class,
-			$this->getService( 'WikibaseRepo.PropertyDataTypeLookup' )
-		);
-	}
-
-	public function testFederatedProperties() {
-		$this->mockService( 'WikibaseRepo.Settings',
-			new SettingsArray( [
-				'federatedPropertiesEnabled' => true,
-			] ) );
-		$propertyDataTypeLookup = $this->createMock( ApiPropertyDataTypeLookup::class );
-		$federatedPropertiesServiceFactory = $this->createMock( ApiServiceFactory::class );
-		$federatedPropertiesServiceFactory->expects( $this->once() )
-			->method( 'newApiPropertyDataTypeLookup' )
-			->willReturn( $propertyDataTypeLookup );
-		$this->mockService( 'WikibaseRepo.FederatedPropertiesServiceFactory',
-			$federatedPropertiesServiceFactory );
-
-		$this->assertSame(
-			$propertyDataTypeLookup,
+			PropertyDataTypeLookup::class,
 			$this->getService( 'WikibaseRepo.PropertyDataTypeLookup' )
 		);
 	}

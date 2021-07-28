@@ -58,6 +58,7 @@ class EntityTypeDefinitions {
 	public const REDIRECT_CHECKER_CALLBACK = 'redirect-checker-callback';
 	public const ENTITY_ID_PATTERN = 'entity-id-pattern';
 	public const ENTITY_ID_BUILDER = 'entity-id-builder';
+	public const PROPERTY_DATA_TYPE_LOOKUP_CALLBACK = 'property-data-type-lookup-callback';
 
 	/**
 	 * @var array[]
