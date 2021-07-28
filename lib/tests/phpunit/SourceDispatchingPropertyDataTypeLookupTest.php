@@ -1,0 +1,76 @@
+<?php
+
+declare( strict_types=1 );
+
+namespace Wikibase\Lib\Tests;
+
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Wikibase\DataAccess\EntitySourceLookup;
+use Wikibase\DataAccess\Tests\NewEntitySource;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
+use Wikibase\Lib\SourceDispatchingPropertyDataTypeLookup;
+
+/**
+ * @covers \Wikibase\Lib\SourceDispatchingPropertyDataTypeLookup
+ *
+ * @group Wikibase
+ *
+ * @license GPL-2.0-or-later
+ */
+class SourceDispatchingPropertyDataTypeLookupTest extends TestCase {
+
+/**
+ * @var MockObject|EntitySourceLookup
+ */
+	private $entitySourceLookup;
+
+	/**
+	 * @var MockObject|ServiceBySourceAndTypeDispatcher
+	 */
+	private $serviceBySourceAndTypeDispatcher;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->entitySourceLookup = $this->createStub( EntitySourceLookup::class );
+		$this->serviceBySourceAndTypeDispatcher = $this->createStub( ServiceBySourceAndTypeDispatcher::class );
+	}
+
+	public function testGivenEntityDataTypeLookupDefinedForEntitySource_usesRespectiveEntityDataTypeLookup(): void {
+		$propertyId = new PropertyId( 'P321' );
+		$dataTypeId = 'wikibase-schmentity';
+		$propertySourceName = 'schmentitySource';
+
+		$this->entitySourceLookup = $this->createMock( EntitySourceLookup::class );
+		$this->serviceBySourceAndTypeDispatcher = $this->createMock( ServiceBySourceAndTypeDispatcher::class );
+
+		$propertyDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
+		$propertyDataTypeLookup->expects( $this->once() )
+			->method( 'getDataTypeIdForProperty' )
+			->with( $propertyId )
+			->willReturn( $dataTypeId );
+
+		$this->entitySourceLookup->expects( $this->atLeastOnce() )
+			->method( 'getEntitySourceById' )
+			->with( $propertyId )
+			->willReturn( NewEntitySource::havingName( $propertySourceName )->build() );
+
+		$this->serviceBySourceAndTypeDispatcher->expects( $this->once() )
+			->method( 'getServiceForSourceAndType' )
+			->with( $propertySourceName, 'property' )
+			->willReturn( $propertyDataTypeLookup );
+
+		$this->assertSame( $dataTypeId, $this->newDispatchingPropertyDataTypeLookup()->getDataTypeIdForProperty( $propertyId ) );
+	}
+
+	private function newDispatchingPropertyDataTypeLookup(): SourceDispatchingPropertyDataTypeLookup {
+		return new SourceDispatchingPropertyDataTypeLookup(
+			$this->entitySourceLookup,
+			$this->serviceBySourceAndTypeDispatcher
+		);
+	}
+
+}
