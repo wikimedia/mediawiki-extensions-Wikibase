@@ -329,6 +329,7 @@
 	"wikibase-entitydata-not-acceptable": "לא נמצא תסדיר מתאים. סוגי MIME נתמכים: $1",
 	"wikibase-entitydata-bad-revision": "לא ניתן להציג את הגרסה $2 של הישות $1.",
 	"wikibase-entitydata-bad-id": "מזהה בלתי־תקין: $1.",
+	"wikibase-entitydata-bad-flavor": "טעם שגוי $1: חייב להיות {{PLURAL:$2|{{#commaseparatedlist:$3}}|אחד מתוך: {{#commaseparatedlist:$3}}}}.",
 	"wikibase-entitydata-rdf-not-available": "פלט RDF אינו זמין לישויות מסוג: $1. נא לבקש תסדיר JSON במקום זה.",
 	"wikibase-entitydata-unsupported-format": "תסדיר $1 אינו נתמך בממשק הזה.",
 	"wikibase-entitydata-storage-error": "שגיאה בטעינת הישות $1.",

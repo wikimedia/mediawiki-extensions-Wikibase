@@ -389,7 +389,7 @@
 	"wikibase-api-illegal-ids-or-sites-titles-selector": "Burada ya \"ids\" kimliği ya da \"sites\" eşlerini ve ilgi sayfa için \"titles\" sağlayın",
 	"wikibase-api-invalid-list": "Geçersiz liste verisi.",
 	"wikibase-api-no-external-page": "Harici istemci sitesi \"$1\", \"$2\" sayfası için sayfa bilgisi sağlamadı.",
-	"wikibase-api-nosuchrevid": "Kimliğe sahip revizyon bulunamadı",
+	"wikibase-api-nosuchrevid": "Kimliğe sahip revizyon bulunamadı.",
 	"wikibase-api-no-such-entity": "\"$1\" kimlik numaralı varlık bulunamadı.",
 	"wikibase-api-no-such-sitelink": "Rozetlerin düzenlenmesi esnasında \"$1\" için bir site bağlantısı bulunamadı.",
 	"wikibase-api-not-recognized-datatype": "Bir veri türü bekleniyor ancak eksik ya da tanınmıyor.",
