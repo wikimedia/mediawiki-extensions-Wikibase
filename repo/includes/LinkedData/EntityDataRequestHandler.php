@@ -561,7 +561,7 @@ class EntityDataRequestHandler {
 				$output->msg( 'wikibase-entitydata-bad-flavor' )
 					->plaintextParams( $e->getUnknownFlavor() )
 					->numParams( count( $knownFlavors ) )
-					->plaintextParams( implode( '|', $knownFlavors ) )
+					->params( implode( '|', $knownFlavors ) )
 			);
 		}
 
