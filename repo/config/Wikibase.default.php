@@ -136,11 +136,6 @@ return [
 
 	'transformLegacyFormatOnExport' => true,
 
-	'conceptBaseUri' => function() {
-		$uri = preg_replace( '!^//!', 'http://', $GLOBALS['wgServer'] );
-		return $uri . '/entity/';
-	},
-
 	// Property used as formatter to link identifiers
 	'formatterUrlProperty' => null,
 
