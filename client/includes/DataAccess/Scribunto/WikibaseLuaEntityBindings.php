@@ -127,7 +127,7 @@ class WikibaseLuaEntityBindings {
 	 * Add a label usage (called once specific labels are accessed).
 	 *
 	 * @param string $entityId The Entity from which the labels were accessed.
-	 * @param string $langCode Language code the labels accessed.
+	 * @param string|null $langCode Language code the labels accessed.
 	 */
 	public function addLabelUsage( $entityId, $langCode ) {
 		$entityId = $this->entityIdParser->parse( $entityId );
@@ -138,7 +138,7 @@ class WikibaseLuaEntityBindings {
 	 * Add a description usage (called once specific descriptions are accessed).
 	 *
 	 * @param string $entityId The Entity from which the descriptions were accessed.
-	 * @param string $langCode Language code the descriptions accessed.
+	 * @param string|null $langCode Language code the descriptions accessed.
 	 */
 	public function addDescriptionUsage( $entityId, $langCode ) {
 		$entityId = $this->entityIdParser->parse( $entityId );
