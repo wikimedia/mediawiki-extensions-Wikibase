@@ -36,7 +36,7 @@
 	"wikibase-statementview-rank-tooltip-deprecated": "Yanlış olduğu bilinən, lakin (vaxtilə) inanılan dəyər",
 	"wikibase-statementview-references-counter": "$1 mənbə",
 	"wikibase-snakview-snaktypeselector-value": "xüsusi dəyər",
-	"wikibase-validator-no-such-property": "$1 xüsusiyyəti tapılmadı",
+	"wikibase-validator-no-such-property": "$1 tapılmadı",
 	"special-newitem": "Yeni müddəa yarat",
 	"wikibase-newitem-fieldset": "Yeni müddəa yarat",
 	"wikibase-listdatatypes-wikibase-property-head": "Xüsusiyyət"

@@ -3,6 +3,7 @@
 		"authors": [
 			"Afaz",
 			"Fryed-peach",
+			"MathXplore",
 			"Sujiniku"
 		]
 	},
@@ -17,6 +18,7 @@
 	"apihelp-wbmergeitems-description": "複数の項目を統合する。",
 	"apihelp-wbmergeitems-param-fromid": "統合元の ID",
 	"apihelp-wbmergeitems-param-toid": "統合先の ID",
+	"apihelp-wbmergeitems-param-tags": "版に適用するタグを変更します。",
 	"apihelp-query+wbsearch-param-search": "このテキストを検索する。",
 	"apihelp-query+wbsearch-param-language": "この言語で検索する。",
 	"apihelp-wbsetlabel-param-language": "ラベルの言語",
