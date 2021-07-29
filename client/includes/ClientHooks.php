@@ -225,10 +225,10 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Used to propagate information about the current site to JavaScript.
-	 * This is used in "wikibase.client.linkitem.init" module
+	 * Used to propagate configuration for the linkitem feature to JavaScript.
+	 * This is used in the "wikibase.client.linkitem.init" module.
 	 */
-	public static function getSiteConfiguration() {
+	public static function getLinkitemConfiguration() {
 		$cache = MediaWikiServices::getInstance()->getLocalServerObjectCache();
 		$key = $cache->makeKey(
 			'wikibase-client',
@@ -236,7 +236,7 @@ final class ClientHooks {
 		);
 		return $cache->getWithSetCallback(
 			$key,
-			$cache::TTL_DAY,
+			$cache::TTL_DAY, // when changing the TTL, also update linkItemTags in options.md
 			function () {
 				$site = WikibaseClient::getSite();
 				$currentSite = [
@@ -244,8 +244,14 @@ final class ClientHooks {
 					'languageCode' => $site->getLanguageCode(),
 					'langLinkSiteGroup' => WikibaseClient::getLangLinkSiteGroup()
 				];
+				$value = [ 'currentSite' => $currentSite ];
 
-				return [ 'currentSite' => $currentSite ];
+				$tags = WikibaseClient::getSettings()->getSetting( 'linkItemTags' );
+				if ( $tags !== [] ) {
+					$value['tags'] = $tags;
+				}
+
+				return $value;
 			}
 		);
 	}

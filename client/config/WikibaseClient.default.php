@@ -146,6 +146,9 @@ return call_user_func( function() {
 
 		// enable implicit usage on the description of a page in its content language (T191831)
 		'enableImplicitDescriptionUsage' => false,
+
+		// tags for edits made via the linkitem feature
+		'linkItemTags' => [],
 	];
 
 	// Some defaults depend on information not available at this time.

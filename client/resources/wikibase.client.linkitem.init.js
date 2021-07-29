@@ -25,7 +25,8 @@
 				$spinner.remove();
 
 				var repoConfig = mw.config.get( 'wbRepo' ),
-					config = require( './config.json' ).currentSite;
+					linkItemConfig = require( './config.json' ),
+					currentSite = linkItemConfig.currentSite;
 
 				$linkItemLink
 				.show()
@@ -33,10 +34,11 @@
 					pageTitle: ( new mw.Title(
 						mw.config.get( 'wgPageName' )
 					) ).getPrefixedText(),
-					globalSiteId: config.globalSiteId,
+					globalSiteId: currentSite.globalSiteId,
 					namespaceNumber: mw.config.get( 'wgNamespaceNumber' ),
 					repoArticlePath: repoConfig.url + repoConfig.articlePath,
-					langLinkSiteGroup: config.langLinkSiteGroup
+					langLinkSiteGroup: currentSite.langLinkSiteGroup,
+					tags: linkItemConfig.tags || []
 				} );
 
 				var widgetName = $linkItemLink.data( 'linkitem' ).widgetName;
