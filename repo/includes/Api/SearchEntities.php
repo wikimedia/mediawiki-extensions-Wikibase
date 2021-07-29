@@ -6,7 +6,6 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
-use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
@@ -77,18 +76,13 @@ class SearchEntities extends ApiBase {
 		EntityUrlLookup $entityUrlLookup,
 		EntityArticleIdLookup $entityArticleIdLookup,
 		ApiErrorReporter $errorReporter,
-		array $enabledEntityTypes,
-		EntitySourceDefinitions $entitySourceDefinitions // to be removed in a follow-up
+		array $enabledEntityTypes
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );
 
 		// Always try to add a conceptUri to results if not already set
-		$entitySearchHelper = new ConceptUriSearchHelper(
-			$entitySearchHelper,
-			$entitySourceDefinitions
-		);
+		$this->entitySearchHelper = new ConceptUriSearchHelper( $entitySearchHelper, $entitySourceLookup );
 
-		$this->entitySearchHelper = $entitySearchHelper;
 		$this->termsLanguages = $termLanguages;
 		$this->entitySourceLookup = $entitySourceLookup;
 		$this->entityTitleTextLookup = $entityTitleTextLookup;
@@ -105,7 +99,6 @@ class SearchEntities extends ApiBase {
 		array $enabledEntityTypes,
 		EntityArticleIdLookup $entityArticleIdLookup,
 		EntitySearchHelper $entitySearchHelper,
-		EntitySourceDefinitions $entitySourceDefinitions,
 		EntitySourceLookup $entitySourceLookup,
 		EntityTitleTextLookup $entityTitleTextLookup,
 		EntityUrlLookup $entityUrlLookup,
@@ -122,8 +115,7 @@ class SearchEntities extends ApiBase {
 			$entityUrlLookup,
 			$entityArticleIdLookup,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
-			$enabledEntityTypes,
-			$entitySourceDefinitions
+			$enabledEntityTypes
 		);
 	}
 

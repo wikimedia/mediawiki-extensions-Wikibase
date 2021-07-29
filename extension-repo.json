@@ -182,7 +182,6 @@
 				"WikibaseRepo.EnabledEntityTypes",
 				"WikibaseRepo.EntityArticleIdLookup",
 				"WikibaseRepo.EntitySearchHelper",
-				"WikibaseRepo.EntitySourceDefinitions",
 				"WikibaseRepo.EntitySourceLookup",
 				"WikibaseRepo.EntityTitleTextLookup",
 				"WikibaseRepo.EntityUrlLookup",

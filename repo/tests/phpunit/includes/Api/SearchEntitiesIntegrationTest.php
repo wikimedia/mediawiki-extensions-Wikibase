@@ -158,8 +158,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( EntityUrlLookup::class ),
 			$this->createMock( EntityArticleIdLookup::class ),
 			$this->createMock( ApiErrorReporter::class ),
-			[ 'item', 'property' ],
-			$entitySourceDefinitions
+			[ 'item', 'property' ]
 		);
 
 		$apiModule->execute();

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -22,8 +23,10 @@ use Wikibase\Repo\Api\EntitySearchHelper;
  */
 class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 
-	private function getEntitySourceDefinitions( string $sourceName = 'test' ) {
-		return new EntitySourceDefinitions(
+	private function getEntitySourceLookup( string $sourceName = 'test' ): EntitySourceLookup {
+		$subEntityTypesMapper = new SubEntityTypesMapper( [] );
+
+		return new EntitySourceLookup( new EntitySourceDefinitions(
 			[ new EntitySource(
 				$sourceName,
 				false,
@@ -36,8 +39,8 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 				'',
 				''
 			) ],
-			new SubEntityTypesMapper( [] )
-		);
+			$subEntityTypesMapper
+		), $subEntityTypesMapper );
 	}
 
 	public function testGetRankedSearchResults_delegatesAndAddsConceptUriWhenNotSet() {
@@ -69,7 +72,7 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 
 		$searchHelper = new ConceptUriSearchHelper(
 			$searchHelper,
-			$this->getEntitySourceDefinitions()
+			$this->getEntitySourceLookup()
 		);
 
 		$results = $searchHelper->getRankedSearchResults(
@@ -122,7 +125,7 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 
 		$searchHelper = new ConceptUriSearchHelper(
 			$searchHelper,
-			$this->getEntitySourceDefinitions()
+			$this->getEntitySourceLookup()
 		);
 
 		$results = $searchHelper->getRankedSearchResults(
