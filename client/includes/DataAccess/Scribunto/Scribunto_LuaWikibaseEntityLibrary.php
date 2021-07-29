@@ -171,9 +171,9 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * Add a label usage (called once specific labels are accessed).
 	 *
 	 * @param string $entityId The Entity from which the labels were accessed.
-	 * @param string $langCode Language code of the labels accessed.
+	 * @param string|null $langCode Language code of the labels accessed.
 	 */
-	public function addLabelUsage( string $entityId, string $langCode ): void {
+	public function addLabelUsage( string $entityId, ?string $langCode ): void {
 		$this->getImplementation()->addLabelUsage( $entityId, $langCode );
 	}
 
@@ -181,9 +181,9 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * Add a description usage (called once specific descriptions are accessed).
 	 *
 	 * @param string $entityId The Entity from which the descriptions were accessed.
-	 * @param string $langCode Language code of the descriptions accessed.
+	 * @param string|null $langCode Language code of the descriptions accessed.
 	 */
-	public function addDescriptionUsage( string $entityId, string $langCode ): void {
+	public function addDescriptionUsage( string $entityId, ?string $langCode ): void {
 		$this->getImplementation()->addDescriptionUsage( $entityId, $langCode );
 	}
 
