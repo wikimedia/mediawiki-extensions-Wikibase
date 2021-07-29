@@ -179,9 +179,11 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SearchEntities::factory",
 			"services": [
 				"WikibaseRepo.ApiHelperFactory",
+				"WikibaseRepo.EnabledEntityTypes",
 				"WikibaseRepo.EntityArticleIdLookup",
 				"WikibaseRepo.EntitySearchHelper",
 				"WikibaseRepo.EntitySourceDefinitions",
+				"WikibaseRepo.EntitySourceLookup",
 				"WikibaseRepo.EntityTitleTextLookup",
 				"WikibaseRepo.EntityUrlLookup",
 				"WikibaseRepo.TermsLanguages"

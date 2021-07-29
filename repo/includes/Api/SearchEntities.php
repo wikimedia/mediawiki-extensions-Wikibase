@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -34,9 +35,9 @@ class SearchEntities extends ApiBase {
 	private $termsLanguages;
 
 	/**
-	 * @var EntitySourceDefinitions
+	 * @var EntitySourceLookup
 	 */
-	private $entitySourceDefinitions;
+	private $entitySourceLookup;
 
 	/**
 	 * @var EntityTitleTextLookup
@@ -59,6 +60,11 @@ class SearchEntities extends ApiBase {
 	private $errorReporter;
 
 	/**
+	 * @var array
+	 */
+	private $enabledEntityTypes;
+
+	/**
 	 * @see ApiBase::__construct
 	 */
 	public function __construct(
@@ -66,11 +72,13 @@ class SearchEntities extends ApiBase {
 		string $moduleName,
 		EntitySearchHelper $entitySearchHelper,
 		ContentLanguages $termLanguages,
-		EntitySourceDefinitions $entitySourceDefinitions,
+		EntitySourceLookup $entitySourceLookup,
 		EntityTitleTextLookup $entityTitleTextLookup,
 		EntityUrlLookup $entityUrlLookup,
 		EntityArticleIdLookup $entityArticleIdLookup,
-		ApiErrorReporter $errorReporter
+		ApiErrorReporter $errorReporter,
+		array $enabledEntityTypes,
+		EntitySourceDefinitions $entitySourceDefinitions // to be removed in a follow-up
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );
 
@@ -82,20 +90,23 @@ class SearchEntities extends ApiBase {
 
 		$this->entitySearchHelper = $entitySearchHelper;
 		$this->termsLanguages = $termLanguages;
-		$this->entitySourceDefinitions = $entitySourceDefinitions;
+		$this->entitySourceLookup = $entitySourceLookup;
 		$this->entityTitleTextLookup = $entityTitleTextLookup;
 		$this->entityUrlLookup = $entityUrlLookup;
 		$this->entityArticleIdLookup = $entityArticleIdLookup;
 		$this->errorReporter = $errorReporter;
+		$this->enabledEntityTypes = $enabledEntityTypes;
 	}
 
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
 		ApiHelperFactory $apiHelperFactory,
+		array $enabledEntityTypes,
 		EntityArticleIdLookup $entityArticleIdLookup,
 		EntitySearchHelper $entitySearchHelper,
 		EntitySourceDefinitions $entitySourceDefinitions,
+		EntitySourceLookup $entitySourceLookup,
 		EntityTitleTextLookup $entityTitleTextLookup,
 		EntityUrlLookup $entityUrlLookup,
 		ContentLanguages $termsLanguages
@@ -106,11 +117,13 @@ class SearchEntities extends ApiBase {
 			$moduleName,
 			$entitySearchHelper,
 			$termsLanguages,
-			$entitySourceDefinitions,
+			$entitySourceLookup,
 			$entityTitleTextLookup,
 			$entityUrlLookup,
 			$entityArticleIdLookup,
-			$apiHelperFactory->getErrorReporter( $mainModule )
+			$apiHelperFactory->getErrorReporter( $mainModule ),
+			$enabledEntityTypes,
+			$entitySourceDefinitions
 		);
 	}
 
@@ -211,11 +224,7 @@ class SearchEntities extends ApiBase {
 	}
 
 	private function getRepositoryOrEntitySourceName( EntityId $entityId ): string {
-		$source = $this->entitySourceDefinitions->getSourceForEntityType( $entityId->getEntityType() );
-		if ( $source === null ) {
-			return '';
-		}
-		return $source->getSourceName();
+		return $this->entitySourceLookup->getEntitySourceById( $entityId )->getSourceName();
 	}
 
 	/**
@@ -306,7 +315,7 @@ class SearchEntities extends ApiBase {
 				self::PARAM_DFLT => false
 			],
 			'type' => [
-				self::PARAM_TYPE => array_keys( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() ),
+				self::PARAM_TYPE => $this->enabledEntityTypes,
 				self::PARAM_DFLT => 'item',
 			],
 			'limit' => [

@@ -8,6 +8,7 @@ use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -133,29 +134,32 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 			'search' => $query,
 		] ) );
 
+		$entitySourceDefinitions = new EntitySourceDefinitions( [
+			new EntitySource(
+				'test',
+				'testdb',
+				[
+					'item' => [ 'namespaceId' => 123, 'slot' => 'main' ],
+					'property' => [ 'namespaceId' => 321, 'slot' => 'main' ],
+				],
+				'conceptBaseUri:',
+				'',
+				'',
+				''
+			)
+		], new SubEntityTypesMapper( [] ) );
 		$apiModule = new SearchEntities(
 			new ApiMain( $context ),
 			'',
 			$entitySearchTermIndex,
 			new StaticContentLanguages( [ 'en' ] ),
-			new EntitySourceDefinitions( [
-				new EntitySource(
-					'test',
-					'testdb',
-					[
-						'item' => [ 'namespaceId' => 123, 'slot' => 'main' ],
-						'property' => [ 'namespaceId' => 321, 'slot' => 'main' ],
-					],
-					'conceptBaseUri:',
-					'',
-					'',
-					''
-				)
-			], new SubEntityTypesMapper( [] ) ),
+			new EntitySourceLookup( $entitySourceDefinitions, new SubEntityTypesMapper( [] ) ),
 			$this->createMock( EntityTitleTextLookup::class ),
 			$this->createMock( EntityUrlLookup::class ),
 			$this->createMock( EntityArticleIdLookup::class ),
-			$this->createMock( ApiErrorReporter::class )
+			$this->createMock( ApiErrorReporter::class ),
+			[ 'item', 'property' ],
+			$entitySourceDefinitions
 		);
 
 		$apiModule->execute();

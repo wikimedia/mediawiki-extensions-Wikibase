@@ -7,6 +7,7 @@ use FauxRequest;
 use RequestContext;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -104,35 +105,39 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	 * @return array[]
 	 */
 	private function callApiModule( array $params, EntitySearchHelper $entitySearchHelper = null ) {
+		$entitySourceDefinitions = new EntitySourceDefinitions( [
+			new EntitySource(
+				'items',
+				false,
+				[ 'item' => [ 'namespaceId' => 10000, 'slot' => 'main' ] ],
+				'http://items.wiki/concept/',
+				'',
+				'',
+				''
+			),
+			new EntitySource(
+				'props',
+				'otherdb',
+				[ 'property' => [ 'namespaceId' => 50000, 'slot' => 'main' ] ],
+				'http://property.wiki/concept/',
+				'o',
+				'o',
+				'otherwiki'
+			)
+		], new SubEntityTypesMapper( [] ) );
+
 		$module = new SearchEntities(
 			$this->getApiMain( $params ),
 			'wbsearchentities',
 			$entitySearchHelper ?: $this->getMockEntitySearchHelper( $params ),
 			$this->getContentLanguages(),
-			new EntitySourceDefinitions( [
-				new EntitySource(
-					'items',
-					false,
-					[ 'item' => [ 'namespaceId' => 10000, 'slot' => 'main' ] ],
-					'http://items.wiki/concept/',
-					'',
-					'',
-					''
-				),
-				new EntitySource(
-					'props',
-					'otherdb',
-					[ 'property' => [ 'namespaceId' => 50000, 'slot' => 'main' ] ],
-					'http://property.wiki/concept/',
-					'o',
-					'o',
-					'otherwiki'
-				)
-			], new SubEntityTypesMapper( [] ) ),
+			new EntitySourceLookup( $entitySourceDefinitions, new SubEntityTypesMapper( [] ) ),
 			$this->newMockTitleTextLookup(),
 			$this->newMockUrlLookup(),
 			$this->newMockArticleIdLookup(),
-			$this->createMock( ApiErrorReporter::class )
+			$this->createMock( ApiErrorReporter::class ),
+			[ 'item', 'property' ],
+			$entitySourceDefinitions
 		);
 
 		$module->execute();
@@ -344,10 +349,8 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenEntityIdContainsUriUnsafeCharacters_conceptUriContainsEncodedCharacters() {
-		$nyanId = $this->getMockBuilder( EntityId::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$nyanId->method( 'getLocalPart' )
+		$nyanId = $this->createStub( EntityId::class );
+		$nyanId->method( $this->logicalOr( 'getSerialization', 'getLocalPart' ) )
 			->willReturn( '[,,_,,];3' );
 		$nyanId->method( 'getEntityType' )
 			->willReturn( 'kitten' );
@@ -368,29 +371,32 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 
 		$searchHelper = $this->getMockEntitySearchHelper( $params, [ $match ] );
 
+		$entitySourceDefinitions = new EntitySourceDefinitions(
+			[
+				new EntitySource(
+					'test',
+					'kittendb',
+					[ 'kitten' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ],
+					'http://acme.test/concept/',
+					'',
+					'',
+					''
+				)
+			],
+			new SubEntityTypesMapper( [] )
+		);
 		$module = new SearchEntities(
 			$this->getApiMain( $params ),
 			'wbsearchentities',
 			$searchHelper,
 			$this->getContentLanguages(),
-			new EntitySourceDefinitions(
-				[
-					new EntitySource(
-						'test',
-						'kittendb',
-						[ 'kitten' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ],
-						'http://acme.test/concept/',
-						'',
-						'',
-						''
-					)
-				],
-				new SubEntityTypesMapper( [] )
-			),
+			new EntitySourceLookup( $entitySourceDefinitions, new SubEntityTypesMapper( [] ) ),
 			$this->newMockTitleTextLookup(),
 			$this->newMockUrlLookup(),
 			$this->newMockArticleIdLookup(),
-			$this->createMock( ApiErrorReporter::class )
+			$this->createMock( ApiErrorReporter::class ),
+			[ 'kitten' ],
+			$entitySourceDefinitions
 		);
 
 		$module->execute();
