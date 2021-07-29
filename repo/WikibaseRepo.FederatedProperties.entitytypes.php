@@ -46,8 +46,5 @@ return [
 		Def::EXISTENCE_CHECKER_CALLBACK => function () {
 			return WikibaseRepo::getFederatedPropertiesServiceFactory()->newApiEntityExistenceChecker();
 		},
-		Def::PROPERTY_DATA_TYPE_LOOKUP_CALLBACK => function () {
-			return WikibaseRepo::getFederatedPropertiesServiceFactory()->newApiPropertyDataTypeLookup();
-		},
 	]
 ];

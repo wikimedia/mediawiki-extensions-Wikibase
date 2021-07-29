@@ -19,16 +19,20 @@ class SourceDispatchingPropertyDataTypeLookup implements PropertyDataTypeLookup 
 	private $entitySourceLookup;
 
 	/**
-	 * @var ServiceBySourceAndTypeDispatcher
+	 * @var callable[]
 	 */
-	private $serviceBySourceAndTypeDispatcher;
+	private $lookupsCallbacks;
 
+	/**
+	 * @param EntitySourceLookup $entitySourceLookup
+	 * @param callable[] $lookupsCallbacks keyed by source name
+	 */
 	public function __construct(
 		EntitySourceLookup $entitySourceLookup,
-		ServiceBySourceAndTypeDispatcher $serviceBySourceAndTypeDispatcher
+		array $lookupsCallbacks
 	) {
 		$this->entitySourceLookup = $entitySourceLookup;
-		$this->serviceBySourceAndTypeDispatcher = $serviceBySourceAndTypeDispatcher;
+		$this->lookupsCallbacks = $lookupsCallbacks;
 	}
 
 	/**
@@ -39,10 +43,8 @@ class SourceDispatchingPropertyDataTypeLookup implements PropertyDataTypeLookup 
 	public function getDataTypeIdForProperty( PropertyId $propertyId ): string {
 		$entitySource = $this->entitySourceLookup->getEntitySourceById( $propertyId );
 
-		return $this->serviceBySourceAndTypeDispatcher->getServiceForSourceAndType(
-			$entitySource->getSourceName(),
-			$propertyId->getEntityType()
-		)->getDataTypeIdForProperty( $propertyId );
+		return $this->lookupsCallbacks[$entitySource->getSourceName()]()
+			->getDataTypeIdForProperty( $propertyId );
 	}
 
 }

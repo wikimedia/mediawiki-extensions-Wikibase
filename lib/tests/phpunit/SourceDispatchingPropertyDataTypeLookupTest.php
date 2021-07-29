@@ -30,13 +30,13 @@ class SourceDispatchingPropertyDataTypeLookupTest extends TestCase {
 	/**
 	 * @var MockObject|ServiceBySourceAndTypeDispatcher
 	 */
-	private $serviceBySourceAndTypeDispatcher;
+	private $lookupCallbacks;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->entitySourceLookup = $this->createStub( EntitySourceLookup::class );
-		$this->serviceBySourceAndTypeDispatcher = $this->createStub( ServiceBySourceAndTypeDispatcher::class );
+		$this->lookupCallbacks = [];
 	}
 
 	public function testGivenEntityDataTypeLookupDefinedForEntitySource_usesRespectiveEntityDataTypeLookup(): void {
@@ -45,7 +45,6 @@ class SourceDispatchingPropertyDataTypeLookupTest extends TestCase {
 		$propertySourceName = 'schmentitySource';
 
 		$this->entitySourceLookup = $this->createMock( EntitySourceLookup::class );
-		$this->serviceBySourceAndTypeDispatcher = $this->createMock( ServiceBySourceAndTypeDispatcher::class );
 
 		$propertyDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$propertyDataTypeLookup->expects( $this->once() )
@@ -53,15 +52,16 @@ class SourceDispatchingPropertyDataTypeLookupTest extends TestCase {
 			->with( $propertyId )
 			->willReturn( $dataTypeId );
 
+		$this->lookupCallbacks = [
+			$propertySourceName => function () use ( $propertyDataTypeLookup ) {
+				return $propertyDataTypeLookup;
+			},
+		];
+
 		$this->entitySourceLookup->expects( $this->atLeastOnce() )
 			->method( 'getEntitySourceById' )
 			->with( $propertyId )
 			->willReturn( NewEntitySource::havingName( $propertySourceName )->build() );
-
-		$this->serviceBySourceAndTypeDispatcher->expects( $this->once() )
-			->method( 'getServiceForSourceAndType' )
-			->with( $propertySourceName, 'property' )
-			->willReturn( $propertyDataTypeLookup );
 
 		$this->assertSame( $dataTypeId, $this->newDispatchingPropertyDataTypeLookup()->getDataTypeIdForProperty( $propertyId ) );
 	}
@@ -69,7 +69,7 @@ class SourceDispatchingPropertyDataTypeLookupTest extends TestCase {
 	private function newDispatchingPropertyDataTypeLookup(): SourceDispatchingPropertyDataTypeLookup {
 		return new SourceDispatchingPropertyDataTypeLookup(
 			$this->entitySourceLookup,
-			$this->serviceBySourceAndTypeDispatcher
+			$this->lookupCallbacks
 		);
 	}
 
