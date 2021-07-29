@@ -3,11 +3,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -20,8 +19,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class PrefetchingTermLookupTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$this->mockService(
-			'WikibaseRepo.EntitySourceDefinitions',
-			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) )
+			'WikibaseRepo.EntitySourceLookup',
+			$this->createStub( EntitySourceLookup::class )
 		);
 
 		$sourceAndTypeDefinitions = $this->createMock( EntitySourceAndTypeDefinitions::class );
@@ -34,11 +33,6 @@ class PrefetchingTermLookupTest extends ServiceWiringTestCase {
 				} ]
 			] );
 		$this->mockService( 'WikibaseRepo.EntitySourceAndTypeDefinitions', $sourceAndTypeDefinitions );
-
-		$this->mockService(
-			'WikibaseRepo.EntityTypeDefinitions',
-			new EntityTypeDefinitions( [] )
-		);
 
 		$this->assertInstanceOf(
 			PrefetchingTermLookup::class,

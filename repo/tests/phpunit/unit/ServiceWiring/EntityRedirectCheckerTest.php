@@ -3,11 +3,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRedirectChecker;
-use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -32,13 +31,8 @@ class EntityRedirectCheckerTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.EntitySourceAndTypeDefinitions', $sourceAndTypeDefinitions );
 
 		$this->mockService(
-			'WikibaseRepo.EntitySourceDefinitions',
-			$this->createMock( EntitySourceDefinitions::class )
-		);
-
-		$this->mockService(
-			'WikibaseRepo.SubEntityTypesMapper',
-			$this->createMock( SubEntityTypesMapper::class )
+			'WikibaseRepo.EntitySourceLookup',
+			$this->createMock( EntitySourceLookup::class )
 		);
 
 		$this->assertInstanceOf(

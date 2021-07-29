@@ -16,6 +16,7 @@ use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\WikibaseServices;
@@ -1023,6 +1024,11 @@ class WikibaseRepo {
 	public static function getSubEntityTypesMapper( ContainerInterface $services = null ): SubEntityTypesMapper {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.SubEntityTypesMapper' );
+	}
+
+	public static function getEntitySourceLookup( ContainerInterface $services = null ): EntitySourceLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntitySourceLookup' );
 	}
 
 }

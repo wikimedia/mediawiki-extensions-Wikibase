@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataAccess\Tests\NewEntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -33,8 +34,11 @@ class EntityUrlLookupTest extends ServiceWiringTestCase {
 				->build()
 		];
 		$this->mockService(
-			'WikibaseRepo.EntitySourceDefinitions',
-			new EntitySourceDefinitions( $sources, new SubEntityTypesMapper( [] ) )
+			'WikibaseRepo.EntitySourceLookup',
+			new EntitySourceLookup( new EntitySourceDefinitions(
+				$sources,
+				new SubEntityTypesMapper( [] )
+			), new SubEntityTypesMapper( [] ) )
 		);
 		$this->mockService( 'WikibaseRepo.EntitySourceAndTypeDefinitions',
 			new EntitySourceAndTypeDefinitions(
@@ -54,10 +58,6 @@ class EntityUrlLookupTest extends ServiceWiringTestCase {
 				],
 				$sources
 			)
-		);
-		$this->mockService(
-			'WikibaseRepo.SubEntityTypesMapper',
-			new SubEntityTypesMapper( [] )
 		);
 
 		/** @var EntityUrlLookup $entityUrlLookup */

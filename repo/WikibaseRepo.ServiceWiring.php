@@ -726,10 +726,7 @@ return [
 
 	'WikibaseRepo.EntityExistenceChecker' => function ( MediaWikiServices $services ): EntityExistenceChecker {
 		return new SourceAndTypeDispatchingExistenceChecker(
-			new EntitySourceLookup(
-				WikibaseRepo::getEntitySourceDefinitions( $services ),
-				WikibaseRepo::getSubEntityTypesMapper( $services )
-			),
+			WikibaseRepo::getEntitySourceLookup( $services ),
 			new ServiceBySourceAndTypeDispatcher(
 				EntityExistenceChecker::class,
 				WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
@@ -896,10 +893,7 @@ return [
 				WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
 					->getServiceBySourceAndType( EntityTypeDefinitions::REDIRECT_CHECKER_CALLBACK )
 			),
-			new EntitySourceLookup(
-				WikibaseRepo::getEntitySourceDefinitions( $services ),
-				WikibaseRepo::getSubEntityTypesMapper( $services )
-			)
+			WikibaseRepo::getEntitySourceLookup( $services )
 		);
 	},
 
@@ -980,6 +974,13 @@ return [
 		return $entitySourceDefinitions;
 	},
 
+	'WikibaseRepo.EntitySourceLookup' => function ( MediaWikiServices $services ): EntitySourceLookup {
+		return new EntitySourceLookup(
+			WikibaseRepo::getEntitySourceDefinitions( $services ),
+			WikibaseRepo::getSubEntityTypesMapper( $services )
+		);
+	},
+
 	'WikibaseRepo.EntityStore' => function ( MediaWikiServices $services ): EntityStore {
 		return WikibaseRepo::getStore( $services )->getEntityStore();
 	},
@@ -1015,10 +1016,7 @@ return [
 
 	'WikibaseRepo.EntityTitleTextLookup' => function ( MediaWikiServices $services ): EntityTitleTextLookup {
 		return new SourceAndTypeDispatchingTitleTextLookup(
-			new EntitySourceLookup(
-				WikibaseRepo::getEntitySourceDefinitions( $services ),
-				WikibaseRepo::getSubEntityTypesMapper( $services )
-			),
+			WikibaseRepo::getEntitySourceLookup( $services ),
 			new ServiceBySourceAndTypeDispatcher(
 				EntityTitleTextLookup::class,
 				WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
@@ -1065,10 +1063,7 @@ return [
 				WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
 					->getServiceBySourceAndType( EntityTypeDefinitions::URL_LOOKUP_CALLBACK )
 			),
-			new EntitySourceLookup(
-				WikibaseRepo::getEntitySourceDefinitions( $services ),
-				WikibaseRepo::getSubEntityTypesMapper( $services )
-			)
+			WikibaseRepo::getEntitySourceLookup( $services )
 		);
 	},
 
@@ -1112,10 +1107,7 @@ return [
 			$services->getHttpRequestFactory(),
 			WikibaseRepo::getContentModelMappings( $services ),
 			WikibaseRepo::getDataTypeDefinitions( $services ),
-			new EntitySourceLookup(
-				$entitySourceDefinition,
-				WikibaseRepo::getSubEntityTypesMapper( $services )
-			),
+			WikibaseRepo::getEntitySourceLookup( $services ),
 			$entitySourceDefinition,
 			$settings->getSetting( 'federatedPropertiesSourceScriptUrl' ),
 			$services->getMainConfig()->get( 'ServerName' )
@@ -1478,21 +1470,13 @@ return [
 				WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
 					->getServiceBySourceAndType( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK )
 			),
-			new EntitySourceLookup(
-				WikibaseRepo::getEntitySourceDefinitions( $services ),
-				new SubEntityTypesMapper( WikibaseRepo::getEntityTypeDefinitions( $services )
-				->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) )
-			)
+			WikibaseRepo::getEntitySourceLookup( $services )
 		);
 	},
 
 	'WikibaseRepo.PropertyDataTypeLookup' => function ( MediaWikiServices $services ): PropertyDataTypeLookup {
 		return new SourceDispatchingPropertyDataTypeLookup(
-			new EntitySourceLookup(
-				WikibaseRepo::getEntitySourceDefinitions( $services ),
-				new SubEntityTypesMapper( WikibaseRepo::getEntityTypeDefinitions( $services )
-				->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) )
-			),
+			WikibaseRepo::getEntitySourceLookup( $services ),
 			new ServiceBySourceAndTypeDispatcher(
 				PropertyDataTypeLookup::class,
 				WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
