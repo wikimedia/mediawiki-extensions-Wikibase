@@ -6,7 +6,6 @@ use Maintenance;
 use MWException;
 use OrderedStreamingForkController;
 use Wikibase\Repo\Api\EntitySearchHelper;
-use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -140,10 +139,7 @@ class SearchEntities extends Maintenance {
 	private function getSearchHelper( $engine ) {
 		$engines = [
 			'sql' => function() {
-				return new TypeDispatchingEntitySearchHelper(
-					WikibaseRepo::getEntitySearchHelperCallbacks(),
-					new \FauxRequest()
-				);
+				return WikibaseRepo::getEntitySearchHelper();
 			}
 		];
 
