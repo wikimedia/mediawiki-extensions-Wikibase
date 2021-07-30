@@ -39,6 +39,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
+use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
@@ -80,6 +81,11 @@ use Wikimedia\Purtle\RdfWriter;
 
 return [
 	'item' => [
+		Def::ARTICLE_ID_LOOKUP_CALLBACK => function () {
+			return new TitleLookupBasedEntityArticleIdLookup(
+				WikibaseRepo::getEntityTitleLookup()
+			);
+		},
 		Def::STORAGE_SERIALIZER_FACTORY_CALLBACK => function( SerializerFactory $serializerFactory ) {
 			return $serializerFactory->newItemSerializer();
 		},
@@ -284,6 +290,11 @@ return [
 		},
 	],
 	'property' => [
+		Def::ARTICLE_ID_LOOKUP_CALLBACK => function () {
+			return new TitleLookupBasedEntityArticleIdLookup(
+				WikibaseRepo::getEntityTitleLookup()
+			);
+		},
 		Def::STORAGE_SERIALIZER_FACTORY_CALLBACK => function( SerializerFactory $serializerFactory ) {
 			return $serializerFactory->newPropertySerializer();
 		},

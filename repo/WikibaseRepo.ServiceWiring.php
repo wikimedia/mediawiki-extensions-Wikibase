@@ -119,6 +119,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\Store\SourceAndTypeDispatchingArticleIdLookup;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingExistenceChecker;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingRedirectChecker;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingTitleTextLookup;
@@ -135,8 +136,6 @@ use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
-use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
-use Wikibase\Lib\Store\TypeDispatchingArticleIdLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -599,11 +598,15 @@ return [
 	},
 
 	'WikibaseRepo.EntityArticleIdLookup' => function ( MediaWikiServices $services ): EntityArticleIdLookup {
-		return new TypeDispatchingArticleIdLookup(
-			WikibaseRepo::getEntityTypeDefinitions( $services )
-				->get( EntityTypeDefinitions::ARTICLE_ID_LOOKUP_CALLBACK ),
-			new TitleLookupBasedEntityArticleIdLookup(
-				WikibaseRepo::getEntityTitleLookup( $services )
+		$callbacks = WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )->getServiceBySourceAndType(
+				EntityTypeDefinitions::ARTICLE_ID_LOOKUP_CALLBACK
+			);
+
+		return new SourceAndTypeDispatchingArticleIdLookup(
+			WikibaseRepo::getEntitySourceLookup( $services ),
+			new ServiceBySourceAndTypeDispatcher(
+				EntityArticleIdLookup::class,
+				$callbacks
 			)
 		);
 	},
