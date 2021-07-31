@@ -45,7 +45,6 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	private function setupDisabledVariants( array $disabledVariants ) {
 		$this->setMwGlobals( [
 			'wgDisabledVariants' => $disabledVariants,
-			'wgLangObjCacheSize' => 0,
 		] );
 	}
 
