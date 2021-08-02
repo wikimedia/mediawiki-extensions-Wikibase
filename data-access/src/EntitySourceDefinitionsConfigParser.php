@@ -3,16 +3,21 @@
 namespace Wikibase\DataAccess;
 
 use InvalidArgumentException;
-use MediaWiki\MediaWikiServices;
+use NamespaceInfo;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikimedia\Assert\Assert;
 
 /**
- * TODO: alternatively, the logic could go to the "static constructor" of EntitySourceDefinitions class?
- *
  * @license GPL-2.0-or-later
  */
 class EntitySourceDefinitionsConfigParser {
+
+	/** @var NamespaceInfo */
+	private $namespaceInfo;
+
+	public function __construct( NamespaceInfo $namespaceInfo ) {
+		$this->namespaceInfo = $namespaceInfo;
+	}
 
 	/**
 	 * @param array[] $sourceConfig
@@ -28,7 +33,7 @@ class EntitySourceDefinitionsConfigParser {
 			$namespaceSlotData = [];
 			foreach ( $sourceData['entityNamespaces'] as $entityType => $namespaceSlot ) {
 
-				list( $namespaceId, $slot ) = self::splitNamespaceAndSlot( $namespaceSlot );
+				list( $namespaceId, $slot ) = $this->splitNamespaceAndSlot( $namespaceSlot );
 				$namespaceSlotData[$entityType] = [
 					'namespaceId' => $namespaceId,
 					'slot' => $slot,
@@ -111,7 +116,7 @@ class EntitySourceDefinitionsConfigParser {
 		}
 	}
 
-	private static function splitNamespaceAndSlot( $namespaceAndSlot ) {
+	private function splitNamespaceAndSlot( $namespaceAndSlot ) {
 		if ( is_int( $namespaceAndSlot ) ) {
 			return [ $namespaceAndSlot, 'main' ];
 		}
@@ -129,9 +134,7 @@ class EntitySourceDefinitionsConfigParser {
 		} else {
 			// TODO: this is evil, can we get around this without binding to MediaWiki?
 			// Or should this class go to some other place, where coupling is not an issue?
-			$ns = MediaWikiServices::getInstance()
-				->getNamespaceInfo()
-				->getCanonicalIndex( strtolower( $m[1] ) );
+			$ns = $this->namespaceInfo->getCanonicalIndex( strtolower( $m[1] ) );
 		}
 
 		if ( !is_int( $ns ) ) {

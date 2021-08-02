@@ -23,6 +23,8 @@ class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 			new EntityTypeDefinitions( [] ) );
 		$this->mockService( 'WikibaseClient.Settings',
 			new SettingsArray( $settingsArray ) );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getNamespaceInfo' );
 	}
 
 	public function testWithEntitySourcesSettings() {
