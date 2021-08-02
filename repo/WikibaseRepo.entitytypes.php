@@ -30,6 +30,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter;
+use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StaticContentLanguages;
@@ -215,6 +216,8 @@ return [
 			);
 		},
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
+			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
+			$language = WikibaseRepo::getUserLanguage();
 			return new CombinedEntitySearchHelper(
 					[
 						new EntityIdSearchHelper(
@@ -222,14 +225,21 @@ return [
 							WikibaseRepo::getEntityIdParser(),
 							new LanguageFallbackLabelDescriptionLookup(
 								WikibaseRepo::getTermLookup(),
-								WikibaseRepo::getLanguageFallbackChainFactory()
-									->newFromLanguage( WikibaseRepo::getUserLanguage() )
+								$languageFallbackChainFactory
+									->newFromLanguage( $language )
 							),
 							WikibaseRepo::getEntityTypeToRepositoryMapping()
 						),
 						new EntityTermSearchHelper(
-							WikibaseRepo::getTermSearchInteractorFactory()
-								->newInteractor( WikibaseRepo::getUserLanguage()->getCode() )
+							new MatchingTermsLookupSearchInteractor(
+								WikibaseRepo::getMatchingTermsLookupFactory()->getLookupForSource(
+									WikibaseRepo::getEntitySourceDefinitions()
+										->getSourceForEntityType( Item::ENTITY_TYPE ) // FIXME needs to get the db source
+								),
+								$languageFallbackChainFactory,
+								WikibaseRepo::getPrefetchingTermLookup(),
+								$language->getCode()
+							)
 						)
 					]
 			);
@@ -407,6 +417,8 @@ return [
 			);
 		},
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
+			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
+			$language = WikibaseRepo::getUserLanguage();
 			return new PropertyDataTypeSearchHelper(
 				new CombinedEntitySearchHelper(
 					[
@@ -415,14 +427,21 @@ return [
 							WikibaseRepo::getEntityIdParser(),
 							new LanguageFallbackLabelDescriptionLookup(
 								WikibaseRepo::getTermLookup(),
-								WikibaseRepo::getLanguageFallbackChainFactory()
-									->newFromLanguage( WikibaseRepo::getUserLanguage() )
+								$languageFallbackChainFactory
+									->newFromLanguage( $language )
 							),
 							WikibaseRepo::getEntityTypeToRepositoryMapping()
 						),
 						new EntityTermSearchHelper(
-							WikibaseRepo::getTermSearchInteractorFactory()
-								->newInteractor( WikibaseRepo::getUserLanguage()->getCode() )
+							new MatchingTermsLookupSearchInteractor(
+								WikibaseRepo::getMatchingTermsLookupFactory()->getLookupForSource(
+									WikibaseRepo::getEntitySourceDefinitions()
+										->getSourceForEntityType( Property::ENTITY_TYPE ) // FIXME needs to get the db source
+								),
+								$languageFallbackChainFactory,
+								WikibaseRepo::getPrefetchingTermLookup(),
+								$language->getCode()
+							)
 						)
 					]
 				),
