@@ -6,11 +6,9 @@ use ApiMain;
 use FauxRequest;
 use MediaWikiIntegrationTestCase;
 use RequestContext;
-use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -20,7 +18,6 @@ use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -140,7 +137,6 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 			new ApiMain( $context ),
 			'',
 			$entitySearchTermIndex,
-			$this->newEntityTitleLookup(),
 			new StaticContentLanguages( [ 'en' ] ),
 			new EntitySourceDefinitions( [
 				new EntitySource(
@@ -195,24 +191,6 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 		$lookup->method( 'hasEntity' )->willReturn( true );
 
 		return $lookup;
-	}
-
-	/**
-	 * @return EntityTitleLookup
-	 */
-	private function newEntityTitleLookup() {
-		$titleLookup = $this->createMock( EntityTitleLookup::class );
-		$titleLookup->method( 'getTitlesForIds' )
-			->willReturnCallback( function ( $ids ) {
-				$titles = [];
-				/** @var EntityId $id */
-				foreach ( $ids as $id ) {
-					$titles[ $id->getSerialization() ] = $this->createMock( Title::class );
-				}
-				return $titles;
-			} );
-
-		return $titleLookup;
 	}
 
 }

@@ -65,7 +65,6 @@ class SearchEntities extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		EntitySearchHelper $entitySearchHelper,
-		$unused, // backwards compat, removed later
 		ContentLanguages $termLanguages,
 		EntitySourceDefinitions $entitySourceDefinitions,
 		EntityTitleTextLookup $entityTitleTextLookup,
@@ -106,7 +105,6 @@ class SearchEntities extends ApiBase {
 			$mainModule,
 			$moduleName,
 			$entitySearchHelper,
-			null,
 			$termsLanguages,
 			$entitySourceDefinitions,
 			$entityTitleTextLookup,
