@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"AlexandrL714",
 			"Андрей Саг."
 		]
 	},
-	"wikibase-editlinks": "Аларғаны тӱзедерге"
+	"wikibase-editlinks": "Аларғаны тӱзедерге",
+	"wikibase-editlinkstitle": "Тіллер аразындағы ссылкалар алыстырарға",
+	"wikibase-linkitem-addlinks": "Ссылкалар хозарға"
 }
