@@ -6,6 +6,7 @@ use ExtensionRegistry;
 use Maintenance;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Onoi\MessageReporter\MessageReporter;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterItemLookup;
 use Wikibase\Repo\RangeTraversable;
@@ -68,6 +69,12 @@ class RebuildItemTerms extends Maintenance {
 			$this->fatalError(
 				"You need to have Wikibase enabled in order to use this "
 				. "maintenance script!\n\n",
+				1
+			);
+		}
+		if ( !in_array( Item::ENTITY_TYPE, WikibaseRepo::getLocalEntitySource()->getEntityTypes() ) ) {
+			$this->fatalError(
+				"You can't run this maintenance script on foreign items!",
 				1
 			);
 		}

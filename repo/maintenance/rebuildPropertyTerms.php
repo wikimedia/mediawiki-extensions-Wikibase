@@ -6,6 +6,7 @@ use ExtensionRegistry;
 use Maintenance;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Onoi\MessageReporter\MessageReporter;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
 use Wikibase\Repo\Store\PropertyTermsRebuilder;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
@@ -54,6 +55,12 @@ class RebuildPropertyTerms extends Maintenance {
 			$this->fatalError(
 				"You need to have Wikibase enabled in order to use this "
 				. "maintenance script!\n\n",
+				1
+			);
+		}
+		if ( !in_array( Property::ENTITY_TYPE, WikibaseRepo::getLocalEntitySource()->getEntityTypes() ) ) {
+			$this->fatalError(
+				"You can't run this maintenance script on foreign properties!",
 				1
 			);
 		}

@@ -6,6 +6,7 @@ use Exception;
 use InvalidArgumentException;
 use Maintenance;
 use User;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\PropertyDataTypeChanger;
@@ -42,6 +43,12 @@ class ChangePropertyDataType extends Maintenance {
 	public function execute() {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->fatalError( "You need to have Wikibase enabled in order to use this maintenance script!\n" );
+		}
+		if ( !in_array( Property::ENTITY_TYPE, WikibaseRepo::getLocalEntitySource()->getEntityTypes() ) ) {
+			$this->fatalError(
+				"You can't run this maintenance script on foreign properties!",
+				1
+			);
 		}
 		$propertyIdSerialization = $this->getOption( 'property-id' );
 		$newDataType = $this->getOption( 'new-data-type' );
