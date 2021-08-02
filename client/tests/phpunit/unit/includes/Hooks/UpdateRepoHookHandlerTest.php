@@ -156,15 +156,6 @@ class UpdateRepoHookHandlerTest extends TestCase {
 				$this->createMock( RevisionRecord::class )
 			)
 		);
-
-		$this->assertSame(
-			$jobName !== null,
-			isset( $newTitle->wikibasePushedMoveToRepo ) && $newTitle->wikibasePushedMoveToRepo,
-			'Move got propagated to repo.'
-		);
-
-		$this->assertFalse( property_exists( $oldTitle, 'wikibasePushedMoveToRepo' ),
-			'Should not touch $oldTitle' );
 	}
 
 	private function getTitle(): Title {

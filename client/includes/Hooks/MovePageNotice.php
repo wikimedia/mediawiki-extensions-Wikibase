@@ -106,29 +106,16 @@ class MovePageNotice implements SpecialMovepageAfterMoveHook {
 			return null;
 		}
 
-		$msg = $this->getPageMoveMessage( $newTitle );
-
 		$html = Html::rawElement(
 			'div',
 			[
 				'id' => 'wbc-after-page-move',
 				'class' => 'plainlinks'
 			],
-			wfMessage( $msg, $itemLink )->parse()
+			wfMessage( 'wikibase-after-page-move', $itemLink )->parse()
 		);
 
 		return $html;
-	}
-
-	private function getPageMoveMessage( Title $newTitle ) {
-		// @phan-suppress-next-line PhanUndeclaredProperty Dynamic property
-		if ( isset( $newTitle->wikibasePushedMoveToRepo ) ) {
-			// We're going to update the item using the repo job queue \o/
-			return 'wikibase-after-page-move-queued';
-		}
-
-		// The user has to update the item per hand for some reason
-		return 'wikibase-after-page-move';
 	}
 
 }

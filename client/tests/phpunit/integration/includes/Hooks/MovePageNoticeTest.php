@@ -45,10 +45,10 @@ class MovePageNoticeTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider getMovePageNoticeCaseProvider
-	 */
-	public function testDoSpecialMovepageAfterMove( $expected, Title $oldTitle, Title $newTitle ) {
+	public function testDoSpecialMovepageAfterMove() {
+		$oldTitle = Title::newFromTextThrow( 'New Amsterdam' );
+		$newTitle = Title::newFromTextThrow( 'New York City' );
+		$expected = $this->getParsedMessage( 'wikibase-after-page-move' );
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 
 		$siteLinkLookup->method( 'getItemIdForLink' )
@@ -81,21 +81,6 @@ class MovePageNoticeTest extends MediaWikiIntegrationTestCase {
 		$movePageNotice->onSpecialMovepageAfterMove( $movePageForm, $oldTitle, $newTitle );
 
 		$this->assertTrue( true ); // The mocks do the assertions we need
-	}
-
-	public function getMovePageNoticeCaseProvider() {
-		$oldTitle = Title::newFromTextThrow( 'New Amsterdam' );
-		$newTitle = Title::newFromTextThrow( 'New York City' );
-		$expected = $this->getParsedMessage( 'wikibase-after-page-move' );
-
-		$newTitle2 = Title::newFromTextThrow( 'New York' );
-		$newTitle2->wikibasePushedMoveToRepo = true;
-		$expected2 = $this->getParsedMessage( 'wikibase-after-page-move-queued' );
-
-		return [
-			'after page move' => [ $expected, $oldTitle, $newTitle ],
-			'page move queued' => [ $expected2, $oldTitle, $newTitle2 ]
-		];
 	}
 
 	protected function getParsedMessage( $messageKey ) {

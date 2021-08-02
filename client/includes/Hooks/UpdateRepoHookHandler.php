@@ -174,7 +174,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	private function applyUpdateRepo(
 		UpdateRepo $updateRepo,
 		LinkTarget $title,
-		string $titleProperty
+		string $titleProperty = null
 	): void {
 		if ( !$updateRepo->isApplicable() ) {
 			return;
@@ -184,8 +184,10 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 			$updateRepo->injectJob( $this->jobQueueGroup );
 
 			// To be able to find out about this in the ArticleDeleteAfter
-			// or SpecialMovepageAfterMove hook (but see T268135)
-			$title->$titleProperty = true;
+			// hook (but see T268135)
+			if ( $titleProperty ) {
+				$title->$titleProperty = true;
+			}
 		} catch ( MWException $e ) {
 			// This is not a reason to let an exception bubble up, we just
 			// show a message to the user that the Wikibase item needs to be
@@ -284,11 +286,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 			}
 		}
 
-		$this->applyUpdateRepo(
-			$updateRepo,
-			$newLinkTarget,
-			'wikibasePushedMoveToRepo'
-		);
+		$this->applyUpdateRepo( $updateRepo, $newLinkTarget );
 
 		return true;
 	}

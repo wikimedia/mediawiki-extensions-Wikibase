@@ -13,7 +13,6 @@
 	"tooltip-t-wikibase": "Link to connected data repository item",
 	"accesskey-t-wikibase": "g",
 	"wikibase-after-page-move": "Your move should now be [$1 reflected in the {{WBREPONAME}} item] language link. We ask that you check this has occurred.",
-	"wikibase-after-page-move-queued": "The [$1 {{WBREPONAME}} item] associated with this page will be automatically updated. Please note that this might not happen instantaneously.",
 	"wikibase-after-page-delete": "Link to this page should have been removed from [$1 the associated {{WBREPONAME}} item]. We ask that you check this has occurred.",
 	"wikibase-after-page-delete-queued": "The [$1 {{WBREPONAME}} item] associated with this page will be automatically updated. Please note that this might not happen instantaneously.",
 	"wikibase-comment-add": "A {{WBREPONAME}} item has been created.",
