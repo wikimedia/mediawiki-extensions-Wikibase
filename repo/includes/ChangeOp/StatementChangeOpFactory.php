@@ -9,6 +9,9 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\Normalization\ReferenceNormalizer;
+use Wikibase\Lib\Normalization\SnakNormalizer;
+use Wikibase\Lib\Normalization\StatementNormalizer;
 use Wikibase\Repo\Validators\SnakValidator;
 
 /**
@@ -44,18 +47,38 @@ class StatementChangeOpFactory {
 	 */
 	private $referenceSnakValidator;
 
+	/** @var SnakNormalizer */
+	private $snakNormalizer;
+
+	/** @var ReferenceNormalizer */
+	private $referenceNormalizer;
+
+	/** @var StatementNormalizer */
+	private $statementNormalizer;
+
+	/** @var bool */
+	private $normalize;
+
 	public function __construct(
 		GuidGenerator $guidGenerator,
 		StatementGuidValidator $guidValidator,
 		StatementGuidParser $guidParser,
 		SnakValidator $snakValidator,
-		SnakValidator $referenceSnakValidator
+		SnakValidator $referenceSnakValidator,
+		SnakNormalizer $snakNormalizer,
+		ReferenceNormalizer $referenceNormalizer,
+		StatementNormalizer $statementNormalizer,
+		bool $normalize
 	) {
 		$this->guidGenerator = $guidGenerator;
 		$this->guidValidator = $guidValidator;
 		$this->guidParser = $guidParser;
 		$this->snakValidator = $snakValidator;
 		$this->referenceSnakValidator = $referenceSnakValidator;
+		$this->snakNormalizer = $snakNormalizer;
+		$this->referenceNormalizer = $referenceNormalizer;
+		$this->statementNormalizer = $statementNormalizer;
+		$this->normalize = $normalize;
 	}
 
 	/**
@@ -66,6 +89,9 @@ class StatementChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetStatementOp( Statement $statement, $index = null ) {
+		if ( $this->normalize ) {
+			$statement = $this->statementNormalizer->normalize( $statement );
+		}
 		return new ChangeOpStatement(
 			$statement,
 			$this->guidGenerator,
@@ -94,6 +120,9 @@ class StatementChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetMainSnakOp( $statementGuid, Snak $snak ) {
+		if ( $this->normalize ) {
+			$snak = $this->snakNormalizer->normalize( $snak );
+		}
 		return new ChangeOpMainSnak( $statementGuid, $snak, $this->guidGenerator, $this->snakValidator );
 	}
 
@@ -107,6 +136,9 @@ class StatementChangeOpFactory {
 	 */
 	public function newSetQualifierOp( $statementGuid, Snak $snak, $snakHash ) {
 		//XXX: index??
+		if ( $this->normalize ) {
+			$snak = $this->snakNormalizer->normalize( $snak );
+		}
 		return new ChangeOpQualifier( $statementGuid, $snak, $snakHash, $this->snakValidator );
 	}
 
@@ -131,6 +163,9 @@ class StatementChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetReferenceOp( $statementGuid, Reference $reference, $referenceHash, $index = null ) {
+		if ( $this->normalize ) {
+			$reference = $this->referenceNormalizer->normalize( $reference );
+		}
 		return new ChangeOpReference( $statementGuid, $reference, $referenceHash, $this->referenceSnakValidator, $index );
 	}
 

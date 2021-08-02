@@ -168,7 +168,11 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 			$this->getSnakValidator(),
 			$this->getTermValidatorFactory(),
 			new HashSiteStore( TestSites::getSites() ),
-			[]
+			WikibaseRepo::getSnakNormalizer(),
+			WikibaseRepo::getReferenceNormalizer(),
+			WikibaseRepo::getStatementNormalizer(),
+			[],
+			true
 		);
 
 		$apiResultBuilder = new ResultBuilder(

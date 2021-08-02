@@ -10,6 +10,9 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\Normalization\ReferenceNormalizer;
+use Wikibase\Lib\Normalization\SnakNormalizer;
+use Wikibase\Lib\Normalization\StatementNormalizer;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\DataTypeValidatorFactory;
@@ -33,6 +36,11 @@ class ChangeOpFactoryProviderTest extends ServiceWiringTestCase {
 			new DataTypeFactory( [] ) );
 		$this->mockService( 'WikibaseRepo.DataTypeValidatorFactory',
 			$this->createMock( DataTypeValidatorFactory::class ) );
+		$this->mockService( 'WikibaseRepo.Settings',
+			new SettingsArray( [
+				'badgeItems' => [],
+				'tmpNormalizeDataValues' => true,
+			] ) );
 		$this->mockService( 'WikibaseRepo.EntityConstraintProvider',
 			$this->createMock( EntityConstraintProvider::class ) );
 		$entityIdParser = new ItemIdParser();
@@ -45,10 +53,12 @@ class ChangeOpFactoryProviderTest extends ServiceWiringTestCase {
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getSiteLookup' )
 			->willReturn( new HashSiteStore() );
-		$this->mockService( 'WikibaseRepo.Settings',
-			new SettingsArray( [
-				'badgeItems' => [],
-			] ) );
+		$this->mockService( 'WikibaseRepo.SnakNormalizer',
+			$this->createMock( SnakNormalizer::class ) );
+		$this->mockService( 'WikibaseRepo.ReferenceNormalizer',
+			$this->createMock( ReferenceNormalizer::class ) );
+		$this->mockService( 'WikibaseRepo.StatementNormalizer',
+			$this->createMock( StatementNormalizer::class ) );
 
 		$this->assertInstanceOf(
 			ChangeOpFactoryProvider::class,

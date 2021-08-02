@@ -365,6 +365,8 @@ return [
 			WikibaseRepo::getDataTypeValidatorFactory( $services )
 		);
 
+		$settings = WikibaseRepo::getSettings( $services );
+
 		return new ChangeOpFactoryProvider(
 			WikibaseRepo::getEntityConstraintProvider( $services ),
 			new GuidGenerator(),
@@ -373,10 +375,11 @@ return [
 			$snakValidator,
 			WikibaseRepo::getTermValidatorFactory( $services ),
 			$services->getSiteLookup(),
-			array_keys(
-				WikibaseRepo::getSettings( $services )
-					->getSetting( 'badgeItems' )
-			)
+			WikibaseRepo::getSnakNormalizer( $services ),
+			WikibaseRepo::getReferenceNormalizer( $services ),
+			WikibaseRepo::getStatementNormalizer( $services ),
+			array_keys( $settings->getSetting( 'badgeItems' ) ),
+			$settings->getSetting( 'tmpNormalizeDataValues' )
 		);
 	},
 
