@@ -162,15 +162,6 @@ DEFAULT: ````null```` (There is no SPARQL endpoint.)
 
 EXAMPLE: ```https://query.wikidata.org/sparql```
 
-#### conceptBaseUri {#conceptBaseUri}
-Base URI for building concept URIs (used in Rdf output).
-
-This has to include the protocol and domain, only an entity identifier will be appended.
-
-DEFAULT: Constructed from [$wgServer] with http protocol and /entity/ path.
-
-EXAMPLE: ```http://www.wikidata.org/entity/```
-
 #### globeUris
 Mapping of globe URIs to canonical names, as recognized and used by [GeoData] extension when indexing and querying for coordinates.
 
