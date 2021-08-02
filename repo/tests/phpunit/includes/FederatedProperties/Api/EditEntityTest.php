@@ -37,6 +37,7 @@ class EditEntityTest extends FederatedPropertiesApiTestCase {
 	}
 
 	public function testCreatingANewPropertyShouldFailFromMediawikiParamValidator() {
+		$this->markTestSkipped( 'TODO fix or remove per T288228' );
 
 		$params = [
 			'action' => 'wbeditentity',

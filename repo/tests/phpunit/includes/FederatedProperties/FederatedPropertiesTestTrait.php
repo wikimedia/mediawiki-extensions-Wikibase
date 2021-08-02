@@ -28,17 +28,13 @@ trait FederatedPropertiesTestTrait {
 		$this->setWbSetting( 'federatedPropertiesEnabled', true );
 
 		$localEntitySource = [
-			'entityNamespaces' => [ 'item' => 120 ],
+			'entityNamespaces' => [ 'item' => 120, 'property' => 122 ],
 			'repoDatabase' => false,
 			'baseUri' => 'http://wikidata-federated-properties.wmflabs.org/entity/',
 			'interwikiPrefix' => '',
 			'rdfNodeNamespacePrefix' => 'wd',
 			'rdfPredicateNamespacePrefix' => 'wdt',
 		];
-
-		if ( $withLocalPropertySource ) {
-			$localEntitySource['entityNamespaces']['property'] = 122;
-		}
 
 		$this->setWbSetting( 'entitySources', [
 			'local' => $localEntitySource,
