@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Tests\Integration;
 
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
-use MWNamespace;
 use Wikibase\Client\NamespaceChecker;
 
 /**
@@ -91,11 +91,14 @@ class NamespaceCheckerTest extends MediaWikiIntegrationTestCase {
 		// callbacks until the actual problem is resolved.
 		return [
 			[ [], [], function () {
-				return MWNamespace::getValidNamespaces();
+				return MediaWikiServices::getInstance()->getNamespaceInfo()->getValidNamespaces();
 			} ], // #0
 			[ [], [ NS_MAIN ], [ NS_MAIN ] ], // #1
 			[ [ NS_USER_TALK ], [], function () {
-				return array_diff( MWNamespace::getValidNamespaces(), [ NS_USER_TALK ] );
+				return array_diff(
+					MediaWikiServices::getInstance()->getNamespaceInfo()->getValidNamespaces(),
+					[ NS_USER_TALK ]
+				);
 			} ], // #2
 			[ [ NS_CATEGORY ], [ NS_USER_TALK ], [ NS_USER_TALK ] ], // #3
 			[ [ NS_USER_TALK ], [ NS_USER_TALK ], [] ] // #4
