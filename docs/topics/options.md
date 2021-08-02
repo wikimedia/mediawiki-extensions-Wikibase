@@ -436,6 +436,11 @@ to update sitelinks when connected pages on the client are moved or deleted.
 
 DEFAULT: `[]`
 
+#### viewUiTags
+List of tags to be added to edits made via the main frontend (WikibaseView).
+
+DEFAULT: `[]`
+
 ### Miscellaneous
 
 #### dataRightsText

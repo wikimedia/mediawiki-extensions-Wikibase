@@ -193,7 +193,8 @@ return call_user_func( function() {
 					"callback" => function () {
 						$settings = WikibaseRepo::getSettings();
 						return [
-							'geoShapeStorageApiEndpoint' => $settings->getSetting( 'geoShapeStorageApiEndpointUrl' )
+							'geoShapeStorageApiEndpoint' => $settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
+							'tags' => $settings->getSetting( 'viewUiTags' ),
 						];
 					}
 				],
