@@ -136,7 +136,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 			'only Q3' => [
 				[
 					'action' => 'query',
-					'query' => 'entityusage',
+					'list' => 'wblistentityusage',
 					'wbeuentities' => 'Q3',
 				],
 				[ "11" => [
@@ -151,7 +151,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 			'two entities in two pages' => [
 				[
 					'action' => 'query',
-					'query' => 'entityusage',
+					'list' => 'wblistentityusage',
 					'wbeuentities' => 'Q3|Q5',
 				],
 				[ "11" => [
@@ -174,7 +174,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 			'continue' => [
 				[
 					'action' => 'query',
-					'query' => 'entityusage',
+					'list' => 'wblistentityusage',
 					'wbeuentities' => 'Q3|Q5',
 					'wbeucontinue' => '11|Q3|S',
 				],
@@ -198,7 +198,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 			'correctly finish pageination step between two pages' => [
 				[
 					'action' => 'query',
-					'query' => 'entityusage',
+					'list' => 'wblistentityusage',
 					'wbeuentities' => 'Q3|Q4|Q5',
 					'wbeulimit' => 2
 				],
