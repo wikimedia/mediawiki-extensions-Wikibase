@@ -1,5 +1,6 @@
 <?php
 
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Module\TemplateModule;
 use Wikibase\View\Termbox\TermboxModule;
 
@@ -895,8 +896,16 @@ return call_user_func( function() {
 
 		'wikibase.termbox' => $wikibaseTermboxPaths + [
 			'class' => TermboxModule::class,
-			'scripts' => [
+			'packageFiles' => [
 				'dist/wikibase.termbox.main.js',
+				[
+					'name' => 'dist/config.json',
+					'callback' => function () {
+						return [
+							'tags' => WikibaseRepo::getSettings()->getSetting( 'termboxTags' ),
+						];
+					},
+				],
 			],
 			'targets' => 'mobile',
 			'dependencies' => [
