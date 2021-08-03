@@ -2,8 +2,7 @@
 
 namespace Wikibase\Repo\Api;
 
-use LogicException;
-use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Interactors\TermSearchResult;
 
@@ -23,13 +22,13 @@ class ConceptUriSearchHelper implements EntitySearchHelper {
 	private $searchHelper;
 
 	/**
-	 * @var EntitySourceDefinitions
+	 * @var EntitySourceLookup
 	 */
-	private $entitySourceDefinitions;
+	private $entitySourceLookup;
 
-	public function __construct( EntitySearchHelper $searchHelper, EntitySourceDefinitions $entitySourceDefinitions ) {
+	public function __construct( EntitySearchHelper $searchHelper, EntitySourceLookup $entitySourceLookup ) {
 		$this->searchHelper = $searchHelper;
-		$this->entitySourceDefinitions = $entitySourceDefinitions;
+		$this->entitySourceLookup = $entitySourceLookup;
 	}
 
 	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit, $strictLanguage ) {
@@ -64,22 +63,8 @@ class ConceptUriSearchHelper implements EntitySearchHelper {
 		return $baseUri . wfUrlencode( $entityId->getLocalPart() );
 	}
 
-	/**
-	 * @param EntityId $entityId
-	 *
-	 * @throws LogicException when there is no base URI for the repository $entityId belongs to
-	 *
-	 * @return string
-	 */
-	private function getConceptBaseUri( EntityId $entityId ) {
-		$source = $this->entitySourceDefinitions->getSourceForEntityType( $entityId->getEntityType() );
-		if ( $source === null ) {
-			throw new LogicException(
-				'No source defined for entity of type: ' . $entityId->getEntityType()
-			);
-		}
-
-		return $source->getConceptBaseUri();
+	private function getConceptBaseUri( EntityId $entityId ): string {
+		return $this->entitySourceLookup->getEntitySourceById( $entityId )->getConceptBaseUri();
 	}
 
 }
