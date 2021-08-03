@@ -197,6 +197,7 @@ use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
+use Wikibase\Repo\Normalization\CommonsMediaValueNormalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
@@ -380,6 +381,13 @@ return [
 			WikibaseRepo::getStatementNormalizer( $services ),
 			array_keys( $settings->getSetting( 'badgeItems' ) ),
 			$settings->getSetting( 'tmpNormalizeDataValues' )
+		);
+	},
+
+	'WikibaseRepo.CommonsMediaValueNormalizer' => function ( MediaWikiServices $services ): CommonsMediaValueNormalizer {
+		return new CommonsMediaValueNormalizer(
+			WikibaseRepo::getCachingCommonsMediaFileNameLookup( $services ),
+			WikibaseRepo::getLogger( $services )
 		);
 	},
 

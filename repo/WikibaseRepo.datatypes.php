@@ -113,6 +113,13 @@ return call_user_func( function() {
 			'rdf-data-type' => function() {
 				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
 			},
+			'normalizer-factory-callback' => static function () {
+				if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+					// Don't go for commons during unit tests.
+					return [];
+				}
+				return WikibaseRepo::getCommonsMediaValueNormalizer();
+			},
 		],
 		'PT:geo-shape' => [
 			'expert-module' => 'jquery.valueview.experts.GeoShape',
