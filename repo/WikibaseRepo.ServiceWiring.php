@@ -89,6 +89,7 @@ use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\Normalization\ReferenceNormalizer;
 use Wikibase\Lib\Normalization\SnakNormalizer;
 use Wikibase\Lib\Normalization\StatementNormalizer;
+use Wikibase\Lib\Normalization\StringValueNormalizer;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
@@ -1742,6 +1743,13 @@ return [
 
 	'WikibaseRepo.StringNormalizer' => function ( MediaWikiServices $services ): StringNormalizer {
 		return new StringNormalizer();
+	},
+
+	'WikibaseRepo.StringValueNormalizer' => function ( MediaWikiServices $services ): StringValueNormalizer {
+		return new StringValueNormalizer(
+			WikibaseRepo::getStringNormalizer( $services ),
+			WikibaseRepo::getLogger( $services )
+		);
 	},
 
 	'WikibaseRepo.SubEntityTypesMapper' => function ( MediaWikiServices $services ): SubEntityTypesMapper {
