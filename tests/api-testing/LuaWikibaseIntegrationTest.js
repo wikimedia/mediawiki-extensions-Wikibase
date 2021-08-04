@@ -126,6 +126,12 @@ describe( 'Lua Wikibase integration', () => {
 				end
 				p.getEntity_aliases = function() return mw.wikibase.getEntity( '${testItemId}' ).aliases.en[1].value end
 				p.getEntity_labels = function() return mw.wikibase.getEntity( '${testItemId}' ).labels.de.value end
+				p.getEntityLabelWithNilLang = function() return mw.wikibase.getEntity( '${testItemId}' ).labels[nil] end
+				p.getEntityLabelWithObjectLang = function() return mw.wikibase.getEntity( '${testItemId}' ).labels[{}] end
+				p.getEntityLabelWithIntegerLang = function() return mw.wikibase.getEntity( '${testItemId}' ).labels[2] end
+				p.getEntityDescriptionWithNilLang = function() return mw.wikibase.getEntity( '${testItemId}' ).descriptions[nil] end
+				p.getEntityDescriptionWithObjectLang = function() return mw.wikibase.getEntity( '${testItemId}' ).descriptions[{}] end
+				p.getEntityDescriptionWithIntegerLang = function() return mw.wikibase.getEntity( '${testItemId}' ).descriptions[2] end
 				p.getDescription = function() return mw.wikibase.getDescription( '${testItemId}' ) end
 				p.formatItemIdValue = function( frame )
 					local dataValue = { type = 'wikibase-entityid', value = { ['entity-type'] = 'item', id = frame.args[1] } }
@@ -174,6 +180,28 @@ describe( 'Lua Wikibase integration', () => {
 		assert.equal( pageResponse.parse.text, `<p>${englishLabel}\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.equal( usageAspects, 'L.en' );
+	} );
+
+	describe( 'ensure resilience of label and description usage tracking => T287704', () => {
+		/* eslint-disable mocha/no-setup-in-describe */
+		[
+			[ 'gets the empty label with nil as language and doesnt break addLabelUsage', 'getEntityLabelWithNilLang', null ],
+			[ 'gets the empty label with an object as language and doesnt break addLabelUsage', 'getEntityLabelWithObjectLang', null ],
+			[ 'gets the empty label with an integer as language and doesnt break addLabelUsage', 'getEntityLabelWithIntegerLang', null ],
+			[ 'gets the empty description with nil as language and doesnt break addDescriptionUsage', 'getEntityDescriptionWithNilLang', null ],
+			[ 'gets the empty description with an object as language and doesnt break addDescriptionUsage', 'getEntityDescriptionWithObjectLang', null ],
+			[ 'gets the empty description with an integer as language and doesnt break addDescriptionUsage', 'getEntityDescriptionWithIntegerLang', null ],
+		].forEach( ( [ testLabel, luaTestMethod, expectedAspect ] ) => {
+			it( testLabel, async () => {
+				const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
+				await writeTextToPage( `{{#invoke:${module}|${luaTestMethod}}}`, pageTitle );
+				const pageResponse = await parsePage( pageTitle );
+				assert.equal( pageResponse.parse.text, '' );
+				const usageAspects = await getUsageAspects( pageTitle, testItemId );
+				assert.equal( usageAspects, expectedAspect );
+			} );
+		} );
+		/* eslint-enable mocha/no-setup-in-describe */
 	} );
 
 	it( 'getLabelByLang returns the label of the redirect target for a redirected item', async () => {
@@ -274,6 +302,10 @@ describe( 'Lua Wikibase integration', () => {
 			indexpageids: true,
 		} );
 		const pageId = usageResponse.query.pageids[ 0 ];
+		if ( !usageResponse.query.pages[ pageId ].wbentityusage ) {
+			// TODO: replace with optional chaning as soon as CI is on Node.js v14
+			return null;
+		}
 		return usageResponse.query.pages[ pageId ].wbentityusage[ itemId ].aspects;
 	}
 
