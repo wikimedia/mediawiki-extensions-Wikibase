@@ -7,6 +7,7 @@ use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\ContentLanguages;
 
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension
@@ -47,17 +48,15 @@ class WikibaseLuaEntityBindings {
 	private $siteId;
 
 	/**
-	 * @param StatementTransclusionInteractor $plainTextTransclusionInteractor
-	 * @param StatementTransclusionInteractor $richWikitextTransclusionInteractor
-	 * @param EntityIdParser $entityIdParser
-	 * @param Language $language
-	 * @param UsageAccumulator $usageAccumulator
-	 * @param string $siteId
+	 * @var ContentLanguages
 	 */
+	private $termsLanguages;
+
 	public function __construct(
 		StatementTransclusionInteractor $plainTextTransclusionInteractor,
 		StatementTransclusionInteractor $richWikitextTransclusionInteractor,
 		EntityIdParser $entityIdParser,
+		ContentLanguages $termsLanguages,
 		Language $language,
 		UsageAccumulator $usageAccumulator,
 		$siteId
@@ -68,6 +67,7 @@ class WikibaseLuaEntityBindings {
 		$this->language = $language;
 		$this->usageAccumulator = $usageAccumulator;
 		$this->siteId = $siteId;
+		$this->termsLanguages = $termsLanguages;
 	}
 
 	/**
@@ -131,6 +131,9 @@ class WikibaseLuaEntityBindings {
 	 */
 	public function addLabelUsage( $entityId, $langCode ) {
 		$entityId = $this->entityIdParser->parse( $entityId );
+		if ( !$this->termsLanguages->hasLanguage( $langCode ) ) {
+			$langCode = null;
+		}
 		$this->usageAccumulator->addLabelUsage( $entityId, $langCode );
 	}
 
@@ -142,6 +145,9 @@ class WikibaseLuaEntityBindings {
 	 */
 	public function addDescriptionUsage( $entityId, $langCode ) {
 		$entityId = $this->entityIdParser->parse( $entityId );
+		if ( !$this->termsLanguages->hasLanguage( $langCode ) ) {
+			$langCode = null;
+		}
 		$this->usageAccumulator->addDescriptionUsage( $entityId, $langCode );
 	}
 

@@ -129,9 +129,11 @@ describe( 'Lua Wikibase integration', () => {
 				p.getEntityLabelWithNilLang = function() return mw.wikibase.getEntity( '${testItemId}' ).labels[nil] end
 				p.getEntityLabelWithObjectLang = function() return mw.wikibase.getEntity( '${testItemId}' ).labels[{}] end
 				p.getEntityLabelWithIntegerLang = function() return mw.wikibase.getEntity( '${testItemId}' ).labels[2] end
+				p.getEntityLabelWithInvalidLang = function() return mw.wikibase.getEntity( '${testItemId}' ).labels.INVALID end
 				p.getEntityDescriptionWithNilLang = function() return mw.wikibase.getEntity( '${testItemId}' ).descriptions[nil] end
 				p.getEntityDescriptionWithObjectLang = function() return mw.wikibase.getEntity( '${testItemId}' ).descriptions[{}] end
 				p.getEntityDescriptionWithIntegerLang = function() return mw.wikibase.getEntity( '${testItemId}' ).descriptions[2] end
+				p.getEntityDescriptionWithInvalidLang = function() return mw.wikibase.getEntity( '${testItemId}' ).descriptions.INVALID end
 				p.getDescription = function() return mw.wikibase.getDescription( '${testItemId}' ) end
 				p.formatItemIdValue = function( frame )
 					local dataValue = { type = 'wikibase-entityid', value = { ['entity-type'] = 'item', id = frame.args[1] } }
@@ -188,9 +190,11 @@ describe( 'Lua Wikibase integration', () => {
 			[ 'gets the empty label with nil as language and doesnt break addLabelUsage', 'getEntityLabelWithNilLang', null ],
 			[ 'gets the empty label with an object as language and doesnt break addLabelUsage', 'getEntityLabelWithObjectLang', null ],
 			[ 'gets the empty label with an integer as language and doesnt break addLabelUsage', 'getEntityLabelWithIntegerLang', null ],
+			[ 'gets the empty label with an invalid language and doesnt break addLabelUsage', 'getEntityLabelWithInvalidLang', 'L' ],
 			[ 'gets the empty description with nil as language and doesnt break addDescriptionUsage', 'getEntityDescriptionWithNilLang', null ],
 			[ 'gets the empty description with an object as language and doesnt break addDescriptionUsage', 'getEntityDescriptionWithObjectLang', null ],
 			[ 'gets the empty description with an integer as language and doesnt break addDescriptionUsage', 'getEntityDescriptionWithIntegerLang', null ],
+			[ 'gets the empty description with an invalid language and doesnt break addDescriptionUsage', 'getEntityDescriptionWithInvalidLang', 'D' ],
 		].forEach( ( [ testLabel, luaTestMethod, expectedAspect ] ) => {
 			it( testLabel, async () => {
 				const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
