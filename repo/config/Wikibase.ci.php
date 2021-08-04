@@ -28,3 +28,6 @@ $wgWBRepoSettings['dataBridgeEnabled'] = true;
 
 // enable tainted-refs
 $wgWBRepoSettings['taintedReferencesEnabled'] = true;
+
+// enable data value normalization
+$wgWBRepoSettings['tmpNormalizeDataValues'] = true;
