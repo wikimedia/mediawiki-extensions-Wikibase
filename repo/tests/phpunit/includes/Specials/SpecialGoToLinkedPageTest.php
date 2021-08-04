@@ -46,7 +46,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 				if ( $siteIds === [ 'dewiki' ] && $itemIds === [ 23 ] ) {
 					return $result;
 				} else {
-					return null;
+					return [];
 				}
 			} );
 

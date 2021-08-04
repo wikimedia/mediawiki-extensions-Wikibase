@@ -81,7 +81,11 @@ class CachingSiteLinkLookup implements SiteLinkLookup {
 	/**
 	 * This is uncached!
 	 */
-	public function getLinks( ?array $numericIds = null, ?array $siteIds = null, ?array $pageNames = null ) {
+	public function getLinks(
+		?array $numericIds = null,
+		?array $siteIds = null,
+		?array $pageNames = null
+	): array {
 		// Caching this would be rather complicated for little to no benefit.
 		return $this->lookup->getLinks( $numericIds, $siteIds, $pageNames );
 	}

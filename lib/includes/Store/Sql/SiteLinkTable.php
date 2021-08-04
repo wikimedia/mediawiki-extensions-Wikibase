@@ -275,7 +275,11 @@ class SiteLinkTable implements SiteLinkStore {
 	/**
 	 * @note The arrays returned by this method do not contain badges!
 	 */
-	public function getLinks( ?array $numericIds = null, ?array $siteIds = null, ?array $pageNames = null ) {
+	public function getLinks(
+		?array $numericIds = null,
+		?array $siteIds = null,
+		?array $pageNames = null
+	): array {
 		$conditions = [];
 
 		if ( $numericIds !== null ) {
