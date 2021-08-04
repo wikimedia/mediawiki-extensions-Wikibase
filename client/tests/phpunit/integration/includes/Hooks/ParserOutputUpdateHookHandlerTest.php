@@ -183,8 +183,8 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$langLinkHandlerFactory = $this->newLangLinkHandlerFactory( $namespaceChecker, $mockRepo, $settings );
 
 		return new ParserOutputUpdateHookHandler(
-			$namespaceChecker,
 			$langLinkHandlerFactory,
+			$namespaceChecker,
 			$parserOutputDataUpdater,
 			$this->newUsageAccumulatorFactory()
 		);
@@ -397,8 +397,8 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$langLinkHandlerFactory = $this->newLangLinkHandlerFactory( $namespaceChecker, $mockRepo );
 
 		$handler = new ParserOutputUpdateHookHandler(
-			$namespaceChecker,
 			$langLinkHandlerFactory,
+			$namespaceChecker,
 			$this->newParserOutputDataUpdater( $mockRepo, [ $itemId => [ $siteLink ] ] ),
 			$this->newUsageAccumulatorFactory()
 		);

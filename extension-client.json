@@ -96,7 +96,6 @@
 		},
 		"ParserOutputUpdate": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler::factory",
 			"services": [
 				"WikibaseClient.LangLinkHandlerFactory",
 				"WikibaseClient.NamespaceChecker",
