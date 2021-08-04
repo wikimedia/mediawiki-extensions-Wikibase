@@ -45,19 +45,10 @@ class HashSiteLinkStore implements SiteLinkStore {
 		return $this->itemIdsByLink[$key] ?? null;
 	}
 
-	/**
-	 * @see SiteLinkStore::getLinks
-	 *
-	 * @param int[] $numericIds Numeric (unprefixed) item ids
-	 * @param string[] $siteIds
-	 * @param string[] $pageNames
-	 *
-	 * @return array[]
-	 */
 	public function getLinks(
-		array $numericIds = [],
-		array $siteIds = [],
-		array $pageNames = []
+		?array $numericIds = null,
+		?array $siteIds = null,
+		?array $pageNames = null
 	) {
 		$links = [];
 
@@ -85,22 +76,22 @@ class HashSiteLinkStore implements SiteLinkStore {
 	 *
 	 * @param ItemId $itemId
 	 * @param SiteLink $siteLink
-	 * @param int[] $numericIds Numeric (unprefixed) item ids
-	 * @param string[] $siteIds
-	 * @param string[] $pageNames
+	 * @param int[]|null $numericIds like for SiteLinkLookup::getLinks()
+	 * @param string[]|null $siteIds like for SiteLinkLookup::getLinks()
+	 * @param string[]|null $pageNames like for SiteLinkLookup::getLinks()
 	 *
 	 * @return bool
 	 */
 	private function linkMatches(
 		ItemId $itemId,
 		SiteLink $siteLink,
-		array $numericIds,
-		array $siteIds,
-		array $pageNames
+		?array $numericIds,
+		?array $siteIds,
+		?array $pageNames
 	) {
-		return ( empty( $numericIds ) || in_array( $itemId->getNumericId(), $numericIds ) )
-			&& ( empty( $siteIds ) || in_array( $siteLink->getSiteId(), $siteIds ) )
-			&& ( empty( $pageNames ) || in_array( $siteLink->getPageName(), $pageNames ) );
+		return ( $numericIds === null || in_array( $itemId->getNumericId(), $numericIds ) )
+			&& ( $siteIds === null || in_array( $siteLink->getSiteId(), $siteIds ) )
+			&& ( $pageNames === null || in_array( $siteLink->getPageName(), $pageNames ) );
 	}
 
 	/**

@@ -345,16 +345,7 @@ class MockRepository implements
 		return $oldEntity;
 	}
 
-	/**
-	 * @see SiteLinkLookup::getLinks
-	 *
-	 * @param int[] $numericIds Numeric (unprefixed) item ids
-	 * @param string[] $siteIds
-	 * @param string[] $pageNames
-	 *
-	 * @return array[]
-	 */
-	public function getLinks( array $numericIds = [], array $siteIds = [], array $pageNames = [] ) {
+	public function getLinks( ?array $numericIds = null, ?array $siteIds = null, ?array $pageNames = null ) {
 		return $this->siteLinkStore->getLinks( $numericIds, $siteIds, $pageNames );
 	}
 
