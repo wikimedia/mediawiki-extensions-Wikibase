@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Maintenance;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\ObservableMessageReporter;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
@@ -55,6 +56,12 @@ class RebuildItemsPerSite extends Maintenance {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
 			exit;
+		}
+		if ( !in_array( Item::ENTITY_TYPE, WikibaseRepo::getLocalEntitySource()->getEntityTypes() ) ) {
+			$this->fatalError(
+				"You can't run this maintenance script on foreign items!",
+				1
+			);
 		}
 
 		$batchSize = (int)$this->getOption( 'batch-size', 100 );

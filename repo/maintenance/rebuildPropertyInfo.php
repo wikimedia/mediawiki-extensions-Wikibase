@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Maintenance;
 
 use LoggedUpdateMaintenance;
 use Onoi\MessageReporter\ObservableMessageReporter;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\WikibaseSettings;
@@ -40,6 +41,12 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
 			exit;
+		}
+		if ( !in_array( Property::ENTITY_TYPE, WikibaseRepo::getLocalEntitySource()->getEntityTypes() ) ) {
+			$this->fatalError(
+				"You can't run this maintenance script on foreign properties!",
+				1
+			);
 		}
 
 		$reporter = new ObservableMessageReporter();
