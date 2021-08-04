@@ -101,7 +101,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Einige Aussagen",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Aussage: $1",
 	"wikibase-pageinfo-entity-usage-X": "Alle Objektdaten",
-	"wikibase-pageinfo-entity-usage-O": "Andere (Aussagen)",
+	"wikibase-pageinfo-entity-usage-O": "Sonstiges (z. B. Aliasnamen, Existenz von Entitäten)",
 	"wikibase-property-render-error": "Eigenschaft „$1“ konnte nicht gerendert werden: $2",
 	"wikibase-otherprojects": "In anderen Projekten",
 	"wikibase-otherprojects-beta-message": "Seitenleiste anderer Projekte",
