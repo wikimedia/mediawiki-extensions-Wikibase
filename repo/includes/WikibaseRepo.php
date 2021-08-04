@@ -55,6 +55,7 @@ use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\Normalization\ReferenceNormalizer;
 use Wikibase\Lib\Normalization\SnakNormalizer;
+use Wikibase\Lib\Normalization\StatementNormalizer;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
@@ -1035,6 +1036,11 @@ class WikibaseRepo {
 	public static function getReferenceNormalizer( ContainerInterface $services = null ): ReferenceNormalizer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.ReferenceNormalizer' );
+	}
+
+	public static function getStatementNormalizer( ContainerInterface $services = null ): StatementNormalizer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.StatementNormalizer' );
 	}
 
 }

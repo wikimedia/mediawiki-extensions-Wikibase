@@ -88,6 +88,7 @@ use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\Normalization\ReferenceNormalizer;
 use Wikibase\Lib\Normalization\SnakNormalizer;
+use Wikibase\Lib\Normalization\StatementNormalizer;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
@@ -1688,6 +1689,13 @@ return [
 
 	'WikibaseRepo.StatementGuidValidator' => function ( MediaWikiServices $services ): StatementGuidValidator {
 		return new StatementGuidValidator( WikibaseRepo::getEntityIdParser( $services ) );
+	},
+
+	'WikibaseRepo.StatementNormalizer' => function ( MediaWikiServices $services ): StatementNormalizer {
+		return new StatementNormalizer(
+			WikibaseRepo::getSnakNormalizer( $services ),
+			WikibaseRepo::getReferenceNormalizer( $services )
+		);
 	},
 
 	'WikibaseRepo.StorageEntitySerializer' => function ( MediaWikiServices $services ): Serializer {
