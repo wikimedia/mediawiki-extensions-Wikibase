@@ -53,6 +53,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
+use Wikibase\Lib\Normalization\SnakNormalizer;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
@@ -1023,6 +1024,11 @@ class WikibaseRepo {
 	public static function getEntitySourceLookup( ContainerInterface $services = null ): EntitySourceLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntitySourceLookup' );
+	}
+
+	public static function getSnakNormalizer( ContainerInterface $services = null ): SnakNormalizer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.SnakNormalizer' );
 	}
 
 }

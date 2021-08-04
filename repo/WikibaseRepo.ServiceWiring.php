@@ -86,6 +86,7 @@ use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
+use Wikibase\Lib\Normalization\SnakNormalizer;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
@@ -1664,6 +1665,15 @@ return [
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			WikibaseRepo::getDataTypeFactory( $services ),
 			WikibaseRepo::getMessageInLanguageProvider( $services )
+		);
+	},
+
+	'WikibaseRepo.SnakNormalizer' => function ( MediaWikiServices $services ): SnakNormalizer {
+		return new SnakNormalizer(
+			WikibaseRepo::getPropertyDataTypeLookup( $services ),
+			WikibaseRepo::getLogger( $services ),
+			WikibaseRepo::getDataTypeDefinitions( $services )
+				->getNormalizerFactoryCallbacks()
 		);
 	},
 
