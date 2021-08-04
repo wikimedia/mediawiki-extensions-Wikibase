@@ -2,9 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
-use InvalidArgumentException;
 use MediaWikiIntegrationTestCase;
-use TitleValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
@@ -147,11 +145,6 @@ class SiteLinkTableTest extends MediaWikiIntegrationTestCase {
 				$this->siteLinkTable->getItemIdForLink( $siteLink->getSiteId(), $siteLink->getPageName() )
 			);
 		}
-	}
-
-	public function testGetEntityIdForLinkedTitle_doesNotAcceptObjects() {
-		$this->expectException( InvalidArgumentException::class );
-		$this->siteLinkTable->getEntityIdForLinkedTitle( 'enwiki', new TitleValue( 0, 'Beer' ) );
 	}
 
 	/**

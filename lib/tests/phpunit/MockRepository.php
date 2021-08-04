@@ -184,26 +184,11 @@ class MockRepository implements
 		return $this->getEntity( $entityId ) !== null;
 	}
 
-	/**
-	 * @see SiteLinkLookup::getItemIdForLink
-	 *
-	 * @param string $globalSiteId
-	 * @param string $pageTitle
-	 *
-	 * @return ItemId|null
-	 */
-	public function getItemIdForLink( $globalSiteId, $pageTitle ) {
+	public function getItemIdForLink( string $globalSiteId, string $pageTitle ): ?ItemId {
 		return $this->siteLinkStore->getItemIdForLink( $globalSiteId, $pageTitle );
 	}
 
-	/**
-	 * @see SiteLinkLookup::getItemIdForSiteLink
-	 *
-	 * @param SiteLink $siteLink
-	 *
-	 * @return ItemId|null
-	 */
-	public function getItemIdForSiteLink( SiteLink $siteLink ) {
+	public function getItemIdForSiteLink( SiteLink $siteLink ): ?ItemId {
 		return $this->siteLinkStore->getItemIdForSiteLink( $siteLink );
 	}
 
@@ -381,14 +366,7 @@ class MockRepository implements
 		return $entities;
 	}
 
-	/**
-	 * @see SiteLinkLookup::getSiteLinksForItem
-	 *
-	 * @param ItemId $itemId
-	 *
-	 * @return SiteLink[]
-	 */
-	public function getSiteLinksForItem( ItemId $itemId ) {
+	public function getSiteLinksForItem( ItemId $itemId ): array {
 		return $this->siteLinkStore->getSiteLinksForItem( $itemId );
 	}
 

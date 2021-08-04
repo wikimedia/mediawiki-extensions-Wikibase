@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Store;
 
 use BagOStuff;
@@ -58,15 +60,7 @@ class CachingSiteLinkLookup implements SiteLinkLookup {
 		$this->cacheKeyPrefix = $cacheKeyPrefix;
 	}
 
-	/**
-	 * @see SiteLinkLookup::getItemIdForLink
-	 *
-	 * @param string $globalSiteId
-	 * @param string $pageTitle
-	 *
-	 * @return ItemId|null
-	 */
-	public function getItemIdForLink( $globalSiteId, $pageTitle ) {
+	public function getItemIdForLink( string $globalSiteId, string $pageTitle ): ?ItemId {
 		$itemIdSerialization = $this->cache->get( $this->getByPageCacheKey( $globalSiteId, $pageTitle ) );
 
 		if ( is_string( $itemIdSerialization ) ) {
@@ -98,7 +92,7 @@ class CachingSiteLinkLookup implements SiteLinkLookup {
 	 *
 	 * @return SiteLink[]
 	 */
-	public function getSiteLinksForItem( ItemId $itemId ) {
+	public function getSiteLinksForItem( ItemId $itemId ): array {
 		$cacheKey = $this->cacheKeyPrefix . ':sitelinks:' . $itemId->getSerialization();
 		$siteLinks = $this->cache->get( $cacheKey );
 
@@ -110,37 +104,18 @@ class CachingSiteLinkLookup implements SiteLinkLookup {
 		return $siteLinks;
 	}
 
-	/**
-	 * @see SiteLinkLookup::getItemIdForSiteLink
-	 *
-	 * @param SiteLink $siteLink
-	 *
-	 * @return ItemId|null
-	 */
-	public function getItemIdForSiteLink( SiteLink $siteLink ) {
+	public function getItemIdForSiteLink( SiteLink $siteLink ): ?ItemId {
 		return $this->getItemIdForLink(
 			$siteLink->getSiteId(),
 			$siteLink->getPageName()
 		);
 	}
 
-	/**
-	 * @param string $globalSiteId
-	 * @param string $pageTitle
-	 *
-	 * @return string
-	 */
-	private function getByPageCacheKey( $globalSiteId, $pageTitle ) {
+	private function getByPageCacheKey( string $globalSiteId, string $pageTitle ): string {
 		return $this->cacheKeyPrefix . ':sitelinks-by-page:' . $globalSiteId . ':' . $pageTitle;
 	}
 
-	/**
-	 * @param string $globalSiteId
-	 * @param string $pageTitle
-	 *
-	 * @return ItemId|null
-	 */
-	private function getAndCacheItemIdForLink( $globalSiteId, $pageTitle ) {
+	private function getAndCacheItemIdForLink( string $globalSiteId, string $pageTitle ): ?ItemId {
 		$itemId = $this->lookup->getItemIdForLink( $globalSiteId, $pageTitle );
 
 		$this->cache->set(

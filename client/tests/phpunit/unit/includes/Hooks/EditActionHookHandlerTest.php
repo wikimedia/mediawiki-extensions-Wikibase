@@ -35,10 +35,10 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider handleProvider
 	 * @param string HTML $expected
 	 * @param IContextSource $context
-	 * @param EntityId|bool $entityId
+	 * @param EntityId|null $entityId
 	 * @param string $message
 	 */
-	public function testHandle( $expected, IContextSource $context, $entityId, $message ) {
+	public function testHandle( $expected, IContextSource $context, ?EntityId $entityId, $message ) {
 		$out = new OutputPage( $context );
 		$hookHandler = $this->newHookHandler( $entityId );
 		$editor = $this->getEditPage();
@@ -68,7 +68,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$cases[] = [
 			'',
 			$context,
-			false,
+			null,
 			'page is not connected to an item'
 		];
 
@@ -83,11 +83,11 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @param ItemId|bool $entityId
+	 * @param ItemId|null $entityId
 	 *
 	 * @return EditActionHookHandler
 	 */
-	private function newHookHandler( $entityId ) {
+	private function newHookHandler( ?EntityId $entityId ) {
 		$repoLinker = $this->getMockBuilder( RepoLinker::class )
 			->disableOriginalConstructor()
 			->onlyMethods( [ 'buildEntityLink' ] )

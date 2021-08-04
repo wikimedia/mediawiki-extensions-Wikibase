@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Store\Sql;
 
 use InvalidArgumentException;
@@ -67,7 +69,7 @@ class SiteLinkTable implements SiteLinkStore {
 	 *
 	 * @return SiteLink[]
 	 */
-	private function diffSiteLinks( array $siteLinks1, array $siteLinks2 ) {
+	private function diffSiteLinks( array $siteLinks1, array $siteLinks2 ): array {
 		return array_udiff(
 			$siteLinks1,
 			$siteLinks2,
@@ -83,14 +85,7 @@ class SiteLinkTable implements SiteLinkStore {
 		);
 	}
 
-	/**
-	 * @see SiteLinkStore::saveLinksOfItem
-	 *
-	 * @param Item $item
-	 *
-	 * @return boolean Success indicator
-	 */
-	public function saveLinksOfItem( Item $item ) {
+	public function saveLinksOfItem( Item $item ): bool {
 		//First check whether there's anything to update
 		$newLinks = $item->getSiteLinkList()->toArray();
 		$oldLinks = $this->getSiteLinksForItem( $item->getId() );
@@ -143,7 +138,7 @@ class SiteLinkTable implements SiteLinkStore {
 	 *
 	 * @return bool Success indicator
 	 */
-	private function insertLinks( Item $item, array $links, IDatabase $dbw ) {
+	private function insertLinks( Item $item, array $links, IDatabase $dbw ): bool {
 		$this->logger->debug(
 			'{method}: inserting links for {entityId}',
 			[
@@ -178,7 +173,7 @@ class SiteLinkTable implements SiteLinkStore {
 	 *
 	 * @return bool Success indicator
 	 */
-	private function deleteLinks( Item $item, array $links, IDatabase $dbw ) {
+	private function deleteLinks( Item $item, array $links, IDatabase $dbw ): bool {
 		$this->logger->debug(
 			'{method}: deleting links for {entityId}',
 			[
@@ -212,7 +207,7 @@ class SiteLinkTable implements SiteLinkStore {
 	 * @return boolean Success indicator
 	 * @throws MWException
 	 */
-	public function deleteLinksOfItem( ItemId $itemId ) {
+	public function deleteLinksOfItem( ItemId $itemId ): bool {
 		if ( $this->readonly ) {
 			throw new MWException( 'Cannot write when in readonly mode' );
 		}
@@ -239,7 +234,7 @@ class SiteLinkTable implements SiteLinkStore {
 	 * @throws InvalidArgumentException if a parameter does not have the expected type
 	 * @return ItemId|null
 	 */
-	public function getItemIdForLink( $globalSiteId, $pageTitle ) {
+	public function getItemIdForLink( string $globalSiteId, string $pageTitle ): ?ItemId {
 		Assert::parameterType( 'string', $globalSiteId, '$globalSiteId' );
 		Assert::parameterType( 'string', $pageTitle, '$pageTitle' );
 
@@ -261,14 +256,7 @@ class SiteLinkTable implements SiteLinkStore {
 		return $result === false ? null : ItemId::newFromNumber( (int)$result->ips_item_id );
 	}
 
-	/**
-	 * @see SiteLinkLookup::getItemIdForSiteLink
-	 *
-	 * @param SiteLink $siteLink
-	 *
-	 * @return ItemId|null
-	 */
-	public function getItemIdForSiteLink( SiteLink $siteLink ) {
+	public function getItemIdForSiteLink( SiteLink $siteLink ): ?ItemId {
 		return $this->getItemIdForLink( $siteLink->getSiteId(), $siteLink->getPageName() );
 	}
 
@@ -343,7 +331,7 @@ class SiteLinkTable implements SiteLinkStore {
 	 * @return SiteLink[]
 	 * @note The SiteLink objects returned by this method do not contain badges!
 	 */
-	public function getSiteLinksForItem( ItemId $itemId ) {
+	public function getSiteLinksForItem( ItemId $itemId ): array {
 		$numericId = $itemId->getNumericId();
 
 		$dbr = $this->db->connections()->getReadConnectionRef();
@@ -375,7 +363,7 @@ class SiteLinkTable implements SiteLinkStore {
 	 * @throws InvalidArgumentException if a parameter does not have the expected type
 	 * @return EntityId|null
 	 */
-	public function getEntityIdForLinkedTitle( $globalSiteId, $pageTitle ) {
+	public function getEntityIdForLinkedTitle( $globalSiteId, $pageTitle ): ?EntityId {
 		return $this->getItemIdForLink( $globalSiteId, $pageTitle );
 	}
 
