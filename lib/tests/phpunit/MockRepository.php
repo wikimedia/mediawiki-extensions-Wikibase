@@ -345,7 +345,11 @@ class MockRepository implements
 		return $oldEntity;
 	}
 
-	public function getLinks( ?array $numericIds = null, ?array $siteIds = null, ?array $pageNames = null ) {
+	public function getLinks(
+		?array $numericIds = null,
+		?array $siteIds = null,
+		?array $pageNames = null
+	): array {
 		return $this->siteLinkStore->getLinks( $numericIds, $siteIds, $pageNames );
 	}
 

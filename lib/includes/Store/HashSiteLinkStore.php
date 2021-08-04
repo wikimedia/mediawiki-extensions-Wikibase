@@ -49,7 +49,7 @@ class HashSiteLinkStore implements SiteLinkStore {
 		?array $numericIds = null,
 		?array $siteIds = null,
 		?array $pageNames = null
-	) {
+	): array {
 		$links = [];
 
 		foreach ( $this->linksByItemId as $prefixedId => $siteLinks ) {

@@ -146,12 +146,12 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 		$lookup->expects( $this->once() )
 			->method( 'getLinks' )
 			->with( [ 1 ], [ 'a' ], [ 'b' ] )
-			->willReturn( 'bar' );
+			->willReturn( [ 'bar' ] );
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup( $lookup, new HashBagOStuff() );
 
 		$this->assertEquals(
-			'bar',
+			[ 'bar' ],
 			$cachingSiteLinkLookup->getLinks( [ 1 ], [ 'a' ], [ 'b' ] )
 		);
 	}
