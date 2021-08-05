@@ -7,7 +7,6 @@
 	"wikibase-client-desc": "Kliente para iti Wikibase a pagpaatiddog",
 	"tooltip-t-wikibase": "Isilpo iti naikapet a datos ti repositorio ti banag",
 	"wikibase-after-page-move": "Mabalinmo pay a [$1 pabaruen] ti mainaig a banag ti {{WBREPONAME}} tapno mataripatu dagiti silpo ti pagsasao ti naiyalis a panid.",
-	"wikibase-after-page-move-queued": "Ti [$1 {{WBREPONAME}} a banag] a mainaig iti daytoy a panid ket automatikonton a mapabaro.",
 	"wikibase-comment-add": "Napartuaten ti maysa a banag ti {{WBREPONAME}}.",
 	"wikibase-comment-remove": "Ti mainaig a banag ti {{WBREPONAME}} ket naikkaten. Dagiti silpo ti pagsasao ket naikkaten.",
 	"wikibase-comment-linked": "Ti {{WBREPONAME}} a banag ket naisilpon iti daytoy a panid.",

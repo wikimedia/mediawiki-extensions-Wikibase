@@ -18,7 +18,6 @@
 	"wikibase-client-desc": "Klien untuk ekstensi Wikibase",
 	"tooltip-t-wikibase": "Pranala untuk menghubungkan butir pada ruang penyimpanan data",
 	"wikibase-after-page-move": "Pemindahan Anda seharusnya [$1 terlihat di pranala bahasa item {{WBREPONAME}}]. Kami meminta Anda memeriksa apakah ini sudah terjadi.",
-	"wikibase-after-page-move-queued": "[$1 Item {{WBREPONAME}}] yang terkait dengan halaman ini akan secara otomatis diperbarui. Tolong perhatikan bahwa ini mungkin tidak langsung terjadi.",
 	"wikibase-after-page-delete": "Pranala ke halaman ini seharusnya terhapus dari [$1 item {{WBREPONAME}} yang terkait]. Kami meminta Anda memeriksa apakah ini sudah terjadi.",
 	"wikibase-after-page-delete-queued": "[$1 Item {{WBREPONAME}}] yang terkait dengan halaman ini akan secara otomatis diperbarui. Tolong perhatikan bahwa ini mungkin tidak langsung terjadi.",
 	"wikibase-comment-add": "Butir {{WBREPONAME}} telah dibuat.",

@@ -10,7 +10,6 @@
 	"wikibase-client-desc": "Client pi l'estinzioni Wikibase",
 	"tooltip-t-wikibase": "Culligamentu ô suggettu assuciatu ntô dipòsitu dati",
 	"wikibase-after-page-move": "Poi puru [$1 aggiurnari] lu suggettu assuciatu supra a {{WBREPONAME}} pi mantèniri li culligamenti di lingua supra â pàggina spustata.",
-	"wikibase-after-page-move-queued": "Lu [$1 suggettu supra a {{WBREPONAME}}] assuciatu a sta pàggina è aggiurnatu autumaticamenti prestu.",
 	"wikibase-after-page-delete": "Poi puru cancillari li culligamenti a sta pàggina dû [$1 suggettu assuciatu supra a {{WBREPONAME}}] pi mantèniri li culligamenti di lingua.",
 	"wikibase-after-page-delete-queued": "Lu [$1 suggettu supra a {{WBREPONAME}}] assuciatu a sta pàggina è aggiurnatu autumaticamenti prestu.",
 	"wikibase-comment-add": "Fu criatu nu suggettu supra a {{WBREPONAME}}.",

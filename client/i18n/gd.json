@@ -8,7 +8,6 @@
 	"wikibase-client-desc": "Cliant airson an tuilleadain Wikibase",
 	"tooltip-t-wikibase": "Ceangail ri nì san ionad-tasgaidh dàta co-cheangailte",
 	"wikibase-after-page-move": "Bu chòir dhut [$1 an nì {{WBREPONAME}} co-cheangailte] ùrachadh cuideachd gus na ceanglaichean cànain a ghlèidheadh air an duilleag air a ghluasad.",
-	"wikibase-after-page-move-queued": "Thèid [$1 an nì {{WBREPONAME}}] a tha co-cheangailte ris an duilleag seo ùrachadh gu fèin-obrachail a dh'aithghearr. Thoir an aire nach tachair seo sa bhad ma dh'fhaoidte.",
 	"wikibase-comment-add": "Chaidh nì {{WBREPONAME}} a chruthachadh.",
 	"wikibase-comment-remove": "Chaidh an nì {{WBREPONAME}} co-cheangailte air a sguabadh às. Chaidh na ceanglaichean cànain a thoirt air falbh.",
 	"wikibase-comment-linked": "Chaidh nì {{WBREPONAME}} a cheangal ris an duilleag seo.",

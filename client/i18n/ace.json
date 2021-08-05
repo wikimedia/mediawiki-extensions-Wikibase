@@ -8,7 +8,6 @@
 	"wikibase-client-desc": "Klien keu ekstensi Wikibase",
 	"tooltip-t-wikibase": "Peunawôt keu peukaw'èt data u keuneubah item",
 	"wikibase-after-page-move": "Droëneuh peureulèë cit [$1 neupubarô] item Wikidata nyang teukaw'èt keu neujaga peunawôt bahsa bak laman teupinah.",
-	"wikibase-after-page-move-queued": "[$1 Item Wikidata] nyang teukaw'èt ngön laman nyoë keumeung geupubarô keudroë ngön sigra",
 	"wikibase-comment-add": "Item Wikidata ka teupeugöt",
 	"wikibase-comment-remove": "Item Wikidata teukaw'èt geusampôh. Peunawôt bahsa geusampôh.",
 	"wikibase-comment-linked": "Item Wikidata ka teupawôt u laman nyoë.",

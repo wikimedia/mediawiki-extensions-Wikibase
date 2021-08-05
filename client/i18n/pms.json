@@ -9,7 +9,6 @@
 	"wikibase-client-desc": "Client për l'estension Wikibase",
 	"tooltip-t-wikibase": "Liura a l'element ëd referensa dij dàit colegà",
 	"wikibase-after-page-move": "A peul ëdcò [$1 agiorné] j'element Wikidata associà për goerné le liure ëd lenga an sla pàgina tramudà.",
-	"wikibase-after-page-move-queued": "L'[$1 element Wikidata] associà con costa pàgina a sarà tòst agiornà an automàtich.",
 	"wikibase-comment-add": "N'element Wikidata a l'é stàit creà.",
 	"wikibase-comment-remove": "Element Wikidata associà scancelà. Liura ëd lenga gavà.",
 	"wikibase-comment-linked": "N'element Wikidata a l'é stàit colegà a sta pàgina.",

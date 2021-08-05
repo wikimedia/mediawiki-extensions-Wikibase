@@ -14,7 +14,6 @@
 	"wikibase-client-desc": "Client pentru extensia Wikibase",
 	"tooltip-t-wikibase": "Legătură către elementul asociat din depozitul de date",
 	"wikibase-after-page-move": "Mutarea dumneavoastră ar trebui acum să [$1 se reflecte în legătura de limbă de la itemul {{WBREPONAME}}]. Vă rugăm să verificați că așa și este.",
-	"wikibase-after-page-move-queued": "[$1 Elementul {{WBREPONAME}}] asociat acestei pagini va fi în curând actualizat în mod automat. Rețineți că este posibil ca aceasta să nu se întâmple instantaneu.",
 	"wikibase-comment-add": "Un element {{WBREPONAME}} a fost creat.",
 	"wikibase-comment-remove": "Elementul {{WBREPONAME}} asociat a fost șters. Legăturile linguale au fost înlăturate.",
 	"wikibase-comment-linked": "Un element {{WBREPONAME}} a fost legat către această pagină.",

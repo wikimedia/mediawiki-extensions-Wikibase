@@ -13,7 +13,6 @@
 	"wikibase-client-desc": "Kliento por la Vikidatuma etendaĵo",
 	"tooltip-t-wikibase": "Ligilo al konektita datuma ero",
 	"wikibase-after-page-move": "Vi povas [$1 ĝisdatigi] la ligitan eron en {{WBREPONAME}} por pluteni la lingvan ligilon al la la movita paĝo.",
-	"wikibase-after-page-move-queued": "La [$1 ero en {{WBREPONAME}}] asociigita kun tiu ĉi paĝo estos baldaŭ aŭtomate ĝisdatigita.",
 	"wikibase-comment-add": "Ero en {{WBREPONAME}} estis kreita.",
 	"wikibase-comment-remove": "Ligita ero en {{WBREPONAME}} estis forigita. La lingvaj ligiloj estas forviŝitaj.",
 	"wikibase-comment-linked": "Ero en {{WBREPONAME}} estis ligita al ĉi tiu paĝo.",

@@ -8,7 +8,6 @@
 	"wikibase-client-desc": "Cliende pe l'estenzione Uicchibase",
 	"tooltip-t-wikibase": "Appuende a 'a vôsce de l'archivije date collegate",
 	"wikibase-after-page-move": "Condrolle ca [$1 l'elemende {{WBREPONAME}} associate] ha state aggiornate automatecamende pe mandenè le collegaminde de le lènghe sus 'a pàgene.",
-	"wikibase-after-page-move-queued": "L'[$1 elemende {{WBREPONAME}}] associate a sta pàgene avène aggiornate automaticamende. Pò essere ca non ge succede istandaneamende.",
 	"wikibase-after-page-delete": "Le collegaminde a sta pàgene avessera essere luate da [$1 da l'elemende {{WBREPONAME}} associate]. Te cercare de condrollà ca ha state fatte.",
 	"wikibase-after-page-delete-queued": "L'[$1 elemende {{WBREPONAME}}] associate a sta pàgene avène aggiornate automaticamende. Pò essere ca non ge succede istandaneamende.",
 	"wikibase-comment-add": "'N'elemende de {{WBREPONAME}} ha state ccrejate.",

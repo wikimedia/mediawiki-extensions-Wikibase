@@ -14,7 +14,7 @@
 	"apihelp-query+wbentityusage-paramvalue-aspect-T": "Се користи насловот на месната страница која одговара на единицата",
 	"apihelp-query+wbentityusage-paramvalue-aspect-C": "Се користат исказите од единицата",
 	"apihelp-query+wbentityusage-paramvalue-aspect-X": "Се користат или може да се користат сите аспекти на единицата",
-	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Се користи нешто друго од единицата. Ова тековно подразбира употреба на исказ или истозначник, како и изречни проверки за постоењето на единицата.",
+	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Се користи нешто друго од единицата. Ова тековно подразбира употреба на истозначник, како и изречни проверки за постоењето на единицата.",
 	"apihelp-query+wbentityusage-param-prop": "Својства за додавање кон исходот.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Ако е овозможено, ќе се додаде URL на единицата",
 	"apihelp-query+wbentityusage-param-entities": "Давај само страници што ги користат следниве единици.",

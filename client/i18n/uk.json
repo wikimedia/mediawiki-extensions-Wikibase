@@ -25,7 +25,6 @@
 	"wikibase-client-desc": "Клієнт для розширення Wikibase",
 	"tooltip-t-wikibase": "Посилання на пов’язаний елемент сховища даних",
 	"wikibase-after-page-move": "Ваше перейменування тепер має бути [$1 відтворене у мовному посиланні відповідного елементу {{grammar:genitive|{{WBREPONAME}}}}]. Просимо Вас перевірити, чи це так.",
-	"wikibase-after-page-move-queued": "Пов'язаний з цією сторінкою [$1 елемент {{grammar:genitive|{{WBREPONAME}}}}] буде автоматично оновлено. Будь ласка, зауважте, що це може відбутися не миттєво.",
 	"wikibase-after-page-delete": "Посилання на цю сторінку мало бути вилучене [$1 з відповідного елементу {{grammar:genitive|{{WBREPONAME}}}}]. Просимо Вас перевірити, чи це так.",
 	"wikibase-after-page-delete-queued": "Пов'язаний з цією сторінкою [$1 елемент {{grammar:genitive|{{WBREPONAME}}}}] буде автоматично оновлено. Будь ласка, зауважте, що це може відбутися не миттєво.",
 	"wikibase-comment-add": "Елемент {{grammar:genitive|{{WBREPONAME}}}} вже створено.",

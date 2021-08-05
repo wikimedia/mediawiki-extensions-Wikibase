@@ -11,7 +11,6 @@
 	"wikibase-client-desc": "Klien untuak ekstensi Wikibase",
 	"tooltip-t-wikibase": "Pautan untuak maubuangan ka item panyimpanan data",
 	"wikibase-after-page-move": "Sanak paralu juo [$1 mampabarui item] nan tapauik di Wikidata dalam hal interwiki sangkek mamindahan laman.",
-	"wikibase-after-page-move-queued": "[$1 Item Wikidata] nan takaik ka laman ko akan sacaro otomatih dipabarui sacapeknyo.",
 	"wikibase-comment-remove": "Item Wikidata takait dihapuih. Interwiki hilang.",
 	"wikibase-comment-linked": "Item Wikidata alah tapauik ka laman iko.",
 	"wikibase-comment-unlink": "Laman ko alah indak tapauik ka item Wikidata. Interwiki hilang.",

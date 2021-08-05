@@ -8,7 +8,6 @@
 	"wikibase-client-desc": "Klient za rozšěrjenje Wikibase",
 	"tooltip-t-wikibase": "Wotkaz k zwjazanemu objektej w datowym repozitoriju",
 	"wikibase-after-page-move": "Móžeš tež přirjadowany element {{WBREPONAME}} [$1 aktualizować], zo by mjezyrěčne wotkazy na přesunjenej stronje zarjadował.",
-	"wikibase-after-page-move-queued": "[$1 Element {{WBREPONAME}}] zwjazany z tutej stronu budźe so bórze awtomatisce aktualizować.",
 	"wikibase-comment-add": "Zapisk {{WBREPONAME}} je so wutworił.",
 	"wikibase-comment-remove": "Přirjadowany element {{WBREPONAME}} zhašany. Mjezyrěčne wotkazy wotstronjene.",
 	"wikibase-comment-linked": "Element z {{WBREPONAME}} je so z tutej stronu zwjazał.",

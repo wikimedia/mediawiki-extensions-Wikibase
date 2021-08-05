@@ -7,7 +7,6 @@
 	"wikibase-client-desc": "Cliente pro le extension Wikibase",
 	"tooltip-t-wikibase": "Ligamine a un elemento in le repositorio de datos connectite",
 	"wikibase-after-page-move": "Le renomination deberea ora esser reflectite in le ligamine interwiki in [$1 le elemento {{WBREPONAME}} associate]. Per favor, verifica que isto es le caso.",
-	"wikibase-after-page-move-queued": "Le [$1 elemento {{WBREPONAME}}] associate a iste pagina essera actualisate automaticamente. Nota ben que isto poterea non evenir instantaneemente.",
 	"wikibase-comment-add": "Un elemento {{WBREPONAME}} ha essite create.",
 	"wikibase-comment-remove": "Le elemento {{WBREPONAME}} associate ha essite delite. Le ligamines de lingua ha essite removite.",
 	"wikibase-comment-linked": "Un elemento {{WBREPONAME}} ha essite ligate a iste pagina.",

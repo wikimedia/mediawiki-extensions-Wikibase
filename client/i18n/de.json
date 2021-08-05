@@ -14,7 +14,6 @@
 	"wikibase-client-desc": "Stellt einen Client für die Erweiterung Wikibase bereit",
 	"tooltip-t-wikibase": "Link zum verbundenen Objekt im Datenrepositorium",
 	"wikibase-after-page-move": "Deine Verschiebung sollte jetzt im Sprachlink [$1 des {{WBREPONAME}}-Objektes zu sehen sein]. Wir bitten dich zu prüfen, ob dies geschehen ist.",
-	"wikibase-after-page-move-queued": "Das mit dieser Seite verbundene [$1 {{WBREPONAME}}-Objekt] wird automatisch aktualisiert werden. Beachte bitte, dass dies nicht sofort geschieht.",
 	"wikibase-after-page-delete": "Der Link auf diese Seite sollte von [$1 dem dazugehörigen {{WBREPONAME}}-Objekt] entfernt worden sein. Wir bitten dich zu prüfen, ob dies geschehen ist.",
 	"wikibase-after-page-delete-queued": "Das dazugehörige [$1 {{WBREPONAME}}-Objekt] zu dieser Seite wird automatisch aktualisiert. Beachte bitte, dass dies nicht sofort geschieht.",
 	"wikibase-comment-add": "Ein {{WBREPONAME}}-Objekt wurde erstellt.",

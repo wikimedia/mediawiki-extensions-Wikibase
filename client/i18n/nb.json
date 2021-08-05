@@ -13,7 +13,6 @@
 	"wikibase-client-desc": "Klient for Wikibase-utvidelsen",
 	"tooltip-t-wikibase": "Lenke til koblet dataregisterelement",
 	"wikibase-after-page-move": "Språklenken på [$1 {{WBREPONAME}}-elementet] skal ha blitt oppdatert, men sjekk gjerne at det har skjedd.",
-	"wikibase-after-page-move-queued": "[$1 {{WBREPONAME}}-elementet] knyttet til denne siden vil snart bli oppdatert automatisk. Merk at dette muligens ikke vil skje umiddelbart.",
 	"wikibase-after-page-delete": "Lenken til denne siden skal ha blitt fjernet fra [$1 det tilknyttede {{WBREPONAME}}-elementet], men sjekk gjerne at det har skjedd.",
 	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}}-elementet] tilknyttet denne siden vil oppdateres automatisk. Merk at dette kanskje ikke skjer umiddelbart.",
 	"wikibase-comment-add": "Et {{WBREPONAME}}-element har blitt opprettet.",

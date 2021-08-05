@@ -34,7 +34,6 @@
 	"wikibase-client-desc": "Клиент для расширения Wikibase",
 	"tooltip-t-wikibase": "Ссылка на связанный элемент репозитория данных",
 	"wikibase-after-page-move": "Ваше переименование также должно быть [$1 отражено в языковых ссылках элемента {{grammar:genitive|{{WBREPONAME}}}}]. Проверьте, что это произошло.",
-	"wikibase-after-page-move-queued": "Связанный с этой страницей [$1 элемент {{grammar:genitive|{{WBREPONAME}}}}] будет автоматически обновлён. Обратите внимание, что это не может произойти мгновенно.",
 	"wikibase-after-page-delete": "Ссылку на эту страницу следует также удалить из [$1 ассоциированного элемента {{GRAMMAR:genitive|{{WBREPONAME}}}}]. Мы просим вас проверить, что это было сделано.",
 	"wikibase-after-page-delete-queued": "Связанный с этой страницей [$1 элемент {{grammar:genitive|{{WBREPONAME}}}}] будет автоматически обновлён. Обратите внимание, что это не может произойти мгновенно.",
 	"wikibase-comment-add": "Был создан элемент {{grammar:genitive|{{WBREPONAME}}}}.",

@@ -11,7 +11,6 @@
 	"wikibase-client-desc": "Klient for Wikibase-utvidinga",
 	"tooltip-t-wikibase": "Lenkje til tilknytt element",
 	"wikibase-after-page-move": "Flyttinga di skal no [$1 visa på sida det tilknytte {{WBREPONAME}}-elementet]. Me ber deg om å sjå at dette stemmer.",
-	"wikibase-after-page-move-queued": "[$1 {{WBREPONAME}}-elementet] som er knytt til sida vil verta automatisk oppdatert. Merk at dette mogelegvis kan ta noko tid.",
 	"wikibase-after-page-delete": "Lenkja til denne sida skal ha vorte fjerna frå [$1 det tilknytte {{WBREPONAME}}-elementet]. Me ber deg om å sjå at dette stemmer.",
 	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}}-elementet] som er knytt til sida vil verta automatisk oppdatert. Merk at dette mogelegvis kan ta noko tid.",
 	"wikibase-comment-add": "Eit Wikidata-element vart oppretta.",

@@ -11,7 +11,6 @@
 	"wikibase-client-desc": "Cliente para a extensión Wikibase",
 	"tooltip-t-wikibase": "Ligazón ao elemento conectado no repositorio de datos",
 	"wikibase-after-page-move": "Tamén debería actualizar o [$1  elemento asociado de {{WBREPONAME}}] para manter as ligazóns lingüísticas na páxina trasladada.",
-	"wikibase-after-page-move-queued": "O [$1 elemento de {{WBREPONAME}}] asociado a esta páxina ha actualizarse automaticamente axiña. Por favor, decátese de que isto pode non ser instantáneo.",
 	"wikibase-after-page-delete": "Tamén debería eliminar a ligazón cara a esta páxina do [$1  elemento asociado de {{WBREPONAME}}] para manter as ligazóns lingüísticas.",
 	"wikibase-after-page-delete-queued": "O [$1 {{WBREPONAME}} elemento] asociado a esta páxina actualizarase automaticamente axiña. Por favor, decátese de que isto pode non ser instantáneo.",
 	"wikibase-comment-add": "Creouse un elemento en {{WBREPONAME}}.",

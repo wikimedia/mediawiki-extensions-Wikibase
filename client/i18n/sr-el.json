@@ -13,7 +13,6 @@
 	"wikibase-client-desc": "Klijent za ekstenziju Vikibaza",
 	"tooltip-t-wikibase": "Veza ka povezanim podacima stavke u skladištu",
 	"wikibase-after-page-move": "Vaše premeštanje se sada treba [$1 odraziti na jezičnu vezu stavke na Vikipodacima]. Tražimo da proverite da li se to dogodilo.",
-	"wikibase-after-page-move-queued": "[$1 Stavka Vikipodataka] povezana sa ovom stranicom će se automatski ažurirati. Napominjemo da se ovo ne može desiti odmah.",
 	"wikibase-after-page-delete": "Veza ka ovoj stranici treba da bude uklonjena iz [$1 povezane stavke na Vikipodacima]. Tražimo da proverite da li se to dogodilo.",
 	"wikibase-after-page-delete-queued": "[$1 Stavka Vikipodataka] povezana sa ovom stranicom će se automatski ažurirati. Napominjemo da se ovo ne može desiti odmah.",
 	"wikibase-comment-add": "Stavka na Vikipodacima je napravljena.",

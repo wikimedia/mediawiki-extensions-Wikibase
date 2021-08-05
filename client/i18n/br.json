@@ -13,7 +13,6 @@
 	"wikibase-client-desc": "Arval evit an astenn Wikibase",
 	"tooltip-t-wikibase": "Liamm war-zu elfenn gevreet kavlec'h ar roadennoù",
 	"wikibase-after-page-move": "Ret e vefe deoc'h hizivaat [$1 an elfenn {{WBREPONAME}} liammet] evit derc'hel d'al liammoù yezh war ar bajenn dilec'hiet.",
-	"wikibase-after-page-move-queued": "An [elfenn {{WBREPONAME}} $1] liammet ouzh ar bajenn-mañ a vo hizivaet ent emgefre. Notit mat ne c'hoarvezo ket diouzhtu-diouzhtu ker buan all.",
 	"wikibase-after-page-delete": "Dleout a rafec'h ivez lemel al liamm war-zu ar bajenn-mañ a-ziwar [$1 an elfenn {{WBREPONAME}} liammet] evit derc'hel d'al liammoù yezh.",
 	"wikibase-after-page-delete-queued": "Hizivaet e vo ent emgefre an [$1 elfenn {{WBREPONAME}}] liammet ouzh ar bajenn-ma. Notit mat ne c'hoarvezo ket diouzhtu-diouzhtu ker buan all.",
 	"wikibase-comment-add": "Savet ez eus bet un elfenn {{WBREPONAME}}.",

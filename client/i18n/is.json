@@ -8,7 +8,6 @@
 	"wikibase-client-desc": "Biðlari fyrir Wikibase viðbótina",
 	"tooltip-t-wikibase": "Tengill á tengdan hlut í gagnagrunni",
 	"wikibase-after-page-move": "Færslan ætti núna að [$1 sjást í {{WBREPONAME}} atriði] tungumálatengilsins. Við biðjum þig um að staðreyna hvort þetta hafi átt sér stað.",
-	"wikibase-after-page-move-queued": "[$1 {{WBREPONAME}} hluturinn] sem tengist þessari síðu verður fljótlega uppfærður sjálfvirkt. Vinsamlegast athugaðu að þetta gerist ekkert endilega samstundis.",
 	"wikibase-after-page-delete": "Tengill á þessa síðu ætti að hafa verið fjarlægður af [$1 tengdu {{WBREPONAME}} atriði]. Við biðjum þig um að staðreyna hvort þetta hafi átt sér stað.",
 	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}} hluturinn] sem tengist þessari síðu verður sjálfvirkt uppfærður. Vinsamlegast athugaðu að það gerist ekkert endilega samstundis.",
 	"wikibase-comment-add": "{{WBREPONAME}} hlutur hefur verið búinn til.",

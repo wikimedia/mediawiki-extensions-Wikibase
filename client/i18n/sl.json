@@ -10,7 +10,6 @@
 	"wikibase-client-desc": "Klient za razširitev Wikibase",
 	"tooltip-t-wikibase": "Povežite na ustrezni predmet v podatkovnem odložišču",
 	"wikibase-after-page-move": "Vaša prestavitev bi se morala odraziti tudi s spremembo [$1 jezikovne povezave v projektu {{WBREPONAME}}]. Prosimo, preverite, ali se je to res zgodilo.",
-	"wikibase-after-page-move-queued": "[$1 Objekt v {{GRAMMAR:mestnik|{{WBREPONAME}}}}], povezan s to stranjo, bo v kratkem samodejno posodobljen. Pomnite, da se to morda ne zgodi takoj.",
 	"wikibase-comment-add": "Ustvarjen je bil predmet v Wikipodatkih.",
 	"wikibase-comment-remove": "Povezan objekt v {{GRAMMAR:mestnik|{{WBREPONAME}}}} izbrisan. Jezikovne povezave odstranjene.",
 	"wikibase-comment-linked": "Objekt v {{GRAMMAR:mestnik|{{WBREPONAME}}}} je povezan s to stranjo.",
