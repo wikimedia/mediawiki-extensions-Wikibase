@@ -76,6 +76,9 @@ local function maskEntityTable( entity, tableName, usageFunc )
 
 	local pseudoTableMetatable = {
 		__index = function( _, key )
+			if type( key ) ~= 'string' then
+				return nil
+			end
 			usageFunc( entity.id, key )
 			return actualEntityTable[key]
 		end,
