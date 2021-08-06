@@ -576,7 +576,7 @@ return [
 	'WikibaseRepo.EnabledEntityTypes' => function ( MediaWikiServices $services ): array {
 		$types = array_keys(
 			WikibaseRepo::getEntitySourceDefinitions( $services )
-				->getEntityTypeToSourceMapping()
+				->getEntityTypeToDatabaseSourceMapping()
 		);
 		$subEntityTypes = WikibaseRepo::getEntityTypeDefinitions( $services )
 			->get( EntityTypeDefinitions::SUB_ENTITY_TYPES );
@@ -1051,7 +1051,7 @@ return [
 		// prefixed IDs in the entity source realm. Probably EntityIdSearchHelper should be changed instead
 		// of getting this map passed from Repo
 		$entityTypes = array_keys(
-			WikibaseRepo::getEntitySourceDefinitions( $services )->getEntityTypeToSourceMapping()
+			WikibaseRepo::getEntitySourceDefinitions( $services )->getEntityTypeToDatabaseSourceMapping()
 		);
 		return array_fill_keys( $entityTypes, [ '' ] );
 	},

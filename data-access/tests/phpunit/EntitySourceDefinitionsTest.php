@@ -82,7 +82,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 
 		$this->assertEquals(
 			[ 'item' => $itemSource, 'property' => $propertySource, 'other' => $otherSource, 'otherSub' => $otherSource ],
-			$sourceDefinitions->getEntityTypeToSourceMapping()
+			$sourceDefinitions->getEntityTypeToDatabaseSourceMapping()
 		);
 	}
 

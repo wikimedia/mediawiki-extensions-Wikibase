@@ -21,7 +21,7 @@ class EntitySourceDefinitions {
 	/**
 	 * @var null|EntitySource[]
 	 */
-	private $entityTypeToSourceMapping = null;
+	private $entityTypeToDatabaseSourceMapping = null;
 
 	/** @var null|string[] */
 	private $sourceToConceptBaseUriMap = null;
@@ -92,7 +92,7 @@ class EntitySourceDefinitions {
 	public function getDatabaseSourceForEntityType( string $entityType ): ?EntitySource {
 		$entityType = $this->subEntityTypesMapper->getParentEntityType( $entityType ) ?? $entityType;
 
-		$entityTypeToSourceMapping = $this->getEntityTypeToSourceMapping();
+		$entityTypeToSourceMapping = $this->getEntityTypeToDatabaseSourceMapping();
 		if ( array_key_exists( $entityType, $entityTypeToSourceMapping ) ) {
 			return $entityTypeToSourceMapping[$entityType];
 		}
@@ -103,29 +103,29 @@ class EntitySourceDefinitions {
 	/**
 	 * @return EntitySource[]
 	 */
-	public function getEntityTypeToSourceMapping() {
-		if ( $this->entityTypeToSourceMapping === null ) {
-			$this->buildEntityTypeToSourceMapping();
+	public function getEntityTypeToDatabaseSourceMapping() {
+		if ( $this->entityTypeToDatabaseSourceMapping === null ) {
+			$this->buildEntityTypeToDatabaseSourceMapping();
 		}
-		return $this->entityTypeToSourceMapping;
+		return $this->entityTypeToDatabaseSourceMapping;
 	}
 
-	private function buildEntityTypeToSourceMapping() {
-		$this->entityTypeToSourceMapping = [];
+	private function buildEntityTypeToDatabaseSourceMapping() {
+		$this->entityTypeToDatabaseSourceMapping = [];
 		foreach ( $this->sources as $source ) {
 			if ( $source->getType() === EntitySource::TYPE_DB ) {
 				$entityTypes = $source->getEntityTypes();
 				foreach ( $entityTypes as $type ) {
-					$this->entityTypeToSourceMapping[$type] = $source;
+					$this->entityTypeToDatabaseSourceMapping[$type] = $source;
 				}
 			}
 		}
-		foreach ( $this->entityTypeToSourceMapping as $mainEntityType => $source ) {
+		foreach ( $this->entityTypeToDatabaseSourceMapping as $mainEntityType => $source ) {
 			foreach ( $this->subEntityTypesMapper->getSubEntityTypes( $mainEntityType ) as $subEntityType ) {
-				$this->entityTypeToSourceMapping[$subEntityType] = $this->entityTypeToSourceMapping[$mainEntityType];
+				$this->entityTypeToDatabaseSourceMapping[$subEntityType] = $this->entityTypeToDatabaseSourceMapping[$mainEntityType];
 			}
 		}
-		return $this->entityTypeToSourceMapping;
+		return $this->entityTypeToDatabaseSourceMapping;
 	}
 
 	/**
