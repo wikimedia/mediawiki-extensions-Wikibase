@@ -69,7 +69,7 @@ class EntityLinkTargetEntityIdLookup implements LinkTargetEntityIdLookup {
 			return null;
 		}
 
-		$source = $this->entitySourceDefinitions->getSourceForEntityType( $id->getEntityType() );
+		$source = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( $id->getEntityType() );
 		return $source && $source->getInterwikiPrefix() === $linkTarget->getInterwiki() ? $id : null;
 	}
 

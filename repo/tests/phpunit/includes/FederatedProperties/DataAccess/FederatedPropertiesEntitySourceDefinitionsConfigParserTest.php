@@ -68,7 +68,7 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParserTest extends TestCas
 		$this->assertSame( [ 'property' ], $propertySource->getEntityTypes() );
 
 		foreach ( $expectedEntitySourceArray as $entityType => $expectedSource ) {
-			$result = $newSourceDefinitions->getSourceForEntityType( $entityType );
+			$result = $newSourceDefinitions->getDatabaseSourceForEntityType( $entityType );
 			$this->assertEquals( $expectedSource, $result );
 		}
 	}

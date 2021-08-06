@@ -157,7 +157,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 			->willReturn( self::FOREIGN_REPO_PREFIX );
 
 		$sourceDefs = $this->createMock( EntitySourceDefinitions::class );
-		$sourceDefs->method( 'getSourceForEntityType' )
+		$sourceDefs->method( 'getDatabaseSourceForEntityType' )
 			->with( $entityType )
 			->willReturn( $foreignItemSource );
 

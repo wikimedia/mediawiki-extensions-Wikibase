@@ -240,7 +240,7 @@ return [
 							new MatchingTermsLookupSearchInteractor(
 								WikibaseRepo::getMatchingTermsLookupFactory()->getLookupForSource(
 									WikibaseRepo::getEntitySourceDefinitions()
-										->getSourceForEntityType( Item::ENTITY_TYPE ) // FIXME needs to get the db source
+										->getDatabaseSourceForEntityType( Item::ENTITY_TYPE )
 								),
 								$languageFallbackChainFactory,
 								WikibaseRepo::getPrefetchingTermLookup(),
@@ -447,7 +447,7 @@ return [
 							new MatchingTermsLookupSearchInteractor(
 								WikibaseRepo::getMatchingTermsLookupFactory()->getLookupForSource(
 									WikibaseRepo::getEntitySourceDefinitions()
-										->getSourceForEntityType( Property::ENTITY_TYPE ) // FIXME needs to get the db source
+										->getDatabaseSourceForEntityType( Property::ENTITY_TYPE )
 								),
 								$languageFallbackChainFactory,
 								WikibaseRepo::getPrefetchingTermLookup(),

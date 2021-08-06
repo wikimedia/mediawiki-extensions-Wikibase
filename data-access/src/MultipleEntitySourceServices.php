@@ -81,7 +81,7 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 	}
 
 	public function getPropertyInfoLookup() {
-		$source = $this->entitySourceDefinitions->getSourceForEntityType( Property::ENTITY_TYPE );
+		$source = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( Property::ENTITY_TYPE );
 		if ( $source === null ) {
 			throw new \LogicException( 'No entity source provides properties!' );
 		}
@@ -93,21 +93,21 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 	}
 
 	public function entityUpdated( EntityRevision $entityRevision ) {
-		$source = $this->entitySourceDefinitions->getSourceForEntityType( $entityRevision->getEntity()->getType() );
+		$source = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( $entityRevision->getEntity()->getType() );
 		if ( $source !== null ) {
 			$this->singleSourceServices[$source->getSourceName()]->entityUpdated( $entityRevision );
 		}
 	}
 
 	public function redirectUpdated( EntityRedirect $entityRedirect, $revisionId ) {
-		$source = $this->entitySourceDefinitions->getSourceForEntityType( $entityRedirect->getEntityId()->getEntityType() );
+		$source = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( $entityRedirect->getEntityId()->getEntityType() );
 		if ( $source !== null ) {
 			$this->singleSourceServices[$source->getSourceName()]->redirectUpdated( $entityRedirect, $revisionId );
 		}
 	}
 
 	public function entityDeleted( EntityId $entityId ) {
-		$source = $this->entitySourceDefinitions->getSourceForEntityType( $entityId->getEntityType() );
+		$source = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( $entityId->getEntityType() );
 		if ( $source !== null ) {
 			$this->singleSourceServices[$source->getSourceName()]->entityDeleted( $entityId );
 		}

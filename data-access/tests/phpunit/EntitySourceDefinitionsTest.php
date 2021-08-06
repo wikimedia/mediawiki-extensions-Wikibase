@@ -38,16 +38,16 @@ class EntitySourceDefinitionsTest extends TestCase {
 		new EntitySourceDefinitions( [ $sourceOne, $sourceTwo ], new SubEntityTypesMapper( [] ) );
 	}
 
-	public function testGivenKnownType_getSourceForEntityTypeReturnsTheConfiguredSource() {
+	public function testGivenKnownType_getDatabaseSourceForEntityTypeReturnsTheConfiguredSource() {
 		$itemSource = $this->newItemSource();
 		$propertySource = $this->newPropertySource();
 
 		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource, $propertySource ], new SubEntityTypesMapper( [] ) );
 
-		$this->assertEquals( $itemSource, $sourceDefinitions->getSourceForEntityType( 'item' ) );
+		$this->assertEquals( $itemSource, $sourceDefinitions->getDatabaseSourceForEntityType( 'item' ) );
 	}
 
-	public function testGivenSubEntityOfKnownType_getSourceForEntityTypeReturnsTheRelevantSource() {
+	public function testGivenSubEntityOfKnownType_getDatabaseSourceForEntityTypeReturnsTheRelevantSource() {
 		$itemSource = $this->newItemSource();
 		$propertySource = $this->newPropertySource();
 
@@ -56,15 +56,15 @@ class EntitySourceDefinitionsTest extends TestCase {
 			new SubEntityTypesMapper( [ 'item' => [ 'subitem' ] ] )
 		);
 
-		$this->assertEquals( $itemSource, $sourceDefinitions->getSourceForEntityType( 'subitem' ) );
+		$this->assertEquals( $itemSource, $sourceDefinitions->getDatabaseSourceForEntityType( 'subitem' ) );
 	}
 
-	public function testGivenUnknownType_getSourceForEntityTypeReturnsNull() {
+	public function testGivenUnknownType_getDatabaseSourceForEntityTypeReturnsNull() {
 		$itemSource = $this->newItemSource();
 
 		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource ], new SubEntityTypesMapper( [] ) );
 
-		$this->assertNull( $sourceDefinitions->getSourceForEntityType( 'property' ) );
+		$this->assertNull( $sourceDefinitions->getDatabaseSourceForEntityType( 'property' ) );
 	}
 
 	public function testGetEntityTypeToSourceMapping() {

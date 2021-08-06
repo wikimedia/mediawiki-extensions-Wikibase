@@ -108,7 +108,7 @@ class EntityLinkTargetEntityIdLookupTest extends TestCase {
 			->willReturn( self::ITEM_SOURCE_INTERWIKI_PREFIX );
 
 		$sourceDefs = $this->createMock( EntitySourceDefinitions::class );
-		$sourceDefs->method( 'getSourceForEntityType' )
+		$sourceDefs->method( 'getDatabaseSourceForEntityType' )
 			->with( Item::ENTITY_TYPE )
 			->willReturn( $itemSource );
 

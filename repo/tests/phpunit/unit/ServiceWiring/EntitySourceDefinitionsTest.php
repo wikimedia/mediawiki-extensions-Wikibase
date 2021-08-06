@@ -53,7 +53,7 @@ class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 
 		if ( $sourceDefinitions instanceof EntitySourceDefinitions ) {
 
-			$itemSource = $sourceDefinitions->getSourceForEntityType( 'item' );
+			$itemSource = $sourceDefinitions->getDatabaseSourceForEntityType( 'item' );
 
 			$this->assertSame( 'local', $itemSource->getSourceName() );
 			$this->assertSame( 'http://example.com/entity/', $itemSource->getConceptBaseUri() );
@@ -89,7 +89,7 @@ class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 
 		if ( $sourceDefinitions instanceof EntitySourceDefinitions ) {
 
-			$itemSource = $sourceDefinitions->getSourceForEntityType( 'item' );
+			$itemSource = $sourceDefinitions->getDatabaseSourceForEntityType( 'item' );
 
 			$this->assertSame( 'local', $itemSource->getSourceName() );
 			$this->assertSame( 'http://localhost/entity/', $itemSource->getConceptBaseUri() );

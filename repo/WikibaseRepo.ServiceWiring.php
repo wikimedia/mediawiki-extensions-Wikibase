@@ -1252,7 +1252,7 @@ return [
 
 	'WikibaseRepo.ItemVocabularyBaseUri' => function ( MediaWikiServices $services ): string {
 		$itemSource = WikibaseRepo::getEntitySourceDefinitions( $services )
-			->getSourceForEntityType( Item::ENTITY_TYPE );
+			->getDatabaseSourceForEntityType( Item::ENTITY_TYPE );
 
 		if ( $itemSource === null ) {
 			throw new LogicException( 'No source providing Items configured!' );

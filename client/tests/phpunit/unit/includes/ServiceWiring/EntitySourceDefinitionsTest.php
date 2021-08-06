@@ -43,7 +43,7 @@ class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 		$entitySourceDefinitions = $this->getService( 'WikibaseClient.EntitySourceDefinitions' );
 
 		$this->assertInstanceOf( EntitySourceDefinitions::class, $entitySourceDefinitions );
-		$source = $entitySourceDefinitions->getSourceForEntityType( 'my-entity' );
+		$source = $entitySourceDefinitions->getDatabaseSourceForEntityType( 'my-entity' );
 		$this->assertSame( 'repo', $source->getDatabaseName() );
 		$this->assertSame( 'https://repo.example/', $source->getConceptBaseUri() );
 		$this->assertSame( 'repoiw', $source->getInterwikiPrefix() );

@@ -55,7 +55,7 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 		);
 
 		$propertySource = WikibaseRepo::getEntitySourceDefinitions()
-			->getSourceForEntityType( 'property' );
+			->getDatabaseSourceForEntityType( 'property' );
 
 		$builder = new PropertyInfoTableBuilder(
 			new PropertyInfoTable(

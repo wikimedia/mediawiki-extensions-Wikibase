@@ -467,7 +467,7 @@ return [
 
 	'WikibaseClient.ItemSource' => function ( MediaWikiServices $services ): EntitySource {
 		$itemSource = WikibaseClient::getEntitySourceDefinitions( $services )
-			->getSourceForEntityType( Item::ENTITY_TYPE );
+			->getDatabaseSourceForEntityType( Item::ENTITY_TYPE );
 
 		if ( $itemSource === null ) {
 			throw new LogicException( 'No source providing Items configured!' );
@@ -711,7 +711,7 @@ return [
 
 	'WikibaseClient.PropertySource' => function ( MediaWikiServices $services ): EntitySource {
 		$propertySource = WikibaseClient::getEntitySourceDefinitions( $services )
-			->getSourceForEntityType( Property::ENTITY_TYPE );
+			->getDatabaseSourceForEntityType( Property::ENTITY_TYPE );
 
 		if ( $propertySource === null ) {
 			throw new LogicException( 'No source providing Properties configured!' );

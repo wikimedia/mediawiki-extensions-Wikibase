@@ -167,7 +167,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	public static function rebuildPropertyTerms( DatabaseUpdater $updater ) {
 		$localEntitySourceName = WikibaseRepo::getSettings()->getSetting( 'localEntitySourceName' );
 		$propertySource = WikibaseRepo::getEntitySourceDefinitions()
-			->getSourceForEntityType( 'property' );
+			->getDatabaseSourceForEntityType( 'property' );
 		if ( $propertySource->getSourceName() !== $localEntitySourceName ) {
 			// Foreign properties, skip this part
 			return;
@@ -208,7 +208,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	public static function rebuildItemTerms( DatabaseUpdater $updater ) {
 		$localEntitySourceName = WikibaseRepo::getSettings()->getSetting( 'localEntitySourceName' );
 		$itemSource = WikibaseRepo::getEntitySourceDefinitions()
-			->getSourceForEntityType( 'item' );
+			->getDatabaseSourceForEntityType( 'item' );
 		if ( $itemSource->getSourceName() !== $localEntitySourceName ) {
 			// Foreign items, skip this part
 			return;
