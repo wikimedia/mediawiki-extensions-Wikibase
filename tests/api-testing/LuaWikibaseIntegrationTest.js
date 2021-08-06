@@ -299,14 +299,13 @@ describe( 'Lua Wikibase integration', () => {
 		const usageResponse = await action.getAnon().action( 'query', {
 			prop: 'wbentityusage',
 			titles: pageTitle,
-			indexpageids: true,
+			formatversion: 2,
 		} );
-		const pageId = usageResponse.query.pageids[ 0 ];
-		if ( !usageResponse.query.pages[ pageId ].wbentityusage ) {
+		if ( !usageResponse.query.pages[ 0 ].wbentityusage ) {
 			// TODO: replace with optional chaning as soon as CI is on Node.js v14
 			return null;
 		}
-		return usageResponse.query.pages[ pageId ].wbentityusage[ itemId ].aspects;
+		return usageResponse.query.pages[ 0 ].wbentityusage[ itemId ].aspects;
 	}
 
 } );
