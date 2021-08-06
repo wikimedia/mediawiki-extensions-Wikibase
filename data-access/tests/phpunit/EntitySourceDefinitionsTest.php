@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
@@ -111,6 +112,34 @@ class EntitySourceDefinitionsTest extends TestCase {
 		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource, $propertySource ], new SubEntityTypesMapper( [] ) );
 
 		$this->assertEquals( [ 'items' => '', 'properties' => 'pro' ], $sourceDefinitions->getRdfPredicateNamespacePrefixes() );
+	}
+
+	public function testGivenFedPropsSource_getApiSourceForEntityTypeReturnsSource(): void {
+		$fedPropSource = NewEntitySource::havingName( 'feddy-props' )
+			->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 122, 'slot' => 'main' ] ] )
+			->withType( EntitySource::TYPE_API )
+			->build();
+
+		$sourceDefinitions = new EntitySourceDefinitions( [
+			$this->newItemSource(),
+			$fedPropSource,
+		], new SubEntityTypesMapper( [] ) );
+
+		$this->assertSame(
+			$fedPropSource,
+			$sourceDefinitions->getApiSourceForEntityType( Property::ENTITY_TYPE )
+		);
+	}
+
+	public function testGivenNoFedPropsSource_getApiSourceForEntityTypeReturnsNull(): void {
+		$sourceDefinitions = new EntitySourceDefinitions( [
+			$this->newItemSource(),
+			$this->newPropertySource(),
+		], new SubEntityTypesMapper( [] ) );
+
+		$this->assertNull(
+			$sourceDefinitions->getApiSourceForEntityType( Property::ENTITY_TYPE )
+		);
 	}
 
 	private function newItemSource() {

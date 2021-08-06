@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
@@ -56,7 +57,7 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParserTest extends TestCas
 		$parser = new FederatedPropertiesEntitySourceDefinitionsConfigParser( $settings );
 		$newSourceDefinitions = $parser->initializeDefaults( $sourceDefinitions, $subEntityTypesMapper );
 
-		$propertySource = $this->getFedPropsSource( $newSourceDefinitions );
+		$propertySource = $newSourceDefinitions->getApiSourceForEntityType( Property::ENTITY_TYPE );
 
 		$this->assertSame( 'fedprops', $propertySource->getSourceName() );
 		$this->assertSame( 'http://www.wikidata.org/entity/', $propertySource->getConceptBaseUri() );
@@ -134,15 +135,5 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParserTest extends TestCas
 		'federatedPropertiesSourceScriptUrl' => 'https://www.wikidata.org/w/',
 		'localEntitySourceName' => 'local'
 	];
-
-	private function getFedPropsSource( EntitySourceDefinitions $sourceDefinitions ): EntitySource {
-		foreach ( $sourceDefinitions->getSources() as $source ) {
-			if ( $source->getType() === EntitySource::TYPE_API && in_array( 'property', $source->getEntityTypes() ) ) {
-				return $source;
-			}
-		}
-
-		throw new \LogicException( 'No federated properties source defined.' );
-	}
 
 }
