@@ -146,7 +146,7 @@ describe( 'Lua Wikibase integration', () => {
 
 	it( 'getLabel can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( `{{#invoke:${module}|getLabel|${testItemId}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${module}|getLabel|${testItemId}}}`, pageTitle );
 		const pageResponse = await parsePage( pageTitle );
 		assert.match( pageResponse.parse.text, new RegExp( englishLabel + '|' + germanLabel ) );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
@@ -158,7 +158,7 @@ describe( 'Lua Wikibase integration', () => {
 
 	it( 'getLabel returns the label of the redirect target for a redirected item', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageForRedirectsToParse-' );
-		await writeTextToPage( `{{#invoke:${module}|getLabel|${redirectedItemId}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${module}|getLabel|${redirectedItemId}}}`, pageTitle );
 		const pageResponse = await parsePage( pageTitle );
 		assert.match( pageResponse.parse.text, new RegExp( englishLabel + '|' + germanLabel ) );
 		const usageAspects = await getUsageAspects( pageTitle, redirectedItemId );
@@ -169,13 +169,13 @@ describe( 'Lua Wikibase integration', () => {
 	// otherwise it still passes but doesn’t test anything in particular
 	it( 'getLabel can be invoked correctly with strange uselang query param', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( `{{#invoke:${module}|getLabel}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${module}|getLabel}}`, pageTitle );
 		await parsePage( pageTitle, { uselang: '⧼Lang⧽' } ); // should not throw
 	} );
 
 	it( 'getLabelByLang can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( `{{#invoke:${module}|getLabelByLang|${testItemId}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${module}|getLabelByLang|${testItemId}}}`, pageTitle );
 		const pageResponse = await parsePage( pageTitle );
 		assert.equal( pageResponse.parse.text, `<p>${englishLabel}\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
@@ -194,7 +194,7 @@ describe( 'Lua Wikibase integration', () => {
 		].forEach( ( [ testLabel, luaTestMethod, expectedAspect ] ) => {
 			it( testLabel, async () => {
 				const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-				await writeTextToPage( `{{#invoke:${module}|${luaTestMethod}}}`, pageTitle );
+				await writeTextToPage( mindy, `{{#invoke:${module}|${luaTestMethod}}}`, pageTitle );
 				const pageResponse = await parsePage( pageTitle );
 				assert.equal( pageResponse.parse.text, '' );
 				const usageAspects = await getUsageAspects( pageTitle, testItemId );
@@ -206,14 +206,14 @@ describe( 'Lua Wikibase integration', () => {
 
 	it( 'getLabelByLang returns the label of the redirect target for a redirected item', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageForRedirectsToParse-' );
-		await writeTextToPage( `{{#invoke:${module}|getLabelByLang|${redirectedItemId}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${module}|getLabelByLang|${redirectedItemId}}}`, pageTitle );
 		const pageResponse = await parsePage( pageTitle );
 		assert.equal( pageResponse.parse.text, `<p>${englishLabel}\n</p>` );
 	} );
 
 	it( 'getEntity_claims can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( `{{#invoke:${module}|getEntity_claims|${testPropertyId}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${module}|getEntity_claims|${testPropertyId}}}`, pageTitle );
 		const response = await parsePage( pageTitle );
 		assert.equal( response.parse.text, `<p>${examplePropertyValue}\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
@@ -222,7 +222,7 @@ describe( 'Lua Wikibase integration', () => {
 
 	it( 'getEntity_claims can be invoked not yet existing property', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( `{{#invoke:${module}|getEntity_claims|${testPropertyId + '1'}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${module}|getEntity_claims|${testPropertyId + '1'}}}`, pageTitle );
 		const response = await parsePage( pageTitle );
 		assert.equal( response.parse.text, '' );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
@@ -231,7 +231,7 @@ describe( 'Lua Wikibase integration', () => {
 
 	it( 'getEntity_aliases can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( `{{#invoke:${module}|getEntity_aliases}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${module}|getEntity_aliases}}`, pageTitle );
 		const response = await parsePage( pageTitle );
 		assert.equal( response.parse.text, `<p>${englishLabel + '-redirected'}\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
@@ -240,7 +240,7 @@ describe( 'Lua Wikibase integration', () => {
 
 	it( 'getEntity_labels can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( `{{#invoke:${module}|getEntity_labels}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${module}|getEntity_labels}}`, pageTitle );
 		const response = await parsePage( pageTitle );
 		assert.equal( response.parse.text, `<p>${germanLabel}\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
@@ -249,7 +249,7 @@ describe( 'Lua Wikibase integration', () => {
 
 	it( 'getDescription can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( `{{#invoke:${module}|getDescription}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${module}|getDescription}}`, pageTitle );
 		const response = await parsePage( pageTitle );
 		assert.equal( response.parse.text, `<p>${englishDescription}\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
@@ -261,7 +261,7 @@ describe( 'Lua Wikibase integration', () => {
 
 	it( 'formatValue can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( `{{#invoke:${module}|formatItemIdValue|${testItemId}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${module}|formatItemIdValue|${testItemId}}}`, pageTitle );
 		const response = await parsePage( pageTitle );
 		assert.match( response.parse.text, new RegExp( englishLabel + '|' + germanLabel ) );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
@@ -275,14 +275,14 @@ describe( 'Lua Wikibase integration', () => {
 
 	it( 'formatValue uses the label of the redirect target for a redirected item', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( `{{#invoke:${module}|formatItemIdValue|${redirectedItemId}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${module}|formatItemIdValue|${redirectedItemId}}}`, pageTitle );
 		const response = await parsePage( pageTitle );
 		assert.match( response.parse.text, new RegExp( englishLabel + '|' + germanLabel ) );
 		// TODO usage tracking for redirects: T280910
 	} );
 
-	function writeTextToPage( text, pageTitle ) {
-		return action.getAnon().edit( pageTitle, { text }, 'post' );
+	function writeTextToPage( user, text, pageTitle ) {
+		return user.edit( pageTitle, { text }, 'post' );
 	}
 
 	function parsePage( pageTitle, extraParams = {} ) {
