@@ -102,7 +102,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Enkele verklaringen",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Verklaring: $1",
 	"wikibase-pageinfo-entity-usage-X": "Alle entiteitsgegevens",
-	"wikibase-pageinfo-entity-usage-O": "Overige (verklaringen)",
+	"wikibase-pageinfo-entity-usage-O": "Anders (bv. aliassen, bestaan van entiteiten)",
 	"wikibase-property-render-error": "Het verwerken van de eigenschap $1 is mislukt: $2",
 	"wikibase-otherprojects": "In andere projecten",
 	"wikibase-otherprojects-beta-message": "Zijbalk andere projecten",

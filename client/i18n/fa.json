@@ -103,7 +103,7 @@
 	"wikibase-pageinfo-entity-usage-C": "چندی اظهارنظر",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "اظهارنظر: $1",
 	"wikibase-pageinfo-entity-usage-X": "همهٔ اطلاعات هویتی",
-	"wikibase-pageinfo-entity-usage-O": "دیگر (اظهارات)",
+	"wikibase-pageinfo-entity-usage-O": "متفرقه (مثلاً نام‌های مستعار، وجود موجودیت)",
 	"wikibase-property-render-error": "خطا در ارائهٔ خصوصیت  $1: $2",
 	"wikibase-otherprojects": "در دیگر پروژه‌ها",
 	"wikibase-otherprojects-beta-message": "نوار کناری سایر پروژه‌ها",

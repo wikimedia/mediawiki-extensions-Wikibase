@@ -74,7 +74,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Nekatere izjave",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Izjava: $1",
 	"wikibase-pageinfo-entity-usage-X": "Vsi podatki objekta",
-	"wikibase-pageinfo-entity-usage-O": "Drugo (izjave)",
+	"wikibase-pageinfo-entity-usage-O": "Mešano (npr. vzdevki, obstoj entitete)",
 	"wikibase-property-render-error": "Upodobitev lastnosti $1 je spodletela: $2",
 	"wikibase-otherprojects": "V drugih projektih",
 	"wikibase-sitelinks-sitename-columnheading": "Jezik",

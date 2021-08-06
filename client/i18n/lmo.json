@@ -92,7 +92,7 @@
 	"wikibase-pageinfo-entity-usage-C": "'Na quai deciarazzion",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Dichiarazzion: $1",
 	"wikibase-pageinfo-entity-usage-X": "Tut i dati de l'entità",
-	"wikibase-pageinfo-entity-usage-O": "Alter (deciarazzion)",
+	"wikibase-pageinfo-entity-usage-O": "Vari (per esempi alias, entità esistenza)",
 	"wikibase-property-render-error": "Rapresentazzion de la propiretà $1 fallada: $2",
 	"wikibase-otherprojects": "In di alter proget",
 	"wikibase-otherprojects-beta-message": "Sbarra de fianch di alter proget",
