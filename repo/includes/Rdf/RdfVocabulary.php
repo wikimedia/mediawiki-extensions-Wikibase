@@ -279,7 +279,7 @@ class RdfVocabulary {
 		}
 
 		$this->sourceNameByEntityType = [];
-		foreach ( $entitySourceDefinitions->getEntityTypeToSourceMapping() as $entityType => $source ) {
+		foreach ( $entitySourceDefinitions->getEntityTypeToDatabaseSourceMapping() as $entityType => $source ) {
 			$this->sourceNameByEntityType[$entityType] = $source->getSourceName();
 		}
 

@@ -55,7 +55,7 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 			$lookupsPerType = [];
 
 			/** @var EntitySource $source */
-			foreach ( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() as $entityType => $source ) {
+			foreach ( $this->entitySourceDefinitions->getEntityTypeToDatabaseSourceMapping() as $entityType => $source ) {
 				$lookupsPerType[$entityType] = $this->singleSourceServices[$source->getSourceName()]->getEntityRevisionLookup();
 			}
 
@@ -70,7 +70,7 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 			$prefetchersByType = [];
 
 			/** @var EntitySource $source */
-			foreach ( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() as $entityType => $source ) {
+			foreach ( $this->entitySourceDefinitions->getEntityTypeToDatabaseSourceMapping() as $entityType => $source ) {
 				$prefetchersByType[$entityType] = $this->singleSourceServices[$source->getSourceName()]->getEntityPrefetcher();
 			}
 
