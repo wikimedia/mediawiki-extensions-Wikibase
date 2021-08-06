@@ -51,11 +51,12 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParserTest extends TestCas
 		EntitySourceDefinitions $sourceDefinitions,
 		SubEntityTypesMapper $subEntityTypesMapper,
 		SettingsArray $settings,
-		array $expectedEntitySourceArray ) {
+		array $expectedEntitySourceArray
+	) {
 		$parser = new FederatedPropertiesEntitySourceDefinitionsConfigParser( $settings );
 		$newSourceDefinitions = $parser->initializeDefaults( $sourceDefinitions, $subEntityTypesMapper );
 
-		$propertySource = $newSourceDefinitions->getSourceForEntityType( 'property' );
+		$propertySource = $this->getFedPropsSource( $newSourceDefinitions );
 
 		$this->assertSame( 'fedprops', $propertySource->getSourceName() );
 		$this->assertSame( 'http://www.wikidata.org/entity/', $propertySource->getConceptBaseUri() );
@@ -72,7 +73,7 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParserTest extends TestCas
 		}
 	}
 
-	public function getDefaultEntitySource( array $namespaceDefinition, $sourceName = 'local' ) {
+	private function getDefaultEntitySource( array $namespaceDefinition, $sourceName = 'local' ) {
 		return new EntitySource(
 			$sourceName,
 			false,
@@ -133,5 +134,15 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParserTest extends TestCas
 		'federatedPropertiesSourceScriptUrl' => 'https://www.wikidata.org/w/',
 		'localEntitySourceName' => 'local'
 	];
+
+	private function getFedPropsSource( EntitySourceDefinitions $sourceDefinitions ): EntitySource {
+		foreach ( $sourceDefinitions->getSources() as $source ) {
+			if ( $source->getType() === EntitySource::TYPE_API && in_array( 'property', $source->getEntityTypes() ) ) {
+				return $source;
+			}
+		}
+
+		throw new \LogicException( 'No federated properties source defined.' );
+	}
 
 }

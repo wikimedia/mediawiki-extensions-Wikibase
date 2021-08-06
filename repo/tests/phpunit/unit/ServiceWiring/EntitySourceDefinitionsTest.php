@@ -4,6 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use LogicException;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -98,7 +100,7 @@ class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 			$this->assertSame( [ 'item' => 'main' ], $itemSource->getEntitySlotNames() );
 			$this->assertSame( [ 'item' ], $itemSource->getEntityTypes() );
 
-			$propertySource = $sourceDefinitions->getSourceForEntityType( 'property' );
+			$propertySource = $this->getFedPropsSource( $sourceDefinitions );
 
 			$this->assertSame( 'fedprops', $propertySource->getSourceName() );
 			$this->assertSame( 'http://www.wikidata.org/entity/', $propertySource->getConceptBaseUri() );
@@ -110,4 +112,15 @@ class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 			$this->assertSame( [ 'property' ], $propertySource->getEntityTypes() );
 		}
 	}
+
+	private function getFedPropsSource( EntitySourceDefinitions $sourceDefinitions ): EntitySource {
+		foreach ( $sourceDefinitions->getSources() as $source ) {
+			if ( $source->getType() === EntitySource::TYPE_API && in_array( 'property', $source->getEntityTypes() ) ) {
+				return $source;
+			}
+		}
+
+		throw new LogicException( 'No federated properties source defined.' );
+	}
+
 }

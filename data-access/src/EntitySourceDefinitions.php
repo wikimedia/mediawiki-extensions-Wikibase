@@ -104,6 +104,23 @@ class EntitySourceDefinitions {
 	}
 
 	/**
+	 * Same as getSourceForEntityType.
+	 * @todo Replace all occurrences of getSourceForEntityType with getDatabaseSourceForEntityType
+	 * @param string $entityType Entity type or sub type
+	 * @return EntitySource|null EntitySource or null if no EntitySource configured for the type
+	 */
+	public function getDatabaseSourceForEntityType( string $entityType ): ?EntitySource {
+		$entityType = $this->subEntityTypesMapper->getParentEntityType( $entityType ) ?? $entityType;
+
+		$entityTypeToSourceMapping = $this->getEntityTypeToSourceMapping();
+		if ( array_key_exists( $entityType, $entityTypeToSourceMapping ) ) {
+			return $entityTypeToSourceMapping[$entityType];
+		}
+
+		return null;
+	}
+
+	/**
 	 * @return EntitySource[]
 	 */
 	public function getEntityTypeToSourceMapping() {
@@ -116,9 +133,11 @@ class EntitySourceDefinitions {
 	private function buildEntityTypeToSourceMapping() {
 		$this->entityTypeToSourceMapping = [];
 		foreach ( $this->sources as $source ) {
-			$entityTypes = $source->getEntityTypes();
-			foreach ( $entityTypes as $type ) {
-				$this->entityTypeToSourceMapping[$type] = $source;
+			if ( $source->getType() === EntitySource::TYPE_DB ) {
+				$entityTypes = $source->getEntityTypes();
+				foreach ( $entityTypes as $type ) {
+					$this->entityTypeToSourceMapping[$type] = $source;
+				}
 			}
 		}
 		foreach ( $this->entityTypeToSourceMapping as $mainEntityType => $source ) {
