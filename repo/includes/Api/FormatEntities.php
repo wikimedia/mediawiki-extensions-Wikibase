@@ -23,6 +23,7 @@ use Wikibase\View\EntityIdFormatterFactory;
  * API module for formatting a set of entity IDs.
  *
  * @license GPL-2.0-or-later
+ * @phan-file-suppress PhanParamSignatureRealMismatchParamType Remex namespace migration
  */
 class FormatEntities extends ApiBase {
 
