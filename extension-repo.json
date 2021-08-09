@@ -785,12 +785,6 @@
 				"WikibaseRepo.EntityIdLookup"
 			]
 		},
-		"FederatedPropertiesSpecialPage": {
-			"class": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler",
-			"services": [
-				"WikibaseRepo.Settings"
-			]
-		},
 		"HtmlPageLinkRendererEnd": {
 			"class": "\\Wikibase\\Repo\\Hooks\\HtmlPageLinkRendererEndHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\HtmlPageLinkRendererEndHookHandler::factory",
@@ -934,7 +928,6 @@
 		"ShowSearchHitTitle": "ShowSearchHit",
 		"SidebarBeforeOutput": "\\Wikibase\\Repo\\RepoHooks::onSidebarBeforeOutput",
 		"SkinTemplateNavigation::Universal": "\\Wikibase\\Repo\\RepoHooks::onSkinTemplateNavigationUniversal",
-		"SpecialPage_initList": "FederatedPropertiesSpecialPage",
 		"SpecialPage_reorderPages": "\\Wikibase\\Repo\\RepoHooks::onSpecialPageReorderPages",
 		"TitleGetRestrictionTypes": "\\Wikibase\\Repo\\RepoHooks::onTitleGetRestrictionTypes",
 		"UnitTestsList": [
