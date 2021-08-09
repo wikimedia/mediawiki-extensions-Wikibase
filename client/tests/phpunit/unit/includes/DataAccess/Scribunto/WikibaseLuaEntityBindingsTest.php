@@ -7,6 +7,7 @@ use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaEntityBindings;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\Statement;
@@ -49,6 +50,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit\Framework\TestCase {
 			$plainTextTransclusionInteractor,
 			$richWikitextTransclusionInteractor,
 			new BasicEntityIdParser(),
+			WikibaseClient::getTermsLanguages(),
 			Language::factory( 'es' ),
 			$usageAccumulator ?: new HashUsageAccumulator(),
 			'enwiki'
