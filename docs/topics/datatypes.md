@@ -60,10 +60,6 @@ The data type definitions themselves are wrapped by a [DataTypeDefinitions] obje
 
 [WikibaseRepo] also has [WikibaseRepo::getDataTypeValidatorFactory()] which returns a [DataTypeValidatorFactory] for obtaining the validators for each data type.
 
-## Caveats
-
-* **FIXME**  * the Methods <code>getSnakFormatterFactory()</code> does not yet use <code>$wgWikibaseDataTypeDefinitions</code>.
-
 [DataTypeDefinitions]: @ref Wikibase::Lib::DataTypeDefinitions
 [DataTypeFactory]: @ref Wikibase::Lib::DataTypeFactory
 [WikibaseRepo]: @ref Wikibase::Repo::WikibaseRepo
