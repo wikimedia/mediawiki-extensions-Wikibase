@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ladsgroup",
+			"Narazeni",
 			"Silovan"
 		]
 	},
@@ -10,8 +11,8 @@
 	"wikibase-label-empty": "ჯოხო ვარე გოთანჯილი",
 	"wikibase-description-empty": "ეჭარუა ვა რე გოთანჯილი",
 	"wikibase-statementsection-statements": "ფაქტეფი",
-	"wikibase-sitelinks": "საიტიშ რცხუეფი",
-	"wikibase-sitelinks-special": "შხვა საიტეფი",
+	"wikibase-sitelinks": "ვებ-ხასჷლაშ რსხილეფი",
+	"wikibase-sitelinks-special": "შხვა ვებ-ხასჷლეფი",
 	"wikibase-statementview-rank-normal": "ნორმალური რანგი",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|სქოლიო|სქოლიო}}"
 }

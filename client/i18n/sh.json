@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"BadDog",
 			"Conquistador",
 			"Kolega2357",
 			"OC Ripper",
@@ -17,7 +18,7 @@
 	"wikibase-rc-hide-wikidata-hide": "Sakrij",
 	"wikibase-rc-hide-wikidata-show": "Prikaži",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} uređivanje",
+	"wikibase-rc-wikibase-edit-title": "Izmjena na Wikipodacima",
 	"wikibase-otherprojects": "Na drugim projektima",
 	"wikibase-otherprojects-beta-message": "Bočna traka drugih projekata"
 }

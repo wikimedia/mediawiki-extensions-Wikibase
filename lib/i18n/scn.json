@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajeje Brazorf",
 			"Gmelfi",
 			"Pippinu",
 			"Sarvaturi"
@@ -29,7 +30,7 @@
 	"wikibase-timedetails-precision": "Pricisioni",
 	"wikibase-timedetails-before": "Avanti",
 	"wikibase-timedetails-after": "Appressu",
-	"wikibase-globedetails-longitude": "Luncitùdini",
+	"wikibase-globedetails-longitude": "Loncitùdini",
 	"wikibase-globedetails-latitude": "Latitùdini",
 	"wikibase-globedetails-precision": "Pricisioni",
 	"wikibase-globedetails-globe": "Globbu",

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajeje Brazorf",
 			"Amire80",
 			"Gmelfi",
 			"Ladsgroup",
@@ -317,5 +318,6 @@
 	"action-property-create": "criari prupietà",
 	"right-property-create": "Criari prupità",
 	"wikibase-entity-not-viewable-title": "Nun currispunni lu tipu dû cuntinutu: Nun si pò ammustrari lu cuntinutu",
-	"wikibase-entity-not-viewable": "Lu cuntinutu spicificatu di tipu \"$1\" nun è na Ntità e nun si pò ammustrari nta Wikibase."
+	"wikibase-entity-not-viewable": "Lu cuntinutu spicificatu di tipu \"$1\" nun è na Ntità e nun si pò ammustrari nta Wikibase.",
+	"wikibase-pageinfo-subscription-none": "Nuddu"
 }
