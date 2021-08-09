@@ -7,6 +7,7 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Logger\LoggerFactory;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\DataTypeDefinitions;
 
 /**
@@ -85,12 +86,10 @@ class ApiServiceFactory {
 	}
 
 	public function newApiEntitySearchHelper(): ApiEntitySearchHelper {
-		$apiSources = new ApiEntitySources( $this->entitySourceDefinitions );
-
 		return new ApiEntitySearchHelper(
 			$this->newFederatedPropertiesApiClient(),
 			$this->dataTypeDefinitions->getTypeIds(),
-			$apiSources->getApiPropertySource()
+			$this->entitySourceDefinitions->getApiSourceForEntityType( Property::ENTITY_TYPE )
 		);
 	}
 

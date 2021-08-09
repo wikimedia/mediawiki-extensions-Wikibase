@@ -101,6 +101,21 @@ class EntitySourceDefinitions {
 	}
 
 	/**
+	 * As of Federated Properties v2 there is only one source of federation per entity type, so returning a single EntitySource is ok.
+	 */
+	public function getApiSourceForEntityType( string $entityType ): ?EntitySource {
+		$entityType = $this->subEntityTypesMapper->getParentEntityType( $entityType ) ?? $entityType;
+
+		foreach ( $this->sources as $source ) {
+			if ( $source->getType() === EntitySource::TYPE_API && in_array( $entityType, $source->getEntityTypes() ) ) {
+				return $source;
+			}
+		}
+
+		return null;
+	}
+
+	/**
 	 * @return EntitySource[]
 	 */
 	public function getEntityTypeToDatabaseSourceMapping() {
