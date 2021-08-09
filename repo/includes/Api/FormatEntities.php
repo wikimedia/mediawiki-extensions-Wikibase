@@ -7,23 +7,22 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use IBufferingStatsdDataFactory;
-use RemexHtml\HTMLData;
-use RemexHtml\Serializer\HtmlFormatter;
-use RemexHtml\Serializer\Serializer;
-use RemexHtml\Serializer\SerializerNode;
-use RemexHtml\Tokenizer\Tokenizer;
-use RemexHtml\TreeBuilder\Dispatcher;
-use RemexHtml\TreeBuilder\TreeBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\View\EntityIdFormatterFactory;
+use Wikimedia\RemexHtml\HTMLData;
+use Wikimedia\RemexHtml\Serializer\HtmlFormatter;
+use Wikimedia\RemexHtml\Serializer\Serializer;
+use Wikimedia\RemexHtml\Serializer\SerializerNode;
+use Wikimedia\RemexHtml\Tokenizer\Tokenizer;
+use Wikimedia\RemexHtml\TreeBuilder\Dispatcher;
+use Wikimedia\RemexHtml\TreeBuilder\TreeBuilder;
 
 /**
  * API module for formatting a set of entity IDs.
  *
  * @license GPL-2.0-or-later
- * @phan-file-suppress PhanParamSignatureRealMismatchParamType Remex namespace migration
  */
 class FormatEntities extends ApiBase {
 
