@@ -79,7 +79,7 @@ The entity types repository is an associative array mapping entity type identifi
 * search-field-definitions (repo only)
   * Field definitions for search indexing
 * lua-entity-module (optional) (client only)
-  * The name of a Lua module that should be used to represent entities of this type. The module must expose a create() function* mw.wikibase.getEntity() will call this function with a clone of the entity data and return its result. If this is not specified, the standard mw.wikibase.entity module is used.
+  * The name of a Lua module that should be used to represent entities of this type. The module must expose a create() function; mw.wikibase.getEntity() will call this function with a clone of the entity data and return its result. If this is not specified, the standard mw.wikibase.entity module is used.
 * entity-id-lookup-callback (client only)
   * A callback for creating an [EntityIdLookup] to resolve Title instances to EntityIds for entities of this types
 * prefetching-term-lookup-callback
