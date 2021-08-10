@@ -306,6 +306,9 @@ return call_user_func( function() {
 			'search-index-data-formatter-callback' => function ( StringValue $value ) {
 				return $value->getValue();
 			},
+			'normalizer-factory-callback' => static function () {
+				return WikibaseRepo::getStringValueNormalizer();
+			},
 		],
 		'VT:time' => [
 			'expert-module' => 'jquery.valueview.experts.TimeInput',
