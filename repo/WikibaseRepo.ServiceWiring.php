@@ -86,6 +86,7 @@ use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
+use Wikibase\Lib\Normalization\ReferenceNormalizer;
 use Wikibase\Lib\Normalization\SnakNormalizer;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
@@ -1580,6 +1581,10 @@ return [
 			$repoSettings->getSetting( 'pagePropertiesRdf' ) ?: [],
 			$repoSettings->getSetting( 'rdfDataRightsUrl' )
 		);
+	},
+
+	'WikibaseRepo.ReferenceNormalizer' => function ( MediaWikiServices $services ): ReferenceNormalizer {
+		return new ReferenceNormalizer( WikibaseRepo::getSnakNormalizer( $services ) );
 	},
 
 	'WikibaseRepo.RepoDomainDbFactory' => function ( MediaWikiServices $services ): RepoDomainDbFactory {
