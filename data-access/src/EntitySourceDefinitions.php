@@ -81,7 +81,10 @@ class EntitySourceDefinitions {
 		}
 	}
 
-	public function getSources() {
+	/**
+	 * @return EntitySource[]
+	 */
+	public function getSources(): array {
 		return $this->sources;
 	}
 

@@ -173,8 +173,8 @@ use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\EntityTypesConfigFeddyPropsAugmenter;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\BaseUriExtractor;
+use Wikibase\Repo\FederatedProperties\DefaultFederatedPropertiesEntitySourceAdder;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesAwareDispatchingEntityIdParser;
-use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 use Wikibase\Repo\FederatedProperties\WrappingEntityIdFormatterFactory;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -962,16 +962,13 @@ return [
 			$subEntityTypesMapper
 		);
 
-		if ( count( $entitySourceDefinitions->getSources() ) === 1 && $settings->getSetting( 'federatedPropertiesEnabled' ) ) {
-			$configParser = new FederatedPropertiesEntitySourceDefinitionsConfigParser( $settings );
+		$fedPropsSourceAdder = new DefaultFederatedPropertiesEntitySourceAdder(
+			$settings->getSetting( 'federatedPropertiesEnabled' ),
+			$settings->getSetting( 'federatedPropertiesSourceScriptUrl' ),
+			$subEntityTypesMapper
+		);
 
-			return $configParser->initializeDefaults(
-				$entitySourceDefinitions,
-				$subEntityTypesMapper
-			);
-		}
-
-		return $entitySourceDefinitions;
+		return $fedPropsSourceAdder->addDefaultIfRequired( $entitySourceDefinitions );
 	},
 
 	'WikibaseRepo.EntitySourceLookup' => function ( MediaWikiServices $services ): EntitySourceLookup {
