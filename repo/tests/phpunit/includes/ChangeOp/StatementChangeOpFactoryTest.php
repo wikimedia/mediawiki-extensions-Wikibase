@@ -2,13 +2,17 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
+use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOpMainSnak;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\StatementChangeOpFactory
@@ -33,7 +37,11 @@ class StatementChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 			$mockProvider->getMockGuidValidator(),
 			$mockProvider->getMockGuidParser( $entityId ),
 			$mockProvider->getMockSnakValidator(),
-			$mockProvider->getMockSnakValidator()
+			$mockProvider->getMockSnakValidator(),
+			$mockProvider->getMockSnakNormalizer(),
+			$mockProvider->getMockReferenceNormalizer(),
+			$mockProvider->getMockStatementNormalizer(),
+			true
 		);
 	}
 
@@ -84,6 +92,17 @@ class StatementChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testNewSetStatementRankOp() {
 		$op = $this->newChangeOpFactory()->newSetStatementRankOp( 'DEADBEEF', Statement::RANK_NORMAL );
 		$this->assertInstanceOf( ChangeOp::class, $op );
+	}
+
+	public function testNormalize(): void {
+		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a string' ) );
+
+		$op = $this->newChangeOpFactory()->newSetMainSnakOp( 'DEADBEEF', $snak );
+
+		$this->assertInstanceOf( ChangeOpMainSnak::class, $op );
+		$value = TestingAccessWrapper::newFromObject( $op )->snak->getDataValue();
+		$this->assertInstanceOf( StringValue::class, $value );
+		$this->assertSame( 'A STRING', $value->getValue() );
 	}
 
 }

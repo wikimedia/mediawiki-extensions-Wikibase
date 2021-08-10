@@ -6,6 +6,9 @@ use SiteLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
+use Wikibase\Lib\Normalization\ReferenceNormalizer;
+use Wikibase\Lib\Normalization\SnakNormalizer;
+use Wikibase\Lib\Normalization\StatementNormalizer;
 use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
@@ -56,10 +59,22 @@ class ChangeOpFactoryProvider {
 	 */
 	private $siteLookup;
 
+	/** @var SnakNormalizer */
+	private $snakNormalizer;
+
+	/** @var ReferenceNormalizer */
+	private $referenceNormalizer;
+
+	/** @var StatementNormalizer */
+	private $statementNormalizer;
+
 	/**
 	 * @var string[]
 	 */
 	private $allowedBadgeItemIds;
+
+	/** @var bool */
+	private $normalize;
 
 	/**
 	 * @param EntityConstraintProvider $constraintProvider
@@ -79,7 +94,11 @@ class ChangeOpFactoryProvider {
 		SnakValidator $snakValidator,
 		TermValidatorFactory $termValidatorFactory,
 		SiteLookup $siteLookup,
-		array $allowedBadgeItemIds
+		SnakNormalizer $snakNormalizer,
+		ReferenceNormalizer $referenceNormalizer,
+		StatementNormalizer $statementNormalizer,
+		array $allowedBadgeItemIds,
+		bool $normalize
 	) {
 		$this->constraintProvider = $constraintProvider;
 
@@ -92,7 +111,12 @@ class ChangeOpFactoryProvider {
 
 		$this->siteLookup = $siteLookup;
 
+		$this->snakNormalizer = $snakNormalizer;
+		$this->referenceNormalizer = $referenceNormalizer;
+		$this->statementNormalizer = $statementNormalizer;
+
 		$this->allowedBadgeItemIds = $allowedBadgeItemIds;
+		$this->normalize = $normalize;
 	}
 
 	/**
@@ -113,7 +137,11 @@ class ChangeOpFactoryProvider {
 			$this->guidValidator,
 			$this->guidParser,
 			$this->snakValidator,
-			$this->snakValidator
+			$this->snakValidator,
+			$this->snakNormalizer,
+			$this->referenceNormalizer,
+			$this->statementNormalizer,
+			$this->normalize
 		);
 	}
 

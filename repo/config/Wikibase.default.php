@@ -406,4 +406,13 @@ return [
 	 * @see https://phabricator.wikimedia.org/T286774
 	 */
 	'specialPageTags' => [],
+
+	/**
+	 * @note This config options is primarily added for Wikidata transition use-case and can be
+	 * considered temporary. It could be removed in the future with no warning.
+	 *
+	 * @var bool Whether to normalize data values when saving edits
+	 * @see https://phabricator.wikimedia.org/T251480
+	 */
+	'tmpNormalizeDataValues' => false,
 ];

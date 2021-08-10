@@ -9,6 +9,7 @@ use OutOfBoundsException;
 use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
@@ -16,6 +17,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
@@ -25,6 +27,10 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Lib\DataType;
 use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\Normalization\DataValueNormalizer;
+use Wikibase\Lib\Normalization\ReferenceNormalizer;
+use Wikibase\Lib\Normalization\SnakNormalizer;
+use Wikibase\Lib\Normalization\StatementNormalizer;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Validators\CompositeValidator;
@@ -378,6 +384,32 @@ class ChangeOpTestMockProvider {
 			);
 
 		return $mock;
+	}
+
+	/** A mock snak normalizer which uppercases all string values. */
+	public function getMockSnakNormalizer(): SnakNormalizer {
+		return new SnakNormalizer( new InMemoryDataTypeLookup(), new NullLogger(), [
+			'VT:string' => function () {
+				$normalizer = $this->createMock( DataValueNormalizer::class );
+				$normalizer->method( 'normalize' )
+					->willReturnCallback( static function ( DataValue $value ) {
+						if ( $value instanceof StringValue ) {
+							return new StringValue( strtoupper( $value->getValue() ) );
+						} else {
+							return $value;
+						}
+					} );
+				return $normalizer;
+			},
+		] );
+	}
+
+	public function getMockReferenceNormalizer(): ReferenceNormalizer {
+		return new ReferenceNormalizer( $this->getMockSnakNormalizer() );
+	}
+
+	public function getMockStatementNormalizer(): StatementNormalizer {
+		return new StatementNormalizer( $this->getMockSnakNormalizer(), $this->getMockReferenceNormalizer() );
 	}
 
 }

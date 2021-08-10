@@ -58,7 +58,11 @@ class ChangeOpFactoryProviderTest extends \PHPUnit\Framework\TestCase {
 			$this->mockProvider->getMockSnakValidator(),
 			$this->mockProvider->getMockTermValidatorFactory(),
 			new HashSiteStore( TestSites::getSites() ),
-			[]
+			$this->mockProvider->getMockSnakNormalizer(),
+			$this->mockProvider->getMockReferenceNormalizer(),
+			$this->mockProvider->getMockStatementNormalizer(),
+			[],
+			true
 		);
 	}
 

@@ -98,7 +98,11 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 			$this->mockProvider->getMockSnakValidator(),
 			$this->mockProvider->getMockTermValidatorFactory(),
 			$siteLookup,
-			[]
+			$this->mockProvider->getMockSnakNormalizer(),
+			$this->mockProvider->getMockReferenceNormalizer(),
+			$this->mockProvider->getMockStatementNormalizer(),
+			[],
+			true
 		);
 
 		return new ChangeOpsMerge(
