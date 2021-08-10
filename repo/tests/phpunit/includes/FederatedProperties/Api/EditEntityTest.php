@@ -36,16 +36,27 @@ class EditEntityTest extends FederatedPropertiesApiTestCase {
 		$this->doApiRequestWithToken( $params );
 	}
 
-	public function testCreatingANewPropertyShouldFailFromMediawikiParamValidator() {
-		$this->markTestSkipped( 'TODO fix or remove per T288228' );
+	public function testCreatingANewLocalProperty() {
+		$expectedLabel = 'local prop';
 
-		$params = [
+		[ $result, ] = $this->doApiRequestWithToken( [
 			'action' => 'wbeditentity',
 			'new' => 'property',
-			'data' => '{"datatype":"string"}'
-		];
+			'data' => json_encode( [
+				'datatype' => 'string',
+				'labels' => [
+					'en' => [ 'language' => 'en', 'value' => $expectedLabel ],
+				],
+			] ),
+		] );
 
-		$this->setExpectedApiException( wfMessage( 'apierror-unrecognizedvalue', 'new', 'property' ) );
-		$this->doApiRequestWithToken( $params );
+		$this->assertArrayHasKey(
+			'success',
+			$result
+		);
+		$this->assertSame(
+			$expectedLabel,
+			$result['entity']['labels']['en']['value']
+		);
 	}
 }
