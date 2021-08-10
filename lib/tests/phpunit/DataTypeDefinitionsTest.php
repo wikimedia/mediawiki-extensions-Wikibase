@@ -225,4 +225,24 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( [], $dataTypeDefinitions->getExpertModules() );
 	}
 
+	public function test_getNormalizerFactoryCallbacks(): void {
+		$definitions = [
+			'PT:some-type' => [
+				'value-type' => 'some-type',
+				'normalizer-factory-callback' => 'callable 1',
+			],
+			'VT:some-type' => [
+				'normalizer-factory-callback' => 'callable 2',
+			],
+			'PT:other-type' => [ 'value-type' => 'other-type' ],
+			'VT:other-type' => [],
+		];
+		$dataTypeDefinitions = new DataTypeDefinitions( $definitions );
+
+		$this->assertSame(
+			[ 'PT:some-type' => 'callable 1', 'VT:some-type' => 'callable 2' ],
+			$dataTypeDefinitions->getNormalizerFactoryCallbacks()
+		);
+	}
+
 }

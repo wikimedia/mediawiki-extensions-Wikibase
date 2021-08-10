@@ -344,4 +344,12 @@ class DataTypeDefinitions {
 		);
 	}
 
+	/**
+	 * Get {@link DataValueNormalizer data value normalizers} for each type.
+	 * @return callable[] List of callbacks, with keys having "VT:" and "PT:" prefixes.
+	 */
+	public function getNormalizerFactoryCallbacks(): array {
+		return $this->getMapForDefinitionField( 'normalizer-factory-callback' );
+	}
+
 }
