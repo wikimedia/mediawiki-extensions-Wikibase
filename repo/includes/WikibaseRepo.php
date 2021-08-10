@@ -108,6 +108,7 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
+use Wikibase\Repo\Normalization\CommonsMediaValueNormalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
@@ -868,6 +869,11 @@ class WikibaseRepo {
 	public static function getCachingCommonsMediaFileNameLookup( ContainerInterface $services = null ): CachingCommonsMediaFileNameLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.CachingCommonsMediaFileNameLookup' );
+	}
+
+	public static function getCommonsMediaValueNormalizer( ContainerInterface $services = null ): CommonsMediaValueNormalizer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.CommonsMediaValueNormalizer' );
 	}
 
 	public static function getEntityTypesConfigValue( ContainerInterface $services = null ): array {
