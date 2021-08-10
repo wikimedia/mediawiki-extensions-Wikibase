@@ -4,7 +4,7 @@ This document describes the concept of property data types as used by Wikibase.
 
 ## Overview
 
-Property data types in Wikibase are rather insubstantial  * they are modeled by DataType objects, but such objects do not define any functionality of themselves. They merely act as a type safe ID for the data type.
+Property data types in Wikibase are rather insubstantial: they are modeled by DataType objects, but such objects do not define any functionality of themselves. They merely act as a type safe ID for the data type.
 
 Property data types are used to declare which kinds of values can be associated with a Property in a Snak. For each data type, the following things are defined:
 
@@ -52,7 +52,7 @@ Each key is associated with a map that provides the following fields:
     Normalization takes place between parsing and validation (which are defined using other callbacks, see above). While parsing is based on string input, is usually interactive, and can be fairly lenient (e.g. trimming whitespace), normalization is based on already parsed data values and applied whenever a data value is saved, including non-interactively; normalization should therefore be more conservative than parsing. Validation afterwards ensures that the (normalized) value is valid before it is saved.
     Wikibase currently does not normalize values at any other stage (e.g. post-save, when loading an item), because some normalizations are too expensive to apply when dumping large numbers of entities.
 
-Since for each property data type the associated value type is known, this provides a convenient fallback mechanism  * If a desired callback field isn't defined for a given property data type, we can fall back to using the callback that is defined for the value type. For example, if there is no formatter-factory-callback field associated with the PT:url key, we may use the one defined for VT:string, since the url property data type is based on the string value type.
+Since for each property data type the associated value type is known, this provides a convenient fallback mechanism: If a desired callback field isn't defined for a given property data type, we can fall back to using the callback that is defined for the value type. For example, if there is no formatter-factory-callback field associated with the PT:url key, we may use the one defined for VT:string, since the url property data type is based on the string value type.
 
 Extensions that wish to register a data type should use the [WikibaseRepoDataTypes] resp. [WikibaseClientDataTypes] hooks to provide additional data type definitions.
 
@@ -60,7 +60,7 @@ Extensions that wish to register a data type should use the [WikibaseRepoDataTyp
 
 Information about data types can be accessed programmatically using the appropriate service objects.
 
-The data type definitions themselves are wrapped by a [DataTypeDefinitions] object* the DataType objects can be obtained from the [DataTypeFactory] service available via [WikibaseRepo::getDataTypeFactory()] and [WikibaseClient::getDataTypeFactory()]
+The data type definitions themselves are wrapped by a [DataTypeDefinitions] object; the DataType objects can be obtained from the [DataTypeFactory] service available via [WikibaseRepo::getDataTypeFactory()] and [WikibaseClient::getDataTypeFactory()]
 
 [WikibaseRepo] also has [WikibaseRepo::getDataTypeValidatorFactory()] which returns a [DataTypeValidatorFactory] for obtaining the validators for each data type.
 
