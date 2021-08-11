@@ -6,7 +6,6 @@ namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 use Language;
 use NullStatsdDataFactory;
 use RepoGroup;
-use Serializers\Serializer;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -46,7 +45,6 @@ class EntityParserOutputGeneratorFactoryTest extends FederatedPropertiesTestCase
 			$this->createMock( TemplateFactory::class ),
 			$this->createMock( EntityDataFormatProvider::class ),
 			new InMemoryDataTypeLookup(),
-			$this->createMock( Serializer::class ),
 			$this->createMock( EntityReferenceExtractorDelegator::class ),
 			$this->createMock( CachingKartographerEmbeddingHandler::class ),
 			new NullStatsdDataFactory(),

@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Serializers\Serializer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -46,8 +45,6 @@ class EntityParserOutputGeneratorFactoryTest extends ServiceWiringTestCase {
 			new EntityDataFormatProvider() );
 		$this->mockService( 'WikibaseRepo.PropertyDataTypeLookup',
 			new InMemoryDataTypeLookup() );
-		$this->mockService( 'WikibaseRepo.CompactEntitySerializer',
-			$this->createMock( Serializer::class ) );
 		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
 			new EntityTypeDefinitions( [] ) );
 		$this->mockService( 'WikibaseRepo.ItemUrlParser',

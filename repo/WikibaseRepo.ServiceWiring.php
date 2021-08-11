@@ -856,7 +856,6 @@ return [
 			new InProcessCachingDataTypeLookup(
 				WikibaseRepo::getPropertyDataTypeLookup( $services )
 			),
-			WikibaseRepo::getCompactEntitySerializer( $services ),
 			new EntityReferenceExtractorDelegator(
 				WikibaseRepo::getEntityTypeDefinitions( $services )
 					->get( EntityTypeDefinitions::ENTITY_REFERENCE_EXTRACTOR_CALLBACK ),

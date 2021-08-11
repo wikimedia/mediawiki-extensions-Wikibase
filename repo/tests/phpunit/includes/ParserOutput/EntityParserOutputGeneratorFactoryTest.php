@@ -6,7 +6,6 @@ use Language;
 use MediaWikiIntegrationTestCase;
 use NullStatsdDataFactory;
 use RepoGroup;
-use Serializers\Serializer;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -49,7 +48,6 @@ class EntityParserOutputGeneratorFactoryTest extends MediaWikiIntegrationTestCas
 				->disableOriginalConstructor()->getMock(),
 			$this->createMock( EntityDataFormatProvider::class ),
 			new InMemoryDataTypeLookup(),
-			$this->createMock( Serializer::class ),
 			$this->getMockBuilder( EntityReferenceExtractorDelegator::class )
 				->disableOriginalConstructor()->getMock(),
 			$this->getMockBuilder( CachingKartographerEmbeddingHandler::class )

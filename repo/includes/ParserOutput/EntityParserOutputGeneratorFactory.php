@@ -8,7 +8,6 @@ use Language;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use PageImages\PageImages;
 use RepoGroup;
-use Serializers\Serializer;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
@@ -64,11 +63,6 @@ class EntityParserOutputGeneratorFactory {
 	private $propertyDataTypeLookup;
 
 	/**
-	 * @var Serializer
-	 */
-	private $entitySerializer;
-
-	/**
 	 * @var string[]
 	 */
 	private $preferredGeoDataProperties;
@@ -112,7 +106,6 @@ class EntityParserOutputGeneratorFactory {
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
-	 * @param Serializer $entitySerializer
 	 * @param EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator
 	 * @param CachingKartographerEmbeddingHandler|null $kartographerEmbeddingHandler
 	 * @param StatsdDataFactoryInterface $stats
@@ -130,7 +123,6 @@ class EntityParserOutputGeneratorFactory {
 		TemplateFactory $templateFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
-		Serializer $entitySerializer,
 		EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator,
 		?CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler,
 		StatsdDataFactoryInterface $stats,
@@ -146,7 +138,6 @@ class EntityParserOutputGeneratorFactory {
 		$this->templateFactory = $templateFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
-		$this->entitySerializer = $entitySerializer;
 		$this->entityReferenceExtractorDelegator = $entityReferenceExtractorDelegator;
 		$this->kartographerEmbeddingHandler = $kartographerEmbeddingHandler;
 		$this->stats = $stats;
