@@ -15,11 +15,8 @@ use Wikimedia\AtEase\AtEase;
  */
 class PidLockTest extends \PHPUnit\Framework\TestCase {
 
-	/**
-	 * @dataProvider wikiIdProvider
-	 */
-	public function testPidLock( $wikiId ) {
-		$pidLock = new PidLock( 'PidLockTest', $wikiId );
+	public function testPidLock() {
+		$pidLock = new PidLock( 'PidLockTest', 'wikiId' );
 
 		$this->assertTrue( $pidLock->getLock(), 'Get an initial log' );
 		$this->assertFalse( $pidLock->getLock(), 'Try to get the lock, although some already has it' );
@@ -32,13 +29,6 @@ class PidLockTest extends \PHPUnit\Framework\TestCase {
 		AtEase::suppressWarnings();
 		$this->assertFalse( $pidLock->removeLock() );
 		AtEase::restoreWarnings();
-	}
-
-	public function wikiIdProvider() {
-		return [
-			[ wfWikiID() ],
-			[ null ]
-		];
 	}
 
 }
