@@ -22,8 +22,25 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class EditEntityTest extends FederatedPropertiesApiTestCase {
 
-	public function testUpdatingAPropertyShouldFail() {
-		$entity = new Property( new PropertyId( 'P123' ), null, 'string' );
+	public function testUpdatingAFederatedPropertyShouldFail(): void {
+		$id = $this->newFederatedPropertyIdFromPId( 'P666' );
+
+		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
+
+		$this->doApiRequestWithToken( [
+			'action' => 'wbeditentity',
+			'id' => $id->getSerialization(),
+			'data' => json_encode( [
+				'labels' => [
+					'en' => [ 'language' => 'en', 'value' => 'im a feddy prop' ],
+				],
+			] ),
+		] );
+	}
+
+	// We want updating local Properties to work eventually
+	public function testUpdatingAPropertyShouldFail(): void {
+		$entity = new Property( new PropertyId( 'P123' ), null, 'string' ); // needs to be saved via EntityStore
 		$entityId = $entity->getId();
 
 		$params = [
@@ -36,7 +53,7 @@ class EditEntityTest extends FederatedPropertiesApiTestCase {
 		$this->doApiRequestWithToken( $params );
 	}
 
-	public function testCreatingANewLocalProperty() {
+	public function testCreatingANewLocalProperty(): void {
 		$expectedLabel = 'local prop';
 
 		[ $result, ] = $this->doApiRequestWithToken( [
