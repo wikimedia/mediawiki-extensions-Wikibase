@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Tests\Formatters;
 
 use ReflectionClass;
@@ -15,7 +17,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  */
 class SnakFormatTest extends \PHPUnit\Framework\TestCase {
 
-	public function baseFormatProvider() {
+	public function baseFormatProvider(): iterable {
 		yield [ SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML_VERBOSE ];
 		yield [ SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW ];
 		yield [ SnakFormatter::FORMAT_WIKI, SnakFormatter::FORMAT_WIKI ];
@@ -24,7 +26,7 @@ class SnakFormatTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider baseFormatProvider
 	 */
-	public function testGetBaseFormat( $expect, $format ) {
+	public function testGetBaseFormat( string $expect, string $format ): void {
 		$snakFormatHelper = new SnakFormat();
 		$this->assertSame( $expect, $snakFormatHelper->getBaseFormat( $format ) );
 	}
@@ -32,7 +34,7 @@ class SnakFormatTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * Make sure all SnakFormatter::FORMAT_* constants are known/supported
 	 */
-	public function testGetBaseFormat_complete() {
+	public function testGetBaseFormat_complete(): void {
 		$snakFormatHelper = new SnakFormat();
 		$refSnakFormatter = new ReflectionClass( SnakFormatter::class );
 
@@ -44,7 +46,7 @@ class SnakFormatTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function possibleFormatProvider() {
+	public function possibleFormatProvider(): iterable {
 		yield [ true, SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML ];
 		yield [ true, SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML_VERBOSE ];
 		yield [ true, SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW ];
@@ -55,7 +57,7 @@ class SnakFormatTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider possibleFormatProvider
 	 */
-	public function testIsPossibleFormat( $expect, $availableFormat, $targetFormat ) {
+	public function testIsPossibleFormat( bool $expect, string $availableFormat, string $targetFormat ): void {
 		$snakFormatHelper = new SnakFormat();
 		$this->assertSame( $expect, $snakFormatHelper->isPossibleFormat( $availableFormat, $targetFormat ) );
 	}
