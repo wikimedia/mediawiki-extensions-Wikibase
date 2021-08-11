@@ -15,15 +15,15 @@ class PidLock {
 	private $module;
 
 	/**
-	 * @var string|null
+	 * @var string
 	 */
 	private $wikiId;
 
 	/**
 	 * @param string $module used as a basis for the file name.
-	 * @param string|null $wikiId the wiki's id, used for per-wiki file names. Defaults to wfWikiID().
+	 * @param string $wikiId the wiki's id, used for per-wiki file names.
 	 */
-	public function __construct( $module, $wikiId = null ) {
+	public function __construct( $module, $wikiId ) {
 		$this->module = $module;
 		$this->wikiId = $wikiId;
 	}
@@ -105,7 +105,7 @@ class PidLock {
 	 */
 	private function getStateFile() {
 		$fileName = preg_replace( '/[^a-z\d]+/i', '', $this->module ) . '_'
-			. preg_replace( '/[^a-z\d]+/i', '', $this->wikiId ?: wfWikiID() ) . '.pid';
+			. preg_replace( '/[^a-z\d]+/i', '', $this->wikiId ) . '.pid';
 
 		// Directory /var/run/ with system specific separators
 		$dir = DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'run' . DIRECTORY_SEPARATOR;
