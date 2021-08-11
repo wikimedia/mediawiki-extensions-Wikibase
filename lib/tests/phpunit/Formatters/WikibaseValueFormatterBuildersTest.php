@@ -59,8 +59,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 
 	private const TABULAR_DATA_STORAGE_FRONTEND_URL = '//commons2.wikimedia.org/wiki/';
 
-	private const CACHE_TTL_IN_SECONDS = 10;
-
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -123,7 +121,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			self::GEO_SHAPE_STORAGE_FRONTEND_URL,
 			self::TABULAR_DATA_STORAGE_FRONTEND_URL,
 			$this->createCache(),
-			self::CACHE_TTL_IN_SECONDS,
 			$this->createMock( EntityLookup::class ),
 			$this->createMock( EntityRevisionLookup::class ),
 			1,

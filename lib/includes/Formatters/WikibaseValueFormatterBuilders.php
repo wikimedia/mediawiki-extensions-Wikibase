@@ -30,7 +30,6 @@ use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
-use Wikimedia\Assert\Assert;
 
 /**
  * Low level factory for ValueFormatters for well known data types.
@@ -112,11 +111,6 @@ class WikibaseValueFormatterBuilders {
 	private $kartographerEmbeddingHandler;
 
 	/**
-	 * @var int
-	 */
-	private $cacheTtlInSeconds;
-
-	/**
 	 * @var bool
 	 */
 	private $useKartographerMaplinkInWikitext;
@@ -158,7 +152,6 @@ class WikibaseValueFormatterBuilders {
 		string $geoShapeStorageBaseUrl,
 		string $tabularDataStorageBaseUrl,
 		TermFallbackCacheFacade $termFallbackCacheFacade,
-		int $cacheTtlInSeconds,
 		EntityLookup $entityLookup,
 		EntityRevisionLookup $entityRevisionLookup,
 		int $entitySchemaNamespace,
@@ -171,12 +164,6 @@ class WikibaseValueFormatterBuilders {
 		bool $useKartographerMaplinkInWikitext = false,
 		array $thumbLimits = []
 	) {
-		Assert::parameter(
-			$cacheTtlInSeconds >= 0,
-			'$cacheTtlInSeconds',
-			"should be non-negative"
-		);
-
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->itemUriParser = $itemUriParser;
@@ -187,7 +174,6 @@ class WikibaseValueFormatterBuilders {
 		$this->entityLookup = $entityLookup;
 		$this->cache = $termFallbackCacheFacade;
 		$this->snakFormat = new SnakFormat();
-		$this->cacheTtlInSeconds = $cacheTtlInSeconds;
 		$this->kartographerEmbeddingHandler = $kartographerEmbeddingHandler;
 		$this->useKartographerMaplinkInWikitext = $useKartographerMaplinkInWikitext;
 		$this->entitySchemaNamespace = $entitySchemaNamespace;

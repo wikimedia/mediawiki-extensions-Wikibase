@@ -550,7 +550,6 @@ return [
 			$settings->getSetting( 'geoShapeStorageBaseUrl' ),
 			$settings->getSetting( 'tabularDataStorageBaseUrl' ),
 			$termFallbackCache,
-			$settings->getSetting( 'sharedCacheDuration' ),
 			WikibaseRepo::getEntityLookup( $services ),
 			$revisionLookup,
 			$settings->getSetting( 'entitySchemaNamespace' ),
