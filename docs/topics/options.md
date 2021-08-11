@@ -534,15 +534,6 @@ $wgWBRepoSettings['urlSchemes']['mailto'] = false;
 
 DEFAULT: is ```['bzr', 'cvs', 'ftp', 'git', 'http', 'https', 'irc', 'mailto', 'ssh', 'svn']```
 
-#### entityNamespaces {#entityNamespaces}
-Defines which kind of entity is managed in which namespace.
-
-It is given as an associative array mapping entity types such as `'item'` to namespaces (IDs or canonical names).
-Mapping must be done for each type of entity that should be supported.
-If entities are stored in alternative slots, the syntax <namespace>/<slot> can be used to define which slot to use.
-
-EXAMPLE: ```['item' => 0, 'property' => 120, 'slottedEntity' => '123/slotname']```
-
 #### unitStorage
 Definition for unit conversion storage.
 

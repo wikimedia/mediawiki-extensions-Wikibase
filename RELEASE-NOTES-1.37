@@ -26,22 +26,24 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 
 ==== New configuration ====
 
-* (client) (T285471) Clients are now required to specify entitySources,
- which replaces the legacy configuration option repositories.
 * (repo) (T219215) sandboxEntityIds — Entity ids to be used in various live
  examples. These entities will be affected by changes made through those
  examples, such as edits made by the API sandbox.
 
 ==== Changed configuration ====
 
-* (repo) (T12345) ...
+* (repo+client) (T257262) The entitySources setting is no longer optional, but required.
+ See the “upgrading notes” section, above, for migration instructions.
 
 ==== Removed configuration ====
 
+* (repo) (T285471) foreignRepositories has been removed.
 * (client) (T285471) repositories has been removed.
-* (client) (T286539) repoNamespaces has been removed.
+* (repo+client) (T285472) entityNamespaces has been removed.
 * (repo+client) (T285473) changesDatabase has been removed.
+* (client) (T286539) repoNamespaces has been removed.
 * (client) (T287242) repoDatabase has been removed.
+* (repo) (T287486) conceptBaseUri has been removed.
 
 === New user-facing features in 1.37 ===
 
