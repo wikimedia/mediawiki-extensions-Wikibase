@@ -24,8 +24,6 @@ class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 			new SubEntityTypesMapper( [] ) );
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( $settingsArray ) );
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getNamespaceInfo' );
 	}
 
 	public function testGetEntitySourceDefinitionsFromSettingsParsesSettings() {

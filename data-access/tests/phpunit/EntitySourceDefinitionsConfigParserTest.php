@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataAccess\Tests;
 
-use NamespaceInfo;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
@@ -17,18 +16,10 @@ use Wikibase\Lib\SubEntityTypesMapper;
  */
 class EntitySourceDefinitionsConfigParserTest extends TestCase {
 
-	private const TEST_NAMESPACE_NAME = 'testnamespace';
-	private const TEST_NAMESPACE_INDEX = 124;
-
 	public function testGivenSingleSourceConfig_newDefinitionsFromConfigArrayParsesSourcaData() {
 		$config = [
 			'local' => [
-				'entityNamespaces' => [
-					'item' => 100,
-					'property' => 200,
-					'test1' => self::TEST_NAMESPACE_NAME,
-					'test2' => self::TEST_NAMESPACE_NAME . '/slot',
-				],
+				'entityNamespaces' => [ 'item' => 100, 'property' => 200 ],
 				'repoDatabase' => false,
 				'baseUri' => 'http://example.com/entity/',
 				'rdfNodeNamespacePrefix' => 'wd',
@@ -37,7 +28,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 			]
 		];
 
-		$parser = new EntitySourceDefinitionsConfigParser( $this->getNamespaceInfo() );
+		$parser = new EntitySourceDefinitionsConfigParser();
 
 		$sourceDefinitions = $parser->newDefinitionsFromConfigArray( $config, new SubEntityTypesMapper( [] ) );
 
@@ -46,23 +37,11 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 		$this->assertCount( 1, $sources );
 		$this->assertSame( 'local', $sources[0]->getSourceName() );
 		$this->assertSame( false, $sources[0]->getDatabaseName() );
-		$this->assertSame( [ 'item', 'property', 'test1', 'test2' ], $sources[0]->getEntityTypes() );
+		$this->assertSame( [ 'item', 'property' ], $sources[0]->getEntityTypes() );
 		$this->assertSame( 'localwiki', $sources[0]->getInterwikiPrefix() );
 		$this->assertSame( 'http://example.com/entity/', $sources[0]->getConceptBaseUri() );
-		$expectedNamespaceIds = [
-			'item' => 100,
-			'property' => 200,
-			'test1' => self::TEST_NAMESPACE_INDEX,
-			'test2' => self::TEST_NAMESPACE_INDEX,
-		];
-		$this->assertEquals( $expectedNamespaceIds, $sources[0]->getEntityNamespaceIds() );
-		$expectedSlotNames = [
-			'item' => 'main',
-			'property' => 'main',
-			'test1' => 'main',
-			'test2' => 'slot',
-		];
-		$this->assertEquals( $expectedSlotNames, $sources[0]->getEntitySlotNames() );
+		$this->assertEquals( [ 'item' => 100, 'property' => 200 ], $sources[0]->getEntityNamespaceIds() );
+		$this->assertEquals( [ 'item' => 'main', 'property' => 'main' ], $sources[0]->getEntitySlotNames() );
 	}
 
 	public function testGivenMultipleSourceConfig_newDefinitionsFromConfigArrayParsesAllSourceData() {
@@ -94,7 +73,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 			],
 		];
 
-		$parser = new EntitySourceDefinitionsConfigParser( $this->getNamespaceInfo() );
+		$parser = new EntitySourceDefinitionsConfigParser();
 
 		$sourceDefinitions = $parser->newDefinitionsFromConfigArray( $config, new SubEntityTypesMapper( [] ) );
 
@@ -127,7 +106,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 	 * @dataProvider provideInvalidConfig
 	 */
 	public function testGivenInvalidConfig_throwsException( $config ) {
-		$parser = new EntitySourceDefinitionsConfigParser( $this->getNamespaceInfo() );
+		$parser = new EntitySourceDefinitionsConfigParser();
 
 		$this->expectException( \InvalidArgumentException::class );
 
@@ -296,19 +275,6 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 				]
 			]
 		];
-	}
-
-	private function getNamespaceInfo(): NamespaceInfo {
-		$namespaceInfo = $this->createMock( NamespaceInfo::class );
-		$namespaceInfo->method( 'getCanonicalIndex' )
-			->willReturnCallback( static function ( string $name ) {
-				if ( $name === self::TEST_NAMESPACE_NAME ) {
-					return self::TEST_NAMESPACE_INDEX;
-				} else {
-					return null;
-				}
-			} );
-		return $namespaceInfo;
 	}
 
 }
