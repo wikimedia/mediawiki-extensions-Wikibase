@@ -968,7 +968,7 @@ return [
 		$settings = WikibaseRepo::getSettings( $services );
 		$subEntityTypesMapper = WikibaseRepo::getSubEntityTypesMapper( $services );
 
-		$configParser = new EntitySourceDefinitionsConfigParser( $services->getNamespaceInfo() );
+		$configParser = new EntitySourceDefinitionsConfigParser();
 
 		$entitySourceDefinitions = $configParser->newDefinitionsFromConfigArray(
 			$settings->getSetting( 'entitySources' ),

@@ -420,7 +420,7 @@ return [
 		$subEntityTypesMapper = new SubEntityTypesMapper( WikibaseClient::getEntityTypeDefinitions( $services )
 			->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) );
 
-		$configParser = new EntitySourceDefinitionsConfigParser( $services->getNamespaceInfo() );
+		$configParser = new EntitySourceDefinitionsConfigParser();
 
 		return $configParser->newDefinitionsFromConfigArray( $settings->getSetting( 'entitySources' ), $subEntityTypesMapper );
 	},
