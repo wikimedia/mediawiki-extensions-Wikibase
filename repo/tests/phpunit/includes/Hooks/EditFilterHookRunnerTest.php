@@ -37,6 +37,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 		$namespaceLookup = $this->getMockBuilder( EntityNamespaceLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
+		$namespaceLookup->method( 'getEntitySlotRole' )->willReturn( 'main' );
 
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->method( 'getTitleForId' )

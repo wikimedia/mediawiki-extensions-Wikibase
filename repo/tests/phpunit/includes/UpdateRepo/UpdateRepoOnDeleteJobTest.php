@@ -89,7 +89,10 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getSummaryFormatter(): SummaryFormatter {
-		return $this->createMock( SummaryFormatter::class );
+		$summaryFormatter = $this->createMock( SummaryFormatter::class );
+		$summaryFormatter->method( 'formatSummary' )->willReturn( '' );
+
+		return $summaryFormatter;
 	}
 
 	private function getMockEditFitlerHookRunner(): EditFilterHookRunner {

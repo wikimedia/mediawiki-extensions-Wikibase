@@ -636,7 +636,7 @@ class MediawikiEditEntity implements EditEntity {
 	 * @see    WikiPage::doUserEditContent
 	 * @see    EntityStore::saveEntity
 	 */
-	public function attemptSave( EntityDocument $newEntity, $summary, $flags, $token, $watch = null, array $tags = [] ) {
+	public function attemptSave( EntityDocument $newEntity, string $summary, $flags, $token, $watch = null, array $tags = [] ) {
 		$this->checkReadOnly( $newEntity );
 		$this->checkEntityId( $newEntity->getId() );
 

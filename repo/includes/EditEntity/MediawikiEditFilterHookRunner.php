@@ -61,7 +61,7 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 	 * @throws InvalidArgumentException
 	 * @return Status
 	 */
-	public function run( $new, IContextSource $context, $summary ) {
+	public function run( $new, IContextSource $context, string $summary ) {
 		$filterStatus = Status::newGood();
 
 		if ( !Hooks::isRegistered( 'EditFilterMergedContent' ) ) {

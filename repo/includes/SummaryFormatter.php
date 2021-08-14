@@ -244,7 +244,7 @@ class SummaryFormatter {
 	 *
 	 * @return string to be used for the summary
 	 */
-	private function assembleSummaryString( $autoComment, $autoSummary, $userSummary ) {
+	private function assembleSummaryString( $autoComment, $autoSummary, $userSummary ): string {
 		$mergedString = '';
 		$autoComment = $this->stringNormalizer->trimToNFC( $autoComment );
 		$autoSummary = $this->stringNormalizer->trimToNFC( $autoSummary );
@@ -274,7 +274,7 @@ class SummaryFormatter {
 	 *
 	 * @return string to be used for the summary
 	 */
-	public function formatSummary( FormatableSummary $summary ) {
+	public function formatSummary( FormatableSummary $summary ): string {
 		$userSummary = $summary->getUserSummary();
 
 		return $this->assembleSummaryString(

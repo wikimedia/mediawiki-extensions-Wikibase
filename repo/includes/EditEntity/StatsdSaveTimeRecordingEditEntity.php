@@ -67,7 +67,7 @@ class StatsdSaveTimeRecordingEditEntity implements EditEntity {
 
 	public function attemptSave(
 		EntityDocument $newEntity,
-		$summary,
+		string $summary,
 		$flags,
 		$token,
 		$watch = null,
