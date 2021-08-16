@@ -109,6 +109,7 @@
 	"apihelp-wbmergeitems-param-toid": "ID-ja për t'u bashkuar",
 	"apihelp-wbmergeitems-param-ignoreconflicts": "Një varg elementësh të artikullit për të injoruar konfliktet. Mund të përmbajë vetëm vlerat e \"<var>description</var>\", \"<var>siteling</var>\" dhe \n\"<var>statement</var>\"",
 	"apihelp-wbmergeitems-param-summary": "Përmbledhje për redaktimin.\nDo të paraprihet nga një koment i krijuar automatikisht. Kufiri i gjatësisë së autokomentimit së bashku me përmbledhjen është 260 karaktere. Jini të vetëdijshëm se gjithçka mbi atë kufi do të pritet.",
+	"apihelp-wbmergeitems-param-tags": "Ndryshoni etiketat për të aplikuar rishikimin.",
 	"apihelp-wbmergeitems-param-bot": "Shënojeni këtë redaktim si bot. Ky flamur URL do të respektohet vetëm nëse përdoruesi i përket grupit \"bot\".",
 	"apihelp-wbmergeitems-example-1": "Bashkon të dhënat nga <samp>$1</samp> në <samp>$2</samp>",
 	"apihelp-wbmergeitems-example-3": "Bashkon të dhënat nga <samp>$1</samp> në <samp>$2</samp> duke injoruar çdo lidhje të faqes në konflikt",

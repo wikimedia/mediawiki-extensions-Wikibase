@@ -69,6 +69,7 @@
 	"wikibase-setsitelink-label": "ဆိုဒ်လင့်:",
 	"wikibase-modifyentity-id": "အိုင်ဒီ:",
 	"wikibase-modifyterm-language": "ဘာသာစကားကုဒ်:",
+	"wikibase-itemmerge-cant-merge-self": "Item တစ်ခုကိုယ်တိုင်နှင့် မပေါင်းစပ်နိုင်ပါ။",
 	"wikibase-dispatchstats-change-id": "အိုင်ဒီ",
 	"wikibase-dispatchstats-change-timestamp": "အချိန်တံဆိပ်",
 	"wikibase-dispatchstats-oldest-change": "အဟောင်းဆုံး",
