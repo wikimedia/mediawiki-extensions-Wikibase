@@ -1,0 +1,30 @@
+EntityId contains the logical name of the repository the ID refers to. This serves as a namespace mechanism for entity IDs.
+EntityIds from repositories other than local repository are called '''foreign''' EntityIds,
+and, similarly, repositories other than local are '''foreign''' repositories.
+
+Notes:
+* The name used to refer to a given repository is local, and can differ from client to client.
+* The empty repository name "" refers to the local wiki.
+* Repository names can be used to look up the repository Site object, which in turn allows the ID to be mapped to the correct URI, URL, or API path for the repository it belongs to.
+* The serialization of the EntityId follows the pattern <code><repository>:<id></code>. If <code><repository></code> is empty, the leading <code>:</code> is optional. This format follows the convention set by XML namespaces, RDF prefixes, and MediaWiki interwiki links.
+* Repository names can be mapped during serialization and deserialization.
+* When reading data from another repository, repository names in entity IDs get mapped from the names used on the other repository to the names used on the local wiki. In particular, the empty repository prefix is mapped to the name of the foreign repository while reading IDs.
+* The repository name in an EntityId object can always be assumed to match the local definition of that name. A repository name in serialized data however cannot be interpreted without knowing which repository it came from.
+
+== Prefix mapping ==
+
+When receiving prefixed entities from another repository, prefixes are "chained", like interwiki prefixes:
+
+* When reading <code>d:Q5</code> from repository <code>foo</code>, it is turned into <code>foo:d:Q5</code>, meaning ''<code>Q5</code> at the repo that repo <code>foo</code> calls <code>d</code>''
+* The local repository may have mappings defined for the prefixes used by other wikis, e.g. <code>foo:d</code> would be known to be the same as the local prefix <code>wd</code> for Wikidata. Mappings are defined as a two-dimensional array, e.g. part of mapping definition for example mentioned here would look like below:
+<code> [ ... 'foo' => [ 'd' => 'wd' ], ... ]</code>
+
+* When deserializing data from another repository, the name of the source repository is always added as a prefix, and then any known mappings are resolved: <code>d:Q5</code> from <code>foo</code> becomes <code>foo:d:Q5</code> and then <code>wd:Q5</code>.
+* If no mapping is known, the "chained" version of the ID (<code>foo:d:Q5</code>) is stored locally. If this kind of ID is sent to yet another repo, that may result in longer "chains" of prefixes, like <code>xyz:foo:d:Q5</code>.
+* During deserialization data from the local database, no prefix is added, but any known mappings are resolved. If <code>foo:d:Q5</code> was stored earlier because there was no mapping defined for <code>foo:d</code> then, but there is a mapping now, that mapping is resolved when loading the item.
+* Note that <code>foo:bar:Q5</code> and <code>bar:foo:Q5</code> may mean different things (or the same thing), depending on the mappings defined in repositories <code>foo</code> and <code>bar</code>.
+
+An EntityId object always ''knows'' which repository it belongs to, and it always reflects the currently defined mappings.
+This implies however that an ID used in an old revision can ''change its effective serialization'' later - it will
+''look'' different when the mappings change. The ID would however still ''mean'' the same, since it still references
+the same entity (provided the mappings were defined correctly).
