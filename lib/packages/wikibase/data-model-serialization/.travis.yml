@@ -1,0 +1,36 @@
+language: php
+
+dist: xenial
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.2
+    - php: 7.3
+    - php: 7.4
+    - php: 8.0
+
+sudo: false
+
+install: travis_retry composer install
+
+script: composer ci
+
+after_success:
+  - if [[ "`phpenv version-name`" != "8.0" ]]; then exit 0; fi
+  - vendor/bin/phpunit --coverage-clover coverage.clover
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+
+notifications:
+  irc:
+    channels:
+      - "irc.libera.chat#wikidata-feed"
+    on_success: change
+    on_failure: always
+    template:
+      - "%{repository}/%{branch}/%{commit} : %{author} %{message} %{build_url}"
+
+cache:
+  directories:
+    - $HOME/.composer/cache
