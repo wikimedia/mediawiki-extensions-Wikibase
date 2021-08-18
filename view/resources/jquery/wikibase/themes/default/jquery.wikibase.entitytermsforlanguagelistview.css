@@ -27,7 +27,8 @@
 	background-color: #eaecf0;
 	border-right: 1px solid #fff;
 	padding-left: 0.4em;
-	vertical-align: top;
+	position: sticky;
+	top: 0;
 }
 
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-header .wikibase-entitytermsforlanguagelistview-header-row .wikibase-entitytermsforlanguagelistview-cell:last-child {
