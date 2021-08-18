@@ -234,6 +234,13 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
+	 * Do not render HTML on edit (T285987)
+	 */
+	public function generateHTMLOnEdit(): bool {
+		return false;
+	}
+
+	/**
 	 * @see ContentHandler::getAutosummary
 	 *
 	 * We never want to use MediaWiki's autosummaries, used e.g. for new page creation. Override this
