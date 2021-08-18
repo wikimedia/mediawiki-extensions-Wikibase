@@ -94,7 +94,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Állítások",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Állítás: $1",
 	"wikibase-pageinfo-entity-usage-X": "Minden entitásadat",
-	"wikibase-pageinfo-entity-usage-O": "Egyéb (Állítások)",
+	"wikibase-pageinfo-entity-usage-O": "Egyéb (pl. más nevek, entitás létezése)",
 	"wikibase-property-render-error": "$1 tulajdonság feldolgozása sikertelen: $2",
 	"wikibase-otherprojects": "Társlapok",
 	"wikibase-otherprojects-beta-message": "Társlapok oldalsáv",
