@@ -1,0 +1,2204 @@
+{
+	"id": "Q1",
+	"type": "item",
+	"aliases": {
+		"pl": [
+			{
+				"language": "pl",
+				"value": "Kosmos"
+			},
+			{
+				"language": "pl",
+				"value": "\u015awiat"
+			},
+			{
+				"language": "pl",
+				"value": "Natura"
+			},
+			{
+				"language": "pl",
+				"value": "Uniwersum"
+			}
+		],
+		"en": [
+			{
+				"language": "en",
+				"value": "cosmos"
+			},
+			{
+				"language": "en",
+				"value": "The Universe"
+			},
+			{
+				"language": "en",
+				"value": "Space"
+			}
+		],
+		"es": [
+			{
+				"language": "es",
+				"value": "cosmos"
+			}
+		],
+		"de": [
+			{
+				"language": "de",
+				"value": "Weltall"
+			},
+			{
+				"language": "de",
+				"value": "All"
+			},
+			{
+				"language": "de",
+				"value": "Kosmos"
+			}
+		],
+		"fr": [
+			{
+				"language": "fr",
+				"value": "Cosmos"
+			}
+		],
+		"eo": [
+			{
+				"language": "eo",
+				"value": "Kosmo"
+			}
+		],
+		"it": [
+			{
+				"language": "it",
+				"value": "cosmo"
+			},
+			{
+				"language": "it",
+				"value": "spazio"
+			}
+		],
+		"nl": [
+			{
+				"language": "nl",
+				"value": "universum"
+			},
+			{
+				"language": "nl",
+				"value": "kosmos"
+			},
+			{
+				"language": "nl",
+				"value": "cosmos"
+			}
+		],
+		"ca": [
+			{
+				"language": "ca",
+				"value": "cosmos"
+			}
+		],
+		"fi": [
+			{
+				"language": "fi",
+				"value": "universumi"
+			},
+			{
+				"language": "fi",
+				"value": "kaikkeus"
+			}
+		],
+		"hu": [
+			{
+				"language": "hu",
+				"value": "univerzum"
+			}
+		],
+		"sv": [
+			{
+				"language": "sv",
+				"value": "Kosmos"
+			}
+		],
+		"nds": [
+			{
+				"language": "nds",
+				"value": "Universum"
+			},
+			{
+				"language": "nds",
+				"value": "Kosmos"
+			}
+		],
+		"fa": [
+			{
+				"language": "fa",
+				"value": "\u062c\u0647\u0627\u0646"
+			},
+			{
+				"language": "fa",
+				"value": "\u0639\u0627\u0644\u0645"
+			},
+			{
+				"language": "fa",
+				"value": "\u0686\u0631\u062e \u06af\u0631\u062f\u0648\u0646"
+			},
+			{
+				"language": "fa",
+				"value": "\u06a9\u06cc\u0647\u0627\u0646"
+			},
+			{
+				"language": "fa",
+				"value": "\u06a9\u0627\u06cc\u0646\u0627\u062a"
+			},
+			{
+				"language": "fa",
+				"value": "\u0647\u0633\u062a\u06cc"
+			}
+		],
+		"ta": [
+			{
+				"language": "ta",
+				"value": "\u0baa\u0bbf\u0bb0\u0baa\u0b9e\u0bcd\u0b9a\u0bae\u0bcd"
+			},
+			{
+				"language": "ta",
+				"value": "\u0baa\u0bc7\u0bb0\u0ba3\u0bcd\u0b9f\u0bae\u0bcd"
+			},
+			{
+				"language": "ta",
+				"value": "\u0baa\u0bb2\u0bcd\u0bb2\u0ba3\u0bcd\u0b9f\u0bae\u0bcd"
+			},
+			{
+				"language": "ta",
+				"value": "\u0b85\u0ba3\u0bcd\u0b9f\u0bb5\u0bc6\u0bb3\u0bbf"
+			}
+		],
+		"pt": [
+			{
+				"language": "pt",
+				"value": "Universo"
+			},
+			{
+				"language": "pt",
+				"value": "cosmos"
+			}
+		],
+		"ml": [
+			{
+				"language": "ml",
+				"value": "\u0d32\u0d4b\u0d15\u0d02"
+			},
+			{
+				"language": "ml",
+				"value": "\u0d05\u0d23\u0d4d\u0d21\u0d15\u0d1f\u0d3e\u0d39\u0d02"
+			},
+			{
+				"language": "ml",
+				"value": "\u0d2c\u0d4d\u0d30\u0d39\u0d4d\u0d2e\u0d3e\u0d23\u0d4d\u0d21\u0d02"
+			}
+		],
+		"ilo": [
+			{
+				"language": "ilo",
+				"value": "uniberso"
+			},
+			{
+				"language": "ilo",
+				"value": "universo"
+			}
+		],
+		"cs": [
+			{
+				"language": "cs",
+				"value": "ve\u0161kerenstvo"
+			},
+			{
+				"language": "cs",
+				"value": "univerzum"
+			}
+		],
+		"ru": [
+			{
+				"language": "ru",
+				"value": "\u041c\u0438\u0440"
+			},
+			{
+				"language": "ru",
+				"value": "\u041a\u043e\u0441\u043c\u043e\u0441"
+			}
+		],
+		"sr": [
+			{
+				"language": "sr",
+				"value": "\u0443\u043d\u0438\u0432\u0435\u0440\u0437\u0443\u043c"
+			}
+		]
+	},
+	"labels": {
+		"en": {
+			"language": "en",
+			"value": "universe"
+		},
+		"fr": {
+			"language": "fr",
+			"value": "Univers"
+		},
+		"la": {
+			"language": "la",
+			"value": "universum"
+		},
+		"uz": {
+			"language": "uz",
+			"value": "Olam"
+		},
+		"ru": {
+			"language": "ru",
+			"value": "\u0412\u0441\u0435\u043b\u0435\u043d\u043d\u0430\u044f"
+		},
+		"pl": {
+			"language": "pl",
+			"value": "Wszech\u015bwiat"
+		},
+		"nb": {
+			"language": "nb",
+			"value": "Universet"
+		},
+		"eo": {
+			"language": "eo",
+			"value": "universo"
+		},
+		"it": {
+			"language": "it",
+			"value": "universo"
+		},
+		"es": {
+			"language": "es",
+			"value": "universo"
+		},
+		"de": {
+			"language": "de",
+			"value": "Universum"
+		},
+		"ca": {
+			"language": "ca",
+			"value": "univers"
+		},
+		"en-gb": {
+			"language": "en-gb",
+			"value": "Universe"
+		},
+		"de-ch": {
+			"language": "de-ch",
+			"value": "Universum"
+		},
+		"fi": {
+			"language": "fi",
+			"value": "maailmankaikkeus"
+		},
+		"nn": {
+			"language": "nn",
+			"value": "Universet"
+		},
+		"ja": {
+			"language": "ja",
+			"value": "\u5b87\u5b99"
+		},
+		"zh-hant": {
+			"language": "zh-hant",
+			"value": "\u5b87\u5b99"
+		},
+		"hr": {
+			"language": "hr",
+			"value": "Svemir"
+		},
+		"pt": {
+			"language": "pt",
+			"value": "universo"
+		},
+		"simple": {
+			"language": "simple",
+			"value": "Universe"
+		},
+		"hu": {
+			"language": "hu",
+			"value": "vil\u00e1gegyetem"
+		},
+		"nl": {
+			"language": "nl",
+			"value": "heelal"
+		},
+		"ro": {
+			"language": "ro",
+			"value": "univers"
+		},
+		"sv": {
+			"language": "sv",
+			"value": "Universum"
+		},
+		"gl": {
+			"language": "gl",
+			"value": "universo"
+		},
+		"eu": {
+			"language": "eu",
+			"value": "Unibertso"
+		},
+		"mk": {
+			"language": "mk",
+			"value": "\u0412\u0441\u0435\u043b\u0435\u043d\u0430"
+		},
+		"da": {
+			"language": "da",
+			"value": "Universet"
+		},
+		"br": {
+			"language": "br",
+			"value": "Hollved"
+		},
+		"et": {
+			"language": "et",
+			"value": "Universum"
+		},
+		"af": {
+			"language": "af",
+			"value": "heelal"
+		},
+		"cy": {
+			"language": "cy",
+			"value": "Bydysawd"
+		},
+		"io": {
+			"language": "io",
+			"value": "Universo"
+		},
+		"ia": {
+			"language": "ia",
+			"value": "Universo"
+		},
+		"is": {
+			"language": "is",
+			"value": "Alheimurinn"
+		},
+		"tr": {
+			"language": "tr",
+			"value": "Evren"
+		},
+		"cs": {
+			"language": "cs",
+			"value": "vesm\u00edr"
+		},
+		"sk": {
+			"language": "sk",
+			"value": "Vesm\u00edr"
+		},
+		"uk": {
+			"language": "uk",
+			"value": "\u0412\u0441\u0435\u0441\u0432\u0456\u0442"
+		},
+		"an": {
+			"language": "an",
+			"value": "Universo"
+		},
+		"az": {
+			"language": "az",
+			"value": "Kainat"
+		},
+		"ast": {
+			"language": "ast",
+			"value": "Universu"
+		},
+		"gn": {
+			"language": "gn",
+			"value": "Arapy"
+		},
+		"bs": {
+			"language": "bs",
+			"value": "Svemir"
+		},
+		"sn": {
+			"language": "sn",
+			"value": "Rudunhumwe"
+		},
+		"nv": {
+			"language": "nv",
+			"value": "Y\u00e1gh\u00e1hook\u00e1\u00e1n"
+		},
+		"dsb": {
+			"language": "dsb",
+			"value": "Uniwersum"
+		},
+		"hif": {
+			"language": "hif",
+			"value": "Sansaar"
+		},
+		"fo": {
+			"language": "fo",
+			"value": "Alheimurin"
+		},
+		"fy": {
+			"language": "fy",
+			"value": "Hielal"
+		},
+		"ga": {
+			"language": "ga",
+			"value": "An Chruinne"
+		},
+		"hak": {
+			"language": "hak",
+			"value": "Y\u00ee-chhiu"
+		},
+		"id": {
+			"language": "id",
+			"value": "Alam semesta"
+		},
+		"jv": {
+			"language": "jv",
+			"value": "Alam semesta"
+		},
+		"pam": {
+			"language": "pam",
+			"value": "Sikluban"
+		},
+		"csb": {
+			"language": "csb",
+			"value": "Swiatnica"
+		},
+		"sw": {
+			"language": "sw",
+			"value": "Ulimwengu"
+		},
+		"ht": {
+			"language": "ht",
+			"value": "Liniv\u00e8"
+		},
+		"ku": {
+			"language": "ku",
+			"value": "Gerd\u00fbn"
+		},
+		"lv": {
+			"language": "lv",
+			"value": "Visums"
+		},
+		"lt": {
+			"language": "lt",
+			"value": "Visata"
+		},
+		"li": {
+			"language": "li",
+			"value": "Universum"
+		},
+		"lmo": {
+			"language": "lmo",
+			"value": "\u00dcnivers"
+		},
+		"ms": {
+			"language": "ms",
+			"value": "Alam semesta"
+		},
+		"mwl": {
+			"language": "mwl",
+			"value": "Ouniberso"
+		},
+		"nah": {
+			"language": "nah",
+			"value": "Cem\u0101n\u0101huac"
+		},
+		"nds-nl": {
+			"language": "nds-nl",
+			"value": "Hielal"
+		},
+		"nap": {
+			"language": "nap",
+			"value": "Annevierzo"
+		},
+		"frr": {
+			"language": "frr",
+			"value": "\u00c5\u00e5l"
+		},
+		"nrm": {
+			"language": "nrm",
+			"value": "Eunivers"
+		},
+		"nov": {
+			"language": "nov",
+			"value": "Universe"
+		},
+		"oc": {
+			"language": "oc",
+			"value": "Univ\u00e8rs"
+		},
+		"pfl": {
+			"language": "pfl",
+			"value": "Weldall"
+		},
+		"pap": {
+			"language": "pap",
+			"value": "Universo"
+		},
+		"nds": {
+			"language": "nds",
+			"value": "Weltruum"
+		},
+		"qu": {
+			"language": "qu",
+			"value": "Ch'askancha"
+		},
+		"stq": {
+			"language": "stq",
+			"value": "Al"
+		},
+		"sq": {
+			"language": "sq",
+			"value": "Gjith\u00ebsia"
+		},
+		"scn": {
+			"language": "scn",
+			"value": "Universu"
+		},
+		"sl": {
+			"language": "sl",
+			"value": "Vesolje"
+		},
+		"sh": {
+			"language": "sh",
+			"value": "Svemir"
+		},
+		"su": {
+			"language": "su",
+			"value": "Jagat"
+		},
+		"tl": {
+			"language": "tl",
+			"value": "Uniberso"
+		},
+		"war": {
+			"language": "war",
+			"value": "Sangkalibutan"
+		},
+		"bat-smg": {
+			"language": "bat-smg",
+			"value": "V\u0117sata"
+		},
+		"vi": {
+			"language": "vi",
+			"value": "v\u0169 tr\u1ee5"
+		},
+		"zh-min-nan": {
+			"language": "zh-min-nan",
+			"value": "\u00da-ti\u016b"
+		},
+		"bn": {
+			"language": "bn",
+			"value": "\u09ae\u09b9\u09be\u09ac\u09bf\u09b6\u09cd\u09ac"
+		},
+		"ar": {
+			"language": "ar",
+			"value": "\u0641\u0636\u0627\u0621 \u0643\u0648\u0646\u064a"
+		},
+		"arc": {
+			"language": "arc",
+			"value": "\u072c\u0712\u071d\u0720"
+		},
+		"arz": {
+			"language": "arz",
+			"value": "\u0643\u0648\u0646"
+		},
+		"be": {
+			"language": "be",
+			"value": "\u0421\u0443\u0441\u0432\u0435\u0442"
+		},
+		"bg": {
+			"language": "bg",
+			"value": "\u0412\u0441\u0435\u043b\u0435\u043d\u0430"
+		},
+		"ckb": {
+			"language": "ckb",
+			"value": "\u06af\u06d5\u0631\u062f\u0648\u0648\u0646"
+		},
+		"cv": {
+			"language": "cv",
+			"value": "\u00c7\u0443\u0442 \u0422\u0115\u043d\u0447\u0435"
+		},
+		"el": {
+			"language": "el",
+			"value": "\u03c3\u03cd\u03bc\u03c0\u03b1\u03bd"
+		},
+		"fa": {
+			"language": "fa",
+			"value": "\u06af\u06cc\u062a\u06cc"
+		},
+		"gu": {
+			"language": "gu",
+			"value": "\u0aac\u0acd\u0ab0\u0ab9\u0acd\u0aae\u0abe\u0a82\u0aa1"
+		},
+		"he": {
+			"language": "he",
+			"value": "\u05d4\u05d9\u05e7\u05d5\u05dd"
+		},
+		"hi": {
+			"language": "hi",
+			"value": "\u092c\u094d\u0930\u0939\u094d\u092e\u093e\u0923\u094d\u0921"
+		},
+		"hy": {
+			"language": "hy",
+			"value": "\u054f\u056b\u0565\u0566\u0565\u0580\u0584"
+		},
+		"ka": {
+			"language": "ka",
+			"value": "\u10e1\u10d0\u10db\u10e7\u10d0\u10e0\u10dd"
+		},
+		"kk": {
+			"language": "kk",
+			"value": "\u04d8\u043b\u0435\u043c"
+		},
+		"kn": {
+			"language": "kn",
+			"value": "\u0cac\u0ccd\u0cb0\u0cb9\u0ccd\u0cae\u0cbe\u0c82\u0ca1"
+		},
+		"ko": {
+			"language": "ko",
+			"value": "\uc6b0\uc8fc"
+		},
+		"lez": {
+			"language": "lez",
+			"value": "\u0427\u0438\u043b\u0435\u0440-\u0446\u0430\u0432\u0430\u0440"
+		},
+		"ml": {
+			"language": "ml",
+			"value": "\u0d2a\u0d4d\u0d30\u0d2a\u0d1e\u0d4d\u0d1a\u0d02"
+		},
+		"mn": {
+			"language": "mn",
+			"value": "\u041e\u0440\u0447\u043b\u043e\u043d"
+		},
+		"mr": {
+			"language": "mr",
+			"value": "\u0935\u093f\u0936\u094d\u0935"
+		},
+		"my": {
+			"language": "my",
+			"value": "\u1019\u103c\u1014\u103a\u1019\u102c\u1018\u102c\u101e\u102c"
+		},
+		"ne": {
+			"language": "ne",
+			"value": "\u092c\u094d\u0930\u0939\u094d\u092e\u093e\u0923\u094d\u0921"
+		},
+		"pnb": {
+			"language": "pnb",
+			"value": "\u06a9\u0627\u0626\u0646\u0627\u062a"
+		},
+		"rue": {
+			"language": "rue",
+			"value": "\u0412\u0435\u0441\u043c\u0456\u0440"
+		},
+		"sr": {
+			"language": "sr",
+			"value": "\u0421\u0432\u0435\u043c\u0438\u0440"
+		},
+		"ta": {
+			"language": "ta",
+			"value": "\u0b85\u0ba3\u0bcd\u0b9f\u0bae\u0bcd"
+		},
+		"te": {
+			"language": "te",
+			"value": "\u0c35\u0c3f\u0c36\u0c4d\u0c35\u0c02"
+		},
+		"tg": {
+			"language": "tg",
+			"value": "\u041a\u043e\u0438\u043d\u043e\u0442"
+		},
+		"th": {
+			"language": "th",
+			"value": "\u0e40\u0e2d\u0e01\u0e20\u0e1e"
+		},
+		"tt": {
+			"language": "tt",
+			"value": "\u0413\u0430\u043b\u04d9\u043c"
+		},
+		"ur": {
+			"language": "ur",
+			"value": "\u06a9\u0627\u0626\u0646\u0627\u062a"
+		},
+		"xmf": {
+			"language": "xmf",
+			"value": "\u10dd\u10e5\u10d8\u10d0\u10dc\u10e3"
+		},
+		"yi": {
+			"language": "yi",
+			"value": "\u05d0\u05d5\u05e0\u05d9\u05d5\u05d5\u05e2\u05e8\u05e1"
+		},
+		"zh": {
+			"language": "zh",
+			"value": "\u5b87\u5b99"
+		},
+		"zh-classical": {
+			"language": "zh-classical",
+			"value": "\u5b87\u5b99"
+		},
+		"zh-yue": {
+			"language": "zh-yue",
+			"value": "\u5b87\u5b99"
+		},
+		"en-ca": {
+			"language": "en-ca",
+			"value": "Universe"
+		},
+		"pt-br": {
+			"language": "pt-br",
+			"value": "universo"
+		},
+		"yue": {
+			"language": "yue",
+			"value": "\u5b87\u5b99"
+		},
+		"zh-cn": {
+			"language": "zh-cn",
+			"value": "\u5b87\u5b99"
+		},
+		"zh-hans": {
+			"language": "zh-hans",
+			"value": "\u5b87\u5b99"
+		},
+		"zh-sg": {
+			"language": "zh-sg",
+			"value": "\u5b87\u5b99"
+		},
+		"zh-my": {
+			"language": "zh-my",
+			"value": "\u5b87\u5b99"
+		},
+		"zh-hk": {
+			"language": "zh-hk",
+			"value": "\u5b87\u5b99"
+		},
+		"zh-tw": {
+			"language": "zh-tw",
+			"value": "\u5b87\u5b99"
+		},
+		"zh-mo": {
+			"language": "zh-mo",
+			"value": "\u5b87\u5b99"
+		},
+		"de-formal": {
+			"language": "de-formal",
+			"value": "Universum"
+		},
+		"si": {
+			"language": "si",
+			"value": "\u0dc0\u0dd2\u0dc1\u0dca\u0dc0\u0dba"
+		},
+		"be-x-old": {
+			"language": "be-x-old",
+			"value": "\u0421\u0443\u0441\u044c\u0432\u0435\u0442"
+		},
+		"ilo": {
+			"language": "ilo",
+			"value": "law-ang"
+		},
+		"jbo": {
+			"language": "jbo",
+			"value": "munje"
+		},
+		"vep": {
+			"language": "vep",
+			"value": "Mir"
+		},
+		"be-tarask": {
+			"language": "be-tarask",
+			"value": "\u0421\u0443\u0441\u044c\u0432\u0435\u0442"
+		},
+		"bar": {
+			"language": "bar",
+			"value": "W\u00f6dall"
+		},
+		"pms": {
+			"language": "pms",
+			"value": "Univers"
+		},
+		"sr-ec": {
+			"language": "sr-ec",
+			"value": "\u0421\u0432\u0435\u043c\u0438\u0440"
+		},
+		"sr-el": {
+			"language": "sr-el",
+			"value": "Svemir"
+		},
+		"sco": {
+			"language": "sco",
+			"value": "Universe"
+		},
+		"or": {
+			"language": "or",
+			"value": "\u0b2c\u0b4d\u0b30\u0b39\u0b4d\u0b2e\u0b3e\u0b23\u0b4d\u0b21"
+		},
+		"no": {
+			"language": "no",
+			"value": "Universet"
+		}
+	},
+	"descriptions": {
+		"la": {
+			"language": "la",
+			"value": "res quae omnem materiam et spatium continet"
+		},
+		"en": {
+			"language": "en",
+			"value": "totality of planets, stars, galaxies, intergalactic space, and all matter and energy"
+		},
+		"fr": {
+			"language": "fr",
+			"value": "ensemble des plan\u00e8tes, des \u00e9toiles, des galaxies, de l'espace intergalactique, ainsi que de toute la mati\u00e8re et de l'\u00e9nergie"
+		},
+		"pl": {
+			"language": "pl",
+			"value": "Wszystko, co fizycznie istnieje: ca\u0142a przestrze\u0144, czas, wszystkie formy materii i energii oraz prawa fizyki i sta\u0142e fizyczne okre\u015blaj\u0105ce ich zachowanie."
+		},
+		"es": {
+			"language": "es",
+			"value": "totalidad del espacio-tiempo, la materia y la energ\u00eda existentes"
+		},
+		"de": {
+			"language": "de",
+			"value": "Gesamtheit aller Planeten, Sterne, Galaxien, des intergalaktischen Raums, und aller Materie und Energie"
+		},
+		"it": {
+			"language": "it",
+			"value": "insieme di tutto ci\u00f2 che esiste"
+		},
+		"eo": {
+			"language": "eo",
+			"value": "la tuto de \u0109io ekzistanta, steloj, spaco, materio, energio ..."
+		},
+		"no": {
+			"language": "no",
+			"value": "alt som eksisterer av rom, materie og str\u00e5ling"
+		},
+		"nb": {
+			"language": "nb",
+			"value": "alt som eksisterer av rom, materie og str\u00e5ling."
+		},
+		"nn": {
+			"language": "nn",
+			"value": "alt som eksisterer, derfor all fysisk masse og energi, planetar, stjerner, galaksar, og alt i det intergalaktiske rommet"
+		},
+		"en-gb": {
+			"language": "en-gb",
+			"value": "The totality of planets, stars, galaxies, intergalactic space, and all matter and energy"
+		},
+		"nl": {
+			"language": "nl",
+			"value": "alle materie en energie binnen het gehele ruimte-tijdcontinu\u00fcm waarin wij bestaan"
+		},
+		"ko": {
+			"language": "ko",
+			"value": "\ubb34\ud55c\ud55c \uc2dc\uac04\uacfc \ub9cc\ubb3c\uc744 \ud3ec\ud568\ud558\uace0 \uc788\ub294 \ub05d\uc5c6\ub294 \uacf5\uac04\uc758 \ucd1d\uccb4"
+		},
+		"ca": {
+			"language": "ca",
+			"value": "totalitat de planetes, estrelles, gal\u00e0xies, espai intergal\u00e0ctic i tota la mat\u00e8ria i energia"
+		},
+		"fi": {
+			"language": "fi",
+			"value": "avaruuden ja siin\u00e4 olevan aineen ja energian muodostama kokonaisuus"
+		},
+		"ru": {
+			"language": "ru",
+			"value": "\u0444\u0443\u043d\u0434\u0430\u043c\u0435\u043d\u0442\u0430\u043b\u044c\u043d\u043e\u0435 \u043f\u043e\u043d\u044f\u0442\u0438\u0435 \u0432 \u0430\u0441\u0442\u0440\u043e\u043d\u043e\u043c\u0438\u0438 \u0438 \u0444\u0438\u043b\u043e\u0441\u043e\u0444\u0438\u0438"
+		},
+		"zh-hans": {
+			"language": "zh-hans",
+			"value": "\u4e00\u5207\u7a7a\u95f4\u3001\u65f6\u95f4\u3001\u7269\u8d28\u548c\u80fd\u91cf\u6784\u6210\u7684\u7edf\u4e00\u4f53"
+		},
+		"zh-hant": {
+			"language": "zh-hant",
+			"value": "\u4e00\u5207\u7a7a\u9593\u3001\u6642\u9593\u3001\u7269\u8cea\u548c\u80fd\u91cf\u69cb\u6210\u7684\u7d71\u4e00\u9ad4"
+		},
+		"zh-cn": {
+			"language": "zh-cn",
+			"value": "\u4e00\u5207\u7a7a\u95f4\u3001\u65f6\u95f4\u3001\u7269\u8d28\u548c\u80fd\u91cf\u6784\u6210\u7684\u7edf\u4e00\u4f53"
+		},
+		"zh-sg": {
+			"language": "zh-sg",
+			"value": "\u4e00\u5207\u7a7a\u95f4\u3001\u65f6\u95f4\u3001\u7269\u8d28\u548c\u80fd\u91cf\u6784\u6210\u7684\u7edf\u4e00\u4f53"
+		},
+		"zh-my": {
+			"language": "zh-my",
+			"value": "\u4e00\u5207\u7a7a\u95f4\u3001\u65f6\u95f4\u3001\u7269\u8d28\u548c\u80fd\u91cf\u6784\u6210\u7684\u7edf\u4e00\u4f53"
+		},
+		"zh": {
+			"language": "zh",
+			"value": "\u4e00\u5207\u7a7a\u95f4\u3001\u65f6\u95f4\u3001\u7269\u8d28\u548c\u80fd\u91cf\u6784\u6210\u7684\u7edf\u4e00\u4f53"
+		},
+		"zh-hk": {
+			"language": "zh-hk",
+			"value": "\u4e00\u5207\u7a7a\u9593\u3001\u6642\u9593\u3001\u7269\u8cea\u548c\u80fd\u91cf\u69cb\u6210\u7684\u7d71\u4e00\u9ad4"
+		},
+		"zh-tw": {
+			"language": "zh-tw",
+			"value": "\u4e00\u5207\u7a7a\u9593\u3001\u6642\u9593\u3001\u7269\u8cea\u548c\u80fd\u91cf\u69cb\u6210\u7684\u7d71\u4e00\u9ad4"
+		},
+		"zh-mo": {
+			"language": "zh-mo",
+			"value": "\u4e00\u5207\u7a7a\u9593\u3001\u6642\u9593\u3001\u7269\u8cea\u548c\u80fd\u91cf\u69cb\u6210\u7684\u7d71\u4e00\u9ad4"
+		},
+		"ja": {
+			"language": "ja",
+			"value": "\u60d1\u661f\u3001\u6052\u661f\u3001\u9280\u6cb3\u3001\u9280\u6cb3\u9593\u7a7a\u9593\u3001\u5168\u3066\u306e\u7269\u8cea\u3068\u30a8\u30cd\u30eb\u30ae\u30fc\u306e\u7dcf\u4f53"
+		},
+		"tr": {
+			"language": "tr",
+			"value": "y\u0131ld\u0131zlar, gezegenler, gaz, toz, galaksileraras\u0131 madde ve k\u0131saca her \u015fey"
+		},
+		"uk": {
+			"language": "uk",
+			"value": "\u0441\u0443\u043a\u0443\u043f\u043d\u0456\u0441\u0442\u044c \u0443\u0441\u044c\u043e\u0433\u043e, \u0449\u043e \u0456\u0441\u043d\u0443\u0454: \u0447\u0430\u0441, \u043f\u0440\u043e\u0441\u0442\u0456\u0440, \u043c\u0430\u0442\u0435\u0440\u0456\u044f, \u0435\u043d\u0435\u0440\u0433\u0456\u044f"
+		},
+		"pt-br": {
+			"language": "pt-br",
+			"value": "Tudo o que existe fisicamente, a totalidade do espa\u00e7o e tempo e todas as formas de mat\u00e9ria e energia."
+		},
+		"ta": {
+			"language": "ta",
+			"value": "\u0bb5\u0bc6\u0bb3\u0bbf \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0b95\u0bbe\u0bb2\u0bae\u0bcd \u0b86\u0b95\u0bbf\u0baf\u0bb5\u0bb1\u0bcd\u0bb1\u0bbf\u0ba9\u0bcd \u0bae\u0bc1\u0bb4\u0bc1\u0bae\u0bc8"
+		},
+		"ro": {
+			"language": "ro",
+			"value": "totalitatea planetelor, stelelor, galaxiilor, spa\u0163iului intergalactic \u015fi al materiei \u015fi energiei"
+		},
+		"da": {
+			"language": "da",
+			"value": "Universet defineres almindeligvis som alt eksisterende, inklusiv planeter, stjerner, galakser, indholdet af det intergalaktiske rum, og alt stof og energi."
+		},
+		"fa": {
+			"language": "fa",
+			"value": "\u0645\u062c\u0645\u0648\u0639\u0647 \u0633\u06cc\u0627\u0631\u0647\u200c\u0647\u0627\u060c \u0633\u062a\u0627\u0631\u06af\u0627\u0646\u060c \u06a9\u0647\u06a9\u0634\u0627\u0646\u200c\u0647\u0627\u060c \u0641\u0636\u0627\u06cc \u0645\u06cc\u0627\u0646 \u06a9\u0647\u06a9\u0634\u0627\u0646\u200c\u0647\u0627 \u0648 \u0647\u0645\u0647 \u0645\u0627\u062f\u0647 \u0648 \u0627\u0646\u0631\u0698\u06cc"
+		},
+		"sv": {
+			"language": "sv",
+			"value": "Det utrymme som per definition inneh\u00e5ller allting, det vill s\u00e4ga all materia, energi, rumtiden, naturlagarna och alla h\u00e4ndelser."
+		},
+		"pt": {
+			"language": "pt",
+			"value": "tudo o que existe fisicamente, a totalidade do espa\u00e7o e tempo e todas as formas de mat\u00e9ria e energia"
+		},
+		"ml": {
+			"language": "ml",
+			"value": "\u0d2d\u0d57\u0d24\u0d3f\u0d15\u0d2e\u0d3e\u0d2f\u0d3f \u0d28\u0d3f\u0d32\u0d28\u0d3f\u0d7d\u0d15\u0d4d\u0d15\u0d41\u0d28\u0d4d\u0d28 \u0d0e\u0d32\u0d4d\u0d32\u0d3e\u0d02 \u0d1a\u0d47\u0d7c\u0d28\u0d4d\u0d28\u0d24\u0d3e\u0d23\u0d4d \u0d2a\u0d4d\u0d30\u0d2a\u0d1e\u0d4d\u0d1a\u0d02"
+		},
+		"ilo": {
+			"language": "ilo",
+			"value": "totalidad iti pannakaparsua a mairaman dagiti planeta, dagiti bituen, dagiti ariwanas, dagiti linaon ti intergalaktiko a limbang, ken amin a banag ken enerhia"
+		},
+		"cs": {
+			"language": "cs",
+			"value": "ve\u0161kerenstvo"
+		},
+		"tl": {
+			"language": "tl",
+			"value": "planeta, mga bituin, mga galaksiya, mga nilalaman ng intergalaktikong kalawakan, at lahat ng materya at enerhiya"
+		},
+		"oc": {
+			"language": "oc",
+			"value": "ensemble de tot \u00e7\u00f2 qu'exit\u00eds"
+		},
+		"af": {
+			"language": "af",
+			"value": "al die planete, sterre, sterrestelsels en intergalaktiese ruimtes, asook alle energie en materie"
+		},
+		"sr": {
+			"language": "sr",
+			"value": "\u0441\u0432\u0435\u0443\u043a\u0443\u043f\u043d\u043e\u0441\u0442 \u043f\u043b\u0430\u043d\u0435\u0442\u0430, \u0437\u0432\u0435\u0437\u0434\u0430, \u0433\u0430\u043b\u0430\u043a\u0441\u0438\u0458\u0430, \u0438\u043d\u0442\u0435\u0440\u0433\u0430\u043b\u0430\u043a\u0442\u0438\u0447\u043a\u043e\u0433 \u043f\u0440\u043e\u0441\u0442\u043e\u0440\u0430, \u0438 \u0441\u0432\u0435 \u043c\u0430\u0442\u0435\u0440\u0438\u0458\u0435 \u0438 \u0435\u043d\u0435\u0440\u0433\u0438\u0458\u0435"
+		},
+		"sr-ec": {
+			"language": "sr-ec",
+			"value": "\u0441\u0432\u0435\u0443\u043a\u0443\u043f\u043d\u043e\u0441\u0442 \u043f\u043b\u0430\u043d\u0435\u0442\u0430, \u0437\u0432\u0435\u0437\u0434\u0430, \u0433\u0430\u043b\u0430\u043a\u0441\u0438\u0458\u0430, \u0438\u043d\u0442\u0435\u0440\u0433\u0430\u043b\u0430\u043a\u0442\u0438\u0447\u043a\u043e\u0433 \u043f\u0440\u043e\u0441\u0442\u043e\u0440\u0430, \u0438 \u0441\u0432\u0435 \u043c\u0430\u0442\u0435\u0440\u0438\u0458\u0435 \u0438 \u0435\u043d\u0435\u0440\u0433\u0438\u0458\u0435"
+		},
+		"sr-el": {
+			"language": "sr-el",
+			"value": "sveukupnost planeta, zvezda, galaksija, intergalakti\u010dkog prostora, i sve materije i energije"
+		},
+		"my": {
+			"language": "my",
+			"value": "\u1019\u103c\u1014\u103a\u1019\u102c\u1018\u102c\u101e\u102c"
+		},
+		"th": {
+			"language": "th",
+			"value": "\u0e40\u0e2d\u0e01\u0e20\u0e1e"
+		}
+	},
+	"claims": {
+		"P793": [
+			{
+				"id": "Q1$e70e289c-471e-36b8-50ff-25612cf24e70",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P793",
+					"datatype": "wikibase-item",
+					"datavalue": {
+						"value": {
+							"entity-type": "item",
+							"numeric-id": 323
+						},
+						"type": "wikibase-entityid"
+					}
+				},
+				"type": "statement",
+				"rank": "normal"
+			},
+			{
+				"id": "Q1$7b881a36-4708-3c1e-f05d-fd4eb0322087",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P793",
+					"datatype": "wikibase-item",
+					"datavalue": {
+						"value": {
+							"entity-type": "item",
+							"numeric-id": 273508
+						},
+						"type": "wikibase-entityid"
+					}
+				},
+				"type": "statement",
+				"rank": "normal"
+			}
+		],
+		"P31": [
+			{
+				"id": "q1$0479EB23-FC5B-4EEC-9529-CEE21D6C6FA9",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P31",
+					"datatype": "wikibase-item",
+					"datavalue": {
+						"value": {
+							"entity-type": "item",
+							"numeric-id": 223557
+						},
+						"type": "wikibase-entityid"
+					}
+				},
+				"type": "statement",
+				"rank": "normal"
+			},
+			{
+				"id": "q1$442901db-4168-e229-2509-ec9d59d99531",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P31",
+					"datatype": "wikibase-item",
+					"datavalue": {
+						"value": {
+							"entity-type": "item",
+							"numeric-id": 1454986
+						},
+						"type": "wikibase-entityid"
+					}
+				},
+				"type": "statement",
+				"rank": "normal"
+			}
+		],
+		"P227": [
+			{
+				"id": "q1$4E4479B7-920C-4AB3-A405-5F3A2168DE91",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P227",
+					"datatype": "string",
+					"datavalue": {
+						"value": "4079154-3",
+						"type": "string"
+					}
+				},
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "004ec6fbee857649acdbdbad4f97b2c8571df97b",
+						"snaks": {
+							"P143": [
+								{
+									"snaktype": "value",
+									"property": "P143",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 48183
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": ["P143"]
+					}
+				]
+			}
+		],
+		"P373": [
+			{
+				"id": "q1$BD33C4D4-8E79-40FA-BB26-475CA5E732CE",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P373",
+					"datatype": "string",
+					"datavalue": {
+						"value": "Universe",
+						"type": "string"
+					}
+				},
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "7eb64cf9621d34c54fd4bd040ed4b61a88c4a1a0",
+						"snaks": {
+							"P143": [
+								{
+									"snaktype": "value",
+									"property": "P143",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 328
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": ["P143"]
+					}
+				]
+			}
+		],
+		"P508": [
+			{
+				"id": "q1$766D285D-5EA2-49FA-BDDE-915E3851ECFD",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P508",
+					"datatype": "string",
+					"datavalue": {
+						"value": "7239",
+						"type": "string"
+					}
+				},
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "33ef5efac8ec9d2de05f19b852ff1698d9036c26",
+						"snaks": {
+							"P143": [
+								{
+									"snaktype": "value",
+									"property": "P143",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 460907
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": ["P143"]
+					}
+				]
+			}
+		],
+		"P18": [
+			{
+				"id": "q1$fd1de6d2-4522-5d35-5e15-e7e144452ba9",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P18",
+					"datatype": "commonsMedia",
+					"datavalue": {
+						"value": "Hubble ultra deep field.jpg",
+						"type": "string"
+					}
+				},
+				"type": "statement",
+				"rank": "normal"
+			}
+		],
+		"P910": [
+			{
+				"id": "Q1$41A4AA15-DF3F-49C9-842C-A2AF0BBCAAD0",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P910",
+					"datatype": "wikibase-item",
+					"datavalue": {
+						"value": {
+							"entity-type": "item",
+							"numeric-id": 5551050
+						},
+						"type": "wikibase-entityid"
+					}
+				},
+				"type": "statement",
+				"rank": "normal"
+			}
+		],
+		"P349": [
+			{
+				"id": "Q1$E0551ECA-8ADE-46E0-AAE7-2C4685C91E89",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P349",
+					"datatype": "string",
+					"datavalue": {
+						"value": "00574074",
+						"type": "string"
+					}
+				},
+				"type": "statement",
+				"rank": "normal"
+			}
+		],
+		"P361": [
+			{
+				"id": "q1$21f31f42-4f4d-79b0-0380-92039776e884",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P361",
+					"datatype": "wikibase-item",
+					"datavalue": {
+						"value": {
+							"entity-type": "item",
+							"numeric-id": 3327819
+						},
+						"type": "wikibase-entityid"
+					}
+				},
+				"qualifiers": {
+					"P31": [
+						{
+							"hash": "94962579945ddcb356b701e18b46a8ca04361fac",
+							"snaktype": "value",
+							"property": "P31",
+							"datatype": "wikibase-item",
+							"datavalue": {
+								"value": {
+									"entity-type": "item",
+									"numeric-id": 41719
+								},
+								"type": "wikibase-entityid"
+							}
+						}
+					]
+				},
+				"qualifiers-order": ["P31"],
+				"type": "statement",
+				"rank": "deprecated"
+			}
+		],
+		"P580": [
+			{
+				"id": "Q1$789eef0c-4108-cdda-1a63-505cdd324564",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P580",
+					"datatype": "time",
+					"datavalue": {
+						"value": {
+							"time": "-13800000000-01-01T00:00:00Z",
+							"timezone": 0,
+							"before": 0,
+							"after": 0,
+							"precision": 1,
+							"calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+						},
+						"type": "time"
+					}
+				},
+				"qualifiers": {
+					"P459": [
+						{
+							"hash": "188fed94b60f7fa40c5a4a5546df5e45b577f7a3",
+							"snaktype": "value",
+							"property": "P459",
+							"datatype": "wikibase-item",
+							"datavalue": {
+								"value": {
+									"entity-type": "item",
+									"numeric-id": 15605
+								},
+								"type": "wikibase-entityid"
+							}
+						},
+						{
+							"hash": "08f7d11dbd1140f69d2b2152d8b9332e6b2360b4",
+							"snaktype": "value",
+							"property": "P459",
+							"datatype": "wikibase-item",
+							"datavalue": {
+								"value": {
+									"entity-type": "item",
+									"numeric-id": 76250
+								},
+								"type": "wikibase-entityid"
+							}
+						}
+					],
+					"P805": [
+						{
+							"hash": "751608ca7ec900cb6e6e16e5fc5bbf89447f18a7",
+							"snaktype": "value",
+							"property": "P805",
+							"datatype": "wikibase-item",
+							"datavalue": {
+								"value": {
+									"entity-type": "item",
+									"numeric-id": 500699
+								},
+								"type": "wikibase-entityid"
+							}
+						}
+					]
+				},
+				"qualifiers-order": [
+					"P459",
+					"P805"
+				],
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "79885b9674cf6fdb3134592581a095f0c6c4d9d3",
+						"snaks": {
+							"P248": [
+								{
+									"snaktype": "value",
+									"property": "P248",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 15217920
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": ["P248"]
+					}
+				]
+			}
+		]
+	},
+	"sitelinks": {
+		"afwiki": {
+			"site": "afwiki",
+			"title": "Heelal",
+			"url": "//af.wikipedia.org/wiki/Heelal",
+			"badges": []
+		},
+		"anwiki": {
+			"site": "anwiki",
+			"title": "Universo",
+			"url": "//an.wikipedia.org/wiki/Universo",
+			"badges": []
+		},
+		"arcwiki": {
+			"site": "arcwiki",
+			"title": "\u072c\u0712\u071d\u0720",
+			"url": "//arc.wikipedia.org/wiki/%DC%AC%DC%92%DC%9D%DC%A0",
+			"badges": []
+		},
+		"arwiki": {
+			"site": "arwiki",
+			"title": "\u0641\u0636\u0627\u0621 \u0643\u0648\u0646\u064a",
+			"url": "//ar.wikipedia.org/wiki/%D9%81%D8%B6%D8%A7%D8%A1_%D9%83%D9%88%D9%86%D9%8A",
+			"badges": []
+		},
+		"arzwiki": {
+			"site": "arzwiki",
+			"title": "\u0643\u0648\u0646",
+			"url": "//arz.wikipedia.org/wiki/%D9%83%D9%88%D9%86",
+			"badges": []
+		},
+		"astwiki": {
+			"site": "astwiki",
+			"title": "Universu",
+			"url": "//ast.wikipedia.org/wiki/Universu",
+			"badges": []
+		},
+		"azwiki": {
+			"site": "azwiki",
+			"title": "Kainat",
+			"url": "//az.wikipedia.org/wiki/Kainat",
+			"badges": []
+		},
+		"barwiki": {
+			"site": "barwiki",
+			"title": "W\u00f6dall",
+			"url": "//bar.wikipedia.org/wiki/W%C3%B6dall",
+			"badges": []
+		},
+		"bat_smgwiki": {
+			"site": "bat_smgwiki",
+			"title": "V\u0117sata",
+			"url": "//bat-smg.wikipedia.org/wiki/V%C4%97sata",
+			"badges": []
+		},
+		"bawiki": {
+			"site": "bawiki",
+			"title": "\u0492\u0430\u043b\u04d9\u043c",
+			"url": "//ba.wikipedia.org/wiki/%D2%92%D0%B0%D0%BB%D3%99%D0%BC",
+			"badges": []
+		},
+		"be_x_oldwiki": {
+			"site": "be_x_oldwiki",
+			"title": "\u0421\u0443\u0441\u044c\u0432\u0435\u0442",
+			"url": "//be-x-old.wikipedia.org/wiki/%D0%A1%D1%83%D1%81%D1%8C%D0%B2%D0%B5%D1%82",
+			"badges": []
+		},
+		"bewiki": {
+			"site": "bewiki",
+			"title": "\u0421\u0443\u0441\u0432\u0435\u0442",
+			"url": "//be.wikipedia.org/wiki/%D0%A1%D1%83%D1%81%D0%B2%D0%B5%D1%82",
+			"badges": []
+		},
+		"bgwiki": {
+			"site": "bgwiki",
+			"title": "\u0412\u0441\u0435\u043b\u0435\u043d\u0430",
+			"url": "//bg.wikipedia.org/wiki/%D0%92%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%B0",
+			"badges": []
+		},
+		"bnwiki": {
+			"site": "bnwiki",
+			"title": "\u09ae\u09b9\u09be\u09ac\u09bf\u09b6\u09cd\u09ac",
+			"url": "//bn.wikipedia.org/wiki/%E0%A6%AE%E0%A6%B9%E0%A6%BE%E0%A6%AC%E0%A6%BF%E0%A6%B6%E0%A7%8D%E0%A6%AC",
+			"badges": []
+		},
+		"brwiki": {
+			"site": "brwiki",
+			"title": "Hollved",
+			"url": "//br.wikipedia.org/wiki/Hollved",
+			"badges": []
+		},
+		"bswiki": {
+			"site": "bswiki",
+			"title": "Svemir",
+			"url": "//bs.wikipedia.org/wiki/Svemir",
+			"badges": []
+		},
+		"cawiki": {
+			"site": "cawiki",
+			"title": "Univers",
+			"url": "//ca.wikipedia.org/wiki/Univers",
+			"badges": []
+		},
+		"cewiki": {
+			"site": "cewiki",
+			"title": "\u04c0\u0430\u043b\u0430\u043c",
+			"url": "//ce.wikipedia.org/wiki/%D3%80%D0%B0%D0%BB%D0%B0%D0%BC",
+			"badges": []
+		},
+		"ckbwiki": {
+			"site": "ckbwiki",
+			"title": "\u06af\u06d5\u0631\u062f\u0648\u0648\u0646",
+			"url": "//ckb.wikipedia.org/wiki/%DA%AF%DB%95%D8%B1%D8%AF%D9%88%D9%88%D9%86",
+			"badges": []
+		},
+		"commonswiki": {
+			"site": "commonswiki",
+			"title": "Univers",
+			"url": "//commons.wikimedia.org/wiki/Univers",
+			"badges": []
+		},
+		"csbwiki": {
+			"site": "csbwiki",
+			"title": "Swiatnica",
+			"url": "//csb.wikipedia.org/wiki/Swiatnica",
+			"badges": []
+		},
+		"cswiki": {
+			"site": "cswiki",
+			"title": "Vesm\u00edr",
+			"url": "//cs.wikipedia.org/wiki/Vesm%C3%ADr",
+			"badges": []
+		},
+		"cvwiki": {
+			"site": "cvwiki",
+			"title": "\u00c7\u0443\u0442 \u0422\u0115\u043d\u0447\u0435",
+			"url": "//cv.wikipedia.org/wiki/%C3%87%D1%83%D1%82_%D0%A2%C4%95%D0%BD%D1%87%D0%B5",
+			"badges": []
+		},
+		"cywiki": {
+			"site": "cywiki",
+			"title": "Bydysawd (seryddiaeth)",
+			"url": "//cy.wikipedia.org/wiki/Bydysawd_(seryddiaeth)",
+			"badges": []
+		},
+		"dawiki": {
+			"site": "dawiki",
+			"title": "Universet",
+			"url": "//da.wikipedia.org/wiki/Universet",
+			"badges": []
+		},
+		"dewiki": {
+			"site": "dewiki",
+			"title": "Universum",
+			"url": "//de.wikipedia.org/wiki/Universum",
+			"badges": []
+		},
+		"dsbwiki": {
+			"site": "dsbwiki",
+			"title": "Uniwersum",
+			"url": "//dsb.wikipedia.org/wiki/Uniwersum",
+			"badges": []
+		},
+		"elwiki": {
+			"site": "elwiki",
+			"title": "\u03a3\u03cd\u03bc\u03c0\u03b1\u03bd",
+			"url": "//el.wikipedia.org/wiki/%CE%A3%CF%8D%CE%BC%CF%80%CE%B1%CE%BD",
+			"badges": []
+		},
+		"enwiki": {
+			"site": "enwiki",
+			"title": "Universe",
+			"url": "//en.wikipedia.org/wiki/Universe",
+			"badges": []
+		},
+		"eowiki": {
+			"site": "eowiki",
+			"title": "Universo",
+			"url": "//eo.wikipedia.org/wiki/Universo",
+			"badges": []
+		},
+		"eswiki": {
+			"site": "eswiki",
+			"title": "Universo",
+			"url": "//es.wikipedia.org/wiki/Universo",
+			"badges": []
+		},
+		"etwiki": {
+			"site": "etwiki",
+			"title": "Universum",
+			"url": "//et.wikipedia.org/wiki/Universum",
+			"badges": []
+		},
+		"euwiki": {
+			"site": "euwiki",
+			"title": "Unibertso",
+			"url": "//eu.wikipedia.org/wiki/Unibertso",
+			"badges": []
+		},
+		"fawiki": {
+			"site": "fawiki",
+			"title": "\u06af\u06cc\u062a\u06cc",
+			"url": "//fa.wikipedia.org/wiki/%DA%AF%DB%8C%D8%AA%DB%8C",
+			"badges": []
+		},
+		"fiwiki": {
+			"site": "fiwiki",
+			"title": "Maailmankaikkeus",
+			"url": "//fi.wikipedia.org/wiki/Maailmankaikkeus",
+			"badges": []
+		},
+		"fowiki": {
+			"site": "fowiki",
+			"title": "Alheimurin",
+			"url": "//fo.wikipedia.org/wiki/Alheimurin",
+			"badges": []
+		},
+		"frrwiki": {
+			"site": "frrwiki",
+			"title": "\u00c5\u00e5l",
+			"url": "//frr.wikipedia.org/wiki/%C3%85%C3%A5l",
+			"badges": []
+		},
+		"frwiki": {
+			"site": "frwiki",
+			"title": "Univers",
+			"url": "//fr.wikipedia.org/wiki/Univers",
+			"badges": []
+		},
+		"fywiki": {
+			"site": "fywiki",
+			"title": "Hielal",
+			"url": "//fy.wikipedia.org/wiki/Hielal",
+			"badges": []
+		},
+		"gawiki": {
+			"site": "gawiki",
+			"title": "An Chruinne",
+			"url": "//ga.wikipedia.org/wiki/An_Chruinne",
+			"badges": []
+		},
+		"glwiki": {
+			"site": "glwiki",
+			"title": "Universo",
+			"url": "//gl.wikipedia.org/wiki/Universo",
+			"badges": []
+		},
+		"gnwiki": {
+			"site": "gnwiki",
+			"title": "Arapy",
+			"url": "//gn.wikipedia.org/wiki/Arapy",
+			"badges": []
+		},
+		"guwiki": {
+			"site": "guwiki",
+			"title": "\u0aac\u0acd\u0ab0\u0ab9\u0acd\u0aae\u0abe\u0a82\u0aa1",
+			"url": "//gu.wikipedia.org/wiki/%E0%AA%AC%E0%AB%8D%E0%AA%B0%E0%AA%B9%E0%AB%8D%E0%AA%AE%E0%AA%BE%E0%AA%82%E0%AA%A1",
+			"badges": []
+		},
+		"hakwiki": {
+			"site": "hakwiki",
+			"title": "Y\u00ee-chhiu",
+			"url": "//hak.wikipedia.org/wiki/Y%C3%AE-chhiu",
+			"badges": []
+		},
+		"hewiki": {
+			"site": "hewiki",
+			"title": "\u05d4\u05d9\u05e7\u05d5\u05dd",
+			"url": "//he.wikipedia.org/wiki/%D7%94%D7%99%D7%A7%D7%95%D7%9D",
+			"badges": []
+		},
+		"hifwiki": {
+			"site": "hifwiki",
+			"title": "Sansaar",
+			"url": "//hif.wikipedia.org/wiki/Sansaar",
+			"badges": []
+		},
+		"hiwiki": {
+			"site": "hiwiki",
+			"title": "\u092c\u094d\u0930\u0939\u094d\u092e\u093e\u0923\u094d\u0921",
+			"url": "//hi.wikipedia.org/wiki/%E0%A4%AC%E0%A5%8D%E0%A4%B0%E0%A4%B9%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%A3%E0%A5%8D%E0%A4%A1",
+			"badges": []
+		},
+		"hrwiki": {
+			"site": "hrwiki",
+			"title": "Svemir",
+			"url": "//hr.wikipedia.org/wiki/Svemir",
+			"badges": []
+		},
+		"htwiki": {
+			"site": "htwiki",
+			"title": "Liniv\u00e8",
+			"url": "//ht.wikipedia.org/wiki/Liniv%C3%A8",
+			"badges": []
+		},
+		"huwiki": {
+			"site": "huwiki",
+			"title": "Vil\u00e1gegyetem",
+			"url": "//hu.wikipedia.org/wiki/Vil%C3%A1gegyetem",
+			"badges": []
+		},
+		"hywiki": {
+			"site": "hywiki",
+			"title": "\u054f\u056b\u0565\u0566\u0565\u0580\u0584",
+			"url": "//hy.wikipedia.org/wiki/%D5%8F%D5%AB%D5%A5%D5%A6%D5%A5%D6%80%D6%84",
+			"badges": []
+		},
+		"iawiki": {
+			"site": "iawiki",
+			"title": "Universo",
+			"url": "//ia.wikipedia.org/wiki/Universo",
+			"badges": []
+		},
+		"idwiki": {
+			"site": "idwiki",
+			"title": "Alam semesta",
+			"url": "//id.wikipedia.org/wiki/Alam_semesta",
+			"badges": []
+		},
+		"ilowiki": {
+			"site": "ilowiki",
+			"title": "Law-ang",
+			"url": "//ilo.wikipedia.org/wiki/Law-ang",
+			"badges": []
+		},
+		"iowiki": {
+			"site": "iowiki",
+			"title": "Universo",
+			"url": "//io.wikipedia.org/wiki/Universo",
+			"badges": []
+		},
+		"iswiki": {
+			"site": "iswiki",
+			"title": "Alheimurinn",
+			"url": "//is.wikipedia.org/wiki/Alheimurinn",
+			"badges": []
+		},
+		"itwiki": {
+			"site": "itwiki",
+			"title": "Universo",
+			"url": "//it.wikipedia.org/wiki/Universo",
+			"badges": []
+		},
+		"jawiki": {
+			"site": "jawiki",
+			"title": "\u5b87\u5b99",
+			"url": "//ja.wikipedia.org/wiki/%E5%AE%87%E5%AE%99",
+			"badges": []
+		},
+		"jvwiki": {
+			"site": "jvwiki",
+			"title": "Alam semesta",
+			"url": "//jv.wikipedia.org/wiki/Alam_semesta",
+			"badges": []
+		},
+		"kawiki": {
+			"site": "kawiki",
+			"title": "\u10e1\u10d0\u10db\u10e7\u10d0\u10e0\u10dd",
+			"url": "//ka.wikipedia.org/wiki/%E1%83%A1%E1%83%90%E1%83%9B%E1%83%A7%E1%83%90%E1%83%A0%E1%83%9D",
+			"badges": []
+		},
+		"kkwiki": {
+			"site": "kkwiki",
+			"title": "\u04d8\u043b\u0435\u043c",
+			"url": "//kk.wikipedia.org/wiki/%D3%98%D0%BB%D0%B5%D0%BC",
+			"badges": []
+		},
+		"knwiki": {
+			"site": "knwiki",
+			"title": "\u0cac\u0ccd\u0cb0\u0cb9\u0ccd\u0cae\u0cbe\u0c82\u0ca1",
+			"url": "//kn.wikipedia.org/wiki/%E0%B2%AC%E0%B3%8D%E0%B2%B0%E0%B2%B9%E0%B3%8D%E0%B2%AE%E0%B2%BE%E0%B2%82%E0%B2%A1",
+			"badges": []
+		},
+		"kowiki": {
+			"site": "kowiki",
+			"title": "\uc6b0\uc8fc",
+			"url": "//ko.wikipedia.org/wiki/%EC%9A%B0%EC%A3%BC",
+			"badges": []
+		},
+		"kuwiki": {
+			"site": "kuwiki",
+			"title": "Gerd\u00fbn",
+			"url": "//ku.wikipedia.org/wiki/Gerd%C3%BBn",
+			"badges": []
+		},
+		"lawiki": {
+			"site": "lawiki",
+			"title": "Universum",
+			"url": "//la.wikipedia.org/wiki/Universum",
+			"badges": []
+		},
+		"lezwiki": {
+			"site": "lezwiki",
+			"title": "\u0427\u0438\u043b\u0435\u0440-\u0446\u0430\u0432\u0430\u0440",
+			"url": "//lez.wikipedia.org/wiki/%D0%A7%D0%B8%D0%BB%D0%B5%D1%80-%D1%86%D0%B0%D0%B2%D0%B0%D1%80",
+			"badges": []
+		},
+		"liwiki": {
+			"site": "liwiki",
+			"title": "Universum",
+			"url": "//li.wikipedia.org/wiki/Universum",
+			"badges": []
+		},
+		"lmowiki": {
+			"site": "lmowiki",
+			"title": "\u00dcnivers",
+			"url": "//lmo.wikipedia.org/wiki/%C3%9Cnivers",
+			"badges": []
+		},
+		"ltwiki": {
+			"site": "ltwiki",
+			"title": "Visata",
+			"url": "//lt.wikipedia.org/wiki/Visata",
+			"badges": []
+		},
+		"lvwiki": {
+			"site": "lvwiki",
+			"title": "Visums",
+			"url": "//lv.wikipedia.org/wiki/Visums",
+			"badges": []
+		},
+		"mkwiki": {
+			"site": "mkwiki",
+			"title": "\u0412\u0441\u0435\u043b\u0435\u043d\u0430",
+			"url": "//mk.wikipedia.org/wiki/%D0%92%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%B0",
+			"badges": []
+		},
+		"mlwiki": {
+			"site": "mlwiki",
+			"title": "\u0d2a\u0d4d\u0d30\u0d2a\u0d1e\u0d4d\u0d1a\u0d02",
+			"url": "//ml.wikipedia.org/wiki/%E0%B4%AA%E0%B5%8D%E0%B4%B0%E0%B4%AA%E0%B4%9E%E0%B5%8D%E0%B4%9A%E0%B4%82",
+			"badges": []
+		},
+		"mnwiki": {
+			"site": "mnwiki",
+			"title": "\u041e\u0440\u0447\u043b\u043e\u043d",
+			"url": "//mn.wikipedia.org/wiki/%D0%9E%D1%80%D1%87%D0%BB%D0%BE%D0%BD",
+			"badges": []
+		},
+		"mrwiki": {
+			"site": "mrwiki",
+			"title": "\u0935\u093f\u0936\u094d\u0935",
+			"url": "//mr.wikipedia.org/wiki/%E0%A4%B5%E0%A4%BF%E0%A4%B6%E0%A5%8D%E0%A4%B5",
+			"badges": []
+		},
+		"mswiki": {
+			"site": "mswiki",
+			"title": "Alam semesta",
+			"url": "//ms.wikipedia.org/wiki/Alam_semesta",
+			"badges": []
+		},
+		"mwlwiki": {
+			"site": "mwlwiki",
+			"title": "Ouniberso",
+			"url": "//mwl.wikipedia.org/wiki/Ouniberso",
+			"badges": []
+		},
+		"mywiki": {
+			"site": "mywiki",
+			"title": "\u1005\u1000\u103c\u101d\u1020\u102c",
+			"url": "//my.wikipedia.org/wiki/%E1%80%85%E1%80%80%E1%80%BC%E1%80%9D%E1%80%A0%E1%80%AC",
+			"badges": []
+		},
+		"nahwiki": {
+			"site": "nahwiki",
+			"title": "Cem\u0101n\u0101huac",
+			"url": "//nah.wikipedia.org/wiki/Cem%C4%81n%C4%81huac",
+			"badges": []
+		},
+		"napwiki": {
+			"site": "napwiki",
+			"title": "Annevierzo",
+			"url": "//nap.wikipedia.org/wiki/Annevierzo",
+			"badges": []
+		},
+		"nds_nlwiki": {
+			"site": "nds_nlwiki",
+			"title": "Hielal",
+			"url": "//nds-nl.wikipedia.org/wiki/Hielal",
+			"badges": []
+		},
+		"ndswiki": {
+			"site": "ndswiki",
+			"title": "Weltruum",
+			"url": "//nds.wikipedia.org/wiki/Weltruum",
+			"badges": []
+		},
+		"newiki": {
+			"site": "newiki",
+			"title": "\u092c\u094d\u0930\u0939\u094d\u092e\u093e\u0923\u094d\u0921",
+			"url": "//ne.wikipedia.org/wiki/%E0%A4%AC%E0%A5%8D%E0%A4%B0%E0%A4%B9%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%A3%E0%A5%8D%E0%A4%A1",
+			"badges": []
+		},
+		"nlwiki": {
+			"site": "nlwiki",
+			"title": "Heelal",
+			"url": "//nl.wikipedia.org/wiki/Heelal",
+			"badges": []
+		},
+		"nnwiki": {
+			"site": "nnwiki",
+			"title": "Universet",
+			"url": "//nn.wikipedia.org/wiki/Universet",
+			"badges": []
+		},
+		"novwiki": {
+			"site": "novwiki",
+			"title": "Universe",
+			"url": "//nov.wikipedia.org/wiki/Universe",
+			"badges": []
+		},
+		"nowiki": {
+			"site": "nowiki",
+			"title": "Universet",
+			"url": "//no.wikipedia.org/wiki/Universet",
+			"badges": []
+		},
+		"nrmwiki": {
+			"site": "nrmwiki",
+			"title": "Eunivers",
+			"url": "//nrm.wikipedia.org/wiki/Eunivers",
+			"badges": []
+		},
+		"nvwiki": {
+			"site": "nvwiki",
+			"title": "Y\u00e1gh\u00e1hook\u00e1\u00e1n",
+			"url": "//nv.wikipedia.org/wiki/Y%C3%A1gh%C3%A1hook%C3%A1%C3%A1n",
+			"badges": []
+		},
+		"ocwiki": {
+			"site": "ocwiki",
+			"title": "Univ\u00e8rs",
+			"url": "//oc.wikipedia.org/wiki/Univ%C3%A8rs",
+			"badges": []
+		},
+		"pamwiki": {
+			"site": "pamwiki",
+			"title": "Sikluban",
+			"url": "//pam.wikipedia.org/wiki/Sikluban",
+			"badges": []
+		},
+		"papwiki": {
+			"site": "papwiki",
+			"title": "Universo",
+			"url": "//pap.wikipedia.org/wiki/Universo",
+			"badges": []
+		},
+		"pflwiki": {
+			"site": "pflwiki",
+			"title": "Weldall",
+			"url": "//pfl.wikipedia.org/wiki/Weldall",
+			"badges": []
+		},
+		"plwiki": {
+			"site": "plwiki",
+			"title": "Wszech\u015bwiat",
+			"url": "//pl.wikipedia.org/wiki/Wszech%C5%9Bwiat",
+			"badges": []
+		},
+		"pmswiki": {
+			"site": "pmswiki",
+			"title": "Univers",
+			"url": "//pms.wikipedia.org/wiki/Univers",
+			"badges": []
+		},
+		"pnbwiki": {
+			"site": "pnbwiki",
+			"title": "\u06a9\u0627\u0626\u0646\u0627\u062a",
+			"url": "//pnb.wikipedia.org/wiki/%DA%A9%D8%A7%D8%A6%D9%86%D8%A7%D8%AA",
+			"badges": []
+		},
+		"ptwiki": {
+			"site": "ptwiki",
+			"title": "Universo",
+			"url": "//pt.wikipedia.org/wiki/Universo",
+			"badges": []
+		},
+		"quwiki": {
+			"site": "quwiki",
+			"title": "Ch'askancha",
+			"url": "//qu.wikipedia.org/wiki/Ch%27askancha",
+			"badges": []
+		},
+		"rowiki": {
+			"site": "rowiki",
+			"title": "Univers",
+			"url": "//ro.wikipedia.org/wiki/Univers",
+			"badges": []
+		},
+		"ruewiki": {
+			"site": "ruewiki",
+			"title": "\u0412\u0435\u0441\u043c\u0456\u0440",
+			"url": "//rue.wikipedia.org/wiki/%D0%92%D0%B5%D1%81%D0%BC%D1%96%D1%80",
+			"badges": []
+		},
+		"ruwiki": {
+			"site": "ruwiki",
+			"title": "\u0412\u0441\u0435\u043b\u0435\u043d\u043d\u0430\u044f",
+			"url": "//ru.wikipedia.org/wiki/%D0%92%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F",
+			"badges": []
+		},
+		"scnwiki": {
+			"site": "scnwiki",
+			"title": "Universu",
+			"url": "//scn.wikipedia.org/wiki/Universu",
+			"badges": []
+		},
+		"scowiki": {
+			"site": "scowiki",
+			"title": "Universe",
+			"url": "//sco.wikipedia.org/wiki/Universe",
+			"badges": []
+		},
+		"shwiki": {
+			"site": "shwiki",
+			"title": "Svemir",
+			"url": "//sh.wikipedia.org/wiki/Svemir",
+			"badges": []
+		},
+		"simplewiki": {
+			"site": "simplewiki",
+			"title": "Universe",
+			"url": "//simple.wikipedia.org/wiki/Universe",
+			"badges": []
+		},
+		"siwiki": {
+			"site": "siwiki",
+			"title": "\u0dc0\u0dd2\u0dc1\u0dca\u0dc0\u0dba",
+			"url": "//si.wikipedia.org/wiki/%E0%B7%80%E0%B7%92%E0%B7%81%E0%B7%8A%E0%B7%80%E0%B6%BA",
+			"badges": []
+		},
+		"skwiki": {
+			"site": "skwiki",
+			"title": "Vesm\u00edr",
+			"url": "//sk.wikipedia.org/wiki/Vesm%C3%ADr",
+			"badges": []
+		},
+		"slwiki": {
+			"site": "slwiki",
+			"title": "Vesolje",
+			"url": "//sl.wikipedia.org/wiki/Vesolje",
+			"badges": []
+		},
+		"snwiki": {
+			"site": "snwiki",
+			"title": "Rudunhumwe",
+			"url": "//sn.wikipedia.org/wiki/Rudunhumwe",
+			"badges": []
+		},
+		"sowiki": {
+			"site": "sowiki",
+			"title": "Koon",
+			"url": "//so.wikipedia.org/wiki/Koon",
+			"badges": []
+		},
+		"sqwiki": {
+			"site": "sqwiki",
+			"title": "Gjith\u00ebsia",
+			"url": "//sq.wikipedia.org/wiki/Gjith%C3%ABsia",
+			"badges": []
+		},
+		"srwiki": {
+			"site": "srwiki",
+			"title": "\u0421\u0432\u0435\u043c\u0438\u0440",
+			"url": "//sr.wikipedia.org/wiki/%D0%A1%D0%B2%D0%B5%D0%BC%D0%B8%D1%80",
+			"badges": []
+		},
+		"stqwiki": {
+			"site": "stqwiki",
+			"title": "Al",
+			"url": "//stq.wikipedia.org/wiki/Al",
+			"badges": []
+		},
+		"suwiki": {
+			"site": "suwiki",
+			"title": "Jagat",
+			"url": "//su.wikipedia.org/wiki/Jagat",
+			"badges": []
+		},
+		"svwiki": {
+			"site": "svwiki",
+			"title": "Universum",
+			"url": "//sv.wikipedia.org/wiki/Universum",
+			"badges": []
+		},
+		"swwiki": {
+			"site": "swwiki",
+			"title": "Ulimwengu",
+			"url": "//sw.wikipedia.org/wiki/Ulimwengu",
+			"badges": []
+		},
+		"tawiki": {
+			"site": "tawiki",
+			"title": "\u0b85\u0ba3\u0bcd\u0b9f\u0bae\u0bcd",
+			"url": "//ta.wikipedia.org/wiki/%E0%AE%85%E0%AE%A3%E0%AF%8D%E0%AE%9F%E0%AE%AE%E0%AF%8D",
+			"badges": []
+		},
+		"tewiki": {
+			"site": "tewiki",
+			"title": "\u0c35\u0c3f\u0c36\u0c4d\u0c35\u0c02",
+			"url": "//te.wikipedia.org/wiki/%E0%B0%B5%E0%B0%BF%E0%B0%B6%E0%B1%8D%E0%B0%B5%E0%B0%82",
+			"badges": []
+		},
+		"tgwiki": {
+			"site": "tgwiki",
+			"title": "\u041a\u043e\u0438\u043d\u043e\u0442",
+			"url": "//tg.wikipedia.org/wiki/%D0%9A%D0%BE%D0%B8%D0%BD%D0%BE%D1%82",
+			"badges": []
+		},
+		"thwiki": {
+			"site": "thwiki",
+			"title": "\u0e40\u0e2d\u0e01\u0e20\u0e1e",
+			"url": "//th.wikipedia.org/wiki/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%A0%E0%B8%9E",
+			"badges": []
+		},
+		"tlwiki": {
+			"site": "tlwiki",
+			"title": "Sansinukob",
+			"url": "//tl.wikipedia.org/wiki/Sansinukob",
+			"badges": []
+		},
+		"trwiki": {
+			"site": "trwiki",
+			"title": "Evren",
+			"url": "//tr.wikipedia.org/wiki/Evren",
+			"badges": []
+		},
+		"ttwiki": {
+			"site": "ttwiki",
+			"title": "\u0413\u0430\u043b\u04d9\u043c",
+			"url": "//tt.wikipedia.org/wiki/%D0%93%D0%B0%D0%BB%D3%99%D0%BC",
+			"badges": []
+		},
+		"ukwiki": {
+			"site": "ukwiki",
+			"title": "\u0412\u0441\u0435\u0441\u0432\u0456\u0442",
+			"url": "//uk.wikipedia.org/wiki/%D0%92%D1%81%D0%B5%D1%81%D0%B2%D1%96%D1%82",
+			"badges": []
+		},
+		"urwiki": {
+			"site": "urwiki",
+			"title": "\u06a9\u0627\u0626\u0646\u0627\u062a",
+			"url": "//ur.wikipedia.org/wiki/%DA%A9%D8%A7%D8%A6%D9%86%D8%A7%D8%AA",
+			"badges": []
+		},
+		"uzwiki": {
+			"site": "uzwiki",
+			"title": "Olam",
+			"url": "//uz.wikipedia.org/wiki/Olam",
+			"badges": []
+		},
+		"vepwiki": {
+			"site": "vepwiki",
+			"title": "Mir",
+			"url": "//vep.wikipedia.org/wiki/Mir",
+			"badges": []
+		},
+		"viwiki": {
+			"site": "viwiki",
+			"title": "V\u0169 tr\u1ee5",
+			"url": "//vi.wikipedia.org/wiki/V%C5%A9_tr%E1%BB%A5",
+			"badges": []
+		},
+		"warwiki": {
+			"site": "warwiki",
+			"title": "Sangkalibutan",
+			"url": "//war.wikipedia.org/wiki/Sangkalibutan",
+			"badges": []
+		},
+		"xmfwiki": {
+			"site": "xmfwiki",
+			"title": "\u10dd\u10e5\u10d8\u10d0\u10dc\u10e3",
+			"url": "//xmf.wikipedia.org/wiki/%E1%83%9D%E1%83%A5%E1%83%98%E1%83%90%E1%83%9C%E1%83%A3",
+			"badges": []
+		},
+		"yiwiki": {
+			"site": "yiwiki",
+			"title": "\u05d0\u05d5\u05e0\u05d9\u05d5\u05d5\u05e2\u05e8\u05e1",
+			"url": "//yi.wikipedia.org/wiki/%D7%90%D7%95%D7%A0%D7%99%D7%95%D7%95%D7%A2%D7%A8%D7%A1",
+			"badges": []
+		},
+		"zh_classicalwiki": {
+			"site": "zh_classicalwiki",
+			"title": "\u5b87\u5b99",
+			"url": "//zh-classical.wikipedia.org/wiki/%E5%AE%87%E5%AE%99",
+			"badges": []
+		},
+		"zh_min_nanwiki": {
+			"site": "zh_min_nanwiki",
+			"title": "\u00da-ti\u016b",
+			"url": "//zh-min-nan.wikipedia.org/wiki/%C3%9A-ti%C5%AB",
+			"badges": []
+		},
+		"zh_yuewiki": {
+			"site": "zh_yuewiki",
+			"title": "\u5b87\u5b99",
+			"url": "//zh-yue.wikipedia.org/wiki/%E5%AE%87%E5%AE%99",
+			"badges": []
+		},
+		"zhwiki": {
+			"site": "zhwiki",
+			"title": "\u5b87\u5b99",
+			"url": "//zh.wikipedia.org/wiki/%E5%AE%87%E5%AE%99",
+			"badges": []
+		}
+	}
+}

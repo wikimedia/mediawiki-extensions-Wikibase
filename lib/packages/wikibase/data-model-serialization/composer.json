@@ -1,0 +1,75 @@
+{
+	"name": "wikibase/data-model-serialization",
+	"type": "library",
+	"description": "Serializers and deserializers for the Wikibase DataModel",
+	"keywords": [
+		"wikibase",
+		"DataModel",
+		"serializers",
+		"serialization",
+		"deserializers",
+		"wikidata"
+	],
+	"homepage": "https://github.com/wmde/WikibaseDataModelSerialization",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Thomas PT",
+			"homepage": "https://github.com/Tpt"
+		},
+		{
+			"name": "Jeroen De Dauw",
+			"email": "jeroendedauw@gmail.com",
+			"homepage": "http://jeroendedauw.com"
+		},
+		{
+			"name": "The Wikidata team",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"irc": "irc://irc.freenode.net/wikidata"
+	},
+	"require": {
+		"php": "^7.0|^8.0",
+		"wikibase/data-model": "~9.0|~8.0",
+		"serialization/serialization": "~4.0|~3.1",
+		"data-values/serialization": "~1.0"
+	},
+	"require-dev": {
+		"data-values/geo": "~4.0|~3.0",
+		"data-values/number": ">=0.1 <0.11",
+		"data-values/time": "~1.0|~0.2",
+		"phpunit/phpunit": "~8.0",
+		"mediawiki/mediawiki-codesniffer": "34.0.0"
+	},
+	"suggest": {
+		"data-values/geo": "Needed for deserialization of geographical values",
+		"data-values/number": "Needed for deserialization of numerical values",
+		"data-values/time": "Needed for deserialization of time values"
+	},
+	"autoload": {
+		"psr-4": {
+			"Wikibase\\DataModel\\": "src/"
+		}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "2.9.x-dev"
+		}
+	},
+	"scripts": {
+		"test": [
+			"composer validate --no-interaction",
+			"@cs",
+			"phpunit"
+		],
+		"ci": [
+			"@test"
+		],
+		"cs": [
+			"phpcs -p -s"
+		],
+		"fix": "phpcbf"
+	}
+}

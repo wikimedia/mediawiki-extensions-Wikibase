@@ -1,0 +1,813 @@
+{
+	"id": "P18",
+	"type": "property",
+	"aliases": {
+		"pl": [
+			{
+				"language": "pl",
+				"value": "zdj\u0119cie"
+			},
+			{
+				"language": "pl",
+				"value": "obrazek"
+			}
+		],
+		"hu": [
+			{
+				"language": "hu",
+				"value": "illusztr\u00e1ci\u00f3"
+			}
+		],
+		"hr": [
+			{
+				"language": "hr",
+				"value": "fotografija"
+			}
+		],
+		"fr": [
+			{
+				"language": "fr",
+				"value": "photo"
+			},
+			{
+				"language": "fr",
+				"value": "portrait"
+			}
+		],
+		"fi": [
+			{
+				"language": "fi",
+				"value": "kuvitus"
+			}
+		],
+		"ilo": [
+			{
+				"language": "ilo",
+				"value": "retrato"
+			},
+			{
+				"language": "ilo",
+				"value": "imahen"
+			}
+		],
+		"nn": [
+			{
+				"language": "nn",
+				"value": "bilde"
+			}
+		],
+		"ru": [
+			{
+				"language": "ru",
+				"value": "\u043f\u043e\u0440\u0442\u0440\u0435\u0442"
+			},
+			{
+				"language": "ru",
+				"value": "\u0438\u043b\u043b\u044e\u0441\u0442\u0440\u0430\u0446\u0438\u044f"
+			}
+		],
+		"vi": [
+			{
+				"language": "vi",
+				"value": "h\u00ecnh"
+			},
+			{
+				"language": "vi",
+				"value": "\u1ea3nh"
+			},
+			{
+				"language": "vi",
+				"value": "ch\u00e2n dung"
+			},
+			{
+				"language": "vi",
+				"value": "h\u00ecnh ch\u1ee5p"
+			},
+			{
+				"language": "vi",
+				"value": "\u1ea3nh ch\u1ee5p"
+			}
+		],
+		"uk": [
+			{
+				"language": "uk",
+				"value": "\u0456\u043b\u044e\u0441\u0442\u0440\u0430\u0446\u0456\u044f"
+			},
+			{
+				"language": "uk",
+				"value": "\u043f\u043e\u0440\u0442\u0440\u0435\u0442"
+			}
+		],
+		"en-gb": [
+			{
+				"language": "en-gb",
+				"value": "picture"
+			},
+			{
+				"language": "en-gb",
+				"value": "photo"
+			}
+		],
+		"en-ca": [
+			{
+				"language": "en-ca",
+				"value": "picture"
+			},
+			{
+				"language": "en-ca",
+				"value": "photo"
+			}
+		],
+		"th": [
+			{
+				"language": "th",
+				"value": "\u0e23\u0e39\u0e1b"
+			},
+			{
+				"language": "th",
+				"value": "\u0e23\u0e39\u0e1b\u0e20\u0e32\u0e1e"
+			}
+		],
+		"fa": [
+			{
+				"language": "fa",
+				"value": "\u062a\u0635\u0648\u06cc\u0631"
+			},
+			{
+				"language": "fa",
+				"value": "\u0639\u06a9\u0633"
+			}
+		],
+		"ro": [
+			{
+				"language": "ro",
+				"value": "fotografie"
+			}
+		],
+		"de": [
+			{
+				"language": "de",
+				"value": "Abbildung"
+			},
+			{
+				"language": "de",
+				"value": "Foto"
+			},
+			{
+				"language": "de",
+				"value": "Grafik"
+			}
+		],
+		"nl": [
+			{
+				"language": "nl",
+				"value": "image"
+			},
+			{
+				"language": "nl",
+				"value": "plaatje"
+			},
+			{
+				"language": "nl",
+				"value": "foto"
+			}
+		],
+		"ja": [
+			{
+				"language": "ja",
+				"value": "\u30a4\u30e1\u30fc\u30b8"
+			},
+			{
+				"language": "ja",
+				"value": "\u633f\u7d75"
+			},
+			{
+				"language": "ja",
+				"value": "\u5199\u771f"
+			},
+			{
+				"language": "ja",
+				"value": "\u30d5\u30a9\u30c8"
+			},
+			{
+				"language": "ja",
+				"value": "\u30d5\u30a9\u30c8\u30b0\u30e9\u30d5"
+			},
+			{
+				"language": "ja",
+				"value": "\u56f3"
+			},
+			{
+				"language": "ja",
+				"value": "\u30a4\u30e9\u30b9\u30c8"
+			},
+			{
+				"language": "ja",
+				"value": "\u30a4\u30e9\u30b9\u30c8\u30ec\u30fc\u30b7\u30e7\u30f3"
+			},
+			{
+				"language": "ja",
+				"value": "\u7d75"
+			}
+		],
+		"sh": [
+			{
+				"language": "sh",
+				"value": "ilustracija"
+			}
+		],
+		"en": [
+			{
+				"language": "en",
+				"value": "portrait"
+			},
+			{
+				"language": "en",
+				"value": "illustration"
+			},
+			{
+				"language": "en",
+				"value": "picture"
+			}
+		],
+		"ar": [
+			{
+				"language": "ar",
+				"value": "http://www.dermis.net/bilder/CD084/550px/img0095.jpg"
+			}
+		],
+		"or": [
+			{
+				"language": "or",
+				"value": "\u0b2b\u0b1f\u0b4b"
+			}
+		],
+		"ko": [
+			{
+				"language": "ko",
+				"value": "\uadf8\ub9bc"
+			},
+			{
+				"language": "ko",
+				"value": "\uc0ac\uc9c4"
+			}
+		]
+	},
+	"labels": {
+		"en": {
+			"language": "en",
+			"value": "image"
+		},
+		"fr": {
+			"language": "fr",
+			"value": "image"
+		},
+		"fi": {
+			"language": "fi",
+			"value": "kuva"
+		},
+		"it": {
+			"language": "it",
+			"value": "immagine"
+		},
+		"de": {
+			"language": "de",
+			"value": "Bild"
+		},
+		"cs": {
+			"language": "cs",
+			"value": "obr\u00e1zek"
+		},
+		"is": {
+			"language": "is",
+			"value": "mynd"
+		},
+		"pl": {
+			"language": "pl",
+			"value": "ilustracja"
+		},
+		"ru": {
+			"language": "ru",
+			"value": "\u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435"
+		},
+		"zh-hans": {
+			"language": "zh-hans",
+			"value": "\u56fe\u50cf"
+		},
+		"zh": {
+			"language": "zh",
+			"value": "\u5716\u50cf"
+		},
+		"hu": {
+			"language": "hu",
+			"value": "k\u00e9p"
+		},
+		"hr": {
+			"language": "hr",
+			"value": "slika"
+		},
+		"he": {
+			"language": "he",
+			"value": "\u05ea\u05de\u05d5\u05e0\u05d4"
+		},
+		"nl": {
+			"language": "nl",
+			"value": "afbeelding"
+		},
+		"es": {
+			"language": "es",
+			"value": "imagen"
+		},
+		"lmo": {
+			"language": "lmo",
+			"value": "foto"
+		},
+		"ca": {
+			"language": "ca",
+			"value": "imatge"
+		},
+		"sl": {
+			"language": "sl",
+			"value": "slika"
+		},
+		"ilo": {
+			"language": "ilo",
+			"value": "ladawan"
+		},
+		"nb": {
+			"language": "nb",
+			"value": "bilde"
+		},
+		"be": {
+			"language": "be",
+			"value": "\u0432\u044b\u044f\u0432\u0430"
+		},
+		"ja": {
+			"language": "ja",
+			"value": "\u753b\u50cf"
+		},
+		"uk": {
+			"language": "uk",
+			"value": "\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u043d\u044f"
+		},
+		"nn": {
+			"language": "nn",
+			"value": "bilete"
+		},
+		"pt-br": {
+			"language": "pt-br",
+			"value": "imagem"
+		},
+		"el": {
+			"language": "el",
+			"value": "\u03b5\u03b9\u03ba\u03cc\u03bd\u03b1"
+		},
+		"pt": {
+			"language": "pt",
+			"value": "imagem"
+		},
+		"vi": {
+			"language": "vi",
+			"value": "h\u00ecnh \u1ea3nh"
+		},
+		"da": {
+			"language": "da",
+			"value": "billede"
+		},
+		"gl": {
+			"language": "gl",
+			"value": "imaxe"
+		},
+		"bs": {
+			"language": "bs",
+			"value": "slika"
+		},
+		"sr": {
+			"language": "sr",
+			"value": "\u0441\u043b\u0438\u043a\u0430"
+		},
+		"en-gb": {
+			"language": "en-gb",
+			"value": "image"
+		},
+		"en-ca": {
+			"language": "en-ca",
+			"value": "image"
+		},
+		"uz": {
+			"language": "uz",
+			"value": "tasvir"
+		},
+		"lv": {
+			"language": "lv",
+			"value": "att\u0113ls"
+		},
+		"th": {
+			"language": "th",
+			"value": "\u0e20\u0e32\u0e1e"
+		},
+		"la": {
+			"language": "la",
+			"value": "imago"
+		},
+		"fa": {
+			"language": "fa",
+			"value": "\u0646\u06af\u0627\u0631\u0647"
+		},
+		"zh-hant": {
+			"language": "zh-hant",
+			"value": "\u5716\u7247"
+		},
+		"ta": {
+			"language": "ta",
+			"value": "\u0baa\u0b9f\u0bbf\u0bae\u0bae\u0bcd"
+		},
+		"eo": {
+			"language": "eo",
+			"value": "bildo"
+		},
+		"ko": {
+			"language": "ko",
+			"value": "\uc774\ubbf8\uc9c0 \ud30c\uc77c"
+		},
+		"sv": {
+			"language": "sv",
+			"value": "bild"
+		},
+		"nds": {
+			"language": "nds",
+			"value": "Bild"
+		},
+		"ro": {
+			"language": "ro",
+			"value": "imagine"
+		},
+		"id": {
+			"language": "id",
+			"value": "gambar"
+		},
+		"min": {
+			"language": "min",
+			"value": "gambar"
+		},
+		"ar": {
+			"language": "ar",
+			"value": "\u0627\u0644\u0635\u0648\u0631\u0629"
+		},
+		"no": {
+			"language": "no",
+			"value": "bilde"
+		},
+		"be-tarask": {
+			"language": "be-tarask",
+			"value": "\u0432\u044b\u044f\u0432\u0430"
+		},
+		"ka": {
+			"language": "ka",
+			"value": "\u10e1\u10e3\u10e0\u10d0\u10d7\u10d8"
+		},
+		"hi": {
+			"language": "hi",
+			"value": "\u091a\u093f\u0924\u094d\u0930"
+		},
+		"zh-cn": {
+			"language": "zh-cn",
+			"value": "\u56fe\u50cf"
+		},
+		"af": {
+			"language": "af",
+			"value": "beeld"
+		},
+		"zh-tw": {
+			"language": "zh-tw",
+			"value": "\u5716\u50cf"
+		},
+		"mr": {
+			"language": "mr",
+			"value": "\u091a\u093f\u0924\u094d\u0930"
+		},
+		"sk": {
+			"language": "sk",
+			"value": "obr\u00e1zok"
+		},
+		"ckb": {
+			"language": "ckb",
+			"value": "\u0648\u06ce\u0646\u06d5"
+		},
+		"bn": {
+			"language": "bn",
+			"value": "\u099a\u09bf\u09a4\u09cd\u09b0"
+		},
+		"nds-nl": {
+			"language": "nds-nl",
+			"value": "ofbeelding"
+		},
+		"sh": {
+			"language": "sh",
+			"value": "slika"
+		},
+		"br": {
+			"language": "br",
+			"value": "skeudenn"
+		},
+		"bg": {
+			"language": "bg",
+			"value": "\u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0430"
+		},
+		"tr": {
+			"language": "tr",
+			"value": "g\u00f6r\u00fcnt\u00fc"
+		},
+		"pcd": {
+			"language": "pcd",
+			"value": "image"
+		},
+		"et": {
+			"language": "et",
+			"value": "pilt"
+		},
+		"sr-ec": {
+			"language": "sr-ec",
+			"value": "\u0441\u043b\u0438\u043a\u0430"
+		},
+		"oc": {
+			"language": "oc",
+			"value": "imatge"
+		},
+		"mk": {
+			"language": "mk",
+			"value": "\u0441\u043b\u0438\u043a\u0430"
+		},
+		"co": {
+			"language": "co",
+			"value": "imagine"
+		},
+		"yi": {
+			"language": "yi",
+			"value": "\u05d1\u05d9\u05dc\u05d3"
+		},
+		"rm": {
+			"language": "rm",
+			"value": "maletg"
+		},
+		"gu": {
+			"language": "gu",
+			"value": "\u0a9b\u0aac\u0ac0"
+		},
+		"ms": {
+			"language": "ms",
+			"value": "gambar"
+		},
+		"zh-yue": {
+			"language": "zh-yue",
+			"value": "\u76f8"
+		},
+		"yue": {
+			"language": "yue",
+			"value": "\u76f8"
+		},
+		"mzn": {
+			"language": "mzn",
+			"value": "\u0639\u06a9\u0633"
+		},
+		"ang": {
+			"language": "ang",
+			"value": "Bili\u00fe"
+		},
+		"ml": {
+			"language": "ml",
+			"value": "\u0d1a\u0d3f\u0d24\u0d4d\u0d30\u0d02"
+		},
+		"sco": {
+			"language": "sco",
+			"value": "image"
+		},
+		"lt": {
+			"language": "lt",
+			"value": "Vaizdas"
+		},
+		"mg": {
+			"language": "mg",
+			"value": "sary"
+		},
+		"gsw": {
+			"language": "gsw",
+			"value": "Bild"
+		},
+		"lb": {
+			"language": "lb",
+			"value": "Bild"
+		},
+		"ts": {
+			"language": "ts",
+			"value": "Xifaniso"
+		},
+		"te": {
+			"language": "te",
+			"value": "\u0c26\u0c38\u0c4d\u0c24\u0c4d\u0c30\u0c02"
+		},
+		"zh-hk": {
+			"language": "zh-hk",
+			"value": "\u5716\u7247"
+		},
+		"or": {
+			"language": "or",
+			"value": "\u0b1b\u0b2c\u0b3f"
+		},
+		"sr-el": {
+			"language": "sr-el",
+			"value": "slika"
+		}
+	},
+	"descriptions": {
+		"fr": {
+			"language": "fr",
+			"value": "image illustrant l'\u00e9l\u00e9ment"
+		},
+		"it": {
+			"language": "it",
+			"value": "immagine significativa"
+		},
+		"ru": {
+			"language": "ru",
+			"value": "\u0441\u043e\u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044e\u0449\u0430\u044f \u0438\u043b\u043b\u044e\u0441\u0442\u0440\u0430\u0446\u0438\u044f"
+		},
+		"hr": {
+			"language": "hr",
+			"value": "relevantna ilustracija"
+		},
+		"de": {
+			"language": "de",
+			"value": "entsprechende Darstellung"
+		},
+		"fi": {
+			"language": "fi",
+			"value": "aiheeseen liittyv\u00e4 kuva"
+		},
+		"ilo": {
+			"language": "ilo",
+			"value": "ti maitutop a panangiladawan"
+		},
+		"be": {
+			"language": "be",
+			"value": "\u0410\u0434\u043f\u0430\u0432\u0435\u0434\u043d\u0430\u044f \u0432\u044b\u044f\u0432\u0430"
+		},
+		"es": {
+			"language": "es",
+			"value": "imagen ilustrativa del elemento"
+		},
+		"pt": {
+			"language": "pt",
+			"value": "uma ilustra\u00e7\u00e3o relevante"
+		},
+		"vi": {
+			"language": "vi",
+			"value": "h\u00ecnh c\u00f3 li\u00ean quan"
+		},
+		"sr": {
+			"language": "sr",
+			"value": "\u043e\u0434\u0433\u043e\u0432\u0430\u0440\u0430\u0458\u0443\u045b\u0430 \u0438\u043b\u0443\u0441\u0442\u0440\u0430\u0446\u0438\u0458\u0430; \u0441\u043f\u0435\u0446\u0438\u0444\u0438\u0447\u043d\u0438\u0458\u0430 \u0441\u0432\u043e\u0458\u0441\u0442\u0432\u0430 \u0442\u0440\u0435\u0431\u0430 \u0434\u0430 \u0441\u0435 \u043a\u043e\u0440\u0438\u0441\u0442\u0438 \u043a\u0430\u0434\u0430 \u0458\u0435 \u043f\u043e\u0442\u0440\u0435\u0431\u0430\u043d \u043f\u043e\u0434\u0440\u043e\u0431\u043d\u0438\u0458\u0438 \u043e\u043f\u0438\u0441"
+		},
+		"en-ca": {
+			"language": "en-ca",
+			"value": "a relevant illustration"
+		},
+		"en-gb": {
+			"language": "en-gb",
+			"value": "a relevant illustration"
+		},
+		"pl": {
+			"language": "pl",
+			"value": "link do ilustracji na Commons"
+		},
+		"gl": {
+			"language": "gl",
+			"value": "unha ilustraci\u00f3n relevante"
+		},
+		"lv": {
+			"language": "lv",
+			"value": "atbilsto\u0161a ilustr\u0101cija"
+		},
+		"ca": {
+			"language": "ca",
+			"value": "il\u00b7lustraci\u00f3 rellevant"
+		},
+		"fa": {
+			"language": "fa",
+			"value": "\u0646\u06af\u0627\u0631\u0647 \u0645\u0631\u062a\u0628\u0637"
+		},
+		"ko": {
+			"language": "ko",
+			"value": "\uad00\ub828\ub41c \uadf8\ub9bc"
+		},
+		"ro": {
+			"language": "ro",
+			"value": "o ilustra\u021bie relevant\u0103"
+		},
+		"cs": {
+			"language": "cs",
+			"value": "odkaz na soubor na Commons"
+		},
+		"no": {
+			"language": "no",
+			"value": "illustrasjon av subjektet"
+		},
+		"be-tarask": {
+			"language": "be-tarask",
+			"value": "\u0434\u0430\u0440\u044d\u0447\u043d\u0430\u044f \u0432\u044b\u044f\u0432\u0430"
+		},
+		"sv": {
+			"language": "sv",
+			"value": "en relevant illustration"
+		},
+		"hi": {
+			"language": "hi",
+			"value": "\u092a\u094d\u0930\u093e\u0938\u0902\u0917\u093f\u0915 \u091a\u093f\u0924\u094d\u0930\u0923"
+		},
+		"nl": {
+			"language": "nl",
+			"value": "een relevante afbeelding"
+		},
+		"ja": {
+			"language": "ja",
+			"value": "\u95a2\u9023\u3059\u308b\u753b\u50cf\u3001\u633f\u7d75"
+		},
+		"he": {
+			"language": "he",
+			"value": "\u05ea\u05de\u05d5\u05e0\u05d4 \u05de\u05ea\u05d0\u05d9\u05de\u05d4"
+		},
+		"nds-nl": {
+			"language": "nds-nl",
+			"value": "plaetjen, foto"
+		},
+		"bg": {
+			"language": "bg",
+			"value": "\u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435, \u043e\u0442\u043d\u0430\u0441\u044f\u0449\u043e \u0441\u0435 \u0434\u043e \u043e\u0431\u0435\u043a\u0442\u0430"
+		},
+		"nb": {
+			"language": "nb",
+			"value": "illustrasjon av subjektet"
+		},
+		"sr-ec": {
+			"language": "sr-ec",
+			"value": "\u043e\u0434\u0433\u043e\u0432\u0430\u0440\u0430\u0458\u0443\u045b\u0430 \u0438\u043b\u0443\u0441\u0442\u0440\u0430\u0446\u0438\u0458\u0430; \u0441\u043f\u0435\u0446\u0438\u0444\u0438\u0447\u043d\u0438\u0458\u0430 \u0441\u0432\u043e\u0458\u0441\u0442\u0432\u0430 \u0442\u0440\u0435\u0431\u0430 \u0434\u0430 \u0441\u0435 \u043a\u043e\u0440\u0438\u0441\u0442\u0438 \u043a\u0430\u0434\u0430 \u0458\u0435 \u043f\u043e\u0442\u0440\u0435\u0431\u0430\u043d \u043f\u043e\u0434\u0440\u043e\u0431\u043d\u0438\u0458\u0438 \u043e\u043f\u0438\u0441"
+		},
+		"gu": {
+			"language": "gu",
+			"value": "\u0ab8\u0a82\u0ab2\u0a97\u0acd\u0aa8 \u0a9b\u0aac\u0ac0; \u0ab5\u0aa7\u0ac1 \u0ab5\u0abf\u0ab5\u0ab0\u0aa3\u0aa8\u0ac0 \u0a9c\u0ab0\u0ac2\u0ab0 \u0ab9\u0acb\u0aaf \u0aa4\u0acd\u0aaf\u0abe\u0ab0\u0ac7 \u0ab5\u0aa7\u0ac1 \u0ab8\u0a9a\u0acb\u0a9f \u0a97\u0ac1\u0aa3\u0aa7\u0ab0\u0acd\u0aae\u0acb \u0ab5\u0abe\u0aaa\u0ab0\u0ab5\u0abe"
+		},
+		"is": {
+			"language": "is",
+			"value": "Mynd af vi\u00f0fangsefni"
+		},
+		"ar": {
+			"language": "ar",
+			"value": "\u062c\u0644\u062f \u0645\u0631\u0645\u0631\u064a"
+		},
+		"mzn": {
+			"language": "mzn",
+			"value": "\u0645\u0631\u0628\u0648\u0637 \u0639\u06a9\u0633"
+		},
+		"da": {
+			"language": "da",
+			"value": "illustration"
+		},
+		"nn": {
+			"language": "nn",
+			"value": "illustrasjon"
+		},
+		"el": {
+			"language": "el",
+			"value": "\u03b5\u03b9\u03ba\u03cc\u03bd\u03b1 \u03c4\u03bf\u03c5 \u03b1\u03bd\u03c4\u03b9\u03ba\u03b5\u03b9\u03bc\u03ad\u03bd\u03bf\u03c5"
+		},
+		"gan": {
+			"language": "gan",
+			"value": "wyxdo"
+		},
+		"ka": {
+			"language": "ka",
+			"value": "boingi"
+		},
+		"gsw": {
+			"language": "gsw",
+			"value": "relevanti Illuschtration"
+		},
+		"pt-br": {
+			"language": "pt-br",
+			"value": "uma ilustra\u00e7\u00e3o relevante; propriedades mais espec\u00edficas devem ser utilizadas quando mais descri\u00e7\u00e3o for necess\u00e1ria"
+		},
+		"en": {
+			"language": "en",
+			"value": "a relevant illustration; more specific properties should be used when more description is required"
+		},
+		"zh": {
+			"language": "zh",
+			"value": "\u4e00\u4e2a\u76f8\u5173\u7684\u56fe\u793a\uff0c\u5f53\u9700\u8981\u66f4\u591a\u7684\u63cf\u8ff0\u65f6\uff0c\u5e94\u4f7f\u7528\u66f4\u5177\u4f53\u7684\u5c5e\u6027"
+		},
+		"sr-el": {
+			"language": "sr-el",
+			"value": "odgovaraju\u0107a ilustracija; specifi\u010dnija svojstva treba da se koristi kada je potreban podrobniji opis"
+		}
+	},
+	"datatype": "commonsMedia"
+}

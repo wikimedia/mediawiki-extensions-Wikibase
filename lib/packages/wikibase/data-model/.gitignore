@@ -1,0 +1,16 @@
+*~
+*.kate-swp
+
+composer.phar
+composer.lock
+
+!.*
+.idea/
+
+vendor/
+build/
+
+.floo
+.flooignore
+
+.phpunit.result.cache
