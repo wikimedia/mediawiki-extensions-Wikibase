@@ -4,6 +4,7 @@
 
 * Require Wikibase DataModel 8.x or 9.x
 * Raised minimum PHP version to 7.0 (^7.0)
+* Moved (De)SerializerFactories into (De)Serializer Namespaces
 
 ## 2.9.1 (2018-12-14)
 

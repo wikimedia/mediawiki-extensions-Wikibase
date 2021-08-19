@@ -7,7 +7,7 @@ use ExtensionRegistry;
 use Parser;
 use Wikibase\Client\Api\ApiFormatReference;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
-use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\Deserializers\DeserializerFactory;
 
 /**
  * Do special hook registrations. These are affected by ordering issues and/or

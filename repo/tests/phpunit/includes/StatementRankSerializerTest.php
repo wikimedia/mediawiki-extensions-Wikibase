@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests;
 use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Exceptions\DeserializationException;
 use Serializers\Exceptions\SerializationException;
-use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\StatementRankSerializer;

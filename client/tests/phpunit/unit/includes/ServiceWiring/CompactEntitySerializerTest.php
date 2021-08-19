@@ -6,7 +6,7 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 use Serializers\DispatchableSerializer;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 
 /**

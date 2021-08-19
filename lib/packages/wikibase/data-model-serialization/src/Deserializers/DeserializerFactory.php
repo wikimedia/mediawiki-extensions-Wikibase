@@ -1,23 +1,10 @@
 <?php
 
-namespace Wikibase\DataModel;
+namespace Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\DispatchingDeserializer;
-use Wikibase\DataModel\Deserializers\AliasGroupListDeserializer;
-use Wikibase\DataModel\Deserializers\EntityIdDeserializer;
-use Wikibase\DataModel\Deserializers\ItemDeserializer;
-use Wikibase\DataModel\Deserializers\PropertyDeserializer;
-use Wikibase\DataModel\Deserializers\ReferenceDeserializer;
-use Wikibase\DataModel\Deserializers\ReferenceListDeserializer;
-use Wikibase\DataModel\Deserializers\SiteLinkDeserializer;
-use Wikibase\DataModel\Deserializers\SnakDeserializer;
-use Wikibase\DataModel\Deserializers\SnakListDeserializer;
-use Wikibase\DataModel\Deserializers\StatementDeserializer;
-use Wikibase\DataModel\Deserializers\StatementListDeserializer;
-use Wikibase\DataModel\Deserializers\TermDeserializer;
-use Wikibase\DataModel\Deserializers\TermListDeserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**

@@ -1,25 +1,11 @@
 <?php
 
-namespace Wikibase\DataModel;
+namespace Wikibase\DataModel\Serializers;
 
 use InvalidArgumentException;
 use Serializers\DispatchableSerializer;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
-use Wikibase\DataModel\Serializers\AliasGroupListSerializer;
-use Wikibase\DataModel\Serializers\AliasGroupSerializer;
-use Wikibase\DataModel\Serializers\ItemSerializer;
-use Wikibase\DataModel\Serializers\PropertySerializer;
-use Wikibase\DataModel\Serializers\ReferenceListSerializer;
-use Wikibase\DataModel\Serializers\ReferenceSerializer;
-use Wikibase\DataModel\Serializers\SiteLinkSerializer;
-use Wikibase\DataModel\Serializers\SnakListSerializer;
-use Wikibase\DataModel\Serializers\SnakSerializer;
-use Wikibase\DataModel\Serializers\StatementListSerializer;
-use Wikibase\DataModel\Serializers\StatementSerializer;
-use Wikibase\DataModel\Serializers\TermListSerializer;
-use Wikibase\DataModel\Serializers\TermSerializer;
-use Wikibase\DataModel\Serializers\TypedSnakSerializer;
 
 /**
  * Factory for constructing Serializer objects that can serialize WikibaseDataModel objects.

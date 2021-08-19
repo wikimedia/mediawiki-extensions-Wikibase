@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**

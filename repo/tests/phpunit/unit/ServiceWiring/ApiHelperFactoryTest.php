@@ -7,7 +7,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use HashSiteStore;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;

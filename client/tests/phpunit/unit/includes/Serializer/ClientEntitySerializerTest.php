@@ -7,7 +7,7 @@ use Serializers\Serializer;
 use Wikibase\Client\Serializer\ClientEntitySerializer;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;

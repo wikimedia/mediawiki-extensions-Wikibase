@@ -4,8 +4,8 @@ namespace Wikibase\Lib\Tests;
 
 use Deserializers\Deserializer;
 use Serializers\Serializer;
-use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Deserializers\DeserializerFactory;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 
 /**

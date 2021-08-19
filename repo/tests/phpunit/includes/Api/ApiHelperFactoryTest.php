@@ -9,7 +9,7 @@ use Language;
 use MediaWiki\MediaWikiServices;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Api\ApiErrorReporter;
