@@ -80,7 +80,7 @@ class SitesModule extends ResourceLoaderModule {
 			$this->cache->makeKey( 'wikibase-sites-module', 'script', $languageCode ),
 			self::SITE_DETAILS_TTL,
 			function () use ( $languageCode ) {
-					return $this->makeScript( $languageCode );
+				return $this->makeScript( $languageCode );
 			}
 		);
 	}
@@ -166,13 +166,13 @@ class SitesModule extends ResourceLoaderModule {
 		);
 
 		return [
-				'shortName' => $languageName,
-				'name' => $languageName, // use short name for both, for now
-				'id' => $site->getGlobalId(),
-				'pageUrl' => $pageUrl,
-				'apiUrl' => $apiUrl,
-				'languageCode' => $site->getLanguageCode(),
-				'group' => $groupName
+			'shortName' => $languageName,
+			'name' => $languageName, // use short name for both, for now
+			'id' => $site->getGlobalId(),
+			'pageUrl' => $pageUrl,
+			'apiUrl' => $apiUrl,
+			'languageCode' => $site->getLanguageCode(),
+			'group' => $groupName
 		];
 	}
 
