@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Adriendelucca",
 			"Fohanno",
 			"Fulup",
 			"Pymouss",
@@ -12,8 +13,8 @@
 	"wikibase-snakview-snaktypeselector-novalue": "talvoud ebet",
 	"datatypes-type-string": "Neudennad",
 	"datatypes-type-quantity": "Kementad",
-	"datatypes-type-monolingualtext": "Testenn unyezhek",
-	"datatypes-type-multilingualtext": "Testenn liesyezhek",
+	"datatypes-type-monolingualtext": "Skrid unyezhek",
+	"datatypes-type-multilingualtext": "Skrid liesyezhek",
 	"datatypes-type-number": "Niver",
 	"datatypes-type-mediawiki-title": "Titl MediaWiki",
 	"datatypes-type-unknown": "Anspisaet",
