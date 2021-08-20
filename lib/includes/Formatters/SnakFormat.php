@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Formatters;
 
 /**
@@ -17,7 +19,7 @@ class SnakFormat {
 	 * @param string $format
 	 * @return string One of the SnakFormatter::FORMAT_HTML/FORMAT_WIKI/FORMAT_PLAIN constants.
 	 */
-	public function getBaseFormat( $format ) {
+	public function getBaseFormat( string $format ): string {
 		switch ( $format ) {
 			case SnakFormatter::FORMAT_HTML_DIFF:
 			case SnakFormatter::FORMAT_HTML_VERBOSE:
@@ -35,7 +37,7 @@ class SnakFormat {
 	 * @param string $targetFormat
 	 * @return bool Whether $availableFormat can be served by $targetFormat.
 	 */
-	public function isPossibleFormat( $availableFormat, $targetFormat ) {
+	public function isPossibleFormat( string $availableFormat, string $targetFormat ): bool {
 		switch ( $targetFormat ) {
 			case SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW:
 				if ( $availableFormat === SnakFormatter::FORMAT_HTML_VERBOSE ) {
