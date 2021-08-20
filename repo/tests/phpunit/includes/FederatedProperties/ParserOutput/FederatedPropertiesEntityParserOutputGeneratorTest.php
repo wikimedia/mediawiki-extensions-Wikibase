@@ -39,6 +39,7 @@ use Wikibase\View\Template\TemplateFactory;
 class FederatedPropertiesEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTestBase {
 
 	public function testShouldPrefetchFederatedProperties() {
+		$this->markTestSkipped( 'Skipped until we enable generating parser output with Federated Properties. See T288598' );
 		$labelLanguage = 'en';
 		$userLanguage = 'en';
 
