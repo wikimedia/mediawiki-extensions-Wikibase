@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
-use InvalidArgumentException;
 use ReflectionClass;
 use Wikibase\Lib\Formatters\SnakFormat;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -16,72 +15,9 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  */
 class SnakFormatTest extends \PHPUnit\Framework\TestCase {
 
-	public function fallbackFormatProvider() {
-		yield [ SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML_VERBOSE ];
-		yield [ SnakFormatter::FORMAT_WIKI, SnakFormatter::FORMAT_WIKI ];
-	}
-
-	/**
-	 * @dataProvider fallbackFormatProvider
-	 */
-	public function testGetFallbackFormat( $expect, $format ) {
-		$snakFormatHelper = new SnakFormat();
-		$this->assertSame( $expect, $snakFormatHelper->getFallbackFormat( $format ) );
-	}
-
-	/**
-	 * Make sure all SnakeFormatter::FORMAT_* constants are known/supported
-	 */
-	public function testGetFallbackFormat_complete() {
-		$snakFormatHelper = new SnakFormat();
-		$refSnakFormatter = new ReflectionClass( SnakFormatter::class );
-
-		foreach ( $refSnakFormatter->getConstants() as $cname => $cvalue ) {
-			if ( strpos( $cname, 'FORMAT_' ) !== 0 ) {
-				continue;
-			}
-			$this->assertIsString(
-
-				$snakFormatHelper->getFallbackFormat( $cvalue )
-			);
-		}
-	}
-
-	public function testGetFallbackFormat_invalidFormat() {
-		$snakFormatHelper = new SnakFormat();
-		$this->expectException( InvalidArgumentException::class );
-		$snakFormatHelper->getFallbackFormat( 'JSON-XML' );
-	}
-
-	public function fallbackChainProvider() {
-		yield [
-			[ SnakFormatter::FORMAT_HTML ],
-			SnakFormatter::FORMAT_HTML
-		];
-		yield [
-			[ SnakFormatter::FORMAT_HTML_VERBOSE, SnakFormatter::FORMAT_HTML ],
-			SnakFormatter::FORMAT_HTML_VERBOSE
-		];
-		yield [
-			[
-				SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW,
-				SnakFormatter::FORMAT_HTML_VERBOSE,
-				SnakFormatter::FORMAT_HTML
-			],
-			SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW
-		];
-	}
-
-	/**
-	 * @dataProvider fallbackChainProvider
-	 */
-	public function testGetFallbackChain( $expect, $format ) {
-		$snakFormatHelper = new SnakFormat();
-		$this->assertEquals( $expect, $snakFormatHelper->getFallbackChain( $format ) );
-	}
-
 	public function baseFormatProvider() {
 		yield [ SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML_VERBOSE ];
+		yield [ SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW ];
 		yield [ SnakFormatter::FORMAT_WIKI, SnakFormatter::FORMAT_WIKI ];
 	}
 
@@ -93,9 +29,26 @@ class SnakFormatTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expect, $snakFormatHelper->getBaseFormat( $format ) );
 	}
 
+	/**
+	 * Make sure all SnakFormatter::FORMAT_* constants are known/supported
+	 */
+	public function testGetBaseFormat_complete() {
+		$snakFormatHelper = new SnakFormat();
+		$refSnakFormatter = new ReflectionClass( SnakFormatter::class );
+
+		foreach ( $refSnakFormatter->getConstants() as $cname => $cvalue ) {
+			if ( strpos( $cname, 'FORMAT_' ) !== 0 ) {
+				continue;
+			}
+			$this->assertIsString( $snakFormatHelper->getBaseFormat( $cvalue ) );
+		}
+	}
+
 	public function possibleFormatProvider() {
 		yield [ true, SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML ];
 		yield [ true, SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML_VERBOSE ];
+		yield [ true, SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW ];
+		yield [ true, SnakFormatter::FORMAT_HTML_VERBOSE, SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW ];
 		yield [ false, SnakFormatter::FORMAT_PLAIN, SnakFormatter::FORMAT_HTML ];
 	}
 
