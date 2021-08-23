@@ -207,6 +207,7 @@ use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\PropertyInfoBuilder;
+use Wikibase\Repo\PropertyServices;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\EntityStubRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfBuilderFactory;
@@ -1485,13 +1486,18 @@ return [
 	},
 
 	'WikibaseRepo.PropertyDataTypeLookup' => function ( MediaWikiServices $services ): PropertyDataTypeLookup {
+		$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions( $services );
+
 		return new SourceDispatchingPropertyDataTypeLookup(
-			WikibaseRepo::getEntitySourceLookup( $services ),
-			new ServiceBySourceAndTypeDispatcher(
-				PropertyDataTypeLookup::class,
-				WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )
-					->getServiceBySourceAndType( EntityTypeDefinitions::PROPERTY_DATA_TYPE_LOOKUP_CALLBACK )
-			)
+			new EntitySourceLookup(
+				$entitySourceDefinitions,
+				new SubEntityTypesMapper( WikibaseRepo::getEntityTypeDefinitions( $services )
+				->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) )
+			),
+			( new PropertyServices(
+				$entitySourceDefinitions,
+				PropertyServices::getServiceDefinitions()
+			) )->get( PropertyServices::PROPERTY_DATA_TYPE_LOOKUP_CALLBACK )
 		);
 	},
 

@@ -24,14 +24,12 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
-use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
@@ -538,17 +536,6 @@ return [
 		Def::TITLE_TEXT_LOOKUP_CALLBACK => function () {
 			return new TitleLookupBasedEntityTitleTextLookup(
 				WikibaseRepo::getEntityTitleLookup()
-			);
-		},
-		Def::PROPERTY_DATA_TYPE_LOOKUP_CALLBACK => function () {
-			$infoLookup = WikibaseRepo::getStore()->getPropertyInfoLookup();
-			$entityLookup = WikibaseRepo::getEntityLookup();
-			$retrievingLookup = new EntityRetrievingDataTypeLookup( $entityLookup );
-
-			return new PropertyInfoDataTypeLookup(
-				$infoLookup,
-				WikibaseRepo::getLogger(),
-				$retrievingLookup
 			);
 		},
 	]
