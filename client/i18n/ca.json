@@ -103,7 +103,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Algunes declaracions",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Declaració: $1",
 	"wikibase-pageinfo-entity-usage-X": "Totes les dades de l'entitat",
-	"wikibase-pageinfo-entity-usage-O": "Altres (declaracions)",
+	"wikibase-pageinfo-entity-usage-O": "Miscel·lània (p. ex., àlies, existència d'entitat)",
 	"wikibase-property-render-error": "No s'ha pogut representar la propietat $1: $2",
 	"wikibase-otherprojects": "En altres projectes",
 	"wikibase-otherprojects-beta-message": "Barra lateral d'altres projectes",
