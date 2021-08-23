@@ -35,7 +35,7 @@ class EntityTypesConfigFeddyPropsAugmenter {
 
 	public static function factory(): self {
 		return new EntityTypesConfigFeddyPropsAugmenter(
-			require __DIR__ . '/../WikibaseRepo.FederatedProperties.entitytypes.php'
+			require __DIR__ . '/../WikibaseRepo.FederatedProperties.OverrideEntityServices.php'
 		);
 	}
 }
