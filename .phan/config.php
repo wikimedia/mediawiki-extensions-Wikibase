@@ -40,6 +40,10 @@ $cfg['directory_list'] = array_merge(
 		'view/src',
 		'lib/packages/wikibase/changes/src',
 		'lib/packages/wikibase/federated-properties/src',
+		'lib/packages/wikibase/data-model/src/',
+		'lib/packages/wikibase/data-model-serialization/src/Deserializers/',
+		'lib/packages/wikibase/data-model-serialization/src/Serializers/',
+		'lib/packages/wikibase/data-model-services/src/',
 	]
 );
 
@@ -62,5 +66,11 @@ $cfg['suppress_issue_types'] = array_merge(
 		"PhanRedefinedUsedTrait",
 	]
 );
+
+/*
+ * Hack to disable Phan - T289040
+ */
+$cfg['directory_list'] = [];
+$cfg['file_list'] = [];
 
 return $cfg;
