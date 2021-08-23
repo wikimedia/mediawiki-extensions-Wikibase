@@ -104,9 +104,9 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	 * Mind that in the real world this is done by the WikibaseRepoEntityTypes hook.
 	 */
 	protected function getEntityTypeDefinitionsConfiguration(): array {
-		return array_merge_recursive(
-			require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php',
-			require __DIR__ . '/../../../../WikibaseRepo.entitytypes.php'
+		return wfArrayPlus2d(
+			require __DIR__ . '/../../../../WikibaseRepo.entitytypes.php',
+			require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php'
 		);
 	}
 
