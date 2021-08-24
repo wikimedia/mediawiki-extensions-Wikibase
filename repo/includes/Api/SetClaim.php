@@ -204,6 +204,7 @@ class SetClaim extends ApiBase {
 		$index = $params['index'] ?? null;
 		$changeop = $this->statementChangeOpFactory->newSetStatementOp( $statement, $index );
 		$this->modificationHelper->applyChangeOp( $changeop, $entity, $summary );
+		$statement = $entity->getStatements()->getFirstStatementWithGuid( $guid );
 
 		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, $params, $this->getContext() );
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );

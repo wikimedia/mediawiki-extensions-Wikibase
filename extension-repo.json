@@ -265,6 +265,7 @@
 				"WikibaseRepo.BaseDataModelDeserializerFactory",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.Logger",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.SnakFactory",
 				"WikibaseRepo.StatementGuidParser",
