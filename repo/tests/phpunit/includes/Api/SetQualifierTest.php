@@ -153,6 +153,26 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		] );
 	}
 
+	public function testReturnsNormalizedData(): void {
+		$propertyId = $this->createUppercaseStringTestProperty();
+		$item = $this->getTestItem();
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$guid = $statement->getGuid();
+
+		[ $response ] = $this->doApiRequestWithToken( [
+			'action' => 'wbsetqualifier',
+			'claim' => $guid,
+			'snaktype' => 'value',
+			'property' => $propertyId->getSerialization(),
+			'value' => '"a string"',
+		] );
+
+		$responseSnak = $response['claim']['qualifiers'][$propertyId->getSerialization()][0];
+		$this->assertSame( 'A STRING', $responseSnak['datavalue']['value'] );
+	}
+
 	public function provideChangeRequests(): iterable {
 		return [ [ PropertyValueSnak::class, new StringValue( 'o_O' ) ] ];
 	}

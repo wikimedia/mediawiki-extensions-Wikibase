@@ -119,6 +119,21 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		] );
 	}
 
+	public function testReturnsNormalizedData(): void {
+		$propertyId = $this->createUppercaseStringTestProperty();
+
+		$entity = $this->addStatementsAndSave( new Item(), $propertyId );
+
+		[ $response ] = $this->doApiRequestWithToken( [
+			'action' => 'wbsetclaimvalue',
+			'claim' => $entity->getStatements()->toArray()[0]->getGuid(),
+			'snaktype' => 'value',
+			'value' => '"a string"',
+		] );
+
+		$this->assertSame( 'A STRING', $response['claim']['mainsnak']['datavalue']['value'] );
+	}
+
 	public function doTestValidRequest( EntityId $entityId, string $guid, $value, string $expectedSummary ): void {
 		$entityLookup = WikibaseRepo::getEntityLookup();
 		/** @var StatementListProvidingEntity $obtainedEntity */

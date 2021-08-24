@@ -607,4 +607,24 @@ class SetClaimTest extends WikibaseApiTestCase {
 		}
 	}
 
+	public function testReturnsNormalizedData(): void {
+		$propertyId = $this->createUppercaseStringTestProperty();
+
+		$entity = $this->getEntityStore()
+			->saveEntity( new Item(), '', $this->user, EDIT_NEW )
+			->getEntity();
+
+		$guidGenerator = new GuidGenerator();
+		$statement = new Statement( new PropertyValueSnak(
+			$propertyId,
+			new StringValue( 'a string' )
+		) );
+		$statement->setGuid( $guidGenerator->newGuid( $entity->getId() ) );
+
+		$response = $this->makeRequest( $statement, null, null, null );
+
+		$this->assertValidResponse( $response );
+		$this->assertSame( 'A STRING', $response['claim']['mainsnak']['datavalue']['value'] );
+	}
+
 }

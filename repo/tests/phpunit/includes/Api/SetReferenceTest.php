@@ -244,6 +244,25 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		) );
 	}
 
+	public function testReturnsNormalizedData(): void {
+		$propertyId = $this->createUppercaseStringTestProperty();
+
+		$statement = $this->getNewStatement( [ /* no references yet */ ] );
+		$guid = $statement->getGuid();
+
+		$reference = new Reference( new SnakList( [ new PropertyValueSnak(
+			$propertyId,
+			new StringValue( 'a string' )
+		) ] ) );
+		$serialized = $this->serializeReference( $reference );
+		$params = $this->generateRequestParams( $guid, json_encode( $serialized['snaks'] ) );
+
+		[ $response ] = $this->doApiRequestWithToken( $params );
+
+		$responseSnak = $response['reference']['snaks'][$propertyId->getSerialization()][0];
+		$this->assertSame( 'A STRING', $responseSnak['datavalue']['value'] );
+	}
+
 	protected function makeInvalidRequest(
 		string $statementGuid,
 		?string $referenceHash,
