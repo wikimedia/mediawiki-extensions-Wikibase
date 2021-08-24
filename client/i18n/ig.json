@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Oby Ezeilo",
+			"Tochiprecious",
 			"Ukabia",
 			"Uzoma Ozurumba"
 		]
@@ -11,6 +12,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} ihe",
 	"wikibase-editlinks": "Dezie njikọ ndi a",
 	"wikibase-editlinkstitle": "Dezie njiko asusu ndi yiri nụ",
+	"wikibase-linkitem-addlinks": "Tinye njikọ",
 	"wikibase-rc-hide-wikidata-hide": "Zònarị",
 	"wikibase-rc-hide-wikidata-show": "Zi",
 	"wikibase-rc-wikibase-edit-letter": "D",
