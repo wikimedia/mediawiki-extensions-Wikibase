@@ -8,17 +8,21 @@ use ApiBase;
 use ApiMain;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\SnakFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating a reference or setting the value of an existing one.
@@ -174,9 +178,10 @@ class SetReference extends ApiBase {
 		$snakList->orderByProperty( $snaksOrder );
 
 		$newReference = new Reference( $snakList );
-
 		$changeOp = $this->getChangeOp( $newReference );
-		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
+
+		$newReference = $this->applyChangeOpAndReturnChangedReference(
+			$changeOp, $entity, $summary, $claim, $newReference );
 
 		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, $params, $this->getContext() );
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
@@ -220,6 +225,49 @@ class SetReference extends ApiBase {
 		$index = $params['index'] ?? null;
 
 		return $this->statementChangeOpFactory->newSetReferenceOp( $guid, $reference, $hash, $index );
+	}
+
+	/**
+	 * Apply $changeop to $entity (updating $summary) and return the Reference that was changed.
+	 * (Due to data value normalization in the ChangeOp factory,
+	 * this may not be the exact same reference as $newReference.)
+	 */
+	private function applyChangeOpAndReturnChangedReference(
+		ChangeOp $changeOp,
+		EntityDocument $entity,
+		Summary $summary,
+		Statement $statement,
+		Reference $newReference
+	): Reference {
+		$oldReferences = clone $statement->getReferences();
+
+		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
+
+		$changedReferences = [];
+		foreach ( $statement->getReferences()->getIterator() as $reference ) {
+			if ( !$oldReferences->hasReference( $reference ) ) {
+				$changedReferences[] = $reference;
+			}
+		}
+
+		switch ( count( $changedReferences ) ) {
+			case 0:
+				// no reference changed hash, return original $newReference
+				// (could be a null edit, or its index or snaks-order could have changed)
+				return $newReference;
+			case 1:
+				return $changedReferences[0];
+			default:
+				// this should never happen, but let’s warn instead of crashing
+				WikibaseRepo::getLogger()->warning( __METHOD__ . ': changed {count} references, expected 0-1', [
+					'count' => count( $changedReferences ),
+					'oldReferences' => $oldReferences->serialize(),
+					'newReferences' => $statement->getReferences()->serialize(),
+					'changedReferences' => ( new ReferenceList( $changedReferences ) )->serialize(),
+					'entityId' => $entity->getId()->getSerialization(),
+				] );
+				return $newReference; // it’s the best we have
+		}
 	}
 
 	/**
