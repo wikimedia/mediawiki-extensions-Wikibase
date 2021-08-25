@@ -75,6 +75,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$badge = new Item();
 			$store->saveEntity( $badge, 'EditEntityTestQ32', $this->user, EDIT_NEW );
 			self::$idMap['%Q32%'] = $badge->getId()->getSerialization();
+
+			// self::$idMap['%UppercaseStringProp%'] is added in testEditEntity
 		}
 
 		WikibaseRepo::getSettings()->setSetting( 'badgeItems', [
@@ -388,6 +390,23 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'claims' => []
 				]
 			],
+			'return normalized data' => [
+				'p' => [ 'data' => '{"claims":['
+					. '{"mainsnak":{"snaktype":"value","property":"%UppercaseStringProp%",'
+					. '"datavalue":{"value":"a string","type":"string"}},'
+					. '"type":"statement","rank":"normal"}]}' ],
+				'e' => [
+					'claims' => [ [
+						'mainsnak' => [
+							'snaktype' => 'value',
+							'property' => '%UppercaseStringProp%',
+							'datavalue' => [ 'value' => 'A STRING', 'type' => 'string' ],
+						],
+						'type' => 'statement',
+						'rank' => 'normal',
+					] ],
+				],
+			],
 		];
 	}
 
@@ -536,6 +555,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 	 */
 	public function testEditEntity( $params, $expected, $needed = null ) {
 		$this->skipIfEntityTypeNotKnown( $needed );
+
+		// this registers a new datatype, can’t be done in setUp
+		self::$idMap['%UppercaseStringProp%'] = $this
+			->createUppercaseStringTestProperty()->getSerialization();
 
 		$this->injectIds( $params );
 		$this->injectIds( $expected );

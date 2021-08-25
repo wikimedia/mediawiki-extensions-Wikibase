@@ -97,6 +97,24 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		] );
 	}
 
+	public function testReturnsNormalizedData(): void {
+		$itemId = $this->getEntityStore()
+			->saveEntity( new Item(), 'test', $this->user, EDIT_NEW )
+			->getEntity()
+			->getId();
+		$propertyId = $this->createUppercaseStringTestProperty();
+
+		[ $response ] = $this->doApiRequestWithToken( [
+			'action' => 'wbcreateclaim',
+			'entity' => $itemId->getSerialization(),
+			'property' => $propertyId->getSerialization(),
+			'snaktype' => 'value',
+			'value' => '"a string"',
+		] );
+
+		$this->assertSame( 'A STRING', $response['claim']['mainsnak']['datavalue']['value'] );
+	}
+
 	public function invalidRequestProvider(): iterable {
 		$argLists = [];
 

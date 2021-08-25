@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiTestCase;
 use ApiUsageException;
 use ChangeTags;
+use DataValues\StringValue;
 use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
 use PHPUnit\Framework\Constraint\Constraint;
@@ -12,6 +13,9 @@ use TestSites;
 use TestUser;
 use Title;
 use User;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Normalization\DataValueNormalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 use WikiPage;
@@ -143,6 +147,35 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		);
 
 		return $res['entities'][$id];
+	}
+
+	/**
+	 * Set up a datatype that normalizes strings to uppercase,
+	 * create a property for it, and return its ID.
+	 */
+	protected function createUppercaseStringTestProperty(): PropertyId {
+		$this->setTemporaryHook( 'WikibaseRepoDataTypes', function ( array &$dataTypes ) {
+			$dataTypes['PT:string-uppercase'] = [
+				'value-type' => 'string',
+				'normalizer-factory-callback' => function (): DataValueNormalizer {
+					$normalizer = $this->createMock( DataValueNormalizer::class );
+					$normalizer->method( 'normalize' )
+						->willReturnCallback( function ( StringValue $value ): StringValue {
+							return new StringValue( strtoupper( $value->getValue() ) );
+						} );
+					return $normalizer;
+				},
+			];
+		} );
+		// note: when removing tmpNormalizeDataValues, call $this->resetServices() instead
+		$settings = clone WikibaseRepo::getSettings( $this->getServiceContainer() );
+		$settings->setSetting( 'tmpNormalizeDataValues', true );
+		$this->setService( 'WikibaseRepo.Settings', $settings );
+
+		return $this->getEntityStore()
+			->saveEntity( Property::newFromType( 'string-uppercase' ), '', $this->user, EDIT_NEW )
+			->getEntity()
+			->getId();
 	}
 
 	/**
