@@ -441,7 +441,10 @@ return [
 		$baseDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
 		$repoDataTypes = require __DIR__ . '/WikibaseRepo.datatypes.php';
 
-		$dataTypes = array_merge_recursive( $baseDataTypes, $repoDataTypes );
+		$dataTypes = wfArrayPlus2d(
+			$repoDataTypes,
+			$baseDataTypes
+		);
 
 		$services->getHookContainer()->run( 'WikibaseRepoDataTypes', [ &$dataTypes ] );
 
@@ -947,7 +950,10 @@ return [
 		$baseEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
 		$repoEntityTypes = require __DIR__ . '/WikibaseRepo.entitytypes.php';
 
-		$entityTypes = array_merge_recursive( $baseEntityTypes, $repoEntityTypes );
+		$entityTypes = wfArrayPlus2d(
+			$repoEntityTypes,
+			$baseEntityTypes
+		);
 
 		$services->getHookContainer()->run( 'WikibaseRepoEntityTypes', [ &$entityTypes ] );
 
@@ -1040,7 +1046,10 @@ return [
 		$baseEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
 		$repoEntityTypes = require __DIR__ . '/WikibaseRepo.entitytypes.php';
 
-		$entityTypes = array_merge_recursive( $baseEntityTypes, $repoEntityTypes );
+		$entityTypes = wfArrayPlus2d(
+			$repoEntityTypes,
+			$baseEntityTypes
+		);
 
 		$services->getHookContainer()->run( 'WikibaseRepoEntityTypes', [ &$entityTypes ] );
 

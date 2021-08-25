@@ -234,7 +234,10 @@ return [
 		$baseDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
 		$clientDataTypes = require __DIR__ . '/WikibaseClient.datatypes.php';
 
-		$dataTypes = array_merge_recursive( $baseDataTypes, $clientDataTypes );
+		$dataTypes = wfArrayPlus2d(
+			$clientDataTypes,
+			$baseDataTypes
+		);
 
 		$services->getHookContainer()->run( 'WikibaseClientDataTypes', [ &$dataTypes ] );
 
@@ -429,7 +432,10 @@ return [
 		$baseEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
 		$clientEntityTypes = require __DIR__ . '/WikibaseClient.entitytypes.php';
 
-		$entityTypes = array_merge_recursive( $baseEntityTypes, $clientEntityTypes );
+		$entityTypes = wfArrayPlus2d(
+			$clientEntityTypes,
+			$baseEntityTypes
+		);
 
 		$services->getHookContainer()->run( 'WikibaseClientEntityTypes', [ &$entityTypes ] );
 
