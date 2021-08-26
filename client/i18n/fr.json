@@ -94,7 +94,7 @@
 	"wikibase-watchlist-show-changes-pref": "Voir les modifications de {{WBREPONAME}} dans votre liste de suivi",
 	"wikibase-error-deserialize-error": "Échec lors de la désérialisation des données.",
 	"wikibase-error-serialize-error": "Échec lors de la sérialisation des données.",
-	"wikibase-error-invalid-entity-id": "L’ID « $2 » est inconnu du système. Veuillez utiliser un ID d’entité valide.",
+	"wikibase-error-invalid-entity-id": "L’identifiant « $2 » est inconnu du système. Veuillez utiliser un identifiant d’entité valide.",
 	"wikibase-error-exceeded-entity-access-limit": "Trop d’entités de {{WBREPONAME}} accédées.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Trop d’appels à « mw.wikibase.getReferencedEntityId », {{PLURAL:$2|$2 seul est autorisé|au plus $2 sont autorisés}}.",
 	"unconnectedpages": "Pages non reliées à un élément",

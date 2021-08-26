@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Filzstift"
+		]
+	},
+	"wikibase-validator-bad-url": "URLs dürfen bestimmte Zeichen wie Leerschläge oder eckige Klammern nicht enthalten: $1"
+}
