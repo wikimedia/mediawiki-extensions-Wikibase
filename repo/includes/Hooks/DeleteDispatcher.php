@@ -60,9 +60,6 @@ class DeleteDispatcher implements ArticleDeleteCompleteHook {
 		}
 
 		$title = $wikiPage->getTitle();
-		if ( $title === null ) {
-			return true;
-		}
 
 		// Abort if not entityId
 		$entityId = $this->entityIdLookup->getEntityIdForTitle( $title );
