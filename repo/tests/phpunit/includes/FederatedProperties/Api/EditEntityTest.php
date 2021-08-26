@@ -4,8 +4,14 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Api\EditEntity
@@ -76,4 +82,44 @@ class EditEntityTest extends FederatedPropertiesApiTestCase {
 			$result['entity']['labels']['en']['value']
 		);
 	}
+
+	public function testAddStatementToLocalEntityContainingLocalProperty(): void {
+		$store = WikibaseRepo::getEntityStore();
+
+		$item = new Item( new ItemId( 'Q1' ) );
+		$itemId = $item->getId();
+		$store->saveEntity( $item, 'feddypropstest', $this->user, EDIT_NEW );
+
+		$property = new Property( new PropertyId( 'P1' ), null, 'string' );
+		$propertyId = $property->getId();
+		$store->saveEntity( $property, 'feddypropstest', $this->user, EDIT_NEW );
+
+		$statement = new Statement( new PropertyNoValueSnak( $propertyId ) );
+		$guidGenerator = new GuidGenerator();
+		$guid = $guidGenerator->newGuid( $itemId );
+		$statement->setGuid( $guid );
+
+		$statementSerializer = WikibaseRepo::getBaseDataModelSerializerFactory()->newStatementSerializer();
+		$statementSerialization = $statementSerializer->serialize( $statement );
+
+		$params = [
+			'action' => 'wbeditentity',
+			'id' => $itemId->getSerialization(),
+			'data' => json_encode( [
+				'claims' => [ $statementSerialization ],
+			] ),
+		];
+
+		[ $result, ] = $this->doApiRequestWithToken( $params );
+
+		$this->assertArrayHasKey(
+			'success',
+			$result
+		);
+		$this->assertSame(
+			$propertyId->getSerialization(),
+			$result['entity']['claims'][ $propertyId->getSerialization() ][ 0 ][ 'mainsnak' ][ 'property' ]
+		);
+	}
+
 }
