@@ -156,6 +156,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>أنا حدثت</strong> قيمة قديمة",
 	"wikibase-client-data-bridge-edit-decision-update-description": "القيمة السابقة كانت صحيحة في وقت سابق لكنها الآن قديمة.",
 	"wikibase-client-data-bridge-references-heading": "مراجع",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "أنت غير مسجل الدخول",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "تسجيل الدخول أو إنشاء حساب",
 	"wikibase-client-data-bridge-license-heading": "الاستخدام والترخيص",
 	"wikibase-client-data-bridge-license-body": "<p>سيؤدي تغيير هذه القيمة إلى تغييرها أيضًا في {{WBREPONAME}} وربما على الويكي بلغات أخرى.</p>\n<p> بالنقر على \"{{int:$1}}\", أنت توافق على [$2 تعليمات الاستخدام], وأنت توافق بشكل لا رجعة فيه على التخلي عن مساهمتك بموجب [$3 $4].</p>",
@@ -173,6 +174,7 @@
 	"wikibase-client-data-bridge-somevalue-error-body": "$1 معلم عليه ك<i>unknown value</i> في {{WBREPONAME}}. تعديل القيم المعلم عليها ك<i>unknown value</i> حاليا غير ممكن.",
 	"wikibase-client-data-bridge-novalue-error-head": "تعديل قيمة $1 غير مدعوم حاليًّا",
 	"wikibase-client-data-bridge-novalue-error-body": "$1 معلم عليه ك<i>no value</i> في {{WBREPONAME}}. تعديل القيم المعلم عليها ك<i>no value</i> حاليا غير ممكن.",
+	"wikibase-client-data-bridge-saving-error-heading": "تعذر حفظ التغييرات",
 	"wikibase-client-data-bridge-edit-conflict-error-heading": "كشف تضارب تحريري",
 	"wikibase-client-data-bridge-unknown-error-heading": "حدث خطأ ما",
 	"wikibase-client-data-bridge-unknown-error-message": " حدث خطأ ولا يمكن تحرير القيمة المحددة حاليا. من فضلك جرب إعادة التحميل.",
@@ -180,5 +182,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "أعد تحميل الصفحة",
 	"wikibase-client-data-bridge-reference-note": "تعديل المراجع سيكون ممكنا في {{WBREPONAME}} بعد الحفظ",
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "لم تسجل الدخول.",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "النشر دون تسجيل الدخول",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "احفظ دون تسجيل الدخول",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "تابع التعديل"
 }

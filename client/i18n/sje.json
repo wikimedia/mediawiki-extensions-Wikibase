@@ -4,6 +4,9 @@
 			"Olve Utne"
 		]
 	},
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Tjiega",
+	"wikibase-rc-hide-wikidata-show": "Vuoseda",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-rävvdadibme",
 	"wikibase-otherprojects": "Mubbe prosjiektajn"
