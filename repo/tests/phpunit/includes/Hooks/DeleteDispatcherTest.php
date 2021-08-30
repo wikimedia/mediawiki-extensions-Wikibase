@@ -26,7 +26,7 @@ class DeleteDispatcherTest extends TestCase {
 	private $localClientDatabases = [ 'asdfwiki', 'somewiki' ];
 
 	public function earlyAbortProvider() {
-		$title = Title::newFromTextThrow( 'some cool page' );
+		$title = Title::makeTitle( NS_MAIN, 'Some_cool_page' );
 		$wikiPage = $this->createMock( WikiPage::class );
 		$wikiPage->method( 'getTitle' )
 			->willReturn( $title );
@@ -39,14 +39,9 @@ class DeleteDispatcherTest extends TestCase {
 
 		$entityIdLookupNotCalled = $this->newEntityIdLookupNeverCalled();
 
-		$wikiPageNoTitle = $this->createMock( WikiPage::class );
-		$wikiPageNoTitle->method( 'getTitle' )
-			->willReturn( null );
-
 		return [
 			'no client databases' => [ 1, [], $wikiPage, $entityIdLookupNotCalled ],
 			'no archive records' => [ 0,  $this->localClientDatabases, $wikiPage, $entityIdLookupNotCalled ],
-			'wiki-page has no title' => [ 1, $this->localClientDatabases, $wikiPageNoTitle, $entityIdLookupNotCalled ],
 			'not an entity page' => [ 1, $this->localClientDatabases, $wikiPage, $entityIdLookup ]
 		];
 	}

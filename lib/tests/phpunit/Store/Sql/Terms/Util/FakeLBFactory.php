@@ -25,7 +25,7 @@ class FakeLBFactory extends LBFactory {
 		$this->lb = $params['lb'];
 	}
 
-	public function newMainLB( $domain = false, $owner = null ) {
+	public function newMainLB( $domain = false, $owner = null ): ILoadBalancer {
 		if ( $domain === false || $domain === self::LOCAL_DOMAIN_ID ) {
 			return $this->lb;
 		} else {
@@ -33,7 +33,7 @@ class FakeLBFactory extends LBFactory {
 		}
 	}
 
-	public function getMainLB( $domain = false ) {
+	public function getMainLB( $domain = false ): ILoadBalancer {
 		return $this->newMainLB( $domain );
 	}
 
@@ -41,11 +41,11 @@ class FakeLBFactory extends LBFactory {
 		// no-op
 	}
 
-	public function newExternalLB( $cluster, $owner = null ) {
+	public function newExternalLB( $cluster, $owner = null ): ILoadBalancer {
 		throw new InvalidArgumentException( 'no external cluster supported' );
 	}
 
-	public function getExternalLB( $cluster ) {
+	public function getExternalLB( $cluster ): ILoadBalancer {
 		return $this->newExternalLB( $cluster );
 	}
 
@@ -53,11 +53,11 @@ class FakeLBFactory extends LBFactory {
 		( $callback )( $this->lb, ...$params );
 	}
 
-	public function getAllMainLBs() {
+	public function getAllMainLBs(): array {
 		return [ $this->lb ];
 	}
 
-	public function getAllExternalLBs() {
+	public function getAllExternalLBs(): array {
 		return [];
 	}
 
