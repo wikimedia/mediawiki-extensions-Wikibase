@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\WikibaseServices;
@@ -21,7 +21,7 @@ class WikibaseServicesTest extends ServiceWiringTestCase {
 	public function testConstruction() {
 		$this->mockService( 'WikibaseClient.EntitySourceDefinitions',
 			new EntitySourceDefinitions(
-				[ new EntitySource(
+				[ new DatabaseEntitySource(
 					'item',
 					'itemdb',
 					[ 'item' => [ 'namespaceId' => 0, 'slot' => 'main' ] ],

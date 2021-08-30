@@ -19,7 +19,7 @@ use RuntimeException;
 use SearchEngine;
 use Serializers\Serializer;
 use Title;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -85,7 +85,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$this->setService( 'WikibaseRepo.Settings', new SettingsArray( $repoSettings ) );
 
 		$this->setService( 'WikibaseRepo.EntitySourceDefinitions', new EntitySourceDefinitions(
-			[ new EntitySource(
+			[ new DatabaseEntitySource(
 				'test',
 				'testdb',
 				$entityNamespaceIdsAndSlots,

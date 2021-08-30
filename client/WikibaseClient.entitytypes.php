@@ -19,7 +19,7 @@ declare( strict_types=1 );
 
 use MediaWiki\MediaWikiServices;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
@@ -31,7 +31,7 @@ use Wikibase\Lib\WikibaseContentLanguages;
 
 return [
 	'item' => [
-		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( EntitySource $entitySource ) {
+		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( DatabaseEntitySource $entitySource ) {
 			$termIdsResolver = WikibaseClient::getTermInLangIdsResolverFactory()
 				->getResolverForEntitySource( $entitySource );
 
@@ -39,7 +39,7 @@ return [
 		},
 	],
 	'property' => [
-		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( EntitySource $entitySource ) {
+		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( DatabaseEntitySource $entitySource ) {
 			$mwServices = MediaWikiServices::getInstance();
 			$entitySourceServices = WikibaseClient::getSingleEntitySourceServicesFactory( $mwServices )
 				->getServicesForSource( $entitySource );

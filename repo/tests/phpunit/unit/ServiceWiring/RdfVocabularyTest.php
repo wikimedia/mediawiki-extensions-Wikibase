@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use HashConfig;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\DataTypeDefinitions;
@@ -26,7 +26,7 @@ class RdfVocabularyTest extends ServiceWiringTestCase {
 		$pagePropertyDefs = [
 			'test-prop' => [ 'name' => 'tp', 'type' => 'integer' ],
 		];
-		$localEntitySource = new EntitySource(
+		$localEntitySource = new DatabaseEntitySource(
 			'test-local',
 			false,
 			[],
@@ -35,7 +35,7 @@ class RdfVocabularyTest extends ServiceWiringTestCase {
 			'l',
 			''
 		);
-		$otherEntitySource = new EntitySource(
+		$otherEntitySource = new DatabaseEntitySource(
 			'test-other',
 			'other',
 			[],

@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -29,7 +29,7 @@ class EnabledEntityTypesTest extends ServiceWiringTestCase {
 		] );
 		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions',
 			new EntitySourceDefinitions( [
-				new EntitySource(
+				new DatabaseEntitySource(
 					'local',
 					false,
 					[
@@ -41,7 +41,7 @@ class EnabledEntityTypesTest extends ServiceWiringTestCase {
 					'',
 					''
 				),
-				new EntitySource(
+				new DatabaseEntitySource(
 					'bazwiki',
 					'bazdb',
 					[
@@ -52,7 +52,7 @@ class EnabledEntityTypesTest extends ServiceWiringTestCase {
 					'baz',
 					'bazwiki'
 				),
-				new EntitySource(
+				new DatabaseEntitySource(
 					'lexemewiki',
 					'bazdb',
 					[

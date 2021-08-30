@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Psr\Log\NullLogger;
 use WANObjectCache;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
@@ -27,7 +27,7 @@ class TermStoreWriterFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
 		$this->mockService( 'WikibaseRepo.LocalEntitySource',
-			$this->createMock( EntitySource::class ) );
+			$this->createMock( DatabaseEntitySource::class ) );
 		$this->mockService( 'WikibaseRepo.StringNormalizer',
 			new StringNormalizer() );
 		$this->mockService( 'WikibaseRepo.TypeIdsAcquirer',

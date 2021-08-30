@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit\Framework\TestCase;
 use TitleValue;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -63,7 +63,7 @@ class EntityLinkTargetEntityIdLookupTest extends TestCase {
 		$entityId = new ItemId( 'Q123' );
 		$link = new TitleValue( self::ITEM_NAMESPACE, 'Q123' );
 		$entityIdParser = $this->newMockEntityIdParserForId( $entityId );
-		$localSource = $this->createMock( EntitySource::class );
+		$localSource = $this->createMock( DatabaseEntitySource::class );
 		$localSource->expects( $this->once() )
 			->method( 'getEntityTypes' )
 			->willReturn( [ 'mediainfo' ] );
@@ -103,7 +103,7 @@ class EntityLinkTargetEntityIdLookupTest extends TestCase {
 	}
 
 	private function newMockEntitySourceDefinitions() {
-		$itemSource = $this->createMock( EntitySource::class );
+		$itemSource = $this->createMock( DatabaseEntitySource::class );
 		$itemSource->method( 'getInterwikiPrefix' )
 			->willReturn( self::ITEM_SOURCE_INTERWIKI_PREFIX );
 
@@ -116,7 +116,7 @@ class EntityLinkTargetEntityIdLookupTest extends TestCase {
 	}
 
 	private function newMockEntitySource() {
-		$entitySource = $this->createMock( EntitySource::class );
+		$entitySource = $this->createMock( DatabaseEntitySource::class );
 		$entitySource->method( 'getEntityTypes' )
 			->willReturn( [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] );
 

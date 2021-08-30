@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\SettingsArray;
@@ -29,7 +29,7 @@ class RepoLinkerTest extends ServiceWiringTestCase {
 			] ) );
 		$this->mockService( 'WikibaseClient.EntitySourceDefinitions',
 			new EntitySourceDefinitions(
-				[ new EntitySource(
+				[ new DatabaseEntitySource(
 					'item',
 					'itemdb',
 					[ 'item' => [ 'namespaceId' => 0, 'slot' => 'main' ] ],

@@ -65,7 +65,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	private $dataAccessSettings;
 
 	/**
-	 * @var EntitySource
+	 * @var DatabaseEntitySource
 	 */
 	private $entitySource;
 
@@ -114,7 +114,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		Deserializer $dataValueDeserializer,
 		NameTableStore $slotRoleStore,
 		DataAccessSettings $dataAccessSettings,
-		EntitySource $entitySource,
+		DatabaseEntitySource $entitySource,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		Serializer $storageEntitySerializer,
 		RepoDomainDb $repoDb,
@@ -174,9 +174,9 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	}
 
 	/**
-	 * @return EntitySource The EntitySource object for this set of services
+	 * @return DatabaseEntitySource The EntitySource object for this set of services
 	 */
-	public function getEntitySource(): EntitySource {
+	public function getEntitySource(): DatabaseEntitySource {
 		return $this->entitySource;
 	}
 

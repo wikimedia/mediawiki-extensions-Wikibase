@@ -8,7 +8,7 @@ use Wikimedia\Assert\Assert;
  *
  * @license GPL-2.0-or-later
  */
-class DatabaseEntitySource extends EntitySource {
+class DatabaseEntitySource implements EntitySource {
 
 	public const TYPE = 'db';
 
@@ -90,6 +90,29 @@ class DatabaseEntitySource extends EntitySource {
 		$this->setEntityTypeData( $entityNamespaceIdsAndSlots );
 	}
 
+	private function assertEntityNamespaceIdsAndSlots( array $entityNamespaceIdsAndSlots ) {
+		foreach ( $entityNamespaceIdsAndSlots as $entityType => $namespaceIdAndSlot ) {
+			if ( !is_string( $entityType ) ) {
+				throw new \InvalidArgumentException( 'Entity type name not a string: ' . $entityType );
+			}
+			if ( !is_array( $namespaceIdAndSlot ) ) {
+				throw new \InvalidArgumentException( 'Namespace and slot not defined for entity type: ' . $entityType );
+			}
+			if ( !array_key_exists( 'namespaceId', $namespaceIdAndSlot ) ) {
+				throw new \InvalidArgumentException( 'Namespace ID not defined for entity type: ' . $entityType );
+			}
+			if ( !array_key_exists( 'slot', $namespaceIdAndSlot ) ) {
+				throw new \InvalidArgumentException( 'Slot not defined for entity type: ' . $entityType );
+			}
+			if ( !is_int( $namespaceIdAndSlot['namespaceId'] ) ) {
+				throw new \InvalidArgumentException( 'Namespace ID for entity type must be an integer: ' . $entityType );
+			}
+			if ( !is_string( $namespaceIdAndSlot['slot'] ) ) {
+				throw new \InvalidArgumentException( 'Slot for entity type must be a string: ' . $entityType );
+			}
+		}
+	}
+
 	private function setEntityTypeData( array $entityNamespaceIdsAndSlots ) {
 		$this->entityTypes = array_keys( $entityNamespaceIdsAndSlots );
 		$this->entityNamespaceIds = array_map(
@@ -148,5 +171,4 @@ class DatabaseEntitySource extends EntitySource {
 	public function getType(): string {
 		return self::TYPE;
 	}
-
 }

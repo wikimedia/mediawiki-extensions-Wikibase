@@ -3,7 +3,8 @@
 namespace Wikibase\DataAccess\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\ApiEntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\Lib\SubEntityTypesMapper;
 
@@ -63,13 +64,12 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 				'interwikiPrefix' => 'commons'
 			],
 			'apiSource' => [
-				'type' => 'api',
-				'entityNamespaces' => [ 'item' => 100, 'property' => 200 ],
-				'repoDatabase' => false,
+				'entityTypes' => [ 'item', 'property' ],
 				'baseUri' => 'http://wikidorta.xyz/entity/',
 				'rdfNodeNamespacePrefix' => 'wdo',
 				'rdfPredicateNamespacePrefix' => 'wdo',
-				'interwikiPrefix' => 'wikidorta'
+				'interwikiPrefix' => 'wikidorta',
+				'type' => 'api'
 			],
 		];
 
@@ -82,7 +82,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 		$this->assertCount( 3, $sources );
 
 		$this->assertSame( 'wikidata', $sources[0]->getSourceName() );
-		$this->assertSame( EntitySource::TYPE_DB, $sources[0]->getType() );
+		$this->assertInstanceOf( DatabaseEntitySource::class, $sources[0] );
 		$this->assertSame( 'wikidatadb', $sources[0]->getDatabaseName() );
 		$this->assertSame( [ 'item', 'property' ], $sources[0]->getEntityTypes() );
 		$this->assertSame( 'wikidata', $sources[0]->getInterwikiPrefix() );
@@ -91,7 +91,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 		$this->assertEquals( [ 'item' => 'main', 'property' => 'main' ], $sources[0]->getEntitySlotNames() );
 
 		$this->assertSame( 'commons', $sources[1]->getSourceName() );
-		$this->assertSame( EntitySource::TYPE_DB, $sources[1]->getType() );
+		$this->assertInstanceOf( DatabaseEntitySource::class, $sources[1] );
 		$this->assertSame( 'commonsdb', $sources[1]->getDatabaseName() );
 		$this->assertEquals( [ 'mediainfo' ], $sources[1]->getEntityTypes() );
 		$this->assertSame( 'commons', $sources[1]->getInterwikiPrefix() );
@@ -99,7 +99,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 		$this->assertEquals( [ 'mediainfo' => 100 ], $sources[1]->getEntityNamespaceIds() );
 		$this->assertEquals( [ 'mediainfo' => 'mediainfo' ], $sources[1]->getEntitySlotNames() );
 
-		$this->assertSame( EntitySource::TYPE_API, $sources[2]->getType() );
+		$this->assertInstanceOf( ApiEntitySource::class, $sources[2] );
 	}
 
 	/**
@@ -134,16 +134,6 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 		yield 'source data not an array' => [
 			[
 				$validSourceName => 'CONFIG'
-			]
-		];
-
-		yield 'no repoDatabase key' => [
-			[
-				$validSourceName => [
-					'entityNamespaces' => $validNamespaces,
-					'baseUri' => $validBaseUri,
-					'interwikiPrefix' => $validInterwikiPrefix,
-				]
 			]
 		];
 

@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -23,7 +23,7 @@ class ItemAndPropertySourceTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseClient.EntitySourceDefinitions',
 			new EntitySourceDefinitions(
 				[
-					new EntitySource(
+					new DatabaseEntitySource(
 						'someSourceName',
 						'repodb',
 						[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
@@ -32,7 +32,7 @@ class ItemAndPropertySourceTest extends ServiceWiringTestCase {
 						'',
 						'repo'
 					),
-					new EntitySource(
+					new DatabaseEntitySource(
 						'someOtherSourceName',
 						'otherdb',
 						[ 'property' => [ 'namespaceId' => 321, 'slot' => 'main' ] ],
@@ -53,7 +53,7 @@ class ItemAndPropertySourceTest extends ServiceWiringTestCase {
 
 		$itemAndPropertySourceOfLocalRepo = $this->getService( 'WikibaseClient.ItemAndPropertySource' );
 		$this->assertInstanceOf(
-			EntitySource::class,
+			DatabaseEntitySource::class,
 			$itemAndPropertySourceOfLocalRepo
 		);
 		$this->assertEquals( 'repodb', $itemAndPropertySourceOfLocalRepo->getDatabaseName() );

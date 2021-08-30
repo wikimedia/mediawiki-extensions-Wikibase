@@ -66,7 +66,7 @@ class EntitySourceDefinitions {
 			$sourceNamesProvided[] = $sourceName;
 
 			foreach ( $source->getEntityTypes() as $type ) {
-				if ( $source->getType() === EntitySource::TYPE_API ) {
+				if ( $source->getType() === ApiEntitySource::TYPE ) {
 					continue; // it's ok to have more than one entity source per entity type if it's an api source
 				}
 
@@ -106,11 +106,11 @@ class EntitySourceDefinitions {
 	/**
 	 * As of Federated Properties v2 there is only one source of federation per entity type, so returning a single EntitySource is ok.
 	 */
-	public function getApiSourceForEntityType( string $entityType ): ?EntitySource {
+	public function getApiSourceForEntityType( string $entityType ): ?ApiEntitySource {
 		$entityType = $this->subEntityTypesMapper->getParentEntityType( $entityType ) ?? $entityType;
 
 		foreach ( $this->sources as $source ) {
-			if ( $source->getType() === EntitySource::TYPE_API && in_array( $entityType, $source->getEntityTypes() ) ) {
+			if ( $source->getType() === ApiEntitySource::TYPE && in_array( $entityType, $source->getEntityTypes() ) ) {
 				return $source;
 			}
 		}
@@ -131,7 +131,7 @@ class EntitySourceDefinitions {
 	private function buildEntityTypeToDatabaseSourceMapping() {
 		$this->entityTypeToDatabaseSourceMapping = [];
 		foreach ( $this->sources as $source ) {
-			if ( $source->getType() === EntitySource::TYPE_DB ) {
+			if ( $source->getType() === DatabaseEntitySource::TYPE ) {
 				$entityTypes = $source->getEntityTypes();
 				foreach ( $entityTypes as $type ) {
 					$this->entityTypeToDatabaseSourceMapping[$type] = $source;

@@ -4,8 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\Tests\NewEntitySource;
+use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -61,11 +60,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 		return new ApiEntitySearchHelper(
 			$api,
 			$dataTypes,
-			NewEntitySource::havingName( 'feddy prop source' )
-				->withType( EntitySource::TYPE_API )
-				->withConceptBaseUri( self::CONCEPT_BASE_URI )
-				->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 122, 'slot' => 'main' ] ] )
-				->build()
+			new ApiEntitySource( 'feddy prop source', [ 'property' ], self::CONCEPT_BASE_URI, '', '', '' )
 		);
 	}
 

@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Content;
 
 use MediaWikiIntegrationTestCase;
 use Title;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\Content\ContentHandlerEntityIdLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
@@ -26,7 +26,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class ContentHandlerEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 	private function getItemSource() {
-		return new EntitySource(
+		return new DatabaseEntitySource(
 			'itemwiki',
 			'itemdb',
 			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ],
@@ -39,7 +39,7 @@ class ContentHandlerEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 
 	protected function newFactory() {
 		$itemSource = $this->getItemSource();
-		$propertySource = new EntitySource(
+		$propertySource = new DatabaseEntitySource(
 			'propertywiki',
 			'propertydb',
 			[ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ],

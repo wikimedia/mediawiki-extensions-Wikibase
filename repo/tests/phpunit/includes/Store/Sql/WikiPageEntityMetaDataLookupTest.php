@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use stdClass;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -98,13 +98,13 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function newEntitySource(): EntitySource {
+	private function newEntitySource(): DatabaseEntitySource {
 		$irrelevantItemNamespaceId = 100;
 		$irrelevantPropertyNamespaceId = 200;
 		$irrelevantItemSlotName = 'main';
 		$irrelevantPropertySlotName = 'main';
 
-		return new EntitySource(
+		return new DatabaseEntitySource(
 			'testsource',
 			false,
 			[
@@ -371,7 +371,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$irrelevantItemNamespaceId = 100;
 		$irrelevantItemSlotName = 'main';
 
-		$itemSource = new EntitySource(
+		$itemSource = new DatabaseEntitySource(
 			'testsource',
 			false,
 			[

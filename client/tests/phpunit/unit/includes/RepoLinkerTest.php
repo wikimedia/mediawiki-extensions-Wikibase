@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Unit;
 
 use Wikibase\Client\RepoLinker;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -65,7 +65,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		return new RepoLinker(
 			new EntitySourceDefinitions(
 				[
-					new EntitySource(
+					new DatabaseEntitySource(
 						'test',
 						'testdb',
 						[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
@@ -248,7 +248,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		$linker = new RepoLinker(
 			new EntitySourceDefinitions(
 				[
-					new EntitySource(
+					new DatabaseEntitySource(
 						'itemwiki',
 						'itemdb',
 						[ 'item' => [ 'namespaceId' => 111, 'slot' => 'main' ] ],
@@ -257,7 +257,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 						'',
 						''
 					),
-					new EntitySource(
+					new DatabaseEntitySource(
 						'propertywiki',
 						'propdb',
 						[ 'property' => [ 'namespaceId' => 111, 'slot' => 'main' ] ],

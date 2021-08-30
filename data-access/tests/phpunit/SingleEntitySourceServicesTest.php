@@ -7,7 +7,7 @@ use LogicException;
 use MediaWiki\Storage\NameTableStore;
 use PHPUnit\Framework\MockObject\MockObject;
 use Serializers\DispatchingSerializer;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
@@ -38,7 +38,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			[ 'getEntityRevisionLookup', EntityRevisionLookup::class, true ],
 			[ 'getEntityPrefetcher', EntityPrefetcher::class, true ],
 			[ 'getPropertyInfoLookup', PropertyInfoLookup::class, true ],
-			[ 'getEntitySource', EntitySource::class, true ],
+			[ 'getEntitySource', DatabaseEntitySource::class, true ],
 		];
 	}
 
@@ -67,7 +67,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
 			DataAccessSettingsFactory::anySettings(),
-			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
+			new DatabaseEntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
@@ -89,7 +89,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
 			DataAccessSettingsFactory::anySettings(),
-			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
+			new DatabaseEntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
@@ -108,7 +108,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
 			DataAccessSettingsFactory::anySettings(),
-			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
+			new DatabaseEntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
@@ -127,7 +127,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
 			DataAccessSettingsFactory::anySettings(),
-			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
+			new DatabaseEntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
@@ -145,7 +145,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
 			DataAccessSettingsFactory::anySettings(),
-			new EntitySource( 'source', 'sourcedb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], '', '', '', '' ),
+			new DatabaseEntitySource( 'source', 'sourcedb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),

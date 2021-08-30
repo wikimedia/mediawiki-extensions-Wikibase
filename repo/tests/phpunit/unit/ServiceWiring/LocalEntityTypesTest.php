@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -18,7 +18,7 @@ class LocalEntityTypesTest extends ServiceWiringTestCase {
 
 	private function mockEntityTypes( array $localEntityTypes, array $entityTypeDefinitions ): void {
 		$this->mockService( 'WikibaseRepo.LocalEntitySource',
-			new EntitySource(
+			new DatabaseEntitySource(
 				'local',
 				false,
 				$localEntityTypes,

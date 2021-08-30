@@ -4,7 +4,7 @@ namespace Wikibase\DataAccess\Tests\MediaWiki;
 
 use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWikiIntegrationTestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\MediaWiki\EntitySourceDocumentUrlProvider;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -26,7 +26,7 @@ class EntitySourceDocumentUrlProviderTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$sources = new EntitySourceDefinitions(
-			[ new EntitySource(
+			[ new DatabaseEntitySource(
 				'local',
 				false,
 				[],
@@ -56,7 +56,7 @@ class EntitySourceDocumentUrlProviderTest extends MediaWikiIntegrationTestCase {
 		$this->setMwGlobals( 'wgLanguageCode', 'de' );
 
 		$sources = new EntitySourceDefinitions(
-			[ new EntitySource(
+			[ new DatabaseEntitySource(
 				'nonlocal',
 				false,
 				[],

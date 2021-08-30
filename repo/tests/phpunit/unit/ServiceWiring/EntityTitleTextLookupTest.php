@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataAccess\Tests\NewEntitySource;
@@ -46,7 +46,7 @@ class EntityTitleTextLookupTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.EntitySourceAndTypeDefinitions',
 			new EntitySourceAndTypeDefinitions(
 				[
-					EntitySource::TYPE_DB => new EntityTypeDefinitions( [
+					DatabaseEntitySource::TYPE => new EntityTypeDefinitions( [
 						Item::ENTITY_TYPE => [
 							EntityTypeDefinitions::TITLE_TEXT_LOOKUP_CALLBACK => function () use ( $itemId ) {
 								$entityTitleTextLookup = $this->createMock( EntityTitleTextLookup::class );

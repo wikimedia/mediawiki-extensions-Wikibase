@@ -2,7 +2,7 @@
 declare( strict_types=1 );
 namespace Wikibase\Repo\FederatedProperties;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -43,18 +43,13 @@ class DefaultFederatedPropertiesEntitySourceAdder {
 			count( $existingDefinitions->getSources() ) === 1
 			) {
 			$sources = $existingDefinitions->getSources();
-			$sources[] = new EntitySource(
+			$sources[] = new ApiEntitySource(
 				'fedprops',
-				false,
-				[ Property::ENTITY_TYPE => [
-					'namespaceId' => 0,
-					'slot' => 'main'
-				] ], # FIXME: T288524
+				[ Property::ENTITY_TYPE ],
 				'http://www.wikidata.org/entity/',
 				'fpwd',
 				'fpwd',
-				'wikidata',
-				EntitySource::TYPE_API
+				'wikidata'
 			);
 			return new EntitySourceDefinitions( $sources, $this->subTypeMapper );
 		}

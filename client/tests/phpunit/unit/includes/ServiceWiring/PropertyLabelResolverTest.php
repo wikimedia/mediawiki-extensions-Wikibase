@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
@@ -29,7 +29,7 @@ class PropertyLabelResolverTest extends ServiceWiringTestCase {
 			] )
 		);
 
-		$propertySource = $this->createStub( EntitySource::class );
+		$propertySource = $this->createStub( DatabaseEntitySource::class );
 		$this->mockService( 'WikibaseClient.PropertySource', $propertySource );
 
 		$repoDb = $this->createStub( RepoDomainDb::class );

@@ -10,7 +10,7 @@ use MediaWikiIntegrationTestCase;
 use MWException;
 use Site;
 use SiteLookup;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -304,7 +304,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 				[ 'test' => self::URI_BASE, 'foreign' => 'http://foreign.test/', ],
 				[ 'test' => self::URI_DATA, 'foreign' => 'http://data.foreign.test/' ],
 				new EntitySourceDefinitions( [
-					new EntitySource(
+					new DatabaseEntitySource(
 						'test',
 						'testdb',
 						[

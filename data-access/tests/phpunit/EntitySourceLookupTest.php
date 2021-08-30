@@ -6,7 +6,7 @@ namespace Wikibase\DataAccess\Tests;
 
 use LogicException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
@@ -25,10 +25,14 @@ use Wikibase\Lib\SubEntityTypesMapper;
 class EntitySourceLookupTest extends TestCase {
 
 	public function testGivenUriEntityId_returnsEntitySourceWithMatchingConceptUri() {
-		$expectedSource = NewEntitySource::create()
-			->withConceptBaseUri( 'http://wikidata.org/entity/' )
-			->withType( EntitySource::TYPE_API )
-			->build();
+		$expectedSource = new ApiEntitySource(
+			'feddy-props',
+			[ 'property' ],
+			'http://wikidata.org/entity/',
+			'',
+			'',
+			''
+		);
 		$entityId = new FederatedPropertyId( 'http://wikidata.org/entity/P123', 'P123' );
 
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [

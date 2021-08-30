@@ -2,7 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\ApiEntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
@@ -66,7 +67,7 @@ class EntityIdParserTest extends ServiceWiringTestCase {
 
 		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions',
 			new EntitySourceDefinitions( [
-				new EntitySource(
+				new DatabaseEntitySource(
 					'local',
 					false,
 					[],
@@ -75,15 +76,13 @@ class EntityIdParserTest extends ServiceWiringTestCase {
 					'',
 					''
 				),
-				new EntitySource(
+				new ApiEntitySource(
 					'wikidorta',
-					false,
-					[],
+					[ 'property' ],
 					'http://www.wikidorta.org/shmentity/',
 					'',
 					'',
-					'',
-					EntitySource::TYPE_API
+					''
 				)
 			], new SubEntityTypesMapper( [] ) ) );
 

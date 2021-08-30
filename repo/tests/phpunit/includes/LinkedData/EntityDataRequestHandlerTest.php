@@ -16,7 +16,7 @@ use OutputPage;
 use Psr\Log\NullLogger;
 use RequestContext;
 use Title;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -131,7 +131,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 				[ 'test' => EntityDataSerializationServiceTest::URI_BASE ],
 				[ 'test' => EntityDataSerializationServiceTest::URI_DATA ],
 				new EntitySourceDefinitions( [
-					new EntitySource(
+					new DatabaseEntitySource(
 						'test',
 						'testdb',
 						[ 'item' => [ 'namespaceId' => 1200, 'slot' => 'main' ] ],

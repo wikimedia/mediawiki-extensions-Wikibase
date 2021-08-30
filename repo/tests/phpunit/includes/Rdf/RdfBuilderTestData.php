@@ -6,7 +6,7 @@ use HashSiteStore;
 use InvalidArgumentException;
 use Site;
 use SiteLookup;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
@@ -169,7 +169,7 @@ class RdfBuilderTestData {
 			[ 'wikidata' => self::URI_DATA, 'foreign' => self::URI_DATA_FOREIGN ],
 			new EntitySourceDefinitions(
 				[
-					new EntitySource(
+					new DatabaseEntitySource(
 						'wikidata',
 						'wikidatadb',
 						[ 'item' => [ 'namespaceId' => 700, 'slot' => 'main' ] ],
@@ -178,7 +178,7 @@ class RdfBuilderTestData {
 						'',
 						''
 					),
-					new EntitySource(
+					new DatabaseEntitySource(
 						'foreign',
 						'foreigndb',
 						[ 'property' => [ 'namespaceId' => 900, 'slot' => 'main' ] ],

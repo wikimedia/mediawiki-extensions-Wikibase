@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Content\EntityContentFactory;
@@ -37,7 +37,7 @@ class EntityTitleStoreLookupTest extends ServiceWiringTestCase {
 
 		$this->mockService(
 			'WikibaseRepo.LocalEntitySource',
-			$this->createMock( EntitySource::class )
+			$this->createMock( DatabaseEntitySource::class )
 		);
 
 		$this->assertInstanceOf(

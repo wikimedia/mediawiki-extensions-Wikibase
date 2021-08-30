@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use stdClass;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -46,7 +46,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	private $logger;
 
 	/**
-	 * @var EntitySource
+	 * @var DatabaseEntitySource
 	 */
 	private $entitySource;
 
@@ -58,7 +58,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
 		PageTableEntityQuery $pageTableEntityConditionGenerator,
-		EntitySource $entitySource,
+		DatabaseEntitySource $entitySource,
 		RepoDomainDb $repoDb,
 		LoggerInterface $logger = null
 	) {

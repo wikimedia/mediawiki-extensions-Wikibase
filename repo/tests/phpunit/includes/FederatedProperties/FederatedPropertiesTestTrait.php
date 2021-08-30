@@ -39,13 +39,12 @@ trait FederatedPropertiesTestTrait {
 		$this->setWbSetting( 'entitySources', [
 			'local' => $localEntitySource,
 			'fedprops' => [
-				'entityNamespaces' => [ 'property' => 122 ],
-				'type' => 'api',
-				'repoDatabase' => false,
+				'entityTypes' => [ 'property' ],
 				'baseUri' => $this->getFederatedPropertiesSourceConceptUri(),
 				'interwikiPrefix' => 'wikidatabeta',
 				'rdfNodeNamespacePrefix' => 'fpwd',
 				'rdfPredicateNamespacePrefix' => 'fpwd',
+				'type' => 'api'
 			],
 		] );
 		$this->setWbSetting( 'localEntitySourceName', 'local' );

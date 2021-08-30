@@ -32,7 +32,7 @@ class EntitySourceLookup {
 		foreach ( $this->entitySourceDefinitions->getSources() as $source ) {
 			if (
 				strpos( $id->getSerialization(), $source->getConceptBaseUri() ) === 0 &&
-				$source->getType() === EntitySource::TYPE_API
+				$source->getType() === ApiEntitySource::TYPE
 			) {
 				return $source;
 			}
@@ -44,7 +44,7 @@ class EntitySourceLookup {
 
 			// TODO this returns the first entity source that is not an api source that has this entity type. In the case there is more than
 			// one configured, this could be bad.
-			if ( $source->getType() === EntitySource::TYPE_DB && in_array( $topLevelEntityType, $source->getEntityTypes() ) ) {
+			if ( $source->getType() === DatabaseEntitySource::TYPE && in_array( $topLevelEntityType, $source->getEntityTypes() ) ) {
 				return $source;
 			}
 		}

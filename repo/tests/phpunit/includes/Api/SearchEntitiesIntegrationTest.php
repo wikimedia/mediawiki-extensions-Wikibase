@@ -6,7 +6,7 @@ use ApiMain;
 use FauxRequest;
 use MediaWikiIntegrationTestCase;
 use RequestContext;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -135,7 +135,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 		] ) );
 
 		$entitySourceDefinitions = new EntitySourceDefinitions( [
-			new EntitySource(
+			new DatabaseEntitySource(
 				'test',
 				'testdb',
 				[

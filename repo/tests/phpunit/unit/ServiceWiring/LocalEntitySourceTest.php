@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -21,7 +21,7 @@ class LocalEntitySourceTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$settingsArray = [ 'localEntitySourceName' => 'local' ];
 		$mockEntitySources = [
-			new EntitySource(
+			new DatabaseEntitySource(
 				'other',
 				'other',
 				[],
@@ -30,7 +30,7 @@ class LocalEntitySourceTest extends ServiceWiringTestCase {
 				'ott',
 				'otherwiki'
 			),
-			new EntitySource(
+			new DatabaseEntitySource(
 				'local',
 				false,
 				[],
@@ -47,7 +47,7 @@ class LocalEntitySourceTest extends ServiceWiringTestCase {
 
 		$localEntitySource = $this->getService( 'WikibaseRepo.LocalEntitySource' );
 
-		$this->assertInstanceOf( EntitySource::class, $localEntitySource );
+		$this->assertInstanceOf( DatabaseEntitySource::class, $localEntitySource );
 		$this->assertSame( $mockEntitySources[1], $localEntitySource );
 	}
 

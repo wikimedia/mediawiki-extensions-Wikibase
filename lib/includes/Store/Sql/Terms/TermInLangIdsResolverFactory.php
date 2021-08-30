@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 
 use Psr\Log\LoggerInterface;
 use WANObjectCache;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 
 /**
@@ -39,7 +39,7 @@ class TermInLangIdsResolverFactory {
 		$this->dbFactory = $dbFactory;
 	}
 
-	public function getResolverForEntitySource( EntitySource $entitySource ): DatabaseTermInLangIdsResolver {
+	public function getResolverForEntitySource( DatabaseEntitySource $entitySource ): DatabaseTermInLangIdsResolver {
 		$db = $this->dbFactory->newForEntitySource( $entitySource );
 
 		$databaseTypeIdsStore = new DatabaseTypeIdsStore(

@@ -6,7 +6,7 @@ use HashBagOStuff;
 use Hooks;
 use MediaWiki\MediaWikiServices;
 use ObjectCache;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
@@ -161,7 +161,7 @@ class SqlStore implements Store {
 	 */
 	private $idGenerator;
 
-	/** @var EntitySource */
+	/** @var DatabaseEntitySource */
 	private $entitySource;
 
 	/**
@@ -173,7 +173,7 @@ class SqlStore implements Store {
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param IdGenerator $idGenerator
 	 * @param WikibaseServices $wikibaseServices Service container providing data access services
-	 * @param EntitySource $entitySource
+	 * @param DatabaseEntitySource $entitySource
 	 * @param SettingsArray $settings
 	 */
 	public function __construct(
@@ -185,7 +185,7 @@ class SqlStore implements Store {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		IdGenerator $idGenerator,
 		WikibaseServices $wikibaseServices,
-		EntitySource $entitySource,
+		DatabaseEntitySource $entitySource,
 		SettingsArray $settings
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
