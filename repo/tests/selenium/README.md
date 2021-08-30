@@ -1,47 +1,33 @@
 # Selenium tests
 
-Please see tests/selenium/README.md file in mediawiki repository.
+For more information see https://www.mediawiki.org/wiki/Selenium
 
-## Run all specs
+## Setup
 
-Run test specs from mediawiki/core via:
+See https://www.mediawiki.org/wiki/MediaWiki-Docker/Extension/Wikibase
 
-    cd mediawiki
-    npm run selenium
+## Run all tests
 
-Run test specs from Wikibase via:
-
-    cd mediawiki/extensions/Wikibase
     npm run selenium-test
-
 
 ## Run specific tests
 
-To run only some tests, you first have to start Chromedriver in one terminal window:
+Just tests from this folder (repo/tests/selenium)
 
-    chromedriver --url-base=wd/hub --port=4444
+    npm run selenium-test:repo
 
-Then, in another terminal window run this the current extension directory:
+Filter by file name:
 
-    npm install
-    npm run selenium-test -- --spec tests/selenium/specs/FILE-NAME.js
+    npm run selenium-test -- --spec tests/selenium/specs/[FILE-NAME]
 
-You can also filter specific test(s) by name:
+Filter by file name and test name:
 
-    npm run selenium-test -- --spec tests/selenium/specs/FILE-NAME.js --mochaOpts.grep TEST-NAME
-
-Make sure Chromedriver is running when executing the above command.
+    npm run selenium-test -- --spec tests/selenium/specs/[FILE-NAME] --mochaOpts.grep [TEST-NAME]
 
 ## Environment
 
 The behavior of the tests can be modified with several environment variables.
 
-* `MW_SERVER`: protocol, host name and port of the MediaWiki installation.
-  Defaults to `http://127.0.0.1:8080` (Vagrant).
-* `MW_SCRIPT_PATH`: path to `index.php`, `api.php` etc. under `MW_SERVER`.
-  Defaults to `/w`.
-* `LOG_DIR`: Directory to leave logs and screenshots in.
-  Defaults to a `log/` subdirectory of this directory.
 * `WIKIBASE_PROPERTY_STRING`, `WIKIBASE_PROPERTY_URL`, etc.:
   Property ID of a property with datatype `string`, `url`, etc. –
   if not set, a new property of this type will be created each time the tests are run.
