@@ -1,0 +1,74 @@
+{
+	"name": "wikibase/data-model",
+	"type": "library",
+	"description": "PHP implementation of the Wikibase DataModel",
+	"keywords": [
+		"Wikibase",
+		"DataModel",
+		"Wikidata"
+	],
+	"homepage": "https://github.com/wmde/WikibaseDataModel",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Jeroen De Dauw",
+			"email": "jeroendedauw@gmail.com",
+			"homepage": "http://jeroendedauw.com"
+		},
+		{
+			"name": "Thiemo Kreuz"
+		},
+		{
+			"name": "The Wikidata team",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"irc": "irc://irc.libera.chat/wikidata"
+	},
+	"require": {
+		"php": "^8.0|^7.1",
+		"data-values/data-values": "~0.1|~1.0|~2.0|~3.0",
+		"wikimedia/assert": "~0.2.2|~0.3.0|~0.4.0|~0.5.0"
+	},
+	"require-dev": {
+		"ockcyp/covers-validator": "~1.1",
+		"phpmd/phpmd": "~2.6",
+		"phpunit/phpunit": "~8.0",
+		"mediawiki/mediawiki-codesniffer": "34.0.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Wikibase\\DataModel\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Wikibase\\DataModel\\Fixtures\\": "tests/fixtures",
+			"Wikibase\\DataModel\\Tests\\": [
+				"tests/unit"
+			]
+		}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "9.6.x-dev"
+		}
+	},
+	"scripts": {
+		"test": [
+			"composer validate --no-interaction",
+			"@cs",
+			"phpunit",
+			"covers-validator"
+		],
+		"cs": [
+			"phpcs -p -s",
+			"phpmd src/ text phpmd.xml"
+		],
+		"fix": "phpcbf",
+		"ci": [
+			"@test"
+		]
+	}
+}
