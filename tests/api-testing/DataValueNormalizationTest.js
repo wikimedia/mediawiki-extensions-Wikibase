@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert, action, utils } = require( 'api-testing' );
+const { requireExtensions } = require( './utils.js' );
 
 describe( 'data value normalization', () => {
 	let mindy;
@@ -8,22 +9,9 @@ describe( 'data value normalization', () => {
 	let stringProperty;
 	let commonsMediaProperty;
 
-	before( 'require extensions', async function () {
-		const requiredExtensions = [
-			'WikibaseRepository',
-		];
-		const installedExtensions = ( await action.getAnon().meta(
-			'siteinfo',
-			{ siprop: 'extensions' },
-			'extensions',
-		) ).map( ( extension ) => extension.name );
-		const missingExtensions = requiredExtensions.filter(
-			( requiredExtension ) => installedExtensions.indexOf( requiredExtension ) === -1,
-		);
-		if ( missingExtensions.length ) {
-			this.skip();
-		}
-	} );
+	before( 'require extensions', requireExtensions( [
+		'WikibaseRepository',
+	] ) );
 
 	before( 'set up admin', async () => {
 		mindy = await action.mindy();

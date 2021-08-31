@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert, action, utils } = require( 'api-testing' );
+const { requireExtensions } = require( './utils.js' );
 const germanLabel = 'a-German-label-' + utils.uniq();
 const englishLabel = 'an-English-label-' + utils.uniq();
 const englishPropertyLabel = 'an-English-Property-label-' + utils.uniq();
@@ -14,24 +15,11 @@ describe( 'Lua Wikibase integration', () => {
 	let redirectedItemId;
 	let module;
 
-	before( 'require extensions', async function () {
-		const requiredExtensions = [
-			'Scribunto',
-			'WikibaseRepository',
-			'WikibaseClient',
-		];
-		const installedExtensions = ( await action.getAnon().meta(
-			'siteinfo',
-			{ siprop: 'extensions' },
-			'extensions',
-		) ).map( ( extension ) => extension.name );
-		const missingExtensions = requiredExtensions.filter(
-			( requiredExtension ) => installedExtensions.indexOf( requiredExtension ) === -1,
-		);
-		if ( missingExtensions.length ) {
-			this.skip();
-		}
-	} );
+	before( 'require extensions', requireExtensions( [
+		'Scribunto',
+		'WikibaseRepository',
+		'WikibaseClient',
+	] ) );
 
 	before( 'set up admin', async () => {
 		mindy = await action.mindy();
