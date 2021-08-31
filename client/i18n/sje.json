@@ -4,6 +4,10 @@
 			"Olve Utne"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}}-åbme",
+	"wikibase-editlinks": "Rävvdada liŋkajt",
+	"wikibase-editlinkstitle": "Rävvdada giellagaskanliŋkajt",
+	"wikibase-linkitem-addlinks": "Liŋkajt laseda",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Tjiega",
 	"wikibase-rc-hide-wikidata-show": "Vuoseda",
