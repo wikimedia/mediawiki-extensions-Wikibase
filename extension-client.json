@@ -292,11 +292,20 @@
 		"unresolved-property-category",
 		"connected-redirect-category"
 	],
+	"AutoloadClasses": {
+		"Wikibase\\DataModel\\DeserializerFactory": "lib/packages/wikibase/data-model-serialization/src/DeserializerFactory.php",
+		"Wikibase\\DataModel\\SerializerFactory": "lib/packages/wikibase/data-model-serialization/src/SerializerFactory.php"
+	},
 	"AutoloadNamespaces": {
 		"Wikibase\\Client\\": "client/includes/",
 		"Wikibase\\Lib\\": "lib/includes/",
 		"Wikibase\\Lib\\FederatedProperties\\": "lib/packages/wikibase/federated-properties/src/",
 		"Wikibase\\Lib\\Changes\\": "lib/packages/wikibase/changes/src/",
+		"Wikibase\\DataModel\\": "lib/packages/wikibase/data-model/src/",
+		"Wikibase\\DataModel\\Deserializers\\": "lib/packages/wikibase/data-model-serialization/src/Deserializers/",
+		"Wikibase\\DataModel\\Serializers\\": "lib/packages/wikibase/data-model-serialization/src/Serializers/",
+		"Wikibase\\DataModel\\Services\\": "lib/packages/wikibase/data-model-services/src/",
+		"Wikibase\\InternalSerialization\\": "lib/packages/wikibase/internal-serialization/src/",
 		"Wikibase\\DataAccess\\": "data-access/src/"
 	},
 	"TestAutoloadNamespaces": {
