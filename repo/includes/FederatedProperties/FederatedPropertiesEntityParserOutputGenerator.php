@@ -101,13 +101,10 @@ class FederatedPropertiesEntityParserOutputGenerator implements EntityParserOutp
 		$federatedPropertyIds = array_filter(
 			$propertyIds,
 			function ( $propId ) {
-				return $propId instanceof FederatedPropertyId; // FIXME after T288234 is resolved
+				// TODO: after T288234 is resolved, consider more flexible filtering by type. See also T289667.
+				return $propId instanceof FederatedPropertyId;
 			}
 		);
-
-		// FIXME: This is not technically true, because as of Federated Properties v2 $propertyIds may contain both local and federated
-		//        Properties. We'll have to revisit this once we start working on a story like "showing statements with federated and local
-		//        Properties on an Item page". This is broken at the moment so we're just tricking Phan here until we fix it properly.
 		'@phan-var FederatedPropertyId[] $federatedPropertyIds';
 
 		$this->apiEntityLookup->fetchEntities( array_unique( $federatedPropertyIds ) );
