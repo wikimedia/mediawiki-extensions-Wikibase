@@ -119,7 +119,7 @@ class ResultBuilder {
 		Serializer $entitySerializer,
 		SiteLookup $siteLookup,
 		PropertyDataTypeLookup $dataTypeLookup,
-		$entityIdParser = null,
+		EntityIdParser $entityIdParser,
 		$addMetaData = null
 	) {
 		$this->result = $result;
@@ -128,11 +128,6 @@ class ResultBuilder {
 		$this->entitySerializer = $entitySerializer;
 		$this->siteLookup = $siteLookup;
 		$this->dataTypeLookup = $dataTypeLookup;
-
-		if ( !( $entityIdParser instanceof EntityIdParser ) ) { // FIXME Lexeme backwards compat. removed in a follow-up.
-			$addMetaData = $entityIdParser;
-			$entityIdParser = WikibaseRepo::getEntityIdParser();
-		}
 		$this->entityIdParser = $entityIdParser;
 		$this->addMetaData = $addMetaData;
 

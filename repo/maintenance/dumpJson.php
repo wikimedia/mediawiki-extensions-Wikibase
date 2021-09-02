@@ -71,7 +71,7 @@ class DumpJson extends DumpEntities {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityRevisionLookup $entityRevisionLookup,
 		Serializer $entitySerializer,
-		EntityIdParser $entityIdParser = null
+		EntityIdParser $entityIdParser
 	) {
 		parent::setDumpEntitiesServices(
 			$sqlEntityIdPagerFactory,
@@ -82,7 +82,7 @@ class DumpJson extends DumpEntities {
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entitySerializer = $entitySerializer;
-		$this->entityIdParser = $entityIdParser ?? WikibaseRepo::getEntityIdParser(); // FIXME backwards compat removed in a follow-up
+		$this->entityIdParser = $entityIdParser;
 		$this->hasHadServicesSet = true;
 	}
 
