@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Unit\Serializer;
 
 use DataValues\Serializers\DataValueSerializer;
 use Wikibase\Client\Serializer\ClientStatementListSerializer;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -34,7 +35,8 @@ class ClientStatementListSerializerTest extends \PHPUnit\Framework\TestCase {
 
 		return new ClientStatementListSerializer(
 			$serializerFactory->newStatementListSerializer(),
-			$dataTypeLookup
+			$dataTypeLookup,
+			WikibaseClient::getEntityIdParser()
 		);
 	}
 

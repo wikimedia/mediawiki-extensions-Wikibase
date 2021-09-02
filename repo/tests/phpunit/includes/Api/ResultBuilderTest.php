@@ -11,6 +11,7 @@ use HashSiteStore;
 use InvalidArgumentException;
 use Status;
 use Title;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -72,6 +73,12 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 				return 'DtIdFor_' . $id->getSerialization();
 			} );
 
+		$propertyIdParser = $this->createStub( EntityIdParser::class );
+		$propertyIdParser->method( 'parse' )
+			->willReturnCallback( static function ( string $id ) {
+				return new PropertyId( $id );
+			} );
+
 		$serializerFactory = new SerializerFactory(
 			new DataValueSerializer(),
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
@@ -85,6 +92,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 			$serializerFactory->newItemSerializer(),
 			new HashSiteStore(),
 			$mockPropertyDataTypeLookup,
+			$propertyIdParser,
 			$addMetaData
 		);
 

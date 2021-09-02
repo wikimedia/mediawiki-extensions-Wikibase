@@ -4,6 +4,7 @@ namespace Wikibase\Client\Serializer;
 
 use Serializers\Exceptions\SerializationException;
 use Serializers\Serializer;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Statement\StatementList;
 
@@ -20,9 +21,10 @@ class ClientStatementListSerializer extends ClientSerializer {
 
 	public function __construct(
 		Serializer $statementListSerializer,
-		PropertyDataTypeLookup $dataTypeLookup
+		PropertyDataTypeLookup $dataTypeLookup,
+		EntityIdParser $entityIdParser
 	) {
-		parent::__construct( $dataTypeLookup );
+		parent::__construct( $dataTypeLookup, $entityIdParser );
 
 		$this->statementListSerializer = $statementListSerializer;
 	}

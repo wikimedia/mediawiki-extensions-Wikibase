@@ -14,6 +14,7 @@ use RequestContext;
 use Serializers\Serializer;
 use SiteLookup;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -82,6 +83,11 @@ class EntityDataSerializationService {
 	 */
 	private $rdfBuilderFactory;
 
+	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
 	public function __construct(
 		EntityTitleStoreLookup $entityTitleStoreLookup,
 		PropertyDataTypeLookup $propertyLookup,
@@ -89,7 +95,8 @@ class EntityDataSerializationService {
 		SerializerFactory $serializerFactory,
 		Serializer $entitySerializer,
 		SiteLookup $siteLookup,
-		RdfBuilderFactory $rdfBuilderFactory
+		RdfBuilderFactory $rdfBuilderFactory,
+		EntityIdParser $entityIdParser
 	) {
 		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
 		$this->propertyLookup = $propertyLookup;
@@ -98,6 +105,7 @@ class EntityDataSerializationService {
 		$this->entitySerializer = $entitySerializer;
 		$this->siteLookup = $siteLookup;
 		$this->rdfBuilderFactory = $rdfBuilderFactory;
+		$this->entityIdParser = $entityIdParser;
 
 		$this->rdfWriterFactory = new RdfWriterFactory();
 	}
@@ -355,6 +363,7 @@ class EntityDataSerializationService {
 			$this->entitySerializer,
 			$this->siteLookup,
 			$this->propertyLookup,
+			$this->entityIdParser,
 			true // include metadata for the API result printer
 		);
 		$resultBuilder->addEntityRevision( null, $entityRevision );

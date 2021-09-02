@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Serializers\Serializer;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -36,6 +37,8 @@ class EntityDataSerializationServiceTest extends ServiceWiringTestCase {
 			->method( 'getSiteLookup' );
 		$this->mockService( 'WikibaseRepo.RdfBuilderFactory',
 			$this->createMock( RdfBuilderFactory::class ) );
+		$this->mockService( 'WikibaseRepo.EntityIdParser',
+			$this->createMock( EntityIdParser::class ) );
 
 		$this->assertInstanceOf(
 			EntityDataSerializationService::class,

@@ -8,6 +8,7 @@ use SiteLookup;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -97,12 +98,18 @@ class ResultBuilder {
 	private $dataTypeInjector;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	/**
 	 * @param ApiResult $result
 	 * @param EntityTitleStoreLookup $entityTitleStoreLookup
 	 * @param SerializerFactory $serializerFactory
 	 * @param Serializer $entitySerializer
 	 * @param SiteLookup $siteLookup
 	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 * @param EntityIdParser $entityIdParser
 	 * @param bool|null $addMetaData when special elements such as '_element' are needed
 	 */
 	public function __construct(
@@ -112,6 +119,7 @@ class ResultBuilder {
 		Serializer $entitySerializer,
 		SiteLookup $siteLookup,
 		PropertyDataTypeLookup $dataTypeLookup,
+		$entityIdParser = null,
 		$addMetaData = null
 	) {
 		$this->result = $result;
@@ -120,6 +128,12 @@ class ResultBuilder {
 		$this->entitySerializer = $entitySerializer;
 		$this->siteLookup = $siteLookup;
 		$this->dataTypeLookup = $dataTypeLookup;
+
+		if ( !( $entityIdParser instanceof EntityIdParser ) ) { // FIXME Lexeme backwards compat. removed in a follow-up.
+			$addMetaData = $entityIdParser;
+			$entityIdParser = WikibaseRepo::getEntityIdParser();
+		}
+		$this->entityIdParser = $entityIdParser;
 		$this->addMetaData = $addMetaData;
 
 		$this->modifier = new SerializationModifier();
@@ -128,7 +142,8 @@ class ResultBuilder {
 		$this->dataTypeInjector = new JsonDataTypeInjector(
 			$this->modifier,
 			$this->callbackFactory,
-			$dataTypeLookup
+			$dataTypeLookup,
+			$entityIdParser
 		);
 	}
 
@@ -854,7 +869,7 @@ class ResultBuilder {
 		}
 
 		$values = $this->modifier->modifyUsingCallbacks( $values, [
-			'*/*/mainsnak' => $this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup ),
+			'*/*/mainsnak' => $this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup, $this->entityIdParser ),
 		] );
 
 		if ( $this->addMetaData ) {
@@ -885,7 +900,7 @@ class ResultBuilder {
 		}
 
 		$value = $this->modifier->modifyUsingCallbacks( $value, [
-			'mainsnak' => $this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup ),
+			'mainsnak' => $this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup, $this->entityIdParser ),
 		] );
 
 		$this->setValue( null, 'claim', $value );
@@ -901,11 +916,17 @@ class ResultBuilder {
 		array $array,
 		$claimPath = ''
 	) {
-		$groupedCallback = $this->callbackFactory->getCallbackToAddDataTypeToSnaksGroupedByProperty( $this->dataTypeLookup );
+		$groupedCallback = $this->callbackFactory->getCallbackToAddDataTypeToSnaksGroupedByProperty(
+			$this->dataTypeLookup,
+			$this->entityIdParser
+		);
 		return $this->modifier->modifyUsingCallbacks( $array, [
 			$claimPath . 'references/*/snaks' => $groupedCallback,
 			$claimPath . 'qualifiers' => $groupedCallback,
-			$claimPath . 'mainsnak' => $this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup ),
+			$claimPath . 'mainsnak' => $this->callbackFactory->getCallbackToAddDataTypeToSnak(
+				$this->dataTypeLookup,
+				$this->entityIdParser
+			),
 		] );
 	}
 
@@ -941,7 +962,7 @@ class ResultBuilder {
 				$this->callbackFactory->getCallbackToIndexTags( 'property' )
 			],
 			$claimPath . 'mainsnak' => [
-				$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup ),
+				$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup, $this->entityIdParser ),
 			],
 		] );
 	}
@@ -961,7 +982,10 @@ class ResultBuilder {
 		$value = $serializer->serialize( $reference );
 
 		$value = $this->modifier->modifyUsingCallbacks( $value, [
-			'snaks' => $this->callbackFactory->getCallbackToAddDataTypeToSnaksGroupedByProperty( $this->dataTypeLookup ),
+			'snaks' => $this->callbackFactory->getCallbackToAddDataTypeToSnaksGroupedByProperty(
+				$this->dataTypeLookup,
+				$this->entityIdParser
+			),
 		] );
 
 		if ( $this->addMetaData ) {

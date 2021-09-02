@@ -135,7 +135,8 @@ class DumpJsonTest extends MediaWikiIntegrationTestCase {
 			new NullEntityPrefetcher(),
 			$this->getMockPropertyDataTypeLookup(),
 			$mockRepo,
-			WikibaseRepo::getCompactEntitySerializer()
+			WikibaseRepo::getCompactEntitySerializer(),
+			WikibaseRepo::getEntityIdParser()
 		);
 
 		return $dumpScript;

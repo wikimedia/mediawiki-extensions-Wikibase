@@ -47,7 +47,8 @@ class JsonDataTypeInjectorTest extends TestCase {
 		$injector = new JsonDataTypeInjector(
 			new SerializationModifier(),
 			new CallbackFactory(),
-			$this->getMockPropertyDataTypeLookup()
+			$this->getMockPropertyDataTypeLookup(),
+			WikibaseRepo::getEntityIdParser()
 		);
 
 		// should not be present before injection

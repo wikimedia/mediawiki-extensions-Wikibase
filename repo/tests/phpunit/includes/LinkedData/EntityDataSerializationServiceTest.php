@@ -154,7 +154,8 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 			$serializerFactory,
 			$serializerFactory->newItemSerializer(),
 			new HashSiteStore(),
-			$rdfBuilderFactory
+			$rdfBuilderFactory,
+			WikibaseRepo::getEntityIdParser()
 		);
 	}
 

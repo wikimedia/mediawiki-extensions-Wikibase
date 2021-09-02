@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Serializer;
 
 use Serializers\Serializer;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Serialization\CallbackFactory;
 use Wikibase\Lib\Serialization\SerializationModifier;
@@ -28,8 +29,14 @@ abstract class ClientSerializer implements Serializer {
 	 */
 	private $callbackFactory;
 
-	public function __construct( PropertyDataTypeLookup $dataTypeLookup ) {
+	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	public function __construct( PropertyDataTypeLookup $dataTypeLookup, EntityIdParser $entityIdParser ) {
 		$this->dataTypeLookup = $dataTypeLookup;
+		$this->entityIdParser = $entityIdParser;
 
 		$this->modifier = new SerializationModifier();
 		$this->callbackFactory = new CallbackFactory();
@@ -58,8 +65,11 @@ abstract class ClientSerializer implements Serializer {
 	 * @return array
 	 */
 	protected function injectSerializationWithDataTypes( array $serialization, $pathPrefix ) {
-		$callback = $this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup );
-		$groupedCallback = $this->callbackFactory->getCallbackToAddDataTypeToSnaksGroupedByProperty( $this->dataTypeLookup );
+		$callback = $this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup, $this->entityIdParser );
+		$groupedCallback = $this->callbackFactory->getCallbackToAddDataTypeToSnaksGroupedByProperty(
+			$this->dataTypeLookup,
+			$this->entityIdParser
+		);
 
 		return $this->modifier->modifyUsingCallbacks(
 			$serialization,

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Maintenance;
 
 use MediaWiki\MediaWikiServices;
 use Serializers\Serializer;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -46,6 +47,11 @@ class DumpJson extends DumpEntities {
 	 */
 	private $hasHadServicesSet = false;
 
+	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
 	public function __construct() {
 		parent::__construct();
 
@@ -64,7 +70,8 @@ class DumpJson extends DumpEntities {
 		EntityPrefetcher $entityPrefetcher,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityRevisionLookup $entityRevisionLookup,
-		Serializer $entitySerializer
+		Serializer $entitySerializer,
+		EntityIdParser $entityIdParser = null
 	) {
 		parent::setDumpEntitiesServices(
 			$sqlEntityIdPagerFactory,
@@ -75,6 +82,7 @@ class DumpJson extends DumpEntities {
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entitySerializer = $entitySerializer;
+		$this->entityIdParser = $entityIdParser ?? WikibaseRepo::getEntityIdParser(); // FIXME backwards compat removed in a follow-up
 		$this->hasHadServicesSet = true;
 	}
 
@@ -99,7 +107,8 @@ class DumpJson extends DumpEntities {
 				$store->getEntityPrefetcher(),
 				WikibaseRepo::getPropertyDataTypeLookup(),
 				$revisionLookup,
-				WikibaseRepo::getCompactEntitySerializer( $mwServices )
+				WikibaseRepo::getCompactEntitySerializer( $mwServices ),
+				WikibaseRepo::getEntityIdParser( $mwServices )
 			);
 		}
 		parent::execute();
@@ -111,14 +120,13 @@ class DumpJson extends DumpEntities {
 	 * @return DumpGenerator
 	 */
 	protected function createDumper( $output ) {
-		$dataTypeLookup = $this->propertyDatatypeLookup;
-
 		$dumper = new JsonDumpGenerator(
 			$output,
 			$this->entityRevisionLookup,
 			$this->entitySerializer,
 			$this->entityPrefetcher,
-			$dataTypeLookup
+			$this->propertyDatatypeLookup,
+			$this->entityIdParser
 		);
 
 		$dumper->setUseSnippets( (bool)$this->getOption( 'snippet', false ) );

@@ -7,6 +7,7 @@ use MWContentSerializationException;
 use MWException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -56,6 +57,7 @@ class JsonDumpGenerator extends DumpGenerator {
 	 * @param Serializer $entitySerializer
 	 * @param EntityPrefetcher $entityPrefetcher
 	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 * @param EntityIdParser $entityIdParser
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -64,7 +66,8 @@ class JsonDumpGenerator extends DumpGenerator {
 		EntityRevisionLookup $lookup,
 		Serializer $entitySerializer,
 		EntityPrefetcher $entityPrefetcher,
-		PropertyDataTypeLookup $dataTypeLookup
+		PropertyDataTypeLookup $dataTypeLookup,
+		EntityIdParser $entityIdParser
 	) {
 		parent::__construct( $out, $entityPrefetcher );
 
@@ -74,7 +77,8 @@ class JsonDumpGenerator extends DumpGenerator {
 		$this->dataTypeInjector = new JsonDataTypeInjector(
 			new SerializationModifier(),
 			new CallbackFactory(),
-			$dataTypeLookup
+			$dataTypeLookup,
+			$entityIdParser
 		);
 	}
 

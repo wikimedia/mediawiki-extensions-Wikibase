@@ -125,7 +125,8 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$serializerFactory,
 			$serializerFactory->newItemSerializer(),
 			new HashSiteStore(),
-			$rdfBuilderFactory
+			$rdfBuilderFactory,
+			WikibaseRepo::getEntityIdParser()
 		);
 
 		$formats = [ 'json', 'rdfxml', 'ntriples', 'turtle' ];

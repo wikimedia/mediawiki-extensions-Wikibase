@@ -231,6 +231,7 @@ class EntityAccessor {
 		return new ClientEntitySerializer(
 			$this->entitySerializer,
 			$this->dataTypeLookup,
+			$this->entityIdParser,
 			array_unique( array_merge(
 				$this->termsLanguages->getLanguages(),
 				$this->termFallbackChain->getFetchLanguageCodes(),
@@ -243,7 +244,8 @@ class EntityAccessor {
 	private function newClientStatementListSerializer() {
 		return new ClientStatementListSerializer(
 			$this->statementSerializer,
-			$this->dataTypeLookup
+			$this->dataTypeLookup,
+			$this->entityIdParser
 		);
 	}
 

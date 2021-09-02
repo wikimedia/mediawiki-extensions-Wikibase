@@ -10,6 +10,7 @@ use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -130,7 +131,8 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 			$entityRevisionLookup,
 			$serializer,
 			new NullEntityPrefetcher(),
-			$this->getMockPropertyDataTypeLookup()
+			$this->getMockPropertyDataTypeLookup(),
+			$this->newMockPropertyIdParser()
 		);
 	}
 
@@ -230,7 +232,8 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 			$entityRevisionLookup,
 			$serializer,
 			new NullEntityPrefetcher(),
-			$this->getMockPropertyDataTypeLookup()
+			$this->getMockPropertyDataTypeLookup(),
+			$this->newMockPropertyIdParser()
 		);
 
 		$exceptionHandler = $this->createMock( ExceptionHandler::class );
@@ -572,6 +575,16 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$json = trim( ob_get_clean() );
 
 		$this->assertCount( 9, json_decode( $json ), 'Redirected Item Q9 not in dump' );
+	}
+
+	private function newMockPropertyIdParser(): EntityIdParser {
+		$propertyIdParser = $this->createStub( EntityIdParser::class );
+		$propertyIdParser->method( 'parse' )
+			->willReturnCallback( static function ( string $id ) {
+				return new PropertyId( $id );
+			} );
+
+		return $propertyIdParser;
 	}
 
 }

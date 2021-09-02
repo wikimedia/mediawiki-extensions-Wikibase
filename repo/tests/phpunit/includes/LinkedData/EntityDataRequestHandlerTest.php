@@ -157,7 +157,8 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			$serializerFactory,
 			$serializerFactory->newItemSerializer(),
 			new HashSiteStore(),
-			$rdfBuilderFactory
+			$rdfBuilderFactory,
+			WikibaseRepo::getEntityIdParser()
 		);
 
 		$entityDataFormatProvider->setAllowedFormats(

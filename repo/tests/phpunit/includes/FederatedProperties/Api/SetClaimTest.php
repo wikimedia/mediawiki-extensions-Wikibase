@@ -28,7 +28,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SetClaimTest extends FederatedPropertiesApiTestCase {
 
-	public function testAlteringPropertiesIsNotSupported() {
+	public function testAlteringFederatedPropertiesIsNotSupported() {
 		$entity = new Property( $this->newFederatedPropertyIdFromPId( 'P123' ), null, 'string' );
 		$entityId = $entity->getId();
 
@@ -44,7 +44,7 @@ class SetClaimTest extends FederatedPropertiesApiTestCase {
 		] );
 	}
 
-	public function testFederatedPropertiesFailure() {
+	public function testGivenSourceWikiUnavailable_respondsWithAnError() {
 		$this->setSourceWikiUnavailable();
 
 		$store = WikibaseRepo::getEntityStore();
@@ -64,6 +64,43 @@ class SetClaimTest extends FederatedPropertiesApiTestCase {
 			'action' => 'wbsetclaim',
 			'claim' => FormatJson::encode( $this->getSerializedStatement( $statement ) ),
 		] );
+	}
+
+	public function testAddingStatementUsingFederatedProperty(): void {
+		$fedPropRemoteId = 'P626';
+		$fedPropId = $this->newFederatedPropertyIdFromPId( $fedPropRemoteId );
+		$statement = new Statement( new PropertyNoValueSnak( $fedPropId ) );
+
+		$entity = new Item();
+		WikibaseRepo::getEntityStore()->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
+		$entityId = $entity->getId();
+
+		$statement->setGuid( ( new GuidGenerator() )->newGuid( $entityId ) );
+
+		$this->mockSourceApiRequests( [ [
+			[
+				'action' => 'wbgetentities',
+				'ids' => $fedPropRemoteId,
+			],
+			[
+				'entities' => [
+					$fedPropRemoteId => [
+						'datatype' => 'string',
+					],
+				],
+			],
+		] ] );
+
+		[ $result ] = $this->doApiRequestWithToken( [
+			'action' => 'wbsetclaim',
+			'claim' => FormatJson::encode( $this->getSerializedStatement( $statement ) ),
+		] );
+
+		$this->assertArrayHasKey( 'success', $result );
+		$this->assertSame(
+			$fedPropId->getSerialization(),
+			$result['claim']['mainsnak']['property']
+		);
 	}
 
 	private function getSerializedStatement( $statement ) {
