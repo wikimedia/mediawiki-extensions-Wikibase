@@ -4,5 +4,7 @@
 			"MinecraftAustralia"
 		]
 	},
-	"wikibase-edit": "edet"
+	"wikibase-edit": "edet",
+	"wikibase-add": "add",
+	"wikibase-sitelinks-special": "Otha saits"
 }

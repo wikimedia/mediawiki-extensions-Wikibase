@@ -4,6 +4,13 @@
 			"MinecraftAustralia"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} it'm",
+	"wikibase-editlinks": "Edet links",
 	"wikibase-editlinkstitle": "Edet interlaenghwij links",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} edet"
+	"wikibase-linkitem-addlinks": "Aed links",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Show",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} edet",
+	"wikibase-otherprojects": "I' otha projekts"
 }
