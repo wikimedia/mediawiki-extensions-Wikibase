@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @covers \Wikibase\Repo\Api\SetClaim
@@ -21,8 +20,8 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class CreateClaimTest extends FederatedPropertiesApiTestCase {
 
-	public function testFederatedPropertiesFailure() {
-		$entity = new Property( new PropertyId( 'P123' ), null, 'string' );
+	public function testUpdatingAFederatedPropertyShouldFail(): void {
+		$entity = new Property( $this->newFederatedPropertyIdFromPId( 'P123' ), null, 'string' );
 		$entityId = $entity->getId();
 
 		$params = [
@@ -34,6 +33,22 @@ class CreateClaimTest extends FederatedPropertiesApiTestCase {
 
 		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
 		$this->doApiRequestWithToken( $params );
+	}
+
+	public function testCreateClaimForLocalProperty(): void {
+		$property = new Property( null, null, 'string' );
+		$this->getEntityStore()->saveEntity( $property, 'feddypropstest', $this->user, EDIT_NEW );
+		$id = $property->getId();
+
+		[ $result ] = $this->doApiRequestWithToken( [
+			'action' => 'wbcreateclaim',
+			'entity' => $id->getSerialization(),
+			'snaktype' => 'novalue',
+			'property' => $id->getSerialization(),
+		] );
+
+		$this->assertArrayHasKey( 'success', $result );
+		$this->assertStringStartsWith( $id->getSerialization(), $result['claim']['id'] );
 	}
 
 }

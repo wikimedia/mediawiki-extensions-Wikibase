@@ -6,7 +6,6 @@ namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -43,19 +42,25 @@ class EditEntityTest extends FederatedPropertiesApiTestCase {
 		] );
 	}
 
-	// We want updating local Properties to work eventually
-	public function testUpdatingAPropertyShouldFail(): void {
-		$entity = new Property( new PropertyId( 'P123' ), null, 'string' ); // needs to be saved via EntityStore
-		$entityId = $entity->getId();
+	public function testEditEntityForLocalProperty(): void {
+		$property = new Property( null, null, 'string' );
+		$this->getEntityStore()->saveEntity( $property, 'feddypropstest', $this->user, EDIT_NEW );
+		$id = $property->getId();
 
-		$params = [
+		$label = 'im a local prop';
+		$labelLanguage = 'en';
+		[ $result ] = $this->doApiRequestWithToken( [
 			'action' => 'wbeditentity',
-			'id' => $entityId->getSerialization(),
-			'data' => '{"datatype":"string"}'
-		];
+			'id' => $id->getSerialization(),
+			'data' => json_encode( [
+				'labels' => [
+					$labelLanguage => [ 'language' => $labelLanguage, 'value' => $label ],
+				],
+			] ),
+		] );
 
-		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
-		$this->doApiRequestWithToken( $params );
+		$this->assertArrayHasKey( 'success', $result );
+		$this->assertSame( $label, $result['entity']['labels'][$labelLanguage]['value'] );
 	}
 
 	public function testCreatingANewLocalProperty(): void {

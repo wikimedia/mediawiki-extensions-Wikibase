@@ -5,12 +5,13 @@ namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Repo\Tests\NewStatement;
 
 /**
  * @covers \Wikibase\Repo\Api\RemoveClaims
@@ -27,9 +28,8 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class RemoveClaimsTest extends FederatedPropertiesApiTestCase {
 
-	public function testFederatedPropertiesFailure() {
-
-		$entity = new Property( new PropertyId( 'P123' ), null, 'string' );
+	public function testUpdatingAFederatedPropertyShouldFail(): void {
+		$entity = new Property( $this->newFederatedPropertyIdFromPId( 'P123' ), null, 'string' );
 
 		/** @var Statement[] $statements */
 		$statements = [
@@ -53,6 +53,31 @@ class RemoveClaimsTest extends FederatedPropertiesApiTestCase {
 
 		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
 		$this->doApiRequestWithToken( $params );
+	}
+
+	public function testRemoveClaimFromLocalProperty(): void {
+		$propertyForStatement = new Property( null, null, 'string' );
+		$this->saveLocalProperty( $propertyForStatement );
+
+		$propertyUnderTest = new Property( null, null, 'string' );
+		$this->saveLocalProperty( $propertyUnderTest );
+
+		$statementToRemove = NewStatement::noValueFor( $propertyForStatement->getId() )
+			->withGuid( ( new GuidGenerator() )->newGuid( $propertyUnderTest->getId() ) )
+			->build();
+		$propertyUnderTest->setStatements( new StatementList( $statementToRemove ) );
+		$this->saveLocalProperty( $propertyUnderTest );
+
+		[ $result ] = $this->doApiRequestWithToken( [
+			'action' => 'wbremoveclaims',
+			'claim' => $statementToRemove->getGuid()
+		] );
+
+		$this->assertArrayHasKey( 'success', $result );
+	}
+
+	private function saveLocalProperty( Property $prop ): void {
+		$this->getEntityStore()->saveEntity( $prop, 'feddypropstest', $this->user, $prop->getId() ? EDIT_UPDATE : EDIT_NEW );
 	}
 
 }

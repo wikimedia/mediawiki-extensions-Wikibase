@@ -5,10 +5,11 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Repo\Tests\NewStatement;
 
 /**
  * @covers \Wikibase\Repo\Api\SetReference
@@ -25,8 +26,8 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class SetReferenceTest extends FederatedPropertiesApiTestCase {
 
-	public function testUpdatingAPropertyShouldFail() {
-		$entity = new Property( new PropertyId( 'P123' ), null, 'string' );
+	public function testUpdatingAFederatedPropertyShouldFail() {
+		$entity = new Property( $this->newFederatedPropertyIdFromPId( 'P123' ), null, 'string' );
 
 		$mainSnak = new PropertyNoValueSnak( 42 );
 		$statement = new Statement( $mainSnak );
@@ -44,4 +45,41 @@ class SetReferenceTest extends FederatedPropertiesApiTestCase {
 		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
 		$this->doApiRequestWithToken( $params );
 	}
+
+	public function testSetReferenceOnLocalPropertyStatement(): void {
+		$propertyForStatementAndReference = new Property( null, null, 'string' );
+		$this->saveLocalProperty( $propertyForStatementAndReference );
+		$propertyIdForStatementAndReference = $propertyForStatementAndReference->getId()->getSerialization();
+
+		$propertyUnderTest = new Property( null, null, 'string' );
+		$this->saveLocalProperty( $propertyUnderTest );
+
+		$statementToChange = NewStatement::noValueFor( $propertyForStatementAndReference->getId() )
+			->withGuid( ( new GuidGenerator() )->newGuid( $propertyUnderTest->getId() ) )
+			->build();
+		$propertyUnderTest->setStatements( new StatementList( $statementToChange ) );
+		$this->saveLocalProperty( $propertyUnderTest );
+
+		[ $result ] = $this->doApiRequestWithToken( [
+			'action' => 'wbsetreference',
+			'statement' => $statementToChange->getGuid(),
+			'snaks' => json_encode( [
+				$propertyIdForStatementAndReference => [
+					[
+						'snaktype' => 'value',
+						'property' => $propertyIdForStatementAndReference,
+						'datavalue' => [ 'type' => 'string', 'value' => 'potato' ],
+					],
+				],
+			] )
+		] );
+
+		$this->assertArrayHasKey( 'success', $result );
+		$this->assertArrayHasKey( $propertyIdForStatementAndReference, $result['reference']['snaks'] );
+	}
+
+	private function saveLocalProperty( Property $prop ): void {
+		$this->getEntityStore()->saveEntity( $prop, 'feddypropstest', $this->user, $prop->getId() ? EDIT_UPDATE : EDIT_NEW );
+	}
+
 }
