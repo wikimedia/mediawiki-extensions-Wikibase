@@ -82,9 +82,9 @@ class PurgeEntityDataJob extends Job {
 	}
 
 	private function getArchivedRevisionIds(): iterable {
-		// read archive rows from a replica, but only after it has caught up with the master
-		// (in theory we only need to wait for the master pos as of when the job was pushed,
-		// but DBMasterPos is an opaque object, so we can’t put it in the job params)
+		// read archive rows from a replica, but only after it has caught up with the primary
+		// (in theory we only need to wait for the primary pos as of when the job was pushed,
+		// but DBPrimaryPos is an opaque object, so we can’t put it in the job params)
 		$this->repoDb->replication()->wait();
 		$dbr = $this->repoDb->connections()->getReadConnection();
 
