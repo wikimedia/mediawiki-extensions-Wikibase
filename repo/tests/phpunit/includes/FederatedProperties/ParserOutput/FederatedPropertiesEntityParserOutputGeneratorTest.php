@@ -9,10 +9,10 @@ use RepoGroup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\FederatedProperties\ApiEntityLookup;
 use Wikibase\Repo\FederatedProperties\ApiRequestExecutionException;
@@ -39,27 +39,24 @@ use Wikibase\View\Template\TemplateFactory;
 class FederatedPropertiesEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTestBase {
 
 	public function testShouldPrefetchFederatedProperties() {
-		$this->markTestSkipped( 'Skipped until we enable generating parser output with Federated Properties. See T288598' );
 		$labelLanguage = 'en';
 		$userLanguage = 'en';
+
+		$fedPropId1 = new FederatedPropertyId( 'http://wikidata.org/entity/P123', 'P123' );
+		$fedPropId2 = new FederatedPropertyId( 'http://wikidata.org/entity/P321', 'P321' );
 
 		$item = new Item( new ItemId( 'Q7799929' ) );
 		$item->setLabel( $labelLanguage, 'kitten item' );
 
-		$statementWithReference = new Statement( new PropertyNoValueSnak( 1 ) );
+		$statementWithReference = new Statement( new PropertyNoValueSnak( $fedPropId1 ) );
 		$statementWithReference->addNewReference( new PropertyNoValueSnak( 4 ) );
 
 		$item->getStatements()->addStatement( $statementWithReference );
 		$item->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( 2 ) ) );
-		$item->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( 3 ) ) );
-		$item->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( 3 ) ) );
+		$item->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( $fedPropId2 ) ) );
+		$item->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( $fedPropId2 ) ) );
 
-		$expectedIds = [
-			new PropertyId( "P1" ),
-			new PropertyId( "P2" ),
-			new PropertyId( "P3" ),
-			new PropertyId( "P4" ),
-		];
+		$expectedIds = [ $fedPropId1, $fedPropId2 ];
 
 		$this->entityViewFactory = $this->mockEntityViewFactory( false );
 
