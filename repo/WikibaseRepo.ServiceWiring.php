@@ -693,7 +693,8 @@ return [
 			WikibaseRepo::getBaseDataModelSerializerFactory( $services ),
 			WikibaseRepo::getAllTypesEntitySerializer( $services ),
 			$services->getSiteLookup(),
-			WikibaseRepo::getRdfBuilderFactory( $services )
+			WikibaseRepo::getRdfBuilderFactory( $services ),
+			WikibaseRepo::getEntityIdParser( $services )
 		);
 	},
 

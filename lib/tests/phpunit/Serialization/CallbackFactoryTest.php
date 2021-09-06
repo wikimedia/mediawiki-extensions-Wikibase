@@ -1,7 +1,11 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Tests\Serialization;
 
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Serialization\CallbackFactory;
 
@@ -15,10 +19,7 @@ use Wikibase\Lib\Serialization\CallbackFactory;
  */
 class CallbackFactoryTest extends \PHPUnit\Framework\TestCase {
 
-	/**
-	 * @return PropertyDataTypeLookup
-	 */
-	private function getPropertyDataTypeLookup() {
+	private function getPropertyDataTypeLookup(): PropertyDataTypeLookup {
 		$mock = $this->createMock( PropertyDataTypeLookup::class );
 
 		$mock->expects( $this->once() )
@@ -61,7 +62,7 @@ class CallbackFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGetCallbackToAddDataTypeToSnaksGroupedByProperty() {
 		$instance = new CallbackFactory();
 		$dataTypeLookup = $this->getPropertyDataTypeLookup();
-		$callback = $instance->getCallbackToAddDataTypeToSnaksGroupedByProperty( $dataTypeLookup );
+		$callback = $instance->getCallbackToAddDataTypeToSnaksGroupedByProperty( $dataTypeLookup, $this->newEntityIdParser() );
 		$this->assertIsCallable( $callback );
 
 		$array = [
@@ -76,7 +77,7 @@ class CallbackFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGetCallbackToAddDataTypeToSnak() {
 		$instance = new CallbackFactory();
 		$dataTypeLookup = $this->getPropertyDataTypeLookup();
-		$callback = $instance->getCallbackToAddDataTypeToSnak( $dataTypeLookup );
+		$callback = $instance->getCallbackToAddDataTypeToSnak( $dataTypeLookup, $this->newEntityIdParser() );
 		$this->assertIsCallable( $callback );
 
 		$array = [
@@ -87,6 +88,17 @@ class CallbackFactoryTest extends \PHPUnit\Framework\TestCase {
 			'property' => 'P1',
 			'datatype' => 'propertyDataType',
 		], $array );
+	}
+
+	private function newEntityIdParser(): EntityIdParser {
+		$parser = $this->createMock( EntityIdParser::class );
+		$parser->expects( $this->once() )
+			->method( 'parse' )
+			->willReturnCallback( function ( string $id ) {
+				return new PropertyId( $id );
+			} );
+
+		return $parser;
 	}
 
 }

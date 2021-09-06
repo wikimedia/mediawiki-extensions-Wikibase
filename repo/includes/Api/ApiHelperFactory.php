@@ -176,6 +176,7 @@ class ApiHelperFactory {
 			$this->entitySerializer,
 			$this->siteLookup,
 			$this->dataTypeLookup,
+			$this->idParser,
 			true // The mediawiki api should always be given metadata
 		);
 	}

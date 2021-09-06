@@ -183,7 +183,8 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 				->getMock(),
 			$this->getMockBuilder( ItemSerializer::class )->disableOriginalConstructor()->getMock(),
 			$this->createMock( SiteLookup::class ),
-			new InMemoryDataTypeLookup()
+			new InMemoryDataTypeLookup(),
+			WikibaseRepo::getEntityIdParser()
 		);
 		$errorReporter = new ApiErrorReporter(
 			$main,

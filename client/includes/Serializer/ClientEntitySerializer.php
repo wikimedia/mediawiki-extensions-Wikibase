@@ -5,6 +5,7 @@ namespace Wikibase\Client\Serializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
 
@@ -38,10 +39,11 @@ class ClientEntitySerializer extends ClientSerializer {
 	public function __construct(
 		Serializer $entitySerializer,
 		PropertyDataTypeLookup $dataTypeLookup,
+		EntityIdParser $entityIdParser,
 		array $filterLangCodes,
 		array $termFallbackChains
 	) {
-		parent::__construct( $dataTypeLookup );
+		parent::__construct( $dataTypeLookup, $entityIdParser );
 
 		$this->filterLangCodes = $filterLangCodes;
 		$this->entitySerializer = $entitySerializer;

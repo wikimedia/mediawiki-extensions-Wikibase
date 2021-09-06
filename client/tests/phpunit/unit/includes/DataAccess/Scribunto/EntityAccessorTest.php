@@ -12,10 +12,10 @@ use Wikibase\Client\DataAccess\Scribunto\EntityAccessor;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -71,7 +71,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		return new EntityAccessor(
-			new ItemIdParser(),
+			WikibaseClient::getEntityIdParser(),
 			$entityLookup ?: new MockRepository(),
 			$usageAccumulator ?: new HashUsageAccumulator(),
 			$entitySerializer,

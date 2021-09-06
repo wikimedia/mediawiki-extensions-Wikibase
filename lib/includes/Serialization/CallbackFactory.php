@@ -3,9 +3,11 @@
 namespace Wikibase\Lib\Serialization;
 
 use ApiResult;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
+use Wikimedia\Assert\Assert;
 
 /**
  * @license GPL-2.0-or-later
@@ -47,15 +49,19 @@ class CallbackFactory {
 	}
 
 	public function getCallbackToAddDataTypeToSnaksGroupedByProperty(
-		PropertyDataTypeLookup $dataTypeLookup
+		PropertyDataTypeLookup $dataTypeLookup,
+		EntityIdParser $entityIdParser
 	) {
-		return function ( $array ) use ( $dataTypeLookup ) {
+		return function ( $array ) use ( $dataTypeLookup, $entityIdParser ) {
 			if ( !is_array( $array ) ) {
 				return $array;
 			}
 			foreach ( $array as $propertyIdGroupKey => &$snakGroup ) {
 				try {
-					$dataType = $dataTypeLookup->getDataTypeIdForProperty( new PropertyId( $propertyIdGroupKey ) );
+					$dataType = $dataTypeLookup->getDataTypeIdForProperty( $this->getPropertyFromSerialization(
+						$entityIdParser,
+						$propertyIdGroupKey
+					) );
 					foreach ( $snakGroup as &$snak ) {
 						$snak['datatype'] = $dataType;
 					}
@@ -67,18 +73,30 @@ class CallbackFactory {
 		};
 	}
 
-	public function getCallbackToAddDataTypeToSnak( PropertyDataTypeLookup $dataTypeLookup ) {
-		return function ( $array ) use ( $dataTypeLookup ) {
+	public function getCallbackToAddDataTypeToSnak( PropertyDataTypeLookup $dataTypeLookup, EntityIdParser $entityIdParser ) {
+		return function ( $array ) use ( $dataTypeLookup, $entityIdParser ) {
 			if ( is_array( $array ) ) {
 				try {
-					$dataType = $dataTypeLookup->getDataTypeIdForProperty( new PropertyId( $array['property'] ) );
-					$array['datatype'] = $dataType;
+					$array['datatype'] = $dataTypeLookup->getDataTypeIdForProperty( $this->getPropertyFromSerialization(
+						$entityIdParser,
+						$array['property']
+					) );
 				} catch ( PropertyDataTypeLookupException $e ) {
 					//XXX: shall we set $serialization['datatype'] = 'bad' ??
 				}
 			}
 			return $array;
 		};
+	}
+
+	private function getPropertyFromSerialization( EntityIdParser $parser, string $id ): PropertyId {
+		$propertyId = $parser->parse( $id );
+
+		Assert::postcondition( $propertyId instanceof PropertyId, '$id must be a valid PropertyId serialization' );
+		/** @var PropertyId $propertyId */
+		'@phan-var PropertyId $propertyId';
+
+		return $propertyId;
 	}
 
 }

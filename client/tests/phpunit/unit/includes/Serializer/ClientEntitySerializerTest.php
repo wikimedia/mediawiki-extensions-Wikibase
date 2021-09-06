@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Unit\Serializer;
 use DataValues\Serializers\DataValueSerializer;
 use Serializers\Serializer;
 use Wikibase\Client\Serializer\ClientEntitySerializer;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
@@ -44,6 +45,7 @@ class ClientEntitySerializerTest extends \PHPUnit\Framework\TestCase {
 		return new ClientEntitySerializer(
 			$serializerFactory->newItemSerializer(),
 			$dataTypeLookup,
+			WikibaseClient::getEntityIdParser(),
 			[ 'en' ],
 			[ 'en' => $fallbackChain ]
 		);
@@ -93,6 +95,7 @@ class ClientEntitySerializerTest extends \PHPUnit\Framework\TestCase {
 		$instance = new ClientEntitySerializer(
 			$serializer,
 			new InMemoryDataTypeLookup(),
+			WikibaseClient::getEntityIdParser(),
 			[ 'en' ],
 			[ 'en' => new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) ) ]
 		);
