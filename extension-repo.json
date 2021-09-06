@@ -564,6 +564,7 @@
 		"PurgeEntityData": "Wikibase\\Repo\\PurgeEntityDataJob::newFromGlobalState",
 		"UpdateRepoOnMove": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnMoveJob",
 		"UpdateRepoOnDelete": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnDeleteJob",
+		"DispatchChanges": "Wikibase\\Repo\\ChangeModification\\DispatchChangesJob::newFromGlobalState",
 		"DispatchChangeDeletionNotification": "Wikibase\\Repo\\ChangeModification\\DispatchChangeDeletionNotificationJob",
 		"DispatchChangeVisibilityNotification": "Wikibase\\Repo\\ChangeModification\\DispatchChangeVisibilityNotificationJob"
 	},

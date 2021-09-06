@@ -75,6 +75,7 @@ use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
+use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolverFactory;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
@@ -357,6 +358,11 @@ class WikibaseRepo {
 	public static function getEntityIdParser( ContainerInterface $services = null ): EntityIdParser {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntityIdParser' );
+	}
+
+	public static function getEntityChangeLookup( ContainerInterface $services = null ): EntityChangeLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityChangeLookup' );
 	}
 
 	public static function getEntityIdComposer( ContainerInterface $services = null ): EntityIdComposer {

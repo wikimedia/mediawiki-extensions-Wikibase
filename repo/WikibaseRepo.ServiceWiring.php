@@ -125,6 +125,7 @@ use Wikibase\Lib\Store\SourceAndTypeDispatchingExistenceChecker;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingRedirectChecker;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingTitleTextLookup;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingUrlLookup;
+use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
@@ -642,6 +643,14 @@ return [
 			$changeClasses,
 			EntityChange::class,
 			WikibaseRepo::getLogger( $services )
+		);
+	},
+
+	'WikibaseRepo.EntityChangeLookup' => function ( MediaWikiServices $services ): EntityChangeLookup {
+		return new EntityChangeLookup(
+			WikibaseRepo::getEntityChangeFactory( $services ),
+			WikibaseRepo::getEntityIdParser( $services ),
+			WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb()
 		);
 	},
 
