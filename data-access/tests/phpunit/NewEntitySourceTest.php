@@ -4,6 +4,8 @@ declare( strict_types=1 );
 namespace Wikibase\DataAccess\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataAccess\ApiEntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySource;
 
 /**
@@ -43,6 +45,18 @@ class NewEntitySourceTest extends TestCase {
 		$this->assertSame(
 			$db,
 			$source->getDatabaseName()
+		);
+	}
+
+	public function testWithEntityTypes(): void {
+		$entityTypes = [ 'some type' ];
+		$source = NewEntitySource::create()
+			->withEntityTypes( $entityTypes )
+			->build();
+
+		$this->assertSame(
+			$entityTypes,
+			$source->getEntityTypes()
 		);
 	}
 
@@ -116,14 +130,23 @@ class NewEntitySourceTest extends TestCase {
 	}
 
 	public function testType(): void {
-		$sourceType = EntitySource::TYPE_API;
-		$source = NewEntitySource::create()
-			->withType( $sourceType )
+		$apiSourceType = ApiEntitySource::TYPE;
+		$apiSource = NewEntitySource::create()
+			->withType( $apiSourceType )
+			->build();
+
+		$dbSourceType = DatabaseEntitySource::TYPE;
+		$dbSource = NewEntitySource::create()
+			->withType( $dbSourceType )
 			->build();
 
 		$this->assertSame(
-			$sourceType,
-			$source->getType()
+			$dbSourceType,
+			$dbSource->getType()
+		);
+		$this->assertSame(
+			$apiSourceType,
+			$apiSource->getType()
 		);
 	}
 
