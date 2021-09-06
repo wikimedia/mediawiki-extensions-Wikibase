@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Kwekubo",
+			"MinecraftAustralia",
 			"Tem",
 			"පසිඳු කාවින්ද"
 		]
@@ -9,6 +10,7 @@
 	"wikibase-edit": "cuir in eagar",
 	"wikibase-save": "Sábháil",
 	"wikibase-cancel": "Cealaigh",
+	"wikibase-add": "ardaigh",
 	"wikibase-sitelinks-special": "Suíomhanna eile",
 	"wikibase-itembytitle-lookup-page": "Leathanach:",
 	"wikibase-itembytitle-submit": "Cuardaigh",
