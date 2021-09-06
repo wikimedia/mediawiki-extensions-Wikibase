@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -86,13 +85,13 @@ class EditEntityTest extends FederatedPropertiesApiTestCase {
 	public function testAddStatementToLocalEntityContainingLocalProperty(): void {
 		$store = WikibaseRepo::getEntityStore();
 
-		$item = new Item( new ItemId( 'Q1' ) );
-		$itemId = $item->getId();
+		$item = new Item();
 		$store->saveEntity( $item, 'feddypropstest', $this->user, EDIT_NEW );
+		$itemId = $item->getId();
 
-		$property = new Property( new PropertyId( 'P1' ), null, 'string' );
-		$propertyId = $property->getId();
+		$property = new Property( null, null, 'string' );
 		$store->saveEntity( $property, 'feddypropstest', $this->user, EDIT_NEW );
+		$propertyId = $property->getId();
 
 		$statement = new Statement( new PropertyNoValueSnak( $propertyId ) );
 		$guidGenerator = new GuidGenerator();
