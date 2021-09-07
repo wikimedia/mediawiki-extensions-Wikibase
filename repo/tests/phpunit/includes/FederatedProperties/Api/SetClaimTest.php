@@ -36,7 +36,7 @@ class SetClaimTest extends FederatedPropertiesApiTestCase {
 		$guid = $guidGenerator->newGuid( $entityId );
 		$statement->setGuid( $guid );
 
-		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
+		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-federated-property-api-error-message' ) );
 		$this->doApiRequestWithToken( [
 			'action' => 'wbsetclaim',
 			'claim' => FormatJson::encode( $this->getSerializedStatement( $statement ) ),

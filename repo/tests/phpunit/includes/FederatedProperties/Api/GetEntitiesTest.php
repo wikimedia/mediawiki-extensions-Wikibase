@@ -29,7 +29,7 @@ class GetEntitiesTest extends FederatedPropertiesApiTestCase {
 			'ids' => $fedPropId,
 		];
 
-		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
+		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-federated-property-api-error-message' ) );
 		$this->doApiRequestWithToken( $params );
 	}
 

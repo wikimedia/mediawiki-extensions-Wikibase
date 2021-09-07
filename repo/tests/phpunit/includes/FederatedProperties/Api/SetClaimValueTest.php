@@ -39,7 +39,7 @@ class SetClaimValueTest extends FederatedPropertiesApiTestCase {
 			'snaktype' => 'value',
 		];
 
-		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
+		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-federated-property-api-error-message' ) );
 		$this->doApiRequestWithToken( $params );
 	}
 

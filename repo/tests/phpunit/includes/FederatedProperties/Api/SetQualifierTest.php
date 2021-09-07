@@ -39,7 +39,7 @@ class SetQualifierTest extends FederatedPropertiesApiTestCase {
 			'value' => 'mega cool!'
 		];
 
-		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
+		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-federated-property-api-error-message' ) );
 		$this->doApiRequestWithToken( $params );
 	}
 
