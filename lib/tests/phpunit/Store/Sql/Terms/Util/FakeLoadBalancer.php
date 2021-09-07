@@ -43,11 +43,11 @@ class FakeLoadBalancer extends LoadBalancer {
 		( $callback )( $this->dbw, ...$params );
 	}
 
-	public function getLocalDomainID() {
+	public function getLocalDomainID(): string {
 		return 'localhost';
 	}
 
-	public function resolveDomainID( $domain ) {
+	public function resolveDomainID( $domain ): string {
 		return ( $domain === false ) ? $this->getLocalDomainID() : (string)$domain;
 	}
 
