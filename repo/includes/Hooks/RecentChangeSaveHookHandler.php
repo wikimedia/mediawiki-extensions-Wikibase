@@ -7,7 +7,6 @@ namespace Wikibase\Repo\Hooks;
 use CentralIdLookup;
 use MediaWiki\User\CentralId\CentralIdLookupFactory;
 use RecentChange;
-use User;
 use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
@@ -67,9 +66,8 @@ class RecentChangeSaveHookHandler {
 				if ( $this->centralIdLookup === null ) {
 					$centralUserId = 0;
 				} else {
-					$repoUser = User::newFromIdentity( $recentChange->getPerformerIdentity() );
 					$centralUserId = $this->centralIdLookup->centralIdFromLocalUser(
-						$repoUser
+						$recentChange->getPerformerIdentity()
 					);
 				}
 
