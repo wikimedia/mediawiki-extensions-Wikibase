@@ -39,7 +39,7 @@ class FakeLoadBalancer extends LoadBalancer {
 		}
 	}
 
-	public function forEachOpenMasterConnection( $callback, array $params = [] ) {
+	public function forEachOpenPrimaryConnection( $callback, array $params = [] ) {
 		( $callback )( $this->dbw, ...$params );
 	}
 
