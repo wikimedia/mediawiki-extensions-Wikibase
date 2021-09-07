@@ -1,4 +1,4 @@
-name: Filter Wikibase Changes
+name: Filter New Wikibase Commits
 on:
   push:
     branches: [ master ]
@@ -31,3 +31,22 @@ jobs:
             --path-rename=lib/tests/phpunit/Changes:tests
             --path-rename lib/packages/wikibase/changes/:
             --message-callback 'return re.sub(b"^changes: ", b"", message)'
+  filterDataModel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: git-monorepo-splice
+        uses: wmde/git-monorepo-splice-docker-action@v1
+        with:
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY_DATAMODEL }}
+          targetOrg: wmde
+          targetRepo: WikibaseDataModel
+          targetBranch: master
+          filterArguments: >-
+            --path lib/packages/wikibase/data-model/
+            --path-rename "lib/packages/wikibase/data-model/:"
+          monorepoParentCommit1: 976f0e32d62eeefc3e0bfe994125494ebc842aa8
+          monorepoParentCommit2: 01e1f4ba3605a5996c664a42f0019bc96140beff
+          lastPreMigrationCommit: 22c2933c6221102c93bef993cd17b18a78eda185
