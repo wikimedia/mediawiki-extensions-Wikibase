@@ -9,7 +9,7 @@ use Elastica\Query\Exists;
 use Elastica\Query\MatchAll;
 use Elastica\Query\MoreLikeThis;
 use ExtensionRegistry;
-use MediaWiki\MediaWikiServices;
+use LinkCacheTestTrait;
 use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\Client\MoreLikeWikibase;
@@ -24,6 +24,7 @@ use Wikibase\Client\MoreLikeWikibase;
  * @license GPL-2.0-or-later
  */
 class MoreLikeWikibaseTest extends MediaWikiIntegrationTestCase {
+	use LinkCacheTestTrait;
 
 	public static function setUpBeforeClass(): void {
 		if (
@@ -72,9 +73,8 @@ class MoreLikeWikibaseTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testApply( $term, $expectedQuery, $mltUsed ) {
 		// Inject fake pages for MoreLikeFeature::collectTitles() to find
-		$linkCache = MediaWikiServices::getInstance()->getLinkCache();
-		$linkCache->addGoodLinkObj( 12345, Title::newFromTextThrow( 'Some page' ) );
-		$linkCache->addGoodLinkObj( 23456, Title::newFromTextThrow( 'Other page' ) );
+		$this->addGoodLinkObject( 12345, Title::newFromTextThrow( 'Some page' ) );
+		$this->addGoodLinkObject( 23456, Title::newFromTextThrow( 'Other page' ) );
 
 		// @todo Use a HashConfig with explicit values?
 		$config = new HashSearchConfig( [ 'CirrusSearchMoreLikeThisTTL' => 600 ], [ 'inherit' ] );
