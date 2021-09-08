@@ -52,7 +52,7 @@
 		"ext-calendar": "Needed for dumpRdf script"
 	},
 	"scripts": {
-		"lint": "parallel-lint . --exclude vendor --exclude node_modules --exclude .git",
+		"lint": "parallel-lint . --exclude vendor --exclude node_modules --exclude .git --exclude lib/packages/*/*/vendor",
 		"phpcs": "phpcs -p -s",
 		"phpcs-modified": "bash build/phpcsGitModified.sh",
 		"phpcs-committed": "bash build/phpcsGitCommitted.sh",
