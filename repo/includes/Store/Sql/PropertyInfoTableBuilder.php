@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Store\Sql;
 
 use Onoi\MessageReporter\MessageReporter;
 use RuntimeException;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -157,7 +157,7 @@ class PropertyInfoTableBuilder {
 			$c = 0;
 
 			foreach ( $props as $row ) {
-				$this->updatePropertyInfo( new PropertyId( $row->page_title ) );
+				$this->updatePropertyInfo( new NumericPropertyId( $row->page_title ) );
 				$pageId = (int)$row->page_id;
 				$c++;
 			}
@@ -182,9 +182,9 @@ class PropertyInfoTableBuilder {
 	 *
 	 * @throws RuntimeException
 	 *
-	 * @param PropertyId $id the Property to process
+	 * @param NumericPropertyId $id the Property to process
 	 */
-	private function updatePropertyInfo( PropertyId $id ) {
+	private function updatePropertyInfo( NumericPropertyId $id ) {
 		$property = $this->propertyLookup->getPropertyForId( $id );
 
 		if ( $property === null ) {

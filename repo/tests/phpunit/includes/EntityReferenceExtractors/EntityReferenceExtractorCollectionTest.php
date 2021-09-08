@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractor;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorCollection;
 use Wikibase\Repo\EntityReferenceExtractors\SiteLinkBadgeItemReferenceExtractor;
@@ -43,7 +43,7 @@ class EntityReferenceExtractorCollectionTest extends TestCase {
 	}
 
 	public function testGivenEntityReferenceExtractor_returnsIds() {
-		$expected = [ new ItemId( 'Q42' ), new PropertyId( 'P23' ) ];
+		$expected = [ new ItemId( 'Q42' ), new NumericPropertyId( 'P23' ) ];
 		$item = new Item();
 		$mockExtractor = $this->getMockEntityReferenceExtractor( $item, $expected );
 		$extractor = new EntityReferenceExtractorCollection( [ $mockExtractor ] );
@@ -55,16 +55,16 @@ class EntityReferenceExtractorCollectionTest extends TestCase {
 		$item = new Item();
 		$mockExtractor1 = $this->getMockEntityReferenceExtractor(
 			$item,
-			[ new PropertyId( 'P666' ), new ItemId( 'Q123' ) ]
+			[ new NumericPropertyId( 'P666' ), new ItemId( 'Q123' ) ]
 		);
 		$mockExtractor2 = $this->getMockEntityReferenceExtractor(
 			$item,
-			[ new PropertyId( 'P666' ), new ItemId( 'Q456' ) ]
+			[ new NumericPropertyId( 'P666' ), new ItemId( 'Q456' ) ]
 		);
 		$extractor = new EntityReferenceExtractorCollection( [ $mockExtractor1, $mockExtractor2 ] );
 
 		$this->assertEquals(
-			[ new PropertyId( 'P666' ), new ItemId( 'Q123' ), new ItemId( 'Q456' ) ],
+			[ new NumericPropertyId( 'P666' ), new ItemId( 'Q123' ), new ItemId( 'Q456' ) ],
 			$extractor->extractEntityIds( $item )
 		);
 	}

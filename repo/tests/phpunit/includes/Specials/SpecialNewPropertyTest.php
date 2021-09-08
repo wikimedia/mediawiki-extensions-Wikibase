@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewProperty;
 use Wikibase\Repo\Tests\WikibaseTablesUsed;
@@ -245,11 +245,11 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 	/**
 	 * @param string $url
 	 *
-	 * @return PropertyId
+	 * @return NumericPropertyId
 	 */
 	protected function extractEntityIdFromUrl( $url ) {
 		preg_match( '/\bP\d+$/i', $url, $matches );
-		return new PropertyId( $matches[0] );
+		return new NumericPropertyId( $matches[0] );
 	}
 
 	/**

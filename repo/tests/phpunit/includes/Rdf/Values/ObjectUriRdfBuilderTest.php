@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\StringValue;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\Rdf\Values\ObjectUriRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
@@ -41,7 +41,7 @@ class ObjectUriRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$writer->about( 'www', 'Q1' );
 
 		$snak = new PropertyValueSnak(
-			new PropertyId( 'P1' ),
+			new NumericPropertyId( 'P1' ),
 			new StringValue( 'http://en.wikipedia.org/wiki/Wikidata' )
 		);
 

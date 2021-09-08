@@ -43,8 +43,8 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
@@ -1536,13 +1536,13 @@ return [
 		$formatterUrlProperty = $settings->getSetting( 'formatterUrlProperty' );
 		if ( $formatterUrlProperty !== null ) {
 			$propertyIdMap[PropertyInfoLookup::KEY_FORMATTER_URL] =
-				new PropertyId( $formatterUrlProperty );
+				new NumericPropertyId( $formatterUrlProperty );
 		}
 
 		$canonicalUriProperty = $settings->getSetting( 'canonicalUriProperty' );
 		if ( $canonicalUriProperty !== null ) {
 			$propertyIdMap[PropertyInfoStore::KEY_CANONICAL_URI] =
-				new PropertyId( $canonicalUriProperty );
+				new NumericPropertyId( $canonicalUriProperty );
 		}
 
 		return new PropertyInfoBuilder( $propertyIdMap );

@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -351,7 +351,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 
 		$this->expectException( InvalidArgumentException::class );
 		$lookup->loadRevisionInformation(
-			[ new PropertyId( 'P123' ) ],
+			[ new NumericPropertyId( 'P123' ) ],
 			 LookupConstants::LATEST_FROM_REPLICA
 		);
 	}
@@ -361,7 +361,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 
 		$this->expectException( InvalidArgumentException::class );
 		$lookup->loadRevisionInformationByRevisionId(
-			new PropertyId( 'P123' ),
+			new NumericPropertyId( 'P123' ),
 			1,
 			 LookupConstants::LATEST_FROM_REPLICA
 		);
@@ -490,7 +490,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$this->expectException( InvalidArgumentException::class );
 
 		$lookup->loadLatestRevisionIds(
-			[ new PropertyId( 'P123' ) ],
+			[ new NumericPropertyId( 'P123' ) ],
 			 LookupConstants::LATEST_FROM_REPLICA
 		);
 	}

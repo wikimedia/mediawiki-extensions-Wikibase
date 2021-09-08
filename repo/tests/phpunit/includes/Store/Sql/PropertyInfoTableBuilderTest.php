@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use DataValues\StringValue;
 use MediaWikiIntegrationTestCase;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -102,8 +102,8 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$propertyInfoBuilder = new PropertyInfoBuilder( [
-			PropertyInfoLookup::KEY_FORMATTER_URL => new PropertyId( 'P1630' ),
-			PropertyInfoStore::KEY_CANONICAL_URI => new PropertyId( 'P1640' )
+			PropertyInfoLookup::KEY_FORMATTER_URL => new NumericPropertyId( 'P1630' ),
+			PropertyInfoStore::KEY_CANONICAL_URI => new NumericPropertyId( 'P1640' )
 		] );
 		$builder = new PropertyInfoTableBuilder(
 			$table,
@@ -122,7 +122,7 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 
 	private function assertTableHasProperties( array $properties, PropertyInfoTable $table ) {
 		foreach ( $properties as $propId => $expected ) {
-			$info = $table->getPropertyInfo( new PropertyId( $propId ) );
+			$info = $table->getPropertyInfo( new NumericPropertyId( $propId ) );
 			$this->assertEquals(
 				$expected[PropertyInfoLookup::KEY_DATA_TYPE],
 				$info[PropertyInfoLookup::KEY_DATA_TYPE],

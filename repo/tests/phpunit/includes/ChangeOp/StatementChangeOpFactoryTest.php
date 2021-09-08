@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use DataValues\StringValue;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -30,7 +30,7 @@ class StatementChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 	 */
 	protected function newChangeOpFactory() {
 		$mockProvider = new ChangeOpTestMockProvider( $this );
-		$entityId = new PropertyId( 'P7' );
+		$entityId = new NumericPropertyId( 'P7' );
 
 		return new StatementChangeOpFactory(
 			new GuidGenerator(),
@@ -46,7 +46,7 @@ class StatementChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testNewSetStatementOp() {
-		$snak = new PropertyNoValueSnak( new PropertyId( 'P7' ) );
+		$snak = new PropertyNoValueSnak( new NumericPropertyId( 'P7' ) );
 		$statement = new Statement( $snak );
 
 		$op = $this->newChangeOpFactory()->newSetStatementOp( $statement );
@@ -59,14 +59,14 @@ class StatementChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testNewSetMainSnakOp() {
-		$snak = new PropertyNoValueSnak( new PropertyId( 'P7' ) );
+		$snak = new PropertyNoValueSnak( new NumericPropertyId( 'P7' ) );
 
 		$op = $this->newChangeOpFactory()->newSetMainSnakOp( 'DEADBEEF', $snak );
 		$this->assertInstanceOf( ChangeOp::class, $op );
 	}
 
 	public function testNewSetQualifierOp() {
-		$snak = new PropertyNoValueSnak( new PropertyId( 'P7' ) );
+		$snak = new PropertyNoValueSnak( new NumericPropertyId( 'P7' ) );
 
 		$op = $this->newChangeOpFactory()->newSetQualifierOp( 'DEADBEEF', $snak, '1337BABE' );
 		$this->assertInstanceOf( ChangeOp::class, $op );
@@ -95,7 +95,7 @@ class StatementChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testNormalize(): void {
-		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a string' ) );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a string' ) );
 
 		$op = $this->newChangeOpFactory()->newSetMainSnakOp( 'DEADBEEF', $snak );
 

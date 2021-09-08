@@ -9,8 +9,8 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -221,7 +221,7 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 
 	public function testApplyWithProperty() {
 		$property = Property::newFromType( 'string' );
-		$property->setId( new PropertyId( 'P73923' ) );
+		$property->setId( new NumericPropertyId( 'P73923' ) );
 
 		$statement = new Statement( new PropertyNoValueSnak( 45 ) );
 		$expected = new StatementList( [ $statement ] );
@@ -245,8 +245,8 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 
 	public function applyInvalidThrowsExceptionProvider() {
 		$itemEmpty = new Item( new ItemId( 'Q888' ) );
-		$noValueSnak = new PropertyNoValueSnak( new PropertyId( 'P45' ) );
-		$someValueSnak = new PropertySomeValueSnak( new PropertyId( 'P44' ) );
+		$noValueSnak = new PropertyNoValueSnak( new NumericPropertyId( 'P45' ) );
+		$someValueSnak = new PropertySomeValueSnak( new NumericPropertyId( 'P44' ) );
 
 		$statementWithInvalidGuid = new Statement( $noValueSnak );
 		$statementWithInvalidGuid->setGuid( 'Q0$' );
@@ -348,7 +348,7 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function validateProvider() {
-		$p11 = new PropertyId( 'P11' );
+		$p11 = new NumericPropertyId( 'P11' );
 		$q17 = new ItemId( 'Q17' );
 
 		//NOTE: the mock validator will consider the string "INVALID" to be invalid.

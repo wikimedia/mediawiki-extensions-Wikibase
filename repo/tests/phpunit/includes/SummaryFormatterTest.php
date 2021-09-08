@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
@@ -124,7 +124,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	public function providerFormatAutoComment() {
-		$p20 = new PropertyId( 'P20' );
+		$p20 = new NumericPropertyId( 'P20' );
 		$q5 = new ItemId( 'Q5' );
 		$q5Value = new EntityIdValue( $q5 );
 		$p20q5Snak = new PropertyValueSnak( $p20, $q5Value );
@@ -206,7 +206,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	public function providerFormatAutoSummary() {
-		$p20 = new PropertyId( 'P20' );
+		$p20 = new NumericPropertyId( 'P20' );
 		$q5 = new ItemId( 'Q5' );
 		$q5Value = new EntityIdValue( $q5 );
 		$p20q5Snak = new PropertyValueSnak( $p20, $q5Value );

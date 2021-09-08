@@ -11,8 +11,8 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -645,11 +645,11 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 	}
 
 	private function getExistingProperty() {
-		return new Property( new PropertyId( self::EXISTING_PROPERTY_ID ), null, 'test' );
+		return new Property( new NumericPropertyId( self::EXISTING_PROPERTY_ID ), null, 'test' );
 	}
 
 	private function getNonExistingProperty() {
-		return new Property( new PropertyId( self::NON_EXISTING_PROPERTY_ID ), null, 'test' );
+		return new Property( new NumericPropertyId( self::NON_EXISTING_PROPERTY_ID ), null, 'test' );
 	}
 
 	private function getNonExistingPropertyWithNullId() {

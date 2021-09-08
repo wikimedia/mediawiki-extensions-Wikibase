@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
@@ -47,7 +47,7 @@ class PropertyInfoBuilderTest extends ServiceWiringTestCase {
 				'canonicalUriProperty' => null,
 			],
 			'expectedPropertyIdMap' => [
-				PropertyInfoLookup::KEY_FORMATTER_URL => new PropertyId( 'P123' ),
+				PropertyInfoLookup::KEY_FORMATTER_URL => new NumericPropertyId( 'P123' ),
 			],
 		];
 
@@ -57,7 +57,7 @@ class PropertyInfoBuilderTest extends ServiceWiringTestCase {
 				'canonicalUriProperty' => 'P321',
 			],
 			'expectedPropertyIdMap' => [
-				PropertyInfoStore::KEY_CANONICAL_URI => new PropertyId( 'P321' ),
+				PropertyInfoStore::KEY_CANONICAL_URI => new NumericPropertyId( 'P321' ),
 			],
 		];
 
@@ -67,8 +67,8 @@ class PropertyInfoBuilderTest extends ServiceWiringTestCase {
 				'canonicalUriProperty' => 'P321',
 			],
 			'expectedPropertyIdMap' => [
-				PropertyInfoLookup::KEY_FORMATTER_URL => new PropertyId( 'P123' ),
-				PropertyInfoStore::KEY_CANONICAL_URI => new PropertyId( 'P321' ),
+				PropertyInfoLookup::KEY_FORMATTER_URL => new NumericPropertyId( 'P123' ),
+				PropertyInfoStore::KEY_CANONICAL_URI => new NumericPropertyId( 'P321' ),
 			],
 		];
 	}

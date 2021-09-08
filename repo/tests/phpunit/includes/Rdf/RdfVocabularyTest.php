@@ -7,8 +7,8 @@ use OutOfBoundsException;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -153,7 +153,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetEntityLName() {
-		$entityId = new PropertyId( 'P1' );
+		$entityId = new NumericPropertyId( 'P1' );
 		$actual = $this->newInstance()->getEntityLName( $entityId );
 		$this->assertSame( 'P1', $actual );
 	}
@@ -165,7 +165,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetRepositoryName_entityFromNonLocalSource() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$vocabulary = $this->newInstance();
 		$this->assertSame( 'otherwiki', $vocabulary->getEntityRepositoryName( $id ) );
 	}

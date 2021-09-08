@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -122,8 +122,8 @@ class StatementsMergerTest extends TestCase {
 			[ $statementBuilder->build() ]
 		];
 
-		$reference1 = new PropertyValueSnak( new PropertyId( 'P345' ), new StringValue( 'hi' ) );
-		$reference2 = new PropertyValueSnak( new PropertyId( 'P456' ), new StringValue( 'hello' ) );
+		$reference1 = new PropertyValueSnak( new NumericPropertyId( 'P345' ), new StringValue( 'hi' ) );
+		$reference2 = new PropertyValueSnak( new NumericPropertyId( 'P456' ), new StringValue( 'hello' ) );
 		yield 'given equivalent statements with references, references are merged' => [
 			[ $this->newStatementWithReferences( $statementBuilder, [ $reference1 ] ) ],
 			[ $this->newStatementWithReferences( $statementBuilder, [ $reference2 ] ) ],

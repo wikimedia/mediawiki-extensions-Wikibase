@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractor;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
@@ -94,11 +94,11 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiIntegrationTestCase {
 	public function entityIdProvider() {
 		return [
 			[ [] ],
-			[ [ new PropertyId( 'P1' ), new ItemId( 'Q1' ) ] ],
+			[ [ new NumericPropertyId( 'P1' ), new ItemId( 'Q1' ) ] ],
 			[ [ new ItemId( 'Q1' ) ] ],
-			[ [ new PropertyId( 'P1' ), new ItemId( 'Q1' ) ] ],
+			[ [ new NumericPropertyId( 'P1' ), new ItemId( 'Q1' ) ] ],
 			[ [
-				new PropertyId( 'P1' ),
+				new NumericPropertyId( 'P1' ),
 				new ItemId( 'Q20' ),
 				new ItemId( 'Q21' ),
 				new ItemId( 'Q22' ),

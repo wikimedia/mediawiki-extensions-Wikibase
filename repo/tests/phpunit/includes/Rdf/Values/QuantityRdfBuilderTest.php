@@ -6,7 +6,7 @@ use DataValues\QuantityValue;
 use DataValues\UnboundedQuantityValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Lib\Units\UnitConverter;
@@ -43,13 +43,13 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideAddValue() {
 		$unboundedValue = UnboundedQuantityValue::newFromNumber( '+23.5', '1' );
-		$unboundedSnak = new PropertyValueSnak( new PropertyId( 'P7' ), $unboundedValue );
+		$unboundedSnak = new PropertyValueSnak( new NumericPropertyId( 'P7' ), $unboundedValue );
 		$value = QuantityValue::newFromNumber( '+23.5', '1', '+23.6', '+23.4' );
-		$snak = new PropertyValueSnak( new PropertyId( 'P7' ), $value );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P7' ), $value );
 
 		$unitId = new ItemId( 'Q2' );
 		$value = QuantityValue::newFromNumber( '+23.5', 'http://acme/' . $unitId->getSerialization(), '+23.6', '+23.4' );
-		$snak2 = new PropertyValueSnak( new PropertyId( 'P7' ), $value );
+		$snak2 = new PropertyValueSnak( new NumericPropertyId( 'P7' ), $value );
 
 		return [
 			'simple unbounded' => [
@@ -354,8 +354,8 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testWriteTwice() {
 		$unboundedValue = UnboundedQuantityValue::newFromNumber( '-79.1', 'Q2' );
-		$unboundedSnak = new PropertyValueSnak( new PropertyId( 'P7' ), $unboundedValue );
-		$unboundedSnak2 = new PropertyValueSnak( new PropertyId( 'P9' ), $unboundedValue );
+		$unboundedSnak = new PropertyValueSnak( new NumericPropertyId( 'P7' ), $unboundedValue );
+		$unboundedSnak2 = new PropertyValueSnak( new NumericPropertyId( 'P9' ), $unboundedValue );
 
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://acme.com/item/' ],

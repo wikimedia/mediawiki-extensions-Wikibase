@@ -10,8 +10,8 @@ use DataValues\StringValue;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -38,7 +38,7 @@ use Wikimedia\TestingAccessWrapper;
 class SetReferenceTest extends WikibaseApiTestCase {
 
 	/**
-	 * @var PropertyId[]
+	 * @var NumericPropertyId[]
 	 */
 	private static $propertyIds;
 
@@ -430,7 +430,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			$guid = $statement->getGuid();
 		}
 
-		$prop = new PropertyId( EntityTestHelper::getId( 'StringProp' ) );
+		$prop = new NumericPropertyId( EntityTestHelper::getId( 'StringProp' ) );
 		$snak = new PropertyValueSnak( $prop, new StringValue( $referenceValue ) );
 		$reference = new Reference( new SnakList( [ $snak ] ) );
 

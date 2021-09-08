@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\StringValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\PropertyInfoProvider;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -39,7 +39,7 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	public function testAddValue() {
 		$uriPatternProvider = $this->createMock( PropertyInfoProvider::class );
 		$uriPatternProvider->method( 'getPropertyInfo' )
-			->willReturnCallback( function( PropertyId $id ) {
+			->willReturnCallback( function( NumericPropertyId $id ) {
 				return $id->getSerialization() === 'P1' ? 'http://xyzzy.test/vocab/$1' : null;
 			} );
 
@@ -69,12 +69,12 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$writer->about( 'www', 'Q1' );
 
 		$snakP1 = new PropertyValueSnak(
-			new PropertyId( 'P1' ),
+			new NumericPropertyId( 'P1' ),
 			new StringValue( 'AB&123' )
 		);
 
 		$snakP345 = new PropertyValueSnak(
-			new PropertyId( 'P345' ),
+			new NumericPropertyId( 'P345' ),
 			new StringValue( 'XY-23' )
 		);
 

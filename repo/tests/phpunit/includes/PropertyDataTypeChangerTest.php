@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests;
 
 use InvalidArgumentException;
 use User;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\DataType;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Store\EntityRevision;
@@ -26,7 +26,7 @@ use Wikibase\Repo\PropertyDataTypeChanger;
 class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testChangeDataType_success() {
-		$propertyId = new PropertyId( 'P42' );
+		$propertyId = new NumericPropertyId( 'P42' );
 
 		$expectedProperty = new Property( $propertyId, null, 'shinydata' );
 
@@ -46,7 +46,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testChangeDataType_propertyNotFound() {
-		$propertyId = new PropertyId( 'P43' );
+		$propertyId = new NumericPropertyId( 'P43' );
 
 		$entityStore = $this->createMock( EntityStore::class );
 
@@ -58,7 +58,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testChangeDataType_saveFailed() {
-		$propertyId = new PropertyId( 'P42' );
+		$propertyId = new NumericPropertyId( 'P42' );
 
 		$expectedProperty = new Property( $propertyId, null, 'shinydata' );
 		$storageException = new StorageException( 'whatever' );
@@ -81,7 +81,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testChangeDataType_mismatchingDataValueTypes() {
-		$propertyId = new PropertyId( 'P42' );
+		$propertyId = new NumericPropertyId( 'P42' );
 
 		$entityStore = $this->createMock( EntityStore::class );
 
@@ -98,14 +98,14 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 		$entityRevisionLookup->expects( $this->once() )
 			->method( 'getEntityRevision' )
 			->with(
-				$this->isInstanceOf( PropertyId::class ),
+				$this->isInstanceOf( NumericPropertyId::class ),
 				0,
 				 LookupConstants::LATEST_FROM_MASTER
 			)
-			->willReturnCallback( function( PropertyId $propertyId ) {
+			->willReturnCallback( function( NumericPropertyId $propertyId ) {
 				if ( $propertyId->getSerialization() === 'P42' ) {
 					$property = new Property(
-						new PropertyId( 'P42' ),
+						new NumericPropertyId( 'P42' ),
 						null,
 						'rustydata'
 					);

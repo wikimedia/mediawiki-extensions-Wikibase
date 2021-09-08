@@ -21,8 +21,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -443,8 +443,8 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function unsupportedRedirectProvider() {
-		$p1 = new PropertyId( 'P1' );
-		$p2 = new PropertyId( 'P2' );
+		$p1 = new NumericPropertyId( 'P1' );
+		$p2 = new NumericPropertyId( 'P2' );
 
 		return [
 			'P1 -> P2' => [ new EntityRedirect( $p1, $p2 ) ],
@@ -923,7 +923,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$store = $this->createStoreForItemsOnly();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->getWikiPageForEntity( new PropertyId( 'P42' ) );
+		$store->getWikiPageForEntity( new NumericPropertyId( 'P42' ) );
 	}
 
 	public function testSaveEntityFails_GivenEntityIdFromOtherSource() {
@@ -931,7 +931,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$this->expectException( InvalidArgumentException::class );
 
 		$store->saveEntity(
-			new Property( new PropertyId( 'P123' ), null, 'string' ),
+			new Property( new NumericPropertyId( 'P123' ), null, 'string' ),
 			'testing',
 			$this->getTestUser()->getUser(),
 			EDIT_NEW
@@ -942,19 +942,19 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$store = $this->createStoreForItemsOnly();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->deleteEntity( new PropertyId( 'P123' ), 'testing', $this->getTestUser()->getUser() );
+		$store->deleteEntity( new NumericPropertyId( 'P123' ), 'testing', $this->getTestUser()->getUser() );
 	}
 
 	public function testUserWasLastToEditFails_GivenEntityIdFromOtherSource() {
 		$store = $this->createStoreForItemsOnly();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->userWasLastToEdit( $this->getTestUser()->getUser(), new PropertyId( 'P123' ), false );
+		$store->userWasLastToEdit( $this->getTestUser()->getUser(), new NumericPropertyId( 'P123' ), false );
 	}
 
 	public function testSaveRedirectFails_GivenEntityIdFromOtherSource() {
-		$source = new PropertyId( 'P123' );
-		$target = new PropertyId( 'P321' );
+		$source = new NumericPropertyId( 'P123' );
+		$target = new NumericPropertyId( 'P321' );
 
 		$store = $this->createStoreForItemsOnly();
 		$this->expectException( InvalidArgumentException::class );
@@ -970,14 +970,14 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$store = $this->createStoreForItemsOnly();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->updateWatchlist( $this->getTestUser()->getUser(), new PropertyId( 'P123' ), false );
+		$store->updateWatchlist( $this->getTestUser()->getUser(), new NumericPropertyId( 'P123' ), false );
 	}
 
 	public function testIsWatchingFails_GivenEntityIdFromOtherSource() {
 		$store = $this->createStoreForItemsOnly();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->isWatching( $this->getTestUser()->getUser(), new PropertyId( 'P123' ) );
+		$store->isWatching( $this->getTestUser()->getUser(), new NumericPropertyId( 'P123' ) );
 	}
 
 	private function createStoreForItemsOnly() {

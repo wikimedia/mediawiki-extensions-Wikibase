@@ -58,7 +58,7 @@ class NewStatement {
 	public static function forProperty( $propertyId ) {
 		$result = new self();
 		if ( is_string( $propertyId ) ) {
-			$propertyId = new PropertyId( $propertyId );
+			$propertyId = new PropertyId( $propertyId ); // TODO: Change to NumericPropertyId
 		}
 		$result->propertyId = $propertyId;
 
@@ -164,7 +164,7 @@ class NewStatement {
 	public function withQualifier( $propertyId, $value ) {
 		$result = clone $this;
 		if ( is_string( $propertyId ) ) {
-			$propertyId = new PropertyId( $propertyId );
+			$propertyId = new PropertyId( $propertyId ); // TODO: Change to NumericPropertyId
 		}
 
 		$value = $this->createDataValueObject( $value );

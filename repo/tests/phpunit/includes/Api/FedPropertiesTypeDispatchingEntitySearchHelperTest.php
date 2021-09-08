@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\CombinedEntitySearchHelper;
@@ -40,7 +40,7 @@ class FedPropertiesTypeDispatchingEntitySearchHelperTest extends \PHPUnit\Framew
 	}
 
 	public function testInternalSearchHelperIsCombinedSearchHelperWhenEntityTypeIsProperty() {
-		$p31 = [ 'P31' => new TermSearchResult( new Term( 'en', 'instance of' ), 'match', new PropertyId( 'P31' ) ) ];
+		$p31 = [ 'P31' => new TermSearchResult( new Term( 'en', 'instance of' ), 'match', new NumericPropertyId( 'P31' ) ) ];
 		$federatedPropertiesEntitySearchHelper = $this->createMock( CombinedEntitySearchHelper::class );
 		$typeDispatchingSearch = $this->createMock( TypeDispatchingEntitySearchHelper::class );
 

@@ -6,8 +6,8 @@ use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Content\EntityContent;
@@ -66,7 +66,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 
 	public function testGetTitleForId() {
 		$handler = $this->getHandler();
-		$id = new PropertyId( 'P123' );
+		$id = new NumericPropertyId( 'P123' );
 
 		$title = $handler->getTitleForId( $id );
 		$this->assertEquals( $id->getSerialization(), $title->getText() );
@@ -74,8 +74,8 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 
 	public function testGetTitlesForIds() {
 		$handler = $this->getHandler();
-		$id1 = new PropertyId( 'P123' );
-		$id2 = new PropertyId( 'P124' );
+		$id1 = new NumericPropertyId( 'P123' );
+		$id2 = new NumericPropertyId( 'P124' );
 
 		$titles = $handler->getTitlesForIds( [ $id1, $id2 ] );
 		$this->assertEquals( $id1->getSerialization(), $titles['P123']->getText() );
@@ -100,7 +100,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 
 	protected function newEntity( EntityId $id = null ) {
 		if ( !$id ) {
-			$id = new PropertyId( 'P7' );
+			$id = new NumericPropertyId( 'P7' );
 		}
 
 		$property = Property::newFromType( 'string' );
@@ -143,7 +143,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 
 	public function testCanCreateWithCustomId() {
 		$handler = $this->getHandler();
-		$id = new PropertyId( 'P7' );
+		$id = new NumericPropertyId( 'P7' );
 		$this->assertFalse( $handler->canCreateWithCustomId( $id ) );
 	}
 
@@ -151,7 +151,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 		$property = new Property( null, null, 'string' );
 		$property->getFingerprint()->setLabel( 'en', 'Kitten' );
 		$property->getStatements()->addNewStatement(
-			new PropertyNoValueSnak( new PropertyId( 'P1' ) )
+			new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) )
 		);
 
 		return PropertyContent::newFromProperty( $property );

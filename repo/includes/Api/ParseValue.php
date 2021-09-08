@@ -20,7 +20,7 @@ use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use ValueValidators\Error;
 use ValueValidators\ValueValidator;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\Lib\DataTypeFactory;
@@ -179,7 +179,7 @@ class ParseValue extends ApiBase {
 
 		if ( empty( $name ) && isset( $params['property'] ) ) {
 			try {
-				$propertyId = new PropertyId( $params['property'] );
+				$propertyId = new NumericPropertyId( $params['property'] );
 			} catch ( InvalidArgumentException $ex ) {
 				$this->errorReporter->dieWithError(
 					'wikibase-api-invalid-property-id',
@@ -222,7 +222,7 @@ class ParseValue extends ApiBase {
 		$name = $params['datatype'];
 
 		if ( empty( $name ) && isset( $params['property'] ) ) {
-			$propertyId = new PropertyId( $params['property'] );
+			$propertyId = new NumericPropertyId( $params['property'] );
 			$name = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
 		}
 

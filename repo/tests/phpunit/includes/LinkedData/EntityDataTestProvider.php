@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Tests\LinkedData;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Rdf\RdfVocabulary;
@@ -30,7 +30,7 @@ class EntityDataTestProvider {
 
 		$itemRev = new EntityRevision( $item, self::ITEM_REVISION_ID, '20131211100908' );
 
-		$property = new Property( new PropertyId( 'P42' ), null, 'string' );
+		$property = new Property( new NumericPropertyId( 'P42' ), null, 'string' );
 		$property->setLabel( 'en', 'Propertyyy' );
 
 		$propertyRev = new EntityRevision( $property, self::PROPERTY_REVISON_ID, '20141211100908' );

@@ -124,7 +124,7 @@ class NoCrossReferencingStatementsTest extends TestCase {
 			NewItem::withId( 'Q2' )->build()
 		);
 
-		$this->assertEquals( [ new PropertyId( 'P42' ) ], $validator->getViolations() );
+		$this->assertEquals( [ new PropertyId( 'P42' ) ], $validator->getViolations() ); // TODO: Change to NumericPropertyId
 	}
 
 }

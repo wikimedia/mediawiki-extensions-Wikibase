@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\StringValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Rdf\RdfVocabulary;
@@ -52,7 +52,7 @@ class CommonsMediaRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$writer->about( 'www', 'Q1' );
 
 		$snak = new PropertyValueSnak(
-			new PropertyId( 'P1' ),
+			new NumericPropertyId( 'P1' ),
 			new StringValue( 'Bunny.jpg' )
 		);
 

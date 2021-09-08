@@ -14,8 +14,8 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
@@ -247,41 +247,41 @@ class RdfBuilderTestData {
 	/**
 	 * Define a set of fake properties
 	 * @return array[] A list of properties used in the test data. Each element is a pair
-	 *         of an PropertyId and a data type ID.
+	 *         of an NumericPropertyId and a data type ID.
 	 */
 	public static function getTestProperties() {
 		return [
-			[ new PropertyId( 'P2' ), 'wikibase-item' ],
-			[ new PropertyId( 'P3' ), 'commonsMedia' ],
-			[ new PropertyId( 'P4' ), 'globe-coordinate' ],
-			[ new PropertyId( 'P5' ), 'monolingualtext' ],
-			[ new PropertyId( 'P6' ), 'quantity' ],
-			[ new PropertyId( 'P7' ), 'string' ],
-			[ new PropertyId( 'P8' ), 'time' ],
-			[ new PropertyId( 'P9' ), 'url' ],
-			[ new PropertyId( 'P10' ), 'geo-shape' ],
-			[ new PropertyId( 'P11' ), 'external-id' ],
-			[ new PropertyId( 'foreign:P12' ), 'string' ],
-			[ new PropertyId( 'foreign:P13' ), 'wikibase-item' ],
+			[ new NumericPropertyId( 'P2' ), 'wikibase-item' ],
+			[ new NumericPropertyId( 'P3' ), 'commonsMedia' ],
+			[ new NumericPropertyId( 'P4' ), 'globe-coordinate' ],
+			[ new NumericPropertyId( 'P5' ), 'monolingualtext' ],
+			[ new NumericPropertyId( 'P6' ), 'quantity' ],
+			[ new NumericPropertyId( 'P7' ), 'string' ],
+			[ new NumericPropertyId( 'P8' ), 'time' ],
+			[ new NumericPropertyId( 'P9' ), 'url' ],
+			[ new NumericPropertyId( 'P10' ), 'geo-shape' ],
+			[ new NumericPropertyId( 'P11' ), 'external-id' ],
+			[ new NumericPropertyId( 'foreign:P12' ), 'string' ],
+			[ new NumericPropertyId( 'foreign:P13' ), 'wikibase-item' ],
 		];
 	}
 
 	/**
 	 * @return array[] A list of properties used in the test data. Each element is a pair
-	 *         of an PropertyId and a data type ID.
+	 *         of an NumericPropertyId and a data type ID.
 	 */
 	public static function getTestProperties_noPrefixedIds() {
 		return [
-			[ new PropertyId( 'P2' ), 'wikibase-item' ],
-			[ new PropertyId( 'P3' ), 'commonsMedia' ],
-			[ new PropertyId( 'P4' ), 'globe-coordinate' ],
-			[ new PropertyId( 'P5' ), 'monolingualtext' ],
-			[ new PropertyId( 'P6' ), 'quantity' ],
-			[ new PropertyId( 'P7' ), 'string' ],
-			[ new PropertyId( 'P8' ), 'time' ],
-			[ new PropertyId( 'P9' ), 'url' ],
-			[ new PropertyId( 'P10' ), 'geo-shape' ],
-			[ new PropertyId( 'P11' ), 'external-id' ],
+			[ new NumericPropertyId( 'P2' ), 'wikibase-item' ],
+			[ new NumericPropertyId( 'P3' ), 'commonsMedia' ],
+			[ new NumericPropertyId( 'P4' ), 'globe-coordinate' ],
+			[ new NumericPropertyId( 'P5' ), 'monolingualtext' ],
+			[ new NumericPropertyId( 'P6' ), 'quantity' ],
+			[ new NumericPropertyId( 'P7' ), 'string' ],
+			[ new NumericPropertyId( 'P8' ), 'time' ],
+			[ new NumericPropertyId( 'P9' ), 'url' ],
+			[ new NumericPropertyId( 'P10' ), 'geo-shape' ],
+			[ new NumericPropertyId( 'P11' ), 'external-id' ],
 		];
 	}
 
@@ -289,7 +289,7 @@ class RdfBuilderTestData {
 		$termLookup = new InMemoryPrefetchingTermLookup( $loadEntitiesIfNotPrefetched );
 		$entities = [];
 		foreach ( self::getTestProperties() as $propertyTypeMapping ) {
-			/** @var PropertyId $id */
+			/** @var NumericPropertyId $id */
 			$id = $propertyTypeMapping[0];
 			$fingerprint = new Fingerprint();
 			$fingerprint->setLabel( 'en', 'Property' . $id->getNumericId() );
@@ -327,7 +327,7 @@ class RdfBuilderTestData {
 		$entities = [];
 		foreach ( self::getTestProperties() as $propertyTypeMapping ) {
 			$revisionNumber++;
-			/** @var PropertyId $id */
+			/** @var NumericPropertyId $id */
 			$id = $propertyTypeMapping[0];
 			$fingerprint = new Fingerprint();
 			$fingerprint->setLabel( 'en', 'Property' . $id->getNumericId() );

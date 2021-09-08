@@ -16,8 +16,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\CreateRedirect;
@@ -62,11 +62,11 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 
 		// a property
 		$prop = Property::newFromType( 'string' );
-		$prop->setId( new PropertyId( 'P11' ) );
+		$prop->setId( new NumericPropertyId( 'P11' ) );
 		$this->mockRepository->putEntity( $prop );
 
 		// another property
-		$prop->setId( new PropertyId( 'P12' ) );
+		$prop->setId( new NumericPropertyId( 'P12' ) );
 		$this->mockRepository->putEntity( $prop );
 
 		// redirect

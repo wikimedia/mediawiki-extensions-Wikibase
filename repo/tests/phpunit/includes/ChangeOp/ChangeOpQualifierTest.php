@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -164,7 +164,7 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function applyInvalidProvider() {
-		$p11 = new PropertyId( 'P11' );
+		$p11 = new NumericPropertyId( 'P11' );
 		$q17 = new ItemId( 'Q17' );
 
 		$item = new Item( $q17 );
@@ -208,7 +208,7 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function validateProvider() {
-		$p11 = new PropertyId( 'P11' );
+		$p11 = new NumericPropertyId( 'P11' );
 		$q17 = new ItemId( 'Q17' );
 
 		$item = new Item( $q17 );
@@ -250,7 +250,7 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 	public function testGetActions() {
 		$changeOp = new ChangeOpQualifier(
 			'guid',
-			new PropertyNoValueSnak( new PropertyId( 'P11' ) ),
+			new PropertyNoValueSnak( new NumericPropertyId( 'P11' ) ),
 			'snakhash',
 			$this->mockProvider->getMockSnakValidator()
 		);

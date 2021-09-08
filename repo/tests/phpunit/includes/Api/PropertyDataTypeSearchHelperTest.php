@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -21,9 +21,9 @@ use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 class PropertyDataTypeSearchHelperTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetRankedSearchResults_delegatesAndAddsDataTypeMetaData() {
-		$property1 = new PropertyId( 'P123' );
+		$property1 = new NumericPropertyId( 'P123' );
 		$property1Datatype = 'string';
-		$property2 = new PropertyId( 'P321' );
+		$property2 = new NumericPropertyId( 'P321' );
 		$property2Datatype = 'url';
 
 		$property1TermSearchResult = new TermSearchResult(

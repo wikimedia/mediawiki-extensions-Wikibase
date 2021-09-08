@@ -17,8 +17,8 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdSet;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
@@ -229,7 +229,7 @@ class ItemContentTest extends EntityContentTestCase {
 		$item = $itemContent->getItem();
 
 		$item->getStatements()->addNewStatement(
-			new PropertyNoValueSnak( new PropertyId( 'P11' ) ),
+			new PropertyNoValueSnak( new NumericPropertyId( 'P11' ) ),
 			null,
 			null,
 			'Whatever'
@@ -244,7 +244,7 @@ class ItemContentTest extends EntityContentTestCase {
 	private function getItemContentWithIdentifierClaims() {
 
 		$item = new Item( new ItemId( 'Q2' ) );
-		$snak = new PropertyValueSnak( new PropertyId( 'P11' ), new StringValue( 'Tehran' ) );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P11' ), new StringValue( 'Tehran' ) );
 		$guid = $item->getId()->getSerialization() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P';
 		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
 
@@ -266,7 +266,7 @@ class ItemContentTest extends EntityContentTestCase {
 	private function getPropertyDataTypeLookup() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P11' ), 'external-id' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P11' ), 'external-id' );
 
 		return $dataTypeLookup;
 	}
@@ -563,16 +563,16 @@ class ItemContentTest extends EntityContentTestCase {
 			new StatementList(
 				new Statement(
 					new PropertyValueSnak(
-						new PropertyId( 'P6654' ), new StringValue( 'stringvalue' )
+						new NumericPropertyId( 'P6654' ), new StringValue( 'stringvalue' )
 					),
 					new SnakList(
 						[
 							new PropertyValueSnak(
-								new PropertyId( 'P6654' ),
+								new NumericPropertyId( 'P6654' ),
 								new GlobeCoordinateValue( new LatLongValue( 1, 2 ), 1 )
 							),
 							new PropertyValueSnak(
-								new PropertyId( 'P6654' ),
+								new NumericPropertyId( 'P6654' ),
 								new TimeValue(
 									'+2015-11-11T00:00:00Z',
 									0,
@@ -588,8 +588,8 @@ class ItemContentTest extends EntityContentTestCase {
 						[
 							new Reference(
 								[
-									new PropertySomeValueSnak( new PropertyId( 'P987' ) ),
-									new PropertyNoValueSnak( new PropertyId( 'P986' ) )
+									new PropertySomeValueSnak( new NumericPropertyId( 'P987' ) ),
+									new PropertyNoValueSnak( new NumericPropertyId( 'P986' ) )
 								]
 							)
 						]

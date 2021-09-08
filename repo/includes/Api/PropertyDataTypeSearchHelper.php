@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Api;
 
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Interactors\TermSearchResult;
 
@@ -34,9 +34,9 @@ class PropertyDataTypeSearchHelper implements EntitySearchHelper {
 		$results = $this->searchHelper->getRankedSearchResults( $text, $languageCode, $entityType, $limit, $strictLanguage );
 
 		return array_map( function ( TermSearchResult $searchResult ) {
-			/** @var PropertyId $propertyId */
+			/** @var NumericPropertyId $propertyId */
 			$propertyId = $searchResult->getEntityId();
-			'@phan-var PropertyId $propertyId';
+			'@phan-var NumericPropertyId $propertyId';
 
 			return new TermSearchResult(
 				$searchResult->getMatchedTerm(),

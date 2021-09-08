@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Store;
 use LogicException;
 use MediaWikiIntegrationTestCase;
 use Onoi\MessageReporter\SpyMessageReporter;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\InMemoryEntityIdPager;
@@ -93,21 +94,21 @@ class PropertyTermsRebuilderTest extends MediaWikiIntegrationTestCase {
 	public function assertP1IsStored() {
 		$this->assertEquals(
 			$this->newP1()->getFingerprint(),
-			$this->propertyTermStoreWriter->getTerms( new PropertyId( 'P1' ) )
+			$this->propertyTermStoreWriter->getTerms( new NumericPropertyId( 'P1' ) )
 		);
 	}
 
 	private function assertP2IsStored() {
 		$this->assertEquals(
 			$this->newP2()->getFingerprint(),
-			$this->propertyTermStoreWriter->getTerms( new PropertyId( 'P2' ) )
+			$this->propertyTermStoreWriter->getTerms( new NumericPropertyId( 'P2' ) )
 		);
 	}
 
 	private function newIdPager(): InMemoryEntityIdPager {
 		return new InMemoryEntityIdPager(
-			new PropertyId( 'P1' ),
-			new PropertyId( 'P2' )
+			new NumericPropertyId( 'P1' ),
+			new NumericPropertyId( 'P2' )
 		);
 	}
 
@@ -122,7 +123,7 @@ class PropertyTermsRebuilderTest extends MediaWikiIntegrationTestCase {
 
 	private function newP1() {
 		return new Property(
-			new PropertyId( 'P1' ),
+			new NumericPropertyId( 'P1' ),
 			new Fingerprint(
 				new TermList( [
 					new Term( 'en', 'EnglishPropLabel' ),
@@ -136,7 +137,7 @@ class PropertyTermsRebuilderTest extends MediaWikiIntegrationTestCase {
 
 	private function newP2() {
 		return new Property(
-			new PropertyId( 'P2' ),
+			new NumericPropertyId( 'P2' ),
 			new Fingerprint(
 				new TermList( [
 					new Term( 'en', 'EnglishLabel' ),

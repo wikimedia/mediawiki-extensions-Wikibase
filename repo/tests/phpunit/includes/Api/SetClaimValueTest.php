@@ -65,7 +65,10 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		}
 	}
 
-	private function addStatementsAndSave( StatementListProvidingEntity $entity, PropertyId $propertyId ): StatementListProvidingEntity {
+	private function addStatementsAndSave(
+		StatementListProvidingEntity $entity,
+		PropertyId $propertyId
+	): StatementListProvidingEntity {
 		$store = $this->getEntityStore();
 		$store->saveEntity( $entity, '', $this->user, EDIT_NEW );
 

@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use ChangesList;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 
 /**
  * @covers \Wikibase\Repo\Hooks\LabelPrefetchHookHandler
@@ -31,7 +31,7 @@ class LabelPrefetchHookHandlerTest extends LabelPrefetchHookHandlerTestBase {
 
 		$expectedIds = [
 			new ItemId( 'Q23' ),
-			new PropertyId( 'P55' ),
+			new NumericPropertyId( 'P55' ),
 		];
 
 		$prefetchTerms = $this->getPrefetchTermsCallback( $expectedIds, $expectedTermTypes, $expectedLanguageCodes );

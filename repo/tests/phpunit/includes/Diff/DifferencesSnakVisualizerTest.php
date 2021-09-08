@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Diff;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use MediaWikiIntegrationTestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -97,9 +97,9 @@ class DifferencesSnakVisualizerTest extends MediaWikiIntegrationTestCase {
 	public function provideGetPropertyAndDetailedValue() {
 		$expected = '<a>PID</a>: <i>DETAILED SNAK</i>';
 		return [
-			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
-			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
-			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
+			[ new PropertySomeValueSnak( new NumericPropertyId( 'P1' ) ), $expected ],
+			[ new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) ), $expected ],
+			[ new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
 		];
 	}
 
@@ -115,9 +115,9 @@ class DifferencesSnakVisualizerTest extends MediaWikiIntegrationTestCase {
 	public function provideGetDetailedValue() {
 		$expected = '<i>DETAILED SNAK</i>';
 		return [
-			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
-			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
-			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
+			[ new PropertySomeValueSnak( new NumericPropertyId( 'P1' ) ), $expected ],
+			[ new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) ), $expected ],
+			[ new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
 			[ null, '' ],
 		];
 	}
@@ -134,9 +134,9 @@ class DifferencesSnakVisualizerTest extends MediaWikiIntegrationTestCase {
 	public function provideGetPropertyAndValueHeader() {
 		$expected = 'Property / <a>PID</a>: <i>SNAK</i>';
 		return [
-			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
-			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
-			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
+			[ new PropertySomeValueSnak( new NumericPropertyId( 'P1' ) ), $expected ],
+			[ new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) ), $expected ],
+			[ new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
 		];
 	}
 
@@ -152,9 +152,9 @@ class DifferencesSnakVisualizerTest extends MediaWikiIntegrationTestCase {
 	public function provideGetPropertyHeader() {
 		$expected = 'Property / <a>PID</a>';
 		return [
-			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
-			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
-			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
+			[ new PropertySomeValueSnak( new NumericPropertyId( 'P1' ) ), $expected ],
+			[ new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) ), $expected ],
+			[ new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
 			[ null, 'Property' ],
 			[ null, 'Property' ],
 		];

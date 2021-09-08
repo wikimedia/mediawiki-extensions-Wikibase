@@ -37,7 +37,7 @@ class EntityIdValueParserTest extends \PHPUnit\Framework\TestCase {
 	public function validInputProvider() {
 		$valid = [
 			'q1' => new EntityIdValue( new ItemId( 'q1' ) ),
-			'p1' => new EntityIdValue( new PropertyId( 'p1' ) ),
+			'p1' => new EntityIdValue( new PropertyId( 'p1' ) ), // TODO: Change PropertyId to NumericPropertyId
 		];
 
 		foreach ( $valid as $value => $expected ) {

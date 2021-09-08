@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 
@@ -31,7 +31,7 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testBuildConfigProperty() {
-		$property = new Property( new PropertyId( 'P330' ), null, 'string' );
+		$property = new Property( new NumericPropertyId( 'P330' ), null, 'string' );
 		$this->addLabels( $property );
 
 		$configBuilder = new ParserOutputJsConfigBuilder();

@@ -7,6 +7,7 @@ use DataValues\StringValue;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -68,8 +69,8 @@ class JsonDataTypeInjectorTest extends TestCase {
 
 	public function entityProvider() {
 		$snakList = new SnakList();
-		$snakList->addSnak( new PropertySomeValueSnak( new PropertyId( 'P12' ) ) );
-		$snakList->addSnak( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
+		$snakList->addSnak( new PropertySomeValueSnak( new NumericPropertyId( 'P12' ) ) );
+		$snakList->addSnak( new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
 
 		return [
 				'basic usage' => [
@@ -95,18 +96,18 @@ class JsonDataTypeInjectorTest extends TestCase {
 					] ),
 					new StatementList( [
 						new Statement(
-							new PropertySomeValueSnak( new PropertyId( 'P12' ) ),
+							new PropertySomeValueSnak( new NumericPropertyId( 'P12' ) ),
 							null,
 							null,
 							'GUID1'
 						),
 						new Statement(
-							new PropertySomeValueSnak( new PropertyId( 'P12' ) ),
+							new PropertySomeValueSnak( new NumericPropertyId( 'P12' ) ),
 							$snakList,
 							new ReferenceList( [
 								new Reference( [
-									new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ),
-									new PropertyNoValueSnak( new PropertyId( 'P12' ) ),
+									new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ),
+									new PropertyNoValueSnak( new NumericPropertyId( 'P12' ) ),
 								] ),
 							] ),
 							'GUID2'

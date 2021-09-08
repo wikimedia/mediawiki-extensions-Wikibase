@@ -10,7 +10,7 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -188,7 +188,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$propertyMatch = new TermSearchResult(
 			new Term( 'en', 'PropertyLabel' ),
 			'label',
-			new PropertyId( 'P123' ),
+			new NumericPropertyId( 'P123' ),
 			new Term( 'en', 'PropertyLabel' ),
 			null,
 			[ PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => 'PropertyDataType' ]

@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -182,7 +182,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$item->getFingerprint()->setLabel( 'en', 'Kitten' );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Kitten' );
 		$item->getStatements()->addNewStatement(
-			new PropertyNoValueSnak( new PropertyId( 'P1' ) )
+			new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) )
 		);
 
 		return ItemContent::newFromItem( $item );
@@ -202,9 +202,9 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	private function getPropertyDataTypeLookup() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P11' ), 'external-id' );
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P12' ), 'string' );
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P13' ), 'item' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P11' ), 'external-id' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P12' ), 'string' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P13' ), 'item' );
 
 		return $dataTypeLookup;
 	}
@@ -239,12 +239,12 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	public function provideGetIdentifiersCount() {
 
 		$statementIdentifier = new Statement(
-			new PropertyValueSnak( new PropertyId( 'P11' ), new StringValue( 'xyz123' ) )
+			new PropertyValueSnak( new NumericPropertyId( 'P11' ), new StringValue( 'xyz123' ) )
 		);
 		$statementString = new Statement(
-			new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'Athena' ) )
+			new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'Athena' ) )
 		);
-		$statementItem = new Statement( new PropertyNoValueSnak( new PropertyId( 'P13' ) ) );
+		$statementItem = new Statement( new PropertyNoValueSnak( new NumericPropertyId( 'P13' ) ) );
 
 		$statementListNoIdentifier = new StatementList( [ $statementString ] );
 		$statementListOneIdentifier = new StatementList( [ $statementIdentifier ] );

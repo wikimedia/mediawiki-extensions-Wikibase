@@ -10,8 +10,8 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStore;
@@ -65,7 +65,7 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 
 		$item = new Item();
 		$item->getStatements()->addNewStatement( new PropertyValueSnak(
-			new PropertyId( $propertyId ),
+			new NumericPropertyId( $propertyId ),
 			QuantityValue::newFromNumber(
 				1,
 				WikibaseRepo::getItemVocabularyBaseUri() . $unitItemId
@@ -120,7 +120,7 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 
 	private function saveProperty( $id ) {
 		$this->entityStore->saveEntity(
-			new Property( new PropertyId( $id ), null, 'wikibase-item' ),
+			new Property( new NumericPropertyId( $id ), null, 'wikibase-item' ),
 			__METHOD__,
 			$this->getTestUser()->getUser()
 		);
@@ -131,7 +131,7 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 
 		$mwServices = MediaWikiServices::getInstance();
 
-		$property = new Property( new PropertyId( 'P93' ), null, 'wikibase-item' );
+		$property = new Property( new NumericPropertyId( 'P93' ), null, 'wikibase-item' );
 		$item = new Item( new ItemId( 'Q303' ) );
 
 		$redirectSourceId = new ItemId( 'Q809' );

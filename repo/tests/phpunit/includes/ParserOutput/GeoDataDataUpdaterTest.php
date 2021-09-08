@@ -12,7 +12,7 @@ use GeoData\CoordinatesOutput;
 use MediaWikiIntegrationTestCase;
 use ParserOutput;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -271,79 +271,79 @@ class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		$statements = [];
 
 		$statements['P42-string'] = $this->newStatement(
-			new PropertyId( 'P42' ),
+			new NumericPropertyId( 'P42' ),
 			new StringValue( 'kittens!' )
 		);
 
 		$statements['P625-geo'] = $this->newStatement(
-			new PropertyId( 'P625' ),
+			new NumericPropertyId( 'P625' ),
 			$this->newGlobeCoordinateValue( 19.7, 306.8, 'Q111' )
 		);
 
 		$statements['P10-geo-A'] = $this->newStatement(
-			new PropertyId( 'P10' ),
+			new NumericPropertyId( 'P10' ),
 			$this->newGlobeCoordinateValue( 40.748433, -73.985655 )
 		);
 
 		$statements['P10-geo-B'] = $this->newStatement(
-			new PropertyId( 'P10' ),
+			new NumericPropertyId( 'P10' ),
 			$this->newGlobeCoordinateValue( 44.264464, 52.643666 )
 		);
 
 		$statements['P10-geo-preferred-A'] = $this->newStatementWithRank(
-			new PropertyId( 'P10' ),
+			new NumericPropertyId( 'P10' ),
 			$this->newGlobeCoordinateValue( 50.02440, 41.50202 ),
 			Statement::RANK_PREFERRED
 		);
 
 		$statements['P10-geo-preferred-B'] = $this->newStatementWithRank(
-			new PropertyId( 'P10' ),
+			new NumericPropertyId( 'P10' ),
 			$this->newGlobeCoordinateValue( 70.0144, 30.0015 ),
 			Statement::RANK_PREFERRED
 		);
 
 		$statements['P9000-geo-A'] = $this->newStatement(
-			new PropertyId( 'P9000' ),
+			new NumericPropertyId( 'P9000' ),
 			$this->newGlobeCoordinateValue( 33.643664, 20.464222 )
 		);
 
 		$statements['P9000-geo-B'] = $this->newStatementWithQualifier(
-			new PropertyId( 'P9000' ),
+			new NumericPropertyId( 'P9000' ),
 			$this->newGlobeCoordinateValue( 11.1234, 12.5678 ),
 			new SnakList( [
 				new PropertyValueSnak(
-					new PropertyId( 'P625' ),
+					new NumericPropertyId( 'P625' ),
 					$this->newGlobeCoordinateValue( 30.0987, 20.1234 )
 				)
 			] )
 		);
 
 		$statements['P9000-geo-preferred'] = $this->newStatementWithRank(
-			new PropertyId( 'P9000' ),
+			new NumericPropertyId( 'P9000' ),
 			$this->newGlobeCoordinateValue( 77.7777, 33.3333 ),
 			Statement::RANK_PREFERRED
 		);
 
 		$statements['P17-geo-deprecated'] = $this->newStatementWithRank(
-			new PropertyId( 'P17' ),
+			new NumericPropertyId( 'P17' ),
 			$this->newGlobeCoordinateValue( 10.0234, 11.52352 ),
 			Statement::RANK_DEPRECATED
 		);
 
-		$statements['P20-some-value'] = $this->newStatement( new PropertyId( 'P20' ) );
+		$statements['P20-some-value'] = $this->newStatement( new NumericPropertyId( 'P20' ) );
 
 		$statements['P10-mismatch'] = $this->newStatement(
-			new PropertyId( 'P10' ),
+			new NumericPropertyId( 'P10' ),
 			new StringValue( 'omg! wrong value type' )
 		);
 
 		$statements['P404-unknown-property'] = $this->newStatement(
-			new PropertyId( 'P404' ),
+			new NumericPropertyId( 'P404' ),
 			$this->newGlobeCoordinateValue( 40.733643, -72.352153 )
 		);
 
 		$statements['P9002-unknown-globe'] = $this->newStatement(
-			new PropertyId( 'P9002' ),
+			new NumericPropertyId( 'P9002' ),
 			$this->newGlobeCoordinateValue( 9.017, 14.0987, 'Q147' )
 		);
 
@@ -363,7 +363,7 @@ class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	private function newStatement( PropertyId $propertyId, DataValue $dataValue = null ) {
+	private function newStatement( NumericPropertyId $propertyId, DataValue $dataValue = null ) {
 		$guidGenerator = new GuidGenerator();
 
 		if ( $dataValue === null ) {
@@ -378,7 +378,7 @@ class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newStatementWithRank(
-		PropertyId $propertyId,
+		NumericPropertyId $propertyId,
 		DataValue $dataValue,
 		$rank
 	 ) {
@@ -389,7 +389,7 @@ class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newStatementWithQualifier(
-		PropertyId $propertyId,
+		NumericPropertyId $propertyId,
 		DataValue $dataValue,
 		SnakList $qualifiers
 	) {
@@ -411,14 +411,14 @@ class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 	private function getPropertyDataTypeLookup() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P42' ), 'string' );
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P10' ), 'globe-coordinate' );
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P17' ), 'globe-coordinate' );
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P20' ), 'globe-coordinate' );
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P625' ), 'globe-coordinate' );
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P9000' ), 'globe-coordinate' );
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P9001' ), 'globe-coordinate' );
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P9002' ), 'globe-coordinate' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P42' ), 'string' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P10' ), 'globe-coordinate' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P17' ), 'globe-coordinate' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P20' ), 'globe-coordinate' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P625' ), 'globe-coordinate' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P9000' ), 'globe-coordinate' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P9001' ), 'globe-coordinate' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P9002' ), 'globe-coordinate' );
 
 		return $dataTypeLookup;
 	}

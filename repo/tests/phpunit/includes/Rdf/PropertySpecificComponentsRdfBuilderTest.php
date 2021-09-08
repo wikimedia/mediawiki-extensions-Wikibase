@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
@@ -70,7 +70,7 @@ class PropertySpecificComponentsRdfBuilderTest extends TestCase {
 
 	private function getPropertyDataTypeLookup() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P2' ), 'string' ); // see phpunit/data/rdf/entities
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P2' ), 'string' ); // see phpunit/data/rdf/entities
 
 		return $dataTypeLookup;
 	}

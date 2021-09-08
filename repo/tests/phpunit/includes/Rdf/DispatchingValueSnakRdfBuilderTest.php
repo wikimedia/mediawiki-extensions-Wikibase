@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Rdf;
 
 use DataValues\StringValue;
 use Psr\Log\Test\TestLogger;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\Rdf\DispatchingValueSnakRdfBuilder;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilder;
@@ -26,7 +26,7 @@ class DispatchingValueSnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$namespace = 'xx';
 		$lname = 'yy';
 
-		$propertyId = new PropertyId( 'P123' );
+		$propertyId = new NumericPropertyId( 'P123' );
 		$snak = new PropertyValueSnak( $propertyId, new StringValue( 'xyz' ) );
 
 		$ptBuilder = $this->createMock( ValueSnakRdfBuilder::class );
@@ -53,7 +53,7 @@ class DispatchingValueSnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$namespace = 'xx';
 		$lname = 'yy';
 
-		$propertyId = new PropertyId( 'P123' );
+		$propertyId = new NumericPropertyId( 'P123' );
 		$snak = new PropertyValueSnak( $propertyId, new StringValue( 'xyz' ) );
 
 		$logger = new TestLogger();

@@ -73,8 +73,8 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 		$itemId = new ItemId( "Q1" );
 		$this->entity = new Item( $itemId );
 
-		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( 32456 ) ) );
-		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( 12345 ) ) );
+		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new PropertyId( "P32456" ) ) ) );
+		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new PropertyId( "P12345" ) ) ) );
 
 		$this->linkTargetEntityIdLookup->expects( $this->once() )
 			->method( 'getEntityId' )
@@ -125,8 +125,8 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 		$itemId = new ItemId( "Q1" );
 		$this->entity = new Item( $itemId );
 
-		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( 32456 ) ) );
-		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( 12345 ) ) );
+		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new PropertyId( "P32456" ) ) ) );
+		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new PropertyId( "P12345" ) ) ) );
 
 		$this->linkTargetEntityIdLookup->expects( $this->once() )
 			->method( 'getEntityId' )

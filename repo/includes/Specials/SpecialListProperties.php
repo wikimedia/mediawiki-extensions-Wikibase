@@ -6,7 +6,7 @@ use Html;
 use HTMLForm;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -164,7 +164,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	/**
 	 * Formats a row for display.
 	 *
-	 * @param PropertyId $propertyId
+	 * @param NumericPropertyId $propertyId
 	 *
 	 * @return string
 	 * @suppress PhanParamSignatureMismatch Uses intersection types
@@ -216,7 +216,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 * @param integer $offset Start to include at number of entries from the start title
 	 * @param integer $limit Stop at number of entries after start of inclusion
 	 *
-	 * @return PropertyId[]
+	 * @return NumericPropertyId[]
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		$orderedPropertyInfo = $this->getOrderedProperties( $this->getPropertyInfo() );
@@ -233,12 +233,12 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 
 	/**
 	 * @param array[] $propertyInfo
-	 * @return PropertyId[] A sorted array mapping numeric id to its PropertyId
+	 * @return NumericPropertyId[] A sorted array mapping numeric id to its NumericPropertyId
 	 */
 	private function getOrderedProperties( array $propertyInfo ) {
 		$propertiesById = [];
 		foreach ( $propertyInfo as $serialization => $info ) {
-			$propertyId = new PropertyId( $serialization );
+			$propertyId = new NumericPropertyId( $serialization );
 			$propertiesById[$propertyId->getNumericId()] = $propertyId;
 		}
 		ksort( $propertiesById );

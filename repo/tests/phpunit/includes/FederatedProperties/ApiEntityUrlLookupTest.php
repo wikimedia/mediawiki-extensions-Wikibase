@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Repo\FederatedProperties\ApiEntityTitleTextLookup;
 use Wikibase\Repo\FederatedProperties\ApiEntityUrlLookup;
@@ -59,7 +59,7 @@ class ApiEntityUrlLookupTest extends TestCase {
 
 		$this->expectException( InvalidArgumentException::class );
 
-		$lookup->getFullUrl( new PropertyId( 'P666' ) );
+		$lookup->getFullUrl( new NumericPropertyId( 'P666' ) );
 	}
 
 	public function testGivenNotAFederatedPropertyId_getLinkUrlThrows(): void {
@@ -70,7 +70,7 @@ class ApiEntityUrlLookupTest extends TestCase {
 
 		$this->expectException( InvalidArgumentException::class );
 
-		$lookup->getLinkUrl( new PropertyId( 'P666' ) );
+		$lookup->getLinkUrl( new NumericPropertyId( 'P666' ) );
 	}
 
 	private function getApiEntityTitleTextLookup( ?string $prefixedText ) {

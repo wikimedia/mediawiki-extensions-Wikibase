@@ -10,8 +10,8 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\Content\PropertyContent;
@@ -215,8 +215,8 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function newFromRedirectProvider_unsupported() {
-		$p1 = new PropertyId( 'P1' );
-		$p2 = new PropertyId( 'P2' );
+		$p1 = new NumericPropertyId( 'P1' );
+		$p2 = new NumericPropertyId( 'P2' );
 
 		return [
 			'property' => [ new EntityRedirect( $p1, $p2 ) ],

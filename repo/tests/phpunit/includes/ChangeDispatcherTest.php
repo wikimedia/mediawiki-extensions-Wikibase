@@ -12,7 +12,7 @@ use PHPUnit\Framework\MockObject\Matcher\Invocation;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\ItemChange;
@@ -136,8 +136,8 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 		return [
 			// index 0 is ignored, or used as the base change.
 			$this->newChange( 0, new ItemId( 'Q99999' ), sprintf( '201403030100', 0 ) ),
-			$this->newChange( ++$changeId, new PropertyId( 'P11' ), sprintf( '2014030301%02d', $changeId ) ),
-			$this->newChange( ++$changeId, new PropertyId( 'P11' ), sprintf( '2014030301%02d', $changeId ) ),
+			$this->newChange( ++$changeId, new NumericPropertyId( 'P11' ), sprintf( '2014030301%02d', $changeId ) ),
+			$this->newChange( ++$changeId, new NumericPropertyId( 'P11' ), sprintf( '2014030301%02d', $changeId ) ),
 			$this->newChange( ++$changeId, new ItemId( 'Q22' ), sprintf( '2014030301%02d', $changeId ) ),
 			$this->newChange( ++$changeId, new ItemId( 'Q22' ), sprintf( '2014030301%02d', $changeId ) ),
 			$this->newChange( ++$changeId, new ItemId( 'Q33' ), sprintf( '2014030301%02d', $changeId ), $addEn ),
@@ -149,7 +149,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 
 	protected function setUp(): void {
 		$this->subscriptions['enwiki'] = [
-			new PropertyId( 'P11' ),
+			new NumericPropertyId( 'P11' ),
 			new ItemId( 'Q22' ),
 			// changes to Q33 are relevant because they affect enwiki
 		];

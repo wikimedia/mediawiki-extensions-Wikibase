@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Store\Sql\Terms;
 
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\Sql\Terms\StaticTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
@@ -151,10 +151,10 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		$collisionDetector = $this->makeTestSubject( 'property' );
 
 		$propertyId = $collisionDetector->detectLabelCollision( 'de', 'foo' );
-		$this->assertEquals( PropertyId::newFromNumber( 1 ), $propertyId );
+		$this->assertEquals( NumericPropertyId::newFromNumber( 1 ), $propertyId );
 
 		$propertyId = $collisionDetector->detectLabelCollision( 'en', 'foo' );
-		$this->assertEquals( PropertyId::newFromNumber( 2 ), $propertyId );
+		$this->assertEquals( NumericPropertyId::newFromNumber( 2 ), $propertyId );
 	}
 
 	public function testGivenPropertyLabelTest_whenNoCollisionsExists_returnsNull() {
@@ -225,13 +225,13 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		$collisionDetector = $this->makeTestSubject( 'property' );
 
 		$propertyId = $collisionDetector->detectLabelAndDescriptionCollision( 'en', 'bar', 'bar' );
-		$this->assertEquals( PropertyId::newFromNumber( 1 ), $propertyId );
+		$this->assertEquals( NumericPropertyId::newFromNumber( 1 ), $propertyId );
 
 		$propertyId = $collisionDetector->detectLabelAndDescriptionCollision( 'de', 'bar', 'foo' );
-		$this->assertEquals( PropertyId::newFromNumber( 2 ), $propertyId );
+		$this->assertEquals( NumericPropertyId::newFromNumber( 2 ), $propertyId );
 
 		$propertyId = $collisionDetector->detectLabelAndDescriptionCollision( 'en', 'bar', 'foo' );
-		$this->assertEquals( PropertyId::newFromNumber( 3 ), $propertyId );
+		$this->assertEquals( NumericPropertyId::newFromNumber( 3 ), $propertyId );
 	}
 
 	public function testGivenPropertyLabelDescriptionTest_whenNoCollisionsExists_returnsNull() {

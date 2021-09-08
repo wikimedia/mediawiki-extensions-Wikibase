@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityStore;
@@ -294,7 +294,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		$entity->setId( new ItemId( 'Q444' ) );
 		$entity->getFingerprint()->setLabel( 'en', 'Foo' );
 		$entity->getSiteLinkList()->addNewSiteLink( 'enwiki', 'APage' );
-		$entity->getStatements()->addNewStatement( new PropertyNoValueSnak( new PropertyId( 'P8' ) ) );
+		$entity->getStatements()->addNewStatement( new PropertyNoValueSnak( new NumericPropertyId( 'P8' ) ) );
 
 		$summary = 'A String Summary';
 		$flags = 0;
