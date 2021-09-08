@@ -6,13 +6,14 @@ namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Repo\Tests\NewStatement;
 
 /**
  * @covers \Wikibase\Repo\Api\RemoveQualifiers
@@ -29,8 +30,8 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class RemoveQualifiersTest extends FederatedPropertiesApiTestCase {
 
-	public function testUpdatingAPropertyShouldFail() {
-		$entity = new Property( new PropertyId( 'P123' ), null, 'string' );
+	public function testUpdatingAFederatedPropertyShouldFail() {
+		$entity = new Property( $this->newFederatedPropertyIdFromPId( 'P123' ), null, 'string' );
 
 		$statement = new Statement( new PropertyValueSnak( $entity->getId(), new StringValue( 'O_ö' ) ) );
 
@@ -57,4 +58,32 @@ class RemoveQualifiersTest extends FederatedPropertiesApiTestCase {
 		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
 		$this->doApiRequestWithToken( $params );
 	}
+
+	public function testRemoveQualifierFromLocalPropertyStatement(): void {
+		$propertyForStatementAndQualifier = new Property( null, null, 'string' );
+		$this->saveLocalProperty( $propertyForStatementAndQualifier );
+
+		$propertyUnderTest = new Property( null, null, 'string' );
+		$this->saveLocalProperty( $propertyUnderTest );
+
+		$statementWithQualifier = NewStatement::noValueFor( $propertyForStatementAndQualifier->getId() )
+			->withGuid( ( new GuidGenerator() )->newGuid( $propertyUnderTest->getId() ) )
+			->withQualifier( $propertyForStatementAndQualifier->getId(), 'imma be removed' )
+			->build();
+		$propertyUnderTest->setStatements( new StatementList( $statementWithQualifier ) );
+		$this->saveLocalProperty( $propertyUnderTest );
+
+		[ $result ] = $this->doApiRequestWithToken( [
+			'action' => 'wbremovequalifiers',
+			'claim' => $statementWithQualifier->getGuid(),
+			'qualifiers' => $statementWithQualifier->getQualifiers()[0]->getHash()
+		] );
+
+		$this->assertArrayHasKey( 'success', $result );
+	}
+
+	private function saveLocalProperty( Property $prop ): void {
+		$this->getEntityStore()->saveEntity( $prop, 'feddypropstest', $this->user, $prop->getId() ? EDIT_UPDATE : EDIT_NEW );
+	}
+
 }

@@ -11,7 +11,6 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Api\SetClaim
@@ -44,15 +43,31 @@ class SetClaimTest extends FederatedPropertiesApiTestCase {
 		] );
 	}
 
+	public function testSetClaimOnLocalProperty(): void {
+		$propertyForStatement = new Property( null, null, 'string' );
+		$this->createLocalProperty( $propertyForStatement );
+
+		$propertyUnderTest = new Property( null, null, 'string' );
+		$this->createLocalProperty( $propertyUnderTest );
+
+		$statement = new Statement( new PropertyNoValueSnak( $propertyForStatement->getId() ) );
+		$statement->setGuid( ( new GuidGenerator() )->newGuid( $propertyUnderTest->getId() ) );
+
+		[ $result ] = $this->doApiRequestWithToken( [
+			'action' => 'wbsetclaim',
+			'claim' => FormatJson::encode( $this->getSerializedStatement( $statement ) ),
+		] );
+
+		$this->assertArrayHasKey( 'success', $result );
+	}
+
 	public function testGivenSourceWikiUnavailable_respondsWithAnError() {
 		$this->setSourceWikiUnavailable();
-
-		$store = WikibaseRepo::getEntityStore();
 
 		$statement = new Statement( new PropertyNoValueSnak( $this->newFederatedPropertyIdFromPId( 'P626' ) ) );
 
 		$entity = new Item();
-		$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
+		$this->getEntityStore()->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
 		$entityId = $entity->getId();
 
 		$guidGenerator = new GuidGenerator();
@@ -72,7 +87,7 @@ class SetClaimTest extends FederatedPropertiesApiTestCase {
 		$statement = new Statement( new PropertyNoValueSnak( $fedPropId ) );
 
 		$entity = new Item();
-		WikibaseRepo::getEntityStore()->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
+		$this->getEntityStore()->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
 		$entityId = $entity->getId();
 
 		$statement->setGuid( ( new GuidGenerator() )->newGuid( $entityId ) );
@@ -103,9 +118,13 @@ class SetClaimTest extends FederatedPropertiesApiTestCase {
 		);
 	}
 
-	private function getSerializedStatement( $statement ) {
+	private function getSerializedStatement( $statement ): array {
 		$statementSerializer = ( new SerializerFactory( new DataValueSerializer() ) )->newStatementSerializer();
 		return $statementSerializer->serialize( $statement );
+	}
+
+	private function createLocalProperty( Property $prop ): void {
+		$this->getEntityStore()->saveEntity( $prop, 'feddypropstest', $this->user, EDIT_NEW );
 	}
 
 }

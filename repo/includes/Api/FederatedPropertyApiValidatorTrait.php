@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Api;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 
 /**
  * Trait for Action API endpoints to disable altering properties when
@@ -26,7 +26,7 @@ trait FederatedPropertyApiValidatorTrait {
 	private $federatedPropertiesEnabled;
 
 	protected function validateAlteringEntityById( ?EntityId $entityId ) {
-		if ( $this->federatedPropertiesEnabled && $entityId instanceof PropertyId ) {
+		if ( $entityId instanceof FederatedPropertyId ) {
 			$this->errorReporter->dieWithError(
 				'wikibase-federated-properties-local-property-api-error-message',
 				'param-illegal'

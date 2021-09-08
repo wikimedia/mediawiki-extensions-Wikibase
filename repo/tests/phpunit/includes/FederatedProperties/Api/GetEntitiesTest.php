@@ -4,6 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
+use Wikibase\DataModel\Entity\Property;
+
 /**
  * @covers \Wikibase\Repo\Api\GetEntities
  *
@@ -19,13 +21,30 @@ namespace Wikibase\Repo\Tests\FederatedProperties\Api;
  */
 class GetEntitiesTest extends FederatedPropertiesApiTestCase {
 
-	public function testGettingPropertiesShouldReturnError() {
+	public function testGettingFederatedPropertiesShouldReturnError(): void {
+		$fedPropId = $this->newFederatedPropertyIdFromPId( 'P1' );
+
 		$params = [
 			'action' => 'wbgetentities',
-			'ids' => 'P1|P2|Q1',
+			'ids' => $fedPropId,
 		];
 
 		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
 		$this->doApiRequestWithToken( $params );
 	}
+
+	public function testGetEntitiesWithLocalProperty(): void {
+		$property = new Property( null, null, 'string' );
+		$this->getEntityStore()->saveEntity( $property, 'feddypropstest', $this->user, EDIT_NEW );
+		$id = $property->getId();
+
+		[ $result ] = $this->doApiRequestWithToken( [
+			'action' => 'wbgetentities',
+			'ids' => $id,
+		] );
+
+		$this->assertArrayHasKey( 'success', $result );
+		$this->assertArrayHasKey( $id->getSerialization(), $result['entities'] );
+	}
+
 }
