@@ -29,7 +29,7 @@ class EditEntityTest extends FederatedPropertiesApiTestCase {
 	public function testUpdatingAFederatedPropertyShouldFail(): void {
 		$id = $this->newFederatedPropertyIdFromPId( 'P666' );
 
-		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
+		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-federated-property-api-error-message' ) );
 
 		$this->doApiRequestWithToken( [
 			'action' => 'wbeditentity',

@@ -31,7 +31,7 @@ class CreateClaimTest extends FederatedPropertiesApiTestCase {
 			'property' => $entityId->getSerialization(),
 		];
 
-		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
+		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-federated-property-api-error-message' ) );
 		$this->doApiRequestWithToken( $params );
 	}
 

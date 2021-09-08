@@ -55,7 +55,7 @@ class RemoveQualifiersTest extends FederatedPropertiesApiTestCase {
 			'qualifiers' => implode( '|', $hashes )
 		];
 
-		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
+		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-federated-property-api-error-message' ) );
 		$this->doApiRequestWithToken( $params );
 	}
 

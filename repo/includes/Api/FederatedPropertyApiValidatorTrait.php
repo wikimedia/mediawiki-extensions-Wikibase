@@ -28,7 +28,7 @@ trait FederatedPropertyApiValidatorTrait {
 	protected function validateAlteringEntityById( ?EntityId $entityId ) {
 		if ( $entityId instanceof FederatedPropertyId ) {
 			$this->errorReporter->dieWithError(
-				'wikibase-federated-properties-local-property-api-error-message',
+				'wikibase-federated-properties-federated-property-api-error-message',
 				'param-illegal'
 			);
 		}
