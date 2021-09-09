@@ -7,7 +7,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
-use Wikibase\DataAccess\Tests\NewEntitySource;
+use Wikibase\DataAccess\Tests\NewDatabaseEntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntitySourceAndTypeDefinitions;
@@ -28,7 +28,7 @@ class EntityUrlLookupTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$itemId = new ItemId( 'Q123' );
 		$sources = [
-			NewEntitySource::havingName( 'item-source' )
+			NewDatabaseEntitySource::havingName( 'item-source' )
 				->withEntityNamespaceIdsAndSlots( [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] )
 				->withConceptBaseUri( 'http://wikidata.org/entity/' )
 				->build()

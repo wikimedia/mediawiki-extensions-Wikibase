@@ -6,7 +6,7 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\NewEntitySource;
+use Wikibase\DataAccess\Tests\NewDatabaseEntitySource;
 use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 
@@ -22,7 +22,7 @@ class EntitySourceAndTypeDefinitionsTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$entitySourceDefinitions = $this->createStub( EntitySourceDefinitions::class );
 		$entitySourceDefinitions->method( 'getSources' )
-			->willReturn( [ NewEntitySource::create()->build() ] );
+			->willReturn( [ NewDatabaseEntitySource::create()->build() ] );
 
 		$this->mockService(
 			'WikibaseClient.EntitySourceDefinitions',

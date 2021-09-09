@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\NewEntitySource;
+use Wikibase\DataAccess\Tests\NewDatabaseEntitySource;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\PropertyServices;
 
@@ -39,7 +39,7 @@ class PropertyServicesTest extends TestCase {
 		$services = new PropertyServices(
 			new EntitySourceDefinitions( [
 				new ApiEntitySource( $apiSourceName, [ 'property' ], 'someUrl', '', '', '' ),
-				NewEntitySource::havingName( $dbSourceName )->build(),
+				NewDatabaseEntitySource::havingName( $dbSourceName )->build(),
 			], new SubEntityTypesMapper( [] ) ),
 			$definitions
 		);
