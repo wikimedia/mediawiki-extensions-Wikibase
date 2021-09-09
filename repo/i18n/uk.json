@@ -532,6 +532,6 @@
 	"special-setdescription-parameterized": "Встановити опис $1",
 	"special-setlabeldescriptionaliases-parameterized": "Встановити $1 мітку, опис та псевдоніми",
 	"special-parameterized-description-separator": "/",
-	"wikibase-federated-properties-local-property-api-error-message": "Ви не можете взаємодіяти з властивостями за допомогою цього API, поки увімкнено об’єднані властивості",
+	"wikibase-federated-properties-federated-property-api-error-message": "Ви не можете взаємодіяти з об’єднаними властивостями за допомогою цього API.",
 	"wikibase-federated-properties-failed-request-api-error-message": "Запит не вдався через невдалий запит до вікі-джерела федерації."
 }

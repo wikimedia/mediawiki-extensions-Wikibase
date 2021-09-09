@@ -536,6 +536,5 @@
 	"special-setlabel-parameterized": "$1 etiketine bakın",
 	"special-setdescription-parameterized": "$1 açıklamasına bakın",
 	"special-setlabeldescriptionaliases-parameterized": "$1 etiketini, açıklamayı ve takma adlarına bakın",
-	"wikibase-federated-properties-local-property-api-error-message": "Birleşik özellikler etkinken bu API'yi kullanan özelliklerle etkileşim kuramazsınız",
 	"wikibase-federated-properties-failed-request-api-error-message": "Federasyon kaynak vikisine yapılan başarısız bir istek nedeniyle istek başarısız oldu."
 }

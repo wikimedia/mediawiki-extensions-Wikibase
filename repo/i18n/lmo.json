@@ -503,6 +503,5 @@
 	"special-setlabel-parameterized": "Imposta l'eticheta per $1",
 	"special-setdescription-parameterized": "Imposta la descrizzion per $1",
 	"special-setlabeldescriptionaliases-parameterized": "Imposta l'eticheta, la descrizzion e l'alias per $1",
-	"wikibase-federated-properties-local-property-api-error-message": "Te podet interagì no con i proprietà per mezz de quell API chì quand che i prorpeità federated a inn ativade",
 	"wikibase-federated-properties-failed-request-api-error-message": "La richiesta l'è fallada per via d'una richiesta fallada al wiki d'orgin de la federazzion."
 }

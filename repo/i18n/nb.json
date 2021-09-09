@@ -481,6 +481,5 @@
 	"special-setlabel-parameterized": "Sett etikett for $1",
 	"special-setdescription-parameterized": "Sett beskrivelse for $1",
 	"special-setlabeldescriptionaliases-parameterized": "Sett etikett, beskrivelse og aliaser for $1",
-	"wikibase-federated-properties-local-property-api-error-message": "Du kan ikke samhandle med egenskaper med dette API-et mens fødererte egenskaper er slått på",
 	"wikibase-federated-properties-failed-request-api-error-message": "Forespørselen mislyktes på grunn av en mislykket forespørsel til føderasjonskildewikien."
 }

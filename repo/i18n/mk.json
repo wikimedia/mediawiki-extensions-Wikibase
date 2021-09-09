@@ -481,6 +481,5 @@
 	"special-setlabel-parameterized": "Задај натпис за $1",
 	"special-setdescription-parameterized": "Задај опис за $1",
 	"special-setlabeldescriptionaliases-parameterized": "Задавање на натпис, опис и истозначници за $1",
-	"wikibase-federated-properties-local-property-api-error-message": "Не можете да работите со својствата користејќи го овој приложник додека се овозможени осојузените својства",
 	"wikibase-federated-properties-failed-request-api-error-message": "Барањето не успеа поради неуспешно барање до здруженото изворно вики."
 }

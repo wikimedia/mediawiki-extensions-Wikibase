@@ -511,6 +511,5 @@
 	"special-setlabel-parameterized": "Vendosni etiketën $1",
 	"special-setdescription-parameterized": "Vendosni përshkrimin $1",
 	"special-setlabeldescriptionaliases-parameterized": "Vendosni etiketën, përshkrimin dhe pseudonime $1",
-	"wikibase-federated-properties-local-property-api-error-message": "Ju nuk mund të bashkëveproni me vetitë duke përdorur këtë API ndërsa karakteristikat e federuara janë të aktivizuara",
 	"wikibase-federated-properties-failed-request-api-error-message": "Kërkesa dështoi për shkak të një kërkese të dështuar në burimin e federatës wiki."
 }
