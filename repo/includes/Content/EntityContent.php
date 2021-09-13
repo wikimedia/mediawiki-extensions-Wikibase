@@ -169,6 +169,11 @@ abstract class EntityContent extends AbstractContent {
 	) {
 		if ( $this->isRedirect() ) {
 			return $this->getParserOutputForRedirect( $generateHtml );
+		} elseif ( !$this->getEntityHolder() ) {
+			// NOTE: There is no entity to render, but getParserOutput() must work for all Content objects.
+			// NOTE: isEmpty() will return true when there is an entity, but that entity is empty. In
+			//       that case, we must not bail out, but call getParserOutputFromEntityView() as normal.
+			return new ParserOutput();
 		} else {
 			if ( $options === null ) {
 				$options = ParserOptions::newFromContext( RequestContext::getMain() );

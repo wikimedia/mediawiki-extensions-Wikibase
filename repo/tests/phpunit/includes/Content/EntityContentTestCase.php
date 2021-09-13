@@ -147,10 +147,16 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 
 	public function providePageProperties() {
 		$cases = [];
-		$emptyContent = $this->newBlank( $this->getDummyId() );
 
 		$cases['empty'] = [
-			$emptyContent,
+			$this->newEmpty(),
+			[]
+		];
+
+		$blankContent = $this->newBlank( $this->getDummyId() );
+
+		$cases['blank'] = [
+			$blankContent,
 			[ 'wb-claims' => 0 ]
 		];
 
@@ -171,6 +177,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 	public function testPageProperties( EntityContent $content, array $expectedProps ) {
 		$title = Title::newFromTextThrow( 'Foo' );
 		$parserOutput = $content->getParserOutput( $title, null, null, false );
+		$this->assertTrue( $parserOutput->hasText() );
 
 		foreach ( $expectedProps as $name => $expected ) {
 			$actual = $parserOutput->getProperty( $name );
