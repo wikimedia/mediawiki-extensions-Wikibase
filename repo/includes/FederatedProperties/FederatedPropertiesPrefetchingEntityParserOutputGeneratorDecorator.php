@@ -60,10 +60,6 @@ class FederatedPropertiesPrefetchingEntityParserOutputGeneratorDecorator impleme
 			return $snak->getPropertyId();
 		}, $entity->getStatements()->getAllSnaks() );
 
-		if ( empty( $propertyIds ) ) {
-			return;
-		}
-
 		$federatedPropertyIds = array_filter(
 			$propertyIds,
 			function ( $propId ) {
