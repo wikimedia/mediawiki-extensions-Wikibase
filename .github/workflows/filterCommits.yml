@@ -50,3 +50,60 @@ jobs:
           monorepoParentCommit1: 976f0e32d62eeefc3e0bfe994125494ebc842aa8
           monorepoParentCommit2: 01e1f4ba3605a5996c664a42f0019bc96140beff
           lastPreMigrationCommit: 22c2933c6221102c93bef993cd17b18a78eda185
+  filterDataModelServices:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: git-monorepo-splice
+        uses: wmde/git-monorepo-splice-docker-action@v1
+        with:
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY_DATAMODEL_SERVICES }}
+          targetOrg: wmde
+          targetRepo: WikibaseDataModelServices
+          targetBranch: master
+          filterArguments: >-
+            --path lib/packages/wikibase/data-model-services/
+            --path-rename "lib/packages/wikibase/data-model-services/:"
+          monorepoParentCommit1: 80b6eb3390af2c0fe8200ee8d1b152cd110d802e
+          monorepoParentCommit2: 7f0366d7f1c44c6347d7e39c297a54105ed56905
+          lastPreMigrationCommit: a7652f0c6df63f03f95afc81e1a02c3a5c5a168f
+  filterDataModelSerialization:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: git-monorepo-splice
+        uses: wmde/git-monorepo-splice-docker-action@v1
+        with:
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY_DATAMODEL_SERIALIZATION }}
+          targetOrg: wmde
+          targetRepo: WikibaseDataModelSerialization
+          targetBranch: master
+          filterArguments: >-
+            --path lib/packages/wikibase/data-model-serialization/
+            --path-rename "lib/packages/wikibase/data-model-serialization/:"
+          monorepoParentCommit1: 01eb68d9a45b7ed8ce47d83da2374cc4e4e3d884
+          monorepoParentCommit2: 1fc4431107216dcc4d275f86733cff5263e488ac
+          lastPreMigrationCommit: c66dcf5e8080018cf6e6898212f712d674a3aee1
+  filterInternalSerialization:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: git-monorepo-splice
+        uses: wmde/git-monorepo-splice-docker-action@v1
+        with:
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY_INTERNAL_SERIALIZATION }}
+          targetOrg: wmde
+          targetRepo: WikibaseInternalSerialization
+          targetBranch: master
+          filterArguments: >-
+            --path lib/packages/wikibase/internal-serialization/
+            --path-rename "lib/packages/wikibase/internal-serialization/:"
+          monorepoParentCommit1: 2fcec0ae2eacfdfe73dbacea64d3c782ca52d2c7
+          monorepoParentCommit2: 37e176e60c196eef50b958ec0fa79fde13b049da
+          lastPreMigrationCommit: 9fe73ec38beeb61f23076eaf8d84ec85d8db76b3
