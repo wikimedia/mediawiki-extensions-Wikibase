@@ -18,7 +18,7 @@ use Wikibase\Client\Usage\UsageAccumulatorFactory;
 use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 
@@ -63,7 +63,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 		$propertyLabelResolver->method( 'getPropertyIdsForLabels' )
 			->with( [ 'LuaTestStringProperty' ] )
 			->willReturn(
-				[ 'LuaTestStringProperty' => new PropertyId( 'P342' ) ]
+				[ 'LuaTestStringProperty' => new NumericPropertyId( 'P342' ) ]
 			);
 
 		$this->setService(

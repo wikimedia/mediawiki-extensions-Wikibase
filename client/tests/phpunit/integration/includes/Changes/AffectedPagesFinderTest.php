@@ -19,7 +19,7 @@ use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Tests\Changes\TestChanges;
@@ -207,7 +207,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
-				$this->getItemWithStatement( $q1, new PropertyId( 'P5' ), new StringValue( 'Hello' ) )
+				$this->getItemWithStatement( $q1, new NumericPropertyId( 'P5' ), new StringValue( 'Hello' ) )
 			)
 		];
 
@@ -495,7 +495,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
-				$this->getItemWithStatement( $q2, new PropertyId( 'P1' ), new StringValue( 'Hello' ) )
+				$this->getItemWithStatement( $q2, new NumericPropertyId( 'P1' ), new StringValue( 'Hello' ) )
 			)
 		];
 
@@ -506,7 +506,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
-				$this->getItemWithStatement( $q2, new PropertyId( 'P2' ), new StringValue( 'Hello' ) )
+				$this->getItemWithStatement( $q2, new NumericPropertyId( 'P2' ), new StringValue( 'Hello' ) )
 			)
 		];
 
@@ -626,12 +626,12 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param ItemId $qid
-	 * @param PropertyId $pid
+	 * @param NumericPropertyId $pid
 	 * @param DataValue $value
 	 *
 	 * @return Item
 	 */
-	private function getItemWithStatement( ItemId $qid, PropertyId $pid, DataValue $value ) {
+	private function getItemWithStatement( ItemId $qid, NumericPropertyId $pid, DataValue $value ) {
 		$snak = new PropertyValueSnak( $pid, $value );
 
 		$item = new Item( $qid );

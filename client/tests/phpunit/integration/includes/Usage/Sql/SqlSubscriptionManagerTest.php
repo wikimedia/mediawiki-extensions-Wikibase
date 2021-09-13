@@ -6,7 +6,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
@@ -50,7 +50,7 @@ class SqlSubscriptionManagerTest extends MediaWikiIntegrationTestCase {
 
 		$q11 = new ItemId( 'Q11' );
 		$q22 = new ItemId( 'Q22' );
-		$p11 = new PropertyId( 'P11' );
+		$p11 = new NumericPropertyId( 'P11' );
 
 		$manager->subscribe( 'enwiki', [ $q11, $p11 ] );
 		$manager->subscribe( 'dewiki', [ $q22 ] );

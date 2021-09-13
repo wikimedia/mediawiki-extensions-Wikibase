@@ -7,7 +7,7 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
@@ -94,7 +94,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 
 	public function getEntityTitleProvider() {
 		$itemId = new ItemId( 'Q388' );
-		$propertyId = new PropertyId( 'P472' );
+		$propertyId = new NumericPropertyId( 'P472' );
 		$settings = $this->getRepoSettings();
 
 		return [
@@ -275,7 +275,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$this->assertEquals( 'http://www.itemwiki.com/entity/Q111', $linker->getEntityConceptUri( new ItemId( 'Q111' ) ) );
-		$this->assertEquals( 'http://www.propertywiki.com/entity/P111', $linker->getEntityConceptUri( new PropertyId( 'P111' ) ) );
+		$this->assertEquals( 'http://www.propertywiki.com/entity/P111', $linker->getEntityConceptUri( new NumericPropertyId( 'P111' ) ) );
 	}
 
 	/**

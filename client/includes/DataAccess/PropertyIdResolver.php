@@ -5,12 +5,12 @@ namespace Wikibase\Client\DataAccess;
 use InvalidArgumentException;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 
 /**
- * Resolves the PropertyId for the input, which might be a property label or prefixed id.
+ * Resolves the NumericPropertyId for the input, which might be a property label or prefixed id.
  *
  * @license GPL-2.0-or-later
  */
@@ -46,11 +46,11 @@ class PropertyIdResolver {
 	 * @param string $languageCode
 	 *
 	 * @throws PropertyLabelNotResolvedException
-	 * @return PropertyId
+	 * @return NumericPropertyId
 	 */
 	public function resolvePropertyId( $propertyLabelOrId, $languageCode ) {
 		try {
-			$propertyId = new PropertyId( $propertyLabelOrId );
+			$propertyId = new NumericPropertyId( $propertyLabelOrId );
 
 			if ( !$this->entityLookup->hasEntity( $propertyId ) ) {
 				throw new PropertyLabelNotResolvedException( $propertyLabelOrId, $languageCode );
@@ -72,7 +72,7 @@ class PropertyIdResolver {
 	 * @param string $propertyLabel
 	 * @param string $languageCode
 	 *
-	 * @return PropertyId
+	 * @return NumericPropertyId
 	 * @throws PropertyLabelNotResolvedException
 	 */
 	private function findPropertyByLabel( $propertyLabel, $languageCode ) {

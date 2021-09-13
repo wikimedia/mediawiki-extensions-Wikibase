@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Unit\Serializer;
 use DataValues\Serializers\DataValueSerializer;
 use Wikibase\Client\Serializer\ClientStatementListSerializer;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -43,7 +43,7 @@ class ClientStatementListSerializerTest extends \PHPUnit\Framework\TestCase {
 	public function testSerialize() {
 		$statementList = new StatementList();
 		$statementList->addNewStatement( new PropertyNoValueSnak( 1 ) );
-		$statements = $statementList->getByPropertyId( new PropertyId( 'P1' ) );
+		$statements = $statementList->getByPropertyId( new NumericPropertyId( 'P1' ) );
 
 		$instance = $this->newInstance();
 		$serialization = $instance->serialize( $statements );

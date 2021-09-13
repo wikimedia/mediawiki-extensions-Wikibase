@@ -11,7 +11,7 @@ use Wikibase\Client\ChangeModification\ChangeVisibilityNotificationJob;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
@@ -65,7 +65,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 
 		$entityChange = $entityChangeFactory->newForEntity(
 			'blah',
-			new PropertyId( 'P42' ),
+			new NumericPropertyId( 'P42' ),
 			[ 'user_text' => 'a-nice-user' ]
 		);
 		$entityChange->setTimestamp( '20161111111111' );

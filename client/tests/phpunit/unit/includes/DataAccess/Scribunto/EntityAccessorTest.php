@@ -16,7 +16,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -250,8 +250,8 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 	 * @return Item
 	 */
 	private function getItemWithStatements( $statementDeprecated = false ) {
-		$p65 = new PropertyId( 'P65' );
-		$p68 = new PropertyId( 'P68' );
+		$p65 = new NumericPropertyId( 'P65' );
+		$p68 = new NumericPropertyId( 'P68' );
 
 		$item = new Item( new ItemId( 'Q123099' ) );
 		$item->setLabel( 'de', 'foo-de' );

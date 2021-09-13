@@ -6,7 +6,7 @@ use DataValues\StringValue;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -30,7 +30,7 @@ class SnaksFinderTest extends \PHPUnit\Framework\TestCase {
 	public function testFindSnaks(
 		array $expected,
 		StatementListProvider $statementListProvider,
-		PropertyId $propertyId,
+		NumericPropertyId $propertyId,
 		array $acceptableRanks = null
 	) {
 		$snaksFinder = new SnaksFinder();
@@ -40,7 +40,7 @@ class SnaksFinderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function findSnaksProvider() {
-		$propertyId = new PropertyId( 'P1337' );
+		$propertyId = new NumericPropertyId( 'P1337' );
 
 		$statement1 = new Statement( new PropertyValueSnak(
 			$propertyId,
@@ -74,12 +74,12 @@ class SnaksFinderTest extends \PHPUnit\Framework\TestCase {
 		$snakDeprecated = [ new PropertyValueSnak( $propertyId, new StringValue( 'three kittens!!!' ) ) ];
 
 		return [
-			[ $snaksNormal, $item, new PropertyId( 'P1337' ) ],
-			[ [], $item, new PropertyId( 'P90001' ) ],
+			[ $snaksNormal, $item, new NumericPropertyId( 'P1337' ) ],
+			[ [], $item, new NumericPropertyId( 'P90001' ) ],
 			[
 				$snakDeprecated,
 				$item,
-				new PropertyId( 'P1337' ),
+				new NumericPropertyId( 'P1337' ),
 				[ Statement::RANK_DEPRECATED ]
 			],
 		];

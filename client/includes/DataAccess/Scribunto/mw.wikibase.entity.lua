@@ -347,7 +347,7 @@ local function formatValuesByPropertyId( entity, phpFormatterFunction, propertyL
 	}
 end
 
--- Format the main Snaks belonging to a Statement (which is identified by a PropertyId
+-- Format the main Snaks belonging to a Statement (which is identified by a NumericPropertyId
 -- or the label of a Property) as wikitext escaped plain text.
 --
 -- @param {string} propertyLabelOrId
@@ -366,7 +366,7 @@ function methodtable.formatPropertyValues( entity, propertyLabelOrId, acceptable
 	);
 end
 
--- Format the main Snaks belonging to a Statement (which is identified by a PropertyId
+-- Format the main Snaks belonging to a Statement (which is identified by a NumericPropertyId
 -- or the label of a Property) as rich wikitext.
 --
 -- @param {string} propertyLabelOrId

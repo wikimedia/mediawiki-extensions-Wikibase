@@ -6,7 +6,7 @@ use PHPUnit\Framework\Assert;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 
 /**
  * Contract tester for implementations of the UsageAccumulator interface.
@@ -88,7 +88,7 @@ class UsageAccumulatorContractTester {
 
 	private function testAddAndGetStatementUsage() {
 		$q3 = new ItemId( 'Q3' );
-		$p42 = new PropertyId( 'P42' );
+		$p42 = new NumericPropertyId( 'P42' );
 		$this->usageAccumulator->addStatementUsage( $q3, $p42 );
 
 		$expected = new EntityUsage(

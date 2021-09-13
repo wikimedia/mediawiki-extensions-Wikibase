@@ -9,7 +9,7 @@ use Language;
 use Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -33,7 +33,7 @@ class SnakSerializationRendererTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function getSnakSerialization( DataValue $value ) {
 		$snak = new PropertyValueSnak(
-			new PropertyId( 'P42' ),
+			new NumericPropertyId( 'P42' ),
 			$value
 		);
 

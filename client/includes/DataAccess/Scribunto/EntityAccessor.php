@@ -11,7 +11,7 @@ use Wikibase\Client\Serializer\ClientEntitySerializer;
 use Wikibase\Client\Serializer\ClientStatementListSerializer;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
@@ -199,7 +199,7 @@ class EntityAccessor {
 		$prefixedEntityId = trim( $prefixedEntityId );
 		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
 
-		$propertyId = new PropertyId( $propertyIdSerialization );
+		$propertyId = new NumericPropertyId( $propertyIdSerialization );
 		$this->usageAccumulator->addStatementUsage( $entityId, $propertyId );
 
 		try {

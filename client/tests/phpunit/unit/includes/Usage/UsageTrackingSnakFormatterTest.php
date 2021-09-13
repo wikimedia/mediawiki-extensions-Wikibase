@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -70,7 +70,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testFormatSnak_item() {
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new NumericPropertyId( 'P1' );
 		$q1 = new ItemId( 'Q1' );
 		$itemSnak = new PropertyValueSnak( $p1, new EntityIdValue( $q1 ) );
 
@@ -114,7 +114,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider formatSnakQuantityProvider
 	 */
 	public function testFormatSnak_quantity( $unit, EntityId $formattedEntityId = null ) {
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new NumericPropertyId( 'P1' );
 		$itemSnak = new PropertyValueSnak(
 			$p1, UnboundedQuantityValue::newFromNumber( '1', $unit ) );
 
@@ -133,7 +133,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testFormatSnak_novalue() {
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new NumericPropertyId( 'P1' );
 		$novalueSnak = new PropertyNoValueSnak( $p1 );
 
 		$mockFormatter = $this->getMockSnakFormatter( 'formatSnak', 'test' );
@@ -150,7 +150,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testFormatSnak_string() {
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new NumericPropertyId( 'P1' );
 		$stringSnak = new PropertyValueSnak( $p1, new StringValue( 'xxx' ) );
 
 		$mockFormatter = $this->getMockSnakFormatter( 'formatSnak', 'test' );

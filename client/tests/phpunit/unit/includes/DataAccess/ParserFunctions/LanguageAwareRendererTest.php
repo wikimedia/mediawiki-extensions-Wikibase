@@ -16,7 +16,7 @@ use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -89,7 +89,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testRender() {
-		$propertyId = new PropertyId( 'P1337' );
+		$propertyId = new NumericPropertyId( 'P1337' );
 		$snaks = [
 			'Q42$1' => new PropertyValueSnak( $propertyId, new StringValue( 'a kitten!' ) ),
 			'Q42$2' => new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) )
@@ -202,7 +202,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$propertyIdResolver->method( 'resolvePropertyId' )
-			->willReturn( new PropertyId( 'P1337' ) );
+			->willReturn( new NumericPropertyId( 'P1337' ) );
 
 		return $propertyIdResolver;
 	}

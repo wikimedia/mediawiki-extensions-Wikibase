@@ -15,7 +15,7 @@ use Wikibase\Client\Api\PageTerms;
 use Wikibase\DataAccess\Tests\FakePrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -106,7 +106,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 
 	public function newEntityId( $pageId ): EntityId {
 		if ( $pageId > 1000 ) {
-			return new PropertyId( "P$pageId" );
+			return new NumericPropertyId( "P$pageId" );
 		} else {
 			return new ItemId( "Q$pageId" );
 		}

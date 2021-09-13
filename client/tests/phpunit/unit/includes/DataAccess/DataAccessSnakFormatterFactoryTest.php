@@ -8,7 +8,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
@@ -109,7 +109,7 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function richWikitextSnakFormatterProvider() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 
 		return [
 			[ new PropertyValueSnak( $id, new StringValue( '' ) ), '' ],

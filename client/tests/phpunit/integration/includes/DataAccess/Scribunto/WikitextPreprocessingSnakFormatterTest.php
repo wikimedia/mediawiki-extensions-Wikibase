@@ -9,7 +9,7 @@ use MediaWikiIntegrationTestCase;
 use Parser;
 use ParserOptions;
 use Wikibase\Client\DataAccess\Scribunto\WikitextPreprocessingSnakFormatter;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -76,7 +76,7 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiIntegrationTestCas
 		);
 
 		$snak = new PropertyValueSnak(
-			new PropertyId( 'P42' ),
+			new NumericPropertyId( 'P42' ),
 			new StringValue( 'blah' )
 		);
 
@@ -103,7 +103,7 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiIntegrationTestCas
 		);
 
 		$snak = new PropertyValueSnak(
-			new PropertyId( 'P42' ),
+			new NumericPropertyId( 'P42' ),
 			new StringValue( 'blah' )
 		);
 

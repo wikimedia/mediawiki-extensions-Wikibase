@@ -28,7 +28,7 @@ use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -387,7 +387,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			new SiteLinkList( [ $siteLink ] ),
 			new StatementList( [
 				new Statement( new PropertyValueSnak(
-					new PropertyId( 'P100' ),
+					new NumericPropertyId( 'P100' ),
 					new UnmappedEntityIdValue( 'X808' )
 				) )
 			] )

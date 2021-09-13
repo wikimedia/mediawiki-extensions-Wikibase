@@ -27,7 +27,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
@@ -265,7 +265,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$snakListFinder->method( 'findSnaks' )
 			->willReturnCallback( function(
 				StatementListProvider $statementListProvider,
-				PropertyId $propertyId,
+				NumericPropertyId $propertyId,
 				array $acceptableRanks = null
 			) {
 				return [
