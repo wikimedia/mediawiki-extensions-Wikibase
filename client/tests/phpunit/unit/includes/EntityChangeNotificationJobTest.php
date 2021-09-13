@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\EntityChangeNotificationJob;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -49,6 +50,7 @@ class EntityChangeNotificationJobTest extends TestCase {
 		$entityChangeNotificationJob = new EntityChangeNotificationJob(
 			$mockChangeHandler,
 			$mockEntityIdParser,
+			new NullLogger(),
 			[
 				'changes' => [ $testItemChange->getFields() ],
 			]
