@@ -15,4 +15,6 @@ interface ChangeStore {
 
 	public function saveChange( Change $change );
 
+	public function deleteChangesByChangeIds( array $changeIds ): void;
+
 }
