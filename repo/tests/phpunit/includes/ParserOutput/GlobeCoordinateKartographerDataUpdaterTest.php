@@ -7,7 +7,7 @@ use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
 use Language;
 use ParserOutput;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
@@ -71,16 +71,16 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 	private function getStatements() {
 		$statements = new StatementList();
 		$statements->addNewStatement(
-			new PropertyValueSnak( new PropertyId( 'P42' ), new StringValue( 'Strings should be ignored' ) )
+			new PropertyValueSnak( new NumericPropertyId( 'P42' ), new StringValue( 'Strings should be ignored' ) )
 		);
 		$statements->addNewStatement(
-			new PropertyNoValueSnak( new PropertyId( 'P42' ) )
+			new PropertyNoValueSnak( new NumericPropertyId( 'P42' ) )
 		);
 		$statements->addNewStatement(
-			new PropertyValueSnak( new PropertyId( 'P123' ), $this->newCoordinateValue( 12, 34 ) )
+			new PropertyValueSnak( new NumericPropertyId( 'P123' ), $this->newCoordinateValue( 12, 34 ) )
 		);
 		$statements->addNewStatement(
-			new PropertyValueSnak( new PropertyId( 'P123' ), $this->newCoordinateValue( 50, 50 ) )
+			new PropertyValueSnak( new NumericPropertyId( 'P123' ), $this->newCoordinateValue( 50, 50 ) )
 		);
 
 		return $statements;

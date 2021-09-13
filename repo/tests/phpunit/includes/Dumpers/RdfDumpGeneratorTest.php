@@ -15,7 +15,7 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -262,7 +262,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 
 	private function getPropertyDataTypeLookup(): PropertyDataTypeLookup {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P10' ), 'Wibblywobbly' ); // see phpunit/data/rdf/RdfDumpGenerator
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P10' ), 'Wibblywobbly' ); // see phpunit/data/rdf/RdfDumpGenerator
 
 		return $dataTypeLookup;
 	}
@@ -339,7 +339,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function idProvider(): iterable {
-		$p10 = new PropertyId( 'P10' );
+		$p10 = new NumericPropertyId( 'P10' );
 		$q30 = new ItemId( 'Q30' );
 		$q40 = new ItemId( 'Q40' );
 		$q4242 = new ItemId( 'Q4242' ); // hardcoded to be a redirect

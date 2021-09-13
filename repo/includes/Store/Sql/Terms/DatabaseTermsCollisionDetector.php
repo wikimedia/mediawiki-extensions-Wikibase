@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Repo\Store\TermsCollisionDetector;
@@ -129,7 +129,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 		if ( $this->entityType === Item::ENTITY_TYPE ) {
 			return ItemId::newFromNumber( $numericEntityId );
 		} elseif ( $this->entityType === Property::ENTITY_TYPE ) {
-			return PropertyId::newFromNumber( $numericEntityId );
+			return NumericPropertyId::newFromNumber( $numericEntityId );
 		}
 	}
 

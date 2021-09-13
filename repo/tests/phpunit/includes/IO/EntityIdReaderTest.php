@@ -6,8 +6,8 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
@@ -60,9 +60,9 @@ class EntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 
 	public function listEntitiesProvider() {
 		$q1 = new ItemId( 'Q1' );
-		$p2 = new PropertyId( 'P2' );
+		$p2 = new NumericPropertyId( 'P2' );
 		$q3 = new ItemId( 'Q3' );
-		$p4 = new PropertyId( 'P4' );
+		$p4 = new NumericPropertyId( 'P4' );
 
 		return [
 			'all' => [
@@ -95,9 +95,9 @@ class EntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 
 	public function listEntitiesProvider_paging() {
 		$q1 = new ItemId( 'Q1' );
-		$p2 = new PropertyId( 'P2' );
+		$p2 = new NumericPropertyId( 'P2' );
 		$q3 = new ItemId( 'Q3' );
-		$p4 = new PropertyId( 'P4' );
+		$p4 = new NumericPropertyId( 'P4' );
 
 		return [
 			'limit' => [
@@ -126,7 +126,7 @@ class EntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 	public function testErrorHandler() {
 		$expected = [
 			new ItemId( 'Q23' ),
-			new PropertyId( 'P42' ),
+			new NumericPropertyId( 'P42' ),
 		];
 
 		$exceptionHandler = $this->createMock( ExceptionHandler::class );

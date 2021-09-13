@@ -9,8 +9,8 @@ use Page;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
@@ -221,7 +221,7 @@ class PropertyHandler extends EntityHandler {
 	 * @return EntityId
 	 */
 	public function makeEntityId( $id ) {
-		return new PropertyId( $id );
+		return new NumericPropertyId( $id );
 	}
 
 }

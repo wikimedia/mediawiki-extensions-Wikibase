@@ -6,7 +6,7 @@ use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
@@ -100,14 +100,14 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'value snak' => [
 				new PropertyValueSnak(
-					new PropertyId( 'P2' ),
+					new NumericPropertyId( 'P2' ),
 					new EntityIdValue( new ItemId( 'Q42' ) )
 				),
 				'wikibase-item',
 			],
 			'value snak with data type' => [
 				new PropertyValueSnak(
-					new PropertyId( 'P9' ),
+					new NumericPropertyId( 'P9' ),
 					new StringValue( 'http://acme.com' )
 				),
 				'url'
@@ -137,7 +137,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testAddSnakValue_novalue() {
-		$propertyId = new PropertyId( 'P2' );
+		$propertyId = new NumericPropertyId( 'P2' );
 		$snak = new PropertyNoValueSnak( $propertyId );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
@@ -159,7 +159,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testAddSnakValue_mention() {
-		$propertyId = new PropertyId( 'P2' );
+		$propertyId = new NumericPropertyId( 'P2' );
 		$value = new EntityIdValue( new ItemId( 'Q42' ) );
 		$snak = new PropertyValueSnak( $propertyId, $value );
 

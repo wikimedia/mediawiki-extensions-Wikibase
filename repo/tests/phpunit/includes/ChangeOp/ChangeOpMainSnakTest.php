@@ -9,7 +9,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -186,7 +186,7 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 
 	private function makeSnak( $propertyId, $value ) {
 		if ( is_string( $propertyId ) ) {
-			$propertyId = new PropertyId( $propertyId );
+			$propertyId = new NumericPropertyId( $propertyId );
 		}
 
 		if ( is_string( $value ) ) {
@@ -201,7 +201,7 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function validateProvider() {
-		$p11 = new PropertyId( 'P11' );
+		$p11 = new NumericPropertyId( 'P11' );
 		$q17 = new ItemId( 'Q17' );
 
 		//NOTE: the mock validator will consider the string "INVALID" to be invalid.

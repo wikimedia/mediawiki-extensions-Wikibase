@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\TimeValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Rdf\HashDedupeBag;
@@ -42,7 +42,7 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$jul = TimeValue::CALENDAR_JULIAN;
 		$day = TimeValue::PRECISION_DAY;
 
-		$propertyId = new PropertyId( 'P7' );
+		$propertyId = new NumericPropertyId( 'P7' );
 		$value = new TimeValue( '+2015-11-11T00:00:00Z', 0, 0, 0, $day, $greg );
 		$snak = new PropertyValueSnak( $propertyId, $value );
 

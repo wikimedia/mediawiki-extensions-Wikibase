@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\StringValue;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\Rdf\Values\LiteralValueRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
@@ -32,7 +32,7 @@ class LiteralValueRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function provideAddValue() {
-		$p11 = new PropertyId( 'P11' );
+		$p11 = new NumericPropertyId( 'P11' );
 		$stringSnak = new PropertyValueSnak( $p11, new StringValue( 'Hello World' ) );
 		$numberSnak = new PropertyValueSnak( $p11, new StringValue( '15' ) );
 

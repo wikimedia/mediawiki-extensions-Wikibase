@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -36,7 +36,7 @@ trait ClaimsChangeOpDeserializationTester {
 	}
 
 	public function setStatementProvider() {
-		$property = new PropertyId( 'P7' );
+		$property = new NumericPropertyId( 'P7' );
 		$statement = new Statement( new PropertyNoValueSnak( $property ) );
 		$statementSerialization = $this->getStatementSerializer()->serialize( $statement );
 		$entity = $this->getEntity();
@@ -58,7 +58,7 @@ trait ClaimsChangeOpDeserializationTester {
 	}
 
 	public function deleteStatementProvider() {
-		$property = new PropertyId( 'P7' );
+		$property = new NumericPropertyId( 'P7' );
 		$statement = new Statement( new PropertyNoValueSnak( $property ) );
 		$statement->setGuid( 'test-guid' );
 		$entity = $this->getEntity();
@@ -100,7 +100,7 @@ trait ClaimsChangeOpDeserializationTester {
 	}
 
 	public function editStatementProvider() {
-		$property = new PropertyId( 'P7' );
+		$property = new NumericPropertyId( 'P7' );
 		$statement = new Statement( new PropertyValueSnak( $property, new StringValue( 'foo' ) ) );
 		$entity = $this->getEntity();
 		$statement->setGuid( ( new GuidGenerator() )->newGuid( $entity->getId() ) );

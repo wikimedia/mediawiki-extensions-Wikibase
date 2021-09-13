@@ -6,8 +6,8 @@ use Exception;
 use InvalidArgumentException;
 use Maintenance;
 use User;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\PropertyDataTypeChanger;
 use Wikibase\Repo\WikibaseRepo;
@@ -53,7 +53,7 @@ class ChangePropertyDataType extends Maintenance {
 		$propertyIdSerialization = $this->getOption( 'property-id' );
 		$newDataType = $this->getOption( 'new-data-type' );
 		try {
-			$propertyId = new PropertyId( $propertyIdSerialization );
+			$propertyId = new NumericPropertyId( $propertyIdSerialization );
 		} catch ( InvalidArgumentException $e ) {
 			$this->fatalError( "Invalid property id: " . $propertyIdSerialization );
 		}

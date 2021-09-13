@@ -16,8 +16,8 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -63,7 +63,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 	private function getMockRepository(): MockRepository {
 		$mockRepo = new MockRepository();
 
-		$p5 = new Property( new PropertyId( 'P5' ), null, 'wikibase-item' );
+		$p5 = new Property( new NumericPropertyId( 'P5' ), null, 'wikibase-item' );
 		$p5->setLabel( 'en', 'Label5' );
 		$mockRepo->putEntity( $p5 );
 
@@ -424,7 +424,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 	): void {
 		$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $this->getMockPropertyDataTypeLookup() );
 		$inMemoryTermLookup = new InMemoryPrefetchingTermLookup();
-		$p5 = new PropertyId( 'P5' );
+		$p5 = new NumericPropertyId( 'P5' );
 		$q23 = new ItemId( 'Q23' );
 		$inMemoryTermLookup->setData( [ $this->getMockRepository()->getEntity( $p5 ) ] );
 		$inMemoryTermLookup->setData( [ $this->getMockRepository()->getEntity( $q23 ) ] );
@@ -453,7 +453,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 	private function getMockPropertyDataTypeLookup(): PropertyDataTypeLookup {
 		$mockDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$mockDataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->willReturnCallback( function( PropertyId $id ) {
+			->willReturnCallback( function( NumericPropertyId $id ) {
 				if ( $id->getSerialization() === 'P999' ) {
 					throw new PropertyDataTypeLookupException( $id );
 				}

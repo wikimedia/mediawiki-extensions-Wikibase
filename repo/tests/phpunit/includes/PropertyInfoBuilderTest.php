@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests;
 
 use DataValues\StringValue;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
@@ -22,8 +22,8 @@ class PropertyInfoBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	private function getPropertyInfoBuilder() {
 		return new PropertyInfoBuilder( [
-			PropertyInfoLookup::KEY_FORMATTER_URL => new PropertyId( 'P42' ),
-			PropertyInfoStore::KEY_CANONICAL_URI => new PropertyId( 'P142' )
+			PropertyInfoLookup::KEY_FORMATTER_URL => new NumericPropertyId( 'P42' ),
+			PropertyInfoStore::KEY_CANONICAL_URI => new NumericPropertyId( 'P142' )
 		] );
 	}
 
@@ -38,10 +38,10 @@ class PropertyInfoBuilderTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		$property = Property::newFromType( 'foo' );
-		$snak = new PropertyValueSnak( new PropertyId( 'P42' ), new StringValue( 'test' ) );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P42' ), new StringValue( 'test' ) );
 		$property->getStatements()->addNewStatement( $snak );
 
-		$snak = new PropertyValueSnak( new PropertyId( 'P142' ), new StringValue( 'Heya' ) );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P142' ), new StringValue( 'Heya' ) );
 		$property->getStatements()->addNewStatement( $snak );
 
 		$cases[] = [

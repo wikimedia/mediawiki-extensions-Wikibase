@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -45,10 +45,10 @@ class SqlSubscriptionLookupTest extends MediaWikiIntegrationTestCase {
 		$lookup = new SqlSubscriptionLookup( WikibaseRepo::getRepoDomainDbFactory()->newRepoDb() );
 
 		$subscriptions = $lookup->getSubscriptions( 'enwiki', [
-			new PropertyId( 'P1' ),
+			new NumericPropertyId( 'P1' ),
 			new ItemId( 'Q2' ),
 			new ItemId( 'Q7' ),
-			new PropertyId( 'P3' ),
+			new NumericPropertyId( 'P3' ),
 		] );
 
 		$actual = array_map( function ( EntityId $id ) {

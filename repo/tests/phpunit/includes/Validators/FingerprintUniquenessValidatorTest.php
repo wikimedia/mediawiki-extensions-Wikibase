@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Repo\ChangeOp\ChangeOpDescriptionResult;
 use Wikibase\Repo\ChangeOp\ChangeOpFingerprintResult;
@@ -45,8 +45,8 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 	}
 
 	public function propertyUniquenessValidationProvider() {
-		$entityId = new PropertyId( 'P123' );
-		$collidingEntityId = new PropertyId( 'P321' );
+		$entityId = new NumericPropertyId( 'P123' );
+		$collidingEntityId = new NumericPropertyId( 'P321' );
 
 		return [
 			'no collisions detected' => [

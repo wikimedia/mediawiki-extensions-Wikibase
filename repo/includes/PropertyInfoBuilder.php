@@ -3,8 +3,8 @@
 namespace Wikibase\Repo;
 
 use DataValues\StringValue;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -21,15 +21,15 @@ use Wikimedia\Assert\Assert;
 class PropertyInfoBuilder {
 
 	/**
-	 * @var PropertyId[] Maps PropertyInfoStore keys to PropertyIds
+	 * @var NumericPropertyId[] Maps PropertyInfoStore keys to PropertyIds
 	 */
 	private $propertyIdMap;
 
 	/**
-	 * @param PropertyId[] $propertyIdMap Maps PropertyInfoStore keys to PropertyIds
+	 * @param NumericPropertyId[] $propertyIdMap Maps PropertyInfoStore keys to PropertyIds
 	 */
 	public function __construct( $propertyIdMap = [] ) {
-		Assert::parameterElementType( PropertyId::class, $propertyIdMap, '$propertyIdMap' );
+		Assert::parameterElementType( NumericPropertyId::class, $propertyIdMap, '$propertyIdMap' );
 		$this->propertyIdMap = $propertyIdMap;
 	}
 
@@ -99,7 +99,7 @@ class PropertyInfoBuilder {
 	}
 
 	/**
-	 * @return PropertyId[]
+	 * @return NumericPropertyId[]
 	 */
 	public function getPropertyIdMap() {
 		return $this->propertyIdMap;

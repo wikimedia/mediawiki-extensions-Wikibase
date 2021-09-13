@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -48,48 +48,48 @@ class StatementEntityReferenceExtractorTest extends TestCase {
 		yield 'two statements, one referencing an item' => [
 			[
 				new Statement( new PropertyValueSnak(
-					new PropertyId( 'P23' ),
+					new NumericPropertyId( 'P23' ),
 					new EntityIdValue( new ItemId( 'Q42' ) )
 				) ),
 				new Statement( new PropertyValueSnak(
-					new PropertyId( 'P321' ),
+					new NumericPropertyId( 'P321' ),
 					new StringValue( 'foo' )
 				) )
 			],
-			[ new PropertyId( 'P23' ), new ItemId( 'Q42' ), new PropertyId( 'P321' ) ]
+			[ new NumericPropertyId( 'P23' ), new ItemId( 'Q42' ), new NumericPropertyId( 'P321' ) ]
 		];
 
 		yield 'statement with qualifiers' => [
 			[ new Statement(
-				new PropertyValueSnak( new PropertyId( 'P789' ), new StringValue( 'meow' ) ),
+				new PropertyValueSnak( new NumericPropertyId( 'P789' ), new StringValue( 'meow' ) ),
 				new SnakList( [
 					new PropertyValueSnak(
-						new PropertyId( 'P666' ),
+						new NumericPropertyId( 'P666' ),
 						new EntityIdValue( new ItemId( 'Q666' ) )
 					)
 				] )
 			) ],
-			[ new PropertyId( 'P789' ), new PropertyId( 'P666' ), new ItemId( 'Q666' ) ]
+			[ new NumericPropertyId( 'P789' ), new NumericPropertyId( 'P666' ), new ItemId( 'Q666' ) ]
 		];
 
 		yield 'statements with item in quantity value' => [
 			[
 				new Statement( new PropertyValueSnak(
-					1,
+					new NumericPropertyId( 'P1' ),
 					UnboundedQuantityValue::newFromNumber( 1, self::UNIT_PREFIX . 'Q21' )
 				) ),
 				new Statement( new PropertyValueSnak(
-					1,
+					new NumericPropertyId( 'P1' ),
 					QuantityValue::newFromNumber( 1, self::UNIT_PREFIX . 'Q22' )
 				) )
 			],
-			[ new PropertyId( 'P1' ), new ItemId( 'Q21' ), new ItemId( 'Q22' ) ],
+			[ new NumericPropertyId( 'P1' ), new ItemId( 'Q21' ), new ItemId( 'Q22' ) ],
 		];
 	}
 
 	public function testSeparateIdsPerCall() {
-		$p1 = new PropertyId( 'P1' );
-		$p2 = new PropertyId( 'P2' );
+		$p1 = new NumericPropertyId( 'P1' );
+		$p2 = new NumericPropertyId( 'P2' );
 		$statement1 = NewStatement::noValueFor( $p1 );
 		$statement2 = NewStatement::noValueFor( $p2 );
 		$item1 = NewItem::withStatement( $statement1 )->build();

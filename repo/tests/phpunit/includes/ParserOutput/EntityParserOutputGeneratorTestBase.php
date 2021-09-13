@@ -9,7 +9,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -203,8 +203,8 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 	protected function getPropertyDataTypeLookup() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P42' ), 'url' );
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P10' ), 'commonsMedia' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P42' ), 'url' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P10' ), 'commonsMedia' );
 
 		return $dataTypeLookup;
 	}

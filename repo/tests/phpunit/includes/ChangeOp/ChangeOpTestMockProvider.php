@@ -16,7 +16,7 @@ use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -84,7 +84,7 @@ class ChangeOpTestMockProvider {
 	/**
 	 * Convenience method for creating Statements.
 	 *
-	 * @param string|PropertyId $propertyId
+	 * @param string|NumericPropertyId $propertyId
 	 *
 	 * @param string|int|float|DataValue|null $value The value of the new
 	 *        claim's main snak. Null will result in a PropertyNoValueSnak.
@@ -99,7 +99,7 @@ class ChangeOpTestMockProvider {
 		}
 
 		if ( is_string( $propertyId ) ) {
-			$propertyId = new PropertyId( $propertyId );
+			$propertyId = new NumericPropertyId( $propertyId );
 		}
 
 		if ( $value === null ) {

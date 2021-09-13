@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Repo\FederatedProperties\ApiEntityNamespaceInfoLookup;
 use Wikibase\Repo\FederatedProperties\ApiEntityTitleTextLookup;
@@ -43,7 +43,7 @@ class ApiEntityTitleTextLookupTest extends TestCase {
 
 		$this->expectException( InvalidArgumentException::class );
 
-		$lookup->getPrefixedText( new PropertyId( 'P666' ) );
+		$lookup->getPrefixedText( new NumericPropertyId( 'P666' ) );
 	}
 
 	private function getApiEntityNamespaceInfoLookup( $namespaceName ) {

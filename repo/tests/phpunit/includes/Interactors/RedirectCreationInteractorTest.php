@@ -13,8 +13,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
@@ -55,11 +55,11 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 
 		// a property
 		$prop = Property::newFromType( 'string' );
-		$prop->setId( new PropertyId( 'P11' ) );
+		$prop->setId( new NumericPropertyId( 'P11' ) );
 		$this->mockRepository->putEntity( $prop );
 
 		// another property
-		$prop->setId( new PropertyId( 'P12' ) );
+		$prop->setId( new NumericPropertyId( 'P12' ) );
 		$this->mockRepository->putEntity( $prop );
 
 		// redirect
@@ -209,7 +209,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 			],
 			'target is incompatible' => [
 				new ItemId( 'Q11' ),
-				new PropertyId( 'P11' ),
+				new NumericPropertyId( 'P11' ),
 				'target-is-incompatible',
 				[]
 			],
@@ -227,8 +227,8 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 				[ 'Q12' ]
 			],
 			'can\'t redirect' => [
-				new PropertyId( 'P11' ),
-				new PropertyId( 'P12' ),
+				new NumericPropertyId( 'P11' ),
+				new NumericPropertyId( 'P12' ),
 				'cant-redirect',
 				[]
 			],

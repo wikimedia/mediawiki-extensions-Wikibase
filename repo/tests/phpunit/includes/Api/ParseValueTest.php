@@ -10,7 +10,7 @@ use Language;
 use ValueParsers\NullParser;
 use ValueParsers\ParseException;
 use Wikibase\DataModel\Entity\Int32EntityId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Repo\Api\ApiErrorReporter;
@@ -70,9 +70,9 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 		] );
 
 		$propertyDataTypeLookup = new InMemoryDataTypeLookup();
-		$propertyDataTypeLookup->setDataTypeForProperty( new PropertyId( 'P1' ), 'string' );
-		$propertyDataTypeLookup->setDataTypeForProperty( new PropertyId( 'P2' ), 'url' );
-		$propertyDataTypeLookup->setDataTypeForProperty( new PropertyId( 'P3' ), 'globe-coordinate' );
+		$propertyDataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P1' ), 'string' );
+		$propertyDataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P2' ), 'url' );
+		$propertyDataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P3' ), 'globe-coordinate' );
 
 		return new ParseValue(
 			$main,

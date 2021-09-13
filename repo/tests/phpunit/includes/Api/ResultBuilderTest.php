@@ -14,7 +14,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\SerializerFactory;
@@ -69,14 +69,14 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$mockPropertyDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$mockPropertyDataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->willReturnCallback( function( PropertyId $id ) {
+			->willReturnCallback( function( NumericPropertyId $id ) {
 				return 'DtIdFor_' . $id->getSerialization();
 			} );
 
 		$propertyIdParser = $this->createStub( EntityIdParser::class );
 		$propertyIdParser->method( 'parse' )
 			->willReturnCallback( static function ( string $id ) {
-				return new PropertyId( $id );
+				return new NumericPropertyId( $id );
 			} );
 
 		$serializerFactory = new SerializerFactory(
@@ -374,16 +374,16 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin', [ new ItemId( 'Q333' ) ] );
 		$item->getSiteLinkList()->addNewSiteLink( 'zh_classicalwiki', 'User:Addshore', [] );
 
-		$snak = new PropertyValueSnak( new PropertyId( 'P65' ), new StringValue( 'snakStringValue' ) );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P65' ), new StringValue( 'snakStringValue' ) );
 
 		$qualifiers = new SnakList();
-		$qualifiers->addSnak( new PropertyValueSnak( new PropertyId( 'P65' ), new StringValue( 'string!' ) ) );
-		$qualifiers->addSnak( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
+		$qualifiers->addSnak( new PropertyValueSnak( new NumericPropertyId( 'P65' ), new StringValue( 'string!' ) ) );
+		$qualifiers->addSnak( new PropertySomeValueSnak( new NumericPropertyId( 'P65' ) ) );
 
 		$references = new ReferenceList();
 		$referenceSnaks = new SnakList();
-		$referenceSnaks->addSnak( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
-		$referenceSnaks->addSnak( new PropertySomeValueSnak( new PropertyId( 'P68' ) ) );
+		$referenceSnaks->addSnak( new PropertySomeValueSnak( new NumericPropertyId( 'P65' ) ) );
+		$referenceSnaks->addSnak( new PropertySomeValueSnak( new NumericPropertyId( 'P68' ) ) );
 		$references->addReference( new Reference( $referenceSnaks ) );
 
 		$guid = 'imaguid';
@@ -1061,11 +1061,11 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$path = [ 'entities', 'Q1' ];
 
 		$statement = new Statement(
-			new PropertySomeValueSnak( new PropertyId( 'P12' ) ),
+			new PropertySomeValueSnak( new NumericPropertyId( 'P12' ) ),
 			null,
 			new Referencelist( [
 				new Reference( [
-					new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ),
+					new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ),
 				] ),
 			] ),
 			'fooguidbar'
@@ -1123,13 +1123,13 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	public function statementSerializationProvider() {
 		$statement = new Statement(
-			new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ),
+			new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'stringVal' ) ),
 			new SnakList( [
-				new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'qualiferVal' ) ),
+				new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'qualiferVal' ) ),
 			] ),
 			new Referencelist( [
 				new Reference( [
-					new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ),
+					new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ),
 				] ),
 			] ),
 			'fooguidbar'
@@ -1253,7 +1253,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$result = $this->getDefaultResult();
 		$reference = new Reference(
 			new SnakList( [
-				new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) )
+				new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'stringVal' ) )
 			] )
 		);
 

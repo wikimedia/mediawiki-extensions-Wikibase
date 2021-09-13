@@ -18,8 +18,8 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\DispatchingEntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\StaticContentLanguages;
@@ -65,14 +65,14 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$q8 = new Item( new ItemId( 'Q8' ) );
 
 		$p8 = Property::newFromType( 'string' );
-		$p8->setId( new PropertyId( 'P8' ) );
+		$p8->setId( new NumericPropertyId( 'P8' ) );
 
 		$localLookup = new MockRepository();
 		$localLookup->putEntity( $q8 );
 		$localLookup->putEntity( $p8 );
 
 		$fooQ123 = new ItemId( 'foo:Q123' );
-		$fooP42 = new PropertyId( 'foo:P42' );
+		$fooP42 = new NumericPropertyId( 'foo:P42' );
 
 		$foreignLookup = $this->createMock( EntityLookup::class );
 		$foreignLookup->method( 'hasEntity' )
@@ -445,20 +445,28 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			'Expected item, StringValue supplied' => [ 'wikibase-item', new StringValue( self::EXISTING_ITEM_ID ), false ],
 			'Existing item' => [ 'wikibase-item', new EntityIdValue( new ItemId( self::EXISTING_ITEM_ID ) ), true ],
 			'Missing item' => [ 'wikibase-item', new EntityIdValue( new ItemId( self::NON_EXISTING_ITEM_ID ) ), false ],
-			'Not an item' => [ 'wikibase-item', new EntityIdValue( new PropertyId( self::EXISTING_PROPERTY_ID ) ), false ],
+			'Not an item' => [ 'wikibase-item', new EntityIdValue( new NumericPropertyId( self::EXISTING_PROPERTY_ID ) ), false ],
 
 			// wikibase-property
-			'Existing property' => [ 'wikibase-property', new EntityIdValue( new PropertyId( self::EXISTING_PROPERTY_ID ) ), true ],
-			'Missing property' => [ 'wikibase-property', new EntityIdValue( new PropertyId( self::NON_EXISTING_PROPERTY_ID ) ), false ],
+			'Existing property' => [ 'wikibase-property', new EntityIdValue( new NumericPropertyId( self::EXISTING_PROPERTY_ID ) ), true ],
+			'Missing property' => [
+				'wikibase-property',
+				new EntityIdValue( new NumericPropertyId( self::NON_EXISTING_PROPERTY_ID ) ),
+				false,
+			],
 			'Not a property' => [ 'wikibase-property', new EntityIdValue( new ItemId( self::EXISTING_ITEM_ID ) ), false ],
 			'Expected property, string supplied' => [ 'wikibase-item', self::EXISTING_PROPERTY_ID, false ],
 
 			// generic wikibase entity
-			'Existing property entity' => [ 'wikibase-entity', new EntityIdValue( new PropertyId( self::EXISTING_PROPERTY_ID ) ), true ],
+			'Existing property entity' => [
+				'wikibase-entity',
+				new EntityIdValue( new NumericPropertyId( self::EXISTING_PROPERTY_ID ) ),
+				true,
+			],
 			'Missing property entity' => [
 				'wikibase-entity',
-				new EntityIdValue( new PropertyId( self::NON_EXISTING_PROPERTY_ID ) ),
-				false
+				new EntityIdValue( new NumericPropertyId( self::NON_EXISTING_PROPERTY_ID ) ),
+				false,
 			],
 			'Existing item entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( self::EXISTING_ITEM_ID ) ), true ],
 			'Missing item entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( self::NON_EXISTING_ITEM_ID ) ), false ],

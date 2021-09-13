@@ -11,8 +11,8 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
@@ -74,20 +74,20 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 		$mockEntityIdPager = new InMemoryEntityIdPager();
 
 		$snakList = new SnakList();
-		$snakList->addSnak( new PropertySomeValueSnak( new PropertyId( 'P12' ) ) );
-		$snakList->addSnak( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
+		$snakList->addSnak( new PropertySomeValueSnak( new NumericPropertyId( 'P12' ) ) );
+		$snakList->addSnak( new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
 		/** @var EntityDocument[] $testEntities */
 		$testEntities = [
 			new Item( new ItemId( 'Q1' ) ),
-			new Property( new PropertyId( 'P1' ), null, 'string' ),
+			new Property( new NumericPropertyId( 'P1' ), null, 'string' ),
 			new Property(
-				new PropertyId( 'P12' ),
+				new NumericPropertyId( 'P12' ),
 				null,
 				'string',
 				new StatementList( [
 					new Statement(
 						// P999 is non existent thus the datatype will not be present
-						new PropertySomeValueSnak( new PropertyId( 'P999' ) ),
+						new PropertySomeValueSnak( new NumericPropertyId( 'P999' ) ),
 						null,
 						null,
 						'GUID1'
@@ -116,18 +116,18 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 				] ),
 				new StatementList( [
 					new Statement(
-						new PropertySomeValueSnak( new PropertyId( 'P12' ) ),
+						new PropertySomeValueSnak( new NumericPropertyId( 'P12' ) ),
 						null,
 						null,
 						'GUID1'
 					),
 					new Statement(
-						new PropertySomeValueSnak( new PropertyId( 'P12' ) ),
+						new PropertySomeValueSnak( new NumericPropertyId( 'P12' ) ),
 						$snakList,
 						new ReferenceList( [
 							new Reference( [
-								new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ),
-								new PropertyNoValueSnak( new PropertyId( 'P12' ) ),
+								new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ),
+								new PropertyNoValueSnak( new NumericPropertyId( 'P12' ) ),
 							] ),
 						] ),
 						'GUID2'
@@ -285,7 +285,7 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 	private function getMockPropertyDataTypeLookup(): PropertyDataTypeLookup {
 		$mockDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$mockDataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->willReturnCallback( function( PropertyId $id ) {
+			->willReturnCallback( function( NumericPropertyId $id ) {
 				if ( $id->getSerialization() === 'P999' ) {
 					throw new PropertyDataTypeLookupException( $id );
 				}

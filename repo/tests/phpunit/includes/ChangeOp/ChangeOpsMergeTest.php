@@ -13,7 +13,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -316,7 +316,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 			[ 'sitelink' ],
 		];
 
-		$statement = new Statement( new PropertyNoValueSnak( new PropertyId( 'P56' ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( new NumericPropertyId( 'P56' ) ) );
 		$statement->setGuid( 'Q111$D8404CDA-25E4-4334-AF13-A390BCD9C556' );
 
 		$itemWithStatement = NewItem::withStatement( $statement )
@@ -329,8 +329,8 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 		];
 
 		$qualifiedStatement = new Statement(
-			new PropertyNoValueSnak( new PropertyId( 'P56' ) ),
-			new SnakList( [ new PropertyNoValueSnak( new PropertyId( 'P56' ) ) ] )
+			new PropertyNoValueSnak( new NumericPropertyId( 'P56' ) ),
+			new SnakList( [ new PropertyNoValueSnak( new NumericPropertyId( 'P56' ) ) ] )
 		);
 		$qualifiedStatement->setGuid( 'Q111$D8404CDA-25E4-4334-AF13-A390BCD9C556' );
 
@@ -345,13 +345,13 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 		];
 
 		$anotherQualifiedStatement = new Statement(
-			new PropertyNoValueSnak( new PropertyId( 'P88' ) ),
-			new SnakList( [ new PropertyNoValueSnak( new PropertyId( 'P88' ) ) ] )
+			new PropertyNoValueSnak( new NumericPropertyId( 'P88' ) ),
+			new SnakList( [ new PropertyNoValueSnak( new NumericPropertyId( 'P88' ) ) ] )
 		);
 		$anotherQualifiedStatement->setGuid( 'Q111$D8404CDA-25E4-4334-AF88-A3290BCD9C0F' );
 
 		$selfReferencingStatement = new Statement(
-			new PropertyValueSnak( new PropertyId( 'P42' ), new EntityIdValue( new ItemId( 'Q111' ) ) )
+			new PropertyValueSnak( new NumericPropertyId( 'P42' ), new EntityIdValue( new ItemId( 'Q111' ) ) )
 		);
 		$selfReferencingStatement->setGuid( 'Q111$D74D43D7-BD8F-4240-A058-24C5171ABBFA' );
 
@@ -374,7 +374,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 		];
 
 		$referencingStatement = new Statement(
-			new PropertyValueSnak( new PropertyId( 'P42' ), new EntityIdValue( new ItemId( 'Q222' ) ) )
+			new PropertyValueSnak( new NumericPropertyId( 'P42' ), new EntityIdValue( new ItemId( 'Q222' ) ) )
 		);
 		$referencingStatement->setGuid( 'Q111$949A4D27-0EBC-46A7-BF5F-AA2DD33C0443' );
 

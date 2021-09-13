@@ -8,8 +8,8 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Validators\EntityExistsValidator;
@@ -32,7 +32,7 @@ class EntityExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 	private function getEntityLookup() {
 		$q8 = new Item( new ItemId( 'Q8' ) );
 
-		$p8 = new Property( new PropertyId( 'P8' ), null, 'string' );
+		$p8 = new Property( new NumericPropertyId( 'P8' ), null, 'string' );
 
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $q8 );
@@ -47,7 +47,7 @@ class EntityExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'existing entity' => [ new EntityIdValue( $itemId ), null ],
 			'is an item' => [ $itemId, Item::ENTITY_TYPE ],
-			'is a property' => [ new PropertyId( 'P8' ), Property::ENTITY_TYPE ],
+			'is a property' => [ new NumericPropertyId( 'P8' ), Property::ENTITY_TYPE ],
 		];
 	}
 
@@ -64,7 +64,7 @@ class EntityExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 	public function provideValidate_failure() {
 		return [
 			"missing entity" => [ new ItemId( 'Q3' ), null, 'no-such-entity' ],
-			"not an item" => [ new PropertyId( 'P8' ), Item::ENTITY_TYPE, 'bad-entity-type' ],
+			"not an item" => [ new NumericPropertyId( 'P8' ), Item::ENTITY_TYPE, 'bad-entity-type' ],
 			"not a property" => [ new ItemId( 'Q8' ), Property::ENTITY_TYPE, 'bad-entity-type' ],
 		];
 	}

@@ -6,7 +6,7 @@ use HashSiteStore;
 use Site;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -57,7 +57,7 @@ class ItemChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$newLabel = 'test-label';
 		$newDescription = 'test-description';
 
-		$property = new PropertyId( 'P7' );
+		$property = new NumericPropertyId( 'P7' );
 		$statement = new Statement( new PropertyNoValueSnak( $property ) );
 		$statementSerializer = WikibaseRepo::getBaseDataModelSerializerFactory()->newStatementSerializer();
 		$statementSerialization = $statementSerializer->serialize( $statement );

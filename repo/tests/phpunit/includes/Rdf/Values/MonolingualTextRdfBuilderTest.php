@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\MonolingualTextValue;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\Rdf\Values\MonolingualTextRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
@@ -40,7 +40,7 @@ class MonolingualTextRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$writer->start();
 		$writer->about( 'www', 'Q1' );
 
-		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new MonolingualTextValue( 'de', 'Hallo Welt' ) );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P1' ), new MonolingualTextValue( 'de', 'Hallo Welt' ) );
 		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', '', $snak );
 
 		$expected = '<http://www/Q1> <http://acme/testing> "Hallo Welt"@de .';

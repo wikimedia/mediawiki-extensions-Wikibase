@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Repo\FederatedProperties\ApiEntityExistenceChecker;
 use Wikibase\Repo\FederatedProperties\ApiEntityLookup;
@@ -84,7 +84,7 @@ class ApiEntityExistenceCheckerTest extends TestCase {
 
 		$this->expectException( InvalidArgumentException::class );
 
-		$existenceChecker->exists( new PropertyId( 'P777' ) );
+		$existenceChecker->exists( new NumericPropertyId( 'P777' ) );
 	}
 
 	public function testGivenListWithNonFederatedPropertyId_existsBatchThrows() {
@@ -94,7 +94,7 @@ class ApiEntityExistenceCheckerTest extends TestCase {
 
 		$existenceChecker->existsBatch( [
 			new FederatedPropertyId( 'http://yolo/entity/P666', 'P666' ),
-			new PropertyId( 'P777' ),
+			new NumericPropertyId( 'P777' ),
 		] );
 	}
 

@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\Rdf\PropertyStubRdfBuilder;
@@ -85,7 +85,7 @@ class PropertyStubRdfBuilderTest extends MediaWikiIntegrationTestCase {
 	private function getPropertyDataTypeLookup(): PropertyDataTypeLookup {
 		$mockDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$mockDataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->willReturnCallback( function( PropertyId $id ) {
+			->willReturnCallback( function( NumericPropertyId $id ) {
 				return 'string';
 			} );
 		return $mockDataTypeLookup;
@@ -113,7 +113,7 @@ class PropertyStubRdfBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testAddEntityStub(): void {
-		$propertyId = new PropertyId( 'P2' );
+		$propertyId = new NumericPropertyId( 'P2' );
 		$this->termLookup->setData( [
 			$this->getTestData()->getEntity( 'P2' )
 		] );

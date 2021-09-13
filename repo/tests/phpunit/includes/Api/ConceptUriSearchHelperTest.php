@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -44,7 +44,7 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetRankedSearchResults_delegatesAndAddsConceptUriWhenNotSet() {
-		$property1 = new PropertyId( 'P123' );
+		$property1 = new NumericPropertyId( 'P123' );
 		$property1ConceptUri = 'myConceptUriBase-P123';
 
 		$property1TermSearchResult = new TermSearchResult(
@@ -97,7 +97,7 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetRankedSearchResults_doesNotAddConceptUriWhenAlreadySet() {
-		$property1 = new PropertyId( 'P123' );
+		$property1 = new NumericPropertyId( 'P123' );
 		$property1ConceptUri = 'alreadySet';
 
 		$property1TermSearchResult = new TermSearchResult(

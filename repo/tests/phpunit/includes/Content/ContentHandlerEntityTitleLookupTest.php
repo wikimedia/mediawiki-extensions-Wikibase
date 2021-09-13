@@ -8,7 +8,7 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Content\ContentHandlerEntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
@@ -82,7 +82,7 @@ class ContentHandlerEntityTitleLookupTest extends MediaWikiIntegrationTestCase {
 		$factory = $this->newFactory();
 		$entityTitleLookup = $this->newEntityTitleLookup();
 
-		$id = new PropertyId( 'P42' );
+		$id = new NumericPropertyId( 'P42' );
 		$title = $entityTitleLookup->getTitleForId( $id );
 
 		$this->assertEquals( 'P42', $title->getText() );
@@ -98,7 +98,7 @@ class ContentHandlerEntityTitleLookupTest extends MediaWikiIntegrationTestCase {
 		$this->setService( 'InterwikiLookup', $lookup );
 
 		$entityTitleLookup = $this->newEntityTitleLookup();
-		$title = $entityTitleLookup->getTitleForId( new PropertyId( 'P42' ) );
+		$title = $entityTitleLookup->getTitleForId( new NumericPropertyId( 'P42' ) );
 		$this->assertSame( 'propertywiki:Special:EntityPage/P42', $title->getFullText() );
 	}
 
@@ -106,7 +106,7 @@ class ContentHandlerEntityTitleLookupTest extends MediaWikiIntegrationTestCase {
 		$factory = $this->newFactory();
 		$entityTitleLookup = $this->newEntityTitleLookup();
 
-		$id = new PropertyId( 'P42' );
+		$id = new NumericPropertyId( 'P42' );
 		$titles = $entityTitleLookup->getTitlesForIds( [ $id ] );
 
 		$this->assertEquals( 'P42', $titles['P42']->getText() );
@@ -122,7 +122,7 @@ class ContentHandlerEntityTitleLookupTest extends MediaWikiIntegrationTestCase {
 		$this->setService( 'InterwikiLookup', $lookup );
 
 		$entityTitleLookup = $this->newEntityTitleLookup();
-		$titles = $entityTitleLookup->getTitlesForIds( [ new PropertyId( 'P42' ) ] );
+		$titles = $entityTitleLookup->getTitlesForIds( [ new NumericPropertyId( 'P42' ) ] );
 		$this->assertSame(
 			'propertywiki:Special:EntityPage/P42',
 			$titles['P42']->getFullText()
@@ -132,7 +132,7 @@ class ContentHandlerEntityTitleLookupTest extends MediaWikiIntegrationTestCase {
 	public function testGetTitlesForIds_multipleIdenticalIds() {
 		$entityTitleLookup = $this->newEntityTitleLookup();
 
-		$id = new PropertyId( 'P42' );
+		$id = new NumericPropertyId( 'P42' );
 		$titles = $entityTitleLookup->getTitlesForIds( [ $id, $id ] );
 
 		$this->assertCount( 1, $titles );
@@ -143,8 +143,8 @@ class ContentHandlerEntityTitleLookupTest extends MediaWikiIntegrationTestCase {
 		$entityTitleLookup = $this->newEntityTitleLookup();
 
 		$titles = $entityTitleLookup->getTitlesForIds( [
-			new PropertyId( 'P42' ),
-			new PropertyId( 'P43' ),
+			new NumericPropertyId( 'P42' ),
+			new NumericPropertyId( 'P43' ),
 			new ItemId( 'Q42' ),
 			new ItemId( 'Q43' )
 		] );

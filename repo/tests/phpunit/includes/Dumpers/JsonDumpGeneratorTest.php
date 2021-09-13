@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
@@ -275,7 +276,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function idProvider() {
-		$p10 = new PropertyId( 'P10' );
+		$p10 = new NumericPropertyId( 'P10' );
 		$q30 = new ItemId( 'Q30' );
 
 		return [
@@ -333,7 +334,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function typeFilterProvider() {
-		$p10 = new PropertyId( 'P10' );
+		$p10 = new NumericPropertyId( 'P10' );
 		$q30 = new ItemId( 'Q30' );
 
 		return [
@@ -395,12 +396,12 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$ids = [];
 
 		for ( $i = 10; $i < 20; $i++ ) {
-			$ids[] = new PropertyId( "P$i" );
+			$ids[] = new NumericPropertyId( "P$i" );
 			$ids[] = new ItemId( "Q$i" );
 		}
 
 		for ( $i = 50; $i < 101; $i += 10 ) {
-			$ids[] = new PropertyId( "P$i" );
+			$ids[] = new NumericPropertyId( "P$i" );
 			$ids[] = new ItemId( "Q$i" );
 		}
 
@@ -581,7 +582,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$propertyIdParser = $this->createStub( EntityIdParser::class );
 		$propertyIdParser->method( 'parse' )
 			->willReturnCallback( static function ( string $id ) {
-				return new PropertyId( $id );
+				return new NumericPropertyId( $id );
 			} );
 
 		return $propertyIdParser;

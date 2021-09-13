@@ -7,7 +7,7 @@ use ChangesList;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Tests\Hooks\LabelPrefetchHookHandlerTestBase;
@@ -67,9 +67,9 @@ class LabelPrefetchHookHandlerTest extends LabelPrefetchHookHandlerTestBase {
 		];
 
 		$expectedPropertyIds = [
-			new PropertyId( 'P1' ),
-			new PropertyId( 'P2' ),
-			new PropertyId( 'P3' )
+			new NumericPropertyId( 'P1' ),
+			new NumericPropertyId( 'P2' ),
+			new NumericPropertyId( 'P3' )
 		];
 
 		$prefetchingTermLookup = $this->createMock( PrefetchingTermLookup::class );

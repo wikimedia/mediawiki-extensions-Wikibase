@@ -8,7 +8,7 @@ use DataValues\UnDeserializableValue;
 use DataValues\UnknownValue;
 use InvalidArgumentException;
 use ValueValidators\Error;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
@@ -61,9 +61,9 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 			'alphabetic' => 'string'
 		] );
 
-		$p1 = new PropertyId( 'P1' );
-		$p2 = new PropertyId( 'P2' );
-		$p4 = new PropertyId( 'P4' );
+		$p1 = new NumericPropertyId( 'P1' );
+		$p2 = new NumericPropertyId( 'P2' );
+		$p4 = new NumericPropertyId( 'P4' );
 
 		$this->propertyDataTypeLookup = new InMemoryDataTypeLookup();
 		$this->propertyDataTypeLookup->setDataTypeForProperty( $p1, 'numeric' );
@@ -85,8 +85,8 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function provideValidateClaimSnaks() {
-		$p1 = new PropertyId( 'p1' ); // numeric
-		$p2 = new PropertyId( 'p2' ); // alphabetic
+		$p1 = new NumericPropertyId( 'p1' ); // numeric
+		$p2 = new NumericPropertyId( 'p2' ); // alphabetic
 
 		$cases = [];
 
@@ -141,8 +141,8 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function provideValidateReferences() {
-		$p1 = new PropertyId( 'p1' ); // numeric
-		$p2 = new PropertyId( 'p2' ); // alphabetic
+		$p1 = new NumericPropertyId( 'p1' ); // numeric
+		$p2 = new NumericPropertyId( 'p2' ); // alphabetic
 
 		$cases = [];
 
@@ -184,8 +184,8 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function provideValidateReference() {
-		$p1 = new PropertyId( 'p1' ); // numeric
-		$p2 = new PropertyId( 'p2' ); // alphabetic
+		$p1 = new NumericPropertyId( 'p1' ); // numeric
+		$p2 = new NumericPropertyId( 'p2' ); // alphabetic
 
 		$cases = [];
 
@@ -233,10 +233,10 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function provideValidate() {
-		$p1 = new PropertyId( 'P1' ); // numeric
-		$p2 = new PropertyId( 'P2' ); // alphabetic
-		$p3 = new PropertyId( 'P3' ); // bad
-		$p4 = new PropertyId( 'P4' ); // property with bad data type
+		$p1 = new NumericPropertyId( 'P1' ); // numeric
+		$p2 = new NumericPropertyId( 'P2' ); // alphabetic
+		$p3 = new NumericPropertyId( 'P3' ); // bad
+		$p4 = new NumericPropertyId( 'P4' ); // property with bad data type
 
 		$cases = [];
 

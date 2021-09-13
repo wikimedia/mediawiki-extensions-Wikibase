@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractor;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
@@ -55,7 +55,7 @@ class EntityReferenceExtractorDelegatorTest extends TestCase {
 
 	public function testGivenUnknownStatementListProvidingEntityType_usesStatementEntityReferenceExtractor() {
 		$entity = new Item();
-		$expected = [ new PropertyId( 'P123' ), new ItemId( 'Q123' ) ];
+		$expected = [ new NumericPropertyId( 'P123' ), new ItemId( 'Q123' ) ];
 		$statementEntityReferenceExtractor = $this->getMockStatementEntityReferenceExtractor();
 		$statementEntityReferenceExtractor->expects( $this->once() )
 			->method( 'extractEntityIds' )

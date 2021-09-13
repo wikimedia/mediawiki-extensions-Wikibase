@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Validators;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SiteLinkUniquenessValidator;
@@ -61,7 +61,7 @@ class EntityConstraintProviderTest extends \PHPUnit\Framework\TestCase {
 			// Property
 			'for properties' => [
 				'entityType' => Property::ENTITY_TYPE,
-				'entityId' => PropertyId::newFromNumber( 1 ), // irrelevant
+				'entityId' => NumericPropertyId::newFromNumber( 1 ), // irrelevant
 				'expectedValidatorTypes' => []
 			],
 

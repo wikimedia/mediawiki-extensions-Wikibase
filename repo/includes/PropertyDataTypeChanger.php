@@ -4,8 +4,8 @@ namespace Wikibase\Repo;
 
 use InvalidArgumentException;
 use User;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -47,14 +47,14 @@ class PropertyDataTypeChanger {
 	}
 
 	/**
-	 * @param PropertyId $propertyId
+	 * @param NumericPropertyId $propertyId
 	 * @param User $user User to attribute the changes made to.
 	 * @param string $dataTypeId
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws StorageException
 	 */
-	public function changeDataType( PropertyId $propertyId, User $user, $dataTypeId ) {
+	public function changeDataType( NumericPropertyId $propertyId, User $user, $dataTypeId ) {
 		$entityRevision = $this->entityRevisionLookup->getEntityRevision(
 			$propertyId,
 			0,

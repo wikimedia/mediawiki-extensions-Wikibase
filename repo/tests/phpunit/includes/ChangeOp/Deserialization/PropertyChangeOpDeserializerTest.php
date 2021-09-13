@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
 use HashSiteStore;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\StaticContentLanguages;
@@ -32,7 +32,7 @@ class PropertyChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	use LabelsChangeOpDeserializationTester;
 
 	public function getEntity() {
-		return new Property( new PropertyId( 'P100' ), null, 'foo' );
+		return new Property( new NumericPropertyId( 'P100' ), null, 'foo' );
 	}
 
 	public function getChangeOpDeserializer() {
@@ -62,7 +62,7 @@ class PropertyChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$newLabel = 'test-label';
 		$newDescription = 'test-description';
 
-		$otherProperty = new PropertyId( 'P7' );
+		$otherProperty = new NumericPropertyId( 'P7' );
 		$statement = new Statement( new PropertyNoValueSnak( $otherProperty ) );
 		$statementSerializer = WikibaseRepo::getBaseDataModelSerializerFactory()->newStatementSerializer();
 		$statementSerialization = $statementSerializer->serialize( $statement );

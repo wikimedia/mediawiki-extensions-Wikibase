@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Tests\Store;
 use HashBagOStuff;
 use MediaWikiIntegrationTestCase;
 use WANObjectCache;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
@@ -50,7 +50,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 	private function getEntityComposer() {
 		return new EntityIdComposer( [
 			Property::ENTITY_TYPE => function( $repository, $uniquePart ) {
-				return PropertyId::newFromRepositoryAndNumber( $repository, $uniquePart );
+				return NumericPropertyId::newFromRepositoryAndNumber( $repository, $uniquePart );
 			},
 		] );
 	}
@@ -90,7 +90,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 		 */
 		list( $table, $cache, $store, $lookup ) = $this->getServices();
 
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new NumericPropertyId( 'P1' );
 		$p1Info = $this->getInfo();
 		$p1Type = $p1Info[PropertyInfoLookup::KEY_DATA_TYPE];
 		$store->setPropertyInfo( $p1, $p1Info );
@@ -117,7 +117,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 		 */
 		list( $table, $cache, $store, $lookup ) = $this->getServices();
 
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new NumericPropertyId( 'P1' );
 		$p1Info = $this->getInfo();
 		$p1Type = $p1Info[PropertyInfoLookup::KEY_DATA_TYPE];
 		$p1InfoTwo = $this->getInfo( '-2' );
@@ -169,7 +169,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 		 */
 		list( $table, $cache, $store, $lookup ) = $this->getServices();
 
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new NumericPropertyId( 'P1' );
 		$p1Info = $this->getInfo();
 		$p1Type = $p1Info[PropertyInfoLookup::KEY_DATA_TYPE];
 		$store->setPropertyInfo( $p1, $p1Info );
@@ -198,7 +198,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 		list( $table, $cache, $store, $lookup ) = $this->getServices();
 
 		// Store some data
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new NumericPropertyId( 'P1' );
 		$p1Info = $this->getInfo();
 		$p1Type = $p1Info[PropertyInfoLookup::KEY_DATA_TYPE];
 		$store->setPropertyInfo( $p1, $p1Info );
@@ -222,7 +222,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 		list( $table, $cache, $store, $lookup ) = $this->getServices();
 
 		// Store some data
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new NumericPropertyId( 'P1' );
 		$p1Info = $this->getInfo();
 		$p1Type = $p1Info[PropertyInfoLookup::KEY_DATA_TYPE];
 		$store->setPropertyInfo( $p1, $p1Info );

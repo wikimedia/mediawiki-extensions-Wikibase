@@ -8,7 +8,7 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use MediaWikiIntegrationTestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -82,17 +82,17 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 		return [
 			'no change' => [
 				new ClaimDifference(),
-				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
+				new Statement( new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
 				'',
 			],
 			'mainsnak' => [
 				new ClaimDifference(
 					new DiffOpChange(
-						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'bar' ) ),
-						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) )
+						new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'bar' ) ),
+						new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'foo' ) )
 					)
 				),
-				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
+				new Statement( new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
 				'<tr><td colspan="2" class="diff-lineno">property / P1</td>' .
 				'<td colspan="2" class="diff-lineno">property / P1</td></tr>' .
 				'<tr><td class="diff-marker" data-marker="−"></td><td class="diff-deletedline">' .
@@ -107,7 +107,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 						new DiffOpAdd( new PropertyValueSnak( 44, new StringValue( 'v' ) ) ),
 					] )
 				),
-				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
+				new Statement( new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
 				'<tr><td colspan="2" class="diff-lineno"></td>' .
 				'<td colspan="2" class="diff-lineno">property / P1: foo / qualifier</td></tr>' .
 				'<tr><td colspan="2">&nbsp;</td><td class="diff-marker" data-marker="+"></td><td class="diff-addedline">' .
@@ -124,7 +124,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 						] ) ) ),
 					] )
 				),
-				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
+				new Statement( new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
 				'<tr><td colspan="2" class="diff-lineno">property / P1: foo / reference</td>' .
 				'<td colspan="2" class="diff-lineno"></td></tr>' .
 				'<tr><td class="diff-marker" data-marker="−"></td><td class="diff-deletedline">' .
@@ -138,7 +138,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 					null,
 					new DiffOpChange( Statement::RANK_NORMAL, Statement::RANK_PREFERRED )
 				),
-				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
+				new Statement( new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
 				'<tr>'
 				. '<td colspan="2" class="diff-lineno">property / P1: foo / rank</td>'
 				. '<td colspan="2" class="diff-lineno">property / P1: foo / rank</td>'
@@ -155,8 +155,8 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 			'mainsnak and qualifiers' => [
 				new ClaimDifference(
 					new DiffOpChange(
-						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'oldmainsnakvalue' ) ),
-						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) )
+						new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'oldmainsnakvalue' ) ),
+						new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) )
 					),
 					new Diff( [
 						new DiffOpAdd(
@@ -167,7 +167,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 						)
 					] )
 				),
-				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
+				new Statement( new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
 				// mainsnak change
 				'<tr>'
 				. '<td colspan="2" class="diff-lineno">property / P1</td>'
@@ -206,8 +206,8 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 			'mainsnak and references' => [
 				new ClaimDifference(
 					new DiffOpChange(
-						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'oldmainsnakvalue' ) ),
-						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) )
+						new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'oldmainsnakvalue' ) ),
+						new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) )
 					),
 					null,
 					new Diff( [
@@ -219,7 +219,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 						] ) ) )
 					] )
 				),
-				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
+				new Statement( new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
 				// mainsnak change
 				'<tr>'
 				. '<td colspan="2" class="diff-lineno">property / P1</td>'
@@ -258,14 +258,14 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 			'mainsnak and rank' => [
 				new ClaimDifference(
 					new DiffOpChange(
-						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'oldmainsnakvalue' ) ),
-						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) )
+						new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'oldmainsnakvalue' ) ),
+						new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) )
 					),
 					null,
 					null,
 					new DiffOpChange( Statement::RANK_NORMAL, Statement::RANK_PREFERRED )
 				),
-				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
+				new Statement( new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
 				// mainsnak change
 				'<tr><td colspan="2" class="diff-lineno">property / P1</td><td colspan="2" class="diff-lineno">property / P1</td></tr>' .
 				'<tr><td class="diff-marker" data-marker="−"></td><td class="diff-deletedline">' .
@@ -285,14 +285,14 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 			'mainsnak and rank with path' => [
 				new ClaimDifference(
 					new DiffOpChange(
-						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'oldmainsnakvalue' ) ),
-						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) )
+						new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'oldmainsnakvalue' ) ),
+						new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) )
 					),
 					null,
 					null,
 					new DiffOpChange( Statement::RANK_NORMAL, Statement::RANK_PREFERRED )
 				),
-				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
+				new Statement( new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
 				// mainsnak change
 				'<tr><td colspan="2" class="diff-lineno">foo / bar / property / P1</td><td colspan="2" class="diff-lineno">' .
 				'foo / bar / property / P1</td></tr><tr><td class="diff-marker" data-marker="−"></td><td class="diff-deletedline">' .
@@ -355,12 +355,12 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 
 		$visualizer = $this->newClaimDifferenceVisualizer();
 		$claim = new Statement(
-			new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'foo' ) ),
+			new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'foo' ) ),
 			new SnakList( [ new PropertyValueSnak( 50, new StringValue( 'v' ) ) ] ),
 			new ReferenceList( [
 				new Reference(
 					new SnakList( [
-						new PropertyValueSnak( new PropertyId( 'P44' ), new StringValue( 'referencevalue' ) )
+						new PropertyValueSnak( new NumericPropertyId( 'P44' ), new StringValue( 'referencevalue' ) )
 					] ) ) ] ) );
 		$html = $visualizer->visualizeNewClaim( $claim, [ 'fooo' ] );
 
@@ -399,12 +399,12 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 
 		$visualizer = $this->newClaimDifferenceVisualizer();
 		$claim = new Statement(
-			new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'foo' ) ),
+			new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'foo' ) ),
 			new SnakList( [ new PropertyValueSnak( 50, new StringValue( 'v' ) ) ] ),
 			new ReferenceList( [
 				new Reference(
 					new SnakList( [
-						new PropertyValueSnak( new PropertyId( 'P44' ), new StringValue( 'referencevalue' ) )
+						new PropertyValueSnak( new NumericPropertyId( 'P44' ), new StringValue( 'referencevalue' ) )
 					] ) ) ] ) );
 		$html = $visualizer->visualizeRemovedClaim( $claim, [ 'bar' ] );
 

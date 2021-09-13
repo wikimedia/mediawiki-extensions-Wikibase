@@ -6,7 +6,7 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Rdf\NullEntityMentionListener;
@@ -66,7 +66,7 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$writer->about( 'www', 'Q1' );
 
 		$snak = new PropertyValueSnak(
-			new PropertyId( 'P1' ),
+			new NumericPropertyId( 'P1' ),
 			new EntityIdValue( new ItemId( 'Q23' ) )
 		);
 

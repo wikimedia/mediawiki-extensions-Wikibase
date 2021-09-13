@@ -9,7 +9,7 @@ use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Summary;
@@ -138,7 +138,7 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 		$item = new Item();
 
 		$guid = 'guid';
-		$snak = new PropertyValueSnak( new PropertyId( 'P7' ), new StringValue( 'INVALID' ) );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P7' ), new StringValue( 'INVALID' ) );
 		$guidGenerator = new GuidGenerator();
 
 		$error = Error::newError( 'Testing', 'test', 'test-error', [] );

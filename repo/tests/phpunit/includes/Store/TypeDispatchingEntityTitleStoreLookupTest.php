@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Store;
 use MediaWikiCoversValidator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
 use Wikimedia\Assert\PostconditionException;
@@ -32,11 +32,11 @@ class TypeDispatchingEntityTitleStoreLookupTest extends \PHPUnit\Framework\TestC
 		);
 
 		$this->expectException( PostconditionException::class );
-		$lookup->getTitleForId( new PropertyId( 'P1' ) );
+		$lookup->getTitleForId( new NumericPropertyId( 'P1' ) );
 	}
 
 	public function testGivenUnknownEntityType_getTitleForIdForwardsToDefaultService() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$lookup = new TypeDispatchingEntityTitleStoreLookup(
 			[],
 			$this->newDefaultService( $id )
@@ -47,7 +47,7 @@ class TypeDispatchingEntityTitleStoreLookupTest extends \PHPUnit\Framework\TestC
 	}
 
 	public function testGivenCustomEntityType_getTitleForIdInstantiatesCustomService() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$lookup = new TypeDispatchingEntityTitleStoreLookup(
 			[
 				'property' => function ( EntityTitleStoreLookup $defaultService ) use ( $id ) {

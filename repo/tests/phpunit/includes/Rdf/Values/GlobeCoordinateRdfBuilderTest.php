@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Rdf\Values;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Rdf\HashDedupeBag;
@@ -45,7 +45,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://www.wikidata.org/entity/Q2'
 		);
 
-		$snak = new PropertyValueSnak( new PropertyId( 'P7' ), $value );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P7' ), $value );
 
 		// Mare Tranquillitatis
 		$value_moon = new GlobeCoordinateValue(
@@ -54,7 +54,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 				'http://www.wikidata.org/entity/Q405'
 		);
 
-		$snak_moon = new PropertyValueSnak( new PropertyId( 'P7' ), $value_moon );
+		$snak_moon = new PropertyValueSnak( new NumericPropertyId( 'P7' ), $value_moon );
 
 		$data = [
 			'simple' => [
@@ -111,7 +111,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://www.wikidata.org/entity/Q2'
 		);
 
-		$snak2 = new PropertyValueSnak( new PropertyId( 'P7' ), $value2 );
+		$snak2 = new PropertyValueSnak( new NumericPropertyId( 'P7' ), $value2 );
 
 		$data["complex2"] = [
 				$snak2,

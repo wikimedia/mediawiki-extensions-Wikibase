@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Summary;
@@ -32,7 +32,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 		$argLists[] = [ 1234, 'Berlin' ];
 		$argLists[] = [ 'plwiki', 'Warszawa', [ 'FA', 'GA' ] ];
 		$argLists[] = [ 'plwiki', 'Warszawa', [ new ItemId( 'Q42' ), 'FA' ] ];
-		$argLists[] = [ 'plwiki', 'Warszawa', [ new PropertyId( 'P42' ) ] ];
+		$argLists[] = [ 'plwiki', 'Warszawa', [ new NumericPropertyId( 'P42' ) ] ];
 
 		return $argLists;
 	}
