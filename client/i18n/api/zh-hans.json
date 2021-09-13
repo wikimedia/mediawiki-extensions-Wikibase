@@ -4,6 +4,7 @@
 			"GuoPC",
 			"Liuxinyu970226",
 			"Shizhao",
+			"Tranve",
 			"列维劳德"
 		]
 	},
@@ -38,7 +39,7 @@
 	"apihelp-query+description-summary": "获得一个简短的描述（或称副标题），用来解释目标页面的内容。",
 	"apihelp-query+description-extended-description": "描述是纯文本的，在一行上，但在其他方面是任意的（可能包括原始HTML标签，也应该被解释为纯文本）。不得在未转义的HTML中使用它！",
 	"apihelp-query+description-param-prefersource": "首选哪种描述来源（只要有）：",
-	"apihelp-query+description-paramvalue-prefersource-local": "通过页面中wiki文本的<code><nowiki>{{SHORTDESC:...}}</nowiki></code>解析器函数生成的本地描述。",
+	"apihelp-query+description-paramvalue-prefersource-local": "通过页面中wikitext的<code><nowiki>{{SHORTDESC:...}}</nowiki></code>解析器函数生成的本地描述。",
 	"apihelp-query+description-paramvalue-prefersource-central": "来自关联{{WBREPONAME}}项目的中心描述。",
 	"apihelp-query+description-example": "获取页面“London”的描述。",
 	"apihelp-query+description-example-central": "获取页面“London”的描述，首选中心描述（如有）。",

@@ -26,6 +26,7 @@
 			"Vcohen",
 			"Vlad5250",
 			"VoxelJ",
+			"WindEwriX",
 			"Александр Сигачёв",
 			"Туллук",
 			"Умар"
@@ -84,6 +85,7 @@
 	"wikibase-error-serialize-error": "Не удалось сериализовать данные.",
 	"wikibase-error-invalid-entity-id": "Идентификатор «$2» неизвестен системе. Используйте один из действующих идентификаторов сущностей.",
 	"unconnectedpages": "Страницы, не связанные с элементами",
+	"unconnectedpages-summary": "Эта страница содержит список страниц, которые не соединены с элементами данных (в пространствах имён, которые поддерживают связи с элементам). Список отсортирован по убыванию ID страницы, так что самые новые страницы показываются в начале.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|межъязыковая ссылка|межъязыковые ссылки|межъязыковых ссылок}} на странице)",
 	"wikibase-unconnectedpages-submit": "Показать страницы",
 	"pageswithbadges": "Страницы со значками",
@@ -134,6 +136,7 @@
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Я исправил</strong> некорректное значение",
 	"wikibase-client-data-bridge-references-heading": "Примечания",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Вы не вошли в систему",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Редактировать без входа в систему",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Войти или Зарегистрироваться",
 	"wikibase-client-data-bridge-license-heading": "Использование и лицензия",
 	"wikibase-client-data-bridge-license-body": "<p>Изменение этого значения также приведет к его изменению в {{WBREPONAME}} и, возможно, в вики на других языках.</p>\n<p>Нажимая \"{{int:$1}}\", вы соглашаетесь с [$2 условиями использования] и безоговорочно соглашаетесь опубликовать свой вклад в соответствии с [$3 $4].</p>",
@@ -145,5 +148,8 @@
 	"wikibase-client-data-bridge-error-go-back": "Вернуться назад",
 	"wikibase-client-data-bridge-error-retry-save": "Повторить сохранение",
 	"wikibase-client-data-bridge-thank-you-head": "Спасибо за вашу правку!",
-	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Вы не вошли в систему"
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Вы не вошли в систему",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Опубликовать без входа в систему",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Сохранить без входа в систему",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Продолжить редактирование"
 }
