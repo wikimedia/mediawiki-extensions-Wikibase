@@ -15,7 +15,8 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
-use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntityParserOutputGenerator;
+use Wikibase\Repo\FederatedProperties\FederatedPropertiesPrefetchingEntityParserOutputGeneratorDecorator;
+use Wikibase\Repo\FederatedProperties\FederatedPropertiesUiEntityParserOutputGeneratorDecorator;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -155,10 +156,12 @@ class EntityParserOutputGeneratorFactory {
 		);
 
 		if ( WikibaseRepo::getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {
-			$pog = new FederatedPropertiesEntityParserOutputGenerator(
-				$pog,
-				$userLanguage,
-				WikibaseRepo::getFederatedPropertiesServiceFactory()->getApiEntityLookup()
+			$pog = new FederatedPropertiesUiEntityParserOutputGeneratorDecorator(
+				new FederatedPropertiesPrefetchingEntityParserOutputGeneratorDecorator(
+					$pog,
+					WikibaseRepo::getFederatedPropertiesServiceFactory()->getApiEntityLookup()
+				),
+				$userLanguage
 			);
 		}
 
