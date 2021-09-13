@@ -26,8 +26,6 @@ use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ItemParserOutputUpdater;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\Repo\Tests\ParserOutput\EntityParserOutputGeneratorTestBase;
-use Wikibase\View\LocalizedTextProvider;
-use Wikibase\View\Template\TemplateFactory;
 
 /**
  * @covers \Wikibase\Repo\FederatedProperties\FederatedPropertiesEntityParserOutputGenerator
@@ -189,8 +187,6 @@ class FederatedPropertiesEntityParserOutputGeneratorTest extends EntityParserOut
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$entityDataFormatProvider->setAllowedFormats( [ 'json', 'ntriples' ] );
 
-		$entityTitleLookup = $this->getEntityTitleLookupMock();
-
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
 		$repoGroup = $this->createMock( RepoGroup::class );
 
@@ -204,7 +200,7 @@ class FederatedPropertiesEntityParserOutputGeneratorTest extends EntityParserOut
 				new ItemParserOutputUpdater( $statementUpdater ),
 				new ReferencedEntitiesDataUpdater(
 					$this->newEntityReferenceExtractor(),
-					$entityTitleLookup
+					$this->getEntityTitleLookupMock()
 				)
 			];
 		}
@@ -217,10 +213,7 @@ class FederatedPropertiesEntityParserOutputGeneratorTest extends EntityParserOut
 			$this->entityViewFactory,
 			$this->getEntityMetaTagsFactory( $title, $description ),
 			$this->getConfigBuilderMock(),
-			$entityTitleLookup,
 			$this->newLanguageFallbackChain(),
-			TemplateFactory::getDefaultInstance(),
-			$this->createMock( LocalizedTextProvider::class ),
 			$entityDataFormatProvider,
 			$dataUpdaters,
 			Language::factory( $language )

@@ -8,11 +8,8 @@ use ParserOutput;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
-use Wikibase\View\LocalizedTextProvider;
-use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewPlaceHolderEmitter;
 
 /**
@@ -41,24 +38,9 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	private $configBuilder;
 
 	/**
-	 * @var EntityTitleLookup
-	 */
-	private $entityTitleLookup;
-
-	/**
 	 * @var TermLanguageFallbackChain
 	 */
 	private $termLanguageFallbackChain;
-
-	/**
-	 * @var TemplateFactory
-	 */
-	private $templateFactory;
-
-	/**
-	 * @var LocalizedTextProvider
-	 */
-	private $textProvider;
 
 	/**
 	 * @var EntityDataFormatProvider
@@ -71,11 +53,6 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	private $dataUpdaters;
 
 	/**
-	 * @var string
-	 */
-	private $languageCode;
-
-	/**
 	 * @var Language
 	 */
 	private $language;
@@ -84,10 +61,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
-	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param TermLanguageFallbackChain $termLanguageFallbackChain
-	 * @param TemplateFactory $templateFactory
-	 * @param LocalizedTextProvider $textProvider
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param EntityParserOutputUpdater[] $dataUpdaters
 	 * @param Language $language
@@ -96,10 +70,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		DispatchingEntityViewFactory $entityViewFactory,
 		DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
-		EntityTitleLookup $entityTitleLookup,
 		TermLanguageFallbackChain $termLanguageFallbackChain,
-		TemplateFactory $templateFactory,
-		LocalizedTextProvider $textProvider,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		array $dataUpdaters,
 		Language $language
@@ -107,14 +78,10 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityMetaTagsCreatorFactory = $entityMetaTagsCreatorFactory;
 		$this->configBuilder = $configBuilder;
-		$this->entityTitleLookup = $entityTitleLookup;
 		$this->termLanguageFallbackChain = $termLanguageFallbackChain;
-		$this->templateFactory = $templateFactory;
-		$this->textProvider = $textProvider;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->dataUpdaters = $dataUpdaters;
 		$this->language = $language;
-		$this->languageCode = $language->getCode();
 	}
 
 	/**

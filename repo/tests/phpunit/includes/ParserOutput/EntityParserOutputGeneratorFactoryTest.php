@@ -16,7 +16,6 @@ use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
-use Wikibase\View\Template\TemplateFactory;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory
@@ -44,8 +43,6 @@ class EntityParserOutputGeneratorFactoryTest extends MediaWikiIntegrationTestCas
 			$this->createMock( DispatchingEntityMetaTagsCreatorFactory::class ),
 			$this->createMock( EntityTitleLookup::class ),
 			new LanguageFallbackChainFactory(),
-			$this->getMockBuilder( TemplateFactory::class )
-				->disableOriginalConstructor()->getMock(),
 			$this->createMock( EntityDataFormatProvider::class ),
 			new InMemoryDataTypeLookup(),
 			$this->getMockBuilder( EntityReferenceExtractorDelegator::class )
