@@ -856,7 +856,6 @@ return [
 			WikibaseRepo::getEntityMetaTagsCreatorFactory( $services ),
 			WikibaseRepo::getEntityTitleLookup( $services ),
 			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
-			TemplateFactory::getDefaultInstance(),
 			WikibaseRepo::getEntityDataFormatProvider( $services ),
 			// FIXME: Should this be done for all usages of this lookup, or is the impact of
 			// CachingPropertyInfoLookup enough?

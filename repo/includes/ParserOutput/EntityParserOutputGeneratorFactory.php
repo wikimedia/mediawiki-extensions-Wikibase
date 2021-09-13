@@ -17,20 +17,13 @@ use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntityParserOutputGenerator;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
-use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\View\Template\TemplateFactory;
 
 /**
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EntityParserOutputGeneratorFactory {
-
-	/**
-	 * @var TemplateFactory
-	 */
-	private $templateFactory;
 
 	/**
 	 * @var DispatchingEntityViewFactory
@@ -103,7 +96,6 @@ class EntityParserOutputGeneratorFactory {
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
-	 * @param TemplateFactory $templateFactory
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator
@@ -120,7 +112,6 @@ class EntityParserOutputGeneratorFactory {
 		DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		TemplateFactory $templateFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator,
@@ -135,7 +126,6 @@ class EntityParserOutputGeneratorFactory {
 		$this->entityMetaTagsCreatorFactory = $entityMetaTagsCreatorFactory;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
-		$this->templateFactory = $templateFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->entityReferenceExtractorDelegator = $entityReferenceExtractorDelegator;
@@ -152,10 +142,7 @@ class EntityParserOutputGeneratorFactory {
 			$this->entityViewFactory,
 			$this->entityMetaTagsCreatorFactory,
 			new ParserOutputJsConfigBuilder(),
-			$this->entityTitleLookup,
 			$this->getLanguageFallbackChain( $userLanguage ),
-			$this->templateFactory,
-			new MediaWikiLocalizedTextProvider( $userLanguage ),
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
 			$userLanguage

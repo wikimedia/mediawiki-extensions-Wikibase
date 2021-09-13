@@ -20,8 +20,6 @@ use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ItemParserOutputUpdater;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\View\EntityView;
-use Wikibase\View\LocalizedTextProvider;
-use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewContent;
 use Wikibase\View\ViewPlaceHolderEmitter;
 
@@ -228,10 +226,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 			$this->entityViewFactory,
 			$this->getEntityMetaTagsFactory( $title, $description ),
 			$this->getConfigBuilderMock(),
-			$entityTitleLookup,
 			$this->newLanguageFallbackChain(),
-			TemplateFactory::getDefaultInstance(),
-			$this->createMock( LocalizedTextProvider::class ),
 			$entityDataFormatProvider,
 			$dataUpdaters,
 			Language::factory( 'en' )
