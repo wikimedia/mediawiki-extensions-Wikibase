@@ -10,8 +10,8 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -52,10 +52,10 @@ class WikibaseDataAccessTestItemSetUpHelper {
 			return;
 		}
 
-		$stringProperty = $this->getTestProperty( new PropertyId( 'P342' ), 'string', 'LuaTestStringProperty' );
-		$itemProperty = $this->getTestProperty( new PropertyId( 'P456' ), 'wikibase-item', 'LuaTestItemProperty' );
+		$stringProperty = $this->getTestProperty( new NumericPropertyId( 'P342' ), 'string', 'LuaTestStringProperty' );
+		$itemProperty = $this->getTestProperty( new NumericPropertyId( 'P456' ), 'wikibase-item', 'LuaTestItemProperty' );
 		$globeCoordinateProperty = $this->getTestProperty(
-			new PropertyId( 'P625' ),
+			new NumericPropertyId( 'P625' ),
 			'globe-coordinate',
 			'location'
 		);
@@ -69,15 +69,15 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		$statement1->setRank( Statement::RANK_PREFERRED );
 
 		$qualifierSnak1 = new PropertyValueSnak(
-			new PropertyId( 'P342' ),
+			new NumericPropertyId( 'P342' ),
 			new StringValue( 'A qualifier Snak' )
 		);
 		$qualifierSnak2 = new PropertyValueSnak(
-			new PropertyId( 'P342' ),
+			new NumericPropertyId( 'P342' ),
 			new StringValue( 'Moar qualifiers' )
 		);
 		$referenceSnak = new PropertyValueSnak(
-			new PropertyId( 'P342' ),
+			new NumericPropertyId( 'P342' ),
 			new StringValue( 'A reference' )
 		);
 
@@ -145,13 +145,13 @@ class WikibaseDataAccessTestItemSetUpHelper {
 	}
 
 	/**
-	 * @param PropertyId $id
+	 * @param NumericPropertyId $id
 	 * @param string $dataTypeId
 	 * @param string $label
 	 *
 	 * @return Property
 	 */
-	private function getTestProperty( PropertyId $id, $dataTypeId, $label ) {
+	private function getTestProperty( NumericPropertyId $id, $dataTypeId, $label ) {
 		$property = Property::newFromType( $dataTypeId );
 		$property->setId( $id );
 		$property->setLabel( 'de', $label );

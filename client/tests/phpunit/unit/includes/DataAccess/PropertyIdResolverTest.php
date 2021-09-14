@@ -6,8 +6,8 @@ use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Tests\MockPropertyLabelResolver;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -37,7 +37,7 @@ class PropertyIdResolverTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getMockRepository() {
-		$propertyId = new PropertyId( 'P1337' );
+		$propertyId = new NumericPropertyId( 'P1337' );
 
 		$property = Property::newFromType( 'string' );
 		$property->setId( $propertyId );

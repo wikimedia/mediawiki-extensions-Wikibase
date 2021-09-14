@@ -8,7 +8,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\WikibaseSettings;
 use WikiPage;
@@ -58,7 +58,7 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 			->willReturnCallback( static function ( EntityId $id ) {
 				// statement usage is only tracked for existing properties,
 				// so pretend all properties exist
-				return $id instanceof PropertyId;
+				return $id instanceof NumericPropertyId;
 			} );
 		$this->setService( 'WikibaseClient.EntityLookup', $entityLookup );
 

@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
@@ -49,7 +49,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider formatProvider
 	 */
 	public function testRender( $format, $expected ) {
-		$propertyId = new PropertyId( 'P1337' );
+		$propertyId = new NumericPropertyId( 'P1337' );
 		$snaks = [
 			'Q42$1' => new PropertyValueSnak( $propertyId, new StringValue( 'a kitten!' ) ),
 			'Q42$2' => new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) ),
@@ -190,7 +190,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$propertyIdResolver->method( 'resolvePropertyId' )
-			->willReturn( new PropertyId( 'P1337' ) );
+			->willReturn( new NumericPropertyId( 'P1337' ) );
 
 		return $propertyIdResolver;
 	}

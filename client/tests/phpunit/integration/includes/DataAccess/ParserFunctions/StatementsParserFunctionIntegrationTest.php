@@ -21,8 +21,8 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -86,7 +86,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 		$propertyLabelResolver->method( 'getPropertyIdsForLabels' )
 			->with( [ 'LuaTestStringProperty' ] )
 			->willReturn(
-				[ 'LuaTestStringProperty' => new PropertyId( 'P342' ) ]
+				[ 'LuaTestStringProperty' => new NumericPropertyId( 'P342' ) ]
 			);
 
 		$this->setService(
@@ -185,7 +185,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 	}
 
 	public function testStatementsParserFunction_unknownEntityTypeAsValue() {
-		$propertyId = new PropertyId( 'P666' );
+		$propertyId = new NumericPropertyId( 'P666' );
 		$property = new Property( $propertyId, null, 'wikibase-coolentity' );
 
 		$statements = new StatementList( [

@@ -6,7 +6,7 @@ use Language;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\ContentLanguages;
 
 /**
@@ -71,7 +71,7 @@ class WikibaseLuaEntityBindings {
 	}
 
 	/**
-	 * Format the main Snaks belonging to a Statement (which is identified by a PropertyId
+	 * Format the main Snaks belonging to a Statement (which is identified by a NumericPropertyId
 	 * or the label of a Property) as wikitext escaped plain text.
 	 *
 	 * @param string $entityId
@@ -91,7 +91,7 @@ class WikibaseLuaEntityBindings {
 	}
 
 	/**
-	 * Format the main Snaks belonging to a Statement (which is identified by a PropertyId
+	 * Format the main Snaks belonging to a Statement (which is identified by a NumericPropertyId
 	 * or the label of a Property) as rich wikitext.
 	 *
 	 * @param string $entityId
@@ -118,7 +118,7 @@ class WikibaseLuaEntityBindings {
 	 */
 	public function addStatementUsage( $entityId, $propertyId ) {
 		$entityId = $this->entityIdParser->parse( $entityId );
-		$propertyId = new PropertyId( $propertyId );
+		$propertyId = new NumericPropertyId( $propertyId );
 
 		$this->usageAccumulator->addStatementUsage( $entityId, $propertyId );
 	}

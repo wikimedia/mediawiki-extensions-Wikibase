@@ -17,7 +17,7 @@ use Wikibase\Client\Usage\ImplicitDescriptionUsageLookup;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -196,7 +196,7 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 			// This entity ID is irrelevant to ImplicitUsageLookup,
 			// but the inner lookup will return a usage for it.
 			// We will assert that it’s not thrown away.
-			new PropertyId( 'P951' ),
+			new NumericPropertyId( 'P951' ),
 			// For this entity ID, the inner lookup will already return a usage
 			// equal to the implicit usage, so there will be nothing to do.
 			new ItemId( 'Q123' ),

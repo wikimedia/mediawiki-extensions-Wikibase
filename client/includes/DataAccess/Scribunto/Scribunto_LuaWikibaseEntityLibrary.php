@@ -240,7 +240,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Format the main Snaks belonging to a Statement (which is identified by a PropertyId
+	 * Format the main Snaks belonging to a Statement (which is identified by a NumericPropertyId
 	 * or the label of a Property) as wikitext escaped plain text.
 	 *
 	 * @param string $entityId
@@ -276,7 +276,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Format the main Snaks belonging to a Statement (which is identified by a PropertyId
+	 * Format the main Snaks belonging to a Statement (which is identified by a NumericPropertyId
 	 * or the label of a Property) as rich wikitext.
 	 *
 	 * @param string $entityId

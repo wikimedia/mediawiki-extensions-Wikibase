@@ -8,7 +8,7 @@ use Title;
 use Wikibase\Client\Tests\Integration\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\Tests\Mocks\MockClientStore;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
@@ -143,7 +143,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 			->willReturnCallback( function ( array $labels ): array {
 				if ( in_array( 'LuaTestStringProperty', $labels ) ) {
 					return [
-						'LuaTestStringProperty' => new PropertyId( 'P342' )
+						'LuaTestStringProperty' => new NumericPropertyId( 'P342' )
 					];
 				}
 				return [];

@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Unit\DataAccess;
 use Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -48,7 +48,7 @@ class ClientSiteLinkTitleLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function getTitleForIdProvider() {
 		return [
-			[ new PropertyId( 'P1' ), 'enwiki', null ],
+			[ new NumericPropertyId( 'P1' ), 'enwiki', null ],
 			[ new ItemId( 'Q1' ), 'enwiki', null ],
 			[ new ItemId( 'Q2' ), 'enwiki', null ],
 			[ new ItemId( 'Q2' ), 'dewiki', 'Berlin' ],

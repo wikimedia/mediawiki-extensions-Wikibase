@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\MaxReferencedEntityVisitsExhaustedException;
 use Wikibase\DataModel\Services\Lookup\MaxReferenceDepthExhaustedException;
 use Wikibase\DataModel\Services\Lookup\ReferencedEntityIdLookup;
@@ -401,7 +401,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		$getReferencedEntityIdMocker = $referencedEntityIdLookup
 			->expects( $this->once() )
 			->method( 'getReferencedEntityId' )
-			->with( new ItemId( 'Q1453477' ), new PropertyId( 'P1366' ), [ new ItemId( 'Q2013' ) ] );
+			->with( new ItemId( 'Q1453477' ), new NumericPropertyId( 'P1366' ), [ new ItemId( 'Q2013' ) ] );
 
 		if ( $result instanceof Exception ) {
 			$getReferencedEntityIdMocker->willThrowException( $result );
@@ -427,7 +427,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 				$this->newReferencedEntityIdLookupMock(
 					new MaxReferenceDepthExhaustedException(
 						new ItemId( 'Q2013' ),
-						new PropertyId( 'P1366' ),
+						new NumericPropertyId( 'P1366' ),
 						[ new ItemId( 'Q2013' ) ],
 						42
 					)
@@ -438,7 +438,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 				$this->newReferencedEntityIdLookupMock(
 					new MaxReferencedEntityVisitsExhaustedException(
 						new ItemId( 'Q2013' ),
-						new PropertyId( 'P1366' ),
+						new NumericPropertyId( 'P1366' ),
 						[ new ItemId( 'Q2013' ) ],
 						42
 					)
@@ -455,7 +455,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		$this->assertSame(
 			$expected,
 			$this->getWikibaseLanguageIndependentLuaBindings()
-				->getReferencedEntityId( new ItemId( 'Q1453477' ), new PropertyId( 'P1366' ), [ new ItemId( 'Q2013' ) ] )
+				->getReferencedEntityId( new ItemId( 'Q1453477' ), new NumericPropertyId( 'P1366' ), [ new ItemId( 'Q2013' ) ] )
 		);
 	}
 

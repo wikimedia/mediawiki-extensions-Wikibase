@@ -7,7 +7,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 
 /**
  * @covers \Wikibase\Client\Usage\EntityUsageFactory
@@ -24,7 +24,7 @@ class EntityUsageFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function newFromIdentityRoundtripProvider() {
 		return [
 			[ new EntityUsage( new ItemId( 'Q21' ), EntityUsage::ALL_USAGE ) ],
-			[ new EntityUsage( new PropertyId( 'P12' ), EntityUsage::LABEL_USAGE, 'blah' ) ],
+			[ new EntityUsage( new NumericPropertyId( 'P12' ), EntityUsage::LABEL_USAGE, 'blah' ) ],
 		];
 	}
 
