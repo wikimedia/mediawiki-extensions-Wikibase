@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Beunice",
 			"Hangmanwa7id"
 		]
 	},
@@ -8,6 +9,8 @@
 	"wikibase-dataitem": "Élément {{WBREPONAME}}",
 	"wikibase-editlinks": "Changer les liens",
 	"wikibase-editlinkstitle": "Changer les liens interlangue",
+	"wikibase-linkitem-addlinks": "Ajouter des liens",
+	"wikibase-rc-hide-wikidata-hide": "Cacher",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-otherprojects": "Autres projets"
 }
