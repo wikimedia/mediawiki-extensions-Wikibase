@@ -353,14 +353,6 @@ return [
 	 * @note This config options is primarily added for Wikidata transition use-case and can be
 	 * considered temporary. It could be removed in the future with no warning.
 	 *
-	 * @var bool Whether to respond with request language fallback chain for entity stubs in RDF output or all language.
-	 */
-	'tmpUseRequestLanguagesForRdfOutput' => false,
-
-	/**
-	 * @note This config options is primarily added for Wikidata transition use-case and can be
-	 * considered temporary. It could be removed in the future with no warning.
-	 *
 	 * @var bool Whether to serialize empty containers as {} instead of []
 	 * in the json output of wbgetentities for lexemes
 	 */

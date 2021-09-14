@@ -3,26 +3,27 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Rdf;
 
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\ContentLanguages;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
  * @license GPL-2.0-or-later
  */
-class PropertyStubRdfBuilder implements EntityStubRdfBuilder {
+class PropertyStubRdfBuilder implements PrefetchingEntityStubRdfBuilder {
 
 	public const OBJECT_PROPERTY = 'ObjectProperty';
 	private const DATATYPE_PROPERTY = 'DatatypeProperty';
 	private const NO_NORMALIZATION = null;
 
 	/**
-	 * @var TermLookup
+	 * @var PrefetchingTermLookup
 	 */
-	private $termLookup;
+	private $prefetchingLookup;
 
 	/**
 	 * @var PropertyDataTypeLookup
@@ -54,8 +55,10 @@ class PropertyStubRdfBuilder implements EntityStubRdfBuilder {
 	 */
 	private $dataTypes;
 
+	private $idsToPrefetch = [];
+
 	public function __construct(
-		TermLookup $termLookup,
+		PrefetchingTermLookup $prefetchingLookup,
 		PropertyDataTypeLookup $dataTypeLookup,
 		ContentLanguages $termLanguages,
 		RdfVocabulary $vocabulary,
@@ -63,7 +66,7 @@ class PropertyStubRdfBuilder implements EntityStubRdfBuilder {
 		array $dataTypes = [],
 		array $labelPredicates = []
 	) {
-		$this->termLookup = $termLookup;
+		$this->prefetchingLookup = $prefetchingLookup;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->termLanguages = $termLanguages;
 		$this->dataTypes = $dataTypes;
@@ -73,8 +76,9 @@ class PropertyStubRdfBuilder implements EntityStubRdfBuilder {
 	}
 
 	public function addEntityStub( EntityId $entityId ): void {
-		$propertyDescriptions = $this->termLookup->getDescriptions( $entityId, $this->termLanguages->getLanguages() );
-		$propertyLabels = $this->termLookup->getLabels( $entityId, $this->termLanguages->getLanguages() );
+		$this->prefetchEntityStubData();
+		$propertyDescriptions = $this->prefetchingLookup->getDescriptions( $entityId, $this->termLanguages->getLanguages() );
+		$propertyLabels = $this->prefetchingLookup->getLabels( $entityId, $this->termLanguages->getLanguages() );
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 		$entityRepoName = $this->vocabulary->getEntityRepositoryName( $entityId );
 		$entityNamespace = $this->vocabulary->entityNamespaceNames[ $entityRepoName ];
@@ -333,4 +337,24 @@ class PropertyStubRdfBuilder implements EntityStubRdfBuilder {
 		$this->writer->say( 'owl', 'someValuesFrom' )->is( 'owl', 'Thing' );
 	}
 
+	public function markForPrefetchingEntityStub( EntityId $id ): void {
+		$this->idsToPrefetch[$id->getSerialization()] = $id;
+	}
+
+	private function prefetchEntityStubData(): void {
+		if ( $this->idsToPrefetch === [] ) {
+			return;
+		}
+
+		$this->prefetchingLookup->prefetchTerms(
+			array_values( $this->idsToPrefetch ),
+			[
+				TermTypes::TYPE_DESCRIPTION,
+				TermTypes::TYPE_LABEL,
+			],
+			$this->termLanguages->getLanguages()
+		);
+
+		$this->idsToPrefetch = [];
+	}
 }

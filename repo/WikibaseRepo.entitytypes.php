@@ -24,7 +24,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -180,12 +179,8 @@ return [
 			$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions();
 			$labelPredicates = $entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES );
 			$termLookup = WikibaseRepo::getPrefetchingTermLookup();
-			if ( WikibaseRepo::getSettings()->getSetting( 'tmpUseRequestLanguagesForRdfOutput' ) === true ) {
-				$languageFallbackFactory = WikibaseRepo::getLanguageFallbackChainFactory();
-				$languageCodes = $languageFallbackFactory->newFromContext( RequestContext::getMain() )->getFetchLanguageCodes();
-			} else {
-				$languageCodes = WikibaseRepo::getTermsLanguages()->getLanguages();
-			}
+			$languageFallbackFactory = WikibaseRepo::getLanguageFallbackChainFactory();
+			$languageCodes = $languageFallbackFactory->newFromContext( RequestContext::getMain() )->getFetchLanguageCodes();
 
 			return new ItemStubRdfBuilder(
 				$termLookup,
@@ -400,23 +395,17 @@ return [
 			RdfVocabulary $vocabulary,
 			RdfWriter $writer
 		) {
-
 			$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions();
 			$labelPredicates = $entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES );
-			$entityLookup = WikibaseRepo::getEntityLookup();
-			$termLookup = new EntityRetrievingTermLookup( $entityLookup );
+			$prefetchingLookup = WikibaseRepo::getPrefetchingTermLookup();
 			$propertyDataLookup = WikibaseRepo::getPropertyDataTypeLookup();
 			$dataTypes = WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes();
-			if ( WikibaseRepo::getSettings()->getSetting( 'tmpUseRequestLanguagesForRdfOutput' ) === true ) {
-				$languageFallbackFactory = WikibaseRepo::getLanguageFallbackChainFactory();
-				$languageCodes = $languageFallbackFactory->newFromContext( RequestContext::getMain() )->getFetchLanguageCodes();
-				$termsLanguages = new StaticContentLanguages( $languageCodes );
-			} else {
-				$termsLanguages = WikibaseRepo::getTermsLanguages();
-			}
+			$languageFallbackFactory = WikibaseRepo::getLanguageFallbackChainFactory();
+			$languageCodes = $languageFallbackFactory->newFromContext( RequestContext::getMain() )->getFetchLanguageCodes();
+			$termsLanguages = new StaticContentLanguages( $languageCodes );
 
 			return new PropertyStubRdfBuilder(
-				$termLookup,
+				$prefetchingLookup,
 				$propertyDataLookup,
 				$termsLanguages,
 				$vocabulary,

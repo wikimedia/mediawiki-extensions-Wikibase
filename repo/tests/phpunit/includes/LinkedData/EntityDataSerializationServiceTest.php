@@ -429,7 +429,6 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		$inMemoryTermLookup->setData( [ $this->getMockRepository()->getEntity( $p5 ) ] );
 		$inMemoryTermLookup->setData( [ $this->getMockRepository()->getEntity( $q23 ) ] );
 		$this->setService( 'WikibaseRepo.PrefetchingTermLookup', $inMemoryTermLookup );
-		$this->setService( 'WikibaseRepo.EntityLookup', $this->getMockRepository() );
 		$service = $this->newService();
 		list( $data, $mimeType ) = $service->getSerializedData(
 			$format,

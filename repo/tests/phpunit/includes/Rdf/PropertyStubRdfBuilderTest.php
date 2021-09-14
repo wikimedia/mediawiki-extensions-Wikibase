@@ -67,7 +67,7 @@ class PropertyStubRdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$this->writer = $this->getTestData()->getNTriplesWriter();
 		$this->vocabulary = $this->getTestData()->getVocabulary();
 		$this->dataTypeLookup = $this->getPropertyDataTypeLookup();
-		$this->termLookup = new InMemoryPrefetchingTermLookup();
+		$this->termLookup = new InMemoryPrefetchingTermLookup( false );
 		$this->termsLanguages = $this->getContentLanguages();
 	}
 
@@ -126,6 +126,8 @@ class PropertyStubRdfBuilderTest extends MediaWikiIntegrationTestCase {
 			[],
 			[]
 		);
+
+		$builder->markForPrefetchingEntityStub( $propertyId );
 
 		$builder->addEntityStub( $propertyId );
 
