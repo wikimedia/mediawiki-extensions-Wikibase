@@ -173,6 +173,18 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $expected, $row );
 	}
 
+	public function testDeleteChangesByChangeIds(): void {
+		$factory = $this->getEntityChangeFactory();
+		$change = $factory->newForEntity( EntityChange::ADD, new ItemId( 'Q21389475' ) );
+		$store = $this->newSqlChangeStore();
+		$store->saveChange( $change );
+
+		$store->deleteChangesByChangeIds( [ $change->getId() ] );
+
+		$res = $this->db->select( 'wb_changes', '*', [], __METHOD__ );
+		$this->assertSame( 0, $res->numRows(), 'row count' );
+	}
+
 	private function getEntityChangeFactory() {
 		$changeClasses = [
 			Item::ENTITY_TYPE => ItemChange::class,
