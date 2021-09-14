@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use MediaWiki\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use WANObjectCache;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 
 /**
  * Implementation of PropertyInfoStore wrapping the instance modifying the local
@@ -79,12 +79,12 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 	/**
 	 * @see PropertyInfoStore::setPropertyInfo
 	 *
-	 * @param PropertyId $propertyId
+	 * @param NumericPropertyId $propertyId
 	 * @param array $info
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function setPropertyInfo( PropertyId $propertyId, array $info ) {
+	public function setPropertyInfo( NumericPropertyId $propertyId, array $info ) {
 		if ( !isset( $info[ PropertyInfoLookup::KEY_DATA_TYPE ] ) ) {
 			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoLookup::KEY_DATA_TYPE );
 		}
@@ -118,11 +118,11 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 	/**
 	 * @see PropertyInfoStore::removePropertyInfo
 	 *
-	 * @param PropertyId $propertyId
+	 * @param NumericPropertyId $propertyId
 	 *
 	 * @return bool
 	 */
-	public function removePropertyInfo( PropertyId $propertyId ) {
+	public function removePropertyInfo( NumericPropertyId $propertyId ) {
 		$id = $propertyId->getSerialization();
 
 		// update primary store
@@ -165,7 +165,7 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		);
 	}
 
-	private function getSinglePropertyCacheKey( PropertyId $propertyId ) {
+	private function getSinglePropertyCacheKey( NumericPropertyId $propertyId ) {
 		return $this->cache->makeGlobalKey(
 			self::CACHE_CLASS,
 			$this->cacheKeyGroup,
@@ -177,7 +177,7 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		$this->cache->delete( $this->getFullTableCacheKey() );
 	}
 
-	private function deleteCacheKeyForProperty( PropertyId $propertyId ) {
+	private function deleteCacheKeyForProperty( NumericPropertyId $propertyId ) {
 		$this->cache->delete( $this->getSinglePropertyCacheKey( $propertyId ) );
 	}
 

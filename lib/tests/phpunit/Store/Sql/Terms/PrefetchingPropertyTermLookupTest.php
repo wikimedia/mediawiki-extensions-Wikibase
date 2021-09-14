@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -36,10 +36,10 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiIntegrationTestCase {
 	/** @var PrefetchingPropertyTermLookup */
 	private $lookup;
 
-	/** @var PropertyId */
+	/** @var NumericPropertyId */
 	private $p1;
 
-	/** @var PropertyId */
+	/** @var NumericPropertyId */
 	private $p2;
 
 	protected function setUp(): void {
@@ -81,7 +81,7 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiIntegrationTestCase {
 			$termIdsStore,
 			new StringNormalizer()
 		);
-		$this->p1 = new PropertyId( 'P1' );
+		$this->p1 = new NumericPropertyId( 'P1' );
 		$propertyTermStoreWriter->storeTerms(
 			$this->p1,
 			new Fingerprint(
@@ -90,7 +90,7 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiIntegrationTestCase {
 				new AliasGroupList( [ new AliasGroup( 'en', [ 'P1' ] ) ] )
 			)
 		);
-		$this->p2 = new PropertyId( 'P2' );
+		$this->p2 = new NumericPropertyId( 'P2' );
 		$propertyTermStoreWriter->storeTerms(
 			$this->p2,
 			new Fingerprint(

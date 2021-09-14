@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\TermCacheKeyBuilder;
 
 /**
@@ -30,12 +30,12 @@ class TermCacheKeyBuilderTest extends TestCase {
 
 	public function cacheKeyParamsProvider() {
 		yield [ new ItemId( 'Q123' ), 777, 'en', 'label', 'Q123_777_en_label' ];
-		yield [ new PropertyId( 'P666' ), 789, 'de', 'alias', 'P666_789_de_alias' ];
-		yield [ new PropertyId( 'reponame:P666' ), 789, 'de', 'alias', 'reponame_P666_789_de_alias' ];
-		yield [ new PropertyId( 'P666' ), 789, 'de()', 'alias', 'P666_789_de___alias' ];
-		yield [ new PropertyId( 'P666' ), 789, 'de{}', 'alias', 'P666_789_de___alias' ];
-		yield [ new PropertyId( 'P666' ), 789, 'de\/', 'alias', 'P666_789_de___alias' ];
-		yield [ new PropertyId( 'P666' ), 789, 'de@', 'alias', 'P666_789_de__alias' ];
+		yield [ new NumericPropertyId( 'P666' ), 789, 'de', 'alias', 'P666_789_de_alias' ];
+		yield [ new NumericPropertyId( 'reponame:P666' ), 789, 'de', 'alias', 'reponame_P666_789_de_alias' ];
+		yield [ new NumericPropertyId( 'P666' ), 789, 'de()', 'alias', 'P666_789_de___alias' ];
+		yield [ new NumericPropertyId( 'P666' ), 789, 'de{}', 'alias', 'P666_789_de___alias' ];
+		yield [ new NumericPropertyId( 'P666' ), 789, 'de\/', 'alias', 'P666_789_de___alias' ];
+		yield [ new NumericPropertyId( 'P666' ), 789, 'de@', 'alias', 'P666_789_de__alias' ];
 	}
 
 }

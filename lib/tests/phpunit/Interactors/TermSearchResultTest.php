@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Interactors;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
 
@@ -30,7 +30,7 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 			[
 				new Term( 'en-gb', 'FooText' ),
 				'description',
-				new PropertyId( 'P777' ),
+				new NumericPropertyId( 'P777' ),
 				null,
 				null,
 				[ 'datatype' => 'some datatype' ]
@@ -38,7 +38,7 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 			[
 				new Term( 'en-gb', 'FooText' ),
 				'description',
-				new PropertyId( 'foo:P777' ),
+				new NumericPropertyId( 'foo:P777' ),
 				null,
 				null,
 				[ 'datatype' => 'some datatype' ]

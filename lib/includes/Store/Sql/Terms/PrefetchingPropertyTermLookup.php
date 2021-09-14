@@ -3,8 +3,8 @@
 declare( strict_types = 1 );
 namespace Wikibase\Lib\Store\Sql\Terms;
 
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * A {@link PrefetchingTermLookup} that only supports properties,
@@ -20,7 +20,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 class PrefetchingPropertyTermLookup extends PrefetchingEntityTermLookupBase {
 
 	/** @var string */
-	protected $entityIdClass = PropertyId::class;
+	protected $entityIdClass = NumericPropertyId::class;
 	/** @var string */
 	protected $statsPrefix = 'PrefetchingPropertyTermLookup';
 

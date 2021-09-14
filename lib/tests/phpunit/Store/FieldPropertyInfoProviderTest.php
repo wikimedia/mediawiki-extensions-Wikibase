@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
@@ -21,7 +21,7 @@ class FieldPropertyInfoProviderTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideGetPropertyInfo
 	 */
 	public function testGetPropertyInfo( $info, $key, $expected ) {
-		$propertyId = new PropertyId( 'P1' );
+		$propertyId = new NumericPropertyId( 'P1' );
 
 		$lookup = $this->createMock( PropertyInfoLookup::class );
 		$lookup->expects( $this->once() )

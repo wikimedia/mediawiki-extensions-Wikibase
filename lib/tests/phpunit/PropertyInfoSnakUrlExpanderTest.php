@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\PropertyInfoSnakUrlExpander;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
@@ -24,12 +24,12 @@ use Wikimedia\Assert\ParameterTypeException;
 class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideExpandUrl() {
-		$p66 = new PropertyId( 'P66' );
-		$p2 = new PropertyId( 'P2' );
-		$p3 = new PropertyId( 'P3' );
-		$p4 = new PropertyId( 'P4' );
-		$p5 = new PropertyId( 'P5' );
-		$p523 = new PropertyId( 'P523' );
+		$p66 = new NumericPropertyId( 'P66' );
+		$p2 = new NumericPropertyId( 'P2' );
+		$p3 = new NumericPropertyId( 'P3' );
+		$p4 = new NumericPropertyId( 'P4' );
+		$p5 = new NumericPropertyId( 'P5' );
+		$p523 = new NumericPropertyId( 'P523' );
 
 		$infoLookup = new MockPropertyInfoLookup( [
 			$p2->getSerialization() => [
@@ -110,8 +110,8 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'bad value type' => [
 				new PropertyValueSnak(
-					new PropertyId( 'P7' ),
-					new EntityIdValue( new PropertyId( 'P18' ) )
+					new NumericPropertyId( 'P7' ),
+					new EntityIdValue( new NumericPropertyId( 'P18' ) )
 				)
 			],
 		];

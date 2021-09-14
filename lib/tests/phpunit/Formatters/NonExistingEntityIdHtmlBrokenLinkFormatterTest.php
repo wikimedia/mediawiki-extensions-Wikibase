@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Formatters\NonExistingEntityIdHtmlBrokenLinkFormatter;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
@@ -32,7 +32,7 @@ class NonExistingEntityIdHtmlBrokenLinkFormatterTest extends MediaWikiIntegratio
 			. '(word-separator)<span class="wb-entity-undefinedinfo">(parentheses: (somePrefix-item))</span>'
 		];
 		yield [
-			new PropertyId( 'P99' ),
+			new NumericPropertyId( 'P99' ),
 			'<a title="(red-link-title: someTitle)" href="http://someurl.com" class="new">P99</a>'
 			. '(word-separator)<span class="wb-entity-undefinedinfo">(parentheses: (somePrefix-property))</span>'
 		];

@@ -11,7 +11,7 @@ use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -57,7 +57,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 
 	public function testGetEntityPrefetcherReturnsServiceBufferingDataOfSourceEntities() {
 		$itemId = new ItemId( 'Q200' );
-		$propertyId = new PropertyId( 'P500' );
+		$propertyId = new NumericPropertyId( 'P500' );
 
 		$itemPrefetcher = new EntityPrefetcherSpy();
 
@@ -84,7 +84,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 
 	public function testGetEntityPrefetcherReturnsServiceThatDoesNotPrefetchEntitiesNotConfiguredInSources() {
 		$itemId = new ItemId( 'Q200' );
-		$propertyId = new PropertyId( 'P500' );
+		$propertyId = new NumericPropertyId( 'P500' );
 
 		$itemPrefetcher = new EntityPrefetcherSpy();
 
@@ -114,7 +114,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 	}
 
 	public function testGetPropertyInfoLookupReturnsPropertyDataAccessingService() {
-		$propertyId = new PropertyId( 'P6' );
+		$propertyId = new NumericPropertyId( 'P6' );
 
 		$propertyLookup = new MockPropertyInfoLookup();
 		$propertyLookup->addPropertyInfo( $propertyId, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );

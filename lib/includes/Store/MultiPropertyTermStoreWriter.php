@@ -39,6 +39,7 @@ class MultiPropertyTermStoreWriter implements PropertyTermStoreWriter {
 	}
 
 	public function storeTerms( PropertyId $propertyId, Fingerprint $terms ) {
+ // TODO: Change to NumericPropertyId after data-model is updated
 		$firstException = null;
 		foreach ( $this->propertyTermStoreWriters as $propertyTermStoreWriter ) {
 			try {
@@ -55,6 +56,7 @@ class MultiPropertyTermStoreWriter implements PropertyTermStoreWriter {
 	}
 
 	public function deleteTerms( PropertyId $propertyId ) {
+ // TODO: Change to NumericPropertyId after data-model is updated
 		$firstException = null;
 		foreach ( $this->propertyTermStoreWriters as $propertyTermStoreWriter ) {
 			try {

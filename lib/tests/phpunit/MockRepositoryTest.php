@@ -7,8 +7,8 @@ use User;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityRevision;
@@ -41,8 +41,8 @@ class MockRepositoryTest extends TestCase {
 		$q23 = new ItemId( 'q23' );
 		$q42 = new ItemId( 'q42' );
 
-		$p23 = new PropertyId( 'p23' );
-		$p42 = new PropertyId( 'p42' );
+		$p23 = new NumericPropertyId( 'p23' );
+		$p42 = new NumericPropertyId( 'p42' );
 
 		$item = new Item( $q23 );
 		$this->repo->putEntity( $item );
@@ -75,7 +75,7 @@ class MockRepositoryTest extends TestCase {
 		// set up a property
 		$prop = Property::newFromType( 'string' );
 		$prop->setLabel( 'en', 'foo' );
-		$prop->setId( PropertyId::newFromNumber( $itemId->getNumericId() ) ); // same numeric id, different prefix
+		$prop->setId( NumericPropertyId::newFromNumber( $itemId->getNumericId() ) ); // same numeric id, different prefix
 
 		$propId = $prop->getId();
 		$this->repo->putEntity( $prop );
@@ -114,7 +114,7 @@ class MockRepositoryTest extends TestCase {
 		// set up a property
 		$prop = Property::newFromType( 'string' );
 		$prop->setLabel( 'en', 'foo' );
-		$prop->setId( PropertyId::newFromNumber( $itemId->getNumericId() ) ); // same numeric id, different prefix
+		$prop->setId( NumericPropertyId::newFromNumber( $itemId->getNumericId() ) ); // same numeric id, different prefix
 
 		$propId = $prop->getId();
 		$this->repo->putEntity( $prop );
@@ -301,7 +301,7 @@ class MockRepositoryTest extends TestCase {
 		$three->setLabel( 'de', 'drei' );
 		$three->setDescription( 'en', 'the third' );
 
-		$prop = new Property( new PropertyId( 'P4' ), null, 'string' );
+		$prop = new Property( new NumericPropertyId( 'P4' ), null, 'string' );
 		$prop->setLabel( 'en', 'property!' );
 
 		$this->repo->putEntity( $one, 1001 );

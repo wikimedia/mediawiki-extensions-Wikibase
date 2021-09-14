@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use MediaWikiIntegrationTestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
@@ -30,14 +30,14 @@ class MockPropertyInfoLookupTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertSame(
 			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
-			$lookup->getPropertyInfo( new PropertyId( 'P23' ) )
+			$lookup->getPropertyInfo( new NumericPropertyId( 'P23' ) )
 		);
 	}
 
 	public function testGivenUnknownPropertyId_getPropertyInfoReturnsNull() {
 		$lookup = $this->newMockPropertyInfoLookup();
 
-		$this->assertNull( $lookup->getPropertyInfo( new PropertyId( 'P32' ) ) );
+		$this->assertNull( $lookup->getPropertyInfo( new NumericPropertyId( 'P32' ) ) );
 	}
 
 	public function testGetAllPropertyInfo() {
@@ -75,7 +75,7 @@ class MockPropertyInfoLookupTest extends MediaWikiIntegrationTestCase {
 
 	public function testAddPropertyInfo() {
 		$lookup = $this->newMockPropertyInfoLookup();
-		$propertyId = new PropertyId( 'P234' );
+		$propertyId = new NumericPropertyId( 'P234' );
 
 		$this->assertNull( $lookup->getPropertyInfo( $propertyId ) );
 

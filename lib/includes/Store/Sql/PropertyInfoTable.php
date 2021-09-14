@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -185,13 +186,13 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 	/**
 	 * @see PropertyInfoStore::setPropertyInfo
 	 *
-	 * @param PropertyId $propertyId
+	 * @param NumericPropertyId $propertyId
 	 * @param array $info
 	 *
 	 * @throws DBError
 	 * @throws InvalidArgumentException
 	 */
-	public function setPropertyInfo( PropertyId $propertyId, array $info ) {
+	public function setPropertyInfo( NumericPropertyId $propertyId, array $info ) {
 		if ( !isset( $info[ PropertyInfoLookup::KEY_DATA_TYPE ] ) ) {
 			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoLookup::KEY_DATA_TYPE );
 		}
@@ -218,13 +219,13 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 	/**
 	 * @see PropertyInfoStore::removePropertyInfo
 	 *
-	 * @param PropertyId $propertyId
+	 * @param NumericPropertyId $propertyId
 	 *
 	 * @throws DBError
 	 * @throws InvalidArgumentException
 	 * @return bool
 	 */
-	public function removePropertyInfo( PropertyId $propertyId ) {
+	public function removePropertyInfo( NumericPropertyId $propertyId ) {
 		$this->assertCanWritePropertyInfo();
 
 		$dbw = $this->getWriteConnection();

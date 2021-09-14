@@ -42,7 +42,7 @@ class EntityContentDataCodecTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function entityIdProvider() {
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new PropertyId( 'P1' ); // TODO: Change to NumericPropertyId after data-model is updated
 		$q11 = new ItemId( 'Q11' );
 
 		return [

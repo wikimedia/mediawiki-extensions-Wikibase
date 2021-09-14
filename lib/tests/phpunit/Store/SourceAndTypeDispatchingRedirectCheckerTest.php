@@ -9,7 +9,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataAccess\Tests\NewEntitySource;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingRedirectChecker;
@@ -37,7 +37,7 @@ class SourceAndTypeDispatchingRedirectCheckerTest extends TestCase {
 	}
 
 	public function testGivenNoRedirectCheckerDefinedForEntityType_throwsException() {
-		$entityId = new PropertyId( 'P123' );
+		$entityId = new NumericPropertyId( 'P123' );
 
 		$this->callbacks['some-other-source']['property'] = $this->newNeverCalledMockChecker();
 
@@ -53,7 +53,7 @@ class SourceAndTypeDispatchingRedirectCheckerTest extends TestCase {
 	}
 
 	public function testGivenRedirectCheckerDefinedForEntitySourceAndType_usesRespectiveRedirectChecker() {
-		$entityId = new PropertyId( 'P321' );
+		$entityId = new NumericPropertyId( 'P321' );
 		$isRedirect = true;
 		$sourceName = 'wikidorta';
 

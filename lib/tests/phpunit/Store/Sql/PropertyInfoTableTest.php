@@ -5,8 +5,8 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 
 use InvalidArgumentException;
 use MediaWikiIntegrationTestCase;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -51,18 +51,18 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 
 		$this->expectException( InvalidArgumentException::class );
 
-		$table->setPropertyInfo( new PropertyId( 'P123' ), [ 'foo' => 'bar' ] );
+		$table->setPropertyInfo( new NumericPropertyId( 'P123' ), [ 'foo' => 'bar' ] );
 	}
 
 	public function testGivenUnknownPropertyId_getPropertyInfoReturnsNull() {
 		$table = $this->newPropertyInfoTable();
 
-		$this->assertNull( $table->getPropertyInfo( new PropertyId( 'P123' ) ) );
+		$this->assertNull( $table->getPropertyInfo( new NumericPropertyId( 'P123' ) ) );
 	}
 
 	public function testGivenKnownPropertyId_getPropertyInfoReturnsTheInfo() {
 		$table = $this->newPropertyInfoTable();
-		$propertyId = new PropertyId( 'P123' );
+		$propertyId = new NumericPropertyId( 'P123' );
 
 		$table->setPropertyInfo( $propertyId, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ] );
 
@@ -81,11 +81,11 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 	public function testGivenSomeProperties_getAllPropertyInfoReturnsAllInfo() {
 		$table = $this->newPropertyInfoTable();
 		$table->setPropertyInfo(
-			new PropertyId( 'P123' ),
+			new NumericPropertyId( 'P123' ),
 			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ]
 		);
 		$table->setPropertyInfo(
-			new PropertyId( 'P456' ),
+			new NumericPropertyId( 'P456' ),
 			[ PropertyInfoLookup::KEY_DATA_TYPE => 'external-id', PropertyInfoLookup::KEY_FORMATTER_URL => 'http://foo.bar/$1' ]
 		);
 
@@ -104,7 +104,7 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 	public function testGivenDataTypeNotUsedInProperties_getPropertyInfoForDataTypeReturnsEmptyList() {
 		$table = $this->newPropertyInfoTable();
 		$table->setPropertyInfo(
-			new PropertyId( 'P123' ),
+			new NumericPropertyId( 'P123' ),
 			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ]
 		);
 
@@ -114,11 +114,11 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 	public function testGivenDataTypeUsedInSomeProperties_getPropertyInfoForDataTypeReturnsInfoForRelevantOnes() {
 		$table = $this->newPropertyInfoTable();
 		$table->setPropertyInfo(
-			new PropertyId( 'P123' ),
+			new NumericPropertyId( 'P123' ),
 			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ]
 		);
 		$table->setPropertyInfo(
-			new PropertyId( 'P456' ),
+			new NumericPropertyId( 'P456' ),
 			[ PropertyInfoLookup::KEY_DATA_TYPE => 'external-id', PropertyInfoLookup::KEY_FORMATTER_URL => 'http://foo.bar/$1' ]
 		);
 
@@ -135,7 +135,7 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 
 	public function testGivenKnownPropertyId_removePropertyInfoRemovesTheEntryAndReturnsTrue() {
 		$table = $this->newPropertyInfoTable();
-		$propertyId = new PropertyId( 'P123' );
+		$propertyId = new NumericPropertyId( 'P123' );
 
 		$table->setPropertyInfo( $propertyId, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
 
@@ -151,7 +151,7 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 
 	public function testGivenUnknownPropertyId_removePropertyInfoReturnsFalse() {
 		$table = $this->newPropertyInfoTable();
-		$propertyId = new PropertyId( 'P123' );
+		$propertyId = new NumericPropertyId( 'P123' );
 
 		$this->assertNull( $table->getPropertyInfo( $propertyId ) );
 
@@ -163,7 +163,7 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 	public function testSettingAndRemovingPropertyInfoIsPersistent() {
 		$tableOne = $this->newPropertyInfoTable();
 		$tableTwo = $this->newPropertyInfoTable();
-		$propertyId = new PropertyId( 'P123' );
+		$propertyId = new NumericPropertyId( 'P123' );
 
 		$this->assertNull( $tableOne->getPropertyInfo( $propertyId ) );
 		$this->assertNull( $tableTwo->getPropertyInfo( $propertyId ) );
@@ -188,19 +188,19 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 	public function testGivenNonWriting_setPropertyInfoThrowsException() {
 		$infoTable = $this->newPropertyInfoTable( false );
 		$this->expectException( InvalidArgumentException::class );
-		$infoTable->setPropertyInfo( new PropertyId( 'P1' ), [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
+		$infoTable->setPropertyInfo( new NumericPropertyId( 'P1' ), [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
 	}
 
 	public function testGivenNonWriting_removePropertyInfoThrowsException() {
 		$infoTable = $this->newPropertyInfoTable( false );
 		$this->expectException( InvalidArgumentException::class );
-		$infoTable->removePropertyInfo( new PropertyId( 'P1' ) );
+		$infoTable->removePropertyInfo( new NumericPropertyId( 'P1' ) );
 	}
 
 	private function getEntityComposer() {
 		return new EntityIdComposer( [
 			Property::ENTITY_TYPE => function( $repository, $uniquePart ) {
-				return PropertyId::newFromRepositoryAndNumber( $repository, $uniquePart );
+				return NumericPropertyId::newFromRepositoryAndNumber( $repository, $uniquePart );
 			},
 		] );
 	}

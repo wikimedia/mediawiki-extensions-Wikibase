@@ -10,7 +10,7 @@ use MediaWikiIntegrationTestCase;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -68,7 +68,7 @@ class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 		$formatter = new ErrorHandlingSnakFormatter( $this->getSnakFormatter(), null, null );
 
 		$snak = new PropertyNoValueSnak(
-			new PropertyId( 'P1' )
+			new NumericPropertyId( 'P1' )
 		);
 
 		$text = $formatter->formatSnak( $snak );
@@ -76,7 +76,7 @@ class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function provideFormatSnak_error() {
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new NumericPropertyId( 'P1' );
 
 		$valueFormatter = $this->getValueFormatter();
 
@@ -106,13 +106,13 @@ class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 			'PropertyDataTypeLookupException' => [
 				'<span class="error wb-format-error">(wikibase-snakformatter-property-not-found: P1)</span>',
 				new PropertyValueSnak( $p1, new StringValue( 'foo' ) ),
-				new PropertyDataTypeLookupException( new PropertyId( 'P1' ) ),
+				new PropertyDataTypeLookupException( new NumericPropertyId( 'P1' ) ),
 
 			],
 			'PropertyDataTypeLookupException+fallback' => [
 				'VALUE <span class="error wb-format-error">(wikibase-snakformatter-property-not-found: P1)</span>',
 				new PropertyValueSnak( $p1, new StringValue( 'foo' ) ),
-				new PropertyDataTypeLookupException( new PropertyId( 'P1' ) ),
+				new PropertyDataTypeLookupException( new NumericPropertyId( 'P1' ) ),
 				$valueFormatter
 			],
 			'FormattingException' => [

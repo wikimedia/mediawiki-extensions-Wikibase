@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Serialization;
 
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Serialization\CallbackFactory;
 
@@ -95,7 +95,7 @@ class CallbackFactoryTest extends \PHPUnit\Framework\TestCase {
 		$parser->expects( $this->once() )
 			->method( 'parse' )
 			->willReturnCallback( function ( string $id ) {
-				return new PropertyId( $id );
+				return new NumericPropertyId( $id );
 			} );
 
 		return $parser;

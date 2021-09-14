@@ -7,8 +7,8 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Formatters\EntityIdLinkFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
@@ -28,8 +28,8 @@ class EntityIdLinkFormatterTest extends \PHPUnit\Framework\TestCase {
 				new ItemId( 'Q23' ),
 				'[[ITEM-TEST--Q23|Q23]]'
 			],
-			'PropertyId' => [
-				new PropertyId( 'P23' ),
+			'NumericPropertyId' => [
+				new NumericPropertyId( 'P23' ),
 				'[[PROPERTY-TEST--P23|P23]]'
 			],
 		];

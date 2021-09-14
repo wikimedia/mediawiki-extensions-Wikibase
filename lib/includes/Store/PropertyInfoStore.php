@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikimedia\Rdbms\DBError;
 
 /**
@@ -22,23 +22,23 @@ interface PropertyInfoStore {
 	 *
 	 * @note All well known fields MUST be set in $info.
 	 *
-	 * @param PropertyId $propertyId
+	 * @param NumericPropertyId $propertyId
 	 * @param array $info
 	 *
 	 * @throws StorageException
 	 * @throws DBError
 	 */
-	public function setPropertyInfo( PropertyId $propertyId, array $info );
+	public function setPropertyInfo( NumericPropertyId $propertyId, array $info );
 
 	/**
 	 * Remove the info entry for the given property.
 	 *
-	 * @param PropertyId $propertyId
+	 * @param NumericPropertyId $propertyId
 	 *
 	 * @return bool true iff something was deleted
 	 * @throws StorageException
 	 * @throws DBError
 	 */
-	public function removePropertyInfo( PropertyId $propertyId );
+	public function removePropertyInfo( NumericPropertyId $propertyId );
 
 }

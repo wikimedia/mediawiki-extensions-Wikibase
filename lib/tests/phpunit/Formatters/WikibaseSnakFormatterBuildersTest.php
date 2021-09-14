@@ -6,7 +6,7 @@ use DataValues\StringValue;
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
@@ -33,7 +33,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit\Framework\TestCase {
 	 * @return WikibaseSnakFormatterBuilders
 	 */
 	private function getWikibaseSnakFormatterBuilders() {
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new NumericPropertyId( 'P1' );
 
 		$valueFormatterBuilders = $this->getMockBuilder( WikibaseValueFormatterBuilders::class )
 			->disableOriginalConstructor()
@@ -63,7 +63,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function provideNewExternalIdentifierFormatter() {
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new NumericPropertyId( 'P1' );
 		$snak = new PropertyValueSnak( $p1, new StringValue( 'AB123' ) );
 
 		return [

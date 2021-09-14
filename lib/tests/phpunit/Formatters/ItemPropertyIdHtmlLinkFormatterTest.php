@@ -9,7 +9,7 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Formatters\ItemPropertyIdHtmlLinkFormatter;
 use Wikibase\Lib\Formatters\NonExistingEntityIdHtmlBrokenLinkFormatter;
@@ -274,7 +274,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->givenPropertyExists( 'P42' );
 
 		$entityIdHtmlLinkFormatter = $this->createFormatter();
-		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P42' ) );
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new NumericPropertyId( 'P42' ) );
 
 		$expectedUrl = $this->propertyPageUrl( 'P42' );
 		$this->assertThatHamcrest(
@@ -289,7 +289,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->givenPropertyHasLabel( 'P1', 'en', 'Some label' );
 
 		$entityIdHtmlLinkFormatter = $this->createFormatter();
-		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new NumericPropertyId( 'P1' ) );
 
 		$this->assertThatHamcrest(
 			$result,
@@ -305,7 +305,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->givenPropertyExists( 'P1' );
 
 		$entityIdHtmlLinkFormatter = $this->createFormatter();
-		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new NumericPropertyId( 'P1' ) );
 
 		$this->assertThatHamcrest(
 			$result,
@@ -326,9 +326,9 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$entityIdHtmlLinkFormatter = $this->createFormatter();
-		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new NumericPropertyId( 'P1' ) );
 
-		$expectedResult = $this->nonExistingEntityIdHtmlFormatter->formatEntityId( new PropertyId( 'P1' ) );
+		$expectedResult = $this->nonExistingEntityIdHtmlFormatter->formatEntityId( new NumericPropertyId( 'P1' ) );
 		$this->assertEquals( $expectedResult, $result );
 	}
 
@@ -354,7 +354,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->givenPropertyHasLabel( 'P1', 'en', 'Label in English' );
 
 		$entityIdHtmlLinkFormatter = $this->createFormatter();
-		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new NumericPropertyId( 'P1' ) );
 
 		$this->assertThatHamcrest(
 			$result,
@@ -371,7 +371,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->givenPropertyHasLabel( 'P1', $fallbackLanguage, 'some text' );
 
 		$entityIdHtmlLinkFormatter = $this->createFormatter();
-		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new NumericPropertyId( 'P1' ) );
 
 		$this->assertThatHamcrest(
 			$result,
@@ -388,7 +388,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->givenPropertyHasLabel( 'P1', 'en', 'Label in English' );
 
 		$entityIdHtmlLinkFormatter = $this->createFormatter();
-		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new NumericPropertyId( 'P1' ) );
 
 		$languageFallbackIndicator = new LanguageFallbackIndicator(
 			$this->languageNameLookup->reveal()
@@ -405,7 +405,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->givenPropertyHasLabel( 'P1', 'crh-cyrl', 'къырымтатарджа' );
 
 		$entityIdHtmlLinkFormatter = $this->createFormatter();
-		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new NumericPropertyId( 'P1' ) );
 
 		$languageFallbackIndicator = new LanguageFallbackIndicator( $this->languageNameLookup->reveal() );
 		$fallbackMarker = $languageFallbackIndicator->getHtml(
@@ -420,7 +420,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->givenPropertyHasLabel( 'foo:P1', 'en', 'Something' );
 
 		$formatter = $this->createFormatter();
-		$result = $formatter->formatEntityId( new PropertyId( 'foo:P1' ) );
+		$result = $formatter->formatEntityId( new NumericPropertyId( 'foo:P1' ) );
 
 		$isFullUrl = startsWith( 'http' );
 		$this->assertThatHamcrest(
@@ -575,7 +575,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	private function givenPropertyHasLabel( $propertyId, $labelLanguage, $labelText ) {
 		$this->givenPropertyExists( 'P1' );
 
-		$this->givenEntityHasLabel( new PropertyId( $propertyId ), $labelLanguage, $labelText );
+		$this->givenEntityHasLabel( new NumericPropertyId( $propertyId ), $labelLanguage, $labelText );
 	}
 
 	private function propertyPageUrl( $propertyId ) {
@@ -591,7 +591,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$title->isLocal()->willReturn( true );
 
 		$this->entityTitleLookup
-			->getTitleForId( new PropertyId( $propertyId ) )
+			->getTitleForId( new NumericPropertyId( $propertyId ) )
 			->willReturn( $title->reveal() );
 	}
 
@@ -606,7 +606,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$title->getLocalURL()->willReturn( $this->propertyPageUrl( $propertyId ) );
 		$title->getPrefixedText()->willReturn( $propertyId );
 
-		$this->entityTitleLookup->getTitleForId( new PropertyId( $propertyId ) )->willReturn(
+		$this->entityTitleLookup->getTitleForId( new NumericPropertyId( $propertyId ) )->willReturn(
 			$title->reveal()
 		);
 

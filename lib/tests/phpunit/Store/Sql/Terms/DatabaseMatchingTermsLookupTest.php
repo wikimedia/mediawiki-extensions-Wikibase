@@ -8,7 +8,7 @@ use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
@@ -217,7 +217,7 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 				return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 			},
 			'property' => function ( $repositoryName, $uniquePart ) {
-				return PropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
+				return NumericPropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 			},
 		] );
 		return new DatabaseMatchingTermsLookup(

@@ -6,7 +6,7 @@ use JobQueueGroup;
 use MediaWikiIntegrationTestCase;
 use WANObjectCache;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
@@ -311,7 +311,7 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $repoDb ), new StringNormalizer()
 		);
 
-		$propertyTermStoreWriter->storeTerms( new PropertyId( 'P12' ), new Fingerprint(
+		$propertyTermStoreWriter->storeTerms( new NumericPropertyId( 'P12' ), new Fingerprint(
 			new TermList( [ new Term( 'nl', 'van' ) ] )
 		) );
 		$itemStoreWriter->storeTerms( new ItemId( 'Q99' ), new Fingerprint(
@@ -322,7 +322,7 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 		// Store with empty fingerprint (will delete things)
 		$itemStoreWriter->storeTerms( new ItemId( 'Q99' ), new Fingerprint() );
 
-		$r = $this->getTermsForProperty( new PropertyId( 'P12' ) );
+		$r = $this->getTermsForProperty( new NumericPropertyId( 'P12' ) );
 		$this->assertTrue( $r->hasLabel( 'nl' ) );
 		$this->assertEquals( 'van', $r->getLabel( 'nl' )->getText() );
 	}

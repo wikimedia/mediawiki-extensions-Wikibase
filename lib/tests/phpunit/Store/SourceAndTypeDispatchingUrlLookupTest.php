@@ -7,7 +7,7 @@ use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataAccess\Tests\NewEntitySource;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingUrlLookup;
@@ -45,7 +45,7 @@ class SourceAndTypeDispatchingUrlLookupTest extends TestCase {
 	 * @dataProvider provideGetUrlMethods
 	 */
 	public function testGivenNoLookupDefinedForEntityType_throwsException( string $method ) {
-		$entityId = new PropertyId( 'P123' );
+		$entityId = new NumericPropertyId( 'P123' );
 
 		$this->callbacks['some-other-source']['property'] = $this->newNeverCalledMockLookup();
 
@@ -64,7 +64,7 @@ class SourceAndTypeDispatchingUrlLookupTest extends TestCase {
 	 * @dataProvider provideGetUrlMethods
 	 */
 	public function testGivenLookupDefinedForEntityType_usesRespectiveLookup( string $method ) {
-		$entityId = new PropertyId( 'P321' );
+		$entityId = new NumericPropertyId( 'P321' );
 		$url = 'http://some-wikibase/wiki/Property:P321';
 		$sourceName = 'wikidorta';
 

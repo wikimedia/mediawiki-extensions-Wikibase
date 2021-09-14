@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\SourceAndTypeDispatchingExistenceChecker;
@@ -40,7 +40,7 @@ class SourceAndTypeDispatchingExistenceCheckerTest extends TestCase {
 	}
 
 	public function testGivenExistenceCheckerDefinedForEntitySourceAndType_usesRespectiveExistenceChecker() {
-		$entityId = new PropertyId( 'P321' );
+		$entityId = new NumericPropertyId( 'P321' );
 		$exists = false;
 
 		$this->entitySourceLookup = $this->createMock( EntitySourceLookup::class );
@@ -68,7 +68,7 @@ class SourceAndTypeDispatchingExistenceCheckerTest extends TestCase {
 
 	public function testExistsBatch() {
 		$itemIds = [ new ItemId( 'Q123' ), new ItemId( 'Q456' ) ];
-		$propertyIds = [ new PropertyId( 'P123' ), new PropertyId( 'P456' ) ];
+		$propertyIds = [ new NumericPropertyId( 'P123' ), new NumericPropertyId( 'P456' ) ];
 
 		$itemSourceName = 'itemSource';
 		$propertySourceName = 'propertySource';

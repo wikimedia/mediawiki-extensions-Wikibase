@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Store;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
@@ -97,7 +98,7 @@ class PropertyTermStoreWriterAdapterTest extends TestCase {
 
 	private function newPropertyWithTerms(): Property {
 		return new Property(
-			new PropertyId( 'P42' ),
+			new NumericPropertyId( 'P42' ),
 			$this->newFingerprint(),
 			'irrelevant-datatype'
 		);
@@ -153,7 +154,7 @@ class PropertyTermStoreWriterAdapterTest extends TestCase {
 
 	public function testDeleteTermsReturnsTrueOnSuccess() {
 		$this->assertTrue(
-			$this->newTermStoreWriter()->deleteTermsOfEntity( new PropertyId( 'P1' ) )
+			$this->newTermStoreWriter()->deleteTermsOfEntity( new NumericPropertyId( 'P1' ) )
 		);
 	}
 
@@ -161,7 +162,7 @@ class PropertyTermStoreWriterAdapterTest extends TestCase {
 		$this->propertyTermStoreWriter = $this->newThrowingPropertyTermStoreWriter();
 
 		$this->assertFalse(
-			$this->newTermStoreWriter()->deleteTermsOfEntity( new PropertyId( 'P1' ) )
+			$this->newTermStoreWriter()->deleteTermsOfEntity( new NumericPropertyId( 'P1' ) )
 		);
 	}
 

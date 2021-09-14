@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Formatters\Reference;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\Lib\Formatters\Reference\ByCertainPropertyIdGrouper;
@@ -19,10 +19,10 @@ use Wikibase\Lib\Formatters\Reference\ByCertainPropertyIdGrouper;
 class ByCertainPropertyIdGrouperTest extends TestCase {
 
 	public function testGrouping() {
-		$p1 = new PropertyId( 'P1' );
-		$p2 = new PropertyId( 'P2' );
-		$p3 = new PropertyId( 'P3' );
-		$p4 = new PropertyId( 'P4' );
+		$p1 = new NumericPropertyId( 'P1' );
+		$p2 = new NumericPropertyId( 'P2' );
+		$p3 = new NumericPropertyId( 'P3' );
+		$p4 = new NumericPropertyId( 'P4' );
 		$snak11 = new PropertyNoValueSnak( $p1 );
 		$snak12 = new PropertySomeValueSnak( $p1 );
 		$snak21 = new PropertyNoValueSnak( $p2 );
@@ -43,14 +43,14 @@ class ByCertainPropertyIdGrouperTest extends TestCase {
 	}
 
 	/** @dataProvider provideKnownAndUnknownPropertyId */
-	public function testGetByProperty_certainPropertyWithoutSnaks( ?PropertyId $propertyId ) {
+	public function testGetByProperty_certainPropertyWithoutSnaks( ?NumericPropertyId $propertyId ) {
 		$snaks = new ByCertainPropertyIdGrouper( [], [ $propertyId ] );
 
 		$this->assertSame( [], $snaks->getByPropertyId( $propertyId ) );
 	}
 
 	/** @dataProvider provideKnownAndUnknownPropertyId */
-	public function testGetByProperty_notCertainProperty( ?PropertyId $propertyId ) {
+	public function testGetByProperty_notCertainProperty( ?NumericPropertyId $propertyId ) {
 		$snaks = new ByCertainPropertyIdGrouper( [], [] );
 
 		$this->expectException( InvalidArgumentException::class );
@@ -58,7 +58,7 @@ class ByCertainPropertyIdGrouperTest extends TestCase {
 	}
 
 	public function provideKnownAndUnknownPropertyId(): iterable {
-		yield 'known' => [ new PropertyId( 'P1' ) ];
+		yield 'known' => [ new NumericPropertyId( 'P1' ) ];
 		yield 'unknown' => [ null ];
 	}
 

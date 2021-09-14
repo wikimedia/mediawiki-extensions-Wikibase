@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\TermIndexEntry;
 use Wikimedia\Assert\ParameterAssertionException;
@@ -151,7 +151,7 @@ class TermIndexEntryTest extends \PHPUnit\Framework\TestCase {
 			],
 			'other entity id' => [
 				$term,
-				$this->newInstance( [ 'entityId' => new PropertyId( 'P11' ) ] ),
+				$this->newInstance( [ 'entityId' => new NumericPropertyId( 'P11' ) ] ),
 				false
 			],
 			'other language' => [

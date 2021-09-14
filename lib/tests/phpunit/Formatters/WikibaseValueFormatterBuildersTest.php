@@ -21,7 +21,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -329,7 +329,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 				'EntityId',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions( 'en' ),
-				new EntityIdValue( new PropertyId( 'P5' ) ),
+				new EntityIdValue( new NumericPropertyId( 'P5' ) ),
 				'/^<a\b[^>]* href="[^"]*\bP5">Label for P5<\/a>.*$/',
 			],
 

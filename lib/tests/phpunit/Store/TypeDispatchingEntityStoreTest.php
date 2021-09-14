@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use MediaWikiCoversValidator;
 use User;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\TypeDispatchingEntityStore;
@@ -114,8 +114,8 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenUnknownEntityType_saveRedirectForwardsToDefaultService() {
-		$id = new PropertyId( 'P1' );
-		$id2 = new PropertyId( 'P2' );
+		$id = new NumericPropertyId( 'P1' );
+		$id2 = new NumericPropertyId( 'P2' );
 		$redirect = new EntityRedirect( $id, $id2 );
 		$user = $this->newUser();
 		$flags = EDIT_MINOR;
@@ -132,8 +132,8 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenCustomEntityType_saveRedirectInstantiatesCustomService() {
-		$id = new PropertyId( 'P1' );
-		$id2 = new PropertyId( 'P2' );
+		$id = new NumericPropertyId( 'P1' );
+		$id2 = new NumericPropertyId( 'P2' );
 		$redirect = new EntityRedirect( $id, $id2 );
 		$user = $this->newUser();
 		$flags = EDIT_MINOR;
@@ -159,7 +159,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenUnknownEntityType_deleteEntityForwardsToDefaultService() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$user = $this->newUser();
 		$store = new TypeDispatchingEntityStore(
 			[],
@@ -171,7 +171,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenCustomEntityType_deleteEntityInstantiatesCustomService() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$user = $this->newUser();
 		$store = new TypeDispatchingEntityStore(
 			[
@@ -192,7 +192,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenUnknownEntityType_userWasLastToEditForwardsToDefaultService() {
 		$user = $this->newUser();
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$lastRevId = 23;
 		$store = new TypeDispatchingEntityStore(
 			[],
@@ -206,7 +206,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenCustomEntityType_userWasLastToEditInstantiatesCustomService() {
 		$user = $this->newUser();
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$lastRevId = 23;
 		$store = new TypeDispatchingEntityStore(
 			[
@@ -229,7 +229,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenUnknownEntityType_updateWatchlistForwardsToDefaultService() {
 		$user = $this->newUser();
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$store = new TypeDispatchingEntityStore(
 			[],
 			$this->newDefaultService( 'updateWatchlist', [ $user, $id, true ] ),
@@ -241,7 +241,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenCustomEntityType_updateWatchlistInstantiatesCustomService() {
 		$user = $this->newUser();
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$store = new TypeDispatchingEntityStore(
 			[
 				'property' => function ( EntityStore $defaultService ) use ( $user, $id ) {
@@ -261,7 +261,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenUnknownEntityType_isWatchingForwardsToDefaultService() {
 		$user = $this->newUser();
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$store = new TypeDispatchingEntityStore(
 			[],
 			$this->newDefaultService( 'isWatching', [ $user, $id ] ),
@@ -274,7 +274,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenCustomEntityType_isWatchingInstantiatesCustomService() {
 		$user = $this->newUser();
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$store = new TypeDispatchingEntityStore(
 			[
 				'property' => function ( EntityStore $defaultService ) use ( $user, $id ) {
@@ -295,7 +295,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenUnknownEntityType_canCreateWithCustomIdForwardsToDefaultService() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$store = new TypeDispatchingEntityStore(
 			[],
 			$this->newDefaultService( 'canCreateWithCustomId', [ $id ] ),
@@ -307,7 +307,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenCustomEntityType_canCreateWithCustomIdInstantiatesCustomService() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$store = new TypeDispatchingEntityStore(
 			[
 				'property' => function ( EntityStore $defaultService ) use ( $id ) {

@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Tests;
 
 use Psr\Log\NullLogger;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -40,7 +40,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 		$propertyDataTypeLookup = new EntityRetrievingDataTypeLookup( $entityLookup );
 
 		foreach ( $this->propertiesAndTypes as $propertyId => $dataTypeId ) {
-			$id = new PropertyId( $propertyId );
+			$id = new NumericPropertyId( $propertyId );
 
 			// register property info
 			$mockInfoLookup->addPropertyInfo(
@@ -71,7 +71,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 		}
 
 		// try unknown property
-		$id = new PropertyId( 'P23' );
+		$id = new NumericPropertyId( 'P23' );
 
 		// try with a working info store
 		$argLists[] = [
@@ -98,7 +98,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 	public function testGetDataTypeForProperty(
 		PropertyInfoLookup $infoLookup,
 		?PropertyDataTypeLookup $fallbackLookup,
-		PropertyId $propertyId,
+		NumericPropertyId $propertyId,
 		$expectedDataType
 	) {
 		if ( $expectedDataType === false ) {

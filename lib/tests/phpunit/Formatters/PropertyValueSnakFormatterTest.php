@@ -12,7 +12,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -66,7 +66,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 			$getDataTypeIdForPropertyResult = $this->returnValue( $dataType );
 		} else {
 			$getDataTypeIdForPropertyResult = $this->throwException(
-				new PropertyDataTypeLookupException( new PropertyId( 'P666' ) ) );
+				new PropertyDataTypeLookupException( new NumericPropertyId( 'P666' ) ) );
 		}
 
 		$typeLookup = $this->createMock( PropertyDataTypeLookup::class );

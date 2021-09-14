@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 use JobQueueGroup;
 use MediaWikiIntegrationTestCase;
 use WANObjectCache;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
@@ -32,7 +32,7 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 	use DatabaseTermStoreWriterTestGetTermsTrait;
 	use LocalRepoDbTestHelper;
 
-	/** @var PropertyId */
+	/** @var NumericPropertyId */
 	private $p1;
 
 	/** @var Fingerprint */
@@ -60,7 +60,7 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 		$this->tablesUsed[] = 'wbt_term_in_lang';
 		$this->tablesUsed[] = 'wbt_property_terms';
 
-		$this->p1 = new PropertyId( 'P1' );
+		$this->p1 = new NumericPropertyId( 'P1' );
 		$this->fingerprint1 = new Fingerprint(
 			new TermList( [ new Term( 'en', 'some label' ) ] ),
 			new TermList( [ new Term( 'en', 'description' ) ] )
@@ -188,8 +188,8 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 			new TermList( [ $sharedTerm ] ),
 			new TermList( [ new Term( 'en', 'Goat' ) ] )
 		);
-		$property1 = new PropertyId( 'P1' );
-		$property2 = new PropertyId( 'P2' );
+		$property1 = new NumericPropertyId( 'P1' );
+		$property2 = new NumericPropertyId( 'P2' );
 		$store->storeTerms( $property1, $propertyFingerprint );
 		$store->storeTerms( $property2, $property2Fingerprint );
 
