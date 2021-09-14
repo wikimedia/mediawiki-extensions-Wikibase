@@ -3,19 +3,19 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
-use Language;
 use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 
 /**
+ * Wraps an EntityParserOutputGenerator and prefetches data for Federated Properties used on the given Entity.
+ *
  * @license GPL-2.0-or-later
  */
-class FederatedPropertiesEntityParserOutputGenerator implements EntityParserOutputGenerator {
+class FederatedPropertiesPrefetchingEntityParserOutputGeneratorDecorator implements EntityParserOutputGenerator {
 
 	/**
 	 * @var EntityParserOutputGenerator
@@ -23,33 +23,19 @@ class FederatedPropertiesEntityParserOutputGenerator implements EntityParserOutp
 	private $inner;
 
 	/**
-	 * @var string|null
-	 */
-	private $languageCode;
-
-	/**
 	 * @var ApiEntityLookup
 	 */
 	private $apiEntityLookup;
 
-	/**
-	 * @param EntityParserOutputGenerator $inner
-	 * @param Language $language
-	 * @param ApiEntityLookup $apiEntityLookup
-	 */
 	public function __construct(
 		EntityParserOutputGenerator $inner,
-		Language $language,
 		ApiEntityLookup $apiEntityLookup
 	) {
 		$this->inner = $inner;
-		$this->languageCode = $language->getCode();
 		$this->apiEntityLookup = $apiEntityLookup;
 	}
 
 	/**
-	 * Creates the parser output for the given entity.
-	 *
 	 * @param EntityRevision $entityRevision
 	 * @param bool $generateHtml
 	 *
@@ -60,29 +46,9 @@ class FederatedPropertiesEntityParserOutputGenerator implements EntityParserOutp
 		EntityRevision $entityRevision,
 		$generateHtml = true
 	) {
-		// add wikibase styles in all cases, so we can format the link properly:
-		try {
-			$entity = $entityRevision->getEntity();
-			$this->prefetchFederatedProperties( $entity );
+		$this->prefetchFederatedProperties( $entityRevision->getEntity() );
 
-			$po = $this->inner->getParserOutput( $entityRevision, $generateHtml );
-			$po->setEnableOOUI( true );
-			$po->addModules( 'wikibase.federatedPropertiesEditRequestFailureNotice' );
-			$po->addModules( 'wikibase.federatedPropertiesLeavingSiteNotice' );
-
-		} catch ( FederatedPropertiesException $ex ) {
-
-			if ( $entity instanceof LabelsProvider ) {
-				$ex = new FederatedPropertiesError(
-					$this->languageCode,
-					$entity,
-					'wikibase-federated-properties-source-wiki-api-error-message'
-				);
-			}
-			throw $ex;
-		}
-
-		return $po;
+		return $this->inner->getParserOutput( $entityRevision, $generateHtml );
 	}
 
 	private function prefetchFederatedProperties( EntityDocument $entity ) {
@@ -101,7 +67,7 @@ class FederatedPropertiesEntityParserOutputGenerator implements EntityParserOutp
 		$federatedPropertyIds = array_filter(
 			$propertyIds,
 			function ( $propId ) {
-				// TODO: after T288234 is resolved, consider more flexible filtering by type. See also T289667.
+				// TODO: after T288234 is resolved, consider more flexible filtering by type.
 				return $propId instanceof FederatedPropertyId;
 			}
 		);

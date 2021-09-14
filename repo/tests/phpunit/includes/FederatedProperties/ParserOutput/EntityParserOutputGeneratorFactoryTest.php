@@ -11,7 +11,7 @@ use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
-use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntityParserOutputGenerator;
+use Wikibase\Repo\FederatedProperties\FederatedPropertiesUiEntityParserOutputGeneratorDecorator;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
@@ -32,7 +32,7 @@ class EntityParserOutputGeneratorFactoryTest extends FederatedPropertiesTestCase
 		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
 		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator( Language::factory( 'en' ) );
 
-		$this->assertInstanceOf( FederatedPropertiesEntityParserOutputGenerator::class, $instance );
+		$this->assertInstanceOf( FederatedPropertiesUiEntityParserOutputGeneratorDecorator::class, $instance );
 	}
 
 	private function getEntityParserOutputGeneratorFactory() {
