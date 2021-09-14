@@ -68,24 +68,6 @@ class FederatedPropertiesPrefetchingEntityParserOutputGeneratorDecoratorTest ext
 		$entityParserOutputGenerator->getParserOutput( new EntityRevision( $item, 4711 ), false );
 	}
 
-	public function testShouldNotCallPrefetchIfNoProperties() {
-		$labelLanguage = 'en';
-
-		$item = new Item( new ItemId( 'Q7799929' ) );
-		$item->setLabel( $labelLanguage, 'kitten item' );
-
-		$apiEntityLookup = $this->createMock( ApiEntityLookup::class );
-		$apiEntityLookup->expects( $this->never() )
-			->method( 'fetchEntities' );
-
-		$this->entityViewFactory = $this->mockEntityViewFactory( false );
-
-		$innerPog = $this->getFullGeneratorMock();
-		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( $apiEntityLookup, $innerPog );
-
-		$entityParserOutputGenerator->getParserOutput( new EntityRevision( $item, 4711 ), false );
-	}
-
 	protected function getPrefetchCallback( $expectedIds ) {
 		return function (
 			array $entityIds,
