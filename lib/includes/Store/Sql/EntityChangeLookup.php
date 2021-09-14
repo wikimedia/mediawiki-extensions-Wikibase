@@ -123,6 +123,15 @@ class EntityChangeLookup implements ChunkAccess {
 	}
 
 	/**
+	 * @param string $entityId
+	 *
+	 * @return EntityChange[]
+	 */
+	public function loadByEntityId( string $entityId ): array {
+		return $this->loadChanges( [ 'change_object_id' => $entityId ], [], __METHOD__ );
+	}
+
+	/**
 	 * @param array $where
 	 * @param array $options
 	 * @param string $method

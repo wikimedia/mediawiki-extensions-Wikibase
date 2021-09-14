@@ -18,9 +18,11 @@ class RepoNoBadUsageTest extends NoBadUsageTest {
 			// don’t reference client in repo
 			'WikibaseClient::' => [
 				'maintenance/dispatchChanges.php' => 1, // guarded by isClientEnabled()
+				'includes/ChangeModification/DispatchChangesJob.php' => 1, // guarded by isClientEnabled()
 			],
 			'Wikibase\\Client\\' => [
 				'maintenance/dispatchChanges.php' => 1, // see above
+				'includes/ChangeModification/DispatchChangesJob.php' => 1, // see above
 			],
 			'Wikibase\\\\Client\\\\' => [],
 			// don’t use MediaWiki RDBMS – use our RDBMS instead (DomainDb etc.)

@@ -5,16 +5,19 @@ declare( strict_types=1 );
 namespace Wikibase\Repo\Hooks;
 
 use CentralIdLookup;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\User\CentralId\CentralIdLookupFactory;
 use RecentChange;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Repo\ChangeModification\DispatchChangesJob;
 use Wikibase\Repo\Notifications\ChangeHolder;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\Store\SubscriptionLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 //phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
 /**
@@ -95,6 +98,11 @@ class RecentChangeSaveHookHandler {
 
 		$this->setChangeMetaData( $change, $recentChange, $centralUserId );
 		$this->changeStore->saveChange( $change );
+
+		// FIXME: inject settings instead?
+		if ( WikibaseRepo::getSettings()->getSetting( 'dispatchViaJobsEnabled' ) ) {
+			$this->enqueueDispatchChangesJob( $change->getEntityId()->getSerialization() );
+		}
 	}
 
 	private function setChangeMetaData( EntityChange $change, RecentChange $rc, int $centralUserId ): void {
@@ -116,6 +124,12 @@ class RecentChangeSaveHookHandler {
 			$rc->getAttribute( 'rc_user_text' ),
 			$centralUserId
 		);
+	}
+
+	private function enqueueDispatchChangesJob( string $entityIdSerialization ): void {
+		$job = DispatchChangesJob::makeJobSpecification( $entityIdSerialization );
+		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup();
+		$jobQueueGroup->push( $job );
 	}
 
 }
