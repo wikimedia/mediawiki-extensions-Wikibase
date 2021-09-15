@@ -72,11 +72,13 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 				'rd_namespace' => $title->getNamespace(),
 				// Entity redirects are guaranteed to be in the same namespace
 				'page_namespace' => $title->getNamespace(),
-				'page_id = rd_from'
 			],
 			__METHOD__,
 			[
 				'LIMIT' => 1000 // everything should have a hard limit
+			],
+			[
+				'redirect' => [ 'JOIN', 'rd_from=page_id' ],
 			]
 		);
 
