@@ -6,8 +6,8 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -50,7 +50,7 @@ class EntityChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function newForEntityProvider() {
 		return [
 			'add item' => [ EntityChange::ADD, new ItemId( 'Q17' ), ItemChange::class ],
-			'remove property' => [ EntityChange::REMOVE, new PropertyId( 'P17' ), EntityChange::class ],
+			'remove property' => [ EntityChange::REMOVE, new NumericPropertyId( 'P17' ), EntityChange::class ],
 		];
 	}
 
@@ -154,7 +154,7 @@ class EntityChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testNewFromUpdate_remove() {
-		$propertyId = new PropertyId( 'P2' );
+		$propertyId = new NumericPropertyId( 'P2' );
 
 		$property = new Property( $propertyId, null, 'string' );
 		$property->setLabel( 'de', 'Katze' );

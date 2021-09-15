@@ -4,7 +4,7 @@ namespace Wikibase\DataModel\Tests\Snak;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\Snak;
@@ -33,8 +33,8 @@ class PropertyNoValueSnakTest extends \PHPUnit\Framework\TestCase {
 	public function validConstructorArgumentsProvider() {
 		return [
 			[ 1 ],
-			[ new PropertyId( 'P1' ) ],
-			[ new PropertyId( 'P9001' ) ],
+			[ new NumericPropertyId( 'P1' ) ],
+			[ new NumericPropertyId( 'P9001' ) ],
 		];
 	}
 
@@ -56,13 +56,13 @@ class PropertyNoValueSnakTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetPropertyId() {
-		$snak = new PropertyNoValueSnak( new PropertyId( 'P1' ) );
+		$snak = new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) );
 		$propertyId = $snak->getPropertyId();
-		$this->assertInstanceOf( PropertyId::class, $propertyId );
+		$this->assertInstanceOf( NumericPropertyId::class, $propertyId );
 	}
 
 	public function testGetHash() {
-		$snak = new PropertyNoValueSnak( new PropertyId( 'P1' ) );
+		$snak = new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) );
 		$hash = $snak->getHash();
 		$this->assertIsString( $hash );
 		$this->assertSame( 40, strlen( $hash ) );
@@ -72,7 +72,7 @@ class PropertyNoValueSnakTest extends \PHPUnit\Framework\TestCase {
 	 * This test is a safeguard to make sure hashes are not changed unintentionally.
 	 */
 	public function testHashStability() {
-		$snak = new PropertyNoValueSnak( new PropertyId( 'P1' ) );
+		$snak = new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) );
 		$hash = $snak->getHash();
 
 		$expected = sha1( 'C:43:"Wikibase\DataModel\Snak\PropertyNoValueSnak":2:{P1}' );
@@ -80,8 +80,8 @@ class PropertyNoValueSnakTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testEquals() {
-		$snak1 = new PropertyNoValueSnak( new PropertyId( 'P1' ) );
-		$snak2 = new PropertyNoValueSnak( new PropertyId( 'P1' ) );
+		$snak1 = new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) );
+		$snak2 = new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) );
 		$this->assertTrue( $snak1->equals( $snak2 ) );
 		$this->assertTrue( $snak2->equals( $snak1 ) );
 	}
@@ -95,12 +95,12 @@ class PropertyNoValueSnakTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function notEqualsProvider() {
-		$p1 = new PropertyId( 'P1' );
+		$p1 = new NumericPropertyId( 'P1' );
 
 		return [
 			[
 				new PropertyNoValueSnak( $p1 ),
-				new PropertyNoValueSnak( new PropertyId( 'P2' ) )
+				new PropertyNoValueSnak( new NumericPropertyId( 'P2' ) )
 			],
 			[
 				new PropertyNoValueSnak( $p1 ),
@@ -110,8 +110,8 @@ class PropertyNoValueSnakTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function provideDataToSerialize() {
-		$p2 = new PropertyId( 'P2' );
-		$p2foo = new PropertyId( 'foo:P2' );
+		$p2 = new NumericPropertyId( 'P2' );
+		$p2foo = new NumericPropertyId( 'foo:P2' );
 
 		return [
 			'string' => [
@@ -132,14 +132,14 @@ class PropertyNoValueSnakTest extends \PHPUnit\Framework\TestCase {
 		$serialized = $snak->serialize();
 		$this->assertSame( $expected, $serialized );
 
-		$snak2 = new PropertyNoValueSnak( new PropertyId( 'P1' ) );
+		$snak2 = new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) );
 		$snak2->unserialize( $serialized );
 		$this->assertTrue( $snak->equals( $snak2 ), 'round trip' );
 	}
 
 	public function provideDataToUnserialize() {
-		$p2 = new PropertyId( 'P2' );
-		$p2foo = new PropertyId( 'foo:P2' );
+		$p2 = new NumericPropertyId( 'P2' );
+		$p2foo = new NumericPropertyId( 'foo:P2' );
 
 		return [
 			'legacy' => [ new PropertyNoValueSnak( $p2 ), 'i:2;' ],
@@ -152,7 +152,7 @@ class PropertyNoValueSnakTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideDataToUnserialize
 	 */
 	public function testUnserialize( $expected, $serialized ) {
-		$snak = new PropertyNoValueSnak( new PropertyId( 'P1' ) );
+		$snak = new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) );
 		$snak->unserialize( $serialized );
 		$this->assertTrue( $snak->equals( $expected ) );
 	}

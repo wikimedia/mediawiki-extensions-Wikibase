@@ -4,7 +4,7 @@ namespace Wikibase\DataModel\Tests;
 
 use InvalidArgumentException;
 use Traversable;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -64,7 +64,7 @@ class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function invalidConstructorArgumentsProvider() {
-		$id1 = new PropertyId( 'P1' );
+		$id1 = new NumericPropertyId( 'P1' );
 
 		return [
 			[ null ],

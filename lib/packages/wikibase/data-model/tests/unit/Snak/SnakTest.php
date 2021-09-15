@@ -4,7 +4,7 @@ namespace Wikibase\DataModel\Tests\Snak;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -18,7 +18,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @uses \DataValues\NumberValue
  * @uses \DataValues\StringValue
  * @uses \Wikibase\DataModel\Entity\EntityId
- * @uses \Wikibase\DataModel\Entity\PropertyId
+ * @uses \Wikibase\DataModel\Entity\NumericPropertyId
  *
  * @group Wikibase
  * @group WikibaseDataModel
@@ -32,7 +32,7 @@ class SnakTest extends \PHPUnit\Framework\TestCase {
 	public function snakProvider() {
 		$snaks = [];
 
-		$id42 = new PropertyId( 'p42' );
+		$id42 = new NumericPropertyId( 'p42' );
 
 		$snaks[] = new PropertyNoValueSnak( $id42 );
 
@@ -69,7 +69,7 @@ class SnakTest extends \PHPUnit\Framework\TestCase {
 	 * @param Snak $snak
 	 */
 	public function testGetPropertyId( Snak $snak ) {
-		$this->assertInstanceOf( PropertyId::class, $snak->getPropertyId() );
+		$this->assertInstanceOf( NumericPropertyId::class, $snak->getPropertyId() );
 	}
 
 	/**
@@ -108,7 +108,7 @@ class SnakTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testEqualsMoar() {
-		$id42 = new PropertyId( 'p42' );
+		$id42 = new NumericPropertyId( 'p42' );
 
 		$snak = new PropertyNoValueSnak( $id42 );
 
@@ -119,7 +119,7 @@ class SnakTest extends \PHPUnit\Framework\TestCase {
 			new StringValue( 'Ohi there!' )
 		) ) );
 
-		$id43 = new PropertyId( 'p43' );
+		$id43 = new NumericPropertyId( 'p43' );
 
 		$this->assertFalse( $snak->equals( new PropertyNoValueSnak( $id43 ) ) );
 	}

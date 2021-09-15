@@ -4,7 +4,7 @@ namespace Wikibase\DataModel\Tests\Snak;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
@@ -21,20 +21,20 @@ use Wikibase\DataModel\Snak\SnakList;
 class SnakListTest extends \PHPUnit\Framework\TestCase {
 
 	public function elementInstancesProvider() {
-		$id42 = new PropertyId( 'P42' );
+		$id42 = new NumericPropertyId( 'P42' );
 
 		$argLists = [];
 
 		$argLists[] = [ [ new PropertyNoValueSnak( $id42 ) ] ];
-		$argLists[] = [ [ new PropertyNoValueSnak( new PropertyId( 'P9001' ) ) ] ];
+		$argLists[] = [ [ new PropertyNoValueSnak( new NumericPropertyId( 'P9001' ) ) ] ];
 		$argLists[] = [ [ new PropertyValueSnak( $id42, new StringValue( 'a' ) ) ] ];
 
 		return $argLists;
 	}
 
 	public function instanceProvider() {
-		$id42 = new PropertyId( 'P42' );
-		$id9001 = new PropertyId( 'P9001' );
+		$id42 = new NumericPropertyId( 'P42' );
+		$id9001 = new NumericPropertyId( 'P9001' );
 
 		return [
 			[ new SnakList() ],
@@ -62,7 +62,7 @@ class SnakListTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function invalidConstructorArgumentsProvider() {
-		$id1 = new PropertyId( 'P1' );
+		$id1 = new NumericPropertyId( 'P1' );
 
 		return [
 			[ null ],
@@ -126,7 +126,7 @@ class SnakListTest extends \PHPUnit\Framework\TestCase {
 			$this->assertSame( --$elementCount, $array->count() );
 		}
 
-		$element = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
+		$element = new PropertyNoValueSnak( new NumericPropertyId( 'P42' ) );
 
 		$array->removeSnak( $element );
 		$array->removeSnakHash( $element->getHash() );
@@ -157,10 +157,10 @@ class SnakListTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function orderByPropertyProvider() {
-		$id1 = new PropertyId( 'P1' );
-		$id2 = new PropertyId( 'P2' );
-		$id3 = new PropertyId( 'P3' );
-		$id4 = new PropertyId( 'P4' );
+		$id1 = new NumericPropertyId( 'P1' );
+		$id2 = new NumericPropertyId( 'P2' );
+		$id3 = new NumericPropertyId( 'P3' );
+		$id4 = new NumericPropertyId( 'P4' );
 
 		/**
 		 * List of test data containing snaks to initialize SnakList objects. The first list of

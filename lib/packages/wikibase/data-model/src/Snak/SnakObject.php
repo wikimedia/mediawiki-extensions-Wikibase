@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Snak;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 
@@ -37,7 +38,7 @@ abstract class SnakObject implements Snak {
 	 */
 	public function __construct( $propertyId ) {
 		if ( is_int( $propertyId ) ) {
-			$propertyId = PropertyId::newFromNumber( $propertyId );
+			$propertyId = NumericPropertyId::newFromNumber( $propertyId );
 		}
 
 		if ( !( $propertyId instanceof EntityId ) ) {
@@ -49,7 +50,7 @@ abstract class SnakObject implements Snak {
 		}
 
 		if ( !( $propertyId instanceof PropertyId ) ) {
-			$propertyId = new PropertyId( $propertyId->getSerialization() );
+			$propertyId = new NumericPropertyId( $propertyId->getSerialization() );
 		}
 
 		$this->propertyId = $propertyId;
@@ -111,10 +112,10 @@ abstract class SnakObject implements Snak {
 	 */
 	public function unserialize( $serialized ) {
 		try {
-			$this->propertyId = new PropertyId( $serialized );
+			$this->propertyId = new NumericPropertyId( $serialized );
 		} catch ( InvalidArgumentException $ex ) {
 			// Backwards compatibility with the previous serialization format
-			$this->propertyId = PropertyId::newFromNumber( unserialize( $serialized ) );
+			$this->propertyId = NumericPropertyId::newFromNumber( unserialize( $serialized ) );
 		}
 	}
 

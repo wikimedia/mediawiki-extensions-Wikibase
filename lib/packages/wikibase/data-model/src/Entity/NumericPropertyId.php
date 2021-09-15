@@ -57,7 +57,7 @@ class NumericPropertyId extends PropertyId {
 
 	/**
 	 * @see Serializable::serialize
-	 * 
+	 *
 	 * @return string
 	 */
 	public function serialize() {

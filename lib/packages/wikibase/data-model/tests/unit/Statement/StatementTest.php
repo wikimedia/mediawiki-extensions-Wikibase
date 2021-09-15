@@ -4,7 +4,7 @@ namespace Wikibase\DataModel\Tests\Statement;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -80,24 +80,24 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testHashStability() {
-		$mainSnak = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
+		$mainSnak = new PropertyNoValueSnak( new NumericPropertyId( 'P42' ) );
 		$statement = new Statement( $mainSnak );
 		$this->assertSame( '50c73da6759fd31868fb0cc9c218969fa776f62c', $statement->getHash() );
 	}
 
 	public function testSetAndGetMainSnak() {
-		$mainSnak = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
+		$mainSnak = new PropertyNoValueSnak( new NumericPropertyId( 'P42' ) );
 		$statement = new Statement( $mainSnak );
 		$this->assertSame( $mainSnak, $statement->getMainSnak() );
 	}
 
 	public function testSetAndGetQualifiers() {
 		$qualifiers = new SnakList( [
-			new PropertyValueSnak( new PropertyId( 'P42' ), new StringValue( 'a' ) )
+			new PropertyValueSnak( new NumericPropertyId( 'P42' ), new StringValue( 'a' ) )
 		] );
 
 		$statement = new Statement(
-			new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
+			new PropertyNoValueSnak( new NumericPropertyId( 'P42' ) ),
 			$qualifiers
 		);
 
@@ -154,7 +154,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	public function instanceProvider() {
 		$instances = [];
 
-		$propertyId = new PropertyId( 'P42' );
+		$propertyId = new NumericPropertyId( 'P42' );
 		$baseInstance = new Statement( new PropertyNoValueSnak( $propertyId ) );
 
 		$instances[] = $baseInstance;
@@ -172,7 +172,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 
 		$instance->setReferences( new ReferenceList( [
 			new Reference( [
-				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) )
+				new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) )
 			] )
 		] ) );
 
@@ -200,7 +200,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	public function testSetReferences( Statement $statement ) {
 		$references = new ReferenceList( [
 			new Reference( [
-				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) ),
+				new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ),
 			] )
 		] );
 

@@ -3,8 +3,8 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -35,13 +35,13 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConstructorWithAllParameters() {
 		$property = new Property(
-			new PropertyId( 'P42' ),
+			new NumericPropertyId( 'P42' ),
 			new Fingerprint(),
 			'string',
 			new StatementList()
 		);
 		$this->assertInstanceOf( Property::class, $property );
-		$this->assertEquals( new PropertyId( 'P42' ), $property->getId() );
+		$this->assertEquals( new NumericPropertyId( 'P42' ), $property->getId() );
 		$this->assertEquals( new Fingerprint(), $property->getFingerprint() );
 		$this->assertSame( 'string', $property->getDataTypeId() );
 		$this->assertEquals( new StatementList(), $property->getStatements() );
@@ -77,12 +77,12 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	protected function assertHasCorrectIdType( Property $property ) {
-		$this->assertInstanceOf( PropertyId::class, $property->getId() );
+		$this->assertInstanceOf( NumericPropertyId::class, $property->getId() );
 	}
 
 	public function testWhenIdSetWithPropertyId_GetIdReturnsPropertyId() {
 		$property = Property::newFromType( 'string' );
-		$property->setId( new PropertyId( 'P42' ) );
+		$property->setId( new NumericPropertyId( 'P42' ) );
 
 		$this->assertHasCorrectIdType( $property );
 	}
@@ -93,7 +93,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 
 	public function testPropertyWithIdIsEmpty() {
 		$property = Property::newFromType( 'string' );
-		$property->setId( new PropertyId( 'P1337' ) );
+		$property->setId( new NumericPropertyId( 'P1337' ) );
 		$this->assertTrue( $property->isEmpty() );
 	}
 
@@ -134,10 +134,10 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 		$secondProperty->setStatements( $this->newNonEmptyStatementList() );
 
 		$secondPropertyWithId = $secondProperty->copy();
-		$secondPropertyWithId->setId( new PropertyId( 'P42' ) );
+		$secondPropertyWithId->setId( new NumericPropertyId( 'P42' ) );
 
 		$differentId = $secondPropertyWithId->copy();
-		$differentId->setId( new PropertyId( 'P43' ) );
+		$differentId->setId( new NumericPropertyId( 'P43' ) );
 
 		return [
 			[ Property::newFromType( 'string' ), Property::newFromType( 'string' ) ],
@@ -158,7 +158,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 	private function getBaseProperty() {
 		$property = Property::newFromType( 'string' );
 
-		$property->setId( new PropertyId( 'P42' ) );
+		$property->setId( new NumericPropertyId( 'P42' ) );
 		$property->setLabel( 'en', 'Same' );
 		$property->setDescription( 'en', 'Same' );
 		$property->setAliases( 'en', [ 'Same' ] );
@@ -208,7 +208,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function cloneProvider() {
-		$property = new Property( new PropertyId( 'P1' ), null, 'string' );
+		$property = new Property( new NumericPropertyId( 'P1' ), null, 'string' );
 		$property->setLabel( 'en', 'original' );
 		$property->getStatements()->addNewStatement( new PropertyNoValueSnak( 1 ) );
 
@@ -385,7 +385,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 
 		// ID only
 		$entity = clone $entity;
-		$entity->setId( new PropertyId( 'P44' ) );
+		$entity->setId( new NumericPropertyId( 'P44' ) );
 
 		$entities[] = $entity;
 
@@ -399,7 +399,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 
 		// with labels etc and ID
 		$entity = clone $entity;
-		$entity->setId( new PropertyId( 'P42' ) );
+		$entity->setId( new NumericPropertyId( 'P42' ) );
 
 		$entities[] = $entity;
 
@@ -628,18 +628,18 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 	public function clearableProvider() {
 		return [
 			'empty' => [
-				new Property( new PropertyId( 'P123' ), null, 'string' ),
+				new Property( new NumericPropertyId( 'P123' ), null, 'string' ),
 			],
 			'with fingerprint' => [
 				new Property(
-					new PropertyId( 'P321' ),
+					new NumericPropertyId( 'P321' ),
 					new Fingerprint( new TermList( [ new Term( 'en', 'foo' ) ] ) ),
 					'time'
 				),
 			],
 			'with statement' => [
 				new Property(
-					new PropertyId( 'P234' ),
+					new NumericPropertyId( 'P234' ),
 					null,
 					'wikibase-entityid',
 					$this->newNonEmptyStatementList()

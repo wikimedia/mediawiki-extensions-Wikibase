@@ -46,8 +46,8 @@ class BasicEntityIdParser implements EntityIdParser {
 			ItemId::PATTERN => function( $serialization ) {
 				return new ItemId( $serialization );
 			},
-			PropertyId::PATTERN => function( $serialization ) {
-				return new PropertyId( $serialization );
+			NumericPropertyId::PATTERN => function( $serialization ) {
+				return new NumericPropertyId( $serialization );
 			},
 		];
 	}
