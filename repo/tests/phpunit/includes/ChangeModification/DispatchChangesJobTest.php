@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Tests\ChangeModification;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
@@ -40,27 +41,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testDispatchJobForSingleChangeToSingleWiki(): void {
-		$testItemId = new ItemId( 'Q1' );
-		$testItemChange = new ItemChange( [
-			'time' => '20210906122813',
-			'info' => [
-				'compactDiff' => new EntityDiffChangedAspects( [], [], [ 'P1' ], [], false ),
-				'metadata' => [
-					'page_id' => 3,
-					'rev_id' => 6,
-					'parent_id' => 4,
-					'comment' => '/* wbsetclaim-update:2||1 */ [[Property:P1]]: string on first item: foo 1',
-					'user_text' => 'Admin',
-					'central_user_id' => 0,
-					'bot' => 0,
-				],
-			],
-			'user_id' => '43',
-			'revision_id' => '123',
-			'object_id' => 'Q1',
-			'type' => 'wikibase-item~update',
-		] );
-		$testItemChange->setEntityId( $testItemId );
+		$testItemChange = $this->makeNewChange( 123 );
 		$repoDb = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb();
 		$changeStore = new SqlChangeStore( $repoDb );
 		$changeStore->saveChange( $testItemChange );
@@ -88,16 +69,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testNoValidSubscribers(): void {
-		$testItemId = new ItemId( 'Q1' );
-		$testItemChange = new ItemChange( [
-			'time' => '20210906122813',
-			'info' => '{}', // some json
-			'user_id' => '43',
-			'revision_id' => '123',
-			'object_id' => 'Q1',
-			'type' => 'wikibase-item~update',
-		] );
-		$testItemChange->setEntityId( $testItemId );
+		$testItemChange = $this->makeNewChange( 123 );
 		$changeStore = new SqlChangeStore(
 			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()
 		);
@@ -140,5 +112,31 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 
 	public function testRemovingCompletedRows(): void {
 		$this->markTestIncomplete( 'Functionality not yet implemented.' );
+	}
+
+	private function makeNewChange( int $revisionId ): EntityChange {
+		$testItemId = new ItemId( 'Q1' );
+		$testItemChange = new ItemChange( [
+			'time' => '20210906122813',
+			'info' => [
+				'compactDiff' => new EntityDiffChangedAspects( [], [], [ 'P1' ], [], false ),
+				'metadata' => [
+					'page_id' => 3,
+					'rev_id' => $revisionId,
+					'parent_id' => 4,
+					'comment' => '/* wbsetclaim-update:2||1 */ [[Property:P1]]: string on first item: foo 1',
+					'user_text' => 'Admin',
+					'central_user_id' => 0,
+					'bot' => 0,
+				],
+			],
+			'user_id' => '43',
+			'revision_id' => (string)$revisionId,
+			'object_id' => 'Q1',
+			'type' => 'wikibase-item~update',
+		] );
+		$testItemChange->setEntityId( $testItemId );
+
+		return $testItemChange;
 	}
 }
