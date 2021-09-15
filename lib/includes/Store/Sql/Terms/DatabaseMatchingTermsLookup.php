@@ -2,7 +2,9 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
+use FakeResultWrapper;
 use InvalidArgumentException;
+use MediaWiki\Storage\NameTableAccessException;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -163,7 +165,13 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 			$termType = $mask->getTermType();
 		}
 		if ( $termType !== null ) {
-			$conditions['wbtl_type_id'] = $this->typeIdsAcquirer->acquireTypeIds( [ $termType ] )[$termType];
+			try {
+				$conditions['wbtl_type_id'] = $this->typeIdsAcquirer->acquireTypeIds( [ $termType ] )[$termType];
+			} catch ( NameTableAccessException $e ) {
+				// Edge case: attempting to do a term lookup before the first insert of the respective term type. Unlikely to happen in
+				// production, but annoying/confusing if it happens in tests.
+				return new FakeResultWrapper( [] );
+			}
 		}
 
 		$fields = [ 'wbtl_id', 'wbtl_type_id', 'wbxl_language', 'wbx_text' ];
