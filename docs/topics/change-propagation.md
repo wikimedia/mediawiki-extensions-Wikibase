@@ -73,7 +73,7 @@ They are designed to automatically coordinate. For details, refer to the --help 
 
 **Usage Tracking and Subscription Management**
 
-Usage tracking and description management are described in detail in @ref md_docs_topics_usagetracking.
+Usage tracking and subscription management are described in detail in @ref md_docs_topics_usagetracking.
 
 **Change Buffer**
 
@@ -106,7 +106,7 @@ Redis based locks are supported as an alternative and use on wikidata.org
 **dispatch lag**
 
 Dispatch lag is linked to max lag.
-If dispatch lag increases max lag will also increase.
+If dispatch lag increases, max lag will also increase.
 Dispatching is not as efficient as DB replication so the raw lag value is not used, instead a factor is applied.
 The factor is configurable using the [dispatchLagToMaxLagFactor] setting.
 
