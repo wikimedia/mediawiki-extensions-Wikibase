@@ -44,7 +44,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 	public function testDispatchJobForSingleChangeToSingleWiki(): void {
 		$this->skipIfClientNotEnabled();
 
-		$testItemChange = $this->makeNewChange( 123 );
+		$testItemChange = $this->makeNewChange();
 		$repoDb = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb();
 		$changeStore = new SqlChangeStore( $repoDb );
 		$changeStore->saveChange( $testItemChange );
@@ -56,7 +56,13 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 			'cs_subscriber_id' => $wiki,
 		] );
 
-		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState( null, [ 'entityId' => 'Q1' ] );
+		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState(
+			null,
+			[
+				'entityId' => 'Q1',
+				'changeId' => $testItemChange->getId(),
+			]
+		);
 
 		$dispatchChangesJob->run();
 
@@ -71,10 +77,47 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( 0, $dbw->selectRowCount( 'wb_changes' ), 'change should be deleted from `wb_changes`' );
 	}
 
+	public function testNotDispatchingOldChangesAgain(): void {
+		$testItemOldChange = $this->makeNewChange();
+		$testItemNewChange = $this->makeNewChange();
+		$repoDb = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb();
+		$changeStore = new SqlChangeStore( $repoDb );
+		$changeStore->saveChange( $testItemOldChange );
+		$changeStore->saveChange( $testItemNewChange );
+
+		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
+		$dbw = $repoDb->connections()->getWriteConnectionRef();
+		$dbw->insert( 'wb_changes_subscription', [
+			'cs_entity_id' => 'Q1',
+			'cs_subscriber_id' => $wiki,
+		] );
+
+		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState(
+			null,
+			[
+				'entityId' => 'Q1',
+				'changeId' => $testItemNewChange->getId(),
+			]
+		);
+
+		$dispatchChangesJob->run();
+
+		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
+		$queuedJobs = $jobQueueGroup->get( 'EntityChangeNotification' )->getAllQueuedJobs();
+		$job = $queuedJobs->current();
+		$this->assertNotNull( $job );
+		$this->assertCount( 1, $job->getParams()['changes'] );
+
+		$actualItemChangeFields = $job->getParams()['changes'][0];
+		$expectedItemChangeFields = $testItemNewChange->getFields();
+		$expectedItemChangeFields['info'] = $testItemNewChange->getSerializedInfo();
+		$this->assertSame( $expectedItemChangeFields, $actualItemChangeFields );
+	}
+
 	public function testNoValidSubscribers(): void {
 		$this->skipIfClientNotEnabled();
 
-		$testItemChange = $this->makeNewChange( 123 );
+		$testItemChange = $this->makeNewChange();
 		$changeStore = new SqlChangeStore(
 			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()
 		);
@@ -87,7 +130,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 			'cs_subscriber_id' => 'client',
 		] );
 
-		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState( null, [ 'entityId' => 'Q1' ] );
+		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState( null, [ 'entityId' => 'Q1', 'changeId' => 1 ] );
 
 		$dispatchChangesJob->run();
 
@@ -105,7 +148,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 			'cs_subscriber_id' => $wiki,
 		] );
 
-		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState( null, [ 'entityId' => 'Q1' ] );
+		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState( null, [ 'entityId' => 'Q1', 'changeId' => 1 ] );
 
 		$dispatchChangesJob->run();
 
@@ -113,7 +156,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 		$this->assertTrue( $jobQueueGroup->get( 'EntityChangeNotification' )->isEmpty() );
 	}
 
-	private function makeNewChange( int $revisionId ): EntityChange {
+	private function makeNewChange(): EntityChange {
 		$testItemId = new ItemId( 'Q1' );
 		$testItemChange = new ItemChange( [
 			'time' => '20210906122813',
@@ -121,7 +164,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 				'compactDiff' => new EntityDiffChangedAspects( [], [], [ 'P1' ], [], false ),
 				'metadata' => [
 					'page_id' => 3,
-					'rev_id' => $revisionId,
+					'rev_id' => 123,
 					'parent_id' => 4,
 					'comment' => '/* wbsetclaim-update:2||1 */ [[Property:P1]]: string on first item: foo 1',
 					'user_text' => 'Admin',
@@ -130,7 +173,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 			'user_id' => '43',
-			'revision_id' => (string)$revisionId,
+			'revision_id' => '123',
 			'object_id' => 'Q1',
 			'type' => 'wikibase-item~update',
 		] );

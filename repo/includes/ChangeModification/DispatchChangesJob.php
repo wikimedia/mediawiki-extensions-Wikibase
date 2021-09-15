@@ -33,6 +33,11 @@ class DispatchChangesJob extends Job {
 	private $entityIdSerialization;
 
 	/**
+	 * @var int
+	 */
+	private $changeId;
+
+	/**
 	 * @var SubscriptionLookup
 	 */
 	private $subscriptionLookup;
@@ -46,6 +51,7 @@ class DispatchChangesJob extends Job {
 	 * @var JobQueueGroupFactory
 	 */
 	private $jobQueueGroupFactory;
+
 	/**
 	 * @var EntityChangeLookup
 	 */
@@ -56,12 +62,13 @@ class DispatchChangesJob extends Job {
 	 */
 	private $changeStore;
 
-	public static function makeJobSpecification( string $entityIdSerialization ): IJobSpecification {
+	public static function makeJobSpecification( string $entityIdSerialization, int $changeId ): IJobSpecification {
 		return new JobSpecification(
 			'DispatchChanges',
 			[
 				'title' => $entityIdSerialization,
 				'entityId' => $entityIdSerialization,
+				'changeId' => $changeId,
 			]
 		);
 	}
@@ -78,8 +85,12 @@ class DispatchChangesJob extends Job {
 		if ( empty( $params['entityId'] ) ) {
 			throw new InvalidArgumentException( 'entityId parameter missing' );
 		}
+		if ( empty( $params['changeId'] ) ) {
+			throw new InvalidArgumentException( 'changeId parameter missing' );
+		}
 
 		$this->entityIdSerialization = $params['entityId'];
+		$this->changeId = $params['changeId'];
 		$this->subscriptionLookup = $subscriptionLookup;
 		$this->changeLookup = $changeLookup;
 		$this->entityIdParser = $entityIdParser;
@@ -128,6 +139,8 @@ class DispatchChangesJob extends Job {
 		}
 
 		$changes = $this->changeLookup->loadByEntityIdFromPrimary( $this->entityIdSerialization );
+		$changes = $this->extractNewChanges( $changes, $this->changeId );
+
 		if ( empty( $changes ) ) {
 			return true;
 		}
@@ -143,6 +156,12 @@ class DispatchChangesJob extends Job {
 		}
 
 		return true;
+	}
+
+	private function extractNewChanges( array $changes, int $changeId ): array {
+		return array_values( array_filter( $changes, function ( EntityChange $change ) use ( $changeId ) {
+			return $change->getId() >= $changeId;
+		} ) );
 	}
 
 	/**

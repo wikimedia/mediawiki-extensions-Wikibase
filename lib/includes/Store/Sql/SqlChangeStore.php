@@ -26,7 +26,7 @@ class SqlChangeStore implements ChangeStore {
 	}
 
 	/**
-	 * Saves the change to a database table.
+	 * Saves the change to a database table and ensures it has a change-id.
 	 *
 	 * @note Only supports Change objects that are derived from ChangeRow.
 	 *
