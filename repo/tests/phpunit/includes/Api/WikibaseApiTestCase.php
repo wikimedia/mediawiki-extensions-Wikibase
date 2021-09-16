@@ -477,6 +477,9 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		if ( isset( $result['pageinfo']['lastrevid'] ) ) {
 			return $result['pageinfo']['lastrevid'];
 		}
+		if ( isset( $result['lastrevid'] ) ) {
+			return $result['lastrevid'];
+		}
 
 		return null;
 	}
