@@ -78,4 +78,29 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		$this->assertSame( 0, $result->numRows() );
 	}
 
+	public function testFormatResult() {
+		$skin = $this->createMock( \Skin::class );
+		$result = new \stdClass();
+		$result->value = 1;
+
+		$namespaceChecker = new NamespaceChecker( [] );
+
+		$titleFactoryMock = $this->getMockBuilder( \TitleFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$titleFactoryMock->method( 'newFromID' )
+			->willReturn( null );
+
+		$services = $this->getServiceContainer();
+		$specialPage = new SpecialUnconnectedPages(
+			$services->getDBLoadBalancer(),
+			$services->getNamespaceInfo(),
+			$titleFactoryMock,
+			$namespaceChecker ?: WikibaseClient::getNamespaceChecker( $services )
+		);
+
+		$this->assertFalse( $specialPage->formatResult( $skin, $result ) );
+	}
+
 }
