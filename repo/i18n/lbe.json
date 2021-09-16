@@ -5,5 +5,8 @@
 		]
 	},
 	"wikibase-edit": "дакьин дан",
-	"wikibase-add": "ххи бан"
+	"wikibase-add": "ххи бан",
+	"wikibase-description-empty": "Бусала кьачирчун дур",
+	"wikibase-sitelinks-special": "Цамур сайтрув",
+	"wikibase-statementview-rank-normal": "Муданмасса ранг"
 }
