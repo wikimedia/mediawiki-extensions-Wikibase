@@ -7,7 +7,6 @@ use MediaWikiCoversValidator;
 use Site;
 use SiteLookup;
 use Wikibase\Client\OtherProjectsSitesGenerator;
-use Wikimedia\AtEase\AtEase;
 
 /**
  * @covers \Wikibase\Client\OtherProjectsSitesGenerator
@@ -88,12 +87,10 @@ class OtherProjectsSitesGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 		// getOtherProjectsSiteIds does wfWarn in case it's being called with a siteid
 		// it doesn't know about. That's fine, we can just ignore that.
-		AtEase::suppressWarnings();
-		$result = $otherProjectsSitesProvider->getOtherProjectsSiteIds( [
+		$result = @$otherProjectsSitesProvider->getOtherProjectsSiteIds( [
 			'wikipedia',
 			'wikisource',
 		] );
-		AtEase::restoreWarnings();
 
 		$this->assertSame( [], $result );
 	}

@@ -20,7 +20,6 @@ use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
-use Wikimedia\AtEase\AtEase;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -463,9 +462,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$factory = $this->newRecentChangeFactory();
 
-		AtEase::suppressWarnings();
-		$rc = $factory->newRecentChange( $change, $target );
-		AtEase::restoreWarnings();
+		$rc = @$factory->newRecentChange( $change, $target );
 
 		$expectedComment = '(wikibase-comment-update)';
 		$this->assertEquals( $expectedComment, $rc->getAttribute( 'rc_comment' ) );

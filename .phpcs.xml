@@ -45,6 +45,9 @@
 		<!-- Exclude test methods like "testGivenInvalidInput_methodThrowsException". -->
 		<exclude-pattern>tests*Test*\.php</exclude-pattern>
 	</rule>
+	<rule ref="Generic.PHP.NoSilencedErrors.Discouraged">
+		<exclude-pattern>tests/phpunit/*</exclude-pattern>
+	</rule>
 
 	<!-- NOTE: We can not use the Squiz.Arrays.ArrayBracketSpacing sniff because it conflicts with
 		the MediaWiki style that encourages to use spaces inside brackets, see
