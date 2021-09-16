@@ -127,7 +127,7 @@ class DispatchChangesJob extends Job {
 			return true;
 		}
 
-		$changes = $this->changeLookup->loadByEntityId( $this->entityIdSerialization );
+		$changes = $this->changeLookup->loadByEntityIdFromPrimary( $this->entityIdSerialization );
 		if ( empty( $changes ) ) {
 			return true;
 		}
