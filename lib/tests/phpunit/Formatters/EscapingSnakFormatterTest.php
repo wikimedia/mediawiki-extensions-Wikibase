@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\StringValue;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Formatters\EscapingSnakFormatter;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -44,7 +44,7 @@ class EscapingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 			'htmlspecialchars'
 		);
 
-		$p1 = new PropertyId( 'P77' );
+		$p1 = new NumericPropertyId( 'P77' );
 		$snak = new PropertyValueSnak( $p1, new StringValue( 'DUMMY' ) );
 		$this->assertSame( '&lt;foo&gt;', $formatter->formatSnak( $snak ) );
 	}

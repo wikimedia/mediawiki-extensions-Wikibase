@@ -7,6 +7,7 @@ use DataValues\StringValue;
 use InvalidArgumentException;
 use MockMessageLocalizer;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -39,15 +40,15 @@ class DataBridgeReferenceFormatterTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->referenceUrlPropertyId = new PropertyId( 'P1' );
-		$this->titlePropertyId = new PropertyId( 'P2' );
-		$this->statedInPropertyId = new PropertyId( 'P3' );
-		$this->authorPropertyId = new PropertyId( 'P4' );
-		$this->publisherPropertyId = new PropertyId( 'P5' );
-		$this->publicationDatePropertyId = new PropertyId( 'P6' );
-		$this->retrievedDatePropertyId = new PropertyId( 'P7' );
-		$this->otherPropertyId1 = new PropertyId( 'P8' );
-		$this->otherPropertyId2 = new PropertyId( 'P9' );
+		$this->referenceUrlPropertyId = new NumericPropertyId( 'P1' );
+		$this->titlePropertyId = new NumericPropertyId( 'P2' );
+		$this->statedInPropertyId = new NumericPropertyId( 'P3' );
+		$this->authorPropertyId = new NumericPropertyId( 'P4' );
+		$this->publisherPropertyId = new NumericPropertyId( 'P5' );
+		$this->publicationDatePropertyId = new NumericPropertyId( 'P6' );
+		$this->retrievedDatePropertyId = new NumericPropertyId( 'P7' );
+		$this->otherPropertyId1 = new NumericPropertyId( 'P8' );
+		$this->otherPropertyId2 = new NumericPropertyId( 'P9' );
 	}
 
 	private function stringValueSnak( PropertyId $propertyId, string $string ): Snak {

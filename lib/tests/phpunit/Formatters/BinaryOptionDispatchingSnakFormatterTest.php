@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\StringValue;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -48,8 +48,8 @@ class BinaryOptionDispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCa
 	}
 
 	public function formatSnakProvider() {
-		$pSpecial = new PropertyId( 'P1' );
-		$pRegular = new PropertyId( 'P2' );
+		$pSpecial = new NumericPropertyId( 'P1' );
+		$pRegular = new NumericPropertyId( 'P2' );
 		$value = new StringValue( '' );
 
 		return [
@@ -70,7 +70,7 @@ class BinaryOptionDispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCa
 				false
 			],
 			'Fallback on non-existing Properties' => [
-				new PropertyValueSnak( new PropertyId( 'P3' ), $value ),
+				new PropertyValueSnak( new NumericPropertyId( 'P3' ), $value ),
 				false
 			],
 		];
@@ -110,7 +110,7 @@ class BinaryOptionDispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCa
 	private function getPropertyDataTypeLookup() {
 		$propertyDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$propertyDataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->willReturnCallback( function( PropertyId $propertyId ) {
+			->willReturnCallback( function( NumericPropertyId $propertyId ) {
 				switch ( $propertyId->getSerialization() ) {
 					case 'P1':
 						return 'special';

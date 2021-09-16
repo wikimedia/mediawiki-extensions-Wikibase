@@ -7,8 +7,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
@@ -41,7 +41,7 @@ abstract class EntityRevisionLookupTestCase extends MediaWikiIntegrationTestCase
 
 		$entities[12] = new EntityRevision( $item, 12, '20130101001200' );
 
-		$prop = new Property( new PropertyId( 'P753' ), null, 'string' );
+		$prop = new Property( new NumericPropertyId( 'P753' ), null, 'string' );
 
 		$entities[13] = new EntityRevision( $prop, 13, '20130101001300' );
 
@@ -99,10 +99,10 @@ abstract class EntityRevisionLookupTestCase extends MediaWikiIntegrationTestCase
 				new ItemId( 'q753' ), 0, false,
 			],
 			[ // #5: mismatching revision
-				new PropertyId( 'p753' ), 11, false, StorageException::class,
+				new NumericPropertyId( 'p753' ), 11, false, StorageException::class,
 			],
 			[ // #6: some revision
-				new PropertyId( 'p753' ), 0, true,
+				new NumericPropertyId( 'p753' ), 0, true,
 			],
 		];
 
@@ -163,7 +163,7 @@ abstract class EntityRevisionLookupTestCase extends MediaWikiIntegrationTestCase
 				new ItemId( 'q42' ), 12,
 			],
 			[ // #1
-				new PropertyId( 'p753' ), 13,
+				new NumericPropertyId( 'p753' ), 13,
 			],
 		];
 

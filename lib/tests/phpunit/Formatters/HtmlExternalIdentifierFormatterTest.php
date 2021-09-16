@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\StringValue;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Formatters\HtmlExternalIdentifierFormatter;
@@ -39,12 +39,12 @@ class HtmlExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'formatter URL' => [
 				$formatterUrlExpander,
-				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'abc&123' ) ),
+				new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'abc&123' ) ),
 				'<a class="wb-external-id external" href="http://acme.test/stuff/abc%26123" rel="nofollow">abc&amp;123</a>'
 			],
 			'unknown property' => [
 				$formatterUrlExpander,
-				new PropertyValueSnak( new PropertyId( 'P2' ), new StringValue( 'abc&123' ) ),
+				new PropertyValueSnak( new NumericPropertyId( 'P2' ), new StringValue( 'abc&123' ) ),
 				'<span class="wb-external-id">abc&amp;123</span>'
 			],
 		];
@@ -66,7 +66,7 @@ class HtmlExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
 	public function provideFormatSnak_ParameterTypeException() {
 		return [
 			'bad snak type' => [
-				new PropertyNoValueSnak( new PropertyId( 'P7' ) )
+				new PropertyNoValueSnak( new NumericPropertyId( 'P7' ) )
 			],
 		];
 	}

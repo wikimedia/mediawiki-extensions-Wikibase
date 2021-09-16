@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 
 use BagOStuff;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\AbstractTermPropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
 
@@ -63,7 +63,7 @@ class CachedDatabasePropertyLabelResolver extends AbstractTermPropertyLabelResol
 		foreach ( $termsByPropertyId as $propertyId => $terms ) {
 			$label = $terms['label'][$this->languageCode][0] ?? null;
 			if ( $label !== null ) {
-				$propertiesByLabel[$label] = PropertyId::newFromNumber( $propertyId );
+				$propertiesByLabel[$label] = NumericPropertyId::newFromNumber( $propertyId );
 			}
 		}
 

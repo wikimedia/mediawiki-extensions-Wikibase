@@ -10,7 +10,7 @@ use Message;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -160,7 +160,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( SnakFormatter::class, $formatter );
 		$this->assertEquals( $format, $formatter->getFormat() );
 
-		$snak = new PropertyValueSnak( new PropertyId( 'P5' ), $value );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P5' ), $value );
 		$this->assertEquals( $expected, $formatter->formatSnak( $snak ) );
 	}
 
@@ -181,7 +181,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory = $this->newOutputFormatSnakFormatterFactory( 'string' );
 		$formatter = $factory->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, new FormatterOptions() );
 
-		$snak = new $snakClass( new PropertyId( 'P5' ) );
+		$snak = new $snakClass( new NumericPropertyId( 'P5' ) );
 		$this->assertStringContainsString( $expected, $formatter->formatSnak( $snak ) );
 	}
 

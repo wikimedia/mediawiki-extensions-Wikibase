@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Store;
 use InvalidArgumentException;
 use MediaWikiCoversValidator;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup;
 
@@ -34,11 +34,11 @@ class TypeDispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCas
 		);
 
 		$this->expectException( InvalidArgumentException::class );
-		$lookup->getEntityRevision( new PropertyId( 'P1' ) );
+		$lookup->getEntityRevision( new NumericPropertyId( 'P1' ) );
 	}
 
 	public function testGivenUnknownEntityType_getEntityRevisionForwardsToDefaultService() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$lookup = new TypeDispatchingEntityRevisionLookup(
 			[],
 			$this->newDefaultService( 'getEntityRevision', $id )
@@ -49,7 +49,7 @@ class TypeDispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCas
 	}
 
 	public function testGivenCustomEntityType_getEntityRevisionInstantiatesCustomService() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$lookup = new TypeDispatchingEntityRevisionLookup(
 			[
 				'property' => function ( EntityRevisionLookup $defaultService ) use ( $id ) {
@@ -69,7 +69,7 @@ class TypeDispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCas
 	}
 
 	public function testGivenUnknownEntityType_getLatestRevisionIdForwardsToDefaultService() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$lookup = new TypeDispatchingEntityRevisionLookup(
 			[],
 			$this->newDefaultService( 'getLatestRevisionId', $id )
@@ -80,7 +80,7 @@ class TypeDispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCas
 	}
 
 	public function testGivenCustomEntityType_getLatestRevisionIdInstantiatesCustomService() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 		$lookup = new TypeDispatchingEntityRevisionLookup(
 			[
 				'property' => function ( EntityRevisionLookup $defaultService ) use ( $id ) {

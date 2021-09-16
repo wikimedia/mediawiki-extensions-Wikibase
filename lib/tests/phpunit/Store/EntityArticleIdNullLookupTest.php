@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\EntityArticleIdNullLookup;
 
 /**
@@ -17,7 +17,7 @@ class EntityArticleIdNullLookupTest extends TestCase {
 
 	public function testGetArticleId() {
 		$this->assertNull( ( new EntityArticleIdNullLookup() )
-			->getArticleId( new PropertyId( 'P666' ) ) );
+			->getArticleId( new NumericPropertyId( 'P666' ) ) );
 	}
 
 }

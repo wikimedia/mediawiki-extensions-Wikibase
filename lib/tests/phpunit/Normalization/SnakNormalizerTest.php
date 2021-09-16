@@ -7,7 +7,7 @@ namespace Wikibase\Lib\Tests\Normalization;
 use DataValues\StringValue;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -32,7 +32,7 @@ class SnakNormalizerTest extends TestCase {
 
 	private function getSnakNormalizer( array $normalizerDefinitions ): SnakNormalizer {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( self::STRING_PROPERTY ), 'string' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::STRING_PROPERTY ), 'string' );
 
 		return new SnakNormalizer(
 			$dataTypeLookup,
@@ -74,7 +74,7 @@ class SnakNormalizerTest extends TestCase {
 	}
 
 	public function provideNonValueSnak(): iterable {
-		$propertyId = new PropertyId( self::STRING_PROPERTY );
+		$propertyId = new NumericPropertyId( self::STRING_PROPERTY );
 		yield 'somevalue' => [ new PropertySomeValueSnak( $propertyId ) ];
 		yield 'novalue' => [ new PropertyNoValueSnak( $propertyId ) ];
 	}
@@ -82,7 +82,7 @@ class SnakNormalizerTest extends TestCase {
 	/** @dataProvider provideEmptyDefinitions */
 	public function testEmptyDefinitions( array $definitions ): void {
 		$value = new StringValue( '' );
-		$snak = new PropertyValueSnak( new PropertyId( self::STRING_PROPERTY ), $value );
+		$snak = new PropertyValueSnak( new NumericPropertyId( self::STRING_PROPERTY ), $value );
 		$normalizer = $this->getSnakNormalizer( $definitions );
 
 		$normalizedSnak = $normalizer->normalize( $snak );
@@ -115,7 +115,7 @@ class SnakNormalizerTest extends TestCase {
 			'VT:monolingualtext' => $callable,
 		] );
 
-		$propertyId = new PropertyId( self::STRING_PROPERTY );
+		$propertyId = new NumericPropertyId( self::STRING_PROPERTY );
 		$value = new StringValue( '' );
 		$snak = new PropertyValueSnak( $propertyId, $value );
 		$normalizer->normalize( $snak );
@@ -129,7 +129,7 @@ class SnakNormalizerTest extends TestCase {
 			'VT:string' => $this->constantCallable( $this->uppercasingNormalizer() ),
 		] );
 
-		$propertyId = new PropertyId( self::STRING_PROPERTY );
+		$propertyId = new NumericPropertyId( self::STRING_PROPERTY );
 		$value = new StringValue( 'abc' );
 		$snak = new PropertyValueSnak( $propertyId, $value );
 		/** @var PropertyValueSnak $normalizedSnak */
@@ -146,7 +146,7 @@ class SnakNormalizerTest extends TestCase {
 			] ),
 		] );
 
-		$propertyId = new PropertyId( self::STRING_PROPERTY );
+		$propertyId = new NumericPropertyId( self::STRING_PROPERTY );
 		$value = new StringValue( 'abc' );
 		$snak = new PropertyValueSnak( $propertyId, $value );
 		/** @var PropertyValueSnak $normalizedSnak */
@@ -160,7 +160,7 @@ class SnakNormalizerTest extends TestCase {
 			'PT:string' => $this->constantCallable( $this->uppercasingNormalizer() ),
 		] );
 
-		$propertyId = new PropertyId( self::STRING_PROPERTY );
+		$propertyId = new NumericPropertyId( self::STRING_PROPERTY );
 		$value = new StringValue( 'abc' );
 		$snak = new PropertyValueSnak( $propertyId, $value );
 		/** @var PropertyValueSnak $normalizedSnak */
@@ -177,7 +177,7 @@ class SnakNormalizerTest extends TestCase {
 			] ),
 		] );
 
-		$propertyId = new PropertyId( self::STRING_PROPERTY );
+		$propertyId = new NumericPropertyId( self::STRING_PROPERTY );
 		$value = new StringValue( 'abc' );
 		$snak = new PropertyValueSnak( $propertyId, $value );
 		/** @var PropertyValueSnak $normalizedSnak */
@@ -195,7 +195,7 @@ class SnakNormalizerTest extends TestCase {
 			'PT:string' => $this->constantCallable( $this->repeatingNormalizer( 3 ) ),
 		] );
 
-		$propertyId = new PropertyId( self::STRING_PROPERTY );
+		$propertyId = new NumericPropertyId( self::STRING_PROPERTY );
 		$value = new StringValue( 'abc' );
 		$snak = new PropertyValueSnak( $propertyId, $value );
 		/** @var PropertyValueSnak $normalizedSnak */
@@ -210,7 +210,7 @@ class SnakNormalizerTest extends TestCase {
 			'PT:string' => $this->constantCallable( $this->repeatingNormalizer( 2 ) ), // unused
 		] );
 
-		$propertyId = new PropertyId( self::UNKNOWN_PROPERTY );
+		$propertyId = new NumericPropertyId( self::UNKNOWN_PROPERTY );
 		$value = new StringValue( 'abc' );
 		$snak = new PropertyValueSnak( $propertyId, $value );
 		/** @var PropertyValueSnak $normalizedSnak */
@@ -224,7 +224,7 @@ class SnakNormalizerTest extends TestCase {
 			'VT:string' => $this->constantCallable( new StringNormalizer() ),
 		] );
 
-		$propertyId = new PropertyId( self::STRING_PROPERTY );
+		$propertyId = new NumericPropertyId( self::STRING_PROPERTY );
 		$value = new StringValue( 'abc' );
 		$snak = new PropertyValueSnak( $propertyId, $value );
 

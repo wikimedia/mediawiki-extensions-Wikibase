@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -22,7 +22,7 @@ use Wikibase\Lib\Store\MultiPropertyTermStoreWriter;
  */
 class MultiPropertyTermStoreWriterTest extends TestCase {
 
-	/** @var PropertyId */
+	/** @var NumericPropertyId */
 	private $propertyId;
 
 	/** @var Fingerprint */
@@ -30,7 +30,7 @@ class MultiPropertyTermStoreWriterTest extends TestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->propertyId = new PropertyId( 'P1' );
+		$this->propertyId = new NumericPropertyId( 'P1' );
 		$this->fingerprint = new Fingerprint(
 			new TermList( [ new Term( 'en', 'a label' ) ] ),
 			new TermList( [ new Term( 'en', 'a description' ) ] ),

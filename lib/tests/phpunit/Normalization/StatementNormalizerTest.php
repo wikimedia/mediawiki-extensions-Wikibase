@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Tests\Normalization;
 
 use DataValues\StringValue;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -37,8 +37,8 @@ class StatementNormalizerTest extends TestCase {
 		$referenceNormalizer = new ReferenceNormalizer( $snakNormalizer );
 		$statementNormalizer = new StatementNormalizer( $snakNormalizer, $referenceNormalizer );
 
-		$p1 = new PropertyId( 'P1' );
-		$p2 = new PropertyId( 'P2' );
+		$p1 = new NumericPropertyId( 'P1' );
+		$p2 = new NumericPropertyId( 'P2' );
 		$guid = 'Q2013$0c0b84da-49d8-84ff-f367-0c6e5e098aa6';
 		$statement = new Statement(
 			new PropertyValueSnak( $p1, new StringValue( 'main' ) ),

@@ -19,11 +19,13 @@ use Wikibase\DataModel\Term\Fingerprint;
 class DatabasePropertyTermStoreWriter extends DatabaseTermStoreWriterBase implements PropertyTermStoreWriter {
 
 	public function storeTerms( PropertyId $propertyId, Fingerprint $fingerprint ) {
+ // TODO: Change to NumericPropertyId when data-model-services is updated
 		$this->incrementForQuery( 'PropertyTermStore_storeTerms' );
 		$this->store( $propertyId, $fingerprint );
 	}
 
 	public function deleteTerms( PropertyId $propertyId ) {
+ // TODO: Change to NumericPropertyId when data-model-services is updated
 		$this->incrementForQuery( 'PropertyTermStore_deleteTerms' );
 		$this->delete( $propertyId );
 	}

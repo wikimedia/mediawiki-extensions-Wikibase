@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Formatters\Reference;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 
 /**
  * A container for a set of property IDs for certain well-known roles.
@@ -20,29 +20,29 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class WellKnownReferenceProperties {
 
-	/** @var PropertyId|null */
+	/** @var NumericPropertyId|null */
 	public $referenceUrlPropertyId;
-	/** @var PropertyId|null */
+	/** @var NumericPropertyId|null */
 	public $titlePropertyId;
-	/** @var PropertyId|null */
+	/** @var NumericPropertyId|null */
 	public $statedInPropertyId;
-	/** @var PropertyId|null */
+	/** @var NumericPropertyId|null */
 	public $authorPropertyId;
-	/** @var PropertyId|null */
+	/** @var NumericPropertyId|null */
 	public $publisherPropertyId;
-	/** @var PropertyId|null */
+	/** @var NumericPropertyId|null */
 	public $publicationDatePropertyId;
-	/** @var PropertyId|null */
+	/** @var NumericPropertyId|null */
 	public $retrievedDatePropertyId;
 
 	private function __construct(
-		?PropertyId $referenceUrlPropertyId,
-		?PropertyId $titlePropertyId,
-		?PropertyId $statedInPropertyId,
-		?PropertyId $authorPropertyId,
-		?PropertyId $publisherPropertyId,
-		?PropertyId $publicationDatePropertyId,
-		?PropertyId $retrievedDatePropertyId
+		?NumericPropertyId $referenceUrlPropertyId,
+		?NumericPropertyId $titlePropertyId,
+		?NumericPropertyId $statedInPropertyId,
+		?NumericPropertyId $authorPropertyId,
+		?NumericPropertyId $publisherPropertyId,
+		?NumericPropertyId $publicationDatePropertyId,
+		?NumericPropertyId $retrievedDatePropertyId
 	) {
 		$this->referenceUrlPropertyId = $referenceUrlPropertyId;
 		$this->titlePropertyId = $titlePropertyId;
@@ -125,14 +125,14 @@ class WellKnownReferenceProperties {
 		array $wellKnownPropertyIds,
 		string $wellKnownName,
 		LoggerInterface $logger
-	): ?PropertyId {
+	): ?NumericPropertyId {
 		if ( array_key_exists( $wellKnownName, $wellKnownPropertyIds ) ) {
 			$value = $wellKnownPropertyIds[$wellKnownName];
 			if ( $value === null ) {
 				return null;
 			}
 			try {
-				return new PropertyId( $value );
+				return new NumericPropertyId( $value );
 			} catch ( InvalidArgumentException $e ) {
 				$logger->error(
 					'cannot parse value {value} for well-known reference property {wellKnownName}: {exception}',

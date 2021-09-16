@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
@@ -72,10 +73,10 @@ class MockPropertyInfoLookup implements PropertyInfoLookup {
 	}
 
 	/**
-	 * @param PropertyId $propertyId
+	 * @param NumericPropertyId $propertyId
 	 * @param array $info
 	 */
-	public function addPropertyInfo( PropertyId $propertyId, array $info ) {
+	public function addPropertyInfo( NumericPropertyId $propertyId, array $info ) {
 		$id = $propertyId->getSerialization();
 		$this->propertyInfo[$id] = $info;
 	}

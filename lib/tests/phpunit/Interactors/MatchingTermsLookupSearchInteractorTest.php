@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Interactors;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
@@ -48,13 +48,13 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				$this->getTermIndexEntry( 'TAAA', 'en-ca', TermIndexEntry::TYPE_ALIAS, new ItemId( 'Q555' ) ),
 				$this->getTermIndexEntry( 'Taa', 'en-ca', TermIndexEntry::TYPE_ALIAS, new ItemId( 'Q555' ) ),
 				//P11
-				$this->getTermIndexEntry( 'Lahmacun', 'en', TermIndexEntry::TYPE_LABEL, new PropertyId( 'P11' ) ),
+				$this->getTermIndexEntry( 'Lahmacun', 'en', TermIndexEntry::TYPE_LABEL, new NumericPropertyId( 'P11' ) ),
 				//P22
-				$this->getTermIndexEntry( 'Lama', 'en', TermIndexEntry::TYPE_LABEL, new PropertyId( 'P22' ) ),
-				$this->getTermIndexEntry( 'La-description', 'en', TermIndexEntry::TYPE_DESCRIPTION, new PropertyId( 'P22' ) ),
+				$this->getTermIndexEntry( 'Lama', 'en', TermIndexEntry::TYPE_LABEL, new NumericPropertyId( 'P22' ) ),
+				$this->getTermIndexEntry( 'La-description', 'en', TermIndexEntry::TYPE_DESCRIPTION, new NumericPropertyId( 'P22' ) ),
 				//P44
-				$this->getTermIndexEntry( 'Lama', 'en-ca', TermIndexEntry::TYPE_LABEL, new PropertyId( 'P44' ) ),
-				$this->getTermIndexEntry( 'Lama-de-desc', 'de', TermIndexEntry::TYPE_DESCRIPTION, new PropertyId( 'P44' ) ),
+				$this->getTermIndexEntry( 'Lama', 'en-ca', TermIndexEntry::TYPE_LABEL, new NumericPropertyId( 'P44' ) ),
+				$this->getTermIndexEntry( 'Lama-de-desc', 'de', TermIndexEntry::TYPE_DESCRIPTION, new NumericPropertyId( 'P44' ) ),
 			]
 		);
 	}
@@ -63,7 +63,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 	 * @param string $text
 	 * @param string $languageCode
 	 * @param string $termType
-	 * @param EntityId|ItemId|PropertyId $entityId
+	 * @param EntityId|ItemId|NumericPropertyId $entityId
 	 *
 	 * @return TermIndexEntry
 	 */
@@ -338,22 +338,22 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				[ 'La', 'en-ca', 'property', $allTermTypes ],
 				[
 					[
-						'entityId' => new PropertyId( 'P44' ),
+						'entityId' => new NumericPropertyId( 'P44' ),
 						'term' => new Term( 'en-ca', 'Lama' ),
 						'termtype' => 'label',
 					],
 					[
-						'entityId' => new PropertyId( 'P11' ),
+						'entityId' => new NumericPropertyId( 'P11' ),
 						'term' => new Term( 'en', 'Lahmacun' ),
 						'termtype' => 'label' ,
 					],
 					[
-						'entityId' => new PropertyId( 'P22' ),
+						'entityId' => new NumericPropertyId( 'P22' ),
 						'term' => new Term( 'en', 'Lama' ),
 						'termtype' => 'label' ,
 					],
 					[
-						'entityId' => new PropertyId( 'P22' ),
+						'entityId' => new NumericPropertyId( 'P22' ),
 						'term' => new Term( 'en', 'La-description' ),
 						'termtype' => 'description' ,
 					],
@@ -366,12 +366,12 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				[ 'La', 'en-ca', 'property', $allTermTypes ],
 				[
 					[
-						'entityId' => new PropertyId( 'P44' ),
+						'entityId' => new NumericPropertyId( 'P44' ),
 						'term' => new Term( 'en-ca', 'Lama' ),
 						'termtype' => 'label',
 					],
 					[
-						'entityId' => new PropertyId( 'P11' ),
+						'entityId' => new NumericPropertyId( 'P11' ),
 						'term' => new Term( 'en', 'Lahmacun' ),
 						'termtype' => 'label' ,
 					],

@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
@@ -343,9 +342,9 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 	public function testSetCutoffPosition() {
 		$entities = [
 			new Item( new ItemId( 'Q6' ) ),
-			new Property( new PropertyId( 'P1' ), null, 'string' ), // TODO: change PropertyId to NumericPropertyId
+			new Property( new NumericPropertyId( 'P1' ), null, 'string' ),
 			new Item( new ItemId( 'Q7' ) ),
-			new Property( new PropertyId( 'P2' ), null, 'string' ), // TODO: change PropertyId to NumericPropertyId
+			new Property( new NumericPropertyId( 'P2' ), null, 'string' ),
 			new Item( new ItemId( 'Q8' ) )
 		];
 
@@ -367,7 +366,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 		$ids = $pager->fetchIds( 10 );
 
 		$this->assertEquals(
-			[ new ItemId( 'Q6' ), new PropertyId( 'P1' ), new ItemId( 'Q7' ) ], // TODO: change PropertyId to NumericPropertyId
+			[ new ItemId( 'Q6' ), new NumericPropertyId( 'P1' ), new ItemId( 'Q7' ) ],
 			$ids
 		);
 		$this->assertSame( $itemPage->getId(), $pager->getPosition() );
@@ -377,7 +376,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 		$ids = $pager->fetchIds( 10 );
 
 		$this->assertEquals(
-			[ new PropertyId( 'P2' ), new ItemId( 'Q8' ) ], // TODO: change PropertyId to NumericPropertyId
+			[ new NumericPropertyId( 'P2' ), new ItemId( 'Q8' ) ],
 			$ids
 		);
 		$this->assertSame( $itemPage->getId() + 2, $pager->getPosition() );

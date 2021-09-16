@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use HashBagOStuff;
 use MediaWikiIntegrationTestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
@@ -109,8 +109,8 @@ class CachedDatabasePropertyLabelResolverTest extends MediaWikiIntegrationTestCa
 					'Zwei'
 				],
 				[ // expected
-					'Eins' => new PropertyId( 'P1' ),
-					'Zwei' => new PropertyId( 'P2' ),
+					'Eins' => new NumericPropertyId( 'P1' ),
+					'Zwei' => new NumericPropertyId( 'P2' ),
 				]
 			],
 			[ // #2
@@ -121,7 +121,7 @@ class CachedDatabasePropertyLabelResolverTest extends MediaWikiIntegrationTestCa
 					'Vier'
 				],
 				[ // expected
-					'Drei' => new PropertyId( 'P3' ),
+					'Drei' => new NumericPropertyId( 'P3' ),
 				]
 			],
 			[ // #3
@@ -143,7 +143,7 @@ class CachedDatabasePropertyLabelResolverTest extends MediaWikiIntegrationTestCa
 					'Four'
 				],
 				[ // expected
-					'One' => new PropertyId( 'P1' ),
+					'One' => new NumericPropertyId( 'P1' ),
 				]
 			],
 		];

@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -154,7 +154,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function provideFormatSnak() {
-		$p23 = new PropertyId( 'P23' );
+		$p23 = new NumericPropertyId( 'P23' );
 
 		return [
 			'novalue' => [

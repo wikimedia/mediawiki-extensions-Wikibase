@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\StringValue;
 use MediaWikiCoversValidator;
 use Message;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -15,7 +15,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
 
 /**
  * @covers \Wikibase\Lib\Formatters\MessageSnakFormatter
- * @uses Wikibase\DataModel\Entity\PropertyId
+ * @uses Wikibase\DataModel\Entity\NumericPropertyId
  * @uses Wikibase\DataModel\Snak\PropertyNoValueSnak
  * @uses Wikibase\DataModel\Snak\PropertySomeValueSnak
  *
@@ -65,7 +65,7 @@ class MessageSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function snakProvider() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 
 		return [
 			[
@@ -87,7 +87,7 @@ class MessageSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider formatProvider
 	 */
 	public function testFormatSnak_givenDifferentFormats( $format, $expected ) {
-		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'string' ) );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'string' ) );
 		$formatter = $this->getFormatter( $snak->getType(), $format );
 
 		$this->assertEquals( $expected, $formatter->formatSnak( $snak ) );

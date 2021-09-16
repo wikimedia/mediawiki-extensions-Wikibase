@@ -7,7 +7,7 @@ use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use TestLogger;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Formatters\Reference\WellKnownReferenceProperties;
 
 /**
@@ -47,13 +47,13 @@ class WellKnownReferencePropertiesTest extends TestCase {
 	}
 
 	public function testNewFromArray_complete() {
-		$referenceUrlPropertyId = new PropertyId( 'P1' );
-		$titlePropertyId = new PropertyId( 'P2' );
-		$statedInPropertyId = new PropertyId( 'P3' );
-		$authorPropertyId = new PropertyId( 'P4' );
-		$publisherPropertyId = new PropertyId( 'P5' );
-		$publicationDatePropertyId = new PropertyId( 'P6' );
-		$retrievedDatePropertyId = new PropertyId( 'P7' );
+		$referenceUrlPropertyId = new NumericPropertyId( 'P1' );
+		$titlePropertyId = new NumericPropertyId( 'P2' );
+		$statedInPropertyId = new NumericPropertyId( 'P3' );
+		$authorPropertyId = new NumericPropertyId( 'P4' );
+		$publisherPropertyId = new NumericPropertyId( 'P5' );
+		$publicationDatePropertyId = new NumericPropertyId( 'P6' );
+		$retrievedDatePropertyId = new NumericPropertyId( 'P7' );
 
 		$properties = WellKnownReferenceProperties::newFromArray( [
 			'referenceUrl' => $referenceUrlPropertyId->getSerialization(),

@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Tests\Normalization;
 
 use DataValues\StringValue;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Normalization\ReferenceNormalizer;
@@ -43,8 +43,8 @@ class ReferenceNormalizerTest extends TestCase {
 			} );
 		$referenceNormalizer = new ReferenceNormalizer( $snakNormalizer );
 
-		$p1 = new PropertyId( 'P1' );
-		$p2 = new PropertyId( 'P2' );
+		$p1 = new NumericPropertyId( 'P1' );
+		$p2 = new NumericPropertyId( 'P2' );
 		$reference = $referenceNormalizer->normalize( new Reference( [
 			new PropertyValueSnak( $p1, new StringValue( 'abc' ) ),
 			new PropertyValueSnak( $p1, new StringValue( 'def' ) ),
