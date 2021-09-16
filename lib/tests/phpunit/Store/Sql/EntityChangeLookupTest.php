@@ -117,36 +117,6 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testLoadByRevisionId() {
-		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
-		}
-
-		list( $expected ) = $this->getEntityChanges();
-		$expected->setField( 'revision_id', 342342 );
-		$expected->setField( 'id', null ); // Null the id as we save the same changes multiple times
-
-		$changeStore = new SqlChangeStore( $this->getRepoDomainDb() );
-		$changeStore->saveChange( $expected );
-
-		$lookup = $this->newEntityChangeLookup();
-
-		$change = $lookup->loadByRevisionId( 342342 );
-
-		$this->assertChangesEqual( [ $expected ], [ $change ] );
-	}
-
-	public function testLoadByRevisionId_notFound() {
-		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
-		}
-
-		$lookup = $this->newEntityChangeLookup();
-
-		$changes = $lookup->loadByRevisionId( PHP_INT_MAX );
-		$this->assertNull( $changes );
-	}
-
 	private function assertChangesEqual( array $expected, array $changes, $start = 0 ) {
 		$this->assertCount( count( $expected ), $changes );
 

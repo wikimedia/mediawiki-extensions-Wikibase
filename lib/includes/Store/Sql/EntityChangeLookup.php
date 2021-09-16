@@ -19,13 +19,6 @@ use Wikimedia\Rdbms\IResultWrapper;
 class EntityChangeLookup implements ChunkAccess {
 
 	/**
-	 * Flag to indicate that we need to query a master database.
-	 */
-	public const FROM_MASTER = 'master';
-
-	public const FROM_REPLICA = 'replica';
-
-	/**
 	 * @var EntityChangeFactory
 	 */
 	private $entityChangeFactory;
@@ -99,27 +92,6 @@ class EntityChangeLookup implements ChunkAccess {
 			[],
 			__METHOD__
 		);
-	}
-
-	/**
-	 * @param int $revisionId
-	 * @param string $mode One of the self::FROM_... constants.
-	 *
-	 * @return EntityChange|null
-	 */
-	public function loadByRevisionId( $revisionId, $mode = self::FROM_REPLICA ) {
-		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
-
-		$change = $this->loadChanges(
-			[ 'change_revision_id' => $revisionId ],
-			[
-				'LIMIT' => 1
-			],
-			__METHOD__,
-			$mode === self::FROM_MASTER ? DB_PRIMARY : DB_REPLICA
-		);
-
-		return $change[0] ?? null;
 	}
 
 	/**
