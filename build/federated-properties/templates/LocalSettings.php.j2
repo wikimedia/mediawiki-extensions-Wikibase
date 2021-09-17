@@ -81,8 +81,7 @@ if('{{ FEDPROPS_INTERWIKI_PREFIX }}' !== 'wikidata') {
 		],
 		'fedprops' => [
 			'type' => 'api',
-			'entityNamespaces' => [ 'property' => 122 ],
-			'repoDatabase' => false,
+			'entityTypes' => [ 'property' ],
 			'baseUri' => 'http://{{ SOURCE_REPO_HOST }}/entity/',
 			'interwikiPrefix' => '{{ FEDPROPS_INTERWIKI_PREFIX }}',
 			'rdfNodeNamespacePrefix' => 'fpwd',
