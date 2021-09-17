@@ -5,17 +5,12 @@ namespace Wikibase\DataAccess;
 use Wikimedia\Assert\Assert;
 
 /**
- * An EntitySource includes information needed to interact with one or more entity types at a given source.
- * EntitySource can only currently be used via direct database access.
- *
- * @see EntitySourceDefinitions for defining multiple EntitySources within a single site.
  *
  * @license GPL-2.0-or-later
  */
-class EntitySource {
+class DatabaseEntitySource extends EntitySource {
 
-	public const TYPE_DB = 'db';
-	public const TYPE_API = 'api';
+	public const TYPE = 'db';
 
 	/**
 	 * @var string
@@ -59,11 +54,6 @@ class EntitySource {
 	private $interwikiPrefix;
 
 	/**
-	 * @var string
-	 */
-	private $type;
-
-	/**
 	 * @param string $name Unique name for the source for a given configuration / site, used for indexing the sources internally.
 	 *        This does not have to be a wikiname, sitename or dbname, it can for example just be 'properties'.
 	 * @param string|false $databaseName The name of the database to use (use false for the local db)
@@ -73,7 +63,6 @@ class EntitySource {
 	 * @param string $rdfNodeNamespacePrefix
 	 * @param string $rdfPredicateNamespacePrefix
 	 * @param string $interwikiPrefix
-	 * @param string $type
 	 */
 	public function __construct(
 		$name,
@@ -82,8 +71,7 @@ class EntitySource {
 		$conceptBaseUri,
 		$rdfNodeNamespacePrefix,
 		$rdfPredicateNamespacePrefix,
-		$interwikiPrefix,
-		string $type = self::TYPE_DB
+		$interwikiPrefix
 	) {
 		Assert::parameterType( 'string', $name, '$name' );
 		Assert::parameter( is_string( $databaseName ) || $databaseName === false, '$databaseName', 'must be a string or false' );
@@ -99,32 +87,7 @@ class EntitySource {
 		$this->rdfNodeNamespacePrefix = $rdfNodeNamespacePrefix;
 		$this->rdfPredicateNamespacePrefix = $rdfPredicateNamespacePrefix;
 		$this->interwikiPrefix = $interwikiPrefix;
-		$this->type = $type;
-
 		$this->setEntityTypeData( $entityNamespaceIdsAndSlots );
-	}
-
-	protected function assertEntityNamespaceIdsAndSlots( array $entityNamespaceIdsAndSlots ) {
-		foreach ( $entityNamespaceIdsAndSlots as $entityType => $namespaceIdAndSlot ) {
-			if ( !is_string( $entityType ) ) {
-				throw new \InvalidArgumentException( 'Entity type name not a string: ' . $entityType );
-			}
-			if ( !is_array( $namespaceIdAndSlot ) ) {
-				throw new \InvalidArgumentException( 'Namespace and slot not defined for entity type: ' . $entityType );
-			}
-			if ( !array_key_exists( 'namespaceId', $namespaceIdAndSlot ) ) {
-				throw new \InvalidArgumentException( 'Namespace ID not defined for entity type: ' . $entityType );
-			}
-			if ( !array_key_exists( 'slot', $namespaceIdAndSlot ) ) {
-				throw new \InvalidArgumentException( 'Slot not defined for entity type: ' . $entityType );
-			}
-			if ( !is_int( $namespaceIdAndSlot['namespaceId'] ) ) {
-				throw new \InvalidArgumentException( 'Namespace ID for entity type must be an integer: ' . $entityType );
-			}
-			if ( !is_string( $namespaceIdAndSlot['slot'] ) ) {
-				throw new \InvalidArgumentException( 'Slot for entity type must be a string: ' . $entityType );
-			}
-		}
 	}
 
 	private function setEntityTypeData( array $entityNamespaceIdsAndSlots ) {
@@ -154,36 +117,36 @@ class EntitySource {
 		return $this->sourceName;
 	}
 
-	public function getEntityTypes() {
+	public function getEntityTypes(): array {
 		return $this->entityTypes;
 	}
 
-	public function getEntityNamespaceIds() {
+	public function getEntityNamespaceIds(): array {
 		return $this->entityNamespaceIds;
 	}
 
-	public function getEntitySlotNames() {
+	public function getEntitySlotNames(): array {
 		return $this->entitySlots;
 	}
 
-	public function getConceptBaseUri() {
+	public function getConceptBaseUri(): string {
 		return $this->conceptBaseUri;
 	}
 
-	public function getRdfNodeNamespacePrefix() {
+	public function getRdfNodeNamespacePrefix(): string {
 		return $this->rdfNodeNamespacePrefix;
 	}
 
-	public function getRdfPredicateNamespacePrefix() {
+	public function getRdfPredicateNamespacePrefix(): string {
 		return $this->rdfPredicateNamespacePrefix;
 	}
 
-	public function getInterwikiPrefix() {
+	public function getInterwikiPrefix(): string {
 		return $this->interwikiPrefix;
 	}
 
 	public function getType(): string {
-		return $this->type;
+		return self::TYPE;
 	}
 
 }
