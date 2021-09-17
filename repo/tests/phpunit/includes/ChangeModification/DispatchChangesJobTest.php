@@ -113,10 +113,6 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 		$this->assertTrue( $jobQueueGroup->get( 'EntityChangeNotification' )->isEmpty() );
 	}
 
-	public function testRemovingCompletedRows(): void {
-		$this->markTestIncomplete( 'Functionality not yet implemented.' );
-	}
-
 	private function makeNewChange( int $revisionId ): EntityChange {
 		$testItemId = new ItemId( 'Q1' );
 		$testItemChange = new ItemChange( [
