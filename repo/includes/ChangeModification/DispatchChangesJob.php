@@ -29,6 +29,9 @@ use Wikimedia\Assert\Assert;
  */
 class DispatchChangesJob extends Job {
 
+	private const ENTITY_ID_KEY = 'entityId';
+	private const CHANGE_ID_KEY = 'changeId';
+
 	/** @var string */
 	private $entityIdSerialization;
 
@@ -67,8 +70,8 @@ class DispatchChangesJob extends Job {
 			'DispatchChanges',
 			[
 				'title' => $entityIdSerialization,
-				'entityId' => $entityIdSerialization,
-				'changeId' => $changeId,
+				self::ENTITY_ID_KEY => $entityIdSerialization,
+				self::CHANGE_ID_KEY => $changeId,
 			]
 		);
 	}
@@ -82,15 +85,15 @@ class DispatchChangesJob extends Job {
 		array $params
 	) {
 
-		if ( empty( $params['entityId'] ) ) {
+		if ( empty( $params[self::ENTITY_ID_KEY] ) ) {
 			throw new InvalidArgumentException( 'entityId parameter missing' );
 		}
-		if ( empty( $params['changeId'] ) ) {
+		if ( empty( $params[self::CHANGE_ID_KEY] ) ) {
 			throw new InvalidArgumentException( 'changeId parameter missing' );
 		}
 
-		$this->entityIdSerialization = $params['entityId'];
-		$this->changeId = $params['changeId'];
+		$this->entityIdSerialization = $params[self::ENTITY_ID_KEY];
+		$this->changeId = $params[self::CHANGE_ID_KEY];
 		$this->subscriptionLookup = $subscriptionLookup;
 		$this->changeLookup = $changeLookup;
 		$this->entityIdParser = $entityIdParser;
@@ -116,7 +119,7 @@ class DispatchChangesJob extends Job {
 
 	public function getDeduplicationInfo(): array {
 		return [
-			'entityId' => $this->entityIdSerialization,
+			self::ENTITY_ID_KEY => $this->entityIdSerialization,
 		];
 	}
 
