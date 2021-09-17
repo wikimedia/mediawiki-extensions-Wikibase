@@ -5,7 +5,7 @@ namespace Wikibase\Repo\FederatedProperties;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\NewEntitySource;
+use Wikibase\DataAccess\Tests\NewDatabaseEntitySource;
 use Wikibase\Lib\SubEntityTypesMapper;
 use const false;
 
@@ -31,7 +31,7 @@ class DefaultFederatedPropertiesEntitySourceAdderTest extends TestCase {
 
 	public function testAddDefaultIfRequired_AddsFederatedSourceWhenEnableAndSourceScriptUrlMatches() {
 		$adder = $this->getAdder( true, 'https://www.wikidata.org/w/' );
-		$localSource = NewEntitySource::havingName( 'thislocalone' )->withEntityNamespaceIdsAndSlots( [] )->build();
+		$localSource = NewDatabaseEntitySource::havingName( 'thislocalone' )->withEntityNamespaceIdsAndSlots( [] )->build();
 		$entitySourceDefinitions = new EntitySourceDefinitions( [ $localSource ], $this->createStub( SubEntityTypesMapper::class ) );
 		$resultingEntitySourceDefs = $adder->addDefaultIfRequired( $entitySourceDefinitions );
 		$this->assertInstanceOf( ApiEntitySource::class, $resultingEntitySourceDefs->getApiSourceForEntityType( 'property' ) );

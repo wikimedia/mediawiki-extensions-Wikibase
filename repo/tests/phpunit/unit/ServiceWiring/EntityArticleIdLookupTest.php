@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\DataAccess\EntitySourceLookup;
-use Wikibase\DataAccess\Tests\NewEntitySource;
+use Wikibase\DataAccess\Tests\NewDatabaseEntitySource;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -38,7 +38,7 @@ class EntityArticleIdLookupTest extends ServiceWiringTestCase {
 
 		$stubSourceLookup = $this->createStub( EntitySourceLookup::class );
 		$stubSourceLookup->method( 'getEntitySourceById' )
-			->willReturn( NewEntitySource::havingName( $sourceName )->build() );
+			->willReturn( NewDatabaseEntitySource::havingName( $sourceName )->build() );
 		$this->mockService( 'WikibaseRepo.EntitySourceLookup', $stubSourceLookup );
 
 		/** @var EntityArticleIdLookup $entityArticleIdLookup */

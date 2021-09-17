@@ -36,7 +36,7 @@ class EntitySourceLookupTest extends TestCase {
 		$entityId = new FederatedPropertyId( 'http://wikidata.org/entity/P123', 'P123' );
 
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
-			NewEntitySource::havingName( 'some other source' )->build(),
+			NewDatabaseEntitySource::havingName( 'some other source' )->build(),
 			$expectedSource,
 		] ), new SubEntityTypesMapper( [] ) );
 
@@ -45,12 +45,12 @@ class EntitySourceLookupTest extends TestCase {
 
 	public function testGivenUnprefixedEntityId_returnsDbEntitySourceForEntityType() {
 		$id = new PropertyId( 'P123' );
-		$expectedSource = NewEntitySource::havingName( 'im a db source!' )
+		$expectedSource = NewDatabaseEntitySource::havingName( 'im a db source!' )
 			->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 121, 'slot' => 'main' ] ] )
 			->build();
 
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
-			NewEntitySource::havingName( 'some other source' )->build(),
+			NewDatabaseEntitySource::havingName( 'some other source' )->build(),
 			$expectedSource,
 		] ), new SubEntityTypesMapper( [] ) );
 
@@ -59,7 +59,7 @@ class EntitySourceLookupTest extends TestCase {
 
 	public function testGivenEntityIdWithNoMatchingSource_throwsException() {
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
-			NewEntitySource::havingName( 'im a property source' )
+			NewDatabaseEntitySource::havingName( 'im a property source' )
 				->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 121, 'slot' => 'main' ] ] )
 				->build(),
 		] ), new SubEntityTypesMapper( [] ) );
@@ -70,13 +70,13 @@ class EntitySourceLookupTest extends TestCase {
 	}
 
 	public function testGivenUriEntityId_WithMatchingConceptUri_ButWithDBEntitySource_throws() {
-		$expectedSource = NewEntitySource::havingName( 'expected source' )
+		$expectedSource = NewDatabaseEntitySource::havingName( 'expected source' )
 			->withConceptBaseUri( 'http://wikidata.org/entity/' )
 			->build();
 		$entityId = new FederatedPropertyId( 'http://wikidata.org/entity/P123', 'P123' );
 
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
-			NewEntitySource::havingName( 'some other source' )->build(),
+			NewDatabaseEntitySource::havingName( 'some other source' )->build(),
 			$expectedSource,
 		] ), new SubEntityTypesMapper( [] ) );
 
@@ -89,13 +89,13 @@ class EntitySourceLookupTest extends TestCase {
 		$subEntityId->method( 'getSerialization' )->willReturn( 'L123-F123' );
 		$subEntityId->method( 'getEntityType' )->willReturn( 'form' );
 
-		$expectedSource = NewEntitySource::havingName( 'lexeme source' )
+		$expectedSource = NewDatabaseEntitySource::havingName( 'lexeme source' )
 			->withEntityNamespaceIdsAndSlots( [ 'lexeme' => [ 'namespaceId' => 121, 'slot' => 'main' ] ] )
 			->build();
 
 		$lookup = new EntitySourceLookup(
 			$this->newEntitySourceDefinitionsFromSources( [
-				NewEntitySource::havingName( 'some other source' )->build(),
+				NewDatabaseEntitySource::havingName( 'some other source' )->build(),
 				$expectedSource,
 			] ),
 			new SubEntityTypesMapper( [ 'lexeme' => [ 'form', 'sense' ] ] )

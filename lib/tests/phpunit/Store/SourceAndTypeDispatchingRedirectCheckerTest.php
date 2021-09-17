@@ -8,7 +8,7 @@ use LogicException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySourceLookup;
-use Wikibase\DataAccess\Tests\NewEntitySource;
+use Wikibase\DataAccess\Tests\NewDatabaseEntitySource;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\Store\EntityRedirectChecker;
@@ -45,7 +45,7 @@ class SourceAndTypeDispatchingRedirectCheckerTest extends TestCase {
 		$this->entitySourceLookup->expects( $this->once() )
 			->method( 'getEntitySourceById' )
 			->with( $entityId )
-			->willReturn( NewEntitySource::havingName( 'foo' )->build() );
+			->willReturn( NewDatabaseEntitySource::havingName( 'foo' )->build() );
 
 		$this->expectException( LogicException::class );
 
@@ -71,7 +71,7 @@ class SourceAndTypeDispatchingRedirectCheckerTest extends TestCase {
 		$this->entitySourceLookup->expects( $this->once() )
 			->method( 'getEntitySourceById' )
 			->with( $entityId )
-			->willReturn( NewEntitySource::havingName( $sourceName )->build() );
+			->willReturn( NewDatabaseEntitySource::havingName( $sourceName )->build() );
 
 		$this->assertSame( $isRedirect, $this->newRedirectChecker()->isRedirect( $entityId ) );
 	}

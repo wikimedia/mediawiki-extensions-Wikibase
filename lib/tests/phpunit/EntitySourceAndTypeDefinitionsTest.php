@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataAccess\DatabaseEntitySource;
-use Wikibase\DataAccess\Tests\NewEntitySource;
+use Wikibase\DataAccess\Tests\NewDatabaseEntitySource;
 use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
@@ -43,7 +43,7 @@ class EntitySourceAndTypeDefinitionsTest extends TestCase {
 				] )
 			],
 			[
-				NewEntitySource::havingName( 'local' )->build(),
+				NewDatabaseEntitySource::havingName( 'local' )->build(),
 				new ApiEntitySource( 'wikidorta', [ 'property' ], '', '', '', '' )
 			]
 		);
@@ -82,7 +82,7 @@ class EntitySourceAndTypeDefinitionsTest extends TestCase {
 
 		yield 'entityTypeDefinitionsBySourceType array contains non-EntityTypeDefinitions object' => [
 			'definitionsByType' => [ DatabaseEntitySource::TYPE => 'i am not an entity type def object' ],
-			'sources' => [ NewEntitySource::create()->build() ],
+			'sources' => [ NewDatabaseEntitySource::create()->build() ],
 		];
 	}
 

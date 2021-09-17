@@ -7,7 +7,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
-use Wikibase\DataAccess\Tests\NewEntitySource;
+use Wikibase\DataAccess\Tests\NewDatabaseEntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntitySourceAndTypeDefinitions;
@@ -29,7 +29,7 @@ class EntityTitleTextLookupTest extends ServiceWiringTestCase {
 		$itemId = new ItemId( 'Q123' );
 
 		$sources = [
-			NewEntitySource::havingName( 'itemSource' )
+			NewDatabaseEntitySource::havingName( 'itemSource' )
 				->withEntityNamespaceIdsAndSlots( [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] )
 				->withConceptBaseUri( 'http://wikidorta.org/schmentity/' )
 				->build()

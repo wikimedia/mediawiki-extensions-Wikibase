@@ -3,16 +3,15 @@ declare( strict_types=1 );
 
 namespace Wikibase\DataAccess\Tests;
 
-use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataAccess\DatabaseEntitySource;
-use Wikibase\DataAccess\EntitySource;
 
 /**
- * Convenience builder for EntitySource objects in tests
+ * Convenience builder for DatabaseEntitySource objects in tests
  *
  * @license GPL-2.0-or-later
  */
-class NewEntitySource {
+
+class NewDatabaseEntitySource {
 
 	/** @var string */
 	private $name;
@@ -37,12 +36,6 @@ class NewEntitySource {
 	/** @var string */
 	private $interwikiPrefix;
 
-	/** @var string */
-	private $type;
-
-	/** @var array */
-	private $entityTypes;
-
 	public static function create(): self {
 		return new self();
 	}
@@ -61,16 +54,6 @@ class NewEntitySource {
 	public function withDbName( string $db ): self {
 		$result = clone $this;
 		$result->dbName = $db;
-
-		return $result;
-	}
-
-	public function withEntityTypes( array $entityTypes ): self {
-		if ( $this->type === null ) {
-			$this->type = ApiEntitySource::TYPE;
-		}
-		$result = clone $this;
-		$result->entityTypes = $entityTypes;
 
 		return $result;
 	}
@@ -117,17 +100,7 @@ class NewEntitySource {
 		return $result;
 	}
 
-	public function build(): EntitySource {
-		if ( $this->type === ApiEntitySource::TYPE ) {
-			return new ApiEntitySource(
-				$this->name ?? '',
-				$this->entityTypes ?? [ 'item', 'property', 'lexeme' ],
-				$this->conceptBaseUri ?? $this->makeRandomUri(),
-				$this->rdfNodeNamespacePrefix ?? '',
-				$this->rdfPredicateNamespacePrefix ?? '',
-				$this->interwikiPrefix ?? ''
-			);
-		}
+	public function build(): DatabaseEntitySource {
 		return new DatabaseEntitySource(
 			$this->name ?? '',
 			$this->dbName ?? false,
@@ -142,5 +115,4 @@ class NewEntitySource {
 	private function makeRandomUri(): string {
 		return 'http://my-random-uri-' . mt_rand() . '.org/entity/';
 	}
-
 }

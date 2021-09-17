@@ -4,9 +4,7 @@ declare( strict_types=1 );
 namespace Wikibase\DataAccess\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataAccess\DatabaseEntitySource;
-use Wikibase\DataAccess\EntitySource;
 
 /**
  * @covers \Wikibase\DataAccess\MultipleEntitySourceServices
@@ -15,18 +13,17 @@ use Wikibase\DataAccess\EntitySource;
  *
  * @license GPL-2.0-or-later
  */
-class NewEntitySourceTest extends TestCase {
-
+class NewDatabaseEntitySourceTest extends TestCase {
 	public function testCreate(): void {
 		$this->assertInstanceOf(
-			EntitySource::class,
-			NewEntitySource::create()->build()
+			DatabaseEntitySource::class,
+			NewDatabaseEntitySource::create()->build()
 		);
 	}
 
 	public function testWithName(): void {
 		$name = 'meep';
-		$source = NewEntitySource::create()
+		$source = NewDatabaseEntitySource::create()
 			->withName( $name )
 			->build();
 
@@ -38,7 +35,7 @@ class NewEntitySourceTest extends TestCase {
 
 	public function testWithDbName(): void {
 		$db = 'some db';
-		$source = NewEntitySource::create()
+		$source = NewDatabaseEntitySource::create()
 			->withDbName( $db )
 			->build();
 
@@ -48,20 +45,8 @@ class NewEntitySourceTest extends TestCase {
 		);
 	}
 
-	public function testWithEntityTypes(): void {
-		$entityTypes = [ 'some type' ];
-		$source = NewEntitySource::create()
-			->withEntityTypes( $entityTypes )
-			->build();
-
-		$this->assertSame(
-			$entityTypes,
-			$source->getEntityTypes()
-		);
-	}
-
 	public function testWithEntityNamespaceIdsAndSlots(): void {
-		$source = NewEntitySource::create()
+		$source = NewDatabaseEntitySource::create()
 			->withEntityNamespaceIdsAndSlots( [
 				'item' => [ 'namespaceId' => 100, 'slot' => 'main', ],
 			] )
@@ -83,7 +68,7 @@ class NewEntitySourceTest extends TestCase {
 
 	public function testWithConceptBaseUri(): void {
 		$conceptUri = 'http://wikidata.org/entity/';
-		$source = NewEntitySource::create()
+		$source = NewDatabaseEntitySource::create()
 			->withConceptBaseUri( $conceptUri )
 			->build();
 
@@ -95,7 +80,7 @@ class NewEntitySourceTest extends TestCase {
 
 	public function testWithRdfNodeNamespacePrefix(): void {
 		$rdfNodePrefix = 'wd';
-		$source = NewEntitySource::create()
+		$source = NewDatabaseEntitySource::create()
 			->withRdfNodeNamespacePrefix( $rdfNodePrefix )
 			->build();
 
@@ -107,7 +92,7 @@ class NewEntitySourceTest extends TestCase {
 
 	public function testWithRdfPredicateNamespacePrefix(): void {
 		$rdfPredicatePrefix = 'wdp';
-		$source = NewEntitySource::create()
+		$source = NewDatabaseEntitySource::create()
 			->withRdfPredicateNamespacePrefix( $rdfPredicatePrefix )
 			->build();
 
@@ -119,7 +104,7 @@ class NewEntitySourceTest extends TestCase {
 
 	public function testWithInterwikiPrefix(): void {
 		$interwikiPrefix = 'wd';
-		$source = NewEntitySource::create()
+		$source = NewDatabaseEntitySource::create()
 			->withInterwikiPrefix( $interwikiPrefix )
 			->build();
 
@@ -130,24 +115,14 @@ class NewEntitySourceTest extends TestCase {
 	}
 
 	public function testType(): void {
-		$apiSourceType = ApiEntitySource::TYPE;
-		$apiSource = NewEntitySource::create()
-			->withType( $apiSourceType )
-			->build();
-
-		$dbSourceType = DatabaseEntitySource::TYPE;
-		$dbSource = NewEntitySource::create()
-			->withType( $dbSourceType )
+		$sourceType = DatabaseEntitySource::TYPE;
+		$source = NewDatabaseEntitySource::create()
+			->withType( $sourceType )
 			->build();
 
 		$this->assertSame(
-			$dbSourceType,
-			$dbSource->getType()
-		);
-		$this->assertSame(
-			$apiSourceType,
-			$apiSource->getType()
+			$sourceType,
+			$source->getType()
 		);
 	}
-
 }

@@ -36,7 +36,7 @@ class SourceAndTypeDispatchingPrefetchingTermLookupTest extends TestCase {
 		$this->callbacks = [];
 		$this->entitySourceLookup = $this->createMock( EntitySourceLookup::class );
 		$sourceName = 'some-source';
-		$source = NewEntitySource::havingName( $sourceName )->build();
+		$source = NewDatabaseEntitySource::havingName( $sourceName )->build();
 		$this->entitySourceLookup->method( 'getEntitySourceById' )->willReturn( $source );
 	}
 
