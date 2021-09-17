@@ -78,6 +78,8 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testNotDispatchingOldChangesAgain(): void {
+		$this->skipIfClientNotEnabled();
+
 		$testItemOldChange = $this->makeNewChange();
 		$testItemNewChange = $this->makeNewChange();
 		$repoDb = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb();
