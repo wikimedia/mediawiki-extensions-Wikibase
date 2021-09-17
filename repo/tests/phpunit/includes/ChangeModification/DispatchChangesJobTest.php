@@ -92,9 +92,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 		$dispatchChangesJob->run();
 
 		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
-		$queuedJobs = $jobQueueGroup->get( 'EntityChangeNotification' )->getAllQueuedJobs();
-		$job = $queuedJobs->current();
-		$this->assertNull( $job );
+		$this->assertTrue( $jobQueueGroup->get( 'EntityChangeNotification' )->isEmpty() );
 	}
 
 	public function testMissingId(): void {
@@ -112,9 +110,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 		$dispatchChangesJob->run();
 
 		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
-		$queuedJobs = $jobQueueGroup->get( 'EntityChangeNotification' )->getAllQueuedJobs();
-		$job = $queuedJobs->current();
-		$this->assertNull( $job );
+		$this->assertTrue( $jobQueueGroup->get( 'EntityChangeNotification' )->isEmpty() );
 	}
 
 	public function testRemovingCompletedRows(): void {
