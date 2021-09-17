@@ -11,6 +11,7 @@ use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\ChangeModification\DispatchChangesJob;
 use Wikibase\Repo\WikibaseRepo;
 use WikiMap;
@@ -41,6 +42,8 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testDispatchJobForSingleChangeToSingleWiki(): void {
+		$this->skipIfClientNotEnabled();
+
 		$testItemChange = $this->makeNewChange( 123 );
 		$repoDb = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb();
 		$changeStore = new SqlChangeStore( $repoDb );
@@ -69,6 +72,8 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testNoValidSubscribers(): void {
+		$this->skipIfClientNotEnabled();
+
 		$testItemChange = $this->makeNewChange( 123 );
 		$changeStore = new SqlChangeStore(
 			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()
@@ -93,6 +98,8 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testMissingId(): void {
+		$this->skipIfClientNotEnabled();
+
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
 		$dbw = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()->connections()->getWriteConnectionRef();
 		$dbw->insert( 'wb_changes_subscription', [
@@ -138,5 +145,11 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 		$testItemChange->setEntityId( $testItemId );
 
 		return $testItemChange;
+	}
+
+	private function skipIfClientNotEnabled() {
+		if ( !WikibaseSettings::isClientEnabled() ) {
+			$this->markTestSkipped( 'Client is not enabled.' );
+		}
 	}
 }
