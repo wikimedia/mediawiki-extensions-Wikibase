@@ -8,6 +8,7 @@ use IJobSpecification;
 use InvalidArgumentException;
 use Job;
 use JobSpecification;
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\MediaWikiServices;
 use MWException;
@@ -72,6 +73,11 @@ class DispatchChangesJob extends Job {
 	 */
 	private $logger;
 
+	/**
+	 * @var StatsdDataFactoryInterface
+	 */
+	private $stats;
+
 	public static function makeJobSpecification( string $entityIdSerialization, int $changeId ): IJobSpecification {
 		return new JobSpecification(
 			'DispatchChanges',
@@ -90,6 +96,7 @@ class DispatchChangesJob extends Job {
 		JobQueueGroupFactory $jobQueueGroupFactory,
 		ChangeStore $changeStore,
 		LoggerInterface $logger,
+		StatsdDataFactoryInterface $stats,
 		array $params
 	) {
 
@@ -108,6 +115,7 @@ class DispatchChangesJob extends Job {
 		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
 		$this->changeStore = $changeStore;
 		$this->logger = $logger;
+		$this->stats = $stats;
 		$this->removeDuplicates = true;
 
 		parent::__construct( 'DispatchChanges', $params );
@@ -123,6 +131,7 @@ class DispatchChangesJob extends Job {
 			MediaWikiServices::getInstance()->getJobQueueGroupFactory(),
 			WikibaseRepo::getStore()->getChangeStore(),
 			WikibaseRepo::getLogger(),
+			MediaWikiServices::getInstance()->getPerDbNameStatsdDataFactory(),
 			$params
 		);
 	}
@@ -163,6 +172,8 @@ class DispatchChangesJob extends Job {
 			] );
 			return true;
 		}
+
+		$this->stats->timing( 'wikibase.repo.dispatchChangesJob.NumberOfChangesInJob', count( $changes ) );
 
 		$this->logger->info( __METHOD__ . ': dispatching changes for {entity} to {numberOfWikis} clients: {listOfWikis}', [
 			'entity' => $this->entityIdSerialization,
