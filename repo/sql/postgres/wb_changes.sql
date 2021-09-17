@@ -16,3 +16,5 @@ CREATE TABLE wb_changes (
 CREATE INDEX wb_changes_change_time ON wb_changes (change_time);
 
 CREATE INDEX wb_changes_change_revision_id ON wb_changes (change_revision_id);
+
+CREATE INDEX change_object_id ON wb_changes (change_object_id);

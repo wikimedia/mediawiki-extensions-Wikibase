@@ -12,5 +12,6 @@ CREATE TABLE /*_*/wb_changes (
   change_info MEDIUMBLOB NOT NULL,
   INDEX wb_changes_change_time (change_time),
   INDEX wb_changes_change_revision_id (change_revision_id),
+  INDEX change_object_id (change_object_id),
   PRIMARY KEY(change_id)
 ) /*$wgDBTableOptions*/;

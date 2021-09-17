@@ -48,7 +48,8 @@
 		],
 		"indexes": [
 			{ "name": "wb_changes_change_time", "columns": [ "change_time" ], "unique": false },
-			{ "name": "wb_changes_change_revision_id", "columns": [ "change_revision_id" ], "unique": false }
+			{ "name": "wb_changes_change_revision_id", "columns": [ "change_revision_id" ], "unique": false },
+			{ "name": "change_object_id", "columns": [ "change_object_id" ], "unique": false }
 		],
 		"pk": [ "change_id" ]
 	}
