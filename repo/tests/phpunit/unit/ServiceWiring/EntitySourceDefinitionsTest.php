@@ -112,8 +112,6 @@ class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 			$this->assertSame( 'fpwd', $propertySource->getRdfPredicateNamespacePrefix() );
 			$this->assertSame( 'fpwd', $propertySource->getRdfNodeNamespacePrefix() );
 			$this->assertSame( 'wikidata', $propertySource->getInterwikiPrefix() );
-			$this->assertSame( [ 'property' => 0 ], $propertySource->getEntityNamespaceIds() ); // uses wikidata default not config
-			$this->assertSame( [ 'property' => 'main' ], $propertySource->getEntitySlotNames() );
 			$this->assertSame( [ 'property' ], $propertySource->getEntityTypes() );
 		}
 	}

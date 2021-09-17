@@ -128,26 +128,14 @@ class NewEntitySource {
 				$this->interwikiPrefix ?? ''
 			);
 		}
-		if ( $this->type === DatabaseEntitySource::TYPE ) {
-			return new DatabaseEntitySource(
-				$this->name ?? '',
-				$this->dbName ?? false,
-				$this->entityNamespaceIdsAndSlots ?? [],
-				$this->conceptBaseUri ?? $this->makeRandomUri(),
-				$this->rdfNodeNamespacePrefix ?? '',
-				$this->rdfPredicateNamespacePrefix ?? '',
-				$this->interwikiPrefix ?? ''
-			);
-		}
-		return new EntitySource(
+		return new DatabaseEntitySource(
 			$this->name ?? '',
 			$this->dbName ?? false,
 			$this->entityNamespaceIdsAndSlots ?? [],
 			$this->conceptBaseUri ?? $this->makeRandomUri(),
 			$this->rdfNodeNamespacePrefix ?? '',
 			$this->rdfPredicateNamespacePrefix ?? '',
-			$this->interwikiPrefix ?? '',
-			$this->type ?? EntitySource::TYPE_DB
+			$this->interwikiPrefix ?? ''
 		);
 	}
 

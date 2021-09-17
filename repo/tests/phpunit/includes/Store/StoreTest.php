@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Store;
 
 use MediaWikiIntegrationTestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Lib\SettingsArray;
@@ -43,7 +43,7 @@ class StoreTest extends MediaWikiIntegrationTestCase {
 				new EntityNamespaceLookup( [] ),
 				$this->createMock( IdGenerator::class ),
 				$this->createMock( WikibaseServices::class ),
-				new EntitySource( 'testsource', 'testdb', [], '', '', '', '' ),
+				new DatabaseEntitySource( 'testsource', 'testdb', [], '', '', '', '' ),
 				new SettingsArray( [
 					'sharedCacheKeyPrefix' => 'wikibase_shared/testdb',
 					'sharedCacheKeyGroup' => 'testdb',

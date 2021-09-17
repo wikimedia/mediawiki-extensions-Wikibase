@@ -3,7 +3,7 @@
 use MediaWiki\MediaWikiServices;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\WikibaseRepo;
@@ -174,7 +174,7 @@ return call_user_func( function() {
 			$entitySources = [];
 
 			foreach ( $entitySourceDefinitions->getSources() as $source ) {
-				if ( $source->getType() !== EntitySource::TYPE_DB ) {
+				if ( $source->getType() === ApiEntitySource::TYPE ) {
 					// WikibaseClient.EntitySourceAndTypeDefinitions service wiring can’t parse other types yet
 					continue;
 				}
@@ -192,7 +192,6 @@ return call_user_func( function() {
 					'rdfNodeNamespacePrefix' => $source->getRdfNodeNamespacePrefix(),
 					'rdfPredicateNamespacePrefix' => $source->getRdfPredicateNamespacePrefix(),
 					'interwikiPrefix' => $source->getInterwikiPrefix(),
-					'type' => $source->getType(),
 				];
 			}
 

@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
@@ -21,7 +21,7 @@ class PropertyTermStoreWriterTest extends ServiceWiringTestCase {
 	private function mockLocalEntityType( string $type ): void {
 		$this->mockService(
 			'WikibaseRepo.LocalEntitySource',
-			new EntitySource(
+			new DatabaseEntitySource(
 				'test',
 				false,
 				[ $type => [

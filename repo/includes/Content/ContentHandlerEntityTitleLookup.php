@@ -9,7 +9,7 @@ use MediaWiki\Interwiki\InterwikiLookup;
 use MWException;
 use OutOfBoundsException;
 use Title;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -33,7 +33,7 @@ class ContentHandlerEntityTitleLookup implements EntityTitleStoreLookup {
 	private $entitySourceDefinitions;
 
 	/**
-	 * @var EntitySource
+	 * @var DatabaseEntitySource
 	 */
 	private $localEntitySource;
 
@@ -45,7 +45,7 @@ class ContentHandlerEntityTitleLookup implements EntityTitleStoreLookup {
 	public function __construct(
 		EntityContentFactory $entityContentFactory,
 		EntitySourceDefinitions $entitySourceDefinitions,
-		EntitySource $localEntitySource,
+		DatabaseEntitySource $localEntitySource,
 		InterwikiLookup $interwikiLookup = null
 	) {
 		$this->entityContentFactory = $entityContentFactory;

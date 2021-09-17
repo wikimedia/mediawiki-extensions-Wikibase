@@ -7,7 +7,7 @@ use Wikimedia\Assert\Assert;
 /**
  * @license GPL-2.0-or-later
  */
-class ApiEntitySource extends EntitySource {
+class ApiEntitySource implements EntitySource {
 
 	public const TYPE = 'api';
 

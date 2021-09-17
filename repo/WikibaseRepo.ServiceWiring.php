@@ -25,7 +25,9 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueParsers\NullParser;
 use Wikibase\DataAccess\AliasTermBuffer;
+use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
@@ -845,9 +847,16 @@ return [
 	},
 
 	'WikibaseRepo.EntityNamespaceLookup' => function ( MediaWikiServices $services ): EntityNamespaceLookup {
-		return array_reduce(
+		$entitySources = array_filter(
 			WikibaseRepo::getEntitySourceDefinitions( $services )->getSources(),
-			function ( EntityNamespaceLookup $nsLookup, EntitySource $source ): EntityNamespaceLookup {
+			function ( EntitySource $entitySource ) {
+				return $entitySource->getType() === DatabaseEntitySource::TYPE;
+			}
+		);
+
+		return array_reduce(
+			$entitySources,
+			function ( EntityNamespaceLookup $nsLookup, DatabaseEntitySource $source ): EntityNamespaceLookup {
 				return $nsLookup->merge( new EntityNamespaceLookup(
 					$source->getEntityNamespaceIds(),
 					$source->getEntitySlotNames()
@@ -969,10 +978,10 @@ return [
 
 		$services->getHookContainer()->run( 'WikibaseRepoEntityTypes', [ &$entityTypes ] );
 
-		$entityTypeDefinitionsBySourceType = [ EntitySource::TYPE_DB => new EntityTypeDefinitions( $entityTypes ) ];
+		$entityTypeDefinitionsBySourceType = [ DatabaseEntitySource::TYPE => new EntityTypeDefinitions( $entityTypes ) ];
 
 		if ( WikibaseRepo::getSettings( $services )->getSetting( 'federatedPropertiesEnabled' ) ) {
-			$entityTypeDefinitionsBySourceType[EntitySource::TYPE_API] = new EntityTypeDefinitions(
+			$entityTypeDefinitionsBySourceType[ApiEntitySource::TYPE] = new EntityTypeDefinitions(
 				EntityTypesConfigFeddyPropsAugmenter::factory()->override( $entityTypes )
 			);
 		}
@@ -2068,7 +2077,11 @@ return [
 		$singleEntitySourceServicesFactory = WikibaseRepo::getSingleEntitySourceServicesFactory( $services );
 
 		$singleSourceServices = [];
+
 		foreach ( $entitySourceDefinitions->getSources() as $source ) {
+			if ( $source->getType() === ApiEntitySource::TYPE ) {
+				continue;
+			}
 			$singleSourceServices[$source->getSourceName()] = $singleEntitySourceServicesFactory
 				->getServicesForSource( $source );
 		}

@@ -7,7 +7,7 @@ use JobQueueGroup;
 use LogicException;
 use Psr\Log\LoggerInterface;
 use WANObjectCache;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
@@ -24,7 +24,7 @@ use Wikibase\Lib\StringNormalizer;
 class TermStoreWriterFactory {
 
 	/**
-	 * @var EntitySource
+	 * @var DatabaseEntitySource
 	 */
 	private $localEntitySource;
 
@@ -63,7 +63,7 @@ class TermStoreWriterFactory {
 	private $logger;
 
 	public function __construct(
-		EntitySource $localEntitySource,
+		DatabaseEntitySource $localEntitySource,
 		StringNormalizer $stringNormalizer,
 		TypeIdsAcquirer $typeIdsAcquirer,
 		TypeIdsLookup $typeIdsLookup,

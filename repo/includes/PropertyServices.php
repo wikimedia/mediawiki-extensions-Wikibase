@@ -3,7 +3,8 @@
 namespace Wikibase\Repo;
 
 use LogicException;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\ApiEntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
@@ -56,10 +57,10 @@ class PropertyServices {
 	public static function getServiceDefinitions(): array {
 		return [
 			self::PROPERTY_DATA_TYPE_LOOKUP_CALLBACK => [
-				EntitySource::TYPE_API => function () {
+				ApiEntitySource::TYPE => function () {
 					return WikibaseRepo::getFederatedPropertiesServiceFactory()->newApiPropertyDataTypeLookup();
 				},
-				EntitySource::TYPE_DB => function () {
+				DatabaseEntitySource::TYPE => function () {
 					$infoLookup = WikibaseRepo::getStore()->getPropertyInfoLookup();
 					$entityLookup = WikibaseRepo::getEntityLookup();
 					$retrievingLookup = new EntityRetrievingDataTypeLookup( $entityLookup );

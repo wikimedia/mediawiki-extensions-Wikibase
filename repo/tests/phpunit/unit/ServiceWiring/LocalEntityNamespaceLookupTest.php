@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -23,7 +23,7 @@ class LocalEntityNamespaceLookupTest extends ServiceWiringTestCase {
 		];
 
 		$this->mockService( 'WikibaseRepo.LocalEntitySource',
-			new EntitySource(
+			new DatabaseEntitySource(
 				'local',
 				false,
 				array_map( function ( $nsId ) {

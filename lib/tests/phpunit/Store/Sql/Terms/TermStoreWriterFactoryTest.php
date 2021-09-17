@@ -7,7 +7,7 @@ use LogicException;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use WANObjectCache;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
@@ -38,7 +38,7 @@ class TermStoreWriterFactoryTest extends TestCase {
 	 * @dataProvider provideTestCreateWriters
 	 */
 	public function testFailsToCreateWriterWhenNotOnLocalEntitySource(
-		EntitySource $entitySource,
+		DatabaseEntitySource $entitySource,
 		string $method,
 		$expected
 	) {
@@ -65,7 +65,7 @@ class TermStoreWriterFactoryTest extends TestCase {
 	}
 
 	private function getEntitySourceWithNoEntities() {
-		return new EntitySource( 'empty', false, [], '', '', '', '' );
+		return new DatabaseEntitySource( 'empty', false, [], '', '', '', '' );
 	}
 
 	private function getEntitySourceWithTypes( array $types ) {
@@ -73,7 +73,7 @@ class TermStoreWriterFactoryTest extends TestCase {
 		foreach ( $types as $typeName ) {
 			$entityTypeData[$typeName] = [ 'namespaceId' => 1, 'slot' => 'main' ];
 		}
-		return new EntitySource( 'empty', false, $entityTypeData, '', '', '', '' );
+		return new DatabaseEntitySource( 'empty', false, $entityTypeData, '', '', '', '' );
 	}
 
 	private function newStubRepoDb() {

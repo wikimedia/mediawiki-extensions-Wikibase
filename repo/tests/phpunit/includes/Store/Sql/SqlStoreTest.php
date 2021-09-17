@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWikiIntegrationTestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -72,7 +72,7 @@ class SqlStoreTest extends MediaWikiIntegrationTestCase {
 			new EntityNamespaceLookup( [] ),
 			$this->createMock( IdGenerator::class ),
 			$wikibaseServices,
-			new EntitySource( 'testsource', 'testdb', [], '', '', '', '' ),
+			new DatabaseEntitySource( 'testsource', 'testdb', [], '', '', '', '' ),
 			new SettingsArray( [
 				'sharedCacheKeyPrefix' => 'wikibase_shared/testdb',
 				'sharedCacheKeyGroup' => 'testdb',

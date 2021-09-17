@@ -22,7 +22,7 @@ use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\UpdateRepo\UpdateRepo;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
@@ -77,7 +77,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	public static function factory(
 		JobQueueGroupFactory $jobQueueGroupFactory,
 		ClientDomainDbFactory $clientDomainDbFactory,
-		EntitySource $entitySource,
+		DatabaseEntitySource $entitySource,
 		NamespaceChecker $namespaceChecker,
 		SettingsArray $clientSettings,
 		ClientStore $store

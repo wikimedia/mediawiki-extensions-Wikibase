@@ -4,7 +4,8 @@ namespace Wikibase\DataAccess\Tests;
 
 use LogicException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\ApiEntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
@@ -94,7 +95,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 
 		$services = new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [
-				new EntitySource(
+				new DatabaseEntitySource(
 					'items',
 					'itemdb',
 					[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
@@ -133,7 +134,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 	public function testGivenNoSourceProvidingProperties_getPropertyInfoLookupThrowsException() {
 		$services = new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [
-				new EntitySource(
+				new DatabaseEntitySource(
 					'items',
 					'itemdb',
 					[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
@@ -206,7 +207,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 	private function newMultipleEntitySourceServices( array $perSourceServices ) {
 		return new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [
-				new EntitySource(
+				new DatabaseEntitySource(
 					'items',
 					'itemdb',
 					[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
@@ -215,7 +216,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 					'',
 					''
 				),
-				new EntitySource(
+				new DatabaseEntitySource(
 					'props',
 					'propb',
 					[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
@@ -224,6 +225,14 @@ class MultipleEntitySourceServicesTest extends TestCase {
 					'prop',
 					'props'
 				),
+				new ApiEntitySource(
+					'fedprops',
+					[ 'property' ],
+					'someUrl',
+					'',
+					'',
+					''
+				)
 			], new SubEntityTypesMapper( [] ) ),
 			$perSourceServices
 		);

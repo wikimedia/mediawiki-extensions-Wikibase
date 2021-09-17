@@ -81,7 +81,7 @@ class SingleEntitySourceServicesFactory {
 		$this->servicesBySource = [];
 	}
 
-	public function getServicesForSource( EntitySource $source ): SingleEntitySourceServices {
+	public function getServicesForSource( DatabaseEntitySource $source ): SingleEntitySourceServices {
 		$sourceName = $source->getSourceName();
 
 		if ( !array_key_exists( $sourceName, $this->servicesBySource ) ) {
@@ -91,7 +91,7 @@ class SingleEntitySourceServicesFactory {
 		return $this->servicesBySource[ $sourceName ];
 	}
 
-	private function newServicesForSource( EntitySource $source ): SingleEntitySourceServices {
+	private function newServicesForSource( DatabaseEntitySource $source ): SingleEntitySourceServices {
 		return new SingleEntitySourceServices(
 			$this->entityIdParser,
 			$this->entityIdComposer,

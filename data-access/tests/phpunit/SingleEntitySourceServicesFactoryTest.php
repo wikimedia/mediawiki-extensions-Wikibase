@@ -9,7 +9,7 @@ use MediaWiki\Storage\NameTableStoreFactory;
 use PHPUnit\Framework\TestCase;
 use Serializers\Serializer;
 use Wikibase\DataAccess\DataAccessSettings;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -24,7 +24,7 @@ use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
  */
 class SingleEntitySourceServicesFactoryTest extends TestCase {
 	public function testGetServicesForSource(): void {
-		$entitySource = new EntitySource(
+		$entitySource = new DatabaseEntitySource(
 			'test',
 			false,
 			[],

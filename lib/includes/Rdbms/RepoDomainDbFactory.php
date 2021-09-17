@@ -5,7 +5,7 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\Rdbms;
 
 use InvalidArgumentException;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikimedia\Rdbms\ILBFactory;
 
 /**
@@ -51,7 +51,7 @@ class RepoDomainDbFactory {
 		return $this->newForDomain( $this->repoDomain );
 	}
 
-	public function newForEntitySource( EntitySource $entitySource ): RepoDomainDb {
+	public function newForEntitySource( DatabaseEntitySource $entitySource ): RepoDomainDb {
 		return $this->newForDomain(
 			$entitySource->getDatabaseName() ?: $this->lbFactory->getLocalDomainID() // db name === false means local db
 		);

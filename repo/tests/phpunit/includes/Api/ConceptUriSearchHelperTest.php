@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -27,7 +27,7 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		$subEntityTypesMapper = new SubEntityTypesMapper( [] );
 
 		return new EntitySourceLookup( new EntitySourceDefinitions(
-			[ new EntitySource(
+			[ new DatabaseEntitySource(
 				$sourceName,
 				false,
 				[

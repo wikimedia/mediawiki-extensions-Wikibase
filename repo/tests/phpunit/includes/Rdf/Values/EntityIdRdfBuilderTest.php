@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Rdf\Values;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -42,7 +42,7 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ 'test' => 'http://test/item/' ],
 			[ 'test' => 'http://test/data/' ],
 			new EntitySourceDefinitions( [
-				new EntitySource(
+				new DatabaseEntitySource(
 					'test',
 					'testdb',
 					[ 'item' => [ 'namespaceId' => 3000, 'slot' => 'main' ] ],

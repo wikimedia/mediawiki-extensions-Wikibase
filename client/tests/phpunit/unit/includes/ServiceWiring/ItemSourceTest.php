@@ -6,7 +6,7 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use LogicException;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -23,7 +23,7 @@ class ItemSourceTest extends ServiceWiringTestCase {
 	private function getEntitySourceDefinitions( array $entityTypeNames ): EntitySourceDefinitions {
 		return new EntitySourceDefinitions(
 			[
-				new EntitySource(
+				new DatabaseEntitySource(
 					'test',
 					false,
 					array_fill_keys(
@@ -47,7 +47,7 @@ class ItemSourceTest extends ServiceWiringTestCase {
 		);
 
 		$this->assertInstanceOf(
-			EntitySource::class,
+			DatabaseEntitySource::class,
 			$this->getService( 'WikibaseClient.ItemSource' )
 		);
 	}

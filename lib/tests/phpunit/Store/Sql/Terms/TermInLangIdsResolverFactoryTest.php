@@ -7,7 +7,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\WikibaseSettings;
 
@@ -90,7 +90,7 @@ class TermInLangIdsResolverFactoryTest extends MediaWikiIntegrationTestCase {
 			MediaWikiServices::getInstance()->getMainWANObjectCache()
 		);
 
-		$entitySource = $this->createStub( EntitySource::class );
+		$entitySource = $this->createStub( DatabaseEntitySource::class );
 		$entitySource->method( 'getDatabaseName' )
 			->willReturn( false ); // false means local db
 

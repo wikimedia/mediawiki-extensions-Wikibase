@@ -14,7 +14,7 @@ use Serializers\Serializer;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataAccess\PrefetchingTermLookup;
@@ -443,7 +443,7 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.Store' );
 	}
 
-	public static function getLocalEntitySource( ContainerInterface $services = null ): EntitySource {
+	public static function getLocalEntitySource( ContainerInterface $services = null ): DatabaseEntitySource {
 		// EntitySource bearing the same name as the localEntitySourceName setting
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.LocalEntitySource' );

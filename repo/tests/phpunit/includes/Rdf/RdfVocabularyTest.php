@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Rdf;
 
 use DataValues\StringValue;
 use OutOfBoundsException;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -32,7 +32,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			[ 'foo' => '<BASE-foo>' ],
 			[ 'local' => '<DATA>', 'foo' => '<DATA-foo>' ],
 			new EntitySourceDefinitions( [
-				new EntitySource(
+				new DatabaseEntitySource(
 					'local',
 					'localdb',
 					[ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ],
@@ -41,7 +41,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 					'',
 					''
 				),
-				new EntitySource(
+				new DatabaseEntitySource(
 					'foo',
 					'otherbd',
 					[ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ],
@@ -63,7 +63,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			[ 'local' => '<BASE>', 'foo' => '<BASE-foo>' ],
 			[ 'foo' => '<DATA-foo>' ],
 			new EntitySourceDefinitions( [
-				new EntitySource(
+				new DatabaseEntitySource(
 					'local',
 					'localdb',
 					[ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ],
@@ -72,7 +72,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 					'',
 					''
 				),
-				new EntitySource(
+				new DatabaseEntitySource(
 					'foo',
 					'otherbd',
 					[ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ],
@@ -92,7 +92,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			[ 'localwiki' => '<BASE>', 'otherwiki' => '<BASE-other>' ],
 			[ 'localwiki' => '<DATA>', 'otherwiki' => '<DATA-other>' ],
 			new EntitySourceDefinitions( [
-				new EntitySource(
+				new DatabaseEntitySource(
 					'localwiki',
 					'localdb',
 					[ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ],
@@ -101,7 +101,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 					'',
 					''
 				),
-				new EntitySource(
+				new DatabaseEntitySource(
 					'otherwiki',
 					'otherdb',
 					[ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ],

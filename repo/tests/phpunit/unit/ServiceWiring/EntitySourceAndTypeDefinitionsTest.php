@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
@@ -22,7 +22,7 @@ class EntitySourceAndTypeDefinitionsTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.Settings', new SettingsArray( [ 'federatedPropertiesEnabled' => false ] ) );
 		$entitySourceDefinitions = $this->createStub( EntitySourceDefinitions::class );
 		$entitySourceDefinitions->method( 'getSources' )->willReturn( [
-			new EntitySource(
+			new DatabaseEntitySource(
 				'test',
 				false,
 				[],

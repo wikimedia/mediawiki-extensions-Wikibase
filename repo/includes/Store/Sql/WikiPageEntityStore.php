@@ -14,7 +14,7 @@ use RecentChange;
 use Status;
 use Title;
 use User;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -72,7 +72,7 @@ class WikiPageEntityStore implements EntityStore {
 	 */
 	private $revisionStore;
 
-	/** @var EntitySource */
+	/** @var DatabaseEntitySource */
 	private $entitySource;
 
 	/**
@@ -96,7 +96,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param IdGenerator $idGenerator
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param RevisionStore $revisionStore A RevisionStore for the local database.
-	 * @param EntitySource $entitySource
+	 * @param DatabaseEntitySource $entitySource
 	 * @param PermissionManager $permissionManager
 	 * @param WatchlistManager $watchlistManager
 	 * @param RepoDomainDb $repoDomainDb
@@ -107,7 +107,7 @@ class WikiPageEntityStore implements EntityStore {
 		IdGenerator $idGenerator,
 		EntityIdComposer $entityIdComposer,
 		RevisionStore $revisionStore,
-		EntitySource $entitySource,
+		DatabaseEntitySource $entitySource,
 		PermissionManager $permissionManager,
 		WatchlistManager $watchlistManager,
 		RepoDomainDb $repoDomainDb

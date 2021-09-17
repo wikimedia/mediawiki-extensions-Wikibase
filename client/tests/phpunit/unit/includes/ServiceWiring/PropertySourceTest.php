@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -20,7 +20,7 @@ class PropertySourceTest extends ServiceWiringTestCase {
 	private function getEntitySourceDefinitions( array $entityTypeNames ): EntitySourceDefinitions {
 		return new EntitySourceDefinitions(
 			[
-				new EntitySource(
+				new DatabaseEntitySource(
 					'test',
 					false,
 					array_fill_keys(
@@ -44,7 +44,7 @@ class PropertySourceTest extends ServiceWiringTestCase {
 		);
 
 		$this->assertInstanceOf(
-			EntitySource::class,
+			DatabaseEntitySource::class,
 			$this->getService( 'WikibaseClient.PropertySource' )
 		);
 	}

@@ -7,7 +7,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use WANObjectCache;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -105,7 +105,7 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 			$this->objectCache
 		);
 
-		$itemSource = $this->createMock( EntitySource::class );
+		$itemSource = $this->createMock( DatabaseEntitySource::class );
 		$itemSource->expects( $this->once() )
 			->method( 'getDatabaseName' )
 			->willReturn( false ); // false means local db

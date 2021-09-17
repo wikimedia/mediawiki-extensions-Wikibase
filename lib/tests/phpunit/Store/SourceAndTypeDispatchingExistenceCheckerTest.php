@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -120,8 +120,15 @@ class SourceAndTypeDispatchingExistenceCheckerTest extends TestCase {
 		);
 	}
 
-	private function newEntitySourceWithName( string $name ): EntitySource {
-		return new EntitySource( $name, false, [], '', '', '', '' );
+	private function newEntitySourceWithName( string $name ): DatabaseEntitySource {
+		return new DatabaseEntitySource(
+			$name,
+			false, [],
+			'',
+			'',
+			'',
+			''
+		);
 	}
 
 }

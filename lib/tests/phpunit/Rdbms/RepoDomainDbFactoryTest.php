@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Tests;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikimedia\Rdbms\ILBFactory;
@@ -53,7 +53,7 @@ class RepoDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testNewForEntitySource() {
 		$expectedDbName = 'itemRepoDb';
 
-		$itemSource = $this->createMock( EntitySource::class );
+		$itemSource = $this->createMock( DatabaseEntitySource::class );
 		$itemSource->expects( $this->once() )
 			->method( 'getDatabaseName' )
 			->willReturn( $expectedDbName );

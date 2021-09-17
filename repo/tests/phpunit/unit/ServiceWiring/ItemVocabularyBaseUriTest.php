@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -23,8 +23,8 @@ class ItemVocabularyBaseUriTest extends ServiceWiringTestCase {
 
 		return new EntitySourceDefinitions(
 			array_map(
-				function ( string $baseUri, array $entityTypes, int $idx ): EntitySource {
-					return new EntitySource(
+				function ( string $baseUri, array $entityTypes, int $idx ): DatabaseEntitySource {
+					return new DatabaseEntitySource(
 						'test' . $idx,
 						false,
 						array_fill_keys(

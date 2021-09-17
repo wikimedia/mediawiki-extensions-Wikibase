@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -21,8 +21,8 @@ class EntityNamespaceLookupTest extends ServiceWiringTestCase {
 
 	private function getEntitySources( array ...$entityNSDefinitions ): EntitySourceDefinitions {
 		return new EntitySourceDefinitions( array_map(
-			function ( array $nsDefinitions, int $idx ): EntitySource {
-				return new EntitySource(
+			function ( array $nsDefinitions, int $idx ): DatabaseEntitySource {
+				return new DatabaseEntitySource(
 					'test-' . $idx,
 					false,
 					$nsDefinitions,

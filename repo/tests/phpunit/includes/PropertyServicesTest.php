@@ -5,7 +5,8 @@ namespace Wikibase\Repo\Tests;
 
 use LogicException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\ApiEntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\NewEntitySource;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -24,10 +25,10 @@ class PropertyServicesTest extends TestCase {
 		$serviceName = 'some-service';
 		$definitions = [
 			$serviceName => [
-				EntitySource::TYPE_API => function () {
+				ApiEntitySource::TYPE => function () {
 					return 'api service';
 				},
-				EntitySource::TYPE_DB => function () {
+				DatabaseEntitySource::TYPE => function () {
 					return 'db service';
 				},
 			]
@@ -37,9 +38,7 @@ class PropertyServicesTest extends TestCase {
 		$dbSourceName = 'dbsource';
 		$services = new PropertyServices(
 			new EntitySourceDefinitions( [
-				NewEntitySource::havingName( $apiSourceName )
-					->withType( EntitySource::TYPE_API )
-					->build(),
+				new ApiEntitySource( $apiSourceName, [ 'property' ], 'someUrl', '', '', '' ),
 				NewEntitySource::havingName( $dbSourceName )->build(),
 			], new SubEntityTypesMapper( [] ) ),
 			$definitions

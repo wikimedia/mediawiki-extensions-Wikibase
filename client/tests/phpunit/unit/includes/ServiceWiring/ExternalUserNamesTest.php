@@ -8,7 +8,7 @@ use ExternalUserNames;
 use HashSiteStore;
 use Site;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 
 /**
  * @coversNothing
@@ -21,7 +21,7 @@ class ExternalUserNamesTest extends ServiceWiringTestCase {
 
 	private function mockItemAndPropertySource() {
 		$this->mockService( 'WikibaseClient.ItemAndPropertySource',
-			new EntitySource(
+			new DatabaseEntitySource(
 				'repo',
 				'repowiki',
 				[],

@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 
@@ -20,7 +20,7 @@ class RepoItemUriParserTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$this->mockService(
 			'WikibaseClient.ItemSource',
-			$this->createMock( EntitySource::class )
+			$this->createMock( DatabaseEntitySource::class )
 		);
 
 		$this->assertInstanceOf(
@@ -32,7 +32,7 @@ class RepoItemUriParserTest extends ServiceWiringTestCase {
 	public function testThrowsForBaseUriMismatch(): void {
 		$this->mockService(
 			'WikibaseClient.ItemSource',
-			new EntitySource(
+			new DatabaseEntitySource(
 				'test',
 				false,
 				[],

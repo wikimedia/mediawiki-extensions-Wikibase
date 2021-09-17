@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
@@ -21,7 +21,7 @@ class WikibaseServicesTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
 		$entitySources = [
-			new EntitySource(
+			new DatabaseEntitySource(
 				'source1',
 				'source1',
 				[],
@@ -30,7 +30,7 @@ class WikibaseServicesTest extends ServiceWiringTestCase {
 				'',
 				''
 			),
-			new EntitySource(
+			new DatabaseEntitySource(
 				'source2',
 				'source1',
 				[],

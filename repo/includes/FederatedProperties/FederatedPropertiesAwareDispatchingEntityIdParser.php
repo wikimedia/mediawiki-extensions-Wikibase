@@ -3,7 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
@@ -69,7 +69,7 @@ class FederatedPropertiesAwareDispatchingEntityIdParser implements EntityIdParse
 		return ( filter_var( $idSerialization, FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED ) !== false );
 	}
 
-	private function getEntitySourceForConceptURI( $idSerialization ): ?EntitySource {
+	private function getEntitySourceForConceptURI( $idSerialization ): ?ApiEntitySource {
 		$baseUri = $this->baseUriExtractor->getBaseUriFromSerialization( $idSerialization );
 		$conceptBaseURIsToSources = array_flip( $this->entitySourceDefinitions->getConceptBaseUris() );
 
@@ -77,7 +77,7 @@ class FederatedPropertiesAwareDispatchingEntityIdParser implements EntityIdParse
 			$sources = $this->entitySourceDefinitions->getSources();
 			foreach ( $sources as $source ) {
 				if ( $source->getSourceName() === $conceptBaseURIsToSources[ $baseUri ] ) {
-					return $source->getType() === EntitySource::TYPE_API ? $source : null;
+					return $source->getType() === ApiEntitySource::TYPE ? $source : null;
 				}
 			}
 		}
@@ -85,7 +85,7 @@ class FederatedPropertiesAwareDispatchingEntityIdParser implements EntityIdParse
 		return null;
 	}
 
-	private function getSerializationWithoutConceptBaseURI( string $idSerialization, EntitySource $entitySource ) {
+	private function getSerializationWithoutConceptBaseURI( string $idSerialization, ApiEntitySource $entitySource ) {
 		return substr( $idSerialization, strlen( $entitySource->getConceptBaseUri() ) );
 	}
 

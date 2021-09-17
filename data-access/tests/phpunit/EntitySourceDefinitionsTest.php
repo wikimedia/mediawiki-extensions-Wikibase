@@ -4,7 +4,8 @@ namespace Wikibase\DataAccess\Tests;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\ApiEntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -25,15 +26,37 @@ class EntitySourceDefinitionsTest extends TestCase {
 
 	public function testGivenEntityTypeProvidedByMultipleSources_constructorThrowsException() {
 		$itemSourceOne = $this->newItemSource();
-		$itemSourceTwo = new EntitySource( 'dupe test', 'foodb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' );
+		$itemSourceTwo = new DatabaseEntitySource(
+			'dupe test',
+			'foodb',
+			[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
+			'',
+			'',
+			'',
+			''
+		);
 
 		$this->expectException( InvalidArgumentException::class );
 		new EntitySourceDefinitions( [ $itemSourceOne, $itemSourceTwo ], new SubEntityTypesMapper( [] ) );
 	}
 
 	public function testTwoSourcesWithSameName_constructorThrowsException() {
-		$sourceOne = new EntitySource( 'same name', 'aaa', [ 'entityOne' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' );
-		$sourceTwo = new EntitySource( 'same name', 'bbb', [ 'entityTwo' => [ 'namespaceId' => 101, 'slot' => 'main2' ] ], '', '', '', '' );
+		$sourceOne = new DatabaseEntitySource(
+			'same name',
+			'aaa', [ 'entityOne' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
+			'',
+			'',
+			'',
+			''
+		);
+		$sourceTwo = new DatabaseEntitySource(
+			'same name',
+			'bbb', [ 'entityTwo' => [ 'namespaceId' => 101, 'slot' => 'main2' ] ],
+			'',
+			'',
+			'',
+			''
+		);
 
 		$this->expectException( InvalidArgumentException::class );
 		new EntitySourceDefinitions( [ $sourceOne, $sourceTwo ], new SubEntityTypesMapper( [] ) );
@@ -115,10 +138,14 @@ class EntitySourceDefinitionsTest extends TestCase {
 	}
 
 	public function testGivenFedPropsSource_getApiSourceForEntityTypeReturnsSource(): void {
-		$fedPropSource = NewEntitySource::havingName( 'feddy-props' )
-			->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 122, 'slot' => 'main' ] ] )
-			->withType( EntitySource::TYPE_API )
-			->build();
+		$fedPropSource = new ApiEntitySource(
+			'feddy-props',
+			[ 'property' ],
+			'someUrl',
+			'',
+			'',
+			''
+		);
 
 		$sourceDefinitions = new EntitySourceDefinitions( [
 			$this->newItemSource(),
@@ -143,7 +170,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 	}
 
 	private function newItemSource() {
-		return new EntitySource(
+		return new DatabaseEntitySource(
 			'items',
 			false,
 			[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
@@ -155,7 +182,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 	}
 
 	private function newPropertySource() {
-		return new EntitySource(
+		return new DatabaseEntitySource(
 			'properties',
 			false,
 			[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
@@ -167,7 +194,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 	}
 
 	private function newOtherSource() {
-		return new EntitySource(
+		return new DatabaseEntitySource(
 			'others',
 			false,
 			[ 'other' => [ 'namespaceId' => 666, 'slot' => 'other' ] ],

@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
 use InvalidArgumentException;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
@@ -40,7 +40,7 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 	private $typesEnabled = [];
 
 	/**
-	 * @var EntitySource
+	 * @var ApiEntitySource
 	 */
 	private $entitySource;
 
@@ -48,7 +48,7 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 	 * @param GenericActionApiClient $api
 	 * @param string[] $enabledDataTypes
 	 */
-	public function __construct( GenericActionApiClient $api, array $enabledDataTypes, EntitySource $entitySource ) {
+	public function __construct( GenericActionApiClient $api, array $enabledDataTypes, ApiEntitySource $entitySource ) {
 		$this->api = $api;
 		foreach ( $enabledDataTypes as $dataType ) {
 			$this->typesEnabled[$dataType] = true;

@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
@@ -25,7 +25,7 @@ class EntityChangeLookupTest extends ServiceWiringTestCase {
 			$this->createMock( EntityChangeFactory::class ) );
 		$this->mockService( 'WikibaseClient.EntityIdParser',
 			new ItemIdParser() );
-		$itemAndPropertySource = new EntitySource(
+		$itemAndPropertySource = new DatabaseEntitySource(
 			'test',
 			'testdb',
 			[],

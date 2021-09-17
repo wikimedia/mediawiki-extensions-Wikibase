@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
@@ -49,8 +49,8 @@ class EntityTypeToRepositoryMappingTest extends ServiceWiringTestCase {
 		array $typesToSubtypes
 	): EntitySourceDefinitions {
 		return new EntitySourceDefinitions(
-			array_map( function ( string $source, array $types ): EntitySource {
-				return new EntitySource(
+			array_map( function ( string $source, array $types ): DatabaseEntitySource {
+				return new DatabaseEntitySource(
 					$source,
 					false,
 					array_fill_keys( $types, [

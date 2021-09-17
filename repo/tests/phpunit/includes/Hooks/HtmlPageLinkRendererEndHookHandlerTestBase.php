@@ -9,7 +9,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWikiLangTestCase;
 use RequestContext;
 use Title;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
@@ -152,7 +152,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 	}
 
 	private function newMockEntitySourceDefinitions( $entityType ) {
-		$foreignItemSource = $this->createMock( EntitySource::class );
+		$foreignItemSource = $this->createMock( DatabaseEntitySource::class );
 		$foreignItemSource->method( 'getInterwikiPrefix' )
 			->willReturn( self::FOREIGN_REPO_PREFIX );
 
@@ -165,7 +165,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 	}
 
 	private function newMockEntitySource() {
-		$entitySource = $this->createMock( EntitySource::class );
+		$entitySource = $this->createMock( DatabaseEntitySource::class );
 		$entitySource->method( 'getEntityTypes' )
 			->willReturn( [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] );
 

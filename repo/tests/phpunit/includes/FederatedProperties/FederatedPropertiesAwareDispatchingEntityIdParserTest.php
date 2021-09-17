@@ -4,7 +4,8 @@ declare( strict_types=1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\ApiEntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
@@ -72,7 +73,7 @@ class FederatedPropertiesAwareDispatchingEntityIdParserTest extends TestCase {
 	): FederatedPropertiesAwareDispatchingEntityIdParser {
 		$definitions = new EntitySourceDefinitions(
 			[
-				new EntitySource(
+				new DatabaseEntitySource(
 					'local',
 					false,
 					[],
@@ -81,25 +82,21 @@ class FederatedPropertiesAwareDispatchingEntityIdParserTest extends TestCase {
 					'',
 					''
 				),
-				new EntitySource(
+				new ApiEntitySource(
 					'wikidorta',
-					false,
-					[],
+					[ 'property' ],
 					'',
 					'',
 					'',
-					'',
-					EntitySource::TYPE_API
+					''
 				),
-				new EntitySource(
+				new ApiEntitySource(
 					'wikidata',
-					false,
-					[],
+					[ 'property' ],
 					'http://www.wikidata.org/entity/',
 					'',
 					'',
-					'',
-					EntitySource::TYPE_API
+					''
 				)
 			],
 			new SubEntityTypesMapper( [] )

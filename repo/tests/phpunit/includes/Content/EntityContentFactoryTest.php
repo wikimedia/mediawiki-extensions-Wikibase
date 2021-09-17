@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Content;
 use InvalidArgumentException;
 use MediaWikiIntegrationTestCase;
 use OutOfBoundsException;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -86,7 +86,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getItemSource() {
-		return new EntitySource(
+		return new DatabaseEntitySource(
 			'itemwiki',
 			'itemdb',
 			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ],
@@ -99,7 +99,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 
 	protected function newFactory() {
 		$itemSource = $this->getItemSource();
-		$propertySource = new EntitySource(
+		$propertySource = new DatabaseEntitySource(
 			'propertywiki',
 			'propertydb',
 			[ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ],

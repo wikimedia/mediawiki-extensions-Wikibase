@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Psr\Log\NullLogger;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -27,7 +27,7 @@ class LocalRepoWikiPageMetaDataAccessorTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
 			new EntityTypeDefinitions( [] ) );
 		$this->mockService( 'WikibaseRepo.LocalEntitySource',
-			$this->createMock( EntitySource::class ) );
+			$this->createMock( DatabaseEntitySource::class ) );
 		$this->mockService(
 			'WikibaseRepo.RepoDomainDbFactory',
 			$this->createMock( RepoDomainDbFactory::class )

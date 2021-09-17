@@ -6,7 +6,7 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -46,7 +46,7 @@ class StoreTest extends ServiceWiringTestCase {
 			] ) );
 		$this->mockService( 'WikibaseClient.TermBuffer',
 			$this->createMock( TermBuffer::class ) );
-		$itemAndPropertySource = new EntitySource(
+		$itemAndPropertySource = new DatabaseEntitySource(
 			'test',
 			'testdb',
 			[],

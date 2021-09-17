@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -44,7 +44,7 @@ class StoreTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.WikibaseServices',
 			$this->createMock( WikibaseServices::class ) );
 		$this->mockService( 'WikibaseRepo.LocalEntitySource',
-			$this->createMock( EntitySource::class ) );
+			$this->createMock( DatabaseEntitySource::class ) );
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
 				'sharedCacheKeyPrefix' => 'wikibase_shared/test',

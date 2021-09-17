@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiMain;
 use FauxRequest;
 use RequestContext;
-use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
@@ -106,7 +106,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function callApiModule( array $params, EntitySearchHelper $entitySearchHelper = null ) {
 		$entitySourceDefinitions = new EntitySourceDefinitions( [
-			new EntitySource(
+			new DatabaseEntitySource(
 				'items',
 				false,
 				[ 'item' => [ 'namespaceId' => 10000, 'slot' => 'main' ] ],
@@ -115,7 +115,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 				'',
 				''
 			),
-			new EntitySource(
+			new DatabaseEntitySource(
 				'props',
 				'otherdb',
 				[ 'property' => [ 'namespaceId' => 50000, 'slot' => 'main' ] ],
@@ -372,7 +372,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 
 		$entitySourceDefinitions = new EntitySourceDefinitions(
 			[
-				new EntitySource(
+				new DatabaseEntitySource(
 					'test',
 					'kittendb',
 					[ 'kitten' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ],

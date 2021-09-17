@@ -25,28 +25,39 @@ class EntitySourceDefinitionsConfigParser {
 		$sources = [];
 
 		foreach ( $sourceConfig as $sourceName => $sourceData ) {
-			$namespaceSlotData = [];
-			foreach ( $sourceData['entityNamespaces'] as $entityType => $namespaceSlot ) {
+			if ( !array_key_exists( 'type', $sourceData ) || ( $sourceData['type'] === DatabaseEntitySource::TYPE ) ) {
+				$namespaceSlotData = [];
+				foreach ( $sourceData['entityNamespaces'] as $entityType => $namespaceSlot ) {
 
-				list( $namespaceId, $slot ) = self::splitNamespaceAndSlot( $namespaceSlot );
-				$namespaceSlotData[$entityType] = [
-					'namespaceId' => $namespaceId,
-					'slot' => $slot,
-				];
+					list( $namespaceId, $slot ) = self::splitNamespaceAndSlot( $namespaceSlot );
+					$namespaceSlotData[$entityType] = [
+						'namespaceId' => $namespaceId,
+						'slot' => $slot,
+					];
 
+				}
+				$sources[] = new DatabaseEntitySource(
+					$sourceName,
+					$sourceData['repoDatabase'],
+					$namespaceSlotData,
+					$sourceData['baseUri'],
+					$sourceData['rdfNodeNamespacePrefix'],
+					$sourceData['rdfPredicateNamespacePrefix'],
+					$sourceData['interwikiPrefix']
+				);
+			} elseif ( $sourceData['type'] === ApiEntitySource::TYPE ) {
+				$sources[] = new ApiEntitySource(
+					$sourceName,
+					$sourceData['entityTypes'],
+					$sourceData['baseUri'],
+					$sourceData['rdfNodeNamespacePrefix'],
+					$sourceData['rdfPredicateNamespacePrefix'],
+					$sourceData['interwikiPrefix']
+				);
+			} else {
+				throw new InvalidArgumentException( 'Source data with wrong elements.' );
 			}
-			$sources[] = new EntitySource(
-				$sourceName,
-				$sourceData['repoDatabase'],
-				$namespaceSlotData,
-				$sourceData['baseUri'],
-				$sourceData['rdfNodeNamespacePrefix'],
-				$sourceData['rdfPredicateNamespacePrefix'],
-				$sourceData['interwikiPrefix'],
-				$sourceData['type'] ?? EntitySource::TYPE_DB
-			);
 		}
-
 		return new EntitySourceDefinitions( $sources, $subEntityTypesMapper );
 	}
 
@@ -58,41 +69,15 @@ class EntitySourceDefinitionsConfigParser {
 				throw new InvalidArgumentException( 'Source name should be a string. Given: "' . $sourceName . '"' );
 			}
 
-			if ( !array_key_exists( 'entityNamespaces', $sourceData ) ) {
-				throw new InvalidArgumentException( 'Source data should include "entityNamespace" element' );
-			}
-
-			if ( !is_array( $sourceData['entityNamespaces'] ) ) {
-				throw new InvalidArgumentException(
-					'Entity namespace definition of entity source "' . $sourceName . '" should be an associative array'
-				);
-			}
-
-			foreach ( $sourceData['entityNamespaces'] as $entityType => $namespaceSlot ) {
-				if ( !is_string( $entityType ) ) {
-					throw new InvalidArgumentException(
-						'Entity namespace definition of entity source "' . $sourceName . '" should be indexed by strings'
-					);
-				}
-				if ( !is_string( $namespaceSlot ) && !is_int( $namespaceSlot ) ) {
-					throw new InvalidArgumentException(
-						'Entity namespaces of entity source "' . $sourceName . '" should be either a string or an integer'
-					);
-				}
-			}
-
-			if ( !array_key_exists( 'repoDatabase', $sourceData ) ) {
-				throw new InvalidArgumentException( 'Source data should include "repoDatabase" element' );
-			}
-
-			if ( !is_string( $sourceData['repoDatabase'] ) && $sourceData['repoDatabase'] !== false ) {
-				throw new InvalidArgumentException(
-					'Symbolic database name of entity source "' . $sourceName . '" should be a string or false.'
-				);
-			}
-
 			if ( !array_key_exists( 'baseUri', $sourceData ) ) {
 				throw new InvalidArgumentException( 'Source data should include "baseUri" element' );
+			}
+
+			if ( array_key_exists( 'repoDatabase', $sourceData ) ) {
+				$this->asserConfigArrayWellFormedWhenRepoDatabaseExist( $sourceData, $sourceName );
+			}
+			if ( array_key_exists( 'entityTypes', $sourceData ) ) {
+				Assert::parameterElementType( 'string', $sourceData[ 'entityTypes' ], 'entityTypes' );
 			}
 
 			if ( !is_string( $sourceData['baseUri'] ) ) {
@@ -107,6 +92,36 @@ class EntitySourceDefinitionsConfigParser {
 
 			if ( !is_string( $sourceData['interwikiPrefix'] ) ) {
 				throw new InvalidArgumentException( 'Interwiki prefix of entity source "' . $sourceName . '" should be a string.' );
+			}
+		}
+	}
+
+	private function asserConfigArrayWellFormedWhenRepoDatabaseExist( $sourceData, $sourceName ) {
+		if ( !is_string( $sourceData['repoDatabase'] ) && $sourceData['repoDatabase'] !== false ) {
+			throw new InvalidArgumentException(
+				'Symbolic database name of entity source "' . $sourceName . '" should be a string or false.'
+			);
+		}
+
+		if ( !array_key_exists( 'entityNamespaces', $sourceData ) ) {
+			throw new InvalidArgumentException( 'Source data should include "entityNamespace" element' );
+		}
+
+		if ( !is_array( $sourceData['entityNamespaces'] ) ) {
+			throw new InvalidArgumentException(
+				'Entity namespace definition of entity source "' . $sourceName . '" should be an associative array'
+			);
+		}
+		foreach ( $sourceData['entityNamespaces'] as $entityType => $namespaceSlot ) {
+			if ( !is_string( $entityType ) ) {
+				throw new InvalidArgumentException(
+					'Entity namespace definition of entity source "' . $sourceName . '" should be indexed by strings'
+				);
+			}
+			if ( !is_string( $namespaceSlot ) && !is_int( $namespaceSlot ) ) {
+				throw new InvalidArgumentException(
+					'Entity namespaces of entity source "' . $sourceName . '" should be either a string or an integer'
+				);
 			}
 		}
 	}
