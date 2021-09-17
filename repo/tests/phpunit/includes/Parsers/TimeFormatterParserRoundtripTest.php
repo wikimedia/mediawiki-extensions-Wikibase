@@ -100,12 +100,14 @@ class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 			[ '1. millennium' ], //wikibase-time-precision-millennium
 			[ '1. century' ], //wikibase-time-precision-century
 			[ '10s' ], //wikibase-time-precision-10annum
+			[ '10 CE' ], //wikibase-time-precision-CE
 			[ '1 billion years BCE' ], //wikibase-time-precision-BCE-Gannum
 			[ '1 million years BCE' ], //wikibase-time-precision-BCE-Mannum
 			[ '10000 years BCE' ], //wikibase-time-precision-BCE-annum
 			[ '1. millennium BCE' ], //wikibase-time-precision-BCE-millennium
 			[ '1. century BCE' ], //wikibase-time-precision-BCE-century
 			[ '10s BCE' ], //wikibase-time-precision-BCE-10annum
+			[ '10 BCE' ], //wikibase-time-precision-BCE
 		];
 	}
 
@@ -160,7 +162,7 @@ class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 			],
 			[
 				'+00000000001-01-14T00:00:00Z',
-				'14 January 1',
+				'14 January 1 CE',
 			],
 			[
 				'+00000010000-01-01T00:00:00Z',

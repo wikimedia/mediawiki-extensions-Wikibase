@@ -34,7 +34,7 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 			],
 			[
 				'+00000000001-01-14T00:00:00Z', TimeValue::PRECISION_DAY,
-				'14 January 1',
+				'14 January 1 CE',
 			],
 			[
 				'+00000010000-01-01T00:00:00Z', TimeValue::PRECISION_DAY,
@@ -50,7 +50,7 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 			],
 			[
 				'+00000000013-07-16T00:00:00Z', TimeValue::PRECISION_YEAR,
-				'13',
+				'13 CE',
 			],
 			[
 				'+00002222013-07-16T00:10:00Z', TimeValue::PRECISION_YEAR,
@@ -351,7 +351,7 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 			],
 			[
 				'+5-01-00T00:00:00Z', TimeValue::PRECISION_MONTH,
-				'January 5',
+				'January 5 CE',
 			],
 			[
 				'+00000001996-01-00T00:00:00Z', TimeValue::PRECISION_MONTH,
@@ -363,7 +363,7 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 			],
 			[
 				'+0-01-01T00:00:42Z', TimeValue::PRECISION_YEAR,
-				'0',
+				'0 CE',
 			],
 
 			// centuries and millenia start with 1, so we can format "low" years just fine
@@ -485,7 +485,7 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 			],
 			[
 				'+1-01-01T00:00:08Z', TimeValue::PRECISION_YEAR10,
-				'1',
+				'1 CE',
 			],
 			[
 				'-0-01-01T00:00:42Z', TimeValue::PRECISION_YEAR,

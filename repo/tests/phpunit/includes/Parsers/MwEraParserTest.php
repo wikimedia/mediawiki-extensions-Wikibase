@@ -69,8 +69,10 @@ class MwEraParserTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( $code );
 
 		$lang->method( 'getMessage' )
-			->with( $this->equalTo( MwEraParser::MESSAGE_KEY ) )
-			->willReturn( '$1 v. Chr.' );
+			->willReturnMap( [
+				[ MwEraParser::BCE_MESSAGE_KEY, '$1 v. Chr.' ],
+				[ MwEraParser::CE_MESSAGE_KEY, '$1 n. Chr.' ],
+			] );
 
 		return $lang;
 	}
@@ -94,13 +96,25 @@ class MwEraParserTest extends \PHPUnit\Framework\TestCase {
 			[ 'September 19th, 2019 BCE', [ '-', 'September 19th, 2019' ] ],
 			[ '2019-09-19 BCE', [ '-', '2019-09-19' ] ],
 
+			[ '2019 CE', [ '+', '2019' ] ],
+			[ 'September 2019 CE', [ '+', 'September 2019' ] ],
+			[ 'September 19th, 2019 CE', [ '+', 'September 19th, 2019' ] ],
+			[ '2019-09-19 CE', [ '+', '2019-09-19' ] ],
+
 			[ '2019 v. Chr.', [ '-', '2019' ] ],
 			[ 'September 2019 v. Chr.', [ '-', 'September 2019' ] ],
 			[ '19. September 2019 v. Chr.', [ '-', '19. September 2019' ] ],
 			[ '2019-09-19 v. Chr.', [ '-', '2019-09-19' ] ],
 
+			[ '2019 n. Chr.', [ '+', '2019' ] ],
+			[ 'September 2019 n. Chr.', [ '+', 'September 2019' ] ],
+			[ '19. September 2019 n. Chr.', [ '+', '19. September 2019' ] ],
+			[ '2019-09-19 n. Chr.', [ '+', '2019-09-19' ] ],
+
 			[ 'foo BCE', [ '-', 'foo' ] ],
 			[ 'foo v. Chr.', [ '-', 'foo' ] ],
+			[ 'foo CE', [ '+', 'foo' ] ],
+			[ 'foo n. Chr.', [ '+', 'foo' ] ],
 
 			[ 'foo v.Chr.', [ '+', 'foo v.Chr.' ] ],
 
