@@ -7,6 +7,7 @@
 			"Elroy",
 			"JurgenNL",
 			"Konovalov",
+			"Krinkle",
 			"Mainframe98",
 			"Mar(c)",
 			"Mbch331",
@@ -26,7 +27,7 @@
 			"Xxmarijnw"
 		]
 	},
-	"wikibase-client-desc": "Client voor de uitbreiding Wikibase",
+	"wikibase-client-desc": "Client extensie voor Wikibase",
 	"tooltip-t-wikibase": "Koppeling naar item in verbonden gegevensrepository",
 	"wikibase-after-page-move": "Uw titelwijziging zou nu in de taalkoppeling van [$1 het {{WBREPONAME}}-item] bijgewerkt moeten zijn. We vragen u dit te controleren.",
 	"wikibase-after-page-delete": "De koppeling naar deze pagina zou nu van [$1 het gekoppelde {{WBREPONAME}}-item] verwijderd moeten zijn. We vragen u dit te controleren.",
