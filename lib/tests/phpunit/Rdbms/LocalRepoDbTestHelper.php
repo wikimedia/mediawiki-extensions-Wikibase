@@ -4,9 +4,9 @@ declare( strict_types=1 );
 
 namespace Wikibase\Lib\Tests\Rdbms;
 
-use IDatabase;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LBFactorySingle;
 
 /**

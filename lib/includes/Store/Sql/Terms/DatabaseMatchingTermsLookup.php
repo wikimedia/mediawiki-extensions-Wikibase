@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use FakeResultWrapper;
 use InvalidArgumentException;
 use MediaWiki\Storage\NameTableAccessException;
 use Psr\Log\LoggerInterface;
@@ -13,6 +12,7 @@ use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\TermIndexEntry;
+use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
 

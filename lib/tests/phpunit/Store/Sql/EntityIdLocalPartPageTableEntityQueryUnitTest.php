@@ -3,13 +3,13 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use ArrayObject;
-use IDatabase;
 use MediaWiki\Storage\NameTableStore;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PageTableEntityQueryBase;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @group Wikibase
