@@ -158,7 +158,6 @@ return call_user_func( function() {
 		'wikibase.entityChangers.EntityChangersFactory' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/entityChangers/namespace.js',
-
 				'wikibase/entityChangers/AliasesChanger.js',
 				'wikibase/entityChangers/StatementsChanger.js',
 				'wikibase/entityChangers/StatementsChangerState.js',
@@ -167,7 +166,6 @@ return call_user_func( function() {
 				'wikibase/entityChangers/LabelsChanger.js',
 				'wikibase/entityChangers/SiteLinksChanger.js',
 				'wikibase/entityChangers/SiteLinkSetsChanger.js',
-
 				'wikibase/entityChangers/EntityChangersFactory.js',
 			],
 			'dependencies' => [
@@ -181,7 +179,6 @@ return call_user_func( function() {
 		'wikibase.utilities.ClaimGuidGenerator' => $moduleTemplate + [
 			'packageFiles' => [
 				'wikibase/utilities/wikibase.utilities.ClaimGuidGenerator.js',
-
 				'wikibase/utilities/wikibase.utilities.GuidGenerator.js',
 			],
 			'dependencies' => [
@@ -210,7 +207,6 @@ return call_user_func( function() {
 		'wikibase.view.ControllerViewFactory' => $moduleBaseTemplate + [
 			'packageFiles' => [
 				'resources/wikibase/view/ControllerViewFactory.js',
-
 				'resources/jquery/ui/jquery.ui.TemplatedWidget.js',
 				'resources/jquery/ui/jquery.ui.closeable.js',
 				'resources/jquery/ui/jquery.ui.EditableTemplatedWidget.js',
@@ -257,7 +253,6 @@ return call_user_func( function() {
 				'resources/jquery/jquery.removeClassByRegex.js',
 				'lib/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.js',
 				'resources/wikibase/utilities/wikibase.utilities.ui.js',
-
 			],
 			'styles' => [
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.badgeselector.css',
@@ -382,7 +377,6 @@ return call_user_func( function() {
 		'wikibase.datamodel' => [
 			'packageFiles' => [
 				'index.js',
-
 				'List.js',
 				'Group.js',
 				'Map.js',
@@ -634,7 +628,6 @@ return call_user_func( function() {
 		'wikibase.serialization' => [
 			'packageFiles' => [
 				'index.js',
-
 				'Deserializers/Deserializer.js',
 				'Deserializers/SnakDeserializer.js',
 				'Deserializers/StatementGroupSetDeserializer.js',
