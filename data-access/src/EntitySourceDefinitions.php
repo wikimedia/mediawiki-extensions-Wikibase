@@ -19,7 +19,7 @@ class EntitySourceDefinitions {
 	private $sources;
 
 	/**
-	 * @var null|EntitySource[]
+	 * @var null|DatabaseEntitySource[]
 	 */
 	private $entityTypeToDatabaseSourceMapping = null;
 
@@ -90,9 +90,9 @@ class EntitySourceDefinitions {
 
 	/**
 	 * @param string $entityType Entity type or sub type
-	 * @return EntitySource|null EntitySource or null if no EntitySource configured for the type
+	 * @return DatabaseEntitySource |null DatabaseEntitySource or null if no DatabaseEntitySource configured for the type
 	 */
-	public function getDatabaseSourceForEntityType( string $entityType ): ?EntitySource {
+	public function getDatabaseSourceForEntityType( string $entityType ): ?DatabaseEntitySource {
 		$entityType = $this->subEntityTypesMapper->getParentEntityType( $entityType ) ?? $entityType;
 
 		$entityTypeToSourceMapping = $this->getEntityTypeToDatabaseSourceMapping();
@@ -119,7 +119,7 @@ class EntitySourceDefinitions {
 	}
 
 	/**
-	 * @return EntitySource[]
+	 * @return DatabaseEntitySource[]
 	 */
 	public function getEntityTypeToDatabaseSourceMapping() {
 		if ( $this->entityTypeToDatabaseSourceMapping === null ) {
