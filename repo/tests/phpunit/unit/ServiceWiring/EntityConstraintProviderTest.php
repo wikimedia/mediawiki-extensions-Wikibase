@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
@@ -25,6 +26,8 @@ class EntityConstraintProviderTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.RepoDomainDbFactory', $dbFactory );
 		$this->mockService( 'WikibaseRepo.EntityIdComposer',
 			new EntityIdComposer( [] ) );
+		$this->mockService( 'WikibaseRepo.BagOStuffSiteLinkConflictLookup',
+			$this->createMock( BagOStuffSiteLinkConflictLookup::class ) );
 
 		$this->assertInstanceOf(
 			EntityConstraintProvider::class,

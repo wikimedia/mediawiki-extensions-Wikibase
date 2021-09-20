@@ -221,6 +221,8 @@ use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\StatementGrouperBuilder;
+use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
+use Wikibase\Repo\Store\CompositeSiteLinkConflictLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
@@ -300,6 +302,14 @@ return [
 			$store->getEntityByLinkedTitleLookup(),
 			WikibaseRepo::getEntityFactory( $services ),
 			WikibaseRepo::getEntityStore( $services )
+		);
+	},
+
+	'WikibaseRepo.BagOStuffSiteLinkConflictLookup' => function (
+		MediaWikiServices $services
+	): BagOStuffSiteLinkConflictLookup {
+		return new BagOStuffSiteLinkConflictLookup(
+			ObjectCache::getLocalClusterInstance()
 		);
 	},
 
@@ -665,10 +675,13 @@ return [
 
 	'WikibaseRepo.EntityConstraintProvider' => function ( MediaWikiServices $services ): EntityConstraintProvider {
 		return new EntityConstraintProvider(
-			new SqlSiteLinkConflictLookup(
-				WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
-				WikibaseRepo::getEntityIdComposer( $services )
-			),
+			new CompositeSiteLinkConflictLookup( [
+				new SqlSiteLinkConflictLookup(
+					WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
+					WikibaseRepo::getEntityIdComposer( $services )
+				),
+				WikibaseRepo::getBagOStuffSiteLinkConflictLookup( $services ),
+			] ),
 			WikibaseRepo::getTermValidatorFactory()
 		);
 	},
@@ -1226,11 +1239,14 @@ return [
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getStore( $services )
 				->newSiteLinkStore(),
+			WikibaseRepo::getBagOStuffSiteLinkConflictLookup( $services ),
 			WikibaseRepo::getEntityIdLookup( $services ),
 			WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory( $services ),
 			WikibaseRepo::getFieldDefinitionsFactory( $services )
 				->getFieldDefinitionsByType( Item::ENTITY_TYPE ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
+			WikibaseRepo::getRepoDomainDbFactory( $services )
+				->newRepoDb(),
 			WikibaseRepo::getLegacyFormatDetectorCallback( $services )
 		);
 	},
