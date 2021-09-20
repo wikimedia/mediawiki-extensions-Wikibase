@@ -4,7 +4,11 @@
 			"Yupik"
 		]
 	},
+	"wikibase-editlinks": "Muuʹtt liiŋkid",
+	"wikibase-editlinkstitle": "Muuʹtt ǩiõlikõskksaž liiŋkid",
+	"wikibase-linkitem-addlinks": "Lââʹzzet liiŋkid",
 	"wikibase-linkitem-input-site": "Ǩiõll:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Čiõǥǥ",
 	"wikibase-rc-hide-wikidata-show": "Čuäʹjet",
 	"wikibase-rc-wikibase-edit-letter": "D",

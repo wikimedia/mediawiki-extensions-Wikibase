@@ -451,5 +451,6 @@
 	"wikibase-tainted-ref-popper-help-link-title": "Stránka s nápovědou pro tento typ omezení",
 	"wikibase-tainted-ref-popper-help-link-text": "Nápověda",
 	"wikibase-tainted-ref-popper-remove-warning": "Odstranit varování",
-	"wikibase-tainted-ref-tainted-icon-title": "Toto tvrzení může mít určité problémy."
+	"wikibase-tainted-ref-tainted-icon-title": "Toto tvrzení může mít určité problémy.",
+	"special-setlabeldescriptionaliases-parameterized": "Nastavit štítek, popis a aliasy pro $1"
 }

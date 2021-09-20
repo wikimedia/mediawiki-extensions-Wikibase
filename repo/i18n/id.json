@@ -272,7 +272,7 @@
 	"wikibase-setsitelink-label": "Pranala situs:",
 	"wikibase-setsitelink-badges": "Lencana:",
 	"wikibase-setsitelink-submit": "Atur pranala situs",
-	"wikibase-setsitelink-invalid-site": "Penanda situs \"$1\" tidak dikenal. GUnakan penanda situs yang sudah ada, misalnya \"enwiki\"",
+	"wikibase-setsitelink-invalid-site": "Situs \"$1\" tidak dikenal. Gunakan nama situs yang sudah ada, misalnya \"idwiki\"",
 	"wikibase-setsitelink-not-item": "Penanda $1 tidak termasuk pada sebuah butir.",
 	"wikibase-setsitelink-not-badge": "Butir $1 bukanlah sebuah lencana.",
 	"wikibase-setsitelink-add-failed": "Pranala situs tidak dapat disimpan.",
