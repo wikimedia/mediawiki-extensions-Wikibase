@@ -6,8 +6,8 @@ use Diff\DiffOp\DiffOpAdd;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\SiteLink;
@@ -102,8 +102,8 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		$q2 = new ItemId( 'Q2' );
-		$p1 = new PropertyId( 'P1' );
-		$p2 = new PropertyId( 'P2' );
+		$p1 = new NumericPropertyId( 'P1' );
+		$p2 = new NumericPropertyId( 'P2' );
 
 		$noValueP1Statement = new Statement( new PropertyNoValueSnak( $p1 ) );
 		$noValueP1Statements = new StatementList( [ $noValueP1Statement ] );
