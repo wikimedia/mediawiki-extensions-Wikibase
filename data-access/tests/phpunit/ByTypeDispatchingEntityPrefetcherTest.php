@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ByTypeDispatchingEntityPrefetcher;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 
 /**
  * @covers \Wikibase\DataAccess\ByTypeDispatchingEntityPrefetcher
@@ -29,7 +29,7 @@ class ByTypeDispatchingEntityPrefetcherTest extends TestCase {
 
 	public function testPrefetchFetchesDataOfAllEntitiesOfKnownType() {
 		$itemId = new ItemId( 'Q123' );
-		$propertyId = new PropertyId( 'P100' );
+		$propertyId = new NumericPropertyId( 'P100' );
 
 		$itemPrefetcher = new EntityPrefetcherSpy();
 		$propertyPrefetcher = new EntityPrefetcherSpy();
@@ -49,7 +49,7 @@ class ByTypeDispatchingEntityPrefetcherTest extends TestCase {
 
 	public function testPrefetchOmitsEntitiesOfKnownType() {
 		$itemId = new ItemId( 'Q123' );
-		$propertyId = new PropertyId( 'P100' );
+		$propertyId = new NumericPropertyId( 'P100' );
 
 		$innerPrefetcher = new EntityPrefetcherSpy();
 
@@ -64,7 +64,7 @@ class ByTypeDispatchingEntityPrefetcherTest extends TestCase {
 
 	public function testPurge() {
 		$itemId = new ItemId( 'Q123' );
-		$propertyId = new PropertyId( 'P100' );
+		$propertyId = new NumericPropertyId( 'P100' );
 
 		$itemPrefetcher = new EntityPrefetcherSpy();
 		$propertyPrefetcher = new EntityPrefetcherSpy();
@@ -86,7 +86,7 @@ class ByTypeDispatchingEntityPrefetcherTest extends TestCase {
 
 	public function testPurgeAll() {
 		$itemId = new ItemId( 'Q123' );
-		$propertyId = new PropertyId( 'P100' );
+		$propertyId = new NumericPropertyId( 'P100' );
 
 		$itemPrefetcher = new EntityPrefetcherSpy();
 		$propertyPrefetcher = new EntityPrefetcherSpy();

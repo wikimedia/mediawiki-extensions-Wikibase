@@ -5,7 +5,7 @@ namespace Wikibase\View\Tests;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -36,7 +36,7 @@ use Wikibase\View\Template\TemplateRegistry;
 class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetHtml() {
-		$propertyId = new PropertyId( 'P77' );
+		$propertyId = new NumericPropertyId( 'P77' );
 		$statements = $this->makeStatements( $propertyId );
 
 		$statementGroupListView = $this->newStatementGroupListView();
@@ -54,7 +54,7 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenIdPrefix_getHtmlPrefixesId() {
 		$id = 'P78';
 		$prefix = 'X1-Y5';
-		$statements = $this->makeStatements( new PropertyId( $id ) );
+		$statements = $this->makeStatements( new NumericPropertyId( $id ) );
 
 		$statementGroupListView = $this->newStatementGroupListView();
 
@@ -66,7 +66,7 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 
 	public function testAddsPropertyIdDataAttribute() {
 		$id = 'P78';
-		$statements = $this->makeStatements( new PropertyId( $id ) );
+		$statements = $this->makeStatements( new NumericPropertyId( $id ) );
 
 		$statementGroupListView = $this->newStatementGroupListView();
 
@@ -101,17 +101,17 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 	 * @return Statement
 	 */
 	private function makeNoValueStatement( $propertyId ) {
-		$statement = new Statement( new PropertyNoValueSnak( new PropertyId( $propertyId ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( new NumericPropertyId( $propertyId ) ) );
 		$statement->setGuid( 'GUID$' . $propertyId );
 		return $statement;
 	}
 
 	/**
-	 * @param PropertyId $propertyId
+	 * @param NumericPropertyId $propertyId
 	 *
 	 * @return Statement[]
 	 */
-	private function makeStatements( PropertyId $propertyId ) {
+	private function makeStatements( NumericPropertyId $propertyId ) {
 		return [
 			$this->makeStatement( new PropertyNoValueSnak(
 				$propertyId

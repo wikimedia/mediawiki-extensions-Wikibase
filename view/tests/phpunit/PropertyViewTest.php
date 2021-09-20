@@ -4,8 +4,8 @@ namespace Wikibase\View\Tests;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\DataTypeFactory;
@@ -33,7 +33,7 @@ use Wikibase\View\Template\TemplateFactory;
 class PropertyViewTest extends EntityViewTestCase {
 
 	/**
-	 * @param EntityId|PropertyId $id
+	 * @param EntityId|NumericPropertyId $id
 	 * @param Statement[] $statements
 	 *
 	 * @return Property
@@ -55,10 +55,10 @@ class PropertyViewTest extends EntityViewTestCase {
 	 *
 	 * @param int|string $n
 	 *
-	 * @return PropertyId
+	 * @return NumericPropertyId
 	 */
 	protected function makeEntityId( $n ) {
-		return new PropertyId( "P$n" );
+		return new NumericPropertyId( "P$n" );
 	}
 
 	/**

@@ -11,7 +11,7 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Lib\SubEntityTypesMapper;
 
@@ -44,7 +44,7 @@ class EntitySourceLookupTest extends TestCase {
 	}
 
 	public function testGivenUnprefixedEntityId_returnsDbEntitySourceForEntityType() {
-		$id = new PropertyId( 'P123' );
+		$id = new NumericPropertyId( 'P123' );
 		$expectedSource = NewDatabaseEntitySource::havingName( 'im a db source!' )
 			->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 121, 'slot' => 'main' ] ] )
 			->build();

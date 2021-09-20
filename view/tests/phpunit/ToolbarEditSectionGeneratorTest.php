@@ -3,7 +3,7 @@
 namespace Wikibase\View\Tests;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\View\LocalizedTextProvider;
@@ -42,7 +42,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	public function getAddStatementToGroupSectionProvider() {
 		return [
-			[ new PropertyId( 'P1' ) ],
+			[ new NumericPropertyId( 'P1' ) ],
 		];
 	}
 
@@ -63,7 +63,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				'en',
-				new PropertyId( 'P1' ),
+				new NumericPropertyId( 'P1' ),
 				'Special:SetLabelDescriptionAliases/P1/en'
 			]
 		];
@@ -80,7 +80,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	public function getSiteLinksEditSectionProvider() {
 		return [
-			[ new PropertyId( 'P1' ), 'Special:SetSiteLink/P1' ]
+			[ new NumericPropertyId( 'P1' ), 'Special:SetSiteLink/P1' ]
 		];
 	}
 
@@ -98,7 +98,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	public function getStatementEditSection() {
 		return [
-			[ new Statement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) ) ]
+			[ new Statement( new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) ) ) ]
 		];
 	}
 
