@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ByTypeDispatchingEntityRevisionLookup;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
 
@@ -77,7 +77,7 @@ class ByTypeDispatchingEntityRevisionLookupTest extends TestCase {
 			'item' => $itemLookup
 		] );
 
-		$this->assertNull( $lookup->getEntityRevision( new PropertyId( 'P1' ) ) );
+		$this->assertNull( $lookup->getEntityRevision( new NumericPropertyId( 'P1' ) ) );
 	}
 
 	public function testGivenEntityIdOfKnownType_getLatestRevisionIdDispatchesRequestToRelevantLookup() {
@@ -133,7 +133,7 @@ class ByTypeDispatchingEntityRevisionLookupTest extends TestCase {
 			return true;
 		};
 
-		$nonExistentEntityReturned = $lookup->getLatestRevisionId( new PropertyId( 'P1' ) )
+		$nonExistentEntityReturned = $lookup->getLatestRevisionId( new NumericPropertyId( 'P1' ) )
 			->onConcreteRevision( $shouldNotBeCalled )
 			->onRedirect( $shouldNotBeCalled )
 			->onNonexistentEntity( $returnTrue )

@@ -9,7 +9,7 @@ use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\SourceAndTypeDispatchingPrefetchingTermLookup;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 
 /**
@@ -55,7 +55,7 @@ class SourceAndTypeDispatchingPrefetchingTermLookupTest extends TestCase {
 
 		$lookup = $this->getLookup();
 
-		$lookup->prefetchTerms( [ new ItemId( 'Q1' ), new PropertyId( 'P1' ) ], [ 'label' ], [ 'en' ] );
+		$lookup->prefetchTerms( [ new ItemId( 'Q1' ), new NumericPropertyId( 'P1' ) ], [ 'label' ], [ 'en' ] );
 
 		$allPrefetchedTerms = array_merge(
 			$itemPrefetchingLookup->getPrefetchedTerms(),
@@ -81,7 +81,7 @@ class SourceAndTypeDispatchingPrefetchingTermLookupTest extends TestCase {
 		$lookup = $this->getLookup();
 
 		$itemId = new ItemId( 'Q1' );
-		$propertyId = new PropertyId( 'P1' );
+		$propertyId = new NumericPropertyId( 'P1' );
 
 		$lookup->prefetchTerms( [ $itemId, $propertyId ], [ 'label' ], [ 'en' ] );
 
@@ -105,7 +105,7 @@ class SourceAndTypeDispatchingPrefetchingTermLookupTest extends TestCase {
 		$lookup = $this->getLookup();
 
 		$itemId = new ItemId( 'Q1' );
-		$propertyId = new PropertyId( 'P1' );
+		$propertyId = new NumericPropertyId( 'P1' );
 
 		$lookup->prefetchTerms( [ $itemId ], [ 'label' ], [ 'en' ] );
 
