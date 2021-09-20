@@ -4,7 +4,7 @@ namespace Wikibase\DataModel\Tests;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -29,13 +29,13 @@ class ReferenceTest extends \PHPUnit\Framework\TestCase {
 		$snakLists[] = new SnakList();
 
 		$snakLists[] = new SnakList(
-			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) ) ]
+			[ new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ) ]
 		);
 
 		$snakLists[] = new SnakList( [
-			new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) ),
-			new PropertySomeValueSnak( new PropertyId( 'P2' ) ),
-			new PropertyNoValueSnak( new PropertyId( 'P3' ) )
+			new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ),
+			new PropertySomeValueSnak( new NumericPropertyId( 'P2' ) ),
+			new PropertyNoValueSnak( new NumericPropertyId( 'P3' ) )
 		] );
 
 		$argLists = [];
@@ -53,12 +53,12 @@ class ReferenceTest extends \PHPUnit\Framework\TestCase {
 		$references[] = new Reference();
 
 		$references[] = new Reference( [
-			new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) ),
+			new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ),
 		] );
 
 		$references[] = new Reference( [
-			new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) ),
-			new PropertySomeValueSnak( new PropertyId( 'P2' ) ),
+			new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ),
+			new PropertySomeValueSnak( new NumericPropertyId( 'P2' ) ),
 		] );
 
 		$argLists = [];
@@ -119,10 +119,10 @@ class ReferenceTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function unorderedReferenceProvider() {
 		$ids = [
-			new PropertyId( 'P1' ),
-			new PropertyId( 'P2' ),
-			new PropertyId( 'P3' ),
-			new PropertyId( 'P4' ),
+			new NumericPropertyId( 'P1' ),
+			new NumericPropertyId( 'P2' ),
+			new NumericPropertyId( 'P3' ),
+			new NumericPropertyId( 'P4' ),
 		];
 
 		$snakListArgs = [
@@ -258,7 +258,7 @@ class ReferenceTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function invalidConstructorArgumentsProvider() {
-		$id1 = new PropertyId( 'P1' );
+		$id1 = new NumericPropertyId( 'P1' );
 
 		return [
 			[ null ],

@@ -5,7 +5,7 @@ namespace Wikibase\DataModel;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 
 /**
  * Turns legacy entity id serializations consisting of entity type + numeric id
@@ -32,7 +32,7 @@ class LegacyIdInterpreter {
 		if ( $entityType === 'item' ) {
 			return ItemId::newFromNumber( $numericId );
 		} elseif ( $entityType === 'property' ) {
-			return PropertyId::newFromNumber( $numericId );
+			return NumericPropertyId::newFromNumber( $numericId );
 		}
 
 		throw new InvalidArgumentException( 'Invalid entityType ' . $entityType );

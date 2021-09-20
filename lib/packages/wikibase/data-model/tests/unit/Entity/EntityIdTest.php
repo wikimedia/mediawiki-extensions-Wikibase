@@ -6,12 +6,12 @@ use InvalidArgumentException;
 use ReflectionClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 
 /**
  * @covers \Wikibase\DataModel\Entity\EntityId
  * @uses \Wikibase\DataModel\Entity\ItemId
- * @uses \Wikibase\DataModel\Entity\PropertyId
+ * @uses \Wikibase\DataModel\Entity\NumericPropertyId
  *
  * @group Wikibase
  * @group WikibaseDataModel
@@ -31,8 +31,8 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		$ids[] = [ new ItemId( 'Q2147483647' ), '' ];
 		$ids[] = [ new ItemId( ':Q2147483647' ), '' ];
 		$ids[] = [ new ItemId( 'foo:Q2147483647' ), 'foo' ];
-		$ids[] = [ new PropertyId( 'P101010' ), '' ];
-		$ids[] = [ new PropertyId( 'foo:bar:P101010' ), 'foo' ];
+		$ids[] = [ new NumericPropertyId( 'P101010' ), '' ];
+		$ids[] = [ new NumericPropertyId( 'foo:bar:P101010' ), 'foo' ];
 
 		return $ids;
 	}
@@ -89,8 +89,8 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( ( new ItemId( 'Q42' ) )->isForeign() );
 		$this->assertFalse( ( new ItemId( ':Q42' ) )->isForeign() );
 		$this->assertTrue( ( new ItemId( 'foo:Q42' ) )->isForeign() );
-		$this->assertFalse( ( new PropertyId( ':P42' ) )->isForeign() );
-		$this->assertTrue( ( new PropertyId( 'foo:P42' ) )->isForeign() );
+		$this->assertFalse( ( new NumericPropertyId( ':P42' ) )->isForeign() );
+		$this->assertTrue( ( new NumericPropertyId( 'foo:P42' ) )->isForeign() );
 	}
 
 	/**

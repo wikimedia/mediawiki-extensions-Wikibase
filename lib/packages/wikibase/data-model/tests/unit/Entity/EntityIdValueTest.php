@@ -6,7 +6,7 @@ use DataValues\IllegalValueException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Fixtures\CustomEntityId;
 
 /**
@@ -43,10 +43,10 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 		$ids = [
 			new ItemId( 'Q1' ),
 			new ItemId( 'Q2147483647' ),
-			new PropertyId( 'P1' ),
-			new PropertyId( 'P31337' ),
+			new NumericPropertyId( 'P1' ),
+			new NumericPropertyId( 'P31337' ),
 			new CustomEntityId( 'X567' ),
-			new PropertyId( 'foo:P678' ),
+			new NumericPropertyId( 'foo:P678' ),
 		];
 
 		$argLists = [];
@@ -90,7 +90,7 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 				],
 			],
 			'P31337' => [
-				new PropertyId( 'P31337' ),
+				new NumericPropertyId( 'P31337' ),
 				[
 					'entity-type' => 'property',
 					'numeric-id' => 31337,
@@ -105,7 +105,7 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 				],
 			],
 			'foo:P678' => [
-				new PropertyId( 'foo:P678' ),
+				new NumericPropertyId( 'foo:P678' ),
 				[
 					'entity-type' => 'property',
 					'numeric-id' => 678,
@@ -133,7 +133,7 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideDeserializationCompatibility() {
 		$local = new EntityIdValue( new ItemId( 'Q31337' ) );
-		$foreign = new EntityIdValue( new PropertyId( 'foo:P678' ) );
+		$foreign = new EntityIdValue( new NumericPropertyId( 'foo:P678' ) );
 		$custom = new EntityIdValue( new CustomEntityId( 'X567' ) );
 
 		return [
@@ -148,7 +148,7 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 			],
 			'foreign: Version 7.0 (7fcddfc)' => [
 				'C:39:"Wikibase\DataModel\Entity\EntityIdValue":'
-					. '56:{C:36:"Wikibase\DataModel\Entity\PropertyId":8:{foo:P678}}',
+					. '63:{C:43:"Wikibase\DataModel\Entity\NumericPropertyId":8:{foo:P678}}',
 				$foreign
 			],
 			'custom: Version 7.0 (7fcddfc): custom' => [

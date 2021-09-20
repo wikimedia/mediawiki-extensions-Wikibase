@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 use RuntimeException;
 use Traversable;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -111,7 +112,7 @@ class ByPropertyIdArray extends ArrayObject {
 
 		return array_map(
 			function( $serializedPropertyId ) {
-				return new PropertyId( $serializedPropertyId );
+				return new NumericPropertyId( $serializedPropertyId );
 			},
 			array_keys( $this->byId )
 		);
@@ -329,7 +330,7 @@ class ByPropertyIdArray extends ArrayObject {
 		$this->byId = [];
 
 		foreach ( $byIdClone as $serializedPId => $objects ) {
-			$pId = new PropertyId( $serializedPId );
+			$pId = new NumericPropertyId( $serializedPId );
 			if ( $pId->equals( $propertyId ) ) {
 				continue;
 			} elseif ( $pId->equals( $insertBefore ) ) {
@@ -357,7 +358,7 @@ class ByPropertyIdArray extends ArrayObject {
 		$i = 0;
 
 		foreach ( $this->byId as $serializedPropertyId => $objects ) {
-			$pId = new PropertyId( $serializedPropertyId );
+			$pId = new NumericPropertyId( $serializedPropertyId );
 			if ( $pId->equals( $propertyId ) ) {
 				return $i;
 			}

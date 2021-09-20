@@ -6,7 +6,7 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @covers \Wikibase\DataModel\Snak\SnakObject
  * @uses DataValues\StringValue
  * @uses \Wikibase\DataModel\Entity\EntityId
- * @uses \Wikibase\DataModel\Entity\PropertyId
+ * @uses \Wikibase\DataModel\Entity\NumericPropertyId
  * @uses DataValues\DataValueObject
  *
  * @group Wikibase
@@ -39,8 +39,8 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	public function validConstructorArgumentsProvider() {
 		return [
 			[ 1, new StringValue( 'a' ) ],
-			[ new PropertyId( 'P1' ), new StringValue( 'a' ) ],
-			[ new PropertyId( 'P9001' ), new StringValue( 'bc' ) ],
+			[ new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ],
+			[ new NumericPropertyId( 'P9001' ), new StringValue( 'bc' ) ],
 		];
 	}
 
@@ -67,13 +67,13 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetPropertyId() {
-		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) );
 		$propertyId = $snak->getPropertyId();
-		$this->assertInstanceOf( PropertyId::class, $propertyId );
+		$this->assertInstanceOf( NumericPropertyId::class, $propertyId );
 	}
 
 	public function testGetHash() {
-		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) );
 		$hash = $snak->getHash();
 		$this->assertIsString( $hash );
 		$this->assertSame( 40, strlen( $hash ) );
@@ -83,7 +83,7 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	 * This test is a safeguard to make sure hashes are not changed unintentionally.
 	 */
 	public function testHashStability() {
-		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) );
 		$hash = $snak->getHash();
 
 		// @codingStandardsIgnoreStart
@@ -93,8 +93,8 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testEquals() {
-		$snak1 = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
-		$snak2 = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
+		$snak1 = new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) );
+		$snak2 = new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) );
 		$this->assertTrue( $snak1->equals( $snak2 ) );
 		$this->assertTrue( $snak2->equals( $snak1 ) );
 	}
@@ -110,19 +110,19 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	public function notEqualsProvider() {
 		return [
 			[
-				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) ),
-				new PropertyValueSnak( new PropertyId( 'P2' ), new StringValue( 'a' ) )
+				new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ),
+				new PropertyValueSnak( new NumericPropertyId( 'P2' ), new StringValue( 'a' ) )
 			],
 			[
-				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) ),
-				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'b' ) )
+				new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ),
+				new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'b' ) )
 			],
 		];
 	}
 
 	public function provideDataToSerialize() {
-		$p2 = new PropertyId( 'P2' );
-		$p2foo = new PropertyId( 'foo:P2' );
+		$p2 = new NumericPropertyId( 'P2' );
+		$p2foo = new NumericPropertyId( 'foo:P2' );
 		$value = new StringValue( 'b' );
 
 		return [
@@ -144,14 +144,14 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 		$serialized = $snak->serialize();
 		$this->assertSame( $expected, $serialized );
 
-		$snak2 = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
+		$snak2 = new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) );
 		$snak2->unserialize( $serialized );
 		$this->assertTrue( $snak->equals( $snak2 ), 'round trip' );
 	}
 
 	public function provideDataToUnserialize() {
-		$p2 = new PropertyId( 'P2' );
-		$p2foo = new PropertyId( 'foo:P2' );
+		$p2 = new NumericPropertyId( 'P2' );
+		$p2foo = new NumericPropertyId( 'foo:P2' );
 		$value = new StringValue( 'b' );
 
 		return [
@@ -174,13 +174,13 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideDataToUnserialize
 	 */
 	public function testUnserialize( $expected, $serialized ) {
-		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) );
 		$snak->unserialize( $serialized );
 		$this->assertTrue( $snak->equals( $expected ) );
 	}
 
 	public function testGetDataValue() {
-		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
+		$snak = new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) );
 		$dataValue = $snak->getDataValue();
 		$this->assertInstanceOf( DataValue::class, $dataValue );
 		$this->assertTrue( $dataValue->equals( new StringValue( 'a' ) ) );

@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Tests\Snak;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\DerivedPropertyValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
@@ -32,12 +32,12 @@ class DerivedPropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	public function validConstructorArgumentsProvider() {
 		return [
 			'No extras' => [
-				new PropertyId( 'P1' ),
+				new NumericPropertyId( 'P1' ),
 				new StringValue( 'a' ),
 				[],
 			],
 			'2 extras' => [
-				new PropertyId( 'P9001' ),
+				new NumericPropertyId( 'P9001' ),
 				new StringValue( 'bc' ),
 				[ 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ],
 			],
@@ -64,12 +64,12 @@ class DerivedPropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	public function invalidConstructorArgumentsProvider() {
 		return [
 			'fail - Integer key' => [
-				new PropertyId( 'P9001' ),
+				new NumericPropertyId( 'P9001' ),
 				new StringValue( 'bc' ),
 				[ new StringValue( 'foo' ) ],
 			],
 			'fail - not a value' => [
-				new PropertyId( 'P9001' ),
+				new NumericPropertyId( 'P9001' ),
 				new StringValue( 'bc' ),
 				[ 'foo' => 'bar' ],
 			],
@@ -81,7 +81,7 @@ class DerivedPropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testHashStability() {
 		$snak = new DerivedPropertyValueSnak(
-			new PropertyId( 'P1' ),
+			new NumericPropertyId( 'P1' ),
 			new StringValue( 'a' ),
 			[ 'foo' => new StringValue( 'foo' ) ]
 		);
@@ -97,7 +97,7 @@ class DerivedPropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 		$derivedValues = [ 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ];
 
 		$snak = new DerivedPropertyValueSnak(
-			new PropertyId( 'P9001' ),
+			new NumericPropertyId( 'P9001' ),
 			new StringValue( 'bc' ),
 			$derivedValues
 		);
@@ -111,7 +111,7 @@ class DerivedPropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 		$derivedValues = [ 'foo' => $foo, 'bar' => $bar ];
 
 		$snak = new DerivedPropertyValueSnak(
-			new PropertyId( 'P9001' ),
+			new NumericPropertyId( 'P9001' ),
 			new StringValue( 'bc' ),
 			$derivedValues
 		);
@@ -122,7 +122,7 @@ class DerivedPropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 
 	public function testSerializationDoesNotContainDerivedValues() {
 		$snak = new DerivedPropertyValueSnak(
-			new PropertyId( 'P9001' ),
+			new NumericPropertyId( 'P9001' ),
 			new StringValue( 'bc' ),
 			[ 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ]
 		);
@@ -134,7 +134,7 @@ class DerivedPropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testSnakWithDerivedValuesEqualsSnakWithoutDerivedValues() {
-		$property = new PropertyId( 'P9001' );
+		$property = new NumericPropertyId( 'P9001' );
 		$value = new StringValue( 'bc' );
 		$derivedValues = [ 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ];
 
@@ -145,7 +145,7 @@ class DerivedPropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testDerivedSnakDoesNoteEqualPropertyValueSnak() {
-		$property = new PropertyId( 'P9001' );
+		$property = new NumericPropertyId( 'P9001' );
 		$value = new StringValue( 'bc' );
 		$derivedValues = [ 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ];
 
@@ -158,7 +158,7 @@ class DerivedPropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testNewPropertyValueSnak() {
-		$property = new PropertyId( 'P9001' );
+		$property = new NumericPropertyId( 'P9001' );
 		$value = new StringValue( 'bc' );
 		$derivedValues = [ 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ];
 

@@ -8,7 +8,7 @@ use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\Parsers\EntityIdValueParser;
 
 /**
@@ -37,7 +37,7 @@ class EntityIdValueParserTest extends \PHPUnit\Framework\TestCase {
 	public function validInputProvider() {
 		$valid = [
 			'q1' => new EntityIdValue( new ItemId( 'q1' ) ),
-			'p1' => new EntityIdValue( new PropertyId( 'p1' ) ), // TODO: Change PropertyId to NumericPropertyId
+			'p1' => new EntityIdValue( new NumericPropertyId( 'p1' ) ),
 		];
 
 		foreach ( $valid as $value => $expected ) {

@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Tests;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\LegacyIdInterpreter;
 
 /**
@@ -31,7 +31,7 @@ class LegacyIdInterpreterTest extends \PHPUnit\Framework\TestCase {
 	public function idProvider() {
 		return [
 			[ new ItemId( 'Q42' ), 'item', 42 ],
-			[ new PropertyId( 'P42' ), 'property', 42 ],
+			[ new NumericPropertyId( 'P42' ), 'property', 42 ],
 		];
 	}
 

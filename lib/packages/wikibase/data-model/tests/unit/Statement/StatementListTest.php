@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Tests\Statement;
 use ArrayObject;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -42,7 +42,7 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 
 		$statement->expects( $this->any() )
 			->method( 'getPropertyId' )
-			->will( $this->returnValue( new PropertyId( $propertyId ) ) );
+			->will( $this->returnValue( new NumericPropertyId( $propertyId ) ) );
 
 		$statement->expects( $this->any() )
 			->method( 'getRank' )
@@ -72,7 +72,7 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function newSnak( $propertyId, $stringValue ) {
 		return new PropertyValueSnak(
-			new PropertyId( $propertyId ),
+			new NumericPropertyId( $propertyId ),
 			new StringValue( $stringValue )
 		);
 	}
@@ -111,9 +111,9 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 			[
-				'P1' => new PropertyId( 'P1' ),
-				'P3' => new PropertyId( 'P3' ),
-				'P2' => new PropertyId( 'P2' ),
+				'P1' => new NumericPropertyId( 'P1' ),
+				'P3' => new NumericPropertyId( 'P3' ),
+				'P2' => new NumericPropertyId( 'P2' ),
 			],
 			$list->getPropertyIds()
 		);
@@ -535,7 +535,7 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 			new StatementList(),
-			$list->getByPropertyId( new PropertyId( 'P2' ) )
+			$list->getByPropertyId( new NumericPropertyId( 'P2' ) )
 		);
 	}
 
@@ -552,7 +552,7 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 			$expected,
-			$list->getByPropertyId( new PropertyId( 'P42' ) )
+			$list->getByPropertyId( new NumericPropertyId( 'P42' ) )
 		);
 	}
 

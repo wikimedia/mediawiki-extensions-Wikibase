@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Snak;
 
 use DataValues\DataValue;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -67,10 +68,10 @@ class PropertyValueSnak extends SnakObject {
 		list( $propertyId, $this->dataValue ) = unserialize( $serialized );
 
 		if ( is_string( $propertyId ) ) {
-			$this->propertyId = new PropertyId( $propertyId );
+			$this->propertyId = new NumericPropertyId( $propertyId );
 		} else {
 			// Backwards compatibility with the previous serialization format
-			$this->propertyId = PropertyId::newFromNumber( $propertyId );
+			$this->propertyId = NumericPropertyId::newFromNumber( $propertyId );
 		}
 	}
 

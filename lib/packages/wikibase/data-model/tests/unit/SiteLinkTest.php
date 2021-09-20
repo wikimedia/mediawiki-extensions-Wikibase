@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Tests;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdSet;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\SiteLink;
 
 /**
@@ -151,8 +151,8 @@ class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 			[ [ 'nyan', 42 ] ],
 			[ [ 'nyan', [] ] ],
 			// Arrays with Entities that aren't Items
-			[ [ new PropertyId( 'P2' ), new ItemId( 'Q149' ) ] ],
-			[ [ new PropertyId( 'P2' ), new PropertyId( 'P3' ) ] ],
+			[ [ new NumericPropertyId( 'P2' ), new ItemId( 'Q149' ) ] ],
+			[ [ new NumericPropertyId( 'P2' ), new NumericPropertyId( 'P3' ) ] ],
 		];
 	}
 
