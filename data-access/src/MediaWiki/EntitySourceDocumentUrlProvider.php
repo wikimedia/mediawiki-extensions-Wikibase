@@ -23,12 +23,22 @@ class EntitySourceDocumentUrlProvider {
 		$sources = $sourceDefinitions->getSources();
 
 		foreach ( $sources as $source ) {
-			$entityDataTitle = $this->titleFactory->makeTitle(
-				NS_SPECIAL,
-				'EntityData',
-				'',
-				$source->getInterwikiPrefix()
-			);
+
+			if ( $source->getInterwikiPrefix() === '' ) {
+				$entityDataTitle = $this->titleFactory->makeTitle(
+					NS_SPECIAL,
+					'EntityData',
+					'',
+					$source->getInterwikiPrefix()
+				);
+			} else {
+				$entityDataTitle = $this->titleFactory->makeTitle(
+					NS_MAIN,
+					'Special:EntityData',
+					'',
+					$source->getInterwikiPrefix()
+				);
+			}
 			$documentUrls[$source->getSourceName()] = $entityDataTitle->getCanonicalURL() . '/';
 		}
 
