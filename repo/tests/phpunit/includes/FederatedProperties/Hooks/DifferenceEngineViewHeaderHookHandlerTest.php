@@ -12,7 +12,7 @@ use Title;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Term\TermTypes;
@@ -73,8 +73,8 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 		$itemId = new ItemId( "Q1" );
 		$this->entity = new Item( $itemId );
 
-		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new PropertyId( "P32456" ) ) ) );
-		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new PropertyId( "P12345" ) ) ) );
+		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new NumericPropertyId( "P32456" ) ) ) );
+		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new NumericPropertyId( "P12345" ) ) ) );
 
 		$this->linkTargetEntityIdLookup->expects( $this->once() )
 			->method( 'getEntityId' )
@@ -85,7 +85,7 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 		$this->prefetchingLookup->expects( $this->once() )
 			->method( 'prefetchTerms' )
 			->with(
-				[ new PropertyId( "P32456" ), new PropertyId( "P12345" ) ],
+				[ new NumericPropertyId( "P32456" ), new NumericPropertyId( "P12345" ) ],
 				[ TermTypes::TYPE_LABEL ],
 				[ 'sv', 'de', 'en' ]
 			);
@@ -125,8 +125,8 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 		$itemId = new ItemId( "Q1" );
 		$this->entity = new Item( $itemId );
 
-		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new PropertyId( "P32456" ) ) ) );
-		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new PropertyId( "P12345" ) ) ) );
+		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new NumericPropertyId( "P32456" ) ) ) );
+		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new NumericPropertyId( "P12345" ) ) ) );
 
 		$this->linkTargetEntityIdLookup->expects( $this->once() )
 			->method( 'getEntityId' )
@@ -137,7 +137,7 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 		$this->prefetchingLookup->expects( $this->once() )
 			->method( 'prefetchTerms' )
 			->with(
-				[ new PropertyId( "P12345" ) ],
+				[ new NumericPropertyId( "P12345" ) ],
 				[ TermTypes::TYPE_LABEL ],
 				[ 'sv', 'de', 'en' ]
 			);

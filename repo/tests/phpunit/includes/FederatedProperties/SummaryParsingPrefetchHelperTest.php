@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 use MediaWiki\Revision\RevisionRecord;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Repo\FederatedProperties\ApiRequestException;
 use Wikibase\Repo\FederatedProperties\SummaryParsingPrefetchHelper;
@@ -35,7 +35,7 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 
 		$expectedPropertyIds = [];
 		foreach ( $expectedProperties as $propertyString ) {
-			$expectedPropertyIds[] = new PropertyId( $propertyString );
+			$expectedPropertyIds[] = new NumericPropertyId( $propertyString );
 		}
 
 		$this->prefetchingLookup->expects( empty( $expectedPropertyIds ) ? $this->never() : $this->once() )

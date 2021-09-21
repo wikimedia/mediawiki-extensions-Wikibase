@@ -7,7 +7,7 @@ use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -24,7 +24,7 @@ class NewStatement {
 	private const GENERATE_GUID = true;
 
 	/**
-	 * @var PropertyId
+	 * @var NumericPropertyId
 	 */
 	private $propertyId;
 
@@ -52,13 +52,13 @@ class NewStatement {
 	private $qualifiers = [];
 
 	/**
-	 * @param PropertyId|string $propertyId
+	 * @param NumericPropertyId|string $propertyId
 	 * @return self
 	 */
 	public static function forProperty( $propertyId ) {
 		$result = new self();
 		if ( is_string( $propertyId ) ) {
-			$propertyId = new PropertyId( $propertyId ); // TODO: Change to NumericPropertyId
+			$propertyId = new NumericPropertyId( $propertyId );
 		}
 		$result->propertyId = $propertyId;
 
@@ -66,7 +66,7 @@ class NewStatement {
 	}
 
 	/**
-	 * @param PropertyId|string $propertyId
+	 * @param NumericPropertyId|string $propertyId
 	 * @return self
 	 */
 	public static function someValueFor( $propertyId ) {
@@ -77,7 +77,7 @@ class NewStatement {
 	}
 
 	/**
-	 * @param PropertyId|string $propertyId
+	 * @param NumericPropertyId|string $propertyId
 	 * @return self
 	 */
 	public static function noValueFor( $propertyId ) {
@@ -155,7 +155,7 @@ class NewStatement {
 	}
 
 	/**
-	 * @param string|PropertyId $propertyId
+	 * @param string|NumericPropertyId $propertyId
 	 * @param DataValue|EntityId|string $value If not a DataValue object, the builder tries to
 	 *  guess the type and turns it into a DataValue object.
 	 *
@@ -164,7 +164,7 @@ class NewStatement {
 	public function withQualifier( $propertyId, $value ) {
 		$result = clone $this;
 		if ( is_string( $propertyId ) ) {
-			$propertyId = new PropertyId( $propertyId ); // TODO: Change to NumericPropertyId
+			$propertyId = new NumericPropertyId( $propertyId );
 		}
 
 		$value = $this->createDataValueObject( $value );
