@@ -74,7 +74,7 @@ class EntitySourceDefinitionsConfigParser {
 			}
 
 			if ( array_key_exists( 'repoDatabase', $sourceData ) ) {
-				$this->asserConfigArrayWellFormedWhenRepoDatabaseExist( $sourceData, $sourceName );
+				$this->assertConfigArrayWellFormedWhenRepoDatabaseExist( $sourceData, $sourceName );
 			}
 			if ( array_key_exists( 'entityTypes', $sourceData ) ) {
 				Assert::parameterElementType( 'string', $sourceData[ 'entityTypes' ], 'entityTypes' );
@@ -96,7 +96,7 @@ class EntitySourceDefinitionsConfigParser {
 		}
 	}
 
-	private function asserConfigArrayWellFormedWhenRepoDatabaseExist( $sourceData, $sourceName ) {
+	private function assertConfigArrayWellFormedWhenRepoDatabaseExist( $sourceData, $sourceName ) {
 		if ( !is_string( $sourceData['repoDatabase'] ) && $sourceData['repoDatabase'] !== false ) {
 			throw new InvalidArgumentException(
 				'Symbolic database name of entity source "' . $sourceName . '" should be a string or false.'
@@ -104,7 +104,7 @@ class EntitySourceDefinitionsConfigParser {
 		}
 
 		if ( !array_key_exists( 'entityNamespaces', $sourceData ) ) {
-			throw new InvalidArgumentException( 'Source data should include "entityNamespace" element' );
+			throw new InvalidArgumentException( 'Source data should include "entityNamespaces" element' );
 		}
 
 		if ( !is_array( $sourceData['entityNamespaces'] ) ) {
