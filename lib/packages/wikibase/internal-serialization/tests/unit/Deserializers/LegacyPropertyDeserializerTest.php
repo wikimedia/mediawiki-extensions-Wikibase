@@ -24,7 +24,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $deserializer;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->deserializer = new LegacyPropertyDeserializer(
 			new LegacyEntityIdDeserializer( new BasicEntityIdParser() ),
 			new LegacyFingerprintDeserializer()
@@ -42,45 +42,45 @@ class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenNoDataType_exceptionIsThrown() {
 		$this->expectDeserializationException();
-		$this->deserializer->deserialize( array() );
+		$this->deserializer->deserialize( [] );
 	}
 
 	public function testGivenNonStringDataType_exceptionIsThrown() {
 		$this->expectDeserializationException();
-		$this->deserializer->deserialize( array( 'datatype' => null ) );
+		$this->deserializer->deserialize( [ 'datatype' => null ] );
 	}
 
 	public function testGivenValidDataType_dataTypeIsSet() {
-		$property = $this->deserializer->deserialize( array( 'datatype' => 'foo' ) );
+		$property = $this->deserializer->deserialize( [ 'datatype' => 'foo' ] );
 		$this->assertEquals( 'foo', $property->getDataTypeId() );
 	}
 
 	public function testGivenInvalidEntityId_exceptionIsThrown() {
 		$this->expectDeserializationException();
-		$this->deserializer->deserialize( array(
+		$this->deserializer->deserialize( [
 			'datatype' => 'foo',
 			'entity' => 'spam spam spam'
-		) );
+		] );
 	}
 
 	public function testGivenNonPropertyEntityId_exceptionIsThrown() {
 		$this->expectDeserializationException();
-		$this->deserializer->deserialize( array(
+		$this->deserializer->deserialize( [
 			'datatype' => 'foo',
 			'entity' => 'q42'
-		) );
+		] );
 	}
 
 	public function testGivenNoPropertyIdId_noPropertyIdIsSet() {
-		$property = $this->deserializer->deserialize( array( 'datatype' => 'foo' ) );
+		$property = $this->deserializer->deserialize( [ 'datatype' => 'foo' ] );
 		$this->assertNull( $property->getId() );
 	}
 
 	public function testGivenValidPropertyIdId_propertyIdIsSet() {
-		$property = $this->deserializer->deserialize( array(
+		$property = $this->deserializer->deserialize( [
 			'datatype' => 'foo',
 			'entity' => 'p42'
-		) );
+		] );
 
 		$this->assertEquals( new PropertyId( 'p42' ), $property->getId() );
 	}
@@ -90,28 +90,28 @@ class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGivenLabels_getLabelsReturnsThem( array $labels ) {
 		/** @var Property $property */
-		$property = $this->deserializer->deserialize( array(
+		$property = $this->deserializer->deserialize( [
 			'datatype' => 'foo',
 			'label' => $labels
-		) );
+		] );
 
 		$this->assertEquals( $labels, $property->getFingerprint()->getLabels()->toTextArray() );
 	}
 
 	public function TermListProvider() {
-		return array(
-			array( array() ),
+		return [
+			[ [] ],
 
-			array( array(
+			[ [
 				'en' => 'foo',
 				'de' => 'bar',
-			) ),
-		);
+			] ],
+		];
 	}
 
 	public function testGivenInvalidLabels_exceptionIsThrown() {
 		$this->expectDeserializationException();
-		$this->deserializer->deserialize( array( 'label' => null ) );
+		$this->deserializer->deserialize( [ 'label' => null ] );
 	}
 
 	/**
@@ -119,17 +119,17 @@ class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGivenDescriptions_getDescriptionsReturnsThem( array $descriptions ) {
 		/** @var Property $property */
-		$property = $this->deserializer->deserialize( array(
+		$property = $this->deserializer->deserialize( [
 			'datatype' => 'foo',
 			'description' => $descriptions
-		) );
+		] );
 
 		$this->assertEquals( $descriptions, $property->getFingerprint()->getDescriptions()->toTextArray() );
 	}
 
 	public function testGivenInvalidAliases_exceptionIsThrown() {
 		$this->expectDeserializationException();
-		$this->deserializer->deserialize( array( 'aliases' => null ) );
+		$this->deserializer->deserialize( [ 'aliases' => null ] );
 	}
 
 	/**
@@ -137,24 +137,24 @@ class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGivenAliases_getAliasesReturnsThem( array $aliases ) {
 		/** @var Property $property */
-		$property = $this->deserializer->deserialize( array(
+		$property = $this->deserializer->deserialize( [
 			'datatype' => 'foo',
 			'aliases' => $aliases
-		) );
+		] );
 
 		$this->assertEquals( $aliases, $property->getFingerprint()->getAliasGroups()->toTextArray() );
 	}
 
 	public function aliasesListProvider() {
-		return array(
-			array( array() ),
+		return [
+			[ [] ],
 
-			array( array(
-				'en' => array( 'foo', 'bar' ),
-				'de' => array( 'foo', 'bar', 'baz' ),
-				'nl' => array( 'bah' ),
-			) ),
-		);
+			[ [
+				'en' => [ 'foo', 'bar' ],
+				'de' => [ 'foo', 'bar', 'baz' ],
+				'nl' => [ 'bah' ],
+			] ],
+		];
 	}
 
 }

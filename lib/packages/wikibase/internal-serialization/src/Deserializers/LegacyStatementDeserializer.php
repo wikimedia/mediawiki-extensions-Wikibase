@@ -78,7 +78,7 @@ class LegacyStatementDeserializer implements DispatchableDeserializer {
 	}
 
 	private function getReferences( array $refs ) {
-		$references = array();
+		$references = [];
 
 		foreach ( $refs as $serialization ) {
 			$references[] = new Reference( $this->snakListDeserializer->deserialize( $serialization ) );

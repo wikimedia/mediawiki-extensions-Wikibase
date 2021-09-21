@@ -242,7 +242,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertIsInt( $rank );
 
 		$ranks = [ Statement::RANK_DEPRECATED, Statement::RANK_NORMAL, Statement::RANK_PREFERRED ];
-		$this->assertTrue( in_array( $rank, $ranks ), true );
+		$this->assertContains( $rank, $ranks, true );
 	}
 
 	/**

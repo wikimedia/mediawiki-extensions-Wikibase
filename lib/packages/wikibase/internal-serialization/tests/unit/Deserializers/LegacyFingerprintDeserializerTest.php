@@ -24,7 +24,7 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $deserializer;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->deserializer = new LegacyFingerprintDeserializer();
 	}
 
@@ -32,29 +32,29 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider TermListProvider
 	 */
 	public function testGivenLabels_getLabelsReturnsThem( array $labelSerialization, $expected ) {
-		$fingerprint = $this->deserializer->deserialize( array( 'label' => $labelSerialization ) );
+		$fingerprint = $this->deserializer->deserialize( [ 'label' => $labelSerialization ] );
 
 		$this->assertEquals( $expected, $fingerprint->getLabels() );
 	}
 
 	public function TermListProvider() {
-		return array(
-			array(
-				array(),
-				new TermList( array() )
-			),
+		return [
+			[
+				[],
+				new TermList( [] )
+			],
 
-			array(
-				array(
+			[
+				[
 					'en' => 'foo',
 					'de' => 'bar',
-				),
-				new TermList( array(
+				],
+				new TermList( [
 					new Term( 'en', 'foo' ),
 					new Term( 'de', 'bar' ),
-				) )
-			),
-		);
+				] )
+			],
+		];
 	}
 
 	public function testGivenNonArray_exceptionIsThrown() {
@@ -64,12 +64,12 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenNonArrayLabels_exceptionIsThrown() {
 		$this->expectDeserializationException();
-		$this->deserializer->deserialize( array( 'label' => null ) );
+		$this->deserializer->deserialize( [ 'label' => null ] );
 	}
 
 	public function testGivenInvalidTermSerialization_exceptionIsThrown() {
 		$this->expectDeserializationException();
-		$this->deserializer->deserialize( array( 'label' => array( null ) ) );
+		$this->deserializer->deserialize( [ 'label' => [ null ] ] );
 	}
 
 	private function expectDeserializationException() {
@@ -78,41 +78,41 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenNonArrayDescriptions_exceptionIsThrown() {
 		$this->expectDeserializationException();
-		$this->deserializer->deserialize( array( 'description' => null ) );
+		$this->deserializer->deserialize( [ 'description' => null ] );
 	}
 
 	/**
 	 * @dataProvider descriptionListProvider
 	 */
 	public function testGivenDescriptions_getDescriptionsReturnsThem( array $descriptionSerialization, $expected ) {
-		$fingerprint = $this->deserializer->deserialize( array( 'description' => $descriptionSerialization ) );
+		$fingerprint = $this->deserializer->deserialize( [ 'description' => $descriptionSerialization ] );
 
 		$this->assertEquals( $expected, $fingerprint->getDescriptions() );
 	}
 
 	public function descriptionListProvider() {
-		return array(
-			array(
-				array(),
-				new TermList( array() )
-			),
+		return [
+			[
+				[],
+				new TermList( [] )
+			],
 
-			array(
-				array(
+			[
+				[
 					'en' => 'foo',
 					'de' => 'bar',
-				),
-				new TermList( array(
+				],
+				new TermList( [
 					new Term( 'en', 'foo' ),
 					new Term( 'de', 'bar' ),
-				) )
-			),
-		);
+				] )
+			],
+		];
 	}
 
 	public function testGivenNonArrayAliases_exceptionIsThrown() {
 		$this->expectDeserializationException();
-		$this->deserializer->deserialize( array( 'aliases' => null ) );
+		$this->deserializer->deserialize( [ 'aliases' => null ] );
 	}
 
 	/**
@@ -122,32 +122,32 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 		/**
 		 * @var Fingerprint $fingerprint
 		 */
-		$fingerprint = $this->deserializer->deserialize( array( 'aliases' => $aliasesSerialization ) );
+		$fingerprint = $this->deserializer->deserialize( [ 'aliases' => $aliasesSerialization ] );
 
 		$this->assertEquals( $expected, $fingerprint->getAliasGroups() );
 	}
 
 	public function aliasesListProvider() {
-		return array(
-			array(
-				array(),
-				new AliasGroupList( array() )
-			),
+		return [
+			[
+				[],
+				new AliasGroupList( [] )
+			],
 
-			array(
-				array(
-					'en' => array( 'foo', 'bar' ),
-					'de' => array( 'foo', 'bar', 'baz' ),
-					'nl' => array( 'bah' ),
-					'fr' => array(),
-				),
-				new AliasGroupList( array(
-					new AliasGroup( 'en', array( 'foo', 'bar' ) ),
-					new AliasGroup( 'de', array( 'foo', 'bar', 'baz' ) ),
-					new AliasGroup( 'nl', array( 'bah' ) ),
-				) )
-			),
-		);
+			[
+				[
+					'en' => [ 'foo', 'bar' ],
+					'de' => [ 'foo', 'bar', 'baz' ],
+					'nl' => [ 'bah' ],
+					'fr' => [],
+				],
+				new AliasGroupList( [
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
+					new AliasGroup( 'de', [ 'foo', 'bar', 'baz' ] ),
+					new AliasGroup( 'nl', [ 'bah' ] ),
+				] )
+			],
+		];
 	}
 
 }

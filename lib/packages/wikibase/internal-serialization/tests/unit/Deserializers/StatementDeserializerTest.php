@@ -20,7 +20,7 @@ class StatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $deserializer;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$legacyDeserializer = $this->createMock( DispatchableDeserializer::class );
 		$currentDeserializer = $this->createMock( DispatchableDeserializer::class );
 		$this->deserializer = new StatementDeserializer( $legacyDeserializer, $currentDeserializer );
@@ -35,10 +35,10 @@ class StatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function invalidSerializationProvider() {
-		return array(
-			array( null ),
-			array( 5 ),
-		);
+		return [
+			[ null ],
+			[ 5 ],
+		];
 	}
 
 }

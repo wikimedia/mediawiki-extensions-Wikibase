@@ -20,7 +20,7 @@ class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $deserializer;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->deserializer = new EntityDeserializer(
 			$this->getStubLegacyDeserializer(),
 			$this->getStubCurrentDeserializer()
@@ -66,12 +66,12 @@ class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenLegacySerialization_legacyIsDetected() {
-		$returnValue = $this->deserializer->deserialize( array( 'entity' => array( 'item', 1 ) ) );
+		$returnValue = $this->deserializer->deserialize( [ 'entity' => [ 'item', 1 ] ] );
 		$this->assertEquals( 'legacy', $returnValue );
 	}
 
 	public function testGivenCurrentSerialization_currentIsDetected() {
-		$returnValue = $this->deserializer->deserialize( array( 'id' => 'Q1' ) );
+		$returnValue = $this->deserializer->deserialize( [ 'id' => 'Q1' ] );
 		$this->assertEquals( 'current', $returnValue );
 	}
 
@@ -99,9 +99,9 @@ class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getLegacyItemSerializationWithoutId() {
-		return array( 'aliases' => array(
-			'en' => array( 'foo', 'bar' )
-		) );
+		return [ 'aliases' => [
+			'en' => [ 'foo', 'bar' ]
+		] ];
 	}
 
 	public function testCurrentSerializationWithoutId_exceptionIsThrown() {
@@ -115,18 +115,18 @@ class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getCurrentItemSerializationWithoutId() {
-		return array( 'aliases' => array(
-			'en' => array(
-				array(
+		return [ 'aliases' => [
+			'en' => [
+				[
 					'language' => 'en',
 					'value' => 'foo',
-				),
-				array(
+				],
+				[
 					'language' => 'en',
 					'value' => 'bar',
-				),
-			)
-		) );
+				],
+			]
+		] ];
 	}
 
 	/**
@@ -143,12 +143,12 @@ class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function invalidSerializationProvider() {
-		return array(
-			array( null ),
-			array( 5 ),
-			array( array() ),
-			array( array( 'entity' => 'P42', 'datatype' => null ) ),
-		);
+		return [
+			[ null ],
+			[ 5 ],
+			[ [] ],
+			[ [ 'entity' => 'P42', 'datatype' => null ] ],
+		];
 	}
 
 }

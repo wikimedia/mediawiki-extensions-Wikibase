@@ -30,7 +30,7 @@ class StatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $currentSerializer;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->deserializer = TestFactoryBuilder::newDeserializerFactoryWithDataValueSupport()
 			->newStatementDeserializer();
 		$this->currentSerializer = TestFactoryBuilder::newSerializerFactory()->newStatementSerializer();
@@ -49,10 +49,10 @@ class StatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 	private function newTestStatement() {
 		$statement = new Statement( new PropertySomeValueSnak( 42 ) );
 
-		$statement->setQualifiers( new SnakList( array(
+		$statement->setQualifiers( new SnakList( [
 			new PropertyNoValueSnak( 1337 ),
 			new PropertyValueSnak( 23, new NumberValue( 42 ) )
-		) ) );
+		] ) );
 
 		$statement->setGuid( 'some guid be here' );
 
@@ -67,11 +67,11 @@ class StatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function statementsInLegacyFormatProvider() {
-		return array(
-			array( '{"m":["somevalue",42],"q":[],"g":"some guid be here","rank":1,"refs":[]}' ),
-			array( '{"m":["somevalue",42],"q":[["novalue",1337],["value",23,"number",42]],'
-				. '"g":"some guid be here","rank":1,"refs":[]}' ),
-		);
+		return [
+			[ '{"m":["somevalue",42],"q":[],"g":"some guid be here","rank":1,"refs":[]}' ],
+			[ '{"m":["somevalue",42],"q":[["novalue",1337],["value",23,"number",42]],'
+				. '"g":"some guid be here","rank":1,"refs":[]}' ],
+		];
 	}
 
 }

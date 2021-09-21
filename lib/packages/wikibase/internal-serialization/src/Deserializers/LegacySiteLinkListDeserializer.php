@@ -71,7 +71,7 @@ class LegacySiteLinkListDeserializer implements Deserializer {
 	 * @return SiteLinkList
 	 */
 	private function getDeserialized( array $siteLinkArray ) {
-		$siteLinks = array();
+		$siteLinks = [];
 
 		foreach ( $siteLinkArray as $siteId => $siteLinkData ) {
 			$siteLinks[] = $this->newSiteLinkFromSerialization( $siteId, $siteLinkData );
@@ -107,7 +107,7 @@ class LegacySiteLinkListDeserializer implements Deserializer {
 			$badges = $this->getDeserializedBadges( $siteLinkData['badges'] );
 		} else {
 			$pageName = $siteLinkData;
-			$badges = array();
+			$badges = [];
 		}
 
 		return new SiteLink( $siteId, $pageName, $badges );
@@ -119,7 +119,7 @@ class LegacySiteLinkListDeserializer implements Deserializer {
 	 * @return ItemId[]
 	 */
 	private function getDeserializedBadges( array $badgesSerialization ) {
-		$badges = array();
+		$badges = [];
 
 		foreach ( $badgesSerialization as $badgeSerialization ) {
 			$badges[] = new ItemId( $badgeSerialization );

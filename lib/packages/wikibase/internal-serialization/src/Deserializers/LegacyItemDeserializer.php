@@ -149,7 +149,7 @@ class LegacyItemDeserializer implements DispatchableDeserializer {
 		}
 
 		if ( !isset( $seralization['refs'] ) ) {
-			$seralization['refs'] = array();
+			$seralization['refs'] = [];
 		}
 
 		return $seralization;
@@ -157,7 +157,7 @@ class LegacyItemDeserializer implements DispatchableDeserializer {
 
 	private function getArrayFromKey( $key, array $serialization ) {
 		if ( !array_key_exists( $key, $serialization ) ) {
-			return array();
+			return [];
 		}
 
 		if ( !is_array( $serialization[$key] ) ) {

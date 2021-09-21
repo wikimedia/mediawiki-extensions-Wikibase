@@ -81,7 +81,7 @@ class StatementGuidValidatorTest extends TestCase {
 	/**
 	 * @dataProvider invalidFormatProvider
 	 */
-	public function  testInvalidFormat( $guid ) {
+	public function testInvalidFormat( $guid ) {
 		$validator = $this->newStatementGuidValidator();
 		$isValid = $validator->validate( $guid );
 

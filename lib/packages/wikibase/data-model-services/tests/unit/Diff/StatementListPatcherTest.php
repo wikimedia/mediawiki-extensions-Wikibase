@@ -107,9 +107,6 @@ class StatementListPatcherTest extends TestCase {
 		$this->assertEquals( $expected, $statements );
 	}
 
-	/**
-	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-	 */
 	public function statementOrderProvider() {
 		$statement1 = new Statement( new PropertyNoValueSnak( 1 ), null, null, 's1' );
 		$statement2 = new Statement( new PropertyNoValueSnak( 2 ), null, null, 's2' );

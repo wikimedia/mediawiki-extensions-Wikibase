@@ -46,7 +46,7 @@ class LegacyFingerprintDeserializer implements Deserializer {
 	}
 
 	private function getLabels( array $serialization ) {
-		$labels = array();
+		$labels = [];
 
 		foreach ( $this->getArrayFromKey( 'label', $serialization ) as $langCode => $text ) {
 			$labels[] = new Term( $langCode, $text );
@@ -56,7 +56,7 @@ class LegacyFingerprintDeserializer implements Deserializer {
 	}
 
 	private function getDescriptions( array $serialization ) {
-		$descriptions = array();
+		$descriptions = [];
 
 		foreach ( $this->getArrayFromKey( 'description', $serialization ) as $langCode => $text ) {
 			$descriptions[] = new Term( $langCode, $text );
@@ -66,10 +66,10 @@ class LegacyFingerprintDeserializer implements Deserializer {
 	}
 
 	private function getAliases( array $serialization ) {
-		$descriptions = array();
+		$descriptions = [];
 
 		foreach ( $this->getArrayFromKey( 'aliases', $serialization ) as $langCode => $texts ) {
-			if ( $texts !== array() ) {
+			if ( $texts !== [] ) {
 				$descriptions[] = new AliasGroup( $langCode, $texts );
 			}
 		}
@@ -79,7 +79,7 @@ class LegacyFingerprintDeserializer implements Deserializer {
 
 	private function getArrayFromKey( $key, array $serialization ) {
 		if ( !array_key_exists( $key, $serialization ) ) {
-			return array();
+			return [];
 		}
 
 		if ( !is_array( $serialization[$key] ) ) {

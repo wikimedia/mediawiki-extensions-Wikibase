@@ -19,9 +19,6 @@ use Wikibase\DataModel\Term\AliasGroupList;
  */
 class AliasGroupListPatcherTest extends TestCase {
 
-	/**
-	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-	 */
 	public function providePatchAliasGroupList() {
 		return [
 			'add aliases (associative)' => [

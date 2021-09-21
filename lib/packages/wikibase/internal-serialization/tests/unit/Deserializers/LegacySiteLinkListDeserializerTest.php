@@ -22,27 +22,27 @@ class LegacySiteLinkListDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $deserializer;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->deserializer = new LegacySiteLinkListDeserializer();
 	}
 
 	public function invalidSerializationProvider() {
-		return array(
-			array( null ),
-			array( 42 ),
-			array( 'foo' ),
+		return [
+			[ null ],
+			[ 42 ],
+			[ 'foo' ],
 
-			array( array( 'foo' ) ),
-			array( array( 'foo' => 42 ) ),
-			array( array( 'foo' => array() ) ),
+			[ [ 'foo' ] ],
+			[ [ 'foo' => 42 ] ],
+			[ [ 'foo' => [] ] ],
 
-			array( array( 'foo' => array( 'bar' => 'baz' ) ) ),
-			array( array( 'foo' => array( 'name' => 'baz' ) ) ),
-			array( array( 'foo' => array( 'badges' => array() ) ) ),
+			[ [ 'foo' => [ 'bar' => 'baz' ] ] ],
+			[ [ 'foo' => [ 'name' => 'baz' ] ] ],
+			[ [ 'foo' => [ 'badges' => [] ] ] ],
 
-			array( array( 'foo' => array( 'name' => 'baz', 'badges' => array( 42 ) ) ) ),
-			array( array( 'foo' => array( 'name' => 'baz', 'badges' => array( new ItemId( 'Q42' ), 'Q42' ) ) ) ),
-		);
+			[ [ 'foo' => [ 'name' => 'baz', 'badges' => [ 42 ] ] ] ],
+			[ [ 'foo' => [ 'name' => 'baz', 'badges' => [ new ItemId( 'Q42' ), 'Q42' ] ] ] ],
+		];
 	}
 
 	/**
@@ -54,42 +54,42 @@ class LegacySiteLinkListDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testEmptyListDeserialization() {
-		$list = $this->deserializer->deserialize( array() );
+		$list = $this->deserializer->deserialize( [] );
 		$this->assertInstanceOf( SiteLinkList::class, $list );
 	}
 
 	public function serializationProvider() {
-		return array(
-			array( array(
-			) ),
+		return [
+			[ [
+			] ],
 
-			array( array(
-				'foo' => array(
+			[ [
+				'foo' => [
 					'name' => 'bar',
-					'badges' => array(),
-				),
-				'baz' => array(
+					'badges' => [],
+				],
+				'baz' => [
 					'name' => 'bah',
-					'badges' => array(),
-				)
-			) ),
+					'badges' => [],
+				]
+			] ],
 
-			array( array(
-				'foo' => array(
+			[ [
+				'foo' => [
 					'name' => 'bar',
-					'badges' => array( 'Q42', 'Q1337' ),
-				)
-			) ),
+					'badges' => [ 'Q42', 'Q1337' ],
+				]
+			] ],
 
-			array( array(
+			[ [
 				'foo' => 'bar',
-			) ),
+			] ],
 
-			array( array(
+			[ [
 				'foo' => 'bar',
 				'baz' => 'bah',
-			) ),
-		);
+			] ],
+		];
 	}
 
 	/**
@@ -103,19 +103,19 @@ class LegacySiteLinkListDeserializerTest extends \PHPUnit\Framework\TestCase {
 	public function testDeserialization() {
 		$this->assertEquals(
 			new SiteLinkList(
-				array(
-					new SiteLink( 'foo', 'bar', array( new ItemId( 'Q42' ), new ItemId( 'Q1337' ) ) ),
+				[
+					new SiteLink( 'foo', 'bar', [ new ItemId( 'Q42' ), new ItemId( 'Q1337' ) ] ),
 					new SiteLink( 'bar', 'baz' )
-				)
+				]
 			),
 			$this->deserializer->deserialize(
-				array(
-					'foo' => array(
+				[
+					'foo' => [
 						'name' => 'bar',
-						'badges' => array( 'Q42', 'Q1337' ),
-					),
+						'badges' => [ 'Q42', 'Q1337' ],
+					],
 					'bar' => 'baz'
-				)
+				]
 			)
 		);
 	}

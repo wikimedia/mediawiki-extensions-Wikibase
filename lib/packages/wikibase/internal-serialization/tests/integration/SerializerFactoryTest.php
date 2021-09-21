@@ -19,7 +19,7 @@ class SerializerFactoryTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $factory;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->factory = new SerializerFactory( $this->createMock( Serializer::class ) );
 	}
 

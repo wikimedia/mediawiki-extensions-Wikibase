@@ -29,7 +29,7 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $deserializer;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$idDeserializer = new LegacyEntityIdDeserializer( new BasicEntityIdParser() );
 
 		$snakDeserializer = new LegacySnakDeserializer( $this->createMock( Deserializer::class ) );
@@ -48,25 +48,25 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function invalidSerializationProvider() {
-		return array(
-			array( null ),
+		return [
+			[ null ],
 
-			array( array(
-				'links' => array( null )
-			) ),
+			[ [
+				'links' => [ null ]
+			] ],
 
-			array( array(
+			[ [
 				'claims' => null
-			) ),
+			] ],
 
-			array( array(
-				'claims' => array( null )
-			) ),
+			[ [
+				'claims' => [ null ]
+			] ],
 
-			array( array(
+			[ [
 				'entity' => 42
-			) ),
-		);
+			] ],
+		];
 	}
 
 	/**
@@ -84,7 +84,7 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenEmptyArray_emptyItemIsReturned() {
 		$this->assertEquals(
 			new Item(),
-			$this->deserializer->deserialize( array() )
+			$this->deserializer->deserialize( [] )
 		);
 	}
 
@@ -95,12 +95,12 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$item->getSiteLinkList()->addNewSiteLink( 'baz', 'bah' );
 
 		$this->assertDeserialization(
-			array(
-				'links' => array(
+			[
+				'links' => [
 					'foo' => 'bar',
 					'baz' => 'bah',
-				)
-			),
+				]
+			],
 			$item
 		);
 	}
@@ -130,11 +130,11 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$item->getStatements()->addStatement( $this->newStatement() );
 
 		$this->assertDeserialization(
-			array(
-				'claims' => array(
+			[
+				'claims' => [
 					$this->newStatementSerialization()
-				)
-			),
+				]
+			],
 			$item
 		);
 	}
@@ -146,13 +146,13 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function newStatementSerialization() {
-		return array(
-			'm' => array( 'novalue', 42 ),
-			'q' => array(),
+		return [
+			'm' => [ 'novalue', 42 ],
+			'q' => [],
 			'g' => 'foo',
 			'rank' => Statement::RANK_NORMAL,
-			'refs' => array()
-		);
+			'refs' => []
+		];
 	}
 
 	public function testGivenStatementWithLegacyKey_itemHasStatement() {
@@ -160,11 +160,11 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$item->getStatements()->addStatement( $this->newStatement() );
 
 		$this->assertDeserialization(
-			array(
-				'statements' => array(
+			[
+				'statements' => [
 					$this->newStatementSerialization()
-				)
-			),
+				]
+			],
 			$item
 		);
 	}
@@ -173,60 +173,60 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider TermListProvider
 	 */
 	public function testGivenLabels_getLabelsReturnsThem( array $labels ) {
-		$item = $this->itemFromSerialization( array( 'label' => $labels ) );
+		$item = $this->itemFromSerialization( [ 'label' => $labels ] );
 
 		$this->assertEquals( $labels, $item->getFingerprint()->getLabels()->toTextArray() );
 	}
 
 	public function TermListProvider() {
-		return array(
-			array( array() ),
+		return [
+			[ [] ],
 
-			array( array(
+			[ [
 				'en' => 'foo',
 				'de' => 'bar',
-			) ),
-		);
+			] ],
+		];
 	}
 
 	public function testGivenInvalidLabels_exceptionIsThrown() {
 		$this->expectDeserializationException();
-		$this->deserializer->deserialize( array( 'label' => null ) );
+		$this->deserializer->deserialize( [ 'label' => null ] );
 	}
 
 	/**
 	 * @dataProvider TermListProvider
 	 */
 	public function testGivenDescriptions_getDescriptionsReturnsThem( array $descriptions ) {
-		$item = $this->itemFromSerialization( array( 'description' => $descriptions ) );
+		$item = $this->itemFromSerialization( [ 'description' => $descriptions ] );
 
 		$this->assertEquals( $descriptions, $item->getFingerprint()->getDescriptions()->toTextArray() );
 	}
 
 	public function testGivenInvalidAliases_exceptionIsThrown() {
 		$this->expectDeserializationException();
-		$this->deserializer->deserialize( array( 'aliases' => null ) );
+		$this->deserializer->deserialize( [ 'aliases' => null ] );
 	}
 
 	/**
 	 * @dataProvider aliasesListProvider
 	 */
 	public function testGivenAliases_getAliasesReturnsThem( array $aliases ) {
-		$item = $this->itemFromSerialization( array( 'aliases' => $aliases ) );
+		$item = $this->itemFromSerialization( [ 'aliases' => $aliases ] );
 
 		$this->assertEquals( $aliases, $item->getFingerprint()->getAliasGroups()->toTextArray() );
 	}
 
 	public function aliasesListProvider() {
-		return array(
-			array( array() ),
+		return [
+			[ [] ],
 
-			array( array(
-				'en' => array( 'foo', 'bar' ),
-				'de' => array( 'foo', 'bar', 'baz' ),
-				'nl' => array( 'bah' ),
-			) ),
-		);
+			[ [
+				'en' => [ 'foo', 'bar' ],
+				'de' => [ 'foo', 'bar', 'baz' ],
+				'nl' => [ 'bah' ],
+			] ],
+		];
 	}
 
 }

@@ -54,10 +54,10 @@ class LegacySnakDeserializer implements Deserializer {
 	private function deserializeValueSnak( array $serialization ) {
 		try {
 			$dataValue = $this->dataValueDeserializer->deserialize(
-				array(
+				[
 					'type' => $serialization[2],
 					'value' => $serialization[3],
-				)
+				]
 			);
 		} catch ( DeserializationException $ex ) {
 			$dataValue = new UnDeserializableValue( $serialization[3], $serialization[2], $ex->getMessage() );
@@ -70,7 +70,7 @@ class LegacySnakDeserializer implements Deserializer {
 	}
 
 	private function assertStructureIsValid( $serialization ) {
-		if ( !is_array( $serialization ) || $serialization === array() ) {
+		if ( !is_array( $serialization ) || $serialization === [] ) {
 			throw new DeserializationException( 'Serialization should be a non-empty array' );
 		}
 
@@ -94,7 +94,7 @@ class LegacySnakDeserializer implements Deserializer {
 			throw new DeserializationException( 'Non-value snaks need to have 2 elements' );
 		}
 
-		if ( !in_array( $serialization[0], array( 'novalue', 'somevalue' ) ) ) {
+		if ( !in_array( $serialization[0], [ 'novalue', 'somevalue' ] ) ) {
 			throw new DeserializationException( 'Unknown snak type' );
 		}
 	}

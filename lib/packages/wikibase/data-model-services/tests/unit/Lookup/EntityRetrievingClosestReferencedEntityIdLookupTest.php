@@ -155,9 +155,6 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 		return $lookup;
 	}
 
-	/**
-	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-	 */
 	public function provideGetReferencedEntityIdNoError() {
 		$pSubclassOf = new PropertyId( 'P599' );
 		$q1 = new ItemId( 'Q1' );

@@ -27,7 +27,7 @@ class LegacyStatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $deserializer;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$snakDeserializer = new LegacySnakDeserializer( $this->createMock( Deserializer::class ) );
 		$qualifiersDeserializer = new LegacySnakListDeserializer( $snakDeserializer );
 
@@ -35,28 +35,28 @@ class LegacyStatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function invalidSerializationProvider() {
-		return array(
-			array( null ),
-			array( array() ),
-			array( array( 'm' => array( 'novalue', 42 ) ) ),
-			array( array( 'm' => array( 'novalue', 42 ), 'q' => array() ) ),
-			array( array( 'm' => array( 'novalue', 42 ), 'q' => array( null ), 'g' => null ) ),
-			array( array( 'm' => array( 'novalue', 42 ), 'q' => array(), 'g' => 'kittens' ) ),
-			array( array(
-				'm' => array( 'novalue', 42 ),
-				'q' => array(),
+		return [
+			[ null ],
+			[ [] ],
+			[ [ 'm' => [ 'novalue', 42 ] ] ],
+			[ [ 'm' => [ 'novalue', 42 ], 'q' => [] ] ],
+			[ [ 'm' => [ 'novalue', 42 ], 'q' => [ null ], 'g' => null ] ],
+			[ [ 'm' => [ 'novalue', 42 ], 'q' => [], 'g' => 'kittens' ] ],
+			[ [
+				'm' => [ 'novalue', 42 ],
+				'q' => [],
 				'g' => 9001,
-				'refs' => array(),
+				'refs' => [],
 				'rank' => Statement::RANK_PREFERRED
-			) ),
-			array( array(
-				'm' => array( 'novalue', 42 ),
-				'q' => array(),
+			] ],
+			[ [
+				'm' => [ 'novalue', 42 ],
+				'q' => [],
 				'g' => null,
-				'refs' => array(),
+				'refs' => [],
 				'rank' => 'not a rank',
-			) ),
-		);
+			] ],
+		];
 	}
 
 	/**
@@ -72,13 +72,13 @@ class LegacyStatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 			new PropertyNoValueSnak( 42 )
 		);
 
-		$serialization = array(
-			'm' => array( 'novalue', 42 ),
-			'q' => array(),
+		$serialization = [
+			'm' => [ 'novalue', 42 ],
+			'q' => [],
 			'g' => null,
 			'rank' => Statement::RANK_NORMAL,
-			'refs' => array()
-		);
+			'refs' => []
+		];
 
 		$this->assertEquals(
 			$statement,
@@ -89,24 +89,24 @@ class LegacyStatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenValidSerialization_deserializeReturnsStatementWithQualifiers() {
 		$statement = new Statement(
 			new PropertyNoValueSnak( 42 ),
-			new SnakList( array(
+			new SnakList( [
 				new PropertyNoValueSnak( 23 ),
 				new PropertyNoValueSnak( 1337 ),
-			) )
+			] )
 		);
 
 		$statement->setGuid( 'foo bar baz' );
 
-		$serialization = array(
-			'm' => array( 'novalue', 42 ),
-			'q' => array(
-				array( 'novalue', 23 ),
-				array( 'novalue', 1337 )
-			),
+		$serialization = [
+			'm' => [ 'novalue', 42 ],
+			'q' => [
+				[ 'novalue', 23 ],
+				[ 'novalue', 1337 ]
+			],
 			'g' => 'foo bar baz',
 			'rank' => Statement::RANK_NORMAL,
-			'refs' => array()
-		);
+			'refs' => []
+		];
 
 		$this->assertEquals(
 			$statement,
@@ -117,38 +117,38 @@ class LegacyStatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenValidSerialization_deserializeReturnsStatementWithReferences() {
 		$statement = new Statement(
 			new PropertyNoValueSnak( 42 ),
-			new SnakList( array(
+			new SnakList( [
 				new PropertyNoValueSnak( 23 ),
 				new PropertyNoValueSnak( 1337 ),
-			) ),
-			new ReferenceList( array(
+			] ),
+			new ReferenceList( [
 				new Reference(
-					new SnakList( array(
+					new SnakList( [
 						new PropertyNoValueSnak( 1 ),
 						new PropertyNoValueSnak( 2 ),
-					) )
+					] )
 				)
-			) )
+			] )
 		);
 
 		$statement->setGuid( 'foo bar baz' );
 		$statement->setRank( Statement::RANK_PREFERRED );
 
-		$serialization = array(
-			'm' => array( 'novalue', 42 ),
-			'q' => array(
-				array( 'novalue', 23 ),
-				array( 'novalue', 1337 )
-			),
+		$serialization = [
+			'm' => [ 'novalue', 42 ],
+			'q' => [
+				[ 'novalue', 23 ],
+				[ 'novalue', 1337 ]
+			],
 			'g' => 'foo bar baz',
 			'rank' => Statement::RANK_PREFERRED,
-			'refs' => array(
-				array(
-					array( 'novalue', 1 ),
-					array( 'novalue', 2 )
-				)
-			)
-		);
+			'refs' => [
+				[
+					[ 'novalue', 1 ],
+					[ 'novalue', 2 ]
+				]
+			]
+		];
 
 		$deserialized = $this->deserializer->deserialize( $serialization );
 

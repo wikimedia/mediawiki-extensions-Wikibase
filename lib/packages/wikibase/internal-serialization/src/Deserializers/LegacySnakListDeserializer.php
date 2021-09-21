@@ -32,7 +32,7 @@ class LegacySnakListDeserializer implements Deserializer {
 			throw new DeserializationException( 'SnakList serialization should be an array' );
 		}
 
-		$snaks = array();
+		$snaks = [];
 
 		foreach ( $serialization as $snakSerialization ) {
 			$snaks[] = $this->snakDeserializer->deserialize( $snakSerialization );
