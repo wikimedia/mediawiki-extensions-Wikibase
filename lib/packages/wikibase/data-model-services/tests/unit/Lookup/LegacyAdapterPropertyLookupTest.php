@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Fixtures\PropertyFixtures;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
@@ -33,12 +33,12 @@ class LegacyAdapterPropertyLookupTest extends TestCase {
 		$lookup = new LegacyAdapterPropertyLookup( new InMemoryEntityLookup() );
 
 		$this->assertNull(
-			$lookup->getPropertyForId( new PropertyId( 'P1' ) )
+			$lookup->getPropertyForId( new NumericPropertyId( 'P1' ) )
 		);
 	}
 
 	public function testGetPropertyForIdThrowsCorrectExceptionType() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 
 		$legacyLookup = new InMemoryEntityLookup();
 		$legacyLookup->addException( new EntityLookupException( $id ) );

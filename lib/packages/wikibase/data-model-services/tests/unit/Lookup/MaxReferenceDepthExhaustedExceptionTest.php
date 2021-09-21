@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Services\Tests\Lookup;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\MaxReferenceDepthExhaustedException;
 
 /**
@@ -18,7 +18,7 @@ class MaxReferenceDepthExhaustedExceptionTest extends TestCase {
 
 	public function testConstructorWithOnlyRequiredArguments() {
 		$entityId = new ItemId( 'Q1' );
-		$propertyId = new PropertyId( 'P12' );
+		$propertyId = new NumericPropertyId( 'P12' );
 		$toIds = [
 			new ItemId( 'Q5' ),
 			new ItemId( 'Q2013' )
@@ -36,7 +36,7 @@ class MaxReferenceDepthExhaustedExceptionTest extends TestCase {
 
 	public function testConstructorWithAllArguments() {
 		$entityId = new ItemId( 'Q1' );
-		$propertyId = new PropertyId( 'P12' );
+		$propertyId = new NumericPropertyId( 'P12' );
 		$toIds = [
 			new ItemId( 'Q5' ),
 			new ItemId( 'Q2013' )

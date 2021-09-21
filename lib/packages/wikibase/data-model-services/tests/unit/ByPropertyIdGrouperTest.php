@@ -6,7 +6,7 @@ use ArrayObject;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\PropertyIdProvider;
 use Wikibase\DataModel\Services\ByPropertyIdGrouper;
 use Wikibase\DataModel\Snak\Snak;
@@ -70,18 +70,18 @@ class ByPropertyIdGrouperTest extends TestCase {
 				$this->getPropertyIdProviderMock( 'P23' )
 			],
 			[
-				new PropertyId( 'P42' ),
-				new PropertyId( 'P23' )
+				new NumericPropertyId( 'P42' ),
+				new NumericPropertyId( 'P23' )
 			]
 		];
 
 		$cases['duplicate property ids'] = [
 			$this->getPropertyIdProviders(),
 			[
-				new PropertyId( 'P42' ),
-				new PropertyId( 'P23' ),
-				new PropertyId( 'P15' ),
-				new PropertyId( 'P10' )
+				new NumericPropertyId( 'P42' ),
+				new NumericPropertyId( 'P23' ),
+				new NumericPropertyId( 'P15' ),
+				new NumericPropertyId( 'P10' )
 			]
 		];
 
@@ -91,7 +91,7 @@ class ByPropertyIdGrouperTest extends TestCase {
 	/**
 	 * @dataProvider provideGetPropertyIds
 	 * @param PropertyIdProvider[] $propertyIdProviders
-	 * @param PropertyId[] $expectedPropertyIds
+	 * @param NumericPropertyId[] $expectedPropertyIds
 	 */
 	public function testGetPropertyIds( array $propertyIdProviders, array $expectedPropertyIds ) {
 		$byPropertyIdGrouper = new ByPropertyIdGrouper( $propertyIdProviders );
@@ -122,7 +122,7 @@ class ByPropertyIdGrouperTest extends TestCase {
 	 */
 	public function testGetByPropertyId( array $propertyIdProviders, $propertyId, array $expectedValues ) {
 		$byPropertyIdGrouper = new ByPropertyIdGrouper( $propertyIdProviders );
-		$values = $byPropertyIdGrouper->getByPropertyId( new PropertyId( $propertyId ) );
+		$values = $byPropertyIdGrouper->getByPropertyId( new NumericPropertyId( $propertyId ) );
 		array_walk( $values, function( Snak &$value ) {
 			$value = $value->getType();
 		} );
@@ -132,7 +132,7 @@ class ByPropertyIdGrouperTest extends TestCase {
 	public function testGetByPropertyIdThrowsException() {
 		$byPropertyIdGrouper = new ByPropertyIdGrouper( $this->getPropertyIdProviders() );
 		$this->expectException( OutOfBoundsException::class );
-		$byPropertyIdGrouper->getByPropertyId( new PropertyId( 'P11' ) );
+		$byPropertyIdGrouper->getByPropertyId( new NumericPropertyId( 'P11' ) );
 	}
 
 	public function provideHasPropertyId() {
@@ -152,7 +152,7 @@ class ByPropertyIdGrouperTest extends TestCase {
 	 */
 	public function testHasPropertyId( array $propertyIdProviders, $propertyId, $expectedValue ) {
 		$byPropertyIdGrouper = new ByPropertyIdGrouper( $propertyIdProviders );
-		$this->assertEquals( $expectedValue, $byPropertyIdGrouper->hasPropertyId( new PropertyId( $propertyId ) ) );
+		$this->assertEquals( $expectedValue, $byPropertyIdGrouper->hasPropertyId( new NumericPropertyId( $propertyId ) ) );
 	}
 
 	/**
@@ -181,7 +181,7 @@ class ByPropertyIdGrouperTest extends TestCase {
 
 		$propertyIdProvider->expects( $this->once() )
 			->method( 'getPropertyId' )
-			->will( $this->returnValue( new PropertyId( $propertyId ) ) );
+			->will( $this->returnValue( new NumericPropertyId( $propertyId ) ) );
 
 		$propertyIdProvider->expects( $this->any() )
 			->method( 'getType' )

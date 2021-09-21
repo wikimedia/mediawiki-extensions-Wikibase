@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Services\Tests\Lookup;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Fixtures\FakeEntityDocument;
 use Wikibase\DataModel\Services\Fixtures\ItemFixtures;
 use Wikibase\DataModel\Services\Fixtures\PropertyFixtures;
@@ -123,7 +123,7 @@ class InMemoryEntityLookupTest extends TestCase {
 
 	public function testWhenPropertyIsNotKnown_getPropertyForIdReturnsNull() {
 		$this->assertNull(
-			( new InMemoryEntityLookup() )->getPropertyForId( new PropertyId( 'P1' ) )
+			( new InMemoryEntityLookup() )->getPropertyForId( new NumericPropertyId( 'P1' ) )
 		);
 	}
 
@@ -138,7 +138,7 @@ class InMemoryEntityLookupTest extends TestCase {
 	}
 
 	public function testGetPropertyForIdThrowsCorrectExceptionType() {
-		$id = new PropertyId( 'P1' );
+		$id = new NumericPropertyId( 'P1' );
 
 		$lookup = new InMemoryEntityLookup();
 		$lookup->addException( new EntityLookupException( $id ) );

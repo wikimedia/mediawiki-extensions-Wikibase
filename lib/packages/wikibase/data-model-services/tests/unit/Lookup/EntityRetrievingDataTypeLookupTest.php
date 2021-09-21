@@ -3,8 +3,8 @@
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
@@ -35,7 +35,7 @@ class EntityRetrievingDataTypeLookupTest extends TestCase {
 
 		foreach ( $this->propertiesAndTypes as $propertyId => $dataTypeId ) {
 			$property = Property::newFromType( $dataTypeId );
-			$property->setId( new PropertyId( $propertyId ) );
+			$property->setId( new NumericPropertyId( $propertyId ) );
 
 			$lookup->addEntity( $property );
 		}
@@ -48,7 +48,7 @@ class EntityRetrievingDataTypeLookupTest extends TestCase {
 
 		foreach ( $this->propertiesAndTypes as $propertyId => $dataTypeId ) {
 			$argLists[] = [
-				new PropertyId( $propertyId ),
+				new NumericPropertyId( $propertyId ),
 				$dataTypeId
 			];
 		}
@@ -59,10 +59,10 @@ class EntityRetrievingDataTypeLookupTest extends TestCase {
 	/**
 	 * @dataProvider getDataTypeForPropertyProvider
 	 *
-	 * @param PropertyId $propertyId
+	 * @param NumericPropertyId $propertyId
 	 * @param string $expectedDataType
 	 */
-	public function testGetDataTypeForProperty( PropertyId $propertyId, $expectedDataType ) {
+	public function testGetDataTypeForProperty( NumericPropertyId $propertyId, $expectedDataType ) {
 		$lookup = new EntityRetrievingDataTypeLookup( $this->newEntityLookup() );
 
 		$actualDataType = $lookup->getDataTypeIdForProperty( $propertyId );

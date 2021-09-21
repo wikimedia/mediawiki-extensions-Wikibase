@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Services;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Traversable;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\PropertyIdProvider;
 
 /**
@@ -66,28 +66,28 @@ class ByPropertyIdGrouper {
 	 *
 	 * @since 1.0
 	 *
-	 * @return PropertyId[]
+	 * @return NumericPropertyId[]
 	 */
 	public function getPropertyIds() {
 		return array_map(
 			function( $propertyId ) {
-				return new PropertyId( $propertyId );
+				return new NumericPropertyId( $propertyId );
 			},
 			array_keys( $this->byPropertyId )
 		);
 	}
 
 	/**
-	 * Returns the PropertyIdProvider instances for the given PropertyId.
+	 * Returns the PropertyIdProvider instances for the given NumericPropertyId.
 	 *
 	 * @since 1.0
 	 *
-	 * @param PropertyId $propertyId
+	 * @param NumericPropertyId $propertyId
 	 *
 	 * @throws OutOfBoundsException
 	 * @return PropertyIdProvider[]
 	 */
-	public function getByPropertyId( PropertyId $propertyId ) {
+	public function getByPropertyId( NumericPropertyId $propertyId ) {
 		$idSerialization = $propertyId->getSerialization();
 
 		if ( !isset( $this->byPropertyId[$idSerialization] ) ) {
@@ -98,15 +98,15 @@ class ByPropertyIdGrouper {
 	}
 
 	/**
-	 * Checks if there are PropertyIdProvider instances for the given PropertyId.
+	 * Checks if there are PropertyIdProvider instances for the given NumericPropertyId.
 	 *
 	 * @since 1.0
 	 *
-	 * @param PropertyId $propertyId
+	 * @param NumericPropertyId $propertyId
 	 *
 	 * @return bool
 	 */
-	public function hasPropertyId( PropertyId $propertyId ) {
+	public function hasPropertyId( NumericPropertyId $propertyId ) {
 		return isset( $this->byPropertyId[$propertyId->getSerialization()] );
 	}
 

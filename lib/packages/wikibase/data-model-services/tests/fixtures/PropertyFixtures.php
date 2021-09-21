@@ -2,8 +2,8 @@
 
 namespace Wikibase\DataModel\Services\Fixtures;
 
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @license GPL-2.0-or-later
@@ -13,7 +13,7 @@ class PropertyFixtures {
 
 	public static function newProperty() {
 		return new Property(
-			new PropertyId( 'P1' ),
+			new NumericPropertyId( 'P1' ),
 			null,
 			'string'
 		);

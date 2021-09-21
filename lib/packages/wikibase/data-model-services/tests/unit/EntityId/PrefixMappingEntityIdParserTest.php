@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikimedia\Assert\ParameterAssertionException;
 
@@ -41,7 +41,7 @@ class PrefixMappingEntityIdParserTest extends TestCase {
 		return [
 			[ [ '' => 'wikidata' ], 'Q1337', new ItemId( 'wikidata:Q1337' ) ],
 			[ [ '' => '' ], 'Q1337', new ItemId( 'Q1337' ) ],
-			[ [ '' => 'foo' ], 'P123', new PropertyId( 'foo:P123' ) ],
+			[ [ '' => 'foo' ], 'P123', new NumericPropertyId( 'foo:P123' ) ],
 			[ [ '' => 'foo' ], 'bar:Q1337', new ItemId( 'foo:bar:Q1337' ) ],
 			[ [ '' => 'foo' ], 'foo:Q1337', new ItemId( 'foo:foo:Q1337' ) ],
 		];

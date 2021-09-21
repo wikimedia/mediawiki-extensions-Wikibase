@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 
@@ -20,11 +20,11 @@ class InMemoryDataTypeLookupTest extends TestCase {
 
 		$this->expectException( PropertyDataTypeLookupException::class );
 
-		$lookup->getDataTypeIdForProperty( new PropertyId( 'p7201010' ) );
+		$lookup->getDataTypeIdForProperty( new NumericPropertyId( 'p7201010' ) );
 	}
 
 	public function testSetAndGetDataType() {
-		$propertyId = new PropertyId( 'p7201010' );
+		$propertyId = new NumericPropertyId( 'p7201010' );
 
 		$stringTypeId = 'string-datatype';
 		$intTypeId = 'integer';

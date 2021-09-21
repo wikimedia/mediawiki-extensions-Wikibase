@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Services\Tests\Lookup;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Fixtures\FakeEntityDocument;
 use Wikibase\DataModel\Services\Lookup\DispatchingEntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -47,7 +47,7 @@ class DispatchingEntityLookupTest extends TestCase {
 		$localLookup = new InMemoryEntityLookup();
 		$localLookup->addEntity( new FakeEntityDocument( new ItemId( 'Q1' ) ) );
 		$fooLookup = new InMemoryEntityLookup();
-		$fooLookup->addEntity( new FakeEntityDocument( new PropertyId( 'foo:P11' ) ) );
+		$fooLookup->addEntity( new FakeEntityDocument( new NumericPropertyId( 'foo:P11' ) ) );
 
 		$dispatchingLookup = new DispatchingEntityLookup( [ '' => $localLookup, 'foo' => $fooLookup ] );
 
@@ -56,10 +56,10 @@ class DispatchingEntityLookupTest extends TestCase {
 		$this->assertTrue( $actual->equals( $expected ) );
 		$this->assertTrue( $actual->getId()->equals( new ItemId( 'Q1' ) ) );
 
-		$expected = new FakeEntityDocument( new PropertyId( 'foo:P11' ) );
-		$actual = $dispatchingLookup->getEntity( new PropertyId( 'foo:P11' ) );
+		$expected = new FakeEntityDocument( new NumericPropertyId( 'foo:P11' ) );
+		$actual = $dispatchingLookup->getEntity( new NumericPropertyId( 'foo:P11' ) );
 		$this->assertTrue( $actual->equals( $expected ) );
-		$this->assertTrue( $actual->getId()->equals( new PropertyId( 'foo:P11' ) ) );
+		$this->assertTrue( $actual->getId()->equals( new NumericPropertyId( 'foo:P11' ) ) );
 	}
 
 	public function testGivenNotExistingEntityIdFromKnownRepository_getEntityReturnsNull() {
@@ -102,12 +102,12 @@ class DispatchingEntityLookupTest extends TestCase {
 		$localLookup = new InMemoryEntityLookup();
 		$localLookup->addEntity( new FakeEntityDocument( new ItemId( 'Q1' ) ) );
 		$fooLookup = new InMemoryEntityLookup();
-		$fooLookup->addEntity( new FakeEntityDocument( new PropertyId( 'foo:P11' ) ) );
+		$fooLookup->addEntity( new FakeEntityDocument( new NumericPropertyId( 'foo:P11' ) ) );
 
 		$dispatchingLookup = new DispatchingEntityLookup( [ '' => $localLookup, 'foo' => $fooLookup ] );
 
 		$this->assertTrue( $dispatchingLookup->hasEntity( new ItemId( 'Q1' ) ) );
-		$this->assertTrue( $dispatchingLookup->hasEntity( new PropertyId( 'foo:P11' ) ) );
+		$this->assertTrue( $dispatchingLookup->hasEntity( new NumericPropertyId( 'foo:P11' ) ) );
 	}
 
 	public function testGivenNotExistingEntityIdFromKnownRepository_hasEntityReturnsFalse() {

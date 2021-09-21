@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Entity;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
@@ -20,7 +20,7 @@ class PropertyDataTypeMatcherTest extends TestCase {
 		$propertyDataTypeMatcher = $this->getPropertyDataTypeMatcher();
 
 		$isMatching = $propertyDataTypeMatcher->isMatchingDataType(
-			new PropertyId( 'P2' ),
+			new NumericPropertyId( 'P2' ),
 			'string'
 		);
 
@@ -31,7 +31,7 @@ class PropertyDataTypeMatcherTest extends TestCase {
 		$propertyDataTypeMatcher = $this->getPropertyDataTypeMatcher();
 
 		$isMatching = $propertyDataTypeMatcher->isMatchingDataType(
-			new PropertyId( 'P2' ),
+			new NumericPropertyId( 'P2' ),
 			'url'
 		);
 
@@ -42,7 +42,7 @@ class PropertyDataTypeMatcherTest extends TestCase {
 		$propertyDataTypeMatcher = $this->getPropertyDataTypeMatcher();
 
 		$isMatching = $propertyDataTypeMatcher->isMatchingDataType(
-			new PropertyId( 'P9000' ),
+			new NumericPropertyId( 'P9000' ),
 			'string'
 		);
 
@@ -51,7 +51,7 @@ class PropertyDataTypeMatcherTest extends TestCase {
 
 	private function getPropertyDataTypeMatcher() {
 		$inMemoryDataTypeLookup = new InMemoryDataTypeLookup();
-		$inMemoryDataTypeLookup->setDataTypeForProperty( new PropertyId( 'P2' ), 'string' );
+		$inMemoryDataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'P2' ), 'string' );
 
 		$propertyDataTypeLookup = new InProcessCachingDataTypeLookup( $inMemoryDataTypeLookup );
 

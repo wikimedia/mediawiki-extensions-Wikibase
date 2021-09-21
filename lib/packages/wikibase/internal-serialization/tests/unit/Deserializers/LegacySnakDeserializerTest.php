@@ -7,7 +7,7 @@ use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -113,7 +113,7 @@ class LegacySnakDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function assertSnakHasUnDeseriableValue( PropertyValueSnak $snak ) {
-		$this->assertEquals( new PropertyId( 'P42' ), $snak->getPropertyId() );
+		$this->assertEquals( new NumericPropertyId( 'P42' ), $snak->getPropertyId() );
 
 		$dataValue = $snak->getDataValue();
 

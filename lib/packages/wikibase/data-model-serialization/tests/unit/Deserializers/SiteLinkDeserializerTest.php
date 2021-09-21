@@ -8,7 +8,7 @@ use Deserializers\Exceptions\InvalidAttributeException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Deserializers\SiteLinkDeserializer;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\SiteLink;
 
 /**
@@ -99,7 +99,7 @@ class SiteLinkDeserializerTest extends TestCase {
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( 'P42' ) )
-			->will( $this->returnValue( new PropertyId( 'P42' ) ) );
+			->will( $this->returnValue( new NumericPropertyId( 'P42' ) ) );
 		$deserializer = new SiteLinkDeserializer( $entityIdDeserializerMock );
 
 		$this->expectException( InvalidAttributeException::class );

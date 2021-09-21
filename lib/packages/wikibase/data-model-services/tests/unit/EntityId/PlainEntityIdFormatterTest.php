@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Services\Tests\EntityId;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\EntityId\PlainEntityIdFormatter;
 
 /**
@@ -23,9 +23,9 @@ class PlainEntityIdFormatterTest extends TestCase {
 		$argLists[] = [ new ItemId( 'q9001' ), 'Q9001' ];
 		$argLists[] = [ new ItemId( 'q1' ), 'Q1' ];
 
-		$argLists[] = [ new PropertyId( 'p42' ), 'P42' ];
-		$argLists[] = [ new PropertyId( 'p9001' ), 'P9001' ];
-		$argLists[] = [ new PropertyId( 'p1' ), 'P1' ];
+		$argLists[] = [ new NumericPropertyId( 'p42' ), 'P42' ];
+		$argLists[] = [ new NumericPropertyId( 'p9001' ), 'P9001' ];
+		$argLists[] = [ new NumericPropertyId( 'p1' ), 'P1' ];
 
 		return $argLists;
 	}

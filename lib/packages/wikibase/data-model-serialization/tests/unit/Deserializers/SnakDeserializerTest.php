@@ -9,7 +9,7 @@ use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -197,7 +197,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 	}
 
 	private function assertSnakHasUnDeserializableValue( PropertyValueSnak $snak ) {
-		$this->assertEquals( new PropertyId( 'P42' ), $snak->getPropertyId() );
+		$this->assertEquals( new NumericPropertyId( 'P42' ), $snak->getPropertyId() );
 
 		$dataValue = $snak->getDataValue();
 
