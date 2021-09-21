@@ -5,8 +5,8 @@ namespace Wikibase\Lib\Tests\Changes;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -49,15 +49,15 @@ final class TestChanges {
 		$changeFactory = self::getEntityChangeFactory();
 
 		if ( empty( $changes ) ) {
-			$empty = new Property( new PropertyId( 'P100' ), null, 'string' );
+			$empty = new Property( new NumericPropertyId( 'P100' ), null, 'string' );
 
 			$changes['property-creation'] = $changeFactory->newFromUpdate( EntityChange::ADD, null, $empty );
 			$changes['property-deletion'] = $changeFactory->newFromUpdate( EntityChange::REMOVE, $empty, null );
 
 			// -----
-			$old = new Property( new PropertyId( 'P100' ), null, 'string' );
+			$old = new Property( new NumericPropertyId( 'P100' ), null, 'string' );
 
-			$new = new Property( new PropertyId( 'P100' ), null, 'string' );
+			$new = new Property( new NumericPropertyId( 'P100' ), null, 'string' );
 			$new->setLabel( "de", "dummy" );
 			$changes['property-set-label'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 
@@ -119,7 +119,7 @@ final class TestChanges {
 			$old = $new->copy();
 
 			// -----
-			$propertyId = new PropertyId( 'p23' );
+			$propertyId = new NumericPropertyId( 'p23' );
 			$snak = new PropertyNoValueSnak( $propertyId );
 			$statement = new Statement( $snak );
 			$statement->setGuid( 'TEST$test-guid' );
