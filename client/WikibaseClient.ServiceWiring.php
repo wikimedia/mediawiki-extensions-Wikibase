@@ -179,6 +179,7 @@ return [
 			$pageUpdater,
 			$changeListTransformer,
 			$logger,
+			$services->getHookContainer(),
 			$settings->getSetting( 'injectRecentChanges' )
 		);
 	},
