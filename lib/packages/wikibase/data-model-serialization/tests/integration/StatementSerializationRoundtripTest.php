@@ -16,6 +16,8 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
+ * @covers DataValues\Deserializers\DataValueDeserializer
+ *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */

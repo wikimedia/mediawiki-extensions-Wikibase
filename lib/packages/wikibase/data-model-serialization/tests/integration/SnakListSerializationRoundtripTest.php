@@ -13,6 +13,8 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
+ * @covers DataValues\Serializers\DataValueSerializer
+ *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thomas Pellissier Tanon

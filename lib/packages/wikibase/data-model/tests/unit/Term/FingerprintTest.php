@@ -43,7 +43,7 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $fingerprint;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->labels = $this->createMock( TermList::class );
 		$this->descriptions = $this->createMock( TermList::class );
 		$this->aliasGroups = $this->createMock( AliasGroupList::class );

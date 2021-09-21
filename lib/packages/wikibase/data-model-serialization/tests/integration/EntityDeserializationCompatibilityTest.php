@@ -19,6 +19,8 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityIdValue;
 
 /**
+ * @covers DataValues\Deserializers\DataValueDeserializer
+ *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

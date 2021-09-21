@@ -14,6 +14,8 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
+ * @covers DataValues\Serializers\DataValueSerializer
+ *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  * @author Thiemo Kreuz

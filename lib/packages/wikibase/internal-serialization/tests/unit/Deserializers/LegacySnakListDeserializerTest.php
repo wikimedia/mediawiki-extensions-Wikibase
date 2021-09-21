@@ -23,20 +23,20 @@ class LegacySnakListDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $deserializer;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$snakDeserializer = new LegacySnakDeserializer( $this->createMock( Deserializer::class ) );
 
 		$this->deserializer = new LegacySnakListDeserializer( $snakDeserializer );
 	}
 
 	public function invalidSerializationProvider() {
-		return array(
-			array( null ),
-			array( array( null ) ),
-			array( array( 1337 ) ),
-			array( array( array() ) ),
-			array( array( array( 'novalue', 42 ), array( 'hax' ) ) ),
-		);
+		return [
+			[ null ],
+			[ [ null ] ],
+			[ [ 1337 ] ],
+			[ [ [] ] ],
+			[ [ [ 'novalue', 42 ], [ 'hax' ] ] ],
+		];
 	}
 
 	/**
@@ -49,27 +49,27 @@ class LegacySnakListDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenEmptyArray_deserializeReturnsEmptySnakList() {
 		$this->assertEquals(
-			new SnakList( array() ),
-			$this->deserializer->deserialize( array() )
+			new SnakList( [] ),
+			$this->deserializer->deserialize( [] )
 		);
 	}
 
 	public function testGivenValidSerialization_deserializeReturnsCorrectSnakList() {
-		$expected = new SnakList( array(
+		$expected = new SnakList( [
 			new PropertyNoValueSnak( 42 ),
 			new PropertySomeValueSnak( 1337 ),
-		) );
+		] );
 
-		$serialization = array(
-			array(
+		$serialization = [
+			[
 				'novalue',
 				42,
-			),
-			array(
+			],
+			[
 				'somevalue',
 				1337,
-			)
-		);
+			]
+		];
 
 		$this->assertEquals(
 			$expected,

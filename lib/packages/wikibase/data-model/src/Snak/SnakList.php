@@ -300,7 +300,7 @@ class SnakList extends ArrayObject {
 	 *
 	 * @param array $data
 	 */
-	public function __unserialize( $data ) : void {
+	public function __unserialize( $data ): void {
 		foreach ( $data['data'] as $offset => $value ) {
 			// Just set the element, bypassing checks and offset resolving,
 			// as these elements have already gone through this.

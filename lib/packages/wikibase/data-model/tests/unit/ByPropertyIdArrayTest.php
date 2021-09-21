@@ -194,17 +194,15 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 		$removeObject->invokeArgs( $indexedArray, [ $objects[0] ] );
 		$removeObject->invokeArgs( $indexedArray, [ $objects[$lastIndex] ] );
 
-		$this->assertFalse(
-			in_array( $objects[0], $indexedArray->getByPropertyId( $objects[0]->getPropertyId() ) )
+		$this->assertNotContains(
+			$objects[0], $indexedArray->getByPropertyId( $objects[0]->getPropertyId() )
 		);
 
-		$this->assertFalse( in_array(
-			$objects[$lastIndex],
-			$indexedArray->getByPropertyId( $objects[1]->getPropertyId() )
-		) );
+		$this->assertNotContains( $objects[$lastIndex],
+			$indexedArray->getByPropertyId( $objects[1]->getPropertyId() ) );
 
-		$this->assertFalse( in_array( $objects[0], $indexedArray->toFlatArray() ) );
-		$this->assertFalse( in_array( $objects[$lastIndex], $indexedArray->toFlatArray() ) );
+		$this->assertNotContains( $objects[0], $indexedArray->toFlatArray() );
+		$this->assertNotContains( $objects[$lastIndex], $indexedArray->toFlatArray() );
 	}
 
 	public function testGetByNotSetIdThrowsException() {

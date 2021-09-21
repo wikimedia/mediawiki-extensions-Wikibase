@@ -22,7 +22,7 @@ class RealEntitiesTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $deserializer;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->deserializer = TestFactoryBuilder::newDeserializerFactoryWithDataValueSupport()->newEntityDeserializer();
 	}
 
@@ -44,17 +44,17 @@ class RealEntitiesTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getEntitySerializationsFromDir( $dir ) {
-		$argumentLists = array();
+		$argumentLists = [];
 
 		/**
 		 * @var SplFileInfo $fileInfo
 		 */
 		foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $dir ) ) as $fileInfo ) {
 			if ( $fileInfo->getExtension() === 'json' ) {
-				$argumentLists[] = array(
+				$argumentLists[] = [
 					$fileInfo->getFilename(),
 					json_decode( file_get_contents( $fileInfo->getPathname() ), true )
-				);
+				];
 			}
 		}
 

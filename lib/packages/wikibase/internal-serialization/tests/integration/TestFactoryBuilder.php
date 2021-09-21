@@ -6,6 +6,8 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use Deserializers\Deserializer;
+use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\DeserializerFactory as DataModelDeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\LegacyDeserializerFactory;
@@ -17,7 +19,7 @@ use Wikibase\InternalSerialization\SerializerFactory;
  */
 class TestFactoryBuilder {
 
-	public static function newLegacyDeserializerFactory( \PHPUnit\Framework\TestCase $testCase ) {
+	public static function newLegacyDeserializerFactory( TestCase $testCase ) {
 		return new LegacyDeserializerFactory(
 			self::newFakeDataValueDeserializer( $testCase ),
 			new BasicEntityIdParser()
@@ -25,22 +27,22 @@ class TestFactoryBuilder {
 	}
 
 	/**
-	 * @param \PHPUnit\Framework\TestCase $testCase
+	 * @param TestCase $testCase
 	 *
 	 * @return Deserializer
 	 */
-	private static function newFakeDataValueDeserializer( \PHPUnit\Framework\TestCase $testCase ) {
+	private static function newFakeDataValueDeserializer( TestCase $testCase ) {
 		$dataValueDeserializer = $testCase->getMockBuilder( Deserializer::class )->getMock();
 
 		$dataValueDeserializer->expects( $testCase->any() )
 			->method( 'deserialize' )
-			->with( $testCase->equalTo( array( 'type' => 'string', 'value' => 'foo' ) ) )
+			->with( $testCase->equalTo( [ 'type' => 'string', 'value' => 'foo' ] ) )
 			->will( $testCase->returnValue( new StringValue( 'foo' ) ) );
 
 		return $dataValueDeserializer;
 	}
 
-	public static function newDeserializerFactory( \PHPUnit\Framework\TestCase $testCase ) {
+	public static function newDeserializerFactory( TestCase $testCase ) {
 		return new DeserializerFactory(
 			self::newFakeDataValueDeserializer( $testCase ),
 			new BasicEntityIdParser()
@@ -62,7 +64,7 @@ class TestFactoryBuilder {
 	}
 
 	private static function newRealDataValueDeserializer() {
-		$dataValueClasses = array(
+		$dataValueClasses = [
 			'boolean' => 'DataValues\BooleanValue',
 			'number' => 'DataValues\NumberValue',
 			'string' => 'DataValues\StringValue',
@@ -73,7 +75,7 @@ class TestFactoryBuilder {
 			'quantity' => 'DataValues\QuantityValue',
 			'time' => 'DataValues\TimeValue',
 			'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
-		);
+		];
 
 		return new DataValueDeserializer( $dataValueClasses );
 	}
@@ -83,7 +85,7 @@ class TestFactoryBuilder {
 	}
 
 	public static function newCurrentDeserializerFactory() {
-		return new \Wikibase\DataModel\DeserializerFactory(
+		return new DataModelDeserializerFactory(
 			self::newRealDataValueDeserializer(),
 			new BasicEntityIdParser()
 		);

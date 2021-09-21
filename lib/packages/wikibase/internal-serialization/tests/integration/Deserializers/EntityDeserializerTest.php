@@ -26,7 +26,7 @@ class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $currentSerializer;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->deserializer = TestFactoryBuilder::newDeserializerFactoryWithDataValueSupport()->newEntityDeserializer();
 		$this->currentSerializer = TestFactoryBuilder::newSerializerFactory()->newEntitySerializer();
 	}

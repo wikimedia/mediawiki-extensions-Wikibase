@@ -21,15 +21,15 @@ class LegacyEntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $deserializer;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->deserializer = TestFactoryBuilder::newLegacyDeserializerFactory( $this )->newEntityDeserializer();
 	}
 
 	public function testGivenPropertySerialization_propertyIsReturned() {
-		$serialization = array(
+		$serialization = [
 			'entity' => 'P42',
 			'datatype' => 'foo',
-		);
+		];
 
 		$deserialized = $this->deserializer->deserialize( $serialization );
 
@@ -37,9 +37,9 @@ class LegacyEntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenItemSerialization_itemIsReturned() {
-		$serialization = array(
+		$serialization = [
 			'entity' => 'Q42',
-		);
+		];
 
 		$deserialized = $this->deserializer->deserialize( $serialization );
 
@@ -55,11 +55,11 @@ class LegacyEntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function invalidSerializationProvider() {
-		return array(
-			array( null ),
-			array( 5 ),
-			array( array( 'entity' => 'P42', 'datatype' => null ) ),
-		);
+		return [
+			[ null ],
+			[ 5 ],
+			[ [ 'entity' => 'P42', 'datatype' => null ] ],
+		];
 	}
 
 }

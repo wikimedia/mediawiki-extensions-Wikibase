@@ -20,24 +20,24 @@ class LegacyDeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $factory;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->factory = TestFactoryBuilder::newLegacyDeserializerFactory( $this );
 	}
 
 	public function testEntityDeserializer() {
 		$this->assertEquals(
 			new Property( new PropertyId( 'P1' ), null, 'foo' ),
-			$this->factory->newEntityDeserializer()->deserialize( array(
-				'entity' => array( 'property', 1 ),
+			$this->factory->newEntityDeserializer()->deserialize( [
+				'entity' => [ 'property', 1 ],
 				'datatype' => 'foo',
-			) )
+			] )
 		);
 	}
 
 	public function testSnakDeserializer() {
 		$this->assertEquals(
 			new PropertyNoValueSnak( 1 ),
-			$this->factory->newSnakDeserializer()->deserialize( array( 'novalue', 1 ) )
+			$this->factory->newSnakDeserializer()->deserialize( [ 'novalue', 1 ] )
 		);
 	}
 

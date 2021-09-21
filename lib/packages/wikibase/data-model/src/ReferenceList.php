@@ -248,7 +248,7 @@ class ReferenceList implements Countable, IteratorAggregate, Serializable {
 	 *
 	 * @param array $data
 	 */
-	public function __unserialize( array $data ) : void {
+	public function __unserialize( array $data ): void {
 		$this->references = $data['references'];
 	}
 

@@ -13,6 +13,8 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
+ * @covers DataValues\Serializers\DataValueSerializer
+ *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
