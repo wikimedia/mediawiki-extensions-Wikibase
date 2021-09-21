@@ -25,7 +25,7 @@ class EntitySourceDefinitionsConfigParser {
 		$sources = [];
 
 		foreach ( $sourceConfig as $sourceName => $sourceData ) {
-			if ( !array_key_exists( 'type', $sourceData ) || ( $sourceData['type'] === DatabaseEntitySource::TYPE ) ) {
+			if ( $this->isDatabaseSourceConfig( $sourceData ) ) {
 				$namespaceSlotData = [];
 				foreach ( $sourceData['entityNamespaces'] as $entityType => $namespaceSlot ) {
 
@@ -69,15 +69,14 @@ class EntitySourceDefinitionsConfigParser {
 				throw new InvalidArgumentException( 'Source name should be a string. Given: "' . $sourceName . '"' );
 			}
 
-			if ( !array_key_exists( 'baseUri', $sourceData ) ) {
-				throw new InvalidArgumentException( 'Source data should include "baseUri" element' );
+			if ( $this->isDatabaseSourceConfig( $sourceData ) ) {
+				$this->validateDatabaseSourceConfigFields( $sourceData, $sourceName );
+			} else {
+				Assert::parameterElementType( 'string', $sourceData[ 'entityTypes' ], 'entityTypes' );
 			}
 
-			if ( array_key_exists( 'repoDatabase', $sourceData ) ) {
-				$this->assertConfigArrayWellFormedWhenRepoDatabaseExist( $sourceData, $sourceName );
-			}
-			if ( array_key_exists( 'entityTypes', $sourceData ) ) {
-				Assert::parameterElementType( 'string', $sourceData[ 'entityTypes' ], 'entityTypes' );
+			if ( !array_key_exists( 'baseUri', $sourceData ) ) {
+				throw new InvalidArgumentException( 'Source data should include "baseUri" element' );
 			}
 
 			if ( !is_string( $sourceData['baseUri'] ) ) {
@@ -96,7 +95,7 @@ class EntitySourceDefinitionsConfigParser {
 		}
 	}
 
-	private function assertConfigArrayWellFormedWhenRepoDatabaseExist( $sourceData, $sourceName ) {
+	private function validateDatabaseSourceConfigFields( $sourceData, $sourceName ) {
 		if ( !is_string( $sourceData['repoDatabase'] ) && $sourceData['repoDatabase'] !== false ) {
 			throw new InvalidArgumentException(
 				'Symbolic database name of entity source "' . $sourceName . '" should be a string or false.'
@@ -160,6 +159,10 @@ class EntitySourceDefinitionsConfigParser {
 			$ns,
 			$m[3] ?? 'main'
 		];
+	}
+
+	private function isDatabaseSourceConfig( array $sourceData ): bool {
+		return !array_key_exists( 'type', $sourceData ) || ( $sourceData['type'] === DatabaseEntitySource::TYPE );
 	}
 
 }
