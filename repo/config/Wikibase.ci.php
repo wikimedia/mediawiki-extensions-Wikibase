@@ -31,3 +31,8 @@ $wgWBRepoSettings['taintedReferencesEnabled'] = true;
 
 // enable data value normalization
 $wgWBRepoSettings['tmpNormalizeDataValues'] = true;
+
+// enable Federated Properties. With only local (= db) Entity Sources, this should have no effect.
+$wgWBRepoSettings['federatedPropertiesEnabled'] = true;
+// Overriding the default source URL so that no default API Entity Source gets added via DefaultFederatedPropertiesEntitySourceAdder
+$wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = 'https://wikidata.beta.wmflabs.org/w/';
