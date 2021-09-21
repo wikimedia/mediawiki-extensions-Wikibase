@@ -16,7 +16,8 @@ class MwEraParser extends EraParser {
 
 	public const FORMAT_NAME = 'mw-era';
 
-	public const MESSAGE_KEY = 'wikibase-time-precision-BCE';
+	public const BCE_MESSAGE_KEY = 'wikibase-time-precision-BCE';
+	public const CE_MESSAGE_KEY = 'wikibase-time-precision-CE';
 
 	/**
 	 * @var Language
@@ -56,7 +57,33 @@ class MwEraParser extends EraParser {
 	 * @return string[]|null
 	 */
 	private function parseEra( $value, Language $language ) {
-		$msgText = $language->getMessage( self::MESSAGE_KEY );
+		$bceEra = $this->parseEraWithMessage( $value, $language->getMessage( self::BCE_MESSAGE_KEY ) );
+		if ( $bceEra !== null ) {
+			return [
+				self::BEFORE_COMMON_ERA,
+				$bceEra,
+			];
+		}
+
+		$ceEra = $this->parseEraWithMessage( $value, $language->getMessage( self::CE_MESSAGE_KEY ) );
+		if ( $ceEra !== null ) {
+			return [
+				self::COMMON_ERA,
+				$ceEra,
+			];
+		}
+
+		return null;
+	}
+
+	/**
+	 * Try to parse the era from the value using the given message text.
+	 *
+	 * @param string $value
+	 * @param string $msgText
+	 * @return string|null The value with the era stripped (if it can be parsed).
+	 */
+	private function parseEraWithMessage( string $value, string $msgText ): ?string {
 		if ( strpos( $msgText, '$1' ) === false || $msgText === '$1' ) {
 			return null;
 		}
@@ -67,10 +94,7 @@ class MwEraParser extends EraParser {
 			trim( $value ),
 			$matches
 		) ) {
-			return [
-				self::BEFORE_COMMON_ERA,
-				$matches[1]
-			];
+			return $matches[1];
 		}
 
 		return null;

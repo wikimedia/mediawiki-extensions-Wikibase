@@ -290,6 +290,13 @@ class MwTimeIsoFormatter implements ValueFormatter {
 				)
 				->inLanguage( $this->language )
 				->text();
+			} elseif ( strlen( $year ) <= 2 ) {
+				return wfMessage(
+					'wikibase-time-precision-CE',
+					$year
+				)
+				->inLanguage( $this->language )
+				->text();
 			} else {
 				return $year;
 			}
