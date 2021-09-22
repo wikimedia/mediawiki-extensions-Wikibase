@@ -2,8 +2,8 @@
 
 namespace Tests\Integration\Wikibase\InternalSerialization;
 
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\InternalSerialization\LegacyDeserializerFactory;
 
@@ -26,7 +26,7 @@ class LegacyDeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function testEntityDeserializer() {
 		$this->assertEquals(
-			new Property( new PropertyId( 'P1' ), null, 'foo' ),
+			new Property( new NumericPropertyId( 'P1' ), null, 'foo' ),
 			$this->factory->newEntityDeserializer()->deserialize( [
 				'entity' => [ 'property', 1 ],
 				'datatype' => 'foo',

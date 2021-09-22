@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 
 /**
@@ -20,7 +20,7 @@ class SuffixEntityIdParserTest extends TestCase {
 	public function validInputProvider() {
 		return [
 			'base URI' => [ 'http://acme.test/entity/', 'http://acme.test/entity/Q14', new ItemId( 'Q14' ) ],
-			'interwiki prefix' => [ 'wikidata:', 'wikidata:P14', new PropertyId( 'P14' ) ],
+			'interwiki prefix' => [ 'wikidata:', 'wikidata:P14', new NumericPropertyId( 'P14' ) ],
 		];
 	}
 

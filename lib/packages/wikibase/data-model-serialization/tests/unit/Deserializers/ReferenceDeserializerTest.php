@@ -6,7 +6,7 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Deserializers\ReferenceDeserializer;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -94,17 +94,17 @@ class ReferenceDeserializerTest extends DispatchableDeserializerTest {
 				]
 			) )
 			->will( $this->returnValue( new SnakList( [
-				new PropertyNoValueSnak( new PropertyId( 'P24' ) ),
-				new PropertySomeValueSnak( new PropertyId( 'P42' ) ),
-				new PropertyNoValueSnak( new PropertyId( 'P42' ) )
+				new PropertyNoValueSnak( new NumericPropertyId( 'P24' ) ),
+				new PropertySomeValueSnak( new NumericPropertyId( 'P42' ) ),
+				new PropertyNoValueSnak( new NumericPropertyId( 'P42' ) )
 			] ) ) );
 
 		$referenceDeserializer = new ReferenceDeserializer( $snaksDeserializerMock );
 
 		$reference = new Reference( new SnakList( [
-			new PropertySomeValueSnak( new PropertyId( 'P42' ) ),
-			new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
-			new PropertyNoValueSnak( new PropertyId( 'P24' ) )
+			new PropertySomeValueSnak( new NumericPropertyId( 'P42' ) ),
+			new PropertyNoValueSnak( new NumericPropertyId( 'P42' ) ),
+			new PropertyNoValueSnak( new NumericPropertyId( 'P24' ) )
 		] ) );
 
 		$serialization = [

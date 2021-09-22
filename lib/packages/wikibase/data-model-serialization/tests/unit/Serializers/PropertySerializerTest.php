@@ -4,8 +4,8 @@ namespace Tests\Wikibase\DataModel\Serializers;
 
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Serializers\PropertySerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
@@ -116,7 +116,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 			],
 		];
 
-		$property = new Property( new PropertyId( 'P42' ), null, 'string' );
+		$property = new Property( new NumericPropertyId( 'P42' ), null, 'string' );
 		$provider[] = [
 			[
 				'type' => 'property',

@@ -7,7 +7,7 @@ use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
 
 /**
@@ -64,7 +64,7 @@ class LegacyEntityIdDeserializerTest extends \PHPUnit\Framework\TestCase {
 			],
 
 			[
-				new PropertyId( 'P1337' ),
+				new NumericPropertyId( 'P1337' ),
 				[ 'property', 1337 ]
 			],
 		];
@@ -82,8 +82,8 @@ class LegacyEntityIdDeserializerTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[ new ItemId( 'Q1' ), 'Q1' ],
 			[ new ItemId( 'Q42' ), 'q42' ],
-			[ new PropertyId( 'P1337' ), 'P1337' ],
-			[ new PropertyId( 'P23' ), 'p23' ],
+			[ new NumericPropertyId( 'P1337' ), 'P1337' ],
+			[ new NumericPropertyId( 'P23' ), 'p23' ],
 		];
 	}
 

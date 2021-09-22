@@ -5,8 +5,8 @@ namespace Tests\Wikibase\InternalSerialization\Deserializers;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer;
@@ -82,7 +82,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 			'entity' => 'p42'
 		] );
 
-		$this->assertEquals( new PropertyId( 'p42' ), $property->getId() );
+		$this->assertEquals( new NumericPropertyId( 'p42' ), $property->getId() );
 	}
 
 	/**

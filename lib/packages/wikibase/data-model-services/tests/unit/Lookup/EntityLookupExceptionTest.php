@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 
 /**
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 class EntityLookupExceptionTest extends TestCase {
 
 	public function testConstructorWithJustAnId() {
-		$propertyId = new PropertyId( 'P42' );
+		$propertyId = new NumericPropertyId( 'P42' );
 		$exception = new EntityLookupException( $propertyId );
 
 		$this->assertEquals( $propertyId, $exception->getEntityId() );

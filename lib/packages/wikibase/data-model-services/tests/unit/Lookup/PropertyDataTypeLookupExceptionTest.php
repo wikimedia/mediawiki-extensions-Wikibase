@@ -4,7 +4,7 @@ namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 
 /**
@@ -16,7 +16,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 class PropertyDataTypeLookupExceptionTest extends TestCase {
 
 	public function testConstructorWithOnlyRequiredArguments() {
-		$propertyId = new PropertyId( 'P1' );
+		$propertyId = new NumericPropertyId( 'P1' );
 		$exception = new PropertyDataTypeLookupException( $propertyId );
 
 		$this->assertSame( $propertyId, $exception->getPropertyId() );
@@ -26,7 +26,7 @@ class PropertyDataTypeLookupExceptionTest extends TestCase {
 	}
 
 	public function testConstructorWithAllArguments() {
-		$propertyId = new PropertyId( 'P1' );
+		$propertyId = new NumericPropertyId( 'P1' );
 		$previous = new Exception( 'previous' );
 		$exception = new PropertyDataTypeLookupException( $propertyId, 'customMessage', $previous );
 

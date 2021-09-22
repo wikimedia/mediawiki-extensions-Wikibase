@@ -4,8 +4,8 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Deserializers\PropertyDeserializer;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -28,7 +28,7 @@ class PropertyDeserializerTest extends DispatchableDeserializerTest {
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( 'P42' ) )
-			->will( $this->returnValue( new PropertyId( 'P42' ) ) );
+			->will( $this->returnValue( new NumericPropertyId( 'P42' ) ) );
 
 		$termListDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
 		$termListDeserializerMock->expects( $this->any() )
@@ -121,7 +121,7 @@ class PropertyDeserializerTest extends DispatchableDeserializerTest {
 			],
 		];
 
-		$property = new Property( new PropertyId( 'P42' ), null, 'string' );
+		$property = new Property( new NumericPropertyId( 'P42' ), null, 'string' );
 		$provider[] = [
 			$property,
 			[

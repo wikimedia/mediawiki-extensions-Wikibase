@@ -3,7 +3,7 @@
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use Serializers\Serializer;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Serializers\ReferenceSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -73,18 +73,18 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 		$snakListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( new SnakList( [
-				new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
-				new PropertySomeValueSnak( new PropertyId( 'P24' ) ),
-				new PropertyNoValueSnak( new PropertyId( 'P24' ) )
+				new PropertyNoValueSnak( new NumericPropertyId( 'P42' ) ),
+				new PropertySomeValueSnak( new NumericPropertyId( 'P24' ) ),
+				new PropertyNoValueSnak( new NumericPropertyId( 'P24' ) )
 			] ) ) )
 			->will( $this->returnValue( [] ) );
 
 		$referenceSerializer = new ReferenceSerializer( $snakListSerializerMock );
 
 		$reference = new Reference( new SnakList( [
-			new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
-			new PropertySomeValueSnak( new PropertyId( 'P24' ) ),
-			new PropertyNoValueSnak( new PropertyId( 'P24' ) )
+			new PropertyNoValueSnak( new NumericPropertyId( 'P42' ) ),
+			new PropertySomeValueSnak( new NumericPropertyId( 'P24' ) ),
+			new PropertyNoValueSnak( new NumericPropertyId( 'P24' ) )
 		] ) );
 
 		$this->assertEquals(

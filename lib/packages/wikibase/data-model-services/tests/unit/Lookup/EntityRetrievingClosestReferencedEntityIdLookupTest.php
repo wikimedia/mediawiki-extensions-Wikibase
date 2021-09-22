@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -65,12 +65,12 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 	}
 
 	/**
-	 * @param PropertyId $via
+	 * @param NumericPropertyId $via
 	 * @param EntityId[] $to
 	 *
 	 * @return StatementList
 	 */
-	private function newReferencingStatementList( PropertyId $via, array $to ) {
+	private function newReferencingStatementList( NumericPropertyId $via, array $to ) {
 		$statementList = new StatementList();
 
 		foreach ( $to as $toId ) {
@@ -93,7 +93,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 		//     --- Q90 -> Q3
 		// Note: Q404 doesn't exist
 
-		$pSubclassOf = new PropertyId( 'P599' );
+		$pSubclassOf = new NumericPropertyId( 'P599' );
 		$q1 = new ItemId( 'Q1' );
 		$q5 = new ItemId( 'Q5' );
 		$q599 = new ItemId( 'Q599' );
@@ -135,7 +135,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 		//   \           \
 		//    --- Q90     --- Q90
 
-		$pSubclassOf = new PropertyId( 'P599' );
+		$pSubclassOf = new NumericPropertyId( 'P599' );
 		$q1 = new ItemId( 'Q1' );
 		$q5 = new ItemId( 'Q5' );
 		$q90 = new ItemId( 'Q90' );
@@ -156,7 +156,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 	}
 
 	public function provideGetReferencedEntityIdNoError() {
-		$pSubclassOf = new PropertyId( 'P599' );
+		$pSubclassOf = new NumericPropertyId( 'P599' );
 		$q1 = new ItemId( 'Q1' );
 		$q3 = new ItemId( 'Q3' );
 		$q5 = new ItemId( 'Q5' );
@@ -182,7 +182,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 				0,
 				$referencingEntityStructureLookup,
 				$q1,
-				new PropertyId( 'P12345' ),
+				new NumericPropertyId( 'P12345' ),
 				[ $q5 ]
 			],
 			'from id does not exist' => [
@@ -278,7 +278,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 		$maxDepth,
 		EntityLookup $entityLookup,
 		EntityId $fromId,
-		PropertyId $propertyId,
+		NumericPropertyId $propertyId,
 		array $toIds
 	) {
 		// Number of prefetching operations to expect (Note: We call getReferencedEntityId twice)
@@ -327,7 +327,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 		$maxDepth,
 		EntityLookup $entityLookup,
 		EntityId $fromId,
-		PropertyId $propertyId,
+		NumericPropertyId $propertyId,
 		array $toIds
 	) {
 		$lookup = new EntityRetrievingClosestReferencedEntityIdLookup(
@@ -373,7 +373,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 		$maxDepth,
 		EntityLookup $entityLookup,
 		EntityId $fromId,
-		PropertyId $propertyId,
+		NumericPropertyId $propertyId,
 		array $toIds
 	) {
 		$lookup = new EntityRetrievingClosestReferencedEntityIdLookup(
@@ -395,8 +395,8 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 
 	public function provideGetReferencedEntityIdTestInvalidSnak() {
 		$q42 = new ItemId( 'Q42' );
-		$p1 = new PropertyId( 'P1' );
-		$p2 = new PropertyId( 'P2' );
+		$p1 = new NumericPropertyId( 'P1' );
+		$p2 = new NumericPropertyId( 'P2' );
 		$statementList = new StatementList();
 
 		$statementList->addStatement(
@@ -432,7 +432,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 	public function testGetReferencedEntityIdTestInvalidSnak(
 		EntityLookup $entityLookup,
 		EntityId $fromId,
-		PropertyId $propertyId,
+		NumericPropertyId $propertyId,
 		array $toIds
 	) {
 		$lookup = new EntityRetrievingClosestReferencedEntityIdLookup(
@@ -462,7 +462,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 		);
 
 		try {
-			$lookup->getReferencedEntityId( $q2013, new PropertyId( 'P31' ), [ new ItemId( 'Q154187' ) ] );
+			$lookup->getReferencedEntityId( $q2013, new NumericPropertyId( 'P31' ), [ new ItemId( 'Q154187' ) ] );
 		} catch ( ReferencedEntityIdLookupException $exception ) {
 			$this->assertInstanceOf( EntityLookupException::class, $exception->getPrevious() );
 

@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 
@@ -20,14 +20,14 @@ class InProcessCachingDataTypeLookupTest extends TestCase {
 
 		$decoratedLookup->expects( $this->once() )
 			->method( 'getDataTypeIdForProperty' )
-			->with( new PropertyId( 'P1' ) )
+			->with( new NumericPropertyId( 'P1' ) )
 			->will( $this->returnValue( 'string' ) );
 
 		$cachingLookup = new InProcessCachingDataTypeLookup( $decoratedLookup );
 
 		$this->assertSame(
 			'string',
-			$cachingLookup->getDataTypeIdForProperty( new PropertyId( 'P1' ) )
+			$cachingLookup->getDataTypeIdForProperty( new NumericPropertyId( 'P1' ) )
 		);
 	}
 
@@ -39,14 +39,14 @@ class InProcessCachingDataTypeLookupTest extends TestCase {
 			->will( $this->returnValue( 'string' ) );
 
 		$cachingLookup = new InProcessCachingDataTypeLookup( $decoratedLookup );
-		$cachingLookup->getDataTypeIdForProperty( new PropertyId( 'P1' ) );
+		$cachingLookup->getDataTypeIdForProperty( new NumericPropertyId( 'P1' ) );
 
 		$decoratedLookup->expects( $this->never() )
 			->method( 'getDataTypeIdForProperty' );
 
 		$this->assertSame(
 			'string',
-			$cachingLookup->getDataTypeIdForProperty( new PropertyId( 'P1' ) )
+			$cachingLookup->getDataTypeIdForProperty( new NumericPropertyId( 'P1' ) )
 		);
 	}
 

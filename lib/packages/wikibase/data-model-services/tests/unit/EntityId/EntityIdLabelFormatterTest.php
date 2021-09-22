@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Services\Tests\EntityId;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Services\Lookup\LabelLookup;
@@ -31,7 +31,7 @@ class EntityIdLabelFormatterTest extends TestCase {
 
 		$argLists[] = [ new ItemId( 'Q9001' ), 'en', 'Q9001' ];
 
-		$argLists[] = [ new PropertyId( 'P9001' ), 'en', 'P9001' ];
+		$argLists[] = [ new NumericPropertyId( 'P9001' ), 'en', 'P9001' ];
 
 		$argLists['unresolved-redirect'] = [ new ItemId( 'Q23' ), 'en', 'Q23' ];
 

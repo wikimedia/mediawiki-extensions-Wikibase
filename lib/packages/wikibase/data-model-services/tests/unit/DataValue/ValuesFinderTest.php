@@ -6,7 +6,7 @@ use DataValues\BooleanValue;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\DataValue\ValuesFinder;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -31,10 +31,10 @@ class ValuesFinderTest extends TestCase {
 	public function snaksProvider() {
 		$argLists = [];
 
-		$p23 = new PropertyId( 'p23' );
-		$p42 = new PropertyId( 'p42' );
-		$p44 = new PropertyId( 'p44' );
-		$p404 = new PropertyId( 'P404' );
+		$p23 = new NumericPropertyId( 'p23' );
+		$p42 = new NumericPropertyId( 'p42' );
+		$p44 = new NumericPropertyId( 'p44' );
+		$p404 = new NumericPropertyId( 'P404' );
 
 		$argLists['empty'] = [
 			[],
@@ -113,7 +113,7 @@ class ValuesFinderTest extends TestCase {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 
 		foreach ( self::$propertyDataTypes as $propertyId => $dataType ) {
-			$dataTypeLookup->setDataTypeForProperty( new PropertyId( $propertyId ), $dataType );
+			$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( $propertyId ), $dataType );
 		}
 
 		return new ValuesFinder( $dataTypeLookup );
