@@ -70,7 +70,7 @@ class ByPropertyIdGrouper {
 	 */
 	public function getPropertyIds() {
 		return array_map(
-			function( $propertyId ) {
+			static function( $propertyId ) {
 				return new NumericPropertyId( $propertyId );
 			},
 			array_keys( $this->byPropertyId )

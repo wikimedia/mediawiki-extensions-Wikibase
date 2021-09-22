@@ -49,7 +49,7 @@ class ReferencedEntityIdLookupException extends RuntimeException {
 		$this->toIds = $toIds;
 
 		$targets = array_map(
-			function ( EntityId $entityId ) {
+			static function ( EntityId $entityId ) {
 				return $entityId->getSerialization();
 			},
 			$toIds

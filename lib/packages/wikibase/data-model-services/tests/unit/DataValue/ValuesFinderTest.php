@@ -102,7 +102,7 @@ class ValuesFinderTest extends TestCase {
 
 		$actual = $valuesFinder->findFromSnaks( $snaks, $dataType );
 
-		$actual = array_map( function( DataValue $dataValue ) {
+		$actual = array_map( static function( DataValue $dataValue ) {
 			return $dataValue->getValue();
 		}, $actual );
 
@@ -156,7 +156,7 @@ class ValuesFinderTest extends TestCase {
 	private function objectAssociativeSort( array &$array ) {
 		uasort(
 			$array,
-			function ( $a, $b ) {
+			static function ( $a, $b ) {
 				return serialize( $a ) > serialize( $b ) ? 1 : -1;
 			}
 		);

@@ -393,7 +393,7 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 
 	public function testCountForEmptyList() {
 		$list = new StatementList();
-		$this->assertSame( 0, count( $list ) );
+		$this->assertCount( 0, $list );
 		$this->assertSame( 0, $list->count() );
 	}
 

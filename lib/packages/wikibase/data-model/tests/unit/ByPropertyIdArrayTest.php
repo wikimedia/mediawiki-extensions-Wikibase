@@ -89,7 +89,7 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 		$lists[] = $snaks;
 
 		$lists[] = array_map(
-			function( Snak $snak ) {
+			static function( Snak $snak ) {
 				return new Statement( $snak );
 			},
 			$snaks
@@ -118,7 +118,7 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		return array_map(
-			function( Snak $snak ) {
+			static function( Snak $snak ) {
 				return new Statement( $snak );
 			},
 			$snaks

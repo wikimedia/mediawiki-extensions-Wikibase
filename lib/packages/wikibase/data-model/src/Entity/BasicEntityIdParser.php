@@ -43,10 +43,10 @@ class BasicEntityIdParser implements EntityIdParser {
 	 */
 	public static function getBuilders() {
 		return [
-			ItemId::PATTERN => function( $serialization ) {
+			ItemId::PATTERN => static function( $serialization ) {
 				return new ItemId( $serialization );
 			},
-			NumericPropertyId::PATTERN => function( $serialization ) {
+			NumericPropertyId::PATTERN => static function( $serialization ) {
 				return new NumericPropertyId( $serialization );
 			},
 		];

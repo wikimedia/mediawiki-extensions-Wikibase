@@ -46,7 +46,7 @@ class AliasGroup implements Countable {
 					'trim',
 					array_filter(
 						$aliases,
-						function( $alias ) {
+						static function( $alias ) {
 							if ( !is_string( $alias ) ) {
 								throw new InvalidArgumentException( '$aliases must be an array of strings' );
 							}

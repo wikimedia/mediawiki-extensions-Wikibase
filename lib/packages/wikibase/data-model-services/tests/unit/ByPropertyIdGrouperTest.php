@@ -123,7 +123,7 @@ class ByPropertyIdGrouperTest extends TestCase {
 	public function testGetByPropertyId( array $propertyIdProviders, $propertyId, array $expectedValues ) {
 		$byPropertyIdGrouper = new ByPropertyIdGrouper( $propertyIdProviders );
 		$values = $byPropertyIdGrouper->getByPropertyId( new NumericPropertyId( $propertyId ) );
-		array_walk( $values, function( Snak &$value ) {
+		array_walk( $values, static function( Snak &$value ) {
 			$value = $value->getType();
 		} );
 		$this->assertEquals( $expectedValues, $values );

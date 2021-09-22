@@ -140,7 +140,7 @@ class StatementByGuidMapTest extends \PHPUnit\Framework\TestCase {
 			$this->newStatement( 2, 'other guid' )
 		] );
 
-		$this->assertSame( 2, count( $statements ) );
+		$this->assertCount( 2, $statements );
 	}
 
 	public function testMapCanBeIteratedOver() {

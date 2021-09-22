@@ -19,17 +19,17 @@ class EntityIdComposerTest extends TestCase {
 
 	private function getComposer() {
 		return new EntityIdComposer( [
-			'numeric-item' => function( $repositoryName, $uniquePart ) {
+			'numeric-item' => static function( $repositoryName, $uniquePart ) {
 				return new ItemId( 'Q' . $uniquePart );
 			},
-			'custom-item' => function( $repositoryName, $uniquePart ) {
+			'custom-item' => static function( $repositoryName, $uniquePart ) {
 				return new ItemId( 'Q100' . $uniquePart );
 			},
 		] );
 	}
 
 	public function invalidConstructorArgumentProvider() {
-		$callable = function() {
+		$callable = static function() {
 		};
 
 		return [
@@ -50,7 +50,7 @@ class EntityIdComposerTest extends TestCase {
 
 	public function testGivenInvalidCallback_buildFails() {
 		$composer = new EntityIdComposer( [
-			'item' => function() {
+			'item' => static function() {
 				return null;
 			},
 		] );

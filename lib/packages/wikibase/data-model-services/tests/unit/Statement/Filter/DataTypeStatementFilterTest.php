@@ -26,7 +26,7 @@ class DataTypeStatementFilterTest extends TestCase {
 
 		$dataTypeLookup->expects( $this->once() )
 			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnCallback( function( PropertyId $propertyId ) {
+			->will( $this->returnCallback( static function( PropertyId $propertyId ) {
 				$id = $propertyId->getSerialization();
 
 				if ( $id === 'P3' ) {

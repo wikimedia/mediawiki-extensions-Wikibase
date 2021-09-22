@@ -44,7 +44,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 			$expectedNumberOfGetEntityCalls === null ? $this->any() : $this->exactly( $expectedNumberOfGetEntityCalls )
 		)
 			->method( 'getEntity' )
-			->willReturnCallback( function ( EntityId $entityId ) use ( $entityLookup ) {
+			->willReturnCallback( static function ( EntityId $entityId ) use ( $entityLookup ) {
 				return $entityLookup->getEntity( $entityId );
 			} );
 

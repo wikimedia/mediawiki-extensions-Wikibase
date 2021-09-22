@@ -64,7 +64,7 @@ class ItemIdSet implements IteratorAggregate, Countable {
 	public function getSerializations() {
 		return array_values(
 			array_map(
-				function( ItemId $id ) {
+				static function( ItemId $id ) {
 					return $id->getSerialization();
 				},
 				$this->ids

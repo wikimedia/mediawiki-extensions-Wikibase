@@ -143,7 +143,7 @@ class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 			$array->removeReference( $element );
 
 			$this->assertFalse( $array->hasReference( $element ) );
-			$this->assertSame( --$elementCount, count( $array ) );
+			$this->assertCount( --$elementCount, $array );
 		}
 		if ( $elementCount === 0 ) {
 			$this->assertTrue( true );

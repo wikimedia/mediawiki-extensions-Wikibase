@@ -35,7 +35,7 @@ class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 		$legacyDeserializer->expects( $this->any() )
 			->method( 'isDeserializerFor' )
-			->will( $this->returnCallback( function( $serialization ) {
+			->will( $this->returnCallback( static function( $serialization ) {
 				return array_key_exists( 'entity', $serialization );
 			} ) );
 
@@ -54,7 +54,7 @@ class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 		$currentDeserializer->expects( $this->any() )
 			->method( 'isDeserializerFor' )
-			->will( $this->returnCallback( function( $serialization ) {
+			->will( $this->returnCallback( static function( $serialization ) {
 				return array_key_exists( 'id', $serialization );
 			} ) );
 

@@ -90,7 +90,7 @@ class ItemDiffer implements EntityDifferStrategy {
 			$linksInDiffFormat[$siteLink->getSiteId()] = [
 				'name' => $siteLink->getPageName(),
 				'badges' => array_map(
-					function( ItemId $id ) {
+					static function( ItemId $id ) {
 						return $id->getSerialization();
 					},
 					$siteLink->getBadges()

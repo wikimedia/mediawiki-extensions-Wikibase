@@ -64,7 +64,7 @@ class SiteLinkListPatcher {
 		}
 
 		return array_map(
-			function( $idSerialization ) {
+			static function( $idSerialization ) {
 				return new ItemId( $idSerialization );
 			},
 			$siteLinkData['badges']
@@ -78,7 +78,7 @@ class SiteLinkListPatcher {
 			$linksInDiffFormat[$siteLink->getSiteId()] = [
 				'name' => $siteLink->getPageName(),
 				'badges' => array_map(
-					function( ItemId $id ) {
+					static function( ItemId $id ) {
 						return $id->getSerialization();
 					},
 					$siteLink->getBadges()

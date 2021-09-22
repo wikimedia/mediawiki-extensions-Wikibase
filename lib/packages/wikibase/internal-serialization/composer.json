@@ -39,7 +39,7 @@
 		"data-values/geo": ">=1.0 <4.0",
 		"data-values/number": ">=0.1 <0.10",
 		"data-values/time": ">=0.1 <0.9",
-		"mediawiki/mediawiki-codesniffer": "34.0.0"
+		"mediawiki/mediawiki-codesniffer": "37.0.0"
 	},
 	"autoload": {
 		"psr-4": {

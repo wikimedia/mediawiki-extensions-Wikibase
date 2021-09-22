@@ -25,7 +25,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 		$termListSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
 		$termListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnCallback( function( TermList $termList ) {
+			->will( $this->returnCallback( static function( TermList $termList ) {
 				if ( $termList->isEmpty() ) {
 					return [];
 				}
@@ -38,7 +38,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 		$aliasGroupListSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
 		$aliasGroupListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnCallback( function( AliasGroupList $aliasGroupList ) {
+			->will( $this->returnCallback( static function( AliasGroupList $aliasGroupList ) {
 				if ( $aliasGroupList->isEmpty() ) {
 					return [];
 				}
@@ -51,7 +51,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 		$statementListSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
 		$statementListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnCallback( function( StatementList $statementList ) {
+			->will( $this->returnCallback( static function( StatementList $statementList ) {
 				if ( $statementList->isEmpty() ) {
 					return [];
 				}

@@ -30,7 +30,7 @@ class DisabledEntityTypesEntityLookupTest extends TestCase {
 
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnCallback( function( EntityId $id ) {
+			->will( $this->returnCallback( static function( EntityId $id ) {
 				return $id->getSerialization();
 			} ) );
 

@@ -111,7 +111,7 @@ class ByPropertyIdArray extends ArrayObject {
 		$this->assertIndexIsBuild();
 
 		return array_map(
-			function( $serializedPropertyId ) {
+			static function( $serializedPropertyId ) {
 				return new NumericPropertyId( $serializedPropertyId );
 			},
 			array_keys( $this->byId )
