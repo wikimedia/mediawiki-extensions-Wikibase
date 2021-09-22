@@ -15,3 +15,5 @@ CREATE TABLE /*_*/wb_changes (
 CREATE INDEX wb_changes_change_time ON /*_*/wb_changes (change_time);
 
 CREATE INDEX wb_changes_change_revision_id ON /*_*/wb_changes (change_revision_id);
+
+CREATE INDEX change_object_id ON /*_*/wb_changes (change_object_id);

@@ -90,6 +90,12 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			'chd_seen',
 			$this->getUpdateScriptPath( 'patch-wb_changes_dispatch-make-chd_seen-unsigned', $db->getType() )
 		);
+
+		$updater->addExtensionIndex(
+			'wb_changes',
+			'change_object_id',
+			$this->getUpdateScriptPath( 'patch-wb_changes-change_object_id-index', $db->getType() )
+		);
 	}
 
 	private function updateChangesSubscriptionTable( DatabaseUpdater $dbUpdater ): void {
