@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * @license GPL-2.0-or-later
@@ -48,9 +49,11 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 		}
 
 		if ( !$db || $db === DB_REPLICA ) {
-			$dbr = $this->db->connections()->getReadConnectionRef();
+			$dbr = $this->db->connections()->getReadConnection();
 		} elseif ( $db === DB_PRIMARY ) {
-			$dbr = $this->db->connections()->getWriteConnectionRef();
+			// CONN_TRX_AUTOCOMMIT: ensure we can read rows (i.e. get conflicts)
+			// that were committed after the main transaction started (T291377)
+			$dbr = $this->db->connections()->getWriteConnection( ILoadBalancer::CONN_TRX_AUTOCOMMIT );
 		} else {
 			throw new InvalidArgumentException( '$db must be either DB_REPLICA or DB_PRIMARY' );
 		}
@@ -81,6 +84,8 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 			], $dbr::LIST_AND ),
 			__METHOD__
 		);
+
+		$this->db->connections()->releaseConnection( $dbr );
 
 		$conflicts = [];
 
