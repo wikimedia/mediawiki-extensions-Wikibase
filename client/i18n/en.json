@@ -63,7 +63,7 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "All {{WBREPONAME}} edits are designated as \"minor\", so the \"{{WBREPONAME}} edits\" filter conflicts with the \"Non-minor edits\" filter.",
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "All {{WBREPONAME}} edits are designated as \"minor\", so the \"{{WBREPONAME}} edits\" filter conflicts with the \"Non-minor edits\" filter.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "All {{WBREPONAME}} edits are designated as \"minor\", so the \"{{WBREPONAME}} edits\" filter conflicts with the \"Non-minor edits\" filter.",
-	"wikibase-replicationnote": "Please notice that it can take several minutes until the changes are visible on all wikis.",
+	"wikibase-replicationnote": "Please note that it can take several minutes until the changes are visible on all wikis.",
 	"wikibase-watchlist-show-changes-pref": "Show {{WBREPONAME}} edits in your watchlist",
 	"wikibase-error-deserialize-error": "Failed to deserialize data.",
 	"wikibase-error-serialize-error": "Failed to serialize data.",
