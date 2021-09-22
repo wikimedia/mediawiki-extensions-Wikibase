@@ -73,7 +73,7 @@ class SqlChangeStore implements ChangeStore {
 		$dbw = $this->repoDomainDb->connections()->getWriteConnection();
 
 		$dbw->insert( 'wb_changes', $values, __METHOD__ );
-		$change->setField( 'id', $dbw->insertId() );
+		$change->setField( ChangeRow::ID, $dbw->insertId() );
 
 		$this->repoDomainDb->connections()->releaseConnection( $dbw );
 	}
@@ -86,10 +86,11 @@ class SqlChangeStore implements ChangeStore {
 	private function getValues( ChangeRow $change ) {
 		$type = $change->getType();
 		// TODO: Avoid depending on hasField here.
-		$time = $change->hasField( 'time' ) ? $change->getTime() : wfTimestampNow();
-		$objectId = $change->hasField( 'object_id' ) ? $change->getObjectId() : '';
+		$time = $change->hasField( ChangeRow::TIME ) ? $change->getTime() : wfTimestampNow();
+		$objectId = $change->hasField( ChangeRow::OBJECT_ID ) ? $change->getObjectId() : '';
 		// TODO: Introduce dedicated getter for revision ID.
-		$revisionId = $change->hasField( 'revision_id' ) ? $change->getField( 'revision_id' ) : '0';
+		$revisionId = $change->hasField( ChangeRow::REVISION_ID ) ?
+			$change->getField( ChangeRow::REVISION_ID ) : '0';
 		$userId = $change->getUserId();
 		$serializedInfo = $change->getSerializedInfo();
 

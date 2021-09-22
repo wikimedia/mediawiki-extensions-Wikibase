@@ -14,6 +14,7 @@ use TitleFactory;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
@@ -92,7 +93,7 @@ class InjectRCRecordsJob extends Job {
 		// Note: Avoid serializing Change objects. Original changes can be restored
 		// from $changeData['info']['change-ids'], see getChange().
 		$changeData = $change->getFields();
-		$changeData['info'] = $change->getSerializedInfo( [ 'changes' ] );
+		$changeData[ChangeRow::INFO] = $change->getSerializedInfo( [ 'changes' ] );
 
 		// See JobQueueChangeNotificationSender::getJobSpecification for relevant root job parameters.
 		$params = array_merge( $rootJobParams, [
@@ -228,7 +229,7 @@ class InjectRCRecordsJob extends Job {
 			if ( isset( $info['change-ids'] ) && !isset( $info['changes'] ) ) {
 				$children = $this->changeLookup->loadByChangeIds( $info['change-ids'] );
 				$info['changes'] = $children;
-				$change->setField( 'info', $info );
+				$change->setField( ChangeRow::INFO, $info );
 			}
 		}
 

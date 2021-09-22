@@ -85,14 +85,14 @@ class EntityChangeFactory {
 
 		$instance->setEntityId( $entityId );
 
-		if ( !$instance->hasField( 'info' ) ) {
-			$instance->setField( 'info', [] );
+		if ( !$instance->hasField( ChangeRow::INFO ) ) {
+			$instance->setField( ChangeRow::INFO, [] );
 		}
 
 		// Note: the change type determines how newForChangeType will
 		// instantiate and handle the change
 		$type = 'wikibase-' . $entityId->getEntityType() . '~' . $action;
-		$instance->setField( 'type', $type );
+		$instance->setField( ChangeRow::TYPE, $type );
 
 		return $instance;
 	}
@@ -124,11 +124,11 @@ class EntityChangeFactory {
 	 * @return EntityChange
 	 */
 	public function newFromFieldData( array $fields ): EntityChange {
-		Assert::parameter( isset( $fields['type'] ), '$fields[\'type\']', 'must be set' );
-		Assert::parameter( isset( $fields['object_id'] ), '$fields[\'object_id\']', 'must be set' );
+		Assert::parameter( isset( $fields[ChangeRow::TYPE] ), '$fields[\'type\']', 'must be set' );
+		Assert::parameter( isset( $fields[ChangeRow::OBJECT_ID] ), '$fields[\'object_id\']', 'must be set' );
 
-		$entityId = $this->idParser->parse( $fields['object_id'] );
-		return $this->newForChangeType( $fields['type'], $entityId, $fields );
+		$entityId = $this->idParser->parse( $fields[ChangeRow::OBJECT_ID] );
+		return $this->newForChangeType( $fields[ChangeRow::TYPE], $entityId, $fields );
 	}
 
 	/**

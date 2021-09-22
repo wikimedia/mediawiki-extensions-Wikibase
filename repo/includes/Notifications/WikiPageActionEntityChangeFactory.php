@@ -10,6 +10,7 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Repo\Content\EntityContent;
@@ -152,11 +153,11 @@ class WikiPageActionEntityChangeFactory {
 	 */
 	private function setEntityChangeRevisionInfo( EntityChange $change, RevisionRecord $revision, int $centralUserId ): void {
 		$change->setFields( [
-			'revision_id' => $revision->getId(),
-			'time' => $revision->getTimestamp(),
+			ChangeRow::REVISION_ID => $revision->getId(),
+			ChangeRow::TIME => $revision->getTimestamp(),
 		] );
 
-		if ( !$change->hasField( 'object_id' ) ) {
+		if ( !$change->hasField( ChangeRow::OBJECT_ID ) ) {
 			throw new Exception(
 				'EntityChange::setRevisionInfo() called without calling setEntityId() first!'
 			);

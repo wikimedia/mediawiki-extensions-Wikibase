@@ -31,14 +31,14 @@ class EntityChange extends DiffChange {
 	 * @return string
 	 */
 	public function getType() {
-		return $this->getField( 'type' );
+		return $this->getField( ChangeRow::TYPE );
 	}
 
 	/**
 	 * @return EntityId
 	 */
 	public function getEntityId() {
-		if ( !$this->entityId && $this->hasField( 'object_id' ) ) {
+		if ( !$this->entityId && $this->hasField( ChangeRow::OBJECT_ID ) ) {
 			// FIXME: this should not happen
 			$this->logger->warning( 'object_id set in EntityChange, but not entityId' );
 			$idParser = new BasicEntityIdParser();
@@ -54,7 +54,7 @@ class EntityChange extends DiffChange {
 	 */
 	public function setEntityId( EntityId $entityId ) {
 		$this->entityId = $entityId;
-		$this->setField( 'object_id', $entityId->getSerialization() );
+		$this->setField( ChangeRow::OBJECT_ID, $entityId->getSerialization() );
 	}
 
 	/**
@@ -74,14 +74,14 @@ class EntityChange extends DiffChange {
 	public function getMetadata( $cache = 'no' ) {
 		$info = $this->getInfo( $cache );
 
-		if ( array_key_exists( 'metadata', $info ) ) {
+		if ( array_key_exists( ChangeRow::METADATA, $info ) ) {
 			return array_merge(
 				[ // these may be expected to be set by consuming code
 					'page_id' => 0,
 					'rev_id' => 0,
 					'parent_id' => 0,
 				],
-				$info['metadata']
+				$info[ChangeRow::METADATA]
 			);
 		}
 
@@ -117,8 +117,8 @@ class EntityChange extends DiffChange {
 		}
 
 		$info = $this->getInfo();
-		$info['metadata'] = $metadata;
-		$this->setField( 'info', $info );
+		$info[ChangeRow::METADATA] = $metadata;
+		$this->setField( ChangeRow::INFO, $info );
 	}
 
 	/**
@@ -151,7 +151,7 @@ class EntityChange extends DiffChange {
 	 */
 	public function addUserMetadata( int $repoUserId, string $repoUserText, int $centralUserId ) {
 		$this->setFields( [
-			'user_id' => $repoUserId,
+			ChangeRow::USER_ID => $repoUserId,
 		] );
 
 		$metadata = [
@@ -166,7 +166,7 @@ class EntityChange extends DiffChange {
 	 * @param string $timestamp Timestamp in TS_MW format
 	 */
 	public function setTimestamp( $timestamp ) {
-		$this->setField( 'time', $timestamp );
+		$this->setField( ChangeRow::TIME, $timestamp );
 	}
 
 	/**
@@ -181,11 +181,11 @@ class EntityChange extends DiffChange {
 
 		$info = array_diff_key( $info, array_flip( $skipKeys ) );
 
-		if ( isset( $info['compactDiff'] ) ) {
-			$diff = $info['compactDiff'];
+		if ( isset( $info[ChangeRow::COMPACT_DIFF] ) ) {
+			$diff = $info[ChangeRow::COMPACT_DIFF];
 
 			if ( $diff instanceof EntityDiffChangedAspects ) {
-				$info['compactDiff'] = $diff->serialize();
+				$info[ChangeRow::COMPACT_DIFF] = $diff->serialize();
 			}
 		}
 
@@ -220,11 +220,11 @@ class EntityChange extends DiffChange {
 
 		$info = parent::unserializeInfo( $serialization );
 
-		if ( isset( $info['compactDiff'] ) && is_string( $info['compactDiff'] ) ) {
+		if ( isset( $info[ChangeRow::COMPACT_DIFF] ) && is_string( $info[ChangeRow::COMPACT_DIFF] ) ) {
 			$aspectsFactory = new EntityDiffChangedAspectsFactory( $this->logger );
 			$compactDiff = $aspectsFactory->newEmpty();
-			$compactDiff->unserialize( $info['compactDiff'] );
-			$info['compactDiff'] = $compactDiff;
+			$compactDiff->unserialize( $info[ChangeRow::COMPACT_DIFF] );
+			$info[ChangeRow::COMPACT_DIFF] = $compactDiff;
 		}
 
 		return $info;
