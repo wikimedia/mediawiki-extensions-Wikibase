@@ -14,28 +14,25 @@ use Wikibase\DataModel\Entity\EntityId;
 class UniquenessViolation extends Error {
 
 	/**
-	 * @var EntityId
+	 * @var EntityId|null
 	 */
 	private $conflictingEntity;
 
 	/**
 	 * @see Error::__construct()
 	 *
-	 * @param EntityId $conflictingEntity The entity causing the conflict
+	 * @param EntityId|null $conflictingEntity The entity causing the conflict, if known
 	 * @param string $text
 	 * @param string $code
 	 * @param mixed[] $params
 	 */
-	public function __construct( EntityId $conflictingEntity, $text, $code, array $params ) {
+	public function __construct( ?EntityId $conflictingEntity, $text, $code, array $params ) {
 		parent::__construct( $text, Error::SEVERITY_ERROR, null, $code, $params );
 
 		$this->conflictingEntity = $conflictingEntity;
 	}
 
-	/**
-	 * @return EntityId
-	 */
-	public function getConflictingEntity() {
+	public function getConflictingEntity(): ?EntityId {
 		return $this->conflictingEntity;
 	}
 

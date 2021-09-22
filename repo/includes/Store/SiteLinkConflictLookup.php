@@ -17,7 +17,7 @@ interface SiteLinkConflictLookup {
 	 * currently in the store. The array is empty if there are no such conflicts.
 	 *
 	 * The items in the return array are arrays with the following elements:
-	 * - ItemId itemId
+	 * - ItemId|null itemId (null if not known)
 	 * - string siteId
 	 * - string sitePage
 	 *

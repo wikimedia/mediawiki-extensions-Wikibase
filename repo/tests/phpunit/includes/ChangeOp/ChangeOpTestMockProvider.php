@@ -328,6 +328,12 @@ class ChangeOpTestMockProvider {
 							'itemId' => new ItemId( 'Q666' ),
 							'sitePage' => $link->getPageName(),
 						];
+					} elseif ( $link->getPageName() === 'DUPE-UNKNOWN' ) {
+						$conflicts[] = [
+							'siteId' => $link->getSiteId(),
+							'itemId' => null,
+							'sitePage' => $link->getPageName(),
+						];
 					}
 				}
 
