@@ -292,10 +292,6 @@
 		"unresolved-property-category",
 		"connected-redirect-category"
 	],
-	"AutoloadClasses": {
-		"Wikibase\\DataModel\\DeserializerFactory": "lib/packages/wikibase/data-model-serialization/src/DeserializerFactory.php",
-		"Wikibase\\DataModel\\SerializerFactory": "lib/packages/wikibase/data-model-serialization/src/SerializerFactory.php"
-	},
 	"AutoloadNamespaces": {
 		"Wikibase\\Client\\": "client/includes/",
 		"Wikibase\\Lib\\": "lib/includes/",

@@ -15,5 +15,5 @@ namespace Wikibase\InternalSerialization;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SerializerFactory extends \Wikibase\DataModel\SerializerFactory {
+class SerializerFactory extends \Wikibase\DataModel\Serializers\SerializerFactory {
 }

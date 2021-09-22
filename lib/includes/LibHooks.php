@@ -29,10 +29,6 @@ final class LibHooks implements
 	public static function onRegistration(): void {
 		global $wgResourceModules;
 
-		# FIXME: Hack for T289040
-		require_once __DIR__ . '/../../lib/packages/wikibase/data-model-serialization/src/DeserializerFactory.php';
-		require_once __DIR__ . '/../../lib/packages/wikibase/data-model-serialization/src/SerializerFactory.php';
-
 		$wgResourceModules = array_merge(
 			$wgResourceModules,
 			require __DIR__ . '/../resources/Resources.php'

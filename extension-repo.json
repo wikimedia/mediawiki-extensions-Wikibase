@@ -568,10 +568,6 @@
 		"DispatchChangeDeletionNotification": "Wikibase\\Repo\\ChangeModification\\DispatchChangeDeletionNotificationJob",
 		"DispatchChangeVisibilityNotification": "Wikibase\\Repo\\ChangeModification\\DispatchChangeVisibilityNotificationJob"
 	},
-	"AutoloadClasses": {
-		"Wikibase\\DataModel\\DeserializerFactory": "lib/packages/wikibase/data-model-serialization/src/DeserializerFactory.php",
-		"Wikibase\\DataModel\\SerializerFactory": "lib/packages/wikibase/data-model-serialization/src/SerializerFactory.php"
-	},
 	"AutoloadNamespaces": {
 		"Wikibase\\Repo\\": "repo/includes/",
 		"Wikibase\\Lib\\": "lib/includes/",

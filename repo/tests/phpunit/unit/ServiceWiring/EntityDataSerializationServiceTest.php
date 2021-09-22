@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;

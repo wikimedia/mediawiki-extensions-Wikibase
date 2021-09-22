@@ -9,7 +9,7 @@ use Serializers\Serializer;
 use SiteLookup;
 use TitleFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;

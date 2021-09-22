@@ -5,7 +5,7 @@ namespace Tests\Wikibase\DataModel;
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**

@@ -4,7 +4,7 @@ namespace Wikibase\InternalSerialization;
 
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
-use Wikibase\DataModel\DeserializerFactory as CurrentDeserializerFactory;
+use Wikibase\DataModel\Deserializers\DeserializerFactory as CurrentDeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\InternalSerialization\Deserializers\EntityDeserializer;
 use Wikibase\InternalSerialization\Deserializers\StatementDeserializer;

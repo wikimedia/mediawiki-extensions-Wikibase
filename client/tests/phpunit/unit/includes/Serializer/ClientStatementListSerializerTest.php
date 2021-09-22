@@ -6,7 +6,7 @@ use DataValues\Serializers\DataValueSerializer;
 use Wikibase\Client\Serializer\ClientStatementListSerializer;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;

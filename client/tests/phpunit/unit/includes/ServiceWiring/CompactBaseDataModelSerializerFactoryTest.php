@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 
 /**
  * @coversNothing
