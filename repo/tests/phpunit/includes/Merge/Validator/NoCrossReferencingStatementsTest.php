@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Merge\Validator;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\Merge\Validator\NoCrossReferencingStatements;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\Tests\NewStatement;
@@ -124,7 +124,7 @@ class NoCrossReferencingStatementsTest extends TestCase {
 			NewItem::withId( 'Q2' )->build()
 		);
 
-		$this->assertEquals( [ new PropertyId( 'P42' ) ], $validator->getViolations() ); // TODO: Change to NumericPropertyId
+		$this->assertEquals( [ new NumericPropertyId( 'P42' ) ], $validator->getViolations() );
 	}
 
 }

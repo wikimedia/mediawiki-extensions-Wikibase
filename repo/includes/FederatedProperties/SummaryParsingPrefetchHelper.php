@@ -6,6 +6,7 @@ namespace Wikibase\Repo\FederatedProperties;
 use LogicException;
 use MediaWiki\Storage\RevisionRecord;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikimedia\Rdbms\IResultWrapper;
 
@@ -73,7 +74,8 @@ class SummaryParsingPrefetchHelper {
 			preg_match( self::PROPERTY_SUMMARY_REGEXP, $comment, $matches );
 			if ( count( $matches ) === 3 ) {
 				$propertyId = $matches[2];
-				$propertyIds[] = new PropertyId( $propertyId );
+				// TODO: Change to FederatedPropertyId when this functionality is supported in Feddy Props v2
+				$propertyIds[] = new NumericPropertyId( $propertyId );
 			}
 		}
 		return $propertyIds;

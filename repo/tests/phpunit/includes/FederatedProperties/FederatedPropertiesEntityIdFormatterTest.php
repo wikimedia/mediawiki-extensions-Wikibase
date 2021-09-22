@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Test\FederatedProperties;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Repo\FederatedProperties\ApiRequestExecutionException;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntityIdFormatter;
 
@@ -37,14 +37,14 @@ class FederatedPropertiesEntityIdFormatterTest extends TestCase {
 
 	public function testInnerValueWhenNoException() {
 		$sot = new FederatedPropertiesEntityIdFormatter( $this->getReturningInnerService() );
-		$result = $sot->formatEntityId( new PropertyId( 'P123' ) );
+		$result = $sot->formatEntityId( new FederatedPropertyId( 'http://wikidata.org/entity/P123', 'P123' ) );
 		$this->assertEquals( 'RETURNED', $result );
 	}
 
 	public function testSerializedIdWhenExceptionThrown() {
 		$sot = new FederatedPropertiesEntityIdFormatter( $this->getThrowingInnerService() );
-		$result = $sot->formatEntityId( new PropertyId( 'P123' ) );
-		$this->assertEquals( 'P123', $result );
+		$result = $sot->formatEntityId( new FederatedPropertyId( 'http://wikidata.org/entity/P123', 'P123' ) );
+		$this->assertEquals( 'http://wikidata.org/entity/P123', $result );
 	}
 
 }
