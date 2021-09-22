@@ -9,6 +9,7 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Repo\Api\EntitySearchHelper;
 
 /**
  * @license GPL-2.0-or-later
@@ -85,11 +86,13 @@ class ApiServiceFactory {
 		);
 	}
 
-	public function newApiEntitySearchHelper(): ApiEntitySearchHelper {
-		return new ApiEntitySearchHelper(
+	public function newApiEntitySearchHelper(): EntitySearchHelper {
+		$apiSource = $this->entitySourceDefinitions->getApiSourceForEntityType( Property::ENTITY_TYPE );
+
+		return $apiSource === null ? new NullEntitySearchHelper() : new ApiEntitySearchHelper(
 			$this->newFederatedPropertiesApiClient(),
 			$this->dataTypeDefinitions->getTypeIds(),
-			$this->entitySourceDefinitions->getApiSourceForEntityType( Property::ENTITY_TYPE )
+			$apiSource
 		);
 	}
 
