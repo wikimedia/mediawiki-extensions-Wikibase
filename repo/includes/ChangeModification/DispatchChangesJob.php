@@ -11,6 +11,7 @@ use JobSpecification;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\MediaWikiServices;
 use MWException;
+use Psr\Log\LoggerInterface;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Changes\Change;
@@ -66,6 +67,11 @@ class DispatchChangesJob extends Job {
 	 */
 	private $changeStore;
 
+	/*
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
 	public static function makeJobSpecification( string $entityIdSerialization, int $changeId ): IJobSpecification {
 		return new JobSpecification(
 			'DispatchChanges',
@@ -83,6 +89,7 @@ class DispatchChangesJob extends Job {
 		EntityIdParser $entityIdParser,
 		JobQueueGroupFactory $jobQueueGroupFactory,
 		ChangeStore $changeStore,
+		LoggerInterface $logger,
 		array $params
 	) {
 
@@ -100,6 +107,7 @@ class DispatchChangesJob extends Job {
 		$this->entityIdParser = $entityIdParser;
 		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
 		$this->changeStore = $changeStore;
+		$this->logger = $logger;
 		$this->removeDuplicates = true;
 
 		parent::__construct( 'DispatchChanges', $params );
@@ -114,6 +122,7 @@ class DispatchChangesJob extends Job {
 			WikibaseRepo::getEntityIdParser(),
 			MediaWikiServices::getInstance()->getJobQueueGroupFactory(),
 			WikibaseRepo::getStore()->getChangeStore(),
+			WikibaseRepo::getLogger(),
 			$params
 		);
 	}
@@ -139,6 +148,9 @@ class DispatchChangesJob extends Job {
 
 		$dispatchingClientSites = $this->filterClientWikis( $allClientSites, $subscribedClientSites, $allowedClientSites );
 		if ( empty( $dispatchingClientSites ) ) {
+			$this->logger->info( __METHOD__ . ': no wikis subscribed for {entity} => doing nothing', [
+				'entity' => $this->entityIdSerialization,
+			] );
 			return true;
 		}
 
@@ -146,8 +158,17 @@ class DispatchChangesJob extends Job {
 		$changes = $this->extractNewChanges( $changes, $this->changeId );
 
 		if ( empty( $changes ) ) {
+			$this->logger->info( __METHOD__ . ': no changes for {entity} => all have been consumed by previous job?', [
+				'entity' => $this->entityIdSerialization,
+			] );
 			return true;
 		}
+
+		$this->logger->info( __METHOD__ . ': dispatching changes for {entity} to {numberOfWikis} clients: {listOfWikis}', [
+			'entity' => $this->entityIdSerialization,
+			'numberOfWikis' => count( $dispatchingClientSites ),
+			'listOfWikis' => implode( ', ', $dispatchingClientSites ),
+		] );
 
 		$job = $this->getClientJobSpecification( $changes );
 		foreach ( $dispatchingClientSites as $clientDb ) {

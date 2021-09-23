@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client;
 
 use Job;
+use Psr\Log\LoggerInterface;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Changes\ChangeRow;
@@ -31,15 +32,22 @@ class EntityChangeNotificationJob extends Job {
 	 */
 	private $entityIdParser;
 
+	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
 	public function __construct(
 		ChangeHandler $changeHandler,
 		EntityIdParser $entityIdParser,
+		LoggerInterface $logger,
 		$params
 	) {
 		parent::__construct( 'EntityChangeNotification', $params );
 
 		$this->changeHandler = $changeHandler;
 		$this->entityIdParser = $entityIdParser;
+		$this->logger = $logger;
 		$this->changes = array_map( [ $this, 'reconstructChangeFromFields' ], $params['changes'] );
 	}
 
@@ -47,6 +55,7 @@ class EntityChangeNotificationJob extends Job {
 		return new self(
 			WikibaseClient::getChangeHandler(),
 			WikibaseClient::getEntityIdParser(),
+			WikibaseClient::getLogger(),
 			$params
 		);
 	}
@@ -54,7 +63,15 @@ class EntityChangeNotificationJob extends Job {
 	/**
 	 * @inheritDoc
 	 */
-	public function run() {
+	public function run(): bool {
+		if ( empty( $this->changes ) ) {
+			$this->logger->error( __METHOD__ . ': Job without changes, which should never have been scheduled.' );
+			return true;
+		}
+		$this->logger->info( __METHOD__ . ': handling {numberOfChanges} change(s) for {entity}', [
+			'entity' => $this->changes[0]->getEntityId()->getSerialization(),
+			'numberOfChanges' => count( $this->changes ),
+		] );
 		$this->changeHandler->handleChanges( $this->changes, $this->getRootJobParams() );
 
 		return true;
