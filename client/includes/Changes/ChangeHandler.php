@@ -9,6 +9,7 @@ use Title;
 use TitleFactory;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Lib\Changes\Change;
+use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
 
 /**
@@ -158,7 +159,7 @@ class ChangeHandler {
 			$titlesToUpdate,
 			$rootJobParams,
 			$change->getAction(),
-			$change->hasField( 'user_id' ) ? 'uid:' . $change->getUserId() : 'uid:?'
+			$change->hasField( ChangeRow::USER_ID ) ? 'uid:' . $change->getUserId() : 'uid:?'
 		);
 
 		// Removing root job timestamp to make it work: T233520
@@ -210,8 +211,8 @@ class ChangeHandler {
 			// synthetic change!
 			$changeData = $change->getFields();
 
-			if ( isset( $changeData['info']['change-ids'] ) ) {
-				$ids = $changeData['info']['change-ids'];
+			if ( isset( $changeData[ChangeRow::INFO]['change-ids'] ) ) {
+				$ids = $changeData[ChangeRow::INFO]['change-ids'];
 				sort( $ids );
 				return 'change-batch:' . implode( ',', $ids );
 			} else {

@@ -16,6 +16,16 @@ use Wikimedia\Timestamp\ConvertibleTimestamp;
  */
 abstract class ChangeRow implements Change {
 
+	public const ID = 'id';
+	public const METADATA = 'metadata';
+	public const INFO = 'info';
+	public const TIME = 'time';
+	public const USER_ID = 'user_id';
+	public const OBJECT_ID = 'object_id';
+	public const COMPACT_DIFF = 'compactDiff';
+	public const TYPE = 'type';
+	public const REVISION_ID = 'revision_id';
+
 	/** @var LoggerInterface */
 	protected $logger;
 
@@ -34,7 +44,7 @@ abstract class ChangeRow implements Change {
 	 *
 	 * @var array
 	 */
-	private $fields = [ 'id' => null ];
+	private $fields = [ self::ID => null ];
 
 	/**
 	 * @see Change::getAge
@@ -43,7 +53,7 @@ abstract class ChangeRow implements Change {
 	 * @return int Seconds
 	 */
 	public function getAge() {
-		return time() - (int)ConvertibleTimestamp::convert( TS_UNIX, $this->getField( 'time' ) );
+		return time() - (int)ConvertibleTimestamp::convert( TS_UNIX, $this->getField( self::TIME ) );
 	}
 
 	/**
@@ -53,7 +63,7 @@ abstract class ChangeRow implements Change {
 	 * @return string TS_MW
 	 */
 	public function getTime() {
-		return $this->getField( 'time' );
+		return $this->getField( self::TIME );
 	}
 
 	/**
@@ -62,7 +72,7 @@ abstract class ChangeRow implements Change {
 	 * @return int
 	 */
 	public function getUserId() {
-		return $this->hasField( 'user_id' ) ? $this->getField( 'user_id' ) : 0;
+		return $this->hasField( self::USER_ID ) ? $this->getField( self::USER_ID ) : 0;
 	}
 
 	/**
@@ -72,7 +82,7 @@ abstract class ChangeRow implements Change {
 	 * @return string
 	 */
 	public function getObjectId() {
-		return $this->getField( 'object_id' );
+		return $this->getField( self::OBJECT_ID );
 	}
 
 	/**
@@ -86,7 +96,7 @@ abstract class ChangeRow implements Change {
 			throw new Exception( 'Attempted to get not-set field ' . $name );
 		}
 
-		if ( $name === 'info' ) {
+		if ( $name === self::INFO ) {
 			throw new Exception( 'Use getInfo instead' );
 		}
 
@@ -101,8 +111,8 @@ abstract class ChangeRow implements Change {
 	public function getFields() {
 		$fields = $this->fields;
 
-		if ( isset( $fields['info'] ) && is_string( $fields['info'] ) ) {
-			$fields['info'] = $this->unserializeInfo( $fields['info'] );
+		if ( isset( $fields[self::INFO] ) && is_string( $fields[self::INFO] ) ) {
+			$fields[self::INFO] = $this->unserializeInfo( $fields[self::INFO] );
 		}
 
 		return $fields;
@@ -123,13 +133,13 @@ abstract class ChangeRow implements Change {
 	 * @return array
 	 */
 	public function getInfo( $cache = 'no' ) {
-		$info = $this->hasField( 'info' ) ? $this->fields['info'] : [];
+		$info = $this->hasField( self::INFO ) ? $this->fields[self::INFO] : [];
 
 		if ( is_string( $info ) ) {
 			$info = $this->unserializeInfo( $info );
 
 			if ( $cache === 'cache' ) {
-				$this->setField( 'info', $info );
+				$this->setField( self::INFO, $info );
 			}
 		}
 
@@ -158,7 +168,7 @@ abstract class ChangeRow implements Change {
 
 		if ( !is_array( $info ) ) {
 			$this->logger->warning( 'Failed to unserializeInfo of id: {id}', [
-				'id' => $this->getObjectId(),
+				self::ID => $this->getObjectId(),
 			] );
 			return [];
 		}
@@ -194,7 +204,7 @@ abstract class ChangeRow implements Change {
 	 * @return int|null Number to be used as an identifier when persisting the change.
 	 */
 	public function getId() {
-		return $this->getField( 'id' );
+		return $this->getField( self::ID );
 	}
 
 	/**

@@ -7,6 +7,7 @@ namespace Wikibase\Client;
 use Job;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\ItemChange;
 
@@ -60,8 +61,8 @@ class EntityChangeNotificationJob extends Job {
 	}
 
 	private function reconstructChangeFromFields( array $changeFields ): EntityChange {
-		$entityId = $this->entityIdParser->parse( $changeFields['object_id'] );
-		if ( explode( '~', $changeFields['type'] )[0] === 'wikibase-item' ) {
+		$entityId = $this->entityIdParser->parse( $changeFields[ChangeRow::OBJECT_ID] );
+		if ( explode( '~', $changeFields[ChangeRow::TYPE] )[0] === 'wikibase-item' ) {
 			$entityChange = new ItemChange( $changeFields );
 		} else {
 			$entityChange = new EntityChange( $changeFields );

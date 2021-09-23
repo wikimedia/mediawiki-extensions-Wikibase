@@ -14,6 +14,7 @@ use MWException;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Changes\Change;
+use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\SettingsArray;
@@ -247,7 +248,7 @@ class DispatchChangesJob extends Job {
 		$params = [
 			'changes' => array_map( function ( EntityChange $change ) {
 				$fields = $change->getFields();
-				$fields['info'] = $change->getSerializedInfo();
+				$fields[ChangeRow::INFO] = $change->getSerializedInfo();
 				return $fields;
 			}, $changes ),
 		];

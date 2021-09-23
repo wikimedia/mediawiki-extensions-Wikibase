@@ -9,6 +9,7 @@ use MWException;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\Change;
+use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\ItemChange;
@@ -189,9 +190,9 @@ class ChangeRunCoalescer {
 
 		$change->setFields(
 			[
-				'revision_id' => $last->getField( 'revision_id' ),
-				'user_id' => $last->getUserId(),
-				'time' => $last->getTime(),
+				ChangeRow::REVISION_ID => $last->getField( ChangeRow::REVISION_ID ),
+				ChangeRow::USER_ID => $last->getUserId(),
+				ChangeRow::TIME => $last->getTime(),
 			]
 		);
 
@@ -209,7 +210,7 @@ class ChangeRunCoalescer {
 		$info = $change->getInfo();
 		$info['change-ids'] = $ids;
 		$info['changes'] = $changes;
-		$change->setField( 'info', $info );
+		$change->setField( ChangeRow::INFO, $info );
 
 		return $change;
 	}
