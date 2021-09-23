@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Store\Sql;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 
@@ -56,22 +55,16 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 			throw new InvalidArgumentException( '$db must be either DB_REPLICA or DB_PRIMARY' );
 		}
 
-		$anyOfTheLinks = '';
+		$linkConds = [];
 
-		/** @var SiteLink $siteLink */
 		foreach ( $siteLinks as $siteLink ) {
-			if ( $anyOfTheLinks !== '' ) {
-				$anyOfTheLinks .= "\nOR ";
-			}
-
-			$anyOfTheLinks .= '(';
-			$anyOfTheLinks .= 'ips_site_id=' . $dbr->addQuotes( $siteLink->getSiteId() );
-			$anyOfTheLinks .= ' AND ';
-			$anyOfTheLinks .= 'ips_site_page=' . $dbr->addQuotes( $siteLink->getPageName() );
-			$anyOfTheLinks .= ')';
+			$linkConds[] = $dbr->makeList( [
+				'ips_site_id' => $siteLink->getSiteId(),
+				'ips_site_page' => $siteLink->getPageName(),
+			], $dbr::LIST_AND );
 		}
 
-		// TODO: $anyOfTheLinks might get very large and hit some size limit imposed
+		// TODO: $linkConds might get very large and hit some size limit imposed
 		//       by the database. We could chop it up of we know that size limit.
 		//       For MySQL, it's select @@max_allowed_packet.
 
@@ -82,7 +75,10 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 				'ips_site_page',
 				'ips_item_id',
 			],
-			"($anyOfTheLinks) AND ips_item_id != " . (int)$item->getId()->getNumericId(),
+			$dbr->makeList( [
+				$dbr->makeList( $linkConds, $dbr::LIST_OR ),
+				'ips_item_id != ' . (int)$item->getId()->getNumericId(),
+			], $dbr::LIST_AND ),
 			__METHOD__
 		);
 
