@@ -317,16 +317,6 @@ class InjectRCRecordsJobTest extends TestCase {
 		$title = $this->getTitleMock( 'Foo', 21 );
 
 		return [
-			// TODO: drop the change ID test case once T172394 has been deployed
-			//       and old jobs have cleared the queue.
-			'job spec using change ID' => [
-				[
-					'change' => $change->getId(),
-					'pages' => $this->getPageSpecData( [ $title ] )
-				],
-				$change,
-				[ $title ],
-			],
 			'job spec using change field data' => [
 				[
 					'change' => $change->getFields(),
@@ -396,8 +386,14 @@ class InjectRCRecordsJobTest extends TestCase {
 	}
 
 	public function testRun(): void {
-		$title = $this->getTitleMock( 'Foo', 21 );
-		$change = $this->getEntityChangeMock( 17 );
+		$change = $this->getEntityChangeMock(
+			17,
+			[
+				'object_id' => 'Q7',
+				'type' => 'wikibase-item~change',
+				'time' => time(),
+			]
+		);
 		$rc = $this->getRecentChangeMock();
 
 		$changeLookup = $this->getEntityChangeLookupMock( [ $change ] );
@@ -407,7 +403,6 @@ class InjectRCRecordsJobTest extends TestCase {
 
 		$rcFactory->expects( $this->once() )
 			->method( 'newRecentChange' )
-			->with( $change, $title, [] )
 			->willReturn( $rc );
 
 		$rcDupeDetector = $this->getRCDupeDetectorMock();
@@ -417,7 +412,7 @@ class InjectRCRecordsJobTest extends TestCase {
 			->with( $rc );
 
 		$params = [
-			'change' => $change->getId(),
+			'change' => $change->getFields(),
 			'pages' => [
 				21 => [ 0, 'Foo' ]
 			]
