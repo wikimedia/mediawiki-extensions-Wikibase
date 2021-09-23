@@ -37,7 +37,7 @@
 		"karma-qunit": "^1.2.1",
 		"karma-webpack": "^4.0.2",
 		"qunitjs": "^2.4.0",
-		"sinon": "^4.0.1",
+		"sinon": "^11.1.2",
 		"webpack": "^4.46.0"
 	},
 	"dependencies": {
