@@ -35,10 +35,10 @@
 		"karma-cli": "^2.0.0",
 		"karma-firefox-launcher": "^2.1.1",
 		"karma-qunit": "^1.2.1",
-		"karma-webpack": "^4.0.2",
+		"karma-webpack": "^5.0.0",
 		"qunitjs": "^2.4.0",
 		"sinon": "^11.1.2",
-		"webpack": "^4.46.0"
+		"webpack": "^5.53.0"
 	},
 	"dependencies": {
 		"jquery": "^3.2.1",
