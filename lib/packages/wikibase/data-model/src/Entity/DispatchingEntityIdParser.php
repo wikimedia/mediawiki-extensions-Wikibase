@@ -42,9 +42,9 @@ class DispatchingEntityIdParser implements EntityIdParser {
 		}
 
 		try {
-			list( , , $localId ) = EntityId::splitSerialization( $idSerialization );
+			list( , , $localId ) = SerializableEntityId::splitSerialization( $idSerialization );
 		} catch ( InvalidArgumentException $ex ) {
-			// EntityId::splitSerialization performs some sanity checks which
+			// SerializableEntityId::splitSerialization performs some sanity checks which
 			// might result in an exception. Should this happen, re-throw the exception message
 			throw new EntityIdParsingException( $ex->getMessage(), 0, $ex );
 		}

@@ -27,7 +27,7 @@ interface EntityExistenceChecker {
 	 * but may be more efficient, depending on implementation.
 	 *
 	 * @param EntityId[] $ids
-	 * @return bool[] Mapping from {@link EntityId::getSerialization() entity ID serialization}
+	 * @return bool[] Mapping from {@link SerializableEntityId::getSerialization() entity ID serialization}
 	 * to {@link exists()} result.
 	 */
 	public function existsBatch( array $ids ): array;

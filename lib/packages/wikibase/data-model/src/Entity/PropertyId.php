@@ -9,7 +9,7 @@ use InvalidArgumentException;
  *
  * @license GPL-2.0-or-later
  */
-class PropertyId extends EntityId implements Int32EntityId {
+class PropertyId extends SerializableEntityId implements Int32EntityId {
 
 	/**
 	 * @since 0.5

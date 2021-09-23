@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\SerializableEntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Assert\ParameterAssertionException;
@@ -104,7 +105,7 @@ class TermIndexEntry {
 			'$fields["' . self::FIELD_TEXT . '"]'
 		);
 		Assert::parameterType(
-			EntityId::class,
+			SerializableEntityId::class,
 			$fields[ self::FIELD_ENTITY ],
 			'$fields["' . self::FIELD_ENTITY . '"]'
 		);

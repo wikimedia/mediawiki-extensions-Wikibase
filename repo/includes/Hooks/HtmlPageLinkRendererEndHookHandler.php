@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\SerializableEntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -426,7 +427,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 			try {
 				// FIXME: This assumes repository name is equal to interwiki. This assumption might
 				// become invalid
-				return $this->entityIdParser->parse( EntityId::joinSerialization( [ $idPrefix, '', $idPart ] ) );
+				return $this->entityIdParser->parse( SerializableEntityId::joinSerialization( [ $idPrefix, '', $idPart ] ) );
 			} catch ( EntityIdParsingException $ex ) {
 			}
 		}

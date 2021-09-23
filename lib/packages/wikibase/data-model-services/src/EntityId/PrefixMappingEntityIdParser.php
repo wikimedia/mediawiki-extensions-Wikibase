@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Services\EntityId;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\SerializableEntityId;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Assert\ParameterAssertionException;
 
@@ -75,13 +76,13 @@ class PrefixMappingEntityIdParser implements EntityIdParser {
 	 */
 	public function parse( $idSerialization ) {
 		$defaultPrefix = $this->prefixMapping[''];
-		list( $repoName, $extraPrefixes, $relativeId ) = EntityId::splitSerialization( $idSerialization );
+		list( $repoName, $extraPrefixes, $relativeId ) = SerializableEntityId::splitSerialization( $idSerialization );
 		if ( $repoName !== '' && isset( $this->prefixMapping[$repoName] ) ) {
-			$prefixedIdSerialization = EntityId::joinSerialization( [
+			$prefixedIdSerialization = SerializableEntityId::joinSerialization( [
 				$this->prefixMapping[$repoName], $extraPrefixes, $relativeId
 			] );
 		} else {
-			$prefixedIdSerialization = EntityId::joinSerialization( [ $defaultPrefix, '', $idSerialization ] );
+			$prefixedIdSerialization = SerializableEntityId::joinSerialization( [ $defaultPrefix, '', $idSerialization ] );
 		}
 		return $this->idParser->parse( $prefixedIdSerialization );
 	}
