@@ -1,0 +1,15 @@
+name: Dependabot to Gerrit
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, closed]
+jobs:
+  open-or-update-change:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Run dependabot gerrit action
+        uses: wmde/dependabot-gerrit-action@main
+        with:
+            password: ${{ secrets.DEPENDABOT_GERRIT_PASSWORD }}
+            user: Addbot
+            email: addshorewiki+addbot-dependabot@gmail.com
