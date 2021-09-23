@@ -29,7 +29,6 @@ use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\RepoHooks;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\AtEase\AtEase;
 
 /**
  * @covers \Wikibase\Repo\RepoHooks
@@ -294,9 +293,7 @@ XML
 	 */
 	public function testImportHandleRevisionXMLTag_hook( $xml, $allowImport, $expectedException = null ) {
 		// WikiImporter tried to register this protocol every time, so unregister first to avoid errors.
-		AtEase::suppressWarnings();
-		stream_wrapper_unregister( 'uploadsource' );
-		AtEase::restoreWarnings();
+		@stream_wrapper_unregister( 'uploadsource' );
 
 		$this->getSettings()->setSetting( 'allowEntityImport', $allowImport );
 
