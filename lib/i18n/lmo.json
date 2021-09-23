@@ -56,6 +56,7 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregorian",
 	"wikibase-time-calendar-julian": "Sgiulian",
+	"wikibase-time-precision-CE": "$1 CE",
 	"wikibase-time-precision-Gannum": "$1 miliard d'agn d.C.",
 	"wikibase-time-precision-Mannum": "$1 milion d'agn d.C.",
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 ann|$1 agn}}",

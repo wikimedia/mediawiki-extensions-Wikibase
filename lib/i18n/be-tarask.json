@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Fitoschido",
+			"Nieszczarda2",
 			"Red Winged Duck",
 			"Renessaince",
 			"Wizardist",
@@ -52,6 +53,7 @@
 	"datatypes-type-commonsMedia": "Мэдыяфайл зь Вікісховішча",
 	"datatypes-type-external-id": "Вонкавы ідэнтыфікатар",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-CE": "$1 н. э.",
 	"wikibase-entity-summary-wbsetitem": "Створаны новы прадмет",
 	"wikibase-entity-summary-wbcreateredirect": "Перанакіраваны на $4",
 	"wikibase-entity-summary-wbsetreference": "Пазначаная крыніца",

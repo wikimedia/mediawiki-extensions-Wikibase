@@ -61,6 +61,7 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "גרגוריאני",
 	"wikibase-time-calendar-julian": "יוליאני",
+	"wikibase-time-precision-CE": "$1 לספירה",
 	"wikibase-time-precision-Gannum": "$1 מיליארד שנים לספירה",
 	"wikibase-time-precision-Mannum": "$1 מיליון שנים לספירה",
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 שנים}} לספירה",
