@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Api;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\SerializableEntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
@@ -194,7 +195,7 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 		$unprefixedIdPart = $entityId->getLocalPart();
 
 		try {
-			$id = $this->idParser->parse( EntityId::joinSerialization( [
+			$id = $this->idParser->parse( SerializableEntityId::joinSerialization( [
 				$repositoryPrefix,
 				'',
 				$unprefixedIdPart

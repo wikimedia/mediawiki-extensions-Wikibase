@@ -7,6 +7,7 @@ use ReflectionClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Entity\SerializableEntityId;
 
 /**
  * @covers \Wikibase\DataModel\Entity\EntityId
@@ -113,7 +114,7 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider serializationSplitProvider
 	 */
 	public function testSplitSerialization( $serialization, $split ) {
-		$this->assertSame( $split, EntityId::splitSerialization( $serialization ) );
+		$this->assertSame( $split, SerializableEntityId::splitSerialization( $serialization ) );
 	}
 
 	/**
@@ -121,14 +122,14 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testSplitSerializationFails_GivenInvalidSerialization( $serialization ) {
 		$this->expectException( InvalidArgumentException::class );
-		EntityId::splitSerialization( $serialization );
+		SerializableEntityId::splitSerialization( $serialization );
 	}
 
 	/**
 	 * @dataProvider serializationSplitProvider
 	 */
 	public function testJoinSerialization( $serialization, $split ) {
-		$this->assertSame( $serialization, EntityId::joinSerialization( $split ) );
+		$this->assertSame( $serialization, SerializableEntityId::joinSerialization( $split ) );
 	}
 
 	/**
@@ -136,7 +137,7 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testJoinSerializationFails_GivenEmptyId( $parts ) {
 		$this->expectException( InvalidArgumentException::class );
-		EntityId::joinSerialization( $parts );
+		SerializableEntityId::joinSerialization( $parts );
 	}
 
 	public function invalidJoinSerializationDataProvider() {
@@ -148,8 +149,8 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenNotNormalizedSerialization_splitSerializationReturnsNormalizedParts() {
-		$this->assertSame( [ '', '', 'Q42' ], EntityId::splitSerialization( ':Q42' ) );
-		$this->assertSame( [ 'foo', 'bar', 'Q42' ], EntityId::splitSerialization( ':foo:bar:Q42' ) );
+		$this->assertSame( [ '', '', 'Q42' ], SerializableEntityId::splitSerialization( ':Q42' ) );
+		$this->assertSame( [ 'foo', 'bar', 'Q42' ], SerializableEntityId::splitSerialization( ':foo:bar:Q42' ) );
 	}
 
 	public function localPartDataProvider() {
@@ -184,9 +185,9 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidSerializationProvider
 	 */
 	public function testConstructor( $serialization ) {
-		$mock = $this->createMock( EntityId::class );
+		$mock = $this->createMock( SerializableEntityId::class );
 
-		$constructor = ( new ReflectionClass( EntityId::class ) )->getConstructor();
+		$constructor = ( new ReflectionClass( SerializableEntityId::class ) )->getConstructor();
 
 		$this->expectException( InvalidArgumentException::class );
 		$constructor->invoke( $mock, $serialization );

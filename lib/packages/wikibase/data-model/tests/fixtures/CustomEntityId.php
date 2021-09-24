@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Fixtures;
 
-use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\SerializableEntityId;
 
 /**
  * Dummy custom EntityId implementation for use with EntityIdValueTest
@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class CustomEntityId extends EntityId {
+class CustomEntityId extends SerializableEntityId {
 
 	/**
 	 * @see Serializable::serialize
