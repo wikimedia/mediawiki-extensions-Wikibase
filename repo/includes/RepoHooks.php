@@ -20,7 +20,6 @@ use MediaWiki\Revision\SlotRecord;
 use MediaWiki\User\UserIdentity;
 use MWException;
 use OutputPage;
-use PageProps;
 use Parser;
 use ParserOptions;
 use ParserOutput;
@@ -1007,13 +1006,15 @@ final class RepoHooks {
 
 		$siteLookup = $mediaWikiServices->getSiteLookup();
 
+		$pageProps = $mediaWikiServices->getPageProps();
+
 		$infoActionHookHandler = new InfoActionHookHandler(
 			$namespaceChecker,
 			$subscriptionLookup,
 			$siteLookup,
 			$entityIdLookup,
 			$context,
-			PageProps::getInstance()
+			$pageProps
 		);
 
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
