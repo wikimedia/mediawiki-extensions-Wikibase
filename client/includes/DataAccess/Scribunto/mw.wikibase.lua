@@ -110,7 +110,7 @@ function wikibase.setupInterface( settings )
 
 		local entityModule = require( php.getEntityModuleName( id ) )
 
-		-- Use a deep clone here, so that people can't modify the entity
+		-- Use a deep clone here, so that people can't modify the cached entity
 		return entityModule.create( mw.clone( entity ) )
 	end
 
