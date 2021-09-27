@@ -23,6 +23,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\SerializableEntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -79,7 +80,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	 * @return EntityId
 	 */
 	private function newCustomEntityId( $idString ) {
-		$id = $this->getMockBuilder( EntityId::class )
+		$id = $this->getMockBuilder( SerializableEntityId::class )
 			->setConstructorArgs( [ $idString ] )
 			->onlyMethods( [ 'getEntityType', 'serialize', 'unserialize' ] )
 			->getMock();

@@ -8,7 +8,7 @@ use InvalidArgumentException;
  *
  * @license GPL-2.0-or-later
  */
-abstract class SerializableEntityId extends EntityId {
+abstract class SerializableEntityId implements EntityId {
 
 	protected $serialization;
 
@@ -21,6 +21,8 @@ abstract class SerializableEntityId extends EntityId {
 	 * @var string
 	 */
 	protected $localPart;
+
+	public const PATTERN = '/^:?(\w+:)*[^:]+\z/';
 
 	/**
 	 * @param string $serialization

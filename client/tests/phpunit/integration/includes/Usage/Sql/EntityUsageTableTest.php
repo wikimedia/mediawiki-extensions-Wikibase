@@ -190,9 +190,7 @@ class EntityUsageTableTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetQueryUsagesSkipsRowsForEntitiesOfUnknownType() {
-		$customEntityId = $this->getMockBuilder( EntityId::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$customEntityId = $this->createMock( EntityId::class );
 		$customEntityId->method( 'getSerialization' )
 			->willReturn( 'ODD123' );
 		$customEntityId->method( 'getEntityType' )
