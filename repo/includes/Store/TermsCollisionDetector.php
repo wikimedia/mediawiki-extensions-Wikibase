@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * Find collisions of term values with existing terms in store
@@ -34,4 +35,22 @@ interface TermsCollisionDetector {
 		string $label,
 		string $description
 	): ?EntityId;
+
+	/**
+	 * Returns entity ids that collides with given labels in given languages
+	 * @param  TermList        $labels
+	 *
+	 * // example return array
+	 * [
+	 * 	'P1' => [
+	 * 		Term('en', 'label'),
+	 * 		Term('de', 'label')
+	 * 	]
+	 * ]
+	 *
+	 * @return array
+	 */
+	public function detectLabelsCollision(
+		TermList $labels
+	): array;
 }

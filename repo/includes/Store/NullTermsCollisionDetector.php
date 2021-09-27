@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * TermsCollisionDetector implementation that does nothing (always returns no collision)
@@ -24,5 +25,9 @@ class NullTermsCollisionDetector implements TermsCollisionDetector {
 		string $description
 	): ?EntityId {
 		return null;
+	}
+
+	public function detectLabelsCollision( TermList $labels ): array {
+		return [];
 	}
 }
