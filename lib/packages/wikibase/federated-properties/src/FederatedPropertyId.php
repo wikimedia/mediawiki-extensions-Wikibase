@@ -4,13 +4,16 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\FederatedProperties;
 
 use InvalidArgumentException;
+use LogicException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @license GPL-2.0-or-later
  */
-class FederatedPropertyId extends PropertyId {
+class FederatedPropertyId implements PropertyId {
+
+	private $serialization;
 
 	private $remoteId;
 
@@ -54,4 +57,26 @@ class FederatedPropertyId extends PropertyId {
 	public function getRemoteIdSerialization(): string {
 		return $this->remoteId;
 	}
+
+	public function getSerialization() {
+		return $this->serialization;
+	}
+
+	public function __toString() {
+		return $this->getSerialization();
+	}
+
+	public function equals( $target ) {
+		return $target instanceof FederatedPropertyId &&
+			$target->getSerialization() === $this->serialization;
+	}
+
+	public function getLocalPart() {
+		throw new LogicException( 'Not implemented for FederatedPropertyId' );
+	}
+
+	public function getRepositoryName() {
+		throw new LogicException( 'Not implemented for FederatedPropertyId' );
+	}
+
 }

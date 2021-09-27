@@ -8,7 +8,7 @@ use InvalidArgumentException;
 /**
  * @license GPL-2.0-or-later
  */
-class NumericPropertyId extends PropertyId {
+class NumericPropertyId extends SerializableEntityId implements PropertyId, Int32EntityId {
 
 	public const PATTERN = '/^P[1-9]\d{0,9}\z/i';
 
