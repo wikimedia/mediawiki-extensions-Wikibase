@@ -95,9 +95,6 @@ local function maskEntityTable( entity, tableName, usageFunc )
 	setmetatable( entity[tableName], pseudoTableMetatable )
 end
 
-local function noUsageTracking()
-end
-
 -- Function to mask an entity's subtables in order to log access and prevent modifications
 --
 -- @param {table} entity
