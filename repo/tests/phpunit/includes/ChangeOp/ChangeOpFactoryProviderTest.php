@@ -12,6 +12,7 @@ use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider
@@ -47,7 +48,8 @@ class ChangeOpFactoryProviderTest extends \PHPUnit\Framework\TestCase {
 		$entityId = new ItemId( 'Q2' );
 
 		$constraintProvider = new EntityConstraintProvider(
-			$this->mockProvider->getMockSiteLinkConflictLookup()
+			$this->mockProvider->getMockSiteLinkConflictLookup(),
+			$this->createMock( TermValidatorFactory::class )
 		);
 
 		return new ChangeOpFactoryProvider(
