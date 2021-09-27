@@ -114,7 +114,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Некоторые утверждения",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Утверждение: $1",
 	"wikibase-pageinfo-entity-usage-X": "Все данные сущности",
-	"wikibase-pageinfo-entity-usage-O": "Другие (Утверждения)",
+	"wikibase-pageinfo-entity-usage-O": "Другие (например псевдонимы, существование сущностей)",
 	"wikibase-property-render-error": "Ошибка раскрытия свойства «$1»: $2",
 	"wikibase-otherprojects": "В других проектах",
 	"wikibase-otherprojects-beta-message": "Боковая панель других проектов",

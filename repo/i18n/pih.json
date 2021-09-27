@@ -4,10 +4,5 @@
 			"MinecraftAustralia"
 		]
 	},
-	"wikibase-edit": "edet",
-	"wikibase-add": "add",
-	"wikibase-label-empty": "Noe lab'l defain'd",
-	"wikibase-description-empty": "Noe deskripsh'n defain'd",
-	"wikibase-sitelinks-special": "Otha saits",
-	"wikibase-statementview-rank-normal": "Norm'l renk"
+	"wikibase-edit": "edet"
 }

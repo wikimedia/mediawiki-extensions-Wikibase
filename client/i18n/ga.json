@@ -10,11 +10,8 @@
 	"wikibase-dataitem": "Mír {{WBREPONAME}}",
 	"wikibase-editlinks": "Athraigh naisc",
 	"wikibase-editlinkstitle": "Athraigh na naisc idirtheanga",
-	"wikibase-linkitem-addlinks": "Cuir naisc leis",
-	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Folaigh",
 	"wikibase-rc-hide-wikidata-show": "Taispeáin",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} cuir in eagar",
 	"wikibase-otherprojects": "I dtionscadail eile"
 }

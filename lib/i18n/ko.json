@@ -65,6 +65,7 @@
 	"version-wikibase": "위키베이스",
 	"wikibase-time-calendar-gregorian": "그레고리력",
 	"wikibase-time-calendar-julian": "율리우스력",
+	"wikibase-time-precision-CE": "서기 $1",
 	"wikibase-time-precision-Gannum": "서기 $1십억 년",
 	"wikibase-time-precision-Mannum": "서기 $1백만 년",
 	"wikibase-time-precision-annum": "서기 {{PLURAL:$1|$1년}}",

@@ -70,6 +70,7 @@
 	"version-wikibase": "Вікібаза",
 	"wikibase-time-calendar-gregorian": "Григоріанський",
 	"wikibase-time-calendar-julian": "Юліанський",
+	"wikibase-time-precision-CE": "$1 до н. е.",
 	"wikibase-time-precision-Gannum": "$1 мільярд{{PLURAL:$1||ів|и}} років н.е.",
 	"wikibase-time-precision-Mannum": "$1 мільйон{{PLURAL:$1||ів|и}} років н.е.",
 	"wikibase-time-precision-annum": "$1 {{PLURAL:$1|рік|років|роки}} н.е.",

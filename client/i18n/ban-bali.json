@@ -1,8 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"Carma Citrawati",
+			"Chinamoonroll",
 			"Tok Pisin"
 		]
 	},
-	"wikibase-rc-wikibase-edit-letter": "ᬤ᭄"
+	"wikibase-dataitem": "ᬳᬶᬢᭂᬫ᭄{{WBREPONAME}}",
+	"wikibase-editlinks": "ᬳᬸᬯᬄᬧ᭄ᬭᬦᬮ",
+	"wikibase-editlinkstitle": "ᬳᬸᬯᬄᬧ᭄ᬭᬦᬮᬧᬦ᭄ᬢᬭᬦᬶᬂᬪᬵᬱ",
+	"wikibase-linkitem-addlinks": "ᬢᬫ᭄ᬩᬄᬧ᭄ᬭᬦᬮ",
+	"wikibase-rc-hide-wikidata-hide": "ᬳᭂᬂᬓᭂᬩᬂ",
+	"wikibase-rc-wikibase-edit-letter": "ᬤ᭄",
+	"wikibase-rc-wikibase-edit-title": "ᬳᬸᬯᬳᬦ᭄ {{WBREPONAME}}"
 }
