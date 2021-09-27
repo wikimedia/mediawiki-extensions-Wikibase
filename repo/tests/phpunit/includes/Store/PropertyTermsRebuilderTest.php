@@ -77,11 +77,11 @@ class PropertyTermsRebuilderTest extends MediaWikiIntegrationTestCase {
 		return new class implements PropertyTermStoreWriter {
 			private $fingerprints = [];
 
-			public function storeTerms( PropertyId $propertyId, Fingerprint $terms ) {
+			public function storeTerms( NumericPropertyId $propertyId, Fingerprint $terms ) {
 				$this->fingerprints[$propertyId->getNumericId()] = $terms;
 			}
 
-			public function deleteTerms( PropertyId $propertyId ) {
+			public function deleteTerms( NumericPropertyId $propertyId ) {
 				throw new LogicException( 'Unimplemented' );
 			}
 

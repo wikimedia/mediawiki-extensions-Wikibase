@@ -7,8 +7,8 @@ namespace Wikibase\Lib\Store;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\DataModel\Services\Term\TermStoreException;
 
@@ -27,9 +27,11 @@ class PropertyTermStoreWriterAdapter implements EntityTermStoreWriter {
 	}
 
 	public function saveTermsOfEntity( EntityDocument $entity ): bool {
-		if ( $entity instanceof Property ) {
+		$id = $entity->getId();
+
+		if ( $entity instanceof Property && $id instanceof NumericPropertyId ) {
 			try {
-				$this->store->storeTerms( $entity->getId(), $entity->getFingerprint() );
+				$this->store->storeTerms( $id, $entity->getFingerprint() );
 				return true;
 			} catch ( TermStoreException $ex ) {
 				return false;
@@ -40,7 +42,7 @@ class PropertyTermStoreWriterAdapter implements EntityTermStoreWriter {
 	}
 
 	public function deleteTermsOfEntity( EntityId $entityId ): bool {
-		if ( $entityId instanceof PropertyId ) {
+		if ( $entityId instanceof NumericPropertyId ) {
 			try {
 				$this->store->deleteTerms( $entityId );
 				return true;

@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Term;
 
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
@@ -14,11 +14,11 @@ interface PropertyTermStoreWriter {
 	 * Updates the stored terms for the specified property.
 	 * @throws TermStoreException
 	 */
-	public function storeTerms( PropertyId $propertyId, Fingerprint $terms );
+	public function storeTerms( NumericPropertyId $propertyId, Fingerprint $terms );
 
 	/**
 	 * @throws TermStoreException
 	 */
-	public function deleteTerms( PropertyId $propertyId );
+	public function deleteTerms( NumericPropertyId $propertyId );
 
 }
