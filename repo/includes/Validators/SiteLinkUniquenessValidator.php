@@ -51,19 +51,28 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	 * Get Message for a conflict
 	 *
 	 * @param array $conflict A record as returned by SiteLinkConflictLookup::getConflictsForItem()
-	 *
-	 * @return Error
 	 */
-	private function getConflictError( array $conflict ) {
-		return new UniquenessViolation(
-			$conflict['itemId'],
-			'SiteLink conflict',
-			'sitelink-conflict',
-			[
-				new SiteLink( $conflict['siteId'], $conflict['sitePage'] ),
+	private function getConflictError( array $conflict ): Error {
+		if ( $conflict['itemId'] !== null ) {
+			return new UniquenessViolation(
 				$conflict['itemId'],
-			]
-		);
+				'SiteLink conflict',
+				'sitelink-conflict',
+				[
+					new SiteLink( $conflict['siteId'], $conflict['sitePage'] ),
+					$conflict['itemId'],
+				]
+			);
+		} else {
+			return new UniquenessViolation(
+				null,
+				'SiteLink conflict with unknown item',
+				'sitelink-conflict-unknown',
+				[
+					new SiteLink( $conflict['siteId'], $conflict['sitePage'] ),
+				]
+			);
+		}
 	}
 
 }
