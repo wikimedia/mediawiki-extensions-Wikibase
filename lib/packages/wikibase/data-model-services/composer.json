@@ -32,8 +32,7 @@
 	},
 	"require-dev": {
 		"phpmd/phpmd": "~2.3",
-		"phpunit/phpunit": "~8.0",
-		"mediawiki/mediawiki-codesniffer": "34.0.0"
+		"phpunit/phpunit": "~8.0"
 	},
 	"autoload": {
 		"psr-4": {
@@ -52,10 +51,8 @@
 			"phpunit --coverage-php /dev/null"
 		],
 		"cs": [
-			"phpcs -p -s",
 			"phpmd src/,tests/unit/ text phpmd.xml"
 		],
-		"fix": "phpcbf",
 		"ci": [
 			"@test"
 		]
