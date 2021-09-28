@@ -26,8 +26,11 @@ use Wikibase\Repo\Store\TermsCollisionDetector;
  * Items are unique on their label and description in a language. This means, given a language, no two items should
  * have same label and same description in that language.
  *
- * Properties are unique on their label alone in a language. This means, given a language, no two properties should
- * have same label in that language.
+ * For properties, label uniqueness is instead validated by the LabelUniquenessValidator
+ * added by EntityConstraintProvider.
+ *
+ * @see EntityConstraintProvider
+ * @see LabelUniquenessValidator
  *
  * @license GPL-2.0-or-later
  */
@@ -61,25 +64,7 @@ class FingerprintUniquenessValidator implements ValueValidator {
 		$entityId = $value->getEntityId();
 		return $entityId->getEntityType() === Item::ENTITY_TYPE
 			? $this->validateItem( $value )
-			: $this->validateProperty( $value );
-	}
-
-	private function validateProperty( ChangeOpFingerprintResult $fingerprintChangeOpResult ): Result {
-		$errors = [];
-
-		foreach ( $this->getChangedLabelsPerLanguage( $fingerprintChangeOpResult ) as $lang => $label ) {
-			$collidingEntityId = $this->termsCollisionDetector->detectLabelCollision( $lang, $label );
-
-			if ( $collidingEntityId !== null ) {
-				$errors[] = $this->collisionToError( 'label-conflict', $collidingEntityId, $lang, $label );
-			}
-		}
-
-		if ( !empty( $errors ) ) {
-			return Result::newError( $errors );
-		}
-
-		return Result::newSuccess();
+			: Result::newSuccess();
 	}
 
 	private function validateItem( ChangeOpFingerprintResult $fingerprintChangeOpResult ): Result {
@@ -107,19 +92,6 @@ class FingerprintUniquenessValidator implements ValueValidator {
 		}
 
 		return Result::newSuccess();
-	}
-
-	/**
-	 * @return Generator yield entries of the shape [ language code => label text ]
-	 */
-	private function getChangedLabelsPerLanguage( ChangeOpFingerprintResult $changeOpsResult ): Generator {
-		$traversable = $this->makeRecursiveTraversable( $changeOpsResult );
-
-		foreach ( $traversable as $changeOp ) {
-			if ( $changeOp instanceof ChangeOpLabelResult && $changeOp->isEntityChanged() ) {
-				yield $changeOp->getLanguageCode() => $changeOp->getNewLabel();
-			}
-		}
 	}
 
 	/**

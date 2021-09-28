@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Repo\ChangeOp\ChangeOpDescriptionResult;
 use Wikibase\Repo\ChangeOp\ChangeOpFingerprintResult;
@@ -42,72 +41,6 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 	public function testSubject_givenUnsupportedValueType_throws() {
 		$this->expectException( InvalidArgumentException::class );
 		$this->getSubjectResult( new DummyChangeOpResult() );
-	}
-
-	public function propertyUniquenessValidationProvider() {
-		$entityId = new NumericPropertyId( 'P123' );
-		$collidingEntityId = new NumericPropertyId( 'P321' );
-
-		return [
-			'no collisions detected' => [
-				'detectLabelCollisionMock' => function ( $lang, $label ) {
-					$this->assertEquals( 'en', $lang );
-					$this->assertEquals( 'new label', $label );
-					return null;
-				},
-				'valueToValidate' => new ChangeOpFingerprintResult(
-					new ChangeOpsResult( $entityId, [
-						new ChangeOpLabelResult( $entityId, 'en', '', 'new label', true )
-					] ),
-					$this->createMock( TermValidatorFactory::class )
-				),
-				'expectedResult' => Result::newSuccess()
-			],
-
-			'collision detected' => [
-				'detectLabelCollisionMock' => function ( $lang, $label ) use ( $collidingEntityId ) {
-					$this->assertEquals( 'en', $lang );
-					$this->assertEquals( 'new label', $label );
-					return $collidingEntityId;
-				},
-				'valueToValidate' => new ChangeOpFingerprintResult(
-					new ChangeOpsResult( $entityId, [
-						new ChangeOpLabelResult( $entityId, 'en', '', 'new label', true )
-					] ),
-					$this->createMock( TermValidatorFactory::class )
-				),
-				'expectedResult' => Result::newError( [
-					new UniquenessViolation(
-						$collidingEntityId,
-						'found conflicting terms',
-						'label-conflict',
-						[
-							'new label',
-							'en',
-							$collidingEntityId
-						]
-					)
-				] )
-			]
-		];
-	}
-
-	/**
-	 * @dataProvider propertyUniquenessValidationProvider
-	 */
-	public function testSubject_givenPropertyEntityType(
-		?callable $detectLabelCollisionMock,
-		$valueToValidate,
-		Result $expectedResult
-	) {
-		if ( $detectLabelCollisionMock ) {
-			$this->termsCollisionDetector->method( 'detectLabelCollision' )
-				->willReturnCallback( $detectLabelCollisionMock );
-		}
-
-		$actualResult = $this->getSubjectResult( $valueToValidate );
-
-		$this->assertEquals( $actualResult, $expectedResult );
 	}
 
 	public function itemUniquenessValidationProvider() {
