@@ -10,6 +10,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
+use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
@@ -117,6 +118,10 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 	 * @throws DBError
 	 */
 	public function getPropertyInfo( PropertyId $propertyId ) {
+		Assert::parameterType( NumericPropertyId::class, $propertyId, '$propertyId' );
+		/** @var NumericPropertyId $propertyId */
+		'@phan-var NumericPropertyId $propertyId';
+
 		$dbr = $this->getReadConnection();
 
 		$res = $dbr->selectField(

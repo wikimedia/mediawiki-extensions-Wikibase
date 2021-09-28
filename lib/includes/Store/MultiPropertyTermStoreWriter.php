@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Store;
 
 use Exception;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikimedia\Assert\Assert;
@@ -38,7 +38,7 @@ class MultiPropertyTermStoreWriter implements PropertyTermStoreWriter {
 		$this->propertyTermStoreWriters = $propertyTermStoreWriters;
 	}
 
-	public function storeTerms( PropertyId $propertyId, Fingerprint $terms ) {
+	public function storeTerms( NumericPropertyId $propertyId, Fingerprint $terms ) {
 		$firstException = null;
 		foreach ( $this->propertyTermStoreWriters as $propertyTermStoreWriter ) {
 			try {
@@ -54,7 +54,7 @@ class MultiPropertyTermStoreWriter implements PropertyTermStoreWriter {
 		}
 	}
 
-	public function deleteTerms( PropertyId $propertyId ) {
+	public function deleteTerms( NumericPropertyId $propertyId ) {
 		$firstException = null;
 		foreach ( $this->propertyTermStoreWriters as $propertyTermStoreWriter ) {
 			try {
