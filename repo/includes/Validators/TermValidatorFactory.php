@@ -157,4 +157,10 @@ class TermValidatorFactory {
 		return $validator;
 	}
 
+	public function getLabelUniquenessValidator( $entityType ): LabelUniquenessValidator {
+		return new LabelUniquenessValidator(
+			$this->termsCollisionDetectorFactory->getTermsCollisionDetector( $entityType )
+		);
+	}
+
 }

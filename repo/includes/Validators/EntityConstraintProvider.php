@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Validators;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 
 /**
@@ -22,10 +23,17 @@ class EntityConstraintProvider {
 	 */
 	private $siteLinkConflictLookup;
 
+	/**
+	 * @var EntityValidator
+	 */
+	private $labelUniquenessValidator;
+
 	public function __construct(
-		SiteLinkConflictLookup $siteLinkConflictLookup
+		SiteLinkConflictLookup $siteLinkConflictLookup,
+		TermValidatorFactory $termValidatorFactory
 	) {
 		$this->siteLinkConflictLookup = $siteLinkConflictLookup;
+		$this->labelUniquenessValidator = $termValidatorFactory->getLabelUniquenessValidator( Property::ENTITY_TYPE );
 
 		//TODO: Make validators configurable. Allow more types to register.
 	}
@@ -43,6 +51,10 @@ class EntityConstraintProvider {
 
 		if ( $entityType === Item::ENTITY_TYPE ) {
 			$validators[] = new SiteLinkUniquenessValidator( $this->siteLinkConflictLookup );
+		}
+
+		if ( $entityType === Property::ENTITY_TYPE ) {
+			$validators[] = $this->labelUniquenessValidator;
 		}
 
 		return $validators;

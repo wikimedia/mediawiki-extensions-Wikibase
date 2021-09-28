@@ -7,8 +7,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
+use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
+use Wikibase\Repo\Validators\LabelUniquenessValidator;
 use Wikibase\Repo\Validators\SiteLinkUniquenessValidator;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
  * @covers \Wikibase\Repo\Validators\EntityConstraintProvider
@@ -22,8 +25,16 @@ use Wikibase\Repo\Validators\SiteLinkUniquenessValidator;
 class EntityConstraintProviderTest extends \PHPUnit\Framework\TestCase {
 
 	private function getEntityConstraintProvider() {
+		$termValidatorFactory = $this->createMock( TermValidatorFactory::class );
+		$termValidatorFactory->method( 'getLabelUniquenessValidator' )
+			->willReturn(
+				new LabelUniquenessValidator(
+					$this->createMock( TermsCollisionDetector::class )
+				)
+			);
 		return new EntityConstraintProvider(
-			$this->createMock( SiteLinkConflictLookup::class )
+			$this->createMock( SiteLinkConflictLookup::class ),
+			$termValidatorFactory
 		);
 	}
 
@@ -37,7 +48,9 @@ class EntityConstraintProviderTest extends \PHPUnit\Framework\TestCase {
 			],
 			'for properties' => [
 				'entityType' => Property::ENTITY_TYPE,
-				'expectedValidatorTypes' => []
+				'expectedValidatorTypes' => [
+					LabelUniquenessValidator::class
+				]
 			]
 		];
 	}
@@ -62,7 +75,9 @@ class EntityConstraintProviderTest extends \PHPUnit\Framework\TestCase {
 			'for properties' => [
 				'entityType' => Property::ENTITY_TYPE,
 				'entityId' => NumericPropertyId::newFromNumber( 1 ), // irrelevant
-				'expectedValidatorTypes' => []
+				'expectedValidatorTypes' => [
+					LabelUniquenessValidator::class
+				]
 			],
 
 			// Item
