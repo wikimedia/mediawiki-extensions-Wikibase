@@ -247,6 +247,24 @@ local function testClaimsAccessIndex( propertyId )
 	return entity.claims[propertyId]
 end
 
+local function testReassignEntityId_number()
+	local entity = mw.wikibase.getEntityObject( 'Q32487' )
+	entity.id = 0
+	return entity.labels.en.value
+end
+
+local function testReassignEntityId_nil()
+	local entity = mw.wikibase.getEntityObject( 'Q32487' )
+	entity.id = nil
+	return entity.labels.en.value
+end
+
+local function testReassignEntityId_string()
+	local entity = mw.wikibase.getEntityObject( 'Q32487' )
+	entity.id = 'not a valid entity ID'
+	return entity.labels.en.value
+end
+
 
 local tests = {
 	-- Unit Tests
@@ -565,6 +583,15 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.entity.formatStatements integration property', func = integrationTestFormatStatementsProperty,
 	  expect = { { label = 'LuaTestStringProperty', value = '<span><span>Lua :)</span></span>' } }
+	},
+	{ name = 'reassigning entity ID to 0 does not crash', func = testReassignEntityId_number,
+	  expect = { 'Test all the code paths' }
+	},
+	{ name = 'reassigning entity ID to nil does not crash', func = testReassignEntityId_nil,
+	  expect = { 'Test all the code paths' }
+	},
+	{ name = 'reassigning entity ID to string does not crash', func = testReassignEntityId_string,
+	  expect = { 'Test all the code paths' }
 	},
 }
 
