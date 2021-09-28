@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Tests\Store\Sql\Terms;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\Sql\Terms\StaticTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
@@ -42,14 +44,17 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 	private $enFooLabelTermInLangId;
 	/** @var int */
 	private $enBarLabelTermInLangId;
+
 	/** @var int */
 	private $deFooLabelTermInLangId;
 	/** @var int */
 	private $deBarLabelTermInLangId;
+
 	/** @var int */
 	private $enFooDescriptionTermInLangId;
 	/** @var int */
 	private $enBarDescriptionTermInLangId;
+
 	/** @var int */
 	private $deFooDescriptionTermInLangId;
 	/** @var int */
@@ -316,6 +321,79 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 
 		$itemId = $collisionDetector->detectLabelAndDescriptionCollision( 'de', 'bar', 'bar' );
 		$this->assertNull( $itemId );
+	}
+
+	/**
+	 * @dataProvider termListProvider
+	 */
+	public function testDetectLabelsCollision( array $databaseRecords, TermList $termsList, array $expectedResults ) {
+		$records = [];
+		foreach ( $databaseRecords as $key => $propertyRecords ) {
+			foreach ( $propertyRecords as $record ) {
+				$records[] = [ 'wbpt_term_in_lang_id' => $this->{$record}, 'wbpt_property_id' => $key ];
+			}
+		}
+
+		$this->db->insert( 'wbt_property_terms', $records );
+
+		$collisionDetector = $this->makeTestSubject( 'property' );
+
+		$properties = $collisionDetector->detectLabelsCollision( $termsList );
+
+		$this->assertCount( count( $expectedResults ), $properties );
+		$this->assertEquals( $properties, $expectedResults );
+	}
+
+	public function termListProvider() {
+
+		$deFoo = new Term( 'de', 'foo' );
+		$enFoo = new Term( 'en', 'foo' );
+
+		$deBar = new Term( 'de', 'bar' );
+		$enBar = new Term( 'en', 'bar' );
+
+		yield [
+			[
+				1 => [ 'enFooLabelTermInLangId' ],
+				2 => [ 'deFooLabelTermInLangId' ]
+			],
+			new TermList( [ $deBar ] ),
+			[]
+		];
+
+		yield [
+			[
+				1 => [ 'enFooLabelTermInLangId', 'deFooLabelTermInLangId' ],
+				2 => [ 'enBarLabelTermInLangId', 'deBarLabelTermInLangId' ]
+			],
+			new TermList( [ $deFoo ] ),
+			[
+				'P1' => [ $deFoo ]
+			]
+		];
+
+		yield [
+			[
+				1 => [ 'enFooLabelTermInLangId', 'deFooLabelTermInLangId' ],
+				2 => [ 'enBarLabelTermInLangId', 'deBarLabelTermInLangId' ]
+			],
+			new TermList( [ $deFoo, $enFoo ] ),
+			[
+				'P1' => [ $deFoo, $enFoo ]
+			]
+		];
+
+		yield [
+			[
+				1 => [ 'enFooLabelTermInLangId', 'deBarLabelTermInLangId' ],
+				2 => [ 'enBarLabelTermInLangId' ]
+			],
+			new TermList( [ $deBar, $enBar ] ),
+			[
+				'P1' => [ $deBar ],
+				'P2' => [ $enBar ],
+			]
+		];
 	}
 
 }
