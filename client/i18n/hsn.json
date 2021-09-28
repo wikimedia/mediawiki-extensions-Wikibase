@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"ChoiChong"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}}项目",
+	"wikibase-editlinks": "编辑链接",
+	"wikibase-editlinkstitle": "编辑跨语言链接",
+	"wikibase-linkitem-addlinks": "加链接",
+	"wikibase-rc-hide-wikidata": "$1{{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "唔要看",
+	"wikibase-rc-hide-wikidata-show": "要看",
+	"wikibase-rc-wikibase-edit-letter": "数",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}编辑",
+	"wikibase-otherprojects": "在其他项目中"
+}
