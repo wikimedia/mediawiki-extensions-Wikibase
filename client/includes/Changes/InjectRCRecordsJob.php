@@ -72,6 +72,11 @@ class InjectRCRecordsJob extends Job {
 	private $stats = null;
 
 	/**
+	 * @var StatsdDataFactoryInterface
+	 */
+	private $perWikiStats = null;
+
+	/**
 	 * @param Title[] $titles
 	 * @param EntityChange $change
 	 * @param array $rootJobParams
@@ -180,7 +185,7 @@ class InjectRCRecordsJob extends Job {
 		$job->setRecentChangesFinder( $store->getRecentChangesFinder() );
 
 		$job->setLogger( WikibaseClient::getLogger( $mwServices ) );
-		$job->setStats( $mwServices->getStatsdDataFactory() );
+		$job->setStats( $mwServices->getStatsdDataFactory(), $mwServices->getPerDbNameStatsdDataFactory() );
 
 		return $job;
 	}
@@ -193,8 +198,9 @@ class InjectRCRecordsJob extends Job {
 		$this->logger = $logger;
 	}
 
-	public function setStats( StatsdDataFactoryInterface $stats ) {
+	public function setStats( StatsdDataFactoryInterface $stats, StatsdDataFactoryInterface $perWikiStats = null ) {
 		$this->stats = $stats;
+		$this->perWikiStats = $perWikiStats;
 	}
 
 	/**
@@ -288,6 +294,7 @@ class InjectRCRecordsJob extends Job {
 
 		$dbw->endAtomic( __METHOD__ );
 		$this->incrementStats( 'InjectRCRecords.run.titles', count( $titles ) );
+		$this->recordDelay( $change->getAge() );
 
 		$this->db->connections()->releaseConnection( $dbw );
 
@@ -304,4 +311,12 @@ class InjectRCRecordsJob extends Job {
 		}
 	}
 
+	private function recordDelay( int $delay ): void {
+		if ( $this->stats ) {
+			$this->stats->timing( 'wikibase.client.pageupdates.InjectRCRecords.delay', $delay );
+		}
+		if ( $this->perWikiStats ) {
+			$this->perWikiStats->timing( 'wikibase.client.pageupdates.InjectRCRecords.delay', $delay );
+		}
+	}
 }

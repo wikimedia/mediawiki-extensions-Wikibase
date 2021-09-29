@@ -165,6 +165,9 @@ class InjectRCRecordsJobTest extends TestCase {
 		$change->method( 'getSerializedInfo' )
 			->willReturn( json_encode( $info ) );
 
+		$change->method( 'getAge' )
+			->willReturn( 42 );
+
 		return $change;
 	}
 
