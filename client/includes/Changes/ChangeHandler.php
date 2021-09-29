@@ -1,9 +1,10 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Client\Changes;
 
-use Hooks;
 use InvalidArgumentException;
+use MediaWiki\HookContainer\HookContainer;
 use Psr\Log\LoggerInterface;
 use Title;
 use TitleFactory;
@@ -49,6 +50,11 @@ class ChangeHandler {
 	private $logger;
 
 	/**
+	 * @var HookContainer
+	 */
+	private $hookContainer;
+
+	/**
 	 * @var bool
 	 */
 	private $injectRecentChanges;
@@ -59,6 +65,7 @@ class ChangeHandler {
 	 * @param PageUpdater $updater
 	 * @param ChangeRunCoalescer $changeRunCoalescer
 	 * @param LoggerInterface $logger
+	 * @param HookContainer $hookContainer
 	 * @param bool $injectRecentChanges
 	 *
 	 * @throws InvalidArgumentException
@@ -69,17 +76,16 @@ class ChangeHandler {
 		PageUpdater $updater,
 		ChangeRunCoalescer $changeRunCoalescer,
 		LoggerInterface $logger,
-		$injectRecentChanges = true
-	) {
-		if ( !is_bool( $injectRecentChanges ) ) {
-			throw new InvalidArgumentException( '$injectRecentChanges must be a bool' );
-		}
+		HookContainer $hookContainer,
+		bool $injectRecentChanges = true
 
+	) {
 		$this->affectedPagesFinder = $affectedPagesFinder;
 		$this->titleFactory = $titleFactory;
 		$this->updater = $updater;
 		$this->changeRunCoalescer = $changeRunCoalescer;
 		$this->logger = $logger;
+		$this->hookContainer = $hookContainer;
 		$this->injectRecentChanges = $injectRecentChanges;
 	}
 
@@ -90,12 +96,12 @@ class ChangeHandler {
 	public function handleChanges( array $changes, array $rootJobParams = [] ) {
 		$changes = $this->changeRunCoalescer->transformChangeList( $changes );
 
-		if ( !Hooks::run( 'WikibaseHandleChanges', [ $changes, $rootJobParams ] ) ) {
+		if ( !$this->hookContainer->run( 'WikibaseHandleChanges', [ $changes, $rootJobParams ] ) ) {
 			return;
 		}
 
 		foreach ( $changes as $change ) {
-			if ( !Hooks::run( 'WikibaseHandleChange', [ $change, $rootJobParams ] ) ) {
+			if ( !$this->hookContainer->run( 'WikibaseHandleChange', [ $change, $rootJobParams ] ) ) {
 				continue;
 			}
 

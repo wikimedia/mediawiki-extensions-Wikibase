@@ -1,5 +1,6 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Integration\Changes;
 
 use ArrayIterator;
@@ -67,7 +68,8 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 
 	private function getChangeHandler(
 		array $pageNamesPerItemId = [],
-		PageUpdater $updater = null
+		PageUpdater $updater = null,
+		array $hooks = []
 	) {
 		$siteLinkLookup = $this->getSiteLinkLookup( $pageNamesPerItemId );
 		$usageLookup = $this->getUsageLookup( $siteLinkLookup );
@@ -80,6 +82,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			$updater ?: new MockPageUpdater(),
 			$this->getChangeRunCoalescer(),
 			new NullLogger(),
+			$this->createHookContainer( $hooks ),
 			true
 		);
 
@@ -171,9 +174,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			} ]
 		];
 
-		$this->mergeMwGlobalArrayValue( 'wgHooks', $testHooks );
-
-		$changeHandler = $this->getChangeHandler();
+		$changeHandler = $this->getChangeHandler( [], null, $testHooks );
 		$changeHandler->handleChanges( $changes );
 
 		$this->assertSame( count( $changes ), $spy->handleChangeCallCount );
@@ -605,7 +606,8 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			$titleFactory,
 			$updater,
 			$this->getChangeRunCoalescer(),
-			new NullLogger()
+			new NullLogger(),
+			$this->createHookContainer()
 		);
 
 		$inputRootJobParams = [ 'rootJobTimestamp' => '20171122040506' ];
