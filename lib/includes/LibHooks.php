@@ -46,7 +46,11 @@ final class LibHooks implements
 		$paths[] = __DIR__ . '/../tests/phpunit/';
 		$paths[] = __DIR__ . '/../../data-access/tests/phpunit/';
 		$paths[] = __DIR__ . '/../packages/wikibase/changes/tests/';
+		$paths[] = __DIR__ . '/../packages/wikibase/data-model/tests/';
+		$paths[] = __DIR__ . '/../packages/wikibase/data-model-serialization/tests/';
+		$paths[] = __DIR__ . '/../packages/wikibase/data-model-services/tests/';
 		$paths[] = __DIR__ . '/../packages/wikibase/federated-properties/tests/';
+		$paths[] = __DIR__ . '/../packages/wikibase/internal-serialization/tests/';
 	}
 
 	/**
