@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Changes;
 
 use InvalidArgumentException;
@@ -87,7 +89,7 @@ class InjectRCRecordsJob extends Job {
 		array $titles,
 		EntityChange $change,
 		array $rootJobParams = []
-	) {
+	): JobSpecification {
 		$pages = [];
 
 		foreach ( $titles as $t ) {
@@ -168,7 +170,7 @@ class InjectRCRecordsJob extends Job {
 		$this->logger = new NullLogger();
 	}
 
-	public static function newFromGlobalState( Title $unused, array $params ) {
+	public static function newFromGlobalState( Title $unused, array $params ): self {
 		$mwServices = MediaWikiServices::getInstance();
 
 		$store = WikibaseClient::getStore( $mwServices );
@@ -190,15 +192,15 @@ class InjectRCRecordsJob extends Job {
 		return $job;
 	}
 
-	public function setRecentChangesFinder( RecentChangesFinder $rcDuplicateDetector ) {
+	public function setRecentChangesFinder( RecentChangesFinder $rcDuplicateDetector ): void {
 		$this->rcDuplicateDetector = $rcDuplicateDetector;
 	}
 
-	public function setLogger( LoggerInterface $logger ) {
+	public function setLogger( LoggerInterface $logger ): void {
 		$this->logger = $logger;
 	}
 
-	public function setStats( StatsdDataFactoryInterface $stats, StatsdDataFactoryInterface $perWikiStats = null ) {
+	public function setStats( StatsdDataFactoryInterface $stats, StatsdDataFactoryInterface $perWikiStats = null ): void {
 		$this->stats = $stats;
 		$this->perWikiStats = $perWikiStats;
 	}
@@ -210,7 +212,7 @@ class InjectRCRecordsJob extends Job {
 	 *
 	 * @return EntityChange|null the change to process (or none).
 	 */
-	private function getChange() {
+	private function getChange(): ?EntityChange {
 		$params = $this->getParams();
 		$changeData = $params['change'];
 
@@ -245,7 +247,7 @@ class InjectRCRecordsJob extends Job {
 	/**
 	 * @return Title[] List of Titles to inject RC entries for, indexed by page ID
 	 */
-	private function getTitles() {
+	private function getTitles(): array {
 		$params = $this->getParams();
 		$pages = $params['pages'];
 
@@ -261,7 +263,7 @@ class InjectRCRecordsJob extends Job {
 	/**
 	 * @return bool success
 	 */
-	public function run() {
+	public function run(): bool {
 		$change = $this->getChange();
 		$titles = $this->getTitles();
 
@@ -305,7 +307,7 @@ class InjectRCRecordsJob extends Job {
 	 * @param string $updateType
 	 * @param int $delta
 	 */
-	private function incrementStats( $updateType, $delta ) {
+	private function incrementStats( string $updateType, int $delta ): void {
 		if ( $this->stats ) {
 			$this->stats->updateCount( 'wikibase.client.pageupdates.' . $updateType, $delta );
 		}

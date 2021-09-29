@@ -1,8 +1,9 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Unit\Changes;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RecentChange;
 use Title;
@@ -36,10 +37,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class InjectRCRecordsJobTest extends TestCase {
 
-	/**
-	 * @return RecentChangeFactory|MockObject
-	 */
-	private function getRCFactoryMock() {
+	private function getRCFactoryMock(): RecentChangeFactory {
 		$rcFactory = $this->getMockBuilder( RecentChangeFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -52,10 +50,8 @@ class InjectRCRecordsJobTest extends TestCase {
 
 	/**
 	 * @param EntityChange[] $knownChanges
-	 *
-	 * @return MockObject|EntityChangeLookup
 	 */
-	private function getEntityChangeLookupMock( array $knownChanges = [] ) {
+	private function getEntityChangeLookupMock( array $knownChanges = [] ): EntityChangeLookup {
 		$changeLookup = $this->getMockBuilder( EntityChangeLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -74,10 +70,7 @@ class InjectRCRecordsJobTest extends TestCase {
 		return $changeLookup;
 	}
 
-	/**
-	 * @return EntityChangeFactory
-	 */
-	private function getEntityChangeFactory() {
+	private function getEntityChangeFactory(): EntityChangeFactory {
 		return new EntityChangeFactory(
 			new EntityDiffer(),
 			new BasicEntityIdParser(),
@@ -85,10 +78,7 @@ class InjectRCRecordsJobTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @return RecentChangesFinder|MockObject
-	 */
-	private function getRCDupeDetectorMock() {
+	private function getRCDupeDetectorMock(): RecentChangesFinder {
 		$rcDupeDetector = $this->getMockBuilder( RecentChangesFinder::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -96,28 +86,19 @@ class InjectRCRecordsJobTest extends TestCase {
 		return $rcDupeDetector;
 	}
 
-	/**
-	 * @return TitleFactory|MockObject
-	 */
-	private function getTitleFactoryMock() {
+	private function getTitleFactoryMock(): TitleFactory {
 		$titleFactory = $this->createMock( TitleFactory::class );
 
 		$id = 200;
 		$titleFactory->method( 'makeTitle' )
-			->willReturnCallback( function( $ns, $text ) use ( &$id ) {
+			->willReturnCallback( function ( $ns, $text ) use ( &$id ) {
 				return $this->getTitleMock( $text, $id++ );
 			} );
 
 		return $titleFactory;
 	}
 
-	/**
-	 * @param string $text
-	 * @param int $id
-	 *
-	 * @return Title|MockObject
-	 */
-	private function getTitleMock( $text, $id = 23 ) {
+	private function getTitleMock( string $text, int $id = 23 ): Title {
 		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -140,13 +121,7 @@ class InjectRCRecordsJobTest extends TestCase {
 		return $title;
 	}
 
-	/**
-	 * @param int $id
-	 * @param array $fields
-	 *
-	 * @return MockObject|EntityChange
-	 */
-	private function getEntityChangeMock( $id = 77, array $fields = [] ) {
+	private function getEntityChangeMock( int $id = 77, array $fields = [] ): EntityChange {
 		$info = $fields['info'] ?? [];
 
 		$change = $this->getMockBuilder( EntityChange::class )
@@ -171,10 +146,7 @@ class InjectRCRecordsJobTest extends TestCase {
 		return $change;
 	}
 
-	/**
-	 * @return RecentChange|MockObject
-	 */
-	private function getRecentChangeMock() {
+	private function getRecentChangeMock(): RecentChange {
 		$change = $this->getMockBuilder( RecentChange::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -182,9 +154,6 @@ class InjectRCRecordsJobTest extends TestCase {
 		return $change;
 	}
 
-	/**
-	 * @return ClientDomainDb
-	 */
 	private function getClientDomainDbMock( IDatabase $dbWrite = null ): ClientDomainDb {
 		$dbWrite = $dbWrite ?: $this->createMock( IDatabase::class );
 
@@ -196,7 +165,7 @@ class InjectRCRecordsJobTest extends TestCase {
 		return $mock;
 	}
 
-	public function provideMakeJobSpecification() {
+	public function provideMakeJobSpecification(): array {
 		$title = $this->getTitleMock( 'Foo', 21 );
 		$changeFactory = $this->getEntityChangeFactory();
 		$itemId = new ItemId( 'Q7' );
@@ -280,7 +249,7 @@ class InjectRCRecordsJobTest extends TestCase {
 	 * @param Title[] $titles
 	 * @param EntityChange $change
 	 */
-	public function testMakeJobSpecification( array $titles, EntityChange $change, array $knownChanges = [] ) {
+	public function testMakeJobSpecification( array $titles, EntityChange $change, array $knownChanges = [] ): void {
 		$spec = InjectRCRecordsJob::makeJobSpecification( $titles, $change );
 
 		$changeLookup = $this->getEntityChangeLookupMock( $knownChanges );
@@ -316,7 +285,7 @@ class InjectRCRecordsJobTest extends TestCase {
 		);
 	}
 
-	public function testMakeJobSpecification_rootJobParams() {
+	public function testMakeJobSpecification_rootJobParams(): void {
 		$titles = [ $this->getTitleMock( 'Foo', 21 ) ];
 		$change = $this->getEntityChangeFactory()->newForEntity(
 			'change',
@@ -334,7 +303,7 @@ class InjectRCRecordsJobTest extends TestCase {
 		$this->assertEquals( $rootJobParams, $spec->getRootJobParams() );
 	}
 
-	public function provideConstruction() {
+	public function provideConstruction(): array {
 		$change = $this->getEntityChangeMock(
 			17,
 			[
@@ -374,7 +343,7 @@ class InjectRCRecordsJobTest extends TestCase {
 	 *
 	 * @return array[]
 	 */
-	private function getPageSpecData( array $titles ) {
+	private function getPageSpecData( array $titles ): array {
 		$pages = [];
 
 		foreach ( $titles as $title ) {
@@ -392,7 +361,7 @@ class InjectRCRecordsJobTest extends TestCase {
 		array $params,
 		EntityChange $expectedChange,
 		array $expectedTitles
-	) {
+	): void {
 		$changeLookup = $this->getEntityChangeLookupMock( [ $expectedChange ] );
 		$changeFactory = $this->getEntityChangeFactory();
 		$rcFactory = $this->getRCFactoryMock();
@@ -426,7 +395,7 @@ class InjectRCRecordsJobTest extends TestCase {
 		);
 	}
 
-	public function testRun() {
+	public function testRun(): void {
 		$title = $this->getTitleMock( 'Foo', 21 );
 		$change = $this->getEntityChangeMock( 17 );
 		$rc = $this->getRecentChangeMock();
@@ -481,7 +450,7 @@ class InjectRCRecordsJobTest extends TestCase {
 	 *
 	 * @return int[]
 	 */
-	private function getTitleIDs( array $titles ) {
+	private function getTitleIDs( array $titles ): array {
 		return array_map(
 			function( Title $title ) {
 				return $title->getArticleID();
@@ -495,7 +464,7 @@ class InjectRCRecordsJobTest extends TestCase {
 	 *
 	 * @return string[]
 	 */
-	private function getTitleDBKeys( array $titles ) {
+	private function getTitleDBKeys( array $titles ): array {
 		return array_map(
 			function( Title $title ) {
 				return $title->getPrefixedDBkey();
