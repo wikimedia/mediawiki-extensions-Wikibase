@@ -147,6 +147,7 @@
 	"wikibase-validator-not-allowed": "Valor minga valid: $1",
 	"wikibase-validator-no-validators": "Proibid",
 	"wikibase-validator-sitelink-conflict": "El conligament $1 l'è sgiamò drovad de l'element $2. Te podet toeùvel vìa de $2 se 'l ghe parten minga, o trà insema i element se revarden l'istess argoment.",
+	"wikibase-validator-sitelink-conflict-unknown": "El ligam $1 l'è anca dorvad d'on alter element che l'è 'dree a vesser salvad.",
 	"wikibase-validator-label-conflict": "La proprietà $3 la gh'hà sgaimò l'eticheta \"$1\" associada cont el codes de la lengua $2.",
 	"wikibase-validator-label-with-description-conflict": "L'element $3 el gh'hà sgiamò l'eticheta \"$1\" associada cont el codes de la lengua $2, e droven l'istessa descrizzion.",
 	"wikibase-validator-label-equals-description": "L'eticheta e la descrizzion per el codes de la langua $1 i poden avegh minmga l'istess valor.",

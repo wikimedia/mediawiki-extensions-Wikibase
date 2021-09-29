@@ -1,10 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ayire Adongo",
 			"Dnshitobu"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} lɔkɔ",
+	"wikibase-editlinks": "Demese tongere",
+	"wikibase-editlinkstitle": "Demese tɔgewɔnɛ tongere",
+	"wikibase-linkitem-addlinks": "Pa’asɛ tongere",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Sugɛ",
 	"wikibase-rc-hide-wikidata-show": "Pa’alɛ",
 	"wikibase-rc-wikibase-edit-letter": "D",
