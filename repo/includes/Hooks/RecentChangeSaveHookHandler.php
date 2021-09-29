@@ -133,7 +133,7 @@ class RecentChangeSaveHookHandler {
 	private function enqueueDispatchChangesJob( string $entityIdSerialization, int $changeId ): void {
 		$job = DispatchChangesJob::makeJobSpecification( $entityIdSerialization, $changeId );
 		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup();
-		$jobQueueGroup->push( $job );
+		$jobQueueGroup->lazyPush( $job );
 	}
 
 }
