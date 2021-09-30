@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Carma Citrawati",
 			"Carma citrawati",
 			"Chinamoonroll",
 			"Joseagush",
@@ -63,7 +64,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Makudang panikayan",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Panikayan: $1",
 	"wikibase-pageinfo-entity-usage-X": "Samian data éntitas",
-	"wikibase-pageinfo-entity-usage-O": "Liyanan (Panikayan)",
+	"wikibase-pageinfo-entity-usage-O": "sané lianan",
 	"wikibase-property-render-error": "Buwung ngarénder properti $1:$2",
 	"wikibase-otherprojects": "Ring proyék lianan",
 	"wikibase-sitelinks-sitename-columnheading": "Basa",

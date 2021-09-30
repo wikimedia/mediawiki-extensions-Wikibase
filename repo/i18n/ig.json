@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Tochiprecious",
 			"Ukabia"
 		]
 	},
@@ -8,8 +9,11 @@
 	"wikibase-save": "dònye",
 	"wikibase-cancel": "Hapụ̀",
 	"wikibase-add": "tinye",
+	"wikibase-label-empty": "Enweghị nkọwa labelụ",
+	"wikibase-description-empty": "Enweghị nkọwa akọwapụtara",
 	"wikibase-diffview-link": "òjikọ",
 	"wikibase-sitelinks-special": "Ntọdị ọ̀zọ",
+	"wikibase-statementview-rank-normal": "Ọkwa nkịtị",
 	"wikibase-itembytitle-submit": "Tùwe",
 	"wikibase-itemdisambiguation-submit": "Tùwe"
 }
