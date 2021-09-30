@@ -5,8 +5,8 @@ declare( strict_types=1 );
 namespace Wikibase\Repo\Tests\Validators;
 
 use ValueValidators\Result;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
@@ -66,7 +66,7 @@ class LabelUniquenessValidatorTest extends \PHPUnit\Framework\TestCase {
 		array $expectedLabelCollisionLookups,
 		array $conflicts
 	) {
-		$propertyId = new PropertyId( 'P1234' );
+		$propertyId = new NumericPropertyId( 'P1234' );
 		$property = new Property(
 			$propertyId,
 			new Fingerprint( new TermList( $terms ) ),
