@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -625,7 +626,6 @@ class MockRepository implements
 	 */
 	public function assignFreshId( EntityDocument $entity ) {
 		//TODO: Find a canonical way to generate an EntityId from the maxId number.
-		//XXX: Using setId() with an integer argument is deprecated!
 		$numericId = ++$this->maxEntityId;
 
 		if ( $entity instanceof Item ) {
@@ -634,7 +634,7 @@ class MockRepository implements
 		}
 
 		if ( $entity instanceof Property ) {
-			$entity->setId( PropertyId::newFromNumber( $numericId ) );
+			$entity->setId( NumericPropertyId::newFromNumber( $numericId ) );
 			return;
 		}
 
