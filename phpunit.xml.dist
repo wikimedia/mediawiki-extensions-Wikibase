@@ -19,6 +19,11 @@
             <directory>view/tests/phpunit</directory>
             <directory>data-access/tests/phpunit</directory>
             <directory>lib/packages/wikibase/changes/tests</directory>
+            <directory>lib/packages/wikibase/data-model/tests</directory>
+            <directory>lib/packages/wikibase/data-model-serialization/tests</directory>
+            <directory>lib/packages/wikibase/data-model-services/tests</directory>
+            <directory>lib/packages/wikibase/federated-properties/tests</directory>
+            <directory>lib/packages/wikibase/internal-serialization/tests</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -37,6 +42,11 @@
             <directory suffix=".php">data-access/src</directory>
 
             <directory suffix=".php">lib/packages/wikibase/changes/src</directory>
+            <directory suffix=".php">lib/packages/wikibase/data-model/src</directory>
+            <directory suffix=".php">lib/packages/wikibase/data-model-serialization/src</directory>
+            <directory suffix=".php">lib/packages/wikibase/data-model-services/src</directory>
+            <directory suffix=".php">lib/packages/wikibase/federated-properties/src</directory>
+            <directory suffix=".php">lib/packages/wikibase/internal-serialization/src</directory>
         </whitelist>
     </filter>
 </phpunit>
