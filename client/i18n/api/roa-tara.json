@@ -13,7 +13,7 @@
 	"apihelp-query+wbentityusage-paramvalue-aspect-T": "'U titole d'a pàgena locale s'accocchie cu l'endità ca jè ausate",
 	"apihelp-query+wbentityusage-paramvalue-aspect-C": "Dichiaraziune da l'endità sò ausate",
 	"apihelp-query+wbentityusage-paramvalue-aspect-X": "Tutte le aspette de 'n'endità sò o ponne essere ausate",
-	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Quacche otra cose sus a l'endità avène ausate. Stu fatte pe mò 'mbliche l'ause de 'struziune e alias e condrolle esplicite de l'esistenze de l'endità.",
+	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Quacche otra cose sus a l'endità avène ausate. Stu fatte pe mò 'mbliche l'ause alias e condrolle esplicite de l'esistenze de l'endità.",
 	"apihelp-query+wbentityusage-param-prop": "Probbietà da aggiungere a 'u resultate.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Ce abbiltiate, avène aggiunde l'URL de l'endità",
 	"apihelp-query+wbentityusage-param-entities": "Tuèrne sulamende le pàggene ca ausane ste endità.",

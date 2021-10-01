@@ -68,6 +68,7 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregoryen",
 	"wikibase-time-calendar-julian": "Jülyen",
+	"wikibase-time-precision-CE": "$1 MS",
 	"wikibase-time-precision-Gannum": "MS $1 milyar yıl",
 	"wikibase-time-precision-Mannum": "MS $1 milyon yıl",
 	"wikibase-time-precision-annum": "MS {{PLURAL:$1|$1 yıl}}",
