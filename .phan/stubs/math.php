@@ -5,14 +5,21 @@
  * the Math extension.
  */
 
-class MathDataUpdater implements \Wikibase\Repo\ParserOutput\StatementDataUpdater {
-	public function __construct( Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher $propertyDataTypeMatcher ) {
+namespace MediaWiki\Extension\Math;
+
+use ParserOutput;
+use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\ParserOutput\StatementDataUpdater;
+
+class MathDataUpdater implements StatementDataUpdater {
+	public function __construct( PropertyDataTypeMatcher $propertyDataTypeMatcher ) {
 	}
 
 	/**
-	* @param \Wikibase\DataModel\Statement\Statement $statement
-	*/
-	public function processStatement( \Wikibase\DataModel\Statement\Statement $statement ) {
+	 * @param Statement $statement
+	 */
+	public function processStatement( Statement $statement ) {
 	}
 
 	/**
