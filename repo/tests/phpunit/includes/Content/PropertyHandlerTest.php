@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
+use ParserOutput;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -115,6 +116,13 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 	}
 
 	/**
+	 * @return PropertyContent
+	 */
+	protected function newEmptyContent() {
+		return new PropertyContent();
+	}
+
+	/**
 	 * @param SettingsArray|null $settings
 	 *
 	 * @return PropertyHandler
@@ -172,4 +180,21 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 		$this->assertSame( "Kitten", $data['text'], 'text' );
 	}
 
+	public function testGetParserOutput() {
+		$content = $this->newEntityContent();
+		$contentRenderer = $this->getServiceContainer()->getContentRenderer();
+
+		$title = Title::newFromTextThrow( 'Foo' );
+		$parserOutput = $contentRenderer->getParserOutput( $content, $title );
+
+		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];
+		$actualOptions = $parserOutput->getUsedOptions();
+		$this->assertEqualsCanonicalizing(
+			$expectedUsedOptions,
+			$actualOptions,
+			'Cache-split flags are not what they should be'
+		);
+
+		$this->assertInstanceOf( ParserOutput::class, $parserOutput );
+	}
 }

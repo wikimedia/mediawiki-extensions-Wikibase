@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Content;
 
 use DataValues\StringValue;
 use MWException;
+use ParserOutput;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -99,6 +100,13 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$cases[] = [ $content4, $content4, $content3, $itemContent2, "redo redirect" ];
 
 		return $cases;
+	}
+
+	/**
+	 * @return ItemContent
+	 */
+	protected function newEmptyContent() {
+		return new ItemContent();
 	}
 
 	/**
@@ -281,4 +289,34 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$this->assertSame( "Kitten\nKitten", $data['text'], 'text' );
 	}
 
+	public function testGetParserOutput() {
+		$content = $this->newEntityContent();
+		$contentRenderer = $this->getServiceContainer()->getContentRenderer();
+
+		$title = Title::newFromTextThrow( 'Foo' );
+		$parserOutput = $contentRenderer->getParserOutput( $content, $title );
+
+		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];
+		$actualOptions = $parserOutput->getUsedOptions();
+		$this->assertEqualsCanonicalizing(
+			$expectedUsedOptions,
+			$actualOptions,
+			'Cache-split flags are not what they should be'
+		);
+
+		$this->assertInstanceOf( ParserOutput::class, $parserOutput );
+	}
+
+	public function testGetParserOutput_redirect() {
+		$content = $this->newRedirectContent( new ItemId( 'Q5' ), new ItemId( 'Q123' ) );
+		$contentRenderer = $this->getServiceContainer()->getContentRenderer();
+		$title = Title::newFromTextThrow( 'Foo' );
+		$parserOutput = $contentRenderer->getParserOutput( $content, $title );
+
+		$html = $parserOutput->getText();
+
+		$this->assertStringContainsString( '<div class="redirectMsg">', $html, 'redirect message' );
+		$this->assertStringContainsString( '<a href="', $html, 'redirect target link' );
+		$this->assertStringContainsString( 'Q123</a>', $html, 'redirect target label' );
+	}
 }

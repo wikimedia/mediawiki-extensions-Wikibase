@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Content;
 
+use Article;
 use Content;
 use ContentHandler;
 use Diff\Patcher\PatcherException;
@@ -9,11 +10,14 @@ use Html;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
+use MediaWiki\Content\Renderer\ContentParseParams;
 use MediaWiki\MediaWikiServices;
 use MWContentSerializationException;
 use MWException;
 use ParserCache;
+use ParserOptions;
 use ParserOutput;
+use RequestContext;
 use SearchEngine;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -22,6 +26,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\Diff\EntityContentDiffView;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
@@ -517,7 +522,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * This implementation returns the user language, because entities get rendered in
 	 * the user's language. The PageContentLanguage hook is bypassed.
 	 *
-	 * @param Title        $title the page to determine the language for.
+	 * @param Title $title the page to determine the language for.
 	 * @param Content|null $content the page's content, if you have it handy, to avoid reloading it.
 	 *
 	 * @return Language The page's language
@@ -540,7 +545,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @note in several places in mediawiki, most importantly the parser cache, getPageLanguage
 	 * is used in places where getPageViewLanguage would be more appropriate.
 	 *
-	 * @param Title        $title the page to determine the language for.
+	 * @param Title $title the page to determine the language for.
 	 * @param Content|null $content the page's content, if you have it handy, to avoid reloading it.
 	 *
 	 * @return Language The page's language
@@ -723,4 +728,152 @@ abstract class EntityHandler extends ContentHandler {
 		return $parserOutput;
 	}
 
+	/**
+	 * @note this calls ParserOutput::recordOption( 'userlang' ) to split the cache
+	 * by user language, and ParserOutput::recordOption( 'wb' ) to split the cache on
+	 * EntityHandler::PARSER_VERSION.
+	 *
+	 * @inheritDoc
+	 */
+	protected function fillParserOutput(
+		Content $content,
+		ContentParseParams $cpoParams,
+		ParserOutput &$output
+	) {
+		'@phan-var EntityContent $content';
+		$generateHtml = $cpoParams->getGenerateHtml();
+		$parserOptions = $cpoParams->getParserOptions();
+		$revId = $cpoParams->getRevId();
+
+		if ( $content->isRedirect() ) {
+			$output = $this->getParserOutputForRedirect( $content, $generateHtml );
+		} elseif ( !$content->getEntityHolder() ) {
+			// NOTE: There is no entity to render, but fillParserOutput() must work for all Content objects.
+			// NOTE: isEmpty() will return true when there is an entity, but that entity is empty. In
+			//       that case, we must not bail out, but call getParserOutputFromEntityView() as normal.
+		} else {
+			$output = $this->getParserOutputFromEntityView(
+				$content,
+				$revId,
+				$parserOptions,
+				$generateHtml
+			);
+
+			if ( !$parserOptions->getUserLangObj()->equals( RequestContext::getMain()->getLanguage() ) ) {
+				// HACK: Don't save to parser cache if this is not in the user's lang: T199983.
+				$output->updateCacheExpiry( 0 );
+			}
+		}
+	}
+
+	/**
+	 * @note Will fail if this EntityContent does not represent a redirect.
+	 *
+	 * @param EntityContent $content
+	 * @param bool $generateHtml
+	 *
+	 * @return ParserOutput
+	 */
+	protected function getParserOutputForRedirect( EntityContent $content, bool $generateHtml ) {
+		$output = new ParserOutput();
+		$target = $content->getRedirectTarget();
+
+		// Make sure to include the redirect link in pagelinks
+		$output->addLink( $target );
+
+		// Since the output depends on the user language, we must make sure
+		// ParserCache::getKey() includes it in the cache key.
+		$output->recordOption( 'userlang' );
+		// And we need to include EntityHandler::PARSER_VERSION in the cache key too
+		$output->recordOption( 'wb' );
+		if ( $generateHtml ) {
+			$chain = $content->getRedirectChain();
+			$language = $this->getPageViewLanguage( $target );
+			$html = Article::getRedirectHeaderHtml( $language, $chain, false );
+			$output->setText( $html );
+		}
+
+		return $output;
+	}
+
+	/**
+	 * @note Will fail if this EntityContent represents a redirect.
+	 *
+	 * @param EntityContent $content
+	 * @param int|null $revisionId
+	 * @param ParserOptions $options
+	 * @param bool $generateHtml
+	 *
+	 * @return ParserOutput
+	 */
+	protected function getParserOutputFromEntityView(
+		EntityContent $content,
+		$revisionId,
+		ParserOptions $options,
+		$generateHtml = true
+	) {
+		$outputGenerator = WikibaseRepo::getEntityParserOutputGeneratorFactory()
+			->getEntityParserOutputGenerator(
+				$this->getValidUserLanguage( $options->getUserLangObj() )
+			);
+
+		$entityRevision = $this->getEntityRevision( $content, $revisionId );
+
+		$output = $outputGenerator->getParserOutput( $entityRevision, $generateHtml );
+
+		// Since the output depends on the user language, we must make sure
+		// ParserCache::getKey() includes it in the cache key.
+		$output->recordOption( 'userlang' );
+		// And we need to include EntityHandler::PARSER_VERSION in the cache key too
+		$output->recordOption( 'wb' );
+
+		$this->applyEntityPageProperties( $content, $output );
+
+		return $output;
+	}
+
+	private function getValidUserLanguage( Language $language ) {
+		if ( !Language::isValidBuiltInCode( $language->getCode() ) ) {
+			return Language::factory( 'und' ); // T204791
+		}
+
+		return $language;
+	}
+
+	/**
+	 * @param EntityContent $content
+	 * @param int|null $revisionId
+	 *
+	 * @return EntityRevision
+	 */
+	private function getEntityRevision( EntityContent $content, $revisionId = null ) {
+		$entity = $content->getEntity();
+
+		if ( $revisionId !== null ) {
+			return new EntityRevision( $entity, $revisionId );
+		}
+
+		// Revision defaults to 0 (latest), which is desired and suitable in cases where
+		// getParserOutput specifies no revision. (e.g. is called during save process
+		// when revision id is unknown or not assigned yet)
+		return new EntityRevision( $entity );
+	}
+
+	/**
+	 * Registers any properties returned by getEntityPageProperties()
+	 * in $output.
+	 *
+	 * @param EntityContent $content
+	 * @param ParserOutput $output
+	 */
+	private function applyEntityPageProperties( EntityContent $content, ParserOutput $output ) {
+		if ( $content->isRedirect() ) {
+			return;
+		}
+
+		$properties = $content->getEntityPageProperties();
+		foreach ( $properties as $name => $value ) {
+			$output->setPageProperty( $name, $value );
+		}
+	}
 }
