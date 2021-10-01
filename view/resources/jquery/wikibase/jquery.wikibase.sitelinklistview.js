@@ -292,14 +292,10 @@
 				$items.length
 			);
 
-			// Counter result should be wrapped in parentheses, which is another message. Since the
-			// message system does not return a jQuery object, a work-around is needed:
-			var $parenthesesMsg = $(
-				( '<div>' + mw.msg( 'parentheses', '__1__' ) + '</div>' ).replace( /__1__/g, '<span/>' )
-			);
-			$parenthesesMsg.find( 'span' ).replaceWith( $counterMsg );
-
-			return $parenthesesMsg.contents();
+			// Counter result should be wrapped in parentheses, which is another message. Since this
+			// module loads mediawiki.jqueryMsg, we can use jQuery objects as parameters,
+			// and use parseDom() to get a jQuery object back
+			return mw.message( 'parentheses', $counterMsg ).parseDom();
 		},
 
 		_startEditing: function () {
