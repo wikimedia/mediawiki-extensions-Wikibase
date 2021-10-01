@@ -503,6 +503,10 @@
 		"Wikibaseclientalias": "client/WikibaseClient.i18n.alias.php",
 		"wikibaseclientmagic": "client/WikibaseClient.i18n.magic.php"
 	},
+	"DefaultUserOptions": {
+		"rcshowwikidata": 0,
+		"wlshowwikibase": 0
+	},
 	"callback": "\\Wikibase\\Lib\\LibHooks::onRegistration",
 	"manifest_version": 2
 }
