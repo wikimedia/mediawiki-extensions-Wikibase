@@ -6,6 +6,7 @@ use ExtensionRegistry;
 use Hooks;
 use Language;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use MediaWiki\Extension\Math\MathDataUpdater;
 use PageImages\PageImages;
 use RepoGroup;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
@@ -198,7 +199,7 @@ class EntityParserOutputGeneratorFactory {
 		}
 
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'Math' ) ) {
-			$statementUpdater->addUpdater( new \MathDataUpdater( $propertyDataTypeMatcher ) );
+			$statementUpdater->addUpdater( new MathDataUpdater( $propertyDataTypeMatcher ) );
 		}
 
 		// FIXME: null implementation of KartographerEmbeddingHandler would seem better than null pointer
