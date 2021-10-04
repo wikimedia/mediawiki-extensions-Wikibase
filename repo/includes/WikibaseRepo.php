@@ -122,6 +122,7 @@ use Wikibase\Repo\Rdf\RdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Search\Fields\FieldDefinitionsFactory;
+use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
@@ -1065,6 +1066,13 @@ class WikibaseRepo {
 	public static function getStatementNormalizer( ContainerInterface $services = null ): StatementNormalizer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.StatementNormalizer' );
+	}
+
+	public static function getBagOStuffSiteLinkConflictLookup(
+		ContainerInterface $services = null
+	): BagOStuffSiteLinkConflictLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.BagOStuffSiteLinkConflictLookup' );
 	}
 
 }

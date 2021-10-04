@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
@@ -26,6 +27,7 @@ use Wikibase\Repo\Actions\HistoryEntityAction;
 use Wikibase\Repo\Actions\SubmitEntityAction;
 use Wikibase\Repo\Actions\ViewEntityAction;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
+use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
@@ -43,6 +45,9 @@ class ItemHandler extends EntityHandler {
 	 * @var SiteLinkStore
 	 */
 	private $siteLinkStore;
+
+	/** @var BagOStuffSiteLinkConflictLookup */
+	private $bagOStuffSiteLinkConflictLookup;
 
 	/**
 	 * @var EntityIdLookup
@@ -64,19 +69,9 @@ class ItemHandler extends EntityHandler {
 	 */
 	private $entityTermStoreWriter;
 
-	/**
-	 * @param EntityTermStoreWriter $entityTermStoreWriter
-	 * @param EntityContentDataCodec $contentCodec
-	 * @param EntityConstraintProvider $constraintProvider
-	 * @param ValidatorErrorLocalizer $errorLocalizer
-	 * @param EntityIdParser $entityIdParser
-	 * @param SiteLinkStore $siteLinkStore
-	 * @param EntityIdLookup $entityIdLookup
-	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory
-	 * @param FieldDefinitions $itemFieldDefinitions
-	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param callable|null $legacyExportFormatDetector
-	 */
+	/** @var RepoDomainDb */
+	private $db;
+
 	public function __construct(
 		EntityTermStoreWriter $entityTermStoreWriter,
 		EntityContentDataCodec $contentCodec,
@@ -84,11 +79,13 @@ class ItemHandler extends EntityHandler {
 		ValidatorErrorLocalizer $errorLocalizer,
 		EntityIdParser $entityIdParser,
 		SiteLinkStore $siteLinkStore,
+		BagOStuffSiteLinkConflictLookup $bagOStuffSiteLinkConflictLookup,
 		EntityIdLookup $entityIdLookup,
 		LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory,
 		FieldDefinitions $itemFieldDefinitions,
 		PropertyDataTypeLookup $dataTypeLookup,
-		$legacyExportFormatDetector = null
+		RepoDomainDb $db,
+		?callable $legacyExportFormatDetector = null
 	) {
 		parent::__construct(
 			ItemContent::CONTENT_MODEL_ID,
@@ -104,8 +101,10 @@ class ItemHandler extends EntityHandler {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->labelLookupFactory = $labelLookupFactory;
 		$this->siteLinkStore = $siteLinkStore;
+		$this->bagOStuffSiteLinkConflictLookup = $bagOStuffSiteLinkConflictLookup;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->entityTermStoreWriter = $entityTermStoreWriter;
+		$this->db = $db;
 	}
 
 	/**
@@ -177,8 +176,15 @@ class ItemHandler extends EntityHandler {
 			);
 
 			$updates[] = new DataUpdateAdapter(
-				[ $this->siteLinkStore, 'saveLinksOfItem' ],
-				$item
+				function ( Item $item, string $method ) {
+					$this->siteLinkStore->saveLinksOfItem( $item );
+					$this->db->connections()->getWriteConnectionRef()
+						->onTransactionCommitOrIdle( function() use ( $item ) {
+							$this->bagOStuffSiteLinkConflictLookup->clearConflictsForItem( $item );
+						}, $method );
+				},
+				$item,
+				__METHOD__
 			);
 		}
 

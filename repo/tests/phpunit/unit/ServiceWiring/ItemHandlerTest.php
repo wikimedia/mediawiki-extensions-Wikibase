@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
@@ -14,6 +15,7 @@ use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Search\Fields\FieldDefinitionsFactory;
+use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
@@ -45,6 +47,8 @@ class ItemHandlerTest extends ServiceWiringTestCase {
 			->willReturn( new HashSiteLinkStore() );
 		$this->mockService( 'WikibaseRepo.Store',
 			$store );
+		$this->mockService( 'WikibaseRepo.BagOStuffSiteLinkConflictLookup',
+			$this->createMock( BagOStuffSiteLinkConflictLookup::class ) );
 		$this->mockService( 'WikibaseRepo.EntityIdLookup',
 			$this->createMock( EntityIdLookup::class ) );
 		$this->mockService( 'WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory',
@@ -57,6 +61,11 @@ class ItemHandlerTest extends ServiceWiringTestCase {
 			$fieldDefinitionsFactory );
 		$this->mockService( 'WikibaseRepo.PropertyDataTypeLookup',
 			new InMemoryDataTypeLookup() );
+		$repoDomainDbFactory = $this->createMock( RepoDomainDbFactory::class );
+		$repoDomainDbFactory->expects( $this->once() )
+			->method( 'newRepoDb' );
+		$this->mockService( 'WikibaseRepo.RepoDomainDbFactory',
+			$repoDomainDbFactory );
 		$this->mockService( 'WikibaseRepo.LegacyFormatDetectorCallback',
 			null );
 
