@@ -58,7 +58,7 @@ class InterWikiLinkExistsValidator implements ValueValidator {
 			$errors[] = Error::newError(
 				"Page does not exist: " . $value,
 				null,
-				'page-not-exist',
+				'page-not-exists',
 				[ $value ]
 			);
 		}
