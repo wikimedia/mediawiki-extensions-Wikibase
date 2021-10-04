@@ -63,13 +63,14 @@ local function maskEntityTable( entity, tableName, usageFunc )
 		return
 	end
 
+	local actualEntityId = entity.id
 	local actualEntityTable = entity[tableName]
 	entity[tableName] = {}
 
 	local function logNext( _, key )
 		local k, v = next( actualEntityTable, key )
 		if k ~= nil then
-			usageFunc( entity.id, k )
+			usageFunc( actualEntityId, k )
 		end
 		return k, v
 	end
@@ -79,7 +80,7 @@ local function maskEntityTable( entity, tableName, usageFunc )
 			if type( key ) ~= 'string' then
 				return nil
 			end
-			usageFunc( entity.id, key )
+			usageFunc( actualEntityId, key )
 			return actualEntityTable[key]
 		end,
 

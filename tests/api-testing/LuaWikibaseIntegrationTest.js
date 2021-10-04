@@ -128,6 +128,12 @@ describe( 'Lua Wikibase integration', () => {
 					local snak = { datatype = 'wikibase-item', property = 'P435739845', snaktype = 'value', datavalue = dataValue }
 					return mw.wikibase.formatValue( snak )
 				end
+				p.getLabelAfterReassignedEntityId = function()
+					local entity = mw.wikibase.getEntity( '${testItemId}' )
+					entity.id = 'Q2147483647'
+					return entity.labels.en.value
+				end
+
 				return p
 				`,
 			contentmodel: 'Scribunto',
@@ -194,6 +200,15 @@ describe( 'Lua Wikibase integration', () => {
 			} );
 		} );
 		/* eslint-enable mocha/no-setup-in-describe */
+	} );
+
+	it( 'reassigning entity ID has no impact on usage tracking', async () => {
+		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
+		await writeTextToPage( mindy, `{{#invoke:${module}|getLabelAfterReassignedEntityId }}`, pageTitle );
+		const pageResponse = await parsePage( pageTitle );
+		assert.equal( pageResponse.parse.text, `<p>${englishLabel}\n</p>` );
+		const usageAspects = await getUsageAspects( pageTitle, testItemId );
+		assert.equal( usageAspects, 'L.en' );
 	} );
 
 	it( 'getLabelByLang returns the label of the redirect target for a redirected item', async () => {
