@@ -8,25 +8,5 @@
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Handling of \"$1\" data values is not yet supported.",
-	"valueview-expert-emptyvalue-empty": "empty",
-	"valueview-expert-globecoordinateinput-precision": "Precision:",
-	"valueview-expert-globecoordinateinput-nullprecision": "unspecified",
-	"valueview-expert-globecoordinateinput-customprecision": "special ($1)",
-	"valueview-expert-timevalue-calendar-gregorian": "Gregorian",
-	"valueview-expert-timevalue-calendar-julian": "Julian",
-	"valueview-expert-timeinput-precision": "Precision:",
-	"valueview-expert-timeinput-precision-year1g": "billion years",
-	"valueview-expert-timeinput-precision-year1m": "million years",
-	"valueview-expert-timeinput-precision-year10k": "10,000 years",
-	"valueview-expert-timeinput-precision-year": "year",
-	"valueview-expert-timeinput-precision-month": "month",
-	"valueview-expert-timeinput-precision-day": "day",
-	"valueview-expert-timeinput-precision-hour": "hour",
-	"valueview-expert-timeinput-calendar": "Calendar:",
-	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
-	"valueview-expertextender-languageselector-label": "Language (mandatory):",
-	"valueview-expertextender-unitsuggester-label": "Unit (optional):",
-	"valueview-preview-label": "will be displayed as:",
-	"valueview-preview-novalue": "no valid value recognised",
-	"valueview-listrotator-manually": "set manually"
+	"valueview-preview-novalue": "no valid value recognised"
 }
