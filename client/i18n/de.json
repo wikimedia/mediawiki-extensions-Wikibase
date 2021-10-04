@@ -63,7 +63,7 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "Alle {{WBREPONAME}}-Bearbeitungen, die als „klein“ gekennzeichnet sind, so dass der Filter „{{WBREPONAME}}-Bearbeitungen“ mit dem Filter „Nicht-kleine Änderungen“ kollidiert.",
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "Alle {{WBREPONAME}}-Bearbeitungen, die als „klein“ gekennzeichnet sind, so dass der Filter „{{WBREPONAME}}-Bearbeitungen“ mit dem Filter „Nicht-kleine Änderungen“ kollidiert.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Alle {{WBREPONAME}}-Bearbeitungen, die als „klein“ gekennzeichnet sind, so dass der Filter „{{WBREPONAME}}-Bearbeitungen“ mit dem Filter „Nicht-kleine Änderungen“ kollidiert.",
-	"wikibase-replicationnote": "Bitte bedenke, dass es einige Minuten dauern kann, bis die Änderungen auf allen Wikis sichtbar sind.",
+	"wikibase-replicationnote": "Bitte beachte, dass es einige Minuten dauern kann, bis die Änderungen auf allen Wikis sichtbar sind.",
 	"wikibase-watchlist-show-changes-pref": "Bearbeitungen auf {{WBREPONAME}} in der Beobachtungsliste anzeigen",
 	"wikibase-error-deserialize-error": "Daten konnten nicht deserialisiert werden.",
 	"wikibase-error-serialize-error": "Die Daten konnten nicht serialisiert werden",

@@ -207,6 +207,8 @@
 	"wikibase-listdatatypes-multilingualtext-head": "Шматмоўны тэкст",
 	"wikibase-listdatatypes-string-head": "Радок",
 	"wikibase-listdatatypes-time-head": "Час",
+	"wikibase-concept-uri": "URI канцэпта",
+	"wikibase-concept-uri-tooltip": "URI, які ідэнтыфікуе канцэпт, што апісваецца гэтым элементам",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Элемент рэпазітара Wikibase",
 	"content-model-wikibase-property": "Уласцівасць элемента Wikibase",

@@ -11,9 +11,6 @@
 			"Usandaru555"
 		]
 	},
-	"wikibase-edit": "edit",
-	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configure",
-	"wikibase-summary-generated": "Summary (will be appended to an automatically generated summary):",
 	"wikibase-newitem-not-recognized-siteid": "The provided site identifier was not recognised.",
 	"wikibase-api-not-recognized-siteid": "The supplied site identifier was not recognised",
 	"wikibase-api-not-recognized-array": "An array was expected, but not recognised",

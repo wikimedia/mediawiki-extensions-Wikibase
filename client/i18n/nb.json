@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"4ing",
+			"Abuluntu",
 			"Danmichaelo",
 			"Event",
 			"Jeblad",
@@ -61,7 +62,7 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "Alle endringer på {{WBREPONAME}} merkes som mindre endringer, så filteret «{{WBREPONAME}}-redigeringer» strider med filteret «Ingen mindre endringer».",
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "Alle endringer på {{WBREPONAME}} merkes som mindre endringer, så filteret «{{WBREPONAME}}-redigeringer» strider med filteret «Ingen mindre endringer».",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Alle endringer på {{WBREPONAME}} merkes som mindre endringer, så filteret «{{WBREPONAME}}-redigeringer» strider med filteret «Ingen mindre endringer».",
-	"wikibase-replicationnote": "Vær oppmerksom på at det kan ta flere minutter før endringene er synlig på alle wikier",
+	"wikibase-replicationnote": "Vær oppmerksom på at det kan ta flere minutter før endringene er synlig på alle wikier.",
 	"wikibase-watchlist-show-changes-pref": "Vis {{WBREPONAME}}-redigeringer i overvåkningslisten din",
 	"wikibase-error-deserialize-error": "Klarte ikke å pakke ut data.",
 	"wikibase-error-serialize-error": "Serialisering av data mislyktes",

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Fraxinus.cs",
 			"Guycn2",
 			"Ilimanaq29",
 			"JAn Dudík",
@@ -63,7 +64,7 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "Všechny editace {{GRAMMAR:2sg|{{WBREPONAME}}}} jsou označeny jako „malé“, filtr „Editace {{GRAMMAR:2sg|{{WBREPONAME}}}}“ je proto v konfliktu s filtrem „Nemalé editace“.",
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "Všechny editace {{GRAMMAR:2sg|{{WBREPONAME}}}} jsou označeny jako „malé“, filtr „Editace {{GRAMMAR:2sg|{{WBREPONAME}}}}“ je proto v konfliktu s filtrem „Nemalé editace“.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Všechny editace {{GRAMMAR:2sg|{{WBREPONAME}}}} jsou označeny jako „malé“, filtr „Editace {{GRAMMAR:2sg|{{WBREPONAME}}}}“ je proto v konfliktu s filtrem „Nemalé editace“.",
-	"wikibase-replicationnote": "Vezměte prosím na vědomí, že než se změny projeví na všech wiki, může to trvat pár minut.",
+	"wikibase-replicationnote": "Vezměte prosím na vědomí, že než se změny projeví na všech wiki, může to trvat několik minut.",
 	"wikibase-watchlist-show-changes-pref": "Zobrazit změny {{grammar:2sg|{{WBREPONAME}}}} ve sledovaných stránkách",
 	"wikibase-error-deserialize-error": "Nepodařilo se deserializovat data.",
 	"wikibase-error-serialize-error": "Nepodařilo se zaserializovat data.",

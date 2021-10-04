@@ -55,7 +55,7 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "Tute i modifiche {{WBREPONAME}} inn condierade \"piscinini\", per quest el filter \"modiffiche {{WBREPONAME}}\" el ghe dà adoss al filter \"Modifiche minga piscinine\".",
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "Tute i modifiche {{WBREPONAME}} inn considerade \"piscinine\", per quest el filter \"modifiche {{WBREPONAME}}\" el ghe dà adoss al filter \"Modifiche minga piscinine\".",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Tute i modifiche {{WBREPONAME}} inn considerade \"piscinine\", per quest el filter \"modifiche {{WBREPONAME}}\" el ghe dà adoss al filter \"Modifiche minga piscinine\".",
-	"wikibase-replicationnote": "A ghe podarìssen vorè diversì minùt inanz che i modifihe sìen visìbel in su tut i wiki.",
+	"wikibase-replicationnote": "Ten in cunt che 'l ghe podariss voré on frach de minùt inanz che i modifeghe i sien visibel in tut i wiki.",
 	"wikibase-watchlist-show-changes-pref": "Mostra i modifiche in su {{WBREPONAME}} in la lista di pagine che te tegnet d'oeugg",
 	"wikibase-error-deserialize-error": "Deserializazzion ci dati fallada.",
 	"wikibase-error-serialize-error": "Deserializazzion di dati fallada.",
