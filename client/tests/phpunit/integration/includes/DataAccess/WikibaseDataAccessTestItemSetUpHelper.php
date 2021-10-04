@@ -123,8 +123,8 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		);
 
 		$labels = [
-			'de' => 'Lua Test Item',
-			'en' => 'Test all the code paths'
+			'de' => 'Lua-Test-Datenobjekt',
+			'en' => 'Lua Test Item'
 		];
 
 		$this->createTestItem( new ItemId( 'Q32487' ), $labels, [ $statement1, $statement2 ], $siteLinks );

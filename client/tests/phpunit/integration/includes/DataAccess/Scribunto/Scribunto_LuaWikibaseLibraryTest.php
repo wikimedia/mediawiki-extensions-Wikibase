@@ -253,12 +253,12 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 		if ( $allowDataAccessInUserLanguage ) {
 			$this->assertSame(
-				[ 'Lua Test Item', 'de' ],
+				[ 'Lua-Test-Datenobjekt', 'de' ],
 				$label
 			);
 		} else {
 			$this->assertSame(
-				[ 'Test all the code paths', 'en' ],
+				[ 'Lua Test Item', 'en' ],
 				$label
 			);
 		}
