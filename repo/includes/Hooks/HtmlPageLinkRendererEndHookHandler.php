@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Hooks;
 
-use Action;
 use HtmlArmor;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\Hook\HtmlPageLinkRendererEndHook;
@@ -238,10 +237,10 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 			return true;
 		}
 
-		// Only continue on pages with edit summaries (histories / diffs) or on special pages.
+		// Only continue on comment links or on special pages.
 		// Don't run this code when accessing it through the api (eg. for parsing) as the title is
 		// set to a special page dummy in api.php, see https://phabricator.wikimedia.org/T111346
-		if ( $this->isApiRequest() || !$this->shouldConvert( $outTitle, $context ) ) {
+		if ( $this->isApiRequest() || !$this->shouldConvert( $outTitle, $linkRenderer ) ) {
 			return true;
 		}
 
@@ -482,39 +481,18 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 
 	/**
 	 * Whether we should try to convert links on this page.
-	 * This caches that result within a static variable,
-	 * thus it can't change (except in phpunit tests).
 	 *
 	 * @param Title|null $currentTitle
-	 * @param RequestContext $context
+	 * @param LinkRenderer $linkRenderer
 	 *
 	 * @return bool
 	 */
-	private function shouldConvert( ?Title $currentTitle, RequestContext $context ) {
-		static $shouldConvert = null;
-		if ( $shouldConvert !== null && !defined( 'MW_PHPUNIT_TEST' ) ) {
-			return $shouldConvert;
-		}
-
-		$actionName = Action::getActionName( $context );
-		 // This is how Article detects diffs
-		$isDiff = $actionName === 'view' && $context->getRequest()->getCheck( 'diff' );
-
-		// Only continue on pages with edit summaries (histories / diffs) or on special pages.
-		if (
-			( $currentTitle === null || !$currentTitle->isSpecialPage() )
-			&& $actionName !== 'history'
-			&& !$isDiff
-		) {
+	private function shouldConvert( Title $currentTitle, LinkRenderer $linkRenderer ) {
+		return $linkRenderer->isForComment() ||
 			// Note: this may not work right with special page transclusion. If $out->getTitle()
 			// doesn't return the transcluded special page's title, the transcluded text will
 			// not have entity IDs resolved to labels.
-			$shouldConvert = false;
-			return false;
-		}
-
-		$shouldConvert = true;
-		return true;
+			$currentTitle->isSpecialPage();
 	}
 
 	private function getLabelDescriptionLookup( RequestContext $context ): LabelDescriptionLookup {
