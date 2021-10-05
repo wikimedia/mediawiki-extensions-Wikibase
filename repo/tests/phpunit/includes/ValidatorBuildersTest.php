@@ -391,6 +391,25 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 				false
 			],
 
+			'Month precision must specify nonzero month' => [
+				'+2021-00-00T00:00:00Z',
+				TimeValue::PRECISION_MONTH,
+				$wikidataUri . 'Q1985727',
+				false,
+			],
+			'Day precision must specify nonzero month' => [
+				'+2021-00-00T00:00:00Z',
+				TimeValue::PRECISION_DAY,
+				$wikidataUri . 'Q1985727',
+				false,
+			],
+			'Day precision must specify nonzero day' => [
+				'+2021-10-00T00:00:00Z',
+				TimeValue::PRECISION_DAY,
+				$wikidataUri . 'Q1985727',
+				false,
+			],
+
 			// TODO: Calendar must be an item reference
 			// TODO: Calendar must be from a list of configured values
 		];

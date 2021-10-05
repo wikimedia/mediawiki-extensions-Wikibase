@@ -25,6 +25,7 @@ use Wikibase\Repo\Validators\NumberRangeValidator;
 use Wikibase\Repo\Validators\NumberValidator;
 use Wikibase\Repo\Validators\RegexValidator;
 use Wikibase\Repo\Validators\StringLengthValidator;
+use Wikibase\Repo\Validators\TimestampPrecisionValidator;
 use Wikibase\Repo\Validators\TypeValidator;
 use Wikibase\Repo\Validators\UrlSchemeValidators;
 use Wikibase\Repo\Validators\UrlValidator;
@@ -370,6 +371,7 @@ class ValidatorBuilders {
 			'precision',
 			new CompositeValidator( $precisionValidators ) //Note: each validator is fatal
 		);
+		$validators[] = new TimestampPrecisionValidator();
 
 		$topValidator = new DataValueValidator(
 			new CompositeValidator( $validators ) //Note: each validator is fatal
