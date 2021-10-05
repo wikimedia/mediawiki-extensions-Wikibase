@@ -70,7 +70,7 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-bewerking",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-bewerkingen",
 	"wikibase-rcfilters-hide-wikibase-description": "Bewerkingen die van {{WBREPONAME}} afkomstig zijn.",
-	"wikibase-replicationnote": "Het kan een aantal minuten duren voor alle wijzigingen op alle wiki's zichtbaar zijn",
+	"wikibase-replicationnote": "Het kan een aantal minuten duren voordat de wijzigingen op alle wiki's zichtbaar zijn.",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-bewerkingen op mijn volglijst weergeven",
 	"wikibase-error-serialize-error": "De gegevens konden niet geserialiseerd worden",
 	"wikibase-error-invalid-entity-id": "Het ID \"$2\" is niet bekend in het systeem. Gebruik een geldig entiteits-ID.",

@@ -13,5 +13,6 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ᬳᭂᬂᬓᭂᬩᬂ",
 	"wikibase-rc-wikibase-edit-letter": "ᬤ᭄",
-	"wikibase-rc-wikibase-edit-title": "ᬳᬸᬯᬳᬦ᭄ {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "ᬳᬸᬯᬳᬦ᭄ {{WBREPONAME}}",
+	"wikibase-otherprojects": "ᬭᬶᬂᬧ᭄ᬭᭀᬬᬾᬓ᭄ᬮᬶᬬᬦᬦ᭄"
 }

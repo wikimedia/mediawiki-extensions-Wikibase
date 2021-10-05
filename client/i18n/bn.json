@@ -26,7 +26,7 @@
 	"wikibase-comment-sitelink-add": "ভাষা সংযোগ যোগ হয়েছে: $1",
 	"wikibase-comment-sitelink-change": "ভাষা সংযোগ $1 থেকে $2 এ পরিবর্তন হয়েছে",
 	"wikibase-comment-sitelink-remove": "ভাষা সংযোগ অপসারিত হয়েছে: $1",
-	"wikibase-comment-multi": "$1 {{PLURAL:$1|টি পরিবর্তন}}",
+	"wikibase-comment-multi": "$1টি {{PLURAL:$1|পরিবর্তন}}",
 	"wikibase-dataitem": "{{WBREPONAME}} আইটেম",
 	"wikibase-editlinks": "আন্তঃউইকি সংযোগ সম্পাদনা",
 	"wikibase-editlinkstitle": "আন্তঃভাষার সংযোগ সম্পাদনা করুন",

@@ -69,7 +69,7 @@
 	"wikibase-rc-wikibase-edit-title": "Modifica effettuata su {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-label": "Modifiche {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-description": "Modifiche che hanno origine da {{WBREPONAME}}.",
-	"wikibase-replicationnote": "Potrebbero essere necessari diversi minuti prima che le modifiche siano visibili su tutti i wiki",
+	"wikibase-replicationnote": "Potrebbero essere necessari diversi minuti prima che le modifiche siano visibili su tutti i wiki.",
 	"wikibase-watchlist-show-changes-pref": "Mostra le modifiche su {{WBREPONAME}} nella tua lista degli osservati speciali",
 	"wikibase-error-deserialize-error": "Errore nella deserializzazione dei dati.",
 	"wikibase-error-serialize-error": "Impossibile serializzare i dati",
