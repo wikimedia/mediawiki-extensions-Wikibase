@@ -32,7 +32,7 @@ return [
 	'ssrServerTimeout' => 3,
 
 	// feature flag for termbox
-	'termboxEnabled' => false,
+	'termboxEnabled' => true,
 
 	// debug flag for termbox ssr
 	'termboxUserSpecificSsrEnabled' => true,

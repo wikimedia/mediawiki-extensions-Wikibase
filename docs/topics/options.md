@@ -347,9 +347,9 @@ Relevant only for search engines supporting it.
 ### Termbox & SSR
 
 #### termboxEnabled {#repo_termboxEnabled}
-Enable/Disable Termbox v2. Setting it to ```true``` will enable both client-side and server-side rendering functionality. In order for server-side rendering to work the respective service needs to be set up and ```ssrServerUrl``` has to be set accordingly.
+Enable/Disable Termbox v2. Setting it to ```true``` will enable both client-side and server-side rendering functionality. In order for server-side rendering to work, the respective service needs to be set up and ```ssrServerUrl``` has to be set accordingly; otherwise, users without JavaScript will not see a termbox.
 
-DEFAULT: ```false``` (so all Termbox v2 functionality is disabled)
+DEFAULT: ```true```
 
 #### ssrServerUrl
 The url to where the server-side-renderer server (for termbox) is running.

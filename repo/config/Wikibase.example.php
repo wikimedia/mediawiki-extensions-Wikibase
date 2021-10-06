@@ -29,10 +29,4 @@ call_user_func( function() {
 
 	// Tell Wikibase to register these namespaces (later)
 	$wgWBRepoSettings['defaultEntityNamespaces'] = true;
-
-	// Example configuration for enabling termbox
-	// both exemplary and used to enable it for CI tests
-	$wgWBRepoSettings['termboxEnabled'] = true;
-	$wgWBRepoSettings['ssrServerUrl'] = 'http://termbox-ssr.example.com';
-	$wgWBRepoSettings['ssrServerTimeout'] = 0.1;
 } );
