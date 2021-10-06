@@ -61,8 +61,6 @@ call_user_func( function() {
 		];
 	};
 
-	// NOTE: no need to set up $wgNamespaceContentModels, Wikibase will do that automatically based on $wgWBRepoSettings
-
 	// Tell MediaWiki to search the item namespace
 	$wgNamespacesToBeSearchedDefault[WB_NS_ITEM] = true;
 
