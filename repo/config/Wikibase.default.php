@@ -26,7 +26,7 @@ return [
 	'taintedReferencesEnabled' => false,
 
 	// url of (termbox) ssr-server
-	'ssrServerUrl' => '',
+	'ssrServerUrl' => null,
 
 	// Timeout for SSR-Server in seconds
 	'ssrServerTimeout' => 3,
