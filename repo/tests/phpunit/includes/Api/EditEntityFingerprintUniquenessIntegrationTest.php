@@ -27,7 +27,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 	}
 
 	public function testNewPropertyLabelConflict() {
-		$expectedFailureCode = 'modification-failed';
+		$expectedFailureCode = 'failed-save';
 		$params = [
 			'action' => 'wbeditentity',
 			'data' => json_encode( [
@@ -47,7 +47,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 	}
 
 	public function testExistingPropertyLabelConflict() {
-		$expectedFailureCode = 'modification-failed';
+		$expectedFailureCode = 'failed-save';
 
 		$params = [
 			'action' => 'wbeditentity',

@@ -233,6 +233,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 			return Status::newFatal( 'wikibase-newproperty-same-label-and-description' );
 		}
 
+		// property label uniqueness is also checked later in LabelUniquenessValidator (T289473),
+		// but we repeat it here to avoid consuming a property ID if there is a collision
 		$collidingPropertyId = $this->termsCollisionDetector->detectLabelCollision(
 			$formData[ self::FIELD_LANG ],
 			$formData[ self::FIELD_LABEL ]
