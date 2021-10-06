@@ -17,6 +17,7 @@ use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\PageUpdater;
+use Wikibase\Client\Hooks\WikibaseClientHookRunner;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageLookup;
@@ -88,7 +89,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			$updater ?: new MockPageUpdater(),
 			$this->getChangeRunCoalescer(),
 			new NullLogger(),
-			$this->createHookContainer( $hooks ),
+			new WikibaseClientHookRunner( $this->createHookContainer( $hooks ) ),
 			true
 		);
 
@@ -671,7 +672,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			$updater,
 			$this->getChangeRunCoalescer(),
 			new NullLogger(),
-			$this->createHookContainer()
+			new WikibaseClientHookRunner( $this->createHookContainer() )
 		);
 
 		$inputRootJobParams = [ 'rootJobTimestamp' => '20171122040506' ];
