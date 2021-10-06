@@ -12,9 +12,11 @@
 	"wikibase-dataitem": "{{WBREPONAME}} တၢ်ဖိလံး",
 	"wikibase-editlinks": "အဲၣ်ဒံၣ် links",
 	"wikibase-editlinkstitle": "Edit interlanguage links",
+	"wikibase-linkitem-addlinks": "မၤအါထီၣ် လ့ၣ်ခ်တဖၣ်",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ပာ်ဘၢ",
 	"wikibase-rc-hide-wikidata-show": "နဲၣ်ဖျါ",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} အဲးဒံၣ်"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} အဲးဒံၣ်",
+	"wikibase-otherprojects": "လၢ တၢ်တိာ်ကျဲၤ အဂၤတဖၣ်"
 }

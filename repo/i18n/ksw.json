@@ -2,10 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Jaeminlovetaejoon",
-			"Khing"
+			"Khing",
+			"SawJaemin"
 		]
 	},
 	"wikibase-edit": "ပဲာ်ထံ",
 	"wikibase-add": "ပၥ်ဖှိၣ်",
-	"wikibase-sitelinks-special": "စဲၣ်အဂၤတဖၣ်"
+	"wikibase-label-empty": "No label defined",
+	"wikibase-description-empty": "No description defined",
+	"wikibase-sitelinks-special": "စဲၣ်အဂၤတဖၣ်",
+	"wikibase-statementview-rank-normal": "Normal rank"
 }
