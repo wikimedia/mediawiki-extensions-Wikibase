@@ -20,8 +20,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 
 call_user_func( function() {
-	global $wgDBname,
-		$wgExtraNamespaces,
+	global $wgExtraNamespaces,
 		$wgNamespacesToBeSearchedDefault,
 		$wgWBRepoSettings;
 
@@ -61,10 +60,6 @@ call_user_func( function() {
 			],
 		];
 	};
-
-	// Make sure we use the same keys on repo and clients, so we can share cached objects.
-	$wgWBRepoSettings['sharedCacheKeyPrefix'] = $wgDBname . ':WBL';
-	$wgWBRepoSettings['sharedCacheKeyGroup'] = $wgDBname;
 
 	// NOTE: no need to set up $wgNamespaceContentModels, Wikibase will do that automatically based on $wgWBRepoSettings
 
