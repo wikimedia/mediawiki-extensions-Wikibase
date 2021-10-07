@@ -214,31 +214,15 @@ class InjectRCRecordsJob extends Job {
 	 */
 	private function getChange(): ?EntityChange {
 		$params = $this->getParams();
-		$changeData = $params['change'];
+		$change = $this->changeFactory->newFromFieldData( $params['change'] );
 
-		if ( is_int( $changeData ) ) {
-			// TODO: this can be removed once T172394 has been deployed
-			//       and old jobs have cleared the queue.
-			$this->logger->debug( __FUNCTION__ . ": loading change $changeData." );
-
-			$changes = $this->changeLookup->loadByChangeIds( [ $changeData ] );
-
-			$change = reset( $changes );
-
-			if ( !$change ) {
-				$this->logger->error( __FUNCTION__ . ": failed to load change $changeData." );
-			}
-		} else {
-			$change = $this->changeFactory->newFromFieldData( $params['change'] );
-
-			// If the current change was composed of other child changes, restore the
-			// child objects.
-			$info = $change->getInfo();
-			if ( isset( $info['change-ids'] ) && !isset( $info['changes'] ) ) {
-				$children = $this->changeLookup->loadByChangeIds( $info['change-ids'] );
-				$info['changes'] = $children;
-				$change->setField( ChangeRow::INFO, $info );
-			}
+		// If the current change was composed of other child changes, restore the
+		// child objects.
+		$info = $change->getInfo();
+		if ( isset( $info['change-ids'] ) && !isset( $info['changes'] ) ) {
+			$children = $this->changeLookup->loadByChangeIds( $info['change-ids'] );
+			$info['changes'] = $children;
+			$change->setField( ChangeRow::INFO, $info );
 		}
 
 		return $change;
