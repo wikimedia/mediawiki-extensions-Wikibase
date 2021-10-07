@@ -34,8 +34,7 @@
 	"require-dev": {
 		"ockcyp/covers-validator": "~1.1",
 		"phpmd/phpmd": "~2.6",
-		"phpunit/phpunit": "~8.0",
-		"mediawiki/mediawiki-codesniffer": "34.0.0"
+		"phpunit/phpunit": "~8.0"
 	},
 	"autoload": {
 		"psr-4": {
@@ -63,10 +62,8 @@
 			"covers-validator"
 		],
 		"cs": [
-			"phpcs -p -s",
 			"phpmd src/ text phpmd.xml"
 		],
-		"fix": "phpcbf",
 		"ci": [
 			"@test"
 		]
