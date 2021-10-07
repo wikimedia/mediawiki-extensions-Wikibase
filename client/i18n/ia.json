@@ -41,7 +41,7 @@
 	"wikibase-rc-show-wikidata-pref": "Monstrar modificationes de {{WBREPONAME}} in le modificationes recente",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Modification de {{WBREPONAME}}",
-	"wikibase-replicationnote": "Nota que il pote tardar plure minutas ante que le modificationes es visibile in tote le wikis.",
+	"wikibase-replicationnote": "Nota que pote durar plure minutas ante que le modificationes es visibile sur tote le wikis.",
 	"wikibase-watchlist-show-changes-pref": "Monstrar modificationes de {{WBREPONAME}} in tu observatorio",
 	"wikibase-error-serialize-error": "Non ha potite serialisar le datos.",
 	"wikibase-error-invalid-entity-id": "Le ID \"$2\" es incognite pro le systema. Per favor usa un ID de entitate valide.",

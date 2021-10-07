@@ -70,7 +70,7 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "모든 {{WBREPONAME}} 편집은 \"사소한 편집\"으로 지정되어 있으므로 \"{{WBREPONAME}} 편집\" 필터는 \"사소하지 않은 편집\" 필터와 충돌합니다.",
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "모든 {{WBREPONAME}} 편집은 \"사소한 편집\"으로 지정되어 있으므로 \"{{WBREPONAME}} 편집\" 필터는 \"사소하지 않은 편집\" 필터와 충돌합니다.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "모든 {{WBREPONAME}} 편집은 \"사소한 편집\"으로 지정되어 있으므로 \"{{WBREPONAME}} 편집\" 필터는 \"사소하지 않은 편집\" 필터와 충돌합니다.",
-	"wikibase-replicationnote": "바뀐 내용이 모든 위키에 보이는데 시간이 걸릴 수 있음을 주의하세요.",
+	"wikibase-replicationnote": "바뀐 내용이 모든 위키에 보이는데 수분 소요될 수 있음을 참고해 주십시오.",
 	"wikibase-watchlist-show-changes-pref": "주시문서 목록에서 {{WBREPONAME}} 편집을 보기",
 	"wikibase-error-deserialize-error": "데이터의 역직렬화를 실패했습니다.",
 	"wikibase-error-serialize-error": "데이터를 직렬화할 수 없습니다.",
