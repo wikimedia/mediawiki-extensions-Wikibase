@@ -9,6 +9,7 @@
  * @license GPL-2.0-or-later
  */
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\SettingsArray;
 
 global $wgCdnMaxAge;
@@ -305,7 +306,40 @@ return [
 
 	'entityTypesWithoutRdfOutput' => [],
 
+	'defaultEntityNamespaces' => false,
+
 	'entitySources' => function ( SettingsArray $settings ) {
+		if ( $settings->getSetting( 'defaultEntityNamespaces' ) ) {
+			global $wgServer;
+
+			if ( !defined( 'WB_NS_ITEM' ) ) {
+				throw new Exception( 'Constant WB_NS_ITEM is not defined' );
+			}
+
+			if ( !defined( 'WB_NS_PROPERTY' ) ) {
+				throw new Exception( 'Constant WB_NS_PROPERTY is not defined' );
+			}
+
+			$entityNamespaces = [
+				'item' => WB_NS_ITEM,
+				'property' => WB_NS_PROPERTY,
+			];
+
+			$hookContainer = MediaWikiServices::getInstance()->getHookContainer();
+			$hookContainer->run( 'WikibaseRepoEntityNamespaces', [ &$entityNamespaces ] );
+
+			return [
+				$settings->getSetting( 'localEntitySourceName' ) => [
+					'entityNamespaces' => $entityNamespaces,
+					'repoDatabase' => false,
+					'baseUri' => $wgServer . '/entity/',
+					'rdfNodeNamespacePrefix' => 'wd',
+					'rdfPredicateNamespacePrefix' => '',
+					'interwikiPrefix' => '',
+				],
+			];
+		}
+
 		throw new Exception( 'entitySources must be configured manually (or use the example settings)' );
 	},
 
