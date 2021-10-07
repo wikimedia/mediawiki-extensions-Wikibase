@@ -51,7 +51,7 @@ class NoLangLinkHandler {
 	 *         Empty if {{#noexternallanglinks}} was not used on the page.
 	 */
 	public static function getNoExternalLangLinks( ParserOutput $out ) {
-		$property = $out->getProperty( 'noexternallanglinks' );
+		$property = $out->getPageProperty( 'noexternallanglinks' );
 
 		return is_string( $property ) ? unserialize( $property ) : [];
 	}
@@ -64,7 +64,7 @@ class NoLangLinkHandler {
 	 * @param string[] $noexternallanglinks a list of languages to suppress
 	 */
 	public static function setNoExternalLangLinks( ParserOutput $out, array $noexternallanglinks ) {
-		$out->setProperty( 'noexternallanglinks', serialize( $noexternallanglinks ) );
+		$out->setPageProperty( 'noexternallanglinks', serialize( $noexternallanglinks ) );
 	}
 
 	/**

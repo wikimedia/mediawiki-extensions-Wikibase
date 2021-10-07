@@ -243,7 +243,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$parserOutput = new ParserOutput();
 
 		foreach ( $pageProps as $name => $value ) {
-			$parserOutput->setProperty( $name, $value );
+			$parserOutput->setPageProperty( $name, $value );
 		}
 
 		foreach ( $extensionData as $key => $value ) {
@@ -326,7 +326,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			EntityUsage::SITELINK_USAGE
 		);
 
-		$this->assertEquals( $expectedItem, $parserOutput->getProperty( 'wikibase_item' ) );
+		$this->assertEquals( $expectedItem, $parserOutput->getPageProperty( 'wikibase_item' ) );
 		$this->assertLanguageLinks( $expectedLanguageLinks, $parserOutput );
 		$this->assertSisterLinks( $expectedSisterLinks, $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
 
@@ -348,7 +348,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
-		$this->assertFalse( $parserOutput->getProperty( 'wikibase_item' ) );
+		$this->assertFalse( $parserOutput->getPageProperty( 'wikibase_item' ) );
 
 		$this->assertSame( [], $parserOutput->getLanguageLinks() );
 		$this->assertSame( [], $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
@@ -365,7 +365,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
-		$this->assertFalse( $parserOutput->getProperty( 'wikibase_item' ) );
+		$this->assertFalse( $parserOutput->getPageProperty( 'wikibase_item' ) );
 
 		$this->assertSame( [], $parserOutput->getLanguageLinks() );
 		$this->assertNull( $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
@@ -409,7 +409,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
-		$this->assertEquals( $itemId, $parserOutput->getProperty( 'wikibase_item' ) );
+		$this->assertEquals( $itemId, $parserOutput->getPageProperty( 'wikibase_item' ) );
 	}
 
 	private function assertLanguageLinks( $links, ParserOutput $parserOutput ) {

@@ -178,10 +178,10 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
 		if ( $this->bestFileName === null ) {
-			$parserOutput->unsetProperty( $this->pagePropName );
+			$parserOutput->unsetPageProperty( $this->pagePropName );
 		} else {
 			$fileName = str_replace( ' ', '_', $this->bestFileName );
-			$parserOutput->setProperty( $this->pagePropName, $fileName );
+			$parserOutput->setPageProperty( $this->pagePropName, $fileName );
 		}
 	}
 

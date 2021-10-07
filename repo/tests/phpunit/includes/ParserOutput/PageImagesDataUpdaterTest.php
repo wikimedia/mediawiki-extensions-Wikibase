@@ -81,11 +81,11 @@ class PageImagesDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 		if ( $expected !== null ) {
 			$parserOutput->expects( $this->once() )
-				->method( 'setProperty' )
+				->method( 'setPageProperty' )
 				->with( 'page_image', $expected );
 		} else {
 			$parserOutput->expects( $this->never() )
-				->method( 'setProperty' );
+				->method( 'setPageProperty' );
 		}
 
 		$instance = $this->newInstance( $propertyIds );

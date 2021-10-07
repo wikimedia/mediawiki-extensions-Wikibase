@@ -180,7 +180,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		$this->assertTrue( $parserOutput->hasText() );
 
 		foreach ( $expectedProps as $name => $expected ) {
-			$actual = $parserOutput->getProperty( $name );
+			$actual = $parserOutput->getPageProperty( $name );
 			$this->assertSame( $expected, $actual, "page property $name" );
 		}
 	}

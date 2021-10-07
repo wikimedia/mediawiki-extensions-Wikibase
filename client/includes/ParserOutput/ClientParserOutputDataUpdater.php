@@ -89,12 +89,12 @@ class ClientParserOutputDataUpdater {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId ) {
-			$out->setProperty( 'wikibase_item', $itemId->getSerialization() );
+			$out->setPageProperty( 'wikibase_item', $itemId->getSerialization() );
 
 			$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutput( $out );
 			$usageAccumulator->addSiteLinksUsage( $itemId );
 		} else {
-			$out->unsetProperty( 'wikibase_item' );
+			$out->unsetPageProperty( 'wikibase_item' );
 		}
 	}
 
@@ -127,9 +127,9 @@ class ClientParserOutputDataUpdater {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		// first reset all badges in case one got removed
-		foreach ( $out->getProperties() as $name => $property ) {
+		foreach ( $out->getPageProperties() as $name => $property ) {
 			if ( strpos( $name, 'wikibase-badge-' ) === 0 ) {
-				$out->unsetProperty( $name );
+				$out->unsetPageProperty( $name );
 			}
 		}
 
@@ -160,7 +160,7 @@ class ClientParserOutputDataUpdater {
 		$siteLink = $item->getSiteLinkList()->getBySiteId( $this->siteId );
 
 		foreach ( $siteLink->getBadges() as $badge ) {
-			$out->setProperty( 'wikibase-badge-' . $badge->getSerialization(), true );
+			$out->setPageProperty( 'wikibase-badge-' . $badge->getSerialization(), true );
 		}
 	}
 

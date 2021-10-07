@@ -145,7 +145,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$instance = $this->newInstance();
 
 		$instance->updateItemIdProperty( $title, $parserOutput );
-		$property = $parserOutput->getProperty( 'wikibase_item' );
+		$property = $parserOutput->getPageProperty( 'wikibase_item' );
 
 		$itemId = $this->mockRepo->getItemIdForLink( 'srwiki', $titleText );
 		$this->assertEquals( $itemId->getSerialization(), $property );
@@ -170,7 +170,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$instance = $this->newInstance();
 
 		$instance->updateItemIdProperty( $title, $parserOutput );
-		$property = $parserOutput->getProperty( 'wikibase_item' );
+		$property = $parserOutput->getPageProperty( 'wikibase_item' );
 
 		$this->assertFalse( $property );
 	}
@@ -224,14 +224,14 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 		$instance->updateBadgesProperty( $title, $parserOutput );
 		$this->assertTrue(
-			$parserOutput->getProperty( 'wikibase-badge-Q17' ),
+			$parserOutput->getPageProperty( 'wikibase-badge-Q17' ),
 			'property "wikibase-badge-Q17" should be set'
 		);
 	}
 
 	public function testUpdateBadgesProperty_removesPreviousData(): void {
 		$parserOutput = new ParserOutput();
-		$parserOutput->setProperty( 'wikibase-badge-Q17', true );
+		$parserOutput->setPageProperty( 'wikibase-badge-Q17', true );
 
 		$title = $this->getTitle( 'Foo sr' );
 
@@ -239,7 +239,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 		$instance->updateBadgesProperty( $title, $parserOutput );
 		$this->assertFalse(
-			$parserOutput->getProperty( 'wikibase-badge-Q17' ),
+			$parserOutput->getPageProperty( 'wikibase-badge-Q17' ),
 			'property "wikibase-badge-Q17" should not be set'
 		);
 	}
