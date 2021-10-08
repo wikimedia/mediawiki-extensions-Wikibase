@@ -155,14 +155,6 @@ class DispatchChangesJob extends Job {
 		$subscribedClientSites = $this->subscriptionLookup->getSubscribers( $entityId );
 		$allowedClientSites = WikibaseRepo::getSettings()->getSetting( 'dispatchViaJobsAllowedClients' );
 
-		$dispatchingClientSites = $this->filterClientWikis( $allClientSites, $subscribedClientSites, $allowedClientSites );
-		if ( empty( $dispatchingClientSites ) ) {
-			$this->logger->info( __METHOD__ . ': no wikis subscribed for {entity} => doing nothing', [
-				'entity' => $this->entityIdSerialization,
-			] );
-			return true;
-		}
-
 		$changes = $this->changeLookup->loadByEntityIdFromPrimary( $this->entityIdSerialization );
 		$changes = $this->extractNewChanges( $changes, $this->changeId );
 
@@ -170,6 +162,20 @@ class DispatchChangesJob extends Job {
 			$this->logger->info( __METHOD__ . ': no changes for {entity} => all have been consumed by previous job?', [
 				'entity' => $this->entityIdSerialization,
 			] );
+			return true;
+		}
+
+		$dispatchingClientSites = $this->filterClientWikis( $allClientSites, $subscribedClientSites, $allowedClientSites );
+		if ( empty( $dispatchingClientSites ) ) {
+			// without subscribed wikis, this job should never have been scheduled
+			$this->logger->warning( __METHOD__ . ': no wikis subscribed for {entity} => doing nothing', [
+				'entity' => $this->entityIdSerialization,
+			] );
+
+			if ( $repoSettings->getSetting( 'dispatchViaJobsPruneChangesTableInJobEnabled' ) ) {
+				$this->deleteChangeRows( $changes );
+			}
+
 			return true;
 		}
 
