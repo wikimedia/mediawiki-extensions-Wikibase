@@ -6,7 +6,7 @@
 	/**
 	 * Base prototype for all widgets using the `mw.wbTemplate` templating system.
 	 * Uses `jQuery.fn.applyTemplate`.
-	 * @see mediaWiki.WbTemplate
+	 * @see mw.wbTemplate
 	 * @class jQuery.ui.TemplatedWidget
 	 * @abstract
 	 * @extends jQuery.Widget
