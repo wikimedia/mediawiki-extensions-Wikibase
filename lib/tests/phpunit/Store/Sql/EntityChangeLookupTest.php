@@ -51,7 +51,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function loadChunkProvider() {
-		list( $changeOne, $changeTwo, $changeThree ) = $this->getEntityChanges();
+		[ $changeOne, $changeTwo, $changeThree ] = $this->getEntityChanges();
 
 		return [
 			'Get one change' => [
@@ -106,11 +106,13 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 		$lookup = $this->newEntityChangeLookup();
 
 		$changes = $lookup->loadByChangeIds( [ $start, $start + 1, $start + 4 ] );
-		list( $changeOne, $changeTwo, $changeThree ) = $this->getEntityChanges();
+		[ $changeOne, $changeTwo, $changeThree ] = $this->getEntityChanges();
 
 		$this->assertChangesEqual(
 			[
-				$changeOne, $changeTwo, $changeThree
+				$changeOne,
+				$changeTwo,
+				$changeThree,
 			],
 			$changes,
 			$start
