@@ -241,7 +241,7 @@ class DispatchChangesJob extends Job {
 			if ( array_key_exists( $siteID, $allClientWikis ) ) {
 				$clientWikis[$siteID] = $allClientWikis[$siteID];
 			} else {
-				$this->logger->error(
+				$this->logger->warning(
 					__METHOD__ . ': No client wiki with site ID {siteID} configured in \$wgWBRepoSettings["localClientDatabases"]!',
 					[
 						'siteID' => $siteID,
