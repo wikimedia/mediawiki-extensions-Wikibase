@@ -356,6 +356,7 @@
 
 	mw.hook( 'wikipage.content' ).add( function () {
 		// This is copied from startup.js in MediaWiki core.
+		// eslint-disable-next-line compat/compat
 		var mwPerformance = window.performance && performance.mark ? performance : {
 			mark: function () {}
 		};

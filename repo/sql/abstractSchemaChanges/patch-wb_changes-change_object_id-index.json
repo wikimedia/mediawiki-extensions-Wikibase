@@ -53,7 +53,7 @@
 		],
 		"pk": [ "change_id" ]
 	},
-		"after": {
+	"after": {
 		"name": "wb_changes",
 		"comment": "Change feed.",
 		"columns": [
