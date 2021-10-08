@@ -6,6 +6,9 @@ namespace Wikibase\Client\Tests\Integration\Changes;
 use ArrayIterator;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\PageSelectQueryBuilder;
+use MediaWiki\Page\PageStore;
+use MediaWiki\Page\PageStoreRecord;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use Title;
@@ -40,11 +43,12 @@ use Wikibase\Lib\Tests\MockRepository;
  */
 class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 
-	private function getAffectedPagesFinder( UsageLookup $usageLookup, TitleFactory $titleFactory ) {
+	private function getAffectedPagesFinder( UsageLookup $usageLookup, TitleFactory $titleFactory, PageStore $pageStore ) {
 		// @todo: mock the finder directly
 		return new AffectedPagesFinder(
 			$usageLookup,
 			$titleFactory,
+			$pageStore,
 			MediaWikiServices::getInstance()->getLinkBatchFactory(),
 			'enwiki',
 			null,
@@ -74,11 +78,13 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 		$siteLinkLookup = $this->getSiteLinkLookup( $pageNamesPerItemId );
 		$usageLookup = $this->getUsageLookup( $siteLinkLookup );
 		$titleFactory = $this->getTitleFactory( $pageNamesPerItemId );
-		$affectedPagesFinder = $this->getAffectedPagesFinder( $usageLookup, $titleFactory );
+		$pageStore = $this->getPageStore( $pageNamesPerItemId );
+		$affectedPagesFinder = $this->getAffectedPagesFinder( $usageLookup, $titleFactory, $pageStore );
 
 		$handler = new ChangeHandler(
 			$affectedPagesFinder,
 			$titleFactory,
+			$pageStore,
 			$updater ?: new MockPageUpdater(),
 			$this->getChangeRunCoalescer(),
 			new NullLogger(),
@@ -227,22 +233,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 		$titlesById = $this->getFakePageIdMap( $pageNamesPerItemId );
 		$pageIdsByTitle = array_flip( $titlesById );
 
-		$titleFactory = $this->createMock( TitleFactory::class );
-
-		$titleFactory->method( 'newFromIDs' )
-			->willReturnCallback( function ( array $ids ) use ( $titlesById ) {
-				$titles = [];
-				foreach ( $ids as $id ) {
-					if ( isset( $titlesById[$id] ) ) {
-						$title = Title::newFromTextThrow( $titlesById[$id] );
-						$title->resetArticleID( $id );
-						$titles[] = $title;
-					} else {
-						throw new InvalidArgumentException( 'Unknown ID: ' . $id );
-					}
-				}
-				return $titles;
-			} );
+		$titleFactory = $this->createPartialMock( TitleFactory::class, [ 'newFromText' ] );
 
 		$titleFactory->method( 'newFromText' )
 			->willReturnCallback( function( $text, $defaultNs = \NS_MAIN ) use ( $pageIdsByTitle ) {
@@ -262,6 +253,63 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			} );
 
 		return $titleFactory;
+	}
+
+	/**
+	 * Page store, using spoofed local page ids that correspond to the ids of items linked to
+	 * the respective page (see getUsageLookup).
+	 *
+	 * @param array[] $pageNamesPerItemId Assoc array mapping entity IDs to lists of sitelinks.
+	 */
+	private function getPageStore( array $pageNamesPerItemId ): PageStore {
+		$titlesById = $this->getFakePageIdMap( $pageNamesPerItemId );
+
+		$pageStore = $this->createMock( PageStore::class );
+		$pageSelectQueryBuilder = $this->getMockBuilder( PageSelectQueryBuilder::class )
+			->setConstructorArgs(
+				[ $this->db, $pageStore ]
+			)
+			->onlyMethods( [ 'fetchPageRecords' ] )
+			->getMock();
+
+		$pageSelectQueryBuilder->method( 'fetchPageRecords' )->willReturnCallback(
+			function () use ( $pageSelectQueryBuilder, $titlesById ) {
+				[ 'conds' => $conds ] = $pageSelectQueryBuilder->getQueryInfo();
+				$pageRecords = new ArrayIterator();
+				if ( isset( $conds['page_id'] ) ) {
+					foreach ( $conds['page_id'] as $pageId ) {
+						if ( isset( $titlesById[$pageId] ) ) {
+							$pageRecords->append(
+								$this->newMockPageRecord( $titlesById[$pageId], $pageId )
+							);
+						} else {
+							throw new InvalidArgumentException( 'Unknown ID: ' . $pageId );
+						}
+					}
+				}
+				return $pageRecords;
+			}
+		);
+
+		$pageStore->method( 'newSelectQueryBuilder' )
+			->willReturn( $pageSelectQueryBuilder );
+
+		return $pageStore;
+	}
+
+	private function newMockPageRecord( string $pageTitle, int $pageId ) {
+		return new PageStoreRecord(
+			(object)[
+				'page_namespace' => NS_MAIN,
+				'page_title' => $pageTitle,
+				'page_id' => $pageId,
+				'page_is_redirect' => false,
+				'page_is_new' => false,
+				'page_latest' => 0,
+				'page_touched' => 0,
+			],
+			PageStoreRecord::LOCAL
+		);
 	}
 
 	/**
@@ -586,24 +634,40 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $usages );
 
 		$titleFactory = $this->getMockBuilder( TitleFactory::class )
-			->disableOriginalConstructor()
+			->setMethodsExcept( [ 'castFromPageIdentity' ] )
 			->getMock();
-		$titleFactory->method( 'newFromIDs' )
-			->willReturnCallback( function ( array $ids ) {
-				// NOTE: the fake title construction influences the expected hash values
-				// defined in provideHandleChange_rootJobParams!
-				$titles = [];
-				foreach ( $ids as $id ) {
-					$title = Title::makeTitle( NS_MAIN, 'Page_No_' . $id );
-					$title->resetArticleID( $id );
-					$titles[] = $title;
+
+		$pageStore = $this->createMock( PageStore::class );
+		$pageSelectQueryBuilder = $this->getMockBuilder( PageSelectQueryBuilder::class )
+			->setConstructorArgs(
+				[
+					$this->db,
+					$pageStore
+				]
+			)
+			->onlyMethods( [ 'fetchPageRecords' ] )
+			->getMock();
+		$pageSelectQueryBuilder->method( 'fetchPageRecords' )->willReturnCallback(
+			function () use ( $pageSelectQueryBuilder ) {
+				[ 'conds' => $conds ] = $pageSelectQueryBuilder->getQueryInfo();
+				$pageRecords = new ArrayIterator();
+				if ( isset( $conds['page_id'] ) ) {
+					foreach ( $conds['page_id'] as $pageId ) {
+						$pageRecords->append(
+							$this->newMockPageRecord( "Page_No_$pageId", $pageId )
+						);
+					}
 				}
-				return $titles;
-			} );
+				return $pageRecords;
+			}
+		);
+		$pageStore->method( 'newSelectQueryBuilder' )
+			->willReturn( $pageSelectQueryBuilder );
 
 		$handler = new ChangeHandler(
 			$affectedPagesFinder,
 			$titleFactory,
+			$pageStore,
 			$updater,
 			$this->getChangeRunCoalescer(),
 			new NullLogger(),

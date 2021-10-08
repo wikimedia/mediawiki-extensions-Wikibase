@@ -7,6 +7,8 @@ namespace Wikibase\Client\Changes;
 use ArrayIterator;
 use InvalidArgumentException;
 use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\Page\PageRecord;
+use MediaWiki\Page\PageStore;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Title;
@@ -39,6 +41,9 @@ class AffectedPagesFinder {
 	 */
 	private $titleFactory;
 
+	/** @var PageStore */
+	private $pageStore;
+
 	/** @var LinkBatchFactory */
 	private $linkBatchFactory;
 
@@ -60,6 +65,7 @@ class AffectedPagesFinder {
 	/**
 	 * @param UsageLookup $usageLookup
 	 * @param TitleFactory $titleFactory
+	 * @param PageStore $pageStore
 	 * @param LinkBatchFactory $linkBatchFactory
 	 * @param string $siteId
 	 * @param LoggerInterface|null $logger
@@ -71,6 +77,7 @@ class AffectedPagesFinder {
 	public function __construct(
 		UsageLookup $usageLookup,
 		TitleFactory $titleFactory,
+		PageStore $pageStore,
 		LinkBatchFactory $linkBatchFactory,
 		string $siteId,
 		?LoggerInterface $logger = null,
@@ -78,6 +85,7 @@ class AffectedPagesFinder {
 	) {
 		$this->usageLookup = $usageLookup;
 		$this->titleFactory = $titleFactory;
+		$this->pageStore = $pageStore;
 		$this->linkBatchFactory = $linkBatchFactory;
 		$this->siteId = $siteId;
 		$this->logger = $logger ?: new NullLogger();
@@ -298,12 +306,19 @@ class AffectedPagesFinder {
 
 		$titlesToUpdate = [];
 
-		foreach ( $this->titleFactory->newFromIDs( array_keys( $usagesByPageId ) ) as $title ) {
-			if ( $this->checkPageExistence && !$title->exists() ) {
+		$pageRecords = $this->pageStore
+			->newSelectQueryBuilder()
+			->wherePageIds( array_keys( $usagesByPageId ) )
+			->caller( __METHOD__ )
+			->fetchPageRecords();
+
+		/** @var PageRecord $pageRecord */
+		foreach ( $pageRecords as $pageRecord ) {
+			if ( $this->checkPageExistence && !$pageRecord->exists() ) {
 				continue;
 			}
 
-			$pageId = $title->getArticleID();
+			$pageId = $pageRecord->getId();
 			$titlesToUpdate[$pageId] = $usagesByPageId[$pageId];
 		}
 

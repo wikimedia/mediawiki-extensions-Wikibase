@@ -34,6 +34,19 @@ class AffectedPagesFinderTest extends ServiceWiringTestCase {
 			'WikibaseClient.Logger',
 			$this->createMock( LoggerInterface::class )
 		);
+
+		$this->serviceContainer
+			->expects( $this->once() )
+			->method( 'getTitleFactory' );
+
+		$this->serviceContainer
+			->expects( $this->once() )
+			->method( 'getLinkBatchFactory' );
+
+		$this->serviceContainer
+			->expects( $this->once() )
+			->method( 'getPageStore' );
+
 		$service = $this->getService( 'WikibaseClient.AffectedPagesFinder' );
 
 		$this->assertInstanceOf( AffectedPagesFinder::class, $service );
