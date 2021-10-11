@@ -587,11 +587,12 @@ class MediawikiEditEntity implements EditEntity {
 	 * @throws ReadOnlyError
 	 */
 	private function checkReadOnly( EntityDocument $entity ) {
-		if ( wfReadOnly() ) {
+		$services = MediaWikiServices::getInstance();
+		if ( $services->getReadOnlyMode()->isReadOnly() ) {
 			throw new ReadOnlyError();
 		}
 		if ( $this->entityTypeIsReadOnly( $entity ) ) {
-			MediaWikiServices::getInstance()->getConfiguredReadOnlyMode()->setReason(
+			$services->getConfiguredReadOnlyMode()->setReason(
 				'Editing of entity type: ' . $entity->getType() . ' is currently disabled. It will be enabled soon.'
 			);
 			throw new ReadOnlyError();
