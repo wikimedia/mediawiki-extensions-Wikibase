@@ -21,6 +21,6 @@
 		"at-rule-no-unknown": null,
 		"scss/at-else-empty-line-before": "never",
 		"scss/at-rule-no-unknown": true,
-		"unit-blacklist": null
+		"unit-disallowed-list": null
 	}
 }
