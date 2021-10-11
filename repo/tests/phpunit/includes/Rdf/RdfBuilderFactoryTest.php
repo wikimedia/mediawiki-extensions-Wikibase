@@ -3,7 +3,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Tests\Rdf;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Rdf\DedupeBag;
@@ -22,7 +22,7 @@ use Wikimedia\Purtle\RdfWriter;
  *
  * @license GPL-2.0-or-later
  */
-class RdfBuilderFactoryTest extends MediaWikiTestCase {
+class RdfBuilderFactoryTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetRdfBuilder() {
 		$factory = $this->getFactory();
