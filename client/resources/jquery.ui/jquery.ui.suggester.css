@@ -5,6 +5,7 @@
 
 .ui-widget.ui-suggester-list {
 	font-family: sans-serif; /* reset the "Smoothness" jQuery UI theme */
+	/* stylelint-disable-next-line declaration-property-unit-disallowed-list */
 	font-size: 13px;
 }
 
