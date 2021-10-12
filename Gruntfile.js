@@ -20,7 +20,8 @@ module.exports = function ( grunt ) {
 				'!vendor/**',
 				'!extensions/**',
 				'!client/data-bridge/**',
-				'!lib/resources/wikibase-api/**'
+				'!lib/resources/wikibase-api/**',
+				'!lib/packages/wikibase/*/tests/**/*.json'
 			]
 		},
 		stylelint: {

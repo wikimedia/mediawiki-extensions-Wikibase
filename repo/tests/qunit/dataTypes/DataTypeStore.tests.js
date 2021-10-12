@@ -24,8 +24,8 @@
 		);
 
 		assert.strictEqual(
-			testDataType === dataTypeStore.getDataType( testDataTypeId ),
-			true,
+			testDataType,
+			dataTypeStore.getDataType( testDataTypeId ),
 			'getDataType: returns exact same instance of the data type which was registered before'
 		);
 	} );

@@ -61,15 +61,15 @@
 			'Handler has been called for every source.'
 		);
 
-		assert.strictEqual(
-			triggeredForSources.indexOf( $sources[ 0 ] ) !== -1,
-			true,
+		assert.notStrictEqual(
+			triggeredForSources.indexOf( $sources[ 0 ] ),
+			-1,
 			'Handler was called for first source.'
 		);
 
-		assert.strictEqual(
-			triggeredForSources.indexOf( $sources[ 1 ] ) !== -1,
-			true,
+		assert.notStrictEqual(
+			triggeredForSources.indexOf( $sources[ 1 ] ),
+			-1,
 			'Handler was called for second source.'
 		);
 
