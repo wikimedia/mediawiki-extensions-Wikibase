@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
 use LogicException;
-use MediaWiki\Storage\RevisionRecord;
+use MediaWiki\Revision\RevisionRecord;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;

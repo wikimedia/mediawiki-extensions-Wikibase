@@ -3,9 +3,9 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use MediaWiki\Revision\RevisionAccessException;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Storage\BlobAccessException;
 use MediaWiki\Storage\BlobStore;
-use MediaWiki\Storage\RevisionRecord;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\StorageException;

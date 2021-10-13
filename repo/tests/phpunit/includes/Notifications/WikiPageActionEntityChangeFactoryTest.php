@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Notifications;
 
 use CommentStoreComment;
 use MediaWiki\Revision\MutableRevisionRecord;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
-use MediaWiki\Storage\RevisionRecord;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
