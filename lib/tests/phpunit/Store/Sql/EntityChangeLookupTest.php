@@ -12,6 +12,7 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\WikibaseSettings;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\EntityChangeLookup
@@ -117,6 +118,22 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 			$changes,
 			$start
 		);
+	}
+
+	public function testLoadChangesBefore(): void {
+		$this->db->delete( 'wb_changes', '*', __METHOD__ );
+		$changesToStore = $this->getEntityChanges();
+		$changeStore = new SqlChangeStore( $this->getRepoDomainDb() );
+		foreach ( $changesToStore as $change ) {
+			$changeStore->saveChange( $change );
+		}
+		$lookup = $this->newEntityChangeLookup();
+
+		$jan1st2013Timestamp = ConvertibleTimestamp::convert( TS_MW, 1356998400 );
+
+		$changes = $lookup->loadChangesBefore( $jan1st2013Timestamp, 500, 0 );
+
+		$this->assertChangesEqual( [ $changesToStore[0] ], $changes );
 	}
 
 	private function assertChangesEqual( array $expected, array $changes, $start = 0 ) {

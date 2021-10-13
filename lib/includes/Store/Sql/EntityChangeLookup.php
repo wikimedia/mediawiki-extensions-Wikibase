@@ -112,6 +112,23 @@ class EntityChangeLookup implements ChunkAccess {
 	}
 
 	/**
+	 * @param string $thisTimeOrOlder maximum timestamp of changes to returns (TS_MW format)
+	 * @param int $batchSize maximum number of changes to return
+	 * @param int $offset skip this many changes
+	 *
+	 * @return EntityChange[]
+	 */
+	public function loadChangesBefore( string $thisTimeOrOlder, int $batchSize, int $offset ): array {
+		$dbr = $this->db->connections()->getReadConnectionRef();
+		return $this->loadChanges(
+			[ 'change_time <= ' . $dbr->addQuotes( $thisTimeOrOlder ) ],
+			[ 'LIMIT' => $batchSize, 'OFFSET' => $offset ],
+			__METHOD__,
+			$dbr
+		);
+	}
+
+	/**
 	 * @param array $where
 	 * @param array $options
 	 * @param string $method
