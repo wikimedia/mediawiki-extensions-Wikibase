@@ -8,6 +8,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\ChunkAccess;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -75,7 +76,8 @@ class EntityChangeLookup implements ChunkAccess {
 				'ORDER BY' => 'change_id ASC',
 				'LIMIT' => $size
 			],
-			__METHOD__
+			__METHOD__,
+			$this->db->connections()->getReadConnectionRef()
 		);
 	}
 
@@ -90,7 +92,8 @@ class EntityChangeLookup implements ChunkAccess {
 		return $this->loadChanges(
 			[ 'change_id' => $ids ],
 			[],
-			__METHOD__
+			__METHOD__,
+			$this->db->connections()->getReadConnectionRef()
 		);
 	}
 
@@ -100,25 +103,24 @@ class EntityChangeLookup implements ChunkAccess {
 	 * @return EntityChange[]
 	 */
 	public function loadByEntityIdFromPrimary( string $entityId ): array {
-		return $this->loadChanges( [ 'change_object_id' => $entityId ], [], __METHOD__, DB_PRIMARY );
+		return $this->loadChanges(
+			[ 'change_object_id' => $entityId ],
+			[],
+			__METHOD__,
+			$this->db->connections()->getWriteConnectionRef()
+		);
 	}
 
 	/**
 	 * @param array $where
 	 * @param array $options
 	 * @param string $method
-	 * @param int $mode (DB_REPLICA or DB_PRIMARY)
+	 * @param IDatabase $dbr
 	 *
 	 * @return EntityChange[]
 	 */
-	private function loadChanges( array $where, array $options, $method, $mode = DB_REPLICA ) {
-		if ( $mode === DB_REPLICA ) {
-			$db = $this->db->connections()->getReadConnectionRef();
-		} else {
-			$db = $this->db->connections()->getWriteConnectionRef();
-		}
-
-		$rows = $db->select(
+	private function loadChanges( array $where, array $options, $method, IDatabase $dbr ) {
+		$rows = $dbr->select(
 			'wb_changes',
 			[
 				'change_id', 'change_type', 'change_time', 'change_object_id',
