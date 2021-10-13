@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Api;
 
 use WebRequest;
-use Wikibase\Lib\Interactors\TermSearchResult;
 
 /**
  * EntitySearchHelper implementation which uses entity configuration to
@@ -27,15 +26,7 @@ class TypeDispatchingEntitySearchHelper implements EntitySearchHelper {
 	}
 
 	/**
-	 * Get entities matching the search term.
-	 *
-	 * @param string $text
-	 * @param string $languageCode
-	 * @param string $entityType
-	 * @param int $limit
-	 * @param bool $strictLanguage
-	 *
-	 * @return TermSearchResult[] Key: string Serialized EntityId
+	 * @inheritDoc
 	 */
 	public function getRankedSearchResults(
 		$text,

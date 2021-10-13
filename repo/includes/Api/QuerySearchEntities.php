@@ -10,6 +10,7 @@ use ApiQueryGeneratorBase;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikimedia\Assert\InvariantException;
 
 /**
  * API module to search for Wikibase entities that can be used as a generator.
@@ -131,15 +132,21 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	 * @param array $params
 	 *
 	 * @return TermSearchResult[]
+	 * @throws \ApiUsageException
 	 */
 	private function getSearchResults( array $params ): array {
-		return $this->entitySearchHelper->getRankedSearchResults(
-			$params['search'],
-			$params['language'] ?: $this->getLanguage()->getCode(),
-			$params['type'],
-			$params['limit'],
-			$params['strictlanguage']
-		);
+		try {
+			return $this->entitySearchHelper->getRankedSearchResults(
+				$params['search'],
+				$params['language'] ?: $this->getLanguage()->getCode(),
+				$params['type'],
+				$params['limit'],
+				$params['strictlanguage']
+			);
+		} catch ( EntitySearchException $ese ) {
+			$this->dieStatus( $ese->getStatus() );
+			throw new InvariantException( "dieStatus() must throw an exception" );
+		}
 	}
 
 	/**

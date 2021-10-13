@@ -10,6 +10,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\TermIndexEntry;
+use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\ItemDisambiguation;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
@@ -28,6 +29,15 @@ use Wikibase\Repo\Specials\SpecialItemDisambiguation;
  * @license GPL-2.0-or-later
  */
 class SpecialItemDisambiguationTest extends SpecialPageTestBase {
+	/**
+	 * @var bool
+	 */
+	private $simulateSearchBackendError;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->simulateSearchBackendError = false;
+	}
 
 	/**
 	 * @return ItemDisambiguation
@@ -68,20 +78,25 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		];
 		$mock = $this->createMock( EntitySearchHelper::class );
 
-		$mock->method( 'getRankedSearchResults' )
-			->willReturnCallback(
-				function( $text, $lang, $entityType ) use ( $searchResults ) {
-					if ( $lang !== 'fr' ) {
-						throw new InvalidArgumentException( 'Not a valid language code' );
-					}
+		if ( $this->simulateSearchBackendError ) {
+			$mock->method( 'getRankedSearchResults' )
+				->willThrowException( new EntitySearchException( \Status::newFatal( 'search-backend-error' ) ) );
+		} else {
+			$mock->method( 'getRankedSearchResults' )
+				->willReturnCallback(
+					function( $text, $lang, $entityType ) use ( $searchResults ) {
+						if ( $lang !== 'fr' ) {
+							throw new InvalidArgumentException( 'Not a valid language code' );
+						}
 
-					if ( $text === 'Foo' && $entityType === 'item' ) {
-						return $searchResults;
-					}
+						if ( $text === 'Foo' && $entityType === 'item' ) {
+							return $searchResults;
+						}
 
-					return [];
-				}
-			);
+						return [];
+					}
+				);
+		}
 
 		return $mock;
 	}
@@ -157,6 +172,13 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		list( $html, ) = $this->executeSpecialPage( 'invalid/Foo', null, 'qqx' );
 
 		$this->assertStringContainsString( '(wikibase-itemdisambiguation-invalid-langcode)', $html );
+	}
+
+	public function testSearchBackendError() {
+		$this->simulateSearchBackendError = true;
+		list( $html, ) = $this->executeSpecialPage( 'fr/Foo' );
+
+		$this->assertStringContainsString( 'search-backend-error', $html );
 	}
 
 	public function testNoLabel() {
