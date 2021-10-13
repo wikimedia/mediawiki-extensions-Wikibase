@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Store;
 
 use BagOStuff;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 
 /**
@@ -86,7 +87,7 @@ class BagOStuffSiteLinkConflictLookup implements SiteLinkConflictLookup {
 		if ( $itemId === $otherItemId ) {
 			return null;
 		} else {
-			$conflict['itemId'] = $otherItemId;
+			$conflict['itemId'] = new ItemId( $otherItemId );
 			return $conflict;
 		}
 	}
@@ -101,7 +102,7 @@ class BagOStuffSiteLinkConflictLookup implements SiteLinkConflictLookup {
 			return [
 				'siteId' => $siteLink->getSiteId(),
 				'sitePage' => $siteLink->getPageName(),
-				'itemId' => $otherItemId,
+				'itemId' => new ItemId( $otherItemId ),
 			];
 		}
 	}

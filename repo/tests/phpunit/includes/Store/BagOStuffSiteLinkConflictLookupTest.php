@@ -59,6 +59,7 @@ class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 			'sitePage' => 'Four',
 			'itemId' => new ItemId( 'Q2' ),
 		], $conflicts );
+		$this->assertContainsOnlyInstancesOf( ItemId::class, array_column( $conflicts, 'itemId' ) );
 		$this->assertFalse( $bagOStuff->hasKey( $this->cacheKey( 'site1', 'One' ) ) );
 		$this->assertTrue( $bagOStuff->hasKey( $this->cacheKey( 'site2', 'Two' ) ) );
 		$this->assertFalse( $bagOStuff->hasKey( $this->cacheKey( 'site3', 'Three' ) ) );
@@ -112,6 +113,7 @@ class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 			'sitePage' => 'One',
 			'itemId' => new ItemId( 'Q2' ),
 		] ], $conflicts );
+		$this->assertInstanceOf( ItemId::class, $conflicts[0]['itemId'] );
 		$this->assertSame( 'Q2', $bagOStuff->get( $this->cacheKey( 'site1', 'One' ) ) );
 		$this->assertFalse( $bagOStuff->hasKey( $this->cacheKey( 'site2', 'Two' ) ) );
 	}
