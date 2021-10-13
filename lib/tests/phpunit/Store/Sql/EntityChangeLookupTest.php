@@ -51,6 +51,14 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( 42, $changeLookup->getRecordId( $change ) );
 	}
 
+	public static function setUpBeforeClass(): void {
+		parent::setUpBeforeClass();
+
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			self::markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
+		}
+	}
+
 	public function loadChunkProvider() {
 		[ $changeOne, $changeTwo, $changeThree ] = $this->getEntityChanges();
 
@@ -80,10 +88,6 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider loadChunkProvider
 	 */
 	public function testLoadChunk( array $expected, array $changesToStore, $start, $size ) {
-		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
-		}
-
 		$changeStore = new SqlChangeStore( $this->getRepoDomainDb() );
 		foreach ( $changesToStore as $change ) {
 			$change->setField( 'id', null ); // Null the id as we save the same changes multiple times
