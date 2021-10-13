@@ -33,7 +33,6 @@ use Wikimedia\Assert\Assert;
 class DispatchChangesJob extends Job {
 
 	private const ENTITY_ID_KEY = 'entityId';
-	private const CHANGE_ID_KEY = 'changeId';
 
 	/** @var string */
 	private $entityIdSerialization;
@@ -73,13 +72,12 @@ class DispatchChangesJob extends Job {
 	 */
 	private $stats;
 
-	public static function makeJobSpecification( string $entityIdSerialization, int $changeId ): IJobSpecification {
+	public static function makeJobSpecification( string $entityIdSerialization ): IJobSpecification {
 		return new JobSpecification(
 			'DispatchChanges',
 			[
 				'title' => $entityIdSerialization,
 				self::ENTITY_ID_KEY => $entityIdSerialization,
-				self::CHANGE_ID_KEY => $changeId,
 			]
 		);
 	}
