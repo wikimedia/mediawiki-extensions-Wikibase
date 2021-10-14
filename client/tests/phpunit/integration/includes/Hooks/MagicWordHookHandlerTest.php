@@ -125,7 +125,7 @@ class MagicWordHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertArrayHasKey( 'noexternallanglinks', $cache );
 		$this->assertIsString(
-			$out->getProperty( 'noexternallanglinks' )
+			$out->getPageProperty( 'noexternallanglinks' )
 		);
 	}
 

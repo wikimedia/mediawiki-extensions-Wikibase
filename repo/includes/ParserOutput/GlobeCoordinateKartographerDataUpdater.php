@@ -85,13 +85,13 @@ class GlobeCoordinateKartographerDataUpdater implements StatementDataUpdater {
 			'kartographer',
 			$kartographerParserOutput->getExtensionData( 'kartographer' )
 		);
-		$parserOutput->setProperty(
+		$parserOutput->setPageProperty(
 			'kartographer_links',
-			$kartographerParserOutput->getProperty( 'kartographer_links' )
+			$kartographerParserOutput->getPageProperty( 'kartographer_links' )
 		);
-		$parserOutput->setProperty(
+		$parserOutput->setPageProperty(
 			'kartographer_frames',
-			$kartographerParserOutput->getProperty( 'kartographer_frames' )
+			$kartographerParserOutput->getPageProperty( 'kartographer_frames' )
 		);
 	}
 

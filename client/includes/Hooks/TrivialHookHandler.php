@@ -75,7 +75,7 @@ class TrivialHookHandler implements
 	 * @param SearchEngine $engine
 	 */
 	public function onSearchDataForIndex( &$fields, $handler, $page, $output, $engine ): void {
-		$wikibaseItem = $output->getProperty( 'wikibase_item' );
+		$wikibaseItem = $output->getPageProperty( 'wikibase_item' );
 		if ( $wikibaseItem ) {
 			$fields['wikibase_item'] = $wikibaseItem;
 		}

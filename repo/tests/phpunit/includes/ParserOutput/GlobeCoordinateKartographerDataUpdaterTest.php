@@ -45,12 +45,12 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 			$parserOutput->getExtensionData( 'kartographer' )
 		);
 		$this->assertSame(
-			$expected->getProperty( 'kartographer_links' ),
-			$parserOutput->getProperty( 'kartographer_links' )
+			$expected->getPageProperty( 'kartographer_links' ),
+			$parserOutput->getPageProperty( 'kartographer_links' )
 		);
 		$this->assertSame(
-			$expected->getProperty( 'kartographer_frames' ),
-			$parserOutput->getProperty( 'kartographer_frames' )
+			$expected->getPageProperty( 'kartographer_frames' ),
+			$parserOutput->getPageProperty( 'kartographer_frames' )
 		);
 		$this->assertEquals(
 			[ 'wikibase', 'kartographer-rl-module1', 'javascript-stuffs' ],
@@ -115,8 +115,8 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 		$parserOutput = new ParserOutput();
 		$parserOutput->addModules( [ 'kartographer-rl-module1', 'javascript-stuffs' ] );
 		$parserOutput->getExtensionData( 'kartographer', [ [ 'whatever' ] ] );
-		$parserOutput->setProperty( 'kartographer_links', [ [ 34 ] ] );
-		$parserOutput->setProperty( 'kartographer_frames', [ [ 'blah' ] ] );
+		$parserOutput->setPageProperty( 'kartographer_links', [ [ 34 ] ] );
+		$parserOutput->setPageProperty( 'kartographer_frames', [ [ 'blah' ] ] );
 		$parserOutput->addJsConfigVars( 'wgKartographerMapServer', 'https://maps.wikimedia.org' );
 
 		return $parserOutput;

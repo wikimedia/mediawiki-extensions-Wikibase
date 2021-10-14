@@ -684,7 +684,7 @@ abstract class EntityContent extends AbstractContent {
 
 		$properties = $this->getEntityPageProperties();
 		foreach ( $properties as $name => $value ) {
-			$output->setProperty( $name, $value );
+			$output->setPageProperty( $name, $value );
 		}
 	}
 

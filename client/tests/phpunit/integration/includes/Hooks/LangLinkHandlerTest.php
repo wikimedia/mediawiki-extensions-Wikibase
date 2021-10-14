@@ -520,7 +520,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testSuppressRepoLinks( array $repoLinks, array $nel, array $expectedLinks ) {
 		$out = new ParserOutput();
-		$out->setProperty( 'noexternallanglinks', serialize( $nel ) );
+		$out->setPageProperty( 'noexternallanglinks', serialize( $nel ) );
 
 		$actualLinks = $this->langLinkHandler->suppressRepoLinks( $out, $repoLinks );
 
