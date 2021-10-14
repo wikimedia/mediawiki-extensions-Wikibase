@@ -321,7 +321,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	public function testUpdateTrackingCategories( string $titleText, bool $isRedirect, int $expected ): void {
 		$parserOutput = $this->createMock( ParserOutput::class );
 		$parserOutput->expects( $this->exactly( $expected ) )
-			->method( 'addTrackingCategory' );
+			->method( 'addCategory' );
 
 		$title = $this->getTitle( $titleText, $isRedirect );
 

@@ -7,6 +7,7 @@ namespace Wikibase\Client\DataAccess\ParserFunctions;
 use Exception;
 use InvalidArgumentException;
 use Language;
+use MediaWiki\MediaWikiServices;
 use Message;
 use ParserOutput;
 use Status;
@@ -71,8 +72,12 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 				)
 			);
 		} catch ( PropertyLabelNotResolvedException $ex ) {
-			$this->parserOutput->addTrackingCategory( 'unresolved-property-category',
-				$this->title );
+			$trackingCategories = MediaWikiServices::getInstance()->getTrackingCategories();
+			$trackingCategories->addTrackingCategory(
+				$this->parserOutput,
+				'unresolved-property-category',
+				$this->title
+			);
 
 			$status = $this->getStatusForException( $propertyLabelOrId, $ex );
 		} catch ( EntityLookupException | InvalidArgumentException $ex ) {

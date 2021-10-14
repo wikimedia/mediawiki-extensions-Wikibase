@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\ParserOutput;
 
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use ParserOutput;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -101,11 +102,14 @@ class ClientParserOutputDataUpdater {
 	/**
 	 * Add tracking category if the page is a redirect and is connected to an item
 	 */
-	public function updateTrackingCategories( Title $title, ParserOutput $out ): void {
+	public function updateTrackingCategories( Title $title, ParserOutput $parserOutput ): void {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId && $title->isRedirect() ) {
-			$out->addTrackingCategory( 'connected-redirect-category', $title );
+			$trackingCategories = MediaWikiServices::getInstance()->getTrackingCategories();
+			$trackingCategories->addTrackingCategory(
+				$parserOutput, 'connected-redirect-category', $title
+			);
 		}
 	}
 
