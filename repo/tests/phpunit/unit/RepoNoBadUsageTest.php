@@ -17,11 +17,9 @@ class RepoNoBadUsageTest extends NoBadUsageTest {
 		return [
 			// don’t reference client in repo
 			'WikibaseClient::' => [
-				'maintenance/dispatchChanges.php' => 1, // guarded by isClientEnabled()
 				'includes/ChangeModification/DispatchChangesJob.php' => 1, // guarded by isClientEnabled()
 			],
 			'Wikibase\\Client\\' => [
-				'maintenance/dispatchChanges.php' => 1, // see above
 				'includes/ChangeModification/DispatchChangesJob.php' => 1, // see above
 			],
 			'Wikibase\\\\Client\\\\' => [],
