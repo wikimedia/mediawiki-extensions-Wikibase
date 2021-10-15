@@ -60,7 +60,6 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 			null,
 			[
 				'entityId' => 'Q1',
-				'changeId' => $testItemChange->getId(),
 			]
 		);
 
@@ -75,45 +74,6 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 		$expectedItemChangeFields['info'] = $testItemChange->getSerializedInfo();
 		$this->assertSame( $expectedItemChangeFields, $actualItemChangeFields );
 		$this->assertSame( 0, $dbw->selectRowCount( 'wb_changes' ), 'change should be deleted from `wb_changes`' );
-	}
-
-	public function testNotDispatchingOldChangesAgain(): void {
-		$this->skipIfClientNotEnabled();
-
-		$testItemOldChange = $this->makeNewChange();
-		$testItemNewChange = $this->makeNewChange();
-		$repoDb = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb();
-		$changeStore = new SqlChangeStore( $repoDb );
-		$changeStore->saveChange( $testItemOldChange );
-		$changeStore->saveChange( $testItemNewChange );
-
-		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
-		$dbw = $repoDb->connections()->getWriteConnectionRef();
-		$dbw->insert( 'wb_changes_subscription', [
-			'cs_entity_id' => 'Q1',
-			'cs_subscriber_id' => $wiki,
-		] );
-
-		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState(
-			null,
-			[
-				'entityId' => 'Q1',
-				'changeId' => $testItemNewChange->getId(),
-			]
-		);
-
-		$dispatchChangesJob->run();
-
-		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
-		$queuedJobs = $jobQueueGroup->get( 'EntityChangeNotification' )->getAllQueuedJobs();
-		$job = $queuedJobs->current();
-		$this->assertNotNull( $job );
-		$this->assertCount( 1, $job->getParams()['changes'] );
-
-		$actualItemChangeFields = $job->getParams()['changes'][0];
-		$expectedItemChangeFields = $testItemNewChange->getFields();
-		$expectedItemChangeFields['info'] = $testItemNewChange->getSerializedInfo();
-		$this->assertSame( $expectedItemChangeFields, $actualItemChangeFields );
 	}
 
 	public function testNoValidSubscribers(): void {
@@ -132,7 +92,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 			'cs_subscriber_id' => 'client',
 		] );
 
-		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState( null, [ 'entityId' => 'Q1', 'changeId' => 1 ] );
+		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState( null, [ 'entityId' => 'Q1' ] );
 
 		$dispatchChangesJob->run();
 
@@ -150,7 +110,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 			'cs_subscriber_id' => $wiki,
 		] );
 
-		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState( null, [ 'entityId' => 'Q1', 'changeId' => 1 ] );
+		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState( null, [ 'entityId' => 'Q1' ] );
 
 		$dispatchChangesJob->run();
 

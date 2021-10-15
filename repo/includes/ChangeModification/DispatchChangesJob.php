@@ -39,11 +39,6 @@ class DispatchChangesJob extends Job {
 	private $entityIdSerialization;
 
 	/**
-	 * @var int
-	 */
-	private $changeId;
-
-	/**
 	 * @var SubscriptionLookup
 	 */
 	private $subscriptionLookup;
@@ -103,12 +98,8 @@ class DispatchChangesJob extends Job {
 		if ( empty( $params[self::ENTITY_ID_KEY] ) ) {
 			throw new InvalidArgumentException( 'entityId parameter missing' );
 		}
-		if ( empty( $params[self::CHANGE_ID_KEY] ) ) {
-			throw new InvalidArgumentException( 'changeId parameter missing' );
-		}
 
 		$this->entityIdSerialization = $params[self::ENTITY_ID_KEY];
-		$this->changeId = $params[self::CHANGE_ID_KEY];
 		$this->subscriptionLookup = $subscriptionLookup;
 		$this->changeLookup = $changeLookup;
 		$this->entityIdParser = $entityIdParser;
@@ -156,7 +147,6 @@ class DispatchChangesJob extends Job {
 		$allowedClientSites = WikibaseRepo::getSettings()->getSetting( 'dispatchViaJobsAllowedClients' );
 
 		$changes = $this->changeLookup->loadByEntityIdFromPrimary( $this->entityIdSerialization );
-		$changes = $this->extractNewChanges( $changes, $this->changeId );
 
 		if ( empty( $changes ) ) {
 			$this->logger->info( __METHOD__ . ': no changes for {entity} => all have been consumed by previous job?', [
@@ -198,12 +188,6 @@ class DispatchChangesJob extends Job {
 		}
 
 		return true;
-	}
-
-	private function extractNewChanges( array $changes, int $changeId ): array {
-		return array_values( array_filter( $changes, function ( EntityChange $change ) use ( $changeId ) {
-			return $change->getId() >= $changeId;
-		} ) );
 	}
 
 	/**
