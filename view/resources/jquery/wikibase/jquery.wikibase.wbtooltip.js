@@ -195,12 +195,10 @@
 			// the tooltip before filling it with content and cache the initial position.
 			// TODO: This is not the most elegant solution since the $tip might reach out of the
 			// viewport.
-			// The DOM content needs to be cloned since IE8 will lose the reference to the DOM content
-			// when the inner HTML is removed within tipsy's native show() method.
 			var content = null;
 
 			if ( this.options.content instanceof $ ) {
-				content = this.options.content.clone( true, true );
+				content = this.options.content;
 			}
 
 			// If a tooltip anchor is specified, use that for positioning the tip by overwriting the
