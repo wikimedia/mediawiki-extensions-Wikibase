@@ -202,7 +202,7 @@
 							),
 							{
 								autoHide: false,
-								title: mw.message( 'wikibase-outdated-client-script' ),
+								title: mw.msg( 'wikibase-outdated-client-script' ),
 								type: 'warn',
 								tag: 'wikibase-outdated-datatypes'
 							}
