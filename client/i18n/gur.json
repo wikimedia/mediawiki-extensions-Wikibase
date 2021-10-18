@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Akakiiri",
 			"Ayire Adongo",
 			"Dnshitobu"
 		]
@@ -14,5 +15,6 @@
 	"wikibase-rc-hide-wikidata-show": "Pa’alɛ",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} demese",
-	"wikibase-replicationnote": "N beleni fu mɛ, mina suŋa ti la ta’am yue paa gogo se’em gee teere la nya niɛ wikiduma la za’a puam."
+	"wikibase-replicationnote": "N beleni fu mɛ, mina suŋa ti la ta’am yue paa gogo se’em gee teere la nya niɛ wikiduma la za’a puam.",
+	"wikibase-otherprojects": "Tuuma asi'a"
 }

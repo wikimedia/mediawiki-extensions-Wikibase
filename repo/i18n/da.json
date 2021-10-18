@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Antonla",
 			"Byrial",
 			"Christian List",
 			"Dipsacus fullonum",
@@ -72,7 +73,7 @@
 	"wikibase-sitelinks": "Liste over sider, der er knyttet til dette emne",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|værdi|værdier}}",
 	"wikibase-sitelinks-empty": "Der er ingen sider der er tilknyttet dette emne.",
-	"wikibase-sitelinks-special": "Andre websteder",
+	"wikibase-sitelinks-special": "Andre hjemmesider",
 	"wikibase-remove": "fjern",
 	"wikibase-undo-title": "Fjern redigering af \"$1\"",
 	"wikibase-restore-title": "Genskaber tidligere version af \"$1\"",

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Antonla",
 			"Byrial",
 			"Christian List",
 			"Dipsacus fullonum",
@@ -28,7 +29,7 @@
 	"wikibase-comment-sitelink-change": "Sproghenvisning ændret fra $1 til $2",
 	"wikibase-comment-sitelink-remove": "Sproghenvisning fjernet: $1",
 	"wikibase-comment-multi": "{{PLURAL:$1|ændring|ændringer}}",
-	"wikibase-dataitem": "{{WBREPONAME}}-emne",
+	"wikibase-dataitem": "{{WBREPONAME}}-element",
 	"wikibase-editlinks": "Redigér links",
 	"wikibase-editlinkstitle": "Redigér sproglinks",
 	"wikibase-addlinkstitle": "Tilføj sproghenvisninger",

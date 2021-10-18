@@ -1,13 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abbaty",
 			"Ammarpad",
-			"DonCamillo"
+			"DonCamillo",
+			"Em-em"
 		]
 	},
 	"wikibase-editlinks": "Gyara mahaɗa",
+	"wikibase-editlinkstitle": "Gyara linki na harsuna",
+	"wikibase-linkitem-addlinks": "Sanya linki",
 	"wikibase-rc-hide-wikidata-hide": "Ɓoye",
 	"wikibase-rc-hide-wikidata-show": "Nuna",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Gyaran {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Gyaran {{WBREPONAME}}",
+	"wikibase-replicationnote": "Yi hakuri!ka sani zai dauki dakikoki kafin masu shafin su ga sauye-sayen"
 }
