@@ -125,12 +125,6 @@ class DispatchChangesJob extends Job {
 		);
 	}
 
-	public function getDeduplicationInfo(): array {
-		return [
-			self::ENTITY_ID_KEY => $this->entityIdSerialization,
-		];
-	}
-
 	/**
 	 * @throws MWException
 	 */
