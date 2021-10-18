@@ -60,7 +60,7 @@ class ResubmitChanges extends Maintenance {
 
 	private function makeChangesIntoJobs( array $changes ): array {
 		return array_map( function ( EntityChange $change ): IJobSpecification {
-			return DispatchChangesJob::makeJobSpecification( $change->getEntityId()->getSerialization(), $change->getId() );
+			return DispatchChangesJob::makeJobSpecification( $change->getEntityId()->getSerialization() );
 		}, $changes );
 	}
 
