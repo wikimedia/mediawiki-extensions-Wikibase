@@ -19,11 +19,12 @@ use Wikibase\DataAccess\DatabaseEntitySource;
  */
 class ExternalUserNamesTest extends ServiceWiringTestCase {
 
-	private function mockItemAndPropertySource() {
+	/** @param string|false $databaseName */
+	private function mockItemAndPropertySource( $databaseName = 'repowiki' ) {
 		$this->mockService( 'WikibaseClient.ItemAndPropertySource',
 			new DatabaseEntitySource(
 				'repo',
-				'repowiki',
+				$databaseName,
 				[],
 				'',
 				'',
@@ -60,6 +61,22 @@ class ExternalUserNamesTest extends ServiceWiringTestCase {
 			->method( 'getSiteLookup' )
 			->willReturn( new HashSiteStore( [ $site ] ) );
 		$this->mockItemAndPropertySource();
+
+		/** @var ExternalUserNames $externalUserNames */
+		$externalUserNames = $this->getService( 'WikibaseClient.ExternalUserNames' );
+
+		$this->assertInstanceOf( ExternalUserNames::class, $externalUserNames );
+		$this->assertSame( 'r>MyUser', $externalUserNames->addPrefix( 'MyUser' ) );
+	}
+
+	public function testConstructionWithLocalSiteWithInterwikiIds(): void {
+		$site = new Site();
+		$site->setGlobalId( 'repowiki' );
+		$site->addInterwikiId( 'r' );
+		$this->mockService( 'WikibaseClient.Site', $site );
+		$this->serviceContainer->expects( $this->never() )
+			->method( 'getSiteLookup' );
+		$this->mockItemAndPropertySource( false );
 
 		/** @var ExternalUserNames $externalUserNames */
 		$externalUserNames = $this->getService( 'WikibaseClient.ExternalUserNames' );
