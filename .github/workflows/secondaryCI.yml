@@ -89,7 +89,7 @@ jobs:
         bash ./build/ci-scripts/script.sh
     - name: Send mail
       if: ${{ failure() }}
-      uses: dawidd6/action-send-mail@v3.5.0
+      uses: dawidd6/action-send-mail@v3.6.0
       with:
         server_address: smtp.gmail.com
         server_port: 465
