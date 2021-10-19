@@ -9,6 +9,9 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use LinkBatch;
 use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\Page\PageSelectQueryBuilder;
+use MediaWiki\Page\PageStore;
+use MediaWiki\Page\PageStoreRecord;
 use MediaWikiIntegrationTestCase;
 use Title;
 use TitleFactory;
@@ -44,18 +47,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 	 * @return TitleFactory
 	 */
 	private function getTitleFactory() {
-		$titleFactory = $this->createMock( TitleFactory::class );
-
-		$titleFactory->method( 'newFromIDs' )
-			->willReturnCallback( function( array $ids ) {
-				$titles = [];
-				foreach ( $ids as $id ) {
-					$title = Title::makeTitle( NS_MAIN, "$id" );
-					$title->resetArticleID( $id );
-					$titles[] = $title;
-				}
-				return $titles;
-			} );
+		$titleFactory = $this->createPartialMock( TitleFactory::class, [ 'newFromText' ] );
 
 		$titleFactory->method( 'newFromText' )
 			->willReturnCallback( function( $text, $defaultNs = \NS_MAIN ) {
@@ -70,6 +62,50 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			} );
 
 		return $titleFactory;
+	}
+
+	/**
+	 * Returns a PageStore that generates PageRecords on fetch
+	 */
+	private function getPageStore(): PageStore {
+		$pageStore = $this->createMock( PageStore::class );
+		$pageSelectQueryBuilder = $this->getMockBuilder( PageSelectQueryBuilder::class )
+			->setConstructorArgs(
+				[ $this->db, $pageStore ]
+			)
+			->onlyMethods( [ 'fetchPageRecords' ] )
+			->getMock();
+
+		$pageSelectQueryBuilder->method( 'fetchPageRecords' )->willReturnCallback(
+			static function () use ( $pageSelectQueryBuilder ) {
+				[ 'conds' => $conds ] = $pageSelectQueryBuilder->getQueryInfo();
+				$pageRecords = new ArrayIterator();
+				if ( isset( $conds['page_id'] ) ) {
+					foreach ( $conds['page_id'] as $pageId ) {
+						$pageRecords->append(
+							new PageStoreRecord(
+								(object)[
+									'page_namespace' => NS_MAIN,
+									'page_title' => "$pageId",
+									'page_id' => $pageId,
+									'page_is_redirect' => false,
+									'page_is_new' => false,
+									'page_latest' => 0,
+									'page_touched' => 0,
+								],
+								PageStoreRecord::LOCAL
+							)
+						);
+					}
+				}
+				return $pageRecords;
+			}
+		);
+
+		$pageStore->method( 'newSelectQueryBuilder' )
+			->willReturn( $pageSelectQueryBuilder );
+
+		return $pageStore;
 	}
 
 	private function getLinkBatchFactory(): LinkBatchFactory {
@@ -94,6 +130,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 		$affectedPagesFinder = new AffectedPagesFinder(
 			$usageLookup,
 			$this->getTitleFactory(),
+			$this->getPageStore(),
 			$this->getLinkBatchFactory(),
 			'enwiki',
 			null,
@@ -533,6 +570,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 		$affectedPagesFinder = new AffectedPagesFinder(
 			$this->getSiteLinkUsageLookup( $pageTitle ),
 			$this->getTitleFactory(),
+			$this->getPageStore(),
 			$this->getLinkBatchFactory(),
 			'enwiki',
 			null,

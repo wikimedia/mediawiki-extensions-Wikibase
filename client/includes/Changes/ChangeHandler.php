@@ -5,6 +5,7 @@ namespace Wikibase\Client\Changes;
 
 use InvalidArgumentException;
 use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\Page\PageStore;
 use Psr\Log\LoggerInterface;
 use Title;
 use TitleFactory;
@@ -35,6 +36,11 @@ class ChangeHandler {
 	private $titleFactory;
 
 	/**
+	 * @var PageStore
+	 */
+	private $pageStore;
+
+	/**
 	 * @var PageUpdater
 	 */
 	private $updater;
@@ -62,6 +68,7 @@ class ChangeHandler {
 	/**
 	 * @param AffectedPagesFinder $affectedPagesFinder
 	 * @param TitleFactory $titleFactory
+	 * @param PageStore $pageStore
 	 * @param PageUpdater $updater
 	 * @param ChangeRunCoalescer $changeRunCoalescer
 	 * @param LoggerInterface $logger
@@ -73,6 +80,7 @@ class ChangeHandler {
 	public function __construct(
 		AffectedPagesFinder $affectedPagesFinder,
 		TitleFactory $titleFactory,
+		PageStore $pageStore,
 		PageUpdater $updater,
 		ChangeRunCoalescer $changeRunCoalescer,
 		LoggerInterface $logger,
@@ -82,6 +90,7 @@ class ChangeHandler {
 	) {
 		$this->affectedPagesFinder = $affectedPagesFinder;
 		$this->titleFactory = $titleFactory;
+		$this->pageStore = $pageStore;
 		$this->updater = $updater;
 		$this->changeRunCoalescer = $changeRunCoalescer;
 		$this->logger = $logger;
@@ -240,7 +249,19 @@ class ChangeHandler {
 			$pageIds[] = $usages->getPageId();
 		}
 
-		return $this->titleFactory->newFromIDs( $pageIds );
+		$pageRecords = $this->pageStore
+			->newSelectQueryBuilder()
+			->wherePageIds( $pageIds )
+			->caller( __METHOD__ )
+			->fetchPageRecords();
+
+		return array_map(
+			function ( $pageRecord ) {
+				return $this->titleFactory
+					->castFromPageIdentity( $pageRecord );
+			},
+			iterator_to_array( $pageRecords )
+		);
 	}
 
 	/**

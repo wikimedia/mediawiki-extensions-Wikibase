@@ -68,6 +68,10 @@ class ChangeHandlerTest extends ServiceWiringTestCase {
 			->expects( $this->once() )
 			->method( 'getTitleFactory' );
 
+		$this->serviceContainer
+			->expects( $this->once() )
+			->method( 'getPageStore' );
+
 		$this->assertInstanceOf(
 			ChangeHandler::class,
 			$this->getService( 'WikibaseClient.ChangeHandler' )

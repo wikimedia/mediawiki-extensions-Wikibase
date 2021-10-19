@@ -136,6 +136,7 @@ return [
 		return new AffectedPagesFinder(
 			WikibaseClient::getStore( $services )->getUsageLookup(),
 			$services->getTitleFactory(),
+			$services->getPageStore(),
 			$services->getLinkBatchFactory(),
 			WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' ),
 			WikibaseClient::getLogger( $services )
@@ -177,6 +178,7 @@ return [
 		return new ChangeHandler(
 			WikibaseClient::getAffectedPagesFinder( $services ),
 			$services->getTitleFactory(),
+			$services->getPageStore(),
 			$pageUpdater,
 			$changeListTransformer,
 			$logger,
