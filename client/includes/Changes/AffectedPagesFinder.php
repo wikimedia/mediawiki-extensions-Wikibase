@@ -58,19 +58,12 @@ class AffectedPagesFinder {
 	private $logger;
 
 	/**
-	 * @var bool
-	 */
-	private $checkPageExistence;
-
-	/**
 	 * @param UsageLookup $usageLookup
 	 * @param TitleFactory $titleFactory
 	 * @param PageStore $pageStore
 	 * @param LinkBatchFactory $linkBatchFactory
 	 * @param string $siteId
 	 * @param LoggerInterface|null $logger
-	 * @param bool $checkPageExistence To disable slow filtering that is not relevant in test
-	 *  scenarios. Not meant to be used in production!
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -80,8 +73,7 @@ class AffectedPagesFinder {
 		PageStore $pageStore,
 		LinkBatchFactory $linkBatchFactory,
 		string $siteId,
-		?LoggerInterface $logger = null,
-		bool $checkPageExistence = true
+		?LoggerInterface $logger = null
 	) {
 		$this->usageLookup = $usageLookup;
 		$this->titleFactory = $titleFactory;
@@ -89,7 +81,6 @@ class AffectedPagesFinder {
 		$this->linkBatchFactory = $linkBatchFactory;
 		$this->siteId = $siteId;
 		$this->logger = $logger ?: new NullLogger();
-		$this->checkPageExistence = $checkPageExistence;
 	}
 
 	/**
@@ -314,10 +305,6 @@ class AffectedPagesFinder {
 
 		/** @var PageRecord $pageRecord */
 		foreach ( $pageRecords as $pageRecord ) {
-			if ( $this->checkPageExistence && !$pageRecord->exists() ) {
-				continue;
-			}
-
 			$pageId = $pageRecord->getId();
 			$titlesToUpdate[$pageId] = $usagesByPageId[$pageId];
 		}
