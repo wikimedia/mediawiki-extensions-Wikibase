@@ -447,10 +447,13 @@ return [
 	},
 
 	'WikibaseClient.ExternalUserNames' => function ( MediaWikiServices $services ): ?ExternalUserNames {
-		$siteLookup = $services->getSiteLookup();
-		$repoSite = $siteLookup->getSite(
-			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName()
-		);
+		$databaseName = WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName();
+		if ( $databaseName !== false ) {
+			$siteLookup = $services->getSiteLookup();
+			$repoSite = $siteLookup->getSite( $databaseName );
+		} else {
+			$repoSite = WikibaseClient::getSite( $services );
+		}
 		if ( $repoSite === null ) {
 			return null;
 		}
