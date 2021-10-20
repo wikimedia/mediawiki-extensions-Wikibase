@@ -153,9 +153,7 @@ class DispatchChangesJob extends Job {
 				'entity' => $this->entityIdSerialization,
 			] );
 
-			if ( $repoSettings->getSetting( 'dispatchViaJobsPruneChangesTableInJobEnabled' ) ) {
-				$this->deleteChangeRows( $changes );
-			}
+			$this->deleteChangeRows( $changes );
 
 			return true;
 		}
@@ -174,9 +172,7 @@ class DispatchChangesJob extends Job {
 			$jobQueueGroup->lazyPush( $job );
 		}
 
-		if ( $repoSettings->getSetting( 'dispatchViaJobsPruneChangesTableInJobEnabled' ) ) {
-			$this->deleteChangeRows( $changes );
-		}
+		$this->deleteChangeRows( $changes );
 
 		return true;
 	}
