@@ -136,7 +136,6 @@ class DispatchChangesJob extends Job {
 		$allClientSites = $this->getClientWikis( $repoSettings );
 		$entityId = $this->entityIdParser->parse( $this->entityIdSerialization );
 		$subscribedClientSites = $this->subscriptionLookup->getSubscribers( $entityId );
-		$allowedClientSites = WikibaseRepo::getSettings()->getSetting( 'dispatchViaJobsAllowedClients' );
 
 		$changes = $this->changeLookup->loadByEntityIdFromPrimary( $this->entityIdSerialization );
 
@@ -147,7 +146,7 @@ class DispatchChangesJob extends Job {
 			return true;
 		}
 
-		$dispatchingClientSites = $this->filterClientWikis( $allClientSites, $subscribedClientSites, $allowedClientSites );
+		$dispatchingClientSites = $this->filterClientWikis( $allClientSites, $subscribedClientSites );
 		if ( empty( $dispatchingClientSites ) ) {
 			// without subscribed wikis, this job should never have been scheduled
 			$this->logger->warning( __METHOD__ . ': no wikis subscribed for {entity} => doing nothing', [
@@ -197,23 +196,15 @@ class DispatchChangesJob extends Job {
 	/**
 	 * @param string[] $allClientWikis as returned by getClientWikis().
 	 * @param string[] $subscribedClientSites sites subscribed to this entityId
-	 * @param string[]|null $allowedSiteIDs site IDs to select, or null to allow all
 	 *
 	 * @throws MWException
 	 * @return string[] A mapping of client wiki site IDs to logical database names.
 	 */
-	private function filterClientWikis( array $allClientWikis, array $subscribedClientSites, ?array $allowedSiteIDs ): array {
+	private function filterClientWikis( array $allClientWikis, array $subscribedClientSites ): array {
 		Assert::parameterElementType( 'string', $allClientWikis, '$allClientWikis' );
 
-		if ( $allowedSiteIDs === null ) {
-			$dispatchingClientSites = $subscribedClientSites;
-		} else {
-			Assert::parameterElementType( 'string', $allowedSiteIDs, '$allowedSiteIDs' );
-			$dispatchingClientSites = array_intersect( $subscribedClientSites, $allowedSiteIDs );
-		}
-
 		$clientWikis = [];
-		foreach ( $dispatchingClientSites as $siteID ) {
+		foreach ( $subscribedClientSites as $siteID ) {
 			if ( array_key_exists( $siteID, $allClientWikis ) ) {
 				$clientWikis[$siteID] = $allClientWikis[$siteID];
 			} else {
