@@ -61,10 +61,10 @@ class LanguageLinkBadgeDisplay {
 	 *
 	 * @param array &$languageLink
 	 * @param Title $languageLinkTitle
-	 * @param OutputPage $output The output page to take the wikibase_badges property from.
+	 * @param OutputPage $outputPage The output page to take the wikibase_badges property from.
 	 */
-	public function applyBadges( array &$languageLink, Title $languageLinkTitle, OutputPage $output ) {
-		$badges = $output->getProperty( 'wikibase_badges' );
+	public function applyBadges( array &$languageLink, Title $languageLinkTitle, OutputPage $outputPage ) {
+		$badges = $outputPage->getProperty( 'wikibase_badges' );
 
 		if ( empty( $badges ) ) {
 			return;

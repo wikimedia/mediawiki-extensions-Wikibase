@@ -106,8 +106,8 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 		return true;
 	}
 
-	private function allLinksAreSuppressed( OutputPage $out ) {
-		$noexternallanglinks = $out->getProperty( 'noexternallanglinks' );
+	private function allLinksAreSuppressed( OutputPage $outputPage ) {
+		$noexternallanglinks = $outputPage->getProperty( 'noexternallanglinks' );
 
 		if ( $noexternallanglinks !== null ) {
 			return in_array( '*', $noexternallanglinks );
@@ -116,10 +116,10 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 		return false;
 	}
 
-	private function hasLinkItemWidget( User $user, OutputPage $out, Title $title, $actionName ) {
+	private function hasLinkItemWidget( User $user, OutputPage $outputPage, Title $title, $actionName ) {
 		if (
-			$out->getLanguageLinks() !== [] || !$user->isRegistered()
-			|| !$this->hasEditOrAddLinks( $out, $title, $actionName )
+			$outputPage->getLanguageLinks() !== [] || !$user->isRegistered()
+			|| !$this->hasEditOrAddLinks( $outputPage, $title, $actionName )
 		) {
 			return false;
 		}

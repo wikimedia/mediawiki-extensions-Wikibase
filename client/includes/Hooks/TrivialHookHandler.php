@@ -55,14 +55,14 @@ class TrivialHookHandler implements
 
 	/**
 	 * Add the connected item prefixed id as a JS config variable, for gadgets etc.
-	 * @param OutputPage $out
+	 * @param OutputPage $outputPage
 	 * @param Skin $skin
 	 */
-	public function onBeforePageDisplay( $out, $skin ): void {
-		$prefixedId = $out->getProperty( 'wikibase_item' );
+	public function onBeforePageDisplay( $outputPage, $skin ): void {
+		$prefixedId = $outputPage->getProperty( 'wikibase_item' );
 
 		if ( $prefixedId !== null ) {
-			$out->addJsConfigVars( 'wgWikibaseItemId', $prefixedId );
+			$outputPage->addJsConfigVars( 'wgWikibaseItemId', $prefixedId );
 		}
 	}
 
@@ -71,11 +71,11 @@ class TrivialHookHandler implements
 	 * @param array &$fields
 	 * @param ContentHandler $handler
 	 * @param WikiPage $page
-	 * @param ParserOutput $output
+	 * @param ParserOutput $parserOutput
 	 * @param SearchEngine $engine
 	 */
-	public function onSearchDataForIndex( &$fields, $handler, $page, $output, $engine ): void {
-		$wikibaseItem = $output->getPageProperty( 'wikibase_item' );
+	public function onSearchDataForIndex( &$fields, $handler, $page, $parserOutput, $engine ): void {
+		$wikibaseItem = $parserOutput->getPageProperty( 'wikibase_item' );
 		if ( $wikibaseItem ) {
 			$fields['wikibase_item'] = $wikibaseItem;
 		}
