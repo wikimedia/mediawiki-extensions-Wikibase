@@ -83,7 +83,6 @@ return [
 	'dispatchDefaultMaxChunks' => 15,
 	'dispatchDefaultDispatchInterval' => 60,
 	'dispatchDefaultDispatchRandomness' => 15,
-	'dispatchViaJobsEnabled' => true,
 
 	// Formats that shall be available via Special:EntityData.
 	// The first format will be used as the default.
