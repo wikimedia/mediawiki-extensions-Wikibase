@@ -156,6 +156,7 @@ class RecentChangeFactory {
 			'rc_patrolled' => RecentChange::PRC_AUTOPATROLLED,
 			'rc_params' => serialize( $params ),
 			'rc_timestamp' => $time,
+			'rc_logid' => 0,
 			'rc_log_type' => null,
 			'rc_log_action' => '',
 			'rc_source' => self::SRC_WIKIBASE,
