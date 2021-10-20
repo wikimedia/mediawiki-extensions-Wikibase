@@ -85,13 +85,13 @@ class ShortDescHandler {
 		$noReplace = $this->parseNoReplace( $parser, $controlArg );
 		$out = $parser->getOutput();
 
-		if ( $out->getProperty( 'wikibase-shortdesc' ) !== false && $noReplace ) {
+		if ( $out->getPageProperty( 'wikibase-shortdesc' ) !== false && $noReplace ) {
 			return;
 		}
 
 		$shortDesc = $this->sanitize( $shortDesc );
 		if ( $this->isValid( $shortDesc ) ) {
-			$out->setProperty( DescriptionLookup::LOCAL_PROPERTY_NAME, $shortDesc );
+			$out->setPageProperty( DescriptionLookup::LOCAL_PROPERTY_NAME, $shortDesc );
 		}
 	}
 
