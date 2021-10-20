@@ -460,18 +460,18 @@ local tests = {
 	-- Integration tests
 
 	{ name = 'mw.wikibase.entity.getLabel integration 1', func = integrationTestGetLabel, type='ToString',
-	  expect = { 'Lua Test Item' }
+	  expect = { 'Lua-Test-Datenobjekt' }
 	},
 	{ name = 'mw.wikibase.entity.getLabel integration 2', func = integrationTestGetLabel, type='ToString',
 	  args = { 'en' },
-	  expect = { 'Test all the code paths' }
+	  expect = { 'Lua Test Item' }
 	},
 	{ name = 'mw.wikibase.entity.getLabelWithLang integration 1', func = integrationTestGetLabelWithLang, type='ToString',
-	  expect = { 'Lua Test Item', 'de' }
+	  expect = { 'Lua-Test-Datenobjekt', 'de' }
 	},
 	{ name = 'mw.wikibase.entity.getLabelWithLang integration 2', func = integrationTestGetLabelWithLang, type='ToString',
 	  args = { 'en' },
-	  expect = { 'Test all the code paths', 'en' }
+	  expect = { 'Lua Test Item', 'en' }
 	},
 	{ name = 'mw.wikibase.entity.getDescription integration', func = integrationTestGetDescription, type='ToString',
 	  expect = { 'Description of Q32487' }
@@ -585,13 +585,13 @@ local tests = {
 	  expect = { { label = 'LuaTestStringProperty', value = '<span><span>Lua :)</span></span>' } }
 	},
 	{ name = 'reassigning entity ID to 0 does not crash', func = testReassignEntityId_number,
-	  expect = { 'Test all the code paths' }
+	  expect = { 'Lua Test Item' }
 	},
 	{ name = 'reassigning entity ID to nil does not crash', func = testReassignEntityId_nil,
-	  expect = { 'Test all the code paths' }
+	  expect = { 'Lua Test Item' }
 	},
 	{ name = 'reassigning entity ID to string does not crash', func = testReassignEntityId_string,
-	  expect = { 'Test all the code paths' }
+	  expect = { 'Lua Test Item' }
 	},
 }
 

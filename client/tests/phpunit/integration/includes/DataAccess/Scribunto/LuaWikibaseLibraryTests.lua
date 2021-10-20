@@ -201,11 +201,11 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.label (legacy alias)', func = mw.wikibase.label, type='ToString',
 	  args = { 'Q32487' },
-	  expect = { 'Lua Test Item' }
+	  expect = { 'Lua-Test-Datenobjekt' }
 	},
 	{ name = 'mw.wikibase.getLabel', func = mw.wikibase.getLabel, type='ToString',
 	  args = { 'Q32487' },
-	  expect = { 'Lua Test Item' }
+	  expect = { 'Lua-Test-Datenobjekt' }
 	},
 	{ name = 'mw.wikibase.getLabel (invalid id type)', func = mw.wikibase.getLabel,
 	  args = { 1 },
@@ -217,7 +217,7 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.getLabel (connected item)', func = mw.wikibase.getLabel, type='ToString',
 	  args = {},
-	  expect = { 'Lua Test Item' }
+	  expect = { 'Lua-Test-Datenobjekt' }
 	},
 	{ name = 'mw.wikibase.getLabel (no label)', func = mw.wikibase.getLabel, type='ToString',
 	  args = { 'Q32488' },
@@ -225,7 +225,7 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.getLabelWithLang', func = mw.wikibase.getLabelWithLang, type='ToString',
 	  args = { 'Q32487' },
-	  expect = { 'Lua Test Item', 'de' }
+	  expect = { 'Lua-Test-Datenobjekt', 'de' }
 	},
 	{ name = 'mw.wikibase.getLabelWithLang (no such item)', func = mw.wikibase.getLabelWithLang, type='ToString',
 	  args = { 'Q1224342342' },
@@ -233,7 +233,7 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.getLabelWithLang (connected item)', func = mw.wikibase.getLabelWithLang, type='ToString',
 	  args = {},
-	  expect = { 'Lua Test Item', 'de' }
+	  expect = { 'Lua-Test-Datenobjekt', 'de' }
 	},
 	{ name = 'mw.wikibase.getLabelWithLang (no label)', func = mw.wikibase.getLabelWithLang, type='ToString',
 	  args = { 'Q32488' },
@@ -253,11 +253,11 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.getLabelByLang 1', func = mw.wikibase.getLabelByLang, type='ToString',
 	  args = { 'Q32487', 'de' },
-	  expect = { 'Lua Test Item' }
+	  expect = { 'Lua-Test-Datenobjekt' }
 	},
 	{ name = 'mw.wikibase.getLabelByLang 2', func = mw.wikibase.getLabelByLang, type='ToString',
 	  args = { 'Q32487', 'en' },
-	  expect = { 'Test all the code paths' }
+	  expect = { 'Lua Test Item' }
 	},
 	{ name = 'mw.wikibase.getLabelByLang (no such item)', func = mw.wikibase.getLabelByLang, type='ToString',
 	  args = { 'Q1224342342', 'de' },
