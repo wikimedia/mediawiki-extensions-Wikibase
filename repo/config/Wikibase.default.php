@@ -272,9 +272,6 @@ return [
 	// characters (e.g. space, percent, etc.) should NOT be encoded.
 	'tabularDataStorageBaseUrl' => 'https://commons.wikimedia.org/wiki/',
 
-	// Name of the lock manager for dispatch changes coordinator
-	'dispatchingLockManager' => null,
-
 	// List of properties to be indexed
 	'searchIndexProperties' => [],
 	// List of property types to be indexed
