@@ -9,7 +9,7 @@
 	},
 	"apihelp-query+wbentityusage-description": "Returnerar alla enhets -ID som används på de angivna sidorna.",
 	"apihelp-query+wbentityusage-summary": "Returnerar alla enhets -ID som används på de angivna sidorna.",
-	"apihelp-query+wbentityusage-param-aspect": "Returnerar enbart enhets -ID som används på denna aspekt.",
+	"apihelp-query+wbentityusage-param-aspect": "Returnerar enbart enhets-ID som används på denna aspekt.",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Enhetens webbplatslänkar används",
 	"apihelp-query+wbentityusage-paramvalue-aspect-L": "Enhetens etikett används",
 	"apihelp-query+wbentityusage-paramvalue-aspect-D": "The entity's description is used",

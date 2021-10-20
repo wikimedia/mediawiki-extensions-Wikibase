@@ -5,8 +5,8 @@
 			"Michawiki"
 		]
 	},
-	"specialpages-group-wikibase": "Repozitorij Wikibase",
-	"wikibase-error-unexpected": "Njewočakowany zmylk je wustupił.",
+	"specialpages-group-wikibase": "Wikibase",
+	"wikibase-error-unexpected": "Zmylk: $1.",
 	"wikibase-error-save-generic": "Při składowanju je zmylk wustupił, a tohodla njedachu so změny přewjesć.",
 	"wikibase-error-remove-generic": "Při wotstronjenu je zmylk wustupił, a tohodla njedachu so twoje změny přewjesć.",
 	"wikibase-error-save-timeout": "Mamy techniske ćežkosće a tohodla njeda so ničo składować.",
