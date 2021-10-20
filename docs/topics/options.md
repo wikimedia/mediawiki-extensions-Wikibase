@@ -239,11 +239,6 @@ EXAMPLE: On wikidata.org, this is set to `P1921`, a string property named “URI
 
 ### Dispatching
 
-#### dispatchingLockManager {#repo_dispatchingLockManager}
-If you want to use another lock mechanism for dispatching changes to clients instead of database locking (which can occupy too many connections to the master database), set its name in this config.
-
-See [$wgLockManagers] documentation in MediaWiki core for more information on configuring a locking mechanism inside core.
-
 #### dispatchLagToMaxLagFactor {#repo_dispatchLagToMaxLagFactor}
 If set to a positive number, the median dispatch lag (in seconds) will be divided by this number and passed to core like database lag (see the API maxlag parameter).
 
@@ -911,7 +906,6 @@ DEFAULT: array mapping each well-known name to `null`.
 [$wgMaxArticleSize]: https://www.mediawiki.org/wiki/Manual:$wgMaxArticleSize
 [$wgRightsUrl]: https://www.mediawiki.org/wiki/Manual:$wgRightsUrl
 [$wgRightsText]: https://www.mediawiki.org/wiki/Manual:$wgRightsText
-[$wgLockManagers]: https://www.mediawiki.org/wiki/Manual:$wgLockManagers
 [$wgDBDefaultGroup]: https://www.mediawiki.org/wiki/Manual:$wgDBDefaultGroup
 [$wgLanguageCode]: https://www.mediawiki.org/wiki/Manual:$wgLanguageCode
 [$wgSitename]: https://www.mediawiki.org/wiki/Manual:$wgSitename
