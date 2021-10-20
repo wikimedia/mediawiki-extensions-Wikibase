@@ -51,7 +51,6 @@ use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TermboxVersionParserCacheValueRejector;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
-use Wikibase\Repo\Store\Sql\DispatchStats;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\View\ViewHooks;
 use WikiPage;
@@ -820,56 +819,6 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Helper for onAPIQuerySiteInfoStatisticsInfo
-	 *
-	 * @param object $row
-	 * @return array
-	 */
-	private static function formatDispatchRow( $row ) {
-		$data = [
-			'pending' => $row->chd_pending,
-			'lag' => $row->chd_lag,
-		];
-		if ( isset( $row->chd_site ) ) {
-			$data['site'] = $row->chd_site;
-		}
-		if ( isset( $row->chd_seen ) ) {
-			$data['position'] = $row->chd_seen;
-		}
-		if ( isset( $row->chd_touched ) ) {
-			$data['touched'] = wfTimestamp( TS_ISO_8601, $row->chd_touched );
-		}
-
-		return $data;
-	}
-
-	/**
-	 * Adds DispatchStats info to the API
-	 *
-	 * @param array[] &$data
-	 */
-	public static function onAPIQuerySiteInfoStatisticsInfo( array &$data ) {
-		$stats = new DispatchStats( WikibaseRepo::getRepoDomainDbFactory()->newRepoDb() );
-		$stats->load();
-		if ( $stats->hasStats() ) {
-			$data['dispatch'] = [
-				'oldest' => [
-					'id' => $stats->getMinChangeId(),
-					'timestamp' => $stats->getMinChangeTimestamp(),
-				],
-				'newest' => [
-					'id' => $stats->getMaxChangeId(),
-					'timestamp' => $stats->getMaxChangeTimestamp(),
-				],
-				'freshest' => self::formatDispatchRow( $stats->getFreshest() ),
-				'median' => self::formatDispatchRow( $stats->getMedian() ),
-				'stalest' => self::formatDispatchRow( $stats->getStalest() ),
-				'average' => self::formatDispatchRow( $stats->getAverage() ),
-			];
-		}
-	}
-
-	/**
 	 * Called by Import.php. Implemented to prevent the import of entities.
 	 *
 	 * @param object $importer unclear, see Bug T66657
@@ -1018,40 +967,6 @@ final class RepoHooks {
 		);
 
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
-	}
-
-	/**
-	 * Handler for the ApiMaxLagInfo to add dispatching lag stats
-	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ApiMaxLagInfo
-	 *
-	 * @param array &$lagInfo
-	 */
-	public static function onApiMaxLagInfo( array &$lagInfo ) {
-
-		$dispatchLagToMaxLagFactor = WikibaseRepo::getSettings()->getSetting(
-			'dispatchLagToMaxLagFactor'
-		);
-
-		if ( $dispatchLagToMaxLagFactor <= 0 ) {
-			return;
-		}
-
-		$stats = new DispatchStats( WikibaseRepo::getRepoDomainDbFactory()->newRepoDb() );
-		$stats->load();
-		$median = $stats->getMedian();
-
-		if ( $median ) {
-			$maxDispatchLag = $median->chd_lag / (float)$dispatchLagToMaxLagFactor;
-			if ( $maxDispatchLag > $lagInfo['lag'] ) {
-				$lagInfo = [
-					'host' => $median->chd_site,
-					'lag' => $maxDispatchLag,
-					'type' => 'wikibase-dispatching',
-					'dispatchLag' => $median->chd_lag,
-				];
-			}
-		}
 	}
 
 	/**
