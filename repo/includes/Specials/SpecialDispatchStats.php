@@ -1,147 +1,91 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Specials;
 
 use Html;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
-use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Repo\Store\Sql\DispatchStats;
 
 /**
- * Page for displaying diagnostics about the dispatch process.
- *
  * @license GPL-2.0-or-later
- * @author Daniel Kinzler
  */
 class SpecialDispatchStats extends SpecialWikibasePage {
 
-	/** @var RepoDomainDb */
-	private $db;
-
-	public function __construct( RepoDomainDbFactory $dbFactory ) {
-		parent::__construct( 'DispatchStats' );
-		$this->db = $dbFactory->newRepoDb();
-	}
-
-	protected function outputRow( $data, $tag = 'td', $attr = [] ) {
-		$this->getOutput()->addHTML( Html::openElement( 'tr' ) );
-
-		foreach ( $data as $v ) {
-			if ( !isset( $attr['align'] ) ) {
-				if ( is_int( $v ) || is_float( $v ) ) {
-					$attr['align'] = 'right';
-				} else {
-					$attr['align'] = 'left';
-				}
-			}
-
-			$this->getOutput()->addHTML( Html::element( $tag, $attr, $v ) );
-		}
-
-		$this->getOutput()->addHTML( Html::closeElement( 'tr' ) );
-	}
-
-	protected function outputStateRow( $label, $state ) {
-		$lang = $this->getContext()->getLanguage();
-
-		// @phan-suppress-next-line SecurityCheck-DoubleEscaped T270000
-		$this->outputRow( [
-			$label,
-			$state->chd_site ?? '-',
-			$state->chd_seen ?? '-',
-			$lang->formatNum( $state->chd_pending ),
-			$state->chd_lag === null
-				? wfMessage( 'wikibase-dispatchstats-large-lag' )->text()
-				: $lang->formatDuration( $state->chd_lag, [ 'days', 'hours', 'minutes' ] ),
-			isset( $state->chd_touched )
-				? $lang->timeanddate( $state->chd_touched, true )
-				: '-',
-		] );
-	}
-
 	/**
-	 * @see SpecialWikibasePage::execute
-	 *
-	 * @param string|null $subPage
+	 * @var DispatchStats
 	 */
-	public function execute( $subPage ) {
+	private $dispatchStats;
+
+	public function __construct( DispatchStats $dispatchStats ) {
+		parent::__construct( 'DispatchStats' );
+
+		$this->dispatchStats = $dispatchStats;
+	}
+
+	public function execute( $subPage ): void {
 		parent::execute( $subPage );
 
-		$lang = $this->getContext()->getLanguage();
+		$this->addIntroToPage();
 
-		$stats = new DispatchStats( $this->db );
-		$stats->load();
+		$stats = $this->dispatchStats->getDispatchStats();
 
-		$this->getOutput()->addHTML( Html::rawElement( 'p', [],
-			$this->msg( 'wikibase-dispatchstats-intro' )->parse() ) );
-
-		if ( !$stats->hasStats() ) {
-			$this->getOutput()->addHTML( Html::rawElement( 'p', [],
-				$this->msg( 'wikibase-dispatchstats-no-stats' )->parse() ) );
-
+		if ( isset( $stats['numberOfChanges'] ) && $stats['numberOfChanges'] === 0 ) {
+			$this->addEmptyQueueMessageToPage();
 			return;
 		}
 
-		// changes ------
-		$this->getOutput()->addHTML( Html::rawElement( 'h2', [], $this->msg( 'wikibase-dispatchstats-changes' )->parse() ) );
+		$this->addChangeTimesToPage( $stats['freshestTime'], $stats['stalestTime'] );
 
-		$this->getOutput()->addHTML( Html::openElement( 'table', [ 'class' => 'wikitable' ] ) );
+		if ( isset( $stats['minimumNumberOfChanges'] ) ) {
+			$this->addMinimumNumberOfChangesToPage( $stats['minimumNumberOfChanges'] );
+			return;
+		}
 
-		$this->outputRow( [
-			'',
-			$this->msg( 'wikibase-dispatchstats-change-id' )->text(),
-			$this->msg( 'wikibase-dispatchstats-change-timestamp' )->text(),
-		], 'th' );
+		if ( isset( $stats['estimatedNumberOfChanges'] ) ) {
+			$this->addEstimatedStatsToPage( $stats['estimatedNumberOfChanges'] );
+			return;
+		}
 
-		$this->outputRow( [
-			$this->msg( 'wikibase-dispatchstats-oldest-change' )->text(),
-			$stats->getMinChangeId(),
-			$lang->timeanddate( $stats->getMinChangeTimestamp(), true ),
-		] );
-
-		$this->outputRow( [
-			$this->msg( 'wikibase-dispatchstats-newest-change' )->text(),
-			$stats->getMaxChangeId(),
-			$lang->timeanddate( $stats->getMaxChangeTimestamp(), true ),
-		] );
-
-		$this->getOutput()->addHTML( Html::closeElement( 'table' ) );
-
-		// dispatch stats ------
-		$this->getOutput()->addHTML( Html::rawElement( 'h2', [], $this->msg( 'wikibase-dispatchstats-stats' )->parse() ) );
-
-		$this->getOutput()->addHTML( Html::openElement( 'table', [ 'class' => 'wikitable' ] ) );
-
-		$this->outputRow( [
-			'',
-			$this->msg( 'wikibase-dispatchstats-site-id' )->text(),
-			$this->msg( 'wikibase-dispatchstats-pos' )->text(),
-			$this->msg( 'wikibase-dispatchstats-lag-num' )->text(),
-			$this->msg( 'wikibase-dispatchstats-lag-time' )->text(),
-			$this->msg( 'wikibase-dispatchstats-touched' )->text(),
-		], 'th' );
-
-		$this->outputStateRow(
-			$this->msg( 'wikibase-dispatchstats-freshest' )->text(),
-			$stats->getFreshest()
-		);
-
-		$this->outputStateRow(
-			$this->msg( 'wikibase-dispatchstats-median' )->text(),
-			$stats->getMedian()
-		);
-
-		$this->outputStateRow(
-			$this->msg( 'wikibase-dispatchstats-stalest' )->text(),
-			$stats->getStalest()
-		);
-
-		$this->outputStateRow(
-			$this->msg( 'wikibase-dispatchstats-average' )->text(),
-			$stats->getAverage()
-		);
-
-		$this->getOutput()->addHTML( Html::closeElement( 'table' ) );
+		$this->addNumberOfChangesToPage( $stats['numberOfChanges'] );
+		$this->addNumberOfEntitiesToPage( $stats['numberOfEntities'] );
 	}
 
+	private function addIntroToPage(): void {
+		$this->getOutput()->addHTML( Html::rawElement( 'p', [],
+			$this->msg( 'wikibase-dispatchstats-intro' )->parse() ) );
+	}
+
+	private function addChangeTimesToPage( string $freshestTime, string $stalestTime ): void {
+
+		$this->getOutput()->addHTML( Html::rawElement( 'p', [],
+			$this->msg( 'wikibase-dispatchstats-oldest' )->dateTimeParams( $stalestTime ) ) );
+		$this->getOutput()->addHTML( Html::rawElement( 'p', [],
+			$this->msg( 'wikibase-dispatchstats-newest' )->dateTimeParams( $freshestTime ) ) );
+	}
+
+	private function addMinimumNumberOfChangesToPage( int $minNumberOfChanges ): void {
+		$this->getOutput()->addHTML( Html::rawElement( 'p', [],
+			$this->msg( 'wikibase-dispatchstats-above' )->numParams( $minNumberOfChanges )->parse() ) );
+	}
+
+	private function addEstimatedStatsToPage( int $estimatedNumberOfChanges ): void {
+		$this->getOutput()->addHTML( Html::rawElement( 'p', [],
+			$this->msg( 'wikibase-dispatchstats-estimate' )->numParams( $estimatedNumberOfChanges )->parse() ) );
+	}
+
+	private function addEmptyQueueMessageToPage(): void {
+		$this->getOutput()->addHTML( Html::rawElement( 'p', [],
+			$this->msg( 'wikibase-dispatchstats-empty-queue' )->parse() ) );
+	}
+
+	private function addNumberOfChangesToPage( int $numberOfChanges ): void {
+		$this->getOutput()->addHTML( Html::rawElement( 'p', [],
+			$this->msg( 'wikibase-dispatchstats-number-of-changes-in-queue' )->numParams( $numberOfChanges )->parse() ) );
+	}
+
+	private function addNumberOfEntitiesToPage( int $numberOfEntities ): void {
+		$this->getOutput()->addHTML( Html::rawElement( 'p', [],
+			$this->msg( 'wikibase-dispatchstats-number-of-entities-in-queue' )->numParams( $numberOfEntities )->parse() ) );
+	}
 }

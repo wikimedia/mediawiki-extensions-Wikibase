@@ -227,6 +227,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
+use Wikibase\Repo\Store\Sql\DispatchStats;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlStore;
@@ -581,6 +582,12 @@ return [
 			WikibaseRepo::getKartographerEmbeddingHandler( $services ),
 			$settings->getSetting( 'useKartographerMaplinkInWikitext' ),
 			$services->getMainConfig()->get( 'ThumbLimits' )
+		);
+	},
+
+	'WikibaseRepo.DispatchStats' => function ( MediaWikiServices $services ): DispatchStats {
+		return new DispatchStats(
+			WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb()
 		);
 	},
 
