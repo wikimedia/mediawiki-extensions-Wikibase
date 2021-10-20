@@ -475,7 +475,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			],
 			[ // #8
 				$changes['set-en-label'],
-				[ 'Q100' => [ 'enwiki' => 'User:Emmy2' ] ], // user namespace
+				[ 'Q100' => [ 'enwiki' => $userEmmy2 ] ], // user namespace
 				$userEmmy2PurgeParser
 			],
 			[ // #9
