@@ -84,7 +84,6 @@ return [
 	'dispatchDefaultDispatchInterval' => 60,
 	'dispatchDefaultDispatchRandomness' => 15,
 	'dispatchViaJobsEnabled' => true,
-	'dispatchViaJobsAllowedClients' => null,
 	'dispatchViaJobsPruneChangesTableInJobEnabled' => true,
 
 	// Formats that shall be available via Special:EntityData.
