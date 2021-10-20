@@ -36,7 +36,6 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 		global $wgWBRepoSettings;
 		$newRepoSettings = $wgWBRepoSettings;
 		$newRepoSettings['localClientDatabases'] = [ $wiki => $wiki ];
-		$newRepoSettings['dispatchViaJobsPruneChangesTableInJobEnabled'] = true;
 		$this->setMwGlobals( 'wgWBRepoSettings', $newRepoSettings );
 	}
 
