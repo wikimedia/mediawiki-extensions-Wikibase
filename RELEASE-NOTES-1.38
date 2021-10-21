@@ -42,6 +42,15 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 
 ==== Removed configuration ====
 
+* (repo) (T292604) dispatchBatchChunkFactor has been removed.
+* (repo) (T292604) dispatchDefaultBatchSize has been removed.
+* (repo) (T292604) dispatchDefaultMaxChunks has been removed.
+* (repo) (T292604) dispatchDefaultDispatchInterval has been removed.
+* (repo) (T292604) dispatchDefaultDispatchRandomness has been removed.
+* (repo) (T292604) dispatchMaxTime has been removed.
+* (repo) (T292604) dispatchIdleDelay has been removed.
+* (repo) (T292604) dispatchLagToMaxLagFactor has been removed.
+* (repo) (T292604) dispatchingLockManager has been removed.
 * ...
 
 === New user-facing features in 1.38 ===
