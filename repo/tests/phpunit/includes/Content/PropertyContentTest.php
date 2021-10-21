@@ -7,8 +7,6 @@ use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use InvalidArgumentException;
-use ParserOutput;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -186,26 +184,4 @@ class PropertyContentTest extends EntityContentTestCase {
 			$output
 		);
 	}
-
-	public function testGetParserOutput() {
-		$content = $this->newBlank();
-
-		//@todo: Use a fake ID, no need to hit the database once we
-		//       got rid of the rest of the storage logic.
-		$this->entityStore->assignFreshId( $content->getEntity() );
-
-		$title = Title::newFromTextThrow( 'Foo' );
-		$parserOutput = $content->getParserOutput( $title );
-
-		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];
-		$actualOptions = $parserOutput->getUsedOptions();
-		$this->assertEqualsCanonicalizing(
-			$expectedUsedOptions,
-			$actualOptions,
-			'Cache-split flags are not what they should be'
-		);
-
-		$this->assertInstanceOf( ParserOutput::class, $parserOutput );
-	}
-
 }

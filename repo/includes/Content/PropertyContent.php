@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Content;
 
 use InvalidArgumentException;
 use LogicException;
-use ParserOptions;
 use Wikibase\DataModel\Entity\Property;
 
 /**
@@ -123,7 +122,7 @@ class PropertyContent extends EntityContent {
 	 * @see Content::isValid()
 	 */
 	public function isValid() {
-		//TODO: provide a way to get the data type from the holder directly!
+		// TODO: provide a way to get the data type from the holder directly!
 		return parent::isValid() && $this->getProperty()->getDataTypeId() !== '';
 	}
 
@@ -135,11 +134,4 @@ class PropertyContent extends EntityContent {
 	public function isEmpty() {
 		return !$this->isRedirect() && ( !$this->propertyHolder || $this->getProperty()->isEmpty() );
 	}
-
-	protected function getParserOutputFromEntityView( $revisionId, ParserOptions $options, $generateHtml = true ) {
-		$output = parent::getParserOutputFromEntityView( $revisionId, $options, $generateHtml );
-		$output->recordOption( 'termboxVersion' );
-		return $output;
-	}
-
 }

@@ -220,7 +220,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$handler = $this->getHandler();
 		$title = Title::makeTitle( $handler->getEntityNamespace(), "1234567" );
 
-		//NOTE: currently, this tests whether getPageLanguage will always return the content language, even
+		// NOTE: currently, this tests whether getPageLanguage will always return the content language, even
 		//      if the user language is different. It's unclear whether this is actually the desired behavior,
 		//      since Wikibase Entities are inherently multilingual, so they have no actual "page language".
 
@@ -247,7 +247,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$handler = $this->getHandler();
 		$title = Title::makeTitle( $handler->getEntityNamespace(), "1234567" );
 
-		//NOTE: we expect getPageViewLanguage to return the user language, because Wikibase Entities
+		// NOTE: we expect getPageViewLanguage to return the user language, because Wikibase Entities
 		//      are always shown in the user language.
 
 		// test whatever is there
@@ -581,7 +581,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$searchEngine = $this->getMockBuilder( SearchEngine::class )->getMock();
 
 		$searchEngine->method( 'makeSearchFieldMapping' )
-			->willReturnCallback( function ( $name, $type ) {
+			->willReturnCallback( static function ( $name, $type ) {
 				return new DummySearchIndexFieldDefinition( $name, $type );
 			} );
 
@@ -687,4 +687,56 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		}
 	}
 
+	/**
+	 * @return EntityContent An entirely empty content object with no EntityHolder and no entity.
+	 */
+	abstract protected function newEmptyContent();
+
+	public function providePageProperties() {
+		yield 'empty' => [
+			$this->newEmptyContent(),
+			[]
+		];
+
+		$blankContent = $this->newEntityContent();
+		yield 'blank' => [
+			$blankContent,
+			[ 'wb-claims' => 0 ]
+		];
+
+		$contentWithLabel = $this->newEntityContent();
+		// Entity that didn't extend LabelsProvider to set/get a labels
+		// should be ingnored in this test case.
+		if ( $contentWithLabel->getEntity() instanceof LabelsProvider ) {
+			$this->setLabel( $contentWithLabel->getEntity(), 'en', 'Foo' );
+
+			yield 'labels' => [
+				$contentWithLabel,
+				[ 'wb-claims' => 0 ]
+			];
+		}
+	}
+
+	/**
+	 * @dataProvider providePageProperties
+	 */
+	public function testPageProperties( EntityContent $content, array $expectedProps ) {
+		$title = Title::newFromTextThrow( 'Foo' );
+		$contentRenderer = $this->getServiceContainer()->getContentRenderer();
+		$parserOutput = $contentRenderer->getParserOutput( $content, $title, null, null, false );
+		$this->assertTrue( $parserOutput->hasText() );
+
+		foreach ( $expectedProps as $name => $expected ) {
+			$actual = $parserOutput->getPageProperty( $name );
+			$this->assertSame( $expected, $actual, "page property $name" );
+		}
+	}
+
+	private function setLabel( EntityDocument $entity, $languageCode, $text ) {
+		if ( !( $entity instanceof LabelsProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a LabelsProvider' );
+		}
+
+		$entity->getLabels()->setTextForLanguage( $languageCode, $text );
+	}
 }

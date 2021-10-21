@@ -135,7 +135,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 
 		$this->mergeMwGlobalArrayValue( 'wgHooks', [
 			'WikibaseTextForSearchIndex' => [
-				function () {
+				static function () {
 					return false;
 				},
 			],
@@ -143,46 +143,6 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 
 		$text = $entityContent->getTextForSearchIndex();
 		$this->assertSame( '', $text, 'Text for search index should be empty if the hook returned false' );
-	}
-
-	public function providePageProperties() {
-		$cases = [];
-
-		$cases['empty'] = [
-			$this->newEmpty(),
-			[]
-		];
-
-		$blankContent = $this->newBlank( $this->getDummyId() );
-
-		$cases['blank'] = [
-			$blankContent,
-			[ 'wb-claims' => 0 ]
-		];
-
-		$contentWithLabel = $this->newBlank( $this->getDummyId() );
-		$this->setLabel( $contentWithLabel->getEntity(), 'en', 'Foo' );
-
-		$cases['labels'] = [
-			$contentWithLabel,
-			[ 'wb-claims' => 0 ]
-		];
-
-		return $cases;
-	}
-
-	/**
-	 * @dataProvider providePageProperties
-	 */
-	public function testPageProperties( EntityContent $content, array $expectedProps ) {
-		$title = Title::newFromTextThrow( 'Foo' );
-		$parserOutput = $content->getParserOutput( $title, null, null, false );
-		$this->assertTrue( $parserOutput->hasText() );
-
-		foreach ( $expectedProps as $name => $expected ) {
-			$actual = $parserOutput->getPageProperty( $name );
-			$this->assertSame( $expected, $actual, "page property $name" );
-		}
 	}
 
 	abstract public function provideGetEntityId();

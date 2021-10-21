@@ -10,7 +10,6 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use InvalidArgumentException;
-use ParserOutput;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -175,7 +174,7 @@ class ItemContentTest extends EntityContentTestCase {
 		$title->method( 'getNamespace' )
 			->willReturn( $itemNs );
 		$title->method( 'equals' )
-			->willReturnCallback( function( Title $other ) use ( $targetId ) {
+			->willReturnCallback( static function ( Title $other ) use ( $targetId ) {
 				// XXX: Ignores namespaces
 				return $other->getText() === $targetId->getSerialization();
 			} );
@@ -242,7 +241,6 @@ class ItemContentTest extends EntityContentTestCase {
 	 * @return EntityContent
 	 */
 	private function getItemContentWithIdentifierClaims() {
-
 		$item = new Item( new ItemId( 'Q2' ) );
 		$snak = new PropertyValueSnak( new NumericPropertyId( 'P11' ), new StringValue( 'Tehran' ) );
 		$guid = $item->getId()->getSerialization() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P';
@@ -485,19 +483,6 @@ class ItemContentTest extends EntityContentTestCase {
 		return $cases;
 	}
 
-	public function testGetParserOutput_redirect() {
-		$content = $this->newRedirect( new ItemId( 'Q5' ), new ItemId( 'Q123' ) );
-
-		$title = Title::newFromTextThrow( 'Foo' );
-		$parserOutput = $content->getParserOutput( $title );
-
-		$html = $parserOutput->getText();
-
-		$this->assertStringContainsString( '<div class="redirectMsg">', $html, 'redirect message' );
-		$this->assertStringContainsString( '<a href="', $html, 'redirect target link' );
-		$this->assertStringContainsString( 'Q123</a>', $html, 'redirect target label' );
-	}
-
 	public function provideGetEntityId() {
 		$q11 = new ItemId( 'Q11' );
 		$q12 = new ItemId( 'Q12' );
@@ -608,27 +593,6 @@ class ItemContentTest extends EntityContentTestCase {
 			trim( file_get_contents( __DIR__ . '/textForFiltersItem.txt' ) ),
 			$output
 		);
-	}
-
-	public function testGetParserOutput() {
-		$content = $this->newBlank();
-
-		//@todo: Use a fake ID, no need to hit the database once we
-		//       got rid of the rest of the storage logic.
-		$this->entityStore->assignFreshId( $content->getEntity() );
-
-		$title = Title::newFromTextThrow( 'Foo' );
-		$parserOutput = $content->getParserOutput( $title );
-
-		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];
-		$actualOptions = $parserOutput->getUsedOptions();
-		$this->assertEqualsCanonicalizing(
-			$expectedUsedOptions,
-			$actualOptions,
-			'Cache-split flags are not what they should be'
-		);
-
-		$this->assertInstanceOf( ParserOutput::class, $parserOutput );
 	}
 
 	private function setLanguageCodeEnglish() {

@@ -6,7 +6,6 @@ use Hooks;
 use InvalidArgumentException;
 use LogicException;
 use MWException;
-use ParserOptions;
 use Title;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -175,7 +174,7 @@ class ItemContent extends EntityContent {
 	 *
 	 * @return EntityHolder|null
 	 */
-	protected function getEntityHolder() {
+	public function getEntityHolder() {
 		return $this->itemHolder;
 	}
 
@@ -229,11 +228,4 @@ class ItemContent extends EntityContent {
 
 		return $properties;
 	}
-
-	protected function getParserOutputFromEntityView( $revisionId, ParserOptions $options, $generateHtml = true ) {
-		$output = parent::getParserOutputFromEntityView( $revisionId, $options, $generateHtml );
-		$output->recordOption( 'termboxVersion' );
-		return $output;
-	}
-
 }

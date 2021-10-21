@@ -6,6 +6,7 @@ use Content;
 use IContextSource;
 use MediaWiki\Revision\SlotRenderingProvider;
 use Page;
+use ParserOptions;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -108,7 +109,7 @@ class PropertyHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return [
-			'history' => function( Page $page, IContextSource $context ) {
+			'history' => function ( Page $page, IContextSource $context ) {
 				return new HistoryEntityAction(
 					$page,
 					$context,
@@ -224,4 +225,17 @@ class PropertyHandler extends EntityHandler {
 		return new NumericPropertyId( $id );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
+	protected function getParserOutputFromEntityView(
+		EntityContent $content,
+		$revisionId,
+		ParserOptions $options,
+		$generateHtml = true
+	) {
+		$output = parent::getParserOutputFromEntityView( $content, $revisionId, $options, $generateHtml );
+		$output->recordOption( 'termboxVersion' );
+		return $output;
+	}
 }
