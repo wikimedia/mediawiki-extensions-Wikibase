@@ -15,7 +15,6 @@
 
 * \ref md_docs_topics_change-propagation
   * @subpage md_docs_sql_wb_changes
-  * @subpage md_docs_sql_wb_changes_dispatch
   * @subpage md_docs_sql_wb_changes_subscription
 * \ref md_docs_storage_id-counters
   * @subpage md_docs_sql_wb_id_counters

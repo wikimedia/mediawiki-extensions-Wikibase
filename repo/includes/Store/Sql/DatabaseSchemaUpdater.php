@@ -85,17 +85,13 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			$this->getUpdateScriptPath( 'patch-wb_changes-drop-change_type_index', $db->getType() )
 		);
 
-		$updater->modifyExtensionField(
-			'wb_changes_dispatch',
-			'chd_seen',
-			$this->getUpdateScriptPath( 'patch-wb_changes_dispatch-make-chd_seen-unsigned', $db->getType() )
-		);
-
 		$updater->addExtensionIndex(
 			'wb_changes',
 			'change_object_id',
 			$this->getUpdateScriptPath( 'patch-wb_changes-change_object_id-index', $db->getType() )
 		);
+
+		$updater->dropExtensionTable( 'wb_changes_dispatch' );
 	}
 
 	private function updateChangesSubscriptionTable( DatabaseUpdater $dbUpdater ): void {
@@ -120,10 +116,6 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$updater->addExtensionTable(
 			'wb_changes',
 			$this->getScriptPath( 'wb_changes', $type )
-		);
-		$updater->addExtensionTable(
-			'wb_changes_dispatch',
-			$this->getScriptPath( 'wb_changes_dispatch', $type )
 		);
 	}
 
