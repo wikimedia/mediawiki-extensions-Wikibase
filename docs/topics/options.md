@@ -239,43 +239,6 @@ EXAMPLE: On wikidata.org, this is set to `P1921`, a string property named “URI
 
 ### Dispatching
 
-#### dispatchBatchChunkFactor
-Chunk factor used internally by the dispatchChanges.php script.
-
-If most clients are not interested in most changes, this factor can be raised to lower the number of database queries needed to fetch a batch of changes.
-
-DEFAULT: ```3```
-
-#### dispatchDefaultBatchSize
-Overrides the default value for batch-size in dispatchChanges.php
-
-DEFAULT: ```1000```
-
-#### dispatchDefaultMaxChunks
-Overrides the default value for max-chunks in dispatchChanges.php
-
-DEFAULT: ```15```
-
-#### dispatchDefaultDispatchInterval
-Overrides the default value for dispatch-interval in dispatchChanges.php in seconds.
-
-DEFAULT: ```60```
-
-#### dispatchDefaultDispatchRandomness
-Overrides the default value for randomness in dispatchChanges.php
-
-DEFAULT: ```15```
-
-#### dispatchMaxTime
-Overrides the default value for max-time in dispatchChanges.php in seconds.
-
-DEFAULT: ```3600``` (1 hour)
-
-#### dispatchIdleDelay
-Overrides the default value for idle-delay in dispatchChanges.php in seconds.
-
-DEFAULT: ```10```
-
 #### localClientDatabases {#client_localClientDatabases}
 An array of locally accessible client databases, for use by the dispatchChanges.php script.
 
