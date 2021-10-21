@@ -110,17 +110,5 @@
 	"wikibase-modifyterm-language": "Zwunzwuo a̱lyem:",
 	"special-mergeitems": "Mun A̱yaangga a̱feang",
 	"wikibase-mergeitems-submit": "Mun A̱yaangga",
-	"wikibase-dispatchstats-change-id": "ID",
-	"wikibase-dispatchstats-oldest-change": "A̱khwukhwop lan swak",
-	"wikibase-dispatchstats-newest-change": "A̱fai lan swak",
-	"wikibase-dispatchstats-site-id": "A̱ma̱ntei",
-	"wikibase-dispatchstats-pos": "Yong",
-	"wikibase-dispatchstats-lag-time": "Lat",
-	"wikibase-dispatchstats-touched": "Á̱ la",
-	"wikibase-dispatchstats-large-lag": "(a̱mgbii)",
-	"wikibase-dispatchstats-freshest": "A̱shyim lan swak",
-	"wikibase-dispatchstats-stalest": "A̱lyen lan swak",
-	"wikibase-dispatchstats-median": "A̱tyia̱ka̱u",
-	"wikibase-dispatchstats-average": "A̱ka̱wa̱tyia̱",
 	"wikibase-listproperties-submit": "Cat"
 }

@@ -44,13 +44,5 @@
 	"wikibase-newentity-submit": "ਬਣਾਓ",
 	"wikibase-modifyterm-language": "ਭਾਸ਼ਾ ਕੋਡ:",
 	"special-mergeitems": "ਦੋ ਮੱਦਾਂ ਰਲ਼ਾਓ",
-	"wikibase-dispatchstats-oldest-change": "ਸਭ ਤੋਂ ਪੁਰਾਣਾ",
-	"wikibase-dispatchstats-newest-change": "ਸਭ ਤੋਂ ਨਵਾਂ",
-	"wikibase-dispatchstats-site-id": "ਸਾਈਟ",
-	"wikibase-dispatchstats-large-lag": "(ਬਹੁਤ ਵੱਡਾ)",
-	"wikibase-dispatchstats-freshest": "ਸਭ ਤੋਂ ਤਾਜ਼ਾ",
-	"wikibase-dispatchstats-stalest": "ਸਭ ਤੋਂ ਬੇਹਾ",
-	"wikibase-dispatchstats-median": "ਦਰਮਿਆਨੀ",
-	"wikibase-dispatchstats-average": "ਔਸਤ",
 	"wikibase-listdatatypes-time-head": "ਵਕਤ"
 }

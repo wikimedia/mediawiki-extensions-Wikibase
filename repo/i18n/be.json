@@ -178,8 +178,6 @@
 	"wikibase-itemmerge-no-such-entity": "Элемент не знойдзены.",
 	"wikibase-itemmerge-cant-load-entity-content": "Не атрымалася загрузіць элемент.",
 	"wikibase-itemmerge-cant-merge-self": "Немагчыма аб’яднаць элемент з самім сабой.",
-	"wikibase-dispatchstats-change-timestamp": "Дата/час",
-	"wikibase-dispatchstats-oldest-change": "Самыя старыя",
 	"special-listdatatypes": "Спіс усіх даступных тыпаў дадзеных",
 	"wikibase-listdatatypes-intro": "Гэта спіс усіх тыпаў дадзеных, якія выкарыстоўваюцца зараз у гэтай інсталяцыі:",
 	"wikibase-history-title-with-label": "Гісторыя версій для «$2» ($1)",

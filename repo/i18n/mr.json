@@ -177,8 +177,6 @@
 	"wikibase-mergeitems-submit": "बाबी एकत्रित करा",
 	"wikibase-itemmerge-permissiondenied": "परवानगी नाकारण्यात येते.",
 	"wikibase-itemmerge-no-such-entity": "कलम सापडले नाही.",
-	"wikibase-dispatchstats-change-id": "ओळखण (आयडी)",
-	"wikibase-dispatchstats-change-timestamp": "वेळशिक्का",
 	"special-listproperties": "गुणधर्मांची यादी",
 	"wikibase-listproperties-submit": "शोधा",
 	"wikibase-redirectentity-submit": "पुर्ननिर्देशन",
