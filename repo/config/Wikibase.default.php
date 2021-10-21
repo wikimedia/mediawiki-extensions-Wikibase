@@ -278,9 +278,6 @@ return [
 	// List of properties that, if in a qualifier, will be used for indexing quantities
 	'searchIndexQualifierPropertiesForQuantity' => [],
 
-	// Change it to a positive number so it becomes effective
-	'dispatchLagToMaxLagFactor' => 0,
-
 	// DB group to use in dump maintenance scripts. Defaults to "dump", per T147169.
 	'dumpDBDefaultGroup' => 'dump',
 

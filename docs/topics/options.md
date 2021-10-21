@@ -239,11 +239,6 @@ EXAMPLE: On wikidata.org, this is set to `P1921`, a string property named “URI
 
 ### Dispatching
 
-#### dispatchLagToMaxLagFactor {#repo_dispatchLagToMaxLagFactor}
-If set to a positive number, the median dispatch lag (in seconds) will be divided by this number and passed to core like database lag (see the API maxlag parameter).
-
-DEFAULT: ```0``` (disabled)
-
 #### dispatchBatchChunkFactor
 Chunk factor used internally by the dispatchChanges.php script.
 

@@ -103,15 +103,6 @@ The locking mechanism used to prevent race conditions can be configured using th
 Per default, named locks on the repo database are used.
 Redis based locks are supported as an alternative and use on wikidata.org
 
-**dispatch lag**
-
-Dispatch lag is linked to max lag.
-If dispatch lag increases, max lag will also increase.
-Dispatching is not as efficient as DB replication so the raw lag value is not used, instead a factor is applied.
-The factor is configurable using the [dispatchLagToMaxLagFactor] setting.
-
-For more about maxlag see https://www.mediawiki.org/wiki/Manual:Maxlag_parameter
-
 ### On Clients
 
 **SiteLinkLookup**
@@ -159,5 +150,4 @@ The [WikiPageUpdater] class defines three methods for updating the client wikis 
 [wb_items_per_site]: @ref md_docs_sql_wb_items_per_site
 [purgeCacheBatchSize]: @ref client_purgeCacheBatchSize
 [recentChangesBatchSize]: @ref client_recentChangesBatchSize
-[dispatchLagToMaxLagFactor]: @ref repo_dispatchLagToMaxLagFactor
 [dispatchingLockManager]: @ref repo_dispatchingLockManager
