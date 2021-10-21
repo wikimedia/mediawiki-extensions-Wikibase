@@ -74,16 +74,6 @@ return [
 	// may contain mappings from site-id to db-name.
 	'localClientDatabases' => [],
 
-	// Settings for change dispatching
-	'dispatchMaxTime' => 60 * 60,
-	'dispatchIdleDelay' => 10,
-	'dispatchBatchChunkFactor' => 3,
-	'dispatchBatchCacheFactor' => 3,
-	'dispatchDefaultBatchSize' => 1000,
-	'dispatchDefaultMaxChunks' => 15,
-	'dispatchDefaultDispatchInterval' => 60,
-	'dispatchDefaultDispatchRandomness' => 15,
-
 	// Formats that shall be available via Special:EntityData.
 	// The first format will be used as the default.
 	// Even if a format is allowed here, it may not be supported
