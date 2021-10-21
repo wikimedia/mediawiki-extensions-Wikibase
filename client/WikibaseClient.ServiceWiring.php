@@ -30,6 +30,7 @@ use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
+use Wikibase\Client\Hooks\WikibaseClientHookRunner;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\OtherProjectsSitesGenerator;
 use Wikibase\Client\OtherProjectsSitesProvider;
@@ -182,7 +183,7 @@ return [
 			$pageUpdater,
 			$changeListTransformer,
 			$logger,
-			$services->getHookContainer(),
+			WikibaseClient::getHookRunner( $services ),
 			$settings->getSetting( 'injectRecentChanges' )
 		);
 	},
@@ -463,6 +464,12 @@ return [
 		}
 		$interwikiPrefix = $interwikiPrefixes[0];
 		return new ExternalUserNames( $interwikiPrefix, false );
+	},
+
+	'WikibaseClient.HookRunner' => function ( MediaWikiServices $services ): WikibaseClientHookRunner {
+		return new WikibaseClientHookRunner(
+			$services->getHookContainer()
+		);
 	},
 
 	'WikibaseClient.ItemAndPropertySource' => function ( MediaWikiServices $services ): EntitySource {

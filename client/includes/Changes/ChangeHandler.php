@@ -4,11 +4,11 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Changes;
 
 use InvalidArgumentException;
-use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Page\PageStore;
 use Psr\Log\LoggerInterface;
 use Title;
 use TitleFactory;
+use Wikibase\Client\Hooks\WikibaseClientHookRunner;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\ChangeRow;
@@ -56,9 +56,9 @@ class ChangeHandler {
 	private $logger;
 
 	/**
-	 * @var HookContainer
+	 * @var WikibaseClientHookRunner
 	 */
-	private $hookContainer;
+	private $hookRunner;
 
 	/**
 	 * @var bool
@@ -72,7 +72,7 @@ class ChangeHandler {
 	 * @param PageUpdater $updater
 	 * @param ChangeRunCoalescer $changeRunCoalescer
 	 * @param LoggerInterface $logger
-	 * @param HookContainer $hookContainer
+	 * @param WikibaseClientHookRunner $hookRunner
 	 * @param bool $injectRecentChanges
 	 *
 	 * @throws InvalidArgumentException
@@ -84,7 +84,7 @@ class ChangeHandler {
 		PageUpdater $updater,
 		ChangeRunCoalescer $changeRunCoalescer,
 		LoggerInterface $logger,
-		HookContainer $hookContainer,
+		WikibaseClientHookRunner $hookRunner,
 		bool $injectRecentChanges = true
 
 	) {
@@ -94,7 +94,7 @@ class ChangeHandler {
 		$this->updater = $updater;
 		$this->changeRunCoalescer = $changeRunCoalescer;
 		$this->logger = $logger;
-		$this->hookContainer = $hookContainer;
+		$this->hookRunner = $hookRunner;
 		$this->injectRecentChanges = $injectRecentChanges;
 	}
 
@@ -105,12 +105,12 @@ class ChangeHandler {
 	public function handleChanges( array $changes, array $rootJobParams = [] ) {
 		$changes = $this->changeRunCoalescer->transformChangeList( $changes );
 
-		if ( !$this->hookContainer->run( 'WikibaseHandleChanges', [ $changes, $rootJobParams ] ) ) {
+		if ( !$this->hookRunner->onWikibaseHandleChanges( $changes, $rootJobParams ) ) {
 			return;
 		}
 
 		foreach ( $changes as $change ) {
-			if ( !$this->hookContainer->run( 'WikibaseHandleChange', [ $change, $rootJobParams ] ) ) {
+			if ( !$this->hookRunner->onWikibaseHandleChange( $change, $rootJobParams ) ) {
 				continue;
 			}
 

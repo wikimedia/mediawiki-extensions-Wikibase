@@ -20,6 +20,7 @@ use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
+use Wikibase\Client\Hooks\WikibaseClientHookRunner;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Store\ClientStore;
@@ -530,6 +531,11 @@ final class WikibaseClient {
 	public static function getUsageAccumulatorFactory( ContainerInterface $services = null ): UsageAccumulatorFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.UsageAccumulatorFactory' );
+	}
+
+	public static function getHookRunner( ContainerInterface $services = null ): WikibaseClientHookRunner {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.HookRunner' );
 	}
 
 }

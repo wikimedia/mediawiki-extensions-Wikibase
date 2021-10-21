@@ -6,6 +6,7 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 use Psr\Log\LoggerInterface;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
+use Wikibase\Client\Hooks\WikibaseClientHookRunner;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -71,6 +72,11 @@ class ChangeHandlerTest extends ServiceWiringTestCase {
 		$this->serviceContainer
 			->expects( $this->once() )
 			->method( 'getPageStore' );
+
+		$this->mockService(
+			'WikibaseClient.HookRunner',
+			$this->createMock( WikibaseClientHookRunner::class )
+		);
 
 		$this->assertInstanceOf(
 			ChangeHandler::class,
