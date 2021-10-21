@@ -31,7 +31,6 @@ trait WikibaseTablesUsed {
 
 	private function markChangePropTablesUsed() {
 		$this->markTableUsed( 'wb_changes' );
-		$this->markTableUsed( 'wb_changes_dispatch' );
 		$this->markTableUsed( 'wb_changes_subscription' );
 	}
 
