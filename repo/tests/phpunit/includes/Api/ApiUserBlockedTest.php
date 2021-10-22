@@ -220,7 +220,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 	public function testBlock() {
 		$testuser = self::getTestUser()->getUser();
 
-		$this->assertTrue( $testuser->isBlocked(), 'User is expected to be blocked' );
+		$this->assertNotNull( $testuser->getBlock(), 'User is expected to be blocked' );
 
 		foreach ( $this->blockCases() as $case ) {
 			list( $apiKey, $otherApiData, $expectedMessages ) = $case;
