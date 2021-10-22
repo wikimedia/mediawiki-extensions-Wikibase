@@ -20,6 +20,7 @@ interface EntitySearchHelper {
 	 * @param bool $strictLanguage
 	 *
 	 * @return TermSearchResult[] Key: string Serialized EntityId
+	 * @throws EntitySearchException when a problem occurs fetching data from the underlying datastore
 	 */
 	public function getRankedSearchResults(
 		$text,

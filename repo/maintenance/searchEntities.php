@@ -91,6 +91,7 @@ class SearchEntities extends Maintenance {
 	 * Run search for one query.
 	 * @param string $query
 	 * @return string
+	 * @throws \Wikibase\Repo\Api\EntitySearchException
 	 */
 	public function doSearch( $query ) {
 		$limit = (int)$this->getOption( 'limit', 5 );

@@ -8,6 +8,7 @@ use ApiPageSet;
 use ApiQuery;
 use FauxRequest;
 use RequestContext;
+use Status;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
@@ -15,6 +16,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\EntityTermSearchHelper;
 use Wikibase\Repo\Api\QuerySearchEntities;
 
@@ -83,14 +85,14 @@ class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @param array $params
 	 * @param TermSearchResult[] $matches
-	 *
+	 * @param Status|null $failureStatus
 	 * @return EntityTermSearchHelper
 	 */
-	private function getMockEntitySearchHelper( array $params, array $matches ) {
+	private function getMockEntitySearchHelper( array $params, array $matches, ?Status $failureStatus ): EntityTermSearchHelper {
 		$mock = $this->getMockBuilder( EntityTermSearchHelper::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$mock->expects( $this->atLeastOnce() )
+		$invocation = $mock->expects( $this->atLeastOnce() )
 			->method( 'getRankedSearchResults' )
 			->with(
 				$this->equalTo( $params['wbssearch'] ),
@@ -98,8 +100,12 @@ class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 				$this->equalTo( $params['wbstype'] ),
 				$this->equalTo( $params['wbslimit'] ),
 				$this->equalTo( false )
-			)
-			->willReturn( $matches );
+			);
+		if ( $failureStatus !== null ) {
+			$invocation->willThrowException( new EntitySearchException( $failureStatus ) );
+		} else {
+			$invocation->willReturn( $matches );
+		}
 
 		return $mock;
 	}
@@ -130,7 +136,7 @@ class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		return $mock;
 	}
 
-	private function callApi( array $params, array $matches, ApiPageSet $resultPageSet = null ) {
+	private function callApi( array $params, array $matches, ApiPageSet $resultPageSet = null, Status $failureStatus = null ) {
 		// defaults from SearchEntities
 		$params = array_merge( [
 			'wbstype' => 'item',
@@ -141,7 +147,7 @@ class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$api = new QuerySearchEntities(
 			$this->getApiQuery( $params ),
 			'wbsearch',
-			$this->getMockEntitySearchHelper( $params, $matches ),
+			$this->getMockEntitySearchHelper( $params, $matches, $failureStatus ),
 			$this->getMockTitleLookup(),
 			$this->getContentLanguages(),
 			[ 'item', 'property' ]
@@ -245,6 +251,16 @@ class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
+	public function testSearchBackendErrorIsPropagatedDuringExecute() {
+		$errorStatus = Status::newFatal( 'search-backend-error' );
+		try {
+			$this->callApi( [ 'wbssearch' => 'Foo' ], [], null, $errorStatus );
+			$this->fail( "Exception must be thrown" );
+		} catch ( \ApiUsageException $aue ) {
+			$this->assertSame( $errorStatus, $aue->getStatusValue() );
+		}
+	}
+
 	private function assertResultLooksGood( array $result ) {
 		$this->assertArrayHasKey( 'query', $result );
 		$this->assertArrayHasKey( 'wbsearch', $result['query'] );
@@ -264,6 +280,19 @@ class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	public function testExecuteGenerator( array $params, array $matches, array $expected ) {
 		$resultPageSet = $this->getMockApiPageSet( $expected );
 		$this->callApi( $params, $matches, $resultPageSet );
+	}
+
+	public function testSearchBackendErrorIsPropagatedDuringExecuteGenerator() {
+		$errorStatus = Status::newFatal( 'search-backend-error' );
+		$mock = $this->getMockBuilder( ApiPageSet::class )
+			->disableOriginalConstructor()
+			->getMock();
+		try {
+			$this->callApi( [ 'wbssearch' => 'Foo' ], [], $mock, $errorStatus );
+			$this->fail( "Exception must be thrown" );
+		} catch ( \ApiUsageException $aue ) {
+			$this->assertSame( $errorStatus, $aue->getStatusValue() );
+		}
 	}
 
 }

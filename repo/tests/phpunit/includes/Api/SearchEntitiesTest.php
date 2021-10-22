@@ -20,6 +20,7 @@ use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Api\ApiErrorReporter;
+use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
@@ -430,6 +431,31 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( 42 );
 
 		return $articleIdLookup;
+	}
+
+	public function testEntitySearchErrorIsForwardedToApiModule() {
+		$errorValue = \Status::newFatal( "search-backend-error" );
+		$entitySearchHelper = $this->getMockBrokenEntitySearchHelper( $errorValue );
+		try {
+			$params = [
+				'action' => 'wbsearchentities',
+				'search' => 'nyan',
+				'language' => 'en'
+			];
+			$this->callApiModule( $params, $entitySearchHelper );
+			$this->fail( "Exception must be thrown" );
+		} catch ( \ApiUsageException $aue ) {
+			$this->assertSame( $errorValue, $aue->getStatusValue() );
+		}
+	}
+
+	private function getMockBrokenEntitySearchHelper( \Status $errorStatus ): EntitySearchHelper {
+		$mock = $this->createMock( EntitySearchHelper::class );
+		$mock->expects( $this->atLeastOnce() )
+			->method( 'getRankedSearchResults' )
+			->willThrowException( new EntitySearchException( $errorStatus ) );
+
+		return $mock;
 	}
 
 }

@@ -15,6 +15,7 @@ use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Assert\InvariantException;
 
 /**
  * API module to search for Wikibase entities.
@@ -128,15 +129,21 @@ class SearchEntities extends ApiBase {
 	 * @param array $params
 	 *
 	 * @return array[]
+	 * @throws \ApiUsageException
 	 */
 	private function getSearchEntries( array $params ): array {
-		$searchResults = $this->entitySearchHelper->getRankedSearchResults(
-			$params['search'],
-			$params['language'],
-			$params['type'],
-			$params['continue'] + $params['limit'] + 1,
-			$params['strictlanguage']
-		);
+		try {
+			$searchResults = $this->entitySearchHelper->getRankedSearchResults(
+				$params['search'],
+				$params['language'],
+				$params['type'],
+				$params['continue'] + $params['limit'] + 1,
+				$params['strictlanguage']
+			);
+		} catch ( EntitySearchException $ese ) {
+			$this->dieStatus( $ese->getStatus() );
+			throw new InvariantException( "dieStatus() must throw an exception" );
+		}
 
 		$entries = [];
 		foreach ( $searchResults as $match ) {
@@ -233,6 +240,10 @@ class SearchEntities extends ApiBase {
 		}
 	}
 
+	/**
+	 * @throws \ApiUsageException
+	 * @throws EntitySearchException
+	 */
 	public function executeInternal(): void {
 		$this->getMain()->setCacheMode( 'public' );
 

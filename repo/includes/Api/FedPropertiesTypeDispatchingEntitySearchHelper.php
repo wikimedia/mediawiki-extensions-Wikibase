@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\Api;
 
-use Wikibase\Lib\Interactors\TermSearchResult;
-
 /**
  * EntitySearchHelper implementation invoked when federated properties is enabled
  * which uses entity configuration to instantiate the specific handler.
@@ -31,15 +29,7 @@ class FedPropertiesTypeDispatchingEntitySearchHelper implements EntitySearchHelp
 	}
 
 	/**
-	 * Get entities matching the search term.
-	 *
-	 * @param string $text
-	 * @param string $languageCode
-	 * @param string $entityType
-	 * @param int $limit
-	 * @param bool $strictLanguage
-	 *
-	 * @return TermSearchResult[] Key: string Serialized EntityId
+	 * @inheritDoc
 	 */
 	public function getRankedSearchResults(
 		$text,

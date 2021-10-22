@@ -10,6 +10,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\ItemDisambiguation;
@@ -120,12 +121,16 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 					$this->msg( 'wikibase-itemdisambiguation-invalid-langcode' )->escaped()
 				);
 			} else {
-				$searchResults = $this->getSearchResults( $label, $languageCode );
+				try {
+					$searchResults = $this->getSearchResults( $label, $languageCode );
 
-				if ( !empty( $searchResults ) ) {
-					$this->displaySearchResults( $searchResults, $label );
-				} else {
-					$this->showNothingFound( $languageCode, $label );
+					if ( !empty( $searchResults ) ) {
+						$this->displaySearchResults( $searchResults, $label );
+					} else {
+						$this->showNothingFound( $languageCode, $label );
+					}
+				} catch ( EntitySearchException $ese ) {
+					$this->showErrorHTML( $ese->getStatus()->getHTML( 'search-error' ) );
 				}
 			}
 		}
@@ -181,6 +186,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @param string $languageCode
 	 *
 	 * @return TermSearchResult[]
+	 * @throws EntitySearchException
 	 */
 	private function getSearchResults( $label, $languageCode ) {
 		return $this->entitySearchHelper->getRankedSearchResults(
