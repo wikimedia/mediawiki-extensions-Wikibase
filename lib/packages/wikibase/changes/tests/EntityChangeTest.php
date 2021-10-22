@@ -202,7 +202,7 @@ class EntityChangeTest extends ChangeRowTest {
 		// EntityChange only tests for objects if MW_PHPUNIT_TEST is defined,
 		// so define it even when not running under MediaWiki PHPUnit
 		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
-			define( 'MW_PHPUNIT_TEST', 'not MediaWiki (' . __FUNCTION__ . ')' );
+			define( 'MW_PHPUNIT_TEST', 'not MediaWiki (' . __METHOD__ . ')' );
 		}
 		$info = [ 'array' => [ 'object' => (object)[] ] ];
 		$change = new EntityChange( [ 'info' => $info ] );
