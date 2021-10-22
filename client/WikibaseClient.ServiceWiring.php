@@ -452,14 +452,29 @@ return [
 		if ( $databaseName !== false ) {
 			$siteLookup = $services->getSiteLookup();
 			$repoSite = $siteLookup->getSite( $databaseName );
+			if ( $repoSite === null ) {
+				WikibaseClient::getLogger( $services )
+					->warning(
+						'WikibaseClient.ExternalUserNames service wiring: ' .
+						'itemAndPropertySource databaseName {databaseName} is not known as a global site ID',
+						[ 'databaseName' => $databaseName ]
+					);
+				return null;
+			}
 		} else {
 			$repoSite = WikibaseClient::getSite( $services );
 		}
-		if ( $repoSite === null ) {
-			return null;
-		}
 		$interwikiPrefixes = $repoSite->getInterwikiIds();
 		if ( $interwikiPrefixes === [] ) {
+			WikibaseClient::getLogger( $services )
+				->warning(
+					'WikibaseClient.ExternalUserNames service wiring: ' .
+					'repo site {siteInternalId}/{siteGlobalId} has no interwiki IDs/prefixes',
+					[
+						'siteInternalId' => $repoSite->getInternalId(),
+						'siteGlobalId' => $repoSite->getGlobalId(),
+					]
+				);
 			return null;
 		}
 		$interwikiPrefix = $interwikiPrefixes[0];
