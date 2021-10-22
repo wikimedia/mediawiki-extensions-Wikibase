@@ -58,5 +58,10 @@
 	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "Ba a samun hasashen ƙimar gudummawa ga wasu nau'ikan canje -canje, don haka wannan matattarar ta ci karo da nau'in Canjin {{PLURAL:$2 |tace | matattara}}: $1",
 	"wikibase-rcfilters-goodfaith-conflicts-hide-wikibase": "Ba a samun hasashen mai amfani da niyya don wasu nau'ikan canji, don haka wannan tace ta ci karo da nau'in Canjin {{PLURAL:$2|tace|matattara}}:$1",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "Dukkan gyararraki na {{WBREPONAME}} an tsara su ne a matsayin \"kaɗan\", kenan \"gyararraki na {{WBREPONAME}}\" taciya yana cin karo da matattara \"marasa kanana\".",
-	"wikibase-replicationnote": "Yi hakuri!ka sani zai dauki dakikoki kafin masu shafin su ga sauye-sayen"
+	"wikibase-rcfilters-major-conflicts-hide-wikibase": "Dukkanin gyararrakin {{WBREPONAME}} an sanya su a matsayin \"ƙanana\", don haka tace \"{{WBREPONAME}} tace\" ta ci karo da matattara \"Ba ƙaramin gyara ba\".",
+	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Dukkan gyararraki na {{WBREPONAME}} an tsara su ne a matsayin \"kaɗan\", kenan \"gyararraki na {{WBREPONAME}}\" taciya yana cin karo da matattara \"marasa kanana\".",
+	"wikibase-replicationnote": "Yi hakuri!ka sani zai dauki dakikoki kafin masu shafin su ga sauye-sayen",
+	"wikibase-watchlist-show-changes-pref": "Nuna gyare -gyaren {{WBREPONAME}} a cikin jerin abubuwan luranka",
+	"wikibase-error-deserialize-error": "Ba a yi nasarar lalata bayanai ba.",
+	"wikibase-error-serialize-error": "An kasa jera bayanai"
 }

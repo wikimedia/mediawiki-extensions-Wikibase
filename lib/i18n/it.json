@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Beta16",
+			"Camillo Pellizzari",
 			"FRacco",
 			"Horcrux92",
 			"Macofe",
@@ -59,6 +60,7 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregoriano",
 	"wikibase-time-calendar-julian": "Giuliano",
+	"wikibase-time-precision-CE": "$1 d.C.",
 	"wikibase-time-precision-Gannum": "$1 miliardi di anni d.C.",
 	"wikibase-time-precision-Mannum": "$1 milioni di anni d.C.",
 	"wikibase-time-precision-annum": "$1 {{PLURAL:$1|anno|anni}} d.C.",

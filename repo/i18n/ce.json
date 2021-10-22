@@ -77,6 +77,7 @@
 	"wikibase-undo-revision-error": "Йухайаккха цаелира",
 	"wikibase-undo-firstrev": "АгӀо кхоллар йухадаккха цало",
 	"wikibase-undo-nocontent": "«$1» агӀонан $2 версин чулацам чубаккха цало",
+	"wikibase-summary-generated": "Йоца аннотаци (автокечбина хааман тӀетухура йу):",
 	"wikibase-aliases-input-help-message": "ХӀара элемент атта карайайта йазйе кхуза йогӀуш йолу цӀе.",
 	"wikibase-propertypage-datatype": "Хаамийн тайп",
 	"wikibase-claimview-snak-new-tooltip": "Билгало йазйича цуна маьӀна йаздан мегар ду. Билгалонан маьӀна дацахь йа карара маьӀна хууш дацахь, йаздечу меттиган уллера хьаьркан тӀетаӀӀина альтернативан маьӀна харжа йиш йу.",
