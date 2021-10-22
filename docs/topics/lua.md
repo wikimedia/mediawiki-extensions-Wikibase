@@ -54,10 +54,11 @@ mw.wikibase.getEntityIdForCurrentPage() -- Returns the item id as string, like "
 `wikibase.getEntityIdForTitle( pageTitle )`  
 `wikibase.getEntityIdForTitle( pageTitle, globalSiteId )`
 
-Takes a page title string either in the local wiki or an other wiki on the same cluster specified by the global site identifier, and returns the item ID connected via a sitelink, if one exists. Returns nil if there's no linked item.
+Takes a page title string either in the local wiki or an other wiki on the same cluster specified by the site global ID, and returns the item ID connected via a sitelink, if one exists. Returns nil if there's no linked item.
 
 ``` {.lua}
-mw.wikibase.getEntityIdForTitle( 'Berlin' ) -- Returns the ID of the item linked with the "Berlin" page, like "Q64"
+mw.wikibase.getEntityIdForTitle( 'Berlin' ) -- Returns the ID of the item linked with the "Berlin" page on the local wiki, like "Q64"
+mw.wikibase.getEntityIdForTitle( 'Berlin', 'enwikivoyage' ) -- Returns the ID of the item linked with the "Berlin" page on English Wikivoyage, like "Q64"
 ```
 
 ### mw.wikibase.getEntityUrl
@@ -419,7 +420,7 @@ mw.wikibase.getReferencedEntityId( 'Q59', 'P31', { 'Q7366', 'Q2095' } ) -- Retur
 
 `wikibase.getGlobalSiteId()`
 
-Returns the global site id (the site code used for site links) of the current wiki.
+Returns the site global ID (the site code used for site links) of the current wiki.
 
 An example call might look like this:
 

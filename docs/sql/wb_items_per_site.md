@@ -7,7 +7,7 @@ Part of the \ref md_docs_storage_sitelinks storage system.
  - **ips_row_id**: Unique ID
  - **ips_item_id**: Numeric representation of the Qid. Q64 -> 64.
    - Can be joined against page.page_title if the namespace for Items is known.
- - **ips_site_id**: Site identifier
+ - **ips_site_id**: Site global ID, e.g. enwiktionary
  - **ips_site_page**: Page name on site
 
 ```

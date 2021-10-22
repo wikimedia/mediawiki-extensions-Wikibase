@@ -244,7 +244,7 @@ An array of locally accessible client databases, for use by the dispatchChanges.
 
 See @ref md_docs_topics_change-propagation
 This setting determines to which wikis changes are pushed directly.
-It must be given either as an associative array, mapping global site IDs to logical database names, or, of the database names are the same as the site IDs, as a list of databases.
+It must be given either as an associative array, mapping site global IDs to logical database names, or, of the database names are the same as the site global IDs, as a list of databases.
 
 DEFAULT: ```[]``` (An empty array, indicating no local client databases.)
 
@@ -580,7 +580,7 @@ For performance reasons, it may be desirable to set this explicitly to avoid loo
 ### Repository
 
 #### repoSiteId
-Site ID of connected repository wiki
+Site global ID of connected repository wiki
 
 DEFAULT: is to assume both client and repo are the same.
 
@@ -797,7 +797,7 @@ Must match the name of the entity source as defined in [entitySources] setting.
 This setting is intended to be used by Wikibase installations with complex setups which have multiple repos attached.
 
 The entity source named by this setting must be a database entity source (i.e. its `type` must be `db`).
-If its `repoDatabase` is a string, that string must also be a site ID for the repository wiki;
+If its `repoDatabase` is a string, that string must also be a site global ID for the repository wiki;
 otherwise, [recent changes injection][injectRecentChanges] will not work.
 
 DEFAULT: ```local```
