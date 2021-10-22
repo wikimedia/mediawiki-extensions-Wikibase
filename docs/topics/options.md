@@ -796,6 +796,10 @@ Must match the name of the entity source as defined in [entitySources] setting.
 
 This setting is intended to be used by Wikibase installations with complex setups which have multiple repos attached.
 
+The entity source named by this setting must be a database entity source (i.e. its `type` must be `db`).
+If its `repoDatabase` is a string, that string must also be a site ID for the repository wiki;
+otherwise, [recent changes injection][injectRecentChanges] will not work.
+
 DEFAULT: ```local```
 
 #### propagateChangesToRepo
