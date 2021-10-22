@@ -38,6 +38,12 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 
 ==== Changed configuration ====
 
+* (client) (T293246) If you configure your own entity sources,
+ and the entity source referred to by the `itemAndPropertySourceName` setting has a string as the `repoDatabase`,
+ then that string must also be a site ID of the repo wiki.
+ (This was true before in some setups, but is more important now.)
+ If you have a single wiki that is both a repo and a client,
+ it’s recommended to set the `repoDatabase` to `false`.
 * ...
 
 ==== Removed configuration ====
