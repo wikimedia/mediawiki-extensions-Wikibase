@@ -598,10 +598,10 @@ using the property IDs as keys. By *snaks-order* the order of those snaks is sho
 }
 ```
 
-Sitelinks are given as records for each site identifier. Each such record contains the following fields:
+Sitelinks are given as records for each site global ID. Each such record contains the following fields:
 
 * site
-  * The site ID.
+  * The site global ID.
 * title
   * The page title.
 * badges

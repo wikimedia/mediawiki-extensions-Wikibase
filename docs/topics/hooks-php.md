@@ -161,7 +161,7 @@ Parameters:
 * $item
   * Item the page is linked with.
 * &$siteLinks
-  * Array containing the site links to display indexed by site ID.
+  * Array containing the site links to display indexed by site global ID.
 * $usageAccumulator
   * A [UsageAccumulator] to track the usages of Wikibase entities done by the hook handlers.
 
