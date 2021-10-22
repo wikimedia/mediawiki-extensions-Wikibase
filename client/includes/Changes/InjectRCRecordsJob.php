@@ -272,9 +272,9 @@ class InjectRCRecordsJob extends Job {
 			if ( $this->rcDuplicateDetector
 				&& $this->rcDuplicateDetector->getRecentChangeId( $rc ) !== null
 			) {
-				$this->logger->debug( __FUNCTION__ . ": skipping duplicate RC entry for " . $title->getFullText() );
+				$this->logger->debug( __METHOD__ . ": skipping duplicate RC entry for " . $title->getFullText() );
 			} else {
-				$this->logger->debug( __FUNCTION__ . ": saving RC entry for " . $title->getFullText() );
+				$this->logger->debug( __METHOD__ . ": saving RC entry for " . $title->getFullText() );
 				try {
 					$rc->save();
 				} catch ( CannotCreateActorException $e ) {
