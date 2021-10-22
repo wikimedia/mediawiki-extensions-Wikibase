@@ -158,7 +158,9 @@ class DispatchChangesJob extends Job {
 			return true;
 		}
 
+		// StatsdDataFactoryInterface::timing is used so that p99 and similar aggregation is available
 		$this->stats->timing( 'wikibase.repo.dispatchChangesJob.NumberOfChangesInJob', count( $changes ) );
+		$this->stats->timing( 'wikibase.repo.dispatchChangesJob.numberOfWikisForChange', count( $dispatchingClientSites ) );
 
 		$this->logger->info( __METHOD__ . ': dispatching changes for {entity} to {numberOfWikis} clients: {listOfWikis}', [
 			'entity' => $this->entityIdSerialization,
@@ -204,6 +206,7 @@ class DispatchChangesJob extends Job {
 			if ( array_key_exists( $siteID, $allClientWikis ) ) {
 				$clientWikis[$siteID] = $allClientWikis[$siteID];
 			} else {
+				$this->stats->increment( 'wikibase.repo.dispatchChangesJob.clientWikiWithoutConfig' );
 				$this->logger->warning(
 					__METHOD__ . ': No client wiki with site ID {siteID} configured in \$wgWBRepoSettings["localClientDatabases"]!',
 					[
