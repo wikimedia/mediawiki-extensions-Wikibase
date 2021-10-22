@@ -71,13 +71,15 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 
 	public function overrideSpecialNewEntityLinkProvider() {
 		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
+		$namespaceLookup = $this->getEntityNamespaceLookup();
 
 		foreach ( $entityContentFactory->getEntityTypes() as $entityType ) {
 			$entityHandler = $entityContentFactory->getContentHandlerForType( $entityType );
 			$specialPage = $entityHandler->getSpecialPageForCreation();
 
 			if ( $specialPage !== null ) {
-				yield [ $specialPage ];
+				$ns = $namespaceLookup->getEntityNamespace( $entityType );
+				yield [ $specialPage, $ns ];
 			}
 		}
 	}
@@ -85,11 +87,12 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 	/**
 	 * @dataProvider overrideSpecialNewEntityLinkProvider
 	 * @param string $linkTitle
+	 * @param int $ns
 	 */
-	public function testDoHtmlPageLinkRendererBegin_overrideSpecialNewEntityLink( $linkTitle ) {
+	public function testDoHtmlPageLinkRendererBegin_overrideSpecialNewEntityLink( $linkTitle, $ns ) {
 		$handler = $this->newInstance();
 
-		$title = Title::makeTitle( NS_MAIN, $linkTitle );
+		$title = Title::makeTitle( $ns, $linkTitle );
 		$text = $title->getFullText();
 		$context = $this->newContext();
 		$attribs = [];
@@ -106,6 +109,44 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 			$html
 		);
 		$this->assertStringContainsString( $specialPageTitle->getFullText(), $html );
+	}
+
+	public function noOverrideSpecialNewEntityLinkProvider() {
+		$lookup = $this->getEntityNamespaceLookup();
+		$itemNs = $lookup->getEntityNamespace( 'item' );
+		$propertyNs = $lookup->getEntityNamespace( 'property' );
+		return [
+			'NS=ITEM, title=Log' => [ 'Log', $itemNs ],
+			'NS=PROPERTY, TITLE=Log' => [ 'Log', $propertyNs ],
+			'NS=ITEM, title=NewProperty' => [ 'NewProperty', $itemNs ],
+			'NS=PROPERTY, title=NewItem' => [ 'NewItem', $propertyNs ],
+			'EXTERNAL title Log' => [ 'Log', NS_MAIN, 'w' ],
+			'EXTERNAL title NewItem' => [ 'NewItem', NS_MAIN, self::FOREIGN_REPO_PREFIX ],
+		];
+	}
+
+	/**
+	 * @dataProvider noOverrideSpecialNewEntityLinkProvider
+	 * @param string $linkText
+	 * @param int $ns
+	 * @param string $interwiki
+	 */
+	public function testDoHtmlPageLinkRendererBegin_avoidSpecialPageReplacement( $linkText, $ns, $interwiki = '' ) {
+		$handler = $this->newInstance();
+
+		$title = Title::makeTitle( $ns, $linkText, '', $interwiki );
+
+		$text = $title->getFullText();
+		$context = $this->newContext();
+		$attribs = [];
+		$html = null;
+
+		$ret = $handler->doHtmlPageLinkRendererEnd(
+			$this->getLinkRenderer(), $title, $text, $attribs, $context, $html );
+
+		$this->assertTrue( $ret );
+		$this->assertNull( $html );
+		$this->assertEquals( $title->getFullText(), $text );
 	}
 
 	public function testDoHtmlPageLinkRendererBegin_nonEntityTitleLink() {

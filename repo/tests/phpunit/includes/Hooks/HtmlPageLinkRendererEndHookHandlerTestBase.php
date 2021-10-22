@@ -221,10 +221,13 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 		return $termLookup;
 	}
 
-	private function getEntityNamespaceLookup() {
+	final protected function getEntityNamespaceLookup() {
 		$entityNamespaces = [
 			'item' => 0,
-			'property' => 122
+			'property' => 122,
+			// needed for HtmlPageLinkRendererEndHookHandlerTest::overrideSpecialNewEntityLinkProvider
+			// when tests run with WikibaseLexeme installed
+			'lexeme' => 146,
 		];
 
 		return new EntityNamespaceLookup( $entityNamespaces );
