@@ -6,6 +6,7 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use ExternalUserNames;
 use HashSiteStore;
+use Psr\Log\Test\TestLogger;
 use Site;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -38,8 +39,12 @@ class ExternalUserNamesTest extends ServiceWiringTestCase {
 			->method( 'getSiteLookup' )
 			->willReturn( new HashSiteStore( /* empty */ ) );
 		$this->mockItemAndPropertySource();
+		$logger = new TestLogger();
+		$this->mockService( 'WikibaseClient.Logger',
+			$logger );
 
 		$this->assertNull( $this->getService( 'WikibaseClient.ExternalUserNames' ) );
+		$this->assertTrue( $logger->hasWarningRecords(), 'logged warning' );
 	}
 
 	public function testConstructionWithSiteWithoutInterwikiIds(): void {
@@ -49,8 +54,12 @@ class ExternalUserNamesTest extends ServiceWiringTestCase {
 			->method( 'getSiteLookup' )
 			->willReturn( new HashSiteStore( [ $site ] ) );
 		$this->mockItemAndPropertySource();
+		$logger = new TestLogger();
+		$this->mockService( 'WikibaseClient.Logger',
+			$logger );
 
 		$this->assertNull( $this->getService( 'WikibaseClient.ExternalUserNames' ) );
+		$this->assertTrue( $logger->hasWarningRecords(), 'logged warning' );
 	}
 
 	public function testConstructionWithSiteWithInterwikiIds(): void {
