@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Changes;
 
+use CannotCreateActorException;
 use InvalidArgumentException;
 use Job;
 use JobSpecification;
@@ -274,7 +275,19 @@ class InjectRCRecordsJob extends Job {
 				$this->logger->debug( __FUNCTION__ . ": skipping duplicate RC entry for " . $title->getFullText() );
 			} else {
 				$this->logger->debug( __FUNCTION__ . ": saving RC entry for " . $title->getFullText() );
-				$rc->save();
+				try {
+					$rc->save();
+				} catch ( CannotCreateActorException $e ) {
+					$this->logger->error(
+						__METHOD__ . ': cannot create actor {rc_user_text} for RC entry for {title}, skipping;'
+						. ' misconfigured ExternalUserNames?',
+						[
+							'exception' => $e,
+							'rc_user_text' => $rc->getAttribute( 'rc_user_text' ),
+							'title' => $title->getFullText(),
+						]
+					);
+				}
 			}
 		}
 
