@@ -141,7 +141,7 @@
 							$ul.append( mw.wbTemplate(
 								'wikibase-entitytermsview-aliases-alias',
 								text,
-								mw.message( 'wikibase-aliases-separator' ).text()
+								mw.msg( 'wikibase-aliases-separator' )
 							) );
 						} );
 					}
