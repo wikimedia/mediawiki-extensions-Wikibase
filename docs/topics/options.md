@@ -45,8 +45,7 @@ See @ref md_docs_topics_change-propagation
 #### useChangesTable
 Whether to record changes in the database, so they can be pushed to clients.
 
-Boolean, may be set to `false` in situations where there are no clients to notify to preserve space.
-If this is `true`, the pruneChanges.php script should run periodically to remove old changes from the database table.
+Boolean, may be set to `false` to completely disable change dispatching from this wiki.
 
 DEFAULT: ```true```
 
