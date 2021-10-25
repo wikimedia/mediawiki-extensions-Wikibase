@@ -36,7 +36,7 @@
 		"@wdio/local-runner": "^7.3.0",
 		"@wdio/mocha-framework": "^7.3.0",
 		"@wdio/spec-reporter": "^7.3.0",
-		"@wdio/sync": "^7.3.0",
+		"@wdio/sync": "^7.16.2",
 		"@wmde/lib-version-check": "^0.1.0",
 		"api-testing": "^1.2.0",
 		"apollo-boost": "^0.4.9",
