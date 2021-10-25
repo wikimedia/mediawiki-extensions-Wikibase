@@ -20,7 +20,6 @@ use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
-use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Client\RecentChanges\RecentChangeFactory
@@ -471,22 +470,25 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideGetClientUserId
+	 * @dataProvider providePrepareChangeAttributes_rc_user
 	 */
-	public function testGetClientUserId( $expectedClientUserId, $centralIdLookup, $repoUserId, $metadata ) {
+	public function testPrepareChangeAttributes_rc_user( $expectedClientUserId, $centralIdLookup, $repoUserId, $metadata ) {
 		$recentChangeFactory = $this->newRecentChangeFactoryHelper( $centralIdLookup );
+		$change = $this->newEntityChange( 'change', new ItemId( 'Q17' ), new ItemDiff(), [] );
+		$change->setMetadata( $metadata );
+		$change->setField( 'user_id', $repoUserId );
 
-		$recentChangeFactory = TestingAccessWrapper::newFromObject( $recentChangeFactory );
-		$clientUserId = $recentChangeFactory->getClientUserId( $repoUserId, $metadata );
+		$preparedChangeAttributes = $recentChangeFactory->prepareChangeAttributes( $change );
+
 		$this->assertSame(
 			$expectedClientUserId,
-			$clientUserId
+			$preparedChangeAttributes['rc_user']
 		);
 	}
 
 	//  * central = -1, repo = 1, client = 2
 
-	public function provideGetClientUserId() {
+	public function providePrepareChangeAttributes_rc_user() {
 		$centralIdLookup = new MockRepoClientCentralIdLookup(
 			/** isRepo= */ false
 		);
