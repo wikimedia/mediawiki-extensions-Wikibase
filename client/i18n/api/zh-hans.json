@@ -5,7 +5,8 @@
 			"Liuxinyu970226",
 			"Shizhao",
 			"Tranve",
-			"列维劳德"
+			"列维劳德",
+			"落花有意12138"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "返回指定页面中使用的所有实体ID。",
@@ -16,6 +17,8 @@
 	"apihelp-query+wbentityusage-paramvalue-aspect-D": "实体描述已使用",
 	"apihelp-query+wbentityusage-paramvalue-aspect-T": "对应该实体的本地页面标题已使用",
 	"apihelp-query+wbentityusage-paramvalue-aspect-C": "实体语句已使用",
+	"apihelp-query+wbentityusage-paramvalue-aspect-X": "所有的实体的特征正在或者可能被使用。",
+	"apihelp-query+wbentityusage-paramvalue-aspect-O": "实体的某些其他东西正在被使用。这当前意味着别名的使用和对实体存在的显示检查。",
 	"apihelp-query+wbentityusage-param-prop": "要添加至结果的属性。",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "如果启用，将添加实体的url",
 	"apihelp-query+wbentityusage-param-entities": "只返回使用了这些实体的页面。",
@@ -35,6 +38,7 @@
 	"apihelp-query+pageterms-summary": "通过网站链接获取与页面相关的{{WBREPONAME}}术语（例如标签、描述和别名）。",
 	"apihelp-query+pageterms-example-simple": "以用户语言获取与“伦敦”页面相关的所有术语。",
 	"apihelp-query+pageterms-example-label-en": "获取与“伦敦”页面相关的英文标签和别名。",
+	"apihelp-query+pageterms-param-language": "获取条款的语言代码。如不指定，将使用用户的默认语言。",
 	"apihelp-query+pageterms-param-terms": "要获取的术语类型，例如“description”，每个都作为由其类型键控的字符串数组返回，例如{\"description\": [\"foo\"]}。如果未指定，就返回所有类型。",
 	"apihelp-query+description-summary": "获得一个简短的描述（或称副标题），用来解释目标页面的内容。",
 	"apihelp-query+description-extended-description": "描述是纯文本的，在一行上，但在其他方面是任意的（可能包括原始HTML标签，也应该被解释为纯文本）。不得在未转义的HTML中使用它！",
