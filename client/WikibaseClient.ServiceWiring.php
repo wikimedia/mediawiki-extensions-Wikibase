@@ -765,6 +765,8 @@ return [
 				$siteLookup,
 				WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' )
 			),
+			WikibaseClient::getEntitySourceDefinitions( $services ),
+			WikibaseClient::getClientDomainDbFactory( $services )->newLocalDb(),
 			$services->getCentralIdLookupFactory()->getNonLocalLookup(),
 			WikibaseClient::getExternalUserNames( $services )
 		);

@@ -9,9 +9,11 @@ use Message;
 use MWException;
 use RecentChange;
 use Title;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\ItemChange;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -38,6 +40,16 @@ class RecentChangeFactory {
 	private $siteLinkCommentCreator;
 
 	/**
+	 * @var EntitySourceDefinitions
+	 */
+	private $entitySourceDefinitions;
+
+	/**
+	 * @var string
+	 */
+	private $localDomainId;
+
+	/**
 	 * @var CentralIdLookup|null
 	 */
 	private $centralIdLookup;
@@ -50,6 +62,8 @@ class RecentChangeFactory {
 	/**
 	 * @param Language $language Language to format in
 	 * @param SiteLinkCommentCreator $siteLinkCommentCreator
+	 * @param EntitySourceDefinitions $entitySourceDefinitions
+	 * @param ClientDomainDb $clientDomainDb
 	 * @param CentralIdLookup|null $centralIdLookup CentralIdLookup, or null if
 	 *   this repository is not connected to a central user system (see
 	 *   CentralIdLookupFactory::getNonLocalLookup).
@@ -58,11 +72,15 @@ class RecentChangeFactory {
 	public function __construct(
 		Language $language,
 		SiteLinkCommentCreator $siteLinkCommentCreator,
+		EntitySourceDefinitions $entitySourceDefinitions,
+		ClientDomainDb $clientDomainDb,
 		CentralIdLookup $centralIdLookup = null,
 		ExternalUserNames $externalUsernames = null
 	) {
 		$this->language = $language;
 		$this->siteLinkCommentCreator = $siteLinkCommentCreator;
+		$this->entitySourceDefinitions = $entitySourceDefinitions;
+		$this->localDomainId = $clientDomainDb->domain();  // T294287
 		$this->centralIdLookup = $centralIdLookup;
 		$this->externalUsernames = $externalUsernames;
 	}
@@ -139,7 +157,7 @@ class RecentChangeFactory {
 		];
 
 		$repoUserId = $change->getUserId();
-		$clientUserId = $this->getClientUserId( $repoUserId, $metadata );
+		$clientUserId = $this->getClientUserId( $repoUserId, $metadata, $this->isChangeFromLocalDb( $change ) );
 
 		// If the user could not be found in client but exists in repo
 		if ( $this->externalUsernames !== null && $clientUserId === 0 && $repoUserId !== 0 ) {
@@ -174,15 +192,32 @@ class RecentChangeFactory {
 		return $attribs;
 	}
 
+	private function isChangeFromLocalDb( EntityChange $change ): bool {
+		$entityType = $change->getEntityId()->getEntityType();
+		$source = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( $entityType );
+		if ( $source === null ) {
+			return false;
+		}
+
+		$dbName = $source->getDatabaseName();
+
+		if ( $dbName === false || $dbName === $this->localDomainId ) {
+			return true;
+		}
+
+		return false;
+	}
+
 	/**
 	 * Gets the client's user ID from the repo user ID and EntityChange's metadata
 	 *
 	 * @param int $repoUserId Original user ID from the repository
 	 * @param array $metadata EntityChange metadata
+	 * @param bool $changeComesFromLocalDb
 	 *
 	 * @return int User ID for the current (client) wiki
 	 */
-	private function getClientUserId( $repoUserId, array $metadata ) {
+	private function getClientUserId( $repoUserId, array $metadata, bool $changeComesFromLocalDb ) {
 		if ( $repoUserId === 0 ) {
 			// Logged out on repo just copied to client
 			return 0;
@@ -208,6 +243,10 @@ class RecentChangeFactory {
 			if ( $user ) {
 				return $user->getId();
 			}
+		}
+
+		if ( $changeComesFromLocalDb ) {
+			return $repoUserId;
 		}
 
 		return 0;

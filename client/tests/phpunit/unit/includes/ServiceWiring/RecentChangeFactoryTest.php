@@ -7,7 +7,11 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 use MediaWiki\User\CentralId\CentralIdLookupFactory;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
+use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @coversNothing
@@ -25,6 +29,16 @@ class RecentChangeFactoryTest extends ServiceWiringTestCase {
 			new SettingsArray( [
 				'siteGlobalID' => 'client',
 			] ) );
+		$clientDomainDb = $this->createMock( ClientDomainDb::class );
+		$clientDomainDbFactory = $this->createMock( ClientDomainDbFactory::class );
+		$clientDomainDbFactory->expects( $this->once() )
+			->method( 'newLocalDb' )->willReturn( $clientDomainDb );
+		$this->mockService( 'WikibaseClient.ClientDomainDbFactory', $clientDomainDbFactory );
+
+		$this->mockService(
+			'WikibaseClient.EntitySourceDefinitions',
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) )
+		);
 		$centralIdLookupFactory = $this->createMock( CentralIdLookupFactory::class );
 		$centralIdLookupFactory->expects( $this->once() )
 			->method( 'getNonLocalLookup' );

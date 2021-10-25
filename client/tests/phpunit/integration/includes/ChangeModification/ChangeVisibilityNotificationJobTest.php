@@ -10,6 +10,7 @@ use Title;
 use Wikibase\Client\ChangeModification\ChangeVisibilityNotificationJob;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
@@ -17,6 +18,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
+use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
  * @covers \Wikibase\Client\ChangeModification\ChangeVisibilityNotificationJob
@@ -55,7 +57,9 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 
 		$recentChangeFactory = new RecentChangeFactory(
 			Language::factory( 'qqx' ),
-			$this->createMock( SiteLinkCommentCreator::class )
+			$this->createMock( SiteLinkCommentCreator::class ),
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
+			$this->createStub( ClientDomainDb::class )
 		);
 		$entityChangeFactory = new EntityChangeFactory(
 			$this->createMock( EntityDiffer::class ),

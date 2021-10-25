@@ -10,6 +10,8 @@ use SiteLookup;
 use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
+use Wikibase\DataAccess\DatabaseEntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -19,6 +21,8 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Changes\ItemChange;
+use Wikibase\Lib\Rdbms\ClientDomainDb;
+use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 
 /**
@@ -35,7 +39,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return RecentChangeFactory
 	 */
-	private function newRecentChangeFactoryHelper( $centralIdLookup ) {
+	private function newRecentChangeFactoryHelper( $entitySourceDefinitions, $clientDomainDb, $centralIdLookup ) {
 		$siteLookup = $this->createMock( SiteLookup::class );
 
 		$lang = Language::factory( 'qqx' );
@@ -43,6 +47,8 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		return new RecentChangeFactory(
 			$lang,
 			$siteLinkCommentCreator,
+			$entitySourceDefinitions,
+			$clientDomainDb,
 			$centralIdLookup,
 			new ExternalUserNames( 'repo', false )
 		);
@@ -50,6 +56,8 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	private function newRecentChangeFactory() {
 		return $this->newRecentChangeFactoryHelper(
+			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
+			$this->createStub( ClientDomainDb::class ),
 			new MockRepoClientCentralIdLookup( /** isRepo= */ false )
 		);
 	}
@@ -472,8 +480,16 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider providePrepareChangeAttributes_rc_user
 	 */
-	public function testPrepareChangeAttributes_rc_user( $expectedClientUserId, $centralIdLookup, $repoUserId, $metadata ) {
-		$recentChangeFactory = $this->newRecentChangeFactoryHelper( $centralIdLookup );
+	public function testPrepareChangeAttributes_rc_user( $expectedClientUserId, $centralIdLookup, $repoUserId, $metadata, $changeSource ) {
+		$clientDomainDb = $this->createStub( ClientDomainDb::class );
+		$clientDomainDb->method( 'domain' )->willReturn( 'local' );
+		$databaseEntitySource = $this->createStub( DatabaseEntitySource::class );
+		$databaseEntitySource->method( 'getDatabaseName' )->willReturn( $changeSource );
+		$entitySourceDefinitions = $this->createStub( EntitySourceDefinitions::class );
+		$entitySourceDefinitions->method( 'getDatabaseSourceForEntityType' )->willReturn( $databaseEntitySource );
+
+		$recentChangeFactory = $this->newRecentChangeFactoryHelper( $entitySourceDefinitions, $clientDomainDb, $centralIdLookup );
+
 		$change = $this->newEntityChange( 'change', new ItemId( 'Q17' ), new ItemDiff(), [] );
 		$change->setMetadata( $metadata );
 		$change->setField( 'user_id', $repoUserId );
@@ -499,14 +515,34 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 				$centralIdLookup,
 				0,
 				[ 'central_user_id' => 0 ],
+				'separateRepoDb',
 			],
 
 			'No central ID lookup (client wiki is not connected to central ' .
-			'user system' => [
+			'user system, client and repo differ)' => [
 				0,
 				null,
 				3,
 				[ 'central_user_id' => -3 ],
+				'separateRepoDb',
+			],
+
+			'No central ID lookup (client wiki is not connected to central ' .
+			'user system, client and repo are the same db)' => [
+				3,
+				null,
+				3,
+				[ 'central_user_id' => -3 ],
+				'local',
+			],
+
+			'No central ID lookup (client wiki is not connected to central ' .
+			'user system, repoDb is false (i.e. local))' => [
+				3,
+				null,
+				3,
+				[ 'central_user_id' => -3 ],
+				false,
 			],
 
 			'0 central user ID although there is a repo user ID, e.g.' .
@@ -515,15 +551,16 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 				$centralIdLookup,
 				5,
 				[ 'central_user_id' => 0 ],
+				'separateRepoDb',
 			],
 
 			'No central user ID because it is from a row created before ' .
-			'central_user_id was saved' =>
-			[
+			'central_user_id was saved' => [
 				0,
 				$centralIdLookup,
 				7,
 				[],
+				'separateRepoDb',
 			],
 
 			'Invalid central ID so client user ID is 0' => [
@@ -531,6 +568,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 				$centralIdLookup,
 				8,
 				[ 'central_user_id' => 3 ],
+				'separateRepoDb',
 			],
 
 			'Happy path; user ID is fully mapped' => [
@@ -541,7 +579,8 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 				// this other than == or != 0.
 				9,
 
-				[ 'central_user_id' => -4 ]
+				[ 'central_user_id' => -4 ],
+				'separateRepoDb',
 			],
 		];
 	}
