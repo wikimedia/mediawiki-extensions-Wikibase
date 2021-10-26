@@ -76,6 +76,7 @@ class WikibaseContentLanguages {
 			new MediaWikiContentLanguages( $languageNameUtils ),
 			new StaticContentLanguages(
 				[
+					'agq', // T288335
 					'bag', // T263946
 					'bas', // T263946
 					'bax', // T263946
@@ -102,6 +103,7 @@ class WikibaseContentLanguages {
 					'ksf', // T263946
 					'lem', // T263946
 					'lns', // T263946
+					'mcn', // T293884
 					'mcp', // T263946
 					'mua', // T263946
 					'nan-hani', // T180771
