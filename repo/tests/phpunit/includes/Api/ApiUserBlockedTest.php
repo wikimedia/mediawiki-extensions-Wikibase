@@ -242,12 +242,8 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				$this->fail( 'Expected api error to be raised' );
 			} catch ( ApiUsageException $exception ) {
 				foreach ( $expectedMessages as $message ) {
-					$hasMessage = $exception->getStatusValue()->hasMessage( $message );
-					if ( $message === 'apierror-blocked' ) {
-						// back compat for pre-I14887b6d MediaWiki
-						$hasMessage = $hasMessage || $exception->getStatusValue()->hasMessage( 'blockedtext' );
-					}
-					$this->assertTrue( $hasMessage, 'Expected message ' . $message );
+					$this->assertTrue( $exception->getStatusValue()->hasMessage( $message ),
+						'Expected message ' . $message );
 				}
 			}
 		}
