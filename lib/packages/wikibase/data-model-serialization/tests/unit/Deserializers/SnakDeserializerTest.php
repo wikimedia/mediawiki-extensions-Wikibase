@@ -206,8 +206,8 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 		 */
 		$this->assertInstanceOf( UnDeserializableValue::class, $dataValue );
 
-		$this->assertEquals( $dataValue->getTargetType(), 'string' );
-		$this->assertEquals( $dataValue->getValue(), 1337 );
+		$this->assertEquals( 'string', $dataValue->getTargetType() );
+		$this->assertEquals( 1337, $dataValue->getValue() );
 	}
 
 }

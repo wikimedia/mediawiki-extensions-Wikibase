@@ -32,8 +32,8 @@ class ImportFederatedPropertiesSampleDataTest extends MaintenanceBaseTestCase {
 		$this->assertFalse( $item->isEmpty() );
 		$this->assertTrue( $item->getLabels()->hasTermForLanguage( "en" ) );
 		$this->assertTrue( $item->getDescriptions()->hasTermForLanguage( "en" ) );
-		$this->assertEquals( $item->getLabels()->getByLanguage( 'en' )->getText(), 'somelabel' );
-		$this->assertEquals( $item->getDescriptions()->getByLanguage( 'en' )->getText(), 'somedescription' );
+		$this->assertEquals( 'somelabel', $item->getLabels()->getByLanguage( 'en' )->getText() );
+		$this->assertEquals( 'somedescription', $item->getDescriptions()->getByLanguage( 'en' )->getText() );
 	}
 
 	/**
