@@ -4699,7 +4699,7 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
 var web_dom_collections_for_each = __webpack_require__("159b");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"48ad8978-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=03dcaef3&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5773008d-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=03dcaef3&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-app"},[(_vm.isTainted && !_vm.editState )?_c('div',[_c('span',[_c('TaintedIcon',{attrs:{"guid":_vm.id}}),(_vm.popperIsOpened)?_c('div',{staticClass:"wb-tr-float-wrapper"},[_c('TaintedPopper',{attrs:{"guid":_vm.id,"title":_vm.popperTitle}})],1):_vm._e()],1)]):_vm._e()])}
 var staticRenderFns = []
 
@@ -5158,7 +5158,7 @@ function isPromise(obj) {
     return obj instanceof Promise || (obj && typeof obj.then === 'function');
 }
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"48ad8978-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=b5769d28&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5773008d-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=b5769d28&
 var TaintedIconvue_type_template_id_b5769d28_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.popperIsOpened ? 'div' : 'a',{tag:"component",staticClass:"wb-tr-tainted-icon",attrs:{"title":_vm.iconTitle},on:{"click":function (event) { return !_vm.popperIsOpened && _vm.onClick( event ); }}})}
 var TaintedIconvue_type_template_id_b5769d28_staticRenderFns = []
 
@@ -5439,14 +5439,14 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var components_TaintedIcon = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"48ad8978-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedPopper.vue?vue&type=template&id=6721fc42&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5773008d-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedPopper.vue?vue&type=template&id=6721fc42&
 var TaintedPoppervue_type_template_id_6721fc42_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Popper',{attrs:{"guid":_vm.guid,"title":_vm.popperTitle},scopedSlots:_vm._u([{key:"subheading-area",fn:function(){return [_c('div',{staticClass:"wb-tr-popper-help"},[_c('a',{attrs:{"title":_vm.popperHelpLinkTitle,"href":_vm.helpLink,"target":"_blank"},on:{"click":_vm.helpClick}},[_vm._v(_vm._s(_vm.popperHelpLinkText))])])]},proxy:true},{key:"content",fn:function(){return [_c('p',{staticClass:"wb-tr-popper__text wb-tr-popper__text--top"},[_vm._v(" "+_vm._s(_vm.popperText)+" ")]),_c('button',{staticClass:"wb-tr-popper-remove-warning",on:{"click":_vm.removeWarningClick}},[_vm._v(" "+_vm._s(_vm.removeWarningText)+" ")])]},proxy:true}])})}
 var TaintedPoppervue_type_template_id_6721fc42_staticRenderFns = []
 
 
 // CONCATENATED MODULE: ./src/presentation/components/TaintedPopper.vue?vue&type=template&id=6721fc42&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"48ad8978-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=template&id=a4e9afb6&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5773008d-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=template&id=a4e9afb6&
 var Poppervue_type_template_id_a4e9afb6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-popper-wrapper",attrs:{"tabindex":"-1"},on:{"focusout":_vm.onFocusout,"keydown":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"esc",27,$event.key,["Esc","Escape"])){ return null; }return _vm.closeKeyPress($event)}}},[_c('div',{staticClass:"wb-tr-popper-triangle"}),_c('div',{staticClass:"wb-tr-popper-body"},[_c('div',{staticClass:"wb-tr-title-wrapper"},[_c('span',{staticClass:"wb-tr-popper-title"},[_vm._v(_vm._s(_vm.title))]),_c('button',{staticClass:"wb-tr-popper-close",on:{"click":_vm.closeClick}})]),_c('div',{staticClass:"wb-tr-popper-subheading-area"},[_vm._t("subheading-area")],2),_c('div',{staticClass:"wb-tr-popper-content"},[_vm._t("content")],2)])])}
 var Poppervue_type_template_id_a4e9afb6_staticRenderFns = []
 
