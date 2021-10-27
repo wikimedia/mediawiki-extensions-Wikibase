@@ -179,7 +179,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			0
 		);
 
-		$this->assertEquals( $statement->getReferences()->indexOf( $references[0] ), 0 );
+		$this->assertSame( 0, $statement->getReferences()->indexOf( $references[0] ) );
 	}
 
 	/**

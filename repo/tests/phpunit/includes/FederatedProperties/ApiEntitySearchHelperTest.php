@@ -253,7 +253,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 
 			);
 		} catch ( ApiRequestException $exception ) {
-			$this->assertEquals( $exception->getMessage(), 'Unexpected response output' );
+			$this->assertEquals( 'Unexpected response output', $exception->getMessage() );
 		}
 	}
 

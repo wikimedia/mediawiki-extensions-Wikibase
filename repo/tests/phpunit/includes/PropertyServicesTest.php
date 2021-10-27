@@ -49,8 +49,8 @@ class PropertyServicesTest extends TestCase {
 		$this->assertArrayHasKey( $apiSourceName, $serviceCallbacksBySource );
 		$this->assertArrayHasKey( $dbSourceName, $serviceCallbacksBySource );
 
-		$this->assertSame( $serviceCallbacksBySource[$apiSourceName](), 'api service' );
-		$this->assertSame( $serviceCallbacksBySource[$dbSourceName](), 'db service' );
+		$this->assertSame( 'api service', $serviceCallbacksBySource[$apiSourceName]() );
+		$this->assertSame( 'db service', $serviceCallbacksBySource[$dbSourceName]() );
 	}
 
 	public function testGivenUndefinedServiceName_throws(): void {

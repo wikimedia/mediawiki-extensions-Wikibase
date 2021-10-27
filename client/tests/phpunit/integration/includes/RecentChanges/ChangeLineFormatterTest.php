@@ -154,7 +154,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$this->assertArrayHasKey( 'untouchedKey', $data );
 		$this->assertArrayHasKey( 'recentChangesFlags', $data );
 		$this->assertArrayHasKey( 'timestampLink', $data );
-		$this->assertEquals( $data['untouchedKey'], 'foo' );
+		$this->assertEquals( 'foo', $data['untouchedKey'] );
 		$this->assertEquals( [ 'wikibase-edit' => true ], $data['recentChangesFlags'] );
 
 		$map = [
@@ -237,7 +237,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$this->assertArrayHasKey( 'untouchedKey', $data );
 		$this->assertArrayHasKey( 'recentChangesFlags', $data );
 		$this->assertArrayHasKey( 'timestampLink', $data );
-		$this->assertEquals( $data['untouchedKey'], 'foo' );
+		$this->assertEquals( 'foo', $data['untouchedKey'] );
 		$this->assertEquals( [ 'wikibase-edit' => true ], $data['recentChangesFlags'] );
 
 		$map = [

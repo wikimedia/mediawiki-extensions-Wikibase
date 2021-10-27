@@ -195,8 +195,8 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 		} catch ( ApiUsageException $e ) {
 			$msg = TestingAccessWrapper::newFromObject( $e )->getApiMessage();
 			$this->assertEquals(
-				$msg->getApiCode(),
 				'invalid-guid',
+				$msg->getApiCode(),
 				'Invalid claim guid raised correct error'
 			);
 		}
