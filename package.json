@@ -34,7 +34,7 @@
 	"devDependencies": {
 		"@wdio/cli": "^7.3.0",
 		"@wdio/local-runner": "^7.3.0",
-		"@wdio/mocha-framework": "^7.3.0",
+		"@wdio/mocha-framework": "^7.16.3",
 		"@wdio/spec-reporter": "^7.3.0",
 		"@wdio/sync": "^7.3.0",
 		"@wmde/lib-version-check": "^0.1.0",
