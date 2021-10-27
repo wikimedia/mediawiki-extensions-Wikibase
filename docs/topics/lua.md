@@ -15,7 +15,7 @@ On multilingual wikis accessing labels is based on user's language rather than W
 |Sitelinks|[getSitelink](#mw.wikibase.getSitelink "wikilink")|[getSitelink](#mw.wikibase.entity:getSitelink "wikilink")|
 |Descriptions|[getDescription](#mw.wikibase.getDescription "wikilink")/[getDescriptionWithLang](#mw.wikibase.getDescriptionWithLang "wikilink")|[getDescription](#mw.wikibase.entity:getDescription "wikilink")/[getDescriptionWithLang](#mw.wikibase.entity:getDescriptionWithLang "wikilink")|
 |Statements|[getBestStatements](#mw.wikibase.getBestStatements "wikilink")|[getBestStatements](#mw.wikibase.entity:getBestStatements "wikilink")|
-|[getAllStatements](#mw.wikibase.getAllStatements "wikilink")|[getAllStatements](#mw.wikibase.entity:getAllStatements "wikilink")|
+||[getAllStatements](#mw.wikibase.getAllStatements "wikilink")|[getAllStatements](#mw.wikibase.entity:getAllStatements "wikilink")|
 
 mw.wikibase
 -----------
@@ -448,7 +448,7 @@ Alias for [mw.wikibase.getDescription](#mw.wikibase.getDescription "wikilink").
 
 Alias for [mw.wikibase.getSitelink](#mw.wikibase.getSitelink "wikilink").
 
-mw.wikibase.entity
+mw.wikibase.entity {#mw_wikibase_entity}
 ------------------
 
 `mw.wikibase.entity` represents a Wikibase entity in Lua. A `mw.wikibase.entity` table for the item which is linked with the current page can be obtained with [`mw.wikibase.getEntity`](#mw.wikibase.getEntity "wikilink").
