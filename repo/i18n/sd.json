@@ -37,6 +37,9 @@
 	"wikibase-dispatchstats-above": "{{PLURAL:$1|$1 کان مٿي بدلاءَ آھن}}.",
 	"wikibase-redirectentity-submit": "چوريو",
 	"wikibase-listdatatypes-wikibase-item-head": "جزو",
+	"wikibase-listdatatypes-monolingualtext-head": "يڪ-لساني متن",
+	"wikibase-listdatatypes-multilingualtext-head": "گهڻ-لساني متن",
+	"wikibase-listdatavaluetypes-name-monolingualtext": "يڪ-لساني متن",
 	"wikibase-pageinfo-subscription-none": "ڪوبہ نہ",
 	"wikibase-search-bad-profile-name": "کوٽو ڳولها پروفائل نالو: $1",
 	"wikibase-search-config-badclass": "کوٽو ڪيوري بلڊر ڪلاس: $1"
