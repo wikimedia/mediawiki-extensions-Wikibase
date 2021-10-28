@@ -5,8 +5,12 @@
 			"咽頭べさ"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} item",
+	"wikibase-editlinks": "ခြပ်ချော်ꩻ လိဉ့်ဖုံႏ",
+	"wikibase-linkitem-addlinks": "ထဲမ်သော့ꩻ လိဉ့်ဖုံႏ",
 	"wikibase-linkitem-close": "ပေ့ꩻထိုꩻလဲဉ်း ဒုဲင်ယာလော့၊ လိတ်မဲ့ငါယို",
 	"wikibase-linkitem-selectlink": "လိတ်မဲ့ငါယိုတွမ်ႏ နာꩻကမဲဥ်ဆွိုက်ဒါႏ သုဲက်တဗာႏတွမ်ႏ လိတ်မဲ့ငါတဗာႏယို လွိုက်ဖေႏသွော့သြ။",
 	"wikibase-linkitem-success-link": "လိတ်မဲ့ငါဖုံႏ ဆွိုက်ထွူလဲဉ်း။ လိဉ့်ဖုံႏနွို့ပါဒါႏ itemယို ထိုမ်ႏထွားနွောင်ꩻဒျာႏ နီ[$1 ဗဟိုႏဒေတာဘဏ်တွိုက်]ကိုသွူ။",
+	"wikibase-rc-wikibase-edit-letter": "ဃ",
 	"wikibase-replicationnote": "ဖေႏကထီႏနွောင်ꩻလို့ ဝီခီဖုံႏကားကအဝ်ႏ ပြောင်ꩻလုဲင်ႏမုꩻဖုံႏနဝ်ꩻ အခိန်ႏမိနစ်ညဆွာꩻဒါႏကရိုꩻနဝ်ꩻ သတိꩻပါသွော့။"
 }
