@@ -57,7 +57,7 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "Сите уредувања на {{WBREPONAME}} се означени како „ситни“, така што филтерот „Уредувања на {{WBREPONAME}}“ се коси со филтерот „Неситни уредувања“.",
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "Сите уредувања на {{WBREPONAME}} се означени како „ситни“, така што филтерот „Уредувања на {{WBREPONAME}}“ се коси со филтерот „Неситни уредувања“.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Сите уредувања на {{WBREPONAME}} се означени како „ситни“, така што филтерот „Уредувања на {{WBREPONAME}}“ се коси со филтерот „Неситни уредувања“.",
-	"wikibase-replicationnote": "Имајте предвид дека се потребни неколку минути за промените да станат видливи на сите викија",
+	"wikibase-replicationnote": "Имајте предвид дека се потребни неколку минути за промените да станат видливи на сите викија.",
 	"wikibase-watchlist-show-changes-pref": "Прикажи уредувања на {{WBREPONAME}} во набљудуваните",
 	"wikibase-error-deserialize-error": "Не успеав да ги децентрализирам податоците",
 	"wikibase-error-serialize-error": "Не успеав да ги серијализирам податоците",

@@ -221,6 +221,7 @@
 	"wikibase-itemmerge-cant-load-entity-content": "D'Element konnt net geluede ginn.",
 	"wikibase-itemmerge-cant-merge-self": "En Element kann net mat sech selwer zesummegeluecht ginn.",
 	"wikibase-tokencheck-missingtoken": "Token fir z'änneren obligatoresch.",
+	"wikibase-dispatchstats-above": "Et gëtt {{PLURAL:$1|méi wéi $1 Ännerungen}}.",
 	"special-listdatatypes": "Lëscht vun allen disponibelen Type vun Donnéeën",
 	"wikibase-history-title-with-label": "Versioune vun \"$2\" ($1)",
 	"wikibase-history-title-without-label": "Versioune vun ($1)",
