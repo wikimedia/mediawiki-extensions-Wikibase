@@ -177,7 +177,7 @@ class InfoActionHookHandler implements InfoActionHook {
 		return [
 			// messages: wikibase-pageinfo-description-local, wikibase-pageinfo-description-central
 			$context->msg( 'wikibase-pageinfo-description-' . $source )->parse(),
-			$description
+			htmlspecialchars( $description )
 		];
 	}
 
