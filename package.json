@@ -50,7 +50,7 @@
 		"grunt-stylelint": "0.16.0",
 		"mocha": "^9.1.2",
 		"npm-run-all": "^4.1.5",
-		"plotly.js": "^1.56.0",
+		"plotly.js": "^2.6.0",
 		"stylelint-config-wikimedia": "0.11.1",
 		"vue": "^2.6.11",
 		"wdio-mediawiki": "^1.0.0",
