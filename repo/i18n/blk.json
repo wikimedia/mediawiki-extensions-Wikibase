@@ -1,11 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Khun Kt",
 			"咽頭べさ"
 		]
 	},
-	"wikibase-edit": "ဖျင်ဆင်တာႏ",
+	"wikibase-edit": "ခြပ်ချော်ꩻ",
 	"wikibase-add": "ထဲမ်သော့ꩻ",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "တွမ်ႏဘာႏသာႏလင်ဖုံႏအကို",
-	"wikibase-sitelinks-special": "သုဲက်အလင်ဖုံႏ"
+	"wikibase-description-empty": "ဖေႏခါꩻတဝ်း အွောန်ႏနယ်ချက်",
+	"wikibase-sitelinks-special": "သုဲက်အလင်ဖုံႏ",
+	"wikibase-statementview-rank-normal": "အရန်းပူင်ႏမဲဉ်ႏ"
 }

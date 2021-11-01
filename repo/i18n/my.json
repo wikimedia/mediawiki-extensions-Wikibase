@@ -46,7 +46,7 @@
 	"wikibase-anonymouseditwarning-dismiss-persist": "အကောင့်ထဲ မဝင်သည့်အချိန်တိုင်း သတိပေးပါ။",
 	"wikibase-anonymouseditwarning-dismiss-button": "အကောင့်ထဲမဝင်ဘဲ တည်းဖြတ်ရန်",
 	"wikibase-validator-bad-type": "$1 ၏အစား $2",
-	"wikibase-validator-description-too-long": "ဖော်ပြချက်သည် စာလုံးရေ {{PLURAL:$1|ခု|$1 ခု}} ထက်မပိုရပါ",
+	"wikibase-validator-description-too-long": "ဖော်ပြချက်သည် စာလုံးရေ {{PLURAL:$1|ခု}} ထက်မပိုရပါ",
 	"wikibase-validator-no-such-entity": "$1 ကိုမတွေ့ပါ",
 	"wikibase-validator-no-validators": "ခွင့်မပြုပါ",
 	"wikibase-validator-no-such-media": "ဖိုင် \"$1\" သည် [https://commons.wikimedia.org/ ဝီကီမီဒီယာ ကွန်မွန်းစ်]ပေါ်တွင် မတည်ရှိပါ။",

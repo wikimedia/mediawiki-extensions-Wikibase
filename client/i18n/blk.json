@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Khun Kt",
 			"Ninjastrikers",
 			"咽頭べさ"
 		]
@@ -12,7 +13,9 @@
 	"wikibase-linkitem-selectlink": "လိတ်မဲ့ငါယိုတွမ်ႏ နာꩻကမဲဥ်ဆွိုက်ဒါႏ သုဲက်တဗာႏတွမ်ႏ လိတ်မဲ့ငါတဗာႏယို လွိုက်ဖေႏသွော့သြ။",
 	"wikibase-linkitem-success-link": "လိတ်မဲ့ငါဖုံႏ ဆွိုက်ထွူလဲဉ်း။ လိဉ့်ဖုံႏနွို့ပါဒါႏ itemယို ထိုမ်ႏထွားနွောင်ꩻဒျာႏ နီ[$1 ဗဟိုႏဒေတာဘဏ်တွိုက်]ကိုသွူ။",
 	"wikibase-rc-hide-wikidata": "မာꩻ $1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-show": "အွဉ်ႏနယာ",
-	"wikibase-rc-wikibase-edit-letter": "ဃ",
-	"wikibase-replicationnote": "ဖေႏကထီႏနွောင်ꩻလို့ ဝီခီဖုံႏကားကအဝ်ႏ ပြောင်ꩻလုဲင်ႏမုꩻဖုံႏနဝ်ꩻ အခိန်ႏမိနစ်ညဆွာꩻဒါႏကရိုꩻနဝ်ꩻ သတိꩻပါသွော့။"
+	"wikibase-rc-hide-wikidata-hide": "အွဉ်ႏပလို့ꩻ",
+	"wikibase-rc-hide-wikidata-show": "အွဉ်ႏနယ်",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-replicationnote": "ဖေႏကထီႏနွောင်ꩻလို့ ဝီခီဖုံႏကားကအဝ်ႏ ပြောင်ꩻလုဲင်ႏမုꩻဖုံႏနဝ်ꩻ အခိန်ႏမိနစ်ညဆွာꩻဒါႏကရိုꩻနဝ်ꩻ သတိꩻပါသွော့။",
+	"wikibase-otherprojects": "ပရောစဲစ်အလင်ဖုံႏကို"
 }
