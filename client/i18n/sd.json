@@ -25,6 +25,7 @@
 	"wikibase-linkitem-title": "صفحي سان ڳنڍيو",
 	"wikibase-linkitem-linkpage": "صفحي سان ڳنڍيو",
 	"wikibase-linkitem-selectlink": "ھن صفحي کي توھان جنھن سائيٽ ۽ صفحي سان ڳنڍڻ چاھيو ٿا، مھرباني ڪري ان کي چونڊيو.",
+	"wikibase-linkitem-input-site": "ٻولي:",
 	"wikibase-linkitem-input-page": "صفحو:",
 	"wikibase-linkitem-confirmitem-text": "جنھن صفحي کي اوهان هن صفحي سان ڳنڍيو آهي اهو اڳ ئي [$1 اسان مرڪزي ڊيٽا مخزن جي آئٽم] سان ڳنڍيل آهي. مھرباني ڪري تصديق ڪريو تہ جيڪو {{PLURAL:$2|صفحو هيٺ ڏيکاريو وڃي پيو اهو ئي صفحو آهي.|صفحا هيٺ ڏيکاريا وڃن پيا، اهو صفحو آهي}}  جنھن سان اوهان ڳنڍڻ چاهيو ٿا.",
 	"wikibase-linkitem-confirmitem-button": "پڪ ڪريو",
