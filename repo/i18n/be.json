@@ -6,6 +6,7 @@
 			"Macofe",
 			"Maksim L.",
 			"Mechanizatar",
+			"ZlyiLev",
 			"Дзяніс Тутэйшы",
 			"Чаховіч Уладзіслаў"
 		]
@@ -197,6 +198,7 @@
 	"wikibase-conflict-patched": "Ваша праўка ўнесена ў апошнюю версію.",
 	"wikibase-restoreold": "аднавіць",
 	"wikibase-entity-summary-restore": "Адноўлена версія $3 з дапамогай [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-undo": "Адкат праўкі $3 аўтарства [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|размовы]])",
 	"wikibase-no-direct-editing": "У прасторы назваў «$1» адключана прамое рэдагаванне",
 	"wikibase-noentity": "Такога набору дадзеных не існуе. Вы можаце\n<span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пашукаць адпаведныя запісы ў журналах]</span>,\nкаб даведацца, куды ён дзеўся.",
 	"wikibase-noentity-createone": "Вы таксама можаце [[$1|стварыць яго]].",
