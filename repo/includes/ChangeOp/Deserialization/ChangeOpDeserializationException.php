@@ -20,9 +20,9 @@ class ChangeOpDeserializationException extends \InvalidArgumentException {
 	private $params;
 
 	/**
-	 * @param string $message - descriptive error message to be used in logs
-	 * @param string $errorCode - i18n code of the error message
-	 * @param array $params - optional parameters (e.g. i18n message arguments)
+	 * @param string $message descriptive error message to be used in logs
+	 * @param string $errorCode i18n code of the error message
+	 * @param array $params optional parameters (e.g. i18n message arguments)
 	 */
 	public function __construct( $message, $errorCode, array $params = [] ) {
 		parent::__construct( $message );

@@ -24,7 +24,7 @@ class EntityReferenceExtractorDelegator implements EntityReferenceExtractor {
 	private $statementEntityReferenceExtractor;
 
 	/**
-	 * @param array $callbacks - maps entity types to EntityReferenceExtractors
+	 * @param array $callbacks maps entity types to EntityReferenceExtractors
 	 * @param StatementEntityReferenceExtractor $statementEntityReferenceExtractor
 	 */
 	public function __construct( array $callbacks, StatementEntityReferenceExtractor $statementEntityReferenceExtractor ) {

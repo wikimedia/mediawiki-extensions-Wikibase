@@ -69,7 +69,7 @@ trait FederatedPropertiesTestTrait {
 	}
 
 	/**
-	 * @param array $requestResponsePairs - list of [ $requestParams, $jsonResponse ] pairs. The former are used to match request URL, the
+	 * @param array $requestResponsePairs list of [ $requestParams, $jsonResponse ] pairs. The former are used to match request URL, the
 	 *        latter are used as the response body.
 	 */
 	protected function mockSourceApiRequests( array $requestResponsePairs ): void {
