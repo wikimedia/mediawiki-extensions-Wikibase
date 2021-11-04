@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use HtmlArmor;
 use Language;
+use MediaWiki\Linker\LinkRenderer;
 use RequestContext;
 use SpecialPage;
 use Title;
@@ -23,9 +24,9 @@ use Wikimedia\TestingAccessWrapper;
 class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHookHandlerTestBase {
 
 	/**
-	 * @dataProvider validContextProvider
+	 * @dataProvider validLinkRendererAndContextProvider
 	 */
-	public function testDoHtmlPageLinkRendererBegin_validContext( RequestContext $context ) {
+	public function testDoHtmlPageLinkRendererBegin_validContext( LinkRenderer $linkRenderer, RequestContext $context ) {
 		$handler = $this->newInstance();
 
 		$title = $this->newTitle( self::ITEM_WITH_LABEL );
@@ -33,7 +34,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$customAttribs = [];
 
 		$ret = $handler->doHtmlPageLinkRendererEnd(
-			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+			$linkRenderer, $title, $text, $customAttribs, $context );
 
 		$expectedHtml = '<span class="wb-itemlink">'
 			. '<span class="wb-itemlink-label" lang="en" dir="ltr">' . self::DUMMY_LABEL . '</span> '
@@ -50,9 +51,9 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 	}
 
 	/**
-	 * @dataProvider invalidContextProvider
+	 * @dataProvider invalidLinkRendererAndContextProvider
 	 */
-	public function testDoHtmlPageLinkRendererBegin_invalidContext( RequestContext $context ) {
+	public function testDoHtmlPageLinkRendererBegin_invalidContext( LinkRenderer $linkRenderer, RequestContext $context ) {
 		$handler = $this->newInstance();
 
 		$title = $this->newTitle( self::ITEM_WITH_LABEL );
@@ -61,7 +62,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$customAttribs = [];
 
 		$ret = $handler->doHtmlPageLinkRendererEnd(
-			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+			$linkRenderer, $title, $text, $customAttribs, $context );
 
 		$this->assertTrue( $ret );
 		$this->assertEquals( $titleText, $text );

@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Test\Hooks\FederatedProperties;
 
+use MediaWiki\Linker\LinkRenderer;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
@@ -21,9 +22,9 @@ use Wikibase\Repo\Tests\Hooks\HtmlPageLinkRendererEndHookHandlerTestBase;
 class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHookHandlerTestBase {
 
 	/**
-	 * @dataProvider validContextProvider
+	 * @dataProvider validLinkRendererAndContextProvider
 	 */
-	public function testDoHtmlPageLinkRendererBegin( RequestContext $context ) {
+	public function testDoHtmlPageLinkRendererBegin( LinkRenderer $linkRenderer, RequestContext $context ) {
 		$handler = $this->newInstance( 'foo', false, true, Property::ENTITY_TYPE );
 
 		$title = Title::makeTitle( WB_NS_PROPERTY, self::PROPERTY_WITH_LABEL );
@@ -31,7 +32,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$customAttribs = [];
 
 		$ret = $handler->doHtmlPageLinkRendererEnd(
-			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+			$linkRenderer, $title, $text, $customAttribs, $context );
 
 		$this->assertTrue( $ret );
 		$this->assertStringContainsString( 'fedprop', $customAttribs['class'] );

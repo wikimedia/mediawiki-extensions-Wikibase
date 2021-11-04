@@ -77,7 +77,9 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 	}
 
 	protected function getLinkRenderer(): LinkRenderer {
-		return MediaWikiServices::getInstance()->getLinkRenderer();
+		$linkRenderer = MediaWikiServices::getInstance()
+			->getLinkRendererFactory()->create( [ 'renderForComment' => true ] );
+		return $linkRenderer;
 	}
 
 	protected function newInstance(
@@ -237,32 +239,40 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 		return $lookup;
 	}
 
-	public function validContextProvider() {
+	public function validLinkRendererAndContextProvider() {
+		$commentLinkRenderer = $this->getLinkRenderer();
+		$nonCommentLinkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+
+		$specialPageContext = $this->newContext();
+
 		$historyContext = $this->newContext( 'Foo' );
 		$historyContext->getRequest()->setVal( 'action', 'history' );
 
 		$diffContext = $this->newContext( 'Foo' );
 		$diffContext->getRequest()->setVal( 'diff', 123 );
 
+		$viewContext = $this->newContext( 'Foo' );
+
 		return [
-			'Special page' => [ $this->newContext() ],
-			'Action history' => [ $historyContext ],
-			'Diff' => [ $diffContext ],
+			'normal link, special page' => [ $nonCommentLinkRenderer, $specialPageContext ],
+			'comment link, history' => [ $commentLinkRenderer, $historyContext ],
+			'comment link, diff view' => [ $commentLinkRenderer, $diffContext ],
+			'comment link, normal view' => [ $commentLinkRenderer, $viewContext ],
+			'comment link, special page' => [ $commentLinkRenderer, $specialPageContext ],
 		];
 	}
 
-	public function invalidContextProvider() {
-		$deleteContext = $this->newContext( 'Foo' );
-		$deleteContext->getRequest()->setVal( 'action', 'delete' );
+	public function invalidLinkRendererAndContextProvider() {
+		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 
-		$diffNonViewContext = $this->newContext( 'Foo' );
-		$diffNonViewContext->getRequest()->setVal( 'action', 'protect' );
-		$diffNonViewContext->getRequest()->setVal( 'diff', 123 );
+		$viewContext = $this->newContext( 'Foo' );
+
+		$diffContext = $this->newContext( 'Foo' );
+		$diffContext->getRequest()->setVal( 'diff', 123 );
 
 		return [
-			'Action delete' => [ $deleteContext ],
-			'Non-special page' => [ $this->newContext( 'Foo' ) ],
-			'Edge case: diff parameter set, but action != view' => [ $diffNonViewContext ],
+			'normal link, normal view' => [ $linkRenderer, $viewContext ],
+			'normal link, diff view' => [ $linkRenderer, $diffContext ],
 		];
 	}
 
