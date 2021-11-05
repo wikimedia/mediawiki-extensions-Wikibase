@@ -29,6 +29,7 @@ use SkinTemplate;
 use StubUserLang;
 use Throwable;
 use Title;
+use UnexpectedValueException;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -120,6 +121,10 @@ final class RepoHooks {
 		global $wgContentHandlers,
 			$wgNamespaceContentModels;
 
+		if ( WikibaseRepo::getSettings()->getSetting( 'defaultEntityNamespaces' ) ) {
+			self::defaultEntityNamespaces();
+		}
+
 		$namespaces = WikibaseRepo::getLocalEntitySource()->getEntityNamespaceIds();
 		$namespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 
@@ -149,6 +154,42 @@ final class RepoHooks {
 		}
 
 		return true;
+	}
+
+	/**
+	 * @suppress PhanUndeclaredConstant
+	 */
+	private static function defaultEntityNamespaces(): void {
+		global $wgExtraNamespaces, $wgNamespacesToBeSearchedDefault;
+
+		$baseNs = 120;
+
+		self::ensureConstant( 'WB_NS_ITEM', $baseNs );
+		self::ensureConstant( 'WB_NS_ITEM_TALK', $baseNs + 1 );
+		self::ensureConstant( 'WB_NS_PROPERTY', $baseNs + 2 );
+		self::ensureConstant( 'WB_NS_PROPERTY_TALK', $baseNs + 3 );
+
+		$wgExtraNamespaces[WB_NS_ITEM] = 'Item';
+		$wgExtraNamespaces[WB_NS_ITEM_TALK] = 'Item_talk';
+		$wgExtraNamespaces[WB_NS_PROPERTY] = 'Property';
+		$wgExtraNamespaces[WB_NS_PROPERTY_TALK] = 'Property_talk';
+
+		$wgNamespacesToBeSearchedDefault[WB_NS_ITEM] = true;
+	}
+
+	/**
+	 * Ensure that a constant is set to a certain (integer) value,
+	 * defining it or checking its value if it was already defined.
+	 */
+	private static function ensureConstant( string $name, int $value ): void {
+		if ( !defined( $name ) ) {
+			define( $name, $value );
+		} elseif ( constant( $name ) !== $value ) {
+			$actual = constant( $name );
+			throw new UnexpectedValueException(
+				"Expecting constant $name to be set to $value instead of $actual"
+			);
+		}
 	}
 
 	/**
