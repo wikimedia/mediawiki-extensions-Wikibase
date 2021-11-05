@@ -29,7 +29,7 @@ class ServiceByTypeDispatcher {
 	/**
 	 * @param string $type type of the dispatched services, i.e. type of the default service and the return value of the callbacks
 	 * @param callable[] $callbacks map of entity types to callbacks creating the service to be used
-	 * @param object $defaultService - the service to be used when there is no callback defined for the given entity type
+	 * @param object $defaultService the service to be used when there is no callback defined for the given entity type
 	 */
 	public function __construct( string $type, array $callbacks, object $defaultService ) {
 		Assert::parameterElementType( 'callable', $callbacks, '$callbacks' );

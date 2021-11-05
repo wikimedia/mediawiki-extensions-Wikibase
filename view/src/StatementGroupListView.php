@@ -61,7 +61,7 @@ class StatementGroupListView {
 	 * Builds and returns the HTML representing a WikibaseEntity's statements.
 	 *
 	 * @param Statement[] $statements
-	 * @param string $idPrefix - optional prefix for statement group ids
+	 * @param string $idPrefix optional prefix for statement group ids
 	 *
 	 * @return string HTML
 	 */

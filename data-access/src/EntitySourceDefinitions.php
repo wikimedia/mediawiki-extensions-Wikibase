@@ -90,7 +90,7 @@ class EntitySourceDefinitions {
 
 	/**
 	 * @param string $entityType Entity type or sub type
-	 * @return DatabaseEntitySource |null DatabaseEntitySource or null if no DatabaseEntitySource configured for the type
+	 * @return DatabaseEntitySource|null DatabaseEntitySource or null if no DatabaseEntitySource configured for the type
 	 */
 	public function getDatabaseSourceForEntityType( string $entityType ): ?DatabaseEntitySource {
 		$entityType = $this->subEntityTypesMapper->getParentEntityType( $entityType ) ?? $entityType;

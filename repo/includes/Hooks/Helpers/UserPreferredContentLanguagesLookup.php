@@ -40,7 +40,7 @@ class UserPreferredContentLanguagesLookup {
 	 * @param $uiLanguage - user interface language; will be returned as the first language in the list if valid
 	 * @param User $user
 	 *
-	 * @return array - language codes
+	 * @return array language codes
 	 */
 	public function getLanguages( $uiLanguage, User $user ) {
 		$validLanguages = array_filter(
