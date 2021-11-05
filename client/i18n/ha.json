@@ -24,7 +24,7 @@
 	"wikibase-comment-sitelink-change": "An canza mahaɗar harshen daga $1 zuwa $2",
 	"wikibase-comment-sitelink-remove": "An cire mahaɗar harshen: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|canji |canje-canje}}",
-	"wikibase-dataitem": "Abun {{WEBREPONAME}}",
+	"wikibase-dataitem": "Abun {{WBREPONAME}}",
 	"wikibase-editlinks": "Gyara hanyoyin mahaɗar",
 	"wikibase-editlinkstitle": "Gyara hanyoyin mahaɗar harshen",
 	"wikibase-addlinkstitle": "Ƙara hanyoyin mahaɗar harshen",
