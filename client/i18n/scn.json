@@ -65,5 +65,7 @@
 	"wikibase-otherprojects-beta-message": "Sbarra latirali di l'àutri pruggetti",
 	"wikibase-otherprojects-beta-description": "Agghiunci na sizzioni \"{{int:wikibase-otherprojects}}\" â sbarra latirali, chi duna culligamenti a l'àutri pruggetti di Wikimedia chi si bàsanu supra ê dati di {{WBREPONAME}}.",
 	"wikibase-sitelinks-sitename-columnheading": "Lingua",
-	"wikibase-sitelinks-link-columnheading": "Pàggina assuciata"
+	"wikibase-sitelinks-link-columnheading": "Pàggina assuciata",
+	"wikibase-client-data-bridge-dialog-title": "Cancia $1",
+	"wikibase-client-data-bridge-permissions-error-info": "Àutri dittagghî"
 }
