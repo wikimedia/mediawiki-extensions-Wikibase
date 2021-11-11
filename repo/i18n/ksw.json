@@ -10,5 +10,7 @@
 	"wikibase-add": "ပၥ်ဖှိၣ်",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "လၢကျိာ်အဂၤ",
 	"wikibase-sitelinks-special": "စဲၣ်အဂၤတဖၣ်",
-	"wikibase-modifyterm-language": "ကျိာ်ခိၢ်:"
+	"wikibase-statementview-rank-normal": "အပတီၢ် ယိယိ",
+	"wikibase-modifyterm-language": "ကျိာ်ခိၢ်:",
+	"wikibase-tainted-ref-popper-help-link-text": "တၢ်မၤစၢၤ"
 }

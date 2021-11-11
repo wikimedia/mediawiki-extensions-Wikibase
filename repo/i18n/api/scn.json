@@ -126,6 +126,7 @@
 	"apihelp-wbsearchentities-example-1": "Arricerca \"abc\" ntâ lingua ngrisa, cu valuri pridifinuti pi tipu e lìmiti",
 	"apihelp-wbsearchentities-example-2": "Arricerca \"abc\" ntâ lingua ngrisa cûn lìmiti di 50",
 	"apihelp-wbsearchentities-example-3": "Arricerca \"alphabet\" ntâ lingua ngrisa e comu tipu prupità",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Lu còdici dâ lingua.",
 	"apihelp-wbsetaliases-description": "Mposta l'alias di na ntità di Wikibase.",
 	"apihelp-wbsetaliases-param-id": "L'idintificaturi di la ntità, cu tuttu lu prifissu.\nAdupirari o 'id' o puru 'site' e 'title' nzèmmula.",
 	"apihelp-wbsetaliases-param-site": "N'idintificaturi pû situ unni s'attrova la pàggina.\nAdupirari nzèmmula a 'title' pi fari nu culligamentu a situ cumpletu.",
