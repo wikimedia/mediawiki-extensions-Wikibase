@@ -300,7 +300,6 @@ describe( 'Lua Wikibase integration', () => {
 			wrapoutputclass: '',
 			...extraParams,
 		} );
-		response.parse.text = response.parse.text.replace( /\n<!-- Saved in .*\n -->\n$/, '' ); // T295357
 		return response.parse.text;
 	}
 
