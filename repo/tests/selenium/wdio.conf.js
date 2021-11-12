@@ -6,6 +6,7 @@
 
 const fs = require( 'fs' ),
 	saveScreenshot = require( 'wdio-mediawiki' ).saveScreenshot;
+const WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
 
 exports.config = {
 	// ======
@@ -76,6 +77,9 @@ exports.config = {
 	// =====
 	// Hooks
 	// =====
+	beforeSuite: function () {
+		browser.call( () => WikibaseApi.initialize() );
+	},
 
 	/**
 	 * Save a screenshot when test fails.

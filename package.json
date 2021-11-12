@@ -53,8 +53,8 @@
 		"plotly.js": "^1.56.0",
 		"stylelint-config-wikimedia": "0.11.1",
 		"vue": "^2.6.11",
-		"wdio-mediawiki": "^1.0.0",
-		"wdio-wikibase": "^5.1.0",
+		"wdio-mediawiki": "^1.1.1",
+		"wdio-wikibase": "^5.2.0",
 		"webdriverio": "^7.3.0"
 	},
 	"eslintIgnore": [

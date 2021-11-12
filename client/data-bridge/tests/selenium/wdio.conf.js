@@ -5,6 +5,7 @@ const fs = require( 'fs' ),
 	saveScreenshot = require( 'wdio-mediawiki' ).saveScreenshot,
 	videoUtil = require( './VideoUtil' ),
 	networkUtil = require( './NetworkUtil' );
+const WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
 
 exports.config = {
 
@@ -133,6 +134,10 @@ exports.config = {
 	// it and to build services around it. You can either apply a single function or an array of
 	// methods to it. If one of them returns with a promise, WebdriverIO will wait until that promise got
 	// resolved to continue.
+
+	beforeSuite() {
+		browser.call( () => WikibaseApi.initialize() );
+	},
 
 	/**
 	 * Function to be executed before a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
