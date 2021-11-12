@@ -803,10 +803,10 @@
 				"WikibaseRepo.EntityExistenceChecker",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.EntityLinkFormatterFactory",
-				"WikibaseRepo.EntityNamespaceLookup",
 				"WikibaseRepo.EntityUrlLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.LinkTargetEntityIdLookup",
+				"WikibaseRepo.LocalEntityNamespaceLookup",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermLookup"
 			]

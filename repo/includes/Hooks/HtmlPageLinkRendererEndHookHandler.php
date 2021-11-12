@@ -116,10 +116,10 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		EntityExistenceChecker $entityExistenceChecker,
 		EntityIdParser $entityIdParser,
 		EntityLinkFormatterFactory $entityLinkFormatterFactory,
-		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityUrlLookup $entityUrlLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		LinkTargetEntityIdLookup $linkTargetEntityIdLookup,
+		EntityNamespaceLookup $entityNamespaceLookup,
 		SettingsArray $repoSettings,
 		TermLookup $termLookup
 	): self {
