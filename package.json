@@ -55,7 +55,7 @@
 		"vue": "^2.6.11",
 		"wdio-mediawiki": "^1.1.1",
 		"wdio-wikibase": "^5.2.0",
-		"webdriverio": "^7.3.0"
+		"webdriverio": "^7.16.8"
 	},
 	"eslintIgnore": [
 		"extensions/**",
