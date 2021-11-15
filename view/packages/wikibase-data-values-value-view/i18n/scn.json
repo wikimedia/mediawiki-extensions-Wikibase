@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ajeje Brazorf"
+		]
+	},
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
+	"valueview-expert-timeinput-precision-year100k": "100&nbsp;000 anni",
+	"valueview-expert-timeinput-precision-year10k": "10&nbsp;000 anni",
+	"valueview-expert-timeinput-precision-year": "annu",
+	"valueview-expert-timeinput-precision-month": "misi",
+	"valueview-expert-timeinput-precision-day": "jornu",
+	"valueview-expert-timeinput-precision-hour": "ura",
+	"valueview-expert-timeinput-precision-minute": "minutu",
+	"valueview-expert-timeinput-precision-second": "secunnu",
+	"valueview-expert-timeinput-calendar": "Calannariu:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)"
+}
