@@ -5,13 +5,17 @@
 			"Itsmine",
 			"SolidBlock",
 			"StephDC",
+			"列维劳德",
 			"飞舞回堂前"
 		]
 	},
 	"wikibase-after-page-move": "斯頁自有相繫者，在於{{WBREPONAME}}。君既改其題，亦宜改其[$1 相繫之頁]。然後諸語之間，方能不斷連結。",
 	"wikibase-comment-update": "{{WBREPONAME}}項變",
+	"wikibase-dataitem": "{{WBREPONAME}}項",
 	"wikibase-editlinks": "纂鏈",
 	"wikibase-editlinkstitle": "修跨語鏈",
+	"wikibase-linkitem-addlinks": "增鏈",
+	"wikibase-rc-hide-wikidata": "$1{{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "隱",
 	"wikibase-rc-hide-wikidata-show": "示",
 	"wikibase-rc-wikibase-edit-letter": "數",
