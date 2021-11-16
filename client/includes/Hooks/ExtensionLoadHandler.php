@@ -4,6 +4,7 @@ namespace Wikibase\Client\Hooks;
 
 use ApiMain;
 use ExtensionRegistry;
+use InvalidArgumentException;
 use Parser;
 use Wikibase\Client\Api\ApiFormatReference;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
@@ -43,6 +44,10 @@ class ExtensionLoadHandler {
 		$handler = self::factory();
 
 		$wgHooks = array_merge_recursive( $wgHooks, $handler->getHooks() );
+
+		if ( $wgWBClientSettings === null ) {
+			throw new InvalidArgumentException( "Client configuration not loaded" );
+		}
 
 		$apiFormatReferenceSpec = $handler->getApiFormatReferenceSpec( $wgWBClientSettings );
 		if ( $apiFormatReferenceSpec !== null ) {
