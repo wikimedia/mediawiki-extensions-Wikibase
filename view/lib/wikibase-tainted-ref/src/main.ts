@@ -3,6 +3,7 @@ import { createStore } from '@/store';
 import { STORE_INIT, HELP_LINK_SET } from '@/store/actionTypes';
 import { HookHandler } from '@/HookHandler';
 import { TrackFunction } from '@/store/TrackFunction';
+import Vue, { CreateElement } from 'vue';
 
 export function launch(
 	hookHandler: HookHandler,
@@ -18,7 +19,14 @@ export function launch(
 			guids.push( id );
 			const appElement = headingElement.appendChild( document.createElement( 'div' ) );
 			appElement.setAttribute( 'class', 'wikibase-tainted-references-container' );
-			new App( { store, propsData: { id } } ).$mount( appElement );
+			const compatApp = {
+				store,
+				render( h: CreateElement ) {
+					return h( App, { props: { id } } );
+				},
+			};
+			Vue.createMwApp( compatApp )
+				.mount( appElement );
 		}
 	} );
 	store.dispatch( STORE_INIT, guids );
