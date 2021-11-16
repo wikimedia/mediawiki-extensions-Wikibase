@@ -19,19 +19,25 @@ import Vue from 'vue';
 
 export default Vue.extend( {
 	name: 'App',
+	props: {
+		id: {
+			type: String,
+			required: true,
+		},
+	},
 	components: {
 		TaintedIcon,
 		TaintedPopper,
 	},
 	computed: {
 		isTainted(): boolean {
-			return this.$store.getters[ GET_STATEMENT_TAINTED_STATE ]( this.$data.id );
+			return this.$store.getters[ GET_STATEMENT_TAINTED_STATE ]( this.$props.id );
 		},
 		popperIsOpened(): boolean {
-			return this.$store.getters[ GET_POPPER_STATE ]( this.$data.id );
+			return this.$store.getters[ GET_POPPER_STATE ]( this.$props.id );
 		},
 		editState(): boolean {
-			return this.$store.getters[ GET_EDIT_STATE ]( this.$data.id );
+			return this.$store.getters[ GET_EDIT_STATE ]( this.$props.id );
 		},
 	},
 } );

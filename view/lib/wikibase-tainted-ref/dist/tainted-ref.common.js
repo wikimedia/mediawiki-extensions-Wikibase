@@ -2016,12 +2016,12 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
 var web_dom_collections_for_each = __webpack_require__("159b");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2802c5b7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=7692ea8c&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2802c5b7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=c85fe55a&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-app"},[(_vm.isTainted && !_vm.editState )?_c('div',[_c('span',[_c('TaintedIcon',{attrs:{"guid":_vm.id}}),(_vm.popperIsOpened)?_c('div',{staticClass:"wb-tr-float-wrapper"},[_c('TaintedPopper',{attrs:{"guid":_vm.id}})],1):_vm._e()],1)]):_vm._e()])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=7692ea8c&
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=c85fe55a&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2802c5b7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=21ee2939&
 var TaintedIconvue_type_template_id_21ee2939_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.popperIsOpened ? 'div' : 'a',{tag:"component",staticClass:"wb-tr-tainted-icon",attrs:{"title":_vm.iconTitle},on:{"click":function (event) { return !_vm.popperIsOpened && _vm.onClick( event ); }}})}
@@ -2357,19 +2357,25 @@ var TaintedPopper_component = normalizeComponent(
 
 /* harmony default export */ var Appvue_type_script_lang_ts_ = (external_vue_default.a.extend({
   name: 'App',
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
   components: {
     TaintedIcon: TaintedIcon,
     TaintedPopper: TaintedPopper
   },
   computed: {
     isTainted: function isTainted() {
-      return this.$store.getters[GET_STATEMENT_TAINTED_STATE](this.$data.id);
+      return this.$store.getters[GET_STATEMENT_TAINTED_STATE](this.$props.id);
     },
     popperIsOpened: function popperIsOpened() {
-      return this.$store.getters[GET_POPPER_STATE](this.$data.id);
+      return this.$store.getters[GET_POPPER_STATE](this.$props.id);
     },
     editState: function editState() {
-      return this.$store.getters[GET_EDIT_STATE](this.$data.id);
+      return this.$store.getters[GET_EDIT_STATE](this.$props.id);
     }
   }
 }));
@@ -2557,7 +2563,7 @@ function launch(hookHandler, helpLink, trackFunction) {
       appElement.setAttribute('class', 'wikibase-tainted-references-container');
       new App({
         store: store,
-        data: {
+        propsData: {
           id: id
         }
       }).$mount(appElement);

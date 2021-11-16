@@ -22,6 +22,7 @@ describe( 'App.vue', () => {
 		const wrapper = shallowMount( App, {
 			store,
 			localVue,
+			propsData: { id: 'fooId' },
 		} );
 		expect( wrapper.classes() ).toContain( 'wb-tr-app' );
 	} );
@@ -30,7 +31,7 @@ describe( 'App.vue', () => {
 		const wrapper = shallowMount( App, {
 			store,
 			localVue,
-			data: () => { return { id: 'fooId' }; },
+			propsData: { id: 'fooId' },
 		} );
 		store.dispatch( STORE_INIT, [ 'fooId' ] );
 		expect( wrapper.find( TaintedIcon ).exists() ).toBeFalsy();
@@ -42,7 +43,7 @@ describe( 'App.vue', () => {
 		const wrapper = shallowMount( App, {
 			store,
 			localVue,
-			data: () => { return { id: 'fooId' }; },
+			propsData: { id: 'fooId' },
 		} );
 		store.dispatch( STORE_INIT, [ 'fooId' ] );
 		store.dispatch( STATEMENT_TAINTED_STATE_TAINT, 'fooId' );

@@ -18,7 +18,7 @@ export function launch(
 			guids.push( id );
 			const appElement = headingElement.appendChild( document.createElement( 'div' ) );
 			appElement.setAttribute( 'class', 'wikibase-tainted-references-container' );
-			new App( { store, data: { id } } ).$mount( appElement );
+			new App( { store, propsData: { id } } ).$mount( appElement );
 		}
 	} );
 	store.dispatch( STORE_INIT, guids );
