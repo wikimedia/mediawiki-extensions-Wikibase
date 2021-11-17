@@ -29,6 +29,7 @@ export const initializing = ( args, { argTypes } ) => {
 };
 initializing.args = {
 	isInitializing: true,
+	isSaving: false,
 };
 initializing.argTypes = {
 	...defaultArgTypes,
@@ -56,6 +57,7 @@ export const saving = ( args, { argTypes } ) => {
 	};
 };
 saving.args = {
+	isInitializing: false,
 	isSaving: true,
 };
 saving.argTypes = {
