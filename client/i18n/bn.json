@@ -115,7 +115,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "মানটি পূর্বে সঠিক ছিল তবে এখন পুরনো।",
 	"wikibase-client-data-bridge-references-heading": "তথ্যসূত্র",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "আপনি প্রবেশ করেন নি",
-	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>সতর্কতা:</strong> আপনি প্রবেশ করেননি। যদি আপনি সম্পাদনা করেন, আপনার আইপি ঠিকানা সার্বজনীনভাবে দেখা যাবে। যদি আপনি <strong>প্রবেশ করেন</strong> বা <strong>একটি অ্যাকাউন্ট তৈরি করেন</strong>, তাহলে আপনি আপনার আইপি ঠিকানা গোপন রাখতে পারবেন ও অন্যান্য অনেক সুবিধা পাবেন।",
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>সতর্কতা:</strong> আপনি প্রবেশ করেননি। আপনি যদি কোন সম্পাদনা করেন, তবে আপনার আইপি ঠিকানা সার্বজনীনভাবে দেখা যাবে। আপনি যদি <strong>প্রবেশ করেন</strong> বা <strong>একটি অ্যাকাউন্ট তৈরি করেন</strong>, তাহলে আপনি আপনার আইপি ঠিকানা গোপন রাখতে পারবেন ও আরও অনেক সুবিধা পাবেন।",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "প্রবেশ ছাড়াই সম্পাদনা করুন",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "প্রবেশ করুন বা নিবন্ধন করুন",
 	"wikibase-client-data-bridge-license-heading": "ব্যবহার ও লাইসেন্স",
