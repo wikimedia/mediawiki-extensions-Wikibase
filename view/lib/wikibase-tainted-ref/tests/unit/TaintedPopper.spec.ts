@@ -1,5 +1,6 @@
-import { createLocalVue, mount } from '@vue/test-utils';
-import Vuex, { Store } from 'vuex';
+import { Plugin } from '@vue/runtime-core';
+import { mount } from '@vue/test-utils';
+import { Store } from 'vuex';
 import Track from '@/vue-plugins/Track';
 import Message from '@/vue-plugins/Message';
 import Application from '@/store/Application';
@@ -7,13 +8,12 @@ import TaintedPopper from '@/presentation/components/TaintedPopper.vue';
 import { POPPER_HIDE, STATEMENT_TAINTED_STATE_UNTAINT } from '@/store/actionTypes';
 import { GET_HELP_LINK } from '@/store/getterTypes';
 
-const localVue = createLocalVue();
 const trackingFunction: any = jest.fn();
-localVue.use( Vuex );
-localVue.use( Message, { messageToTextFunction: () => {
+const messagePlugin: [ Plugin, ...unknown[] ] = [ Message, { messageToTextFunction: () => {
 	return 'dummy';
-} } );
-localVue.use( Track, { trackingFunction } );
+} } ];
+const trackPlugin: [ Plugin, ...unknown[] ] = [ Track, { trackingFunction } ];
+const plugins = [ messagePlugin, trackPlugin ];
 
 function createMockStore( helpLink?: string ): Store<Partial<Application>> {
 	return new Store<Partial<Application>>( {
@@ -30,17 +30,15 @@ describe( 'TaintedPopper.vue', () => {
 	it( 'sets the help link according to the store', () => {
 		const helpLinkUrl = 'https://wdtest/Help';
 		const store = createMockStore( helpLinkUrl );
-		const wrapper = mount( TaintedPopper, {
-			store,
-			localVue,
+		const wrapper = mount( TaintedPopper as any, {
+			global: { plugins: [ store, ...plugins ] },
 		} );
 		expect( wrapper.find( '.wb-tr-popper-help a' ).attributes().href ).toEqual( helpLinkUrl );
 	} );
 	it( 'clicking the help link triggers a tracking event', () => {
 		const store = createMockStore();
-		const wrapper = mount( TaintedPopper, {
-			store,
-			localVue,
+		const wrapper = mount( TaintedPopper as any, {
+			global: { plugins: [ store, ...plugins ] },
 		} );
 		wrapper.find( '.wb-tr-popper-help a' ).trigger( 'click' );
 		expect( trackingFunction ).toHaveBeenCalledWith( 'counter.wikibase.view.tainted-ref.helpLinkClick', 1 );
@@ -49,10 +47,9 @@ describe( 'TaintedPopper.vue', () => {
 		const store = createMockStore();
 		store.dispatch = jest.fn();
 
-		const wrapper = mount( TaintedPopper, {
-			store,
-			localVue,
-			propsData: { guid: 'a-guid' },
+		const wrapper = mount( TaintedPopper as any, {
+			global: { plugins: [ store, ...plugins ] },
+			props: { guid: 'a-guid' },
 		} );
 		wrapper.trigger(
 			'focusout', {
@@ -65,44 +62,37 @@ describe( 'TaintedPopper.vue', () => {
 		const store = createMockStore();
 		store.dispatch = jest.fn();
 
-		const wrapper = mount( TaintedPopper, {
-			store,
-			localVue,
-			propsData: { guid: 'a-guid' },
+		const wrapper = mount( TaintedPopper as any, {
+			global: { plugins: [ store, ...plugins ] },
+			props: { guid: 'a-guid' },
 		} );
 		wrapper.find( '.wb-tr-popper-remove-warning' ).trigger( 'click' );
 		expect( store.dispatch ).toHaveBeenCalledWith( STATEMENT_TAINTED_STATE_UNTAINT, 'a-guid' );
 	} );
 	it( 'clicking the remove warning button triggers a tracking event', () => {
 		const store = createMockStore();
-		const wrapper = mount( TaintedPopper, {
-			store,
-			localVue,
+		const wrapper = mount( TaintedPopper as any, {
+			global: { plugins: [ store, ...plugins ] },
 		} );
 		wrapper.find( '.wb-tr-popper-remove-warning' ).trigger( 'click' );
 		expect( trackingFunction ).toHaveBeenCalledWith( 'counter.wikibase.view.tainted-ref.removeWarningClick', 1 );
 	} );
 	it( 'popper texts are taken from our Vue message plugin', () => {
-		const localVue = createLocalVue();
 		const messageToTextFunction = jest.fn();
 		messageToTextFunction.mockImplementation( ( key ) => `(${key})` );
-
-		localVue.use( Vuex );
-		localVue.use( Message, { messageToTextFunction } );
 
 		const store = createMockStore();
 		store.dispatch = jest.fn();
 
-		const wrapper = mount( TaintedPopper, {
-			store,
-			localVue,
-			propsData: { guid: 'a-guid' },
+		const wrapper = mount( TaintedPopper as any, {
+			global: { plugins: [ store, [ Message, { messageToTextFunction } ], trackPlugin ] },
+			props: { guid: 'a-guid' },
 		} );
 		expect( wrapper.find( '.wb-tr-popper__text--top' ).element.textContent )
 			.toMatch( '(wikibase-tainted-ref-popper-text)' );
 		expect( wrapper.find( '.wb-tr-popper-title' ).element.textContent )
 			.toMatch( '(wikibase-tainted-ref-popper-title)' );
-		expect( wrapper.find( '.wb-tr-popper-help a' ).element.title )
+		expect( ( wrapper.find( '.wb-tr-popper-help a' ).element as HTMLElement ).title )
 			.toMatch( '(wikibase-tainted-ref-popper-help-link-title)' );
 		expect( wrapper.find( '.wb-tr-popper-help' ).element.textContent )
 			.toMatch( '(wikibase-tainted-ref-popper-help-link-text)' );

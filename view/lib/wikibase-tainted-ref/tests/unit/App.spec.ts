@@ -1,14 +1,11 @@
 import { TrackFunction } from '@/@types/TrackingOptions';
 import App from '@/presentation/App.vue';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import Vuex, { Store } from 'vuex';
+import { shallowMount } from '@vue/test-utils';
+import { Store } from 'vuex';
 import Application from '@/store/Application';
 import { createStore } from '@/store';
 import TaintedIcon from '@/presentation/components/TaintedIcon.vue';
 import { STORE_INIT, STATEMENT_TAINTED_STATE_TAINT, START_EDIT } from '@/store/actionTypes';
-
-const localVue = createLocalVue();
-localVue.use( Vuex );
 
 const mockTrackFunction: TrackFunction = jest.fn();
 
@@ -19,35 +16,33 @@ function getStore(): Store<Application> {
 describe( 'App.vue', () => {
 	it( 'should render the mounted root element', () => {
 		const store = getStore();
-		const wrapper = shallowMount( App, {
-			store,
-			localVue,
-			propsData: { id: 'fooId' },
+		const wrapper = shallowMount( App as any, {
+			global: { plugins: [ store ] },
+			props: { id: 'fooId' },
 		} );
 		expect( wrapper.classes() ).toContain( 'wb-tr-app' );
 	} );
-	it( 'should render the TaintedIcon when the statement is tainted', () => {
+	it( 'should render the TaintedIcon when the statement is tainted', async () => {
 		const store = getStore();
-		const wrapper = shallowMount( App, {
-			store,
-			localVue,
-			propsData: { id: 'fooId' },
+		const wrapper = shallowMount( App as any, {
+			global: { plugins: [ store ] },
+			props: { id: 'fooId' },
 		} );
 		store.dispatch( STORE_INIT, [ 'fooId' ] );
-		expect( wrapper.find( TaintedIcon ).exists() ).toBeFalsy();
+		expect( wrapper.findComponent( TaintedIcon as any ).exists() ).toBeFalsy();
 		store.dispatch( STATEMENT_TAINTED_STATE_TAINT, 'fooId' );
-		expect( wrapper.find( TaintedIcon ).exists() ).toBeTruthy();
+		await wrapper.vm.$nextTick();
+		expect( wrapper.findComponent( TaintedIcon as any ).exists() ).toBeTruthy();
 	} );
 	it( 'should not render the TaintedIcon during edit', () => {
 		const store = getStore();
-		const wrapper = shallowMount( App, {
-			store,
-			localVue,
-			propsData: { id: 'fooId' },
+		const wrapper = shallowMount( App as any, {
+			global: { plugins: [ store ] },
+			props: { id: 'fooId' },
 		} );
 		store.dispatch( STORE_INIT, [ 'fooId' ] );
 		store.dispatch( STATEMENT_TAINTED_STATE_TAINT, 'fooId' );
 		store.dispatch( START_EDIT, 'fooId' );
-		expect( wrapper.find( TaintedIcon ).exists() ).toBeFalsy();
+		expect( wrapper.findComponent( TaintedIcon as any ).exists() ).toBeFalsy();
 	} );
 } );

@@ -11,7 +11,6 @@ import {
 	SET_STATEMENT_EDIT_FALSE,
 	SET_STATEMENT_EDIT_TRUE,
 } from '@/store/mutationTypes';
-import Vue from 'vue';
 import Application from '@/store/Application';
 
 export const mutations: MutationTree<Application> = {
@@ -20,7 +19,7 @@ export const mutations: MutationTree<Application> = {
 		guids: string[],
 	): void {
 		guids.forEach( ( guid ) => {
-			Vue.set( state.statementsTaintedState, guid, false );
+			state.statementsTaintedState[ guid ] = false;
 		} );
 	},
 	[ SET_ALL_POPPERS_HIDDEN ](
@@ -28,7 +27,7 @@ export const mutations: MutationTree<Application> = {
 		guids: string[],
 	): void {
 		guids.forEach( ( guid ) => {
-			Vue.set( state.statementsPopperIsOpen, guid, false );
+			state.statementsPopperIsOpen[ guid ] = false;
 		} );
 	},
 	[ SET_ALL_EDIT_MODE_FALSE ](
@@ -36,7 +35,7 @@ export const mutations: MutationTree<Application> = {
 		guids: string[],
 	): void {
 		guids.forEach( ( guid ) => {
-			Vue.set( state.statementsEditState, guid, false );
+			state.statementsEditState[ guid ] = false;
 		} );
 	},
 	[ SET_TAINTED ](

@@ -1,15 +1,14 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import Vuex, { Store } from 'vuex';
+import { shallowMount } from '@vue/test-utils';
+import { Plugin } from '@vue/runtime-core';
+import { Store } from 'vuex';
 import Message from '@/vue-plugins/Message';
 import Application from '@/store/Application';
 import Popper from '@/presentation/components/Popper.vue';
 import { POPPER_HIDE } from '@/store/actionTypes';
 
-const localVue = createLocalVue();
-localVue.use( Vuex );
-localVue.use( Message, { messageToTextFunction: () => {
+const messagePlugin: [ Plugin, ...unknown[] ] = [ Message, { messageToTextFunction: () => {
 	return 'dummy';
-} } );
+} } ];
 
 function createStore(): Store<Partial<Application>> {
 	return new Store<Partial<Application>>( {
@@ -20,9 +19,8 @@ function createStore(): Store<Partial<Application>> {
 describe( 'Popper.vue', () => {
 	it( 'should render the Popper', () => {
 		const store = createStore();
-		const wrapper = shallowMount( Popper, {
-			store,
-			localVue,
+		const wrapper = shallowMount( Popper as any, {
+			global: { plugins: [ store, messagePlugin ] },
 		} );
 		expect( wrapper.classes() ).toContain( 'wb-tr-popper-wrapper' );
 	} );
@@ -30,10 +28,9 @@ describe( 'Popper.vue', () => {
 		const store = createStore();
 		store.dispatch = jest.fn();
 
-		const wrapper = shallowMount( Popper, {
-			store,
-			localVue,
-			propsData: { guid: 'a-guid' },
+		const wrapper = shallowMount( Popper as any, {
+			global: { plugins: [ store, messagePlugin ] },
+			props: { guid: 'a-guid' },
 		} );
 		wrapper.find( '.wb-tr-popper-close' ).trigger( 'click' );
 		expect( store.dispatch ).toHaveBeenCalledWith( POPPER_HIDE, 'a-guid' );
@@ -42,41 +39,42 @@ describe( 'Popper.vue', () => {
 		const store = createStore();
 		store.dispatch = jest.fn();
 
-		const wrapper = shallowMount( Popper, {
-			store,
-			localVue,
-			propsData: { guid: 'a-guid' },
+		const wrapper = shallowMount( Popper as any, {
+			global: { plugins: [ store, messagePlugin ] },
+			props: { guid: 'a-guid' },
 		} );
 		wrapper.trigger( 'focusout' );
 		expect( store.dispatch ).toHaveBeenCalledWith( POPPER_HIDE, 'a-guid' );
 	} );
 	it( 'should use injected title text', () => {
-		const localVue = createLocalVue();
 		const store = createStore();
 		store.dispatch = jest.fn();
 		const messageToTextFunction = ( key: any ): string => `(${key})`;
-		localVue.use( Vuex );
-		localVue.use( Message, { messageToTextFunction } );
-		const wrapper = shallowMount( Popper, {
-			store,
-			localVue,
-			propsData: { guid: 'a-guid', title: 'kitten' },
+		const wrapper = shallowMount( Popper as any, {
+			global: {
+				plugins: [
+					store,
+					[ Message, { messageToTextFunction } ],
+				],
+			},
+			props: { guid: 'a-guid', title: 'kitten' },
 		} );
 
 		expect( wrapper.find( '.wb-tr-popper-title' ).element.textContent )
 			.toMatch( 'kitten' );
 	} );
 	it( 'should display the injected slots', () => {
-		const localVue = createLocalVue();
 		const store = createStore();
 		store.dispatch = jest.fn();
 		const messageToTextFunction = ( key: any ): string => `(${key})`;
-		localVue.use( Vuex );
-		localVue.use( Message, { messageToTextFunction } );
-		const wrapper = shallowMount( Popper, {
-			store,
-			localVue,
-			propsData: { guid: 'a-guid', title: 'title' },
+		const wrapper = shallowMount( Popper as any, {
+			global: {
+				plugins: [
+					store,
+					[ Message, { messageToTextFunction } ],
+				],
+			},
+			props: { guid: 'a-guid', title: 'title' },
 			slots: {
 				'subheading-area': '<div class="the-subheading">subhead</div>',
 				content: '<div class="the-content">content</div>',

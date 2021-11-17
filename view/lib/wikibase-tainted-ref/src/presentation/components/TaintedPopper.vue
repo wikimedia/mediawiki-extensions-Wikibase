@@ -25,9 +25,9 @@
 import { STATEMENT_TAINTED_STATE_UNTAINT } from '@/store/actionTypes';
 import Popper from '@/presentation/components/Popper.vue';
 import { GET_HELP_LINK } from '@/store/getterTypes';
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'TaintedPopper',
 	props: {
 		guid: {

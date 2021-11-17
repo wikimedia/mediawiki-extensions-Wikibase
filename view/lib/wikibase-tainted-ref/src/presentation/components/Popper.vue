@@ -23,9 +23,9 @@
 
 <script lang="ts">
 import { POPPER_HIDE } from '@/store/actionTypes';
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'Popper',
 	props: {
 		guid: {
