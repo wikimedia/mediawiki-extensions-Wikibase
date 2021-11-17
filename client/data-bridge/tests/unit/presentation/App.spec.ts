@@ -82,6 +82,7 @@ describe( 'App.vue', () => {
 			entityId,
 			propertyId,
 			editFlow,
+			originalHref: 'https://example.com',
 			client: {
 				usePublish: true,
 			},

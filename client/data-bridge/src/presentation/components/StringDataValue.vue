@@ -14,55 +14,67 @@
 	</div>
 </template>
 <script lang="ts">
-import Term from '@/datamodel/Term';
+import Vue, { PropType } from 'vue';
 import PropertyLabel from '@/presentation/components/PropertyLabel.vue';
 import { DataValue } from '@wmde/wikibase-datamodel-types';
 import { ResizingTextField } from '@wmde/wikibase-vuejs-components';
 import { v4 as uuid } from 'uuid';
-import {
-	Component,
-	Prop,
-	Vue,
-} from 'vue-property-decorator';
+import Term from '@/datamodel/Term';
 
-@Component( {
+export default Vue.extend( {
+	name: 'StringDataValue',
+	props: {
+		dataValue: {
+			type: Object as PropType<DataValue | null>,
+			required: false,
+			default: null,
+		},
+		label: {
+			type: Object as PropType<Term>,
+			required: true,
+		},
+		placeholder: {
+			required: false,
+			type: String,
+			default: undefined,
+		},
+		maxlength: {
+			type: Number,
+			required: false,
+			default: undefined,
+		},
+		setDataValue: {
+			required: true,
+			type: Function as PropType<( dataValue: DataValue ) => void>,
+		},
+	},
 	components: { PropertyLabel, ResizingTextField },
-} )
-export default class StringDataValue extends Vue {
-	public readonly id = uuid();
-
-	@Prop( { required: true } )
-	public dataValue!: DataValue|null;
-
-	@Prop( { required: true } )
-	public label!: Term;
-
-	@Prop( { required: false } )
-	public placeholder?: string;
-
-	@Prop( { type: Number, required: false } )
-	public maxlength?: number;
-
-	@Prop( { required: true, type: Function } )
-	public setDataValue!: ( dataValue: DataValue ) => void;
-
-	public get value(): string {
-		if ( !this.dataValue ) {
-			return '';
-		} else {
-			return this.dataValue.value as string;
-		}
-	}
-
-	public set value( value: string ) {
-		this.setDataValue(
-			{
-				type: 'string',
-				value,
+	data() {
+		return {
+			id: uuid(),
+		};
+	},
+	computed: {
+		value: {
+			get(): string {
+				if ( !this.dataValue ) {
+					return '';
+				} else {
+					return this.dataValue.value;
+				}
 			},
-		);
-	}
-}
+			set( value: string ): void {
+				this.setDataValue(
+					{
+						type: 'string',
+						value,
+					},
+				);
+			},
+		},
+	},
+
+} );
 </script>
 <style lang="scss">
 .wb-db-string-value {

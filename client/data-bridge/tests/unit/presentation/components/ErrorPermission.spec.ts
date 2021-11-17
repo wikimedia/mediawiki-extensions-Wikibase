@@ -92,6 +92,7 @@ describe( 'ErrorPermission', () => {
 		const errorBlockedOnRepo: BlockReason = {
 			type: PageNotEditable.BLOCKED_ON_REPO_ITEM,
 			info: {
+				blockedBy,
 				blockedById,
 				blockId,
 			} as any,
@@ -99,6 +100,7 @@ describe( 'ErrorPermission', () => {
 		const errorBlockedOnClient: BlockReason = {
 			type: PageNotEditable.BLOCKED_ON_CLIENT_PAGE,
 			info: {
+				blockedBy,
 				blockedById,
 				blockId,
 			} as any,

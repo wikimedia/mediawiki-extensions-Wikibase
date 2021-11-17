@@ -6,25 +6,24 @@
 </template>
 
 <script lang="ts">
+import Vue, { PropType } from 'vue';
 import TermLabel from '@/presentation/components/TermLabel.vue';
-import {
-	Component,
-	Prop,
-	Vue,
-} from 'vue-property-decorator';
 import Term from '@/datamodel/Term';
 
-@Component( {
+export default Vue.extend( {
+	name: 'PropertyLabel',
 	components: { TermLabel },
-} )
-export default class PropertyLabel extends Vue {
-
-	@Prop( { required: true } )
-	public term!: Term;
-
-	@Prop( { required: true } )
-	public htmlFor!: string;
-}
+	props: {
+		term: {
+			type: Object as PropType<Term>,
+			required: true,
+		},
+		htmlFor: {
+			type: String,
+			required: true,
+		},
+	},
+} );
 </script>
 
 <style lang="scss">

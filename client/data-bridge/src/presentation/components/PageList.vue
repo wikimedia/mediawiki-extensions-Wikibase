@@ -7,8 +7,7 @@
 </template>
 
 <script lang="ts">
-import { Prop, Vue } from 'vue-property-decorator';
-import Component from 'vue-class-component';
+import Vue, { PropType } from 'vue';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 
 /**
@@ -20,12 +19,18 @@ import MediaWikiRouter from '@/definitions/MediaWikiRouter';
  * accessing features from ClientRouterPlugin or RepoRouterPlugin
  * from here.
  */
-@Component
-export default class PageList extends Vue {
-	@Prop( { required: true } )
-	private readonly pages!: string[];
-	@Prop( { required: true } )
-	private readonly router!: MediaWikiRouter;
-}
+export default Vue.extend( {
+	name: 'PageList',
+	props: {
+		pages: {
+			type: Array as PropType<string[]>,
+			required: true,
+		},
+		router: {
+			type: Object as PropType<MediaWikiRouter>,
+			required: true,
+		},
+	},
+} );
 
 </script>

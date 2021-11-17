@@ -6,10 +6,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Component from 'vue-class-component';
 
-@Component
-export default class RadioGroup extends Vue {}
+export default Vue.extend( {
+	name: 'RadioGroup',
+} );
 </script>
 
 <style lang="scss">
