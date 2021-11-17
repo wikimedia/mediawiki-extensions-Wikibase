@@ -65,6 +65,8 @@ wfLoadExtension( 'UniversalLanguageSelector' );
 # cldr
 wfLoadExtension( 'cldr' );
 
+$wgWBClientSettings = $wgWBClientSettings ?? [];
+
 # Federated Properties
 $wgWBRepoSettings['federatedPropertiesEnabled'] = true;
 $wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = "{{ SOURCE_REPO_SCHEME }}://{{ SOURCE_REPO_HOST }}/w/";
