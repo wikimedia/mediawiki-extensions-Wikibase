@@ -37,8 +37,8 @@
 </template>
 
 <script lang="ts">
+import Vue, { VueConstructor } from 'vue';
 import ErrorUnsupportedSnakType from '@/presentation/components/ErrorUnsupportedSnakType.vue';
-import Component, { mixins } from 'vue-class-component';
 import { MissingPermissionsError, PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
 import StateMixin from '@/presentation/StateMixin';
 import ErrorPermission from '@/presentation/components/ErrorPermission.vue';
@@ -55,7 +55,13 @@ import ApplicationError, {
 	UnsupportedSnakTypeError,
 } from '@/definitions/ApplicationError';
 
-@Component( {
+function isPermissionError( error: ApplicationError ): error is MissingPermissionsError {
+	return ( Object.values( PageNotEditable ) as string[] ).includes( error.type );
+}
+
+export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+	mixins: [ StateMixin ],
+	name: 'ErrorWrapper',
 	components: {
 		ErrorUnsupportedSnakType,
 		ErrorPermission,
@@ -67,87 +73,74 @@ import ApplicationError, {
 		ErrorSavingAssertUser,
 		ErrorSavingEditConflict,
 	},
-} )
-export default class ErrorWrapper extends mixins( StateMixin ) {
-	public get applicationErrors(): ApplicationError[] {
-		return this.rootModule.state.applicationErrors;
-	}
-
-	public get permissionErrors(): MissingPermissionsError[] {
-		return this.applicationErrors.filter( this.isPermissionError );
-	}
-
-	private isPermissionError( error: ApplicationError ): error is MissingPermissionsError {
-		return ( Object.values( PageNotEditable ) as string[] ).includes( error.type );
-	}
-
-	public get unsupportedDatatypeError(): UnsupportedDatatypeError|null {
-		for ( const applicationError of this.applicationErrors ) {
-			if ( applicationError.type === ErrorTypes.UNSUPPORTED_DATATYPE ) {
-				return applicationError;
+	computed: {
+		applicationErrors(): ApplicationError[] {
+			return this.rootModule.state.applicationErrors;
+		},
+		permissionErrors(): MissingPermissionsError[] {
+			return this.applicationErrors.filter( isPermissionError );
+		},
+		unsupportedDatatypeError(): UnsupportedDatatypeError | null {
+			for ( const applicationError of this.applicationErrors ) {
+				if ( applicationError.type === ErrorTypes.UNSUPPORTED_DATATYPE ) {
+					return applicationError;
+				}
 			}
-		}
-		return null;
-	}
-
-	public get statementValueIsDeprecated(): boolean {
-		return this.applicationErrors.some(
-			( applicationError ) => applicationError.type === ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT,
-		);
-	}
-
-	public get statementIsAmbiguous(): boolean {
-		return this.applicationErrors.some(
-			( applicationError ) => applicationError.type === ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT,
-		);
-	}
-
-	public get unsupportedSnakTypeError(): UnsupportedSnakTypeError|null {
-		for ( const applicationError of this.applicationErrors ) {
-			if ( applicationError.type === ErrorTypes.UNSUPPORTED_SNAK_TYPE ) {
-				return applicationError;
+			return null;
+		},
+		statementValueIsDeprecated(): boolean {
+			return this.applicationErrors.some(
+				( applicationError ) => applicationError.type === ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT,
+			);
+		},
+		statementIsAmbiguous(): boolean {
+			return this.applicationErrors.some(
+				( applicationError ) => applicationError.type === ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT,
+			);
+		},
+		unsupportedSnakTypeError(): UnsupportedSnakTypeError | null {
+			for ( const applicationError of this.applicationErrors ) {
+				if ( applicationError.type === ErrorTypes.UNSUPPORTED_SNAK_TYPE ) {
+					return applicationError;
+				}
 			}
-		}
-		return null;
-	}
-
-	public get isGenericSavingError(): boolean {
-		return this.rootModule.getters.isGenericSavingError;
-	}
-
-	public get isAssertUserFailedError(): boolean {
-		return this.rootModule.getters.isAssertUserFailedError;
-	}
-
-	public get isEditConflictError(): boolean {
-		return this.rootModule.getters.isEditConflictError;
-	}
-
-	public get loginUrl(): string {
-		return this.$clientRouter.getPageUrl(
-			'Special:UserLogin',
-			{
-				warning: this.$messages.KEYS.LOGIN_WARNING,
-			},
-		);
-	}
-
-	private relaunch(): void {
-		/**
-		 * An event fired when it is time to relaunch the bridge (usually bubbled from a child component)
-		 * @type {Event}
-		 */
-		this.$emit( 'relaunch' );
-	}
-
-	private reload(): void {
-		/**
-		 * An event fired when the user requested to reload the whole page (usually bubbled from a child component)
-		 * @type {Event}
-		 */
-		this.$emit( 'reload' );
-	}
-}
+			return null;
+		},
+		isGenericSavingError(): boolean {
+			return this.rootModule.getters.isGenericSavingError;
+		},
+		isAssertUserFailedError(): boolean {
+			return this.rootModule.getters.isAssertUserFailedError;
+		},
+		isEditConflictError(): boolean {
+			return this.rootModule.getters.isEditConflictError;
+		},
+		loginUrl(): string {
+			return this.$clientRouter.getPageUrl(
+				'Special:UserLogin',
+				{
+					warning: this.$messages.KEYS.LOGIN_WARNING,
+				},
+			);
+		},
+	},
+	methods: {
+		relaunch(): void {
+			/**
+			 * An event fired when it is time to relaunch the bridge (usually bubbled from a child component)
+			 * @type {Event}
+			 */
+			this.$emit( 'relaunch' );
+		},
+		reload(): void {
+			/**
+			 * An event fired when the user requested to reload the whole page (usually bubbled from a child component)
+			 * @type {Event}
+			 */
+			this.$emit( 'reload' );
+		},
+	},
+} );
 </script>
 
 <style lang="scss">
