@@ -33,9 +33,8 @@
 </template>
 
 <script lang="ts">
-import { mixins } from 'vue-class-component';
+import Vue, { VueConstructor } from 'vue';
 import StateMixin from '@/presentation/StateMixin';
-import Component from 'vue-class-component';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import ReportIssue from '@/presentation/components/ReportIssue.vue';
@@ -44,26 +43,26 @@ import ReportIssue from '@/presentation/components/ReportIssue.vue';
  * A component which gets shown when an error occurs while saving,
  * if no dedicated handling for the type of error which happened is configured.
  */
-@Component( {
+export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+	mixins: [ StateMixin ],
+	name: 'ErrorSaving',
 	components: {
 		EventEmittingButton,
 		IconMessageBox,
 		ReportIssue,
 	},
-} )
-export default class ErrorSaving extends mixins( StateMixin ) {
-	public mounted(): void {
+	mounted(): void {
 		this.rootModule.dispatch( 'trackSavingErrorsFallingBackToGenericView' );
-	}
-
-	public retrySave(): void {
-		this.rootModule.dispatch( 'retrySave' );
-	}
-
-	public goBack(): void {
-		this.rootModule.dispatch( 'goBackFromErrorToReady' );
-	}
-}
+	},
+	methods: {
+		retrySave(): void {
+			this.rootModule.dispatch( 'retrySave' );
+		},
+		goBack(): void {
+			this.rootModule.dispatch( 'goBackFromErrorToReady' );
+		},
+	},
+} );
 </script>
 
 <style lang="scss">

@@ -20,51 +20,49 @@
 </template>
 
 <script lang="ts">
-import {
-	Prop,
-	Vue,
-} from 'vue-property-decorator';
-import Component from 'vue-class-component';
+import Vue from 'vue';
 
 /**
  * A component used to illustrate permission errors which happened when
  * checking the user's authorization to perform an action.
  */
-@Component
-export default class ErrorPermissionInfo extends Vue {
-	public infoIsExpanded = false;
+export default Vue.extend( {
+	name: 'ErrorPermissionInfo',
+	props: {
+		/**
+		 * Flag to decide if the component is to be shown in an expanded
+		 * state initially.
+		 */
+		expandedByDefault: { required: false, default: false, type: Boolean },
 
-	/**
-	 * Flag to decide if the component is to be shown in an expanded
-	 * state initially.
-	 */
-	@Prop( { required: false, default: false, type: Boolean } )
-	public expandedByDefault!: boolean;
+		/**
+		 * The mark-up to show in the header.
+		 * Careful, this value will not be HTML-escaped for you to allow
+		 * for formatting of the content.
+		 */
+		messageHeader: { type: String, required: true },
 
-	/**
-	 * The mark-up to show in the header.
-	 * Careful, this value will not be HTML-escaped for you to allow
-	 * for formatting of the content.
-	 */
-	@Prop( { required: true } )
-	private readonly messageHeader!: string;
-
-	/**
-	 * The mark-up to show in the body.
-	 * Careful, this value will not be HTML-escaped for you to allow
-	 * for formatting of the content.
-	 */
-	@Prop( { required: true } )
-	private readonly messageBody!: string;
-
-	public created(): void {
+		/**
+		 * The mark-up to show in the body.
+		 * Careful, this value will not be HTML-escaped for you to allow
+		 * for formatting of the content.
+		 */
+		messageBody: { type: String, required: true },
+	},
+	data() {
+		return {
+			infoIsExpanded: false,
+		};
+	},
+	created(): void {
 		this.infoIsExpanded = this.expandedByDefault;
-	}
-
-	private toggleInfo(): void {
-		this.infoIsExpanded = !this.infoIsExpanded;
-	}
-}
+	},
+	methods: {
+		toggleInfo(): void {
+			this.infoIsExpanded = !this.infoIsExpanded;
+		},
+	},
+} );
 </script>
 
 <style lang="scss">

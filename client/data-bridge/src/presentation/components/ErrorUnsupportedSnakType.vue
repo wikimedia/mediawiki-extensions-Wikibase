@@ -23,10 +23,9 @@
 </template>
 
 <script lang="ts">
-import { SnakType } from '@wmde/wikibase-datamodel-types';
-import { Prop } from 'vue-property-decorator';
-import Component, { mixins } from 'vue-class-component';
+import Vue, { PropType, VueConstructor } from 'vue';
 import StateMixin from '@/presentation/StateMixin';
+import { SnakType } from '@wmde/wikibase-datamodel-types';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import BailoutActions from '@/presentation/components/BailoutActions.vue';
 import TermLabel from '@/presentation/components/TermLabel.vue';
@@ -35,54 +34,55 @@ import TermLabel from '@/presentation/components/TermLabel.vue';
  * A component used to illustrate an error which happened when the user tried
  * to edit a statement with a snak type not supported by Bridge yet.
  */
-@Component( {
+export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+	mixins: [ StateMixin ],
+	name: 'ErrorUnsupportedSnakType',
 	components: {
 		IconMessageBox,
 		BailoutActions,
 	},
-} )
-export default class ErrorUnsupportedSnakType extends mixins( StateMixin ) {
-	public get propertyLabel(): HTMLElement {
-		return new TermLabel( {
-			propsData: {
-				term: this.rootModule.getters.targetLabel,
-			},
-		} ).$mount().$el as HTMLElement;
-	}
-
-	public get pageTitle(): string {
-		return this.rootModule.state.pageTitle;
-	}
-
-	public get originalHref(): string {
-		return this.rootModule.state.originalHref;
-	}
-
-	@Prop( { required: true } )
-	public snakType!: SnakType;
-
-	private get messageHeaderKey(): string {
-		switch ( this.snakType ) {
-			case 'somevalue':
-				return this.$messages.KEYS.SOMEVALUE_ERROR_HEAD;
-			case 'novalue':
-				return this.$messages.KEYS.NOVALUE_ERROR_HEAD;
-			default:
-				throw new Error( `No message for unsupported snak type ${this.snakType}` );
-		}
-	}
-
-	private get messageBodyKey(): string {
-		switch ( this.snakType ) {
-			case 'somevalue':
-				return this.$messages.KEYS.SOMEVALUE_ERROR_BODY;
-			case 'novalue':
-				return this.$messages.KEYS.NOVALUE_ERROR_BODY;
-			default:
-				throw new Error( `No message for unsupported snak type ${this.snakType}` );
-		}
-	}
-}
+	props: {
+		snakType: {
+			type: String as PropType<SnakType>,
+			required: true,
+		},
+	},
+	computed: {
+		propertyLabel(): HTMLElement {
+			return new TermLabel( {
+				propsData: {
+					term: this.rootModule.getters.targetLabel,
+				},
+			} ).$mount().$el as HTMLElement;
+		},
+		pageTitle(): string {
+			return this.rootModule.state.pageTitle;
+		},
+		originalHref(): string {
+			return this.rootModule.state.originalHref;
+		},
+		messageHeaderKey(): string {
+			switch ( this.snakType ) {
+				case 'somevalue':
+					return this.$messages.KEYS.SOMEVALUE_ERROR_HEAD;
+				case 'novalue':
+					return this.$messages.KEYS.NOVALUE_ERROR_HEAD;
+				default:
+					throw new Error( `No message for unsupported snak type ${this.snakType}` );
+			}
+		},
+		messageBodyKey(): string {
+			switch ( this.snakType ) {
+				case 'somevalue':
+					return this.$messages.KEYS.SOMEVALUE_ERROR_BODY;
+				case 'novalue':
+					return this.$messages.KEYS.NOVALUE_ERROR_BODY;
+				default:
+					throw new Error( `No message for unsupported snak type ${this.snakType}` );
+			}
+		},
+	},
+} );
 </script>
 
 <style lang="scss">
