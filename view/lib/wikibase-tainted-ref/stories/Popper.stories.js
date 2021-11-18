@@ -12,7 +12,10 @@ Vue.use( Message, { messageToTextFunction: ( key ) => {
 	return `(${key})`;
 } } );
 
-export default { title: 'Popper' };
+export default {
+	title: 'Popper',
+	component: Popper,
+};
 
 export function popperComponent() {
 	return {

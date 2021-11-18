@@ -8,7 +8,10 @@ Vue.use( Vuex );
 // eslint-disable-next-line no-console
 Vue.use( Track, { trackingFunction: console.log } );
 
-export default { title: 'TaintedIcon' };
+export default {
+	title: 'TaintedIcon',
+	component: TaintedIcon,
+};
 
 export function justTheIcon() {
 	return {
