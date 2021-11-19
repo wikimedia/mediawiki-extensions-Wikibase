@@ -3,6 +3,8 @@ import StringDataValue from '@/presentation/components/StringDataValue.vue';
 import { ResizingTextField } from '@wmde/wikibase-vuejs-components';
 import { shallowMount } from '@vue/test-utils';
 
+const defaultLabel = { value: 'dont assert me!', language: 'zxx' };
+
 describe( 'StringDataValue', () => {
 	describe( 'label and editfield', () => {
 		it( 'passes the label down', () => {
@@ -22,7 +24,7 @@ describe( 'StringDataValue', () => {
 			const dataValue = { type: 'string', value: 'Töfften' };
 			const wrapper = shallowMount( StringDataValue, {
 				propsData: {
-					label: '',
+					label: defaultLabel,
 					dataValue,
 					setDataValue: () => {},
 				},
@@ -36,7 +38,7 @@ describe( 'StringDataValue', () => {
 			const mockSetter = jest.fn();
 			const wrapper = shallowMount( StringDataValue, {
 				propsData: {
-					label: '',
+					label: defaultLabel,
 					dataValue,
 					setDataValue: mockSetter,
 				},
@@ -51,7 +53,7 @@ describe( 'StringDataValue', () => {
 		it( 'binds label and editField', () => {
 			const wrapper = shallowMount( StringDataValue, {
 				propsData: {
-					label: '',
+					label: defaultLabel,
 					dataValue: null,
 					setDataValue: () => {},
 				},
@@ -69,7 +71,7 @@ describe( 'StringDataValue', () => {
 		const placeholder = 'a placeholder',
 			wrapper = shallowMount( StringDataValue, {
 				propsData: {
-					label: '',
+					label: defaultLabel,
 					dataValue: null,
 					placeholder,
 					setDataValue: () => {},
@@ -85,7 +87,7 @@ describe( 'StringDataValue', () => {
 			const maxlength = 12345;
 			const wrapper = shallowMount( StringDataValue, {
 				propsData: {
-					label: null,
+					label: defaultLabel,
 					dataValue: null,
 					setDataValue: () => {},
 					maxlength,
@@ -100,7 +102,7 @@ describe( 'StringDataValue', () => {
 		it( 'is unset by default', () => {
 			const wrapper = shallowMount( StringDataValue, {
 				propsData: {
-					label: null,
+					label: defaultLabel,
 					dataValue: null,
 					setDataValue: () => {},
 				},

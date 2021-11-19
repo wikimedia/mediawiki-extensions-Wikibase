@@ -22,32 +22,32 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Component from 'vue-class-component';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 
-@Component( {
+export default Vue.extend( {
+	name: 'License',
 	components: { EventEmittingButton },
-} )
-export default class License extends Vue {
-	public get publishOrSave(): string {
-		return this.$bridgeConfig.usePublish ?
-			this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
-	}
-
-	public get getBodyMessage(): string {
-		return this.$messages.get(
-			this.$messages.KEYS.LICENSE_BODY,
-			this.publishOrSave,
-			this.$bridgeConfig.termsOfUseUrl ?? '',
-			this.$bridgeConfig.dataRightsUrl ?? '',
-			this.$bridgeConfig.dataRightsText ?? '',
-		);
-	}
-
-	public handleCloseButtonClick( event: UIEvent ): void {
-		this.$emit( 'close', event );
-	}
-}
+	computed: {
+		publishOrSave(): string {
+			return this.$bridgeConfig.usePublish ?
+				this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
+		},
+		getBodyMessage(): string {
+			return this.$messages.get(
+				this.$messages.KEYS.LICENSE_BODY,
+				this.publishOrSave,
+				this.$bridgeConfig.termsOfUseUrl ?? '',
+				this.$bridgeConfig.dataRightsUrl ?? '',
+				this.$bridgeConfig.dataRightsText ?? '',
+			);
+		},
+	},
+	methods: {
+		handleCloseButtonClick( event: UIEvent ): void {
+			this.$emit( 'close', event );
+		},
+	},
+} );
 </script>
 
 <style lang="scss">

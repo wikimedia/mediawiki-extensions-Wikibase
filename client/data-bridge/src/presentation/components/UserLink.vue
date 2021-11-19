@@ -13,8 +13,7 @@
 
 <script lang="ts">
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
-import Component from 'vue-class-component';
-import { Prop, Vue } from 'vue-property-decorator';
+import Vue, { PropType } from 'vue';
 
 /**
  * A component which renders a link to a user page on a certain wiki.
@@ -25,26 +24,32 @@ import { Prop, Vue } from 'vue-property-decorator';
  * accessing features from ClientRouterPlugin or RepoRouterPlugin
  * from here.
  */
-@Component
-export default class UserLink extends Vue {
-	/**
-	 * The user ID, or 0 if the user has no account on this wiki
-	 * (can happen for certain cross-wiki administrative actions);
-	 * in that case, the link is omitted, and only the name is shown.
-	 */
-	@Prop( { required: true } )
-	private readonly userId!: number;
-
-	/**
-	 * The user name (without User: prefix).
-	 */
-	@Prop( { required: true } )
-	private readonly userName!: string;
-
-	/**
-	 * A router for the wiki to which the link should point.
-	 */
-	@Prop( { required: true } )
-	private readonly router!: MediaWikiRouter;
-}
+export default Vue.extend( {
+	name: 'UserLink',
+	props: {
+		/**
+		 * The user ID, or 0 if the user has no account on this wiki
+		 * (can happen for certain cross-wiki administrative actions);
+		 * in that case, the link is omitted, and only the name is shown.
+		 */
+		userId: {
+			type: Number,
+			required: true,
+		},
+		/**
+		 * The user name (without User: prefix).
+		 */
+		userName: {
+			type: String,
+			required: true,
+		},
+		/**
+		 * A router for the wiki to which the link should point.
+		 */
+		router: {
+			type: Object as PropType<MediaWikiRouter>,
+			required: true,
+		},
+	},
+} );
 </script>

@@ -23,32 +23,35 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component';
-import { Prop, Vue } from 'vue-property-decorator';
+import Vue from 'vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 
 /**
  * A component to thank the user for their edit and present them with
  * the option to continue editing (e.g. references) on the repository.
  */
-@Component( {
+export default Vue.extend( {
+	name: 'ThankYou',
 	components: { EventEmittingButton },
-} )
-export default class ThankYou extends Vue {
-	/**
-	 * The link to continue editing on the repository if desired
-	 */
-	@Prop( { required: true } )
-	private readonly repoLink!: string;
-
-	private click(): void {
+	props: {
 		/**
-		 * An event fired when the user clicks the CTA to edit references on the repository
-		 * @type {Event}
+		 * The link to continue editing on the repository if desired
 		 */
-		this.$emit( 'opened-reference-edit-on-repo' );
-	}
-}
+		repoLink: {
+			type: String,
+			required: true,
+		},
+	},
+	methods: {
+		click(): void {
+			/**
+			 * An event fired when the user clicks the CTA to edit references on the repository
+			 * @type {Event}
+			 */
+			this.$emit( 'opened-reference-edit-on-repo' );
+		},
+	},
+} );
 </script>
 
 <style lang="scss">

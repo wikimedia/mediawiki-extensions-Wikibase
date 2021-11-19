@@ -27,39 +27,42 @@
 <script lang="ts">
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import Vue from 'vue';
-import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
 
 /**
  * A component to present the user with alternative suggestions
  * if they cannot use the Data Bridge to edit a value for some reason.
  * (That reason is typically displayed above this component in an IconMessageBox.)
  */
-@Component( {
+export default Vue.extend( {
+	name: 'BailoutActions',
 	components: { EventEmittingButton },
-} )
-export default class BailoutActions extends Vue {
-	/**
-	 * The original URL of the bridge edit link,
-	 * used for the “edit on the repo” button.
-	 */
-	@Prop( { required: true, type: String } )
-	public originalHref!: string;
-
-	/**
-	 * The title of the client page with the bridge edit link,
-	 * used for the “article editor” link.
-	 */
-	@Prop( { required: true, type: String } )
-	public pageTitle!: string;
-
-	/**
-	 * The full URL of the “article editor” link.
-	 */
-	public get editArticleUrl(): string {
-		return this.$clientRouter.getPageUrl( this.pageTitle, { action: 'edit' } );
-	}
-}
+	props: {
+		/**
+		 * The original URL of the bridge edit link,
+		 * used for the “edit on the repo” button.
+		 */
+		originalHref: {
+			type: String,
+			required: true,
+		},
+		/**
+		 * The title of the client page with the bridge edit link,
+		 * used for the “article editor” link.
+		 */
+		pageTitle: {
+			required: true,
+			type: String,
+		},
+	},
+	computed: {
+		/**
+		 * The full URL of the “article editor” link.
+		 */
+		editArticleUrl(): string {
+			return this.$clientRouter.getPageUrl( this.pageTitle, { action: 'edit' } );
+		},
+	},
+} );
 </script>
 
 <style lang="scss">
