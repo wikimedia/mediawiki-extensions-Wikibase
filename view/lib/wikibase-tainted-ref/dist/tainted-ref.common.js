@@ -2545,14 +2545,34 @@ function createStore(metricTracker) {
     getters: getters
   });
 }
+// CONCATENATED MODULE: ./src/vue-plugins/Message.ts
+function Message(vueConstructor, options) {
+  vueConstructor.prototype.$message = function (key) {
+    return options.messageToTextFunction(key);
+  };
+}
+// CONCATENATED MODULE: ./src/vue-plugins/Track.ts
+function Track(vueConstructor, options) {
+  vueConstructor.prototype.$track = function (topic, data) {
+    options.trackingFunction(topic, data);
+  };
+}
 // CONCATENATED MODULE: ./src/main.ts
 
 
 
 
 
-function launch(hookHandler, helpLink, trackFunction) {
-  var store = createStore(trackFunction);
+
+
+function launch(hookHandler, helpLink, messageToTextFunction, trackingFunction) {
+  external_vue_default.a.use(Message, {
+    messageToTextFunction: messageToTextFunction
+  });
+  external_vue_default.a.use(Track, {
+    trackingFunction: trackingFunction
+  });
+  var store = createStore(trackingFunction);
   var guids = [];
   document.querySelectorAll('.wikibase-statementview').forEach(function (element) {
     var id = element.getAttribute('id');

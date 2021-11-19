@@ -1,3 +1,4 @@
+import { TrackFunction } from '@/@types/TrackingOptions';
 import App from '@/presentation/App.vue';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Vuex, { Store } from 'vuex';
@@ -5,7 +6,6 @@ import Application from '@/store/Application';
 import { createStore } from '@/store';
 import TaintedIcon from '@/presentation/components/TaintedIcon.vue';
 import { STORE_INIT, STATEMENT_TAINTED_STATE_TAINT, START_EDIT } from '@/store/actionTypes';
-import { TrackFunction } from '@/store/TrackFunction';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );

@@ -1,5 +1,5 @@
+import { TrackFunction } from '@/@types/TrackingOptions';
 import { createStore } from '@/store';
-import { TrackFunction } from '@/store/TrackFunction';
 
 describe( 'store/createStore ', () => {
 	it( 'creates the store', () => {

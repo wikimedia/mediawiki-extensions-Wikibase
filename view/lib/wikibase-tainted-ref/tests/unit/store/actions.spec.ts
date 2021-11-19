@@ -1,3 +1,4 @@
+import { TrackFunction } from '@/@types/TrackingOptions';
 import {
 	SET_ALL_UNTAINTED,
 	SET_ALL_POPPERS_HIDDEN,
@@ -22,7 +23,6 @@ import {
 import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import { ActionContext, ActionTree } from 'vuex';
 import Application from '@/store/Application';
-import { TrackFunction } from '@/store/TrackFunction';
 import { GET_STATEMENT_TAINTED_STATE } from '@/store/getterTypes';
 
 function getActionTree( mockTrackFunction: TrackFunction ): ActionTree<Application, Application> {

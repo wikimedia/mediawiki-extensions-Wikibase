@@ -1,3 +1,4 @@
+import { TrackFunction } from '@/@types/TrackingOptions';
 import {
 	POPPER_HIDE, POPPER_SHOW,
 	STORE_INIT,
@@ -19,7 +20,6 @@ import {
 	SET_STATEMENT_EDIT_TRUE,
 	SET_STATEMENT_EDIT_FALSE,
 } from '@/store/mutationTypes';
-import { TrackFunction } from '@/store/TrackFunction';
 import { GET_STATEMENT_TAINTED_STATE } from '@/store/getterTypes';
 
 export default function actions( metricTracker: TrackFunction ): ActionTree<Application, Application> {
