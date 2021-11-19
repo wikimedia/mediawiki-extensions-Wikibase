@@ -4,7 +4,7 @@
 			<span>
 				<TaintedIcon :guid="id" />
 				<div class="wb-tr-float-wrapper" v-if="popperIsOpened">
-					<TaintedPopper :guid="id" :title="popperTitle" />
+					<TaintedPopper :guid="id" />
 				</div>
 			</span>
 		</div>
@@ -12,47 +12,29 @@
 </template>
 
 <script lang="ts">
-import {
-	Component,
-	Vue,
-} from 'vue-property-decorator';
 import TaintedIcon from '@/presentation/components/TaintedIcon.vue';
-import { Getter } from 'vuex-class';
 import TaintedPopper from '@/presentation/components/TaintedPopper.vue';
 import { GET_EDIT_STATE, GET_POPPER_STATE, GET_STATEMENT_TAINTED_STATE } from '@/store/getterTypes';
+import Vue from 'vue';
 
-@Component( {
+export default Vue.extend( {
+	name: 'App',
 	components: {
 		TaintedIcon,
 		TaintedPopper,
 	},
-} )
-export default class App extends Vue {
-	@Getter( GET_STATEMENT_TAINTED_STATE )
-	public statementsTaintedStateFunction!: Function;
-
-	@Getter( GET_POPPER_STATE )
-	public popperStateFunction!: Function;
-
-	@Getter( GET_EDIT_STATE )
-	public editStateFunction!: Function;
-
-	public get isTainted(): boolean {
-		return this.statementsTaintedStateFunction( this.$data.id );
-	}
-
-	public get popperIsOpened(): boolean {
-		return this.popperStateFunction( this.$data.id );
-	}
-
-	public get editState(): boolean {
-		return this.editStateFunction( this.$data.id );
-	}
-	public get popperTitle(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-title' );
-	}
-
-}
+	computed: {
+		isTainted(): boolean {
+			return this.$store.getters[ GET_STATEMENT_TAINTED_STATE ]( this.$data.id );
+		},
+		popperIsOpened(): boolean {
+			return this.$store.getters[ GET_POPPER_STATE ]( this.$data.id );
+		},
+		editState(): boolean {
+			return this.$store.getters[ GET_EDIT_STATE ]( this.$data.id );
+		},
+	},
+} );
 </script>
 
 <style lang="scss">

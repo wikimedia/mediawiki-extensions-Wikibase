@@ -23,38 +23,41 @@
 
 <script lang="ts">
 import { POPPER_HIDE } from '@/store/actionTypes';
-import Component from 'vue-class-component';
 import Vue from 'vue';
 
-@Component( {
+export default Vue.extend( {
+	name: 'Popper',
 	props: {
-		guid: String,
-		title: String,
+		guid: {
+			type: String,
+			default: '',
+		},
+		title: {
+			type: String,
+			default: '',
+		},
 	},
-} )
-export default class Popper extends Vue {
-	public mounted(): void {
-		( this.$el as HTMLElement ).focus();
-	}
+	methods: {
+		onFocusout( event: FocusEvent ): void {
+			const relatedTarget = event.relatedTarget;
 
-	public onFocusout( event: FocusEvent ): void {
-		const relatedTarget = event.relatedTarget;
-
-		if ( !relatedTarget || !this.$el.contains( ( relatedTarget as Node ) ) ) {
+			if ( !relatedTarget || !this.$el.contains( ( relatedTarget as Node ) ) ) {
+				this.$store.dispatch( POPPER_HIDE, this.$props.guid );
+			}
+		},
+		closeClick( event: MouseEvent ): void {
+			event.preventDefault();
 			this.$store.dispatch( POPPER_HIDE, this.$props.guid );
-		}
-	}
-
-	public closeClick( event: MouseEvent ): void {
-		event.preventDefault();
-		this.$store.dispatch( POPPER_HIDE, this.$props.guid );
-	}
-
-	public closeKeyPress( event: KeyboardEvent ): void {
-		event.preventDefault();
-		this.$store.dispatch( POPPER_HIDE, this.$props.guid );
-	}
-}
+		},
+		closeKeyPress( event: KeyboardEvent ): void {
+			event.preventDefault();
+			this.$store.dispatch( POPPER_HIDE, this.$props.guid );
+		},
+		mounted(): void {
+			( this.$el as HTMLElement ).focus();
+		},
+	},
+} );
 </script>
 
 <style lang="scss">

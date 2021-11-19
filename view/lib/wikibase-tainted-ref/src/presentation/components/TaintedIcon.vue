@@ -12,32 +12,33 @@
 
 <script lang="ts">
 import { POPPER_SHOW } from '@/store/actionTypes';
-import Component from 'vue-class-component';
-import { Getter } from 'vuex-class';
 import Vue from 'vue';
 import { GET_POPPER_STATE } from '@/store/getterTypes';
 
-@Component( {
-	props: [ 'guid' ],
-} )
-export default class TaintedIcon extends Vue {
-	@Getter( GET_POPPER_STATE )
-	public popperStateFunction!: Function;
-
-	public get iconTitle(): string {
-		return this.$message( 'wikibase-tainted-ref-tainted-icon-title' );
-	}
-
-	public onClick( event: MouseEvent ): void {
-		event.preventDefault();
-		this.$track( 'counter.wikibase.view.tainted-ref.taintedIconClick', 1 );
-		this.$store.dispatch( POPPER_SHOW, this.$props.guid );
-	}
-
-	public get popperIsOpened(): boolean {
-		return this.popperStateFunction( this.$props.guid );
-	}
-}
+export default Vue.extend( {
+	name: 'TaintedIcon',
+	props: {
+		guid: {
+			type: String,
+			default: '',
+		},
+	},
+	computed: {
+		iconTitle(): string {
+			return this.$message( 'wikibase-tainted-ref-tainted-icon-title' );
+		},
+		popperIsOpened(): boolean {
+			return this.$store.getters[ GET_POPPER_STATE ]( this.$props.guid );
+		},
+	},
+	methods: {
+		onClick( event: MouseEvent ): void {
+			event.preventDefault();
+			this.$track( 'counter.wikibase.view.tainted-ref.taintedIconClick', 1 );
+			this.$store.dispatch( POPPER_SHOW, this.$props.guid );
+		},
+	},
+} );
 </script>
 
 <style lang="scss">

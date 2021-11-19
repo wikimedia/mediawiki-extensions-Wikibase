@@ -23,56 +23,51 @@
 
 <script lang="ts">
 import { STATEMENT_TAINTED_STATE_UNTAINT } from '@/store/actionTypes';
-import { Getter } from 'vuex-class';
-import {
-	Component,
-	Vue,
-} from 'vue-property-decorator';
 import Popper from '@/presentation/components/Popper.vue';
 import { GET_HELP_LINK } from '@/store/getterTypes';
+import Vue from 'vue';
 
-@Component( {
+export default Vue.extend( {
+	name: 'TaintedPopper',
 	props: {
-		guid: String,
-		title: String,
+		guid: {
+			type: String,
+			default: '',
+		},
 	},
 	components: {
 		Popper,
 	},
-} )
-export default class TaintedPopper extends Vue {
-	public get popperTitle(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-title' );
-	}
-
-	public get popperHelpLinkTitle(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-help-link-title' );
-	}
-
-	public get popperHelpLinkText(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-help-link-text' );
-	}
-
-	public helpClick(): void {
-		this.$track( 'counter.wikibase.view.tainted-ref.helpLinkClick', 1 );
-	}
-
-	@Getter( GET_HELP_LINK )
-	public helpLink!: string;
-
-	public get popperText(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-text' );
-	}
-
-	public get removeWarningText(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-remove-warning' );
-	}
-
-	public removeWarningClick( _event: MouseEvent ): void {
-		this.$track( 'counter.wikibase.view.tainted-ref.removeWarningClick', 1 );
-		this.$store.dispatch( STATEMENT_TAINTED_STATE_UNTAINT, this.$props.guid );
-	}
-}
+	computed: {
+		popperTitle(): string {
+			return this.$message( 'wikibase-tainted-ref-popper-title' );
+		},
+		popperHelpLinkTitle(): string {
+			return this.$message( 'wikibase-tainted-ref-popper-help-link-title' );
+		},
+		popperHelpLinkText(): string {
+			return this.$message( 'wikibase-tainted-ref-popper-help-link-text' );
+		},
+		popperText(): string {
+			return this.$message( 'wikibase-tainted-ref-popper-text' );
+		},
+		removeWarningText(): string {
+			return this.$message( 'wikibase-tainted-ref-popper-remove-warning' );
+		},
+		helpLink(): string {
+			return this.$store.getters[ GET_HELP_LINK ];
+		},
+	},
+	methods: {
+		helpClick(): void {
+			this.$track( 'counter.wikibase.view.tainted-ref.helpLinkClick', 1 );
+		},
+		removeWarningClick( _event: MouseEvent ): void {
+			this.$track( 'counter.wikibase.view.tainted-ref.removeWarningClick', 1 );
+			this.$store.dispatch( STATEMENT_TAINTED_STATE_UNTAINT, this.$props.guid );
+		},
+	},
+} );
 </script>
 
 <style lang="scss">
