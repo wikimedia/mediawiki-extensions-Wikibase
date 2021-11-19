@@ -32,8 +32,6 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
 
 const validTypes = [
 	'primaryProgressive',
@@ -60,115 +58,123 @@ const validSizes = [
 	'XL',
 ];
 
-@Component
-export default class EventEmittingButton extends Vue {
-	@Prop( {
-		required: true,
-		validator: ( type ) => validTypes.indexOf( type ) !== -1,
-	} )
-	public type!: string;
+export default Vue.extend( {
+	name: 'EventEmittingButton',
+	props: {
+		type: {
+			type: String,
+			required: true,
+			validator: ( type ) => validTypes.indexOf( type ) !== -1,
+		},
+		size: {
+			type: String,
+			required: true,
+			validator: ( size ) => validSizes.includes( size ),
+		},
+		message: {
+			required: true,
+			type: String,
+		},
+		href: {
+			type: String,
+			required: false,
+			default: null,
+		},
+		preventDefault: {
+			type: Boolean,
+			required: false,
+			default: true,
+		},
+		disabled: {
+			type: Boolean,
+			required: false,
+			default: false,
+		},
+		squary: {
+			type: Boolean,
+			required: false,
+			default: false,
+		},
 
-	@Prop( {
-		required: true,
-		validator: ( size ) => validSizes.includes( size ),
-	} )
-	public size!: string;
+		/**
+		 * Whether this link should open in a new tab or not.
+		 * Only effective if `href` is set.
+		 * `preventDefault` should usually be set to `false` as well.
+		 */
+		newTab: {
+			type: Boolean,
+			required: false,
+			default: false,
+		},
+	},
+	data() {
+		return {
+			isPressed: false,
+		};
+	},
+	computed: {
+		isIconOnly(): boolean {
+			return imageOnlyTypes.includes( this.type );
+		},
+		isFrameless(): boolean {
+			return framelessTypes.includes( this.type );
+		},
+		opensInNewTab(): boolean {
+			return this.href !== null && this.newTab;
+		},
+		tabindex(): number | null {
+			if ( this.disabled ) {
+				return -1;
+			}
 
-	@Prop( { required: true, type: String } )
-	public message!: string;
+			if ( this.href ) {
+				return null;
+			}
 
-	@Prop( { required: false, default: null, type: String } )
-	public href!: string|null;
-
-	@Prop( { required: false, default: true, type: Boolean } )
-	public preventDefault!: boolean;
-
-	@Prop( { required: false, default: false, type: Boolean } )
-	public disabled!: boolean;
-
-	@Prop( { required: false, default: false, type: Boolean } )
-	public squary!: boolean;
-
-	/**
-	 * Whether this link should open in a new tab or not.
-	 * Only effective if `href` is set.
-	 * `preventDefault` should usually be set to `false` as well.
-	 */
-	@Prop( { required: false, default: false, type: Boolean } )
-	public newTab!: boolean;
-
-	public isPressed = false;
-
-	public get isIconOnly(): boolean {
-		return imageOnlyTypes.includes( this.type );
-	}
-
-	public get isFrameless(): boolean {
-		return framelessTypes.includes( this.type );
-	}
-
-	public get opensInNewTab(): boolean {
-		return this.href !== null && this.newTab;
-	}
-
-	public handleSpacePress( event: UIEvent ): void {
-		if ( !this.simulateSpaceOnButton() ) {
-			return;
-		}
-		this.preventScrollingDown( event );
-		this.isPressed = true;
-		this.click( event );
-	}
-
-	public handleEnterPress( event: UIEvent ): void {
-		this.isPressed = true;
-		if ( this.thereIsNoSeparateClickEvent() ) {
+			return 0;
+		},
+	},
+	methods: {
+		handleSpacePress( event: UIEvent ): void {
+			if ( !this.simulateSpaceOnButton() ) {
+				return;
+			}
+			this.preventScrollingDown( event );
+			this.isPressed = true;
 			this.click( event );
-		}
-	}
-
-	public unpress(): void {
-		this.isPressed = false;
-	}
-
-	public click( event: UIEvent ): void {
-		if ( this.preventDefault ) {
-			this.preventOpeningLink( event );
-		}
-		if ( this.disabled ) {
-			return;
-		}
-		this.$emit( 'click', event );
-	}
-
-	public get tabindex(): number|null {
-		if ( this.disabled ) {
-			return -1;
-		}
-
-		if ( this.href ) {
-			return null;
-		}
-
-		return 0;
-	}
-
-	private preventOpeningLink( event: UIEvent ): void {
-		event.preventDefault();
-	}
-
-	private preventScrollingDown( event: UIEvent ): void {
-		event.preventDefault();
-	}
-
-	private thereIsNoSeparateClickEvent(): boolean {
-		return this.href === null;
-	}
-
-	private simulateSpaceOnButton(): boolean {
-		return this.href === null;
-	}
-}
+		},
+		handleEnterPress( event: UIEvent ): void {
+			this.isPressed = true;
+			if ( this.thereIsNoSeparateClickEvent() ) {
+				this.click( event );
+			}
+		},
+		unpress(): void {
+			this.isPressed = false;
+		},
+		click( event: UIEvent ): void {
+			if ( this.preventDefault ) {
+				this.preventOpeningLink( event );
+			}
+			if ( this.disabled ) {
+				return;
+			}
+			this.$emit( 'click', event );
+		},
+		preventOpeningLink( event: UIEvent ): void {
+			event.preventDefault();
+		},
+		preventScrollingDown( event: UIEvent ): void {
+			event.preventDefault();
+		},
+		thereIsNoSeparateClickEvent(): boolean {
+			return this.href === null;
+		},
+		simulateSpaceOnButton(): boolean {
+			return this.href === null;
+		},
+	},
+} );
 </script>
 <style lang="scss">
 .wb-ui-event-emitting-button {
