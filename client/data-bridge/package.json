@@ -34,8 +34,6 @@
     "serialize-error": "^7.0.1",
     "uuid": "^8.3.2",
     "vue": "2.6.11",
-    "vue-class-component": "^7.2.6",
-    "vue-property-decorator": "^8.5.1",
     "vuex-smart-module": "^0.3.4"
   },
   "devDependencies": {
