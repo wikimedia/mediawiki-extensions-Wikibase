@@ -49,25 +49,23 @@ class CachingPropertyOrderProvider implements PropertyOrderProvider {
 	 * @return int[]|null
 	 */
 	public function getPropertyOrder() {
-		$cacheKey = $this->cache->makeKey( 'wikibase-PropertyOrderProvider' );
-
-		// check if the list is already in the cache
-		$propertyOrder = $this->cache->get( $cacheKey );
-		if ( $propertyOrder !== false ) {
-			return $propertyOrder;
+		$cached = $this->cache->getWithSetCallback(
+			$this->cache->makeKey( 'wikibase-PropertyOrderProvider' ),
+			$this->cacheDuration,
+			function () {
+				$propertyOrder = $this->propertyOrderProvider->getPropertyOrder();
+				if ( $propertyOrder !== null ) {
+					return $propertyOrder;
+				} else {
+					return false;
+				}
+			}
+		);
+		if ( $cached !== false ) {
+			return $cached;
+		} else {
+			return null;
 		}
-
-		// if not, add it to the cache
-		$propertyOrder = $this->propertyOrderProvider->getPropertyOrder();
-
-		if ( $propertyOrder !== null ) {
-			$this->cache->set(
-				$cacheKey,
-				$propertyOrder,
-				$this->cacheDuration
-			);
-		}
-		return $propertyOrder;
 	}
 
 }
