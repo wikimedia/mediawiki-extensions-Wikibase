@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IndeterminateProgressBar renders correctly 1`] = `
+<div
+  class="wb-ui-indeterminate-progress-bar__box"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="wb-ui-indeterminate-progress-bar__bar"
+  />
+</div>
+`;

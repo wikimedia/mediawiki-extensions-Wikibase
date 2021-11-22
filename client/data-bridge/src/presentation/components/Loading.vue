@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { IndeterminateProgressBar } from '@wmde/wikibase-vuejs-components';
+import IndeterminateProgressBar from '@/presentation/components/IndeterminateProgressBar.vue';
 
 /**
  * A component which gets shown to illustrate that an operation is

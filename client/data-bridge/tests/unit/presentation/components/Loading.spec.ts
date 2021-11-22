@@ -1,6 +1,6 @@
 import Loading from '@/presentation/components/Loading.vue';
 import { shallowMount } from '@vue/test-utils';
-import { IndeterminateProgressBar } from '@wmde/wikibase-vuejs-components';
+import IndeterminateProgressBar from '@/presentation/components/IndeterminateProgressBar.vue';
 
 describe( 'Loading', () => {
 	beforeEach( () => {
