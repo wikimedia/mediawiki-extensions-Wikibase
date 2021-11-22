@@ -1,5 +1,5 @@
-interface TrackingOptions {
-	trackingFunction( topic: string, data: object|number|string ): void;
-}
+export type TrackFunction = ( topic: string, data?: object|number|string ) => void;
 
-export default TrackingOptions;
+export default interface TrackingOptions {
+	trackingFunction: TrackFunction;
+}

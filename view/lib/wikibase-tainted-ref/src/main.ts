@@ -1,16 +1,22 @@
+import { MessageToTextFunction } from '@/@types/MessageOptions';
+import { TrackFunction } from '@/@types/TrackingOptions';
 import App from '@/presentation/App.vue';
 import { createStore } from '@/store';
 import { STORE_INIT, HELP_LINK_SET } from '@/store/actionTypes';
 import { HookHandler } from '@/HookHandler';
-import { TrackFunction } from '@/store/TrackFunction';
+import Message from '@/vue-plugins/Message';
+import Track from '@/vue-plugins/Track';
 import Vue, { CreateElement } from 'vue';
 
 export function launch(
 	hookHandler: HookHandler,
 	helpLink: string,
-	trackFunction: TrackFunction,
+	messageToTextFunction: MessageToTextFunction,
+	trackingFunction: TrackFunction,
 ): void {
-	const store = createStore( trackFunction );
+	Vue.use( Message, { messageToTextFunction } );
+	Vue.use( Track, { trackingFunction } );
+	const store = createStore( trackingFunction );
 	const guids: string[] = [];
 	document.querySelectorAll( '.wikibase-statementview' ).forEach( ( element ) => {
 		const id = element.getAttribute( 'id' );

@@ -1,5 +1,5 @@
-interface MessageOptions {
-	messageToTextFunction( key: string ): string;
-}
+export type MessageToTextFunction = ( key: string ) => string;
 
-export default MessageOptions;
+export default interface MessageOptions {
+	messageToTextFunction: MessageToTextFunction;
+}
