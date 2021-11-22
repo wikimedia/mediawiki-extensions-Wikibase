@@ -9,12 +9,7 @@
 </template>
 
 <script lang="ts">
-import {
-	Prop,
-	Vue,
-	Watch,
-} from 'vue-property-decorator';
-import Component from 'vue-class-component';
+import Vue from 'vue';
 import { IndeterminateProgressBar } from '@wmde/wikibase-vuejs-components';
 
 /**
@@ -53,105 +48,120 @@ import { IndeterminateProgressBar } from '@wmde/wikibase-vuejs-components';
  *   Animation                                        |-------------------|<- ready
  * ```
  */
-@Component( {
+export default Vue.extend( {
+	name: 'Loading',
 	components: {
 		IndeterminateProgressBar,
 	},
-} )
-export default class Loading extends Vue {
-	/**
-	 * The state of initializing.
-	 * The using component should influence this based on the progress of loading.
-	 */
-	@Prop( { required: true } )
-	private readonly isInitializing!: boolean;
+	props: {
+		/**
+		 * The state of initializing.
+		 * The using component should influence this based on the progress of loading.
+		 */
+		isInitializing: {
+			type: Boolean,
+			required: true,
+		},
 
-	/**
-	 * The state of saving, activated after the "Save changes" button has been clicked.
-	 * The using component should influence this based on the progress of saving.
-	 */
-	@Prop( { required: true } )
-	private readonly isSaving!: boolean;
+		/**
+		 * The state of saving, activated after the "Save changes" button has been clicked.
+		 * The using component should influence this based on the progress of saving.
+		 */
+		isSaving: {
+			type: Boolean,
+			required: true,
+		},
 
-	/**
-	 * Number of *milliseconds* before the initializing or saving is considered "slow"
-	 * and is illustrated accordingly.
-	 */
-	@Prop( { default: 1000 } )
-	private readonly TIME_UNTIL_CONSIDERED_SLOW!: number;
+		/* eslint-disable vue/prop-name-casing */
+		/**
+		 * Number of *milliseconds* before the initializing or saving is considered "slow"
+		 * and is illustrated accordingly.
+		 */
+		TIME_UNTIL_CONSIDERED_SLOW: {
+			type: Number,
+			default: 1000,
+		},
+		/**
+		 * Number of *milliseconds* to show the loading animation at least for,
+		 * to avoid the impression of "flickering".
+		 */
+		MINIMUM_TIME_OF_PROGRESS_ANIMATION: {
+			type: Number,
+			default: 500,
+		},
+		/* eslint-enable vue/prop-name-casing */
+	},
+	watch: {
+		isInitializing: {
+			immediate: true,
+			handler( isInitializing: boolean, _oldStatus: boolean ): void {
+				if ( isInitializing ) {
+					this.showLoading();
+				} else {
+					this.tendTowardsReady();
+				}
+			},
+		},
+		isSaving: {
+			immediate: true,
+			handler( isSaving: boolean, _oldStatus: boolean ): void {
+				if ( isSaving ) {
+					this.showLoading();
+				} else {
+					this.tendTowardsReady();
+				}
+			},
+		},
+	},
+	data() {
+		return {
+			/**
+			 * This flag, which determines the rendering of the default slot,
+			 * plays a role only in the case of Initializing, where we do not
+			 * have the content which needs to be rendered.
+			 * In the case of Saving we want the content to be visible, just not clickable.
+			 */
+			ready: !this.isInitializing,
+			loadingIsSlow: false,
+			trackSlowness: null as ReturnType<typeof setTimeout> | null,
+			trackAnimation: null as ReturnType<typeof setTimeout> | null,
+			animatedEnough: false,
+		};
+	},
+	methods: {
+		showLoading(): void {
+			this.ready = !this.isInitializing;
 
-	/**
-	 * Number of *milliseconds* to show the loading animation at least for,
-	 * to avoid the impression of "flickering".
-	 */
-	@Prop( { default: 500 } )
-	private readonly MINIMUM_TIME_OF_PROGRESS_ANIMATION!: number;
+			this.trackSlowness = setTimeout( () => {
+				this.loadingIsSlow = true;
+				this.trackAnimation = setTimeout( () => {
+					this.animatedEnough = true;
+					this.tendTowardsReady();
+				}, this.MINIMUM_TIME_OF_PROGRESS_ANIMATION );
+			}, this.TIME_UNTIL_CONSIDERED_SLOW );
+		},
+		tendTowardsReady(): void {
+			if ( ( this.isInitializing || this.isSaving ) || this.loadingIsSlow && !this.animatedEnough ) {
+				return;
+			}
 
-	@Watch( 'isInitializing', { immediate: true } )
-	private onInitStatusChange( isInitializing: boolean, _oldStatus: boolean ): void {
-		if ( isInitializing ) {
-			this.showLoading();
-		} else {
-			this.tendTowardsReady();
-		}
-	}
-
-	@Watch( 'isSaving', { immediate: true } )
-	private onSavingStatusChange( isSaving: boolean, _oldStatus: boolean ): void {
-		if ( isSaving ) {
-			this.showLoading();
-		} else {
-			this.tendTowardsReady();
-		}
-	}
-
-	/**
-	 * This flag, which determines the rendering of the default slot,
-	 * plays a role only in the case of Initializing, where we do not
-	 * have the content which needs to be rendered.
-	 * In the case of Saving we want the content to be visible, just not clickable.
-	 */
-	public ready = !this.isInitializing;
-	public loadingIsSlow = false;
-
-	private trackSlowness?: ReturnType<typeof setTimeout>;
-	private trackAnimation?: ReturnType<typeof setTimeout>;
-	private animatedEnough = false;
-
-	private showLoading(): void {
-		this.ready = !this.isInitializing;
-
-		this.trackSlowness = setTimeout( () => {
-			this.loadingIsSlow = true;
-			this.trackAnimation = setTimeout( () => {
-				this.animatedEnough = true;
-				this.tendTowardsReady();
-			}, this.MINIMUM_TIME_OF_PROGRESS_ANIMATION );
-		}, this.TIME_UNTIL_CONSIDERED_SLOW );
-	}
-
-	private tendTowardsReady(): void {
-		if ( ( this.isInitializing || this.isSaving ) || this.loadingIsSlow && !this.animatedEnough ) {
-			return;
-		}
-
-		this.ready = true;
-		this.resetSlownessTracking();
-	}
-
-	private resetSlownessTracking(): void {
-		this.loadingIsSlow = false;
-		this.animatedEnough = false;
-		if ( this.trackSlowness ) {
-			clearTimeout( this.trackSlowness );
-			this.trackSlowness = undefined;
-		}
-		if ( this.trackAnimation ) {
-			clearTimeout( this.trackAnimation );
-			this.trackAnimation = undefined;
-		}
-	}
-}
+			this.ready = true;
+			this.resetSlownessTracking();
+		},
+		resetSlownessTracking(): void {
+			this.loadingIsSlow = false;
+			this.animatedEnough = false;
+			if ( this.trackSlowness ) {
+				clearTimeout( this.trackSlowness );
+				this.trackSlowness = null;
+			}
+			if ( this.trackAnimation ) {
+				clearTimeout( this.trackAnimation );
+				this.trackAnimation = null;
+			}
+		},
+	},
+} );
 </script>
 <style lang="scss">
 .wb-db-load {
