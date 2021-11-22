@@ -403,28 +403,65 @@ describe( 'ErrorPermission', () => {
 		expect( messageGet ).toHaveBeenNthCalledWith( 3, body, ...bodyParams );
 	} );
 
-	it.each( [
-		[
-			'client',
-			PageNotEditable.PAGE_CASCADE_PROTECTED,
-			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_HEADING,
-			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_BODY,
-		] as const,
-		[
-			'repo',
-			PageNotEditable.ITEM_CASCADE_PROTECTED,
-			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_HEADING,
-			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_BODY,
-		] as const,
-	] )( 'interpolates correct message for page cascade-protected on %s', (
-		wiki: 'repo'|'client',
-		type: typeof PageNotEditable.ITEM_CASCADE_PROTECTED
-		| typeof PageNotEditable.PAGE_CASCADE_PROTECTED,
-		header: MessageKeys,
-		body: MessageKeys,
-	) => {
+	it( 'interpolates correct message for page cascade-protected on client', () => {
 		const error: CascadeProtectedReason = {
-			type,
+			type: PageNotEditable.PAGE_CASCADE_PROTECTED,
+			info: {
+				pages: pagesCausingCascadeProtection,
+			},
+		};
+		const messageGet = jest.fn( ( key ) => key );
+		const routerGetPageUrl = jest.fn();
+		routerGetPageUrl
+			.mockReturnValueOnce( 'http://localhost/wiki/Page_One' )
+			.mockReturnValueOnce( 'http://localhost/wiki/Page_Two' )
+			.mockReturnValueOnce( 'http://localhost/wiki/Page_Three' );
+		const $router: MediaWikiRouter = {
+			getPageUrl: routerGetPageUrl,
+		};
+
+		const store = createTestStore( {
+			state: {
+				entityTitle,
+			},
+		} );
+
+		shallowMount( ErrorPermission, {
+			localVue,
+			propsData: {
+				permissionErrors: [ error ],
+			},
+
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+					getText: messageGet,
+				},
+				$repoRouter: unusedRouter( 'repo' ),
+				$clientRouter: $router,
+			},
+			store,
+		} );
+
+		calledWithHTMLElement( messageGet, 2, 2 );
+
+		expect( messageGet ).toHaveBeenNthCalledWith(
+			2,
+			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_HEADING,
+		);
+		expect( messageGet ).toHaveBeenNthCalledWith(
+			3,
+			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_BODY,
+			pagesCausingCascadeProtection.length.toString(),
+			// eslint-disable-next-line max-len
+			`<ul><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 0 ]}">${pagesCausingCascadeProtection[ 0 ]}</a></li><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 1 ]}">${pagesCausingCascadeProtection[ 1 ]}</a></li><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 2 ]}">${pagesCausingCascadeProtection[ 2 ]}</a></li></ul>`,
+		);
+	} );
+
+	it( 'interpolates correct message for page cascade-protected on repo', () => {
+		const error: CascadeProtectedReason = {
+			type: PageNotEditable.ITEM_CASCADE_PROTECTED,
 			info: {
 				pages: pagesCausingCascadeProtection,
 			},
@@ -458,8 +495,8 @@ describe( 'ErrorPermission', () => {
 					get: messageGet,
 					getText: messageGet,
 				},
-				$repoRouter: wiki === 'repo' ? $router : unusedRouter( 'repo' ),
-				$clientRouter: wiki === 'client' ? $router : unusedRouter( 'client' ),
+				$repoRouter: $router,
+				$clientRouter: unusedRouter( 'client' ),
 			},
 			store,
 		} );
@@ -468,13 +505,13 @@ describe( 'ErrorPermission', () => {
 
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			2,
-			header,
+			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_HEADING,
 			'',
 			'http://localhost/wiki/Project:Administrators',
 		);
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			3,
-			body,
+			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_BODY,
 			pagesCausingCascadeProtection.length.toString(),
 			// eslint-disable-next-line max-len
 			`<ul><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 0 ]}">${pagesCausingCascadeProtection[ 0 ]}</a></li><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 1 ]}">${pagesCausingCascadeProtection[ 1 ]}</a></li><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 2 ]}">${pagesCausingCascadeProtection[ 2 ]}</a></li></ul>`,

@@ -136,13 +136,6 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 						this.$repoRouter.getPageUrl( 'Project:Administrators' ),
 					);
 					break;
-				// temporary; TODO remove once translations no longer use $2
-				case PageNotEditable.PAGE_CASCADE_PROTECTED:
-					params.push(
-						'', // unused (not reserved for anything in particular)
-						this.$clientRouter.getPageUrl( 'Project:Administrators' ),
-					);
-					break;
 			}
 			return params;
 		},
