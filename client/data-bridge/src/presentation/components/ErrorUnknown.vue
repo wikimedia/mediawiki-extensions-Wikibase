@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import Component, { mixins } from 'vue-class-component';
+import Vue, { VueConstructor } from 'vue';
 import StateMixin from '@/presentation/StateMixin';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
@@ -35,26 +35,27 @@ import ReportIssue from '@/presentation/components/ReportIssue.vue';
  * A component which gets shown if no dedicated handling for the type of
  * error which happened is configured.
  */
-@Component( {
+export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+	mixins: [ StateMixin ],
+	name: 'ErrorUnknown',
 	components: {
 		EventEmittingButton,
 		IconMessageBox,
 		ReportIssue,
 	},
-} )
-export default class ErrorUnknown extends mixins( StateMixin ) {
-	public mounted(): void {
+	methods: {
+		relaunch(): void {
+			/**
+			 * An event fired when the user clicks the CTA to relaunch the bridge
+			 * @type {Event}
+			 */
+			this.$emit( 'relaunch' );
+		},
+	},
+	mounted(): void {
 		this.rootModule.dispatch( 'trackErrorsFallingBackToGenericView' );
-	}
-
-	private relaunch(): void {
-		/**
-		 * An event fired when the user clicks the CTA to relaunch the bridge
-		 * @type {Event}
-		 */
-		this.$emit( 'relaunch' );
-	}
-}
+	},
+} );
 </script>
 
 <style lang="scss">

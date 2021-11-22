@@ -23,7 +23,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Component from 'vue-class-component';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 
@@ -31,21 +30,22 @@ import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
  * A component which gets shown if an edit conflict occurs while saving.
  * The only possible action is to reload the whole page.
  */
-@Component( {
+export default Vue.extend( {
+	name: 'ErrorSavingEditConflict',
 	components: {
 		EventEmittingButton,
 		IconMessageBox,
 	},
-} )
-export default class ErrorSavingEditConflict extends Vue {
-	public reload(): void {
-		/**
-		 * An event fired when the user requested to reload the whole page.
-		 * @type {Event}
-		 */
-		this.$emit( 'reload' );
-	}
-}
+	methods: {
+		reload(): void {
+			/**
+			 * An event fired when the user requested to reload the whole page.
+			 * @type {Event}
+			 */
+			this.$emit( 'reload' );
+		},
+	},
+} );
 </script>
 
 <style lang="scss">

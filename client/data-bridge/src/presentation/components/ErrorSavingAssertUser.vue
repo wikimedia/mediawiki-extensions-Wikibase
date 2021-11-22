@@ -41,43 +41,40 @@
 </template>
 
 <script lang="ts">
-import { mixins } from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import Vue, { VueConstructor } from 'vue';
 import StateMixin from '@/presentation/StateMixin';
-import Component from 'vue-class-component';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
-import ReportIssue from '@/presentation/components/ReportIssue.vue';
 
 /**
  * A component which gets shown when an error occurs while saving and the user is logged out.
  */
-@Component( {
+export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+	mixins: [ StateMixin ],
+	name: 'ErrorSavingAssertUser',
 	components: {
 		EventEmittingButton,
 		IconMessageBox,
-		ReportIssue,
 	},
-} )
-export default class ErrorSavingAssertUser extends mixins( StateMixin ) {
-	@Prop( { required: true, type: String } )
-	public loginUrl!: string;
-
-	public async proceed(): Promise<void> {
-		await this.rootModule.dispatch( 'stopAssertingUserWhenSaving' );
-		await this.rootModule.dispatch( 'retrySave' );
-	}
-
-	public back(): void {
-		this.rootModule.dispatch( 'goBackFromErrorToReady' );
-	}
-
-	public get publishOrSave(): string {
-		return this.$bridgeConfig.usePublish ?
-			this.$messages.KEYS.SAVING_ERROR_ASSERTUSER_PUBLISH : this.$messages.KEYS.SAVING_ERROR_ASSERTUSER_SAVE;
-	}
-
-}
+	props: {
+		loginUrl: { required: true, type: String },
+	},
+	computed: {
+		publishOrSave(): string {
+			return this.$bridgeConfig.usePublish ?
+				this.$messages.KEYS.SAVING_ERROR_ASSERTUSER_PUBLISH : this.$messages.KEYS.SAVING_ERROR_ASSERTUSER_SAVE;
+		},
+	},
+	methods: {
+		async proceed(): Promise<void> {
+			await this.rootModule.dispatch( 'stopAssertingUserWhenSaving' );
+			await this.rootModule.dispatch( 'retrySave' );
+		},
+		back(): void {
+			this.rootModule.dispatch( 'goBackFromErrorToReady' );
+		},
+	},
+} );
 </script>
 
 <style lang="scss">

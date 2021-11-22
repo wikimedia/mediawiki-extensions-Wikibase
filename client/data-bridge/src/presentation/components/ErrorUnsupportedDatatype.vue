@@ -23,9 +23,8 @@
 </template>
 
 <script lang="ts">
+import Vue, { PropType, VueConstructor } from 'vue';
 import { DataType } from '@wmde/wikibase-datamodel-types';
-import { Prop } from 'vue-property-decorator';
-import Component, { mixins } from 'vue-class-component';
 import StateMixin from '@/presentation/StateMixin';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import BailoutActions from '@/presentation/components/BailoutActions.vue';
@@ -35,32 +34,35 @@ import TermLabel from '@/presentation/components/TermLabel.vue';
  * A component used to illustrate a datatype error which happened when
  * the user tried to edit a value which bridge does not support yet.
  */
-@Component( {
+export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+	mixins: [ StateMixin ],
+	name: 'ErrorUnsupportedDatatype',
 	components: {
 		IconMessageBox,
 		BailoutActions,
 	},
-} )
-export default class ErrorUnsupportedDatatype extends mixins( StateMixin ) {
-	public get propertyLabel(): HTMLElement {
-		return new TermLabel( {
-			propsData: {
-				term: this.rootModule.getters.targetLabel,
-			},
-		} ).$mount().$el as HTMLElement;
-	}
-
-	public get pageTitle(): string {
-		return this.rootModule.state.pageTitle;
-	}
-
-	public get originalHref(): string {
-		return this.rootModule.state.originalHref;
-	}
-
-	@Prop( { required: true } )
-	public dataType!: DataType;
-}
+	props: {
+		dataType: {
+			type: String as PropType<DataType>,
+			required: true,
+		},
+	},
+	computed: {
+		pageTitle(): string {
+			return this.rootModule.state.pageTitle;
+		},
+		originalHref(): string {
+			return this.rootModule.state.originalHref;
+		},
+		propertyLabel(): HTMLElement {
+			return new TermLabel( {
+				propsData: {
+					term: this.rootModule.getters.targetLabel,
+				},
+			} ).$mount().$el as HTMLElement;
+		},
+	},
+} );
 </script>
 
 <style lang="scss">
