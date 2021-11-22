@@ -25,32 +25,33 @@
 </template>
 
 <script lang="ts">
-import EditDecisionOption from '@/definitions/EditDecision';
+import Vue, { VueConstructor } from 'vue';
 import StateMixin from '@/presentation/StateMixin';
+import EditDecisionOption from '@/definitions/EditDecision';
 import RadioGroup from '@/presentation/components/RadioGroup.vue';
 import { RadioInput } from '@wmde/wikibase-vuejs-components';
-import Component, { mixins } from 'vue-class-component';
 
-@Component( {
+export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+	mixins: [ StateMixin ],
+	name: 'EditDecision',
 	components: {
 		RadioGroup,
 		RadioInput,
 	},
-} )
-export default class EditDecision extends mixins( StateMixin ) {
-
-	public get editDecision(): EditDecisionOption|null {
-		return this.rootModule.state.editDecision;
-	}
-
-	public set editDecision( value: EditDecisionOption|null ) {
-		if ( value === null ) {
-			throw new Error( 'Cannot set editDecision back to null!' );
-		}
-		this.rootModule.dispatch( 'setEditDecision', value );
-	}
-
-}
+	computed: {
+		editDecision: {
+			get(): EditDecisionOption | null {
+				return this.rootModule.state.editDecision;
+			},
+			set( value: EditDecisionOption | null ): void {
+				if ( value === null ) {
+					throw new Error( 'Cannot set editDecision back to null!' );
+				}
+				this.rootModule.dispatch( 'setEditDecision', value );
+			},
+		},
+	},
+} );
 </script>
 
 <style lang="scss">
