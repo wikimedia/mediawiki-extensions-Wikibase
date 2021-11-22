@@ -142,6 +142,7 @@
 	"wikibase-newentity-description": "Апісанне:",
 	"wikibase-newentity-submit": "Стварыць",
 	"special-setlabel": "Задаць назву",
+	"wikibase-search-result-stats": "$1 {{PLURAL:$1|заява|заявы|заяў}}, $2 {{PLURAL:$2|спасылка|спасылкі|спасылак}}",
 	"wikibase-setlabel-introfull": "Вы задалі назву «$2» для [[:$1]].",
 	"wikibase-setlabel-intro": "Гэта форма дазваляе вам задаць назву для якога-небудзь элемента. Неабходна ўвесці ідэнтыфікатар элемента (напрыклад, Q23), код мовы (напрыклад, en) і пажаданую назву на гэтай мове.",
 	"wikibase-setlabel-label": "Назва:",

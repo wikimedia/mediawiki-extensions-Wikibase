@@ -43,10 +43,21 @@
 	"wikibase-entityusage-submit": "صفحا ڏيکاريو",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} آئٽم آئِڊي",
 	"wikibase-pageinfo-entity-id-none": "ڪوبہ نہ",
+	"wikibase-pageinfo-description-central": "مرڪزي تشريح",
 	"wikibase-pageinfo-entity-usage": "هن صفحي تي {{WBREPONAME}} جا استعمال ٿيل حصا",
 	"wikibase-pageinfo-entity-usage-S": "سائيٽ-ڳنڍڻو",
 	"wikibase-otherprojects": "ٻيون رٿائون",
 	"wikibase-sitelinks-sitename-columnheading": "ٻولي",
+	"wikibase-client-data-bridge-references-heading": "حوالا",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "توھان داخل ٿيل نہ آھيو",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "داخل ٿيو يا شامل ٿيو",
+	"wikibase-client-data-bridge-error-reload-bridge": "ٻيھر لاھيو",
+	"wikibase-client-data-bridge-error-reload-page": "صفحي کي ٻيھر لاھيو",
 	"wikibase-client-data-bridge-error-go-back": "واپس وڃو",
-	"wikibase-client-data-bridge-error-retry-save": "ٻيھر سانڍيو"
+	"wikibase-client-data-bridge-error-retry-save": "ٻيھر سانڍيو",
+	"wikibase-client-data-bridge-thank-you-head": "توھان جي سنوار لاءِ توھان جي مھرباني!",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "توھان داخل ٿيل نہ آھيو",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "داخل ٿيڻ بغير ڇاپيو",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "داخل ٿيڻ بغير سانڍيو",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "سنواريندا رھو"
 }

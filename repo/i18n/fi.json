@@ -20,6 +20,7 @@
 			"Silvonen",
 			"Stryn",
 			"Valtlait",
+			"Veikk0.ma",
 			"VezonThunder",
 			"Zolo",
 			"Тест"
@@ -124,7 +125,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Hyväksyn nämä ehdot tulevissa muokkauksissani. Älä näytä tätä viestiä uudelleen.",
 	"wikibase-entityselector-more": "lisää",
 	"wikibase-entityselector-notfound": "Ei hakutuloksia",
-	"wikibase-anonymouseditwarning": "Varoitus: Et ole kirjautunut sisään.\nIP-osoitteesi kirjataan tämän aiheen muokkaushistoriaan.",
+	"wikibase-anonymouseditwarning": "Varoitus: Et ole kirjautunut sisään. Jos teet muokkauksia,\n[https://fi.wikipedia.org/wiki/IP-osoite IP-osoitteesi] tulee julkisesti näkyville. Jos <strong>[[Special:UserLogin|kirjaudut sisään]]</strong> tai <strong>[[Special:CreateAccount|luot käyttäjätilin]]</strong>, tekemäsi muokkaukset liitetään käyttäjänimeesi. Rekisteröitymisellä on myös muita etuja.",
 	"wikibase-move-error": "Et voi siirtää sivuja, jotka ovat data-nimiavaruudessa, etkä voi siirtää sivuja siihen.",
 	"wikibase-validator-invalid": "Virheellinen arvo",
 	"wikibase-validator-missing-field": "Puuttuu pakollinen kenttä ”$1”",
