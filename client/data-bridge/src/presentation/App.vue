@@ -40,9 +40,8 @@
 </template>
 
 <script lang="ts">
+import Vue, { VueConstructor } from 'vue';
 import WarningAnonymousEdit from '@/presentation/components/WarningAnonymousEdit.vue';
-import { mixins } from 'vue-class-component';
-import { Component } from 'vue-property-decorator';
 import Events from '@/events';
 import StateMixin from '@/presentation/StateMixin';
 import DataBridge from '@/presentation/components/DataBridge.vue';
@@ -53,7 +52,9 @@ import License from '@/presentation/components/License.vue';
 import ThankYou from '@/presentation/components/ThankYou.vue';
 import AppHeader from '@/presentation/components/AppHeader.vue';
 
-@Component( {
+export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+	mixins: [ StateMixin ],
+	name: 'App',
 	components: {
 		WarningAnonymousEdit,
 		AppHeader,
@@ -63,105 +64,94 @@ import AppHeader from '@/presentation/components/AppHeader.vue';
 		Loading,
 		ThankYou,
 	},
-} )
-export default class App extends mixins( StateMixin ) {
-	public licenseIsVisible = false;
+	data() {
+		return {
+			licenseIsVisible: false,
+		};
+	},
+	computed: {
+		isOverlayed(): boolean {
+			return this.isSaving || this.licenseIsVisible;
+		},
+		isSaving(): boolean {
+			return this.rootModule.getters.applicationStatus === ApplicationStatus.SAVING;
+		},
+		isInitializing(): boolean {
+			return this.rootModule.getters.applicationStatus === ApplicationStatus.INITIALIZING;
+		},
+		isSaved(): boolean {
+			return this.rootModule.getters.applicationStatus === ApplicationStatus.SAVED;
+		},
+		hasError(): boolean {
+			return this.rootModule.getters.applicationStatus === ApplicationStatus.ERROR;
+		},
+		hasErrorRequiringReload(): boolean {
+			return this.hasError &&
+				this.rootModule.getters.isEditConflictError;
+		},
+		repoLink(): string {
+			return this.rootModule.state.originalHref;
+		},
+		showWarningAnonymousEdit(): boolean {
+			return this.rootModule.state.showWarningAnonymousEdit;
+		},
+		loginUrl(): string {
+			return this.$clientRouter.getPageUrl(
+				'Special:UserLogin',
+				{
+					returnto: this.rootModule.state.pageTitle,
+				},
+			);
+		},
+	},
+	methods: {
+		close(): void {
+			if ( this.isSaved ) {
+				this.$emit( Events.saved );
+			} else if ( this.hasErrorRequiringReload ) {
+				this.reload();
+			} else {
+				this.$emit( Events.cancel );
+			}
+		},
+		back(): void {
+			this.rootModule.dispatch( 'goBackFromErrorToReady' );
+		},
+		dismissLicense(): void {
+			this.licenseIsVisible = false;
+		},
+		save(): void {
+			if ( !this.licenseIsVisible ) {
+				this.licenseIsVisible = true;
+				return;
+			}
 
-	public get isOverlayed(): boolean {
-		return this.isSaving || this.licenseIsVisible;
-	}
+			this.licenseIsVisible = false;
 
-	public get isSaving(): boolean {
-		return this.rootModule.getters.applicationStatus === ApplicationStatus.SAVING;
-	}
-
-	public get isInitializing(): boolean {
-		return this.rootModule.getters.applicationStatus === ApplicationStatus.INITIALIZING;
-	}
-
-	public get isSaved(): boolean {
-		return this.rootModule.getters.applicationStatus === ApplicationStatus.SAVED;
-	}
-
-	public get hasError(): boolean {
-		return this.rootModule.getters.applicationStatus === ApplicationStatus.ERROR;
-	}
-
-	public get hasErrorRequiringReload(): boolean {
-		return this.hasError &&
-			this.rootModule.getters.isEditConflictError;
-	}
-
-	public get repoLink(): string {
-		return this.rootModule.state.originalHref;
-	}
-
-	public get showWarningAnonymousEdit(): boolean {
-		return this.rootModule.state.showWarningAnonymousEdit;
-	}
-
-	public get loginUrl(): string {
-		return this.$clientRouter.getPageUrl(
-			'Special:UserLogin',
-			{
-				returnto: this.rootModule.state.pageTitle,
-			},
-		);
-	}
-
-	public close(): void {
-		if ( this.isSaved ) {
+			this.rootModule.dispatch( 'saveBridge' );
+		},
+		openedReferenceEditOnRepo(): void {
 			this.$emit( Events.saved );
-		} else if ( this.hasErrorRequiringReload ) {
-			this.reload();
-		} else {
-			this.$emit( Events.cancel );
-		}
-	}
-
-	public back(): void {
-		this.rootModule.dispatch( 'goBackFromErrorToReady' );
-	}
-
-	public dismissLicense(): void {
-		this.licenseIsVisible = false;
-	}
-
-	public save(): void {
-		if ( !this.licenseIsVisible ) {
-			this.licenseIsVisible = true;
-			return;
-		}
-
-		this.licenseIsVisible = false;
-
-		this.rootModule.dispatch( 'saveBridge' );
-	}
-
-	public openedReferenceEditOnRepo(): void {
-		this.$emit( Events.saved );
-	}
-
-	private relaunch(): void {
-		/**
-		 * An event fired when it is time to relaunch the bridge (usually bubbled from a child component)
-		 * @type {Event}
-		 */
-		this.$emit( Events.relaunch );
-	}
-
-	private reload(): void {
-		/**
-		 * An event fired when the user requested to reload the whole page (usually bubbled from a child component)
-		 * @type {Event}
-		 */
-		this.$emit( Events.reload );
-	}
-
-	public dismissWarningAnonymousEdit(): void {
-		this.rootModule.dispatch( 'dismissWarningAnonymousEdit' );
-	}
-}
+		},
+		relaunch(): void {
+			/**
+			 * An event fired when it is time to relaunch the bridge (usually bubbled from a child component)
+			 * @type {Event}
+			 */
+			this.$emit( Events.relaunch );
+		},
+		reload(): void {
+			/**
+			 * An event fired when the user requested to reload the whole page (usually bubbled from a child component)
+			 * @type {Event}
+			 */
+			this.$emit( Events.reload );
+		},
+		dismissWarningAnonymousEdit(): void {
+			this.rootModule.dispatch( 'dismissWarningAnonymousEdit' );
+		},
+	},
+} );
 </script>
 
 <style lang="scss">
