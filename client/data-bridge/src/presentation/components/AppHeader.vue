@@ -44,74 +44,66 @@
 </template>
 
 <script lang="ts">
-import Component, { mixins } from 'vue-class-component';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import StateMixin from '@/presentation/StateMixin';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import TermLabel from '@/presentation/components/TermLabel.vue';
+import Vue, { VueConstructor } from 'vue';
 
-@Component( {
+export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+	mixins: [ StateMixin ],
+	name: 'AppHeader',
 	components: {
 		EventEmittingButton,
 		ProcessDialogHeader,
 	},
-} )
-export default class AppHeader extends mixins( StateMixin ) {
-
-	public get title(): string {
-		return this.$messages.get(
-			this.$messages.KEYS.BRIDGE_DIALOG_TITLE,
-			new TermLabel( {
-				propsData: {
-					term: this.rootModule.getters.targetLabel,
-				},
-			} ).$mount().$el as HTMLElement,
-		);
-	}
-
-	public get canGoBack(): boolean {
-		return this.rootModule.getters.canGoToPreviousState;
-	}
-
-	public get isSaved(): boolean {
-		return this.rootModule.getters.applicationStatus === ApplicationStatus.SAVED;
-	}
-
-	public get hasError(): boolean {
-		return this.rootModule.getters.applicationStatus === ApplicationStatus.ERROR;
-	}
-
-	public get hasWarning(): boolean {
-		return this.rootModule.state.showWarningAnonymousEdit;
-	}
-
-	public get publishOrSave(): string {
-		return this.$bridgeConfig.usePublish ?
-			this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
-	}
-
-	public get canStartSaving(): boolean {
-		return this.rootModule.getters.canStartSaving;
-	}
-
-	public get isSaving(): boolean {
-		return this.rootModule.getters.applicationStatus === ApplicationStatus.SAVING;
-	}
-
-	public close(): void {
-		this.$emit( 'close' );
-	}
-
-	public save(): void {
-		this.$emit( 'save' );
-	}
-
-	public back(): void {
-		this.$emit( 'back' );
-	}
-
-}
+	computed: {
+		title(): string {
+			return this.$messages.get(
+				this.$messages.KEYS.BRIDGE_DIALOG_TITLE,
+				new TermLabel( {
+					propsData: {
+						term: this.rootModule.getters.targetLabel,
+					},
+				} ).$mount().$el as HTMLElement,
+			);
+		},
+		canGoBack(): boolean {
+			return this.rootModule.getters.canGoToPreviousState;
+		},
+		isSaved(): boolean {
+			return this.rootModule.getters.applicationStatus === ApplicationStatus.SAVED;
+		},
+		hasError(): boolean {
+			return this.rootModule.getters.applicationStatus === ApplicationStatus.ERROR;
+		},
+		hasWarning(): boolean {
+			return this.rootModule.state.showWarningAnonymousEdit;
+		},
+		publishOrSave(): string {
+			return this.$bridgeConfig.usePublish ?
+				this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
+		},
+		canStartSaving(): boolean {
+			return this.rootModule.getters.canStartSaving;
+		},
+		isSaving(): boolean {
+			return this.rootModule.getters.applicationStatus === ApplicationStatus.SAVING;
+		},
+	},
+	methods: {
+		close(): void {
+			this.$emit( 'close' );
+		},
+		save(): void {
+			this.$emit( 'save' );
+		},
+		back(): void {
+			this.$emit( 'back' );
+		},
+	},
+} );
 </script>
 
 <style lang="scss">
