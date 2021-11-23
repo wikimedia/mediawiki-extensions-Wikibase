@@ -11,6 +11,7 @@ use IContextSource;
 use InvalidArgumentException;
 use Language;
 use MediaWiki\Content\Renderer\ContentParseParams;
+use MediaWiki\Content\ValidationParams;
 use MediaWiki\MediaWikiServices;
 use MWContentSerializationException;
 use MWException;
@@ -19,7 +20,9 @@ use ParserOptions;
 use ParserOutput;
 use RequestContext;
 use SearchEngine;
+use Status;
 use Title;
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -729,6 +732,30 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
+	 * @inheritDoc
+	 */
+	public function validateSave(
+		Content $content,
+		ValidationParams $validationParams
+	) {
+		'@phan-var EntityContent $content';
+		// Chain to parent
+		$status = parent::validateSave( $content, $validationParams );
+		$flags = $validationParams->getFlags();
+		if ( $status->isOK() ) {
+			if ( !$content->isRedirect() && !( $flags & EntityContent::EDIT_IGNORE_CONSTRAINTS ) ) {
+				$validators = $this->getOnSaveValidators(
+					( $flags & EDIT_NEW ) !== 0,
+					$content->getEntity()->getId()
+				);
+				$status = $this->applyValidators( $content, $validators );
+			}
+		}
+
+		return $status;
+	}
+
+	/**
 	 * @note this calls ParserOutput::recordOption( 'userlang' ) to split the cache
 	 * by user language, and ParserOutput::recordOption( 'wb' ) to split the cache on
 	 * EntityHandler::PARSER_VERSION.
@@ -875,5 +902,28 @@ abstract class EntityHandler extends ContentHandler {
 		foreach ( $properties as $name => $value ) {
 			$output->setPageProperty( $name, $value );
 		}
+	}
+
+	/**
+	 * Apply the given validators.
+	 *
+	 * @param EntityContent $content
+	 * @param EntityValidator[] $validators
+	 *
+	 * @return Status
+	 */
+	private function applyValidators( EntityContent $content, array $validators ) {
+		$result = Result::newSuccess();
+
+		foreach ( $validators as $validator ) {
+			$result = $validator->validateEntity( $content->getEntity() );
+
+			if ( !$result->isValid() ) {
+				break;
+			}
+		}
+
+		$status = $this->getValidationErrorLocalizer()->getResultStatus( $result );
+		return $status;
 	}
 }

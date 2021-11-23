@@ -14,18 +14,13 @@ use MediaWiki\MediaWikiServices;
 use MWException;
 use RuntimeException;
 use Serializers\Exceptions\SerializationException;
-use Status;
-use User;
-use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Repo\ArrayValueCollector;
 use Wikibase\Repo\FingerprintSearchTextGenerator;
-use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * Abstract content object for articles representing Wikibase entities.
@@ -43,7 +38,7 @@ use WikiPage;
 abstract class EntityContent extends AbstractContent {
 
 	/**
-	 * Flag for use with prepareSave(), indicating that no pre-save validation should be applied.
+	 * Flag for use with EntityHandler::validateSave(), indicating that no pre-save validation should be applied.
 	 * Can be passed in via EditEntity::attemptSave, EntityStore::saveEntity,
 	 * as well as WikiPage::doUserEditContent()
 	 *
@@ -476,57 +471,6 @@ abstract class EntityContent extends AbstractContent {
 
 		// There is nothing mutable on an entirely empty content object.
 		return $this;
-	}
-
-	/**
-	 * @see Content::prepareSave
-	 *
-	 * @param WikiPage $page
-	 * @param int $flags
-	 * @param int $baseRevId
-	 * @param User $user
-	 *
-	 * @return Status
-	 */
-	public function prepareSave( WikiPage $page, $flags, $baseRevId, User $user ) {
-		// Chain to parent
-		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
-
-		if ( $status->isOK() ) {
-			if ( !$this->isRedirect() && !( $flags & self::EDIT_IGNORE_CONSTRAINTS ) ) {
-				$handler = $this->getContentHandler();
-				$validators = $handler->getOnSaveValidators(
-					( $flags & EDIT_NEW ) !== 0,
-					$this->getEntity()->getId()
-				);
-				$status = $this->applyValidators( $validators );
-			}
-		}
-
-		return $status;
-	}
-
-	/**
-	 * Apply the given validators.
-	 *
-	 * @param EntityValidator[] $validators
-	 *
-	 * @return Status
-	 */
-	private function applyValidators( array $validators ) {
-		$result = Result::newSuccess();
-
-		foreach ( $validators as $validator ) {
-			$result = $validator->validateEntity( $this->getEntity() );
-
-			if ( !$result->isValid() ) {
-				break;
-			}
-		}
-
-		$handler = $this->getContentHandler();
-		$status = $handler->getValidationErrorLocalizer()->getResultStatus( $result );
-		return $status;
 	}
 
 	/**
