@@ -46,11 +46,11 @@ class SidebarHookHandler implements
 	/**
 	 * Add output page property if repo links are suppressed, and property for item id
 	 *
-	 * @param OutputPage $out
+	 * @param OutputPage $outputPage
 	 * @param ParserOutput $parserOutput
 	 */
-	public function onOutputPageParserOutput( $out, $parserOutput ): void {
-		$title = $out->getTitle();
+	public function onOutputPageParserOutput( $outputPage, $parserOutput ): void {
+		$title = $outputPage->getTitle();
 		if ( !$title || !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			// shorten out
 			return;
@@ -59,25 +59,25 @@ class SidebarHookHandler implements
 		$noExternalLangLinks = NoLangLinkHandler::getNoExternalLangLinks( $parserOutput );
 
 		if ( !empty( $noExternalLangLinks ) ) {
-			$out->setProperty( 'noexternallanglinks', $noExternalLangLinks );
+			$outputPage->setProperty( 'noexternallanglinks', $noExternalLangLinks );
 		}
 
 		$itemId = $parserOutput->getPageProperty( 'wikibase_item' );
 
 		if ( $itemId !== false ) {
-			$out->setProperty( 'wikibase_item', $itemId );
+			$outputPage->setProperty( 'wikibase_item', $itemId );
 		}
 
 		$otherProjects = $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' );
 
 		if ( $otherProjects !== null ) {
-			$out->setProperty( 'wikibase-otherprojects-sidebar', $otherProjects );
+			$outputPage->setProperty( 'wikibase-otherprojects-sidebar', $otherProjects );
 		}
 
 		$badges = $parserOutput->getExtensionData( 'wikibase_badges' );
 
 		if ( $badges !== null ) {
-			$out->setProperty( 'wikibase_badges', $badges );
+			$outputPage->setProperty( 'wikibase_badges', $badges );
 		}
 	}
 

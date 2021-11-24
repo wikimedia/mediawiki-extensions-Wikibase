@@ -743,20 +743,20 @@ final class RepoHooks {
 	 * Called when pushing meta-info from the ParserOutput into OutputPage.
 	 * Used to transfer 'wikibase-view-chunks' and entity data from ParserOutput to OutputPage.
 	 *
-	 * @param OutputPage $out
+	 * @param OutputPage $outputPage
 	 * @param ParserOutput $parserOutput
 	 */
-	public static function onOutputPageParserOutput( OutputPage $out, ParserOutput $parserOutput ) {
+	public static function onOutputPageParserOutput( OutputPage $outputPage, ParserOutput $parserOutput ) {
 		// Set in EntityParserOutputGenerator.
 		$placeholders = $parserOutput->getExtensionData( 'wikibase-view-chunks' );
 		if ( $placeholders !== null ) {
-			$out->setProperty( 'wikibase-view-chunks', $placeholders );
+			$outputPage->setProperty( 'wikibase-view-chunks', $placeholders );
 		}
 
 		// Set in EntityParserOutputGenerator.
 		$termsListItems = $parserOutput->getExtensionData( 'wikibase-terms-list-items' );
 		if ( $termsListItems !== null ) {
-			$out->setProperty( 'wikibase-terms-list-items', $termsListItems );
+			$outputPage->setProperty( 'wikibase-terms-list-items', $termsListItems );
 		}
 
 		// Used in ViewEntityAction and EditEntityAction to override the page HTML title
@@ -764,9 +764,9 @@ final class RepoHooks {
 		// and output page to save overhead of fetching content and accessing an entity
 		// on page view.
 		$meta = $parserOutput->getExtensionData( 'wikibase-meta-tags' );
-		$out->setProperty( 'wikibase-meta-tags', $meta );
+		$outputPage->setProperty( 'wikibase-meta-tags', $meta );
 
-		$out->setProperty(
+		$outputPage->setProperty(
 			TermboxView::TERMBOX_MARKUP,
 			$parserOutput->getExtensionData( TermboxView::TERMBOX_MARKUP )
 		);
@@ -775,7 +775,7 @@ final class RepoHooks {
 		$alternateLinks = $parserOutput->getExtensionData( 'wikibase-alternate-links' );
 		if ( $alternateLinks !== null ) {
 			foreach ( $alternateLinks as $link ) {
-				$out->addLink( $link );
+				$outputPage->addLink( $link );
 			}
 		}
 	}
