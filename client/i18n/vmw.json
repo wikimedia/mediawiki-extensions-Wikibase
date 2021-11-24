@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Gildo Máquina",
-			"Jacinto Jeque"
+			"Jacinto Jeque",
+			"Amire80"
 		]
 	},
 	"wikibase-dataitem": "Ekaruma {{WBREPONAME}}",
@@ -10,6 +11,7 @@
 	"wikibase-editlinkstitle": "Ohimya ephiro yooluttelela ntattaava",
 	"wikibase-linkitem-addlinks": "Otakaaha iphiro",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Ottukuttherya",
 	"wikibase-rc-hide-wikidata-show": "Wooniha",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Yoreeriheliwa {{WBREPONAME}}",

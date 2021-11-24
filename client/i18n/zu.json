@@ -3,7 +3,8 @@
 		"authors": [
 			"3atbulletz",
 			"Irus",
-			"Nkankane"
+			"Nkankane",
+			"Weather Top Wizard"
 		]
 	},
 	"tooltip-t-wikibase": "Xhumanisa nento yenqolobane yemininingwane",
@@ -11,5 +12,6 @@
 	"wikibase-editlinks": "Hlela links",
 	"wikibase-editlinkstitle": "Hlela interlanguage links",
 	"wikibase-linkitem-addlinks": "Faka ama-links",
-	"wikibase-rc-hide-wikidata-show": "Khombisa"
+	"wikibase-rc-hide-wikidata-show": "Khombisa",
+	"wikibase-otherprojects": "Kwamanye amaphrojekthi"
 }

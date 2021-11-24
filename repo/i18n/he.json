@@ -192,7 +192,7 @@
 	"wikibase-itembytitle-error-site": "נא להשתמש במזהה אתר קיים, למשל \"enwiki\" עבור ויקיפדיה האנגלית.",
 	"wikibase-itembytitle-error-item": "פריט שמקשר לדף הנתון לא נמצא.",
 	"wikibase-itembytitle-create": "אפשר גם [$1 ליצור פריט].",
-	"wikibase-itembytitle-summary": "הדף המיוחד Special:ItemByTitle משמש למציאת פריט קשור לדף נתון באתר מקושר.<br />בשדה הראשון, \"{{int:wikibase-itembytitle-lookup-site}}\", יש להזין את קוד השפה והאתר.<br />בשדה השני, \"{{int:wikibase-itembytitle-lookup-page}}\", יש לכתוב את הכותרת המדויקת של הדף כפי שהיא מופיעה בדף המקושר.",
+	"wikibase-itembytitle-summary": "הדף המיוחד Special:ItemByTitle משמש למציאת פריט מתאים לדף נתון באתר מקושר.<br />בשדה הראשון, \"{{int:wikibase-itembytitle-lookup-site}}\", יש להזין את קוד השפה והאתר.<br />בשדה השני, \"{{int:wikibase-itembytitle-lookup-page}}\", יש לכתוב את הכותרת המדויקת של הדף כפי שהיא מופיעה בדף המקושר.",
 	"special-gotolinkedpage": "מעבר אל הדף המקושר",
 	"wikibase-gotolinkedpage-lookup-fieldset": "מעבר אל הדף המקושר לפי אתר ופריט",
 	"wikibase-gotolinkedpage-lookup-site": "אתר:",

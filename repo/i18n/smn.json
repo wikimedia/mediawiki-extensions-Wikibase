@@ -6,7 +6,8 @@
 		]
 	},
 	"wikibase-edit": "mute",
-	"wikibase-add": "Lasseet",
+	"wikibase-save": "vuorkkii",
+	"wikibase-add": "lasseet",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Eres kieláid",
 	"wikibase-entitytermsforlanguagelistview-language": "Kielâ",
 	"wikibase-label-empty": "Nommâ ij lah lasettum",
@@ -16,5 +17,7 @@
 	"wikibase-sitelinks-special": "Eres siijđoh",
 	"wikibase-statementview-rank-normal": "Táválâš sajattâh",
 	"wikibase-anonymouseditwarning": "<strong>Váruttâs:</strong> Jieh lah čälittâm jieijâd siisâ. IP-čujottâsâd uáinoo almolávt puohháid, jis hammiih. Jis <strong>[[Special:UserLogin|čälittah jieijâd siisâ]]</strong> teikâ <strong>[[Special:CreateAccount|rááhtáh tubdâlduv]]</strong>, tuu hammim čálloo tuu kevtteetubdâlduvâi rähtim hammiimin já siämmást tun finniih kiävtun ávhálijd piergâsijd.",
+	"wikibase-itembytitle-submit": "Uusâ",
+	"wikibase-itemdisambiguation-submit": "Uusâ",
 	"wikibase-newentity-language": "Kielâ:"
 }

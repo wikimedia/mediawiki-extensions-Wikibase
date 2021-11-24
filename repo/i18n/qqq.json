@@ -48,7 +48,8 @@
 			"Stryn",
 			"Umherirrender",
 			"ZxxZxxZ",
-			"아라"
+			"아라",
+			"Ajeje Brazorf"
 		]
 	},
 	"wikibase-desc": "{{desc|name=Wikibase|url=https://www.mediawiki.org/wiki/Extension:Wikibase}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]] in the Wikidata glossary.\n\n\"Structured\" refers to \"data\", not to \"repository\".",
@@ -549,7 +550,7 @@
 	"wikibase-federated-properties-source-wiki-api-error-message": "Message of error page shown after a failed request to the federation source Wiki.",
 	"wikibase-federated-properties-special-list-of-properties-notice": "Notice message that points out that this Wikibase uses federated properties from an external source and how to access that.\n\nParameters:\n* $1 is the link to the external wiki.",
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "Link text shown on Special:ListProperties linking to the external source wiki.\n\nParameters:\n* $1 is the href for the link.\n* $2 is the domain of the external wiki.",
-	"wikibase-federated-properties-leaving-site-notice-cancel": "Button title for the cancel button.",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Button title for the cancel button.\n\n{{Identical|Cancel}}",
 	"wikibase-federated-properties-leaving-site-notice-continue": "Button title for the continue to source wiki button.",
 	"wikibase-federated-properties-leaving-site-notice-notice": "Message displayed in the dialog explaining that the user is leaving the site. \n\nParameters:\n* $1 is the hostname of the source wiki.",
 	"wikibase-federated-properties-leaving-site-notice-header": "Header for the dialog indicating that the user is leaving the site.",

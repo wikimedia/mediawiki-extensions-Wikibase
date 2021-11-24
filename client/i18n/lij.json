@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Giromin Cangiaxo",
-			"S4b1nuz E.656"
+			"S4b1nuz E.656",
+			"N. Longo"
 		]
 	},
 	"wikibase-client-desc": "Client pe l'estenscion Wikibase",
@@ -24,7 +25,7 @@
 	"wikibase-editlinks": "Modìfica colegaménti",
 	"wikibase-editlinkstitle": "Modiffica conligamenti interlenguisteghi",
 	"wikibase-addlinkstitle": "Azonzi ingancio interlengoistego",
-	"wikibase-linkitem-addlinks": "Azonzi conligamenti",
+	"wikibase-linkitem-addlinks": "Azónzi colegaménti",
 	"wikibase-linkitem-alreadylinked": "A paggina che ti voeivi inganciâ a l'è zà conligâ co-in atro [$1 elemento] into depoxito centrâ di dæti ch'o l'aponta a [[$2]] insce sto scito. I elementi pœuan aveighe conligou solo che 'na paggina pe scito. Serni 'na paggina diferente da conligâghe.",
 	"wikibase-linkitem-close": "Særa o barcon de diallogo e recarrega a paggina",
 	"wikibase-linkitem-failure": "Gh'è stæt'in aro sconosciuo into tentativo de conligâ a paggina indicâ.",

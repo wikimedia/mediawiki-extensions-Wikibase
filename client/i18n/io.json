@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Joao Xavier"
+			"Joao Xavier",
+			"JSantos"
 		]
 	},
 	"tooltip-t-wikibase": "Ligilo ad arkivo de la datumaro",
@@ -34,7 +35,7 @@
 	"wikibase-rc-hide-wikidata-show": "Montrar",
 	"wikibase-rc-show-wikidata-pref": "Montrez la redakti che {{WBREPONAME}} en la recenta chanji",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Redakto en {{WBREPONAME}}",
+	"wikibase-rc-wikibase-edit-title": "Redakto che {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-label": "Redakturi che {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-description": "Redakturi qui originis de {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Atencez ke povas bezonar kelka minuti, til ke omna modifiki divenos videbla en omna Wiki.",
@@ -49,6 +50,11 @@
 	"wikibase-pageinfo-entity-id-none": "Nulo",
 	"wikibase-pageinfo-entity-usage": "Enti de {{WBREPONAME}} uzita en ca pagino",
 	"wikibase-pageinfo-entity-usage-S": "Ligilo a retsituo",
+	"wikibase-pageinfo-entity-usage-D": "Kelka deskriptadi",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "Deskriptado: $1",
+	"wikibase-pageinfo-entity-usage-T": "Titulo",
+	"wikibase-pageinfo-entity-usage-C": "Kelka deklari",
+	"wikibase-pageinfo-entity-usage-C-with-modifier": "Deklaro: $1",
 	"wikibase-otherprojects": "En altra projeti",
 	"wikibase-sitelinks-sitename-columnheading": "Linguo",
 	"wikibase-sitelinks-link-columnheading": "Pagino ligata",

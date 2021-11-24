@@ -47,7 +47,9 @@
 			"Vivaelcelta",
 			"YoViajo",
 			"Zolo",
-			"아라"
+			"아라",
+			"Avengium",
+			"Jakeukalane"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estructurados",
@@ -208,7 +210,7 @@
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 es una redirección.",
 	"wikibase-wikibaserepopage-storage-exception": "Se produjo un error al intentar cargar $1: $2.",
 	"special-availablebadges": "Insignias disponibles",
-	"wikibase-availablebadges-emptylist": "No hay insignias configuradas en este wiki.",
+	"wikibase-availablebadges-emptylist": "No hay insignias configuradas en esta wiki.",
 	"special-itembytitle": "Elemento por título",
 	"wikibase-itembytitle-lookup-fieldset": "Búsqueda de artículos por sitio y título",
 	"wikibase-itembytitle-lookup-site": "Sitio:",

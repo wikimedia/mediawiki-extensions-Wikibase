@@ -4,7 +4,8 @@
 			"Macofe",
 			"Pippinu",
 			"SaldırganSincap",
-			"Sarvaturi"
+			"Sarvaturi",
+			"Ajeje Brazorf"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Ntèrruga l'elimenti distintivu dispunìbbili.",
@@ -63,7 +64,7 @@
 	"apihelp-wbgetentities-description": "Pigghia li dati di cchiù ntità di Wikibase.",
 	"apihelp-wbgetentities-param-ids": "L'ID di la ntità dî quali s'hannu a pigghiari li dati",
 	"apihelp-wbgetentities-param-sites": "L'idintificaturi dû situ supra ô quali s'attrova la pàggina\nAdupirari nzèmmula a 'title', pirò dari sulu un situ pi tanti tìtuli o puru tanti siti pûn sulu tìtulu.",
-	"apihelp-wbgetentities-param-titles": "Lu tìtulu di la pàggina currispunnenti.\nAdupirari nzèmmula a <code>sites</code>, pirò dari sulu un situ pi tanti tìtuli o puru tanti siti pûn sulu tìtulu.",
+	"apihelp-wbgetentities-param-titles": "Lu tìtulu dâ pàggina currispunnenti.\nAdupirari nzèmmula a <code>sites</code>, pirò dari sulu un situ pi tanti tìtuli o puru tanti siti pûn sulu tìtulu.",
 	"apihelp-wbgetentities-param-redirects": "Si li rimanni s'hannu a arrisòrviri o puru no.\nSi è mpustatu a \"no\", li rimanni sunnu trattati comu ntità cancillati.",
 	"apihelp-wbgetentities-param-props": "Li noma dî prupità di pigghiari d'ogni ntità.\nSù macari filtrati a pàrtiri dî lingui spicificati.",
 	"apihelp-wbgetentities-param-languages": "Pi mpustazzioni pridifinuta li valuri ntirnazziunalizzati sù arriturnati nta tutti li lingui dispunìbbili.\nStu paràmitru cunzenti di filtràrili lassannu sulu una o cchiù lingui, spicificannu unu o cchiù còdici di lingua.",
@@ -125,6 +126,7 @@
 	"apihelp-wbsearchentities-example-1": "Arricerca \"abc\" ntâ lingua ngrisa, cu valuri pridifinuti pi tipu e lìmiti",
 	"apihelp-wbsearchentities-example-2": "Arricerca \"abc\" ntâ lingua ngrisa cûn lìmiti di 50",
 	"apihelp-wbsearchentities-example-3": "Arricerca \"alphabet\" ntâ lingua ngrisa e comu tipu prupità",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Lu còdici dâ lingua.",
 	"apihelp-wbsetaliases-description": "Mposta l'alias di na ntità di Wikibase.",
 	"apihelp-wbsetaliases-param-id": "L'idintificaturi di la ntità, cu tuttu lu prifissu.\nAdupirari o 'id' o puru 'site' e 'title' nzèmmula.",
 	"apihelp-wbsetaliases-param-site": "N'idintificaturi pû situ unni s'attrova la pàggina.\nAdupirari nzèmmula a 'title' pi fari nu culligamentu a situ cumpletu.",

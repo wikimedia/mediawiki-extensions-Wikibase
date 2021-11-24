@@ -100,7 +100,7 @@
 	"wikibase-pageinfo-entity-usage-T": "Tytuł",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Deklaracja: $1",
 	"wikibase-pageinfo-entity-usage-X": "Wszystkie dane encji",
-	"wikibase-pageinfo-entity-usage-O": "Inne (stwierdzenia)",
+	"wikibase-pageinfo-entity-usage-O": "Inne (np. aliasy, sprawdzenie istnienia)",
 	"wikibase-property-render-error": "Nie można zrenderować właściwości $1: $2",
 	"wikibase-otherprojects": "W innych projektach",
 	"wikibase-otherprojects-beta-message": "Pasek siostrzanych projektów",

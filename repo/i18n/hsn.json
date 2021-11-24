@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"ChoiChong"
+		]
+	},
+	"wikibase-edit": "增改",
+	"wikibase-add": "添加",
+	"wikibase-label-empty": "冇定义标签",
+	"wikibase-description-empty": "冇定义亇描述",
+	"wikibase-sitelinks-special": "其他网站",
+	"wikibase-statementview-rank-normal": "普通级"
+}

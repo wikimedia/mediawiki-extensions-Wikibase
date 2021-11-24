@@ -25,5 +25,7 @@
 	"apihelp-query+wikibase-example": "Aconsegueix la URL i altra informació sobre el client Wikibase i el seu repositori.",
 	"apihelp-wbformatreference-summary": "Formata una referència per mostrar als usuaris.",
 	"apihelp-wbformatreference-example-1": "Formata una referència buida usant l'estil de Data Bridge a HTML.",
+	"apihelp-wbformatreference-param-reference": "La referència com a objecte JSON.",
+	"apihelp-wbformatreference-param-style": "L'estil en què formatar la referència.",
 	"apihelp-wbformatreference-paramvalue-outputformat-html": "marcatge HTML."
 }

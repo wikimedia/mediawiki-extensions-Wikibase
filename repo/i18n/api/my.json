@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Dr Lotus Black"
+			"Dr Lotus Black",
+			"Ninjastrikers"
 		]
 	},
 	"apihelp-wbsearchentities-param-search": "ဤစာသားအတွက် ရှာဖွေပါ။",
-	"apihelp-wbsearchentities-param-language": "ဤဘာသာစကားထဲတွင် ရှာဖွေပါ။",
+	"apihelp-wbsearchentities-param-language": "ဤဘာသာစကားထဲတွင် ရှာဖွေပါ။ ဤရှာဖွေမှုသည် ရွေးချယ်မှုများအပေါ်တွင် မူတည်ပြီး ရလဒ်၏ ဘာသာစကားများနှင့် မသက်ဆိုင်ပါ။ ယင်းအား \"uselang\" ပါရာမီတာဖြင့် ထိန်းချုပ်ထားသည်။",
 	"apihelp-query+wbsearch-param-search": "ဤစာသားအတွက် ရှာဖွေပါ။",
 	"apihelp-query+wbsearch-param-language": "ဤဘာသာစကားထဲတွင် ရှာဖွေပါ။"
 }

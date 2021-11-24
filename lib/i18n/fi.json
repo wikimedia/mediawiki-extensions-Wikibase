@@ -13,7 +13,8 @@
 			"Silvonen",
 			"Stryn",
 			"Valtlait",
-			"VezonThunder"
+			"VezonThunder",
+			"Yupik"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -141,5 +142,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "Luotu uusi ominaisuus",
 	"wikibase-property-summary-wbeditentity-update": "Ominaisuus muutettu",
 	"wikibase-property-summary-wbeditentity-override": "Ominaisuus korvattu",
-	"wikibase-property-summary-special-create-property": "[$2]-ominaisuus luotiin {{PLURAL:$1|arvolla|arvoilla}}"
+	"wikibase-property-summary-special-create-property": "[$2]-ominaisuus luotiin {{PLURAL:$1|arvolla|arvoilla}}",
+	"wikibase-reference-formatter-snak-retrieved": "Haettu $1"
 }

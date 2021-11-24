@@ -11,7 +11,9 @@
 	"wikibase-editlinkstitle": "Дакьин дан чил мазурдил баранду",
 	"wikibase-linkitem-addlinks": "Баранду ялун дулун",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Лабитан",
 	"wikibase-rc-hide-wikidata-show": "Ккаккан дан",
 	"wikibase-rc-wikibase-edit-letter": "Х",
-	"wikibase-rc-wikibase-edit-title": "Даххана щаву {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Даххана щаву {{WBREPONAME}}",
+	"wikibase-otherprojects": "Цеми проектравув"
 }

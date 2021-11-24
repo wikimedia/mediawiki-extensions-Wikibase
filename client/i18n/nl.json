@@ -23,10 +23,11 @@
 			"Servien",
 			"Siebrand",
 			"Sjoerddebruin",
-			"Xxmarijnw"
+			"Xxmarijnw",
+			"Krinkle"
 		]
 	},
-	"wikibase-client-desc": "Client voor de uitbreiding Wikibase",
+	"wikibase-client-desc": "Cliënt voor de uitbreiding Wikibase",
 	"tooltip-t-wikibase": "Koppeling naar item in verbonden gegevensrepository",
 	"wikibase-after-page-move": "Uw titelwijziging zou nu in de taalkoppeling van [$1 het {{WBREPONAME}}-item] bijgewerkt moeten zijn. We vragen u dit te controleren.",
 	"wikibase-after-page-delete": "De koppeling naar deze pagina zou nu van [$1 het gekoppelde {{WBREPONAME}}-item] verwijderd moeten zijn. We vragen u dit te controleren.",
@@ -120,12 +121,18 @@
 	"wikibase-client-data-bridge-permissions-error-info": "Meer weergeven",
 	"wikibase-client-data-bridge-edit-decision-heading": "Kies de soort gemaakte bewerking:",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Ik heb</strong> een verouderde waarde <strong>bijgewerkt</strong>",
+	"wikibase-client-data-bridge-references-heading": "Referenties",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Bewerken zonder aan te melden",
 	"wikibase-client-data-bridge-unknown-error-heading": "Er is iets misgegaan",
 	"wikibase-client-data-bridge-unknown-error-message": "Er is een fout opgetreden en de geselecteerde waarde kan nu niet aangepast worden. Probeer te herladen.",
 	"wikibase-client-data-bridge-error-report": "<p>Als de fout aanhoudt, wilt u dit probleem dan [$1 rapporteren]? Beschrijf uw handelingen en neem de volgende informatie op:</p>\n<ul>\n<li>$2</li>\n<li>$3 van $4</li>\n<li>Foutcode: $5</li>\n</ul>",
 	"wikibase-client-data-bridge-error-reload-bridge": "Herladen",
+	"wikibase-client-data-bridge-error-reload-page": "Pagina opnieuw laden",
 	"wikibase-client-data-bridge-error-go-back": "Ga terug",
+	"wikibase-client-data-bridge-error-retry-save": "Opslaan opnieuw proberen",
+	"wikibase-client-data-bridge-thank-you-head": "Dank u voor uw bewerking!",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Bewerk referentie op {{WBREPONAME}}",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "U bent niet aangemeld",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Publiceren zonder aan te melden",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Opslaan zonder aan te melden",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Doorgaan met bewerken"

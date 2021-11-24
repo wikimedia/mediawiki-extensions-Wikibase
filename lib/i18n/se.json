@@ -1,6 +1,9 @@
 {
 	"@metadata": {
-		"authors": []
+		"authors": [
+			"Yupik"
+		]
 	},
-	"wikibase-sitelinks-wikipedia": "Wikipedia"
+	"wikibase-sitelinks-wikipedia": "Wikipedia",
+	"wikibase-reference-formatter-snak-retrieved": "Čujuhuvvon $1"
 }

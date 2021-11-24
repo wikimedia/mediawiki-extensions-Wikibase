@@ -4,9 +4,22 @@
 			"Yupik"
 		]
 	},
+	"wikibase-edit": "muuʹtt",
+	"wikibase-save": "ruõkk",
+	"wikibase-publish": "õlmstââʹtt",
+	"wikibase-add": "lââʹzzet",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Jeeʹres ǩiõlid",
 	"wikibase-entitytermsforlanguagelistview-language": "Ǩiõll",
 	"wikibase-content-language-edit-label": "Ǩiõll:",
 	"wikibase-diffview-link": "liiŋk",
-	"wikibase-newentity-language": "Ǩiõll:"
+	"wikibase-sitelink-page-edit-placeholder": "seidd",
+	"wikibase-remove": "jaukkâd",
+	"wikibase-itembytitle-lookup-page": "Seidd:",
+	"wikibase-itembytitle-submit": "Ooʒʒ",
+	"wikibase-itemdisambiguation-lookup-language": "Ǩiõllkoodd:",
+	"wikibase-itemdisambiguation-submit": "Ooʒʒ",
+	"wikibase-newentity-language": "Ǩiõll:",
+	"wikibase-newentity-submit": "Raaj",
+	"wikibase-modifyterm-language": "Ǩiõllkoodd:",
+	"wikibase-listproperties-submit": "Ooʒʒ"
 }
