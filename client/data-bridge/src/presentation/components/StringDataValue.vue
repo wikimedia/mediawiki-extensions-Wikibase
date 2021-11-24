@@ -8,8 +8,9 @@
 			:id="id"
 			class="wb-db-string-value__input"
 			:placeholder="placeholder"
-			:maxlength="maxlength"
-			v-model="value"
+			:max-length="maxlength"
+			:value="value"
+			@input="value = $event"
 		/>
 	</div>
 </template>
@@ -17,7 +18,7 @@
 import Vue, { PropType } from 'vue';
 import PropertyLabel from '@/presentation/components/PropertyLabel.vue';
 import { DataValue } from '@wmde/wikibase-datamodel-types';
-import { ResizingTextField } from '@wmde/wikibase-vuejs-components';
+import ResizingTextField from '@/presentation/components/ResizingTextField.vue';
 import { v4 as uuid } from 'uuid';
 import Term from '@/datamodel/Term';
 

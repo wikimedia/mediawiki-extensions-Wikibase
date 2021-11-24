@@ -4,7 +4,12 @@
 			{{ $messages.getText( $messages.KEYS.EDIT_DECISION_HEADING ) }}
 		</h2>
 		<RadioGroup>
-			<RadioInput name="editDecision" html-value="replace" v-model="editDecision">
+			<RadioInput
+				name="editDecision"
+				html-value="replace"
+				value="editDecision"
+				@input="editDecision = $event"
+			>
 				<template slot="label">
 					<span v-html="$messages.get( $messages.KEYS.EDIT_DECISION_REPLACE_LABEL )" />
 				</template>
@@ -12,7 +17,12 @@
 					{{ $messages.getText( $messages.KEYS.EDIT_DECISION_REPLACE_DESCRIPTION ) }}
 				</template>
 			</RadioInput>
-			<RadioInput name="editDecision" html-value="update" v-model="editDecision">
+			<RadioInput
+				name="editDecision"
+				html-value="update"
+				value="editDecision"
+				@input="editDecision = $event"
+			>
 				<template slot="label">
 					<span v-html="$messages.get( $messages.KEYS.EDIT_DECISION_UPDATE_LABEL )" />
 				</template>
@@ -29,7 +39,7 @@ import Vue, { VueConstructor } from 'vue';
 import StateMixin from '@/presentation/StateMixin';
 import EditDecisionOption from '@/definitions/EditDecision';
 import RadioGroup from '@/presentation/components/RadioGroup.vue';
-import { RadioInput } from '@wmde/wikibase-vuejs-components';
+import RadioInput from '@/presentation/components/RadioInput.vue';
 
 export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
 	mixins: [ StateMixin ],

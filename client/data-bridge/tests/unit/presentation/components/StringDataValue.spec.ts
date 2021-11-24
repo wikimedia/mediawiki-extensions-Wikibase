@@ -1,6 +1,6 @@
 import PropertyLabel from '@/presentation/components/PropertyLabel.vue';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
-import { ResizingTextField } from '@wmde/wikibase-vuejs-components';
+import ResizingTextField from '@/presentation/components/ResizingTextField.vue';
 import { shallowMount } from '@vue/test-utils';
 
 const defaultLabel = { value: 'dont assert me!', language: 'zxx' };

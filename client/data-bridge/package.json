@@ -69,7 +69,6 @@
     "@wmde/lib-version-check": "^0.1.0",
     "@wmde/vuex-helpers": "^0.1.2",
     "@wmde/wikibase-datamodel-types": "^0.1.0",
-    "@wmde/wikibase-vuejs-components": "^0.1.9",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",

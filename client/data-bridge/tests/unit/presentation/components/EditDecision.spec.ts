@@ -1,6 +1,7 @@
 import MessageKeys from '@/definitions/MessageKeys';
 import EditDecision from '@/presentation/components/EditDecision.vue';
 import RadioGroup from '@/presentation/components/RadioGroup.vue';
+import RadioInput from '@/presentation/components/RadioInput.vue';
 import { createStore } from '@/store';
 import Application from '@/store/Application';
 import {
@@ -8,7 +9,6 @@ import {
 	mount,
 	shallowMount,
 } from '@vue/test-utils';
-import { RadioInput } from '@wmde/wikibase-vuejs-components';
 import Vuex, { Store } from 'vuex';
 import { createTestStore } from '../../../util/store';
 import newMockServiceContainer from '../../services/newMockServiceContainer';
