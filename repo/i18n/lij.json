@@ -3,6 +3,7 @@
 		"authors": [
 			"Giromin Cangiaxo",
 			"Ladsgroup",
+			"N. Longo",
 			"S4b1nuz E.656"
 		]
 	},
@@ -15,7 +16,7 @@
 	"wikibase-save": "sarva",
 	"wikibase-publish": "pubbrica",
 	"wikibase-cancel": "anulla",
-	"wikibase-add": "azonzi",
+	"wikibase-add": "azónzi",
 	"wikibase-addqualifier": "azonzi qualificatô",
 	"wikibase-addreference": "azonzi rifeimento",
 	"wikibase-save-inprogress": "Sarvamento in corso...",
@@ -35,10 +36,10 @@
 	"wikibase-entitytermsforlanguagelistview-language": "Lengua",
 	"wikibase-entitytermsforlanguagelistview-more": "Tutte e lengue inseje",
 	"wikibase-entitytermsforlanguagelistview-less": "Meno lengue",
-	"wikibase-label-empty": "Nisciun-a etichetta definia",
+	"wikibase-label-empty": "Nisciùnn-a etichétta definîa",
 	"wikibase-label-edit-placeholder": "scrivi 'n'etichetta",
 	"wikibase-label-edit-placeholder-language-aware": "scrivi 'n'etichetta in $1",
-	"wikibase-description-empty": "Nisciun-a descrission definia",
+	"wikibase-description-empty": "Nisciùnn-a descriçión definîa",
 	"wikibase-description-edit-placeholder": "scrivi 'na descrission",
 	"wikibase-description-edit-placeholder-language-aware": "scrivi 'na descrission in $1",
 	"wikibase-aliases-edit-placeholder": "mettighe di alias",
@@ -69,7 +70,7 @@
 	"wikibase-sitelinkgroupview-input-help-message": "Azonzi 'n ingancio a-o scito specificando o sito e 'na paggina de quello scito, modiffica ò leva i inganci a-i sciti existenti.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|scito|sciti}}",
 	"wikibase-sitelinks-empty": "No gh'è nisciun-a paggina inganciâ a questo Elemento.",
-	"wikibase-sitelinks-special": "Atri sciti",
+	"wikibase-sitelinks-special": "Âtri scîti",
 	"wikibase-badgeselector-badge-placeholder-title": "Clicca pe assegnâ un distintivo.",
 	"wikibase-remove": "leva",
 	"wikibase-undo-title": "Anullamento modiffica a \"$1\"",
