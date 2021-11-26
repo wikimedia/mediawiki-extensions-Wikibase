@@ -7,7 +7,6 @@
 	/>
 </template>
 <script lang="ts">
-// @ts-nocheck
 import debounce from 'lodash/debounce';
 import Vue from 'vue';
 
@@ -42,7 +41,7 @@ export default Vue.extend( {
 		window.addEventListener( 'resize', this.windowResizeHandler );
 		this.resizeTextField();
 	},
-	unmounted(): void {
+	destroyed(): void {
 		if ( this.windowResizeHandler !== undefined ) {
 			window.removeEventListener( 'resize', this.windowResizeHandler );
 			this.windowResizeHandler = undefined;
