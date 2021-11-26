@@ -32,7 +32,7 @@
 		"fix": "grunt fix"
 	},
 	"devDependencies": {
-		"@wdio/cli": "^7.16.8",
+		"@wdio/cli": "^7.16.10",
 		"@wdio/local-runner": "^7.16.8",
 		"@wdio/mocha-framework": "^7.16.6",
 		"@wdio/spec-reporter": "7.16.4",
