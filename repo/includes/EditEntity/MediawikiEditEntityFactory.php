@@ -4,6 +4,7 @@ namespace Wikibase\Repo\EditEntity;
 
 use IContextSource;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use MediaWiki\User\UserOptionsLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
@@ -59,6 +60,11 @@ class MediawikiEditEntityFactory {
 	private $stats;
 
 	/**
+	 * @var UserOptionsLookup
+	 */
+	private $userOptionsLookup;
+
+	/**
 	 * @var int
 	 */
 	private $maxSerializedEntitySize;
@@ -72,6 +78,7 @@ class MediawikiEditEntityFactory {
 		EntityPatcher $entityPatcher,
 		EditFilterHookRunner $editFilterHookRunner,
 		StatsdDataFactoryInterface $statsdDataFactory,
+		UserOptionsLookup $userOptionsLookup,
 		$maxSerializedEntitySize
 	) {
 		$this->titleLookup = $titleLookup;
@@ -82,6 +89,7 @@ class MediawikiEditEntityFactory {
 		$this->entityPatcher = $entityPatcher;
 		$this->editFilterHookRunner = $editFilterHookRunner;
 		$this->stats = $statsdDataFactory;
+		$this->userOptionsLookup = $userOptionsLookup;
 		$this->maxSerializedEntitySize = $maxSerializedEntitySize;
 	}
 
@@ -123,6 +131,7 @@ class MediawikiEditEntityFactory {
 					$this->stats,
 					$statsTimingPrefix . '.EditFilterHookRunner'
 				),
+				$this->userOptionsLookup,
 				$this->maxSerializedEntitySize,
 				$baseRevId,
 				$allowMasterConnection

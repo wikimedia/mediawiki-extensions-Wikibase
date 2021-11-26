@@ -4,6 +4,7 @@ namespace Wikibase\Repo;
 
 use Babel;
 use ExtensionRegistry;
+use MediaWiki\MediaWikiServices;
 use User;
 use Wikibase\Lib\UserLanguageLookup;
 
@@ -81,9 +82,9 @@ class BabelUserLanguageLookup implements UserLanguageLookup {
 	 */
 	public function getAllUserLanguages( User $user ) {
 		$languages = [];
-
+		$userOptionsLookup = MediaWikiServices::getInstance()->getUserOptionsLookup();
 		// Start with the user's UI language
-		$userLanguage = $user->getOption( 'language' );
+		$userLanguage = $userOptionsLookup->getOption( $user, 'language' );
 		if ( $userLanguage !== null ) {
 			$languages[] = $userLanguage;
 		}

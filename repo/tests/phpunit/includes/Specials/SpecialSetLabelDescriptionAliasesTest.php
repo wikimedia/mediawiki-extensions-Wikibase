@@ -73,6 +73,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				new EntityPatcher(),
 				$this->getMockEditFitlerHookRunner(),
 				new NullStatsdDataFactory(),
+				$this->getServiceContainer()->getUserOptionsLookup(),
 				PHP_INT_MAX
 			),
 			$this->getFingerprintChangeOpsFactory(),
@@ -171,7 +172,6 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	}
 
 	public function executeProvider() {
-
 		$fooFingerprint = $this->makeFingerprint(
 			[ 'de' => 'foo' ]
 		);
@@ -251,7 +251,6 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	}
 
 	public function testAllFormFieldsRendered_WhenPageRendered() {
-
 		list( $output ) = $this->executeSpecialPage( '' );
 
 		$this->assertHtmlContainsInputWithName( $output, 'id' );
@@ -374,6 +373,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				new EntityPatcher(),
 				$this->getMockEditFitlerHookRunner(),
 				new NullStatsdDataFactory(),
+				$this->getServiceContainer()->getUserOptionsLookup(),
 				PHP_INT_MAX
 			),
 			$this->getFingerprintChangeOpsFactory(),

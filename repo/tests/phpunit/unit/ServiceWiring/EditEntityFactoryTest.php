@@ -71,6 +71,10 @@ class EditEntityFactoryTest extends ServiceWiringTestCase {
 			->expects( $this->once() )
 			->method( 'getStatsdDataFactory' );
 
+		$this->serviceContainer
+			->expects( $this->once() )
+			->method( 'getUserOptionsLookup' );
+
 		$this->assertInstanceOf(
 			MediawikiEditEntityFactory::class,
 			$this->getService( 'WikibaseRepo.EditEntityFactory' )

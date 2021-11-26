@@ -7,6 +7,7 @@ use ChangesListSpecialPage;
 use ExtensionRegistry;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\Hook\ChangesListSpecialPageQueryHook;
+use MediaWiki\User\UserOptionsLookup;
 use User;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
@@ -31,24 +32,34 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 	private $showExternalChanges;
 
 	/**
+	 * @var UserOptionsLookup
+	 */
+	private $userOptionsLookup;
+
+	/**
 	 * @param IDatabase $dbr
 	 * @param bool $showExternalChanges
+	 * @param UserOptionsLookup $userOptionsLookup
 	 */
 	public function __construct(
 		IDatabase $dbr,
-		$showExternalChanges
+		$showExternalChanges,
+		UserOptionsLookup $userOptionsLookup
 	) {
 		$this->dbr = $dbr;
 		$this->showExternalChanges = $showExternalChanges;
+		$this->userOptionsLookup = $userOptionsLookup;
 	}
 
 	public static function factory(
+		UserOptionsLookup $userOptionsLookup,
 		ClientDomainDbFactory $dbFactory,
 		SettingsArray $clientSettings
 	): self {
 		return new self(
 			$dbFactory->newLocalDb()->connections()->getLazyReadConnectionRef(),
-			$clientSettings->getSetting( 'showExternalRecentChanges' )
+			$clientSettings->getSetting( 'showExternalRecentChanges' ),
+			$userOptionsLookup
 		);
 	}
 
@@ -80,6 +91,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 	public static function onChangesListSpecialPageStructuredFilters( $special ) {
 		$services = MediaWikiServices::getInstance();
 		$handler = self::factory(
+			MediaWikiServices::getInstance()->getUserOptionsLookup(),
 			WikibaseClient::getClientDomainDbFactory( $services ),
 			WikibaseClient::getSettings( $services )
 		);
@@ -114,7 +126,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 				$this->addWikibaseConditions( $dbr, $conds );
 			},
 			'cssClassSuffix' => 'src-mw-wikibase',
-			'isRowApplicableCallable' => function ( $ctx, $rc ) {
+			'isRowApplicableCallable' => static function ( $ctx, $rc ) {
 				return RecentChangeFactory::isWikibaseChange( $rc );
 			}
 		] );
@@ -168,7 +180,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 	}
 
 	private function hasShowWikibaseEditsPrefEnabled( User $user, string $pageName ): bool {
-		return (bool)$user->getOption( $this->getOptionName( $pageName ) );
+		return (bool)$this->userOptionsLookup->getOption( $user, $this->getOptionName( $pageName ) );
 	}
 
 	/**

@@ -57,7 +57,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->method( 'getTitleForId' )
-			->willReturnCallback( function( EntityId $id ) {
+			->willReturnCallback( static function ( EntityId $id ) {
 				return Title::makeTitle(
 					NS_MAIN,
 					$id->getEntityType() . '/' . $id->getSerialization()
@@ -75,7 +75,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	private function getEntityPermissionChecker( array $permissions = null ) {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
-		$checkAction = function( $user, $action ) use ( $permissions ) {
+		$checkAction = static function ( $user, $action ) use ( $permissions ) {
 			if ( $permissions === null
 				|| ( isset( $permissions[$action] ) && $permissions[$action] )
 			) {
@@ -158,6 +158,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			$entityId,
 			$context,
 			$editFilterHookRunner,
+			$this->getServiceContainer()->getUserOptionsLookup(),
 			$repoSettings['maxSerializedEntitySize'],
 			$baseRevId
 		);
@@ -413,12 +414,12 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 
 	public function dataCheckEditPermissions() {
 		return [
-			[ #0: edit allowed for new item
+			[ # 0: edit allowed for new item
 				[ 'read' => true, 'edit' => true, 'createpage' => true ],
 				false,
 				true,
 			],
-			[ #3: edit not allowed for existing item
+			[ # 3: edit not allowed for existing item
 				[ 'read' => true, 'edit' => false ],
 				true,
 				false,
@@ -655,19 +656,19 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 
 	public function provideIsTokenOk() {
 		return [
-			[ //0
+			[ // 0
 				true, // use a newly generated valid token
 				true, // should work
 			],
-			[ //1
+			[ // 1
 				"xyz", // use an invalid token
 				false, // should fail
 			],
-			[ //2
+			[ // 2
 				"", // use an empty token
 				false, // should fail
 			],
-			[ //3
+			[ // 3
 				null, // use no token
 				false, // should fail
 			],

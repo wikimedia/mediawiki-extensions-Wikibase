@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput\PlaceholderExpander;
 
+use MediaWiki\MediaWikiServices;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -50,6 +51,7 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( LanguageDirectionalityLookup::class ),
 			$languageNameLookup,
 			new DummyLocalizedTextProvider(),
+			MediaWikiServices::getInstance()->getUserOptionsLookup(),
 			$cookiePrefix
 		);
 	}

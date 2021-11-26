@@ -5,6 +5,7 @@ namespace Wikibase\Repo\EditEntity;
 use IContextSource;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\User\UserOptionsLookup;
 use MWException;
 use ReadOnlyError;
 use RuntimeException;
@@ -118,6 +119,11 @@ class MediawikiEditEntity implements EditEntity {
 	private $editFilterHookRunner;
 
 	/**
+	 * @var UserOptionsLookup
+	 */
+	private $userOptionsLookup;
+
+	/**
 	 * @var int Bit field for error types, using the EditEntity::XXX_ERROR constants.
 	 */
 	private $errorType = 0;
@@ -143,6 +149,7 @@ class MediawikiEditEntity implements EditEntity {
 	 *        May be null when creating a new entity.
 	 * @param IContextSource $context the request context for the edit
 	 * @param EditFilterHookRunner $editFilterHookRunner
+	 * @param UserOptionsLookup $userOptionsLookup
 	 * @param int $maxSerializedEntitySize the maximal allowed entity size in Kilobytes
 	 * @param int $baseRevId the base revision ID for conflict checking.
 	 *        Use 0 to indicate that the current revision should be used as the base revision,
@@ -162,6 +169,7 @@ class MediawikiEditEntity implements EditEntity {
 		?EntityId $entityId,
 		IContextSource $context,
 		EditFilterHookRunner $editFilterHookRunner,
+		UserOptionsLookup $userOptionsLookup,
 		$maxSerializedEntitySize,
 		$baseRevId = 0,
 		$allowMasterConnection = true
@@ -191,6 +199,7 @@ class MediawikiEditEntity implements EditEntity {
 		$this->entityPatcher = $entityPatcher;
 
 		$this->editFilterHookRunner = $editFilterHookRunner;
+		$this->userOptionsLookup = $userOptionsLookup;
 		$this->allowMasterConnection = $allowMasterConnection;
 		$this->maxSerializedEntitySize = $maxSerializedEntitySize;
 	}
@@ -261,7 +270,7 @@ class MediawikiEditEntity implements EditEntity {
 					$id,
 					$this->getReplicaMode()
 				);
-				$returnZero = function () {
+				$returnZero = static function () {
 					return 0;
 				};
 				$this->latestRevId = $result->onNonexistentEntity( $returnZero )
@@ -553,7 +562,7 @@ class MediawikiEditEntity implements EditEntity {
 	/**
 	 * Resolve user specific default default for watch state, if $watch is null.
 	 *
-	 * @param boolean|null $watch
+	 * @param bool|null $watch
 	 *
 	 * @return bool
 	 */
@@ -785,8 +794,9 @@ class MediawikiEditEntity implements EditEntity {
 	 */
 	private function getWatchDefault() {
 		// User wants to watch all edits or all creations.
-		if ( $this->user->getOption( 'watchdefault' )
-			|| ( $this->user->getOption( 'watchcreations' ) && $this->isNewPage() )
+		if ( $this->userOptionsLookup->getOption( $this->user, 'watchdefault' )
+			|| ( $this->userOptionsLookup->getOption( $this->user, 'watchcreations' )
+			&& $this->isNewPage() )
 		) {
 			return true;
 		}

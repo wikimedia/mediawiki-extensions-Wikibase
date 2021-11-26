@@ -129,7 +129,6 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 		EntityStore $editEntityStore = null,
 		array $tags = []
 	): UpdateRepoOnMoveJob {
-
 		if ( !isset( $editEntityLookup ) ) {
 			$editEntityLookup = $entityLookup;
 		}
@@ -154,6 +153,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 				new EntityPatcher(),
 				$this->getMockEditFitlerHookRunner(),
 				new NullStatsdDataFactory(),
+				$this->getServiceContainer()->getUserOptionsLookup(),
 				PHP_INT_MAX
 			),
 			new SettingsArray( [
