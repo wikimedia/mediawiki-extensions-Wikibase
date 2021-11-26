@@ -91,10 +91,13 @@ describe( 'App.vue', () => {
 		await store.dispatch( 'initBridge', information );
 	} );
 
+	const mockEmitter = { emit: jest.fn() };
+
 	it( 'renders the mountable root element', () => {
 		const wrapper = shallowMount( App, {
 			store,
 			localVue,
+			propsData: { emitter: mockEmitter },
 		} );
 
 		expect( wrapper.classes() ).toContain( 'wb-db-app' );
@@ -110,6 +113,7 @@ describe( 'App.vue', () => {
 		const wrapper = shallowMount( App, {
 			store: localStore,
 			localVue,
+			propsData: { emitter: mockEmitter },
 		} );
 
 		await wrapper.find( AppHeader ).vm.$emit( 'back' );
@@ -129,6 +133,7 @@ describe( 'App.vue', () => {
 			store: localStore,
 			localVue,
 			stubs: { EventEmittingButton },
+			propsData: { emitter: mockEmitter },
 		} );
 
 		await wrapper.find( AppHeader ).vm.$emit( 'save' );
@@ -144,8 +149,8 @@ describe( 'App.vue', () => {
 		localStore.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
 		expect( wrapper.find( ThankYou ).exists() ).toBe( true );
 		await wrapper.find( ThankYou ).vm.$emit( 'opened-reference-edit-on-repo' );
-		await localVue.nextTick();
-		expect( wrapper.emitted( initEvents.saved ) ).toHaveLength( 1 );
+		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
+		expect( mockEmitter.emit ).toHaveBeenCalledWith( initEvents.saved );
 	} );
 
 	it(
@@ -161,6 +166,7 @@ describe( 'App.vue', () => {
 			const wrapper = shallowMount( App, {
 				store: localStore,
 				localVue,
+				propsData: { emitter: mockEmitter },
 			} );
 
 			await wrapper.find( AppHeader ).vm.$emit( 'save' );
@@ -182,6 +188,7 @@ describe( 'App.vue', () => {
 		const wrapper = shallowMount( App, {
 			store,
 			localVue,
+			propsData: { emitter: mockEmitter },
 		} );
 
 		await wrapper.find( AppHeader ).vm.$emit( 'save' );
@@ -195,6 +202,7 @@ describe( 'App.vue', () => {
 			store,
 			localVue,
 			stubs: { ProcessDialogHeader, EventEmittingButton },
+			propsData: { emitter: mockEmitter },
 		} );
 
 		store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
@@ -206,40 +214,42 @@ describe( 'App.vue', () => {
 		const wrapper = shallowMount( App, {
 			store,
 			localVue,
+			propsData: { emitter: mockEmitter },
 		} );
 
 		store.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
 
 		await wrapper.find( AppHeader ).vm.$emit( 'close' );
-		await localVue.nextTick();
-
-		expect( wrapper.emitted( initEvents.saved ) ).toHaveLength( 1 );
+		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
+		expect( mockEmitter.emit ).toHaveBeenCalledWith( initEvents.saved );
 	} );
 
 	it( 'cancels on close button click', async () => {
 		const wrapper = shallowMount( App, {
 			store,
 			localVue,
+			propsData: { emitter: mockEmitter },
 		} );
 
 		await wrapper.find( AppHeader ).vm.$emit( 'close' );
-		await localVue.nextTick();
 
-		expect( wrapper.emitted( initEvents.cancel ) ).toHaveLength( 1 );
+		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
+		expect( mockEmitter.emit ).toHaveBeenCalledWith( initEvents.cancel );
 	} );
 
 	it( 'reloads on close button click during edit conflict', async () => {
 		const wrapper = shallowMount( App, {
 			store,
 			localVue,
+			propsData: { emitter: mockEmitter },
 		} );
 
 		store.commit( 'addApplicationErrors', [ { type: ErrorTypes.EDIT_CONFLICT } ] );
 
 		await wrapper.find( AppHeader ).vm.$emit( 'close' );
-		await localVue.nextTick();
 
-		expect( wrapper.emitted( initEvents.reload ) ).toHaveLength( 1 );
+		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
+		expect( mockEmitter.emit ).toHaveBeenCalledWith( initEvents.reload );
 	} );
 
 	describe( 'component switch', () => {
@@ -250,6 +260,7 @@ describe( 'App.vue', () => {
 				const wrapper = shallowMount( App, {
 					store,
 					localVue,
+					propsData: { emitter: mockEmitter },
 				} );
 
 				expect( wrapper.find( ErrorWrapper ).exists() ).toBe( true );
@@ -263,10 +274,12 @@ describe( 'App.vue', () => {
 				const wrapper = shallowMount( App, {
 					store,
 					localVue,
+					propsData: { emitter: mockEmitter },
 				} );
 				wrapper.find( ErrorWrapper ).vm.$emit( errorWrapperEvent );
 
-				expect( wrapper.emitted( initAppEvent ) ).toHaveLength( 1 );
+				expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
+				expect( mockEmitter.emit ).toHaveBeenCalledWith( initAppEvent );
 			} );
 		} );
 
@@ -276,6 +289,7 @@ describe( 'App.vue', () => {
 				const wrapper = shallowMount( App, {
 					store,
 					localVue,
+					propsData: { emitter: mockEmitter },
 				} );
 
 				expect( wrapper.find( Loading ).exists() ).toBe( true );
@@ -287,6 +301,7 @@ describe( 'App.vue', () => {
 				const wrapper = shallowMount( App, {
 					store,
 					localVue,
+					propsData: { emitter: mockEmitter },
 				} );
 
 				expect( wrapper.find( Loading ).props( 'isInitializing' ) ).toBe( true );
@@ -297,6 +312,7 @@ describe( 'App.vue', () => {
 				const wrapper = shallowMount( App, {
 					store,
 					localVue,
+					propsData: { emitter: mockEmitter },
 				} );
 
 				expect( wrapper.find( Loading ).props( 'isSaving' ) ).toBe( true );
@@ -307,6 +323,7 @@ describe( 'App.vue', () => {
 				const wrapper = shallowMount( App, {
 					store,
 					localVue,
+					propsData: { emitter: mockEmitter },
 				} );
 
 				expect( wrapper.find( Loading ).props( 'isInitializing' ) ).toBe( false );
@@ -328,6 +345,7 @@ describe( 'App.vue', () => {
 					store,
 					localVue,
 					mocks: { $clientRouter },
+					propsData: { emitter: mockEmitter },
 				} );
 
 				expect( wrapper.find( WarningAnonymousEdit ).exists() ).toBe( true );
@@ -357,6 +375,7 @@ describe( 'App.vue', () => {
 					store,
 					localVue,
 					mocks: { $clientRouter },
+					propsData: { emitter: mockEmitter },
 				} );
 
 				expect( wrapper.find( WarningAnonymousEdit ).exists() ).toBe( true );

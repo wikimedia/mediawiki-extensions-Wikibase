@@ -40,7 +40,8 @@
 </template>
 
 <script lang="ts">
-import Vue, { VueConstructor } from 'vue';
+import Vue, { PropType, VueConstructor } from 'vue';
+import { EventEmitter } from 'events';
 import WarningAnonymousEdit from '@/presentation/components/WarningAnonymousEdit.vue';
 import Events from '@/events';
 import StateMixin from '@/presentation/StateMixin';
@@ -68,6 +69,12 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 		return {
 			licenseIsVisible: false,
 		};
+	},
+	props: {
+		emitter: {
+			required: true,
+			type: Object as PropType<EventEmitter>,
+		},
 	},
 	computed: {
 		isOverlayed(): boolean {
@@ -107,11 +114,11 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 	methods: {
 		close(): void {
 			if ( this.isSaved ) {
-				this.$emit( Events.saved );
+				this.emitter.emit( Events.saved );
 			} else if ( this.hasErrorRequiringReload ) {
 				this.reload();
 			} else {
-				this.$emit( Events.cancel );
+				this.emitter.emit( Events.cancel );
 			}
 		},
 		back(): void {
@@ -131,21 +138,21 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 			this.rootModule.dispatch( 'saveBridge' );
 		},
 		openedReferenceEditOnRepo(): void {
-			this.$emit( Events.saved );
+			this.emitter.emit( Events.saved );
 		},
 		relaunch(): void {
 			/**
 			 * An event fired when it is time to relaunch the bridge (usually bubbled from a child component)
 			 * @type {Event}
 			 */
-			this.$emit( Events.relaunch );
+			this.emitter.emit( Events.relaunch );
 		},
 		reload(): void {
 			/**
 			 * An event fired when the user requested to reload the whole page (usually bubbled from a child component)
 			 * @type {Event}
 			 */
-			this.$emit( Events.reload );
+			this.emitter.emit( Events.reload );
 		},
 		dismissWarningAnonymousEdit(): void {
 			this.rootModule.dispatch( 'dismissWarningAnonymousEdit' );

@@ -2,7 +2,7 @@ import { launch } from '@/main';
 import Vue from 'vue';
 import App from '@/presentation/App.vue';
 import { EventEmitter } from 'events';
-import { initEvents, appEvents } from '@/events';
+import { appEvents } from '@/events';
 import newMockServiceContainer from './services/newMockServiceContainer';
 
 const mockApp = {
@@ -14,7 +14,9 @@ jest.mock( '@/presentation/App.vue', () => {
 	return jest.fn().mockImplementation( () => mockApp );
 } );
 
-const mockEmitter = {};
+const mockEmitter = {
+	on: jest.fn(),
+};
 jest.mock( 'events', () => ( {
 	__esModule: true,
 	EventEmitter: jest.fn(),
@@ -39,12 +41,6 @@ const mockCreateStore = jest.fn( ( _x: any ) => store );
 jest.mock( '@/store', () => ( {
 	__esModule: true,
 	createStore: ( services: any ) => mockCreateStore( services ),
-} ) );
-
-const mockRepeater = jest.fn();
-jest.mock( '@/events/repeater', () => ( {
-	__esModule: true,
-	default: ( app: any, emitter: any, events: any ) => mockRepeater( app, emitter, events ),
 } ) );
 
 const mockExtendVueEnvironment = jest.fn();
@@ -91,15 +87,10 @@ describe( 'launch', () => {
 		expect( emitter ).toBe( mockEmitter );
 		expect( mockCreateStore ).toHaveBeenCalledWith( services );
 		expect( store.dispatch ).toHaveBeenCalledWith( 'initBridge', appInformation );
-		expect( App ).toHaveBeenCalledWith( { store } );
+		expect( App ).toHaveBeenCalledWith( { store, propsData: { emitter: mockEmitter } } );
 		expect( mockApp.$mount ).toHaveBeenCalledWith( appConfiguration.containerSelector );
-		expect( mockApp.$on ).toHaveBeenCalledTimes( 1 );
-		expect( mockApp.$on.mock.calls[ 0 ][ 0 ] ).toBe( appEvents.relaunch );
-		expect( mockRepeater ).toHaveBeenCalledWith(
-			mockApp,
-			mockEmitter,
-			Object.values( initEvents ),
-		);
+		expect( mockEmitter.on ).toHaveBeenCalledTimes( 1 );
+		expect( mockEmitter.on.mock.calls[ 0 ][ 0 ] ).toBe( appEvents.relaunch );
 	} );
 
 } );

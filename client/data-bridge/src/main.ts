@@ -4,9 +4,8 @@ import AppInformation from '@/definitions/AppInformation';
 import AppConfiguration from '@/definitions/AppConfiguration';
 import { createStore } from '@/store';
 import ServiceContainer from '@/services/ServiceContainer';
-import { initEvents, appEvents } from '@/events';
+import { appEvents } from '@/events';
 import { EventEmitter } from 'events';
-import repeater from '@/events/repeater';
 import extendVueEnvironment from '@/presentation/extendVueEnvironment';
 import createServices from '@/services/createServices';
 
@@ -28,16 +27,15 @@ export function launch(
 	const store = createStore( services );
 	store.dispatch( 'initBridge', information );
 
+	const emitter = new EventEmitter();
 	const app = new App( {
 		store,
+		propsData: { emitter },
 	} );
 	app.$mount( config.containerSelector );
-	app.$on( appEvents.relaunch, () => {
+	emitter.on( appEvents.relaunch, () => {
 		store.dispatch( 'relaunchBridge', information );
 	} );
-
-	const emitter = new EventEmitter();
-	repeater( app, emitter, Object.values( initEvents ) );
 
 	return emitter;
 }
