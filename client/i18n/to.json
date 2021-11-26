@@ -4,14 +4,6 @@
 			"Weather Top Wizard"
 		]
 	},
-	"wikibase-dataitem": "{{WBREPONAME}} fili",
-	"wikibase-editlinks": "Fatu fehokotaki",
-	"wikibase-editlinkstitle": "Fatu ngaahi-lea fehokotaki",
-	"wikibase-linkitem-addlinks": "Tānaki fehokotaki",
-	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Toi",
-	"wikibase-rc-hide-wikidata-show": "ʻAsi mai",
-	"wikibase-rc-wikibase-edit-letter": "Wf",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} fatu",
-	"wikibase-otherprojects": "ʻI he ngaahi ngāue kehé"
+	"wikibase-rc-hide-wikidata-show": "ʻAsi mai"
 }
