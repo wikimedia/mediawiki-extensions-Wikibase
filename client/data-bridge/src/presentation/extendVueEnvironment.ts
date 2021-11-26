@@ -1,5 +1,6 @@
 import Vue from 'vue';
-import inlanguage from './directives/inlanguage';
+import { VueConstructor } from 'vue/types/vue';
+import inlanguage from '@/presentation/directives/inlanguage';
 import MessagesPlugin from './plugins/MessagesPlugin';
 import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
 import MessagesRepository from '@/definitions/data-access/MessagesRepository';
@@ -10,6 +11,7 @@ import ClientRouterPlugin from '@/presentation/plugins/ClientRouterPlugin';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 
 export default function extendVueEnvironment(
+	app: ReturnType<VueConstructor['createMwApp']>,
 	languageInfoRepo: LanguageInfoRepository,
 	messageRepo: MessagesRepository,
 	bridgeConfigOptions: WikibaseClientConfiguration,
@@ -17,8 +19,8 @@ export default function extendVueEnvironment(
 	clientRouter: MediaWikiRouter,
 ): void {
 	Vue.directive( 'inlanguage', inlanguage( languageInfoRepo ) );
-	Vue.use( MessagesPlugin, messageRepo );
-	Vue.use( BridgeConfig, bridgeConfigOptions );
-	Vue.use( RepoRouterPlugin, repoRouter );
-	Vue.use( ClientRouterPlugin, clientRouter );
+	app.use( MessagesPlugin, messageRepo );
+	app.use( BridgeConfig, bridgeConfigOptions );
+	app.use( RepoRouterPlugin, repoRouter );
+	app.use( ClientRouterPlugin, clientRouter );
 }

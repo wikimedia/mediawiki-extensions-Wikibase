@@ -22,8 +22,10 @@ import {
 	selectRadioInput,
 } from '../util/e2e';
 import Entities from '@/mock-data/data/Q42.data.json';
+import Vuex from 'vuex';
 
 Vue.config.devtools = false;
+Vue.use( Vuex );
 
 const manager = {
 	on: jest.fn(),

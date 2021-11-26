@@ -1,8 +1,12 @@
 import { createStore } from '@/store';
 import newMockServiceContainer from '../services/newMockServiceContainer';
+import { createLocalVue } from '@vue/test-utils';
+import Vuex from 'vuex';
 
 describe( 'store/index', () => {
 	it( 'creates the store', () => {
+		const localVue = createLocalVue();
+		localVue.use( Vuex );
 		const store = createStore( newMockServiceContainer( {} ) );
 		expect( store ).toBeDefined();
 		expect( store.state ).toBeDefined();

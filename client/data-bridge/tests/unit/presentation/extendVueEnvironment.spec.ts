@@ -4,7 +4,6 @@ import RepoRouterPlugin from '@/presentation/plugins/RepoRouterPlugin';
 jest.mock( 'vue', () => {
 	return {
 		directive: jest.fn(),
-		use: jest.fn(),
 	};
 } );
 
@@ -21,10 +20,15 @@ jest.mock( '@/presentation/directives/inlanguage', () => ( {
 	default: ( languageRepo: any ) => mockInlanguage( languageRepo ),
 } ) );
 
+const appMock: any = {
+	use: jest.fn(),
+};
+
 describe( 'extendVueEnvironment', () => {
 	it( 'attaches inlanguage directive', () => {
 		const languageInfoRepo = new ( jest.fn() )();
 		extendVueEnvironment(
+			appMock,
 			languageInfoRepo,
 			new ( jest.fn() )(),
 			{} as WikibaseClientConfiguration,
@@ -38,18 +42,20 @@ describe( 'extendVueEnvironment', () => {
 	it( 'invokes the Messages plugin', () => {
 		const messageRepo = new ( jest.fn() )();
 		extendVueEnvironment(
+			appMock,
 			new ( jest.fn() )(),
 			messageRepo,
 			{} as WikibaseClientConfiguration,
 			new ( jest.fn() )(),
 			new ( jest.fn() )(),
 		);
-		expect( Vue.use ).toHaveBeenCalledWith( MessagesPlugin, messageRepo );
+		expect( appMock.use ).toHaveBeenCalledWith( MessagesPlugin, messageRepo );
 	} );
 
 	it( 'invokes the BridgeConfig plugin', () => {
 		const config = { usePublish: true, issueReportingLink: '' };
 		extendVueEnvironment(
+			appMock,
 			new ( jest.fn() )(),
 			new ( jest.fn() )(),
 			config,
@@ -57,12 +63,13 @@ describe( 'extendVueEnvironment', () => {
 			new ( jest.fn() )(),
 		);
 
-		expect( Vue.use ).toHaveBeenCalledWith( BridgeConfig, config );
+		expect( appMock.use ).toHaveBeenCalledWith( BridgeConfig, config );
 	} );
 
 	it( 'invokes the RepoRouterPlugin plugin', () => {
 		const repoRouter = new ( jest.fn() )();
 		extendVueEnvironment(
+			appMock,
 			new ( jest.fn() )(),
 			new ( jest.fn() )(),
 			{} as WikibaseClientConfiguration,
@@ -70,12 +77,13 @@ describe( 'extendVueEnvironment', () => {
 			new ( jest.fn() )(),
 		);
 
-		expect( Vue.use ).toHaveBeenCalledWith( RepoRouterPlugin, repoRouter );
+		expect( appMock.use ).toHaveBeenCalledWith( RepoRouterPlugin, repoRouter );
 	} );
 
 	it( 'invokes the ClientRouterPlugin plugin', () => {
 		const clientRouter = new ( jest.fn() )();
 		extendVueEnvironment(
+			appMock,
 			new ( jest.fn() )(),
 			new ( jest.fn() )(),
 			{} as WikibaseClientConfiguration,
@@ -83,6 +91,6 @@ describe( 'extendVueEnvironment', () => {
 			clientRouter,
 		);
 
-		expect( Vue.use ).toHaveBeenCalledWith( ClientRouterPlugin, clientRouter );
+		expect( appMock.use ).toHaveBeenCalledWith( ClientRouterPlugin, clientRouter );
 	} );
 } );

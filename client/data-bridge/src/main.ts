@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue, { CreateElement } from 'vue';
 import App from '@/presentation/App.vue';
 import AppInformation from '@/definitions/AppInformation';
 import AppConfiguration from '@/definitions/AppConfiguration';
@@ -16,7 +16,22 @@ export function launch(
 	information: AppInformation,
 	services: ServiceContainer,
 ): EventEmitter {
+	const store = createStore( services );
+	store.dispatch( 'initBridge', information );
+
+	const emitter = new EventEmitter();
+
+	const compatApp = {
+		store,
+		render( h: CreateElement ) {
+			return h( App, { props: { emitter } } );
+		},
+	};
+
+	const app = Vue.createMwApp( compatApp );
+
 	extendVueEnvironment(
+		app,
 		services.get( 'languageInfoRepository' ),
 		services.get( 'messagesRepository' ),
 		information.client,
@@ -24,15 +39,7 @@ export function launch(
 		services.get( 'clientRouter' ),
 	);
 
-	const store = createStore( services );
-	store.dispatch( 'initBridge', information );
-
-	const emitter = new EventEmitter();
-	const app = new App( {
-		store,
-		propsData: { emitter },
-	} );
-	app.$mount( config.containerSelector );
+	app.mount( config.containerSelector );
 	emitter.on( appEvents.relaunch, () => {
 		store.dispatch( 'relaunchBridge', information );
 	} );

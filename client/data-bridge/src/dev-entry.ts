@@ -7,13 +7,22 @@ import Entities from '@/mock-data/data/Q42.data.json';
 import EditFlow from '@/definitions/EditFlow';
 import getOrEnforceUrlParameter from '@/mock-data/getOrEnforceUrlParameter';
 import ServiceContainer from '@/services/ServiceContainer';
-import { launch } from '@/main';
 import EntityRevision from '@/datamodel/EntityRevision';
-import { initEvents } from '@/events';
+import { appEvents, initEvents } from '@/events';
 import MessageKeys from '@/definitions/MessageKeys';
 import clone from '@/store/clone';
 import messages from '@/mock-data/messages';
 import cssjanus from 'cssjanus';
+import Vue from 'vue';
+import Vuex from 'vuex';
+import AppConfiguration from '@/definitions/AppConfiguration';
+import AppInformation from '@/definitions/AppInformation';
+import { EventEmitter } from 'events';
+import { createStore } from '@/store';
+import App from '@/presentation/App.vue';
+import extendVueEnvironment from '@/presentation/extendVueEnvironment';
+
+Vue.use( Vuex );
 
 const services = new ServiceContainer();
 
@@ -152,7 +161,40 @@ services.set( 'purgeTitles', {
 	},
 } );
 
-launch(
+// copy of main.ts’ launch() but without createMwApp(), to be removed later
+function devlaunch(
+	config: AppConfiguration,
+	information: AppInformation,
+	services: ServiceContainer,
+): EventEmitter {
+
+	extendVueEnvironment(
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		Vue as any,
+		services.get( 'languageInfoRepository' ),
+		services.get( 'messagesRepository' ),
+		information.client,
+		services.get( 'repoRouter' ),
+		services.get( 'clientRouter' ),
+	);
+
+	const store = createStore( services );
+	store.dispatch( 'initBridge', information );
+	const emitter = new EventEmitter();
+	const app = new App( {
+		store,
+		propsData: { emitter },
+	} );
+	app.$mount( config.containerSelector );
+
+	emitter.on( appEvents.relaunch, () => {
+		store.dispatch( 'relaunchBridge', information );
+	} );
+
+	return emitter;
+}
+
+devlaunch(
 	{
 		containerSelector: '#data-bridge-container',
 	},

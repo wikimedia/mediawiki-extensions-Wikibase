@@ -11,6 +11,8 @@ describe( 'ErrorSavingAssertUser', () => {
 	const stopAssertingUserWhenSaving = jest.fn();
 	const retrySave = jest.fn();
 	const goBackFromErrorToReady = jest.fn();
+	const localVue = createLocalVue();
+	localVue.use( Vuex );
 	const store = createTestStore( {
 		actions: {
 			stopAssertingUserWhenSaving,
@@ -18,9 +20,6 @@ describe( 'ErrorSavingAssertUser', () => {
 			goBackFromErrorToReady,
 		},
 	} );
-
-	const localVue = createLocalVue();
-	localVue.use( Vuex );
 
 	it( 'matches the snapshot', () => {
 		const $messages = {

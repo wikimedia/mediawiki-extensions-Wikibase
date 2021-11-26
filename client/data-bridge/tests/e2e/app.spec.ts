@@ -32,8 +32,10 @@ import { ApiQueryInfoTestResponsePage, ApiQueryResponseBody } from '@/definition
 import { ApiErrorRawErrorformat } from '@/data-access/ApiPageEditPermissionErrorsRepository';
 import { SpecialPageWikibaseEntityResponse } from '@/data-access/SpecialPageReadingEntityRepository';
 import MwConfig from '@/@types/mediawiki/MwConfig';
+import Vuex from 'vuex';
 
 Vue.config.devtools = false;
+Vue.use( Vuex );
 
 const on = jest.fn();
 const clearWindows = jest.fn( () => Promise.resolve() );

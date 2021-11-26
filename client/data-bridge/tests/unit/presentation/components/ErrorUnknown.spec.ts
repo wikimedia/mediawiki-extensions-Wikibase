@@ -19,10 +19,10 @@ describe( 'ErrorUnknown', () => {
 	const mocks = { $messages };
 
 	const trackErrorsFallingBackToGenericView = jest.fn();
-	const store = createTestStore( { actions: { trackErrorsFallingBackToGenericView } } );
 
 	const localVue = createLocalVue();
 	localVue.use( Vuex );
+	const store = createTestStore( { actions: { trackErrorsFallingBackToGenericView } } );
 
 	it( 'creates a heading with the right message', () => {
 		const wrapper = shallowMount( ErrorUnknown, { mocks, store, localVue } );
@@ -58,7 +58,7 @@ describe( 'ErrorUnknown', () => {
 	} );
 
 	it( 'repeats relaunch button\'s "click" event as "relaunch"', () => {
-		const wrapper = shallowMount( ErrorUnknown, { store } );
+		const wrapper = shallowMount( ErrorUnknown, { store, localVue } );
 		wrapper.find( '.wb-db-error-unknown__relaunch' ).vm.$emit( 'click' );
 		expect( wrapper.emitted( 'relaunch' ) ).toHaveLength( 1 );
 	} );

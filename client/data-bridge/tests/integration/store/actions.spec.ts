@@ -3,7 +3,7 @@ import {
 	DataValueType,
 } from '@wmde/wikibase-datamodel-types';
 import Entity from '@/datamodel/Entity';
-import { Store } from 'vuex';
+import Vuex, { Store } from 'vuex';
 import { ErrorTypes } from '@/definitions/ApplicationError';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import Application, { InitializedApplicationState } from '@/store/Application';
@@ -21,6 +21,7 @@ import clone from '@/store/clone';
 import EditDecision from '@/definitions/EditDecision';
 import newMockTracker from '../../util/newMockTracker';
 import { getMockBridgeRepoConfig } from '../../util/mocks';
+import { createLocalVue } from '@vue/test-utils';
 
 describe( 'store/actions', () => {
 	let store: Store<Application>;
@@ -153,6 +154,8 @@ describe( 'store/actions', () => {
 			userName: 'Test user',
 		};
 
+		const localVue = createLocalVue();
+		localVue.use( Vuex );
 		store = createStore( services );
 		await store.dispatch( 'initBridge', info );
 	} );

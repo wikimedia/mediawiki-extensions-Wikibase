@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import Vuex, { Store } from 'vuex';
+import { Store } from 'vuex';
 import Application from '@/store/Application';
 import { RootActions } from '@/store/actions';
 import { RootGetters } from '@/store/getters';
@@ -11,8 +10,6 @@ import { NS_ENTITY, NS_STATEMENTS } from '@/store/namespaces';
 import { entityModule } from './entity';
 import { statementModule } from '@/store/statements';
 import mutationsTrackerPlugin from '@/tracking/mutationsTrackerPlugin';
-
-Vue.use( Vuex );
 
 export const rootModule = new Module( {
 	state: BaseState,

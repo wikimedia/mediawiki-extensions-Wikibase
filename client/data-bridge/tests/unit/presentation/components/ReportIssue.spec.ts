@@ -1,8 +1,12 @@
 import { ErrorTypes } from '@/definitions/ApplicationError';
 import MessageKeys from '@/definitions/MessageKeys';
 import ReportIssue from '@/presentation/components/ReportIssue.vue';
-import { shallowMount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { createTestStore } from '../../../util/store';
+import Vuex from 'vuex';
+
+const localVue = createLocalVue();
+localVue.use( Vuex );
 
 describe( 'ReportIssue', () => {
 	it( 'shows a message with the right parameters', () => {
@@ -29,7 +33,7 @@ describe( 'ReportIssue', () => {
 		const $bridgeConfig = {
 			issueReportingLink: 'https://bugs.example/new',
 		};
-		const wrapper = shallowMount( ReportIssue, { store, mocks: { $messages, $bridgeConfig } } );
+		const wrapper = shallowMount( ReportIssue, { store, mocks: { $messages, $bridgeConfig }, localVue } );
 		expect( $messages.get ).toHaveBeenCalledTimes( 1 );
 		expect( $messages.get ).toHaveBeenCalledWith(
 			MessageKeys.ERROR_REPORT,
@@ -61,7 +65,7 @@ describe( 'ReportIssue', () => {
 		const $bridgeConfig = {
 			issueReportingLink: 'https://bugs.example/new?body=<body>&tag=data-bridge',
 		};
-		shallowMount( ReportIssue, { store, mocks: { $messages, $bridgeConfig } } );
+		shallowMount( ReportIssue, { store, mocks: { $messages, $bridgeConfig }, localVue } );
 		expect( $messages.get.mock.calls[ 0 ][ 1 ] ).toBe(
 			'https://bugs.example/new?body=%22report%20issue%22%20template%20%60body%60%20%26%3D%23&tag=data-bridge',
 		);

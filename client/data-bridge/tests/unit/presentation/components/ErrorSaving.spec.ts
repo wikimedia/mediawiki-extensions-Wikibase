@@ -20,10 +20,10 @@ describe( 'ErrorSaving', () => {
 
 	const retrySave = jest.fn();
 	const trackSavingErrorsFallingBackToGenericView = jest.fn();
-	const store = createTestStore( { actions: { retrySave, trackSavingErrorsFallingBackToGenericView } } );
 
 	const localVue = createLocalVue();
 	localVue.use( Vuex );
+	const store = createTestStore( { actions: { retrySave, trackSavingErrorsFallingBackToGenericView } } );
 
 	it( 'creates a heading with the right message', () => {
 		const wrapper = shallowMount( ErrorSaving, { mocks, store, localVue } );
