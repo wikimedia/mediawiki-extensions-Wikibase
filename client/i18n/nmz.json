@@ -7,5 +7,12 @@
 	"wikibase-dataitem": "{{WBREPONAME}} wangu",
 	"wikibase-editlinks": "Manyi togdgu",
 	"wikibase-linkitem-addlinks": "Hewl togdgu",
+	"wikibase-linkitem-title": "Turnt n wadga",
+	"wikibase-linkitem-linkpage": "Turnt n wadga",
+	"wikibase-linkitem-selectlink": "Bantg sitii n wadga kiiga b'bagna b'turii-n wadga ke",
+	"wikibase-linkitem-input-site": "Laam",
+	"wikibase-linkitem-input-page": "Wadga",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-show": "Werii",
 	"wikibase-rc-wikibase-edit-letter": "D"
 }
