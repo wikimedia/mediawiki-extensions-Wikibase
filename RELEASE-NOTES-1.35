@@ -6,6 +6,8 @@ This is a security and maintenance release of the Wikibase 1.35 branch.
 
 === Changes since Wikibase 1.35.0-wmde.1 ===
 
+* (T294693) Escape description before outputting it in action=info
+* (T282154) EntityDataRequestHandler: Remove ob_clean() call
 * (T282154) EntityDataRequestHandler: Remove ob_clean() call
 * (T283040) Update documentation of usage aspects
 * (T286193) Drop subscribing to "other" aspect when using statements
