@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import Vue, { VueConstructor } from 'vue';
+import { defineComponent } from 'vue';
 import StateMixin from '@/presentation/StateMixin';
 
 /**
@@ -24,7 +24,7 @@ import StateMixin from '@/presentation/StateMixin';
  * Individual references are rendered in the backend via the API and the
  * resulting mark-up is presented in a list here.
  */
-export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+export default defineComponent( {
 	mixins: [ StateMixin ],
 	name: 'ReferenceSection',
 	computed: {

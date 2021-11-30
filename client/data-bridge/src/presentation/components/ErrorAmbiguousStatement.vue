@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import Vue, { VueConstructor } from 'vue';
+import { createApp, defineComponent } from 'vue';
 import StateMixin from '@/presentation/StateMixin';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import BailoutActions from '@/presentation/components/BailoutActions.vue';
@@ -30,7 +30,7 @@ import TermLabel from '@/presentation/components/TermLabel.vue';
  * A component used to illustrate an ambiguous statement error which happened when
  * the user tried to edit a statement group with more than one value.
  */
-export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+export default defineComponent( {
 	mixins: [ StateMixin ],
 	name: 'ErrorAmbiguousStatement',
 	components: {
@@ -39,12 +39,13 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 	},
 	computed: {
 		propertyLabel(): HTMLElement {
-			return new TermLabel( {
-				propsData: {
+			return createApp(
+				TermLabel,
+				{
 					term: this.rootModule.getters.targetLabel,
 					inLanguage: this.$inLanguage,
 				},
-			} ).$mount().$el as HTMLElement;
+			).mount( document.createElement( 'span' ) ).$el;
 		},
 		pageTitle(): string {
 			return this.rootModule.state.pageTitle;

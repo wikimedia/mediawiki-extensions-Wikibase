@@ -21,11 +21,11 @@
 </template>
 
 <script lang="ts">
-import Vue, { VueConstructor } from 'vue';
+import { defineComponent } from 'vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import StateMixin from '@/presentation/StateMixin';
 
-export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+export default defineComponent( {
 	// eslint-disable-next-line vue/multi-word-component-names
 	name: 'License',
 	mixins: [ StateMixin ],

@@ -1,5 +1,5 @@
 import { rootModule } from '@/store';
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import { Context } from 'vuex-smart-module';
 
 /**
@@ -7,7 +7,7 @@ import { Context } from 'vuex-smart-module';
  *
  * Basic usage:
  *
- *     export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+ *     export default defineComponent( {
  *         mixins: [ StateMixin ],
  *         name: 'MyComponent',
  *         methods: {
@@ -18,7 +18,7 @@ import { Context } from 'vuex-smart-module';
  *     } );
  *
  */
-const StateMixin = Vue.extend( {
+const StateMixin = defineComponent( {
 	computed: {
 		rootModule(): Context<typeof rootModule> {
 			return rootModule.context( this.$store );

@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import Vue, { VueConstructor } from 'vue';
+import { defineComponent } from 'vue';
 import ErrorUnsupportedSnakType from '@/presentation/components/ErrorUnsupportedSnakType.vue';
 import { MissingPermissionsError, PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
 import StateMixin from '@/presentation/StateMixin';
@@ -59,7 +59,7 @@ function isPermissionError( error: ApplicationError ): error is MissingPermissio
 	return ( Object.values( PageNotEditable ) as string[] ).includes( error.type );
 }
 
-export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+export default defineComponent( {
 	mixins: [ StateMixin ],
 	name: 'ErrorWrapper',
 	components: {
@@ -90,12 +90,14 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 		},
 		statementValueIsDeprecated(): boolean {
 			return this.applicationErrors.some(
-				( applicationError ) => applicationError.type === ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT,
+				( applicationError: ApplicationError ) =>
+					applicationError.type === ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT,
 			);
 		},
 		statementIsAmbiguous(): boolean {
 			return this.applicationErrors.some(
-				( applicationError ) => applicationError.type === ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT,
+				( applicationError: ApplicationError ) =>
+					applicationError.type === ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT,
 			);
 		},
 		unsupportedSnakTypeError(): UnsupportedSnakTypeError | null {

@@ -8,7 +8,7 @@
 </template>
 <script lang="ts">
 import debounce from 'lodash/debounce';
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
 interface InputEventTarget {
 	value: string;
@@ -18,8 +18,9 @@ interface InputEvent {
 	target: InputEventTarget;
 }
 
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'ResizingTextField',
+	emits: [ 'input' ],
 	props: {
 		value: {
 			type: String,

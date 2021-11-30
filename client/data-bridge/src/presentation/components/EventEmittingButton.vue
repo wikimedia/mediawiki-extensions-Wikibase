@@ -31,7 +31,7 @@
 	</a>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
 const validTypes = [
 	'primaryProgressive',
@@ -58,18 +58,19 @@ const validSizes = [
 	'XL',
 ];
 
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'EventEmittingButton',
+	emits: [ 'click' ],
 	props: {
 		type: {
 			type: String,
 			required: true,
-			validator: ( type ) => validTypes.indexOf( type ) !== -1,
+			validator: ( type: string ) => validTypes.indexOf( type ) !== -1,
 		},
 		size: {
 			type: String,
 			required: true,
-			validator: ( size ) => validSizes.includes( size ),
+			validator: ( size: string ) => validSizes.includes( size ),
 		},
 		message: {
 			required: true,

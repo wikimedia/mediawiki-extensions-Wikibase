@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import IndeterminateProgressBar from '@/presentation/components/IndeterminateProgressBar.vue';
 
 /**
@@ -48,7 +48,7 @@ import IndeterminateProgressBar from '@/presentation/components/IndeterminatePro
  *   Animation                                        |-------------------|<- ready
  * ```
  */
-export default Vue.extend( {
+export default defineComponent( {
 	// eslint-disable-next-line vue/multi-word-component-names
 	name: 'Loading',
 	components: {

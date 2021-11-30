@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import Vue, { VueConstructor } from 'vue';
+import { defineComponent } from 'vue';
 import StateMixin from '@/presentation/StateMixin';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
@@ -49,7 +49,7 @@ import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 /**
  * A component which gets shown when an error occurs while saving and the user is logged out.
  */
-export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+export default defineComponent( {
 	mixins: [ StateMixin ],
 	name: 'ErrorSavingAssertUser',
 	components: {

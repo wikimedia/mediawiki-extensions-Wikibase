@@ -23,14 +23,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 
 /**
  * A component to thank the user for their edit and present them with
  * the option to continue editing (e.g. references) on the repository.
  */
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'ThankYou',
 	components: { EventEmittingButton },
 	props: {

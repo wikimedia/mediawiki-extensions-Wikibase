@@ -1,13 +1,9 @@
-import Vue from 'vue';
 import DataBridge from '@/presentation/components/DataBridge.vue';
 import {
-	createLocalVue,
 	shallowMount,
 } from '@vue/test-utils';
 import { createStore } from '@/store';
-import Vuex, {
-	Store,
-} from 'vuex';
+import { Store } from 'vuex';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
 import ReferenceSection from '@/presentation/components/ReferenceSection.vue';
 import EditDecision from '@/presentation/components/EditDecision.vue';
@@ -15,27 +11,23 @@ import Application from '@/store/Application';
 import newMockServiceContainer from '../../services/newMockServiceContainer';
 
 let store: Store<Application>;
-const localVue = createLocalVue();
-
-localVue.use( Vuex );
 
 describe( 'DataBridge', () => {
 	beforeEach( () => {
 		store = createStore( newMockServiceContainer( {} ) );
 		store.commit( 'setTargetValue', { type: 'string', value: '' } );
-		Vue.set( store, 'getters', {
+		store.getters = {
 			targetLabel: { value: 'P123', language: 'zxx' },
 			targetReferences: [],
 			config: {
 				stringMaxLength: 123,
 			},
-		} );
+		};
 	} );
 
 	it( 'mounts StringDataValue', () => {
 		const wrapper = shallowMount( DataBridge, {
-			store,
-			localVue,
+			global: { plugins: [ store ] },
 		} );
 
 		expect( wrapper.findComponent( StringDataValue ).exists() ).toBe( true );
@@ -46,12 +38,11 @@ describe( 'DataBridge', () => {
 		const targetLabel = { value: 'P123', language: 'zxx' };
 		const stringMaxLength = 200;
 		store.commit( 'setTargetValue', targetValue );
-		Vue.set( store.getters, 'targetLabel', targetLabel );
-		Vue.set( store.getters, 'config', { stringMaxLength } );
+		store.getters.targetLabel = targetLabel;
+		store.getters.config = { stringMaxLength };
 
 		const wrapper = shallowMount( DataBridge, {
-			store,
-			localVue,
+			global: { plugins: [ store ] },
 		} );
 
 		expect( wrapper.findComponent( StringDataValue ).props( 'dataValue' ) ).toStrictEqual( targetValue );
@@ -61,8 +52,7 @@ describe( 'DataBridge', () => {
 
 	it( 'mounts ReferenceSection', () => {
 		const wrapper = shallowMount( DataBridge, {
-			store,
-			localVue,
+			global: { plugins: [ store ] },
 		} );
 
 		expect( wrapper.findComponent( ReferenceSection ).exists() ).toBe( true );
@@ -70,8 +60,7 @@ describe( 'DataBridge', () => {
 
 	it( 'mounts EditDecision', () => {
 		const wrapper = shallowMount( DataBridge, {
-			store,
-			localVue,
+			global: { plugins: [ store ] },
 		} );
 
 		expect( wrapper.findComponent( EditDecision ).exists() ).toBe( true );

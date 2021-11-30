@@ -1,21 +1,11 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import MessageKeys from '@/definitions/MessageKeys';
 import License from '@/presentation/components/License.vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
-import Vuex from 'vuex';
 import { createTestStore } from '../../../util/store';
 import { BridgeConfig } from '@/store/Application';
 
 describe( 'License component', () => {
-
-	const $messages = {
-		KEYS: MessageKeys,
-		get: jest.fn( ( key: string ) => `⧼${key}⧽` ),
-		getText: jest.fn( ( key: string ) => `⧼${key}⧽` ),
-	};
-
-	const localVue = createLocalVue();
-	localVue.use( Vuex );
 	const store = createTestStore( {
 		getters: {
 			get config() {
@@ -30,13 +20,19 @@ describe( 'License component', () => {
 	} );
 
 	it( 'bubbles the button\'s click event as close event', () => {
-		const wrapper = shallowMount( License, { store, localVue } );
+		const wrapper = shallowMount(
+			License,
+			{ global: { plugins: [ store ] } },
+		);
 		wrapper.findComponent( EventEmittingButton ).vm.$emit( 'click' );
 		expect( wrapper.emitted( 'close' ) ).toHaveLength( 1 );
 	} );
 
 	it( 'mounts a button with the correct props', () => {
-		const wrapper = shallowMount( License, { store, localVue } );
+		const wrapper = shallowMount(
+			License,
+			{ global: { plugins: [ store ] } },
+		);
 
 		expect( wrapper.findComponent( EventEmittingButton ).props( 'size' ) ).toBe( 'M' );
 		expect( wrapper.findComponent( EventEmittingButton ).props( 'type' ) ).toBe( 'close' );
@@ -56,10 +52,16 @@ describe( 'License component', () => {
 				},
 			},
 		} );
+		const $messages = {
+			KEYS: MessageKeys,
+			get: jest.fn( ( key: string ) => `⧼${key}⧽` ),
+			getText: jest.fn( ( key: string ) => `⧼${key}⧽` ),
+		};
 		shallowMount( License, {
-			mocks: { $messages },
-			store: localStore,
-			localVue,
+			global: {
+				mocks: { $messages },
+				plugins: [ localStore ],
+			},
 		} );
 
 		const messageKeys = $messages.get.mock.calls.reduce( ( acc: Record<string, string[]>, call: string[] ) => {

@@ -9,16 +9,12 @@ exports[`ErrorPermissionInfo matches the snapshot in closed state 1`] = `
   >
     header
   </div>
-   
   <a
     class="wb-db-error-permission-info__toggle wb-db-error-permission-info__toggle--closed"
   >
-    
-		⧼wikibase-client-data-bridge-permissions-error-info⧽
-	
+    ⧼wikibase-client-data-bridge-permissions-error-info⧽
   </a>
-   
-  <!---->
+  <!--v-if-->
 </div>
 `;
 
@@ -31,15 +27,11 @@ exports[`ErrorPermissionInfo matches the snapshot in opened state 1`] = `
   >
     header
   </div>
-   
   <a
     class="wb-db-error-permission-info__toggle wb-db-error-permission-info__toggle--open"
   >
-    
-		⧼wikibase-client-data-bridge-permissions-error-info⧽
-	
+    ⧼wikibase-client-data-bridge-permissions-error-info⧽
   </a>
-   
   <div
     class="wb-db-error-permission-info__body"
   >

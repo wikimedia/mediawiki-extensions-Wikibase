@@ -15,14 +15,19 @@
 	</div>
 </template>
 <script lang="ts">
-import Vue, { PropType } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import PropertyLabel from '@/presentation/components/PropertyLabel.vue';
 import { DataValue } from '@wmde/wikibase-datamodel-types';
 import ResizingTextField from '@/presentation/components/ResizingTextField.vue';
 import { v4 as uuid } from 'uuid';
 import Term from '@/datamodel/Term';
 
-export default Vue.extend( {
+interface StringDataValue {
+	dataValue: DataValue | null;
+	setDataValue: ( dataValue: DataValue ) => void;
+}
+
+export default defineComponent( {
 	name: 'StringDataValue',
 	props: {
 		dataValue: {
@@ -57,14 +62,14 @@ export default Vue.extend( {
 	},
 	computed: {
 		value: {
-			get(): string {
+			get( this: StringDataValue ): string {
 				if ( !this.dataValue ) {
 					return '';
 				} else {
 					return this.dataValue.value;
 				}
 			},
-			set( value: string ): void {
+			set( this: StringDataValue, value: string ): void {
 				this.setDataValue(
 					{
 						type: 'string',

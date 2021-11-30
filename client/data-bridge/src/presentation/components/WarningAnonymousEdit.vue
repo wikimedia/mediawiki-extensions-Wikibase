@@ -35,11 +35,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'WarningAnonymousEdit',
 	components: {
 		EventEmittingButton,

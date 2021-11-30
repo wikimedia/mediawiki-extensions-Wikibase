@@ -1,14 +1,10 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import ErrorAmbiguousStatement from '@/presentation/components/ErrorAmbiguousStatement.vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import BailoutActions from '@/presentation/components/BailoutActions.vue';
 import MessageKeys from '@/definitions/MessageKeys';
-import Vuex from 'vuex';
 import { calledWithHTMLElement } from '../../../util/assertions';
 import { createTestStore } from '../../../util/store';
-
-const localVue = createLocalVue();
-localVue.use( Vuex );
 
 describe( 'ErrorAmbiguousStatement', () => {
 	const targetProperty = 'P569',
@@ -24,16 +20,18 @@ describe( 'ErrorAmbiguousStatement', () => {
 		} );
 
 	it( 'uses IconMessageBox to display the error header and body messages', () => {
-		const wrapper = shallowMount( ErrorAmbiguousStatement, {
-			localVue,
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					get: messageGet,
-					getText: messageGet,
+		const wrapper = mount( ErrorAmbiguousStatement, {
+			global: {
+				mocks: {
+					$messages: {
+						KEYS: MessageKeys,
+						get: messageGet,
+						getText: messageGet,
+					},
 				},
+				plugins: [ store ],
+				stubs: { BailoutActions: true },
 			},
-			store,
 		} );
 
 		calledWithHTMLElement( messageGet, 1, 1 );
@@ -46,22 +44,23 @@ describe( 'ErrorAmbiguousStatement', () => {
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			2,
 			MessageKeys.AMBIGUOUS_STATEMENT_ERROR_BODY,
-			`<span lang="zxx" dir="auto" class="wb-db-term-label">${targetProperty}</span>`,
+			`<span class="wb-db-term-label" lang="zxx" dir="auto">${targetProperty}</span>`,
 		);
 
 	} );
 
 	it( 'uses BailoutActions to provide a bail out path for the ambiguous statement error', () => {
 		const wrapper = shallowMount( ErrorAmbiguousStatement, {
-			localVue,
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					get: messageGet,
-					getText: messageGet,
+			global: {
+				mocks: {
+					$messages: {
+						KEYS: MessageKeys,
+						get: messageGet,
+						getText: messageGet,
+					},
 				},
+				plugins: [ store ],
 			},
-			store,
 		} );
 
 		expect( wrapper.findComponent( BailoutActions ).exists() ).toBe( true );

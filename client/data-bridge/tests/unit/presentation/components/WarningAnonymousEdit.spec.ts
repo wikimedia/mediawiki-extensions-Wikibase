@@ -1,7 +1,9 @@
 import MessageKeys from '@/definitions/MessageKeys';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import WarningAnonymousEdit from '@/presentation/components/WarningAnonymousEdit.vue';
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, config } from '@vue/test-utils';
+
+config.renderStubDefaultSlot = true;
 
 describe( 'WarningAnonymousEdit', () => {
 	it( 'matches the snapshot', () => {
@@ -14,7 +16,9 @@ describe( 'WarningAnonymousEdit', () => {
 			propsData: {
 				loginUrl: 'https://data-bridge.test/Login',
 			},
-			mocks: { $messages },
+			global: {
+				mocks: { $messages },
+			},
 		} );
 
 		expect( wrapper.element ).toMatchSnapshot();

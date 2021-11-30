@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType, VueConstructor } from 'vue';
+import { createApp, defineComponent, PropType } from 'vue';
 import { DataType } from '@wmde/wikibase-datamodel-types';
 import StateMixin from '@/presentation/StateMixin';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
@@ -34,7 +34,7 @@ import TermLabel from '@/presentation/components/TermLabel.vue';
  * A component used to illustrate a datatype error which happened when
  * the user tried to edit a value which bridge does not support yet.
  */
-export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+export default defineComponent( {
 	mixins: [ StateMixin ],
 	name: 'ErrorUnsupportedDatatype',
 	components: {
@@ -55,12 +55,13 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 			return this.rootModule.state.originalHref;
 		},
 		propertyLabel(): HTMLElement {
-			return new TermLabel( {
-				propsData: {
+			return createApp(
+				TermLabel,
+				{
 					term: this.rootModule.getters.targetLabel,
 					inLanguage: this.$inLanguage,
 				},
-			} ).$mount().$el as HTMLElement;
+			).mount( document.createElement( 'span' ) ).$el;
 		},
 	},
 } );

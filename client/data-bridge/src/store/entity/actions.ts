@@ -19,7 +19,7 @@ export class EntityActions extends Actions<EntityState, Getters<EntityState>, En
 
 	public entityInit(
 		payload: { entity: string },
-	): Promise<void> {
+	): Promise<unknown> {
 		return this.store.$services.get( 'readingEntityRepository' )
 			.getEntity( payload.entity )
 			.then( ( entityRevision: EntityRevision ) => this.dispatch( 'entityWrite', entityRevision ) );
@@ -27,7 +27,7 @@ export class EntityActions extends Actions<EntityState, Getters<EntityState>, En
 
 	public entitySave(
 		payload: { statements: StatementMap; assertUser?: boolean },
-	): Promise<void> {
+	): Promise<unknown> {
 		const entityId = this.state.id;
 		const entity = new Entity( entityId, payload.statements );
 		const base = new EntityRevision(
@@ -42,7 +42,7 @@ export class EntityActions extends Actions<EntityState, Getters<EntityState>, En
 
 	public entityWrite(
 		entityRevision: EntityRevision,
-	): Promise<void> {
+	): Promise<unknown> {
 		this.commit( 'updateRevision', entityRevision.revisionId );
 		this.commit( 'updateEntity', entityRevision.entity );
 

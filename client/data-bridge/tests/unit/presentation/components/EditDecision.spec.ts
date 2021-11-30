@@ -5,17 +5,15 @@ import RadioInput from '@/presentation/components/RadioInput.vue';
 import { createStore } from '@/store';
 import Application from '@/store/Application';
 import {
-	createLocalVue,
+	config,
 	mount,
 	shallowMount,
 } from '@vue/test-utils';
-import Vuex, { Store } from 'vuex';
+import { Store } from 'vuex';
 import { createTestStore } from '../../../util/store';
 import newMockServiceContainer from '../../services/newMockServiceContainer';
 
-const localVue = createLocalVue();
-
-localVue.use( Vuex );
+config.renderStubDefaultSlot = true;
 
 /**
  * Array.filter callback to return unique elements of an array.
@@ -47,13 +45,14 @@ describe( 'EditDecision', () => {
 		const get = jest.fn( () => '' );
 
 		const wrapper = shallowMount( EditDecision, {
-			store,
-			localVue,
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					get,
-					getText,
+			global: {
+				plugins: [ store ],
+				mocks: {
+					$messages: {
+						KEYS: MessageKeys,
+						get,
+						getText,
+					},
 				},
 			},
 		} );
@@ -64,8 +63,7 @@ describe( 'EditDecision', () => {
 
 	it( 'mounts RadioGroup and two RadioInputs', () => {
 		const wrapper = shallowMount( EditDecision, {
-			store,
-			localVue,
+			global: { plugins: [ store ] },
 		} );
 
 		expect( wrapper.findComponent( RadioGroup ).exists() ).toBe( true );
@@ -74,11 +72,10 @@ describe( 'EditDecision', () => {
 
 	it( 'passes the same name to all RadioInputs', () => {
 		const wrapper = shallowMount( EditDecision, {
-			store,
-			localVue,
+			global: { plugins: [ store ] },
 		} );
 
-		const radioInputs = wrapper.findAllComponents( RadioInput ).wrappers;
+		const radioInputs = wrapper.findAllComponents( RadioInput );
 		const allNames = radioInputs.map( ( radioInput ) => radioInput.props( 'name' ) );
 		const distinctNames = allNames.filter( unique );
 		expect( distinctNames ).toHaveLength( 1 );
@@ -88,11 +85,9 @@ describe( 'EditDecision', () => {
 		const setEditDecisionAction = jest.fn();
 		store = createTestStore( { actions: { 'setEditDecision': setEditDecisionAction } } );
 		const wrapper = mount( EditDecision, {
-			store,
-			localVue,
+			global: { plugins: [ store ] },
 		} );
 		wrapper.find( 'input[value=replace]' ).setChecked( true );
-		wrapper.find( 'input' ).trigger( 'input' );
 		expect( setEditDecisionAction ).toHaveBeenCalledTimes( 1 );
 		expect( setEditDecisionAction.mock.calls[ 0 ][ 0 ] ).toBe( 'replace' );
 	} );

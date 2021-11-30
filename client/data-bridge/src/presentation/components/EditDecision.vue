@@ -35,13 +35,19 @@
 </template>
 
 <script lang="ts">
-import Vue, { VueConstructor } from 'vue';
+import { defineComponent } from 'vue';
+import { Context } from 'vuex-smart-module';
 import StateMixin from '@/presentation/StateMixin';
 import EditDecisionOption from '@/definitions/EditDecision';
 import RadioGroup from '@/presentation/components/RadioGroup.vue';
 import RadioInput from '@/presentation/components/RadioInput.vue';
+import { rootModule } from '@/store';
 
-export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+interface EditDecision {
+	rootModule: Context<typeof rootModule>;
+}
+
+export default defineComponent( {
 	mixins: [ StateMixin ],
 	name: 'EditDecision',
 	components: {
@@ -50,10 +56,10 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 	},
 	computed: {
 		editDecision: {
-			get(): EditDecisionOption | null {
+			get( this: EditDecision ): EditDecisionOption | null {
 				return this.rootModule.state.editDecision;
 			},
-			set( value: EditDecisionOption | null ): void {
+			set( this: EditDecision, value: EditDecisionOption | null ): void {
 				if ( value === null ) {
 					throw new Error( 'Cannot set editDecision back to null!' );
 				}

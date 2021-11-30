@@ -7,45 +7,47 @@ exports[`ErrorSavingAssertUser matches the snapshot 1`] = `
   <h2
     class="wb-db-error-saving-assertuser__heading"
   >
-    
-		Some 'text
-	
+    Some 'text
   </h2>
-   
-  <iconmessagebox-stub
+  <icon-message-box-stub
     class="wb-db-error-saving-assertuser__message"
+    inline="false"
     type="warning"
   >
-    
-		Some 'text
-	
-  </iconmessagebox-stub>
-   
+    Some 'text
+  </icon-message-box-stub>
   <div
     class="wb-db-error-saving-assertuser__buttons"
   >
-    <eventemittingbutton-stub
+    <event-emitting-button-stub
       class="wb-db-error-saving-assertuser__proceed"
+      disabled="false"
       message="Some 'text"
+      newtab="false"
       preventdefault="true"
       size="M"
+      squary="false"
       type="primaryProgressive"
     />
-     
-    <eventemittingbutton-stub
+    <event-emitting-button-stub
       class="wb-db-error-saving-assertuser__login"
+      disabled="false"
       href="https://data-bridge.test/Login"
       message="Some 'text"
       newtab="true"
+      preventdefault="false"
       size="M"
+      squary="false"
       type="neutral"
     />
-     
-    <eventemittingbutton-stub
+    <event-emitting-button-stub
       class="wb-db-error-saving-assertuser__back"
+      disabled="false"
       message="Some 'text"
+      newtab="false"
       preventdefault="true"
       size="M"
+      squary="false"
       type="link"
     />
   </div>

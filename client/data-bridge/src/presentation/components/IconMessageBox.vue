@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
 const validTypes = [
 	'error',
@@ -21,13 +21,13 @@ const validTypes = [
 	'notice',
 ];
 
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'IconMessageBox',
 	props: {
 		type: {
 			type: String,
 			required: true,
-			validator: ( type ) => validTypes.includes( type ),
+			validator: ( type: string ) => validTypes.includes( type ),
 		},
 		inline: {
 			type: Boolean,

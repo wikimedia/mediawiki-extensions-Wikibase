@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType, VueConstructor } from 'vue';
+import { PropType, defineComponent } from 'vue';
 import { EventEmitter } from 'events';
 import WarningAnonymousEdit from '@/presentation/components/WarningAnonymousEdit.vue';
 import Events from '@/events';
@@ -53,7 +53,7 @@ import License from '@/presentation/components/License.vue';
 import ThankYou from '@/presentation/components/ThankYou.vue';
 import AppHeader from '@/presentation/components/AppHeader.vue';
 
-export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+export default defineComponent( {
 	mixins: [ StateMixin ],
 	name: 'App',
 	components: {

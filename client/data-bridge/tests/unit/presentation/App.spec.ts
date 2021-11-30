@@ -2,12 +2,13 @@ import EntityRevision from '@/datamodel/EntityRevision';
 import { ErrorTypes } from '@/definitions/ApplicationError';
 import ThankYou from '@/presentation/components/ThankYou.vue';
 import WarningAnonymousEdit from '@/presentation/components/WarningAnonymousEdit.vue';
-import Vuex, { Store } from 'vuex';
+import { Store } from 'vuex';
 import Entities from '@/mock-data/data/Q42.data.json';
 import {
-	createLocalVue,
 	shallowMount,
+	config,
 } from '@vue/test-utils';
+import { nextTick } from 'vue';
 import App from '@/presentation/App.vue';
 import { createStore } from '@/store';
 import Application from '@/store/Application';
@@ -26,8 +27,7 @@ import License from '@/presentation/components/License.vue';
 import AppHeader from '@/presentation/components/AppHeader.vue';
 import newMockTracker from '../../util/newMockTracker';
 
-const localVue = createLocalVue();
-localVue.use( Vuex );
+config.renderStubDefaultSlot = true;
 
 describe( 'App.vue', () => {
 	let store: Store<Application>;
@@ -95,8 +95,9 @@ describe( 'App.vue', () => {
 
 	it( 'renders the mountable root element', () => {
 		const wrapper = shallowMount( App, {
-			store,
-			localVue,
+			global: {
+				plugins: [ store ],
+			},
 			propsData: { emitter: mockEmitter },
 		} );
 
@@ -111,13 +112,13 @@ describe( 'App.vue', () => {
 			},
 		} );
 		const wrapper = shallowMount( App, {
-			store: localStore,
-			localVue,
+			global: {
+				plugins: [ localStore ],
+			},
 			propsData: { emitter: mockEmitter },
 		} );
 
 		await wrapper.findComponent( AppHeader ).vm.$emit( 'back' );
-		await localVue.nextTick();
 		expect( goBackFromErrorToReady ).toHaveBeenCalled();
 	} );
 
@@ -130,24 +131,23 @@ describe( 'App.vue', () => {
 		} );
 		localStore.commit( 'setApplicationStatus', ApplicationStatus.READY );
 		const wrapper = shallowMount( App, {
-			store: localStore,
-			localVue,
-			stubs: { EventEmittingButton },
+			global: {
+				plugins: [ localStore ],
+				stubs: { EventEmittingButton },
+			},
 			propsData: { emitter: mockEmitter },
 		} );
 
 		await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
-		await localVue.nextTick();
 		expect( bridgeSave ).not.toHaveBeenCalled();
 		expect( wrapper.findComponent( License ).exists() ).toBe( true );
 
 		await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
-		await localVue.nextTick();
 		expect( bridgeSave ).toHaveBeenCalledTimes( 1 );
 		expect( wrapper.emitted( initEvents.saved ) ).toBeFalsy();
 
 		localStore.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
-		await localVue.nextTick();
+		await nextTick();
 
 		expect( wrapper.findComponent( ThankYou ).exists() ).toBe( true );
 		await wrapper.findComponent( ThankYou ).vm.$emit( 'opened-reference-edit-on-repo' );
@@ -167,21 +167,19 @@ describe( 'App.vue', () => {
 			} );
 			localStore.commit( 'setApplicationStatus', ApplicationStatus.READY );
 			const wrapper = shallowMount( App, {
-				store: localStore,
-				localVue,
+				global: {
+					plugins: [ localStore ],
+				},
 				propsData: { emitter: mockEmitter },
 			} );
 
 			await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
-			await localVue.nextTick();
 			expect( wrapper.findComponent( License ).exists() ).toBe( true );
 
 			await wrapper.findComponent( License ).vm.$emit( 'close' );
-			await localVue.nextTick();
 			expect( wrapper.findComponent( License ).exists() ).toBe( false );
 
 			await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
-			await localVue.nextTick();
 			expect( bridgeSave ).not.toHaveBeenCalled();
 			expect( wrapper.findComponent( License ).exists() ).toBe( true );
 		},
@@ -189,35 +187,37 @@ describe( 'App.vue', () => {
 
 	it( 'adds an overlay over DataBridge while showing the License', async () => {
 		const wrapper = shallowMount( App, {
-			store,
-			localVue,
+			global: {
+				plugins: [ store ],
+			},
 			propsData: { emitter: mockEmitter },
 		} );
 
 		await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
-		await localVue.nextTick();
 
 		expect( wrapper.findComponent( DataBridge ).classes( 'wb-db-app__data-bridge--overlayed' ) ).toBe( true );
 	} );
 
 	it( 'adds an overlay over DataBridge during save state', async () => {
 		const wrapper = shallowMount( App, {
-			store,
-			localVue,
-			stubs: { ProcessDialogHeader, EventEmittingButton },
+			global: {
+				plugins: [ store ],
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			},
 			propsData: { emitter: mockEmitter },
 		} );
 
 		store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
-		await localVue.nextTick();
+		await nextTick();
 
 		expect( wrapper.findComponent( DataBridge ).classes( 'wb-db-app__data-bridge--overlayed' ) ).toBe( true );
 	} );
 
 	it( 'emits saved event on close button click after saving is done', async () => {
 		const wrapper = shallowMount( App, {
-			store,
-			localVue,
+			global: {
+				plugins: [ store ],
+			},
 			propsData: { emitter: mockEmitter },
 		} );
 
@@ -230,8 +230,9 @@ describe( 'App.vue', () => {
 
 	it( 'cancels on close button click', async () => {
 		const wrapper = shallowMount( App, {
-			store,
-			localVue,
+			global: {
+				plugins: [ store ],
+			},
 			propsData: { emitter: mockEmitter },
 		} );
 
@@ -243,8 +244,9 @@ describe( 'App.vue', () => {
 
 	it( 'reloads on close button click during edit conflict', async () => {
 		const wrapper = shallowMount( App, {
-			store,
-			localVue,
+			global: {
+				plugins: [ store ],
+			},
 			propsData: { emitter: mockEmitter },
 		} );
 
@@ -262,8 +264,9 @@ describe( 'App.vue', () => {
 			it( 'mounts ErrorWrapper', () => {
 				store.commit( 'addApplicationErrors', [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ] );
 				const wrapper = shallowMount( App, {
-					store,
-					localVue,
+					global: {
+						plugins: [ store ],
+					},
 					propsData: { emitter: mockEmitter },
 				} );
 
@@ -276,8 +279,9 @@ describe( 'App.vue', () => {
 			] )( 'repeats %s ErrorWrapper event as %s init/app event', ( errorWrapperEvent, initAppEvent ) => {
 				store.commit( 'addApplicationErrors', [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR } ] );
 				const wrapper = shallowMount( App, {
-					store,
-					localVue,
+					global: {
+						plugins: [ store ],
+					},
 					propsData: { emitter: mockEmitter },
 				} );
 				wrapper.findComponent( ErrorWrapper ).vm.$emit( errorWrapperEvent );
@@ -291,20 +295,22 @@ describe( 'App.vue', () => {
 			it( 'mounts Loading & passes DataBridge to it', () => {
 				store.commit( 'setApplicationStatus', ApplicationStatus.READY );
 				const wrapper = shallowMount( App, {
-					store,
-					localVue,
+					global: {
+						plugins: [ store ],
+					},
 					propsData: { emitter: mockEmitter },
 				} );
 
 				expect( wrapper.findComponent( Loading ).exists() ).toBe( true );
-				expect( wrapper.findComponent( Loading ).findComponent( DataBridge ).exists() ).toBe( true );
+				expect( wrapper.findComponent( DataBridge ).exists() ).toBe( true );
 			} );
 
 			it( 'instructs Loading accordingly if the store is not ready', () => {
 				store.commit( 'setApplicationStatus', ApplicationStatus.INITIALIZING );
 				const wrapper = shallowMount( App, {
-					store,
-					localVue,
+					global: {
+						plugins: [ store ],
+					},
 					propsData: { emitter: mockEmitter },
 				} );
 
@@ -314,8 +320,9 @@ describe( 'App.vue', () => {
 			it( 'instructs Loading accordingly if the store is attempting saving', () => {
 				store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
 				const wrapper = shallowMount( App, {
-					store,
-					localVue,
+					global: {
+						plugins: [ store ],
+					},
 					propsData: { emitter: mockEmitter },
 				} );
 
@@ -325,8 +332,9 @@ describe( 'App.vue', () => {
 			it( 'instructs Loading accordingly if the store is ready', () => {
 				store.commit( 'setApplicationStatus', ApplicationStatus.READY );
 				const wrapper = shallowMount( App, {
-					store,
-					localVue,
+					global: {
+						plugins: [ store ],
+					},
 					propsData: { emitter: mockEmitter },
 				} );
 
@@ -346,9 +354,10 @@ describe( 'App.vue', () => {
 					getPageUrl: jest.fn().mockReturnValue( loginUrl ),
 				};
 				const wrapper = shallowMount( App, {
-					store,
-					localVue,
-					mocks: { $clientRouter },
+					global: {
+						plugins: [ store ],
+						mocks: { $clientRouter },
+					},
 					propsData: { emitter: mockEmitter },
 				} );
 
@@ -363,7 +372,7 @@ describe( 'App.vue', () => {
 				expect( wrapper.findComponent( WarningAnonymousEdit ).props( 'loginUrl' ) ).toBe( loginUrl );
 
 				wrapper.findComponent( WarningAnonymousEdit ).vm.$emit( 'proceed' );
-				await localVue.nextTick();
+				await nextTick();
 				expect( wrapper.findComponent( WarningAnonymousEdit ).exists() ).toBe( false );
 				expect( wrapper.findComponent( Loading ).exists() ).toBe( true );
 			} );
@@ -376,9 +385,10 @@ describe( 'App.vue', () => {
 				] );
 				const $clientRouter = { getPageUrl: jest.fn().mockReturnValue( '' ) };
 				const wrapper = shallowMount( App, {
-					store,
-					localVue,
-					mocks: { $clientRouter },
+					global: {
+						plugins: [ store ],
+						mocks: { $clientRouter },
+					},
 					propsData: { emitter: mockEmitter },
 				} );
 

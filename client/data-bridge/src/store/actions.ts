@@ -41,7 +41,7 @@ RootActions
 		this.statementMutationFactory = statementMutationFactory;
 	}
 
-	public relaunchBridge( information: AppInformation ): Promise<void> {
+	public relaunchBridge( information: AppInformation ): Promise<unknown> {
 		this.commit( 'reset' );
 		this.entityModule.commit( 'reset' );
 		this.statementModule.commit( 'reset' );
@@ -75,7 +75,7 @@ RootActions
 			} );
 		};
 
-		const getRemoteData = (): Promise<[WikibaseRepoConfiguration, MissingPermissionsError[], string, void]> => {
+		const getRemoteData = (): Promise<[WikibaseRepoConfiguration, MissingPermissionsError[], string, unknown]> => {
 			return Promise.all( [
 				this.store.$services.get( 'wikibaseRepoConfigRepository' ).getRepoConfiguration(),
 				this.store.$services.get( 'editAuthorizationChecker' ).canUseBridgeForItemAndPage(
@@ -128,7 +128,7 @@ RootActions
 		],
 	}: {
 		results: [ WikibaseRepoConfiguration, readonly MissingPermissionsError[], string, unknown ];
-	} ): Promise<void> {
+	} ): Promise<unknown> {
 		if ( permissionErrors.length ) {
 			this.commit( 'addApplicationErrors', permissionErrors );
 			return;
@@ -183,7 +183,7 @@ RootActions
 
 	public validateEntityState(
 		path: MainSnakPath,
-	): Promise<void> {
+	): Promise<unknown> {
 		if ( !this.statementModule.getters.propertyExists( path ) ) {
 			this.commit( 'addApplicationErrors', [ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ] );
 			return Promise.resolve();
@@ -194,7 +194,7 @@ RootActions
 
 	public validateBridgeApplicability(
 		path: MainSnakPath,
-	): Promise<void> {
+	): Promise<unknown> {
 		if ( this.state.applicationStatus === ApplicationStatus.SAVED ) {
 			// saving edits can transition us from applicable to inapplicable states, but that should not be an error
 			return Promise.resolve();
@@ -257,7 +257,7 @@ RootActions
 		return Promise.resolve();
 	}
 
-	public async saveBridge(): Promise<void> {
+	public async saveBridge(): Promise<unknown> {
 		if ( this.state.applicationStatus !== ApplicationStatus.READY ) {
 			this.commit( 'addApplicationErrors', [ {
 				type: ErrorTypes.APPLICATION_LOGIC_ERROR,
@@ -289,7 +289,7 @@ RootActions
 			this.commit( 'addApplicationErrors', [ {
 				type: ErrorTypes.APPLICATION_LOGIC_ERROR,
 				info: error,
-			} ] );
+			} as ApplicationError ] );
 			throw error;
 		}
 
@@ -330,7 +330,7 @@ RootActions
 			} );
 	}
 
-	public async retrySave(): Promise<void> {
+	public async retrySave(): Promise<unknown> {
 		await this.dispatch( 'goBackFromErrorToReady' );
 		return this.dispatch( 'saveBridge' );
 	}

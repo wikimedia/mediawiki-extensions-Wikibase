@@ -1,20 +1,10 @@
-import Vue from 'vue';
 import ReferenceSection from '@/presentation/components/ReferenceSection.vue';
-import {
-	createLocalVue,
-	shallowMount,
-} from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { createStore } from '@/store';
-import Vuex, {
-	Store,
-} from 'vuex';
+import { Store } from 'vuex';
 import Application from '@/store/Application';
 import newMockServiceContainer from '../../services/newMockServiceContainer';
 import MessageKeys from '@/definitions/MessageKeys';
-
-const localVue = createLocalVue();
-
-localVue.use( Vuex );
 
 const REFERENCE_ITEM_SELECTOR = '.wb-db-references__listItem';
 
@@ -36,15 +26,16 @@ describe( 'ReferenceSection', () => {
 				return '';
 			},
 		);
-		Vue.set( store, 'getters', { targetReferences: [] } );
+		store.getters = { targetReferences: [] };
 
 		const wrapper = shallowMount( ReferenceSection, {
-			store,
-			localVue,
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					getText,
+			global: {
+				plugins: [ store ],
+				mocks: {
+					$messages: {
+						KEYS: MessageKeys,
+						getText,
+					},
 				},
 			},
 		} );
@@ -60,8 +51,9 @@ describe( 'ReferenceSection', () => {
 		];
 		store.commit( 'setRenderedTargetReferences', renderedTargetReferences );
 		const wrapper = shallowMount( ReferenceSection, {
-			store,
-			localVue,
+			global: {
+				plugins: [ store ],
+			},
 		} );
 
 		const references = wrapper.findAll( REFERENCE_ITEM_SELECTOR );
@@ -75,8 +67,9 @@ describe( 'ReferenceSection', () => {
 		const renderedTargetReferences: string[] = [];
 		store.commit( 'setRenderedTargetReferences', renderedTargetReferences );
 		const wrapper = shallowMount( ReferenceSection, {
-			store,
-			localVue,
+			global: {
+				plugins: [ store ],
+			},
 		} );
 
 		expect( wrapper.find( REFERENCE_ITEM_SELECTOR ).exists() ).toBe( false );

@@ -1,6 +1,6 @@
-import _Vue from 'vue';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
+import { App } from 'vue';
 
-export default function ClientRouterPlugin( Vue: typeof _Vue, clientRouter: MediaWikiRouter ): void {
-	Vue.prototype.$clientRouter = clientRouter;
+export default function ClientRouterPlugin( app: App, clientRouter: MediaWikiRouter ): void {
+	app.config.globalProperties.$clientRouter = clientRouter;
 }

@@ -8,6 +8,11 @@ module.exports = {
 		'ts',
 		'tsx',
 	],
+	globals: {
+		'ts-jest': {
+			diagnostics: false,
+		},
+	},
 	moduleNameMapper: {
 		'^@/(.*)$': '<rootDir>/src/$1',
 	},
@@ -21,8 +26,9 @@ module.exports = {
 	],
 	testURL: 'https://data-bridge.test/jest',
 	transform: {
-		'^.+\\.vue$': '@vue/vue2-jest',
+		'^.+\\.vue$': '@vue/vue3-jest',
 		'.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+		'.+\\.ts$': 'ts-jest', // not sure if needed?
 	},
 	transformIgnorePatterns: [
 		'/node_modules/',

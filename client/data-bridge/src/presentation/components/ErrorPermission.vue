@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType, VueConstructor } from 'vue';
+import { createApp, defineComponent, PropType } from 'vue';
 import StateMixin from '@/presentation/StateMixin';
 import ErrorPermissionInfo from '@/presentation/components/ErrorPermissionInfo.vue';
 import PageList from '@/presentation/components/PageList.vue';
@@ -66,7 +66,7 @@ const permissionTypeRenderers: PermissionTypeMessageRenderers = {
 	},
 };
 
-export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+export default defineComponent( {
 	mixins: [ StateMixin ],
 	name: 'ErrorPermission',
 	components: {
@@ -151,13 +151,14 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 						blockedTimestamp,
 					} = permissionError.info;
 					const blockedByText = this.bdi( blockedBy );
-					const blockedByLink = new UserLink( {
-						propsData: {
+					const blockedByLink = createApp(
+						UserLink,
+						{
 							userId: blockedById,
 							userName: blockedBy,
 							router: this.$clientRouter,
 						},
-					} ).$mount().$el as HTMLElement;
+					).mount( document.createElement( 'span' ) ).$el;
 					params.push(
 						blockedByLink,
 						blockReason,
@@ -180,13 +181,14 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 						blockedTimestamp,
 					} = permissionError.info;
 					const blockedByText = this.bdi( blockedBy );
-					const blockedByLink = new UserLink( {
-						propsData: {
+					const blockedByLink = createApp(
+						UserLink,
+						{
 							userId: blockedById,
 							userName: blockedBy,
 							router: this.$repoRouter,
 						},
-					} ).$mount().$el as HTMLElement;
+					).mount( document.createElement( 'span' ) ).$el;
 					params.push(
 						blockedByLink,
 						blockReason,
@@ -235,14 +237,13 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 			return bdi;
 		},
 		convertToHtmlList( arr: readonly string[], mwRouter: MediaWikiRouter ): HTMLElement {
-			const pageListInstance = new PageList( {
-				propsData: {
+			return createApp(
+				PageList,
+				{
 					pages: arr,
 					router: mwRouter,
 				},
-			} );
-			pageListInstance.$mount();
-			return pageListInstance.$el as HTMLElement;
+			).mount( document.createElement( 'span' ) ).$el;
 		},
 	},
 } );

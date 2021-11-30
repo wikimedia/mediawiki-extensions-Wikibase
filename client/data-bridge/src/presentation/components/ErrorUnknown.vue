@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import Vue, { VueConstructor } from 'vue';
+import { defineComponent } from 'vue';
 import StateMixin from '@/presentation/StateMixin';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
@@ -35,7 +35,7 @@ import ReportIssue from '@/presentation/components/ReportIssue.vue';
  * A component which gets shown if no dedicated handling for the type of
  * error which happened is configured.
  */
-export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+export default defineComponent( {
 	mixins: [ StateMixin ],
 	name: 'ErrorUnknown',
 	components: {

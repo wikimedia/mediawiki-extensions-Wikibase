@@ -1,8 +1,8 @@
 import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
-import _Vue from 'vue';
+import { App } from 'vue';
 
-export default function InLanguagePlugin( Vue: typeof _Vue, resolver: LanguageInfoRepository ): void {
-	Vue.prototype.$inLanguage = ( mwLangCode: string ) => {
+export default function InLanguagePlugin( app: App, resolver: LanguageInfoRepository ): void {
+	app.config.globalProperties.$inLanguage = ( mwLangCode: string ) => {
 		if ( !mwLangCode ) {
 			return {};
 		}

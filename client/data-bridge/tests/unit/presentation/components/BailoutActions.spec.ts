@@ -19,7 +19,9 @@ describe( 'BailoutActions', () => {
 	it( 'only uses bailout messages', () => {
 		shallowMount( BailoutActions, {
 			propsData: { originalHref, pageTitle },
-			mocks: { $messages, $clientRouter },
+			global: {
+				mocks: { $messages, $clientRouter },
+			},
 		} );
 
 		const messageKeys = $messages.getText.mock.calls.map( ( call ) => call[ 0 ] );
@@ -31,7 +33,9 @@ describe( 'BailoutActions', () => {
 	it( 'calls the client router correctly', () => {
 		shallowMount( BailoutActions, {
 			propsData: { originalHref, pageTitle },
-			mocks: { $messages, $clientRouter },
+			global: {
+				mocks: { $messages, $clientRouter },
+			},
 		} );
 
 		expect( $clientRouter.getPageUrl ).toHaveBeenCalledWith( pageTitle, { action: 'edit' } );
@@ -40,7 +44,9 @@ describe( 'BailoutActions', () => {
 	it( 'passes the original href into the button', () => {
 		const wrapper = shallowMount( BailoutActions, {
 			propsData: { originalHref, pageTitle },
-			mocks: { $messages, $clientRouter },
+			global: {
+				mocks: { $messages, $clientRouter },
+			},
 		} );
 
 		expect( wrapper.findComponent( EventEmittingButton ).props( 'href' ) ).toBe( originalHref );

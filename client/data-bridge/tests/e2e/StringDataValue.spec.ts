@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import { launch } from '@/main';
@@ -22,10 +21,7 @@ import {
 	selectRadioInput,
 } from '../util/e2e';
 import Entities from '@/mock-data/data/Q42.data.json';
-import Vuex from 'vuex';
-
-Vue.config.devtools = false;
-Vue.use( Vuex );
+import { createApp } from 'vue';
 
 const manager = {
 	on: jest.fn(),
@@ -58,7 +54,9 @@ function prepareTestEnv( options: {
 	const clientPageTitle = 'Client_page';
 
 	const app = { launch, createServices };
-	const require = jest.fn().mockResolvedValue( app );
+	const require = jest.fn().mockResolvedValueOnce( app );
+	const vue = { createMwApp: createApp };
+	require.mockReturnValueOnce( vue );
 	const using = jest.fn().mockResolvedValue( require );
 
 	mockMwEnv(
@@ -278,10 +276,7 @@ describe( 'string data value', () => {
 	} );
 
 	describe( 'language utils', () => {
-		/* Works only in isolation due to shared state in Vue, will be reenabled in
-		 * I1822878050997eedbd2419fd5920c96d1bd65172
-		 */
-		it.skip( 'determines the directionality of the given language', async () => {
+		it( 'determines the directionality of the given language', async () => {
 			const propertyId = 'P373';
 			const propertyLabel = 'רתֵּסְאֶ';
 			const language = 'he';
@@ -319,10 +314,7 @@ describe( 'string data value', () => {
 			expect( window.$.uls!.data.getDir ).toHaveBeenCalledWith( language );
 		} );
 
-		/* Works only in isolation due to shared state in Vue, will be reenabled in
-		 * I1822878050997eedbd2419fd5920c96d1bd65172
-		 */
-		it.skip( 'standardized language code', async () => {
+		it( 'standardized language code', async () => {
 			const propertyId = 'P373';
 			const propertyLabel = 'Jochen';
 			const language = 'de-formal';

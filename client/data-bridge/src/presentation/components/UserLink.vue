@@ -1,5 +1,5 @@
+<!-- span added to ensure there is a single root and eslint is happy -->
 <template>
-	<!-- span added to ensure there is a single root and eslint is happy -->
 	<span>
 		<a
 			v-if="userId !== 0"
@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
-import Vue, { PropType } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 /**
  * A component which renders a link to a user page on a certain wiki.
@@ -24,7 +24,7 @@ import Vue, { PropType } from 'vue';
  * accessing features from ClientRouterPlugin or RepoRouterPlugin
  * from here.
  */
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'UserLink',
 	props: {
 		/**

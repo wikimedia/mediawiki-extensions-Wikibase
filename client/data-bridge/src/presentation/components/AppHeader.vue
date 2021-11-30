@@ -49,9 +49,9 @@ import EventEmittingButton from '@/presentation/components/EventEmittingButton.v
 import StateMixin from '@/presentation/StateMixin';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import TermLabel from '@/presentation/components/TermLabel.vue';
-import Vue, { VueConstructor } from 'vue';
+import { createApp, defineComponent } from 'vue';
 
-export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+export default defineComponent( {
 	mixins: [ StateMixin ],
 	name: 'AppHeader',
 	components: {
@@ -60,14 +60,16 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 	},
 	computed: {
 		title(): string {
+			const termLabel = createApp(
+				TermLabel,
+				{
+					term: this.rootModule.getters.targetLabel,
+					inLanguage: this.$inLanguage,
+				},
+			).mount( document.createElement( 'span' ) ).$el;
 			return this.$messages.get(
 				this.$messages.KEYS.BRIDGE_DIALOG_TITLE,
-				new TermLabel( {
-					propsData: {
-						term: this.rootModule.getters.targetLabel,
-						inLanguage: this.$inLanguage,
-					},
-				} ).$mount().$el as HTMLElement,
+				termLabel,
 			);
 		},
 		canGoBack(): boolean {

@@ -4,21 +4,28 @@ exports[`ProcessDialogHeader renders correctly with all props and slots filled 1
 <div
   class="wb-ui-processdialog-header"
 >
+  <!-- @slot This slot should be filled with a "safe" action, e.g. close -->
+  
   <button>
     safe action
   </button>
-   
+  
   <h1
     class="wb-ui-processdialog-header__title"
   >
+    <!-- @slot This slot should be filled with the title of the dialog -->
+    
     <span>
       title
     </span>
+    
   </h1>
-   
+  <!-- @slot This slot should be filled with the primary action, e.g. publish -->
+  
   <button>
     primary action
   </button>
+  
 </div>
 `;
 
@@ -26,14 +33,21 @@ exports[`ProcessDialogHeader renders correctly without slots filled 1`] = `
 <div
   class="wb-ui-processdialog-header"
 >
+  <!-- @slot This slot should be filled with a "safe" action, e.g. close -->
+  
   <div />
-   
+  
   <h1
     class="wb-ui-processdialog-header__title"
   >
+    <!-- @slot This slot should be filled with the title of the dialog -->
+    
     <span />
+    
   </h1>
-   
+  <!-- @slot This slot should be filled with the primary action, e.g. publish -->
+  
   <div />
+  
 </div>
 `;

@@ -6,13 +6,13 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import Term from '@/datamodel/Term';
 
 /**
  * A label for a Term in a certain language.
  */
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'TermLabel',
 	props: {
 		term: {

@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 
@@ -30,7 +30,7 @@ import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
  * A component which gets shown if an edit conflict occurs while saving.
  * The only possible action is to reload the whole page.
  */
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'ErrorSavingEditConflict',
 	components: {
 		EventEmittingButton,

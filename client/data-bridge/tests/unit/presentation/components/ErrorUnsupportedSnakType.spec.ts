@@ -1,15 +1,11 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import { SnakType } from '@wmde/wikibase-datamodel-types';
 import ErrorUnsupportedSnakType from '@/presentation/components/ErrorUnsupportedSnakType.vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import BailoutActions from '@/presentation/components/BailoutActions.vue';
 import MessageKeys from '@/definitions/MessageKeys';
-import Vuex from 'vuex';
 import { calledWithHTMLElement } from '../../../util/assertions';
 import { createTestStore } from '../../../util/store';
-
-const localVue = createLocalVue();
-localVue.use( Vuex );
 
 describe( 'ErrorUnsupportedSnakType', () => {
 	const targetProperty = 'P569',
@@ -26,17 +22,18 @@ describe( 'ErrorUnsupportedSnakType', () => {
 
 	it( 'uses IconMessageBox to display the error message', () => {
 		const wrapper = shallowMount( ErrorUnsupportedSnakType, {
-			localVue,
 			propsData: {
 				snakType: 'somevalue',
 			},
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					get: messageGet,
+			global: {
+				mocks: {
+					$messages: {
+						KEYS: MessageKeys,
+						get: messageGet,
+					},
 				},
+				plugins: [ store ],
 			},
-			store,
 		} );
 		expect( wrapper.findComponent( IconMessageBox ).exists() ).toBe( true );
 	} );
@@ -45,18 +42,20 @@ describe( 'ErrorUnsupportedSnakType', () => {
 		[ 'somevalue' as SnakType, MessageKeys.SOMEVALUE_ERROR_HEAD ],
 		[ 'novalue' as SnakType, MessageKeys.NOVALUE_ERROR_HEAD ],
 	] )( 'shows the message header for %s', ( snakType: SnakType, messageKey: MessageKeys ) => {
-		shallowMount( ErrorUnsupportedSnakType, {
-			localVue,
+		mount( ErrorUnsupportedSnakType, {
 			propsData: {
 				snakType,
 			},
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					get: messageGet,
+			global: {
+				stubs: { BailoutActions: true },
+				mocks: {
+					$messages: {
+						KEYS: MessageKeys,
+						get: messageGet,
+					},
 				},
+				plugins: [ store ],
 			},
-			store,
 		} );
 
 		calledWithHTMLElement( messageGet, 0, 1 );
@@ -64,7 +63,7 @@ describe( 'ErrorUnsupportedSnakType', () => {
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			1,
 			messageKey,
-			`<span lang="zxx" dir="auto" class="wb-db-term-label">${targetProperty}</span>`,
+			`<span class="wb-db-term-label" lang="zxx" dir="auto">${targetProperty}</span>`,
 		);
 	} );
 
@@ -72,18 +71,20 @@ describe( 'ErrorUnsupportedSnakType', () => {
 		[ 'somevalue' as SnakType, MessageKeys.SOMEVALUE_ERROR_BODY ],
 		[ 'novalue' as SnakType, MessageKeys.NOVALUE_ERROR_BODY ],
 	] )( 'shows the message body for %s', ( snakType: SnakType, messageKey: MessageKeys ) => {
-		shallowMount( ErrorUnsupportedSnakType, {
-			localVue,
+		mount( ErrorUnsupportedSnakType, {
 			propsData: {
 				snakType,
 			},
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					get: messageGet,
+			global: {
+				stubs: { BailoutActions: true },
+				mocks: {
+					$messages: {
+						KEYS: MessageKeys,
+						get: messageGet,
+					},
 				},
+				plugins: [ store ],
 			},
-			store,
 		} );
 
 		calledWithHTMLElement( messageGet, 1, 1 );
@@ -91,23 +92,24 @@ describe( 'ErrorUnsupportedSnakType', () => {
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			2,
 			messageKey,
-			`<span lang="zxx" dir="auto" class="wb-db-term-label">${targetProperty}</span>`,
+			`<span class="wb-db-term-label" lang="zxx" dir="auto">${targetProperty}</span>`,
 		);
 	} );
 
 	it( 'uses BailoutActions to provide a bail out path for unsupported snak type', () => {
 		const wrapper = shallowMount( ErrorUnsupportedSnakType, {
-			localVue,
 			propsData: {
 				snakType: 'somevalue',
 			},
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					get: messageGet,
+			global: {
+				mocks: {
+					$messages: {
+						KEYS: MessageKeys,
+						get: messageGet,
+					},
 				},
+				plugins: [ store ],
 			},
-			store,
 		} );
 
 		expect( wrapper.findComponent( BailoutActions ).exists() ).toBe( true );

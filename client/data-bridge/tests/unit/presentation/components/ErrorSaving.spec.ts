@@ -1,6 +1,5 @@
-import Vuex from 'vuex';
 import {
-	createLocalVue,
+	config,
 	shallowMount,
 } from '@vue/test-utils';
 import { createTestStore } from '../../../util/store';
@@ -9,6 +8,8 @@ import ErrorSaving from '@/presentation/components/ErrorSaving.vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import ReportIssue from '@/presentation/components/ReportIssue.vue';
+
+config.renderStubDefaultSlot = true;
 
 describe( 'ErrorSaving', () => {
 	const $messages = {
@@ -21,32 +22,30 @@ describe( 'ErrorSaving', () => {
 	const retrySave = jest.fn();
 	const trackSavingErrorsFallingBackToGenericView = jest.fn();
 
-	const localVue = createLocalVue();
-	localVue.use( Vuex );
 	const store = createTestStore( { actions: { retrySave, trackSavingErrorsFallingBackToGenericView } } );
 
 	it( 'creates a heading with the right message', () => {
-		const wrapper = shallowMount( ErrorSaving, { mocks, store, localVue } );
+		const wrapper = shallowMount( ErrorSaving, { global: { mocks, plugins: [ store ] } } );
 		const heading = wrapper.find( 'h2' );
 		expect( heading.exists() ).toBe( true );
 		expect( heading.text() ).toBe( `⧼${MessageKeys.SAVING_ERROR_HEADING}⧽` );
 	} );
 
 	it( 'mounts an IconMessageBox with the right message', () => {
-		const wrapper = shallowMount( ErrorSaving, { mocks, store, localVue } );
+		const wrapper = shallowMount( ErrorSaving, { global: { mocks, plugins: [ store ] } } );
 		const iconMessageBox = wrapper.findComponent( IconMessageBox );
 		expect( iconMessageBox.exists() ).toBe( true );
 		expect( iconMessageBox.text() ).toBe( `⧼${MessageKeys.SAVING_ERROR_MESSAGE}⧽` );
 	} );
 
 	it( 'mounts a ReportIssue', () => {
-		const wrapper = shallowMount( ErrorSaving, { mocks, store, localVue } );
+		const wrapper = shallowMount( ErrorSaving, { global: { mocks, plugins: [ store ] } } );
 		expect( wrapper.findComponent( ReportIssue ).exists() ).toBe( true );
 	} );
 
 	it( 'mounts first EventEmittingButton with the right props', () => {
-		const wrapper = shallowMount( ErrorSaving, { mocks, store, localVue } );
-		const eventEmittingButton = wrapper.findAllComponents( EventEmittingButton ).at( 0 );
+		const wrapper = shallowMount( ErrorSaving, { global: { mocks, plugins: [ store ] } } );
+		const eventEmittingButton = wrapper.findAllComponents( EventEmittingButton )[ 0 ];
 		expect( eventEmittingButton.exists() ).toBe( true );
 		expect( eventEmittingButton.props( 'type' ) ).toBe( 'neutral' );
 		expect( eventEmittingButton.props( 'size' ) ).toBe( 'M' );
@@ -54,8 +53,8 @@ describe( 'ErrorSaving', () => {
 	} );
 
 	it( 'mounts second EventEmittingButton with the right props', () => {
-		const wrapper = shallowMount( ErrorSaving, { mocks, store, localVue } );
-		const eventEmittingButton = wrapper.findAllComponents( EventEmittingButton ).at( 1 );
+		const wrapper = shallowMount( ErrorSaving, { global: { mocks, plugins: [ store ] } } );
+		const eventEmittingButton = wrapper.findAllComponents( EventEmittingButton )[ 1 ];
 		expect( eventEmittingButton.exists() ).toBe( true );
 		expect( eventEmittingButton.props( 'type' ) ).toBe( 'primaryProgressive' );
 		expect( eventEmittingButton.props( 'size' ) ).toBe( 'M' );
@@ -63,16 +62,15 @@ describe( 'ErrorSaving', () => {
 	} );
 
 	it( 'includes no whitespace between the two buttons', () => {
-		const wrapper = shallowMount( ErrorSaving, { mocks, store, localVue } );
+		const wrapper = shallowMount( ErrorSaving, { global: { mocks, plugins: [ store ] } } );
 		const buttons = wrapper.find( '.wb-db-error-saving__buttons' );
 		expect( buttons.element.textContent ).toBe( '' );
 	} );
 
 	it( 'dispatches retrySave action when the retry save button is clicked', async () => {
-		const wrapper = shallowMount( ErrorSaving, { mocks, store, localVue } );
+		const wrapper = shallowMount( ErrorSaving, { global: { mocks, plugins: [ store ] } } );
 		const button = wrapper.find( '.wb-db-error-saving__buttons .wb-db-error-saving__retry' );
-		button.vm.$emit( 'click' );
-		await localVue.nextTick();
+		await button.trigger( 'click' );
 
 		expect( retrySave ).toHaveBeenCalledTimes( 1 );
 	} );
@@ -84,20 +82,18 @@ describe( 'ErrorSaving', () => {
 			trackSavingErrorsFallingBackToGenericView,
 		} } );
 		const wrapper = shallowMount( ErrorSaving, {
-			store: localStore,
-			localVue,
+			global: { plugins: [ localStore ] },
 		} );
 
 		const button = wrapper.find( '.wb-db-error-saving__buttons .wb-db-error-saving__back' );
 		expect( button.exists() ).toBe( true );
-		button.vm.$emit( 'click' );
+		await button.trigger( 'click' );
 
-		await localVue.nextTick();
 		expect( goBackFromErrorToReady ).toHaveBeenCalled();
 	} );
 
 	it( 'dispatches trackSavingErrorsFallingBackToGenericView on mount', () => {
-		shallowMount( ErrorSaving, { mocks, store, localVue } );
+		shallowMount( ErrorSaving, { global: { mocks, plugins: [ store ] } } );
 		expect( trackSavingErrorsFallingBackToGenericView ).toHaveBeenCalledTimes( 1 );
 	} );
 } );

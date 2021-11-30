@@ -31,10 +31,12 @@ describe( 'ErrorPermissionInfo', () => {
 		const messageGet = jest.fn().mockReturnValue( toggleText );
 		const wrapper = shallowMount( ErrorPermissionInfo, {
 			propsData: { messageHeader: 'header', messageBody: 'body' },
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					getText: messageGet,
+			global: {
+				mocks: {
+					$messages: {
+						KEYS: MessageKeys,
+						getText: messageGet,
+					},
 				},
 			},
 		} );

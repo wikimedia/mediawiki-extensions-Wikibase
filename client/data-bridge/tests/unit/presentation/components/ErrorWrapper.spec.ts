@@ -1,8 +1,7 @@
 import { DataType } from '@wmde/wikibase-datamodel-types';
 import MessageKeys from '@/definitions/MessageKeys';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import Vuex from 'vuex';
+import { shallowMount } from '@vue/test-utils';
 import {
 	MissingPermissionsError,
 	PageNotEditable,
@@ -20,9 +19,6 @@ import ErrorSavingEditConflict from '@/presentation/components/ErrorSavingEditCo
 import ApplicationError, { ErrorTypes, UnsupportedDatatypeError } from '@/definitions/ApplicationError';
 import { createTestStore } from '../../../util/store';
 
-const localVue = createLocalVue();
-localVue.use( Vuex );
-
 describe( 'ErrorWrapper', () => {
 	it( 'mounts ErrorUnknown on empty applicationErrors', () => {
 		const store = createTestStore( {
@@ -30,7 +26,7 @@ describe( 'ErrorWrapper', () => {
 				applicationErrors: [],
 			},
 		} );
-		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+		const wrapper = shallowMount( ErrorWrapper, { global: { plugins: [ store ] } } );
 		expect( wrapper.findComponent( ErrorUnknown ).exists() ).toBe( true );
 		expect( wrapper.findComponent( ErrorPermission ).exists() ).toBe( false );
 	} );
@@ -45,7 +41,7 @@ describe( 'ErrorWrapper', () => {
 				],
 			},
 		} );
-		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+		const wrapper = shallowMount( ErrorWrapper, { global: { plugins: [ store ] } } );
 		expect( wrapper.findComponent( ErrorUnknown ).exists() ).toBe( true );
 		expect( wrapper.findComponent( ErrorPermission ).exists() ).toBe( false );
 	} );
@@ -61,10 +57,7 @@ describe( 'ErrorWrapper', () => {
 				applicationErrors,
 			},
 		} );
-		const wrapper = shallowMount( ErrorWrapper, {
-			localVue,
-			store,
-		} );
+		const wrapper = shallowMount( ErrorWrapper, { global: { plugins: [ store ] } } );
 
 		const permissionErrorComponent = wrapper.findComponent( ErrorPermission );
 		expect( permissionErrorComponent.exists() ).toBe( true );
@@ -114,10 +107,7 @@ describe( 'ErrorWrapper', () => {
 				applicationErrors,
 			},
 		} );
-		const wrapper = shallowMount( ErrorWrapper, {
-			localVue,
-			store,
-		} );
+		const wrapper = shallowMount( ErrorWrapper, { global: { plugins: [ store ] } } );
 
 		const permissionErrorComponent = wrapper.findComponent( ErrorPermission );
 		expect( permissionErrorComponent.exists() ).toBe( true );
@@ -140,7 +130,7 @@ describe( 'ErrorWrapper', () => {
 				applicationErrors,
 			},
 		} );
-		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+		const wrapper = shallowMount( ErrorWrapper, { global: { plugins: [ store ] } } );
 		expect( wrapper.findComponent( ErrorUnsupportedDatatype ).exists() ).toBe( true );
 	} );
 
@@ -156,7 +146,7 @@ describe( 'ErrorWrapper', () => {
 				applicationErrors,
 			},
 		} );
-		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+		const wrapper = shallowMount( ErrorWrapper, { global: { plugins: [ store ] } } );
 
 		expect( wrapper.findComponent( ErrorDeprecatedStatement ).exists() ).toBe( true );
 	} );
@@ -172,7 +162,7 @@ describe( 'ErrorWrapper', () => {
 				applicationErrors,
 			},
 		} );
-		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+		const wrapper = shallowMount( ErrorWrapper, { global: { plugins: [ store ] } } );
 
 		expect( wrapper.findComponent( ErrorAmbiguousStatement ).exists() ).toBe( true );
 	} );
@@ -191,7 +181,7 @@ describe( 'ErrorWrapper', () => {
 				applicationErrors,
 			},
 		} );
-		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+		const wrapper = shallowMount( ErrorWrapper, { global: { plugins: [ store ] } } );
 		expect( wrapper.findComponent( ErrorUnsupportedSnakType ).exists() ).toBe( true );
 	} );
 
@@ -206,7 +196,7 @@ describe( 'ErrorWrapper', () => {
 				applicationErrors,
 			},
 		} );
-		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+		const wrapper = shallowMount( ErrorWrapper, { global: { plugins: [ store ] } } );
 		expect( wrapper.findComponent( ErrorSaving ).exists() ).toBe( true );
 	} );
 
@@ -225,7 +215,7 @@ describe( 'ErrorWrapper', () => {
 		const $clientRouter = {
 			getPageUrl: jest.fn().mockReturnValue( loginUrl ),
 		};
-		const wrapper = shallowMount( ErrorWrapper, { localVue, store, mocks: { $clientRouter } } );
+		const wrapper = shallowMount( ErrorWrapper, { global: { plugins: [ store ], mocks: { $clientRouter } } } );
 		expect( wrapper.findComponent( ErrorSavingAssertUser ).exists() ).toBe( true );
 		expect( $clientRouter.getPageUrl ).toHaveBeenCalledWith(
 			'Special:UserLogin',
@@ -246,7 +236,7 @@ describe( 'ErrorWrapper', () => {
 				],
 			},
 		} );
-		const wrapper = shallowMount( ErrorWrapper, { store, localVue } );
+		const wrapper = shallowMount( ErrorWrapper, { global: { plugins: [ store ] } } );
 		wrapper.findComponent( ErrorUnknown ).vm.$emit( 'relaunch' );
 		expect( wrapper.emitted( 'relaunch' ) ).toHaveLength( 1 );
 	} );
@@ -262,7 +252,7 @@ describe( 'ErrorWrapper', () => {
 				applicationErrors,
 			},
 		} );
-		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+		const wrapper = shallowMount( ErrorWrapper, { global: { plugins: [ store ] } } );
 		expect( wrapper.findComponent( ErrorSavingEditConflict ).exists() ).toBe( true );
 	} );
 
@@ -276,7 +266,7 @@ describe( 'ErrorWrapper', () => {
 				],
 			},
 		} );
-		const wrapper = shallowMount( ErrorWrapper, { store, localVue } );
+		const wrapper = shallowMount( ErrorWrapper, { global: { plugins: [ store ] } } );
 		wrapper.findComponent( ErrorSavingEditConflict ).vm.$emit( 'reload' );
 		expect( wrapper.emitted( 'reload' ) ).toHaveLength( 1 );
 	} );

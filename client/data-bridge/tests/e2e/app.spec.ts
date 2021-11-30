@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import { launch } from '@/main';
@@ -32,10 +31,7 @@ import { ApiQueryInfoTestResponsePage, ApiQueryResponseBody } from '@/definition
 import { ApiErrorRawErrorformat } from '@/data-access/ApiPageEditPermissionErrorsRepository';
 import { SpecialPageWikibaseEntityResponse } from '@/data-access/SpecialPageReadingEntityRepository';
 import MwConfig from '@/@types/mediawiki/MwConfig';
-import Vuex from 'vuex';
-
-Vue.config.devtools = false;
-Vue.use( Vuex );
+import { createApp } from 'vue';
 
 const on = jest.fn();
 const clearWindows = jest.fn( () => Promise.resolve() );
@@ -69,7 +65,8 @@ function prepareTestEnv( options: {
 	const editFlow = options.editFlow || EditFlow.SINGLE_BEST_VALUE;
 
 	const app = { launch, createServices };
-	const require = jest.fn().mockResolvedValue( app );
+	const require = jest.fn().mockResolvedValueOnce( app );
+	require.mockResolvedValueOnce( { createMwApp: createApp } );
 	const using = jest.fn().mockResolvedValue( require );
 
 	mockMwEnv(

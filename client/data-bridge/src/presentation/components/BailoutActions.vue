@@ -26,14 +26,14 @@
 
 <script lang="ts">
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
 /**
  * A component to present the user with alternative suggestions
  * if they cannot use the Data Bridge to edit a value for some reason.
  * (That reason is typically displayed above this component in an IconMessageBox.)
  */
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'BailoutActions',
 	components: { EventEmittingButton },
 	props: {

@@ -1,5 +1,4 @@
 import { launch } from '@/main';
-import Vue from 'vue';
 import { EventEmitter } from 'events';
 import { appEvents } from '@/events';
 import newMockServiceContainer from './services/newMockServiceContainer';
@@ -21,16 +20,6 @@ const mockVue = {
 	mount: jest.fn(),
 	use: jest.fn(),
 };
-
-jest.mock( 'vue', () => {
-	return {
-		createMwApp: jest.fn().mockImplementation( () => mockVue ),
-		use: jest.fn(),
-		config: {
-			productionTip: true,
-		},
-	};
-} );
 
 const store = {
 	dispatch: jest.fn(),
@@ -69,19 +58,21 @@ describe( 'launch', () => {
 			messagesRepository,
 		} );
 
-		launch( appConfiguration, appInformation as any, services as any );
+		const createMwApp = jest.fn().mockImplementation( () => mockVue );
+
+		launch( createMwApp, appConfiguration, appInformation as any, services as any );
 
 		expect( mockExtendVueEnvironment ).toHaveBeenCalledTimes( 1 );
 		expect( mockExtendVueEnvironment.mock.calls[ 0 ][ 0 ] ).toBe( mockVue );
 		expect( mockExtendVueEnvironment.mock.calls[ 0 ][ 1 ] ).toBe( languageInfoRepository );
 		expect( mockExtendVueEnvironment.mock.calls[ 0 ][ 2 ] ).toBe( messagesRepository );
-		expect( Vue.config.productionTip ).toBe( false );
 	} );
 
 	it( 'builds app', () => {
 		const services = newMockServiceContainer( {} );
+		const createMwApp = jest.fn().mockImplementation( () => mockVue );
 
-		const emitter = launch( appConfiguration, appInformation as any, services as any );
+		const emitter = launch( createMwApp, appConfiguration, appInformation as any, services as any );
 
 		expect( emitter ).toBe( mockEmitter );
 		expect( mockCreateStore ).toHaveBeenCalledWith( services );

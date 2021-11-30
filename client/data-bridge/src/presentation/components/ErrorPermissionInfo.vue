@@ -20,13 +20,13 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
 /**
  * A component used to illustrate permission errors which happened when
  * checking the user's authorization to perform an action.
  */
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'ErrorPermissionInfo',
 	props: {
 		/**

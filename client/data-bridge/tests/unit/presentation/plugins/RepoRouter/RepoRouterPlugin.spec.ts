@@ -1,16 +1,19 @@
-import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 import RepoRouterPlugin from '@/presentation/plugins/RepoRouterPlugin';
-import { createLocalVue } from '@vue/test-utils';
+import MediaWikiRouter from '@/definitions/MediaWikiRouter';
+import { App } from 'vue';
 
 describe( 'RepoRouterPlugin', () => {
 	it( 'attaches MediaWikiRouter instance as $repoRouter', () => {
-		const localVue = createLocalVue();
 		const router: MediaWikiRouter = {
 			getPageUrl: jest.fn(),
 		};
 
-		localVue.use( RepoRouterPlugin, router );
+		const app = {
+			config: { globalProperties: {} },
+		} as App;
 
-		expect( localVue.prototype.$repoRouter ).toBe( router );
+		RepoRouterPlugin( app, router );
+
+		expect( app.config.globalProperties.$repoRouter ).toBe( router );
 	} );
 } );

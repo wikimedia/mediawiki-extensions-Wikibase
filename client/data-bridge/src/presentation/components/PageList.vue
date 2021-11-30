@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 
 /**
@@ -19,7 +19,7 @@ import MediaWikiRouter from '@/definitions/MediaWikiRouter';
  * accessing features from ClientRouterPlugin or RepoRouterPlugin
  * from here.
  */
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'PageList',
 	props: {
 		pages: {

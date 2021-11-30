@@ -1,4 +1,4 @@
-import { VueConstructor } from 'vue/types/vue';
+import { App } from 'vue';
 import InLanguagePlugin from './plugins/InLanguagePlugin';
 import MessagesPlugin from './plugins/MessagesPlugin';
 import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
@@ -8,7 +8,7 @@ import ClientRouterPlugin from '@/presentation/plugins/ClientRouterPlugin';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 
 export default function extendVueEnvironment(
-	app: ReturnType<VueConstructor['createMwApp']>,
+	app: App,
 	languageInfoRepo: LanguageInfoRepository,
 	messageRepo: MessagesRepository,
 	repoRouter: MediaWikiRouter,

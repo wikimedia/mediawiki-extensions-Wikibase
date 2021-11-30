@@ -28,6 +28,7 @@ describe( 'Dispatcher', () => {
 	it( 'can be constructed with mwWindow and app definition', () => {
 		const dispatcher = new Dispatcher(
 			{} as MwWindow,
+			{} as unknown,
 			{} as AppBridge,
 			{} as DataBridgeConfig,
 			{} as Tracker,
@@ -47,6 +48,7 @@ describe( 'Dispatcher', () => {
 					mw: { config: mockMwConfig() },
 					location: { href: '' },
 				} as MwWindow,
+				{ createMwApp: jest.fn() },
 				{
 					launch: jest.fn(),
 					createServices: jest.fn(),
@@ -85,9 +87,11 @@ describe( 'Dispatcher', () => {
 			const editFlow = EditFlow.SINGLE_BEST_VALUE;
 			const originalHref = 'https://example.com/index.php?title=Item:Q42&uselang=en#P31';
 			const tracker = {} as Tracker;
+			const createApp = jest.fn();
 
 			const dispatcher = new Dispatcher(
 				mwWindow as MwWindow,
+				{ createMwApp: createApp },
 				app as any,
 				{ usePublish, editTags } as DataBridgeConfig,
 				tracker,
@@ -103,6 +107,7 @@ describe( 'Dispatcher', () => {
 
 			expect( app.createServices ).toHaveBeenCalledWith( mwWindow, editTags, tracker );
 			expect( app.launch ).toHaveBeenCalledWith(
+				createApp,
 				{
 					containerSelector: `#${Dispatcher.APP_DOM_CONTAINER_ID}`,
 				},

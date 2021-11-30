@@ -55,8 +55,6 @@ describe( 'init', () => {
 				launch: jest.fn().mockReturnValue( emitter ),
 				createServices,
 			},
-			require = jest.fn().mockReturnValue( app ),
-			using = jest.fn().mockResolvedValue( require ),
 			editTags = [ 'a tag' ],
 			usePublish = true,
 			issueReportingLink = 'https://bugs.example/new?body=<body>',
@@ -82,6 +80,11 @@ describe( 'init', () => {
 			MwApiConstructor = mockMwApiConstructor( {} ),
 			clientMwApi = new MwApiConstructor(),
 			clientApi = new ApiCore( clientMwApi );
+		const require = jest.fn().mockReturnValueOnce( app );
+		const createApp = jest.fn();
+		const vue = { createMwApp: createApp };
+		require.mockReturnValueOnce( vue );
+		const using = jest.fn().mockResolvedValue( require );
 
 		mockMwEnv(
 			using,
@@ -155,6 +158,7 @@ describe( 'init', () => {
 
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 			expect( app.launch ).toHaveBeenCalledWith(
+				createApp,
 				{
 					containerSelector: '#data-bridge-container',
 				},

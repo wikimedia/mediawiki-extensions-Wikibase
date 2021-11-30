@@ -1,7 +1,7 @@
 import Bcp47Language from '@/datamodel/Bcp47Language';
 import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
 import InLanguagePlugin from '@/presentation/plugins/InLanguagePlugin';
-import { createLocalVue } from '@vue/test-utils';
+import { App } from 'vue';
 
 describe( 'InLanguage plugin', () => {
 	it( 'adds $inLanguage to global instance and resolve language code', () => {
@@ -10,11 +10,13 @@ describe( 'InLanguage plugin', () => {
 		const resolver: LanguageInfoRepository = {
 			resolve: jest.fn( (): Bcp47Language => language ),
 		};
-		const localVue = createLocalVue();
+		const app = {
+			config: { globalProperties: {} },
+		} as App;
 
-		localVue.use( InLanguagePlugin, resolver );
+		InLanguagePlugin( app, resolver );
 
-		const actualLanguage = localVue.prototype.$inLanguage( languageCode );
+		const actualLanguage = app.config.globalProperties.$inLanguage( languageCode );
 
 		expect( resolver.resolve ).toHaveBeenCalledWith( languageCode );
 		expect( resolver.resolve ).toHaveBeenCalledTimes( 1 );
@@ -26,10 +28,13 @@ describe( 'InLanguage plugin', () => {
 		const resolver = {
 			resolve: jest.fn(),
 		};
-		const localVue = createLocalVue();
-		localVue.use( InLanguagePlugin, resolver );
+		const app = {
+			config: { globalProperties: {} },
+		} as App;
 
-		const actualLanguage = localVue.prototype.$inLanguage( '' );
+		InLanguagePlugin( app, resolver );
+
+		const actualLanguage = app.config.globalProperties.$inLanguage( '' );
 
 		expect( resolver.resolve ).not.toHaveBeenCalled();
 		expect( actualLanguage ).toStrictEqual( {} );

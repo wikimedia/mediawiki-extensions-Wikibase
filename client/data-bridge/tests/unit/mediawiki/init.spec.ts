@@ -62,6 +62,7 @@ describe( 'init', () => {
 			expect( using ).toHaveBeenCalledTimes( 1 );
 			expect( using ).toHaveBeenCalledWith( [
 				'wikibase.client.data-bridge.app',
+				'vue',
 				'mw.config.values.wbRepo',
 				'mediawiki.ForeignApi',
 				'mediawiki.api',
@@ -79,7 +80,8 @@ describe( 'init', () => {
 
 	it( 'loads `wikibase.client.data-bridge.app` and dispatches it on click', () => {
 		const app = {},
-			require = jest.fn().mockReturnValue( app ),
+			vue = {},
+			require = jest.fn().mockReturnValueOnce( app ),
 			using = jest.fn().mockResolvedValue( require ),
 			entityId = 'Q5',
 			propertyId = 'P4711',
@@ -90,6 +92,7 @@ describe( 'init', () => {
 				usePublish: false,
 				issueReportingLink: 'https://bugs.example/new?body=<body>',
 			};
+		require.mockReturnValueOnce( vue );
 		mockMwEnv( using, mockMwConfig( dataBridgeConfig ) );
 
 		const selectedElement = {
@@ -133,7 +136,7 @@ describe( 'init', () => {
 			expect( mockMwInitTracker.startClickDelayTracker ).toHaveBeenCalled();
 			expect( mwInitTrackerClickDelayCallback ).toHaveBeenCalled();
 
-			expect( Dispatcher ).toHaveBeenCalledWith( window, app, dataBridgeConfig, mockPrefixingEventTracker );
+			expect( Dispatcher ).toHaveBeenCalledWith( window, {}, app, dataBridgeConfig, mockPrefixingEventTracker );
 			expect( mockDispatcher.dispatch ).toHaveBeenCalledWith( selectedElement );
 		} );
 	} );
@@ -182,8 +185,10 @@ describe( 'init', () => {
 	} );
 
 	it( 'does not dispatch app twice if clicked a second time before app loads', async () => {
-		const app = {},
-			require = jest.fn().mockReturnValue( app );
+		const app = {};
+		const vue = {};
+		const require = jest.fn().mockReturnValueOnce( app );
+		require.mockReturnValueOnce( vue );
 		let resolveUsing: ( require: Function ) => void;
 		const using = jest.fn(
 				() => new Promise( ( resolve ) => {
@@ -235,7 +240,7 @@ describe( 'init', () => {
 		expect( event.stopPropagation ).toHaveBeenCalled();
 		resolveUsing!( require );
 		await budge();
-		expect( Dispatcher ).toHaveBeenCalledWith( window, app, dataBridgeConfig, tracker );
+		expect( Dispatcher ).toHaveBeenCalledWith( window, vue, app, dataBridgeConfig, tracker );
 		expect( Dispatcher ).toHaveBeenCalledTimes( 1 );
 		expect( mockDispatcher.dispatch ).toHaveBeenCalledWith( selectedElement );
 		expect( mockDispatcher.dispatch ).toHaveBeenCalledTimes( 1 );

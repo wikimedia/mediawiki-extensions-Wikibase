@@ -1,5 +1,5 @@
-import Vue, { CreateElement } from 'vue';
-import App from '@/presentation/App.vue';
+import { Component, App } from 'vue';
+import RootApp from '@/presentation/App.vue';
 import AppInformation from '@/definitions/AppInformation';
 import AppConfiguration from '@/definitions/AppConfiguration';
 import { createStore } from '@/store';
@@ -9,9 +9,8 @@ import { EventEmitter } from 'events';
 import extendVueEnvironment from '@/presentation/extendVueEnvironment';
 import createServices from '@/services/createServices';
 
-Vue.config.productionTip = false;
-
 export function launch(
+	createApp: ( rootComponent: Component, rootProps?: Record<string, unknown> | null ) => App,
 	config: AppConfiguration,
 	information: AppInformation,
 	services: ServiceContainer,
@@ -20,15 +19,8 @@ export function launch(
 	store.dispatch( 'initBridge', information );
 
 	const emitter = new EventEmitter();
-
-	const compatApp = {
-		store,
-		render( h: CreateElement ) {
-			return h( App, { props: { emitter } } );
-		},
-	};
-
-	const app = Vue.createMwApp( compatApp );
+	const app = createApp( RootApp, { emitter } );
+	app.use( store );
 
 	extendVueEnvironment(
 		app,

@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType, VueConstructor } from 'vue';
+import { createApp, defineComponent, PropType } from 'vue';
 import StateMixin from '@/presentation/StateMixin';
 import { SnakType } from '@wmde/wikibase-datamodel-types';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
@@ -34,7 +34,7 @@ import TermLabel from '@/presentation/components/TermLabel.vue';
  * A component used to illustrate an error which happened when the user tried
  * to edit a statement with a snak type not supported by Bridge yet.
  */
-export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
+export default defineComponent( {
 	mixins: [ StateMixin ],
 	name: 'ErrorUnsupportedSnakType',
 	components: {
@@ -49,12 +49,13 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 	},
 	computed: {
 		propertyLabel(): HTMLElement {
-			return new TermLabel( {
-				propsData: {
+			return createApp(
+				TermLabel,
+				{
 					term: this.rootModule.getters.targetLabel,
 					inLanguage: this.$inLanguage,
 				},
-			} ).$mount().$el as HTMLElement;
+			).mount( document.createElement( 'span' ) ).$el;
 		},
 		pageTitle(): string {
 			return this.rootModule.state.pageTitle;

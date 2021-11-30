@@ -16,6 +16,9 @@ module.exports = {
 	},
 	root: true,
 	rules: {
+		// We need to programmatically create small pseudo-apps to generate a HTMLElement to inject into messages
+		'vue/one-component-per-file': 'off',
+
 		'function-paren-newline': [ 'error', 'consistent' ],
 		'filenames/match-exported': 'error',
 		'object-shorthand': [ 'error', 'always' ],

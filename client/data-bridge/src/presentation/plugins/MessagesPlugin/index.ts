@@ -1,7 +1,7 @@
 import MessagesRepository from '@/definitions/data-access/MessagesRepository';
 import Messages from '@/presentation/plugins/MessagesPlugin/Messages';
-import _Vue from 'vue';
+import { App } from 'vue';
 
-export default function MessagesPlugin( Vue: typeof _Vue, messages: MessagesRepository ): void {
-	Vue.prototype.$messages = new Messages( messages );
+export default function MessagesPlugin( app: App, messages: MessagesRepository ): void {
+	app.config.globalProperties.$messages = new Messages( messages );
 }

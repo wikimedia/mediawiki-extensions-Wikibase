@@ -1,7 +1,7 @@
 import Loading from '@/presentation/components/Loading.vue';
 import { shallowMount } from '@vue/test-utils';
 import IndeterminateProgressBar from '@/presentation/components/IndeterminateProgressBar.vue';
-import Vue from 'vue';
+import { nextTick } from 'vue';
 
 describe( 'Loading', () => {
 	beforeEach( () => {
@@ -30,7 +30,13 @@ describe( 'Loading', () => {
 					isSaving: false,
 				},
 			} );
-			expect( wrapper ).toMatchSnapshot();
+			const expectedHtml = `<div class="wb-db-load">
+  <!-- @slot The content which is being initialized and needs to be hidden until that is complete,
+\t\tor the content which is being saved and needs to be unchangeable until the saving is complete -->
+  <!--v-if-->
+  <!--v-if-->
+</div>`;
+			expect( wrapper.html() ).toBe( expectedHtml );
 		} );
 
 		it( 'renders IndeterminateProgressBar after TIME_UNTIL_CONSIDERED_SLOW', async () => {
@@ -44,7 +50,7 @@ describe( 'Loading', () => {
 			} );
 
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW + 1 );
-			await Vue.nextTick();
+			await nextTick();
 
 			expect( wrapper.findComponent( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
@@ -64,7 +70,7 @@ describe( 'Loading', () => {
 
 			// way after minimum animation time
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW + MINIMUM_TIME_OF_PROGRESS_ANIMATION * 2 );
-			await Vue.nextTick();
+			await nextTick();
 
 			expect( wrapper.findComponent( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
@@ -88,7 +94,7 @@ describe( 'Loading', () => {
 
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW / 2 ); // well before considered slow
 			wrapper.setProps( { isInitializing: false } );
-			await Vue.nextTick();
+			await nextTick();
 
 			expect( wrapper.text() ).toBe( content );
 		} );
@@ -108,9 +114,9 @@ describe( 'Loading', () => {
 
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW ); // just after considered slow
 			wrapper.setProps( { isInitializing: false } );
-			await Vue.nextTick();
+			await nextTick();
 			jest.advanceTimersByTime( MINIMUM_TIME_OF_PROGRESS_ANIMATION - 1 ); // just before animation end
-			await Vue.nextTick();
+			await nextTick();
 
 			expect( wrapper.findComponent( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
@@ -134,9 +140,9 @@ describe( 'Loading', () => {
 
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW ); // just after considered slow
 			wrapper.setProps( { isInitializing: false } );
-			await Vue.nextTick();
+			await nextTick();
 			jest.advanceTimersByTime( MINIMUM_TIME_OF_PROGRESS_ANIMATION ); // just after animation end
-			await Vue.nextTick();
+			await nextTick();
 
 			expect( wrapper.text() ).toBe( content );
 		} );
@@ -161,7 +167,7 @@ describe( 'Loading', () => {
 			// way after minimum animation time
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW + MINIMUM_TIME_OF_PROGRESS_ANIMATION * 2 );
 			wrapper.setProps( { isInitializing: false } );
-			await Vue.nextTick();
+			await nextTick();
 
 			expect( wrapper.text() ).toBe( content );
 		} );
@@ -195,7 +201,7 @@ describe( 'Loading', () => {
 			} );
 
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW + 1 );
-			await Vue.nextTick();
+			await nextTick();
 
 			expect( wrapper.findComponent( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
@@ -214,7 +220,7 @@ describe( 'Loading', () => {
 
 			// way after minimum animation time
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW + MINIMUM_TIME_OF_PROGRESS_ANIMATION * 2 );
-			await Vue.nextTick();
+			await nextTick();
 
 			expect( wrapper.findComponent( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
@@ -258,9 +264,9 @@ describe( 'Loading', () => {
 
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW ); // just after considered slow
 			wrapper.setProps( { isSaving: false } );
-			await Vue.nextTick();
+			await nextTick();
 			jest.advanceTimersByTime( MINIMUM_TIME_OF_PROGRESS_ANIMATION - 1 ); // just before animation end
-			await Vue.nextTick();
+			await nextTick();
 
 			expect( wrapper.findComponent( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
@@ -284,9 +290,9 @@ describe( 'Loading', () => {
 
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW ); // just after considered slow
 			wrapper.setProps( { isSaving: false } );
-			await Vue.nextTick();
+			await nextTick();
 			jest.advanceTimersByTime( MINIMUM_TIME_OF_PROGRESS_ANIMATION ); // just after animation end
-			await Vue.nextTick();
+			await nextTick();
 
 			expect( wrapper.text() ).toBe( content );
 			expect( wrapper.findComponent( IndeterminateProgressBar ).exists() ).toBeFalsy();

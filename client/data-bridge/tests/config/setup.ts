@@ -20,8 +20,8 @@ beforeEach( () => {
 	expect.hasAssertions();
 } );
 
-config.mocks = {
-	...config.mocks,
+config.global.mocks = {
+	...config.global.mocks,
 	...{
 		$messages: {
 			KEYS: MessageKeys,

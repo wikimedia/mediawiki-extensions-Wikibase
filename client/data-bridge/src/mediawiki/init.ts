@@ -7,6 +7,7 @@ import MwInitTracker from '@/mediawiki/MwInitTracker';
 import PrefixingEventTracker from '@/tracking/PrefixingEventTracker';
 
 const APP_MODULE = 'wikibase.client.data-bridge.app';
+const VUE_MODULE = 'vue';
 const WBREPO_MODULE = 'mw.config.values.wbRepo';
 const FOREIGNAPI_MODULE = 'mediawiki.ForeignApi';
 const API_MODULE = 'mediawiki.api';
@@ -36,6 +37,7 @@ export default async (): Promise<void> => {
 		);
 		const dispatcherPromise = mwWindow.mw.loader.using( [
 			APP_MODULE,
+			VUE_MODULE,
 			WBREPO_MODULE,
 			FOREIGNAPI_MODULE,
 			API_MODULE,
@@ -43,7 +45,8 @@ export default async (): Promise<void> => {
 			MWLANGUAGE_MODULE,
 		] ).then( async ( require ) => {
 			const app = await require( APP_MODULE );
-			return new Dispatcher( mwWindow, app, dataBridgeConfig, eventTracker );
+			const vue = await require( VUE_MODULE );
+			return new Dispatcher( mwWindow, vue, app, dataBridgeConfig, eventTracker );
 		} );
 		const initTracker = new MwInitTracker( eventTracker, window.performance, window.document );
 
