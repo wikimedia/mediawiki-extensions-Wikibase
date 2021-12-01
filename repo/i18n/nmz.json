@@ -6,5 +6,9 @@
 		]
 	},
 	"wikibase-edit": "manyi",
-	"wikibase-add": "Hewl"
+	"wikibase-add": "Hewl",
+	"wikibase-label-empty": "Jugun gwɛɛt kpah",
+	"wikibase-description-empty": "Jugun gwɛɛt tiit kpah nah",
+	"wikibase-sitelinks-special": "Siitnt jeŋt",
+	"wikibase-statementview-rank-normal": "Kalaŋ hɔmga"
 }
