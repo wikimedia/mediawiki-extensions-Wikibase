@@ -80,7 +80,7 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		$this->runJobs( [ 'minJobs' => 0 ], [ 'type' => 'refreshLinks' ] );
 	}
 
-	private function deletePage( Title $title ) {
+	private function deletePageWithPostUpdates( Title $title ) {
 		$page = WikiPage::factory( $title );
 		$page->doDeleteArticleReal( 'TEST', $this->getTestSysop()->getUser() );
 
@@ -147,7 +147,7 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
 
 		// Delete the page.
-		$this->deletePage( $this->articleTitle );
+		$this->deletePageWithPostUpdates( $this->articleTitle );
 
 		// Make sure tracking has been removed for all usages on the deleted page.
 		$this->assertTrackedUsages( [], $this->articleTitle );
