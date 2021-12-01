@@ -90,6 +90,7 @@
 			"class": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler::factory",
 			"services": [
+				"UserOptionsLookup",
 				"WikibaseClient.ClientDomainDbFactory",
 				"WikibaseClient.Settings"
 			]

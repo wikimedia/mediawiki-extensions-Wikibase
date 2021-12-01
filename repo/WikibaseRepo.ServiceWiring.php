@@ -493,7 +493,7 @@ return [
 			'monolingualtext' => MonolingualTextValue::class,
 			'quantity' => QuantityValue::class,
 			'time' => TimeValue::class,
-			'wikibase-entityid' => function ( $value ) use ( $services ) {
+			'wikibase-entityid' => static function ( $value ) use ( $services ) {
 				// TODO this should perhaps be factored out into a class
 				if ( isset( $value['id'] ) ) {
 					try {
@@ -602,6 +602,7 @@ return [
 			WikibaseRepo::getEntityPatcher( $services ),
 			WikibaseRepo::getEditFilterHookRunner( $services ),
 			$services->getStatsdDataFactory(),
+			$services->getUserOptionsLookup(),
 			WikibaseRepo::getSettings( $services )->getSetting( 'maxSerializedEntitySize' )
 		);
 	},
@@ -825,7 +826,6 @@ return [
 	},
 
 	'WikibaseRepo.EntityIdParser' => function ( MediaWikiServices $services ): EntityIdParser {
-
 		$settings = WikibaseRepo::getSettings( $services );
 		$dispatchingEntityIdParser = new DispatchingEntityIdParser(
 			WikibaseRepo::getEntityTypeDefinitions( $services )->getEntityIdBuilders()
@@ -2034,7 +2034,7 @@ return [
 			$callbacks['globecoordinate'] = $prefixedCallbacks['VT:globecoordinate'];
 		}
 		// 'null' is not a datatype. Kept for backwards compatibility.
-		$callbacks['null'] = function() {
+		$callbacks['null'] = function () {
 			return new NullParser();
 		};
 

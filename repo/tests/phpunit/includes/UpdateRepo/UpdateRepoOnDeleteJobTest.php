@@ -155,6 +155,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 				new EntityPatcher(),
 				$this->getMockEditFitlerHookRunner(),
 				new NullStatsdDataFactory(),
+				$this->getServiceContainer()->getUserOptionsLookup(),
 				PHP_INT_MAX
 			),
 			new SettingsArray( [

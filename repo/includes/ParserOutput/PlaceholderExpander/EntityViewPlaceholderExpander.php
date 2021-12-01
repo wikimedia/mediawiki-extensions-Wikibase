@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\ParserOutput\PlaceholderExpander;
 
 use InvalidArgumentException;
+use MediaWiki\User\UserOptionsLookup;
 use MWException;
 use RuntimeException;
 use User;
@@ -67,6 +68,11 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	private $textProvider;
 
 	/**
+	 * @var UserOptionsLookup
+	 */
+	private $userOptionsLookup;
+
+	/**
 	 * @var string
 	 */
 	private $cookiePrefix;
@@ -84,6 +90,7 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param LocalizedTextProvider $textProvider
+	 * @param UserOptionsLookup $userOptionsLookup
 	 * @param string $cookiePrefix
 	 * @param string[] $termsListItems
 	 */
@@ -95,6 +102,7 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		LanguageNameLookup $languageNameLookup,
 		LocalizedTextProvider $textProvider,
+		UserOptionsLookup $userOptionsLookup,
 		$cookiePrefix,
 		array $termsListItems = []
 	) {
@@ -105,6 +113,7 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->textProvider = $textProvider;
+		$this->userOptionsLookup = $userOptionsLookup;
 		$this->cookiePrefix = $cookiePrefix;
 		$this->termsListItems = $termsListItems;
 	}
@@ -160,7 +169,11 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 			$cookieName = $this->cookiePrefix . self::INITIALLY_COLLAPSED_SETTING_NAME;
 			return isset( $_COOKIE[$cookieName] ) && $_COOKIE[$cookieName] === 'false';
 		} else {
-			return !$this->user->getOption( self::INITIALLY_COLLAPSED_SETTING_NAME, true );
+			return !$this->userOptionsLookup->getOption(
+				$this->user,
+				self::INITIALLY_COLLAPSED_SETTING_NAME,
+				true
+			);
 		}
 	}
 

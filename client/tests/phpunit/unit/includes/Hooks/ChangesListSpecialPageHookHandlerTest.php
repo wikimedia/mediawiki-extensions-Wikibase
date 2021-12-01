@@ -6,6 +6,7 @@ use ChangesListBooleanFilter;
 use ExtensionRegistry;
 use FormOptions;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\User\UserOptionsLookup;
 use SpecialRecentChanges;
 use User;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandler;
@@ -79,7 +80,8 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		/** @var ChangesListSpecialPageHookHandler $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
-			true
+			true,
+			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		) );
 
 		$specialPage->getContext()->setUser( $user );
@@ -125,7 +127,11 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		$join_conds = [];
 		$opts = new FormOptions();
 
-		$handler = new ChangesListSpecialPageHookHandler( $this->getDatabase(), true );
+		$handler = new ChangesListSpecialPageHookHandler(
+			$this->getDatabase(),
+			true,
+			MediaWikiServices::getInstance()->getUserOptionsLookup()
+		);
 
 		$handler->onChangesListSpecialPageQuery(
 			'RecentChanges',
@@ -149,7 +155,8 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 			->setConstructorArgs(
 				[
 					$this->getDatabase(),
-					true
+					true,
+					$this->getUserOptionsLookup()
 				]
 			)
 			->onlyMethods( [
@@ -199,7 +206,8 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		/** @var ChangesListSpecialPageHookHandler $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
-			true
+			true,
+			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		) );
 
 		$this->assertSame(
@@ -230,7 +238,8 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 	public function testAddWikibaseConditions() {
 		$hookHandler = new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
-			true
+			true,
+			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		);
 
 		$conds = [];
@@ -256,7 +265,8 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		/** @var ChangesListSpecialPageHookHandler $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
-			true
+			true,
+			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		) );
 
 		$this->assertSame(
@@ -320,7 +330,8 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		/** @var ChangesListSpecialPageHookHandler $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
-			true
+			true,
+			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		) );
 
 		$this->assertSame(
@@ -389,7 +400,8 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		/** @var ChangesListSpecialPageHookHandler $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
-			true
+			true,
+			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		) );
 
 		$this->assertSame(
@@ -445,7 +457,8 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		/** @var ChangesListSpecialPageHookHandler $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
-			false
+			false,
+			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		) );
 
 		$this->assertSame(
@@ -473,7 +486,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 			->getMock();
 
 		$user->method( 'getOption' )
-			->willReturnCallback( function( $optionName ) use ( $userOptions ) {
+			->willReturnCallback( static function ( $optionName ) use ( $userOptions ) {
 				foreach ( $userOptions as $key => $value ) {
 					if ( $optionName === $key ) {
 						return $value;
@@ -493,11 +506,21 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		$databaseBase = $this->createMock( DBConnRef::class );
 
 		$databaseBase->method( 'addQuotes' )
-			->willReturnCallback( function( $input ) {
+			->willReturnCallback( static function ( $input ) {
 				return "'$input'";
 			} );
 
 		return $databaseBase;
 	}
 
+	/**
+	 * @return UserOptionsLookup
+	 */
+	private function getUserOptionsLookup() {
+		$userOptionsLookup = $this->createMock( UserOptionsLookup::class );
+		$userOptionsLookup->method( 'getOption' )
+			->willReturn( true );
+
+		return $userOptionsLookup;
+	}
 }

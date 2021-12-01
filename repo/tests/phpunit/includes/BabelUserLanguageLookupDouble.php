@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWiki\MediaWikiServices;
 use User;
 use Wikibase\Repo\BabelUserLanguageLookup;
 
@@ -16,7 +17,8 @@ class BabelUserLanguageLookupDouble extends BabelUserLanguageLookup {
 
 	protected function getBabelLanguages( User $user ) {
 		// Not a real option, just to manipulate the double class
-		return $user->getOption( 'babelLanguages' );
+		$userOptionsLookup = MediaWikiServices::getInstance()->getUserOptionsLookup();
+		return $userOptionsLookup->getOption( $user, 'babelLanguages' );
 	}
 
 }

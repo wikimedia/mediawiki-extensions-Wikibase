@@ -6,6 +6,7 @@ use IBufferingStatsdDataFactory;
 use Language;
 use MediaWiki\Hook\OutputPageBeforeHTMLHook;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\User\UserOptionsLookup;
 use OutputPage;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -119,6 +120,9 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	/** @var LanguageFallbackChainFactory */
 	private $languageFallbackChainFactory;
 
+	/** @var UserOptionsLookup */
+	private $userOptionsLookup;
+
 	/** @var LoggerInterface */
 	private $logger;
 
@@ -139,6 +143,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		UserPreferredContentLanguagesLookup $userPreferredTermsLanguages,
 		OutputPageEntityViewChecker $entityViewChecker,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		UserOptionsLookup $userOptionsLookup,
 		LoggerInterface $logger = null
 	) {
 		$this->httpRequestFactory = $httpRequestFactory;
@@ -157,6 +162,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$this->userPreferredTermsLanguages = $userPreferredTermsLanguages;
 		$this->entityViewChecker = $entityViewChecker;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
+		$this->userOptionsLookup = $userOptionsLookup;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -167,6 +173,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		Language $contentLanguage,
 		HttpRequestFactory $httpRequestFactory,
 		IBufferingStatsdDataFactory $statsdDataFactory,
+		UserOptionsLookup $userOptionsLookup,
 		EntityContentFactory $entityContentFactory,
 		EntityFactory $entityFactory,
 		EntityIdParser $entityIdParser,
@@ -205,6 +212,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			),
 			$entityViewChecker,
 			$languageFallbackChainFactory,
+			$userOptionsLookup,
 			$logger
 		);
 	}
@@ -240,7 +248,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		}
 
 		$injector = new TextInjector( $placeholders );
-		$getHtmlCallback = function() {
+		$getHtmlCallback = static function () {
 			return '';
 		};
 
@@ -328,6 +336,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			new MediaWikiLanguageDirectionalityLookup(),
 			$this->languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $language ),
+			$this->userOptionsLookup,
 			$this->cookiePrefix,
 			$this->getEntityTermsListHtml( $out ) ?: []
 		);

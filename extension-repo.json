@@ -833,6 +833,7 @@
 				"ContentLanguage",
 				"HttpRequestFactory",
 				"StatsdDataFactory",
+				"UserOptionsLookup",
 				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityFactory",
 				"WikibaseRepo.EntityIdParser",
