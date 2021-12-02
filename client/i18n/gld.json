@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"RFScott"
 		]
 	},
@@ -10,6 +11,8 @@
 	"wikibase-editlinks": "Поктова калаори",
 	"wikibase-editlinkstitle": "Хэсэ алдандолани поктова калаори",
 	"wikibase-linkitem-addlinks": "Поктова аӈговори",
+	"wikibase-linkitem-input-site": "Хэсэ:",
+	"wikibase-linkitem-input-page": "Страница:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Дяяори",
 	"wikibase-rc-hide-wikidata-show": "Ичэвэмбури",
