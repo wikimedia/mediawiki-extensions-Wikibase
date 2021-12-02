@@ -2,6 +2,49 @@ Change notes from older releases. For current info, see RELEASE-NOTES-1.36.
 
 = Wikibase 1.35 =
 
+== Wikibase 1.35.4-wmde.2 ==
+
+This is a security and maintenance release of the Wikibase 1.35 branch.
+
+=== Changes since Wikibase 1.35.0-wmde.1 ===
+
+* (T294693) Escape description before outputting it in action=info
+* (T282154) EntityDataRequestHandler: Remove ob_clean() call
+* (T283040) Update documentation of usage aspects
+* (T286193) Drop subscribing to "other" aspect when using statements
+* (T283040) Update Usage Aspect values documented in API help pages
+* (T280491) Update watir version for ruby browser tests
+* (T258184) OtherProjectsSidebarGenerator::buildProjectLinkSidebarFromItemId
+ was added because it's still used by ArticlePlaceholder
+
+=== Changes since Wikibase 1.35.0-wmde.0 ===
+
+* (T280124) FedProps: ensure FedProps EntityTypeDefinitions are loaded last
+* (T97146) Permit restoring redirects to discard entity data
+* (T271618) Catch wider exception type for unresolved redirects
+* (T153570) SubmitEntityAction: Pass 'undoafter' and 'restore' to doEditContent
+* (T97146) Handle error when mixing redirects in undo
+* (T270353) Fix Wikibase client Scribunto test ParserOption watcher
+* (T264929) Skip 0 page ID in hook handler
+* (T264929) Use LinksUpdate::$mId in hook handler
+* (T269871) Don't assume wbUserSpecifiedLanguages is always there
+* (T267502) Fix missing Wikibase CSS on undo and diff pages
+* (T217144) Fix watch-on-edit settings on grant-limited requests
+* (T259340) Remove check for valid MW language code in Lua
+* (T253812) Correct directionality and language of placeholders in New Item
+* (T256885) Fix limit not applied in case of language fallback
+* (T260853) TypeError on commons Title::newFromText returning null
+* (T255387) Redirected links should use redirect=no
+* (T269666) Create a Wikibase Pingback based on MW Pingback
+* (T254740) Prefetch entities as part of federated properties
+* (T258558) Error messages for API modules that will not work with federated properties
+* (T255756, T258565) Handling failed requests to the federation source Wiki
+* (T246125, T251102) Notifications for redirects to Wikidata in Federated Properties MVP
+* (T246871) Changes to RDF dumping when federated properties are enabled
+* (T257907) Automatically alter entitysources configuration for Wikidata.org values for
+ fed props when pointing at wikidata.org
+* (T255581) Changes to Special:ListDatatypes when federation is enabled
+
 == Upgrading notes for 1.35 ==
 Don't forget to always back up your database before upgrading!
 
