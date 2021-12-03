@@ -1,9 +1,9 @@
 <template>
 	<ProcessDialogHeader class="wb-db-app__header">
-		<template v-slot:title>
+		<template #title>
 			<span v-html="title" />
 		</template>
-		<template v-slot:primaryAction>
+		<template #primaryAction>
 			<EventEmittingButton
 				:message="$messages.getText( publishOrSave )"
 				type="primaryProgressive"
@@ -14,7 +14,7 @@
 				v-if="!hasWarning && !hasError && !isSaved"
 			/>
 		</template>
-		<template v-slot:safeAction>
+		<template #safeAction>
 			<span
 				:class="{ 'app-header__close-button--desktop-only': canGoBack }"
 			>
