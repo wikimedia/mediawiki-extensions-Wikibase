@@ -6,6 +6,7 @@
 			"咽頭べさ"
 		]
 	},
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|ပြောင်ꩻလုဲင်ႏမုꩻ|ပြောင်ꩻလုဲင်ႏမုꩻဖိုင်ႏ}}",
 	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "ခြပ်ချော်ꩻ လိဉ့်ဖုံႏ",
 	"wikibase-linkitem-addlinks": "ထဲမ်သော့ꩻ လိဉ့်ဖုံႏ",
@@ -39,6 +40,7 @@
 	"wikibase-pageinfo-entity-usage": "လိတ်မဲ့ငါယိုအကို ကသုင်ꩻခါꩻဒါႏ {{WBREPONAME}} ဖိုင်ႏ",
 	"wikibase-pageinfo-entity-usage-S": "သုဲက်လိဉ့်",
 	"wikibase-pageinfo-entity-usage-D": "အွောန်ႏနယ်ချက်ခရာႏယဟန်ႏ",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "အွောန်ႏနယ်ချက်: $1",
 	"wikibase-pageinfo-entity-usage-T": "ကတူႏစဲဉ်ႏ",
 	"wikibase-otherprojects": "ပရောစဲစ်အလင်ဖုံႏကို",
 	"wikibase-sitelinks-sitename-columnheading": "ဘာႏသာႏငဝ်းငွါ",
@@ -55,6 +57,7 @@
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "အီႏခြပ်ချော်ꩻတာႏ နွို့နေးတဝ်းအကောက်",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "နွို့အကောက် မွေးတဝ်းလဲ့ ဒင်ႏအကောက်မတ်ပိုင်တိဉ်",
 	"wikibase-client-data-bridge-license-heading": "သုင်ꩻအီခရာႏတောမ်ႏ လုဲင်သိဉ်",
+	"wikibase-client-data-bridge-unknown-error-heading": "ထွာထိုꩻလဲဉ်း အမာႏတဗာႏဗာႏ",
 	"wikibase-client-data-bridge-error-reload-bridge": "ထူႏဟဲ့ꩻချာယင်း",
 	"wikibase-client-data-bridge-error-reload-page": "ထူႏဟဲ့ꩻချာယင်းလိတ်မဲ့ငါ",
 	"wikibase-client-data-bridge-error-go-back": "သဲင်ꩻချာ",
