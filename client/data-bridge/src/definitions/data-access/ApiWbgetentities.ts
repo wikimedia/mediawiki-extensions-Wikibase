@@ -4,15 +4,15 @@ import {
 } from '@wmde/wikibase-datamodel-types';
 import { ApiResponse } from '@/definitions/data-access/Api';
 
+export interface ApiResponseEntity {
+	id: string;
+	missing?: ''; // string '' instead of boolean true – see T145050
+}
+
 export interface ApiWbgetentitiesResponse extends ApiResponse {
 	entities: {
 		[entityId: string]: ApiResponseEntity;
 	};
-}
-
-export interface ApiResponseEntity {
-	id: string;
-	missing?: ''; // string '' instead of boolean true – see T145050
 }
 
 export interface PartialEntity extends ApiResponseEntity {

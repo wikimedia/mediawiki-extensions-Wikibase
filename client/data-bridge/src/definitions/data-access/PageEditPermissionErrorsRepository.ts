@@ -5,11 +5,6 @@ export enum PermissionErrorType {
 	UNKNOWN = -1,
 }
 
-export type PermissionError = PermissionErrorProtectedPage |
-PermissionErrorCascadeProtectedPage |
-PermissionErrorBlockedUser |
-PermissionErrorUnknown;
-
 export interface PermissionErrorProtectedPage {
 	type: PermissionErrorType.PROTECTED_PAGE;
 	right: 'editprotected' | 'editsemiprotected' | string;
@@ -40,6 +35,11 @@ export interface PermissionErrorUnknown {
 	messageKey: string;
 	messageParams: readonly ( string|number )[];
 }
+
+export type PermissionError = PermissionErrorProtectedPage |
+PermissionErrorCascadeProtectedPage |
+PermissionErrorBlockedUser |
+PermissionErrorUnknown;
 
 /**
  * A repository for determining potential permission errors

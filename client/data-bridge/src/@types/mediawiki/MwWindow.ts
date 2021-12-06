@@ -33,10 +33,6 @@ export type MwApiParameter = MwApiParameterPrimitive | readonly MwApiParameterPr
 export type MwApiParameters = Record<string, MwApiParameter>;
 export type MwApiParametersWithout<K extends string> = MwApiParameters & { [ k in K ]?: never };
 
-/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.ForeignApi */
-export type MwForeignApiConstructor = new( url: string, options?: ApiOptions ) => MwApi;
-/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api */
-export type MwApiConstructor = new( options?: ApiOptions ) => MwApi;
 export interface MwApi {
 	get( parameters: MwApiParameters, ajaxOptions?: unknown ): JQuery.Promise<any>;
 	getEditToken(): JQuery.Promise<any>;
@@ -47,6 +43,11 @@ export interface MwApi {
 	login( username: string, password: string ): JQuery.Promise<any>;
 	assertCurrentUser( parameters: MwApiParametersWithout<'assert'|'assertuser'> ): MwApiParameters;
 }
+
+/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.ForeignApi */
+export type MwForeignApiConstructor = new( url: string, options?: ApiOptions ) => MwApi;
+/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api */
+export type MwApiConstructor = new( options?: ApiOptions ) => MwApi;
 
 export type MwTracker = ( topic: string, data?: unknown ) => void;
 
@@ -90,6 +91,10 @@ export interface OOEventEmitter<E extends Events> {
 	once<K extends keyof E>( event: K, listener: EventListener<E[K]> ): this;
 }
 
+export interface OOElement {
+	initialize(): void;
+}
+
 /** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/OO.ui.Window */
 export interface OOUIWindow extends OOElement {}
 
@@ -103,8 +108,6 @@ interface WindowManagerEvents extends Events {
 	opening: [OOUIWindow, JQuery.Promise<unknown>, object];
 	resize: [OOUIWindow];
 }
-
-export type WindowManagerConstructor = new() => WindowManager;
 export interface WindowManager extends OOEventEmitter<WindowManagerEvents> {
 	addWindows( elements: readonly OOElement[] ): void;
 	openWindow( element: OOElement ): void;
@@ -113,23 +116,21 @@ export interface WindowManager extends OOEventEmitter<WindowManagerEvents> {
 	$element: JQuery;
 }
 
-export interface OOElement {
-	initialize(): void;
-}
+export type WindowManagerConstructor = new() => WindowManager;
 
-/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/OO.ui.Dialog */
-export type DialogConstructor = new( options: object ) => Dialog;
 export interface Dialog extends OOElement {
 	$body: JQuery;
 	getBodyHeight(): number;
 	close( data?: object ): WindowInstance;
 	getManager(): WindowManager;
 }
+/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/OO.ui.Dialog */
+export type DialogConstructor = new( options: object ) => Dialog;
 
-export type PanelLayoutConstructor = new( options: object ) => PanelLayout;
 export interface PanelLayout {
 	$element: JQuery;
 }
+export type PanelLayoutConstructor = new( options: object ) => PanelLayout;
 
 export interface MwWindowOO {
 	ui: {

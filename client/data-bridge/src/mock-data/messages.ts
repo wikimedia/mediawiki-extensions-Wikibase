@@ -3,7 +3,7 @@ import MessageKeys from '@/definitions/MessageKeys';
 import * as clientMessages from '../../../i18n/en.json';
 
 const messages = {
-	// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
 	...clientMessages.default,
 	[ MessageKeys.BRIDGE_DIALOG_TITLE ]: 'bridge dev',

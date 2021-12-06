@@ -70,8 +70,8 @@ describe( 'resolveMainSnak', () => {
 		expect( mainSnakPath.resolveStatement( state ) ).toStrictEqual( statement );
 	} );
 
-	const methods: Method[] = [ 'resolveStatement', 'resolveSnakInStatement', 'resolveStatementGroup' ];
 	type Method = 'resolveStatement'|'resolveSnakInStatement'|'resolveStatementGroup';
+	const methods: Method[] = [ 'resolveStatement', 'resolveSnakInStatement', 'resolveStatementGroup' ];
 
 	it.each( methods )( '%s returns null if there is no statement map', ( method: Method ) => {
 		const mainSnakPath = new MainSnakPath( 'Q42', 'P42', 0 );

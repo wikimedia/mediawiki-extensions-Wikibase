@@ -1,6 +1,45 @@
 import { ApiQueryResponse } from '@/definitions/data-access/ApiQuery';
 import { ApiWbgetentitiesResponse } from '@/definitions/data-access/ApiWbgetentities';
 
+export type ApiResponse = {
+	// there are no members common to all API modules
+};
+
+export interface ApiResponsesMap {
+	query: ApiQueryResponse;
+	wbgetentities: ApiWbgetentitiesResponse;
+	[ action: string ]: ApiResponse;
+}
+export type ApiAction = keyof ApiResponsesMap & string;
+
+export interface ApiParams<action extends ApiAction> {
+	action: action;
+	[ name: string ]: string | number | boolean | undefined | readonly ( string|number )[] | Set<string|number>;
+}
+
+export interface ReadingApi {
+	/**
+	 * Send a GET request with at least the given parameters.
+	 * The resulting response may include data from other requests
+	 * which were combined with this one.
+	 */
+	get<action extends ApiAction>( params: ApiParams<action> ): Promise<ApiResponsesMap[ action ]>;
+}
+
+export interface WritingApi {
+	/**
+	 * Send a POST request with the given parameters and with a valid edit token
+	 */
+	postWithEditToken( params: ApiParams<string> ): Promise<unknown>;
+
+	/**
+	 * Add parameters to assert that the current local browser tab login status is also true at the server.
+	 *
+	 * Otherwise the same as postWithEditToken
+	 */
+	postWithEditTokenAndAssertUser( params: ApiParams<string> ): Promise<unknown>;
+}
+
 /**
  * An interface for MediaWiki API requests.
  * Some implementations may merge compatible requests for efficiency.
@@ -39,45 +78,6 @@ import { ApiWbgetentitiesResponse } from '@/definitions/data-access/ApiWbgetenti
  * Using formatversion: 2 is strongly encouraged.
  */
 export default interface Api extends ReadingApi, WritingApi {}
-
-export interface ReadingApi {
-	/**
-	 * Send a GET request with at least the given parameters.
-	 * The resulting response may include data from other requests
-	 * which were combined with this one.
-	 */
-	get<action extends ApiAction>( params: ApiParams<action> ): Promise<ApiResponsesMap[ action ]>;
-}
-
-export interface WritingApi {
-	/**
-	 * Send a POST request with the given parameters and with a valid edit token
-	 */
-	postWithEditToken( params: ApiParams<string> ): Promise<unknown>;
-
-	/**
-	 * Add parameters to assert that the current local browser tab login status is also true at the server.
-	 *
-	 * Otherwise the same as postWithEditToken
-	 */
-	postWithEditTokenAndAssertUser( params: ApiParams<string> ): Promise<unknown>;
-}
-
-export interface ApiParams<action extends ApiAction> {
-	action: action;
-	[ name: string ]: string | number | boolean | undefined | readonly ( string|number )[] | Set<string|number>;
-}
-
-export type ApiResponse = {
-	// there are no members common to all API modules
-};
-
-export interface ApiResponsesMap {
-	query: ApiQueryResponse;
-	wbgetentities: ApiWbgetentitiesResponse;
-	[ action: string ]: ApiResponse;
-}
-export type ApiAction = keyof ApiResponsesMap & string;
 
 export interface ApiError {
 	code: string;

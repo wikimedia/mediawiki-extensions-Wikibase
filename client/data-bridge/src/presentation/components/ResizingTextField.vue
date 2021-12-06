@@ -10,12 +10,12 @@
 import debounce from 'lodash/debounce';
 import Vue from 'vue';
 
-interface InputEvent {
-	target: InputEventTarget;
-}
-
 interface InputEventTarget {
 	value: string;
+}
+
+interface InputEvent {
+	target: InputEventTarget;
 }
 
 export default Vue.extend( {
