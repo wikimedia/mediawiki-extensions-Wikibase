@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"GastonJeremiah"
 		]
 	},
@@ -13,7 +14,7 @@
 	"wikibase-linkitem-input-site": "Lam",
 	"wikibase-linkitem-input-page": "Wadga",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
-	"wikibase-rc-hide-wikidata-hide": "Kpɛdr",
+	"wikibase-rc-hide-wikidata-hide": "Kpɛɦdr",
 	"wikibase-rc-hide-wikidata-show": "Werii",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-otherprojects": "ŋmɛɛbolb"
