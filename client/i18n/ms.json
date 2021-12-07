@@ -17,7 +17,7 @@
 	"tooltip-t-wikibase": "Pautan ke item repositori data yang bersambung",
 	"wikibase-after-page-move": "Pindahan anda sepatutnya [$1 sudah terkemaskini dalam perkara pautan bahasa {{WBREPONAME}}]. Kami meminta anda menyemak jika perkara ini sudah dilakukan.",
 	"wikibase-after-page-move-queued": "[$1 Perkara {{WBREPONAME}}] yang dikaitkan dengan halaman ini akan dikemaskinikan secara automatik. Harap maklum bahawa ini mungkin tidak berlaku dengan segera.",
-	"wikibase-comment-remove": "Perkara Wikidata yang berkenaan dihapuskan. Pautan bahasa dipadamkan.",
+	"wikibase-comment-remove": "Butir {{WBREPONAME}} berkenaan dihapuskan. Pautan-pautan bahasa turut disingkirkan.",
 	"wikibase-comment-linked": "Satu perkara Wikidata telah dipautkan ke halaman ini.",
 	"wikibase-comment-unlink": "Halaman ini telah dinyahpautkan dari perkara Wikidata. Pautan bahasa dibuang.",
 	"wikibase-comment-restore": "Perkara Wikidata yang berkenaan dinyahhapus. Pautan bahasa dipulihkan.",

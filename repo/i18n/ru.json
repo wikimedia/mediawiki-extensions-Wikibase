@@ -41,13 +41,14 @@
 			"Александр Сигачёв",
 			"Умар",
 			"Чаховіч Уладзіслаў",
-			"Ядерный Трамвай"
+			"Ядерный Трамвай",
+			"WindEwriX"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
 	"wikibase-entity": "сущность",
 	"wikibase-entity-item": "элемент",
-	"wikibase-entity-property": "свойство",
+	"wikibase-entity-property": "Свойство",
 	"wikibase-entity-query": "запрос",
 	"wikibase-edit": "править",
 	"wikibase-save": "сохранить",
@@ -363,6 +364,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Вы можете изменить её, разместив блок <nowiki>{{#babel:}}</nowiki> на своей [[Special:MyPage|персональной странице {{GENDER:$1|участника|участницы}}]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 — $2, преобразованные из $3 — $4",
 	"wikibase-api-unresolved-redirect": "Указанный идентификатор сущности относится к перенаправленнию, которое не поддерживается в данном контексте.",
+	"wikibase-api-failed-save": "Сохранение не удалось.",
 	"wikibase-api-illegal-ids-or-sites-titles-selector": "Укажите «идентификаторы» элемента, или же пары «сайтов» та «названий» для соответствующей страницы",
 	"wikibase-api-no-such-entity": "Не удалось найти объект с идентификатором «$1».",
 	"wikibase-api-no-such-sitelink": "При попытке отредактировать значки не удалось найти ссылку на «$1».",
@@ -420,6 +422,9 @@
 	"wikibase-pageinfo-wb-claims": "Количестве утверждений в этом объекте",
 	"wikibase-pageinfo-wb-identifiers": "количестве внешних идентификаторов в этом объекте",
 	"wikibase-search-bad-entity-type": "Некорректный тип сущности: $1",
+	"wikibase-entity-save-error-heading": "Что-то пошло не так",
 	"wikibase-tainted-ref-popper-help-link-text": "Справка",
-	"wikibase-tainted-ref-popper-remove-warning": "Убрать предупреждение"
+	"wikibase-tainted-ref-popper-remove-warning": "Убрать предупреждение",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Отмена",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Попробуйте снова"
 }

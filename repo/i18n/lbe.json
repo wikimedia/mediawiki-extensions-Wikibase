@@ -4,5 +4,10 @@
 			"Soul Train"
 		]
 	},
-	"wikibase-edit": "дакьин дуван"
+	"wikibase-edit": "дакьин дан",
+	"wikibase-add": "ххи бан",
+	"wikibase-label-empty": "ЦӀа дакьасса",
+	"wikibase-description-empty": "Бусала кьачирчун дур",
+	"wikibase-sitelinks-special": "Цамур сайтрув",
+	"wikibase-statementview-rank-normal": "Муданмасса ранг"
 }

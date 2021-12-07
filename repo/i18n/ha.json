@@ -1,9 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"DonCamillo"
+			"DonCamillo",
+			"Em-em"
 		]
 	},
 	"wikibase-edit": "Gyara",
-	"wikibase-add": "ƙara"
+	"wikibase-add": "ƙara",
+	"wikibase-label-empty": "Ba suna a kai",
+	"wikibase-description-empty": "Ba'a bayyana ma'ana ba",
+	"wikibase-sitelinks-special": "Wasu shafuka"
 }

@@ -118,7 +118,7 @@
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Ismeretlen jogosultsághiba",
 	"wikibase-client-data-bridge-permissions-error-unknown-body": "Ismeretlen okból nem szerkesztheted ezt az értéket",
 	"wikibase-client-data-bridge-edit-decision-heading": "Kérjük, válaszd ki a szerkesztésed típusát:",
-	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Javítottam</strong> egy rossz értéket",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Javítottam</strong> egy hibás értéket",
 	"wikibase-client-data-bridge-edit-decision-replace-description": "Az korábbi érték soha nem volt jó.",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Frissítettem</strong> egy elavult értéket",
 	"wikibase-client-data-bridge-edit-decision-update-description": "A korábban használt érték jó volt, de elavult.",

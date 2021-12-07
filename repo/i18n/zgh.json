@@ -9,9 +9,12 @@
 	},
 	"wikibase-edit": "ⵙⵏⴼⵍ",
 	"wikibase-add": "ⵔⵏⵓ",
+	"wikibase-entitytermsforlanguagelistview-language": "ⵜⵓⵜⵍⴰⵢⵜ",
 	"wikibase-label-empty": "ⵓⵔ ⵉⵍⵍⵉ ⴰⵡⴷ ⵢⴰⵏ ⵢⵉⵙⵎ ⵓⵏⵎⵉⵍ",
 	"wikibase-description-empty": "ⴰⵡⴷ ⵢⴰⵏ ⵓⴳⵍⴰⵎ ⵓⵔ ⵉⵜⵜⵓⴼⴽⵉ",
+	"wikibase-content-language-edit-label": "ⵜⵓⵜⵍⴰⵢⵜ:",
 	"wikibase-sitelinks-special": "ⵉⵙⵉⵜⵏ ⵢⴰⴹⵏ",
 	"wikibase-statementview-rank-normal": "ⴰⵏⵎⴰⵍⴰ ⴰⵎⴰⴳⵏⵓ",
+	"wikibase-newentity-language": "ⵜⵓⵜⵍⴰⵢⵜ:",
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "ⴰⵔⵎ ⴷⴰⵖ"
 }

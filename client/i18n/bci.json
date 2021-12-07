@@ -10,7 +10,9 @@
 	"wikibase-editlinkstitle": "Katchi mein noun anien moun bé liein",
 	"wikibase-linkitem-addlinks": "Fa liein moun gouassou",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-show": "klé",
+	"wikibase-rc-hide-wikidata-hide": "Fia sou",
+	"wikibase-rc-hide-wikidata-show": "Fa klé",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} i noun klèklèlè"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} i noun klèklèlè",
+	"wikibase-otherprojects": "Djouman ouflè vié moun bé noun"
 }

@@ -4,7 +4,8 @@
 			"Arianit",
 			"Besnik b",
 			"GretaDoci",
-			"Liridon"
+			"Liridon",
+			"Vyolla"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -12,12 +13,14 @@
 	"wikibase-deletedentity-property": "Fshiu Veti",
 	"wikibase-deletedentity-query": "Fshiu kërkim",
 	"wikibase-error-unexpected": "Gabim: $1.",
+	"wikibase-error-unknown": "Ndodhi një gabim.",
 	"wikibase-error-save-generic": "S’u bë dot ruajtje, për shkak të një gabimi.",
 	"wikibase-error-remove-generic": "S’u bë dot heqje, për shkak të një gabimi.",
 	"wikibase-error-save-timeout": "Kemi vështirësi teknike. Ju lutemi, riprovoni.",
 	"wikibase-error-remove-timeout": "Kemi vështirësi teknike. Ju lutemi, riprovoni.",
 	"wikibase-error-ui-no-external-page": "S’u gjet faqe sfondi Te \"$1\" s’u gjet dot faqe \"$2\".",
 	"wikibase-error-ui-edit-conflict": "Ndërkohë, e njëjta vlerë u përpunua gjetkë, duke shkaktuar një përplasje përpunimesh. Ju lutemi, ringarkoni faqen.",
+	"wikibase-language-fallback-transliteration-hint": "$1 (i transliteruar)",
 	"wikibase-quantitydetails-amount": "Sasi",
 	"wikibase-quantitydetails-upperbound": "Kufi i sipërm",
 	"wikibase-quantitydetails-lowerbound": "Kufi i poshtëm",
@@ -53,6 +56,7 @@
 	"datatypes-type-geo-shape": "Formë gjeografike",
 	"datatypes-type-tabular-data": "Të dhëna tabelash",
 	"datatypes-type-external-id": "Identifikues i jashtëm",
+	"datatypes-type-entity-schema": "Skema e entitetit",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregorian",
 	"wikibase-time-calendar-julian": "Julian",
@@ -62,6 +66,7 @@
 	"wikibase-time-precision-millennium": "Mijëvjeçari $1.",
 	"wikibase-time-precision-century": "Shekulli $1.",
 	"wikibase-time-precision-10annum": "$1s",
+	"wikibase-time-precision-BCE": "$1 BCE",
 	"wikibase-time-precision-BCE-Gannum": "$1 miliardë vjet PEE",
 	"wikibase-time-precision-BCE-Mannum": "$1 milion vjet PEE",
 	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 vit|$1 vjet}} PEE",
@@ -79,6 +84,10 @@
 	"wikibase-entity-summary-wbeditentity-create": "Krijoi një entitet të ri",
 	"wikibase-entity-summary-wbeditentity-update": "Ndryshoi një entitet",
 	"wikibase-entity-summary-wbeditentity-override": "Hoqi një entitet",
+	"wikibase-entity-summary-wbeditentity-update-languages": "Etiketa, përshkrimi dhe/ose pseudonimet e ndryshuara në $3 {{PLURAL:$3|gjuha| gjuhët}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "Etiketa, përshkrimi dhe/ose pseudonimet e ndryshuara në {{#commaseparatedlist:$3}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other": "Etiketa, përshkrimi dhe/ose pseudonimet e ndryshuara në $3 {{PLURAL:$3|gjuha|gjuhët}} dhe pjesë të tjera",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "Etiketa, përshkrimi dhe/ose pseudonimet e ndryshuara në {{#commaseparatedlist:$3}} dhe pjesë të tjera",
 	"wikibase-entity-summary-wbsetreference": "Caktoni një referencë",
 	"wikibase-entity-summary-wbsetreference-add": "Shtoi një referencë tek deklarata",
 	"wikibase-entity-summary-wbsetreference-set": "Ndryshoi referencën e deklaratës",
@@ -137,6 +146,7 @@
 	"wikibase-property-summary-wbeditentity-create": "Krijoi një Veti të re",
 	"wikibase-property-summary-wbeditentity-create-property": "Krijoi një Veti të re",
 	"wikibase-property-summary-wbeditentity-update": "Ndryshoi një Veti",
-	"wikibase-property-summary-wbeditentity-override": "Pastroi një Veti",
-	"wikibase-property-summary-special-create-property": "Krijoi një Veti [$2] me {{PLURAL:$1|vlerë|vlera}}"
+	"wikibase-property-summary-wbeditentity-override": "Spastroi një Veti",
+	"wikibase-property-summary-special-create-property": "Krijoi një Veti [$2] me {{PLURAL:$1|vlerë|vlera}}",
+	"wikibase-reference-formatter-snak-retrieved": "Marrë $1"
 }

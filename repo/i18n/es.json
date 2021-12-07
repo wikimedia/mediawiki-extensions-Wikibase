@@ -46,7 +46,10 @@
 			"Vivaelcelta",
 			"YoViajo",
 			"Zolo",
-			"아라"
+			"아라",
+			"Avengium",
+			"Jakeukalane",
+			"Rodney Araujo"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estructurados",
@@ -207,7 +210,7 @@
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 es una redirección.",
 	"wikibase-wikibaserepopage-storage-exception": "Se produjo un error al intentar cargar $1: $2.",
 	"special-availablebadges": "Insignias disponibles",
-	"wikibase-availablebadges-emptylist": "No hay insignias configuradas en este wiki.",
+	"wikibase-availablebadges-emptylist": "No hay insignias configuradas en esta wiki.",
 	"special-itembytitle": "Elemento por título",
 	"wikibase-itembytitle-lookup-fieldset": "Búsqueda de artículos por sitio y título",
 	"wikibase-itembytitle-lookup-site": "Sitio:",
@@ -386,9 +389,17 @@
 	"wikibase-mylanguagefallbackchain-text": "El lenguaje de reserva de la cadena se utiliza para mostrar entidad etiquetas para que se muestra a continuación.",
 	"wikibase-mylanguagefallbackchain-babel": "Puedes editar esto poniendo <nowiki>{{#babel: }}</nowiki> en tu [[Special:MyPage|página de {{GENDER:$1|usuario|usuaria}}]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, convertido desde $3 - $4",
+	"wikibase-api-failed-save": "Ha fallado el guardado.",
+	"wikibase-api-no-data": "No se ha encontrado ningún dato sobre el que operar",
 	"wikibase-api-no-external-page": "El sitio externo $1 no proporcionó información de la página \"$2\".",
 	"wikibase-api-no-such-entity": "No se encontró ninguna entidad con el identificador «$1».",
 	"wikibase-api-no-such-sitelink": "No se pudo encontrar un enlace de sitio a «$1» al tratar de editar insignias.",
+	"wikibase-api-not-recognized-siteid": "El identificador del sitio suministrado no fue reconocido.",
+	"wikibase-api-not-recognized": "Se solicitó una propiedad no válida: $1.",
+	"wikibase-api-not-recognized-array": "Se esperaba una matriz pero no se encontró.",
+	"wikibase-api-not-recognized-language": "El identificador de idioma suministrado no fue reconocido.",
+	"wikibase-api-not-recognized-string": "Se esperaba una secuencia de comandos (string) pero no se encontró.",
+	"wikibase-api-wrong-class": "El contenido de la página encontrada no es del tipo correcto.",
 	"wikibase-api-target-not-empty": "Solo se puede crear la redirección sobre una entidad vacía o eliminada.",
 	"wikibase-api-target-is-redirect": "El destino de la redirección no debe ser una redirección.",
 	"wikibase-api-target-is-incompatible": "Intento de redirigir a una entidad de un tipo diferente.",
@@ -456,5 +467,10 @@
 	"wikibase-federated-properties-leaving-site-notice-notice": "Esta es propiedad federada. Serás redirigido a $1 para ver a los detalles.",
 	"wikibase-federated-properties-leaving-site-notice-header": "A punto de dejar Wikibase local",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "No mostrar este mensaje de nuevo",
-	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Intentar de nuevo"
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Intentar de nuevo",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Fallo al editar",
+	"special-setaliases-parameterized": "Establecer alias $1",
+	"special-setlabel-parameterized": "Establecer la etiqueta $1",
+	"special-setdescription-parameterized": "Establecer la descripción $1",
+	"special-setlabeldescriptionaliases-parameterized": "Establecer etiqueta $1, descripción y alias"
 }

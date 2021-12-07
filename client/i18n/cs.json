@@ -9,7 +9,8 @@
 			"Matěj Suchánek",
 			"Mormegil",
 			"Walter Klosse",
-			"YjM"
+			"YjM",
+			"Fraxinus.cs"
 		]
 	},
 	"wikibase-client-desc": "Klient pro rozšíření Wikibase",
@@ -36,6 +37,7 @@
 	"wikibase-linkitem-alreadylinked": "Stránka, kterou chcete propojit, je již v ústředním úložišti propojená s [$1 položkou], která odkazuje na [[$2]] na tomto serveru. Položky smí mít pro každý server jen jeden odkaz. Prosím, zvolte jinou stránku.",
 	"wikibase-linkitem-close": "Zavřít dialog a obnovit stránku",
 	"wikibase-linkitem-failure": "Došlo k neznámé chybě při pokusu o odkaz na danou stránku.",
+	"wikibase-linkitem-failed-modify": "Nebylo možné propojit stránky: sloučení odpovídajících položek na {{GRAMMAR:6sg|{{WBREPONAME}}}} selhalo.",
 	"wikibase-linkitem-title": "Propojit se stránkou",
 	"wikibase-linkitem-linkpage": "Propojit se stránkou",
 	"wikibase-linkitem-selectlink": "Prosím vyberte jazyk a stránku, kterou chcete propojit s touto stránkou.",

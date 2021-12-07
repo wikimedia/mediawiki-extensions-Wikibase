@@ -3,12 +3,14 @@
 		"authors": [
 			"Dicto23456",
 			"Macofe",
-			"Tkalyn"
+			"Tkalyn",
+			"Gramo6"
 		]
 	},
 	"wikibase-edit": "едітовати",
 	"wikibase-add": "додати",
 	"wikibase-sitelink-page-edit-placeholder": "сторінка",
+	"wikibase-statementview-rank-normal": "Обычайный ранґ",
 	"wikibase-itembytitle-lookup-page": "Сторінка:",
 	"wikibase-itemdisambiguation-lookup-language": "Код языка:",
 	"wikibase-modifyterm-language": "Код языка:"

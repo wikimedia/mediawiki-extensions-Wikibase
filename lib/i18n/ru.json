@@ -20,7 +20,8 @@
 			"Smigles",
 			"Stjn",
 			"Vlad5250",
-			"Александр Сигачёв"
+			"Александр Сигачёв",
+			"1233qwer1234qwer4"
 		]
 	},
 	"specialpages-group-wikibase": "Вики-база",
@@ -85,7 +86,7 @@
 	"wikibase-time-precision-BCE-Mannum": "$1 миллион{{PLURAL:$1||ов|а}} лет до н.э.",
 	"wikibase-time-precision-BCE-annum": "$1 {{PLURAL:$1|год|года|лет}} до н.э.",
 	"wikibase-time-precision-BCE-millennium": "$1 тысячелети{{PLURAL:$1|е|й|я}} до н. э.",
-	"wikibase-time-precision-BCE-century": "$1 век{{PLURAL:$1||а|ов}} до н.э.",
+	"wikibase-time-precision-BCE-century": "$1 век до н.э.",
 	"wikibase-time-precision-BCE-10annum": "$1-е годы до н.э.",
 	"wikibase-snakformatter-valuetype-mismatch": "Тип значения «$1» не соответствует типу свойства «$2».",
 	"wikibase-snakformatter-property-not-found": "Свойство $1 не найдено, невозможно определить тип данных для использования.",
@@ -141,12 +142,12 @@
 	"wikibase-entity-summary-wbremovereferences-remove": "{{PLURAL:$3|1=Удалена ссылка|Удалены ссылки}} из заявления",
 	"wikibase-entity-summary-wbmergeitems-from": "Объединённый элемент из $3",
 	"wikibase-entity-summary-wbmergeitems-to": "Объединённый элемент в «$3»",
-	"wikibase-item-summary-wbcreate-new": "Создан новый элемент",
+	"wikibase-item-summary-wbcreate-new": "Новый элемент создан",
 	"wikibase-item-summary-wbeditentity": "Новый элемент создан",
 	"wikibase-item-summary-wbeditentity-create": "Новый элемент создан",
 	"wikibase-item-summary-wbeditentity-create-item": "Создан новый элемент",
 	"wikibase-item-summary-wbeditentity-update": "Элемент изменён",
-	"wikibase-item-summary-wbeditentity-override": "Элемент переопределён",
+	"wikibase-item-summary-wbeditentity-override": "Элемент очищен",
 	"wikibase-item-summary-wblinktitles-create": "Этот элемент создан для связи страниц",
 	"wikibase-item-summary-wblinktitles-connect": "Добавлены языковые ссылки на связанные страницы",
 	"wikibase-property-summary-wbcreate-new": "Создано новое свойство",

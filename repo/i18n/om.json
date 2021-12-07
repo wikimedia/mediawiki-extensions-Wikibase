@@ -3,14 +3,17 @@
 		"authors": [
 			"Maammee",
 			"Oromoo",
-			"Tumsaa"
+			"Tumsaa",
+			"Ahrada2016"
 		]
 	},
 	"wikibase-edit": "gulaali",
 	"wikibase-add": "dabali",
-	"wikibase-entitytermsforlanguagelistview-more": "Afaanota dabalataa",
+	"wikibase-entitytermsforlanguagelistview-more": "Afaanota galchaman hunda",
+	"wikibase-description-empty": "Ibsi ife hin jiru",
 	"wikibase-sitelinks-special": "Marsaalee biroo",
+	"wikibase-statementview-rank-normal": "Raankii sirrima",
 	"wikibase-itemdisambiguation-lookup-language": "Lakkaddaa Afaanii",
 	"wikibase-modifyterm-language": "Lakkaddaa Afaanii",
-	"wikibase-federated-properties-leaving-site-notice-cancel": "Dhiisi"
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Haqi"
 }

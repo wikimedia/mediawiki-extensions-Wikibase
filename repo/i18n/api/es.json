@@ -7,7 +7,9 @@
 			"Lemondoge",
 			"Macofe",
 			"Matiia",
-			"Tiberius1701"
+			"Tiberius1701",
+			"Jackiezelaya",
+			"Jakeukalane"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Consulta los elementos de insignias disponibles.",
@@ -180,8 +182,8 @@
 	"apihelp-wbsetreference-param-summary": "Resumen de la edición.\nSerá precedido por un comentario generado automáticamente. La longitud máxima del autocomentario junto con el resumen es de 260 caracteres. Ten en cuenta que todo lo que sobrepase el límite se cortará.",
 	"apihelp-wbsetreference-param-baserevid": "El identificador numérico de la revisión en la que basar la modificación.\nEste dato se utiliza para detectar conflictos al guardar.",
 	"apihelp-wbsetreference-param-bot": "Marcar esta edición como hecha por un robot. Este parámetro funcionará solo si el usuario pertenece al grupo «bot».",
-	"apihelp-wbsetsitelink-description": "Asocia una página de un wiki con un elemento de Wikibase o borra una asociación de este tipo ya realizada.",
-	"apihelp-wbsetsitelink-summary": "Asocia una página de un wiki con un elemento de Wikibase o borra una asociación de este tipo ya realizada.",
+	"apihelp-wbsetsitelink-description": "Asocia una página de una wiki con un elemento de Wikibase o borra una asociación de este tipo ya realizada.",
+	"apihelp-wbsetsitelink-summary": "Asocia una página de una wiki con un elemento de Wikibase o borra una asociación de este tipo ya realizada.",
 	"apihelp-wbsetsitelink-param-new": "Si se establece, se creará una entidad nueva.\nEstablece esto al tipo de entidad que quieres crear.",
 	"apihelp-wbsetsitelink-param-site": "Un identificador para el sitio en el que reside la página.\nÚsalo junto con <var>title</var> para crear un enlace de sitio completo.",
 	"apihelp-wbsetsitelink-param-title": "El título de la página que se asociará.\nUtilízalo junto con <var>site</var> para crear un enlace de sitio completo.",

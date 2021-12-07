@@ -4,7 +4,8 @@
 			"Fanjiayi",
 			"Mithridates",
 			"OIS",
-			"Stavanger7"
+			"Stavanger7",
+			"Renan"
 		]
 	},
 	"tooltip-t-wikibase": "Ligament a conexet articul del depositoria de data",
@@ -12,12 +13,14 @@
 	"wikibase-dataitem": "Element {{WBREPONAME}}",
 	"wikibase-editlinks": "Redacter ligamentes",
 	"wikibase-editlinkstitle": "Redacter interlingual ligamentes",
-	"wikibase-linkitem-addlinks": "Adjunter ligamentes",
+	"wikibase-linkitem-addlinks": "Addir ligamentes",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ocultar",
 	"wikibase-rc-hide-wikidata-show": "Monstrar",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} redacter",
+	"entityusage": "Págines que usa un entitá",
+	"entityusage-summary": "Ti págine lista li págines que usa li entitá specificat (e.g. Q42). Li liste es monstrat per órdine descendente del ID del págine, de ti-ci forme li págines max nov es listat prim.",
 	"wikibase-otherprojects": "In altri projectes",
 	"wikibase-client-data-bridge-dialog-title": "Redacter $1"
 }

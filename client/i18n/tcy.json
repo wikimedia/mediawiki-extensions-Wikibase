@@ -6,19 +6,21 @@
 			"Kiranpoojary",
 			"VASANTH S.N.",
 			"Vishwanatha Badikana",
-			"రహ్మానుద్దీన్"
+			"రహ్మానుద్దీన్",
+			"Chidananda Kampa"
 		]
 	},
 	"tooltip-t-wikibase": "ಸಂಪರ್ಕೊ ಮಾಹಿತಿ ಸಂಗ್ರಹೊ ಮಲ್ಪುನ ಬಾಗೊದ ಕೊಂಡಿ",
 	"wikibase-comment-update": "{{WBREPONAME}} ವಿಸಯೊ ಬದಲಾತ್ಂಡ್",
-	"wikibase-dataitem": "{{WBREPONAME}}ಅಂಸೊ",
+	"wikibase-dataitem": "{{WBREPONAME}} ಅಂಸೊ",
 	"wikibase-editlinks": "ಕೊಂಡಿಲೆನ್ ಸಂಪೊಲಿಪುಲೆ",
 	"wikibase-editlinkstitle": "ಬೇತೆ ಬಾಸೆದ ಕೊಂಡಿಲೆನ್ ಸಂಪೊಲಿಪುಲೆ",
+	"wikibase-linkitem-addlinks": "ಕೊಂಡಿ ಸೆರಾಲೆ",
 	"wikibase-rc-hide-wikidata": "$1{{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ಅಡೆಂಗಾವು",
 	"wikibase-rc-hide-wikidata-show": "ತೋಜಾವು",
 	"wikibase-rc-wikibase-edit-letter": "ಡೇ",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}ಸಂಪದನೆ",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ಸಂಪೊಲಿಪು",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}ಸಂಪದನೆಲೂ",
 	"wikibase-pageinfo-entity-usage-T": "ತರೆಬರವು",
 	"wikibase-otherprojects": "ಬೇತೆ ಯೋಜನೆಲೆಡ್"

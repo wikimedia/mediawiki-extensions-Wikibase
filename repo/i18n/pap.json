@@ -7,5 +7,7 @@
 	},
 	"wikibase-edit": "editá",
 	"wikibase-add": "añadí",
-	"wikibase-sitelinks-special": "Otro sitio"
+	"wikibase-description-empty": "No a definí deskripshon",
+	"wikibase-sitelinks-special": "Otro sitio",
+	"wikibase-statementview-rank-normal": "Klasifikashon normal"
 }

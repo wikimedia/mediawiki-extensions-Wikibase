@@ -6,12 +6,17 @@
 			"Гусейн"
 		]
 	},
-	"wikibase-edit": "dəqiş karde",
+	"wikibase-edit": "сәрост карде",
+	"wikibase-save": "огәтеј",
 	"wikibase-cancel": "ləğv karde",
-	"wikibase-add": "ziyod",
-	"wikibase-label-empty": "Nom ni",
-	"wikibase-description-empty": "Nom-nışon nıvıştə bıəni",
-	"wikibase-sitelinks-special": "Co sayton",
-	"wikibase-statementview-rank-normal": "Normalə ranq",
+	"wikibase-add": "әловәкә",
+	"wikibase-save-inprogress": "Огәтејдә...",
+	"wikibase-remove-inprogress": "Моледә...",
+	"wikibase-entitytermsforlanguagelistview-label": "Ном",
+	"wikibase-entitytermsforlanguagelistview-language": "Зывон",
+	"wikibase-label-empty": "Ном ни",
+	"wikibase-description-empty": "Ном-нышон нывыштә быәни",
+	"wikibase-sitelinks-special": "Ҹо сајтон",
+	"wikibase-statementview-rank-normal": "Нормалә ранк",
 	"wikibase-setlabeldescriptionaliases-description-label": "Təsvir:"
 }

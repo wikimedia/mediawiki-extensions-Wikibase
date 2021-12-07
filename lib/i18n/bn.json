@@ -56,7 +56,7 @@
 	"datatypes-type-wikibase-property": "বৈশিষ্ট্য",
 	"datatypes-type-commonsMedia": "কমন্স মিডিয়া ফাইল",
 	"datatypes-type-geo-shape": "ভৌগোলিক আকৃতি",
-	"datatypes-type-tabular-data": "ছককৃত উপাত্ত",
+	"datatypes-type-tabular-data": "ছকবদ্ধ উপাত্ত",
 	"datatypes-type-external-id": "বহিঃস্থ শনাক্তকারক",
 	"version-wikibase": "উইকিবেজ",
 	"wikibase-time-calendar-gregorian": "গ্রেগরীয়",

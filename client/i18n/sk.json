@@ -12,7 +12,8 @@
 			"Teslaton",
 			"TomášPolonec",
 			"Vegetator",
-			"Yardom78"
+			"Yardom78",
+			"Dušan Kreheľ"
 		]
 	},
 	"wikibase-client-desc": "Klient pre rozšírenie Wikibase",
@@ -30,7 +31,7 @@
 	"wikibase-comment-sitelink-change": "Medzijazykový odkaz zmenený z $1 na $2",
 	"wikibase-comment-sitelink-remove": "Odstránený medzijazykový odkaz: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|úprava|úpravy|úprav}}",
-	"wikibase-dataitem": "položka {{WBREPONAME}}",
+	"wikibase-dataitem": "Položka {{WBREPONAME}}",
 	"wikibase-editlinks": "Upraviť odkazy",
 	"wikibase-editlinkstitle": "Upraviť medzijazykové odkazy",
 	"wikibase-addlinkstitle": "Pridať medzijazykové odkazy",

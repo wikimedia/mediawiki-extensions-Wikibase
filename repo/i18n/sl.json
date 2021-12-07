@@ -194,6 +194,7 @@
 	"wikibase-dispatchstats-site-id": "Spletna stran",
 	"wikibase-dispatchstats-pos": "Položaj",
 	"wikibase-dispatchstats-lag-num": "V delu",
+	"wikibase-history-title-with-label": "Zgodovina strani »$2« ($1)",
 	"special-listproperties": "Seznam Lastnosti",
 	"wikibase-listproperties-datatype": "Vrsta podatka:",
 	"wikibase-listproperties-submit": "Poišči",
@@ -205,6 +206,7 @@
 	"wikibase-parse-error-quantity": "Vrednost količine je slabo oblikovana.",
 	"wikibase-parse-error-time": "Vrednost časa je slabo oblikovana.",
 	"wikibase-redirectentity-submit": "Preusmeri",
+	"wikibase-api-failed-save": "Shranjevanje je spodletelo.",
 	"wikibase-restoreold": "obnovi",
 	"wikibase-entity-summary-restore": "Obnova redakcije $3 {{gender:$4|avtorja|avtorice|avtorja/avtorice}} [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Razveljavi redakcijo $3 {{gender:$4|avtorja|avtorice|avtorja/avtorice}} [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|pogovor]])",
@@ -222,5 +224,6 @@
 	"action-item-merge": "združi Objekte",
 	"right-item-merge": "Združi Objekte",
 	"action-property-create": "ustvari Lastnosti",
-	"wikibase-pageinfo-subscription-none": "Brez"
+	"wikibase-pageinfo-subscription-none": "Brez",
+	"wikibase-shortcopyrightwarning-heading": "Navedba licence"
 }

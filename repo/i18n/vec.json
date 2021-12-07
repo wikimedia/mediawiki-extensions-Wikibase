@@ -94,7 +94,7 @@
 	"wikibase-snakview-variation-datavaluetypemismatch-details": "El tipo de dato \"$1\" de sto valor no'l corisponde al tipo de dato \"$2\" previsto par i valori de la proprietà.",
 	"wikibase-snakview-variation-nonewvaluefordeletedproperty": "No se pol definir un valor novo par na proprietà scancelà.",
 	"wikibase-snakview-variations-somevalue-label": "valor sconossùo",
-	"wikibase-snakview-variations-novalue-label": "nissun valor",
+	"wikibase-snakview-variations-novalue-label": "nisun vałore",
 	"wikibase-snakview-snaktypeselector-value": "valor personalixà",
 	"wikibase-shortcopyrightwarning": "Strucando su \"$1\", te aceti le [[$2|condision de uso]], e te aceti irevocabilmente a rilasiar el to contributo in base a la $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Aceto sti termini par le me future modifiche. No sta mostrarme da novo sto mesajo.",

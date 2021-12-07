@@ -3,7 +3,8 @@
 		"authors": [
 			"Gmelfi",
 			"Pippinu",
-			"Sarvaturi"
+			"Sarvaturi",
+			"Ajeje Brazorf"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -29,7 +30,7 @@
 	"wikibase-timedetails-precision": "Pricisioni",
 	"wikibase-timedetails-before": "Avanti",
 	"wikibase-timedetails-after": "Appressu",
-	"wikibase-globedetails-longitude": "Luncitùdini",
+	"wikibase-globedetails-longitude": "Loncitùdini",
 	"wikibase-globedetails-latitude": "Latitùdini",
 	"wikibase-globedetails-precision": "Pricisioni",
 	"wikibase-globedetails-globe": "Globbu",
@@ -37,6 +38,11 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "valuri scanusciutu",
 	"wikibase-snakview-snaktypeselector-novalue": "nuddu valuri",
 	"wikibase-undeserializable-value": "Lu valuri nun è vàlidu e nun si pò ammustrari.",
+	"datatypes-type-quantity": "Quantità",
+	"datatypes-type-monolingualtext": "Testu monu-lingua",
+	"datatypes-type-multilingualtext": "Testu multi-lingua",
+	"datatypes-type-number": "Nùmmiru",
+	"datatypes-type-mediawiki-title": "Tìtulu MediaWiki",
 	"datatypes-type-wikibase-item": "Suggettu",
 	"datatypes-type-wikibase-property": "Prupità",
 	"datatypes-type-commonsMedia": "File multimidiali supra a Commons",
@@ -47,6 +53,7 @@
 	"wikibase-time-precision-millennium": "$1. millenniu",
 	"wikibase-time-precision-century": "$1. sèculu",
 	"wikibase-time-precision-10annum": "anni $1",
+	"wikibase-time-precision-BCE": "$1 a.C.",
 	"wikibase-time-precision-BCE-Gannum": "$1 {{PLURAL:$1|miliardu|miliardi}} d'anni a.C.",
 	"wikibase-time-precision-BCE-Mannum": "$1 {{PLURAL:$1|miliuni|miliuna}} d'anni a.C.",
 	"wikibase-time-precision-BCE-annum": "$1 {{PLURAL:$1|annu|anni}} a.C.",

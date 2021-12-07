@@ -28,7 +28,9 @@
 			"VoxelJ",
 			"Александр Сигачёв",
 			"Туллук",
-			"Умар"
+			"Умар",
+			"DDPAT",
+			"WindEwriX"
 		]
 	},
 	"wikibase-client-desc": "Клиент для расширения Wikibase",
@@ -71,7 +73,7 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Скрыть",
 	"wikibase-rc-hide-wikidata-show": "Показать",
-	"wikibase-rc-show-wikidata-pref": "Показать изменения {{grammar:genitive|{{WBREPONAME}}}} в списке свежих правок",
+	"wikibase-rc-show-wikidata-pref": "Показывать изменения {{grammar:genitive|{{WBREPONAME}}}} в списке свежих правок",
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "Правка {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-rcfilters-hide-wikibase-label": "Правки {{grammar:genitive|{{WBREPONAME}}}}",
@@ -80,11 +82,12 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "Фильтр «Правки из {{grammar:genitive|{{WBREPONAME}}}}» конфликтует с одним или несколькими фильтрами качества вклада или намерений участника. Предсказывание качества вклада и намерений пользователей недоступно для правок из {{grammar:genitive|{{WBREPONAME}}}}. Конфликтующие фильтры отмечены в поле активных фильтров выше.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Все правки {{WBREPONAME}} отмечаются как \"малые\", так что фильтр \"правки {{WBREPONAME}}\" конфликтует с фильтром \"Обычные правки\".",
 	"wikibase-replicationnote": "Пожалуйста, обратите внимание, что может пройти несколько минут, пока изменения станут видны во всех вики-проектах",
-	"wikibase-watchlist-show-changes-pref": "Показать изменения в {{grammar:genitive|{{WBREPONAME}}}} в списке наблюдения",
+	"wikibase-watchlist-show-changes-pref": "Показывать изменения в {{grammar:genitive|{{WBREPONAME}}}} в списке наблюдения",
 	"wikibase-error-deserialize-error": "Не удалось десериализовать данные.",
 	"wikibase-error-serialize-error": "Не удалось сериализовать данные.",
 	"wikibase-error-invalid-entity-id": "Идентификатор «$2» неизвестен системе. Используйте один из действующих идентификаторов сущностей.",
 	"unconnectedpages": "Страницы, не связанные с элементами",
+	"unconnectedpages-summary": "Эта страница содержит список страниц, которые не соединены с элементами данных (в пространствах имён, которые поддерживают связи с элементам). Список отсортирован по убыванию ID страницы, так что самые новые страницы показываются в начале.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|межъязыковая ссылка|межъязыковые ссылки|межъязыковых ссылок}} на странице)",
 	"wikibase-unconnectedpages-submit": "Показать страницы",
 	"pageswithbadges": "Страницы со значками",
@@ -131,9 +134,11 @@
 	"connected-redirect-category-desc": "Эта категория перечисляет страницы-перенаправления, которые связаны с элементом {{grammar:genitive|{{WBREPONAME}}}}.",
 	"wikibase-client-data-bridge-dialog-title": "Редактировать $1",
 	"wikibase-client-data-bridge-permissions-error-info": "Подробнее",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "Неизвестная ошибка разрешения",
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Я исправил</strong> некорректное значение",
 	"wikibase-client-data-bridge-references-heading": "Примечания",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Вы не вошли в систему",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Редактировать без входа в систему",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Войти или Зарегистрироваться",
 	"wikibase-client-data-bridge-license-heading": "Использование и лицензия",
 	"wikibase-client-data-bridge-license-body": "<p>Изменение этого значения также приведет к его изменению в {{WBREPONAME}} и, возможно, в вики на других языках.</p>\n<p>Нажимая \"{{int:$1}}\", вы соглашаетесь с [$2 условиями использования] и безоговорочно соглашаетесь опубликовать свой вклад в соответствии с [$3 $4].</p>",
@@ -144,5 +149,9 @@
 	"wikibase-client-data-bridge-error-reload-page": "Перезагрузить страницу",
 	"wikibase-client-data-bridge-error-go-back": "Вернуться назад",
 	"wikibase-client-data-bridge-error-retry-save": "Повторить сохранение",
-	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Вы не вошли в систему"
+	"wikibase-client-data-bridge-thank-you-head": "Спасибо за вашу правку!",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Вы не вошли в систему",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Опубликовать без входа в систему",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Сохранить без входа в систему",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Продолжить редактирование"
 }

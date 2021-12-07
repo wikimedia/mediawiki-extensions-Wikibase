@@ -59,7 +59,7 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "gregoriansk",
 	"wikibase-time-calendar-julian": "juliansk",
-	"wikibase-time-precision-Gannum": "i $1 milliarder år",
+	"wikibase-time-precision-Gannum": "$1 milliarder år",
 	"wikibase-time-precision-Mannum": "$1 million år e.v.t.",
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 år}} e.v.t.",
 	"wikibase-time-precision-millennium": "$1. årtusind",

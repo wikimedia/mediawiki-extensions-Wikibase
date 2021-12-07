@@ -16,7 +16,7 @@
 	"wikibase-comment-linked": "Objekt v {{GRAMMAR:mestnik|{{WBREPONAME}}}} je povezan s to stranjo.",
 	"wikibase-comment-unlink": "Stran je bila razvezana od objekta v {{GRAMMAR:mestnik|{{WBREPONAME}}}}. Jezikovne povezave odstranjene.",
 	"wikibase-comment-restore": "Povezan objekt v {{GRAMMAR:mestnik|{{WBREPONAME}}}}je obnovljen. Jezikovne povezave so obnovljene.",
-	"wikibase-comment-update": "Objekt v {{GRAMMAR:mestnik|{{WBREPONAME}}}} je spremenjen.",
+	"wikibase-comment-update": "Objekt v Wikipodatkih je spremenjen.",
 	"wikibase-comment-sitelink-add": "Jezikovna povezava dodana: $1",
 	"wikibase-comment-sitelink-change": "Jezikovna povezava spremenjena iz $1 v $2",
 	"wikibase-comment-sitelink-remove": "Jezikovna povezava odstranjena: $1",
@@ -63,7 +63,7 @@
 	"entityusage": "Uporaba objekta",
 	"wikibase-entityusage-entity": "Objekt:",
 	"wikibase-entityusage-submit": "Prikaži strani",
-	"wikibase-pageinfo-entity-id": "ID objekta v {{GRAMMAR:mestnik|{{WBREPONAME}}}}",
+	"wikibase-pageinfo-entity-id": "ID objekta v Wikipodatkih",
 	"wikibase-pageinfo-entity-id-none": "Brez",
 	"wikibase-pageinfo-entity-usage": "Predmeti v Wikipodatkih, uporabljeni na tej strani",
 	"wikibase-pageinfo-entity-usage-S": "Povezava s stranjo",
@@ -82,8 +82,8 @@
 	"wikibase-sitelinks-link-columnheading": "Povezana stran",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Povezava|Povezavi|Povezave|Povezav}} {{GRAMMAR:orodnik|{{WBREPONAME}}}}",
 	"echo-pref-tooltip-wikibase-action": "Obvesti me, ko nekdo poveže stran, ki {{GENDER:|sem jo ustvaril}} z njenim objektom na {{WBREPONAME}}.",
-	"notification-header-page-connection": "Stran <strong>$3</strong> je bila {{GENDER:$2|povezana}} s {{PLURAL:$4|-1=predmetom v shrambi {{WBREPONAME}}|predmetom $4 v shrambi {{WPREPONAME}}}}, v kateri je mogoče zbirati podatke, povezane s temo.",
-	"notification-bundle-header-page-connection": "<strong>$3</strong> in {{PLURAL:$4|še ena stran|še $4 drugi strani|100=99+ drugih strani|še $4 druge strani|še $4 drugih strani}} je {{GENDER:$2|$2 povezal|$2 povezala|povezanih}} s predmeti v shrambi {{WBREPONAME}}, kjer se lahko zbirajo podatki, relevantni za temo.",
+	"notification-header-page-connection": "Stran <strong>$3</strong> je bila {{GENDER:$2|povezana}} s {{PLURAL:$4|-1=predmetom v shrambi  {{WBREPONAME}}|predmetom $4 v shrambi {{WBREPONAME}}}}, v kateri je mogoče zbirati podatke, povezane s temo.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> in {{PLURAL:$4|še $4 stran je {{GENDER:$2|$2 povezal|$2 povezala|povezanih}}|še $4 drugi strani je {{GENDER:$2|$2 povezal|$2 povezala|povezanih}}|še $4 druge strani je {{GENDER:$2|$2 povezal|$2 povezala|povezanih}}|še $4 drugih strani je {{GENDER:$2|$2 povezal|$2 povezala|povezanih}}|100=99+ drugih strani je {{GENDER:$2|$2 povezal|$2 povezala|povezanih}}}} s predmeti v shrambi {{WBREPONAME}}, kjer se lahko zbirajo podatki, relevantni za temo.",
 	"notification-link-text-view-item": "{{GENDER:$1|Prikaži}} predmet",
 	"notification-subject-page-connection": "Stran {{SITENAME}}, ki ste jo {{GENDER:$3|ustvarili}}, je bila {{GENDER:$2|povezana}} s predmetom v {{WBREPONAME}}"
 }

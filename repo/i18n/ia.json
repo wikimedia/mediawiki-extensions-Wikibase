@@ -65,6 +65,13 @@
 	"special-itemdisambiguation": "Disambiguation de elementos",
 	"special-newitem": "Crear un nove objecto",
 	"wikibase-error-entity-too-big": "Le entitate es troppo grande. Le dimension maxime permittite del entitate es $1.",
+	"wikibase-api-no-data": "Il non ha datos a tractar.",
 	"wikibase-api-no-external-page": "Le sito cliente externe \"$1\" non forniva informationes sur le pagina \"$2\".",
+	"wikibase-api-not-recognized-siteid": "Le identificator de sito fornite non es recognoscite.",
+	"wikibase-api-not-recognized": "Qualcosa non ha essite recognoscite.",
+	"wikibase-api-not-recognized-array": "Un array esseva expectate ma non recognoscite.",
+	"wikibase-api-not-recognized-language": "Le codice de lingua fornite non es recognoscite.",
+	"wikibase-api-not-recognized-string": "Un catena de characteres esseva expectate ma non recognoscite.",
+	"wikibase-api-wrong-class": "Un typo de classe incorrecte ha essite detegite.",
 	"wikibase-restoreold": "restaurar"
 }

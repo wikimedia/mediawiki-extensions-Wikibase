@@ -19,7 +19,8 @@
 			"Sergento",
 			"Tkalyn",
 			"Ата",
-			"Максим Підліснюк"
+			"Максим Підліснюк",
+			"DDPAT"
 		]
 	},
 	"wikibase-client-desc": "Клієнт для розширення Wikibase",
@@ -58,6 +59,7 @@
 	"wikibase-linkitem-not-loggedin": "Вам необхідно увійти в систему на цій вікі і на [$1 центральному сховищі даних], щоб скористатись цією функцією.",
 	"wikibase-linkitem-success-link": "Сторінки було пов'язано. Ви можете знайти елемент, який містить ці посилання, у нашому [$1 центральному сховищі даних].",
 	"limitreport-entityaccesscount": "Число завантажених елементів Вікібази",
+	"limitreport-entityaccesscount-value": "$1/$2",
 	"wikibase-property-notfound": "Властивість $1 не знайдено.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Приховати",
@@ -177,7 +179,7 @@
 	"wikibase-client-data-bridge-edit-conflict-error-message": "Інший користувач щойно редагував це значення й опублікував свої зміни раніше за вас. Ваші зміни не вдалося застосувати. Будь ласка, перезавантажте сторінку, щоб отримати нове значення.",
 	"wikibase-client-data-bridge-unknown-error-heading": "Щось пішло не так",
 	"wikibase-client-data-bridge-unknown-error-message": "Виникла якась помилка, і станом на цю мить вибране значення неможливо відредагувати. Будь ласка, спробуйте перезавантажити сторінку.",
-	"wikibase-client-data-bridge-error-report": "<p>Якщо помилка не зникає, будь ласка, [$1 повідомте про цю проблему], додавши до свого повідомлення таку інформацію:</p>\n<ul>\n<li>$2</li>\n<li>$3 із $4</li>\n<li>Код помилки: $5</li>\n</ul>",
+	"wikibase-client-data-bridge-error-report": "<p>Якщо помилка не зникає, будь ласка, [$1 повідомте про цю проблему], описавши свої дії і додавши до свого повідомлення таку інформацію:</p>\n<ul>\n<li>$2</li>\n<li>$3 із $4</li>\n<li>Код помилки: $5</li>\n</ul>",
 	"wikibase-client-data-bridge-error-reload-bridge": "Перезавантажити",
 	"wikibase-client-data-bridge-error-reload-page": "Перезавантажити сторінку",
 	"wikibase-client-data-bridge-error-go-back": "Назад",

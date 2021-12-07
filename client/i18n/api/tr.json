@@ -3,12 +3,20 @@
 		"authors": [
 			"Alpkant",
 			"BaRaN6161 TURK",
-			"MuratTheTurkish"
+			"MuratTheTurkish",
+			"Hedda"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "Belirli sayfalarda kullanılan tüm varlık kimliklerini döndürür.",
 	"apihelp-query+wbentityusage-summary": "Belirli sayfalarda kullanılan tüm varlık kimliklerini döndürür.",
 	"apihelp-query+wbentityusage-param-aspect": "Yalnızca bu yönü kullanan varlık kimliklerini döndürün.",
+	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Varlığın site bağlantıları kullanılıyor",
+	"apihelp-query+wbentityusage-paramvalue-aspect-L": "Varlığın etiketi kullanılıyor",
+	"apihelp-query+wbentityusage-paramvalue-aspect-D": "Varlığın açıklaması kullanılıyor",
+	"apihelp-query+wbentityusage-paramvalue-aspect-T": "Varlığa karşılık gelen yerel sayfanın başlığı kullanılıyor",
+	"apihelp-query+wbentityusage-paramvalue-aspect-C": "Varlıktan alınan açıklamalar kullanılıyor",
+	"apihelp-query+wbentityusage-paramvalue-aspect-X": "Bir varlığın tüm yönleri kullanılır veya kullanılabilir",
+	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Varlık hakkında başka bir şey kullanılıyor. Bu, şu anda takma ad kullanımı ve varlık varlığı için açık kontroller anlamına gelir.",
 	"apihelp-query+wbentityusage-param-prop": "Sonuca eklenecek özellikler.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Etkinleştirilirse varlık URL'si eklenir",
 	"apihelp-query+wbentityusage-param-entities": "Yalnızca bu varlıkları kullanan sayfayı döndürün.",

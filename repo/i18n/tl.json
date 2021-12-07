@@ -13,7 +13,7 @@
 		]
 	},
 	"wikibase-desc": "Repositoryo ng datong may kayarian",
-	"wikibase-edit": "i-edit",
+	"wikibase-edit": "baguhin",
 	"wikibase-save": "itala",
 	"wikibase-cancel": "huwag ituloy",
 	"wikibase-add": "magdagdag",
@@ -74,7 +74,14 @@
 	"special-mergeitems": "Ipagsama ang dalawang bagay",
 	"wikibase-mergeitems-submit": "Ipagsama ang mga bagay",
 	"special-entitypage": "Pinagmulang pagina",
+	"wikibase-api-no-data": "Walang dato na mapagsasagawaan.",
 	"wikibase-api-no-external-page": "Hindi nagbigay ng pahina ng impormasyon ang pook ng panlabas na kliyente.",
+	"wikibase-api-not-recognized-siteid": "Hindi nakilala ang ibinigay na pangkilala ng pook.",
+	"wikibase-api-not-recognized": "Hiniling ang isang hindi katanggap-tanggap na kaarian: $1.",
+	"wikibase-api-not-recognized-array": "Inaasahan ang isang hanay ngunit hindi natagpuan.",
+	"wikibase-api-not-recognized-language": "Hindi nakilala ang ibinigay na pangkilala ng wika.",
+	"wikibase-api-not-recognized-string": "Isang bagting ang inaasahan subalit hindi natagpuan.",
+	"wikibase-api-wrong-class": "Hindi tama ang uri ng nilalaman na nasa ibabaw ng natagpuang pahina.",
 	"wikibase-restoreold": "itakdang muli",
 	"wikibase-entity-summary-restore": "Ipanumbalik ang rebisyong $3 ni [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-save-error-heading": "May pagkakamali"

@@ -6,7 +6,10 @@
 			"Mainframe98",
 			"Mar(c)",
 			"Siebrand",
-			"Sjoerddebruin"
+			"Sjoerddebruin",
+			"McDutchie",
+			"NthnH",
+			"Romaine"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Vraagt beschikbare badge-items op.",
@@ -70,7 +73,7 @@
 	"apihelp-wbgetclaims-example-4": "Haal de verklaring op met GUID <var>Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F</var>",
 	"apihelp-wbgetentities-description": "Haalt gegevens op van meerdere Wikibase-entiteiten.",
 	"apihelp-wbgetentities-param-ids": "De ID's van de entiteiten om de gegevens van op te halen",
-	"apihelp-wbgetentities-param-sites": "Identificatiecode van de site waar de bijbehorende pagina zich op bevindt.\nGebruik samen met <code>title</code>, maar geef alleen één site voor meerdere titels of meerdere sites voor één titel.",
+	"apihelp-wbgetentities-param-sites": "Identificatiecode van de site waarop de bijbehorende pagina zich bevindt.\nGebruik samen met <code>title</code>, maar geef slechts één site op voor meerdere titels of meerdere sites voor één titel.",
 	"apihelp-wbgetentities-param-titles": "De titel van de bijbehorende pagina.\nGebruik samen met <code>sites</code>, maar geef alleen één site voor meerdere titels of meerdere sites voor één titel.",
 	"apihelp-wbgetentities-param-redirects": "Of het doel van doorverwijzingen moet worden achterhaald.\nAls dit is ingesteld op \"no\", dan zullen doorverwijzingen worden behandeld als verwijderde entiteiten.",
 	"apihelp-wbgetentities-param-props": "De namen van de eigenschappen die opgehaald moeten worden van elke entiteit.\nDit zal verder worden gefilterd op elke opgegeven taal.",
@@ -152,6 +155,7 @@
 	"apihelp-wbsearchentities-example-4": "Zoeken naar \"abc\" in de Engelse taal met een maximum van 2 resultaten en een startpositie van 2",
 	"apihelp-wbsearchentities-example-5": "Zoeken naar \"alphabet\" in de Engelse taal voor type-eigenschap",
 	"apihelp-query+entityterms-example-item": "Labels en aliassen voor het item Q84 opvragen.",
+	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "Een enkeltalige tekstwaarde in een verklaring.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "De taalcode.",
 	"apihelp-query+wbsearch-description": "Zoekt naar entiteiten met behulp van labels en aliassen.\nDit kan worden gebruikt als een generator voor andere zoekopdrachten.\nGeeft de overeenkomende term terug die moet worden weergegeven.",
 	"apihelp-query+wbsearch-param-search": "Naar deze tekst zoeken.",

@@ -7,6 +7,14 @@
 	"tooltip-t-wikibase": "ti mntaliwa ulh ti item",
 	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "qw'lasiitucw wa mntaliwa ts",
+	"wikibase-linkitem-addlinks": "sikwtl'icw ka inic7umat ala ats",
+	"wikibase-linkitem-title": "sisxpicw awcwa ulh ti qw'las ti umat",
+	"wikibase-linkitem-linkpage": "sxptx awcwa ulh ti qw'las ti umat",
+	"wikibase-linkitem-selectlink": "ulictx ti anaykmicw ti umat sisxpicw tc ulh ti umat t'ayc.",
+	"wikibase-linkitem-input-site": "Wa slhk'msta ts:",
+	"wikibase-linkitem-input-page": "Ti umat tc:",
+	"wikibase-rc-hide-wikidata-hide": "si7ip'wicw tc",
+	"wikibase-rc-hide-wikidata-show": "sik'cicw",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} siqw'lasiitucw tc"
 }

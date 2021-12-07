@@ -6,12 +6,15 @@
 		]
 	},
 	"wikibase-error-unexpected": "အမှား: $1။",
+	"wikibase-error-unknown": "အမှားတစ်ခု ဖြစ်ပွားခဲ့ပါသည်။",
 	"wikibase-error-save-generic": "အမှားကြောင့် မသိမ်းဆည်းနိုင်ခဲ့ပါ။",
 	"wikibase-error-remove-generic": "အမှားကြောင့် မဖယ်ရှားနိုင်ခဲ့ပါ။",
 	"wikibase-error-save-timeout": "နည်းပညာအခက်အခဲများ ကြုံတွေ့နေရပါသည်။ ကျေးဇူးပြု၍ ထပ်မံကြိုးစားကြည့်ပါ",
 	"wikibase-error-remove-timeout": "နည်းပညာအခက်အခဲများ ကြုံတွေ့နေရပါသည်။ ကျေးဇူးပြု၍ ထပ်မံကြိုးစားကြည့်ပါ",
 	"wikibase-error-ui-no-external-page": "\"$1\" တွင် \"$2\" ကို မရှာတွေ့နိုင်ခဲ့ပါ။",
+	"wikibase-error-ui-edit-conflict": "တချိန်တည်းတွင် တူညီသောတန်ဖိုးကို တည်းဖြတ်ခဲ့သည်၊ တည်းဖြတ်မှု ပဋိပက္ခအားဖြစ်စေသဖြင့် စာမျက်နှာအား ပြန်လည်ဝန်ဆွဲတင်ပါ။",
 	"wikibase-language-fallback-transliteration-hint": "$1 (အသံဖလှယ်ပြီး)",
+	"wikibase-quantitydetails-amount": "ပမာဏ",
 	"wikibase-quantitydetails-unit": "ယူနစ်",
 	"wikibase-timedetails-time": "အချိန်",
 	"wikibase-timedetails-isotime": "အချိန်တံဆိပ်",
@@ -24,6 +27,8 @@
 	"wikibase-globedetails-latitude": "လတ္တီကျု",
 	"wikibase-globedetails-precision": "တိကျမှု",
 	"wikibase-sitelinks-wikipedia": "ဝီကီပီးဒီးယား",
+	"datatypes-type-globe-coordinate": "ပထဝီဝင် ကိုဩဒိနိတ်များ",
+	"datatypes-type-commonsMedia": "ကွန်မွန်းစ် မီဒီယာဖိုင်",
 	"wikibase-time-calendar-gregorian": "ဂရီဂေါရီးယန်း",
 	"wikibase-time-calendar-julian": "ဂျူလီယန်",
 	"wikibase-time-precision-Gannum": "ခရစ်တော်ပေါ်ပြီး $1 ဘီလီယံနှစ်",
@@ -39,5 +44,9 @@
 	"wikibase-entity-summary-wbcreateredirect": "$4 သို့ ပြန်ညွှန်းထားသည်",
 	"wikibase-entity-summary-wbsetdescription-add": "[$2] ဖော်ပြချက်ကို ပေါင်းထည့်ခဲ့သည်",
 	"wikibase-entity-summary-wbsetdescription-set": "[$2] ဖော်ပြချက်ကို ပြောင်းလဲခဲ့သည်",
-	"wikibase-entity-summary-wbsetdescription-remove": "[$2] ဖော်ပြချက်ကို ဖယ်ရှားခဲ့သည်"
+	"wikibase-entity-summary-wbsetdescription-remove": "[$2] ဖော်ပြချက်ကို ဖယ်ရှားခဲ့သည်",
+	"wikibase-entity-summary-wbsetsitelink-add": "[$2] သို့ လင့်ခ်ပေါင်းထည့်ခဲ့သည်",
+	"wikibase-entity-summary-wbsetsitelink-set": "[$2] သို့ လင့်ခ်ပြောင်းလဲခဲ့သည်",
+	"wikibase-entity-summary-wbsetsitelink-remove": "[$2] သို့ လင့်ခ်ဖယ်ရှားခဲ့သည်",
+	"wikibase-item-summary-wblinktitles-connect": "စာမျက်နှာများသို့ချိတ်ဆက်ရန် ဘာသာစကားလင့်ခ်တစ်ခု ပေါင်းထည့်ခဲ့သည်"
 }

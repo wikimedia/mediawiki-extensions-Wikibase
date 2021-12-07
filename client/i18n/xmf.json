@@ -2,14 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"David1010",
-			"Silovan"
+			"Silovan",
+			"Narazeni"
 		]
 	},
 	"tooltip-t-wikibase": "მუნაჩემეფიშ ოჩუაშეს მიკორსხილი ელემენტიშ რცხუ",
 	"wikibase-comment-update": "{{WBREPONAME}} ელემენტი თირელი რე",
 	"wikibase-dataitem": "{{WBREPONAME}}ს ელემენტი",
-	"wikibase-editlinks": "რცხუეფიშ რედაქტირაფა",
-	"wikibase-editlinkstitle": "ნინეფს შქას რცხუეფიშ რედაქტირაფა",
+	"wikibase-editlinks": "რსხილეფიშ რედაქტირაფა",
+	"wikibase-editlinkstitle": "ნინეფს შქას რსხილეფიშ რედაქტირაფა",
+	"wikibase-linkitem-addlinks": "რსხუეფიშ გეძინა",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ტყობინაფა",
 	"wikibase-rc-hide-wikidata-show": "ძირაფა",

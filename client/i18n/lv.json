@@ -47,6 +47,7 @@
 	"wikibase-error-deserialize-error": "Neizdevās deserializēt datus.",
 	"wikibase-error-serialize-error": "Neizdevās serializēt datus.",
 	"wikibase-error-invalid-entity-id": "Sistēmai nav zināms ID \"$2\". Lūdzu, norādi derīgu vienuma ID.",
+	"unconnectedpages": "Vienumiem nepievienotās lapas",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|starpvalodu saites|starpvalodu saite|starpvalodu saites}} šajā lapā)",
 	"wikibase-unconnectedpages-submit": "Rādīt lapas",
 	"wikibase-pageswithbadges-invalid-id": "$1 nav derīgs vienuma ID",
@@ -55,7 +56,7 @@
 	"entityusage-summary": "Šī lapa uzskaita lapas, kas izmanto norādīto vienumu (piemēram, Q42). Saraksts ir sakārtots dilstošā secībā pēc lapas ID, tāpēc jaunākās lapas parādās sākumā.",
 	"wikibase-entityusage-invalid-id": "$1 nav derīgs entītijas ID",
 	"wikibase-entityusage-legend": "Lapu saraksts, kuras izmanto norādīto entītiju",
-	"wikibase-entityusage-entity": "Entītija:",
+	"wikibase-entityusage-entity": "Vienums:",
 	"wikibase-entityusage-submit": "Rādīt lapas",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} ieraksta ID",
 	"wikibase-pageinfo-entity-id-none": "Nav",
@@ -97,5 +98,7 @@
 	"wikibase-client-data-bridge-error-go-back": "Atpakaļ",
 	"wikibase-client-data-bridge-error-retry-save": "Mēģināt saglabāt vēlreiz",
 	"wikibase-client-data-bridge-thank-you-head": "Paldies par tavu labojumu!",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Publicēt bez pieslēgšanās",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Saglabāt bez pieslēgšanās",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Turpināt labošanu"
 }

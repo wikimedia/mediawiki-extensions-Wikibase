@@ -3,9 +3,19 @@
 		"authors": [
 			"Amire80",
 			"Dnshitobu",
-			"Shahadusadik"
+			"Shahadusadik",
+			"Achiri Bitamsimli",
+			"Alhassan Mohammed Awal",
+			"Chirifo",
+			"Masssly",
+			"Ruky Wunpini"
 		]
 	},
-	"wikibase-edit": "malniŋ",
-	"wikibase-add": "pahima"
+	"wikibase-edit": "mali niŋ",
+	"wikibase-add": "pahima",
+	"wikibase-addreference": "pahimi kundi vihirili",
+	"wikibase-label-empty": "ŋɔ na ka dalinli",
+	"wikibase-description-empty": "Buɣisibu shɛli bi kahigi",
+	"wikibase-sitelinks-special": "Yaɣi din bala",
+	"wikibase-statementview-rank-normal": "dede zashe"
 }
