@@ -10,7 +10,8 @@
 			"Trần Nguyễn Minh Huy",
 			"Vinhtantran",
 			"Zolo",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Thienhau2003"
 		]
 	},
 	"wikibase-desc": "Kho dữ liệu có cấu trúc",
@@ -18,7 +19,7 @@
 	"wikibase-entity-item": "Khoản mục",
 	"wikibase-entity-property": "Thuộc tính",
 	"wikibase-entity-query": "Truy vấn",
-	"wikibase-edit": "sửa",
+	"wikibase-edit": "sửa đổi",
 	"wikibase-save": "lưu",
 	"wikibase-publish": "đăng",
 	"wikibase-cancel": "hủy bỏ",

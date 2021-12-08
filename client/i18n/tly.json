@@ -12,6 +12,8 @@
 	"wikibase-editlinks": "Линкон сәрост быкә",
 	"wikibase-editlinkstitle": "Че зывонарә линкон сәрост быкә",
 	"wikibase-linkitem-addlinks": "Линкон әловәкә",
+	"wikibase-linkitem-input-site": "Zıvon:",
+	"wikibase-linkitem-input-page": "Səhifə:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Нијо кардә",
 	"wikibase-rc-hide-wikidata-show": "Нишо дој",

@@ -1,11 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
-			"GastonJeremiah"
+			"GastonJeremiah",
+			"Amire80"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} wangu",
-	"wikibase-editlinks": "Manyi togdgu",
+	"wikibase-editlinks": "Manyii togdgu",
 	"wikibase-linkitem-addlinks": "Hewl togdgu",
-	"wikibase-rc-wikibase-edit-letter": "D"
+	"wikibase-linkitem-title": "Turnt n wadga",
+	"wikibase-linkitem-linkpage": "Turnt n wadga",
+	"wikibase-linkitem-selectlink": "Bantg sitii n wadga kiiga b'bagna b'turii-n wadga ke",
+	"wikibase-linkitem-input-site": "Lam",
+	"wikibase-linkitem-input-page": "Wadga",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "Kpɛɦdr",
+	"wikibase-rc-hide-wikidata-show": "Werii",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-otherprojects": "ŋmɛɛbolb"
 }
