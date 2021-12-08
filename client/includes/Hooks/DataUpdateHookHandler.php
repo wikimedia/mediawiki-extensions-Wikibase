@@ -137,7 +137,7 @@ class DataUpdateHookHandler implements
 	}
 
 	public function doLinksUpdateComplete( LinksUpdate $linksUpdate ): void {
-		$pageId = $linksUpdate->mId;
+		$pageId = $linksUpdate->getPageId();
 		if ( !$pageId ) {
 			$this->logger->info(
 				__METHOD__ . ': skipping page ID {pageId} for title {title} (T264929)',

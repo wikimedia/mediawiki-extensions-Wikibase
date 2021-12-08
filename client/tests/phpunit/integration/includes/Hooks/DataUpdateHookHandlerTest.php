@@ -223,7 +223,8 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$linksUpdate->mId = $title->getArticleID();
+		$linksUpdate->method( 'getPageId' )
+			->willReturn( $title->getArticleID() );
 
 		$linksUpdate->method( 'getTitle' )
 			->willReturn( $title );
