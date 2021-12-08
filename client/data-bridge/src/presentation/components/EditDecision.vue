@@ -10,10 +10,10 @@
 				value="editDecision"
 				@input="editDecision = $event"
 			>
-				<template slot="label">
+				<template #label>
 					<span v-html="$messages.get( $messages.KEYS.EDIT_DECISION_REPLACE_LABEL )" />
 				</template>
-				<template slot="description">
+				<template #description>
 					{{ $messages.getText( $messages.KEYS.EDIT_DECISION_REPLACE_DESCRIPTION ) }}
 				</template>
 			</RadioInput>
@@ -23,10 +23,10 @@
 				value="editDecision"
 				@input="editDecision = $event"
 			>
-				<template slot="label">
+				<template #label>
 					<span v-html="$messages.get( $messages.KEYS.EDIT_DECISION_UPDATE_LABEL )" />
 				</template>
-				<template slot="description">
+				<template #description>
 					{{ $messages.getText( $messages.KEYS.EDIT_DECISION_UPDATE_DESCRIPTION ) }}
 				</template>
 			</RadioInput>
