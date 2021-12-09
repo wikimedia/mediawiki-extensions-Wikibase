@@ -27,7 +27,7 @@
 		"test-fast:grunt": "grunt test",
 		"test-fast:bridge": "npm --prefix client/data-bridge test",
 		"test-fast:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref test",
-		"test-fast:mwlibs": "ZUUL_BRANCH=${ZUUL_BRANCH:-master} lib-version-check",
+		"test-fast:mwlibs": "echo 'disabled (T297381)' # ZUUL_BRANCH=${ZUUL_BRANCH:-master} lib-version-check",
 		"coverage": "npm --prefix client/data-bridge run-script test-unit-coverage",
 		"fix": "grunt fix"
 	},
