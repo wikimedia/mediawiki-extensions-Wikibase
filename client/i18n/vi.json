@@ -3,6 +3,7 @@
 		"authors": [
 			"Cheers!",
 			"Minh Nguyen",
+			"Nghiemtrongdai VN",
 			"NguoiDungKhongDinhDanh",
 			"Quenhitran",
 			"Thienhau2003",
@@ -26,7 +27,7 @@
 	"wikibase-comment-sitelink-remove": "Đã loại bỏ liên kết ngôn ngữ: $1",
 	"wikibase-comment-multi": "$1 thay đổi",
 	"wikibase-dataitem": "Khoản mục {{WBREPONAME}}",
-	"wikibase-editlinks": "Sửa đổi liên kết",
+	"wikibase-editlinks": "Sửa liên kết",
 	"wikibase-editlinkstitle": "Sửa liên kết giữa ngôn ngữ",
 	"wikibase-addlinkstitle": "Thêm liên kết giữa ngôn ngữ",
 	"wikibase-linkitem-addlinks": "Thêm liên kết",
