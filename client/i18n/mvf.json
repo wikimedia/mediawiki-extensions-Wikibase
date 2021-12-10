@@ -1,10 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Enkhsaihan2005"
+			"Enkhsaihan2005",
+			"Wikibilig"
 		]
 	},
 	"wikibase-dataitem": "ᠪᠤᠰᠤᠳ ᠬᠡᠯᠡᠨ ᠦ ᠬᠣᠯᠪᠣᠭᠠᠰᠤ",
 	"wikibase-editlinks": "ᠣᠨᠣᠭᠠᠨ ᠬᠣᠯᠪᠣᠬᠤ",
-	"wikibase-linkitem-addlinks": "ᠲᠠᠲᠠᠨ ᠬᠤᠯᠪᠤᠬᠤ"
+	"wikibase-linkitem-addlinks": "ᠲᠠᠲᠠᠨ ᠬᠤᠯᠪᠤᠬᠤ",
+	"wikibase-linkitem-title": "ᠬᠠᠭᠤᠳᠠᠰᠤ ᠤᠷᠤᠭᠤ ᠬᠣᠯᠪᠤᠭᠠᠰᠤ",
+	"wikibase-linkitem-linkpage": "ᠬᠠᠭᠤᠳᠠᠰᠤ ᠤᠷᠤᠭᠤ ᠬᠣᠯᠪᠤᠭᠠᠰᠤ",
+	"wikibase-linkitem-selectlink": "ᠡᠨᠡ ᠬᠠᠭᠤᠳᠠᠰᠤ ᠢᠢ ᠬᠣᠯᠪᠤᠬᠤ ᠴᠠᠬᠢᠮ ᠬᠠᠶᠢᠭ ᠪᠤᠶᠤ ᠬᠠᠭᠤᠳᠠᠰᠤ᠎ ᠢᠢ ᠰᠣᠩᠭᠤ",
+	"wikibase-linkitem-input-site": "ᠬᠡᠯᠡ",
+	"wikibase-linkitem-input-page": "ᠥᠭᠦᠯᠡᠯ"
 }

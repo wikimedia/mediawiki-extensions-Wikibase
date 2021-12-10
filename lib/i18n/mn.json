@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Mongol"
 		]
 	},
@@ -14,5 +15,6 @@
 	"wikibase-globedetails-longitude": "Уртраг",
 	"wikibase-globedetails-latitude": "Өргөрөг",
 	"wikibase-globedetails-precision": "Нарийвчлал",
-	"wikibase-globedetails-globe": "Бөмбөрцөг"
+	"wikibase-globedetails-globe": "Бөмбөрцөг",
+	"wikibase-sitelinks-wikipedia": "Википедиа"
 }
