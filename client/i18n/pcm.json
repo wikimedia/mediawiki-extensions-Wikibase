@@ -4,7 +4,14 @@
 			"Samatics"
 		]
 	},
-	"wikibase-linkitem-input-page": "Page:",
+	"wikibase-dataitem": "{{WBREPONAME}} aitem",
+	"wikibase-editlinks": "Chenj conet-dem",
+	"wikibase-linkitem-addlinks": "Ad conet-dem",
+	"wikibase-linkitem-title": "Conet am wit pej",
+	"wikibase-linkitem-linkpage": "Conet-am wit pej",
+	"wikibase-linkitem-selectlink": "Abeg pik wan sait an wan pej we yu go laik conet-am to dis pej",
+	"wikibase-linkitem-input-site": "Languej:",
+	"wikibase-linkitem-input-page": "Pej:",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} edit"
 }

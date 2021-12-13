@@ -2,17 +2,18 @@
 	"@metadata": {
 		"authors": [
 			"Gazimagomedov",
+			"Omarov M.",
 			"Аль-Гимравий",
 			"Умар"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} элемент",
-	"wikibase-editlinks": "РегІелал хисизаризе",
-	"wikibase-editlinkstitle": "МацІаздагьоркьосел регІелал хисизаризе",
+	"wikibase-editlinks": "РегӀелал хисизаризе",
+	"wikibase-editlinkstitle": "МацӀаздагьоркьосел регӀелал хисизаризе",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Бахчизе",
 	"wikibase-rc-hide-wikidata-show": "Бихьизабизе",
 	"wikibase-rc-wikibase-edit-letter": "Д",
-	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} хиса-баси",
+	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} хисизаби",
 	"wikibase-otherprojects": "Цогидал проектазда"
 }

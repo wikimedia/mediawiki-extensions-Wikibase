@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Enkhsaihan2005",
 			"Wikibilig"
 		]
@@ -12,5 +13,5 @@
 	"wikibase-linkitem-linkpage": "ᠬᠠᠭᠤᠳᠠᠰᠤ ᠤᠷᠤᠭᠤ ᠬᠣᠯᠪᠤᠭᠠᠰᠤ",
 	"wikibase-linkitem-selectlink": "ᠡᠨᠡ ᠬᠠᠭᠤᠳᠠᠰᠤ ᠢᠢ ᠬᠣᠯᠪᠤᠬᠤ ᠴᠠᠬᠢᠮ ᠬᠠᠶᠢᠭ ᠪᠤᠶᠤ ᠬᠠᠭᠤᠳᠠᠰᠤ᠎ ᠢᠢ ᠰᠣᠩᠭᠤ",
 	"wikibase-linkitem-input-site": "ᠬᠡᠯᠡ",
-	"wikibase-linkitem-input-page": "ᠥᠭᠦᠯᠡᠯ"
+	"wikibase-linkitem-input-page": "ᠥᠭᠦᠯᠡᠯ:"
 }
