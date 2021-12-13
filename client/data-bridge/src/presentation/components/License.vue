@@ -25,6 +25,7 @@ import Vue from 'vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 
 export default Vue.extend( {
+	// eslint-disable-next-line vue/multi-word-component-names
 	name: 'License',
 	components: { EventEmittingButton },
 	computed: {

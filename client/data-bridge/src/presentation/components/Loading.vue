@@ -49,6 +49,7 @@ import IndeterminateProgressBar from '@/presentation/components/IndeterminatePro
  * ```
  */
 export default Vue.extend( {
+	// eslint-disable-next-line vue/multi-word-component-names
 	name: 'Loading',
 	components: {
 		IndeterminateProgressBar,
