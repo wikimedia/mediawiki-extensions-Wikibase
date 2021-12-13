@@ -18,7 +18,9 @@
 			"Sergento",
 			"Tkalyn",
 			"Ата",
-			"Максим Підліснюк"
+			"Максим Підліснюк",
+			"Arxivist",
+			"DDPAT"
 		]
 	},
 	"wikibase-client-desc": "Клієнт для розширення Wikibase",
@@ -57,6 +59,7 @@
 	"wikibase-linkitem-not-loggedin": "Вам необхідно увійти в систему на цій вікі і на [$1 центральному сховищі даних], щоб скористатись цією функцією.",
 	"wikibase-linkitem-success-link": "Сторінки було пов'язано. Ви можете знайти елемент, який містить ці посилання, у нашому [$1 центральному сховищі даних].",
 	"limitreport-entityaccesscount": "Число завантажених елементів Вікібази",
+	"limitreport-entityaccesscount-value": "$1/$2",
 	"wikibase-property-notfound": "Властивість $1 не знайдено.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Приховати",
@@ -112,7 +115,7 @@
 	"wikibase-pageinfo-entity-usage-X": "Всі дані сутності",
 	"wikibase-pageinfo-entity-usage-O": "Інше (твердження)",
 	"wikibase-property-render-error": "Не вдалося відобразити властивість $1: $2",
-	"wikibase-otherprojects": "В інших проектах",
+	"wikibase-otherprojects": "В інших проєктах",
 	"wikibase-otherprojects-beta-message": "Бічна панель інших проектів",
 	"wikibase-otherprojects-beta-description": "Додає розділ «{{int:wikibase-otherprojects}}» на бічну панель, який містить посилання на інші проекти Фонду Вікімедіа, використовуючи {{WBREPONAME}} для отримання потрібних для цього даних.",
 	"wikibase-sitelinks-sitename-columnheading": "Мова",
@@ -152,7 +155,7 @@
 	"wikibase-client-data-bridge-references-heading": "Примітки",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Ви не ввійшли в систему",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Увага:</strong> ви не авторизовані. Ваша IP-адреса буде публічно видима, якщо ви зробите якісь редагування. Якщо ви <strong>авторизуєтеся</strong> чи <strong>створите обліковий запис</strong>, ваші редагування позначатимуться вашим іменем користувача і ви отримаєте інші переваги.",
-	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Редагувати без авторизації",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Редагувати без автентифікації",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Увійти або зареєструватися",
 	"wikibase-client-data-bridge-license-heading": "Використання і ліцензія",
 	"wikibase-client-data-bridge-license-body": "<p>Зміна цього значення змінить його також і на сайті {{WBREPONAME}}, а також, можливо, і в іншомовних вікі.</p>\n<p>Натискаючи «{{int:$1}}», ви погоджуєтесь із [$2 умовами користування], а також даєте невідкличну згоду на публікацію вашого внеску на умовах [$3 $4].</p>",

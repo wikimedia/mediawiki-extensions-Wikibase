@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"ArmenBakkalian"
+			"ArmenBakkalian",
+			"Kareyac"
 		]
 	},
+	"wikibase-globedetails-latitude": "Լայնութիւն",
 	"wikibase-sitelinks-wikipedia": "Ուիքիփետիա"
 }

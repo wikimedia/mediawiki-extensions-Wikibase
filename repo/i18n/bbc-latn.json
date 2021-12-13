@@ -1,9 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Salomo Christian Hutajulu"
+			"Salomo Christian Hutajulu",
+			"Herryz"
 		]
 	},
+	"wikibase-edit": "patota",
 	"wikibase-add": "tamba",
-	"wikibase-sitelinks-special": "Situs na asing"
+	"wikibase-label-empty": "Ndang adong label",
+	"wikibase-description-empty": "Ndang adong deskripsi",
+	"wikibase-sitelinks-special": "Situs na asing",
+	"wikibase-statementview-rank-normal": "Urutan normal"
 }

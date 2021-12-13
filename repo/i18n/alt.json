@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Батыр Комдошев",
+			"Толуш"
+		]
+	},
+	"wikibase-edit": "тӱзедер",
+	"wikibase-add": "кожор",
+	"wikibase-label-empty": "Ады јок",
+	"wikibase-description-empty": "Јартамалын бичибеген",
+	"wikibase-sitelinks-special": "Ӧскӧ сайттар",
+	"wikibase-statementview-rank-normal": "Нормальный рангы"
+}

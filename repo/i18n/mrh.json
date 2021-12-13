@@ -7,6 +7,14 @@
 	},
 	"wikibase-edit": "taopathi",
 	"wikibase-add": "khô",
+	"wikibase-label-empty": "Label a pyh tlâ vei",
 	"wikibase-description-empty": "Reipakawhna palâsapa y vei",
-	"wikibase-sitelinks-special": "Site hropazy"
+	"wikibase-sitelinks-special": "Site hropazy",
+	"wikibase-statementview-rank-normal": "Rank a daihpa",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Azaoh via teih",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Taopathina hlaotloh vei",
+	"special-setaliases-parameterized": "$1 mohchakhyhpa bie teih",
+	"special-setlabel-parameterized": "$1 label bai teih",
+	"special-setdescription-parameterized": "$1 palâsana tao teih",
+	"special-setlabeldescriptionaliases-parameterized": "$1 label, palâsana nata mohchakhyhpa zy tao teih"
 }

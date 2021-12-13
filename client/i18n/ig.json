@@ -3,7 +3,8 @@
 		"authors": [
 			"Oby Ezeilo",
 			"Ukabia",
-			"Uzoma Ozurumba"
+			"Uzoma Ozurumba",
+			"Tochiprecious"
 		]
 	},
 	"tooltip-t-wikibase": "link eji ejikọta Data edebere nke ọma",
@@ -11,8 +12,11 @@
 	"wikibase-dataitem": "{{WBREPONAME}} ihe",
 	"wikibase-editlinks": "Dezie njikọ ndi a",
 	"wikibase-editlinkstitle": "Dezie njiko asusu ndi yiri nụ",
+	"wikibase-linkitem-addlinks": "Tinye njikọ",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Zònarị",
 	"wikibase-rc-hide-wikidata-show": "Zi",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Ḿmezi {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Ḿmezi {{WBREPONAME}}",
+	"wikibase-otherprojects": "N'ọrụ ndị ọzọ"
 }

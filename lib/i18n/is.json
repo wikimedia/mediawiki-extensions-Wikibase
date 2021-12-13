@@ -6,7 +6,6 @@
 			"Sveinn í Felli"
 		]
 	},
-	"wikibase-lib-desc": "Inniheldur almenna virkni fyrir Wikibase og Wikibase Client.",
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Eyddur hlutur",
 	"wikibase-deletedentity-property": "Eyddur eiginleiki",
@@ -24,7 +23,7 @@
 	"wikibase-quantitydetails-lowerbound": "neðri mörk",
 	"wikibase-quantitydetails-unit": "Eining",
 	"wikibase-timedetails-time": "Tími",
-	"wikibase-timedetails-isotime": "Tímastimpill",
+	"wikibase-timedetails-isotime": "Tímamerki",
 	"wikibase-timedetails-timezone": "Tímabelti",
 	"wikibase-timedetails-calendar": "Dagatal",
 	"wikibase-timedetails-precision": "Nákvæmni",

@@ -19,7 +19,6 @@
 			"Woytecr"
 		]
 	},
-	"wikibase-lib-desc": "Zawiera wspólne funkcje dla rozszerzeń Wikibase i Wikibase Client",
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Usunięty element",
 	"wikibase-deletedentity-property": "Usunięta właściwość",
@@ -94,11 +93,11 @@
 	"wikibase-entity-summary-wbsetdescription-add": "Dodano opis [$2]",
 	"wikibase-entity-summary-wbsetdescription-set": "Zmieniono opis [$2]",
 	"wikibase-entity-summary-wbsetdescription-remove": "Usunięto opis [$2]",
-	"wikibase-entity-summary-wbsetaliases-set": "Ustawiono [$2] {{PLURAL:$1|alias|aliasy|aliasów}}",
+	"wikibase-entity-summary-wbsetaliases-set": "Ustawiono [$2] {{PLURAL:$1|alias|aliasy}}",
 	"wikibase-entity-summary-wbsetaliases-add-remove": "Dodano i usunięto {{PLURAL:$1|alias|aliasy}} [$2]",
 	"wikibase-entity-summary-wbsetaliases-add": "Dodano {{PLURAL:$1|alias|aliasy}} [$2]",
 	"wikibase-entity-summary-wbsetaliases-remove": "Usunięto {{PLURAL:$1|alias|aliasy}} [$2]",
-	"wikibase-entity-summary-wbsetaliases-update": "Zaktualizowano [$2] {{PLURAL:$1|alias|aliasy|aliasów}}",
+	"wikibase-entity-summary-wbsetaliases-update": "Zaktualizowano [$2] {{PLURAL:$1|alias|aliasy}}",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Zmieniono etykietę, opis i aliasy dla [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add": "Dodano link do [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "Dodano link z odznakami do [$2]",

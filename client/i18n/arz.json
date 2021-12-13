@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ghaly"
+			"Ghaly",
+			"HitomiAkane"
 		]
 	},
 	"tooltip-t-wikibase": "الربط بعنصر مرتبط ف مستودع البيانات",
@@ -9,10 +10,12 @@
 	"wikibase-dataitem": "عنصر {{WBREPONAME}}",
 	"wikibase-editlinks": "عدل الوصلات",
 	"wikibase-editlinkstitle": "تعديل الروابط ما بين اللغات",
+	"wikibase-linkitem-addlinks": "ضيف لينكات",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "تخبية",
 	"wikibase-rc-hide-wikidata-show": "عرض",
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "تعديل {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "التعديلات اللى اصلها من {{WBREPONAME}}.",
 	"wikibase-otherprojects": "مشاريع تانيه"
 }

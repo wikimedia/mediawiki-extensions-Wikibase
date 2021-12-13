@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Leonfd1992"
+		]
+	},
+	"tooltip-t-wikibase": "Süpüshii a'ttalee epe'ipajaanüka eere outkajain atüjayaakalu'u",
+	"wikibase-comment-update": "Awanajaanüsü wane süpüshii tüü {{WBREPONAME}}",
+	"wikibase-dataitem": "Süpüshii tüü {{WBREPONAME}}",
+	"wikibase-editlinks": "Anaataa e'ttaaleekalirua",
+	"wikibase-editlinkstitle": "Anaataa tü a'ttaleekalu'u kojuyaka anüikii",
+	"wikibase-linkitem-addlinks": "Akoo’omüinjaa a'ttaleekalu'u",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Ounjulaa",
+	"wikibase-rc-hide-wikidata-show": "Ee'iyataa",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Anaataa tüü {{WBREPONAME}}",
+	"wikibase-otherprojects": "Sulu'u waneeyan aa'innajatü"
+}

@@ -1,13 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Midnight Gambler"
+			"Midnight Gambler",
+			"Iohanen"
 		]
 	},
-	"wikibase-editlinks": "Links beoorbeite",
+	"tooltip-t-wikibase": "Link zum ferbunne Objekt im Daterepositorium",
+	"wikibase-comment-update": "Das {{WBREPONAME}}-Objekt wurd geannrd",
+	"wikibase-dataitem": "{{WBREPONAME}}-Dateobjekt",
+	"wikibase-editlinks": "Links beaarvete",
+	"wikibase-editlinkstitle": "Links uff Artikel in annre Sproche beaarvete.",
+	"wikibase-linkitem-addlinks": "Links adizioneere",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "Ausblenne",
 	"wikibase-rc-hide-wikidata-show": "Zeich",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-eoorbeite"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-Beaarbetung",
+	"wikibase-otherprojects": "In annre Projekte"
 }

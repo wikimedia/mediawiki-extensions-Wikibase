@@ -3,7 +3,8 @@
 		"authors": [
 			"Chrumps",
 			"InternerowyGołąb",
-			"Matma Rex"
+			"Matma Rex",
+			"Kareyac"
 		]
 	},
 	"apihelp-wbcreateclaim-description": "Tworzy stwierdzenia Wikibase.",
@@ -46,6 +47,7 @@
 	"apihelp-wbsearchentities-param-language": "Wyszukaj w tym języku.",
 	"apihelp-wbsearchentities-param-strictlanguage": "Czy wyłączyć język pomocniczy",
 	"apihelp-wbsearchentities-param-limit": "Maksymalna liczba wyników",
+	"apihelp-query+entityterms-example-item": "Uzyskaj etykietę i aliasy elementu Q84.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Kod języka.",
 	"apihelp-query+wbsearch-param-search": "Wyszukaj ten tekst.",
 	"apihelp-query+wbsearch-param-language": "Wyszukaj w tym języku.",

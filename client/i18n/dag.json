@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Alhaj Darajaati",
+			"Amire80",
+			"Dhee jah",
+			"Dnshitobu",
+			"Hidrash",
+			"Masssly",
+			"Shahadusadik"
+		]
+	},
+	"wikibase-comment-update": "{{WBREPONAME}} Bini ŋɔ taɣimi",
+	"wikibase-dataitem": "{{WBREPONAME}} bɛlinli",
+	"wikibase-editlinks": "Malimi soya nim ŋɔ niŋ",
+	"wikibase-editlinkstitle": "Malimi bala din kpɛri tabini soya n niŋ",
+	"wikibase-linkitem-addlinks": "Pahimi soya",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Sɔɣama",
+	"wikibase-rc-hide-wikidata-show": "Wuhima",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} maliniŋ",
+	"wikibase-otherprojects": "Tuunshɛŋa ni"
+}

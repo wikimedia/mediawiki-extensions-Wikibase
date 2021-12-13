@@ -14,7 +14,8 @@
 			"Upendradutt93",
 			"Vivek Rai",
 			"Wikiuser13",
-			"రహ్మానుద్దీన్"
+			"రహ్మానుద్దీన్",
+			"Abijeet Patro"
 		]
 	},
 	"wikibase-entity": "इकाई",
@@ -170,5 +171,6 @@
 	"content-model-wikibase-query": "विकिबैस क्वारी",
 	"action-property-create": "गुण निर्मित करें",
 	"right-property-create": "गुण निर्मित करें",
-	"wikibase-pageinfo-subscription-none": "कोई नहीं"
+	"wikibase-pageinfo-subscription-none": "कोई नहीं",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "रद्द करें"
 }

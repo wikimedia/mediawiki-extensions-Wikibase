@@ -6,6 +6,8 @@
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "وڪيپيڊيا",
+	"datatypes-type-monolingualtext": "يڪ-لساني متن",
+	"datatypes-type-multilingualtext": "گهڻ-لساني متن",
 	"datatypes-type-wikibase-item": "جزو",
 	"wikibase-entity-summary-wbsetdescription-remove": "[$2] تشريح ھٽائي",
 	"wikibase-entity-summary-wbsetsitelink-remove": "[$2] ڏانھن ڳنڍڻو ھٽايو ويو"

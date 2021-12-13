@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Yupik"
+		]
+	},
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|muuttâs|muttâz|muttsed}}",
+	"wikibase-editlinks": "Muuʹtt liiŋkid",
+	"wikibase-editlinkstitle": "Muuʹtt ǩiõlikõskksaž liiŋkid",
+	"wikibase-linkitem-addlinks": "Lââʹzzet liiŋkid",
+	"wikibase-linkitem-input-site": "Ǩiõll:",
+	"wikibase-linkitem-input-page": "Seidd:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Čiõǥǥ",
+	"wikibase-rc-hide-wikidata-show": "Čuäʹjet",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-muuttâs",
+	"wikibase-unconnectedpages-submit": "Čuäʹjet seeidaid",
+	"wikibase-pageswithbadges-submit": "Čuäʹjet seeidaid",
+	"wikibase-entityusage-submit": "Čuäʹjet seeidaid",
+	"wikibase-otherprojects": "Jeeʹres projeeʹktin",
+	"wikibase-sitelinks-sitename-columnheading": "Ǩiõll"
+}

@@ -3,7 +3,8 @@
 		"authors": [
 			"Athena in Wonderland",
 			"Fúlvio",
-			"Hamilton Abreu"
+			"Hamilton Abreu",
+			"SaldırganSincap"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Consulta os objetos de emblemas disponíveis.",
@@ -163,6 +164,7 @@
 	"apihelp-wbsearchentities-example-4": "Pesquisar \"abc\" em inglês com o limite 2 e a posição 2",
 	"apihelp-wbsearchentities-example-5": "Pesquisar \"alphabet\" em inglês omitindo o parâmetro do URL",
 	"apihelp-wbsearchentities-example-6": "Pesquisar \"Q1234\" em inglês, para corresponder ao identificador da entidade.",
+	"apihelp-query+entityterms-example-item": "Obter os rótulos e nomes alternativos do elemento Q84.",
 	"apihelp-query+wbcontentlanguages-summary": "Devolve informação sobre as línguas de conteúdo que a extensão Wikibase aceita em diferentes contextos.",
 	"apihelp-query+wbcontentlanguages-param-context": "O contexto no qual as línguas de conteúdo devem ser válidas.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Os termos (rótulo, descrição, nomes alternativos) de uma entidade.",

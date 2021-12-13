@@ -15,7 +15,9 @@
 			"VIGNERON",
 			"Verdy p",
 			"Wladek92",
-			"Yasten"
+			"Yasten",
+			"Ajeje Brazorf",
+			"Pamputt"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Recherche les éléments de badge disponibles.",
@@ -182,6 +184,9 @@
 	"apihelp-wbsearchentities-example-4": "Rechercher « abc » en anglais avec une limite de 2 et un décalage de 2",
 	"apihelp-wbsearchentities-example-5": "Rechercher « alphabet » en anglais sans le paramètre d’URL",
 	"apihelp-wbsearchentities-example-6": "Rechercher « Q1234 » en anglais, pour correspondre à l’ID de l’entité.",
+	"apihelp-query+entityterms-summary": "Obtenir les termes (étiquettes, descriptions et alias) de l'entité sur cette page.",
+	"apihelp-query+entityterms-param-terms": "Types des termes à récupérer, par exemple 'description', chacun valeur renvoyée est un tableau de chaînes ayant pour clé le type, par exemple {\"description\": [\"foo\"]}. Si non spécifié, tous les types sont renvoyés.",
+	"apihelp-query+entityterms-example-item": "Obtenir les libellés et les alias de l’élément Q84.",
 	"apihelp-query+wbcontentlanguages-summary": "Retourne des informations sur les langues de contenu acceptées par Wikibase dans les différents contextes.",
 	"apihelp-query+wbcontentlanguages-param-context": "Le contexte dans lequel les langues du contenu doivent être valides.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Les termes (étiquette, description, alias) d'une entité.",
@@ -225,7 +230,7 @@
 	"apihelp-wbsetaliases-param-add": "Liste des alias à ajouter (peut être combiné avec des <var>remove</var>)",
 	"apihelp-wbsetaliases-param-remove": "Liste des alias à enlever (peut être combiné avec <var>add</var>)",
 	"apihelp-wbsetaliases-param-set": "Une liste d'alias qui remplacera la liste actuelle (les éléments de cette liste ne peuvent être combinés ni avec <var>add</var> ni avec <var>remove</var>)",
-	"apihelp-wbsetaliases-param-language": "La langue pour laquelle fixer les alias",
+	"apihelp-wbsetaliases-param-language": "La langue pour laquelle définir les alias",
 	"apihelp-wbsetaliases-param-tags": "Modifier les balises à appliquer à la version.",
 	"apihelp-wbsetaliases-example-1": "Fixer les alias anglais pour l’entité d’ID <samp>Q1</samp> à <var>Foo</var> et <var>Bar</var>",
 	"apihelp-wbsetaliases-example-2": "Ajouter <var>Foo</var> et <var>Bar</var> à la liste des alias anglais pour l’entité d’ID <samp>Q1</samp>",
@@ -307,7 +312,7 @@
 	"apihelp-wbsetreference-example-1": "Créer une nouvelle référence pour la réclamation, avec GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF",
 	"apihelp-wbsetreference-example-2": "Initialiser la référence pour la demande ayant pour GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF et qui a un hachage de 1eb8793c002b1d9820c833d234a1b54c8e94187e",
 	"apihelp-wbsetreference-example-3": "Crée une nouvelle référence pour la demande avec GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF et insère la nouvelle référence en haut de la liste des références au lieu de l'ajouter en bas.",
-	"apihelp-wbsetsitelink-description": "Associe une page sur un wiki à un élément Wikibase,  ou supprime une telle association si elle existe déja.",
+	"apihelp-wbsetsitelink-description": "Associe une page sur un wiki à un élément Wikibase, ou supprime une telle association si elle existe déjà.",
 	"apihelp-wbsetsitelink-summary": "Associe une page sur un wiki à un élément Wikibase, ou supprime une telle association si elle existe.",
 	"apihelp-wbsetsitelink-param-id": "Identificateur de l’entité, en incluant le préfixe.\nUtiliser soit <var>id</var> soit <var>site</var> et <var>title</var> ensemble.",
 	"apihelp-wbsetsitelink-param-new": "Si elle est définie, une nouvelle entité sera créée. \nLa valeur indiquée doit correspondre au type d'entité que vous souhaitez créer.",

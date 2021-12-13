@@ -29,6 +29,7 @@
 	"wikibase-linkitem-alreadylinked": "Síðan sem þú vildir tengja við er þegar tengd við [$1 hlut] á miðlægum gagnagrunni sem tengir á [[$2]] á þessari síðu. Hlutir geta eingöngu haft eina síðu per vefsvæði. Vinsamlegast veldu aðra síðu til að tengja við.",
 	"wikibase-linkitem-close": "Loka glugganum og endurhlaða síðunni",
 	"wikibase-linkitem-failure": "Óþekkt villa kom upp þegar reynt var að tengja í síðuna.",
+	"wikibase-linkitem-failed-modify": "Gat ekki tengt síður: mistókst að sameina hluti á {{WBREPONAME}}.",
 	"wikibase-linkitem-title": "Tengja í síðu",
 	"wikibase-linkitem-linkpage": "Tengja í síðu",
 	"wikibase-linkitem-selectlink": "Vinsamlegast veldu vefsvæði og síðu sem þú vilt tengja þessa síðu við.",
@@ -109,5 +110,7 @@
 	"wikibase-client-data-bridge-dialog-title": "Breyta $1",
 	"wikibase-client-data-bridge-permissions-error": "Þú hefur ekki leyfi til að breyta þessu gildi, af eftirfarandi ástæðum {{PLURAL:$1|ástæðu|ástæðum}}:",
 	"wikibase-client-data-bridge-permissions-error-info": "Frekari upplýsingar",
-	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>Þetta gildi er í augnablikinu [$1 full verndað] á {{WBREPONAME}} og er eingöngu hægt að breyta af [$2 stjórnendum].</strong>"
+	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>Þetta gildi er í augnablikinu [$1 full verndað] á {{WBREPONAME}} og er eingöngu hægt að breyta af [$2 stjórnendum].</strong>",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Þú ert ekki skráð/ur inn",
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Viðvörun:</strong> Þú ert ekki skráð/ur inn. IP talan þín verður sýnileg opinberlega ef þú gerir einhverjar breytingar. Ef þú <strong>skráir þig inn</strong> eða <strong>býrð til aðgang</strong>, þá munu breytingarnar þínar vera auðkenndar við notandanafnið þitt, ásamt öðrum kostum."
 }

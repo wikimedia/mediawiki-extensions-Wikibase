@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80",
+			"RFScott"
+		]
+	},
+	"tooltip-t-wikibase": "Данныйсал репозиторийчи бокий элементани покто",
+	"wikibase-comment-update": "Эй дякава {{WBREPONAME}} калахачи",
+	"wikibase-dataitem": "Элемент {{WBREPONAME}}",
+	"wikibase-editlinks": "Поктова калаори",
+	"wikibase-editlinkstitle": "Хэсэ алдандолани поктова калаори",
+	"wikibase-linkitem-addlinks": "Поктова аӈговори",
+	"wikibase-linkitem-input-site": "Хэсэ:",
+	"wikibase-linkitem-input-page": "Страница:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Дяяори",
+	"wikibase-rc-hide-wikidata-show": "Ичэвэмбури",
+	"wikibase-rc-wikibase-edit-letter": "д",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} калаори",
+	"wikibase-otherprojects": "Гой проектаду"
+}

@@ -12,10 +12,11 @@
 			"Silvonen",
 			"Stryn",
 			"Valtlait",
-			"VezonThunder"
+			"VezonThunder",
+			"Moj",
+			"Yupik"
 		]
 	},
-	"wikibase-lib-desc": "Sisältää Wikibase- ja Wikibase Client -laajennuksille yhteistä toiminnallisuutta",
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Kohde poistettu",
 	"wikibase-deletedentity-property": "Ominaisuus poistettu",
@@ -97,6 +98,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "Lisätty ja poistettu [$2]-{{PLURAL:$1|alias|aliaksia}}",
 	"wikibase-entity-summary-wbsetaliases-add": "Lisätty [$2]-{{PLURAL:$1|alias|aliaksia}}",
 	"wikibase-entity-summary-wbsetaliases-remove": "Poistettu [$2]-{{PLURAL:$1|alias|aliaksia}}",
+	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Muutettu [$2]-nimeä, -kuvausta ja/tai -aliaksia",
 	"wikibase-entity-summary-wbsetsitelink-add": "Lisättiin [$2]-linkki",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "Lisätty [$2]-linkki merkkeineen",
 	"wikibase-entity-summary-wbsetsitelink-set": "Muutettu [$2]-linkki",
@@ -140,5 +142,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "Luotu uusi ominaisuus",
 	"wikibase-property-summary-wbeditentity-update": "Ominaisuus muutettu",
 	"wikibase-property-summary-wbeditentity-override": "Ominaisuus korvattu",
-	"wikibase-property-summary-special-create-property": "[$2]-ominaisuus luotiin {{PLURAL:$1|arvolla|arvoilla}}"
+	"wikibase-property-summary-special-create-property": "[$2]-ominaisuus luotiin {{PLURAL:$1|arvolla|arvoilla}}",
+	"wikibase-reference-formatter-snak-retrieved": "Haettu $1"
 }

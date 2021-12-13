@@ -6,7 +6,8 @@
 			"Ghybu",
 			"Ladsgroup",
 			"Macofe",
-			"Mirzali"
+			"Mirzali",
+			"Guherto"
 		]
 	},
 	"wikibase-entity-item": "obje",
@@ -19,11 +20,11 @@
 	"wikibase-save-inprogress": "Tê tomarkirin...",
 	"wikibase-publish-inprogress": "Tê weşandin...",
 	"wikibase-remove-inprogress": "Tê jêbirin...",
-	"wikibase-statementlistview-add": "lê zêde bike",
+	"wikibase-statementlistview-add": "nirxek lê zêde bike",
 	"wikibase-statementlistview-add-tooltip": "Nirxekî nû lê zêde bike",
-	"wikibase-statementgrouplistview-add": "lê zêde bike",
+	"wikibase-statementgrouplistview-add": "daxuyaniyek tevlî bike",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Bi zêdetir zimanan",
-	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Mîheng bike",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Eyar bike",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Herwiha tê nasîn wek",
 	"wikibase-entitytermsforlanguagelistview-description": "Danasîn",
 	"wikibase-entitytermsforlanguagelistview-label": "Etîket",
@@ -41,7 +42,7 @@
 	"wikibase-sitelink-page-edit-placeholder": "rûpel",
 	"wikibase-statementsection-statements": "Vegotin",
 	"wikibase-sitelinks": "Girêdanên malperê",
-	"wikibase-sitelinks-special": "Sîteyên din",
+	"wikibase-sitelinks-special": "Malperên din",
 	"wikibase-remove": "jê bibe",
 	"wikibase-propertypage-datatype": "Cureya daneyê",
 	"wikibase-statementview-rank-normal": "Normal rank",

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Cedric31"
+			"Cedric31",
+			"Quentí"
 		]
 	},
 	"tooltip-t-wikibase": "Ligam cap a l’element de referencial de las donadas connectadas",
@@ -15,6 +16,7 @@
 	"wikibase-linkitem-close": "Tampar la bóstia de dialòg e recargar la pagina",
 	"wikibase-linkitem-title": "Se ligar amb la pagina",
 	"wikibase-linkitem-linkpage": "Ligam amb la pagina",
+	"wikibase-linkitem-selectlink": "Seleccionatz un site e una pagina que volètz associar a aquesta.",
 	"wikibase-linkitem-input-site": "Lenga :",
 	"wikibase-linkitem-input-page": "Pagina :",
 	"wikibase-linkitem-confirmitem-text": "La pagina qu'avètz causida es ja associada a un [$1 element dins nòstre depaus de donadas central]. Confirmatz que {{PLURAL:$2|la pagina afichada çaijós es la|las paginas afichadas çaijós son las}} que volètz ligar amb aquesta pagina.",

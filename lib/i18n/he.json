@@ -9,7 +9,6 @@
 			"ערן"
 		]
 	},
-	"wikibase-lib-desc": "הפעולות המשותפות להרחבות Wikibase ו־Wikibase Client",
 	"specialpages-group-wikibase": "ויקיבייס",
 	"wikibase-deletedentity-item": "פריט מחוק",
 	"wikibase-deletedentity-property": "מאפיין מחוק",
@@ -124,7 +123,7 @@
 	"wikibase-entity-summary-wbcreateclaim-create": "נוצרה טענה",
 	"wikibase-entity-summary-wbsetclaim-update": "{{PLURAL:$3|שונתה טענה אחת|שונו $3 טענות}}",
 	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|נוצרה טענה|נוצרו טענות}}",
-	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "{{PLURAL:$4|שוּנה מבחין אחד|שונו $4 מבחינים}} של {{PLURAL:$3|טענה|טענות}}",
+	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "{{PLURAL:$4|שוּנה מבחין|שונו $4 מבחינים}} של {{PLURAL:$3|טענה|טענות}}",
 	"wikibase-entity-summary-wbsetclaim-update-references": "{{PLURAL:$4|שוּנתה הפניה אחת למקור|שונו $4 הפניות למקורות}} של {{PLURAL:$3|טענה|טענות}}",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "שונה דירוג של {{PLURAL:$3|טענה|טענות}}",
 	"wikibase-entity-summary-clientsitelink-update": "הדף הועבר מ־[ִ$3] אל [$4]",

@@ -1,10 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amara-Amaziɣ"
+			"Amara-Amaziɣ",
+			"Ayour2002",
+			"Lhoussine AIT TAYFST"
 		]
 	},
-	"wikibase-edit": "ⵙⵏⴼⵍ",
-	"wikibase-add": "ⵔⵏⵓ",
-	"wikibase-sitelinks-special": "ⴰⵏⵙⵉⵡⵏ ⵢⴰⴹⵏ"
+	"wikibase-edit": "snfl",
+	"wikibase-add": "rnu",
+	"wikibase-label-empty": "Ur illi ḥta yan yism unmil",
+	"wikibase-description-empty": "Ur ittufki ḥta yan uglam",
+	"wikibase-sitelinks-special": "Ssitat yaḍni",
+	"wikibase-statementview-rank-normal": "Adaru afrar"
 }

@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ahrada2016",
+			"Hagos",
+			"Maammee",
+			"Oromoo",
+			"Oromoom"
+		]
+	},
+	"tooltip-t-wikibase": "Mi'a kuusa data walqabatuun hidhi",
+	"wikibase-comment-update": "{{WBREPONAME}} mi'a jijjiirame",
+	"wikibase-dataitem": "Mi'a {{WBREPONAME}}",
+	"wikibase-editlinks": "Geessituuwwan gulaali",
+	"wikibase-editlinkstitle": "Geessitu afaani gara afaani gulaali",
+	"wikibase-linkitem-addlinks": "Geessituuwwan dabali",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "Dhoksi",
+	"wikibase-rc-hide-wikidata-show": "Agarsiisi",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} gulaali",
+	"wikibase-otherprojects": "Piroojektiiwwan biroon"
+}

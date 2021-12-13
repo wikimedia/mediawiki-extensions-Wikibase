@@ -2,7 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Macofe",
-			"Xuacu"
+			"Xuacu",
+			"SaldırganSincap",
+			"Tokvo"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Consulta los elementos d'insinies disponibles.",
@@ -162,6 +164,7 @@
 	"apihelp-wbsearchentities-example-4": "Buscar «abc» nel idioma inglés con una llende de 2 y una allancia de 2",
 	"apihelp-wbsearchentities-example-5": "Buscar \"alphabet\" n'inglés ensin poner el parámetru url",
 	"apihelp-wbsearchentities-example-6": "Buscar \"Q1234\" n'idioma inglés, pa casar col ID de la entidá.",
+	"apihelp-query+entityterms-example-item": "Recibir les etiquetes y alcuños del elementu Q84.",
 	"apihelp-query+wbcontentlanguages-summary": "Devuelve información sobro los idiomes de conteníu que Wikibase aceuta en distintos contestos.",
 	"apihelp-query+wbcontentlanguages-param-context": "El contestu nel que los idiomes del conteníu tendríen de ser válidos.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Los términos (etiqueta, descripción, alcuños) d'una entidá.",

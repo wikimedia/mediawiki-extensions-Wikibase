@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gadarawamo",
+			"Misteld",
+			"Samatics"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} nuzinzanlẹ",
+	"wikibase-editlinks": "Jla Nọtẹn Intẹnẹt tọn ehe do",
+	"wikibase-editlinkstitle": "Basi Jladona Nọtẹn Intẹnẹt tọn ogbe wunmẹwunmẹ tọn lẹ",
+	"wikibase-linkitem-addlinks": "Gọ Nọtẹn Intẹnẹt naẹ",
+	"wikibase-linkitem-title": "Ko yin kanṣadopọ po weda po",
+	"wikibase-linkitem-linkpage": "Ko yin kanṣadopọ po weda po",
+	"wikibase-linkitem-selectlink": "Jaale bo de nọtẹn po weda he ajlo ni yin ṣiṣakadopọ hẹ weda ehe",
+	"wikibase-linkitem-input-site": "Ogbè:",
+	"wikibase-linkitem-input-page": "Weda:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Whla",
+	"wikibase-rc-hide-wikidata-show": "Dohia",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} jlado",
+	"wikibase-otherprojects": "To azọndenamẹ devo lẹ mẹ"
+}

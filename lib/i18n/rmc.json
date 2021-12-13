@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Adehertogh"
+		]
+	},
+	"wikibase-sitelinks-wikipedia": "Wikipedija",
+	"wikibase-time-calendar-gregorian": "Gregoreskero",
+	"wikibase-time-calendar-julian": "Julianeskero",
+	"wikibase-time-precision-century": "$1. šelberš"
+}

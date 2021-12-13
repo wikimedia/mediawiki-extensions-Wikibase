@@ -8,9 +8,12 @@
 	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}} элемент",
 	"wikibase-editlinks": "Æрвитæнтæ ивын",
 	"wikibase-editlinkstitle": "Æвзæгты ’хсæн æрвитæнтæ баив",
+	"wikibase-linkitem-addlinks": "Бафтау æрвитæнтæ",
+	"wikibase-linkitem-input-site": "Æвзаг:",
+	"wikibase-linkitem-input-page": "Фарс:",
 	"wikibase-rc-hide-wikidata-hide": "Бамбæхс",
 	"wikibase-rc-hide-wikidata-show": "Равдис",
 	"wikibase-rc-wikibase-edit-letter": "Р",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ууылты конд ивд",
-	"wikibase-otherprojects": "Æндæр проекттæ"
+	"wikibase-otherprojects": "Æндæр проектты мидæг"
 }

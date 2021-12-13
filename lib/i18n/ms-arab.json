@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tofeiku"
+		]
+	},
+	"wikibase-quantitydetails-amount": "جومله",
+	"wikibase-quantitydetails-unit": "اونيت",
+	"wikibase-timedetails-time": "ماس",
+	"wikibase-timedetails-timezone": "زون ماس",
+	"wikibase-timedetails-calendar": "تقويم",
+	"wikibase-timedetails-before": "سبلوم",
+	"wikibase-timedetails-after": "سلڤس",
+	"wikibase-globedetails-longitude": "لوڠيتود",
+	"wikibase-globedetails-latitude": "لاتيتود",
+	"wikibase-sitelinks-wikipedia": "ويکيڤيديا",
+	"wikibase-snakview-snaktypeselector-somevalue": "نيلاي تيدق دکتاهوءي",
+	"wikibase-snakview-snaktypeselector-novalue": "تياد نيلاي",
+	"datatypes-type-string": "رينتيتن",
+	"datatypes-type-quantity": "کوانتيتي",
+	"datatypes-type-monolingualtext": "تيک‌س ايکابهاس",
+	"datatypes-type-multilingualtext": "تيک‌س ڤلباݢاي بهاس",
+	"datatypes-type-number": "نومبور",
+	"datatypes-type-mediawiki-title": "تاجوق ميدياويکي",
+	"datatypes-type-unknown": "تيدق دتنتوکن",
+	"datatypes-type-boolean": "بوليئن",
+	"datatypes-type-globe-coordinate": "کوءوردينت ݢيوݢرافي",
+	"datatypes-type-time": "تيتيق دالم ماس",
+	"datatypes-type-wikibase-item": "بوتير",
+	"datatypes-type-wikibase-property": "صيفت",
+	"datatypes-type-commonsMedia": "فاءيل ميديا کومنس",
+	"datatypes-type-geo-shape": "بنتوق ݢيوݢرافي",
+	"datatypes-type-tabular-data": "داتا جدوال",
+	"datatypes-type-external-id": "ڤڠنل ڤستي لوارن",
+	"datatypes-type-entity-schema": "سکيما اينتيتي",
+	"wikibase-time-precision-millennium": "$1. الاف",
+	"wikibase-time-precision-century": "$1. ابد",
+	"wikibase-time-precision-BCE": "$1 س. م."
+}

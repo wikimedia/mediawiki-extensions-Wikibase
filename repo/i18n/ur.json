@@ -133,6 +133,8 @@
 	"wikibase-itemmerge-failed-modify": "آئٹموں کا انضمام ناکام رہا، براہ مہربانی پہلے تنازعات دور کریں۔",
 	"wikibase-itemmerge-cant-merge-self": "ایک آئٹم کو خود سے مدغم نہیں کر سکتے۔",
 	"wikibase-history-title-with-label": "«$2» ($1) کا تاریخچہ ترمیم",
+	"wikibase-api-failed-save": "محفوظ ہونے میں ناکام۔",
+	"wikibase-api-permissiondenied": "آپ اس کام کو سر انجام دینے کے لیے ضروری اختیارات کے حامل نہیں۔",
 	"wikibase-restoreold": "بحال",
 	"wikibase-entity-summary-restore": "نے [[Special:Contributions/$4|{{GENDER:$4|$4}}]] کی جانب سے کی گئی ترامیم نسخہ $3 کی جانب واپس پھیر دیا۔",
 	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|تبادلۂ خیال]]) کی جانب سے کی گئی $3 ترمیم رد کر دی گئی ہے",

@@ -11,7 +11,9 @@
 			"Stryn",
 			"Valtlait",
 			"VezonThunder",
-			"Zache"
+			"Zache",
+			"01miki10",
+			"Rönttönen"
 		]
 	},
 	"wikibase-client-desc": "Wikibase-laajennuksen asiakasohjelma",
@@ -63,6 +65,7 @@
 	"wikibase-error-invalid-entity-id": "Tunniste ”$2” on järjestelmälle tuntematon. Käytä kelvollista tunnistetta.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Liian monta mw.wikibase.getReferencedEntityId-kutsua. Enintään $2 {{PLURAL:$2|kutsu|kutsua}} sallittu.",
 	"unconnectedpages": "Sivut, joita ei ole liitetty kohteisiin",
+	"unconnectedpages-summary": "Tällä sivulla listataan sivut, joita ei ole liitetty datakohteeseen (nimiavaruuksissa, jotka tukevat kohteisiin liittämistä). Luettelo on laskevassa järjestyksessä sivutunnisteen mukaan, joten uudemmat sivut ovat luettelossa ensimmäisenä.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|kieltenvälinen linkki|kieltenvälistä linkkiä}} sivulla)",
 	"wikibase-unconnectedpages-submit": "Näytä sivut",
 	"pageswithbadges": "Sivut, joissa on arvomerkkejä",
@@ -89,9 +92,10 @@
 	"wikibase-sitelinks-link-columnheading": "Linkitetty sivu",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Yhteys|Yhteydet}} {{WBREPONAME}}an",
 	"echo-pref-tooltip-wikibase-action": "Ilmoita minulle, kun joku yhdistää sivun {{GENDER:|jonka loin}} {{WBREPONAME}}-kohteeseen.",
-	"notification-header-page-connection": "Sivu <strong>$3</strong> {{GENDER:$2|yhdistettiin}} {{PLURAL:$4|-1={{WBREPONAME}}-kohteeseen|{{WBREPONAME}}-kohteeseen $4}}, joka sisältää aiheeseen liittyviä tietoja.",
-	"notification-bundle-header-page-connection": "<strong>$3</strong> ja {{PLURAL:$4|yksi muu sivu|$4 muuta sivua|100=99+ muuta sivua}} {{GENDER:$2|yhdistettiin}} {{WBREPONAME}}-kohteisiin.",
+	"notification-header-page-connection": "Sivu <strong>$3</strong> {{GENDER:$2|yhdistettiin}} {{PLURAL:$4|-1={{WBREPONAME}}-kohteeseen|{{WBREPONAME}}-kohteeseen $4}}, missä aiheeseen liittyviä tietoja voidaan kerätä.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> ja {{PLURAL:$4|yksi muu sivu|$4 muuta sivua|100=99+ muuta sivua}} {{GENDER:$2|yhdistettiin}} {{WBREPONAME}}-kohteisiin, missä aiheeseen liittyviä tietoja voidaan kerätä.",
 	"notification-link-text-view-item": "{{GENDER:$1|Näytä}} kohde",
+	"notification-subject-page-connection": "{{GRAMMAR:inessive|{{SITENAME}}}} {{GENDER:$3|luomasi}} sivu {{GENDER:$2|yhdistettiin}} {{WBREPONAME}}-kohteeseen",
 	"unresolved-property-category": "Sivut, joissa on ratkaisemattomia ominaisuuksia",
 	"connected-redirect-category": "Ohjaukset, jotka on liitetty {{WBREPONAME}}-kohteeseen",
 	"wikibase-client-data-bridge-bailout-heading": "Sen sijaan voisit tehdä seuraavasti:",

@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"ChoiChong",
+			"Chulsu463",
+			"Foavi33",
+			"Moon0319"
+		]
+	},
+	"tooltip-t-wikibase": "data de holbobure namun i jaka",
+	"wikibase-comment-update": "{{WBREPONAME}} jaka kūbulihebi",
+	"wikibase-dataitem": "{{WBREPONAME}} jaka",
+	"wikibase-editlinks": "banjibusi links",
+	"wikibase-editlinkstitle": "geren gisun i asu be halambi",
+	"wikibase-linkitem-addlinks": "asu be nonggimbi",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "somire",
+	"wikibase-rc-hide-wikidata-show": "iletulere",
+	"wikibase-rc-wikibase-edit-letter": "ton",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} banjibusi",
+	"wikibase-otherprojects": "encu arga de"
+}

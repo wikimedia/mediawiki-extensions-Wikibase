@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Батыр Комдошев"
+		]
+	},
+	"tooltip-t-wikibase": "Данныйлардыҥ репозиторийине колбоштырылган элементтиҥ тайантызы",
+	"wikibase-comment-update": "{{WBREPONAME}} элементиҥ солынганы",
+	"wikibase-dataitem": "{{WBREPONAME}} элементти",
+	"wikibase-editlinks": "Тайантыларды тӱзедери",
+	"wikibase-editlinkstitle": "Башка тилдер ортодо тайантыларын тӱзедери",
+	"wikibase-linkitem-addlinks": "Тайантылар кожоры",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Јажырар",
+	"wikibase-rc-hide-wikidata-show": "Кӧргӱзер",
+	"wikibase-rc-wikibase-edit-letter": "д",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} тӱзедӱзи",
+	"wikibase-otherprojects": "Ӧскӧ проекттерде"
+}

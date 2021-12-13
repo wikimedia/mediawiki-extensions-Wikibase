@@ -6,5 +6,11 @@
 	},
 	"apihelp-query+wbentityusage-param-prop": "Īpašības, ko pievienot rezultātam.",
 	"apihelp-query+wblistentityusage-param-prop": "Īpašības, ko pievienot rezultātam.",
-	"apihelp-query+description-example": "Iegūt lapas \"Londona\" aprakstu."
+	"apihelp-query+description-example": "Iegūt lapas \"Londona\" aprakstu.",
+	"apihelp-wbformatreference-summary": "Formatē atsauci attēlošanai lietotājiem.",
+	"apihelp-wbformatreference-param-reference": "Atsauce kā JSON objekts.",
+	"apihelp-wbformatreference-param-style": "Stils, kādā formatēt atsauci.",
+	"apihelp-wbformatreference-paramvalue-style-internal-data-bridge": "Stils, ko izmanto [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]]. Nav paredzēts vispārīgai izmantošanai.",
+	"apihelp-wbformatreference-param-outputformat": "Formāts, kādā jāatgriež rezultāts.",
+	"apihelp-wbformatreference-paramvalue-outputformat-html": "HTML marķējums."
 }

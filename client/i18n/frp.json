@@ -4,14 +4,15 @@
 			"ChrisPtDe"
 		]
 	},
-	"tooltip-t-wikibase": "Lim de vers la piéce de rèferencièl de les balyês liyêes",
+	"tooltip-t-wikibase": "Lim de vers la piéce dedens lo dèpôt de balyês liyê",
 	"wikibase-comment-update": "Piéce {{WBREPONAME}} changiêe",
 	"wikibase-comment-sitelink-add": "Lim de lengoua apondu : $1",
 	"wikibase-comment-sitelink-change": "Lim de lengoua changiê de $1 a $2",
 	"wikibase-comment-sitelink-remove": "Lim de lengoua enlevâ : $1",
 	"wikibase-dataitem": "Piéce {{WBREPONAME}}",
 	"wikibase-editlinks": "Changiér los lims",
-	"wikibase-editlinkstitle": "Changiér los lims entèrlengoua",
+	"wikibase-editlinkstitle": "Changiér los lims entèrlengoues",
+	"wikibase-linkitem-addlinks": "Apondre de lims",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Cachiér",
 	"wikibase-rc-hide-wikidata-show": "Montrar",

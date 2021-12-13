@@ -3,10 +3,10 @@
 		"authors": [
 			"Anakmalaysia",
 			"Fitoschido",
-			"Shirayuki"
+			"Shirayuki",
+			"Tofeiku"
 		]
 	},
-	"wikibase-lib-desc": "Memegang kefungsian sepunya untuk sambungan Wikibase dan Wikibase Client",
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Perkara yang terhapus",
 	"wikibase-deletedentity-property": "Sifat yang terhapus",
@@ -31,7 +31,7 @@
 	"datatypes-type-globe-coordinate": "Koordinat geografi",
 	"datatypes-type-time": "Waktu",
 	"datatypes-type-wikibase-item": "Perkara",
-	"datatypes-type-wikibase-property": "Ciri-ciri",
+	"datatypes-type-wikibase-property": "Sifat",
 	"datatypes-type-commonsMedia": "Fail media Commons",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "dalam $1 bilion tahun",

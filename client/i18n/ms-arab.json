@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tofeiku"
+		]
+	},
+	"tooltip-t-wikibase": "ڤاءوتن کبوتير ريڤوسيتوري داتا يڠ برسامبوڠ",
+	"wikibase-comment-update": "بوتير {{WBREPONAME}} دأوبه",
+	"wikibase-dataitem": "بوتير {{WBREPONAME}}",
+	"wikibase-editlinks": "سونتيڠ ڤاءوتن",
+	"wikibase-editlinkstitle": "سونتيڠ ڤاءوتن انتارا بهاس",
+	"wikibase-linkitem-addlinks": "تمبه ڤاءوتن",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "سوروق",
+	"wikibase-rc-hide-wikidata-show": "ڤاڤر",
+	"wikibase-rc-wikibase-edit-letter": "د",
+	"wikibase-rc-wikibase-edit-title": "سونتيڠ {{WBREPONAME}}",
+	"wikibase-otherprojects": "دالم ڤروجيک لاءين"
+}

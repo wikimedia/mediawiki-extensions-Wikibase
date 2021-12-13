@@ -12,7 +12,6 @@
 			"පසිඳු කාවින්ද"
 		]
 	},
-	"wikibase-lib-desc": "Té la funcionalitat comuna per les extensions de Wikibase i de Wikibase Client",
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "S’ha suprimit l’element",
 	"wikibase-deletedentity-property": "S’ha suprimit la propietat",
@@ -70,14 +69,14 @@
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 any|$1 anys}} dC",
 	"wikibase-time-precision-millennium": "mil·leni $1",
 	"wikibase-time-precision-century": "segle $1",
-	"wikibase-time-precision-10annum": "$1s",
+	"wikibase-time-precision-10annum": "dècada del $1",
 	"wikibase-time-precision-BCE": "$1 aC",
 	"wikibase-time-precision-BCE-Gannum": "$1 miliards d'anys aC",
 	"wikibase-time-precision-BCE-Mannum": "$1 milions d'anys aC",
 	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 any|$1 anys}} aC",
 	"wikibase-time-precision-BCE-millennium": "mil·leni $1 aC",
 	"wikibase-time-precision-BCE-century": "segle $1 aC",
-	"wikibase-time-precision-BCE-10annum": "$1s aC",
+	"wikibase-time-precision-BCE-10annum": "dècada del $1 aC",
 	"wikibase-snakformatter-valuetype-mismatch": "El tipus de valor «$1» no coincideix amb el tipus de propietat «$2».",
 	"wikibase-snakformatter-property-not-found": "No s'ha trobat la propietat $1. No es pot determinar el tipus de dades a utilitzar.",
 	"wikibase-snakformatter-formatting-exception": "Error de formatació: $1.",
@@ -88,6 +87,10 @@
 	"wikibase-entity-summary-wbeditentity-create": "Nova entitat creada",
 	"wikibase-entity-summary-wbeditentity-update": "Entitat modificada",
 	"wikibase-entity-summary-wbeditentity-override": "S'ha netejat una entitat",
+	"wikibase-entity-summary-wbeditentity-update-languages": "Etiqueta, descripció o àlies canviats en $3 {{PLURAL:$3|llengua|llengües}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "Etiqueta, descripció o àlies canviats en {{#commaseparatedlist: $3}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other": "Etiqueta, descripció o àlies canviats en $3 {{PLURAL:$3|llengua|llengües}}, i d'altres parts",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "Etiqueta, descripció o àlies canviats en {{#commaseparatedlist: $3}}, i d'altres parts",
 	"wikibase-entity-summary-wbsetreference": "Defineix una referència",
 	"wikibase-entity-summary-wbsetreference-add": "S'ha afegit una referència a la declaració",
 	"wikibase-entity-summary-wbsetreference-set": "S'ha canviat la referència d'una declaració",
@@ -147,5 +150,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "S'ha creat una nova propietat",
 	"wikibase-property-summary-wbeditentity-update": "S’ha canviat una propietat",
 	"wikibase-property-summary-wbeditentity-override": "S'ha eliminat una propietat",
-	"wikibase-property-summary-special-create-property": "S'ha creat una propietat [$2] amb {{PLURAL:$1|valor|valors}}"
+	"wikibase-property-summary-special-create-property": "S'ha creat una propietat [$2] amb {{PLURAL:$1|valor|valors}}",
+	"wikibase-reference-formatter-snak-retrieved": "Consulta $1"
 }

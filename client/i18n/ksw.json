@@ -4,17 +4,22 @@
 			"Jaeminlovetaejoon",
 			"Khing",
 			"Rul1902",
-			"SawJaemin"
+			"SawJaemin",
+			"Amire80"
 		]
 	},
 	"tooltip-t-wikibase": "Link to connected data repository item",
 	"wikibase-comment-update": "{{WBREPONAME}} တၢ်တမံၤလၢဆီတလဲလံ",
 	"wikibase-dataitem": "{{WBREPONAME}} တၢ်ဖိလံး",
-	"wikibase-editlinks": "အဲၣ်ဒံၣ် links",
+	"wikibase-editlinks": "အဲၣ်ဒံၣ် လ့ၣ်ခ်တဖၣ်",
 	"wikibase-editlinkstitle": "Edit interlanguage links",
+	"wikibase-addlinkstitle": "ထၢနုာ် ကျိာ်အဂၤတဖၣ်",
+	"wikibase-linkitem-addlinks": "မၤအါထီၣ် လ့ၣ်ခ်တဖၣ်",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ပာ်ဘၢ",
 	"wikibase-rc-hide-wikidata-show": "နဲၣ်ဖျါ",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} အဲးဒံၣ်"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} အဲးဒံၣ်",
+	"wikibase-pageinfo-entity-id-none": "တအိၣ်ဘၣ်",
+	"wikibase-otherprojects": "လၢ တၢ်တိာ်ကျဲၤ အဂၤတဖၣ်"
 }

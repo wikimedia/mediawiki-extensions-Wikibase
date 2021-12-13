@@ -1,10 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Menachem.Moreira"
+			"Menachem.Moreira",
+			"WikiiiTranslator"
 		]
 	},
+	"wikibase-edit": "trocar",
+	"wikibase-add": "Anyadir",
+	"wikibase-label-empty": "No deskripsión definida",
+	"wikibase-description-empty": "No hubo deskripsión definida",
 	"wikibase-sitelink-page-edit-placeholder": "pajina",
+	"wikibase-sitelinks-special": "Otros sitios",
+	"wikibase-statementview-rank-normal": "Nivel normal",
 	"wikibase-itembytitle-lookup-page": "Pajina:",
 	"wikibase-itembytitle-submit": "Bushkar",
 	"wikibase-itemdisambiguation-lookup-language": "Lengua:",

@@ -9,11 +9,13 @@
 	"wikibase-add": "тIатоха",
 	"wikibase-label-empty": "Белгало (цIи) йоацаш я",
 	"wikibase-description-empty": "Йоазонца сурт оттадар хьалдизадац",
+	"wikibase-content-language-edit-label": "Мотт:",
 	"wikibase-diffview-link": "тӏатовжамаш",
 	"wikibase-sitelinks-special": "Кхыйола сайташ",
 	"wikibase-statementview-rank-normal": "ГIаьхьа йола ранг",
 	"wikibase-entityselector-more": "кхы а",
 	"wikibase-itembytitle-lookup-page": "ОагIув:",
+	"wikibase-newentity-language": "Мотт:",
 	"wikibase-newentity-submit": "Хьакхолла",
 	"wikibase-redirectentity-submit": "Ластар"
 }

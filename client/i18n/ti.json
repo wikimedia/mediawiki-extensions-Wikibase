@@ -4,10 +4,26 @@
 			"Joanmp17"
 		]
 	},
-	"wikibase-linkitem-input-site": "ቋንቋ፥",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|ለውጢ|ለውጥታት}}",
+	"wikibase-dataitem": "ናይ {{WBREPONAME}} ውልቀ ነገር",
+	"wikibase-editlinks": "መጋጠሚታት ኣመዓራርይ",
+	"wikibase-linkitem-addlinks": "መጋጠሚታት ወስኽ",
+	"wikibase-linkitem-title": "ገጻት ኣጋጥም",
+	"wikibase-linkitem-linkpage": "ገጻት ኣጋጥም",
+	"wikibase-linkitem-input-site": "ቋንቋ፦",
 	"wikibase-linkitem-input-page": "ገጽ፦",
 	"wikibase-linkitem-confirmitem-button": "ኣረጋግጽ",
 	"wikibase-rc-hide-wikidata-hide": "ከውል",
 	"wikibase-rc-hide-wikidata-show": "ኣርእይ",
-	"wikibase-otherprojects": "ብካልኦት ፕሮጀክታት"
+	"wikibase-rc-wikibase-edit-letter": "ዳ",
+	"wikibase-rc-wikibase-edit-title": "ኣርትዖት {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "ኣርትዖታት {{WBREPONAME}}",
+	"wikibase-entityusage-submit": "ገጻት ኣርእይ",
+	"wikibase-pageinfo-description-central": "ሓፈሻዊ መግለጺ",
+	"wikibase-pageinfo-entity-usage-T": "ኣርእስቲ",
+	"wikibase-otherprojects": "ኣብ ካልኦት ፕሮጀክታት",
+	"wikibase-sitelinks-sitename-columnheading": "ቋንቋ",
+	"wikibase-client-data-bridge-permissions-error-info": "ተወሳኺ ዝርዝራት",
+	"wikibase-client-data-bridge-error-reload-bridge": "እንደገና ጸዓን",
+	"wikibase-client-data-bridge-error-go-back": "ተመለስ"
 }

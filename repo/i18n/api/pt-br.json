@@ -3,7 +3,8 @@
 		"authors": [
 			"Eduardo Addad de Oliveira",
 			"Felipe L. Ewald",
-			"Jurema Oliveira"
+			"Jurema Oliveira",
+			"Eduardoaddad"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Consulta os itens de emblema disponíveis.",
@@ -127,6 +128,7 @@
 	"apihelp-wbparsevalue-example-1": "Analisar uma sequência simples em um objeto StringValue.",
 	"apihelp-wbparsevalue-example-2": "Analisar 1994-02-08 para um objeto TimeValue com uma precisão de 9 (ano).",
 	"apihelp-wbparsevalue-example-3": "Analisar 1994-02-08 para um objeto TimeValue com uma precisão de 14 (segundo) com a validação ativada, resultando em uma falha de validação.",
+	"apihelp-wbparsevalue-example-4": "Analisa foo em um objeto de qualquer tipo de dados P123, com a validação habilitada, resultando potencialmente em uma falha de validação dependendo da entrada esperada do tipo de dados P123.",
 	"apihelp-wbremoveclaims-description": "Remover reinvindicação Wikibase.",
 	"apihelp-wbremoveclaims-summary": "Remover reinvindicação Wikibase.",
 	"apihelp-wbremoveclaims-param-baserevid": "O identificador numérico da revisão na qual será baseada a modificação.\nIsto é usado para detectar conflitos durante o gravação.",
@@ -169,6 +171,9 @@
 	"apihelp-wbsearchentities-example-4": "Pesquisa por \"abc\" em inglês com um limite de 2 e um offset de 2",
 	"apihelp-wbsearchentities-example-5": "Procure por \"alphabet\" em língua inglesa omitindo o parâmetro url",
 	"apihelp-wbsearchentities-example-6": "Pesquisar \"Q1234\" em inglês, para corresponder ao identificador da entidade.",
+	"apihelp-query+entityterms-summary": "Obter os termos (rótulos, descrições e nomes alternativos) da entidade nesta página.",
+	"apihelp-query+entityterms-param-terms": "Os tipos de termos a serem obtidos, p.ex. 'description' ,cada um retornou uma matriz de cadeias com chave por seu tipo, e. {\"description\": [\"foo\"]}. Se não for especificado, todos os tipos são devolvidos.",
+	"apihelp-query+entityterms-example-item": "Obtenha rótulos e nomes alternativos do item Q84.",
 	"apihelp-query+wbcontentlanguages-summary": "Devolve informação sobre os idiomas de conteúdo que a extensão Wikibase aceita em diferentes contextos.",
 	"apihelp-query+wbcontentlanguages-param-context": "O contexto no qual os idiomas de conteúdo devem ser válidas.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Os termos (rótulo, descrição, nomes alternativos) de uma entidade.",

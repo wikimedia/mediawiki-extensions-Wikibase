@@ -21,12 +21,12 @@
 			"Waldyrious"
 		]
 	},
-	"wikibase-lib-desc": "Contém funcionalidades comuns para as extensões Wikibase e Wikibase Client",
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Objeto eliminado",
 	"wikibase-deletedentity-property": "Propriedade eliminada",
 	"wikibase-deletedentity-query": "Consulta eliminada",
 	"wikibase-error-unexpected": "Erro: $1.",
+	"wikibase-error-unknown": "Ocorreu um erro.",
 	"wikibase-error-save-generic": "Ocorreu um erro na gravação.",
 	"wikibase-error-remove-generic": "Ocorreu um erro na remoção.",
 	"wikibase-error-save-timeout": "Estamos a ter dificuldades técnicas. Tente novamente por favor.",
@@ -96,6 +96,10 @@
 	"wikibase-entity-summary-wbeditentity-create": "Criou uma entidade nova",
 	"wikibase-entity-summary-wbeditentity-update": "Alterou uma entidade",
 	"wikibase-entity-summary-wbeditentity-override": "Limpou uma entidade",
+	"wikibase-entity-summary-wbeditentity-update-languages": "Etiqueta, descrição e/ou nomes alternativos alterados {{PLURAL:$3|numa língua|em $3 línguas}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "Etiqueta, descrição e/ou nomes alternativos alterados em {{#commaseparatedlist: $3}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other": "Etiqueta, descrição e/ou nomes alternativos alterados {{PLURAL:$3|numa língua|em $3 línguas}}, e outras partes",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "Etiqueta, descrição e/ou nomes alternativos alterados em {{#commaseparatedlist: $3}}, e outras partes",
 	"wikibase-entity-summary-wbsetreference": "Definiu uma referência",
 	"wikibase-entity-summary-wbsetreference-add": "Adicionou uma referência à alegação",
 	"wikibase-entity-summary-wbsetreference-set": "Alterou a referência da alegação",
@@ -155,5 +159,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "Criou uma propriedade nova",
 	"wikibase-property-summary-wbeditentity-update": "Alterou uma propriedade",
 	"wikibase-property-summary-wbeditentity-override": "Limpou uma propriedade",
-	"wikibase-property-summary-special-create-property": "Criou uma propriedade [$2] com {{PLURAL:$1|valor|valores}}"
+	"wikibase-property-summary-special-create-property": "Criou uma propriedade [$2] com {{PLURAL:$1|valor|valores}}",
+	"wikibase-reference-formatter-snak-retrieved": "Obtida em $1"
 }

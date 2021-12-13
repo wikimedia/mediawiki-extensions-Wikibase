@@ -14,7 +14,6 @@
 			"아라"
 		]
 	},
-	"wikibase-lib-desc": "위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 기능을 얻습니다",
 	"specialpages-group-wikibase": "위키베이스",
 	"wikibase-deletedentity-item": "삭제된 항목",
 	"wikibase-deletedentity-property": "삭제된 속성",
@@ -62,6 +61,7 @@
 	"datatypes-type-geo-shape": "지리 형태",
 	"datatypes-type-tabular-data": "표 형식 데이터",
 	"datatypes-type-external-id": "외부 식별자",
+	"datatypes-type-entity-schema": "엔티티 스키마",
 	"version-wikibase": "위키베이스",
 	"wikibase-time-calendar-gregorian": "그레고리력",
 	"wikibase-time-calendar-julian": "율리우스력",
@@ -71,6 +71,7 @@
 	"wikibase-time-precision-millennium": "$1. 천년",
 	"wikibase-time-precision-century": "$1. 세기",
 	"wikibase-time-precision-10annum": "$1년대",
+	"wikibase-time-precision-BCE": "기원전 $1",
 	"wikibase-time-precision-BCE-Gannum": "기원전 $1십억년",
 	"wikibase-time-precision-BCE-Mannum": "기원전 $1백만년",
 	"wikibase-time-precision-BCE-annum": "기원전 {{PLURAL:$1|$1년}}",
@@ -86,6 +87,8 @@
 	"wikibase-entity-summary-wbeditentity": "새 엔티티를 만듦",
 	"wikibase-entity-summary-wbeditentity-create": "새 엔티티를 만듦",
 	"wikibase-entity-summary-wbeditentity-update": "엔티티를 바꿈",
+	"wikibase-entity-summary-wbeditentity-update-languages": "$3개 {{PLURAL:$3|언어}}의 레이블, 설명 및 다른 이름을 변경함",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "{{#commaseparatedlist: $3}}에 대한 레이블, 설명 및 다른 이름을 바꿈",
 	"wikibase-entity-summary-wbsetreference": "참고를 설정함",
 	"wikibase-entity-summary-wbsetreference-add": "주장에 참고를 추가함",
 	"wikibase-entity-summary-wbsetreference-set": "주장의 참고를 바꿈",

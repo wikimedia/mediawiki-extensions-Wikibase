@@ -9,7 +9,6 @@
 			"Roarjo"
 		]
 	},
-	"wikibase-lib-desc": "Har felles funksjonalitet for Wikibase- og Wikibase Client-utvidingane",
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Sletta element",
 	"wikibase-deletedentity-property": "Sletta eigenskap",
@@ -62,6 +61,9 @@
 	"wikibase-entity-summary-wbeditentity": "Oppretta ei ny eining",
 	"wikibase-entity-summary-wbeditentity-create": "Oppretta ei ny eining",
 	"wikibase-entity-summary-wbeditentity-update": "Endra ei eining",
+	"wikibase-entity-summary-wbeditentity-update-languages": "Endra merkelapp, skildring og/eller tilleggsnamn for $3 {{PLURAL:$3|språk}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "Endra merkelapp, skildring og/eller tilleggsnamn for {{#commaseparatedlist: $3}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "Endra merkelapp, skildring og/eller tilleggsnamn for {{#commaseparatedlist: $3}}, og andre delar",
 	"wikibase-entity-summary-wbsetreference": "Sette ei kjelde",
 	"wikibase-entity-summary-wbsetreference-add": "La til referanse for utsegn",
 	"wikibase-entity-summary-wbsetlabel-add": "La til merkelapp for [$2]",

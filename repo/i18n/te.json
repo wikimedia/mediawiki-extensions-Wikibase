@@ -41,6 +41,7 @@
 	"wikibase-snakview-property-input-placeholder": "లక్షణం",
 	"wikibase-snakview-variations-somevalue-label": "తెలియని విలువ",
 	"wikibase-snakview-variations-novalue-label": "విలువ లేదు",
+	"wikibase-shortcopyrightwarning": "\"$1\" నొక్కి మీరు, [[$2|వినియోగ నియమాలను]] అంగీకరిస్తూ, $3 కింద మీ రచనను వెనక్కి తీసుకోలేని విధంగా విడుదల చేసేందుకు అంగీకరిస్తున్నారు.",
 	"wikibase-entityselector-more": "మరిన్ని",
 	"wikibase-validator-invalid": "చెల్లని విలువ",
 	"wikibase-validator-sitelink-conflict": "$1 లింకును ఈసరికే $2 అంశం వాడుతోంది. అవి సంబంధించినవి కాకపోతే, దాన్ని $2 నుండి తీసెయ్యవచ్చు. ఒకవేళ అవి సరిగ్గా అదే విషయానికి చెందినవైతే, వాటిని విలీనం చెయ్యవచ్చు.",
@@ -85,6 +86,7 @@
 	"wikibase-itemmerge-not-item": "ఇచ్చిన ఎన్టిటీ, అంశం కాదు.",
 	"wikibase-itemmerge-failed-modify": "అంశాలను విలీనం చెయ్యలేకపోయాం. ఘర్షణలేమైనా ఉంటే పరిష్కరించండి.",
 	"wikibase-itemmerge-cant-load-entity-content": "అంశాన్ని లోడు చెయ్యలేకపోయాం.",
+	"wikibase-itemmerge-cant-merge-self": "అంశాన్ని దానితోటే విలీనం చెయ్యజాలరు.",
 	"wikibase-dispatchstats-average": "సగటు",
 	"special-itemswithoutsitelinks": "సైటులింకులు లేని అంశాలు",
 	"wikibase-special-mergeitems-error-prefix": "ఆ అంశాలను విలీనం చెయ్యలేకపోయాం. కింది లోపం ఎదురైంది:",
@@ -95,5 +97,7 @@
 	"content-model-wikibase-item": "వికీబేస్ అంశం",
 	"right-item-term": "అంశపు విశేషాలను మార్చడం (లేబెళ్ళు, వివరణలు, అలియాసులు)",
 	"action-item-merge": "అంశాలను విలీనం చేసే",
-	"right-item-redirect": "అంశాల దారిమార్పులను సృష్టించడం"
+	"right-item-merge": "అంశాలను విలీనం చెయ్యడం",
+	"right-item-redirect": "అంశాల దారిమార్పులను సృష్టించడం",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "రద్దుచేయి"
 }

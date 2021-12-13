@@ -43,6 +43,7 @@
 	"wikibase-aliases-edit-placeholder-language-aware": "'nzerisce de le alias jndr'à $1",
 	"wikibase-aliases-edit-label": "Alias, separate da 'na barre verticale:",
 	"wikibase-content-language-edit-label": "Lènghe:",
+	"wikibase-content-language-edit-not-recognized-language": "'U codece d'a lènghe date non g'ave state recanusciute.",
 	"wikibase-diffview-reference": "referimende",
 	"wikibase-diffview-rank": "posizione",
 	"wikibase-diffview-rank-preferred": "Posizione preferite",

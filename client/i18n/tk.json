@@ -4,5 +4,14 @@
 			"Hanberke"
 		]
 	},
-	"wikibase-editlinks": "Çykgytlary düzet"
+	"tooltip-t-wikibase": "Birigen maglumat repozitorisi zadyna bag",
+	"wikibase-comment-update": "{{WBREPONAME}} zady üýtgedildi",
+	"wikibase-dataitem": "{{WBREPONAME}} zady",
+	"wikibase-editlinks": "Çykgytlary düzet",
+	"wikibase-editlinkstitle": "Dilara baglary düzet",
+	"wikibase-rc-hide-wikidata-hide": "Gizle",
+	"wikibase-rc-hide-wikidata-show": "Görkez",
+	"wikibase-rc-wikibase-edit-letter": "M",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} düzetmesi",
+	"wikibase-otherprojects": "Başga taslamalarda"
 }

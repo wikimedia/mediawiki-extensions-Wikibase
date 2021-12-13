@@ -7,7 +7,9 @@
 			"McDutchie",
 			"Peki01",
 			"Rockyfelle",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"Sabelöga",
+			"SaldırganSincap"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Frågar efter tillgängliga emblemföremål.",
@@ -101,8 +103,8 @@
 	"apihelp-wbgetentities-example-11": "Hämta objektet för sidan \"<var>Berlin</var>\" och webbplatsen \"<var>enwiki</var>\" efter att ha normaliserat titeln från \"<var>berlin</var>\"",
 	"apihelp-wbgetentities-example-12": "Hämta webbplatslänkar för objekt <samp>Q42</samp>",
 	"apihelp-wbgetentities-example-13": "Hämta entiteter med ID <samp>Q42</samp> och visa endast webbplatslänkar från \"<var>enwiki</var>\"",
-	"apihelp-wblinktitles-description": "Kopplar ihop två sidor på två olika wikis med ett Wikibase-objekt",
-	"apihelp-wblinktitles-summary": "Kopplar ihop två sidor på två olika wikis med ett Wikibase-objekt.",
+	"apihelp-wblinktitles-description": "Kopplar ihop två sidor på två olika wikier med ett Wikibase-objekt",
+	"apihelp-wblinktitles-summary": "Kopplar ihop två sidor på två olika wikier med ett Wikibase-objekt.",
 	"apihelp-wblinktitles-param-tosite": "En identifierare för webbplatsen på vilken sidan finns.\nAnvänds tillsammans med <var>totitle</var> för att göra en komplett webbplatslänk.",
 	"apihelp-wblinktitles-param-totitle": "Titeln på sidan att associera.\nAnvänd tillsammans med <var>tosite</var> för att göra en komplett webbplatslänk.",
 	"apihelp-wblinktitles-param-fromsite": "En identifierare för webbplatsen på vilken sidan finns.\nAnvänds tillsammans med <var>fromtitle</var> för att göra en komplett webbplatslänk.",
@@ -172,6 +174,8 @@
 	"apihelp-wbsearchentities-example-4": "Sök efter \"abc\" på engelska med en gräns på 2 och en offset på 2",
 	"apihelp-wbsearchentities-example-5": "Sök efter \"alphabet\" på engelska och utelämna URL-parametrar",
 	"apihelp-wbsearchentities-example-6": "Sök efter \"Q1234\" på engelska för att matcha entitetens ID.",
+	"apihelp-query+entityterms-summary": "Hämta termerna (etiketter, beskrivningar och alias) för entiteten på denna sida.",
+	"apihelp-query+entityterms-example-item": "Hämta etiketter och alias för objektet Q84.",
 	"apihelp-query+wbcontentlanguages-summary": "Returnerar information om innehållsspråken som Wikibase accepterar i olika sammanhang.",
 	"apihelp-query+wbcontentlanguages-param-context": "Sammanhanget som innehållsspråken bör vara giltiga.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Termerna (etikett, beskrivning, alias) för en entitet.",
@@ -182,6 +186,7 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-name": "Namnet på språket på det nuvarande språket (specificeras via parametern <var>uselang</var>), med språkfallback som tillämpas vid behov. Vanligtvis är minst ett engelskt namn känt för alla innehållsspråk som Wikibase accepterar.",
 	"apihelp-query+wbcontentlanguages-example-1": "Hämta de giltiga språkkoderna för en entitets termer.",
 	"apihelp-query+wbcontentlanguages-example-2": "Hämta de giltiga språken, med språkkod och autonym, för enspråkiga textvärden.",
+	"apihelp-query+wbdatabridgeconfig-summary": "Returnerar information som behövs för funktionen [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]].",
 	"apihelp-query+wbdatabridgeconfig-extended-description": "Detta är en intern modul. Använd den inte.",
 	"apihelp-query+wbsearch-description": "Sök efter entiteter med etiketter och alias.\nDetta kan användas som en generator till andra förfrågan.\nReturnerar den matchade termen som bör visas.",
 	"apihelp-query+wbsearch-summary": "Söker efter entiteter med etiketter och alias.",

@@ -6,7 +6,8 @@
 			"Lucas",
 			"Mirin",
 			"Robin van der Vliet",
-			"Tlustulimu"
+			"Tlustulimu",
+			"NMaia"
 		]
 	},
 	"wikibase-client-desc": "Kliento por la Vikidatuma etendaĵo",
@@ -23,7 +24,7 @@
 	"wikibase-comment-sitelink-change": "Lingva ligilo ŝanĝita de $1 al $2",
 	"wikibase-comment-sitelink-remove": "Lingva ligilo forigita: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|ŝanĝo|ŝanĝoj}}",
-	"wikibase-dataitem": "{{WBREPONAME}}‑ero",
+	"wikibase-dataitem": "Ero en {{WBREPONAME}}",
 	"wikibase-editlinks": "Redakti ligilojn",
 	"wikibase-editlinkstitle": "Redakti interlingvajn ligilojn",
 	"wikibase-addlinkstitle": "Aldoni interlingvajn ligilojn",
@@ -39,7 +40,7 @@
 	"wikibase-linkitem-confirmitem-button": "Konfirmi",
 	"wikibase-linkitem-not-loggedin-title": "Vi bezonas esti ensalutinta",
 	"wikibase-linkitem-not-loggedin": "Vi bezonas esti ensalutinta en tiu ĉi vikio kaj en  [$1 centra datuma deponejo] por uzi tiun ĉi funkcion.",
-	"wikibase-linkitem-success-link": "La paĝoj estas sukcese interligitaj. Eron, kiu enhavas la ligilojn, vi povas trovi en nia [$1 centra datuma deponejo].",
+	"wikibase-linkitem-success-link": "La paĝoj estas ligitaj. Vi povas trovi eron, kiu enhavas la ligilojn, en nia [$1 centra datuma deponejo].",
 	"limitreport-entityaccesscount": "Nombro de ŝargitaj entoj de Vikibazo",
 	"wikibase-property-notfound": "Atributo $1 ne estas trovita.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}n",
@@ -84,5 +85,9 @@
 	"notification-header-page-connection": "La paĝo <strong>$3</strong> estis {{GENDER:$2|konektita}} al {{PLURAL:$4|-1={{WBREPONAME}}-ero|la {{WBREPONAME}}-ero $4}}, kie datumoj rilataj al la temo povas esti kolektitaj.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vidi}} eron",
 	"notification-subject-page-connection": "Paĝo ĉe {{SITENAME}}, kiun vi {{GENDER:$3|kreis}}, estis {{GENDER:$2|konektita}} al {{WBREPONAME}}-ero",
+	"connected-redirect-category": "Alidirektiloj konektitaj al ero en {{WBREPONAME}}",
+	"wikibase-client-data-bridge-dialog-title": "Redakti $1",
+	"wikibase-client-data-bridge-permissions-error-info": "Pliaj detaloj",
+	"wikibase-client-data-bridge-references-heading": "Referencoj",
 	"wikibase-client-data-bridge-error-go-back": "Reveni"
 }

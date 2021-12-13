@@ -15,15 +15,16 @@
 			"Siebrand",
 			"Sjoerddebruin",
 			"Southparkfan",
-			"Wiki13"
+			"Wiki13",
+			"Romaine"
 		]
 	},
-	"wikibase-lib-desc": "Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client",
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Verwijderd item",
 	"wikibase-deletedentity-property": "Verwijderde eigenschap",
 	"wikibase-deletedentity-query": "Verwijderde zoekopdracht",
 	"wikibase-error-unexpected": "Fout: $1.",
+	"wikibase-error-unknown": "Er is een fout opgetreden.",
 	"wikibase-error-save-generic": "Kon het niet opslaan vanwege een fout.",
 	"wikibase-error-remove-generic": "Kon niet verwijderen vanwege een fout.",
 	"wikibase-error-save-timeout": "Wij ondervinden technische problemen. Probeer het opnieuw.",
@@ -147,7 +148,9 @@
 	"wikibase-item-summary-wblinktitles-connect": "Taalkoppeling naar gekoppelde pagina's toegevoegd",
 	"wikibase-property-summary-wbcreate-new": "Nieuwe eigenschap aangemaakt",
 	"wikibase-property-summary-wbeditentity-create": "Nieuwe eigenschap aangemaakt",
+	"wikibase-property-summary-wbeditentity-create-property": "Nieuwe eigenschap aangemaakt",
 	"wikibase-property-summary-wbeditentity-update": "Een eigenschap bijgewerkt",
 	"wikibase-property-summary-wbeditentity-override": "Eigenschap geleegd",
-	"wikibase-property-summary-special-create-property": "Eigenschap voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt"
+	"wikibase-property-summary-special-create-property": "Eigenschap voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt",
+	"wikibase-reference-formatter-snak-retrieved": "Opgehaald op $1"
 }

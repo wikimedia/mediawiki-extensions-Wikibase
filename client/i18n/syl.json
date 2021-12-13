@@ -4,7 +4,12 @@
 			"এম আবু সাঈদ"
 		]
 	},
+	"tooltip-t-wikibase": "ꠒꠦꠁꠐꠣ ꠞꠤꠙꠎꠤꠐꠞꠤ ꠀꠁꠐꠦꠝꠞ ꠟꠉꠦ ꠟꠣꠉꠣꠅ",
+	"wikibase-comment-update": "{{WBREPONAME}} ꠛꠖꠟꠣꠁꠟ ꠀꠁꠐꠦꠝ",
 	"wikibase-dataitem": "{{WBREPONAME}} ꠀꠁꠐꠦꠝ",
 	"wikibase-editlinks": "ꠡꠋꠎꠥꠉ ꠟꠦꠈ",
-	"wikibase-editlinkstitle": "ꠀꠘ꠆ꠔꠃꠁꠇꠤ ꠡꠋꠎꠥꠉ ꠟꠦꠈ"
+	"wikibase-editlinkstitle": "ꠀꠘ꠆ꠔꠃꠁꠇꠤ ꠡꠋꠎꠥꠉ ꠟꠦꠈ",
+	"wikibase-linkitem-addlinks": "ꠟꠤꠋꠇ ꠟꠣꠉꠣꠅ",
+	"wikibase-rc-wikibase-edit-letter": "ꠒꠤ",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ꠟꠦꠈ"
 }

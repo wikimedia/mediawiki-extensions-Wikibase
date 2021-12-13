@@ -4,7 +4,8 @@
 			"C.R.",
 			"Candalua",
 			"Macofe",
-			"Ruthven"
+			"Ruthven",
+			"SaldırganSincap"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Addimanne ncopp'a l'elemente 'n distizione",
@@ -145,6 +146,7 @@
 	"apihelp-wbsearchentities-example-1": "Circa \"abc\" dint'a lengua ngrese, ch' 'e predefinite pe' tipe e nu lemmeto",
 	"apihelp-wbsearchentities-example-2": "Circa \"abc\" dint' 'a lengua ngrese cu nu lemmeto 'e 50",
 	"apihelp-wbsearchentities-example-3": "Circa pe \"alphabet\" dint' 'a lengua ngrese pe' tipo 'e pruprietà",
+	"apihelp-query+entityterms-example-item": "Piglia etichette e aliasse 'e ll'item Q84.",
 	"apihelp-query+wbsearch-description": "Asciasse l'entità ausanno etichette e aliasse.\nChesto se putesse ausà comm'a nu generatore 'e l'ati query.\nTurnasse 'e tièrmene ncuntrate ca s'avesser'a mmustà.",
 	"apihelp-query+wbsearch-param-search": "Ascìa pe stu testo.",
 	"apihelp-query+wbsearch-param-language": "Ascìa dint'a sta lengua.",

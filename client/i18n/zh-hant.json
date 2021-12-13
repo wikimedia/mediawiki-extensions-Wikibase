@@ -102,7 +102,7 @@
 	"wikibase-entityusage-legend": "列出使用指定實體的頁面",
 	"wikibase-entityusage-entity": "實體：",
 	"wikibase-entityusage-submit": "顯示頁面",
-	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} 項目 ID",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}項目ID",
 	"wikibase-pageinfo-entity-id-none": "無",
 	"wikibase-pageinfo-description-local": "本地描述",
 	"wikibase-pageinfo-description-central": "中心描述",

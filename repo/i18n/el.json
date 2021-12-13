@@ -13,7 +13,9 @@
 			"Nikosgranturismogt",
 			"Nikosguard",
 			"Protnet",
-			"Xaris333"
+			"Xaris333",
+			"NikosLikomitros",
+			"Norhorn"
 		]
 	},
 	"wikibase-desc": "Αποθετήριο δομημένων δεδομένων",
@@ -253,5 +255,8 @@
 	"wikibase-tainted-ref-popper-text": "Η τιμή αυτής της δήλωσης έχει αλλάξει, αλλά η παραπομπή παρέμεινε η ίδια. Μπορείτε να αφαιρέσετε αυτήν την προειδοποίηση σε περίπτωση που η παραπομπή εξακολουθεί να είναι σωστή.",
 	"wikibase-tainted-ref-popper-title": "Πιθανή αναντιστοιχία παραπομπής/τιμής",
 	"wikibase-tainted-ref-popper-help-link-text": "Βοήθεια",
-	"wikibase-tainted-ref-popper-remove-warning": "Αφαίρεση προειδοποίησης"
+	"wikibase-tainted-ref-popper-remove-warning": "Αφαίρεση προειδοποίησης",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Ακύρωση",
+	"wikibase-federated-properties-leaving-site-notice-continue": "Συνεχίστε στην πηγή της Wiki",
+	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Να μην εμφανιστεί ξανά αυτό το μήνυμα"
 }

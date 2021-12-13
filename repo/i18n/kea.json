@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Quintino Lopes Castro Tavares"
+			"Quintino Lopes Castro Tavares",
+			"Waldyrious"
 		]
 	},
-	"wikibase-edit": "muda"
+	"wikibase-edit": "muda",
+	"wikibase-add": "adisiona",
+	"wikibase-sitelinks-special": "Otus websites"
 }

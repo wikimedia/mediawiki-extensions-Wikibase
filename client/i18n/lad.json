@@ -1,10 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
-			"Menachem.Moreira"
+			"Menachem.Moreira",
+			"WikiiiTranslator"
 		]
 	},
+	"wikibase-dataitem": "''ítem'' {{WBREPONAME}}",
+	"wikibase-editlinks": "Trocar enlases",
+	"wikibase-editlinkstitle": "Trocar enlases intervikis",
+	"wikibase-linkitem-addlinks": "Agregar enlases",
 	"wikibase-linkitem-input-site": "Lengua:",
 	"wikibase-linkitem-input-page": "Pajina:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "okultar",
+	"wikibase-rc-hide-wikidata-show": "Amostrar",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "trocación {{WBREPONAME}}",
+	"wikibase-otherprojects": "En otros prodjektos",
 	"wikibase-sitelinks-sitename-columnheading": "Lengua"
 }

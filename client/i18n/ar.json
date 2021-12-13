@@ -23,7 +23,9 @@
 			"ديفيد",
 			"زكريا",
 			"علاء",
-			"محمد أحمد عبد الفتاح"
+			"محمد أحمد عبد الفتاح",
+			"Forzagreen",
+			"Michel Bakni"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد Wikibase",
@@ -38,7 +40,7 @@
 	"wikibase-comment-unlink": "تم فصل ارتباط هذه الصفحة من عنصر {{WBREPONAME}}. تمت إزالة وصلات اللغة.",
 	"wikibase-comment-restore": "تم استرجاع عنصر {{WBREPONAME}} المرتبط. وصلات اللغة أعيدت.",
 	"wikibase-comment-update": "تغيير عنصر {{WBREPONAME}}",
-	"wikibase-comment-sitelink-add": "وصلة اللغة المُضافة:$1",
+	"wikibase-comment-sitelink-add": "وصلة اللغة المضافة:$1",
 	"wikibase-comment-sitelink-change": "تم تعديل وصلة اللغة من $1 إلى $2",
 	"wikibase-comment-sitelink-remove": "وصلة اللغة المُلغاة:$1",
 	"wikibase-comment-multi": "{{PLURAL:$1|لا تعديلات|تعديل|تعديلين|$1 تعديلات|$1 تعديلاً|$1 تعديل}}",
@@ -56,11 +58,11 @@
 	"wikibase-linkitem-selectlink": "رجاءً اختر موقعاً وصفحة للربط مع هذه الصفحة.",
 	"wikibase-linkitem-input-site": "اللغة:",
 	"wikibase-linkitem-input-page": "صفحة:",
-	"wikibase-linkitem-confirmitem-text": "الصفحة التي اخترتها مرتبطة بالفعل ب[$1 غنصر في المستودع المركزي للبيانات]. تيقن من أن {{PLURAL:$2|الصفحة|الصفحات}} فيما يلي {{PLURAL:$2|هي}} التي تريد ربطها بهذه الصفحة.",
+	"wikibase-linkitem-confirmitem-text": "الصفحة التي اخترتها مرتبطة بالفعل ب[$1 عنصر في المستودع المركزي للبيانات]. تيقن من أن {{PLURAL:$2|الصفحة|الصفحات}} فيما يلي {{PLURAL:$2|هي}} التي تريد ربطها بهذه الصفحة.",
 	"wikibase-linkitem-confirmitem-button": "أكّد",
 	"wikibase-linkitem-not-loggedin-title": "يتوجب عليك تسجيل الدخول",
 	"wikibase-linkitem-not-loggedin": "لاستخدام هذه الميزة لا بد من تسجيل الدخول على هذه الويكي وعلى [$1 مستودع البيانات المركزي].",
-	"wikibase-linkitem-success-link": "تم ربط الصفحات بنجاح. يمكنك العثور على العنصر الذي يحتوي على الارتباطات على [$1  مستودعنا المركزي للبيانات].",
+	"wikibase-linkitem-success-link": "رُبطت الصَّفحات بنجاح. يمكنك العثور على العنصر ذي الصَّلة في [$1  مستودعنا المركزي للبيانات].",
 	"limitreport-entityaccesscount": "عدد كيانات قاعة الويكي المحملة",
 	"wikibase-property-notfound": "لم يتم العثور على الخاصية $1.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
@@ -155,6 +157,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>أنا حدثت</strong> قيمة قديمة",
 	"wikibase-client-data-bridge-edit-decision-update-description": "القيمة السابقة كانت صحيحة في وقت سابق لكنها الآن قديمة.",
 	"wikibase-client-data-bridge-references-heading": "مراجع",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "أنت غير مسجل الدخول",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "تسجيل الدخول أو إنشاء حساب",
 	"wikibase-client-data-bridge-license-heading": "الاستخدام والترخيص",
 	"wikibase-client-data-bridge-license-body": "<p>سيؤدي تغيير هذه القيمة إلى تغييرها أيضًا في {{WBREPONAME}} وربما على الويكي بلغات أخرى.</p>\n<p> بالنقر على \"{{int:$1}}\", أنت توافق على [$2 تعليمات الاستخدام], وأنت توافق بشكل لا رجعة فيه على التخلي عن مساهمتك بموجب [$3 $4].</p>",
@@ -172,6 +175,7 @@
 	"wikibase-client-data-bridge-somevalue-error-body": "$1 معلم عليه ك<i>unknown value</i> في {{WBREPONAME}}. تعديل القيم المعلم عليها ك<i>unknown value</i> حاليا غير ممكن.",
 	"wikibase-client-data-bridge-novalue-error-head": "تعديل قيمة $1 غير مدعوم حاليًّا",
 	"wikibase-client-data-bridge-novalue-error-body": "$1 معلم عليه ك<i>no value</i> في {{WBREPONAME}}. تعديل القيم المعلم عليها ك<i>no value</i> حاليا غير ممكن.",
+	"wikibase-client-data-bridge-saving-error-heading": "تعذر حفظ التغييرات",
 	"wikibase-client-data-bridge-edit-conflict-error-heading": "كشف تضارب تحريري",
 	"wikibase-client-data-bridge-unknown-error-heading": "حدث خطأ ما",
 	"wikibase-client-data-bridge-unknown-error-message": " حدث خطأ ولا يمكن تحرير القيمة المحددة حاليا. من فضلك جرب إعادة التحميل.",
@@ -179,5 +183,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "أعد تحميل الصفحة",
 	"wikibase-client-data-bridge-reference-note": "تعديل المراجع سيكون ممكنا في {{WBREPONAME}} بعد الحفظ",
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "لم تسجل الدخول.",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "النشر دون تسجيل الدخول",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "احفظ دون تسجيل الدخول",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "تابع التعديل"
 }

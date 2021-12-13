@@ -13,6 +13,12 @@
 	"wikibase-dataitem": "Викидарий элемент",
 	"wikibase-editlinks": "ТӀатовжамаш нийсдар",
 	"wikibase-editlinkstitle": "Метташта юкъера тӀатовжамаш нийсдар",
+	"wikibase-addlinkstitle": "Интервики-тӏатовжамаш тӀатоха, ер оагӀув кхыча меттала йолча Википеден разделашкара оагӀонашца хоттаргйолаш",
+	"wikibase-linkitem-addlinks": "ТӀатовжамаш тӀатоха",
+	"wikibase-linkitem-title": "ОагӀонца бола бувзам",
+	"wikibase-linkitem-linkpage": "ДӀахотта оагӀонах",
+	"wikibase-linkitem-selectlink": "МалагӀча оагӀонна тӀатовжам оттабе безам ба хьа, хьахаржа.",
+	"wikibase-linkitem-input-site": "Мотт:",
 	"wikibase-linkitem-input-page": "ОагIув:",
 	"wikibase-linkitem-confirmitem-button": "Бакъде",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
@@ -24,5 +30,6 @@
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} тоадар",
 	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} чу даь хувцамаш.",
 	"wikibase-watchlist-show-changes-pref": "Хьахьокха хувцамаш {{grammar:genitive|{{WBREPONAME}}}} чура керда хувцамаш гойтача",
+	"wikibase-pageinfo-entity-usage": "Укх оагӀона чура {{WBREPONAME}}",
 	"wikibase-otherprojects": "Кхыйола проекташ чу"
 }

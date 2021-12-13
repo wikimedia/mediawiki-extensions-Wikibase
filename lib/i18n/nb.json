@@ -11,12 +11,12 @@
 			"Ranveig"
 		]
 	},
-	"wikibase-lib-desc": "Felles funksjonalitet for Wikibase, det strukturerte datalageret",
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Slettet element",
 	"wikibase-deletedentity-property": "Slettet egenskap",
 	"wikibase-deletedentity-query": "Slettet spørring",
 	"wikibase-error-unexpected": "Feil: $1.",
+	"wikibase-error-unknown": "En feil har oppstått.",
 	"wikibase-error-save-generic": "Kunne ikke lagre på grunn av en feil.",
 	"wikibase-error-remove-generic": "Kunne ikke fjerne på grunn av en feil.",
 	"wikibase-error-save-timeout": "Vi har tekniske problemer. Prøv igjen.",
@@ -86,6 +86,10 @@
 	"wikibase-entity-summary-wbeditentity-create": "Opprettet et nytt element",
 	"wikibase-entity-summary-wbeditentity-update": "Endret en entitet",
 	"wikibase-entity-summary-wbeditentity-override": "Rensket et element",
+	"wikibase-entity-summary-wbeditentity-update-languages": "Endret etikett, beskrivelse og/eller aliaser på $3 {{PLURAL:$3|språk}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "Endret etikett, beskrivelse og/eller aliaser på {{#commaseparatedlist: $3}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other": "Endret etikett, beskrivelse og/eller aliaser på $3 {{PLURAL:$3|språk}}, samt andre deler",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "Endret etikett, beskrivelse og/eller aliaser på {{#commaseparatedlist: $3}}, samt andre deler",
 	"wikibase-entity-summary-wbsetreference": "Satte en referanse",
 	"wikibase-entity-summary-wbsetreference-add": "La til referanse for påstand",
 	"wikibase-entity-summary-wbsetreference-set": "Endret referanse for påstand",
@@ -145,5 +149,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "Opprettet en ny egenskap",
 	"wikibase-property-summary-wbeditentity-update": "Endret en egenskap",
 	"wikibase-property-summary-wbeditentity-override": "Renset en egenskap",
-	"wikibase-property-summary-special-create-property": "Opprettet en [$2] egenskap med {{PLURAL:$1|verdi|verdiene}}"
+	"wikibase-property-summary-special-create-property": "Opprettet en [$2] egenskap med {{PLURAL:$1|verdi|verdiene}}",
+	"wikibase-reference-formatter-snak-retrieved": "Hentet $1"
 }

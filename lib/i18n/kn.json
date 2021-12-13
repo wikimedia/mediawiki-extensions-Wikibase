@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Omshivaprakash",
-			"VASANTH S.N."
+			"VASANTH S.N.",
+			"ಮಲ್ನಾಡಾಚ್ ಕೊಂಕ್ಣೊ"
 		]
 	},
-	"wikibase-error-unexpected": "ಅನಿರೀಕ್ಷಿತ ದೋಷ ಸಂಭವಿಸಿದೆ:$1.",
+	"wikibase-error-unexpected": "ದೋಷ: $1.",
 	"wikibase-quantitydetails-amount": "ಮೊತ್ತ",
 	"wikibase-timedetails-time": "ಸಮಯ",
 	"wikibase-timedetails-timezone": "ಸಮಯ ವಲಯ",

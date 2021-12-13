@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tofeiku"
+		]
+	},
+	"tooltip-t-wikibase": "Sambungan ta' keserentaan pesimponon data diam sambungan",
+	"wikibase-dataitem": "Keserentaan {{WBREPONAME}}",
+	"wikibase-editlinks": "Niuba sambungan",
+	"wikibase-editlinkstitle": "Niuba sambungan ling lain",
+	"wikibase-linkitem-addlinks": "Namba sambungan"
+}

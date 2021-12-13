@@ -3,7 +3,8 @@
 		"authors": [
 			"CoderSI",
 			"Nataev",
-			"Sociologist"
+			"Sociologist",
+			"Malikxan"
 		]
 	},
 	"wikibase-after-page-move-queued": "Ushbu sahifa bilan bogʻliq [$1 Wikidata bandi] bir oz vaqtdan soʻng avtomatik oʻzgartiriladi.",
@@ -16,13 +17,30 @@
 	"wikibase-linkitem-linkpage": "Sahifa bogʻlash",
 	"wikibase-linkitem-selectlink": "Ushbu sahifaga bogʻlamoqchi boʻlgan sayt va sahifa nomlarini tanlang.",
 	"wikibase-linkitem-input-site": "Til:",
-	"wikibase-linkitem-confirmitem-text": "Siz tanlagan sahifa [$1 markazlashtirilgan maʼlumotlar repozitoriyimizning bandi] bilan bogʻlandi. Iltimos, quyida koʻrsatilgan sahifalar orasida ushbu sahifaga bogʻlanishi keraklari borligini tasdiqlang.",
+	"wikibase-linkitem-input-page": "Sahifa:",
+	"wikibase-linkitem-confirmitem-text": "Siz tanlagan sahifa [$1 markazlashtirilgan maʼlumotlar repozitoriyimizning bandi] bilan bogʻlandi. Iltimos, quyida koʻrsatilgan {{PLURAL:$2|sahifalar}} orasida ushbu sahifaga bogʻlanishi keraklari borligini tasdiqlang.",
+	"wikibase-linkitem-confirmitem-button": "Tasdiqlash",
 	"wikibase-linkitem-success-link": "Sahifalar bogʻlandi. Bogʻlamalar toʻplami saqlanadigan bandni [$1 markazlashtirilgan maʼlumot repozitoriyimizda] topishingiz mumkin.",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}}ga oid tahrirlarni $1",
 	"wikibase-rc-hide-wikidata-hide": "yashir",
 	"wikibase-rc-hide-wikidata-show": "Koʻrsat",
 	"wikibase-rc-show-wikidata-pref": "Yangi oʻzgarishlar roʻyxatida Vikimaʼlumotlarga oid tahrirlarni koʻrsatish",
 	"wikibase-rc-wikibase-edit-title": "Vikimaʼlumotlarga oid tahrir",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}ga oid tahrir",
 	"wikibase-replicationnote": "Iltimos, eʼtibor bering, oʻzgarishlar barcha viki-loyihalarda koʻrsatilishi uchun bir necha daqiqa kerak boʻlishi mumkin",
-	"wikibase-watchlist-show-changes-pref": "Vikimaʼlumotlarga oid tahrirlar kuzatuv roʻyxatimda koʻrsatilsin"
+	"wikibase-watchlist-show-changes-pref": "Vikimaʼlumotlarga oid tahrirlar kuzatuv roʻyxatimda koʻrsatilsin",
+	"wikibase-unconnectedpages-submit": "Sahifalarni koʻrsatish",
+	"wikibase-pageswithbadges-submit": "Sahifalarni koʻrsatish",
+	"wikibase-entityusage-submit": "Sahifalarni koʻrsatish",
+	"wikibase-pageinfo-description-local": "Mahalliy tavsif",
+	"wikibase-pageinfo-description-central": "Markaziy tavsif",
+	"wikibase-pageinfo-entity-usage-T": "Sarlavha",
+	"wikibase-pageinfo-entity-usage-C": "Baʼzi bayonotlar",
+	"wikibase-pageinfo-entity-usage-C-with-modifier": "Bayonot: $1",
+	"wikibase-otherprojects": "Boshqa loyihalarda",
+	"wikibase-otherprojects-beta-message": "Boshqa loyihalar yonqutisi",
+	"wikibase-sitelinks-sitename-columnheading": "Til",
+	"wikibase-sitelinks-link-columnheading": "Bogʻlangan sahifa",
+	"wikibase-client-data-bridge-permissions-error-info": "Batafsil tafsilotlar",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Kirmasdan turib tahrirlash"
 }

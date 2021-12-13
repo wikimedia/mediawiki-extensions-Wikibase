@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Anugrahgori",
+			"Slaia"
+		]
+	},
+	"tooltip-t-wikibase": "Khai-khai ba ngawua repositori data si fakhai",
+	"wikibase-comment-update": "{{WBREPONAME}} ngawua tefabö'ö",
+	"wikibase-dataitem": "Ngawua {{WBREPONAME}}",
+	"wikibase-editlinks": "Bulö'ö khai-khai",
+	"wikibase-editlinkstitle": "Bulö'ö khai-khai antarbahasa",
+	"wikibase-linkitem-addlinks": "Nönö khai-khai",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Bini'ö",
+	"wikibase-rc-hide-wikidata-show": "Oroma'ö",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Famulö'ö {{WBREPONAME}}",
+	"wikibase-otherprojects": "Ba halöŵö tanö bö'ö"
+}

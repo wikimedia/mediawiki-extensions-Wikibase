@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Xbony2"
+			"Xbony2",
+			"Irati"
 		]
 	},
-	"wikibase-editlinks": "stika le urli"
+	"wikibase-editlinks": "stika le urli",
+	"wikibase-rc-wikibase-edit-letter": "S"
 }

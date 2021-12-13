@@ -8,6 +8,8 @@
 	"wikibase-dataitem": " Nú {{WBREPONAME}} tɔn",
 	"wikibase-editlinks": "Ɖyɔ́ wémá ɖɔn ɖokpɔ́ kan lɛ",
 	"wikibase-editlinkstitle": "Ɖyɔ́ wémá ɖɔn ɖokpɔ́ kan lɛ",
+	"wikibase-linkitem-addlinks": "Gɔ wéma kan lɛ nan",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-show": "Xlɛ",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}Núwlǎnwlǎn"

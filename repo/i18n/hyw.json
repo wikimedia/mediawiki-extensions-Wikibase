@@ -4,7 +4,8 @@
 			"ArmenBakkalian",
 			"Azniv Stepanian",
 			"Kareyac",
-			"Rajemian"
+			"Rajemian",
+			"Շահէն"
 		]
 	},
 	"wikibase-entity-item": "Նիւթ",
@@ -34,7 +35,7 @@
 	"wikibase-sitelinks-special": "Այլ կայքեր",
 	"wikibase-remove": "հեռացնել",
 	"wikibase-statementview-rank-normal": "Բնական կարգաստիճան",
-	"wikibase-entityselector-more": "աւելին",
+	"wikibase-entityselector-more": "աւելի",
 	"wikibase-itembytitle-submit": "Որոնել",
 	"wikibase-gotolinkedpage-submit": "‎Յառաջանալ",
 	"wikibase-itemdisambiguation-lookup-language": "Լեզուի կարգանիշ․",
@@ -51,5 +52,6 @@
 	"wikibase-dispatchstats-oldest-change": "Հնագոյն",
 	"wikibase-dispatchstats-newest-change": "Նորագոյն",
 	"wikibase-dispatchstats-pos": "Դիրք",
-	"wikibase-listproperties-submit": "Գտնել"
+	"wikibase-listproperties-submit": "Գտնել",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Կրկին փորձէ"
 }

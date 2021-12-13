@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Migraghvi"
+			"Migraghvi",
+			"Mugerganets"
 		]
 	},
 	"wikibase-edit": "дуьзар хъувун",
-	"wikibase-add": "Алава авун"
+	"wikibase-add": "Алава авун",
+	"wikibase-sitelinks-special": "Маса сайтар"
 }

@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Boesenbergia",
+			"NoiX180"
+		]
+	},
+	"tooltip-t-wikibase": "Pranala ghâbây manyambhung butèr dâ' lombhung data",
+	"wikibase-comment-update": "Butèr {{WBREPONAME}} aobâ",
+	"wikibase-dataitem": "Butèr è {{WBREPONAME}}",
+	"wikibase-editlinks": "Beccè' interwiki",
+	"wikibase-editlinkstitle": "Beccè' pranala interwiki",
+	"wikibase-linkitem-addlinks": "Tambâ interwiki",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Pangètek",
+	"wikibase-rc-hide-wikidata-show": "Angghâlaghi",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Beccè'an {{WBREPONAME}}",
+	"wikibase-otherprojects": "Ḍâlem proyèk laèn"
+}

@@ -2,15 +2,17 @@
 	"@metadata": {
 		"authors": [
 			"Kandar",
-			"Uchup19"
+			"Uchup19",
+			"RXerself"
 		]
 	},
 	"tooltip-t-wikibase": "Tutumbu ka item gudang data anu nyambung",
 	"wikibase-comment-update": "Item {{WBREPONAME}} robah",
 	"wikibase-comment-sitelink-remove": "Tutumbu basa dipupus: $1",
-	"wikibase-dataitem": "Item {{WBREPONAME}}",
+	"wikibase-dataitem": "Butir di {{WBREPONAME}}",
 	"wikibase-editlinks": "Édit tutumbu",
 	"wikibase-editlinkstitle": "Édit tutumbu antarbasa",
+	"wikibase-linkitem-addlinks": "Nambah tutumbu",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Sumputkeun",
 	"wikibase-rc-hide-wikidata-show": "Témbongkeun",

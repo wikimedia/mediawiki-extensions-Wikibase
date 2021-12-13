@@ -48,6 +48,7 @@
 	"wikibase-newentity-language": "Linguo:",
 	"wikibase-newentity-label": "Etiketo:",
 	"wikibase-newentity-description": "Deskripto:",
+	"wikibase-newentity-submit": "Kreez",
 	"wikibase-setlabel-label": "Etiketo:",
 	"wikibase-setdescription-label": "Deskripto:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Deskripto:",
@@ -56,6 +57,8 @@
 	"wikibase-modifyterm-language": "Linguala kodexo:",
 	"wikibase-itemmerge-permissiondenied": "Nepermisata.",
 	"special-redirectentity": "Ridirektar ento",
+	"wikibase-restoreold": "restaurar",
+	"wikibase-entity-summary-restore": "Restaurar revizuro $3 da [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Desfacar revizo $3 da [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|skribar mesajo]])",
 	"wikibase-noentity": "Ca ento ne existas. Vu povas [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} searchar l'etiketi asociita] por deskovrar ube ol povas renkontresar.",
 	"wikibase-pageinfo-subscription-none": "Nula"

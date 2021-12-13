@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Midnight Gambler"
+			"Midnight Gambler",
+			"Iohanen"
 		]
 	},
-	"wikibase-edit": "beoorbeite"
+	"wikibase-edit": "beaarvete",
+	"wikibase-add": "adizioneere",
+	"wikibase-description-empty": "Keen Beschreivung forhande",
+	"wikibase-sitelinks-special": "Annre Websites",
+	"wikibase-statementview-rank-normal": "Normaler rank"
 }

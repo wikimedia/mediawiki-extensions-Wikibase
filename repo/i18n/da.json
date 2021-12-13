@@ -14,7 +14,9 @@
 			"Saederup92",
 			"Sarrus",
 			"Steenth",
-			"아라"
+			"아라",
+			"Antonla",
+			"MuratTheTurkish"
 		]
 	},
 	"wikibase-desc": "Struktureret datalager",
@@ -71,7 +73,7 @@
 	"wikibase-sitelinks": "Liste over sider, der er knyttet til dette emne",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|værdi|værdier}}",
 	"wikibase-sitelinks-empty": "Der er ingen sider der er tilknyttet dette emne.",
-	"wikibase-sitelinks-special": "Andre websteder",
+	"wikibase-sitelinks-special": "Andre hjemmesider",
 	"wikibase-remove": "fjern",
 	"wikibase-undo-title": "Fjern redigering af \"$1\"",
 	"wikibase-restore-title": "Genskaber tidligere version af \"$1\"",
@@ -107,7 +109,7 @@
 	"wikibase-shortcopyrightwarning": "Ved at klikke på \"$1\", accepterer du [[$2|brugervilkårene]], og du accepterer uigenkaldeligt at frigive dit bidrag under $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Jeg accepterer disse vilkår for mine fremtidige redigeringer. Vis ikke denne meddelelse igen.",
 	"wikibase-entityselector-more": "mere",
-	"wikibase-anonymouseditwarning": "Advarsel: Du er ikke logget på.\nDin IP-adresse vil blive registreret i redigeringshistorikken for denne enhed.",
+	"wikibase-anonymouseditwarning": "Advarsel: Du er ikke logget på. Din [https://da.wikipedia.org/wiki/Internetadresse IP-adresse] vil være offentligt synlig, hvis du foretager ændringer. Hvis du <strong>[[Special:UserLogin|logger ind]]</strong> eller <strong>[[Special:CreateAccount|opretter en konto]]</strong>, tilskrives dine ændringer et brugernavn, blandt andre fordele.",
 	"wikibase-anonymouseditwarning-heading": "Du er ikke logget på",
 	"wikibase-anonymouseditwarning-dismiss-button": "Rediger uden at logge på",
 	"wikibase-move-error": "Du kan ikke flytte sider, der er i data-navnerummet, og du kan ikke flytte sider ind i det.",
@@ -296,5 +298,7 @@
 	"action-property-create": "oprette egenskaber",
 	"right-property-create": "Oprette egenskaber",
 	"wikibase-pageinfo-subscription-none": "Ingen",
-	"wikibase-tainted-ref-popper-help-link-text": "Hjælp"
+	"wikibase-tainted-ref-popper-help-link-text": "Hjælp",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Annullér",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Prøv igen"
 }

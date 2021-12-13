@@ -1,10 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
-			"Carlos Cristia"
+			"Carlos Cristia",
+			"Willtron"
 		]
 	},
+	"wikibase-comment-update": "Se modificó un elemento de {{WBREPONAME}}",
+	"wikibase-dataitem": "Elemento de {{WBREPONAME}}",
+	"wikibase-editlinks": "Modificar os enlaces",
+	"wikibase-editlinkstitle": "Editar enlaces interlingüisticos",
+	"wikibase-linkitem-addlinks": "Adhibir enlaces",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Amagar",
 	"wikibase-rc-hide-wikidata-show": "Amostrar",
-	"wikibase-rc-wikibase-edit-letter": "D"
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Edición de {{WBREPONAME}}"
 }

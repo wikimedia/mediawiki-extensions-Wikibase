@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Joetaras"
+			"Joetaras",
+			"S4b1nuz E.656"
 		]
 	},
 	"wikibase-client-desc": "Cliende pe l'estenzione Uicchibase",
@@ -37,7 +38,7 @@
 	"wikibase-linkitem-confirmitem-button": "Conferme",
 	"wikibase-linkitem-not-loggedin-title": "Tu è abbesògne de trasè",
 	"wikibase-linkitem-not-loggedin": "Tu a trasè sus a sta uicchi e jndr'à l'[archivije date cendralizzate $1] pe ausà sta funzione.",
-	"wikibase-linkitem-success-link": "Le pàggene onne state collegate. Puè acchià l'elemende ca tène le collegaminde jndr'à l'[archivije date cendralizzate $1] nuèstre",
+	"wikibase-linkitem-success-link": "Le pàggene onne state collegate. Puè acchià l'elemende ca tène le collegaminde jndr'à l'[$1 archivije date cendralizzate] nuèstre.",
 	"limitreport-entityaccesscount": "Numere de endità uicchibase carecate",
 	"wikibase-property-notfound": "Probbietà $1 non acchiate.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
@@ -111,6 +112,18 @@
 	"connected-redirect-category-desc": "Sta categorije elenghe le redirezionaminde ca sò collegate a 'nu elemende {{WBREPONAME}}.",
 	"wikibase-client-data-bridge-dialog-title": "Cange $1",
 	"wikibase-client-data-bridge-permissions-error": "Tu non ge tìne 'u permesse pe cangià stu valore, pe {{PLURAL:$1|stu mutive|ste mutive}}:",
+	"wikibase-client-data-bridge-permissions-error-info": "Cchiù dettaglie",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "Errore de permesse scanusciute",
 	"wikibase-client-data-bridge-references-heading": "Refereminde",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Non gè trasute",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Cange senza trasè",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Tràse o reggistrate",
+	"wikibase-client-data-bridge-license-heading": "Ause e licenze",
+	"wikibase-client-data-bridge-bailout-heading": "'Nvece tu putisse fà ste cose:",
+	"wikibase-client-data-bridge-saving-error-heading": "'Mbossibbele reggistrà le cangiaminde",
+	"wikibase-client-data-bridge-edit-conflict-error-heading": "Acchiate conflitte de cangiaminde",
+	"wikibase-client-data-bridge-error-reload-bridge": "Recareche",
+	"wikibase-client-data-bridge-error-reload-page": "Recareche 'a pàgene",
+	"wikibase-client-data-bridge-error-go-back": "Tuèrne rrete",
 	"wikibase-client-data-bridge-error-retry-save": "Pruève a reggistrà arrete"
 }

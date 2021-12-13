@@ -2,17 +2,18 @@
 	"@metadata": {
 		"authors": [
 			"Gott wisst",
-			"JJohnson1701"
+			"JJohnson1701",
+			"Heahwrita"
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}} wiht wæs andwended",
 	"wikibase-dataitem": "{{WBREPONAME}} wiht",
-	"wikibase-editlinks": "Ādihtan hlencan",
-	"wikibase-editlinkstitle": "Ādihtan hlencan betweox sprǣcum",
+	"wikibase-editlinks": "Adiht hlencan",
+	"wikibase-editlinkstitle": "Adiht hlencan betweox spræcum",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "Hȳdan",
-	"wikibase-rc-hide-wikidata-show": "Īwan",
+	"wikibase-rc-hide-wikidata-hide": "Hyd",
+	"wikibase-rc-hide-wikidata-show": "Yw",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Ādihtung of {{WBREPONAME}}",
-	"wikibase-otherprojects": "Ōðru weorc"
+	"wikibase-rc-wikibase-edit-title": "Adihtung of {{WBREPONAME}}",
+	"wikibase-otherprojects": "Oðru weorc"
 }

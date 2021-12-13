@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Asenoner",
-			"Starladin"
+			"Starladin",
+			"Fierodelveneto"
 		]
 	},
 	"tooltip-t-wikibase": "Culegamënt cul element culegà de l archive di dac",
@@ -10,11 +11,17 @@
 	"wikibase-dataitem": "{{WBREPONAME}} element",
 	"wikibase-editlinks": "Muda i links",
 	"wikibase-editlinkstitle": "Muda i links te autra rujenedes",
+	"wikibase-linkitem-addlinks": "Jonté liam",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ascogn",
 	"wikibase-rc-hide-wikidata-show": "Mostra",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Mudazion fata sun {{WBREPONAME}}",
+	"unconnectedpages": "Plates nia colegades",
+	"pageswithbadges": "Plates cun plachëtes",
+	"entityusage": "Utilisaziun dl'entité",
+	"wikibase-pageinfo-entity-id": "ID elemënt Wikidata",
+	"wikibase-pageinfo-entity-usage": "Entites Wikidata utilisades sön chësta plata",
 	"wikibase-otherprojects": "Te d'atri proiec",
 	"wikibase-client-data-bridge-permissions-error-info": "Deplü detais",
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Fal nia conesciü de autorisaziun",

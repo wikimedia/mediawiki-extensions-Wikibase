@@ -15,6 +15,7 @@
 	},
 	"wikibase-edit": "խմբագրել",
 	"wikibase-publish": "հրապարակել",
+	"wikibase-cancel": "չեղարկել",
 	"wikibase-add": "ավելացնել",
 	"wikibase-publish-inprogress": "հրապարակվում է...",
 	"wikibase-statementlistview-add": "ավելացնել",
@@ -38,5 +39,9 @@
 	"wikibase-validator-no-validators": "Արգելված է",
 	"wikibase-newitem-fieldset": "Ստեղծել նոր տարր",
 	"wikibase-newentity-language": "Լեզու.",
-	"special-mergeitems": "Միացնել երկու տարր"
+	"special-mergeitems": "Միացնել երկու տարր",
+	"wikibase-listproperties-submit": "Գտնել",
+	"wikibase-listdatatypes-multilingualtext-head": "Բազմալեզու տեքստ",
+	"wikibase-entity-save-error-heading": "Ինչ-որ սխալ է տեղի ունեցել",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Չեղարկել"
 }

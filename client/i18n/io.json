@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Joao Xavier"
+			"Joao Xavier",
+			"JSantos"
 		]
 	},
 	"tooltip-t-wikibase": "Ligilo ad arkivo de la datumaro",
-	"wikibase-after-page-move": "Vua chanjo nune povas [$1 videsar en la ligilo por altra idiomi de {{WBREPONAME}}]. Voluntez verifikar se to fakte eventis.",
+	"wikibase-after-page-move": "Vua chanjo nun povas [$1 videsar en la ligilo por altra idiomi de {{WBREPONAME}}]. Voluntez verifikar se to fakte eventis.",
 	"wikibase-after-page-delete": "Omna ligili ad ica pagino mustis modifikesir a la [nova asociita pagino $1, en {{WBREPONAME}}], e nula pagino existanta mustas havar ligili a la pagino efacinda. Voluntez verifikar se to fakte eventas.",
 	"wikibase-comment-linked": "Artiklo {{WBREPONAME}} ligesis ad ica pagino.",
 	"wikibase-comment-update": "{{WBREPONAME}} artiklo chanjita",
@@ -28,12 +29,13 @@
 	"wikibase-linkitem-confirmitem-text": "La pagino quon vu selektis ja esas asociita ad [$1 artiklo en nia centrala receveyo di artikli]. Voluntez verifikar se {{PLURAL:$2|la pagino|la pagini}} montrita infre {{PLURAL:$2|esas|esas}} {{PLURAL:$2|la pagino quon|la pagini quin}} vu deziras ligilar a la nuna pagino.",
 	"wikibase-linkitem-confirmitem-button": "Konfirmez",
 	"wikibase-linkitem-success-link": "La pagini ligesis. Vu povas trovar la pagino qua kontenas la ligili en nia [$1 centrala receveyo di datumi].",
+	"limitreport-entityaccesscount": "Quanto di enti de Wikibase portita",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Celar",
 	"wikibase-rc-hide-wikidata-show": "Montrar",
 	"wikibase-rc-show-wikidata-pref": "Montrez la redakti che {{WBREPONAME}} en la recenta chanji",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Redakto en {{WBREPONAME}}",
+	"wikibase-rc-wikibase-edit-title": "Redakto che {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-label": "Redakturi che {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-description": "Redakturi qui originis de {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Atencez ke povas bezonar kelka minuti, til ke omna modifiki divenos videbla en omna Wiki.",
@@ -48,12 +50,18 @@
 	"wikibase-pageinfo-entity-id-none": "Nulo",
 	"wikibase-pageinfo-entity-usage": "Enti de {{WBREPONAME}} uzita en ca pagino",
 	"wikibase-pageinfo-entity-usage-S": "Ligilo a retsituo",
+	"wikibase-pageinfo-entity-usage-D": "Kelka deskriptadi",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "Deskriptado: $1",
+	"wikibase-pageinfo-entity-usage-T": "Titulo",
+	"wikibase-pageinfo-entity-usage-C": "Kelka deklari",
+	"wikibase-pageinfo-entity-usage-C-with-modifier": "Deklaro: $1",
 	"wikibase-otherprojects": "En altra projeti",
 	"wikibase-sitelinks-sitename-columnheading": "Linguo",
 	"wikibase-sitelinks-link-columnheading": "Pagino ligata",
 	"notification-header-page-connection": "La pagino <strong>$3</strong> {{GENDER:$2|konektesis}} a {{PLURAL:$4|-1=-1 ula elemento {{WBREPONAME}}|la listo {{WBREPONAME}} # $4}}, qua kontenas dati relativa a ca temo.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> ed {{PLURAL:$4|altra pagino|$4 altra pagini|100=plu kam 99 altra pagini}} {{GENDER:$2|ligesis}} ad artikli de {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vidar}} detalo",
+	"connected-redirect-category": "Ridirekti ligita ad artiklo de {{WBREPONAME}}",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Vu ne facis 'log in'",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Redaktar sen facar 'log in'",
 	"wikibase-client-data-bridge-unknown-error-heading": "Ulo faliis",

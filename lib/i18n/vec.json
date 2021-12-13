@@ -5,7 +5,6 @@
 			"Fierodelveneto"
 		]
 	},
-	"wikibase-lib-desc": "Contien le funsionalità comuni par le estension Wikibase e Wikibase Client.",
 	"specialpages-group-wikibase": "Archivio Wikibase",
 	"wikibase-error-unexpected": "Xe capità un eror inprevisto.",
 	"wikibase-error-save-generic": "Calcosa xe 'ndà storto sercando de salvar, quindi po darse che le to modifiche le sia 'ndà perse.",
@@ -16,7 +15,7 @@
 	"wikibase-error-ui-edit-conflict": "Ghe xe un conflito de edizion. Par piaser ricarica e salva da novo.",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-snakview-snaktypeselector-somevalue": "valor sconossùo",
-	"wikibase-snakview-snaktypeselector-novalue": "nissun valor",
+	"wikibase-snakview-snaktypeselector-novalue": "nisun vałore",
 	"datatypes-type-wikibase-item": "Elemento",
 	"datatypes-type-commonsMedia": "File multimediale su Commons",
 	"version-wikibase": "Wikibase",

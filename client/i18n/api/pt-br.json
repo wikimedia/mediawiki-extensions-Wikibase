@@ -3,12 +3,20 @@
 		"authors": [
 			"Eduardo Addad de Oliveira",
 			"Felipe L. Ewald",
-			"Guycn2"
+			"Guycn2",
+			"Eduardoaddad"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "Retorna todas as IDs de entidade usadas nas páginas fornecidas.",
 	"apihelp-query+wbentityusage-summary": "Retorna todas as IDs de entidade usadas nas páginas fornecidas.",
 	"apihelp-query+wbentityusage-param-aspect": "Apenas retorna IDs de entidades que usaram esse aspecto.",
+	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Os sitelinks da entidade são usados",
+	"apihelp-query+wbentityusage-paramvalue-aspect-L": "O rótulo da entidade é usado",
+	"apihelp-query+wbentityusage-paramvalue-aspect-D": "A descrição da entidade é usada",
+	"apihelp-query+wbentityusage-paramvalue-aspect-T": "O título da página local correspondente à entidade é usado",
+	"apihelp-query+wbentityusage-paramvalue-aspect-C": "Statements from the entity are used",
+	"apihelp-query+wbentityusage-paramvalue-aspect-X": "Todos os aspectos de uma entidade são ou podem ser usados",
+	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Outra coisa sobre a entidade é usada. Atualmente, isso implica o uso de instrução e alias e verificações explícitas da existência da entidade.",
 	"apihelp-query+wbentityusage-param-prop": "Propriedades a adicionar ao resultado.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Se ativado, o url da entidade será adicionado",
 	"apihelp-query+wbentityusage-param-entities": "Somente uma página de retorno que usou essas entidades.",
@@ -28,7 +36,6 @@
 	"apihelp-query+pageterms-summary": "Obtenha os termos {{WBREPONAME}} (geralmente rótulos, descrições e alias) associados a uma página por meio de um link de site. Na própria página da entidade, os termos são usados diretamente. Advertência: em uma wiki de repo, este módulo só funciona diretamente em páginas de entidades, não em páginas conectadas a uma entidade por meio de um link de site. Isso pode mudar no futuro.",
 	"apihelp-query+pageterms-example-simple": "Obtenha todos os termos associados à página 'London', no idioma do usuário.",
 	"apihelp-query+pageterms-example-label-en": "Obtenha rótulos e alias associados à página 'London', em inglês.",
-	"apihelp-query+pageterms-example-item": "Obtenha rótulos e nomes alternativos do item Q84.",
 	"apihelp-query+pageterms-param-terms": "Os tipos de termos a serem obtidos, p.ex. 'description' ,cada um retornou uma matriz de cadeias com chave por seu tipo, e. {\"description\": [\"foo\"]}. Se não for especificado, todos os tipos são devolvidos.",
 	"apihelp-query+description-summary": "Obter uma descrição breve, isto é, um subtítulo que explica o objetivo da página de destino.",
 	"apihelp-query+description-extended-description": "A descrição é texto simples, numa única linha, mas em tudo o resto arbitrária (possivelmente incluindo elementos de HTML puro, que também devem ser interpretados como texto simples). Não pode ser usada no interior de HTML sem escapes!",

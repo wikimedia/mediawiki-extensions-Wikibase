@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Adehertogh"
+		]
+	},
+	"tooltip-t-wikibase": "Linkos so prephandel le elementos kaj šaj thoves o data",
+	"wikibase-comment-update": "Te visarel le elementos pre {{WBREPONAME}}",
+	"wikibase-dataitem": "{{WBREPONAME}} elementos",
+	"wikibase-editlinks": "Te pikerel o linki",
+	"wikibase-editlinkstitle": "Te pikerel o maškaročhibakere linki",
+	"wikibase-linkitem-addlinks": "Te prithovel linki",
+	"wikibase-linkitem-input-site": "Čhib:",
+	"wikibase-linkitem-input-page": "Sera:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Te garuvel",
+	"wikibase-rc-hide-wikidata-show": "Te sikhavel",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} pikeriben",
+	"wikibase-otherprojects": "Andre aver projekti"
+}

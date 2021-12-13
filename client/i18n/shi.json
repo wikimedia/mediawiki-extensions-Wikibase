@@ -1,14 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amara-Amaziɣ"
+			"Amara-Amaziɣ",
+			"Ayour2002",
+			"Lhoussine AIT TAYFST"
 		]
 	},
-	"wikibase-editlinks": "ⵙⵏⴼⵍ ⵉⵍⵉⵏⴽⵏ",
-	"wikibase-editlinkstitle": "ⵙⵏⴼⵍ ⵉⵍⵉⵏⴽⵏ ⵉⴳⵔⵓⵜⵍⴰⵢⵏ",
+	"tooltip-t-wikibase": "Zdi i isfka imzadayen",
+	"wikibase-comment-update": "{{WBREPONAME}} item tbuddel",
+	"wikibase-dataitem": "{{WBREPONAME}} taɣawsa",
+	"wikibase-editlinks": "Snfl ilikn",
+	"wikibase-editlinkstitle": "Snfl ilinkn igrutlayn",
+	"wikibase-linkitem-addlinks": "Zayd izdayn nɣ ilikitn",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "ⵙⵙⵏⵜⵍ",
-	"wikibase-rc-hide-wikidata-show": "ⵎⵍ",
-	"wikibase-rc-wikibase-edit-letter": "ⴷ",
-	"wikibase-rc-wikibase-edit-title": "ⴰⵙⵏⴼⵍ ⵏ {{WBREPONAME}}"
+	"wikibase-rc-hide-wikidata-hide": "Ḥbu",
+	"wikibase-rc-hide-wikidata-show": "Ml",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Asnfl n {{WBREPONAME}}",
+	"wikibase-otherprojects": "Ɣ isnta yaḍni"
 }

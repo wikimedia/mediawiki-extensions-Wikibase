@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"RFScott"
+		]
+	},
+	"wikibase-edit": "калаори",
+	"wikibase-add": "ноӈгиори",
+	"wikibase-label-empty": "Гэрбуни аба",
+	"wikibase-description-empty": "Описание абани",
+	"wikibase-sitelinks-special": "Гой сайт",
+	"wikibase-statementview-rank-normal": "Нормальнай ранг"
+}

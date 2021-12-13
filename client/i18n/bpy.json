@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Usingha"
+		]
+	},
+	"tooltip-t-wikibase": "আইটেম ভান্ডারগত তিলকরিসি লিঙ্ক",
+	"wikibase-dataitem": "{{WBREPONAME}} আইটেম",
+	"wikibase-editlinks": "লিঙ্কহানি পতা",
+	"wikibase-editlinkstitle": "আন্তঃঠারর লিংকহানি পতা",
+	"wikibase-linkitem-addlinks": "লিঙ্কহানি তিলকর",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "আরুম",
+	"wikibase-rc-hide-wikidata-show": "দেহাদে",
+	"wikibase-rc-wikibase-edit-letter": "হ",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} পতা"
+}

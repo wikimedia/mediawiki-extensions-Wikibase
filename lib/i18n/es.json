@@ -16,10 +16,10 @@
 			"Pegna",
 			"Savh",
 			"Vivaelcelta",
-			"YoViajo"
+			"YoViajo",
+			"MarcoAurelio"
 		]
 	},
-	"wikibase-lib-desc": "Contiene una funcionalidad común para las extensiones Wikibase y cliente de Wikibase.",
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Elemento borrado",
 	"wikibase-deletedentity-property": "Propiedad borrada",
@@ -142,6 +142,7 @@
 	"wikibase-item-summary-wbcreate-new": "Se creó un nuevo elemento",
 	"wikibase-item-summary-wbeditentity": "Se creó un nuevo elemento",
 	"wikibase-item-summary-wbeditentity-create": "Se creó un nuevo elemento",
+	"wikibase-item-summary-wbeditentity-create-item": "Nuevo elemento creado",
 	"wikibase-item-summary-wbeditentity-update": "Se cambió un elemento",
 	"wikibase-item-summary-wbeditentity-override": "Se sobreescribió un elemento",
 	"wikibase-item-summary-wblinktitles-create": "Se creó este elemento para conectar las páginas",

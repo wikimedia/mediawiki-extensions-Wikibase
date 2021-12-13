@@ -6,7 +6,8 @@
 			"Autokrator",
 			"Laurentianus",
 			"Lesgles",
-			"UV"
+			"UV",
+			"Demetrius Talpa"
 		]
 	},
 	"tooltip-t-wikibase": "Nexus ad rem repositorii Vicibasis",
@@ -14,6 +15,7 @@
 	"wikibase-dataitem": "Res {{WBREPONAME}}",
 	"wikibase-editlinks": "Nexus recensere",
 	"wikibase-editlinkstitle": "Nexus inter linguas recensere",
+	"wikibase-linkitem-addlinks": "Nexus addere",
 	"wikibase-rc-hide-wikidata": "$1 Vicidata",
 	"wikibase-rc-hide-wikidata-hide": "Celare",
 	"wikibase-rc-hide-wikidata-show": "Monstrare",

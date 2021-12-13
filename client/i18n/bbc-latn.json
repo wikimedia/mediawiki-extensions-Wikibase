@@ -1,11 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
-			"Salomo Christian Hutajulu"
+			"Salomo Christian Hutajulu",
+			"Herryz",
+			"NoiX180"
 		]
 	},
+	"tooltip-t-wikibase": "Pautan to item repositori data na tarsambung",
 	"wikibase-comment-update": "Diubah do item {{WBREPONAME}}",
+	"wikibase-dataitem": "{{WBREPONAME}} ulaula",
+	"wikibase-editlinks": "Patota tautan",
+	"wikibase-editlinkstitle": "Patota angka tautan antarparhataan",
+	"wikibase-linkitem-addlinks": "Tamba tautan",
 	"wikibase-rc-hide-wikidata": "$1{{WBREOPNAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Bunihon",
+	"wikibase-rc-hide-wikidata-show": "Patudu",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Patota {{WBREPONAME}}",
 	"wikibase-otherprojects": "Di bagasan siulaon na asing"
 }

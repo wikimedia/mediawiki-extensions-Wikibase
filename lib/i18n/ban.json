@@ -2,8 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Joseagush",
-			"NoiX180"
+			"NoiX180",
+			"Chinamoonroll"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Wikipédia"
+	"wikibase-sitelinks-wikipedia": "Wikipédia",
+	"wikibase-snakview-snaktypeselector-novalue": "tan paaji",
+	"wikibase-item-summary-wbeditentity-create-item": "Ngardi item anyar"
 }

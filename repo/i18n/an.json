@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Carlos Cristia"
+			"Carlos Cristia",
+			"Willtron"
 		]
 	},
-	"wikibase-edit": "editar"
+	"wikibase-edit": "editar",
+	"wikibase-add": "adhibir",
+	"wikibase-label-empty": "Encara no s'ha definiu garra etiqueta",
+	"wikibase-sitelinks-special": "Atros sitios"
 }

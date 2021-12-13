@@ -66,6 +66,7 @@
 	"apihelp-wbsearchentities-param-limit": "Максимальное количество результатов",
 	"apihelp-wbsearchentities-example-1": "Искать «abc» на английском языке, со значениями по умолчанию для типа и ограничений",
 	"apihelp-wbsearchentities-example-2": "Искать «abc» на английском языке с ограничением в 50 результатов",
+	"apihelp-query+entityterms-example-item": "Получить обозначения и псевдонимы элемента Q84.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Код языка",
 	"apihelp-query+wbsearch-param-search": "Искать данный текст.",
 	"apihelp-query+wbsearch-param-language": "Искать на этом языке.",

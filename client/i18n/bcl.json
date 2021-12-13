@@ -3,7 +3,8 @@
 		"authors": [
 			"Filipinayzd",
 			"Geopoet",
-			"ShimunUfesoj"
+			"ShimunUfesoj",
+			"Kunokuno"
 		]
 	},
 	"tooltip-t-wikibase": "Takod sa konektadong bagay sa repositoryo nin datus",
@@ -11,6 +12,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} na bagay",
 	"wikibase-editlinks": "Liwaton an mga takod",
 	"wikibase-editlinkstitle": "Liwaton an mga interlengwaheng takod",
+	"wikibase-linkitem-addlinks": "Magdagdag pa nin mga links",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Itago",
 	"wikibase-rc-hide-wikidata-show": "Ipatanaw",
