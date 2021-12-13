@@ -20,6 +20,7 @@ export const parameters = {
 };
 
 extendVueEnvironment(
+	Vue,
 	{
 		resolve( languageCode ) {
 			switch ( languageCode ) {
