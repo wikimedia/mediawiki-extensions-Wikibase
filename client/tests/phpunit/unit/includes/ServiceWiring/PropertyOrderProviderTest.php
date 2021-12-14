@@ -38,6 +38,8 @@ class PropertyOrderProviderTest extends ServiceWiringTestCase {
 		}
 
 		$this->serviceContainer->expects( $this->once() )
+			->method( 'getWikiPageFactory' );
+		$this->serviceContainer->expects( $this->once() )
 			->method( 'getTitleFactory' )
 			->willReturn( $this->createMock( TitleFactory::class ) );
 

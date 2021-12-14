@@ -34,7 +34,10 @@ class WikiPagePropertyOrderProviderTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testGetPropertyOrder( $text, $expected ) {
 		$this->makeWikiPage( 'MediaWiki:Wikibase-SortedProperties', $text );
-		$instance = new WikiPagePropertyOrderProvider( Title::newFromTextThrow( 'MediaWiki:Wikibase-SortedProperties' ) );
+		$instance = new WikiPagePropertyOrderProvider(
+			$this->getServiceContainer()->getWikiPageFactory(),
+			Title::newFromTextThrow( 'MediaWiki:Wikibase-SortedProperties' )
+		);
 		$propertyOrder = $instance->getPropertyOrder();
 		$this->assertSame( $expected, $propertyOrder );
 	}
@@ -51,6 +54,7 @@ class WikiPagePropertyOrderProviderTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetPropertyOrder_pageDoesNotExist() {
 		$instance = new WikiPagePropertyOrderProvider(
+			$this->getServiceContainer()->getWikiPageFactory(),
 			Title::newFromTextThrow( 'MediaWiki:WikiPagePropertyOrderProviderTest-DoesNotExist' )
 		);
 		$propertyOrder = $instance->getPropertyOrder();

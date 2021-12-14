@@ -3,9 +3,9 @@ declare( strict_types=1 );
 
 namespace Wikibase\Lib\Store;
 
+use MediaWiki\Page\WikiPageFactory;
 use TextContent;
 use Title;
-use WikiPage;
 
 /**
  * Base class for ItemOrderProviders, that parse the item order from a
@@ -16,15 +16,23 @@ use WikiPage;
  */
 class WikiPageItemOrderProvider implements ItemOrderProvider {
 
+	/** @var WikiPageFactory */
+	private $wikiPageFactory;
+
 	/**
 	 * @var Title
 	 */
 	private $pageTitle;
 
 	/**
+	 * @param WikiPageFactory $wikiPageFactory
 	 * @param Title $pageTitle page name the ordered item list is on
 	 */
-	public function __construct( Title $pageTitle ) {
+	public function __construct(
+		WikiPageFactory $wikiPageFactory,
+		Title $pageTitle
+	) {
+		$this->wikiPageFactory = $wikiPageFactory;
 		$this->pageTitle = $pageTitle;
 	}
 
@@ -50,7 +58,7 @@ class WikiPageItemOrderProvider implements ItemOrderProvider {
 	 * @throws ItemOrderProviderException
 	 */
 	protected function getItemOrderWikitext(): ?string {
-		$wikiPage = WikiPage::factory( $this->pageTitle );
+		$wikiPage = $this->wikiPageFactory->newFromTitle( $this->pageTitle );
 
 		$pageContent = $wikiPage->getContent();
 

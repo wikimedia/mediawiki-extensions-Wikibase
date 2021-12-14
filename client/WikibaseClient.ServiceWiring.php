@@ -710,7 +710,7 @@ return [
 
 	'WikibaseClient.PropertyOrderProvider' => function ( MediaWikiServices $services ): CachingPropertyOrderProvider {
 		$title = $services->getTitleFactory()->newFromTextThrow( 'MediaWiki:Wikibase-SortedProperties' );
-		$innerProvider = new WikiPagePropertyOrderProvider( $title );
+		$innerProvider = new WikiPagePropertyOrderProvider( $services->getWikiPageFactory(), $title );
 
 		$url = WikibaseClient::getSettings( $services )->getSetting( 'propertyOrderUrl' );
 
