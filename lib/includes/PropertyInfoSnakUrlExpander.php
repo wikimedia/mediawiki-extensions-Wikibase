@@ -17,6 +17,15 @@ use Wikimedia\Assert\Assert;
 class PropertyInfoSnakUrlExpander implements SnakUrlExpander {
 
 	/**
+	 * URL protocols (schemes) that are allowed in the pattern.
+	 */
+	private const ALLOWED_PROTOCOLS = [
+		'https' => null,
+		'http' => null,
+		'tel' => null,
+	];
+
+	/**
 	 * @var PropertyInfoProvider
 	 */
 	private $infoProvider;
@@ -47,6 +56,12 @@ class PropertyInfoSnakUrlExpander implements SnakUrlExpander {
 
 		$id = wfUrlencode( $value->getValue() );
 		$url = str_replace( '$1', $id, $pattern );
+
+		$parsedUrl = wfParseUrl( $url );
+		if ( !$parsedUrl || !array_key_exists( $parsedUrl['scheme'], self::ALLOWED_PROTOCOLS ) ) {
+			return null;
+		}
+
 		return $url;
 	}
 
