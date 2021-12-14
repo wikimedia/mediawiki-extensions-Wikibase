@@ -29,6 +29,7 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 		$p3 = new PropertyId( 'P3' );
 		$p4 = new PropertyId( 'P4' );
 		$p5 = new PropertyId( 'P5' );
+		$p6 = new PropertyId( 'P6' );
 		$p523 = new PropertyId( 'P523' );
 
 		$infoLookup = new MockPropertyInfoLookup( [
@@ -46,6 +47,10 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 			$p5->getSerialization() => [
 				PropertyInfoLookup::KEY_DATA_TYPE => 'string',
 				PropertyInfoLookup::KEY_FORMATTER_URL => 'http://acme.info/foo#$1',
+			],
+			$p6->getSerialization() => [
+				PropertyInfoLookup::KEY_DATA_TYPE => 'string',
+				PropertyInfoLookup::KEY_FORMATTER_URL => 'javascript:alert()//$1',
 			],
 		] );
 
@@ -88,6 +93,11 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 				$infoProvider,
 				new PropertyValueSnak( $p5, $value ),
 				'http://acme.info/foo#X%26Y'
+			],
+			'pattern with illegal protocol' => [
+				$infoProvider,
+				new PropertyValueSnak( $p6, $value ),
+				null,
 			],
 		];
 	}
