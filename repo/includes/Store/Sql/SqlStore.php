@@ -318,6 +318,7 @@ class SqlStore implements Store {
 			$this->entitySource,
 			$services->getPermissionManager(),
 			$services->getWatchlistManager(),
+			$services->getWikiPageFactory(),
 			WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb()
 		);
 		$store->registerWatcher( $this->getEntityStoreWatcher() );

@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Store\Sql;
 use ActorMigration;
 use CommentStoreComment;
 use InvalidArgumentException;
+use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
@@ -85,6 +86,9 @@ class WikiPageEntityStore implements EntityStore {
 	 */
 	private $watchlistManager;
 
+	/** @var WikiPageFactory */
+	private $wikiPageFactory;
+
 	/**
 	 * @var RepoDomainDb
 	 */
@@ -99,6 +103,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param DatabaseEntitySource $entitySource
 	 * @param PermissionManager $permissionManager
 	 * @param WatchlistManager $watchlistManager
+	 * @param WikiPageFactory $wikiPageFactory
 	 * @param RepoDomainDb $repoDomainDb
 	 */
 	public function __construct(
@@ -110,6 +115,7 @@ class WikiPageEntityStore implements EntityStore {
 		DatabaseEntitySource $entitySource,
 		PermissionManager $permissionManager,
 		WatchlistManager $watchlistManager,
+		WikiPageFactory $wikiPageFactory,
 		RepoDomainDb $repoDomainDb
 	) {
 		$this->contentFactory = $contentFactory;
@@ -126,6 +132,7 @@ class WikiPageEntityStore implements EntityStore {
 		$this->permissionManager = $permissionManager;
 
 		$this->watchlistManager = $watchlistManager;
+		$this->wikiPageFactory = $wikiPageFactory;
 		$this->db = $repoDomainDb;
 	}
 
@@ -219,7 +226,7 @@ class WikiPageEntityStore implements EntityStore {
 			throw new StorageException( 'Entity could not be mapped to a page title!' );
 		}
 
-		return WikiPage::factory( $title );
+		return $this->wikiPageFactory->newFromTitle( $title );
 	}
 
 	/**
