@@ -358,7 +358,9 @@ class AffectedPagesFinder {
 		}
 
 		// bulk-load the page IDs into the LinkCache
-		$this->linkBatchFactory->newLinkBatch( $titles )->execute();
+		$linkBatch = $this->linkBatchFactory->newLinkBatch( $titles );
+		$linkBatch->setCaller( __METHOD__ );
+		$linkBatch->execute();
 
 		$usagesPerPage = [];
 		foreach ( $titles as $title ) {

@@ -48,7 +48,8 @@ class ReferencedEntitiesDataUpdater implements EntityParserOutputUpdater {
 	}
 
 	private function addLinksToParserOutput( ParserOutput $parserOutput, array $entityIds ) {
-		$linkBatch = new LinkBatch();
+		$linkBatch = new LinkBatch(); // TODO inject LinkBatchFactory
+		$linkBatch->setCaller( __METHOD__ );
 
 		foreach ( $entityIds as $entityId ) {
 			$linkBatch->addObj( $this->entityTitleLookup->getTitleForId( $entityId ) );
