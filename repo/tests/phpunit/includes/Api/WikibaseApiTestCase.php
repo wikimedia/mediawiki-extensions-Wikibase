@@ -18,7 +18,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Normalization\DataValueNormalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
-use WikiPage;
 
 /**
  * @license GPL-2.0-or-later
@@ -95,7 +94,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		foreach ( $activeHandles as $handle => $id ) {
 			$title = $this->getTestEntityTitle( $handle );
 
-			$page = WikiPage::factory( $title );
+			$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 			$page->doDeleteArticleReal( 'Test reset', $user );
 			EntityTestHelper::unRegisterEntity( $handle );
 		}

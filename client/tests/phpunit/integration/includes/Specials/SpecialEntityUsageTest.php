@@ -12,7 +12,6 @@ use TrivialLanguageConverter;
 use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikimedia\Rdbms\FakeResultWrapper;
-use WikiPage;
 
 /**
  * @covers \Wikibase\Client\Specials\SpecialEntityUsage
@@ -203,7 +202,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 			foreach ( $rows as $row ) {
 				if ( $table === 'page' ) {
 					$title = Title::newFromTextThrow( $row['page_title'], $row['page_namespace'] );
-					$page = WikiPage::factory( $title );
+					$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 					$page->insertOn( $this->db, $row['page_id'] );
 				} else {
 					$this->db->insert( $table, $row );

@@ -11,7 +11,6 @@ use RequestContext;
 use Title;
 use Wikibase\Client\Api\ApiListEntityUsage;
 use Wikibase\Client\WikibaseClient;
-use WikiPage;
 
 /**
  * @covers \Wikibase\Client\Api\ApiListEntityUsage
@@ -56,7 +55,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 
 			foreach ( $rows as $row ) {
 				$title = Title::newFromTextThrow( $row['page_title'], $row['page_namespace'] );
-				$page = WikiPage::factory( $title );
+				$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 				$page->insertOn( $this->db, $row['page_id'] );
 			}
 		}

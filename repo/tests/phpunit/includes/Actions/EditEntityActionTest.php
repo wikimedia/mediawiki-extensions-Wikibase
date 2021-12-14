@@ -895,7 +895,7 @@ class EditEntityActionTest extends ActionTestCase {
 		if ( is_string( $page ) ) {
 			$page = $this->getTestItemPage( $page );
 		} elseif ( $page instanceof Title ) {
-			$page = WikiPage::factory( $page );
+			$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $page );
 		}
 
 		$this->adjustRevisionParam( 'undo', $params, $page );

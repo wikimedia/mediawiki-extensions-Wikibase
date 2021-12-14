@@ -6,7 +6,6 @@ namespace Wikibase\Lib\Tests\Store;
 use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\Lib\Store\WikiPageItemOrderProvider;
-use WikiPage;
 use WikitextContent;
 
 /**
@@ -41,7 +40,7 @@ class WikiPageItemOrderProviderTest extends MediaWikiIntegrationTestCase {
 
 	private function makeWikiPage( string $name, string $text ): void {
 		$title = Title::newFromTextThrow( $name );
-		$wikiPage = WikiPage::factory( $title );
+		$wikiPage = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 		$wikiPage->doUserEditContent(
 			new WikitextContent( $text ),
 			$this->getTestUser()->getUser(),
