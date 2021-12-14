@@ -6,6 +6,7 @@ use DerivativeContext;
 use Hooks;
 use IContextSource;
 use InvalidArgumentException;
+use MediaWiki\Page\WikiPageFactory;
 use RuntimeException;
 use Status;
 use Title;
@@ -15,7 +16,6 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use WikiPage;
 
 /**
  * Class to run the Mediawiki EditFilterMergedContent hook.
@@ -24,6 +24,9 @@ use WikiPage;
  * @author Addshore
  */
 class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
+
+	/** @var WikiPageFactory */
+	private $wikiPageFactory;
 
 	/**
 	 * @var EntityNamespaceLookup
@@ -41,10 +44,12 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 	private $entityContentFactory;
 
 	public function __construct(
+		WikiPageFactory $wikiPageFactory,
 		EntityNamespaceLookup $namespaceLookup,
 		EntityTitleStoreLookup $titleLookup,
 		EntityContentFactory $entityContentFactory
 	) {
+		$this->wikiPageFactory = $wikiPageFactory;
 		$this->namespaceLookup = $namespaceLookup;
 		$this->titleLookup = $titleLookup;
 		$this->entityContentFactory = $entityContentFactory;
@@ -134,7 +139,7 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 		}
 
 		$context->setTitle( $title );
-		$context->setWikiPage( WikiPage::factory( $title ) );
+		$context->setWikiPage( $this->wikiPageFactory->newFromTitle( $title ) );
 
 		return $context;
 	}
