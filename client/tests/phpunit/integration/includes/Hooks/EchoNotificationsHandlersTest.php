@@ -75,6 +75,7 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 		return new EchoNotificationsHandlers(
 			$this->repoLinker,
 			$this->namespaceChecker,
+			$this->getServiceContainer()->getRedirectLookup(),
 			$this->userOptionsManager,
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),
@@ -225,6 +226,7 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 		$handlers = new EchoNotificationsHandlers(
 			$this->repoLinker,
 			$this->namespaceChecker,
+			$this->getServiceContainer()->getRedirectLookup(),
 			$this->userOptionsManager,
 			'enwiki',
 			$enabled,

@@ -7,6 +7,7 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use EchoEvent;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\RedirectLookup;
 use MediaWiki\User\UserOptionsManager;
 use Title;
 use User;
@@ -15,7 +16,6 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\ItemChange;
-use WikiPage;
 
 /**
  * Handlers for client Echo notifications
@@ -39,6 +39,9 @@ class EchoNotificationsHandlers {
 	 * @var NamespaceChecker
 	 */
 	private $namespaceChecker;
+
+	/** @var RedirectLookup */
+	private $redirectLookup;
 
 	/**
 	 * @var UserOptionsManager
@@ -71,6 +74,7 @@ class EchoNotificationsHandlers {
 	public function __construct(
 		RepoLinker $repoLinker,
 		NamespaceChecker $namespaceChecker,
+		RedirectLookup $redirectLookup,
 		UserOptionsManager $userOptionsManager,
 		$siteId,
 		$sendEchoNotification,
@@ -78,6 +82,7 @@ class EchoNotificationsHandlers {
 	) {
 		$this->repoLinker = $repoLinker;
 		$this->namespaceChecker = $namespaceChecker;
+		$this->redirectLookup = $redirectLookup;
 		$this->userOptionsManager = $userOptionsManager;
 		$this->siteId = $siteId;
 		$this->sendEchoNotification = $sendEchoNotification;
@@ -87,12 +92,14 @@ class EchoNotificationsHandlers {
 	// TODO convert this to a proper hook handler class,
 	// register factory with services in extension JSON file
 	public static function factory(): self {
-		$settings = WikibaseClient::getSettings();
+		$services = MediaWikiServices::getInstance();
+		$settings = WikibaseClient::getSettings( $services );
 
 		return new self(
-			WikibaseClient::getRepoLinker(),
-			WikibaseClient::getNamespaceChecker(),
-			MediaWikiServices::getInstance()->getUserOptionsManager(),
+			WikibaseClient::getRepoLinker( $services ),
+			WikibaseClient::getNamespaceChecker( $services ),
+			$services->getRedirectLookup(),
+			$services->getUserOptionsManager(),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),
 			$settings->getSetting( 'repoSiteName' )
@@ -231,13 +238,11 @@ class EchoNotificationsHandlers {
 				return false;
 			}
 
-			// even if the old page is a redirect, make sure it redirects to the new title
-			if ( $oldTitle->isRedirect() ) {
-				$page = WikiPage::factory( $oldTitle );
-				$targetTitle = $page->getRedirectTarget();
-				if ( $targetTitle && $targetTitle->equals( $newTitle ) ) {
-					return false;
-				}
+			// even if the old page is a redirect, make sure it redirects to the new title (ignoring any fragments)
+			$target = $this->redirectLookup->getRedirectTarget( $oldTitle );
+			if ( $target && $target->createFragmentTarget( '' )
+					->isSameLinkAs( $newTitle->createFragmentTarget( '' ) ) ) {
+				return false;
 			}
 
 			return $newTitle;
