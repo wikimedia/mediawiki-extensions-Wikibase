@@ -192,6 +192,8 @@ This config helps by adding a bigger number to ratelimit and slow them down to a
 Value of this config determines how much the user is going to be penalized for an error in creation of entities.
 Zero means no penalty. The higher value, the heavier the penalty would be.
 
+This feature depends on MediaWiki rate limits, which require a cache to be configured.
+
 DEFAULT: 0
 
 #### sandboxEntityIds
