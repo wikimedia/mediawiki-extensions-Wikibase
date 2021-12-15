@@ -16,7 +16,7 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 		message(): string {
 			return this.$messages.get(
 				this.$messages.KEYS.ERROR_REPORT,
-				this.$bridgeConfig.issueReportingLink.replace(
+				this.rootModule.getters.issueReportingLinkConfig.replace(
 					/<body>/g,
 					encodeURIComponent( this.rootModule.getters.reportIssueTemplateBody ),
 				),

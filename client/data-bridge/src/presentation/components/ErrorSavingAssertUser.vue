@@ -61,7 +61,7 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 	},
 	computed: {
 		publishOrSave(): string {
-			return this.$bridgeConfig.usePublish ?
+			return this.rootModule.getters.config.usePublish ?
 				this.$messages.KEYS.SAVING_ERROR_ASSERTUSER_PUBLISH : this.$messages.KEYS.SAVING_ERROR_ASSERTUSER_SAVE;
 		},
 	},

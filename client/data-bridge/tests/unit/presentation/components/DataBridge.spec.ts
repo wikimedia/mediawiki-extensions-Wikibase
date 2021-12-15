@@ -26,6 +26,9 @@ describe( 'DataBridge', () => {
 		Vue.set( store, 'getters', {
 			targetLabel: { value: 'P123', language: 'zxx' },
 			targetReferences: [],
+			config: {
+				stringMaxLength: 123,
+			},
 		} );
 	} );
 
@@ -44,12 +47,10 @@ describe( 'DataBridge', () => {
 		const stringMaxLength = 200;
 		store.commit( 'setTargetValue', targetValue );
 		Vue.set( store.getters, 'targetLabel', targetLabel );
+		Vue.set( store.getters, 'config', { stringMaxLength } );
 
 		const wrapper = shallowMount( DataBridge, {
 			store,
-			mocks: {
-				$bridgeConfig: { stringMaxLength },
-			},
 			localVue,
 		} );
 

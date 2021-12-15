@@ -1,7 +1,7 @@
 import { Reference } from '@wmde/wikibase-datamodel-types';
 import { Store } from 'vuex';
 import Status from '@/definitions/ApplicationStatus';
-import Application, { InitializedApplicationState } from '@/store/Application';
+import Application, { BridgeConfig, InitializedApplicationState } from '@/store/Application';
 import {
 	NS_ENTITY,
 	NS_STATEMENTS,
@@ -113,6 +113,18 @@ export class RootGetters extends Getters<Application> {
 			stackTrace,
 			'```',
 		].join( '\n' );
+	}
+
+	public get issueReportingLinkConfig(): string {
+		const bridgeConfig = this.state.config;
+		if ( bridgeConfig.issueReportingLink === null ) {
+			throw new Error( 'not correctly initialized' );
+		}
+		return bridgeConfig.issueReportingLink;
+	}
+
+	public get config(): BridgeConfig {
+		return this.state.config;
 	}
 
 }

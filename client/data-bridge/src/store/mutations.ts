@@ -7,6 +7,8 @@ import ApplicationError from '@/definitions/ApplicationError';
 import { BaseState } from './BaseState';
 import { Mutations } from 'vuex-smart-module';
 import Application from '@/store/Application';
+import WikibaseClientConfiguration from '@/definitions/WikibaseClientConfiguration';
+import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 
 export class RootMutations extends Mutations<Application> {
 
@@ -68,6 +70,23 @@ export class RootMutations extends Mutations<Application> {
 
 	public setAssertUserWhenSaving( assertUserWhenSaving: boolean ): void {
 		this.state.assertUserWhenSaving = assertUserWhenSaving;
+	}
+
+	public setClientConfig( clientConfig: WikibaseClientConfiguration ): void {
+		this.state.config = {
+			...this.state.config,
+			...clientConfig,
+		};
+	}
+
+	public setRepoConfig( repoConfig: WikibaseRepoConfiguration ): void {
+		this.state.config = {
+			...this.state.config,
+			stringMaxLength: repoConfig.dataTypeLimits?.string.maxLength,
+			dataRightsText: repoConfig.dataRightsText,
+			dataRightsUrl: repoConfig.dataRightsUrl,
+			termsOfUseUrl: repoConfig.termsOfUseUrl,
+		};
 	}
 
 	public reset(): void {
