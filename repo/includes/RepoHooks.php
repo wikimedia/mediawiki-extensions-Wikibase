@@ -4,6 +4,7 @@ namespace Wikibase\Repo;
 
 use ApiBase;
 use ApiEditPage;
+use ApiMain;
 use ApiModuleManager;
 use ApiQuery;
 use ApiQuerySiteinfo;
@@ -30,6 +31,7 @@ use ResourceLoader;
 use Skin;
 use SkinTemplate;
 use StubUserLang;
+use Throwable;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
@@ -42,6 +44,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\Api\MetaDataBridgeConfig;
+use Wikibase\Repo\Api\ModifyEntity;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
@@ -53,6 +56,7 @@ use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TermboxVersionParserCacheValueRejector;
 use Wikibase\Repo\ParserOutput\TermboxView;
+use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\DispatchStats;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\View\ViewHooks;
@@ -1206,5 +1210,30 @@ final class RepoHooks {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Attempt to create an entity locks an entity id (for items, it would be Q####) and if saving fails
+	 * due to validation issues for example, that id would be wasted.
+	 * We want to penalize the user by adding a bigger number to ratelimit and slow them down
+	 * to avoid bots wasting significant number of Q-ids by sending faulty data over and over again.
+	 * See T284538 for more information.
+	 *
+	 * @param ApiMain $apiMain
+	 * @param Throwable $e
+	 * @return bool|void
+	 * @throws MWException
+	 */
+	public static function onApiMainOnException( $apiMain, $e ) {
+		$module = $apiMain->getModule();
+		if ( !$module instanceof ModifyEntity ) {
+			return;
+		}
+		$repoSettings = WikibaseRepo::getSettings();
+		$idGeneratorInErrorPingLimiterValue = $repoSettings->getSetting( 'idGeneratorInErrorPingLimiter' );
+		if ( !$idGeneratorInErrorPingLimiterValue || !$module->isFreshIdAssigned() ) {
+			return;
+		}
+		$apiMain->getUser()->pingLimiter( RateLimitingIdGenerator::RATELIMIT_NAME, $idGeneratorInErrorPingLimiterValue );
 	}
 }
