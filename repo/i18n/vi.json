@@ -11,7 +11,8 @@
 			"Vinhtantran",
 			"Zolo",
 			"පසිඳු කාවින්ද",
-			"Thienhau2003"
+			"Thienhau2003",
+			"Nghiemtrongdai VN"
 		]
 	},
 	"wikibase-desc": "Kho dữ liệu có cấu trúc",
@@ -19,7 +20,7 @@
 	"wikibase-entity-item": "Khoản mục",
 	"wikibase-entity-property": "Thuộc tính",
 	"wikibase-entity-query": "Truy vấn",
-	"wikibase-edit": "sửa đổi",
+	"wikibase-edit": "sửa",
 	"wikibase-save": "lưu",
 	"wikibase-publish": "đăng",
 	"wikibase-cancel": "hủy bỏ",

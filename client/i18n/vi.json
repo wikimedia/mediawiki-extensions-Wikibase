@@ -7,7 +7,8 @@
 			"Thin",
 			"Vinhtantran",
 			"NguoiDungKhongDinhDanh",
-			"Thienhau2003"
+			"Thienhau2003",
+			"Nghiemtrongdai VN"
 		]
 	},
 	"wikibase-client-desc": "Trình khách của phần mở rộng Wikibase",
@@ -26,7 +27,7 @@
 	"wikibase-comment-sitelink-remove": "Đã loại bỏ liên kết ngôn ngữ: $1",
 	"wikibase-comment-multi": "$1 thay đổi",
 	"wikibase-dataitem": "Khoản mục {{WBREPONAME}}",
-	"wikibase-editlinks": "Sửa đổi liên kết",
+	"wikibase-editlinks": "Sửa liên kết",
 	"wikibase-editlinkstitle": "Sửa liên kết giữa ngôn ngữ",
 	"wikibase-addlinkstitle": "Thêm liên kết giữa ngôn ngữ",
 	"wikibase-linkitem-addlinks": "Thêm liên kết",
