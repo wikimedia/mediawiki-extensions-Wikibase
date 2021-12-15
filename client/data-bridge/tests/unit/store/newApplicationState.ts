@@ -19,6 +19,7 @@ export default function ( fields?: RecursivePartial<InitializedApplicationState>
 		originalHref: '',
 		pageTitle: '',
 		assertUserWhenSaving: true,
+		config: {},
 	};
 
 	if ( fields !== null ) {

@@ -173,7 +173,6 @@ function devlaunch(
 		Vue as any,
 		services.get( 'languageInfoRepository' ),
 		services.get( 'messagesRepository' ),
-		information.client,
 		services.get( 'repoRouter' ),
 		services.get( 'clientRouter' ),
 	);

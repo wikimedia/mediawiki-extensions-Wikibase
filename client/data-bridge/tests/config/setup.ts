@@ -1,7 +1,6 @@
 import { config } from '@vue/test-utils';
 import MessageKeys from '@/definitions/MessageKeys';
 import Messages from '@/presentation/plugins/MessagesPlugin/Messages';
-import BridgeConfig from '@/presentation/plugins/BridgeConfigPlugin/BridgeConfig';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 
 // Break on unhandled promise rejection (default warning might be overlooked)
@@ -28,15 +27,11 @@ config.mocks = {
 			get: ( key: string ) => `⧼${key}⧽`,
 			getText: ( key: string ) => `⧼${key}⧽`,
 		},
-		$bridgeConfig: {
-			usePublish: false,
-		},
 		$repoRouter: {
 			getPageUrl: ( title, _params? ) => title,
 		},
 	} as {
 		$messages: Messages;
-		$bridgeConfig: BridgeConfig;
 		$repoRouter: MediaWikiRouter;
 	},
 };

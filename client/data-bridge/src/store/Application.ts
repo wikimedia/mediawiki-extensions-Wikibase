@@ -9,6 +9,15 @@ import ApplicationError from '@/definitions/ApplicationError';
 import EditDecision from '@/definitions/EditDecision';
 import { StatementState } from '@/store/statements/StatementState';
 
+export interface BridgeConfig {
+	usePublish: boolean | null;
+	issueReportingLink: string | null;
+	stringMaxLength: number | null;
+	dataRightsText: string | null;
+	dataRightsUrl: string | null;
+	termsOfUseUrl: string | null;
+}
+
 interface Application {
 	applicationErrors: ApplicationError[];
 	applicationStatus: ValidApplicationStatus;
@@ -24,6 +33,7 @@ interface Application {
 	pageUrl: string;
 	showWarningAnonymousEdit: boolean;
 	assertUserWhenSaving: boolean;
+	config: BridgeConfig;
 }
 
 export default Application;

@@ -7,6 +7,8 @@ import Application from '@/store/Application';
 import { RootMutations } from '@/store/mutations';
 import newApplicationState from './newApplicationState';
 import { inject } from 'vuex-smart-module';
+import WikibaseClientConfiguration from '@/definitions/WikibaseClientConfiguration';
+import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 
 describe( 'root/mutations', () => {
 	it( 'changes the targetProperty of the state', () => {
@@ -166,6 +168,47 @@ describe( 'root/mutations', () => {
 
 		mutations.setAssertUserWhenSaving( false );
 		expect( state.assertUserWhenSaving ).toBe( false );
+	} );
+
+	it( 'sets the client config in the store', () => {
+		const initialConfig = { dataRightsText: 'foo' };
+		const state: Application = newApplicationState( { config: initialConfig } );
+		const mutations = inject( RootMutations, { state } );
+
+		const clientConfig: WikibaseClientConfiguration = {
+			usePublish: true,
+			issueReportingLink: 'https://client.example/',
+		};
+		mutations.setClientConfig( clientConfig );
+
+		expect( state.config ).toEqual( {
+			...initialConfig,
+			...clientConfig,
+		} );
+	} );
+
+	it( 'sets the repo config in the store', () => {
+		const initialConfig = { usePublish: true };
+		const state: Application = newApplicationState( { config: initialConfig } );
+		const mutations = inject( RootMutations, { state } );
+
+		const repoConfig: WikibaseRepoConfiguration = {
+			dataRightsText: 'foo',
+			dataRightsUrl: 'https://example.com/datarights',
+			termsOfUseUrl: 'https://example.com/termsofuse',
+			dataTypeLimits: {
+				string: { maxLength: 123 },
+			},
+		};
+		mutations.setRepoConfig( repoConfig );
+
+		expect( state.config ).toEqual( {
+			...initialConfig,
+			dataRightsText: repoConfig.dataRightsText,
+			dataRightsUrl: repoConfig.dataRightsUrl,
+			termsOfUseUrl: repoConfig.termsOfUseUrl,
+			stringMaxLength: repoConfig.dataTypeLimits.string.maxLength,
+		} );
 	} );
 
 	it( 'resets the root module of the store', () => {

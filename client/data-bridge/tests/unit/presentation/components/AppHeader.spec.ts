@@ -22,6 +22,7 @@ describe( 'AppHeader', () => {
 
 	beforeEach( () => {
 		store = createStore( newMockServiceContainer( { tracker: newMockTracker() } ) );
+		store.commit( 'setClientConfig', { usePublish: false } );
 	} );
 
 	it( 'shows the header with title', () => {
@@ -69,7 +70,6 @@ describe( 'AppHeader', () => {
 				store,
 				localVue,
 				mocks: {
-					$bridgeConfig: { usePublish: false },
 					$messages: {
 						KEYS: MessageKeys,
 						get: messageGet,
@@ -96,11 +96,11 @@ describe( 'AppHeader', () => {
 				},
 			);
 
+			store.commit( 'setClientConfig', { usePublish: true } );
 			const wrapper = shallowMount( AppHeader, {
 				store,
 				localVue,
 				mocks: {
-					$bridgeConfig: { usePublish: true },
 					$messages: {
 						KEYS: MessageKeys,
 						get: messageGet,
@@ -203,6 +203,7 @@ describe( 'AppHeader', () => {
 			Vue.set( store, 'getters', {
 				canGoToPreviousState: true,
 				targetLabel: { value: 'P123', language: 'zxx' },
+				config: { usePublish: false },
 			} );
 
 			const wrapper = shallowMount( AppHeader, {
@@ -220,6 +221,7 @@ describe( 'AppHeader', () => {
 			Vue.set( store, 'getters', {
 				canGoToPreviousState: false,
 				targetLabel: { value: 'P123', language: 'zxx' },
+				config: { usePublish: false },
 			} );
 
 			const wrapper = shallowMount( AppHeader, {
@@ -241,6 +243,7 @@ describe( 'AppHeader', () => {
 			Vue.set( store, 'getters', {
 				canGoToPreviousState: true,
 				targetLabel: { value: 'P123', language: 'zxx' },
+				config: { usePublish: false },
 			} );
 
 			const wrapper = shallowMount( AppHeader, {
@@ -266,6 +269,7 @@ describe( 'AppHeader', () => {
 			Vue.set( store, 'getters', {
 				canGoToPreviousState: false,
 				targetLabel: { value: 'P123', language: 'zxx' },
+				config: { usePublish: false },
 			} );
 
 			const wrapper = shallowMount( AppHeader, {
@@ -310,6 +314,7 @@ describe( 'AppHeader', () => {
 			Vue.set( store, 'getters', {
 				canGoToPreviousState: true,
 				targetLabel: { value: 'P123', language: 'zxx' },
+				config: { usePublish: false },
 			} );
 			const wrapper = shallowMount( AppHeader, {
 				store,

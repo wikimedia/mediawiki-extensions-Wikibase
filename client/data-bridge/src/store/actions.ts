@@ -1,9 +1,7 @@
 import { DataValue } from '@wmde/wikibase-datamodel-types';
 import ApiErrors from '@/data-access/error/ApiErrors';
 import SavingError from '@/data-access/error/SavingError';
-import Vue from 'vue';
 import { Store } from 'vuex';
-import BridgeConfig from '@/presentation/plugins/BridgeConfigPlugin';
 import Application, { InitializedApplicationState, SavingState } from '@/store/Application';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import AppInformation from '@/definitions/AppInformation';
@@ -60,6 +58,7 @@ RootActions
 		this.commit( 'setOriginalHref', information.originalHref );
 		this.commit( 'setPageTitle', information.pageTitle );
 		this.commit( 'setPageUrl', information.pageUrl );
+		this.commit( 'setClientConfig', information.client );
 		this.commit( 'setShowWarningAnonymousEdit', information.userName === null );
 
 		this.dispatch( 'requestAndSetTargetLabel', information.propertyId );
@@ -104,7 +103,7 @@ RootActions
 					} );
 			} )
 			.then(
-				( results ) => this.dispatch( 'initBridgeWithRemoteData', { information, results } ),
+				( results ) => this.dispatch( 'initBridgeWithRemoteData', { results } ),
 				( error ) => {
 					const type = hasCentralauthBadtokenError( error )
 						? ErrorTypes.CENTRALAUTH_BADTOKEN
@@ -121,7 +120,6 @@ RootActions
 	}
 
 	public async initBridgeWithRemoteData( {
-		information,
 		results: [
 			wikibaseRepoConfiguration,
 			permissionErrors,
@@ -129,7 +127,6 @@ RootActions
 			_entityInit,
 		],
 	}: {
-		information: AppInformation;
 		results: [ WikibaseRepoConfiguration, readonly MissingPermissionsError[], string, unknown ];
 	} ): Promise<void> {
 		if ( permissionErrors.length ) {
@@ -145,7 +142,7 @@ RootActions
 			this.store.$services.get( 'tracker' ).trackError( 'render_references' );
 		}
 
-		BridgeConfig( Vue, { ...wikibaseRepoConfiguration, ...information.client } );
+		this.commit( 'setRepoConfig', wikibaseRepoConfiguration );
 
 		return this.dispatch( 'postEntityLoad' );
 	}
