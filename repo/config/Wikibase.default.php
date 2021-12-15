@@ -320,14 +320,6 @@ return [
 	 */
 	'idGeneratorSeparateDbConnection' => false,
 
-	/**
-	 * Whether rate limiting should be applied to the entity ID generator.
-	 *
-	 * @var bool
-	 * @see https://phabricator.wikimedia.org/T272032
-	 */
-	'idGeneratorRateLimiting' => false,
-
 	'entityTypesWithoutRdfOutput' => [],
 
 	'entitySources' => [],
