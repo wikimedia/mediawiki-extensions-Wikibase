@@ -332,7 +332,9 @@ abstract class ModifyEntity extends ApiBase {
 		try {
 			$status = $this->entitySavingHelper->attemptSaveEntity(
 				$entity,
-				$summary
+				$summary,
+				$this->extractRequestParams(),
+				$this->getContext()
 			);
 		} catch ( MWContentSerializationException $ex ) {
 			// This happens if the $entity created via modifyEntity() above (possibly cleared

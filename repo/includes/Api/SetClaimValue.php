@@ -134,7 +134,7 @@ class SetClaimValue extends ApiBase {
 
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
-		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary );
+		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, $params, $this->getContext() );
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->resultBuilder->markSuccess();
 		$this->resultBuilder->addStatement( $claim );
