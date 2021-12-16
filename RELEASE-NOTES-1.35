@@ -1,8 +1,12 @@
 = Wikibase 1.35 =
 
-== Wikibase 1.35.4-wmde.2 ==
+== Wikibase 1.35.5-wmde.3 ==
 
 This is a security and maintenance release of the Wikibase 1.35 branch.
+
+=== Changes since Wikibase 1.35.4-wmde.2 ===
+
+* (T297570) XSS in Wikibase using formatter URL
 
 === Changes since Wikibase 1.35.0-wmde.1 ===
 
