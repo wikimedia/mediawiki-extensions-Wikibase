@@ -34,7 +34,6 @@ export function launch(
 		app,
 		services.get( 'languageInfoRepository' ),
 		services.get( 'messagesRepository' ),
-		information.client,
 		services.get( 'repoRouter' ),
 		services.get( 'clientRouter' ),
 	);

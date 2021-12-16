@@ -3,7 +3,7 @@ import Term from '@/datamodel/Term';
 import ApplicationError from '@/definitions/ApplicationError';
 import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import EditDecision from '@/definitions/EditDecision';
-import Application from '@/store/Application';
+import Application, { BridgeConfig } from '@/store/Application';
 
 export class BaseState implements Application {
 	public applicationErrors: ApplicationError[] = [];
@@ -20,4 +20,12 @@ export class BaseState implements Application {
 	public pageUrl = '';
 	public showWarningAnonymousEdit = false;
 	public assertUserWhenSaving = true;
+	public config: BridgeConfig = {
+		usePublish: null,
+		issueReportingLink: null,
+		stringMaxLength: null,
+		dataRightsText: null,
+		dataRightsUrl: null,
+		termsOfUseUrl: null,
+	};
 }

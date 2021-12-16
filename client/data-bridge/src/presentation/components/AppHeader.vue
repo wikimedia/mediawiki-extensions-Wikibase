@@ -82,7 +82,7 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 			return this.rootModule.state.showWarningAnonymousEdit;
 		},
 		publishOrSave(): string {
-			return this.$bridgeConfig.usePublish ?
+			return this.rootModule.getters.config.usePublish ?
 				this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
 		},
 		canStartSaving(): boolean {

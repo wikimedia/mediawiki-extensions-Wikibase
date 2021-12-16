@@ -6,6 +6,7 @@ import {
 	shallowMount,
 } from '@vue/test-utils';
 import { createTestStore } from '../../../util/store';
+import { BridgeConfig } from '@/store/Application';
 
 describe( 'ErrorSavingAssertUser', () => {
 	const stopAssertingUserWhenSaving = jest.fn();
@@ -18,6 +19,9 @@ describe( 'ErrorSavingAssertUser', () => {
 			stopAssertingUserWhenSaving,
 			retrySave,
 			goBackFromErrorToReady,
+		},
+		state: {
+			config: { usePublish: false } as BridgeConfig,
 		},
 	} );
 
@@ -32,6 +36,8 @@ describe( 'ErrorSavingAssertUser', () => {
 				loginUrl: 'https://data-bridge.test/Login',
 			},
 			mocks: { $messages },
+			store,
+			localVue,
 		} );
 
 		expect( wrapper.element ).toMatchSnapshot();
@@ -127,19 +133,28 @@ describe( 'ErrorSavingAssertUser', () => {
 				return '';
 			},
 		);
+		const localStore = createTestStore( {
+			actions: {
+				stopAssertingUserWhenSaving,
+				retrySave,
+				goBackFromErrorToReady,
+			},
+			state: {
+				config: { usePublish: true } as BridgeConfig,
+			},
+		} );
 
 		const wrapper = shallowMount( ErrorSavingAssertUser, {
 			propsData: {
 				loginUrl: 'https://data-bridge.test/Login',
 			},
 			mocks: {
-				$bridgeConfig: { usePublish: true },
 				$messages: {
 					KEYS: MessageKeys,
 					getText: messageGet,
 				},
 			},
-			store,
+			store: localStore,
 			localVue,
 		} );
 		const button = wrapper.find( '.wb-db-error-saving-assertuser__proceed' );

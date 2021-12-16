@@ -4,7 +4,7 @@
 			:label="targetLabel"
 			:data-value="targetValue"
 			:set-data-value="setDataValue"
-			:maxlength="this.$bridgeConfig.stringMaxLength"
+			:maxlength="valueMaxLength"
 			class="wb-db-bridge__target-value"
 		/>
 		<ReferenceSection
@@ -41,6 +41,9 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 		},
 		targetLabel(): Term {
 			return this.rootModule.getters.targetLabel;
+		},
+		valueMaxLength(): number | null {
+			return this.rootModule.getters.config.stringMaxLength;
 		},
 	},
 	methods: {

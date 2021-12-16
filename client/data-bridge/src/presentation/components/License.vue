@@ -21,25 +21,28 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { VueConstructor } from 'vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
+import StateMixin from '@/presentation/StateMixin';
 
-export default Vue.extend( {
+export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).extend( {
 	// eslint-disable-next-line vue/multi-word-component-names
 	name: 'License',
+	mixins: [ StateMixin ],
 	components: { EventEmittingButton },
 	computed: {
 		publishOrSave(): string {
-			return this.$bridgeConfig.usePublish ?
+			return this.rootModule.getters.config.usePublish ?
 				this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
 		},
 		getBodyMessage(): string {
+			const config = this.rootModule.getters.config;
 			return this.$messages.get(
 				this.$messages.KEYS.LICENSE_BODY,
 				this.publishOrSave,
-				this.$bridgeConfig.termsOfUseUrl ?? '',
-				this.$bridgeConfig.dataRightsUrl ?? '',
-				this.$bridgeConfig.dataRightsText ?? '',
+				config.termsOfUseUrl ?? '',
+				config.dataRightsUrl ?? '',
+				config.dataRightsText ?? '',
 			);
 		},
 	},

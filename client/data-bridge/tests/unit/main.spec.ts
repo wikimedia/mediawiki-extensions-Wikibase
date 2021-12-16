@@ -76,7 +76,6 @@ describe( 'launch', () => {
 		expect( mockExtendVueEnvironment.mock.calls[ 0 ][ 0 ] ).toBe( mockVue );
 		expect( mockExtendVueEnvironment.mock.calls[ 0 ][ 1 ] ).toBe( languageInfoRepository );
 		expect( mockExtendVueEnvironment.mock.calls[ 0 ][ 2 ] ).toBe( messagesRepository );
-		expect( mockExtendVueEnvironment.mock.calls[ 0 ][ 3 ] ).toBe( appInformation.client );
 		expect( Vue.config.productionTip ).toBe( false );
 	} );
 

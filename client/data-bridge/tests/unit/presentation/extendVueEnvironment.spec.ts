@@ -10,8 +10,6 @@ jest.mock( 'vue', () => {
 import Vue from 'vue';
 import extendVueEnvironment from '@/presentation/extendVueEnvironment';
 import MessagesPlugin from '@/presentation/plugins/MessagesPlugin';
-import WikibaseClientConfiguration from '@/definitions/WikibaseClientConfiguration';
-import BridgeConfig from '@/presentation/plugins/BridgeConfigPlugin';
 
 const inlanguageDirective = {};
 const mockInlanguage = jest.fn( ( _x: any ) => inlanguageDirective );
@@ -31,7 +29,6 @@ describe( 'extendVueEnvironment', () => {
 			appMock,
 			languageInfoRepo,
 			new ( jest.fn() )(),
-			{} as WikibaseClientConfiguration,
 			new ( jest.fn() )(),
 			new ( jest.fn() )(),
 		);
@@ -45,25 +42,10 @@ describe( 'extendVueEnvironment', () => {
 			appMock,
 			new ( jest.fn() )(),
 			messageRepo,
-			{} as WikibaseClientConfiguration,
 			new ( jest.fn() )(),
 			new ( jest.fn() )(),
 		);
 		expect( appMock.use ).toHaveBeenCalledWith( MessagesPlugin, messageRepo );
-	} );
-
-	it( 'invokes the BridgeConfig plugin', () => {
-		const config = { usePublish: true, issueReportingLink: '' };
-		extendVueEnvironment(
-			appMock,
-			new ( jest.fn() )(),
-			new ( jest.fn() )(),
-			config,
-			new ( jest.fn() )(),
-			new ( jest.fn() )(),
-		);
-
-		expect( appMock.use ).toHaveBeenCalledWith( BridgeConfig, config );
 	} );
 
 	it( 'invokes the RepoRouterPlugin plugin', () => {
@@ -72,7 +54,6 @@ describe( 'extendVueEnvironment', () => {
 			appMock,
 			new ( jest.fn() )(),
 			new ( jest.fn() )(),
-			{} as WikibaseClientConfiguration,
 			repoRouter,
 			new ( jest.fn() )(),
 		);
@@ -86,7 +67,6 @@ describe( 'extendVueEnvironment', () => {
 			appMock,
 			new ( jest.fn() )(),
 			new ( jest.fn() )(),
-			{} as WikibaseClientConfiguration,
 			new ( jest.fn() )(),
 			clientRouter,
 		);

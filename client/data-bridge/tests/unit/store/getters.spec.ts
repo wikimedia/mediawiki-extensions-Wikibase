@@ -577,6 +577,33 @@ describe( 'root/getters', () => {
 
 			expect( getters.isEditConflictError ).toBe( false );
 		} );
+
+		it( 'returns the issue reporting link from the (client) configuration', () => {
+			const config = { issueReportingLink: 'https://example.com/' };
+			const applicationState = newApplicationState( { config } );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.issueReportingLinkConfig ).toBe( config.issueReportingLink );
+		} );
+
+		it( 'returns the (client + repo) configuration', () => {
+			const config = {
+				issueReportingLink: 'https://example.com/',
+				usePublish: true,
+				stringMaxLength: 123,
+				dataRightsText: 'foo',
+				dataRightsUrl: 'https://example.com/datarights',
+				termsOfUseUrl: 'https://example.com/termsofuse',
+			};
+			const applicationState = newApplicationState( { config } );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.config ).toBe( config );
+		} );
 	} );
 
 } );

@@ -9,10 +9,8 @@ import ApplicationStatus, { ValidApplicationStatus } from '@/definitions/Applica
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import EditDecision from '@/definitions/EditDecision';
 import EditFlow from '@/definitions/EditFlow';
-import { BridgeConfigOptions } from '@/presentation/plugins/BridgeConfigPlugin/BridgeConfig';
 import Application from '@/store/Application';
 import { RootGetters } from '@/store/getters';
-import Vue, { VueConstructor } from 'vue';
 import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
 import {
 	BridgePermissionsRepository,
@@ -33,12 +31,6 @@ import { StatementState } from '@/store/statements/StatementState';
 import MediaWikiPurge from '@/definitions/MediaWikiPurge';
 import { getMockBridgeRepoConfig } from '../../util/mocks';
 import { budge } from '../../util/timer';
-
-const mockBridgeConfig = jest.fn();
-jest.mock( '@/presentation/plugins/BridgeConfigPlugin', () => ( {
-	__esModule: true,
-	default: ( vue: VueConstructor<Vue>, options?: BridgeConfigOptions ) => mockBridgeConfig( vue, options ),
-} ) );
 
 describe( 'root/actions', () => {
 	const defaultEntityId = 'Q32';
@@ -108,6 +100,7 @@ describe( 'root/actions', () => {
 				const originalHref = 'https://example.com/index.php?title=Item:Q42&uselang=en#P31';
 				const pageTitle = 'Client_page';
 				const pageUrl = 'https://client.example/wiki/Douglas_Adams';
+				const client = { usePublish: true, issueReportingLink: '' };
 				const information = newMockAppInformation( {
 					editFlow,
 					propertyId,
@@ -115,6 +108,7 @@ describe( 'root/actions', () => {
 					originalHref,
 					pageTitle,
 					pageUrl,
+					client,
 				} );
 
 				const commit = jest.fn();
@@ -144,6 +138,7 @@ describe( 'root/actions', () => {
 				expect( commit ).toHaveBeenCalledWith( 'setPageTitle', pageTitle );
 				expect( commit ).toHaveBeenCalledWith( 'setPageUrl', pageUrl );
 				expect( commit ).toHaveBeenCalledWith( 'setApplicationStatus', ApplicationStatus.READY );
+				expect( commit ).toHaveBeenCalledWith( 'setClientConfig', client );
 			},
 		);
 
@@ -266,7 +261,6 @@ describe( 'root/actions', () => {
 			expect( dispatch ).toHaveBeenCalledTimes( 2 );
 			expect( dispatch.mock.calls[ 1 ][ 0 ] ).toBe( 'initBridgeWithRemoteData' );
 			expect( dispatch.mock.calls[ 1 ][ 1 ] ).toStrictEqual( {
-				information,
 				results: [
 					mockWikibaseRepoConfig,
 					mockListOfAuthorizationErrors,
@@ -342,7 +336,6 @@ describe( 'root/actions', () => {
 			expect( dispatch ).toHaveBeenCalledTimes( 2 );
 			expect( dispatch.mock.calls[ 1 ][ 0 ] ).toBe( 'initBridgeWithRemoteData' );
 			expect( dispatch.mock.calls[ 1 ][ 1 ] ).toStrictEqual( {
-				information,
 				results: [
 					mockWikibaseRepoConfig,
 					mockListOfAuthorizationErrors,
@@ -583,7 +576,6 @@ describe( 'root/actions', () => {
 
 	describe( 'initBridgeWithRemoteData', () => {
 		it( 'commits to addApplicationErrors if there are permission errors', async () => {
-			const information = newMockAppInformation();
 			const commit = jest.fn();
 			const actions = inject( RootActions, {
 				commit,
@@ -597,7 +589,7 @@ describe( 'root/actions', () => {
 				},
 			} as CascadeProtectedReason ];
 
-			await actions.initBridgeWithRemoteData( { information, results: [
+			await actions.initBridgeWithRemoteData( { results: [
 				{} as WikibaseRepoConfiguration,
 				permissionErrors,
 				'string',
@@ -608,7 +600,6 @@ describe( 'root/actions', () => {
 		} );
 
 		it( 'tracks the datatype', async () => {
-			const information = newMockAppInformation();
 			const actions = inject( RootActions, {
 				state: newApplicationState( {
 					entity: { id: defaultEntityId },
@@ -632,7 +623,7 @@ describe( 'root/actions', () => {
 					tracker,
 				} ),
 			};
-			await actions.initBridgeWithRemoteData( { information, results: [
+			await actions.initBridgeWithRemoteData( { results: [
 				{} as WikibaseRepoConfiguration,
 				[],
 				propertyDataType,
@@ -651,6 +642,7 @@ describe( 'root/actions', () => {
 			const actions = inject( RootActions, {
 				state: newApplicationState(),
 				dispatch,
+				commit: jest.fn(),
 			} );
 
 			// @ts-ignore
@@ -661,7 +653,6 @@ describe( 'root/actions', () => {
 			};
 
 			actions.initBridgeWithRemoteData( {
-				information: newMockAppInformation(),
 				results: [
 					{} as WikibaseRepoConfiguration,
 					[],
@@ -691,6 +682,7 @@ describe( 'root/actions', () => {
 			const actions = inject( RootActions, {
 				state: newApplicationState(),
 				dispatch,
+				commit: jest.fn(),
 			} );
 			const tracker = newMockTracker();
 
@@ -702,7 +694,6 @@ describe( 'root/actions', () => {
 			};
 
 			actions.initBridgeWithRemoteData( {
-				information: newMockAppInformation(),
 				results: [
 					{} as WikibaseRepoConfiguration,
 					[],
@@ -717,8 +708,8 @@ describe( 'root/actions', () => {
 			expect( dispatch ).toHaveBeenCalledWith( 'postEntityLoad' );
 		} );
 
-		it( 'resets the config plugin', async () => {
-			const information = newMockAppInformation();
+		it( 'sets the config for repo', async () => {
+			const commit = jest.fn();
 			const actions = inject( RootActions, {
 				state: newApplicationState( {
 					entity: { id: defaultEntityId },
@@ -729,7 +720,7 @@ describe( 'root/actions', () => {
 						},
 					},
 				} ),
-				commit: jest.fn(),
+				commit,
 				dispatch: jest.fn(),
 				getters: jest.fn() as any,
 			} );
@@ -743,21 +734,20 @@ describe( 'root/actions', () => {
 
 			const wikibaseRepoConfiguration = getMockBridgeRepoConfig();
 
-			await actions.initBridgeWithRemoteData( { information, results: [
+			await actions.initBridgeWithRemoteData( { results: [
 				wikibaseRepoConfiguration,
 				[],
 				'string',
 				undefined,
 			] } );
 
-			expect( mockBridgeConfig ).toHaveBeenCalledWith(
-				Vue,
-				{ ...wikibaseRepoConfiguration, ...information.client },
+			expect( commit ).toHaveBeenCalledWith(
+				'setRepoConfig',
+				wikibaseRepoConfiguration,
 			);
 		} );
 
 		it( 'dispatches postEntityLoad', async () => {
-			const information = newMockAppInformation();
 			const commit = jest.fn();
 			const dataValue: DataValue = { type: 'string', value: 'a string value' };
 			const statement = { mainsnak: { datavalue: dataValue } };
@@ -784,7 +774,7 @@ describe( 'root/actions', () => {
 				} ),
 			};
 
-			await actions.initBridgeWithRemoteData( { information, results: [
+			await actions.initBridgeWithRemoteData( { results: [
 				{} as WikibaseRepoConfiguration,
 				[],
 				'string',
