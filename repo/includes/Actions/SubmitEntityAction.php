@@ -16,7 +16,6 @@ use Wikibase\Lib\Summary;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * Handles the submit action for Wikibase entities.
@@ -240,7 +239,8 @@ class SubmitEntityAction extends EditEntityAction {
 		}
 
 		// save edit
-		$page = WikiPage::factory( $title );
+		$page = MediaWikiServices::getInstance()->getWikiPageFactory()
+			->newFromTitle( $title );
 
 		// NOTE: Constraint checks are performed automatically via EntityHandler::validateSave.
 		$status = $page->doUserEditContent(
