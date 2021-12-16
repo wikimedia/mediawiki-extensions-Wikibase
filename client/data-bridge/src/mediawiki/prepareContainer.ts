@@ -25,7 +25,7 @@ export default function prepareContainer( OO: MwWindowOO, $: JQueryStatic, id: s
 	BridgeDialog.prototype.initialize = function (): void {
 		BridgeDialog.parent.prototype.initialize.call( this );
 		this.content = new OO.ui.PanelLayout( { padded: false, expanded: false } );
-		this.content.$element.append( `<div id="${id}"></div>` );
+		this.content.$element.attr( 'id', id );
 		this.$body.append( this.content.$element );
 	};
 	BridgeDialog.prototype.getBodyHeight = function (): number {
