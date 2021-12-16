@@ -33,7 +33,10 @@ class WikiPageItemOrderProviderTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testGetItemOrder( string $text, ?array $expected ): void {
 		$this->makeWikiPage( 'MediaWiki:WikibaseLexeme-SortedGrammaticalFeaturesTest', $text );
-		$instance = new WikiPageItemOrderProvider( Title::newFromTextThrow( 'MediaWiki:WikibaseLexeme-SortedGrammaticalFeaturesTest' ) );
+		$instance = new WikiPageItemOrderProvider(
+			$this->getServiceContainer()->getWikiPageFactory(),
+			Title::newFromTextThrow( 'MediaWiki:WikibaseLexeme-SortedGrammaticalFeaturesTest' )
+		);
 		$itemOrder = $instance->getItemOrder();
 		$this->assertSame( $expected, $itemOrder );
 	}
@@ -50,6 +53,7 @@ class WikiPageItemOrderProviderTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetItemOrder_pageDoesNotExist(): void {
 		$instance = new WikiPageItemOrderProvider(
+			$this->getServiceContainer()->getWikiPageFactory(),
 			Title::newFromTextThrow( 'MediaWiki:WikibaseLexeme-SortedGrammaticalFeatures-Test-DoesNotExist' )
 		);
 		$itemOrder = $instance->getItemOrder();

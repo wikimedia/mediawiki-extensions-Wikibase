@@ -41,6 +41,8 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 			new InMemoryDataTypeLookup() );
 		$this->mockService( 'WikibaseRepo.StatementGuidParser',
 			new StatementGuidParser( new ItemIdParser() ) );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getWikiPageFactory' );
 		$titleFactory = $this->createMock( TitleFactory::class );
 		$titleFactory->expects( $this->once() )
 			->method( 'newFromText' )
