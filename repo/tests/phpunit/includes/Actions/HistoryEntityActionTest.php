@@ -88,6 +88,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 				'UserrightsInterwikiDelimiter' => '@',
 				'MiserMode' => true,
 				'ActionFilteredLogs' => [],
+				'MaxExecutionTimeForExpensiveQueries' => 0
 			] ) );
 		$context->method( 'getRequest' )
 			->willReturn( new WebRequest() );
