@@ -31,7 +31,7 @@ function mockOOEnv(): any {
 
 	const panelLayout: PanelLayout = {
 		$element: {
-			append: jest.fn(),
+			attr: jest.fn(),
 		} as unknown as JQuery,
 	};
 
@@ -85,8 +85,8 @@ describe( 'prepareContainer', () => {
 
 		expect( panelLayoutConstructor )
 			.toHaveBeenCalledWith( { padded: false, expanded: false } );
-		expect( panelLayout.$element.append )
-			.toHaveBeenCalledWith( `<div id="${APP_DOM_CONTAINER_ID}"></div>` );
+		expect( panelLayout.$element.attr )
+			.toHaveBeenCalledWith( 'id', APP_DOM_CONTAINER_ID );
 
 		expect( myDialog.$body.append ).toHaveBeenCalledWith( myDialog.content.$element );
 
