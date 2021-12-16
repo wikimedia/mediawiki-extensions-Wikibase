@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Store;
 use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
-use WikiPage;
 use WikitextContent;
 
 /**
@@ -42,7 +41,7 @@ class WikiPagePropertyOrderProviderTest extends MediaWikiIntegrationTestCase {
 
 	private function makeWikiPage( $name, $text ) {
 		$title = Title::newFromTextThrow( $name );
-		$wikiPage = WikiPage::factory( $title );
+		$wikiPage = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 		$wikiPage->doUserEditContent(
 			new WikitextContent( $text ),
 			$this->getTestUser()->getUser(),

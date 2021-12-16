@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\WikibaseSettings;
-use WikiPage;
 use WikitextContent;
 
 /**
@@ -81,7 +80,7 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function deletePageWithPostUpdates( Title $title ) {
-		$page = WikiPage::factory( $title );
+		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 		$page->doDeleteArticleReal( 'TEST', $this->getTestSysop()->getUser() );
 
 		$this->runRefreshLinksJobs();
@@ -94,7 +93,7 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 
 		$flags = $title->exists() ? EDIT_UPDATE : EDIT_NEW;
 
-		$page = WikiPage::factory( $title );
+		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 		$page->doUserEditContent(
 			$content,
 			$this->getTestUser()->getUser(),

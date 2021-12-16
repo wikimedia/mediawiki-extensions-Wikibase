@@ -19,7 +19,6 @@ use Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\ConnectionManager;
 use Wikimedia\Rdbms\IDatabase;
-use WikiPage;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup
@@ -83,7 +82,8 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 
 		$wikiText = '#REDIRECT [[' . $title->getFullText() . ']]';
 
-		$page = WikiPage::factory( Title::newFromTextThrow( 'Help:WikiPageEntityMetaDataLookupTest' ) );
+		$title = Title::newFromTextThrow( 'Help:WikiPageEntityMetaDataLookupTest' );
+		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 		$page->doUserEditContent(
 			ContentHandler::makeContent( $wikiText, $page->getTitle() ),
 			$this->getTestUser()->getUser(),
