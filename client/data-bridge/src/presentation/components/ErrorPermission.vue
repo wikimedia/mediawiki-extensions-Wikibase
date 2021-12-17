@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import Vue, { CreateElement, PropType, VueConstructor } from 'vue';
+import Vue, { PropType, VueConstructor } from 'vue';
 import StateMixin from '@/presentation/StateMixin';
 import ErrorPermissionInfo from '@/presentation/components/ErrorPermissionInfo.vue';
 import PageList from '@/presentation/components/PageList.vue';
@@ -25,7 +25,6 @@ import UserLink from '@/presentation/components/UserLink.vue';
 import { MissingPermissionsError, PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
 import MessageKeys from '@/definitions/MessageKeys';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
-import { VNode } from 'vue/types';
 
 interface PermissionTypeRenderer {
 	header: keyof typeof MessageKeys;
@@ -231,11 +230,9 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 			return params;
 		},
 		bdi( text: string ): HTMLElement {
-			return new Vue( {
-				render( createElement: CreateElement ): VNode {
-					return createElement( 'bdi', text );
-				},
-			} ).$mount().$el as HTMLElement;
+			const bdi = document.createElement( 'bdi' );
+			bdi.textContent = text;
+			return bdi;
 		},
 		convertToHtmlList( arr: readonly string[], mwRouter: MediaWikiRouter ): HTMLElement {
 			const pageListInstance = new PageList( {
