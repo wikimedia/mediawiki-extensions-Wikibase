@@ -68,8 +68,8 @@ describe( 'EditDecision', () => {
 			localVue,
 		} );
 
-		expect( wrapper.find( RadioGroup ).exists() ).toBe( true );
-		expect( wrapper.findAll( RadioInput ) ).toHaveLength( 2 );
+		expect( wrapper.findComponent( RadioGroup ).exists() ).toBe( true );
+		expect( wrapper.findAllComponents( RadioInput ) ).toHaveLength( 2 );
 	} );
 
 	it( 'passes the same name to all RadioInputs', () => {
@@ -78,7 +78,7 @@ describe( 'EditDecision', () => {
 			localVue,
 		} );
 
-		const radioInputs = wrapper.findAll( RadioInput ).wrappers;
+		const radioInputs = wrapper.findAllComponents( RadioInput ).wrappers;
 		const allNames = radioInputs.map( ( radioInput ) => radioInput.props( 'name' ) );
 		const distinctNames = allNames.filter( unique );
 		expect( distinctNames ).toHaveLength( 1 );

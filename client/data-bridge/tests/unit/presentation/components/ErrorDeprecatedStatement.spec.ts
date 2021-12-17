@@ -38,7 +38,7 @@ describe( 'ErrorDeprecatedStatement', () => {
 		calledWithHTMLElement( messageGet, 0, 1 );
 		calledWithHTMLElement( messageGet, 1, 1 );
 
-		expect( wrapper.find( IconMessageBox ).exists() ).toBe( true );
+		expect( wrapper.findComponent( IconMessageBox ).exists() ).toBe( true );
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			1,
 			MessageKeys.DEPRECATED_STATEMENT_ERROR_HEAD,
@@ -63,8 +63,8 @@ describe( 'ErrorDeprecatedStatement', () => {
 			store,
 		} );
 
-		expect( wrapper.find( BailoutActions ).exists() ).toBe( true );
-		expect( wrapper.find( BailoutActions ).props() ).toStrictEqual( {
+		expect( wrapper.findComponent( BailoutActions ).exists() ).toBe( true );
+		expect( wrapper.findComponent( BailoutActions ).props() ).toStrictEqual( {
 			originalHref,
 			pageTitle,
 		} );

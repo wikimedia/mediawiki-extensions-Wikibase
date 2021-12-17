@@ -33,19 +33,19 @@ describe( 'ErrorUnknown', () => {
 
 	it( 'mounts an IconMessageBox with the right message', () => {
 		const wrapper = shallowMount( ErrorUnknown, { mocks, store, localVue } );
-		const iconMessageBox = wrapper.find( IconMessageBox );
+		const iconMessageBox = wrapper.findComponent( IconMessageBox );
 		expect( iconMessageBox.exists() ).toBe( true );
 		expect( iconMessageBox.text() ).toBe( `⧼${MessageKeys.UNKNOWN_ERROR_MESSAGE}⧽` );
 	} );
 
 	it( 'mounts a ReportIssue', () => {
 		const wrapper = shallowMount( ErrorUnknown, { mocks, store, localVue } );
-		expect( wrapper.find( ReportIssue ).exists() ).toBe( true );
+		expect( wrapper.findComponent( ReportIssue ).exists() ).toBe( true );
 	} );
 
 	it( 'mounts an EventEmittingButton with the right props', () => {
 		const wrapper = shallowMount( ErrorUnknown, { mocks, store, localVue } );
-		const eventEmittingButton = wrapper.find( EventEmittingButton );
+		const eventEmittingButton = wrapper.findComponent( EventEmittingButton );
 		expect( eventEmittingButton.exists() ).toBe( true );
 		expect( eventEmittingButton.props( 'type' ) ).toBe( 'primaryProgressive' );
 		expect( eventEmittingButton.props( 'size' ) ).toBe( 'M' );

@@ -38,7 +38,7 @@ describe( 'DataBridge', () => {
 			localVue,
 		} );
 
-		expect( wrapper.find( StringDataValue ).exists() ).toBe( true );
+		expect( wrapper.findComponent( StringDataValue ).exists() ).toBe( true );
 	} );
 
 	it( 'delegates the necessary props to StringDataValue', () => {
@@ -54,9 +54,9 @@ describe( 'DataBridge', () => {
 			localVue,
 		} );
 
-		expect( wrapper.find( StringDataValue ).props( 'dataValue' ) ).toStrictEqual( targetValue );
-		expect( wrapper.find( StringDataValue ).props( 'label' ) ).toBe( targetLabel );
-		expect( wrapper.find( StringDataValue ).props( 'maxlength' ) ).toBe( stringMaxLength );
+		expect( wrapper.findComponent( StringDataValue ).props( 'dataValue' ) ).toStrictEqual( targetValue );
+		expect( wrapper.findComponent( StringDataValue ).props( 'label' ) ).toBe( targetLabel );
+		expect( wrapper.findComponent( StringDataValue ).props( 'maxlength' ) ).toBe( stringMaxLength );
 	} );
 
 	it( 'mounts ReferenceSection', () => {
@@ -65,7 +65,7 @@ describe( 'DataBridge', () => {
 			localVue,
 		} );
 
-		expect( wrapper.find( ReferenceSection ).exists() ).toBe( true );
+		expect( wrapper.findComponent( ReferenceSection ).exists() ).toBe( true );
 	} );
 
 	it( 'mounts EditDecision', () => {
@@ -74,6 +74,6 @@ describe( 'DataBridge', () => {
 			localVue,
 		} );
 
-		expect( wrapper.find( EditDecision ).exists() ).toBe( true );
+		expect( wrapper.findComponent( EditDecision ).exists() ).toBe( true );
 	} );
 } );

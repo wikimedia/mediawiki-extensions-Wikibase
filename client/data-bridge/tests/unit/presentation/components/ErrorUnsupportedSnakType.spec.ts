@@ -38,7 +38,7 @@ describe( 'ErrorUnsupportedSnakType', () => {
 			},
 			store,
 		} );
-		expect( wrapper.find( IconMessageBox ).exists() ).toBe( true );
+		expect( wrapper.findComponent( IconMessageBox ).exists() ).toBe( true );
 	} );
 
 	it.each( [
@@ -110,8 +110,8 @@ describe( 'ErrorUnsupportedSnakType', () => {
 			store,
 		} );
 
-		expect( wrapper.find( BailoutActions ).exists() ).toBe( true );
-		expect( wrapper.find( BailoutActions ).props() ).toStrictEqual( {
+		expect( wrapper.findComponent( BailoutActions ).exists() ).toBe( true );
+		expect( wrapper.findComponent( BailoutActions ).props() ).toStrictEqual( {
 			originalHref,
 			pageTitle,
 		} );

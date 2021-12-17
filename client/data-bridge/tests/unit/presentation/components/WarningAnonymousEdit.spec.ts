@@ -27,7 +27,7 @@ describe( 'WarningAnonymousEdit', () => {
 			},
 		} );
 
-		wrapper.find( EventEmittingButton ).vm.$emit( 'click' );
+		wrapper.findComponent( EventEmittingButton ).vm.$emit( 'click' );
 		expect( wrapper.emitted( 'proceed' ) ).toHaveLength( 1 );
 	} );
 } );

@@ -56,7 +56,7 @@ describe( 'Loading', () => {
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW + 1 );
 			await Vue.nextTick();
 
-			expect( wrapper.find( IndeterminateProgressBar ).isVisible() ).toBe( true );
+			expect( wrapper.findComponent( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
 
 		// Scenario 3 (one half)
@@ -76,7 +76,7 @@ describe( 'Loading', () => {
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW + MINIMUM_TIME_OF_PROGRESS_ANIMATION * 2 );
 			await Vue.nextTick();
 
-			expect( wrapper.find( IndeterminateProgressBar ).isVisible() ).toBe( true );
+			expect( wrapper.findComponent( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
 	} );
 
@@ -122,7 +122,7 @@ describe( 'Loading', () => {
 			jest.advanceTimersByTime( MINIMUM_TIME_OF_PROGRESS_ANIMATION - 1 ); // just before animation end
 			await Vue.nextTick();
 
-			expect( wrapper.find( IndeterminateProgressBar ).isVisible() ).toBe( true );
+			expect( wrapper.findComponent( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
 
 		// Scenario 2
@@ -207,7 +207,7 @@ describe( 'Loading', () => {
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW + 1 );
 			await Vue.nextTick();
 
-			expect( wrapper.find( IndeterminateProgressBar ).isVisible() ).toBe( true );
+			expect( wrapper.findComponent( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
 
 		it( 'keeps showing IndeterminateProgressBar even after MINIMUM_TIME_OF_PROGRESS_ANIMATION', async () => {
@@ -226,7 +226,7 @@ describe( 'Loading', () => {
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW + MINIMUM_TIME_OF_PROGRESS_ANIMATION * 2 );
 			await Vue.nextTick();
 
-			expect( wrapper.find( IndeterminateProgressBar ).isVisible() ).toBe( true );
+			expect( wrapper.findComponent( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
 	} );
 
@@ -250,7 +250,7 @@ describe( 'Loading', () => {
 			wrapper.setProps( { isSaving: false } );
 
 			expect( wrapper.text() ).toBe( content );
-			expect( wrapper.find( IndeterminateProgressBar ).exists() ).toBeFalsy();
+			expect( wrapper.findComponent( IndeterminateProgressBar ).exists() ).toBeFalsy();
 		} );
 
 		// Scenario 2
@@ -272,7 +272,7 @@ describe( 'Loading', () => {
 			jest.advanceTimersByTime( MINIMUM_TIME_OF_PROGRESS_ANIMATION - 1 ); // just before animation end
 			await Vue.nextTick();
 
-			expect( wrapper.find( IndeterminateProgressBar ).isVisible() ).toBe( true );
+			expect( wrapper.findComponent( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
 
 		// Scenario 2
@@ -299,7 +299,7 @@ describe( 'Loading', () => {
 			await Vue.nextTick();
 
 			expect( wrapper.text() ).toBe( content );
-			expect( wrapper.find( IndeterminateProgressBar ).exists() ).toBeFalsy();
+			expect( wrapper.findComponent( IndeterminateProgressBar ).exists() ).toBeFalsy();
 		} );
 
 		// Scenario 3 (second half)
@@ -324,7 +324,7 @@ describe( 'Loading', () => {
 			wrapper.setProps( { isSaving: false } );
 
 			expect( wrapper.text() ).toBe( content );
-			expect( wrapper.find( IndeterminateProgressBar ).exists() ).toBeFalsy();
+			expect( wrapper.findComponent( IndeterminateProgressBar ).exists() ).toBeFalsy();
 		} );
 	} );
 } );

@@ -17,7 +17,7 @@ describe( 'StringDataValue', () => {
 				},
 			} );
 
-			expect( wrapper.find( PropertyLabel ).props( 'term' ) ).toBe( label );
+			expect( wrapper.findComponent( PropertyLabel ).props( 'term' ) ).toBe( label );
 		} );
 
 		it( 'passes the DataValue down', () => {
@@ -30,7 +30,7 @@ describe( 'StringDataValue', () => {
 				},
 			} );
 
-			expect( wrapper.find( ResizingTextField ).props( 'value' ) ).toBe( dataValue.value );
+			expect( wrapper.findComponent( ResizingTextField ).props( 'value' ) ).toBe( dataValue.value );
 		} );
 
 		it( 'triggers the setter with the new value when it is edited', () => {
@@ -45,7 +45,7 @@ describe( 'StringDataValue', () => {
 			} );
 			const testString = 'newString';
 
-			wrapper.find( ResizingTextField ).vm.$emit( 'input', testString );
+			wrapper.findComponent( ResizingTextField ).vm.$emit( 'input', testString );
 
 			expect( mockSetter ).toHaveBeenCalledWith( { type: 'string', value: testString } );
 		} );
@@ -60,9 +60,9 @@ describe( 'StringDataValue', () => {
 			} );
 
 			expect(
-				wrapper.find( PropertyLabel ).props( 'htmlFor' ),
+				wrapper.findComponent( PropertyLabel ).props( 'htmlFor' ),
 			).toBe(
-				wrapper.find( ResizingTextField ).attributes( 'id' ),
+				wrapper.findComponent( ResizingTextField ).attributes( 'id' ),
 			);
 		} );
 	} );
@@ -78,7 +78,7 @@ describe( 'StringDataValue', () => {
 				},
 			} );
 
-		expect( wrapper.find( ResizingTextField ).attributes( 'placeholder' ) )
+		expect( wrapper.findComponent( ResizingTextField ).attributes( 'placeholder' ) )
 			.toBe( placeholder );
 	} );
 
@@ -95,7 +95,7 @@ describe( 'StringDataValue', () => {
 			} );
 
 			expect(
-				wrapper.find( ResizingTextField ).attributes( 'maxlength' ),
+				wrapper.findComponent( ResizingTextField ).attributes( 'maxlength' ),
 			).toBe( maxlength.toString() );
 		} );
 
@@ -108,7 +108,7 @@ describe( 'StringDataValue', () => {
 				},
 			} );
 
-			expect( wrapper.find( ResizingTextField ).attributes( 'maxlength' ) )
+			expect( wrapper.findComponent( ResizingTextField ).attributes( 'maxlength' ) )
 				.toBeUndefined();
 		} );
 	} );

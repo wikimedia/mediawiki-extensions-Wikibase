@@ -70,9 +70,9 @@ describe( 'ErrorPermission', () => {
 			store,
 		} );
 
-		expect( wrapper.find( ErrorPermissionInfo ).props( 'messageHeader' ) )
+		expect( wrapper.findComponent( ErrorPermissionInfo ).props( 'messageHeader' ) )
 			.toBe( MessageKeys.PERMISSIONS_PROTECTED_HEADING );
-		expect( wrapper.find( ErrorPermissionInfo ).props( 'messageBody' ) )
+		expect( wrapper.findComponent( ErrorPermissionInfo ).props( 'messageBody' ) )
 			.toBe( MessageKeys.PERMISSIONS_PROTECTED_BODY );
 	} );
 
@@ -135,7 +135,7 @@ describe( 'ErrorPermission', () => {
 			store,
 		} );
 
-		expect( wrapper.findAll( ErrorPermissionInfo ) ).toHaveLength( permissionErrors.length );
+		expect( wrapper.findAllComponents( ErrorPermissionInfo ) ).toHaveLength( permissionErrors.length );
 	} );
 
 	it( 'interpolates correct message for unknown error', () => {
@@ -600,7 +600,7 @@ describe( 'ErrorPermission', () => {
 			store,
 		} );
 
-		for ( const errorPermissionInfo of wrapper.findAll( ErrorPermissionInfo ).wrappers ) {
+		for ( const errorPermissionInfo of wrapper.findAllComponents( ErrorPermissionInfo ).wrappers ) {
 			expect( errorPermissionInfo.props( 'expandedByDefault' ) ).toBe( expandedByDefault );
 		}
 	} );

@@ -45,7 +45,7 @@ describe( 'AppHeader', () => {
 
 		calledWithHTMLElement( messageGet, 1, 1 );
 
-		expect( wrapper.find( ProcessDialogHeader ).exists() ).toBe( true );
+		expect( wrapper.findComponent( ProcessDialogHeader ).exists() ).toBe( true );
 		expect( messageGet ).toHaveBeenCalledWith(
 			MessageKeys.BRIDGE_DIALOG_TITLE,
 			`<span class="wb-db-term-label" lang="zxx" dir="auto">${propertyId}</span>`,

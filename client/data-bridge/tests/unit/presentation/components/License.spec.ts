@@ -31,15 +31,15 @@ describe( 'License component', () => {
 
 	it( 'bubbles the button\'s click event as close event', () => {
 		const wrapper = shallowMount( License, { store, localVue } );
-		wrapper.find( EventEmittingButton ).vm.$emit( 'click' );
+		wrapper.findComponent( EventEmittingButton ).vm.$emit( 'click' );
 		expect( wrapper.emitted( 'close' ) ).toHaveLength( 1 );
 	} );
 
 	it( 'mounts a button with the correct props', () => {
 		const wrapper = shallowMount( License, { store, localVue } );
 
-		expect( wrapper.find( EventEmittingButton ).props( 'size' ) ).toBe( 'M' );
-		expect( wrapper.find( EventEmittingButton ).props( 'type' ) ).toBe( 'close' );
+		expect( wrapper.findComponent( EventEmittingButton ).props( 'size' ) ).toBe( 'M' );
+		expect( wrapper.findComponent( EventEmittingButton ).props( 'type' ) ).toBe( 'close' );
 	} );
 
 	it( 'calls license body with correct parameters', () => {

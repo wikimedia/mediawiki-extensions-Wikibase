@@ -43,6 +43,6 @@ describe( 'BailoutActions', () => {
 			mocks: { $messages, $clientRouter },
 		} );
 
-		expect( wrapper.find( EventEmittingButton ).props( 'href' ) ).toBe( originalHref );
+		expect( wrapper.findComponent( EventEmittingButton ).props( 'href' ) ).toBe( originalHref );
 	} );
 } );

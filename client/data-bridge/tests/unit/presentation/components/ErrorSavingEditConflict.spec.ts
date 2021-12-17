@@ -18,7 +18,7 @@ describe( 'ErrorSavingEditConflict', () => {
 	it( 'maps reload button click to reload event', async () => {
 		const wrapper = shallowMount( ErrorSavingEditConflict );
 
-		wrapper.find( EventEmittingButton ).vm.$emit( 'click' );
+		wrapper.findComponent( EventEmittingButton ).vm.$emit( 'click' );
 		expect( wrapper.emitted( 'reload' ) ).toHaveLength( 1 );
 	} );
 } );

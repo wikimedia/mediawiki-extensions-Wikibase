@@ -116,7 +116,7 @@ describe( 'App.vue', () => {
 			propsData: { emitter: mockEmitter },
 		} );
 
-		await wrapper.find( AppHeader ).vm.$emit( 'back' );
+		await wrapper.findComponent( AppHeader ).vm.$emit( 'back' );
 		await localVue.nextTick();
 		expect( goBackFromErrorToReady ).toHaveBeenCalled();
 	} );
@@ -136,20 +136,22 @@ describe( 'App.vue', () => {
 			propsData: { emitter: mockEmitter },
 		} );
 
-		await wrapper.find( AppHeader ).vm.$emit( 'save' );
+		await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
 		await localVue.nextTick();
 		expect( bridgeSave ).not.toHaveBeenCalled();
-		expect( wrapper.find( License ).exists() ).toBe( true );
+		expect( wrapper.findComponent( License ).exists() ).toBe( true );
 
-		await wrapper.find( AppHeader ).vm.$emit( 'save' );
+		await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
 		await localVue.nextTick();
 		expect( bridgeSave ).toHaveBeenCalledTimes( 1 );
 		expect( wrapper.emitted( initEvents.saved ) ).toBeFalsy();
 
 		localStore.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
 		await localVue.nextTick();
-		expect( wrapper.find( ThankYou ).exists() ).toBe( true );
-		await wrapper.find( ThankYou ).vm.$emit( 'opened-reference-edit-on-repo' );
+
+		expect( wrapper.findComponent( ThankYou ).exists() ).toBe( true );
+		await wrapper.findComponent( ThankYou ).vm.$emit( 'opened-reference-edit-on-repo' );
+
 		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
 		expect( mockEmitter.emit ).toHaveBeenCalledWith( initEvents.saved );
 	} );
@@ -170,18 +172,18 @@ describe( 'App.vue', () => {
 				propsData: { emitter: mockEmitter },
 			} );
 
-			await wrapper.find( AppHeader ).vm.$emit( 'save' );
+			await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
 			await localVue.nextTick();
-			expect( wrapper.find( License ).exists() ).toBe( true );
+			expect( wrapper.findComponent( License ).exists() ).toBe( true );
 
-			await wrapper.find( License ).vm.$emit( 'close' );
+			await wrapper.findComponent( License ).vm.$emit( 'close' );
 			await localVue.nextTick();
-			expect( wrapper.find( License ).exists() ).toBe( false );
+			expect( wrapper.findComponent( License ).exists() ).toBe( false );
 
-			await wrapper.find( AppHeader ).vm.$emit( 'save' );
+			await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
 			await localVue.nextTick();
 			expect( bridgeSave ).not.toHaveBeenCalled();
-			expect( wrapper.find( License ).exists() ).toBe( true );
+			expect( wrapper.findComponent( License ).exists() ).toBe( true );
 		},
 	);
 
@@ -192,10 +194,10 @@ describe( 'App.vue', () => {
 			propsData: { emitter: mockEmitter },
 		} );
 
-		await wrapper.find( AppHeader ).vm.$emit( 'save' );
+		await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
 		await localVue.nextTick();
 
-		expect( wrapper.find( DataBridge ).classes( 'wb-db-app__data-bridge--overlayed' ) ).toBe( true );
+		expect( wrapper.findComponent( DataBridge ).classes( 'wb-db-app__data-bridge--overlayed' ) ).toBe( true );
 	} );
 
 	it( 'adds an overlay over DataBridge during save state', async () => {
@@ -209,7 +211,7 @@ describe( 'App.vue', () => {
 		store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
 		await localVue.nextTick();
 
-		expect( wrapper.find( DataBridge ).classes( 'wb-db-app__data-bridge--overlayed' ) ).toBe( true );
+		expect( wrapper.findComponent( DataBridge ).classes( 'wb-db-app__data-bridge--overlayed' ) ).toBe( true );
 	} );
 
 	it( 'emits saved event on close button click after saving is done', async () => {
@@ -221,7 +223,7 @@ describe( 'App.vue', () => {
 
 		store.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
 
-		await wrapper.find( AppHeader ).vm.$emit( 'close' );
+		await wrapper.findComponent( AppHeader ).vm.$emit( 'close' );
 		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
 		expect( mockEmitter.emit ).toHaveBeenCalledWith( initEvents.saved );
 	} );
@@ -233,7 +235,7 @@ describe( 'App.vue', () => {
 			propsData: { emitter: mockEmitter },
 		} );
 
-		await wrapper.find( AppHeader ).vm.$emit( 'close' );
+		await wrapper.findComponent( AppHeader ).vm.$emit( 'close' );
 
 		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
 		expect( mockEmitter.emit ).toHaveBeenCalledWith( initEvents.cancel );
@@ -248,7 +250,7 @@ describe( 'App.vue', () => {
 
 		store.commit( 'addApplicationErrors', [ { type: ErrorTypes.EDIT_CONFLICT } ] );
 
-		await wrapper.find( AppHeader ).vm.$emit( 'close' );
+		await wrapper.findComponent( AppHeader ).vm.$emit( 'close' );
 
 		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
 		expect( mockEmitter.emit ).toHaveBeenCalledWith( initEvents.reload );
@@ -265,7 +267,7 @@ describe( 'App.vue', () => {
 					propsData: { emitter: mockEmitter },
 				} );
 
-				expect( wrapper.find( ErrorWrapper ).exists() ).toBe( true );
+				expect( wrapper.findComponent( ErrorWrapper ).exists() ).toBe( true );
 			} );
 
 			it.each( [
@@ -278,7 +280,7 @@ describe( 'App.vue', () => {
 					localVue,
 					propsData: { emitter: mockEmitter },
 				} );
-				wrapper.find( ErrorWrapper ).vm.$emit( errorWrapperEvent );
+				wrapper.findComponent( ErrorWrapper ).vm.$emit( errorWrapperEvent );
 
 				expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
 				expect( mockEmitter.emit ).toHaveBeenCalledWith( initAppEvent );
@@ -294,8 +296,8 @@ describe( 'App.vue', () => {
 					propsData: { emitter: mockEmitter },
 				} );
 
-				expect( wrapper.find( Loading ).exists() ).toBe( true );
-				expect( wrapper.find( Loading ).find( DataBridge ).exists() ).toBe( true );
+				expect( wrapper.findComponent( Loading ).exists() ).toBe( true );
+				expect( wrapper.findComponent( Loading ).findComponent( DataBridge ).exists() ).toBe( true );
 			} );
 
 			it( 'instructs Loading accordingly if the store is not ready', () => {
@@ -306,7 +308,7 @@ describe( 'App.vue', () => {
 					propsData: { emitter: mockEmitter },
 				} );
 
-				expect( wrapper.find( Loading ).props( 'isInitializing' ) ).toBe( true );
+				expect( wrapper.findComponent( Loading ).props( 'isInitializing' ) ).toBe( true );
 			} );
 
 			it( 'instructs Loading accordingly if the store is attempting saving', () => {
@@ -317,7 +319,7 @@ describe( 'App.vue', () => {
 					propsData: { emitter: mockEmitter },
 				} );
 
-				expect( wrapper.find( Loading ).props( 'isSaving' ) ).toBe( true );
+				expect( wrapper.findComponent( Loading ).props( 'isSaving' ) ).toBe( true );
 			} );
 
 			it( 'instructs Loading accordingly if the store is ready', () => {
@@ -328,8 +330,8 @@ describe( 'App.vue', () => {
 					propsData: { emitter: mockEmitter },
 				} );
 
-				expect( wrapper.find( Loading ).props( 'isInitializing' ) ).toBe( false );
-				expect( wrapper.find( Loading ).props( 'isSaving' ) ).toBe( false );
+				expect( wrapper.findComponent( Loading ).props( 'isInitializing' ) ).toBe( false );
+				expect( wrapper.findComponent( Loading ).props( 'isSaving' ) ).toBe( false );
 			} );
 		} );
 
@@ -350,20 +352,20 @@ describe( 'App.vue', () => {
 					propsData: { emitter: mockEmitter },
 				} );
 
-				expect( wrapper.find( WarningAnonymousEdit ).exists() ).toBe( true );
-				expect( wrapper.find( Loading ).exists() ).toBe( false );
+				expect( wrapper.findComponent( WarningAnonymousEdit ).exists() ).toBe( true );
+				expect( wrapper.findComponent( Loading ).exists() ).toBe( false );
 				expect( $clientRouter.getPageUrl ).toHaveBeenCalledWith(
 					'Special:UserLogin',
 					{
 						returnto: pageTitle,
 					},
 				);
-				expect( wrapper.find( WarningAnonymousEdit ).props( 'loginUrl' ) ).toBe( loginUrl );
+				expect( wrapper.findComponent( WarningAnonymousEdit ).props( 'loginUrl' ) ).toBe( loginUrl );
 
-				wrapper.find( WarningAnonymousEdit ).vm.$emit( 'proceed' );
+				wrapper.findComponent( WarningAnonymousEdit ).vm.$emit( 'proceed' );
 				await localVue.nextTick();
-				expect( wrapper.find( WarningAnonymousEdit ).exists() ).toBe( false );
-				expect( wrapper.find( Loading ).exists() ).toBe( true );
+				expect( wrapper.findComponent( WarningAnonymousEdit ).exists() ).toBe( false );
+				expect( wrapper.findComponent( Loading ).exists() ).toBe( true );
 			} );
 
 			it( 'mounts WarningAnonymousEdit even if there are errors', () => {
@@ -380,8 +382,8 @@ describe( 'App.vue', () => {
 					propsData: { emitter: mockEmitter },
 				} );
 
-				expect( wrapper.find( WarningAnonymousEdit ).exists() ).toBe( true );
-				expect( wrapper.find( ErrorWrapper ).exists() ).toBe( false );
+				expect( wrapper.findComponent( WarningAnonymousEdit ).exists() ).toBe( true );
+				expect( wrapper.findComponent( ErrorWrapper ).exists() ).toBe( false );
 			} );
 		} );
 
