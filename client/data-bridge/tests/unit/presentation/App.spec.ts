@@ -147,6 +147,7 @@ describe( 'App.vue', () => {
 		expect( wrapper.emitted( initEvents.saved ) ).toBeFalsy();
 
 		localStore.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
+		await localVue.nextTick();
 		expect( wrapper.find( ThankYou ).exists() ).toBe( true );
 		await wrapper.find( ThankYou ).vm.$emit( 'opened-reference-edit-on-repo' );
 		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
@@ -206,6 +207,7 @@ describe( 'App.vue', () => {
 		} );
 
 		store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
+		await localVue.nextTick();
 
 		expect( wrapper.find( DataBridge ).classes( 'wb-db-app__data-bridge--overlayed' ) ).toBe( true );
 	} );

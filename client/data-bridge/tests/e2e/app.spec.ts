@@ -113,7 +113,10 @@ function prepareTestEnv( options: {
 	window.mw.language = {
 		bcp47: jest.fn().mockReturnValue( 'de' ),
 	};
-	window.location.reload = jest.fn();
+
+	delete window.location;
+	// @ts-ignore
+	window.location = { reload: jest.fn() };
 
 	const testLinkHref = `https://www.wikidata.org/wiki/${entityTitle}?uselang=en#${propertyId}`;
 	document.body.innerHTML = `

@@ -124,7 +124,6 @@ describe( 'AppHeader', () => {
 
 			store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
 			await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).trigger( 'click' );
-			await localVue.nextTick();
 
 			expect( wrapper.emitted( initEvents.saved ) ).toBeFalsy();
 		} );
@@ -137,6 +136,8 @@ describe( 'AppHeader', () => {
 			} );
 
 			store.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
+			await localVue.nextTick();
+
 			expect( wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).exists() ).toBe( false );
 		} );
 

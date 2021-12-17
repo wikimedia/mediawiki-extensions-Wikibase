@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading when initializing renders empty loading screen and hides default slots 1`] = `
+<div class="wb-db-load">
+  <!---->
+  <!---->
+</div>
+`;

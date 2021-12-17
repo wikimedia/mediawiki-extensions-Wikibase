@@ -52,12 +52,16 @@ describe( 'ErrorPermissionInfo', () => {
 
 		expect( wrapper.find( BODY_SELECTOR ).exists() )
 			.toBeFalsy();
-		wrapper.find( TOGGLE_SELECTOR ).trigger( 'click' );
+
+		await wrapper.find( TOGGLE_SELECTOR ).trigger( 'click' );
+
 		expect( wrapper.find( TOGGLE_SELECTOR ).classes() )
 			.toContain( 'wb-db-error-permission-info__toggle--open' );
 		expect( wrapper.find( BODY_SELECTOR ).exists() )
 			.toBeTruthy();
-		wrapper.find( TOGGLE_SELECTOR ).trigger( 'click' );
+
+		await wrapper.find( TOGGLE_SELECTOR ).trigger( 'click' );
+
 		expect( wrapper.find( TOGGLE_SELECTOR ).classes() )
 			.toContain( 'wb-db-error-permission-info__toggle--closed' );
 		expect( wrapper.find( BODY_SELECTOR ).exists() )

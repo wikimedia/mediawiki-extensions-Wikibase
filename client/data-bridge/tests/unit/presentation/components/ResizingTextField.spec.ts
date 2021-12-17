@@ -17,12 +17,12 @@ describe( 'ResizingTextField', () => {
 		expect( ( wrapper.element as HTMLTextAreaElement ).value ).toBe( value );
 	} );
 
-	it( 'propagates input events to its parent', () => {
+	it( 'propagates input events to its parent', async () => {
 		const wrapper = mount( ResizingTextField );
 		const value = 'foo';
 		( wrapper.element as HTMLTextAreaElement ).value = value;
-		wrapper.trigger( 'input' );
-		expect( wrapper.emitted( 'input' )[ 0 ] ).toEqual( [ value ] );
+		await wrapper.trigger( 'input' );
+		expect( wrapper.emitted( 'input' )![ 0 ] ).toEqual( [ value ] );
 	} );
 
 	it( 'applies the max length limit to the textarea, if supplied', () => {
@@ -56,7 +56,7 @@ describe( 'ResizingTextField', () => {
 				const textarea = wrapper.element as HTMLTextAreaElement;
 				textarea.value = given;
 				wrapper.trigger( 'input' );
-				expect( wrapper.emitted( 'input' )[ 0 ] ).toEqual( [ expected ] );
+				expect( wrapper.emitted( 'input' )![ 0 ] ).toEqual( [ expected ] );
 			},
 		);
 	} );
