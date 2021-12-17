@@ -28,9 +28,6 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 * (repo) (T264597) forceWriteTermsTableSearchFields was removed
 * (repo) (T242164) propagateChangeVisibility was removed as a feature flag and turned on by default.
 
-=== New user-facing features in 1.36 ===
-* ...
-
 === External library changes in 1.36 ===
 
 ==== New external libraries ====
@@ -74,10 +71,6 @@ New monolingual support:
 * (T270059) ms-arab
 * (T267479) rah
 
-Monolingual entries removed as they are now natively supported by MediaWiki:
-
-* (T12345) ...
-
 === Breaking changes in 1.36 ===
 * (T264281) wb_terms table is fully removed from the database.
 
@@ -86,9 +79,6 @@ Monolingual entries removed as they are now natively supported by MediaWiki:
 * (T278819) Deprecated WikibaseRepo::getUserLanguage
 * (T277314) Deprecated WikibaseRepo::getSingleEntitySourceServicesFactory
 * (T277304) Deprecated WikibaseClient::getSingleEntitySourceServicesFactory
-
-=== Other changes in 1.36 ===
-* (T12345) ...
 
 == Online documentation ==
 Installation instructions and FAQ
