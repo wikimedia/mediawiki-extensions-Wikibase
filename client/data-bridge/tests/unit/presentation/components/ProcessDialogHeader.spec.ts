@@ -2,11 +2,6 @@ import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.v
 import { shallowMount } from '@vue/test-utils';
 
 describe( 'ProcessDialogHeader', () => {
-	it( 'is a Vue instance', () => {
-		const wrapper = shallowMount( ProcessDialogHeader );
-		expect( wrapper.isVueInstance() ).toBe( true );
-	} );
-
 	it( 'renders correctly without slots filled', () => {
 		const wrapper = shallowMount( ProcessDialogHeader );
 		expect( wrapper.element ).toMatchSnapshot();

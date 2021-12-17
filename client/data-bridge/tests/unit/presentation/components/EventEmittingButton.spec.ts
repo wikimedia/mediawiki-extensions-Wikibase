@@ -250,8 +250,7 @@ describe( 'EventEmittingButton', () => {
 		} );
 	} );
 
-	// TODO: reenable when JestCustomEnvironment is reenabled after migration
-	it.skip( 'throws for unknown type', () => {
+	it( 'throws for unknown type', () => {
 		expect( () => shallowMountWithProps( { type: 'potato' } ) ).toThrow();
 	} );
 

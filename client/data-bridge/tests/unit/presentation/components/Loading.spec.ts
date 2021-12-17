@@ -8,16 +8,6 @@ describe( 'Loading', () => {
 		jest.useFakeTimers();
 	} );
 
-	it( 'is a Vue instance', () => {
-		const wrapper = shallowMount( Loading, {
-			propsData: {
-				isInitializing: false,
-				isSaving: false,
-			},
-		} );
-		expect( wrapper.isVueInstance() ).toBe( true );
-	} );
-
 	it( 'renders default slot if constructed as not initializing', () => {
 		const content = 'Already initialized content';
 		const wrapper = shallowMount( Loading, {

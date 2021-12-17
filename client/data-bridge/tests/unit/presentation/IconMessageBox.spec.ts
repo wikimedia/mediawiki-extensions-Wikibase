@@ -18,8 +18,7 @@ describe( 'IconMessageBox', () => {
 		expect( wrapper.classes() ).toContain( 'wb-ui-icon-message-box--notice' );
 	} );
 
-	// TODO: reenable when JestCustomEnvironment is reenabled after migration
-	it.skip( 'throws for unknown type', () => {
+	it( 'throws for unknown type', () => {
 		expect( () => shallowMount( IconMessageBox, {
 			propsData: { type: 'potato' },
 		} ) ).toThrow();
