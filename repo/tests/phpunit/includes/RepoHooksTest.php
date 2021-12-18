@@ -364,7 +364,7 @@ XML
 	}
 
 	public function testOnParserOptionsRegister_hook() {
-		$pOpts = ParserOptions::newCanonical( 'canonical' );
+		$pOpts = ParserOptions::newFromAnon();
 
 		$used = [];
 		$pOpts->registerWatcher( function ( $opt ) use ( &$used ) {
@@ -379,7 +379,7 @@ XML
 			$pOpts->optionsHash( [ 'wb' ] )
 		);
 
-		$pOpts2 = ParserOptions::newCanonical( 'canonical' );
+		$pOpts2 = ParserOptions::newFromAnon();
 		$this->assertRegExp(
 			'/(?:^|!)wb=' . EntityHandler::PARSER_VERSION . '(?:!|$)/',
 			$pOpts2->optionsHash( [ 'wb' ] )
