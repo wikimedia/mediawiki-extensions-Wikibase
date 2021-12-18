@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Notifications;
 use InvalidArgumentException;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
-use User;
+use MediaWiki\User\UserIdentity;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Repo\Content\EntityContent;
 use Wikimedia\Assert\Assert;
@@ -48,14 +48,14 @@ class ChangeNotifier {
 	 * when a wiki page containing an EntityContent was deleted.
 	 *
 	 * @param EntityContent $content
-	 * @param User $user
+	 * @param UserIdentity $user
 	 * @param string $timestamp timestamp in TS_MW format.
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws ChangeTransmitterException
 	 * @return EntityChange|null
 	 */
-	public function notifyOnPageDeleted( EntityContent $content, User $user, $timestamp ) {
+	public function notifyOnPageDeleted( EntityContent $content, UserIdentity $user, $timestamp ) {
 		if ( $content->isRedirect() ) {
 			// TODO: notify the client about changes to redirects!
 			return null;
