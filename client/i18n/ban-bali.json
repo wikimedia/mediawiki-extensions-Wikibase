@@ -3,6 +3,7 @@
 		"authors": [
 			"Carma Citrawati",
 			"Chinamoonroll",
+			"Joseagush",
 			"Tok Pisin"
 		]
 	},
@@ -10,6 +11,8 @@
 	"wikibase-editlinks": "ᬳᬸᬯᬄᬧ᭄ᬭᬦᬮ",
 	"wikibase-editlinkstitle": "ᬳᬸᬯᬄᬧ᭄ᬭᬦᬮᬧᬦ᭄ᬢᬭᬦᬶᬂᬪᬵᬱ",
 	"wikibase-linkitem-addlinks": "ᬯᭂᬯᭂᬄᬧ᭄ᬭᬦᬮ",
+	"wikibase-linkitem-input-site": "ᬪᬵᬱ:",
+	"wikibase-linkitem-input-page": "ᬓᬘ:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ᬳᭂᬂᬓᭂᬩᬂ",
 	"wikibase-rc-wikibase-edit-letter": "ᬤ᭄",
