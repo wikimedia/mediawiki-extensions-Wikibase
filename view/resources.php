@@ -275,7 +275,10 @@ return call_user_func( function() {
 				'oojs-ui',
 				'util.highlightSubstring',
 				'util.inherit',
-				'wikibase.tainted-ref',
+				// the tainted-ref dependency is temporarily moved to ControllerViewFactory.js (T298001),
+				// because tainted-ref is (transitively) es6-only and we don’t want this module to be es6-only yet;
+				// this can probably be reverted at some point, once we fully drop Wikibase IE11 support
+				// 'wikibase.tainted-ref',
 			],
 			'messages' => [
 				'parentheses',

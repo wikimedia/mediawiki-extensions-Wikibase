@@ -200,6 +200,13 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 			savingNodeNames.indexOf( eventNodeName ) !== -1;
 	};
 
+	// dynamically load wikibase.tainted-ref, originally added as dependency of this module in change I9a244a36fe (commit 5fed25ce15);
+	// it’s not directly related to ControllerViewFactory, but we want to load it at the same time,
+	// and the dependency can’t be in resources.php because then TR’s es6-ness “infects” regular Wikibase (T298001)
+	mw.loader.using( 'wikibase.tainted-ref' ).catch( function () {
+		// ignore errors (but avoid unhandled promise rejection)
+	} );
+
 	return SELF;
 
 }( wikibase ) );
