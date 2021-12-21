@@ -9,6 +9,8 @@
 	"wikibase-editlinks": "Шилтемелерди оңдоо",
 	"wikibase-editlinkstitle": "Тилдер аралык шилтемелерди түзөтүү",
 	"wikibase-linkitem-addlinks": "Шилтемелерди кошуу",
+	"wikibase-linkitem-input-site": "Тил:",
+	"wikibase-linkitem-input-page": "Барак:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Жашыруу",
 	"wikibase-rc-hide-wikidata-show": "Көрсөтүү",
