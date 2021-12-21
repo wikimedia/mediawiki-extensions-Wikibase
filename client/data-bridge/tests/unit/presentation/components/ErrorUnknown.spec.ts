@@ -59,7 +59,8 @@ describe( 'ErrorUnknown', () => {
 
 	it( 'repeats relaunch button\'s "click" event as "relaunch"', () => {
 		const wrapper = shallowMount( ErrorUnknown, { store, localVue } );
-		wrapper.find( '.wb-db-error-unknown__relaunch' ).vm.$emit( 'click' );
+		// @ts-ignore
+		wrapper.findComponent( '.wb-db-error-unknown__relaunch' ).vm.$emit( 'click' );
 		expect( wrapper.emitted( 'relaunch' ) ).toHaveLength( 1 );
 	} );
 } );
