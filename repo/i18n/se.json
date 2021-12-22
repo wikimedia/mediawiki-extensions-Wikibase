@@ -5,10 +5,16 @@
 		]
 	},
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Eará gielaide",
+	"wikibase-entitytermsforlanguagelistview-label": "Namma",
 	"wikibase-entitytermsforlanguagelistview-language": "Giella",
 	"wikibase-content-language-edit-label": "Giella:",
+	"wikibase-diffview-label": "namma",
 	"wikibase-diffview-link": "liŋkkat",
 	"wikibase-itembytitle-submit": "Oza",
+	"wikibase-itemdisambiguation-lookup-label": "Namma:",
 	"wikibase-itemdisambiguation-submit": "Oza",
-	"wikibase-newentity-language": "Giella:"
+	"wikibase-newentity-language": "Giella:",
+	"wikibase-newentity-label": "Namma:",
+	"wikibase-setlabel-label": "Namma:",
+	"wikibase-setlabeldescriptionaliases-label-label": "Namma:"
 }

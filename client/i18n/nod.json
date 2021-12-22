@@ -12,6 +12,7 @@
 	"wikibase-linkitem-selectlink": "ᨡᩬᩴᩉᩨ᩶ᨴ᩵ᩤ᩠ᨶᩃᩮᩬᩥᨠᨪᩱᨴ᩺ᩓᩉ᩠ᨶ᩶ᩣᨴᩦ᩵ᨴ᩵ᩤ᩠ᨶᩀᩣ᩠ᨠᩉᩨ᩶ᩃᩥᨦ᩠ᨣ᩺ᨾᩣᩁᩬᨯᩉ᩠ᨶ᩶ᩣᨶᩦ᩶",
 	"wikibase-linkitem-input-site": "ᨽᩣᩈᩣ:",
 	"wikibase-linkitem-input-page": "ᩉ᩠ᨶ᩶ᩣ:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ᨪ᩵ᩬᩁ",
 	"wikibase-rc-hide-wikidata-show": "ᨹᩮᩥ᩠ᨿ",
 	"wikibase-rc-wikibase-edit-letter": "ᨯ",

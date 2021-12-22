@@ -24,6 +24,8 @@
 	"wikibase-addreference": "agghiunci rifirimentu",
 	"wikibase-save-inprogress": "Sarvamentu...",
 	"wikibase-remove-inprogress": "Cancillazzioni...",
+	"wikibase-statementgrouplistview-add": "agghiunci dichiarazzioni",
+	"wikibase-statementgrouplistview-add-tooltip": "Agghiunci na ducumintazzioni nova",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Nta àutri lingui",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Cunfigura",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Ammustra etichetti, alias e discrizzioni nta tutti li mè lingui ô carricamentu dâ pàggina",

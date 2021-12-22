@@ -10,6 +10,7 @@
 	"wikibase-linkitem-addlinks": "Lââʹzzet liiŋkid",
 	"wikibase-linkitem-input-site": "Ǩiõll:",
 	"wikibase-linkitem-input-page": "Seidd:",
+	"wikibase-linkitem-not-loggedin-title": "Ton õõlǥak leeʹd sizz ǩeeʹrjtõõttâm",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Čiõǥǥ",
 	"wikibase-rc-hide-wikidata-show": "Čuäʹjet",
@@ -18,6 +19,11 @@
 	"wikibase-unconnectedpages-submit": "Čuäʹjet seeidaid",
 	"wikibase-pageswithbadges-submit": "Čuäʹjet seeidaid",
 	"wikibase-entityusage-submit": "Čuäʹjet seeidaid",
+	"wikibase-pageinfo-entity-usage-S": "Seiddõõzz liŋkk",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Nõmm: $1",
 	"wikibase-otherprojects": "Jeeʹres projeeʹktin",
-	"wikibase-sitelinks-sitename-columnheading": "Ǩiõll"
+	"wikibase-sitelinks-sitename-columnheading": "Ǩiõll",
+	"wikibase-client-data-bridge-references-heading": "Teâttkääiv",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Jiõk leäkku ǩeeʹrjtõõttâm sizz",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Jiõk leäkku ǩeeʹrjtõõttâm sizz"
 }
