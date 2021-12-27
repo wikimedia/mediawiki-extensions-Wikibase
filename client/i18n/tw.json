@@ -1,11 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Robertjamal12"
 		]
 	},
 	"wikibase-editlinks": "Sesa links no",
 	"wikibase-linkitem-addlinks": "Fa links ɛka ho",
+	"wikibase-linkitem-input-site": "Kasa:",
+	"wikibase-linkitem-input-page": "Kratafaː",
 	"wikibase-rc-hide-wikidata-hide": "Fa sie",
 	"wikibase-rc-hide-wikidata-show": "Kyereɛ",
 	"wikibase-rc-wikibase-edit-letter": "D",

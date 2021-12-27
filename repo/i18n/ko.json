@@ -156,7 +156,7 @@
 	"wikibase-validator-bad-url": "URL에는 공백이나 대괄호와 같은 특정한 문자의 포함을 허용하지 않습니다: $1",
 	"wikibase-validator-url-scheme-missing": "이 URL에는 \"https://\"와 같은 스킴이 없습니다.: $1",
 	"wikibase-validator-bad-url-scheme": "\"$1\" URL 스킴을 지원하지 않습니다.",
-	"wikibase-validator-unknown-unit": "알 수 없는 장치: $1",
+	"wikibase-validator-unknown-unit": "알 수 없는 단위: $1",
 	"wikibase-validator-not-allowed": "잘못된 값: $1",
 	"wikibase-validator-no-validators": "접근 거부",
 	"wikibase-validator-sitelink-conflict": "$1 링크는 $2 항목에 의해 이미 사용되고 있습니다. 소속되어 있지 않으면 $2에서 제거할 수 있으며 정확히 동일한 주제를 다루고 있다면 항목들을 병합할 수 있습니다.",

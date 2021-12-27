@@ -63,6 +63,7 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregorian",
 	"wikibase-time-calendar-julian": "Julian",
+	"wikibase-time-precision-CE": "$1 M",
 	"wikibase-time-precision-Gannum": "$1 miliar tahun",
 	"wikibase-time-precision-Mannum": "$1 juta tahun",
 	"wikibase-time-precision-annum": "$1 tahun",
