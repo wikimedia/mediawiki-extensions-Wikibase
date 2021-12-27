@@ -17,7 +17,7 @@ describe( 'StringDataValue', () => {
 				},
 			} );
 
-			expect( wrapper.findComponent( PropertyLabel ).props( 'term' ) ).toBe( label );
+			expect( wrapper.findComponent( PropertyLabel ).props( 'term' ) ).toStrictEqual( label );
 		} );
 
 		it( 'passes the DataValue down', () => {

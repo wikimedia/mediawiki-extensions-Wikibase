@@ -175,7 +175,7 @@ describe( 'store/actions', () => {
 			const successStore = createStore( services );
 			return successStore.dispatch( 'initBridge', info ).then( () => {
 				expect( successStore.state.applicationStatus ).toBe( ApplicationStatus.READY );
-				expect( successStore.state.targetLabel ).toBe( labelTerm );
+				expect( successStore.state.targetLabel ).toStrictEqual( labelTerm );
 				expect( successStore.state.targetValue ).not.toBe(
 					testSet.entity.statements[ info.propertyId ][ 0 ].mainsnak.datavalue,
 				);
