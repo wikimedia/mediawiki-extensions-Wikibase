@@ -1,29 +1,15 @@
 import ClientRouterPlugin from '@/presentation/plugins/ClientRouterPlugin';
 import RepoRouterPlugin from '@/presentation/plugins/RepoRouterPlugin';
-
-jest.mock( 'vue', () => {
-	return {
-		directive: jest.fn(),
-	};
-} );
-
-import Vue from 'vue';
 import extendVueEnvironment from '@/presentation/extendVueEnvironment';
 import MessagesPlugin from '@/presentation/plugins/MessagesPlugin';
-
-const inlanguageDirective = {};
-const mockInlanguage = jest.fn( ( _x: any ) => inlanguageDirective );
-jest.mock( '@/presentation/directives/inlanguage', () => ( {
-	__esModule: true,
-	default: ( languageRepo: any ) => mockInlanguage( languageRepo ),
-} ) );
+import InLanguagePlugin from '@/presentation/plugins/InLanguagePlugin';
 
 const appMock: any = {
 	use: jest.fn(),
 };
 
 describe( 'extendVueEnvironment', () => {
-	it( 'attaches inlanguage directive', () => {
+	it( 'invokes the InLanguage plugin', () => {
 		const languageInfoRepo = new ( jest.fn() )();
 		extendVueEnvironment(
 			appMock,
@@ -32,8 +18,7 @@ describe( 'extendVueEnvironment', () => {
 			new ( jest.fn() )(),
 			new ( jest.fn() )(),
 		);
-		expect( mockInlanguage ).toHaveBeenCalledWith( languageInfoRepo );
-		expect( Vue.directive ).toHaveBeenCalledWith( 'inlanguage', inlanguageDirective );
+		expect( appMock.use ).toHaveBeenCalledWith( InLanguagePlugin, languageInfoRepo );
 	} );
 
 	it( 'invokes the Messages plugin', () => {

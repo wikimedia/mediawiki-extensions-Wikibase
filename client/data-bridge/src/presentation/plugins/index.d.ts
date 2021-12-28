@@ -9,5 +9,6 @@ declare module 'vue/types/vue' {
 		$messages: Messages;
 		$repoRouter: MediaWikiRouter;
 		$clientRouter: MediaWikiRouter;
+		$inLanguage: ( langCode: string ) => { lang: string; dir: string; }
 	}
 }

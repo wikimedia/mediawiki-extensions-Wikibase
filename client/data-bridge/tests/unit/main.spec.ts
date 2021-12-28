@@ -25,7 +25,6 @@ const mockVue = {
 jest.mock( 'vue', () => {
 	return {
 		createMwApp: jest.fn().mockImplementation( () => mockVue ),
-		directive: jest.fn(),
 		use: jest.fn(),
 		config: {
 			productionTip: true,

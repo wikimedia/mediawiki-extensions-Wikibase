@@ -1,6 +1,7 @@
 import Term from '@/datamodel/Term';
 import TermLabel from '@/presentation/components/TermLabel.vue';
 import { shallowMount } from '@vue/test-utils';
+import { testInLanguage } from '../../../util/language';
 
 describe( 'TermLabel', () => {
 	const enTerm: Term = {
@@ -10,7 +11,7 @@ describe( 'TermLabel', () => {
 
 	it( 'uses the term value as the text', () => {
 		const wrapper = shallowMount( TermLabel, {
-			propsData: { term: enTerm },
+			propsData: { term: enTerm, inLanguage: testInLanguage },
 		} );
 
 		expect( wrapper.text() ).toBe( enTerm.value );
@@ -18,7 +19,7 @@ describe( 'TermLabel', () => {
 
 	it( 'sets the lang and dir attributes in English', () => {
 		const wrapper = shallowMount( TermLabel, {
-			propsData: { term: enTerm },
+			propsData: { term: enTerm, inLanguage: testInLanguage },
 		} );
 
 		expect( wrapper.attributes( 'lang' ) ).toBe( 'en' );
@@ -32,6 +33,7 @@ describe( 'TermLabel', () => {
 					value: 'שם מדעי',
 					language: 'he',
 				},
+				inLanguage: testInLanguage,
 			},
 		} );
 

@@ -2,6 +2,7 @@ import { config } from '@vue/test-utils';
 import MessageKeys from '@/definitions/MessageKeys';
 import Messages from '@/presentation/plugins/MessagesPlugin/Messages';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
+import { testInLanguage } from '../util/language';
 
 // Break on unhandled promise rejection (default warning might be overlooked)
 // https://github.com/facebook/jest/issues/3251#issuecomment-299183885
@@ -30,8 +31,10 @@ config.mocks = {
 		$repoRouter: {
 			getPageUrl: ( title, _params? ) => title,
 		},
+		$inLanguage: testInLanguage,
 	} as {
 		$messages: Messages;
 		$repoRouter: MediaWikiRouter;
+		$inLanguage: ( mwLangCode: string ) => { lang: string; dir: string;},
 	},
 };

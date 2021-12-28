@@ -2,7 +2,7 @@
 	<label
 		class="wb-db-property-label"
 		:for="htmlFor"
-	><TermLabel :term="term" /></label>
+	><TermLabel :term="term" :in-language="$inLanguage" /></label>
 </template>
 
 <script lang="ts">

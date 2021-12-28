@@ -1,6 +1,5 @@
 import Bcp47Language from '@/datamodel/Bcp47Language';
 import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
-import inlanguage from '@/presentation/directives/inlanguage';
 
 export const testLanguageInfoRepository: LanguageInfoRepository = {
 	resolve( languageCode: string ): Bcp47Language {
@@ -15,6 +14,10 @@ export const testLanguageInfoRepository: LanguageInfoRepository = {
 	},
 };
 
-export const testDirectivesInLanguage = {
-	inlanguage: inlanguage( testLanguageInfoRepository ),
-};
+export function testInLanguage( mwLangCode: string ): { lang: string; dir: string;} {
+	const language = testLanguageInfoRepository.resolve( mwLangCode );
+	return {
+		lang: language.code,
+		dir: language.directionality,
+	};
+}

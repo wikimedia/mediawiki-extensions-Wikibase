@@ -65,6 +65,7 @@ export default ( Vue as VueConstructor<Vue & InstanceType<typeof StateMixin>> ).
 				new TermLabel( {
 					propsData: {
 						term: this.rootModule.getters.targetLabel,
+						inLanguage: this.$inLanguage,
 					},
 				} ).$mount().$el as HTMLElement,
 			);

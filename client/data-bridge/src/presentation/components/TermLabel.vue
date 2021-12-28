@@ -1,7 +1,7 @@
 <template>
 	<span
 		class="wb-db-term-label"
-		v-inlanguage="term.language"
+		v-bind="inLanguage(term.language)"
 	>{{ term.value }}</span>
 </template>
 
@@ -17,6 +17,10 @@ export default Vue.extend( {
 	props: {
 		term: {
 			type: Object as PropType<Term>,
+			required: true,
+		},
+		inLanguage: {
+			type: Function as PropType<( langCode: string ) => { lang: string; dir: string; }>,
 			required: true,
 		},
 	},

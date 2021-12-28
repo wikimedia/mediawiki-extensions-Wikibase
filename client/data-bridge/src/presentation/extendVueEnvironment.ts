@@ -1,6 +1,5 @@
-import Vue from 'vue';
 import { VueConstructor } from 'vue/types/vue';
-import inlanguage from '@/presentation/directives/inlanguage';
+import InLanguagePlugin from './plugins/InLanguagePlugin';
 import MessagesPlugin from './plugins/MessagesPlugin';
 import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
 import MessagesRepository from '@/definitions/data-access/MessagesRepository';
@@ -15,7 +14,7 @@ export default function extendVueEnvironment(
 	repoRouter: MediaWikiRouter,
 	clientRouter: MediaWikiRouter,
 ): void {
-	Vue.directive( 'inlanguage', inlanguage( languageInfoRepo ) );
+	app.use( InLanguagePlugin, languageInfoRepo );
 	app.use( MessagesPlugin, messageRepo );
 	app.use( RepoRouterPlugin, repoRouter );
 	app.use( ClientRouterPlugin, clientRouter );

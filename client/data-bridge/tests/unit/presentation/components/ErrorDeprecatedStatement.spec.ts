@@ -42,12 +42,12 @@ describe( 'ErrorDeprecatedStatement', () => {
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			1,
 			MessageKeys.DEPRECATED_STATEMENT_ERROR_HEAD,
-			`<span class="wb-db-term-label" lang="zxx" dir="auto">${targetProperty}</span>`,
+			`<span lang="zxx" dir="auto" class="wb-db-term-label">${targetProperty}</span>`,
 		);
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			2,
 			MessageKeys.DEPRECATED_STATEMENT_ERROR_BODY,
-			`<span class="wb-db-term-label" lang="zxx" dir="auto">${targetProperty}</span>`,
+			`<span lang="zxx" dir="auto" class="wb-db-term-label">${targetProperty}</span>`,
 		);
 	} );
 

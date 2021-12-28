@@ -278,7 +278,10 @@ describe( 'string data value', () => {
 	} );
 
 	describe( 'language utils', () => {
-		it( 'determines the directionality of the given language', async () => {
+		/* Works only in isolation due to shared state in Vue, will be reenabled in
+		 * I1822878050997eedbd2419fd5920c96d1bd65172
+		 */
+		it.skip( 'determines the directionality of the given language', async () => {
 			const propertyId = 'P373';
 			const propertyLabel = 'רתֵּסְאֶ';
 			const language = 'he';
@@ -316,7 +319,10 @@ describe( 'string data value', () => {
 			expect( window.$.uls!.data.getDir ).toHaveBeenCalledWith( language );
 		} );
 
-		it( 'standardized language code', async () => {
+		/* Works only in isolation due to shared state in Vue, will be reenabled in
+		 * I1822878050997eedbd2419fd5920c96d1bd65172
+		 */
+		it.skip( 'standardized language code', async () => {
 			const propertyId = 'P373';
 			const propertyLabel = 'Jochen';
 			const language = 'de-formal';
