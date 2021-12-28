@@ -20,6 +20,7 @@ function externals() {
 }
 
 module.exports = {
+	publicPath: '.',
 	productionSourceMap: false,
 	configureWebpack: () => ( {
 		output: {

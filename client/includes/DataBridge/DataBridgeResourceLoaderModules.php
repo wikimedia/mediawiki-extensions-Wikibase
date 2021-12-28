@@ -21,7 +21,7 @@ class DataBridgeResourceLoaderModules {
 			[
 				'es6' => true,
 				'scripts' => [
-					'vendor-chunks.js',
+					'data-bridge.chunk-vendors.js',
 					'data-bridge.init.js',
 				],
 				'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
