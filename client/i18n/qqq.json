@@ -21,7 +21,8 @@
 			"Raymond",
 			"Shirayuki",
 			"Umherirrender",
-			"Vadgt"
+			"Vadgt",
+			"Waldyrious"
 		]
 	},
 	"wikibase-client-desc": "{{desc|name=Wikibase Client|url=https://www.mediawiki.org/wiki/Extension:Wikibase_Client}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]].",
@@ -51,7 +52,7 @@
 	"wikibase-linkitem-failed-modify": "Shown in case of a merge / modification error of items",
 	"wikibase-linkitem-title": "Title for the dialog which allows linking the current page with a page on another site.",
 	"wikibase-linkitem-linkpage": "Button in the dialog which allows linking the current page with a page on another site. Usable after the user inserted a site and a page to link.",
-	"wikibase-linkitem-selectlink": "Explaining the user that he can choose a site and a page that should be linked with the one he's currently on.",
+	"wikibase-linkitem-selectlink": "Explains to the user that they can choose a site and a page that should be linked with the item they are currently viewing. The link can be thought of as bidirectional.",
 	"wikibase-linkitem-input-site": "Label for the (autocompleted) inputbox asking for a site/ language.\n{{Identical|Language}}",
 	"wikibase-linkitem-input-page": "Label for the (autocompleted) inputbox asking for a page.\n{{Identical|Page}}",
 	"wikibase-linkitem-confirmitem-text": "Text shown above a table containing links to other pages. Asks the user to confirm that the links are correct and should be linked with the current page.\n\tThe message string will only be used when there are multiple pages, still it has a count argument so it can use a correct plural parser function.\n\nParameters:\n* $1 - the URL to the item which links to the shown pages\n* $2 - the number of links to associated pages",

@@ -7,7 +7,8 @@
 			"Neriman2003",
 			"Serkanland",
 			"Toghrul Rahimli",
-			"Wertuose"
+			"Wertuose",
+			"Şeyx Şamil"
 		]
 	},
 	"tooltip-t-wikibase": "Bağlanan məlumatların saxlanması elementinə keçid",
@@ -18,6 +19,8 @@
 	"wikibase-editlinks": "Keçidlərin redaktəsi",
 	"wikibase-editlinkstitle": "Dillərarası keçidləri redaktə et",
 	"wikibase-linkitem-addlinks": "Keçid əlavə et",
+	"wikibase-linkitem-input-site": "Dil:",
+	"wikibase-linkitem-input-page": "Səhifə:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Gizlə",
 	"wikibase-rc-hide-wikidata-show": "Göstər",

@@ -94,7 +94,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Beberapa pernyataan",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Pernyataan: $1",
 	"wikibase-pageinfo-entity-usage-X": "Semua data entitas",
-	"wikibase-pageinfo-entity-usage-O": "Lain-lain (Pernyataan)",
+	"wikibase-pageinfo-entity-usage-O": "Lain-lain (misalnya, alias, keberadaan entitas)",
 	"wikibase-property-render-error": "Gagal merender properti $1: $2",
 	"wikibase-otherprojects": "Dalam proyek lain",
 	"wikibase-otherprojects-beta-message": "Proyek lain menu samping",

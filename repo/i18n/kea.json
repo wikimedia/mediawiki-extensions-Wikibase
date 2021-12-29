@@ -7,5 +7,6 @@
 	},
 	"wikibase-edit": "muda",
 	"wikibase-add": "adisiona",
-	"wikibase-sitelinks-special": "Otus websites"
+	"wikibase-sitelinks-special": "Otus websites",
+	"wikibase-statementview-rank-normal": "Prioridadi normal"
 }

@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Karapananguasú Kururú Teremembé"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} aikuewa",
+	"wikibase-editlinks": "Murupiawa link-etá",
+	"wikibase-linkitem-addlinks": "Mburipíri linketá",
+	"wikibase-linkitem-title": "Link sowa irũ",
+	"wikibase-linkitem-linkpage": "Link sowa irũ",
+	"wikibase-linkitem-selectlink": "Katuçawa rupí, e-parawaka yepé site açui yepé sowa ĩdé reputari waá remuãdí kuá sowa upé.",
+	"wikibase-linkitem-input-site": "Nhẽẽga:",
+	"wikibase-linkitem-input-page": "Sowa:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Mumiwara",
+	"wikibase-rc-hide-wikidata-show": "Mukameẽ",
+	"wikibase-otherprojects": "Amũ kuri rupí"
+}
