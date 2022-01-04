@@ -13,6 +13,7 @@ export default {
 					stack: 'this is the stack trace',
 				},
 			} ],
+			config: { issueReportingLink: 'https://example.com' },
 		} ),
 	],
 };

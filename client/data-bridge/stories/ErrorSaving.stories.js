@@ -10,6 +10,7 @@ export default {
 			applicationErrors: [ {
 				type: ErrorTypes.SAVING_FAILED,
 			} ],
+			config: { issueReportingLink: 'https://example.com' },
 		} ),
 	],
 };
