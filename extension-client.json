@@ -458,12 +458,6 @@
 		},
 		"wikibase.client.data-bridge.app": {
 			"factory": "\\Wikibase\\Client\\DataBridge\\DataBridgeResourceLoaderModules::appModule"
-		},
-		"wikibase.client.data-bridge.app.modern": {
-			"factory": "\\Wikibase\\Client\\DataBridge\\DataBridgeResourceLoaderModules::modernAppModule"
-		},
-		"wikibase.client.data-bridge.app.legacy": {
-			"factory": "\\Wikibase\\Client\\DataBridge\\DataBridgeResourceLoaderModules::legacyAppModule"
 		}
 	},
 	"SpecialPages": {

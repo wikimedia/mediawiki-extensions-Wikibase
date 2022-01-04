@@ -19,6 +19,7 @@ class DataBridgeResourceLoaderModules {
 		$clientSettings = WikibaseClient::getSettings();
 		return new ResourceLoaderFileModule(
 			[
+				'es6' => true,
 				'scripts' => [
 					'vendor-chunks.js',
 					'data-bridge.init.js',
@@ -57,6 +58,7 @@ class DataBridgeResourceLoaderModules {
 		$clientSettings = WikibaseClient::getSettings();
 		return new MediaWikiConfigModule(
 			[
+				'es6' => true,
 				'getconfigvalueprovider' => function () use ( $clientSettings ) {
 					return new DataBridgeConfigValueProvider(
 						$clientSettings,
@@ -74,16 +76,17 @@ class DataBridgeResourceLoaderModules {
 		$clientSettings = WikibaseClient::getSettings();
 		return new ResourceLoaderFileModule(
 			[
+				'es6' => true,
 				'scripts' => [
-					'resources/wikibase.client.data-bridge.app.js'
+					'data-bridge.app.js'
 				],
 				'styles' => [
-					'data-bridge/dist/css/data-bridge.app.css',
+					'css/data-bridge.app.css',
 				],
 				'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
 					[ 'desktop', 'mobile' ] :
 					[],
-				'remoteExtPath' => 'Wikibase/client',
+				'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
 				'dependencies' => [
 					'vue',
 					'vuex',
@@ -160,38 +163,6 @@ class DataBridgeResourceLoaderModules {
 					'grouppage-sysop',
 					'emailuser',
 				],
-			],
-			__DIR__ . '/../..'
-		);
-	}
-
-	public static function modernAppModule() {
-		$clientSettings = WikibaseClient::getSettings();
-		return new ResourceLoaderFileModule(
-			[
-				'scripts' => [
-					'data-bridge.app.modern.js'
-				],
-				'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
-					[ 'desktop', 'mobile' ] :
-					[],
-				'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
-			],
-			__DIR__ . '/../../data-bridge/dist'
-		);
-	}
-
-	public static function legacyAppModule() {
-		$clientSettings = WikibaseClient::getSettings();
-		return new ResourceLoaderFileModule(
-			[
-				'scripts' => [
-					'data-bridge.app.js'
-				],
-				'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
-					[ 'desktop', 'mobile' ] :
-					[],
-				'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
 			],
 			__DIR__ . '/../../data-bridge/dist'
 		);
