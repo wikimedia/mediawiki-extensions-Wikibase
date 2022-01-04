@@ -2,9 +2,13 @@ Change notes from older releases. For current info, see RELEASE-NOTES-1.36.
 
 = Wikibase 1.35 =
 
-== Wikibase 1.35.4-wmde.2 ==
+== Wikibase 1.35.5-wmde.3 ==
 
 This is a security and maintenance release of the Wikibase 1.35 branch.
+
+=== Changes since Wikibase 1.35.4-wmde.2 ===
+
+* (T297570) XSS in Wikibase using formatter URL
 
 === Changes since Wikibase 1.35.0-wmde.1 ===
 
@@ -243,5 +247,4 @@ Discussion regarding the development of Wikidata
 
 == IRC help ==
 
-Questions related to wikibase and wikidata can be asked in #wikibase or
-#wikidata on irc.freenode.net.
+Questions related to wikibase and wikidata can be asked in #wikidata on irc.libera.chat.
