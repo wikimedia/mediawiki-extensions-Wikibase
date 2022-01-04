@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fraxinus.cs"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}}тәи аелемент",
+	"wikibase-editlinks": "Азхьарԥшқәа рредакциазура",
+	"wikibase-linkitem-addlinks": "Азхьарԥшқәа иацҵатәуп",
+	"wikibase-linkitem-title": "Адаҟьа иадҳәалатәуп",
+	"wikibase-linkitem-linkpage": "Адаҟьа иадҳәалатәуп",
+	"wikibase-linkitem-input-site": "Абызшәа:",
+	"wikibase-linkitem-input-page": "Адаҟьа:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Иҵәахтәуп",
+	"wikibase-rc-hide-wikidata-show": "Иаарԥштәуп"
+}
