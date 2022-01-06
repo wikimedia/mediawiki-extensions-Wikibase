@@ -42,10 +42,6 @@ extendVueEnvironment(
 		},
 	},
 	{
-		usePublish: true,
-		issueReportingLink: 'https://example.com/issue/new?title=Bridge+error&description=<body>&tags=Wikidata-Bridge',
-	},
-	{
 		getPageUrl( title, params ) {
 			let url = `http://repo/${title}`;
 			if ( params ) {
