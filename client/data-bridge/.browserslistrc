@@ -4,4 +4,14 @@
 # See also browsers definition in ResourceLoader startup module
 # in MediaWiki core 'resources/src/startup/startup.js'.
 
-extends browserslist-config-wikimedia/modern
+# since we're now using Vue 3, there is no point in trying to produce a bundle for non-es6 browsers,
+# because Proxy cannot be polyfilled/transpiled.
+
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Opera versions
+last 2 Edge versions
+Android >= 96
+
+Safari >= 10
+iOS >= 10
