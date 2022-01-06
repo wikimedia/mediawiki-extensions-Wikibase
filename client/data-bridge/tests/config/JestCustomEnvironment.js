@@ -5,6 +5,8 @@ class JestCustomEnvironment extends JSDOMEnvironment {
 		super( config, context );
 		Object.assign( context.console, {
 			error( ...args ) {
+				// eslint-disable-next-line no-console
+				console.error( ...args );
 				throw new Error(
 					`Unexpected call of console.error() with:\n\n${args.join( ', ' )}`,
 					this.error,
@@ -12,6 +14,8 @@ class JestCustomEnvironment extends JSDOMEnvironment {
 			},
 
 			warn( ...args ) {
+				// eslint-disable-next-line no-console
+				console.warn( ...args );
 				throw new Error(
 					`Unexpected call of console.warn() with:\n\n${args.join( ', ' )}`,
 					this.warn,
