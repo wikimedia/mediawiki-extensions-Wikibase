@@ -26,11 +26,26 @@ use WikiMap;
  */
 class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 
+	public function needsDB() {
+		$neededTables = [
+			'wb_changes',
+			'wb_changes_subscription',
+			'job',
+		];
+		$this->tablesUsed = array_merge(
+			$this->tablesUsed,
+			array_diff( $neededTables, $this->tablesUsed )
+		);
+
+		return parent::needsDB();
+	}
+
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->tablesUsed[] = 'wb_changes';
 		$this->tablesUsed[] = 'wb_changes_subscription';
+		$this->tablesUsed[] = 'job';
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
 		global $wgWBRepoSettings;
@@ -114,6 +129,47 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 
 		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
 		$this->assertTrue( $jobQueueGroup->get( 'EntityChangeNotification' )->isEmpty() );
+	}
+
+	public function testSitelinkAdded(): void {
+		$this->skipIfClientNotEnabled();
+		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
+
+		$testItemId = new ItemId( 'Q50' );
+		$testItemChange = new ItemChange( [
+			'time' => '20210906122813',
+			'info' => [
+				'compactDiff' => new EntityDiffChangedAspects( [], [], [], [
+					$wiki => [ null, 'some_page', false, ]
+				], false ),
+				'metadata' => [
+					'page_id' => 3,
+					'rev_id' => 123,
+					'parent_id' => 4,
+					'comment' => '...',
+					'user_text' => 'Admin',
+					'central_user_id' => 0,
+					'bot' => 0,
+				],
+			],
+			'user_id' => '43',
+			'revision_id' => '123',
+			'object_id' => 'Q50',
+			'type' => 'wikibase-item~update',
+		] );
+		$testItemChange->setEntityId( $testItemId );
+
+		$changeStore = new SqlChangeStore(
+			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()
+		);
+		$changeStore->saveChange( $testItemChange );
+
+		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState( null, [ 'entityId' => 'Q50' ] );
+
+		$dispatchChangesJob->run();
+
+		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
+		$this->assertFalse( $jobQueueGroup->get( 'EntityChangeNotification' )->isEmpty() );
 	}
 
 	private function makeNewChange(): EntityChange {
