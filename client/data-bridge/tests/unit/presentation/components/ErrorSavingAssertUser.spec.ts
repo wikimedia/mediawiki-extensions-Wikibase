@@ -57,7 +57,8 @@ describe( 'ErrorSavingAssertUser', () => {
 			store,
 			localVue,
 		} );
-		const button = wrapper.find( '.wb-db-error-saving-assertuser__proceed' );
+		// @ts-ignore
+		const button = wrapper.findComponent( '.wb-db-error-saving-assertuser__proceed' );
 		button.vm.$emit( 'click' );
 		await localVue.nextTick();
 
@@ -83,9 +84,9 @@ describe( 'ErrorSavingAssertUser', () => {
 			store,
 			localVue,
 		} );
-		const button = wrapper.find( `.wb-db-error-saving-assertuser__${buttonName}` );
+		// @ts-ignore
+		const button = wrapper.findComponent( `.wb-db-error-saving-assertuser__${buttonName}` );
 		button.vm.$emit( 'click' );
-		await localVue.nextTick();
 
 		expect( goBackFromErrorToReady ).toHaveBeenCalledTimes( 1 );
 	} );
@@ -116,7 +117,8 @@ describe( 'ErrorSavingAssertUser', () => {
 			store,
 			localVue,
 		} );
-		const button = wrapper.find( '.wb-db-error-saving-assertuser__proceed' );
+		// @ts-ignore
+		const button = wrapper.findComponent( '.wb-db-error-saving-assertuser__proceed' );
 
 		expect( messageGet ).toHaveBeenCalledWith( MessageKeys.SAVING_ERROR_ASSERTUSER_SAVE );
 		expect( button.props( 'message' ) ).toBe( saveMessage );
@@ -157,7 +159,8 @@ describe( 'ErrorSavingAssertUser', () => {
 			store: localStore,
 			localVue,
 		} );
-		const button = wrapper.find( '.wb-db-error-saving-assertuser__proceed' );
+		// @ts-ignore
+		const button = wrapper.findComponent( '.wb-db-error-saving-assertuser__proceed' );
 
 		expect( messageGet ).toHaveBeenCalledWith( MessageKeys.SAVING_ERROR_ASSERTUSER_PUBLISH );
 		expect( button.props( 'message' ) ).toBe( publishMessage );
