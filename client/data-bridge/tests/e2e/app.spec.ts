@@ -114,6 +114,7 @@ function prepareTestEnv( options: {
 		bcp47: jest.fn().mockReturnValue( 'de' ),
 	};
 
+	// @ts-ignore
 	delete window.location;
 	// @ts-ignore
 	window.location = { reload: jest.fn() };

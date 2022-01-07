@@ -22,7 +22,7 @@ export async function waitFor(
 				.then(
 					( done: boolean ) => {
 						if ( done === true ) {
-							return resolve();
+							return resolve( null );
 						}
 
 						if ( rounds < limit ) {

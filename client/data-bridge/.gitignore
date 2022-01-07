@@ -3,10 +3,7 @@ node_modules
 coverage/
 storybook-static/
 dist/*
-!dist/data-bridge.init.js
-!dist/data-bridge.app.js
-!dist/data-bridge.app.modern.js
-!dist/vendor-chunks.js
+!dist/*.js
 !dist/css/data-bridge.app.css
 !dist/img
 # note: when adding additional files to dist/, also add them to test:distnodiff
