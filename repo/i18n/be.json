@@ -200,6 +200,7 @@
 	"wikibase-parse-error-quantity": "Значэнне колькасці мае няправільны фармат.",
 	"wikibase-parse-error-time": "Значэнне часу мае няправільны фармат.",
 	"wikibase-api-failed-save": "Памылка пры захаванні.",
+	"wikibase-api-illegal-ids-or-sites-titles-selector": "Вызначыце або \"ids\", або пары \"sites\" і \"titles\" для адпаведнай старонкі.",
 	"wikibase-api-no-external-page": "Сайт «$1» не прадаставіў інфармацыі пра старонку «$2».",
 	"wikibase-conflict-patched": "Ваша праўка ўнесена ў апошнюю версію.",
 	"wikibase-restoreold": "аднавіць",
