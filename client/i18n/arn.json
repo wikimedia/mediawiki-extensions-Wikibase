@@ -1,8 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Fiestoforo"
+			"Fiestoforo",
+			"Manke ruLpa"
 		]
 	},
-	"wikibase-rc-hide-wikidata-show": "Pengelün"
+	"wikibase-dataitem": "Chemkün {{WBREPONAME}} mew",
+	"wikibase-editlinks": "Kümeelün trarintuku",
+	"wikibase-linkitem-addlinks": "Püñamtun trarintuku",
+	"wikibase-linkitem-title": "Trarintukun kiñe tapülh mew",
+	"wikibase-linkitem-linkpage": "Trarintukun kiñe tapülh mew",
+	"wikibase-linkitem-selectlink": "Zullinge kiñe welliñ ka kiñe tapülh tami trarintukuafiel tüfachi tapülh",
+	"wikibase-linkitem-input-site": "Zungun:",
+	"wikibase-linkitem-input-page": "Aztapülh:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Ellkan",
+	"wikibase-rc-hide-wikidata-show": "Pengelün",
+	"wikibase-otherprojects": "Kake küzaw"
 }
