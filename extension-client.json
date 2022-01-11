@@ -346,6 +346,10 @@
 				"vector": [
 					"wikibase.client.css",
 					"wikibase.client.vector.css"
+				],
+				"vector-2022": [
+					"wikibase.client.css",
+					"wikibase.client.vector.css"
 				]
 			}
 		},
