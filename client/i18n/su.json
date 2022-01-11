@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Daud I.F. Argana",
 			"Kandar",
 			"RXerself",
 			"Uchup19"
@@ -13,6 +14,10 @@
 	"wikibase-editlinks": "Édit tutumbu",
 	"wikibase-editlinkstitle": "Édit tutumbu antarbasa",
 	"wikibase-linkitem-addlinks": "Nambah tutumbu",
+	"wikibase-linkitem-title": "Tutumbu kana kaca",
+	"wikibase-linkitem-linkpage": "Tutumbu kana kaca",
+	"wikibase-linkitem-input-site": "Basa:",
+	"wikibase-linkitem-input-page": "Kaca:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Sumputkeun",
 	"wikibase-rc-hide-wikidata-show": "Témbongkeun",

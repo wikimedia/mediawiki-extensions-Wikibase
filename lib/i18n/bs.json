@@ -29,5 +29,10 @@
 	"datatypes-type-wikibase-item": "Stavka",
 	"datatypes-type-commonsMedia": "Commons medijska datoteka",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-calendar-gregorian": "gregorijanski",
+	"wikibase-time-calendar-julian": "julijanski",
+	"wikibase-time-precision-CE": "$1 n. e.",
+	"wikibase-time-precision-century": "$1. vijek",
+	"wikibase-time-precision-BCE": "$1 p. n. e.",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Uklonjen link ka [$2]"
 }
