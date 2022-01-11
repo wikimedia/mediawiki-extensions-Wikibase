@@ -47,10 +47,12 @@ class FederatedPropertiesUiEntityParserOutputGeneratorDecorator implements Entit
 	) {
 		// add wikibase styles in all cases, so we can format the link properly:
 		try {
-			$po = $this->inner->getParserOutput( $entityRevision, $generateHtml );
-			$po->setEnableOOUI( true );
-			$po->addModules( 'wikibase.federatedPropertiesEditRequestFailureNotice' );
-			$po->addModules( 'wikibase.federatedPropertiesLeavingSiteNotice' );
+			$parserOutput = $this->inner->getParserOutput( $entityRevision, $generateHtml );
+			$parserOutput->setEnableOOUI( true );
+			$parserOutput->addModules( [
+				'wikibase.federatedPropertiesEditRequestFailureNotice',
+				'wikibase.federatedPropertiesLeavingSiteNotice',
+			] );
 
 		} catch ( FederatedPropertiesException $ex ) {
 			$entity = $entityRevision->getEntity();
@@ -65,7 +67,7 @@ class FederatedPropertiesUiEntityParserOutputGeneratorDecorator implements Entit
 			throw $ex;
 		}
 
-		return $po;
+		return $parserOutput;
 	}
 
 }
