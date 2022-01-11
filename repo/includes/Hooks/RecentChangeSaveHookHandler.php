@@ -12,6 +12,7 @@ use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Repo\ChangeModification\DispatchChangesJob;
 use Wikibase\Repo\Notifications\ChangeHolder;
@@ -92,7 +93,7 @@ class RecentChangeSaveHookHandler {
 			return;
 		}
 
-		if ( !$this->subscriptionLookup->getSubscribers( $change->getEntityId() ) ) {
+		if ( !$this->changeNeedsDispatching( $change ) ) {
 			return;
 		}
 
@@ -102,6 +103,11 @@ class RecentChangeSaveHookHandler {
 		$this->enqueueDispatchChangesJob(
 			$change->getEntityId()->getSerialization()
 		);
+	}
+
+	private function changeNeedsDispatching( EntityChange $change ) {
+		return $this->subscriptionLookup->getSubscribers( $change->getEntityId() ) ||
+			( $change instanceof ItemChange && $change->getSiteLinkDiff()->getOperations() );
 	}
 
 	private function setChangeMetaData( EntityChange $change, RecentChange $rc, int $centralUserId ): void {

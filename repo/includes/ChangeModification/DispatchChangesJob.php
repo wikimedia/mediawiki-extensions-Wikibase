@@ -19,6 +19,7 @@ use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\WikibaseSettings;
@@ -146,7 +147,12 @@ class DispatchChangesJob extends Job {
 			return true;
 		}
 
-		$dispatchingClientSites = $this->filterClientWikis( $allClientSites, $subscribedClientSites );
+		if ( $entityId->getEntityType() === 'item' ) {
+			$wikisWithSitelinkChanges = $this->getWikiIdsWithChangedSitelinks( $changes );
+		} else {
+			$wikisWithSitelinkChanges = [];
+		}
+		$dispatchingClientSites = $this->filterClientWikis( $allClientSites, $subscribedClientSites, $wikisWithSitelinkChanges );
 		if ( empty( $dispatchingClientSites ) ) {
 			// without subscribed wikis, this job should never have been scheduled
 			$this->logger->warning( __METHOD__ . ': no wikis subscribed for {entity} => doing nothing', [
@@ -158,6 +164,7 @@ class DispatchChangesJob extends Job {
 			return true;
 		}
 
+		$this->logUnsubscribedWikisWithSitelinkChanges( $dispatchingClientSites, $subscribedClientSites );
 		// StatsdDataFactoryInterface::timing is used so that p99 and similar aggregation is available
 		$this->stats->timing( 'wikibase.repo.dispatchChangesJob.NumberOfChangesInJob', count( $changes ) );
 		$this->stats->timing( 'wikibase.repo.dispatchChangesJob.numberOfWikisForChange', count( $dispatchingClientSites ) );
@@ -179,6 +186,26 @@ class DispatchChangesJob extends Job {
 		return true;
 	}
 
+	private function logUnsubscribedWikisWithSitelinkChanges( $dispatchingClientSites, $subscribedClientSites ) {
+		$clientsWithAddedSitelinks = array_diff( array_keys( $dispatchingClientSites ), $subscribedClientSites );
+		foreach ( $clientsWithAddedSitelinks as $wikiId ) {
+			$this->stats->increment( "wikibase.repo.dispatchChangesJob.sitelinkAdditionDispatched.${wikiId}" );
+		}
+	}
+
+	/**
+	 * @return string[]
+	 */
+	private function getWikiIdsWithChangedSitelinks( array $changes ): array {
+		return array_values( array_unique( array_reduce(
+			$changes,
+			function ( $carry, ItemChange $change ) {
+				return array_merge( $carry, array_keys( $change->getSiteLinkDiff()->getOperations() ) );
+			},
+			[]
+		) ) );
+	}
+
 	/**
 	 * @param Change[] $changes
 	 */
@@ -194,15 +221,16 @@ class DispatchChangesJob extends Job {
 	/**
 	 * @param string[] $allClientWikis as returned by getClientWikis().
 	 * @param string[] $subscribedClientSites sites subscribed to this entityId
+	 * @param string[] $wikisWithSitelinkChanges sites whose sitelink was changed
 	 *
 	 * @throws MWException
 	 * @return string[] A mapping of client wiki site IDs to logical database names.
 	 */
-	private function filterClientWikis( array $allClientWikis, array $subscribedClientSites ): array {
+	private function filterClientWikis( array $allClientWikis, array $subscribedClientSites, array $wikisWithSitelinkChanges ): array {
 		Assert::parameterElementType( 'string', $allClientWikis, '$allClientWikis' );
 
 		$clientWikis = [];
-		foreach ( $subscribedClientSites as $siteID ) {
+		foreach ( array_unique( array_merge( $subscribedClientSites, $wikisWithSitelinkChanges ) ) as $siteID ) {
 			if ( array_key_exists( $siteID, $allClientWikis ) ) {
 				$clientWikis[$siteID] = $allClientWikis[$siteID];
 			} else {
