@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Fiestoforo"
+			"Fiestoforo",
+			"Manke ruLpa"
 		]
 	},
-	"wikibase-edit": "kümeelün"
+	"wikibase-edit": "kümeelün",
+	"wikibase-add": "püñamtun",
+	"wikibase-description-empty": "Pikünulay ñi chumngelen",
+	"wikibase-sitelinks-special": "Kake welliñ"
 }

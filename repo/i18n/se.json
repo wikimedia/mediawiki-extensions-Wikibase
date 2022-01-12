@@ -4,12 +4,16 @@
 			"Yupik"
 		]
 	},
+	"wikibase-addreference": "lasit gáldu",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Eará gielaide",
+	"wikibase-entitytermsforlanguagelistview-description": "Govvádus",
 	"wikibase-entitytermsforlanguagelistview-label": "Namma",
 	"wikibase-entitytermsforlanguagelistview-language": "Giella",
 	"wikibase-content-language-edit-label": "Giella:",
+	"wikibase-diffview-reference": "gáldu",
 	"wikibase-diffview-label": "namma",
 	"wikibase-diffview-link": "liŋkkat",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|gáldu}}",
 	"wikibase-itembytitle-submit": "Oza",
 	"wikibase-itemdisambiguation-lookup-label": "Namma:",
 	"wikibase-itemdisambiguation-submit": "Oza",
