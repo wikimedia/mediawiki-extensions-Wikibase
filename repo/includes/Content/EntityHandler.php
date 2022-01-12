@@ -678,17 +678,17 @@ abstract class EntityHandler extends ContentHandler {
 
 	/**
 	 * @param WikiPage $page
-	 * @param ParserOutput $output
+	 * @param ParserOutput $parserOutput
 	 * @param SearchEngine $engine
 	 *
 	 * @return array Wikibase fields data, map of name=>value for fields
 	 */
 	public function getDataForSearchIndex(
 		WikiPage $page,
-		ParserOutput $output,
+		ParserOutput $parserOutput,
 		SearchEngine $engine
 	) {
-		$fieldsData = parent::getDataForSearchIndex( $page, $output, $engine );
+		$fieldsData = parent::getDataForSearchIndex( $page, $parserOutput, $engine );
 
 		$content = $page->getContent();
 		if ( ( $content instanceof EntityContent ) && !$content->isRedirect() ) {
@@ -765,7 +765,7 @@ abstract class EntityHandler extends ContentHandler {
 	protected function fillParserOutput(
 		Content $content,
 		ContentParseParams $cpoParams,
-		ParserOutput &$output
+		ParserOutput &$parserOutput
 	) {
 		'@phan-var EntityContent $content';
 		$generateHtml = $cpoParams->getGenerateHtml();
@@ -773,13 +773,13 @@ abstract class EntityHandler extends ContentHandler {
 		$revId = $cpoParams->getRevId();
 
 		if ( $content->isRedirect() ) {
-			$output = $this->getParserOutputForRedirect( $content, $generateHtml );
+			$parserOutput = $this->getParserOutputForRedirect( $content, $generateHtml );
 		} elseif ( !$content->getEntityHolder() ) {
 			// NOTE: There is no entity to render, but fillParserOutput() must work for all Content objects.
 			// NOTE: isEmpty() will return true when there is an entity, but that entity is empty. In
 			//       that case, we must not bail out, but call getParserOutputFromEntityView() as normal.
 		} else {
-			$output = $this->getParserOutputFromEntityView(
+			$parserOutput = $this->getParserOutputFromEntityView(
 				$content,
 				$revId,
 				$parserOptions,
@@ -788,7 +788,7 @@ abstract class EntityHandler extends ContentHandler {
 
 			if ( !$parserOptions->getUserLangObj()->equals( RequestContext::getMain()->getLanguage() ) ) {
 				// HACK: Don't save to parser cache if this is not in the user's lang: T199983.
-				$output->updateCacheExpiry( 0 );
+				$parserOutput->updateCacheExpiry( 0 );
 			}
 		}
 	}
@@ -802,25 +802,25 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return ParserOutput
 	 */
 	protected function getParserOutputForRedirect( EntityContent $content, bool $generateHtml ) {
-		$output = new ParserOutput();
+		$parserOutput = new ParserOutput();
 		$target = $content->getRedirectTarget();
 
 		// Make sure to include the redirect link in pagelinks
-		$output->addLink( $target );
+		$parserOutput->addLink( $target );
 
 		// Since the output depends on the user language, we must make sure
 		// ParserCache::getKey() includes it in the cache key.
-		$output->recordOption( 'userlang' );
+		$parserOutput->recordOption( 'userlang' );
 		// And we need to include EntityHandler::PARSER_VERSION in the cache key too
-		$output->recordOption( 'wb' );
+		$parserOutput->recordOption( 'wb' );
 		if ( $generateHtml ) {
 			$chain = $content->getRedirectChain();
 			$language = $this->getPageViewLanguage( $target );
 			$html = Article::getRedirectHeaderHtml( $language, $chain, false );
-			$output->setText( $html );
+			$parserOutput->setText( $html );
 		}
 
-		return $output;
+		return $parserOutput;
 	}
 
 	/**
@@ -846,17 +846,17 @@ abstract class EntityHandler extends ContentHandler {
 
 		$entityRevision = $this->getEntityRevision( $content, $revisionId );
 
-		$output = $outputGenerator->getParserOutput( $entityRevision, $generateHtml );
+		$parserOutput = $outputGenerator->getParserOutput( $entityRevision, $generateHtml );
 
 		// Since the output depends on the user language, we must make sure
 		// ParserCache::getKey() includes it in the cache key.
-		$output->recordOption( 'userlang' );
+		$parserOutput->recordOption( 'userlang' );
 		// And we need to include EntityHandler::PARSER_VERSION in the cache key too
-		$output->recordOption( 'wb' );
+		$parserOutput->recordOption( 'wb' );
 
-		$this->applyEntityPageProperties( $content, $output );
+		$this->applyEntityPageProperties( $content, $parserOutput );
 
-		return $output;
+		return $parserOutput;
 	}
 
 	private function getValidUserLanguage( Language $language ) {
@@ -888,19 +888,19 @@ abstract class EntityHandler extends ContentHandler {
 
 	/**
 	 * Registers any properties returned by getEntityPageProperties()
-	 * in $output.
+	 * in $parserOutput.
 	 *
 	 * @param EntityContent $content
-	 * @param ParserOutput $output
+	 * @param ParserOutput $parserOutput
 	 */
-	private function applyEntityPageProperties( EntityContent $content, ParserOutput $output ) {
+	private function applyEntityPageProperties( EntityContent $content, ParserOutput $parserOutput ) {
 		if ( $content->isRedirect() ) {
 			return;
 		}
 
 		$properties = $content->getEntityPageProperties();
 		foreach ( $properties as $name => $value ) {
-			$output->setPageProperty( $name, $value );
+			$parserOutput->setPageProperty( $name, $value );
 		}
 	}
 

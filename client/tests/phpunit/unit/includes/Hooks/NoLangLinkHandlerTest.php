@@ -49,11 +49,11 @@ class NoLangLinkHandlerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetSetNoExternalLangLinks() {
-		$pout = new ParserOutput();
+		$parserOutput = new ParserOutput();
 		$list = [ 'xy', 'abc' ];
 
-		NoLangLinkHandler::setNoExternalLangLinks( $pout, $list );
-		$actual = NoLangLinkHandler::getNoExternalLangLinks( $pout );
+		NoLangLinkHandler::setNoExternalLangLinks( $parserOutput, $list );
+		$actual = NoLangLinkHandler::getNoExternalLangLinks( $parserOutput );
 
 		$this->assertEquals( $list, $actual );
 	}

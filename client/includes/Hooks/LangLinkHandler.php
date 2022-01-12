@@ -108,14 +108,14 @@ class LangLinkHandler {
 	 * - nel parser function = * (suppress all repo links)
 	 *
 	 * @param Title $title
-	 * @param ParserOutput $out
+	 * @param ParserOutput $parserOutput
 	 *
 	 * @return bool
 	 */
-	public function useRepoLinks( Title $title, ParserOutput $out ) {
+	public function useRepoLinks( Title $title, ParserOutput $parserOutput ) {
 		// use repoLinks in only the namespaces specified in settings
 		if ( $this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) === true ) {
-			$nel = $this->getNoExternalLangLinks( $out );
+			$nel = $this->getNoExternalLangLinks( $parserOutput );
 
 			if ( in_array( '*', $nel ) ) {
 				return false;
@@ -137,14 +137,14 @@ class LangLinkHandler {
 	 * inter-language link defined in the local wikitext. This is done later
 	 * by getEffectiveRepoLinks().
 	 *
-	 * @param ParserOutput $out
+	 * @param ParserOutput $parserOutput
 	 * @param array $repoLinks An array that uses global site IDs as keys.
 	 *
 	 * @return SiteLink[] A filtered copy of $repoLinks, with any inappropriate
 	 *         entries removed.
 	 */
-	public function suppressRepoLinks( ParserOutput $out, array $repoLinks ) {
-		$nel = $this->getNoExternalLangLinks( $out );
+	public function suppressRepoLinks( ParserOutput $parserOutput, array $repoLinks ) {
+		$nel = $this->getNoExternalLangLinks( $parserOutput );
 
 		foreach ( $nel as $code ) {
 			if ( $code === '*' ) {
@@ -199,13 +199,13 @@ class LangLinkHandler {
 	 *
 	 * @see NoLangLinkHandler::getNoExternalLangLinks
 	 *
-	 * @param ParserOutput $out
+	 * @param ParserOutput $parserOutput
 	 *
 	 * @return string[] A list of language codes, identifying which repository links to ignore.
 	 *         Empty if {{#noexternallanglinks}} was not used on the page.
 	 */
-	public function getNoExternalLangLinks( ParserOutput $out ) {
-		return NoLangLinkHandler::getNoExternalLangLinks( $out );
+	public function getNoExternalLangLinks( ParserOutput $parserOutput ) {
+		return NoLangLinkHandler::getNoExternalLangLinks( $parserOutput );
 	}
 
 	/**
@@ -251,22 +251,22 @@ class LangLinkHandler {
 	 * link on the page.
 	 *
 	 * @param Title $title The page's title
-	 * @param ParserOutput $out   Parsed representation of the page
+	 * @param ParserOutput $parserOutput   Parsed representation of the page
 	 *
 	 * @return SiteLink[] An associative array, using site IDs for keys
 	 *         and the target pages in the respective languages as the associated value.
 	 */
-	public function getEffectiveRepoLinks( Title $title, ParserOutput $out ) {
-		if ( !$this->useRepoLinks( $title, $out ) ) {
+	public function getEffectiveRepoLinks( Title $title, ParserOutput $parserOutput ) {
+		if ( !$this->useRepoLinks( $title, $parserOutput ) ) {
 			return [];
 		}
-		$onPageLinks = $out->getLanguageLinks();
+		$onPageLinks = $parserOutput->getLanguageLinks();
 		$onPageLinks = $this->localLinksToArray( $onPageLinks );
 
 		$repoLinks = $this->siteLinksForDisplayLookup->getSiteLinksForPageTitle( $title );
 
 		$repoLinks = $this->filterRepoLinksByGroup( $repoLinks, $this->siteGroups );
-		$repoLinks = $this->suppressRepoLinks( $out, $repoLinks );
+		$repoLinks = $this->suppressRepoLinks( $parserOutput, $repoLinks );
 
 		$repoLinks = array_diff_key( $repoLinks, $onPageLinks ); // remove local links
 
@@ -281,24 +281,24 @@ class LangLinkHandler {
 	 * The language links are not sorted, call sortLanguageLinks() to do that.
 	 *
 	 * @param Title $title The page's title
-	 * @param ParserOutput $out Parsed representation of the page
+	 * @param ParserOutput $parserOutput Parsed representation of the page
 	 */
-	public function addLinksFromRepository( Title $title, ParserOutput $out ) {
-		$repoLinks = $this->getEffectiveRepoLinks( $title, $out );
+	public function addLinksFromRepository( Title $title, ParserOutput $parserOutput ) {
+		$repoLinks = $this->getEffectiveRepoLinks( $title, $parserOutput );
 
-		$this->addLinksToOutput( $repoLinks, $out );
+		$this->addLinksToOutput( $repoLinks, $parserOutput );
 
 		$repoLinksByInterwiki = $this->indexLinksByInterwiki( $repoLinks );
-		$this->badgeDisplay->attachBadgesToOutput( $repoLinksByInterwiki, $out );
+		$this->badgeDisplay->attachBadgesToOutput( $repoLinksByInterwiki, $parserOutput );
 	}
 
 	/**
 	 * Adds the given SiteLinks to the given ParserOutput.
 	 *
 	 * @param SiteLink[] $links
-	 * @param ParserOutput $out
+	 * @param ParserOutput $parserOutput
 	 */
-	private function addLinksToOutput( array $links, ParserOutput $out ) {
+	private function addLinksToOutput( array $links, ParserOutput $parserOutput ) {
 		foreach ( $links as $siteId => $siteLink ) {
 			$page = $siteLink->getPageName();
 			$targetSite = $this->siteLookup->getSite( $siteId );
@@ -312,7 +312,7 @@ class LangLinkHandler {
 
 			if ( $interwikiCode ) {
 				$link = "$interwikiCode:$page";
-				$out->addLanguageLink( $link );
+				$parserOutput->addLanguageLink( $link );
 			} else {
 				wfWarn( "No interlanguage prefix found for $siteId." );
 			}

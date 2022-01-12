@@ -78,15 +78,15 @@ class CachingKartographerEmbeddingHandler {
 			return false;
 		}
 
-		$out = $this->getParserOutput( [ $value ], $language );
+		$parserOutput = $this->getParserOutput( [ $value ], $language );
 
 		$containerDivId = 'wb-globeCoordinateValue-preview-' . base_convert( mt_rand( 1, PHP_INT_MAX ), 10, 36 );
 
-		$html = '<div id="' . $containerDivId . '">' . $out->getText() . '</div>';
+		$html = '<div id="' . $containerDivId . '">' . $parserOutput->getText() . '</div>';
 		$html .= $this->getMapframeInitJS(
 			$containerDivId,
-			$out->getModules(),
-			(array)( $out->getJsConfigVars()['wgKartographerLiveData'] ?? [] )
+			$parserOutput->getModules(),
+			(array)( $parserOutput->getJsConfigVars()['wgKartographerLiveData'] ?? [] )
 		);
 
 		return $html;
@@ -103,7 +103,7 @@ class CachingKartographerEmbeddingHandler {
 	 * @return ParserOutput
 	 */
 	public function getParserOutput( array $values, Language $language ) {
-		$out = new ParserOutput();
+		$parserOutput = new ParserOutput();
 		// Clear the state initially (but only once)
 		$clearState = true;
 
@@ -121,7 +121,7 @@ class CachingKartographerEmbeddingHandler {
 				continue;
 			}
 
-			$out = $this->parser->parse(
+			$parserOutput = $this->parser->parse(
 				$this->getWikiText( $value ),
 				$title,
 				$parserOptions,
@@ -130,10 +130,10 @@ class CachingKartographerEmbeddingHandler {
 			);
 			$clearState = false;
 
-			$this->cache->set( $this->getCacheKey( $value, $language ), $out->getText() );
+			$this->cache->set( $this->getCacheKey( $value, $language ), $parserOutput->getText() );
 		}
 
-		return $out;
+		return $parserOutput;
 	}
 
 	/**

@@ -104,9 +104,9 @@ class MagicWordHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$out = new ParserOutput();
+		$parserOutput = new ParserOutput();
 		$parser->method( 'getOutput' )
-			->willReturn( $out );
+			->willReturn( $parserOutput );
 		$parser->method( 'getTitle' )
 			->willReturn( Title::newMainPage() );
 
@@ -125,7 +125,7 @@ class MagicWordHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertArrayHasKey( 'noexternallanglinks', $cache );
 		$this->assertIsString(
-			$out->getPageProperty( 'noexternallanglinks' )
+			$parserOutput->getPageProperty( 'noexternallanglinks' )
 		);
 	}
 

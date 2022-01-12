@@ -45,13 +45,13 @@ class NoLangLinkHandler {
 	 * Get the noexternallanglinks page property from the ParserOutput,
 	 * which is set by the {{#noexternallanglinks}} parser function.
 	 *
-	 * @param ParserOutput $out
+	 * @param ParserOutput $parserOutput
 	 *
 	 * @return string[] A list of language codes, identifying which repository links to ignore.
 	 *         Empty if {{#noexternallanglinks}} was not used on the page.
 	 */
-	public static function getNoExternalLangLinks( ParserOutput $out ) {
-		$property = $out->getPageProperty( 'noexternallanglinks' );
+	public static function getNoExternalLangLinks( ParserOutput $parserOutput ) {
+		$property = $parserOutput->getPageProperty( 'noexternallanglinks' );
 
 		return is_string( $property ) ? unserialize( $property ) : [];
 	}
@@ -60,11 +60,11 @@ class NoLangLinkHandler {
 	 * Set the noexternallanglinks page property in the ParserOutput,
 	 * which is set by the {{#noexternallanglinks}} parser function.
 	 *
-	 * @param ParserOutput $out
+	 * @param ParserOutput $parserOutput
 	 * @param string[] $noexternallanglinks a list of languages to suppress
 	 */
-	public static function setNoExternalLangLinks( ParserOutput $out, array $noexternallanglinks ) {
-		$out->setPageProperty( 'noexternallanglinks', serialize( $noexternallanglinks ) );
+	public static function setNoExternalLangLinks( ParserOutput $parserOutput, array $noexternallanglinks ) {
+		$parserOutput->setPageProperty( 'noexternallanglinks', serialize( $noexternallanglinks ) );
 	}
 
 	/**
@@ -81,10 +81,10 @@ class NoLangLinkHandler {
 			return '';
 		}
 
-		$output = $parser->getOutput();
-		$nel = array_merge( self::getNoExternalLangLinks( $output ), $langs );
+		$parserOutput = $parser->getOutput();
+		$nel = array_merge( self::getNoExternalLangLinks( $parserOutput ), $langs );
 
-		self::setNoExternalLangLinks( $output, $nel );
+		self::setNoExternalLangLinks( $parserOutput, $nel );
 
 		return '';
 	}

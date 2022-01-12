@@ -86,16 +86,16 @@ class ClientParserOutputDataUpdater {
 	/**
 	 * Add wikibase_item parser output property
 	 */
-	public function updateItemIdProperty( Title $title, ParserOutput $out ): void {
+	public function updateItemIdProperty( Title $title, ParserOutput $parserOutput ): void {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId ) {
-			$out->setPageProperty( 'wikibase_item', $itemId->getSerialization() );
+			$parserOutput->setPageProperty( 'wikibase_item', $itemId->getSerialization() );
 
-			$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutput( $out );
+			$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutput( $parserOutput );
 			$usageAccumulator->addSiteLinksUsage( $itemId );
 		} else {
-			$out->unsetPageProperty( 'wikibase_item' );
+			$parserOutput->unsetPageProperty( 'wikibase_item' );
 		}
 	}
 
@@ -113,36 +113,36 @@ class ClientParserOutputDataUpdater {
 		}
 	}
 
-	public function updateOtherProjectsLinksData( Title $title, ParserOutput $out ): void {
+	public function updateOtherProjectsLinksData( Title $title, ParserOutput $parserOutput ): void {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId ) {
-			$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutput( $out );
+			$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutput( $parserOutput );
 			$otherProjectsSidebarGenerator = $this->otherProjectsSidebarGeneratorFactory
 				->getOtherProjectsSidebarGenerator( $usageAccumulator );
 			$otherProjects = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
-			$out->setExtensionData( 'wikibase-otherprojects-sidebar', $otherProjects );
+			$parserOutput->setExtensionData( 'wikibase-otherprojects-sidebar', $otherProjects );
 		} else {
-			$out->setExtensionData( 'wikibase-otherprojects-sidebar', [] );
+			$parserOutput->setExtensionData( 'wikibase-otherprojects-sidebar', [] );
 		}
 	}
 
-	public function updateBadgesProperty( Title $title, ParserOutput $out ): void {
+	public function updateBadgesProperty( Title $title, ParserOutput $parserOutput ): void {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		// first reset all badges in case one got removed
-		foreach ( $out->getPageProperties() as $name => $property ) {
+		foreach ( $parserOutput->getPageProperties() as $name => $property ) {
 			if ( strpos( $name, 'wikibase-badge-' ) === 0 ) {
-				$out->unsetPageProperty( $name );
+				$parserOutput->unsetPageProperty( $name );
 			}
 		}
 
 		if ( $itemId ) {
-			$this->setBadgesProperty( $itemId, $out );
+			$this->setBadgesProperty( $itemId, $parserOutput );
 		}
 	}
 
-	private function setBadgesProperty( ItemId $itemId, ParserOutput $out ): void {
+	private function setBadgesProperty( ItemId $itemId, ParserOutput $parserOutput ): void {
 		/** @var Item $item */
 		$item = $this->entityLookup->getEntity( $itemId );
 		'@phan-var Item|null $item';
@@ -164,7 +164,7 @@ class ClientParserOutputDataUpdater {
 		$siteLink = $item->getSiteLinkList()->getBySiteId( $this->siteId );
 
 		foreach ( $siteLink->getBadges() as $badge ) {
-			$out->setPageProperty( 'wikibase-badge-' . $badge->getSerialization(), true );
+			$parserOutput->setPageProperty( 'wikibase-badge-' . $badge->getSerialization(), true );
 		}
 	}
 

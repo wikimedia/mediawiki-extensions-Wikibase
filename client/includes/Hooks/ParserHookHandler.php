@@ -58,10 +58,10 @@ class ParserHookHandler implements
 
 	/**
 	 * @param Parser $parser
-	 * @param ParserOutput $output
+	 * @param ParserOutput $parserOutput
 	 */
-	public function onParserLimitReportPrepare( $parser, $output ) {
-		$output->setLimitReportData(
+	public function onParserLimitReportPrepare( $parser, $parserOutput ) {
+		$parserOutput->setLimitReportData(
 			'limitreport-entityaccesscount',
 			[
 				$this->restrictedEntityLookup->getEntityAccessCount(),

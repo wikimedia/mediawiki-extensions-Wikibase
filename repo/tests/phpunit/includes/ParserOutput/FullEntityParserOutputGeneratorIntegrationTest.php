@@ -72,22 +72,22 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 			)
 		) );
 
-		$output = $this->newParserOutputGenerator()->getParserOutput( new EntityRevision( $item, $revision ) );
+		$parserOutput = $this->newParserOutputGenerator()->getParserOutput( new EntityRevision( $item, $revision ) );
 
 		$this->assertArrayHasKey(
 			$propertyId,
-			$output->getLinks()[$this->propertyNamespace]
+			$parserOutput->getLinks()[$this->propertyNamespace]
 		);
 		$this->assertArrayHasKey(
 			$unitItemId,
-			$output->getLinks()[$this->itemNamespace]
+			$parserOutput->getLinks()[$this->itemNamespace]
 		);
 	}
 
 	public function testSetsViewChunksForEntityTermsView() {
 		$parserOutputGenerator = $this->newParserOutputGenerator();
 
-		$output = $parserOutputGenerator->getParserOutput(
+		$parserOutput = $parserOutputGenerator->getParserOutput(
 			new EntityRevision(
 				NewItem::withId( 'Q42' )->build(),
 				4711
@@ -100,9 +100,9 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 				[ 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' ],
 				[ 'termbox' ],
 			],
-			array_values( $output->getExtensionData( 'wikibase-view-chunks' ) )
+			array_values( $parserOutput->getExtensionData( 'wikibase-view-chunks' ) )
 		);
-		$this->assertArrayHasKey( 'en', $output->getExtensionData( 'wikibase-terms-list-items' ) );
+		$this->assertArrayHasKey( 'en', $parserOutput->getExtensionData( 'wikibase-terms-list-items' ) );
 	}
 
 	private function newParserOutputGenerator() {

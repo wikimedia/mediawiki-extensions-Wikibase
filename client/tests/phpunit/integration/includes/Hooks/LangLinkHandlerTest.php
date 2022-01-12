@@ -162,22 +162,22 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	protected function makeParserOutput( array $langLinks, array $noExternalLangLinks = [] ) {
-		$out = new ParserOutput();
-		NoLangLinkHandler::setNoExternalLangLinks( $out, $noExternalLangLinks );
+		$parserOutput = new ParserOutput();
+		NoLangLinkHandler::setNoExternalLangLinks( $parserOutput, $noExternalLangLinks );
 
 		foreach ( $langLinks as $lang => $link ) {
-			$out->addLanguageLink( "$lang:$link" );
+			$parserOutput->addLanguageLink( "$lang:$link" );
 		}
 
-		return $out;
+		return $parserOutput;
 	}
 
 	/**
 	 * @dataProvider provideGetNoExternalLangLinks
 	 */
 	public function testGetNoExternalLangLinks( array $noExternalLangLinks ) {
-		$out = $this->makeParserOutput( [], $noExternalLangLinks );
-		$nel = $this->langLinkHandler->getNoExternalLangLinks( $out );
+		$parserOutput = $this->makeParserOutput( [], $noExternalLangLinks );
+		$nel = $this->langLinkHandler->getNoExternalLangLinks( $parserOutput );
 
 		$this->assertEquals( $noExternalLangLinks, $nel );
 	}
@@ -241,9 +241,9 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 			$title->resetArticleID( 1 );
 		}
 
-		$out = $this->makeParserOutput( [], $noExternalLangLinks );
+		$parserOutput = $this->makeParserOutput( [], $noExternalLangLinks );
 
-		$useRepoLinks = $this->langLinkHandler->useRepoLinks( $title, $out );
+		$useRepoLinks = $this->langLinkHandler->useRepoLinks( $title, $parserOutput );
 
 		$this->assertEquals( $expected, $useRepoLinks, "use repository links" );
 	}
@@ -326,9 +326,9 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 			$title = Title::newFromTextThrow( $title );
 		}
 
-		$out = $this->makeParserOutput( $langLinks, $noExternalLangLinks );
+		$parserOutput = $this->makeParserOutput( $langLinks, $noExternalLangLinks );
 
-		$links = $this->langLinkHandler->getEffectiveRepoLinks( $title, $out );
+		$links = $this->langLinkHandler->getEffectiveRepoLinks( $title, $parserOutput );
 		$links = $this->getPlainLinks( $links );
 
 		$this->assertArrayEquals( $expectedLinks, $links, false, true );
@@ -406,12 +406,12 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 			$title = Title::newFromTextThrow( $title );
 		}
 
-		$out = $this->makeParserOutput( $langLinks, $noExternalLangLinks );
+		$parserOutput = $this->makeParserOutput( $langLinks, $noExternalLangLinks );
 
-		$this->langLinkHandler->addLinksFromRepository( $title, $out );
+		$this->langLinkHandler->addLinksFromRepository( $title, $parserOutput );
 
-		$this->assertArrayEquals( $expectedLinks, $out->getLanguageLinks(), false, false );
-		$this->assertArrayEquals( $expectedBadges, $out->getExtensionData( 'wikibase_badges' ), false, true );
+		$this->assertArrayEquals( $expectedLinks, $parserOutput->getLanguageLinks(), false, false );
+		$this->assertArrayEquals( $expectedBadges, $parserOutput->getExtensionData( 'wikibase_badges' ), false, true );
 	}
 
 	protected function mapToLinks( $map ) {
@@ -519,10 +519,10 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideSuppressRepoLinks
 	 */
 	public function testSuppressRepoLinks( array $repoLinks, array $nel, array $expectedLinks ) {
-		$out = new ParserOutput();
-		$out->setPageProperty( 'noexternallanglinks', serialize( $nel ) );
+		$parserOutput = new ParserOutput();
+		$parserOutput->setPageProperty( 'noexternallanglinks', serialize( $nel ) );
 
-		$actualLinks = $this->langLinkHandler->suppressRepoLinks( $out, $repoLinks );
+		$actualLinks = $this->langLinkHandler->suppressRepoLinks( $parserOutput, $repoLinks );
 
 		$this->assertEquals( $expectedLinks, $actualLinks );
 	}

@@ -234,8 +234,8 @@ class PropertyHandler extends EntityHandler {
 		ParserOptions $options,
 		$generateHtml = true
 	) {
-		$output = parent::getParserOutputFromEntityView( $content, $revisionId, $options, $generateHtml );
-		$output->recordOption( 'termboxVersion' );
-		return $output;
+		$parserOutput = parent::getParserOutputFromEntityView( $content, $revisionId, $options, $generateHtml );
+		$parserOutput->recordOption( 'termboxVersion' );
+		return $parserOutput;
 	}
 }

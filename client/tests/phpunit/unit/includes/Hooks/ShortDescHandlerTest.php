@@ -82,15 +82,15 @@ class ShortDescHandlerTest extends TestCase {
 	 * @param string|null $pageProperty
 	 */
 	public function testDoHandle( $inputString, $pageProperty ) {
-		$output = $this->createMock( ParserOutput::class );
+		$parserOutput = $this->createMock( ParserOutput::class );
 		$parser = $this->getMockBuilder( \Parser::class )->disableOriginalConstructor()->getMock();
-		$parser->method( 'getOutput' )->willReturn( $output );
+		$parser->method( 'getOutput' )->willReturn( $parserOutput );
 		$parser->method( 'getMagicWordFactory' )->willReturn(
 			MediaWikiServices::getInstance()->getMagicWordFactory() );
 		if ( $pageProperty === null ) {
-			$output->expects( $this->never() )->method( 'setPageProperty' );
+			$parserOutput->expects( $this->never() )->method( 'setPageProperty' );
 		} else {
-			$output->expects( $this->once() )
+			$parserOutput->expects( $this->once() )
 				->method( 'setPageProperty' )
 				->with( DescriptionLookup::LOCAL_PROPERTY_NAME, $pageProperty );
 		}
@@ -111,10 +111,10 @@ class ShortDescHandlerTest extends TestCase {
 	public function testDoHandle_noreplace() {
 		$shortDesc = null;
 
-		$output = $this->createMock( ParserOutput::class );
+		$parserOutput = $this->createMock( ParserOutput::class );
 		$parser = $this->getMockBuilder( \Parser::class )->disableOriginalConstructor()->getMock();
-		$parser->method( 'getOutput' )->willReturn( $output );
-		$output->method( 'setPageProperty' )
+		$parser->method( 'getOutput' )->willReturn( $parserOutput );
+		$parserOutput->method( 'setPageProperty' )
 			->willReturnCallback( function ( $name, $value ) use ( &$shortDesc ) {
 				$this->assertSame( 'wikibase-shortdesc', $name );
 				$shortDesc = $value;

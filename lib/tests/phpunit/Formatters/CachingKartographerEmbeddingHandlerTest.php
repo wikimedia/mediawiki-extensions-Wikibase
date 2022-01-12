@@ -110,7 +110,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 			GlobeCoordinateValue::GLOBE_EARTH
 		);
 
-		$out = $handler->getParserOutput(
+		$parserOutput = $handler->getParserOutput(
 			[
 				$this->newSampleCoordinate(),
 				$this->newSampleMarsCoordinate(),
@@ -119,29 +119,29 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 			$language
 		);
 
-		$this->assertInstanceOf( ParserOutput::class, $out );
-		$this->assertNotFalse( $out->getExtensionData( 'kartographer' ) );
-		$this->assertNotFalse( $out->getPageProperty( 'kartographer_frames' ) );
+		$this->assertInstanceOf( ParserOutput::class, $parserOutput );
+		$this->assertNotFalse( $parserOutput->getExtensionData( 'kartographer' ) );
+		$this->assertNotFalse( $parserOutput->getPageProperty( 'kartographer_frames' ) );
 
 		// This is sometimes an object, see \Kartographer\Tag\TagHandler::finalParseStep()
-		$this->assertCount( 2, (array)$out->getJsConfigVars()['wgKartographerLiveData'] );
-		$this->assertNotEmpty( $out->getModules() );
+		$this->assertCount( 2, (array)$parserOutput->getJsConfigVars()['wgKartographerLiveData'] );
+		$this->assertNotEmpty( $parserOutput->getModules() );
 	}
 
 	public function testGetParserOutput_empty() {
 		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
 		$language = Language::factory( 'qqx' );
 
-		$out = $handler->getParserOutput(
+		$parserOutput = $handler->getParserOutput(
 			[
 				$this->newSampleMarsCoordinate()
 			],
 			$language
 		);
 
-		$this->assertInstanceOf( ParserOutput::class, $out );
-		$this->assertNull( $out->getExtensionData( 'kartographer' ) );
-		$this->assertFalse( $out->getPageProperty( 'kartographer_frames' ) );
+		$this->assertInstanceOf( ParserOutput::class, $parserOutput );
+		$this->assertNull( $parserOutput->getExtensionData( 'kartographer' ) );
+		$this->assertFalse( $parserOutput->getPageProperty( 'kartographer_frames' ) );
 	}
 
 	public function testGetMapframeInitJS() {

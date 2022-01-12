@@ -182,17 +182,17 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @param EntityUsage[]|null $usages
 	 */
 	private function newParserOutput( array $usages = null ): ParserOutput {
-		$output = new ParserOutput();
+		$parserOutput = new ParserOutput();
 
 		if ( $usages ) {
-			$acc = $this->newUsageAccumulatorFactory()->newFromParserOutput( $output );
+			$acc = $this->newUsageAccumulatorFactory()->newFromParserOutput( $parserOutput );
 
 			foreach ( $usages as $u ) {
 				$acc->addUsage( $u );
 			}
 		}
 
-		return $output;
+		return $parserOutput;
 	}
 
 	private function newTitle( int $id, int $ns, string $text ): Title {
