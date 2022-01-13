@@ -76,7 +76,6 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 	public function testExecuteWithoutAnyParams() {
 		list( $result, ) = $this->executeSpecialPage( '' );
 
-		$this->assertStringContainsString( "<select tabindex='0' aria-disabled='false' name='badge'", $result );
 		$this->assertStringContainsString( "<option value='Q123'", $result );
 		$this->assertStringContainsString( "<option value='Q456'", $result );
 
