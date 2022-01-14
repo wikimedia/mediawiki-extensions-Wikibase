@@ -7,6 +7,8 @@
 	},
 	"wikibase-edit": "kümeelün",
 	"wikibase-add": "püñamtun",
+	"wikibase-label-empty": "Chem entukelay rume",
 	"wikibase-description-empty": "Pikünulay ñi chumngelen",
-	"wikibase-sitelinks-special": "Kake welliñ"
+	"wikibase-sitelinks-special": "Kake welliñ",
+	"wikibase-statementview-rank-normal": "Trürkaken"
 }
