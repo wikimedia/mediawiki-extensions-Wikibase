@@ -74,20 +74,20 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 				return [ 'en' ];
 			case 'de-formal':
 				return [ 'de', 'en' ];
+			case 'ii':
+				return [ 'zh-cn', 'zh-hans', 'en' ];
+			case 'kk':
+				return [ 'kk-cyrl', 'en' ];
+			case 'kk-cn':
+				return [ 'kk-arab', 'kk-cyrl', 'en' ];
+			case 'lzh':
+				return [ 'en' ];
 			case 'zh':
 				return [ 'zh-hans', 'en' ];
 			case 'zh-cn':
 				return [ 'zh-hans', 'en' ];
-			case 'ii':
-				return [ 'zh-cn', 'zh-hans', 'en' ];
-			case 'lzh':
-				return [ 'en' ];
-			case 'kk-cn':
-				return [ 'kk-arab', 'kk-cyrl', 'en' ];
 			case 'zh-hk':
 				return [ 'zh-hant', 'zh-hans', 'en' ];
-			case 'kk':
-				return [ 'kk-cyrl', 'en' ];
 			default:
 				// Language::getFallbacksFor returns [ 'en' ] if $code is unknown and conforms to /^[a-z0-9-]{2,}$/
 				return preg_match( '/^[a-z0-9-]{2,}$/', $code ) ? [ 'en' ] : [];
