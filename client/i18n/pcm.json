@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Samatics"
+			"Samatics",
+			"Egiebizzy"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} aitem",
@@ -12,6 +13,7 @@
 	"wikibase-linkitem-selectlink": "Abeg pik wan sait an wan pej we yu go laik conet-am to dis pej",
 	"wikibase-linkitem-input-site": "Languej:",
 	"wikibase-linkitem-input-page": "Pej:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Haid-am",
 	"wikibase-rc-hide-wikidata-show": "Sho-am",
 	"wikibase-rc-wikibase-edit-letter": "D",

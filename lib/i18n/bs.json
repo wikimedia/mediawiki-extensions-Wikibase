@@ -6,10 +6,10 @@
 			"KWiki",
 			"Palapa",
 			"Semso98",
-			"Srdjan m"
+			"Srdjan m",
+			"Srđan"
 		]
 	},
-	"wikibase-lib-desc": "Sadrži zajedničku funkcionalnost za Wikibazu i proširenje za Wikibaza klijent.",
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-error-unexpected": "Greška: $1.",
 	"wikibase-error-save-generic": "Ne mogu sačuvati zbog greške.",
@@ -29,5 +29,9 @@
 	"datatypes-type-wikibase-item": "Stavka",
 	"datatypes-type-commonsMedia": "Commons medijska datoteka",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-calendar-gregorian": "gregorijanski",
+	"wikibase-time-calendar-julian": "julijanski",
+	"wikibase-time-precision-century": "$1. vijek",
+	"wikibase-time-precision-BCE": "$1 p. n. e.",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Uklonjen link ka [$2]"
 }
