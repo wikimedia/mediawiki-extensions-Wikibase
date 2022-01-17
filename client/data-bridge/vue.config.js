@@ -80,7 +80,7 @@ module.exports = {
 	css: {
 		loaderOptions: {
 			sass: {
-				prependData: '@import "@/presentation/styles/_main.scss";',
+				additionalData: '@import "@/presentation/styles/_main.scss";',
 			},
 		},
 	},
