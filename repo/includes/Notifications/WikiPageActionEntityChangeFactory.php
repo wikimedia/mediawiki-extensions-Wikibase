@@ -8,7 +8,7 @@ use CentralIdLookup;
 use Exception;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
-use User;
+use MediaWiki\User\UserIdentity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
@@ -34,7 +34,7 @@ class WikiPageActionEntityChangeFactory {
 		$this->centralIdLookup = $centralIdLookup;
 	}
 
-	public function newForPageDeleted( EntityContent $content, User $user, string $timestamp ): EntityChange {
+	public function newForPageDeleted( EntityContent $content, UserIdentity $user, string $timestamp ): EntityChange {
 		$change = $this->changeFactory->newFromUpdate( EntityChange::REMOVE, $content->getEntity() );
 		$change->setTimestamp( $timestamp );
 		$this->setEntityChangeUserInfo(
@@ -59,7 +59,7 @@ class WikiPageActionEntityChangeFactory {
 		// the timestamp of the original change.
 		$change->setTimestamp( wfTimestampNow() );
 
-		$user = User::newFromIdentity( $revisionRecord->getUser() );
+		$user = $revisionRecord->getUser();
 		$this->setEntityChangeUserInfo(
 			$change,
 			$user,
@@ -74,7 +74,7 @@ class WikiPageActionEntityChangeFactory {
 		$this->setEntityChangeRevisionInfo(
 			$change,
 			$revisionRecord,
-			$this->getCentralUserId( User::newFromIdentity( $revisionRecord->getUser() ) )
+			$this->getCentralUserId( $revisionRecord->getUser() )
 		);
 
 		return $change;
@@ -93,7 +93,7 @@ class WikiPageActionEntityChangeFactory {
 		$this->setEntityChangeRevisionInfo(
 			$change,
 			$currentRevision,
-			$this->getCentralUserId( User::newFromIdentity( $currentRevision->getUser() ) )
+			$this->getCentralUserId( $currentRevision->getUser() )
 		);
 
 		return $change;
@@ -119,11 +119,11 @@ class WikiPageActionEntityChangeFactory {
 	}
 
 	/**
-	 * @param User $user Repository user
+	 * @param UserIdentity $user Repository user
 	 *
 	 * @return int Central user ID, or 0
 	 */
-	private function getCentralUserId( User $user ): int {
+	private function getCentralUserId( UserIdentity $user ): int {
 		if ( $this->centralIdLookup ) {
 			return $this->centralIdLookup->centralIdFromLocalUser( $user );
 		}
@@ -133,11 +133,11 @@ class WikiPageActionEntityChangeFactory {
 
 	/**
 	 * @param EntityChange $change
-	 * @param User $user User that made change
+	 * @param UserIdentity $user User that made change
 	 * @param int $centralUserId Central user ID, or 0 if unknown or not applicable
 	 *   (see docs/change-propagation.md)
 	 */
-	private function setEntityChangeUserInfo( EntityChange $change, User $user, $centralUserId ): void {
+	private function setEntityChangeUserInfo( EntityChange $change, UserIdentity $user, $centralUserId ): void {
 		$change->addUserMetadata(
 			$user->getId(),
 			$user->getName(),
