@@ -1195,11 +1195,18 @@ return [
 
 	'WikibaseRepo.IdGenerator' => function ( MediaWikiServices $services ): IdGenerator {
 		$settings = WikibaseRepo::getSettings( $services );
+		$idGeneratorSetting = $settings->getSetting( 'idGenerator' );
+		$db = WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb();
 
-		switch ( $settings->getSetting( 'idGenerator' ) ) {
+		if ( $idGeneratorSetting === 'auto' ) {
+			$idGeneratorSetting = $db->connections()->getLazyWriteConnectionRef()->getType() === 'mysql'
+				? 'mysql-upsert' : 'original';
+		}
+
+		switch ( $idGeneratorSetting ) {
 			case 'original':
 				$idGenerator = new SqlIdGenerator(
-					WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
+					$db,
 					$settings->getSetting( 'reservedIds' ),
 					$settings->getSetting( 'idGeneratorSeparateDbConnection' )
 				);
@@ -1209,14 +1216,14 @@ return [
 				// but perhaps that is an unnecessary check? People will realize when the DB query for
 				// ID selection fails anyway...
 				$idGenerator = new UpsertSqlIdGenerator(
-					WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
+					$db,
 					$settings->getSetting( 'reservedIds' ),
 					$settings->getSetting( 'idGeneratorSeparateDbConnection' )
 				);
 				break;
 			default:
 				throw new InvalidArgumentException(
-					'idGenerator config option must be either \'original\' or \'mysql-upsert\''
+					'idGenerator config option must be \'original\', \'mysql-upsert\' or \'auto\''
 				);
 		}
 

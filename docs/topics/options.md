@@ -178,7 +178,7 @@ Allows the entity id generator to be chosen. (See @ref md_docs_storage_id-counte
 
 DEFAULT: ```original```
 
-Allows values: `original` or `mysql-upsert`
+Allows values: `original`, `mysql-upsert`, or `auto`
 
 #### idGeneratorSeparateDbConnection {#repo_idGeneratorSeparateDbConnection}
 Should a separate DB connection be used to generate entity IDs?  (See @ref md_docs_storage_id-counters)
