@@ -13,6 +13,7 @@ The [IdGenerator] interface is generally used when interacting with this storage
  - [UpsertSqlIdGenerator] is a newer 'better' generator that only works for MySql.
 
 The [IdGenerator] implementation to be used can be switched using the [idGenerator] setting.
+A setting of `auto` means using the `UpsertSqlIdGenerator` if the database is a MySQL database and the `SqlIdGenerator` otherwise.
 
 ### Write scaling
 

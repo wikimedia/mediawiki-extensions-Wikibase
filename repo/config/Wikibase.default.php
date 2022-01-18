@@ -284,7 +284,7 @@ return [
 	 * generator as the 'upsert' generator only supports MySQL currently.
 	 *
 	 * @var string 'original' or 'mysql-upsert' depending on what implementation of IdGenerator
-	 * you wish to use.
+	 * you wish to use, or 'auto' to pick one depending on the database type.
 	 */
 	'idGenerator' => 'original',
 

@@ -23,6 +23,9 @@ $wgWBCSUseCirrus = false;
 // CirrusSearch should not perform any updates
 $wgCirrusSearchDisableUpdate = true;
 
+// use mysql-upsert if CI is using a MySQL database to avoid deadlocks from parallel tests
+$wgWBRepoSettings['idGenerator'] = 'auto';
+
 // enable data bridge
 $wgWBRepoSettings['dataBridgeEnabled'] = true;
 

@@ -3,12 +3,15 @@
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use InvalidArgumentException;
+use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
+use Wikimedia\Rdbms\ConnectionManager;
+use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -81,11 +84,92 @@ class IdGeneratorTest extends ServiceWiringTestCase {
 		$this->assertSame( true, $innerGenerator->separateDbConnection );
 	}
 
+	public function testConstructionAutoMysqlUpsert() {
+		$this->mockService( 'WikibaseRepo.Settings',
+			new SettingsArray( [
+				'idGenerator' => 'auto',
+				'reservedIds' => [],
+				'idGeneratorSeparateDbConnection' => false,
+			] ) );
+		$connection = $this->createMock( DBConnRef::class );
+		$connection->expects( $this->once() )
+			->method( 'getType' )
+			->willReturn( 'mysql' );
+		$connections = $this->createMock( ConnectionManager::class );
+		$connections->expects( $this->once() )
+			->method( 'getLazyWriteConnectionRef' )
+			->willReturn( $connection );
+		$db = $this->createMock( RepoDomainDb::class );
+		$db->expects( $this->once() )
+			->method( 'connections' )
+			->willReturn( $connections );
+		$dbFactory = $this->createMock( RepoDomainDbFactory::class );
+		$dbFactory->expects( $this->once() )
+			->method( 'newRepoDb' )
+			->willReturn( $db );
+		$this->mockService( 'WikibaseRepo.RepoDomainDbFactory',
+			$dbFactory );
+
+		$idGenerator = $this->getService( 'WikibaseRepo.IdGenerator' );
+
+		$this->assertInstanceOf( RateLimitingIdGenerator::class, $idGenerator );
+
+		// Look at the 1st test to see the purpose of this
+		$idGenerator = TestingAccessWrapper::newFromObject( $idGenerator );
+
+		$this->assertInstanceOf( UpsertSqlIdGenerator::class, $idGenerator->idGenerator );
+	}
+
+	public function testConstructionAutoOriginal() {
+		$this->mockService( 'WikibaseRepo.Settings',
+			new SettingsArray( [
+				'idGenerator' => 'auto',
+				'reservedIds' => [],
+				'idGeneratorSeparateDbConnection' => false,
+			] ) );
+		$connection = $this->createMock( DBConnRef::class );
+		$connection->expects( $this->once() )
+			->method( 'getType' )
+			->willReturn( 'sqlite' );
+		$connections = $this->createMock( ConnectionManager::class );
+		$connections->expects( $this->once() )
+			->method( 'getLazyWriteConnectionRef' )
+			->willReturn( $connection );
+		$db = $this->createMock( RepoDomainDb::class );
+		$db->expects( $this->once() )
+			->method( 'connections' )
+			->willReturn( $connections );
+		$dbFactory = $this->createMock( RepoDomainDbFactory::class );
+		$dbFactory->expects( $this->once() )
+			->method( 'newRepoDb' )
+			->willReturn( $db );
+		$this->mockService( 'WikibaseRepo.RepoDomainDbFactory',
+			$dbFactory );
+
+		$idGenerator = $this->getService( 'WikibaseRepo.IdGenerator' );
+
+		$this->assertInstanceOf( RateLimitingIdGenerator::class, $idGenerator );
+
+		// Look at the 1st test to see the purpose of this
+		$idGenerator = TestingAccessWrapper::newFromObject( $idGenerator );
+
+		$this->assertInstanceOf( SqlIdGenerator::class, $idGenerator->idGenerator );
+	}
+
 	public function testConstructionUnknownType() {
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
 				'idGenerator' => 'unknown',
 			] ) );
+		$db = $this->createMock( RepoDomainDb::class );
+		$db->expects( $this->never() )
+			->method( $this->anything() );
+		$dbFactory = $this->createMock( RepoDomainDbFactory::class );
+		$dbFactory->expects( $this->once() )
+			->method( 'newRepoDb' )
+			->willReturn( $db );
+		$this->mockService( 'WikibaseRepo.RepoDomainDbFactory',
+			$dbFactory );
 
 		$this->expectException( InvalidArgumentException::class );
 		$this->getService( 'WikibaseRepo.IdGenerator' );
