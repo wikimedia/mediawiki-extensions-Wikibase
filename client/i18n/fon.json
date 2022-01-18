@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Mahuton",
-			"Àlɔ̀ tɛ́"
+			"Àlɔ̀ tɛ́",
+			"Samatics"
 		]
 	},
 	"tooltip-t-wikibase": "Wémá kán é yi nunywɛ gbá kɔn é",
@@ -10,12 +11,15 @@
 	"wikibase-editlinks": "Ɖyɔ́ wémá ɖɔn ɖokpɔ́ kan lɛ",
 	"wikibase-editlinkstitle": "Ɖyɔ́ wémá ɖɔn ɖokpɔ́ kan lɛ",
 	"wikibase-linkitem-addlinks": "Gɔ wéma kan lɛ nan",
-	"wikibase-linkitem-title": "Ca wéman élɔ",
+	"wikibase-linkitem-title": "Ca wexwɛ élɔ",
+	"wikibase-linkitem-linkpage": "Ca ɖo kpɔ xa wexwɛ élɔ",
+	"wikibase-linkitem-selectlink": "Mi jalé bo sɔ nɔtɛn kpoɖo wéma é mi ba na ca ɖo kpɔ xa wéma élɔ é",
 	"wikibase-linkitem-input-site": "Gbé:",
-	"wikibase-linkitem-input-page": "Wémá:",
+	"wikibase-linkitem-input-page": "Wexwɛ:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Sɛxwe",
 	"wikibase-rc-hide-wikidata-show": "Xlɛ",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}Núwlǎnwlǎn"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} núwlǎnwlǎn",
+	"wikibase-otherprojects": "Ɖo tito ɖéo lɛ mɛ"
 }

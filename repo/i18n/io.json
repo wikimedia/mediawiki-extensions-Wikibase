@@ -5,6 +5,7 @@
 			"Lakaoso"
 		]
 	},
+	"wikibase-entity": "Ento",
 	"wikibase-edit": "redaktar",
 	"wikibase-cancel": "nuligar",
 	"wikibase-add": "adjuntar",
@@ -35,6 +36,8 @@
 	"wikibase-statementview-rank-normal": "Normala rango",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|refero|referi}}",
 	"wikibase-entityselector-more": "pluse",
+	"wikibase-anonymouseditwarning": "Avizo: Vu ne esas konektita. Vua [https://en.wikipedia.org/wiki/IP_address IP-adreso] divenos publike videbla se vu facos irga redakturo. Se vu <strong>[[Special:UserLogin|facos ''log in'']]</strong> o <strong>[[Special:CreateAccount|kreos konto]]</strong>, vua redakturi atribuesos a vua uzeronomo, ensemble kun altr avantaji.",
+	"wikibase-anonymouseditwarning-heading": "Vu ne esas konektita",
 	"wikibase-itembytitle-lookup-page": "Pagino:",
 	"wikibase-itembytitle-submit": "Serchez",
 	"wikibase-gotolinkedpage-submit": "Irez",
