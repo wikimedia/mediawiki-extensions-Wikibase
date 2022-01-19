@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kly"
+			"Kly",
+			"Tranve"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "回傳在指定頁面的所有使用到的項目 ID。",
@@ -30,7 +31,7 @@
 	"apihelp-query+description-summary": "取得解釋目標頁面相關內容的簡短描述（即子標題）。",
 	"apihelp-query+description-extended-description": "描述為單行任意內容的純文字（可能會包含原始的 HTML 標籤，並且也會詮釋成純文字）。這不應使用於 HTML 非轉義！",
 	"apihelp-query+description-param-prefersource": "要首選的描述來源（若有的話）：",
-	"apihelp-query+description-paramvalue-prefersource-local": "透過在頁面中 wiki 文字裡 <code><nowiki>{{SHORTDESC:...}}</nowiki></code> 解析函式的本地端描述。",
+	"apihelp-query+description-paramvalue-prefersource-local": "透過在頁面中 wikitext 裡 <code><nowiki>{{SHORTDESC:...}}</nowiki></code> 解析函式的本地端描述。",
 	"apihelp-query+description-paramvalue-prefersource-central": "來自關聯{{WBREPONAME}}項目的中心描述。",
 	"apihelp-query+description-example": "取得頁面「London」的描述。",
 	"apihelp-query+description-example-central": "取得頁面「London」的描述，若中心描述存在則為首選。",

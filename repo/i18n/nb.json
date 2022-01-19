@@ -87,6 +87,8 @@
 	"wikibase-undo-badpage": "Ugyldig revisjon: Revisjonen $2 hører ikke til [[:$1]]",
 	"wikibase-undo-firstrev": "Kan ikke fjerne opprettelsen av siden",
 	"wikibase-undo-nocontent": "Innholdet i revisjon $2 av siden $1 kunne ikke lastes inn",
+	"wikibase-undo-redirect-latestredirect": "Kan ikke gjøre om en redigering som ikke er omdirigering hvis den siste revisjonen er en omdirigering.",
+	"wikibase-undo-redirect-latestnoredirect": "Kan ikke gjøre om omdirigeringsredigering hvis den siste revisjonen ikke er en omdirigering",
 	"wikibase-summary-generated": "Sammendrag (vil legges til et automatisk generert sammendrag):",
 	"wikibase-disambiguation-title": "Alternativer for «$1»",
 	"wikibase-aliases-input-help-message": "For å gjøre entiteten enklere å finne kan du oppgi alternative navn.",
