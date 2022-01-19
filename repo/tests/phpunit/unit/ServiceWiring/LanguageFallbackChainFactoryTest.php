@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -16,6 +17,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class LanguageFallbackChainFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
+		$this->mockService( 'WikibaseRepo.TermsLanguages',
+			new StaticContentLanguages( [] ) );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getLanguageFactory' );
 		$this->serviceContainer->expects( $this->once() )

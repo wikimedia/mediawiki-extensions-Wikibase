@@ -1352,6 +1352,7 @@ return [
 
 	'WikibaseRepo.LanguageFallbackChainFactory' => function ( MediaWikiServices $services ): LanguageFallbackChainFactory {
 		return new LanguageFallbackChainFactory(
+			WikibaseRepo::getTermsLanguages( $services ),
 			$services->getLanguageFactory(),
 			$services->getLanguageConverterFactory(),
 			$services->getLanguageFallback()

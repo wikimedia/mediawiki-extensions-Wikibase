@@ -54,7 +54,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 			->willReturnCallback( function( $code ) {
 				return $this->getLanguageFallbacksForCallback( $code );
 			} );
-		return new LanguageFallbackChainFactory( null, null, $languageFallback );
+		return new LanguageFallbackChainFactory( null, null, null, $languageFallback );
 	}
 
 	/**

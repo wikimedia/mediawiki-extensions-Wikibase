@@ -44,6 +44,9 @@ class LanguageFallbackChainFactory {
 	 */
 	public const FALLBACK_OTHERS = 4;
 
+	/** @var ContentLanguages */
+	private $termsLanguages;
+
 	/** @var LanguageFactory */
 	private $languageFactory;
 
@@ -64,10 +67,14 @@ class LanguageFallbackChainFactory {
 	private $userLanguageCache = [];
 
 	public function __construct(
+		?ContentLanguages $termsLanguages = null,
 		?LanguageFactory $languageFactory = null,
 		?LanguageConverterFactory $languageConverterFactory = null,
 		?LanguageFallback $languageFallback = null
 	) {
+		// note: this is lib code, so we can’t get the default term languages from the repo or client services
+		$this->termsLanguages = $termsLanguages ?:
+			WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
 		// note: do not extract MediaWikiServices::getInstance() into a variable –
 		// if all three services are given, the service container should never be loaded
 		// (important in unit tests, where it isn’t set up)
@@ -94,7 +101,7 @@ class LanguageFallbackChainFactory {
 			$chain = $this->buildFromLanguage( $language, $mode );
 			$this->languageCache[$languageCode][$mode] = new TermLanguageFallbackChain(
 				$chain,
-				WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
+				$this->termsLanguages
 			);
 		}
 
@@ -116,7 +123,7 @@ class LanguageFallbackChainFactory {
 			$chain = $this->buildFromLanguage( $languageCode, $mode );
 			$this->languageCache[$languageCode][$mode] = new TermLanguageFallbackChain(
 				$chain,
-				WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
+				$this->termsLanguages
 			);
 		}
 
@@ -255,7 +262,7 @@ class LanguageFallbackChainFactory {
 		$chain = $this->buildFromBabel( $babel );
 		$languageFallbackChain = new TermLanguageFallbackChain(
 			$chain,
-			WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
+			$this->termsLanguages
 		);
 
 		$this->userLanguageCache[$user->getName()][$languageCode] = $languageFallbackChain;
