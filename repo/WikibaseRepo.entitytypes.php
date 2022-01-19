@@ -43,7 +43,6 @@ use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
-use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\Api\CombinedEntitySearchHelper;
 use Wikibase\Repo\Api\EntityIdSearchHelper;
 use Wikibase\Repo\Api\EntityTermSearchHelper;
@@ -505,8 +504,7 @@ return [
 				$cache,
 				$prefetchingPropertyTermLookup,
 				$redirectResolvingRevisionLookup,
-				WikibaseContentLanguages::getDefaultInstance()
-					->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
+				WikibaseRepo::getTermsLanguages( $mwServices )
 			);
 		},
 		Def::URL_LOOKUP_CALLBACK => function () {
