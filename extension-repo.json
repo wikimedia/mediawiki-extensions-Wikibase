@@ -944,7 +944,8 @@
 			"\\Wikibase\\Repo\\RepoHooks::registerUnitTests",
 			"LibHooks",
 			"ViewHooks"
-		]
+		],
+		"WikibaseContentLanguages": "\\Wikibase\\Repo\\RepoHooks::onWikibaseContentLanguages"
 	},
 	"RateLimits": {
 		"wikibase-idgenerator": {

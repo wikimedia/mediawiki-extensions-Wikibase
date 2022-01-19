@@ -12,7 +12,11 @@ use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Formatters\AutoCommentFormatter;
+use Wikibase\Lib\StaticContentLanguages;
+use Wikibase\Lib\UnionContentLanguages;
+use Wikibase\Lib\WikibaseContentLanguages;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -253,6 +257,22 @@ final class ClientHooks {
 
 				return $value;
 			}
+		);
+	}
+
+	/** @param ContentLanguages[] $contentLanguages */
+	public static function onWikibaseContentLanguages( array &$contentLanguages ): void {
+		if ( !WikibaseClient::getSettings()->getSetting( 'tmpEnableMulLanguageCode' ) ) {
+			return;
+		}
+
+		if ( $contentLanguages[WikibaseContentLanguages::CONTEXT_TERM]->hasLanguage( 'mul' ) ) {
+			return;
+		}
+
+		$contentLanguages[WikibaseContentLanguages::CONTEXT_TERM] = new UnionContentLanguages(
+			$contentLanguages[WikibaseContentLanguages::CONTEXT_TERM],
+			new StaticContentLanguages( [ 'mul' ] )
 		);
 	}
 

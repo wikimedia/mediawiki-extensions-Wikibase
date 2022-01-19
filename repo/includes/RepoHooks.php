@@ -33,11 +33,14 @@ use UnexpectedValueException;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Formatters\AutoCommentFormatter;
 use Wikibase\Lib\LibHooks;
 use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\UnionContentLanguages;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\Api\MetaDataBridgeConfig;
 use Wikibase\Repo\Api\ModifyEntity;
@@ -1137,5 +1140,21 @@ final class RepoHooks {
 			return;
 		}
 		$apiMain->getUser()->pingLimiter( RateLimitingIdGenerator::RATELIMIT_NAME, $idGeneratorInErrorPingLimiterValue );
+	}
+
+	/** @param ContentLanguages[] $contentLanguages */
+	public static function onWikibaseContentLanguages( array &$contentLanguages ): void {
+		if ( !WikibaseRepo::getSettings()->getSetting( 'tmpEnableMulLanguageCode' ) ) {
+			return;
+		}
+
+		if ( $contentLanguages[WikibaseContentLanguages::CONTEXT_TERM]->hasLanguage( 'mul' ) ) {
+			return;
+		}
+
+		$contentLanguages[WikibaseContentLanguages::CONTEXT_TERM] = new UnionContentLanguages(
+			$contentLanguages[WikibaseContentLanguages::CONTEXT_TERM],
+			new StaticContentLanguages( [ 'mul' ] )
+		);
 	}
 }
