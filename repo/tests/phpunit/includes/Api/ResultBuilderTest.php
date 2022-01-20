@@ -504,12 +504,11 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$entityRevision = new EntityRevision( $item );
 
 		$fallbackChainFactory = new LanguageFallbackChainFactory();
-		$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL;
 		$fallbackChains = [
-			'de-formal' => $fallbackChainFactory->newFromLanguageCode( 'de-formal', $fallbackMode ),
-			'es' => $fallbackChainFactory->newFromLanguageCode( 'es', $fallbackMode ),
-			'qug' => $fallbackChainFactory->newFromLanguageCode( 'qug', $fallbackMode ),
-			'zh-my' => $fallbackChainFactory->newFromLanguageCode( 'zh-my', $fallbackMode ),
+			'de-formal' => $fallbackChainFactory->newFromLanguageCode( 'de-formal' ),
+			'es' => $fallbackChainFactory->newFromLanguageCode( 'es' ),
+			'qug' => $fallbackChainFactory->newFromLanguageCode( 'qug' ),
+			'zh-my' => $fallbackChainFactory->newFromLanguageCode( 'zh-my' ),
 		];
 		$filterLangCodes = array_keys( $fallbackChains );
 

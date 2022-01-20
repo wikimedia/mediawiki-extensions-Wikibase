@@ -110,10 +110,7 @@ class DataAccessSnakFormatterFactory {
 		UsageAccumulator $usageAccumulator,
 		$type = self::TYPE_ESCAPED_PLAINTEXT
 	) {
-		$fallbackChain = $this->languageFallbackChainFactory->newFromLanguage(
-			$language,
-			LanguageFallbackChainFactory::FALLBACK_ALL
-		);
+		$fallbackChain = $this->languageFallbackChainFactory->newFromLanguage( $language );
 
 		$options = new FormatterOptions( [
 			FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $fallbackChain,

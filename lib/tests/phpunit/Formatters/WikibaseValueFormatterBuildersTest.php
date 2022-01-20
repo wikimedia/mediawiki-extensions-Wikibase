@@ -158,9 +158,8 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newFormatterOptions( $lang = 'en' ) {
-		$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL;
 		$fallbackChainFactory = new LanguageFallbackChainFactory();
-		$fallbackChain = $fallbackChainFactory->newFromLanguageCode( $lang, $fallbackMode );
+		$fallbackChain = $fallbackChainFactory->newFromLanguageCode( $lang );
 
 		return new FormatterOptions( [
 			ValueFormatter::OPT_LANG => $lang,

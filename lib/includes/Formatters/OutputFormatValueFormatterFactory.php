@@ -109,10 +109,9 @@ class OutputFormatValueFormatterFactory {
 
 		$fallbackOption = FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN;
 		if ( !$options->hasOption( $fallbackOption ) ) {
-			$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL;
 			$options->setOption(
 				$fallbackOption,
-				$this->languageFallbackChainFactory->newFromLanguageCode( $lang, $fallbackMode )
+				$this->languageFallbackChainFactory->newFromLanguageCode( $lang )
 			);
 		}
 
