@@ -7,5 +7,7 @@
 	},
 	"wikibase-edit": "tereeza",
 	"wikibase-add": "giita",
-	"wikibase-sitelinks-special": "Ezindi embuga"
+	"wikibase-description-empty": "Tihariho ebirikugambaho ebiri kucengwa",
+	"wikibase-sitelinks-special": "Ezindi embuga",
+	"wikibase-statementview-rank-normal": "Idaara"
 }
