@@ -135,7 +135,7 @@ class LanguageFallbackChainFactory {
 	 *
 	 * @param Language|string $language Language object or language code as string
 	 * @param int $mode Bitfield of self::FALLBACK_*
-	 * @param TermLanguageFallbackChain[] $chain for recursive calls
+	 * @param LanguageWithConversion[] $chain for recursive calls
 	 * @param bool[] $fetched for recursive calls
 	 *
 	 * @throws InvalidArgumentException
