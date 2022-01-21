@@ -65,13 +65,13 @@ class TermLanguageFallbackChainTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideExtractPreferredValue
 	 */
-	public function testExtractPreferredValue( $languageCode, $mode, $data, $expected ) {
+	public function testExtractPreferredValue( $languageCode, $data, $expected ) {
 		$factory = new LanguageFallbackChainFactory();
-		$chain = $factory->newFromLanguageCode( $languageCode, $mode );
+		$chain = $factory->newFromLanguageCode( $languageCode );
 
 		$resolved = $chain->extractPreferredValue( $data );
 
-		$this->assertEquals( $expected, $resolved );
+		$this->assertSame( $expected, $resolved );
 	}
 
 	public function provideExtractPreferredValue() {
@@ -94,79 +94,55 @@ class TermLanguageFallbackChainTest extends MediaWikiIntegrationTestCase {
 		];
 
 		return [
-			[ 'en', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
+			[ 'en', $data, [
 				'value' => 'foo',
 				'language' => 'en',
 				'source' => null,
 			] ],
-			[ 'zh-classical', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
+			[ 'zh-classical', $data, [
 				'value' => '試',
 				'language' => 'lzh',
 				'source' => null,
 			] ],
-			[ 'nl', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
+			[ 'nl', $data, [
 				'value' => 'bar',
 				'language' => 'nl',
 				'source' => null,
 			] ],
-			[ 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $data, null ],
-			[ 'de', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
+			[ 'de', $data, [
 				'value' => 'foo',
 				'language' => 'en',
 				'source' => null,
 			] ],
-			[ 'zh', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
+			[ 'zh', $data, [
 				'value' => '测试',
 				'language' => 'zh',
 				'source' => 'zh-cn',
 			] ],
-			[ 'zh-tw', LanguageFallbackChainFactory::FALLBACK_SELF, $data, null ],
-			[ 'zh-tw', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
+			[ 'zh-tw', $data, [
 				'value' => '測試',
 				'language' => 'zh-tw',
 				'source' => 'zh-cn',
 			] ],
-			[
-				'zh-tw',
-				LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
-				$data,
-				[
-					'value' => '測試',
-					'language' => 'zh-tw',
-					'source' => 'zh-cn',
-				],
-			],
-			[
-				'kk-cyrl',
-				LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
-				$data,
-				null,
-			],
-			[ 'kk-cyrl', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
+			[ 'kk-cyrl', $data, [
 				// Shouldn't be converted to Cyrillic ('фоо') as this specific
 				// value ('foo') is taken from the English label.
 				'value' => 'foo',
 				'language' => 'en',
 				'source' => null,
 			] ],
-			[
-				'gan-hant',
-				LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
-				$data,
-				null,
-			],
-			[ 'gan-hant', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
+			[ 'gan-hant', $data, [
 				'value' => '測試',
 				'language' => 'zh-hant',
 				'source' => 'zh-cn',
 			] ],
 
-			[ 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $entityInfoBuilderArray, [
+			[ 'de', $entityInfoBuilderArray, [
 				'value' => 'Beispiel',
 				'language' => 'de',
 				'source' => null,
 			] ],
-			[ 'gan-hant', LanguageFallbackChainFactory::FALLBACK_ALL, $entityInfoBuilderArray, [
+			[ 'gan-hant', $entityInfoBuilderArray, [
 				'value' => '測試',
 				'language' => 'zh-hant',
 				'source' => 'zh-cn',
@@ -177,9 +153,9 @@ class TermLanguageFallbackChainTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideExtractPreferredValueOrAny
 	 */
-	public function testExtractPreferredValueOrAny( $languageCode, $mode, $data, $expected ) {
+	public function testExtractPreferredValueOrAny( $languageCode, $data, $expected ) {
 		$factory = new LanguageFallbackChainFactory();
-		$chain = $factory->newFromLanguage( Language::factory( $languageCode ), $mode );
+		$chain = $factory->newFromLanguage( Language::factory( $languageCode ) );
 
 		$resolved = $chain->extractPreferredValueOrAny( $data );
 
@@ -192,38 +168,32 @@ class TermLanguageFallbackChainTest extends MediaWikiIntegrationTestCase {
 			'nl' => 'bar',
 			'zh-cn' => '测试',
 		];
-		$entityInfoBuilderArray = [
-			'en' => [
-				'language' => 'en',
-				'value' => 'Example'
-			],
-		];
 
 		return [
-			[ 'en', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
+			[ 'en', $data, [
 				'value' => 'foo',
 				'language' => 'en',
 				'source' => null,
 			] ],
-			[ 'nl', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
+			[ 'nl', $data, [
 				'value' => 'bar',
 				'language' => 'nl',
 				'source' => null,
 			] ],
-			[ 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $data, [
+			[ 'de', $data, [
 				'value' => 'foo',
 				'language' => 'en',
 				'source' => null,
 			] ],
 
-			[ 'fr', LanguageFallbackChainFactory::FALLBACK_SELF, [
+			[ 'fr', [
 				'kk' => 'baz',
 			], [
 				'value' => 'baz',
 				'language' => 'kk',
 				'source' => null,
 			] ],
-			[ 'it', LanguageFallbackChainFactory::FALLBACK_SELF, [
+			[ 'it', [
 				':' => 'qux',
 				'kk' => 'baz',
 			], [
@@ -231,15 +201,20 @@ class TermLanguageFallbackChainTest extends MediaWikiIntegrationTestCase {
 				'language' => 'kk',
 				'source' => null,
 			] ],
-			[ 'sr', LanguageFallbackChainFactory::FALLBACK_SELF, [
+			[ 'sr', [
 				':' => 'qux',
 			], null ],
-			[ 'en', LanguageFallbackChainFactory::FALLBACK_ALL, [], null ],
-			[ 'ar', LanguageFallbackChainFactory::FALLBACK_SELF, [], null ],
+			[ 'en', [], null ],
+			[ 'ar', [], null ],
 
-			[ 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $entityInfoBuilderArray, [
-				'value' => 'Example',
-				'language' => 'en',
+			[ 'de', [
+				'fr' => [
+					'language' => 'fr',
+					'value' => 'exemple',
+				],
+			], [
+				'language' => 'fr',
+				'value' => 'exemple',
 			] ],
 		];
 	}
