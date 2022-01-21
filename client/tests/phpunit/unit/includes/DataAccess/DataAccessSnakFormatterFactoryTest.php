@@ -65,7 +65,7 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$factory->expects( $this->once() )
 			->method( 'newFromLanguage' )
-			->with( $this->isInstanceOf( Language::class ), LanguageFallbackChainFactory::FALLBACK_ALL )
+			->with( $this->isInstanceOf( Language::class ) )
 			->willReturnCallback( [ $realFactory, 'newFromLanguage' ] );
 
 		return $factory;

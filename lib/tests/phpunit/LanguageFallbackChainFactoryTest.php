@@ -100,13 +100,12 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testNewFromLanguage(
 		$languageCode,
-		$mode,
 		array $expected,
 		array $disabledVariants = []
 	) {
 		$this->setupDisabledVariants( $disabledVariants );
 		$factory = $this->getLanguageFallbackChainFactory();
-		$chain = $factory->newFromLanguage( Language::factory( $languageCode ), $mode )->getFallbackChain();
+		$chain = $factory->newFromLanguage( Language::factory( $languageCode ) )->getFallbackChain();
 		$this->assertChainEquals( $expected, $chain );
 	}
 
@@ -115,13 +114,12 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testNewFromLanguageCode(
 		$languageCode,
-		$mode,
 		array $expected,
 		array $disabledVariants = []
 	) {
 		$this->setupDisabledVariants( $disabledVariants );
 		$factory = $this->getLanguageFallbackChainFactory();
-		$chain = $factory->newFromLanguageCode( $languageCode, $mode )->getFallbackChain();
+		$chain = $factory->newFromLanguageCode( $languageCode )->getFallbackChain();
 		$this->assertChainEquals( $expected, $chain );
 	}
 
@@ -129,51 +127,26 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 		return [
 			[
 				'languageCode' => 'en',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
 				'expected' => [ 'en' ]
-			],
-			[
-				'languageCode' => 'en',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_VARIANTS,
-				'expected' => []
-			],
-			[
-				'languageCode' => 'en',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_OTHERS,
-				'expected' => []
 			],
 
 			[
 				'languageCode' => 'zh-classical',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_SELF,
-				'expected' => [ 'lzh' ]
+				'expected' => [ 'lzh', 'en' ],
 			],
 
 			[
 				'languageCode' => 'de-formal',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
 				'expected' => [ 'de-formal', 'de', 'en' ]
 			],
 			// Repeated to test caching
 			[
 				'languageCode' => 'de-formal',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
 				'expected' => [ 'de-formal', 'de', 'en' ]
-			],
-			[
-				'languageCode' => 'de-formal',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_VARIANTS,
-				'expected' => []
-			],
-			[
-				'languageCode' => 'de-formal',
-				'mode' => ~LanguageFallbackChainFactory::FALLBACK_SELF,
-				'expected' => [ 'de', 'en' ]
 			],
 
 			[
 				'languageCode' => 'zh',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
 				'expected' => [
 					'zh',
 					[ 'zh', 'zh-hans' ],
@@ -189,7 +162,6 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 			],
 			[
 				'languageCode' => 'zh',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
 				'expected' => [
 					'zh',
 					[ 'zh', 'zh-hans' ],
@@ -203,52 +175,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 				'disabledVariants' => [ 'zh-mo', 'zh-my' ]
 			],
 			[
-				'languageCode' => 'zh',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_SELF,
-				'expected' => [ 'zh' ]
-			],
-			[
-				'languageCode' => 'zh',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_VARIANTS,
-				'expected' => [
-					[ 'zh', 'zh-hans' ],
-					[ 'zh', 'zh-hant' ],
-					[ 'zh', 'zh-cn' ],
-					[ 'zh', 'zh-tw' ],
-					[ 'zh', 'zh-hk' ],
-					[ 'zh', 'zh-sg' ],
-					[ 'zh', 'zh-mo' ],
-					[ 'zh', 'zh-my' ],
-				]
-			],
-			[
-				'languageCode' => 'zh',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
-				'expected' => [
-					'zh', // This should be the only difference to the test case above
-					[ 'zh', 'zh-hans' ],
-					[ 'zh', 'zh-hant' ],
-					[ 'zh', 'zh-cn' ],
-					[ 'zh', 'zh-tw' ],
-					[ 'zh', 'zh-hk' ],
-					[ 'zh', 'zh-sg' ],
-					[ 'zh', 'zh-mo' ],
-					[ 'zh', 'zh-my' ],
-				]
-			],
-			[
-				'languageCode' => 'zh',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_OTHERS,
-				'expected' => [ 'zh-hans', 'en' ]
-			],
-			[
-				'languageCode' => 'zh',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_OTHERS,
-				'expected' => [ 'zh', 'zh-hans', 'en' ]
-			],
-			[
 				'languageCode' => 'zh-cn',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
 				'expected' => [
 					'zh-cn',
 					[ 'zh-cn', 'zh-hans' ],
@@ -264,7 +191,6 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 			],
 			[
 				'languageCode' => 'zh-cn',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
 				'expected' => [
 					'zh-cn',
 					[ 'zh-cn', 'zh-sg' ],
@@ -277,30 +203,9 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 				],
 				'disabledVariants' => [ 'zh-mo', 'zh-my', 'zh-hans' ]
 			],
-			[
-				'languageCode' => 'zh-cn',
-				'mode' => ~LanguageFallbackChainFactory::FALLBACK_VARIANTS,
-				'expected' => [ 'zh-cn', 'zh-hans', 'en' ]
-			],
-			[
-				'languageCode' => 'zh-cn',
-				'mode' => ~LanguageFallbackChainFactory::FALLBACK_OTHERS,
-				'expected' => [
-					'zh-cn',
-					[ 'zh-cn', 'zh-hans' ],
-					[ 'zh-cn', 'zh-sg' ],
-					[ 'zh-cn', 'zh-my' ],
-					[ 'zh-cn', 'zh' ],
-					[ 'zh-cn', 'zh-hant' ],
-					[ 'zh-cn', 'zh-hk' ],
-					[ 'zh-cn', 'zh-mo' ],
-					[ 'zh-cn', 'zh-tw' ],
-				],
-			],
 
 			[
 				'languageCode' => 'ii',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
 				'expected' => [
 					'ii',
 					'zh-cn',
@@ -315,41 +220,9 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					'en',
 				]
 			],
-			[
-				'languageCode' => 'ii',
-				'mode' => ~LanguageFallbackChainFactory::FALLBACK_VARIANTS,
-				'expected' => [ 'ii', 'zh-cn', 'zh-hans', 'en' ]
-			],
-			[
-				'languageCode' => 'ii',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_VARIANTS,
-				'expected' => []
-			],
-			[
-				'languageCode' => 'ii',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_VARIANTS | LanguageFallbackChainFactory::FALLBACK_OTHERS,
-				'expected' => [
-					'zh-cn',
-					[ 'zh-cn', 'zh-hans' ],
-					[ 'zh-cn', 'zh-sg' ],
-					[ 'zh-cn', 'zh-my' ],
-					[ 'zh-cn', 'zh' ],
-					[ 'zh-cn', 'zh-hant' ],
-					[ 'zh-cn', 'zh-hk' ],
-					[ 'zh-cn', 'zh-mo' ],
-					[ 'zh-cn', 'zh-tw' ],
-					'en',
-				]
-			],
-			[
-				'languageCode' => 'ii',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_OTHERS,
-				'expected' => [ 'zh-cn', 'zh-hans', 'en' ]
-			],
 
 			[
 				'languageCode' => 'kk',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
 				'expected' => [
 					'kk',
 					[ 'kk', 'kk-cyrl' ],
@@ -358,11 +231,11 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					[ 'kk', 'kk-kz' ],
 					[ 'kk', 'kk-tr' ],
 					[ 'kk', 'kk-cn' ],
+					'en',
 				]
 			],
 			[
 				'languageCode' => '⧼Lang⧽',
-				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
 				'expected' => [ 'en' ]
 			],
 		];
@@ -401,14 +274,9 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testNewFromUserAndLanguageCode(
 		$languageCode,
-		$mode,
 		array $expected,
 		array $disabledVariants = []
 	) {
-		if ( $mode !== LanguageFallbackChainFactory::FALLBACK_ALL ) {
-			$this->assertTrue( true );
-			return;
-		}
 		$this->setupDisabledVariants( $disabledVariants );
 		$factory = $this->getLanguageFallbackChainFactory();
 		$anon = new User();
@@ -419,7 +287,8 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideTestFromBabel
 	 */
-	public function testBuildFromBabel( array $babel, array $expected ) {
+	public function testBuildFromBabel( array $babel, array $expected, array $disabledVariants = [] ) {
+		$this->setupDisabledVariants( $disabledVariants );
 		$factory = $this->getLanguageFallbackChainFactory();
 		$chain = $factory->buildFromBabel( $babel );
 		$this->assertChainEquals( $expected, $chain );
@@ -454,6 +323,35 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 			[
 				'babel' => [ 'N' => [ 'de-formal' ], '3' => [ 'en' ] ],
 				'expected' => [ 'de-formal', 'en', 'de' ]
+			],
+			[
+				'babel' => [ 'N' => [ 'zh' ] ],
+				'expected' => [
+					'zh',
+					[ 'zh', 'zh-hans' ],
+					[ 'zh', 'zh-hant' ],
+					[ 'zh', 'zh-cn' ],
+					[ 'zh', 'zh-tw' ],
+					[ 'zh', 'zh-hk' ],
+					[ 'zh', 'zh-sg' ],
+					[ 'zh', 'zh-mo' ],
+					[ 'zh', 'zh-my' ],
+					'en',
+				],
+			],
+			[
+				'babel' => [ 'N' => [ 'zh' ] ],
+				'expected' => [
+					'zh',
+					[ 'zh', 'zh-hans' ],
+					[ 'zh', 'zh-hant' ],
+					[ 'zh', 'zh-cn' ],
+					[ 'zh', 'zh-tw' ],
+					[ 'zh', 'zh-hk' ],
+					[ 'zh', 'zh-sg' ],
+					'en',
+				],
+				'disabledVariants' => [ 'zh-mo', 'zh-my' ],
 			],
 			[
 				'babel' => [ 'N' => [ 'zh-cn', 'de-formal' ], '3' => [ 'en', 'de' ] ],
