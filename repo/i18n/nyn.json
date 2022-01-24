@@ -7,6 +7,7 @@
 	},
 	"wikibase-edit": "tereeza",
 	"wikibase-add": "giita",
+	"wikibase-label-empty": "Tihariho bukwate oburikushobororwa",
 	"wikibase-description-empty": "Tihariho ebirikugambaho ebiri kucengwa",
 	"wikibase-sitelinks-special": "Ezindi embuga",
 	"wikibase-statementview-rank-normal": "Idaara"

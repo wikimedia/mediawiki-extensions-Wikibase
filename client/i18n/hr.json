@@ -6,6 +6,7 @@
 			"Fraxinus",
 			"MaGa",
 			"Neptune, the Mystic",
+			"Ponor",
 			"Roberta F.",
 			"SpeedyGonsales"
 		]
@@ -93,7 +94,7 @@
 	"connected-redirect-category": "Preusmjeravanja povezana sa stavkom na projektu {{WBREPONAME}}",
 	"wikibase-client-data-bridge-dialog-title": "Uredi $1",
 	"wikibase-client-data-bridge-permissions-error-info": "Više pojedinosti",
-	"wikibase-client-data-bridge-permissions-error-unknown-head": "Nepoznata pogrješka u dozvolama",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "Nepoznata pogreška u dozvolama",
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Ispravljena je</strong> pogrješna vrijednost",
 	"wikibase-client-data-bridge-edit-decision-replace-description": "Prethodna vrijednost nikad nije bila ispravna.",
 	"wikibase-client-data-bridge-edit-decision-update-description": "Prethodna je vrijednost bila ispravna, no sad je zastarjela.",
