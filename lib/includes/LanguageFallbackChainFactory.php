@@ -168,7 +168,9 @@ class LanguageFallbackChainFactory {
 	}
 
 	/**
-	 * Add the given language, its variants and its fallbacks to the chain (if not included already).
+	 * Add the given language, its variants and its *explicit* fallbacks to the chain (if not included already).
+	 *
+	 * For the *implicit* (non-strict) fallbacks, see {@link addImplicitFallbacksToChain}.
 	 *
 	 * @param Language|string $language language (code)
 	 * @param LanguageWithConversion[] &$chain the resulting chain
@@ -178,10 +180,22 @@ class LanguageFallbackChainFactory {
 		$this->addLanguageAndVariantsToChain( $language, $chain, $fetched );
 
 		$languageCode = is_string( $language ) ? $language : $language->getCode();
-		$fallbacks = $this->languageFallback->getAll( $languageCode );
+		$fallbacks = $this->languageFallback->getAll( $languageCode, LanguageFallback::STRICT );
 		foreach ( $fallbacks as $other ) {
 			$this->addLanguageAndVariantsToChain( $other, $chain, $fetched );
 		}
+	}
+
+	/**
+	 * Add the *implicit* fallbacks for any language to the chain (if not included already).
+	 *
+	 * For the *explicit* fallbacks (of a specific language), see {@link addLanguageAndVariantsAndFallbacksToChain}.
+	 *
+	 * @param LanguageWithConversion[] &$chain the resulting chain
+	 * @param bool[] &$fetched language codes (as keys) that are already in the chain
+	 */
+	private function addImplicitFallbacksToChain( array &$chain, array &$fetched ): void {
+		$this->addLanguageToChain( 'en', $chain, $fetched );
 	}
 
 	/**
@@ -194,6 +208,7 @@ class LanguageFallbackChainFactory {
 		$chain = [];
 		$fetched = [];
 		$this->addLanguageAndVariantsAndFallbacksToChain( $language, $chain, $fetched );
+		$this->addImplicitFallbacksToChain( $chain, $fetched );
 		return $chain;
 	}
 
@@ -333,6 +348,9 @@ class LanguageFallbackChainFactory {
 				$this->addLanguageAndVariantsAndFallbacksToChain( $languageCode, $chain, $fetched );
 			}
 		}
+
+		// Third pass to add implicit, language-independent fallbacks
+		$this->addImplicitFallbacksToChain( $chain, $fetched );
 
 		return $chain;
 	}
