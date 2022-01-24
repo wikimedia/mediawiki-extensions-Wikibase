@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kly"
+			"Kly",
+			"Tranve"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "回傳在指定頁面的所有使用到的項目 ID。",
@@ -26,12 +27,11 @@
 	"apihelp-query+pageterms-summary": "取得透過站台連結關聯至頁面的{{WBREPONAME}}名稱（代表性標籤、描述，以及別名）。在項目頁面本身，名稱會被直接使用。請注意：在儲存庫 wiki 裡，此模組僅在項目頁面上直接運作，而非透過站台連結來連接至項目的頁面上。這在往後可能會有變動。",
 	"apihelp-query+pageterms-example-simple": "取得所有關聯到頁面「London」，以使用者語言的項目。",
 	"apihelp-query+pageterms-example-label-en": "取得關聯到頁面「London」的英語標籤和別名。",
-	"apihelp-query+pageterms-example-item": "取得項目 Q84 的標籤與別名。",
 	"apihelp-query+pageterms-param-terms": "要取得的名稱類型，例如：'description'；會依類型來各個回傳以字串為鍵值的陣列，例如：{\"description\": [\"foo\"]}。若未特別指定，會回傳所有類型。",
 	"apihelp-query+description-summary": "取得解釋目標頁面相關內容的簡短描述（即子標題）。",
 	"apihelp-query+description-extended-description": "描述為單行任意內容的純文字（可能會包含原始的 HTML 標籤，並且也會詮釋成純文字）。這不應使用於 HTML 非轉義！",
 	"apihelp-query+description-param-prefersource": "要首選的描述來源（若有的話）：",
-	"apihelp-query+description-paramvalue-prefersource-local": "透過在頁面中 wiki 文字裡 <code><nowiki>{{SHORTDESC:...}}</nowiki></code> 解析函式的本地端描述。",
+	"apihelp-query+description-paramvalue-prefersource-local": "透過在頁面中 wikitext 裡 <code><nowiki>{{SHORTDESC:...}}</nowiki></code> 解析函式的本地端描述。",
 	"apihelp-query+description-paramvalue-prefersource-central": "來自關聯{{WBREPONAME}}項目的中心描述。",
 	"apihelp-query+description-example": "取得頁面「London」的描述。",
 	"apihelp-query+description-example-central": "取得頁面「London」的描述，若中心描述存在則為首選。",

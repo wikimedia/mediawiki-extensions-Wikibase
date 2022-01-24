@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gilbert Ndihokubwayo"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} ikintu",
+	"wikibase-editlinks": "Hinyanyura imbuga",
+	"wikibase-linkitem-addlinks": "Shirako imbuga",
+	"wikibase-linkitem-title": "Urubuga hamwe n'urupapuro",
+	"wikibase-linkitem-linkpage": "Urubuga hamwe n'urupapuro",
+	"wikibase-linkitem-selectlink": "Cagura urubuga hamwe n'urupapuro ushaka kujanisha n'uru rupapuro.",
+	"wikibase-linkitem-input-site": "Ururimi",
+	"wikibase-linkitem-input-page": "Urupapuro:"
+}
