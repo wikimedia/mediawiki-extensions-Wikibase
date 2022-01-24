@@ -27,7 +27,6 @@ use Wikibase\Lib\Store\CachingPrefetchingTermLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
-use Wikibase\Lib\WikibaseContentLanguages;
 
 return [
 	'item' => [
@@ -77,8 +76,7 @@ return [
 				$cache,
 				$prefetchingPropertyTermLookup,
 				$redirectResolvingRevisionLookup,
-				WikibaseContentLanguages::getDefaultInstance()
-					->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
+				WikibaseClient::getTermsLanguages( $mwServices )
 			);
 		},
 	]
