@@ -2,15 +2,39 @@
 	"@metadata": {
 		"authors": [
 			"Robertjamal12",
-			"Amire80"
+			"Amire80",
+			"Afia360"
 		]
 	},
+	"wikibase-comment-sitelink-remove": "Yi kasa nkutahodie firi mu:$1",
 	"wikibase-editlinks": "Sesa links no",
 	"wikibase-linkitem-addlinks": "Fa links ɛka ho",
+	"wikibase-linkitem-close": "Fa nkutahodie no bra awieɛ na sane bue kratafa",
 	"wikibase-linkitem-input-site": "Kasa:",
 	"wikibase-linkitem-input-page": "Kratafaː",
+	"wikibase-linkitem-not-loggedin-title": "Ɛwɔ sɛ wo kɔm",
+	"wikibase-linkitem-not-loggedin": "Ɛwɔ sɛ wo kɔm wɔ wiki ne [$1 central data repository] so na watumi de saa ahosuo yi adi dwuma.",
+	"wikibase-linkitem-success-link": "Yɛne kratafa ahodoɔ yi anya ayɔnkofa. Wobɛtumi ahunu ade a ɛwɔ ayɔnkofa yi mu wɔ yɛn [$1 cereal data repository].",
+	"wikibase-property-notfound": "Yɛanhunu $1 ahyɛnsodeɛ.",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Fa sie",
 	"wikibase-rc-hide-wikidata-show": "Kyereɛ",
+	"wikibase-rc-show-wikidata-pref": "Kyere {{WBREPONAME}} nsesaɛ no wɔ nsakyereɛ a woyɛɛ no Seisei.",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-otherprojects": "Wɔ dwumadi foforo mu no"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} Sesa",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} nsesaeɛ",
+	"wikibase-pageswithbadges-submit": "Ma menhu krataƒa ahodoɔ",
+	"wikibase-pageinfo-entity-usage-T": "Etiri asɛm",
+	"wikibase-otherprojects": "Wɔ dwumadi foforo mu no",
+	"wikibase-sitelinks-sitename-columnheading": "Kasa",
+	"wikibase-sitelinks-link-columnheading": "Kratafa a ɛwɔ ayɔnkofa",
+	"wikibase-client-data-bridge-error-go-back": "Kɔ wakyi",
+	"wikibase-client-data-bridge-error-retry-save": "Sane fa sie bio",
+	"wikibase-client-data-bridge-thank-you-head": "Yɛda wo ase wɔ nsakyeraeɛ wayɛ!",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Wo nnya nkɔm",
+	"wikibase-client-data-bridge-saving-error-assertuser-message": "Wobɛtumi ama amansan ahu nsakyeraeɛ a woyɛɛ bere a woankɔm no.YɛbɛkOra wo akyiri kwan wɔ kratafa biara  a wo yɛɛ nsakyeraeɛ wo so no abakɔsɛm mu. WObɛtumi asane akɔm bio na wama amansan ahu.",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Ma amansan nhu bere a woankɔm",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Fa sie bere a woankɔm",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Kɔm (Opens in a new tab)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Toa so yɛ nsakyeraeɛ"
 }

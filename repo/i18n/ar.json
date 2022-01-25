@@ -359,7 +359,7 @@
 	"wikibase-error-entity-too-big": "الكيان مُفرِط في الكبر. الحد الأقصى المسموح به لحجم الكيان هو $1.",
 	"wikibase-parse-error": "قيمة ذات بنية غير سليمة.",
 	"wikibase-parse-error-coordinate": "قيمة الإحداثية ذات بنية غير سليمة.",
-	"wikibase-parse-error-entity-id": "مُعرِّف الكيان ذو بنية غير سليمة..",
+	"wikibase-parse-error-entity-id": "مُعرِّف الكيان ذو بنية غير سليمة.",
 	"wikibase-parse-error-quantity": "قيمة الكمية ذات بنية غير سليمة.",
 	"wikibase-parse-error-time": "قيمة الزمن ذات بنية غير سليمة.",
 	"special-redirectentity": "تحويل كيان",
