@@ -66,9 +66,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( 'structured-cat' );
 
 		$fallbackChainFactory = new LanguageFallbackChainFactory();
-		$fallbackChain = $fallbackChainFactory->newFromLanguage( $language,
-			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
-		);
+		$fallbackChain = $fallbackChainFactory->newFromLanguage( $language );
 
 		return new EntityAccessor(
 			WikibaseClient::getEntityIdParser(),
