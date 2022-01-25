@@ -248,7 +248,7 @@ class LanguageFallbackChainFactory {
 	 */
 	public function newFromUserAndLanguageCode( User $user, $languageCode ) {
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Babel' ) || $user->isAnon() ) {
-			return $this->newFromLanguageCode( $languageCode, self::FALLBACK_ALL );
+			return $this->newFromLanguageCode( $languageCode );
 		}
 
 		$languageCode = LanguageWithConversion::validateLanguageCode( $languageCode );
