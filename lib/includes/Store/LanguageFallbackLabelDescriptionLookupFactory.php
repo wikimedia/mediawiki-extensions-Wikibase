@@ -34,33 +34,20 @@ class LanguageFallbackLabelDescriptionLookupFactory {
 	private $termBuffer;
 
 	/**
-	 * @var int
-	 */
-	private $fallbackMode;
-
-	/**
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param TermLookup $termLookup
 	 * @param TermBuffer|null $termBuffer
-	 * @param int $fallbackMode Either 0 or a combination of the
-	 *  LanguageFallbackChainFactory::FALLBACK_... constants.
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		TermLookup $termLookup,
-		TermBuffer $termBuffer = null,
-		$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL
+		TermBuffer $termBuffer = null
 	) {
-		if ( !is_int( $fallbackMode ) ) {
-			throw new InvalidArgumentException( '$fallbackMode must be an integer' );
-		}
-
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->termLookup = $termLookup;
 		$this->termBuffer = $termBuffer;
-		$this->fallbackMode = $fallbackMode;
 	}
 
 	/**
@@ -80,10 +67,7 @@ class LanguageFallbackLabelDescriptionLookupFactory {
 		array $entityIds = [],
 		array $termTypes = [ 'label' ]
 	) {
-		$languageFallbackChain = $this->languageFallbackChainFactory->newFromLanguage(
-			$language,
-			$this->fallbackMode
-		);
+		$languageFallbackChain = $this->languageFallbackChainFactory->newFromLanguage( $language );
 
 		$languages = $languageFallbackChain->getFetchLanguageCodes();
 
