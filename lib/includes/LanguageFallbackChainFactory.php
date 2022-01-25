@@ -26,23 +26,23 @@ class LanguageFallbackChainFactory {
 	/**
 	 * Fallback levels
 	 */
-	public const FALLBACK_ALL = 0xff;
+	private const FALLBACK_ALL = 0xff;
 
 	/**
 	 * The language itself, e.g. 'en' for 'en'.
 	 */
-	public const FALLBACK_SELF = 1;
+	private const FALLBACK_SELF = 1;
 
 	/**
 	 * Other compatible languages that can be translated into the requested language
 	 * (and translation is automatically done), e.g. 'sr', 'sr-ec' and 'sr-el' for 'sr'.
 	 */
-	public const FALLBACK_VARIANTS = 2;
+	private const FALLBACK_VARIANTS = 2;
 
 	/**
 	 * All other language from the system fallback chain, e.g. 'de' and 'en' for 'de-formal'.
 	 */
-	public const FALLBACK_OTHERS = 4;
+	private const FALLBACK_OTHERS = 4;
 
 	/** @var ContentLanguages */
 	private $termsLanguages;
@@ -57,7 +57,7 @@ class LanguageFallbackChainFactory {
 	private $languageFallback;
 
 	/**
-	 * @var array[]
+	 * @var TermLanguageFallbackChain[]
 	 */
 	private $languageCache = [];
 
@@ -87,47 +87,45 @@ class LanguageFallbackChainFactory {
 	}
 
 	/**
-	 * Get the fallback chain based a single language, and specified fallback level.
+	 * Get the fallback chain based a single language.
 	 *
 	 * @param Language $language
-	 * @param int $mode Bitfield of self::FALLBACK_*
 	 *
 	 * @return TermLanguageFallbackChain
 	 */
-	public function newFromLanguage( Language $language, $mode = self::FALLBACK_ALL ) {
+	public function newFromLanguage( Language $language ) {
 		$languageCode = $language->getCode();
 
-		if ( !isset( $this->languageCache[$languageCode][$mode] ) ) {
-			$chain = $this->buildFromLanguage( $language, $mode );
-			$this->languageCache[$languageCode][$mode] = new TermLanguageFallbackChain(
+		if ( !isset( $this->languageCache[$languageCode] ) ) {
+			$chain = $this->buildFromLanguage( $language, self::FALLBACK_ALL );
+			$this->languageCache[$languageCode] = new TermLanguageFallbackChain(
 				$chain,
 				$this->termsLanguages
 			);
 		}
 
-		return $this->languageCache[$languageCode][$mode];
+		return $this->languageCache[$languageCode];
 	}
 
 	/**
-	 * Get the fallback chain based a single language code, and specified fallback level.
+	 * Get the fallback chain based a single language code.
 	 *
 	 * @param string $languageCode
-	 * @param int $mode Bitfield of self::FALLBACK_*
 	 *
 	 * @return TermLanguageFallbackChain
 	 */
-	public function newFromLanguageCode( $languageCode, $mode = self::FALLBACK_ALL ) {
+	public function newFromLanguageCode( $languageCode ) {
 		$languageCode = LanguageWithConversion::validateLanguageCode( $languageCode );
 
-		if ( !isset( $this->languageCache[$languageCode][$mode] ) ) {
-			$chain = $this->buildFromLanguage( $languageCode, $mode );
-			$this->languageCache[$languageCode][$mode] = new TermLanguageFallbackChain(
+		if ( !isset( $this->languageCache[$languageCode] ) ) {
+			$chain = $this->buildFromLanguage( $languageCode, self::FALLBACK_ALL );
+			$this->languageCache[$languageCode] = new TermLanguageFallbackChain(
 				$chain,
 				$this->termsLanguages
 			);
 		}
 
-		return $this->languageCache[$languageCode][$mode];
+		return $this->languageCache[$languageCode];
 	}
 
 	/**
