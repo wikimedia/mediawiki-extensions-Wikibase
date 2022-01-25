@@ -8,7 +8,6 @@ use HtmlCacheUpdater;
 use IJobSpecification;
 use JobQueueGroup;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -25,18 +24,11 @@ use WikiPage;
  */
 class EntityDataPurgerTest extends TestCase {
 
-	private function mockJobQueueGroupFactory( JobQueueGroup $jobQueueGroup = null ): callable {
-		$factory = $this->getMockBuilder( stdClass::class )
-			->addMethods( [ 'factory' ] )
-			->getMock();
-		if ( $jobQueueGroup !== null ) {
-			$factory->method( 'factory' )
-				->willReturn( $jobQueueGroup );
-		} else {
-			$factory->expects( $this->never() )
-				->method( 'factory' );
-		}
-		return [ $factory, 'factory' ];
+	private function mockJobQueueGroupNoop(): JobQueueGroup {
+		$jobQueueGroup = $this->createMock( JobQueueGroup::class );
+		$jobQueueGroup->expects( $this->never() )
+			->method( 'push' );
+		return $jobQueueGroup;
 	}
 
 	public function testGivenEntityIdLookupReturnsNull_handlerDoesNothing() {
@@ -56,7 +48,7 @@ class EntityDataPurgerTest extends TestCase {
 			$entityIdLookup,
 			$entityDataUriManager,
 			$htmlCacheUpdater,
-			$this->mockJobQueueGroupFactory()
+			$this->mockJobQueueGroupNoop()
 		);
 
 		$purger->onArticleRevisionVisibilitySet( $title, [ 1, 2, 3 ], [] );
@@ -83,7 +75,7 @@ class EntityDataPurgerTest extends TestCase {
 			$entityIdLookup,
 			$entityDataUriManager,
 			$htmlCacheUpdater,
-			$this->mockJobQueueGroupFactory()
+			$this->mockJobQueueGroupNoop()
 		);
 
 		$purger->onArticleRevisionVisibilitySet( $title, [ 1 ], [] );
@@ -122,7 +114,7 @@ class EntityDataPurgerTest extends TestCase {
 			$entityIdLookup,
 			$entityDataUriManager,
 			$htmlCacheUpdater,
-			$this->mockJobQueueGroupFactory()
+			$this->mockJobQueueGroupNoop()
 		);
 
 		$purger->onArticleRevisionVisibilitySet( $title, [ 1, 2, 3 ], [] );
@@ -167,7 +159,7 @@ class EntityDataPurgerTest extends TestCase {
 			$entityIdLookup,
 			$entityDataUriManager,
 			$htmlCacheUpdater,
-			$this->mockJobQueueGroupFactory( $jobQueueGroup )
+			$jobQueueGroup
 		);
 
 		$purger->onArticleDeleteComplete(

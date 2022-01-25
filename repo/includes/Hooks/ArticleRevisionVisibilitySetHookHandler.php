@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Hooks;
 
+use JobQueueGroup;
 use MediaWiki\Hook\ArticleRevisionVisibilitySetHook;
 use Title;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -31,16 +32,16 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 	private $entityNamespaceLookup;
 
 	/**
-	 * @var callable
+	 * @var JobQueueGroup
 	 */
-	private $jobQueueGroupFactory;
+	private $jobQueueGroup;
 
 	public function __construct(
-		EntityNamespaceLookup $localEntityNamespaceLookup,
-		callable $jobQueueGroupFactory = null
+		JobQueueGroup $jobQueueGroup,
+		EntityNamespaceLookup $localEntityNamespaceLookup
 	) {
+		$this->jobQueueGroup = $jobQueueGroup;
 		$this->entityNamespaceLookup = $localEntityNamespaceLookup;
-		$this->jobQueueGroupFactory = $jobQueueGroupFactory ?: 'JobQueueGroup::singleton';
 	}
 
 	/**
@@ -58,7 +59,7 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 			'revisionIds' => array_map( 'intval', $ids ), // phpdoc says int[] but MediaWiki may call with a (int|string)[]
 			'visibilityChangeMap' => $visibilityChangeMap,
 		] );
-		( $this->jobQueueGroupFactory )()->push( $job );
+		$this->jobQueueGroup->push( $job );
 	}
 
 }

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use JobQueueGroup;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
@@ -78,7 +77,7 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 
 		$itemTermStoreWriter = new DatabaseItemTermStoreWriter(
 			$repoDb,
-			JobQueueGroup::singleton(),
+			$this->getServiceContainer()->getJobQueueGroup(),
 			new DatabaseTermInLangIdsAcquirer( $repoDb, $typeIdsStore ),
 			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $repoDb ),
 			new StringNormalizer()

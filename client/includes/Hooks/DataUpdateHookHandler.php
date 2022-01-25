@@ -70,13 +70,14 @@ class DataUpdateHookHandler implements
 	private $logger;
 
 	public static function factory(
+		JobQueueGroup $jobQueueGroup,
 		LoggerInterface $logger,
 		ClientStore $store,
 		UsageAccumulatorFactory $usageAccumulatorFactory
 	): self {
 		return new self(
 			$store->getUsageUpdater(),
-			JobQueueGroup::singleton(),
+			$jobQueueGroup,
 			$store->getUsageLookup(),
 			$usageAccumulatorFactory,
 			$logger

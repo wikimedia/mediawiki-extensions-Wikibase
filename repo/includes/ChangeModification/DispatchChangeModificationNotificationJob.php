@@ -6,6 +6,7 @@ namespace Wikibase\Repo\ChangeModification;
 
 use IJobSpecification;
 use Job;
+use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Title;
@@ -36,8 +37,8 @@ abstract class DispatchChangeModificationNotificationJob extends Job {
 	/** @var LoggerInterface */
 	protected $logger;
 
-	/** @var callable */
-	private $jobGroupFactory;
+	/** @var JobQueueGroupFactory */
+	private $jobQueueGroupFactory;
 
 	public function __construct( string $jobName, Title $title, array $params ) {
 		parent::__construct( $jobName, $title, $params );
@@ -53,23 +54,23 @@ abstract class DispatchChangeModificationNotificationJob extends Job {
 		$this->initServices(
 			new ContentHandlerEntityIdLookup( WikibaseRepo::getEntityContentFactory( $mwServices ) ),
 			WikibaseRepo::getLogger( $mwServices ),
-			'JobQueueGroup::singleton'
+			$mwServices->getJobQueueGroupFactory()
 		);
 	}
 
 	/**
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param LoggerInterface $logger
-	 * @param callable $jobGroupFactory
+	 * @param JobQueueGroupFactory $jobQueueGroupFactory
 	 */
 	public function initServices(
 		EntityIdLookup $entityIdLookup,
 		LoggerInterface $logger,
-		callable $jobGroupFactory
+		JobQueueGroupFactory $jobQueueGroupFactory
 	) {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->logger = $logger;
-		$this->jobGroupFactory = $jobGroupFactory;
+		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
 	}
 
 	/**
@@ -92,7 +93,7 @@ abstract class DispatchChangeModificationNotificationJob extends Job {
 	 */
 	private function dispatchChangeModificationNotificationJobs( array $jobSpecifications ): void {
 		foreach ( $this->localClientDatabases as $clientDatabase ) {
-			call_user_func( $this->jobGroupFactory, $clientDatabase )->push( $jobSpecifications );
+			$this->jobQueueGroupFactory->makeJobQueueGroup( $clientDatabase )->push( $jobSpecifications );
 		}
 	}
 

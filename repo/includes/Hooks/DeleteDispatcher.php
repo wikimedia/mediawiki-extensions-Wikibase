@@ -3,6 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Hooks;
 
+use JobQueueGroup;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -16,8 +17,8 @@ use Wikibase\Repo\ChangeModification\DispatchChangeDeletionNotificationJob;
  */
 class DeleteDispatcher implements ArticleDeleteCompleteHook {
 
-	/** @var callable */
-	private $jobQueueGroupFactory;
+	/** @var JobQueueGroup */
+	private $jobQueueGroup;
 
 	/** @var EntityIdLookup */
 	private $entityIdLookup;
@@ -26,26 +27,27 @@ class DeleteDispatcher implements ArticleDeleteCompleteHook {
 	private $localClientDatabases;
 
 	/**
-	 * @param callable $jobQueueGroupFactory
+	 * @param JobQueueGroup $jobQueueGroup
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param array $localClientDatabases
 	 */
 	public function __construct(
-		callable $jobQueueGroupFactory,
+		JobQueueGroup $jobQueueGroup,
 		EntityIdLookup $entityIdLookup,
 		array $localClientDatabases
 	) {
-		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
+		$this->jobQueueGroup = $jobQueueGroup;
 		$this->entityIdLookup = $entityIdLookup;
 		$this->localClientDatabases = $localClientDatabases;
 	}
 
 	public static function factory(
+		JobQueueGroup $jobQueueGroup,
 		EntityIdLookup $entityIdLookup,
 		SettingsArray $repoSettings
 	): self {
 		return new self(
-			'JobQueueGroup::singleton',
+			$jobQueueGroup,
 			$entityIdLookup,
 			$repoSettings->getSetting( 'localClientDatabases' )
 		);
@@ -73,7 +75,7 @@ class DeleteDispatcher implements ArticleDeleteCompleteHook {
 		];
 		$job = new DispatchChangeDeletionNotificationJob( $title, $jobParams );
 
-		call_user_func( $this->jobQueueGroupFactory, false )->push( $job );
+		$this->jobQueueGroup->push( $job );
 	}
 
 }

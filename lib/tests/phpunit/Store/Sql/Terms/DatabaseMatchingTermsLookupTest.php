@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
-use JobQueueGroup;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
@@ -237,7 +236,7 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 		);
 
 		return new DatabaseItemTermStoreWriter( $this->repoDb,
-			JobQueueGroup::singleton(),
+			$this->getServiceContainer()->getJobQueueGroup(),
 			new DatabaseTermInLangIdsAcquirer( $this->repoDb, $typeIdsStore, $logger ),
 			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore,
 				$this->repoDb, $logger ), new StringNormalizer()

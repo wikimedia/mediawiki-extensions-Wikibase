@@ -108,6 +108,7 @@
 			"class": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler::factory",
 			"services": [
+				"JobQueueGroup",
 				"WikibaseClient.Logger",
 				"WikibaseClient.Store",
 				"WikibaseClient.UsageAccumulatorFactory"
