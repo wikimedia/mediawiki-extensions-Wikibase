@@ -9,6 +9,7 @@ use MWException;
 use RequestContext;
 use User;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageWithConversion;
 use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
@@ -23,7 +24,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param array $expectedItems
-	 * @param \Wikibase\LanguageWithConversion[] $chain
+	 * @param LanguageWithConversion[] $chain
 	 */
 	private function assertChainEquals( array $expectedItems, array $chain ) {
 		$this->assertSame( count( $expectedItems ), count( $chain ) );
