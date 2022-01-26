@@ -24,10 +24,7 @@ use Wikibase\Lib\SettingsArray;
  */
 class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 
-	/**
-	 * @return ResourceLoaderContext
-	 */
-	private function getContext( $languageCode = 'qqx' ) {
+	private function getContext(): ResourceLoaderContext {
 		$context = $this->getMockBuilder( ResourceLoaderContext::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -54,12 +51,11 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		array $sites,
 		array $groups,
 		array $specialGroups,
-		$languageCode,
 		$expected
 	) {
 		$module = $this->newSitesModule( $sites, $groups, $specialGroups );
 
-		$result = $module->getScript( $this->getContext( $languageCode ) );
+		$result = $module->getScript( $this->getContext() );
 		$this->assertEquals( 'mw.config.set({"wbSiteDetails":' . $expected . '});', $result );
 	}
 
@@ -79,13 +75,12 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		$nonMwSite->setGroup( 'allowedgroup' );
 
 		return [
-			'no sites' => [ [], [], [], 'qqx', '[]' ],
-			'no site in sitelinkgroups' => [ [ $site1, $site2 ], [], [], 'qqx', '[]' ],
+			'no sites' => [ [], [], [], '[]' ],
+			'no site in sitelinkgroups' => [ [ $site1, $site2 ], [], [], '[]' ],
 			'single site in sitelinkgroups' => [
 				[ $site1, $site2 ],
 				[ 'allowedgroup', 'othergroup' ],
 				[],
-				'qqx',
 				'{"mywiki":{"shortName":"","name":"","id":"mywiki","pageUrl":"//my.test/$1",' .
 				'"apiUrl":"","languageCode":null,"group":"allowedgroup"},' .
 				'"otherwiki":{"shortName":"","name":"","id":"otherwiki","pageUrl":"//other.test/$1",' .
@@ -95,7 +90,6 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 				[ $site1 ],
 				[ 'special' ],
 				[ 'allowedgroup' ],
-				'ar',
 				'{"mywiki":{"shortName":"(wikibase-sitelinks-sitename-mywiki)",' .
 				'"name":"(wikibase-sitelinks-sitename-mywiki)",' .
 				'"id":"mywiki","pageUrl":"//my.test/$1",' .
@@ -105,7 +99,6 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 				[ $nonMwSite ],
 				[ 'allowedgroup' ],
 				[],
-				'qqx',
 				'[]'
 			],
 		];
@@ -118,14 +111,14 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		$module1 = $this->newMockModule( [ new MediaWikiSite() ], [ Site::GROUP_NONE ], $cache );
 		$module1->expects( $this->once() )->method( 'makeScript' )
 			->willReturn( 'mock script' );
-		$module1->getScript( $this->getContext( 'qqx' ) );
-		$module1->getScript( $this->getContext( 'qqx' ) );
+		$module1->getScript( $this->getContext() );
+		$module1->getScript( $this->getContext() );
 
 		// Call twice on a different instance with same cache. Expect 0 compute.
 		$module2 = $this->newMockModule( [ new MediaWikiSite() ], [ Site::GROUP_NONE ], $cache );
 		$module2->expects( $this->never() )->method( 'makeScript' );
-		$module2->getScript( $this->getContext( 'qqx' ) );
-		$module2->getScript( $this->getContext( 'qqx' ) );
+		$module2->getScript( $this->getContext() );
+		$module2->getScript( $this->getContext() );
 	}
 
 	public function testGetVersionHash() {
@@ -182,7 +175,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 			new HashBagOStuff()
 		);
 
-		$script = $module->getScript( $this->getContext( 'qqx' ) );
+		$script = $module->getScript( $this->getContext() );
 
 		$this->assertStringContainsString( $expected, $script );
 	}
