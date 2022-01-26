@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"AlexandrL714",
-			"Андрей Саг."
+			"Андрей Саг.",
+			"Jolka Kaj"
 		]
 	},
 	"wikibase-editlinks": "Аларғаны тӱзедерге",
 	"wikibase-editlinkstitle": "Тіллер аразындағы ссылкалар алыстырарға",
-	"wikibase-linkitem-addlinks": "Ссылкалар хозарға"
+	"wikibase-linkitem-addlinks": "Ссылкалар хозарға",
+	"wikibase-linkitem-input-site": "Тіл:"
 }

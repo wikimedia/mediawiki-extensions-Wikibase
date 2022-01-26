@@ -42,7 +42,8 @@
 			"Умар",
 			"Чаховіч Уладзіслаў",
 			"Ядерный Трамвай",
-			"WindEwriX"
+			"WindEwriX",
+			"WhatamIdoing"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -52,7 +53,7 @@
 	"wikibase-entity-query": "запрос",
 	"wikibase-edit": "править",
 	"wikibase-save": "сохранить",
-	"wikibase-publish": "записать",
+	"wikibase-publish": "опубликовать",
 	"wikibase-cancel": "отменить",
 	"wikibase-add": "добавить",
 	"wikibase-addqualifier": "квалификатор",

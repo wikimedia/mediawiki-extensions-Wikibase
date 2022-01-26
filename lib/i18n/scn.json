@@ -38,6 +38,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "valuri scanusciutu",
 	"wikibase-snakview-snaktypeselector-novalue": "nuddu valuri",
 	"wikibase-undeserializable-value": "Lu valuri nun è vàlidu e nun si pò ammustrari.",
+	"datatypes-type-string": "Stringa",
 	"datatypes-type-quantity": "Quantità",
 	"datatypes-type-monolingualtext": "Testu monu-lingua",
 	"datatypes-type-multilingualtext": "Testu multi-lingua",

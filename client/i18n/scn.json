@@ -62,6 +62,7 @@
 	"wikibase-pageinfo-entity-id-none": "Nuddu",
 	"wikibase-pageinfo-description-local": "Discrizzioni lucali",
 	"wikibase-pageinfo-description-central": "Discrizzioni cintrali",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etichetta: $1",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Discrizzioni: $1",
 	"wikibase-pageinfo-entity-usage-T": "Tìtulu",
 	"wikibase-property-render-error": "Nun s'arriniscìu a rènniri lu valuri dâ prupità $1: $2",
