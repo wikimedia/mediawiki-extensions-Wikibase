@@ -8,6 +8,7 @@ use BagOStuff;
 use HashBagOStuff;
 use HashSiteStore;
 use MediaWikiSite;
+use RawMessage;
 use ResourceLoaderContext;
 use Site;
 use Wikibase\Lib\Modules\SitesModule;
@@ -31,8 +32,10 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$context->method( 'getLanguage' )
-			->willReturn( $languageCode );
+		$context->method( 'msg' )
+			->willReturnCallback( function ( $key ) {
+				return new RawMessage( "($key)" );
+			} );
 
 		return $context;
 	}
@@ -93,7 +96,9 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 				[ 'special' ],
 				[ 'allowedgroup' ],
 				'ar',
-				'{"mywiki":{"shortName":"mywiki","name":"mywiki","id":"mywiki","pageUrl":"//my.test/$1",' .
+				'{"mywiki":{"shortName":"(wikibase-sitelinks-sitename-mywiki)",' .
+				'"name":"(wikibase-sitelinks-sitename-mywiki)",' .
+				'"id":"mywiki","pageUrl":"//my.test/$1",' .
 				'"apiUrl":"","languageCode":null,"group":"special"}}'
 			],
 			'single non-MediaWiki site in sitelinkgroups' => [

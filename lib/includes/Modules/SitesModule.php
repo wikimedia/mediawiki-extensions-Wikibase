@@ -7,6 +7,7 @@ namespace Wikibase\Lib\Modules;
 use BagOStuff;
 use InvalidArgumentException;
 use MediaWikiSite;
+use MessageLocalizer;
 use ResourceLoader;
 use ResourceLoaderContext;
 use ResourceLoaderModule;
@@ -79,8 +80,8 @@ class SitesModule extends ResourceLoaderModule {
 		return $this->cache->getWithSetCallback(
 			$this->cache->makeKey( 'wikibase-sites-module', 'script', $languageCode ),
 			self::SITE_DETAILS_TTL,
-			function () use ( $languageCode ) {
-				return $this->makeScript( $languageCode );
+			function () use ( $context ) {
+				return $this->makeScript( $context );
 			}
 		);
 	}
@@ -91,10 +92,10 @@ class SitesModule extends ResourceLoaderModule {
 	}
 
 	/**
-	 * @param string $languageCode
+	 * @param MessageLocalizer $localizer
 	 * @return string JavaScript Code
 	 */
-	protected function makeScript( string $languageCode ): string {
+	protected function makeScript( MessageLocalizer $localizer ): string {
 		$groups = $this->getSetting( 'siteLinkGroups' );
 		$specialGroups = $this->getSetting( 'specialSiteLinkGroups' );
 		$specialPos = array_search( 'special', $groups );
@@ -112,7 +113,7 @@ class SitesModule extends ResourceLoaderModule {
 				$siteDetails[$site->getGlobalId()] = $this->computeSiteDetails(
 					$site,
 					$specialGroups,
-					$languageCode
+					$localizer
 				);
 			}
 		}
@@ -138,17 +139,17 @@ class SitesModule extends ResourceLoaderModule {
 	/**
 	 * @param MediaWikiSite $site
 	 * @param string[] $specialGroups
-	 * @param string $languageCode
+	 * @param MessageLocalizer $localizer
 	 * @return string[]
 	 */
-	private function computeSiteDetails( MediaWikiSite $site, array $specialGroups, string $languageCode ): array {
+	private function computeSiteDetails( MediaWikiSite $site, array $specialGroups, MessageLocalizer $localizer ): array {
 		$languageNameLookup = new LanguageNameLookup();
 
 		// FIXME: quickfix to allow a custom site-name / handling for the site groups which are
 		// special according to the specialSiteLinkGroups setting
 		$group = $site->getGroup();
 		if ( in_array( $group, $specialGroups ) ) {
-			$languageName = $this->getSpecialSiteLanguageName( $site, $languageCode );
+			$languageName = $this->getSpecialSiteLanguageName( $site, $localizer );
 			$groupName = 'special';
 		} else {
 			$languageName = $languageNameLookup->getName( $site->getLanguageCode() );
@@ -178,17 +179,16 @@ class SitesModule extends ResourceLoaderModule {
 
 	/**
 	 * @param Site $site
-	 * @param string $languageCode
+	 * @param MessageLocalizer $localizer
 	 * @return string
 	 */
-	private function getSpecialSiteLanguageName( Site $site, string $languageCode ): string {
+	private function getSpecialSiteLanguageName( Site $site, MessageLocalizer $localizer ): string {
 		$siteId = $site->getGlobalId();
 		$messageKey = 'wikibase-sitelinks-sitename-' . $siteId;
 
-		// @note: inLanguage needs to be called before exists and parse. See: T127872.
-		$languageNameMsg = wfMessage( $messageKey )->inLanguage( $languageCode );
+		$languageNameMsg = $localizer->msg( $messageKey );
 
-		return $languageNameMsg->exists() ? $languageNameMsg->parse() : $siteId;
+		return $languageNameMsg->exists() ? $languageNameMsg->parse() : htmlspecialchars( $siteId );
 	}
 
 	/**
