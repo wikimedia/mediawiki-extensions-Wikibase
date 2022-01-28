@@ -1,7 +1,7 @@
+<!--
+	If the popper is already open this is an un-clickable div.
+-->
 <template>
-	<!--
-		If the popper is already open this is an un-clickable div.
-	-->
 	<component
 		:is="popperIsOpened ? 'div' : 'a'"
 		class="wb-tr-tainted-icon"
@@ -12,10 +12,10 @@
 
 <script lang="ts">
 import { POPPER_SHOW } from '@/store/actionTypes';
-import Vue from 'vue';
 import { GET_POPPER_STATE } from '@/store/getterTypes';
+import { defineComponent } from 'vue';
 
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'TaintedIcon',
 	props: {
 		guid: {

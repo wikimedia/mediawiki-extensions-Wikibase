@@ -6,7 +6,7 @@ import { STORE_INIT, HELP_LINK_SET } from '@/store/actionTypes';
 import { HookHandler } from '@/HookHandler';
 import Message from '@/vue-plugins/Message';
 import Track from '@/vue-plugins/Track';
-import Vue, { CreateElement } from 'vue';
+import { createApp } from 'vue';
 
 export function launch(
 	hookHandler: HookHandler,
@@ -14,8 +14,6 @@ export function launch(
 	messageToTextFunction: MessageToTextFunction,
 	trackingFunction: TrackFunction,
 ): void {
-	Vue.use( Message, { messageToTextFunction } );
-	Vue.use( Track, { trackingFunction } );
 	const store = createStore( trackingFunction );
 	const guids: string[] = [];
 	document.querySelectorAll( '.wikibase-statementview' ).forEach( ( element ) => {
@@ -25,13 +23,10 @@ export function launch(
 			guids.push( id );
 			const appElement = headingElement.appendChild( document.createElement( 'div' ) );
 			appElement.setAttribute( 'class', 'wikibase-tainted-references-container' );
-			const compatApp = {
-				store,
-				render( h: CreateElement ) {
-					return h( App, { props: { id } } );
-				},
-			};
-			Vue.createMwApp( compatApp )
+			createApp( App, { id } )
+				.use( store )
+				.use( Message, { messageToTextFunction } )
+				.use( Track, { trackingFunction } )
 				.mount( appElement );
 		}
 	} );

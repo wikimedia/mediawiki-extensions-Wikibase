@@ -1,11 +1,11 @@
-import Vue, { VueConstructor } from 'vue';
 import TrackingOptions from '@/@types/TrackingOptions';
+import { App } from 'vue';
 
 export default function Track(
-	vueConstructor: VueConstructor<Vue>,
+	app: App,
 	options: TrackingOptions,
 ): void {
-	vueConstructor.prototype.$track = ( topic: string, data: string | number | object ) => {
+	app.config.globalProperties.$track = ( topic: string, data: string | number | object ) => {
 		options.trackingFunction( topic, data );
 	};
 }

@@ -6,14 +6,11 @@ import {
 } from '@/store/actionTypes';
 import MWHookHandler from '@/MWHookHandler';
 import Vuex, { Store } from 'vuex';
-import Vue from 'vue';
 import { Hook, HookRegistry } from '@/@types/mediawiki/MwWindow';
 import getMockStatement from './getMockStatement';
 import StatementTracker from '@/StatementTracker';
 import { Statement } from '@/definitions/wikibase-js-datamodel/Statement';
 import { HookHandler } from '@/HookHandler';
-
-Vue.use( Vuex );
 
 const fakeGuid = 'cat-Guid';
 

@@ -1,5 +1,6 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import Vuex, { Store } from 'vuex';
+import { Plugin } from '@vue/runtime-core';
+import { shallowMount } from '@vue/test-utils';
+import { Store } from 'vuex';
 import Application from '@/store/Application';
 import TaintedIcon from '@/presentation/components/TaintedIcon.vue';
 import { POPPER_SHOW } from '@/store/actionTypes';
@@ -7,14 +8,13 @@ import Track from '@/vue-plugins/Track';
 import Message from '@/vue-plugins/Message';
 import { GET_POPPER_STATE } from '@/store/getterTypes';
 
-const localVue = createLocalVue();
-localVue.use( Vuex );
-localVue.use( Track, { trackingFunction: () => {
+const trackPlugin: [ Plugin, ...unknown[] ] = [ Track, { trackingFunction: () => {
 	// do nothing on track
-} } );
-localVue.use( Message, { messageToTextFunction: () => {
+} } ];
+const messagePlugin: [ Plugin, ...unknown[] ] = [ Message, { messageToTextFunction: () => {
 	return 'dummy';
-} } );
+} } ];
+const plugins = [ trackPlugin, messagePlugin ];
 
 function createStore( popperOpenState = false ): Store<Partial<Application>> {
 	return new Store<Partial<Application>>( {
@@ -31,9 +31,8 @@ function createStore( popperOpenState = false ): Store<Partial<Application>> {
 describe( 'TaintedIcon.vue', () => {
 	it( 'should render the icon', () => {
 		const store = createStore();
-		const wrapper = shallowMount( TaintedIcon, {
-			store,
-			localVue,
+		const wrapper = shallowMount( TaintedIcon as any, {
+			global: { plugins: [ store, ...plugins ] },
 		} );
 		expect( wrapper.element.tagName ).toEqual( 'A' );
 		expect( wrapper.classes() ).toContain( 'wb-tr-tainted-icon' );
@@ -42,10 +41,9 @@ describe( 'TaintedIcon.vue', () => {
 		const store = createStore();
 		store.dispatch = jest.fn();
 
-		const wrapper = shallowMount( TaintedIcon, {
-			store,
-			localVue,
-			propsData: { guid: 'a-guid' },
+		const wrapper = shallowMount( TaintedIcon as any, {
+			global: { plugins: [ store, ...plugins ] },
+			props: { guid: 'a-guid' },
 		} );
 		wrapper.trigger( 'click' );
 		expect( store.dispatch ).toHaveBeenCalledWith( POPPER_SHOW, 'a-guid' );
@@ -54,10 +52,9 @@ describe( 'TaintedIcon.vue', () => {
 		const store = createStore( true );
 
 		store.dispatch = jest.fn();
-		const wrapper = shallowMount( TaintedIcon, {
-			store,
-			localVue,
-			propsData: { guid: 'a-guid' },
+		const wrapper = shallowMount( TaintedIcon as any, {
+			global: { plugins: [ store, ...plugins ] },
+			props: { guid: 'a-guid' },
 		} );
 
 		expect( wrapper.element.tagName ).toEqual( 'DIV' );
@@ -68,35 +65,21 @@ describe( 'TaintedIcon.vue', () => {
 	} );
 	it( 'clicking the tainted icon triggers a tracking event', () => {
 		const trackingFunction = jest.fn();
-		const localVue = createLocalVue();
-		localVue.use( Vuex );
-		localVue.use( Track, { trackingFunction } );
-		localVue.use( Message, { messageToTextFunction: () => {
-			return 'dummy';
-		} } );
-
 		const store = createStore();
-		const wrapper = shallowMount( TaintedIcon, {
-			store,
-			localVue,
+		const wrapper = shallowMount( TaintedIcon as any, {
+			global: { plugins: [ store, [ Track, { trackingFunction } ], messagePlugin ] },
 		} );
 		wrapper.trigger( 'click' );
 		expect( trackingFunction ).toHaveBeenCalledWith( 'counter.wikibase.view.tainted-ref.taintedIconClick', 1 );
 	} );
 	it( 'uses the title text from the message plugin', () => {
-		const localVue = createLocalVue();
 		const messageToTextFunction = jest.fn();
 		messageToTextFunction.mockReturnValue( 'DUMMY_TEXT' );
-
-		localVue.use( Vuex );
-		localVue.use( Message, { messageToTextFunction } );
-
 		const store = createStore();
-		const wrapper = shallowMount( TaintedIcon, {
-			store,
-			localVue,
+		const wrapper = shallowMount( TaintedIcon as any, {
+			global: { plugins: [ store, [ Message, { messageToTextFunction } ], trackPlugin ] },
 		} );
-		expect( wrapper.find( '.wb-tr-tainted-icon' ).element.title ).toMatch( 'DUMMY_TEXT' );
+		expect( ( wrapper.find( '.wb-tr-tainted-icon' ).element as HTMLElement ).title ).toMatch( 'DUMMY_TEXT' );
 		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-tainted-icon-title' );
 	} );
 } );

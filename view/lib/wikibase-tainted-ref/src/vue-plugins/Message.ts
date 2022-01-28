@@ -1,11 +1,11 @@
-import Vue, { VueConstructor } from 'vue';
 import MessageOptions from '@/@types/MessageOptions';
+import { App } from 'vue';
 
 export default function Message(
-	vueConstructor: VueConstructor<Vue>,
+	app: App,
 	options: MessageOptions,
 ): void {
-	vueConstructor.prototype.$message = ( key: string ): string => {
+	app.config.globalProperties.$message = ( key: string ): string => {
 		return options.messageToTextFunction( key );
 	};
 }

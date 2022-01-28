@@ -15,9 +15,9 @@
 import TaintedIcon from '@/presentation/components/TaintedIcon.vue';
 import TaintedPopper from '@/presentation/components/TaintedPopper.vue';
 import { GET_EDIT_STATE, GET_POPPER_STATE, GET_STATEMENT_TAINTED_STATE } from '@/store/getterTypes';
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
-export default Vue.extend( {
+export default defineComponent( {
 	name: 'App',
 	props: {
 		id: {
