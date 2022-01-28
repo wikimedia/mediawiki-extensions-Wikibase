@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests;
 
 use FauxRequest;
+use InvalidArgumentException;
 use MediaWikiIntegrationTestCase;
 use ObjectCache;
 use ReflectionMethod;
@@ -122,6 +123,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	 * @param bool $baseRevId
 	 * @param bool[]|null $permissions map of actions to bool, indicating which actions are allowed.
 	 * @param EditFilterHookRunner|null $editFilterHookRunner
+	 * @param string[]|null $localEntityTypes
 	 *
 	 * @return MediawikiEditEntity
 	 */
@@ -132,7 +134,8 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		User $user = null,
 		$baseRevId = 0,
 		array $permissions = null,
-		$editFilterHookRunner = null
+		$editFilterHookRunner = null,
+		$localEntityTypes = null
 	) {
 		if ( $user === null ) {
 			$user = User::newFromName( 'EditEntityTestUser' );
@@ -148,6 +151,8 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 
 		$permissionChecker = $this->getEntityPermissionChecker( $permissions );
 		$repoSettings = WikibaseRepo::getSettings();
+		$localEntityTypes = $localEntityTypes ?: WikibaseRepo::getLocalEntityTypes();
+
 		return new MediawikiEditEntity(
 			$titleLookup,
 			$mockRepository,
@@ -160,6 +165,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			$editFilterHookRunner,
 			$this->getServiceContainer()->getUserOptionsLookup(),
 			$repoSettings['maxSerializedEntitySize'],
+			$localEntityTypes,
 			$baseRevId
 		);
 	}
@@ -472,6 +478,26 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
 		$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::PERMISSION_ERROR ) );
+	}
+
+	public function testCheckLocalEntityTypes() {
+		$item = new Item();
+		$user = $this->getUser( 'EditEntityTestUser' );
+		$token = $user->getEditToken();
+
+		$edit = $this->makeEditEntity(
+			$this->getMockRepository(),
+			$item->getId(),
+			$this->getEntityTitleLookup(),
+			$user,
+			0,
+			null,
+			null,
+			[ 'property' ]
+		);
+
+		$this->expectException( InvalidArgumentException::class );
+		$edit->attemptSave( $item, 'testing', EDIT_NEW, $token );
 	}
 
 	/**

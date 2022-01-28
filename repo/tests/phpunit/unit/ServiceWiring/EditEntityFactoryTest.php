@@ -75,6 +75,9 @@ class EditEntityFactoryTest extends ServiceWiringTestCase {
 			->expects( $this->once() )
 			->method( 'getUserOptionsLookup' );
 
+		$this->mockService( 'WikibaseRepo.LocalEntityTypes',
+			[ 'item', 'property' ] );
+
 		$this->assertInstanceOf(
 			MediawikiEditEntityFactory::class,
 			$this->getService( 'WikibaseRepo.EditEntityFactory' )

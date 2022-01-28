@@ -154,7 +154,8 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 				$this->getMockEditFitlerHookRunner(),
 				new NullStatsdDataFactory(),
 				$this->getServiceContainer()->getUserOptionsLookup(),
-				PHP_INT_MAX
+				PHP_INT_MAX,
+				[ 'item', 'property' ]
 			),
 			new SettingsArray( [
 				'updateRepoTags' => $tags,
