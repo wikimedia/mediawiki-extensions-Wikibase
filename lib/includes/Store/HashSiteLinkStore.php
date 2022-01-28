@@ -143,15 +143,6 @@ class HashSiteLinkStore implements SiteLinkStore {
 		return true;
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function clear() {
-		$this->linksByItemId = [];
-		$this->itemIdsByLink = [];
-		return true;
-	}
-
 	private function indexByLink( ItemId $itemId, SiteLink $siteLink ): void {
 		$key = $this->makeSiteLinkKey( $siteLink );
 		$this->itemIdsByLink[$key] = $itemId;
