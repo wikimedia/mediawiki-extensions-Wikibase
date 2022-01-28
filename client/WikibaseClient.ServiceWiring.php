@@ -159,7 +159,7 @@ return [
 		$logger = WikibaseClient::getLogger( $services );
 
 		$pageUpdater = new WikiPageUpdater(
-			JobQueueGroup::singleton(),
+			$services->getJobQueueGroup(),
 			$logger,
 			$services->getStatsdDataFactory()
 		);

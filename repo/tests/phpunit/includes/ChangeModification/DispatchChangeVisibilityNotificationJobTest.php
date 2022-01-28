@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\ChangeModification;
 
 use IJobSpecification;
 use JobQueueGroup;
+use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
@@ -220,25 +221,29 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 		int &$jobQueueGroupFactoryCallCount,
 		array $wikiIds,
 		?array $expectedJobParams
-	): callable {
-		return function ( string $wikiId ) use ( &$jobQueueGroupFactoryCallCount, $wikiIds, $expectedJobParams ) {
-			$this->assertSame( $wikiIds[$jobQueueGroupFactoryCallCount++], $wikiId );
+	): JobQueueGroupFactory {
+		$jobQueueGroupFactory = $this->createMock( JobQueueGroupFactory::class );
+		$jobQueueGroupFactory->method( 'makeJobQueueGroup' )
+			->willReturnCallback( function ( string $wikiId ) use ( &$jobQueueGroupFactoryCallCount, $wikiIds, $expectedJobParams ) {
+				$this->assertSame( $wikiIds[$jobQueueGroupFactoryCallCount++], $wikiId );
 
-			$jobQueueGroup = $this->createMock( JobQueueGroup::class );
-			$jobQueueGroup->expects( $this->once() )
-				->method( 'push' )
-				->willReturnCallback( function ( array $jobs ) use ( $expectedJobParams ) {
-					$this->assertContainsOnlyInstancesOf( IJobSpecification::class, $jobs );
+				$jobQueueGroup = $this->createMock( JobQueueGroup::class );
+				$jobQueueGroup->expects( $this->once() )
+					->method( 'push' )
+					->willReturnCallback( function ( array $jobs ) use ( $expectedJobParams ) {
+						$this->assertContainsOnlyInstancesOf( IJobSpecification::class, $jobs );
 
-					$actualJobParams = array_map( function ( IJobSpecification $job ) {
-						return $job->getParams();
-					}, $jobs );
+						$actualJobParams = array_map( function ( IJobSpecification $job ) {
+							return $job->getParams();
+						}, $jobs );
 
-					$this->assertSame( $expectedJobParams, $actualJobParams );
-				} );
+						$this->assertSame( $expectedJobParams, $actualJobParams );
+					} );
 
-			return $jobQueueGroup;
-		};
+				return $jobQueueGroup;
+			} );
+
+		return $jobQueueGroupFactory;
 	}
 
 	private function newEntityIdLookup(): EntityIdLookup {

@@ -27,23 +27,24 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 	/** @var HtmlCacheUpdater */
 	private $htmlCacheUpdater;
 
-	/** @var callable */
-	private $jobQueueGroupFactory;
+	/** @var JobQueueGroup */
+	private $jobQueueGroup;
 
 	public function __construct(
 		EntityIdLookup $entityIdLookup,
 		EntityDataUriManager $entityDataUriManager,
 		HtmlCacheUpdater $htmlCacheUpdater,
-		callable $jobQueueGroupFactory
+		JobQueueGroup $jobQueueGroup
 	) {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityDataUriManager = $entityDataUriManager;
 		$this->htmlCacheUpdater = $htmlCacheUpdater;
-		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
+		$this->jobQueueGroup = $jobQueueGroup;
 	}
 
 	public static function factory(
 		HtmlCacheUpdater $htmlCacheUpdater,
+		JobQueueGroup $jobQueueGroup,
 		EntityDataUriManager $entityDataUriManager,
 		EntityIdLookup $entityIdLookup
 	): self {
@@ -51,7 +52,7 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 			$entityIdLookup,
 			$entityDataUriManager,
 			$htmlCacheUpdater,
-			'JobQueueGroup::singleton'
+			$jobQueueGroup
 		);
 	}
 
@@ -104,10 +105,7 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 			return;
 		}
 
-		/** @var JobQueueGroup $jobQueueGroup */
-		$jobQueueGroup = ( $this->jobQueueGroupFactory )();
-		'@phan-var JobQueueGroup $jobQueueGroup';
-		$jobQueueGroup->lazyPush( new JobSpecification( 'PurgeEntityData', [
+		$this->jobQueueGroup->lazyPush( new JobSpecification( 'PurgeEntityData', [
 			'namespace' => $title->getNamespace(),
 			'title' => $title->getDBkey(),
 			'pageId' => $id,

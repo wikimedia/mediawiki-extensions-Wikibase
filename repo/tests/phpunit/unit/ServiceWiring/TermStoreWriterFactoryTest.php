@@ -43,6 +43,8 @@ class TermStoreWriterFactoryTest extends ServiceWiringTestCase {
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getMainWANObjectCache' )
 			->willReturn( $this->createMock( WANObjectCache::class ) );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getJobQueueGroup' );
 		$this->mockService( 'WikibaseRepo.Logger',
 			new NullLogger() );
 

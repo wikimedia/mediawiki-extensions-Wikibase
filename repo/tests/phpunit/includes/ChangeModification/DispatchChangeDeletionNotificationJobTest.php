@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\ChangeModification;
 
 use IJobSpecification;
 use JobQueueGroup;
+use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWikiIntegrationTestCase;
 use MWTimestamp;
 use Psr\Log\LoggerInterface;
@@ -74,13 +75,9 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 			->method( 'info' )
 			->with( 'All archive records are too old. Aborting.' );
 
-		$factory = function( $wikiId ) {
-			$jobQueueGroup = $this->createMock( JobQueueGroup::class );
-			$jobQueueGroup->expects( $this->never() )
-				->method( 'push' );
-
-			return $jobQueueGroup;
-		};
+		$factory = $this->createMock( JobQueueGroupFactory::class );
+		$factory->expects( $this->never() )
+			->method( 'makeJobQueueGroup' );
 		$job = $this->getJobAndInitialize( $pageTitle, $params, $logger, $factory );
 		$this->assertTrue( $job->run() );
 	}
@@ -89,7 +86,7 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 	 * @param Title $title
 	 * @param array $params
 	 * @param LoggerInterface $logger
-	 * @param Callable $factory
+	 * @param JobQueueGroupFactory $factory
 	 * @return DispatchChangeDeletionNotificationJob
 	 */
 	private function getJobAndInitialize( Title $title, array $params, $logger, $factory ): DispatchChangeDeletionNotificationJob {
@@ -105,31 +102,34 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 
 	private function newJobQueueGroupFactory(
 		array $expectedIds
-	): callable {
-		return function ( string $wikiId ) use ( $expectedIds ) {
-			$this->assertSame( $wikiId, array_shift( $this->expectedLocalClientWikis ) );
-			$jobQueueGroup = $this->createMock( JobQueueGroup::class );
-			$jobQueueGroup->expects( $this->once() )
-				->method( 'push' )
-				->willReturnCallback( function ( array $jobs ) use ( $expectedIds ) {
-					$this->assertCount( 1, $jobs );
-					$job = $jobs[0];
-					$this->assertInstanceOf( IJobSpecification::class, $job );
-					$this->assertSame( 'ChangeDeletionNotification', $job->getType() );
+	): JobQueueGroupFactory {
+		$jobQueueGroupFactory = $this->createMock( JobQueueGroupFactory::class );
+		$jobQueueGroupFactory->method( 'makeJobQueueGroup' )
+			->willReturnCallback( function ( string $wikiId ) use ( $expectedIds ) {
+				$jobQueueGroup = $this->createMock( JobQueueGroup::class );
+				$jobQueueGroup->expects( $this->once() )
+					->method( 'push' )
+					->willReturnCallback( function ( array $jobs ) use ( $expectedIds ) {
+						$this->assertCount( 1, $jobs );
+						$job = $jobs[0];
+						$this->assertInstanceOf( IJobSpecification::class, $job );
+						$this->assertSame( 'ChangeDeletionNotification', $job->getType() );
 
-					$actualIds = $this->unpackRevisionIdentifiers( $job->getParams()['revisionIdentifiersJson'] );
+						$actualIds = $this->unpackRevisionIdentifiers( $job->getParams()['revisionIdentifiersJson'] );
 
-					$this->assertSameSize( $expectedIds, $actualIds );
+						$this->assertSameSize( $expectedIds, $actualIds );
 
-					for ( $i = 0; $i < count( $expectedIds ); $i++ ) {
-						$this->assertSame( $expectedIds[$i]->getEntityIdSerialization(), $actualIds[$i]->getEntityIdSerialization() );
-						$this->assertSame( $expectedIds[$i]->getRevisionId(), $actualIds[$i]->getRevisionId() );
-						$this->assertSame( $expectedIds[$i]->getRevisionTimestamp(), $actualIds[$i]->getRevisionTimestamp() );
-					}
-				} );
+						for ( $i = 0; $i < count( $expectedIds ); $i++ ) {
+							$this->assertSame( $expectedIds[$i]->getEntityIdSerialization(), $actualIds[$i]->getEntityIdSerialization() );
+							$this->assertSame( $expectedIds[$i]->getRevisionId(), $actualIds[$i]->getRevisionId() );
+							$this->assertSame( $expectedIds[$i]->getRevisionTimestamp(), $actualIds[$i]->getRevisionTimestamp() );
+						}
+					} );
 
-			return $jobQueueGroup;
-		};
+				return $jobQueueGroup;
+			} );
+
+		return $jobQueueGroupFactory;
 	}
 
 	/**

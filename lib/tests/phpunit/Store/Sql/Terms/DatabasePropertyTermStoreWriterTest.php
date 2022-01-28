@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
-use JobQueueGroup;
 use MediaWikiIntegrationTestCase;
 use WANObjectCache;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -80,7 +79,7 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 		if ( $jobQueueMockOverride === null ) {
 			$jobQueue = $this->jobQueueMock;
 		} else {
-			$jobQueue = JobQueueGroup::singleton();
+			$jobQueue = $this->getServiceContainer()->getJobQueueGroup();
 		}
 
 		$repoDb = $this->getRepoDomainDb();
@@ -292,19 +291,20 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testCleanupJobWorks() {
-		$store = $this->getPropertyTermStoreWriter( JobQueueGroup::singleton() );
+		$jobQueue = $this->getServiceContainer()->getJobQueueGroup();
+		$store = $this->getPropertyTermStoreWriter( $jobQueue );
 		$fingerprint1 = new Fingerprint( new Termlist( [ new Term( 'en', 'p--aaaaaaaaaaaaaa1' ) ] ) );
 		$fingerprint2 = new Fingerprint( new Termlist( [ new Term( 'en', 'p--aaaaaaaaaaaaaa2' ) ] ) );
 
 		// Make sure there are not already any cleanup jobs
-		JobQueueGroup::singleton()->get( CleanTermsIfUnusedJob::JOB_NAME )->delete();
+		$jobQueue->get( CleanTermsIfUnusedJob::JOB_NAME )->delete();
 
 		// Schedule a job by causing a term text to be removed and need cleaning up
 		$store->storeTerms( $this->p1, $fingerprint1 );
 		$store->storeTerms( $this->p1, $fingerprint2 );
 
 		// A job should now be scheduled cleaning up "p--aaaaaaaaaaaaaa1", which we can run
-		JobQueueGroup::singleton()->get( CleanTermsIfUnusedJob::JOB_NAME )->pop()->run();
+		$jobQueue->get( CleanTermsIfUnusedJob::JOB_NAME )->pop()->run();
 
 		// Make sure the cleanup happened
 		$this->assertSame( 0, $this->db->selectRowCount( 'wbt_text', '*', [ 'wbx_text' => 'a--aaaaaaaaaaaaaa1' ] ) );

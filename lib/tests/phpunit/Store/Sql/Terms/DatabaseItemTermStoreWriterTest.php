@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
-use JobQueueGroup;
 use MediaWikiIntegrationTestCase;
 use WANObjectCache;
 use Wikibase\DataModel\Entity\ItemId;
@@ -86,7 +85,7 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 		if ( $jobQueueMockOverride === null ) {
 			$jobQueue = $this->jobQueueMock;
 		} else {
-			$jobQueue = JobQueueGroup::singleton();
+			$jobQueue = $this->getServiceContainer()->getJobQueueGroup();
 		}
 
 		$repoDb = $this->getRepoDomainDb();
@@ -280,19 +279,20 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testCleanupJobWorks() {
-		$store = $this->getItemTermStoreWriter( JobQueueGroup::singleton() );
+		$jobQueue = $this->getServiceContainer()->getJobQueueGroup();
+		$store = $this->getItemTermStoreWriter( $jobQueue );
 		$fingerprint1 = new Fingerprint( new Termlist( [ new Term( 'en', 'a--aaaaaaaaaaaaaa1' ) ] ) );
 		$fingerprint2 = new Fingerprint( new Termlist( [ new Term( 'en', 'a--aaaaaaaaaaaaaa2' ) ] ) );
 
 		// Make sure there are not already any cleanup jobs
-		JobQueueGroup::singleton()->get( CleanTermsIfUnusedJob::JOB_NAME )->delete();
+		$jobQueue->get( CleanTermsIfUnusedJob::JOB_NAME )->delete();
 
 		// Schedule a job by causing a term text to be removed and need cleaning up
 		$store->storeTerms( $this->i1, $fingerprint1 );
 		$store->storeTerms( $this->i1, $fingerprint2 );
 
 		// A job should now be scheduled cleaning up "a--aaaaaaaaaaaaaa1", which we can run
-		JobQueueGroup::singleton()->get( CleanTermsIfUnusedJob::JOB_NAME )->pop()->run();
+		$jobQueue->get( CleanTermsIfUnusedJob::JOB_NAME )->pop()->run();
 
 		// Make sure the cleanup happened
 		$this->assertSame( 0, $this->db->selectRowCount( 'wbt_text', '*', [ 'wbx_text' => 'a--aaaaaaaaaaaaaa1' ] ) );
@@ -306,7 +306,8 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 			$repoDb,
 			WANObjectCache::newEmpty()
 		);
-		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter( $repoDb, JobQueueGroup::singleton(),
+		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter( $repoDb,
+			$this->getServiceContainer()->getJobQueueGroup(),
 			new DatabaseTermInLangIdsAcquirer( $repoDb, $typeIdsStore ),
 			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $repoDb ), new StringNormalizer()
 		);

@@ -63,6 +63,10 @@ class ChangeHandlerTest extends ServiceWiringTestCase {
 
 		$this->serviceContainer
 			->expects( $this->once() )
+			->method( 'getJobQueueGroup' );
+
+		$this->serviceContainer
+			->expects( $this->once() )
 			->method( 'getStatsdDataFactory' );
 
 		$this->serviceContainer

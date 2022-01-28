@@ -60,7 +60,7 @@ class DeleteDispatcherTest extends TestCase {
 		EntityIdLookup $entityIdLookup
 	) {
 		$deleteDispatcher = new DeleteDispatcher(
-			$this->newJobQueueGroupFactoryNeverCalled(),
+			$this->newJobQueueGroupNeverCalled(),
 			$entityIdLookup,
 			$clients
 		);
@@ -84,7 +84,7 @@ class DeleteDispatcherTest extends TestCase {
 		$title = Title::newFromTextThrow( $entityId->getSerialization() );
 		$expectedJobParams = [ "pageId" => $id, "archivedRevisionCount" => $archivedRevisionCount ];
 
-		$factory = $this->newJobQueueGroupFactory( $expectedJobParams );
+		$jobQueueGroup = $this->newJobQueueGroup( $expectedJobParams );
 
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 		$entityIdLookup->expects( $this->once() )
@@ -92,7 +92,7 @@ class DeleteDispatcherTest extends TestCase {
 			->with( $title )
 			->willReturn( $entityId );
 
-		$deleteDispatcher = new DeleteDispatcher( $factory, $entityIdLookup, $this->localClientDatabases );
+		$deleteDispatcher = new DeleteDispatcher( $jobQueueGroup, $entityIdLookup, $this->localClientDatabases );
 
 		$wikiPage = $this->createMock( WikiPage::class );
 
@@ -120,29 +120,25 @@ class DeleteDispatcherTest extends TestCase {
 		return $entityIdLookup;
 	}
 
-	private function newJobQueueGroupFactoryNeverCalled() {
-		return function() {
-			$jobQueueGroup = $this->createMock( JobQueueGroup::class );
-			$jobQueueGroup->expects( $this->never() )
-				->method( 'push' );
-			return $jobQueueGroup;
-		};
+	private function newJobQueueGroupNeverCalled() {
+		$jobQueueGroup = $this->createMock( JobQueueGroup::class );
+		$jobQueueGroup->expects( $this->never() )
+			->method( 'push' );
+		return $jobQueueGroup;
 	}
 
-	private function newJobQueueGroupFactory(
+	private function newJobQueueGroup(
 		array $expectedJobParams
-	): callable {
-		return function ( string $wikiId ) use ( $expectedJobParams ) {
-			$jobQueueGroup = $this->createMock( JobQueueGroup::class );
-			$jobQueueGroup->expects( $this->once() )
-				->method( 'push' )
-				->willReturnCallback( function ( IJobSpecification $job ) use ( $expectedJobParams ) {
-					$this->assertSame( 'DispatchChangeDeletionNotification', $job->getType() );
-					$this->assertSame( $expectedJobParams['pageId'], $job->getParams()['pageId'] );
-					$this->assertSame( $expectedJobParams['archivedRevisionCount'], $job->getParams()['archivedRevisionCount'] );
-				} );
+		): JobQueueGroup {
+		$jobQueueGroup = $this->createMock( JobQueueGroup::class );
+		$jobQueueGroup->expects( $this->once() )
+			->method( 'push' )
+			->willReturnCallback( function ( IJobSpecification $job ) use ( $expectedJobParams ) {
+				$this->assertSame( 'DispatchChangeDeletionNotification', $job->getType() );
+				$this->assertSame( $expectedJobParams['pageId'], $job->getParams()['pageId'] );
+				$this->assertSame( $expectedJobParams['archivedRevisionCount'], $job->getParams()['archivedRevisionCount'] );
+			} );
 
-			return $jobQueueGroup;
-		};
+		return $jobQueueGroup;
 	}
 }
