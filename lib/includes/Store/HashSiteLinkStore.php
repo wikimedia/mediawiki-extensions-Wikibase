@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Store;
 
 use InvalidArgumentException;
@@ -37,7 +39,7 @@ class HashSiteLinkStore implements SiteLinkStore {
 	 * @throws InvalidArgumentException if a parameter does not have the expected type
 	 * @return ItemId|null
 	 */
-	public function getItemIdForLink( $globalSiteId, $pageTitle ) {
+	public function getItemIdForLink( string $globalSiteId, string $pageTitle ): ?ItemId {
 		Assert::parameterType( 'string', $globalSiteId, '$globalSiteId' );
 		Assert::parameterType( 'string', $pageTitle, '$pageTitle' );
 
@@ -88,20 +90,13 @@ class HashSiteLinkStore implements SiteLinkStore {
 		?array $numericIds,
 		?array $siteIds,
 		?array $pageNames
-	) {
+	): bool {
 		return ( $numericIds === null || in_array( $itemId->getNumericId(), $numericIds ) )
 			&& ( $siteIds === null || in_array( $siteLink->getSiteId(), $siteIds ) )
 			&& ( $pageNames === null || in_array( $siteLink->getPageName(), $pageNames ) );
 	}
 
-	/**
-	 * @see SiteLinkStore::getSiteLinksForItem
-	 *
-	 * @param ItemId $itemId
-	 *
-	 * @return SiteLink[]
-	 */
-	public function getSiteLinksForItem( ItemId $itemId ) {
+	public function getSiteLinksForItem( ItemId $itemId ): array {
 		$prefixedId = $itemId->getSerialization();
 
 		if ( array_key_exists( $prefixedId, $this->linksByItemId ) ) {
@@ -111,14 +106,7 @@ class HashSiteLinkStore implements SiteLinkStore {
 		return [];
 	}
 
-	/**
-	 * @see SiteLinkStore::getItemIdForSiteLink
-	 *
-	 * @param SiteLink $siteLink
-	 *
-	 * @return ItemId|null
-	 */
-	public function getItemIdForSiteLink( SiteLink $siteLink ) {
+	public function getItemIdForSiteLink( SiteLink $siteLink ): ?ItemId {
 		$siteLinkKey = $this->makeSiteLinkKey( $siteLink );
 
 		if ( array_key_exists( $siteLinkKey, $this->itemIdsByLink ) ) {
@@ -128,14 +116,7 @@ class HashSiteLinkStore implements SiteLinkStore {
 		return null;
 	}
 
-	/**
-	 * @see SiteLinkStore::saveLinksOfItem
-	 *
-	 * @param Item $item
-	 *
-	 * @return bool
-	 */
-	public function saveLinksOfItem( Item $item ) {
+	public function saveLinksOfItem( Item $item ): bool {
 		$itemId = $item->getId();
 
 		$this->deleteLinksOfItem( $itemId );
@@ -148,14 +129,7 @@ class HashSiteLinkStore implements SiteLinkStore {
 		return true;
 	}
 
-	/**
-	 * See SiteLinkStore::deleteLinksOfItem
-	 *
-	 * @param ItemId $itemId
-	 *
-	 * @return bool
-	 */
-	public function deleteLinksOfItem( ItemId $itemId ) {
+	public function deleteLinksOfItem( ItemId $itemId ): bool {
 		$prefixedId = $itemId->getSerialization();
 		$siteLinks = $this->getSiteLinksForItem( $itemId );
 
@@ -178,22 +152,17 @@ class HashSiteLinkStore implements SiteLinkStore {
 		return true;
 	}
 
-	private function indexByLink( ItemId $itemId, SiteLink $siteLink ) {
+	private function indexByLink( ItemId $itemId, SiteLink $siteLink ): void {
 		$key = $this->makeSiteLinkKey( $siteLink );
 		$this->itemIdsByLink[$key] = $itemId;
 	}
 
-	private function indexByItemId( ItemId $itemId, SiteLink $siteLink ) {
+	private function indexByItemId( ItemId $itemId, SiteLink $siteLink ): void {
 		$prefixedId = $itemId->getSerialization();
 		$this->linksByItemId[$prefixedId][] = $siteLink;
 	}
 
-	/**
-	 * @param SiteLink $siteLink
-	 *
-	 * @return string
-	 */
-	private function makeSiteLinkKey( SiteLink $siteLink ) {
+	private function makeSiteLinkKey( SiteLink $siteLink ): string {
 		return $siteLink->getSiteId() . ':' . $siteLink->getPageName();
 	}
 
@@ -204,7 +173,7 @@ class HashSiteLinkStore implements SiteLinkStore {
 	 * @throws InvalidArgumentException if a parameter does not have the expected type
 	 * @return EntityId|null
 	 */
-	public function getEntityIdForLinkedTitle( $globalSiteId, $pageTitle ) {
+	public function getEntityIdForLinkedTitle( $globalSiteId, $pageTitle ): ?EntityId {
 		return $this->getItemIdForLink( $globalSiteId, $pageTitle );
 	}
 

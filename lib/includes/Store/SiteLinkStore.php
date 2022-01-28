@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\Item;
@@ -20,7 +22,7 @@ interface SiteLinkStore extends SiteLinkLookup, EntityByLinkedTitleLookup {
 	 *
 	 * @return bool Success indicator
 	 */
-	public function saveLinksOfItem( Item $item );
+	public function saveLinksOfItem( Item $item ): bool;
 
 	/**
 	 * Removes the links for the provided item.
@@ -29,6 +31,6 @@ interface SiteLinkStore extends SiteLinkLookup, EntityByLinkedTitleLookup {
 	 *
 	 * @return bool Success indicator
 	 */
-	public function deleteLinksOfItem( ItemId $itemId );
+	public function deleteLinksOfItem( ItemId $itemId ): bool;
 
 }

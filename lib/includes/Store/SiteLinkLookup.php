@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\ItemId;
@@ -16,13 +18,8 @@ interface SiteLinkLookup {
 	/**
 	 * Returns the id of the item that is equivalent to the
 	 * provided page, or null if there is none.
-	 *
-	 * @param string $globalSiteId
-	 * @param string $pageTitle
-	 *
-	 * @return ItemId|null
 	 */
-	public function getItemIdForLink( $globalSiteId, $pageTitle );
+	public function getItemIdForLink( string $globalSiteId, string $pageTitle ): ?ItemId;
 
 	/**
 	 * Returns the links that match the provided conditions.
@@ -54,13 +51,8 @@ interface SiteLinkLookup {
 	 *
 	 * @return SiteLink[]
 	 */
-	public function getSiteLinksForItem( ItemId $itemId );
+	public function getSiteLinksForItem( ItemId $itemId ): array;
 
-	/**
-	 * @param SiteLink $siteLink
-	 *
-	 * @return ItemId|null
-	 */
-	public function getItemIdForSiteLink( SiteLink $siteLink );
+	public function getItemIdForSiteLink( SiteLink $siteLink ): ?ItemId;
 
 }

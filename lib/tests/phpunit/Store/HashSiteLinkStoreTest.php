@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -31,12 +30,6 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals( $itemId, $siteLinkStore->getItemIdForLink( 'enwiki', 'Foo' ) );
 		$this->assertNull( $siteLinkStore->getItemIdForLink( 'xywiki', 'Foo' ) );
-	}
-
-	public function testGetEntityIdForLinkedTitle_doesNotAcceptObjects() {
-		$this->expectException( InvalidArgumentException::class );
-		$lookup = new HashSiteLinkStore();
-		$lookup->getEntityIdForLinkedTitle( 'enwiki', (object)[] );
 	}
 
 	public function testGetEntityIdForLinkedTitle() {
