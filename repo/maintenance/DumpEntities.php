@@ -247,7 +247,6 @@ abstract class DumpEntities extends Maintenance {
 	public function finalSetup( SettingsBuilder $settingsBuilder = null ) {
 		global $wgHooks;
 
-		// @phan-suppress-next-line PhanParamTooMany temporary, see gerrit 757469
 		parent::finalSetup( $settingsBuilder );
 
 		if ( $this->hasOption( 'dbgroupdefault' ) ) {
