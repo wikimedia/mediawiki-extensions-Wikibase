@@ -429,19 +429,17 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		return [
 			'Guangzhou Fallback' => [
 				'Guangzhou',
-				[ 'de-formal', 'en', 'fr', /* 'yue', */'zh-cn', 'zh-hk' ],
+				[ 'de-formal', 'en', 'fr', 'yue', 'zh-cn', 'zh-hk' ],
 				[
 					'de-formal' => [
 						'language' => 'de',
 						'value' => 'Guangzhou',
 						'for-language' => 'de-formal',
 					],
-					/*
 					'yue' => [
 						'language' => 'yue',
 						'value' => '廣州',
 					],
-					*/
 					'zh-cn' => [
 						'language' => 'zh-cn',
 						'value' => '广州市',
@@ -467,13 +465,11 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 						'value' => 'Capital of Guangdong.',
 						'for-language' => 'fr',
 					],
-					/*
 					'yue' => [
-						'language' => 'en',
-						'value' => 'Capital of Guangdong.',
+						'language' => 'zh-hk',
+						'value' => '廣東的省會。',
 						'for-language' => 'yue',
 					],
-					*/
 					'zh-cn' => [
 						'language' => 'zh-cn',
 						'source-language' => 'zh-hk',
