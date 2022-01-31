@@ -3,7 +3,6 @@
 namespace Wikibase\View\Termbox\Renderer;
 
 use Exception;
-use InvalidArgumentException;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Http\HttpRequestFactory;
 use Psr\Log\LoggerInterface;
@@ -55,6 +54,9 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 				__METHOD__
 			);
 			$request->execute();
+		} catch ( TermboxRenderingException $e ) {
+			// rethrow without repeated reporting
+			throw $e;
 		} catch ( Exception $e ) {
 			$this->reportFailureOfRequest( $e->getMessage(), $e );
 			throw new TermboxRenderingException( 'Encountered request problem', null, $e );
@@ -99,7 +101,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 
 	private function formatUrl( EntityId $entityId, $revision, $language, $editLink, TermLanguageFallbackChain $preferredLanguages ) {
 		if ( !$this->ssrServerUrl ) {
-			throw new InvalidArgumentException( 'Termbox SSR server URL not configured' );
+			throw new TermboxNoRemoteRendererException( 'Termbox SSR server URL not configured' );
 		}
 		return $this->ssrServerUrl . '?' .
 			http_build_query( $this->getRequestParams( $entityId, $revision, $language, $editLink, $preferredLanguages ) );
