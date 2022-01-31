@@ -51,7 +51,7 @@
 		"npm-run-all": "^4.1.5",
 		"stylelint-config-wikimedia": "0.11.1",
 		"vue": "^2.6.11",
-		"wdio-mediawiki": "^1.1.1",
+		"wdio-mediawiki": "^1.2.0",
 		"wdio-wikibase": "^5.2.0",
 		"webdriverio": "^7.16.13"
 	},
