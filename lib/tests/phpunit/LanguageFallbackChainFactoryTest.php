@@ -52,14 +52,24 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	private function getLanguageFallbackChainFactory() {
 		$languageFallback = $this->createMock( LanguageFallback::class );
 		$languageFallback->method( 'getAll' )
-			->willReturnCallback( function( $code ) {
-				return $this->getLanguageFallbacksForCallback( $code );
+			->willReturnCallback( function( $code, $mode = LanguageFallback::MESSAGES ) {
+				return $this->getLanguageFallbacksForCallback( $code, $mode );
 			} );
 		return new LanguageFallbackChainFactory( null, null, null, $languageFallback );
 	}
 
+	private function getLanguageFallbacksForCallback( string $code, int $mode ): array {
+		$fallbacks = $this->getStrictLanguageFallbacksForCallback( $code );
+
+		if ( $mode === LanguageFallback::MESSAGES && !in_array( 'en', $fallbacks ) ) {
+			$fallbacks[] = 'en';
+		}
+
+		return $fallbacks;
+	}
+
 	/**
-	 * This captures the state of language fallbacks from 2016-08-17.
+	 * A snapshot of language fallbacks, mostly as of 2016-08-17.
 	 * There's no need for this to be exactly up to date with MediaWiki,
 	 * we just need a data base to test with.
 	 *
@@ -67,31 +77,32 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return string[]
 	 */
-	private function getLanguageFallbacksForCallback( $code ) {
+	private function getStrictLanguageFallbacksForCallback( string $code ): array {
 		switch ( $code ) {
 			case 'en':
 				return [];
 			case 'de':
-				return [ 'en' ];
+				return [];
 			case 'de-formal':
-				return [ 'de', 'en' ];
+				return [ 'de' ];
 			case 'ii':
-				return [ 'zh-cn', 'zh-hans', 'en' ];
+				return [ 'zh-cn', 'zh-hans' ];
 			case 'kk':
-				return [ 'kk-cyrl', 'en' ];
+				return [ 'kk-cyrl' ];
 			case 'kk-cn':
-				return [ 'kk-arab', 'kk-cyrl', 'en' ];
+				return [ 'kk-arab', 'kk-cyrl' ];
 			case 'lzh':
-				return [ 'en' ];
+				return []; // actually [ 'zh-hant' ] as of 2022-01-24
+			case 'nl-informal': // added 2022-01-24
+				return [ 'nl' ];
 			case 'zh':
-				return [ 'zh-hans', 'en' ];
+				return [ 'zh-hans' ];
 			case 'zh-cn':
-				return [ 'zh-hans', 'en' ];
+				return [ 'zh-hans' ];
 			case 'zh-hk':
-				return [ 'zh-hant', 'zh-hans', 'en' ];
+				return [ 'zh-hant', 'zh-hans' ];
 			default:
-				// Language::getFallbacksFor returns [ 'en' ] if $code is unknown and conforms to /^[a-z0-9-]{2,}$/
-				return preg_match( '/^[a-z0-9-]{2,}$/', $code ) ? [ 'en' ] : [];
+				return [];
 		}
 	}
 
@@ -301,10 +312,6 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 				'expected' => [ 'de-formal', 'de', 'en' ]
 			],
 			[
-				'babel' => [ 'N' => [ '/' ] ],
-				'expected' => []
-			],
-			[
 				'babel' => [ 'N' => [ ':', 'en' ] ],
 				'expected' => [ 'en' ]
 			],
@@ -414,6 +421,16 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					[ 'kk-cn', 'kk-tr' ],
 					'de',
 				]
+			],
+			'T299904' => [
+				'babel' => [ 'N' => [ 'de-formal' ], '4' => [ 'nl-informal' ] ],
+				'expected' => [
+					'de-formal',
+					'nl-informal',
+					'de',
+					'nl',
+					'en',
+				],
 			],
 		];
 	}
