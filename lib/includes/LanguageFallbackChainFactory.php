@@ -195,6 +195,7 @@ class LanguageFallbackChainFactory {
 	 * @param bool[] &$fetched language codes (as keys) that are already in the chain
 	 */
 	private function addImplicitFallbacksToChain( array &$chain, array &$fetched ): void {
+		$this->addLanguageToChain( 'mul', $chain, $fetched );
 		$this->addLanguageToChain( 'en', $chain, $fetched );
 	}
 

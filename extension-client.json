@@ -288,7 +288,8 @@
 			"Trivial",
 			"LibHooks"
 		],
-		"wgQueryPages": "Trivial"
+		"wgQueryPages": "Trivial",
+		"WikibaseContentLanguages": "\\Wikibase\\Client\\ClientHooks::onWikibaseContentLanguages"
 	},
 	"TrackingCategories": [
 		"unresolved-property-category",

@@ -10,7 +10,10 @@ use RequestContext;
 use User;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageWithConversion;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Lib\UnionContentLanguages;
+use Wikibase\Lib\WikibaseContentLanguages;
 
 /**
  * @covers \Wikibase\Lib\LanguageFallbackChainFactory
@@ -49,13 +52,19 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 		] );
 	}
 
-	private function getLanguageFallbackChainFactory() {
+	private function getLanguageFallbackChainFactory( bool $includeMul = false ) {
+		$termsLanguages = WikibaseContentLanguages::getDefaultTermsLanguages();
+		if ( $includeMul ) {
+			$termsLanguages = new UnionContentLanguages( $termsLanguages, new StaticContentLanguages( [ 'mul' ] ) );
+		}
+
 		$languageFallback = $this->createMock( LanguageFallback::class );
 		$languageFallback->method( 'getAll' )
 			->willReturnCallback( function( $code, $mode = LanguageFallback::MESSAGES ) {
 				return $this->getLanguageFallbacksForCallback( $code, $mode );
 			} );
-		return new LanguageFallbackChainFactory( null, null, null, $languageFallback );
+
+		return new LanguageFallbackChainFactory( $termsLanguages, null, null, $languageFallback );
 	}
 
 	private function getLanguageFallbacksForCallback( string $code, int $mode ): array {
@@ -95,6 +104,8 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 				return []; // actually [ 'zh-hant' ] as of 2022-01-24
 			case 'nl-informal': // added 2022-01-24
 				return [ 'nl' ];
+			case 'sco': // added 2022-01-24
+				return [ 'en' ];
 			case 'zh':
 				return [ 'zh-hans' ];
 			case 'zh-cn':
@@ -112,10 +123,11 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	public function testNewFromLanguage(
 		$languageCode,
 		array $expected,
-		array $disabledVariants = []
+		array $disabledVariants = [],
+		bool $includeMul = false
 	) {
 		$this->setupDisabledVariants( $disabledVariants );
-		$factory = $this->getLanguageFallbackChainFactory();
+		$factory = $this->getLanguageFallbackChainFactory( $includeMul );
 		$chain = $factory->newFromLanguage( Language::factory( $languageCode ) )->getFallbackChain();
 		$this->assertChainEquals( $expected, $chain );
 	}
@@ -126,10 +138,11 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	public function testNewFromLanguageCode(
 		$languageCode,
 		array $expected,
-		array $disabledVariants = []
+		array $disabledVariants = [],
+		bool $includeMul = false
 	) {
 		$this->setupDisabledVariants( $disabledVariants );
-		$factory = $this->getLanguageFallbackChainFactory();
+		$factory = $this->getLanguageFallbackChainFactory( $includeMul );
 		$chain = $factory->newFromLanguageCode( $languageCode )->getFallbackChain();
 		$this->assertChainEquals( $expected, $chain );
 	}
@@ -249,6 +262,20 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 				'languageCode' => '⧼Lang⧽',
 				'expected' => [ 'en' ]
 			],
+
+			'implicit fallback to mul, en' => [
+				'languageCode' => 'de',
+				'expected' => [ 'de', 'mul', 'en' ],
+				'disabledVariants' => [],
+				'includeMul' => true,
+			],
+
+			'explicit fallback to en before implicit fallback to mul' => [
+				'languageCode' => 'sco',
+				'expected' => [ 'sco', 'en', 'mul' ],
+				'disabledVariants' => [],
+				'includeMul' => true,
+			],
 		];
 	}
 
@@ -286,10 +313,11 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	public function testNewFromUserAndLanguageCode(
 		$languageCode,
 		array $expected,
-		array $disabledVariants = []
+		array $disabledVariants = [],
+		bool $includeMul = false
 	) {
 		$this->setupDisabledVariants( $disabledVariants );
-		$factory = $this->getLanguageFallbackChainFactory();
+		$factory = $this->getLanguageFallbackChainFactory( $includeMul );
 		$anon = new User();
 		$chain = $factory->newFromUserAndLanguageCode( $anon, $languageCode )->getFallbackChain();
 		$this->assertChainEquals( $expected, $chain );
@@ -298,10 +326,21 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideTestFromBabel
 	 */
-	public function testBuildFromBabel( array $babel, array $expected, array $disabledVariants = [] ) {
+	public function testBuildFromBabel(
+		array $babel,
+		array $expected,
+		array $disabledVariants = [],
+		bool $includeMul = false
+	) {
 		$this->setupDisabledVariants( $disabledVariants );
-		$factory = $this->getLanguageFallbackChainFactory();
+		$factory = $this->getLanguageFallbackChainFactory( $includeMul );
 		$chain = $factory->buildFromBabel( $babel );
+		if ( !$includeMul ) {
+			// buildFromBabel always returns mul (it’s usually filtered out by the TermLanguageFallbackChain constructor)
+			$chain = array_values( array_filter( $chain, static function ( LanguageWithConversion $language ) {
+				return $language->getLanguageCode() !== 'mul';
+			} ) );
+		}
 		$this->assertChainEquals( $expected, $chain );
 	}
 
@@ -310,6 +349,12 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 			[
 				'babel' => [ 'N' => [ 'de-formal' ] ],
 				'expected' => [ 'de-formal', 'de', 'en' ]
+			],
+			[
+				'babel' => [ 'N' => [ 'de-formal' ] ],
+				'expected' => [ 'de-formal', 'de', 'mul', 'en' ],
+				'disabledVariants' => [],
+				'includeMul' => true,
 			],
 			[
 				'babel' => [ 'N' => [ ':', 'en' ] ],
@@ -431,6 +476,17 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					'nl',
 					'en',
 				],
+			],
+			'explicit sco-4/en fallback > implicit de-N/mul fallback' => [
+				'babel' => [ 'N' => [ 'de' ], '4' => [ 'sco' ] ],
+				'expected' => [
+					'de',
+					'sco',
+					'en',
+					'mul',
+				],
+				'disabledVariants' => [],
+				'includeMul' => true,
 			],
 		];
 	}
