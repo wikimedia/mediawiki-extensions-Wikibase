@@ -27,7 +27,8 @@ class LanguageFallbackIndicatorTest extends \PHPUnit\Framework\TestCase {
 						'de-at' => 'Österreichisches Deutsch',
 						'de-ch' => 'Schweizer Hochdeutsch',
 						'en' => 'english in german',
-						'en-ca' => 'Canadian English'
+						'en-ca' => 'Canadian English',
+						'mul' => 'multilingual',
 				];
 				return $names[ $languageCode ];
 			} );
@@ -46,6 +47,7 @@ class LanguageFallbackIndicatorTest extends \PHPUnit\Framework\TestCase {
 		$deChTerm = new TermFallback( 'de-ch', 'Frass', 'de-ch', 'de' );
 		$enGbEnCaTerm = new TermFallback( 'en-gb', 'Kitten', 'en', 'en-ca' );
 		$deEnTerm = new TermFallback( 'de', 'Kitten', 'en', 'en' );
+		$deMulTerm = new TermFallback( 'de', 'Felis catus', 'mul', 'mul' );
 
 		$translitDeCh = wfMessage( 'wikibase-language-fallback-transliteration-hint', 'Deutsch', 'Schweizer Hochdeutsch' )->text();
 		$translitEnCa = wfMessage( 'wikibase-language-fallback-transliteration-hint', 'Canadian English', 'English' )->text();
@@ -84,6 +86,11 @@ class LanguageFallbackIndicatorTest extends \PHPUnit\Framework\TestCase {
 				'expected' => '&nbsp;<sup class="wb-language-fallback-'
 					. 'indicator">english in german</sup>',
 				'term' => $deEnTerm,
+			],
+			'fallback to multilingual' => [
+				'expected' => '&nbsp;<sup class="wb-language-fallback-'
+					. 'indicator wb-language-fallback-mul">multilingual</sup>',
+				'term' => $deMulTerm,
 			],
 		];
 	}

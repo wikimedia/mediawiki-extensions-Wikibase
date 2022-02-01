@@ -56,6 +56,9 @@ class LanguageFallbackIndicator {
 		) {
 			$classes .= ' wb-language-fallback-variant';
 		}
+		if ( $isFallback && $actualLanguage === 'mul' ) {
+			$classes .= ' wb-language-fallback-mul';
+		}
 
 		$attributes = [ 'class' => $classes ];
 
