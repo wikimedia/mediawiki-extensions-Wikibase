@@ -133,8 +133,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$this->getPageStore(),
 			$this->getLinkBatchFactory(),
 			'enwiki',
-			null,
-			false
+			null
 		);
 
 		return $affectedPagesFinder;
@@ -573,8 +572,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$this->getPageStore(),
 			$this->getLinkBatchFactory(),
 			'enwiki',
-			null,
-			false
+			null
 		);
 
 		$itemId = new ItemId( 'Q1' );

@@ -52,8 +52,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			$pageStore,
 			MediaWikiServices::getInstance()->getLinkBatchFactory(),
 			'enwiki',
-			null,
-			false
+			null
 		);
 	}
 
