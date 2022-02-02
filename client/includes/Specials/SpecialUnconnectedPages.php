@@ -74,18 +74,16 @@ class SpecialUnconnectedPages extends QueryPage {
 
 	/**
 	 * Build conditionals for namespace
-	 *
-	 * @return string[]
 	 */
-	public function buildConditionals() {
+	public function buildConditionals(): array {
 		$conds = [];
 
 		$wbNamespaces = $this->namespaceChecker->getWikibaseNamespaces();
 		$ns = $this->getRequest()->getIntOrNull( 'namespace' );
 		if ( $ns !== null && in_array( $ns, $wbNamespaces ) ) {
-			$conds[] = 'page_namespace = ' . $ns;
+			$conds['page_namespace'] = $ns;
 		} else {
-			$conds[] = 'page_namespace IN (' . implode( ',', $wbNamespaces ) . ')';
+			$conds['page_namespace'] = $wbNamespaces;
 		}
 
 		return $conds;
@@ -99,7 +97,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	public function getQueryInfo() {
 		$conds = $this->buildConditionals();
 		$conds['page_is_redirect'] = 0;
-		$conds[] = 'pp_propname IS NULL';
+		$conds['pp_propname'] = null;
 
 		return [
 			'tables' => [
