@@ -40,6 +40,19 @@ class RebuildItemsPerSite extends Maintenance {
 		);
 
 		$this->addOption( 'batch-size', "Number of rows to update per batch (100 by default)", false, true );
+		$this->addOption(
+			'first-page-id',
+			'First page id to process, use 1 to start with the first page. ' .
+			'Use --last-page-id + 1 to continue a previous run. Not compatible with --file.',
+			false,
+			true
+		);
+		$this->addOption(
+			'last-page-id',
+			'Page id of the last page to process. Not compatible with --file.',
+			false,
+			true
+		);
 
 		$this->addOption(
 			'file',
@@ -106,6 +119,15 @@ class RebuildItemsPerSite extends Maintenance {
 				$domainDB,
 				[ 'item' ]
 			);
+
+			$firstPageId = $this->getOption( 'first-page-id' );
+			if ( $firstPageId ) {
+				$stream->setPosition( intval( $firstPageId ) - 1 );
+			}
+			$lastPageId = $this->getOption( 'last-page-id' );
+			if ( $lastPageId ) {
+				$stream->setCutoffPosition( intval( $lastPageId ) );
+			}
 		}
 
 		// Now <s>kill</s> fix the table
