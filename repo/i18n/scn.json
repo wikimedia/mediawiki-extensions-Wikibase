@@ -315,6 +315,7 @@
 	"wikibase-listdatatypes-url-head": "URL",
 	"wikibase-listdatatypes-url-body": "Valuri custanti di n'URL. L'URL sunnu limitati ê prutucolli suppurtati pî culligamenti esterni ntô wikitestu.",
 	"wikibase-listdatavaluetypes-name-string": "stringa",
+	"wikibase-listdatavaluetypes-name-time": "tempu",
 	"wikibase-concept-uri": "URI dû cuncettu",
 	"wikibase-concept-uri-tooltip": "URI ch'idintìfica lu cuncettu discrivutu di stu suggettu",
 	"datatypes-type-url": "URL",

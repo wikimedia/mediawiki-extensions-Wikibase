@@ -173,7 +173,7 @@
 	"apihelp-query+entityterms-example-item": "Hent etiketter og alias fra elementet Q84.",
 	"apihelp-query+wbcontentlanguages-summary": "Returnerer informasjon om innholdsspråkene Wikibase godtar i forskjellige kontekster.",
 	"apihelp-query+wbcontentlanguages-param-context": "Konteksten der språkkodene bør være gyldige.",
-	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Begrepene (etikett, beskrivelse og alias) tel en entitet.",
+	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Begrepene (etikett, beskrivelse og alias) til en entitet.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "En énspråklig tekstverdi i en påstand.",
 	"apihelp-query+wbcontentlanguages-param-prop": "Egenskapene som skal returneres om hvert språk.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Språkkoden.",
