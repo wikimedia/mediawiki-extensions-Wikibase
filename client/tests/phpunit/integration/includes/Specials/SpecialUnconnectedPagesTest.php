@@ -44,13 +44,13 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		$checker = new NamespaceChecker( [ 2 ], [ 0, 4 ] );
 		$page = $this->newSpecialPage( $checker );
 		$page->getRequest()->setVal( 'namespace', $ns );
-		$this->assertEquals( $expected, $page->buildConditionals() );
+		$this->assertSame( $expected, $page->buildConditionals() );
 	}
 
 	public function provideBuildConditionals() {
-		yield 'no namespace' => [ null, [ 'page_namespace IN (0,4)' ] ];
-		yield 'included namespace' => [ 0, [ 'page_namespace = 0' ] ];
-		yield 'excluded namespace' => [ 2, [ 'page_namespace IN (0,4)' ] ];
+		yield 'no namespace' => [ null, [ 'page_namespace' => [ 0, 4 ] ] ];
+		yield 'included namespace' => [ 0, [ 'page_namespace' => 0 ] ];
+		yield 'excluded namespace' => [ 2, [ 'page_namespace' => [ 0, 4 ] ] ];
 	}
 
 	public function testGetQueryInfo() {
