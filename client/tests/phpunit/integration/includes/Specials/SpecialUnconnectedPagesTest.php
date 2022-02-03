@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Integration\Specials;
 
 use SpecialPageTestBase;
-use Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\Client\WikibaseClient;
@@ -41,20 +40,17 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	/**
 	 * @dataProvider provideBuildConditionals
 	 */
-	public function testBuildConditionals( $text, $expected ) {
-		$checker = new NamespaceChecker( [ 2, 4 ], [ 0 ] );
+	public function testBuildConditionals( ?int $ns, array $expected ) {
+		$checker = new NamespaceChecker( [ 2 ], [ 0, 4 ] );
 		$page = $this->newSpecialPage( $checker );
-		$title = Title::newFromTextThrow( $text );
-		$this->assertEquals( $expected, $page->buildConditionals( $this->db, $title ) );
+		$page->getRequest()->setVal( 'namespace', $ns );
+		$this->assertEquals( $expected, $page->buildConditionals() );
 	}
 
 	public function provideBuildConditionals() {
-		return [
-			[ 'foo', [ "page_title >= 'Foo'", "page_namespace = 0", 'page_namespace IN (0)' ] ],
-			[ ':foo', [ "page_title >= 'Foo'", "page_namespace = 0", 'page_namespace IN (0)' ] ],
-			[ 'user:foo', [ "page_title >= 'Foo'", "page_namespace = 2", 'page_namespace IN (0)' ] ],
-			[ 'user talk:foo', [ "page_title >= 'Foo'", "page_namespace = 3", 'page_namespace IN (0)' ] ],
-		];
+		yield 'no namespace' => [ null, [ 'page_namespace IN (0,4)' ] ];
+		yield 'included namespace' => [ 0, [ 'page_namespace = 0' ] ];
+		yield 'excluded namespace' => [ 2, [ 'page_namespace IN (0,4)' ] ];
 	}
 
 	public function testGetQueryInfo() {

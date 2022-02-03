@@ -6,13 +6,11 @@ use Html;
 use NamespaceInfo;
 use QueryPage;
 use Skin;
-use Title;
 use TitleFactory;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikimedia\Rdbms\FakeResultWrapper;
-use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -77,18 +75,11 @@ class SpecialUnconnectedPages extends QueryPage {
 	/**
 	 * Build conditionals for namespace
 	 *
-	 * @param IDatabase $dbr
-	 * @param Title|null $title
-	 *
 	 * @return string[]
 	 */
-	public function buildConditionals( IDatabase $dbr, Title $title = null ) {
+	public function buildConditionals() {
 		$conds = [];
 
-		if ( $title !== null ) {
-			$conds[] = 'page_title >= ' . $dbr->addQuotes( $title->getDBkey() );
-			$conds[] = 'page_namespace = ' . $title->getNamespace();
-		}
 		$wbNamespaces = $this->namespaceChecker->getWikibaseNamespaces();
 		$ns = $this->getRequest()->getIntOrNull( 'namespace' );
 		if ( $ns !== null && in_array( $ns, $wbNamespaces ) ) {
@@ -106,9 +97,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @return array[]
 	 */
 	public function getQueryInfo() {
-		$dbr = $this->db->connections()->getReadConnectionRef();
-
-		$conds = $this->buildConditionals( $dbr );
+		$conds = $this->buildConditionals();
 		$conds['page_is_redirect'] = 0;
 		$conds[] = 'pp_propname IS NULL';
 
