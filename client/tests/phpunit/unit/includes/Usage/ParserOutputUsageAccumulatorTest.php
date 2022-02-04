@@ -39,7 +39,7 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 
 		$tester->testAddGetUsage();
 
-		$this->assertNotNull( $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
+		$this->assertNotNull( $parserOutput->getExtensionData( ParserOutputUsageAccumulator::EXTENSION_DATA_KEY ) );
 	}
 
 	public function testDeduplicatorIsCalledOnce() {

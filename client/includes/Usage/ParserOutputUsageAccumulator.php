@@ -14,7 +14,11 @@ use ParserOutput;
  */
 class ParserOutputUsageAccumulator extends UsageAccumulator {
 
-	private const EXTENSION_DATA_KEY = 'wikibase-entity-usage';
+	/**
+	 * Key used to store data in ParserOutput.  Exported for use by unit tests.
+	 * @var string
+	 */
+	public const EXTENSION_DATA_KEY = 'wikibase-entity-usage';
 
 	/**
 	 * @var ParserOutput
@@ -47,10 +51,9 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	 * @param EntityUsage $usage
 	 */
 	public function addUsage( EntityUsage $usage ) {
-		$usages = $this->parserOutput->getExtensionData( self::EXTENSION_DATA_KEY ) ?: [];
-		$key = $usage->getIdentityString();
-		$usages[$key] = null;
-		$this->parserOutput->setExtensionData( self::EXTENSION_DATA_KEY, $usages );
+		$this->parserOutput->appendExtensionData(
+			self::EXTENSION_DATA_KEY, $usage->getIdentityString()
+		);
 	}
 
 	/**

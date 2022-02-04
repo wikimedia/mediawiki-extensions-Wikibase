@@ -23,6 +23,7 @@ use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\EntityUsageFactory;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulatorFactory;
 use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -330,7 +331,9 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertLanguageLinks( $expectedLanguageLinks, $parserOutput );
 		$this->assertSisterLinks( $expectedSisterLinks, $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
 
-		$actualUsage = $parserOutput->getExtensionData( 'wikibase-entity-usage' );
+		$actualUsage = $parserOutput->getExtensionData(
+			ParserOutputUsageAccumulator::EXTENSION_DATA_KEY
+		);
 
 		$this->assertEquals( [ $expectedUsage->getIdentityString() ], array_keys( $actualUsage ) );
 
@@ -353,7 +356,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( [], $parserOutput->getLanguageLinks() );
 		$this->assertSame( [], $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
 
-		$this->assertNull( $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
+		$this->assertNull( $parserOutput->getExtensionData( ParserOutputUsageAccumulator::EXTENSION_DATA_KEY ) );
 		$this->assertSame( [], $parserOutput->getExtensionData( 'wikibase_badges' ) );
 	}
 
@@ -370,7 +373,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( [], $parserOutput->getLanguageLinks() );
 		$this->assertNull( $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
 
-		$this->assertNull( $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
+		$this->assertNull( $parserOutput->getExtensionData( ParserOutputUsageAccumulator::EXTENSION_DATA_KEY ) );
 		$this->assertNull( $parserOutput->getExtensionData( 'wikibase_badges' ) );
 	}
 
