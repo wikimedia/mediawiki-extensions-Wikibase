@@ -16,6 +16,7 @@ use SiteLookup;
 use Title;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserOutputUpdateHookHandler;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
@@ -241,14 +242,16 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function newParserOutput( array $pageProps, array $extensionData ) {
+	private function newParserOutput( array $extensionDataAppend, array $extensionDataSet ) {
 		$parserOutput = new ParserOutput();
 
-		foreach ( $pageProps as $name => $value ) {
-			$parserOutput->setPageProperty( $name, $value );
+		foreach ( $extensionDataAppend as $name => $value ) {
+			foreach ( $value as $item ) {
+				$parserOutput->appendExtensionData( $name, $item );
+			}
 		}
 
-		foreach ( $extensionData as $key => $value ) {
+		foreach ( $extensionDataSet as $key => $value ) {
 			$parserOutput->setExtensionData( $key, $value );
 		}
 
@@ -281,7 +284,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'noexternallanglinks=*' => [
 				Title::makeTitle( NS_MAIN, 'Oxygen' ),
 				'Q1',
-				[ 'noexternallanglinks' => serialize( [ '*' ] ) ],
+				[ NoLangLinkHandler::EXTENSION_DATA_KEY => [ '*' ] ],
 				[],
 				[ $commonsOxygen ],
 				null,
@@ -290,7 +293,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'noexternallanglinks=de' => [
 				Title::makeTitle( NS_MAIN, 'Oxygen' ),
 				'Q1',
-				[ 'noexternallanglinks' => serialize( [ 'de' ] ) ],
+				[ NoLangLinkHandler::EXTENSION_DATA_KEY => [ 'de' ] ],
 				[],
 				[ $commonsOxygen ],
 				[],
@@ -299,7 +302,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'noexternallanglinks=ja' => [
 				Title::makeTitle( NS_MAIN, 'Oxygen' ),
 				'Q1',
-				[ 'noexternallanglinks' => serialize( [ 'ja' ] ) ],
+				[ NoLangLinkHandler::EXTENSION_DATA_KEY => [ 'ja' ] ],
 				[ 'de:Sauerstoff' ],
 				[ $commonsOxygen ],
 				[ 'de' => $badgesQ1 ],
@@ -313,12 +316,12 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testDoContentAlterParserOutput(
 		Title $title,
 		$expectedItem,
-		array $pagePropsBefore,
+		array $extensionDataAppend,
 		array $expectedLanguageLinks,
 		array $expectedSisterLinks,
 		array $expectedBadges = null
 	) {
-		$parserOutput = $this->newParserOutput( $pagePropsBefore, [] );
+		$parserOutput = $this->newParserOutput( $extensionDataAppend, [] );
 		$handler = $this->newParserOutputUpdateHookHandler( $this->getTestSiteLinkData() );
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
