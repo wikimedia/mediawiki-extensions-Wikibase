@@ -46,7 +46,7 @@ abstract class ServiceWiringTestCase extends TestCase {
 		$this->serviceContainer->method( 'get' )
 			->willReturnCallback( function ( string $name ) {
 				$this->assertArrayNotHasKey( $name, $this->accessedServices,
-					"Service $name must not be used yet" );
+					"Service $name must not be accessed more than once" );
 				$this->accessedServices[$name] = null;
 				$this->assertArrayHasKey( $name, $this->mockedServices,
 					"Service $name must be mocked" );
