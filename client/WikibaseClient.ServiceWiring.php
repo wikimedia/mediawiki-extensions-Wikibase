@@ -637,12 +637,15 @@ return [
 	},
 
 	'WikibaseClient.ParserOutputDataUpdater' => function ( MediaWikiServices $services ): ClientParserOutputDataUpdater {
+		$settings = WikibaseClient::getSettings( $services );
+
 		return new ClientParserOutputDataUpdater(
 			WikibaseClient::getOtherProjectsSidebarGeneratorFactory( $services ),
 			WikibaseClient::getStore( $services )->getSiteLinkLookup(),
 			WikibaseClient::getEntityLookup( $services ),
 			WikibaseClient::getUsageAccumulatorFactory( $services ),
-			WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' ),
+			$settings->getSetting( 'siteGlobalID' ),
+			$settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' ),
 			WikibaseClient::getLogger( $services )
 		);
 	},

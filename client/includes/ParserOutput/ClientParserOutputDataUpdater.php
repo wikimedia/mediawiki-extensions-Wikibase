@@ -52,6 +52,11 @@ class ClientParserOutputDataUpdater {
 	private $siteId;
 
 	/**
+	 * @var int
+	 */
+	private $unconnectedPagePagePropMigrationStage;
+
+	/**
 	 * @var LoggerInterface
 	 */
 	private $logger;
@@ -63,6 +68,8 @@ class ClientParserOutputDataUpdater {
 	 * @param EntityLookup $entityLookup
 	 * @param UsageAccumulatorFactory $usageAccumulatorFactory
 	 * @param string $siteId The global site ID for the local wiki
+	 * @param int $unconnectedPagePagePropMigrationStage One of the MIGRATION_* constants,
+	 *            indicating which page prop(s) to write for unconnected pages.
 	 * @param LoggerInterface|null $logger
 	 *
 	 * @throws InvalidArgumentException
@@ -73,6 +80,7 @@ class ClientParserOutputDataUpdater {
 		EntityLookup $entityLookup,
 		UsageAccumulatorFactory $usageAccumulatorFactory,
 		string $siteId,
+		int $unconnectedPagePagePropMigrationStage,
 		LoggerInterface $logger = null
 	) {
 		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
@@ -80,6 +88,7 @@ class ClientParserOutputDataUpdater {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->usageAccumulatorFactory = $usageAccumulatorFactory;
 		$this->siteId = $siteId;
+		$this->unconnectedPagePagePropMigrationStage = $unconnectedPagePagePropMigrationStage;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -124,6 +133,37 @@ class ClientParserOutputDataUpdater {
 			$parserOutput->setExtensionData( 'wikibase-otherprojects-sidebar', $otherProjects );
 		} else {
 			$parserOutput->setExtensionData( 'wikibase-otherprojects-sidebar', [] );
+		}
+	}
+
+	/**
+	 * Writes the "unexpectedUnconnectedPage" page property if this page is not linked to an item and
+	 * doesn't have the "__EXPECTED_UNCONNECTED_PAGE__" magic word on it.
+	 *
+	 * @note Depending on the "tmpUnconnectedPagePagePropMigrationStage" setting, this may not
+	 * set the "unexpectedUnconnectedPage" page prop.
+	 */
+	public function updateUnconnectedPageProperty( Title $title, ParserOutput $parserOutput ): void {
+		if ( $this->unconnectedPagePagePropMigrationStage >= MIGRATION_WRITE_BOTH ) {
+			$this->setUnexpectedUnconnectedPage( $title, $parserOutput );
+		}
+	}
+
+	/**
+	 * If applicable, set the "unexpectedUnconnectedPage" page property.
+	 */
+	private function setUnexpectedUnconnectedPage( Title $title, ParserOutput $parserOutput ): void {
+		$itemId = $this->getItemIdForTitle( $title );
+
+		if ( $itemId || $title->isRedirect() ) {
+			// Page is either connected or a redirect (thus expected to be unconnected).
+			return;
+		}
+
+		$pageProperties = $parserOutput->getPageProperties();
+
+		if ( !isset( $pageProperties['expectedUnconnectedPage'] ) ) {
+			$parserOutput->setPageProperty( 'unexpectedUnconnectedPage', $title->getNamespace() );
 		}
 	}
 

@@ -88,6 +88,7 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 		$this->parserOutputDataUpdater->updateItemIdProperty( $title, $parserOutput );
 		$this->parserOutputDataUpdater->updateTrackingCategories( $title, $parserOutput );
 		$this->parserOutputDataUpdater->updateOtherProjectsLinksData( $title, $parserOutput );
+		$this->parserOutputDataUpdater->updateUnconnectedPageProperty( $title, $parserOutput );
 		$this->parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
 	}
 

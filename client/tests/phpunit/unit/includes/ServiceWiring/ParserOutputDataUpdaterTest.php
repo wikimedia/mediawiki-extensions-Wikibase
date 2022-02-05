@@ -37,6 +37,7 @@ class ParserOutputDataUpdaterTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseClient.Settings',
 			new SettingsArray( [
 				'siteGlobalID' => 'testwiki',
+				'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH,
 			] ) );
 		$this->mockService( 'WikibaseClient.Logger',
 			new NullLogger() );
