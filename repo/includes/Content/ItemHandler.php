@@ -73,6 +73,9 @@ class ItemHandler extends EntityHandler {
 	/** @var RepoDomainDb */
 	private $db;
 
+	/** @var bool[] */
+	private $isExternalIdByPropertyId;
+
 	public function __construct(
 		EntityTermStoreWriter $entityTermStoreWriter,
 		EntityContentDataCodec $contentCodec,
@@ -267,17 +270,23 @@ class ItemHandler extends EntityHandler {
 	 * @param StatementList $statementList
 	 * @return int
 	 */
-	public function getIdentifiersCount( StatementList $statementList ) {
+	public function getIdentifiersCount( StatementList $statementList ): int {
 		$identifiers = 0;
-		foreach ( $statementList->getPropertyIds() as $propertyIdSerialization => $propertyId ) {
-			try {
-				$dataType = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
-			} catch ( PropertyDataTypeLookupException $e ) {
-				continue;
+		foreach ( $statementList as $statement ) {
+			$propertyId = $statement->getPropertyId();
+			$propertyIdSerialization = $propertyId->getSerialization();
+			if ( !isset( $this->isExternalIdByPropertyId[$propertyIdSerialization] ) ) {
+				try {
+					$this->isExternalIdByPropertyId[$propertyIdSerialization] =
+						$this->dataTypeLookup->getDataTypeIdForProperty( $propertyId ) === 'external-id';
+				} catch ( PropertyDataTypeLookupException $e ) {
+					$this->isExternalIdByPropertyId[$propertyIdSerialization] = false;
+					continue;
+				}
 			}
 
-			if ( $dataType === 'external-id' ) {
-				$identifiers += $statementList->getByPropertyId( $propertyId )->count();
+			if ( $this->isExternalIdByPropertyId[$propertyIdSerialization] ) {
+				$identifiers++;
 			}
 		}
 
