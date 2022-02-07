@@ -179,12 +179,20 @@ class SpecialUnconnectedPages extends QueryPage {
 		$limit = $this->getRequest()->getIntOrNull( 'limit' );
 		$ns = $this->getRequest()->getIntOrNull( 'namespace' );
 
+		$titleInputHtml = '';
+		$articlePath = $this->getConfig()->get( 'ArticlePath' );
+		if ( strpos( $articlePath, '?' ) !== false ) {
+			// Adopted from HTMLForm::getHiddenFields
+			$titleInputHtml = Html::hidden( 'title', $this->getFullTitle()->getPrefixedText() ) . "\n";
+		}
+
 		return Html::openElement(
 			'form',
 			[
 				'action' => $this->getPageTitle()->getLocalURL()
 			]
 		) .
+		$titleInputHtml .
 		( $limit === null ? '' : Html::hidden( 'limit', $limit ) ) .
 		Html::namespaceSelector( [
 			'selected' => $ns === null ? '' : $ns,
