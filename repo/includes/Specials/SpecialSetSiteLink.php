@@ -6,7 +6,7 @@ use Html;
 use HTMLForm;
 use InvalidArgumentException;
 use OutOfBoundsException;
-use SiteLookup;
+use Site;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -30,11 +30,6 @@ use Wikibase\Repo\SummaryFormatter;
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
 class SpecialSetSiteLink extends SpecialModifyEntity {
-
-	/**
-	 * @var SiteLookup
-	 */
-	private $siteLookup;
 
 	/**
 	 * @var SiteLinkTargetProvider
@@ -88,7 +83,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param MediawikiEditEntityFactory $editEntityFactory
-	 * @param SiteLookup $siteLookup
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 * @param string[] $siteLinkGroups
 	 * @param string[] $badgeItems
@@ -101,7 +95,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediawikiEditEntityFactory $editEntityFactory,
-		SiteLookup $siteLookup,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		array $siteLinkGroups,
 		array $badgeItems,
@@ -117,7 +110,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$editEntityFactory
 		);
 
-		$this->siteLookup = $siteLookup;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->badgeItems = $badgeItems;
@@ -126,19 +118,15 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	}
 
 	public static function factory(
-		SiteLookup $siteLookup,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		MediawikiEditEntityFactory $editEntityFactory,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		SettingsArray $repoSettings,
+		SiteLinkTargetProvider $siteLinkTargetProvider,
 		SummaryFormatter $summaryFormatter
 	): self {
 		$siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
-		$siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$siteLookup,
-			$repoSettings->getSetting( 'specialSiteLinkGroups' )
-		);
 
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
@@ -152,7 +140,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory,
-			$siteLookup,
 			$siteLinkTargetProvider,
 			$repoSettings->getSetting( 'siteLinkGroups' ),
 			$repoSettings->getSetting( 'badgeItems' ),
@@ -301,9 +288,12 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$pageinput['badges'] = $this->getMultiSelectForBadges();
 		}
 
-		$site = $this->siteLookup->getSite( $this->site );
+		$site = null;
+		if ( $this->site !== null ) {
+			$site = $this->getSiteLinkTargetSite( $this->site );
+		}
 
-		if ( $entity !== null && $this->site !== null && $site !== null ) {
+		if ( $entity !== null && $site !== null ) {
 			// show the detailed form which also allows users to remove site links
 			$intro = $this->msg(
 				'wikibase-setsitelink-introfull',
@@ -492,7 +482,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		}
 
 		$status = Status::newGood();
-		$site = $this->siteLookup->getSite( $siteId );
+		$site = $this->getSiteLinkTargetSite( $siteId );
 
 		if ( $site === null ) {
 			$status->fatal( 'wikibase-setsitelink-invalid-site', $siteId );
@@ -526,6 +516,14 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$this->applyChangeOp( $changeOp, $item, $summary );
 
 		return $status;
+	}
+
+	private function getSiteLinkTargetSite( string $siteId ): ?Site {
+		$targetSites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+		if ( !$targetSites->hasSite( $siteId ) ) {
+			return null;
+		}
+		return $targetSites->getSite( $siteId );
 	}
 
 }

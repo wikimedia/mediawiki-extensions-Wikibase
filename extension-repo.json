@@ -440,12 +440,12 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink::factory",
 			"services": [
-				"SiteLookup",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory",
 				"WikibaseRepo.Settings",
+				"WikibaseRepo.SiteLinkTargetProvider",
 				"WikibaseRepo.SummaryFormatter"
 			]
 		},

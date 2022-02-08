@@ -86,7 +86,6 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
 			WikibaseRepo::getEditEntityFactory(),
-			$siteLookup,
 			$siteLinkTargetProvider,
 			[ 'wikipedia' ],
 			$settings->getSetting( 'badgeItems' ),
