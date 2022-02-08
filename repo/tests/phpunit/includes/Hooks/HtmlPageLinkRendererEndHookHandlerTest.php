@@ -251,7 +251,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
 
 		$this->assertTrue( $ret );
-		$this->assertSame( $customAttribs['href'], $expectedHref );
+		$this->assertSame( $expectedHref, $customAttribs['href'] );
 	}
 
 	public function testGivenIdFromOtherSourcesWithLabelAndDesc_labelAndIdAreUsedAsLinkTextAndLabelAndDescAreUsedInLinkTitle() {

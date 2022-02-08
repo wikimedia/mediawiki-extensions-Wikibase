@@ -340,8 +340,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 
 		$properties = $collisionDetector->detectLabelsCollision( $termsList );
 
-		$this->assertCount( count( $expectedResults ), $properties );
-		$this->assertEquals( $properties, $expectedResults );
+		$this->assertEquals( $expectedResults, $properties );
 	}
 
 	public function termListProvider() {

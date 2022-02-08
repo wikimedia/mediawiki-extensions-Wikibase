@@ -255,7 +255,7 @@ class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider rfdFormatProvider
 	 */
 	public function testIsRdfFormat( $format, $expected ) {
-		$this->assertEquals( $this->getProvider()->isRdfFormat( $format ), $expected );
+		$this->assertEquals( $expected, $this->getProvider()->isRdfFormat( $format ) );
 	}
 
 }

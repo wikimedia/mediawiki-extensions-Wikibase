@@ -74,7 +74,7 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 			return $propId->getSerialization();
 		}, $actualOutput );
 
-		$this->assertSame( sort( $stringOutput ), sort( $expectedProperties ) );
+		$this->assertSame( sort( $expectedProperties ), sort( $stringOutput ) );
 	}
 
 	public function rowDataProvider() {

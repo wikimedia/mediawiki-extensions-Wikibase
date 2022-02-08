@@ -53,6 +53,6 @@ class ImportFederatedPropertiesSampleDataTest extends MaintenanceBaseTestCase {
 		$maintenance = new ImportFederatedPropertiesSampleData();
 		$actualDataLines = $maintenance->getDataToImport( $dataFile );
 
-		$this->assertEquals( $actualDataLines, $expectedDataLines );
+		$this->assertEquals( $expectedDataLines, $actualDataLines );
 	}
 }

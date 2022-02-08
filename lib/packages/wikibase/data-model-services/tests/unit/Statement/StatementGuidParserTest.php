@@ -23,7 +23,7 @@ class StatementGuidParserTest extends TestCase {
 	public function testCanParseStatementGuid( StatementGuid $expected ) {
 		$actual = $this->newParser()->parse( $expected->getSerialization() );
 
-		$this->assertEquals( $actual, $expected );
+		$this->assertEquals( $expected, $actual );
 	}
 
 	private function newParser() {
