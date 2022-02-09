@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Specials\SpecialNewItem;
 use Wikibase\Repo\Tests\WikibaseTablesUsed;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -62,9 +63,10 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
 			WikibaseRepo::getEditEntityFactory(),
-			$this->siteStore,
 			$this->getTermValidatorFactorMock(),
-			WikibaseRepo::getItemTermsCollisionDetector()
+			WikibaseRepo::getItemTermsCollisionDetector(),
+			new SiteLinkTargetProvider( $this->siteStore ),
+			[ 'wikiblah' ]
 		);
 	}
 
@@ -264,6 +266,23 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-newitem-no-external-page: existing-site, nonexistent-page)' );
 	}
 
+	public function testErrorAboutNonExistentSiteIsDisplayed_WhenSiteExistsButHasWrongSiteGroup() {
+		$existingSiteId = 'existing-site';
+		$formData = [
+			SpecialNewItem::FIELD_LANG => 'en',
+			SpecialNewItem::FIELD_LABEL => 'some label',
+			SpecialNewItem::FIELD_DESCRIPTION => 'some description',
+			SpecialNewItem::FIELD_ALIASES => '',
+			SpecialNewItem::FIELD_SITE => $existingSiteId,
+			SpecialNewItem::FIELD_PAGE => 'nonexistent-page'
+		];
+		$this->givenSiteWithWrongGroup( $existingSiteId );
+
+		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+
+		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-newitem-not-recognized-siteid)' );
+	}
+
 	public function testWhenLabelIsInvalid_ThenHtmlContainsErrorMessage() {
 		$formData = [
 				SpecialNewItem::FIELD_LABEL => 'TOO_LONG_ERROR'
@@ -384,7 +403,24 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			->onlyMethods( [ 'normalizePageName' ] )
 			->getMock();
 		$siteMock->setGlobalId( $existingSiteId );
+		$siteMock->setGroup( 'wikiblah' );
 		$siteMock->method( 'normalizePageName' )->willReturn( false );
+
+		$this->siteStore->saveSite( $siteMock );
+	}
+
+	/**
+	 * @param string $existingSiteId
+	 */
+	private function givenSiteWithWrongGroup( $existingSiteId ) {
+		/** @var MockObject|Site $siteMock */
+		$siteMock = $this->getMockBuilder( Site::class )
+			->onlyMethods( [ 'normalizePageName' ] )
+			->getMock();
+		$siteMock->setGlobalId( $existingSiteId );
+		$siteMock->setGroup( 'different-site-group' );
+		$siteMock->expects( $this->never() )->
+			method( 'normalizePageName' );
 
 		$this->siteStore->saveSite( $siteMock );
 	}
