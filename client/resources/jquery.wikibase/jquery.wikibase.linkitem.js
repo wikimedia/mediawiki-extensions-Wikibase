@@ -493,7 +493,8 @@
 					self._pageConnector.linkPages()
 					.done( self._onSuccess.bind( self ) )
 					.fail( self._onError.bind( self ) );
-				} );
+				} )
+				.focus();
 		},
 
 		/**
@@ -588,7 +589,7 @@
 					this._showSpinner();
 					window.location.reload( true );
 				} )
-				.button( 'option', 'label', mw.msg( 'wikibase-linkitem-close' ) );
+				.button( 'option', 'label', mw.msg( 'wikibase-linkitem-close' ) ).focus();
 
 			// Purge this page in the background... we shouldn't confuse the user with the newly added
 			// link(s) not being there:
