@@ -53,6 +53,9 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 		$title->method( 'getArticleID' )
 			->willReturn( $id );
 
+		$title->method( 'canExist' )
+			->willReturn( true );
+
 		$title->method( 'exists' )
 			->willReturn( true );
 
