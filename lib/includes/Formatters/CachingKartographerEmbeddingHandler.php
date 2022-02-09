@@ -58,7 +58,12 @@ class CachingKartographerEmbeddingHandler {
 
 		$cacheKey = $this->getCacheKey( $value, $language );
 		if ( !$this->cache->has( $cacheKey ) ) {
-			$this->getParserOutput( [ $value ], $language );
+			$parserOutput = $this->parser->parse(
+				$this->getWikiText( $value ),
+				Title::newFromText( 'Special:BlankPage' ),
+				$this->getParserOptions( $language )
+			);
+			$this->cache->set( $this->getCacheKey( $value, $language ), $parserOutput->getText() );
 		}
 		return $this->cache->get( $cacheKey );
 	}
@@ -95,45 +100,38 @@ class CachingKartographerEmbeddingHandler {
 	/**
 	 * Get a ParserOutput with metadata for all the given GlobeCoordinateValues.
 	 *
-	 * ATTENTION: This ParserOutput will generally only contain metadata, for getting
-	 * the html for a certain GlobeCoordinateValue, please use self::getHtml()
+	 * ATTENTION: This ParserOutput will generally only contain useable metadata, for
+	 * getting the html for a certain GlobeCoordinateValue, please use self::getHtml().
 	 *
 	 * @param GlobeCoordinateValue[] $values
 	 * @param Language $language
 	 * @return ParserOutput
 	 */
 	public function getParserOutput( array $values, Language $language ) {
-		$parserOutput = new ParserOutput();
-		// Clear the state initially (but only once)
-		$clearState = true;
-
-		$title = Title::newFromText( 'Special:BlankPage' );
-
-		// Cannot use $this->parser->getUser(), because that relies on the parser
-		// having either a User or ParserOptions set, causing failures:
-		// Error: Call to a member function getUser() on null
-		$parserOptions = new ParserOptions(
-			RequestContext::getMain()->getUser(),
-			$language
-		);
+		// Parse all mapframes at once, to get metadata for all of them
+		$wikiText = '';
 		foreach ( $values as $value ) {
 			if ( $value->getGlobe() !== GlobeCoordinateValue::GLOBE_EARTH ) {
 				continue;
 			}
-
-			$parserOutput = $this->parser->parse(
-				$this->getWikiText( $value ),
-				$title,
-				$parserOptions,
-				/* $lineStart */ true,
-				/* $clearState */ $clearState
-			);
-			$clearState = false;
-
-			$this->cache->set( $this->getCacheKey( $value, $language ), $parserOutput->getText() );
+			$wikiText .= $this->getWikiText( $value );
 		}
 
-		return $parserOutput;
+		return $this->parser->parse(
+			$wikiText,
+			Title::newFromText( 'Special:BlankPage' ),
+			$this->getParserOptions( $language )
+		);
+	}
+
+	private function getParserOptions( Language $language ): ParserOptions {
+		// Cannot use $this->parser->getUser(), because that relies on the parser
+		// having either a User or ParserOptions set, causing failures:
+		// Error: Call to a member function getUser() on null
+		return new ParserOptions(
+			RequestContext::getMain()->getUser(),
+			$language
+		);
 	}
 
 	/**
