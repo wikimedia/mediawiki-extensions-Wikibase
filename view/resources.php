@@ -985,6 +985,7 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'mediawiki.api',
+				'mediawiki.user',
 				'mediawiki.ForeignApi',
 			],
 			'messages' => [

@@ -408,6 +408,7 @@
 				"jquery.ui",
 				"jquery.tipsy",
 				"mediawiki.api",
+				"mediawiki.user",
 				"mediawiki.util",
 				"mediawiki.jqueryMsg",
 				"mw.config.values.wbRepo",
