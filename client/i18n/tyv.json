@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Agilight",
+			"Riverman",
 			"Көпек",
 			"Монгуш Салим"
 		]
@@ -12,7 +13,15 @@
 	"wikibase-editlinkstitle": "Дылдар аразының шөлүлгелерин эдер",
 	"wikibase-addlinkstitle": "Интервки-шөлүглер немээр",
 	"wikibase-linkitem-addlinks": "Шөлүглер немээр",
+	"wikibase-linkitem-title": "Арын биле харылзаштырар",
+	"wikibase-linkitem-linkpage": "Арын биле харылзаштырар",
+	"wikibase-linkitem-selectlink": "Бо арын биле харылзаштырар сайт биле арынны шилиңер.",
+	"wikibase-linkitem-input-site": "Дыл:",
+	"wikibase-linkitem-input-page": "Арын:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Чажырар",
+	"wikibase-rc-hide-wikidata-show": "Көргүзер",
 	"wikibase-rc-wikibase-edit-letter": "д",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} эдер"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} эдер",
+	"wikibase-otherprojects": "Өске төлевилелдерде"
 }
