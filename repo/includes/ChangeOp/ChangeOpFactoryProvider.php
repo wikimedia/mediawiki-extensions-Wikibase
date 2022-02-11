@@ -73,9 +73,6 @@ class ChangeOpFactoryProvider {
 	 */
 	private $allowedBadgeItemIds;
 
-	/** @var bool */
-	private $normalize;
-
 	/**
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param GuidGenerator $guidGenerator
@@ -88,7 +85,6 @@ class ChangeOpFactoryProvider {
 	 * @param ReferenceNormalizer $referenceNormalizer
 	 * @param StatementNormalizer $statementNormalizer
 	 * @param string[] $allowedBadgeItemIds
-	 * @param bool $normalize
 	 */
 	public function __construct(
 		EntityConstraintProvider $constraintProvider,
@@ -101,8 +97,7 @@ class ChangeOpFactoryProvider {
 		SnakNormalizer $snakNormalizer,
 		ReferenceNormalizer $referenceNormalizer,
 		StatementNormalizer $statementNormalizer,
-		array $allowedBadgeItemIds,
-		bool $normalize
+		array $allowedBadgeItemIds
 	) {
 		$this->constraintProvider = $constraintProvider;
 
@@ -120,7 +115,6 @@ class ChangeOpFactoryProvider {
 		$this->statementNormalizer = $statementNormalizer;
 
 		$this->allowedBadgeItemIds = $allowedBadgeItemIds;
-		$this->normalize = $normalize;
 	}
 
 	/**
@@ -144,8 +138,7 @@ class ChangeOpFactoryProvider {
 			$this->snakValidator,
 			$this->snakNormalizer,
 			$this->referenceNormalizer,
-			$this->statementNormalizer,
-			$this->normalize
+			$this->statementNormalizer
 		);
 	}
 

@@ -38,9 +38,6 @@ $wgWBRepoSettings['taintedReferencesEnabled'] = true;
 $wgRestAPIAdditionalRouteFiles[] = 'extensions/Wikibase/repo/rest-api/routes.json';
 $wgRestAPIAdditionalRouteFiles[] = 'extensions/Wikibase/repo/rest-api/routes.dev.json';
 
-// enable data value normalization
-$wgWBRepoSettings['tmpNormalizeDataValues'] = true;
-
 // enable Federated Properties. With only local (= db) Entity Sources, this should have no effect.
 $wgWBRepoSettings['federatedPropertiesEnabled'] = true;
 // Overriding the default source URL so that no default API Entity Source gets added via DefaultFederatedPropertiesEntitySourceAdder

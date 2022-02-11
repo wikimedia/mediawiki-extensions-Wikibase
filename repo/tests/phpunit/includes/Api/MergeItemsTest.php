@@ -159,8 +159,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 			WikibaseRepo::getSnakNormalizer( $services ),
 			WikibaseRepo::getReferenceNormalizer( $services ),
 			WikibaseRepo::getStatementNormalizer( $services ),
-			[],
-			true
+			[]
 		);
 		$titleLookup = $this->getEntityTitleStoreLookup();
 		$permissionChecker = $this->getPermissionCheckers();

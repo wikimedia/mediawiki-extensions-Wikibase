@@ -452,15 +452,6 @@ return [
 	 * @note This config options is primarily added for Wikidata transition use-case and can be
 	 * considered temporary. It could be removed in the future with no warning.
 	 *
-	 * @var bool Whether to normalize data values when saving edits
-	 * @see https://phabricator.wikimedia.org/T251480
-	 */
-	'tmpNormalizeDataValues' => false,
-
-	/**
-	 * @note This config options is primarily added for Wikidata transition use-case and can be
-	 * considered temporary. It could be removed in the future with no warning.
-	 *
 	 * @var bool Whether to enable the 'mul' language code,
 	 * adding it to the term language codes and falling back to it before the implicit 'en' fallback
 	 * @see https://phabricator.wikimedia.org/T297393

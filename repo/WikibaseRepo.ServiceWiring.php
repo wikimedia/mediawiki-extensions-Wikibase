@@ -409,8 +409,7 @@ return [
 			WikibaseRepo::getSnakNormalizer( $services ),
 			WikibaseRepo::getReferenceNormalizer( $services ),
 			WikibaseRepo::getStatementNormalizer( $services ),
-			array_keys( $settings->getSetting( 'badgeItems' ) ),
-			$settings->getSetting( 'tmpNormalizeDataValues' )
+			array_keys( $settings->getSetting( 'badgeItems' ) )
 		);
 	},
 

@@ -29,6 +29,9 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 
 === New user-facing features in 1.42 ===
 
+* (repo) (T251480) Data values are automatically normalized on save.
+  Built-in normalizations are defined for the commonsMedia data type and the string value type.
+  Custom data and value types can register normalization using the normalizer-factory-callback definition key.
 * ...
 
 === External library changes in 1.42 ===

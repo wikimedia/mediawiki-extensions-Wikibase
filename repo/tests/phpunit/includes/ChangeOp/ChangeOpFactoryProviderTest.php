@@ -64,8 +64,7 @@ class ChangeOpFactoryProviderTest extends \PHPUnit\Framework\TestCase {
 			$this->mockProvider->getMockSnakNormalizer(),
 			$this->mockProvider->getMockReferenceNormalizer(),
 			$this->mockProvider->getMockStatementNormalizer(),
-			[],
-			true
+			[]
 		);
 	}
 
