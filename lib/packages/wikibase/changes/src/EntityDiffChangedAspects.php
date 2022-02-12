@@ -140,8 +140,12 @@ class EntityDiffChangedAspects implements Serializable {
 	 *
 	 * @return string JSON
 	 */
-	public function serialize() {
-		return json_encode( $this->toArray() );
+	public function serialize(): string {
+		return json_encode( $this->__serialize() );
+	}
+
+	public function __serialize(): array {
+		return $this->toArray();
 	}
 
 	/**
@@ -152,23 +156,25 @@ class EntityDiffChangedAspects implements Serializable {
 	 * @throws Exception
 	 */
 	public function unserialize( $serialized ) {
-		$data = json_decode( $serialized );
+		$this->__unserialize( json_decode( $serialized, true ) );
+	}
 
-		if ( $data->arrayFormatVersion !== self::ARRAYFORMATVERSION ) {
-			throw new Exception( 'Unsupported format version ' . $data->arrayFormatVersion );
+	public function __unserialize( array $data ): void {
+		if ( $data['arrayFormatVersion'] !== self::ARRAYFORMATVERSION ) {
+			throw new Exception( 'Unsupported format version ' . $data['arrayFormatVersion'] );
 		}
 
-		$this->labelChanges = $data->labelChanges;
-		$this->descriptionChanges = $data->descriptionChanges;
-		$this->statementChanges = array_values( (array)$data->statementChanges );
-		$this->siteLinkChanges = (array)$data->siteLinkChanges;
-		$this->otherChanges = $data->otherChanges;
+		$this->labelChanges = $data['labelChanges'];
+		$this->descriptionChanges = $data['descriptionChanges'];
+		$this->statementChanges = array_values( (array)$data['statementChanges'] );
+		$this->siteLinkChanges = (array)$data['siteLinkChanges'];
+		$this->otherChanges = $data['otherChanges'];
 	}
 
 	/**
 	 * @return array
 	 */
-	public function toArray() {
+	public function toArray(): array {
 		return [
 			'arrayFormatVersion' => self::ARRAYFORMATVERSION,
 			'labelChanges' => $this->getLabelChanges(),
