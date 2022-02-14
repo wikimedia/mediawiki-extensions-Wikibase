@@ -2,9 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Agilight",
-			"Монгуш Салим"
+			"Монгуш Салим",
+			"Riverman"
 		]
 	},
 	"wikibase-edit": "эдер",
-	"wikibase-add": "немээр"
+	"wikibase-add": "немээр",
+	"wikibase-sitelinks-special": "Өске сайттар",
+	"wikibase-statementview-rank-normal": "Нормалдыг ранг"
 }

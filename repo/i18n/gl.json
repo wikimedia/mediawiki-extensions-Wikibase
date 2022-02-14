@@ -37,7 +37,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Noutras linguas",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configurar",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Amosar etiquetas, alias e descricións en tódalas miñas linguas ao cargar a páxina.",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Pódense establecer outras linguas persoais distintas da da interfaz de usuario empregando a sintaxe [[mw:Special:MyLanguage/Extension:Babel|Babel extension]] na páxina de usuario.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Pódense establecer outras linguas persoais distintas da interfaz de usuario empregando a sintaxe [[mw:Special:MyLanguage/Extension:Babel|Babel extension]] na páxina de usuario.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Tamén coñecido como",
 	"wikibase-entitytermsforlanguagelistview-description": "Descrición",
 	"wikibase-entitytermsforlanguagelistview-label": "Etiqueta",

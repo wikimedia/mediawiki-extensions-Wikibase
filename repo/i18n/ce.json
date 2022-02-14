@@ -192,6 +192,7 @@
 	"wikibase-parse-error": "Нийса доцу маьӀна.",
 	"wikibase-parse-error-time": "Хенан маьӀанан формат нийса йац.",
 	"wikibase-redirectentity-submit": "ДӀасахьажор",
+	"wikibase-api-failed-save": "Ӏалашйан цайелира.",
 	"wikibase-api-no-external-page": "Арахьара сайт «$ 1» тӀехь кара цабо «$ 2» агӀонах хаам.",
 	"wikibase-api-no-such-sitelink": "'$1' cайтан тӀе иштта хьажорг цакарий",
 	"wikibase-restoreold": "меттахӀоттайе",

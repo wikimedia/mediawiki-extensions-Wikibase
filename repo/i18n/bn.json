@@ -110,7 +110,7 @@
 	"wikibase-snakview-snaktypeselector-value": "স্বনির্ধারিত মান",
 	"wikibase-snakformat-invalid-value": "অকার্যকর মান।",
 	"wikibase-snakformat-propertynotfound": "বৈশিষ্ট্য পাওয়া যায়নি।",
-	"wikibase-shortcopyrightwarning": "\"$1\"-এ ক্লিক করার মাধ্যমে, আপনি [[$2|ব্যবহারের শর্তাবলীর]] সাথে একমত হচ্ছেন, এবং $3-এর অধীনে আপনার অবদান প্রকাশে সম্মত হচ্ছেন।",
+	"wikibase-shortcopyrightwarning": "\"$1\" ক্লিক করার দ্বারা, আপনি [[$2|ব্যবহারের শর্তাবলীর]] সাথে একমত হচ্ছেন, এবং $3-এর অধীনে আপনার অবদান প্রকাশে সম্মত হচ্ছেন।",
 	"wikibase-copyrighttooltip-acknowledge": "আমি আমার ভবিষ্যত সম্পাদনাগুলি জন্য এই শর্তাবলী গ্রহণ করলাম। পুনরায় এই বার্তাটি দেখাবেন না।",
 	"wikibase-entityselector-more": "আরও",
 	"wikibase-entityselector-notfound": "মিলে যায় এমন কিছু পাওয়া যায়নি।",

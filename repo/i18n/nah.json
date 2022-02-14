@@ -3,18 +3,19 @@
 		"authors": [
 			"Akapochtli",
 			"Fitoschido",
-			"Taresi"
+			"Taresi",
+			"Languaeditor"
 		]
 	},
-	"wikibase-edit": "xicpatla",
+	"wikibase-edit": "xikpatla",
 	"wikibase-cancel": "moxitiniz",
 	"wikibase-add": "occe",
 	"wikibase-entitytermsforlanguagelistview-language": "Tlahtolli",
 	"wikibase-description-empty": "Atle cemmelahualiztli",
 	"wikibase-content-language-edit-label": "Tlahtolli",
 	"wikibase-statementsection-statements": "Tlahtōlli",
-	"wikibase-itembytitle-submit": "Tlatemoliztli",
-	"wikibase-itemdisambiguation-submit": "Tlatemoliztli",
+	"wikibase-itembytitle-submit": "Xiktemo",
+	"wikibase-itemdisambiguation-submit": "Xiktemo",
 	"wikibase-newentity-language": "Tlahtolli:",
 	"wikibase-history-title-with-label": "«$2» ($1) ītlaceppahuiliztlahtōllo",
 	"wikibase-history-title-without-label": "($1) tlahcuilōlloh ītlaihittaliz"
