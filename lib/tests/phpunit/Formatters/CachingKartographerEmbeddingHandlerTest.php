@@ -56,12 +56,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 		$handler = new CachingKartographerEmbeddingHandler( $parser );
 		$language = Language::factory( 'qqx' );
 
-		$handler->getParserOutput(
-			[
-				$this->newSampleCoordinate()
-			],
-			$language
-		);
+		$handler->getHtml( $this->newSampleCoordinate(), $language );
 
 		// This should be cached and not trigger Parser::parse() a second time
 		$handler->getHtml( $this->newSampleCoordinate(), $language );
