@@ -329,8 +329,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$this->assertEquals( $expectedItem, $parserOutput->getPageProperty( 'wikibase_item' ) );
-		// T301915
-		$this->assertFalse( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) ?? false );
+		$this->assertNull( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
 
 		$this->assertLanguageLinks( $expectedLanguageLinks, $parserOutput );
 		$this->assertSisterLinks( $expectedSisterLinks, $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
@@ -355,7 +354,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
-		$this->assertFalse( $parserOutput->getPageProperty( 'wikibase_item' ) ?? false ); // T301915
+		$this->assertNull( $parserOutput->getPageProperty( 'wikibase_item' ) );
 		$this->assertSame( NS_MAIN, $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
 
 		$this->assertSame( [], $parserOutput->getLanguageLinks() );
@@ -373,8 +372,8 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
-		$this->assertFalse( $parserOutput->getPageProperty( 'wikibase_item' ) ?? false ); // T301915
-		$this->assertFalse( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) ?? false ); // T301915
+		$this->assertNull( $parserOutput->getPageProperty( 'wikibase_item' ) );
+		$this->assertNull( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
 
 		$this->assertSame( [], $parserOutput->getLanguageLinks() );
 		$this->assertNull( $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
@@ -419,8 +418,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
 		$this->assertEquals( $itemId, $parserOutput->getPageProperty( 'wikibase_item' ) );
-		// T301915
-		$this->assertFalse( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) ?? false );
+		$this->assertNull( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
 	}
 
 	private function assertLanguageLinks( $links, ParserOutput $parserOutput ) {

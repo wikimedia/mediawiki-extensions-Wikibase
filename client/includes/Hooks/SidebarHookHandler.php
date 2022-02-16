@@ -62,9 +62,9 @@ class SidebarHookHandler implements
 			$outputPage->setProperty( 'noexternallanglinks', $noExternalLangLinks );
 		}
 
-		$itemId = $parserOutput->getPageProperty( 'wikibase_item' ) ?? false; // T301915
+		$itemId = $parserOutput->getPageProperty( 'wikibase_item' );
 
-		if ( $itemId !== false ) {
+		if ( $itemId !== null ) {
 			$outputPage->setProperty( 'wikibase_item', $itemId );
 		}
 
