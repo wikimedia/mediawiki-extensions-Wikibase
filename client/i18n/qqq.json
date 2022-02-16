@@ -22,7 +22,8 @@
 			"Shirayuki",
 			"Umherirrender",
 			"Vadgt",
-			"Waldyrious"
+			"Waldyrious",
+			"Jon Harald Søby"
 		]
 	},
 	"wikibase-client-desc": "{{desc|name=Wikibase Client|url=https://www.mediawiki.org/wiki/Extension:Wikibase_Client}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]].",
@@ -133,9 +134,9 @@
 	"notification-link-text-view-item": "Label for button that links to the item your article was connected to. Parameters:\n* $1 – raw username of the person who is viewing the notification, can be used for GENDER\nSee also:\n* {{msg-mw|Notification-link-text-view-page}}",
 	"notification-subject-page-connection": "Email subject. Parameters:\n* $1 – formatted username of the person who connected the page\n* $2 – raw username of the person who connected the page, can be used for GENDER.\n* $3 – raw username of the notified user, can be used for GENDER\nSee also:\n* {{msg-mw|Notification-header-page-connection}}\n* {{msg-mw|Notification-page-linked-email-subject}}",
 	"notification-page-connection-link": "{{notranslate}}\nThe name of the page where notified users can find more information and help.  Parameters:\n* $1 – repository name (eg. Wikidata)",
-	"unresolved-property-category": "Name for a [[mw:Special:MyLanguage/Help:Tracking categories|tracking category]] where pages are placed automatically if they reference properties that cannot be resolved.\n\nSee also:\n* {{msg-mw|Unresolved-property-category-desc}}",
+	"unresolved-property-category": "{{tracking category name}}\nName for a [[mw:Special:MyLanguage/Help:Tracking categories|tracking category]] where pages are placed automatically if they reference properties that cannot be resolved.\n\nSee also:\n* {{msg-mw|Unresolved-property-category-desc}}",
 	"unresolved-property-category-desc": "Unresolved property category description. Shown on [[Special:TrackingCategories]].\n\nSee also:\n* {{msg-mw|Unresolved-property-category}}",
-	"connected-redirect-category": "Name for a [[mw:Special:MyLanguage/Help:Tracking categories|tracking category]] where redirect pages are placed automatically if they are connected to a data item.\n\nSee also:\n* {{msg-mw|Connected-redirect-category-desc}}",
+	"connected-redirect-category": "{{tracking category name}}\nName for a [[mw:Special:MyLanguage/Help:Tracking categories|tracking category]] where redirect pages are placed automatically if they are connected to a data item.\n\nSee also:\n* {{msg-mw|Connected-redirect-category-desc}}",
 	"connected-redirect-category-desc": "Connected redirect category description. Shown on [[Special:TrackingCategories]].\n\nSee also:\n* {{msg-mw|Connected-redirect-category}}",
 	"wikibase-client-data-bridge-dialog-title": "Title of the Wikidata Bridge dialog.\n\nParameters:\n* $1 - the label of the property that is being edited.",
 	"wikibase-client-data-bridge-permissions-error": "Message displayed when the user cannot edit this value via Wikidata Bridge due to one or more permission errors, which will be detailed following this message.\n\nParameters:\n* $1 - the number of errors\n\n{{Doc-jqueryMsg}}",

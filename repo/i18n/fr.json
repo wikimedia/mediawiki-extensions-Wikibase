@@ -58,7 +58,8 @@
 			"Wladek92",
 			"Wyz",
 			"Yasten",
-			"Zolo"
+			"Zolo",
+			"DreZhsh"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -363,8 +364,8 @@
 	"special-listdatatypes": "Liste de tous les types de données disponibles",
 	"wikibase-listdatatypes-intro": "Voici une liste de tous les types de données avec les types de valeur de donnée correspondants disponibles sur cette installation :",
 	"wikibase-listdatatypes-listproperties": "Liste des propriétés avec ce type de données",
-	"wikibase-history-title-with-label": "Historique des révisions de « $2 » ($1)",
-	"wikibase-history-title-without-label": "Historique des révisions de ($1)",
+	"wikibase-history-title-with-label": "Historique des versions de « $2 » ($1)",
+	"wikibase-history-title-without-label": "Historique des versions de ($1)",
 	"special-listproperties": "Liste des propriétés",
 	"wikibase-listproperties-legend": "Obtenir une liste de propriétés par type de données",
 	"wikibase-listproperties-datatype": "Type de données :",

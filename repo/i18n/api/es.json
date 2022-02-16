@@ -9,7 +9,8 @@
 			"Macofe",
 			"Matiia",
 			"Tiberius1701",
-			"Jakeukalane"
+			"Jakeukalane",
+			"Ciencia Al Poder"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Consulta los elementos de insignias disponibles.",
@@ -145,8 +146,8 @@
 	"apihelp-wbsetaliases-param-set": "Una lista de alias que reemplazará la lista actual (no combinable ni con <var>add</var> ni con <var>remove</var>)",
 	"apihelp-wbsetaliases-param-language": "El idioma para el cual establecer los alias",
 	"apihelp-wbsetaliases-example-1": "Establezca los alias en inglés para la entidad con identificador <samp>$1</samp> <var>Foo</var> en y <var>Bar</var>",
-	"apihelp-wbsetaliases-example-2": "Agregar <var>Foo</var> y a la lista de alias en inglés para la entidad con <var>Bar</var> id. <samp>$1</samp>",
-	"apihelp-wbsetaliases-example-3": "Quitar <var>Foo</var> y de la lista de alias en inglés para la entidad con <var>Bar</var> id. <samp>$1</samp>",
+	"apihelp-wbsetaliases-example-2": "Añadir <var>Foo</var> y <var>Bar</var> a la lista de alias en inglés para la entidad con el identificador <samp>$1</samp>",
+	"apihelp-wbsetaliases-example-3": "Quitar <var>Foo</var> y <var>Bar</var> de la lista de alias en inglés para la entidad con el identificador <samp>$1</samp>",
 	"apihelp-wbsetaliases-example-4": "Saca <var>Foo</var> de la lista de alias ingleses para la entidad con ID <samp>$1</samp> mientras añadiendo <var>Barra</var> a él",
 	"apihelp-wbsetclaim-description": "Crea o actualiza toda una Declaración o Reclamación.",
 	"apihelp-wbsetclaim-param-summary": "Resumen de la edición.\nSerá precedido por un comentario generado automáticamente. La longitud máxima del autocomentario junto con el resumen es de 260 caracteres. Ten en cuenta que todo lo que sobrepase el límite se cortará.",
@@ -206,8 +207,8 @@
 	"apihelp-wbsetsitelink-param-linksite": "El identificador del sitio en el que reside la página que se enlazará",
 	"apihelp-wbsetsitelink-param-linktitle": "El título de la página que se enlazará. Si este parámetro es una cadena vacía o no se definen ni <var>linktitle</var> ni <var>badges</var>, el enlace se eliminará.",
 	"apihelp-wbsetsitelink-param-badges": "Los identificadores de los elementos que se establecerán como insignias. Reemplazarán a los actuales. Si este parámetro no está definido, las insignias no se cambiarán",
-	"apihelp-wbsetsitelink-example-1": "Añadir un sitelink al Hidrógeno de página \"inglés\" al elemento con ID <samp>$1</samp>, si el sitelink no existe",
-	"apihelp-wbsetsitelink-example-2": "Añadir un sitelink al Hidrógeno de página \"inglés\" al elemento con ID <samp>$1</samp>, si el sitelink no existe. También anexa \"Oxígeno de Amores\" al editar resumen.",
+	"apihelp-wbsetsitelink-example-1": "Añadir a la página en inglés «Hydrogen» un enlace de sitio al elemento con identificador <samp>$1</samp>, en caso de que el enlace de sitio no exista",
+	"apihelp-wbsetsitelink-example-2": "Añadir al artículo en inglés «Hydrogen» un enlace de sitio al elemento con identificador «$1», en caso de que el enlace de sitio no exista. Anexar al resumen de edición «Loves Oxygen».",
 	"apihelp-wbsetsitelink-example-3": "Añadir al artículo en alemán «Wasserstoff» un enlace de sitio al elemento que está enlazado con el artículo en inglés «Hydrogen», en caso de que el enlace de sitio no exista.",
 	"apihelp-wbsetsitelink-example-4": "Eliminar del elemento el enlace de sitio en alemán",
 	"apihelp-wbsetsitelink-example-5": "Añadir al elemento enlazado con el artículo en inglés «Hydrogen» un enlace de sitio al artículo en polaco «Wodór», con una insignia que apunte al elemento con identificador «Q149»",
