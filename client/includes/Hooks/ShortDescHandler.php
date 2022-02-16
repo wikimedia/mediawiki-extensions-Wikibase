@@ -85,7 +85,8 @@ class ShortDescHandler {
 		$noReplace = $this->parseNoReplace( $parser, $controlArg );
 		$out = $parser->getOutput();
 
-		if ( $out->getPageProperty( 'wikibase-shortdesc' ) !== false && $noReplace ) {
+		// T301915: temporary workaround for return value of getPageProperty()
+		if ( ( $out->getPageProperty( 'wikibase-shortdesc' ) ?? false ) !== false && $noReplace ) {
 			return;
 		}
 

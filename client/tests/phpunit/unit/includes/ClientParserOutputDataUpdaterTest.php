@@ -145,7 +145,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$instance = $this->newInstance();
 
 		$instance->updateItemIdProperty( $title, $parserOutput );
-		$property = $parserOutput->getPageProperty( 'wikibase_item' );
+		$property = $parserOutput->getPageProperty( 'wikibase_item' ) ?? false; // T301915
 
 		$itemId = $this->mockRepo->getItemIdForLink( 'srwiki', $titleText );
 		$this->assertEquals( $itemId->getSerialization(), $property );
@@ -170,7 +170,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$instance = $this->newInstance();
 
 		$instance->updateItemIdProperty( $title, $parserOutput );
-		$property = $parserOutput->getPageProperty( 'wikibase_item' );
+		$property = $parserOutput->getPageProperty( 'wikibase_item' ) ?? false; // T301915
 
 		$this->assertFalse( $property );
 	}
@@ -239,7 +239,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 		$instance->updateBadgesProperty( $title, $parserOutput );
 		$this->assertFalse(
-			$parserOutput->getPageProperty( 'wikibase-badge-Q17' ),
+			$parserOutput->getPageProperty( 'wikibase-badge-Q17' ) ?? false, // T301915
 			'property "wikibase-badge-Q17" should not be set'
 		);
 	}

@@ -51,7 +51,7 @@ class NoLangLinkHandler {
 	 *         Empty if {{#noexternallanglinks}} was not used on the page.
 	 */
 	public static function getNoExternalLangLinks( ParserOutput $parserOutput ) {
-		$property = $parserOutput->getPageProperty( 'noexternallanglinks' );
+		$property = $parserOutput->getPageProperty( 'noexternallanglinks' ) ?? false; // T301915
 
 		return is_string( $property ) ? unserialize( $property ) : [];
 	}

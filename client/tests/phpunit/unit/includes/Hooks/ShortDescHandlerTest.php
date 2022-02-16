@@ -114,6 +114,8 @@ class ShortDescHandlerTest extends TestCase {
 		$parserOutput = $this->createMock( ParserOutput::class );
 		$parser = $this->getMockBuilder( \Parser::class )->disableOriginalConstructor()->getMock();
 		$parser->method( 'getOutput' )->willReturn( $parserOutput );
+		$parserOutput->method( 'getPageProperty' )
+			->willReturn( 'bogus' );
 		$parserOutput->method( 'setPageProperty' )
 			->willReturnCallback( function ( $name, $value ) use ( &$shortDesc ) {
 				$this->assertSame( 'wikibase-shortdesc', $name );

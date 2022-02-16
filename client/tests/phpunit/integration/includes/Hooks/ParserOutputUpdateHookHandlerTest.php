@@ -351,7 +351,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
-		$this->assertFalse( $parserOutput->getPageProperty( 'wikibase_item' ) );
+		$this->assertFalse( $parserOutput->getPageProperty( 'wikibase_item' ) ?? false ); // T301915
 
 		$this->assertSame( [], $parserOutput->getLanguageLinks() );
 		$this->assertSame( [], $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
@@ -368,7 +368,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
-		$this->assertFalse( $parserOutput->getPageProperty( 'wikibase_item' ) );
+		$this->assertFalse( $parserOutput->getPageProperty( 'wikibase_item' ) ?? false ); // T301915
 
 		$this->assertSame( [], $parserOutput->getLanguageLinks() );
 		$this->assertNull( $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
