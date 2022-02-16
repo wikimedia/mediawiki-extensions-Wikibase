@@ -3,9 +3,11 @@
 namespace Wikibase\Client\Tests\Integration\Specials;
 
 use SpecialPageTestBase;
+use Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\Client\WikibaseClient;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers \Wikibase\Client\Specials\SpecialUnconnectedPages
@@ -22,13 +24,81 @@ use Wikibase\Client\WikibaseClient;
  */
 class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
-	protected function newSpecialPage( NamespaceChecker $namespaceChecker = null ) {
+	protected function setUp(): void {
+		$this->setService(
+			'WikibaseClient.NamespaceChecker',
+			new NamespaceChecker( [], [ $this->getDefaultWikitextNS() ] )
+		);
+
+		parent::setUp();
+	}
+
+	public function addDBDataOnce() {
+		// Remove old stray pages.
+		$this->db->delete( 'page', IDatabase::ALL_ROWS, __METHOD__ );
+
+		$expectedUnconnectedTitle = Title::newFromTextThrow(
+			"SpecialUnconnectedPagesTest-expectedUnconnected",
+			$this->getDefaultWikitextNS()
+		);
+		$unconnectedTitle = Title::newFromTextThrow(
+			"SpecialUnconnectedPagesTest-unconnected",
+			$this->getDefaultWikitextNS()
+		);
+		$connectedTitle = Title::newFromTextThrow(
+			"SpecialUnconnectedPagesTest-connected",
+			$this->getDefaultWikitextNS()
+		);
+
+		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $expectedUnconnectedTitle );
+		$page->insertOn( $this->db, 100 );
+
+		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $unconnectedTitle );
+		$page->insertOn( $this->db, 200 );
+
+		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $connectedTitle );
+		$page->insertOn( $this->db, 300 );
+		$this->db->insert(
+			'page_props', [
+				[
+					'pp_page' => '100',
+					'pp_propname' => 'expectedUnconnectedPage',
+					'pp_value' => '',
+					'pp_sortkey' => 0.0,
+				],
+				[
+					'pp_page' => '300',
+					'pp_propname' => 'wikibase_item',
+					'pp_value' => 'Q12',
+					'pp_sortkey' => 0.0,
+				],
+			],
+			__METHOD__
+		);
+	}
+
+	protected function newSpecialPage( NamespaceChecker $namespaceChecker = null ): SpecialUnconnectedPages {
 		$services = $this->getServiceContainer();
 		return new SpecialUnconnectedPages(
 			$services->getNamespaceInfo(),
 			$services->getTitleFactory(),
 			WikibaseClient::getClientDomainDbFactory( $services ),
 			$namespaceChecker ?: WikibaseClient::getNamespaceChecker( $services )
+		);
+	}
+
+	public function testReallyDoQuery() {
+		$namespace = $this->getDefaultWikitextNS();
+		$specialPage = $this->newSpecialPage();
+		$specialPage->getRequest()->setVal( 'namespace', $namespace );
+		$res = $specialPage->reallyDoQuery( 10 );
+		$this->assertSame( 1, $res->numRows() );
+		$this->assertSame( [
+				'value' => '200',
+				'namespace' => strval( $namespace ),
+				'title' => 'SpecialUnconnectedPagesTest-unconnected'
+			],
+			(array)$res->fetchObject()
 		);
 	}
 

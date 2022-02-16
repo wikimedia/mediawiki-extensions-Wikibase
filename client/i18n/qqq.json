@@ -89,7 +89,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "{{doc-important|Do not translate \"mw.wikibase.getReferencedEntityId\"}}\n\nError message shown in rendered page output when too many \"mw.wikibase.getReferencedEntityId\" calls are on a page. The limit on the number of function calls per page is controlled by the <tt>referencedEntityIdAccessLimit</tt> configuration setting.",
 	"unconnectedpages": "{{doc-special|UnconnectedPages}}",
 	"unconnectedpages-summary": "Introductory text used on Special:UnconnectedPages.",
-	"wikibase-unconnectedpages-format-row": "Formatting of the additional data for each row in the result set on the special page for pages not connected to sitelinks.\n\nThis message follows the page title (with link).\n\nParameters:\n* $1 - number of inter-language links",
 	"wikibase-unconnectedpages-submit": "Label for the button that activates the action",
 	"pageswithbadges": "{{doc-special|PagesWithBadges}}",
 	"pageswithbadges-summary": "Introductory text used on Special:PagesWithBadges.",

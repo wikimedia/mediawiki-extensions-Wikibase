@@ -108,15 +108,11 @@ class SpecialUnconnectedPages extends QueryPage {
 				'value' => 'page_id',
 				'namespace' => 'page_namespace',
 				'title' => 'page_title',
-				// Placeholder, we'll get this from page_props in the future.
-				'page_num_iwlinks' => '0',
 			],
 			'conds' => $conds,
 			// Sorting is determined getOrderFields(), which returns [ 'value' ] per default.
 			'options' => [],
 			'join_conds' => [
-				// TODO Also get explicit_langlink_count from page_props once that is populated.
-				// Could even filter or sort by it via pp_sortkey.
 				'page_props' => [
 					'LEFT JOIN',
 					[ 'page_id = pp_page', 'pp_propname' => [ 'wikibase_item', 'expectedUnconnectedPage' ] ]
@@ -155,14 +151,7 @@ class SpecialUnconnectedPages extends QueryPage {
 			return false;
 		}
 
-		$out = $this->getLinkRenderer()->makeKnownLink( $title );
-
-		if ( $result->page_num_iwlinks > 0 ) {
-			$out .= ' ' . $this->msg( 'wikibase-unconnectedpages-format-row' )
-				->numParams( $result->page_num_iwlinks )->text();
-		}
-
-		return $out;
+		return $this->getLinkRenderer()->makeKnownLink( $title );
 	}
 
 	/**
