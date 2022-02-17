@@ -116,7 +116,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 
 		$this->assertInstanceOf( ParserOutput::class, $parserOutput );
 		$this->assertNotFalse( $parserOutput->getExtensionData( 'kartographer' ) );
-		$this->assertNotFalse( $parserOutput->getPageProperty( 'kartographer_frames' ) );
+		$this->assertNotFalse( $parserOutput->getPageProperty( 'kartographer_frames' ) ?? false ); // T301915
 
 		// This is sometimes an object, see \Kartographer\Tag\TagHandler::finalParseStep()
 		$this->assertCount( 2, (array)$parserOutput->getJsConfigVars()['wgKartographerLiveData'] );
@@ -136,7 +136,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 
 		$this->assertInstanceOf( ParserOutput::class, $parserOutput );
 		$this->assertNull( $parserOutput->getExtensionData( 'kartographer' ) );
-		$this->assertFalse( $parserOutput->getPageProperty( 'kartographer_frames' ) );
+		$this->assertFalse( $parserOutput->getPageProperty( 'kartographer_frames' ) ?? false ); // T301915
 	}
 
 	public function testGetMapframeInitJS() {
