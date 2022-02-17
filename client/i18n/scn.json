@@ -53,7 +53,6 @@
 	"wikibase-error-serialize-error": "Nun s'arriniscìu a sirializzari li dati.",
 	"wikibase-error-invalid-entity-id": "Lu ID spicificatu è scanusciutu ô sistema. Pi favuri adòpira l'ID vàlidu di na ntità.",
 	"unconnectedpages": "Pàggini nun assuciati a suggetti",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|culligamentu|culligamenti}} di lingua ntâ pàggina)",
 	"wikibase-unconnectedpages-submit": "Ammustra pàggini",
 	"pageswithbadges": "Pàggini cu distintivi",
 	"wikibase-pageswithbadges-submit": "Ammustra pàggini",

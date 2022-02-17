@@ -71,7 +71,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "For mange «mw.wikibase.getReferencedEntityId»-kall, opptil $2 {{PLURAL:$2|tillates}}.",
 	"unconnectedpages": "Sider som ikke er knyttet til elementer",
 	"unconnectedpages-summary": "Denne siden lister sider uten tilknyttet dataelement (i navnerom som støtter tilknyttede elementer). Listen er sortert på fallende side-ID, slik at nyere sider listes først.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|språklenke|språklenker}} på siden)",
 	"wikibase-unconnectedpages-submit": "Vis sider",
 	"pageswithbadges": "Sider med merker",
 	"pageswithbadges-summary": "Denne siden lister opp sider med merker (f.eks. anbefalt eller utmerket artikkel). Denne listen er sortert etter synkende side-ID, så nyere sider listes opp først.",

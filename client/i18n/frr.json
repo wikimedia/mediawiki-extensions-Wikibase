@@ -49,7 +49,6 @@
 	"wikibase-error-serialize-error": "A dooten küd ei serialisiaret wurd",
 	"wikibase-error-invalid-entity-id": "Detdiar käännumer (ID) as ei bekäänd. Brük en ööder ID.",
 	"unconnectedpages": "Sidjen, diar ei mä objekten ferbünjen san",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|ferwisang|ferwisangen}} tu ööder spriaken üüb det sidj)",
 	"wikibase-unconnectedpages-submit": "Widjer",
 	"pageswithbadges": "Sidjen mä ütjtiaknangen",
 	"pageswithbadges-summary": "Detdiar sidj feert sidjen mä ütjtiaknangen (t.b. 'gud artiikel' of 'auer a miaten artiikel') Neier sidjen wurd tuiarst uunwiset.",

@@ -79,7 +79,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "\"mw.wikibase.getReferencedEntityId\" 호출이 너무 많습니다. 최대 $2까지 {{PLURAL:$2|허용됩니다}}.",
 	"unconnectedpages": "항목에 연결되지 않은 문서",
 	"unconnectedpages-summary": "이 문서는 (항목과 연결을 지원하는 이름 공간에서)데이터 항목과 연결되지 않은 문서들을 나열합니다. 이 목록은 문서 ID에 따라 내림차순으로 정렬되므로 새 항목일 수록 앞에 옵니다.",
-	"wikibase-unconnectedpages-format-row": "(문서에 있는 {{PLURAL:$1|언어 간 링크}} $1개)",
 	"wikibase-unconnectedpages-submit": "문서 보기",
 	"pageswithbadges": "배지가 있는 문서",
 	"pageswithbadges-summary": "이 문서는 배지가 있는 문서(예: 좋은 글 또는 알찬 글)를 나열합니다. 이 목록은 문서 ID를 내림차순으로 정렬해 최신 문서가 앞에 오도록 합니다.",

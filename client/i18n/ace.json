@@ -47,7 +47,6 @@
 	"wikibase-error-serialize-error": "Hana meuhasé peukaw'èt data",
 	"wikibase-error-invalid-entity-id": "ID nyang geupasoë hana geuturi lé sistem. Neutulông pasoë ID nyang beutôi.",
 	"unconnectedpages": "Laman hana teukaw'èt u item",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|peunawôt interwiki}} bak laman)",
 	"wikibase-unconnectedpages-submit": "Jak",
 	"wikibase-pageinfo-entity-id": "ID Item {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Hana",

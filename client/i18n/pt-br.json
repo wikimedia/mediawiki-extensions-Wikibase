@@ -80,7 +80,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Há muitas chamadas a \"mw.wikibase.getReferencedEntityId\"; não são {{PLURAL:$2|permitidas}}.",
 	"unconnectedpages": "Páginas não conectadas a itens",
 	"unconnectedpages-summary": "Esta página lista páginas com nenhum item de dados conectado (em espaços nominais que suportam itens conectados). A lista é classificada por ID de página decrescente, de modo que as páginas mais novas são listadas primeiro.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interlanguage link|links interlíngua}} na página)",
 	"wikibase-unconnectedpages-submit": "Mostrar páginas",
 	"pageswithbadges": "Páginas com emblemas",
 	"pageswithbadges-summary": "Esta página lista páginas com distintivos (por exemplo, um artigo bom ou artigo destacado). A lista é classificada por ID de página decrescente, de modo que as páginas mais novas são listadas primeiro.",

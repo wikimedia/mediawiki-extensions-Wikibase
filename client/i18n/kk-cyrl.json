@@ -45,7 +45,6 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} өңдемесі",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}} өңдемелерін бақылау тізіміңізден көрсету",
 	"unconnectedpages": "Беттер даналарға байланыспады",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|тіларалықсілтеме|тіларалықсілтеме}} бетінде)",
 	"wikibase-unconnectedpages-submit": "Өту",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} данасы ID",
 	"wikibase-pageinfo-entity-id-none": "Ешқандай",

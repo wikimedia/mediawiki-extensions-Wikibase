@@ -49,7 +49,6 @@
 	"wikibase-watchlist-show-changes-pref": "Wys Wikidata-wysigings in u dophoulys",
 	"wikibase-error-invalid-entity-id": "Die opgegewe ID is nie in die stelsel nie. Gebruik 'n geldig entiteit-ID.",
 	"unconnectedpages": "Bladsye wat nie aan items gekoppel is nie",
-	"wikibase-unconnectedpages-format-row": "($1 taalskakel{{PLURAL:$1||s}} op die bladsy)",
 	"wikibase-unconnectedpages-submit": "OK",
 	"pageswithbadges": "\nBladsye met balkies",
 	"wikibase-pageswithbadges-badge": "Balkie:",

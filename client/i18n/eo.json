@@ -53,7 +53,6 @@
 	"wikibase-watchlist-show-changes-pref": "Montri redaktojn de {{WBREPONAME}} en via atentaro",
 	"wikibase-error-invalid-entity-id": "La enigita identigilo estas nekonata de la sistemo. Bonvolu uzi validan identigilon.",
 	"unconnectedpages": "Paĝoj nekonektitaj al eroj",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interlingva ligilo|interlingvaj ligiloj}} en la paĝo)",
 	"wikibase-unconnectedpages-submit": "Montri paĝojn",
 	"pageswithbadges": "Paĝoj kun insignoj",
 	"wikibase-pageswithbadges-invalid-id": "$1 ne estas valida numero de ero",

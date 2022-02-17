@@ -58,7 +58,6 @@
 	"wikibase-error-exceeded-entity-access-limit": "Aet oc'h war re a {{WBREPONAME}}.",
 	"unconnectedpages": "Pajennoù n’int ket liammet ouzh elfenn ebet",
 	"unconnectedpages-summary": "Rollañ a ra ar bajenn-mañ ar pajennoù n'int ket stag ouzh un elfenn roadennoù liammet (en esaouennnoù anv a skor elfennoù liammet). Urzhiet eo ar roll dre IDoù pajenn a ziskenn e doare m'en em gav ar pajennoù nevesañ e penn-kentañ.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|liamm etreyezhel}} ouzh ar bajenn)",
 	"wikibase-unconnectedpages-submit": "Diskouez ar pajennoù",
 	"pageswithbadges": "Pajennoù gant badjoù",
 	"pageswithbadges-summary": "Rollañ a ra ar bajenn-mañ ar pajennoù enno badjoù (da sk. pennad mat pe pennad a-zoare). Uzhiet eo ar roll dre IDoù pajenn a ziskenn e doare m'en em gav ar pajennoù nevesañ da gentañ.",

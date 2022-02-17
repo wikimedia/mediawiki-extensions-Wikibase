@@ -63,7 +63,6 @@
 	"wikibase-error-exceeded-entity-access-limit": "Per daug {{WBREPONAME}} esybių pasiekta.",
 	"unconnectedpages": "Puslapiai, nesusieti su įrašais",
 	"unconnectedpages-summary": "Šiame puslapyje pateikiami puslapiai, nesusiję su duomenų įrašais (vardų srityse, palaikančiose susijusius įrašus). Sąrašas surūšiuotas pagal puslapio ID mažėjimo tvarka, taigi naujesni puslapiai pateikiami pirmiau.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|tarpkalbinė nuoroda|tarpkalbinės nuorodos|tarpkalbinių nuorodų}} šiame puslapyje)",
 	"wikibase-unconnectedpages-submit": "Rodyti puslapius",
 	"pageswithbadges": "Puslapiai su ženkliukais",
 	"pageswithbadges-summary": "Šiame puslapyje pateikiamas sąrašas puslapių su ženkliukais (pvz. geras straipsnis arba rinktinis straipsnis). Sąrašas yra išrikiuotas pagal puslapių ID mažėjimo tvarka, kad naujesni puslapiai būtų rodomi pirmiau.",

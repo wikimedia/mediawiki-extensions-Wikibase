@@ -61,7 +61,6 @@
 	"wikibase-watchlist-show-changes-pref": "แสดงการแก้ไขบน {{WBREPONAME}} ในรายการเฝ้าดูของคุณ",
 	"wikibase-error-invalid-entity-id": "ระบบไม่รู้จักไอดี \"$2\" โปรดใช้ไอดีเอนทิตีที่ถูกต้อง",
 	"unconnectedpages": "หน้าที่ไม่ได้เชื่อมโยงกับสิ่งใดๆ ใน {{WBREPONAME}}",
-	"wikibase-unconnectedpages-format-row": "(มี $1 {{PLURAL:$1|ลิงก์ข้ามภาษา}}บนหน้านี้)",
 	"wikibase-unconnectedpages-submit": "แสดงหน้า",
 	"pageswithbadges": "หน้าที่มีตราเครื่องหมาย",
 	"wikibase-pageswithbadges-legend": "รายชื่อหน้าที่มีตราเครื่องหมายตามที่กำหนด",

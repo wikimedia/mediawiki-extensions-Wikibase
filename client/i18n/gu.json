@@ -37,7 +37,6 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} સંપાદન",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} ફેરફારો",
 	"unconnectedpages": "વસ્તુઓ સાથે ન જોડાયેલા પાનાઓ",
-	"wikibase-unconnectedpages-format-row": "($1 પાનાં પર {{PLURAL:$1|આંતરવિકિ કડી|આંતરવિકિ કડીઓ}})",
 	"wikibase-unconnectedpages-submit": "પાનાંઓ દર્શાવો",
 	"wikibase-pageswithbadges-submit": "પાનાંઓ દર્શાવો",
 	"wikibase-entityusage-submit": "પાનાંઓ દર્શાવો",

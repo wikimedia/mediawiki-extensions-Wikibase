@@ -50,7 +50,6 @@
 	"wikibase-error-invalid-entity-id": "sisetyimo la’cus taazihan nasulitan a ID [$2]. pisaungay kapahay a ID",
 	"wikibase-error-exceeded-entity-access-limit": "ciwsac sayadah {{WBREPONAME}} kasacacay.",
 	"unconnectedpages": "kasabelih caay masasiket tayza amahicahica tu kasacacay",
-	"wikibase-unconnectedpages-format-row": "(kya kasabelih izaw {{PLURAL:$1|$1 malakuit kamu masasiket}})",
 	"wikibase-unconnectedpages-submit": "paazih  kasabelih",
 	"pageswithbadges": "u sikunpayay kasabelih",
 	"wikibase-pageswithbadges-invalid-id": "$1 caay ku kapahay a ID kasacacay",

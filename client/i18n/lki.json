@@ -52,7 +52,6 @@
 	"wikibase-error-invalid-entity-id": "شناسهٔ واردشده برای سامانه ناشناخته است.لطفاً از یک شناسهٔ موضوع معتبر استفاده کنید.",
 	"wikibase-error-exceeded-entity-access-limit": "تعداد زیادی ورودی مرتبط با {{WBREPONAME}}",
 	"unconnectedpages": "صفحات متصل نشده به آیتم‌ها",
-	"wikibase-unconnectedpages-format-row": "($1  {{PLURAL:$1|پیوند میان‌ویکی|پیوند میان‌ویکی ها}} در صفحه)",
 	"wikibase-unconnectedpages-submit": "نمایش وةڵگةل",
 	"pageswithbadges": "وةڵگةل با درجه‌هایشان",
 	"wikibase-pageswithbadges-invalid-id": "\"$1\" یک شناسهٔ آیتم معتبر نیست.",

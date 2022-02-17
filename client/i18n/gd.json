@@ -46,7 +46,6 @@
 	"wikibase-error-serialize-error": "Cha deach leinn sruth-leanmhainn a dhèanamh dhen dàta.",
 	"wikibase-error-invalid-entity-id": "Chan eil an siostam eòlach air an ID a chuir thu a-steach. Feuch an cleachd thu ID eintiteis dligheach.",
 	"unconnectedpages": "Duilleagan nach eil ceangailte ri nì",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|cheangal|cheangal|ceanglaichean|ceangal}} eadar-cànain air an duilleag)",
 	"wikibase-unconnectedpages-submit": "Seall na duilleagan",
 	"wikibase-pageinfo-entity-id": "ID an nì {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Chan eil gin",

@@ -69,7 +69,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Da yawan \"mw.wikibase.getReferencedEntityId\", har zuwa $2 {{PLURAL: $2 |a yarda}}.",
 	"unconnectedpages": "Shafukan ba'a haɗa su da abubuwan ba",
 	"unconnectedpages-summary": "Wannan shafin yana lissafa shafuka ba tare da wani abin haɗin bayanai ba (a cikin sunaye masu goyan bayan abubuwan da aka haɗa). Ana jera jerin ta hanyar sauko da ID, don a fara jera sabbin shafuka da farko.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL: $1 | mahaɗin harshe | hanyoyin haɗin harshe}} akan shafi)",
 	"wikibase-unconnectedpages-submit": "Nuna shafukan",
 	"pageswithbadges": "Shafuka masu alama",
 	"pageswithbadges-summary": "Wannan shafin yana lissafa shafuka masu alama (misali maƙala mai kyau ko maƙalar da aka nuna). Ana jera jerin ta hanyar sauko ID, don a fara jera sabbin shafuka da farko.",

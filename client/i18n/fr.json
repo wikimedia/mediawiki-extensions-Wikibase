@@ -99,7 +99,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Trop d’appels à « mw.wikibase.getReferencedEntityId », {{PLURAL:$2|$2 seul est autorisé|au plus $2 sont autorisés}}.",
 	"unconnectedpages": "Pages non reliées à un élément",
 	"unconnectedpages-summary": "Cette page répertorie les pages non reliées à un élément de données (dans les espaces de noms qui prennent en charge les éléments connectés). La liste est triée par ID de page décroissant, de sorte que les pages les plus récentes soient listées en premier.",
-	"wikibase-unconnectedpages-format-row": "($1 lien{{PLURAL:$1||s}} inter-langues sur la page)",
 	"wikibase-unconnectedpages-submit": "Afficher les pages",
 	"pageswithbadges": "Pages avec des badges",
 	"pageswithbadges-summary": "Cette page liste les pages avec des badges (par ex. bon article ou article en vedette). La liste est triée par ID de page descendant, de sorte que les pages les plus récentes soient listées en premier.",

@@ -58,7 +58,6 @@
 	"wikibase-error-serialize-error": "Inpusibiłe seriałixar i dati",
 	"wikibase-error-invalid-entity-id": "L'ID \"$2\" no el xé riconosuo dal sistema. Dopara on ID de entità justo.",
 	"unconnectedpages": "Pàjine mija lingansae a ełementi interłengua",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|linganbo interłenguistego|linganbo interłenguisteghi}} in te ła pàjina)",
 	"wikibase-unconnectedpages-submit": "Mostra pàjine",
 	"pageswithbadges": "Pàjine co insegne",
 	"wikibase-pageinfo-entity-usage": "Entità {{WBREPONAME}} doparae inte sta voze",

@@ -60,7 +60,6 @@
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-এর সম্পাদনাগুলি আপনার নজরতালিকায় দেখায়",
 	"wikibase-error-invalid-entity-id": "\"$2\" আইডিটি সিস্টেমের অজানা। দয়া করে একটি বৈধ ভুক্তি আইডি ব্যবহার করুন।",
 	"unconnectedpages": "পাতাসমূহ আইটেমসমূহের সাথে সংযুক্ত হয়নি",
-	"wikibase-unconnectedpages-format-row": "(এই পাতায় $1টি {{PLURAL:$1|আন্তঃউইকি সংযোগ}} রয়েছে)",
 	"wikibase-unconnectedpages-submit": "পাতা দেখাও",
 	"pageswithbadges": "ব্যাজসহ পাতা",
 	"wikibase-pageswithbadges-invalid-id": "$1 কোন বৈধ উপাদান আইডি নয়",

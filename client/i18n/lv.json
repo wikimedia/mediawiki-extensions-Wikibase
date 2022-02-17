@@ -48,7 +48,6 @@
 	"wikibase-error-serialize-error": "Neizdevās serializēt datus.",
 	"wikibase-error-invalid-entity-id": "Sistēmai nav zināms ID \"$2\". Lūdzu, norādi derīgu vienuma ID.",
 	"unconnectedpages": "Vienumiem nepievienotās lapas",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|starpvalodu saites|starpvalodu saite|starpvalodu saites}} šajā lapā)",
 	"wikibase-unconnectedpages-submit": "Rādīt lapas",
 	"wikibase-pageswithbadges-invalid-id": "$1 nav derīgs vienuma ID",
 	"wikibase-pageswithbadges-submit": "Rādīt lapas",

@@ -43,7 +43,6 @@
 	"wikibase-replicationnote": "Opjepaß: Et kann ättlejje Menutte dohre, bes di Änderonge en alle Wikkis aanjezeijsch wääde.",
 	"wikibase-watchlist-show-changes-pref": "Donn Änderonge aan {{WBREPONAME}} en Dinge Oppaßleß zeije.",
 	"wikibase-error-exceeded-entity-access-limit": "Zoh vill Jähjeschtänd vum {{WBREPONAME}} woode affjerohfe.",
-	"wikibase-unconnectedpages-format-row": "(Mer {{PLURAL:$1|han eine Lenk|han $1 Lenks|hann_er kein Lenks}} op ander Schprohche en dä Sigg)",
 	"wikibase-unconnectedpages-submit": "Lohß Jonn!",
 	"wikibase-pageswithbadges-submit": "Sigge aanzeije",
 	"wikibase-pageinfo-entity-id": "Kännong en {{GRAMMAR: Dative | {{WBREPONAME}}}}",

@@ -67,7 +67,6 @@
 	"wikibase-error-exceeded-entity-access-limit": "Terlalu banyak entitas {{WBREPONAME}} yang diakses.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Terlalu banyak panggilan \"mw.wikibase.getReferencedEntityId\", hanya {{PLURAL:$2|diperbolehkan}} paling banyak $2.",
 	"unconnectedpages": "Laman yang belum terhubung ke butir",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interwiki}} pada halaman)",
 	"wikibase-unconnectedpages-submit": "Tampilkan laman",
 	"pageswithbadges": "Laman dengan lencana",
 	"wikibase-pageswithbadges-invalid-id": "$1 bukan penanda butir yang sahih.",

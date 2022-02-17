@@ -75,7 +75,6 @@
 	"wikibase-error-exceeded-entity-access-limit": "S'ha accedit a massa entitats de {{WBREPONAME}}.",
 	"unconnectedpages": "Pàgines no connectades a elements",
 	"unconnectedpages-summary": "Aquesta pàgina llista pàgina sense cap element de dades connectat (en els espais de noms que permeten elements connectats). La llista està ordenada per ID de pàgina descendent, per tal que les pàgines noves es llistin primer.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|enllaç entre llengües|enllaços entre llengües}} a la pàgina)",
 	"wikibase-unconnectedpages-submit": "Mostra les pàgines",
 	"pageswithbadges": "Pàgines amb insígnies",
 	"pageswithbadges-summary": "Aquesta pàgina llista pàgines amb insígnies (p. ex., un article bo o destacat). La llista està ordenada per ID de pàgina descendent, per tal que les pàgines noves es llistin primer.",

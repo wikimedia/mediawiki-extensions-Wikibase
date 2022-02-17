@@ -46,7 +46,6 @@
 	"wikibase-watchlist-show-changes-pref": "Změny {{WBREPONAME}} w twojich wobkedźbowankach pokazać",
 	"wikibase-error-invalid-entity-id": "Zapodaty ID je systemej njeznaty. Prošu wužij płaćiwy entitowy ID.",
 	"unconnectedpages": "Strony, kotrež njejsu ze zapiskami zwjazane",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|mjezyrěčny wotkaz|mjezyrěčnej wotkazaj|mjezyrěcne wotkazy|mjezyrěčnych wotkazow}} na stronje)",
 	"wikibase-unconnectedpages-submit": "Strony pokazać",
 	"wikibase-pageinfo-entity-id": "ID elementa {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Žadyn",

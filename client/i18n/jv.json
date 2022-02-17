@@ -56,7 +56,6 @@
 	"wikibase-error-exceeded-entity-access-limit": "Kakèhan èntitas {{WBREPONAME}} sing diaksès.",
 	"unconnectedpages": "Kaca kang ora nggayut wiji",
 	"unconnectedpages-summary": "Kaca iki mratélakaké kaca-kaca sing tanpa wiji data kagayut (ing jagad aran sing njurung wiji kagayut). Pratélan iku diurutaké miturut ID kaca saka paling anyar supaya kaca-kaca paling anyar kapacak pisanan.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|pranala antarabasa}} ing kaca)",
 	"wikibase-unconnectedpages-submit": "Tuduhaké kaca",
 	"pageswithbadges": "Kaca mawa lancana",
 	"pageswithbadges-summary": "Kaca iki mratélakaké kaca-kaca mawa lancana (contoné artikel apik utawa artikel pilihan). Pratélan iki diurutaké miturut ID kaca paling anyar supaya kaca-kaca paling anyar kapacak pisanan.",

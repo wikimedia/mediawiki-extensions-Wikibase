@@ -70,7 +70,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Nhiều lượt gọi “mw.wikibase.getReferencedEntityId” quá, chỉ cho phép tới $2 lượt gọi.",
 	"unconnectedpages": "Trang không kết nối với khoản mục",
 	"unconnectedpages-summary": "Danh sách này có các trang không có khoản mục dữ liệu được liên kết (trong các không gian tên hỗ trợ khoản mục được kết nối). Danh sách được sắp xếp theo mã ID của trang giảm dần, vì thế các trang mới hơn sẽ được liệt kê trước.",
-	"wikibase-unconnectedpages-format-row": "($1 liên kết ngôn ngữ trên trang)",
 	"wikibase-unconnectedpages-submit": "Xem các trang",
 	"pageswithbadges": "Trang có phù hiệu",
 	"pageswithbadges-summary": "Trang này liệt kê các trang có phù hiệu (ví dụ bài viết tốt hoặc chọn lọc). Danh sách được sắp xếp theo ID trang trở xuống, tức các trang mới nhất xuất hiện ở phía trên.",

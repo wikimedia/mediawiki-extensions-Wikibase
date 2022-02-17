@@ -65,7 +65,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Liiga palju funktsiooni \"mw.wikibase.getReferencedEntityId\" kutseid, {{PLURAL:$2|lubatud}} ainult kuni $2 kutset.",
 	"unconnectedpages": "Üksustega ühendamata leheküljed",
 	"unconnectedpages-summary": "Sellel leheküljel on loetletud leheküljed, mis pole andmeüksusega ühendatud (nimeruumis, kus on ühendatud üksuste tugi). See loend on järjestatud laskuvalt lehekülje identifikaatori järgi, nii et uuemad leheküljed on eespool.",
-	"wikibase-unconnectedpages-format-row": "(leheküljel {{PLURAL:$1|üks keeltevaheline link|$1 keeltevahelist linki}})",
 	"wikibase-unconnectedpages-submit": "Näita lehekülgi",
 	"pageswithbadges": "Äramärkimistega leheküljed",
 	"pageswithbadges-summary": "Siin on loetletud äramärkimistega leheküljed (nt head või eeskujulikud artiklid). Loend on järjestatud laskuvalt lehekülje identifikaatori järgi nii, et uuemad leheküljed on eespool.",

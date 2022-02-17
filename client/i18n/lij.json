@@ -66,7 +66,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Troppi ciammi \"mw.wikibase.getReferencedEntityId\", l'è {{PLURAL:$2|consentio}} solo scin a $2.",
 	"unconnectedpages": "Paggine non conligæ a-i elementi",
 	"unconnectedpages-summary": "Sta paggina a l'elenca e paggine non conesse a 'n elemento dæti (inti namespace che suportan o conligamento tra elementi) Questa lista a l'è amersâ in orde decrescente segondo l'ID da paggina, cosciché e nœuve paggine seggian elencæ pe-e primme.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|conligamento interlengoistego|conligamenti interlengoisteghi}} inta paggina)",
 	"wikibase-unconnectedpages-submit": "Mostra paggine",
 	"pageswithbadges": "Paggine con distintivi",
 	"pageswithbadges-summary": "Sta paggina a l'elenca e paggine con distintivi (prezempio voxe in vedrin-a ò de qualitæ). A lista a l'è amersâ pe ID decrescente, de moddo che e paggine ciù nœuve en e primme.",

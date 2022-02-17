@@ -75,7 +75,6 @@
 	"wikibase-error-exceeded-entity-access-limit": "Za dużo wywołań elementów z Wikidanych.",
 	"unconnectedpages": "Strony niepowiązane z elementami",
 	"unconnectedpages-summary": "Ta strona wymienia strony, które nie są powiązane z elementem z danymi (z przestrzeni nazw obsługujących powiązania z elementami). Ta lista jest sortowana malejąco według ID strony, więc nowsze strony są na początku.",
-	"wikibase-unconnectedpages-format-row": "(zawiera $1 {{PLURAL:$1|odnośnik interwiki|odnośniki interwiki|odnośników interwiki}})",
 	"wikibase-unconnectedpages-submit": "Pokaż strony",
 	"pageswithbadges": "Strony z odznakami",
 	"pageswithbadges-summary": "Ta strona wymienia strony z odznakami (np. dobry artykuł lub artykuł na medal). Ta lista jest sortowana malejąco według ID strony, więc nowsze strony są na początku.",

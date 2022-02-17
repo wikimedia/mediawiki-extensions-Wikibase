@@ -78,7 +78,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "För många anrop till \"mw.wikibase.getReferencedEntityId\", endast upp till $2 {{PLURAL:$2|är tillåtet}}.",
 	"unconnectedpages": "Sidor som inte är anslutna till objekt",
 	"unconnectedpages-summary": "Denna sida listar sidor utan något anslutet dataobjekt (i namnrymder som stöder objekt). Denna sida är sorterad efter fallande sid-ID, så att nyare sidor listas först.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interwikilänk|interwikilänkar}} på sidan)",
 	"wikibase-unconnectedpages-submit": "Visa sidor",
 	"pageswithbadges": "Sidor med märken",
 	"pageswithbadges-summary": "Denna sida listar sidor med märken (t.ex. bra artikel eller utmärkt artikel). Listan är sorterad i fallande sid-ID, så att nyare sidor listas först.",

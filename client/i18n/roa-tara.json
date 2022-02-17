@@ -64,7 +64,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Troppe chiamate a \"mw.wikibase.getReferencedEntityId\", {{PLURAL:$2|conzendite}} sulamende 'nzigne a $2.",
 	"unconnectedpages": "Pàggene none collegate a le eleminde",
 	"unconnectedpages-summary": "Sta pàgene elenghe le pàggene non collegate a 'n'elemende date (jndr'à le namespace ca supportane 'u collegamende 'mbrà eleminde). Ste elenghe jè ordenate in ordine decrescende seconde l'ID d'a pàgene, accussì le vôsce nuève iessene pe prime.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|collegamende|collegaminde}} inderlènghe sus 'a pàgene)",
 	"wikibase-unconnectedpages-submit": "'Ndruche le pàggene",
 	"pageswithbadges": "Pàggene cu le badge",
 	"pageswithbadges-summary": "Jndr'à sta pàgene avènene elengate le pàggene cu distindive (pe esembie vôsce jndr'à vetrine o de qualitate). L'elenghe jè ordenate pe ID decrescende, accussì le pàggene nuève se iacchiane sus a sus.",

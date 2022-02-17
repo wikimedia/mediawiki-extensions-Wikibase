@@ -75,7 +75,6 @@
 	"wikibase-error-exceeded-entity-access-limit": "{{WBREPONAME}} の実体のアクセス数が多すぎます",
 	"unconnectedpages": "項目に接続されていないページ",
 	"unconnectedpages-summary": "このページでは、関連項目のないページが一覧表示されます。(一覧は、関連項目をサポートしている名前空間に限定されています。)この一覧はページIDの降順で並べ替えられており、新しいページほど先頭に来ます。",
-	"wikibase-unconnectedpages-format-row": "(ページ内に $1 {{PLURAL:$1|件の言語間リンク}})",
 	"wikibase-unconnectedpages-submit": "ページを表示",
 	"pageswithbadges": "バッジがあるページ",
 	"pageswithbadges-summary": "このページではバッジ（例えば、秀逸な記事や良質な記事）のついたページを一覧にして表示しています。この一覧はページIDの大きい順に並べており、新しいページが一番上に来ます。",

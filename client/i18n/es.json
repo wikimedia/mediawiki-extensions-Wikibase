@@ -79,7 +79,6 @@
 	"wikibase-error-exceeded-entity-access-limit": "Se accedieron a demasiadas entidades de {{WBREPONAME}}.",
 	"unconnectedpages": "Páginas no conectadas a elementos",
 	"unconnectedpages-summary": "Esta página muestra páginas sin ningún elemento de datos conectado (en los espacios de nombres que admiten elementos conectados). La lista está ordenada por identificador de página de forma descendente, por lo que las páginas más nuevas se muestran primero.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|enlace interlingüístico|enlaces interlingüísticos}} en la página)",
 	"wikibase-unconnectedpages-submit": "Mostrar páginas",
 	"pageswithbadges": "Páginas con insignias",
 	"pageswithbadges-summary": "Esta página muestra las páginas con insignias (p. ej., artículo bueno o artículo destacado). La lista está ordenada por identificador de página de forma descendente, por lo que las páginas nuevas se muestran primero.",

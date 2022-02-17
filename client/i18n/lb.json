@@ -54,7 +54,6 @@
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-Ännerungen an Ärer Iwwerwaachungslëscht weisen",
 	"wikibase-error-invalid-entity-id": "D'ID \"$2\" déi ass am System net bekannt. Benotzt wgl. eng valabel ID.",
 	"unconnectedpages": "Säiten déi net mat Elementer verbonn sinn",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|Link mat enger anerer Sprooch|Linke mat anere Sproochen}} op der Säit)",
 	"wikibase-unconnectedpages-submit": "Säite weisen",
 	"pageswithbadges": "Säite mat Badgen",
 	"wikibase-pageswithbadges-invalid-id": "$1 ass keng valabel ID vun engem Element",

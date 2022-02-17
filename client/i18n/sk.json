@@ -59,7 +59,6 @@
 	"wikibase-replicationnote": "Môže trvať niekoľko minút, než sa zmeny prejavia na všetkých wiki.",
 	"wikibase-watchlist-show-changes-pref": "Zobraziť zmeny {{grammar:genitív|{{WBREPONAME}}}} v sledovaných stránkach",
 	"unconnectedpages": "Stránky neprepojené na položky",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|medzijazykový odkaz|medzijazykové odkazy|medzijazykových odkazov}})",
 	"wikibase-unconnectedpages-submit": "Zobraziť stránky",
 	"pageswithbadges": "Články s medailou",
 	"pageswithbadges-summary": "Táto stránka obsahuje zoznam stránok s udelenou medailou (napr. dobrý článok alebo najlepší článok). Radený je zostupne podľa ID stránky, takže najnovšie stránky sú zobrazené ako prvé.",

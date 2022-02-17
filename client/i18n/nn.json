@@ -56,7 +56,6 @@
 	"wikibase-error-serialize-error": "Kunne ikkje serialisera data",
 	"wikibase-error-invalid-entity-id": "Den oppgjevne ID-en er ukjend for systemet. Bruk ein gild einings-ID.",
 	"unconnectedpages": "Sider som ikkje er kopla til element",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|mellomspråkleg lenkje|mellomspråklege lenkjer}} på sida)",
 	"wikibase-unconnectedpages-submit": "Vis sider",
 	"wikibase-pageswithbadges-submit": "Vis sider",
 	"entityusage": "Einingsbruk",

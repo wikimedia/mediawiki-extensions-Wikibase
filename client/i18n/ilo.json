@@ -46,7 +46,6 @@
 	"wikibase-error-serialize-error": "Napaay a naserialisado ti datos.",
 	"wikibase-error-invalid-entity-id": "Ti ID a naikabil ket di ammo ti sistema. Pangngaasi nga agusar ti umiso nga entidad ti ID.",
 	"unconnectedpages": "Dagiti panid a saan a naikapet kadagiti banag",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|a silpo ti pagsasao|a silsilpo ti pagsasao}} iti daytoy a panid)",
 	"wikibase-unconnectedpages-submit": "Ipakita dagiti panid",
 	"wikibase-pageinfo-entity-id": "ID ti Banag ti {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Awan",

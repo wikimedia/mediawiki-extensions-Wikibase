@@ -72,7 +72,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Zu viele Aufrufe von „mw.wikibase.getReferencedEntityId“, nur bis zu $2 {{PLURAL:$2|ist|sind}} erlaubt.",
 	"unconnectedpages": "Seiten, die nicht mit Objekten verbunden sind",
 	"unconnectedpages-summary": "Diese Seite listet Seiten ohne verbundenes Datenobjekt auf (in Namensräumen, die verbundene Objekte unterstützen). Die Liste wird absteigend nach der Seitenkennung sortiert, so dass neue Seiten zuerst aufgeführt werden.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|Interlanguagelink|Interlanguagelinks}} auf der Seite)",
 	"wikibase-unconnectedpages-submit": "Seiten anzeigen",
 	"pageswithbadges": "Seiten mit Auszeichnungen",
 	"pageswithbadges-summary": "Diese Seite listet Seiten mit Auszeichnungen auf (z.&nbsp;B. lesenswerter oder exzellenter Artikel). Die Liste ist absteigend nach Seitenkennung sortiert, so dass neuere Seiten zuerst aufgelistet werden.",

@@ -54,7 +54,6 @@
 	"wikibase-watchlist-show-changes-pref": "თქვენი კონტროლის სიაში {{grammar:genitive|{{WBREPONAME}}}} რედაქტირებების ჩვენება",
 	"wikibase-error-invalid-entity-id": "მითითებული ID სისტემისთვის უცნობია. გთხოვთ, გამოიყენოთ მოქმედი ID.",
 	"unconnectedpages": "ელემენტებთან დაუკავშირებელი გვერდები",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interlanguage link|ენათშორისი ბმული}} გვერდზე)",
 	"wikibase-unconnectedpages-submit": "გვერდების ჩვენება",
 	"pageswithbadges": "გვერდი ნიშნებთან ერთად",
 	"pageswithbadges-summary": "ეს გვერდი შეიცავს გვერდების სიას ნიშნებთან ერთად (მაგალითად, კარგი ან რჩეული სტატია). სია დახარისხებულია ID გვერდების შემცირებით, ამიტომ ახალი გვერდები მითითებულია პირველი.",

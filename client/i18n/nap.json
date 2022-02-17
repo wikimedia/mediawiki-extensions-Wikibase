@@ -55,7 +55,6 @@
 	"wikibase-error-exceeded-entity-access-limit": "Troppe entità {{WBREPONAME}} cu na trasuta.",
 	"unconnectedpages": "Paggene ca nun fossero culegate a elemente",
 	"unconnectedpages-summary": "Sta paggena elenca 'e paggene ca nun so cullegate a n'elemento 'e data (dint' 'o namespace ca supporta 'o cullegamento nfra elemente) St'elenco è ordinato 'n ordine dicrescente a sicondo l'ID 'e paggena, picciò 'e paggene nuove sarranno elencate pe' primma.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|cullegamento interlinguistico|cullegamente interlinguistice}} dint' 'a paggena)",
 	"wikibase-unconnectedpages-submit": "Mmusta pagene",
 	"pageswithbadges": "Paggen cu na distinzione",
 	"pageswithbadges-summary": "Sta paggena elencase na paggena cu distinziona (e.g. articulo buono o articulo 'n vetrina). L'elenco s'ordinasse 'n maniera descendente a ll'ID 'e paggena, allora 'e paggene nuove s'alencano primma.",

@@ -87,7 +87,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "「mw.wikibase.getReferencedEntityId」呼叫太多次，僅{{PLURAL:$2|允許}}最多 $2  次。",
 	"unconnectedpages": "頁面未連結至任何項目",
 	"unconnectedpages-summary": "此頁面列舉未連結至資料項的頁面（在支援連結項的命名空間中）。列表依頁面ID遞減排序，因此新頁面會首先被列出。",
-	"wikibase-unconnectedpages-format-row": "(該頁面有 $1 個跨語言連結)",
 	"wikibase-unconnectedpages-submit": "顯示頁面",
 	"pageswithbadges": "含有徽章的頁面",
 	"pageswithbadges-summary": "該頁面列出擁有徽章（例如優良條目或典範條目）之頁面。列表按照頁面 ID 遞減排序，因此新頁面會首先列出。",

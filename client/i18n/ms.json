@@ -55,7 +55,6 @@
 	"wikibase-error-serialize-error": "Data gagal disirikan",
 	"wikibase-error-invalid-entity-id": "ID \"$2\" itu tidak dikenali oleh sistem. Sila gunakan ID entiti yang sah.",
 	"unconnectedpages": "Laman yang tidak bersambung dengan perkara",
-	"wikibase-unconnectedpages-format-row": "($1 pautan antara bahasa pada halaman ini)",
 	"wikibase-unconnectedpages-submit": "Pergi",
 	"pageswithbadges": "Laman dengan lencana",
 	"wikibase-pageswithbadges-badge": "Lencana:",

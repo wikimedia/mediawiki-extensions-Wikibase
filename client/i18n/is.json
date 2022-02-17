@@ -61,7 +61,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Of mörg köll á \"mw.wikibase.getReferencedEntityId\", allt að $2 {{PLURAL:$2|leyfð}}.",
 	"unconnectedpages": "Síður sem tengjast ekki hlutum",
 	"unconnectedpages-summary": "Þessi síða sýnir síður sem tengjast ekki hlut (í nafnrýmum sem styðja tengingu við hluti). Listanum er raðað eftir auðkenni síðunnar, svo að nýjar síður eru fyrstar í röðinni.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|tungumálatengill|tungumálatenglar}} á síðunni)",
 	"wikibase-unconnectedpages-submit": "Sýna síður",
 	"pageswithbadges": "Síður með merkjum",
 	"pageswithbadges-summary": "Þessi síða sýnir síður með merki (t.d. gæðagreinar eða úrvalsgreinar). Listanum er raðað eftir auðkenni síðunnar, svo að nýjar síður eru fyrstar í röðinni.",

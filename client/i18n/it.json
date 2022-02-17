@@ -78,7 +78,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Troppe chiamate \"mw.wikibase.getReferencedEntityId\", {{PLURAL:$2|consentita|consentite}} solo fino a $2.",
 	"unconnectedpages": "Pagine non collegate agli elementi",
 	"unconnectedpages-summary": "Questa pagina elenca le pagine non connesse ad un elemento data (nei namespace che supportano il collegamento tra elementi) Questa lista è ordinata in ordine decrescente secondo l'ID della pagina, cosicché le nuove voci siano elencate per prime.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|collegamento interlinguistico|collegamenti interlinguistici}} nella pagina)",
 	"wikibase-unconnectedpages-submit": "Mostra pagine",
 	"pageswithbadges": "Pagine con distintivi",
 	"pageswithbadges-summary": "In questa pagina vengono elencate le pagine con distintivi (ad esempio voci in vetrina o di qualità). La lista è ordinata per ID decrescente, quindi le pagine più recenti appariranno in alto.",

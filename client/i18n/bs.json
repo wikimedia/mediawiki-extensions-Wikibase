@@ -58,7 +58,6 @@
 	"wikibase-error-serialize-error": "Neuspješna serijalizacija podataka",
 	"wikibase-error-invalid-entity-id": "Uneseni ID \"$2\" nije poznat u sistemu. Koristite ispravan ID.",
 	"unconnectedpages": "Stranice koje nisu povezane sa stavkama",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|međuwiki veza|međuwiki veze|međuwiki veza}} na stranici)",
 	"wikibase-unconnectedpages-submit": "Prikaži stranice",
 	"pageswithbadges": "Stranice sa značkama",
 	"pageswithbadges-summary": "Ova stranica prikazuje stranice sa značkama (dobar članak, odabran članak itd). Najnovije stranice uvijek su prikazane prve.",

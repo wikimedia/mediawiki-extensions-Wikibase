@@ -65,7 +65,6 @@
 	"wikibase-error-invalid-entity-id": "ID „$2” je nepoznat sistemu. Koristite validan ID entiteta.",
 	"unconnectedpages": "Stranice koje nisu povezane sa stavkama",
 	"unconnectedpages-summary": "Ova posebna stranica prikazuje stranice koje nisu povezane sa stavkama (za imenske prostore koji to podržavaju). Najnovije stranice su uvek prikazane prve.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|međujezička veza|međujezičkih veza}} na stranici)",
 	"wikibase-unconnectedpages-submit": "Prikaži stranice",
 	"pageswithbadges": "Stranice sa značkama",
 	"pageswithbadges-summary": "Ova posebna stranica prikazuje stranice sa značkama (dobar članak, sjajan članak i sl.). Najnovije stranice su uvek prikazane prve.",

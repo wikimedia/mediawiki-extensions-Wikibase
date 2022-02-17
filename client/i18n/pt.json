@@ -87,7 +87,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Há demasiadas chamadas a \"mw.wikibase.getReferencedEntityId\"; {{PLURAL:$2|só é permitida|não são permitidas mais de}} $2.",
 	"unconnectedpages": "Páginas sem hiperligações a elementos associados",
 	"unconnectedpages-summary": "Esta página lista as páginas sem nenhum elemento de dados ligado (em espaços nominais que suportam elementos ligados).  A lista é apresentada por ordem decrescente do identificador da página, portanto as páginas mais recentes são mostradas primeiro.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|hiperligação|hiperligações}} interlínguas na página)",
 	"wikibase-unconnectedpages-submit": "Mostrar páginas",
 	"pageswithbadges": "Páginas com emblemas",
 	"pageswithbadges-summary": "Esta página lista páginas com emblemas (ex: artigo bom ou artigo destacado). A lista é apresentada por ordem decrescente do identificador da página, portanto as páginas mais recentes são mostradas primeiro.",

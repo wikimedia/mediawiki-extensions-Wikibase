@@ -71,7 +71,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Shumë thirrje \"mw.wikibase.getReferencedEntityId\", janë të {{PLURAL:$2|lejuara}} vetëm deri në $2.",
 	"unconnectedpages": "Faqe të palidhura te objekte",
 	"unconnectedpages-summary": "Kjo faqe paraqet faqe pa objekt të dhënash të lidhur (në emërhapësira që mbulojnë objekte të lidhur). Lista renditet në rend zbritës sipas ID-sh faqesh, që së pari të dukem faqet më të reja.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|lidhje ndërgjuhësore|lidhje ndërgjuhësore}} në faqe)",
 	"wikibase-unconnectedpages-submit": "Shfaqi faqet",
 	"pageswithbadges": "Faqe me stema",
 	"pageswithbadges-summary": "Kjo faqe paraqet faqe me stema (p.sh., artikull të mirë ose artikull të zgjedhur). Lista renditet në rend zbritës sipas ID-sh faqesh, që së pari të dukem faqet më të reja.",

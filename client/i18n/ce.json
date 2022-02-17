@@ -54,7 +54,6 @@
 	"wikibase-error-serialize-error": "Хаамашна сериализаци йан цаделира.",
 	"wikibase-error-invalid-entity-id": "Йазйина идентификатор системин йоьвзуш йац. Лелайе хӀинца лелаш йолучарех цхьаъ.",
 	"unconnectedpages": "Элементех тесна йоцу агӀонаш",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|хьажорг}} йу)",
 	"wikibase-unconnectedpages-submit": "Гайта агӀонаш",
 	"pageswithbadges": "Билгалонаш йолу агӀонаш",
 	"pageswithbadges-summary": "ХӀокху агӀонгахь йу билгалйина агӀонаш (масала, Дика йа Хаьржина). Керла агӀонаш хьалха гойтуш йу.",

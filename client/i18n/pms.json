@@ -48,7 +48,6 @@
 	"wikibase-error-serialize-error": "Falì a serialisé ij dàit.",
 	"wikibase-error-invalid-entity-id": "L'ID butà a l'é nen conossù dal sistema. Për piasì, ch'a buta n'ID d'entità bon.",
 	"unconnectedpages": "Pàgine nen gropà a d'element",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|liura|liure}} antërlenga ant la pàgina)",
 	"wikibase-unconnectedpages-submit": "Ancaminé",
 	"wikibase-pageinfo-entity-id": "ID ëd l'element Wikidata",
 	"wikibase-pageinfo-entity-id-none": "Gnun",

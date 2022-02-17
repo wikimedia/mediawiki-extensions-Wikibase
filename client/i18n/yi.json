@@ -50,7 +50,6 @@
 	"wikibase-watchlist-show-changes-pref": "ווייזן {{WBREPONAME}}־רעדאקטירונגען אין אייער אויפפאסונג־ליסטע",
 	"wikibase-error-invalid-entity-id": "דער ID  \"$2\" איז אומבאוואוסט צו דער סיסטעם. זײַט אזוי גוט ניצט א גילטיקן אידענטיפיצירער.",
 	"unconnectedpages": "בלעטער נישט פארבונדן מיט אביעקטן",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|אינטערשפראך לינק|אינטערשפראך לינקען}} אויפן בלאט)",
 	"wikibase-unconnectedpages-submit": "ווייזן בלעטער",
 	"pageswithbadges": "בלעטער מיט עמבלעמען",
 	"wikibase-pageswithbadges-invalid-id": "$1 איז נישט קיין גילטיקער אביעקט אידענטיפיצירער.",

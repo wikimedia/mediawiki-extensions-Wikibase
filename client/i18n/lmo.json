@@ -64,7 +64,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Trope ciamade \"mw.wikibase.getReferencedEntityId\", {{PLURAL:$2|permetuda|permetude}} doma fina a $2.",
 	"unconnectedpages": "Pagine minga conligade ai element",
 	"unconnectedpages-summary": "Questa pagina chì la fà la lista di pagine minga conesse a un element dati (in di spazzi di nom che suporten el conligament infra i element). Questa lista chì l'è ordinanda del pussee grand al pussée piccol adree a l'ID de la pagina, de manera che i vos noeuve comparen pussee per prime.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|conligament interlinguistegh}} in la pagina)",
 	"wikibase-unconnectedpages-submit": "Mostra pagine",
 	"pageswithbadges": "Pagine con distintiv",
 	"pageswithbadges-summary": "In questa pagina chì gh'è la lista di pagine con distintivi (per esempi vos in vetrina o de qualità). La lista in ordin segond l'ID del pussee grand al pusse piccol, donca i pagine pussee recent comparen dessoravia.",

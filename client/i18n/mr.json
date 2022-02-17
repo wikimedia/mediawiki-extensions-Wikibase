@@ -59,7 +59,6 @@
 	"wikibase-error-exceeded-entity-access-limit": "खूपसाऱ्या {{WBREPONAME}} अस्तित्वांवर पोहोच.",
 	"unconnectedpages": "कलमांशी न जोडल्या गेलेली पाने",
 	"unconnectedpages-summary": "हे पान (संलग्नीकरणास आधारभूत असणाऱ्या नामविश्वातील)संलग्न नसलेल्या डाटाकलमांची यादी करते.ही यादी उतरत्या पान-ओळखणीनुसार(descending page ID) पृथक केल्या गेली आहे,जेणेकरुन नविनतम पाने यादीत वर आहेत.",
-	"wikibase-unconnectedpages-format-row": "(या पानावरील {{PLURAL:$1|आंतरभाषिक दुवा|आंतरभाषिक दुवे}} $1)",
 	"wikibase-unconnectedpages-submit": "पाने दाखवा",
 	"pageswithbadges": "बिल्ला (बॅजेस) असलेली पाने",
 	"pageswithbadges-summary": "या पानात, बिल्ले असणाऱ्या पानांची यादी आहे(उदा.-चांगला लेख किंवा विशेष लेख). ही यादी उतरत्या पान-ओळखणीनुसार(descending page ID) पृथक केल्या गेली आहे,जेणेकरुन नविनतम पाने यादीत वर आहेत.",

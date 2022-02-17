@@ -91,7 +91,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "调用了太多次“mw.wikibase.getReferencedEntityId”，只{{PLURAL:$2|允许}}最多$2次。",
 	"unconnectedpages": "未连接项目的页面",
 	"unconnectedpages-summary": "此页面列出了没有连接数据项的页面（在支持连接项的命名空间中）。该列表按页面ID降序排序，以便首先列出较新的页面。",
-	"wikibase-unconnectedpages-format-row": "（该页面有$1个{{PLURAL:$1|跨语言链接}}）",
 	"wikibase-unconnectedpages-submit": "显示页面",
 	"pageswithbadges": "有徽章的页面",
 	"pageswithbadges-summary": "此页面列举了有徽章（例如优良条目或典范条目）的页面。列表按页面ID递减排序，这样最新页面会首先列出。",

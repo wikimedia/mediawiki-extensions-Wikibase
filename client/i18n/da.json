@@ -59,7 +59,6 @@
 	"wikibase-error-serialize-error": "Serialisering af data mislykkkedes",
 	"wikibase-error-invalid-entity-id": "Den indtastede ID \"$2\" er ukendt i systemet. Anvend venligst en gyldig ID.",
 	"unconnectedpages": "Sider, der ikke er forbundet til emner",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|sproghenvisning|sproghenvisninger}} på siden)",
 	"wikibase-unconnectedpages-submit": "Vis sider",
 	"pageswithbadges": "Sider med mærker",
 	"wikibase-pageswithbadges-badge": "Mærke:",

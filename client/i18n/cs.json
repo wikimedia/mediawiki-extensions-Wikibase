@@ -73,7 +73,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Příliš mnoho volání „mw.wikibase.getReferencedEntityId“, {{PLURAL:$2|dovoleno|dovolena|dovoleno}} nejvýše $2.",
 	"unconnectedpages": "Stránky nepropojené s položkou",
 	"unconnectedpages-summary": "Tato stránka obsahuje seznam stránek, které nejsou propojeny s datovou položkou (ve jmenných prostorech, které toto propojení umožňují). Seznam je seřazen sestupně podle ID stránky, takže novější stránky se zobrazují první.",
-	"wikibase-unconnectedpages-format-row": "(stránka obsahuje $1 {{PLURAL:$1|mezijazykový odkaz|mezijazykové odkazy|mezijazykových odkazů}})",
 	"wikibase-unconnectedpages-submit": "Zobrazit stránky",
 	"pageswithbadges": "Stránky s odznaky",
 	"pageswithbadges-summary": "Tato stránka obsahuje seznam stránek s odznaky (např. dobrý článek nebo nejlepší článek). Je seřazený sestupně podle ID stránky, takže novější stránky jsou zobrazeny jako první.",

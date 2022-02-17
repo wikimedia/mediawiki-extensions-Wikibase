@@ -66,7 +66,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Túl sok „mw.wikibase.getReferencedEntityId” hívás, legfeljebb $2 engedélyezett.",
 	"unconnectedpages": "{{WBREPONAME}}-hivatkozás nélküli lapok",
 	"unconnectedpages-summary": "Ez a lap listázza azokat a lapokat, amik nincsenek összekapcsolva {{WBREPONAME}}-elemekkel (azokban a névterekben, amik támogatják ezt). A lista lapazonosító szerint csökkenő sorrendben van, így a legújabb lapok vannak felül.",
-	"wikibase-unconnectedpages-format-row": "($1 nyelvközi hivatkozás a lapon)",
 	"wikibase-unconnectedpages-submit": "Lapok megjelenítése",
 	"pageswithbadges": "Lapok jelvényekkel",
 	"pageswithbadges-summary": "A jelvényekkel (például jó vagy kiemelt szócikk minősítéssel) rendelkező lapok listája. A lista a lapazonosítók alapján csökkenő sorrendben van rendezve, tehát az újabb lapok vannak előbb.",

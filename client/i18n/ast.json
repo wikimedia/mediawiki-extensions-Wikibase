@@ -66,7 +66,6 @@
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Demasiaes llamaes \"mw.wikibase.getReferencedEntityId\", {{PLURAL:$2|permítese|permítense}} sólo un máximu de $2.",
 	"unconnectedpages": "Páxines nun coneutaes con elementos",
 	"unconnectedpages-summary": "Esta páxina ye una llista de páxines sin nengún elementu de datos conectáu (en espacios de nomes qu'almiten elementos coneutaos). La llista ta ordenada por ID de páxina descendente, de mou que les páxines más nueves apaecen primero.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|enllaz interllingüísticu|enllaces interllingüísticos}} na páxina)",
 	"wikibase-unconnectedpages-submit": "Amosar páxines",
 	"pageswithbadges": "Páxines con insinies",
 	"pageswithbadges-summary": "Esta páxina amuesa les páxines con insinies (p. ex., artículu bonu o artículu destacáu). La llista ta ordenada por identificador de páxina descendente, polo que les páxines nueves amuésense primero.",

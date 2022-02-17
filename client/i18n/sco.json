@@ -56,7 +56,6 @@
 	"wikibase-error-exceeded-entity-access-limit": "Too mony {{WBREPONAME}} entities accessed.",
 	"unconnectedpages": "Pages nae connectit tae items",
 	"unconnectedpages-summary": "This page leets pages wi no connectit data item (in namespaces that support connectit items). The leet is sortit bi descendin page ID, so that newer pages are leetit first.",
-	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interlied link|interleid links}} oan the page)",
 	"wikibase-unconnectedpages-submit": "Shaw pages",
 	"pageswithbadges": "Pages wi badges",
 	"pageswithbadges-summary": "This page leets pages wi badges (e.g. guid airticle or featurt airticle). The leet is sortit bi descendin page ID, so that newer pages are leetit first.",
