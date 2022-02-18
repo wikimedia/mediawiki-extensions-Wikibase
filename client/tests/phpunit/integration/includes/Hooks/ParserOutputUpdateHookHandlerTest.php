@@ -158,6 +158,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'languageLinkAllowedSiteGroups' => [ 'wikipedia' ],
 			'namespaces' => [ NS_MAIN, NS_CATEGORY ],
 			'otherProjectsLinks' => [ 'commonswiki' ],
+			'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH,
 		];
 
 		return new SettingsArray( $defaults );
@@ -328,6 +329,8 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$this->assertEquals( $expectedItem, $parserOutput->getPageProperty( 'wikibase_item' ) );
+		$this->assertFalse( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
+
 		$this->assertLanguageLinks( $expectedLanguageLinks, $parserOutput );
 		$this->assertSisterLinks( $expectedSisterLinks, $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
 
@@ -352,6 +355,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
 		$this->assertFalse( $parserOutput->getPageProperty( 'wikibase_item' ) ?? false ); // T301915
+		$this->assertSame( NS_MAIN, $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
 
 		$this->assertSame( [], $parserOutput->getLanguageLinks() );
 		$this->assertSame( [], $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
@@ -369,6 +373,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
 		$this->assertFalse( $parserOutput->getPageProperty( 'wikibase_item' ) ?? false ); // T301915
+		$this->assertFalse( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) ?? false ); // T301915
 
 		$this->assertSame( [], $parserOutput->getLanguageLinks() );
 		$this->assertNull( $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
@@ -413,6 +418,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
 		$this->assertEquals( $itemId, $parserOutput->getPageProperty( 'wikibase_item' ) );
+		$this->assertFalse( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
 	}
 
 	private function assertLanguageLinks( $links, ParserOutput $parserOutput ) {
@@ -459,7 +465,8 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$mockRepo,
 			$mockRepo,
 			$this->newUsageAccumulatorFactory(),
-			$settings->getSetting( 'siteGlobalID' )
+			$settings->getSetting( 'siteGlobalID' ),
+			$settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' )
 		);
 	}
 
