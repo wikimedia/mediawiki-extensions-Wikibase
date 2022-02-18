@@ -329,7 +329,8 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$this->assertEquals( $expectedItem, $parserOutput->getPageProperty( 'wikibase_item' ) );
-		$this->assertFalse( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
+		// T301915
+		$this->assertFalse( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) ?? false );
 
 		$this->assertLanguageLinks( $expectedLanguageLinks, $parserOutput );
 		$this->assertSisterLinks( $expectedSisterLinks, $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
@@ -418,7 +419,8 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
 		$this->assertEquals( $itemId, $parserOutput->getPageProperty( 'wikibase_item' ) );
-		$this->assertFalse( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
+		// T301915
+		$this->assertFalse( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) ?? false );
 	}
 
 	private function assertLanguageLinks( $links, ParserOutput $parserOutput ) {
