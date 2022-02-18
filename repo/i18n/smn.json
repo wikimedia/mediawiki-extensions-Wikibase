@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Seipinne",
 			"Trondtr",
 			"Yupik"
 		]
@@ -32,5 +33,6 @@
 	"wikibase-newentity-language": "Kielâ:",
 	"wikibase-newentity-label": "Nommâ:",
 	"wikibase-setlabel-label": "Nommâ:",
-	"wikibase-setlabeldescriptionaliases-label-label": "Nommâ:"
+	"wikibase-setlabeldescriptionaliases-label-label": "Nommâ:",
+	"wikibase-listdatatypes-multilingualtext-head": "Maaŋgâkielâlâš tekstâ"
 }
