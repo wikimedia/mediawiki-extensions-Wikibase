@@ -2,11 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"AC Krah",
+			"Afia360",
 			"Robertjamal12"
 		]
 	},
 	"wikibase-edit": "sesa",
 	"wikibase-add": "fa ka ho",
+	"wikibase-label-empty": "Ahyɛnsodeɛ biara nni hɔ",
 	"wikibase-description-empty": "Nkyerɛkyerɛmu biara nni hɔ",
 	"wikibase-sitelinks-special": "Beaɛ foforɔ"
 }
