@@ -52,6 +52,6 @@ class NonExistingEntityIdHtmlBrokenLinkFormatter extends NonExistingEntityIdHtml
 			'class' => 'new'
 		];
 		$messageSection = $this->getUndefinedInfoMessage( $entityId );
-		return Html::rawElement( 'a', $attributes, $entityId->getSerialization() ) . $messageSection;
+		return Html::element( 'a', $attributes, $entityId->getSerialization() ) . $messageSection;
 	}
 }
