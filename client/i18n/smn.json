@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Trondtr",
-			"Yupik"
+			"Yupik",
+			"Seipinne"
 		]
 	},
 	"tooltip-t-wikibase": "Liŋkkâ ovtâstittum kuávdáštiätuvuárhá čuosâttâhân",
@@ -17,6 +18,7 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Čievâ",
 	"wikibase-rc-hide-wikidata-show": "Čääiti",
+	"wikibase-rc-show-wikidata-pref": "Čääiti {{WBREPONAME}}-hammiimijd vorâs nubástusâin",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-editistem",
 	"wikibase-unconnectedpages-submit": "Čääiti siijđoid",
