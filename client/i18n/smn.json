@@ -2,21 +2,27 @@
 	"@metadata": {
 		"authors": [
 			"Trondtr",
-			"Yupik"
+			"Yupik",
+			"Seipinne"
 		]
 	},
 	"tooltip-t-wikibase": "Liŋkkâ ovtâstittum kuávdáštiätuvuárhá čuosâttâhân",
 	"wikibase-comment-update": "{{WBREPONAME}}-kohdetta muttám",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|nubástus|nubástussâd}}",
 	"wikibase-dataitem": "{{WBREPONAME}}-čuosâttâh",
 	"wikibase-editlinks": "Hammii liiŋkâid",
 	"wikibase-editlinkstitle": "Hammii kielâikoskâsijd liiŋkâid",
 	"wikibase-addlinkstitle": "Lasseet kielâikoskâsijd liiŋkâid",
 	"wikibase-linkitem-addlinks": "Lasseet liiŋkâid",
+	"wikibase-linkitem-title": "Lasseet liiŋkâ siijđon",
+	"wikibase-linkitem-linkpage": "Lasseet liiŋkâ siijđon",
+	"wikibase-linkitem-selectlink": "Valjii siijđoh já siijđo, mon liiŋkâ halijdah lasettiđ taan siijđon.",
 	"wikibase-linkitem-input-site": "Kielâ:",
 	"wikibase-linkitem-input-page": "Sijđo:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Čievâ",
 	"wikibase-rc-hide-wikidata-show": "Čääiti",
+	"wikibase-rc-show-wikidata-pref": "Čääiti {{WBREPONAME}}-hammiimijd vorâs nubástusâin",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-editistem",
 	"wikibase-unconnectedpages-submit": "Čääiti siijđoid",

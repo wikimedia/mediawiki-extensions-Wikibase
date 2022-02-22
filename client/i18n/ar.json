@@ -127,7 +127,7 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|اتصال|اتصالات}} مع {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "أخطرني عندما يقوم شخص ما بتوصيل صفحة {{GENDER:|أنشأتها}} لعنصر {{WBREPONAME}}.",
 	"notification-header-page-connection": "الصفحة <strong>$3</strong> تم {{GENDER:$2|ربطها}} ب{{PLURAL:$4|-1=a {{WBREPONAME}} item|العنصر {{WBREPONAME}} $4}}، حيث يمكن جمع البيانات ذات الصلة بالموضوع.",
-	"notification-bundle-header-page-connection": "<strong>$3</strong> و{{PLURAL:$4|صفحة أخرى|$4 صفحات أخرى|100=99+ صفحات أخرى}} تم {{GENDER:$2|ربطها}} ب{{WBREPONAME}} عناصر، حيث يمكن جمع البيانات ذات الصلة بالمواضيع.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> و{{PLURAL:$4|صفحة أخرى|$4 صفحات أخرى|100=99+ صفحات أخرى}} تم {{GENDER:$2|ربطها}} بعناصر {{WBREPONAME}}، حيث يمكن جمع البيانات ذات الصلة بالمواضيع.",
 	"notification-link-text-view-item": "{{GENDER:$1|اعرض}} العنصر",
 	"notification-subject-page-connection": "الصفحة على {{SITENAME}} التي قمت {{GENDER:$3|بإنشائها}} تم {{GENDER:$2|وصلها}} إلى عنصر {{WBREPONAME}}",
 	"unresolved-property-category": "الصفحات بخصائص غير محلولة",
