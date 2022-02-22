@@ -570,6 +570,7 @@
 	},
 	"AutoloadNamespaces": {
 		"Wikibase\\Repo\\": "repo/includes/",
+		"Wikibase\\Repo\\RestApi\\": "repo/rest-api/src/",
 		"Wikibase\\Lib\\": "lib/includes/",
 		"Wikibase\\Lib\\FederatedProperties\\": "lib/packages/wikibase/federated-properties/src/",
 		"Wikibase\\Lib\\Changes\\": "lib/packages/wikibase/changes/src/",
@@ -585,6 +586,7 @@
 		"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes/",
 		"Wikibase\\Repo\\Tests\\Maintenance\\": "repo/tests/phpunit/maintenance/",
 		"Wikibase\\Repo\\Tests\\Unit\\": "repo/tests/phpunit/unit/",
+		"Wikibase\\Repo\\Tests\\RestApi\\": "repo/rest-api/tests/phpunit/",
 		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
 		"Wikibase\\Lib\\Tests\\Changes\\": "lib/packages/wikibase/changes/tests/",
 		"Wikibase\\DataModel\\Fixtures\\": "lib/packages/wikibase/data-model/tests/fixtures/",

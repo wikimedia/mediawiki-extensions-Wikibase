@@ -33,6 +33,7 @@ $cfg['directory_list'] = array_merge(
 		'data-access/src',
 		'client/includes',
 		'repo/includes',
+		'repo/rest-api/src',
 		'lib/includes',
 		'client/maintenance',
 		'repo/maintenance',
