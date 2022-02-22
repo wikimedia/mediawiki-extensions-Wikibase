@@ -365,6 +365,7 @@
 	"wikibase-api-inconsistent-site": "Terdeteksi situs yang tidak konsisten.",
 	"wikibase-api-invalid-property-id": "ID Atribut tidak sah.",
 	"wikibase-api-invalid-entity-id": "ID entitas tidak sah.",
+	"wikibase-api-no-data": "Tidak ada data untuk dioperasikan.",
 	"wikibase-api-no-external-page": "Situs klien eksternal \"$1\" tidak menyediakan informasi halaman untuk halaman \"$2\".",
 	"wikibase-api-nosuchrevid": "Tidak ditemukan revisi dengan ID ini.",
 	"wikibase-api-no-such-claim": "Tidak ditemukan klaim seperti itu.",
