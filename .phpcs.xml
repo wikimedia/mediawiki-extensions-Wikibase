@@ -131,6 +131,10 @@
 		</properties>
 	</rule>
 
+	<rule ref="repo/rest-api/ruleset.xml">
+		<include-pattern>repo/rest-api</include-pattern>
+	</rule>
+
 	<file>.</file>
 	<arg name="extensions" value="php" />
 	<arg name="encoding" value="UTF-8" />
