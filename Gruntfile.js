@@ -22,7 +22,8 @@ module.exports = function ( grunt ) {
 				'!client/data-bridge/**',
 				'!lib/resources/wikibase-api/**',
 				'!lib/packages/wikibase/*/tests/**/*.json',
-				'!docs/**'
+				'!docs/**',
+				'!repo/rest-api/dist/**'
 			]
 		},
 		stylelint: {

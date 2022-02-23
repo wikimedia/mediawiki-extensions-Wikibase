@@ -1,0 +1,379 @@
+{
+	"Item": {
+		"type": "object",
+		"properties": {
+			"id": {
+				"type": "string"
+			},
+			"type": {
+				"type": "string"
+			},
+			"labels": {
+				"$ref": "#/Labels"
+			},
+			"descriptions": {
+				"$ref": "#/Descriptions"
+			},
+			"aliases": {
+				"$ref": "#/Aliases"
+			},
+			"sitelinks": {
+				"$ref": "#/Sitelinks"
+			},
+			"statements": {
+				"$ref": "#/Statements"
+			}
+		},
+		"required": [
+			"id",
+			"type",
+			"labels",
+			"properties",
+			"aliases",
+			"statements",
+			"sitelinks"
+		],
+		"discriminator": {
+			"propertyName": "type"
+		}
+	},
+	"Labels": {
+		"type": "object",
+		"additionalProperties": {
+			"$ref": "#/Term"
+		},
+		"example": {
+			"en": {
+				"language": "en",
+				"value": "Douglas Adams"
+			},
+			"fr": {
+				"language": "fr",
+				"value": "Douglas Adams"
+			}
+		}
+	},
+	"Descriptions": {
+		"type": "object",
+		"additionalProperties": {
+			"$ref": "#/Term"
+		},
+		"example": {
+			"en": {
+				"language": "en",
+				"value": "Science-fiction writer"
+			},
+			"fr": {
+				"language": "fr",
+				"value": "écrivain de science-fiction"
+			}
+		}
+	},
+	"Aliases": {
+		"type": "object",
+		"additionalProperties": {
+			"type": "array",
+			"items": { "$ref": "#/Term" }
+		},
+		"example": {
+			"en": [
+				{
+					"language": "en",
+					"value": "Douglas Noel Adams"
+				},
+				{
+					"language": "en",
+					"value": "Douglas Noël Adams"
+				}
+			],
+			"fr": [
+				{
+					"language": "fr",
+					"value": "Douglas Noel Adams"
+				}
+			]
+		}
+	},
+	"Sitelinks": {
+		"type": "object",
+		"additionalProperties": {
+			"$ref": "#/Sitelink"
+		},
+		"example": {
+			"afwiki": {
+				"site": "afwiki",
+				"title": "Douglas Adams",
+				"badges": [],
+				"url": "https://af.wikipedia.org/wiki/Douglas_Adams"
+			},
+			"arwiki": {
+				"site": "arwiki",
+				"title": "دوغلاس آدمز",
+				"badges": [],
+				"url": "https://ar.wikipedia.org/wiki/%D8%AF%D9%88%D8%BA%D9%84%D8%A7%D8%B3_%D8%A2%D8%AF%D9%85%D8%B2"
+			}
+		}
+	},
+	"Sitelink": {
+		"type": "object",
+		"properties": {
+			"site": {
+				"type": "string"
+			},
+			"title": {
+				"type": "string"
+			},
+			"badges": {
+				"type": "array",
+				"items": { "type": "string" }
+			}
+		}
+	},
+	"Term": {
+		"type": "object",
+		"properties": {
+			"language": {
+				"type": "string"
+			},
+			"value": {
+				"type": "string"
+			}
+		},
+		"required": [
+			"language",
+			"value"
+		]
+	},
+	"Statements": {
+		"type": "object",
+		"additionalProperties": {
+			"type": "array",
+			"items": { "$ref": "#/Statement" }
+		},
+		"example": {
+			"P103": [
+				{
+					"id": "Q42$b7526300-4ac5-a529-3a91-c8a0120673be",
+					"mainsnak": {
+						"datatype": "string",
+						"datavalue": {
+							"type": "string",
+							"value": "potato"
+						},
+						"hash": "94131f8f22ef0e6c2fe4b312ea8927de20e28296",
+						"property": "P103",
+						"snaktype": "value"
+					},
+					"rank": "normal",
+					"qualifiers": {
+						"P99": [
+							{
+								"snaktype": "value",
+								"property": "P99",
+								"hash": "2f7a93d88dce21585997e91ff089ef516de95d44",
+								"datavalue": {
+									"value": {
+										"entity-type": "item",
+										"numeric-id": 11036149,
+										"id": "Q11036149"
+									},
+									"type": "wikibase-entityid"
+								},
+								"datatype": "wikibase-item"
+							}
+						],
+						"P11": [
+							{
+								"snaktype": "value",
+								"property": "P11",
+								"hash": "2f7a93d88dce21585997e91ff089ef516de95d43",
+								"datavalue": {
+									"value": {
+										"entity-type": "item",
+										"numeric-id": 11036143,
+										"id": "Q11036143"
+									},
+									"type": "wikibase-entityid"
+								},
+								"datatype": "wikibase-item"
+							}
+						]
+					},
+					"qualifiers-order": [ "P11", "P99" ],
+					"references": [
+						{
+							"hash": "2b369d0a4f1d4b801e734fe84a0b217e13dd2930",
+							"snaks": {
+								"P248": [
+									{
+										"snaktype": "value",
+										"property": "P248",
+										"hash": "6b7d4330c4aac4caec4ede9de0311ce273f88ecd",
+										"datavalue": {
+											"value": {
+												"entity-type": "item",
+												"numeric-id": 54919,
+												"id": "Q54919"
+											},
+											"type": "wikibase-entityid"
+										},
+										"datatype": "wikibase-item"
+									}
+								],
+								"P214": [
+									{
+										"snaktype": "value",
+										"property": "P214",
+										"hash": "20e5c69fbf37b8b0402a52948a04f481028e819c",
+										"datavalue": {
+											"value": "113230702",
+											"type": "string"
+										},
+										"datatype": "external-id"
+									}
+								],
+								"P813": [
+									{
+										"snaktype": "value",
+										"property": "P813",
+										"hash": "6b8fcfa6afb3911fecec93ae1dff2b6b6cde5659",
+										"datavalue": {
+											"value": "important source",
+											"type": "string"
+										},
+										"datatype": "string"
+									}
+								]
+							},
+							"snaks-order": [
+								"P248",
+								"P214",
+								"P813"
+							]
+						}
+					]
+				}
+			],
+			"P106": [
+				{
+					"id": "Q42$e0f736bd-4711-c43b-9277-af1e9b2fb85f",
+					"mainsnak": {
+						"datatype": "wikibase-item",
+						"datavalue": {
+							"type": "wikibase-entityid",
+							"value": {
+								"entity-type": "item",
+								"id": "Q214917",
+								"numeric-id": 214917
+							}
+						},
+						"hash": "1ecddfdb184ec1e8540abf98fb07f825697cfab5",
+						"property": "P106",
+						"snaktype": "value"
+					},
+					"rank": "normal"
+				},
+				{
+					"id": "Q42$E13E619F-63EF-4B72-99D9-7A45C7C6AD34",
+					"mainsnak": {
+						"datatype": "wikibase-item",
+						"datavalue": {
+							"type": "wikibase-entityid",
+							"value": {
+								"entity-type": "item",
+								"id": "Q28389",
+								"numeric-id": 28389
+							}
+						},
+						"hash": "8c403faaa2be823ac66d54a4e5e1c37ddbf96da0",
+						"property": "P106",
+						"snaktype": "value"
+					},
+					"rank": "normal"
+				}
+			]
+		}
+	},
+	"Statement": {
+		"type": "object",
+		"properties": {
+			"mainsnak": {
+				"$ref": "#/Snak"
+			},
+			"id": {
+				"type": "string"
+			},
+			"rank": {
+				"type": "string",
+				"enum": [ "preferred", "normal", "deprecated" ]
+			},
+			"qualifiers": {
+				"$ref": "#/Snaks"
+			},
+			"qualifiers-order": {
+				"type": "array",
+				"items": {
+					"type": "string"
+				}
+			},
+			"references": {
+				"type": "array",
+				"items": { "$ref": "#/Reference" }
+			}
+		}
+	},
+	"Snak": {
+		"type": "object",
+		"properties": {
+			"snaktype": {
+				"type": "string"
+			},
+			"property": {
+				"type": "string"
+			},
+			"hash": { "$ref": "#/SnakHash" },
+			"datatype": {
+				"type": "string"
+			},
+			"datavalue": {
+				"type": "object",
+				"additionalProperties": true,
+				"example": {
+					"type": "string",
+					"value": "I am a goat"
+				}
+			}
+		}
+	},
+	"SnakHash": {
+		"description": "Hash of a snak",
+		"type": "string",
+		"example": "455481eeac76e6a8af71a6b493c073d54788e7e9"
+	},
+	"Snaks": {
+		"type": "object",
+		"additionalProperties": {
+			"type": "array",
+			"items": { "$ref": "#/Snak" }
+		},
+		"example": {
+			"P31": [],
+			"P100": []
+		}
+	},
+	"Reference": {
+		"type": "object",
+		"properties": {
+			"hash": { "$ref": "#/SnakHash" },
+			"snaks": {
+				"$ref": "#/Snaks"
+			},
+			"snaks-order": {
+				"type": "array",
+				"items": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}

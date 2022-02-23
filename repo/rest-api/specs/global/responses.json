@@ -1,0 +1,40 @@
+{
+	"Error": {
+		"type": "object",
+		"properties": {
+			"code": { "type": "string" },
+			"message": { "type": "string" }
+		},
+		"required": [ "code", "message" ]
+	},
+	"UnexpectedError": {
+		"description": "An unexpected error has occurred",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "#/Error" }
+			}
+		}
+	},
+	"Item": {
+		"description": "A single Wikibase Item",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./schemas.json#/Item" }
+			}
+		}
+	}
+}

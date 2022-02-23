@@ -1,0 +1,20 @@
+{
+	"openapi": "3.0.2",
+	"info": {
+		"title": "Wikibase REST API",
+		"version": "0.1"
+	},
+	"paths": {
+		"$ref": "./resources/index.json"
+	},
+	"tags": [
+		{
+			"name": "items",
+			"description": "Wikibase Items",
+			"externalDocs": {
+				"description": "Wikibase Data Model - Items",
+				"url": "https://www.mediawiki.org/wiki/Wikibase/DataModel#Items"
+			}
+		}
+	]
+}

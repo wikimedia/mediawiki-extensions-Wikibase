@@ -1,0 +1,13 @@
+{
+	"get": {
+		"tags": [ "items" ],
+		"summary": "Retrieve a single Wikibase Item by ID",
+		"parameters": [
+			{ "$ref": "../../global/parameters.json#/entityId" }
+		],
+		"responses": {
+			"200": { "$ref": "../../global/responses.json#/Item" },
+			"default": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
+	}
+}

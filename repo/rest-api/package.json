@@ -1,0 +1,13 @@
+{
+	"name": "wikibase-rest-api-specs",
+	"version": "0.1.0",
+	"description": "OpenAPI specification of Wikibase REST API",
+	"scripts": {
+		"test": "npm run lint",
+		"lint": "swagger-cli validate specs/openapi.json",
+		"build": "swagger-cli bundle specs/openapi.json -o dist/openapi.json"
+	},
+	"devDependencies": {
+		"@apidevtools/swagger-cli": "^4.0.4"
+	}
+}
