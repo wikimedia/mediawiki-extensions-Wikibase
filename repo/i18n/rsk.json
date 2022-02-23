@@ -4,5 +4,9 @@
 			"Keresturec"
 		]
 	},
-	"wikibase-edit": "ушориц"
+	"wikibase-edit": "ушориц",
+	"wikibase-add": "додай",
+	"wikibase-description-empty": "Опис нє дефиновани",
+	"wikibase-sitelinks-special": "Други сайти",
+	"wikibase-statementview-rank-normal": "Звичайни ранґ"
 }

@@ -63,6 +63,7 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "gregoriansk",
 	"wikibase-time-calendar-julian": "juliansk",
+	"wikibase-time-precision-CE": "$1 e.Kr.",
 	"wikibase-time-precision-Gannum": "$1 {{PLURAL:$1|milliard|milliarder}} år e.Kr.",
 	"wikibase-time-precision-Mannum": "$1 {{PLURAL:$1|million|millioner}} år e.Kr.",
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 år}} e.Kr.",

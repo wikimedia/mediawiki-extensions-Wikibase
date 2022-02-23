@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Brazal.dang",
+			"Daramlagon",
 			"Geopoet",
 			"ShimunUfesoj"
 		]
 	},
-	"wikibase-edit": "liwaton",
-	"wikibase-add": "idugang",
+	"wikibase-edit": "baguhon",
+	"wikibase-add": "magdagdag",
 	"wikibase-label-empty": "Mayong Pigtutukoy na liyabel",
 	"wikibase-description-empty": "Mayong pigtukoy na paglaladawan",
 	"wikibase-sitelinks-special": "Iba pan mga sityo",
