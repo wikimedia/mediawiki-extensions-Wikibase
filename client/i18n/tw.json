@@ -3,14 +3,15 @@
 		"authors": [
 			"Robertjamal12",
 			"Amire80",
-			"Afia360"
+			"Afia360",
+			"Lynessa"
 		]
 	},
 	"wikibase-after-page-move": "Ɛwɔ sɛ deɛ wobɛyɛ biara yɛ [$1 reflected in the {{WBREPONAME}} item] language link. Yɛsrɛ wo hwɛ sɛ ade yi asi.",
 	"wikibase-after-page-delete": "Anka ɛwɔ sɛ woyi ayɔnkofa a ɛda kratafa yi mu firi\n[$1 the associated {{WBREPONAME}} item]. Yesrɛ wo hwɛ sɛ ade yi asi.",
 	"wikibase-comment-sitelink-change": "Language link changed from $1 to $2",
 	"wikibase-comment-sitelink-remove": "Yi kasa nkutahodie firi mu: $1",
-	"wikibase-comment-multi": "$1 {{PLURAL : $1|change|changes}}",
+	"wikibase-comment-multi": "$1 {{PLURAL : $1|sesa|nsesae}}",
 	"wikibase-dataitem": "{{WBREPONAME}} ade",
 	"wikibase-editlinks": "Sesa links no",
 	"wikibase-linkitem-addlinks": "Fa links ɛka ho",
@@ -18,6 +19,7 @@
 	"wikibase-linkitem-failure": "Ade bi a yɛn nnim sii bere a wopɛ sɛ ayɔnkofa bɛda kratafa a yɛde ama wo no ntam.",
 	"wikibase-linkitem-title": "Ma kratafa no nya ayɔnkofa",
 	"wikibase-linkitem-linkpage": "Fa ayɔnkofa to kratafa no ntam",
+	"wikibase-linkitem-selectlink": "Yɛsrɛ wo sɛ yi kratafa a wo pɛ sɛ wo di ka kratafa yi ho.",
 	"wikibase-linkitem-input-site": "Kasa:",
 	"wikibase-linkitem-input-page": "Kratafaː",
 	"wikibase-linkitem-confirmitem-button": "Ti mu bio",

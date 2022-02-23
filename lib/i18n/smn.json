@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Trondtr",
-			"Yupik"
+			"Yupik",
+			"Seipinne"
 		]
 	},
+	"wikibase-timedetails-time": "Äigi",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-reference-formatter-snak-retrieved": "Čujottum $1"
 }

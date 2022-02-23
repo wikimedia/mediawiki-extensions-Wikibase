@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Trondtr",
-			"Yupik"
+			"Yupik",
+			"Seipinne"
 		]
 	},
 	"wikibase-edit": "mute",
@@ -21,16 +22,23 @@
 	"wikibase-diffview-label": "nommâ",
 	"wikibase-diffview-link": "liiŋkah",
 	"wikibase-diffview-link-name": "nommâ",
+	"wikibase-sitelink-page-edit-placeholder": "sijđo",
 	"wikibase-sitelinks-special": "Eres siijđoh",
 	"wikibase-statementview-rank-normal": "Táválâš sajattâh",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|käldee|käldee|kälded}}",
 	"wikibase-anonymouseditwarning": "<strong>Váruttâs:</strong> Jieh lah čälittâm jieijâd siisâ. IP-čujottâsâd uáinoo almolávt puohháid, jis hammiih. Jis <strong>[[Special:UserLogin|čälittah jieijâd siisâ]]</strong> teikâ <strong>[[Special:CreateAccount|rááhtáh tubdâlduv]]</strong>, tuu hammim čálloo tuu kevtteetubdâlduvâi rähtim hammiimin já siämmást tun finniih kiävtun ávhálijd piergâsijd.",
 	"wikibase-anonymouseditwarning-heading": "Jieh lah čälittâm jieijâd siisâ",
+	"wikibase-itembytitle-lookup-page": "Sijđo:",
 	"wikibase-itembytitle-submit": "Uusâ",
 	"wikibase-itemdisambiguation-lookup-label": "Nommâ:",
 	"wikibase-itemdisambiguation-submit": "Uusâ",
 	"wikibase-newentity-language": "Kielâ:",
 	"wikibase-newentity-label": "Nommâ:",
+	"wikibase-newentity-submit": "Räähti",
 	"wikibase-setlabel-label": "Nommâ:",
-	"wikibase-setlabeldescriptionaliases-label-label": "Nommâ:"
+	"wikibase-setlabeldescriptionaliases-label-label": "Nommâ:",
+	"wikibase-redirectentity-submit": "Stivrim",
+	"wikibase-listdatatypes-multilingualtext-head": "Maaŋgâkielâlâš tekstâ",
+	"wikibase-listdatatypes-time-head": "Äigi",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Jooskâ"
 }

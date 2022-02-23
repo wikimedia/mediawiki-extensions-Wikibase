@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Keresturec"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} Елемент",
+	"wikibase-editlinks": "Ушор вязи",
+	"wikibase-linkitem-addlinks": "Додай вязи",
+	"wikibase-linkitem-title": "Вяза зоз боком",
+	"wikibase-linkitem-linkpage": "Повяь зоз боком",
+	"wikibase-linkitem-selectlink": "Виберце сайт и бок зоз хторим жадаце повязац тот ту бок",
+	"wikibase-linkitem-input-site": "Язик:",
+	"wikibase-linkitem-input-page": "Бок:"
+}

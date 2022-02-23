@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hasslaebetch"
+			"Hasslaebetch",
+			"Amire80"
 		]
 	},
-	"wikibase-add": "Paase",
-	"wikibase-sitelinks-special": "sitā toore"
+	"wikibase-edit": "Tekre",
+	"wikibase-add": "paase",
+	"wikibase-sitelinks-special": "Sitā toore"
 }
