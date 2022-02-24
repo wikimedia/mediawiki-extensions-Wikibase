@@ -16,6 +16,7 @@
             <directory>client/tests/phpunit</directory>
             <directory>lib/tests/phpunit</directory>
             <directory>repo/tests/phpunit</directory>
+            <directory>repo/rest-api/tests/phpunit</directory>
             <directory>view/tests/phpunit</directory>
             <directory>data-access/tests/phpunit</directory>
             <directory>lib/packages/wikibase/changes/tests</directory>
