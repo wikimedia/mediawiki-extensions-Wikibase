@@ -14,10 +14,15 @@
 	"wikibase-editlinks": "Baguhon an mga link",
 	"wikibase-editlinkstitle": "Liwaton an mga interlengwaheng takod",
 	"wikibase-linkitem-addlinks": "Magdagdag nin mga link",
+	"wikibase-linkitem-title": "Itakod sa pahina",
+	"wikibase-linkitem-linkpage": "Itakod sa pahina",
+	"wikibase-linkitem-selectlink": "Magpili nin site asin pahina na gusto mong itakod sa pahinang ini.",
+	"wikibase-linkitem-input-site": "Lenggwahe:",
+	"wikibase-linkitem-input-page": "Pahina:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Itago",
 	"wikibase-rc-hide-wikidata-show": "Ipahiling",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} liwaton",
-	"wikibase-otherprojects": "Sa ibang mga proyekto"
+	"wikibase-otherprojects": "Sa iba pang proyekto"
 }
