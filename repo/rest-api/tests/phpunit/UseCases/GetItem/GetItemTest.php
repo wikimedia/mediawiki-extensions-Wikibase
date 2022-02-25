@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemResult;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -28,11 +28,12 @@ class GetItemTest extends TestCase {
 		$serializer = WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer();
 
 		$itemRequest = new GetItemRequest( $itemId );
-		$itemResponse = ( new GetItem( $retriever, $serializer ) )->execute( $itemRequest );
+		$itemResult = ( new GetItem( $retriever, $serializer ) )->execute( $itemRequest );
+		$item = $itemResult->getItem();
 
-		$this->assertInstanceOf( GetItemResponse::class, $itemResponse );
-		$this->assertSame( $itemId, $itemResponse->getItem()['id'] );
-		$this->assertSame( $itemLabel, $itemResponse->getItem()['labels']['en']['value'] );
+		$this->assertInstanceOf( GetItemResult::class, $itemResult );
+		$this->assertSame( $itemId, $item['id'] );
+		$this->assertSame( $itemLabel, $item['labels']['en']['value'] );
 	}
 
 }

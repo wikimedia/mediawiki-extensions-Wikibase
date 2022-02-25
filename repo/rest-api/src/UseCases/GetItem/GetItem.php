@@ -19,9 +19,9 @@ class GetItem {
 		$this->itemSerializer = $itemSerializer;
 	}
 
-	public function execute( GetItemRequest $itemRequest ): GetItemResponse {
+	public function execute( GetItemRequest $itemRequest ): GetItemResult {
 		$itemId = new ItemId( $itemRequest->getItemId() );
 		$item = $this->itemRetriever->getItem( $itemId );
-		return new GetItemResponse( $this->itemSerializer->serialize( $item ) );
+		return new GetItemResult( $this->itemSerializer->serialize( $item ) );
 	}
 }
