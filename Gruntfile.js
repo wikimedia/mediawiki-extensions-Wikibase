@@ -17,11 +17,12 @@ module.exports = function ( grunt ) {
 				'!view/resources/jquery/ui/**',
 				'!view/lib/**',
 				'!**/node_modules/**',
-				'!vendor/**',
+				'!**/vendor/**',
 				'!extensions/**',
 				'!client/data-bridge/**',
 				'!lib/resources/wikibase-api/**',
-				'!lib/packages/wikibase/*/tests/**/*.json'
+				'!lib/packages/wikibase/*/tests/**/*.json',
+				'!docs/**'
 			]
 		},
 		stylelint: {
