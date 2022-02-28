@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"SADIQUI"
+			"SADIQUI",
+			"Ideophagous"
 		]
 	},
+	"wikibase-quantitydetails-unit": "مودول",
 	"wikibase-sitelinks-wikipedia": "ويكيپيديا"
 }
