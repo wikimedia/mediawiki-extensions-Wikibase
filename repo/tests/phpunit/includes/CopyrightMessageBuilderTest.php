@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests;
 
 use Language;
 use MediaWikiIntegrationTestCase;
-use Message;
 use Wikibase\Repo\CopyrightMessageBuilder;
 
 /**
@@ -44,8 +43,7 @@ class CopyrightMessageBuilderTest extends MediaWikiIntegrationTestCase {
 				[
 					'(wikibase-save)',
 					'(copyrightpage)',
-					Message::plaintextParam( 'https://creativecommons.org' ),
-					Message::plaintextParam( 'Creative Commons Attribution-Share Alike 3.0' ),
+					'[https://creativecommons.org Creative Commons Attribution-Share Alike 3.0]'
 				],
 				'https://creativecommons.org',
 				'Creative Commons Attribution-Share Alike 3.0'

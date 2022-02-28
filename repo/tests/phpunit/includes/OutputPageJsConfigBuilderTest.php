@@ -42,7 +42,7 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 				'messageHtml' =>
 					'(wikibase-shortcopyrightwarning: (wikibase-save), ' .
 					wfMessage( 'copyrightpage' )->inContentLanguage()->text() .
-					', https://creativecommons.org, CC-0)'
+					', <a rel="nofollow" class="external text" href="https://creativecommons.org">CC-0</a>)'
 			],
 			'wbBadgeItems' => [
 				'Q12' => 'wb-badge-goodarticle',
@@ -74,7 +74,7 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 				'messageHtml' =>
 					'(wikibase-shortcopyrightwarning: (wikibase-publish), ' .
 					wfMessage( 'copyrightpage' )->inContentLanguage()->text() .
-					', https://creativecommons.org, CC-0)'
+					', <a rel="nofollow" class="external text" href="https://creativecommons.org">CC-0</a>)'
 			],
 			'wbBadgeItems' => [],
 			'wbMultiLingualStringLimit' => 0,
