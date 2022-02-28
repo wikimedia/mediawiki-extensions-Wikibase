@@ -20,8 +20,9 @@ use Wikibase\Repo\OutputPageJsConfigBuilder;
  */
 class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 
-	public function testBuild() {
-		$this->setMwGlobals( [ 'wgEditSubmitButtonLabelPublish' => false ] );
+	/** @dataProvider provideBooleans */
+	public function testBuild( bool $publish, bool $taintedRefs ) {
+		$this->setMwGlobals( [ 'wgEditSubmitButtonLabelPublish' => $publish ] );
 		$configBuilder = new OutputPageJsConfigBuilder();
 
 		$url = 'https://creativecommons.org';
@@ -34,14 +35,15 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 				'Q42' => 'wb-badge-featuredarticle'
 			],
 			250,
-			false
+			$taintedRefs
 		);
 
+		$expectedKey = $publish ? 'wikibase-publish' : 'wikibase-save';
 		$expected = [
 			'wbCopyright' => [
 				'version' => 'wikibase-1',
 				'messageHtml' =>
-					'(wikibase-shortcopyrightwarning: (wikibase-save), ' .
+					"(wikibase-shortcopyrightwarning: ($expectedKey), " .
 					wfMessage( 'copyrightpage' )->inContentLanguage()->text() .
 					', <a rel="nofollow" class="external free" href="' . $url .
 					'">' . $url . '</a>, CC-0)'
@@ -51,41 +53,17 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 				'Q42' => 'wb-badge-featuredarticle'
 			],
 			'wbMultiLingualStringLimit' => 250,
-			'wbTaintedReferencesEnabled' => false,
+			'wbTaintedReferencesEnabled' => $taintedRefs,
 		];
 
 		$this->assertEquals( $expected, $configVars );
 	}
 
-	public function testBuildWikibasePublish() {
-		$this->setMwGlobals( [ 'wgEditSubmitButtonLabelPublish' => true ] );
-		$configBuilder = new OutputPageJsConfigBuilder();
-
-		$url = 'https://creativecommons.org';
-		$configVars = $configBuilder->build(
-			$this->getOutputPage(),
-			$url,
-			'CC-0',
-			[],
-			0,
-			true
-		);
-
-		$expected = [
-			'wbCopyright' => [
-				'version' => 'wikibase-1',
-				'messageHtml' =>
-					'(wikibase-shortcopyrightwarning: (wikibase-publish), ' .
-					wfMessage( 'copyrightpage' )->inContentLanguage()->text() .
-					', <a rel="nofollow" class="external free" href="' . $url .
-					'">' . $url . '</a>, CC-0)'
-			],
-			'wbBadgeItems' => [],
-			'wbMultiLingualStringLimit' => 0,
-			'wbTaintedReferencesEnabled' => true,
-		];
-
-		$this->assertEquals( $expected, $configVars );
+	public function provideBooleans(): iterable {
+		yield 'save, no tainted refs' => [ false, false ];
+		yield 'save, tainted refs' => [ false, true ];
+		yield 'publish, no tainted refs' => [ true, false ];
+		yield 'publish, tainted refs' => [ true, true ];
 	}
 
 	/**
