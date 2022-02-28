@@ -95,7 +95,7 @@
 	"wikibase-snakview-snaktypeselector-value": "पारंपारिक किंमत",
 	"wikibase-snakformat-invalid-value": "अवैध किंमत.",
 	"wikibase-snakformat-propertynotfound": "गुणघर्म सापडला नाही.",
-	"wikibase-shortcopyrightwarning": "\"$1\" टिचकण्याने,आपण [[$2|वापरण्याच्या शर्ती]]मान्य करीत आहात व आपण न परतवण्याजोग्या मान्यतेने, $3 अंतर्गत आपल्या योगदानाचे विमोचन करीत आहात.",
+	"wikibase-shortcopyrightwarning": "\"$1\" टिचकण्याने,आपण [[$2|वापरण्याच्या शर्ती]]मान्य करीत आहात व आपण न परतवण्याजोग्या मान्यतेने, [$3 $4] अंतर्गत आपल्या योगदानाचे विमोचन करीत आहात.",
 	"wikibase-copyrighttooltip-acknowledge": "भविष्यातील संपादनांसाठी या शर्तींचा मी स्वीकार करतो.हा संदेश कृपया पुन्हा दाखवु नका.",
 	"wikibase-entityselector-more": "अधिक",
 	"wikibase-entityselector-notfound": "या सम सापडले नाही",

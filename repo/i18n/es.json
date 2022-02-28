@@ -153,7 +153,7 @@
 	"wikibase-snakview-snaktypeselector-value": "valor personalizado",
 	"wikibase-snakformat-invalid-value": "Valor no válido.",
 	"wikibase-snakformat-propertynotfound": "No se encontró la propiedad.",
-	"wikibase-shortcopyrightwarning": "Al pulsar en «$1» aceptas los [[$2|términos de uso]] y aceptas liberar irrevocablemente tu contribución bajo la $3.",
+	"wikibase-shortcopyrightwarning": "Al pulsar en «$1» aceptas los [[$2|términos de uso]] y aceptas liberar irrevocablemente tu contribución bajo la [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Acepto estos términos para mis futuras contribuciones. No volver a mostrar este mensaje otra vez.",
 	"wikibase-copyrighttooltip-acknowledge": "Acepto estos términos para mis futuras contribuciones. No volver a mostrar este mensaje otra vez.",
 	"wikibase-entityselector-more": "más",

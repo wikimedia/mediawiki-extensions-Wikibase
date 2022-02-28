@@ -100,7 +100,7 @@
 	"wikibase-snakview-variations-somevalue-label": "невядомае значэнне",
 	"wikibase-snakview-variations-novalue-label": "значэнне не зададзена",
 	"wikibase-snakview-snaktypeselector-value": "сваё значэнне",
-	"wikibase-shortcopyrightwarning": "Націснуўшы на кнопку «$1», Вы згаджаецеся з [[$2|умовамі выкарыстання]], а таксама згаджаецеся на беззваротную публікацыю свайго ўнёску на ўмовах $3.",
+	"wikibase-shortcopyrightwarning": "Націснуўшы на кнопку «$1», Вы згаджаецеся з [[$2|умовамі выкарыстання]], а таксама згаджаецеся на беззваротную публікацыю свайго ўнёску на ўмовах [$3 $4].",
 	"wikibase-entityselector-more": "яшчэ",
 	"wikibase-entityselector-notfound": "Супадзенняў не знойдзена",
 	"wikibase-anonymouseditwarning": "Увага: Вы не аўтарызаваліся на сайце. Ваш [https://be.wikipedia.org/wiki/IP-адрас IP-адрас] будзе публічна бачным, калі вы будзеце ўносіць любыя праўкі. Калі вы <strong>[[Special:UserLogin|ўвойдзеце]]</strong> ці <strong>[[Special:CreateAccount|створыце ўліковы запіс]]</strong>, праўкі замест гэтага будуць звязаны з вашым імем карыстальніка, а таксама ў вас з’явяцца іншыя перавагі.",

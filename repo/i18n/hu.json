@@ -121,7 +121,7 @@
 	"wikibase-snakview-snaktypeselector-value": "egyedi érték",
 	"wikibase-snakformat-invalid-value": "Érvénytelen érték.",
 	"wikibase-snakformat-propertynotfound": "A tulajdonság nem található.",
-	"wikibase-shortcopyrightwarning": "A „$1” gombra kattintással elfogadod a [[$2|felhasználási feltételeket]] és visszavonhatatlan engedélyt adsz szerkesztéseid felhasználására a $3 szerint.",
+	"wikibase-shortcopyrightwarning": "A „$1” gombra kattintással elfogadod a [[$2|felhasználási feltételeket]] és visszavonhatatlan engedélyt adsz szerkesztéseid felhasználására a [$3 $4] szerint.",
 	"wikibase-shortcopyrightwarning-accept-persist": "A további szerkesztéseim során elfogadom a fenti feltételeket. Ez az üzenet ne jelenjen meg újra.",
 	"wikibase-copyrighttooltip-acknowledge": "A további szerkesztéseim során elfogadom a fenti feltételeket. Ez az üzenet ne jelenjen meg újra.",
 	"wikibase-entityselector-more": "több",

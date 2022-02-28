@@ -105,7 +105,7 @@
 	"wikibase-snakview-snaktypeselector-value": "prilagođena vrednost",
 	"wikibase-snakformat-invalid-value": "Pogrešna vrednost.",
 	"wikibase-snakformat-propertynotfound": "Svojstvo nije pronađeno.",
-	"wikibase-shortcopyrightwarning": "Klikom na „$1“, prihvatate [[$2|uslove korišćenja]], i neopozivo prihvatate da vaše izmene budu licencirane pod $3.",
+	"wikibase-shortcopyrightwarning": "Klikom na „$1“, prihvatate [[$2|uslove korišćenja]], i neopozivo prihvatate da vaše izmene budu licencirane pod [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "Prihvatam ove uslove za sve moje buduće izmene. Ne prikazuj više ovu poruku.",
 	"wikibase-entityselector-more": "još",
 	"wikibase-entityselector-notfound": "Nema podudaranja",

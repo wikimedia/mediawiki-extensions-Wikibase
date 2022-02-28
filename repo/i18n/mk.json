@@ -112,7 +112,7 @@
 	"wikibase-snakview-snaktypeselector-value": "зададена вредност",
 	"wikibase-snakformat-invalid-value": "Неважечка вредност.",
 	"wikibase-snakformat-propertynotfound": "Не го пронајдов својството.",
-	"wikibase-shortcopyrightwarning": "Стискајќи на „$1“, се согласувате со [[$2|условите на употреба]] и неотповикливо се согласувате вашите придонеси да се нудат под условите на $3.",
+	"wikibase-shortcopyrightwarning": "Стискајќи на „$1“, се согласувате со [[$2|условите на употреба]] и неотповикливо се согласувате вашите придонеси да се нудат под условите на [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Ги прифаќам овие услови за моите идни уредувања. Повеќе не ја прикажувај поракава.",
 	"wikibase-copyrighttooltip-acknowledge": "Ги прифаќам овие услови за моите идни уредувања. Повеќе не ја прикажувај поракава.",
 	"wikibase-entityselector-more": "уште",

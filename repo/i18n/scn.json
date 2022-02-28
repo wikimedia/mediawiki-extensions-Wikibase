@@ -94,7 +94,7 @@
 	"wikibase-snakview-snaktypeselector-value": "valuri pirsunalizzatu",
 	"wikibase-snakformat-invalid-value": "Valuri nun vàlidu.",
 	"wikibase-snakformat-propertynotfound": "Prupità nun attruvata.",
-	"wikibase-shortcopyrightwarning": "Cliccannu \"$1\", accetti li [[$2|cunnizzioni d'utilizzu]], e accunzenti nun rivucabbilmenti a pubblicari lu tò cuntribbutu sutta â licenza $3.",
+	"wikibase-shortcopyrightwarning": "Cliccannu \"$1\", accetti li [[$2|cunnizzioni d'utilizzu]], e accunzenti nun rivucabbilmenti a pubblicari lu tò cuntribbutu sutta â licenza [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "Accettu sti cunnizzioni pî mè canciamenti futuri. Nun m'ammustrari cchiù stu missaggiu.",
 	"wikibase-entityselector-more": "àutri cosi",
 	"wikibase-anonymouseditwarning": "Accura: Nun trasisti.\nLu tò nnirizzu IP è riggistratu ntâ crunuluggìa dî canciamenti di sta ntità.",

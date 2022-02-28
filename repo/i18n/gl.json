@@ -116,7 +116,7 @@
 	"wikibase-snakview-snaktypeselector-value": "valor personalizado",
 	"wikibase-snakformat-invalid-value": "Valor non válido.",
 	"wikibase-snakformat-propertynotfound": "Non se atopou a propiedade.",
-	"wikibase-shortcopyrightwarning": "Ao premer en \"$1\", acepta os [[$2|termos de uso]] e acepta liberar irrevogablemente as súas achegas baixo a $3.",
+	"wikibase-shortcopyrightwarning": "Ao premer en \"$1\", acepta os [[$2|termos de uso]] e acepta liberar irrevogablemente as súas achegas baixo a [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "Acepto estes termos para as miñas futuras edicións. Non quero ver a mensaxe de novo.",
 	"wikibase-entityselector-more": "máis",
 	"wikibase-entityselector-notfound": "Non se atoparon coincidencias",

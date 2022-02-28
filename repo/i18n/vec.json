@@ -96,7 +96,7 @@
 	"wikibase-snakview-variations-somevalue-label": "valor sconossùo",
 	"wikibase-snakview-variations-novalue-label": "nisun vałore",
 	"wikibase-snakview-snaktypeselector-value": "valor personalixà",
-	"wikibase-shortcopyrightwarning": "Strucando su \"$1\", te aceti le [[$2|condision de uso]], e te aceti irevocabilmente a rilasiar el to contributo in base a la $3.",
+	"wikibase-shortcopyrightwarning": "Strucando su \"$1\", te aceti le [[$2|condision de uso]], e te aceti irevocabilmente a rilasiar el to contributo in base a la [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "Aceto sti termini par le me future modifiche. No sta mostrarme da novo sto mesajo.",
 	"wikibase-entityselector-more": "piassè",
 	"wikibase-anonymouseditwarning": "Ocio: no te ghè mia fato el login.\nIn te la cronologia de $1 vegnarà registrà el to indiriso IP.",

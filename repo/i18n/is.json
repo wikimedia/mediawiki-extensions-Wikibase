@@ -108,7 +108,7 @@
 	"wikibase-snakview-snaktypeselector-value": "sérstakt gildi",
 	"wikibase-snakformat-invalid-value": "Ógilt gildi.",
 	"wikibase-snakformat-propertynotfound": "Eiginleiki fannst ekki.",
-	"wikibase-shortcopyrightwarning": "Með því að smella á „$1”, samþykkir þú [[$2|notendaskilmálana]]. Þú samþykkir einnig óafturkræft að þú gefir breytinguna þína út undir $3.",
+	"wikibase-shortcopyrightwarning": "Með því að smella á „$1”, samþykkir þú [[$2|notendaskilmálana]]. Þú samþykkir einnig óafturkræft að þú gefir breytinguna þína út undir [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Ég samþykki þessa skilmála fyrir breytingar í framtíðinni. Ekki sýna þessi skilaboð aftur.",
 	"wikibase-copyrighttooltip-acknowledge": "Ég samþykki þessa skilmála fyrir allar breytingar mínar í framtíðinni. Ekki sýna þessi skilaboð aftur.",
 	"wikibase-entityselector-more": "meira",

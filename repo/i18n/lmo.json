@@ -108,7 +108,7 @@
 	"wikibase-snakview-snaktypeselector-value": "valor personalizzad",
 	"wikibase-snakformat-invalid-value": "Valor minga valid.",
 	"wikibase-snakformat-propertynotfound": "Proprietà minga trovada.",
-	"wikibase-shortcopyrightwarning": "Con el clicà in su \"$1\", te acetet i [[$2|condizzion d'utilizzaziopn]], e te acetet a la definitiva de fornì la toa contribuzzion second conforma a la $3.",
+	"wikibase-shortcopyrightwarning": "Con el clicà in su \"$1\", te acetet i [[$2|condizzion d'utilizzaziopn]], e te acetet a la definitiva de fornì la toa contribuzzion second conforma a la [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Aceti questi termin per i mé modifiche che vegnarànn. Mostra pu quell messagg chì.",
 	"wikibase-copyrighttooltip-acknowledge": "Aceti questi termin chì per i me modifiche che vegnarànn. Mostra pu quell messagg chì.",
 	"wikibase-entityselector-more": "e poeu",

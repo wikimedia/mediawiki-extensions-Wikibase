@@ -106,7 +106,7 @@
 	"wikibase-snakview-snaktypeselector-value": "propra valoro",
 	"wikibase-snakformat-invalid-value": "Nevalida valoro.",
 	"wikibase-snakformat-propertynotfound": "Eco ne troviĝis.",
-	"wikibase-shortcopyrightwarning": "Klakante al \"$1\" vi akceptas la [[$2|kondiĉojn de uzado]] kaj vi nerevokeble akceptas liberigi vian kontribuon laŭ $3.",
+	"wikibase-shortcopyrightwarning": "Klakante al \"$1\" vi akceptas la [[$2|kondiĉojn de uzado]] kaj vi nerevokeble akceptas liberigi vian kontribuon laŭ [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Mi akceptas tiujn ĉi kondiĉojn por miaj estontaj redaktoj. Ne plu montru tiun ĉi mesaĝon.",
 	"wikibase-copyrighttooltip-acknowledge": "Mi akceptas tiujn ĉi kondiĉojn por miaj estontaj redaktoj. Ne plu montru tiun ĉi mesaĝon.",
 	"wikibase-entityselector-more": "pli",

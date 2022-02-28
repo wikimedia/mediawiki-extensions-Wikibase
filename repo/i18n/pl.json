@@ -126,7 +126,7 @@
 	"wikibase-snakview-snaktypeselector-value": "własna wartość",
 	"wikibase-snakformat-invalid-value": "Nieprawidłowa wartość.",
 	"wikibase-snakformat-propertynotfound": "Właściwość nie została znaleziona.",
-	"wikibase-shortcopyrightwarning": "Klikając „$1”, zgadzasz się na [[$2|warunki użytkowania]] oraz wyrażasz nieodwołalną zgodę na udostępnianie twojego wkładu na warunkach $3.",
+	"wikibase-shortcopyrightwarning": "Klikając „$1”, zgadzasz się na [[$2|warunki użytkowania]] oraz wyrażasz nieodwołalną zgodę na udostępnianie twojego wkładu na warunkach [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "Przyjmuję te warunki dla moich przyszłych edycji. Nie pokazuj więcej tego komunikatu.",
 	"wikibase-entityselector-more": "więcej",
 	"wikibase-entityselector-notfound": "Brak wyników",

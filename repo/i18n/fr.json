@@ -166,7 +166,7 @@
 	"wikibase-snakview-snaktypeselector-value": "valeur personnalisée",
 	"wikibase-snakformat-invalid-value": "Valeur non valide.",
 	"wikibase-snakformat-propertynotfound": "Propriété non trouvée.",
-	"wikibase-shortcopyrightwarning": "En cliquant sur « $1 », vous acceptez les [[$2|conditions d’utilisation]] et acceptez de placer irrévocablement votre contribution sous la $3.",
+	"wikibase-shortcopyrightwarning": "En cliquant sur « $1 », vous acceptez les [[$2|conditions d’utilisation]] et acceptez de placer irrévocablement votre contribution sous la [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "J’accepte ces conditions pour mes prochaines modifications. Ne plus afficher ce message.",
 	"wikibase-copyrighttooltip-acknowledge": "J’accepte ces conditions pour mes prochaines modifications. Ne plus afficher ce message.",
 	"wikibase-entityselector-more": "plus",

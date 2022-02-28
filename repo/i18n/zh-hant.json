@@ -140,7 +140,7 @@
 	"wikibase-snakview-snaktypeselector-value": "自訂數值",
 	"wikibase-snakformat-invalid-value": "無效的數值。",
 	"wikibase-snakformat-propertynotfound": "查無屬性。",
-	"wikibase-shortcopyrightwarning": "點選「$1」代表您接受[[$2|使用條款]]，並不反悔接受使用$3發佈您的貢獻。",
+	"wikibase-shortcopyrightwarning": "點選「$1」代表您接受[[$2|使用條款]]，並不反悔接受使用[$3 $4]發佈您的貢獻。",
 	"wikibase-shortcopyrightwarning-accept-persist": "我接受我未來的編輯使用這些條款。不要再顯示此訊息。",
 	"wikibase-copyrighttooltip-acknowledge": "我接受我未來的編輯使用這些條款。不要再顯示此訊息。",
 	"wikibase-entityselector-more": "更多",

@@ -109,7 +109,7 @@
 	"wikibase-snakview-snaktypeselector-value": "valô personalizou",
 	"wikibase-snakformat-invalid-value": "Valô non vallido.",
 	"wikibase-snakformat-propertynotfound": "Propietæ non trovâ.",
-	"wikibase-shortcopyrightwarning": "Clicando \"$1\", ti t'acetti e [[$2|condissioin d'uzo]], e ti t'acetti inrevocabilmente a relasciâ o to contributo in baze a-a $3.",
+	"wikibase-shortcopyrightwarning": "Clicando \"$1\", ti t'acetti e [[$2|condissioin d'uzo]], e ti t'acetti inrevocabilmente a relasciâ o to contributo in baze a-a [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Acetto sti termi pe-e mæ futue modiffiche. No mostrâme ciu questo messaggio.",
 	"wikibase-copyrighttooltip-acknowledge": "Acetto sti termi pe-e mæ futue modiffiche. No mostrâme ciu questo messaggio.",
 	"wikibase-entityselector-more": "atro",

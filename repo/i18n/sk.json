@@ -77,7 +77,7 @@
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|referencia|referencie|referencií}}",
 	"wikibase-snakview-property-input-placeholder": "Vlastnosť",
 	"wikibase-snakview-choosesnaktype": "Vyberte typ hodnoty.",
-	"wikibase-shortcopyrightwarning": "Kliknutím na „$1“ potvrdzujete súhlas s [[$2|podmienkami použitia]] a neodvolateľne zverejňujete svoj príspevok za podmienok $3.",
+	"wikibase-shortcopyrightwarning": "Kliknutím na „$1“ potvrdzujete súhlas s [[$2|podmienkami použitia]] a neodvolateľne zverejňujete svoj príspevok za podmienok [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Prijímam tieto podmienky pre svoje budúce úpravy. Túto správu už nabudúce nezobrazovať.",
 	"wikibase-copyrighttooltip-acknowledge": "Prijímam tieto podmienky pre svoje budúce úpravy. Túto správu už nabudúce nezobrazovať.",
 	"wikibase-entityselector-more": "viac",

@@ -139,7 +139,7 @@
 	"wikibase-snakview-snaktypeselector-value": "özel değer",
 	"wikibase-snakformat-invalid-value": "Geçersiz değer.",
 	"wikibase-snakformat-propertynotfound": "Özellik bulunamadı.",
-	"wikibase-shortcopyrightwarning": "\"$1\" düğmesine tıkladığınızda, [[$2|kullanım şartlarını]] kabul ederek katkınızı, $3 lisansı kapsamında geri döndürülemez bir biçimde yayınlamayı kabul etmiş olacaksınız.",
+	"wikibase-shortcopyrightwarning": "\"$1\" düğmesine tıkladığınızda, [[$2|kullanım şartlarını]] kabul ederek katkınızı, [$3 $4] lisansı kapsamında geri döndürülemez bir biçimde yayınlamayı kabul etmiş olacaksınız.",
 	"wikibase-shortcopyrightwarning-accept-persist": "Gelecek dönem düzenlemelerim için bu şartları kabul ediyorum. Bu mesajı tekrar gösterme.",
 	"wikibase-copyrighttooltip-acknowledge": "Gelecekteki diğer düzenlemelerim için bu şartları kabul ediyorum. Bu mesajı bir daha gösterme.",
 	"wikibase-entityselector-more": "daha fazla",

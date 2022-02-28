@@ -121,7 +121,7 @@
 	"wikibase-snakview-snaktypeselector-value": "mukautettu arvo",
 	"wikibase-snakformat-invalid-value": "Virheellinen arvo.",
 	"wikibase-snakformat-propertynotfound": "Ominaisuutta ei löydy.",
-	"wikibase-shortcopyrightwarning": "Klikkaamalla ”$1” hyväksyt [[$2|käyttöehdot]] ja suostut siihen, että muokkauksesi julkaistaan lisenssin $3 alaisena.",
+	"wikibase-shortcopyrightwarning": "Klikkaamalla ”$1” hyväksyt [[$2|käyttöehdot]] ja suostut siihen, että muokkauksesi julkaistaan lisenssin [$3 $4] alaisena.",
 	"wikibase-copyrighttooltip-acknowledge": "Hyväksyn nämä ehdot tulevissa muokkauksissani. Älä näytä tätä viestiä uudelleen.",
 	"wikibase-entityselector-more": "lisää",
 	"wikibase-entityselector-notfound": "Ei hakutuloksia",

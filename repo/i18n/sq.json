@@ -114,7 +114,7 @@
 	"wikibase-snakview-snaktypeselector-value": "vlera e personalizuar",
 	"wikibase-snakformat-invalid-value": "Vlerë e pavlefshme.",
 	"wikibase-snakformat-propertynotfound": "Tipari nuk u gjet.",
-	"wikibase-shortcopyrightwarning": "Duke klikuar \"$1\", ju pranoni [[$2|kushtet e përdorimit]] dhe pajtoheni në mënyrë të pakthyeshme për të liruar kontributin tuaj nën $3 .",
+	"wikibase-shortcopyrightwarning": "Duke klikuar \"$1\", ju pranoni [[$2|kushtet e përdorimit]] dhe pajtoheni në mënyrë të pakthyeshme për të liruar kontributin tuaj nën [$3 $4] .",
 	"wikibase-shortcopyrightwarning-accept-persist": "Unë i pranoj këto kushte për redaktimet e mia në të ardhmen. Mos e shfaq përsëri këtë mesazh.",
 	"wikibase-copyrighttooltip-acknowledge": "Unë i pranoj këto kushte për redaktimet e mia në të ardhmen. Mos e shfaq përsëri këtë mesazh.",
 	"wikibase-entityselector-more": "më shumë",

@@ -139,7 +139,7 @@
 	"wikibase-snakview-snaktypeselector-value": "قيمة مخصصة",
 	"wikibase-snakformat-invalid-value": "قيمة غير صالحة.",
 	"wikibase-snakformat-propertynotfound": "الخاصية غير موجودة.",
-	"wikibase-shortcopyrightwarning": "بالنقر على $1 أنت توافق على [[$2|شروط الاستخدام]] وأنك تطرح مساهمتك دون تراجع بموجب $3.",
+	"wikibase-shortcopyrightwarning": "بالنقر على $1 أنت توافق على [[$2|شروط الاستخدام]] وأنك تطرح مساهمتك دون تراجع بموجب [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "أوافق على هذه الشروط لتعديلاتي المستقبلية، لا تظهر هذه الرسالة مرة آخرى.",
 	"wikibase-copyrighttooltip-acknowledge": "أقبل هذه الشروط لتعديلاتي القادمة. لا تظهر لي هذه الرسالة بعد الآن.",
 	"wikibase-entityselector-more": "المزيد",

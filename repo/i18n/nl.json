@@ -136,7 +136,7 @@
 	"wikibase-snakview-snaktypeselector-value": "aangepaste waarde",
 	"wikibase-snakformat-invalid-value": "Ongeldige waarde.",
 	"wikibase-snakformat-propertynotfound": "Eigenschap niet gevonden.",
-	"wikibase-shortcopyrightwarning": "Door te klikken op \"$1\" gaat u akkoord met de [[$2|gebruiksvoorwaarden]] en gaat u onherroepelijk akkoord met het vrijgeven van uw bijdrage onder de $3.",
+	"wikibase-shortcopyrightwarning": "Door te klikken op \"$1\" gaat u akkoord met de [[$2|gebruiksvoorwaarden]] en gaat u onherroepelijk akkoord met het vrijgeven van uw bijdrage onder de [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Ik accepteer deze voorwaarden voor mijn toekomstige bewerkingen. Geef dit bericht niet opnieuw weer.",
 	"wikibase-copyrighttooltip-acknowledge": "Ik accepteer deze voorwaarden voor mijn toekomstige bewerkingen. Geef dit bericht niet opnieuw weer.",
 	"wikibase-entityselector-more": "meer",

@@ -131,7 +131,7 @@
 	"wikibase-snakview-snaktypeselector-value": "valor personalizado",
 	"wikibase-snakformat-invalid-value": "Valor inválido.",
 	"wikibase-snakformat-propertynotfound": "Propriedade não encontrada.",
-	"wikibase-shortcopyrightwarning": "Ao clicar em \"$1\", você concorda com os [[$2|termos de uso]] e irrevogavelmente aceita disponibilizar sua contribuição sob $3.",
+	"wikibase-shortcopyrightwarning": "Ao clicar em \"$1\", você concorda com os [[$2|termos de uso]] e irrevogavelmente aceita disponibilizar sua contribuição sob [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Eu aceito estes termos para minhas futuras edições. Não mostre esta mensagem novamente.",
 	"wikibase-copyrighttooltip-acknowledge": "Eu aceito estes termos para minhas futuras edições. Não mostre esta mensagem novamente.",
 	"wikibase-entityselector-more": "mais",

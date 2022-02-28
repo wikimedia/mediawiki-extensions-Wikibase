@@ -123,7 +123,7 @@
 	"wikibase-snakview-snaktypeselector-value": "anpassat värde",
 	"wikibase-snakformat-invalid-value": "Ogiltigt värde.",
 	"wikibase-snakformat-propertynotfound": "Egenskapen hittades inte.",
-	"wikibase-shortcopyrightwarning": "Genom att klicka på \"$1\" samtycker du med [[$2|användarvillkoren]] och samtycker oåterkalleligen att släppa ditt bidrag under $3.",
+	"wikibase-shortcopyrightwarning": "Genom att klicka på \"$1\" samtycker du med [[$2|användarvillkoren]] och samtycker oåterkalleligen att släppa ditt bidrag under [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Jag accepterar dessa villkor för mina framtida redigeringar. Visa inte detta meddelande igen.",
 	"wikibase-copyrighttooltip-acknowledge": "Jag accepterar dessa villkor för mina framtida redigeringar. Visa inte detta meddelande igen.",
 	"wikibase-entityselector-more": "mer",
