@@ -8,7 +8,9 @@
 		}
 	},
 	"scripts": {
-		"api-testing": "mocha --timeout 0 --recursive tests/api-testing",
+		"api-testing": "npm-run-all -p api-testing:*",
+		"api-testing:wikibase": "mocha --timeout 0 --recursive tests/api-testing",
+		"api-testing:rest-api": "mocha --timeout 0 --recursive repo/rest-api/tests/mocha/api-testing",
 		"doc": "npm-run-all doc:*",
 		"doc:jsduck": "jsduck",
 		"doc:data-bridge-storybook": "npm --prefix client/data-bridge run build-storybook -- -o ../../docs/data-bridge-storybook",

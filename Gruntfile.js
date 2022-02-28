@@ -16,7 +16,7 @@ module.exports = function ( grunt ) {
 				'**/*.{js,json}',
 				'!view/resources/jquery/ui/**',
 				'!view/lib/**',
-				'!node_modules/**',
+				'!**/node_modules/**',
 				'!vendor/**',
 				'!extensions/**',
 				'!client/data-bridge/**',
