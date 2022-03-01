@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Serializers\ItemSerializer;
+use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 
 /**

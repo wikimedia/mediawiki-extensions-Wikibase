@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
@@ -24,8 +25,10 @@ class GetItemTest extends TestCase {
 		$itemLabel = "potato";
 
 		$retriever = $this->createStub( ItemRetriever::class );
-		$retriever->method( "getItem" )->willReturn( NewItem::withId( $itemId )->andLabel( "en", "potato" )->build() );
-		$serializer = WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer();
+		$retriever->method( "getItem" )->willReturn( NewItem::withId( $itemId )->andLabel( "en", $itemLabel )->build() );
+		$serializer = new ItemSerializer(
+			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
+		);
 
 		$itemRequest = new GetItemRequest( $itemId );
 		$itemResult = ( new GetItem( $retriever, $serializer ) )->execute( $itemRequest );
