@@ -516,6 +516,11 @@ Enable/Disable the tainted reference feature.
 
 DEFAULT: ```false```
 
+#### restApiEnabled {#repo_restApiEnabled}
+Enable the Wikibase REST API.
+
+DEFAULT: ```false```
+
 #### federatedPropertiesEnabled {#repo_federatedPropertiesEnabled}
 Enable the federated properties feature. **Note that** once this feature is enable (set true), it must not be disabled (set false) again.
 The behaviour is unpredicted if it is disabled after it was enabled.

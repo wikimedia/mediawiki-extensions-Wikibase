@@ -32,6 +32,9 @@ $wgWBRepoSettings['dataBridgeEnabled'] = true;
 // enable tainted-refs
 $wgWBRepoSettings['taintedReferencesEnabled'] = true;
 
+// enable Wikibase REST API
+$wgWBRepoSettings['restApiEnabled'] = true;
+
 // enable data value normalization
 $wgWBRepoSettings['tmpNormalizeDataValues'] = true;
 
