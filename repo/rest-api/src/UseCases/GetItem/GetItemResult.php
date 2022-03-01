@@ -5,7 +5,7 @@ namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemResponse {
+class GetItemResult {
 
 	private $itemSerialization;
 
