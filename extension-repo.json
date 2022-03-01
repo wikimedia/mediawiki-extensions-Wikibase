@@ -532,6 +532,13 @@
 			]
 		}
 	},
+	"RestRoutes": [
+		{
+			"path": "/wikibase/v0/entities/items/{id}",
+			"method": "GET",
+			"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemRouteHandler::factory"
+		}
+	],
 	"GroupPermissions": {
 		"*": {
 			"item-term": true,
