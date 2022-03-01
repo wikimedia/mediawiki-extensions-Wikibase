@@ -3,10 +3,8 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use MediaWikiIntegrationTestCase;
-use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
+use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -27,14 +25,8 @@ class GetItemIntegrationTest extends MediaWikiIntegrationTestCase {
 		$item = NewItem::withLabel( "en", $itemLabel )->build();
 		$entityStore->saveEntity( $item, self::class, self::getTestUser()->getUser(), EDIT_NEW );
 
-		$useCase = new GetItem(
-			new WikibaseEntityLookupItemRetriever(
-				WikibaseRepo::getEntityLookup()
-			),
-			new ItemSerializer( WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer() )
-		);
-
-		$itemResult = $useCase->execute( new GetItemRequest( $item->getId()->getSerialization() ) );
+		$itemResult = WbRestApi::getGetItem()
+			->execute( new GetItemRequest( $item->getId()->getSerialization() ) );
 
 		$this->assertSame(
 			$item->getId()->getSerialization(),
