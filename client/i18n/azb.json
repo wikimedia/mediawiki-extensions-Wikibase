@@ -5,7 +5,8 @@
 			"Amir a57",
 			"Ilğım",
 			"Koroğlu",
-			"Mousa"
+			"Mousa",
+			"Bir morty"
 		]
 	},
 	"tooltip-t-wikibase": "آیتمه باغلی وئری مخزنی ایله ایلگی‌سی وار",
@@ -19,6 +20,8 @@
 	"wikibase-linkitem-title": "صفحه‌یه باغلانتی",
 	"wikibase-linkitem-linkpage": "صفحه‌یه باغلا",
 	"wikibase-linkitem-selectlink": "لوطفا بو صفحه‌یه باغلادیغینیز سایت ایله صفحه‌نی سئچین.",
+	"wikibase-linkitem-input-site": "دیل:",
+	"wikibase-linkitem-input-page": "صفحه:",
 	"wikibase-linkitem-success-link": "بۇ صفحه‌یه باغلانتی وئریلدی. بیزیم [$1 آنا دئیتا آنباریمیزدا] باغلانتی‌یا شامیل اوْلان آیتمی تاپا بیلرسینیز.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "گیزلت",

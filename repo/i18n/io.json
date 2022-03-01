@@ -59,6 +59,7 @@
 	"wikibase-modifyentity-id": "Identifiko-nombro (ID):",
 	"wikibase-modifyterm-language": "Linguala kodexo:",
 	"wikibase-itemmerge-permissiondenied": "Nepermisata.",
+	"wikibase-history-title-with-label": "Historio di la revizo di \"$2\" ($1)",
 	"special-redirectentity": "Ridirektar ento",
 	"wikibase-restoreold": "restaurar",
 	"wikibase-entity-summary-restore": "Restaurar revizuro $3 da [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",

@@ -3,14 +3,15 @@
 		"authors": [
 			"Brazal.dang",
 			"Geopoet",
-			"ShimunUfesoj"
+			"ShimunUfesoj",
+			"Daramlagon"
 		]
 	},
-	"wikibase-edit": "liwaton",
-	"wikibase-add": "idugang",
-	"wikibase-label-empty": "Mayong Pigtutukoy na liyabel",
-	"wikibase-description-empty": "Mayong pigtukoy na paglaladawan",
-	"wikibase-sitelinks-special": "Iba pan mga sityo",
+	"wikibase-edit": "baguhon",
+	"wikibase-add": "magdagdag",
+	"wikibase-label-empty": "Mayong label",
+	"wikibase-description-empty": "Mayong paglaladawan",
+	"wikibase-sitelinks-special": "Iba pang mga site",
 	"wikibase-statementview-rank-normal": "Normal na ranggo",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 sarong pabalikwat.",
 	"wikibase-setlabeldescriptionaliases-intro": "Ining porma minatugot saimo na magkaag nin panandaan, deskripsyon asin mga alyas kan entidad. Ika kaipo enot na magtao nin ID kan entidad (e.g. \"Q23\") asin sarong kodigo nin lengguwahe (e.g. \"en\").",

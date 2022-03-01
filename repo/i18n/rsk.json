@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Keresturec"
+		]
+	},
+	"wikibase-edit": "ушориц",
+	"wikibase-add": "додай",
+	"wikibase-label-empty": "Назва нє дефинована",
+	"wikibase-description-empty": "Опис нє дефиновани",
+	"wikibase-sitelinks-special": "Други сайти",
+	"wikibase-statementview-rank-normal": "Звичайни ранґ"
+}
