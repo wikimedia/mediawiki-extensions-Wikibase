@@ -51,7 +51,7 @@
 	"wikibase-snakview-snaktypeselector-value": "Wäät",
 	"wikibase-snakformat-invalid-value": "Onjöltejje Wäät.",
 	"wikibase-snakformat-propertynotfound": "Eijeschaff nit jefonge",
-	"wikibase-shortcopyrightwarning": "Mem Kleke op „$1“ schtemms de [[$2|Bedengonge fö der Jebruch]] zoh un och onwiderohflesch Dine Beijdraach onger der $3 öffentlesch ze maache.",
+	"wikibase-shortcopyrightwarning": "Mem Kleke op „$1“ schtemms de [[$2|Bedengonge fö der Jebruch]] zoh un och onwiderohflesch Dine Beijdraach onger der [$3 $4] öffentlesch ze maache.",
 	"wikibase-copyrighttooltip-acknowledge": "Esch schtemmen dämm och för ming zohkönftijje Beijdrähsch un Änderonge zoh. Frohch mesch nit norr_ens.",
 	"wikibase-entityselector-more": "mih",
 	"wikibase-anonymouseditwarning": "Opjepaß: Weil De nit enjelogg bes, weed Ding <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"Internet Protocol\">IP</i>-Adräß en dä  entity iere Leß met de Väsjohne faßjehallde wääde.",

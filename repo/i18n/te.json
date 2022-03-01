@@ -41,7 +41,7 @@
 	"wikibase-snakview-property-input-placeholder": "లక్షణం",
 	"wikibase-snakview-variations-somevalue-label": "తెలియని విలువ",
 	"wikibase-snakview-variations-novalue-label": "విలువ లేదు",
-	"wikibase-shortcopyrightwarning": "\"$1\" నొక్కి మీరు, [[$2|వినియోగ నియమాలను]] అంగీకరిస్తూ, $3 కింద మీ రచనను వెనక్కి తీసుకోలేని విధంగా విడుదల చేసేందుకు అంగీకరిస్తున్నారు.",
+	"wikibase-shortcopyrightwarning": "\"$1\" నొక్కి మీరు, [[$2|వినియోగ నియమాలను]] అంగీకరిస్తూ, [$3 $4] కింద మీ రచనను వెనక్కి తీసుకోలేని విధంగా విడుదల చేసేందుకు అంగీకరిస్తున్నారు.",
 	"wikibase-entityselector-more": "మరిన్ని",
 	"wikibase-anonymouseditwarning": "హెచ్చరిక: మీరి లాగినై లేరు. మీరు దిద్దుబాట్లేమైనా చేస్తే మీ [https://en.wikipedia.org/wiki/IP_address ఐపీ చిరునామా] బహిరంగంగా కనిపిస్తుంది. మీరు <strong>[[Special:UserLogin|లాగినైతే]]</strong> లేదా <strong>[[Special:CreateAccount|ఖాతాను సృష్టించుకుంటే]]</strong>, ఇతర ప్రయోజనాలతో పాటు మీరు చేసే దిద్దుబాట్ల శ్రేయస్సు మీ వాడుకరిపేరుకు చెందుతుంది.",
 	"wikibase-anonymouseditwarning-message": "మీరు దిద్దుబాట్లేమైనా చేస్తే మీ ఐపీ చిరునామా బహిరంగంగా కనిపిస్తుంది. మీరు లాగినైతే లేదా ఖాతా సృష్టించుకుంటే, ఇతర ప్రయోజనాలతో పాటు మీరు చేసే దిద్దుబాట్ల శ్రేయస్సు మీ వాడుకరిపేరుకు చెందుతుంది.",

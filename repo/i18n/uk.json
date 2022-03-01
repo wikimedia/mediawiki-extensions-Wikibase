@@ -130,7 +130,7 @@
 	"wikibase-snakview-snaktypeselector-value": "інше значення",
 	"wikibase-snakformat-invalid-value": "Неприпустиме значення.",
 	"wikibase-snakformat-propertynotfound": "Властивість не знайдено.",
-	"wikibase-shortcopyrightwarning": "Натиснувши «$1», Ви погоджуєтесь із [[$2|умовами використання]], і погоджуєтесь поширювати Ваше редагування на умовах $3.",
+	"wikibase-shortcopyrightwarning": "Натиснувши «$1», Ви погоджуєтесь із [[$2|умовами використання]], і погоджуєтесь поширювати Ваше редагування на умовах [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Я погоджуюся редагувати далі на цих умовах. Більше не показувати це повідомлення.",
 	"wikibase-copyrighttooltip-acknowledge": "Я погоджуюся редагувати далі на цих умовах. Більше не показувати це повідомлення.",
 	"wikibase-entityselector-more": "більше",

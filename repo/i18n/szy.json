@@ -87,7 +87,7 @@
 	"wikibase-snakview-snaktypeselector-value": "pakuniza misanga’ay a sulyang",
 	"wikibase-snakformat-invalid-value": "la’cusay a sulyang.",
 	"wikibase-snakformat-propertynotfound": "caykatepa ku susin.",
-	"wikibase-shortcopyrightwarning": "sapecec \"$1\" dayhiw mizawis kisu [[$2| mamaala a cedang]], caayay canuis mizawis pisaungay $3 patiyak tisuwan paanin",
+	"wikibase-shortcopyrightwarning": "sapecec \"$1\" dayhiw mizawis kisu [[$2| mamaala a cedang]], caayay canuis mizawis pisaungay [$3 $4] patiyak tisuwan paanin",
 	"wikibase-copyrighttooltip-acknowledge": "mizawis kaku ku tatalaayaway a mikawaway-kalumyiti pisaungay uyniyay cedang. amana paazih aca tina palatuh.",
 	"wikibase-entityselector-more": "yadah",
 	"wikibase-entityselector-notfound": "inayi’ matatungusay cesyun",

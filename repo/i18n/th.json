@@ -100,7 +100,7 @@
 	"wikibase-snakview-snaktypeselector-value": "ระบุค่า",
 	"wikibase-snakformat-invalid-value": "ค่าไม่ถูกต้อง",
 	"wikibase-snakformat-propertynotfound": "ไม่พบคุณสมบัติ",
-	"wikibase-shortcopyrightwarning": "เมื่อคุณกดปุ่ม \"$1\" ถือว่าคุณยอมรับ[[$2|ข้อกำหนดการใช้งาน]] และคุณตกลงเผยแพร่งานของคุณภายใต้สัญญาอนุญาต $3 อย่างไม่อาจเพิกถอนได้",
+	"wikibase-shortcopyrightwarning": "เมื่อคุณกดปุ่ม \"$1\" ถือว่าคุณยอมรับ[[$2|ข้อกำหนดการใช้งาน]] และคุณตกลงเผยแพร่งานของคุณภายใต้สัญญาอนุญาต [$3 $4] อย่างไม่อาจเพิกถอนได้",
 	"wikibase-copyrighttooltip-acknowledge": "ฉันยอมรับเงื่อนไชดังกล่าวสำหรับการแก้ไขของฉันในครั้งต่อไป ไม่ต้องแสดงข้อความนี้อีก",
 	"wikibase-entityselector-more": "เพิ่มเติม",
 	"wikibase-entityselector-notfound": "ไม่พบรายการที่ตรงกัน",

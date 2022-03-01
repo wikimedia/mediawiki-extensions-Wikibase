@@ -101,7 +101,7 @@
 	"wikibase-snakview-snaktypeselector-value": "valoare specificată",
 	"wikibase-snakformat-invalid-value": "Valoare nevalidă.",
 	"wikibase-snakformat-propertynotfound": "Proprietatea nu a fost găsită.",
-	"wikibase-shortcopyrightwarning": "Apăsând butonul „$1”, sunteți de acord cu [[$2|termenii și condițiile de utilizare]] și eliberați irevocabil contribuția dumneavoastră sub $3.",
+	"wikibase-shortcopyrightwarning": "Apăsând butonul „$1”, sunteți de acord cu [[$2|termenii și condițiile de utilizare]] și eliberați irevocabil contribuția dumneavoastră sub [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "Accept acești termeni pentru modificările mele viitoare. Nu se mai afișează acest mesaj din nou.",
 	"wikibase-entityselector-more": "mai multe",
 	"wikibase-entityselector-notfound": "Nu au fost găsite potriviri",

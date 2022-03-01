@@ -101,7 +101,7 @@
 	"wikibase-snakview-snaktypeselector-value": "swójska hódnota",
 	"wikibase-snakformat-invalid-value": "Njepłaćiwa hódnota.",
 	"wikibase-snakformat-propertynotfound": "Kajkosć njeje so namakała.",
-	"wikibase-shortcopyrightwarning": "Přez kliknjenje na \"$1\" zwoliš do [[$2|wužiwanskich wuměnjenjow]] a sy definitiwnje z tym přezjedny, swój přinošk pod $3 stajić.",
+	"wikibase-shortcopyrightwarning": "Přez kliknjenje na \"$1\" zwoliš do [[$2|wužiwanskich wuměnjenjow]] a sy definitiwnje z tym přezjedny, swój přinošk pod [$3 $4] stajić.",
 	"wikibase-shortcopyrightwarning-accept-persist": "Přihłosuju tutym wuměnjenjam za swoje přichodne změny. Njepokazaj tutu zdźělenku znowa.",
 	"wikibase-copyrighttooltip-acknowledge": "Akceptuju tute wuměnjenja za swoje přichodne změny. Njepokazaj tutu zdźělenku hišće raz.",
 	"wikibase-entityselector-more": "wjace",

@@ -148,7 +148,7 @@
 	"wikibase-snakview-snaktypeselector-value": "自定义值",
 	"wikibase-snakformat-invalid-value": "无效值。",
 	"wikibase-snakformat-propertynotfound": "未找到属性。",
-	"wikibase-shortcopyrightwarning": "点击“$1”即表示您接受[[$2|使用条款]]，并不可撤销地接受以$3发布您的贡献。",
+	"wikibase-shortcopyrightwarning": "点击“$1”即表示您接受[[$2|使用条款]]，并不可撤销地接受以[$3 $4]发布您的贡献。",
 	"wikibase-shortcopyrightwarning-accept-persist": "我接受对我未来的编辑也采用这些条款。不再显示该信息。",
 	"wikibase-copyrighttooltip-acknowledge": "我接受对我未来的编辑也采用这些条款。不再显示该信息。",
 	"wikibase-entityselector-more": "更多",

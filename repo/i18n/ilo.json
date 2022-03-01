@@ -93,7 +93,7 @@
 	"wikibase-snakview-snaktypeselector-value": "naidumduma a pateg",
 	"wikibase-snakformat-invalid-value": "Imbalido a pateg.",
 	"wikibase-snakformat-propertynotfound": "Saan a nabirukan ti tagikua.",
-	"wikibase-shortcopyrightwarning": "Babaen ti panagpindut iti \"$1\", umannurotka kadagiti [[$2|termino ti panagusar]], ken dika mawaswas nga umannurot a mangibbet kadagiti inparawadmo babaen ti $3.",
+	"wikibase-shortcopyrightwarning": "Babaen ti panagpindut iti \"$1\", umannurotka kadagiti [[$2|termino ti panagusar]], ken dika mawaswas nga umannurot a mangibbet kadagiti inparawadmo babaen ti [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "Awatek dagitoy a termino para kadagiti amin a masakbayan nga urnosek. Saanton nga iparang daytoy a mensahe.",
 	"wikibase-entityselector-more": "adu pay",
 	"wikibase-anonymouseditwarning": "Ballaag: Saanka a nakastrek.\nTi IP a pagtaengam ket mairehistonto iti pakasaritaan ti panagurnos iti daytoy nga entidad.",

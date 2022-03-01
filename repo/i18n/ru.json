@@ -148,7 +148,7 @@
 	"wikibase-snakview-snaktypeselector-value": "конкретное значение",
 	"wikibase-snakformat-invalid-value": "Недопустимое значение.",
 	"wikibase-snakformat-propertynotfound": "Свойство не найдено.",
-	"wikibase-shortcopyrightwarning": "Нажав на кнопку «$1», вы соглашаетесь с [[$2|условиями использования]], а также соглашаетесь безотзывно публиковать свой вклад на условиях $3.",
+	"wikibase-shortcopyrightwarning": "Нажав на кнопку «$1», вы соглашаетесь с [[$2|условиями использования]], а также соглашаетесь безотзывно публиковать свой вклад на условиях [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Я принимаю эти условия для моих будущих правок. Не показывать больше это сообщение.",
 	"wikibase-copyrighttooltip-acknowledge": "Я принимаю эти условия для моих будущих правок. Не показывать больше это сообщение.",
 	"wikibase-entityselector-more": "ещё",

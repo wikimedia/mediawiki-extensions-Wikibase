@@ -119,7 +119,7 @@
 	"wikibase-snakview-snaktypeselector-value": "giá trị tùy biến",
 	"wikibase-snakformat-invalid-value": "Giá trị không hợp lệ.",
 	"wikibase-snakformat-propertynotfound": "Không tìm thấy Thuộc tính.",
-	"wikibase-shortcopyrightwarning": "Với việc bấm nút “$1”, bạn chấp nhận [[$2|các điều khoản sử dụng]], và bạn đồng ý phát hành, một cách không thể hủy bỏ, đóng góp của mình theo $3.",
+	"wikibase-shortcopyrightwarning": "Với việc bấm nút “$1”, bạn chấp nhận [[$2|các điều khoản sử dụng]], và bạn đồng ý phát hành, một cách không thể hủy bỏ, đóng góp của mình theo [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Tôi đồng ý áp dụng các điều khoản này vào các sửa đổi sắp tới. Đừng hiện thông báo này nữa.",
 	"wikibase-copyrighttooltip-acknowledge": "Tôi đồng ý áp dụng các điểu khoản này vào các sửa đổi sắp tới. Đừng hiện thông báo này nữa.",
 	"wikibase-entityselector-more": "thêm",

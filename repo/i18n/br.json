@@ -114,7 +114,7 @@
 	"wikibase-snakview-snaktypeselector-value": "talvoud personelaet",
 	"wikibase-snakformat-invalid-value": "Talvoud direizh.",
 	"wikibase-snakformat-propertynotfound": "N'eo ket bet kavet ar perzh.",
-	"wikibase-shortcopyrightwarning": "En ur glikañ war \"$1\" e tegemerit an [[$2|termenoù implij]] hag e savit a-du evit ma vo implijet ho tegasadenn dindan an $3 da viken.",
+	"wikibase-shortcopyrightwarning": "En ur glikañ war \"$1\" e tegemerit an [[$2|termenoù implij]] hag e savit a-du evit ma vo implijet ho tegasadenn dindan an [$3 $4] da viken.",
 	"wikibase-shortcopyrightwarning-accept-persist": "Asantiñ a ran d'an termenoù-se evit ma degasadennoù da zont. Arabat diskouez ar c'hemenn-mañ din ken.",
 	"wikibase-copyrighttooltip-acknowledge": "Asantiñ a ran d'an termenoù-se evit ma degasadennoù da zont. Arabat diskouez ar c'hemenn-mañ din ken.",
 	"wikibase-entityselector-more": "muioc'h",

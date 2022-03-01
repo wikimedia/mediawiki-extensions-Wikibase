@@ -113,7 +113,7 @@
 	"wikibase-snakview-snaktypeselector-value": "προσαρμοσμένη τιμή",
 	"wikibase-snakformat-invalid-value": "Μη έγκυρη τιμή.",
 	"wikibase-snakformat-propertynotfound": "Η ιδιότητα δεν βρέθηκε.",
-	"wikibase-shortcopyrightwarning": "Κάνοντας κλικ στο \"$1\", συμφωνείτε με τους [[$2|όρους χρήσης]], και συμφωνείτε αμετάκλητα να θέσετε την συνεισφορά σας υπό το $3 .",
+	"wikibase-shortcopyrightwarning": "Κάνοντας κλικ στο \"$1\", συμφωνείτε με τους [[$2|όρους χρήσης]], και συμφωνείτε αμετάκλητα να θέσετε την συνεισφορά σας υπό το [$3 $4] .",
 	"wikibase-copyrighttooltip-acknowledge": "Αποδέχομαι τους όρους αυτούς και για τις επεξεργασίες που θα κάνω στο μέλλον. Να μην εμφανιστεί ξανά αυτό το μήνυμα.",
 	"wikibase-entityselector-more": "περισσότερα",
 	"wikibase-entityselector-notfound": "Δεν βρέθηκε ταίριασμα",

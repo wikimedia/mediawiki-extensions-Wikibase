@@ -110,7 +110,7 @@
 	"wikibase-snakview-snaktypeselector-value": "valor personalizáu",
 	"wikibase-snakformat-invalid-value": "Valor inválidu.",
 	"wikibase-snakformat-propertynotfound": "Nun s'alcontró la propiedá.",
-	"wikibase-shortcopyrightwarning": "Al calcar en \"$1\", aceuta [[$2|les condiciones d'usu]] y aceuta ensin vuelta lliberar les sos collaboraciones baxo la $3.",
+	"wikibase-shortcopyrightwarning": "Al calcar en \"$1\", aceuta [[$2|les condiciones d'usu]] y aceuta ensin vuelta lliberar les sos collaboraciones baxo la [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Aceuto estes condiciones pa les mios futures ediciones. Nun volver a amosar esti mensaxe.",
 	"wikibase-copyrighttooltip-acknowledge": "Aceuto estes condiciones pa les mios futures ediciones. Nun volver a amosar esti mensaxe.",
 	"wikibase-entityselector-more": "más",

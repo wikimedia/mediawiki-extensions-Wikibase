@@ -106,7 +106,7 @@
 	"wikibase-snakview-snaktypeselector-value": "brugerdefineret værdi",
 	"wikibase-snakformat-invalid-value": "Ugyldig værdi.",
 	"wikibase-snakformat-propertynotfound": "Egenskab ikke fundet.",
-	"wikibase-shortcopyrightwarning": "Ved at klikke på \"$1\", accepterer du [[$2|brugervilkårene]], og du accepterer uigenkaldeligt at frigive dit bidrag under $3.",
+	"wikibase-shortcopyrightwarning": "Ved at klikke på \"$1\", accepterer du [[$2|brugervilkårene]], og du accepterer uigenkaldeligt at frigive dit bidrag under [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "Jeg accepterer disse vilkår for mine fremtidige redigeringer. Vis ikke denne meddelelse igen.",
 	"wikibase-entityselector-more": "mere",
 	"wikibase-anonymouseditwarning": "Advarsel: Du er ikke logget på. Din [https://da.wikipedia.org/wiki/Internetadresse IP-adresse] vil være offentligt synlig, hvis du foretager ændringer. Hvis du <strong>[[Special:UserLogin|logger ind]]</strong> eller <strong>[[Special:CreateAccount|opretter en konto]]</strong>, tilskrives dine ændringer et brugernavn, blandt andre fordele.",

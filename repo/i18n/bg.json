@@ -118,7 +118,7 @@
 	"wikibase-snakview-snaktypeselector-value": "стойност",
 	"wikibase-snakformat-invalid-value": "Невалидна стойност.",
 	"wikibase-snakformat-propertynotfound": "Свойството не беше намерено.",
-	"wikibase-shortcopyrightwarning": "Натискайки „$1“, се съгласявате с [[$2|Условията за ползване]] и безвъзвратно публикувате приноса си под условията на $3.",
+	"wikibase-shortcopyrightwarning": "Натискайки „$1“, се съгласявате с [[$2|Условията за ползване]] и безвъзвратно публикувате приноса си под условията на [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "Приемам тези условия за моите бъдещи редакции. Не показвай повече това съобщение.",
 	"wikibase-entityselector-more": "още",
 	"wikibase-entityselector-notfound": "Няма открити съвпадения",

@@ -97,7 +97,7 @@
 	"wikibase-snakview-variations-somevalue-label": "ukjend verdi",
 	"wikibase-snakview-variations-novalue-label": "ingen verdi",
 	"wikibase-snakview-snaktypeselector-value": "oppgjeven verdi",
-	"wikibase-shortcopyrightwarning": "Ved å trykkja «$1», godtek du [[$2|bruksvilkåra]], og du gjev endeleg samtykke til å gje ut bidraget ditt under $3.",
+	"wikibase-shortcopyrightwarning": "Ved å trykkja «$1», godtek du [[$2|bruksvilkåra]], og du gjev endeleg samtykke til å gje ut bidraget ditt under [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "Eg godtek desse vilkåra for endringar eg gjer i framtida. Ikkje vis denne meldinga meir.",
 	"wikibase-entityselector-more": "meir",
 	"wikibase-entityselector-notfound": "Fann ingen treff",

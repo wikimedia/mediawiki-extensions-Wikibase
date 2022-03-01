@@ -74,7 +74,7 @@
 	"wikibase-snakview-variations-somevalue-label": "valor pa conossù",
 	"wikibase-snakview-variations-novalue-label": "gnun valor",
 	"wikibase-snakview-snaktypeselector-value": "valor përsonalisà",
-	"wikibase-shortcopyrightwarning": "An sgnacand su «$1», chiel a aceta le [[$2|condission d'usagi]] e a aceta ëd buté ëd fasson irevocàbil soa contribussion sota $3.",
+	"wikibase-shortcopyrightwarning": "An sgnacand su «$1», chiel a aceta le [[$2|condission d'usagi]] e a aceta ëd buté ëd fasson irevocàbil soa contribussion sota [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "I aceto se condission për mie future modìfiche. Mostré pi nen ës mëssagi.",
 	"wikibase-entityselector-more": "pi",
 	"wikibase-anonymouseditwarning": "Atension: A l'é nen rintrà ant ël sistema.\nSoa adrëssa IP a sarà argistrà ant la stòria dle modìfiche ëd costa entità.",

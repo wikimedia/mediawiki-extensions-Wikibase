@@ -79,7 +79,7 @@
 	"wikibase-snakview-variations-somevalue-label": "უცნობი მნიშვნელობა",
 	"wikibase-snakview-variations-novalue-label": "მნიშვნელობა არ არის მითითებული",
 	"wikibase-snakview-snaktypeselector-value": "საკუთარი მნიშვნელობა",
-	"wikibase-shortcopyrightwarning": "ღილაკზე „$1“ დაწკაპუნებით, თქვენ ეთანხმებით [[$2|გამოყენების პირობებს]] და თქვენ შეუქცევადად ეთანხმებით თქვენი წვლილის გამოქვეყნებას შემდეგი პირობით $3.",
+	"wikibase-shortcopyrightwarning": "ღილაკზე „$1“ დაწკაპუნებით, თქვენ ეთანხმებით [[$2|გამოყენების პირობებს]] და თქვენ შეუქცევადად ეთანხმებით თქვენი წვლილის გამოქვეყნებას შემდეგი პირობით [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "მე ვეთანხმები ამ პირობებს ჩემი მომავალი რედაქტირებებისათვის. აღარ მაჩვენოთ ეს შეტყობინება.",
 	"wikibase-entityselector-more": "მეტი",
 	"wikibase-entityselector-notfound": "შესაბამისობა ვერ მოიძებნა",

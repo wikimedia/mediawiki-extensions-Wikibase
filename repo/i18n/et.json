@@ -110,7 +110,7 @@
 	"wikibase-snakview-snaktypeselector-value": "kohandatud väärtus",
 	"wikibase-snakformat-invalid-value": "Vigane väärtus.",
 	"wikibase-snakformat-propertynotfound": "Omadust ei leitud.",
-	"wikibase-shortcopyrightwarning": "Kui klõpsad \"$1\", nõustud [[$2|kasutustingimustega]] ja avaldad pöördumatult oma kaastöö litsentsi $3 all.",
+	"wikibase-shortcopyrightwarning": "Kui klõpsad \"$1\", nõustud [[$2|kasutustingimustega]] ja avaldad pöördumatult oma kaastöö litsentsi [$3 $4] all.",
 	"wikibase-shortcopyrightwarning-accept-persist": "Nõustun tegema edasisi muudatusi kooskõlas nende tingimustega. Ära seda sõnumit enam näita.",
 	"wikibase-copyrighttooltip-acknowledge": "Nõustun tegema edasisi muudatusi kooskõlas nende tingimustega. Ära seda sõnumit enam näita.",
 	"wikibase-entityselector-more": "veel",

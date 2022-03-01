@@ -123,7 +123,7 @@
 	"wikibase-snakview-snaktypeselector-value": "valor personalitzat",
 	"wikibase-snakformat-invalid-value": "Valor no vàlid.",
 	"wikibase-snakformat-propertynotfound": "Propietat no trobada.",
-	"wikibase-shortcopyrightwarning": "En fer clic a \"$1\", expresseu el vostre acord amb les [[$2|condicions d'ús]], i accepteu, de manera irrevocable, alliberar la vostra contribució sota la $3.",
+	"wikibase-shortcopyrightwarning": "En fer clic a \"$1\", expresseu el vostre acord amb les [[$2|condicions d'ús]], i accepteu, de manera irrevocable, alliberar la vostra contribució sota la [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Accepto aquests termes per a les meves futures edicions. No em tornis a mostrar el missatge-",
 	"wikibase-copyrighttooltip-acknowledge": "Accepto aquestes condicions per a les meves modificacions futures. No tornis a mostrar aquest missatge.",
 	"wikibase-entityselector-more": "més",

@@ -110,7 +110,7 @@
 	"wikibase-snakview-snaktypeselector-value": "norima reikšmė",
 	"wikibase-snakformat-invalid-value": "Klaidinga reikšmė.",
 	"wikibase-snakformat-propertynotfound": "Savybė nerasta.",
-	"wikibase-shortcopyrightwarning": "Paspausdamas \"$1\", jūs sutinkate su [[$2|naudojimo taisyklėmis]] ir neatšaukiamai sutinkate savo indėlį platinti pagal $3.",
+	"wikibase-shortcopyrightwarning": "Paspausdamas \"$1\", jūs sutinkate su [[$2|naudojimo taisyklėmis]] ir neatšaukiamai sutinkate savo indėlį platinti pagal [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "Aš sutinku su šiomis taisyklėmis darydamas keitimus ateityje. Daugiau nerodykite šio pranešimo.",
 	"wikibase-entityselector-more": "daugiau",
 	"wikibase-entityselector-notfound": "Atitikuo nerastas",

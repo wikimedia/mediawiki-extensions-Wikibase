@@ -124,7 +124,7 @@
 	"wikibase-snakview-snaktypeselector-value": "valor personalizado",
 	"wikibase-snakformat-invalid-value": "Valor inválido.",
 	"wikibase-snakformat-propertynotfound": "Propriedade não encontrada.",
-	"wikibase-shortcopyrightwarning": "Ao clicar \"$1\", concorda com as [[$2|condições de uso]], e concorda irrevogavelmente em disponibilizar a sua contribuição ao abrigo da licença $3.",
+	"wikibase-shortcopyrightwarning": "Ao clicar \"$1\", concorda com as [[$2|condições de uso]], e concorda irrevogavelmente em disponibilizar a sua contribuição ao abrigo da licença [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Aceito estas condições para as minhas edições futuras. Não mostrar esta mensagem novamente.",
 	"wikibase-copyrighttooltip-acknowledge": "Aceito estas condições para as minhas edições futuras. Não mostrar esta mensagem novamente.",
 	"wikibase-entityselector-more": "mais",

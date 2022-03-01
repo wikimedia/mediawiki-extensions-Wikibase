@@ -71,7 +71,7 @@
 	"wikibase-snakview-variations-somevalue-label": "nepoznata vrijednost",
 	"wikibase-snakview-variations-novalue-label": "bez vrijednosti",
 	"wikibase-snakview-snaktypeselector-value": "uobičajena vrijednost",
-	"wikibase-shortcopyrightwarning": "Kliknuvši \"$1\", pristajete na [[$2|pravila upotrebe]] i trajno pristajete izdati svoj doprinos pod $3.",
+	"wikibase-shortcopyrightwarning": "Kliknuvši \"$1\", pristajete na [[$2|pravila upotrebe]] i trajno pristajete izdati svoj doprinos pod [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "Prihvaćam ove uslove za moja buduća uređivanja. Ne pokazujte više ovu poruku.",
 	"wikibase-entityselector-more": "više",
 	"wikibase-move-error": "Ne možete premjestiti stranice koje se nalaze u imenskom prostoru podataka niti premjestiti stranice u taj imenski prostor.",

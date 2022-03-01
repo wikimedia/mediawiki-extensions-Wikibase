@@ -96,7 +96,7 @@
 	"wikibase-snakview-snaktypeselector-value": "valore automatico",
 	"wikibase-snakformat-invalid-value": "Valore invalido.",
 	"wikibase-snakformat-propertynotfound": "Proprietà nun truvata.",
-	"wikibase-shortcopyrightwarning": "Cliccanno ncopp'a \"$1\", accettate 'e [[$2|condiziune d'uso]], e accettate irrevocabilmente a rilassà 'o contribbuto vuosto 'n base 'a $3.",
+	"wikibase-shortcopyrightwarning": "Cliccanno ncopp'a \"$1\", accettate 'e [[$2|condiziune d'uso]], e accettate irrevocabilmente a rilassà 'o contribbuto vuosto 'n base 'a [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "Je accetto sti térmene p' 'e future cagnamiente. Nun mustrà n'ata vota sta mmasciata.",
 	"wikibase-entityselector-more": "cchiù",
 	"wikibase-anonymouseditwarning": "Attenziò: Accesso nun affettuato. Dint'a cronologgia 'e ll'entità sarrà riggistrato l'indirizzo IP vuosto.",

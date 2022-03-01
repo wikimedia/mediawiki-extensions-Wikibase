@@ -97,7 +97,7 @@
 	"wikibase-snakview-snaktypeselector-value": "nilai tersuai",
 	"wikibase-snakformat-invalid-value": "Nilai tidak sah.",
 	"wikibase-snakformat-propertynotfound": "Sifat tidak dijumpai.",
-	"wikibase-shortcopyrightwarning": "Sambil mengklik \"$1\", anda bersetuju dengan [[$2|syarat-syarat]] dan sudi melepaskan sumbangan anda tanpa di bawah $3 tanpa boleh ditarik balik.",
+	"wikibase-shortcopyrightwarning": "Sambil mengklik \"$1\", anda bersetuju dengan [[$2|syarat-syarat]] dan sudi melepaskan sumbangan anda tanpa di bawah [$3 $4] tanpa boleh ditarik balik.",
 	"wikibase-copyrighttooltip-acknowledge": "Saya menerima syarat-syarat ini untuk suntingan saya yang akan datang. Jangan paparkan pesanan ini lagi.",
 	"wikibase-entityselector-more": "lagi",
 	"wikibase-anonymouseditwarning": "Amnaran: Anda belum log masuk.\nAlamat IP anda akan dicatatkan dalam sejarah suntingan perkara ini.",
