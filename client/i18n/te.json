@@ -54,5 +54,6 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong> తో పాటు {{PLURAL:$4|మరొక పేజీ|మరో $4 ఇతర పేజీలు|100=99+ ఇతర పేజీలు}} {{WBREPONAME}} ఐటములకు {{GENDER:$2|కనెక్టయ్యాయి}}.",
 	"notification-subject-page-connection": "{{SITENAME}} లో మీరు {{GENDER:$3|సృష్టించిన}} ఒక పేజీని ఒక {{WBREPONAME}} ఆంశానికి {{GENDER:$2|జోడించాం}}",
 	"connected-redirect-category": "{{WBREPONAME}} అంశానికి జోడించిన దారిమార్పులు",
-	"connected-redirect-category-desc": "{{WBREPONAME}} అంశానికి జోడించిన దారిమార్పు పేజీలు ఈ వర్గంలో ఉంటాయి."
+	"connected-redirect-category-desc": "{{WBREPONAME}} అంశానికి జోడించిన దారిమార్పు పేజీలు ఈ వర్గంలో ఉంటాయి.",
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>హెచ్చరిక:</strong> మీరు లాగినవలేదు. మీరు ఏమైనా దిద్దుబాట్లు చేస్తే మీ ఐపీ చిరునామా బహిరంగంగా కనిపిస్తుంది. మీరు <strong>లాగిన్ ఐనా</strong> లేక <strong>ఖాతా సృష్టించుకున్నా</strong> మీ మార్పులు మీ పేరుతో ఉండటమే కాకుండా, మరెన్నో సదుపాయాలుంటాయి."
 }
