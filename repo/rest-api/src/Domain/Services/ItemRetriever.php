@@ -10,6 +10,6 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 interface ItemRetriever {
 
-	public function getItem( ItemId $itemId ): Item;
+	public function getItem( ItemId $itemId ): ?Item;
 
 }
