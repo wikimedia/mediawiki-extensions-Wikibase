@@ -42,3 +42,28 @@ The autodocs and/or bundled specification OpenAPI files are generated to the `di
 ## Development
 
 * @subpage rest_adr_index
+
+### Project structure
+This REST API follows the [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) and takes inspiration from [an article about Netflix's use of the hexagonal architecture](https://netflixtechblog.com/ready-for-changes-with-hexagonal-architecture-b315ec967749). This decision is documented in an ADR: @subpage rest_adr_0001.
+
+![Hexagonal Architecture Diagram](./hexagonal_architecture.drawio.svg)
+
+#### Directory structure
+
+- `docs/`
+  - `adr/`: [Architectural Decision Records](https://adr.github.io/)
+- `dist/`: the built OpenAPI specification and swagger documentation
+- `specs/`: source of the OpenAPI specification
+- `src/`
+  - `DataAccess/`: implementations of services that bind to persistent storage
+  - `Domain/`: domain models and services
+  - `Presentation/`: presenter and converter classes to manipulate the output as part of the transport layer
+  - `RouteHandlers/` create and pass request DTO into use cases and return HTTP responses
+  - `UseCases/`: one directory per use case
+- `tests/`
+  - `mocha/`: tests using the mocha framework
+    - `api-testing/`: end-to-end tests using [MediaWiki's api-testing][1] library
+	- `openapi-validation/`: tests against the OpenAPI spec
+  - `phpunit/`: integration and unit tests using the phpunit framework
+
+[1]: https://www.mediawiki.org/wiki/MediaWiki_API_integration_tests

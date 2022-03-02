@@ -34,6 +34,8 @@ FILE_PATTERNS          = *.php \
                          *.md
 RECURSIVE              = YES
 
+IMAGE_PATH             = docs/assets/images repo/rest-api/docs/assets/images
+
 HTML_DYNAMIC_SECTIONS  = YES
 GENERATE_TREEVIEW      = YES
 TREEVIEW_WIDTH         = 250
