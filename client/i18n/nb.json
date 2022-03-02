@@ -7,7 +7,8 @@
 			"Jeblad",
 			"Jon Harald Søby",
 			"Kjetil r",
-			"Tarjeimo"
+			"Tarjeimo",
+			"Abuluntu"
 		]
 	},
 	"wikibase-client-desc": "Klient for Wikibase-utvidelsen",
@@ -98,7 +99,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Noen utsagn",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Utsagn: $1",
 	"wikibase-pageinfo-entity-usage-X": "All entitetsdata",
-	"wikibase-pageinfo-entity-usage-O": "Annet (påstander)",
+	"wikibase-pageinfo-entity-usage-O": "Diverse (f.eks. aliaser, entitetseksistens)",
 	"wikibase-property-render-error": "Klarte ikke å gjengi egenskapen $1: $2",
 	"wikibase-otherprojects": "På andre prosjekter",
 	"wikibase-otherprojects-beta-message": "Andre prosjekter i sidefeltet",
@@ -164,7 +165,7 @@
 	"wikibase-client-data-bridge-edit-conflict-error-message": "En annen bruker redigerte nettopp denne verdien og publiserte sine endringer først. Endringene dine kunne ikke lagres. Last siden på nytt for å hente den nye verdien.",
 	"wikibase-client-data-bridge-unknown-error-heading": "Noe gikk galt",
 	"wikibase-client-data-bridge-unknown-error-message": "En feil oppsto og den valgte verdien kan ikke redigeres for øyeblikket. Prøv å laste på nytt.",
-	"wikibase-client-data-bridge-error-report": "<p>Hvis feilen fortsetter, [$1 rapporter dette problemet] og inkluder følgende informasjon:</p>\n<ul>\n<li>$2</li>\n<li>$3 av $4</li>\n<li>Feilkode: $5</li>\n</ul>",
+	"wikibase-client-data-bridge-error-report": "<p>Hvis feilen fortsetter, [$1 rapporter dette problemet] og beskriv handlingene du har tatt, og inkluder følgende informasjon:</p>\n<ul>\n<li>$2</li>\n<li>$3 av $4</li>\n<li>Feilkode: $5</li>\n</ul>",
 	"wikibase-client-data-bridge-error-reload-bridge": "Last på nytt",
 	"wikibase-client-data-bridge-error-reload-page": "Last siden på nytt",
 	"wikibase-client-data-bridge-error-go-back": "Gå tilbake",
