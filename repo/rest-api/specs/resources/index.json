@@ -1,0 +1,5 @@
+{
+	"/entities/items/{entity_id}": {
+		"$ref": "./items/single.json"
+	}
+}

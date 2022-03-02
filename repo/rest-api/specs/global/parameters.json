@@ -1,0 +1,18 @@
+{
+	"entityId": {
+		"in": "path",
+		"name": "entity_id",
+		"description": "The ID of the required Item",
+		"required": true,
+		"schema": {
+			"type": "string",
+			"pattern": "^Q[1-9]\\d{0,9}$"
+		},
+		"examples": {
+			"item": {
+				"summary": "Example of Item ID",
+				"value": "Q42"
+			}
+		}
+	}
+}
