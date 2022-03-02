@@ -117,7 +117,7 @@ class SerializerFactory {
 	 *
 	 * @since 2.1
 	 *
-	 * @return DispatchableSerializer
+	 * @return ItemSerializer
 	 */
 	public function newItemSerializer() {
 		return new ItemSerializer(
