@@ -4,11 +4,9 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\SimpleHandler;
-use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -26,18 +24,9 @@ class GetItemRouteHandler extends SimpleHandler {
 	}
 
 	public static function factory(): Handler {
-		$useCase = new GetItem(
-			new WikibaseEntityLookupItemRetriever(
-				WikibaseRepo::getEntityLookup()
-			),
-			new ItemSerializer( WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer() )
+		return WbRestApi::getRouteHandlerFeatureToggle()->useHandlerIfEnabled(
+			new self( WbRestApi::getGetItem() )
 		);
-
-		// creation of the feature toggle should move to service wiring in the future
-		return ( new RouteHandlerFeatureToggle(
-			WikibaseRepo::getSettings()->getSetting( 'restApiEnabled' ),
-			new ApiNotEnabledRouteHandler()
-		) )->useHandlerIfEnabled( new self( $useCase ) );
 	}
 
 	public function run( string $id ): array {

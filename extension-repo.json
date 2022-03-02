@@ -622,7 +622,8 @@
 		"wikibaserepomagic": "repo/WikibaseRepo.i18n.magic.php"
 	},
 	"ServiceWiringFiles": [
-		"repo/WikibaseRepo.ServiceWiring.php"
+		"repo/WikibaseRepo.ServiceWiring.php",
+		"repo/rest-api/src/WbRestApi.ServiceWiring.php"
 	],
 	"QUnitTestModule": {
 		"remoteExtPath": "Wikibase",
