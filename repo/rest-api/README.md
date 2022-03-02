@@ -25,8 +25,16 @@ API specs can be validated using npm `test` script, e.g. by running:
 docker run --rm --user $(id -u):$(id -g) -v $PWD:/app -w /app node:16 npm test
 ```
 
-API specs can be bundled into a single file using npm `build` script, e.g. by running:
+API specs can be bundled into a single file using npm `build:spec` script, e.g. by running:
 
 ```
-docker run --rm --user $(id -u):$(id -g) -v $PWD:/app -w /app node:16 npm run build
+docker run --rm --user $(id -u):$(id -g) -v $PWD:/app -w /app node:16 npm run build:spec
 ```
+
+Autodocs can be generated from the API specification using npm `build:docs` script, e.g. by running:
+
+```
+docker run --rm --user $(id -u):$(id -g) -v $PWD:/app -w /app node:16 npm run build:docs
+```
+
+The autodocs and/or bundled specification OpenAPI files are generated to the `dist` directory.

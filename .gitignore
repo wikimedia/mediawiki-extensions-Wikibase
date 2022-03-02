@@ -19,6 +19,8 @@ tests/browser/.bundle/*
 tests/browser/config/config.yml
 .api-testing.config.json
 
+repo/rest-api/dist/
+
 # Doxygen
 docs/php
 docs/*.tmp
