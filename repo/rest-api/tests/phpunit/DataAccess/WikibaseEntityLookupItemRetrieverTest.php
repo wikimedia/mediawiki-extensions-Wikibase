@@ -5,11 +5,12 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemRetriever;
+use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemRevisionRetriever;
+use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\Tests\NewItem;
 
 /**
- * @covers \Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemRetriever
+ * @covers \Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemRevisionRetriever
  *
  * @group Wikibase
  * @group Database
@@ -18,25 +19,32 @@ use Wikibase\Repo\Tests\NewItem;
  */
 class WikibaseEntityLookupItemRetrieverTest extends MediaWikiIntegrationTestCase {
 
-	public function testGetItem(): void {
+	public function testGetItemRevision(): void {
 		$item = NewItem::withId( 'Q123' )->build();
+		$revisionId = 42;
+		$lastModified = '20201111070707';
 
-		$itemRevision = $this->createMock( EntityRevision::class );
-		$itemRevision->expects( $this->once() )
+		$entityRevision = $this->createMock( EntityRevision::class );
+		$entityRevision->expects( $this->once() )
 			->method( 'getEntity' )
 			->willReturn( $item );
+		$entityRevision->expects( $this->once() )
+			->method( 'getRevisionId' )
+			->willReturn( $revisionId );
+		$entityRevision->expects( $this->once() )
+			->method( 'getTimestamp' )
+			->willReturn( $lastModified );
 
 		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->expects( $this->once() )
 			->method( 'getEntityRevision' )
-			->willReturn( $itemRevision );
+			->willReturn( $entityRevision );
 
-		$retriever = new WikibaseEntityLookupItemRetriever( $entityRevisionLookup );
+		$retriever = new WikibaseEntityLookupItemRevisionRetriever( $entityRevisionLookup );
 
 		$this->assertEquals(
-			$item,
-			$retriever->getItem( $item->getId() )
+			new ItemRevision( $item, $lastModified, $revisionId ),
+			$retriever->getItemRevision( $item->getId() )
 		);
 	}
-
 }

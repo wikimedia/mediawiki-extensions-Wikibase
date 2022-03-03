@@ -1,7 +1,7 @@
 <?php declare( strict_types = 1 );
 
 use MediaWiki\MediaWikiServices;
-use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemRetriever;
+use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemRevisionRetriever;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\RouteHandlers\ApiNotEnabledRouteHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\RouteHandlerFeatureToggle;
@@ -13,7 +13,7 @@ return [
 
 	'WbRestApi.GetItem' => function ( MediaWikiServices $services ): GetItem {
 		return new GetItem(
-			new WikibaseEntityLookupItemRetriever(
+			new WikibaseEntityLookupItemRevisionRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
 			new ItemSerializer(
