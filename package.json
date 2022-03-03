@@ -10,7 +10,7 @@
 	"scripts": {
 		"api-testing": "npm-run-all -p api-testing:*",
 		"api-testing:wikibase": "mocha --timeout 0 --recursive tests/api-testing",
-		"api-testing:rest-api": "mocha --timeout 0 --recursive repo/rest-api/tests/mocha/api-testing",
+		"api-testing:rest-api": "npm --prefix repo/rest-api run api-testing",
 		"doc": "npm-run-all doc:*",
 		"doc:jsduck": "jsduck",
 		"doc:data-bridge-storybook": "npm --prefix client/data-bridge run build-storybook -- -o ../../docs/data-bridge-storybook",
@@ -19,6 +19,7 @@
 		"doc:tainted-ref-dist-size": "node build/dist-size/analyze docs/tainted-ref-dist-size wikimedia mediawiki-extensions-Wikibase view/lib/wikibase-tainted-ref/dist/tainted-ref.init.js view/lib/wikibase-tainted-ref/dist/tainted-ref.common.js view/lib/wikibase-tainted-ref/dist/tainted-ref.app.css",
 		"install:bridge": "npm --prefix client/data-bridge ci",
 		"install:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref ci",
+		"install:rest-api": "npm --prefix repo/rest-api ci",
 		"postinstall": "npm-run-all -p install:*",
 		"selenium": "killall -0 chromedriver 2>/dev/null || chromedriver --url-base=/wd/hub --port=4444 & npm run selenium-test; killall chromedriver",
 		"selenium-daily": "MEDIAWIKI_USER='Selenium user' MW_SERVER=https://wikidata.beta.wmflabs.org:443 MW_SCRIPT_PATH=/w WIKIBASE_PROPERTY_STRING=P443 npm run selenium-test",
