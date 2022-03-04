@@ -1,16 +1,18 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\UseCases\GetItem;
+namespace Wikibase\Repo\RestApi\Domain\Model;
+
+use Wikibase\DataModel\Entity\Item;
 
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemResult {
+class ItemRevision {
 
 	/**
-	 * @var array
+	 * @var Item
 	 */
-	private $itemSerialization;
+	private $item;
 	/**
 	 * @var string timestamp in MediaWiki format 'YYYYMMDDhhmmss'
 	 */
@@ -20,14 +22,14 @@ class GetItemResult {
 	 */
 	private $revisionId;
 
-	public function __construct( array $itemSerialization, string $lastModified, int $revisionId ) {
-		$this->itemSerialization = $itemSerialization;
+	public function __construct( Item $item, string $lastModified, int $revisionId ) {
+		$this->item = $item;
 		$this->lastModified = $lastModified;
 		$this->revisionId = $revisionId;
 	}
 
-	public function getItem(): array {
-		return $this->itemSerialization;
+	public function getItem(): Item {
+		return $this->item;
 	}
 
 	public function getLastModified(): string {

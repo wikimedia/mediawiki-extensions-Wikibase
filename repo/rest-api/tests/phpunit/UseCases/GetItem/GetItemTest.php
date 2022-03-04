@@ -3,8 +3,9 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemResult;
@@ -23,9 +24,17 @@ class GetItemTest extends TestCase {
 	public function testGetExistingItem(): void {
 		$itemId = "Q123";
 		$itemLabel = "potato";
+		$lastModifiedTimestamp = '20201111070707';
+		$revisionId = 42;
 
-		$retriever = $this->createStub( ItemRetriever::class );
-		$retriever->method( "getItem" )->willReturn( NewItem::withId( $itemId )->andLabel( "en", $itemLabel )->build() );
+		$retriever = $this->createStub( ItemRevisionRetriever::class );
+		$retriever->method( "getItemRevision" )->willReturn(
+			new ItemRevision(
+				NewItem::withId( $itemId )->andLabel( "en", $itemLabel )->build(),
+				$lastModifiedTimestamp,
+				$revisionId
+			)
+		);
 		$serializer = new ItemSerializer(
 			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
 		);
@@ -37,6 +46,7 @@ class GetItemTest extends TestCase {
 		$this->assertInstanceOf( GetItemResult::class, $itemResult );
 		$this->assertSame( $itemId, $item['id'] );
 		$this->assertSame( $itemLabel, $item['labels']['en']['value'] );
+		$this->assertSame( $lastModifiedTimestamp, $itemResult->getLastModified() );
+		$this->assertSame( $revisionId, $itemResult->getRevisionId() );
 	}
-
 }

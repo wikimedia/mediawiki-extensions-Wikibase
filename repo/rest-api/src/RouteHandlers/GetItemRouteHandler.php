@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
+use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\WbRestApi;
@@ -29,9 +31,15 @@ class GetItemRouteHandler extends SimpleHandler {
 		);
 	}
 
-	public function run( string $id ): array {
+	public function run( string $id ): Response {
 		$result = $this->getItem->execute( new GetItemRequest( $id ) );
-		return $result->getItem();
+		$response = $this->getResponseFactory()->create();
+		$response->setHeader( 'Content-Type', 'application/json' );
+		$response->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $result->getLastModified() ) );
+		$response->setHeader( 'ETag', $result->getRevisionId() );
+		$response->setBody( new StringStream( json_encode( $result->getItem() ) ) );
+
+		return $response;
 	}
 
 	public function getParamSettings(): array {
@@ -43,5 +51,4 @@ class GetItemRouteHandler extends SimpleHandler {
 			],
 		];
 	}
-
 }

@@ -2,14 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Domain\Services;
 
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 
 /**
  * @license GPL-2.0-or-later
  */
-interface ItemRetriever {
+interface ItemRevisionRetriever {
 
-	public function getItem( ItemId $itemId ): ?Item;
-
+	public function getItemRevision( ItemId $itemId ): ?ItemRevision;
 }
