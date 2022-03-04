@@ -4,7 +4,8 @@ namespace Wikibase\Repo\RestApi\DataAccess;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 
 /**
@@ -12,15 +13,20 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
  */
 class WikibaseEntityLookupItemRetriever implements ItemRetriever {
 
-	private $entityLookup;
+	private $entityRevisionLookup;
 
-	public function __construct( EntityLookup $entityLookup ) {
-		$this->entityLookup = $entityLookup;
+	public function __construct( EntityRevisionLookup $entityRevisionLookup ) {
+		$this->entityRevisionLookup = $entityRevisionLookup;
 	}
 
+	/**
+	 * @throws StorageException
+	 */
 	public function getItem( ItemId $itemId ): ?Item {
+		$itemRevision = $this->entityRevisionLookup->getEntityRevision( $itemId );
+
 		/** @var Item $item */
-		$item = $this->entityLookup->getEntity( $itemId );
+		$item = $itemRevision->getEntity();
 		'@phan-var Item $item';
 
 		return $item;

@@ -14,7 +14,7 @@ return [
 	'WbRestApi.GetItem' => function ( MediaWikiServices $services ): GetItem {
 		return new GetItem(
 			new WikibaseEntityLookupItemRetriever(
-				WikibaseRepo::getEntityLookup( $services )
+				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
 			new ItemSerializer(
 				WikibaseRepo::getBaseDataModelSerializerFactory( $services )

@@ -3,7 +3,8 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use MediaWikiIntegrationTestCase;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemRetriever;
 use Wikibase\Repo\Tests\NewItem;
 
@@ -19,13 +20,18 @@ class WikibaseEntityLookupItemRetrieverTest extends MediaWikiIntegrationTestCase
 
 	public function testGetItem(): void {
 		$item = NewItem::withId( 'Q123' )->build();
-		$entityLookup = $this->createMock( EntityLookup::class );
-		$entityLookup->expects( $this->once() )
+
+		$itemRevision = $this->createMock( EntityRevision::class );
+		$itemRevision->expects( $this->once() )
 			->method( 'getEntity' )
-			->with( $item->getId() )
 			->willReturn( $item );
 
-		$retriever = new WikibaseEntityLookupItemRetriever( $entityLookup );
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$entityRevisionLookup->expects( $this->once() )
+			->method( 'getEntityRevision' )
+			->willReturn( $itemRevision );
+
+		$retriever = new WikibaseEntityLookupItemRetriever( $entityRevisionLookup );
 
 		$this->assertEquals(
 			$item,
