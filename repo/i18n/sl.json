@@ -107,7 +107,7 @@
 	"wikibase-snakview-snaktypeselector-value": "vrednost po meri",
 	"wikibase-snakformat-invalid-value": "Neveljavna vrednost.",
 	"wikibase-snakformat-propertynotfound": "Lastnosti ni mogoče najti.",
-	"wikibase-shortcopyrightwarning": "S klikom gumba »$1« izražate strinjanje s [[$2|pogoji uporabe]] in nepreklicno privoljujete v objavo svojega prispevka pod licenco [$3 $4].",
+	"wikibase-shortcopyrightwarning": "S klikom gumba »$1« izražate strinjanje s [[$2|pogoji uporabe]] in nepreklicno privoljujete v objavo svojega prispevka pod dovoljenjem [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Te pogoje sprejmem za vsa svoja prihodnja urejanja. Tega sporočila ne prikaži več.",
 	"wikibase-copyrighttooltip-acknowledge": "Te pogoje sprejmem za vsa svoja prihodnja urejanja. Tega sporočila ne prikaži več.",
 	"wikibase-entityselector-more": "več",

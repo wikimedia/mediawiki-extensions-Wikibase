@@ -8,6 +8,7 @@
 	},
 	"wikibase-edit": "mute",
 	"wikibase-save": "vuorkkii",
+	"wikibase-publish": "almostit",
 	"wikibase-add": "lasseet",
 	"wikibase-addreference": "lasseet käldee",
 	"wikibase-statementlistview-add": "lasseet áárvu",
@@ -39,6 +40,9 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Nommâ:",
 	"wikibase-redirectentity-submit": "Stivrim",
 	"wikibase-listdatatypes-multilingualtext-head": "Maaŋgâkielâlâš tekstâ",
+	"wikibase-listdatatypes-string-head": "Merkkâráiđu",
 	"wikibase-listdatatypes-time-head": "Äigi",
+	"wikibase-listdatavaluetypes-name-string": "merkkâráiđu",
+	"wikibase-tainted-ref-popper-help-link-text": "Iše",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Jooskâ"
 }
