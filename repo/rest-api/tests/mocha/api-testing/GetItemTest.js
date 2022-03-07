@@ -41,6 +41,7 @@ describe( 'GET /entities/items/{id} ', () => {
 
 		assert.equal( response.status, 200 );
 		assert.equal( response.body.id, testItemId );
+		assert.deepEqual( response.body.aliases, {} ); // expect {}, not []
 		assert.equal( response.header[ 'last-modified' ], testModified );
 		assert.equal( response.header.etag, testRevisionId );
 	} );
