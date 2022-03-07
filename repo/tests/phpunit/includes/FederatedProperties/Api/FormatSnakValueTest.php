@@ -19,7 +19,6 @@ class FormatSnakValueTest extends FederatedPropertiesApiTestCase {
 
 	public function testApiRequest_shouldReturnApiErrorOnFailedRequest() {
 
-		$this->setMwGlobals( 'wgLanguageCode', 'qqx' );
 		$this->setSourceWikiUnavailable();
 
 		$params = [
@@ -31,7 +30,7 @@ class FormatSnakValueTest extends FederatedPropertiesApiTestCase {
 		];
 
 		$this->expectException( ApiUsageException::class );
-		$this->expectExceptionMessage( '(wikibase-api-federated-properties-failed-request)' );
+		$this->expectExceptionMessage( 'The request failed due to a failed request to the federation source wiki.' );
 		$this->doApiRequest( $params );
 	}
 }
