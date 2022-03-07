@@ -1,7 +1,7 @@
 'use strict';
 
 const { REST, assert, action, utils } = require( 'api-testing' );
-const createEntity = require( '../helpers/createEntity' );
+const createEntity = require( '../helpers/entityHelper' ).createEntity;
 
 const germanLabel = 'a-German-label-' + utils.uniq();
 const englishLabel = 'an-English-label-' + utils.uniq();

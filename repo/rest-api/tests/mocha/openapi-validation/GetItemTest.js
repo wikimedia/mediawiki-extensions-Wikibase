@@ -1,33 +1,38 @@
 'use strict';
 
-const { REST, assert } = require( 'api-testing' );
+// allow chai expectations
+/* eslint-disable no-unused-expressions */
+const { REST } = require( 'api-testing' );
 const SwaggerParser = require( '@apidevtools/swagger-parser' );
-const OpenAPIResponseValidator = require( 'openapi-response-validator' ).default;
-const createEntity = require( '../helpers/createEntity' );
+const entityHelper = require( '../helpers/entityHelper' );
+const chai = require( 'chai' );
+const expect = chai.expect;
+const chaiResponseValidator = require( 'chai-openapi-response-validator' ).default;
+const basePath = 'rest.php/wikibase/v0';
+const rest = new REST( basePath );
 
-describe( 'GET /entities/items/{id} ', () => {
-	let testItemId;
-	const basePath = 'rest.php/wikibase/v0';
-
+describe( 'validate GET /entities/items/{id} responses against OpenAPI document', () => {
 	before( async () => {
-		const response = await createEntity( 'item', {} );
-		testItemId = response.entity.id;
-	} );
-
-	it( 'is valid for an "empty" item', async () => {
 		const spec = await SwaggerParser.dereference( './specs/openapi.json' );
-
-		const rest = new REST( basePath );
-		const response = await rest.get( `/entities/items/${testItemId}` );
-		const responseValidator = new OpenAPIResponseValidator(
-			spec.paths[ '/entities/items/{entity_id}' ].get
-		);
-
-		const errors = responseValidator.validateResponse(
-			200,
-			response.body
-		);
-
-		assert.ok( errors === undefined );
+		// dynamically add CI test system to the spec
+		spec.servers = [ { url: rest.req.app + basePath } ];
+		chai.use( chaiResponseValidator( spec ) );
 	} );
+
+	it( '200 OK response is valid for an "empty" item', async () => {
+		const createEmptyItemResponse = await entityHelper.createEntity( 'item', {} );
+		const response = await rest.get( `/entities/items/${createEmptyItemResponse.entity.id}` );
+
+		expect( response.status ).to.equal( 200 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
+	it( '200 OK response is valid for a non-empty item', async () => {
+		const createSingleItemResponse = await entityHelper.createSingleItem();
+		const response = await rest.get( `/entities/items/${createSingleItemResponse.entity.id}` );
+
+		expect( response.status ).to.equal( 200 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
 } );
