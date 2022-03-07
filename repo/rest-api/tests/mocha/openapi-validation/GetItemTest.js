@@ -1,19 +1,16 @@
 'use strict';
 
-const { REST, assert, action } = require( 'api-testing' );
+const { REST, assert } = require( 'api-testing' );
 const SwaggerParser = require( '@apidevtools/swagger-parser' );
 const OpenAPIResponseValidator = require( 'openapi-response-validator' ).default;
+const createEntity = require( '../helpers/createEntity' );
 
 describe( 'GET /entities/items/{id} ', () => {
 	let testItemId;
 	const basePath = 'rest.php/wikibase/v0';
 
 	before( async () => {
-		const response = await action.getAnon().action( 'wbeditentity', {
-			new: 'item',
-			token: '+\\',
-			data: JSON.stringify( {} )
-		}, 'POST' );
+		const response = await createEntity( 'item', {} );
 		testItemId = response.entity.id;
 	} );
 
