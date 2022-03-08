@@ -53,7 +53,7 @@ class WikiPagePropertyOrderProvider extends WikiTextPropertyOrderProvider implem
 			throw new PropertyOrderProviderException( 'The page content of ' . $this->pageTitle->getText() . ' is not TextContent' );
 		}
 
-		return strval( $pageContent->getNativeData() );
+		return strval( $pageContent->getText() );
 	}
 
 }
