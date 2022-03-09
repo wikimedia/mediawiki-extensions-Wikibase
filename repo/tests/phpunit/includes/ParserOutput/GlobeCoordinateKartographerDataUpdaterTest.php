@@ -114,7 +114,7 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 	private function getKartographerParserOutput() {
 		$parserOutput = new ParserOutput();
 		$parserOutput->addModules( [ 'kartographer-rl-module1', 'javascript-stuffs' ] );
-		$parserOutput->getExtensionData( 'kartographer', [ [ 'whatever' ] ] );
+		$parserOutput->setExtensionData( 'kartographer', [ [ 'whatever' ] ] );
 		$parserOutput->setPageProperty( 'kartographer_links', [ [ 34 ] ] );
 		$parserOutput->setPageProperty( 'kartographer_frames', [ [ 'blah' ] ] );
 		$parserOutput->addJsConfigVars( 'wgKartographerMapServer', 'https://maps.wikimedia.org' );
