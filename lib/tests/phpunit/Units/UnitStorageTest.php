@@ -8,7 +8,7 @@ use Wikibase\Lib\Units\CSVUnitStorage;
 use Wikibase\Lib\Units\InMemoryUnitStorage;
 use Wikibase\Lib\Units\JsonUnitStorage;
 use Wikibase\Lib\Units\UnitStorage;
-use Wikimedia\ObjectFactory;
+use Wikimedia\ObjectFactory\ObjectFactory;
 
 /**
  * @covers \Wikibase\Lib\Units\JsonUnitStorage
