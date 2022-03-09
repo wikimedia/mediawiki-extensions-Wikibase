@@ -171,7 +171,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "J’accepte ces conditions pour mes prochaines modifications. Ne plus afficher ce message.",
 	"wikibase-entityselector-more": "plus",
 	"wikibase-entityselector-notfound": "Aucune correspondance trouvée",
-	"wikibase-anonymouseditwarning": "Attention : vous n’êtes pas connecté(e). Votre [https://en.wikipedia.org/wiki/IP_address adresse IP] sera visible publiquement si vous apportez des modifications. Si vous vous <strong>[[Special:UserLogin|connectez]]</strong> ou si vous <strong>[[Special:CreateAccount|créez un compte]]</strong>, vos modifications seront attribuées à un nom d’utilisateur, parmi d’autres avantages.",
+	"wikibase-anonymouseditwarning": "Attention : vous n’êtes pas connecté(e). Votre [https://fr.wikipedia.org/wiki/Adresse_IP adresse IP] sera visible publiquement si vous apportez des modifications. Si vous vous <strong>[[Special:UserLogin|connectez]]</strong> ou si vous <strong>[[Special:CreateAccount|créez un compte]]</strong>, vos modifications seront attribuées à un nom d’utilisateur, parmi d’autres avantages.",
 	"wikibase-anonymouseditwarning-heading": "Vous n’êtes pas connecté(e)",
 	"wikibase-anonymouseditwarning-message": "Votre adresse IP sera actuellement visible publiquement si vous faites des modifications. Si vous vous connectez ou créez un compte, vos modifications seront attribuées à votre nom d’utilisateur, parmi d’autres avantages.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "M’avertir chaque fois que je ne suis pas connecté(e).",
