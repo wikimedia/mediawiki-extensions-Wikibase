@@ -13,6 +13,7 @@ use RequestContext;
 use Skin;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Client\Hooks\SidebarHookHandler;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\NamespaceChecker;
@@ -78,13 +79,19 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function primeParserOutput( ParserOutput $parserOutput, array $pageProps, array $extensionData ) {
+	private function primeParserOutput( ParserOutput $parserOutput, array $pageProps, array $extensionData, array $extensionDataAppend ) {
 		foreach ( $pageProps as $name => $value ) {
 			$parserOutput->setPageProperty( $name, $value );
 		}
 
 		foreach ( $extensionData as $key => $value ) {
 			$parserOutput->setExtensionData( $key, $value );
+		}
+
+		foreach ( $extensionDataAppend as $key => $value ) {
+			foreach ( $value as $item ) {
+				$parserOutput->appendExtensionData( $key, $item );
+			}
 		}
 	}
 
@@ -100,12 +107,15 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 		];
 
 		$pageProps = [
-			'noexternallanglinks' => serialize( [ '*' ] ),
 			'wikibase_item' => 'Q1',
 		];
 
 		$extData = [
 			'wikibase-otherprojects-sidebar' => $sisterLinks,
+		];
+
+		$extDataAppend = [
+			NoLangLinkHandler::EXTENSION_DATA_KEY => [ '*' ],
 		];
 
 		$outputProps = [
@@ -122,7 +132,7 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$outputPage = new OutputPage( $context );
 		$outputPage->setTitle( $title );
 
-		$this->primeParserOutput( $parserOutput, $pageProps, $extData );
+		$this->primeParserOutput( $parserOutput, $pageProps, $extData, $extDataAppend );
 
 		$handler->onOutputPageParserOutput( $outputPage, $parserOutput );
 

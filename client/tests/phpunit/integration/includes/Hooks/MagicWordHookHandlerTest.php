@@ -8,6 +8,7 @@ use Parser;
 use ParserOutput;
 use Title;
 use Wikibase\Client\Hooks\MagicWordHookHandler;
+use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Lib\SettingsArray;
 use Wikimedia\TestingAccessWrapper;
 
@@ -124,8 +125,9 @@ class MagicWordHookHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$this->assertArrayHasKey( 'noexternallanglinks', $cache );
-		$this->assertIsString(
-			$parserOutput->getPageProperty( 'noexternallanglinks' )
+		$this->assertContains(
+			'*',
+			NoLangLinkHandler::getNoExternalLangLinks( $parserOutput )
 		);
 	}
 

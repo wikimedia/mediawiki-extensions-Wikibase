@@ -163,7 +163,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 
 	protected function makeParserOutput( array $langLinks, array $noExternalLangLinks = [] ) {
 		$parserOutput = new ParserOutput();
-		NoLangLinkHandler::setNoExternalLangLinks( $parserOutput, $noExternalLangLinks );
+		NoLangLinkHandler::appendNoExternalLangLinks( $parserOutput, $noExternalLangLinks );
 
 		foreach ( $langLinks as $lang => $link ) {
 			$parserOutput->addLanguageLink( "$lang:$link" );
@@ -520,7 +520,11 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testSuppressRepoLinks( array $repoLinks, array $nel, array $expectedLinks ) {
 		$parserOutput = new ParserOutput();
-		$parserOutput->setPageProperty( 'noexternallanglinks', serialize( $nel ) );
+		foreach ( $nel as $lang ) {
+			$parserOutput->appendExtensionData(
+				NoLangLinkHandler::EXTENSION_DATA_KEY, $lang
+			);
+		}
 
 		$actualLinks = $this->langLinkHandler->suppressRepoLinks( $parserOutput, $repoLinks );
 

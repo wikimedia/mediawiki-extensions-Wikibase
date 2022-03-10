@@ -48,14 +48,17 @@ class NoLangLinkHandlerTest extends \PHPUnit\Framework\TestCase {
 		$settings->setSetting( 'namespaces', $this->namespacesToInclude );
 	}
 
-	public function testGetSetNoExternalLangLinks() {
+	public function testGetAppendNoExternalLangLinks() {
 		$parserOutput = new ParserOutput();
-		$list = [ 'xy', 'abc' ];
 
-		NoLangLinkHandler::setNoExternalLangLinks( $parserOutput, $list );
+		NoLangLinkHandler::appendNoExternalLangLinks( $parserOutput, [ 'xy' ] );
+		$actual = NoLangLinkHandler::getNoExternalLangLinks( $parserOutput );
+		$this->assertEqualsCanonicalizing( [ 'xy' ], $actual );
+
+		NoLangLinkHandler::appendNoExternalLangLinks( $parserOutput, [ 'abc', 'xy', 'def' ] );
 		$actual = NoLangLinkHandler::getNoExternalLangLinks( $parserOutput );
 
-		$this->assertEquals( $list, $actual );
+		$this->assertEqualsCanonicalizing( [ 'abc', 'def', 'xy' ], $actual );
 	}
 
 	public function testDoHandle() {
@@ -65,11 +68,11 @@ class NoLangLinkHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$handler->doHandle( $parser, [ 'en', 'fr' ] );
 		$actual = NoLangLinkHandler::getNoExternalLangLinks( $parser->getOutput() );
-		$this->assertEquals( [ 'en', 'fr' ], $actual );
+		$this->assertEqualsCanonicalizing( [ 'en', 'fr' ], $actual );
 
-		$handler->doHandle( $parser, [ '*', 'zh' ] );
+		$handler->doHandle( $parser, [ '*', 'zh', 'en' ] );
 		$actual = NoLangLinkHandler::getNoExternalLangLinks( $parser->getOutput() );
-		$this->assertEquals( [ 'en', 'fr', '*', 'zh' ], $actual );
+		$this->assertEqualsCanonicalizing( [ 'en', 'fr', '*', 'zh' ], $actual );
 	}
 
 	public function testHandle() {
@@ -79,7 +82,7 @@ class NoLangLinkHandlerTest extends \PHPUnit\Framework\TestCase {
 		NoLangLinkHandler::handle( $parser, '*' );
 		$actual = NoLangLinkHandler::getNoExternalLangLinks( $parser->getOutput() );
 
-		$this->assertEquals( [ '*' ], $actual );
+		$this->assertEqualsCanonicalizing( [ '*' ], $actual );
 	}
 
 }

@@ -16,6 +16,11 @@ use Wikibase\Client\WikibaseClient;
  * @author Daniel Kinzler
  */
 class NoLangLinkHandler {
+	/**
+	 * Key used to store data in ParserOutput.  Exported for use by unit tests.
+	 * @var string
+	 */
+	public const EXTENSION_DATA_KEY = 'wikibase-noexternallanglinks';
 
 	/**
 	 * @var NamespaceChecker
@@ -42,7 +47,7 @@ class NoLangLinkHandler {
 	}
 
 	/**
-	 * Get the noexternallanglinks page property from the ParserOutput,
+	 * Get the noexternallanglinks data from the ParserOutput,
 	 * which is set by the {{#noexternallanglinks}} parser function.
 	 *
 	 * @param ParserOutput $parserOutput
@@ -51,20 +56,35 @@ class NoLangLinkHandler {
 	 *         Empty if {{#noexternallanglinks}} was not used on the page.
 	 */
 	public static function getNoExternalLangLinks( ParserOutput $parserOutput ) {
-		$property = $parserOutput->getPageProperty( 'noexternallanglinks' );
+		$property = $parserOutput->getExtensionData(
+			self::EXTENSION_DATA_KEY
+		);
+		if ( $property === null ) {
+			// BACKWARD COMPATIBILITY: remove after the ParserCache expires
+			// This property used to be stored as a page property, so check
+			// there as well.
+			$old = $parserOutput->getPageProperty( 'noexternallanglinks' );
+			if ( is_string( $old ) ) {
+				return unserialize( $old );
+			}
+		}
 
-		return is_string( $property ) ? unserialize( $property ) : [];
+		return array_keys( $property ?? [] );
 	}
 
 	/**
-	 * Set the noexternallanglinks page property in the ParserOutput,
+	 * Append new languages to the noexternallanglinks data in the ParserOutput,
 	 * which is set by the {{#noexternallanglinks}} parser function.
 	 *
 	 * @param ParserOutput $parserOutput
 	 * @param string[] $noexternallanglinks a list of languages to suppress
 	 */
-	public static function setNoExternalLangLinks( ParserOutput $parserOutput, array $noexternallanglinks ) {
-		$parserOutput->setPageProperty( 'noexternallanglinks', serialize( $noexternallanglinks ) );
+	public static function appendNoExternalLangLinks( ParserOutput $parserOutput, array $noexternallanglinks ) {
+		foreach ( $noexternallanglinks as $lang ) {
+			$parserOutput->appendExtensionData(
+				self::EXTENSION_DATA_KEY, $lang
+			);
+		}
 	}
 
 	/**
@@ -82,9 +102,7 @@ class NoLangLinkHandler {
 		}
 
 		$parserOutput = $parser->getOutput();
-		$nel = array_merge( self::getNoExternalLangLinks( $parserOutput ), $langs );
-
-		self::setNoExternalLangLinks( $parserOutput, $nel );
+		self::appendNoExternalLangLinks( $parserOutput, $langs );
 
 		return '';
 	}
