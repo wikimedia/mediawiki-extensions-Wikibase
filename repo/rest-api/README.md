@@ -7,7 +7,7 @@ Enable the feature toggle:
 $wgWBRepoSettings['restApiEnabled'] = true;
 ```
 
-## API Specification
+## OpenAPI Specification
 
 REST API specification is provided using OpenAPI specification in `specs` directory.
 
@@ -38,3 +38,7 @@ docker run --rm --user $(id -u):$(id -g) -v $PWD:/app -w /app node:16 npm run bu
 ```
 
 The autodocs and/or bundled specification OpenAPI files are generated to the `dist` directory.
+
+## Development
+
+* @subpage rest_adr_index
