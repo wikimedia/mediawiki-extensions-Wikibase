@@ -28,7 +28,7 @@
 			"id",
 			"type",
 			"labels",
-			"properties",
+			"descriptions",
 			"aliases",
 			"statements",
 			"sitelinks"
