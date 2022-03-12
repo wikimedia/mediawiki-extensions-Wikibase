@@ -83,6 +83,10 @@ class UnexpectedUnconnectedPagePrimer {
 		$this->progressReporter = new NullMessageReporter();
 	}
 
+	public function setProgressReporter( MessageReporter $messageReporter ): void {
+		$this->progressReporter = $messageReporter;
+	}
+
 	/**
 	 * Set the batch size multiplicator used to determine the number of page ids to
 	 * probe when selecting for a batch.
@@ -222,7 +226,12 @@ class UnexpectedUnconnectedPagePrimer {
 			[
 				'page_props' => [
 					'LEFT JOIN',
-					[ 'page_id = pp_page', 'pp_propname' => [ 'wikibase_item', 'expectedUnconnectedPage' ] ]
+					[
+						'page_id = pp_page',
+						'pp_propname' => [
+							'wikibase_item', 'unexpectedUnconnectedPage', 'expectedUnconnectedPage'
+						]
+					]
 				]
 			]
 		);
