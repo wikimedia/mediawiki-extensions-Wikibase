@@ -250,7 +250,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
-use Wikimedia\ObjectFactory;
+use Wikimedia\ObjectFactory\ObjectFactory;
 
 /** @phpcs-require-sorted-array */
 return [
