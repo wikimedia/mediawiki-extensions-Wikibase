@@ -7,11 +7,63 @@
 		},
 		"required": [ "code", "message" ]
 	},
+	"NotFound": {
+		"description": "The specified resource was not found",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "#/Error" },
+				"example": {
+					"code": "item-not-found",
+					"message": "Could not find an item with the ID: {item_id}"
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "#/Error" },
+				"example": {
+					"code": "invalid-item-id",
+					"message": "Not a valid item ID: {item_id}"
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"UnexpectedError": {
 		"description": "An unexpected error has occurred",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "#/Error" }
+				"schema": { "$ref": "#/Error" },
+				"example": {
+					"code": "unexpected-error",
+					"message": "Unexpected Error"
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
 			}
 		}
 	},
