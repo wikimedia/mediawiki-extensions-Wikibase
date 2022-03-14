@@ -32,7 +32,8 @@
 			"محمد أحمد عبد الفتاح",
 			"مشعل الحربي",
 			"MuratTheTurkish",
-			"علاء"
+			"علاء",
+			"FiberAhmed"
 		]
 	},
 	"wikibase-desc": "مستودع بيانات مهيكلة",
@@ -310,7 +311,7 @@
 	"wikibase-itemmerge-cant-merge-self": "لا يمكن دمج عنصر مع نفسه.",
 	"wikibase-tokencheck-missingtoken": "توكين التعديل مطلوب.",
 	"wikibase-tokencheck-mustposttoken": "التعديل مسموح فقط باستخدام طلبات POST.",
-	"wikibase-tokencheck-badtoken": "توكين تعديل سيء (ربما انتهت صلاحية جلستك).",
+	"wikibase-tokencheck-badtoken": "توكين تعديل سيئ (ربما انتهت صلاحية جلستك).",
 	"special-dispatchstats": "غير إحصاءات إرسال",
 	"wikibase-dispatchstats-intro": "هذه الصفحة توفر الإحصاءات حول التغييرات السريعة للعملاء.\nيتم إشعار ويكي العميل بتغيير في {{SITENAME}} بمجرد أن يتم إرسال التغيير على هذا الويكي, وقائمة انتظار العمل على تلك الويكي عالجت هذا الإشعار.\n\nويكي عميل يتم إخطاره بتغيير على {{SITENAME}} متى ما كان هذا التغير قد حدث على هذه الويكي، وطابور الشغل على تلك الويكي قد عالج هذا الإخطار.\n\n* {{int:wikibase-dispatchstats-changes}} يظهر عدد وتاريخ أقدم وأحدث العناصر الموجودة حاليا في قائمة الانتظار.\n* {{int:wikibase-dispatchstats-stats}} يوفر معلومات حول عملاء الويكي الأكثر والأقل تأخراً، وأيضاً للمتوسط. يتم توفير المعلومات التالية لكل ويكي:\n** \"{{int:wikibase-dispatchstats-site-id}}\" هو المعرف الداخلي للويكي العميل.\n** \"{{int:wikibase-dispatchstats-pos}}\" هو معرف آخر تغيير تم إرساله إلى الويكي.\n** \"{{int:wikibase-dispatchstats-lag-num}}\" هو عدد التغييرات التي لم يتم إرسالها بعد إلى الويكي.\n** \"{{int:wikibase-dispatchstats-lag-time}}\" هو الفارق الزمني بين آخر تغيير أرسل إلى ويكي، والتغيير الأخير الذي أجري على {{SITENAME}}.\n** \"{{int:wikibase-dispatchstats-touched}}\" هو وقت آخر دفعة من التغييرات تم إرسالها للويكي.",
 	"wikibase-dispatchstats-no-stats": "لا تتوفر أية إحصاءات حالياً.",
@@ -486,8 +487,8 @@
 	"wikibase-pageinfo-subscription-none": "لا شيء",
 	"wikibase-pageinfo-wb-claims": "عدد التقارير في هذا المجال",
 	"wikibase-pageinfo-wb-identifiers": "عدد تقارير التعريف الخارجية في هذا المجال",
-	"wikibase-search-bad-entity-type": "نوع كيان سيء: $1",
-	"wikibase-search-bad-profile-name": "اسم ملف بحث سيء: $1",
+	"wikibase-search-bad-entity-type": "نوع كيان سيئ: $1",
+	"wikibase-search-bad-profile-name": "اسم ملف بحث سيئ: $1",
 	"wikibase-search-namespace-mix": "لا يتم حاليا دعم نطاقي الكيانات والمقالات في البحث معا، سيتم البحث في نطاقات الكيانات فقط.",
 	"wikibase-search-config-notfound": "لم يتم العثور على تكوين بحث النص الكامل: $1",
 	"wikibase-search-config-badclass": "فئة باني الاستعلام سيئة: $1",
