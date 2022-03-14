@@ -168,6 +168,9 @@
 				"WikibaseClient.TermLookup"
 			]
 		},
+		"LoadExtensionSchemaUpdates": {
+			"class": "\\Wikibase\\Client\\Hooks\\LoadExtensionSchemaUpdatesHookHandler"
+		},
 		"Magic": {
 			"class": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler",
 			"services": [
@@ -262,7 +265,10 @@
 		"GetPreferences": "\\Wikibase\\Client\\ClientHooks::onGetPreferences",
 		"InfoAction": "InfoAction",
 		"LinksUpdateComplete": "DataUpdate",
-		"LoadExtensionSchemaUpdates": "SqlUsageTrackerSchemaUpdater",
+		"LoadExtensionSchemaUpdates": [
+			"LoadExtensionSchemaUpdates",
+			"SqlUsageTrackerSchemaUpdater"
+		],
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",
 		"MaintenanceShellStart": "\\Wikibase\\Client\\ClientHooks::onMaintenanceShellStart",
