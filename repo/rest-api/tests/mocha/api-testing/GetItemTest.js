@@ -1,6 +1,8 @@
 'use strict';
 
 const { REST, assert, action, utils } = require( 'api-testing' );
+const createEntity = require( '../helpers/createEntity' );
+
 const germanLabel = 'a-German-label-' + utils.uniq();
 const englishLabel = 'an-English-label-' + utils.uniq();
 const englishDescription = 'an-English-description-' + utils.uniq();
@@ -12,20 +14,16 @@ describe( 'GET /entities/items/{id} ', () => {
 	const basePath = 'rest.php/wikibase/v0';
 
 	before( async () => {
-		const createItem = await action.getAnon().action( 'wbeditentity', {
-			new: 'item',
-			token: '+\\',
-			data: JSON.stringify( {
-				labels: {
-					de: { language: 'de', value: germanLabel },
-					en: { language: 'en', value: englishLabel }
-				},
-				descriptions: {
-					en: { language: 'en', value: englishDescription }
-				}
-			} )
-		}, 'POST' );
-		testItemId = createItem.entity.id;
+		const createItemResponse = await createEntity( 'item', {
+			labels: {
+				de: { language: 'de', value: germanLabel },
+				en: { language: 'en', value: englishLabel }
+			},
+			descriptions: {
+				en: { language: 'en', value: englishDescription }
+			}
+		} );
+		testItemId = createItemResponse.entity.id;
 
 		const getItemMetadata = await action.getAnon().action( 'wbgetentities', {
 			ids: testItemId
