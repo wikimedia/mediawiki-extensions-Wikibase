@@ -23,7 +23,7 @@
 	"wikibase-editlinkstitle": "భాషాలింకులను మార్చు",
 	"wikibase-linkitem-addlinks": "లంకెలను చేర్చండి",
 	"wikibase-linkitem-alreadylinked": "మీరు లింకు చెయ్యదలచిన పేజీ ఈసరికే కేంద్రీయ ఖజానా లోని ఒక [$1 అంశానికి] జోడించి ఉంది. అది ఈ సైటులోని [[$2]] కు లింకై ఉంది. అంశాలను ఒక్క పేజీకి మాత్రమే జోడించగలరు. వేరే పేజీని ఎంచుకుని లింకు చెయ్యండి.",
-	"wikibase-linkitem-title": "ఈ పేజీకి లంకె వెయ్యండి",
+	"wikibase-linkitem-title": "ఈ పేజీకి లింకు ఇవ్వండి",
 	"wikibase-linkitem-linkpage": "పేజీకి లింకు కలుపు",
 	"wikibase-linkitem-selectlink": "ఈ పేజీకి లింకు చెయ్యాలనుకుంటున్న సైటును, పేజీనీ ఎంచుకోండి.",
 	"wikibase-linkitem-input-site": "భాష:",
