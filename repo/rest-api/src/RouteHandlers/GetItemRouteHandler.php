@@ -6,6 +6,7 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\WbRestApi;
@@ -21,13 +22,19 @@ class GetItemRouteHandler extends SimpleHandler {
 	 */
 	private $getItem;
 
-	public function __construct( GetItem $getItem ) {
+	/**
+	 * @var GetItemJsonPresenter
+	 */
+	private $presenter;
+
+	public function __construct( GetItem $getItem, GetItemJsonPresenter $presenter ) {
 		$this->getItem = $getItem;
+		$this->presenter = $presenter;
 	}
 
 	public static function factory(): Handler {
 		return WbRestApi::getRouteHandlerFeatureToggle()->useHandlerIfEnabled(
-			new self( WbRestApi::getGetItem() )
+			new self( WbRestApi::getGetItem(), new GetItemJsonPresenter() )
 		);
 	}
 
@@ -37,7 +44,9 @@ class GetItemRouteHandler extends SimpleHandler {
 		$response->setHeader( 'Content-Type', 'application/json' );
 		$response->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $result->getLastModified() ) );
 		$response->setHeader( 'ETag', $result->getRevisionId() );
-		$response->setBody( new StringStream( json_encode( $result->getItem() ) ) );
+		$response->setBody( new StringStream( json_encode(
+			$this->presenter->getJsonEncodableItem( $result )
+		) ) );
 
 		return $response;
 	}
