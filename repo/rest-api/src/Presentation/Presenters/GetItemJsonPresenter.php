@@ -23,8 +23,12 @@ class GetItemJsonPresenter {
 		] );
 	}
 
-	public function getJsonEncodableItem( GetItemResult $getItemResult ): array {
-		return $this->emptyArrayToObjectConverter->convert( $getItemResult->getItem() );
+	public function getJsonItem( GetItemResult $result ): string {
+		if ( $result->isSuccessful() ) {
+			return json_encode( $this->emptyArrayToObjectConverter->convert( $result->getItem() ) );
+		} else {
+			$error = $result->getError();
+			return json_encode( [ 'code' => $error->getCode(), 'message' => $error->getMessage() ] );
+		}
 	}
-
 }
