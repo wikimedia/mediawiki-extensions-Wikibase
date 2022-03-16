@@ -49,4 +49,23 @@ class GetItemTest extends TestCase {
 		$this->assertSame( $lastModifiedTimestamp, $itemResult->getLastModified() );
 		$this->assertSame( $revisionId, $itemResult->getRevisionId() );
 	}
+
+	public function testItemNotFound(): void {
+		$itemId = "Q123";
+
+		$retriever = $this->createStub( ItemRevisionRetriever::class );
+		$retriever->method( "getItemRevision" )->willReturn( null );
+		$serializer = new ItemSerializer(
+			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
+		);
+
+		$itemRequest = new GetItemRequest( $itemId );
+		$itemResult = ( new GetItem( $retriever, $serializer ) )->execute( $itemRequest );
+
+		$this->assertFalse( $itemResult->isSuccessful() );
+		$this->assertNull( $itemResult->getItem() );
+		$this->assertNull( $itemResult->getLastModified() );
+		$this->assertNull( $itemResult->getRevisionId() );
+		$this->assertSame( 'item-not-found', $itemResult->getError()->getCode() );
+	}
 }

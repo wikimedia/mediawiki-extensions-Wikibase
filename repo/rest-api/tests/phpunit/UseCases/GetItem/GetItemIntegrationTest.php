@@ -39,4 +39,12 @@ class GetItemIntegrationTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	public function testNonExistingItem(): void {
+		$itemResult = WbRestApi::getGetItem()->execute( new GetItemRequest( 'Q99' ) );
+
+		$this->assertFalse( $itemResult->isSuccessful() );
+		$this->assertNull( $itemResult->getItem() );
+		$this->assertNull( $itemResult->getLastModified() );
+		$this->assertNull( $itemResult->getRevisionId() );
+	}
 }

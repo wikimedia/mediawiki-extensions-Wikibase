@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\RestApi\Domain\Model\ErrorReporter;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
 
@@ -22,6 +23,15 @@ class GetItem {
 	public function execute( GetItemRequest $itemRequest ): GetItemResult {
 		$itemId = new ItemId( $itemRequest->getItemId() );
 		$itemRevision = $this->itemRetriever->getItemRevision( $itemId );
+
+		if ( $itemRevision === null ) {
+			return GetItemResult::newFailureResult(
+				new ErrorReporter(
+					'item-not-found',
+					"Could not find an item with the ID {$itemRequest->getItemId()}"
+				)
+			);
+		}
 
 		return GetItemResult::newSuccessResult(
 			$this->itemSerializer->serialize( $itemRevision->getItem() ),
