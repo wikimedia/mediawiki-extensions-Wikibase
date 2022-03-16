@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Abijeet Patro",
+			"AnupamM",
 			"Goelujjwal",
 			"Innocentbunny",
 			"Jayprakash12345",
@@ -22,7 +23,7 @@
 	"wikibase-entity-item": "वस्तु",
 	"wikibase-entity-property": "गुणधर्म",
 	"wikibase-entity-query": "प्रश्न",
-	"wikibase-edit": "संपादन",
+	"wikibase-edit": "संपादित करें",
 	"wikibase-save": "सहेजें",
 	"wikibase-publish": "प्रकाशित करना",
 	"wikibase-cancel": "रद्द करें",

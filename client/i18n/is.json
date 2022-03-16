@@ -88,7 +88,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Sumar staðhæfingar",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Fullyrðing: $1",
 	"wikibase-pageinfo-entity-usage-X": "Öll gögn eininga",
-	"wikibase-pageinfo-entity-usage-O": "Annað (Staðhæfingar)",
+	"wikibase-pageinfo-entity-usage-O": "Ýmislegt (þ.e. samnefni, tilurð einingar)",
 	"wikibase-property-render-error": "Mistókst að ganga frá eiginleikanum $1: $2",
 	"wikibase-otherprojects": "Í öðrum verkefnum",
 	"wikibase-otherprojects-beta-message": "Hliðarstika annara verkefna",
