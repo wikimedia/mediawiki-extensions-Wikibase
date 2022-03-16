@@ -345,6 +345,9 @@
 			if ( $menu && $menu.data( this.widgetName ) === this ) {
 				$menu.hide();
 			}
+			if ( dropValue ) {
+				this._setRank( this.options.value );
+			}
 			return this.draw();
 		}
 
