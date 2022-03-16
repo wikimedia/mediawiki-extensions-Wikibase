@@ -23,7 +23,7 @@ class GetItem {
 		$itemId = new ItemId( $itemRequest->getItemId() );
 		$itemRevision = $this->itemRetriever->getItemRevision( $itemId );
 
-		return new GetItemResult(
+		return GetItemResult::newSuccessResult(
 			$this->itemSerializer->serialize( $itemRevision->getItem() ),
 			$itemRevision->getLastModified(),
 			$itemRevision->getRevisionId()

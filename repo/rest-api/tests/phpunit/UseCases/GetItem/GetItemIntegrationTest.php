@@ -28,6 +28,7 @@ class GetItemIntegrationTest extends MediaWikiIntegrationTestCase {
 		$itemResult = WbRestApi::getGetItem()
 			->execute( new GetItemRequest( $item->getId()->getSerialization() ) );
 
+		$this->assertTrue( $itemResult->isSuccessful() );
 		$this->assertSame(
 			$item->getId()->getSerialization(),
 			$itemResult->getItem()['id']
