@@ -8,6 +8,8 @@ use ApiBase;
 use ApiMain;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
@@ -188,12 +190,14 @@ class SearchEntities extends ApiBase {
 		$displayLabel = $match->getDisplayLabel();
 
 		if ( $displayLabel !== null ) {
+			$entry['display']['label'] = $this->getDisplayTerm( $displayLabel );
 			$entry['label'] = $displayLabel->getText();
 		}
 
 		$displayDescription = $match->getDisplayDescription();
 
 		if ( $displayDescription !== null ) {
+			$entry['display']['description'] = $this->getDisplayTerm( $displayDescription );
 			$entry['description'] = $displayDescription->getText();
 		}
 
@@ -224,6 +228,15 @@ class SearchEntities extends ApiBase {
 
 	private function getRepositoryOrEntitySourceName( EntityId $entityId ): string {
 		return $this->entitySourceLookup->getEntitySourceById( $entityId )->getSourceName();
+	}
+
+	private function getDisplayTerm( Term $term ): array {
+		return [
+			'value' => $term->getText(),
+			'language' => $term instanceof TermFallback
+				? $term->getActualLanguageCode()
+				: $term->getLanguageCode(),
+		];
 	}
 
 	/**

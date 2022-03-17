@@ -46,6 +46,7 @@ class SearchEntitiesTest extends FederatedPropertiesApiTestCase {
 	public function testSearchTermMatchingBothLocalAndFederatedProperty(): void {
 		$localPropLabel = "i'm a local prop";
 		$fedPropLabel = "i'm a feddy prop";
+		$fedPropLabelLanguage = 'en-gb';
 		$searchTerm = "i'm a";
 
 		$localPropDataType = 'string';
@@ -79,6 +80,9 @@ class SearchEntitiesTest extends FederatedPropertiesApiTestCase {
 							'pageid' => 666,
 							'url' => "https://wikidata.beta.wmflabs.org/wiki/Property:$fedPropRemoteId",
 							'datatype' => $fedPropDataType,
+							'display' => [
+								'label' => [ 'value' => $fedPropLabel, 'language' => $fedPropLabelLanguage ],
+							],
 							'label' => $fedPropLabel,
 							'concepturi' => $fedPropConceptURI,
 							'match' => [
@@ -103,6 +107,8 @@ class SearchEntitiesTest extends FederatedPropertiesApiTestCase {
 
 		$this->assertSame( $fedPropId->getSerialization(), $result['search'][1]['id'] );
 		$this->assertSame( $fedPropLabel, $result['search'][1]['label'] );
+		$this->assertSame( $fedPropLabel, $result['search'][1]['display']['label']['value'] );
+		$this->assertSame( $fedPropLabelLanguage, $result['search'][1]['display']['label']['language'] );
 		$this->assertSame( $fedPropConceptURI, $result['search'][1]['concepturi'] );
 		$this->assertSame( $fedPropDataType, $result['search'][1]['datatype'] );
 		$this->assertSame( $fedPropTitleText, $result['search'][1]['title'] );
@@ -160,6 +166,71 @@ class SearchEntitiesTest extends FederatedPropertiesApiTestCase {
 		$this->assertCount( 2, $result['search'] );
 		$this->assertSame( $localPropertyId, $result['search'][0]['id'] );
 		$this->assertSame( $fedPropId->getSerialization(), $result['search'][1]['id'] );
+	}
+
+	public function testSearchMatchingFederatedPropertyWithoutDisplaySupport(): void {
+		$fedPropLabel = "this is a feddy prop";
+		$searchTerm = "this is a";
+		$searchLanguage = 'en';
+
+		$fedPropRemoteId = 'P123';
+		$fedPropId = $this->newFederatedPropertyIdFromPId( $fedPropRemoteId );
+
+		$searchRequest = [
+			'action' => 'wbsearchentities',
+			'search' => $searchTerm,
+			'type' => 'property',
+			'language' => $searchLanguage,
+		];
+
+		$fedPropTitleText = "Property:$fedPropRemoteId";
+		$fedPropDataType = 'string';
+		$fedPropConceptURI = "http://wikidata.beta.wmflabs.org/entity/$fedPropRemoteId";
+		$this->mockSourceApiRequests( [
+			$this->getSiteInfoNamespaceRequestData(),
+			[
+				$searchRequest,
+				[
+					'success' => 1,
+					'search' => [
+						[
+							'id' => $fedPropRemoteId,
+							'title' => $fedPropTitleText,
+							'pageid' => 666,
+							'url' => "https://wikidata.beta.wmflabs.org/wiki/Property:$fedPropRemoteId",
+							'datatype' => $fedPropDataType,
+							// no 'display', pretend this Wikibase predates T104344
+							'label' => $fedPropLabel,
+							'concepturi' => $fedPropConceptURI,
+							'match' => [
+								'type' => 'label',
+								'language' => 'en',
+								'text' => $fedPropLabel,
+							],
+						],
+					],
+				],
+			],
+		] );
+
+		[ $result, ] = $this->doApiRequestWithToken( $searchRequest );
+
+		$this->assertArrayHasKey( 'success', $result );
+		$this->assertCount( 1, $result['search'] );
+
+		$this->assertSame( $fedPropId->getSerialization(), $result['search'][0]['id'] );
+		$this->assertSame( $fedPropLabel, $result['search'][0]['label'] );
+		$this->assertSame( $fedPropLabel, $result['search'][0]['display']['label']['value'] );
+		// mocked API response doesn’t indicate language of 'label', should fall back to $searchLanguage
+		$this->assertSame( $searchLanguage, $result['search'][0]['display']['label']['language'] );
+		$this->assertSame( $fedPropConceptURI, $result['search'][0]['concepturi'] );
+		$this->assertSame( $fedPropDataType, $result['search'][0]['datatype'] );
+		$this->assertSame( $fedPropTitleText, $result['search'][0]['title'] );
+		$this->assertSame(
+			WikibaseRepo::getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' )
+			. 'index.php?title=' . urlencode( $fedPropTitleText ),
+			$result['search'][0]['url']
+		);
 	}
 
 	private function getSiteInfoNamespaceRequestData(): array {

@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
@@ -176,7 +177,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'label',
 			new ItemId( 'Q222' ),
 			new Term( 'en-gb', 'FooHeHe' ),
-			new Term( 'en', 'FooHeHe en description' )
+			new TermFallback( 'en-gb', 'FooHeHe en description', 'en', null )
 		);
 
 		$q333Match = new TermSearchResult(
@@ -202,6 +203,10 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
+			'display' => [
+				'label' => [ 'value' => 'ptLabel', 'language' => 'pt' ],
+				'description' => [ 'value' => 'ptDescription', 'language' => 'pt' ],
+			],
 			'label' => 'ptLabel',
 			'description' => 'ptDescription',
 			'aliases' => [ 'Q111' ],
@@ -218,6 +223,10 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
+			'display' => [
+				'label' => [ 'value' => 'FooHeHe', 'language' => 'en-gb' ],
+				'description' => [ 'value' => 'FooHeHe en description', 'language' => 'en' ],
+			],
 			'label' => 'FooHeHe',
 			'description' => 'FooHeHe en description',
 			'aliases' => [ 'Fooooo' ],
@@ -235,6 +244,9 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
+			'display' => [
+				'label' => [ 'value' => 'ADisplayLabel', 'language' => 'fr' ],
+			],
 			'label' => 'ADisplayLabel',
 			'aliases' => [ 'AMatchedTerm' ],
 			'match' => [
@@ -252,6 +264,9 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
 			'datatype' => 'PropertyDataType',
+			'display' => [
+				'label' => [ 'value' => 'PropertyLabel', 'language' => 'en' ],
+			],
 			'label' => 'PropertyLabel',
 			'match' => [
 				'type' => 'label',
@@ -266,6 +281,9 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'concepturi' => 'http://items.wiki/concept/Q333',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
+			'display' => [
+				'label' => [ 'value' => 'ADisplayLabel', 'language' => 'fr' ],
+			],
 			'label' => 'ADisplayLabel',
 			'aliases' => [ 'AMatchedTerm' ],
 			'match' => [
