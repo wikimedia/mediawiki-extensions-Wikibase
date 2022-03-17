@@ -7,6 +7,12 @@ Enable the feature toggle:
 $wgWBRepoSettings['restApiEnabled'] = true;
 ```
 
+## Tests
+
+### e2e and schema tests
+
+These tests can be run via `npm run api-testing`. They require the targeted wiki to act as both client and repo, so that Items can have sitelinks to pages on the same wiki.
+
 ## OpenAPI Specification
 
 REST API specification is provided using OpenAPI specification in `specs` directory.
