@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiTestCase;
 use ApiUsageException;
 use ChangeTags;
+use CommentStoreComment;
 use DataValues\StringValue;
 use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
@@ -438,7 +439,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$this->assertNotNull( $revRecord, "revision not found: $revid" );
 
 		$comment = $revRecord->getComment();
-		$this->assertInstanceOf( 'CommentStoreComment', $comment );
+		$this->assertInstanceOf( CommentStoreComment::class, $comment );
 		$this->assertRegExp( $regex, $comment->text );
 	}
 
