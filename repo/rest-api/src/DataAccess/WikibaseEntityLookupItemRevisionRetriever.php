@@ -26,6 +26,10 @@ class WikibaseEntityLookupItemRevisionRetriever implements ItemRevisionRetriever
 	public function getItemRevision( ItemId $itemId ): ?ItemRevision {
 		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $itemId );
 
+		if ( $entityRevision === null ) {
+			return null;
+		}
+
 		/** @var Item $item */
 		$item = $entityRevision->getEntity();
 		'@phan-var Item $item';

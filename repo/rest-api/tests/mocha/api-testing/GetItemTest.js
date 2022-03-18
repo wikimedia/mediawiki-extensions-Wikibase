@@ -43,4 +43,15 @@ describe( 'GET /entities/items/{id} ', () => {
 		assert.equal( response.header[ 'last-modified' ], testModified );
 		assert.equal( response.header.etag, testRevisionId );
 	} );
+
+	it( '404 error - item not found', async () => {
+		const itemId = 'Q999999';
+		const rest = new REST( basePath );
+		const response = await rest.get( `/entities/items/${itemId}` );
+
+		assert.equal( response.status, 404 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.equal( response.body.code, 'item-not-found' );
+		assert.include( response.body.message, itemId );
+	} );
 } );
