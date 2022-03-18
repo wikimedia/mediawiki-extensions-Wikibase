@@ -78,12 +78,32 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 		$filteredResult = $this->filterRequest( $jsonResult, $limit );
 
 		foreach ( $filteredResult as $result ) {
+			$label = null;
+			$description = null;
+
+			if ( array_key_exists( 'display', $result ) ) {
+				$display = $result['display'];
+				if ( array_key_exists( 'label', $display ) ) {
+					$label = new Term( $display['label']['language'], $display['label']['value'] );
+				}
+				if ( array_key_exists( 'description', $display ) ) {
+					$description = new Term( $display['description']['language'], $display['description']['value'] );
+				}
+			} else {
+				if ( array_key_exists( 'label', $result ) ) {
+					$label = new Term( $languageCode, $result['label'] );
+				}
+				if ( array_key_exists( 'description', $result ) ) {
+					$description = new Term( $languageCode, $result['description'] );
+				}
+			}
+
 			$termSearchResult = new TermSearchResult(
 				$this->getMatchedTerm( $result['match'] ),
 				$result['match']['type'],
 				new FederatedPropertyId( $this->entitySource->getConceptBaseUri() . $result['id'], $result['id'] ),
-				array_key_exists( 'label', $result ) ? new Term( $languageCode, $result['label'] ) : null,
-				array_key_exists( 'description', $result ) ? new Term( $languageCode, $result['description'] ) : null,
+				$label,
+				$description,
 				[
 					TermSearchResult::CONCEPTURI_META_DATA_KEY => $result['concepturi'],
 					PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => $result['datatype'],
