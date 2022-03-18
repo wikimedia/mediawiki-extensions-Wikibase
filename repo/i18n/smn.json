@@ -28,7 +28,7 @@
 	"wikibase-statementview-rank-normal": "Táválâš sajattâh",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|käldee|käldee|kälded}}",
 	"wikibase-anonymouseditwarning": "<strong>Váruttâs:</strong> Jieh lah čälittâm jieijâd siisâ. IP-čujottâsâd uáinoo almolávt puohháid, jis hammiih. Jis <strong>[[Special:UserLogin|čälittah jieijâd siisâ]]</strong> teikâ <strong>[[Special:CreateAccount|rááhtáh tubdâlduv]]</strong>, tuu hammim čálloo tuu kevtteetubdâlduvâi rähtim hammiimin já siämmást tun finniih kiävtun ávhálijd piergâsijd.",
-	"wikibase-anonymouseditwarning-heading": "Jieh lah čälittâm jieijâd siisâ",
+	"wikibase-anonymouseditwarning-heading": "Jieh lah čáládâttâm siisâ",
 	"wikibase-itembytitle-lookup-page": "Sijđo:",
 	"wikibase-itembytitle-submit": "Uusâ",
 	"wikibase-itemdisambiguation-lookup-label": "Nommâ:",
