@@ -67,4 +67,20 @@ class GetItemTest extends TestCase {
 		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
 		$this->assertSame( ErrorResult::ITEM_NOT_FOUND, $itemResult->getCode() );
 	}
+
+	public function testUnexpectedError(): void {
+		$itemId = "Q123";
+
+		$retriever = $this->createStub( ItemRevisionRetriever::class );
+		$retriever->method( "getItemRevision" )->willThrowException( new \RuntimeException() );
+		$serializer = new ItemSerializer(
+			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
+		);
+
+		$itemRequest = new GetItemRequest( $itemId );
+		$itemResult = ( new GetItem( $retriever, $serializer ) )->execute( $itemRequest );
+
+		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
+		$this->assertSame( ErrorResult::UNEXPECTED_ERROR, $itemResult->getCode() );
+	}
 }

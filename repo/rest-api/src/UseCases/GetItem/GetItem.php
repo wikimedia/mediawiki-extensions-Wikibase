@@ -24,8 +24,12 @@ class GetItem {
 	 * @return GetItemSuccessResult|GetItemErrorResult
 	 */
 	public function execute( GetItemRequest $itemRequest ) {
-		$itemId = new ItemId( $itemRequest->getItemId() );
-		$itemRevision = $this->itemRetriever->getItemRevision( $itemId );
+		try {
+			$itemId = new ItemId( $itemRequest->getItemId() );
+			$itemRevision = $this->itemRetriever->getItemRevision( $itemId );
+		} catch ( \Exception $e ) {
+			return new GetItemErrorResult( ErrorResult::UNEXPECTED_ERROR, "Unexpected Error" );
+		}
 
 		if ( $itemRevision === null ) {
 			return new GetItemErrorResult(

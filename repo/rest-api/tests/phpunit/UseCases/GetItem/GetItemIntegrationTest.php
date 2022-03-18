@@ -3,7 +3,10 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use MediaWikiIntegrationTestCase;
+use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
+use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResult;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResult;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResult;
@@ -47,5 +50,19 @@ class GetItemIntegrationTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
 		$this->assertSame( ErrorResult::ITEM_NOT_FOUND, $itemResult->getCode() );
+	}
+
+	public function testUnexpectedError(): void {
+		$retriever = $this->createStub( ItemRevisionRetriever::class );
+		$retriever->method( "getItemRevision" )->willThrowException( new \RuntimeException() );
+		$serializer = new ItemSerializer(
+			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
+		);
+		$this->setService( 'WbRestApi.GetItem', new GetItem( $retriever, $serializer ) );
+
+		$itemResult = WbRestApi::getGetItem()->execute( new GetItemRequest( "Q1" ) );
+
+		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
+		$this->assertSame( ErrorResult::UNEXPECTED_ERROR, $itemResult->getCode() );
 	}
 }

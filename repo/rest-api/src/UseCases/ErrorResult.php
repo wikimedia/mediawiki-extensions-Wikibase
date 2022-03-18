@@ -8,6 +8,7 @@ namespace Wikibase\Repo\RestApi\UseCases;
 interface ErrorResult {
 
 	public const ITEM_NOT_FOUND = 'item-not-found';
+	public const UNEXPECTED_ERROR = 'unexpected-error';
 
 	public function getCode(): string;
 

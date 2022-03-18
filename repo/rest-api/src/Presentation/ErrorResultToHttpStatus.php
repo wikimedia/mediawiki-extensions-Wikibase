@@ -13,6 +13,7 @@ class ErrorResultToHttpStatus {
 	 */
 	private static $lookupTable = [
 		ErrorResult::ITEM_NOT_FOUND => 404,
+		ErrorResult::UNEXPECTED_ERROR => 500
 	];
 
 	public static function lookup( ErrorResult $error ): int {
