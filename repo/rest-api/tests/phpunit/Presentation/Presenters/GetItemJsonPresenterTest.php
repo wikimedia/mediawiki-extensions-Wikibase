@@ -26,7 +26,7 @@ class GetItemJsonPresenterTest extends TestCase {
 		$this->assertEquals(
 			$expectedOutput,
 			$presenter->getJsonEncodableItem(
-				new GetItemResult( $itemSerialization, '20220307180000', 321 )
+				GetItemResult::newSuccessResult( $itemSerialization, '20220307180000', 321 )
 			)
 		);
 	}
