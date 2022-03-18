@@ -10,7 +10,6 @@ use Wikibase\Repo\RestApi\Presentation\ErrorReporterToHttpStatus;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemResult;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -43,11 +42,18 @@ class GetItemRouteHandler extends SimpleHandler {
 	public function run( string $id ): Response {
 		$result = $this->getItem->execute( new GetItemRequest( $id ) );
 
+		$response = $this->getResponseFactory()->create();
+		$response->setHeader( 'Content-Type', 'application/json' );
+
 		if ( $result->isSuccessful() ) {
-			$response = $this->createSuccessResponse( $result );
+			$response->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $result->getLastModified() ) );
+			$response->setHeader( 'ETag', $result->getRevisionId() );
 		} else {
-			$response = $this->createFailureResponse( $result );
+			$response->setHeader( 'Content-Language', 'en' );
+			$response->setStatus( ErrorReporterToHttpStatus::lookup( $result->getError() ) );
 		}
+
+		$response->setBody( new StringStream( $this->presenter->getJsonItem( $result ) ) );
 
 		return $response;
 	}
@@ -60,31 +66,5 @@ class GetItemRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => true,
 			],
 		];
-	}
-
-	private function createSuccessResponse( GetItemResult $result ): Response {
-		$response = $this->getResponseFactory()->create();
-		$response->setHeader( 'Content-Type', 'application/json' );
-		$response->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $result->getLastModified() ) );
-		$response->setHeader( 'ETag', $result->getRevisionId() );
-		$response->setBody( new StringStream( json_encode(
-			$this->presenter->getJsonEncodableItem( $result )
-		) ) );
-
-		return $response;
-	}
-
-	private function createFailureResponse( GetItemResult $result ): Response {
-		$error = $result->getError();
-
-		$response = $this->getResponseFactory()->create();
-		$response->setHeader( 'Content-Type', 'application/json' );
-		$response->setHeader( 'Content-Language', 'en' );
-		$response->setStatus( ErrorReporterToHttpStatus::lookup( $error ) );
-		$response->setBody( new StringStream( json_encode(
-			[ 'code' => $error->getCode(), 'message' => $error->getMessage() ]
-		) ) );
-
-		return $response;
 	}
 }
