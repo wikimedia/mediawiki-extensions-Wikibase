@@ -14,16 +14,30 @@ class GetItem {
 
 	private $itemRetriever;
 	private $itemSerializer;
+	private $validator;
 
-	public function __construct( ItemRevisionRetriever $itemRetriever, ItemSerializer $itemSerializer ) {
+	public function __construct(
+		ItemRevisionRetriever $itemRetriever,
+		ItemSerializer $itemSerializer,
+		GetItemValidator $validator
+	) {
 		$this->itemRetriever = $itemRetriever;
 		$this->itemSerializer = $itemSerializer;
+		$this->validator = $validator;
 	}
 
 	/**
 	 * @return GetItemSuccessResult|GetItemErrorResult
 	 */
 	public function execute( GetItemRequest $itemRequest ) {
+		$validationResult = $this->validator->validate( $itemRequest );
+
+		if ( $validationResult->hasError() ) {
+			return GetItemErrorResult::newFromValidationError(
+				$validationResult->getError()
+			);
+		}
+
 		try {
 			$itemId = new ItemId( $itemRequest->getItemId() );
 			$itemRevision = $this->itemRetriever->getItemRevision( $itemId );
