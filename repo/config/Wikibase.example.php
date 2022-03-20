@@ -16,17 +16,16 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-call_user_func( function() {
-	global $wgWBRepoSettings;
+global $wgWBRepoSettings;
 
-	$baseNs = 120;
+$baseNs = 120;
 
-	// Define these constants immediately so they can be used in LocalSettings.php
-	define( 'WB_NS_ITEM', $baseNs );
-	define( 'WB_NS_ITEM_TALK', $baseNs + 1 );
-	define( 'WB_NS_PROPERTY', $baseNs + 2 );
-	define( 'WB_NS_PROPERTY_TALK', $baseNs + 3 );
+// Define these constants immediately so they can be used in LocalSettings.php
+define( 'WB_NS_ITEM', $baseNs );
+define( 'WB_NS_ITEM_TALK', $baseNs + 1 );
+define( 'WB_NS_PROPERTY', $baseNs + 2 );
+define( 'WB_NS_PROPERTY_TALK', $baseNs + 3 );
 
-	// Tell Wikibase to register these namespaces (later)
-	$wgWBRepoSettings['defaultEntityNamespaces'] = true;
-} );
+// Tell Wikibase to register these namespaces (later)
+$wgWBRepoSettings['defaultEntityNamespaces'] = true;
+unset( $baseNs );
