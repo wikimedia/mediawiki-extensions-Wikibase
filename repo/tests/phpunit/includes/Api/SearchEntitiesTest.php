@@ -187,6 +187,12 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			new Term( 'fr', 'ADisplayLabel' )
 		);
 
+		$q444Match = new TermSearchResult(
+			new Term( 'en', 'a matched term' ),
+			'alias',
+			new ItemId( 'Q444' )
+		);
+
 		$propertyMatch = new TermSearchResult(
 			new Term( 'en', 'PropertyLabel' ),
 			'label',
@@ -256,6 +262,22 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			],
 		];
 
+		$q444Result = [
+			'repository' => 'items',
+			'id' => 'Q444',
+			'concepturi' => 'http://items.wiki/concept/Q444',
+			'url' => 'http://fullTitleUrl',
+			'title' => 'Prefixed:Title',
+			'pageid' => 42,
+			'display' => [],
+			'aliases' => [ 'a matched term' ],
+			'match' => [
+				'type' => 'alias',
+				'language' => 'en',
+				'text' => 'a matched term',
+			],
+		];
+
 		$propertyResult = [
 			'repository' => 'props',
 			'id' => 'P123',
@@ -318,6 +340,11 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 				[ 'limit' => 1, 'continue' => 1 ],
 				[ $q222Match, $q333Match ],
 				[ $q333Result ],
+			],
+			'Result without labels or descriptions' => [
+				[],
+				[ $q444Match ],
+				[ $q444Result ],
 			],
 			'Property has datatype' => [
 				[ 'search' => 'PropertyLabel', 'type' => 'property' ],
