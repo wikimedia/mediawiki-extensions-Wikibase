@@ -50,7 +50,7 @@ The autodocs and/or bundled specification OpenAPI files are generated to the `di
 * @subpage rest_adr_index
 
 ### Project structure
-This REST API follows the [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) and takes inspiration from [an article about Netflix's use of the hexagonal architecture](https://netflixtechblog.com/ready-for-changes-with-hexagonal-architecture-b315ec967749). This decision is documented in an ADR: @subpage rest_adr_0001.
+This REST API follows the [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) and takes inspiration from [an article about Netflix's use of the hexagonal architecture](https://netflixtechblog.com/ready-for-changes-with-hexagonal-architecture-b315ec967749). This decision is documented in [ADR 0001](docs/adr/0001_hexagonal_architecture.md).
 
 ![Hexagonal Architecture Diagram](./hexagonal_architecture.drawio.svg)
 
