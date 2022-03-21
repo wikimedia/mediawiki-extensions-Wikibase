@@ -4,5 +4,8 @@
 			"Robin van der Vliet"
 		]
 	},
-	"wikibase-edit": "o ante"
+	"wikibase-edit": "o ante",
+	"wikibase-entitytermsforlanguagelistview-language": "toki",
+	"wikibase-content-language-edit-label": "toki:",
+	"wikibase-newentity-language": "toki:"
 }
