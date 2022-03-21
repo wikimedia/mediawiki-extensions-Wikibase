@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use ApiResult;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
@@ -167,8 +168,10 @@ class SearchEntities extends ApiBase {
 		$entry = [
 			'id' => $entityId->getSerialization(),
 			'title' => $this->entityTitleTextLookup->getPrefixedText( $entityId ),
-			'pageid' => $this->entityArticleIdLookup->getArticleId( $entityId )
+			'pageid' => $this->entityArticleIdLookup->getArticleId( $entityId ),
+			'display' => [], // filled below
 		];
+		ApiResult::setArrayType( $entry['display'], 'assoc' );
 
 		/**
 		 * The repository key should be deprecated and removed, for now avoid adding it when using federatedProperties to avoid confusion
