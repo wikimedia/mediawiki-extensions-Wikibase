@@ -7,6 +7,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Presentation\ErrorReporterToHttpStatus;
+use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
@@ -26,16 +27,30 @@ class GetItemRouteHandler extends SimpleHandler {
 	/**
 	 * @var GetItemJsonPresenter
 	 */
-	private $presenter;
+	private $successPresenter;
 
-	public function __construct( GetItem $getItem, GetItemJsonPresenter $presenter ) {
+	/**
+	 * @var ErrorJsonPresenter
+	 */
+	private $errorPresenter;
+
+	public function __construct(
+		GetItem $getItem,
+		GetItemJsonPresenter $presenter,
+		ErrorJsonPresenter $errorPresenter
+	) {
 		$this->getItem = $getItem;
-		$this->presenter = $presenter;
+		$this->successPresenter = $presenter;
+		$this->errorPresenter = $errorPresenter;
 	}
 
 	public static function factory(): Handler {
 		return WbRestApi::getRouteHandlerFeatureToggle()->useHandlerIfEnabled(
-			new self( WbRestApi::getGetItem(), new GetItemJsonPresenter() )
+			new self(
+				WbRestApi::getGetItem(),
+				new GetItemJsonPresenter(),
+				new ErrorJsonPresenter()
+			)
 		);
 	}
 
@@ -48,12 +63,12 @@ class GetItemRouteHandler extends SimpleHandler {
 		if ( $result->isSuccessful() ) {
 			$response->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $result->getLastModified() ) );
 			$response->setHeader( 'ETag', $result->getRevisionId() );
+			$response->setBody( new StringStream( $this->successPresenter->getJsonItem( $result ) ) );
 		} else {
 			$response->setHeader( 'Content-Language', 'en' );
 			$response->setStatus( ErrorReporterToHttpStatus::lookup( $result->getError() ) );
+			$response->setBody( new StringStream( $this->errorPresenter->getErrorJson( $result->getError() ) ) );
 		}
-
-		$response->setBody( new StringStream( $this->presenter->getJsonItem( $result ) ) );
 
 		return $response;
 	}

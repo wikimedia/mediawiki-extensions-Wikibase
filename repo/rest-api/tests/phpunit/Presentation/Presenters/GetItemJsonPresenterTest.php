@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Presentation;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Domain\Model\ErrorReporter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemResult;
 
@@ -51,24 +50,4 @@ class GetItemJsonPresenterTest extends TestCase {
 		];
 	}
 
-	/**
-	 * @dataProvider errorReporterProvider
-	 */
-	public function testGetJsonItemForFailure( ErrorReporter $errorReporter, string $expectedOutput ): void {
-		$presenter = new GetItemJsonPresenter();
-
-		$this->assertEquals(
-			$expectedOutput,
-			$presenter->getJsonItem(
-				GetItemResult::newFailureResult( $errorReporter )
-			)
-		);
-	}
-
-	public function errorReporterProvider(): Generator {
-		yield 'converts error' => [
-			new ErrorReporter( 'item-not-found', "Could not find an item with the ID Q123" ),
-			'{"code":"item-not-found","message":"Could not find an item with the ID Q123"}'
-		];
-	}
 }
