@@ -310,7 +310,7 @@ describe( 'App', () => {
 				 * so we can’t assert a particular text, but we can
 				 * look for the <strong> part of our message.
 				 */
-				assert.ok( browser.$( '.warningbox strong' ).isDisplayed() );
+				assert.ok( browser.$( '.mw-message-box-warning strong' ).isDisplayed() );
 			} );
 		} );
 	} );
