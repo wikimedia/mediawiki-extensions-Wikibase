@@ -6,6 +6,7 @@
 			"Fagunkoyel Hansdah",
 			"Manik Soren",
 			"Ramjit Tudu",
+			"Rocky 734",
 			"ᱥᱟᱹᱜᱩᱱ ᱗"
 		]
 	},
@@ -15,6 +16,11 @@
 	"wikibase-editlinks": "ᱡᱚᱱᱚᱲᱠᱩ ᱥᱟᱯᱲᱟᱣ",
 	"wikibase-editlinkstitle": "ᱵᱷᱤᱛᱨᱤ ᱯᱟᱹᱨᱥᱤ ᱡᱚᱱᱚᱲ ᱠᱚ ᱵᱚᱫᱚᱞ",
 	"wikibase-linkitem-addlinks": "ᱡᱳᱱᱳᱲ ᱥᱮᱞᱮᱫ",
+	"wikibase-linkitem-title": "ᱱᱚᱶᱟ ᱥᱟᱦᱴᱟ ᱥᱟᱞᱟᱜ ᱡᱩᱲᱟᱹᱣ ᱢᱮ",
+	"wikibase-linkitem-linkpage": "ᱱᱚᱶᱟ ᱥᱟᱦᱴᱟ ᱥᱟᱞᱟᱜ ᱡᱩᱲᱟᱹᱣ ᱢᱮ",
+	"wikibase-linkitem-selectlink": "ᱟᱢ ᱪᱟᱦᱟᱸᱣ ᱠᱟᱫ ᱱᱚᱶᱟ ᱥᱟᱦᱴᱟ ᱨᱮ ᱞᱤᱝᱠ ᱡᱩᱲᱟᱹᱣ ᱞᱟᱹᱜᱤᱫ ᱫᱟᱭᱟᱠᱟᱛᱮ ᱢᱤᱫ ᱥᱟᱭᱤᱴ ᱟᱨ ᱢᱤᱫ ᱥᱟᱦᱴᱟ ᱵᱟᱪᱷᱟᱣ ᱢᱮ ᱾",
+	"wikibase-linkitem-input-site": "ᱯᱟᱹᱨᱥᱤ :",
+	"wikibase-linkitem-input-page": "ᱥᱟᱦᱴᱟ :",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ᱫᱟᱱᱟᱝ",
 	"wikibase-rc-hide-wikidata-show": "ᱧᱮᱞ",

@@ -17,6 +17,8 @@
 	"wikibase-editlinks": "Baguhin ang mga link",
 	"wikibase-editlinkstitle": "Baguhin ang link sa ibang wika",
 	"wikibase-linkitem-addlinks": "Magdagdag ng link",
+	"wikibase-linkitem-input-site": "Wika:",
+	"wikibase-linkitem-input-page": "Pahina:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Itago",
 	"wikibase-rc-hide-wikidata-show": "Ipakita",
