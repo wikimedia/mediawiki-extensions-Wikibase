@@ -13,17 +13,27 @@
 	var entityStubs = [
 		{
 			id: 1,
+			display: {
+				label: { value: 'abc', language: 'en' },
+				description: { value: 'description', language: 'en' }
+			},
 			label: 'abc',
 			description: 'description',
 			aliases: [ 'ac', 'def' ]
 		},
 		{
 			id: 2,
+			display: {
+				label: { value: 'x', language: 'en' }
+			},
 			label: 'x',
 			aliases: [ 'yz' ]
 		},
 		{
 			id: 3,
+			display: {
+				label: { value: 'g', language: 'en' }
+			},
 			label: 'g'
 		}
 	];
@@ -232,7 +242,15 @@
 			hookStub = sinon.stub( mw, 'hook' ),
 			hook = 'HOOK_NAME',
 			emptyValue = '',
-			suggestions = [ { id: '[ID]', label: '[LABEL]', description: '[DESCRIPTION]' } ],
+			suggestions = [ {
+				id: '[ID]',
+				display: {
+					label: { value: '[LABEL]', language: 'en' },
+					description: { value: '[DESCRIPTION]', language: 'en' }
+				},
+				label: '[LABEL]',
+				description: '[DESCRIPTION]'
+			} ],
 			promise = $.Deferred().resolve( suggestions ).promise(),
 			$entitySelector = newTestEntitySelector( { searchHookName: hook } ),
 			entitySelector = $entitySelector.data( 'entityselector' ),
