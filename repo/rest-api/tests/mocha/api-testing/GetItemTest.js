@@ -44,6 +44,42 @@ describe( 'GET /entities/items/{id} ', () => {
 		assert.equal( response.header.etag, testRevisionId );
 	} );
 
+	it( 'can GET a partial item with single _fields param', async () => {
+		const rest = new REST( basePath );
+		const response = await rest.get( `/entities/items/${testItemId}?_fields=labels` );
+
+		assert.equal( response.status, 200 );
+		assert.deepEqual( response.body, {
+			id: testItemId,
+			labels: {
+				de: { language: 'de', value: germanLabel },
+				en: { language: 'en', value: englishLabel }
+			}
+		} );
+		assert.equal( response.header[ 'last-modified' ], testModified );
+		assert.equal( response.header.etag, testRevisionId );
+	} );
+
+	it( 'can GET a partial item with multiple _fields params', async () => {
+		const rest = new REST( basePath );
+		const response = await rest.get( `/entities/items/${testItemId}?_fields=labels|descriptions|aliases` );
+
+		assert.equal( response.status, 200 );
+		assert.deepEqual( response.body, {
+			id: testItemId,
+			labels: {
+				de: { language: 'de', value: germanLabel },
+				en: { language: 'en', value: englishLabel }
+			},
+			descriptions: {
+				en: { language: 'en', value: englishDescription }
+			},
+			aliases: {} // expect {}, not []
+		} );
+		assert.equal( response.header[ 'last-modified' ], testModified );
+		assert.equal( response.header.etag, testRevisionId );
+	} );
+
 	it( '400 error - bad request', async () => {
 		const itemId = 'X123';
 		const rest = new REST( basePath );
