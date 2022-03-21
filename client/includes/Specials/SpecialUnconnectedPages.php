@@ -72,7 +72,8 @@ class SpecialUnconnectedPages extends QueryPage {
 	/**
 	 * @see QueryPage::isCacheable
 	 *
-	 * @return bool Always false because we can not have caching since we will store additional information.
+	 * @return bool Always false as our query can be parameterized (by namespace), and QueryPage
+	 *     doesn't support that.
 	 */
 	public function isCacheable() {
 		return false;
@@ -143,10 +144,22 @@ class SpecialUnconnectedPages extends QueryPage {
 				'title' => 'page_title',
 			],
 			'conds' => $conds,
-			// Sorting is determined getOrderFields(), which returns [ 'value' ] per default.
+			// Sorting is determined getOrderFields()
 			'options' => [],
 			'join_conds' => $joinConds,
 		];
+	}
+
+	/**
+	 * @return string[]
+	 */
+	protected function getOrderFields() {
+		if ( $this->unconnectedPagePagePropMigrationStage < MIGRATION_NEW ) {
+			// b/c: With the old page prop we can't use pp_sortkey
+			return parent::getOrderFields();
+		}
+		// Should make use of the "pp_propname_sortkey_page" index.
+		return [ 'pp_sortkey', 'page_id' ];
 	}
 
 	/**
