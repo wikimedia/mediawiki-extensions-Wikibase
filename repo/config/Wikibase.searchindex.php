@@ -23,8 +23,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-global $wgHooks;
-
+// @phan-suppress-next-line PhanUndeclaredVariableDim
 $wgHooks['WikibaseTextForSearchIndex'][] = function( EntityContent $entityContent, &$text ) {
 	if ( !( $entityContent instanceof ItemContent ) ) {
 		return;
