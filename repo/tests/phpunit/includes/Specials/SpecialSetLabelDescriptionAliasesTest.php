@@ -74,7 +74,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$this->getMockEditFitlerHookRunner(),
 				new NullStatsdDataFactory(),
 				$this->getServiceContainer()->getUserOptionsLookup(),
-				PHP_INT_MAX
+				PHP_INT_MAX,
+				[ 'item', 'property' ]
 			),
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),
@@ -374,7 +375,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$this->getMockEditFitlerHookRunner(),
 				new NullStatsdDataFactory(),
 				$this->getServiceContainer()->getUserOptionsLookup(),
-				PHP_INT_MAX
+				PHP_INT_MAX,
+				[ 'item', 'property' ]
 			),
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),

@@ -133,6 +133,9 @@ class MediawikiEditEntity implements EditEntity {
 	 */
 	private $maxSerializedEntitySize;
 
+	/** @var string[] */
+	private $localEntityTypes;
+
 	/**
 	 * @var bool Can use a master connection or not
 	 */
@@ -151,6 +154,7 @@ class MediawikiEditEntity implements EditEntity {
 	 * @param EditFilterHookRunner $editFilterHookRunner
 	 * @param UserOptionsLookup $userOptionsLookup
 	 * @param int $maxSerializedEntitySize the maximal allowed entity size in Kilobytes
+	 * @param string[] $localEntityTypes
 	 * @param int $baseRevId the base revision ID for conflict checking.
 	 *        Use 0 to indicate that the current revision should be used as the base revision,
 	 *        effectively disabling conflict detections. true and false will be accepted for
@@ -171,6 +175,7 @@ class MediawikiEditEntity implements EditEntity {
 		EditFilterHookRunner $editFilterHookRunner,
 		UserOptionsLookup $userOptionsLookup,
 		$maxSerializedEntitySize,
+		array $localEntityTypes,
 		$baseRevId = 0,
 		$allowMasterConnection = true
 	) {
@@ -202,6 +207,7 @@ class MediawikiEditEntity implements EditEntity {
 		$this->userOptionsLookup = $userOptionsLookup;
 		$this->allowMasterConnection = $allowMasterConnection;
 		$this->maxSerializedEntitySize = $maxSerializedEntitySize;
+		$this->localEntityTypes = $localEntityTypes;
 	}
 
 	/**
@@ -618,6 +624,18 @@ class MediawikiEditEntity implements EditEntity {
 		return in_array( $entity->getType(), $readOnlyTypes );
 	}
 
+	private function checkLocal( EntityDocument $entity ) {
+		if ( !$this->entityTypeIsLocal( $entity ) ) {
+			throw new InvalidArgumentException(
+				'Entity type ' . $entity->getType() . ' cannot be edited on this wiki.'
+			);
+		}
+	}
+
+	private function entityTypeIsLocal( EntityDocument $entity ): bool {
+		return in_array( $entity->getType(), $this->localEntityTypes );
+	}
+
 	/**
 	 * Attempts to save the given Entity object.
 	 *
@@ -648,6 +666,7 @@ class MediawikiEditEntity implements EditEntity {
 	 */
 	public function attemptSave( EntityDocument $newEntity, string $summary, $flags, $token, $watch = null, array $tags = [] ) {
 		$this->checkReadOnly( $newEntity );
+		$this->checkLocal( $newEntity );
 		$this->checkEntityId( $newEntity->getId() );
 
 		$watch = $this->getDesiredWatchState( $watch );

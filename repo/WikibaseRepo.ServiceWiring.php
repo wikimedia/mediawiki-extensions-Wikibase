@@ -603,7 +603,8 @@ return [
 			WikibaseRepo::getEditFilterHookRunner( $services ),
 			$services->getStatsdDataFactory(),
 			$services->getUserOptionsLookup(),
-			WikibaseRepo::getSettings( $services )->getSetting( 'maxSerializedEntitySize' )
+			WikibaseRepo::getSettings( $services )->getSetting( 'maxSerializedEntitySize' ),
+			WikibaseRepo::getLocalEntityTypes( $services )
 		);
 	},
 
