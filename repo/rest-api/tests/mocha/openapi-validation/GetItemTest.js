@@ -35,4 +35,11 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 		expect( response ).to.satisfyApiSpec;
 	} );
 
+	it( '404 Not Found response is valid for a non-existing item', async () => {
+		const response = await rest.get( '/entities/items/Q99999' );
+
+		expect( response.status ).to.equal( 404 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
 } );
