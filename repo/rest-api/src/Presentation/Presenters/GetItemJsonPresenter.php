@@ -23,7 +23,7 @@ class GetItemJsonPresenter {
 		] );
 	}
 
-	public function getJsonItem( GetItemSuccessResult $result ): string {
+	public function getJson( GetItemSuccessResult $result ): string {
 		return json_encode( $this->emptyArrayToObjectConverter->convert( $result->getItem() ) );
 	}
 }

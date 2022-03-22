@@ -9,7 +9,7 @@ use Wikibase\Repo\RestApi\UseCases\ErrorResult;
  */
 class ErrorJsonPresenter {
 
-	public function getErrorJson( ErrorResult $error ): string {
+	public function getJson( ErrorResult $error ): string {
 		return json_encode( [ 'code' => $error->getCode(), 'message' => $error->getMessage() ] );
 	}
 

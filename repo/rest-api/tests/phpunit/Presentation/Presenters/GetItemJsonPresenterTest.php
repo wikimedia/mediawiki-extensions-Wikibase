@@ -19,12 +19,12 @@ class GetItemJsonPresenterTest extends TestCase {
 	/**
 	 * @dataProvider itemSerializationProvider
 	 */
-	public function testGetJsonItemForSuccess( array $itemSerialization, string $expectedOutput ): void {
+	public function testGetJsonForSuccess( array $itemSerialization, string $expectedOutput ): void {
 		$presenter = new GetItemJsonPresenter();
 
 		$this->assertEquals(
 			$expectedOutput,
-			$presenter->getJsonItem(
+			$presenter->getJson(
 				new GetItemSuccessResult( $itemSerialization, '20220307180000', 321 )
 			)
 		);

@@ -15,14 +15,14 @@ use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResult;
  */
 class ErrorJsonPresenterTest extends TestCase {
 
-	public function testGetJsonItemForFailure(): void {
+	public function testGetJson(): void {
 		$error = new GetItemErrorResult( 'item-not-found', 'Could not find an item with the ID Q123' );
 
 		$presenter = new ErrorJsonPresenter();
 
 		$this->assertEquals(
 			'{"code":"item-not-found","message":"Could not find an item with the ID Q123"}',
-			$presenter->getErrorJson( $error )
+			$presenter->getJson( $error )
 		);
 	}
 
