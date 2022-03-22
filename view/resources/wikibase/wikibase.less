@@ -177,7 +177,8 @@ div.wikibase-statementview textarea {
 	position: relative;
 	background-color: #fff;
 	float: left;
-	width: 100%;
+	margin-left: 15em;
+	width: ~'calc( 100% - 15em )';
 	border: 1px solid #c8ccd1;
 }
 
@@ -222,7 +223,6 @@ div.wikibase-statementview {
 /* Container for the claim contents */
 div.wikibase-statementview-mainsnak {
 	position: relative;
-	margin-left: 15em;
 	margin-right: 18em;
 	max-width: 32em;
 	word-wrap: break-word;
@@ -358,7 +358,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 }
 
 .wikibase-statementgrouplistview .wb-new .wikibase-statementview-mainsnak {
-	margin: 0 18em 0 15em;
+	margin: 0 18em 0 0;
 }
 
 .wikibase-statementgrouplistview .wb-new .wikibase-statementview-mainsnak .wikibase-snakview-property {
@@ -412,7 +412,7 @@ span.wikibase-snakview-variation-novaluesnak {
 /***** QUALIFIERS *****/
 
 .wikibase-statementview-qualifiers {
-	padding-left: 17em;
+	padding-left: 2em;
 }
 
 .wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview-property {
@@ -504,7 +504,7 @@ span.wikibase-snakview-variation-novaluesnak {
 
 .wikibase-statementview .wikibase-statementview-rankselector {
 	position: absolute;
-	margin-left: 15.2em;
+	margin-left: 0.2em;
 	margin-top: 10px; /* same as the .wikibase-snakview padding-top */
 	z-index: 1;
 }
@@ -549,7 +549,7 @@ span.wikibase-snakview-variation-novaluesnak {
 
 .wikibase-statementview-references-heading,
 .wikibase-statementview-references {
-	padding-left: 17em;
+	padding-left: 2em;
 	clear: both;
 }
 
