@@ -56,6 +56,10 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 			"SpecialUnconnectedPagesTest-connected",
 			$namespace
 		);
+		$furtherUnconnectedTitle = Title::newFromTextThrow(
+			"SpecialUnconnectedPagesTest-unconnected2",
+			$namespace
+		);
 
 		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $expectedUnconnectedTitle );
 		$page->insertOn( $this->db, 100 );
@@ -65,6 +69,9 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
 		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $connectedTitle );
 		$page->insertOn( $this->db, 300 );
+
+		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $furtherUnconnectedTitle );
+		$page->insertOn( $this->db, 400 );
 	}
 
 	private function insertPageProp(
@@ -94,6 +101,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	private function insertUnexpectedUnconnectedPagePageProp(): void {
 		$namespace = $this->getDefaultWikitextNS();
 		$this->insertPageProp( 200, 'unexpectedUnconnectedPage', $namespace, $namespace );
+		$this->insertPageProp( 400, 'unexpectedUnconnectedPage', $namespace, $namespace );
 	}
 
 	private function insertWikibaseItemPageProp(): void {
@@ -144,8 +152,20 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
 		$namespace = $this->getDefaultWikitextNS();
 		$specialPage = $this->newSpecialPage( null, $migrationStage );
-		$specialPage->getRequest()->setVal( 'namespace', $namespace );
-		$res = $specialPage->reallyDoQuery( 10 );
+
+		// First entry
+		$res = $specialPage->reallyDoQuery( 1 );
+		$this->assertSame( 1, $res->numRows() );
+		$this->assertSame( [
+				'value' => '400',
+				'namespace' => strval( $namespace ),
+				'title' => 'SpecialUnconnectedPagesTest-unconnected2'
+			],
+			(array)$res->fetchObject()
+		);
+
+		// Continue with offset
+		$res = $specialPage->reallyDoQuery( 10, 1 );
 		$this->assertSame( 1, $res->numRows() );
 		$this->assertSame( [
 				'value' => '200',
@@ -154,6 +174,12 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 			],
 			(array)$res->fetchObject()
 		);
+
+		// Get all entries at once (with descending page ids)
+		$res = $specialPage->reallyDoQuery( 5 );
+		$this->assertSame( 2, $res->numRows() );
+		$this->assertSame( 'SpecialUnconnectedPagesTest-unconnected2', $res->fetchRow()['title'] );
+		$this->assertSame( 'SpecialUnconnectedPagesTest-unconnected', $res->fetchRow()['title'] );
 	}
 
 	/**
@@ -187,7 +213,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		$namespace = $this->getDefaultWikitextNS();
 		$specialPage = $this->newSpecialPage( null, MIGRATION_NEW );
 		$specialPage->getRequest()->setVal( 'namespace', $namespace );
-		$res = $specialPage->reallyDoQuery( 10 );
+		$res = $specialPage->reallyDoQuery( 1, 1 );
 		$this->assertSame( 1, $res->numRows() );
 		$this->assertSame( [
 				'value' => '200',
