@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\RestApi\Presentation;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Domain\Model\ErrorReporter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResult;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter
@@ -16,7 +16,7 @@ use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 class ErrorJsonPresenterTest extends TestCase {
 
 	public function testGetJsonItemForFailure(): void {
-		$error = new ErrorReporter( 'item-not-found', 'Could not find an item with the ID Q123' );
+		$error = new GetItemErrorResult( 'item-not-found', 'Could not find an item with the ID Q123' );
 
 		$presenter = new ErrorJsonPresenter();
 

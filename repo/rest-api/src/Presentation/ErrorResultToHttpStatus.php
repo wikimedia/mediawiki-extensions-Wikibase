@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\RestApi\Presentation;
 
-use Wikibase\Repo\RestApi\Domain\Model\ErrorReporter;
+use Wikibase\Repo\RestApi\UseCases\ErrorResult;
 
 /**
  * @license GPL-2.0-or-later
  */
-class ErrorReporterToHttpStatus {
+class ErrorResultToHttpStatus {
 	/**
 	 * @var array
 	 */
@@ -15,7 +15,7 @@ class ErrorReporterToHttpStatus {
 		'item-not-found' => 404,
 	];
 
-	public static function lookup( ErrorReporter $error ): int {
+	public static function lookup( ErrorResult $error ): int {
 		return self::$lookupTable[ $error->getCode() ];
 	}
 }

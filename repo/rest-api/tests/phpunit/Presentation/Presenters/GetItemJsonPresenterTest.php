@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\Presentation;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemResult;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResult;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter
@@ -25,7 +25,7 @@ class GetItemJsonPresenterTest extends TestCase {
 		$this->assertEquals(
 			$expectedOutput,
 			$presenter->getJsonItem(
-				GetItemResult::newSuccessResult( $itemSerialization, '20220307180000', 321 )
+				new GetItemSuccessResult( $itemSerialization, '20220307180000', 321 )
 			)
 		);
 	}

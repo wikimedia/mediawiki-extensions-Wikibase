@@ -6,11 +6,13 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use Wikibase\Repo\RestApi\Presentation\ErrorReporterToHttpStatus;
+use Wikibase\Repo\RestApi\Presentation\ErrorResultToHttpStatus;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResult;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResult;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -60,14 +62,16 @@ class GetItemRouteHandler extends SimpleHandler {
 		$response = $this->getResponseFactory()->create();
 		$response->setHeader( 'Content-Type', 'application/json' );
 
-		if ( $result->isSuccessful() ) {
+		if ( $result instanceof GetItemSuccessResult ) {
 			$response->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $result->getLastModified() ) );
 			$response->setHeader( 'ETag', $result->getRevisionId() );
 			$response->setBody( new StringStream( $this->successPresenter->getJsonItem( $result ) ) );
-		} else {
+		} elseif ( $result instanceof GetItemErrorResult ) {
 			$response->setHeader( 'Content-Language', 'en' );
-			$response->setStatus( ErrorReporterToHttpStatus::lookup( $result->getError() ) );
-			$response->setBody( new StringStream( $this->errorPresenter->getErrorJson( $result->getError() ) ) );
+			$response->setStatus( ErrorResultToHttpStatus::lookup( $result ) );
+			$response->setBody( new StringStream( $this->errorPresenter->getErrorJson( $result ) ) );
+		} else {
+			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
 
 		return $response;

@@ -1,11 +1,13 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Domain\Model;
+namespace Wikibase\Repo\RestApi\UseCases\GetItem;
+
+use Wikibase\Repo\RestApi\UseCases\ErrorResult;
 
 /**
  * @license GPL-2.0-or-later
  */
-class ErrorReporter {
+class GetItemErrorResult implements ErrorResult {
 	/**
 	 * @var string
 	 */
