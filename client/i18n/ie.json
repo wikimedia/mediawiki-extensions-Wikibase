@@ -14,6 +14,11 @@
 	"wikibase-editlinks": "Redacter ligamentes",
 	"wikibase-editlinkstitle": "Redacter interlingual ligamentes",
 	"wikibase-linkitem-addlinks": "Addir ligamentes",
+	"wikibase-linkitem-title": "Ligar che págine",
+	"wikibase-linkitem-linkpage": "Ligar che págine",
+	"wikibase-linkitem-selectlink": "Pleser selecte un site e un págine que vu desire ligar al ti págine.",
+	"wikibase-linkitem-input-site": "Lingue:",
+	"wikibase-linkitem-input-page": "Págine:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ocultar",
 	"wikibase-rc-hide-wikidata-show": "Monstrar",
@@ -21,6 +26,7 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} redacter",
 	"entityusage": "Págines que usa un entitá",
 	"entityusage-summary": "Ti págine lista li págines que usa li entitá specificat (e.g. Q42). Li liste es monstrat per órdine descendente del ID del págine, de ti-ci forme li págines max nov es listat prim.",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etiquette: $1",
 	"wikibase-otherprojects": "In altri projectes",
 	"wikibase-client-data-bridge-dialog-title": "Redacter $1"
 }
