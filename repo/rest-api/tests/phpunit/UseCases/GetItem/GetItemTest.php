@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
+use Wikibase\Repo\RestApi\UseCases\ErrorResult;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResult;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
@@ -64,6 +65,6 @@ class GetItemTest extends TestCase {
 		$itemResult = ( new GetItem( $retriever, $serializer ) )->execute( $itemRequest );
 
 		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
-		$this->assertSame( 'item-not-found', $itemResult->getCode() );
+		$this->assertSame( ErrorResult::ITEM_NOT_FOUND, $itemResult->getCode() );
 	}
 }

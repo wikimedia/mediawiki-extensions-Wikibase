@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
+use Wikibase\Repo\RestApi\UseCases\ErrorResult;
 
 /**
  * @license GPL-2.0-or-later
@@ -28,7 +29,7 @@ class GetItem {
 
 		if ( $itemRevision === null ) {
 			return new GetItemErrorResult(
-				'item-not-found',
+				ErrorResult::ITEM_NOT_FOUND,
 				"Could not find an item with the ID {$itemRequest->getItemId()}"
 			);
 		}

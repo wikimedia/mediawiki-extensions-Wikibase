@@ -12,7 +12,7 @@ class ErrorResultToHttpStatus {
 	 * @var array
 	 */
 	private static $lookupTable = [
-		'item-not-found' => 404,
+		ErrorResult::ITEM_NOT_FOUND => 404,
 	];
 
 	public static function lookup( ErrorResult $error ): int {
