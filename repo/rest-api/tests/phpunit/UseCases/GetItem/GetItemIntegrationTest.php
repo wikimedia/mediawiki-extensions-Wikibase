@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use MediaWikiIntegrationTestCase;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResult;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResult;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\WikibaseRepo;
@@ -28,7 +30,7 @@ class GetItemIntegrationTest extends MediaWikiIntegrationTestCase {
 		$itemResult = WbRestApi::getGetItem()
 			->execute( new GetItemRequest( $item->getId()->getSerialization() ) );
 
-		$this->assertTrue( $itemResult->isSuccessful() );
+		$this->assertInstanceOf( GetItemSuccessResult::class, $itemResult );
 		$this->assertSame(
 			$item->getId()->getSerialization(),
 			$itemResult->getItem()['id']
@@ -42,9 +44,6 @@ class GetItemIntegrationTest extends MediaWikiIntegrationTestCase {
 	public function testNonExistingItem(): void {
 		$itemResult = WbRestApi::getGetItem()->execute( new GetItemRequest( 'Q99' ) );
 
-		$this->assertFalse( $itemResult->isSuccessful() );
-		$this->assertNull( $itemResult->getItem() );
-		$this->assertNull( $itemResult->getLastModified() );
-		$this->assertNull( $itemResult->getRevisionId() );
+		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
 	}
 }

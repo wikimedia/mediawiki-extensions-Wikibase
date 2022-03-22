@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\Presentation\Presenters;
 
 use Wikibase\Repo\RestApi\Presentation\EmptyArrayToObjectConverter;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemResult;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResult;
 
 /**
  * @license GPL-2.0-or-later
@@ -23,7 +23,7 @@ class GetItemJsonPresenter {
 		] );
 	}
 
-	public function getJsonItem( GetItemResult $result ): string {
+	public function getJsonItem( GetItemSuccessResult $result ): string {
 		return json_encode( $this->emptyArrayToObjectConverter->convert( $result->getItem() ) );
 	}
 }

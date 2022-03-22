@@ -7,8 +7,9 @@ use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResult;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemResult;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResult;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -43,7 +44,7 @@ class GetItemTest extends TestCase {
 		$itemResult = ( new GetItem( $retriever, $serializer ) )->execute( $itemRequest );
 		$item = $itemResult->getItem();
 
-		$this->assertInstanceOf( GetItemResult::class, $itemResult );
+		$this->assertInstanceOf( GetItemSuccessResult::class, $itemResult );
 		$this->assertSame( $itemId, $item['id'] );
 		$this->assertSame( $itemLabel, $item['labels']['en']['value'] );
 		$this->assertSame( $lastModifiedTimestamp, $itemResult->getLastModified() );
@@ -62,10 +63,7 @@ class GetItemTest extends TestCase {
 		$itemRequest = new GetItemRequest( $itemId );
 		$itemResult = ( new GetItem( $retriever, $serializer ) )->execute( $itemRequest );
 
-		$this->assertFalse( $itemResult->isSuccessful() );
-		$this->assertNull( $itemResult->getItem() );
-		$this->assertNull( $itemResult->getLastModified() );
-		$this->assertNull( $itemResult->getRevisionId() );
-		$this->assertSame( 'item-not-found', $itemResult->getError()->getCode() );
+		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
+		$this->assertSame( 'item-not-found', $itemResult->getCode() );
 	}
 }
