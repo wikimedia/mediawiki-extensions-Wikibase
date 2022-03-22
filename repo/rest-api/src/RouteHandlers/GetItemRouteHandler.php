@@ -65,11 +65,11 @@ class GetItemRouteHandler extends SimpleHandler {
 		if ( $result instanceof GetItemSuccessResult ) {
 			$response->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $result->getLastModified() ) );
 			$response->setHeader( 'ETag', $result->getRevisionId() );
-			$response->setBody( new StringStream( $this->successPresenter->getJsonItem( $result ) ) );
+			$response->setBody( new StringStream( $this->successPresenter->getJson( $result ) ) );
 		} elseif ( $result instanceof GetItemErrorResult ) {
 			$response->setHeader( 'Content-Language', 'en' );
 			$response->setStatus( ErrorResultToHttpStatus::lookup( $result ) );
-			$response->setBody( new StringStream( $this->errorPresenter->getErrorJson( $result ) ) );
+			$response->setBody( new StringStream( $this->errorPresenter->getJson( $result ) ) );
 		} else {
 			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
