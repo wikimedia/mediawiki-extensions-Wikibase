@@ -23,7 +23,7 @@ module.exports = function ( grunt ) {
 				'!lib/resources/wikibase-api/**',
 				'!lib/packages/wikibase/*/tests/**/*.json',
 				'!docs/**',
-				'!repo/rest-api/dist/**'
+				'!repo/rest-api/**'
 			]
 		},
 		stylelint: {
@@ -36,7 +36,8 @@ module.exports = function ( grunt ) {
 				'!extensions/**',
 				'!client/data-bridge/**',
 				'!docs/**',
-				'!lib/resources/wikibase-api/**'
+				'!lib/resources/wikibase-api/**',
+				'!repo/rest-api/**'
 			]
 		},
 		banana: {
