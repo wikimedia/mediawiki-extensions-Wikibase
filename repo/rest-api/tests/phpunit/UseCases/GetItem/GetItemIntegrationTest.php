@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use MediaWikiIntegrationTestCase;
+use Wikibase\Repo\RestApi\UseCases\ErrorResult;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResult;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResult;
@@ -41,9 +42,10 @@ class GetItemIntegrationTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testNonExistingItem(): void {
+	public function testItemNotFound(): void {
 		$itemResult = WbRestApi::getGetItem()->execute( new GetItemRequest( 'Q99' ) );
 
 		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
+		$this->assertSame( ErrorResult::ITEM_NOT_FOUND, $itemResult->getCode() );
 	}
 }
