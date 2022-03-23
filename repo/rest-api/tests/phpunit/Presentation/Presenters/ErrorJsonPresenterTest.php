@@ -21,7 +21,7 @@ class ErrorJsonPresenterTest extends TestCase {
 
 		$presenter = new ErrorJsonPresenter();
 
-		$this->assertEquals(
+		$this->assertJsonStringEqualsJsonString(
 			'{"code":"' . ErrorResult::ITEM_NOT_FOUND . '","message":"Could not find an item with the ID Q123"}',
 			$presenter->getJson( $error )
 		);

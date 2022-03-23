@@ -22,7 +22,7 @@ class GetItemJsonPresenterTest extends TestCase {
 	public function testGetJsonForSuccess( array $itemSerialization, string $expectedOutput ): void {
 		$presenter = new GetItemJsonPresenter();
 
-		$this->assertEquals(
+		$this->assertJsonStringEqualsJsonString(
 			$expectedOutput,
 			$presenter->getJson(
 				new GetItemSuccessResult( $itemSerialization, '20220307180000', 321 )
