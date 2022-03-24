@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResult;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResult;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -40,9 +41,10 @@ class GetItemTest extends TestCase {
 		$serializer = new ItemSerializer(
 			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
 		);
+		$validator = new GetItemValidator();
 
 		$itemRequest = new GetItemRequest( $itemId );
-		$itemResult = ( new GetItem( $retriever, $serializer ) )->execute( $itemRequest );
+		$itemResult = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
 		$item = $itemResult->getItem();
 
 		$this->assertInstanceOf( GetItemSuccessResult::class, $itemResult );
@@ -60,12 +62,28 @@ class GetItemTest extends TestCase {
 		$serializer = new ItemSerializer(
 			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
 		);
+		$validator = new GetItemValidator();
 
 		$itemRequest = new GetItemRequest( $itemId );
-		$itemResult = ( new GetItem( $retriever, $serializer ) )->execute( $itemRequest );
-
+		$itemResult = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
 		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
 		$this->assertSame( ErrorResult::ITEM_NOT_FOUND, $itemResult->getCode() );
+	}
+
+	public function testInvalidItemId(): void {
+		$itemId = "X123";
+
+		$retriever = $this->createStub( ItemRevisionRetriever::class );
+		$serializer = new ItemSerializer(
+			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
+		);
+		$validator = new GetItemValidator();
+
+		$itemRequest = new GetItemRequest( $itemId );
+		$itemResult = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
+
+		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
+		$this->assertSame( ErrorResult::INVALID_ITEM_ID, $itemResult->getCode() );
 	}
 
 	public function testUnexpectedError(): void {
@@ -76,9 +94,10 @@ class GetItemTest extends TestCase {
 		$serializer = new ItemSerializer(
 			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
 		);
+		$validator = new GetItemValidator();
 
 		$itemRequest = new GetItemRequest( $itemId );
-		$itemResult = ( new GetItem( $retriever, $serializer ) )->execute( $itemRequest );
+		$itemResult = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
 
 		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
 		$this->assertSame( ErrorResult::UNEXPECTED_ERROR, $itemResult->getCode() );

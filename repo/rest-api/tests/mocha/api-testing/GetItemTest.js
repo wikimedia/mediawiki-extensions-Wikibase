@@ -44,6 +44,17 @@ describe( 'GET /entities/items/{id} ', () => {
 		assert.equal( response.header.etag, testRevisionId );
 	} );
 
+	it( '400 error - bad request', async () => {
+		const itemId = 'X123';
+		const rest = new REST( basePath );
+		const response = await rest.get( `/entities/items/${itemId}` );
+
+		assert.equal( response.status, 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.equal( response.body.code, 'invalid-item-id' );
+		assert.include( response.body.message, itemId );
+	} );
+
 	it( '404 error - item not found', async () => {
 		const itemId = 'Q999999';
 		const rest = new REST( basePath );

@@ -12,6 +12,7 @@ class ErrorResultToHttpStatus {
 	 * @var array
 	 */
 	private static $lookupTable = [
+		ErrorResult::INVALID_ITEM_ID => 400,
 		ErrorResult::ITEM_NOT_FOUND => 404,
 		ErrorResult::UNEXPECTED_ERROR => 500
 	];

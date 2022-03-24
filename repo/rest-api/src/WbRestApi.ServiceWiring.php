@@ -6,6 +6,7 @@ use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\RouteHandlers\ApiNotEnabledRouteHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\RouteHandlerFeatureToggle;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /** @phpcs-require-sorted-array */
@@ -19,7 +20,8 @@ return [
 			new ItemSerializer(
 				WikibaseRepo::getBaseDataModelSerializerFactory( $services )
 					->newItemSerializer()
-			)
+			),
+			new GetItemValidator()
 		);
 	},
 
