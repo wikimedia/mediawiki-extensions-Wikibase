@@ -488,8 +488,17 @@
 		 */
 		_createLabelFromSuggestion: function ( entityStub ) {
 			var $suggestion = $( '<span>' ).addClass( 'ui-entityselector-itemcontent' ),
-				$label = $( '<span>' ).addClass( 'ui-entityselector-label' ).text( entityStub.label || entityStub.id );
+				$label = $( '<span>' ).addClass( 'ui-entityselector-label' ),
+				$description = $();
 
+			if ( entityStub.display && entityStub.display.label ) {
+				$label.text( entityStub.display.label.value );
+				$label.attr( 'lang', entityStub.display.label.language );
+			} else {
+				$label.text( entityStub.label || entityStub.id );
+			}
+
+			// TODO use match instead of aliases
 			if ( entityStub.aliases ) {
 				$label.append(
 					$( '<span>' ).addClass( 'ui-entityselector-aliases' ).text( ' (' + entityStub.aliases.join( ', ' ) + ')' )
@@ -498,12 +507,16 @@
 
 			$suggestion.append( $label );
 
-			if ( entityStub.description ) {
-				$suggestion.append(
-					$( '<span>' ).addClass( 'ui-entityselector-description' )
-					.text( entityStub.description )
-				);
+			if ( entityStub.display && entityStub.display.description ) {
+				$description = $( '<span>' ).addClass( 'ui-entityselector-description' )
+					.text( entityStub.display.description.value )
+					.attr( 'lang', entityStub.display.description.language );
+			} else if ( entityStub.description ) {
+				$description = $( '<span>' ).addClass( 'ui-entityselector-description' )
+					.text( entityStub.description );
 			}
+
+			$suggestion.append( $description );
 
 			return $suggestion;
 		},
