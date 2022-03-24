@@ -55,12 +55,30 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $id, unserialize( serialize( $id ) ) );
 	}
 
-	public function testDeserializationCompatibility() {
-		$v05serialization = 'C:32:"Wikibase\DataModel\Entity\ItemId":15:{["item","Q123"]}';
+	public function deserializationCompatibilityProvider(): array {
+		return [
+			'v05serialization' => [
+				new ItemId( 'q123' ),
+				'C:32:"Wikibase\DataModel\Entity\ItemId":15:{["item","Q123"]}'
+			],
+			'v07serialization' => [
+				new ItemId( 'q123' ),
+				'C:32:"Wikibase\DataModel\Entity\ItemId":4:{Q123}'
+			],
+			'2022-03 PHP 7.4+' => [
+				new ItemId( 'q123' ),
+				'O:32:"Wikibase\DataModel\Entity\ItemId":1:{s:13:"serialization";s:4:"Q123";}'
+			],
+		];
+	}
 
+	/**
+	 * @dataProvider deserializationCompatibilityProvider
+	 */
+	public function testDeserializationCompatibility( $expected, $serialization ) {
 		$this->assertEquals(
-			new ItemId( 'q123' ),
-			unserialize( $v05serialization )
+			$expected,
+			unserialize( $serialization )
 		);
 	}
 
@@ -70,7 +88,7 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 	 * It is just here to catch unintentional changes.
 	 */
 	public function testSerializationStability() {
-		$serialization = 'C:32:"Wikibase\DataModel\Entity\ItemId":4:{Q123}';
+		$serialization = 'O:32:"Wikibase\DataModel\Entity\ItemId":1:{s:13:"serialization";s:4:"Q123";}';
 		$id = new ItemId( 'q123' );
 
 		$this->assertSame(
@@ -185,7 +203,9 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidSerializationProvider
 	 */
 	public function testConstructor( $serialization ) {
-		$mock = $this->createMock( SerializableEntityId::class );
+		$mockBuilder = $this->getMockBuilder( SerializableEntityId::class );
+		$mockBuilder->disableOriginalConstructor();
+		$mock = $mockBuilder->getMockForAbstractClass();
 
 		$constructor = ( new ReflectionClass( SerializableEntityId::class ) )->getConstructor();
 

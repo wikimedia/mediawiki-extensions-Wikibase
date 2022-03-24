@@ -126,9 +126,13 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testSerialize() {
+		$serialization = 'O:32:"Wikibase\DataModel\Entity\ItemId":1:{s:13:"serialization";s:6:"Q31337";}';
 		$id = new EntityIdValue( new ItemId( 'Q31337' ) );
 
-		$this->assertSame( 'C:32:"Wikibase\DataModel\Entity\ItemId":6:{Q31337}', $id->serialize() );
+		$this->assertSame(
+			$serialization,
+			$id->serialize()
+		);
 	}
 
 	public function provideDeserializationCompatibility() {
@@ -155,6 +159,11 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 				'C:39:"Wikibase\DataModel\Entity\EntityIdValue":'
 					. '58:{C:42:"Wikibase\DataModel\Fixtures\CustomEntityId":4:{X567}}',
 				$custom
+			],
+			'local 2022-03 PHP 7.4+' => [
+				'O:39:"Wikibase\DataModel\Entity\EntityIdValue":'
+					. '1:{s:8:"entityId";O:32:"Wikibase\DataModel\Entity\ItemId":1:{s:13:"serialization";s:6:"Q31337";}}',
+				$local
 			],
 		];
 	}
