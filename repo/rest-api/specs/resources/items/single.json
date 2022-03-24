@@ -5,10 +5,13 @@
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/entityId" },
 			{ "$ref": "../../global/parameters.json#/fields" },
+			{ "$ref": "../../global/parameters.json#/ifNoneMatch" },
+			{ "$ref": "../../global/parameters.json#/ifModifiedSince" },
 			{ "$ref": "../../global/parameters.json#/authorization" }
 		],
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Item" },
+			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidInput" },
 			"404": { "$ref": "../../global/responses.json#/NotFound" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }

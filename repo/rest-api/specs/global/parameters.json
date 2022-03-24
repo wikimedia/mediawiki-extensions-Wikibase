@@ -30,6 +30,37 @@
 		"explode": false,
 		"style": "form"
 	},
+	"ifNoneMatch": {
+		"name": "If-None-Match",
+		"in": "header",
+		"description": "Conditionally request a resource only if changed since specified entity revision number",
+		"schema": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"examples": {
+			"strong-etag": {
+				"summary": "Single ETag",
+				"value": [ "\"1276705620\"" ]
+			},
+			"multiple-etags": {
+				"summary": "Multiple ETags",
+				"value": [ "\"1276703231\"", "\"1276705620\"" ]
+			}
+		}
+	},
+	"ifModifiedSince": {
+		"name": "If-Modified-Since",
+		"in": "header",
+		"description": "Conditionally request a resource only if it changed since specified date",
+		"schema": {
+			"type": "string",
+			"format": "http-date"
+		},
+		"example": "Sat, 06 Jun 2020 16:38:47 GMT"
+	},
 	"authorization": {
 		"name": "Authorization",
 		"in": "header",

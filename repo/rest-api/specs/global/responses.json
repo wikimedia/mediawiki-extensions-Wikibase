@@ -104,5 +104,16 @@
 				"schema": { "$ref": "./schemas.json#/Item" }
 			}
 		}
+	},
+	"NotModified": {
+		"description": "The specified resource has not been modified since last provided revision number or date",
+		"headers": {
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			}
+		}
 	}
 }
