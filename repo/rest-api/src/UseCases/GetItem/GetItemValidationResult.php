@@ -10,9 +10,9 @@ use Wikibase\Repo\RestApi\UseCases\ValidationError;
 class GetItemValidationResult {
 	public const SOURCE_ITEM_ID = 'item ID';
 
-	private $error = null;
+	private $error;
 
-	public function setError( ValidationError $error ): void {
+	public function __construct( ?ValidationError $error = null ) {
 		$this->error = $error;
 	}
 
