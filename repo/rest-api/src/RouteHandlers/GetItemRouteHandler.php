@@ -57,7 +57,8 @@ class GetItemRouteHandler extends SimpleHandler {
 	}
 
 	public function run( string $id ): Response {
-		$result = $this->getItem->execute( new GetItemRequest( $id ) );
+		$fields = $this->getValidatedParams()['_fields'];
+		$result = $this->getItem->execute( new GetItemRequest( $id, $fields ) );
 
 		$response = $this->getResponseFactory()->create();
 		$response->setHeader( 'Content-Type', 'application/json' );
@@ -83,6 +84,13 @@ class GetItemRouteHandler extends SimpleHandler {
 				self::PARAM_SOURCE => 'path',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
+			],
+			'_fields' => [
+				self::PARAM_SOURCE => 'query',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => false,
+				// TODO: need to decide on "pipe and array" vs "comma" (vs "pipe, array, and comma"?)
+				ParamValidator::PARAM_ISMULTI => true,
 			],
 		];
 	}

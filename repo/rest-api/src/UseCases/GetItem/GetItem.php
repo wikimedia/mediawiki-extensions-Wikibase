@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\RestApi\Domain\Filters\FieldFilter;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResult;
@@ -52,8 +53,14 @@ class GetItem {
 			);
 		}
 
+		$itemSerialization = $this->itemSerializer->serialize( $itemRevision->getItem() );
+		$fields = $itemRequest->getFields();
+		if ( $fields !== null ) {
+			$itemSerialization = ( new FieldFilter( $fields ) )->filter( $itemSerialization );
+		}
+
 		return new GetItemSuccessResult(
-			$this->itemSerializer->serialize( $itemRevision->getItem() ),
+			$itemSerialization,
 			$itemRevision->getLastModified(),
 			$itemRevision->getRevisionId()
 		);

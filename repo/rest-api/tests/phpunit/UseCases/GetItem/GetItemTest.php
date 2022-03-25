@@ -24,6 +24,10 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class GetItemTest extends TestCase {
 
+	private const ITEM_ID = "Q123";
+	private const ITEM_LABEL = "potato";
+	private const ITEM_DESCRIPTION = "a root vegetable";
+
 	public function testGetExistingItem(): void {
 		$itemId = "Q123";
 		$itemLabel = "potato";
@@ -101,5 +105,84 @@ class GetItemTest extends TestCase {
 
 		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
 		$this->assertSame( ErrorResult::UNEXPECTED_ERROR, $itemResult->getCode() );
+	}
+
+	/**
+	 * @dataProvider filterDataProvider
+	 */
+	public function testGetItemWithFilter( array $fields, array $expectedItem ): void {
+		$lastModifiedTimestamp = '20201111070707';
+		$revisionId = 42;
+
+		$retriever = $this->createStub( ItemRevisionRetriever::class );
+		$retriever->method( "getItemRevision" )->willReturn(
+			new ItemRevision(
+				NewItem::withId( self::ITEM_ID )
+					->andLabel( "en", self::ITEM_LABEL )
+					->andDescription( "en", self::ITEM_DESCRIPTION )
+					->build(),
+				$lastModifiedTimestamp,
+				$revisionId
+			)
+		);
+		$serializer = new ItemSerializer(
+			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
+		);
+		$validator = new GetItemValidator();
+
+		$itemRequest = new GetItemRequest( self::ITEM_ID, $fields );
+		$itemResult = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
+		$item = $itemResult->getItem();
+
+		$this->assertInstanceOf( GetItemSuccessResult::class, $itemResult );
+		$this->assertEquals( $expectedItem, $item );
+	}
+
+	public function filterDataProvider(): \Generator {
+		yield "labels only" => [
+			[ "labels" ],
+			[
+				"id" => self::ITEM_ID,
+				"labels" => [
+					"en" => [ "language" => "en", "value" => self::ITEM_LABEL ]
+				]
+			]
+		];
+
+		yield "type and labels" => [
+			[ "type", "labels" ],
+			[
+				"id" => self::ITEM_ID,
+				"type" => "item",
+				"labels" => [
+					"en" => [ "language" => "en", "value" => self::ITEM_LABEL ]
+				]
+			]
+		];
+
+		yield "type, labels, and descriptions" => [
+			[ "type", "labels", "descriptions" ],
+			[
+				"id" => self::ITEM_ID,
+				"type" => "item",
+				"labels" => [
+					"en" => [ "language" => "en", "value" => self::ITEM_LABEL ]
+				],
+				"descriptions" => [
+					"en" => [ "language" => "en", "value" => self::ITEM_DESCRIPTION ]
+				],
+			]
+		];
+
+		yield "type and descriptions" => [
+			[ "type", "descriptions" ],
+			[
+				"id" => self::ITEM_ID,
+				"type" => "item",
+				"descriptions" => [
+					"en" => [ "language" => "en", "value" => self::ITEM_DESCRIPTION ]
+				],
+			]
+		];
 	}
 }
