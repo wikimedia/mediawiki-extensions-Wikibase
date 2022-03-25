@@ -90,23 +90,6 @@ class GetItemTest extends TestCase {
 		$this->assertSame( ErrorResult::INVALID_ITEM_ID, $itemResult->getCode() );
 	}
 
-	public function testUnexpectedError(): void {
-		$itemId = "Q123";
-
-		$retriever = $this->createStub( ItemRevisionRetriever::class );
-		$retriever->method( "getItemRevision" )->willThrowException( new \RuntimeException() );
-		$serializer = new ItemSerializer(
-			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
-		);
-		$validator = new GetItemValidator();
-
-		$itemRequest = new GetItemRequest( $itemId );
-		$itemResult = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
-
-		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
-		$this->assertSame( ErrorResult::UNEXPECTED_ERROR, $itemResult->getCode() );
-	}
-
 	/**
 	 * @dataProvider filterDataProvider
 	 */

@@ -39,12 +39,8 @@ class GetItem {
 			);
 		}
 
-		try {
-			$itemId = new ItemId( $itemRequest->getItemId() );
-			$itemRevision = $this->itemRetriever->getItemRevision( $itemId );
-		} catch ( \Exception $e ) {
-			return new GetItemErrorResult( ErrorResult::UNEXPECTED_ERROR, "Unexpected Error" );
-		}
+		$itemId = new ItemId( $itemRequest->getItemId() );
+		$itemRevision = $this->itemRetriever->getItemRevision( $itemId );
 
 		if ( $itemRevision === null ) {
 			return new GetItemErrorResult(

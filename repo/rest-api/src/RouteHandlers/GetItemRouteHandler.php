@@ -36,27 +36,43 @@ class GetItemRouteHandler extends SimpleHandler {
 	 */
 	private $errorPresenter;
 
+	/**
+	 * @var UnexpectedErrorHandler
+	 */
+	private $errorHandler;
+
 	public function __construct(
 		GetItem $getItem,
 		GetItemJsonPresenter $presenter,
-		ErrorJsonPresenter $errorPresenter
+		ErrorJsonPresenter $errorPresenter,
+		UnexpectedErrorHandler $errorHandler
 	) {
 		$this->getItem = $getItem;
 		$this->successPresenter = $presenter;
 		$this->errorPresenter = $errorPresenter;
+		$this->errorHandler = $errorHandler;
 	}
 
 	public static function factory(): Handler {
+		$errorPresenter = new ErrorJsonPresenter();
 		return WbRestApi::getRouteHandlerFeatureToggle()->useHandlerIfEnabled(
 			new self(
 				WbRestApi::getGetItem(),
 				new GetItemJsonPresenter(),
-				new ErrorJsonPresenter()
+				$errorPresenter,
+				new UnexpectedErrorHandler( $errorPresenter )
 			)
 		);
 	}
 
-	public function run( string $id ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->errorHandler->runWithErrorHandling( [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $id ): Response {
 		$fields = $this->getValidatedParams()['_fields'];
 		$result = $this->getItem->execute( new GetItemRequest( $id, $fields ) );
 
