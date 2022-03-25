@@ -32,9 +32,19 @@
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "#/Error" },
-				"example": {
-					"code": "invalid-item-id",
-					"message": "Not a valid item ID: {item_id}"
+				"examples": {
+					"invalid-item-id": {
+						"value": {
+							"code": "invalid-item-id",
+							"message": "Not a valid item ID: {item_id}"
+						}
+					},
+					"invalid-field": {
+						"value": {
+							"code": "invalid-field",
+							"message": "Not a valid field: {field}"
+						}
+					}
 				}
 			}
 		},
