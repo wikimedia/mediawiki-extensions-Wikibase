@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
 use ErrorPageError;
+use Html;
 use RawMessage;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\View\Template\TemplateFactory;
@@ -27,7 +28,7 @@ class FederatedPropertiesError extends ErrorPageError {
 	public function __construct( $languageCode, $entity, $msg, $params = [] ) {
 
 		$templateFactory = TemplateFactory::getDefaultInstance();
-		$errorBody = new RawMessage( '<div class="errorbox">$1</div>', [ wfMessage( $msg, $params )->parse() ] );
+		$errorBody = new RawMessage( Html::errorBox( wfMessage( $msg, $params )->parse() ) );
 
 		// @phan-suppress-next-line PhanUndeclaredMethod Phan is confused by intersection types
 		$entityId = $entity->getId()->getSerialization();
