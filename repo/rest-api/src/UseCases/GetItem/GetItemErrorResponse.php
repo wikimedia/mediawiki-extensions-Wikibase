@@ -35,6 +35,12 @@ class GetItemErrorResponse implements ErrorResponse {
 					"Not a valid item ID: " . $validationError->getValue()
 				);
 
+			case GetItemValidationResult::SOURCE_FIELDS:
+				return new self(
+					ErrorResponse::INVALID_FIELD,
+					"Not a valid field: " . $validationError->getValue()
+				);
+
 			default:
 				throw new \LogicException( "Unexpected validation error source: $errorSource" );
 		}

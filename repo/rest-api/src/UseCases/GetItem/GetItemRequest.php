@@ -7,6 +7,7 @@ namespace Wikibase\Repo\RestApi\UseCases\GetItem;
  */
 class GetItemRequest {
 
+	public const VALID_FIELDS = [ 'type', 'labels', 'descriptions', 'aliases', 'statements', 'sitelinks' ];
 	private $itemId;
 
 	private $fields;

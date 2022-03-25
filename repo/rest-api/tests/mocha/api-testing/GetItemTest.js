@@ -80,7 +80,7 @@ describe( 'GET /entities/items/{id} ', () => {
 		assert.equal( response.header.etag, testRevisionId );
 	} );
 
-	it( '400 error - bad request', async () => {
+	it( '400 error - bad request, invalid item ID', async () => {
 		const itemId = 'X123';
 		const rest = new REST( basePath );
 		const response = await rest.get( `/entities/items/${itemId}` );
@@ -89,6 +89,17 @@ describe( 'GET /entities/items/{id} ', () => {
 		assert.header( response, 'Content-Language', 'en' );
 		assert.equal( response.body.code, 'invalid-item-id' );
 		assert.include( response.body.message, itemId );
+	} );
+
+	it( '400 error - bad request, invalid field', async () => {
+		const itemId = 'Q123';
+		const rest = new REST( basePath );
+		const response = await rest.get( `/entities/items/${itemId}`, { _fields: 'unknown_field' } );
+
+		assert.equal( response.status, 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.equal( response.body.code, 'invalid-field' );
+		assert.include( response.body.message, 'unknown_field' );
 	} );
 
 	it( '404 error - item not found', async () => {

@@ -17,6 +17,11 @@ class GetItemValidator {
 			return new Result( $itemIdError );
 		}
 
+		$fieldsError = $this->validateFields( $request->getFields() );
+		if ( $fieldsError ) {
+			return new Result( $fieldsError );
+		}
+
 		return new Result();
 	}
 
@@ -26,6 +31,18 @@ class GetItemValidator {
 			new ItemId( $itemId );
 		} catch ( InvalidArgumentException $ex ) {
 			return new ValidationError( $itemId, Result::SOURCE_ITEM_ID );
+		}
+		return null;
+	}
+
+	private function validateFields( ?array $fields ): ?ValidationError {
+		if ( $fields === null ) {
+			return null;
+		}
+		foreach ( $fields as $field ) {
+			if ( !in_array( $field, GetItemRequest::VALID_FIELDS ) ) {
+				return new ValidationError( $field, Result::SOURCE_FIELDS );
+			}
 		}
 		return null;
 	}

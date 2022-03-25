@@ -3,35 +3,43 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidationResult;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
+use Wikibase\Repo\RestApi\UseCases\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator
+ * @covers \Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class GetItemValidatorTest extends TestCase {
+class GetItemErrorResponseTest extends TestCase {
 
 	/**
-	 * @dataProvider dataProviderPass
+	 * @dataProvider validationErrorDataProvider
 	 */
-	public function testValidatePass( GetItemRequest $request ): void {
-		$result = ( new GetItemValidator() )->validate( $request );
+	public function testNewFromValidationError( ValidationError $validationError, string $expectedCode, string $expectedMessage ): void {
+		$result = GetItemErrorResponse::newFromValidationError( $validationError );
 
-		$this->assertFalse( $result->hasError() );
+		$this->assertEquals( $expectedCode, $result->getCode() );
+		$this->assertEquals( $expectedMessage, $result->getMessage() );
 	}
 
-	public function dataProviderPass(): \Generator {
-		yield "valid ID with empty fields" => [
-			new GetItemRequest( "Q123" )
+	public function validationErrorDataProvider(): \Generator {
+		yield "from invalid item ID" => [
+			new ValidationError( "X123", GetItemValidationResult::SOURCE_ITEM_ID ),
+			ErrorResponse::INVALID_ITEM_ID,
+			"Not a valid item ID: X123"
 		];
 
-		yield "valid ID and fields" => [
-			new GetItemRequest( "Q123", [ 'type', 'labels', 'descriptions' ] )
+		yield "from invalid field" => [
+			new ValidationError( "unknown_field", GetItemValidationResult::SOURCE_FIELDS ),
+			ErrorResponse::INVALID_FIELD,
+			"Not a valid field: unknown_field"
 		];
 	}
 

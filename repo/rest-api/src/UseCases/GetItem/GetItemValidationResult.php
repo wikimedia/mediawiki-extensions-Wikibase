@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\UseCases\ValidationError;
  */
 class GetItemValidationResult {
 	public const SOURCE_ITEM_ID = 'item ID';
+	public const SOURCE_FIELDS = 'fields';
 
 	private $error;
 
