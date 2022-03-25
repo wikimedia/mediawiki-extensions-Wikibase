@@ -27,7 +27,7 @@ class GetItemValidator {
 			// @phan-suppress-next-line PhanNoopNew
 			new ItemId( $itemId );
 		} catch ( InvalidArgumentException $ex ) {
-			return new ValidationError( $itemId, Result::SOURCE_ITEM_ID, $ex->getMessage() );
+			return new ValidationError( $itemId, Result::SOURCE_ITEM_ID );
 		}
 		return null;
 	}
