@@ -12,14 +12,12 @@ use Wikibase\Repo\RestApi\UseCases\ValidationError;
  */
 class GetItemValidator {
 	public function validate( GetItemRequest $request ): Result {
-		$result = new Result();
-
 		$itemIdError = $this->validateItemId( $request->getItemId() );
 		if ( $itemIdError ) {
-			$result->setError( $itemIdError );
+			return new Result( $itemIdError );
 		}
 
-		return $result;
+		return new Result();
 	}
 
 	private function validateItemId( string $itemId ): ?ValidationError {
