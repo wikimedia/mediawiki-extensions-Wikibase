@@ -45,7 +45,7 @@ class GetItem {
 		if ( $itemRevision === null ) {
 			return new GetItemErrorResult(
 				ErrorResult::ITEM_NOT_FOUND,
-				"Could not find an item with the ID {$itemRequest->getItemId()}"
+				"Could not find an item with the ID: {$itemRequest->getItemId()}"
 			);
 		}
 
