@@ -218,5 +218,6 @@
 	"right-item-merge": "Združi Objekte",
 	"action-property-create": "ustvari Lastnosti",
 	"wikibase-pageinfo-subscription-none": "Brez",
-	"wikibase-shortcopyrightwarning-heading": "Navedba licence"
+	"wikibase-shortcopyrightwarning-heading": "Navedba licence",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Prekliči"
 }
