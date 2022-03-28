@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\Rest\Response;
-use Wikibase\Repo\RestApi\Presentation\ErrorResultToHttpStatus;
+use Wikibase\Repo\RestApi\Presentation\ErrorResponseToHttpStatus;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\UnexpectedError;
 
@@ -27,7 +27,7 @@ class UnexpectedErrorHandler {
 		} catch ( \Exception $exception ) {
 			$error = new UnexpectedError();
 			$response = new Response( $this->presenter->getJson( $error ) );
-			$response->setStatus( ErrorResultToHttpStatus::lookup( $error ) );
+			$response->setStatus( ErrorResponseToHttpStatus::lookup( $error ) );
 			$response->setHeader( 'Content-Type', 'application/json' );
 
 			return $response;

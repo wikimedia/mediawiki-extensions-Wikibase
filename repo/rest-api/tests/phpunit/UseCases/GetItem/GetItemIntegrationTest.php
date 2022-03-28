@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use MediaWikiIntegrationTestCase;
-use Wikibase\Repo\RestApi\UseCases\ErrorResult;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResult;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResult;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\WikibaseRepo;
@@ -30,25 +30,25 @@ class GetItemIntegrationTest extends MediaWikiIntegrationTestCase {
 		$item = NewItem::withLabel( "en", self::ITEM_LABEL )->build();
 		$entityStore->saveEntity( $item, self::class, self::getTestUser()->getUser(), EDIT_NEW );
 
-		$itemResult = WbRestApi::getGetItem()
+		$itemResponse = WbRestApi::getGetItem()
 			->execute( new GetItemRequest( $item->getId()->getSerialization() ) );
 
-		$this->assertInstanceOf( GetItemSuccessResult::class, $itemResult );
+		$this->assertInstanceOf( GetItemSuccessResponse::class, $itemResponse );
 		$this->assertSame(
 			$item->getId()->getSerialization(),
-			$itemResult->getItem()['id']
+			$itemResponse->getItem()['id']
 		);
 		$this->assertSame(
 			self::ITEM_LABEL,
-			$itemResult->getItem()['labels']['en']['value']
+			$itemResponse->getItem()['labels']['en']['value']
 		);
 	}
 
 	public function testItemNotFound(): void {
-		$itemResult = WbRestApi::getGetItem()->execute( new GetItemRequest( 'Q99' ) );
+		$itemResponse = WbRestApi::getGetItem()->execute( new GetItemRequest( 'Q99' ) );
 
-		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
-		$this->assertSame( ErrorResult::ITEM_NOT_FOUND, $itemResult->getCode() );
+		$this->assertInstanceOf( GetItemErrorResponse::class, $itemResponse );
+		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $itemResponse->getCode() );
 	}
 
 	/**
@@ -61,13 +61,13 @@ class GetItemIntegrationTest extends MediaWikiIntegrationTestCase {
 			->build();
 		$entityStore->saveEntity( $item, self::class, self::getTestUser()->getUser(), EDIT_NEW );
 
-		$itemResult = WbRestApi::getGetItem()
+		$itemResponse = WbRestApi::getGetItem()
 			->execute( new GetItemRequest( $item->getId()->getSerialization(), $fields ) );
 
 		$expectedItem[ "id" ] = $item->getId()->getSerialization();
 
-		$this->assertInstanceOf( GetItemSuccessResult::class, $itemResult );
-		$this->assertEquals( $expectedItem, $itemResult->getItem() );
+		$this->assertInstanceOf( GetItemSuccessResponse::class, $itemResponse );
+		$this->assertEquals( $expectedItem, $itemResponse->getItem() );
 	}
 
 	public function filterDataProvider(): \Generator {

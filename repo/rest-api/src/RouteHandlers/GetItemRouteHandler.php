@@ -6,13 +6,13 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use Wikibase\Repo\RestApi\Presentation\ErrorResultToHttpStatus;
+use Wikibase\Repo\RestApi\Presentation\ErrorResponseToHttpStatus;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResult;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResult;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -74,24 +74,24 @@ class GetItemRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $id ): Response {
 		$fields = $this->getValidatedParams()['_fields'];
-		$result = $this->getItem->execute( new GetItemRequest( $id, $fields ) );
+		$useCaseResponse = $this->getItem->execute( new GetItemRequest( $id, $fields ) );
 
-		$response = $this->getResponseFactory()->create();
-		$response->setHeader( 'Content-Type', 'application/json' );
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 
-		if ( $result instanceof GetItemSuccessResult ) {
-			$response->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $result->getLastModified() ) );
-			$response->setHeader( 'ETag', $result->getRevisionId() );
-			$response->setBody( new StringStream( $this->successPresenter->getJson( $result ) ) );
-		} elseif ( $result instanceof GetItemErrorResult ) {
-			$response->setHeader( 'Content-Language', 'en' );
-			$response->setStatus( ErrorResultToHttpStatus::lookup( $result ) );
-			$response->setBody( new StringStream( $this->errorPresenter->getJson( $result ) ) );
+		if ( $useCaseResponse instanceof GetItemSuccessResponse ) {
+			$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
+			$httpResponse->setHeader( 'ETag', $useCaseResponse->getRevisionId() );
+			$httpResponse->setBody( new StringStream( $this->successPresenter->getJson( $useCaseResponse ) ) );
+		} elseif ( $useCaseResponse instanceof GetItemErrorResponse ) {
+			$httpResponse->setHeader( 'Content-Language', 'en' );
+			$httpResponse->setStatus( ErrorResponseToHttpStatus::lookup( $useCaseResponse ) );
+			$httpResponse->setBody( new StringStream( $this->errorPresenter->getJson( $useCaseResponse ) ) );
 		} else {
 			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
 
-		return $response;
+		return $httpResponse;
 	}
 
 	public function getParamSettings(): array {

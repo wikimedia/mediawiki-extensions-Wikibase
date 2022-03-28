@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 
-use Wikibase\Repo\RestApi\UseCases\ErrorResult;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ValidationError;
 
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemErrorResult implements ErrorResult {
+class GetItemErrorResponse implements ErrorResponse {
 	/**
 	 * @var string
 	 */
@@ -31,7 +31,7 @@ class GetItemErrorResult implements ErrorResult {
 		switch ( $errorSource ) {
 			case GetItemValidationResult::SOURCE_ITEM_ID:
 				return new self(
-					ErrorResult::INVALID_ITEM_ID,
+					ErrorResponse::INVALID_ITEM_ID,
 					"Not a valid item ID: " . $validationError->getValue()
 				);
 

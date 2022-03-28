@@ -6,7 +6,7 @@ use MediaWiki\Rest\RequestData;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\RestApi\RouteHandlers\GetItemRouteHandler;
-use Wikibase\Repo\RestApi\UseCases\ErrorResult;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 
 /**
@@ -32,7 +32,7 @@ class GetItemRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$response = $routeHandler->execute();
 		$responseBody = json_decode( $response->getBody()->getContents() );
 		$this->assertSame(
-			ErrorResult::UNEXPECTED_ERROR,
+			ErrorResponse::UNEXPECTED_ERROR,
 			$responseBody->code
 		);
 	}
