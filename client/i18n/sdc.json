@@ -11,6 +11,8 @@
 	"wikibase-editlinks": "Mudifiggà liadduri",
 	"wikibase-editlinkstitle": "Mudifiggà liadduri interwiki",
 	"wikibase-linkitem-addlinks": "Aggiungì liammi",
+	"wikibase-linkitem-title": "Cullèga cùn àlthra pàgina",
+	"wikibase-linkitem-linkpage": "Cullèga cùn la pàgina",
 	"wikibase-linkitem-input-site": "Linga:",
 	"wikibase-linkitem-input-page": "Pàgina:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

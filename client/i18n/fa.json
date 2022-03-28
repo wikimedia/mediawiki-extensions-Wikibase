@@ -23,7 +23,8 @@
 			"ZxxZxxZ",
 			"درفش کاویانی",
 			"Darafsh",
-			"Jeeputer"
+			"Jeeputer",
+			"Beginneruser"
 		]
 	},
 	"wikibase-client-desc": "کارخواه برای افزونهٔ ویکی‌بیس",
@@ -72,7 +73,7 @@
 	"wikibase-rcfilters-hide-wikibase-label": "ویرایش‌ها در {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-description": "ویرایش‌هایی که در {{WBREPONAME}} منشأ دارند.",
 	"wikibase-replicationnote": "لطفاً توجه کنید چند دقیقه زمان لازم است تا تغییرات در همهٔ ویکی‌ها قابل مشاهده باشد.",
-	"wikibase-watchlist-show-changes-pref": "نمایش ویرایش‌های {{WBREPONAME}} در فهرست پیگیری‌های شما",
+	"wikibase-watchlist-show-changes-pref": "نمایش ویرایش‌های {{WBREPONAME}} در فهرست پیگیری‌تان",
 	"wikibase-error-deserialize-error": "خطا در مرتب کردن داده ‌ها.",
 	"wikibase-error-serialize-error": "مرتب کردن داده انجام نشد.",
 	"wikibase-error-invalid-entity-id": "شناسهٔ \"$2\" برای سامانه ناشناخته است.لطفاً از یک شناسهٔ موضوع معتبر استفاده کنید.",

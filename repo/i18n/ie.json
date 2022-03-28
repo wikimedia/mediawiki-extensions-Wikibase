@@ -8,8 +8,14 @@
 	},
 	"wikibase-edit": "redacter",
 	"wikibase-add": "addir",
+	"wikibase-entitytermsforlanguagelistview-label": "Etiquette",
 	"wikibase-label-empty": "Nequant etiquette definit",
 	"wikibase-description-empty": "Nequant descrition definit",
+	"wikibase-diffview-label": "etiquette",
 	"wikibase-sitelinks-special": "Altri sites",
-	"wikibase-statementview-rank-normal": "Normal rang"
+	"wikibase-statementview-rank-normal": "Normal rang",
+	"wikibase-itemdisambiguation-lookup-label": "Etiquette:",
+	"wikibase-newentity-label": "Etiquette:",
+	"wikibase-setlabel-label": "Etiquette:",
+	"wikibase-setlabeldescriptionaliases-label-label": "Etiquette:"
 }

@@ -9,7 +9,8 @@
 			"Macofe",
 			"Pymouss",
 			"Y-M D",
-			"MuratTheTurkish"
+			"MuratTheTurkish",
+			"VIGNERON"
 		]
 	},
 	"wikibase-desc": "Kavlec'h roadennoù frammet",
@@ -109,7 +110,7 @@
 	"wikibase-snakview-variation-datavaluetypemismatch": "Ne glot ket an talvoud-mañ gant termenadur ar perzh.",
 	"wikibase-snakview-variation-datavaluetypemismatch-details": "Tabut dic'hortoz etre seurt ar perzh \"$2\" ha seurt an talvoud \"$1\".",
 	"wikibase-snakview-variation-nonewvaluefordeletedproperty": "Ne c'haller ket termeniñ un talvoud nevez evit ur perzh bet diverket.",
-	"wikibase-snakview-variations-somevalue-label": "Talvoud dianav",
+	"wikibase-snakview-variations-somevalue-label": "talvoud dianav",
 	"wikibase-snakview-variations-novalue-label": "talvoud ebet",
 	"wikibase-snakview-snaktypeselector-value": "talvoud personelaet",
 	"wikibase-snakformat-invalid-value": "Talvoud direizh.",
