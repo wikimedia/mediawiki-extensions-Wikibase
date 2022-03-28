@@ -24,18 +24,16 @@ class GetItemErrorResponse implements ErrorResponse {
 		$this->message = $message;
 	}
 
-	public static function newFromValidationError(
-		ValidationError $validationError
-	): self {
+	public static function newFromValidationError( ValidationError $validationError ): self {
 		$errorSource = $validationError->getSource();
 		switch ( $errorSource ) {
-			case GetItemValidationResult::SOURCE_ITEM_ID:
+			case GetItemValidator::SOURCE_ITEM_ID:
 				return new self(
 					ErrorResponse::INVALID_ITEM_ID,
 					"Not a valid item ID: " . $validationError->getValue()
 				);
 
-			case GetItemValidationResult::SOURCE_FIELDS:
+			case GetItemValidator::SOURCE_FIELDS:
 				return new self(
 					ErrorResponse::INVALID_FIELD,
 					"Not a valid field: " . $validationError->getValue()

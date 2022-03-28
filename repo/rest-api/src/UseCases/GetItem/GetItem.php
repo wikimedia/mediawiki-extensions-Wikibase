@@ -31,12 +31,10 @@ class GetItem {
 	 * @return GetItemSuccessResponse|GetItemErrorResponse
 	 */
 	public function execute( GetItemRequest $itemRequest ) {
-		$validationResult = $this->validator->validate( $itemRequest );
+		$validationError = $this->validator->validate( $itemRequest );
 
-		if ( $validationResult->hasError() ) {
-			return GetItemErrorResponse::newFromValidationError(
-				$validationResult->getError()
-			);
+		if ( $validationError ) {
+			return GetItemErrorResponse::newFromValidationError( $validationError );
 		}
 
 		$itemId = new ItemId( $itemRequest->getItemId() );

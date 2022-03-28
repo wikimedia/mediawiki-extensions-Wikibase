@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidationResult;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\UseCases\ValidationError;
 
@@ -23,21 +22,21 @@ class GetItemErrorResponseTest extends TestCase {
 	 * @dataProvider validationErrorDataProvider
 	 */
 	public function testNewFromValidationError( ValidationError $validationError, string $expectedCode, string $expectedMessage ): void {
-		$result = GetItemErrorResponse::newFromValidationError( $validationError );
+		$response = GetItemErrorResponse::newFromValidationError( $validationError );
 
-		$this->assertEquals( $expectedCode, $result->getCode() );
-		$this->assertEquals( $expectedMessage, $result->getMessage() );
+		$this->assertEquals( $expectedCode, $response->getCode() );
+		$this->assertEquals( $expectedMessage, $response->getMessage() );
 	}
 
 	public function validationErrorDataProvider(): \Generator {
 		yield "from invalid item ID" => [
-			new ValidationError( "X123", GetItemValidationResult::SOURCE_ITEM_ID ),
+			new ValidationError( "X123", GetItemValidator::SOURCE_ITEM_ID ),
 			ErrorResponse::INVALID_ITEM_ID,
 			"Not a valid item ID: X123"
 		];
 
 		yield "from invalid field" => [
-			new ValidationError( "unknown_field", GetItemValidationResult::SOURCE_FIELDS ),
+			new ValidationError( "unknown_field", GetItemValidator::SOURCE_FIELDS ),
 			ErrorResponse::INVALID_FIELD,
 			"Not a valid field: unknown_field"
 		];
@@ -47,26 +46,26 @@ class GetItemErrorResponseTest extends TestCase {
 	 * @dataProvider dataProviderFail
 	 */
 	public function testValidateFail( GetItemRequest $request, string $expectedSource ): void {
-		$result = ( new GetItemValidator() )->validate( $request );
+		$error = ( new GetItemValidator() )->validate( $request );
 
-		$this->assertTrue( $result->hasError() );
-		$this->assertEquals( $expectedSource, $result->getError()->getSource() );
+		$this->assertNotNull( $error );
+		$this->assertEquals( $expectedSource, $error->getSource() );
 	}
 
 	public function dataProviderFail(): \Generator {
 		yield "invalid item ID" => [
 			new GetItemRequest( "X123" ),
-			GetItemValidationResult::SOURCE_ITEM_ID
+			GetItemValidator::SOURCE_ITEM_ID
 		];
 
 		yield "invalid field" => [
 			new GetItemRequest( "Q123", [ 'type', 'unknown_field' ] ),
-			GetItemValidationResult::SOURCE_FIELDS
+			GetItemValidator::SOURCE_FIELDS
 		];
 
 		yield "invalid item ID and invalid field" => [
 			new GetItemRequest( "X123", [ 'type', 'unknown_field' ] ),
-			GetItemValidationResult::SOURCE_ITEM_ID
+			GetItemValidator::SOURCE_ITEM_ID
 		];
 	}
 }

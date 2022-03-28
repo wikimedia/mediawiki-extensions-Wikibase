@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidationResult;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
 
 /**
@@ -20,9 +19,9 @@ class GetItemValidatorTest extends TestCase {
 	 * @dataProvider dataProviderPass
 	 */
 	public function testValidatePass( GetItemRequest $request ): void {
-		$result = ( new GetItemValidator() )->validate( $request );
+		$error = ( new GetItemValidator() )->validate( $request );
 
-		$this->assertFalse( $result->hasError() );
+		$this->assertNull( $error );
 	}
 
 	public function dataProviderPass(): \Generator {
@@ -41,24 +40,24 @@ class GetItemValidatorTest extends TestCase {
 	public function testValidateFail( GetItemRequest $request, string $expectedSource ): void {
 		$result = ( new GetItemValidator() )->validate( $request );
 
-		$this->assertTrue( $result->hasError() );
-		$this->assertEquals( $expectedSource, $result->getError()->getSource() );
+		$this->assertNotNull( $result );
+		$this->assertEquals( $expectedSource, $result->getSource() );
 	}
 
 	public function dataProviderFail(): \Generator {
 		yield "invalid item ID" => [
 			new GetItemRequest( "X123" ),
-			GetItemValidationResult::SOURCE_ITEM_ID
+			GetItemValidator::SOURCE_ITEM_ID
 		];
 
 		yield "invalid field" => [
 			new GetItemRequest( "Q123", [ 'type', 'unknown_field' ] ),
-			GetItemValidationResult::SOURCE_FIELDS
+			GetItemValidator::SOURCE_FIELDS
 		];
 
 		yield "invalid item ID and invalid field" => [
 			new GetItemRequest( "X123", [ 'type', 'unknown_field' ] ),
-			GetItemValidationResult::SOURCE_ITEM_ID
+			GetItemValidator::SOURCE_ITEM_ID
 		];
 	}
 }
