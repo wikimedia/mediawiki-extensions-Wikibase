@@ -375,6 +375,7 @@
 	"wikibase-entitypage-title": "Title shown on Special:EntityPage when the explanatory text is presented",
 	"wikibase-entitypage-text": "Explanatory text shown on Special:EntityPage when no ID has been provided.",
 	"wikibase-entitypage-bad-id": "Error shown on Special:EntityPage when the requested ID is invalid. Parameters:\n* $1: the malformed ID",
+	"wikibase-error-entity-not-local": "Error message for attempting to edit an entity from the wrong wiki.\n\nParameters:\n* $1 - the entity type ('item', 'property', etc.)",
 	"wikibase-error-entity-too-big": "Error message for attempting to store an entity larger than the maximum allowed entity size.\n\nParameters:\n* $1 - allowed entity size",
 	"wikibase-parse-error": "Generic error used by the API (in particular, by wbparsevalue) to indicate that some user input was malformed and could not be parsed",
 	"wikibase-parse-error-coordinate": "An error used by the API (in particular, by wbparsevalue) to indicate that the user input could not be parsed as a globe coordinate",

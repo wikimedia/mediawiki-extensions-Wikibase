@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests;
 
 use FauxRequest;
-use InvalidArgumentException;
 use MediaWiki\User\UserIdentity;
 use MediaWikiIntegrationTestCase;
 use ObjectCache;
@@ -497,8 +496,9 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			[ 'property' ]
 		);
 
-		$this->expectException( InvalidArgumentException::class );
-		$edit->attemptSave( $item, 'testing', EDIT_NEW, $token );
+		$status = $edit->attemptSave( $item, 'testing', EDIT_NEW, $token );
+		$this->assertStatusNotOK( $status );
+		$this->assertStatusMessage( 'wikibase-error-entity-not-local', $status );
 	}
 
 	/**
