@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Filters\FieldFilter;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
-use Wikibase\Repo\RestApi\UseCases\ErrorResult;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
 /**
  * @license GPL-2.0-or-later
@@ -28,13 +28,13 @@ class GetItem {
 	}
 
 	/**
-	 * @return GetItemSuccessResult|GetItemErrorResult
+	 * @return GetItemSuccessResponse|GetItemErrorResponse
 	 */
 	public function execute( GetItemRequest $itemRequest ) {
 		$validationResult = $this->validator->validate( $itemRequest );
 
 		if ( $validationResult->hasError() ) {
-			return GetItemErrorResult::newFromValidationError(
+			return GetItemErrorResponse::newFromValidationError(
 				$validationResult->getError()
 			);
 		}
@@ -43,8 +43,8 @@ class GetItem {
 		$itemRevision = $this->itemRetriever->getItemRevision( $itemId );
 
 		if ( $itemRevision === null ) {
-			return new GetItemErrorResult(
-				ErrorResult::ITEM_NOT_FOUND,
+			return new GetItemErrorResponse(
+				ErrorResponse::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$itemRequest->getItemId()}"
 			);
 		}
@@ -55,7 +55,7 @@ class GetItem {
 			$itemSerialization = ( new FieldFilter( $fields ) )->filter( $itemSerialization );
 		}
 
-		return new GetItemSuccessResult(
+		return new GetItemSuccessResponse(
 			$itemSerialization,
 			$itemRevision->getLastModified(),
 			$itemRevision->getRevisionId()

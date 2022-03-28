@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\UnexpectedErrorHandler;
-use Wikibase\Repo\RestApi\UseCases\ErrorResult;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\ApiNotEnabledRouteHandler
@@ -24,7 +24,7 @@ class UnexpectedErrorHandlerTest extends TestCase {
 		}, [] );
 		$responseBody = json_decode( $response->getBody()->getContents() );
 		$this->assertSame(
-			ErrorResult::UNEXPECTED_ERROR,
+			ErrorResponse::UNEXPECTED_ERROR,
 			$responseBody->code
 		);
 	}

@@ -6,11 +6,11 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
-use Wikibase\Repo\RestApi\UseCases\ErrorResult;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResult;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResult;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\WikibaseRepo;
@@ -48,14 +48,14 @@ class GetItemTest extends TestCase {
 		$validator = new GetItemValidator();
 
 		$itemRequest = new GetItemRequest( $itemId );
-		$itemResult = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
-		$item = $itemResult->getItem();
+		$itemResponse = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
+		$item = $itemResponse->getItem();
 
-		$this->assertInstanceOf( GetItemSuccessResult::class, $itemResult );
+		$this->assertInstanceOf( GetItemSuccessResponse::class, $itemResponse );
 		$this->assertSame( $itemId, $item['id'] );
 		$this->assertSame( $itemLabel, $item['labels']['en']['value'] );
-		$this->assertSame( $lastModifiedTimestamp, $itemResult->getLastModified() );
-		$this->assertSame( $revisionId, $itemResult->getRevisionId() );
+		$this->assertSame( $lastModifiedTimestamp, $itemResponse->getLastModified() );
+		$this->assertSame( $revisionId, $itemResponse->getRevisionId() );
 	}
 
 	public function testItemNotFound(): void {
@@ -69,9 +69,9 @@ class GetItemTest extends TestCase {
 		$validator = new GetItemValidator();
 
 		$itemRequest = new GetItemRequest( $itemId );
-		$itemResult = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
-		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
-		$this->assertSame( ErrorResult::ITEM_NOT_FOUND, $itemResult->getCode() );
+		$itemResponse = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
+		$this->assertInstanceOf( GetItemErrorResponse::class, $itemResponse );
+		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $itemResponse->getCode() );
 	}
 
 	public function testInvalidItemId(): void {
@@ -84,10 +84,10 @@ class GetItemTest extends TestCase {
 		$validator = new GetItemValidator();
 
 		$itemRequest = new GetItemRequest( $itemId );
-		$itemResult = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
+		$itemResponse = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
 
-		$this->assertInstanceOf( GetItemErrorResult::class, $itemResult );
-		$this->assertSame( ErrorResult::INVALID_ITEM_ID, $itemResult->getCode() );
+		$this->assertInstanceOf( GetItemErrorResponse::class, $itemResponse );
+		$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $itemResponse->getCode() );
 	}
 
 	/**
@@ -114,10 +114,10 @@ class GetItemTest extends TestCase {
 		$validator = new GetItemValidator();
 
 		$itemRequest = new GetItemRequest( self::ITEM_ID, $fields );
-		$itemResult = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
-		$item = $itemResult->getItem();
+		$itemResponse = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
+		$item = $itemResponse->getItem();
 
-		$this->assertInstanceOf( GetItemSuccessResult::class, $itemResult );
+		$this->assertInstanceOf( GetItemSuccessResponse::class, $itemResponse );
 		$this->assertEquals( $expectedItem, $item );
 	}
 

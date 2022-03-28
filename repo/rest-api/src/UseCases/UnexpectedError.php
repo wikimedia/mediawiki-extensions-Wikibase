@@ -5,10 +5,10 @@ namespace Wikibase\Repo\RestApi\UseCases;
 /**
  * @license GPL-2.0-or-later
  */
-class UnexpectedError implements ErrorResult {
+class UnexpectedError implements ErrorResponse {
 
 	public function getCode(): string {
-		return ErrorResult::UNEXPECTED_ERROR;
+		return ErrorResponse::UNEXPECTED_ERROR;
 	}
 
 	public function getMessage(): string {
