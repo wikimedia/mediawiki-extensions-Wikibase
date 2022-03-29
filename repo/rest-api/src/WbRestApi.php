@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi;
 
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
-use Wikibase\Repo\RestApi\RouteHandlers\RouteHandlerFeatureToggle;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 
 /**
@@ -15,11 +14,6 @@ class WbRestApi {
 	public static function getGetItem( ContainerInterface $services = null ): GetItem {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetItem' );
-	}
-
-	public static function getRouteHandlerFeatureToggle( ContainerInterface $services = null ): RouteHandlerFeatureToggle {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.RouteHandlerFeatureToggle' );
 	}
 
 }

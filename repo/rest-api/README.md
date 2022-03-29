@@ -2,9 +2,9 @@
 
 ## Configuration
 
-Enable the feature toggle:
+Enable the REST API:
 ```php
-$wgWBRepoSettings['restApiEnabled'] = true;
+$wgRestAPIAdditionalRouteFiles[] = 'extensions/Wikibase/repo/rest-api/routes.json';
 ```
 
 ## Tests

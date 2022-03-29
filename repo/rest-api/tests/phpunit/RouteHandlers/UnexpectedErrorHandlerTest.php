@@ -8,7 +8,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\UnexpectedErrorHandler;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
 /**
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\ApiNotEnabledRouteHandler
+ * @covers \Wikibase\Repo\RestApi\RouteHandlers\UnexpectedErrorHandler
  *
  * @group Wikibase
  *

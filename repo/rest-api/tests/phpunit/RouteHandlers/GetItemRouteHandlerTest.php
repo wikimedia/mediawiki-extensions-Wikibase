@@ -10,7 +10,7 @@ use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 
 /**
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\ApiNotEnabledRouteHandler
+ * @covers \Wikibase\Repo\RestApi\RouteHandlers\GetItemRouteHandler
  *
  * @group Wikibase
  *

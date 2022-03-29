@@ -33,7 +33,7 @@ $wgWBRepoSettings['dataBridgeEnabled'] = true;
 $wgWBRepoSettings['taintedReferencesEnabled'] = true;
 
 // enable Wikibase REST API
-$wgWBRepoSettings['restApiEnabled'] = true;
+$wgRestAPIAdditionalRouteFiles[] = 'extensions/Wikibase/repo/rest-api/routes.json';
 
 // enable data value normalization
 $wgWBRepoSettings['tmpNormalizeDataValues'] = true;
