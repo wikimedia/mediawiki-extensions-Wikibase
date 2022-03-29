@@ -19,12 +19,13 @@
 			"Pouyana",
 			"Reza1615",
 			"Rtemis",
-			"ZxxZxxZ"
+			"ZxxZxxZ",
+			"Beginneruser"
 		]
 	},
 	"specialpages-group-wikibase": "ویکی‌بیس",
 	"wikibase-deletedentity-item": "آیتم حذف‌شده",
-	"wikibase-deletedentity-property": "خصوصیات حذف شده",
+	"wikibase-deletedentity-property": "ویژگی حذف شده",
 	"wikibase-deletedentity-query": "جستار حذف‌شده",
 	"wikibase-error-unexpected": "خطا: $1.",
 	"wikibase-error-unknown": "خطایی رخ داده است.",
@@ -65,7 +66,7 @@
 	"datatypes-type-globe-coordinate": "مختصات جغرافیایی",
 	"datatypes-type-time": "نقطه در زمان",
 	"datatypes-type-wikibase-item": "آیتم",
-	"datatypes-type-wikibase-property": "خاصیت",
+	"datatypes-type-wikibase-property": "ویژگی",
 	"datatypes-type-commonsMedia": "پرونده‌های ویکی‌انبار",
 	"datatypes-type-geo-shape": "شکل جغرافیایی",
 	"datatypes-type-tabular-data": "اطلاعات جدولی",
@@ -86,7 +87,7 @@
 	"wikibase-time-precision-BCE-century": "در $1 صد سال پیش از میلاد",
 	"wikibase-time-precision-BCE-10annum": "در $1 سال پیش از میلاد",
 	"wikibase-snakformatter-valuetype-mismatch": "نوع مقداری «$1» با نوع خصوصیت «$2» انطباق ندارد.",
-	"wikibase-snakformatter-property-not-found": "خصوصیت $1 یافت نشد، نمی‌تواند نوع داده‌ای را برای استفاده مشخص کرد.",
+	"wikibase-snakformatter-property-not-found": "ویژگی $1 یافت نشد، نمی‌تواند نوع داده‌ای را برای استفاده مشخص کرد.",
 	"wikibase-snakformatter-formatting-exception": "خطای قالب بندی: $1.",
 	"wikibase-entity-summary-wbsetitem": "یک آیتم جدید ایجاد کرد",
 	"wikibase-entity-summary-wbcreate-new": "ایجاد یک ورودی جدید",
@@ -150,9 +151,9 @@
 	"wikibase-item-summary-wblinktitles-create": "ساخت این آیتم برای پیوند صفحه های",
 	"wikibase-item-summary-wblinktitles-connect": "افزودن یک پیوند زبانی برای ارتباط صفحه های",
 	"wikibase-property-summary-wbcreate-new": "ایجاد یک ویژگی تازه",
-	"wikibase-property-summary-wbeditentity-create": "ایجاد یک  خصوصیت تازه",
-	"wikibase-property-summary-wbeditentity-create-property": "ایجاد یک  خصوصیت تازه",
-	"wikibase-property-summary-wbeditentity-update": "تغییر دادن یک خصوصیت",
-	"wikibase-property-summary-wbeditentity-override": "پاک کردن یک خصوصیت",
+	"wikibase-property-summary-wbeditentity-create": "ایجاد یک  ویژگی تازه",
+	"wikibase-property-summary-wbeditentity-create-property": "ایجاد یک  ویژگی تازه",
+	"wikibase-property-summary-wbeditentity-update": "تغییر دادن یک ویژگی",
+	"wikibase-property-summary-wbeditentity-override": "پاک کردن یک ویژگی",
 	"wikibase-property-summary-special-create-property": "ایجاد یک ویژگی [$2] با {{PLURAL:$1|مقدار|مقدارها}}"
 }
