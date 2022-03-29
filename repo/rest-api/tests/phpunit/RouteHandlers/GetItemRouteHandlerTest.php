@@ -31,6 +31,7 @@ class GetItemRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$response = $routeHandler->execute();
 		$responseBody = json_decode( $response->getBody()->getContents() );
+		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
 		$this->assertSame(
 			ErrorResponse::UNEXPECTED_ERROR,
 			$responseBody->code

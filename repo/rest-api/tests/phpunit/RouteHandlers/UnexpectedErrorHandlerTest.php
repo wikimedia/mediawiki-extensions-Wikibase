@@ -22,6 +22,7 @@ class UnexpectedErrorHandlerTest extends TestCase {
 		$response = $errorHandler->runWithErrorHandling( function (): void {
 			throw new \RuntimeException();
 		}, [] );
+		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
 		$responseBody = json_decode( $response->getBody()->getContents() );
 		$this->assertSame(
 			ErrorResponse::UNEXPECTED_ERROR,

@@ -29,6 +29,7 @@ class UnexpectedErrorHandler {
 			$response = new Response( $this->presenter->getJson( $error ) );
 			$response->setStatus( ErrorResponseToHttpStatus::lookup( $error ) );
 			$response->setHeader( 'Content-Type', 'application/json' );
+			$response->setHeader( 'Content-Language', 'en' );
 
 			return $response;
 		}
