@@ -73,7 +73,7 @@ class GetItemRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $id ): Response {
-		$fields = $this->getValidatedParams()['_fields'];
+		$fields = explode( ',', $this->getValidatedParams()['_fields'] );
 		$useCaseResponse = $this->getItem->execute( new GetItemRequest( $id, $fields ) );
 
 		$httpResponse = $this->getResponseFactory()->create();
@@ -105,8 +105,8 @@ class GetItemRouteHandler extends SimpleHandler {
 				self::PARAM_SOURCE => 'query',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
-				// TODO: need to decide on "pipe and array" vs "comma" (vs "pipe, array, and comma"?)
-				ParamValidator::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_ISMULTI => false,
+				ParamValidator::PARAM_DEFAULT => implode( ',', GetItemRequest::VALID_FIELDS )
 			],
 		];
 	}

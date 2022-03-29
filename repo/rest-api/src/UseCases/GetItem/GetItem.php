@@ -49,7 +49,7 @@ class GetItem {
 
 		$itemSerialization = $this->itemSerializer->serialize( $itemRevision->getItem() );
 		$fields = $itemRequest->getFields();
-		if ( $fields !== null ) {
+		if ( $fields !== GetItemRequest::VALID_FIELDS ) {
 			$itemSerialization = ( new FieldFilter( $fields ) )->filter( $itemSerialization );
 		}
 

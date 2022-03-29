@@ -28,10 +28,7 @@ class GetItemValidator {
 		return null;
 	}
 
-	private function validateFields( ?array $fields ): ?ValidationError {
-		if ( $fields === null ) {
-			return null;
-		}
+	private function validateFields( array $fields ): ?ValidationError {
 		foreach ( $fields as $field ) {
 			if ( !in_array( $field, GetItemRequest::VALID_FIELDS ) ) {
 				return new ValidationError( $field, self::SOURCE_FIELDS );

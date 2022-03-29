@@ -12,7 +12,7 @@ class GetItemRequest {
 
 	private $fields;
 
-	public function __construct( string $itemId, ?array $fields = null ) {
+	public function __construct( string $itemId, array $fields = self::VALID_FIELDS ) {
 		$this->itemId = $itemId;
 		$this->fields = $fields;
 	}
@@ -21,7 +21,7 @@ class GetItemRequest {
 		return $this->itemId;
 	}
 
-	public function getFields(): ?array {
+	public function getFields(): array {
 		return $this->fields;
 	}
 

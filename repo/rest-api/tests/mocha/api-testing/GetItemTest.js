@@ -62,7 +62,7 @@ describe( 'GET /entities/items/{id} ', () => {
 
 	it( 'can GET a partial item with multiple _fields params', async () => {
 		const rest = new REST( basePath );
-		const response = await rest.get( `/entities/items/${testItemId}?_fields=labels|descriptions|aliases` );
+		const response = await rest.get( `/entities/items/${testItemId}?_fields=labels,descriptions,aliases` );
 
 		assert.equal( response.status, 200 );
 		assert.deepEqual( response.body, {
