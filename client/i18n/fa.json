@@ -77,7 +77,7 @@
 	"wikibase-error-serialize-error": "مرتب کردن داده انجام نشد.",
 	"wikibase-error-invalid-entity-id": "شناسهٔ \"$2\" برای سامانه ناشناخته است.لطفاً از یک شناسهٔ موضوع معتبر استفاده کنید.",
 	"wikibase-error-exceeded-entity-access-limit": "تعداد زیادی ورودی مرتبط با {{WBREPONAME}}",
-	"unconnectedpages": "صفحات متصل نشده به آیتم‌ها",
+	"unconnectedpages": "صفحه‌های متصل نشده به آیتم‌ها",
 	"wikibase-unconnectedpages-submit": "نمایش صفحات",
 	"pageswithbadges": "صفحه‌های درجه‌دار",
 	"pageswithbadges-summary": "در این صفحه می‌توان صفحات درجه‌دار (مانند مقاله‌های خوب یا برگزیده) را فهرست کرد. فهرست بر پایهٔ شناسهٔ رقمی صفحات مرتب می‌شود، در نتیجه صفحاتی که جدیدتر ایجاد شده‌اند بالاتر قرار می‌گیرند.",

@@ -8,6 +8,7 @@
 		]
 	},
 	"wikibase-after-page-move": "Sahifa nomini koʻchirganligingiz shu onda [$1 {{WBREPONAME}} bandidagi til havolasida] aks etgan boʻlishi kerak. Bu sodir boʻlganligini tekshiring.",
+	"wikibase-after-page-delete": "Bu sahifaga havola [$1 {{WBREPONAME}} bandidan] olib tashlangan boʻlishi lozim. Buning sodir boʻlgan yoki yoʻqligini tekshirishingizni soʻraymiz.",
 	"wikibase-after-page-delete-queued": "Ushbu sahifa bilan bogʻliq [$1 {{WBREPONAME}} bandi] bir oz vaqtdan soʻng avtomatik oʻzgartiriladi.",
 	"wikibase-dataitem": "{{WBREPONAME}} bandi",
 	"wikibase-editlinks": "Ishoratlarni tahrirla",
