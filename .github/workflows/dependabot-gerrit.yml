@@ -8,7 +8,7 @@ jobs:
     if: github.actor == 'dependabot[bot]'
     steps:
       - name: Run dependabot gerrit action
-        uses: wmde/dependabot-gerrit-action@main
+        uses: wmde/dependabot-gerrit-action@temp-auto-abandon
         with:
             password: ${{ secrets.DEPENDABOT_GERRIT_PASSWORD }}
             user: Addbot
