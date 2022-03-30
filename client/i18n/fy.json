@@ -19,6 +19,7 @@
 	"wikibase-addlinkstitle": "Yntertaalkeppelings taheakje",
 	"wikibase-linkitem-addlinks": "Keppelings taheakje",
 	"wikibase-linkitem-input-site": "Taal:",
+	"wikibase-linkitem-input-page": "Side:",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "ferbergje",
 	"wikibase-rc-hide-wikidata-show": "werjaan",
