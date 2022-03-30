@@ -4,7 +4,8 @@
 		"summary": "Retrieve a single Wikibase Item by ID",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/entityId" },
-			{ "$ref": "../../global/parameters.json#/fields" }
+			{ "$ref": "../../global/parameters.json#/fields" },
+			{ "$ref": "../../global/parameters.json#/authorization" }
 		],
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Item" },

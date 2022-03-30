@@ -29,5 +29,14 @@
 		},
 		"explode": false,
 		"style": "form"
+	},
+	"authorization": {
+		"name": "Authorization",
+		"in": "header",
+		"description": "Make authenticated request using a provided bearer token",
+		"schema": {
+			"type": "string"
+		},
+		"example": "Bearer mF_9.B5f-4.1JqM"
 	}
 }
