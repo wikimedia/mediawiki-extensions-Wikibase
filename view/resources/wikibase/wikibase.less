@@ -173,46 +173,51 @@ div.wikibase-statementview textarea {
 }
 
 /* Section of claims referring to one property */
-.wikibase-statementgrouplistview .wikibase-statementlistview {
-	position: relative;
-	background-color: #fff;
-	float: left;
-	margin-left: 15em;
-	width: ~'calc( 100% - 15em )';
-	border: 1px solid #c8ccd1;
-}
+.wikibase-statementgrouplistview {
 
-/* Highlight target statement groups, e.g. https://www.wikidata.org/wiki/Q42#P735 */
-.wikibase-statementgrouplistview :target .wikibase-statementlistview {
-	outline: 2px solid #36c;
-}
+	@highlight-outline-width: 2px;
 
-/* Highlight individual target statements, e.g. https://www.wikidata.org/wiki/Q42#Q42$1d7d0ea9-412f-8b5b-ba8d-405ab9ecf026 */
-.wikibase-statementgrouplistview .wikibase-statementlistview .wikibase-statementview:target {
-	outline: 2px solid #36c;
-	z-index: 1;
-}
+	.wikibase-statementlistview {
+		position: relative;
+		background-color: #fff;
+		float: left;
+		margin-left: 15em;
+		width: ~'calc( 100% - 15em - @{highlight-outline-width} )';
+		border: 1px solid #c8ccd1;
+	}
 
-/* Container for the section title */
-.wikibase-statementgrouplistview .wikibase-statementgroupview-property {
-	width: 15em;
-	background: #eaecf0;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	z-index: 1; /* should overlay borders of claim containers etc. */
-}
+	/* Highlight target statement groups, e.g. https://www.wikidata.org/wiki/Q42#P735 */
+	:target {
+		outline: @highlight-outline-width solid #36c;
+	}
 
-/* The actual section title (the linked property name) */
-.wikibase-statementgrouplistview .wikibase-statementgroupview-property .wikibase-statementgroupview-property-label {
-	float: left;
-	word-wrap: break-word;
-	padding: 10px;
-	padding-bottom: 0; /* avoid scrollbars on multi-line property labels */
-	-webkit-transition: top 0.1s ease-out;
-	transition: top 0.1s ease-out;
-	position: sticky;
-	top: 10px;
+	/* Highlight individual target statements, e.g. https://www.wikidata.org/wiki/Q42#Q42$1d7d0ea9-412f-8b5b-ba8d-405ab9ecf026 */
+	.wikibase-statementlistview .wikibase-statementview:target {
+		outline: @highlight-outline-width solid #36c;
+		z-index: 1;
+	}
+
+	/* Container for the section title */
+	.wikibase-statementgroupview-property {
+		width: 15em;
+		background: #eaecf0;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		z-index: 1; /* should overlay borders of claim containers etc. */
+	}
+
+	/* The actual section title (the linked property name) */
+	.wikibase-statementgroupview-property .wikibase-statementgroupview-property-label {
+		float: left;
+		word-wrap: break-word;
+		padding: 10px;
+		padding-bottom: 0; /* avoid scrollbars on multi-line property labels */
+		-webkit-transition: top 0.1s ease-out;
+		transition: top 0.1s ease-out;
+		position: sticky;
+		top: 10px;
+	}
 }
 
 /* A single claim */
