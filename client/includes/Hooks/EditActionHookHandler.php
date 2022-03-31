@@ -173,7 +173,7 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 			$text = $label === null ? $entityId : $label->getText();
 
 			$aspectContent = $this->formatAspects( $aspects, $context );
-			$colon = $context->msg( 'colon-separator' )->plain();
+			$colon = $context->msg( 'colon-separator' )->escaped();
 			$output .= Html::rawElement(
 				'li',
 				[],
