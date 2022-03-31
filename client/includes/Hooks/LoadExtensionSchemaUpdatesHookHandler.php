@@ -21,7 +21,7 @@ use Wikibase\Client\WikibaseClient;
  */
 class LoadExtensionSchemaUpdatesHookHandler implements LoadExtensionSchemaUpdatesHook {
 
-	public const UPDATE_KEY_UNEXPECTED_UNCONNECTED_PAGE = 'Wikibase-Client-primeUnexpectedUnconnectedPage';
+	public const UPDATE_KEY_UNEXPECTED_UNCONNECTED_PAGE = 'Wikibase-Client-primeUnexpectedUnconnectedPage-v2';
 
 	/**
 	 * Applies any schema updates
