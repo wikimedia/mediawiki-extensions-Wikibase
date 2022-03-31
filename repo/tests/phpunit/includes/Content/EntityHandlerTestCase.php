@@ -728,7 +728,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 
 		foreach ( $expectedProps as $name => $expected ) {
 			$actual = $parserOutput->getPageProperty( $name );
-			$this->assertSame( $expected, $actual, "page property $name" );
+			$this->assertSame( (string)$expected, (string)$actual, "page property $name" );
 		}
 	}
 
