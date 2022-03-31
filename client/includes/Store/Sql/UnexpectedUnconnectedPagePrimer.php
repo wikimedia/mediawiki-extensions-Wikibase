@@ -221,6 +221,7 @@ class UnexpectedUnconnectedPagePrimer {
 			],
 			__METHOD__,
 			[
+				'ORDER BY' => 'page_id ASC',
 				'LIMIT' => $this->batchSize,
 			],
 			[
