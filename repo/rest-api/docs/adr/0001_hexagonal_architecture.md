@@ -4,7 +4,7 @@ Date: 2022-03-02
 
 ## Status
 
-proposed
+accepted
 
 ## Context
 
@@ -22,7 +22,7 @@ In practice this means that we'll allow ourselves to bind to MediaWiki and Wikib
 
 ## Decision
 
-We will attempt to follow the Hexagonal Architecture inspired by the structure of the FUN code bases. Initially, we will follow its rules to the best of our knowledge and keep an eye on them during code review. Once we feel that our code structure has stabilized we will look into tooling to automatically enforce the rules.
+We will attempt to follow the Hexagonal Architecture inspired by the structure of the FUN code bases. Initially, we will follow its rules to the best of our knowledge and keep an eye on them during code review. Once we feel that our code structure has stabilized we will [look into tooling to automatically enforce the rules](https://phabricator.wikimedia.org/T305132).
 
 ## Consequences
 
