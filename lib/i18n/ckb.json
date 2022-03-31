@@ -21,7 +21,7 @@
 	"wikibase-entity-summary-wbcreateredirect": "ڕەوانە کرا بۆ $4",
 	"wikibase-entity-summary-wbsetlabel-set": "سەرناوی [$2] گۆڕدرا",
 	"wikibase-entity-summary-wbsetlabel-remove": "سەرناوی [$2] سڕایەوە",
-	"wikibase-entity-summary-wbsetdescription-set": "شیکردنەوەی [$2] گۆڕدرا",
+	"wikibase-entity-summary-wbsetdescription-set": "وەسفی [$2] گۆڕدرا",
 	"wikibase-entity-summary-wbsetaliases-set": "دانانی {{PLURAL:$1|نازناو|نازناوەکان}}ی [$2]",
 	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|نازناو|نازناوەکان}}ی [$2] زیاد کرا",
 	"wikibase-entity-summary-wbsetsitelink-add": "بەستەر بە [$2] زیاد کرا",
