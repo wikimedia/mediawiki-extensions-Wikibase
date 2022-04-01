@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
@@ -78,6 +79,15 @@ class GetItemRouteHandler extends SimpleHandler {
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 
 		if ( $useCaseResponse instanceof GetItemSuccessResponse ) {
+
+			// This performs a *precondition* check post use case execution. Maybe needs to be moved into the use case in other scenarios.
+			// A drawback of doing this check here is that we already fetched and serialized a whole Item object.
+			if ( $this->isNotModified( $useCaseResponse->getRevisionId(), $useCaseResponse->getLastModified() ) ) {
+				$notModifiedResponse = $this->getResponseFactory()->createNotModified();
+				$notModifiedResponse->setHeader( 'ETag', $useCaseResponse->getRevisionId() );
+				return $notModifiedResponse;
+			}
+
 			$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
 			$httpResponse->setHeader( 'ETag', $useCaseResponse->getRevisionId() );
 			$httpResponse->setBody( new StringStream( $this->successPresenter->getJson( $useCaseResponse ) ) );
@@ -107,5 +117,12 @@ class GetItemRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_DEFAULT => implode( ',', GetItemRequest::VALID_FIELDS )
 			],
 		];
+	}
+
+	private function isNotModified( int $revId, string $lastModifiedDate ): bool {
+		$headerUtil = new ConditionalHeaderUtil();
+		$headerUtil->setValidators( "\"$revId\"", $lastModifiedDate, true );
+
+		return $headerUtil->checkPreconditions( $this->getRequest() ) === 304;
 	}
 }
