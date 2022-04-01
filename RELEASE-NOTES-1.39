@@ -51,6 +51,11 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 
 === Action API changes in 1.39 ===
 
+* T104344: The wbsearchentities response has a new `display` field for each result. It may contain a `label` and `description` key.
+Each of those will contain a `text` and a `language` key with the respective data.
+The top-level `label`, `description` and `aliases` keys of each result are now considered deprecated and should no longer be used.
+See also the official [https://lists.wikimedia.org/hyperkitty/list/wikidata-tech@lists.wikimedia.org/thread/3LA6FDOZGSK6HSQY73XCFNT4BTYWOY64/ significant change announcement].
+
 * (T12345) ...
 
 === Languages updated in 1.39 ===
