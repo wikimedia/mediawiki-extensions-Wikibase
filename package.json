@@ -46,7 +46,7 @@
 		"apollo-boost": "^0.4.9",
 		"cross-fetch": "^3.1.5",
 		"eslint-config-wikimedia": "0.20.0",
-		"eslint-plugin-compat": "^3.13.0",
+		"eslint-plugin-compat": "^4.0.2",
 		"grunt": "1.4.1",
 		"grunt-banana-checker": "0.9.0",
 		"grunt-eslint": "23.0.0",
