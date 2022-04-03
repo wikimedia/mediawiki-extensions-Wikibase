@@ -19,6 +19,7 @@ use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\InvariantException;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module to search for Wikibase entities.
@@ -351,7 +352,7 @@ class SearchEntities extends ApiBase {
 			],
 			'props' => [
 				self::PARAM_TYPE => [ 'url' ],
-				ApiBase::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_ISMULTI => true,
 				self::PARAM_DFLT => 'url',
 			],
 		];

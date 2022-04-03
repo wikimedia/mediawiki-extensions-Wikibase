@@ -12,6 +12,7 @@ use SiteLookup;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\ParamValidator\TypeDef\IntegerDef;
 use Wikimedia\Rdbms\IResultWrapper;
 
@@ -236,20 +237,20 @@ class ListSubscribers extends ApiQueryBase {
 	protected function getAllowedParams(): array {
 		return [
 			'entities' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_ISMULTI => true,
-				self::PARAM_REQUIRED => true
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_REQUIRED => true
 			],
 			'prop' => [
-				self::PARAM_TYPE => [
+				ParamValidator::PARAM_TYPE => [
 					'url',
 				],
-				self::PARAM_ISMULTI => true,
-				self::PARAM_DFLT => '',
+				ParamValidator::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_DEFAULT => '',
 			],
 			'limit' => [
-				ApiBase::PARAM_DFLT => 10,
-				ApiBase::PARAM_TYPE => 'limit',
+				ParamValidator::PARAM_DEFAULT => 10,
+				ParamValidator::PARAM_TYPE => 'limit',
 				IntegerDef::PARAM_MIN => 1,
 				IntegerDef::PARAM_MAX => ApiBase::LIMIT_BIG1,
 				IntegerDef::PARAM_MAX2 => ApiBase::LIMIT_BIG2
