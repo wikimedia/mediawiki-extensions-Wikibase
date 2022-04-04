@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\View\EntityIdFormatterFactory;
+use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\RemexHtml\HTMLData;
 use Wikimedia\RemexHtml\Serializer\HtmlFormatter;
 use Wikimedia\RemexHtml\Serializer\Serializer;
@@ -177,8 +178,8 @@ class FormatEntities extends ApiBase {
 	protected function getAllowedParams(): array {
 		return [
 			'ids' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_ISMULTI => true,
 			],
 		];
 	}

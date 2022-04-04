@@ -17,6 +17,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\SnakFactory;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module for removing one or more references of the same statement.
@@ -229,24 +230,24 @@ class RemoveReferences extends ApiBase {
 		return array_merge(
 			[
 				'statement' => [
-					self::PARAM_TYPE => 'string',
-					self::PARAM_REQUIRED => true,
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => true,
 				],
 				'references' => [
-					self::PARAM_TYPE => 'string',
-					self::PARAM_REQUIRED => true,
-					self::PARAM_ISMULTI => true,
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => true,
+					ParamValidator::PARAM_ISMULTI => true,
 				],
 				'summary' => [
-					self::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_TYPE => 'string',
 				],
 				'tags' => [
-					self::PARAM_TYPE => 'tags',
-					self::PARAM_ISMULTI => true,
+					ParamValidator::PARAM_TYPE => 'tags',
+					ParamValidator::PARAM_ISMULTI => true,
 				],
 				'token' => null,
 				'baserevid' => [
-					self::PARAM_TYPE => 'integer',
+					ParamValidator::PARAM_TYPE => 'integer',
 				],
 				'bot' => false,
 			],

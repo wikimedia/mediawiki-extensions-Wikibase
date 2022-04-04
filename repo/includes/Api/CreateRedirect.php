@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationException;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module for creating entity redirects.
@@ -172,19 +173,19 @@ class CreateRedirect extends ApiBase {
 	protected function getAllowedParams(): array {
 		return [
 			'from' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'to' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'token' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'bot' => [
-				self::PARAM_TYPE => 'boolean',
+				ParamValidator::PARAM_TYPE => 'boolean',
 				self::PARAM_DFLT => false,
 			]
 		];

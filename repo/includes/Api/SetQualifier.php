@@ -16,6 +16,7 @@ use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\SnakFactory;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
@@ -252,35 +253,35 @@ class SetQualifier extends ApiBase {
 		return array_merge(
 			[
 				'claim' => [
-					self::PARAM_TYPE => 'string',
-					self::PARAM_REQUIRED => true,
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => true,
 				],
 				'property' => [
-					self::PARAM_TYPE => 'string',
-					self::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => false,
 				],
 				'value' => [
-					self::PARAM_TYPE => 'text',
-					self::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_TYPE => 'text',
+					ParamValidator::PARAM_REQUIRED => false,
 				],
 				'snaktype' => [
-					self::PARAM_TYPE => [ 'value', 'novalue', 'somevalue' ],
-					self::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_TYPE => [ 'value', 'novalue', 'somevalue' ],
+					ParamValidator::PARAM_REQUIRED => false,
 				],
 				'snakhash' => [
-					self::PARAM_TYPE => 'string',
-					self::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => false,
 				],
 				'summary' => [
-					self::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_TYPE => 'string',
 				],
 				'tags' => [
-					self::PARAM_TYPE => 'tags',
-					self::PARAM_ISMULTI => true,
+					ParamValidator::PARAM_TYPE => 'tags',
+					ParamValidator::PARAM_ISMULTI => true,
 				],
 				'token' => null,
 				'baserevid' => [
-					self::PARAM_TYPE => 'integer',
+					ParamValidator::PARAM_TYPE => 'integer',
 				],
 				'bot' => false,
 			],

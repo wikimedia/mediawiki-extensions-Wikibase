@@ -323,35 +323,35 @@ class SearchEntities extends ApiBase {
 	protected function getAllowedParams(): array {
 		return [
 			'search' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'language' => [
-				self::PARAM_TYPE => $this->termsLanguages->getLanguages(),
-				self::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => $this->termsLanguages->getLanguages(),
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'strictlanguage' => [
-				self::PARAM_TYPE => 'boolean',
+				ParamValidator::PARAM_TYPE => 'boolean',
 				self::PARAM_DFLT => false
 			],
 			'type' => [
-				self::PARAM_TYPE => $this->enabledEntityTypes,
+				ParamValidator::PARAM_TYPE => $this->enabledEntityTypes,
 				self::PARAM_DFLT => 'item',
 			],
 			'limit' => [
-				self::PARAM_TYPE => 'limit',
+				ParamValidator::PARAM_TYPE => 'limit',
 				self::PARAM_DFLT => 7,
 				self::PARAM_MAX => self::LIMIT_SML1,
 				self::PARAM_MAX2 => self::LIMIT_SML2,
 				self::PARAM_MIN => 0,
 			],
 			'continue' => [
-				self::PARAM_TYPE => 'integer',
-				self::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_TYPE => 'integer',
+				ParamValidator::PARAM_REQUIRED => false,
 				self::PARAM_DFLT => 0
 			],
 			'props' => [
-				self::PARAM_TYPE => [ 'url' ],
+				ParamValidator::PARAM_TYPE => [ 'url' ],
 				ParamValidator::PARAM_ISMULTI => true,
 				self::PARAM_DFLT => 'url',
 			],

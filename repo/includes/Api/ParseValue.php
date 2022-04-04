@@ -29,6 +29,7 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\ValueParserFactory;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module for using value parsers.
@@ -366,30 +367,30 @@ class ParseValue extends ApiBase {
 	public function getAllowedParams(): array {
 		return [
 			'datatype' => [
-				self::PARAM_TYPE => $this->dataTypeFactory->getTypeIds(),
-				self::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_TYPE => $this->dataTypeFactory->getTypeIds(),
+				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'property' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'parser' => [
-				self::PARAM_TYPE => $this->valueParserFactory->getParserIds(),
+				ParamValidator::PARAM_TYPE => $this->valueParserFactory->getParserIds(),
 				// Use 'datatype' instead!
-				self::PARAM_DEPRECATED => true,
-				self::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_DEPRECATED => true,
+				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'values' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_REQUIRED => true,
-				self::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_ISMULTI => true,
 			],
 			'options' => [
-				self::PARAM_TYPE => 'text',
-				self::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_TYPE => 'text',
+				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'validate' => [
-				self::PARAM_TYPE => 'boolean',
+				ParamValidator::PARAM_TYPE => 'boolean',
 			],
 		];
 	}

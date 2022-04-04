@@ -22,6 +22,7 @@ use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module to get the data for one or more Wikibase entities.
@@ -391,46 +392,46 @@ class GetEntities extends ApiBase {
 
 		return array_merge( parent::getAllowedParams(), [
 			'ids' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_ISMULTI => true,
 			],
 			'sites' => [
-				self::PARAM_TYPE => $siteIds,
-				self::PARAM_ISMULTI => true,
-				self::PARAM_ALLOW_DUPLICATES => true
+				ParamValidator::PARAM_TYPE => $siteIds,
+				ParamValidator::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_ALLOW_DUPLICATES => true
 			],
 			'titles' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_ISMULTI => true,
-				self::PARAM_ALLOW_DUPLICATES => true
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_ALLOW_DUPLICATES => true
 			],
 			'redirects' => [
-				self::PARAM_TYPE => [ 'yes', 'no' ],
+				ParamValidator::PARAM_TYPE => [ 'yes', 'no' ],
 				self::PARAM_DFLT => 'yes',
 			],
 			'props' => [
-				self::PARAM_TYPE => [ 'info', 'sitelinks', 'sitelinks/urls', 'aliases', 'labels',
+				ParamValidator::PARAM_TYPE => [ 'info', 'sitelinks', 'sitelinks/urls', 'aliases', 'labels',
 					'descriptions', 'claims', 'datatype' ],
 				self::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|claims|datatype',
-				self::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_ISMULTI => true,
 			],
 			'languages' => [
 				// TODO inject TermsLanguages as a service
-				self::PARAM_TYPE => WikibaseRepo::getTermsLanguages()->getLanguages(),
-				self::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_TYPE => WikibaseRepo::getTermsLanguages()->getLanguages(),
+				ParamValidator::PARAM_ISMULTI => true,
 			],
 			'languagefallback' => [
-				self::PARAM_TYPE => 'boolean',
+				ParamValidator::PARAM_TYPE => 'boolean',
 				self::PARAM_DFLT => false
 			],
 			'normalize' => [
-				self::PARAM_TYPE => 'boolean',
+				ParamValidator::PARAM_TYPE => 'boolean',
 				self::PARAM_DFLT => false
 			],
 			'sitefilter' => [
-				self::PARAM_TYPE => $siteIds,
-				self::PARAM_ISMULTI => true,
-				self::PARAM_ALLOW_DUPLICATES => true
+				ParamValidator::PARAM_TYPE => $siteIds,
+				ParamValidator::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_ALLOW_DUPLICATES => true
 			],
 		] );
 	}

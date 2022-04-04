@@ -17,6 +17,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module to set the aliases for a Wikibase entity.
@@ -232,24 +233,24 @@ class SetAliases extends ModifyEntity {
 			parent::getAllowedParams(),
 			[
 				'add' => [
-					self::PARAM_TYPE => 'string',
-					self::PARAM_ISMULTI => true,
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_ISMULTI => true,
 				],
 				'remove' => [
-					self::PARAM_TYPE => 'string',
-					self::PARAM_ISMULTI => true,
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_ISMULTI => true,
 				],
 				'set' => [
-					self::PARAM_TYPE => 'string',
-					self::PARAM_ISMULTI => true,
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_ISMULTI => true,
 				],
 				'language' => [
 					// TODO inject TermsLanguages as a service
-					self::PARAM_TYPE => WikibaseRepo::getTermsLanguages()->getLanguages(),
-					self::PARAM_REQUIRED => true,
+					ParamValidator::PARAM_TYPE => WikibaseRepo::getTermsLanguages()->getLanguages(),
+					ParamValidator::PARAM_REQUIRED => true,
 				],
 				'new' => [
-					self::PARAM_TYPE => $this->getEntityTypesWithAliases(),
+					ParamValidator::PARAM_TYPE => $this->getEntityTypesWithAliases(),
 				],
 			]
 		);

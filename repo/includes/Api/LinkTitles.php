@@ -20,6 +20,7 @@ use Wikibase\Lib\Summary;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Store\Store;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module to associate two pages on two different sites with a Wikibase item.
@@ -288,20 +289,20 @@ class LinkTitles extends ApiBase {
 
 		return array_merge( parent::getAllowedParams(), [
 			'tosite' => [
-				self::PARAM_TYPE => $siteIds,
-				self::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => $siteIds,
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'totitle' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'fromsite' => [
-				self::PARAM_TYPE => $siteIds,
-				self::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => $siteIds,
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'fromtitle' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'token' => null,
 			'bot' => false,

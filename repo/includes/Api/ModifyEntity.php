@@ -27,6 +27,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * Base class for API modules modifying a single entity identified based on id xor a combination of site and page title.
@@ -451,10 +452,10 @@ abstract class ModifyEntity extends ApiBase {
 	private function getAllowedParamsForId(): array {
 		return [
 			'id' => [
-				self::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_TYPE => 'string',
 			],
 			'new' => [
-				self::PARAM_TYPE => $this->enabledEntityTypes,
+				ParamValidator::PARAM_TYPE => $this->enabledEntityTypes,
 			],
 		];
 	}
@@ -470,10 +471,10 @@ abstract class ModifyEntity extends ApiBase {
 
 		return [
 			'site' => [
-				self::PARAM_TYPE => $siteIds,
+				ParamValidator::PARAM_TYPE => $siteIds,
 			],
 			'title' => [
-				self::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_TYPE => 'string',
 			],
 		];
 	}
@@ -486,14 +487,14 @@ abstract class ModifyEntity extends ApiBase {
 	private function getAllowedParamsForEntity(): array {
 		return [
 			'baserevid' => [
-				self::PARAM_TYPE => 'integer',
+				ParamValidator::PARAM_TYPE => 'integer',
 			],
 			'summary' => [
-				self::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_TYPE => 'string',
 			],
 			'tags' => [
-				self::PARAM_TYPE => 'tags',
-				self::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_TYPE => 'tags',
+				ParamValidator::PARAM_ISMULTI => true,
 			],
 			'token' => null,
 			'bot' => false,

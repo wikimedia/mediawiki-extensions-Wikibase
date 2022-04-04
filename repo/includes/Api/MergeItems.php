@@ -18,6 +18,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationException;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * @license GPL-2.0-or-later
@@ -147,7 +148,7 @@ class MergeItems extends ApiBase {
 	 * @param string[] $ignoreConflicts
 	 * @param string|null $summary
 	 * @param bool $bot
-	 * @param string[] $tags Already permission checked via self::PARAM_TYPE => 'tags'
+	 * @param string[] $tags Already permission checked via ParamValidator::PARAM_TYPE => 'tags'
 	 * @throws ItemMergeException
 	 * @throws RedirectCreationException
 	 */
@@ -208,32 +209,32 @@ class MergeItems extends ApiBase {
 	protected function getAllowedParams(): array {
 		return [
 			'fromid' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'toid' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'ignoreconflicts' => [
-				self::PARAM_ISMULTI => true,
-				self::PARAM_TYPE => ChangeOpsMerge::CONFLICT_TYPES,
-				self::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_TYPE => ChangeOpsMerge::CONFLICT_TYPES,
+				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'summary' => [
-				self::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_TYPE => 'string',
 			],
 			'tags' => [
-				self::PARAM_TYPE => 'tags',
-				self::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_TYPE => 'tags',
+				ParamValidator::PARAM_ISMULTI => true,
 			],
 			'bot' => [
-				self::PARAM_TYPE => 'boolean',
+				ParamValidator::PARAM_TYPE => 'boolean',
 				self::PARAM_DFLT => false,
 			],
 			'token' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
 			]
 		];
 	}

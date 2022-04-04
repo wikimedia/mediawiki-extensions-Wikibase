@@ -23,6 +23,7 @@ use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\SnakFactory;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module for creating a reference or setting the value of an existing one.
@@ -300,32 +301,32 @@ class SetReference extends ApiBase {
 		return array_merge(
 			[
 				'statement' => [
-					self::PARAM_TYPE => 'string',
-					self::PARAM_REQUIRED => true,
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => true,
 				],
 				'snaks' => [
-					self::PARAM_TYPE => 'text',
-					self::PARAM_REQUIRED => true,
+					ParamValidator::PARAM_TYPE => 'text',
+					ParamValidator::PARAM_REQUIRED => true,
 				],
 				'snaks-order' => [
-					self::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_TYPE => 'string',
 				],
 				'reference' => [
-					self::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_TYPE => 'string',
 				],
 				'index' => [
-					self::PARAM_TYPE => 'integer',
+					ParamValidator::PARAM_TYPE => 'integer',
 				],
 				'summary' => [
-					self::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_TYPE => 'string',
 				],
 				'tags' => [
-					self::PARAM_TYPE => 'tags',
-					self::PARAM_ISMULTI => true,
+					ParamValidator::PARAM_TYPE => 'tags',
+					ParamValidator::PARAM_ISMULTI => true,
 				],
 				'token' => null,
 				'baserevid' => [
-					self::PARAM_TYPE => 'integer',
+					ParamValidator::PARAM_TYPE => 'integer',
 				],
 				'bot' => false,
 			],
