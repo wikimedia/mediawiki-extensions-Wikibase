@@ -99,6 +99,8 @@ class GetItemRouteHandler extends SimpleHandler {
 			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
 
+		$this->addAuthHeaderIfAuthenticated( $httpResponse );
+
 		return $httpResponse;
 	}
 
@@ -117,6 +119,13 @@ class GetItemRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_DEFAULT => implode( ',', GetItemRequest::VALID_FIELDS )
 			],
 		];
+	}
+
+	private function addAuthHeaderIfAuthenticated( Response $response ): void {
+		$user = $this->getAuthority()->getUser();
+		if ( $user->isRegistered() ) {
+			$response->setHeader( 'X-Authenticated-User', $user->getName() );
+		}
 	}
 
 	private function isNotModified( int $revId, string $lastModifiedDate ): bool {
