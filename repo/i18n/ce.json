@@ -195,6 +195,7 @@
 	"wikibase-api-failed-save": "Ӏалашйан цайелира.",
 	"wikibase-api-no-external-page": "Арахьара сайт «$ 1» тӀехь кара цабо «$ 2» агӀонах хаам.",
 	"wikibase-api-no-such-sitelink": "'$1' cайтан тӀе иштта хьажорг цакарий",
+	"wikibase-api-permissiondenied": "Хьан бакъо йац дешдерг кхочушдан.",
 	"wikibase-restoreold": "меттахӀоттайе",
 	"wikibase-entity-summary-restore": "МеттахӀоьттина {{GENDER:$4|декъашхочуьнан}} $3 верси  [[Special:Contributions/$4|$4]]",
 	"wikibase-listdatatypes-wikibase-item-head": "Элемент",

@@ -26,7 +26,8 @@
 			"赤城。",
 			"아라",
 			"LaMagiaaa",
-			"Tmv"
+			"Tmv",
+			"Yamagata Yusuke"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
@@ -376,7 +377,7 @@
 	"wikibase-api-no-such-entity": "指定したID「$1」のエンティティは見つかりませんでした",
 	"wikibase-api-no-such-sitelink": "バッジを編集しようとしましたが「$1」へのサイトリンクが見つかりませんでした。",
 	"wikibase-api-not-recognized-datatype": "そのデータ型は存在しないか、認識されませんでした。",
-	"wikibase-api-not-recognized-siteid": "指定したサイト識別子は認識できませんでした",
+	"wikibase-api-not-recognized-siteid": "指定したサイト識別子は認識できませんでした。",
 	"wikibase-api-not-recognized-language": "指定された言語コードは認識できませんでした。",
 	"wikibase-api-permissiondenied": "この操作を実行するために必要な権限がありません。",
 	"wikibase-api-target-not-empty": "リダイレクトは空、または削除されたエンティティの上にしか作ることができません。",

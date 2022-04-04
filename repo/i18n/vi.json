@@ -12,7 +12,8 @@
 			"පසිඳු කාවින්ද",
 			"Nghiemtrongdai VN",
 			"Nguyễn Mạnh An",
-			"Thienhau2003"
+			"Thienhau2003",
+			"NguoiDungKhongDinhDanh"
 		]
 	},
 	"wikibase-desc": "Kho dữ liệu có cấu trúc",
@@ -288,7 +289,7 @@
 	"wikibase-itemmerge-no-such-entity": "Không tìm thấy khoản mục.",
 	"wikibase-itemmerge-cant-load-entity-content": "Không thể tải khoản mục.",
 	"wikibase-itemmerge-cant-merge-self": "Không thể nhập một khoản mục vào chính nó.",
-	"wikibase-tokencheck-missingtoken": "Cần chìa khóa bí mật để sửa đổi.",
+	"wikibase-tokencheck-missingtoken": "Cần token sửa đổi.",
 	"wikibase-tokencheck-mustposttoken": "Việc sửa đổi chỉ có thể dùng yêu cầu POST.",
 	"wikibase-tokencheck-badtoken": "Dấu hiệu sửa đổi sai (có lẽ phiên làm việc của bạn đã hết hạn).",
 	"special-dispatchstats": "Thống kê truyền thay đổi",
