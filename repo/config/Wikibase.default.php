@@ -25,9 +25,6 @@ return [
 	// feature flag for tainted references
 	'taintedReferencesEnabled' => false,
 
-	// feature flag for the Wikibase REST API
-	'restApiEnabled' => false,
-
 	// url of (termbox) ssr-server
 	'ssrServerUrl' => null,
 

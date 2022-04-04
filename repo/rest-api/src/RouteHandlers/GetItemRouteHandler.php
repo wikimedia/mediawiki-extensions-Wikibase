@@ -55,13 +55,11 @@ class GetItemRouteHandler extends SimpleHandler {
 
 	public static function factory(): Handler {
 		$errorPresenter = new ErrorJsonPresenter();
-		return WbRestApi::getRouteHandlerFeatureToggle()->useHandlerIfEnabled(
-			new self(
-				WbRestApi::getGetItem(),
-				new GetItemJsonPresenter(),
-				$errorPresenter,
-				new UnexpectedErrorHandler( $errorPresenter )
-			)
+		return new self(
+			WbRestApi::getGetItem(),
+			new GetItemJsonPresenter(),
+			$errorPresenter,
+			new UnexpectedErrorHandler( $errorPresenter )
 		);
 	}
 
