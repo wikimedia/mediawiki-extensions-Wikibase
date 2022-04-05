@@ -407,12 +407,12 @@ class GetEntities extends ApiBase {
 			],
 			'redirects' => [
 				ParamValidator::PARAM_TYPE => [ 'yes', 'no' ],
-				self::PARAM_DFLT => 'yes',
+				ParamValidator::PARAM_DEFAULT => 'yes',
 			],
 			'props' => [
 				ParamValidator::PARAM_TYPE => [ 'info', 'sitelinks', 'sitelinks/urls', 'aliases', 'labels',
 					'descriptions', 'claims', 'datatype' ],
-				self::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|claims|datatype',
+				ParamValidator::PARAM_DEFAULT => 'info|sitelinks|aliases|labels|descriptions|claims|datatype',
 				ParamValidator::PARAM_ISMULTI => true,
 			],
 			'languages' => [
@@ -422,11 +422,11 @@ class GetEntities extends ApiBase {
 			],
 			'languagefallback' => [
 				ParamValidator::PARAM_TYPE => 'boolean',
-				self::PARAM_DFLT => false
+				ParamValidator::PARAM_DEFAULT => false
 			],
 			'normalize' => [
 				ParamValidator::PARAM_TYPE => 'boolean',
-				self::PARAM_DFLT => false
+				ParamValidator::PARAM_DEFAULT => false
 			],
 			'sitefilter' => [
 				ParamValidator::PARAM_TYPE => $siteIds,

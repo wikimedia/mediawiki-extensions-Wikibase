@@ -181,15 +181,15 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 			],
 			'strictlanguage' => [
 				ParamValidator::PARAM_TYPE => 'boolean',
-				self::PARAM_DFLT => false,
+				ParamValidator::PARAM_DEFAULT => false,
 			],
 			'type' => [
 				ParamValidator::PARAM_TYPE => $this->entityTypes,
-				self::PARAM_DFLT => 'item',
+				ParamValidator::PARAM_DEFAULT => 'item',
 			],
 			'limit' => [
 				ParamValidator::PARAM_TYPE => 'limit',
-				self::PARAM_DFLT => 7,
+				ParamValidator::PARAM_DEFAULT => 7,
 				self::PARAM_MAX => self::LIMIT_SML1,
 				self::PARAM_MAX2 => self::LIMIT_SML2,
 				self::PARAM_MIN => 0,

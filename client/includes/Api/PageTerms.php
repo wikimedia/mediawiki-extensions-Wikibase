@@ -265,12 +265,12 @@ class PageTerms extends ApiQueryBase {
 			],
 			'language' => [
 				self::PARAM_HELP_MSG => 'apihelp-query+pageterms-param-language',
-				self::PARAM_DFLT => 'uselang',
+				ParamValidator::PARAM_DEFAULT => 'uselang',
 				ParamValidator::PARAM_TYPE => array_merge( [ 'uselang' ], $this->termsLanguages->getLanguages() ),
 			],
 			'terms' => [
 				ParamValidator::PARAM_TYPE => TermIndexEntry::$validTermTypes,
-				self::PARAM_DFLT => implode( '|',  TermIndexEntry::$validTermTypes ),
+				ParamValidator::PARAM_DEFAULT => implode( '|',  TermIndexEntry::$validTermTypes ),
 				ParamValidator::PARAM_ISMULTI => true,
 				self::PARAM_HELP_MSG => 'apihelp-query+pageterms-param-terms',
 			],

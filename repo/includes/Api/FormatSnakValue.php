@@ -295,7 +295,7 @@ class FormatSnakValue extends ApiBase {
 					SnakFormatter::FORMAT_HTML_VERBOSE,
 					SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW,
 				],
-				self::PARAM_DFLT => SnakFormatter::FORMAT_WIKI,
+				ParamValidator::PARAM_DEFAULT => SnakFormatter::FORMAT_WIKI,
 				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'datavalue' => [

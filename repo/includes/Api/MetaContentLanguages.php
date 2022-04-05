@@ -131,12 +131,12 @@ class MetaContentLanguages extends ApiQueryBase {
 	protected function getAllowedParams(): array {
 		return [
 			'context' => [
-				self::PARAM_DFLT => 'term',
+				ParamValidator::PARAM_DEFAULT => 'term',
 				ParamValidator::PARAM_TYPE => $this->wikibaseContentLanguages->getContexts(),
 				self::PARAM_HELP_MSG_PER_VALUE => [],
 			],
 			'prop' => [
-				self::PARAM_DFLT => 'code',
+				ParamValidator::PARAM_DEFAULT => 'code',
 				ParamValidator::PARAM_ISMULTI => true,
 				ParamValidator::PARAM_TYPE => [
 					'code',

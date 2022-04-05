@@ -445,7 +445,7 @@ class EditEntity extends ModifyEntity {
 				],
 				self::PARAM_CLEAR => [
 					ParamValidator::PARAM_TYPE => 'boolean',
-					self::PARAM_DFLT => false
+					ParamValidator::PARAM_DEFAULT => false
 				],
 			]
 		);

@@ -140,7 +140,7 @@ class Description extends ApiQueryBase {
 			'continue' => [
 				self::PARAM_HELP_MSG => 'api-help-param-continue',
 				ParamValidator::PARAM_TYPE => 'integer',
-				self::PARAM_DFLT => 0,
+				ParamValidator::PARAM_DEFAULT => 0,
 			],
 			'prefersource' => [
 				// Designating 'local' as the preferred source is allowed even if the wiki does
@@ -149,7 +149,7 @@ class Description extends ApiQueryBase {
 					DescriptionLookup::SOURCE_LOCAL,
 					DescriptionLookup::SOURCE_CENTRAL,
 				],
-				self::PARAM_DFLT => DescriptionLookup::SOURCE_LOCAL,
+				ParamValidator::PARAM_DEFAULT => DescriptionLookup::SOURCE_LOCAL,
 				self::PARAM_HELP_MSG_PER_VALUE => [],
 			],
 		];

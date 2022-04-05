@@ -227,7 +227,7 @@ class GetClaims extends ApiBase {
 				ParamValidator::PARAM_TYPE => [
 					'references',
 				],
-				self::PARAM_DFLT => 'references',
+				ParamValidator::PARAM_DEFAULT => 'references',
 				ParamValidator::PARAM_ISMULTI => true,
 			],
 		];

@@ -98,7 +98,7 @@ class ApiClientInfo extends ApiQueryBase {
 	protected function getAllowedParams() {
 		return [
 			'prop' => [
-				self::PARAM_DFLT => 'url|siteid',
+				ParamValidator::PARAM_DEFAULT => 'url|siteid',
 				ParamValidator::PARAM_ISMULTI => true,
 				ParamValidator::PARAM_TYPE => [
 					'url', 'siteid'

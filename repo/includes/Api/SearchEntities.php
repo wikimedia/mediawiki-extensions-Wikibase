@@ -332,15 +332,15 @@ class SearchEntities extends ApiBase {
 			],
 			'strictlanguage' => [
 				ParamValidator::PARAM_TYPE => 'boolean',
-				self::PARAM_DFLT => false
+				ParamValidator::PARAM_DEFAULT => false
 			],
 			'type' => [
 				ParamValidator::PARAM_TYPE => $this->enabledEntityTypes,
-				self::PARAM_DFLT => 'item',
+				ParamValidator::PARAM_DEFAULT => 'item',
 			],
 			'limit' => [
 				ParamValidator::PARAM_TYPE => 'limit',
-				self::PARAM_DFLT => 7,
+				ParamValidator::PARAM_DEFAULT => 7,
 				self::PARAM_MAX => self::LIMIT_SML1,
 				self::PARAM_MAX2 => self::LIMIT_SML2,
 				self::PARAM_MIN => 0,
@@ -348,12 +348,12 @@ class SearchEntities extends ApiBase {
 			'continue' => [
 				ParamValidator::PARAM_TYPE => 'integer',
 				ParamValidator::PARAM_REQUIRED => false,
-				self::PARAM_DFLT => 0
+				ParamValidator::PARAM_DEFAULT => 0
 			],
 			'props' => [
 				ParamValidator::PARAM_TYPE => [ 'url' ],
 				ParamValidator::PARAM_ISMULTI => true,
-				self::PARAM_DFLT => 'url',
+				ParamValidator::PARAM_DEFAULT => 'url',
 			],
 		];
 	}
