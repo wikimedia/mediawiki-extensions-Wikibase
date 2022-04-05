@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"StarrySky"
 		]
 	},
+	"wikibase-edit": "編輯",
 	"wikibase-mylanguagefallbackchain-babel": "您可以透過將 <nowiki>{{#babel: }}</nowiki> 置於{{GENDER:$1|您的}}[[Special:MyPage|用戶頁面]]來編輯。"
 }
