@@ -26,6 +26,7 @@ use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\TypedValueFormatter;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module for using value formatters.
@@ -287,7 +288,7 @@ class FormatSnakValue extends ApiBase {
 	protected function getAllowedParams(): array {
 		return [
 			'generate' => [
-				self::PARAM_TYPE => [
+				ParamValidator::PARAM_TYPE => [
 					SnakFormatter::FORMAT_PLAIN,
 					SnakFormatter::FORMAT_WIKI,
 					SnakFormatter::FORMAT_HTML,
@@ -295,23 +296,23 @@ class FormatSnakValue extends ApiBase {
 					SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW,
 				],
 				self::PARAM_DFLT => SnakFormatter::FORMAT_WIKI,
-				self::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'datavalue' => [
-				self::PARAM_TYPE => 'text',
-				self::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => 'text',
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'datatype' => [
-				self::PARAM_TYPE => $this->dataTypeFactory->getTypeIds(),
-				self::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_TYPE => $this->dataTypeFactory->getTypeIds(),
+				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'property' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'options' => [
-				self::PARAM_TYPE => 'text',
-				self::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_TYPE => 'text',
+				ParamValidator::PARAM_REQUIRED => false,
 			],
 		];
 	}

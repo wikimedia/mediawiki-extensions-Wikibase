@@ -19,6 +19,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module to associate a page on a site with a Wikibase entity or remove an already made such association.
@@ -222,15 +223,15 @@ class SetSiteLink extends ModifyEntity {
 			parent::getAllowedParams(),
 			[
 				'linksite' => [
-					self::PARAM_TYPE => $siteIds,
-					self::PARAM_REQUIRED => true,
+					ParamValidator::PARAM_TYPE => $siteIds,
+					ParamValidator::PARAM_REQUIRED => true,
 				],
 				'linktitle' => [
-					self::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_TYPE => 'string',
 				],
 				'badges' => [
-					self::PARAM_TYPE => array_keys( $this->badgeItems ),
-					self::PARAM_ISMULTI => true,
+					ParamValidator::PARAM_TYPE => array_keys( $this->badgeItems ),
+					ParamValidator::PARAM_ISMULTI => true,
 				],
 			]
 		);

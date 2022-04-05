@@ -5,6 +5,7 @@ namespace Wikibase\Client\Api;
 use ApiQuery;
 use ApiQueryBase;
 use Wikibase\Lib\SettingsArray;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * Provides url and path information for the associated Wikibase repo
@@ -98,8 +99,8 @@ class ApiClientInfo extends ApiQueryBase {
 		return [
 			'prop' => [
 				self::PARAM_DFLT => 'url|siteid',
-				self::PARAM_ISMULTI => true,
-				self::PARAM_TYPE => [
+				ParamValidator::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_TYPE => [
 					'url', 'siteid'
 				]
 			],

@@ -14,6 +14,7 @@ use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module for the language attributes for a Wikibase entity.
@@ -153,7 +154,7 @@ class SetDescription extends ModifyTerm {
 			parent::getAllowedParams(),
 			[
 				'new' => [
-					self::PARAM_TYPE => $this->getEntityTypesWithDescriptions(),
+					ParamValidator::PARAM_TYPE => $this->getEntityTypesWithDescriptions(),
 				],
 			]
 		);

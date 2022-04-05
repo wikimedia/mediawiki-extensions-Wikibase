@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Api;
 
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module to set the terms for a Wikibase entity.
@@ -45,11 +46,11 @@ abstract class ModifyTerm extends ModifyEntity {
 			[
 				'language' => [
 					// TODO inject TermsLanguages as a service
-					self::PARAM_TYPE => WikibaseRepo::getTermsLanguages()->getLanguages(),
-					self::PARAM_REQUIRED => true,
+					ParamValidator::PARAM_TYPE => WikibaseRepo::getTermsLanguages()->getLanguages(),
+					ParamValidator::PARAM_REQUIRED => true,
 				],
 				'value' => [
-					self::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_TYPE => 'string',
 				],
 			]
 		);

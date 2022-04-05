@@ -15,6 +15,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\StatementRankSerializer;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module for getting claims.
@@ -211,23 +212,23 @@ class GetClaims extends ApiBase {
 	protected function getAllowedParams(): array {
 		return [
 			'entity' => [
-				self::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_TYPE => 'string',
 			],
 			'property' => [
-				self::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_TYPE => 'string',
 			],
 			'claim' => [
-				self::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_TYPE => 'string',
 			],
 			'rank' => [
-				self::PARAM_TYPE => StatementRankSerializer::getRanks(),
+				ParamValidator::PARAM_TYPE => StatementRankSerializer::getRanks(),
 			],
 			'props' => [
-				self::PARAM_TYPE => [
+				ParamValidator::PARAM_TYPE => [
 					'references',
 				],
 				self::PARAM_DFLT => 'references',
-				self::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_ISMULTI => true,
 			],
 		];
 	}

@@ -11,6 +11,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikimedia\Assert\InvariantException;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module to search for Wikibase entities that can be used as a generator.
@@ -172,22 +173,22 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	protected function getAllowedParams(): array {
 		return [
 			'search' => [
-				self::PARAM_TYPE => 'string',
-				self::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'language' => [
-				self::PARAM_TYPE => $this->termsLanguages->getLanguages(),
+				ParamValidator::PARAM_TYPE => $this->termsLanguages->getLanguages(),
 			],
 			'strictlanguage' => [
-				self::PARAM_TYPE => 'boolean',
+				ParamValidator::PARAM_TYPE => 'boolean',
 				self::PARAM_DFLT => false,
 			],
 			'type' => [
-				self::PARAM_TYPE => $this->entityTypes,
+				ParamValidator::PARAM_TYPE => $this->entityTypes,
 				self::PARAM_DFLT => 'item',
 			],
 			'limit' => [
-				self::PARAM_TYPE => 'limit',
+				ParamValidator::PARAM_TYPE => 'limit',
 				self::PARAM_DFLT => 7,
 				self::PARAM_MAX => self::LIMIT_SML1,
 				self::PARAM_MAX2 => self::LIMIT_SML2,

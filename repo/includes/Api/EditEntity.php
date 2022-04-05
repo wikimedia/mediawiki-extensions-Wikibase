@@ -28,6 +28,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\Store\Store;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * Derived class for API modules modifying a single entity identified by id xor a combination of
@@ -439,11 +440,11 @@ class EditEntity extends ModifyEntity {
 			parent::getAllowedParams(),
 			[
 				self::PARAM_DATA => [
-					self::PARAM_TYPE => 'text',
-					self::PARAM_REQUIRED => true,
+					ParamValidator::PARAM_TYPE => 'text',
+					ParamValidator::PARAM_REQUIRED => true,
 				],
 				self::PARAM_CLEAR => [
-					self::PARAM_TYPE => 'boolean',
+					ParamValidator::PARAM_TYPE => 'boolean',
 					self::PARAM_DFLT => false
 				],
 			]

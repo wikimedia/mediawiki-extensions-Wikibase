@@ -30,6 +30,7 @@ use Wikibase\Repo\ClaimSummaryBuilder;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikibase\Repo\SnakFactory;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /**
  * API module for creating or updating an entire Claim.
@@ -319,22 +320,22 @@ class SetClaim extends ApiBase {
 		return array_merge(
 			[
 				'claim' => [
-					self::PARAM_TYPE => 'text',
-					self::PARAM_REQUIRED => true,
+					ParamValidator::PARAM_TYPE => 'text',
+					ParamValidator::PARAM_REQUIRED => true,
 				],
 				'index' => [
-					self::PARAM_TYPE => 'integer',
+					ParamValidator::PARAM_TYPE => 'integer',
 				],
 				'summary' => [
-					self::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_TYPE => 'string',
 				],
 				'tags' => [
-					self::PARAM_TYPE => 'tags',
-					self::PARAM_ISMULTI => true,
+					ParamValidator::PARAM_TYPE => 'tags',
+					ParamValidator::PARAM_ISMULTI => true,
 				],
 				'token' => null,
 				'baserevid' => [
-					self::PARAM_TYPE => 'integer',
+					ParamValidator::PARAM_TYPE => 'integer',
 				],
 				'bot' => false,
 				'ignoreduplicatemainsnak' => false,
