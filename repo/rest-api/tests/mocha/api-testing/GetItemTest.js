@@ -46,6 +46,30 @@ describe( 'GET /entities/items/{id} ', () => {
 	let testModified;
 	let testRevisionId;
 
+	async function newValidRequestWithHeader( headers ) {
+		return newValidRequest( {
+			endpoint: `/entities/items/${testItemId}`,
+			// eslint-disable-next-line camelcase
+			params: { entity_id: testItemId },
+			query: {},
+			headers
+		} );
+	}
+
+	function assertValid200Response( response ) {
+		assert.equal( response.status, 200 );
+		assert.equal( response.body.id, testItemId );
+		assert.deepEqual( response.body.aliases, {} ); // expect {}, not []
+		assert.equal( response.header[ 'last-modified' ], testModified );
+		assert.equal( response.header.etag, testRevisionId );
+	}
+
+	function assertValid304Response( response ) {
+		assert.equal( response.status, 304 );
+		assert.equal( response.header.etag, testRevisionId );
+		assert.equal( response.text, '' );
+	}
+
 	before( async () => {
 		const createItemResponse = await createEntity( 'item', {
 			labels: {
@@ -73,11 +97,7 @@ describe( 'GET /entities/items/{id} ', () => {
 			params: { entity_id: testItemId }
 		} );
 
-		assert.equal( response.status, 200 );
-		assert.equal( response.body.id, testItemId );
-		assert.deepEqual( response.body.aliases, {} ); // expect {}, not []
-		assert.equal( response.header[ 'last-modified' ], testModified );
-		assert.equal( response.header.etag, testRevisionId );
+		assertValid200Response( response );
 	} );
 
 	it( 'can GET a partial item with single _fields param', async () => {
@@ -124,60 +144,47 @@ describe( 'GET /entities/items/{id} ', () => {
 		assert.equal( response.header.etag, testRevisionId );
 	} );
 
-	async function newValidRequestWithHeader( headers ) {
-		return newValidRequest( {
-			endpoint: `/entities/items/${testItemId}`,
-			// eslint-disable-next-line camelcase
-			params: { entity_id: testItemId },
-			query: {},
-			headers
-		} );
-	}
-
-	function assertValid200Response( response ) {
-		assert.equal( response.status, 200 );
-		assert.equal( response.body.id, testItemId );
-		assert.deepEqual( response.body.aliases, {} ); // expect {}, not []
-		assert.equal( response.header[ 'last-modified' ], testModified );
-		assert.equal( response.header.etag, testRevisionId );
-	}
-
-	function assertValid304Response( response ) {
-		assert.equal( response.status, 304 );
-		assert.equal( response.header.etag, testRevisionId );
-		assert.equal( response.text, '' );
-	}
-
 	describe( 'If-None-Match', () => {
 		describe( '200 response', () => {
 			it( 'if the current item revision is newer than the ID provided', async () => {
-				const response = await newValidRequestWithHeader( { 'If-None-Match': `"${testRevisionId - 1}"` } );
+				const response = await newValidRequestWithHeader( {
+					'If-None-Match': `"${testRevisionId - 1}"`
+				} );
 				assertValid200Response( response );
 			} );
+
 			it( 'if the current revision is newer than any of the IDs provided', async () => {
-				const response = await newValidRequestWithHeader(
-					{ 'If-None-Match': `"${testRevisionId - 1}", "${testRevisionId - 2}"` }
-				);
+				const response = await newValidRequestWithHeader( {
+					'If-None-Match': `"${testRevisionId - 1}", "${testRevisionId - 2}"`
+				} );
 				assertValid200Response( response );
 			} );
+
 			it( 'if the provided ETag is not a valid revision ID', async () => {
 				const response = await newValidRequestWithHeader( { 'If-None-Match': '"foo"' } );
 				assertValid200Response( response );
 			} );
+
 			it( 'if all the provided ETags are not valid revision IDs', async () => {
-				const response = await newValidRequestWithHeader( { 'If-None-Match': '"foo", "bar"' } );
+				const response = await newValidRequestWithHeader( {
+					'If-None-Match': '"foo", "bar"'
+				} );
 				assertValid200Response( response );
 			} );
-			it( 'if the current revision is newer than any of the IDs provided (while others are invalid)',
+
+			it( 'if the current revision is newer than any IDs provided (while others are invalid)',
 				async () => {
-					const response = await newValidRequestWithHeader( { 'If-None-Match': '"foo", "bar"' } );
+					const response = await newValidRequestWithHeader( {
+						'If-None-Match': '"foo", "bar"'
+					} );
 					assertValid200Response( response );
 				}
 			);
+
 			it( 'if the header is invalid', async () => {
-				const response = await newValidRequestWithHeader(
-					{ 'If-None-Match': 'this is not in spec for a If-None-Match header, 200 response' }
-				);
+				const response = await newValidRequestWithHeader( {
+					'If-None-Match': 'not in spec for a If-None-Match header, 200 response'
+				} );
 				assertValid200Response( response );
 			} );
 
@@ -196,12 +203,14 @@ describe( 'GET /entities/items/{id} ', () => {
 				const response = await newValidRequestWithHeader( { 'If-None-Match': `"${testRevisionId}"` } );
 				assertValid304Response( response );
 			} );
+
 			it( 'if the current revision ID is the same as one of the IDs provided', async () => {
 				const response = await newValidRequestWithHeader(
 					{ 'If-None-Match': `"${testRevisionId - 1}", "${testRevisionId}"` }
 				);
 				assertValid304Response( response );
 			} );
+
 			it( 'if the current revision ID is the same as one of the IDs provided (while others are invalid)',
 				async () => {
 					const response = await newValidRequestWithHeader(
@@ -210,6 +219,7 @@ describe( 'GET /entities/items/{id} ', () => {
 					assertValid304Response( response );
 				}
 			);
+
 			it( 'if the header is *', async () => {
 				const response = await newValidRequestWithHeader( { 'If-None-Match': '*' } );
 				assertValid304Response( response );
@@ -228,14 +238,18 @@ describe( 'GET /entities/items/{id} ', () => {
 	describe( 'If-Modified-Since', () => {
 		describe( '200 response', () => {
 			it( 'If-Modified-Since header is older than current revision', async () => {
-				const response = await newValidRequestWithHeader( { 'If-Modified-Since': 'Fri, 1 Apr 2022 12:00:00 GMT' } );
+				const response = await newValidRequestWithHeader( {
+					'If-Modified-Since': 'Fri, 1 Apr 2022 12:00:00 GMT'
+				} );
 				assertValid200Response( response );
 			} );
 		} );
 
 		describe( '304 response', () => {
 			it( 'If-Modified-Since header is same as current revision', async () => {
-				const response = await newValidRequestWithHeader( { 'If-Modified-Since': `${testModified}` } );
+				const response = await newValidRequestWithHeader(
+					{ 'If-Modified-Since': `${testModified}` }
+				);
 				assertValid304Response( response );
 			} );
 
