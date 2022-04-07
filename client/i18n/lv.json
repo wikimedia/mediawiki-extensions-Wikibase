@@ -70,6 +70,7 @@
 	"wikibase-pageinfo-entity-usage-O": "Citi (apgalvojumi)",
 	"wikibase-property-render-error": "Neizdevās attēlot īpašību $1: $2",
 	"wikibase-otherprojects": "Citos projektos",
+	"wikibase-otherprojects-beta-message": "Citu projektu sānu panelis",
 	"wikibase-sitelinks-sitename-columnheading": "Valoda",
 	"wikibase-sitelinks-link-columnheading": "Saistītā lapa",
 	"echo-pref-tooltip-wikibase-action": "Paziņot man, kad kāds savieno {{GENDER:|manis izveidotu lapu}} ar Vikidatiem.",

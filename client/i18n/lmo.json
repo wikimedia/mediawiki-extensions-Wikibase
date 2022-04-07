@@ -136,7 +136,7 @@
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Fà di modifiche senza andà dent",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Và dent o registres",
 	"wikibase-client-data-bridge-license-heading": "Utilizazzion e licenza",
-	"wikibase-client-data-bridge-license-body": "<p>A cambià quell valor chì el mudarà anca in su {{WBREPONAME}} e magara anca in di wiki de alter lengov.</p>\n<p>A clicà \"{{int:$1}}\", te acetet i [$2 condizzion s'utilizazion], e ti t'acetet a la definitiva de fornì la toa contrbuzzion second conforma a [$3 $4].</p>",
+	"wikibase-client-data-bridge-license-body": "<p>A cambià quell valor chì el mudarà anca in su {{WBREPONAME}} e magara anca in di wiki de alter lengov.</p>\n<p>A clicà \"{{int:$1}}\", te acetet i [$2 condizzion s'utilizazzion], e ti t'acetet a la definitiva de fornì la toa contrbuzzion conforma a [$3 $4].</p>",
 	"wikibase-client-data-bridge-bailout-heading": "Inscambi te podet fà inscìː",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Modifica el valor in su {{WBREPONAME}}. Clica el boton chì de sota per modificà el valor diretament (El conligament el se derva in d'un altra finestra).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Modifica el valor in su {{WBREPONAME}}",

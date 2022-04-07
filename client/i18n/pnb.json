@@ -21,7 +21,7 @@
 	"wikibase-linkitem-confirmitem-button": "پکا کرو",
 	"wikibase-linkitem-success-link": "صفحے جوڑ دتے گئے نيں۔ تسیں انہاں جوڑاں اُتے مشتمل آئٹم نو‏‏ں ساڈے [$1 مرکزی ڈیٹا ذخیرے] وچ دیکھ سکدے او۔",
 	"limitreport-entityaccesscount": "وکی بیس لوڈڈ انٹیٹیز دی گنتی",
-	"wikibase-rc-hide-wikidata": "{{lang|ur|$1}} {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "لکاؤ",
 	"wikibase-rc-hide-wikidata-show": "وکھاؤ",
 	"wikibase-rc-wikibase-edit-letter": "ڈ",

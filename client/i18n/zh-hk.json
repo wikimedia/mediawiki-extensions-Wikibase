@@ -1,8 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"C933103"
+			"C933103",
+			"StarrySky"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}}項目",
+	"wikibase-editlinks": "編輯連結",
+	"wikibase-linkitem-addlinks": "新增連結",
+	"wikibase-linkitem-title": "連結頁面",
+	"wikibase-linkitem-linkpage": "連結頁面",
+	"wikibase-linkitem-selectlink": "請選擇網站與您想要連結到此頁面的頁面。",
+	"wikibase-linkitem-input-site": "語言：",
+	"wikibase-linkitem-input-page": "頁面",
 	"wikibase-rc-wikibase-edit-letter": "數"
 }
