@@ -301,7 +301,7 @@ describe( 'GET /entities/items/{id} ', () => {
 		assert.include( response.body.message, itemId );
 	} );
 
-	describe( 'authentication', () => {
+	describe.skip( 'authentication', () => {
 
 		before( requireExtensions( [ 'OAuth' ] ) );
 
