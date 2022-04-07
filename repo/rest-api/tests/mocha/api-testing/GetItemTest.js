@@ -301,9 +301,7 @@ describe( 'GET /entities/items/{id} ', () => {
 		assert.include( response.body.message, itemId );
 	} );
 
-	describe.skip( 'authentication', () => {
-
-		before( requireExtensions( [ 'OAuth' ] ) );
+	describe( 'authentication', () => {
 
 		it( 'has an X-Authenticated-User header with the logged in user', async () => {
 			const mindy = await action.mindy();
@@ -315,14 +313,19 @@ describe( 'GET /entities/items/{id} ', () => {
 			assert.header( response, 'X-Authenticated-User', mindy.username );
 		} );
 
-		it( 'responds with an error given an invalid bearer token', async () => {
-			const response = await rest.get(
-				`/entities/items/${testItemId}`,
-				{},
-				{ Authorization: 'Bearer this-is-an-invalid-token' }
-			);
+		describe.skip( 'OAuth', () => { // Skipping due to apache auth header issues. See T305709
+			before( requireExtensions( [ 'OAuth' ] ) );
 
-			assert.equal( response.status, 403 );
+			it( 'responds with an error given an invalid bearer token', async () => {
+				const response = await rest.get(
+					`/entities/items/${testItemId}`,
+					{},
+					{ Authorization: 'Bearer this-is-an-invalid-token' }
+				);
+
+				assert.equal( response.status, 403 );
+			} );
+
 		} );
 
 	} );
