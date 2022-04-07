@@ -16,6 +16,15 @@ async function validateRequest( request ) {
 	const specParameters = { parameters: requestSpec.parameters };
 	// copy, since the unchanged request is still needed
 	const coercedRequest = JSON.parse( JSON.stringify( request ) );
+
+	// make all headers lower case due to bug in openapi-request-coercer package
+	// https://github.com/kogosoftwarellc/open-api/pull/802
+	if ( 'headers' in coercedRequest ) {
+		coercedRequest.headers = Object.keys( coercedRequest.headers ).reduce( ( result, key ) => {
+			result[ key.toLowerCase() ] = coercedRequest.headers[ key ];
+			return result;
+		}, {} );
+	}
 	new OpenAPIRequestCoercer( specParameters ).coerce( coercedRequest );
 
 	return new OpenAPIRequestValidator( requestSpec ).validateRequest( coercedRequest );
@@ -27,7 +36,13 @@ async function newRequest( request ) {
 
 async function newValidRequest( request ) {
 	const errors = await validateRequest( request );
-	assert.isUndefined( errors );
+	let errorMessage = '';
+
+	if ( typeof errors !== 'undefined' ) {
+		const error = errors.errors[ 0 ];
+		errorMessage = `[${error.errorCode}] ${error.path} ${error.message} in ${error.location}`;
+	}
+	assert.isUndefined( errors, errorMessage );
 
 	return newRequest( request );
 }
@@ -163,7 +178,9 @@ describe( 'GET /entities/items/{id} ', () => {
 			} );
 
 			it( 'if the provided ETag is not a valid revision ID', async () => {
-				const response = await newValidRequestWithHeader( { 'If-None-Match': '"foo"' } );
+				const response = await newValidRequestWithHeader( {
+					'If-None-Match': '"foo"'
+				} );
 				assertValid200Response( response );
 			} );
 
@@ -185,7 +202,7 @@ describe( 'GET /entities/items/{id} ', () => {
 
 			it( 'if the header is invalid', async () => {
 				const response = await newValidRequestWithHeader( {
-					'If-None-Match': 'not in spec for a If-None-Match header, 200 response'
+					'If-None-Match': 'not in spec for a If-None-Match header - 200 response'
 				} );
 				assertValid200Response( response );
 			} );
@@ -202,7 +219,9 @@ describe( 'GET /entities/items/{id} ', () => {
 
 		describe( '304 response', () => {
 			it( 'if the current revision ID is the same as the one provided', async () => {
-				const response = await newValidRequestWithHeader( { 'If-None-Match': `"${testRevisionId}"` } );
+				const response = await newValidRequestWithHeader( {
+					'If-None-Match': `"${testRevisionId}"`
+				} );
 				assertValid304Response( response );
 			} );
 
@@ -215,9 +234,9 @@ describe( 'GET /entities/items/{id} ', () => {
 
 			it( 'if the current revision ID is the same as one of the IDs provided (while others are invalid)',
 				async () => {
-					const response = await newValidRequestWithHeader(
-						{ 'If-None-Match': `"foo", "${testRevisionId}"` }
-					);
+					const response = await newValidRequestWithHeader( {
+						'If-None-Match': `"foo", "${testRevisionId}"`
+					} );
 					assertValid304Response( response );
 				}
 			);
@@ -259,7 +278,9 @@ describe( 'GET /entities/items/{id} ', () => {
 				const futureDate = new Date(
 					new Date( testModified ).getTime() + 5000
 				).toUTCString();
-				const response = await newValidRequestWithHeader( { 'If-Modified-Since': futureDate } );
+				const response = await newValidRequestWithHeader( {
+					'If-Modified-Since': futureDate
+				} );
 
 				assertValid304Response( response );
 			} );
