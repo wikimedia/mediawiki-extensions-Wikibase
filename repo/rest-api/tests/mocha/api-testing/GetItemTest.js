@@ -1,12 +1,14 @@
 'use strict';
 
-const { REST, assert, action, utils } = require( 'api-testing' );
+const { REST, assert, action, utils, clientFactory } = require( 'api-testing' );
 const SwaggerParser = require( '@apidevtools/swagger-parser' );
+const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 const OpenAPIRequestValidator = require( 'openapi-request-validator' ).default;
 const OpenAPIRequestCoercer = require( 'openapi-request-coercer' ).default;
 const createEntity = require( '../helpers/entityHelper' ).createEntity;
 
-const rest = new REST( 'rest.php/wikibase/v0' );
+const basePath = 'rest.php/wikibase/v0';
+const rest = new REST( basePath );
 
 async function validateRequest( request ) {
 	const apiSpec = await SwaggerParser.dereference( './specs/openapi.json' );
@@ -298,4 +300,31 @@ describe( 'GET /entities/items/{id} ', () => {
 		assert.equal( response.body.code, 'item-not-found' );
 		assert.include( response.body.message, itemId );
 	} );
+
+	describe( 'authentication', () => {
+
+		before( requireExtensions( [ 'OAuth' ] ) );
+
+		it( 'has an X-Authenticated-User header with the logged in user', async () => {
+			const mindy = await action.mindy();
+
+			const response = await clientFactory.getRESTClient( basePath, mindy )
+				.get( `/entities/items/${testItemId}` );
+
+			assertValid200Response( response );
+			assert.header( response, 'X-Authenticated-User', mindy.username );
+		} );
+
+		it( 'responds with an error given an invalid bearer token', async () => {
+			const response = await rest.get(
+				`/entities/items/${testItemId}`,
+				{},
+				{ Authorization: 'Bearer this-is-an-invalid-token' }
+			);
+
+			assert.equal( response.status, 403 );
+		} );
+
+	} );
+
 } );
