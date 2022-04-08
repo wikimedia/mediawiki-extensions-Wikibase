@@ -125,13 +125,16 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	public function migrationStageProvider(): array {
 		return [
 			'MIGRATION_OLD' => [
-				MIGRATION_OLD
+				'migrationStage' => MIGRATION_OLD,
+				'descending' => true,
 			],
 			'MIGRATION_WRITE_BOTH' => [
-				MIGRATION_WRITE_BOTH
+				'migrationStage' => MIGRATION_WRITE_BOTH,
+				'descending' => true,
 			],
 			'MIGRATION_NEW' => [
-				MIGRATION_NEW
+				'migrationStage' => MIGRATION_NEW,
+				'descending' => false,
 			],
 		];
 	}
@@ -139,7 +142,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	/**
 	 * @dataProvider migrationStageProvider
 	 */
-	public function testReallyDoQuery( int $migrationStage ) {
+	public function testReallyDoQuery( int $migrationStage, bool $descending ) {
 		// Remove old stray page props
 		$this->db->delete( 'page_props', IDatabase::ALL_ROWS, __METHOD__ );
 
@@ -153,33 +156,36 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		$namespace = $this->getDefaultWikitextNS();
 		$specialPage = $this->newSpecialPage( null, $migrationStage );
 
-		// First entry
-		$res = $specialPage->reallyDoQuery( 1 );
-		$this->assertSame( 1, $res->numRows() );
-		$this->assertSame( [
-				'value' => '400',
-				'namespace' => strval( $namespace ),
-				'title' => 'SpecialUnconnectedPagesTest-unconnected2'
-			],
-			(array)$res->fetchObject()
-		);
-
-		// Continue with offset
-		$res = $specialPage->reallyDoQuery( 10, 1 );
-		$this->assertSame( 1, $res->numRows() );
-		$this->assertSame( [
+		$expectedRows = [
+			[
 				'value' => '200',
 				'namespace' => strval( $namespace ),
 				'title' => 'SpecialUnconnectedPagesTest-unconnected'
 			],
-			(array)$res->fetchObject()
-		);
+			[
+				'value' => '400',
+				'namespace' => strval( $namespace ),
+				'title' => 'SpecialUnconnectedPagesTest-unconnected2'
+			],
+		];
+		if ( $descending ) {
+			$expectedRows = array_reverse( $expectedRows );
+		}
 
-		// Get all entries at once (with descending page ids)
+		// First entry
+		$res = $specialPage->reallyDoQuery( 1 );
+		$this->assertSame( 1, $res->numRows() );
+		$this->assertSame( $expectedRows[ 0 ], (array)$res->fetchObject() );
+
+		// Continue with offset
+		$res = $specialPage->reallyDoQuery( 10, 1 );
+		$this->assertSame( 1, $res->numRows() );
+		$this->assertSame( $expectedRows[ 1 ], (array)$res->fetchObject() );
+
+		// Get all entries at once
 		$res = $specialPage->reallyDoQuery( 5 );
 		$this->assertSame( 2, $res->numRows() );
-		$this->assertSame( 'SpecialUnconnectedPagesTest-unconnected2', $res->fetchRow()['title'] );
-		$this->assertSame( 'SpecialUnconnectedPagesTest-unconnected', $res->fetchRow()['title'] );
+		$this->assertSame( $expectedRows, [ (array)$res->fetchObject(), (array)$res->fetchObject() ] );
 	}
 
 	/**
@@ -216,9 +222,9 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		$res = $specialPage->reallyDoQuery( 1, 1 );
 		$this->assertSame( 1, $res->numRows() );
 		$this->assertSame( [
-				'value' => '200',
+				'value' => '400',
 				'namespace' => strval( $namespace ),
-				'title' => 'SpecialUnconnectedPagesTest-unconnected'
+				'title' => 'SpecialUnconnectedPagesTest-unconnected2'
 			],
 			(array)$res->fetchObject()
 		);

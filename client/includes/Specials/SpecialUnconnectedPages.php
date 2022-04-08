@@ -162,6 +162,10 @@ class SpecialUnconnectedPages extends QueryPage {
 		return [ 'pp_sortkey', 'page_id' ];
 	}
 
+	protected function sortDescending(): bool {
+		return $this->unconnectedPagePagePropMigrationStage < MIGRATION_NEW;
+	}
+
 	/**
 	 * @see QueryPage::reallyDoQuery
 	 *
