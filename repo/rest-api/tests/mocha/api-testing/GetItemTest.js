@@ -194,7 +194,7 @@ describe( 'GET /entities/items/{id} ', () => {
 			it( 'if the current revision is newer than any IDs provided (while others are invalid)',
 				async () => {
 					const response = await newValidRequestWithHeader( {
-						'If-None-Match': '"foo", "bar"'
+						'If-None-Match': `"foo", "${testRevisionId - 1}", "bar"`
 					} );
 					assertValid200Response( response );
 				}
