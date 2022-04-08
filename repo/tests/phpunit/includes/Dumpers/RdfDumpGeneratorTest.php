@@ -279,8 +279,6 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 
 		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 
-		$dataTypeLookup = $this->getTestData()->getMockRepository();
-
 		$entityRevisionLookup->method( 'getEntityRevision' )
 			->willReturnCallback( function( EntityId $id ) use ( $entityRevisions, $redirects ) {
 				$key = $id->getSerialization();
@@ -295,8 +293,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 		$siteLookup = $this->getSiteLookup();
 
 		// Note: we test against the actual RDF bindings here, so we get actual RDF.
-		$valueSnakRdfBuilderFactory = WikibaseRepo::getValueSnakRdfBuilderFactory();
-		$entityRdfBuilderFactory = new EntityRdfBuilderFactory( $this->getRdfBuilderFactoryCallbacks( $siteLookup ), [] );
+		$entityRdfBuilderFactory = new EntityRdfBuilderFactory( $this->getRdfBuilderFactoryCallbacks( $siteLookup ) );
 		$entityStubRdfBuilderFactory = new EntityStubRdfBuilderFactory( $this->getStubRdfBuilderFactoryCallbacks() );
 
 		$rdfBuilderFactory = new RdfBuilderFactory(

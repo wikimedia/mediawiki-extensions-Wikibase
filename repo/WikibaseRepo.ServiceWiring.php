@@ -942,8 +942,7 @@ return [
 		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
 
 		return new EntityRdfBuilderFactory(
-			$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_BUILDER_FACTORY_CALLBACK ),
-			$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES )
+			$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_BUILDER_FACTORY_CALLBACK )
 		);
 	},
 
