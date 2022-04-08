@@ -35,6 +35,18 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 		expect( response ).to.satisfyApiSpec;
 	} );
 
+	it( '304 Not Modified response is valid', async () => {
+		const createSingleItemResponse = await entityHelper.createSingleItem();
+		const response = await rest.get(
+			`/entities/items/${createSingleItemResponse.entity.id}`,
+			{},
+			{ 'If-None-Match': `"${createSingleItemResponse.entity.lastrevid}"` }
+		);
+
+		expect( response.status ).to.equal( 304 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
 	it( '400 Bad Request response is valid for an invalid item ID', async () => {
 		const response = await rest.get( '/entities/items/X123' );
 
