@@ -31,14 +31,14 @@ class ViewEntityAction extends ViewAction {
 	 * @throws MWException
 	 */
 	public static function onBeforeDisplayNoArticleText( Article $article ) {
-		$namespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getLocalEntityNamespaceLookup();
 		$contentFactory = WikibaseRepo::getEntityContentFactory();
 
 		$ns = $article->getTitle()->getNamespace();
-		$entityType = $namespaceLookup->getEntityType( $ns );
 		$oldid = $article->getOldID();
 
-		if ( $entityType !== null && !$oldid ) {
+		if ( !$oldid && $namespaceLookup->isEntityNamespace( $ns ) ) {
+			$entityType = $namespaceLookup->getEntityType( $ns );
 			$handler = $contentFactory->getContentHandlerForType( $entityType );
 			$handler->showMissingEntity( $article->getTitle(), $article->getContext() );
 
