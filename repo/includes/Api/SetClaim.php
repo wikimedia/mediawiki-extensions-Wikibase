@@ -293,7 +293,7 @@ class SetClaim extends ApiBase {
 			);
 		}
 
-		// Note: since dieUsage() never returns, this should be unreachable!
+		// Note: since dieError() never returns, this should be unreachable!
 		throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 	}
 
