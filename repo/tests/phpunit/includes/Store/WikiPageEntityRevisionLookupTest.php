@@ -5,11 +5,11 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Store;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
+use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Storage\BlobStore;
-use MediaWiki\Storage\MutableRevisionRecord;
-use MediaWiki\Storage\SlotRecord;
 use PHPUnit\Framework\MockObject\MockObject;
 use Prophecy\Prophecy\ObjectProphecy;
 use Title;
