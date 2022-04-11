@@ -100,15 +100,15 @@ class ApiErrorReporter {
 
 	/**
 	 * Aborts the request with an error based on the given (fatal) StatusValue.
-	 * This is intended as an alternative for ApiBase::dieUsage().
+	 * This is intended as an alternative for ApiBase::dieWithError().
 	 *
 	 * If possible, a localized error message based on the exception is
 	 * included in the error sent to the client. Localization of errors
 	 * is attempted using the ExceptionLocalizer service provided to the
-	 * constructor. If that fails, dieUsage() is called, which in turn
+	 * constructor. If that fails, dieWithError() is called, which in turn
 	 * attempts localization based on the error code.
 	 *
-	 * @see ApiBase::dieUsage()
+	 * @see ApiBase::dieWithError()
 	 *
 	 * @param StatusValue $status The status to report. $status->getMessage() will be used
 	 * to generate the error's free form description.
@@ -154,15 +154,15 @@ class ApiErrorReporter {
 
 	/**
 	 * Aborts the request with an error based on the given Exception.
-	 * This is intended as an alternative for ApiBase::dieUsage().
+	 * This is intended as an alternative for ApiBase::dieWithError().
 	 *
 	 * If possible, a localized error message based on the exception is
 	 * included in the error sent to the client. Localization of errors
 	 * is attempted using the ExceptionLocalizer service provided to the
-	 * constructor. If that fails, dieUsage() is called, which in turn
+	 * constructor. If that fails, dieWithError() is called, which in turn
 	 * attempts localization based on the error code.
 	 *
-	 * @see ApiBase::dieUsage()
+	 * @see ApiBase::dieWithError()
 	 *
 	 * @param Exception $ex The exception to report. $ex->getMessage() will be used as the error's
 	 * free form description.
@@ -216,13 +216,13 @@ class ApiErrorReporter {
 
 	/**
 	 * Aborts the request with an error code. This is intended as a drop-in
-	 * replacement for ApiBase::dieUsage().
+	 * replacement for ApiBase::dieWithError().
 	 *
 	 * Localization of the error code is attempted by looking up a message key
 	 * constructed using the given code in "wikibase-api-$errorCode". If such a message
 	 * exists, it is included in the error's extra data.
 	 *
-	 * @see ApiBase::dieUsage()
+	 * @see ApiBase::dieWithError()
 	 * @deprecated Use dieWithError() instead.
 	 *
 	 * @param string $description An english, plain text description of the error,
