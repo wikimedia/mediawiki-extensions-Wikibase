@@ -84,12 +84,12 @@ class GetItemRouteHandler extends SimpleHandler {
 			// A drawback of doing this check here is that we already fetched and serialized a whole Item object.
 			if ( $this->isNotModified( $useCaseResponse->getRevisionId(), $useCaseResponse->getLastModified() ) ) {
 				$notModifiedResponse = $this->getResponseFactory()->createNotModified();
-				$notModifiedResponse->setHeader( 'ETag', $useCaseResponse->getRevisionId() );
+				$this->setEtagFromRevId( $notModifiedResponse, $useCaseResponse->getRevisionId() );
 				return $notModifiedResponse;
 			}
 
 			$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
-			$httpResponse->setHeader( 'ETag', $useCaseResponse->getRevisionId() );
+			$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
 			$httpResponse->setBody( new StringStream( $this->successPresenter->getJson( $useCaseResponse ) ) );
 		} elseif ( $useCaseResponse instanceof GetItemErrorResponse ) {
 			$httpResponse->setHeader( 'Content-Language', 'en' );
@@ -102,6 +102,10 @@ class GetItemRouteHandler extends SimpleHandler {
 		$this->addAuthHeaderIfAuthenticated( $httpResponse );
 
 		return $httpResponse;
+	}
+
+	private function setEtagFromRevId( Response $response, int $revId ): void {
+		$response->setHeader( 'ETag', "\"$revId\"" );
 	}
 
 	public function getParamSettings(): array {
