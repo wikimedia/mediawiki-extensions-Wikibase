@@ -8,7 +8,7 @@
 	},
 	"tooltip-t-wikibase": "Liŋkkâ ovtâstittum kuávdáštiätuvuárhá čuosâttâhân",
 	"wikibase-comment-update": "{{WBREPONAME}}-kohdetta muttám",
-	"wikibase-comment-multi": "$1 {{PLURAL:$1|nubástus|nubástussâd}}",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|nubástus|nubástus|nubástus|nubástussâd}}",
 	"wikibase-dataitem": "{{WBREPONAME}}-čuosâttâh",
 	"wikibase-editlinks": "Hammii liiŋkâid",
 	"wikibase-editlinkstitle": "Hammii kielâikoskâsijd liiŋkâid",

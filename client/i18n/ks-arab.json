@@ -3,10 +3,15 @@
 		"authors": [
 			"Iflaq",
 			"Rishabhbhat",
-			"Saraiki"
+			"Saraiki",
+			"Tajamul9"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} آئٹم",
+	"wikibase-editlinks": "اؠڈِٹ کُنٛڈٕ",
+	"wikibase-linkitem-addlinks": "کُنٛڈٕ کٕریٚو شٲمِل",
+	"wikibase-linkitem-title": "صفَس سٕتی کُنٛڈٕ",
+	"wikibase-linkitem-linkpage": "صفَس سٕتی کُنٛڈٕ",
 	"wikibase-linkitem-input-site": "زَبان:",
 	"wikibase-linkitem-input-page": "صَفہٕ:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

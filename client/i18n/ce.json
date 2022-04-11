@@ -36,7 +36,7 @@
 	"wikibase-linkitem-confirmitem-text": "Ахьа хаьржина агӀо хӀинцале [$1 кхечу Википедин агӀонашца] вовшахтесна йу. Дехар до, бакъдар {{PLURAL:$2|1=лахахь гайтина йолу агӀонан|лахахь гайтина йолу агӀонийн}} йукъахь хьой кхузара хьажорг тӀехӀоттош йолу агӀо хилар.",
 	"wikibase-linkitem-confirmitem-button": "Бакъдан",
 	"wikibase-linkitem-not-loggedin-title": "Ахьа авторизаци йан йеза",
-	"wikibase-linkitem-not-loggedin": "И функци лела йа йиш хилийта ахьа хьай цӀерца болх ба беза хӀокху вики чох а, [$1 Викихаамаш чохь а].",
+	"wikibase-linkitem-not-loggedin": "И функци лелайан ахьа авторизаци йан йеза хӀокху вики чохь а, [$1 центран хаамийн репозиторехь а].",
 	"wikibase-linkitem-success-link": "АгӀонаш кхиамца [$1 Викихаамаш чохь] вовшахтесна.",
 	"limitreport-entityaccesscount": "Чуйаьхна Викибазан хӀумнийн дукхалла",
 	"limitreport-entityaccesscount-value": "$1/$2",
