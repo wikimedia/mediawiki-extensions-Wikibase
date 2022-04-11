@@ -54,7 +54,7 @@ class EntityRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 			$flags, $vocab, $writer, $tracker, $dedupe, $called
 		);
 
-		$factory = new EntityRdfBuilderFactory( [ 'test' => $constructor ], [] );
+		$factory = new EntityRdfBuilderFactory( [ 'test' => $constructor ] );
 		$rdfBuilder = $factory->getEntityRdfBuilders( $flags, $vocab, $writer, $tracker, $dedupe );
 		$this->assertTrue( $called );
 		$this->assertInstanceOf( EntityRdfBuilder::class, $rdfBuilder['test'] );
