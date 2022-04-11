@@ -121,6 +121,10 @@ class GetItemRouteHandler extends SimpleHandler {
 		];
 	}
 
+	public function needsWriteAccess(): bool {
+		return false;
+	}
+
 	private function addAuthHeaderIfAuthenticated( Response $response ): void {
 		$user = $this->getAuthority()->getUser();
 		if ( $user->isRegistered() ) {

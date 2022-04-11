@@ -38,4 +38,14 @@ class GetItemRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	public function testReadWriteAccess(): void {
+		$routeHandler = GetItemRouteHandler::factory();
+		$this->initHandler(
+			$routeHandler,
+			new RequestData( [ 'pathParams' => [ 'id' => 'Q123' ] ] )
+		);
+
+		$this->assertTrue( $routeHandler->needsReadAccess() );
+		$this->assertFalse( $routeHandler->needsWriteAccess() );
+	}
 }
