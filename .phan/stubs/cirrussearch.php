@@ -115,7 +115,7 @@ namespace Elastica\Exception {
 	}
 }
 
-namespace {
+namespace MediaWiki\Extension\Elastica {
 	class ElasticaConnection {
 		/**
 		 * Fetch a connection.
@@ -142,7 +142,7 @@ namespace CirrusSearch {
 		}
 	}
 
-	class Connection extends \ElasticaConnection {
+	class Connection extends \MediaWiki\Extension\Elastica\ElasticaConnection {
 		/**
 		 * @param SearchConfig $config
 		 * @param string|null $cluster
