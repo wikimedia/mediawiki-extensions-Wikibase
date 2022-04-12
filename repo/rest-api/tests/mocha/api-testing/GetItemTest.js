@@ -54,6 +54,10 @@ async function newInvalidRequest( request ) {
 	return newRequest( request );
 }
 
+function makeEtag( ...revisionIds ) {
+	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
+}
+
 const germanLabel = 'a-German-label-' + utils.uniq();
 const englishLabel = 'an-English-label-' + utils.uniq();
 const englishDescription = 'an-English-description-' + utils.uniq();
@@ -78,12 +82,12 @@ describe( 'GET /entities/items/{id} ', () => {
 		assert.equal( response.body.id, testItemId );
 		assert.deepEqual( response.body.aliases, {} ); // expect {}, not []
 		assert.equal( response.header[ 'last-modified' ], testModified );
-		assert.equal( response.header.etag, testRevisionId );
+		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
 	}
 
 	function assertValid304Response( response ) {
 		assert.equal( response.status, 304 );
-		assert.equal( response.header.etag, testRevisionId );
+		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
 		assert.equal( response.text, '' );
 	}
 
@@ -134,7 +138,7 @@ describe( 'GET /entities/items/{id} ', () => {
 			}
 		} );
 		assert.equal( response.header[ 'last-modified' ], testModified );
-		assert.equal( response.header.etag, testRevisionId );
+		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
 	} );
 
 	it( 'can GET a partial item with multiple _fields params', async () => {
@@ -158,21 +162,21 @@ describe( 'GET /entities/items/{id} ', () => {
 			aliases: {} // expect {}, not []
 		} );
 		assert.equal( response.header[ 'last-modified' ], testModified );
-		assert.equal( response.header.etag, testRevisionId );
+		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
 	} );
 
 	describe( 'If-None-Match', () => {
 		describe( '200 response', () => {
 			it( 'if the current item revision is newer than the ID provided', async () => {
 				const response = await newValidRequestWithHeader( {
-					'If-None-Match': `"${testRevisionId - 1}"`
+					'If-None-Match': makeEtag( testRevisionId - 1 )
 				} );
 				assertValid200Response( response );
 			} );
 
 			it( 'if the current revision is newer than any of the IDs provided', async () => {
 				const response = await newValidRequestWithHeader( {
-					'If-None-Match': `"${testRevisionId - 1}", "${testRevisionId - 2}"`
+					'If-None-Match': makeEtag( testRevisionId - 1, testRevisionId - 2 )
 				} );
 				assertValid200Response( response );
 			} );
@@ -194,7 +198,7 @@ describe( 'GET /entities/items/{id} ', () => {
 			it( 'if the current revision is newer than any IDs provided (while others are invalid)',
 				async () => {
 					const response = await newValidRequestWithHeader( {
-						'If-None-Match': `"foo", "${testRevisionId - 1}", "bar"`
+						'If-None-Match': makeEtag( 'foo', testRevisionId - 1, 'bar' )
 					} );
 					assertValid200Response( response );
 				}
@@ -210,7 +214,7 @@ describe( 'GET /entities/items/{id} ', () => {
 			it( 'If-None-Match takes precedence over If-Modified-Since', async () => {
 				const response = await newValidRequestWithHeader( {
 					'If-Modified-Since': testModified, // this header on its own would return 304
-					'If-None-Match': `"${testRevisionId - 1}"`
+					'If-None-Match': makeEtag( testRevisionId - 1 )
 				} );
 				assertValid200Response( response );
 			} );
@@ -220,14 +224,14 @@ describe( 'GET /entities/items/{id} ', () => {
 		describe( '304 response', () => {
 			it( 'if the current revision ID is the same as the one provided', async () => {
 				const response = await newValidRequestWithHeader( {
-					'If-None-Match': `"${testRevisionId}"`
+					'If-None-Match': makeEtag( testRevisionId )
 				} );
 				assertValid304Response( response );
 			} );
 
 			it( 'if the current revision ID is the same as one of the IDs provided', async () => {
 				const response = await newValidRequestWithHeader(
-					{ 'If-None-Match': `"${testRevisionId - 1}", "${testRevisionId}"` }
+					{ 'If-None-Match': makeEtag( testRevisionId - 1, testRevisionId ) }
 				);
 				assertValid304Response( response );
 			} );
@@ -235,7 +239,7 @@ describe( 'GET /entities/items/{id} ', () => {
 			it( 'if the current revision ID is the same as one of the IDs provided (while others are invalid)',
 				async () => {
 					const response = await newValidRequestWithHeader( {
-						'If-None-Match': `"foo", "${testRevisionId}"`
+						'If-None-Match': makeEtag( 'foo', testRevisionId )
 					} );
 					assertValid304Response( response );
 				}
@@ -249,7 +253,7 @@ describe( 'GET /entities/items/{id} ', () => {
 			it( 'If-None-Match takes precedence over If-Modified-Since', async () => {
 				const response = await newValidRequestWithHeader( {
 					'If-Modified-Since': 'Fri, 1 Apr 2022 12:00:00 GMT', // this header on its own would return 200
-					'If-None-Match': `"${testRevisionId}"`
+					'If-None-Match': makeEtag( testRevisionId )
 				} );
 				assertValid304Response( response );
 			} );
