@@ -11,5 +11,7 @@
 	"wikibase-linkitem-linkpage": "Ma ɔnye kratafa no nnya twaka",
 	"wikibase-linkitem-selectlink": "Yɛserɛ, yi saete na kratafa a epɛ dɛ edze ka kratafa yi ho.",
 	"wikibase-linkitem-input-site": "Kasa:",
-	"wikibase-linkitem-input-page": "Kratafa:"
+	"wikibase-linkitem-input-page": "Kratafa:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Da no edzi"
 }

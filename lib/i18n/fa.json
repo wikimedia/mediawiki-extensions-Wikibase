@@ -117,7 +117,7 @@
 	"wikibase-entity-summary-wbsetsitelink-set-badges": "تغییر نشان‌ها برای [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set-both": "تغییر پیوند و نشان‌ها برای [$2]",
 	"wikibase-entity-summary-wbsetsitelink-remove": "حذف پیوند مشخص‌کنندهٔ وب‌گاه [$2]",
-	"wikibase-entity-summary-wblinktitles-create": "ایجاد این وروید برای اتصال صفحات",
+	"wikibase-entity-summary-wblinktitles-create": "ایجاد این ورودی برای اتصال صفحه‌ها",
 	"wikibase-entity-summary-wblinktitles-connect": "افزودن یک پیوند زبانی برای ارتباط صفحه های",
 	"wikibase-entity-summary-wbcreateclaim-value": "ایجاد {{PLURAL:$1|یک ادعا|ادعا}}",
 	"wikibase-entity-summary-wbcreateclaim-novalue": "ایجاد {{PLURAL:$1|یک ادعای بدون مقدار|ادعاهای بدون مقدار}}",
