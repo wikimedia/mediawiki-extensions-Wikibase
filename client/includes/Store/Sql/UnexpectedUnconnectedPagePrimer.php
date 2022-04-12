@@ -9,7 +9,7 @@ use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\NullMessageReporter;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
-use Wikimedia\Rdbms\SessionConsistentConnectionManager;
+use Wikimedia\Rdbms\ConnectionManager;
 
 /**
  * Maintenance helper which adds the "unexpectedUnconnectedPage" page property
@@ -21,7 +21,7 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 class UnexpectedUnconnectedPagePrimer {
 
 	/**
-	 * @var SessionConsistentConnectionManager
+	 * @var ConnectionManager
 	 */
 	private $localConnectionManager;
 
@@ -76,7 +76,7 @@ class UnexpectedUnconnectedPagePrimer {
 			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
 		}
 		$this->clientDb = $clientDb;
-		$this->localConnectionManager = $clientDb->sessionConsistentConnections();
+		$this->localConnectionManager = $clientDb->connections();
 		$this->batchSize = $batchSize;
 		$this->namespaceChecker = $namespaceChecker;
 
