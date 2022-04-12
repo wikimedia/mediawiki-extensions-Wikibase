@@ -4,15 +4,15 @@ namespace Wikibase\Client\Tests\Maintenance;
 
 use MediaWiki\Tests\Maintenance\MaintenanceBaseTestCase;
 use Title;
+use Wikibase\Client\Maintenance\PopulateUnexpectedUnconnectedPagePageProp;
 use Wikibase\Client\NamespaceChecker;
-use Wikibase\Client\PopulateUnexpectedUnconnectedPagePageProp;
 use Wikimedia\Rdbms\IDatabase;
 
 // files in maintenance/ are not autoloaded, so load explicitly
-require_once __DIR__ . '/../../../../maintenance/populateUnexpectedUnconnectedPagePageProp.php';
+require_once __DIR__ . '/../../../../maintenance/PopulateUnexpectedUnconnectedPagePageProp.php';
 
 /**
- * @covers \Wikibase\Client\PopulateUnexpectedUnconnectedPagePageProp
+ * @covers \Wikibase\Client\Maintenance\PopulateUnexpectedUnconnectedPagePageProp
  *
  * @group Wikibase
  * @group Database

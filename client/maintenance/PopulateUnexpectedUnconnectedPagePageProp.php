@@ -2,11 +2,12 @@
 
 declare( strict_types=1 );
 
-namespace Wikibase\Client;
+namespace Wikibase\Client\Maintenance;
 
 use Maintenance;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Wikibase\Client\Store\Sql\UnexpectedUnconnectedPagePrimer;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\WikibaseSettings;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false
