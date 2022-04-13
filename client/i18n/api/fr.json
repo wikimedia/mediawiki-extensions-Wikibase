@@ -3,7 +3,8 @@
 		"authors": [
 			"Dgstranz",
 			"Gomoko",
-			"Wladek92"
+			"Wladek92",
+			"Verdy p"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "Renvoie tous les IDs d’entité utilisés dans les pages indiquées.",
@@ -40,7 +41,7 @@
 	"apihelp-query+description-summary": "Obtenez une brève description sous-titre a.k.a expliquant ce qu'est la page cible.",
 	"apihelp-query+description-extended-description": "La description est du texte sans mise en forme, tenant sur une seule ligne, et par ailleurs arbitraire (potentiellement avec des balises HTML, qui seront interprétées comme du texte sans mise en forme). A ne pas utiliser à l'intérieur de HTML protégé !",
 	"apihelp-query+description-param-prefersource": "Quelle source de description préférer si présent :",
-	"apihelp-query+description-paramvalue-prefersource-local": "Description locale via la fonction analyseur  <code><nowiki>{{SHORTDESC:...}}</nowiki></code> dans le wikitexte de la page.",
+	"apihelp-query+description-paramvalue-prefersource-local": "Descriptions locales via la fonction de l’analyseur <code><nowiki>{{SHORTDESC:...}}</nowiki></code> dans le wikicode de la page.",
 	"apihelp-query+description-paramvalue-prefersource-central": "Descriptions centrales de l'élément associé  {{WBREPONAME}} .",
 	"apihelp-query+description-example": "Obtenir la description de la page 'London'.",
 	"apihelp-query+description-example-central": "Obtenez la description de la page 'London', en préférant la description centrale si elle existe.",

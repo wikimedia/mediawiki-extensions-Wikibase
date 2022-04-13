@@ -27,6 +27,7 @@
 	"wikibase-dataitem": "Element {{WBREPONAME}}",
 	"wikibase-editlinks": "Modifică legăturile",
 	"wikibase-editlinkstitle": "Modifică legăturile interlinguale",
+	"wikibase-addlinkstitle": "Adaugă legături interlingve",
 	"wikibase-linkitem-addlinks": "Adaugă legături",
 	"wikibase-linkitem-close": "Închide caseta de dialog și reîncarcă pagina",
 	"wikibase-linkitem-failure": "A apărut o eroare necunoscută în timpul creării legăturii către pagina precizată.",
