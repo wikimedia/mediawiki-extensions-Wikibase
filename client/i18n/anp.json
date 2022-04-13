@@ -2,24 +2,25 @@
 	"@metadata": {
 		"authors": [
 			"Angpradesh",
+			"Proabscorp!",
 			"Samyo"
 		]
 	},
 	"tooltip-t-wikibase": "सम्बद्ध डाटा भण्डार प्रविष्टि केरऽ कड़ी",
 	"wikibase-comment-update": "{{WBREPONAME}} आइटम बदललऽ गेलै",
 	"wikibase-dataitem": "{{WBREPONAME}} प्रविष्टि",
-	"wikibase-editlinks": "कड़ी संपादित करऽ",
+	"wikibase-editlinks": "कड़ी संपादित करौ",
 	"wikibase-editlinkstitle": "अन्तरभाषा कड़ी संपादित करऽ",
 	"wikibase-linkitem-addlinks": "कड़ी जोड़ौ",
 	"wikibase-linkitem-title": "पन्ना के कड़ी",
-	"wikibase-linkitem-linkpage": "पन्ना सँ जुड़लो लिंक",
+	"wikibase-linkitem-linkpage": "पन्ना सँ जुड़लौ लिंक",
 	"wikibase-linkitem-selectlink": "कृपा करी क एगो साइट आरू एगो पेज चुनौ जेकरा आपनै इ पेज सँ लिंक करै ल चाहै छियै।",
 	"wikibase-linkitem-input-site": "भाषा",
 	"wikibase-linkitem-input-page": "पन्ना:",
 	"wikibase-rc-hide-wikidata": "विकिडेटा $1",
-	"wikibase-rc-hide-wikidata-hide": "छुपाबऽ",
-	"wikibase-rc-hide-wikidata-show": "देखाबऽ",
+	"wikibase-rc-hide-wikidata-hide": "नुकाबौ",
+	"wikibase-rc-hide-wikidata-show": "देखाबौ",
 	"wikibase-rc-wikibase-edit-letter": "ड.",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} संपादन",
-	"wikibase-otherprojects": "आरू प्रकल्प म॑"
+	"wikibase-otherprojects": "आरू प्रकल्प मँ"
 }
