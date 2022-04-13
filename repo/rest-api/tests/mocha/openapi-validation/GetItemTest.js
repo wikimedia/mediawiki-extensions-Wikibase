@@ -27,7 +27,7 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '200 OK response is valid for a non-empty item', async () => {
+	it.skip( '200 OK response is valid for a non-empty item', async () => {
 		const createSingleItemResponse = await entityHelper.createSingleItem();
 		const response = await rest.get( `/entities/items/${createSingleItemResponse.entity.id}` );
 
