@@ -53,7 +53,7 @@ class GetItemTest extends TestCase {
 
 		$this->assertInstanceOf( GetItemSuccessResponse::class, $itemResponse );
 		$this->assertSame( $itemId, $item['id'] );
-		$this->assertSame( $itemLabel, $item['labels']['en']['value'] );
+		$this->assertSame( $itemLabel, $item['labels']['en'] );
 		$this->assertSame( $lastModifiedTimestamp, $itemResponse->getLastModified() );
 		$this->assertSame( $revisionId, $itemResponse->getRevisionId() );
 	}
@@ -127,7 +127,7 @@ class GetItemTest extends TestCase {
 			[
 				"id" => self::ITEM_ID,
 				"labels" => [
-					"en" => [ "language" => "en", "value" => self::ITEM_LABEL ]
+					"en" => self::ITEM_LABEL
 				]
 			]
 		];
@@ -138,7 +138,7 @@ class GetItemTest extends TestCase {
 				"id" => self::ITEM_ID,
 				"type" => "item",
 				"labels" => [
-					"en" => [ "language" => "en", "value" => self::ITEM_LABEL ]
+					"en" => self::ITEM_LABEL
 				]
 			]
 		];
@@ -149,10 +149,10 @@ class GetItemTest extends TestCase {
 				"id" => self::ITEM_ID,
 				"type" => "item",
 				"labels" => [
-					"en" => [ "language" => "en", "value" => self::ITEM_LABEL ]
+					"en" => self::ITEM_LABEL
 				],
 				"descriptions" => [
-					"en" => [ "language" => "en", "value" => self::ITEM_DESCRIPTION ]
+					"en" => self::ITEM_DESCRIPTION
 				],
 			]
 		];
@@ -163,7 +163,7 @@ class GetItemTest extends TestCase {
 				"id" => self::ITEM_ID,
 				"type" => "item",
 				"descriptions" => [
-					"en" => [ "language" => "en", "value" => self::ITEM_DESCRIPTION ]
+					"en" => self::ITEM_DESCRIPTION
 				],
 			]
 		];

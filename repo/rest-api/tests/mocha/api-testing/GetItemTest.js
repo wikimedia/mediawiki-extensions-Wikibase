@@ -133,8 +133,8 @@ describe( 'GET /entities/items/{id} ', () => {
 		assert.deepEqual( response.body, {
 			id: testItemId,
 			labels: {
-				de: { language: 'de', value: germanLabel },
-				en: { language: 'en', value: englishLabel }
+				de: germanLabel,
+				en: englishLabel
 			}
 		} );
 		assert.equal( response.header[ 'last-modified' ], testModified );
@@ -153,11 +153,11 @@ describe( 'GET /entities/items/{id} ', () => {
 		assert.deepEqual( response.body, {
 			id: testItemId,
 			labels: {
-				de: { language: 'de', value: germanLabel },
-				en: { language: 'en', value: englishLabel }
+				de: germanLabel,
+				en: englishLabel
 			},
 			descriptions: {
-				en: { language: 'en', value: englishDescription }
+				en: englishDescription
 			},
 			aliases: {} // expect {}, not []
 		} );
