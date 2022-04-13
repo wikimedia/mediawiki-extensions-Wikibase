@@ -34,7 +34,6 @@ class RepoNoBadUsageTest extends NoBadUsageTest {
 				'tests/phpunit/unit/ServiceWiringTestCase.php' => true, // mock
 			],
 			'wfGetDB' => [],
-			'wfGetLB' => [],
 		];
 	}
 

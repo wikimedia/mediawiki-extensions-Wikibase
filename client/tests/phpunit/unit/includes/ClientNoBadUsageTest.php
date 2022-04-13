@@ -39,7 +39,6 @@ class ClientNoBadUsageTest extends NoBadUsageTest {
 				'tests/phpunit/unit/includes/ServiceWiringTestCase.php' => true, // mock
 			],
 			'wfGetDB' => [],
-			'wfGetLB' => [],
 		];
 	}
 

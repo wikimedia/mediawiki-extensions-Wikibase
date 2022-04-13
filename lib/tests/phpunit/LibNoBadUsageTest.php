@@ -47,7 +47,6 @@ class LibNoBadUsageTest extends NoBadUsageTest {
 				'tests/phpunit/Store/Sql/Terms/Util/FakeLoadBalancer.php' => true,
 			],
 			'wfGetDB' => [],
-			'wfGetLB' => [],
 		];
 	}
 
