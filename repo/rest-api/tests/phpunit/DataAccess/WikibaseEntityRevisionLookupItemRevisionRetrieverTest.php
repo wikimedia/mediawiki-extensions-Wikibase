@@ -5,19 +5,19 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemRevisionRetriever;
+use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionRetriever;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\Tests\NewItem;
 
 /**
- * @covers \Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemRevisionRetriever
+ * @covers \Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionRetriever
  *
  * @group Wikibase
  * @group Database
  *
  * @license GPL-2.0-or-later
  */
-class WikibaseEntityLookupItemRetrieverTest extends MediaWikiIntegrationTestCase {
+class WikibaseEntityRevisionLookupItemRevisionRetrieverTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetItemRevision(): void {
 		$item = NewItem::withId( 'Q123' )->build();
@@ -40,7 +40,7 @@ class WikibaseEntityLookupItemRetrieverTest extends MediaWikiIntegrationTestCase
 			->method( 'getEntityRevision' )
 			->willReturn( $entityRevision );
 
-		$retriever = new WikibaseEntityLookupItemRevisionRetriever( $entityRevisionLookup );
+		$retriever = new WikibaseEntityRevisionLookupItemRevisionRetriever( $entityRevisionLookup );
 
 		$this->assertEquals(
 			new ItemRevision( $item, $lastModified, $revisionId ),
