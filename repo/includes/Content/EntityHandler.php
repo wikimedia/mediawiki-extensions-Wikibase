@@ -814,9 +814,8 @@ abstract class EntityHandler extends ContentHandler {
 		// And we need to include EntityHandler::PARSER_VERSION in the cache key too
 		$parserOutput->recordOption( 'wb' );
 		if ( $generateHtml ) {
-			$chain = $content->getRedirectChain();
 			$language = $this->getPageViewLanguage( $target );
-			$html = Article::getRedirectHeaderHtml( $language, $chain, false );
+			$html = Article::getRedirectHeaderHtml( $language, $target, false );
 			$parserOutput->setText( $html );
 		}
 
