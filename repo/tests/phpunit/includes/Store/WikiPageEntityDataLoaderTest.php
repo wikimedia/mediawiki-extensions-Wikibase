@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Tests\Store;
 
 use MediaWiki\Revision\RevisionAccessException;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Storage\BlobAccessException;
 use MediaWiki\Storage\BlobStore;
-use MediaWiki\Storage\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
