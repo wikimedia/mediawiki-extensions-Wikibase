@@ -27,6 +27,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\ILoadBalancerForOwner;
 
 /**
  * This test needs to be in repo, although the class is in lib as we can't alter
@@ -127,7 +128,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 	private function getLookupWithLaggedConnection( int $selectCount, int $getConnectionRefCount ): WikiPageEntityMetaDataLookup {
 		$nsLookup = $this->getEntityNamespaceLookup();
 
-		$loadBalancer = $this->createMock( ILoadBalancer::class );
+		$loadBalancer = $this->createMock( ILoadBalancerForOwner::class );
 		$loadBalancer->expects( $this->exactly( $getConnectionRefCount ) )
 			->method( 'getConnectionRef' )
 			->willReturnCallback( function( $id ) use ( $selectCount ) {
@@ -141,7 +142,6 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				return $db;
 			} );
 
-		$this->markTestSkipped( 'Need I27ba4973d24d759c88b3868c95e7db875801ca0c' );
 		$lbFactory = new FakeLBFactory( [ 'lb' => $loadBalancer ] );
 		return new WikiPageEntityMetaDataLookup(
 			$nsLookup,

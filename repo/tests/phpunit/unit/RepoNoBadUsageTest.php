@@ -28,7 +28,7 @@ class RepoNoBadUsageTest extends NoBadUsageTest {
 				'tests/phpunit/includes/GlobalStateFactoryMethodsResourceTest.php' => 1, // mock
 				'tests/phpunit/unit/ServiceWiringTestCase.php' => true, // mock
 			],
-			'/\b((get)?(DB)?|I|)LoadBalancer(Factory)?(?!::|;)/' => [
+			'/\b((get)?(DB)?|I|)LoadBalancer(Factory)?(?!::|;|[a-zA-Z])/' => [
 				'WikibaseRepo.ServiceWiring.php' => 1, // RepoDomainDbFactory service wiring
 				'tests/phpunit/includes/GlobalStateFactoryMethodsResourceTest.php' => 1, // mock
 				'tests/phpunit/unit/ServiceWiringTestCase.php' => true, // mock

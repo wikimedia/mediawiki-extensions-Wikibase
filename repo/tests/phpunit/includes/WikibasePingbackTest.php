@@ -140,7 +140,6 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		$requestFactory->expects( $expectation )
 			->method( 'post' )
 			->willReturn( true );
-		$this->markTestSkipped( 'Need I27ba4973d24d759c88b3868c95e7db875801ca0c' );
 		$lbFactory = new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] );
 
 		return new WikibasePingback(
@@ -166,7 +165,6 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		$extensions = $extensions ?: $this->createMock( ExtensionRegistry::class );
 		$wikibaseRepoSettings = $wikibaseRepoSettings ?: $this->createMock( SettingsArray::class );
 		$requestFactory = $requestFactory ?: $this->createMock( HTTPRequestFactory::class );
-		$this->markTestSkipped( 'Need I27ba4973d24d759c88b3868c95e7db875801ca0c' );
 		$lbFactory = new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] );
 
 		$wikibaseRepoSettings

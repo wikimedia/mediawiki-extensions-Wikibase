@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms\Util;
 
 use InvalidArgumentException;
 use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\ILoadBalancerForOwner;
 use Wikimedia\Rdbms\LBFactory;
 
 /**
@@ -25,7 +26,7 @@ class FakeLBFactory extends LBFactory {
 		$this->lb = $params['lb'];
 	}
 
-	public function newMainLB( $domain = false, $owner = null ): ILoadBalancer {
+	public function newMainLB( $domain = false ): ILoadBalancerForOwner {
 		if ( $domain === false || $domain === self::LOCAL_DOMAIN_ID ) {
 			return $this->lb;
 		} else {
@@ -41,7 +42,7 @@ class FakeLBFactory extends LBFactory {
 		// no-op
 	}
 
-	public function newExternalLB( $cluster, $owner = null ): ILoadBalancer {
+	public function newExternalLB( $cluster ): ILoadBalancerForOwner {
 		throw new InvalidArgumentException( 'no external cluster supported' );
 	}
 
