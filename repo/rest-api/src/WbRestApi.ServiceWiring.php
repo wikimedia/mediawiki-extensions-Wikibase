@@ -1,7 +1,7 @@
 <?php declare( strict_types = 1 );
 
 use MediaWiki\MediaWikiServices;
-use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemRevisionRetriever;
+use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionRetriever;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
@@ -12,7 +12,7 @@ return [
 
 	'WbRestApi.GetItem' => function ( MediaWikiServices $services ): GetItem {
 		return new GetItem(
-			new WikibaseEntityLookupItemRevisionRetriever(
+			new WikibaseEntityRevisionLookupItemRevisionRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
 			new ItemSerializer(

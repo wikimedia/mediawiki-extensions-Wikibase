@@ -12,7 +12,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
 /**
  * @license GPL-2.0-or-later
  */
-class WikibaseEntityLookupItemRevisionRetriever implements ItemRevisionRetriever {
+class WikibaseEntityRevisionLookupItemRevisionRetriever implements ItemRevisionRetriever {
 
 	private $entityRevisionLookup;
 
