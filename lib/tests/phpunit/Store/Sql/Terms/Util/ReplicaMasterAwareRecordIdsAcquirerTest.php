@@ -165,6 +165,7 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 			'dbr' => $this->dbReplica,
 			'dbw' => $this->dbMaster,
 		] );
+		$this->markTestSkipped( 'Need I27ba4973d24d759c88b3868c95e7db875801ca0c' );
 		$lbFactory = new FakeLBFactory( [ 'lb' => $loadBalancer ] );
 
 		return new ReplicaMasterAwareRecordIdsAcquirer(
