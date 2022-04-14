@@ -39,7 +39,7 @@ class DatabaseUsageCheckingTermStoreCleanerTest extends MediaWikiIntegrationTest
 	}
 
 	public function testCleaningUnsharedTermInLangUsesInnerCleaner() {
-		$this->innerCleaner->expects( $this->once() )->method( 'cleanTermInLangIds' )->with( $this->db, $this->db, [ 1 ] );
+		$this->innerCleaner->expects( $this->once() )->method( 'cleanTermInLangIds' )->with( $this->anything(), $this->anything(), [ 1 ] );
 		$cleaner = $this->getCleaner();
 		$cleaner->cleanTermInLangIds( [ 1 ] );
 	}
@@ -54,7 +54,7 @@ class DatabaseUsageCheckingTermStoreCleanerTest extends MediaWikiIntegrationTest
 		$this->insertPropertyTermRow( $propertyId, $stillUsedPropertyTermInLang );
 		$this->innerCleaner->expects( $this->once() )
 			->method( 'cleanTermInLangIds' )
-			->with( $this->db, $this->db, [ $termInLangIdToDelete ] );
+			->with( $this->anything(), $this->anything(), [ $termInLangIdToDelete ] );
 		$cleaner = $this->getCleaner();
 		$cleaner->cleanTermInLangIds( [ $termInLangIdToDelete, $stillUsedItemTermInLang, $stillUsedPropertyTermInLang ] );
 	}
