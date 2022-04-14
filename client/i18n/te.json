@@ -32,7 +32,7 @@
 	"wikibase-linkitem-confirmitem-text": "మీరు లింకు చెయ్యదలచిన పేజీకి ఈసరికే [$1 కేంద్రీయ ఖజానా లోని ఒక అంశానికీ] సంబంధం ఉంది. మీరు లింకు చెయ్యదలచిన{{PLURAL:$2|ది|వి}} కింద చూపించిన {{PLURAL:$2|పేజీ}}{{PLURAL:$2|యే|లే}}నని నిర్ధారించండి.",
 	"wikibase-linkitem-confirmitem-button": "నిర్థారించండి",
 	"wikibase-linkitem-success-link": "పేజీలను లింకు చేసాం. లింకులతో కూడిన ఈ అంశాన్ని మీరు మా [$1 కేంద్రీయ డేటా ఖజానా]లో చూడవచ్చు.",
-	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} ను $1",
 	"wikibase-rc-hide-wikidata-hide": "దాచు",
 	"wikibase-rc-hide-wikidata-show": "చూపించు",
 	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} మార్పులను ఇటీవలి మార్పులలో చూపించు",
