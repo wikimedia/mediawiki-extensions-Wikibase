@@ -64,13 +64,13 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 			return;
 		}
 
-		$this->doContentAlterParserOutput( $title, $parserOutput );
+		$this->doContentAlterParserOutput( $content, $title, $parserOutput );
 	}
 
 	/**
 	 * @internal only public for testing (to bypass the test skip in onContentAlterParserOutput)
 	 */
-	public function doContentAlterParserOutput( Title $title, ParserOutput $parserOutput ): void {
+	public function doContentAlterParserOutput( Content $content, Title $title, ParserOutput $parserOutput ): void {
 		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			// shorten out
 			return;
@@ -88,7 +88,7 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 		$this->parserOutputDataUpdater->updateItemIdProperty( $title, $parserOutput );
 		$this->parserOutputDataUpdater->updateTrackingCategories( $title, $parserOutput );
 		$this->parserOutputDataUpdater->updateOtherProjectsLinksData( $title, $parserOutput );
-		$this->parserOutputDataUpdater->updateUnconnectedPageProperty( $title, $parserOutput );
+		$this->parserOutputDataUpdater->updateUnconnectedPageProperty( $content, $title, $parserOutput );
 		$this->parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
 	}
 

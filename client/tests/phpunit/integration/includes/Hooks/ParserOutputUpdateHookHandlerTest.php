@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
+use Content;
 use HashSiteStore;
 use Language;
 use MediaWiki\HookContainer\HookContainer;
@@ -321,10 +322,11 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		array $expectedSisterLinks,
 		array $expectedBadges = null
 	) {
+		$content = $this->createMock( Content::class );
 		$parserOutput = $this->newParserOutput( $extensionDataAppend, [] );
 		$handler = $this->newParserOutputUpdateHookHandler( $this->getTestSiteLinkData() );
 
-		$handler->doContentAlterParserOutput( $title, $parserOutput );
+		$handler->doContentAlterParserOutput( $content, $title, $parserOutput );
 
 		$expectedUsage = new EntityUsage(
 			new ItemId( $expectedItem ),
@@ -350,12 +352,13 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testDoContentAlterParserOutput_sitelinkOfNoItem() {
+		$content = $this->createMock( Content::class );
 		$title = Title::makeTitle( NS_MAIN, 'Plutonium' );
 
 		$parserOutput = $this->newParserOutput( [], [] );
 		$handler = $this->newParserOutputUpdateHookHandler( $this->getTestSiteLinkData() );
 
-		$handler->doContentAlterParserOutput( $title, $parserOutput );
+		$handler->doContentAlterParserOutput( $content, $title, $parserOutput );
 
 		$this->assertNull( $parserOutput->getPageProperty( 'wikibase_item' ) );
 		$this->assertSame( NS_MAIN, $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
@@ -368,12 +371,13 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testDoContentAlterParserOutput_sitelinkInNotWikibaseEnabledNamespace() {
+		$content = $this->createMock( Content::class );
 		$title = Title::makeTitle( NS_USER, 'Foo' );
 
 		$parserOutput = $this->newParserOutput( [], [] );
 		$handler = $this->newParserOutputUpdateHookHandler( $this->getTestSiteLinkDataInNotEnabledNamespace() );
 
-		$handler->doContentAlterParserOutput( $title, $parserOutput );
+		$handler->doContentAlterParserOutput( $content, $title, $parserOutput );
 
 		$this->assertNull( $parserOutput->getPageProperty( 'wikibase_item' ) );
 		$this->assertNull( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
@@ -414,11 +418,12 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$this->newUsageAccumulatorFactory()
 		);
 
+		$content = $this->createMock( Content::class );
 		$title = Title::makeTitle( NS_MAIN, 'Foobarium' );
 
 		$parserOutput = $this->newParserOutput( [], [] );
 
-		$handler->doContentAlterParserOutput( $title, $parserOutput );
+		$handler->doContentAlterParserOutput( $content, $title, $parserOutput );
 
 		$this->assertEquals( $itemId, $parserOutput->getPageProperty( 'wikibase_item' ) );
 		$this->assertNull( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );

@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\ParserOutput;
 
+use Content;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use ParserOutput;
@@ -143,19 +144,19 @@ class ClientParserOutputDataUpdater {
 	 * @note Depending on the "tmpUnconnectedPagePagePropMigrationStage" setting, this may not
 	 * set the "unexpectedUnconnectedPage" page prop.
 	 */
-	public function updateUnconnectedPageProperty( Title $title, ParserOutput $parserOutput ): void {
+	public function updateUnconnectedPageProperty( Content $content, Title $title, ParserOutput $parserOutput ): void {
 		if ( $this->unconnectedPagePagePropMigrationStage >= MIGRATION_WRITE_BOTH ) {
-			$this->setUnexpectedUnconnectedPage( $title, $parserOutput );
+			$this->setUnexpectedUnconnectedPage( $content, $title, $parserOutput );
 		}
 	}
 
 	/**
 	 * If applicable, set the "unexpectedUnconnectedPage" page property.
 	 */
-	private function setUnexpectedUnconnectedPage( Title $title, ParserOutput $parserOutput ): void {
+	private function setUnexpectedUnconnectedPage( Content $content, Title $title, ParserOutput $parserOutput ): void {
 		$itemId = $this->getItemIdForTitle( $title );
 
-		if ( $itemId || $title->isRedirect() ) {
+		if ( $itemId || $content->isRedirect() ) {
 			// Page is either connected or a redirect (thus expected to be unconnected).
 			return;
 		}

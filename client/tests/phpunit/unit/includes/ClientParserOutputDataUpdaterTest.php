@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit;
 
+use Content;
 use ParserOutput;
 use Psr\Log\LogLevel;
 use TestLogger;
@@ -408,7 +409,12 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$parserOutput->setPageProperty( $key, $value );
 		}
 
-		$title = $this->getTitle( $titleText, $isRedirect );
+		$content = $this->createMock( Content::class );
+		$content->method( 'isRedirect' )
+			->willReturn( $isRedirect );
+
+		// don’t pass $isRedirect into getTitle(), shouldn’t be used because it might be outdated
+		$title = $this->getTitle( $titleText );
 		if ( $migrationStage === MIGRATION_OLD ) {
 			// Hack: At MIGRATION_OLD we do nothing, thus $title is never read.
 			$title->getPrefixedText();
@@ -416,7 +422,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 		$instance = $this->newInstance( [], $migrationStage );
 
-		$instance->updateUnconnectedPageProperty( $title, $parserOutput );
+		$instance->updateUnconnectedPageProperty( $content, $title, $parserOutput );
 
 		$this->assertSame( $expectedPageProps, $parserOutput->getPageProperties() );
 	}
