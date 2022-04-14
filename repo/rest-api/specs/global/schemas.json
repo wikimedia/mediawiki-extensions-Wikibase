@@ -40,57 +40,36 @@
 	"Labels": {
 		"type": "object",
 		"additionalProperties": {
-			"$ref": "#/Term"
+			"type": "string"
 		},
 		"example": {
-			"en": {
-				"language": "en",
-				"value": "Douglas Adams"
-			},
-			"fr": {
-				"language": "fr",
-				"value": "Douglas Adams"
-			}
+			"en": "Douglas Adams",
+			"fr": "Douglas Adams"
 		}
 	},
 	"Descriptions": {
 		"type": "object",
 		"additionalProperties": {
-			"$ref": "#/Term"
+			"type": "string"
 		},
 		"example": {
-			"en": {
-				"language": "en",
-				"value": "Science-fiction writer"
-			},
-			"fr": {
-				"language": "fr",
-				"value": "écrivain de science-fiction"
-			}
+			"en": "Science-fiction writer",
+			"fr": "écrivain de science-fiction"
 		}
 	},
 	"Aliases": {
 		"type": "object",
 		"additionalProperties": {
 			"type": "array",
-			"items": { "$ref": "#/Term" }
+			"items": { "type": "string" }
 		},
 		"example": {
 			"en": [
-				{
-					"language": "en",
-					"value": "Douglas Noel Adams"
-				},
-				{
-					"language": "en",
-					"value": "Douglas Noël Adams"
-				}
+				"Douglas Noel Adams",
+				"Douglas Noël Adams"
 			],
 			"fr": [
-				{
-					"language": "fr",
-					"value": "Douglas Noel Adams"
-				}
+				"Douglas Noel Adams"
 			]
 		}
 	},
@@ -128,21 +107,6 @@
 				"items": { "type": "string" }
 			}
 		}
-	},
-	"Term": {
-		"type": "object",
-		"properties": {
-			"language": {
-				"type": "string"
-			},
-			"value": {
-				"type": "string"
-			}
-		},
-		"required": [
-			"language",
-			"value"
-		]
 	},
 	"Statements": {
 		"type": "object",
