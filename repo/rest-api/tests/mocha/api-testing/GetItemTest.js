@@ -17,14 +17,6 @@ async function validateRequest( request ) {
 	// copy, since the unchanged request is still needed
 	const coercedRequest = JSON.parse( JSON.stringify( request ) );
 
-	// make all headers lower case due to bug in openapi-request-coercer package
-	// https://github.com/kogosoftwarellc/open-api/pull/802
-	if ( 'headers' in coercedRequest ) {
-		coercedRequest.headers = Object.keys( coercedRequest.headers ).reduce( ( result, key ) => {
-			result[ key.toLowerCase() ] = coercedRequest.headers[ key ];
-			return result;
-		}, {} );
-	}
 	new OpenAPIRequestCoercer( specParameters ).coerce( coercedRequest );
 
 	return new OpenAPIRequestValidator( requestSpec ).validateRequest( coercedRequest );

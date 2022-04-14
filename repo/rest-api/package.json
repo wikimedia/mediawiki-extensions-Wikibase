@@ -31,7 +31,7 @@
 		"json-loader": "^0.5.7",
 		"mocha": "^9.2.1",
 		"npm-run-all": "^4.1.5",
-		"openapi-request-coercer": "^10.0.0",
+		"openapi-request-coercer": "^11.0.0",
 		"openapi-request-validator": "^10.0.0",
 		"style-loader": "^3.3.1",
 		"swagger-ui": "^4.5.2",
