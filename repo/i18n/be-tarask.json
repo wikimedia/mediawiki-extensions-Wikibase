@@ -138,6 +138,7 @@
 	"wikibase-validator-sitelink-conflict": "Спасылка $1 ужо выкарыстоўваецца элемэнтам $2. Вы можаце выдаліць яе з $2, калі яна да яго не адносіцца, ці злучыць абодва элемэнты, калі яны адносяцца да аднае тэмы.",
 	"wikibase-validator-label-conflict": "Уласьцівасьць $3 ужо мае метку «$1» для моўнага коду $2.",
 	"wikibase-validator-label-with-description-conflict": "Элемэнт $3 ужо мае метку «$1», злучаны з кодам мовы $2 і мае ў апісаньні той жа тэкст.",
+	"wikibase-validator-label-equals-description": "Метка і апісаньне для коду мовы $1 ня могуць мець аднолькавае значэньне.",
 	"wikibase-validator-label-no-entityid": "Метка ня мусіць супадаць зь дзейным ідэнтыфікатарам элемэнту.",
 	"wikibase-validator-illegal-file-chars": "Назва файлу ня можа ўтрыліваць такія сымбалі, як двукроп’і ці нахіленыя рыскі.",
 	"wikibase-validator-check-file-type": "Адсутнічае пашырэньне файлу.",
@@ -402,5 +403,6 @@
 	"wikibase-tainted-ref-popper-text": "Значэньне гэтага сьцьверджаньня зьмянілася, аднак крыніца засталася той самай. Можаце выдаліць гэтае папярэджаньне, калі крыніца сапраўды слушная.",
 	"wikibase-tainted-ref-popper-help-link-text": "Дапамога",
 	"wikibase-tainted-ref-popper-remove-warning": "Зьняць папярэджаньне",
-	"wikibase-tainted-ref-tainted-icon-title": "Гэтае сьцьверджаньне мае пэўныя магчымыя праблемы."
+	"wikibase-tainted-ref-tainted-icon-title": "Гэтае сьцьверджаньне мае пэўныя магчымыя праблемы.",
+	"special-setlabeldescriptionaliases-parameterized": "Вызначыць метку, апісаньне і псэўданімы $1"
 }
