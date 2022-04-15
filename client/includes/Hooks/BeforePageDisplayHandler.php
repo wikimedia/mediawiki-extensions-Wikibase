@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Hooks;
 
-use Action;
 use MediaWiki\Hook\BeforePageDisplayHook;
 use OutputPage;
 use Skin;
@@ -50,7 +49,7 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 	 * @param Skin $skin
 	 */
 	public function onBeforePageDisplay( $out, $skin ): void {
-		$actionName = Action::getActionName( $out );
+		$actionName = $out->getActionName();
 		$this->addModules( $out, $actionName );
 	}
 

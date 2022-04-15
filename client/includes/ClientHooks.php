@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client;
 
-use Action;
 use MediaWiki\MediaWikiServices;
 use Skin;
 use Title;
@@ -100,7 +99,7 @@ final class ClientHooks {
 			$entityIdParser = WikibaseClient::getEntityIdParser();
 			$entityId = $entityIdParser->parse( $idString );
 		} elseif ( $title &&
-			Action::getActionName( $skin->getContext() ) !== 'view' && $title->exists()
+			$skin->getActionName() !== 'view' && $title->exists()
 		) {
 			// Try to load the item ID from Database, but only do so on non-article views,
 			// (where the article's OutputPage isn't available to us).

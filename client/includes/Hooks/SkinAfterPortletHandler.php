@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Hooks;
 
-use Action;
 use MediaWiki\Skins\Hook\SkinAfterPortletHook;
 use Skin;
 use Wikibase\Client\NamespaceChecker;
@@ -77,7 +76,7 @@ class SkinAfterPortletHandler implements SkinAfterPortletHook {
 
 		$languageUrls = $skin->getLanguages();
 		$prefixedId = $out->getProperty( 'wikibase_item' );
-		$action = Action::getActionName( $skin->getContext() );
+		$action = $skin->getActionName();
 		$noExternalLangLinks = $out->getProperty( 'noexternallanglinks' );
 		$hasLangLinks = $languageUrls !== false && !empty( $languageUrls );
 

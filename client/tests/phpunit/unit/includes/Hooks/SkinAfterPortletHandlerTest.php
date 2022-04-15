@@ -6,7 +6,6 @@ use ConfigFactory;
 use FauxRequest;
 use IContextSource;
 use Language;
-use MediaWiki\MediaWikiServices;
 use MockTitleTrait;
 use OutputPage;
 use PHPUnit\Framework\TestCase;
@@ -18,7 +17,6 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\SubEntityTypesMapper;
-use WikiPage;
 
 /**
  * @covers \Wikibase\Client\Hooks\SkinAfterPortletHandler
@@ -128,12 +126,12 @@ class SkinAfterPortletHandlerTest extends TestCase {
 
 		$skin->method( 'getOutput' )
 			->willReturn( $output );
-		$skin->method( 'getContext' )
-			->willReturn( $output );
 		$skin->method( 'getTitle' )
 			->willReturn( $title );
 		$skin->method( 'getLanguages' )
 			->willReturn( $languageUrls );
+		$skin->method( 'getActionName' )
+			->willReturn( $action );
 
 		return $skin;
 	}
@@ -146,23 +144,8 @@ class SkinAfterPortletHandlerTest extends TestCase {
 		$request = new FauxRequest( [ 'action' => $action ] );
 
 		$title = $this->makeMockTitle( 'Page' );
-		$contentHandler = MediaWikiServices::getInstance()
-			->getContentHandlerFactory()
-			->getContentHandler( CONTENT_MODEL_WIKITEXT );
-
-		$wikiPage = $this->createMock( WikiPage::class );
-		$wikiPage->method( 'getActionOverrides' )
-			->willReturn( [] );
-		$wikiPage->method( 'getContentHandler' )
-			->willReturn( $contentHandler );
-		$wikiPage->method( 'getTitle' )
-			->willReturn( $title );
 
 		$context = $this->createMock( IContextSource::class );
-		$context->method( 'canUseWikiPage' )
-			->willReturn( true );
-		$context->method( 'getWikiPage' )
-			->willReturn( $wikiPage );
 		$context->method( 'getRequest' )
 			->willReturn( $request );
 		$context->method( 'getTitle' )
