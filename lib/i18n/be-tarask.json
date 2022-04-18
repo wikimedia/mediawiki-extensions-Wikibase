@@ -5,10 +5,10 @@
 			"Red Winged Duck",
 			"Renessaince",
 			"Wizardist",
-			"Zedlik"
+			"Zedlik",
+			"Nieszczarda2"
 		]
 	},
-	"wikibase-lib-desc": "Утрымлівае агульны функцыянал пашырэньняў Wikibase і Wikibase Client.",
 	"specialpages-group-wikibase": "Вікібаза",
 	"wikibase-deletedentity-item": "Выдалены аб’ект",
 	"wikibase-deletedentity-property": "Выдаленая ўласьцівасьць",
@@ -55,6 +55,10 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-entity-summary-wbsetitem": "Створаны новы прадмет",
 	"wikibase-entity-summary-wbcreateredirect": "Перанакіраваны на $4",
+	"wikibase-entity-summary-wbeditentity-update-languages": "Зьмененыя метка, апісаньне і/або сынонімы $3 {{PLURAL:$3|мовай|мовамі}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "Зьмененыя метка, апісаньне і/або сынонімы мовамі: {{#commaseparatedlist: $3}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other": "Зьмененыя метка, апісаньне і/або сынонімы $3 {{PLURAL:$3|мовай|мовамі}}, а таксама іншыя часткі",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "Зьмененыя метка, апісаньне і/або сынонімы мовамі: {{#commaseparatedlist: $3}}, а таксама іншыя часткі",
 	"wikibase-entity-summary-wbsetreference": "Пазначаная крыніца",
 	"wikibase-entity-summary-wbsetreference-add": "Дададзеная крыніца сьцьверджаньня",
 	"wikibase-entity-summary-wbsetlabel-add": "Дададзеная метка на [$2]",
@@ -67,6 +71,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "Даданыя й выдаленыя {{PLURAL:$1|псэўданімы}} на [$2]",
 	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|1=Дададзены сынонім|Дададзеныя сынонімы}} для [$2]",
 	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|1=Выдалены псэўданім|Выдаленыя псэўданімы}} на [$2]",
+	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Зьмененыя метка, апісаньне і сынонімы для [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add": "Дададзеная спасылка на [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set": "Зьмененая спасылка на [$2]",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Выдаленая спасылка на [$2]",

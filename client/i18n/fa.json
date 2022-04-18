@@ -24,12 +24,13 @@
 			"درفش کاویانی",
 			"Darafsh",
 			"Jeeputer",
-			"Beginneruser"
+			"Beginneruser",
+			"LordProfo"
 		]
 	},
 	"wikibase-client-desc": "کارخواه برای افزونهٔ ویکی‌پایه",
 	"tooltip-t-wikibase": "پیوند به آیتم متصل‌شدۀ مخزن داده",
-	"wikibase-after-page-move": "انتقال شما الان باید [$1 در آیتم {{WBREPONAME}} بازتاب داده شده باشد] خواهش می‌کنیم که  شما این رخداد را بررسی کنید.",
+	"wikibase-after-page-move": "انتقال شما اکنون باید [$1 در آیتم {{WBREPONAME}} بازتاب داده شده باشد] خواهش می‌کنیم که  شما این رخداد را بررسی کنید.",
 	"wikibase-after-page-move-queued": "[$1 آیتم {{WBREPONAME}}] مرتبط با این صفحه به‌زودی به‌صورت خودکار روزآمد خواهد شد. توجه داشته باشید که ممکن است این به‌صورت مداوم اتفاق نیفتد.",
 	"wikibase-after-page-delete": "پیوند به این صفحه باید از [$1 آیتم مرتبط با {{WBREPONAME}}] حذف شده‌باشد. خواهش می‌کنیم که شما این رخداد را بررسی کنید.",
 	"wikibase-after-page-delete-queued": "[$1 آیتم {{WBREPONAME}}] مرتبط با این صفحه به‌زودی به‌صورت خودکار به‌روزرسانی خواهد شد. توجه داشته باشید که ممکن است این به‌صورت مداوم اتفاق نیفتد.",
@@ -108,7 +109,7 @@
 	"wikibase-pageinfo-entity-usage-X": "همهٔ اطلاعات هویتی",
 	"wikibase-pageinfo-entity-usage-O": "دیگر (اظهارات)",
 	"wikibase-property-render-error": "شکست در پردازش ویژگی $1: $2",
-	"wikibase-otherprojects": "در دیگر پروژه‌ها",
+	"wikibase-otherprojects": "در پروژه‌های دیگر",
 	"wikibase-otherprojects-beta-message": "نوار کناری سایر پروژه‌ها",
 	"wikibase-otherprojects-beta-description": "یک قسمت «{{int:wikibase-otherprojects}}» به نوار کناری می‌افزاید که پیوندهایی به دیگر پروژه‌های ویکی‌مدیا واقع‌شده در داده‌های {{WBREPONAME}} می‌دهد.",
 	"wikibase-sitelinks-sitename-columnheading": "زبان",
