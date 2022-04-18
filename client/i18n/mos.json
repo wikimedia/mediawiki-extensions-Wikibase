@@ -1,8 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abdul Fatawu 352",
+			"Amire80",
 			"Hasslaebetch"
 		]
 	},
-	"wikibase-dataitem": "{{WBREPONAME}} item"
+	"wikibase-dataitem": "{{WBREPONAME}} item",
+	"wikibase-linkitem-input-site": "Gomde:",
+	"wikibase-linkitem-input-page": "Seb-vão:",
+	"wikibase-rc-hide-wikidata-hide": "Lilli",
+	"wikibase-rc-hide-wikidata-show": "vẽnegre"
 }
