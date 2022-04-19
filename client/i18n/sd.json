@@ -10,6 +10,7 @@
 			"Tweety"
 		]
 	},
+	"wikibase-client-desc": "وڪيبيس ايڪسٽينشن لاءِ ڪلائينٽ",
 	"tooltip-t-wikibase": "اعدادخاني ۾ موجود لاڳاپيل اسم سان ڳنڍيو",
 	"wikibase-after-page-move": "اوهان جو چورڻو هاڻي [$1 {{WBREPONAME}} آئٽم تي] ٻولي ڳنڍڻي ۾ نظر اچڻ گهرجي. تصديق ڪري وٺو تہ ڇا اهو نظر اچي پيو.",
 	"wikibase-after-page-delete": "[$1 {{WBREPONAME}} سان لاڳاپيل آئٽم] مان هن صفحي جو ڳنڍڻو ڊاهڻ لازمي آهي. اسان جي درخواست آهي تہ اوهان هڪ دفعو چڪاسي وٺو.",
@@ -30,6 +31,7 @@
 	"wikibase-linkitem-confirmitem-text": "جنھن صفحي کي اوهان هن صفحي سان ڳنڍيو آهي اهو اڳ ئي [$1 اسان مرڪزي ڊيٽا مخزن جي آئٽم] سان ڳنڍيل آهي. مھرباني ڪري تصديق ڪريو تہ جيڪو {{PLURAL:$2|صفحو هيٺ ڏيکاريو وڃي پيو اهو ئي صفحو آهي.|صفحا هيٺ ڏيکاريا وڃن پيا، اهو صفحو آهي}}  جنھن سان اوهان ڳنڍڻ چاهيو ٿا.",
 	"wikibase-linkitem-confirmitem-button": "پڪ ڪريو",
 	"wikibase-linkitem-success-link": "صفحا ڳنڍيا ويا آھن. توھان انھن ڳنڍڻ تي مشتمل آئٽم اسان جي [$1 مرڪزي ڊيٽا ذخيري] ۾ ڏسي سگهو ٿا.",
+	"limitreport-entityaccesscount": "وڪيبيس انٽٽيز لوڊڊ جو انگ",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "لڪايو",
 	"wikibase-rc-hide-wikidata-show": "ڏيکاريو",
@@ -46,8 +48,11 @@
 	"wikibase-pageinfo-description-central": "مرڪزي تشريح",
 	"wikibase-pageinfo-entity-usage": "هن صفحي تي {{WBREPONAME}} جا استعمال ٿيل حصا",
 	"wikibase-pageinfo-entity-usage-S": "سائيٽ-ڳنڍڻو",
+	"wikibase-pageinfo-entity-usage-T": "عنوان",
+	"wikibase-pageinfo-entity-usage-C-with-modifier": "Statement: $1",
 	"wikibase-otherprojects": "ٻيون رٿائون",
 	"wikibase-sitelinks-sitename-columnheading": "ٻولي",
+	"wikibase-sitelinks-link-columnheading": "ڳنڍيل صفحو",
 	"wikibase-client-data-bridge-references-heading": "حوالا",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "توھان داخل ٿيل نہ آھيو",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "داخل ٿيو يا شامل ٿيو",

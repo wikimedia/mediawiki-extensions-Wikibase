@@ -136,7 +136,7 @@
 	"wikibase-anonymouseditwarning-dismiss-button": "로그인 없이 편집",
 	"wikibase-move-error": "데이터 이름공간에 있는 문서를 이동할 수 없으며 그것으로 문서를 이동할 수 없습니다.",
 	"wikibase-validator-invalid": "잘못된 값",
-	"wikibase-validator-missing-field": "필수 칸 '$1'이 없습니다.",
+	"wikibase-validator-missing-field": "필수 칸 \"$1\"이 없습니다.",
 	"wikibase-validator-bad-type": "$1 대신 $2",
 	"wikibase-validator-too-long": "{{PLURAL:$1|한 문자|$1 문자}}보다 더 길지 않아야 합니다",
 	"wikibase-validator-label-too-long": "레이블은 {{PLURAL:$1|1자|$1자}}를 초과할 수 없습니다",

@@ -109,7 +109,7 @@
 	"wikibase-pageinfo-entity-usage-X": "همهٔ اطلاعات هویتی",
 	"wikibase-pageinfo-entity-usage-O": "دیگر (اظهارات)",
 	"wikibase-property-render-error": "شکست در پردازش ویژگی $1: $2",
-	"wikibase-otherprojects": "در دیگر پروژه‌ها",
+	"wikibase-otherprojects": "در پروژه‌های دیگر",
 	"wikibase-otherprojects-beta-message": "نوار کناری سایر پروژه‌ها",
 	"wikibase-otherprojects-beta-description": "یک قسمت «{{int:wikibase-otherprojects}}» به نوار کناری می‌افزاید که پیوندهایی به دیگر پروژه‌های ویکی‌مدیا واقع‌شده در داده‌های {{WBREPONAME}} می‌دهد.",
 	"wikibase-sitelinks-sitename-columnheading": "زبان",
