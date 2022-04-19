@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
+use Wikibase\Repo\RestApi\Domain\Model\ItemRevisionResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
 
 /**
@@ -23,17 +24,19 @@ class WikibaseEntityRevisionLookupItemRevisionRetriever implements ItemRevisionR
 	/**
 	 * @throws StorageException
 	 */
-	public function getItemRevision( ItemId $itemId ): ?ItemRevision {
+	public function getItemRevision( ItemId $itemId ): ItemRevisionResult {
 		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $itemId );
 
 		if ( $entityRevision === null ) {
-			return null;
+			return ItemRevisionResult::itemNotFound();
 		}
 
 		/** @var Item $item */
 		$item = $entityRevision->getEntity();
 		'@phan-var Item $item';
 
-		return new ItemRevision( $item, $entityRevision->getTimestamp(), $entityRevision->getRevisionId() );
+		return ItemRevisionResult::concreteRevision(
+			new ItemRevision( $item, $entityRevision->getTimestamp(), $entityRevision->getRevisionId() )
+		);
 	}
 }

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
+use Wikibase\Repo\RestApi\Domain\Model\ItemRevisionResult;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
@@ -36,11 +37,11 @@ class GetItemTest extends TestCase {
 
 		$retriever = $this->createStub( ItemRevisionRetriever::class );
 		$retriever->method( "getItemRevision" )->willReturn(
-			new ItemRevision(
+			ItemRevisionResult::concreteRevision( new ItemRevision(
 				NewItem::withId( $itemId )->andLabel( "en", $itemLabel )->build(),
 				$lastModifiedTimestamp,
 				$revisionId
-			)
+			) )
 		);
 		$serializer = new ItemSerializer(
 			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
@@ -62,7 +63,8 @@ class GetItemTest extends TestCase {
 		$itemId = "Q123";
 
 		$retriever = $this->createStub( ItemRevisionRetriever::class );
-		$retriever->method( "getItemRevision" )->willReturn( null );
+		$retriever->method( "getItemRevision" )
+			->willReturn( ItemRevisionResult::itemNotFound() );
 		$serializer = new ItemSerializer(
 			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
 		);
@@ -99,14 +101,14 @@ class GetItemTest extends TestCase {
 
 		$retriever = $this->createStub( ItemRevisionRetriever::class );
 		$retriever->method( "getItemRevision" )->willReturn(
-			new ItemRevision(
+			ItemRevisionResult::concreteRevision( new ItemRevision(
 				NewItem::withId( self::ITEM_ID )
 					->andLabel( "en", self::ITEM_LABEL )
 					->andDescription( "en", self::ITEM_DESCRIPTION )
 					->build(),
 				$lastModifiedTimestamp,
 				$revisionId
-			)
+			) )
 		);
 		$serializer = new ItemSerializer(
 			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()

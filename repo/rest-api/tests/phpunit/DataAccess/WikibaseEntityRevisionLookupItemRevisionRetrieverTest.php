@@ -44,7 +44,7 @@ class WikibaseEntityRevisionLookupItemRevisionRetrieverTest extends MediaWikiInt
 
 		$this->assertEquals(
 			new ItemRevision( $item, $lastModified, $revisionId ),
-			$retriever->getItemRevision( $item->getId() )
+			$retriever->getItemRevision( $item->getId() )->getRevision()
 		);
 	}
 }
