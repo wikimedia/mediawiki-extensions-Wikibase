@@ -40,7 +40,7 @@ class GetItemIntegrationTest extends MediaWikiIntegrationTestCase {
 		);
 		$this->assertSame(
 			self::ITEM_LABEL,
-			$itemResponse->getItem()['labels']['en']['value']
+			$itemResponse->getItem()['labels']['en']
 		);
 	}
 
@@ -75,7 +75,7 @@ class GetItemIntegrationTest extends MediaWikiIntegrationTestCase {
 			[ "labels" ],
 			[
 				"labels" => [
-					"en" => [ "language" => "en", "value" => self::ITEM_LABEL ]
+					"en" => self::ITEM_LABEL
 				]
 			]
 		];
@@ -85,7 +85,7 @@ class GetItemIntegrationTest extends MediaWikiIntegrationTestCase {
 			[
 				"type" => "item",
 				"labels" => [
-					"en" => [ "language" => "en", "value" => self::ITEM_LABEL ]
+					"en" => self::ITEM_LABEL
 				]
 			]
 		];
@@ -95,10 +95,10 @@ class GetItemIntegrationTest extends MediaWikiIntegrationTestCase {
 			[
 				"type" => "item",
 				"labels" => [
-					"en" => [ "language" => "en", "value" => self::ITEM_LABEL ]
+					"en" => self::ITEM_LABEL
 				],
 				"descriptions" => [
-					"en" => [ "language" => "en", "value" => self::ITEM_DESCRIPTION ]
+					"en" => self::ITEM_DESCRIPTION
 				],
 			]
 		];
@@ -107,7 +107,7 @@ class GetItemIntegrationTest extends MediaWikiIntegrationTestCase {
 			[ "type", "descriptions" ],
 			[
 				"descriptions" => [
-					"en" => [ "language" => "en", "value" => self::ITEM_DESCRIPTION ]
+					"en" => self::ITEM_DESCRIPTION
 				],
 				"type" => "item",
 			]
