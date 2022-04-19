@@ -3,12 +3,12 @@
 namespace Wikibase\Repo\RestApi\Domain\Services;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
+use Wikibase\Repo\RestApi\Domain\Model\ItemRevisionResult;
 
 /**
  * @license GPL-2.0-or-later
  */
 interface ItemRevisionRetriever {
 
-	public function getItemRevision( ItemId $itemId ): ?ItemRevision;
+	public function getItemRevision( ItemId $itemId ): ItemRevisionResult;
 }

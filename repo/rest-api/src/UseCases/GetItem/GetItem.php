@@ -38,15 +38,16 @@ class GetItem {
 		}
 
 		$itemId = new ItemId( $itemRequest->getItemId() );
-		$itemRevision = $this->itemRetriever->getItemRevision( $itemId );
+		$itemRevisionResult = $this->itemRetriever->getItemRevision( $itemId );
 
-		if ( $itemRevision === null ) {
+		if ( !$itemRevisionResult->itemExists() ) {
 			return new GetItemErrorResponse(
 				ErrorResponse::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$itemRequest->getItemId()}"
 			);
 		}
 
+		$itemRevision = $itemRevisionResult->getRevision();
 		$itemSerialization = $this->itemSerializer->serialize( $itemRevision->getItem() );
 		$fields = $itemRequest->getFields();
 		if ( $fields !== GetItemRequest::VALID_FIELDS ) {
