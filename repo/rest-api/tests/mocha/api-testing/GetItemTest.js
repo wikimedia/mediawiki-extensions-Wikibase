@@ -97,7 +97,7 @@ describe( 'GET /entities/items/{id} ', () => {
 
 		const getItemMetadata = await action.getAnon().action( 'wbgetentities', {
 			ids: testItemId
-		}, 'GET' );
+		} );
 
 		testModified = new Date( getItemMetadata.entities[ testItemId ].modified ).toUTCString();
 		testRevisionId = getItemMetadata.entities[ testItemId ].lastrevid;
