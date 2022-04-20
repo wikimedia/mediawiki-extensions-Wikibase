@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevisionResult;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
@@ -10,6 +11,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRedirectResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
@@ -43,13 +45,12 @@ class GetItemTest extends TestCase {
 				$revisionId
 			) )
 		);
-		$serializer = new ItemSerializer(
-			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
-		);
-		$validator = new GetItemValidator();
-
 		$itemRequest = new GetItemRequest( $itemId );
-		$itemResponse = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
+		$itemResponse = ( new GetItem(
+			$retriever,
+			$this->newItemSerializer(),
+			new GetItemValidator()
+		) )->execute( $itemRequest );
 		$item = $itemResponse->getItem();
 
 		$this->assertInstanceOf( GetItemSuccessResponse::class, $itemResponse );
@@ -65,13 +66,12 @@ class GetItemTest extends TestCase {
 		$retriever = $this->createStub( ItemRevisionRetriever::class );
 		$retriever->method( "getItemRevision" )
 			->willReturn( ItemRevisionResult::itemNotFound() );
-		$serializer = new ItemSerializer(
-			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
-		);
-		$validator = new GetItemValidator();
-
 		$itemRequest = new GetItemRequest( $itemId );
-		$itemResponse = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
+		$itemResponse = ( new GetItem(
+			$retriever,
+			$this->newItemSerializer(),
+			new GetItemValidator()
+		) )->execute( $itemRequest );
 		$this->assertInstanceOf( GetItemErrorResponse::class, $itemResponse );
 		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $itemResponse->getCode() );
 	}
@@ -80,13 +80,12 @@ class GetItemTest extends TestCase {
 		$itemId = "X123";
 
 		$retriever = $this->createStub( ItemRevisionRetriever::class );
-		$serializer = new ItemSerializer(
-			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
-		);
-		$validator = new GetItemValidator();
-
 		$itemRequest = new GetItemRequest( $itemId );
-		$itemResponse = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
+		$itemResponse = ( new GetItem(
+			$retriever,
+			$this->newItemSerializer(),
+			new GetItemValidator()
+		) )->execute( $itemRequest );
 
 		$this->assertInstanceOf( GetItemErrorResponse::class, $itemResponse );
 		$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $itemResponse->getCode() );
@@ -110,13 +109,12 @@ class GetItemTest extends TestCase {
 				$revisionId
 			) )
 		);
-		$serializer = new ItemSerializer(
-			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
-		);
-		$validator = new GetItemValidator();
-
 		$itemRequest = new GetItemRequest( self::ITEM_ID, $fields );
-		$itemResponse = ( new GetItem( $retriever, $serializer, $validator ) )->execute( $itemRequest );
+		$itemResponse = ( new GetItem(
+			$retriever,
+			$this->newItemSerializer(),
+			new GetItemValidator()
+		) )->execute( $itemRequest );
 		$item = $itemResponse->getItem();
 
 		$this->assertInstanceOf( GetItemSuccessResponse::class, $itemResponse );
@@ -170,4 +168,29 @@ class GetItemTest extends TestCase {
 			]
 		];
 	}
+
+	public function testRedirect(): void {
+		$redirectTarget = 'Q321';
+		$request = new GetItemRequest( 'Q123' );
+
+		$revisionRetriever = $this->createStub( ItemRevisionRetriever::class );
+		$revisionRetriever->method( 'getItemRevision' )
+			->willReturn( ItemRevisionResult::redirect( new ItemId( $redirectTarget ) ) );
+
+		$response = ( new GetItem(
+			$revisionRetriever,
+			$this->newItemSerializer(),
+			new GetItemValidator()
+		) )->execute( $request );
+
+		$this->assertInstanceOf( GetItemRedirectResponse::class, $response );
+		$this->assertSame( $redirectTarget, $response->getRedirectTargetId() );
+	}
+
+	private function newItemSerializer(): ItemSerializer {
+		return new ItemSerializer(
+			WikibaseRepo::getBaseDataModelSerializerFactory()->newItemSerializer()
+		);
+	}
+
 }
