@@ -12,6 +12,7 @@ use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRedirectResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
@@ -21,6 +22,8 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class GetItemRouteHandler extends SimpleHandler {
+	private const ID_PATH_PARAM = 'id';
+	private const FIELDS_QUERY_PARAM = '_fields';
 
 	/**
 	 * @var GetItem
@@ -72,34 +75,63 @@ class GetItemRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $id ): Response {
-		$fields = explode( ',', $this->getValidatedParams()['_fields'] );
+		$fields = explode( ',', $this->getValidatedParams()[self::FIELDS_QUERY_PARAM] );
 		$useCaseResponse = $this->getItem->execute( new GetItemRequest( $id, $fields ) );
 
-		$httpResponse = $this->getResponseFactory()->create();
-		$httpResponse->setHeader( 'Content-Type', 'application/json' );
-
 		if ( $useCaseResponse instanceof GetItemSuccessResponse ) {
-
-			// This performs a *precondition* check post use case execution. Maybe needs to be moved into the use case in other scenarios.
-			// A drawback of doing this check here is that we already fetched and serialized a whole Item object.
-			if ( $this->isNotModified( $useCaseResponse->getRevisionId(), $useCaseResponse->getLastModified() ) ) {
-				$notModifiedResponse = $this->getResponseFactory()->createNotModified();
-				$this->setEtagFromRevId( $notModifiedResponse, $useCaseResponse->getRevisionId() );
-				return $notModifiedResponse;
-			}
-
-			$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
-			$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
-			$httpResponse->setBody( new StringStream( $this->successPresenter->getJson( $useCaseResponse ) ) );
+			$httpResponse = $this->newSuccessHttpResponse( $useCaseResponse );
+		} elseif ( $useCaseResponse instanceof GetItemRedirectResponse ) {
+			$httpResponse = $this->newRedirectHttpResponse( $useCaseResponse );
 		} elseif ( $useCaseResponse instanceof GetItemErrorResponse ) {
-			$httpResponse->setHeader( 'Content-Language', 'en' );
-			$httpResponse->setStatus( ErrorResponseToHttpStatus::lookup( $useCaseResponse ) );
-			$httpResponse->setBody( new StringStream( $this->errorPresenter->getJson( $useCaseResponse ) ) );
+			$httpResponse = $this->newErrorHttpResponse( $useCaseResponse );
 		} else {
 			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
 
 		$this->addAuthHeaderIfAuthenticated( $httpResponse );
+
+		return $httpResponse;
+	}
+
+	private function newSuccessHttpResponse( GetItemSuccessResponse $useCaseResponse ): Response {
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setHeader( 'Content-Type', 'application/json' );
+
+		// This performs a *precondition* check post use case execution. Maybe needs to be moved into the use case in other scenarios.
+		// A drawback of doing this check here is that we already fetched and serialized a whole Item object.
+		if ( $this->isNotModified( $useCaseResponse->getRevisionId(), $useCaseResponse->getLastModified() ) ) {
+			$notModifiedResponse = $this->getResponseFactory()->createNotModified();
+			$this->setEtagFromRevId( $notModifiedResponse, $useCaseResponse->getRevisionId() );
+			return $notModifiedResponse;
+		}
+
+		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
+		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
+		$httpResponse->setBody( new StringStream( $this->successPresenter->getJson( $useCaseResponse ) ) );
+
+		return $httpResponse;
+	}
+
+	private function newRedirectHttpResponse( GetItemRedirectResponse $useCaseResponse ): Response {
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setHeader(
+			'Location',
+			$this->getRouteUrl(
+				[ self::ID_PATH_PARAM => $useCaseResponse->getRedirectTargetId() ],
+				$this->getRequest()->getQueryParams()
+			)
+		);
+		$httpResponse->setStatus( 301 );
+
+		return $httpResponse;
+	}
+
+	private function newErrorHttpResponse( GetItemErrorResponse $useCaseResponse ): Response {
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setHeader( 'Content-Type', 'application/json' );
+		$httpResponse->setHeader( 'Content-Language', 'en' );
+		$httpResponse->setStatus( ErrorResponseToHttpStatus::lookup( $useCaseResponse ) );
+		$httpResponse->setBody( new StringStream( $this->errorPresenter->getJson( $useCaseResponse ) ) );
 
 		return $httpResponse;
 	}
@@ -110,12 +142,12 @@ class GetItemRouteHandler extends SimpleHandler {
 
 	public function getParamSettings(): array {
 		return [
-			'id' => [
+			self::ID_PATH_PARAM => [
 				self::PARAM_SOURCE => 'path',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
-			'_fields' => [
+			self::FIELDS_QUERY_PARAM => [
 				self::PARAM_SOURCE => 'query',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
@@ -142,4 +174,5 @@ class GetItemRouteHandler extends SimpleHandler {
 
 		return $headerUtil->checkPreconditions( $this->getRequest() ) === 304;
 	}
+
 }

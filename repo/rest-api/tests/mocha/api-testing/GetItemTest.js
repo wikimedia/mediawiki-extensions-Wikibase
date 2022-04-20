@@ -347,4 +347,41 @@ describe( 'GET /entities/items/{id} ', () => {
 
 	} );
 
+	describe( 'redirects', () => {
+		let redirectSourceId;
+
+		before( async () => {
+			redirectSourceId = ( await createEntity( 'item', {} ) ).entity.id;
+			await action.getAnon().action( 'wbcreateredirect', {
+				from: redirectSourceId,
+				to: testItemId,
+				token: '+\\'
+			}, true );
+		} );
+
+		it( 'responds with a 301 including the redirect target location', async () => {
+			const response = await rest.get( `/entities/items/${redirectSourceId}` );
+
+			assert.equal( response.status, 301 );
+
+			const redirectLocation = new URL( response.headers.location );
+			assert.isTrue( redirectLocation.pathname.endsWith( `${basePath}/entities/items/${testItemId}` ) );
+			assert.empty( redirectLocation.search );
+		} );
+
+		it( 'keeps the original fields param in the Location header', async () => {
+			const queryParams = { _fields: 'labels,statements' };
+			const response = await rest.get( `/entities/items/${redirectSourceId}`, queryParams );
+
+			assert.equal( response.status, 301 );
+
+			const redirectLocation = new URL( response.headers.location );
+			assert.equal(
+				redirectLocation.searchParams.get( '_fields' ),
+				queryParams._fields // eslint-disable-line no-underscore-dangle
+			);
+		} );
+
+	} );
+
 } );
