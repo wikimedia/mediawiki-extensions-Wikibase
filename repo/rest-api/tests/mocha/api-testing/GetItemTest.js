@@ -69,6 +69,16 @@ describe( 'GET /entities/items/{id} ', () => {
 		} );
 	}
 
+	async function newInvalidRequestWithHeader( headers ) {
+		return newInvalidRequest( {
+			endpoint: `/entities/items/${testItemId}`,
+			// eslint-disable-next-line camelcase
+			params: { entity_id: testItemId },
+			query: {},
+			headers
+		} );
+	}
+
 	function assertValid200Response( response ) {
 		assert.equal( response.status, 200 );
 		assert.equal( response.body.id, testItemId );
@@ -182,12 +192,12 @@ describe( 'GET /entities/items/{id} ', () => {
 
 			it( 'if all the provided ETags are not valid revision IDs', async () => {
 				const response = await newValidRequestWithHeader( {
-					'If-None-Match': '"foo", "bar"'
+					'If-None-Match': makeEtag( 'foo', 'bar' )
 				} );
 				assertValid200Response( response );
 			} );
 
-			it( 'if the current revision is newer than any IDs provided (while others are invalid)',
+			it( 'if the current revision is newer than any IDs provided (while others are invalid IDs)',
 				async () => {
 					const response = await newValidRequestWithHeader( {
 						'If-None-Match': makeEtag( 'foo', testRevisionId - 1, 'bar' )
@@ -197,7 +207,7 @@ describe( 'GET /entities/items/{id} ', () => {
 			);
 
 			it( 'if the header is invalid', async () => {
-				const response = await newValidRequestWithHeader( {
+				const response = await newInvalidRequestWithHeader( {
 					'If-None-Match': 'not in spec for a If-None-Match header - 200 response'
 				} );
 				assertValid200Response( response );
@@ -228,7 +238,7 @@ describe( 'GET /entities/items/{id} ', () => {
 				assertValid304Response( response );
 			} );
 
-			it( 'if the current revision ID is the same as one of the IDs provided (while others are invalid)',
+			it( 'if the current revision ID is the same as one of the IDs provided (while others are invalid IDs)',
 				async () => {
 					const response = await newValidRequestWithHeader( {
 						'If-None-Match': makeEtag( 'foo', testRevisionId )
