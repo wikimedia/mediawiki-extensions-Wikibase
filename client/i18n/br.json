@@ -50,6 +50,8 @@
 	"wikibase-rc-show-wikidata-pref": "Diskouez kemmoù {{WBREPONAME}} er c'hemmoù ziwezhañ",
 	"wikibase-rc-wikibase-edit-letter": "R",
 	"wikibase-rc-wikibase-edit-title": "Ur c'hemm gant Wikiroadennoù",
+	"wikibase-rcfilters-hide-wikibase-label": "Kemmoù eus {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Kemmoù a zeu eus {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Notit mat e c'hall padout meur a vunutenn a-raok d'ar c'hemmoù dont war wel war an holl wikioù.",
 	"wikibase-watchlist-show-changes-pref": "Diskouez ar c'hemmoù graet gant {{WBREPONAME}} en ho roll evezhiañ",
 	"wikibase-error-deserialize-error": "N'eus ket bet gallet distiriadenniñ ar roadennoù.",

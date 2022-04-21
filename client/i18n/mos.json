@@ -1,8 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hasslaebetch"
+			"Hasslaebetch",
+			"Abdul Fatawu 352",
+			"Amire80"
 		]
 	},
-	"wikibase-dataitem": "{{WBREPONAME}} item"
+	"wikibase-dataitem": "{{WBREPONAME}} item",
+	"wikibase-editlinks": "Teke tõke",
+	"wikibase-linkitem-addlinks": "Pãasé tõke",
+	"wikibase-linkitem-title": "Tõke lagme nenga",
+	"wikibase-linkitem-linkpage": "Tõke lagme nenga",
+	"wikibase-linkitem-input-site": "Gomde:",
+	"wikibase-linkitem-input-page": "Seb-vão:",
+	"wikibase-rc-hide-wikidata-hide": "Lilli",
+	"wikibase-rc-hide-wikidata-show": "vẽnegre"
 }

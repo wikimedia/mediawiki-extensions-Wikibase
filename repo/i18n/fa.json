@@ -64,7 +64,7 @@
 	"wikibase-label-empty": "نامی تعریف نشده است",
 	"wikibase-label-edit-placeholder": "واردکردن نام",
 	"wikibase-label-edit-placeholder-language-aware": "برچسب را در $1 وارد کنید",
-	"wikibase-description-empty": "توضیحاتی تعریف نشده است.",
+	"wikibase-description-empty": "هیچ توضیحی تعریف نشده است.",
 	"wikibase-description-edit-placeholder": "واردکردن توضیحات",
 	"wikibase-description-edit-placeholder-language-aware": "توصیف را در $1 وارد کنید",
 	"wikibase-aliases-edit-placeholder": "وارد کردن تعدادی نام مستعار",
