@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use MediaWikiIntegrationTestCase;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionRetriever;
@@ -47,4 +49,36 @@ class WikibaseEntityRevisionLookupItemRevisionRetrieverTest extends MediaWikiInt
 			$retriever->getItemRevision( $item->getId() )->getRevision()
 		);
 	}
+
+	public function testGivenItemDoesNotExist_returnsItemNotFound(): void {
+		$nonexistentItem = new ItemId( 'Q321' );
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$entityRevisionLookup->expects( $this->once() )
+			->method( 'getEntityRevision' )
+			->with( $nonexistentItem )
+			->willReturn( null );
+
+		$retriever = new WikibaseEntityRevisionLookupItemRevisionRetriever( $entityRevisionLookup );
+		$result = $retriever->getItemRevision( $nonexistentItem );
+
+		$this->assertFalse( $result->itemExists() );
+	}
+
+	public function testGivenItemIsARedirect_returnsRedirectResult(): void {
+		$redirectedItem = new ItemId( 'Q666' );
+		$redirectTarget = new ItemId( 'Q777' );
+
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$entityRevisionLookup->expects( $this->once() )
+			->method( 'getEntityRevision' )
+			->with( $redirectedItem )
+			->willThrowException( new UnresolvedEntityRedirectException( $redirectedItem, $redirectTarget ) );
+
+		$retriever = new WikibaseEntityRevisionLookupItemRevisionRetriever( $entityRevisionLookup );
+		$result = $retriever->getItemRevision( $redirectedItem );
+
+		$this->assertTrue( $result->isRedirect() );
+		$this->assertSame( $redirectTarget, $result->getRedirectTarget() );
+	}
+
 }
