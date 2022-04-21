@@ -28,7 +28,7 @@ class GetItem {
 	}
 
 	/**
-	 * @return GetItemSuccessResponse|GetItemErrorResponse
+	 * @return GetItemSuccessResponse|GetItemErrorResponse|GetItemRedirectResponse
 	 */
 	public function execute( GetItemRequest $itemRequest ) {
 		$validationError = $this->validator->validate( $itemRequest );
@@ -45,6 +45,8 @@ class GetItem {
 				ErrorResponse::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$itemRequest->getItemId()}"
 			);
+		} elseif ( $itemRevisionResult->isRedirect() ) {
+			return new GetItemRedirectResponse( $itemRevisionResult->getRedirectTarget()->getSerialization() );
 		}
 
 		$itemRevision = $itemRevisionResult->getRevision();
