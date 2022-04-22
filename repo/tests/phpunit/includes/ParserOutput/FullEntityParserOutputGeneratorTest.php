@@ -147,8 +147,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 
 		$parserOutput = $entityParserOutputGenerator->getParserOutput( $entityRevision, false );
 
-		$this->assertTrue( !$parserOutput->hasText() || $parserOutput->getText() === '' );
-		// TODO replace above assertion with $this->assertFalse( $parserOutput->hasText() );
+		$this->assertFalse( $parserOutput->hasText() );
 		// ParserOutput without HTML must not end up in the cache.
 		$this->assertFalse( $parserOutput->isCacheable() );
 	}
