@@ -695,7 +695,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	public function providePageProperties() {
 		yield 'empty' => [
 			$this->newEmptyContent(),
-			[]
+			[ 'wb-claims' => null ]
 		];
 
 		$blankContent = $this->newEntityContent();
@@ -724,11 +724,14 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$title = Title::newFromTextThrow( 'Foo' );
 		$contentRenderer = $this->getServiceContainer()->getContentRenderer();
 		$parserOutput = $contentRenderer->getParserOutput( $content, $title, null, null, false );
-		$this->assertTrue( $parserOutput->hasText() );
 
 		foreach ( $expectedProps as $name => $expected ) {
 			$actual = $parserOutput->getPageProperty( $name );
-			$this->assertSame( (string)$expected, (string)$actual, "page property $name" );
+			if ( $expected === null ) {
+				$this->assertNull( $actual, "page property $name" );
+			} else {
+				$this->assertSame( (string)$expected, (string)$actual, "page property $name" );
+			}
 		}
 	}
 
