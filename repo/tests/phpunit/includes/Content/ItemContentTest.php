@@ -194,32 +194,6 @@ class ItemContentTest extends EntityContentTestCase {
 		];
 	}
 
-	public function providePageProperties() {
-		$cases = parent::providePageProperties();
-
-		$contentLinkStub = $this->newBlank( $this->getDummyId() );
-		$contentLinkStub->getItem()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
-
-		$cases['sitelinks'] = [
-			$contentLinkStub,
-			[ 'wb-claims' => 0, 'wb-sitelinks' => 1 ]
-		];
-
-		// @todo this is needed in PropertyContentTest as well
-		//       once we have statements in properties
-		$contentWithClaim = $this->newBlank( $this->getDummyId() );
-		$snak = new PropertyNoValueSnak( 83 );
-		$guid = '$testing$';
-		$contentWithClaim->getItem()->getStatements()->addNewStatement( $snak, null, null, $guid );
-
-		$cases['claims'] = [
-			$contentWithClaim,
-			[ 'wb-claims' => 1 ]
-		];
-
-		return $cases;
-	}
-
 	/**
 	 * @return EntityContent
 	 */

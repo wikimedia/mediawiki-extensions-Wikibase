@@ -204,6 +204,28 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		return [];
 	}
 
+	public function providePageProperties() {
+		yield from parent::providePageProperties();
+
+		$contentLinkStub = $this->newEntityContent();
+		$contentLinkStub->getItem()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
+
+		yield 'sitelinks' => [
+			$contentLinkStub,
+			[ 'wb-claims' => 0, 'wb-sitelinks' => 1 ]
+		];
+
+		$contentWithClaim = $this->newEntityContent();
+		$snak = new PropertyNoValueSnak( 83 );
+		$guid = '$testing$';
+		$contentWithClaim->getItem()->getStatements()->addNewStatement( $snak, null, null, $guid );
+
+		yield 'claims' => [
+			$contentWithClaim,
+			[ 'wb-claims' => 1 ]
+		];
+	}
+
 	/**
 	 * @return PropertyDataTypeLookup
 	 */
