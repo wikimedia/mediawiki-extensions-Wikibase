@@ -121,7 +121,7 @@ class GetItemRouteHandler extends SimpleHandler {
 				$this->getRequest()->getQueryParams()
 			)
 		);
-		$httpResponse->setStatus( 301 );
+		$httpResponse->setStatus( 308 );
 
 		return $httpResponse;
 	}

@@ -369,10 +369,10 @@ describe( 'GET /entities/items/{id} ', () => {
 			}, true );
 		} );
 
-		it( 'responds with a 301 including the redirect target location', async () => {
+		it( 'responds with a 308 including the redirect target location', async () => {
 			const response = await rest.get( `/entities/items/${redirectSourceId}` );
 
-			assert.equal( response.status, 301 );
+			assert.equal( response.status, 308 );
 
 			const redirectLocation = new URL( response.headers.location );
 			assert.isTrue( redirectLocation.pathname.endsWith( `${basePath}/entities/items/${testItemId}` ) );
@@ -383,7 +383,7 @@ describe( 'GET /entities/items/{id} ', () => {
 			const queryParams = { _fields: 'labels,statements' };
 			const response = await rest.get( `/entities/items/${redirectSourceId}`, queryParams );
 
-			assert.equal( response.status, 301 );
+			assert.equal( response.status, 308 );
 
 			const redirectLocation = new URL( response.headers.location );
 			assert.equal(

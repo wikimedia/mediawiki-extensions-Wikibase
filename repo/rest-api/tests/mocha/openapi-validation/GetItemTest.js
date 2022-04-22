@@ -35,7 +35,7 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '301 Moved Permanently response is valid for a redirected item', async () => {
+	it( '308 Permanent Redirect response is valid for a redirected item', async () => {
 		const redirectSourceId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
 		const redirectTargetId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
 		await action.getAnon().action( 'wbcreateredirect', {
@@ -46,7 +46,7 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 
 		const response = await rest.get( `/entities/items/${redirectSourceId}` );
 
-		expect( response.status ).to.equal( 301 );
+		expect( response.status ).to.equal( 308 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
