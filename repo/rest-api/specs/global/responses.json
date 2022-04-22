@@ -115,5 +115,16 @@
 				"description": "Last entity revision number"
 			}
 		}
+	},
+	"Moved": {
+		"description": "The specified resource has permanently moved to the indicated location",
+		"headers": {
+			"Location": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "The URL to which the requested resource has been moved to"
+			}
+		}
 	}
 }
