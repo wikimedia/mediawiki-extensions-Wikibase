@@ -2,7 +2,7 @@
 
 // allow chai expectations
 /* eslint-disable no-unused-expressions */
-const { REST } = require( 'api-testing' );
+const { REST, action } = require( 'api-testing' );
 const SwaggerParser = require( '@apidevtools/swagger-parser' );
 const entityHelper = require( '../helpers/entityHelper' );
 const chai = require( 'chai' );
@@ -32,6 +32,21 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 		const response = await rest.get( `/entities/items/${createSingleItemResponse.entity.id}` );
 
 		expect( response.status ).to.equal( 200 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
+	it( '301 Moved Permanently response is valid for a redirected item', async () => {
+		const redirectSourceId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+		const redirectTargetId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+		await action.getAnon().action( 'wbcreateredirect', {
+			from: redirectSourceId,
+			to: redirectTargetId,
+			token: '+\\'
+		}, true );
+
+		const response = await rest.get( `/entities/items/${redirectSourceId}` );
+
+		expect( response.status ).to.equal( 301 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -67,4 +82,5 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 		expect( response.status ).to.equal( 404 );
 		expect( response ).to.satisfyApiSpec;
 	} );
+
 } );
