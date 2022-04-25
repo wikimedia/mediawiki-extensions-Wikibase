@@ -36,7 +36,7 @@
 	"wikibase-linkitem-failure": "Ralat di luar jangkaan berlaku apabila cuba memautkan halaman yang diberikan.",
 	"wikibase-linkitem-title": "Pautkan dengan halaman",
 	"wikibase-linkitem-linkpage": "Pautkan dengan halaman",
-	"wikibase-linkitem-selectlink": "Sila pilih tapak dan halaman yang mana ingin anda pautkan halaman ini.",
+	"wikibase-linkitem-selectlink": "Sila pilih tapak dan laman yang anda mahu pautkan laman ini.",
 	"wikibase-linkitem-input-site": "Bahasa:",
 	"wikibase-linkitem-input-page": "Laman:",
 	"wikibase-linkitem-confirmitem-text": "Halaman yang telah anda pilih itu sudah dipautkan dengan satu [$1 perkara di repositori pusat kami]. Sila sahkan bahawa {{PLURAL:$2|halaman|halaman-halaman}} yang ditunjukkan seperti berikut ialah yang ingin anda pautkan dengan halaman ini.",

@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"LesVisages"
 		]
 	},
 	"wikibase-linkitem-input-site": "toki:",
+	"wikibase-linkitem-input-page": "lipu:",
 	"wikibase-sitelinks-sitename-columnheading": "toki"
 }
