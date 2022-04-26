@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Integration\Usage\Sql;
 
 use MediaWiki\MediaWikiServices;
@@ -60,12 +62,12 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 		$this->lookupTester = new UsageLookupContractTester( $this->sqlUsageTracker, [ $this, 'putUsages' ] );
 	}
 
-	public function getUsages( $pageId ) {
+	public function getUsages( int $pageId ): array {
 		$updater = new EntityUsageTable( new ItemIdParser(), $this->db );
 		return $updater->queryUsages( $pageId );
 	}
 
-	public function putUsages( $pageId, array $usages ) {
+	public function putUsages( int $pageId, array $usages ): int {
 		$updater = new EntityUsageTable( new ItemIdParser(), $this->db );
 		return $updater->addUsages( $pageId, $usages );
 	}

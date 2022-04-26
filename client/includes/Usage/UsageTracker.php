@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Usage;
 
 /**
@@ -22,7 +24,7 @@ interface UsageTracker {
 	 *
 	 * @see @ref md_docs_topics_usagetracking for details.
 	 */
-	public function addUsedEntities( $pageId, array $usages );
+	public function addUsedEntities( int $pageId, array $usages ): void;
 
 	/**
 	 * Replaces entity usage information for the given page.
@@ -35,7 +37,7 @@ interface UsageTracker {
 	 *
 	 * @return EntityUsage[] Usages that have been removed
 	 */
-	public function replaceUsedEntities( $pageId, array $usages );
+	public function replaceUsedEntities( int $pageId, array $usages ): array;
 
 	/**
 	 * Removes all usage tracking entries for a given page.
@@ -44,6 +46,6 @@ interface UsageTracker {
 	 *
 	 * @return EntityUsage[] the pruned usages
 	 */
-	public function pruneUsages( $pageId );
+	public function pruneUsages( int $pageId ): array;
 
 }

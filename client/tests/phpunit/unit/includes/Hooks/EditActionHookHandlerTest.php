@@ -114,7 +114,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$entityUsage = $entityId ? [ new EntityUsage( $entityId, 'S' ) ] : null;
+		$entityUsage = $entityId ? [ new EntityUsage( $entityId, 'S' ) ] : [];
 		$sqlUsageTracker->expects( $this->once() )
 			->method( 'getUsagesForPage' )
 			->willReturn( $entityUsage );
@@ -212,6 +212,9 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$title->method( 'getPrefixedText' )
 			->willReturn( 'Cat' );
+
+		$title->method( 'getArticleID' )
+			->willReturn( 1 );
 
 		return $title;
 	}

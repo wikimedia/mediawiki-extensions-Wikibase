@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Usage;
 
 use ArrayIterator;
@@ -21,7 +23,7 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
 	 */
-	public function addUsedEntities( $pageId, array $usages ) {
+	public function addUsedEntities( int $pageId, array $usages ): void {
 		// no-op
 	}
 
@@ -33,7 +35,7 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	 *
 	 * @return EntityUsage[]
 	 */
-	public function replaceUsedEntities( $pageId, array $usages ) {
+	public function replaceUsedEntities( int $pageId, array $usages ): array {
 		return [];
 	}
 
@@ -44,7 +46,7 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	 *
 	 * @return EntityUsage[]
 	 */
-	public function pruneUsages( $pageId ) {
+	public function pruneUsages( int $pageId ): array {
 		return [];
 	}
 
@@ -55,7 +57,7 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	 *
 	 * @return EntityUsage[]
 	 */
-	public function getUsagesForPage( $pageId ) {
+	public function getUsagesForPage( int $pageId ): array {
 		return [];
 	}
 
@@ -66,7 +68,7 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	 *
 	 * @return EntityId[]
 	 */
-	public function getUnusedEntities( array $entityIds ) {
+	public function getUnusedEntities( array $entityIds ): array {
 		return [];
 	}
 
@@ -78,7 +80,7 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	 *
 	 * @return Traversable Always empty.
 	 */
-	public function getPagesUsing( array $entities, array $aspects = [] ) {
+	public function getPagesUsing( array $entities, array $aspects = [] ): Traversable {
 		return new ArrayIterator();
 	}
 

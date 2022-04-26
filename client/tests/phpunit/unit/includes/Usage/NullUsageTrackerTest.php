@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Unit\Usage;
 
 use ArrayIterator;
@@ -19,7 +21,8 @@ class NullUsageTrackerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testAddUsedEntities() {
 		$instance = new NullUsageTracker();
-		$this->assertNull( $instance->addUsedEntities( 0, [] ) );
+		$instance->addUsedEntities( 0, [] );
+		$this->addToAssertionCount( 1 ); // did not throw
 	}
 
 	public function testReplaceUsedEntities() {

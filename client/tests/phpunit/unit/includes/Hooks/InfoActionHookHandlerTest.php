@@ -277,6 +277,9 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$title->method( 'getPrefixedText' )
 			->willReturn( 'Cat' );
 
+		$title->method( 'getArticleID' )
+			->willReturn( 1 );
+
 		$context = new RequestContext();
 		$context->setTitle( $title );
 

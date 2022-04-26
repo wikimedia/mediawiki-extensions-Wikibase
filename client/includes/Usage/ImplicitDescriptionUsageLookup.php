@@ -90,7 +90,7 @@ class ImplicitDescriptionUsageLookup implements UsageLookup {
 		$this->siteLinkLookup = $siteLinkLookup;
 	}
 
-	public function getUsagesForPage( $pageId ): array {
+	public function getUsagesForPage( int $pageId ): array {
 		$usages = $this->usageLookup->getUsagesForPage( $pageId );
 		$title = $this->titleFactory->newFromID( $pageId );
 		if ( !$title ) {

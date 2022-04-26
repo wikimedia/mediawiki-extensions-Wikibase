@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Usage;
 
 use Traversable;
@@ -25,7 +27,7 @@ interface UsageLookup {
 	 *
 	 * @return EntityUsage[] keyed by identity string
 	 */
-	public function getUsagesForPage( $pageId );
+	public function getUsagesForPage( int $pageId ): array;
 
 	/**
 	 * Returns the pages that use any of the given entities.
@@ -37,7 +39,7 @@ interface UsageLookup {
 	 * @return Traversable A traversable over PageEntityUsages of pages using any of the given
 	 *  entities. If $aspects is given, only usages of these aspects are included in the result.
 	 */
-	public function getPagesUsing( array $entityIds, array $aspects = [] );
+	public function getPagesUsing( array $entityIds, array $aspects = [] ): Traversable;
 
 	/**
 	 * Returns the elements of $entityIds that are currently not used as
@@ -49,6 +51,6 @@ interface UsageLookup {
 	 *
 	 * @return EntityId[] A list of elements of $entityIds that are unused.
 	 */
-	public function getUnusedEntities( array $entityIds );
+	public function getUnusedEntities( array $entityIds ): array;
 
 }
