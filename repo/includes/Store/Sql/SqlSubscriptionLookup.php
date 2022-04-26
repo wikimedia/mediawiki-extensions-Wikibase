@@ -39,7 +39,7 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 			return [];
 		}
 
-		$dbr = $this->repoConnections->getReadConnection();
+		$dbr = $this->repoConnections->getReadConnectionRef();
 
 		// NOTE: non-Item ids are ignored, since only items can be subscribed to
 		//       via sitelinks.
@@ -51,8 +51,6 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 		foreach ( $subscribedIds as $id ) {
 			$linkedEntityIds[$id] = $entityIds[$id];
 		}
-
-		$this->repoConnections->releaseConnection( $dbr );
 
 		return $linkedEntityIds;
 	}
@@ -66,7 +64,7 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	 */
 	public function getSubscribers( EntityId $idToCheck ) {
 		$where = [ 'cs_entity_id' => $idToCheck->getSerialization() ];
-		$dbr = $this->repoConnections->getReadConnection();
+		$dbr = $this->repoConnections->getReadConnectionRef();
 
 		$subscriptions = $dbr->selectFieldValues(
 			'wb_changes_subscription',
@@ -74,8 +72,6 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 			$where,
 			__METHOD__
 		);
-
-		$this->repoConnections->releaseConnection( $dbr );
 
 		return $subscriptions;
 	}

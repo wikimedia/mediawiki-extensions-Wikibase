@@ -160,7 +160,7 @@ class BulkSubscriptionUpdater {
 	 * @return string[] A list of entity id strings.
 	 */
 	private function getUpdateBatch( array &$continuation = null ) {
-		$dbr = $this->localConnectionManager->getReadConnection();
+		$dbr = $this->localConnectionManager->getReadConnectionRef();
 
 		if ( empty( $continuation ) ) {
 			$continuationCondition = '1';
@@ -180,7 +180,6 @@ class BulkSubscriptionUpdater {
 			]
 		);
 
-		$this->localConnectionManager->releaseConnection( $dbr );
 		return $this->getEntityIdsFromRows( $res, 'eu_entity_id', $continuation );
 	}
 
@@ -281,7 +280,7 @@ class BulkSubscriptionUpdater {
 	 * @return bool|string[] list( $minId, $maxId, $count ), or false if there is nothing to delete
 	 */
 	private function getDeletionRange( array &$continuation = null ) {
-		$dbr = $this->repoConnectionManager->getReadConnection();
+		$dbr = $this->repoConnectionManager->getReadConnectionRef();
 
 		$conditions = [
 			'cs_subscriber_id' => $this->subscriberWikiId,
@@ -316,7 +315,6 @@ class BulkSubscriptionUpdater {
 			]
 		);
 
-		$this->repoConnectionManager->releaseConnection( $dbr );
 		$subscriptions = $this->getEntityIdsFromRows( $res, 'cs_entity_id', $continuation );
 
 		if ( empty( $subscriptions ) ) {
