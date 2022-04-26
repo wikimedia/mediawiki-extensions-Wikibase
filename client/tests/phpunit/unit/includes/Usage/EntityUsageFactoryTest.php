@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Unit\Usage;
 
 use Exception;
@@ -50,10 +52,8 @@ class EntityUsageFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider newFromIdentityInvalidIdentityProvider
-	 *
-	 * @param string $identity
 	 */
-	public function testNewFromIdentityInvalidIdentity( $identity ) {
+	public function testNewFromIdentityInvalidIdentity( string $identity ) {
 		$factory = new EntityUsageFactory( new BasicEntityIdParser() );
 
 		$this->expectException( Exception::class );

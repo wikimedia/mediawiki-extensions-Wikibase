@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Usage;
 
 use InvalidArgumentException;
@@ -117,7 +119,7 @@ class EntityUsage {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityId $entityId, $aspect, $modifier = null ) {
+	public function __construct( EntityId $entityId, string $aspect, ?string $modifier = null ) {
 		if ( !array_key_exists( $aspect, self::$aspects ) ) {
 			throw new InvalidArgumentException( '$aspect must use one of the XXX_USAGE constants, "' . $aspect . '" given!' );
 		}
@@ -128,48 +130,31 @@ class EntityUsage {
 		$this->identity = $entityId->getSerialization() . '#' . self::makeAspectKey( $aspect, $modifier );
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getAspect() {
+	public function getAspect(): string {
 		return $this->aspect;
 	}
 
-	/**
-	 * @return null|string
-	 */
-	public function getModifier() {
+	public function getModifier(): ?string {
 		return $this->modifier;
 	}
 
 	/**
 	 * Returns the aspect with the modifier applied.
 	 * @see makeAspectKey
-	 *
-	 * @return string
 	 */
-	public function getAspectKey() {
+	public function getAspectKey(): string {
 		return self::makeAspectKey( $this->aspect, $this->modifier );
 	}
 
-	/**
-	 * @return EntityId
-	 */
-	public function getEntityId() {
+	public function getEntityId(): EntityId {
 		return $this->entityId;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getIdentityString() {
+	public function getIdentityString(): string {
 		return $this->identity;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function __toString() {
+	public function __toString(): string {
 		return $this->identity;
 	}
 
@@ -177,7 +162,7 @@ class EntityUsage {
 	 * @return array ( 'entityId' => string $entityId, 'aspect' => string $aspect, 'modifier' => string|null $modifier )
 	 * @phan-return array{entityId:string,aspect:string,modifier:?string}
 	 */
-	public function asArray() {
+	public function asArray(): array {
 		return [
 			'entityId' => $this->entityId->getSerialization(),
 			'aspect' => $this->aspect,
@@ -186,11 +171,9 @@ class EntityUsage {
 	}
 
 	/**
-	 * @param string $aspectKey
-	 *
 	 * @return string One of the EntityUsage::..._USAGE constants with the modifier split off.
 	 */
-	public static function stripModifier( $aspectKey ) {
+	public static function stripModifier( string $aspectKey ): string {
 		// This is about twice as fast compared to calling $this->splitAspectKey.
 		return strstr( $aspectKey, '.', true ) ?: $aspectKey;
 	}
@@ -199,11 +182,9 @@ class EntityUsage {
 	 * Splits the given aspect key into aspect and modifier (if any).
 	 * This is the inverse of makeAspectKey().
 	 *
-	 * @param string $aspectKey
-	 *
 	 * @return string[] list( $aspect, $modifier )
 	 */
-	public static function splitAspectKey( $aspectKey ) {
+	public static function splitAspectKey( string $aspectKey ): array {
 		return array_pad( explode( '.', $aspectKey, 2 ), 2, null );
 	}
 
@@ -211,12 +192,9 @@ class EntityUsage {
 	 * Composes an aspect key from aspect and modifier (if any).
 	 * This is the inverse of splitAspectKey().
 	 *
-	 * @param string $aspect
-	 * @param string|null $modifier
-	 *
 	 * @return string "$aspect.$modifier"
 	 */
-	public static function makeAspectKey( $aspect, $modifier = null ) {
+	public static function makeAspectKey( string $aspect, ?string $modifier = null ): string {
 		if ( $modifier === null ) {
 			return $aspect;
 		}

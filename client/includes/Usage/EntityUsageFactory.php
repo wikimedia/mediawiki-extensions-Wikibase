@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Usage;
 
 use InvalidArgumentException;
@@ -23,12 +25,9 @@ class EntityUsageFactory {
 	}
 
 	/**
-	 * @param string $identity
-	 * @return EntityUsage
-	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function newFromIdentity( $identity ): EntityUsage {
+	public function newFromIdentity( string $identity ): EntityUsage {
 		if ( strpos( $identity, '#' ) === false ) {
 			throw new InvalidArgumentException(
 				'Invalid identity string passed, must be obtained from EntityUsage::getIdentityString.'

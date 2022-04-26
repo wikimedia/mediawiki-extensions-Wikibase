@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Unit\Usage;
 
 use Wikibase\Client\Usage\EntityUsage;
@@ -31,7 +33,7 @@ class EntityUsageTest extends \PHPUnit\Framework\TestCase {
 		$aspect = EntityUsage::ALL_USAGE;
 
 		$usage = new EntityUsage( $id, $aspect );
-		$this->assertEquals( $aspect, $usage->getAspect() );
+		$this->assertSame( $aspect, $usage->getAspect() );
 	}
 
 	public function testGetIdentityString() {
@@ -51,7 +53,7 @@ class EntityUsageTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $aspect, $usage->getAspectKey() );
 
 		$usage = new EntityUsage( $id, $aspect, $modifier );
-		$this->assertEquals( "$aspect.$modifier", $usage->getAspectKey() );
+		$this->assertSame( "$aspect.$modifier", $usage->getAspectKey() );
 	}
 
 	public function testAsArray() {
@@ -66,11 +68,11 @@ class EntityUsageTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		$usage = new EntityUsage( $id, $aspect );
-		$this->assertEquals( $expected, $usage->asArray() );
+		$this->assertSame( $expected, $usage->asArray() );
 
 		$expected['modifier'] = $modifier;
 		$usage = new EntityUsage( $id, $aspect, $modifier );
-		$this->assertEquals( $expected, $usage->asArray() );
+		$this->assertSame( $expected, $usage->asArray() );
 	}
 
 	public function aspectKeyProvider() {
@@ -84,17 +86,17 @@ class EntityUsageTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider aspectKeyProvider
 	 */
-	public function testStripModifier( $aspectKey, array $expectedParts ) {
+	public function testStripModifier( string $aspectKey, array $expectedParts ) {
 		$aspect = EntityUsage::stripModifier( $aspectKey );
-		$this->assertEquals( $expectedParts[0], $aspect );
+		$this->assertSame( $expectedParts[0], $aspect );
 	}
 
 	/**
 	 * @dataProvider aspectKeyProvider
 	 */
-	public function testSplitAspectKey( $aspectKey, array $expectedParts ) {
+	public function testSplitAspectKey( string $aspectKey, array $expectedParts ) {
 		$parts = EntityUsage::splitAspectKey( $aspectKey );
-		$this->assertEquals( $expectedParts, $parts );
+		$this->assertSame( $expectedParts, $parts );
 	}
 
 	public function provideMakeAspectKey() {
@@ -107,9 +109,9 @@ class EntityUsageTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideMakeAspectKey
 	 */
-	public function testMakeAspectKey( $aspect, $modifier, $expectedKey ) {
+	public function testMakeAspectKey( string $aspect, ?string $modifier, string $expectedKey ) {
 		$key = EntityUsage::makeAspectKey( $aspect, $modifier );
-		$this->assertEquals( $expectedKey, $key );
+		$this->assertSame( $expectedKey, $key );
 	}
 
 }
