@@ -7,8 +7,14 @@
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} item",
+	"wikibase-editlinks": "Teke tõke",
+	"wikibase-linkitem-addlinks": "Pãasé tõke",
+	"wikibase-linkitem-title": "Tõke lagme nenga",
+	"wikibase-linkitem-linkpage": "Tõke lagme nenga",
+	"wikibase-linkitem-selectlink": "Boose yãke zĩiga ni nenga fo data tonge",
 	"wikibase-linkitem-input-site": "Gomde:",
 	"wikibase-linkitem-input-page": "Seb-vão:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Lilli",
 	"wikibase-rc-hide-wikidata-show": "vẽnegre"
 }

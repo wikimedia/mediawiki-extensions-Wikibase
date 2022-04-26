@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"RebecaRwanda"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} ikintu",
+	"wikibase-editlinks": "hindura Imbuga",
+	"wikibase-linkitem-addlinks": "Shiraho imbuga",
+	"wikibase-linkitem-title": "Urubuga hamwe n'urupapuro",
+	"wikibase-linkitem-linkpage": "Urubuga hamwe n'urupapuro",
+	"wikibase-linkitem-selectlink": "Hitamo urubuga hamwe n'urupapuro ushaka kujanisha n'uru rupapuro.",
+	"wikibase-linkitem-input-site": "Ururimi:",
+	"wikibase-linkitem-input-page": "Urupapuro:"
+}
