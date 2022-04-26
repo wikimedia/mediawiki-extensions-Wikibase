@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Integration\Usage\Sql;
 
 use MediaWiki\MediaWikiServices;
@@ -34,10 +36,7 @@ class SqlSubscriptionManagerTest extends MediaWikiIntegrationTestCase {
 		parent::setUp();
 	}
 
-	/**
-	 * @return SqlSubscriptionManager
-	 */
-	private function getSubscriptionManager() {
+	private function getSubscriptionManager(): SqlSubscriptionManager {
 		return new SqlSubscriptionManager(
 			new SessionConsistentConnectionManager(
 				MediaWikiServices::getInstance()->getDBLoadBalancer()
@@ -79,7 +78,7 @@ class SqlSubscriptionManagerTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function fetchAllSubscriptions() {
+	private function fetchAllSubscriptions(): array {
 		$res = $this->db->select( 'wb_changes_subscription', "*", '', __METHOD__ );
 
 		$subscriptions = [];

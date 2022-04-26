@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Usage;
 
 use Wikibase\DataModel\Entity\EntityId;
@@ -21,7 +23,7 @@ interface SubscriptionManager {
 	 * @param string $subscriber Global site ID of the subscriber
 	 * @param EntityId[] $entityIds The entities to subscribe to.
 	 */
-	public function subscribe( $subscriber, array $entityIds );
+	public function subscribe( string $subscriber, array $entityIds ): void;
 
 	/**
 	 * Unsubscribes the given subscriber from notifications about changes on the specified entities.
@@ -29,6 +31,6 @@ interface SubscriptionManager {
 	 * @param string $subscriber Global site ID of the subscriber
 	 * @param EntityId[] $entityIds The entities to subscribe to.
 	 */
-	public function unsubscribe( $subscriber, array $entityIds );
+	public function unsubscribe( string $subscriber, array $entityIds ): void;
 
 }

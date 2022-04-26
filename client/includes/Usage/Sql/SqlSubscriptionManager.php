@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Usage\Sql;
 
 use Exception;
@@ -33,7 +35,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 *
 	 * @return string[]
 	 */
-	private function idsToString( array $entityIds ) {
+	private function idsToString( array $entityIds ): array {
 		return array_map( function( EntityId $id ) {
 			return $id->getSerialization();
 		}, $entityIds );
@@ -48,11 +50,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 * @throws InvalidArgumentException
 	 * @throws Exception
 	 */
-	public function subscribe( $subscriber, array $entityIds ) {
-		if ( !is_string( $subscriber ) ) {
-			throw new InvalidArgumentException( '$subscriber must be a string.' );
-		}
-
+	public function subscribe( string $subscriber, array $entityIds ): void {
 		$subscriptions = $this->idsToString( $entityIds );
 		$dbw = $this->connectionManager->getWriteConnectionRef();
 		$dbw->startAtomic( __METHOD__ );
@@ -71,11 +69,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 * @throws InvalidArgumentException
 	 * @throws Exception
 	 */
-	public function unsubscribe( $subscriber, array $entityIds ) {
-		if ( !is_string( $subscriber ) ) {
-			throw new InvalidArgumentException( '$subscriber must be a string.' );
-		}
-
+	public function unsubscribe( string $subscriber, array $entityIds ): void {
 		$unsubscriptions = $this->idsToString( $entityIds );
 		$dbw = $this->connectionManager->getWriteConnectionRef();
 		$dbw->startAtomic( __METHOD__ );
@@ -94,7 +88,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 *
 	 * @return string[] Entity ID strings from $subscriptions which $subscriber is already subscribed to.
 	 */
-	private function querySubscriptions( IDatabase $db, $subscriber, array $subscriptions ) {
+	private function querySubscriptions( IDatabase $db, string $subscriber, array $subscriptions ): array {
 		if ( $subscriptions ) {
 			$subscriptions = $db->selectFieldValues(
 				'wb_changes_subscription',
@@ -117,7 +111,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 * @param string $subscriber
 	 * @param string[] $subscriptions
 	 */
-	private function insertSubscriptions( IDatabase $db, $subscriber, array $subscriptions ) {
+	private function insertSubscriptions( IDatabase $db, string $subscriber, array $subscriptions ): void {
 		$rows = $this->makeSubscriptionRows( $subscriber, $subscriptions );
 
 		$db->insert(
@@ -135,7 +129,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 * @param string $subscriber
 	 * @param string[] $subscriptions
 	 */
-	private function deleteSubscriptions( IDatabase $db, $subscriber, array $subscriptions ) {
+	private function deleteSubscriptions( IDatabase $db, string $subscriber, array $subscriptions ): void {
 		if ( $subscriptions ) {
 			$db->delete(
 				'wb_changes_subscription',
@@ -157,7 +151,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 *
 	 * @return array[] rows
 	 */
-	private function makeSubscriptionRows( $subscriber, array $subscriptions ) {
+	private function makeSubscriptionRows( string $subscriber, array $subscriptions ): array {
 		$rows = [];
 
 		foreach ( $subscriptions as $entityId ) {
