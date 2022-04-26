@@ -158,7 +158,7 @@ class InjectRCRecordsJobTest extends TestCase {
 		$dbWrite = $dbWrite ?: $this->createMock( IDatabase::class );
 
 		$connectionManager = $this->createMock( ConnectionManager::class );
-		$connectionManager->method( 'getWriteConnection' )->willReturn( $dbWrite );
+		$connectionManager->method( 'getWriteConnectionRef' )->willReturn( $dbWrite );
 		$mock = $this->createMock( ClientDomainDb::class );
 		$mock->method( 'connections' )->willReturn( $connectionManager );
 

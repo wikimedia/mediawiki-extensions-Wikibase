@@ -113,20 +113,18 @@ class EntityUsageTableBuilder {
 		$this->domainDb->replication()->wait();
 
 		$connections = $this->domainDb->connections();
-		$db = $connections->getWriteConnection();
+		$dbw = $connections->getWriteConnectionRef();
 
-		$entityPerPage = $this->getUsageBatch( $db, $fromPageId );
+		$entityPerPage = $this->getUsageBatch( $dbw, $fromPageId );
 
 		if ( empty( $entityPerPage ) ) {
 			return 0;
 		}
 
-		$count = $this->insertUsageBatch( $db, $entityPerPage );
+		$count = $this->insertUsageBatch( $dbw, $entityPerPage );
 
 		// Update $fromPageId to become the first page ID of the next batch.
 		$fromPageId = max( array_keys( $entityPerPage ) ) + 1;
-
-		$connections->releaseConnection( $db );
 
 		return $count;
 	}
@@ -136,12 +134,12 @@ class EntityUsageTableBuilder {
 	 *
 	 * @return int The number of rows inserted.
 	 */
-	private function insertUsageBatch( IDatabase $db, array $entityPerPage ): int {
-		$db->startAtomic( __METHOD__ );
+	private function insertUsageBatch( IDatabase $dbw, array $entityPerPage ): int {
+		$dbw->startAtomic( __METHOD__ );
 
 		$c = 0;
 		foreach ( $entityPerPage as $pageId => $entityId ) {
-			$db->insert(
+			$dbw->insert(
 				$this->usageTableName,
 				[
 					'eu_page_id' => (int)$pageId,
@@ -157,7 +155,7 @@ class EntityUsageTableBuilder {
 			$c++;
 		}
 
-		$db->endAtomic( __METHOD__ );
+		$dbw->endAtomic( __METHOD__ );
 		return $c;
 	}
 

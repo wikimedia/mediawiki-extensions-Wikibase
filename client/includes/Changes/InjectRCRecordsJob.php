@@ -258,7 +258,7 @@ class InjectRCRecordsJob extends Job {
 
 		$rcAttribs = $this->rcFactory->prepareChangeAttributes( $change );
 
-		$dbw = $this->db->connections()->getWriteConnection();
+		$dbw = $this->db->connections()->getWriteConnectionRef();
 
 		$dbw->startAtomic( __METHOD__ );
 
@@ -294,8 +294,6 @@ class InjectRCRecordsJob extends Job {
 		$dbw->endAtomic( __METHOD__ );
 		$this->incrementStats( 'InjectRCRecords.run.titles', count( $titles ) );
 		$this->recordDelay( $change->getAge() );
-
-		$this->db->connections()->releaseConnection( $dbw );
 
 		return true;
 	}

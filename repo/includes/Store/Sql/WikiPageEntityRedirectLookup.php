@@ -57,7 +57,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 		}
 
 		try {
-			$dbr = $this->repoDb->connections()->getReadConnection();
+			$dbr = $this->repoDb->connections()->getReadConnectionRef();
 		} catch ( MWException $ex ) {
 			throw new EntityRedirectLookupException( $targetId, null, $ex );
 		}
@@ -79,12 +79,6 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 				'redirect' => [ 'JOIN', 'rd_from=page_id' ],
 			]
 		);
-
-		try {
-			$this->repoDb->connections()->releaseConnection( $dbr );
-		} catch ( MWException $ex ) {
-			throw new EntityRedirectLookupException( $targetId, null, $ex );
-		}
 
 		if ( !$res ) {
 			return [];
@@ -120,9 +114,9 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 
 		try {
 			if ( $forUpdate === EntityRedirectLookup::FOR_UPDATE ) {
-				$db = $this->repoDb->connections()->getWriteConnection();
+				$db = $this->repoDb->connections()->getWriteConnectionRef();
 			} else {
-				$db = $this->repoDb->connections()->getReadConnection();
+				$db = $this->repoDb->connections()->getReadConnectionRef();
 			}
 		} catch ( MWException $ex ) {
 			throw new EntityRedirectLookupException( $entityId, null, $ex );
@@ -141,12 +135,6 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 				'redirect' => [ 'LEFT JOIN', 'rd_from=page_id' ]
 			]
 		);
-
-		try {
-			$this->repoDb->connections()->releaseConnection( $db );
-		} catch ( MWException $ex ) {
-			throw new EntityRedirectLookupException( $entityId, null, $ex );
-		}
 
 		if ( !$row ) {
 			throw new EntityRedirectLookupException( $entityId );

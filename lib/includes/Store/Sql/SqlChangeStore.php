@@ -55,7 +55,7 @@ class SqlChangeStore implements ChangeStore {
 	private function updateChange( ChangeRow $change ) {
 		$values = $this->getValues( $change );
 
-		$dbw = $this->repoDomainDb->connections()->getWriteConnection();
+		$dbw = $this->repoDomainDb->connections()->getWriteConnectionRef();
 
 		$dbw->update(
 			'wb_changes',
@@ -63,19 +63,15 @@ class SqlChangeStore implements ChangeStore {
 			[ 'change_id' => $change->getId() ],
 			__METHOD__
 		);
-
-		$this->repoDomainDb->connections()->releaseConnection( $dbw );
 	}
 
 	private function insertChange( ChangeRow $change ) {
 		$values = $this->getValues( $change );
 
-		$dbw = $this->repoDomainDb->connections()->getWriteConnection();
+		$dbw = $this->repoDomainDb->connections()->getWriteConnectionRef();
 
 		$dbw->insert( 'wb_changes', $values, __METHOD__ );
 		$change->setField( ChangeRow::ID, $dbw->insertId() );
-
-		$this->repoDomainDb->connections()->releaseConnection( $dbw );
 	}
 
 	/**

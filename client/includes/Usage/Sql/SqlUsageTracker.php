@@ -166,7 +166,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
 		// transaction to prevent long lock retention during big updates.
-		$db = $this->connectionManager->getWriteConnection();
+		$db = $this->connectionManager->getWriteConnectionRef();
 		$usageTable = $this->newUsageTable( $db );
 		// queryUsages guarantees this to be identity string => EntityUsage
 		$oldUsages = $usageTable->queryUsages( $pageId );
@@ -177,7 +177,6 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		// Actually add the new entries
 		$usageTable->addUsages( $pageId, $added );
-		$this->connectionManager->releaseConnection( $db );
 	}
 
 	/**
@@ -197,7 +196,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
 		// transaction to prevent long lock retention during big updates.
-		$db = $this->connectionManager->getWriteConnection();
+		$db = $this->connectionManager->getWriteConnectionRef();
 		$usageTable = $this->newUsageTable( $db );
 		// queryUsages guarantees this to be identity string => EntityUsage
 		$oldUsages = $usageTable->queryUsages( $pageId );
@@ -210,7 +209,6 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		$usageTable->removeUsages( $pageId, $removed );
 		$usageTable->addUsages( $pageId, $added );
-		$this->connectionManager->releaseConnection( $db );
 		return $removed;
 	}
 
@@ -224,11 +222,10 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	public function pruneUsages( $pageId ) {
 		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
 		// transaction to prevent long lock retention during big updates.
-		$db = $this->connectionManager->getWriteConnection();
+		$db = $this->connectionManager->getWriteConnectionRef();
 		$usageTable = $this->newUsageTable( $db );
 		$pruned = $usageTable->pruneUsages( $pageId );
 
-		$this->connectionManager->releaseConnection( $db );
 		return $pruned;
 	}
 
@@ -240,12 +237,10 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return EntityUsage[] EntityUsage identity string => EntityUsage
 	 */
 	public function getUsagesForPage( $pageId ) {
-		$db = $this->connectionManager->getReadConnection();
+		$db = $this->connectionManager->getReadConnectionRef();
 
 		$usageTable = $this->newUsageTable( $db );
 		$usages = $usageTable->queryUsages( $pageId );
-
-		$this->connectionManager->releaseConnection( $db );
 
 		return $usages;
 	}
@@ -263,12 +258,10 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			return new ArrayIterator();
 		}
 
-		$db = $this->connectionManager->getReadConnection();
+		$db = $this->connectionManager->getReadConnectionRef();
 
 		$usageTable = $this->newUsageTable( $db );
 		$pages = $usageTable->getPagesUsing( $entityIds, $aspects );
-
-		$this->connectionManager->releaseConnection( $db );
 
 		return $pages;
 	}
@@ -285,12 +278,10 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			return [];
 		}
 
-		$db = $this->connectionManager->getReadConnection();
+		$db = $this->connectionManager->getReadConnectionRef();
 
 		$usageTable = $this->newUsageTable( $db );
 		$unused = $usageTable->getUnusedEntities( $entityIds );
-
-		$this->connectionManager->releaseConnection( $db );
 
 		return $unused;
 	}
