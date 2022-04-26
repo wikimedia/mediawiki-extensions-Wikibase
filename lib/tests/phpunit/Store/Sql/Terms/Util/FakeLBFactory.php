@@ -12,13 +12,13 @@ use Wikimedia\Rdbms\LBFactory;
  */
 class FakeLBFactory extends LBFactory {
 
-	/** @var ILoadBalancer */
+	/** @var ILoadBalancerForOwner */
 	private $lb;
 
 	private const LOCAL_DOMAIN_ID = 'local-domain-id';
 
 	/**
-	 * @param array $params should contain 'lb' ILoadBalancer instance
+	 * @param array $params should contain 'lb' ILoadBalancerForOwner instance
 	 */
 	public function __construct( array $params ) {
 		// no parent constructor call, we only use the LBFactory class so we don’t have to
