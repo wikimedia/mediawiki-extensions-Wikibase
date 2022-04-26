@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ladsgroup",
+			"Pacha Tchernof",
 			"פוילישער",
 			"පසිඳු කාවින්ද"
 		]
@@ -235,5 +236,6 @@
 	"right-property-term": "ענדערן טערמינען פון אן אייגנשאפֿט (באצייכענונגען, באשרייבונגען, אליאסן)",
 	"action-property-create": "שאַפן אייגנשאַפֿטן",
 	"right-property-create": "שאַפן אייגנשאַפֿטן",
-	"wikibase-pageinfo-subscription-none": "קיין"
+	"wikibase-pageinfo-subscription-none": "קיין",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "אַנולירן"
 }

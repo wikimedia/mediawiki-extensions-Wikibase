@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Pacha Tchernof",
 			"פוילישער"
 		]
 	},
@@ -20,15 +21,15 @@
 	"wikibase-comment-sitelink-remove": "שפראך לינק אראפגענומען: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|ענדערונג|ענדערונגען}}",
 	"wikibase-dataitem": "{{WBREPONAME}}־אביעקט",
-	"wikibase-editlinks": "רעדאקטירן לינקען",
+	"wikibase-editlinks": "רעדאַקטירן לינקען",
 	"wikibase-editlinkstitle": "רעדאקטירן אינטערשפראך לינקען",
 	"wikibase-addlinkstitle": "צולייגן אינטערשפראך לינקען",
 	"wikibase-linkitem-addlinks": "צולייגן לינקען",
 	"wikibase-linkitem-alreadylinked": "דער בלאט מיט וואס איר ווילט פארלינקען איז שוין צוגעבונדן צו אן [$1 אביעקט] אויפן צענטראלן רעפאזיטאריום וואס פארלינקט מיט [[$2]] אויף דעם וועבזייטל. אן אביעקט קען נאר זיין צוגעבונדן צו איין בלאט אויף א געוויסן וועבזייטל. זייט אזוי גוט קלויבט אויס אן אנדער בלאט צו פארלינקען.",
 	"wikibase-linkitem-close": "צומאכן דיאלאג און ווידערלאדן בלאט",
 	"wikibase-linkitem-failure": "אן אומבאוואוסטער גרייז האט פאסירט ווען מ'האט פראבירט פארלינקען מיט יענעם בלאט.",
-	"wikibase-linkitem-title": "פארלינקען מיט בלאט",
-	"wikibase-linkitem-linkpage": "פארלינקען מיט בלאט",
+	"wikibase-linkitem-title": "פֿארלינקען מיט בלאט",
+	"wikibase-linkitem-linkpage": "פֿאַרלינקען מיט בלאַט",
 	"wikibase-linkitem-selectlink": "זייט אזוי גוט קלויבט אויס אן וועבזייטל און א בלאט וואס איר ווילט פארלינקען מיטן דאזיקן בלאט.",
 	"wikibase-linkitem-input-site": "שפּראַך:",
 	"wikibase-linkitem-input-page": "בלאַט:",
