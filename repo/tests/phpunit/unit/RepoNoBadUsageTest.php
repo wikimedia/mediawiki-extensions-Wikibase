@@ -28,9 +28,10 @@ class RepoNoBadUsageTest extends NoBadUsageTest {
 				'tests/phpunit/includes/GlobalStateFactoryMethodsResourceTest.php' => 1, // mock
 				'tests/phpunit/unit/ServiceWiringTestCase.php' => true, // mock
 			],
-			'/\b((get)?(DB)?|I|)LoadBalancer(Factory)?(?!::|;|[a-zA-Z])/' => [
+			'/\b((get)?(DB)?|I|)LoadBalancer(Factory)?(?!::|;)/' => [
 				'WikibaseRepo.ServiceWiring.php' => 1, // RepoDomainDbFactory service wiring
 				'tests/phpunit/includes/GlobalStateFactoryMethodsResourceTest.php' => 1, // mock
+				'tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php' => true, // mock
 				'tests/phpunit/unit/ServiceWiringTestCase.php' => true, // mock
 			],
 			'wfGetDB' => [],
