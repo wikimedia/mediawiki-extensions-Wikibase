@@ -25,7 +25,7 @@
 	"apihelp-query+wblistentityusage-param-limit": "چه تعداد کاربردهای هستار بر گردانده شود.",
 	"apihelp-query+wblistentityusage-example-simple": "دریافت صفحه‌هایی که هستار <kbd>Q2</kbd> را استفاده می‌کنند.",
 	"apihelp-query+wblistentityusage-example-url": "دریافت صفحه‌هایی که هستار <kbd>Q2</kbd> را با URL گنجانده‌شده استفاده می‌کنند.",
-	"apihelp-query+pageterms-description": "دریافت اصطلاحات {{WBREPONAME}} (به‌طور معمول برچسب‌ها، توضیحات و نام‌ها مستعار) متصل‌شده توسط یک صفحه با یک پیوند پایگاه.",
+	"apihelp-query+pageterms-description": "دریافت اصطلاحات {{WBREPONAME}} (به‌طور معمول برچسب‌ها، توضیحات و نام‌ها مستعار) متصل‌شده توسط یک صفحه با یک پیوند وبگاه.",
 	"apihelp-query+pageterms-example-simple": "دریافت همهٔ آیتم‌های پیوسته‌شده با صفحهٔ 'London'ُ ، به زبان کاربر",
 	"apihelp-query+pageterms-example-label-en": "دریافت برچسب‌ها و نام‌های مستعار پیوسته‌شده با صفحه 'London'، به انگلیسی",
 	"apihelp-query+pageterms-param-terms": "نوع اصطلاح‌ها برای دریافت مثل 'description'، هر کدام به صورت یک آرایه از رشته‌های کلیددار شده‌ توسط نوع‌شان مثل {\"description\": [\"foo\"]} برگردانده می‌شود. اگر مشخص نشده باشد همهٔ نوع‌ها را برمی‌گرداند.",

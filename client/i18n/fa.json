@@ -96,7 +96,7 @@
 	"wikibase-pageinfo-description-local": "توضیح محلی",
 	"wikibase-pageinfo-description-central": "توضیحات مرکزی",
 	"wikibase-pageinfo-entity-usage": "هستارهای {{WBREPONAME}} استفاده شده در این صفحه",
-	"wikibase-pageinfo-entity-usage-S": "پیوند پایگاه",
+	"wikibase-pageinfo-entity-usage-S": "پیوند وبگاه",
 	"wikibase-pageinfo-entity-usage-L": "چندتا برچسب",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "برچسب: $1",
 	"wikibase-pageinfo-entity-usage-D": "چندتا توضیحات",
