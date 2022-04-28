@@ -124,7 +124,7 @@
 	"wikibase-snakview-snaktypeselector-value": "atur nilai",
 	"wikibase-snakformat-invalid-value": "Nilai tidak sahih.",
 	"wikibase-snakformat-propertynotfound": "Atribut tidak ditemukan",
-	"wikibase-shortcopyrightwarning": "Dengan mengeklik \"$1\", Anda menyetujui [[$2|ketentuan layanan]], dan Anda sepakat untuk melepas sumbangan Anda di bawah [$3 $4] tanpa bisa ditarik kembali.",
+	"wikibase-shortcopyrightwarning": "Dengan menekan \"$1\", Anda menyetujui [[$2|ketentuan layanan]], dan Anda sepakat untuk melepas sumbangan Anda di bawah [$3 $4] tanpa bisa ditarik kembali.",
 	"wikibase-shortcopyrightwarning-accept-persist": "Saya menerima syarat ini untuk suntingan selanjutnya. Jangan tampilkan lagi pesan ini.",
 	"wikibase-copyrighttooltip-acknowledge": "Saya menerima syarat ini untuk suntingan selanjutnya. Jangan tampilkan lagi pesan ini.",
 	"wikibase-entityselector-more": "kembangkan",
