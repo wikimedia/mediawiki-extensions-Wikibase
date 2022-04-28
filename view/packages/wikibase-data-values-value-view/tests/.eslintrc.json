@@ -5,5 +5,8 @@
 	],
 	"globals": {
 		"sinon": false
+	},
+	"rules": {
+		"qunit/no-loose-assertions": "warn"
 	}
 }

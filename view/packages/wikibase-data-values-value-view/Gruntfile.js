@@ -7,12 +7,13 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-karma' );
 
 	grunt.initConfig( {
-		eslint: {
-			options: {
-				cache: true
-			},
-			all: '.'
-		},
+                eslint: {
+                        options: {
+                                fix: grunt.option( 'fix' ),
+                                cache: true
+                        },
+                        all: '.'
+                },
 		banana: {
 			options: {
 				requireCompleteMessageDocumentation: false,
