@@ -70,4 +70,7 @@ class FakeLBFactory extends LBFactory {
 		// no-op
 	}
 
+	protected function getLBsForOwner() {
+		yield $this->lb;
+	}
 }
