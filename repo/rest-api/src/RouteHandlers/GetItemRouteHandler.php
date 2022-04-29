@@ -16,6 +16,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRedirectResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -63,7 +64,7 @@ class GetItemRouteHandler extends SimpleHandler {
 			WbRestApi::getGetItem(),
 			new GetItemJsonPresenter(),
 			$errorPresenter,
-			new UnexpectedErrorHandler( $errorPresenter )
+			new UnexpectedErrorHandler( $errorPresenter, WikibaseRepo::getLogger() )
 		);
 	}
 
