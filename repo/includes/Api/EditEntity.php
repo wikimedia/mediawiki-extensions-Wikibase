@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -41,11 +40,6 @@ class EditEntity extends ModifyEntity {
 	public const PARAM_DATA = 'data';
 
 	public const PARAM_CLEAR = 'clear';
-
-	/**
-	 * @var ContentLanguages
-	 */
-	private $termsLanguages;
 
 	/**
 	 * @var EntityRevisionLookup
@@ -80,7 +74,6 @@ class EditEntity extends ModifyEntity {
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
-		ContentLanguages $termsLanguages,
 		EntityRevisionLookup $revisionLookup,
 		EntityIdParser $idParser,
 		array $propertyDataTypes,
@@ -91,7 +84,6 @@ class EditEntity extends ModifyEntity {
 	) {
 		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 
-		$this->termsLanguages = $termsLanguages;
 		$this->revisionLookup = $revisionLookup;
 		$this->idParser = $idParser;
 		$this->propertyDataTypes = $propertyDataTypes;
@@ -108,13 +100,11 @@ class EditEntity extends ModifyEntity {
 		EntityChangeOpProvider $entityChangeOpProvider,
 		EntityIdParser $entityIdParser,
 		SettingsArray $settings,
-		Store $store,
-		ContentLanguages $termsLanguages
+		Store $store
 	): self {
 		return new self(
 			$mainModule,
 			$moduleName,
-			$termsLanguages,
 			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$entityIdParser,
 			$dataTypeDefinitions->getTypeIds(),

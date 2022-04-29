@@ -37,8 +37,7 @@
 				"WikibaseRepo.EntityChangeOpProvider",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.Settings",
-				"WikibaseRepo.Store",
-				"WikibaseRepo.TermsLanguages"
+				"WikibaseRepo.Store"
 			]
 		},
 		"wbcreateredirect": {
