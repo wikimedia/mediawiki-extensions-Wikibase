@@ -267,7 +267,7 @@ class RemoveQualifiers extends ApiBase {
 
 		return [
 			'action=wbremovequalifiers&claim=' . $guid
-				. '&references=' . $hash . '&token=foobar'
+				. '&qualifiers=' . $hash . '&token=foobar'
 				. '&baserevid=7201010'
 				=> [ 'apihelp-wbremovequalifiers-example-1', $hash, $guid ],
 		];
