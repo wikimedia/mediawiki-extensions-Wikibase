@@ -26,10 +26,10 @@ class EntityTypeDefinitionsIntegrationTest extends MediaWikiIntegrationTestCase 
 		$this->checkExpectedDefinitionsInPlace( $unalteredEntityTypes, $entityTypeDefinitions );
 	}
 
-	private function checkExpectedDefinitionsInPlace( $expectedDefinitions, $actualDefintions ) {
+	private function checkExpectedDefinitionsInPlace( $expectedDefinitions, $actualDefinitions ) {
 		foreach ( array_keys( $expectedDefinitions ) as $entityType ) {
 			foreach ( array_keys( $expectedDefinitions[$entityType] ) as $definitionsName ) {
-				$callbackDefinition = $actualDefintions->get( $definitionsName );
+				$callbackDefinition = $actualDefinitions->get( $definitionsName );
 				$this->assertEquals(
 					$expectedDefinitions[$entityType][$definitionsName],
 					$callbackDefinition[$entityType]
