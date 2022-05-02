@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace Wikibase\Lib\Tests\Store;
 
@@ -130,19 +130,9 @@ class LatestRevisionIdResultTest extends TestCase {
 			->map();
 	}
 
-	public function testConcreteRevision_NotAnIntegerRevisionId_ThrowsAnException() {
-		$this->expectException( \Exception::class );
-		LatestRevisionIdResult::concreteRevision( '1' );
-	}
-
 	public function testConcreteRevision_ZeroRevisionId_ThrowsAnException() {
 		$this->expectException( \Exception::class );
 		LatestRevisionIdResult::concreteRevision( 0 );
-	}
-
-	public function testRedirect_NotAnIntegerRevisionId_ThrowsAnException() {
-		$this->expectException( \Exception::class );
-		LatestRevisionIdResult::redirect( '1', $this->someEntityId() );
 	}
 
 	public function testRedirect_ZeroRevisionId_ThrowsAnException() {
@@ -150,10 +140,7 @@ class LatestRevisionIdResultTest extends TestCase {
 		LatestRevisionIdResult::redirect( 0, $this->someEntityId() );
 	}
 
-	/**
-	 * @return EntityId
-	 */
-	protected function someEntityId() {
+	protected function someEntityId(): EntityId {
 		return $this->createMock( EntityId::class );
 	}
 

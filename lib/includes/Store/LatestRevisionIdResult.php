@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace Wikibase\Lib\Store;
 
@@ -70,9 +70,8 @@ final class LatestRevisionIdResult {
 	/**
 	 * @param int $revisionId
 	 * @param EntityId $redirectsTo (could be another redirect)
-	 * @return self
 	 */
-	public static function redirect( $revisionId, EntityId $redirectsTo ) {
+	public static function redirect( int $revisionId, EntityId $redirectsTo ): self {
 		self::assertCorrectRevisionId( $revisionId );
 
 		$result = new self( self::REDIRECT );
@@ -82,18 +81,11 @@ final class LatestRevisionIdResult {
 		return $result;
 	}
 
-	/**
-	 * @return self
-	 */
-	public static function nonexistentEntity() {
+	public static function nonexistentEntity(): self {
 		return new self( self::NONEXISTENT );
 	}
 
-	/**
-	 * @param int $revisionId
-	 * @return self
-	 */
-	public static function concreteRevision( $revisionId ) {
+	public static function concreteRevision( int $revisionId ): self {
 		self::assertCorrectRevisionId( $revisionId );
 
 		$result = new self( self::CONCRETE_REVISION );
@@ -107,9 +99,8 @@ final class LatestRevisionIdResult {
 
 	/**
 	 * @param callable $handler Revision id will be given as a first argument
-	 * @return self
 	 */
-	public function onConcreteRevision( callable $handler ) {
+	public function onConcreteRevision( callable $handler ): self {
 		$result = clone $this;
 		$result->handlers[ self::CONCRETE_REVISION ] = $handler;
 
@@ -119,9 +110,8 @@ final class LatestRevisionIdResult {
 	/**
 	 * @param callable $handler Revision id will be given as a first argument, EntityId to which
 	 * 							revision redirects will be second argument
-	 * @return self
 	 */
-	public function onRedirect( callable $handler ) {
+	public function onRedirect( callable $handler ): self {
 		$result = clone $this;
 		$result->handlers[ self::REDIRECT] = $handler;
 
@@ -130,9 +120,8 @@ final class LatestRevisionIdResult {
 
 	/**
 	 * @param callable $handler Function with no arguments
-	 * @return self
 	 */
-	public function onNonexistentEntity( callable $handler ) {
+	public function onNonexistentEntity( callable $handler ): self {
 		$result = clone $this;
 		$result->handlers[ self::NONEXISTENT ] = $handler;
 
@@ -163,11 +152,10 @@ final class LatestRevisionIdResult {
 	}
 
 	/**
-	 * @param mixed $revisionId Expected positive integer
+	 * @param int $revisionId Expected positive integer
 	 * @throws \Exception
 	 */
-	private static function assertCorrectRevisionId( $revisionId ) {
-		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
+	private static function assertCorrectRevisionId( int $revisionId ) {
 		Assert::parameter(
 			$revisionId > 0,
 			'$revisionId',
