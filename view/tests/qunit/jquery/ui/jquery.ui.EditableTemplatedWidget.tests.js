@@ -56,7 +56,7 @@
 				template: 'templatedWidget-test'
 			}, testSets[ i ][ 1 ] ) );
 
-			assert.ok(
+			assert.true(
 				$subject.data( 'editablewidget' ) instanceof $.test.editablewidget,
 				'Test set #' + i + ': Initialized widget.'
 			);

@@ -35,15 +35,16 @@
 		var $item = createTestItem(),
 			item = $item.data( 'toolbaritem' );
 
-		assert.ok(
+		assert.true(
 			item instanceof $.wikibase.toolbaritem,
 			'Instantiated widget.'
 		);
 
 		item.destroy();
 
-		assert.notOk(
+		assert.strictEqual(
 			$item.data( 'toolbaritem' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );

@@ -97,7 +97,7 @@
 		var $statementview = createStatementview(),
 			statementview = $statementview.data( 'statementview' );
 
-		assert.ok(
+		assert.true(
 			statementview instanceof $.wikibase.statementview,
 			'Created widget.'
 		);
@@ -153,7 +153,7 @@
 			statementview = $statementview.data( 'statementview' );
 
 		return statementview.startEditing().done( function () {
-			assert.ok( statementview.value(), 'value() should return a value' );
+			assert.notStrictEqual( statementview.value(), undefined, 'value() should return a value' );
 		} );
 	} );
 
@@ -222,7 +222,7 @@
 		var $statementview = createStatementview(),
 			statementview = $statementview.data( 'statementview' );
 
-		assert.ok( $statementview.hasClass( 'wb-new' ) );
+		assert.true( $statementview.hasClass( 'wb-new' ) );
 
 		statementview.value( new datamodel.Statement(
 			new datamodel.Claim(
@@ -233,7 +233,7 @@
 			new datamodel.ReferenceList( [ ] )
 		) );
 
-		assert.notOk( $statementview.hasClass( 'wb-new' ) );
+		assert.false( $statementview.hasClass( 'wb-new' ) );
 	} );
 
 	QUnit.test( 'fires fireStartEditingHook when starting editing', function ( assert ) {
@@ -297,7 +297,7 @@
 
 		return statementview.startEditing().done( function () {
 			statementview.stopEditing().done( function () {
-				assert.ok( fireSpy.notCalled );
+				assert.true( fireSpy.notCalled );
 			} );
 		} );
 	} );

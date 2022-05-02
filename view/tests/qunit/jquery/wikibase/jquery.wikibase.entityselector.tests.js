@@ -65,7 +65,7 @@
 	QUnit.test( 'Create', function ( assert ) {
 		var $entitySelector = newTestEntitySelector();
 
-		assert.ok(
+		assert.true(
 			$entitySelector.data( 'entityselector' ) instanceof $.wikibase.entityselector,
 			'Instantiated entityselector.'
 		);
@@ -93,11 +93,11 @@
 		var $entitySelector = newTestEntitySelector();
 		$entitySelector.data( 'entityselector' );
 
-		assert.notOk( $entitySelector.hasClass( 'ui-entityselector-input-unrecognized' ) );
+		assert.false( $entitySelector.hasClass( 'ui-entityselector-input-unrecognized' ) );
 
 		$entitySelector.val( 'does-not-exist' );
 		$entitySelector.trigger( 'blur' );
-		assert.ok( $entitySelector.hasClass( 'ui-entityselector-input-unrecognized' ) );
+		assert.true( $entitySelector.hasClass( 'ui-entityselector-input-unrecognized' ) );
 	} );
 
 	QUnit.test( 'Indicate recognized input', function ( assert ) {
@@ -105,17 +105,17 @@
 
 		var entitySelector = $entitySelector.data( 'entityselector' );
 
-		assert.notOk( $entitySelector.hasClass( 'ui-entityselector-input-recognized' ) );
+		assert.false( $entitySelector.hasClass( 'ui-entityselector-input-recognized' ) );
 		entitySelector.selectedEntity( 'abc' );
 
 		$entitySelector.trigger( 'blur' );
-		assert.ok( $entitySelector.hasClass( 'ui-entityselector-input-recognized' ) );
+		assert.true( $entitySelector.hasClass( 'ui-entityselector-input-recognized' ) );
 	} );
 
 	QUnit.test( 'Item constructor', function ( assert ) {
 		var item = new $.wikibase.entityselector.Item( 'label', 'value', entityStubs[ 0 ] );
 
-		assert.ok(
+		assert.true(
 			item instanceof $.wikibase.entityselector.Item,
 			'Instantiated default entityselector item.'
 		);

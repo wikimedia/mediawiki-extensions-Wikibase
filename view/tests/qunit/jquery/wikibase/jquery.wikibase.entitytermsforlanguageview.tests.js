@@ -59,14 +59,14 @@
 			entitytermsforlanguageview
 				= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
 
-		assert.ok(
+		assert.true(
 			entitytermsforlanguageview !== undefined,
 			'Created widget.'
 		);
 
 		entitytermsforlanguageview.destroy();
 
-		assert.ok(
+		assert.true(
 			$entitytermsforlanguageview.data( 'entitytermsforlanguageview' ) === undefined,
 			'Destroyed widget.'
 		);
@@ -79,13 +79,13 @@
 
 		$entitytermsforlanguageview
 		.on( 'entitytermsforlanguageviewafterstartediting', function ( event ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
 		.on( 'entitytermsforlanguageviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Stopped edit mode.'
 			);
@@ -193,7 +193,7 @@
 
 		$entitytermsforlanguageview
 		.on( 'entitytermsforlanguageviewtoggleerror', function ( event, error ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered "toggleerror" event.'
 			);
@@ -224,12 +224,12 @@
 			aliases: aliases
 		} );
 
-		assert.ok(
+		assert.true(
 			entitytermsforlanguageview.value().label.equals( label ),
 			'Set new label.'
 		);
 
-		assert.ok(
+		assert.true(
 			entitytermsforlanguageview.value().description.equals( description ),
 			'Did not change description.'
 		);
@@ -244,12 +244,12 @@
 			aliases: aliases
 		} );
 
-		assert.ok(
+		assert.true(
 			entitytermsforlanguageview.value().label.equals( label ),
 			'Reset label.'
 		);
 
-		assert.ok(
+		assert.true(
 			entitytermsforlanguageview.value().description.equals( description ),
 			'Removed description.'
 		);
@@ -263,7 +263,7 @@
 			aliases: aliases
 		} );
 
-		assert.ok(
+		assert.true(
 			entitytermsforlanguageview.value().aliases.equals( aliases ),
 			'Added alias.'
 		);
@@ -277,7 +277,7 @@
 			aliases: aliases
 		} );
 
-		assert.ok(
+		assert.true(
 			entitytermsforlanguageview.value().aliases.equals( aliases ),
 			'Removed aliases.'
 		);

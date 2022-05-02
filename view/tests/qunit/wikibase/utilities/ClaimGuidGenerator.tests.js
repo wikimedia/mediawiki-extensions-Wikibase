@@ -10,7 +10,7 @@
 	QUnit.test( 'Validate GUID layout', function ( assert ) {
 		var generator = new wb.utilities.ClaimGuidGenerator( 'q79' );
 
-		assert.ok(
+		assert.true(
 			/q79\$[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/.test(
 				generator.newGuid()
 			),

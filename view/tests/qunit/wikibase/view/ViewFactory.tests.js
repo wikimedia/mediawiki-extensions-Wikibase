@@ -37,7 +37,7 @@
 	}
 
 	QUnit.test( 'is constructable', function ( assert ) {
-		assert.ok( newViewFactory() instanceof ViewFactory );
+		assert.true( newViewFactory() instanceof ViewFactory );
 	} );
 
 	function getEntityStub( type ) {
@@ -190,7 +190,7 @@
 			}
 		);
 
-		assert.ok( result.buildStatementListView instanceof Function );
+		assert.true( result.buildStatementListView instanceof Function );
 
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );

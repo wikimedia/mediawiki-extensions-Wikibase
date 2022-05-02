@@ -13,12 +13,12 @@
 			QUnit.test( 'Constructor', function ( assert ) {
 				var instance = getInstance();
 
-				assert.ok(
+				assert.true(
 					instance instanceof constructor,
 					'Instantiated.'
 				);
 
-				assert.ok(
+				assert.true(
 					instance instanceof EntityIdHtmlFormatter,
 					'Instance of EntityIdHtmlFormatter'
 				);
@@ -32,7 +32,7 @@
 
 				instance.format( 'Q1' ).done( function ( res ) {
 					assert.strictEqual( typeof res, 'string' );
-					assert.notEqual( res, '' );
+					assert.notStrictEqual( res, '' );
 					done();
 				} );
 			} );

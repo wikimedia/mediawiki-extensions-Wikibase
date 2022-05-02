@@ -34,7 +34,7 @@
 		var $toolbar = createTestToolbar(),
 			toolbar = $toolbar.data( 'toolbar' );
 
-		assert.ok(
+		assert.true(
 			toolbar instanceof $.wikibase.toolbar,
 			'Instantiated widget.'
 		);

@@ -54,7 +54,7 @@
 		var $propertyview = createPropertyview(),
 			propertyview = $propertyview.data( 'propertyview' );
 
-		assert.ok(
+		assert.true(
 			propertyview instanceof $.wikibase.propertyview,
 			'Created widget.'
 		);

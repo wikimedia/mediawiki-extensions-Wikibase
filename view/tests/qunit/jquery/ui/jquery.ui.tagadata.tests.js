@@ -103,7 +103,7 @@
 			done = assert.async( 2 );
 
 		$tagadata.one( 'tagadatatagremoved', function () {
-			assert.ok(
+			assert.true(
 				true,
 				'Removed tag.'
 			);

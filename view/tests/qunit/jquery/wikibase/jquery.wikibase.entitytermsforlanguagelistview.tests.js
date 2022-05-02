@@ -102,7 +102,7 @@
 
 		$entitytermsforlanguagelistview
 		.on( 'entitytermsforlanguagelistviewtoggleerror', function ( event, error ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered "toggleerror" event.'
 			);

@@ -94,8 +94,9 @@
 			'Referenceview is not in edit mode.'
 		);
 
-		assert.ok(
+		assert.notStrictEqual(
 			referenceview.$listview.data( 'listview' ),
+			undefined,
 			'Initialized listview.'
 		);
 

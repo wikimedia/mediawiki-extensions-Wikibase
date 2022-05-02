@@ -32,7 +32,7 @@
 	QUnit.test( 'Create', function ( assert ) {
 		var $pageSuggester = newTestPageSuggester();
 
-		assert.ok(
+		assert.true(
 			$pageSuggester.data( 'pagesuggester' ) instanceof $.wikibase.pagesuggester,
 			'Instantiated page suggester.'
 		);
@@ -46,13 +46,13 @@
 
 		pageSuggester.search()
 		.done( function () {
-			assert.ok(
+			assert.true(
 				false,
 				'Searching successful although supposed to fail.'
 			);
 		} )
 		.fail( function () {
-			assert.ok(
+			assert.true(
 				true,
 				'Searching failed as expected.'
 			);

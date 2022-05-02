@@ -66,7 +66,7 @@
 		var $snakview = createSnakview(),
 			snakview = $snakview.data( 'snakview' );
 
-		assert.ok(
+		assert.true(
 			snakview instanceof $.wikibase.snakview,
 			'Created widget.'
 		);
@@ -143,7 +143,7 @@
 			'Set Snak serialization value.'
 		);
 
-		assert.ok(
+		assert.true(
 			snakview.snak().equals( snakDeserializer.deserialize( newValue ) ),
 			'Verified Snak object returned by snak().'
 		);
@@ -158,7 +158,7 @@
 			'Set datamodel.Snak value.'
 		);
 
-		assert.ok(
+		assert.true(
 			snakview.snak().equals( newValue ),
 			'Verified Snak object returned by snak().'
 		);
@@ -196,7 +196,7 @@
 
 		snakview.snak( snak );
 
-		assert.ok(
+		assert.true(
 			snakview.snak().equals( snak ),
 			'Set Snak value.'
 		);
@@ -258,7 +258,7 @@
 
 		snakview.propertyId( 'P2' );
 
-		assert.ok(
+		assert.true(
 			snakview.snak().equals( new datamodel.PropertyNoValueSnak( 'P2' ) ),
 			'Updated Property ID of Snak.'
 		);
@@ -300,7 +300,7 @@
 
 		snakview.snakType( 'novalue' );
 
-		assert.ok(
+		assert.true(
 			snakview.snak().equals( new datamodel.PropertyNoValueSnak( 'P1' ) ),
 			'Updated Snak type of Snak.'
 		);

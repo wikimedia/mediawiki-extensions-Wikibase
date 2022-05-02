@@ -61,7 +61,7 @@
 	} ) );
 
 	QUnit.test( 'basic', function ( assert ) {
-		assert.ok(
+		assert.true(
 			wb.sites instanceof Object,
 			'initiated wikibase object'
 		);
@@ -79,7 +79,7 @@
 	 * @param {Object} sites
 	 */
 	function siteSetTest( assert, fnName, sites ) {
-		assert.ok(
+		assert.true(
 			$.isPlainObject( sites ),
 			fnName + '() returns a plain object'
 		);
@@ -90,7 +90,7 @@
 			allSiteInstances = allSiteInstances && ( site instanceof Site );
 		} );
 
-		assert.ok(
+		assert.true(
 			allSiteInstances,
 			fnName + '() returned object fields only hold site objects'
 		);
@@ -118,7 +118,7 @@
 				allFromRightGroup = allFromRightGroup && ( site.getGroup() === group );
 			} );
 
-			assert.ok(
+			assert.true(
 				allFromRightGroup,
 				'getSitesOfGroup( "' + group + '" ) only returned sites of group "' + group + '"'
 			);
@@ -126,7 +126,7 @@
 	} );
 
 	QUnit.test( 'wikibase.sites.getSite()', function ( assert ) {
-		assert.ok(
+		assert.true(
 			wb.sites.getSite( 'nnwiki' ) instanceof Site,
 			'trying to get a known site by its ID returns a site object'
 		);

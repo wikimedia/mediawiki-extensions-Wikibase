@@ -275,7 +275,7 @@
 	QUnit.test( 'Item constructor', function ( assert ) {
 		var item = new $.wikibase.siteselector.Item( 'label', 'value', sites[ 0 ] );
 
-		assert.ok(
+		assert.true(
 			item instanceof $.wikibase.siteselector.Item,
 			'Instantiated default siteselector item.'
 		);

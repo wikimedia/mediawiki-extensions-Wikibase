@@ -34,7 +34,7 @@
 		var $button = createTestButton(),
 			button = $button.data( 'toolbarbutton' );
 
-		assert.ok(
+		assert.true(
 			button instanceof $.wikibase.toolbarbutton,
 			'Instantiated widget.'
 		);

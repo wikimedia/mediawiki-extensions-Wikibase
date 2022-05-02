@@ -12,7 +12,7 @@
 	QUnit.test( 'constructor', function ( assert ) {
 		var dataType = new DataType( 'foo', 'string' );
 
-		assert.ok(
+		assert.true(
 			dataType instanceof DataType,
 			'New data type created and instance of DataType'
 		);

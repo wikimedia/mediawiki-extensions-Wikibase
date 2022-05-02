@@ -72,14 +72,14 @@
 		var $entitytermsview = createEntitytermsview(),
 			entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
-		assert.ok(
+		assert.true(
 			entitytermsview !== undefined,
 			'Created widget.'
 		);
 
 		entitytermsview.destroy();
 
-		assert.ok(
+		assert.true(
 			$entitytermsview.data( 'entitytermsview' ) === undefined,
 			'Destroyed widget.'
 		);
@@ -91,7 +91,7 @@
 
 		$entitytermsview
 		.on( 'entitytermsviewtoggleerror', function ( event, error ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered "toggleerror" event.'
 			);
@@ -104,7 +104,7 @@
 		var $entitytermsview = createEntitytermsview(),
 			entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
-		assert.ok(
+		assert.true(
 			entitytermsview.value().equals( createFingerprint() ),
 			'Retrieved value.'
 		);

@@ -11,7 +11,7 @@ module.exports = ( function ( QUnit, wb ) {
 			QUnit.test( 'implements wb.view.ViewController', function ( assert ) {
 				var controller = getInstance();
 
-				assert.ok( controller instanceof constructor );
+				assert.true( controller instanceof constructor );
 			} );
 		},
 
@@ -21,7 +21,7 @@ module.exports = ( function ( QUnit, wb ) {
 
 				controller.startEditing();
 
-				assert.ok( true );
+				assert.true( true );
 			} );
 
 			QUnit.test( 'has non-abstract stopEditing method', function ( assert ) {
@@ -29,7 +29,7 @@ module.exports = ( function ( QUnit, wb ) {
 
 				controller.stopEditing();
 
-				assert.ok( true );
+				assert.true( true );
 			} );
 
 			QUnit.test( 'has non-abstract cancelEditing method', function ( assert ) {
@@ -37,7 +37,7 @@ module.exports = ( function ( QUnit, wb ) {
 
 				controller.cancelEditing();
 
-				assert.ok( true );
+				assert.true( true );
 			} );
 
 			QUnit.test( 'has non-abstract setError method', function ( assert ) {
@@ -45,7 +45,7 @@ module.exports = ( function ( QUnit, wb ) {
 
 				controller.setError();
 
-				assert.ok( true );
+				assert.true( true );
 			} );
 
 			QUnit.test( 'has non-abstract remove method', function ( assert ) {
@@ -53,7 +53,7 @@ module.exports = ( function ( QUnit, wb ) {
 
 				controller.remove();
 
-				assert.ok( true );
+				assert.true( true );
 			} );
 		}
 

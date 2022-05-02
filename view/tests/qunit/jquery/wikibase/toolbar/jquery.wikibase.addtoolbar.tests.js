@@ -34,15 +34,16 @@
 		var $addtoolbar = createAddtoolbar(),
 			addtoolbar = $addtoolbar.data( 'addtoolbar' );
 
-		assert.ok(
+		assert.true(
 			addtoolbar instanceof $.wikibase.addtoolbar,
 			'Instantiated widget.'
 		);
 
 		addtoolbar.destroy();
 
-		assert.notOk(
+		assert.strictEqual(
 			$addtoolbar.data( 'addtoolbar' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );

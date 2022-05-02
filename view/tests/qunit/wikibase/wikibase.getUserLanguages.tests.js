@@ -29,7 +29,7 @@
 		mwConfigStub.withArgs( 'wgUserLanguage' ).returns( userLanguage );
 
 		assert.deepEqual( wb.getUserLanguages(), babelLanguages );
-		assert.ok( mwUlsConfigStub.notCalled );
+		assert.true( mwUlsConfigStub.notCalled );
 	} );
 
 	QUnit.test( 'getUserLanguages uses uls languages if babel is not defined', function ( assert ) {
@@ -45,7 +45,7 @@
 		mwUlsConfigStub.returns( ulsLanguages );
 
 		assert.deepEqual( wb.getUserLanguages(), ulsLanguages );
-		assert.ok( mwUlsConfigStub.calledOnce );
+		assert.true( mwUlsConfigStub.calledOnce );
 	} );
 
 	QUnit.test( 'getUserLanguages returns just the given userLanguage if uls languages and babel is not defined', function ( assert ) {
@@ -61,7 +61,7 @@
 		mwUlsConfigStub.returns( ulsLanguages );
 
 		assert.deepEqual( wb.getUserLanguages(), [ userLanguage ] );
-		assert.ok( mwUlsConfigStub.calledOnce );
+		assert.true( mwUlsConfigStub.calledOnce );
 	} );
 
 	QUnit.test( 'getUserLanguages returns just the given userLanguage if uls is not installed and babel empty', function ( assert ) {
@@ -75,7 +75,7 @@
 		mwConfigStub.withArgs( 'wgUserLanguage' ).returns( userLanguage );
 
 		assert.deepEqual( wb.getUserLanguages(), [ userLanguage ] );
-		assert.ok( mwUlsConfigStub.notCalled );
+		assert.true( mwUlsConfigStub.notCalled );
 	} );
 
 	QUnit.test( 'filters out invalid term languages', function ( assert ) {

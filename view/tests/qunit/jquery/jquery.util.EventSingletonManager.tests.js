@@ -20,7 +20,7 @@
 			$target.get( 0 ),
 			'custom.namespace',
 			function ( event, source ) {
-				assert.ok(
+				assert.true(
 					true,
 					'Triggered event "' + event.type + '.'
 				);
@@ -100,7 +100,7 @@
 			$target.get( 0 ),
 			'custom1.namespace custom2.namespace custom3.namespace custom4.othernamespace',
 			function ( event, source ) {
-				assert.ok(
+				assert.true(
 					true,
 					'Triggered event "' + event.type + '".'
 				);

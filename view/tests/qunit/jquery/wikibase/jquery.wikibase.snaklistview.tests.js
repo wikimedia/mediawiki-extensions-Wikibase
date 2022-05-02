@@ -114,8 +114,9 @@
 			'Snaklistview is not in edit mode.'
 		);
 
-		assert.ok(
+		assert.notStrictEqual(
 			snaklistview.$listview.data( 'listview' ),
+			undefined,
 			'Initialized listview.'
 		);
 
@@ -246,7 +247,7 @@
 		var done = assert.async( 3 );
 
 		$node.on( 'snaklistviewafterstartediting', function ( e ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered "afterstartediting" event.'
 			);
@@ -266,7 +267,7 @@
 		snaklistview.startEditing();
 
 		$node.on( 'snaklistviewafterstopediting', function ( e ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered "afterstopediting" event.'
 			);
@@ -300,7 +301,7 @@
 		var done = assert.async( 3 );
 
 		$node.on( 'snaklistviewafterstartediting', function ( e ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered "afterstartediting" event.'
 			);
@@ -324,7 +325,7 @@
 		snaklistview.startEditing();
 
 		$node.on( 'snaklistviewafterstopediting', function ( e ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered "afterstopediting" event.'
 			);
@@ -360,7 +361,7 @@
 		var done = assert.async( 3 );
 
 		$node.on( 'snaklistviewafterstartediting', function ( e ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered "afterstartediting" event.'
 			);
@@ -368,7 +369,7 @@
 		} );
 
 		$node.on( 'snaklistviewchange', function ( e ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered "change" event.'
 			);
@@ -566,7 +567,7 @@
 		);
 
 		$node.on( 'snaklistviewdisable', function ( e ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered "disable" event.'
 			);
@@ -574,7 +575,7 @@
 		} );
 
 		$node.on( 'snaklistviewenable', function ( e ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered "enable" event.'
 			);
@@ -604,7 +605,7 @@
 		var $node = createSnaklistview( snakLists[ 0 ], { singleProperty: true } ),
 			snaklistview = $node.data( 'snaklistview' );
 
-		assert.ok(
+		assert.true(
 			snaklistview._listview.items().length > 0,
 			'Initialized snaklistview with more than one item.'
 		);

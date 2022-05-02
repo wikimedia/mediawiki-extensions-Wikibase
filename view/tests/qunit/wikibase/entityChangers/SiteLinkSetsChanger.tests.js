@@ -29,7 +29,7 @@
 	} );
 
 	QUnit.test( 'is a constructor', function ( assert ) {
-		assert.ok( new SUBJECT() instanceof SUBJECT );
+		assert.true( new SUBJECT() instanceof SUBJECT );
 	} );
 
 	QUnit.test( 'save performs correct API call', function ( assert ) {
@@ -49,7 +49,7 @@
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new datamodel.SiteLinkSet()
 		).always( function () {
-			assert.ok( api.setSitelink.calledOnce );
+			assert.true( api.setSitelink.calledOnce );
 			done();
 		} );
 
@@ -71,7 +71,7 @@
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new datamodel.SiteLinkSet()
 		).done( function ( savedSiteLinkSet ) {
-			assert.ok( savedSiteLinkSet instanceof datamodel.SiteLinkSet );
+			assert.true( savedSiteLinkSet instanceof datamodel.SiteLinkSet );
 		} );
 	} );
 
@@ -123,11 +123,11 @@
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new datamodel.SiteLinkSet()
 		).done( function ( savedSiteLinkSet ) {
-			assert.ok( false, 'save should have failed' );
+			assert.true( false, 'save should have failed' );
 			done();
 		} )
 		.fail( function ( error ) {
-			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
+			assert.true( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 			done();
 		} );
@@ -150,7 +150,7 @@
 			new datamodel.SiteLinkSet(),
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] )
 		).always( function () {
-			assert.ok( api.setSitelink.calledOnce );
+			assert.true( api.setSitelink.calledOnce );
 			done();
 		} );
 	} );
@@ -180,7 +180,7 @@
 			new datamodel.SiteLinkSet(),
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] )
 		).done( function ( savedSiteLinkSet ) {
-			assert.ok( savedSiteLinkSet instanceof datamodel.SiteLinkSet );
+			assert.true( savedSiteLinkSet instanceof datamodel.SiteLinkSet );
 		} );
 	} );
 
@@ -231,11 +231,11 @@
 			new datamodel.SiteLinkSet(),
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] )
 		).done( function ( savedSiteLinkSet ) {
-			assert.ok( false, 'save should have failed' );
+			assert.true( false, 'save should have failed' );
 			done();
 		} )
 		.fail( function ( error ) {
-			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
+			assert.true( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 			done();
 		} );
