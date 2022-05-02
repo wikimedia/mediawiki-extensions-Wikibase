@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Demmy",
+			"Oyatopeabioye",
 			"Wikicology"
 		]
 	},
@@ -11,6 +12,7 @@
 	"wikibase-editlinks": "Àtúnṣe àjápọ̀",
 	"wikibase-editlinkstitle": "Àtúnṣe àwọn àjápọ̀ èdè míràn",
 	"wikibase-linkitem-addlinks": "Àfikún àjápọ̀",
+	"wikibase-linkitem-title": "asopọ pẹlu oju iwe",
 	"wikibase-linkitem-input-site": "Èdè:",
 	"wikibase-linkitem-input-page": "Ojúewé:",
 	"wikibase-linkitem-confirmitem-button": "Ìfidájú",
