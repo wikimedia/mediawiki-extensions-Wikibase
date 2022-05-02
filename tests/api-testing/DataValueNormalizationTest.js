@@ -48,7 +48,7 @@ describe( 'data value normalization', () => {
 				token: await mindy.token( 'csrf' ),
 			}, 'POST' );
 		} catch ( e ) {
-			// eslint-disable-next-line no-console
+
 			console.warn( 'Unable to save commonsMedia statement, skipping test:', e );
 			return this.skip();
 		}

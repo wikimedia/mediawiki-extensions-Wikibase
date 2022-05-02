@@ -6,7 +6,7 @@ test_systems:
       PORT: ""
       SOURCE_REPO_SCHEME: "https"
       SOURCE_REPO_HOST: "wikidata.beta.wmflabs.org"
-      FEDPROPS_INTERWIKI_PREFIX: 'wdbeta'
+      FEDPROPS_INTERWIKI_PREFIX: "wdbeta"
       DEV_ERROR_REPORTING: true
 
     wikibase-federated-properties.vm:
@@ -15,26 +15,26 @@ test_systems:
       PORT: ""
       SOURCE_REPO_SCHEME: "https"
       SOURCE_REPO_HOST: "wikidata.beta.wmflabs.org"
-      FEDPROPS_INTERWIKI_PREFIX: 'wdbeta'
+      FEDPROPS_INTERWIKI_PREFIX: "wdbeta"
       DEV_ERROR_REPORTING: true
 
     fedprops-euspecies.wikidata-dev.eqiad.wmflabs:
-        SCHEME: "https"
-        SERVER_NAME: "eu-invasive-species-federated-properties.wmflabs.org"
-        PORT: ""
-        SOURCE_REPO_SCHEME: "https"
-        SOURCE_REPO_HOST: "www.wikidata.org"
-        FEDPROPS_INTERWIKI_PREFIX: 'wikidata'
-        DEV_ERROR_REPORTING: false
+      SCHEME: "https"
+      SERVER_NAME: "eu-invasive-species-federated-properties.wmflabs.org"
+      PORT: ""
+      SOURCE_REPO_SCHEME: "https"
+      SOURCE_REPO_HOST: "www.wikidata.org"
+      FEDPROPS_INTERWIKI_PREFIX: "wikidata"
+      DEV_ERROR_REPORTING: false
 
     fedprops-opennext.wikidata-dev.eqiad.wmflabs:
-        SCHEME: "https"
-        SERVER_NAME: "opennext-federated-properties.wmflabs.org"
-        PORT: ""
-        SOURCE_REPO_SCHEME: "https"
-        SOURCE_REPO_HOST: "www.wikidata.org"
-        FEDPROPS_INTERWIKI_PREFIX: 'wikidata'
-        DEV_ERROR_REPORTING: false
+      SCHEME: "https"
+      SERVER_NAME: "opennext-federated-properties.wmflabs.org"
+      PORT: ""
+      SOURCE_REPO_SCHEME: "https"
+      SOURCE_REPO_HOST: "www.wikidata.org"
+      FEDPROPS_INTERWIKI_PREFIX: "wikidata"
+      DEV_ERROR_REPORTING: false
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3"
@@ -44,6 +44,3 @@ test_systems:
     LOG_DIR: "{{ PROJECT_DIR }}/log"
     MW_PATH: "{{ PROJECT_DIR }}/mediawiki"
     MW_SCRIPT_PATH: "/w"
-
-
-

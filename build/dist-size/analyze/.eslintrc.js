@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
 	extends: [
 		'wikimedia/node',
@@ -13,4 +15,4 @@ module.exports = {
 		'mediawiki/valid-package-file-require': 'off',
 		'node/no-unsupported-features/node-builtins': 'off',
 	},
-}
+};

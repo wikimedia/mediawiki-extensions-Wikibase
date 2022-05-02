@@ -46,7 +46,7 @@ test:
   # mediawiki_password: SET THIS IN THE ENVIRONMENT!
 
 integration:
-  item_namespace: 'Item:'
+  item_namespace: "Item:"
   language_code: en
   browser: chrome
   user_factory: true
@@ -63,7 +63,7 @@ custom:
   mediawiki_password: …
   user_factory: true
   # Default for the "item_namespace" is an empty string, representing the main namespace.
-  item_namespace: 'Item:'
+  item_namespace: "Item:"
   # property_namespace: 'Property:'
   # item_id_prefix: Q
   # property_id_prefix : P

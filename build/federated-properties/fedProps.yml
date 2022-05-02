@@ -49,8 +49,8 @@
         name: "{{ item }}"
         state: present
       loop:
-          - "setuptools"
-          - "docker-compose"
+        - "setuptools"
+        - "docker-compose"
 
     - name: Ensure user 'mediawiki' exists and belongs to the 'docker' group
       user:
@@ -60,112 +60,112 @@
 
     - name: Ensure group 'mediawiki' exists
       group:
-          name: mediawiki
-          state: present
+        name: mediawiki
+        state: present
 
     - name: Ensure project directories exists
       file:
-          path: "{{ item.name }}"
-          owner: "{{ item.owner }}"
-          group: "{{ item.owner }}"
-          state: directory
+        path: "{{ item.name }}"
+        owner: "{{ item.owner }}"
+        group: "{{ item.owner }}"
+        state: directory
       loop:
-          - { name: "{{ PROJECT_DIR }}", owner: "root" }
-          - { name: "{{ SCRIPTS_DIR }}", owner: "mediawiki" }
-          - { name: "{{ LOG_DIR }}", owner: "mediawiki" }
-          - { name: "{{ MW_PATH }}", owner: "mediawiki" }
+        - { name: "{{ PROJECT_DIR }}", owner: "root" }
+        - { name: "{{ SCRIPTS_DIR }}", owner: "mediawiki" }
+        - { name: "{{ LOG_DIR }}", owner: "mediawiki" }
+        - { name: "{{ MW_PATH }}", owner: "mediawiki" }
 
     - name: Ensure update and logrotate scripts are in place
       template:
-          src: "templates/{{ item }}.j2"
-          dest: "{{ SCRIPTS_DIR }}/{{ item }}"
-          owner: "mediawiki"
-          group: "mediawiki"
-          mode: 0774
+        src: "templates/{{ item }}.j2"
+        dest: "{{ SCRIPTS_DIR }}/{{ item }}"
+        owner: "mediawiki"
+        group: "mediawiki"
+        mode: 0774
       loop:
-          - "update.sh"
-          - "logrotate.sh"
+        - "update.sh"
+        - "logrotate.sh"
 
     - name: Checkout mediawiki master branch
       git:
-          repo: "https://gerrit.wikimedia.org/r/mediawiki/core"
-          dest: "{{ MW_PATH }}"
-          version: "master"
+        repo: "https://gerrit.wikimedia.org/r/mediawiki/core"
+        dest: "{{ MW_PATH }}"
+        version: "master"
 
     - name: Ensure .htaccess is in place
       copy:
-          src: "files/htaccess"
-          dest: "{{ MW_PATH }}/.htaccess"
-          mode: 0644
+        src: "files/htaccess"
+        dest: "{{ MW_PATH }}/.htaccess"
+        mode: 0644
       tags:
-          - source
+        - source
 
     - name: Ensure symbolic link for script dir is in place
       file:
-          src: "/var/www/html"
-          dest: "{{ MW_PATH }}{{ MW_SCRIPT_PATH }}"
-          state: link
-          force: yes
-          follow: no
+        src: "/var/www/html"
+        dest: "{{ MW_PATH }}{{ MW_SCRIPT_PATH }}"
+        state: link
+        force: yes
+        follow: no
 
     - name: Checkout skin and extensions
       git:
-          repo: "https://gerrit.wikimedia.org/r/mediawiki/{{ item }}"
-          dest: "{{ MW_PATH }}/{{ item }}"
-          version: "master"
+        repo: "https://gerrit.wikimedia.org/r/mediawiki/{{ item }}"
+        dest: "{{ MW_PATH }}/{{ item }}"
+        version: "master"
       loop:
-          - "{{ VECTOR_PATH }}"
-          - "{{ ULS_PATH }}"
-          - "{{ CLDR_PATH }}"
-          - "{{ WIKIBASE_PATH }}"
-          - "{{ WIKIBASE_CIRRUS_SEARCH_PATH }}"
-          - "{{ ELASTICA_PATH }}"
-          - "{{ CIRRUS_SEARCH_PATH }}"
-          - "{{ CONFIRM_EDIT_PATH }}"
+        - "{{ VECTOR_PATH }}"
+        - "{{ ULS_PATH }}"
+        - "{{ CLDR_PATH }}"
+        - "{{ WIKIBASE_PATH }}"
+        - "{{ WIKIBASE_CIRRUS_SEARCH_PATH }}"
+        - "{{ ELASTICA_PATH }}"
+        - "{{ CIRRUS_SEARCH_PATH }}"
+        - "{{ CONFIRM_EDIT_PATH }}"
 
     - name: Ensure composer.local.json is in place
       copy:
-          src: "files/composer.local.json"
-          dest: "{{ MW_PATH }}"
-          mode: 0644
+        src: "files/composer.local.json"
+        dest: "{{ MW_PATH }}"
+        mode: 0644
 
     - name: Run 'composer install' on mediawiki core
       composer:
-          command: install
-          working_dir: "{{ MW_PATH }}"
+        command: install
+        working_dir: "{{ MW_PATH }}"
 
     - name: Run 'composer update' on mediawiki core
       composer:
-          command: update
-          working_dir: "{{ MW_PATH }}"
+        command: update
+        working_dir: "{{ MW_PATH }}"
 
     - name: Ensure docker is started
       systemd:
-          state: started
-          name: docker
+        state: started
+        name: docker
 
     - name: Ensure .env is in place
       template:
-          src: templates/.env.j2
-          dest: "{{ PROJECT_DIR }}/.env"
-          owner: "root"
-          group: "root"
-          mode: 0644
-          force: no # don't override if it exists
+        src: templates/.env.j2
+        dest: "{{ PROJECT_DIR }}/.env"
+        owner: "root"
+        group: "root"
+        mode: 0644
+        force: no # don't override if it exists
 
     - name: Ensure docker-compose.yml is in place
       template:
-          src: templates/docker-compose.yml.j2
-          dest: "{{ PROJECT_DIR }}/docker-compose.yml"
-          owner: "root"
-          group: "root"
-          mode: 0644
+        src: templates/docker-compose.yml.j2
+        dest: "{{ PROJECT_DIR }}/docker-compose.yml"
+        owner: "root"
+        group: "root"
+        mode: 0644
 
     - name: Run `docker-compose up`
       docker_compose:
-          project_src: "{{ PROJECT_DIR }}"
-          build: no
-          state: present
+        project_src: "{{ PROJECT_DIR }}"
+        build: no
+        state: present
 
     # On first start, maintenance/install.php will run, which creates the database tables
     # and finishes by writing a default version of LocalSettings.php. However, the script
@@ -174,29 +174,29 @@
     # can overwrite it with our own one.
     - name: Wait for wikibase install script to finish
       wait_for:
-          path: "{{ MW_PATH }}/LocalSettings.php"
+        path: "{{ MW_PATH }}/LocalSettings.php"
 
     - name: Recursively change ownership of mediawiki directory to 'mediawiki'
       file:
-          path: "{{ MW_PATH }}"
-          recurse: yes
-          owner: "mediawiki"
-          group: "mediawiki"
+        path: "{{ MW_PATH }}"
+        recurse: yes
+        owner: "mediawiki"
+        group: "mediawiki"
 
     - name: Make image directory writeable to Apache
       file:
-          path: "{{ MW_PATH }}/image"
-          recurse: yes
-          group: "www-data"
-          mode: 0775
+        path: "{{ MW_PATH }}/image"
+        recurse: yes
+        group: "www-data"
+        mode: 0775
 
     - name: Ensure LocalSettings.php is in place and readable but not writeable to Apache
       template:
-          src: "templates/LocalSettings.php.j2"
-          dest: "{{ MW_PATH }}/LocalSettings.php"
-          owner: "mediawiki"
-          group: "www-data"
-          mode: 0640
+        src: "templates/LocalSettings.php.j2"
+        dest: "{{ MW_PATH }}/LocalSettings.php"
+        owner: "mediawiki"
+        group: "www-data"
+        mode: 0640
 
     - name: Execute update.php inside wikibase container
       command: "docker exec wikibase php maintenance/update.php"

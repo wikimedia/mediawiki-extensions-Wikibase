@@ -45,7 +45,9 @@
 		"mediawiki/class-doc": "off",
 		"no-jquery/no-class-state": "off",
 		"no-jquery/no-global-selector": "off",
-		"no-shadow": "warn"
+		"no-shadow": "warn",
+		"yml/no-empty-mapping-value": "off",
+		"yml/plain-scalar": "off"
 	},
 	"settings": {
 		"no-jquery": {
