@@ -90,10 +90,7 @@ final class LatestRevisionIdResult {
 		return new self( self::NONEXISTENT );
 	}
 
-	public static function concreteRevision(
-		int $revisionId,
-		string $revisionTimestamp = null // FIXME: nullable only for backwards compatibility. Will be removed in a follow-up
-	): self {
+	public static function concreteRevision( int $revisionId, string $revisionTimestamp ): self {
 		self::assertCorrectRevisionId( $revisionId );
 
 		$result = new self( self::CONCRETE_REVISION );
