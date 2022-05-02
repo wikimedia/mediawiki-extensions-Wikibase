@@ -185,7 +185,9 @@ abstract class EntityRevisionLookupTestCase extends MediaWikiIntegrationTestCase
 		$result = $lookup->getLatestRevisionId( $id );
 		$gotRevisionId = $result->onRedirect( $shouldNotBeCalled )
 			->onNonexistentEntity( $shouldNotBeCalled )
-			->onConcreteRevision( 'intval' )
+			->onConcreteRevision( function ( $revId ) {
+				return $revId;
+			} )
 			->map();
 
 		$expected = $this->resolveLogicalRevision( $expected );

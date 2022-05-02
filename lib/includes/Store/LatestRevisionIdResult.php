@@ -13,7 +13,7 @@ use Wikimedia\Assert\Assert;
  *
  * How to create:
  * ```php
- * $concreteRevision = LatestRevisionIdResult::concreteRevision( 123 );
+ * $concreteRevision = LatestRevisionIdResult::concreteRevision( 123, '20220101001122' );
  * $revisionRedirectsToQ7 = LatestRevisionIdResult::redirect( 123, new ItemId( 'Q7' ) );
  * $entityDoesNotExist = LatestRevisionIdResult::nonexistentEntity();
  * ```
@@ -63,6 +63,11 @@ final class LatestRevisionIdResult {
 	private $revisionId;
 
 	/**
+	 * @var string|null Revision timestamp if present
+	 */
+	private $revisionTimestamp;
+
+	/**
 	 * @var EntityId|null
 	 */
 	private $redirectsTo;
@@ -85,11 +90,15 @@ final class LatestRevisionIdResult {
 		return new self( self::NONEXISTENT );
 	}
 
-	public static function concreteRevision( int $revisionId ): self {
+	public static function concreteRevision(
+		int $revisionId,
+		string $revisionTimestamp = null // FIXME: nullable only for backwards compatibility. Will be removed in a follow-up
+	): self {
 		self::assertCorrectRevisionId( $revisionId );
 
 		$result = new self( self::CONCRETE_REVISION );
 		$result->revisionId = $revisionId;
+		$result->revisionTimestamp = $revisionTimestamp;
 		return $result;
 	}
 
@@ -145,7 +154,7 @@ final class LatestRevisionIdResult {
 			case self::REDIRECT:
 				return $targetHandler( $this->revisionId, $this->redirectsTo );
 			case self::CONCRETE_REVISION:
-				return $targetHandler( $this->revisionId );
+				return $targetHandler( $this->revisionId, $this->revisionTimestamp );
 			default:
 				throw new \RuntimeException( 'Unreachable' );
 		}

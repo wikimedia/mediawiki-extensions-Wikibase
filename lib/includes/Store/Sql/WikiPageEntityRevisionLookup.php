@@ -193,7 +193,7 @@ class WikiPageEntityRevisionLookup implements EntityRevisionLookup {
 					$redirect->getTargetId()
 				);
 			}
-			return LatestRevisionIdResult::concreteRevision( (int)$row->page_latest );
+			return LatestRevisionIdResult::concreteRevision( (int)$row->page_latest, $row->rev_timestamp );
 		}
 
 		return LatestRevisionIdResult::nonexistentEntity();

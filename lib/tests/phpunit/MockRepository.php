@@ -437,7 +437,7 @@ class MockRepository implements
 
 		return $revision === null
 			? LatestRevisionIdResult::nonexistentEntity()
-			: LatestRevisionIdResult::concreteRevision( $revision->getRevisionId() );
+			: LatestRevisionIdResult::concreteRevision( $revision->getRevisionId(), $revision->getTimestamp() );
 	}
 
 	/**

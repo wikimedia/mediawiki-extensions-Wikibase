@@ -173,7 +173,9 @@ class EditEntity extends ModifyEntity {
 				$returnFalse = function () {
 					return false;
 				};
-				$latestRevision = $latestRevisionResult->onConcreteRevision( 'intval' )
+				$latestRevision = $latestRevisionResult->onConcreteRevision( function ( $revId ) {
+					return $revId;
+				} )
 					->onRedirect( $returnFalse )
 					->onNonexistentEntity( $returnFalse )
 					->map();

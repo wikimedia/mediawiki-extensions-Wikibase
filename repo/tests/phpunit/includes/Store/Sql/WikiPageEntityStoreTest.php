@@ -1077,7 +1077,9 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
 		return $result->onRedirect( $shouldNotBeCalled )
 			->onNonexistentEntity( $shouldNotBeCalled )
-			->onConcreteRevision( 'intval' )
+			->onConcreteRevision( function ( $revId ) {
+				return $revId;
+			} )
 			->map();
 	}
 

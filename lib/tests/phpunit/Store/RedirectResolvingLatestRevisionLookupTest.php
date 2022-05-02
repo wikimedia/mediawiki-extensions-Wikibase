@@ -17,6 +17,8 @@ use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
  */
 class RedirectResolvingLatestRevisionLookupTest extends TestCase {
 
+	private const SOME_REV_TIMESTAMP = '20220101001122';
+
 	public function testLooksUpLatestRevision() {
 		$id = new ItemId( 'Q123' );
 		$revision = 777;
@@ -25,7 +27,7 @@ class RedirectResolvingLatestRevisionLookupTest extends TestCase {
 		$revisionLookup->expects( $this->once() )
 			->method( 'getLatestRevisionId' )
 			->with( $id )
-			->willReturn( LatestRevisionIdResult::concreteRevision( $revision ) );
+			->willReturn( LatestRevisionIdResult::concreteRevision( $revision, self::SOME_REV_TIMESTAMP ) );
 
 		$this->assertSame(
 			[ $revision, $id ],
@@ -47,7 +49,7 @@ class RedirectResolvingLatestRevisionLookupTest extends TestCase {
 			)
 			->willReturnOnConsecutiveCalls(
 				LatestRevisionIdResult::redirect( 777, $redirectEntityId ),
-				LatestRevisionIdResult::concreteRevision( $redirectEntityRevision )
+				LatestRevisionIdResult::concreteRevision( $redirectEntityRevision, self::SOME_REV_TIMESTAMP )
 			);
 
 		$this->assertEquals(
@@ -104,7 +106,7 @@ class RedirectResolvingLatestRevisionLookupTest extends TestCase {
 		$revisionLookup->expects( $this->once() )
 			->method( 'getLatestRevisionId' )
 			->with( $id )
-			->willReturn( LatestRevisionIdResult::concreteRevision( $revision ) );
+			->willReturn( LatestRevisionIdResult::concreteRevision( $revision, self::SOME_REV_TIMESTAMP ) );
 
 		$revisionRedirectResolver = $this->newRedirectResolvingLatestRevisionLookup( $revisionLookup );
 

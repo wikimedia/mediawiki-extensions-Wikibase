@@ -110,7 +110,9 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 					return false;
 				};
 
-				$latestRevision = $latestRevisionIdResult->onConcreteRevision( 'intval' )
+				$latestRevision = $latestRevisionIdResult->onConcreteRevision( function ( $revId ) {
+					return $revId;
+				} )
 					->onRedirect( $returnFalse )
 					->onNonexistentEntity( $returnFalse )
 					->map();
@@ -151,7 +153,7 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 			$entityRevision = $this->cache->get( $entityId );
 
 			if ( $entityRevision ) {
-				return LatestRevisionIdResult::concreteRevision( $entityRevision->getRevisionId() );
+				return LatestRevisionIdResult::concreteRevision( $entityRevision->getRevisionId(), $entityRevision->getTimestamp() );
 			}
 		}
 

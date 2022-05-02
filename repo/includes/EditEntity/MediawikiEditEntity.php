@@ -281,7 +281,9 @@ class MediawikiEditEntity implements EditEntity {
 				};
 				$this->latestRevId = $result->onNonexistentEntity( $returnZero )
 					->onRedirect( $returnZero )
-					->onConcreteRevision( 'intval' )
+					->onConcreteRevision( function ( $revId ) {
+						return $revId;
+					} )
 					->map();
 			}
 		}

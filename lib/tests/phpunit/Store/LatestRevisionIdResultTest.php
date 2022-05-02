@@ -7,6 +7,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
 
 /**
+ * @covers \Wikibase\Lib\Store\LatestRevisionIdResult
+ *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
@@ -85,7 +87,7 @@ class LatestRevisionIdResultTest extends TestCase {
 	}
 
 	public function testMap_ConcreteRevision_ReturnsValueReturnedByConcreteRevisionHandler() {
-		$concreteRevisionResult = LatestRevisionIdResult::concreteRevision( 1 );
+		$concreteRevisionResult = LatestRevisionIdResult::concreteRevision( 1, '20220101001122' );
 		$shouldNotBeCalled = function () {
 			$this->fail( "Should not be called" );
 		};
@@ -100,16 +102,19 @@ class LatestRevisionIdResultTest extends TestCase {
 		$this->assertEquals( 'concrete revision', $result );
 	}
 
-	public function testMap_ConcreteRevision_PassesRevisionIdToTheHandler() {
-		$concreteRevisionResult = LatestRevisionIdResult::concreteRevision( 1 );
+	public function testMap_ConcreteRevision_PassesRevisionIdAndTimestampToTheHandler() {
+		$expectedRevisionTimestamp = '20220101001122';
+		$expectedRevisionId = 123;
+		$concreteRevisionResult = LatestRevisionIdResult::concreteRevision( $expectedRevisionId, $expectedRevisionTimestamp );
 		$shouldNotBeCalled = function () {
 			$this->fail( "Should not be called" );
 		};
 
 		$concreteRevisionResult->onRedirect( $shouldNotBeCalled )
 			->onNonexistentEntity( $shouldNotBeCalled )
-			->onConcreteRevision( function ( $revisionId ) {
-				$this->assertSame( 1, $revisionId );
+			->onConcreteRevision( function ( $revisionId, $timestamp ) use ( $expectedRevisionId, $expectedRevisionTimestamp ) {
+				$this->assertSame( $expectedRevisionId, $revisionId );
+				$this->assertSame( $expectedRevisionTimestamp, $timestamp );
 			} )
 			->map();
 	}
@@ -132,7 +137,7 @@ class LatestRevisionIdResultTest extends TestCase {
 
 	public function testConcreteRevision_ZeroRevisionId_ThrowsAnException() {
 		$this->expectException( \Exception::class );
-		LatestRevisionIdResult::concreteRevision( 0 );
+		LatestRevisionIdResult::concreteRevision( 0, '20220101001122' );
 	}
 
 	public function testRedirect_ZeroRevisionId_ThrowsAnException() {
