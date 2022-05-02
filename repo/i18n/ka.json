@@ -7,7 +7,8 @@
 			"MIKHEIL",
 			"Macofe",
 			"Otogi",
-			"Tokoko"
+			"Tokoko",
+			"Გიო ოქრო"
 		]
 	},
 	"wikibase-desc": "სტრუქტურირებული მონაცემების საცავი",
@@ -38,7 +39,7 @@
 	"wikibase-description-empty": "აღწერა არ არის განსაზღვრული",
 	"wikibase-description-edit-placeholder": "აღწერის მითითება",
 	"wikibase-description-edit-placeholder-language-aware": "მიუთითეთ $1 აღწერა",
-	"wikibase-diffview-reference": "მინიშნება",
+	"wikibase-diffview-reference": "სქოლიო",
 	"wikibase-diffview-rank": "ადგილი",
 	"wikibase-diffview-rank-preferred": "პრიორიტეტული რანგი",
 	"wikibase-diffview-rank-deprecated": "არარეკომენდირებული რანგი",
