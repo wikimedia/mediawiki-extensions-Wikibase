@@ -1,15 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
-			"RebecaRwanda"
+			"RebecaRwanda",
+			"Amire80"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} ikintu",
-	"wikibase-editlinks": "hindura Imbuga",
+	"wikibase-editlinks": "Hindura imbuga",
 	"wikibase-linkitem-addlinks": "Shiraho imbuga",
 	"wikibase-linkitem-title": "Urubuga hamwe n'urupapuro",
 	"wikibase-linkitem-linkpage": "Urubuga hamwe n'urupapuro",
 	"wikibase-linkitem-selectlink": "Hitamo urubuga hamwe n'urupapuro ushaka kujanisha n'uru rupapuro.",
 	"wikibase-linkitem-input-site": "Ururimi:",
-	"wikibase-linkitem-input-page": "Urupapuro:"
+	"wikibase-linkitem-input-page": "Urupapuro:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Erekana"
 }

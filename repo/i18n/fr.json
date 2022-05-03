@@ -303,7 +303,7 @@
 	"wikibase-setaliases-label": "Alias :",
 	"wikibase-setaliases-submit": "Définir les alias",
 	"special-setlabeldescriptionaliases": "Définir le libellé, la description et les alias de l’élément ou de la propriété",
-	"wikibase-setlabeldescriptionaliases-introfull": "Vous définissez le libellé, la description et les alias dans $2 pour [[:$1]]. Plusieurs alias sont séparés par un caractère barre verticale (<code>|</code>).",
+	"wikibase-setlabeldescriptionaliases-introfull": "Vous définissez le libellé, la description et les alias en $2 pour [[:$1]]. Plusieurs alias sont séparés par un caractère barre verticale (<code>|</code>).",
 	"wikibase-setlabeldescriptionaliases-intro": "Ce formulaire vous permet de fixer le libellé, la description et les alias d’une entité. Vous devez d’abord fournir l’id de l’entité (par ex. « Q23 ») et un code de langue (par ex. « en »).",
 	"wikibase-setlabeldescriptionaliases-label-label": "Libellé :",
 	"wikibase-setlabeldescriptionaliases-description-label": "Description :",
@@ -565,7 +565,7 @@
 	"special-setaliases-parameterized": "Définir les alias $1",
 	"special-setlabel-parameterized": "Définir le libellé $1",
 	"special-setdescription-parameterized": "Définir la description de $1",
-	"special-setlabeldescriptionaliases-parameterized": "Définir le libellé, description et alias $1",
+	"special-setlabeldescriptionaliases-parameterized": "Définir le libellé, la description et les alias de $1",
 	"special-parameterized-description-separator": "/",
 	"wikibase-federated-properties-local-property-api-error-message": "Vous ne pouvez pas interagir avec des propriétés en utilisant cette API quand les propriétés fédérées sont activées",
 	"wikibase-federated-properties-failed-request-api-error-message": "La requête a échoué du fait d'une requête en échec au wiki source fédéré."
