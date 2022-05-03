@@ -344,7 +344,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 
 			return;
 		}
-		$this->fail( 'No expection thrown!' );
+		$this->fail( 'No exception thrown!' );
 	}
 
 	public function provideGetReferencedEntityIdMaxEntityVisitsExceeded() {
@@ -390,7 +390,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 
 			return;
 		}
-		$this->fail( 'No expection thrown!' );
+		$this->fail( 'No exception thrown!' );
 	}
 
 	public function provideGetReferencedEntityIdTestInvalidSnak() {
@@ -468,7 +468,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 
 			return;
 		}
-		$this->fail( 'No expection thrown!' );
+		$this->fail( 'No exception thrown!' );
 	}
 
 }
