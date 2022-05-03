@@ -4,5 +4,8 @@
 	},
 	"/entities/items/{entity_id}/statements": {
 		"$ref": "./statements/list.json"
+	},
+	"/statements/{statement_id}": {
+		"$ref": "./statements/single.json"
 	}
 }

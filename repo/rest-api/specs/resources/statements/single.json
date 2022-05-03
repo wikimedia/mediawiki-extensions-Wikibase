@@ -1,0 +1,20 @@
+{
+	"get": {
+		"tags": [
+			"statements"
+		],
+		"summary": "Retrieve a single Statement from an entity",
+		"description": "This endpoint is also accessible through `/entities/{entity_type}/{entity_id}/statements/{statement_id}`",
+		"parameters": [
+			{
+				"$ref": "../../global/parameters.json#/statementId"
+			}
+		],
+		"responses": {
+			"200": { "$ref": "../../global/responses.json#/Statement" },
+			"400": { "$ref": "../../global/responses.json#/InvalidInput" },
+			"404": { "$ref": "../../global/responses.json#/NotFound" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
+	}
+}

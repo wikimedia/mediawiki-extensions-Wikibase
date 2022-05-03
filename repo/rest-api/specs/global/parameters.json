@@ -15,6 +15,17 @@
 			}
 		}
 	},
+	"statementId": {
+		"in": "path",
+		"name": "statement_id",
+		"description": "The id of the required Statement",
+		"required": true,
+		"schema": {
+			"type" : "string",
+			"pattern": "^(Q|P)[1-9]\\d{0,9}\\$.+$"
+		},
+		"example": "Q42$F078E5B3-F9A8-480E-B7AC-D97778CBBEF9"
+	},
 	"fields": {
 		"in": "query",
 		"name": "_fields",

@@ -12,9 +12,19 @@
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "#/Error" },
-				"example": {
-					"code": "item-not-found",
-					"message": "Could not find an item with the ID: {item_id}"
+				"examples": {
+					"item-not-found": {
+						"value": {
+							"code": "item-not-found",
+							"message": "Could not find an item with the ID: {item_id}"
+						}
+					},
+					"statement-not-found": {
+						"value": {
+							"code": "statement-not-found",
+							"message": "Could not find a statement with the ID: {statement_id}"
+						}
+					}
 				}
 			}
 		},
@@ -37,6 +47,12 @@
 						"value": {
 							"code": "invalid-item-id",
 							"message": "Not a valid item ID: {item_id}"
+						}
+					},
+					"invalid-statement-id": {
+						"value": {
+							"code": "invalid-statement-id",
+							"message": "Not a valid statement ID: {statement_id}"
 						}
 					},
 					"invalid-field": {
@@ -102,6 +118,28 @@
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "./schemas.json#/Item" }
+			}
+		}
+	},
+	"Statement": {
+		"description": "A single Wikibase Statement",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./schemas.json#/Statement" }
 			}
 		}
 	},
