@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abdul Fatawu 352",
 			"Amire80",
 			"Hasslaebetch"
 		]
 	},
 	"wikibase-edit": "Tekre",
 	"wikibase-add": "paase",
-	"wikibase-sitelinks-special": "Sitā toore"
+	"wikibase-sitelinks-special": "Sitā toore",
+	"wikibase-statementview-rank-normal": "Rulga zemsgo"
 }
