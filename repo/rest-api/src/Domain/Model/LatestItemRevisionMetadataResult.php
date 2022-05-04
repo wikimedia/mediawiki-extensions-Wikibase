@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @license GPL-2.0-or-later
  */
-final class LatestItemRevisionMetaDataResult {
+final class LatestItemRevisionMetadataResult {
 
 	/**
 	 * @var ?int
