@@ -10,7 +10,8 @@
 			"Дзяніс Тутэйшы",
 			"Чаховіч Уладзіслаў",
 			"Tomato Cream",
-			"Chadyka"
+			"Chadyka",
+			"No Sleep till Krupki"
 		]
 	},
 	"wikibase-desc": "Сховішча структураваных дадзеных",
@@ -28,9 +29,9 @@
 	"wikibase-save-inprogress": "Запісванне…",
 	"wikibase-publish-inprogress": "Запісванне...",
 	"wikibase-remove-inprogress": "Выдаленне…",
-	"wikibase-statementlistview-add": "дадаць",
+	"wikibase-statementlistview-add": "дадаць значэнне",
 	"wikibase-statementlistview-add-tooltip": "Дадаць новае значэнне",
-	"wikibase-statementgrouplistview-add": "дадаць",
+	"wikibase-statementgrouplistview-add": "дадаць сцверджанне",
 	"wikibase-statementgrouplistview-add-tooltip": "Дадаць новае сцверджанне",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На іншых мовах",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Наладзіць",
