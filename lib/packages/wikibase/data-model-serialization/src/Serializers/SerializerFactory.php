@@ -158,7 +158,7 @@ class SerializerFactory {
 	 *
 	 * @since 1.4
 	 *
-	 * @return Serializer
+	 * @return StatementListSerializer
 	 */
 	public function newStatementListSerializer() {
 		return new StatementListSerializer(
