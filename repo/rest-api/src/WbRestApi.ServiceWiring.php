@@ -1,10 +1,14 @@
 <?php declare( strict_types = 1 );
 
 use MediaWiki\MediaWikiServices;
+use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemStatementsRetriever;
+use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionRetriever;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
+use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
+use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -21,6 +25,19 @@ return [
 					->newItemSerializer()
 			),
 			new GetItemValidator( new ItemIdValidator() )
+		);
+	},
+	'WbRestApi.GetItemStatements' => function ( MediaWikiServices $services ): GetItemStatements {
+		return new GetItemStatements(
+			new GetItemStatementsValidator( new ItemIdValidator() ),
+			new WikibaseEntityLookupItemStatementsRetriever(
+				WikibaseRepo::getEntityLookup( $services )
+			),
+			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+				WikibaseRepo::getEntityRevisionLookup( $services )
+			),
+			WikibaseRepo::getBaseDataModelSerializerFactory( $services )
+				->newStatementListSerializer()
 		);
 	},
 

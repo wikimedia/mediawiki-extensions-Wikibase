@@ -22,11 +22,21 @@ class EmptyArrayToObjectConverter {
 	 */
 	public function __construct( array $paths ) {
 		$this->paths = array_map( function ( string $path ) {
-			return explode( '/', $path );
+			$path = explode( '/', $path );
+			array_shift( $path ); // remove first array element for leading slash
+			return $path;
 		}, $paths );
 	}
 
-	public function convert( array $input ): array {
+	/**
+	 * @param array $input
+	 *
+	 * @return stdClass|array
+	 */
+	public function convert( array $input ) {
+		if ( $input === [] && $this->hasPath( [ '' ] ) ) {
+			return new stdClass();
+		}
 		$newArray = $input; // copy so that we don't modify the original
 
 		$this->convertWithPath( [], $newArray );

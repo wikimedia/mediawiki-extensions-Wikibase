@@ -14,12 +14,12 @@ class GetItemJsonPresenter {
 
 	public function __construct() {
 		$this->emptyArrayToObjectConverter = new EmptyArrayToObjectConverter( [
-			'labels',
-			'descriptions',
-			'aliases',
-			'statements',
-			'statements/*/*/qualifiers',
-			'sitelinks',
+			'/labels',
+			'/descriptions',
+			'/aliases',
+			'/statements',
+			'/statements/*/*/qualifiers',
+			'/sitelinks',
 		] );
 	}
 
