@@ -304,9 +304,9 @@ return call_user_func( function() {
 	 * "unexpectedUnconnectedPage" page prop should be written or read.
 	 *
 	 * MIGRATION_WRITE_BOTH (and up): Write the "unexpectedUnconnectedPage" page property.
-	 * MIGRATION_WRITE_NEW: Read the "unexpectedUnconnectedPage" page prop in SpecialUnconnectedPages.
+	 * MIGRATION_NEW: Read the "unexpectedUnconnectedPage" page prop in SpecialUnconnectedPages.
 	 */
-	$defaults['tmpUnconnectedPagePagePropMigrationStage'] = MIGRATION_OLD;
+	$defaults['tmpUnconnectedPagePagePropMigrationStage'] = MIGRATION_WRITE_BOTH;
 
 	return $defaults;
 } );
