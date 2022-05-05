@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator
@@ -19,7 +20,7 @@ class GetItemValidatorTest extends TestCase {
 	 * @dataProvider dataProviderPass
 	 */
 	public function testValidatePass( GetItemRequest $request ): void {
-		$error = ( new GetItemValidator() )->validate( $request );
+		$error = ( new GetItemValidator( new ItemIdValidator() ) )->validate( $request );
 
 		$this->assertNull( $error );
 	}
@@ -38,7 +39,7 @@ class GetItemValidatorTest extends TestCase {
 	 * @dataProvider dataProviderFail
 	 */
 	public function testValidateFail( GetItemRequest $request, string $expectedSource ): void {
-		$result = ( new GetItemValidator() )->validate( $request );
+		$result = ( new GetItemValidator( new ItemIdValidator() ) )->validate( $request );
 
 		$this->assertNotNull( $result );
 		$this->assertEquals( $expectedSource, $result->getSource() );

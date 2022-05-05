@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRedirectResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -49,7 +50,7 @@ class GetItemTest extends TestCase {
 		$itemResponse = ( new GetItem(
 			$retriever,
 			$this->newItemSerializer(),
-			new GetItemValidator()
+			new GetItemValidator( new ItemIdValidator() )
 		) )->execute( $itemRequest );
 		$item = $itemResponse->getItem();
 
@@ -70,7 +71,7 @@ class GetItemTest extends TestCase {
 		$itemResponse = ( new GetItem(
 			$retriever,
 			$this->newItemSerializer(),
-			new GetItemValidator()
+			new GetItemValidator( new ItemIdValidator() )
 		) )->execute( $itemRequest );
 		$this->assertInstanceOf( GetItemErrorResponse::class, $itemResponse );
 		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $itemResponse->getCode() );
@@ -84,7 +85,7 @@ class GetItemTest extends TestCase {
 		$itemResponse = ( new GetItem(
 			$retriever,
 			$this->newItemSerializer(),
-			new GetItemValidator()
+			new GetItemValidator( new ItemIdValidator() )
 		) )->execute( $itemRequest );
 
 		$this->assertInstanceOf( GetItemErrorResponse::class, $itemResponse );
@@ -113,7 +114,7 @@ class GetItemTest extends TestCase {
 		$itemResponse = ( new GetItem(
 			$retriever,
 			$this->newItemSerializer(),
-			new GetItemValidator()
+			new GetItemValidator( new ItemIdValidator() )
 		) )->execute( $itemRequest );
 		$item = $itemResponse->getItem();
 
@@ -180,7 +181,7 @@ class GetItemTest extends TestCase {
 		$response = ( new GetItem(
 			$revisionRetriever,
 			$this->newItemSerializer(),
-			new GetItemValidator()
+			new GetItemValidator( new ItemIdValidator() )
 		) )->execute( $request );
 
 		$this->assertInstanceOf( GetItemRedirectResponse::class, $response );
