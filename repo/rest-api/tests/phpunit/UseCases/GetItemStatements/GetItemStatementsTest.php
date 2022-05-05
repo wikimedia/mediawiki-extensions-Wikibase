@@ -9,8 +9,12 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetaDataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetaDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
+use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsRequest;
+use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsValidator;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\Tests\NewStatement;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -83,8 +87,18 @@ class GetItemStatementsTest extends TestCase {
 		$this->assertSame( $lastModified, $response->getLastModified() );
 	}
 
+	public function testGivenInvalidItemId_returnsErrorResponse(): void {
+		$response = $this->newUseCase()->execute(
+			new GetItemStatementsRequest( 'X321' )
+		);
+
+		$this->assertInstanceOf( GetItemStatementsErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $response->getCode() );
+	}
+
 	private function newUseCase(): GetItemStatements {
 		return new GetItemStatements(
+			new GetItemStatementsValidator( new ItemIdValidator() ),
 			$this->statementsRetriever,
 			$this->itemRevisionMetaDataRetriever,
 			WikibaseRepo::getBaseDataModelSerializerFactory()->newStatementListSerializer()
