@@ -8,5 +8,10 @@
 		"path": "/wikibase/v0/entities/items/{id}/statements",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemStatementsRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/statements/{statement_id}",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetStatementRouteHandler::factory"
 	}
 ]
