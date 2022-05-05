@@ -15,9 +15,6 @@ use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
@@ -62,18 +59,11 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 
 	public static function factory(
 		EntityIdParser $idParser,
-		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		RepoLinker $repoLinker,
-		ClientStore $store,
-		TermBuffer $termBuffer,
-		TermLookup $termLookup
+		ClientStore $store
 	): self {
 		$usageLookup = $store->getUsageLookup();
-		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
-			$languageFallbackChainFactory,
-			$termLookup,
-			$termBuffer
-		);
 
 		return new self(
 			$repoLinker,

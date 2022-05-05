@@ -146,11 +146,9 @@
 			"factory": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler::factory",
 			"services": [
 				"WikibaseClient.EntityIdParser",
-				"WikibaseClient.LanguageFallbackChainFactory",
+				"WikibaseClient.LanguageFallbackLabelDescriptionLookupFactory",
 				"WikibaseClient.RepoLinker",
-				"WikibaseClient.Store",
-				"WikibaseClient.TermBuffer",
-				"WikibaseClient.TermLookup"
+				"WikibaseClient.Store"
 			]
 		},
 		"InfoAction": {
@@ -159,13 +157,11 @@
 			"services": [
 				"WikibaseClient.DescriptionLookup",
 				"WikibaseClient.EntityIdParser",
-				"WikibaseClient.LanguageFallbackChainFactory",
+				"WikibaseClient.LanguageFallbackLabelDescriptionLookupFactory",
 				"WikibaseClient.NamespaceChecker",
 				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Settings",
-				"WikibaseClient.Store",
-				"WikibaseClient.TermBuffer",
-				"WikibaseClient.TermLookup"
+				"WikibaseClient.Store"
 			]
 		},
 		"LoadExtensionSchemaUpdates": {
