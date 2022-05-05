@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
-use MediaWikiIntegrationTestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\Lib\Store\EntityRevision;
@@ -15,11 +15,10 @@ use Wikibase\Repo\Tests\NewItem;
  * @covers \Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionRetriever
  *
  * @group Wikibase
- * @group Database
  *
  * @license GPL-2.0-or-later
  */
-class WikibaseEntityRevisionLookupItemRevisionRetrieverTest extends MediaWikiIntegrationTestCase {
+class WikibaseEntityRevisionLookupItemRevisionRetrieverTest extends TestCase {
 
 	public function testGetItemRevision(): void {
 		$item = NewItem::withId( 'Q123' )->build();
@@ -40,6 +39,7 @@ class WikibaseEntityRevisionLookupItemRevisionRetrieverTest extends MediaWikiInt
 		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->expects( $this->once() )
 			->method( 'getEntityRevision' )
+			->with( $item->getId() )
 			->willReturn( $entityRevision );
 
 		$retriever = new WikibaseEntityRevisionLookupItemRevisionRetriever( $entityRevisionLookup );
