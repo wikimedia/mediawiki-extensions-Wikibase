@@ -4,7 +4,7 @@ namespace Wikibase\Repo\RestApi\UseCases\GetItemStatements;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Serializers\StatementListSerializer;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetaDataRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 
 /**
@@ -13,28 +13,28 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 class GetItemStatements {
 
 	private $statementsRetriever;
-	private $revisionMetaDataRetriever;
+	private $revisionMetadataRetriever;
 	private $serializer;
 
 	public function __construct(
 		ItemStatementsRetriever $statementsRetriever,
-		ItemRevisionMetaDataRetriever $revisionMetaDataRetriever,
+		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
 		StatementListSerializer $serializer
 	) {
 		$this->statementsRetriever = $statementsRetriever;
-		$this->revisionMetaDataRetriever = $revisionMetaDataRetriever;
+		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
 		$this->serializer = $serializer;
 	}
 
 	public function execute( GetItemStatementsRequest $request ): GetItemStatementsSuccessResponse {
 		$itemId = new ItemId( $request->getItemId() );
 
-		$latestRevisionMetaData = $this->revisionMetaDataRetriever->getLatestRevisionMetaData( $itemId );
+		$latestRevisionMetadata = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 
 		return new GetItemStatementsSuccessResponse(
 			$this->serializer->serialize( $this->statementsRetriever->getStatements( $itemId ) ),
-			$latestRevisionMetaData->getRevisionTimestamp(),
-			$latestRevisionMetaData->getRevisionId()
+			$latestRevisionMetadata->getRevisionTimestamp(),
+			$latestRevisionMetadata->getRevisionId()
 		);
 	}
 

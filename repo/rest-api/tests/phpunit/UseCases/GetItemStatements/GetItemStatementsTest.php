@@ -6,8 +6,8 @@ use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetaDataResult;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetaDataRetriever;
+use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsRequest;
@@ -24,9 +24,9 @@ use Wikibase\Repo\WikibaseRepo;
 class GetItemStatementsTest extends TestCase {
 
 	/**
-	 * @var Stub|ItemRevisionMetaDataRetriever
+	 * @var Stub|ItemRevisionMetadataRetriever
 	 */
-	private $itemRevisionMetaDataRetriever;
+	private $itemRevisionMetadataRetriever;
 
 	/**
 	 * @var Stub|ItemStatementsRetriever
@@ -36,7 +36,7 @@ class GetItemStatementsTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->itemRevisionMetaDataRetriever = $this->createStub( ItemRevisionMetaDataRetriever::class );
+		$this->itemRevisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->statementsRetriever = $this->createStub( ItemStatementsRetriever::class );
 	}
 
@@ -57,11 +57,11 @@ class GetItemStatementsTest extends TestCase {
 				->build()
 		);
 
-		$this->itemRevisionMetaDataRetriever = $this->createMock( ItemRevisionMetaDataRetriever::class );
-		$this->itemRevisionMetaDataRetriever->expects( $this->once() )
-			->method( 'getLatestRevisionMetaData' )
+		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
+		$this->itemRevisionMetadataRetriever->expects( $this->once() )
+			->method( 'getLatestRevisionMetadata' )
 			->with( $itemId )
-			->willReturn( LatestItemRevisionMetaDataResult::concreteRevision( $revision, $lastModified ) );
+			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( $revision, $lastModified ) );
 
 		$this->statementsRetriever = $this->createMock( ItemStatementsRetriever::class );
 		$this->statementsRetriever->expects( $this->once() )
@@ -86,7 +86,7 @@ class GetItemStatementsTest extends TestCase {
 	private function newUseCase(): GetItemStatements {
 		return new GetItemStatements(
 			$this->statementsRetriever,
-			$this->itemRevisionMetaDataRetriever,
+			$this->itemRevisionMetadataRetriever,
 			WikibaseRepo::getBaseDataModelSerializerFactory()->newStatementListSerializer()
 		);
 	}
