@@ -14,7 +14,6 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
@@ -40,25 +39,17 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 	 */
 	private $labelDescriptionLookupFactory;
 
-	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
-
 	public function __construct(
 		RepoLinker $repoLinker,
 		UsageLookup $usageLookup,
-		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
-		EntityIdParser $idParser
+		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	) {
 		$this->repoLinker = $repoLinker;
 		$this->usageLookup = $usageLookup;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
-		$this->idParser = $idParser;
 	}
 
 	public static function factory(
-		EntityIdParser $idParser,
 		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		RepoLinker $repoLinker,
 		ClientStore $store
@@ -68,8 +59,7 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 		return new self(
 			$repoLinker,
 			$usageLookup,
-			$labelDescriptionLookupFactory,
-			$idParser
+			$labelDescriptionLookupFactory
 		);
 	}
 
