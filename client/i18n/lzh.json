@@ -4,6 +4,7 @@
 			"Davidzdh",
 			"Itsmine",
 			"SolidBlock",
+			"StarrySky",
 			"StephDC",
 			"列维劳德",
 			"飞舞回堂前"
@@ -15,6 +16,8 @@
 	"wikibase-editlinks": "纂鏈",
 	"wikibase-editlinkstitle": "修跨語鏈",
 	"wikibase-linkitem-addlinks": "增鏈",
+	"wikibase-linkitem-input-site": "語：",
+	"wikibase-linkitem-input-page": "頁：",
 	"wikibase-rc-hide-wikidata": "$1{{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "隱",
 	"wikibase-rc-hide-wikidata-show": "示",
