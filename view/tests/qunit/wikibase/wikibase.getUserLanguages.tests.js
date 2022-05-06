@@ -32,6 +32,34 @@
 		assert.true( mwUlsConfigStub.notCalled );
 	} );
 
+	QUnit.test( 'getUserLanguages moves user language to front of babel', function ( assert ) {
+		var mwConfigStub = sandbox.stub( mw.config, 'get' );
+		var mwUlsConfigStub = sandbox.spy( mw.uls, 'getFrequentLanguageList' );
+		var babelLanguages = [ 'de', 'he', 'fr' ];
+		var userLanguage = 'he';
+
+		simulateUlsInstalled( true );
+		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages' ).returns( babelLanguages );
+		mwConfigStub.withArgs( 'wgUserLanguage' ).returns( userLanguage );
+
+		assert.deepEqual( wb.getUserLanguages(), [ 'he', 'de', 'fr' ] );
+		assert.true( mwUlsConfigStub.notCalled );
+	} );
+
+	QUnit.test( 'getUserLanguages adds user language to babel languages if not included', function ( assert ) {
+		var mwConfigStub = sandbox.stub( mw.config, 'get' );
+		var mwUlsConfigStub = sandbox.spy( mw.uls, 'getFrequentLanguageList' );
+		var babelLanguages = [ 'de', 'he', 'fr' ];
+		var userLanguage = 'en';
+
+		simulateUlsInstalled( true );
+		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages' ).returns( babelLanguages );
+		mwConfigStub.withArgs( 'wgUserLanguage' ).returns( userLanguage );
+
+		assert.deepEqual( wb.getUserLanguages(), [ 'en', 'de', 'he', 'fr' ] );
+		assert.true( mwUlsConfigStub.notCalled );
+	} );
+
 	QUnit.test( 'getUserLanguages uses uls languages if babel is not defined', function ( assert ) {
 		var mwConfigStub = sandbox.stub( mw.config, 'get' );
 		var mwUlsConfigStub = sandbox.stub( mw.uls, 'getFrequentLanguageList' );

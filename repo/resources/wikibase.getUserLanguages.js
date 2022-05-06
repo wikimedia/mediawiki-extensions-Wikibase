@@ -18,6 +18,8 @@
 	 */
 	wb.getUserLanguages = function () {
 		var userLanguages = mw.config.get( 'wbUserSpecifiedLanguages', [] ),
+			userLanguage = mw.config.get( 'wgUserLanguage' ),
+			userLanguageIndex = userLanguages.indexOf( userLanguage ),
 			isUlsDefined = mw.uls && $.uls && $.uls.data,
 			languages;
 
@@ -25,11 +27,13 @@
 			languages = mw.uls.getFrequentLanguageList().slice( 1, 4 );
 		} else {
 			languages = userLanguages.slice();
-			languages.splice( userLanguages.indexOf( mw.config.get( 'wgUserLanguage' ) ), 1 );
+			if ( userLanguageIndex !== -1 ) {
+				languages.splice( userLanguageIndex, 1 );
+			}
 		}
 
 		languages = filterInvalidTermsLanguages( languages );
-		languages.unshift( mw.config.get( 'wgUserLanguage' ) );
+		languages.unshift( userLanguage );
 		return languages;
 	};
 }( wikibase ) );
