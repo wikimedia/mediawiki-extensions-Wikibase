@@ -8,23 +8,10 @@ module.exports = function ( grunt ) {
 	grunt.initConfig( {
 		eslint: {
 			options: {
-				extensions: [ '.js', '.json' ],
 				cache: true,
 				fix: grunt.option( 'fix' )
 			},
-			all: [
-				'**/*.{js,json}',
-				'!view/resources/jquery/ui/**',
-				'!view/lib/**',
-				'!**/node_modules/**',
-				'!**/vendor/**',
-				'!extensions/**',
-				'!client/data-bridge/**',
-				'!lib/resources/wikibase-api/**',
-				'!lib/packages/wikibase/*/tests/**/*.json',
-				'!docs/**',
-				'!repo/rest-api/**'
-			]
+			all: [ '.' ]
 		},
 		stylelint: {
 			all: [

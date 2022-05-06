@@ -1,0 +1,19 @@
+# Upstream code
+/view/resources/jquery/ui/
+/view/lib/
+/client/data-bridge/
+/lib/resources/wikibase-api/
+/lib/packages/wikibase/*/tests/**/*.json
+/repo/rest-api/
+
+# Build tooling
+/docs/
+/vendor/
+
+# Nested projects
+/extensions/
+
+# Language files written automatically by TranslateWiki
+**/i18n/**/*.json
+!**/i18n/**/en.json
+!**/i18n/**/qqq.json

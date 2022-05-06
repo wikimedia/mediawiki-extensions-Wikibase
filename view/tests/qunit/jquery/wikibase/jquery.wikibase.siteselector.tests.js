@@ -94,7 +94,7 @@
 		return $( '<input>' )
 			.addClass( 'test-siteselector' )
 			.appendTo( 'body' )
-			.focus()
+			.trigger( 'focus' )
 			.siteselector( options );
 	};
 

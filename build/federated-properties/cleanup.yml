@@ -10,20 +10,20 @@
 
     - name: Run `docker-compose down`
       docker_compose:
-          project_src: "{{ PROJECT_DIR }}"
-          state: absent
+        project_src: "{{ PROJECT_DIR }}"
+        state: absent
       when: "ansible_facts.services['docker'] is defined and ansible_facts.services['docker'].state == 'running'"
 
     - name: Prune containers and volumes
       docker_prune:
-          containers: yes
-          volumes: yes
+        containers: yes
+        volumes: yes
       when: "ansible_facts.services['docker'] is defined and ansible_facts.services['docker'].state == 'running'"
 
     - name: Ensure docker service is stopped
       systemd:
-          state: stopped
-          name: docker
+        state: stopped
+        name: docker
       when: "ansible_facts.services['docker'] is defined and ansible_facts.services['docker'].state == 'running'"
 
     - name: Uninstall previously installed python packages
@@ -50,19 +50,19 @@
 
     - name: Remove cron jobs
       cron:
-          name: "{{ item }}"
-          user: "mediawiki"
-          state: absent
+        name: "{{ item }}"
+        user: "mediawiki"
+        state: absent
       loop:
-          - "gitPullMaster"
-          - "logrotate"
+        - "gitPullMaster"
+        - "logrotate"
 
     - name: Remove LocalSettings.php
       file:
-          path: "{{ MW_PATH }}/LocalSettings.php"
-          state: absent
+        path: "{{ MW_PATH }}/LocalSettings.php"
+        state: absent
 
     - name: Remove project directory
       file:
-          path: "{{ PROJECT_DIR }}"
-          state: absent
+        path: "{{ PROJECT_DIR }}"
+        state: absent
