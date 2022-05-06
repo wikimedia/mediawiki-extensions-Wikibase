@@ -160,7 +160,6 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'languageLinkAllowedSiteGroups' => [ 'wikipedia' ],
 			'namespaces' => [ NS_MAIN, NS_CATEGORY ],
 			'otherProjectsLinks' => [ 'commonswiki' ],
-			'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH,
 		];
 
 		return new SettingsArray( $defaults );
@@ -475,8 +474,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$mockRepo,
 			$mockRepo,
 			$this->newUsageAccumulatorFactory(),
-			$settings->getSetting( 'siteGlobalID' ),
-			$settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' )
+			$settings->getSetting( 'siteGlobalID' )
 		);
 	}
 

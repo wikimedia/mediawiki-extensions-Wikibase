@@ -10,8 +10,6 @@ use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\Client\Hooks\LoadExtensionSchemaUpdatesHookHandler;
 use Wikibase\Client\NamespaceChecker;
-use Wikibase\Client\WikibaseClient;
-use Wikibase\Lib\SettingsArray;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\TestingAccessWrapper;
 
@@ -48,30 +46,9 @@ class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTest
 		}
 	}
 
-	public function testOnLoadExtensionSchemaUpdates_skipSetting() {
-		$dbUpdater = TestingAccessWrapper::newFromObject( DatabaseUpdater::newForDB( $this->db ) );
-
-		$this->overrideMwServices( null, [
-			'WikibaseClient.Settings' => function () {
-				return new SettingsArray( [ 'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_OLD ] );
-			},
-		] );
-
-		$handler = new LoadExtensionSchemaUpdatesHookHandler();
-		$handler->onLoadExtensionSchemaUpdates( $dbUpdater );
-
-		$this->assertSame( [], $dbUpdater->getExtensionUpdates() );
-	}
-
 	public function testOnLoadExtensionSchemaUpdates_skipAlreadyUpdated() {
 		$dbUpdater = TestingAccessWrapper::newFromObject( DatabaseUpdater::newForDB( $this->db ) );
 		$dbUpdater->insertUpdateRow( LoadExtensionSchemaUpdatesHookHandler::UPDATE_KEY_UNEXPECTED_UNCONNECTED_PAGE );
-
-		$this->overrideMwServices( null, [
-			'WikibaseClient.Settings' => function () {
-				return new SettingsArray( [ 'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH ] );
-			},
-		] );
 
 		$handler = new LoadExtensionSchemaUpdatesHookHandler();
 		$handler->onLoadExtensionSchemaUpdates( $dbUpdater );
@@ -84,7 +61,6 @@ class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTest
 		$namespaceString = strval( $namespaceInt );
 		$namespaceFloat = $namespaceInt + 0.0;
 
-		$settings = WikibaseClient::getSettings()->getArrayCopy();
 		$maintenance = $this->createMock( Maintenance::class );
 		$maintenance->expects( $this->any() )
 			->method( 'isQuiet' )
@@ -93,13 +69,6 @@ class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTest
 		$dbUpdater = TestingAccessWrapper::newFromObject( DatabaseUpdater::newForDB( $this->db, false, $maintenance ) );
 
 		$this->overrideMwServices( null, [
-			'WikibaseClient.Settings' => function () use ( $settings ) {
-				return new SettingsArray(
-					[
-						'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH,
-					] + $settings
-				);
-			},
 			'WikibaseClient.NamespaceChecker' => function() {
 				return new NamespaceChecker( [], [ $this->getDefaultWikitextNS() ] );
 			},
