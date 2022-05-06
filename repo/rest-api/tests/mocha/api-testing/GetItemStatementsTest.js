@@ -54,6 +54,16 @@ describe( 'GET /entities/items/{id}/statements ', () => {
 		assert.empty( response.body );
 	} );
 
+	it( '400 error - bad request, invalid item ID', async () => {
+		const itemId = 'X123';
+		const response = await rest.get( `/entities/items/${itemId}/statements` );
+
+		assert.equal( response.status, 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.equal( response.body.code, 'invalid-item-id' );
+		assert.include( response.body.message, itemId );
+	} );
+
 	describe( 'authentication', () => {
 
 		it( 'has an X-Authenticated-User header with the logged in user', async () => {
