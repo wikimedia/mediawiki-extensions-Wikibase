@@ -77,6 +77,7 @@ describe( 'item', function () {
 
 		( new Page() ).openTitle( `Special:EntityPage/${itemId}`, { oldid: entity.lastrevid } );
 
+		// eslint-disable-next-line wdio/no-pause
 		browser.pause( 1000 );
 		assert( !ItemPage.editButton.isExisting() );
 	} );

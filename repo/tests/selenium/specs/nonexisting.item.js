@@ -17,7 +17,7 @@ describe( 'WikibaseRepoNonExistingItemPage', function () {
 		NonExistingItemPage.open();
 
 		const fullTitle = NonExistingItemPage.title.getText();
-		const title = fullTitle.substring( fullTitle.indexOf( ':' ) + 1 );
+		const title = fullTitle.slice( fullTitle.indexOf( ':' ) + 1 );
 
 		assert.strictEqual( title, 'Q999999999' );
 	} );

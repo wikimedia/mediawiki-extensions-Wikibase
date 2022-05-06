@@ -13,6 +13,7 @@
 				"functions": false
 			}
 		],
+		"qunit/no-loose-assertions": "warn",
 		"qunit/resolve-async": "off",
 		"space-unary-ops": "off",
 		"no-jquery/no-parse-html-literal": "off"
