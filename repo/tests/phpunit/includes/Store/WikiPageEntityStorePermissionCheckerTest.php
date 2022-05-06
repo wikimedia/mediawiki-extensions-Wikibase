@@ -585,10 +585,10 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$lookup->method( 'getTitleForId' )
 			->willReturnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() === self::EXISTING_ITEM_ID ) {
-					return Title::newFromTitleValue( new TitleValue( WB_NS_ITEM, 'Test_Item' ) );
+					return Title::newFromLinkTarget( new TitleValue( WB_NS_ITEM, 'Test_Item' ) );
 				}
 				if ( $id->getSerialization() === self::EXISTING_PROPERTY_ID ) {
-					return Title::newFromTitleValue( new TitleValue( WB_NS_PROPERTY, 'Test_Property' ) );
+					return Title::newFromLinkTarget( new TitleValue( WB_NS_PROPERTY, 'Test_Property' ) );
 				}
 				return null;
 			} );
