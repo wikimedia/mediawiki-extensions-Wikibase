@@ -29,11 +29,7 @@ class LoadExtensionSchemaUpdatesHookHandler implements LoadExtensionSchemaUpdate
 	 * @param DatabaseUpdater $updater DatabaseUpdater subclass
 	 */
 	public function onLoadExtensionSchemaUpdates( $updater ): void {
-		$settings = WikibaseClient::getSettings();
-		if (
-			!$updater->updateRowExists( self::UPDATE_KEY_UNEXPECTED_UNCONNECTED_PAGE ) &&
-			$settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' ) >= MIGRATION_WRITE_BOTH
-		) {
+		if ( !$updater->updateRowExists( self::UPDATE_KEY_UNEXPECTED_UNCONNECTED_PAGE ) ) {
 			$updater->addExtensionUpdate( [
 				[ __CLASS__, 'primeUnexpectedUnconnectedPage' ],
 			] );

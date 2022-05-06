@@ -10,7 +10,6 @@ use TitleFactory;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
-use Wikibase\Lib\SettingsArray;
 use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IResultWrapper;
 
@@ -41,15 +40,11 @@ class SpecialUnconnectedPages extends QueryPage {
 	/** @var ClientDomainDb */
 	private $db;
 
-	/** @var int */
-	private $unconnectedPagePagePropMigrationStage;
-
 	public function __construct(
 		NamespaceInfo $namespaceInfo,
 		TitleFactory $titleFactory,
 		ClientDomainDbFactory $db,
-		NamespaceChecker $namespaceChecker,
-		SettingsArray $settings
+		NamespaceChecker $namespaceChecker
 	) {
 		parent::__construct( 'UnconnectedPages' );
 		$this->namespaceInfo = $namespaceInfo;
@@ -57,7 +52,6 @@ class SpecialUnconnectedPages extends QueryPage {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->db = $db->newLocalDb();
 		$this->setDBLoadBalancer( $this->db->loadBalancer() );
-		$this->unconnectedPagePagePropMigrationStage = $settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' );
 	}
 
 	/**
@@ -88,21 +82,12 @@ class SpecialUnconnectedPages extends QueryPage {
 		$wbNamespaces = $this->namespaceChecker->getWikibaseNamespaces();
 		$ns = $this->getRequest()->getIntOrNull( 'namespace' );
 
-		if ( $this->unconnectedPagePagePropMigrationStage >= MIGRATION_NEW ) {
-			if ( $ns !== null && in_array( $ns, $wbNamespaces ) ) {
-				$conds['pp_sortkey'] = -$ns;
-			} else {
-				$conds['pp_sortkey'] = [];
-				foreach ( $wbNamespaces as $wbNs ) {
-					$conds['pp_sortkey'][] = -$wbNs;
-				}
-			}
+		if ( $ns !== null && in_array( $ns, $wbNamespaces ) ) {
+			$conds['pp_sortkey'] = $ns;
 		} else {
-			// b/c: We can't yet use the new "unexpectedUnconnectedPage" page property.
-			if ( $ns !== null && in_array( $ns, $wbNamespaces ) ) {
-				$conds['page_namespace'] = $ns;
-			} else {
-				$conds['page_namespace'] = $wbNamespaces;
+			$conds['pp_sortkey'] = [];
+			foreach ( $wbNamespaces as $wbNs ) {
+				$conds['pp_sortkey'][] = -$wbNs;
 			}
 		}
 
@@ -115,27 +100,6 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @return array[]
 	 */
 	public function getQueryInfo() {
-		$conds = $this->buildNamespaceConditionals();
-
-		$joinConds = [
-			'page_props' => [
-				'INNER JOIN',
-				[ 'page_id = pp_page', 'pp_propname' => 'unexpectedUnconnectedPage' ]
-			],
-		];
-
-		if ( $this->unconnectedPagePagePropMigrationStage < MIGRATION_NEW ) {
-			// b/c: We can't yet use the new "unexpectedUnconnectedPage" page property.
-			$conds['page_is_redirect'] = 0;
-			$conds['pp_propname'] = null;
-			$joinConds = [
-				'page_props' => [
-					'LEFT JOIN',
-					[ 'page_id = pp_page', 'pp_propname' => [ 'wikibase_item', 'expectedUnconnectedPage' ] ]
-				],
-			];
-		}
-
 		return [
 			'tables' => [
 				'page',
@@ -146,10 +110,15 @@ class SpecialUnconnectedPages extends QueryPage {
 				'namespace' => 'page_namespace',
 				'title' => 'page_title',
 			],
-			'conds' => $conds,
+			'conds' => $this->buildNamespaceConditionals(),
 			// Sorting is determined getOrderFields()
 			'options' => [],
-			'join_conds' => $joinConds,
+			'join_conds' => [
+				'page_props' => [
+					'INNER JOIN',
+					[ 'page_id = pp_page', 'pp_propname' => 'unexpectedUnconnectedPage' ]
+				],
+			],
 		];
 	}
 
@@ -157,10 +126,6 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @return string[]
 	 */
 	protected function getOrderFields() {
-		if ( $this->unconnectedPagePagePropMigrationStage < MIGRATION_NEW ) {
-			// b/c: With the old page prop we can't use pp_sortkey
-			return parent::getOrderFields();
-		}
 		// Should make use of the "pp_propname_sortkey_page" index.
 		return [ 'pp_sortkey', 'page_id' ];
 	}

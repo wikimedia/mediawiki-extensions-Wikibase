@@ -663,7 +663,6 @@ return [
 			WikibaseClient::getEntityLookup( $services ),
 			WikibaseClient::getUsageAccumulatorFactory( $services ),
 			$settings->getSetting( 'siteGlobalID' ),
-			$settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' ),
 			WikibaseClient::getLogger( $services )
 		);
 	},

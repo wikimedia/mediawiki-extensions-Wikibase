@@ -297,17 +297,5 @@ return call_user_func( function() {
 	// Batch size for adding entity usage records
 	$defaults['addEntityUsagesBatchSize'] = 500;
 
-	/**
-	 * @note This config option is primarily added for the Wikimedia transition use-case and can be
-	 * considered temporary. It could be removed in the future with no warning.
-	 *
-	 * (tmp) Migration stage (one of the MIGRATION_* constants) indicating, whether the
-	 * "unexpectedUnconnectedPage" page prop should be written or read.
-	 *
-	 * MIGRATION_WRITE_BOTH (and up): Write the "unexpectedUnconnectedPage" page property.
-	 * MIGRATION_NEW: Read the "unexpectedUnconnectedPage" page prop in SpecialUnconnectedPages.
-	 */
-	$defaults['tmpUnconnectedPagePagePropMigrationStage'] = MIGRATION_WRITE_BOTH;
-
 	return $defaults;
 } );
