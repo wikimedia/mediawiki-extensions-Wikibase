@@ -19,7 +19,7 @@
 	} );
 
 	QUnit.test( 'is a constructor', function ( assert ) {
-		assert.ok( new SUBJECT() instanceof SUBJECT );
+		assert.true( new SUBJECT() instanceof SUBJECT );
 	} );
 
 	QUnit.test( 'setSiteLink performs correct API call', function ( assert ) {
@@ -36,7 +36,7 @@
 
 		siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName' ) );
 
-		assert.ok( api.setSitelink.calledOnce );
+		assert.true( api.setSitelink.calledOnce );
 	} );
 
 	QUnit.test( 'setSiteLink correctly handles API response', function ( assert ) {
@@ -62,7 +62,7 @@
 
 		return siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName' ) )
 		.done( function ( savedSiteLink ) {
-			assert.ok( savedSiteLink instanceof datamodel.SiteLink );
+			assert.true( savedSiteLink instanceof datamodel.SiteLink );
 		} );
 	} );
 
@@ -110,10 +110,10 @@
 
 		siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName' ) )
 		.done( function ( savedSiteLink ) {
-			assert.ok( false, 'setSiteLink should have failed' );
+			assert.true( false, 'setSiteLink should have failed' );
 		} )
 		.fail( function ( error ) {
-			assert.ok( error instanceof wb.api.RepoApiError, 'setSiteLink did not fail with a RepoApiError' );
+			assert.true( error instanceof wb.api.RepoApiError, 'setSiteLink did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 		} )
 		.always( done );
@@ -133,7 +133,7 @@
 
 		siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', '' ) );
 
-		assert.ok( api.setSitelink.calledOnce );
+		assert.true( api.setSitelink.calledOnce );
 	} );
 
 	QUnit.test( 'setSiteLink correctly handles API response for remove', function ( assert ) {

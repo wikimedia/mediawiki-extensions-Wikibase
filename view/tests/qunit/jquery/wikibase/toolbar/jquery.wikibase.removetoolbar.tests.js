@@ -34,15 +34,16 @@
 		var $removetoolbar = createRemovetoolbar(),
 			removetoolbar = $removetoolbar.data( 'removetoolbar' );
 
-		assert.ok(
+		assert.true(
 			removetoolbar instanceof $.wikibase.removetoolbar,
 			'Instantiated widget.'
 		);
 
 		removetoolbar.destroy();
 
-		assert.notOk(
+		assert.strictEqual(
 			$removetoolbar.data( 'removetoolbar' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );

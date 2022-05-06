@@ -49,7 +49,7 @@
 	QUnit.test( 'Create & destroy', function ( assert ) {
 		var $entitysearch = newEntitysearch();
 
-		assert.ok(
+		assert.true(
 			$entitysearch.data( 'entitysearch' ) instanceof $.wikibase.entitysearch,
 			'Instantiated widget.'
 		);

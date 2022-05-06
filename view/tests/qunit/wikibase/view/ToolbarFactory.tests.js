@@ -6,7 +6,7 @@
 	QUnit.module( 'wikibase.view.ToolbarFactory' );
 
 	QUnit.test( 'is constructable', function ( assert ) {
-		assert.ok( new ToolbarFactory() instanceof ToolbarFactory );
+		assert.true( new ToolbarFactory() instanceof ToolbarFactory );
 	} );
 
 	QUnit.test( 'getToolbarContainer returns the first container', function ( assert ) {

@@ -19,7 +19,7 @@
 	} );
 
 	QUnit.test( 'is a constructor', function ( assert ) {
-		assert.ok( new SUBJECT() instanceof SUBJECT );
+		assert.true( new SUBJECT() instanceof SUBJECT );
 	} );
 
 	QUnit.test( 'setLabel performs correct API call', function ( assert ) {
@@ -36,7 +36,7 @@
 
 		labelsChanger.setLabel( new datamodel.Term( 'language', 'label' ) );
 
-		assert.ok( api.setLabel.calledOnce );
+		assert.true( api.setLabel.calledOnce );
 	} );
 
 	QUnit.test( 'setLabel correctly handles API response', function ( assert ) {
@@ -82,10 +82,10 @@
 
 		labelsChanger.setLabel( new datamodel.Term( 'language', 'label' ) )
 		.done( function ( savedLabel ) {
-			assert.ok( false, 'setLabel should have failed' );
+			assert.true( false, 'setLabel should have failed' );
 		} )
 		.fail( function ( error ) {
-			assert.ok( error instanceof wb.api.RepoApiError, 'setLabel did not fail with a RepoApiError' );
+			assert.true( error instanceof wb.api.RepoApiError, 'setLabel did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 		} )
 		.always( done );

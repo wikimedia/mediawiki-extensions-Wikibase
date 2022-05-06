@@ -85,7 +85,7 @@
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
-		assert.ok(
+		assert.true(
 			sitelinkview instanceof $.wikibase.sitelinkview,
 			'Created widget.'
 		);
@@ -106,7 +106,7 @@
 			} ),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
-		assert.ok(
+		assert.true(
 			sitelinkview instanceof $.wikibase.sitelinkview,
 			'Created widget.'
 		);
@@ -126,13 +126,13 @@
 
 		$sitelinkview
 		.on( 'sitelinkviewafterstartediting', function ( event ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
 		.on( 'sitelinkviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Stopped edit mode.'
 			);
@@ -167,13 +167,13 @@
 
 		$sitelinkview
 		.on( 'sitelinkviewafterstartediting', function ( event ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
 		.on( 'sitelinkviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Stopped edit mode.'
 			);
@@ -290,7 +290,7 @@
 		$sitelinkview
 		.addClass( 'wb-error' )
 		.on( 'sitelinkviewtoggleerror', function ( event, error ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered toggleerror event.'
 			);

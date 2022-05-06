@@ -55,7 +55,7 @@
 		var $aliasesview = createAliasesview(),
 			aliasesview = $aliasesview.data( 'aliasesview' );
 
-		assert.ok(
+		assert.true(
 			aliasesview instanceof $.wikibase.aliasesview,
 			'Created widget'
 		);
@@ -89,13 +89,13 @@
 
 		$aliasesview
 		.on( 'aliasesviewafterstartediting', function ( event ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
 		.on( 'aliasesviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Stopped edit mode.'
 			);
@@ -199,7 +199,7 @@
 
 		$aliasesview
 		.on( 'aliasesviewtoggleerror', function ( event, error ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered "toggleerror" event.'
 			);

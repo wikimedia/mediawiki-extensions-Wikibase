@@ -32,7 +32,7 @@
 	} );
 
 	QUnit.test( 'is a constructor', function ( assert ) {
-		assert.ok( new EntityTermsChanger() instanceof EntityTermsChanger );
+		assert.true( new EntityTermsChanger() instanceof EntityTermsChanger );
 	} );
 
 	QUnit.test( 'save performs correct API calls for new label', function ( assert ) {
@@ -53,7 +53,7 @@
 			newFingerprint().withLabel( 'some-lang', 'some label' ),
 			currentFingerprint().empty()
 		).then( function () {
-			assert.ok( api.setLabel.calledOnce );
+			assert.true( api.setLabel.calledOnce );
 			sinon.assert.calledWith(
 				api.setLabel,
 				'Q1',
@@ -82,7 +82,7 @@
 			newFingerprint().withLabel( 'some-lang', 'new label' ),
 			currentFingerprint().withLabel( 'some-lang', 'old label' )
 		).then( function () {
-			assert.ok( api.setLabel.calledOnce );
+			assert.true( api.setLabel.calledOnce );
 			sinon.assert.calledWith( api.setLabel, 'Q1', REVISION_ID, 'new label', 'some-lang' );
 		} )
 			.fail( failOnError( assert ) )
@@ -116,7 +116,7 @@
 			newFingerprint().empty(),
 			currentFingerprint().withLabel( 'langCode', 'old label' )
 		).then( function () {
-			assert.ok( api.setLabel.calledOnce );
+			assert.true( api.setLabel.calledOnce );
 			sinon.assert.calledWith( api.setLabel, 'Q1', REVISION_ID, '', 'langCode' );
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
@@ -159,13 +159,13 @@
 			newFingerprint().withLabel( 'language', 'label' ),
 			currentFingerprint().empty()
 		).done( function ( savedFingerprint ) {
-			assert.ok( false, 'save should have failed' );
+			assert.true( false, 'save should have failed' );
 		} )
 		.fail( function ( error ) {
-			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
+			assert.true( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 			assert.strictEqual( error.context.type, 'label' );
-			assert.ok( error.context.value.equals( new Term( 'language', 'label' ) ) );
+			assert.true( error.context.value.equals( new Term( 'language', 'label' ) ) );
 		} )
 		.always( done );
 	} );
@@ -189,7 +189,7 @@
 			newFingerprint().withDescription( 'some-lang', 'description' ),
 			currentFingerprint().empty()
 		).then( function () {
-			assert.ok( api.setDescription.calledOnce );
+			assert.true( api.setDescription.calledOnce );
 			sinon.assert.calledWith(
 				api.setDescription,
 				'Q1',
@@ -219,7 +219,7 @@
 			newFingerprint().withDescription( 'some-lang', 'new description' ),
 			currentFingerprint().withDescription( 'some-lang', 'old description' )
 		).then( function () {
-			assert.ok( api.setDescription.calledOnce );
+			assert.true( api.setDescription.calledOnce );
 			sinon.assert.calledWith(
 				api.setDescription,
 				'Q1',
@@ -256,7 +256,7 @@
 			newFingerprint().empty(),
 			currentFingerprint().withDescription( 'langCode', 'old description' )
 		).then( function () {
-			assert.ok( api.setDescription.calledOnce );
+			assert.true( api.setDescription.calledOnce );
 			sinon.assert.calledWith( api.setDescription, 'Q1', REVISION_ID, '', 'langCode' );
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
@@ -302,13 +302,13 @@
 			newFingerprint().withDescription( 'language', 'description' ),
 			currentFingerprint().empty()
 		).done( function ( savedFingerprint ) {
-			assert.ok( false, 'save should have failed' );
+			assert.true( false, 'save should have failed' );
 		} )
 		.fail( function ( error ) {
-			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
+			assert.true( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 			assert.strictEqual( error.context.type, 'description' );
-			assert.ok( error.context.value.equals( new Term( 'language', 'description' ) ) );
+			assert.true( error.context.value.equals( new Term( 'language', 'description' ) ) );
 		} ).always( done );
 	} );
 
@@ -331,7 +331,7 @@
 			newFingerprint().withAliases( 'language', [ 'alias' ] ),
 			currentFingerprint().empty()
 		).then( function () {
-			assert.ok( api.setAliases.calledOnce );
+			assert.true( api.setAliases.calledOnce );
 			sinon.assert.calledWith( api.setAliases, 'Q1', revisionId, [ 'alias' ], [], 'language' );
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
@@ -354,7 +354,7 @@
 			newFingerprint().withAliases( 'language', [ 'new alias' ] ),
 			currentFingerprint().withAliases( 'language', [ 'old alias' ] )
 		).then( function () {
-			assert.ok( api.setAliases.calledOnce );
+			assert.true( api.setAliases.calledOnce );
 			sinon.assert.calledWith(
 				api.setAliases,
 				'Q1',
@@ -381,7 +381,7 @@
 			newFingerprint().empty(),
 			currentFingerprint().withAliases( 'language', [ 'old alias' ] )
 		).then( function () {
-			assert.ok( api.setAliases.calledOnce );
+			assert.true( api.setAliases.calledOnce );
 			sinon.assert.calledWith(
 				api.setAliases,
 				'Q1',
@@ -433,19 +433,19 @@
 			newFingerprint().withAliases( 'language', [ 'alias' ] ),
 			currentFingerprint().empty()
 		).done( function ( savedFingerprint ) {
-			assert.ok( false, 'save should have failed' );
+			assert.true( false, 'save should have failed' );
 		} )
 		.fail( function ( error ) {
-			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
+			assert.true( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 			assert.strictEqual( error.context.type, 'aliases' );
-			assert.ok( error.context.value.equals( new datamodel.MultiTerm( 'language', [ 'alias' ] ) ) );
+			assert.true( error.context.value.equals( new datamodel.MultiTerm( 'language', [ 'alias' ] ) ) );
 		} ).always( done );
 	} );
 
 	function failOnError( assert ) {
 		return function ( error ) {
-			assert.ok( false, error.stack || error );
+			assert.true( false, error.stack || error );
 		};
 	}
 

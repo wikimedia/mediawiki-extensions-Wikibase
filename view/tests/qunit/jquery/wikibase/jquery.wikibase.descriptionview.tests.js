@@ -52,7 +52,7 @@
 		var $descriptionview = createDescriptionview(),
 			descriptionview = $descriptionview.data( 'descriptionview' );
 
-		assert.ok(
+		assert.true(
 			descriptionview instanceof $.wikibase.descriptionview,
 			'Created widget.'
 		);
@@ -72,13 +72,13 @@
 
 		$descriptionview
 		.on( 'descriptionviewafterstartediting', function ( event ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
 		.on( 'descriptionviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Stopped edit mode.'
 			);
@@ -109,7 +109,7 @@
 
 		$descriptionview
 		.on( 'descriptionviewtoggleerror', function ( event, error ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered "toggleerror" event.'
 			);

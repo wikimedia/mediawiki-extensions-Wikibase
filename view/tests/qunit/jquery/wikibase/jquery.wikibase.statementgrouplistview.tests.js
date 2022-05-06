@@ -56,7 +56,7 @@
 		var $statementgrouplistview = createStatementgrouplistview(),
 			statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 
-		assert.ok(
+		assert.true(
 			statementgrouplistview instanceof $.wikibase.statementgrouplistview,
 			'Created widget.'
 		);
@@ -76,7 +76,7 @@
 		} );
 		statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 
-		assert.ok(
+		assert.true(
 			statementgrouplistview instanceof $.wikibase.statementgrouplistview,
 			'Created widget with filled datamodel.StatementGroupSet instance.'
 		);
@@ -109,7 +109,7 @@
 
 		var $statementgroupview = statementgrouplistview.listview.items().first();
 
-		assert.ok(
+		assert.true(
 			$statementgroupview.hasClass( 'wb-new' ),
 			'Verified statementgroupview widget being pending.'
 		);
@@ -117,7 +117,7 @@
 		$statementgroupview.wrap( '<div/>' );
 		$statementgroupview.trigger( 'afterstopediting', [ false ] );
 
-		assert.notOk(
+		assert.false(
 			statementgrouplistview.listview.items().first().hasClass( 'wb-new' ),
 			'Verified new statementgroupview not being pending after saving.'
 		);

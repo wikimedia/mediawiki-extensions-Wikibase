@@ -17,7 +17,7 @@
 			'number of classes ok'
 		);
 
-		assert.ok(
+		assert.true(
 			$subject.removeClassByRegex( /abcdefgh/ ) instanceof $,
 			'jQuery.removeClassByRegex() returns instance of jQuery'
 		);
@@ -52,7 +52,7 @@
 			.add( $( '<div>' ).addClass( 'AA  BB  CC  11  22  33' ) )
 			.add( $( '<div>' ).addClass( 'AAA BBB CCC 111 222 333' ) );
 
-		assert.ok(
+		assert.true(
 			$subject.removeClassByRegex( /abcdefgh/ ) instanceof $,
 			'jQuery.removeClassByRegex() returns instance of jQuery'
 		);

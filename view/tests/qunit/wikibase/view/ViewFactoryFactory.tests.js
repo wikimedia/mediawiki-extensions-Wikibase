@@ -19,7 +19,7 @@
 			result = factory.getViewFactory( true, [] );
 
 		sinon.assert.calledWithNew( wb.view.ControllerViewFactory );
-		assert.ok( result instanceof wb.view.ControllerViewFactory );
+		assert.true( result instanceof wb.view.ControllerViewFactory );
 	} );
 
 	QUnit.test( 'returns ReadModeViewFactory when not editable', function ( assert ) {
@@ -27,7 +27,7 @@
 			result = factory.getViewFactory( false, [] );
 
 		sinon.assert.calledWithNew( wb.view.ReadModeViewFactory );
-		assert.ok( result instanceof wb.view.ReadModeViewFactory );
+		assert.true( result instanceof wb.view.ReadModeViewFactory );
 	} );
 
 	QUnit.test( 'ControllerViewFactory is called with correct arguments', function ( assert ) {
@@ -35,7 +35,7 @@
 
 		factory.getViewFactory( true, [ 1, 2, 3 ] );
 
-		assert.ok( wb.view.ControllerViewFactory.calledWith( 1, 2, 3 ) );
+		assert.true( wb.view.ControllerViewFactory.calledWith( 1, 2, 3 ) );
 	} );
 
 	QUnit.test( 'ReadModeViewFactory is called with correct arguments', function ( assert ) {
@@ -43,7 +43,7 @@
 
 		factory.getViewFactory( false, [ 1, 2, 3 ] );
 
-		assert.ok( wb.view.ReadModeViewFactory.calledWith( 3 ) );
+		assert.true( wb.view.ReadModeViewFactory.calledWith( 3 ) );
 	} );
 
 }( wikibase ) );

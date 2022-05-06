@@ -140,13 +140,13 @@
 
 		$sitelinkgroupview
 		.on( 'sitelinkgroupviewafterstartediting', function ( event ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
 		.on( 'sitelinkgroupviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Stopped edit mode.'
 			);
@@ -240,7 +240,7 @@
 		$sitelinkgroupview
 		.addClass( 'wb-error' )
 		.on( 'sitelinkgroupviewtoggleerror', function ( event, error ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered toggleerror event.'
 			);

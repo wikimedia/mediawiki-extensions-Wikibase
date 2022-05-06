@@ -105,7 +105,7 @@
 		var $sitelinklistview = createSitelinklistview(),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
-		assert.ok(
+		assert.true(
 			sitelinklistview instanceof $.wikibase.sitelinklistview,
 			'Created widget.'
 		);
@@ -126,7 +126,7 @@
 			} ),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
-		assert.ok(
+		assert.true(
 			sitelinklistview instanceof $.wikibase.sitelinklistview,
 			'Created widget.'
 		);
@@ -188,13 +188,13 @@
 
 		$sitelinklistview
 		.on( 'sitelinklistviewafterstartediting', function ( event ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
 		.on( 'sitelinklistviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Stopped edit mode.'
 			);
@@ -294,7 +294,7 @@
 		$sitelinklistview
 		.addClass( 'wb-error' )
 		.on( 'sitelinklistviewtoggleerror', function ( event, error ) {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered toggleerror event.'
 			);
@@ -336,7 +336,7 @@
 
 		$sitelinklistview
 		.on( 'sitelinklistviewafterstartediting', function () {
-			assert.ok(
+			assert.true(
 				true,
 				'Started sitelinklistview edit mode.'
 			);

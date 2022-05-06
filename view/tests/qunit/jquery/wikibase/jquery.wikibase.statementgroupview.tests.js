@@ -60,7 +60,7 @@
 		var $statementgroupview = createStatementgroupview(),
 			statementgroupview = $statementgroupview.data( 'statementgroupview' );
 
-		assert.ok(
+		assert.true(
 			statementgroupview instanceof $.wikibase.statementgroupview,
 			'Created widget.'
 		);
@@ -82,7 +82,7 @@
 		} );
 		statementgroupview = $statementgroupview.data( 'statementgroupview' );
 
-		assert.ok(
+		assert.true(
 			statementgroupview instanceof $.wikibase.statementgroupview,
 			'Created widget with filled datamodel.StatementGroup instance.'
 		);
@@ -104,14 +104,14 @@
 			} ),
 			statementgroupview = $statementgroupview.data( 'statementgroupview' );
 
-		assert.ok(
+		assert.true(
 			statementgroupview.value().equals( statementGroup1 ),
 			'Retrieved value.'
 		);
 
 		statementgroupview.value( statementGroup2 );
 
-		assert.ok(
+		assert.true(
 			statementgroupview.value().equals( statementGroup2 ),
 			'Retrieved value after setting a new value.'
 		);
@@ -141,7 +141,7 @@
 
 		statementlistview.value( statementList1 );
 
-		assert.ok(
+		assert.true(
 			statementgroupview.value().equals(
 				new datamodel.StatementGroup( 'P2', statementList1 )
 			),
@@ -149,14 +149,14 @@
 				+ 'by the statementgroupview.'
 		);
 
-		assert.ok(
+		assert.true(
 			statementgroupview.option( 'value' ).equals( statementGroup2 ),
 			'Retrieved value still persisting via option().'
 		);
 
 		statementlistview.value( statementList2 );
 
-		assert.ok(
+		assert.true(
 			statementgroupview.value().equals(
 				new datamodel.StatementGroup( 'P3', statementList2 )
 			),

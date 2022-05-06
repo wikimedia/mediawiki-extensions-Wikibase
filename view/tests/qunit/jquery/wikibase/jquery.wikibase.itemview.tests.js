@@ -55,7 +55,7 @@
 		var $itemview = createItemview(),
 			itemview = $itemview.data( 'itemview' );
 
-		assert.ok(
+		assert.true(
 			itemview instanceof $.wikibase.itemview,
 			'Created widget.'
 		);

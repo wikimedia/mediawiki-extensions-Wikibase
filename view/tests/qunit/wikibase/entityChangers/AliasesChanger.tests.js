@@ -20,7 +20,7 @@
 	} );
 
 	QUnit.test( 'is a constructor', function ( assert ) {
-		assert.ok( new SUBJECT() instanceof SUBJECT );
+		assert.true( new SUBJECT() instanceof SUBJECT );
 	} );
 
 	QUnit.test( 'setAliases performs correct API call', function ( assert ) {
@@ -37,7 +37,7 @@
 
 		aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ) );
 
-		assert.ok( api.setAliases.calledOnce );
+		assert.true( api.setAliases.calledOnce );
 	} );
 
 	QUnit.test( 'setAliases correctly handles API response', function ( assert ) {
@@ -59,7 +59,7 @@
 
 		return aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ) )
 		.done( function ( savedAliases ) {
-			assert.ok( true, 'setAliases succeeded' );
+			assert.true( true, 'setAliases succeeded' );
 		} );
 	} );
 
@@ -84,10 +84,10 @@
 
 		aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ) )
 		.done( function ( savedAliases ) {
-			assert.ok( false, 'setAliases succeeded' );
+			assert.true( false, 'setAliases succeeded' );
 		} )
 		.fail( function ( error ) {
-			assert.ok(
+			assert.true(
 				error instanceof wb.api.RepoApiError,
 				'setAliases failed with a RepoApiError'
 			);
@@ -125,9 +125,9 @@
 
 		return aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ) )
 		.done( function () {
-			assert.ok( true, 'setAliases succeeded' );
+			assert.true( true, 'setAliases succeeded' );
 
-			assert.ok(
+			assert.true(
 				item.getFingerprint().getAliasesFor( 'language' ) === null ||
 				item.getFingerprint().getAliasesFor( 'language' ).isEmpty(),
 				'Verified aliases being empty or removed.'

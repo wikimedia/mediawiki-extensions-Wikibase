@@ -22,8 +22,9 @@
 						caughtError = e;
 					}
 
-					assert.notOk(
+					assert.strictEqual(
 						caughtError,
+						null,
 						'Property type "' + propertyType + '" expert is added as a dependency'
 					);
 				}

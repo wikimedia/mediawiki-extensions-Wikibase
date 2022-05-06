@@ -47,7 +47,7 @@
 			tooltip = $node.data( 'wbtooltip' ),
 			$tip;
 
-		assert.ok(
+		assert.true(
 			tooltip instanceof $.wikibase.wbtooltip,
 			'Initialized tooltip.'
 		);
@@ -78,7 +78,7 @@
 		var $node = createTestTooltip( { content: 'Text' } ),
 			tooltip = $node.data( 'wbtooltip' );
 
-		assert.ok(
+		assert.true(
 			tooltip instanceof $.wikibase.wbtooltip,
 			'Initialized tooltip.'
 		);

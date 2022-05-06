@@ -34,7 +34,7 @@
 		var $closeable = createCloseable(),
 			closeable = $closeable.data( 'closeable' );
 
-		assert.ok(
+		assert.true(
 			closeable instanceof $.ui.closeable,
 			'Initialized widget.'
 		);
@@ -54,7 +54,7 @@
 			} ),
 			closeable = $closeable.data( 'closeable' );
 
-		assert.ok(
+		assert.true(
 			closeable.option( '$content' ) instanceof $,
 			'Instantiated widget with initial content.'
 		);
@@ -74,7 +74,7 @@
 			$content = $( '<span>' ).text( 'test' );
 
 		$closeable.on( 'closeableupdate', function () {
-			assert.ok(
+			assert.true(
 				true,
 				'Triggered "update" event.'
 			);

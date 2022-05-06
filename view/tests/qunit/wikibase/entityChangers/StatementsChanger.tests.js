@@ -31,7 +31,7 @@
 	} );
 
 	QUnit.test( 'is a constructor', function ( assert ) {
-		assert.ok( new SUBJECT() instanceof SUBJECT );
+		assert.true( new SUBJECT() instanceof SUBJECT );
 	} );
 
 	QUnit.test( 'remove performs correct API call', function ( assert ) {
@@ -48,7 +48,7 @@
 
 		statementsChanger.remove( newNoValueSnakStatement() );
 
-		assert.ok( api.removeClaim.calledOnce );
+		assert.true( api.removeClaim.calledOnce );
 	} );
 
 	QUnit.test( 'remove correctly handles API response', function ( assert ) {
@@ -71,7 +71,7 @@
 
 		return statementsChanger.remove( newNoValueSnakStatement() )
 		.done( function () {
-			assert.ok( true, 'remove succeeded' );
+			assert.true( true, 'remove succeeded' );
 		} );
 	} );
 
@@ -96,10 +96,10 @@
 
 		statementsChanger.remove( newNoValueSnakStatement() )
 		.done( function () {
-			assert.ok( false, 'remove should have failed' );
+			assert.true( false, 'remove should have failed' );
 		} )
 		.fail( function ( error ) {
-			assert.ok(
+			assert.true(
 				error instanceof wb.api.RepoApiError,
 				'remove did not fail with a RepoApiError'
 			);
@@ -129,12 +129,12 @@
 
 		statementsChanger.remove( newNoValueSnakStatement( guid ) );
 
-		assert.ok( fireHook.notCalled, 'hook should only fire when API call returns' );
+		assert.true( fireHook.notCalled, 'hook should only fire when API call returns' );
 
 		deferred.resolve( { pageinfo: { lastrevid: 2 } } );
 
-		assert.ok( fireHook.calledOnce, 'hook should have fired' );
-		assert.ok( fireHook.calledWith( 'wikibase.statement.removed', 'Q1', guid ), 'hook should have correct arguments' );
+		assert.true( fireHook.calledOnce, 'hook should have fired' );
+		assert.true( fireHook.calledWith( 'wikibase.statement.removed', 'Q1', guid ), 'hook should have correct arguments' );
 	} );
 
 	QUnit.test( 'remove properly updates StatementsChangerState', function ( assert ) {
@@ -176,7 +176,7 @@
 		statementsChanger.remove( statement2 );
 		deferred.resolve( { pageinfo: { lastrevid: 13 } } );
 
-		assert.ok( statementsChangerStatements.isEmpty() );
+		assert.true( statementsChangerStatements.isEmpty() );
 		assert.strictEqual(
 			statementsChangerStatements.getItemByKey( 'P1' ),
 			null
@@ -198,7 +198,7 @@
 
 		statementsChanger.save( newNoValueSnakStatement() );
 
-		assert.ok( api.setClaim.calledOnce );
+		assert.true( api.setClaim.calledOnce );
 	} );
 
 	QUnit.test( 'save correctly handles API response', function ( assert ) {
@@ -223,7 +223,7 @@
 
 		return statementsChanger.save( newNoValueSnakStatement() )
 		.done( function ( savedStatement ) {
-			assert.ok(
+			assert.true(
 				savedStatement instanceof datamodel.Statement,
 				'save did not resolve with a Statement'
 			);
@@ -253,10 +253,10 @@
 
 		statementsChanger.save( newNoValueSnakStatement() )
 		.done( function ( savedStatement ) {
-			assert.ok( false, 'save should have failed' );
+			assert.true( false, 'save should have failed' );
 		} )
 		.fail( function ( error ) {
-			assert.ok(
+			assert.true(
 				error instanceof wb.api.RepoApiError,
 				'save failed with a RepoApiError'
 			);
@@ -287,7 +287,7 @@
 		var statement = newNoValueSnakStatement( guid );
 		statementsChanger.save( statement );
 
-		assert.ok( fireHook.notCalled, 'hook should only fire when API call returns' );
+		assert.true( fireHook.notCalled, 'hook should only fire when API call returns' );
 
 		deferred.resolve( {
 			claim: {
@@ -298,8 +298,8 @@
 			pageinfo: {}
 		} );
 
-		assert.ok( fireHook.calledOnce, 'hook should have fired' );
-		assert.ok(
+		assert.true( fireHook.calledOnce, 'hook should have fired' );
+		assert.true(
 			fireHook.calledWithExactly(
 				'wikibase.statement.saved',
 				'Q1',

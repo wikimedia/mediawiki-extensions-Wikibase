@@ -34,15 +34,16 @@
 		var $singlebuttontoolbar = createSinglebuttontoolbar(),
 			singlebuttontoolbar = $singlebuttontoolbar.data( 'singlebuttontoolbar' );
 
-		assert.ok(
+		assert.true(
 			singlebuttontoolbar instanceof $.wikibase.singlebuttontoolbar,
 			'Instantiated widget.'
 		);
 
 		singlebuttontoolbar.destroy();
 
-		assert.notOk(
+		assert.strictEqual(
 			$singlebuttontoolbar.data( 'singlebuttontoolbar' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );

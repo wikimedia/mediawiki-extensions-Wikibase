@@ -19,7 +19,7 @@
 	} );
 
 	QUnit.test( 'is a constructor', function ( assert ) {
-		assert.ok( new SUBJECT() instanceof SUBJECT );
+		assert.true( new SUBJECT() instanceof SUBJECT );
 	} );
 
 	QUnit.test( 'setDescription performs correct API call', function ( assert ) {
@@ -36,7 +36,7 @@
 
 		descriptionsChanger.setDescription( new datamodel.Term( 'language', 'description' ) );
 
-		assert.ok( api.setDescription.calledOnce );
+		assert.true( api.setDescription.calledOnce );
 	} );
 
 	QUnit.test( 'setDescription correctly handles API response', function ( assert ) {
@@ -82,10 +82,10 @@
 
 		descriptionsChanger.setDescription( new datamodel.Term( 'language', 'description' ) )
 		.done( function ( savedDescription ) {
-			assert.ok( false, 'setDescription should have failed' );
+			assert.true( false, 'setDescription should have failed' );
 		} )
 		.fail( function ( error ) {
-			assert.ok( error instanceof wb.api.RepoApiError, 'setDescription did not fail with a RepoApiError' );
+			assert.true( error instanceof wb.api.RepoApiError, 'setDescription did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 		} )
 		.always( done );
