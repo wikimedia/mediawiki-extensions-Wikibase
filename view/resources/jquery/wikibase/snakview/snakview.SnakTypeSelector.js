@@ -66,7 +66,7 @@
 			.on( 'click.' + widgetName, function ( event ) {
 				// don't show menu if selector is disabled!
 				// otherwise, simply toggle menu's visibility
-				// TODO: Store visiblity in model
+				// TODO: Store visibility in model
 				// eslint-disable-next-line no-jquery/no-sizzle
 				if ( self.options.disabled || $menu.is( ':visible' ) ) {
 					$menu.hide();
