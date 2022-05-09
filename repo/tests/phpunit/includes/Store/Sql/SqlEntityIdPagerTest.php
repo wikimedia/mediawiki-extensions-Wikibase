@@ -90,7 +90,6 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 		return [
 			'page_namespace' => $entityNamespaceLookup->getEntityNamespace( $entityId->getEntityType() ),
 			'page_title' => $entityId->getSerialization(),
-			'page_restrictions' => '',
 			'page_random' => 0,
 			'page_latest' => 0,
 			'page_len' => 1,

@@ -45,7 +45,6 @@ class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 				$pages[] = [
 					'page_namespace' => 123,
 					'page_title' => "Q$n",
-					'page_restrictions' => '',
 					'page_random' => 0,
 					'page_latest' => 0,
 					'page_len' => 1,
@@ -63,7 +62,6 @@ class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 			$pages[] = [
 				'page_namespace' => 4,
 				'page_title' => 'Q5',
-				'page_restrictions' => '',
 				'page_random' => 0,
 				'page_latest' => 0,
 				'page_len' => 1,

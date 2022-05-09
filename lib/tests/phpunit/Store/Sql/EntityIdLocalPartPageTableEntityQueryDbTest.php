@@ -31,7 +31,6 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 			[
 				'page_title' => 'localPartOne',
 				'page_namespace' => 1,
-				'page_restrictions' => '',
 				'page_random' => 1,
 				'page_latest' => 1,
 				'page_len' => 1,
@@ -43,7 +42,6 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 			[
 				'page_title' => 'localPartTwo',
 				'page_namespace' => 2,
-				'page_restrictions' => '',
 				'page_random' => 2,
 				'page_latest' => 221,
 				'page_len' => 2,
