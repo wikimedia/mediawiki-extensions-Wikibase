@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"RebecaRwanda"
+			"RebecaRwanda",
+			"Amire80"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} ikintu",
-	"wikibase-editlinks": "hindura Imbuga",
+	"wikibase-editlinks": "Hindura imbuga",
 	"wikibase-linkitem-addlinks": "Shiraho imbuga",
 	"wikibase-linkitem-title": "Urubuga hamwe n'urupapuro",
 	"wikibase-linkitem-linkpage": "Urubuga hamwe n'urupapuro",
