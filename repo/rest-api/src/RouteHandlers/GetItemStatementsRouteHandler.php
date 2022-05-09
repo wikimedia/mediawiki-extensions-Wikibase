@@ -14,6 +14,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsErrorRespo
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsSuccessResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -37,25 +38,41 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 	 */
 	private $errorPresenter;
 
+	/**
+	 * @var UnexpectedErrorHandler
+	 */
+	private $errorHandler;
+
 	public function __construct(
 		GetItemStatements $getItemStatements,
 		GetItemStatementsJsonPresenter $presenter,
-		ErrorJsonPresenter $errorPresenter
+		ErrorJsonPresenter $errorPresenter,
+		UnexpectedErrorHandler $errorHandler
 	) {
 		$this->getItemStatements = $getItemStatements;
 		$this->successPresenter = $presenter;
 		$this->errorPresenter = $errorPresenter;
+		$this->errorHandler = $errorHandler;
 	}
 
 	public static function factory(): Handler {
+		$errorPresenter = new ErrorJsonPresenter();
 		return new self(
 			WbRestApi::getGetItemStatements(),
 			new GetItemStatementsJsonPresenter(),
-			new ErrorJsonPresenter()
+			$errorPresenter,
+			new UnexpectedErrorHandler( $errorPresenter, WikibaseRepo::getLogger() )
 		);
 	}
 
-	public function run( string $itemId ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->errorHandler->runWithErrorHandling( [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $itemId ): Response {
 		$useCaseResponse = $this->getItemStatements->execute( new GetItemStatementsRequest( $itemId ) );
 
 		if ( $useCaseResponse instanceof GetItemStatementsSuccessResponse ) {
