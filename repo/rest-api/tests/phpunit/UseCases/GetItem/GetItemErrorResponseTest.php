@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
-use Wikibase\Repo\RestApi\UseCases\ValidationError;
+use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse

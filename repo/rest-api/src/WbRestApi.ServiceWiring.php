@@ -5,6 +5,7 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionRet
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /** @phpcs-require-sorted-array */
@@ -19,7 +20,7 @@ return [
 				WikibaseRepo::getBaseDataModelSerializerFactory( $services )
 					->newItemSerializer()
 			),
-			new GetItemValidator()
+			new GetItemValidator( new ItemIdValidator() )
 		);
 	},
 

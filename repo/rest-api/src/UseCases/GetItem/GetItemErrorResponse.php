@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
-use Wikibase\Repo\RestApi\UseCases\ValidationError;
+use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
  * @license GPL-2.0-or-later
