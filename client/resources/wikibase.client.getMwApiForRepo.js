@@ -6,7 +6,7 @@
 	'use strict';
 
 	/**
-	 * @return {mediaWiki.Api}
+	 * @return {mw.Api}
 	 */
 	var getMwApiForRepo = function () {
 		var repoConfig = mw.config.get( 'wbRepo' ),

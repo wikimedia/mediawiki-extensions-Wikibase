@@ -539,7 +539,7 @@
 		/**
 		 * Creates a table row for a site link.
 		 *
-		 * @param {wb.Site} site
+		 * @param {wikibase.Site} site
 		 * @param {Object} entitySitelinks
 		 *
 		 * @return {jQuery}

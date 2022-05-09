@@ -45,6 +45,19 @@
 	"settings": {
 		"no-jquery": {
 			"variablePattern": "^_?\\$.|^element$"
+		},
+		"jsdoc": {
+			"preferredTypes": {
+				"datamodel": "datamodel",
+				"EntityIdHtmlFormatter": "EntityIdHtmlFormatter",
+				"EntityIdPlainFormatter": "EntityIdPlainFormatter",
+				"EntityStore": "EntityStore",
+				"EventSingletonManager": "EventSingletonManager",
+				"PropertyDataTypeStore": "PropertyDataTypeStore",
+				"ValueViewBuilder": "ValueViewBuilder",
+				"Variation": "Variation",
+				"ViewState": "ViewState"
+			}
 		}
 	}
 }
