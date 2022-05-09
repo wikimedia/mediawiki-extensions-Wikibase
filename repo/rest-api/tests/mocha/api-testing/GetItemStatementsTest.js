@@ -64,6 +64,16 @@ describe( 'GET /entities/items/{id}/statements ', () => {
 		assert.include( response.body.message, itemId );
 	} );
 
+	it( '404 error - item not found', async () => {
+		const itemId = 'Q999999';
+		const response = await rest.get( `/entities/items/${itemId}/statements` );
+
+		assert.equal( response.status, 404 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.equal( response.body.code, 'item-not-found' );
+		assert.include( response.body.message, itemId );
+	} );
+
 	describe( 'authentication', () => {
 
 		it( 'has an X-Authenticated-User header with the logged in user', async () => {

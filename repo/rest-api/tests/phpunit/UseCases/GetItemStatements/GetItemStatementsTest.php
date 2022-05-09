@@ -96,6 +96,17 @@ class GetItemStatementsTest extends TestCase {
 		$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $response->getCode() );
 	}
 
+	public function testItemNotFound_returnsErrorResponse(): void {
+		$itemId = "Q123";
+
+		$this->itemRevisionMetadataRetriever->method( "getLatestRevisionMetadata" )
+			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+		$itemStatementsRequest = new GetItemStatementsRequest( $itemId );
+		$itemStatementsResponse = $this->newUseCase()->execute( $itemStatementsRequest );
+		$this->assertInstanceOf( GetItemStatementsErrorResponse::class, $itemStatementsResponse );
+		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $itemStatementsResponse->getCode() );
+	}
+
 	private function newUseCase(): GetItemStatements {
 		return new GetItemStatements(
 			new GetItemStatementsValidator( new ItemIdValidator() ),
