@@ -27,10 +27,6 @@
 		"mediawiki/valid-package-file-require": "error",
 		"new-cap": "off",
 		"no-underscore-dangle": "off",
-		"no-use-before-define": [
-			"error",
-			"nofunc"
-		],
 		"no-unused-vars": [
 			"error",
 			{
@@ -38,10 +34,7 @@
 			}
 		],
 		"no-useless-concat": "off",
-		"one-var": "off",
 		"operator-linebreak": "off",
-		"valid-jsdoc": "off",
-		"vars-on-top": "off",
 		"mediawiki/class-doc": "off",
 		"no-jquery/no-class-state": "off",
 		"no-jquery/no-global-selector": "off",
