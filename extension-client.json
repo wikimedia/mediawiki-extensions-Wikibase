@@ -145,7 +145,6 @@
 			"class": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler::factory",
 			"services": [
-				"WikibaseClient.EntityIdParser",
 				"WikibaseClient.LanguageFallbackLabelDescriptionLookupFactory",
 				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Store"

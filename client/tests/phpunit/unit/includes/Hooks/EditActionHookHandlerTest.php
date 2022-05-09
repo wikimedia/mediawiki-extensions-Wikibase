@@ -13,7 +13,6 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
@@ -128,18 +127,10 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$labelDescriptionLookupFactory->method( 'newLabelDescriptionLookup' )
 			->willReturnCallback( [ $this, 'newLabelDescriptionLookup' ] );
 
-		$idParser = $this->createMock( EntityIdParser::class );
-
-		$idParser->method( 'parse' )
-			->willReturnCallback( function ( $idSerialization ) {
-				return new ItemId( $idSerialization );
-			} );
-
 		$hookHandler = new EditActionHookHandler(
 			$repoLinker,
 			$sqlUsageTracker,
-			$labelDescriptionLookupFactory,
-			$idParser
+			$labelDescriptionLookupFactory
 		);
 
 		return $hookHandler;
