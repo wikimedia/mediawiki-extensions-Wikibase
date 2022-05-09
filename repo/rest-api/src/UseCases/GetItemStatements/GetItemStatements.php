@@ -12,21 +12,32 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
  */
 class GetItemStatements {
 
+	private $validator;
 	private $statementsRetriever;
 	private $revisionMetadataRetriever;
 	private $serializer;
 
 	public function __construct(
+		GetItemStatementsValidator $validator,
 		ItemStatementsRetriever $statementsRetriever,
 		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
 		StatementListSerializer $serializer
 	) {
+		$this->validator = $validator;
 		$this->statementsRetriever = $statementsRetriever;
 		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
 		$this->serializer = $serializer;
 	}
 
-	public function execute( GetItemStatementsRequest $request ): GetItemStatementsSuccessResponse {
+	/**
+	 * @return GetItemStatementsSuccessResponse|GetItemStatementsErrorResponse
+	 */
+	public function execute( GetItemStatementsRequest $request ) {
+		$validationError = $this->validator->validate( $request );
+		if ( $validationError ) {
+			return GetItemStatementsErrorResponse::newFromValidationError( $validationError );
+		}
+
 		$itemId = new ItemId( $request->getItemId() );
 
 		$latestRevisionMetadata = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
