@@ -146,7 +146,7 @@
 		};
 		var statement1 = newNoValueSnakStatement( 'apple' );
 		var statement2 = newNoValueSnakStatement( 'pie' );
-		var statementsChangerState = new wb.entityChangers.StatementsChangerState(
+		var statementsChangerState1 = new wb.entityChangers.StatementsChangerState(
 			'Q1',
 			new datamodel.StatementGroupSet( [
 				new datamodel.StatementGroup(
@@ -155,11 +155,11 @@
 				)
 			] )
 		);
-		var statementsChangerStatements = statementsChangerState.getStatements();
+		var statementsChangerStatements = statementsChangerState1.getStatements();
 		var statementsChanger = new SUBJECT(
 			api,
 			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
-			statementsChangerState
+			statementsChangerState1
 		);
 
 		assert.strictEqual(
@@ -321,15 +321,15 @@
 		};
 		var statement1 = newNoValueSnakStatement( 'apple' );
 		var statement2 = newNoValueSnakStatement( 'pie' );
-		var statementsChangerState = new wb.entityChangers.StatementsChangerState(
+		var statementsChangerState1 = new wb.entityChangers.StatementsChangerState(
 			'Q1',
 			new datamodel.StatementGroupSet()
 		);
-		var statementsChangerStatements = statementsChangerState.getStatements();
+		var statementsChangerStatements = statementsChangerState1.getStatements();
 		var statementsChanger = new SUBJECT(
 			api,
 			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
-			statementsChangerState,
+			statementsChangerState1,
 			new serialization.StatementSerializer(),
 			new serialization.StatementDeserializer()
 		);

@@ -187,8 +187,8 @@
 		}
 
 		// Replace temporary nodes with actual jQuery nodes:
-		$wrappedTemplate.find( '.--mwTemplate' ).each( function ( i ) {
-			$( this ).replaceWith( delayedParams[ i ] );
+		$wrappedTemplate.find( '.--mwTemplate' ).each( function ( j ) {
+			$( this ).replaceWith( delayedParams[ j ] );
 		} );
 
 		return ( $wrappedTemplate.children( 'body' ).length )

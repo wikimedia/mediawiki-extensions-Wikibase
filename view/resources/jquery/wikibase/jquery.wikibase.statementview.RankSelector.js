@@ -135,8 +135,8 @@
 
 				// Close the menu when clicking, regardless of whether the click is performed on the
 				// menu itself or outside of it:
-				var degrade = function ( event ) {
-					if ( event.target !== self.element.get( 0 ) ) {
+				var degrade = function ( ev ) {
+					if ( ev.target !== self.element.get( 0 ) ) {
 						$menu.hide();
 						self.element.removeClass( 'ui-state-active' );
 					}
@@ -146,7 +146,7 @@
 				$( document ).on( 'mouseup.' + self.widgetName, degrade );
 				$( window ).on(
 					'resize.' + self.widgetName,
-					function ( event ) {
+					function ( ev ) {
 						self.repositionMenu();
 					}
 				);
@@ -206,13 +206,13 @@
 		 */
 		_buildMenu: function () {
 			var self = this,
-				$menu = $( '<ul>' ).addClass( this.widgetFullName + '-menu' );
+				$m = $( '<ul>' ).addClass( this.widgetFullName + '-menu' );
 
 			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( datamodel.Statement.RANK, function ( rankName, rank ) {
 				rankName = rankName.toLowerCase();
 
-				$menu.append(
+				$m.append(
 					$( '<li>' )
 					.addClass( self.widgetFullName + '-menuitem-' + rankName )
 					.data( self.widgetName + '-menuitem-rank', rank )
@@ -235,7 +235,7 @@
 				);
 			} );
 
-			return $menu.menu();
+			return $m.menu();
 		},
 
 		/**

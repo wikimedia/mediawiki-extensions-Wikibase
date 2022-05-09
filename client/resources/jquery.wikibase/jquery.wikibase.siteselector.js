@@ -51,7 +51,7 @@
 			.on( 'keydown.' + this.widgetName, function ( event ) {
 				if ( event.keyCode === $.ui.keyCode.TAB ) {
 					$( self.options.menu )
-					.one( 'selected', function ( event, item ) {
+					.one( 'selected', function ( ev, item ) {
 						self.element.val( item.getValue() );
 					} );
 				} else if ( event.keyCode === $.ui.keyCode.ESCAPE ) {

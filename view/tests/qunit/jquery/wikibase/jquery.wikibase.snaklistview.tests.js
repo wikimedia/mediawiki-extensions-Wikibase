@@ -538,10 +538,9 @@
 		/**
 		 * Returns a string representing the state a snaklistview's snakviews are in.
 		 *
-		 * @param {jQuery.wikibase.snaklistview} snaklistview
 		 * @return {string}
 		 */
-		function getSnakviewStates( snaklistview ) {
+		function getSnakviewStates() {
 			var snakviews = snaklistview._listview.value(),
 				isDisabled = true,
 				isEnabled = true;
@@ -561,7 +560,7 @@
 		}
 
 		assert.strictEqual(
-			getSnakviewStates( snaklistview ),
+			getSnakviewStates(),
 			'enabled',
 			'snaklistview\'s snakviews are enabled.'
 		);
@@ -585,7 +584,7 @@
 		snaklistview.disable();
 
 		assert.strictEqual(
-			getSnakviewStates( snaklistview ),
+			getSnakviewStates(),
 			'disabled',
 			'Disabled snaklistview\'s snakviews.'
 		);
@@ -593,7 +592,7 @@
 		snaklistview.enable();
 
 		assert.strictEqual(
-			getSnakviewStates( snaklistview ),
+			getSnakviewStates(),
 			'enabled',
 			'Eabled snaklistview\'s snakviews.'
 		);
@@ -610,7 +609,7 @@
 			'Initialized snaklistview with more than one item.'
 		);
 
-		function testPropertyLabelVisibility( assert, snaklistview ) {
+		function testPropertyLabelVisibility() {
 			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( snaklistview._listview.items(), function ( i, snakviewNode ) {
 				var $snakview = $( snakviewNode ),
@@ -633,7 +632,7 @@
 			} );
 		}
 
-		testPropertyLabelVisibility( assert, snaklistview );
+		testPropertyLabelVisibility();
 	} );
 
 }( wikibase, dataValues ) );

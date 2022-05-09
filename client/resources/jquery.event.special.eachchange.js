@@ -165,7 +165,7 @@
 				var self = this;
 
 				// eslint-disable-next-line no-jquery/no-each-util
-				$.each( $.data( this ), function ( eventId, eventData ) {
+				$.each( $.data( this ), function ( eventId, d ) {
 					if ( eventId.indexOf( EVENT_ID ) !== 0 ) {
 						// Event is not an eachchange event.
 						return true;
@@ -175,7 +175,7 @@
 
 					for ( var i = 0; i < handlers.length; i++ ) {
 						if ( !alreadyTriggered( eventId, i ) ) {
-							handlers[ i ].call( self, event, eventData.prevVal );
+							handlers[ i ].call( self, event, d.prevVal );
 
 							triggeredHandlers.push( {
 								id: eventId,

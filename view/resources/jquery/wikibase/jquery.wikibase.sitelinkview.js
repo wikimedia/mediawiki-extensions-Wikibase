@@ -269,22 +269,22 @@
 
 			$siteIdInput
 			.on( 'siteselectorselected.' + this.widgetName, function ( event, siteId ) {
-				var site = wb.sites.getSite( siteId );
+				var selectedSite = wb.sites.getSite( siteId );
 
-				if ( site ) {
+				if ( selectedSite ) {
 					$pageNameInput
-					.attr( 'lang', site.getLanguageCode() )
-					.attr( 'dir', site.getLanguageDirection() )
+					.attr( 'lang', selectedSite.getLanguageCode() )
+					.attr( 'dir', selectedSite.getLanguageDirection() )
 					.show();
 				} else {
 					$pageNameInput.hide();
 				}
 
 				if ( self._badgeselector ) {
-					self._badgeselector.element[ site ? 'show' : 'hide' ]();
+					self._badgeselector.element[ selectedSite ? 'show' : 'hide' ]();
 				}
 
-				pagesuggester[ site ? 'enable' : 'disable' ]();
+				pagesuggester[ selectedSite ? 'enable' : 'disable' ]();
 				pagesuggester.option( 'siteId', siteId );
 
 				self._trigger( 'change' );

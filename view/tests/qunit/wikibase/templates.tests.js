@@ -24,7 +24,7 @@
 		 *
 		 * @type {Array}
 		 */
-		var params = [
+		var baseParams = [
 			[ [] ], // values for no-parameter templates
 			[ // single-parameter templates
 				'param',
@@ -212,7 +212,7 @@
 		testsData.forEach( function ( testData, numberOfParams ) {
 			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( testData, function ( template, expectedResults ) {
-				params[ numberOfParams ].forEach( function ( params, i ) {
+				baseParams[ numberOfParams ].forEach( function ( params, i ) {
 					verifyTemplate( params, template, expectedResults[ i ] );
 				} );
 			} );

@@ -22,13 +22,13 @@
 
 		/**
 		 * @param {Object} templateShortCuts
-		 * @param {jQuery} $subject
+		 * @param {jQuery} $subj
 		 */
-		function checkShortCuts( templateShortCuts, $subject ) {
+		function checkShortCuts( templateShortCuts, $subj ) {
 			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( templateShortCuts, function ( key, selector ) {
 				assert.true(
-					$subject.data( 'TemplatedWidget' )[ key ] instanceof $,
+					$subj.data( 'TemplatedWidget' )[ key ] instanceof $,
 					'Assigned templateShortCut: ' + key + '.'
 				);
 			} );

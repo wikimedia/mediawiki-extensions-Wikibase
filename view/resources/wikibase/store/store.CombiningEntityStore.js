@@ -54,8 +54,8 @@
 			 */
 			get: function ( entityId ) {
 				return asyncFallback( entityId, this._stores.map( function ( store ) {
-					return function ( entityId ) {
-						return store.get( entityId );
+					return function ( id ) {
+						return store.get( id );
 					};
 				} ) );
 			}

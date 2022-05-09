@@ -144,10 +144,10 @@
 					.one(
 						lia.prefixedEvent( 'afterstopediting.' + self.widgetName ),
 						function ( event, dropValue ) {
-							var $statementgroupview = $( event.target ),
-								statementGroup = lia.liInstance( $statementgroupview ).value();
+							var $view = $( event.target ),
+								statementGroup = lia.liInstance( $view ).value();
 
-							self.listview.removeItem( $statementgroupview );
+							self.listview.removeItem( $view );
 
 							if ( dropValue ) {
 								return;

@@ -213,13 +213,13 @@
 		_initMenu: function () {
 			var self = this,
 				deferred = $.Deferred(),
-				$menu = this._getMenu();
+				$m = this._getMenu();
 
 			self.repositionMenu();
 
 			this._fillMenu()
 			.done( function () {
-				$menu.children( 'li' ).each( function () {
+				$m.children( 'li' ).each( function () {
 					var $li = $( this ),
 						badgeId = $li.data( self.widgetName + '-menuitem-badge' );
 
@@ -228,7 +228,7 @@
 					.toggleClass( 'ui-state-active', self.value().indexOf( badgeId ) !== -1 );
 				} );
 
-				$menu.hide();
+				$m.hide();
 
 				deferred.resolve();
 			} )

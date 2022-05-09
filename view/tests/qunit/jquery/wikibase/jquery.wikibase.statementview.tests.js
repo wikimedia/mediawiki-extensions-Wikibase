@@ -52,7 +52,7 @@
 					}
 				);
 			},
-			buildSnakView: function ( options, value, $dom ) {
+			buildSnakView: function ( opts, value, $dom ) {
 				var _value = value;
 				return {
 					destroy: function () {},

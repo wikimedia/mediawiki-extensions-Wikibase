@@ -51,9 +51,7 @@
 		var promise = entityStore.get( 'id' );
 
 		return promise.done( function ( entity ) {
-			var promise = entityStore.get( 'id' );
-
-			return promise.done( function ( entity ) {
+			return entityStore.get( 'id' ).done( function () {
 				sinon.assert.calledOnce( store.get );
 			} );
 		} );

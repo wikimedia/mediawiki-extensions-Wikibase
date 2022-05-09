@@ -132,11 +132,10 @@
 		var $queue = $( {} );
 
 		/**
-		 * @param {jQuery} $queue
 		 * @param {Function} func
 		 * @param {boolean} [expectingEvent]
 		 */
-		function addToQueue( $queue, func, expectingEvent ) {
+		function addToQueue( func, expectingEvent ) {
 			if ( expectingEvent === undefined ) {
 				expectingEvent = true;
 			}
@@ -149,40 +148,40 @@
 			} );
 		}
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			aliasesview.startEditing();
 		} );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			aliasesview.startEditing();
 		}, false );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			aliasesview.stopEditing( true );
 		} );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			aliasesview.stopEditing( true );
 		}, false );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			aliasesview.stopEditing();
 		}, false );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			aliasesview.startEditing();
 		} );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			aliasesview.$list.data( 'tagadata' ).getTags().first().find( 'input' ).val( 'b' );
 			aliasesview.stopEditing();
 		} );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			aliasesview.startEditing();
 		} );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			aliasesview.$list.data( 'tagadata' ).getTags().first()
 				.removeClass( 'tagadata-choice-equal' ).find( 'input' ).val( 'd' );
 			aliasesview.stopEditing();

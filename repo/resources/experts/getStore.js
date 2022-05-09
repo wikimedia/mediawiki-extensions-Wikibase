@@ -30,7 +30,7 @@
 		// Register experts for data types defined in Wikibase. Since those data types are defined by a
 		// setting, it needs to be checked whether they are actually defined.
 
-		var dataTypeIdToExpertConstructor = resolveExpertModules( registeredExperts );
+		var dataTypeIdToExpertConstructor = resolveExpertModules();
 
 		for ( var dataTypeId in dataTypeIdToExpertConstructor ) {
 			var dataType = dataTypeStore.getDataType( dataTypeId );
@@ -46,10 +46,9 @@
 	};
 
 	/**
-	 * @param {Object} registeredExperts Map from property type to expert module name
 	 * @return {Object} Map from property type to expert constructor
 	 */
-	function resolveExpertModules( registeredExperts ) {
+	function resolveExpertModules() {
 		var constructors = {};
 
 		for ( var dataType in registeredExperts ) {

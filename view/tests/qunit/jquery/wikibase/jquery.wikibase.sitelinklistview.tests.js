@@ -234,11 +234,10 @@
 		var $queue = $( {} );
 
 		/**
-		 * @param {jQuery} $queue
 		 * @param {Function} func
 		 * @param {boolean} [expectingEvent]
 		 */
-		function addToQueue( $queue, func, expectingEvent ) {
+		function addToQueue( func, expectingEvent ) {
 			if ( expectingEvent === undefined ) {
 				expectingEvent = true;
 			}
@@ -251,31 +250,31 @@
 			} );
 		}
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			sitelinklistview.startEditing();
 		} );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			sitelinklistview.startEditing();
 		}, false );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			sitelinklistview.stopEditing( true );
 		} );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			sitelinklistview.stopEditing( true );
 		}, false );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			sitelinklistview.stopEditing();
 		}, false );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			sitelinklistview.startEditing();
 		} );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			// Mock adding a new item:
 			var listview = sitelinklistview.$listview.data( 'listview' ),
 				lia = listview.listItemAdapter(),

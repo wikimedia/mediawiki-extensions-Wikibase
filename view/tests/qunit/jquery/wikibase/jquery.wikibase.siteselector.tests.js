@@ -74,9 +74,9 @@
 	 * @return {wikibase.Site|null}
 	 */
 	function getSite( siteId ) {
-		for ( var i = 0; i < sites.length; i++ ) {
-			if ( sites[ i ].getId() === siteId ) {
-				return sites[ i ];
+		for ( var j = 0; j < sites.length; j++ ) {
+			if ( sites[ j ].getId() === siteId ) {
+				return sites[ j ];
 			}
 		}
 		return null;
@@ -100,7 +100,7 @@
 
 	QUnit.module( 'jquery.wikibase.siteselector', QUnit.newMwEnvironment( {
 		afterEach: function () {
-			$( '.test-siteselector' ).each( function ( i, node ) {
+			$( '.test-siteselector' ).each( function ( j, node ) {
 				var $node = $( node );
 				if ( $node.data( 'siteselector' ) ) {
 					$node.data( 'siteselector' ).destroy();
@@ -199,18 +199,15 @@
 
 		/**
 		 * @param {Array} testSet
-		 * @param {jQuery} $queue
-		 * @return {jQuery}
 		 */
-		function addToQueue( testSet, $queue ) {
+		function addToQueue( testSet ) {
 			$queue.queue( 'tests', function ( next ) {
 				testString( testSet[ 0 ], testSet[ 1 ], next );
 			} );
-			return $queue;
 		}
 
-		for ( var i = 0; i < testStrings.length; i++ ) {
-			$queue = addToQueue( testStrings[ i ], $queue );
+		for ( var j = 0; j < testStrings.length; j++ ) {
+			addToQueue( testStrings[ j ] );
 		}
 
 		// Reset selected site by clearing input:

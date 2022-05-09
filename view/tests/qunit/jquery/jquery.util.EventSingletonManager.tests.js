@@ -19,10 +19,10 @@
 			$source.get( 0 ),
 			$target.get( 0 ),
 			'custom.namespace',
-			function ( event, source ) {
+			function ( ev, source ) {
 				assert.true(
 					true,
-					'Triggered event "' + event.type + '.'
+					'Triggered event "' + ev.type + '.'
 				);
 
 				assert.strictEqual(
@@ -46,7 +46,7 @@
 			$target = $( '<div>' ),
 			triggeredForSources = [],
 			event = $.Event( 'custom' ),
-			handler = function ( event, source ) {
+			handler = function ( ev, source ) {
 				triggeredForSources.push( source );
 			};
 

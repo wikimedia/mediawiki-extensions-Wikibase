@@ -128,11 +128,10 @@
 		var $queue = $( {} );
 
 		/**
-		 * @param {jQuery} $queue
 		 * @param {Function} func
 		 * @param {boolean} [expectingEvent]
 		 */
-		function addToQueue( $queue, func, expectingEvent ) {
+		function addToQueue( func, expectingEvent ) {
 			if ( expectingEvent === undefined ) {
 				expectingEvent = true;
 			}
@@ -145,40 +144,40 @@
 			} );
 		}
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			entitytermsforlanguageview.startEditing();
 		} );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			entitytermsforlanguageview.startEditing();
 		}, false );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			entitytermsforlanguageview.stopEditing( true );
 		} );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			entitytermsforlanguageview.stopEditing( true );
 		}, false );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			entitytermsforlanguageview.stopEditing();
 		}, false );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			entitytermsforlanguageview.startEditing();
 		} );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			entitytermsforlanguageview.$label.find( 'input, textarea' ).val( '' );
 			entitytermsforlanguageview.stopEditing();
 		} );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			entitytermsforlanguageview.startEditing();
 		} );
 
-		addToQueue( $queue, function () {
+		addToQueue( function () {
 			entitytermsforlanguageview.$description.find( 'input, textarea' ).val( 'changed description' );
 			entitytermsforlanguageview.stopEditing();
 		} );

@@ -80,14 +80,14 @@
 
 				// close the menu when clicking, regardless of whether the click is performed on the
 				// menu itself or outside of it:
-				var degrade = function ( event ) {
-					if ( event.target !== self.element[ 0 ] ) {
+				var degrade = function ( ev ) {
+					if ( ev.target !== self.element[ 0 ] ) {
 						$menu.hide();
 						self.element.removeClass( 'ui-state-active' );
 					}
 					self._unbindGlobalListenersFn();
 				};
-				var repositionMenu = function ( event ) {
+				var repositionMenu = function ( ev ) {
 					self.repositionMenu();
 				};
 				// also make this available for destroy() function!

@@ -18,8 +18,8 @@
 		options = $.extend( {
 			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
 				listItemWidget: $.wikibasetest.valuewidget,
-				newItemOptionsFn: function ( value ) {
-					return { value: value || null };
+				newItemOptionsFn: function ( val ) {
+					return { value: val || null };
 				}
 			} ),
 			value: value || null
@@ -65,10 +65,9 @@
 		 * Runs assertions testing initialization and destruction of a listview widget initialized
 		 * with the values passed.
 		 *
-		 * @param {QUnit.assert} assert
 		 * @param {string[]} [values]
 		 */
-		function testInitAndDestroy( assert, values ) {
+		function testInitAndDestroy( values ) {
 			var $node = createListview( values ),
 				listview = $node.data( 'listview' ),
 				valuesLength = ( values ) ? values.length : 0;
@@ -114,9 +113,9 @@
 			$node.remove();
 		}
 
-		testInitAndDestroy( assert );
-		testInitAndDestroy( assert, [ 'a' ] );
-		testInitAndDestroy( assert, [ 'a', 'b' ] );
+		testInitAndDestroy();
+		testInitAndDestroy( [ 'a' ] );
+		testInitAndDestroy( [ 'a', 'b' ] );
 	} );
 
 	QUnit.test( 'value()', function ( assert ) {

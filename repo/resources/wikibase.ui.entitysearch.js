@@ -9,7 +9,7 @@
 	require( './jquery.wikibase/jquery.wikibase.entitysearch.js' );
 
 	$( function () {
-		var $form = $( '#searchform ' ),
+		var $searchForm = $( '#searchform ' ),
 			$input = $( '#searchInput' ),
 			// Both inputs must be named "search" to support Firefox' smart keyword feature (T60467)
 			$hiddenInput = $( '<input>' ).attr( { type: 'hidden', name: 'search' } );
@@ -36,13 +36,13 @@
 		/**
 		 * Updates the suggestion list special item that triggers a full-text search.
 		 *
-		 * @param {jQuery.ui.ooMenu.CustomItem} searchContaining
+		 * @param {jQuery.ui.ooMenu.CustomItem} containig
 		 */
-		function updateSuggestionSpecial( searchContaining ) {
+		function updateSuggestionSpecial( containig ) {
 			var $suggestionsSpecial = $( '.wb-entitysearch-suggestions .suggestions-special' );
 			$suggestionsSpecial.find( '.special-query' ).text( $input.val() );
 
-			searchContaining.setLink( getHref( $form ) + '&fulltext=1' );
+			containig.setLink( getHref( $searchForm ) + '&fulltext=1' );
 		}
 
 		/**
@@ -78,7 +78,7 @@
 			);
 
 		var searchContaining = new $.ui.ooMenu.CustomItem( $searchContaining, null, function () {
-			$form.trigger( 'submit' );
+			$searchForm.trigger( 'submit' );
 		}, 'wb-entitysearch-suggestions' );
 
 		var $searchMenu = $( '<ul>' ).ooMenu( {
@@ -100,7 +100,7 @@
 				$.wikibase.entityselector.prototype.options.position,
 				{ offset: '-1 2' }
 			),
-			confineMinWidthTo: $form,
+			confineMinWidthTo: $searchForm,
 			suggestionsPlaceholder: suggestionsPlaceholder
 		} )
 		.on( 'entityselectoropen', function ( event ) {
@@ -142,7 +142,7 @@
 		// in a hidden input element (which has ripped the "name" attribute from the original search
 		// box). Therefore, the entity id needs to be replaced by the actual search box (entity
 		// selector) content.
-		$form.on( 'submit', function ( event ) {
+		$searchForm.on( 'submit', function ( event ) {
 			$( this ).find( 'input[name="search"]' ).val( $input.val() );
 		} );
 

@@ -156,8 +156,8 @@
 		dataTypeStore.getDataTypeForProperty( propertyId ).then( function ( dataType ) {
 			assert.strictEqual( dataType, expectedType );
 
-			dataTypeStore.getDataTypeForProperty( propertyId ).then( function ( dataType ) {
-				assert.strictEqual( dataType, expectedType );
+			dataTypeStore.getDataTypeForProperty( propertyId ).then( function ( dataType2 ) {
+				assert.strictEqual( dataType2, expectedType );
 				sinon.assert.calledOnce( entityLoadedHook.add );
 
 				done();
@@ -181,8 +181,8 @@
 		dataTypeStore.getDataTypeForProperty( propertyId ).then( function ( dataType ) {
 			assert.strictEqual( dataType, expectedType );
 
-			dataTypeStore.getDataTypeForProperty( propertyId ).then( function ( dataType ) {
-				assert.strictEqual( dataType, expectedType );
+			dataTypeStore.getDataTypeForProperty( propertyId ).then( function ( dataType2 ) {
+				assert.strictEqual( dataType2, expectedType );
 				sinon.assert.calledOnce( entityStore.get );
 
 				done();

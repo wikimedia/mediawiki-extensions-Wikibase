@@ -305,10 +305,10 @@
 				this,
 				window,
 				namespaceEventNames( 'scroll touchmove resize', this.widgetName ),
-				function ( event, self ) {
+				function ( event, self2 ) {
 					// It's possible an event is triggered with the widget not being initialized.
-					if ( self.$listview ) {
-						self._startEditingInViewport();
+					if ( self2.$listview ) {
+						self2._startEditingInViewport();
 					}
 				},
 				{

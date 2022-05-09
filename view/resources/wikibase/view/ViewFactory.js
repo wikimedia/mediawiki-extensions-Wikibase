@@ -561,10 +561,10 @@
 				value: value || null,
 				getAdder: this.getAdderWithStartEditing( startEditingCallback ),
 				getListItemAdapter: this.getListItemAdapterForSnakListView.bind( this, startEditingCallback ),
-				getReferenceRemover: function ( $dom ) {
+				getReferenceRemover: function ( $dom2 ) {
 					return structureEditorFactory.getRemover( function () {
 						return startEditingCallback().then( doRemove );
-					}, $dom );
+					}, $dom2 );
 				},
 				removeCallback: doRemove
 			}

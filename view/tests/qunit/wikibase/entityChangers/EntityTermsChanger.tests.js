@@ -470,9 +470,9 @@
 	}
 
 	function apiResponseForRevision( revisionId ) {
-		function ApiResponse( revisionId ) {
+		function ApiResponse( revId ) {
 			this.entity = {
-				lastrevid: revisionId
+				lastrevid: revId
 			};
 		}
 
@@ -547,7 +547,7 @@
 	}
 
 	/**
-	 * @param revisionId
+	 * @param {number} revisionId
 	 * @return {SuccessfulCallbackBuilder}
 	 */
 	function functionReturningSuccessfulResponse( revisionId ) {
