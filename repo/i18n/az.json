@@ -18,6 +18,7 @@
 	"wikibase-addqualifier": "göstərici əlavə et",
 	"wikibase-addreference": "mənbə əlavə et",
 	"wikibase-statementlistview-add": "dəyər əlavə et",
+	"wikibase-statementlistview-add-tooltip": "Yeni dəyər əlavə edin",
 	"wikibase-statementgrouplistview-add": "müddəa əlavə et",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Digər dillərdə",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Başqa adı",
@@ -33,6 +34,7 @@
 	"wikibase-sitelinks-special": "Digər layihələr",
 	"wikibase-remove": "sil",
 	"wikibase-claimview-snak-tooltip": "\"$1\" adlı parametrə uyğun dəyər əlavə edin. Əgər parametrin təyin olunmuş dəyəri yoxdursa və ya faktiki dəyəri bilinmirsə, qutunun sol tərəfindəki işarəni klikləməklə alternativ dəyər tipi seçin.",
+	"wikibase-claimview-snak-new-tooltip": "Parametri müəyyən etdikdən sonra ona uyğun olan dəyəri əlavə edə bilərsiniz. Əgər parametrin təyin edilmiş dəyəri yoxdursa və ya bilinmirsə, daxiletmə qutusunun sol tərəfindəki simvolu klikləməklə alternativ dəyərləri seçə bilərsiniz.",
 	"wikibase-statementview-rank-preferred": "Üstün dərəcə",
 	"wikibase-statementview-rank-tooltip-preferred": "Əsaslı və aktual dəyər",
 	"wikibase-statementview-rank-normal": "Normal dərəcə",
@@ -48,5 +50,7 @@
 	"special-newitem": "Yeni müddəa yarat",
 	"wikibase-newitem-fieldset": "Yeni müddəa yarat",
 	"wikibase-newentity-description": "İzahı:",
-	"wikibase-listdatatypes-wikibase-property-head": "Xüsusiyyət"
+	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] tərəfindən edilmiş $3 versiya bərpa edildi",
+	"wikibase-listdatatypes-wikibase-property-head": "Xüsusiyyət",
+	"wikibase-tainted-ref-popper-help-link-title": "Bu məhdudiyyət növünün kömək səhifəsi"
 }
