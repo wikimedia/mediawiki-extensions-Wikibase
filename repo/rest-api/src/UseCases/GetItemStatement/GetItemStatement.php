@@ -17,8 +17,10 @@ class GetItemStatement {
 	private $statementRetriever;
 	private $statementSerializer;
 	private $revisionMetadataRetriever;
+	private $validator;
 
 	public function __construct(
+		GetItemStatementValidator $validator,
 		ItemStatementRetriever $statementRetriever,
 		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
 		StatementSerializer $statementSerializer
@@ -26,9 +28,18 @@ class GetItemStatement {
 		$this->statementRetriever = $statementRetriever;
 		$this->statementSerializer = $statementSerializer;
 		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
+		$this->validator = $validator;
 	}
 
-	public function execute( GetItemStatementRequest $statementRequest ): GetItemStatementSuccessResponse {
+	/**
+	 * @return GetItemStatementSuccessResponse | GetItemStatementErrorResponse
+	 */
+	public function execute( GetItemStatementRequest $statementRequest ) {
+		$validationError = $this->validator->validate( $statementRequest );
+		if ( $validationError ) {
+			return GetItemStatementErrorResponse::newFromValidationError( $validationError );
+		}
+
 		$statementIdParser = new StatementGuidParser( new ItemIdParser() );
 		$statementId = $statementIdParser->parse( $statementRequest->getStatementId() );
 		/** @var ItemId $itemId */
