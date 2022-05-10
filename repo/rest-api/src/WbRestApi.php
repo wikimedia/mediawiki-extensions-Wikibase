@@ -23,9 +23,9 @@ class WbRestApi {
 			->get( 'WbRestApi.GetItemStatements' );
 	}
 
-	public static function getGetStatement( ContainerInterface $services = null ): GetItemStatement {
+	public static function getGetItemStatement( ContainerInterface $services = null ): GetItemStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetStatement' );
+			->get( 'WbRestApi.GetItemStatement' );
 	}
 
 }

@@ -33,7 +33,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 
 	public static function factory(): Handler {
 		return new self(
-			WbRestApi::getGetStatement(),
+			WbRestApi::getGetItemStatement(),
 			new GetItemStatementJsonPresenter()
 		);
 	}
