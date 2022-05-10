@@ -39,6 +39,7 @@ class GetItemStatement {
 		$latestRevisionMetadata = $this->revisionMetadataRetriever->getLatestRevisionMetadata(
 			$itemId
 		);
+
 		return new GetItemStatementSuccessResponse(
 			$this->statementSerializer->serialize( $statement ),
 			$latestRevisionMetadata->getRevisionTimestamp(),
