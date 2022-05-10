@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Serializers\StatementListSerializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
 /**
  * @license GPL-2.0-or-later
@@ -41,6 +42,13 @@ class GetItemStatements {
 		$itemId = new ItemId( $request->getItemId() );
 
 		$latestRevisionMetadata = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
+
+		if ( !$latestRevisionMetadata->itemExists() ) {
+			return new GetItemStatementsErrorResponse(
+				ErrorResponse::ITEM_NOT_FOUND,
+				"Could not find an item with the ID: {$request->getItemId()}"
+			);
+		}
 
 		return new GetItemStatementsSuccessResponse(
 			$this->serializer->serialize( $this->statementsRetriever->getStatements( $itemId ) ),
