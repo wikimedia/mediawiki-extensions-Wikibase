@@ -30,6 +30,19 @@ return [
 		);
 	},
 
+	'WbRestApi.GetItemStatement' => function( MediaWikiServices $services ): GetItemStatement {
+		return new GetItemStatement(
+			new WikibaseEntityLookupItemStatementRetriever(
+				WikibaseRepo::getEntityLookup( $services )
+			),
+			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+				WikibaseRepo::getEntityRevisionLookup( $services )
+			),
+			// @phan-suppress-next-line PhanTypeMismatchArgument
+			WikibaseRepo::getBaseDataModelSerializerFactory( $services )->newStatementSerializer()
+		);
+	},
+
 	'WbRestApi.GetItemStatements' => function( MediaWikiServices $services ): GetItemStatements {
 		return new GetItemStatements(
 			new GetItemStatementsValidator( new ItemIdValidator() ),
@@ -41,19 +54,6 @@ return [
 			),
 			WikibaseRepo::getBaseDataModelSerializerFactory( $services )
 				->newStatementListSerializer()
-		);
-	},
-
-	'WbRestApi.GetStatement' => function( MediaWikiServices $services ): GetItemStatement {
-		return new GetItemStatement(
-			new WikibaseEntityLookupItemStatementRetriever(
-				WikibaseRepo::getEntityLookup( $services )
-			),
-			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			),
-			// @phan-suppress-next-line PhanTypeMismatchArgument
-			WikibaseRepo::getBaseDataModelSerializerFactory( $services )->newStatementSerializer()
 		);
 	},
 
