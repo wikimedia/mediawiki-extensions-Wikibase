@@ -1,7 +1,7 @@
 'use strict';
 
 const { REST, action, assert, clientFactory } = require( 'api-testing' );
-const { createEntity, createSingleItem } = require( '../helpers/entityHelper' );
+const { createEntity, createSingleItem, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 
 const basePath = 'rest.php/wikibase/v0';
@@ -76,13 +76,7 @@ describe( 'GET /entities/items/{id}/statements ', () => {
 
 	it( '308 - item redirected', async () => {
 		const redirectTarget = testItemId;
-
-		const redirectSource = ( await createEntity( 'item', {} ) ).entity.id;
-		await action.getAnon().action( 'wbcreateredirect', {
-			from: redirectSource,
-			to: redirectTarget,
-			token: '+\\'
-		}, true );
+		const redirectSource = await createRedirectForItem( redirectTarget );
 
 		const response = await rest.get( `/entities/items/${redirectSource}/statements` );
 

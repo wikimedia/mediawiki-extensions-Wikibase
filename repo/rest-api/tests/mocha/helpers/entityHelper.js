@@ -57,7 +57,23 @@ async function createSingleItem() {
 	return await createEntity( 'item', item );
 }
 
+/**
+ * @param {string} redirectTarget - the id of the item to redirect to (target)
+ * @return {Promise<string>} - the id of the item to redirect from (source)
+ */
+async function createRedirectForItem( redirectTarget ) {
+	const redirectSource = ( await createEntity( 'item', {} ) ).entity.id;
+	await action.getAnon().action( 'wbcreateredirect', {
+		from: redirectSource,
+		to: redirectTarget,
+		token: '+\\'
+	}, true );
+
+	return redirectSource;
+}
+
 module.exports = {
 	createEntity,
-	createSingleItem
+	createSingleItem,
+	createRedirectForItem
 };

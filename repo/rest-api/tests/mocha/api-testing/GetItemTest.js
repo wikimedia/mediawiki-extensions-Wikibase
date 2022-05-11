@@ -5,7 +5,7 @@ const SwaggerParser = require( '@apidevtools/swagger-parser' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 const OpenAPIRequestValidator = require( 'openapi-request-validator' ).default;
 const OpenAPIRequestCoercer = require( 'openapi-request-coercer' ).default;
-const createEntity = require( '../helpers/entityHelper' ).createEntity;
+const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
 
 const basePath = 'rest.php/wikibase/v0';
 const rest = new REST( basePath );
@@ -361,12 +361,7 @@ describe( 'GET /entities/items/{id} ', () => {
 		let redirectSourceId;
 
 		before( async () => {
-			redirectSourceId = ( await createEntity( 'item', {} ) ).entity.id;
-			await action.getAnon().action( 'wbcreateredirect', {
-				from: redirectSourceId,
-				to: testItemId,
-				token: '+\\'
-			}, true );
+			redirectSourceId = await createRedirectForItem( testItemId );
 		} );
 
 		it( 'responds with a 308 including the redirect target location', async () => {
