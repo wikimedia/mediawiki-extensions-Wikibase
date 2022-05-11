@@ -6,6 +6,8 @@ use MediaWiki\Rest\RequestData;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\RestApi\RouteHandlers\GetStatementRouteHandler;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\GetStatementRouteHandler
@@ -17,6 +19,26 @@ use Wikibase\Repo\RestApi\RouteHandlers\GetStatementRouteHandler;
 class GetStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+
+	public function testHandlesUnexpectedErrors(): void {
+		$useCase = $this->createStub( GetItemStatement::class );
+		$useCase->method( 'execute' )->willThrowException( new \RuntimeException() );
+		$this->setService( 'WbRestApi.GetItemStatement', $useCase );
+
+		$routeHandler = GetStatementRouteHandler::factory();
+		$this->initHandler( $routeHandler, new RequestData(
+			[ 'pathParams' => [ GetStatementRouteHandler::ID_PATH_PARAM => 'Q123$some-guid' ] ]
+		) );
+		$this->validateHandler( $routeHandler );
+
+		$response = $routeHandler->execute();
+		$responseBody = json_decode( $response->getBody()->getContents() );
+		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
+		$this->assertSame(
+			ErrorResponse::UNEXPECTED_ERROR,
+			$responseBody->code
+		);
+	}
 
 	public function testReadWriteAccess(): void {
 		$routeHandler = GetStatementRouteHandler::factory();

@@ -6,11 +6,13 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemStatementJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementSuccessResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -18,27 +20,38 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class GetStatementRouteHandler extends SimpleHandler {
 
-	private const ID_PATH_PARAM = 'statement_id';
+	public const ID_PATH_PARAM = 'statement_id';
 
 	private $getItemStatement;
 	private $successPresenter;
+	private $errorHandler;
 
 	public function __construct(
 		GetItemStatement $getItemStatement,
-		GetItemStatementJsonPresenter $successPresenter
+		GetItemStatementJsonPresenter $successPresenter,
+		UnexpectedErrorHandler $errorHandler
 	) {
 		$this->getItemStatement = $getItemStatement;
 		$this->successPresenter = $successPresenter;
+		$this->errorHandler = $errorHandler;
 	}
 
 	public static function factory(): Handler {
 		return new self(
 			WbRestApi::getGetItemStatement(),
-			new GetItemStatementJsonPresenter()
+			new GetItemStatementJsonPresenter(),
+			new UnexpectedErrorHandler( new ErrorJsonPresenter(), WikibaseRepo::getLogger() )
 		);
 	}
 
-	public function run( string $statementId ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->errorHandler->runWithErrorHandling( [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $statementId ): Response {
 		$useCaseResponse = $this->getItemStatement->execute(
 			new GetItemStatementRequest( $statementId )
 		);
