@@ -2,16 +2,16 @@
 
 const { action, utils } = require( 'api-testing' );
 
-module.exports.createEntity = async function createEntity( type, entity ) {
+async function createEntity( type, entity ) {
 	return action.getAnon().action( 'wbeditentity', {
 		new: type,
 		token: '+\\',
 		data: JSON.stringify( entity )
 	}, 'POST' );
-};
+}
 
-module.exports.createSingleItem = async function createSingleItem() {
-	const createPropertyResponse = await this.createEntity( 'property', {
+async function createSingleItem() {
+	const createPropertyResponse = await createEntity( 'property', {
 		labels: { en: { language: 'en', value: `string-property-${utils.uniq()}` } },
 		datatype: 'string'
 	} );
@@ -54,5 +54,10 @@ module.exports.createSingleItem = async function createSingleItem() {
 		]
 	};
 
-	return await this.createEntity( 'item', item );
+	return await createEntity( 'item', item );
+}
+
+module.exports = {
+	createEntity,
+	createSingleItem
 };

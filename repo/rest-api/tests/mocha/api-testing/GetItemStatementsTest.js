@@ -1,7 +1,7 @@
 'use strict';
 
 const { REST, action, assert, clientFactory } = require( 'api-testing' );
-const entityHelper = require( '../helpers/entityHelper' );
+const { createEntity, createSingleItem } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 
 const basePath = 'rest.php/wikibase/v0';
@@ -19,7 +19,7 @@ describe( 'GET /entities/items/{id}/statements ', () => {
 	let testRevisionId;
 
 	before( async () => {
-		const createSingleItemResponse = await entityHelper.createSingleItem();
+		const createSingleItemResponse = await createSingleItem();
 
 		testItemId = createSingleItemResponse.entity.id;
 		testPropertyId = Object.keys( createSingleItemResponse.entity.claims )[ 0 ];
@@ -44,7 +44,7 @@ describe( 'GET /entities/items/{id}/statements ', () => {
 	} );
 
 	it( 'can GET empty statements list', async () => {
-		const createItemResponse = await entityHelper.createEntity( 'item',
+		const createItemResponse = await createEntity( 'item',
 			{ labels: { en: { language: 'en', value: 'item without statements' } } }
 		);
 		testItemId = createItemResponse.entity.id;
@@ -72,6 +72,26 @@ describe( 'GET /entities/items/{id}/statements ', () => {
 		assert.header( response, 'Content-Language', 'en' );
 		assert.equal( response.body.code, 'item-not-found' );
 		assert.include( response.body.message, itemId );
+	} );
+
+	it( '308 - item redirected', async () => {
+		const redirectTarget = testItemId;
+
+		const redirectSource = ( await createEntity( 'item', {} ) ).entity.id;
+		await action.getAnon().action( 'wbcreateredirect', {
+			from: redirectSource,
+			to: redirectTarget,
+			token: '+\\'
+		}, true );
+
+		const response = await rest.get( `/entities/items/${redirectSource}/statements` );
+
+		assert.equal( response.status, 308 );
+
+		assert.isTrue(
+			new URL( response.headers.location ).pathname
+				.endsWith( `${basePath}/entities/items/${redirectTarget}/statements` )
+		);
 	} );
 
 	describe( 'authentication', () => {
