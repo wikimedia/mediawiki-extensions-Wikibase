@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
+namespace Wikibase\Repo\Tests\RestApi\Domain\Filters;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Domain\Filters\FieldFilter;
