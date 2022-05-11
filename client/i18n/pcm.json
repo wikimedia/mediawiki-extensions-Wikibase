@@ -5,13 +5,13 @@
 			"Samatics"
 		]
 	},
-	"wikibase-dataitem": "{{WBREPONAME}} aitem",
-	"wikibase-editlinks": "Chenj conet-dem",
+	"wikibase-dataitem": "{{WBREPONAME}} item",
+	"wikibase-editlinks": "Chenj link-dem",
 	"wikibase-linkitem-addlinks": "Ad link-dem",
 	"wikibase-linkitem-title": "Link-am wit pej",
 	"wikibase-linkitem-linkpage": "Link-am wit pej",
-	"wikibase-linkitem-selectlink": "Abeg pik wan sait an wan pej wey you go like link-am to dis pej",
-	"wikibase-linkitem-input-site": "Languej:",
+	"wikibase-linkitem-selectlink": "Abeg pik one sait an one pej wey you go like link-am to dis pej",
+	"wikibase-linkitem-input-site": "Langwej:",
 	"wikibase-linkitem-input-page": "Pej:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Hide-am",
