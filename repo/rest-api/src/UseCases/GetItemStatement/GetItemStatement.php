@@ -8,6 +8,7 @@ use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
 /**
  * @license GPL-2.0-or-later
@@ -46,10 +47,17 @@ class GetItemStatement {
 		$itemId = $statementId->getEntityId();
 		'@phan-var ItemId $itemId';
 
-		$statement = $this->statementRetriever->getStatement( $statementId );
-		$latestRevisionMetadata = $this->revisionMetadataRetriever->getLatestRevisionMetadata(
-			$itemId
-		);
+		$latestRevisionMetadata = $this->revisionMetadataRetriever
+			->getLatestRevisionMetadata( $itemId );
+		$statement = $latestRevisionMetadata->itemExists() ?
+			$this->statementRetriever->getStatement( $statementId ) : null;
+
+		if ( !$statement ) {
+			return new GetItemStatementErrorResponse(
+				ErrorResponse::STATEMENT_NOT_FOUND,
+				"Could not find a statement with the ID: {$statementRequest->getStatementId()}"
+			);
+		}
 
 		return new GetItemStatementSuccessResponse(
 			$this->statementSerializer->serialize( $statement ),

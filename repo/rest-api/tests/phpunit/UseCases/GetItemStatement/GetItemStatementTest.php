@@ -91,6 +91,48 @@ class GetItemStatementTest extends TestCase {
 		$this->assertSame( ErrorResponse::INVALID_STATEMENT_ID, $response->getCode() );
 	}
 
+	public function testItemNotFound_returnsErrorResponse(): void {
+		$itemId = new ItemId( 'Q123' );
+		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+
+		$this->itemRevisionMetadataRetriever = $this->createMock(
+			ItemRevisionMetadataRetriever::class
+		);
+		$this->itemRevisionMetadataRetriever->expects( $this->once() )
+			->method( 'getLatestRevisionMetadata' )
+			->with( $itemId )
+			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+
+		$itemStatementRequest = new GetItemStatementRequest( $statementId );
+		$itemStatementResponse = $this->newUseCase()->execute( $itemStatementRequest );
+
+		$this->assertInstanceOf( GetItemStatementErrorResponse::class, $itemStatementResponse );
+		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $itemStatementResponse->getCode() );
+	}
+
+	public function testStatementNotFound_returnsErrorResponse(): void {
+		$itemId = new ItemId( 'Q321' );
+		$revision = 987;
+		$lastModified = '20201111070707';
+		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+
+		$this->itemRevisionMetadataRetriever = $this->createMock(
+			ItemRevisionMetadataRetriever::class
+		);
+		$this->itemRevisionMetadataRetriever->expects( $this->once() )
+			->method( 'getLatestRevisionMetadata' )
+			->with( $itemId )
+			->willReturn(
+				LatestItemRevisionMetadataResult::concreteRevision( $revision, $lastModified )
+			);
+
+		$itemStatementRequest = new GetItemStatementRequest( $statementId );
+		$itemStatementResponse = $this->newUseCase()->execute( $itemStatementRequest );
+
+		$this->assertInstanceOf( GetItemStatementErrorResponse::class, $itemStatementResponse );
+		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $itemStatementResponse->getCode() );
+	}
+
 	private function newUseCase(): GetItemStatement {
 		return new GetItemStatement(
 			new GetItemStatementValidator( new StatementIdValidator( new ItemIdParser() ) ),
