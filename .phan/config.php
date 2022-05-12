@@ -45,6 +45,14 @@ $cfg['directory_list'] = array_merge(
 		'lib/packages/wikibase/data-model-serialization/src/',
 		'lib/packages/wikibase/data-model-services/src/',
 		'lib/packages/wikibase/internal-serialization/src/',
+		'../../extensions/Babel/',
+		'../../extensions/CirrusSearch/',
+		'../../extensions/Echo/',
+		'../../extensions/GeoData/',
+		'../../extensions/Math/',
+		'../../extensions/MobileFrontend/',
+		'../../extensions/PageImages/',
+		'../../extensions/Scribunto/',
 	]
 );
 
@@ -53,10 +61,23 @@ if ( is_dir( 'vendor' ) ) {
 	$cfg['exclude_analysis_directory_list'][] = 'vendor';
 }
 
-$cfg['exclude_analysis_directory_list'][] = 'lib/packages/wikibase/data-model/src/';
-$cfg['exclude_analysis_directory_list'][] = 'lib/packages/wikibase/data-model-serialization/src/';
-$cfg['exclude_analysis_directory_list'][] = 'lib/packages/wikibase/data-model-services/src/';
-$cfg['exclude_analysis_directory_list'][] = 'lib/packages/wikibase/internal-serialization/src/';
+$cfg['exclude_analysis_directory_list'] = array_merge(
+	$cfg['exclude_analysis_directory_list'],
+	[
+		'lib/packages/wikibase/data-model/src/',
+		'lib/packages/wikibase/data-model-serialization/src/',
+		'lib/packages/wikibase/data-model-services/src/',
+		'lib/packages/wikibase/internal-serialization/src/',
+		'../../extensions/Babel/',
+		'../../extensions/CirrusSearch/',
+		'../../extensions/Echo/',
+		'../../extensions/GeoData/',
+		'../../extensions/Math/',
+		'../../extensions/MobileFrontend/',
+		'../../extensions/PageImages/',
+		'../../extensions/Scribunto/',
+	]
+);
 
 /*
  * NOTE: adding things here should be meant as a last resort.
