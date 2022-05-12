@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Presentation;
+namespace Wikibase\Repo\Tests\RestApi\Presentation\Presenters;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;

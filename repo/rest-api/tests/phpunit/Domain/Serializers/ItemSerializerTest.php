@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
+namespace Wikibase\Repo\Tests\RestApi\Domain\Serializers;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Serializers\ItemSerializer as LegacyItemSerializer;

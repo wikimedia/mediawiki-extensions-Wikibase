@@ -1,9 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Presentation\Presenters;
+namespace Wikibase\Repo\Tests\RestApi\Presentation\Presenters;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemStatementJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementSuccessResponse;
 
 /**

@@ -11,4 +11,12 @@
 		<exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification" />
 	</rule>
 	<rule ref="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint" />
+	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+		<properties>
+			<property name="rootNamespaces" type="array">
+				<element key="src" value="Wikibase\Repo\RestApi"/>
+				<element key="tests/phpunit" value="Wikibase\Repo\Tests\RestApi"/>
+			</property>
+		</properties>
+	</rule>
 </ruleset>

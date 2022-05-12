@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
+namespace Wikibase\Repo\Tests\RestApi\Domain\Model;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
