@@ -28,7 +28,7 @@ class FakeLoadBalancer extends LoadBalancer {
 		$this->dbw = $params['dbw'] ?? $this->dbr;
 	}
 
-	public function getConnection( $i, $groups = [], $domain = false, $flags = 0 ) {
+	public function getConnectionInternal( $i, $groups = [], $domain = false, $flags = 0 ): IDatabase {
 		switch ( $i ) {
 			case ILoadBalancer::DB_REPLICA:
 				return $this->dbr;

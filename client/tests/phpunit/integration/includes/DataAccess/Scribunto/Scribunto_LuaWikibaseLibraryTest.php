@@ -4,10 +4,10 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
 use Language;
 use LuaSandboxFunction;
+use MediaWiki\Extension\Scribunto\ScribuntoException;
 use ParserOptions;
 use Scribunto_LuaEngine;
 use Scribunto_LuaStandaloneInterpreterFunction;
-use ScribuntoException;
 use Wikibase\Client\DataAccess\Scribunto\LuaFunctionCallTracker;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\RepoLinker;
