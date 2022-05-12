@@ -1,13 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"ChoiChong"
+			"ChoiChong",
+			"春春眠眠"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}}項目",
 	"wikibase-editlinks": "リンクぬ編集",
 	"wikibase-editlinkstitle": "口間リンク直すん",
 	"wikibase-linkitem-addlinks": "リンクぬ追加",
+	"wikibase-linkitem-input-site": "言葉（くとぅば）",
+	"wikibase-linkitem-input-page": "ページ:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "かくすん",
 	"wikibase-rc-hide-wikidata-show": "表示",
