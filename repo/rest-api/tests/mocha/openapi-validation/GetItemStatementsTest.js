@@ -3,21 +3,13 @@
 // allow chai expectations
 /* eslint-disable no-unused-expressions */
 const { REST } = require( 'api-testing' );
-const SwaggerParser = require( '@apidevtools/swagger-parser' );
 const chai = require( 'chai' );
 const { createEntity, createSingleItem, createRedirectForItem } = require( '../helpers/entityHelper' );
 const expect = chai.expect;
-const chaiResponseValidator = require( 'chai-openapi-response-validator' ).default;
 const basePath = 'rest.php/wikibase/v0';
 const rest = new REST( basePath );
 
 describe( 'validate GET /entities/items/{id}/statements responses against OpenAPI spec', () => {
-	before( async () => {
-		const spec = await SwaggerParser.dereference( './specs/openapi.json' );
-		// dynamically add CI test system to the spec
-		spec.servers = [ { url: rest.req.app + basePath } ];
-		chai.use( chaiResponseValidator( spec ) );
-	} );
 
 	it( '200 OK response is valid for an Item with no statements', async () => {
 		const createEmptyItemResponse = await createEntity( 'item', {} );
