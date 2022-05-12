@@ -7,10 +7,10 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 use Deserializers\Exceptions\DeserializationException;
 use Exception;
 use Language;
+use MediaWiki\Extension\Scribunto\ScribuntoException;
 use MediaWiki\MediaWikiServices;
 use Scribunto_LuaError;
 use Scribunto_LuaLibraryBase;
-use ScribuntoException;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\PropertyLabelNotResolvedException;
@@ -331,7 +331,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * @throws \ScribuntoException
+	 * @throws ScribuntoException
 	 */
 	private function parseUserGivenEntityId( string $idSerialization ): EntityId {
 		try {
