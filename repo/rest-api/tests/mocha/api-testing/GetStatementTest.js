@@ -132,6 +132,35 @@ describe( 'GET /statements/{statement_id}', () => {
 		} );
 	} );
 
+	describe( '404 error response', () => {
+		it( 'statement not found on item', async () => {
+			const statementId = testItemId + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newValidRequest( {
+				endpoint: `/statements/${statementId}`,
+				// eslint-disable-next-line camelcase
+				params: { statement_id: statementId }
+			} );
+
+			assert.equal( response.status, 404 );
+			assert.header( response, 'Content-Language', 'en' );
+			assert.equal( response.body.code, 'statement-not-found' );
+			assert.include( response.body.message, statementId );
+		} );
+		it( 'item not found', async () => {
+			const statementId = 'Q321$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newValidRequest( {
+				endpoint: `/statements/${statementId}`,
+				// eslint-disable-next-line camelcase
+				params: { statement_id: statementId }
+			} );
+
+			assert.equal( response.status, 404 );
+			assert.header( response, 'Content-Language', 'en' );
+			assert.equal( response.body.code, 'statement-not-found' );
+			assert.include( response.body.message, statementId );
+		} );
+	} );
+
 	describe( 'authentication', () => {
 
 		it( 'has an X-Authenticated-User header with the logged in user', async () => {
