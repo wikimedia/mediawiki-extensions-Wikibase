@@ -27,7 +27,7 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.labelview', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_labelview' ).each( function () {
 				var $labelview = $( this ),
 					labelview = $labelview.data( 'labelview' );

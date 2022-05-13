@@ -47,7 +47,7 @@
 	}
 
 	QUnit.module( 'jquery.wikibase.entitytermsview', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_entitytermsview' ).each( function () {
 				var $entitytermsview = $( this ),
 					entitytermsview = $entitytermsview.data( 'entitytermsview' );

@@ -23,7 +23,7 @@
 	}
 
 	QUnit.module( 'jquery.wikibase.statementview.RankSelector', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_rankselector' ).each( function ( i, node ) {
 				var $node = $( node );
 				$node.data( 'test_rankselector' ).destroy();

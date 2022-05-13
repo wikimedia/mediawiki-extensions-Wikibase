@@ -17,7 +17,7 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.toolbaritem', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_toolbaritem' ).each( function () {
 				var $item = $( this ).data( 'toolbaritem' ),
 					item = $item.data( 'toolbaritem' );

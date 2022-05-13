@@ -6,7 +6,7 @@
 	'use strict';
 
 	QUnit.module( 'jquery.wikibase.edittoolbar', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_edittoolbar' ).each( function () {
 				var $edittoolbar = $( this ),
 					edittoolbar = $edittoolbar.data( 'edittoolbar' );

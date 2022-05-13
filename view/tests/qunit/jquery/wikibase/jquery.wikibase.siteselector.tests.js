@@ -99,7 +99,7 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.siteselector', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test-siteselector' ).each( function ( i, node ) {
 				var $node = $( node );
 				if ( $node.data( 'siteselector' ) ) {

@@ -31,7 +31,7 @@
 	}
 
 	QUnit.module( 'jquery.wikibase.listview', QUnit.newMwEnvironment( {
-		setup: function () {
+		beforeEach: function () {
 			/**
 			 * Basic widget to be used as list item.
 			 */
@@ -44,7 +44,7 @@
 				}
 			} );
 		},
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_listview' ).each( function ( i, node ) {
 				var $node = $( node ),
 					listview = $node.data( 'listview' );

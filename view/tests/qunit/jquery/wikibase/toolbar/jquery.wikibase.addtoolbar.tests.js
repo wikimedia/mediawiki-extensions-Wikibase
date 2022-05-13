@@ -6,7 +6,7 @@
 	'use strict';
 
 	QUnit.module( 'jquery.wikibase.addtoolbar', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_addtoolbar' ).each( function () {
 				var $addtoolbar = $( this ),
 					addtoolbar = $addtoolbar.data( 'addtoolbar' );

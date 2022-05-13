@@ -9,7 +9,7 @@
 		serialization = require( 'wikibase.serialization' );
 
 	QUnit.module( 'jquery.wikibase.snakview', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_snakview' ).each( function () {
 				var $snakview = $( this ),
 					snakview = $snakview.data( 'snakview' );

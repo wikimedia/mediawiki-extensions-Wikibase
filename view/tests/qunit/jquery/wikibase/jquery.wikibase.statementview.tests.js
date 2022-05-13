@@ -8,7 +8,7 @@
 	var datamodel = require( 'wikibase.datamodel' );
 
 	QUnit.module( 'jquery.wikibase.statementview', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_statementview' ).each( function () {
 				var $statementview = $( this ),
 					statementview = $statementview.data( 'statementview' );

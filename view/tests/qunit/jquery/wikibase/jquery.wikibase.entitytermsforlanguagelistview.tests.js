@@ -51,7 +51,7 @@
 	}
 
 	QUnit.module( 'jquery.wikibase.entitytermsforlanguagelistview', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_entitytermsforlanguagelistview' ).each( function () {
 				var $entitytermsforlanguagelistview = $( this ),
 					entitytermsforlanguagelistview

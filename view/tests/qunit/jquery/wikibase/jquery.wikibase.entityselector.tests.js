@@ -57,7 +57,7 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.entityselector', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test-entityselector' ).remove();
 		}
 	} ) );

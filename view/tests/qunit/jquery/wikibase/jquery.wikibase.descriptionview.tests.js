@@ -27,7 +27,7 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.descriptionview', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_descriptionview' ).each( function () {
 				var $descriptionview = $( this ),
 					descriptionview = $descriptionview.data( 'descriptionview' );

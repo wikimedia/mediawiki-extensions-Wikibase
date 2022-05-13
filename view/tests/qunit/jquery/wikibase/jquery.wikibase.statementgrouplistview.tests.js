@@ -38,7 +38,7 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.statementgrouplistview', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_statementgrouplistview' ).each( function () {
 				var $statementgrouplistview = $( this ),
 					statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );

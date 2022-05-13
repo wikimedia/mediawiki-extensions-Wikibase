@@ -51,7 +51,7 @@
 	}
 
 	QUnit.module( 'jquery.wikibase.sitelinklistview', QUnit.newMwEnvironment( {
-		setup: function () {
+		beforeEach: function () {
 			// empty cache of wikibases site details
 			wb.sites._siteList = null;
 
@@ -87,7 +87,7 @@
 				}
 			} );
 		},
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_sitelinklistview' ).each( function () {
 				var $sitelinklistview = $( this ),
 					sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );

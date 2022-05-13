@@ -57,7 +57,7 @@
 
 	QUnit.module( 'jquery.wikibase.referenceview', window.QUnit.newMwEnvironment( {
 		config: { wbRefTabsEnabled: false },
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_referenceview' ).each( function ( i, node ) {
 				var $node = $( node ),
 					referenceview = $node.data( 'referenceview' );

@@ -30,7 +30,7 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.aliasesview', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_aliasesview' ).each( function () {
 				var $aliasesview = $( this ),
 					aliasesview = $aliasesview.data( 'aliasesview' );

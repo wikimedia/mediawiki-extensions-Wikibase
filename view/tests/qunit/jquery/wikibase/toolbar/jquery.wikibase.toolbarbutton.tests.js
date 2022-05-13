@@ -16,7 +16,7 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.toolbarbutton', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( 'test_toolbarbutton' ).each( function () {
 				var $button = $( this ),
 					button = $button.data( 'toolbarbutton' );

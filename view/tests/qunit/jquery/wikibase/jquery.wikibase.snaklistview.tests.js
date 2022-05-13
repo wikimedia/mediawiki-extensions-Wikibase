@@ -78,7 +78,7 @@
 	}
 
 	QUnit.module( 'jquery.wikibase.snaklistview', window.QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_snaklistview' ).each( function ( i, node ) {
 				var $node = $( node ),
 					snaklistview = $node.data( 'snaklistview' );

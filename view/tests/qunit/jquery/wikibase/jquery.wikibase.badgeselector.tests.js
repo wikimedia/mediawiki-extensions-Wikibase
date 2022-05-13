@@ -6,7 +6,7 @@
 	'use strict';
 
 	QUnit.module( 'jquery.wikibase.badgeselector', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_badgeselector' ).each( function () {
 				var $node = $( this ),
 					badgeselector = $node.data( 'badgeselector' );

@@ -20,7 +20,7 @@
 	}
 
 	QUnit.module( 'jquery.ui.tagadata', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_tagadata' ).each( function () {
 				var $tagadata = $( this ),
 					tagadata = $( this ).data( 'tagadata' );

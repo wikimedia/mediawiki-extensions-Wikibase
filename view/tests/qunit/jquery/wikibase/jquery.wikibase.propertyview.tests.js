@@ -29,7 +29,7 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.propertyview', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_propertyview' ).each( function () {
 				var $propertyview = $( this ),
 					propertyview = $propertyview.data( 'propertyview' );

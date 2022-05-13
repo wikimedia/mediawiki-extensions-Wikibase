@@ -50,7 +50,7 @@
 	};
 
 	QUnit.module( 'wikibase.sites', QUnit.newMwEnvironment( {
-		setup: function () {
+		beforeEach: function () {
 			// empty cache of wikibases site details
 			wb.sites._siteList = null;
 

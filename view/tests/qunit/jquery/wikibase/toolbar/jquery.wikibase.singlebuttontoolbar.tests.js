@@ -6,7 +6,7 @@
 	'use strict';
 
 	QUnit.module( 'jquery.wikibase.singlebuttontoolbar', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_singlebuttontoolbar' ).each( function () {
 				var $singlebuttontoolbar = $( this ),
 					singlebuttontoolbar = $singlebuttontoolbar.data( 'singlebuttontoolbar' );

@@ -42,7 +42,7 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.statementgroupview', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_statementgroupview' ).each( function () {
 				var $statementgroupview = $( this ),
 					statementgroupview = $statementgroupview.data( 'statementgroupview' );

@@ -30,7 +30,7 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.itemview', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_itemview' ).each( function () {
 				var $itemview = $( this ),
 					itemview = $itemview.data( 'itemview' );
