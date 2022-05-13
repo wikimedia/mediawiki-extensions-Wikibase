@@ -7,6 +7,7 @@ use Wikibase\DataModel\Serializers\StatementListSerializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
 
 /**
  * @license GPL-2.0-or-later
@@ -31,7 +32,7 @@ class GetItemStatements {
 	}
 
 	/**
-	 * @return GetItemStatementsSuccessResponse|GetItemStatementsRedirectResponse|GetItemStatementsErrorResponse
+	 * @return GetItemStatementsSuccessResponse|ItemRedirectResponse|GetItemStatementsErrorResponse
 	 */
 	public function execute( GetItemStatementsRequest $request ) {
 		$validationError = $this->validator->validate( $request );
@@ -49,7 +50,7 @@ class GetItemStatements {
 				"Could not find an item with the ID: {$request->getItemId()}"
 			);
 		} elseif ( $latestRevisionMetadata->isRedirect() ) {
-			return new GetItemStatementsRedirectResponse( $latestRevisionMetadata->getRedirectTarget()->getSerialization() );
+			return new ItemRedirectResponse( $latestRevisionMetadata->getRedirectTarget()->getSerialization() );
 		}
 
 		return new GetItemStatementsSuccessResponse(

@@ -7,6 +7,7 @@ use Wikibase\Repo\RestApi\Domain\Filters\FieldFilter;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
 
 /**
  * @license GPL-2.0-or-later
@@ -28,7 +29,7 @@ class GetItem {
 	}
 
 	/**
-	 * @return GetItemSuccessResponse|GetItemErrorResponse|GetItemRedirectResponse
+	 * @return GetItemSuccessResponse|GetItemErrorResponse|ItemRedirectResponse
 	 */
 	public function execute( GetItemRequest $itemRequest ) {
 		$validationError = $this->validator->validate( $itemRequest );
@@ -46,7 +47,7 @@ class GetItem {
 				"Could not find an item with the ID: {$itemRequest->getItemId()}"
 			);
 		} elseif ( $itemRevisionResult->isRedirect() ) {
-			return new GetItemRedirectResponse( $itemRevisionResult->getRedirectTarget()->getSerialization() );
+			return new ItemRedirectResponse( $itemRevisionResult->getRedirectTarget()->getSerialization() );
 		}
 
 		$itemRevision = $itemRevisionResult->getRevision();

@@ -12,9 +12,9 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsErrorResponse;
-use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsRedirectResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsValidator;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\Tests\NewStatement;
 use Wikibase\Repo\WikibaseRepo;
@@ -118,7 +118,7 @@ class GetItemStatementsTest extends TestCase {
 
 		$response = $this->newUseCase()->execute( new GetItemStatementsRequest( $redirectSource ) );
 
-		$this->assertInstanceOf( GetItemStatementsRedirectResponse::class, $response );
+		$this->assertInstanceOf( ItemRedirectResponse::class, $response );
 		$this->assertSame( $redirectTarget, $response->getRedirectTargetId() );
 	}
 

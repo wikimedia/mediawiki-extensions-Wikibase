@@ -12,9 +12,9 @@ use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRedirectResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -81,7 +81,7 @@ class GetItemRouteHandler extends SimpleHandler {
 
 		if ( $useCaseResponse instanceof GetItemSuccessResponse ) {
 			$httpResponse = $this->newSuccessHttpResponse( $useCaseResponse );
-		} elseif ( $useCaseResponse instanceof GetItemRedirectResponse ) {
+		} elseif ( $useCaseResponse instanceof ItemRedirectResponse ) {
 			$httpResponse = $this->newRedirectHttpResponse( $useCaseResponse );
 		} elseif ( $useCaseResponse instanceof GetItemErrorResponse ) {
 			$httpResponse = $this->newErrorHttpResponse( $useCaseResponse );
@@ -113,7 +113,7 @@ class GetItemRouteHandler extends SimpleHandler {
 		return $httpResponse;
 	}
 
-	private function newRedirectHttpResponse( GetItemRedirectResponse $useCaseResponse ): Response {
+	private function newRedirectHttpResponse( ItemRedirectResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader(
 			'Location',
