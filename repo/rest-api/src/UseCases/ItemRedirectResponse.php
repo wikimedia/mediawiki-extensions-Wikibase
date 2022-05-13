@@ -1,11 +1,11 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\UseCases\GetItemStatements;
+namespace Wikibase\Repo\RestApi\UseCases;
 
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemStatementsRedirectResponse {
+class ItemRedirectResponse {
 
 	private $redirectTargetId;
 
