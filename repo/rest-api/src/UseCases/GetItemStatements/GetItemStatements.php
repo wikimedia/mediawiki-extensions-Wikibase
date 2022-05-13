@@ -31,7 +31,7 @@ class GetItemStatements {
 	}
 
 	/**
-	 * @return GetItemStatementsSuccessResponse|GetItemStatementsErrorResponse
+	 * @return GetItemStatementsSuccessResponse|GetItemStatementsRedirectResponse|GetItemStatementsErrorResponse
 	 */
 	public function execute( GetItemStatementsRequest $request ) {
 		$validationError = $this->validator->validate( $request );
@@ -48,6 +48,8 @@ class GetItemStatements {
 				ErrorResponse::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$request->getItemId()}"
 			);
+		} elseif ( $latestRevisionMetadata->isRedirect() ) {
+			return new GetItemStatementsRedirectResponse( $latestRevisionMetadata->getRedirectTarget()->getSerialization() );
 		}
 
 		return new GetItemStatementsSuccessResponse(

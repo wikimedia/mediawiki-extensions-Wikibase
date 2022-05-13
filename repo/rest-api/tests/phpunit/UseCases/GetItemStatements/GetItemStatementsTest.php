@@ -12,6 +12,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsRedirectResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
@@ -105,6 +106,20 @@ class GetItemStatementsTest extends TestCase {
 		$itemStatementsResponse = $this->newUseCase()->execute( $itemStatementsRequest );
 		$this->assertInstanceOf( GetItemStatementsErrorResponse::class, $itemStatementsResponse );
 		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $itemStatementsResponse->getCode() );
+	}
+
+	public function testGivenItemRedirect_returnsRedirectResponse(): void {
+		$redirectSource = 'Q123';
+		$redirectTarget = 'Q321';
+
+		$this->itemRevisionMetadataRetriever
+			->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
+
+		$response = $this->newUseCase()->execute( new GetItemStatementsRequest( $redirectSource ) );
+
+		$this->assertInstanceOf( GetItemStatementsRedirectResponse::class, $response );
+		$this->assertSame( $redirectTarget, $response->getRedirectTargetId() );
 	}
 
 	private function newUseCase(): GetItemStatements {
