@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Don Alessandro"
+			"Don Alessandro",
+			"TayfunEt."
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} deñiştirilmesi",
 	"wikibase-editlinks": "Bağlantılarnı deñiştir",
 	"wikibase-editlinkstitle": "Başqa tillerge bağlantılarnı deñiştir",
 	"wikibase-linkitem-addlinks": "Bağlantılar qoş",
