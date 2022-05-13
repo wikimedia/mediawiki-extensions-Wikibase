@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemStatementsJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsRedirectResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsSuccessResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
@@ -77,6 +78,8 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 
 		if ( $useCaseResponse instanceof GetItemStatementsSuccessResponse ) {
 			$httpResponse = $this->newSuccessHttpResponse( $useCaseResponse );
+		} elseif ( $useCaseResponse instanceof GetItemStatementsRedirectResponse ) {
+			$httpResponse = $this->newRedirectHttpResponse( $useCaseResponse );
 		} elseif ( $useCaseResponse instanceof GetItemStatementsErrorResponse ) {
 			$httpResponse = $this->newErrorHttpResponse( $useCaseResponse );
 		} else {
@@ -95,6 +98,17 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
 		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
 		$httpResponse->setBody( new StringStream( $this->successPresenter->getJson( $useCaseResponse ) ) );
+
+		return $httpResponse;
+	}
+
+	private function newRedirectHttpResponse( GetItemStatementsRedirectResponse $useCaseResponse ): Response {
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setHeader(
+			'Location',
+			$this->getRouteUrl( [ self::ID_PATH_PARAM => $useCaseResponse->getRedirectTargetId() ] )
+		);
+		$httpResponse->setStatus( 308 );
 
 		return $httpResponse;
 	}
