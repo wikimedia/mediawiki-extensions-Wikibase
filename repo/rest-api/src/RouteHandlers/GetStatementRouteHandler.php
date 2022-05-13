@@ -6,9 +6,11 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use Wikibase\Repo\RestApi\Presentation\ErrorResponseToHttpStatus;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemStatementJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
+use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementSuccessResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
@@ -24,23 +26,28 @@ class GetStatementRouteHandler extends SimpleHandler {
 
 	private $getItemStatement;
 	private $successPresenter;
+	private $errorPresenter;
 	private $errorHandler;
 
 	public function __construct(
 		GetItemStatement $getItemStatement,
 		GetItemStatementJsonPresenter $successPresenter,
+		ErrorJsonPresenter $errorPresenter,
 		UnexpectedErrorHandler $errorHandler
 	) {
 		$this->getItemStatement = $getItemStatement;
 		$this->successPresenter = $successPresenter;
+		$this->errorPresenter = $errorPresenter;
 		$this->errorHandler = $errorHandler;
 	}
 
 	public static function factory(): Handler {
+		$errorPresenter = new ErrorJsonPresenter();
 		return new self(
 			WbRestApi::getGetItemStatement(),
 			new GetItemStatementJsonPresenter(),
-			new UnexpectedErrorHandler( new ErrorJsonPresenter(), WikibaseRepo::getLogger() )
+			$errorPresenter,
+			new UnexpectedErrorHandler( $errorPresenter, WikibaseRepo::getLogger() )
 		);
 	}
 
@@ -56,10 +63,10 @@ class GetStatementRouteHandler extends SimpleHandler {
 			new GetItemStatementRequest( $statementId )
 		);
 
-		// temporarily suppress phan, remove when other responses are handled
-		// @phan-suppress-next-line PhanRedundantCondition
 		if ( $useCaseResponse instanceof GetItemStatementSuccessResponse ) {
-			$httpResponse = $this->newSuccessfulHttpResponse( $useCaseResponse );
+			$httpResponse = $this->newSuccessHttpResponse( $useCaseResponse );
+		} elseif ( $useCaseResponse instanceof GetItemStatementErrorResponse ) {
+			$httpResponse = $this->newErrorHttpResponse( $useCaseResponse );
 		} else {
 			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
@@ -83,7 +90,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 		return false;
 	}
 
-	private function newSuccessfulHttpResponse( GetItemStatementSuccessResponse $useCaseResponse ): Response {
+	private function newSuccessHttpResponse( GetItemStatementSuccessResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader(
@@ -93,6 +100,18 @@ class GetStatementRouteHandler extends SimpleHandler {
 		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
 		$httpResponse->setBody(
 			new StringStream( $this->successPresenter->getJson( $useCaseResponse ) )
+		);
+
+		return $httpResponse;
+	}
+
+	private function newErrorHttpResponse( GetItemStatementErrorResponse $useCaseResponse ): Response {
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setHeader( 'Content-Type', 'application/json' );
+		$httpResponse->setHeader( 'Content-Language', 'en' );
+		$httpResponse->setStatus( ErrorResponseToHttpStatus::lookup( $useCaseResponse ) );
+		$httpResponse->setBody(
+			new StringStream( $this->errorPresenter->getJson( $useCaseResponse ) )
 		);
 
 		return $httpResponse;
@@ -108,4 +127,5 @@ class GetStatementRouteHandler extends SimpleHandler {
 	private function setEtagFromRevId( Response $httpResponse, int $revId ): void {
 		$httpResponse->setHeader( 'ETag', "\"$revId\"" );
 	}
+
 }

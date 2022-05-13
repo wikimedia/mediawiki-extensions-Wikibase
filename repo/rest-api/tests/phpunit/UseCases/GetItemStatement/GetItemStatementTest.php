@@ -5,12 +5,17 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItemStatement;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
+use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
+use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementValidator;
+use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 use Wikibase\Repo\Tests\NewStatement;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -77,8 +82,18 @@ class GetItemStatementTest extends TestCase {
 		$this->assertSame( $lastModified, $response->getLastModified() );
 	}
 
+	public function testGivenInvalidStatementId_returnsErrorResponse(): void {
+		$response = $this->newUseCase()->execute(
+			new GetItemStatementRequest( 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+		);
+
+		$this->assertInstanceOf( GetItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::INVALID_STATEMENT_ID, $response->getCode() );
+	}
+
 	private function newUseCase(): GetItemStatement {
 		return new GetItemStatement(
+			new GetItemStatementValidator( new StatementIdValidator( new ItemIdParser() ) ),
 			$this->statementRetriever,
 			$this->itemRevisionMetadataRetriever,
 			WikibaseRepo::getBaseDataModelSerializerFactory()->newStatementSerializer()

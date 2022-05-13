@@ -39,6 +39,13 @@ async function newValidRequest( request ) {
 	return newRequest( request );
 }
 
+async function newInvalidRequest( request ) {
+	const errors = await validateRequest( request );
+	assert.isDefined( errors );
+
+	return newRequest( request );
+}
+
 function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
 }
@@ -79,6 +86,50 @@ describe( 'GET /statements/{statement_id}', () => {
 		} );
 
 		assertValid200Response( response );
+	} );
+
+	describe( '400 error response', () => {
+		it( 'statement ID contains invalid entity ID', async () => {
+			const statementId = 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newInvalidRequest( {
+				endpoint: `/statements/${statementId}`,
+				// eslint-disable-next-line camelcase
+				params: { statement_id: statementId }
+			} );
+
+			assert.equal( response.status, 400 );
+			assert.header( response, 'Content-Language', 'en' );
+			assert.equal( response.body.code, 'invalid-statement-id' );
+			assert.include( response.body.message, statementId );
+		} );
+
+		it( 'statement ID is invalid format', async () => {
+			const statementId = 'not-a-valid-format';
+			const response = await newInvalidRequest( {
+				endpoint: `/statements/${statementId}`,
+				// eslint-disable-next-line camelcase
+				params: { statement_id: statementId }
+			} );
+
+			assert.equal( response.status, 400 );
+			assert.header( response, 'Content-Language', 'en' );
+			assert.equal( response.body.code, 'invalid-statement-id' );
+			assert.include( response.body.message, statementId );
+		} );
+
+		it( 'statement is not on an item', async () => {
+			const statementId = 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newValidRequest( {
+				endpoint: `/statements/${statementId}`,
+				// eslint-disable-next-line camelcase
+				params: { statement_id: statementId }
+			} );
+
+			assert.equal( response.status, 400 );
+			assert.header( response, 'Content-Language', 'en' );
+			assert.equal( response.body.code, 'invalid-statement-id' );
+			assert.include( response.body.message, statementId );
+		} );
 	} );
 
 	describe( 'authentication', () => {
