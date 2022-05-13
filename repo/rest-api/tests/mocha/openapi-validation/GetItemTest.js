@@ -2,10 +2,10 @@
 
 // allow chai expectations
 /* eslint-disable no-unused-expressions */
-const { REST, action } = require( 'api-testing' );
+const { REST } = require( 'api-testing' );
 const SwaggerParser = require( '@apidevtools/swagger-parser' );
-const entityHelper = require( '../helpers/entityHelper' );
 const chai = require( 'chai' );
+const { createEntity, createSingleItem, createRedirectForItem } = require( '../helpers/entityHelper' );
 const expect = chai.expect;
 const chaiResponseValidator = require( 'chai-openapi-response-validator' ).default;
 const basePath = 'rest.php/wikibase/v0';
@@ -20,7 +20,7 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 	} );
 
 	it( '200 OK response is valid for an "empty" item', async () => {
-		const createEmptyItemResponse = await entityHelper.createEntity( 'item', {} );
+		const createEmptyItemResponse = await createEntity( 'item', {} );
 		const response = await rest.get( `/entities/items/${createEmptyItemResponse.entity.id}` );
 
 		expect( response.status ).to.equal( 200 );
@@ -28,7 +28,7 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 	} );
 
 	it( '200 OK response is valid for a non-empty item', async () => {
-		const createSingleItemResponse = await entityHelper.createSingleItem();
+		const createSingleItemResponse = await createSingleItem();
 		const response = await rest.get( `/entities/items/${createSingleItemResponse.entity.id}` );
 
 		expect( response.status ).to.equal( 200 );
@@ -36,13 +36,8 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 	} );
 
 	it( '308 Permanent Redirect response is valid for a redirected item', async () => {
-		const redirectSourceId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
-		const redirectTargetId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
-		await action.getAnon().action( 'wbcreateredirect', {
-			from: redirectSourceId,
-			to: redirectTargetId,
-			token: '+\\'
-		}, true );
+		const redirectTargetId = ( await createEntity( 'item', {} ) ).entity.id;
+		const redirectSourceId = await createRedirectForItem( redirectTargetId );
 
 		const response = await rest.get( `/entities/items/${redirectSourceId}` );
 
@@ -51,7 +46,7 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 	} );
 
 	it( '304 Not Modified response is valid', async () => {
-		const createSingleItemResponse = await entityHelper.createSingleItem();
+		const createSingleItemResponse = await createSingleItem();
 		const response = await rest.get(
 			`/entities/items/${createSingleItemResponse.entity.id}`,
 			{},
