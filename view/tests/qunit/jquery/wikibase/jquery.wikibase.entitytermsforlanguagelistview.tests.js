@@ -8,7 +8,7 @@
 	var datamodel = require( 'wikibase.datamodel' );
 
 	/**
-	 *  @return {Fingerprint}
+	 *  @return {datamodel.Fingerprint}
 	 */
 	function createFingerprint() {
 		return new datamodel.Fingerprint(

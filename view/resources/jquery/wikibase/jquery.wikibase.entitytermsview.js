@@ -13,7 +13,7 @@
 	 *
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 *
-	 * @option {Fingerprint} value
+	 * @option {Datamodel.fingerprint} value
 	 *
 	 * @option {string[]} userLanguages
 	 *         A list of languages for which terms should be displayed initially.
@@ -390,7 +390,7 @@
 		/**
 		 * @inheritdoc
 		 *
-		 * @param {Fingerprint} [value]
+		 * @param {Datamodel.fingerprint} [value]
 		 * @return {Fingerprint|*}
 		 */
 		value: function ( value ) {

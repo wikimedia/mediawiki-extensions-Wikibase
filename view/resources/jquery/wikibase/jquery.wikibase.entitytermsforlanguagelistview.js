@@ -14,7 +14,7 @@
 	 *
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 *
-	 * @option {Fingerprint} value
+	 * @option {datamodel.Fingerprint} value
 	 *
 	 * @option {string[]} userLanguages
 	 *         A list of languages for which terms should be displayed initially.
@@ -448,8 +448,8 @@
 		},
 
 		/**
-		 * @param {Fingerprint} [value]
-		 * @return {Fingerprint|*}
+		 * @param {datamodel.Fingerprint} [value]
+		 * @return {datamodel.Fingerprint|*}
 		 */
 		value: function ( value ) {
 			if ( value !== undefined ) {
@@ -495,6 +495,7 @@
 
 		/**
 		 * @see jQuery.ui.TemplatedWidget._setOption
+		 * @return {jQuery.Widget}
 		 */
 		_setOption: function ( key, value ) {
 			var response = PARENT.prototype._setOption.apply( this, arguments );
