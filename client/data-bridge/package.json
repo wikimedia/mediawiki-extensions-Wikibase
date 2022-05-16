@@ -26,7 +26,6 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@vue/compat": "3.2.23",
     "core-js": "^3.18.2",
     "deep-equal": "^2.0.5",
     "events": "^3.3.0",
