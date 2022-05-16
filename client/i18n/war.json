@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"JinJian"
+			"JinJian",
+			"MinecraftAustralia"
 		]
 	},
 	"tooltip-t-wikibase": "Igsumpay ha connected data repository item",
@@ -9,6 +10,12 @@
 	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "Igliwat an mga sumpay",
 	"wikibase-editlinkstitle": "Igliwat an mga interlanguage link",
+	"wikibase-linkitem-addlinks": "Dugnga hin mga sumpay",
+	"wikibase-linkitem-title": "Sumpayi hit pakli",
+	"wikibase-linkitem-linkpage": "Sumpayi hit pakli",
+	"wikibase-linkitem-selectlink": "Alayon pagpili hin uska site ngan uska pakli nga karuyag mo igsumpay hinin ng pakli.",
+	"wikibase-linkitem-input-site": "Yinaknan:",
+	"wikibase-linkitem-input-page": "Pakli:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Tago-a",
 	"wikibase-rc-hide-wikidata-show": "Pakit-a",

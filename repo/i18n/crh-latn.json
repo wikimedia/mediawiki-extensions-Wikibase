@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Don Alessandro"
+			"Don Alessandro",
+			"TayfunEt."
 		]
 	},
 	"wikibase-edit": "deñiştir",
+	"wikibase-add": "qoy",
+	"wikibase-description-empty": "Tanımlanğan tasvir yoq",
 	"special-gotolinkedpage": "Bağlanğan saifege keç"
 }

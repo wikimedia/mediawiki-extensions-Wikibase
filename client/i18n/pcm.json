@@ -5,17 +5,17 @@
 			"Egiebizzy"
 		]
 	},
-	"wikibase-dataitem": "{{WBREPONAME}} aitem",
-	"wikibase-editlinks": "Chenj conet-dem",
-	"wikibase-linkitem-addlinks": "Ad conet-dem",
-	"wikibase-linkitem-title": "Conet am wit pej",
-	"wikibase-linkitem-linkpage": "Conet-am wit pej",
-	"wikibase-linkitem-selectlink": "Abeg pik wan sait an wan pej we yu go laik conet-am to dis pej",
-	"wikibase-linkitem-input-site": "Languej:",
+	"wikibase-dataitem": "{{WBREPONAME}} item",
+	"wikibase-editlinks": "Chenj link-dem",
+	"wikibase-linkitem-addlinks": "Ad link-dem",
+	"wikibase-linkitem-title": "Link-am wit pej",
+	"wikibase-linkitem-linkpage": "Link-am wit pej",
+	"wikibase-linkitem-selectlink": "Abeg pik one sait an one pej wey you go like link-am to dis pej",
+	"wikibase-linkitem-input-site": "Langwej:",
 	"wikibase-linkitem-input-page": "Pej:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "Haid-am",
-	"wikibase-rc-hide-wikidata-show": "Sho-am",
+	"wikibase-rc-hide-wikidata-hide": "Hide-am",
+	"wikibase-rc-hide-wikidata-show": "Show-am",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} edit"
 }
