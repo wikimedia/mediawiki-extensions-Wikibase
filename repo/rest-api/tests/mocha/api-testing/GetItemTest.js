@@ -1,55 +1,21 @@
 'use strict';
 
-const { REST, assert, action, utils, clientFactory } = require( 'api-testing' );
-const SwaggerParser = require( '@apidevtools/swagger-parser' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
-const OpenAPIRequestValidator = require( 'openapi-request-validator' ).default;
-const OpenAPIRequestCoercer = require( 'openapi-request-coercer' ).default;
 const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
+const { RequestBuilder } = require( '../helpers/RequestBuilder' );
+const { action, assert, clientFactory, utils } = require( 'api-testing' );
 
-const basePath = 'rest.php/wikibase/v0';
-const rest = new REST( basePath );
-
-async function validateRequest( request ) {
-	const apiSpec = await SwaggerParser.dereference( './specs/openapi.json' );
-	const requestSpec = apiSpec.paths[ '/entities/items/{entity_id}' ].get;
-	const specParameters = { parameters: requestSpec.parameters };
-	// copy, since the unchanged request is still needed
-	const coercedRequest = JSON.parse( JSON.stringify( request ) );
-
-	new OpenAPIRequestCoercer( specParameters ).coerce( coercedRequest );
-
-	return new OpenAPIRequestValidator( requestSpec ).validateRequest( coercedRequest );
-}
-
-async function newRequest( request ) {
-	return rest.get( request.endpoint, request.query, request.headers );
-}
-
-async function newValidRequest( request ) {
-	const errors = await validateRequest( request );
-	let errorMessage = '';
-
-	if ( typeof errors !== 'undefined' ) {
-		const error = errors.errors[ 0 ];
-		errorMessage = `[${error.errorCode}] ${error.path} ${error.message} in ${error.location}`;
-	}
-	assert.isUndefined( errors, errorMessage );
-
-	return newRequest( request );
-}
-
-async function newInvalidRequest( request ) {
-	const errors = await validateRequest( request );
-	assert.isDefined( errors );
-
-	return newRequest( request );
+function newGetItemRequestBuilder( itemId ) {
+	return new RequestBuilder()
+		.withRoute( '/entities/items/{entity_id}' )
+		.withPathParam( 'entity_id', itemId );
 }
 
 function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
 }
 
+const basePath = 'rest.php/wikibase/v0';
 const germanLabel = 'a-German-label-' + utils.uniq();
 const englishLabel = 'an-English-label-' + utils.uniq();
 const englishDescription = 'an-English-description-' + utils.uniq();
@@ -59,24 +25,11 @@ describe( 'GET /entities/items/{id} ', () => {
 	let testModified;
 	let testRevisionId;
 
-	async function newValidRequestWithHeader( headers ) {
-		return newValidRequest( {
-			endpoint: `/entities/items/${testItemId}`,
-			// eslint-disable-next-line camelcase
-			params: { entity_id: testItemId },
-			query: {},
-			headers
-		} );
+	function newValidRequestBuilderWithTestItem() {
+		return newGetItemRequestBuilder( testItemId ).assertValidRequest();
 	}
-
-	async function newInvalidRequestWithHeader( headers ) {
-		return newInvalidRequest( {
-			endpoint: `/entities/items/${testItemId}`,
-			// eslint-disable-next-line camelcase
-			params: { entity_id: testItemId },
-			query: {},
-			headers
-		} );
+	function newInvalidRequestBuilderWithTestItem() {
+		return newGetItemRequestBuilder( testItemId ).assertInvalidRequest();
 	}
 
 	function assertValid200Response( response ) {
@@ -114,22 +67,15 @@ describe( 'GET /entities/items/{id} ', () => {
 	} );
 
 	it( 'can GET an item with metadata', async () => {
-		const response = await newValidRequest( {
-			endpoint: `/entities/items/${testItemId}`,
-			// eslint-disable-next-line camelcase
-			params: { entity_id: testItemId }
-		} );
+		const response = await newValidRequestBuilderWithTestItem().makeRequest();
 
 		assertValid200Response( response );
 	} );
 
 	it( 'can GET a partial item with single _fields param', async () => {
-		const response = await newValidRequest( {
-			endpoint: `/entities/items/${testItemId}`,
-			// eslint-disable-next-line camelcase
-			params: { entity_id: testItemId },
-			query: { _fields: 'labels' }
-		} );
+		const response = await newValidRequestBuilderWithTestItem()
+			.withQueryParam( '_fields', 'labels' )
+			.makeRequest();
 
 		assert.equal( response.status, 200 );
 		assert.deepEqual( response.body, {
@@ -144,12 +90,9 @@ describe( 'GET /entities/items/{id} ', () => {
 	} );
 
 	it( 'can GET a partial item with multiple _fields params', async () => {
-		const response = await newValidRequest( {
-			endpoint: `/entities/items/${testItemId}`,
-			// eslint-disable-next-line camelcase
-			params: { entity_id: testItemId },
-			query: { _fields: 'labels,descriptions,aliases' }
-		} );
+		const response = await newValidRequestBuilderWithTestItem()
+			.withQueryParam( '_fields', 'labels,descriptions,aliases' )
+			.makeRequest();
 
 		assert.equal( response.status, 200 );
 		assert.deepEqual( response.body, {
@@ -170,54 +113,55 @@ describe( 'GET /entities/items/{id} ', () => {
 	describe( 'If-None-Match', () => {
 		describe( '200 response', () => {
 			it( 'if the current item revision is newer than the ID provided', async () => {
-				const response = await newValidRequestWithHeader( {
-					'If-None-Match': makeEtag( testRevisionId - 1 )
-				} );
+				const response = await newValidRequestBuilderWithTestItem()
+					.withHeader( 'If-None-Match', makeEtag( testRevisionId - 1 ) )
+					.makeRequest();
+
 				assertValid200Response( response );
 			} );
 
 			it( 'if the current revision is newer than any of the IDs provided', async () => {
-				const response = await newValidRequestWithHeader( {
-					'If-None-Match': makeEtag( testRevisionId - 1, testRevisionId - 2 )
-				} );
+				const response = await newValidRequestBuilderWithTestItem()
+					.withHeader( 'If-None-Match', makeEtag( testRevisionId - 1, testRevisionId - 2 ) )
+					.makeRequest();
 				assertValid200Response( response );
 			} );
 
 			it( 'if the provided ETag is not a valid revision ID', async () => {
-				const response = await newValidRequestWithHeader( {
-					'If-None-Match': '"foo"'
-				} );
+				const response = await newValidRequestBuilderWithTestItem()
+					.withHeader( 'If-None-Match', '"foo"' )
+					.makeRequest();
 				assertValid200Response( response );
 			} );
 
 			it( 'if all the provided ETags are not valid revision IDs', async () => {
-				const response = await newValidRequestWithHeader( {
-					'If-None-Match': makeEtag( 'foo', 'bar' )
-				} );
+				const response = await newValidRequestBuilderWithTestItem()
+					.withHeader( 'If-None-Match', makeEtag( 'foo', 'bar' ) )
+					.makeRequest();
 				assertValid200Response( response );
 			} );
 
 			it( 'if the current revision is newer than any IDs provided (while others are invalid IDs)',
 				async () => {
-					const response = await newValidRequestWithHeader( {
-						'If-None-Match': makeEtag( 'foo', testRevisionId - 1, 'bar' )
-					} );
+					const response = await newValidRequestBuilderWithTestItem()
+						.withHeader( 'If-None-Match', makeEtag( 'foo', testRevisionId - 1, 'bar' ) )
+						.makeRequest();
 					assertValid200Response( response );
 				}
 			);
 
 			it( 'if the header is invalid', async () => {
-				const response = await newInvalidRequestWithHeader( {
-					'If-None-Match': 'not in spec for a If-None-Match header - 200 response'
-				} );
+				const response = await newInvalidRequestBuilderWithTestItem()
+					.withHeader( 'If-None-Match', 'not in spec for a If-None-Match header - 200 response' )
+					.makeRequest();
 				assertValid200Response( response );
 			} );
 
 			it( 'If-None-Match takes precedence over If-Modified-Since', async () => {
-				const response = await newValidRequestWithHeader( {
-					'If-Modified-Since': testModified, // this header on its own would return 304
-					'If-None-Match': makeEtag( testRevisionId - 1 )
-				} );
+				const response = await newValidRequestBuilderWithTestItem()
+					.withHeader( 'If-Modified-Since', testModified ) // this header on its own would return 304
+					.withHeader( 'If-None-Match', makeEtag( testRevisionId - 1 ) )
+					.makeRequest();
 				assertValid200Response( response );
 			} );
 
@@ -225,38 +169,41 @@ describe( 'GET /entities/items/{id} ', () => {
 
 		describe( '304 response', () => {
 			it( 'if the current revision ID is the same as the one provided', async () => {
-				const response = await newValidRequestWithHeader( {
-					'If-None-Match': makeEtag( testRevisionId )
-				} );
+				const response = await newValidRequestBuilderWithTestItem()
+					.withHeader( 'If-None-Match', makeEtag( testRevisionId ) )
+					.makeRequest();
 				assertValid304Response( response );
 			} );
 
 			it( 'if the current revision ID is the same as one of the IDs provided', async () => {
-				const response = await newValidRequestWithHeader(
-					{ 'If-None-Match': makeEtag( testRevisionId - 1, testRevisionId ) }
-				);
+				const response = await newValidRequestBuilderWithTestItem()
+					.withHeader( 'If-None-Match', makeEtag( testRevisionId - 1, testRevisionId ) )
+					.makeRequest();
 				assertValid304Response( response );
 			} );
 
 			it( 'if the current revision ID is the same as one of the IDs provided (while others are invalid IDs)',
 				async () => {
-					const response = await newValidRequestWithHeader( {
-						'If-None-Match': makeEtag( 'foo', testRevisionId )
-					} );
+					const response = await newValidRequestBuilderWithTestItem()
+						.withHeader( 'If-None-Match', makeEtag( 'foo', testRevisionId ) )
+						.makeRequest();
 					assertValid304Response( response );
 				}
 			);
 
 			it( 'if the header is *', async () => {
-				const response = await newValidRequestWithHeader( { 'If-None-Match': '*' } );
+				const response = await newValidRequestBuilderWithTestItem()
+					.withHeader( 'If-None-Match', '*' )
+					.makeRequest();
 				assertValid304Response( response );
 			} );
 
 			it( 'If-None-Match takes precedence over If-Modified-Since', async () => {
-				const response = await newValidRequestWithHeader( {
-					'If-Modified-Since': 'Fri, 1 Apr 2022 12:00:00 GMT', // this header on its own would return 200
-					'If-None-Match': makeEtag( testRevisionId )
-				} );
+				const response = await newValidRequestBuilderWithTestItem()
+					// this header on its own would return 200
+					.withHeader( 'If-Modified-Since', 'Fri, 1 Apr 2022 12:00:00 GMT' )
+					.withHeader( 'If-None-Match', makeEtag( testRevisionId ) )
+					.makeRequest();
 				assertValid304Response( response );
 			} );
 		} );
@@ -265,18 +212,18 @@ describe( 'GET /entities/items/{id} ', () => {
 	describe( 'If-Modified-Since', () => {
 		describe( '200 response', () => {
 			it( 'If-Modified-Since header is older than current revision', async () => {
-				const response = await newValidRequestWithHeader( {
-					'If-Modified-Since': 'Fri, 1 Apr 2022 12:00:00 GMT'
-				} );
+				const response = await newValidRequestBuilderWithTestItem()
+					.withHeader( 'If-Modified-Since', 'Fri, 1 Apr 2022 12:00:00 GMT' )
+					.makeRequest();
 				assertValid200Response( response );
 			} );
 		} );
 
 		describe( '304 response', () => {
 			it( 'If-Modified-Since header is same as current revision', async () => {
-				const response = await newValidRequestWithHeader(
-					{ 'If-Modified-Since': `${testModified}` }
-				);
+				const response = await newValidRequestBuilderWithTestItem()
+					.withHeader( 'If-Modified-Since', `${testModified}` )
+					.makeRequest();
 				assertValid304Response( response );
 			} );
 
@@ -284,9 +231,9 @@ describe( 'GET /entities/items/{id} ', () => {
 				const futureDate = new Date(
 					new Date( testModified ).getTime() + 5000
 				).toUTCString();
-				const response = await newValidRequestWithHeader( {
-					'If-Modified-Since': futureDate
-				} );
+				const response = await newValidRequestBuilderWithTestItem()
+					.withHeader( 'If-Modified-Since', futureDate )
+					.makeRequest();
 
 				assertValid304Response( response );
 			} );
@@ -295,7 +242,8 @@ describe( 'GET /entities/items/{id} ', () => {
 
 	it( '400 error - bad request, invalid item ID', async () => {
 		const itemId = 'X123';
-		const response = await rest.get( `/entities/items/${itemId}` );
+		const response = await newGetItemRequestBuilder( itemId )
+			.makeRequest();
 
 		assert.equal( response.status, 400 );
 		assert.header( response, 'Content-Language', 'en' );
@@ -305,12 +253,10 @@ describe( 'GET /entities/items/{id} ', () => {
 
 	it( '400 error - bad request, invalid field', async () => {
 		const itemId = 'Q123';
-		const response = await newInvalidRequest( {
-			endpoint: `/entities/items/${itemId}`,
-			// eslint-disable-next-line camelcase
-			params: { entity_id: itemId },
-			query: { _fields: 'unknown_field' }
-		} );
+		const response = await newGetItemRequestBuilder( itemId )
+			.withQueryParam( '_fields', 'unknown_field' )
+			.assertInvalidRequest()
+			.makeRequest();
 
 		assert.equal( response.status, 400 );
 		assert.header( response, 'Content-Language', 'en' );
@@ -320,7 +266,7 @@ describe( 'GET /entities/items/{id} ', () => {
 
 	it( '404 error - item not found', async () => {
 		const itemId = 'Q999999';
-		const response = await rest.get( `/entities/items/${itemId}` );
+		const response = await newGetItemRequestBuilder( itemId ).makeRequest();
 
 		assert.equal( response.status, 404 );
 		assert.header( response, 'Content-Language', 'en' );
@@ -344,11 +290,9 @@ describe( 'GET /entities/items/{id} ', () => {
 			before( requireExtensions( [ 'OAuth' ] ) );
 
 			it( 'responds with an error given an invalid bearer token', async () => {
-				const response = await rest.get(
-					`/entities/items/${testItemId}`,
-					{},
-					{ Authorization: 'Bearer this-is-an-invalid-token' }
-				);
+				const response = await newGetItemRequestBuilder( testItemId )
+					.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
+					.makeRequest();
 
 				assert.equal( response.status, 403 );
 			} );
@@ -365,7 +309,7 @@ describe( 'GET /entities/items/{id} ', () => {
 		} );
 
 		it( 'responds with a 308 including the redirect target location', async () => {
-			const response = await rest.get( `/entities/items/${redirectSourceId}` );
+			const response = await newGetItemRequestBuilder( redirectSourceId ).makeRequest();
 
 			assert.equal( response.status, 308 );
 
@@ -375,15 +319,17 @@ describe( 'GET /entities/items/{id} ', () => {
 		} );
 
 		it( 'keeps the original fields param in the Location header', async () => {
-			const queryParams = { _fields: 'labels,statements' };
-			const response = await rest.get( `/entities/items/${redirectSourceId}`, queryParams );
+			const fields = 'labels,statements';
+			const response = await newGetItemRequestBuilder( redirectSourceId )
+				.withQueryParam( '_fields', fields )
+				.makeRequest();
 
 			assert.equal( response.status, 308 );
 
 			const redirectLocation = new URL( response.headers.location );
 			assert.equal(
 				redirectLocation.searchParams.get( '_fields' ),
-				queryParams._fields // eslint-disable-line no-underscore-dangle
+				fields
 			);
 		} );
 
