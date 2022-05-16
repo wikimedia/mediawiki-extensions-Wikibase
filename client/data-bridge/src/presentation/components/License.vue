@@ -52,6 +52,7 @@ export default defineComponent( {
 			this.$emit( 'close', event );
 		},
 	},
+	compatConfig: { MODE: 3 },
 } );
 </script>
 

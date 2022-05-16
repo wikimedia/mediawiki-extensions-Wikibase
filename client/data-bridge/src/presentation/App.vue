@@ -158,6 +158,7 @@ export default defineComponent( {
 			this.rootModule.dispatch( 'dismissWarningAnonymousEdit' );
 		},
 	},
+	compatConfig: { MODE: 3 },
 } );
 </script>
 

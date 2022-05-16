@@ -107,6 +107,7 @@ export default defineComponent( {
 			this.$emit( 'back' );
 		},
 	},
+	compatConfig: { MODE: 3 },
 } );
 </script>
 
