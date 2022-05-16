@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Ebenoffen1"
 		]
 	},
@@ -13,5 +14,6 @@
 	"wikibase-linkitem-input-site": "Kasa:",
 	"wikibase-linkitem-input-page": "Kratafa:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Fa suma",
 	"wikibase-rc-hide-wikidata-show": "Da no edzi"
 }
