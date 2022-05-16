@@ -42,7 +42,7 @@ export default defineComponent( {
 		window.addEventListener( 'resize', this.windowResizeHandler );
 		this.resizeTextField();
 	},
-	destroyed(): void {
+	unmounted(): void {
 		if ( this.windowResizeHandler !== undefined ) {
 			window.removeEventListener( 'resize', this.windowResizeHandler );
 			this.windowResizeHandler = undefined;
