@@ -1,49 +1,16 @@
 'use strict';
 
-const { REST, assert, action, clientFactory } = require( 'api-testing' );
-const SwaggerParser = require( '@apidevtools/swagger-parser' );
+const { assert, action, clientFactory } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
-const OpenAPIRequestValidator = require( 'openapi-request-validator' ).default;
-const OpenAPIRequestCoercer = require( 'openapi-request-coercer' ).default;
+const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 
 const basePath = 'rest.php/wikibase/v0';
-const rest = new REST( basePath );
 
-async function validateRequest( request ) {
-	const apiSpec = await SwaggerParser.dereference( './specs/openapi.json' );
-	const requestSpec = apiSpec.paths[ '/statements/{statement_id}' ].get;
-	const specParameters = { parameters: requestSpec.parameters };
-	// copy, since the unchanged request is still needed
-	const coercedRequest = JSON.parse( JSON.stringify( request ) );
-
-	new OpenAPIRequestCoercer( specParameters ).coerce( coercedRequest );
-
-	return new OpenAPIRequestValidator( requestSpec ).validateRequest( coercedRequest );
-}
-
-async function newRequest( request ) {
-	return rest.get( request.endpoint, request.query, request.headers );
-}
-
-async function newValidRequest( request ) {
-	const errors = await validateRequest( request );
-	let errorMessage = '';
-
-	if ( typeof errors !== 'undefined' ) {
-		const error = errors.errors[ 0 ];
-		errorMessage = `[${error.errorCode}] ${error.path} ${error.message} in ${error.location}`;
-	}
-	assert.isUndefined( errors, errorMessage );
-
-	return newRequest( request );
-}
-
-async function newInvalidRequest( request ) {
-	const errors = await validateRequest( request );
-	assert.isDefined( errors );
-
-	return newRequest( request );
+function newGetStatementRequestBuilder( statementId ) {
+	return new RequestBuilder()
+		.withRoute( '/statements/{statement_id}' )
+		.withPathParam( 'statement_id', statementId );
 }
 
 function makeEtag( ...revisionIds ) {
@@ -79,11 +46,9 @@ describe( 'GET /statements/{statement_id}', () => {
 	} );
 
 	it( 'can GET a statement with metadata', async () => {
-		const response = await newValidRequest( {
-			endpoint: `/statements/${testStatement.id}`,
-			// eslint-disable-next-line camelcase
-			params: { statement_id: testStatement.id }
-		} );
+		const response = await newGetStatementRequestBuilder( testStatement.id )
+			.assertValidRequest()
+			.makeRequest();
 
 		assertValid200Response( response );
 	} );
@@ -91,11 +56,9 @@ describe( 'GET /statements/{statement_id}', () => {
 	describe( '400 error response', () => {
 		it( 'statement ID contains invalid entity ID', async () => {
 			const statementId = 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newInvalidRequest( {
-				endpoint: `/statements/${statementId}`,
-				// eslint-disable-next-line camelcase
-				params: { statement_id: statementId }
-			} );
+			const response = await newGetStatementRequestBuilder( statementId )
+				.assertInvalidRequest()
+				.makeRequest();
 
 			assert.equal( response.status, 400 );
 			assert.header( response, 'Content-Language', 'en' );
@@ -105,11 +68,9 @@ describe( 'GET /statements/{statement_id}', () => {
 
 		it( 'statement ID is invalid format', async () => {
 			const statementId = 'not-a-valid-format';
-			const response = await newInvalidRequest( {
-				endpoint: `/statements/${statementId}`,
-				// eslint-disable-next-line camelcase
-				params: { statement_id: statementId }
-			} );
+			const response = await newGetStatementRequestBuilder( statementId )
+				.assertInvalidRequest()
+				.makeRequest();
 
 			assert.equal( response.status, 400 );
 			assert.header( response, 'Content-Language', 'en' );
@@ -119,11 +80,9 @@ describe( 'GET /statements/{statement_id}', () => {
 
 		it( 'statement is not on an item', async () => {
 			const statementId = 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newValidRequest( {
-				endpoint: `/statements/${statementId}`,
-				// eslint-disable-next-line camelcase
-				params: { statement_id: statementId }
-			} );
+			const response = await newGetStatementRequestBuilder( statementId )
+				.assertValidRequest()
+				.makeRequest();
 
 			assert.equal( response.status, 400 );
 			assert.header( response, 'Content-Language', 'en' );
@@ -135,11 +94,9 @@ describe( 'GET /statements/{statement_id}', () => {
 	describe( '404 error response', () => {
 		it( 'statement not found on item', async () => {
 			const statementId = testItemId + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newValidRequest( {
-				endpoint: `/statements/${statementId}`,
-				// eslint-disable-next-line camelcase
-				params: { statement_id: statementId }
-			} );
+			const response = await newGetStatementRequestBuilder( statementId )
+				.assertValidRequest()
+				.makeRequest();
 
 			assert.equal( response.status, 404 );
 			assert.header( response, 'Content-Language', 'en' );
@@ -148,11 +105,9 @@ describe( 'GET /statements/{statement_id}', () => {
 		} );
 		it( 'item not found', async () => {
 			const statementId = 'Q321$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newValidRequest( {
-				endpoint: `/statements/${statementId}`,
-				// eslint-disable-next-line camelcase
-				params: { statement_id: statementId }
-			} );
+			const response = await newGetStatementRequestBuilder( statementId )
+				.assertValidRequest()
+				.makeRequest();
 
 			assert.equal( response.status, 404 );
 			assert.header( response, 'Content-Language', 'en' );
@@ -177,11 +132,9 @@ describe( 'GET /statements/{statement_id}', () => {
 			before( requireExtensions( [ 'OAuth' ] ) );
 
 			it( 'responds with an error given an invalid bearer token', async () => {
-				const response = await rest.get(
-					`/statements/${testStatement.id}`,
-					{},
-					{ Authorization: 'Bearer this-is-an-invalid-token' }
-				);
+				const response = newGetStatementRequestBuilder( testStatement.id )
+					.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
+					.makeRequest();
 
 				assert.equal( response.status, 403 );
 			} );
