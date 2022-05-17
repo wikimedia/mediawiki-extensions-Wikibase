@@ -375,7 +375,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
 		// register mock watcher
 		$watcher = $this->createMock( EntityStoreWatcher::class );
-		$watcher->expects( $this->exactly( 1 ) )
+		$watcher->expects( $this->once() )
 			->method( 'redirectUpdated' );
 		$watcher->expects( $this->never() )
 			->method( 'entityDeleted' );
@@ -859,7 +859,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
 		// register mock watcher
 		$watcher = $this->createMock( EntityStoreWatcher::class );
-		$watcher->expects( $this->exactly( 1 ) )
+		$watcher->expects( $this->once() )
 			->method( 'entityDeleted' );
 
 		$store->registerWatcher( $watcher );

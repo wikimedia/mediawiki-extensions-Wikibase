@@ -44,7 +44,7 @@ class ItemsPerSiteBuilderTest extends MediaWikiIntegrationTestCase {
 		$mock->expects( $this->exactly( 10 ) )
 			->method( 'saveLinksOfItem' )
 			->willReturn( true )
-			->with( $this->equalTo( $item ) );
+			->with( $item );
 
 		return $mock;
 	}
@@ -55,8 +55,8 @@ class ItemsPerSiteBuilderTest extends MediaWikiIntegrationTestCase {
 		$item = $this->getTestItem();
 		$mock->expects( $this->exactly( 10 ) )
 			->method( 'getEntity' )
-			->willReturn( $item )
-			->with( $this->equalTo( $this->getTestItemId() ) );
+			->with( $this->getTestItemId() )
+			->willReturn( $item );
 
 		return $mock;
 	}
@@ -86,17 +86,17 @@ class ItemsPerSiteBuilderTest extends MediaWikiIntegrationTestCase {
 		$mock->expects( $this->at( 0 ) )
 			->method( 'fetchIds' )
 			->willReturn( $itemIds )
-			->with( $this->equalTo( self::BATCH_SIZE ) );
+			->with( self::BATCH_SIZE );
 
 		$mock->expects( $this->at( 1 ) )
 			->method( 'fetchIds' )
 			->willReturn( $itemIds )
-			->with( $this->equalTo( self::BATCH_SIZE ) );
+			->with( self::BATCH_SIZE );
 
 		$mock->expects( $this->at( 2 ) )
 			->method( 'fetchIds' )
 			->willReturn( [] )
-			->with( $this->equalTo( self::BATCH_SIZE ) );
+			->with( self::BATCH_SIZE );
 
 		return $mock;
 	}

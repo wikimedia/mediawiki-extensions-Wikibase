@@ -96,7 +96,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$updater = $this->getBulkSubscriptionUpdater( 2 );
-		$updater->setProgressReporter( $this->getMessageReporter( $this->exactly( 1 ) ) );
+		$updater->setProgressReporter( $this->getMessageReporter( $this->once() ) );
 
 		$updater->purgeSubscriptions( new ItemId( 'Q20' ) );
 
@@ -167,7 +167,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$updater = $this->getBulkSubscriptionUpdater( 2 );
-		$updater->setProgressReporter( $this->getMessageReporter( $this->exactly( 1 ) ) );
+		$updater->setProgressReporter( $this->getMessageReporter( $this->once() ) );
 
 		$updater->updateSubscriptions( new ItemId( 'Q20' ) );
 

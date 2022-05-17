@@ -170,10 +170,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 
 		$hookHandlerMock->expects( $this->exactly( $expectedAddConditionsCalls ) )
 			->method( 'addWikibaseConditions' )
-			->with(
-				$this->isInstanceOf( IDatabase::class ),
-				$this->equalTo( [] )
-			);
+			->with( $this->isInstanceOf( IDatabase::class ), [] );
 
 		$tables = [ 'recentchanges' ];
 		$fields = [ 'rc_id' ];

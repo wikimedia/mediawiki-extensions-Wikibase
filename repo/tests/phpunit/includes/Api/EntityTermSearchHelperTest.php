@@ -42,10 +42,10 @@ class EntityTermSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		$mock->expects( $this->atLeastOnce() )
 			->method( 'searchForEntities' )
 			->with(
-				$this->equalTo( $search ),
-				$this->equalTo( $language ),
-				$this->equalTo( $type ),
-				$this->equalTo( [ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ] )
+				$search,
+				$language,
+				$type,
+				[ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ]
 			)
 			->willReturn( $returnResults );
 		return $mock;

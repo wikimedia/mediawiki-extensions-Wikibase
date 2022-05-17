@@ -111,7 +111,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 
 		$jobQueueGroupMock->expects( $this->once() )
 			->method( 'get' )
-			->with( $this->equalTo( 'UpdateRepoOnMove' ) )
+			->with( 'UpdateRepoOnMove' )
 			->willReturn( $jobQueue );
 
 		return $jobQueueGroupMock;

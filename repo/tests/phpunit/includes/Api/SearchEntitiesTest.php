@@ -89,11 +89,11 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$mock->expects( $this->atLeastOnce() )
 			->method( 'getRankedSearchResults' )
 			->with(
-				$this->equalTo( $params['search'] ),
-				$this->equalTo( $params['language'] ),
-				$this->equalTo( $params['type'] ),
-				$this->equalTo( $params['continue'] + $params['limit'] + 1 ),
-				$this->equalTo( $params['strictlanguage'] )
+				$params['search'],
+				$params['language'],
+				$params['type'],
+				$params['continue'] + $params['limit'] + 1,
+				$params['strictlanguage']
 			)
 			->willReturn( $returnResults );
 

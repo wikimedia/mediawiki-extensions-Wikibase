@@ -95,11 +95,11 @@ class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$invocation = $mock->expects( $this->atLeastOnce() )
 			->method( 'getRankedSearchResults' )
 			->with(
-				$this->equalTo( $params['wbssearch'] ),
-				$this->equalTo( $params['wbslanguage'] ),
-				$this->equalTo( $params['wbstype'] ),
-				$this->equalTo( $params['wbslimit'] ),
-				$this->equalTo( false )
+				$params['wbssearch'],
+				$params['wbslanguage'],
+				$params['wbstype'],
+				$params['wbslimit'],
+				false
 			);
 		if ( $failureStatus !== null ) {
 			$invocation->willThrowException( new EntitySearchException( $failureStatus ) );
@@ -125,8 +125,8 @@ class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$mock->expects( $this->at( $i++ ) )
 				->method( 'setGeneratorData' )
 				->with(
-					$this->equalTo( $this->getMockTitle() ),
-					$this->equalTo( [ 'displaytext' => $entry['displaytext'] ] )
+					$this->getMockTitle(),
+					[ 'displaytext' => $entry['displaytext'] ]
 				);
 		}
 
