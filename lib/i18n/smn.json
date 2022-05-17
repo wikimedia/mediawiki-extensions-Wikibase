@@ -6,6 +6,7 @@
 			"Yupik"
 		]
 	},
+	"wikibase-error-unexpected": "Feilâ: $1.",
 	"wikibase-timedetails-time": "Äigi",
 	"wikibase-timedetails-calendar": "Kalender",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
