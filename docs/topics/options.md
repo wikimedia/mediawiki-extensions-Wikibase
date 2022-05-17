@@ -628,7 +628,7 @@ EXAMPLE: ```https://www.wikidata.org/w/index.php?title=MediaWiki:Wikibase-Sorted
 
 ### Transclusion & Data Access
 
-#### allowDataTransclusion
+#### allowDataTransclusion {#client_allowDataTransclusion}
 Switch to enable data transclusion features like the ```{{#property}}``` parser function and the `wikibase` [Scribunto] module.
 
 DEFAULT: ```true```
