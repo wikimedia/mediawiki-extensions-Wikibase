@@ -116,10 +116,8 @@ class SerializerFactory {
 	 * Returns a Serializer that can serialize Item objects.
 	 *
 	 * @since 2.1
-	 *
-	 * @return ItemSerializer
 	 */
-	public function newItemSerializer() {
+	public function newItemSerializer(): ItemSerializer {
 		return new ItemSerializer(
 			$this->newTermListSerializer(),
 			$this->newAliasGroupListSerializer(),
@@ -133,10 +131,8 @@ class SerializerFactory {
 	 * Returns a Serializer that can serialize Property objects.
 	 *
 	 * @since 2.1
-	 *
-	 * @return DispatchableSerializer
 	 */
-	public function newPropertySerializer() {
+	public function newPropertySerializer(): PropertySerializer {
 		return new PropertySerializer(
 			$this->newTermListSerializer(),
 			$this->newAliasGroupListSerializer(),
@@ -146,10 +142,8 @@ class SerializerFactory {
 
 	/**
 	 * Returns a Serializer that can serialize SiteLink objects.
-	 *
-	 * @return Serializer
 	 */
-	public function newSiteLinkSerializer() {
+	public function newSiteLinkSerializer(): SiteLinkSerializer {
 		return new SiteLinkSerializer();
 	}
 
@@ -157,10 +151,8 @@ class SerializerFactory {
 	 * Returns a Serializer that can serialize StatementList objects.
 	 *
 	 * @since 1.4
-	 *
-	 * @return StatementListSerializer
 	 */
-	public function newStatementListSerializer() {
+	public function newStatementListSerializer(): StatementListSerializer {
 		return new StatementListSerializer(
 			$this->newStatementSerializer(),
 			$this->shouldUseObjectsForMaps()
@@ -171,10 +163,8 @@ class SerializerFactory {
 	 * Returns a Serializer that can serialize Statement objects.
 	 *
 	 * @since 1.4
-	 *
-	 * @return DispatchableSerializer
 	 */
-	public function newStatementSerializer() {
+	public function newStatementSerializer(): StatementSerializer {
 		return new StatementSerializer(
 			$this->newSnakSerializer( $this->shouldSerializeMainSnaksWithHash() ),
 			$this->newSnakListSerializer( $this->shouldSerializeQualifierSnaksWithHash() ),
@@ -184,19 +174,15 @@ class SerializerFactory {
 
 	/**
 	 * Returns a Serializer that can serialize ReferenceList objects.
-	 *
-	 * @return Serializer
 	 */
-	public function newReferencesSerializer() {
+	public function newReferencesSerializer(): ReferenceListSerializer {
 		return new ReferenceListSerializer( $this->newReferenceSerializer() );
 	}
 
 	/**
 	 * Returns a Serializer that can serialize Reference objects.
-	 *
-	 * @return Serializer
 	 */
-	public function newReferenceSerializer() {
+	public function newReferenceSerializer(): ReferenceSerializer {
 		return new ReferenceSerializer(
 			$this->newSnakListSerializer(
 				$this->shouldSerializeReferenceSnaksWithHash()
@@ -210,10 +196,8 @@ class SerializerFactory {
 	 * @param bool $serializeSnaksWithHash
 	 *
 	 * @since 1.4
-	 *
-	 * @return Serializer
 	 */
-	public function newSnakListSerializer( $serializeSnaksWithHash = true ) {
+	public function newSnakListSerializer( $serializeSnaksWithHash = true ): SnakListSerializer {
 		return new SnakListSerializer(
 			$this->newSnakSerializer( $serializeSnaksWithHash ),
 			$this->shouldUseObjectsForMaps()
@@ -224,10 +208,8 @@ class SerializerFactory {
 	 * Returns a Serializer that can serialize Snak objects.
 	 *
 	 * @param bool $serializeWithHash
-	 *
-	 * @return Serializer
 	 */
-	public function newSnakSerializer( $serializeWithHash = true ) {
+	public function newSnakSerializer( $serializeWithHash = true ): SnakSerializer {
 		return new SnakSerializer( $this->dataValueSerializer, $serializeWithHash );
 	}
 
@@ -237,10 +219,8 @@ class SerializerFactory {
 	 * @param bool $serializeWithHash
 	 *
 	 * @since 1.3
-	 *
-	 * @return Serializer
 	 */
-	public function newTypedSnakSerializer( $serializeWithHash = true ) {
+	public function newTypedSnakSerializer( $serializeWithHash = true ): TypedSnakSerializer {
 		return new TypedSnakSerializer( $this->newSnakSerializer( $serializeWithHash ) );
 	}
 
@@ -248,10 +228,8 @@ class SerializerFactory {
 	 * Returns a Serializer that can serialize Term objects.
 	 *
 	 * @since 1.5
-	 *
-	 * @return Serializer
 	 */
-	public function newTermSerializer() {
+	public function newTermSerializer(): TermSerializer {
 		return new TermSerializer();
 	}
 
@@ -259,10 +237,8 @@ class SerializerFactory {
 	 * Returns a Serializer that can serialize TermList objects.
 	 *
 	 * @since 1.5
-	 *
-	 * @return Serializer
 	 */
-	public function newTermListSerializer() {
+	public function newTermListSerializer(): TermListSerializer {
 		return new TermListSerializer( $this->newTermSerializer(), $this->shouldUseObjectsForMaps() );
 	}
 
@@ -270,10 +246,8 @@ class SerializerFactory {
 	 * Returns a Serializer that can serialize AliasGroup objects.
 	 *
 	 * @since 1.6
-	 *
-	 * @return Serializer
 	 */
-	public function newAliasGroupSerializer() {
+	public function newAliasGroupSerializer(): AliasGroupSerializer {
 		return new AliasGroupSerializer();
 	}
 
@@ -281,10 +255,8 @@ class SerializerFactory {
 	 * Returns a Serializer that can serialize AliasGroupList objects.
 	 *
 	 * @since 1.5
-	 *
-	 * @return Serializer
 	 */
-	public function newAliasGroupListSerializer() {
+	public function newAliasGroupListSerializer(): AliasGroupListSerializer {
 		return new AliasGroupListSerializer(
 			$this->newAliasGroupSerializer(),
 			$this->shouldUseObjectsForMaps()

@@ -42,7 +42,6 @@ return [
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
-			// @phan-suppress-next-line PhanTypeMismatchArgument
 			WikibaseRepo::getBaseDataModelSerializerFactory( $services )->newStatementSerializer()
 		);
 	},
