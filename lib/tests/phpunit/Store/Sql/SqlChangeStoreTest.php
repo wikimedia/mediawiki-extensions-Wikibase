@@ -32,7 +32,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 
 	use LocalRepoDbTestHelper;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );

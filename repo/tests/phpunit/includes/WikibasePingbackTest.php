@@ -29,7 +29,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 
 	private const TEST_KEY = 'TEST_KEY';
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		global $wgWBRepoSettings;

@@ -30,7 +30,7 @@ class FullStatementRdfBuilderFactoryTest extends TestCase {
 	private $valueSnakRdfBuilderFactory;
 	private $propertyDataLookup;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->dedupe = $this->createMock( DedupeBag::class );
 		$this->vocabulary = $this->createMock( RdfVocabulary::class );

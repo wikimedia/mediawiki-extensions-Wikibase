@@ -15,7 +15,7 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
  */
 class EntityTypeDefinitionsTest extends ServiceWiringTestCase {
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 	}
 

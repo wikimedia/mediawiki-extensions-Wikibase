@@ -30,7 +30,7 @@ class TermFallbackCacheFacadeTest extends TestCase {
 	 */
 	private $cache;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->cache = $this->createMock( CacheInterface::class );
 	}

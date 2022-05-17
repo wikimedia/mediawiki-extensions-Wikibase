@@ -30,7 +30,7 @@ class PropertyRdfBuilderTest extends TestCase {
 	private $fullStatementRdfBuilderFactory;
 	private $propertySpecificComponentsRdfBuilder;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->siteLinksRdfBuilder = $this->createMock( SiteLinksRdfBuilder::class );
 		$this->termsRdfBuilder = $this->createMock( TermsRdfBuilder::class );

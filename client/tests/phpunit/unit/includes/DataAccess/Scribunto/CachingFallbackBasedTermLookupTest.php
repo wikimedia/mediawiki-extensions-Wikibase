@@ -43,7 +43,7 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 	 */
 	private $contentLanguages;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->termFallbackCache = $this->createMock( TermFallbackCacheFacade::class );
 		$this->revisionLookup = $this->createMock( RedirectResolvingLatestRevisionLookup::class );
