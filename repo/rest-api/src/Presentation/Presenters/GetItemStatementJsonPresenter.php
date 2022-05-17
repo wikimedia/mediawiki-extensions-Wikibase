@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Presentation\Presenters;
 
-use Wikibase\Repo\RestApi\Presentation\EmptyArrayToObjectConverter;
+use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementSuccessResponse;
 
 /**
@@ -10,17 +10,18 @@ use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementSuccessRespo
  */
 class GetItemStatementJsonPresenter {
 
-	private $emptyArrayToObjectConverter;
+	private $serializer;
 
-	public function __construct() {
-		$this->emptyArrayToObjectConverter = new EmptyArrayToObjectConverter(
-			[ '/qualifiers' ]
-		);
+	/**
+	 * @param StatementSerializer $serializer Should have $useObjectsForMaps (e.g. for qualifiers) set to true.
+	 */
+	public function __construct( StatementSerializer $serializer ) {
+		$this->serializer = $serializer;
 	}
 
 	public function getJson( GetItemStatementSuccessResponse $response ): string {
 		return json_encode(
-			$this->emptyArrayToObjectConverter->convert( $response->getSerializedStatement() )
+			$this->serializer->serialize( $response->getStatement() )
 		);
 	}
 }

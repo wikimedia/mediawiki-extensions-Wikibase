@@ -2,8 +2,9 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Presentation\Presenters;
 
-use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Serializers\StatementSerializer;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemStatementJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementSuccessResponse;
 
@@ -16,40 +17,24 @@ use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementSuccessRespo
  */
 class GetItemStatementJsonPresenterTest extends TestCase {
 
-	/**
-	 * @dataProvider statementSerializationProvider
-	 */
-	public function testGetJsonForSuccess( array $serialization, string $expectedOutput ): void {
-		$presenter = new GetItemStatementJsonPresenter();
+	public function testGetJsonForSuccess(): void {
+		$statement = $this->createStub( Statement::class );
+		$statementSerialization = [ 'id' => 'Q1$943B784F-FFBC-43A9-B7AA-79C3546AA0EF' ];
+
+		$statementSerializer = $this->createMock( StatementSerializer::class );
+		$statementSerializer->expects( $this->once() )
+			->method( 'serialize' )
+			->with( $statement )
+			->willReturn( $statementSerialization );
+
+		$presenter = new GetItemStatementJsonPresenter( $statementSerializer );
 
 		$this->assertJsonStringEqualsJsonString(
-			$expectedOutput,
+			json_encode( $statementSerialization ),
 			$presenter->getJson(
-				new GetItemStatementSuccessResponse( $serialization, '20220307180000', 321 )
+				new GetItemStatementSuccessResponse( $statement, '20220307180000', 321 )
 			)
 		);
 	}
 
-	public function statementSerializationProvider(): Generator {
-		yield 'converts empty qualifiers array to object' => [
-			[
-				'id' => 'Q1$943B784F-FFBC-43A9-B7AA-79C3546AA0EF',
-				'qualifiers' => []
-			],
-			'{ "id": "Q1$943B784F-FFBC-43A9-B7AA-79C3546AA0EF", "qualifiers": {} }'
-		];
-
-		yield 'serializes when no qualifiers exist' => [
-			[
-				'id' => 'Q1$943B784F-FFBC-43A9-B7AA-79C3546AA0EF',
-				'type' => 'statement',
-				'rank' => 'normal'
-			],
-			'{
-				"id": "Q1$943B784F-FFBC-43A9-B7AA-79C3546AA0EF",
-				"type": "statement",
-				"rank": "normal"
-			}'
-		];
-	}
 }

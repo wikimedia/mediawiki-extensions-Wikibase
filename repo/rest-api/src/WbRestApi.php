@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi;
 
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
@@ -26,6 +27,11 @@ class WbRestApi {
 	public static function getGetItemStatement( ContainerInterface $services = null ): GetItemStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetItemStatement' );
+	}
+
+	public static function getBaseDataModelSerializerFactory( ContainerInterface $services = null ): SerializerFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.BaseDataModelSerializerFactory' );
 	}
 
 }
