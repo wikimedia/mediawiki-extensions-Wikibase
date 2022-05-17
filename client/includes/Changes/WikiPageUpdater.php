@@ -106,16 +106,10 @@ class WikiPageUpdater implements PageUpdater {
 			$signature = 'params:' . sha1( json_encode( $pages ) );
 		}
 
-		if ( isset( $rootJobParams['rootJobTimestamp'] ) ) {
-			$timestamp = $rootJobParams['rootJobTimestamp'];
-		} else {
-			$timestamp = wfTimestampNow();
-		}
-
 		return [
 			'pages' => $pages,
 			'rootJobSignature' => $signature,
-			'rootJobTimestamp' => $timestamp,
+			'rootJobTimestamp' => $rootJobParams['rootJobTimestamp'] ?? wfTimestampNow(),
 		];
 	}
 
