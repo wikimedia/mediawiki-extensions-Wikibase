@@ -21,7 +21,7 @@ class TextInjector {
 	/**
 	 * @var int
 	 */
-	private $markerIndex;
+	private $markerIndex = 0;
 
 	/**
 	 * @var array[] Array mapping marker names to arrays of callback arguments.
@@ -38,7 +38,6 @@ class TextInjector {
 
 		// idea stolen from Parser class in core
 		$this->uniqPrefix = "\x7fUNIQ" . wfRandomString( 16 );
-		$this->markerIndex = 0;
 	}
 
 	/**

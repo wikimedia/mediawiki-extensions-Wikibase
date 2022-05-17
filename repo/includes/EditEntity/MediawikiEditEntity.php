@@ -8,7 +8,6 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\User\UserOptionsLookup;
 use MWException;
 use ReadOnlyError;
-use RuntimeException;
 use Status;
 use Title;
 use User;
@@ -73,7 +72,7 @@ class MediawikiEditEntity implements EditEntity {
 	 *
 	 * @var EntityId|null
 	 */
-	private $entityId = null;
+	private $entityId;
 
 	/**
 	 * @var EntityRevision|null
@@ -96,9 +95,9 @@ class MediawikiEditEntity implements EditEntity {
 	private $latestRevId = 0;
 
 	/**
-	 * @var Status|null
+	 * @var Status
 	 */
-	private $status = null;
+	private $status;
 
 	/** @var IContextSource */
 	private $context;
@@ -388,10 +387,6 @@ class MediawikiEditEntity implements EditEntity {
 	 * @return Status
 	 */
 	public function getStatus() {
-		if ( $this->status === null ) {
-			throw new RuntimeException( 'The status is undefined until attemptSave() has been called' );
-		}
-
 		return $this->status;
 	}
 

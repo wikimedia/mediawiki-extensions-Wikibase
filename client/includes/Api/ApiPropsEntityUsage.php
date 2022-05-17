@@ -25,7 +25,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 	/**
 	 * @var RepoLinker
 	 */
-	private $repoLinker = null;
+	private $repoLinker;
 
 	public function __construct( ApiQuery $query, string $moduleName, RepoLinker $repoLinker ) {
 		parent::__construct( $query, $moduleName, 'wbeu' );

@@ -86,7 +86,7 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @var WikibaseServices
 	 */
-	private $wikibaseServices = null;
+	private $wikibaseServices;
 
 	/**
 	 * @var EntityIdLookup

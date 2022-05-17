@@ -94,7 +94,7 @@ class RdfVocabulary {
 	/**
 	 * @var string[] Mapping of namespace names to URIs.
 	 */
-	private $namespaces = [];
+	private $namespaces;
 
 	/**
 	 * @var array Associative array mapping repository names to names specific to the particular repository

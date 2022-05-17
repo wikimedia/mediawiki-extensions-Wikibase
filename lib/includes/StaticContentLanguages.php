@@ -11,9 +11,9 @@ namespace Wikibase\Lib;
 class StaticContentLanguages implements ContentLanguages {
 
 	/**
-	 * @var string[] Array of language codes
+	 * @var string[]
 	 */
-	private $languageCodes = null;
+	private $languageCodes;
 
 	/**
 	 * @param string[] $languageCodes

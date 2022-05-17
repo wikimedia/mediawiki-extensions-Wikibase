@@ -31,7 +31,7 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 	/**
 	 * @var string[]
 	 */
-	private $entityTypes = [];
+	private $entityTypes;
 
 	/**
 	 * @var string
