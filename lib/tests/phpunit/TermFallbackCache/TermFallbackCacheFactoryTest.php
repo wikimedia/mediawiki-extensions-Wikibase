@@ -33,7 +33,7 @@ class TermFallbackCacheFactoryTest extends TestCase {
 	 */
 	private $mockIBufferingStatsdDataFactory;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		$this->mockLogger = $this->createMock( LoggerInterface::class );
 		$this->mockIBufferingStatsdDataFactory = $this->createMock( IBufferingStatsdDataFactory::class );
 

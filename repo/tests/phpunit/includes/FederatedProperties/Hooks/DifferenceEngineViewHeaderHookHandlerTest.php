@@ -46,7 +46,7 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 	 */
 	private $languageFallbackChainFactory;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		$this->prefetchingLookup = $this->createMock( PrefetchingTermLookup::class );
 		$this->languageFallbackChainFactory = $this->createMock( LanguageFallbackChainFactory::class );
 		$this->linkTargetEntityIdLookup = $this->createMock( LinkTargetEntityIdLookup::class );

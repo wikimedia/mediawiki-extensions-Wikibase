@@ -27,7 +27,7 @@ class ItemStubRdfBuilderTest extends TestCase {
 	private $termLookup;
 	private $languages;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		$this->termLookup = $this->createMock( PrefetchingItemTermLookup::class );
 		$this->vocab = $this->createMock( RdfVocabulary::class );
 		$this->writer = $this->createMock( RdfWriter::class );

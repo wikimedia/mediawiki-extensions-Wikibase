@@ -22,7 +22,7 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 
 	private $prefetchingLookup;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->prefetchingLookup = $this->createMock( PrefetchingTermLookup::class );
 	}
