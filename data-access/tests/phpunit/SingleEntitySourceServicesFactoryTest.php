@@ -34,10 +34,7 @@ class SingleEntitySourceServicesFactoryTest extends TestCase {
 			''
 		);
 
-		$dependencies = array_map(
-			function ( string $className ) {
-				return $this->createMock( $className );
-			},
+		$dependencies = array_map( [ $this, 'createMock' ],
 			[
 				EntityIdParser::class,
 				EntityIdComposer::class,

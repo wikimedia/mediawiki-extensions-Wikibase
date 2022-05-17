@@ -402,12 +402,7 @@ final class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 	}
 
 	private function filterValidTermLanguages( array $languageCodes ): array {
-		return array_filter(
-			$languageCodes,
-			function ( $languageCode ) {
-				return $this->termLanguages->hasLanguage( $languageCode );
-			}
-		);
+		return array_filter( $languageCodes, [ $this->termLanguages, 'hasLanguage' ] );
 	}
 
 }
