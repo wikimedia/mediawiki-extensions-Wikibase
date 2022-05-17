@@ -48,7 +48,7 @@ class PageEntityUsages {
 	}
 
 	/**
-	 * @return EntityUsage[] $usages EntityUsage objects keyed and sorted by identity string.
+	 * @return EntityUsage[] EntityUsage objects keyed and sorted by identity string.
 	 */
 	public function getUsages() {
 		return $this->usages;

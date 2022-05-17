@@ -453,7 +453,7 @@ class ApiErrorReporter {
 	 *   In that case, the 'params' field is ignored and the parameter list is taken from the
 	 *   Message object.
 	 *
-	 * @param string|array $messageSpec The message spec.
+	 * @param string|array $messageSpec
 	 *
 	 * @return Message|null
 	 */

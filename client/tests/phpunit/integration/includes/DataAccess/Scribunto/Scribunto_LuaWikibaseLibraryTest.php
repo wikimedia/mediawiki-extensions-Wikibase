@@ -552,7 +552,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 	/**
 	 * @param string[] $propertyOrder
-	 * @return PropertyOrderProvider $propertyOrderProvider
+	 * @return PropertyOrderProvider
 	 */
 	private function getPropertyOrderProvider( array $propertyOrder ) {
 		$propertyOrderProvider = $this->createMock( PropertyOrderProvider::class );

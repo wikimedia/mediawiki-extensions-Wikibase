@@ -127,7 +127,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 	/**
 	 * @param string $cssClassSuffix
 	 * @param string $buttonLabel the text to show on the toolbar button link
-	 * @param string|null $editUrl The edit url
+	 * @param string|null $editUrl
 	 *
 	 * @return string
 	 */

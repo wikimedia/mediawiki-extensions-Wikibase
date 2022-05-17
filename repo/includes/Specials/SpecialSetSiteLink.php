@@ -228,7 +228,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @param EntityDocument $entity
 	 *
-	 * @return Summary|bool The summary or false
+	 * @return Summary|false
 	 */
 	protected function modifyEntity( EntityDocument $entity ) {
 		try {
@@ -249,7 +249,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	/**
 	 * Checks if the site id is valid.
 	 *
-	 * @param string $siteId the site id
+	 * @param string $siteId
 	 *
 	 * @return bool
 	 */

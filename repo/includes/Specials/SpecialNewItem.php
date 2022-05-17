@@ -240,7 +240,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	/**
 	 * @see SpecialNewEntity::getLegend
 	 *
-	 * @return string|Message $msg Message key or Message object
+	 * @return string|Message Message key or Message object
 	 */
 	protected function getLegend() {
 		return $this->msg( 'wikibase-newitem-fieldset' );

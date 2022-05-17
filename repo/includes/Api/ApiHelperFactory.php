@@ -204,7 +204,7 @@ class ApiHelperFactory {
 	 *
 	 * @param ApiBase $apiBase
 	 *
-	 * @return EntitySavingHelper a new EntitySavingHelper instance
+	 * @return EntitySavingHelper
 	 */
 	public function getEntitySavingHelper( ApiBase $apiBase ) {
 		$helper = new EntitySavingHelper(
@@ -244,7 +244,7 @@ class ApiHelperFactory {
 	 *
 	 * @param ApiBase $apiBase
 	 *
-	 * @return EntityLoadingHelper a new EntityLoadingHelper instance
+	 * @return EntityLoadingHelper
 	 */
 	public function getEntityLoadingHelper( ApiBase $apiBase ) {
 		$helper = new EntityLoadingHelper(
