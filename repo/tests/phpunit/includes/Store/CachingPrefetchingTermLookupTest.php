@@ -105,7 +105,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 		$cache->expects( $this->never() )->method( 'get' );
 
 		$this->lookup->expects( $this->once() )->method( 'getPrefetchedAliases' )
-		->with( $this->equalTo( $entity ), $this->equalTo( 'en' ) )
+		->with( $entity, 'en' )
 		->willReturn( $expectedAlias );
 
 		$cachingLookup = new CachingPrefetchingTermLookup(
@@ -136,21 +136,21 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 
 		$cache = $this->createMock( CacheInterface::class );
 		$cache->expects( $this->once() )->method( 'getMultiple' )
-		->with( $this->equalTo( [
+		->with( [
 			'Q123_666_en_label',
 			'Q321_666_en_label',
-		] ) )->willReturn( [
+		] )->willReturn( [
 			'Q123_666_en_label' => $labelOne,
 			'Q321_666_en_label' => $labelTwo,
 		] );
 
 		// assert that the lookup is not asked to talk to the database
 		$this->lookup->expects( $this->once() )->method( 'prefetchTerms' )
-		->with( $this->equalTo( [] ), $this->equalTo( [] ), $this->equalTo( [] ) );
+		->with( [], [], [] );
 
 		// assert that nothing new is stored in the cache
 		$cache->expects( $this->once() )->method( 'setMultiple' )
-		->with( $this->equalTo( [] ) );
+		->with( [] );
 
 		$cachingLookup = new CachingPrefetchingTermLookup(
 			$cache,
@@ -210,9 +210,9 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 			->willReturn( [ self::TEST_REVISION, $entityIdResolved ], null );
 
 		$cache = $this->createMock( CacheInterface::class );
-		$cache->expects( $this->once() )->method( 'getMultiple' )->with( $this->equalTo( [
+		$cache->expects( $this->once() )->method( 'getMultiple' )->with( [
 			'Q1_666_en_label'
-		] ) )->willReturn( [ 'Q1_666_en_label' => 'whatever' ] );
+		] )->willReturn( [ 'Q1_666_en_label' => 'whatever' ] );
 		$this->lookup->expects( $this->once() )->method( 'prefetchTerms' )->with( [], [], [] );
 		$lookup = new CachingPrefetchingTermLookup(
 			$cache,
@@ -306,17 +306,17 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 		$cache = $this->createMock( CacheInterface::class );
 
 		$this->lookup->expects( $this->once() )->method( $getTermMethodName )
-		->with( $this->equalTo( $entity ), $this->equalTo( 'en' ) )
+		->with( $entity, 'en' )
 		->willReturn( $expectedLabel );
 
 		// cache should not be called
 		$cache->expects( $this->once() )->method( 'get' )
-		->with( $this->equalTo( $this->buildTestCacheKey( 'Q123', $termType, 'en' ) ) )
+		->with( $this->buildTestCacheKey( 'Q123', $termType, 'en' ) )
 		->willReturn( null );
 
 		// cache should be set with fresh term
 		$cache->expects( $this->once() )->method( 'set' )
-		->with( $this->equalTo( $this->buildTestCacheKey( 'Q123', $termType, 'en' ) ), $expectedLabel );
+		->with( $this->buildTestCacheKey( 'Q123', $termType, 'en' ), $expectedLabel );
 
 		$cachingLookup = new CachingPrefetchingTermLookup(
 			$cache,
@@ -342,15 +342,15 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 		$cache = $this->createMock( CacheInterface::class );
 
 		$this->lookup->expects( $this->once() )->method( $getTermMethodName )
-			->with( $this->equalTo( $entity ), $this->equalTo( 'en' ) )
+			->with( $entity, 'en' )
 			->willReturn( null );
 
 		$cache->expects( $this->once() )->method( 'get' )
-			->with( $this->equalTo( $this->buildTestCacheKey( 'Q123', $termType, 'en' ) ) )
+			->with( $this->buildTestCacheKey( 'Q123', $termType, 'en' ) )
 			->willReturn( null );
 
 		$cache->expects( $this->once() )->method( 'set' )
-			->with( $this->equalTo( $this->buildTestCacheKey( 'Q123', $termType, 'en' ) ), false );
+			->with( $this->buildTestCacheKey( 'Q123', $termType, 'en' ), false );
 
 		$cachingLookup = new CachingPrefetchingTermLookup(
 			$cache,
@@ -460,7 +460,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 		$entity = new ItemId( 'Q123' );
 
 		$this->lookup->expects( $this->once() )->method( $getTermMethodName )
-		->with( $this->equalTo( $entity ), $this->equalTo( [ 'de', 'en' ] ) )
+		->with( $entity, [ 'de', 'en' ] )
 		->willReturn( [
 			'en' => 'meow',
 			'de' => 'miau',
@@ -509,7 +509,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 		$cacheKeyFrench = $this->buildTestCacheKey( 'Q123', $termType, 'fr' );
 
 		$this->lookup->expects( $this->once() )->method( $getTermMethodName )
-		->with( $this->equalTo( $entity ), $this->equalTo( [ 'fr' ] ) )
+		->with( $entity, [ 'fr' ] )
 		->willReturn( [
 			'fr' => 'miaule',
 		] );
@@ -574,7 +574,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 		$entity = new ItemId( 'Q123' );
 
 		$this->lookup->expects( $this->once() )->method( $getTermMethodName )
-			->with( $this->equalTo( $entity ), $this->equalTo( [ 'de', 'en' ] ) )
+			->with( $entity, [ 'de', 'en' ] )
 			->willReturn( [] );
 
 		$cachingLookup = $this->newPrefetchingTermLookup();

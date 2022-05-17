@@ -47,8 +47,8 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit\Framewo
 		$termBuffer->expects( $this->once() )
 			->method( 'prefetchTerms' )
 			->with(
-				$this->equalTo( [ new ItemId( 'Q123' ), new ItemId( 'Q456' ) ] ),
-				$this->equalTo( [ 'label' ] ),
+				[ new ItemId( 'Q123' ), new ItemId( 'Q456' ) ],
+				[ 'label' ],
 				$this->anything()
 			);
 

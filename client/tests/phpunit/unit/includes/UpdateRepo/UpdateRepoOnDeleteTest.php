@@ -103,7 +103,7 @@ class UpdateRepoOnDeleteTest extends \PHPUnit\Framework\TestCase {
 
 		$jobQueueGroupMock->expects( $this->once() )
 			->method( 'get' )
-			->with( $this->equalTo( 'UpdateRepoOnDelete' ) )
+			->with( 'UpdateRepoOnDelete' )
 			->willReturn( $jobQueue );
 
 		return $jobQueueGroupMock;

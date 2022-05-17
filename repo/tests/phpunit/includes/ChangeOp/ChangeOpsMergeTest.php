@@ -434,8 +434,8 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 		$enwiki->expects( $this->exactly( 2 ) )
 			->method( 'normalizePageName' )
 			->withConsecutive(
-				[ $this->equalTo( 'FOo' ) ],
-				[ $this->equalTo( 'Foo' ) ]
+				[ 'FOo' ],
+				[ 'Foo' ]
 			)
 			->willReturn( 'Foo' );
 

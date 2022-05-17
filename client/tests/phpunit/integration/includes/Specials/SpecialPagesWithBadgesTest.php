@@ -57,7 +57,7 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 			->getMock();
 		$labelDescriptionLookupFactory->expects( $this->once() )
 			->method( 'newLabelDescriptionLookup' )
-			->with( $this->anything(), $this->equalTo( $itemIds ) )
+			->with( $this->anything(), $itemIds )
 			->willReturn( $this->getLabelLookup() );
 
 		return $labelDescriptionLookupFactory;

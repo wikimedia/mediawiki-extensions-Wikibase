@@ -36,7 +36,7 @@ class CleanTermsIfUnusedJobTest extends MediaWikiIntegrationTestCase {
 		$job = new CleanTermsIfUnusedJob( $cleaner, $this->params );
 		$cleaner->expects( $this->once() )
 			->method( 'cleanTermInLangIds' )
-			->with( $this->equalTo( [ $this->termInLangId ] ) );
+			->with( [ $this->termInLangId ] );
 
 		$job->run();
 	}

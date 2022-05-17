@@ -33,7 +33,7 @@ class GenericEventDispatcherTest extends \PHPUnit\Framework\TestCase {
 		$watcher = $this->createMock( EntityStoreWatcher::class );
 		$watcher->expects( $this->once() )
 			->method( 'entityDeleted' )
-			->with( $this->equalTo( $q12 ) );
+			->with( $q12 );
 
 		$dispatcher = new GenericEventDispatcher( EntityStoreWatcher::class );
 

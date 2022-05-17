@@ -204,7 +204,7 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 				$labels,
 				$descriptions,
 				$aliases,
-				$this->equalTo( $languageCode === 'de' ? [ 'de', 'en' ] : [ 'en' ] )
+				$languageCode === 'de' ? [ 'de', 'en' ] : [ 'en' ]
 			)
 			->willReturn( '<TERMSLISTVIEW>' );
 		$entityTermsView = $this->getEntityTermsView( 1, $termsListView );
