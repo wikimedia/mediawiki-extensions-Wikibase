@@ -8,6 +8,7 @@ use ChangeTags;
 use CommentStoreComment;
 use DataValues\StringValue;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\Authority;
 use OutOfBoundsException;
 use PHPUnit\Framework\Constraint\Constraint;
 use TestSites;
@@ -32,7 +33,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	protected $user;
 
 	protected function setUp(): void {
-
 		parent::setUp();
 
 		$this->setupUser();
@@ -183,13 +183,13 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 *
 	 * @param array $params Array of params for the API query.
 	 * @param array $exception Details of the exception to expect (type, code, message, message-key).
-	 * @param User|null $user
+	 * @param Authority|null $user
 	 * @param bool $token Whether to include a CSRF token
 	 */
 	protected function doTestQueryExceptions(
 		array $params,
 		array $exception,
-		User $user = null,
+		Authority $user = null,
 		$token = true
 	) {
 		try {
@@ -446,7 +446,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	protected function assertCanTagSuccessfulRequest(
 		array $params,
 		array $session = null,
-		User $user = null,
+		Authority $user = null,
 		$tokenType = 'csrf'
 	) {
 		$dummyTag = __METHOD__ . '-dummy-tag';

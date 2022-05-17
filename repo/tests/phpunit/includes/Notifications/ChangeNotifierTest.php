@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Notifications;
 use Content;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\User\UserIdentity;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Title;
@@ -71,14 +72,14 @@ class ChangeNotifierTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param Content $content content for the main slot
-	 * @param User $user
+	 * @param UserIdentity $user
 	 * @param int $revisionId
 	 * @param string $timestamp
 	 * @param int $parent_id
 	 *
 	 * @return RevisionRecord
 	 */
-	private function makeRevision( Content $content, User $user, $revisionId, $timestamp, $parent_id = 0 ) {
+	private function makeRevision( Content $content, UserIdentity $user, $revisionId, $timestamp, $parent_id = 0 ) {
 		$revisionRecord = $this->getMockBuilder( RevisionRecord::class )
 			->disableOriginalConstructor()
 			->getMock();

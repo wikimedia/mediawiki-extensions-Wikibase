@@ -211,7 +211,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		$this->getOutput()->addModules( 'wikibase.special.mergeItems' );
 
 		$pre = '';
-		if ( $this->getUser()->isAnon() ) {
+		if ( !$this->getUser()->isRegistered() ) {
 			$pre = Html::rawElement(
 				'p',
 				[ 'class' => 'warning' ],

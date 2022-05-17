@@ -78,7 +78,7 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 
 		$this->getOutput()->addWikiMsg( 'wikibase-mylanguagefallbackchain-text' );
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'Babel' )
-			&& !$this->getContext()->getUser()->isAnon()
+			&& $this->getContext()->getUser()->isRegistered()
 		) {
 			$this->getOutput()->addWikiMsg( 'wikibase-mylanguagefallbackchain-babel',
 				$this->getContext()->getUser()->getName() );

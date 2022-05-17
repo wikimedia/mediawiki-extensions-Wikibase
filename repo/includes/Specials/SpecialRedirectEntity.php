@@ -141,7 +141,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	 */
 	protected function createForm() {
 		$pre = '';
-		if ( $this->getUser()->isAnon() ) {
+		if ( !$this->getUser()->isRegistered() ) {
 			$pre = Html::rawElement(
 				'p',
 				[ 'class' => 'warning' ],

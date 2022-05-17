@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests;
 
 use InvalidArgumentException;
+use MediaWiki\User\UserIdentity;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -254,7 +255,7 @@ class MockRepository implements
 		);
 
 		if ( $user !== null ) {
-			if ( $user instanceof User ) {
+			if ( $user instanceof UserIdentity ) {
 				$user = $user->getName();
 			}
 
@@ -641,7 +642,7 @@ class MockRepository implements
 			$entityId = $entityId->getSerialization();
 		}
 
-		if ( $user instanceof User ) {
+		if ( $user instanceof UserIdentity ) {
 			$user = $user->getName();
 		}
 

@@ -7,7 +7,9 @@ namespace Wikibase\Client\RecentChanges;
 use Language;
 use Linker;
 use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\Permissions\Authority;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\User\UserIdentity;
 use MediaWiki\User\UserNameUtils;
 use Title;
 use User;
@@ -164,7 +166,7 @@ class ChangeLineFormatter {
 		unset( $data['separatorAftercharacterDiff'] );
 	}
 
-	private function getFormattedCommentHTML( RevisionData $rev, Title $title, string $siteId, User $user ): string {
+	private function getFormattedCommentHTML( RevisionData $rev, Title $title, string $siteId, Authority $user ): string {
 		if ( !RevisionRecord::userCanBitfield(
 			$rev->getVisibility(),
 			RevisionRecord::DELETED_COMMENT,
@@ -191,7 +193,7 @@ class ChangeLineFormatter {
 		return ' <span class="mw-changeslist-separator">. .</span> ';
 	}
 
-	private function formatTimestampHTML( string $timestamp, Language $lang, User $user ): string {
+	private function formatTimestampHTML( string $timestamp, Language $lang, UserIdentity $user ): string {
 		return wfMessage( 'semicolon-separator' )->text()
 			. '<span class="mw-changeslist-date">'
 			. $lang->userTime( $timestamp, $user )
@@ -202,10 +204,10 @@ class ChangeLineFormatter {
 	 * @param string $userName
 	 * @param int $visibility
 	 * @param Language $lang
-	 * @param User $user
+	 * @param Authority $user
 	 * @return string[] array of HTML
 	 */
-	private function formatUserLinksHTML( string $userName, int $visibility, Language $lang, User $user ): array {
+	private function formatUserLinksHTML( string $userName, int $visibility, Language $lang, Authority $user ): array {
 		if ( !RevisionRecord::userCanBitfield(
 			$visibility,
 			RevisionRecord::DELETED_USER,
@@ -296,7 +298,7 @@ class ChangeLineFormatter {
 		)->text();
 	}
 
-	private function buildPermanentLinkHTML( EntityId $entityId, RevisionData $rev, Language $lang, User $user ): string {
+	private function buildPermanentLinkHTML( EntityId $entityId, RevisionData $rev, Language $lang, UserIdentity $user ): string {
 		$params = [
 			'title' => $this->repoLinker->getEntityTitle( $entityId ),
 			'curid' => $rev->getPageId(),

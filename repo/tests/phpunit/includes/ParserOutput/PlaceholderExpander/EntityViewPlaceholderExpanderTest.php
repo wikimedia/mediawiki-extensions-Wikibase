@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput\PlaceholderExpander;
 
 use MediaWiki\MediaWikiServices;
-use User;
+use MediaWiki\User\UserIdentity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\LanguageNameLookup;
@@ -30,13 +30,13 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 	private const COOKIE_PREFIX = 'testwiki-';
 
 	/**
-	 * @param User $user
+	 * @param UserIdentity $user
 	 * @param Item $item
 	 * @param string $cookiePrefix
 	 *
 	 * @return EntityViewPlaceholderExpander
 	 */
-	private function newExpander( User $user, Item $item, $cookiePrefix = '' ) {
+	private function newExpander( UserIdentity $user, Item $item, $cookiePrefix = '' ) {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		$termsLanguages = [ 'de', 'en', 'ru' ];
@@ -68,18 +68,12 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @param bool $isAnon
 	 *
-	 * @return User
+	 * @return UserIdentity
 	 */
 	private function newUser( $isAnon = false ) {
-		$user = $this->getMockBuilder( User::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$user->method( 'isAnon' )
-			->willReturn( $isAnon );
-
-		/** @var User $user */
-		$user->setName( 'EntityViewPlaceholderExpanderTest-DummyUser' );
-
+		$user = $this->createMock( UserIdentity::class );
+		$user->method( 'isRegistered' )
+			->willReturn( !$isAnon );
 		return $user;
 	}
 
