@@ -97,8 +97,9 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$this->siteStore,
-			$this->getTermValidatorFactorMock(),
-			$wikibaseRepo->getItemTermsCollisionDetector()
+			$this->getTermValidatorFactoryMock(),
+			$wikibaseRepo->getItemTermsCollisionDetector(),
+			$wikibaseRepo->getValidatorErrorLocalizer()
 		);
 	}
 
@@ -416,7 +417,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		$this->siteStore->saveSite( $siteMock );
 	}
 
-	private function getTermValidatorFactorMock() {
+	private function getTermValidatorFactoryMock() {
 		$validatorMock = $this->getValidatorMock();
 
 		/** @var MockObject|TermValidatorFactory $mock */

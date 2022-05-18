@@ -18,6 +18,8 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\SummaryFormatter;
+use Wikibase\Repo\Validators\TermValidatorFactory;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -33,10 +35,16 @@ class SpecialNewProperty extends SpecialNewEntity {
 	const FIELD_DESCRIPTION = 'description';
 	const FIELD_ALIASES = 'aliases';
 
+	/** @var TermValidatorFactory */
+	private $termValidatorFactory;
+
 	/**
 	 * @var TermsCollisionDetector
 	 */
 	private $termsCollisionDetector;
+
+	/** @var ValidatorErrorLocalizer */
+	private $errorLocalizer;
 
 	public function __construct(
 		SpecialPageCopyrightView $specialPageCopyrightView,
@@ -44,7 +52,9 @@ class SpecialNewProperty extends SpecialNewEntity {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediawikiEditEntityFactory $editEntityFactory,
-		TermsCollisionDetector $termsCollisionDetector
+		TermValidatorFactory $termValidatorFactory,
+		TermsCollisionDetector $termsCollisionDetector,
+		ValidatorErrorLocalizer $errorLocalizer
 	) {
 		parent::__construct(
 			'NewProperty',
@@ -56,7 +66,9 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$editEntityFactory
 		);
 
+		$this->termValidatorFactory = $termValidatorFactory;
 		$this->termsCollisionDetector = $termsCollisionDetector;
+		$this->errorLocalizer = $errorLocalizer;
 	}
 
 	public static function newFromGlobalState(): self {
@@ -75,7 +87,9 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
-			$wikibaseRepo->getPropertyTermsCollisionDetector()
+			$wikibaseRepo->getTermValidatorFactory(),
+			$wikibaseRepo->getPropertyTermsCollisionDetector(),
+			$wikibaseRepo->getValidatorErrorLocalizer()
 		);
 	}
 
@@ -213,33 +227,60 @@ class SpecialNewProperty extends SpecialNewEntity {
 	 * @return Status
 	 */
 	protected function validateFormData( array $formData ) {
+		$status = Status::newGood();
+
 		if ( $formData[ self::FIELD_LABEL ] == ''
 			 && $formData[ self::FIELD_DESCRIPTION ] == ''
 			 && $formData[ self::FIELD_ALIASES ] === []
 		) {
-			return Status::newFatal( 'wikibase-newproperty-insufficient-data' );
+			$status->fatal( 'wikibase-newproperty-insufficient-data' );
 		}
 
 		if ( $formData[ self::FIELD_LABEL ] !== '' &&
 			$formData[ self::FIELD_LABEL ] === $formData[ self::FIELD_DESCRIPTION ]
 		) {
-			return Status::newFatal( 'wikibase-newproperty-same-label-and-description' );
+			$status->fatal( 'wikibase-newproperty-same-label-and-description' );
 		}
 
-		$collidingPropertyId = $this->termsCollisionDetector->detectLabelCollision(
-			$formData[ self::FIELD_LANG ],
-			$formData[ self::FIELD_LABEL ]
-		);
-		if ( $collidingPropertyId !== null ) {
-			return Status::newFatal(
-				'wikibase-validator-label-conflict',
-				$formData[ self::FIELD_LABEL ],
-				$formData[ self::FIELD_LANG ],
-				$collidingPropertyId
+		if ( $formData[self::FIELD_LABEL] != '' ) {
+			$validator = $this->termValidatorFactory->getLabelValidator( $this->getEntityType() );
+			$result = $validator->validate( $formData[self::FIELD_LABEL] );
+			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
+		}
+
+		if ( $formData[self::FIELD_DESCRIPTION] != '' ) {
+			$validator = $this->termValidatorFactory->getDescriptionValidator();
+			$result = $validator->validate( $formData[self::FIELD_DESCRIPTION] );
+			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
+		}
+
+		if ( $formData[self::FIELD_ALIASES] !== [] ) {
+			$validator = $this->termValidatorFactory->getAliasValidator( Property::ENTITY_TYPE );
+			foreach ( $formData[self::FIELD_ALIASES] as $alias ) {
+				$result = $validator->validate( $alias );
+				$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
+			}
+
+			$result = $validator->validate( implode( '|', $formData[self::FIELD_ALIASES] ) );
+			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
+		}
+
+		if ( $status->isOK() ) { // only do this more expensive check if everything else is OK
+			$collidingPropertyId = $this->termsCollisionDetector->detectLabelCollision(
+				$formData[self::FIELD_LANG],
+				$formData[self::FIELD_LABEL]
 			);
+			if ( $collidingPropertyId !== null ) {
+				$status->fatal(
+					'wikibase-validator-label-conflict',
+					$formData[self::FIELD_LABEL],
+					$formData[self::FIELD_LANG],
+					$collidingPropertyId
+				);
+			}
 		}
 
-		return Status::newGood();
+		return $status;
 	}
 
 	/**

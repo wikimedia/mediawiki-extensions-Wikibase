@@ -3,11 +3,17 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use ContentHandler;
+use FauxRequest;
+use PHPUnit\Framework\MockObject\MockObject;
+use ValueValidators\Error;
+use ValueValidators\Result;
+use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewProperty;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 
@@ -78,7 +84,9 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
-			$wikibaseRepo->getPropertyTermsCollisionDetector()
+			$this->getTermValidatorFactoryMock(),
+			$wikibaseRepo->getPropertyTermsCollisionDetector(),
+			$wikibaseRepo->getValidatorErrorLocalizer()
 		);
 	}
 
@@ -148,9 +156,9 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 			SpecialNewProperty::FIELD_ALIASES => '',
 			SpecialNewProperty::FIELD_DATATYPE => 'string',
 		];
-		$this->executeSpecialPage( '', new \FauxRequest( $formData, true ) );
+		$this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
-		list( $html ) = $this->executeSpecialPage( '', new \FauxRequest( $formData, true ) );
+		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-validator-label-conflict: label, en, ' );
 
@@ -341,6 +349,70 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 		}
 
 		$this->assertEquals( $form[SpecialNewProperty::FIELD_DATATYPE], $entity->getDataTypeId() );
+	}
+
+	public function testWhenLabelIsInvalid_ThenHtmlContainsErrorMessage() {
+		$formData = [
+			SpecialNewProperty::FIELD_LABEL => 'TOO_LONG_ERROR'
+		];
+
+		$this->assertHtmlContainsErrorTooLongMessage( $formData );
+	}
+
+	public function testWhenDescriptionIsInvalid_ThenHtmlContainsErrorMessage() {
+		$formData = [
+			SpecialNewProperty::FIELD_DESCRIPTION => 'TOO_LONG_ERROR'
+		];
+
+		$this->assertHtmlContainsErrorTooLongMessage( $formData );
+	}
+
+	public function testWhenAliasIsInvalid_ThenHtmlContainsErrorMessage() {
+		$formData = [
+			SpecialNewProperty::FIELD_ALIASES => 'TOO_LONG_ERROR'
+		];
+
+		$this->assertHtmlContainsErrorTooLongMessage( $formData );
+	}
+
+	public function testWhenAliasesAreInvalid_ThenHtmlContainsErrorMessage() {
+		$formData = [
+			SpecialNewProperty::FIELD_ALIASES => 'TOO_LONG_ERROR|TOO_LONG_ERROR'
+		];
+
+		$this->assertHtmlContainsErrorTooLongMessage( $formData );
+	}
+
+	private function assertHtmlContainsErrorTooLongMessage( $formData ) {
+		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+
+		$this->assertHtmlContainsErrorMessage( $html, '(htmlform-invalid-input)' );
+	}
+
+	private function getTermValidatorFactoryMock() {
+		$validatorMock = $this->getValidatorMock();
+
+		/** @var MockObject|TermValidatorFactory $mock */
+		$mock = $this->createMock( TermValidatorFactory::Class );
+		$mock->method( $this->anything() )
+			->willReturn( $validatorMock );
+
+		return $mock;
+	}
+
+	private function getValidatorMock() {
+		/** @var MockObject|ValueValidator $validatorMock */
+		$validatorMock = $this->createMock( ValueValidator::class );
+		$validatorMock->method( 'validate' )->willReturnCallback(
+			function ( $value ) {
+				if ( $value === 'TOO_LONG_ERROR' ) {
+					return Result::newError( [ Error::newError( 'This is the too long error', null, 'too-long' ) ] );
+				}
+				return Result::newSuccess();
+			}
+		);
+
+		return $validatorMock;
 	}
 
 }
