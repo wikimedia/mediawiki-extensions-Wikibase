@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\UseCases\GetItemStatements;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Serializers\StatementListSerializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
@@ -17,18 +16,15 @@ class GetItemStatements {
 	private $validator;
 	private $statementsRetriever;
 	private $revisionMetadataRetriever;
-	private $serializer;
 
 	public function __construct(
 		GetItemStatementsValidator $validator,
 		ItemStatementsRetriever $statementsRetriever,
-		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
-		StatementListSerializer $serializer
+		ItemRevisionMetadataRetriever $revisionMetadataRetriever
 	) {
 		$this->validator = $validator;
 		$this->statementsRetriever = $statementsRetriever;
 		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
-		$this->serializer = $serializer;
 	}
 
 	/**
@@ -54,7 +50,7 @@ class GetItemStatements {
 		}
 
 		return new GetItemStatementsSuccessResponse(
-			$this->serializer->serialize( $this->statementsRetriever->getStatements( $itemId ) ),
+			$this->statementsRetriever->getStatements( $itemId ),
 			$latestRevisionMetadata->getRevisionTimestamp(),
 			$latestRevisionMetadata->getRevisionId()
 		);

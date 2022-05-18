@@ -55,9 +55,7 @@ return [
 			),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
-			),
-			WikibaseRepo::getBaseDataModelSerializerFactory( $services )
-				->newStatementListSerializer()
+			)
 		);
 	},
 

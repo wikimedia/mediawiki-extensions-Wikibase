@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItemStatements;
 
+use Wikibase\DataModel\Statement\StatementList;
+
 /**
  * @license GPL-2.0-or-later
  */
@@ -16,13 +18,13 @@ class GetItemStatementsSuccessResponse {
 
 	private $revisionId;
 
-	public function __construct( array $serializedStatements, string $lastModified, int $revisionId ) {
+	public function __construct( StatementList $serializedStatements, string $lastModified, int $revisionId ) {
 		$this->statements = $serializedStatements;
 		$this->lastModified = $lastModified;
 		$this->revisionId = $revisionId;
 	}
 
-	public function getStatements(): array {
+	public function getStatements(): StatementList {
 		return $this->statements;
 	}
 

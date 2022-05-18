@@ -49,16 +49,12 @@ class GetItemStatementsTest extends TestCase {
 		$itemId = new ItemId( 'Q123' );
 		$revision = 987;
 		$lastModified = '20201111070707';
-		$statement1PropertyId = 'P123';
-		$statement1Value = 'potato';
-		$statement2PropertyId = 'P321';
-		$statement2Value = 'banana';
 		$statements = new StatementList(
-			NewStatement::forProperty( $statement1PropertyId )
-				->withValue( $statement1Value )
+			NewStatement::forProperty( 'P123' )
+				->withValue( 'potato' )
 				->build(),
-			NewStatement::forProperty( $statement2PropertyId )
-				->withValue( $statement2Value )
+			NewStatement::forProperty( 'P321' )
+				->withValue( 'banana' )
 				->build()
 		);
 
@@ -78,12 +74,7 @@ class GetItemStatementsTest extends TestCase {
 			new GetItemStatementsRequest( $itemId->getSerialization() )
 		);
 
-		$serializedStatements = $response->getStatements();
-		$this->assertArrayHasKey( $statement1PropertyId, $serializedStatements );
-		$this->assertSame( $statement1Value, $serializedStatements[$statement1PropertyId][0]['mainsnak']['datavalue']['value'] );
-		$this->assertArrayHasKey( $statement2PropertyId, $serializedStatements );
-		$this->assertSame( $statement2Value, $serializedStatements[$statement2PropertyId][0]['mainsnak']['datavalue']['value'] );
-
+		$this->assertSame( $statements, $response->getStatements() );
 		$this->assertSame( $revision, $response->getRevisionId() );
 		$this->assertSame( $lastModified, $response->getLastModified() );
 	}

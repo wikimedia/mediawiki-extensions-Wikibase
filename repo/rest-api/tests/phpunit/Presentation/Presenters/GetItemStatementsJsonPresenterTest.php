@@ -2,8 +2,9 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Presentation\Presenters;
 
-use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Serializers\StatementListSerializer;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemStatementsJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsSuccessResponse;
 
@@ -16,37 +17,26 @@ use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsSuccessRes
  */
 class GetItemStatementsJsonPresenterTest extends TestCase {
 
-	/**
-	 * @dataProvider statementsSerializationProvider
-	 */
-	public function testGetJsonForSuccess( array $itemSerialization, string $expectedOutput ): void {
-		$presenter = new GetItemStatementsJsonPresenter();
+	public function testGetJsonForSuccess(): void {
+		$statements = $this->createStub( StatementList::class );
+		$serialization = [
+			'P31' => [ [ 'id' => 'Q1$943B784F-FFBC-43A9-B7AA-79C3546AA0EF' ] ]
+		];
+
+		$serializer = $this->createMock( StatementListSerializer::class );
+		$serializer->expects( $this->once() )
+			->method( 'serialize' )
+			->with( $statements )
+			->willReturn( $serialization );
+
+		$presenter = new GetItemStatementsJsonPresenter( $serializer );
 
 		$this->assertJsonStringEqualsJsonString(
-			$expectedOutput,
+			json_encode( $serialization ),
 			$presenter->getJson(
-				new GetItemStatementsSuccessResponse( $itemSerialization, '20220307180000', 321 )
+				new GetItemStatementsSuccessResponse( $statements, '20220307180000', 321 )
 			)
 		);
-	}
-
-	public function statementsSerializationProvider(): Generator {
-		yield 'converts empty top-level array to object' => [
-			[],
-			'{}'
-		];
-
-		yield 'converts empty qualifiers object' => [
-			[ 'P123' => [
-					[ 'qualifiers' => [] ],
-					[ 'qualifiers' => [] ],
-				],
-				'P321' => [
-					[ 'qualifiers' => [] ],
-				],
-			],
-			'{"P123":[{"qualifiers":{}},{"qualifiers":{}}],"P321":[{"qualifiers":{}}]}'
-		];
 	}
 
 }
