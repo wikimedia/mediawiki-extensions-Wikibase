@@ -21,6 +21,7 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\Validators\TermValidatorFactory;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
  * Page for creating new Wikibase items.
@@ -52,6 +53,9 @@ class SpecialNewItem extends SpecialNewEntity {
 	 */
 	private $termsCollisionDetector;
 
+	/** @var ValidatorErrorLocalizer */
+	private $errorLocalizer;
+
 	public function __construct(
 		array $tags,
 		SpecialPageCopyrightView $copyrightView,
@@ -61,7 +65,8 @@ class SpecialNewItem extends SpecialNewEntity {
 		MediawikiEditEntityFactory $editEntityFactory,
 		SiteLookup $siteLookup,
 		TermValidatorFactory $termValidatorFactory,
-		TermsCollisionDetector $termsCollisionDetector
+		TermsCollisionDetector $termsCollisionDetector,
+		ValidatorErrorLocalizer $errorLocalizer
 	) {
 		parent::__construct(
 			'NewItem',
@@ -76,6 +81,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		$this->siteLookup = $siteLookup;
 		$this->termValidatorFactory = $termValidatorFactory;
 		$this->termsCollisionDetector = $termsCollisionDetector;
+		$this->errorLocalizer = $errorLocalizer;
 	}
 
 	public static function factory(
@@ -86,7 +92,8 @@ class SpecialNewItem extends SpecialNewEntity {
 		TermsCollisionDetector $itemTermsCollisionDetector,
 		SettingsArray $repoSettings,
 		SummaryFormatter $summaryFormatter,
-		TermValidatorFactory $termValidatorFactory
+		TermValidatorFactory $termValidatorFactory,
+		ValidatorErrorLocalizer $errorLocalizer
 	): self {
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
@@ -103,7 +110,8 @@ class SpecialNewItem extends SpecialNewEntity {
 			$editEntityFactory,
 			$siteLookup,
 			$termValidatorFactory,
-			$itemTermsCollisionDetector
+			$itemTermsCollisionDetector,
+			$errorLocalizer
 		);
 	}
 
@@ -258,71 +266,62 @@ class SpecialNewItem extends SpecialNewEntity {
 	 * @return Status
 	 */
 	protected function validateFormData( array $formData ) {
+		$status = Status::newGood();
+
 		if ( $formData[ self::FIELD_LABEL ] == ''
 			 && $formData[ self::FIELD_DESCRIPTION ] == ''
 			 && $formData[ self::FIELD_ALIASES ] === []
 		) {
-			return Status::newFatal( 'wikibase-newitem-insufficient-data' );
+			$status->fatal( 'wikibase-newitem-insufficient-data' );
 		}
 
 		// Disallow the same label and description, but ignore if both are empty T100933
 		if ( $formData[ self::FIELD_LABEL ] !== '' &&
 			$formData[ self::FIELD_LABEL ] === $formData[ self::FIELD_DESCRIPTION ]
 		) {
-			return Status::newFatal( 'wikibase-newitem-same-label-and-description' );
+			$status->fatal( 'wikibase-newitem-same-label-and-description' );
 		}
 
 		if ( $formData[self::FIELD_LABEL] != '' ) {
 			$validator = $this->termValidatorFactory->getLabelValidator( $this->getEntityType() );
 			$result = $validator->validate( $formData[self::FIELD_LABEL] );
-			if ( !$result->isValid() ) {
-				return $this->createStatusFromValidatorError( $result->getErrors()[0] );
-			}
+			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
 		}
 
 		if ( $formData[self::FIELD_DESCRIPTION] != '' ) {
 			$validator = $this->termValidatorFactory->getDescriptionValidator();
 			$result = $validator->validate( $formData[self::FIELD_DESCRIPTION] );
-			if ( !$result->isValid() ) {
-				return $this->createStatusFromValidatorError( $result->getErrors()[0] );
-			}
+			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
 		}
 
 		if ( $formData[self::FIELD_ALIASES] !== [] ) {
 			$validator = $this->termValidatorFactory->getAliasValidator();
 			foreach ( $formData[self::FIELD_ALIASES] as $alias ) {
 				$result = $validator->validate( $alias );
-				if ( !$result->isValid() ) {
-					return $this->createStatusFromValidatorError( $result->getErrors()[0] );
-				}
+				$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
 			}
 
 			$result = $validator->validate( implode( '|', $formData[self::FIELD_ALIASES] ) );
-			if ( !$result->isValid() ) {
-				return $this->createStatusFromValidatorError( $result->getErrors()[0] );
+			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
+		}
+
+		if ( $status->isOK() ) { // only do this more expensive check if everything else is OK
+			$collidingItemId = $this->termsCollisionDetector->detectLabelAndDescriptionCollision(
+				$formData[self::FIELD_LANG],
+				$formData[self::FIELD_LABEL],
+				$formData[self::FIELD_DESCRIPTION]
+			);
+			if ( $collidingItemId !== null ) {
+				$status->fatal(
+					'wikibase-validator-label-with-description-conflict',
+					$formData[self::FIELD_LABEL],
+					$formData[self::FIELD_LANG],
+					$collidingItemId
+				);
 			}
 		}
 
-		$collidingItemId = $this->termsCollisionDetector->detectLabelAndDescriptionCollision(
-			$formData[ self::FIELD_LANG ],
-			$formData[ self::FIELD_LABEL ],
-			$formData[ self::FIELD_DESCRIPTION ]
-		);
-		if ( $collidingItemId !== null ) {
-			return Status::newFatal(
-				'wikibase-validator-label-with-description-conflict',
-				$formData[ self::FIELD_LABEL ],
-				$formData[ self::FIELD_LANG ],
-				$collidingItemId
-			);
-		}
-
-		return Status::newGood();
-	}
-
-	private function createStatusFromValidatorError( $error ) {
-		$params = array_merge( [ 'wikibase-validator-' . $error->getCode() ],  $error->getParameters() );
-		return Status::newFatal( ...$params );
+		return $status;
 	}
 
 	/**
