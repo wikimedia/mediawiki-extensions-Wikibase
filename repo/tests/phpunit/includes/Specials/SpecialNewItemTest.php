@@ -63,8 +63,9 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
 			WikibaseRepo::getEditEntityFactory(),
-			$this->getTermValidatorFactorMock(),
+			$this->getTermValidatorFactoryMock(),
 			WikibaseRepo::getItemTermsCollisionDetector(),
+			WikibaseRepo::getValidatorErrorLocalizer(),
 			new SiteLinkTargetProvider( $this->siteStore ),
 			[ 'wikiblah' ]
 		);
@@ -425,7 +426,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		$this->siteStore->saveSite( $siteMock );
 	}
 
-	private function getTermValidatorFactorMock() {
+	private function getTermValidatorFactoryMock() {
 		$validatorMock = $this->getValidatorMock();
 
 		/** @var MockObject|TermValidatorFactory $mock */
