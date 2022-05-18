@@ -36,7 +36,7 @@ class ItemSerializer implements DispatchableSerializer {
 	/**
 	 * @var Serializer
 	 */
-	private $siteLinkSerializer;
+	private $siteLinkListSerializer;
 
 	/**
 	 * @var bool
@@ -60,7 +60,7 @@ class ItemSerializer implements DispatchableSerializer {
 		$this->termListSerializer = $termListSerializer;
 		$this->aliasGroupListSerializer = $aliasGroupListSerializer;
 		$this->statementListSerializer = $statementListSerializer;
-		$this->siteLinkSerializer = $siteLinkSerializer;
+		$this->siteLinkListSerializer = new SiteLinkListSerializer( $siteLinkSerializer, $useObjectsForMaps );
 		$this->useObjectsForMaps = $useObjectsForMaps;
 	}
 
@@ -130,16 +130,7 @@ class ItemSerializer implements DispatchableSerializer {
 	}
 
 	private function addSiteLinksToSerialization( Item $item, array &$serialization ) {
-		$serialization['sitelinks'] = [];
-
-		foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
-			$serialization['sitelinks'][$siteLink->getSiteId()] =
-				$this->siteLinkSerializer->serialize( $siteLink );
-		}
-
-		if ( $this->useObjectsForMaps ) {
-			$serialization['sitelinks'] = (object)$serialization['sitelinks'];
-		}
+		$serialization['sitelinks'] = $this->siteLinkListSerializer->serialize( $item->getSiteLinkList() );
 	}
 
 }
