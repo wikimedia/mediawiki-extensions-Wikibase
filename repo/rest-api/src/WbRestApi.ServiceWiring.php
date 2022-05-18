@@ -1,7 +1,9 @@
 <?php declare( strict_types=1 );
 
+use DataValues\Serializers\DataValueSerializer;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemStatementRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemStatementsRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
@@ -19,6 +21,11 @@ use Wikibase\Repo\WikibaseRepo;
 
 /** @phpcs-require-sorted-array */
 return [
+
+	'WbRestApi.BaseDataModelSerializerFactory' => function ( MediaWikiServices $services ): SerializerFactory {
+		// same as WikibaseRepo.BaseDataModelSerializerFactory but with OPTION_OBJECTS_FOR_MAPS
+		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_OBJECTS_FOR_MAPS );
+	},
 
 	'WbRestApi.GetItem' => function( MediaWikiServices $services ): GetItem {
 		return new GetItem(
@@ -41,8 +48,7 @@ return [
 			),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
-			),
-			WikibaseRepo::getBaseDataModelSerializerFactory( $services )->newStatementSerializer()
+			)
 		);
 	},
 

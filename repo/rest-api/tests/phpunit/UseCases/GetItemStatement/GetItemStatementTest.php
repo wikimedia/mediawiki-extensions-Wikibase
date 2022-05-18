@@ -50,11 +50,8 @@ class GetItemStatementTest extends TestCase {
 		$revision = 987;
 		$lastModified = '20201111070707';
 		$statementId = $itemId . StatementGuid::SEPARATOR . "c48c32c3-42b5-498f-9586-84608b88747c";
-		$statementPropertyId = 'P123';
-		$statementValue = 'potato';
-
-		$statement = NewStatement::forProperty( $statementPropertyId )
-			->withValue( $statementValue )
+		$expectedStatement = NewStatement::forProperty( 'P123' )
+			->withValue( 'potato' )
 			->withGuid( $statementId )
 			->build();
 
@@ -68,16 +65,13 @@ class GetItemStatementTest extends TestCase {
 		$this->statementRetriever->expects( $this->once() )
 			->method( 'getStatement' )
 			->with( $statementId )
-			->willReturn( $statement );
+			->willReturn( $expectedStatement );
 
 		$response = $this->newUseCase()->execute(
-			new GetItemStatementRequest( $statement->getGuid() )
+			new GetItemStatementRequest( $expectedStatement->getGuid() )
 		);
 
-		$serializedStatement = $response->getSerializedStatement();
-		$this->assertSame( $statementId, $serializedStatement['id'] );
-		$this->assertSame( $statementValue, $serializedStatement['mainsnak']['datavalue']['value'] );
-
+		$this->assertEquals( $expectedStatement, $response->getStatement() );
 		$this->assertSame( $revision, $response->getRevisionId() );
 		$this->assertSame( $lastModified, $response->getLastModified() );
 	}

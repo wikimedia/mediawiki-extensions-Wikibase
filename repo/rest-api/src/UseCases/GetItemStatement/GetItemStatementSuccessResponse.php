@@ -2,12 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItemStatement;
 
+use Wikibase\DataModel\Statement\Statement;
+
 /**
  * @license GPL-2.0-or-later
  */
 class GetItemStatementSuccessResponse {
 
-	private $serializedStatement;
+	private $statement;
 
 	/**
 	 * @var string timestamp in MediaWiki format 'YYYYMMDDhhmmss'
@@ -17,18 +19,18 @@ class GetItemStatementSuccessResponse {
 	private $revisionId;
 
 	public function __construct(
-		array $serializedStatement,
+		Statement $statement,
 		string $lastModified,
 		int $revisionId
 	) {
 
-		$this->serializedStatement = $serializedStatement;
+		$this->statement = $statement;
 		$this->lastModified = $lastModified;
 		$this->revisionId = $revisionId;
 	}
 
-	public function getSerializedStatement(): array {
-		return $this->serializedStatement;
+	public function getStatement(): Statement {
+		return $this->statement;
 	}
 
 	public function getLastModified(): string {
