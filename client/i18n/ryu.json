@@ -6,9 +6,12 @@
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}}項目",
-	"wikibase-editlinks": "リンクぬ編集",
+	"wikibase-editlinks": "リンク直すん",
 	"wikibase-editlinkstitle": "口間リンク直すん",
 	"wikibase-linkitem-addlinks": "リンクぬ追加",
+	"wikibase-linkitem-title": "ページとぅぬリンク",
+	"wikibase-linkitem-linkpage": "ページとぅリンク",
+	"wikibase-linkitem-selectlink": "くぬページんかいリンクしーぶさるサイトとぅページ選(いら)でぃくぃみそーれー。",
 	"wikibase-linkitem-input-site": "言葉（くとぅば）",
 	"wikibase-linkitem-input-page": "ページ:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

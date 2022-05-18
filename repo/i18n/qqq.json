@@ -448,7 +448,7 @@
 	"wikibase-api-not-recognized-siteid": "The supplied site identifier was not recognized.",
 	"wikibase-api-not-recognized": "Something was not recognized (general message).",
 	"wikibase-api-not-recognized-array": "An array was expected, but not recognized. The user probably passed the API a malformed parameter.",
-	"wikibase-api-not-recognized-language": "{{notranslate}}\nThe supplied language identifier was not recognized. The user probably passed the API a malformed parameter",
+	"wikibase-api-not-recognized-language": "The supplied language identifier was not recognized. The user probably passed the API a malformed parameter",
 	"wikibase-api-not-recognized-string": "A string was expected, but not recognized. The user probably passed the API a malformed parameter.",
 	"wikibase-api-param-missing": "Error message when an API parameter that is required was missing from a request.\n* $1 - name of the parameter",
 	"wikibase-api-param-illegal": "An illegal set of parameters have been used, General message for when the parameters passed in a request conflict or do not pass the initial tests.",
