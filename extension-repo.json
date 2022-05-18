@@ -337,7 +337,8 @@
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.SiteLinkTargetProvider",
 				"WikibaseRepo.SummaryFormatter",
-				"WikibaseRepo.TermValidatorFactory"
+				"WikibaseRepo.TermValidatorFactory",
+				"WikibaseRepo.ValidatorErrorLocalizer"
 			]
 		},
 		"NewProperty": {
@@ -350,7 +351,9 @@
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.PropertyTermsCollisionDetector",
 				"WikibaseRepo.Settings",
-				"WikibaseRepo.SummaryFormatter"
+				"WikibaseRepo.SummaryFormatter",
+				"WikibaseRepo.TermValidatorFactory",
+				"WikibaseRepo.ValidatorErrorLocalizer"
 			]
 		},
 		"ItemByTitle": {

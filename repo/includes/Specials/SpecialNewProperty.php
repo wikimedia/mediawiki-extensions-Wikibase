@@ -20,6 +20,8 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\SummaryFormatter;
+use Wikibase\Repo\Validators\TermValidatorFactory;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
  * Page for creating new Wikibase properties.
@@ -37,10 +39,16 @@ class SpecialNewProperty extends SpecialNewEntity {
 	/** @var DataTypeFactory */
 	private $dataTypeFactory;
 
+	/** @var TermValidatorFactory */
+	private $termValidatorFactory;
+
 	/**
 	 * @var TermsCollisionDetector
 	 */
 	private $termsCollisionDetector;
+
+	/** @var ValidatorErrorLocalizer */
+	private $errorLocalizer;
 
 	public function __construct(
 		array $tags,
@@ -50,7 +58,9 @@ class SpecialNewProperty extends SpecialNewEntity {
 		EntityTitleLookup $entityTitleLookup,
 		MediawikiEditEntityFactory $editEntityFactory,
 		DataTypeFactory $dataTypeFactory,
-		TermsCollisionDetector $termsCollisionDetector
+		TermValidatorFactory $termValidatorFactory,
+		TermsCollisionDetector $termsCollisionDetector,
+		ValidatorErrorLocalizer $errorLocalizer
 	) {
 		parent::__construct(
 			'NewProperty',
@@ -64,7 +74,9 @@ class SpecialNewProperty extends SpecialNewEntity {
 		);
 
 		$this->dataTypeFactory = $dataTypeFactory;
+		$this->termValidatorFactory = $termValidatorFactory;
 		$this->termsCollisionDetector = $termsCollisionDetector;
+		$this->errorLocalizer = $errorLocalizer;
 	}
 
 	public static function factory(
@@ -74,7 +86,9 @@ class SpecialNewProperty extends SpecialNewEntity {
 		EntityTitleLookup $entityTitleLookup,
 		TermsCollisionDetector $propertyTermsCollisionDetector,
 		SettingsArray $repoSettings,
-		SummaryFormatter $summaryFormatter
+		SummaryFormatter $summaryFormatter,
+		TermValidatorFactory $termValidatorFactory,
+		ValidatorErrorLocalizer $errorLocalizer
 	): self {
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
@@ -90,7 +104,9 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$entityTitleLookup,
 			$editEntityFactory,
 			$dataTypeFactory,
-			$propertyTermsCollisionDetector
+			$termValidatorFactory,
+			$propertyTermsCollisionDetector,
+			$errorLocalizer
 		);
 	}
 
@@ -220,35 +236,62 @@ class SpecialNewProperty extends SpecialNewEntity {
 	 * @return Status
 	 */
 	protected function validateFormData( array $formData ) {
+		$status = Status::newGood();
+
 		if ( $formData[ self::FIELD_LABEL ] == ''
 			 && $formData[ self::FIELD_DESCRIPTION ] == ''
 			 && $formData[ self::FIELD_ALIASES ] === []
 		) {
-			return Status::newFatal( 'wikibase-newproperty-insufficient-data' );
+			$status->fatal( 'wikibase-newproperty-insufficient-data' );
 		}
 
 		if ( $formData[ self::FIELD_LABEL ] !== '' &&
 			$formData[ self::FIELD_LABEL ] === $formData[ self::FIELD_DESCRIPTION ]
 		) {
-			return Status::newFatal( 'wikibase-newproperty-same-label-and-description' );
+			$status->fatal( 'wikibase-newproperty-same-label-and-description' );
+		}
+
+		if ( $formData[self::FIELD_LABEL] != '' ) {
+			$validator = $this->termValidatorFactory->getLabelValidator( $this->getEntityType() );
+			$result = $validator->validate( $formData[self::FIELD_LABEL] );
+			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
+		}
+
+		if ( $formData[self::FIELD_DESCRIPTION] != '' ) {
+			$validator = $this->termValidatorFactory->getDescriptionValidator();
+			$result = $validator->validate( $formData[self::FIELD_DESCRIPTION] );
+			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
+		}
+
+		if ( $formData[self::FIELD_ALIASES] !== [] ) {
+			$validator = $this->termValidatorFactory->getAliasValidator();
+			foreach ( $formData[self::FIELD_ALIASES] as $alias ) {
+				$result = $validator->validate( $alias );
+				$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
+			}
+
+			$result = $validator->validate( implode( '|', $formData[self::FIELD_ALIASES] ) );
+			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
 		}
 
 		// property label uniqueness is also checked later in LabelUniquenessValidator (T289473),
 		// but we repeat it here to avoid consuming a property ID if there is a collision
-		$collidingPropertyId = $this->termsCollisionDetector->detectLabelCollision(
-			$formData[ self::FIELD_LANG ],
-			$formData[ self::FIELD_LABEL ]
-		);
-		if ( $collidingPropertyId !== null ) {
-			return Status::newFatal(
-				'wikibase-validator-label-conflict',
-				$formData[ self::FIELD_LABEL ],
-				$formData[ self::FIELD_LANG ],
-				$collidingPropertyId
+		if ( $status->isOK() ) { // only do this more expensive check if everything else is OK
+			$collidingPropertyId = $this->termsCollisionDetector->detectLabelCollision(
+				$formData[self::FIELD_LANG],
+				$formData[self::FIELD_LABEL]
 			);
+			if ( $collidingPropertyId !== null ) {
+				$status->fatal(
+					'wikibase-validator-label-conflict',
+					$formData[self::FIELD_LABEL],
+					$formData[self::FIELD_LANG],
+					$collidingPropertyId
+				);
+			}
 		}
 
-		return Status::newGood();
+		return $status;
 	}
 
 	/**
