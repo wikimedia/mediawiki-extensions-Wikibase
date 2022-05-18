@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\Presentation\Presenters;
 
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemDataSerializer;
-use Wikibase\Repo\RestApi\Presentation\EmptyArrayToObjectConverter;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
 
 /**
@@ -11,24 +10,15 @@ use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
  */
 class GetItemJsonPresenter {
 
-	private $emptyArrayToObjectConverter;
 	private $itemDataSerializer;
 
 	public function __construct( ItemDataSerializer $itemDataSerializer ) {
-		$this->emptyArrayToObjectConverter = new EmptyArrayToObjectConverter( [
-			'/labels',
-			'/descriptions',
-			'/aliases',
-			'/statements',
-			'/statements/*/*/qualifiers',
-			'/sitelinks',
-		] );
 		$this->itemDataSerializer = $itemDataSerializer;
 	}
 
 	public function getJson( GetItemSuccessResponse $response ): string {
-		return json_encode( $this->emptyArrayToObjectConverter->convert(
+		return json_encode(
 			$this->itemDataSerializer->serialize( $response->getItemData() )
-		) );
+		);
 	}
 }
