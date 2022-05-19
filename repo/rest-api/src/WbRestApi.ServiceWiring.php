@@ -4,10 +4,10 @@ use DataValues\Serializers\DataValueSerializer;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Serializers\SerializerFactory;
+use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemStatementRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemStatementsRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionRetriever;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
@@ -28,9 +28,10 @@ return [
 
 	'WbRestApi.GetItem' => function( MediaWikiServices $services ): GetItem {
 		return new GetItem(
-			new WikibaseEntityRevisionLookupItemRevisionRetriever(
+			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
+			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new GetItemValidator( new ItemIdValidator() )
 		);
 	},

@@ -4,9 +4,14 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
-use Wikibase\Repo\RestApi\Domain\Model\ItemRevisionResult;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\RestApi\Domain\Model\ItemData;
+use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
+use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
@@ -15,7 +20,6 @@ use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
-use Wikibase\Repo\Tests\NewItem;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\GetItem\GetItem
@@ -32,25 +36,30 @@ class GetItemTest extends TestCase {
 	public function testGetExistingItem(): void {
 		$lastModifiedTimestamp = '20201111070707';
 		$revisionId = 42;
+		$requestedFields = [ ItemData::FIELD_LABELS, ItemData::FIELD_STATEMENTS ];
+		$expectedItemData = ( new ItemDataBuilder() )->setId( new ItemId( self::ITEM_ID ) )
+			->setLabels( new TermList( [ new Term( 'en', self::ITEM_LABEL ) ] ) )
+			->setStatements( new StatementList() )
+			->build();
 
-		$retriever = $this->createStub( ItemRevisionRetriever::class );
-		$retriever->method( "getItemRevision" )->willReturn(
-			ItemRevisionResult::concreteRevision( new ItemRevision(
-				NewItem::withId( self::ITEM_ID )->andLabel( "en", self::ITEM_LABEL )->build(),
-				$lastModifiedTimestamp,
-				$revisionId
-			) )
-		);
-		$itemRequest = new GetItemRequest( self::ITEM_ID );
+		$revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$revisionMetadataRetriever->method( "getLatestRevisionMetadata" )
+			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( $revisionId, $lastModifiedTimestamp ) );
+
+		$itemDataRetriever = $this->createMock( ItemDataRetriever::class );
+		$itemDataRetriever->expects( $this->once() )
+			->method( 'getItemData' )
+			->with( self::ITEM_ID, $requestedFields )
+			->willReturn( $expectedItemData );
+
 		$itemResponse = ( new GetItem(
-			$retriever,
+			$revisionMetadataRetriever,
+			$itemDataRetriever,
 			new GetItemValidator( new ItemIdValidator() )
-		) )->execute( $itemRequest );
-		$itemData = $itemResponse->getItemData();
+		) )->execute( new GetItemRequest( self::ITEM_ID, $requestedFields ) );
 
 		$this->assertInstanceOf( GetItemSuccessResponse::class, $itemResponse );
-		$this->assertSame( self::ITEM_ID, $itemData->getId()->getSerialization() );
-		$this->assertSame( self::ITEM_LABEL, $itemData->getLabels()->getByLanguage( 'en' )->getText() );
+		$this->assertSame( $expectedItemData, $itemResponse->getItemData() );
 		$this->assertSame( $lastModifiedTimestamp, $itemResponse->getLastModified() );
 		$this->assertSame( $revisionId, $itemResponse->getRevisionId() );
 	}
@@ -58,12 +67,13 @@ class GetItemTest extends TestCase {
 	public function testItemNotFound(): void {
 		$itemId = "Q123";
 
-		$retriever = $this->createStub( ItemRevisionRetriever::class );
-		$retriever->method( "getItemRevision" )
-			->willReturn( ItemRevisionResult::itemNotFound() );
+		$revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$revisionMetadataRetriever->method( "getLatestRevisionMetadata" )
+			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
 		$itemRequest = new GetItemRequest( $itemId );
 		$itemResponse = ( new GetItem(
-			$retriever,
+			$revisionMetadataRetriever,
+			$this->createStub( ItemDataRetriever::class ),
 			new GetItemValidator( new ItemIdValidator() )
 		) )->execute( $itemRequest );
 		$this->assertInstanceOf( GetItemErrorResponse::class, $itemResponse );
@@ -73,10 +83,10 @@ class GetItemTest extends TestCase {
 	public function testInvalidItemId(): void {
 		$itemId = "X123";
 
-		$retriever = $this->createStub( ItemRevisionRetriever::class );
 		$itemRequest = new GetItemRequest( $itemId );
 		$itemResponse = ( new GetItem(
-			$retriever,
+			$this->createStub( ItemRevisionMetadataRetriever::class ),
+			$this->createStub( ItemDataRetriever::class ),
 			new GetItemValidator( new ItemIdValidator() )
 		) )->execute( $itemRequest );
 
@@ -88,12 +98,13 @@ class GetItemTest extends TestCase {
 		$redirectTarget = 'Q321';
 		$request = new GetItemRequest( 'Q123' );
 
-		$revisionRetriever = $this->createStub( ItemRevisionRetriever::class );
-		$revisionRetriever->method( 'getItemRevision' )
-			->willReturn( ItemRevisionResult::redirect( new ItemId( $redirectTarget ) ) );
+		$revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
 
 		$response = ( new GetItem(
-			$revisionRetriever,
+			$revisionMetadataRetriever,
+			$this->createStub( ItemDataRetriever::class ),
 			new GetItemValidator( new ItemIdValidator() )
 		) )->execute( $request );
 
