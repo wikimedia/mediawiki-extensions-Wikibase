@@ -4,6 +4,8 @@ namespace Wikibase\Repo\Tests\RestApi\Presentation\Presenters;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\RestApi\Domain\Model\ItemData;
+use Wikibase\Repo\RestApi\Domain\Serializers\ItemDataSerializer;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
 
@@ -20,12 +22,20 @@ class GetItemJsonPresenterTest extends TestCase {
 	 * @dataProvider itemSerializationProvider
 	 */
 	public function testGetJsonForSuccess( array $itemSerialization, string $expectedOutput ): void {
-		$presenter = new GetItemJsonPresenter();
+		$itemData = $this->createStub( ItemData::class );
+
+		$serializer = $this->createMock( ItemDataSerializer::class );
+		$serializer->expects( $this->once() )
+			->method( 'serialize' )
+			->with( $itemData )
+			->willReturn( $itemSerialization );
+
+		$presenter = new GetItemJsonPresenter( $serializer );
 
 		$this->assertJsonStringEqualsJsonString(
 			$expectedOutput,
 			$presenter->getJson(
-				new GetItemSuccessResponse( $itemSerialization, '20220307180000', 321 )
+				new GetItemSuccessResponse( $itemData, '20220307180000', 321 )
 			)
 		);
 	}

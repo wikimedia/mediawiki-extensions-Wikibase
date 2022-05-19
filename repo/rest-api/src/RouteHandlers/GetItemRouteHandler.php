@@ -7,6 +7,8 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use Wikibase\DataModel\Serializers\SiteLinkListSerializer;
+use Wikibase\Repo\RestApi\Domain\Serializers\ItemDataSerializer;
 use Wikibase\Repo\RestApi\Presentation\ErrorResponseToHttpStatus;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
@@ -60,9 +62,13 @@ class GetItemRouteHandler extends SimpleHandler {
 
 	public static function factory(): Handler {
 		$errorPresenter = new ErrorJsonPresenter();
+		$serializerFactory = WbRestApi::getBaseDataModelSerializerFactory();
 		return new self(
 			WbRestApi::getGetItem(),
-			new GetItemJsonPresenter(),
+			new GetItemJsonPresenter( new ItemDataSerializer(
+				$serializerFactory->newStatementListSerializer(),
+				new SiteLinkListSerializer( $serializerFactory->newSiteLinkSerializer(), true )
+			) ),
 			$errorPresenter,
 			new UnexpectedErrorHandler( $errorPresenter, WikibaseRepo::getLogger() )
 		);

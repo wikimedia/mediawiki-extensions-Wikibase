@@ -2,9 +2,10 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\Filters\FieldFilter;
-use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
+use Wikibase\Repo\RestApi\Domain\Model\ItemData;
+use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
@@ -15,16 +16,13 @@ use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
 class GetItem {
 
 	private $itemRetriever;
-	private $itemSerializer;
 	private $validator;
 
 	public function __construct(
 		ItemRevisionRetriever $itemRetriever,
-		ItemSerializer $itemSerializer,
 		GetItemValidator $validator
 	) {
 		$this->itemRetriever = $itemRetriever;
-		$this->itemSerializer = $itemSerializer;
 		$this->validator = $validator;
 	}
 
@@ -49,18 +47,41 @@ class GetItem {
 		} elseif ( $itemRevisionResult->isRedirect() ) {
 			return new ItemRedirectResponse( $itemRevisionResult->getRedirectTarget()->getSerialization() );
 		}
-
 		$itemRevision = $itemRevisionResult->getRevision();
-		$itemSerialization = $this->itemSerializer->serialize( $itemRevision->getItem() );
-		$fields = $itemRequest->getFields();
-		if ( $fields !== GetItemRequest::VALID_FIELDS ) {
-			$itemSerialization = ( new FieldFilter( $fields ) )->filter( $itemSerialization );
-		}
 
 		return new GetItemSuccessResponse(
-			$itemSerialization,
+			$this->itemDataFromFields( $itemRequest->getFields(), $itemRevision->getItem() ),
 			$itemRevision->getLastModified(),
 			$itemRevision->getRevisionId()
 		);
+	}
+
+	/**
+	 * This looks out of place here and is intentionally left untested in the use case unit test for now.
+	 * It will move into the ItemDataRetriever service as part of T307915.
+	 */
+	private function itemDataFromFields( array $fields, Item $item ): ItemData {
+		$itemData = ( new ItemDataBuilder() )->setId( $item->getId() );
+
+		if ( in_array( GetItemRequest::FIELD_TYPE, $fields ) ) {
+			$itemData->setType( $item->getType() );
+		}
+		if ( in_array( GetItemRequest::FIELD_LABELS, $fields ) ) {
+			$itemData->setLabels( $item->getLabels() );
+		}
+		if ( in_array( GetItemRequest::FIELD_DESCRIPTIONS, $fields ) ) {
+			$itemData->setDescriptions( $item->getDescriptions() );
+		}
+		if ( in_array( GetItemRequest::FIELD_ALIASES, $fields ) ) {
+			$itemData->setAliases( $item->getAliasGroups() );
+		}
+		if ( in_array( GetItemRequest::FIELD_STATEMENTS, $fields ) ) {
+			$itemData->setStatements( $item->getStatements() );
+		}
+		if ( in_array( GetItemRequest::FIELD_SITELINKS, $fields ) ) {
+			$itemData->setSiteLinks( $item->getSiteLinkList() );
+		}
+
+		return $itemData->build();
 	}
 }

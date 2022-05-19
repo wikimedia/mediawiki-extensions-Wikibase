@@ -8,7 +8,6 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemStatementRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemStatementsRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionRetriever;
-use Wikibase\Repo\RestApi\Domain\Serializers\ItemSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
@@ -31,10 +30,6 @@ return [
 		return new GetItem(
 			new WikibaseEntityRevisionLookupItemRevisionRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
-			),
-			new ItemSerializer(
-				WikibaseRepo::getBaseDataModelSerializerFactory( $services )
-					->newItemSerializer()
 			),
 			new GetItemValidator( new ItemIdValidator() )
 		);
