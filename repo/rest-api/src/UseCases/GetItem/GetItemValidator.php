@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 
+use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
@@ -25,7 +26,7 @@ class GetItemValidator {
 
 	private function validateFields( array $fields ): ?ValidationError {
 		foreach ( $fields as $field ) {
-			if ( !in_array( $field, GetItemRequest::VALID_FIELDS ) ) {
+			if ( !in_array( $field, ItemData::VALID_FIELDS ) ) {
 				return new ValidationError( $field, self::SOURCE_FIELDS );
 			}
 		}

@@ -63,22 +63,22 @@ class GetItem {
 	private function itemDataFromFields( array $fields, Item $item ): ItemData {
 		$itemData = ( new ItemDataBuilder() )->setId( $item->getId() );
 
-		if ( in_array( GetItemRequest::FIELD_TYPE, $fields ) ) {
+		if ( in_array( ItemData::FIELD_TYPE, $fields ) ) {
 			$itemData->setType( $item->getType() );
 		}
-		if ( in_array( GetItemRequest::FIELD_LABELS, $fields ) ) {
+		if ( in_array( ItemData::FIELD_LABELS, $fields ) ) {
 			$itemData->setLabels( $item->getLabels() );
 		}
-		if ( in_array( GetItemRequest::FIELD_DESCRIPTIONS, $fields ) ) {
+		if ( in_array( ItemData::FIELD_DESCRIPTIONS, $fields ) ) {
 			$itemData->setDescriptions( $item->getDescriptions() );
 		}
-		if ( in_array( GetItemRequest::FIELD_ALIASES, $fields ) ) {
+		if ( in_array( ItemData::FIELD_ALIASES, $fields ) ) {
 			$itemData->setAliases( $item->getAliasGroups() );
 		}
-		if ( in_array( GetItemRequest::FIELD_STATEMENTS, $fields ) ) {
+		if ( in_array( ItemData::FIELD_STATEMENTS, $fields ) ) {
 			$itemData->setStatements( $item->getStatements() );
 		}
-		if ( in_array( GetItemRequest::FIELD_SITELINKS, $fields ) ) {
+		if ( in_array( ItemData::FIELD_SITELINKS, $fields ) ) {
 			$itemData->setSiteLinks( $item->getSiteLinkList() );
 		}
 
