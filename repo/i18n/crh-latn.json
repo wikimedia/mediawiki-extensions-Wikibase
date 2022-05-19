@@ -1,9 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Don Alessandro"
+			"Don Alessandro",
+			"TayfunEt."
 		]
 	},
 	"wikibase-edit": "deñiştir",
+	"wikibase-add": "qoy",
+	"wikibase-label-empty": "Tanımlanğan etiket yoq",
+	"wikibase-description-empty": "Tanımlanğan tasvir yoq",
+	"wikibase-sitelinks-special": "Başqa saytlar",
+	"wikibase-statementview-rank-normal": "Normal seviye",
 	"special-gotolinkedpage": "Bağlanğan saifege keç"
 }

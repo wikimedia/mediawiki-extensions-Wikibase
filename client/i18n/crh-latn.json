@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Don Alessandro"
+			"Don Alessandro",
+			"TayfunEt."
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} deñiştirilmesi",
 	"wikibase-editlinks": "Bağlantılarnı deñiştir",
 	"wikibase-editlinkstitle": "Başqa tillerge bağlantılarnı deñiştir",
 	"wikibase-linkitem-addlinks": "Bağlantılar qoş",
@@ -29,5 +31,6 @@
 	"wikibase-error-serialize-error": "Malümat serializatsiya etilip olamadı.",
 	"wikibase-error-invalid-entity-id": "Yazılğan ID sistemağa belli degil. Keçerli IDlerden birini qullanıñız.",
 	"unconnectedpages": "Elementlerge bağlanmağan saifeler",
+	"wikibase-otherprojects": "Başqa leyhalarda",
 	"wikibase-sitelinks-link-columnheading": "Bağlanğan saife"
 }
