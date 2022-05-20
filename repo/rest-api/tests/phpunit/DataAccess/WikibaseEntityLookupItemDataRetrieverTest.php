@@ -7,6 +7,8 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
@@ -120,6 +122,105 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 				->setSiteLinks( $item->getSiteLinkList() )
 				->build(),
 		];
+	}
+
+	public function testGetStatement(): void {
+		$itemId = new ItemId( 'Q123' );
+		$statementId = new StatementGuid( $itemId, "c48c32c3-42b5-498f-9586-84608b88747c" );
+
+		$statement = NewStatement::forProperty( 'P123' )
+			->withValue( 'potato' )
+			->withGuid( $statementId )
+			->build();
+		$item = NewItem::withId( $itemId )
+			->andStatement( $statement )
+			->build();
+
+		$entityLookup = $this->createMock( EntityLookup::class );
+		$entityLookup->expects( $this->once() )
+			->method( 'getEntity' )
+			->with( $item->getId() )
+			->willReturn( $item );
+
+		$retriever = new WikibaseEntityLookupItemDataRetriever( $entityLookup );
+
+		$this->assertEquals(
+			$statement,
+			$retriever->getStatement( $statementId )
+		);
+	}
+
+	public function testGivenItemDoesNotExist_getStatementReturnsNull(): void {
+		$itemId = new ItemId( 'Q321' );
+		$statementId = new StatementGuid( $itemId, "c48c32c3-42b5-498f-9586-84608b88747c" );
+
+		$entityLookup = $this->createMock( EntityLookup::class );
+		$entityLookup->expects( $this->once() )
+			->method( 'getEntity' )
+			->with( $itemId )
+			->willReturn( null );
+
+		$retriever = new WikibaseEntityLookupItemDataRetriever( $entityLookup );
+
+		$this->assertNull( $retriever->getStatement( $statementId ) );
+	}
+
+	public function testGivenStatementDoesNotExist_getStatementReturnsNull(): void {
+		$itemId = new ItemId( 'Q123' );
+		$statementId = new StatementGuid( $itemId, "c48c32c3-42b5-498f-9586-84608b88747c" );
+
+		$item = NewItem::withId( $itemId )
+			->build();
+
+		$entityLookup = $this->createMock( EntityLookup::class );
+		$entityLookup->expects( $this->once() )
+			->method( 'getEntity' )
+			->with( $itemId )
+			->willReturn( $item );
+
+		$retriever = new WikibaseEntityLookupItemDataRetriever( $entityLookup );
+
+		$this->assertNull( $retriever->getStatement( $statementId ) );
+	}
+
+	public function testGetStatements(): void {
+		$statement1 = NewStatement::forProperty( 'P123' )
+			->withValue( 'potato' )
+			->build();
+		$statement2 = NewStatement::forProperty( 'P321' )
+			->withValue( 'banana' )
+			->build();
+
+		$item = NewItem::withId( 'Q123' )
+			->andStatement( $statement1 )
+			->andStatement( $statement2 )
+			->build();
+
+		$entityLookup = $this->createMock( EntityLookup::class );
+		$entityLookup->expects( $this->once() )
+			->method( 'getEntity' )
+			->with( $item->getId() )
+			->willReturn( $item );
+
+		$retriever = new WikibaseEntityLookupItemDataRetriever( $entityLookup );
+
+		$this->assertEquals(
+			new StatementList( $statement1, $statement2 ),
+			$retriever->getStatements( $item->getId() )
+		);
+	}
+
+	public function testGivenItemDoesNotExist_getStatementsReturnsNull(): void {
+		$nonexistentItemId = new ItemId( 'Q321' );
+		$entityLookup = $this->createMock( EntityLookup::class );
+		$entityLookup->expects( $this->once() )
+			->method( 'getEntity' )
+			->with( $nonexistentItemId )
+			->willReturn( null );
+
+		$retriever = new WikibaseEntityLookupItemDataRetriever( $entityLookup );
+
+		$this->assertNull( $retriever->getStatements( $nonexistentItemId ) );
 	}
 
 }

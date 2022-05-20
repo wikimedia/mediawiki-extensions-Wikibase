@@ -5,8 +5,6 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
-use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemStatementRetriever;
-use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemStatementsRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
@@ -39,9 +37,7 @@ return [
 	'WbRestApi.GetItemStatement' => function( MediaWikiServices $services ): GetItemStatement {
 		return new GetItemStatement(
 			new GetItemStatementValidator( new StatementIdValidator( new ItemIdParser() ) ),
-			new WikibaseEntityLookupItemStatementRetriever(
-				WikibaseRepo::getEntityLookup( $services )
-			),
+			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			)
@@ -51,9 +47,7 @@ return [
 	'WbRestApi.GetItemStatements' => function( MediaWikiServices $services ): GetItemStatements {
 		return new GetItemStatements(
 			new GetItemStatementsValidator( new ItemIdValidator() ),
-			new WikibaseEntityLookupItemStatementsRetriever(
-				WikibaseRepo::getEntityLookup( $services )
-			),
+			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
