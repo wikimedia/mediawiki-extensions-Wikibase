@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\DataBridge;
 
 use MediaWiki\MediaWikiServices;
-use ResourceLoaderFileModule;
+use MediaWiki\ResourceLoader\FileModule;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Modules\MediaWikiConfigModule;
 
@@ -17,7 +17,7 @@ use Wikibase\Lib\Modules\MediaWikiConfigModule;
 class DataBridgeResourceLoaderModules {
 	public static function initModule() {
 		$clientSettings = WikibaseClient::getSettings();
-		return new ResourceLoaderFileModule(
+		return new FileModule(
 			[
 				'es6' => true,
 				'scripts' => [
@@ -39,7 +39,7 @@ class DataBridgeResourceLoaderModules {
 
 	public static function externalModifiersModule() {
 		$clientSettings = WikibaseClient::getSettings();
-		return new ResourceLoaderFileModule(
+		return new FileModule(
 			[
 				'styles' => [
 					'edit-links.css',
@@ -74,7 +74,7 @@ class DataBridgeResourceLoaderModules {
 
 	public static function appModule() {
 		$clientSettings = WikibaseClient::getSettings();
-		return new ResourceLoaderFileModule(
+		return new FileModule(
 			[
 				'es6' => true,
 				'scripts' => [

@@ -5,11 +5,12 @@ namespace Wikibase\Client\Hooks;
 use Language;
 use MediaWiki\Hook\MagicWordwgVariableIDsHook;
 use MediaWiki\Hook\ParserGetVariableValueSwitchHook;
+// phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
+use MediaWiki\ResourceLoader as RL;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderJqueryMsgModuleMagicWordsHook;
 use Message;
 use Parser;
 use PPFrame;
-use ResourceLoaderContext;
 use Wikibase\Lib\SettingsArray;
 
 /**
@@ -92,12 +93,12 @@ class MagicWordHookHandler implements
 	 * Handler for the ResourceLoaderJqueryMsgModuleMagicWords hook.
 	 * Adds magic word constant(s) for use by jQueryMsg.
 	 *
-	 * @param ResourceLoaderContext $context
+	 * @param RL\Context $context
 	 * @param string[] &$magicWords Associative array mapping all-caps magic
 	 *  words to string values
 	 */
 	public function onResourceLoaderJqueryMsgModuleMagicWords(
-		ResourceLoaderContext $context,
+		RL\Context $context,
 		array &$magicWords
 	): void {
 		$lang = Language::factory( $context->getLanguage() );

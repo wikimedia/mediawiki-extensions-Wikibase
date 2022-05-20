@@ -7,9 +7,9 @@ namespace Wikibase\Lib\Tests\Modules;
 use BagOStuff;
 use HashBagOStuff;
 use HashSiteStore;
+use MediaWiki\ResourceLoader\Context;
 use MediaWikiSite;
 use RawMessage;
-use ResourceLoaderContext;
 use Site;
 use Wikibase\Lib\Modules\SitesModule;
 use Wikibase\Lib\SettingsArray;
@@ -24,8 +24,8 @@ use Wikibase\Lib\SettingsArray;
  */
 class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 
-	private function getContext(): ResourceLoaderContext {
-		$context = $this->getMockBuilder( ResourceLoaderContext::class )
+	private function getContext(): Context {
+		$context = $this->getMockBuilder( Context::class )
 			->disableOriginalConstructor()
 			->getMock();
 

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Tests\Modules;
 
-use ResourceLoaderContext;
-use ResourceLoaderModule;
+// phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
+use MediaWiki\ResourceLoader as RL;
 use Wikibase\Lib\Modules\MediaWikiConfigModule;
 use Wikibase\Lib\Modules\MediaWikiConfigValueProvider;
 
@@ -18,11 +18,11 @@ use Wikibase\Lib\Modules\MediaWikiConfigValueProvider;
 class MediaWikiConfigModuleTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConstructor_returnsResourceLoaderModule() {
-		$this->assertInstanceOf( ResourceLoaderModule::class, $this->newInstance() );
+		$this->assertInstanceOf( RL\Module::class, $this->newInstance() );
 	}
 
 	public function testGetScript_returnsJavaScript() {
-		$context = $this->getMockBuilder( ResourceLoaderContext::class )
+		$context = $this->getMockBuilder( RL\Context::class )
 			->disableOriginalConstructor()
 			->getMock();
 

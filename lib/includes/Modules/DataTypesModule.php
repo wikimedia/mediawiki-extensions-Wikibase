@@ -3,9 +3,9 @@
 namespace Wikibase\Lib\Modules;
 
 use Exception;
-use ResourceLoader;
-use ResourceLoaderContext;
-use ResourceLoaderModule;
+// phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
+use MediaWiki\ResourceLoader as RL;
+use MediaWiki\ResourceLoader\ResourceLoader;
 use Wikibase\Lib\DataType;
 use Wikibase\Lib\DataTypeFactory;
 
@@ -21,7 +21,7 @@ use Wikibase\Lib\DataTypeFactory;
  * @license GPL-2.0-or-later
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
-class DataTypesModule extends ResourceLoaderModule {
+class DataTypesModule extends RL\Module {
 
 	/**
 	 * @var string[]
@@ -135,15 +135,15 @@ class DataTypesModule extends ResourceLoaderModule {
 	/**
 	 * Used to propagate available data type ids to JavaScript.
 	 * Data type ids will be available in 'wbDataTypeIds' config var.
-	 * @see ResourceLoaderModule::getScript
+	 * @see RL\Module::getScript
 	 *
 	 * @since 0.1
 	 *
-	 * @param ResourceLoaderContext $context
+	 * @param RL\Context $context
 	 *
 	 * @return string
 	 */
-	public function getScript( ResourceLoaderContext $context ) {
+	public function getScript( RL\Context $context ) {
 		$configVarName = $this->getConfigVarName();
 		$typesJson = [];
 
@@ -155,13 +155,13 @@ class DataTypesModule extends ResourceLoaderModule {
 	}
 
 	/**
-	 * @see ResourceLoaderModule::getDefinitionSummary
+	 * @see RL\Module::getDefinitionSummary
 	 *
-	 * @param ResourceLoaderContext $context
+	 * @param RL\Context $context
 	 *
 	 * @return array
 	 */
-	public function getDefinitionSummary( ResourceLoaderContext $context ) {
+	public function getDefinitionSummary( RL\Context $context ) {
 		$summary = parent::getDefinitionSummary( $context );
 
 		$summary[] = [

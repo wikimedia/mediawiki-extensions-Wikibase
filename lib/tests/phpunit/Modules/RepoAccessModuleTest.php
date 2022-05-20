@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Modules;
 
-use ResourceLoaderContext;
+use MediaWiki\ResourceLoader\Context;
 use Wikibase\Lib\Modules\RepoAccessModule;
 
 /**
@@ -16,10 +16,10 @@ use Wikibase\Lib\Modules\RepoAccessModule;
 class RepoAccessModuleTest extends \PHPUnit\Framework\TestCase {
 
 	/**
-	 * @return ResourceLoaderContext
+	 * @return Context
 	 */
 	private function getContext() {
-		return $this->getMockBuilder( ResourceLoaderContext::class )
+		return $this->getMockBuilder( Context::class )
 			->disableOriginalConstructor()
 			->getMock();
 	}

@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Modules;
 
-use ResourceLoader;
-use ResourceLoaderContext;
-use ResourceLoaderModule;
+// phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
+use MediaWiki\ResourceLoader as RL;
+use MediaWiki\ResourceLoader\ResourceLoader;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\WikibaseSettings;
 
@@ -17,7 +17,7 @@ use Wikibase\Lib\WikibaseSettings;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class RepoAccessModule extends ResourceLoaderModule {
+class RepoAccessModule extends RL\Module {
 
 	/** @var string[] */
 	protected $targets = [ 'desktop', 'mobile' ];
@@ -25,13 +25,13 @@ class RepoAccessModule extends ResourceLoaderModule {
 	/**
 	 * This one lets the client JavaScript know where it can find
 	 * the API and the article path of the repo
-	 * @see ResourceLoaderModule::getScript
+	 * @see RL\Module::getScript
 	 *
-	 * @param ResourceLoaderContext $context
+	 * @param RL\Context $context
 	 *
 	 * @return string
 	 */
-	public function getScript( ResourceLoaderContext $context ): string {
+	public function getScript( RL\Context $context ): string {
 		global $wgServer, $wgScriptPath, $wgArticlePath;
 
 		if ( WikibaseSettings::isClientEnabled() ) {
