@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Maintenance;
 
 use DataValues\StringValue;
 use MediaWikiIntegrationTestCase;
+use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -32,6 +33,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Maintenance\DumpJson;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -118,7 +120,7 @@ class DumpJsonTest extends MediaWikiIntegrationTestCase {
 		];
 
 		foreach ( $testEntities as $testEntity ) {
-			$mockRepo->putEntity( $testEntity );
+			$mockRepo->putEntity( $testEntity, 0, '20201111070707' );
 			$mockEntityIdPager->addEntityId( $testEntity->getId() );
 		}
 
@@ -137,7 +139,8 @@ class DumpJsonTest extends MediaWikiIntegrationTestCase {
 			$this->getMockPropertyDataTypeLookup(),
 			$mockRepo,
 			WikibaseRepo::getCompactEntitySerializer(),
-			WikibaseRepo::getEntityIdParser()
+			WikibaseRepo::getEntityIdParser(),
+			$this->getMockEntityTitleStoreLookup()
 		);
 
 		return $dumpScript;
@@ -156,6 +159,14 @@ class DumpJsonTest extends MediaWikiIntegrationTestCase {
 				],
 				__DIR__ . '/../data/maintenance/dumpJson-limit2-log.txt',
 				__DIR__ . '/../data/maintenance/dumpJson-limit2-out.txt',
+			],
+			'dump with limit 2 and page metadata' => [
+				[
+					'limit' => 2,
+					'page-metadata' => true,
+				],
+				__DIR__ . '/../data/maintenance/dumpJson-limit2-pagemetadata-log.txt',
+				__DIR__ . '/../data/maintenance/dumpJson-limit2-pagemetadata-out.txt',
 			]
 		];
 	}
@@ -200,6 +211,34 @@ class DumpJsonTest extends MediaWikiIntegrationTestCase {
 				return 'DtIdFor_' . $id->getSerialization();
 			} );
 		return $mockDataTypeLookup;
+	}
+
+	/**
+	 * @return EntityTitleStoreLookup
+	 */
+	private function getMockEntityTitleStoreLookup() {
+		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
+		$entityTitleStoreLookup->method( 'getTitleForId' )
+			->willReturn( $this->getMockTitle() );
+
+		return $entityTitleStoreLookup;
+	}
+
+	/**
+	 * @return Title
+	 */
+	public function getMockTitle() {
+		$mock = $this->getMockBuilder( Title::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->method( 'getArticleID' )
+			->willReturn( 42 );
+		$mock->method( 'getNamespace' )
+			->willReturn( 0 );
+		$mock->method( 'getPrefixedText' )
+			->willReturn( 'Prefixed:Title' );
+
+		return $mock;
 	}
 
 	private function fixLineEndings( $string ) {

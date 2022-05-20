@@ -1,0 +1,4 @@
+[
+{"type":"item","id":"Q1","labels":{},"descriptions":{},"aliases":{},"claims":{},"sitelinks":{},"pageid":42,"ns":0,"title":"Prefixed:Title","lastrevid":1,"modified":"2020-11-11T07:07:07Z"},
+{"type":"property","datatype":"string","id":"P1","labels":{},"descriptions":{},"aliases":{},"claims":{},"pageid":42,"ns":0,"title":"Prefixed:Title","lastrevid":2,"modified":"2020-11-11T07:07:07Z"}
+]

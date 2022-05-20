@@ -10,6 +10,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Dumpers\DumpGenerator;
 use Wikibase\Repo\Dumpers\JsonDumpGenerator;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -26,6 +27,11 @@ class DumpJson extends DumpEntities {
 	 * @var EntityRevisionLookup
 	 */
 	private $entityRevisionLookup;
+
+	/**
+	 * @var EntityTitleStoreLookup
+	 */
+	private $entityTitleStoreLookup;
 
 	/**
 	 * @var Serializer
@@ -62,6 +68,12 @@ class DumpJson extends DumpEntities {
 			false,
 			false
 		);
+		$this->addOption(
+			'page-metadata',
+			'Entities should include page metadata.',
+			false,
+			false
+		);
 	}
 
 	public function setServices(
@@ -71,7 +83,9 @@ class DumpJson extends DumpEntities {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityRevisionLookup $entityRevisionLookup,
 		Serializer $entitySerializer,
-		EntityIdParser $entityIdParser
+		EntityIdParser $entityIdParser,
+		// Required only if addPageMetadata is set.
+		EntityTitleStoreLookup $entityTitleStoreLookup = null
 	) {
 		parent::setDumpEntitiesServices(
 			$sqlEntityIdPagerFactory,
@@ -83,6 +97,7 @@ class DumpJson extends DumpEntities {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entitySerializer = $entitySerializer;
 		$this->entityIdParser = $entityIdParser;
+		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
 		$this->hasHadServicesSet = true;
 	}
 
@@ -108,7 +123,8 @@ class DumpJson extends DumpEntities {
 				WikibaseRepo::getPropertyDataTypeLookup(),
 				$revisionLookup,
 				WikibaseRepo::getCompactEntitySerializer( $mwServices ),
-				WikibaseRepo::getEntityIdParser( $mwServices )
+				WikibaseRepo::getEntityIdParser( $mwServices ),
+				WikibaseRepo::getEntityTitleStoreLookup( $mwServices )
 			);
 		}
 		parent::execute();
@@ -126,10 +142,12 @@ class DumpJson extends DumpEntities {
 			$this->entitySerializer,
 			$this->entityPrefetcher,
 			$this->propertyDatatypeLookup,
-			$this->entityIdParser
+			$this->entityIdParser,
+			$this->entityTitleStoreLookup
 		);
 
 		$dumper->setUseSnippets( (bool)$this->getOption( 'snippet', false ) );
+		$dumper->setAddPageMetadata( (bool)$this->getOption( 'page-metadata', false ) );
 		return $dumper;
 	}
 
