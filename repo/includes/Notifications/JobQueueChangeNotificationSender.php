@@ -65,13 +65,8 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 			return; // nothing to do
 		}
 
-		if ( isset( $this->wikiDBNames[$siteID] ) ) {
-			$wikiDB = $this->wikiDBNames[$siteID];
-		} else {
-			$wikiDB = $siteID;
-		}
-
-		$qgroup = call_user_func( $this->jobQueueGroupFactory, $wikiDB );
+		$wikiDB = $this->wikiDBNames[$siteID] ?? $siteID;
+		$qgroup = ( $this->jobQueueGroupFactory )( $wikiDB );
 		$chunks = array_chunk( $changes, $this->batchSize );
 
 		$jobs = [];

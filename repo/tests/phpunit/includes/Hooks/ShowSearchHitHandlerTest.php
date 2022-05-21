@@ -154,7 +154,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		return new ShowSearchHitHandler(
 			$this->getEntityContentFactory(),
 			$this->getEntityIdLookup(),
-			isset( $lookup ) ? $lookup : $this->getEntityLookup( $entities ),
+			$lookup ?? $this->getEntityLookup( $entities ),
 			$this->getFallbackChainFactory( $fallbackChain )
 		);
 	}

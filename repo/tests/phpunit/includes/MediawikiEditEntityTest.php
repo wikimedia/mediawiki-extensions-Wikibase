@@ -658,14 +658,10 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			$label = $e[ 'label' ];
 			$expectedOK = $e[ 'ok' ];
 
-			if ( isset( $items[$name] ) ) {
-				// re-use item
-				$item = $items[$name];
-			} else {
-				// create item
-				$item = new Item();
-				$items[$name] = $item;
+			if ( !isset( $items[$name] ) ) {
+				$items[$name] = new Item();
 			}
+			$item = $items[$name];
 
 			$item->setLabel( 'en', $label );
 

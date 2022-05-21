@@ -356,11 +356,7 @@ class EntityUsageTable {
 				continue;
 			}
 
-			if ( isset( $usagesPerPage[$pageId] ) ) {
-				$pageEntityUsages = $usagesPerPage[$pageId];
-			} else {
-				$pageEntityUsages = new PageEntityUsages( $pageId );
-			}
+			$pageEntityUsages = $usagesPerPage[$pageId] ?? new PageEntityUsages( $pageId );
 
 			$entityId = $this->idParser->parse( $row->eu_entity_id );
 			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $row->eu_aspect );
