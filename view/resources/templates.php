@@ -131,24 +131,18 @@ HTML;
 </div>
 HTML;
 
+	// T308991: Avoid newlines and other whitespace characters between the elements
+	// because they get copied into the clipboard on a selection by a triple click.
 	$templates['wikibase-labelview'] =
 <<<HTML
-<div class="wikibase-labelview $1" dir="$4" lang="$5">
-	<div class="wikibase-labelview-container">
-		<span class="wikibase-labelview-text">$2</span>
-		<!-- wikibase-toolbar -->$3
-	</div>
-</div>
+<div class="wikibase-labelview $1" dir="$4" lang="$5"><div class="wikibase-labelview-container"><span class="wikibase-labelview-text">$2</span><!-- wikibase-toolbar -->$3</div></div>
 HTML;
 
+	// T308991: Avoid newlines and other whitespace characters between the elements
+	// because they get copied into the clipboard on a selection by a triple click.
 	$templates['wikibase-descriptionview'] =
 <<<HTML
-<div class="wikibase-descriptionview $1" dir="$4" lang="$5">
-	<div class="wikibase-descriptionview-container">
-		<span class="wikibase-descriptionview-text">$2</span>
-		<!-- wikibase-toolbar -->$3
-	</div>
-</div>
+<div class="wikibase-descriptionview $1" dir="$4" lang="$5"><div class="wikibase-descriptionview-container"><span class="wikibase-descriptionview-text">$2</span><!-- wikibase-toolbar -->$3</div></div>
 HTML;
 
 	$templates['wikibase-aliasesview'] =
