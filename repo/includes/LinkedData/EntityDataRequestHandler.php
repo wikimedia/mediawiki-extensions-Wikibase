@@ -328,7 +328,7 @@ class EntityDataRequestHandler {
 
 	/**
 	 * Applies HTTP content negotiation.
-	 * If the negotiation is successfull, this method will set the appropriate redirect
+	 * If the negotiation is successful, this method will set the appropriate redirect
 	 * in the OutputPage object and return. Otherwise, an HttpError is thrown.
 	 *
 	 * @param WebRequest $request
