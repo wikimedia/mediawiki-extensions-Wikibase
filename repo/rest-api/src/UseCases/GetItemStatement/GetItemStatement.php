@@ -53,6 +53,10 @@ class GetItemStatement {
 			) : $this->newStatementNotFoundError( $statementRequest->getStatementId() );
 		}
 
+		if ( !$itemId->equals( $statementId->getEntityId() ) ) {
+			return $this->newStatementNotFoundError( $statementRequest->getStatementId() );
+		}
+
 		$statement = $this->statementRetriever->getStatement( $statementId );
 		if ( !$statement ) {
 			return $this->newStatementNotFoundError( $statementRequest->getStatementId() );
