@@ -15,9 +15,9 @@ use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementValidator;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 use Wikibase\Repo\Tests\NewStatement;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement
@@ -129,10 +129,12 @@ class GetItemStatementTest extends TestCase {
 
 	private function newUseCase(): GetItemStatement {
 		return new GetItemStatement(
-			new GetItemStatementValidator( new StatementIdValidator( new ItemIdParser() ) ),
+			new GetItemStatementValidator(
+				new StatementIdValidator( new ItemIdParser() ),
+				new ItemIdValidator()
+			),
 			$this->statementRetriever,
-			$this->itemRevisionMetadataRetriever,
-			WikibaseRepo::getBaseDataModelSerializerFactory()->newStatementSerializer()
+			$this->itemRevisionMetadataRetriever
 		);
 	}
 
