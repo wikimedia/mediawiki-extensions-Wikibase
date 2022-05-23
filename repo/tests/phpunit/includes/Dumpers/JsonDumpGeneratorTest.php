@@ -134,7 +134,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 			new NullEntityPrefetcher(),
 			$this->getMockPropertyDataTypeLookup(),
 			$this->newMockPropertyIdParser(),
-			null
+			WikibaseRepo::getEntityTitleStoreLookup()
 		);
 	}
 
@@ -236,7 +236,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 			new NullEntityPrefetcher(),
 			$this->getMockPropertyDataTypeLookup(),
 			$this->newMockPropertyIdParser(),
-			null
+			WikibaseRepo::getEntityTitleStoreLookup()
 		);
 
 		$exceptionHandler = $this->createMock( ExceptionHandler::class );

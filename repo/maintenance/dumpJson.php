@@ -84,8 +84,7 @@ class DumpJson extends DumpEntities {
 		EntityRevisionLookup $entityRevisionLookup,
 		Serializer $entitySerializer,
 		EntityIdParser $entityIdParser,
-		// Required only if addPageMetadata is set.
-		EntityTitleStoreLookup $entityTitleStoreLookup = null
+		EntityTitleStoreLookup $entityTitleStoreLookup
 	) {
 		parent::setDumpEntitiesServices(
 			$sqlEntityIdPagerFactory,
