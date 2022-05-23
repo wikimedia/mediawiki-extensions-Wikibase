@@ -7,6 +7,7 @@
 			"Dnshitobu",
 			"Hidrash",
 			"Masssly",
+			"Musahfm",
 			"Shahadusadik"
 		]
 	},
@@ -15,6 +16,7 @@
 	"wikibase-editlinks": "Malimi soya nim ŋɔ niŋ",
 	"wikibase-editlinkstitle": "Malimi bala din kpɛri tabini soya n niŋ",
 	"wikibase-linkitem-addlinks": "Pahimi soya",
+	"wikibase-linkitem-title": "Za~n gohi ya~y' sh~eli",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Sɔɣimi li",
 	"wikibase-rc-hide-wikidata-show": "Wuhima",
