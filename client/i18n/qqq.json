@@ -71,7 +71,7 @@
 	"wikibase-rc-show-wikidata-pref": "Option in the recent changes section of preferences to show wikibase changes by default in recent changes.",
 	"wikibase-rc-wikibase-edit-letter": "Very short form of \"'''wikidata edit'''\". Used in [[Special:RecentChanges]] and [[Special:Watchlist]].\n\n{{Rc single letters}}",
 	"wikibase-rc-wikibase-edit-legend": "{{notranslate}}\nUsed as legend on [[Special:RecentChanges]] and [[Special:Watchlist]].\n\nRefers to {{msg-mw|Wikibase-rc-wikibase-edit-title}}.",
-	"wikibase-rc-wikibase-edit-title": "Tooltip for {{msg-mw|wikibase-rc-wikibase-edit-letter}}.\n\nSee also:\n* {{msg-mw|Recentchanges-label-newpage}}\n* {{msg-mw|Recentchanges-label-minor}}\n* {{msg-mw|Recentchanges-label-bot}}\n* {{msg-mw|Recentchanges-label-unpatrolled}}\n{{Identical|Edit}}",
+	"wikibase-rc-wikibase-edit-title": "Text for the legend of {{msg-mw|wikibase-rc-wikibase-edit-letter}}.\n\nSee also:\n* {{msg-mw|Recentchanges-label-newpage}}\n* {{msg-mw|Recentchanges-label-minor}}\n* {{msg-mw|Recentchanges-label-bot}}\n* {{msg-mw|Recentchanges-label-unpatrolled}}\n{{Identical|Edit}}",
 	"wikibase-rcfilters-hide-wikibase-label": "Label for \"Wikidata edits\" filter on ChangesList pages (such as RecentChanges).",
 	"wikibase-rcfilters-hide-wikibase-description": "Description for 'Wikidata edits' filter on ChangesList pages (such as RecentChanges)",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Tooltip shown when hovering over a 'Wikidata edits' filter tag, when a ORES filter is also selected.\n* 'Contribution quality' is based on {{msg-mw|Ores-rcfilters-damaging-title}}.\n* 'User intent' is based on {{msg-mw|Ores-rcfilters-goodfaith-title}}.",

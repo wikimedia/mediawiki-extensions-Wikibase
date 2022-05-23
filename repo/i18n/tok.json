@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"שוקו מוקה"
 		]
 	},
 	"wikibase-edit": "o ante",
 	"wikibase-entitytermsforlanguagelistview-language": "toki",
 	"wikibase-content-language-edit-label": "toki:",
+	"wikibase-sitelinks-special": "lipu ante",
 	"wikibase-newentity-language": "toki:"
 }

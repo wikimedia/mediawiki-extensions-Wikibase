@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Tkalyn"
+			"Tkalyn",
+			"Gramo6"
 		]
 	},
-	"wikibase-sitelinks-sitename-columnheading": "Язык",
-	"wikibase-sitelinks-link-columnheading": "Звязана сторінка"
+	"wikibase-sitelinks-wikipedia": "Вікіпедія"
 }
