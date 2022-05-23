@@ -1,0 +1,23 @@
+{
+	"get": {
+		"tags": [
+			"items"
+		],
+		"summary": "Retrieve a single Statement from an Item",
+		"description": "This endpoint is also accessible through `/statements/{statement_id}`",
+		"parameters": [
+			{
+				"$ref": "../../global/parameters.json#/entityId"
+			},
+			{
+				"$ref": "../../global/parameters.json#/statementId"
+			}
+		],
+		"responses": {
+			"200": { "$ref": "../../global/responses.json#/Statement" },
+			"400": { "$ref": "../../global/responses.json#/InvalidInput" },
+			"404": { "$ref": "../../global/responses.json#/NotFound" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
+	}
+}
