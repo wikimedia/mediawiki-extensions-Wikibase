@@ -26,10 +26,8 @@ class FederatedPropertiesErrorTest extends MediaWikiIntegrationTestCase {
 		$e = new FederatedPropertiesError( $languageCode, $item, 'key', $params );
 		$this->assertInstanceOf( \RawMessage::class, $e->msg );
 
-		$this->assertContainsEquals( $e->msg->parse(), [
-			'<div class="mw-message-box-error errorbox mw-message-box">⧼key⧽</div>', // deprecated, will be removed
-			'<div class="mw-message-box-error mw-message-box">⧼key⧽</div>', // use this with assertSame later
-		] );
+		$this->assertSame( '<div class="mw-message-box-error mw-message-box">⧼key⧽</div>',
+			$e->msg->parse() );
 
 		$this->assertStringContainsString(
 			'<span class="wikibase-title-id">(Q1)</span>',
@@ -50,10 +48,8 @@ class FederatedPropertiesErrorTest extends MediaWikiIntegrationTestCase {
 
 		$e = new FederatedPropertiesError( $languageCode, $item, 'key', $params );
 
-		$this->assertContainsEquals( $e->msg->parse(), [
-			'<div class="mw-message-box-error errorbox mw-message-box">⧼key⧽</div>', // deprecated, will be removed
-			'<div class="mw-message-box-error mw-message-box">⧼key⧽</div>', // use this with assertSame later
-		] );
+		$this->assertSame( '<div class="mw-message-box-error mw-message-box">⧼key⧽</div>',
+			$e->msg->parse() );
 
 		$this->assertStringContainsString(
 			'<span class="wikibase-title-label">' . wfMessage( 'wikibase-label-empty' )->parse() . '</span>',
