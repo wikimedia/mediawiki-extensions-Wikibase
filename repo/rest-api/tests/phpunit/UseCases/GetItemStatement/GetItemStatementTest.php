@@ -85,7 +85,7 @@ class GetItemStatementTest extends TestCase {
 		$this->assertSame( ErrorResponse::INVALID_STATEMENT_ID, $response->getCode() );
 	}
 
-	public function testItemNotFound_returnsErrorResponse(): void {
+	public function testItemForStatementIdNotFound_returnsErrorResponse(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 
@@ -102,6 +102,25 @@ class GetItemStatementTest extends TestCase {
 
 		$this->assertInstanceOf( GetItemStatementErrorResponse::class, $itemStatementResponse );
 		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $itemStatementResponse->getCode() );
+	}
+
+	public function testRequestedItemIdNotFound_returnsErrorResponse(): void {
+		$itemId = new ItemId( 'Q123' );
+		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+
+		$this->itemRevisionMetadataRetriever = $this->createMock(
+			ItemRevisionMetadataRetriever::class
+		);
+		$this->itemRevisionMetadataRetriever->expects( $this->once() )
+			->method( 'getLatestRevisionMetadata' )
+			->with( $itemId )
+			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+
+		$itemStatementRequest = new GetItemStatementRequest( $statementId, $itemId->getSerialization() );
+		$itemStatementResponse = $this->newUseCase()->execute( $itemStatementRequest );
+
+		$this->assertInstanceOf( GetItemStatementErrorResponse::class, $itemStatementResponse );
+		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $itemStatementResponse->getCode() );
 	}
 
 	public function testStatementNotFound_returnsErrorResponse(): void {

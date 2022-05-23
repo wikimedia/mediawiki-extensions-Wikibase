@@ -39,20 +39,23 @@ class GetItemStatement {
 
 		$statementIdParser = new StatementGuidParser( new ItemIdParser() );
 		$statementId = $statementIdParser->parse( $statementRequest->getStatementId() );
+		$requestedItemId = $statementRequest->getItemId();
 		/** @var ItemId $itemId */
-		$itemId = $statementId->getEntityId();
+		$itemId = $requestedItemId ? new ItemId( $requestedItemId ) : $statementId->getEntityId();
 		'@phan-var ItemId $itemId';
 
 		$latestRevisionMetadata = $this->revisionMetadataRetriever
 			->getLatestRevisionMetadata( $itemId );
-		$statement = $latestRevisionMetadata->itemExists() ?
-			$this->statementRetriever->getStatement( $statementId ) : null;
+		if ( !$latestRevisionMetadata->itemExists() ) {
+			return $requestedItemId ? new GetItemStatementErrorResponse(
+				ErrorResponse::ITEM_NOT_FOUND,
+				"Could not find an item with the ID: {$itemId}"
+			) : $this->newStatementNotFoundError( $statementRequest->getStatementId() );
+		}
 
+		$statement = $this->statementRetriever->getStatement( $statementId );
 		if ( !$statement ) {
-			return new GetItemStatementErrorResponse(
-				ErrorResponse::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: {$statementRequest->getStatementId()}"
-			);
+			return $this->newStatementNotFoundError( $statementRequest->getStatementId() );
 		}
 
 		return new GetItemStatementSuccessResponse(
@@ -62,4 +65,10 @@ class GetItemStatement {
 		);
 	}
 
+	private function newStatementNotFoundError( string $statementId ): GetItemStatementErrorResponse {
+		return new GetItemStatementErrorResponse(
+			ErrorResponse::STATEMENT_NOT_FOUND,
+			"Could not find a statement with the ID: $statementId"
+		);
+	}
 }
