@@ -36,8 +36,13 @@ return [
 
 	'WbRestApi.GetItemStatement' => function( MediaWikiServices $services ): GetItemStatement {
 		return new GetItemStatement(
-			new GetItemStatementValidator( new StatementIdValidator( new ItemIdParser() ) ),
-			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
+			new GetItemStatementValidator(
+				new StatementIdValidator( new ItemIdParser() ),
+				new ItemIdValidator()
+			),
+			new WikibaseEntityLookupItemDataRetriever(
+				WikibaseRepo::getEntityLookup( $services )
+			),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			)
