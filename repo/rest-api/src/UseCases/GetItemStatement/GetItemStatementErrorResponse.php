@@ -20,6 +20,12 @@ class GetItemStatementErrorResponse extends ErrorResponse {
 					"Not a valid statement ID: {$validationError->getValue()}"
 				);
 
+			case GetItemStatementValidator::SOURCE_ITEM_ID:
+				return new self(
+					ErrorResponse::INVALID_ITEM_ID,
+					"Not a valid item ID: " . $validationError->getValue()
+				);
+
 			default:
 				throw new LogicException( "Unexpected validation error source: $errorSource" );
 		}
