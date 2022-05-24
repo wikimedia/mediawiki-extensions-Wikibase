@@ -1,7 +1,5 @@
 'use strict';
 
-// allow chai expectations
-/* eslint-disable no-unused-expressions */
 const { REST } = require( 'api-testing' );
 const chai = require( 'chai' );
 const { createEntity, createSingleItem, createRedirectForItem } = require( '../helpers/entityHelper' );
