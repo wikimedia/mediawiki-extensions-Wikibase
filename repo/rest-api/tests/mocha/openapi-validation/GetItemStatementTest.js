@@ -1,7 +1,5 @@
 'use strict';
 
-// allow chai expectations
-/* eslint-disable no-unused-expressions */
 const chai = require( 'chai' );
 const { createSingleItem } = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );

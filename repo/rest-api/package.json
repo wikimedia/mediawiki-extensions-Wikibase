@@ -9,7 +9,7 @@
 		"api-testing": "npm-run-all api-testing:*",
 		"lint": "npm-run-all --parallel lint:*",
 		"lint:openapi": "swagger-cli validate specs/openapi.json",
-		"lint:eslint": "eslint .",
+		"lint:eslint": "eslint . --max-warnings 0",
 		"fix": "npm-run-all --parallel fix:*",
 		"fix:eslint": "eslint --fix .",
 		"build": "run-s build:docs build:spec",

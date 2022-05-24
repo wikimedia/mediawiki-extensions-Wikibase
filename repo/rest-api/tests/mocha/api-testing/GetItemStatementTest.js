@@ -129,11 +129,12 @@ describe( 'GET /entities/items/{entity_id}/statements/{statement_id}', () => {
 			assert.equal( response.body.code, 'item-not-found' );
 			assert.include( response.body.message, itemId );
 		} );
-		it.only( 'requested Item ID and Statement ID mismatch', async () => {
+		it( 'requested Item ID and Statement ID mismatch', async () => {
 			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
-			const response = await newGetItemStatementRequestBuilder( requestedItemId, testStatement.id )
-				.assertValidRequest()
-				.makeRequest();
+			const response = await newGetItemStatementRequestBuilder(
+				requestedItemId,
+				testStatement.id
+			).assertValidRequest().makeRequest();
 
 			assert.equal( response.status, 404 );
 			assert.equal( response.body.code, 'statement-not-found' );
