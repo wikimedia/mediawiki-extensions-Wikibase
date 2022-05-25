@@ -1,25 +1,29 @@
 'use strict';
 
-const { REST } = require( 'api-testing' );
 const chai = require( 'chai' );
 const { createEntity, createSingleItem, createRedirectForItem } = require( '../helpers/entityHelper' );
+const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const expect = chai.expect;
-const basePath = 'rest.php/wikibase/v0';
-const rest = new REST( basePath );
+
+function newGetItemStatementsRequestBuilder( itemId ) {
+	return new RequestBuilder()
+		.withRoute( '/entities/items/{entity_id}/statements' )
+		.withPathParam( 'entity_id', itemId );
+}
 
 describe( 'validate GET /entities/items/{id}/statements responses against OpenAPI spec', () => {
 
 	it( '200 OK response is valid for an Item with no statements', async () => {
-		const createEmptyItemResponse = await createEntity( 'item', {} );
-		const response = await rest.get( `/entities/items/${createEmptyItemResponse.entity.id}/statements` );
+		const { entity: { id } } = await createEntity( 'item', {} );
+		const response = await newGetItemStatementsRequestBuilder( id ).makeRequest();
 
 		expect( response.status ).to.equal( 200 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
 	it( '200 OK response is valid for an Item with statements', async () => {
-		const createSingleItemResponse = await createSingleItem();
-		const response = await rest.get( `/entities/items/${createSingleItemResponse.entity.id}/statements` );
+		const { entity: { id } } = await createSingleItem();
+		const response = await newGetItemStatementsRequestBuilder( id ).makeRequest();
 
 		expect( response.status ).to.equal( 200 );
 		expect( response ).to.satisfyApiSpec;
@@ -29,21 +33,21 @@ describe( 'validate GET /entities/items/{id}/statements responses against OpenAP
 		const redirectTargetId = ( await createEntity( 'item', {} ) ).entity.id;
 		const redirectSourceId = await createRedirectForItem( redirectTargetId );
 
-		const response = await rest.get( `/entities/items/${redirectSourceId}/statements` );
+		const response = await newGetItemStatementsRequestBuilder( redirectSourceId ).makeRequest();
 
 		expect( response.status ).to.equal( 308 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
 	it( '400 Bad Request response is valid for an invalid item ID', async () => {
-		const response = await rest.get( '/entities/items/X123/statements' );
+		const response = await newGetItemStatementsRequestBuilder( 'X123' ).makeRequest();
 
 		expect( response.status ).to.equal( 400 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
 	it( '404 Not Found response is valid for a non-existing item', async () => {
-		const response = await rest.get( '/entities/items/Q99999/statements' );
+		const response = await await newGetItemStatementsRequestBuilder( 'Q99999' ).makeRequest();
 
 		expect( response.status ).to.equal( 404 );
 		expect( response ).to.satisfyApiSpec;

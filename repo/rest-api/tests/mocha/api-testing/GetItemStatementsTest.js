@@ -1,13 +1,19 @@
 'use strict';
 
-const { REST, action, assert, clientFactory } = require( 'api-testing' );
+const { action, assert, clientFactory } = require( 'api-testing' );
 const { createEntity, createSingleItem, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
+const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 
 const basePath = 'rest.php/wikibase/v0';
-const rest = new REST( basePath );
 
-describe( 'GET /entities/items/{id}/statements ', () => {
+function newGetItemStatementsRequestBuilder( itemId ) {
+	return new RequestBuilder()
+		.withRoute( '/entities/items/{entity_id}/statements' )
+		.withPathParam( 'entity_id', itemId );
+}
+
+describe( 'GET /entities/items/{id}/statements', () => {
 
 	function makeEtag( ...revisionIds ) {
 		return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
@@ -33,7 +39,9 @@ describe( 'GET /entities/items/{id}/statements ', () => {
 	} );
 
 	it( 'can GET statements of an item with metadata', async () => {
-		const response = await rest.get( `/entities/items/${testItemId}/statements` );
+		const response = await newGetItemStatementsRequestBuilder( testItemId )
+			.assertValidRequest()
+			.makeRequest();
 
 		assert.equal( response.status, 200 );
 		assert.exists( response.body[ testPropertyId ] );
@@ -47,8 +55,9 @@ describe( 'GET /entities/items/{id}/statements ', () => {
 		const createItemResponse = await createEntity( 'item',
 			{ labels: { en: { language: 'en', value: 'item without statements' } } }
 		);
-		testItemId = createItemResponse.entity.id;
-		const response = await rest.get( `/entities/items/${testItemId}/statements` );
+		const response = await newGetItemStatementsRequestBuilder( createItemResponse.entity.id )
+			.assertValidRequest()
+			.makeRequest();
 
 		assert.equal( response.status, 200 );
 		assert.empty( response.body );
@@ -56,7 +65,9 @@ describe( 'GET /entities/items/{id}/statements ', () => {
 
 	it( '400 error - bad request, invalid item ID', async () => {
 		const itemId = 'X123';
-		const response = await rest.get( `/entities/items/${itemId}/statements` );
+		const response = await newGetItemStatementsRequestBuilder( itemId )
+			.assertInvalidRequest()
+			.makeRequest();
 
 		assert.equal( response.status, 400 );
 		assert.header( response, 'Content-Language', 'en' );
@@ -66,7 +77,9 @@ describe( 'GET /entities/items/{id}/statements ', () => {
 
 	it( '404 error - item not found', async () => {
 		const itemId = 'Q999999';
-		const response = await rest.get( `/entities/items/${itemId}/statements` );
+		const response = await newGetItemStatementsRequestBuilder( itemId )
+			.assertValidRequest()
+			.makeRequest();
 
 		assert.equal( response.status, 404 );
 		assert.header( response, 'Content-Language', 'en' );
@@ -78,7 +91,9 @@ describe( 'GET /entities/items/{id}/statements ', () => {
 		const redirectTarget = testItemId;
 		const redirectSource = await createRedirectForItem( redirectTarget );
 
-		const response = await rest.get( `/entities/items/${redirectSource}/statements` );
+		const response = await newGetItemStatementsRequestBuilder( redirectSource )
+			.assertValidRequest()
+			.makeRequest();
 
 		assert.equal( response.status, 308 );
 
@@ -104,11 +119,9 @@ describe( 'GET /entities/items/{id}/statements ', () => {
 			before( requireExtensions( [ 'OAuth' ] ) );
 
 			it( 'responds with an error given an invalid bearer token', async () => {
-				const response = await rest.get(
-					`/entities/items/${testItemId}`,
-					{},
-					{ Authorization: 'Bearer this-is-an-invalid-token' }
-				);
+				const response = await newGetItemStatementsRequestBuilder( testItemId )
+					.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
+					.makeRequest();
 
 				assert.equal( response.status, 403 );
 			} );
