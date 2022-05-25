@@ -1,4 +1,4 @@
-# 2) Fetch revision metadata and entity data separately {#rest_adr_0003}
+# 3) Fetch revision metadata and entity data separately {#rest_adr_0003}
 
 Date: 2022-05-24
 
