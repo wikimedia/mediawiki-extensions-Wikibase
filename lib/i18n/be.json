@@ -16,8 +16,8 @@
 	"wikibase-deletedentity-query": "Выдалены запыт",
 	"wikibase-error-unexpected": "Памылка: $1.",
 	"wikibase-error-unknown": "Адбылася памылка.",
-	"wikibase-error-save-generic": "Падчас спробы захавання адбылася памылка, з-за чаго змены не былі ўнесеныя цалкам.",
-	"wikibase-error-remove-generic": "Падчас спробы выдалення адбылася памылка, з-за чаго змены не былі ўнесеныя цалкам.",
+	"wikibase-error-save-generic": "Не атрымалася захаваць праз памылку.",
+	"wikibase-error-remove-generic": "Не атрымалася выдаліць праз памылку.",
 	"wikibase-error-save-timeout": "Мы маем тэхнічныя праблемы. Калі ласка, паспрабуйце яшчэ раз.",
 	"wikibase-error-remove-timeout": "Мы маем тэхнічныя праблемы. Калі ласка, паспрабуйце яшчэ раз.",
 	"wikibase-error-ui-no-external-page": "Старонка «$2» не знойдзена на сайце «$1».",
@@ -147,7 +147,7 @@
 	"wikibase-property-summary-wbeditentity-create": "Створана новая ўласцівасць",
 	"wikibase-property-summary-wbeditentity-create-property": "Створаная новая Ўласцівасць",
 	"wikibase-property-summary-wbeditentity-update": "Змененая ўласцівасць",
-	"wikibase-property-summary-wbeditentity-override": "Перакрыта існая ўласцівасць",
+	"wikibase-property-summary-wbeditentity-override": "Ачышчаная Ўласцівасць",
 	"wikibase-property-summary-special-create-property": "Створана ўласцівасць [$2] са {{PLURAL:$1|значэннем|значэннямі}}",
 	"wikibase-reference-formatter-snak-retrieved": "Атрыманая $1"
 }
