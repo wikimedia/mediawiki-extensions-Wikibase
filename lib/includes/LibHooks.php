@@ -6,7 +6,7 @@ use ExtensionRegistry;
 use MediaWiki\Hook\ExtensionTypesHook;
 use MediaWiki\Hook\UnitTestsListHook;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
-use ResourceLoader;
+use MediaWiki\ResourceLoader\ResourceLoader;
 
 /**
  * File defining the hook handlers for the WikibaseLib extension.

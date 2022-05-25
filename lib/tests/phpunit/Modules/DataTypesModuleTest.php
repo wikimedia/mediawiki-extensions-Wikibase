@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Modules;
 
 use Exception;
-use ResourceLoaderContext;
+use MediaWiki\ResourceLoader\Context;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Modules\DataTypesModule;
 
@@ -163,10 +163,10 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @return ResourceLoaderContext
+	 * @return Context
 	 */
 	private function getContext() {
-		return $this->getMockBuilder( ResourceLoaderContext::class )
+		return $this->getMockBuilder( Context::class )
 			->disableOriginalConstructor()
 			->getMock();
 	}

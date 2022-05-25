@@ -3,8 +3,8 @@
 namespace Wikibase\View\Module;
 
 use FormatJson;
-use ResourceLoaderContext;
-use ResourceLoaderFileModule;
+// phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
+use MediaWiki\ResourceLoader as RL;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -13,16 +13,16 @@ use Wikibase\View\Template\TemplateFactory;
  * @license GPL-2.0-or-later
  * @author H. Snater <mediawiki@snater.com>
  */
-class TemplateModule extends ResourceLoaderFileModule {
+class TemplateModule extends RL\FileModule {
 
 	/**
-	 * @see ResourceLoaderModule::getScript
+	 * @see RL\Module::getScript
 	 *
-	 * @param ResourceLoaderContext $context
+	 * @param RL\Context $context
 	 *
 	 * @return string
 	 */
-	public function getScript( ResourceLoaderContext $context ) {
+	public function getScript( RL\Context $context ) {
 		// register HTML templates
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$templatesJson = FormatJson::encode( $templateFactory->getTemplates() );
@@ -43,7 +43,7 @@ EOT;
 	}
 
 	/**
-	 * @see ResourceLoaderModule::supportsURLLoading
+	 * @see RL\Module::supportsURLLoading
 	 *
 	 * @return bool
 	 */
@@ -52,13 +52,13 @@ EOT;
 	}
 
 	/**
-	 * @see ResourceLoaderModule::getDefinitionSummary
+	 * @see RL\Module::getDefinitionSummary
 	 *
-	 * @param ResourceLoaderContext $context
+	 * @param RL\Context $context
 	 *
 	 * @return array
 	 */
-	public function getDefinitionSummary( ResourceLoaderContext $context ) {
+	public function getDefinitionSummary( RL\Context $context ) {
 		$summary = parent::getDefinitionSummary( $context );
 		$summary['mtime'] = (string)filemtime( __DIR__ . '/../../resources/templates.php' );
 

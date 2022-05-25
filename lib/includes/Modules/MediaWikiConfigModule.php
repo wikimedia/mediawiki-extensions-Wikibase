@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib\Modules;
 
-use ResourceLoader;
-use ResourceLoaderContext;
-use ResourceLoaderModule;
+// phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
+use MediaWiki\ResourceLoader as RL;
+use MediaWiki\ResourceLoader\ResourceLoader;
 
 /**
  * Generic, reusable ResourceLoader module to set a JavaScript configuration variable via
@@ -13,7 +13,7 @@ use ResourceLoaderModule;
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class MediaWikiConfigModule extends ResourceLoaderModule {
+class MediaWikiConfigModule extends RL\Module {
 
 	/**
 	 * @var string[]
@@ -36,13 +36,13 @@ class MediaWikiConfigModule extends ResourceLoaderModule {
 	}
 
 	/**
-	 * @see ResourceLoaderModule::getScript
+	 * @see RL\Module::getScript
 	 *
-	 * @param ResourceLoaderContext $context
+	 * @param RL\Context $context
 	 *
 	 * @return string JavaScript code
 	 */
-	public function getScript( ResourceLoaderContext $context ) {
+	public function getScript( RL\Context $context ) {
 		/** @var MediaWikiConfigValueProvider $configValueProvider */
 		$configValueProvider = call_user_func( $this->getConfigValueProvider );
 

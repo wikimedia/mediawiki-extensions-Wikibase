@@ -6,11 +6,11 @@ namespace Wikibase\Lib\Modules;
 
 use BagOStuff;
 use InvalidArgumentException;
+// phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
+use MediaWiki\ResourceLoader as RL;
+use MediaWiki\ResourceLoader\ResourceLoader;
 use MediaWikiSite;
 use MessageLocalizer;
-use ResourceLoader;
-use ResourceLoaderContext;
-use ResourceLoaderModule;
 use Site;
 use SiteLookup;
 use Wikibase\Lib\LanguageNameLookup;
@@ -22,7 +22,7 @@ use Wikibase\Lib\SettingsArray;
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class SitesModule extends ResourceLoaderModule {
+class SitesModule extends RL\Module {
 
 	/**
 	 * How many seconds the result of getSiteDetails() is cached.
@@ -70,12 +70,12 @@ class SitesModule extends ResourceLoaderModule {
 	/**
 	 * Used to propagate information about sites to JavaScript.
 	 * Sites infos will be available in 'wbSiteDetails' config var.
-	 * @see ResourceLoaderModule::getScript
+	 * @see RL\Module::getScript
 	 *
-	 * @param ResourceLoaderContext $context
+	 * @param RL\Context $context
 	 * @return string JavaScript Code
 	 */
-	public function getScript( ResourceLoaderContext $context ): string {
+	public function getScript( RL\Context $context ): string {
 		$languageCode = $context->getLanguage();
 		return $this->cache->getWithSetCallback(
 			$this->cache->makeKey( 'wikibase-sites-module', 'script', $languageCode ),
@@ -87,7 +87,7 @@ class SitesModule extends ResourceLoaderModule {
 	}
 
 	public function enableModuleContentVersion(): bool {
-		// Let ResourceLoaderModule::getVersionHash() invoke getScript() and hash that.
+		// Let RL\Module::getVersionHash() invoke getScript() and hash that.
 		return true;
 	}
 

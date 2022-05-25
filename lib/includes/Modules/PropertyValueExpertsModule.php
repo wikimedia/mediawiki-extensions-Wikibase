@@ -2,7 +2,8 @@
 
 namespace Wikibase\Lib\Modules;
 
-use ResourceLoaderContext;
+// phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
+use MediaWiki\ResourceLoader as RL;
 use Wikibase\Lib\DataTypeDefinitions;
 
 /**
@@ -12,7 +13,7 @@ use Wikibase\Lib\DataTypeDefinitions;
  *
  * @license GPL-2.0-or-later
  */
-class PropertyValueExpertsModule extends \ResourceLoaderModule {
+class PropertyValueExpertsModule extends RL\Module {
 
 	/**
 	 * @var DataTypeDefinitions
@@ -23,7 +24,7 @@ class PropertyValueExpertsModule extends \ResourceLoaderModule {
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 	}
 
-	public function getScript( ResourceLoaderContext $context ) {
+	public function getScript( RL\Context $context ) {
 		$expertModuleMap = \Xml::encodeJsVar( $this->dataTypeDefinitions->getExpertModules() );
 
 		$js = <<<JS
@@ -36,7 +37,7 @@ JS;
 		return $js;
 	}
 
-	public function getDependencies( ResourceLoaderContext $context = null ) {
+	public function getDependencies( RL\Context $context = null ) {
 		return array_values( $this->dataTypeDefinitions->getExpertModules() );
 	}
 

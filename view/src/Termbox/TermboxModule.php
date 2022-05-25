@@ -3,12 +3,12 @@
 namespace Wikibase\View\Termbox;
 
 use Exception;
-use ResourceLoaderFileModule;
+use MediaWiki\ResourceLoader as RL;
 
 /**
  * @license GPL-2.0-or-later
  */
-class TermboxModule extends ResourceLoaderFileModule {
+class TermboxModule extends RL\FileModule {
 
 	/** @return string[] */
 	public function getMessages() {
