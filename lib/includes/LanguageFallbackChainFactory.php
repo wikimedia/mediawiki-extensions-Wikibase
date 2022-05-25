@@ -245,7 +245,7 @@ class LanguageFallbackChainFactory {
 	 * @return TermLanguageFallbackChain
 	 */
 	public function newFromUserAndLanguageCode( User $user, $languageCode ) {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Babel' ) || $user->isAnon() ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Babel' ) || !$user->isRegistered() ) {
 			return $this->newFromLanguageCode( $languageCode );
 		}
 

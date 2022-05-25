@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\ParserOutput\PlaceholderExpander;
 
 use InvalidArgumentException;
+use MediaWiki\User\UserIdentity;
 use MediaWiki\User\UserOptionsLookup;
 use MWException;
 use RuntimeException;
-use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
@@ -38,7 +38,7 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	private $templateFactory;
 
 	/**
-	 * @var User
+	 * @var UserIdentity
 	 */
 	private $user;
 
@@ -84,7 +84,7 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 
 	/**
 	 * @param TemplateFactory $templateFactory
-	 * @param User $user the current user
+	 * @param UserIdentity $user the current user
 	 * @param EntityDocument $entity
 	 * @param string[] $termsLanguages
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
@@ -96,7 +96,7 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
-		User $user,
+		UserIdentity $user,
 		EntityDocument $entity,
 		array $termsLanguages,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
@@ -165,7 +165,7 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	 * @return bool If the terms list should be initially collapsed for the current user.
 	 */
 	private function isInitiallyCollapsed() {
-		if ( $this->user->isAnon() ) {
+		if ( !$this->user->isRegistered() ) {
 			$cookieName = $this->cookiePrefix . self::INITIALLY_COLLAPSED_SETTING_NAME;
 			return isset( $_COOKIE[$cookieName] ) && $_COOKIE[$cookieName] === 'false';
 		} else {

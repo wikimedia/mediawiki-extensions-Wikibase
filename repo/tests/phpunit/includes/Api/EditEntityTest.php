@@ -6,8 +6,8 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\Authority;
 use ReadOnlyError;
-use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -516,7 +516,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$userWithInsufficientPermissions );
 	}
 
-	private function createItemUsing( User $user ) {
+	private function createItemUsing( Authority $user ) {
 		$createItemParams = [ 'action' => 'wbeditentity',
 			'new' => 'item',
 			'data' =>
@@ -528,7 +528,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	/**
 	 * @param string $groupName
 	 *
-	 * @return User
+	 * @return Authority
 	 */
 	private function createUserWithGroup( $groupName ) {
 		return $this->getTestUser( [ 'wbeditor', $groupName ] )->getUser();

@@ -297,7 +297,7 @@ class EditEntityAction extends ViewEntityAction {
 			return;
 		}
 
-		if ( $this->getUser()->isAnon() ) {
+		if ( !$this->getUser()->isRegistered() ) {
 			$this->getOutput()->addHTML( Html::rawElement(
 				'p',
 				[ 'class' => 'warning' ],

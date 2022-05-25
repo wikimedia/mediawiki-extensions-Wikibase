@@ -279,7 +279,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	private function setForm( EntityDocument $entity = null ) {
 		$this->getOutput()->addHTML( $this->getCopyrightHTML() );
 
-		if ( $this->getUser()->isAnon() ) {
+		if ( !$this->getUser()->isRegistered() ) {
 			$this->getOutput()->addHTML( Html::rawElement(
 				'p',
 				[ 'class' => 'warning' ],

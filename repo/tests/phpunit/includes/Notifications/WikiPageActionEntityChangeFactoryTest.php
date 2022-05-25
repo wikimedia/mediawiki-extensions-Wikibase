@@ -6,8 +6,8 @@ use CommentStoreComment;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\User\UserIdentity;
 use Title;
-use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Changes\EntityChange;
@@ -176,7 +176,7 @@ class WikiPageActionEntityChangeFactoryTest extends \MediaWikiIntegrationTestCas
 		$this->assertStringEndsWith( $expectedAction, $change->getType() );
 	}
 
-	private function assertHasUserMetaData( User $user, EntityChange $change ) {
+	private function assertHasUserMetaData( UserIdentity $user, EntityChange $change ) {
 		$this->assertSame( $user->getId(), $change->getField( 'user_id' ) );
 
 		$metadata = $change->getMetadata();

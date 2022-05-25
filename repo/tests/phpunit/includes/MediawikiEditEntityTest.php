@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests;
 
 use FauxRequest;
 use InvalidArgumentException;
+use MediaWiki\User\UserIdentity;
 use MediaWikiIntegrationTestCase;
 use ObjectCache;
 use ReflectionMethod;
@@ -503,10 +504,10 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * Forces the group membership of the given user
 	 *
-	 * @param User $user
+	 * @param UserIdentity $user
 	 * @param array $groups
 	 */
-	private function setUserGroups( User $user, array $groups ) {
+	private function setUserGroups( UserIdentity $user, array $groups ) {
 		if ( $user->getId() === 0 ) {
 			$user = User::createNew( $user->getName() );
 		}

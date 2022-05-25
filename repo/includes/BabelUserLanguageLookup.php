@@ -37,7 +37,7 @@ class BabelUserLanguageLookup implements UserLanguageLookup {
 		// Lazy initialisation
 		if ( !isset( $this->babelLanguages[$key] ) ) {
 			// If the extension is installed, grab the languages from the user's Babel box
-			if ( ExtensionRegistry::getInstance()->isLoaded( 'Babel' ) && !$user->isAnon() ) {
+			if ( ExtensionRegistry::getInstance()->isLoaded( 'Babel' ) && $user->isRegistered() ) {
 				$this->babelLanguages[$key] = Babel::getCachedUserLanguages( $user );
 			} else {
 				$this->babelLanguages[$key] = [];
