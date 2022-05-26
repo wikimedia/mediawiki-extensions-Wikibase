@@ -76,6 +76,8 @@ class WikibaseContentLanguages {
 			new MediaWikiContentLanguages( $languageNameUtils ),
 			new StaticContentLanguages(
 				[
+					// FIXME: Until T273627 is fully resolved, languages added here should also be added to
+					// wmgExtraLanguageNames in Wikimedia's mediawiki-config.
 					'agq', // T288335
 					'bag', // T263946
 					'bas', // T263946
