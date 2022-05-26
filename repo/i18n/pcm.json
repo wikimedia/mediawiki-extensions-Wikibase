@@ -6,6 +6,7 @@
 	},
 	"wikibase-edit": "chenj-am",
 	"wikibase-add": "ad",
+	"wikibase-label-empty": "Dem no define eni label",
 	"wikibase-description-empty": "Dem no describe enitin",
 	"wikibase-sitelinks-special": "Other sait-dem",
 	"wikibase-statementview-rank-normal": "Rank wey dey normal"

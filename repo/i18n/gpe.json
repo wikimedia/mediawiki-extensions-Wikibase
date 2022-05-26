@@ -6,5 +6,6 @@
 	},
 	"wikibase-edit": "edit",
 	"wikibase-add": "add",
+	"wikibase-description-empty": "Dem no define any description",
 	"wikibase-sitelinks-special": "Oda sites"
 }
