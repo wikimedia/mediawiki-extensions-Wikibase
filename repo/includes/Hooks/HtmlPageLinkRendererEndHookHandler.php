@@ -7,7 +7,7 @@ use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\Hook\HtmlPageLinkRendererEndHook;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Linker\LinkTarget;
-use MediaWiki\Special\SpecialPageFactory;
+use MediaWiki\SpecialPage\SpecialPageFactory;
 use RequestContext;
 use Title;
 use TitleValue;
