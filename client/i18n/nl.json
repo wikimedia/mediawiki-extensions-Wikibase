@@ -77,7 +77,7 @@
 	"wikibase-error-exceeded-entity-access-limit": "Te veel {{WBREPONAME}}-entiteiten opgevraagd.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Te veel aanroepen naar \"mw.wikibase.getReferencedEntityId\", er {{PLURAL:$2|is|zijn}} maar $2 toegestaan.",
 	"unconnectedpages": "Pagina's die niet gekoppeld zijn aan items",
-	"unconnectedpages-summary": "Deze pagina toont de pagina's die niet gekoppeld zijn aan een item op Wikidata (in een naamruimte die gekoppelde items toestaat). De lijst is op volgorde van pagina ID, zodat de nieuwste pagina's bovenaan in de lijst staan.",
+	"unconnectedpages-summary": "Deze pagina toont de pagina's die niet gekoppeld zijn aan een item op Wikidata (in naamruimten die gekoppelde items toestaan).",
 	"wikibase-unconnectedpages-submit": "Pagina's weergeven",
 	"pageswithbadges": "Pagina's met badges",
 	"pageswithbadges-summary": "Deze pagina toont een lijst van badges (bijv. goed artikel of een uitgelicht artikel). De lijst is aflopend gesorteerd op pagina ID, zodat nieuwere pagina's als eerste in de lijst voorkomen.",
