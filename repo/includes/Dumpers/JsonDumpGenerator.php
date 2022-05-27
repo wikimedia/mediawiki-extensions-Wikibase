@@ -75,7 +75,7 @@ class JsonDumpGenerator extends DumpGenerator {
 	 * @param EntityPrefetcher $entityPrefetcher
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityIdParser $entityIdParser
-	 * @param ?EntityTitleStoreLookup $entityTitleStoreLookup
+	 * @param EntityTitleStoreLookup $entityTitleStoreLookup
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -86,8 +86,7 @@ class JsonDumpGenerator extends DumpGenerator {
 		EntityPrefetcher $entityPrefetcher,
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityIdParser $entityIdParser,
-		// Required only if addPageMetadata is set.
-		EntityTitleStoreLookup $entityTitleStoreLookup = null
+		EntityTitleStoreLookup $entityTitleStoreLookup
 	) {
 		parent::__construct( $out, $entityPrefetcher );
 
@@ -102,9 +101,7 @@ class JsonDumpGenerator extends DumpGenerator {
 			$entityIdParser
 		);
 
-		if ( $this->entityTitleStoreLookup !== null ) {
-			$this->addPageInfo = new AddPageInfo( $this->entityTitleStoreLookup );
-		}
+		$this->addPageInfo = new AddPageInfo( $this->entityTitleStoreLookup );
 	}
 
 	/**
