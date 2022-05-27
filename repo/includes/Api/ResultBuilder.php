@@ -21,6 +21,7 @@ use Wikibase\Lib\Serialization\CallbackFactory;
 use Wikibase\Lib\Serialization\SerializationModifier;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Repo\AddPageInfo;
 use Wikibase\Repo\Dumpers\JsonDataTypeInjector;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -103,6 +104,11 @@ class ResultBuilder {
 	private $entityIdParser;
 
 	/**
+	 * @var AddPageInfo
+	 */
+	private $addPageInfo;
+
+	/**
 	 * @param ApiResult $result
 	 * @param EntityTitleStoreLookup $entityTitleStoreLookup
 	 * @param SerializerFactory $serializerFactory
@@ -140,6 +146,8 @@ class ResultBuilder {
 			$dataTypeLookup,
 			$entityIdParser
 		);
+
+		$this->addPageInfo = new AddPageInfo( $this->entityTitleStoreLookup );
 	}
 
 	/**
@@ -316,7 +324,7 @@ class ResultBuilder {
 		} else {
 			// @phan-suppress-next-line PhanTypeMismatchArgumentInternal False positive
 			if ( $props == 'all' || in_array( 'info', $props ) ) {
-				$record = $this->addPageInfoToRecord( $record, $entityRevision );
+				$record = $this->addPageInfo->add( $record, $entityRevision );
 			}
 			if ( $sourceEntityIdSerialization !== $entityId->getSerialization() ) {
 				$record = $this->addEntityRedirectInfoToRecord( $record, $sourceEntityIdSerialization, $entityId );
@@ -348,16 +356,6 @@ class ResultBuilder {
 	private function addEntityInfoToRecord( array $record, EntityId $entityId ): array {
 		$record['id'] = $entityId->getSerialization();
 		$record['type'] = $entityId->getEntityType();
-		return $record;
-	}
-
-	private function addPageInfoToRecord( array $record, EntityRevision $entityRevision ): array {
-		$title = $this->entityTitleStoreLookup->getTitleForId( $entityRevision->getEntity()->getId() );
-		$record['pageid'] = $title->getArticleID();
-		$record['ns'] = $title->getNamespace();
-		$record['title'] = $title->getPrefixedText();
-		$record['lastrevid'] = $entityRevision->getRevisionId();
-		$record['modified'] = wfTimestamp( TS_ISO_8601, $entityRevision->getTimestamp() );
 		return $record;
 	}
 

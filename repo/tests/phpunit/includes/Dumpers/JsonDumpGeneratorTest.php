@@ -133,7 +133,8 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 			$serializer,
 			new NullEntityPrefetcher(),
 			$this->getMockPropertyDataTypeLookup(),
-			$this->newMockPropertyIdParser()
+			$this->newMockPropertyIdParser(),
+			null
 		);
 	}
 
@@ -234,7 +235,8 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 			$serializer,
 			new NullEntityPrefetcher(),
 			$this->getMockPropertyDataTypeLookup(),
-			$this->newMockPropertyIdParser()
+			$this->newMockPropertyIdParser(),
+			null
 		);
 
 		$exceptionHandler = $this->createMock( ExceptionHandler::class );

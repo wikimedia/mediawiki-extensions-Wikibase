@@ -16,6 +16,8 @@ use Wikibase\Lib\Serialization\SerializationModifier;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\AddPageInfo;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 
 /**
  * JsonDumpGenerator generates an JSON dump of a given set of entities, excluding
@@ -42,14 +44,29 @@ class JsonDumpGenerator extends DumpGenerator {
 	private $entityLookup;
 
 	/**
+	 * @var EntityTitleStoreLookup
+	 */
+	private $entityTitleStoreLookup;
+
+	/**
 	 * @var bool
 	 */
 	private $useSnippets = false;
 
 	/**
+	 * @var bool
+	 */
+	private $addPageMetadata = false;
+
+	/**
 	 * @var JsonDataTypeInjector
 	 */
 	private $dataTypeInjector;
+
+	/**
+	 * @var AddPageInfo
+	 */
+	private $addPageInfo;
 
 	/**
 	 * @param resource $out
@@ -58,6 +75,7 @@ class JsonDumpGenerator extends DumpGenerator {
 	 * @param EntityPrefetcher $entityPrefetcher
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityIdParser $entityIdParser
+	 * @param ?EntityTitleStoreLookup $entityTitleStoreLookup
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -67,12 +85,15 @@ class JsonDumpGenerator extends DumpGenerator {
 		Serializer $entitySerializer,
 		EntityPrefetcher $entityPrefetcher,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityIdParser $entityIdParser
+		EntityIdParser $entityIdParser,
+		// Required only if addPageMetadata is set.
+		EntityTitleStoreLookup $entityTitleStoreLookup = null
 	) {
 		parent::__construct( $out, $entityPrefetcher );
 
 		$this->entitySerializer = $entitySerializer;
 		$this->entityLookup = $lookup;
+		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
 
 		$this->dataTypeInjector = new JsonDataTypeInjector(
 			new SerializationModifier(),
@@ -80,6 +101,10 @@ class JsonDumpGenerator extends DumpGenerator {
 			$dataTypeLookup,
 			$entityIdParser
 		);
+
+		if ( $this->entityTitleStoreLookup !== null ) {
+			$this->addPageInfo = new AddPageInfo( $this->entityTitleStoreLookup );
+		}
 	}
 
 	/**
@@ -146,7 +171,11 @@ class JsonDumpGenerator extends DumpGenerator {
 			}
 		}
 
-		$data['lastrevid'] = $revision->getRevisionId();
+		if ( $this->addPageMetadata ) {
+			$data = $this->addPageInfo->add( $data, $revision );
+		} else {
+			$data['lastrevid'] = $revision->getRevisionId();
+		}
 
 		$json = $this->encode( $data );
 
@@ -176,6 +205,13 @@ class JsonDumpGenerator extends DumpGenerator {
 	 */
 	public function setUseSnippets( $useSnippets ) {
 		$this->useSnippets = (bool)$useSnippets;
+	}
+
+	/**
+	 * @param bool $addPageMetadata Whether to add page metadata to entities
+	 */
+	public function setAddPageMetadata( $addPageMetadata ) {
+		$this->addPageMetadata = (bool)$addPageMetadata;
 	}
 
 	/**
