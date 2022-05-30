@@ -1,7 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Aguve"
+			"Aguve",
+			"Amire80",
+			"Amuzujoe",
+			"Azorbli"
 		]
 	},
 	"tooltip-t-wikibase": "nyatagoe me nu ƒe kadodo",
@@ -9,6 +12,13 @@
 	"wikibase-dataitem": "{{WBREPONAME}} nu",
 	"wikibase-editlinks": " Trɔ kadodoawo",
 	"wikibase-editlinkstitle": "Trɔ gbegbɔgblɔ vovovowo ƒe kadodowo ŋu",
+	"wikibase-linkitem-addlinks": "Tsɔ kadodowo kpe",
+	"wikibase-linkitem-title": "Kadodo siwo kpe axa nu",
+	"wikibase-linkitem-linkpage": "Kadodo siwo kpe axa nu",
+	"wikibase-linkitem-selectlink": "Mi ɖe kuku tia nyatakakadzraɖoƒe kple axa si ne di be yea tsɔ kadodo sia akpe ɖo.",
+	"wikibase-linkitem-input-site": "Gbegbɔgblɔ:",
+	"wikibase-linkitem-input-page": "Axa",
+	"wikibase-rc-hide-wikidata-hide": "Ɣla",
 	"wikibase-rc-hide-wikidata-show": "Nedze",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} tɔtrɔ",
