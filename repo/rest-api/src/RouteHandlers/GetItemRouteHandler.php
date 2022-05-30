@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
-use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
@@ -26,6 +25,8 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class GetItemRouteHandler extends SimpleHandler {
+	use ConditionalRequestsHelper;
+
 	private const ID_PATH_PARAM = 'id';
 	private const FIELDS_QUERY_PARAM = '_fields';
 
@@ -102,19 +103,18 @@ class GetItemRouteHandler extends SimpleHandler {
 	}
 
 	private function newSuccessHttpResponse( GetItemSuccessResponse $useCaseResponse ): Response {
-		$httpResponse = $this->getResponseFactory()->create();
-		$httpResponse->setHeader( 'Content-Type', 'application/json' );
+		$revId = $useCaseResponse->getRevisionId();
 
 		// This performs a *precondition* check post use case execution. Maybe needs to be moved into the use case in other scenarios.
 		// A drawback of doing this check here is that we already fetched and serialized a whole Item object.
-		if ( $this->isNotModified( $useCaseResponse->getRevisionId(), $useCaseResponse->getLastModified() ) ) {
-			$notModifiedResponse = $this->getResponseFactory()->createNotModified();
-			$this->setEtagFromRevId( $notModifiedResponse, $useCaseResponse->getRevisionId() );
-			return $notModifiedResponse;
+		if ( $this->isNotModified( $revId, $useCaseResponse->getLastModified() ) ) {
+			return $this->newNotModifiedResponse( $revId );
 		}
 
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
-		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
+		$this->setEtagFromRevId( $httpResponse, $revId );
 		$httpResponse->setBody( new StringStream( $this->successPresenter->getJson( $useCaseResponse ) ) );
 
 		return $httpResponse;
@@ -174,13 +174,6 @@ class GetItemRouteHandler extends SimpleHandler {
 		if ( $user->isRegistered() ) {
 			$response->setHeader( 'X-Authenticated-User', $user->getName() );
 		}
-	}
-
-	private function isNotModified( int $revId, string $lastModifiedDate ): bool {
-		$headerUtil = new ConditionalHeaderUtil();
-		$headerUtil->setValidators( "\"$revId\"", $lastModifiedDate, true );
-
-		return $headerUtil->checkPreconditions( $this->getRequest() ) === 304;
 	}
 
 }

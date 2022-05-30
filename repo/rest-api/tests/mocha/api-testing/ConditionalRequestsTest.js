@@ -43,6 +43,12 @@ describe( 'Conditional requests', () => {
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( '/entities/items/{entity_id}' )
 				.withPathParam( 'entity_id', itemId )
+		},
+		{
+			route: '/entities/items/{entity_id}/statements',
+			newRequestBuilder: () => new RequestBuilder()
+				.withRoute( '/entities/items/{entity_id}/statements' )
+				.withPathParam( 'entity_id', itemId )
 		}
 	].forEach( ( { route, newRequestBuilder } ) => {
 		describe( `If-None-Match - ${route}`, () => {
