@@ -3,7 +3,10 @@
         "tags": ["statements"],
         "summary": "Retrieve an entity's statements",
         "parameters": [
-            { "$ref": "../../global/parameters.json#/entityId" }
+            { "$ref": "../../global/parameters.json#/entityId" },
+            { "$ref": "../../global/parameters.json#/ifNoneMatch" },
+            { "$ref": "../../global/parameters.json#/ifModifiedSince" },
+            { "$ref": "../../global/parameters.json#/authorization" }
         ],
         "responses": {
             "200": { "$ref": "../../global/responses.json#/Statements" },
