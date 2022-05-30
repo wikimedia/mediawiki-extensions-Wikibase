@@ -28,9 +28,6 @@ describe( 'GET /entities/items/{id} ', () => {
 	function newValidRequestBuilderWithTestItem() {
 		return newGetItemRequestBuilder( testItemId ).assertValidRequest();
 	}
-	function newInvalidRequestBuilderWithTestItem() {
-		return newGetItemRequestBuilder( testItemId ).assertInvalidRequest();
-	}
 
 	function assertValid200Response( response ) {
 		assert.equal( response.status, 200 );
@@ -38,12 +35,6 @@ describe( 'GET /entities/items/{id} ', () => {
 		assert.deepEqual( response.body.aliases, {} ); // expect {}, not []
 		assert.equal( response.header[ 'last-modified' ], testModified );
 		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
-	}
-
-	function assertValid304Response( response ) {
-		assert.equal( response.status, 304 );
-		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
-		assert.equal( response.text, '' );
 	}
 
 	before( async () => {
@@ -108,136 +99,6 @@ describe( 'GET /entities/items/{id} ', () => {
 		} );
 		assert.equal( response.header[ 'last-modified' ], testModified );
 		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
-	} );
-
-	describe( 'If-None-Match', () => {
-		describe( '200 response', () => {
-			it( 'if the current item revision is newer than the ID provided', async () => {
-				const response = await newValidRequestBuilderWithTestItem()
-					.withHeader( 'If-None-Match', makeEtag( testRevisionId - 1 ) )
-					.makeRequest();
-
-				assertValid200Response( response );
-			} );
-
-			it( 'if the current revision is newer than any of the IDs provided', async () => {
-				const response = await newValidRequestBuilderWithTestItem()
-					.withHeader( 'If-None-Match', makeEtag( testRevisionId - 1, testRevisionId - 2 ) )
-					.makeRequest();
-				assertValid200Response( response );
-			} );
-
-			it( 'if the provided ETag is not a valid revision ID', async () => {
-				const response = await newValidRequestBuilderWithTestItem()
-					.withHeader( 'If-None-Match', '"foo"' )
-					.makeRequest();
-				assertValid200Response( response );
-			} );
-
-			it( 'if all the provided ETags are not valid revision IDs', async () => {
-				const response = await newValidRequestBuilderWithTestItem()
-					.withHeader( 'If-None-Match', makeEtag( 'foo', 'bar' ) )
-					.makeRequest();
-				assertValid200Response( response );
-			} );
-
-			it( 'if the current revision is newer than any IDs provided (while others are invalid IDs)',
-				async () => {
-					const response = await newValidRequestBuilderWithTestItem()
-						.withHeader( 'If-None-Match', makeEtag( 'foo', testRevisionId - 1, 'bar' ) )
-						.makeRequest();
-					assertValid200Response( response );
-				}
-			);
-
-			it( 'if the header is invalid', async () => {
-				const response = await newInvalidRequestBuilderWithTestItem()
-					.withHeader( 'If-None-Match', 'not in spec for a If-None-Match header - 200 response' )
-					.makeRequest();
-				assertValid200Response( response );
-			} );
-
-			it( 'If-None-Match takes precedence over If-Modified-Since', async () => {
-				const response = await newValidRequestBuilderWithTestItem()
-					.withHeader( 'If-Modified-Since', testModified ) // this header on its own would return 304
-					.withHeader( 'If-None-Match', makeEtag( testRevisionId - 1 ) )
-					.makeRequest();
-				assertValid200Response( response );
-			} );
-
-		} );
-
-		describe( '304 response', () => {
-			it( 'if the current revision ID is the same as the one provided', async () => {
-				const response = await newValidRequestBuilderWithTestItem()
-					.withHeader( 'If-None-Match', makeEtag( testRevisionId ) )
-					.makeRequest();
-				assertValid304Response( response );
-			} );
-
-			it( 'if the current revision ID is the same as one of the IDs provided', async () => {
-				const response = await newValidRequestBuilderWithTestItem()
-					.withHeader( 'If-None-Match', makeEtag( testRevisionId - 1, testRevisionId ) )
-					.makeRequest();
-				assertValid304Response( response );
-			} );
-
-			it( 'if the current revision ID is the same as one of the IDs provided (while others are invalid IDs)',
-				async () => {
-					const response = await newValidRequestBuilderWithTestItem()
-						.withHeader( 'If-None-Match', makeEtag( 'foo', testRevisionId ) )
-						.makeRequest();
-					assertValid304Response( response );
-				}
-			);
-
-			it( 'if the header is *', async () => {
-				const response = await newValidRequestBuilderWithTestItem()
-					.withHeader( 'If-None-Match', '*' )
-					.makeRequest();
-				assertValid304Response( response );
-			} );
-
-			it( 'If-None-Match takes precedence over If-Modified-Since', async () => {
-				const response = await newValidRequestBuilderWithTestItem()
-					// this header on its own would return 200
-					.withHeader( 'If-Modified-Since', 'Fri, 1 Apr 2022 12:00:00 GMT' )
-					.withHeader( 'If-None-Match', makeEtag( testRevisionId ) )
-					.makeRequest();
-				assertValid304Response( response );
-			} );
-		} );
-	} );
-
-	describe( 'If-Modified-Since', () => {
-		describe( '200 response', () => {
-			it( 'If-Modified-Since header is older than current revision', async () => {
-				const response = await newValidRequestBuilderWithTestItem()
-					.withHeader( 'If-Modified-Since', 'Fri, 1 Apr 2022 12:00:00 GMT' )
-					.makeRequest();
-				assertValid200Response( response );
-			} );
-		} );
-
-		describe( '304 response', () => {
-			it( 'If-Modified-Since header is same as current revision', async () => {
-				const response = await newValidRequestBuilderWithTestItem()
-					.withHeader( 'If-Modified-Since', `${testModified}` )
-					.makeRequest();
-				assertValid304Response( response );
-			} );
-
-			it( 'If-Modified-Since header is after current revision', async () => {
-				const futureDate = new Date(
-					new Date( testModified ).getTime() + 5000
-				).toUTCString();
-				const response = await newValidRequestBuilderWithTestItem()
-					.withHeader( 'If-Modified-Since', futureDate )
-					.makeRequest();
-
-				assertValid304Response( response );
-			} );
-		} );
 	} );
 
 	it( '400 error - bad request, invalid item ID', async () => {
