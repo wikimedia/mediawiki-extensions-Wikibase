@@ -23,12 +23,15 @@ function assertValid200Response( response, revisionId, lastModified ) {
 describe( 'Conditional requests', () => {
 
 	let itemId;
+	let statementId;
 	let latestRevisionId;
 	let lastModifiedDate;
 
 	before( async () => {
 		const createSingleItemResponse = await createSingleItem();
 		itemId = createSingleItemResponse.entity.id;
+		const claims = createSingleItemResponse.entity.claims;
+		statementId = Object.values( claims )[ 0 ][ 0 ].id;
 
 		const getItemMetadata = await action.getAnon().action( 'wbgetentities', {
 			ids: itemId
@@ -49,6 +52,12 @@ describe( 'Conditional requests', () => {
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( '/entities/items/{entity_id}/statements' )
 				.withPathParam( 'entity_id', itemId )
+		},
+		{
+			route: '/statements/{statement_id}',
+			newRequestBuilder: () => new RequestBuilder()
+				.withRoute( '/statements/{statement_id}' )
+				.withPathParam( 'statement_id', statementId )
 		}
 	].forEach( ( { route, newRequestBuilder } ) => {
 		describe( `If-None-Match - ${route}`, () => {
