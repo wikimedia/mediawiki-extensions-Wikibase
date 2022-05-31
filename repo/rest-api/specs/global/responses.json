@@ -122,7 +122,7 @@
 		}
 	},
 	"Statement": {
-		"description": "A single Wikibase Statement",
+		"description": "A single Wikibase Statement. Please note that the value of the `ETag` header field refers to the Item's revision ID.",
 		"headers": {
 			"Last-Modified": {
 				"schema": {

@@ -6,12 +6,11 @@
 		"summary": "Retrieve a single Statement from an Item",
 		"description": "This endpoint is also accessible through `/statements/{statement_id}`",
 		"parameters": [
-			{
-				"$ref": "../../global/parameters.json#/entityId"
-			},
-			{
-				"$ref": "../../global/parameters.json#/statementId"
-			}
+			{ "$ref": "../../global/parameters.json#/entityId" },
+			{ "$ref": "../../global/parameters.json#/statementId" },
+			{ "$ref": "../../global/parameters.json#/ifNoneMatch" },
+			{ "$ref": "../../global/parameters.json#/ifModifiedSince" },
+			{ "$ref": "../../global/parameters.json#/authorization" }
 		],
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Statement" },
