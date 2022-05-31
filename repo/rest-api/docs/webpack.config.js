@@ -3,8 +3,7 @@ const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 const { CleanWebpackPlugin } = require( 'clean-webpack-plugin' );
 const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
 
-const rootPath = path.resolve( __dirname, '..' ); // eslint-disable-line no-undef
-const outputPath = path.resolve( rootPath, 'dist' );
+const outputPath = path.resolve( __dirname, '../../../docs/rest-api' ); // eslint-disable-line no-undef
 
 module.exports = {
 	mode: 'development',

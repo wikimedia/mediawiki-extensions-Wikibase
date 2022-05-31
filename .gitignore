@@ -19,8 +19,6 @@ tests/browser/.bundle/*
 tests/browser/config/config.yml
 .api-testing.config.json
 
-repo/rest-api/dist/
-
 # Doxygen
 docs/php
 docs/*.tmp
@@ -29,6 +27,7 @@ docs/*.tmp
 /docs/tainted-ref-storybook/
 /docs/data-bridge-dist-size/
 /docs/tainted-ref-dist-size/
+/docs/rest-api/
 
 # Editors
 *.kate-swp
