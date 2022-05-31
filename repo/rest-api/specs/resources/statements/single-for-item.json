@@ -13,7 +13,10 @@
 			{ "$ref": "../../global/parameters.json#/authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/Statement" },
+			"200": {
+				"$ref": "../../global/responses.json#/Statement",
+				"description": "A single Wikibase Statement. Please note that the value of the `ETag` header field refers to the Item's revision ID."
+			},
 			"400": { "$ref": "../../global/responses.json#/InvalidInput" },
 			"404": { "$ref": "../../global/responses.json#/NotFound" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
