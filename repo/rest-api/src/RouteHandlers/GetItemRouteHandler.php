@@ -68,7 +68,7 @@ class GetItemRouteHandler extends SimpleHandler {
 		return new self(
 			WbRestApi::getGetItem(),
 			new GetItemJsonPresenter( new ItemDataSerializer(
-				$serializerFactory->newStatementListSerializer(),
+				WbRestApi::getStatementListSerializer(),
 				new SiteLinkListSerializer( $serializerFactory->newSiteLinkSerializer(), true )
 			) ),
 			$errorPresenter,

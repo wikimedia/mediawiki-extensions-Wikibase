@@ -4,8 +4,10 @@ use DataValues\Serializers\DataValueSerializer;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Serializers\SerializerFactory;
+use Wikibase\DataModel\Serializers\StatementListSerializer;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
+use Wikibase\Repo\RestApi\Domain\Serializers\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
@@ -14,6 +16,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
+use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\WikibaseRepo;
 
 /** @phpcs-require-sorted-array */
@@ -57,6 +60,14 @@ return [
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			)
 		);
+	},
+
+	'WbRestApi.StatementListSerializer' => function( MediaWikiServices $services ): StatementListSerializer {
+		return new StatementListSerializer( WbRestApi::getStatementSerializer( $services ), true );
+	},
+
+	'WbRestApi.StatementSerializer' => function( MediaWikiServices $services ): StatementSerializer {
+		return new StatementSerializer( WbRestApi::getBaseDataModelSerializerFactory( $services )->newStatementSerializer() );
 	},
 
 ];

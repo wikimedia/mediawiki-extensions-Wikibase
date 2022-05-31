@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Presentation\Presenters;
 
-use Wikibase\DataModel\Serializers\StatementSerializer;
+use Wikibase\Repo\RestApi\Domain\Serializers\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementSuccessResponse;
 
 /**
@@ -12,9 +12,6 @@ class GetItemStatementJsonPresenter {
 
 	private $serializer;
 
-	/**
-	 * @param StatementSerializer $serializer Should have $useObjectsForMaps (e.g. for qualifiers) set to true.
-	 */
 	public function __construct( StatementSerializer $serializer ) {
 		$this->serializer = $serializer;
 	}

@@ -284,7 +284,15 @@
 				"type": "array",
 				"items": { "$ref": "#/Reference" }
 			}
-		}
+		},
+		"required": [
+			"id",
+			"mainsnak",
+			"rank",
+			"qualifiers",
+			"qualifiers-order",
+			"references"
+		]
 	},
 	"Snak": {
 		"type": "object",
