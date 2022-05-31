@@ -51,6 +51,7 @@
 	"wikibase-newitem-fieldset": "Yeni müddəa yarat",
 	"wikibase-newentity-description": "İzahı:",
 	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] tərəfindən edilmiş $3 versiya bərpa edildi",
+	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|müzakirə]]) tərəfindən edilmiş $3 redaktə geri qaytarıldı",
 	"wikibase-listdatatypes-wikibase-property-head": "Xüsusiyyət",
 	"wikibase-tainted-ref-popper-help-link-title": "Bu məhdudiyyət növünün kömək səhifəsi"
 }

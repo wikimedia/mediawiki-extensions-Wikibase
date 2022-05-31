@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Vickylin77s",
-			"Akamycoco"
+			"Akamycoco",
+			"嚴美鳳"
 		]
 	},
 	"tooltip-t-wikibase": "militing i mapalitingay to a tatiri’en a kamok no pina’angan",
@@ -11,6 +12,7 @@
 	"wikibase-editlinks": "  misinanot tongod",
 	"wikibase-editlinkstitle": "  misinanot to katatongod no caay kalecad a sowal",
 	"wikibase-linkitem-addlinks": "sincng links",
+	"wikibase-linkitem-title": "o sakakitingkiting a pinengnengan.",
 	"wikibase-linkitem-input-page": " o felih",
 	"wikibase-rc-hide-wikidata": "$1 a {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": " himed",
