@@ -15,7 +15,7 @@ These tests can be run via `npm run api-testing`. They require the targeted wiki
 
 ## OpenAPI Specification
 
-REST API specification is provided using OpenAPI specification in `specs` directory.
+REST API specification is provided using OpenAPI specification in `specs` directory. The latest version is published [on doc.wikimedia.org](https://doc.wikimedia.org/Wikibase/master/js/rest-api/).
 
 Specification can "built" (i.e. compiled to a single JSON OpenAPI specs file) and validated using provided npm scripts.
 
@@ -43,7 +43,7 @@ Autodocs can be generated from the API specification using npm `build:docs` scri
 docker run --rm --user $(id -u):$(id -g) -v $PWD:/app -w /app node:16 npm run build:docs
 ```
 
-The autodocs and/or bundled specification OpenAPI files are generated to the `dist` directory.
+The autodocs and/or bundled specification OpenAPI files are generated to the `../../docs/rest-api/` directory.
 
 ## Development
 
@@ -58,7 +58,7 @@ This REST API follows the [Hexagonal Architecture](https://alistair.cockburn.us/
 
 - `docs/`
   - `adr/`: [Architectural Decision Records](https://adr.github.io/)
-- `dist/`: the built OpenAPI specification and swagger documentation
+- `../../docs/rest-api/`: the built OpenAPI specification and swagger documentation
 - `specs/`: source of the OpenAPI specification
 - `src/`
   - `DataAccess/`: implementations of services that bind to persistent storage
