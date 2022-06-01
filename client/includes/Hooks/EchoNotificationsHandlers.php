@@ -141,7 +141,6 @@ class EchoNotificationsHandlers {
 				'echo-subscriptions-web-wikibase-action',
 				true
 			);
-			$user->saveSettings();
 		}
 	}
 
