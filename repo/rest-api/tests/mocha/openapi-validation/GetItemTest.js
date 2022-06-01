@@ -9,9 +9,17 @@ const rest = new REST( basePath );
 
 describe( 'validate GET /entities/items/{id} responses against OpenAPI document', () => {
 
+	let itemId;
+	let latestRevisionId;
+
+	before( async () => {
+		const createItemResponse = await createEntity( 'item', {} );
+		itemId = createItemResponse.entity.id;
+		latestRevisionId = createItemResponse.entity.lastrevid;
+	} );
+
 	it( '200 OK response is valid for an "empty" item', async () => {
-		const createEmptyItemResponse = await createEntity( 'item', {} );
-		const response = await rest.get( `/entities/items/${createEmptyItemResponse.entity.id}` );
+		const response = await rest.get( `/entities/items/${itemId}` );
 
 		expect( response.status ).to.equal( 200 );
 		expect( response ).to.satisfyApiSpec;
@@ -26,8 +34,7 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 	} );
 
 	it( '308 Permanent Redirect response is valid for a redirected item', async () => {
-		const redirectTargetId = ( await createEntity( 'item', {} ) ).entity.id;
-		const redirectSourceId = await createRedirectForItem( redirectTargetId );
+		const redirectSourceId = await createRedirectForItem( itemId );
 
 		const response = await rest.get( `/entities/items/${redirectSourceId}` );
 
@@ -36,11 +43,10 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 	} );
 
 	it( '304 Not Modified response is valid', async () => {
-		const createSingleItemResponse = await createSingleItem();
 		const response = await rest.get(
-			`/entities/items/${createSingleItemResponse.entity.id}`,
+			`/entities/items/${itemId}`,
 			{},
-			{ 'If-None-Match': `"${createSingleItemResponse.entity.lastrevid}"` }
+			{ 'If-None-Match': `"${latestRevisionId}"` }
 		);
 
 		expect( response.status ).to.equal( 304 );
