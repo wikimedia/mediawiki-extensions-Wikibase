@@ -54,6 +54,13 @@ describe( 'Conditional requests', () => {
 				.withPathParam( 'entity_id', itemId )
 		},
 		{
+			route: '/entities/items/{entity_id}/statements/{statement_id}',
+			newRequestBuilder: () => new RequestBuilder()
+				.withRoute( '/entities/items/{entity_id}/statements/{statement_id}' )
+				.withPathParam( 'entity_id', itemId )
+				.withPathParam( 'statement_id', statementId )
+		},
+		{
 			route: '/statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( '/statements/{statement_id}' )
