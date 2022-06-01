@@ -16,11 +16,13 @@ describe( 'validate GET /entities/items/{entity_id}/statements/{statement_id} re
 
 	let itemId;
 	let statementId;
+	let lastRevId;
 
 	before( async () => {
 		const createSingleItemResponse = await createSingleItem();
 		itemId = createSingleItemResponse.entity.id;
 		statementId = Object.values( createSingleItemResponse.entity.claims )[ 0 ][ 0 ].id;
+		lastRevId = createSingleItemResponse.entity.lastrevid;
 	} );
 
 	it( '200 OK response is valid', async () => {
@@ -28,6 +30,15 @@ describe( 'validate GET /entities/items/{entity_id}/statements/{statement_id} re
 			.makeRequest();
 
 		expect( response.status ).to.equal( 200 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
+	it( '304 Not Modified response is valid', async () => {
+		const response = await newGetItemStatementRequestBuilder( itemId, statementId )
+			.withHeader( 'If-None-Match', `"${lastRevId}"` )
+			.makeRequest();
+
+		expect( response.status ).to.equal( 304 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
