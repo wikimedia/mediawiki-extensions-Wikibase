@@ -13,9 +13,17 @@ function newGetItemStatementsRequestBuilder( itemId ) {
 
 describe( 'validate GET /entities/items/{id}/statements responses against OpenAPI spec', () => {
 
+	let itemId;
+	let latestRevisionId;
+
+	before( async () => {
+		const createItemResponse = await createEntity( 'item', {} );
+		itemId = createItemResponse.entity.id;
+		latestRevisionId = createItemResponse.entity.lastrevid;
+	} );
+
 	it( '200 OK response is valid for an Item with no statements', async () => {
-		const { entity: { id } } = await createEntity( 'item', {} );
-		const response = await newGetItemStatementsRequestBuilder( id ).makeRequest();
+		const response = await newGetItemStatementsRequestBuilder( itemId ).makeRequest();
 
 		expect( response.status ).to.equal( 200 );
 		expect( response ).to.satisfyApiSpec;
@@ -30,9 +38,8 @@ describe( 'validate GET /entities/items/{id}/statements responses against OpenAP
 	} );
 
 	it( '304 Not Modified response is valid', async () => {
-		const createItemResponse = await createEntity( 'item', {} );
-		const response = await newGetItemStatementsRequestBuilder( createItemResponse.entity.id )
-			.withHeader( 'If-None-Match', `"${createItemResponse.entity.lastrevid}"` )
+		const response = await newGetItemStatementsRequestBuilder( itemId )
+			.withHeader( 'If-None-Match', `"${latestRevisionId}"` )
 			.makeRequest();
 
 		expect( response.status ).to.equal( 304 );
@@ -40,8 +47,7 @@ describe( 'validate GET /entities/items/{id}/statements responses against OpenAP
 	} );
 
 	it( '308 Permanent Redirect response is valid for a redirected item', async () => {
-		const redirectTargetId = ( await createEntity( 'item', {} ) ).entity.id;
-		const redirectSourceId = await createRedirectForItem( redirectTargetId );
+		const redirectSourceId = await createRedirectForItem( itemId );
 
 		const response = await newGetItemStatementsRequestBuilder( redirectSourceId ).makeRequest();
 
