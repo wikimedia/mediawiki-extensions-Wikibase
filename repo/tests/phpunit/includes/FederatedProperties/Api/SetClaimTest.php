@@ -92,19 +92,33 @@ class SetClaimTest extends FederatedPropertiesApiTestCase {
 
 		$statement->setGuid( ( new GuidGenerator() )->newGuid( $entityId ) );
 
-		$this->mockSourceApiRequests( [ [
+		$this->mockSourceApiRequests( [
 			[
-				'action' => 'wbgetentities',
-				'ids' => $fedPropRemoteId,
-			],
-			[
-				'entities' => [
-					$fedPropRemoteId => [
-						'datatype' => 'string',
-					],
+				[
+					'action' => 'wbgetentities',
+					'ids' => $fedPropRemoteId,
 				],
+				[
+					'entities' => [
+						$fedPropRemoteId => [
+							'datatype' => 'string',
+						],
+					]
+				]
 			],
-		] ] );
+			// The following request is made by the ConfirmEdit extension.
+			[
+				[
+					'action' => 'query',
+					'meta' => 'siteinfo',
+					'siprop' => 'namespaces',
+					'format' => 'json',
+				],
+				[
+					'query' => [ 'namespaces' => [] ]
+				]
+			]
+		] );
 
 		[ $result ] = $this->doApiRequestWithToken( [
 			'action' => 'wbsetclaim',
