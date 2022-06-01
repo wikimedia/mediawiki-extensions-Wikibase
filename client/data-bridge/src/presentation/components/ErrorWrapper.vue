@@ -73,6 +73,7 @@ export default defineComponent( {
 		ErrorSavingAssertUser,
 		ErrorSavingEditConflict,
 	},
+	emits: [ 'reload', 'relaunch' ],
 	computed: {
 		applicationErrors(): ApplicationError[] {
 			return this.rootModule.state.applicationErrors;

@@ -58,6 +58,7 @@ export default defineComponent( {
 		EventEmittingButton,
 		ProcessDialogHeader,
 	},
+	emits: [ 'save', 'close', 'back' ],
 	computed: {
 		title(): string {
 			const termLabel = createApp(

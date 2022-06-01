@@ -30,6 +30,7 @@ export default defineComponent( {
 	name: 'License',
 	mixins: [ StateMixin ],
 	components: { EventEmittingButton },
+	emits: [ 'close' ],
 	computed: {
 		publishOrSave(): string {
 			return this.rootModule.getters.config.usePublish ?

@@ -36,6 +36,7 @@ export default defineComponent( {
 		EventEmittingButton,
 		IconMessageBox,
 	},
+	emits: [ 'reload' ],
 	methods: {
 		reload(): void {
 			/**
