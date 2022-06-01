@@ -29,6 +29,16 @@ describe( 'validate GET /entities/items/{id}/statements responses against OpenAP
 		expect( response ).to.satisfyApiSpec;
 	} );
 
+	it( '304 Not Modified response is valid', async () => {
+		const createItemResponse = await createEntity( 'item', {} );
+		const response = await newGetItemStatementsRequestBuilder( createItemResponse.entity.id )
+			.withHeader( 'If-None-Match', `"${createItemResponse.entity.lastrevid}"` )
+			.makeRequest();
+
+		expect( response.status ).to.equal( 304 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
 	it( '308 Permanent Redirect response is valid for a redirected item', async () => {
 		const redirectTargetId = ( await createEntity( 'item', {} ) ).entity.id;
 		const redirectSourceId = await createRedirectForItem( redirectTargetId );
