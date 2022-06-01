@@ -235,7 +235,10 @@
 						"property": "P106",
 						"snaktype": "value"
 					},
-					"rank": "normal"
+					"rank": "normal",
+					"qualifiers": {},
+					"qualifiers-order": [],
+					"references": []
 				},
 				{
 					"id": "Q42$E13E619F-63EF-4B72-99D9-7A45C7C6AD34",
@@ -253,7 +256,10 @@
 						"property": "P106",
 						"snaktype": "value"
 					},
-					"rank": "normal"
+					"rank": "normal",
+					"qualifiers": {},
+					"qualifiers-order": [],
+					"references": []
 				}
 			]
 		}
