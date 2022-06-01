@@ -14,10 +14,12 @@ function newGetStatementRequestBuilder( statementId ) {
 describe( 'validate GET /statements/${statement_id} responses against OpenAPI spec', () => {
 
 	let statementId;
+	let lastRevId;
 
 	before( async () => {
 		const createSingleItemResponse = await createSingleItem();
 		statementId = Object.values( createSingleItemResponse.entity.claims )[ 0 ][ 0 ].id;
+		lastRevId = createSingleItemResponse.entity.lastrevid;
 	} );
 
 	it( '200 OK response is valid', async () => {
@@ -25,6 +27,15 @@ describe( 'validate GET /statements/${statement_id} responses against OpenAPI sp
 			.makeRequest();
 
 		expect( response.status ).to.equal( 200 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
+	it( '304 Not Modified response is valid', async () => {
+		const response = await newGetStatementRequestBuilder( statementId )
+			.withHeader( 'If-None-Match', `"${lastRevId}"` )
+			.makeRequest();
+
+		expect( response.status ).to.equal( 304 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
