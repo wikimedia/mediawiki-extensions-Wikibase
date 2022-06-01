@@ -220,8 +220,6 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 
 		$this->userOptionsManager->expects( $this->exactly( $times ) )
 			->method( 'setOption' );
-		$user->expects( $this->exactly( $times ) )
-			->method( 'saveSettings' );
 
 		$handlers = new EchoNotificationsHandlers(
 			$this->repoLinker,
