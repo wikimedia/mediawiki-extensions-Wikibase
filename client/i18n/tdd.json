@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"咽頭べさ"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} ᥛᥤᥱᥐᥤᥰ",
+	"wikibase-editlinks": "ᥛᥦᥰᥗᥖᥰᥞᥥᥒᥰᥐᥩᥒᥳ",
+	"wikibase-linkitem-addlinks": "ᥗᥦᥛᥴᥔᥬᥱ ᥞᥥᥒᥰᥐᥩᥒᥳ",
+	"wikibase-linkitem-title": "ᥐᥩᥒᥳᥖᥒᥰ ᥢᥣᥲᥘᥤᥐᥲ",
+	"wikibase-linkitem-linkpage": "ᥐᥩᥒᥳᥖᥒᥰ ᥢᥣᥲᥘᥤᥐᥲ",
+	"wikibase-linkitem-selectlink": "ᥑᥦᥢᥰᥖᥩᥰ ᥘᥫᥐᥲᥙᥢᥴ ᥝᥦᥙᥳᥔᥣᥭᥳ ᥘᥦᥲ ᥢᥣᥲᥘᥤᥐᥲ ᥟᥢᥴᥓᥝᥲᥐᥝᥱ ᥑᥬᥲᥟᥝᥴ ᥢᥣᥲᥘᥤᥐᥲᥢᥭᥳ ᥐᥣᥱᥐᥩᥒᥳᥓᥧᥰᥢᥢᥳ.",
+	"wikibase-linkitem-input-site": "ᥚᥣᥱᥔᥣᥱᥐᥣᥛᥰ:",
+	"wikibase-linkitem-input-page": "ᥢᥣᥲᥘᥤᥐᥲ:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "ᥔᥫᥒᥱ",
+	"wikibase-rc-hide-wikidata-show": "ᥢᥦᥴ",
+	"wikibase-otherprojects": "ᥖᥤᥲᥢᥬᥰᥢᥣᥲᥐᥣᥢᥴᥖᥣᥒᥱᥟᥢᥴ"
+}

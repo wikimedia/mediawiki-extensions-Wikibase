@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Ebenoffen1",
-			"Amire80"
+			"Amire80",
+			"Leonard Nketsia"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} adze",
@@ -15,5 +16,6 @@
 	"wikibase-linkitem-input-page": "Kratafa:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Fa suma",
-	"wikibase-rc-hide-wikidata-show": "Da no edzi"
+	"wikibase-rc-hide-wikidata-show": "Da no edzi",
+	"wikibase-otherprojects": "Dwumadzi afofor mu"
 }
