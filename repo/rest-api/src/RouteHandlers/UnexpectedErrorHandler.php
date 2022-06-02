@@ -4,8 +4,6 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\Rest\Response;
 use Psr\Log\LoggerInterface;
-use Wikibase\Repo\RestApi\Presentation\ErrorResponseToHttpStatus;
-use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
 /**
@@ -13,11 +11,11 @@ use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
  */
 class UnexpectedErrorHandler {
 
-	private $presenter;
+	private $responseFactory;
 	private $logger;
 
-	public function __construct( ErrorJsonPresenter $presenter, LoggerInterface $logger ) {
-		$this->presenter = $presenter;
+	public function __construct( ResponseFactory $responseFactory, LoggerInterface $logger ) {
+		$this->responseFactory = $responseFactory;
 		$this->logger = $logger;
 	}
 
@@ -30,13 +28,9 @@ class UnexpectedErrorHandler {
 		} catch ( \Exception $exception ) {
 			$this->logger->debug( (string)$exception );
 
-			$error = new ErrorResponse( ErrorResponse::UNEXPECTED_ERROR, 'Unexpected error' );
-			$response = new Response( $this->presenter->getJson( $error ) );
-			$response->setStatus( ErrorResponseToHttpStatus::lookup( $error ) );
-			$response->setHeader( 'Content-Type', 'application/json' );
-			$response->setHeader( 'Content-Language', 'en' );
-
-			return $response;
+			return $this->responseFactory->newErrorResponse(
+				new ErrorResponse( ErrorResponse::UNEXPECTED_ERROR, 'Unexpected error' )
+			);
 		}
 	}
 
