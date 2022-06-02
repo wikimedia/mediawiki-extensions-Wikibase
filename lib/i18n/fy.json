@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"PiefPafPier",
 			"Robin van der Vliet",
 			"Robin0van0der0vliet"
 		]
@@ -10,6 +11,6 @@
 	"wikibase-globedetails-longitude": "Lingtegraad",
 	"wikibase-globedetails-latitude": "Breedtegraad",
 	"wikibase-sitelinks-wikipedia": "Wikipedy",
-	"datatypes-type-time": "Tiid",
+	"datatypes-type-time": "Stuit",
 	"datatypes-type-wikibase-property": "Eigenskip"
 }
