@@ -135,6 +135,12 @@
 					"type": "string"
 				},
 				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
 			}
 		},
 		"content": {
@@ -157,6 +163,12 @@
 					"type": "string"
 				},
 				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
 			}
 		},
 		"content": {
