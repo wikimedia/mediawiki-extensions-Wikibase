@@ -9,7 +9,6 @@ use MediaWiki\Rest\StringStream;
 use Wikibase\DataModel\Serializers\SiteLinkListSerializer;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemDataSerializer;
-use Wikibase\Repo\RestApi\Presentation\ErrorResponseToHttpStatus;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
@@ -41,9 +40,9 @@ class GetItemRouteHandler extends SimpleHandler {
 	private $successPresenter;
 
 	/**
-	 * @var ErrorJsonPresenter
+	 * @var ResponseFactory
 	 */
-	private $errorPresenter;
+	private $responseFactory;
 
 	/**
 	 * @var UnexpectedErrorHandler
@@ -53,26 +52,26 @@ class GetItemRouteHandler extends SimpleHandler {
 	public function __construct(
 		GetItem $getItem,
 		GetItemJsonPresenter $presenter,
-		ErrorJsonPresenter $errorPresenter,
+		ResponseFactory $responseFactory,
 		UnexpectedErrorHandler $errorHandler
 	) {
 		$this->getItem = $getItem;
 		$this->successPresenter = $presenter;
-		$this->errorPresenter = $errorPresenter;
+		$this->responseFactory = $responseFactory;
 		$this->errorHandler = $errorHandler;
 	}
 
 	public static function factory(): Handler {
-		$errorPresenter = new ErrorJsonPresenter();
 		$serializerFactory = WbRestApi::getBaseDataModelSerializerFactory();
+		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
 		return new self(
 			WbRestApi::getGetItem(),
 			new GetItemJsonPresenter( new ItemDataSerializer(
 				WbRestApi::getStatementListSerializer(),
 				new SiteLinkListSerializer( $serializerFactory->newSiteLinkSerializer(), true )
 			) ),
-			$errorPresenter,
-			new UnexpectedErrorHandler( $errorPresenter, WikibaseRepo::getLogger() )
+			$responseFactory,
+			new UnexpectedErrorHandler( $responseFactory, WikibaseRepo::getLogger() )
 		);
 	}
 
@@ -92,7 +91,7 @@ class GetItemRouteHandler extends SimpleHandler {
 		} elseif ( $useCaseResponse instanceof ItemRedirectResponse ) {
 			$httpResponse = $this->newRedirectHttpResponse( $useCaseResponse );
 		} elseif ( $useCaseResponse instanceof GetItemErrorResponse ) {
-			$httpResponse = $this->newErrorHttpResponse( $useCaseResponse );
+			$httpResponse = $this->responseFactory->newErrorResponse( $useCaseResponse );
 		} else {
 			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
@@ -130,16 +129,6 @@ class GetItemRouteHandler extends SimpleHandler {
 			)
 		);
 		$httpResponse->setStatus( 308 );
-
-		return $httpResponse;
-	}
-
-	private function newErrorHttpResponse( GetItemErrorResponse $useCaseResponse ): Response {
-		$httpResponse = $this->getResponseFactory()->create();
-		$httpResponse->setHeader( 'Content-Type', 'application/json' );
-		$httpResponse->setHeader( 'Content-Language', 'en' );
-		$httpResponse->setStatus( ErrorResponseToHttpStatus::lookup( $useCaseResponse ) );
-		$httpResponse->setBody( new StringStream( $this->errorPresenter->getJson( $useCaseResponse ) ) );
 
 		return $httpResponse;
 	}

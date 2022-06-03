@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
+use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\UnexpectedErrorHandler;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
@@ -19,7 +20,7 @@ use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 class UnexpectedErrorHandlerTest extends TestCase {
 
 	public function testHandlesError(): void {
-		$errorHandler = new UnexpectedErrorHandler( new ErrorJsonPresenter(), new NullLogger() );
+		$errorHandler = new UnexpectedErrorHandler( new ResponseFactory( new ErrorJsonPresenter() ), new NullLogger() );
 
 		$response = $errorHandler->runWithErrorHandling( function (): void {
 			throw new \RuntimeException();
@@ -36,7 +37,7 @@ class UnexpectedErrorHandlerTest extends TestCase {
 		$expectedArgs = [ 1, 'potato' ];
 		$expectedResponse = [ 'success' => true ];
 
-		$errorHandler = new UnexpectedErrorHandler( new ErrorJsonPresenter(), new NullLogger() );
+		$errorHandler = new UnexpectedErrorHandler( new ResponseFactory( new ErrorJsonPresenter() ), new NullLogger() );
 
 		$response = $errorHandler->runWithErrorHandling( function ( ...$args ) use ( $expectedArgs, $expectedResponse ) {
 			$this->assertSame( $expectedArgs, $args );
@@ -54,7 +55,7 @@ class UnexpectedErrorHandlerTest extends TestCase {
 			->method( 'debug' )
 			->with( (string)$exception );
 
-		$errorHandler = new UnexpectedErrorHandler( new ErrorJsonPresenter(), $logger );
+		$errorHandler = new UnexpectedErrorHandler( new ResponseFactory( new ErrorJsonPresenter() ), $logger );
 
 		$errorHandler->runWithErrorHandling( function () use ( $exception ): void {
 			throw $exception;
