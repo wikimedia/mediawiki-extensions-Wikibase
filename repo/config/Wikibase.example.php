@@ -27,4 +27,5 @@ call_user_func( function() {
 } );
 
 // Tell Wikibase to register these namespaces (later)
+global $wgWBRepoSettings;
 $wgWBRepoSettings['defaultEntityNamespaces'] = true;
