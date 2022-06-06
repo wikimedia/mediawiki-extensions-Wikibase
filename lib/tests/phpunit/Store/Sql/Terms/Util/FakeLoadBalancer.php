@@ -44,7 +44,7 @@ class FakeLoadBalancer extends LoadBalancer {
 	}
 
 	public function getLocalDomainID(): string {
-		return 'localhost';
+		return $this->dbw->getDomainID();
 	}
 
 	public function resolveDomainID( $domain ): string {
