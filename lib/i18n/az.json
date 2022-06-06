@@ -66,5 +66,6 @@
 	"wikibase-entity-summary-wbmergeitems-to": "$3 elementinə birləşdirildi",
 	"wikibase-item-summary-wbcreate-new": "Yeni müddəa yaradıldı",
 	"wikibase-item-summary-wbeditentity": "Yeni müddəa yaradıldı",
-	"wikibase-item-summary-wbeditentity-create": "Yeni müddəa yaradıldı"
+	"wikibase-item-summary-wbeditentity-create": "Yeni müddəa yaradıldı",
+	"wikibase-item-summary-wbeditentity-override": "Element təmizləndi"
 }
