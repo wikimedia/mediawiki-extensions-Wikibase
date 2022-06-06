@@ -42,7 +42,7 @@
 	"apihelp-wbeditentity-example-1": "ایجاد یک آیتم خالی، بازگرداندن ساختار کلی ورودی",
 	"apihelp-wbeditentity-example-2": "ساخت یک آیتم و برچسب برای <var>de</var> و <var>en</var>",
 	"apihelp-wbeditentity-example-3": "یک ویژگی جدید ایجاد کنید که حاوی داده‌های جیسون باشد و ساختار جوهره را تماما نشان دهد",
-	"apihelp-wbeditentity-example-4": "پاک کردن همه اطلاعات از ورودی با شناسه <samp>Q42</samp>",
+	"apihelp-wbeditentity-example-4": "پاک‌کردن همهٔ داده‌ها از هستار با شناسهٔ <samp>Q42</samp>",
 	"apihelp-wbeditentity-example-5": "همه داده‌ها را از جوهره‌ای به شناسه <samp>Q42</samp> پاک کن و یک برچسب <var>en</var> برای آن قرار بده.",
 	"apihelp-wbeditentity-example-6": "پیوندادی برای ویکی قرار می‌دهد و در صورتی که قبلا یکی وجود داشته باشد دوباره روی آن می‌نویسد",
 	"apihelp-wbeditentity-example-7": "توضیحاتی برای nb قرار می‌دهد و در صورتی که قبلا یکی وجود داشته باشد دوباره روی آن می‌نویسد",
