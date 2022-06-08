@@ -16,5 +16,19 @@
 			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
+	},
+	"post": {
+		"tags": [ "statements" ],
+		"summary": "Add a new Statement to an Item",
+		"parameters": [
+			{ "$ref": "../../global/parameters.json#/itemId" }
+		],
+		"requestBody": { "$ref": "../../global/requests.json#/Statement" },
+		"responses": {
+			"201": { "$ref": "../../global/responses.json#/Statement" },
+			"400": { "$ref": "../../global/responses.json#/InvalidNewStatementInput" },
+			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
 	}
 }

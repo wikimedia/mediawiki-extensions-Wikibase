@@ -7,6 +7,11 @@
 	"paths": {
 		"$ref": "./resources/index.json"
 	},
+	"components": {
+		"schemas": {
+			"$ref": "./global/schemas.json"
+		}
+	},
 	"tags": [
 		{
 			"name": "items",

@@ -118,6 +118,31 @@
 			}
 		}
 	},
+	"InvalidNewStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "#/Error" },
+				"examples": {
+					"invalid-item-id": { "$ref": "#/InvalidItemIdExample" },
+					"invalid-edit-tag": { "$ref": "#/InvalidEditTagExample" },
+					"invalid-bot-flag": { "$ref": "#/InvalidBotFlagExample" },
+					"invalid-statement-data": {
+						"value": {
+							"code": "invalid-statement-data",
+							"message": "Invalid statement data provided"
+						}
+					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidStatementInput": {
 		"description": "The request cannot be processed",
 		"content": {
@@ -169,6 +194,18 @@
 		"value": {
 			"code": "invalid-field",
 			"message": "Not a valid field: {field}"
+		}
+	},
+	"InvalidEditTagExample": {
+		"value": {
+			"code": "invalid-edit-tag",
+			"message": "Invalid MediaWiki tag: {tag}"
+		}
+	},
+	"InvalidBotFlagExample": {
+		"value": {
+			"code": "invalid-bot-flag",
+			"message": "Invalid bot flag value: Must be 'true' or 'false'"
 		}
 	},
 	"UnexpectedError": {
