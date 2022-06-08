@@ -1,9 +1,9 @@
 {
 	"get": {
 		"tags": [ "statements" ],
-		"summary": "Retrieve an entity's statements",
+		"summary": "Retrieve statements from an Item",
 		"parameters": [
-			{ "$ref": "../../global/parameters.json#/entityId" },
+			{ "$ref": "../../global/parameters.json#/itemId" },
 			{ "$ref": "../../global/parameters.json#/ifNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/ifModifiedSince" },
 			{ "$ref": "../../global/parameters.json#/authorization" }

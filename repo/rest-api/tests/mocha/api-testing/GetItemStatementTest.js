@@ -9,8 +9,8 @@ const basePath = 'rest.php/wikibase/v0';
 
 function newGetItemStatementRequestBuilder( itemId, statementId ) {
 	return new RequestBuilder()
-		.withRoute( '/entities/items/{entity_id}/statements/{statement_id}' )
-		.withPathParam( 'entity_id', itemId )
+		.withRoute( '/entities/items/{item_id}/statements/{statement_id}' )
+		.withPathParam( 'item_id', itemId )
 		.withPathParam( 'statement_id', statementId );
 }
 
@@ -18,7 +18,7 @@ function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
 }
 
-describe( 'GET /entities/items/{entity_id}/statements/{statement_id}', () => {
+describe( 'GET /entities/items/{item_id}/statements/{statement_id}', () => {
 	let testItemId;
 	let testStatement;
 	let testLastModified;

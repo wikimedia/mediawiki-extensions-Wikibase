@@ -9,8 +9,8 @@ const basePath = 'rest.php/wikibase/v0';
 
 function newGetItemStatementsRequestBuilder( itemId ) {
 	return new RequestBuilder()
-		.withRoute( '/entities/items/{entity_id}/statements' )
-		.withPathParam( 'entity_id', itemId );
+		.withRoute( '/entities/items/{item_id}/statements' )
+		.withPathParam( 'item_id', itemId );
 }
 
 describe( 'GET /entities/items/{id}/statements', () => {

@@ -1,12 +1,12 @@
 {
 	"get": {
 		"tags": [
-			"items"
+			"statements"
 		],
 		"summary": "Retrieve a single Statement from an Item",
 		"description": "This endpoint is also accessible through `/statements/{statement_id}`",
 		"parameters": [
-			{ "$ref": "../../global/parameters.json#/entityId" },
+			{ "$ref": "../../global/parameters.json#/itemId" },
 			{ "$ref": "../../global/parameters.json#/statementId" },
 			{ "$ref": "../../global/parameters.json#/ifNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/ifModifiedSince" },

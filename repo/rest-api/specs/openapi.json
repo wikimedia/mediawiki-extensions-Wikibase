@@ -15,6 +15,14 @@
 				"description": "Wikibase Data Model - Items",
 				"url": "https://www.mediawiki.org/wiki/Wikibase/DataModel#Items"
 			}
+		},
+		{
+			"name": "statements",
+			"description": "Wikibase Statements",
+			"externalDocs": {
+				"description": "Wikibase Data Model - Statements",
+				"url": "https://www.mediawiki.org/wiki/Wikibase/DataModel#Statements"
+			}
 		}
 	]
 }

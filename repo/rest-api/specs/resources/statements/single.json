@@ -3,8 +3,8 @@
 		"tags": [
 			"statements"
 		],
-		"summary": "Retrieve a single Statement from an entity",
-		"description": "This endpoint is also accessible through `/entities/{entity_type}/{entity_id}/statements/{statement_id}`",
+		"summary": "Retrieve a single Statement",
+		"description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}`",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/statementId" },
 			{ "$ref": "../../global/parameters.json#/ifNoneMatch" },

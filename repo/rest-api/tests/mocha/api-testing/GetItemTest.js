@@ -7,8 +7,8 @@ const { action, assert, clientFactory, utils } = require( 'api-testing' );
 
 function newGetItemRequestBuilder( itemId ) {
 	return new RequestBuilder()
-		.withRoute( '/entities/items/{entity_id}' )
-		.withPathParam( 'entity_id', itemId );
+		.withRoute( '/entities/items/{item_id}' )
+		.withPathParam( 'item_id', itemId );
 }
 
 function makeEtag( ...revisionIds ) {
