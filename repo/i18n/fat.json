@@ -7,5 +7,8 @@
 	},
 	"wikibase-edit": "sesa mu",
 	"wikibase-add": "fa ka ho",
-	"wikibase-sitelinks-special": "Saetse binom so"
+	"wikibase-label-empty": "Onnyaa ahyɛnsewdze biara",
+	"wikibase-description-empty": "Onyaa nkyerɛkyerɛmu biara",
+	"wikibase-sitelinks-special": "Saetse binom so",
+	"wikibase-statementview-rank-normal": "Daa daa dzibew"
 }

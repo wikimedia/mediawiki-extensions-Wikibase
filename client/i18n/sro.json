@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"F Samaritani"
+		]
+	},
+	"wikibase-linkitem-input-site": "Lìngua:",
+	"wikibase-linkitem-input-page": "Boxi:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}"
+}
