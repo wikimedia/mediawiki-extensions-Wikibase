@@ -51,16 +51,9 @@ class SnakValidator implements ValueValidator {
 	}
 
 	/**
-	 * Applies validation to the given Claim.
-	 * This is done by validating all snaks contained in the claim, notably:
-	 * the main snak, the qualifiers, and all snaks of all references,
-	 * in case the claim is a Statement.
-	 *
-	 * @param Statement $statement The value to validate
-	 *
-	 * @return Result
+	 * Validates the Statement's main snak, qualifiers, and references.
 	 */
-	public function validateClaimSnaks( Statement $statement ) {
+	public function validateStatementSnaks( Statement $statement ): Result {
 		$snak = $statement->getMainSnak();
 		$result = $this->validate( $snak );
 
