@@ -37,40 +37,92 @@
 			}
 		}
 	},
-	"InvalidInput": {
+	"InvalidItemInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "#/Error" },
 				"examples": {
-					"invalid-item-id": {
-						"value": {
-							"code": "invalid-item-id",
-							"message": "Not a valid item ID: {item_id}"
-						}
-					},
-					"invalid-statement-id": {
-						"value": {
-							"code": "invalid-statement-id",
-							"message": "Not a valid statement ID: {statement_id}"
-						}
-					},
-					"invalid-field": {
-						"value": {
-							"code": "invalid-field",
-							"message": "Not a valid field: {field}"
-						}
-					}
+					"invalid-item-id": { "$ref": "#/InvalidItemIdExample" },
+					"invalid-field": { "$ref": "#/InvalidFieldExample" }
 				}
 			}
 		},
 		"headers": {
 			"Content-Language": {
-				"schema": {
-					"type": "string"
-				},
+				"schema": { "type": "string" },
 				"description": "Language code of the language in which error message is provided"
 			}
+		}
+	},
+	"InvalidStatementListInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "#/Error" },
+				"examples": {
+					"invalid-item-id": { "$ref": "#/InvalidItemIdExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "#/Error" },
+				"examples": {
+					"invalid-statement-id": { "$ref": "#/InvalidStatementIdExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidItemStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "#/Error" },
+				"examples": {
+					"invalid-item-id": { "$ref": "#/InvalidItemIdExample" },
+					"invalid-statement-id": { "$ref": "#/InvalidStatementIdExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidItemIdExample": {
+		"value": {
+			"code": "invalid-item-id",
+			"message": "Not a valid item ID: {item_id}"
+		}
+	},
+	"InvalidStatementIdExample": {
+		"value": {
+			"code": "invalid-statement-id",
+			"message": "Not a valid statement ID: {statement_id}"
+		}
+	},
+	"InvalidFieldExample": {
+		"value": {
+			"code": "invalid-field",
+			"message": "Not a valid field: {field}"
 		}
 	},
 	"UnexpectedError": {
