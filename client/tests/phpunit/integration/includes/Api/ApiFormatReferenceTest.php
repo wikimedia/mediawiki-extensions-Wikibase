@@ -10,6 +10,10 @@ use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\Lib\WikibaseSettings;
 
 /**
+ * Integration tests for wbformatreference,
+ * making full requests against the API with real services.
+ * See also {@link ApiFormatReferenceUnitTest}.
+ *
  * @covers \Wikibase\Client\Api\ApiFormatReference
  *
  * @group Database

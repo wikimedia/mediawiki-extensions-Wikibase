@@ -1,15 +1,15 @@
 <?php
 
-namespace Wikibase\Client\Tests\Unit\Api;
+namespace Wikibase\Client\Tests\Integration\Api;
 
 use ApiMain;
 use ApiUsageException;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use FauxRequest;
+use MediaWikiIntegrationTestCase;
 use Parser;
 use ParserOutput;
-use PHPUnit\Framework\TestCase;
 use Wikibase\Client\Api\ApiFormatReference;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
 use Wikibase\DataModel\Reference;
@@ -17,8 +17,16 @@ use Wikibase\Lib\Formatters\Reference\DataBridgeReferenceFormatter;
 use Wikibase\Lib\Formatters\Reference\ReferenceFormatter;
 
 /**
+ * Unit tests for wbformatreference,
+ * injecting custom services and calling the class directly.
+ * Still ran as an integration test (Database group, {@link MediaWikiIntegrationTestCase}),
+ * because the API may include behavior that requires a database,
+ * including from other extensions (e.g. T310255).
+ * See also {@link ApiFormatReferenceTest}.
+ *
  * @covers \Wikibase\Client\Api\ApiFormatReference
  *
+ * @group Database
  * @group API
  * @group Wikibase
  * @group WikibaseApi
@@ -26,7 +34,7 @@ use Wikibase\Lib\Formatters\Reference\ReferenceFormatter;
  *
  * @license GPL-2.0-or-later
  */
-class ApiFormatReferenceTest extends TestCase {
+class ApiFormatReferenceUnitTest extends MediaWikiIntegrationTestCase {
 
 	private function getApiMain( array $params ): ApiMain {
 		return new ApiMain( new FauxRequest( $params ) );
