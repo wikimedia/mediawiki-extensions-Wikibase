@@ -80,7 +80,8 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 			$searchLanguageCode,
 			$searchEntityType,
 			$searchLimit,
-			$searchStrictLanguage
+			$searchStrictLanguage,
+			null
 		);
 
 		$this->assertSame( $property1TermSearchResult->getDisplayDescription(), $results[0]->getDisplayDescription() );
@@ -133,7 +134,8 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 			$searchLanguageCode,
 			$searchEntityType,
 			$searchLimit,
-			$searchStrictLanguage
+			$searchStrictLanguage,
+			null
 		);
 
 		$this->assertSame( $property1TermSearchResult->getDisplayDescription(), $results[0]->getDisplayDescription() );

@@ -33,7 +33,8 @@ class TypeDispatchingEntitySearchHelper implements EntitySearchHelper {
 		$languageCode,
 		$entityType,
 		$limit,
-		$strictLanguage
+		$strictLanguage,
+		?string $profileContext
 	) {
 		if ( empty( $this->callbacks[$entityType] ) ) {
 			return [];
@@ -44,7 +45,7 @@ class TypeDispatchingEntitySearchHelper implements EntitySearchHelper {
 			throw new \RuntimeException( "Bad helper returned by the factory for $entityType" );
 		}
 		return $helper->getRankedSearchResults( $text, $languageCode, $entityType, $limit,
-			$strictLanguage );
+			$strictLanguage, $profileContext );
 	}
 
 }

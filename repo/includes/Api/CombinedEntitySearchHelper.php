@@ -34,7 +34,8 @@ class CombinedEntitySearchHelper implements EntitySearchHelper {
 		$languageCode,
 		$entityType,
 		$limit,
-		$strictLanguage
+		$strictLanguage,
+		?string $profileContext
 	) {
 		$allSearchResults = [];
 
@@ -44,7 +45,8 @@ class CombinedEntitySearchHelper implements EntitySearchHelper {
 				$languageCode,
 				$entityType,
 				$limit - count( $allSearchResults ),
-				$strictLanguage
+				$strictLanguage,
+				$profileContext
 			);
 			$allSearchResults = $this->mergeSearchResults( $allSearchResults, $newResults, $limit );
 

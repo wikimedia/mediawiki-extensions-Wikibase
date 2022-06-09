@@ -11,7 +11,14 @@ use Wikibase\Repo\Api\EntitySearchHelper;
  */
 class NullEntitySearchHelper implements EntitySearchHelper {
 
-	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit, $strictLanguage ) {
+	public function getRankedSearchResults(
+		$text,
+		$languageCode,
+		$entityType,
+		$limit,
+		$strictLanguage,
+		?string $profileContext
+	) {
 		return [];
 	}
 

@@ -31,8 +31,22 @@ class ConceptUriSearchHelper implements EntitySearchHelper {
 		$this->entitySourceLookup = $entitySourceLookup;
 	}
 
-	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit, $strictLanguage ) {
-		$results = $this->searchHelper->getRankedSearchResults( $text, $languageCode, $entityType, $limit, $strictLanguage );
+	public function getRankedSearchResults(
+		$text,
+		$languageCode,
+		$entityType,
+		$limit,
+		$strictLanguage,
+		?string $profileContext
+	) {
+		$results = $this->searchHelper->getRankedSearchResults(
+			$text,
+			$languageCode,
+			$entityType,
+			$limit,
+			$strictLanguage,
+			$profileContext
+		);
 
 		return array_map( function ( TermSearchResult $searchResult ) {
 			// Do not set the concept URI if it is already set.

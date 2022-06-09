@@ -40,6 +40,7 @@ class SearchEntities extends Maintenance {
 		$this->addOption( 'language', "Language for the search.", true, true );
 		$this->addOption( 'display-language', "Language for the display.", false, true );
 		$this->addOption( 'strict', "Should we use strict language match?", false, true );
+		$this->addOption( 'profile-context', "Profile context for the search context.", false, true );
 		$this->addOption( 'engine', "Which engine to use - e.g. sql, elastic.", false, true );
 		$this->addOption( 'fork', 'Fork multiple processes to run queries from. Defaults to false.',
 			false, true );
@@ -101,7 +102,8 @@ class SearchEntities extends Maintenance {
 			$this->getOption( 'language' ),
 			$this->getOption( 'entity-type' ),
 			$limit,
-			$this->getOption( 'strict', false )
+			$this->getOption( 'strict', false ),
+			$this->getOption( 'profile-context' )
 		);
 		$out = [
 			'query' => $query,

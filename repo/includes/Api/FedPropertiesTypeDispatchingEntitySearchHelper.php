@@ -36,7 +36,8 @@ class FedPropertiesTypeDispatchingEntitySearchHelper implements EntitySearchHelp
 		$languageCode,
 		$entityType,
 		$limit,
-		$strictLanguage
+		$strictLanguage,
+		?string $profileContext
 	) {
 		$helper = ( $entityType === 'property' ) ?
 			$this->federatedPropertiesEntitySearchHelper :
@@ -47,7 +48,8 @@ class FedPropertiesTypeDispatchingEntitySearchHelper implements EntitySearchHelp
 			$languageCode,
 			$entityType,
 			$limit,
-			$strictLanguage
+			$strictLanguage,
+			$profileContext
 		);
 	}
 

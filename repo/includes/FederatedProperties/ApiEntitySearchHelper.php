@@ -64,11 +64,19 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 	 * @param string $entityType
 	 * @param int $limit
 	 * @param bool $strictLanguage
+	 * @param string|null $profileContext
 	 *
 	 * @return TermSearchResult[] Key: string Serialized EntityId
 	 * @throws InvalidArgumentException
 	 */
-	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit, $strictLanguage ) {
+	public function getRankedSearchResults(
+		$text,
+		$languageCode,
+		$entityType,
+		$limit,
+		$strictLanguage,
+		?string $profileContext
+	) {
 		$allResults = [];
 		if ( $entityType !== Property::ENTITY_TYPE ) {
 			throw new InvalidArgumentException( 'Wrong argument passed in. Entity type must be a property' );

@@ -75,10 +75,18 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	 * @param string $entityType
 	 * @param int $limit
 	 * @param bool $strictLanguage
+	 * @param string|null $profileContext
 	 *
 	 * @return TermSearchResult[] Key: string Serialized EntityId
 	 */
-	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit, $strictLanguage ) {
+	public function getRankedSearchResults(
+		$text,
+		$languageCode,
+		$entityType,
+		$limit,
+		$strictLanguage,
+		?string $profileContext
+	) {
 		$allSearchResults = [];
 
 		// If $text is the ID of an existing item (with repository prefix or without), include it in the result.

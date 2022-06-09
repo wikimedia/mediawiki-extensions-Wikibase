@@ -142,7 +142,8 @@ class SearchEntities extends ApiBase {
 				$params['language'],
 				$params['type'],
 				$params['continue'] + $params['limit'] + 1,
-				$params['strictlanguage']
+				$params['strictlanguage'],
+				null
 			);
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );
