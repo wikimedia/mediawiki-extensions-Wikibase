@@ -4,8 +4,8 @@ namespace Wikibase\Client\Tests\Unit\Api;
 
 use ApiMain;
 use Language;
+use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use Title;
 use Wikibase\Client\Api\Description;
 use Wikibase\Client\Store\DescriptionLookup;
@@ -21,7 +21,7 @@ use Wikimedia\TestingAccessWrapper;
  *
  * @license GPL-2.0-or-later
  */
-class DescriptionTest extends TestCase {
+class DescriptionTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var array[] page id => data
