@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hanberke"
+			"Hanberke",
+			"TayfunEt."
 		]
 	},
 	"tooltip-t-wikibase": "Birigen maglumat repozitorisi zadyna bag",
@@ -9,6 +10,8 @@
 	"wikibase-dataitem": "{{WBREPONAME}} zady",
 	"wikibase-editlinks": "Çykgytlary düzet",
 	"wikibase-editlinkstitle": "Dilara baglary düzet",
+	"wikibase-linkitem-input-site": "Dil:",
+	"wikibase-linkitem-input-page": "Sahypa:",
 	"wikibase-rc-hide-wikidata-hide": "Gizle",
 	"wikibase-rc-hide-wikidata-show": "Görkez",
 	"wikibase-rc-wikibase-edit-letter": "M",

@@ -111,7 +111,7 @@
 	"notification-bundle-header-page-connection": "$3 і яшчэ {{PLURAL:$4|$4 старонка|$4 старонкі|$4 старонак|100=99+ іншых старонак}} былі {{GENDER:$2|падлучаныя}} да элементаў {{WBREPONAME}}, дзе можна збіраць дадзеныя, якія маюць дачыненне да тэмаў.",
 	"notification-link-text-view-item": "{{GENDER:$1|Праглядзець}} элемент",
 	"notification-subject-page-connection": "Старонка на сайце {{SITENAME}}, якую вы {{GENDER:$3|стварылі}}, была {{GENDER:$2|далучаная}} да элемента {{WBREPONAME}}",
-	"unresolved-property-category": "Старонкі з недаступнымі уласцівасцямі Вікідадзеных",
+	"unresolved-property-category": "Старонкі з недаступнымі ўласцівасцямі Вікідадзеных",
 	"unresolved-property-category-desc": "Старонка, якая спасылаецца на ўласцівасць Вікідадзеных, што не можа быць знойдзена па ID або подпісу",
 	"connected-redirect-category": "Перасылкі, звязаныя з элементам {{grammar:родны|{{WBREPONAME}}}}",
 	"connected-redirect-category-desc": "Гэтая катэгорыя змяшчае старонкі-перасылкі, якія звязаны з элементам {{grammar:родны|{{WBREPONAME}}}}.",

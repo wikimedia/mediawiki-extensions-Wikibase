@@ -22,7 +22,7 @@
 	"wikibase-comment-remove": "פריט ה{{GRAMMAR:תחילית|{{WBREPONAME}}}} המשויך נמחק. קישורי שפה הוסרו.",
 	"wikibase-comment-linked": "פריט {{WBREPONAME}} קוּשר לדף הזה.",
 	"wikibase-comment-unlink": "הדף הזה נותק מִפריט {{WBREPONAME}}. קישורי השפה הוסרו.",
-	"wikibase-comment-restore": "פריט ה{{GRAMMAR:תחילית|{{WBREPONAME}}}} המשויך שוחזר. קישורי השפה שוחזרו.",
+	"wikibase-comment-restore": "פריט ה{{GRAMMAR:תחילית|{{WBREPONAME}}}} המשויך שוחזר ממחיקה. קישורי השפה שוחזרו.",
 	"wikibase-comment-update": "פריט {{WBREPONAME}} השתנה",
 	"wikibase-comment-sitelink-add": "קישור שפה נוסף: $1",
 	"wikibase-comment-sitelink-change": "קישור השפה שוּנה מ־$1 אל $2",
