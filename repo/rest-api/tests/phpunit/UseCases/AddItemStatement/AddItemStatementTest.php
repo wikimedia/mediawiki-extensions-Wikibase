@@ -3,8 +3,10 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\AddItemStatement;
 
 use PHPUnit\Framework\MockObject\MockObject;
+use ValueValidators\Result;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
@@ -15,6 +17,7 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\Tests\NewItem;
+use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -109,8 +112,14 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function newValidator(): AddItemStatementValidator {
+		$snakValidator = $this->createStub( SnakValidator::class );
+		$snakValidator->method( 'validateStatementSnaks' )->willReturn( Result::newSuccess() );
+
 		return new AddItemStatementValidator(
-			WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer()
+			new SnakValidatorStatementValidator(
+				WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer(),
+				$snakValidator
+			)
 		);
 	}
 

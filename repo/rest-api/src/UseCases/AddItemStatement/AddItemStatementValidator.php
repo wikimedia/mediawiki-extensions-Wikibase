@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\AddItemStatement;
 
-use Wikibase\DataModel\Deserializers\StatementDeserializer;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
@@ -11,22 +11,20 @@ use Wikibase\Repo\RestApi\Validation\ValidationError;
  */
 class AddItemStatementValidator {
 
-	private $statementDeserializer;
-	private $validatedStatement = null;
+	public const SOURCE_STATEMENT = 'statement';
 
-	public function __construct( StatementDeserializer $statementDeserializer ) {
-		$this->statementDeserializer = $statementDeserializer;
+	private $statementValidator;
+
+	public function __construct( StatementValidator $statementValidator ) {
+		$this->statementValidator = $statementValidator;
 	}
 
 	public function validate( AddItemStatementRequest $request ): ?ValidationError {
-		// The StatementDeserializer and setting the validated statement should move into the dedicated StatementValidator
-		// as part of T309843. It's only here now to make the use case test less awkward.
-		$this->validatedStatement = $this->statementDeserializer->deserialize( $request->getStatement() );
-		return null;
+		return $this->statementValidator->validate( $request->getStatement(), self::SOURCE_STATEMENT );
 	}
 
 	public function getValidatedStatement(): ?Statement {
-		return $this->validatedStatement;
+		return $this->statementValidator->getValidatedStatement();
 	}
 
 }
