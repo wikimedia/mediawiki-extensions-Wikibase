@@ -84,58 +84,58 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 			} );
 	}
 
-	public function provideValidateClaimSnaks() {
+	public function provideValidateStatementSnaks() {
 		$p1 = new NumericPropertyId( 'p1' ); // numeric
 		$p2 = new NumericPropertyId( 'p2' ); // alphabetic
 
 		$cases = [];
 
-		$claim = new Statement( new PropertyNoValueSnak( $p1 ) );
-		$cases[] = [ $claim, 'empty claim', true ];
+		$statement = new Statement( new PropertyNoValueSnak( $p1 ) );
+		$cases[] = [ $statement, 'empty statement', true ];
 
-		$claim = new Statement(
+		$statement = new Statement(
 			new PropertyValueSnak( $p1, new StringValue( '12' ) )
 		);
-		$claim->setQualifiers( new SnakList( [
+		$statement->setQualifiers( new SnakList( [
 			new PropertyValueSnak( $p2, new StringValue( 'abc' ) )
 		] ) );
-		$claim->setReferences( new ReferenceList( [
+		$statement->setReferences( new ReferenceList( [
 			new Reference( new SnakList( [
 				new PropertyValueSnak( $p2, new StringValue( 'xyz' ) )
 			] ) )
 		] ) );
-		$cases[] = [ $claim, 'conforming claim', true ];
+		$cases[] = [ $statement, 'conforming statement', true ];
 
-		$brokenClaim = clone $claim;
-		$brokenClaim->setMainSnak(
+		$brokenStatement = clone $statement;
+		$brokenStatement->setMainSnak(
 			new PropertyValueSnak( $p1, new StringValue( 'kittens' ) )
 		);
-		$cases[] = [ $brokenClaim, 'error in main snak', false ];
+		$cases[] = [ $brokenStatement, 'error in main snak', false ];
 
-		$brokenClaim = clone $claim;
-		$brokenClaim->setQualifiers( new SnakList( [
+		$brokenStatement = clone $statement;
+		$brokenStatement->setQualifiers( new SnakList( [
 			new PropertyValueSnak( $p2, new StringValue( '333' ) )
 		] ) );
-		$cases[] = [ $brokenClaim, 'error in qualifier', false ];
+		$cases[] = [ $brokenStatement, 'error in qualifier', false ];
 
-		$brokenClaim = clone $claim;
-		$brokenClaim->setReferences( new ReferenceList( [
+		$brokenStatement = clone $statement;
+		$brokenStatement->setReferences( new ReferenceList( [
 			new Reference( new SnakList( [
 				new PropertyValueSnak( $p1, new StringValue( 'xyz' ) )
 			] ) )
 		] ) );
-		$cases[] = [ $brokenClaim, 'error in reference', false ];
+		$cases[] = [ $brokenStatement, 'error in reference', false ];
 
 		return $cases;
 	}
 
 	/**
-	 * @dataProvider provideValidateClaimSnaks
+	 * @dataProvider provideValidateStatementSnaks
 	 */
-	public function testValidateClaimSnaks( Statement $statement, $description, $expectedValid = true ) {
+	public function testValidateStatementSnaks( Statement $statement, $description, $expectedValid = true ) {
 		$validator = $this->getSnakValidator();
 
-		$result = $validator->validateClaimSnaks( $statement );
+		$result = $validator->validateStatementSnaks( $statement );
 
 		$this->assertEquals( $expectedValid, $result->isValid(), $description );
 	}

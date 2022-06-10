@@ -225,7 +225,7 @@ class ChangeOpStatement extends ChangeOpBase {
 	 * @return Result
 	 */
 	public function validate( EntityDocument $entity ) {
-		return $this->snakValidator->validateClaimSnaks( $this->statement );
+		return $this->snakValidator->validateStatementSnaks( $this->statement );
 	}
 
 }
