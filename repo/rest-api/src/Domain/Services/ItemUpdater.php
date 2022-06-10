@@ -11,6 +11,6 @@ use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
  */
 interface ItemUpdater {
 
-	public function update( Item $item, EditMetadata $editMetadata ): ItemRevision;
+	public function update( Item $item, EditMetadata $editMetadata ): ?ItemRevision;
 
 }
