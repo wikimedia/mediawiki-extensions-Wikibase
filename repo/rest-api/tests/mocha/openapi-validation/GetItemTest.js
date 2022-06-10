@@ -7,8 +7,8 @@ const expect = chai.expect;
 
 function newGetItemRequestBuilder( itemId ) {
 	return new RequestBuilder()
-		.withRoute( '/entities/items/{entity_id}' )
-		.withPathParam( 'entity_id', itemId );
+		.withRoute( '/entities/items/{item_id}' )
+		.withPathParam( 'item_id', itemId );
 }
 
 describe( 'validate GET /entities/items/{id} responses against OpenAPI document', () => {

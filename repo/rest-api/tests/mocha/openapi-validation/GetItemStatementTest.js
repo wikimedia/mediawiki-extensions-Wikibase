@@ -7,12 +7,12 @@ const expect = chai.expect;
 
 function newGetItemStatementRequestBuilder( itemId, statementId ) {
 	return new RequestBuilder()
-		.withRoute( '/entities/items/{entity_id}/statements/{statement_id}' )
-		.withPathParam( 'entity_id', itemId )
+		.withRoute( '/entities/items/{item_id}/statements/{statement_id}' )
+		.withPathParam( 'item_id', itemId )
 		.withPathParam( 'statement_id', statementId );
 }
 
-describe( 'validate GET /entities/items/{entity_id}/statements/{statement_id} responses', () => {
+describe( 'validate GET /entities/items/{item_id}/statements/{statement_id} responses', () => {
 
 	let itemId;
 	let statementId;

@@ -1,7 +1,7 @@
 {
-	"entityId": {
+	"itemId": {
 		"in": "path",
-		"name": "entity_id",
+		"name": "item_id",
 		"description": "The ID of the required Item",
 		"required": true,
 		"schema": {

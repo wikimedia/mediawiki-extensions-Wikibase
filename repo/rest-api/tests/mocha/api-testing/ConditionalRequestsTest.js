@@ -42,22 +42,22 @@ describe( 'Conditional requests', () => {
 
 	[ // eslint-disable-line mocha/no-setup-in-describe
 		{
-			route: '/entities/items/{entity_id}',
+			route: '/entities/items/{item_id}',
 			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( '/entities/items/{entity_id}' )
-				.withPathParam( 'entity_id', itemId )
+				.withRoute( '/entities/items/{item_id}' )
+				.withPathParam( 'item_id', itemId )
 		},
 		{
-			route: '/entities/items/{entity_id}/statements',
+			route: '/entities/items/{item_id}/statements',
 			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( '/entities/items/{entity_id}/statements' )
-				.withPathParam( 'entity_id', itemId )
+				.withRoute( '/entities/items/{item_id}/statements' )
+				.withPathParam( 'item_id', itemId )
 		},
 		{
-			route: '/entities/items/{entity_id}/statements/{statement_id}',
+			route: '/entities/items/{item_id}/statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( '/entities/items/{entity_id}/statements/{statement_id}' )
-				.withPathParam( 'entity_id', itemId )
+				.withRoute( '/entities/items/{item_id}/statements/{statement_id}' )
+				.withPathParam( 'item_id', itemId )
 				.withPathParam( 'statement_id', statementId )
 		},
 		{
