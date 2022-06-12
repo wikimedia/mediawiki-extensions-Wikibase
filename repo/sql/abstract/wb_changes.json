@@ -17,9 +17,9 @@
 			},
 			{
 				"name": "change_time",
-				"type": "binary",
+				"type": "mwtimestamp",
 				"comment": "Time the change was made",
-				"options": { "length": 14, "notnull": true }
+				"options": { "notnull": true }
 			},
 			{
 				"name": "change_object_id",

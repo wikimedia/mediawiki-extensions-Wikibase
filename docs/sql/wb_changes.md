@@ -13,7 +13,7 @@ Part of the \ref md_docs_topics_change-propagation system on a Repo.
   * Well known entity types are “item” and “property”. Custom entity types will define their own type names.
   * Known actions: “update”, “add”, “remove”, “restore”
 * change_time
-  * A varbinary(14) the time at which the edit was made
+  * A binary(14) the time at which the edit was made
 * change_object_id
   * A varbinary(14) containing the entity ID
 * change_revision_id
@@ -47,7 +47,7 @@ Part of the \ref md_docs_topics_change-propagation system on a Repo.
 +--------------------+------------------+------+-----+---------+----------------+
 | change_id          | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
 | change_type        | varbinary(25)    | NO   | MUL | NULL    |                |
-| change_time        | varbinary(14)    | NO   | MUL | NULL    |                |
+| change_time        | binary(14)       | NO   | MUL | NULL    |                |
 | change_object_id   | varbinary(14)    | NO   | MUL | NULL    |                |
 | change_revision_id | int(10) unsigned | NO   | MUL | NULL    |                |
 | change_user_id     | int(10) unsigned | NO   | MUL | NULL    |                |

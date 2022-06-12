@@ -10,6 +10,7 @@ use Wikibase\Lib\Store\ChunkAccess;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * Allows accessing changes stored in a database.
@@ -121,7 +122,7 @@ class EntityChangeLookup implements ChunkAccess {
 	public function loadChangesBefore( string $thisTimeOrOlder, int $batchSize, int $offset ): array {
 		$dbr = $this->db->connections()->getReadConnectionRef();
 		return $this->loadChanges(
-			[ 'change_time <= ' . $dbr->addQuotes( $thisTimeOrOlder ) ],
+			[ 'change_time <= ' . $dbr->addQuotes( $dbr->timestamp( $thisTimeOrOlder ) ) ],
 			[ 'LIMIT' => $batchSize, 'OFFSET' => $offset ],
 			__METHOD__,
 			$dbr
@@ -162,7 +163,7 @@ class EntityChangeLookup implements ChunkAccess {
 		foreach ( $rows as $row ) {
 			$data = [
 				'id' => (int)$row->change_id,
-				'time' => $row->change_time,
+				'time' => ConvertibleTimestamp::convert( TS_MW, $row->change_time ),
 				'info' => $row->change_info,
 				'user_id' => $row->change_user_id,
 				'revision_id' => $row->change_revision_id,

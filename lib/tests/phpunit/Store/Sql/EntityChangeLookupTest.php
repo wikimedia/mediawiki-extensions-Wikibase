@@ -169,7 +169,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 			'wb_changes',
 			'MIN( change_id )',
 			// First change inserted by this test
-			[ 'change_time' => '20141008161232' ],
+			[ 'change_time' => $this->db->timestamp( '20141008161232' ) ],
 			__METHOD__
 		);
 

@@ -9,6 +9,7 @@ use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\DBQueryError;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @license GPL-2.0-or-later
@@ -53,9 +54,8 @@ class SqlChangeStore implements ChangeStore {
 	}
 
 	private function updateChange( ChangeRow $change ) {
-		$values = $this->getValues( $change );
-
 		$dbw = $this->repoDomainDb->connections()->getWriteConnectionRef();
+		$values = $this->getValues( $change, $dbw );
 
 		$dbw->update(
 			'wb_changes',
@@ -66,9 +66,8 @@ class SqlChangeStore implements ChangeStore {
 	}
 
 	private function insertChange( ChangeRow $change ) {
-		$values = $this->getValues( $change );
-
 		$dbw = $this->repoDomainDb->connections()->getWriteConnectionRef();
+		$values = $this->getValues( $change, $dbw );
 
 		$dbw->insert( 'wb_changes', $values, __METHOD__ );
 		$change->setField( ChangeRow::ID, $dbw->insertId() );
@@ -79,7 +78,7 @@ class SqlChangeStore implements ChangeStore {
 	 *
 	 * @return array
 	 */
-	private function getValues( ChangeRow $change ) {
+	private function getValues( ChangeRow $change, IDatabase $db ) {
 		$type = $change->getType();
 		// TODO: Avoid depending on hasField here.
 		$time = $change->hasField( ChangeRow::TIME ) ? $change->getTime() : wfTimestampNow();
@@ -92,7 +91,7 @@ class SqlChangeStore implements ChangeStore {
 
 		return [
 			'change_type' => $type,
-			'change_time' => $time,
+			'change_time' => $db->timestamp( $time ),
 			'change_object_id' => $objectId,
 			'change_revision_id' => $revisionId,
 			'change_user_id' => $userId,
