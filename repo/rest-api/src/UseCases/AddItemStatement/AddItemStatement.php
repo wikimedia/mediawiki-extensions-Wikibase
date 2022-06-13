@@ -36,10 +36,15 @@ class AddItemStatement {
 	}
 
 	/**
-	 * @return AddItemStatementErrorResponse|AddItemStatementSuccessResponse
+	 * @return AddItemStatementSuccessResponse | AddItemStatementErrorResponse
 	 */
 	public function execute( AddItemStatementRequest $request ) {
-		$this->validator->validate( $request ); // TODO T309847
+		$validationError = $this->validator->validate( $request );
+
+		if ( $validationError ) {
+			return AddItemStatementErrorResponse::newFromValidationError( $validationError );
+		}
+
 		$statement = $this->validator->getValidatedStatement();
 		$itemId = new ItemId( $request->getItemId() );
 
