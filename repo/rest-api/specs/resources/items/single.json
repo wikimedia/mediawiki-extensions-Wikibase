@@ -13,7 +13,7 @@
 			"200": { "$ref": "../../global/responses.json#/Item" },
 			"308": { "$ref": "../../global/responses.json#/Moved" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
-			"400": { "$ref": "../../global/responses.json#/InvalidInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidItemInput" },
 			"404": { "$ref": "../../global/responses.json#/NotFound" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
