@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hanberke"
+			"Hanberke",
+			"TayfunEt."
 		]
 	},
 	"wikibase-edit": "düzet",
 	"wikibase-add": "goş",
 	"wikibase-label-empty": "Etiketka kesgitlenmedik",
-	"wikibase-sitelinks-special": "Başga saýtlar"
+	"wikibase-sitelinks-special": "Başga saýtlar",
+	"wikibase-anonymouseditwarning-dismiss-button": "Hasaba girmän düzet"
 }
