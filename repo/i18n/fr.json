@@ -444,7 +444,7 @@
 	"wikibase-api-no-such-site": "Impossible de trouver un tel site.",
 	"wikibase-api-no-such-sitelink": "Impossible de trouver un lien de site vers « $1 » en essayant de modifier les badges.",
 	"wikibase-api-no-such-statement": "Impossible de trouver une telle déclaration.",
-	"wikibase-api-not-supported": "La fonctionnalité demandée n’est pas supportée par l’entité fournie.",
+	"wikibase-api-not-supported": "La fonctionnalité demandée n’est pas prise en charge par l’entité fournie.",
 	"wikibase-api-not-statement": "Pas une déclaration.",
 	"wikibase-api-not-item": "Pas un élément.",
 	"wikibase-api-not-recognized-datatype": "Un type de donnée est attendu, mais il est absent ou non reconnu.",

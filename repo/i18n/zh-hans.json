@@ -81,7 +81,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "请输入$1的描述",
 	"wikibase-aliases-edit-placeholder": "输入一些别名",
 	"wikibase-aliases-edit-placeholder-language-aware": "输入一些$1的别名",
-	"wikibase-aliases-edit-label": "别名，以逗号分隔：",
+	"wikibase-aliases-edit-label": "别名，以竖线符号分隔：",
 	"wikibase-content-language-edit-label": "语言：",
 	"wikibase-content-language-edit-not-recognized-language": "无法识别提供的语言代码。",
 	"wikibase-diffview-reference": "参考文献",
