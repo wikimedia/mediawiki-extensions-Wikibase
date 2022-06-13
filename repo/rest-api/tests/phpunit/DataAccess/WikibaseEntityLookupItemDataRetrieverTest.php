@@ -28,13 +28,9 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 		$itemId = new ItemId( 'Q123' );
 		$item = NewItem::withId( $itemId )->build();
 
-		$entityLookup = $this->createMock( EntityLookup::class );
-		$entityLookup->expects( $this->once() )
-			->method( 'getEntity' )
-			->with( $itemId )
-			->willReturn( $item );
-
-		$retriever = new WikibaseEntityLookupItemDataRetriever( $entityLookup );
+		$retriever = new WikibaseEntityLookupItemDataRetriever(
+			$this->newEntityLookupForIdWithReturnValue( $itemId, $item )
+		);
 
 		$itemData = $retriever->getItemData( $itemId, ItemData::VALID_FIELDS );
 
@@ -48,14 +44,9 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 
 	public function testGivenItemDoesNotExist_getItemDataReturnsNull(): void {
 		$itemId = new ItemId( 'Q321' );
-
-		$entityLookup = $this->createMock( EntityLookup::class );
-		$entityLookup->expects( $this->once() )
-			->method( 'getEntity' )
-			->with( $itemId )
-			->willReturn( null );
-
-		$retriever = new WikibaseEntityLookupItemDataRetriever( $entityLookup );
+		$retriever = new WikibaseEntityLookupItemDataRetriever(
+			$this->newEntityLookupForIdWithReturnValue( $itemId, null )
+		);
 
 		$this->assertNull( $retriever->getItemData( $itemId, ItemData::VALID_FIELDS ) );
 	}
@@ -64,13 +55,9 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 	 * @dataProvider itemDataWithFieldsProvider
 	 */
 	public function testGivenFields_getItemDataReturnsItemDataOnlyWithRequestFields( Item $item, array $fields, ItemData $itemData ): void {
-		$entityLookup = $this->createMock( EntityLookup::class );
-		$entityLookup->expects( $this->once() )
-			->method( 'getEntity' )
-			->with( $item->getId() )
-			->willReturn( $item );
-
-		$retriever = new WikibaseEntityLookupItemDataRetriever( $entityLookup );
+		$retriever = new WikibaseEntityLookupItemDataRetriever(
+			$this->newEntityLookupForIdWithReturnValue( $item->getId(), $item )
+		);
 
 		$this->assertEquals(
 			$itemData,
@@ -136,13 +123,9 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 			->andStatement( $statement )
 			->build();
 
-		$entityLookup = $this->createMock( EntityLookup::class );
-		$entityLookup->expects( $this->once() )
-			->method( 'getEntity' )
-			->with( $item->getId() )
-			->willReturn( $item );
-
-		$retriever = new WikibaseEntityLookupItemDataRetriever( $entityLookup );
+		$retriever = new WikibaseEntityLookupItemDataRetriever(
+			$this->newEntityLookupForIdWithReturnValue( $itemId, $item )
+		);
 
 		$this->assertEquals(
 			$statement,
@@ -154,13 +137,9 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 		$itemId = new ItemId( 'Q321' );
 		$statementId = new StatementGuid( $itemId, "c48c32c3-42b5-498f-9586-84608b88747c" );
 
-		$entityLookup = $this->createMock( EntityLookup::class );
-		$entityLookup->expects( $this->once() )
-			->method( 'getEntity' )
-			->with( $itemId )
-			->willReturn( null );
-
-		$retriever = new WikibaseEntityLookupItemDataRetriever( $entityLookup );
+		$retriever = new WikibaseEntityLookupItemDataRetriever(
+			$this->newEntityLookupForIdWithReturnValue( $itemId, null )
+		);
 
 		$this->assertNull( $retriever->getStatement( $statementId ) );
 	}
@@ -172,13 +151,9 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 		$item = NewItem::withId( $itemId )
 			->build();
 
-		$entityLookup = $this->createMock( EntityLookup::class );
-		$entityLookup->expects( $this->once() )
-			->method( 'getEntity' )
-			->with( $itemId )
-			->willReturn( $item );
-
-		$retriever = new WikibaseEntityLookupItemDataRetriever( $entityLookup );
+		$retriever = new WikibaseEntityLookupItemDataRetriever(
+			$this->newEntityLookupForIdWithReturnValue( $itemId, $item )
+		);
 
 		$this->assertNull( $retriever->getStatement( $statementId ) );
 	}
@@ -196,13 +171,9 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 			->andStatement( $statement2 )
 			->build();
 
-		$entityLookup = $this->createMock( EntityLookup::class );
-		$entityLookup->expects( $this->once() )
-			->method( 'getEntity' )
-			->with( $item->getId() )
-			->willReturn( $item );
-
-		$retriever = new WikibaseEntityLookupItemDataRetriever( $entityLookup );
+		$retriever = new WikibaseEntityLookupItemDataRetriever(
+			$this->newEntityLookupForIdWithReturnValue( $item->getId(), $item )
+		);
 
 		$this->assertEquals(
 			new StatementList( $statement1, $statement2 ),
@@ -212,15 +183,40 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 
 	public function testGivenItemDoesNotExist_getStatementsReturnsNull(): void {
 		$nonexistentItemId = new ItemId( 'Q321' );
-		$entityLookup = $this->createMock( EntityLookup::class );
-		$entityLookup->expects( $this->once() )
-			->method( 'getEntity' )
-			->with( $nonexistentItemId )
-			->willReturn( null );
+		$entityLookup = $this->newEntityLookupForIdWithReturnValue( $nonexistentItemId, null );
 
 		$retriever = new WikibaseEntityLookupItemDataRetriever( $entityLookup );
 
 		$this->assertNull( $retriever->getStatements( $nonexistentItemId ) );
+	}
+
+	public function testGetItem(): void {
+		$itemId = new ItemId( 'Q321' );
+		$item = NewItem::withId( $itemId )->build();
+		$retriever = new WikibaseEntityLookupItemDataRetriever(
+			$this->newEntityLookupForIdWithReturnValue( $itemId, $item )
+		);
+
+		$this->assertSame( $item, $retriever->getItem( $itemId ) );
+	}
+
+	public function testGivenItemDoesNotExist_getItemReturnsNull(): void {
+		$itemId = new ItemId( 'Q666' );
+		$retriever = new WikibaseEntityLookupItemDataRetriever(
+			$this->newEntityLookupForIdWithReturnValue( $itemId, null )
+		);
+
+		$this->assertNull( $retriever->getItem( $itemId ) );
+	}
+
+	private function newEntityLookupForIdWithReturnValue( ItemId $id, ?Item $returnValue ): EntityLookup {
+		$entityLookup = $this->createMock( EntityLookup::class );
+		$entityLookup->expects( $this->once() )
+			->method( 'getEntity' )
+			->with( $id )
+			->willReturn( $returnValue );
+
+		return $entityLookup;
 	}
 
 }

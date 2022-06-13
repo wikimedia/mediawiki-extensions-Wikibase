@@ -12,13 +12,14 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
-class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemStatementsRetriever, ItemStatementRetriever {
+class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemStatementsRetriever, ItemStatementRetriever, ItemRetriever {
 
 	private $entityLookup;
 
@@ -91,7 +92,7 @@ class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemSt
 		return $item->getStatements();
 	}
 
-	private function getItem( ItemId $itemId ): ?Item {
+	public function getItem( ItemId $itemId ): ?Item {
 		/** @var Item $item */
 		$item = $this->entityLookup->getEntity( $itemId );
 		'@phan-var Item $item';
