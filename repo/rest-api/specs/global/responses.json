@@ -7,23 +7,33 @@
 		},
 		"required": [ "code", "message" ]
 	},
-	"NotFound": {
-		"description": "The specified resource was not found",
+	"ItemNotFound": {
+		"description": "The specified Item was not found",
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "#/Error" },
 				"examples": {
-					"item-not-found": {
-						"value": {
-							"code": "item-not-found",
-							"message": "Could not find an item with the ID: {item_id}"
-						}
-					},
+					"item-not-found": { "$ref": "#/ItemNotFoundExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"StatementNotFound": {
+		"description": "The specified Statement was not found",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "#/Error" },
+				"examples": {
 					"statement-not-found": {
-						"value": {
-							"code": "statement-not-found",
-							"message": "Could not find a statement with the ID: {statement_id}"
-						}
+						"value": { "$ref": "#/StatementNotFoundExample" }
 					}
 				}
 			}
@@ -35,6 +45,42 @@
 				},
 				"description": "Language code of the language in which error message is provided"
 			}
+		}
+	},
+	"ItemStatementNotFound": {
+		"description": "The specified resource was not found",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "#/Error" },
+				"examples": {
+					"item-not-found": {
+						"value": { "$ref": "#/ItemNotFoundExample" }
+					},
+					"statement-not-found": {
+						"value": { "$ref": "#/StatementNotFoundExample" }
+					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"ItemNotFoundExample": {
+		"value": {
+			"code": "item-not-found",
+			"message": "Could not find an item with the ID: {item_id}"
+		}
+	},
+	"StatementNotFoundExample": {
+		"value": {
+			"code": "statement-not-found",
+			"message": "Could not find a statement with the ID: {statement_id}"
 		}
 	},
 	"InvalidItemInput": {
