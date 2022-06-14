@@ -155,5 +155,10 @@
 	"wikibase-client-data-bridge-thank-you-head": "आपके संपादन के लिए धन्यवाद!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "आप नीचे का बटन दबाकर {{WBREPONAME}} पर इस गुणधर्म के लिए सन्दर्भों को संपादित कर सकते हैं।",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "{{WBREPONAME}} पर सन्दर्भ संपादित करें",
-	"wikibase-client-data-bridge-saving-error-assertuser-heading": "आपने लॉग-इन नहीं किया है"
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "आपने लॉग-इन नहीं किया है",
+	"wikibase-client-data-bridge-saving-error-assertuser-message": "आप लॉग-इन किए बिना अपने बदलाव प्रकाशित कर सकते हैं। आपके IP पते को पृष्ठ के संपादन इतिहास में रिकॉर्ड किया जाएगा। आप वापस लॉग-इन करके दोबारा प्रकाशित करने की कोशिश भी कर सकते हैं।",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "लॉग-इन किए बिना प्रकाशित करें",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "लॉग-इन किए बिना सहेजें",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "लॉग-इन करें (नया टैब खोलता है)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "संपादन चालू रखें"
 }
