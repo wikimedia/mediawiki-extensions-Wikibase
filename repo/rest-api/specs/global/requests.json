@@ -1,0 +1,36 @@
+{
+	"Statement": {
+		"description": "Payload containing a Wikibase Statement object",
+		"required": true,
+		"content": {
+			"application/json": {
+				"schema": {
+					"allOf": [
+						{
+							"type": "object",
+							"properties": { "statement": { "$ref": "./interfaces.json#/NewStatement" } },
+							"required": [ "statement" ]
+						},
+						{
+							"$ref": "#/MediawikiEdit"
+						}
+					]
+				}
+			}
+		}
+	},
+	"MediawikiEdit": {
+		"type": "object",
+		"properties": {
+			"tags": {
+				"type": "array",
+				"items": { "type": "string" },
+				"default": []
+			},
+			"bot": {
+				"type": "boolean",
+				"default": false
+			}
+		}
+	}
+}
