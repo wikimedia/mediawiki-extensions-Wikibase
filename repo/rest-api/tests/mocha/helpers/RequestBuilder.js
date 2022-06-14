@@ -23,6 +23,7 @@ class RequestBuilder {
 		this.route = null;
 		this.pathParams = {};
 		this.queryParams = {};
+		this.jsonBodyParams = {};
 		this.headers = {};
 		this.validate = false;
 		this.assertValid = false;
@@ -52,6 +53,11 @@ class RequestBuilder {
 		return this;
 	}
 
+	withJsonBodyParam( name, value ) {
+		this.jsonBodyParams[ name ] = value;
+		return this;
+	}
+
 	withHeader( name, value ) {
 		this.headers[ name ] = value;
 		return this;
@@ -76,7 +82,18 @@ class RequestBuilder {
 			this.validateRequest( spec, method );
 		}
 
-		return rest.request( this.makePath(), method, this.queryParams, this.headers );
+		switch ( method ) {
+			case 'GET':
+				return rest.request( this.makePath(), method, this.queryParams, this.headers );
+			case 'POST':
+				if ( Object.keys( this.queryParams ).length !== 0 ) {
+					throw new Error( 'withQueryParams() can\'t be used with the \'POST\' method' );
+				}
+				return rest.request( this.makePath(), method, this.jsonBodyParams, this.headers );
+			default:
+				throw new Error( `The "${method}" method is not supported by ${this.constructor.name}` );
+		}
+
 	}
 
 	validateRouteAndMethod( spec, method ) {
@@ -114,6 +131,7 @@ class RequestBuilder {
 			endpoint: this.route,
 			params: this.pathParams,
 			query: this.queryParams,
+			body: this.jsonBodyParams,
 			headers: this.headers
 		} ) );
 
