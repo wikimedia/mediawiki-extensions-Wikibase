@@ -155,7 +155,6 @@
 			"factory": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler::factory",
 			"services": [
 				"WikibaseClient.DescriptionLookup",
-				"WikibaseClient.EntityIdParser",
 				"WikibaseClient.LanguageFallbackLabelDescriptionLookupFactory",
 				"WikibaseClient.NamespaceChecker",
 				"WikibaseClient.RepoLinker",

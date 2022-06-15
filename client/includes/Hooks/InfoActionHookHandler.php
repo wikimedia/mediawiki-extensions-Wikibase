@@ -10,8 +10,8 @@ use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\DescriptionLookup;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
@@ -54,11 +54,6 @@ class InfoActionHookHandler implements InfoActionHook {
 	private $labelDescriptionLookupFactory;
 
 	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
-
-	/**
 	 * @var DescriptionLookup
 	 */
 	private $descriptionLookup;
@@ -70,7 +65,6 @@ class InfoActionHookHandler implements InfoActionHook {
 		$siteId,
 		UsageLookup $usageLookup,
 		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
-		EntityIdParser $idParser,
 		DescriptionLookup $descriptionLookup
 	) {
 		$this->namespaceChecker = $namespaceChecker;
@@ -79,13 +73,11 @@ class InfoActionHookHandler implements InfoActionHook {
 		$this->siteId = $siteId;
 		$this->usageLookup = $usageLookup;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
-		$this->idParser = $idParser;
 		$this->descriptionLookup = $descriptionLookup;
 	}
 
 	public static function factory(
 		DescriptionLookup $descriptionLookup,
-		EntityIdParser $idParser,
 		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		NamespaceChecker $namespaceChecker,
 		RepoLinker $repoLinker,
@@ -101,7 +93,6 @@ class InfoActionHookHandler implements InfoActionHook {
 			$clientSettings->getSetting( 'siteGlobalID' ),
 			$usageLookup,
 			$labelDescriptionLookupFactory,
-			$idParser,
 			$descriptionLookup
 		);
 	}
@@ -134,7 +125,7 @@ class InfoActionHookHandler implements InfoActionHook {
 		}
 
 		if ( $usage ) {
-			$pageInfo['header-properties'][] = $this->formatEntityUsage( $context, $usage );
+			$pageInfo['header-properties'][] = $this->formatEntityUsage( $usage, $context );
 		}
 	}
 
@@ -236,40 +227,37 @@ class InfoActionHookHandler implements InfoActionHook {
 	}
 
 	/**
+	 * @param EntityUsage[] $usages
 	 * @param IContextSource $context
-	 * @param array $usage
 	 *
 	 * @return string[]
 	 */
-	private function formatEntityUsage( IContextSource $context, array $usage ) {
+	private function formatEntityUsage( array $usages, IContextSource $context ): array {
 		$usageAspectsByEntity = [];
-		$entities = [];
-		foreach ( $usage as $entityUsage ) {
+		$entityIds = [];
+
+		foreach ( $usages as $entityUsage ) {
 			$entityId = $entityUsage->getEntityId()->getSerialization();
-			$entities[$entityId] = $entityUsage->getEntityId();
+			$entityIds[$entityId] = $entityUsage->getEntityId();
 			$usageAspectsByEntity[$entityId][] = [
 				$entityUsage->getAspect(),
 				$entityUsage->getModifier()
 			];
 		}
+
 		$output = '';
-		$entityIds = array_map(
-			function( $entityId ) {
-				return $this->idParser->parse( $entityId );
-			},
-			array_keys( $usageAspectsByEntity )
-		);
 		$labelLookup = $this->labelDescriptionLookupFactory->newLabelDescriptionLookup(
 			$context->getLanguage(),
-			$entityIds
+			array_values( $entityIds )
 		);
+
 		foreach ( $usageAspectsByEntity as $entityId => $aspects ) {
-			$label = $labelLookup->getLabel( $this->idParser->parse( $entityId ) );
+			$label = $labelLookup->getLabel( $entityIds[$entityId] );
 			$text = $label === null ? $entityId : $label->getText();
 
 			$output .= Html::rawElement( 'li', [],
 				$this->repoLinker->buildEntityLink(
-					$entities[$entityId],
+					$entityIds[$entityId],
 					[ 'external' ],
 					$text
 				)
