@@ -14,8 +14,10 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
+use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
@@ -60,19 +62,12 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 		$postModificationRevisionId = 322;
 		$modificationTimestamp = '20221111070707';
 		$newGuid = $item->getId() . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$serialization = [
-			'mainsnak' => [
-				'snaktype' => 'novalue',
-				'property' => 'P123',
-			],
-			'type' => 'statement'
-		];
 		$editTags = [ 'some', 'tags' ];
 		$isBot = false;
 
 		$request = new AddItemStatementRequest(
 			$item->getId()->getSerialization(),
-			$serialization,
+			$this->getValidNoValueStatementSerialization(),
 			$editTags,
 			$isBot
 		);
@@ -101,6 +96,25 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 	}
 
+	public function testGivenItemNotFound_returnsErrorResponse(): void {
+		$itemId = 'Q321';
+
+		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+
+		$response = $this->newUseCase()->execute( new AddItemStatementRequest(
+			$itemId,
+			$this->getValidNoValueStatementSerialization(),
+			[],
+			false
+		) );
+
+		$this->assertInstanceOf( AddItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $response->getCode() );
+		$this->assertStringContainsString( $itemId, $response->getMessage() );
+	}
+
 	private function newUseCase(): AddItemStatement {
 		return new AddItemStatement(
 			$this->newValidator(),
@@ -121,6 +135,16 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 				$snakValidator
 			)
 		);
+	}
+
+	private function getValidNoValueStatementSerialization(): array {
+		return [
+			'mainsnak' => [
+				'snaktype' => 'novalue',
+				'property' => 'P123',
+			],
+			'type' => 'statement'
+		];
 	}
 
 }

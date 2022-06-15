@@ -8,6 +8,7 @@ use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
 /**
  * @license GPL-2.0-or-later
@@ -34,14 +35,20 @@ class AddItemStatement {
 		$this->guidGenerator = $guidGenerator;
 	}
 
-	public function execute( AddItemStatementRequest $request ): AddItemStatementSuccessResponse {
+	/**
+	 * @return AddItemStatementErrorResponse|AddItemStatementSuccessResponse
+	 */
+	public function execute( AddItemStatementRequest $request ) {
 		$this->validator->validate( $request ); // TODO T309847
 		$statement = $this->validator->getValidatedStatement();
 		$itemId = new ItemId( $request->getItemId() );
 
 		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 		if ( !$latestRevision->itemExists() || $latestRevision->isRedirect() ) {
-			throw new \Exception(); // TODO T309852
+			return new AddItemStatementErrorResponse(
+				ErrorResponse::ITEM_NOT_FOUND,
+				"Could not find an item with the ID: {$request->getItemId()}"
+			);
 		}
 
 		$newStatementGuid = $this->guidGenerator->newGuid( $itemId );
