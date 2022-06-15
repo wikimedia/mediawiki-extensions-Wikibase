@@ -32,5 +32,6 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}項目ID",
 	"wikibase-otherprojects": "第啲項目",
 	"wikibase-sitelinks-sitename-columnheading": "話",
+	"connected-redirect-category": "連咗去個{{WBREPONAME}}項目嘅跳轉",
 	"wikibase-client-data-bridge-error-go-back": "返去"
 }

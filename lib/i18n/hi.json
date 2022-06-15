@@ -6,7 +6,8 @@
 			"Sfic",
 			"Siddhartha Ghai",
 			"Vivek Rai",
-			"चक्रपाणी"
+			"चक्रपाणी",
+			"Saurmandal"
 		]
 	},
 	"specialpages-group-wikibase": "विकिबैस",
@@ -53,7 +54,7 @@
 	"wikibase-entity-summary-wbeditentity-create": "नई इकाई बनाया",
 	"wikibase-entity-summary-wbeditentity-update": "इकाई बदला गया",
 	"wikibase-entity-summary-wbsetreference": "सन्दर्भ सेट करें",
-	"wikibase-entity-summary-wbsetlabel-add": "जाड़ा [$2] लेबल",
+	"wikibase-entity-summary-wbsetlabel-add": "[$2] लेबल जोड़ा",
 	"wikibase-entity-summary-wbsetlabel-set": "बलदा [$2] लेबल",
 	"wikibase-entity-summary-wbsetlabel-remove": "हटाया [$2] लेबल",
 	"wikibase-entity-summary-wbsetdescription-add": "जोडा [$2] विवरण",

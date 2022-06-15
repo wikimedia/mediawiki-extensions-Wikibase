@@ -1,0 +1,35 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saurmandal"
+		]
+	},
+	"apihelp-query+wbentityusage-description": "निर्धारित पृष्ठों में उपयुक्त सभी सत्तों की ID लौटाता है।",
+	"apihelp-query+wbentityusage-summary": "निर्धारित पृष्ठों में उपयुक्त सभी सत्तों की ID लौटाता है।",
+	"apihelp-query+wbentityusage-param-aspect": "सिर्फ इस पहलू का इस्तेमाल करने वाले सत्तों की ID लौटाएँ।",
+	"apihelp-query+wbentityusage-paramvalue-aspect-S": "इस सत्ते की साइटकड़ियों का इस्तेमाल किया गया है",
+	"apihelp-query+wbentityusage-paramvalue-aspect-L": "इस सत्ते के लेबल का इस्तेमाल किया गया है",
+	"apihelp-query+wbentityusage-paramvalue-aspect-D": "इस सत्ते के विवरण का इस्तेमाल किया गया है",
+	"apihelp-query+wbentityusage-paramvalue-aspect-T": "इस सत्ते से जुड़े लोकल पृष्ठ के शीर्षक का इस्तेमाल किया गया है",
+	"apihelp-query+wbentityusage-paramvalue-aspect-C": "इस सत्ते से बयानों का इस्तेमाल किया गया है",
+	"apihelp-query+wbentityusage-paramvalue-aspect-X": "इस सत्ते के सभी पहलुओं का इस्तेमाल किया गया है या शायद किया जाएगा",
+	"apihelp-query+wbentityusage-paramvalue-aspect-O": "इस सत्ते के किसी और सुविधा का भी इस्तेमाल किया जा रहा है। इससे उपनामों का इस्तेमाल होगा और सत्ते की उपस्थिति के लिए जाँच चलाए जाएँगे।",
+	"apihelp-query+wbentityusage-param-prop": "परिणाम में जोड़ने के लिए गुणधर्म।",
+	"apihelp-query+wbentityusage-paramvalue-prop-url": "सत्ते का सक्षण URL जोड़ा जाएगा या नहीं",
+	"apihelp-query+wbentityusage-param-entities": "सिर्फ इन सत्तों का इस्तेमाल करने वाले पृष्ठ लौटाएँ।",
+	"apihelp-query+wbentityusage-param-limit": "सत्तों के कितने इस्तेमाल लौटाने हैं।",
+	"apihelp-query+wbentityusage-example-simple": "पृष्ठ <kbd>Main Page</kbd> में उपयुक्त सत्ते प्राप्त करें।",
+	"apihelp-query+wblistentityusage-description": "निर्धारित सत्ता ID-ओं का इस्तेमाल करने वाले सभी पृष्ठ लौटाएँ।",
+	"apihelp-query+wblistentityusage-summary": "निर्धारित सत्ता ID-ओं का इस्तेमाल करने वाले सभी पृष्ठ लौटाएँ।",
+	"apihelp-query+wblistentityusage-param-prop": "परिणाम में जोड़ने के लिए गुणधर्म।",
+	"apihelp-query+wblistentityusage-paramvalue-prop-url": "अगर सक्षम किया जाता है तो सत्ते का URL परिणाम में जोड़ा जाएगा।",
+	"apihelp-query+wblistentityusage-param-aspect": "सिर्फ इस पहलू का इस्तेमाल करने वाले सत्तों की ID लौटाएँ।",
+	"apihelp-query+wblistentityusage-param-entities": "सिर्फ उपयुक्त सत्ते।",
+	"apihelp-query+wblistentityusage-param-limit": "सत्तों के कितने इस्तेमाल लौटाने हैं।",
+	"apihelp-query+wblistentityusage-example-simple": "सत्ता <kbd>Q2</kbd> का इस्तेमाल करने वाले पृष्ठ प्राप्त करें।",
+	"apihelp-query+wblistentityusage-example-url": "URL के साथ सत्ता <kbd>Q2</kbd> का इस्तेमाल करने वाले पृष्ठ प्राप्त करें।",
+	"apihelp-query+wblistentityusage-example-aspect": "पहलू के साइटकड़ी या बयान होने पर सत्ता <kbd>Q2</kbd> का इस्तेमाल करने वाले पृष्ठ प्राप्त करें।",
+	"apihelp-query+pageterms-description": "{{WBREPONAME}} पर साइटकड़ी के ज़रिए किसी पृष्ठ से जुड़े शब्द पाएँ (आम तौर पर लेबल, विवरण या उपनाम)।",
+	"apihelp-query+pageterms-summary": "{{WBREPONAME}} पर साइटकड़ी के ज़रिए किसी पृष्ठ से जुड़े शब्द पाएँ (आम तौर पर लेबल, विवरण या उपनाम)।",
+	"apihelp-query+pageterms-example-simple": "सदस्य की भाषा में पृष्ठ 'London' से जुड़े सभी शब्द प्राप्त करें।"
+}
