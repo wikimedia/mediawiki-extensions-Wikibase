@@ -7,7 +7,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
-use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemStatementJsonPresenter;
+use Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
@@ -20,6 +20,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class GetStatementRouteHandler extends SimpleHandler {
+
 	use ConditionalRequestsHelper;
 
 	public const ID_PATH_PARAM = 'statement_id';
@@ -31,7 +32,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 
 	public function __construct(
 		GetItemStatement $getItemStatement,
-		GetItemStatementJsonPresenter $successPresenter,
+		StatementJsonPresenter $successPresenter,
 		ResponseFactory $responseFactory,
 		UnexpectedErrorHandler $errorHandler
 	) {
@@ -45,7 +46,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
 		return new self(
 			WbRestApi::getGetItemStatement(),
-			new GetItemStatementJsonPresenter( WbRestApi::getStatementSerializer() ),
+			new StatementJsonPresenter( WbRestApi::getStatementSerializer() ),
 			$responseFactory,
 			new UnexpectedErrorHandler( $responseFactory, WikibaseRepo::getLogger() )
 		);
@@ -107,7 +108,9 @@ class GetStatementRouteHandler extends SimpleHandler {
 		);
 		$this->setEtagFromRevId( $httpResponse, $revId );
 		$httpResponse->setBody(
-			new StringStream( $this->successPresenter->getJson( $useCaseResponse ) )
+			new StringStream(
+				$this->successPresenter->getJson( $useCaseResponse->getStatement() )
+			)
 		);
 
 		return $httpResponse;

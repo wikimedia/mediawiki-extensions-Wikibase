@@ -5,17 +5,16 @@ namespace Wikibase\Repo\Tests\RestApi\Presentation\Presenters;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Domain\Serializers\StatementSerializer;
-use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemStatementJsonPresenter;
-use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementSuccessResponse;
+use Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Presentation\Presenters\GetItemStatementJsonPresenter
+ * @covers \Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class GetItemStatementJsonPresenterTest extends TestCase {
+class StatementJsonPresenterTest extends TestCase {
 
 	public function testGetJsonForSuccess(): void {
 		$statement = $this->createStub( Statement::class );
@@ -27,13 +26,11 @@ class GetItemStatementJsonPresenterTest extends TestCase {
 			->with( $statement )
 			->willReturn( $statementSerialization );
 
-		$presenter = new GetItemStatementJsonPresenter( $statementSerializer );
+		$presenter = new StatementJsonPresenter( $statementSerializer );
 
 		$this->assertJsonStringEqualsJsonString(
 			json_encode( $statementSerialization ),
-			$presenter->getJson(
-				new GetItemStatementSuccessResponse( $statement, '20220307180000', 321 )
-			)
+			$presenter->getJson( $statement )
 		);
 	}
 
