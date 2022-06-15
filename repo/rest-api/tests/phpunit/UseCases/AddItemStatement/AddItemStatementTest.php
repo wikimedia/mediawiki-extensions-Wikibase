@@ -16,8 +16,11 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
+use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementSuccessResponse;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
@@ -47,6 +50,8 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 	 * @var MockObject|GuidGenerator
 	 */
 	private $guidGenerator;
+
+	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -90,6 +95,7 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 
 		$response = $useCase->execute( $request );
 
+		$this->assertInstanceOf( AddItemStatementSuccessResponse::class, $response );
 		$this->assertNotNull( $item->getStatements()->getFirstStatementWithGuid( $newGuid ) );
 		$this->assertSame( $newGuid, $response->getStatement()->getGuid() );
 		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
@@ -103,16 +109,26 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
 
-		$response = $this->newUseCase()->execute( new AddItemStatementRequest(
-			$itemId,
-			$this->getValidNoValueStatementSerialization(),
-			[],
-			false
-		) );
+		$response = $this->newUseCase()->execute(
+			new AddItemStatementRequest(
+				$itemId,
+				$this->getValidNoValueStatementSerialization(),
+				[],
+				false
+			)
+		);
 
 		$this->assertInstanceOf( AddItemStatementErrorResponse::class, $response );
 		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $response->getCode() );
 		$this->assertStringContainsString( $itemId, $response->getMessage() );
+	}
+
+	public function testValidationError_returnsErrorResponse(): void {
+		$request = new AddItemStatementRequest( 'X123', [], [], false );
+
+		$response = $this->newUseCase()->execute( $request );
+		$this->assertInstanceOf( AddItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $response->getCode() );
 	}
 
 	private function newUseCase(): AddItemStatement {
@@ -130,10 +146,12 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 		$snakValidator->method( 'validateStatementSnaks' )->willReturn( Result::newSuccess() );
 
 		return new AddItemStatementValidator(
+			new ItemIdValidator(),
 			new SnakValidatorStatementValidator(
 				WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer(),
 				$snakValidator
-			)
+			),
+			new EditMetadataValidator( self::ALLOWED_TAGS )
 		);
 	}
 
