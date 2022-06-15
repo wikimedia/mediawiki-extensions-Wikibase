@@ -12,6 +12,7 @@ import { defineComponent } from 'vue';
 
 export default defineComponent( {
 	name: 'IndeterminateProgressBar',
+	compatConfig: { MODE: 3 },
 } );
 </script>
 <style lang="scss">

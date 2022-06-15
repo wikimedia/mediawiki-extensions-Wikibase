@@ -62,6 +62,7 @@ export default defineComponent( {
 			this.rootModule.dispatch( 'goBackFromErrorToReady' );
 		},
 	},
+	compatConfig: { MODE: 3 },
 } );
 </script>
 

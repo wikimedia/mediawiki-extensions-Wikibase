@@ -31,6 +31,7 @@ export default defineComponent( {
 			required: true,
 		},
 	},
+	compatConfig: { MODE: 3 },
 } );
 
 </script>

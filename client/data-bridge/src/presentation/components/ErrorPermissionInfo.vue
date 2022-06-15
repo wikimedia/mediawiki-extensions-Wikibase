@@ -62,6 +62,7 @@ export default defineComponent( {
 			this.infoIsExpanded = !this.infoIsExpanded;
 		},
 	},
+	compatConfig: { MODE: 3 },
 } );
 </script>
 

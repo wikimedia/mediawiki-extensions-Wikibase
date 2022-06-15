@@ -143,6 +143,7 @@ export default defineComponent( {
 			this.$emit( 'reload' );
 		},
 	},
+	compatConfig: { MODE: 3 },
 } );
 </script>
 
