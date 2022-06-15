@@ -169,6 +169,20 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 		return [];
 	}
 
+	public function providePageProperties() {
+		yield from parent::providePageProperties();
+
+		$contentWithClaim = $this->newEntityContent();
+		$snak = new PropertyNoValueSnak( 83 );
+		$guid = '$testing$';
+		$contentWithClaim->getEntity()->getStatements()->addNewStatement( $snak, null, null, $guid );
+
+		yield 'claims' => [
+			$contentWithClaim,
+			[ 'wb-claims' => 1 ]
+		];
+	}
+
 	public function testDataForSearchIndex() {
 		$handler = $this->getHandler();
 		$engine = $this->createMock( \SearchEngine::class );
