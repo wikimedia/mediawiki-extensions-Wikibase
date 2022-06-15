@@ -5,6 +5,8 @@ namespace Wikibase\Lib\Tests;
 use Deserializers\Deserializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\Deserializers\DeserializerFactory;
+use Wikibase\DataModel\Deserializers\ItemDeserializer;
+use Wikibase\DataModel\Deserializers\PropertyDeserializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Serializers\PropertySerializer;
 use Wikibase\DataModel\Serializers\SerializerFactory;
@@ -45,13 +47,13 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 	 * @return DeserializerFactory
 	 */
 	private function getDeserializerFactory( $entityType ) {
-		$deserializerFactory = $this->getMockBuilder( DeserializerFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
-
+		$deserializerFactory = $this->createMock( DeserializerFactory::class );
 		$deserializerFactory->expects( $this->once() )
 			->method( 'new' . $entityType . 'Deserializer' )
-			->willReturn( $this->createMock( Deserializer::class ) );
+			->willReturn( [
+				'item' => $this->createStub( ItemDeserializer::class ),
+				'property' => $this->createStub( PropertyDeserializer::class ),
+			][$entityType] );
 
 		return $deserializerFactory;
 	}
