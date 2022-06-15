@@ -15,6 +15,8 @@ class ErrorResponseToHttpStatus {
 		ErrorResponse::INVALID_ITEM_ID => 400,
 		ErrorResponse::INVALID_STATEMENT_ID => 400,
 		ErrorResponse::INVALID_FIELD => 400,
+		ErrorResponse::INVALID_EDIT_TAG => 400,
+		ErrorResponse::INVALID_STATEMENT_DATA => 400,
 		ErrorResponse::ITEM_NOT_FOUND => 404,
 		ErrorResponse::STATEMENT_NOT_FOUND => 404,
 		ErrorResponse::UNEXPECTED_ERROR => 500
