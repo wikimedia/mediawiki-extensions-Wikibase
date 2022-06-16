@@ -479,7 +479,7 @@
 	"wikibase-federated-properties-special-list-of-properties-notice": "此 Wikibase 使用來自外部來源的聯合屬性。您可以存取$1。",
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 在$2的屬性清單]",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "取消",
-	"wikibase-federated-properties-leaving-site-notice-continue": "繼續獲取 Wiki",
+	"wikibase-federated-properties-leaving-site-notice-continue": "繼續前往源wiki",
 	"wikibase-federated-properties-leaving-site-notice-notice": "此為聯合屬性。您將會被重新導向到$1來查看該詳細內容。",
 	"wikibase-federated-properties-leaving-site-notice-header": "離開本地 Wikibase",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "不必再對我顯示此訊息",

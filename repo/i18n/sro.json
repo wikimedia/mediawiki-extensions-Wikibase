@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"F Samaritani"
+			"F Samaritani",
+			"Jaime Sulas"
 		]
 	},
+	"wikibase-edit": "muda",
 	"wikibase-add": "aciungi"
 }
