@@ -197,7 +197,7 @@
 	"wikibase-gotolinkedpage-lookup-item": "Ідэнтыфікатар элемэнту:",
 	"wikibase-gotolinkedpage-submit": "Перайсці",
 	"wikibase-gotolinkedpage-summary": "Special:GoToLinkedPage выкарыстоўваецца для пошуку старонкі элементу на далучаным сайце.<br />Першае поле, «{{int:wikibase-gotolinkedpage-lookup-site}}», куды вы ўводзіце мову і код сайту.<br />У другое поле, «{{int:wikibase-gotolinkedpage-lookup-item}}», вы мусіце ўвесці ідэнтыфікатар элементу, які вы шукаеце.",
-	"wikibase-gotolinkedpage-error-page-not-found": "Ня знойдзена старонак для такой камбінацыі элементу і сайту",
+	"wikibase-gotolinkedpage-error-page-not-found": "Не знойдзена старонак для такой камбінацыі Элементу і сайту",
 	"wikibase-gotolinkedpage-error-item-id-invalid": "Уведзены ідэнтыфікатар элементу не з’яўляецца слушным",
 	"wikibase-gotolinkedpage-error-item-not-found": "Элемент не знойдзены",
 	"special-itemdisambiguation": "Неадназначнасць элементаў",
