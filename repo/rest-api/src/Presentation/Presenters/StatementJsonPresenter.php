@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Presentation\Presenters;
 
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Domain\Serializers\StatementSerializer;
-use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementSuccessResponse;
 
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemStatementJsonPresenter {
+class StatementJsonPresenter {
 
 	private $serializer;
 
@@ -16,9 +16,7 @@ class GetItemStatementJsonPresenter {
 		$this->serializer = $serializer;
 	}
 
-	public function getJson( GetItemStatementSuccessResponse $response ): string {
-		return json_encode(
-			$this->serializer->serialize( $response->getStatement() )
-		);
+	public function getJson( Statement $statement ): string {
+		return json_encode( $this->serializer->serialize( $statement ) );
 	}
 }
