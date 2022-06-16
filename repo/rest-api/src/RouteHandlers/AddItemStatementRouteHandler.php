@@ -79,7 +79,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		);
 
 		if ( $useCaseResponse instanceof AddItemStatementSuccessResponse ) {
-			$httpResponse = $this->newSuccessHttpResponse( $useCaseResponse );
+			$httpResponse = $this->newSuccessHttpResponse( $useCaseResponse, $itemId );
 		} elseif ( $useCaseResponse instanceof AddItemStatementErrorResponse ) {
 			$httpResponse = $this->responseFactory->newErrorResponse( $useCaseResponse );
 		} else {
@@ -135,7 +135,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		] );
 	}
 
-	private function newSuccessHttpResponse( AddItemStatementSuccessResponse $useCaseResponse ): Response {
+	private function newSuccessHttpResponse( AddItemStatementSuccessResponse $useCaseResponse, string $itemId ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setStatus( 201 );
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
@@ -144,6 +144,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 			wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
 		);
 		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
+		$this->setLocationHeader( $httpResponse, $itemId, $useCaseResponse->getStatement()->getGuid() );
 		$httpResponse->setBody(
 			new StringStream(
 				$this->successPresenter->getJson( $useCaseResponse->getStatement() )
@@ -162,6 +163,18 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 
 	private function setEtagFromRevId( Response $httpResponse, int $revId ): void {
 		$httpResponse->setHeader( 'ETag', "\"$revId\"" );
+	}
+
+	private function setLocationHeader( Response $httpResponse, string $itemId, string $statementGuid ): void {
+		$newStatementUrl = $this->getRouter()->getRouteUrl(
+			GetItemStatementRouteHandler::ROUTE,
+			[
+				GetItemStatementRouteHandler::ITEM_ID_PATH_PARAM => $itemId,
+				GetItemStatementRouteHandler::STATEMENT_ID_PATH_PARAM => $statementGuid,
+			]
+		);
+
+		$httpResponse->setHeader( 'Location', $newStatementUrl );
 	}
 
 }

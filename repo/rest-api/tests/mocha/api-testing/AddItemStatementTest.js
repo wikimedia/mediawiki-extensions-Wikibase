@@ -30,6 +30,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 		assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
 		assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
 		assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
+		assert.header( response, 'Location', response.request.url + '/' + encodeURIComponent( response.body.id ) );
 		assert.deepInclude( response.body.mainsnak, testStatement.mainsnak );
 	}
 
