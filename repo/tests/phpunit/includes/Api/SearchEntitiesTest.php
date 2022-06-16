@@ -138,7 +138,8 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->newMockUrlLookup(),
 			$this->newMockArticleIdLookup(),
 			$this->createMock( ApiErrorReporter::class ),
-			[ 'item', 'property' ]
+			[ 'item', 'property' ],
+			[ 'default' => null ]
 		);
 
 		$module->execute();
@@ -440,7 +441,8 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->newMockUrlLookup(),
 			$this->newMockArticleIdLookup(),
 			$this->createMock( ApiErrorReporter::class ),
-			[ 'kitten' ]
+			[ 'kitten' ],
+			[ 'default' => null ]
 		);
 
 		$module->execute();

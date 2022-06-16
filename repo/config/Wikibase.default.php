@@ -269,6 +269,9 @@ return [
 	// List of properties that, if in a qualifier, will be used for indexing quantities
 	'searchIndexQualifierPropertiesForQuantity' => [],
 
+	// Search profiles available in wbsearchentities & query+wbsearch
+	'searchProfiles' => [ 'default' => null ],
+
 	// DB group to use in dump maintenance scripts. Defaults to "dump", per T147169.
 	'dumpDBDefaultGroup' => 'dump',
 

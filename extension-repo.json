@@ -185,6 +185,7 @@
 				"WikibaseRepo.EntitySourceLookup",
 				"WikibaseRepo.EntityTitleTextLookup",
 				"WikibaseRepo.EntityUrlLookup",
+				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermsLanguages"
 			]
 		},
@@ -291,6 +292,7 @@
 				"WikibaseRepo.EnabledEntityTypes",
 				"WikibaseRepo.EntitySearchHelperCallbacks",
 				"WikibaseRepo.EntityTitleLookup",
+				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermsLanguages"
 			]
 		},

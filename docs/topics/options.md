@@ -344,6 +344,17 @@ Array of properties (by ID string) that, if used in a qualifier, will be used to
 
 Relevant only for search engines supporting it.
 
+#### searchProfiles
+Array of search profiles offered by the wbsearchentities and query+wbsearch API modules.
+Keys are strings available as parameter values in the API;
+the first key will be used as the default value if the parameter is not specified,
+and it’s strongly recommended to make the first key 'default' with the value null.
+Values are strings or null, and should be understood by the `EntitySearchHelper` implementation used by the wiki;
+this may depend on other extensions, such as WikibaseCirrusSearch.
+Must be nonempty.
+
+DEFAULT: ```[ 'default' => null ]```
+
 ### Termbox & SSR
 
 #### termboxEnabled {#repo_termboxEnabled}

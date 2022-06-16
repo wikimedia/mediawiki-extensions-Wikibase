@@ -13,6 +13,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
@@ -68,6 +69,9 @@ class SearchEntities extends ApiBase {
 	 */
 	private $enabledEntityTypes;
 
+	/** @var (string|null)[] */
+	private $searchProfiles;
+
 	/**
 	 * @see ApiBase::__construct
 	 */
@@ -81,7 +85,8 @@ class SearchEntities extends ApiBase {
 		EntityUrlLookup $entityUrlLookup,
 		EntityArticleIdLookup $entityArticleIdLookup,
 		ApiErrorReporter $errorReporter,
-		array $enabledEntityTypes
+		array $enabledEntityTypes,
+		array $searchProfiles
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );
 
@@ -95,6 +100,7 @@ class SearchEntities extends ApiBase {
 		$this->entityArticleIdLookup = $entityArticleIdLookup;
 		$this->errorReporter = $errorReporter;
 		$this->enabledEntityTypes = $enabledEntityTypes;
+		$this->searchProfiles = $searchProfiles;
 	}
 
 	public static function factory(
@@ -107,6 +113,7 @@ class SearchEntities extends ApiBase {
 		EntitySourceLookup $entitySourceLookup,
 		EntityTitleTextLookup $entityTitleTextLookup,
 		EntityUrlLookup $entityUrlLookup,
+		SettingsArray $repoSettings,
 		ContentLanguages $termsLanguages
 	): self {
 
@@ -120,7 +127,8 @@ class SearchEntities extends ApiBase {
 			$entityUrlLookup,
 			$entityArticleIdLookup,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
-			$enabledEntityTypes
+			$enabledEntityTypes,
+			$repoSettings->getSetting( 'searchProfiles' )
 		);
 	}
 
@@ -143,7 +151,7 @@ class SearchEntities extends ApiBase {
 				$params['type'],
 				$params['continue'] + $params['limit'] + 1,
 				$params['strictlanguage'],
-				null
+				$params['profile'] ?? null
 			);
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );
@@ -322,7 +330,7 @@ class SearchEntities extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getAllowedParams(): array {
-		return [
+		$params = [
 			'search' => [
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
@@ -357,6 +365,15 @@ class SearchEntities extends ApiBase {
 				ParamValidator::PARAM_DEFAULT => 'url',
 			],
 		];
+		// *temporarily* only make this param available if configured (T307869)
+		if ( count( $this->searchProfiles ) > 1 ) {
+			$params['profile'] = [
+				ParamValidator::PARAM_TYPE => array_keys( $this->searchProfiles ),
+				ParamValidator::PARAM_DEFAULT => array_key_first( $this->searchProfiles ),
+				self::PARAM_HELP_MSG_PER_VALUE => [],
+			];
+		}
+		return $params;
 	}
 
 	/**

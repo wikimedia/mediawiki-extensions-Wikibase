@@ -151,7 +151,8 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 			$this->getMockEntitySearchHelper( $params, $matches, $failureStatus ),
 			$this->getMockTitleLookup(),
 			$this->getContentLanguages(),
-			[ 'item', 'property' ]
+			[ 'item', 'property' ],
+			[ 'default' => null ]
 		);
 
 		$continuationManager = new ApiContinuationManager( $api, [ $api ] );
