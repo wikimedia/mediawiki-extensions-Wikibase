@@ -82,14 +82,14 @@ class RequestBuilder {
 			this.validateRequest( spec, method );
 		}
 
-		switch ( method ) {
+		switch ( method.toUpperCase() ) {
 			case 'GET':
 				return rest.request( this.makePath(), method, this.queryParams, this.headers );
 			case 'POST':
-				if ( Object.keys( this.queryParams ).length !== 0 ) {
-					throw new Error( 'withQueryParams() can\'t be used with the \'POST\' method' );
-				}
-				return rest.request( this.makePath(), method, this.jsonBodyParams, this.headers );
+				return rest.req.post( basePath + this.makePath() )
+					.set( this.headers )
+					.query( this.queryParams )
+					.send( this.jsonBodyParams );
 			default:
 				throw new Error( `The "${method}" method is not supported by ${this.constructor.name}` );
 		}

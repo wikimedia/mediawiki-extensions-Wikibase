@@ -10,12 +10,15 @@ async function createEntity( type, entity ) {
 	}, 'POST' );
 }
 
-async function createSingleItem() {
-	const createPropertyResponse = await createEntity( 'property', {
+async function createUniqueStringProperty() {
+	return await createEntity( 'property', {
 		labels: { en: { language: 'en', value: `string-property-${utils.uniq()}` } },
 		datatype: 'string'
 	} );
-	const stringPropId = createPropertyResponse.entity.id;
+}
+
+async function createSingleItem() {
+	const stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
 
 	const item = {
 		labels: { en: { language: 'en', value: `non-empty-item-${utils.uniq()}` } },
@@ -25,28 +28,28 @@ async function createSingleItem() {
 			{ // with value, without qualifiers or references
 				mainsnak: {
 					snaktype: 'value',
-					property: stringPropId,
+					property: stringPropertyId,
 					datavalue: { value: 'im a statement value', type: 'string' }
 				}, type: 'statement', rank: 'normal'
 			},
 			{ // no value, with qualifier and reference
 				mainsnak: {
 					snaktype: 'novalue',
-					property: stringPropId
+					property: stringPropertyId
 				},
 				type: 'statement',
 				rank: 'normal',
 				qualifiers: [
 					{
 						snaktype: 'value',
-						property: stringPropId,
+						property: stringPropertyId,
 						datavalue: { value: 'im a qualifier value', type: 'string' }
 					}
 				],
 				references: [ {
 					snaks: [ {
 						snaktype: 'value',
-						property: stringPropId,
+						property: stringPropertyId,
 						datavalue: { value: 'im a reference value', type: 'string' }
 					} ]
 				} ]
@@ -75,5 +78,6 @@ async function createRedirectForItem( redirectTarget ) {
 module.exports = {
 	createEntity,
 	createSingleItem,
+	createUniqueStringProperty,
 	createRedirectForItem
 };

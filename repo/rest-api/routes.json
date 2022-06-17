@@ -10,6 +10,11 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemStatementsRouteHandler::factory"
 	},
 	{
+		"path": "/wikibase/v0/entities/items/{item_id}/statements",
+		"method": "POST",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\AddItemStatementRouteHandler::factory"
+	},
+	{
 		"path": "/wikibase/v0/entities/items/{item_id}/statements/{statement_id}",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemStatementRouteHandler::factory"
