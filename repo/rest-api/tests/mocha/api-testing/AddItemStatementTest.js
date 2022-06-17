@@ -124,19 +124,17 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			assert.strictEqual( response.body.code, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
-		// Skipping due to JsonBodyValidator not currently validating types. See T305973
-		it.skip( 'invalid bot flag', async () => {
-			const invalidBotFlag = 'should be a boolean';
+
+		it( 'invalid bot flag', async () => {
 			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
-				.withJsonBodyParam( 'bot', invalidBotFlag )
+				.withJsonBodyParam( 'bot', 'should be a boolean' )
 				.assertInvalidRequest()
 				.makeRequest( 'POST' );
 
 			assert.strictEqual( response.status, 400 );
-			// TODO: validating this depends on if it is a WB or MW error response
-			// assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			// assert.strictEqual( response.body.code, 'invalid-bot-flag' );
-			// assert.include( response.body.message, invalidBotFlag );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'bot' );
+			assert.strictEqual( response.body.expectedType, 'boolean' );
 		} );
 		it( 'invalid statement data', async () => {
 			const invalidStatement = {

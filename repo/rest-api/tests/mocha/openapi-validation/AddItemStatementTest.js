@@ -56,8 +56,7 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	// T310783
-	it.skip( '400 Bad Request is valid for invalid statement param type', async () => {
+	it( '400 Bad Request is valid for invalid statement param type', async () => {
 		const response = await newAddItemStatementRequestBuilder(
 			itemId,
 			'invalid statement param type'

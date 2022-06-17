@@ -8,7 +8,6 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
-use MediaWiki\Rest\Validator\JsonBodyValidator;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
@@ -114,10 +113,10 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 			);
 		}
 
-		return new JsonBodyValidator( [
+		return new TypeValidatingJsonBodyValidator( [
 			self::STATEMENT_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'array',
+				ParamValidator::PARAM_TYPE => 'object',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
 			self::TAGS_BODY_PARAM => [
