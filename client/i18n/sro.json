@@ -1,9 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"F Samaritani"
+			"F Samaritani",
+			"Jaime Sulas"
 		]
 	},
+	"wikibase-dataitem": "Elementu {{WBREPONAME}}",
+	"wikibase-editlinks": "Muda acàpius",
+	"wikibase-linkitem-addlinks": "Aciungi acàpius",
+	"wikibase-linkitem-title": "Acàpia a un'àtera pàgina",
+	"wikibase-linkitem-linkpage": "Acàpia a sa pàgina",
+	"wikibase-linkitem-selectlink": "Scebera unu giassu e una pàgina chi bolis acapiai a custa.",
 	"wikibase-linkitem-input-site": "Lìngua:",
 	"wikibase-linkitem-input-page": "Boxi:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

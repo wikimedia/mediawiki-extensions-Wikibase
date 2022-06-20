@@ -3,7 +3,8 @@
 		"authors": [
 			"BadDog",
 			"Zoranzoki21",
-			"Милан Јелисавчић"
+			"Милан Јелисавчић",
+			"Kizule"
 		]
 	},
 	"apihelp-wbeditentity-example-12": "Уклања ознаку",
@@ -20,7 +21,7 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Појмови (ознака, опис, псеудоними) ентитета.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "Једнојезична вредност текста у изјави.",
 	"apihelp-query+wbcontentlanguages-param-prop": "Својства која треба де буду враћена за сваки језик.",
-	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Кôд језика.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Језички код.",
 	"apihelp-query+wbsearch-param-search": "Претрага за овај текст.",
 	"apihelp-query+wbsearch-param-language": "Претрага на овом језику.",
 	"apihelp-query+wbsearch-param-limit": "Максимални број резултата",
