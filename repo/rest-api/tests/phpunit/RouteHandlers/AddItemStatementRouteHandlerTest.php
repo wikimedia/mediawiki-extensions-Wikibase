@@ -11,7 +11,6 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
 /**
- *
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\AddItemStatementRouteHandler
  *
  * @group Wikibase
