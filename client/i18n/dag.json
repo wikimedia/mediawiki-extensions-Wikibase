@@ -8,7 +8,8 @@
 			"Hidrash",
 			"Masssly",
 			"Musahfm",
-			"Shahadusadik"
+			"Shahadusadik",
+			"Sir Amugi"
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}} Bini ŋɔ taɣimi",
@@ -22,5 +23,10 @@
 	"wikibase-rc-hide-wikidata-show": "Wuhima",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} maliniŋ",
-	"wikibase-otherprojects": "Tuunshɛŋa ni"
+	"wikibase-otherprojects": "Tuunshɛŋa ni",
+	"wikibase-sitelinks-sitename-columnheading": "Balli",
+	"wikibase-client-data-bridge-dialog-title": "Maliniŋ $1",
+	"wikibase-client-data-bridge-references-heading": "Kundivihira",
+	"wikibase-client-data-bridge-error-go-back": "Labimi nyaaŋa",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Kpaŋsim maliniŋ"
 }

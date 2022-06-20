@@ -6,5 +6,9 @@
 		]
 	},
 	"wikibase-edit": "muda",
-	"wikibase-add": "aciungi"
+	"wikibase-add": "aciungi",
+	"wikibase-label-empty": "Peruna eticheta definida",
+	"wikibase-description-empty": "Peruna descridura definida",
+	"wikibase-sitelinks-special": "Àterus giassus",
+	"wikibase-statementview-rank-normal": "Classificau normali"
 }

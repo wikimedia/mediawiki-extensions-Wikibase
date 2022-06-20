@@ -9,6 +9,7 @@
 			"MinecraftAustralia",
 			"Rakeshonwiki",
 			"Shanmugamp7",
+			"Siddhan",
 			"கலைவாணன்",
 			"மதனாஹரன்"
 		]
@@ -16,6 +17,12 @@
 	"wikibase-dataitem": "{{WBREPONAME}}உருப்படி",
 	"wikibase-editlinks": "இணைப்புக்களைத் தொகு",
 	"wikibase-editlinkstitle": "பிற மொழி விக்கி இணைப்புகளைத் தொகு",
+	"wikibase-linkitem-addlinks": "இணைப்புகளைச் சேர்க்கவும்",
+	"wikibase-linkitem-title": "பக்கத்துடன் இணைக்கவும்",
+	"wikibase-linkitem-linkpage": "பக்கத்துடன் இணைக்கவும்",
+	"wikibase-linkitem-selectlink": "இந்தப் பக்கத்துடன் இணைக்க விரும்பும் தளத்தையும் பக்கத்தையும் தேர்ந்தெடுக்கவும்",
+	"wikibase-linkitem-input-site": "மொழி:",
+	"wikibase-linkitem-input-page": "பக்கம்:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "மறை",
 	"wikibase-rc-hide-wikidata-show": "காட்டு",
