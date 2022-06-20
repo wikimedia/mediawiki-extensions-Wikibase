@@ -144,11 +144,6 @@ class SearchEntities extends ApiBase {
 	 * @throws \ApiUsageException
 	 */
 	private function getSearchEntries( array $params ): array {
-		$profile = null;
-		if ( count( $this->searchProfiles ) > 1 ) {
-			// TODO remove this check once profile param always available (T307869)
-			$profile = $this->searchProfiles[$params['profile']];
-		}
 		try {
 			$searchResults = $this->entitySearchHelper->getRankedSearchResults(
 				$params['search'],
@@ -156,7 +151,7 @@ class SearchEntities extends ApiBase {
 				$params['type'],
 				$params['continue'] + $params['limit'] + 1,
 				$params['strictlanguage'],
-				$profile
+				$this->searchProfiles[$params['profile']]
 			);
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );
@@ -335,7 +330,7 @@ class SearchEntities extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getAllowedParams(): array {
-		$params = [
+		return [
 			'search' => [
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
@@ -369,16 +364,12 @@ class SearchEntities extends ApiBase {
 				ParamValidator::PARAM_ISMULTI => true,
 				ParamValidator::PARAM_DEFAULT => 'url',
 			],
-		];
-		// *temporarily* only make this param available if configured (T307869)
-		if ( count( $this->searchProfiles ) > 1 ) {
-			$params['profile'] = [
+			'profile' => [
 				ParamValidator::PARAM_TYPE => array_keys( $this->searchProfiles ),
 				ParamValidator::PARAM_DEFAULT => array_key_first( $this->searchProfiles ),
 				self::PARAM_HELP_MSG_PER_VALUE => [],
-			];
-		}
-		return $params;
+			],
+		];
 	}
 
 	/**
