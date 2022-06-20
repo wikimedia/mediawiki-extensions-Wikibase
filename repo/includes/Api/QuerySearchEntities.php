@@ -142,7 +142,8 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 				$params['language'] ?: $this->getLanguage()->getCode(),
 				$params['type'],
 				$params['limit'],
-				$params['strictlanguage']
+				$params['strictlanguage'],
+				null
 			);
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );

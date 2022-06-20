@@ -100,7 +100,8 @@ class ApiEntitySearchHelperTest extends TestCase {
 			$langCode,
 			'property',
 			$params[ 'limit' ],
-			$params[ 'strictlanguage' ]
+			$params[ 'strictlanguage' ],
+			null
 		);
 
 		$this->assertSame( count( $expectedResultsEntityIds ), count( $results ) );
@@ -169,7 +170,8 @@ class ApiEntitySearchHelperTest extends TestCase {
 			$langCode,
 			'property',
 			$params[ 'limit' ],
-			$params[ 'strictlanguage' ]
+			$params[ 'strictlanguage' ],
+			null
 		);
 
 		$this->assertSame( count( $expectedResultsEntityIds ), count( $results ) );
@@ -249,8 +251,8 @@ class ApiEntitySearchHelperTest extends TestCase {
 				$langCode,
 				'property',
 				$params[ 'limit' ],
-				$params[ 'strictlanguage' ]
-
+				$params[ 'strictlanguage' ],
+				null
 			);
 		} catch ( ApiRequestException $exception ) {
 			$this->assertEquals( 'Unexpected response output', $exception->getMessage() );

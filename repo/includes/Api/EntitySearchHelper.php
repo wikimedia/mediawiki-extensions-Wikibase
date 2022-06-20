@@ -18,6 +18,7 @@ interface EntitySearchHelper {
 	 * @param string $entityType
 	 * @param int $limit
 	 * @param bool $strictLanguage
+	 * @param string|null $profileContext indication given to the engine on the context this search is made (might affect ranking)
 	 *
 	 * @return TermSearchResult[] Key: string Serialized EntityId
 	 * @throws EntitySearchException when a problem occurs fetching data from the underlying datastore
@@ -27,7 +28,8 @@ interface EntitySearchHelper {
 		$languageCode,
 		$entityType,
 		$limit,
-		$strictLanguage
+		$strictLanguage,
+		?string $profileContext
 	);
 
 }

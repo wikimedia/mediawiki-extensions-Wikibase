@@ -70,7 +70,7 @@ class PropertyDataTypeSearchHelperTest extends \PHPUnit\Framework\TestCase {
 			);
 
 		$results = ( new PropertyDataTypeSearchHelper( $searchHelper, $dataTypeLookup ) )
-			->getRankedSearchResults( $searchText, $searchLanguageCode, $searchEntityType, $searchLimit, $searchStrictLanguage );
+			->getRankedSearchResults( $searchText, $searchLanguageCode, $searchEntityType, $searchLimit, $searchStrictLanguage, null );
 
 		$this->assertSame( $property1TermSearchResult->getDisplayDescription(), $results[0]->getDisplayDescription() );
 		$this->assertSame( $property1TermSearchResult->getDisplayLabel(), $results[0]->getDisplayLabel() );

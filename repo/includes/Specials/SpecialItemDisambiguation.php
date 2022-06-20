@@ -194,7 +194,8 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$languageCode,
 			'item',
 			$this->limit,
-			false
+			false,
+			null
 		);
 	}
 

@@ -42,7 +42,7 @@ class CombinedEntitySearchHelperTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( $q33 );
 
 		$helper = new CombinedEntitySearchHelper( [ $mock1 ] );
-		$helper->getRankedSearchResults( 'a', 'b', 'c', 1, true );
+		$helper->getRankedSearchResults( 'a', 'b', 'c', 1, true, null );
 	}
 
 	public function testInternalSearchHelperExecutedInCorrectOrderAndOutputCorrectly() {
@@ -59,7 +59,7 @@ class CombinedEntitySearchHelperTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( $q1 );
 
 		$helper = new CombinedEntitySearchHelper( [ $mock1, $mock2 ] );
-		$result = $helper->getRankedSearchResults( '', '', '', 2, false );
+		$result = $helper->getRankedSearchResults( '', '', '', 2, false, null );
 
 		$this->assertEquals(
 			[
@@ -84,7 +84,7 @@ class CombinedEntitySearchHelperTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( $q1 );
 
 		$helper = new CombinedEntitySearchHelper( [ $mock1, $mock2 ] );
-		$result = $helper->getRankedSearchResults( '', '', '', 1, false );
+		$result = $helper->getRankedSearchResults( '', '', '', 1, false, null );
 
 		$this->assertArrayNotHasKey( 'Q1', $result );
 		$this->assertArrayHasKey( 'Q33', $result );
@@ -105,7 +105,7 @@ class CombinedEntitySearchHelperTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( $result2 );
 
 		$helper = new CombinedEntitySearchHelper( [ $mock1, $mock2 ] );
-		$result = $helper->getRankedSearchResults( '', '', '', 2, false );
+		$result = $helper->getRankedSearchResults( '', '', '', 2, false, null );
 
 		$this->assertEquals(
 			[

@@ -137,7 +137,7 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	public function testGetRankedSearchResults( $search, $limit, array $expected ) {
 		$entitySearchHelper = $this->newEntitySearchHelper( [ 'item' => [ '' ] ] );
 
-		$results = $entitySearchHelper->getRankedSearchResults( $search, 'en', 'item', $limit, false );
+		$results = $entitySearchHelper->getRankedSearchResults( $search, 'en', 'item', $limit, false, null );
 		$this->assertEquals( $expected, $results );
 	}
 
@@ -152,7 +152,7 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 
 		$entitySearchHelper = $this->newEntitySearchHelper( [ 'item' => [ self::FOREIGN_REPO_PREFIX ] ] );
 
-		$results = $entitySearchHelper->getRankedSearchResults( self::EXISTING_FOREIGN_ITEM, 'en', 'item', 10, false );
+		$results = $entitySearchHelper->getRankedSearchResults( self::EXISTING_FOREIGN_ITEM, 'en', 'item', 10, false, null );
 		$this->assertEquals(
 			[ self::EXISTING_FOREIGN_ITEM => $existingForeignItemResult ],
 			$results
@@ -181,7 +181,8 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 				'en',
 				'item',
 				10,
-				false
+				false,
+				null
 			)
 		);
 	}

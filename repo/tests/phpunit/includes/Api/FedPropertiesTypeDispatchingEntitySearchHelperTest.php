@@ -36,7 +36,7 @@ class FedPropertiesTypeDispatchingEntitySearchHelperTest extends \PHPUnit\Framew
 			$typeDispatchingSearch
 		);
 
-		$helper->getRankedSearchResults( 'some text', 'en', 'entity_type', 1, true );
+		$helper->getRankedSearchResults( 'some text', 'en', 'entity_type', 1, true, null );
 	}
 
 	public function testInternalSearchHelperIsCombinedSearchHelperWhenEntityTypeIsProperty() {
@@ -54,11 +54,11 @@ class FedPropertiesTypeDispatchingEntitySearchHelperTest extends \PHPUnit\Framew
 			$typeDispatchingSearch
 		);
 
-		$helper->getRankedSearchResults( 'some text', 'en', 'property', 1, true );
+		$helper->getRankedSearchResults( 'some text', 'en', 'property', 1, true, null );
 
 		$this->assertSame(
 			$p31,
-			$helper->getRankedSearchResults( 'some text', 'en', 'property', 1, true )
+			$helper->getRankedSearchResults( 'some text', 'en', 'property', 1, true, null )
 		);
 	}
 
@@ -77,11 +77,11 @@ class FedPropertiesTypeDispatchingEntitySearchHelperTest extends \PHPUnit\Framew
 			$typeDispatchingSearch
 		);
 
-		$helper->getRankedSearchResults( 'some text', 'en', 'potato', 1, true );
+		$helper->getRankedSearchResults( 'some text', 'en', 'potato', 1, true, null );
 
 		$this->assertSame(
 			$q33,
-			$helper->getRankedSearchResults( 'some text', 'en', 'potato', 1, true )
+			$helper->getRankedSearchResults( 'some text', 'en', 'potato', 1, true, null )
 		);
 	}
 
