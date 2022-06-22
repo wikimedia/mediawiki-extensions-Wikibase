@@ -25,7 +25,7 @@ class UnexpectedErrorHandler {
 	public function runWithErrorHandling( callable $run, array $args ) {
 		try {
 			return $run( ...$args );
-		} catch ( \Exception $exception ) {
+		} catch ( \Throwable $exception ) {
 			$this->logger->debug( (string)$exception );
 
 			return $this->responseFactory->newErrorResponse(

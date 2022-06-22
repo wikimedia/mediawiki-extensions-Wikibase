@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -19,11 +20,14 @@ use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
  */
 class UnexpectedErrorHandlerTest extends TestCase {
 
-	public function testHandlesError(): void {
+	/**
+	 * @dataProvider throwableProvider
+	 */
+	public function testHandlesError( \Throwable $throwable ): void {
 		$errorHandler = new UnexpectedErrorHandler( new ResponseFactory( new ErrorJsonPresenter() ), new NullLogger() );
 
-		$response = $errorHandler->runWithErrorHandling( function (): void {
-			throw new \RuntimeException();
+		$response = $errorHandler->runWithErrorHandling( function () use ( $throwable ): void {
+			throw $throwable;
 		}, [] );
 		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
 		$responseBody = json_decode( $response->getBody()->getContents() );
@@ -60,6 +64,11 @@ class UnexpectedErrorHandlerTest extends TestCase {
 		$errorHandler->runWithErrorHandling( function () use ( $exception ): void {
 			throw $exception;
 		}, [] );
+	}
+
+	public function throwableProvider(): Generator {
+		yield [ new \TypeError() ];
+		yield [ new \RuntimeException() ];
 	}
 
 }
