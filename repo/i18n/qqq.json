@@ -48,6 +48,7 @@
 			"Siebrand",
 			"Stryn",
 			"Umherirrender",
+			"Woytecr",
 			"Yupik",
 			"ZxxZxxZ",
 			"아라"
@@ -339,7 +340,7 @@
 	"wikibase-tokencheck-mustposttoken": "Error message shown when the edit token was not submited using POST.",
 	"wikibase-tokencheck-badtoken": "Error message shown when the edit token is invalid. The most common cause is loss of session data when a session expires or a session cookie is lost.",
 	"special-dispatchstats": "{{doc-special|DispatchStats}}\nThis special page shows statistics about the process used to notify client wikis about changes on the repository. \"Dispatch\" here is similar to \"notify\", \"send\" or \"distribute\".",
-	"wikibase-dispatchstats-intro": "Intro text for [[Special:ChangeDispatchingStats]].",
+	"wikibase-dispatchstats-intro": "Intro text for [[Special:DispatchStats]].",
 	"wikibase-dispatchstats-empty-queue": "Message shown when there are no changes in the queue and we can therefore not show any statistics.",
 	"wikibase-dispatchstats-oldest": "Message for [[Special:DispatchStats]] to show the oldest undispatched change.",
 	"wikibase-dispatchstats-newest": "Message for [[Special:DispatchStats]] to show the newest undispatched change.",
