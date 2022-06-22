@@ -1,0 +1,16 @@
+{
+	"MediawikiEdit": {
+		"type": "object",
+		"properties": {
+			"tags": {
+				"type": "array",
+				"items": { "type": "string" },
+				"default": []
+			},
+			"bot": {
+				"type": "boolean",
+				"default": false
+			}
+		}
+	}
+}

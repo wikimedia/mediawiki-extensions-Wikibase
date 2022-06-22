@@ -8,8 +8,20 @@
 		"$ref": "./resources/index.json"
 	},
 	"components": {
+		"parameters": {
+			"$ref": "./global/parameters.json"
+		},
+		"requestBodies": {
+			"$ref": "./global/requests.json"
+		},
+		"responses": {
+			"$ref": "./global/responses.json"
+		},
 		"schemas": {
 			"$ref": "./global/schemas.json"
+		},
+		"examples": {
+			"$ref": "./global/examples.json"
 		}
 	},
 	"tags": [
