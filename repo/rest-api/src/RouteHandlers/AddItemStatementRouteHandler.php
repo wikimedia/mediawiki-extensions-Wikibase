@@ -4,10 +4,12 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\HttpException;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
+use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
@@ -39,7 +41,6 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		ResponseFactory $responseFactory,
 		UnexpectedErrorHandler $errorHandler
 	) {
-
 		$this->addItemStatement = $addItemStatement;
 		$this->successPresenter = $successPresenter;
 		$this->responseFactory = $responseFactory;
@@ -90,6 +91,20 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		return $httpResponse;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
+	public function validate( Validator $restValidator ) {
+		$contentType = $this->getContentType( $this->getRequest() );
+		if ( $contentType !== 'application/json' ) {
+			throw new HttpException(
+				"Unsupported Content-Type", 415, [ 'content_type' => $contentType ]
+			);
+		}
+
+		parent::validate( $restValidator );
+	}
+
 	public function getParamSettings(): array {
 		return [
 			self::ITEM_ID_PATH_PARAM => [
@@ -101,18 +116,9 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 	}
 
 	/**
-	 * @param string $contentType Content type of the request.
-	 *
-	 * @throws HttpException
+	 * @inheritDoc
 	 */
-	// phpcs:ignore SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	public function getBodyValidator( $contentType ): BodyValidator {
-		if ( $contentType !== 'application/json' ) {
-			throw new HttpException(
-				"Unsupported Content-Type", 415, [ 'content_type' => $contentType ]
-			);
-		}
-
 		return new TypeValidatingJsonBodyValidator( [
 			self::STATEMENT_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
@@ -174,6 +180,13 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		);
 
 		$httpResponse->setHeader( 'Location', $newStatementUrl );
+	}
+
+	// use the helper method if Ie8650198c4afde4721da78ca506548f32732765d gets merged
+	private function getContentType( RequestInterface $request ): string {
+		list( $ct ) = explode( ';', $request->getHeaderLine( 'Content-Type' ), 2 );
+
+		return strtolower( trim( $ct ) );
 	}
 
 }
