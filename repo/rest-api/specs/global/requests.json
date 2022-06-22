@@ -5,16 +5,7 @@
 		"content": {
 			"application/json": {
 				"schema": {
-					"allOf": [
-						{
-							"type": "object",
-							"properties": {
-								"statement": { "$ref": "./schemas.json#/Statement" }
-							},
-							"required": [ "statement" ]
-						},
-						{ "$ref": "./request-parts.json#/MediawikiEdit" }
-					]
+					"$ref": "./request-parts.json#/StatementRequest"
 				}
 			}
 		}

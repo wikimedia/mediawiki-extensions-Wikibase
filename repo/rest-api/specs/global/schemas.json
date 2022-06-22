@@ -24,15 +24,6 @@
 				"$ref": "./schema-parts.json#/Statements"
 			}
 		},
-		"required": [
-			"id",
-			"type",
-			"labels",
-			"descriptions",
-			"aliases",
-			"statements",
-			"sitelinks"
-		],
 		"discriminator": {
 			"propertyName": "type"
 		}
@@ -114,8 +105,7 @@
 				"type": "array",
 				"items": { "$ref": "#/Reference" }
 			}
-		},
-		"required": [ "mainsnak" ]
+		}
 	},
 	"Reference": {
 		"type": "object",
