@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aliyu shaba"
+		]
+	},
+	"wikibase-dataitem": "Awodoy {{WBREPONAME}}",
+	"wikibase-editlinks": "Links yasa",
+	"wikibase-linkitem-addlinks": "Links yiko",
+	"wikibase-linkitem-title": "Link with page",
+	"wikibase-linkitem-linkpage": "Killee nasha diya",
+	"wikibase-linkitem-selectlink": "Site do ra,amadi karnə süro page ra,amaduro yikəə",
+	"wikibase-linkitem-input-site": "Yarənza",
+	"wikibase-linkitem-input-page": "Nasha,a"
+}
