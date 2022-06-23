@@ -59,7 +59,7 @@ class RequestBuilder {
 	}
 
 	withHeader( name, value ) {
-		this.headers[ name ] = value;
+		this.headers[ name.toLowerCase() ] = value;
 		return this;
 	}
 
@@ -82,6 +82,10 @@ class RequestBuilder {
 			this.validateRequest( spec, method );
 		}
 
+		const body = this.headers[ 'content-type' ] === 'multipart/form-data' ?
+			new URLSearchParams( this.jsonBodyParams ).toString() :
+			this.jsonBodyParams;
+
 		switch ( method.toUpperCase() ) {
 			case 'GET':
 				return rest.request( this.makePath(), method, this.queryParams, this.headers );
@@ -89,7 +93,7 @@ class RequestBuilder {
 				return rest.req.post( basePath + this.makePath() )
 					.set( this.headers )
 					.query( this.queryParams )
-					.send( this.jsonBodyParams );
+					.send( body );
 			default:
 				throw new Error( `The "${method}" method is not supported by ${this.constructor.name}` );
 		}
