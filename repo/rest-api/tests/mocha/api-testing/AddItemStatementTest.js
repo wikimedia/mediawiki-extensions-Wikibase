@@ -165,6 +165,19 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 		} );
 	} );
 
+	describe( '415 error response', () => {
+		it( 'unsupported media type', async () => {
+			const contentType = 'multipart/form-data';
+			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
+				.withHeader( 'content-type', contentType )
+				.makeRequest( 'POST' );
+
+			assert.strictEqual( response.status, 415 );
+			assert.strictEqual( response.body.message, 'Unsupported Content-Type' );
+			assert.strictEqual( response.body.content_type, contentType );
+		} );
+	} );
+
 	describe( 'authentication', () => {
 
 		it( 'has an X-Authenticated-User header with the logged in user', async () => {
