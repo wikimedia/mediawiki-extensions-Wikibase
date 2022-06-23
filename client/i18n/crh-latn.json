@@ -32,5 +32,6 @@
 	"wikibase-error-invalid-entity-id": "Yazılğan ID sistemağa belli degil. Keçerli IDlerden birini qullanıñız.",
 	"unconnectedpages": "Elementlerge bağlanmağan saifeler",
 	"wikibase-otherprojects": "Başqa leyhalarda",
-	"wikibase-sitelinks-link-columnheading": "Bağlanğan saife"
+	"wikibase-sitelinks-link-columnheading": "Bağlanğan saife",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Kirmeden devam et"
 }
