@@ -28,6 +28,7 @@
 			"201": { "$ref": "../../global/responses.json#/Statement" },
 			"400": { "$ref": "../../global/responses.json#/InvalidNewStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
+			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	}

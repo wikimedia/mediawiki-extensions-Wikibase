@@ -18,6 +18,30 @@
 			}
 		}
 	},
+	"ItemRedirected": {
+		"description": "The specified Item was redirected",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"item-redirected": {
+						"value": {
+							"code": "redirected-item",
+							"message": "Item {item_id} has been merged into {other_id}."
+						}
+					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"StatementNotFound": {
 		"description": "The specified Statement was not found",
 		"content": {
