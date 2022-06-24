@@ -1,8 +1,13 @@
 {
-	"Hash": {
-		"type": "string",
-		"example": "455481eeac76e6a8af71a6b493c073d54788e7e9",
-		"readOnly": true
+	"HashBearing": {
+		"type": "object",
+		"properties": {
+			"hash": {
+				"type": "string",
+				"example": "455481eeac76e6a8af71a6b493c073d54788e7e9",
+				"readOnly": true
+			}
+		}
 	},
 	"Snaks": {
 		"type": "object",
@@ -180,15 +185,26 @@
 			"afwiki": {
 				"site": "afwiki",
 				"title": "Douglas Adams",
-				"badges": [],
+				"badges": [ ],
 				"url": "https://af.wikipedia.org/wiki/Douglas_Adams"
 			},
 			"arwiki": {
 				"site": "arwiki",
 				"title": "دوغلاس آدمز",
-				"badges": [],
+				"badges": [ ],
 				"url": "https://ar.wikipedia.org/wiki/%D8%AF%D9%88%D8%BA%D9%84%D8%A7%D8%B3_%D8%A2%D8%AF%D9%85%D8%B2"
 			}
+		}
+	},
+	"Qualifiers": {
+		"type": "object",
+		"additionalProperties": {
+			"type": "array",
+			"items": { "$ref": "./schemas.json#/Qualifier" }
+		},
+		"example": {
+			"P31": [ ],
+			"P100": [ ]
 		}
 	}
 }

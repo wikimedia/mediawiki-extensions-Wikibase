@@ -93,7 +93,7 @@
 				"type": "string"
 			},
 			"qualifiers": {
-				"$ref": "./schema-parts.json#/Snaks"
+				"$ref": "./schema-parts.json#/Qualifiers"
 			},
 			"qualifiers-order": {
 				"type": "array",
@@ -108,49 +108,69 @@
 		}
 	},
 	"Reference": {
-		"type": "object",
-		"properties": {
-			"hash": {
-				"description": "Hash of a reference",
-				"$ref": "./schema-parts.json#/Hash"
-			},
-			"snaks": {
-				"$ref": "./schema-parts.json#/Snaks"
-			},
-			"snaks-order": {
-				"type": "array",
-				"items": {
-					"type": "string"
+		"allOf": [
+			{ "$ref": "./schema-parts.json#/HashBearing" },
+			{
+				"type": "object",
+				"properties": {
+					"hash": {
+						"description": "Hash of a reference"
+					},
+					"snaks": {
+						"$ref": "./schema-parts.json#/Snaks"
+					},
+					"snaks-order": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					}
 				}
 			}
-		}
+		]
+	},
+	"Qualifier": {
+		"allOf": [
+			{ "$ref": "#/Snak" },
+			{
+				"properties": {
+					"hash": {
+						"description": "Hash of a qualifier"
+					}
+				}
+			}
+		]
 	},
 	"Snak": {
-		"type": "object",
-		"properties": {
-			"snaktype": {
-				"type": "string"
-			},
-			"property": {
-				"type": "string"
-			},
-			"hash": {
-				"description": "Hash of a snak",
-				"$ref": "./schema-parts.json#/Hash"
-			},
-			"datatype": {
-				"description": "The property data type",
-				"type": "string",
-				"readOnly": true
-			},
-			"datavalue": {
+		"allOf": [
+			{ "$ref": "./schema-parts.json#/HashBearing" },
+			{
 				"type": "object",
-				"additionalProperties": true,
-				"example": {
-					"type": "string",
-					"value": "I am a goat"
+				"properties": {
+					"snaktype": {
+						"type": "string"
+					},
+					"property": {
+						"type": "string"
+					},
+					"hash": {
+						"description": "Hash of a snak"
+					},
+					"datatype": {
+						"description": "The property data type",
+						"type": "string",
+						"readOnly": true
+					},
+					"datavalue": {
+						"type": "object",
+						"additionalProperties": true,
+						"example": {
+							"type": "string",
+							"value": "I am a goat"
+						}
+					}
 				}
 			}
-		}
+		]
 	}
 }
