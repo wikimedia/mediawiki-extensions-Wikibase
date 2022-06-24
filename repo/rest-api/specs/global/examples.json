@@ -1,0 +1,44 @@
+{
+	"InvalidBotFlagExample": {
+		"value": {
+			"code": "invalid-bot-flag",
+			"message": "Invalid bot flag value: Must be 'true' or 'false'"
+		}
+	},
+	"InvalidEditTagExample": {
+		"value": {
+			"code": "invalid-edit-tag",
+			"message": "Invalid MediaWiki tag: {tag}"
+		}
+	},
+	"InvalidFieldExample": {
+		"value": {
+			"code": "invalid-field",
+			"message": "Not a valid field: {field}"
+		}
+	},
+	"InvalidItemIdExample": {
+		"value": {
+			"code": "invalid-item-id",
+			"message": "Not a valid item ID: {item_id}"
+		}
+	},
+	"InvalidStatementIdExample": {
+		"value": {
+			"code": "invalid-statement-id",
+			"message": "Not a valid statement ID: {statement_id}"
+		}
+	},
+	"ItemNotFoundExample": {
+		"value": {
+			"code": "item-not-found",
+			"message": "Could not find an item with the ID: {item_id}"
+		}
+	},
+	"StatementNotFoundExample": {
+		"value": {
+			"code": "statement-not-found",
+			"message": "Could not find a statement with the ID: {statement_id}"
+		}
+	}
+}

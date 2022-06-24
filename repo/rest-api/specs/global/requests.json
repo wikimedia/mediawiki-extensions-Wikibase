@@ -8,28 +8,14 @@
 					"allOf": [
 						{
 							"type": "object",
-							"properties": { "statement": { "$ref": "./interfaces.json#/NewStatement" } },
+							"properties": {
+								"statement": { "$ref": "./schemas.json#/Statement" }
+							},
 							"required": [ "statement" ]
 						},
-						{
-							"$ref": "#/MediawikiEdit"
-						}
+						{ "$ref": "./request-parts.json#/MediawikiEdit" }
 					]
 				}
-			}
-		}
-	},
-	"MediawikiEdit": {
-		"type": "object",
-		"properties": {
-			"tags": {
-				"type": "array",
-				"items": { "type": "string" },
-				"default": []
-			},
-			"bot": {
-				"type": "boolean",
-				"default": false
 			}
 		}
 	}

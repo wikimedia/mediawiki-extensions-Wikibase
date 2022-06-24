@@ -1,19 +1,11 @@
 {
-	"Error": {
-		"type": "object",
-		"properties": {
-			"code": { "type": "string" },
-			"message": { "type": "string" }
-		},
-		"required": [ "code", "message" ]
-	},
 	"ItemNotFound": {
 		"description": "The specified Item was not found",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "#/Error" },
+				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"item-not-found": { "$ref": "#/ItemNotFoundExample" }
+					"item-not-found": { "$ref": "./examples.json#/ItemNotFoundExample" }
 				}
 			}
 		},
@@ -30,10 +22,10 @@
 		"description": "The specified Statement was not found",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "#/Error" },
+				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"statement-not-found": {
-						"value": { "$ref": "#/StatementNotFoundExample" }
+						"value": { "$ref": "./examples.json#/StatementNotFoundExample" }
 					}
 				}
 			}
@@ -51,13 +43,13 @@
 		"description": "The specified resource was not found",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "#/Error" },
+				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"item-not-found": {
-						"value": { "$ref": "#/ItemNotFoundExample" }
+						"value": { "$ref": "./examples.json#/ItemNotFoundExample" }
 					},
 					"statement-not-found": {
-						"value": { "$ref": "#/StatementNotFoundExample" }
+						"value": { "$ref": "./examples.json#/StatementNotFoundExample" }
 					}
 				}
 			}
@@ -71,26 +63,14 @@
 			}
 		}
 	},
-	"ItemNotFoundExample": {
-		"value": {
-			"code": "item-not-found",
-			"message": "Could not find an item with the ID: {item_id}"
-		}
-	},
-	"StatementNotFoundExample": {
-		"value": {
-			"code": "statement-not-found",
-			"message": "Could not find a statement with the ID: {statement_id}"
-		}
-	},
 	"InvalidItemInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "#/Error" },
+				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "#/InvalidItemIdExample" },
-					"invalid-field": { "$ref": "#/InvalidFieldExample" }
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-field": { "$ref": "./examples.json#/InvalidFieldExample" }
 				}
 			}
 		},
@@ -105,9 +85,9 @@
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "#/Error" },
+				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "#/InvalidItemIdExample" }
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" }
 				}
 			}
 		},
@@ -122,11 +102,11 @@
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "#/Error" },
+				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "#/InvalidItemIdExample" },
-					"invalid-edit-tag": { "$ref": "#/InvalidEditTagExample" },
-					"invalid-bot-flag": { "$ref": "#/InvalidBotFlagExample" },
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-bot-flag": { "$ref": "./examples.json#/InvalidBotFlagExample" },
 					"invalid-statement-data": {
 						"value": {
 							"code": "invalid-statement-data",
@@ -147,9 +127,9 @@
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "#/Error" },
+				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-statement-id": { "$ref": "#/InvalidStatementIdExample" }
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" }
 				}
 			}
 		},
@@ -164,10 +144,10 @@
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "#/Error" },
+				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "#/InvalidItemIdExample" },
-					"invalid-statement-id": { "$ref": "#/InvalidStatementIdExample" }
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" }
 				}
 			}
 		},
@@ -178,41 +158,11 @@
 			}
 		}
 	},
-	"InvalidItemIdExample": {
-		"value": {
-			"code": "invalid-item-id",
-			"message": "Not a valid item ID: {item_id}"
-		}
-	},
-	"InvalidStatementIdExample": {
-		"value": {
-			"code": "invalid-statement-id",
-			"message": "Not a valid statement ID: {statement_id}"
-		}
-	},
-	"InvalidFieldExample": {
-		"value": {
-			"code": "invalid-field",
-			"message": "Not a valid field: {field}"
-		}
-	},
-	"InvalidEditTagExample": {
-		"value": {
-			"code": "invalid-edit-tag",
-			"message": "Invalid MediaWiki tag: {tag}"
-		}
-	},
-	"InvalidBotFlagExample": {
-		"value": {
-			"code": "invalid-bot-flag",
-			"message": "Invalid bot flag value: Must be 'true' or 'false'"
-		}
-	},
 	"UnexpectedError": {
 		"description": "An unexpected error has occurred",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "#/Error" },
+				"schema": { "$ref": "./response-parts.json#/Error" },
 				"example": {
 					"code": "unexpected-error",
 					"message": "Unexpected Error"
@@ -280,7 +230,12 @@
 		},
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "./schemas.json#/Statement" }
+				"schema": {
+					"allOf": [
+						{ "$ref": "./schemas.json#/Statement" },
+						{ "required": [ "id", "rank", "qualifiers", "qualifiers-order", "references" ] }
+					]
+				}
 			}
 		}
 	},
@@ -308,7 +263,7 @@
 		},
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "./schemas.json#/Statements" }
+				"schema": { "$ref": "./schema-parts.json#/Statements" }
 			}
 		}
 	},
