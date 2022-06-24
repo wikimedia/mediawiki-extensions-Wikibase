@@ -3,7 +3,6 @@
 namespace Wikibase\View\Tests\Termbox\Renderer;
 
 use Exception;
-use InvalidArgumentException;
 use Language;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Http\HttpRequestFactory;
@@ -17,6 +16,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageWithConversion;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\View\Termbox\Renderer\TermboxNoRemoteRendererException;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 
@@ -277,20 +277,10 @@ class TermboxRemoteRendererTest extends TestCase {
 		$requestFactory = $this->createMock( HttpRequestFactory::class );
 		$requestFactory->expects( $this->never() )
 			->method( 'create' );
-
-		$this->logger->expects( $this->once() )
-			->method( 'error' )
-			->with(
-				'{class}: Problem requesting from the remote server',
-				[
-					'class' => TermboxRemoteRenderer::class,
-					'errormessage' => 'Termbox SSR server URL not configured',
-					'exception' => new InvalidArgumentException( 'Termbox SSR server URL not configured' ),
-				]
-			);
-		$this->stats->expects( $this->once() )
-			->method( 'increment' )
-			->with( 'wikibase.view.TermboxRemoteRenderer.requestError' );
+		$this->logger->expects( $this->never() )
+			->method( 'error' );
+		$this->stats->expects( $this->never() )
+			->method( 'increment' );
 
 		$client = new TermboxRemoteRenderer(
 			$requestFactory,
@@ -303,7 +293,7 @@ class TermboxRemoteRendererTest extends TestCase {
 			$client->getContent( $entityId, $revision, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( TermboxRenderingException $exception ) {
-			$this->assertSame( 'Encountered request problem', $exception->getMessage() );
+			$this->assertInstanceOf( TermboxNoRemoteRendererException::class, $exception );
 		}
 	}
 
