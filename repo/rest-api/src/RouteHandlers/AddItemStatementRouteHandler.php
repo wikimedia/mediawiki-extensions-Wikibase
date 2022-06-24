@@ -29,6 +29,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 	public const STATEMENT_BODY_PARAM = 'statement';
 	public const TAGS_BODY_PARAM = 'tags';
 	public const BOT_BODY_PARAM = 'bot';
+	public const COMMENT_BODY_PARAM = 'comment';
 
 	private $addItemStatement;
 	private $successPresenter;
@@ -74,7 +75,8 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 				$itemId,
 				$jsonBody[self::STATEMENT_BODY_PARAM],
 				$jsonBody[self::TAGS_BODY_PARAM],
-				$jsonBody[self::BOT_BODY_PARAM]
+				$jsonBody[self::BOT_BODY_PARAM],
+				$jsonBody[self::COMMENT_BODY_PARAM]
 			)
 		);
 
@@ -136,7 +138,12 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'boolean',
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_DEFAULT => false
-			]
+			],
+			self::COMMENT_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => false,
+			],
 		] );
 	}
 

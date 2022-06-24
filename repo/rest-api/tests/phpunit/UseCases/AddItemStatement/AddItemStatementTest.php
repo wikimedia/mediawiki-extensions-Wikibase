@@ -69,12 +69,14 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 		$newGuid = $item->getId() . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		$editTags = [ 'some', 'tags' ];
 		$isBot = false;
+		$comment = 'potato';
 
 		$request = new AddItemStatementRequest(
 			$item->getId()->getSerialization(),
 			$this->getValidNoValueStatementSerialization(),
 			$editTags,
-			$isBot
+			$isBot,
+			$comment
 		);
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
@@ -88,7 +90,7 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->method( 'update' )
-			->with( $item, $this->equalTo( new EditMetadata( $editTags, $isBot ) ) )
+			->with( $item, $this->equalTo( new EditMetadata( $editTags, $isBot, $comment ) ) )
 			->willReturn( new ItemRevision( $item, $modificationTimestamp, $postModificationRevisionId ) );
 
 		$useCase = $this->newUseCase();
@@ -114,7 +116,8 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 				$itemId,
 				$this->getValidNoValueStatementSerialization(),
 				[],
-				false
+				false,
+				null
 			)
 		);
 
@@ -124,7 +127,7 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testValidationError_returnsErrorResponse(): void {
-		$request = new AddItemStatementRequest( 'X123', [], [], false );
+		$request = new AddItemStatementRequest( 'X123', [], [], false, null );
 
 		$response = $this->newUseCase()->execute( $request );
 		$this->assertInstanceOf( AddItemStatementErrorResponse::class, $response );
