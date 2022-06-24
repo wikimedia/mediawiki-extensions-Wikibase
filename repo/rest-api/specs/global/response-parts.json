@@ -11,14 +11,9 @@
 		]
 	},
 	"StatementsResponse": {
-		"allOf": [
-			{ "$ref": "./schema-parts.json#/Statements" },
-			{
-				"additionalProperties": {
-					"items": { "$ref": "#/StatementResponse" }
-				}
-			}
-		]
+		"additionalProperties": {
+			"items": { "$ref": "#/StatementResponse" }
+		}
 	},
 	"StatementResponse": {
 		"allOf": [
@@ -26,7 +21,7 @@
 			{
 				"required": [ "id", "mainsnak", "rank", "qualifiers", "qualifiers-order", "references" ],
 				"properties": {
-					"mainsnak": { "$ref": "#/SnakResponseRequired" },
+					"mainsnak": { "required": [ "snaktype", "property", "hash" ] },
 					"qualifiers": { "$ref": "#/QualifiersResponseRequired" },
 					"references": { "$ref": "#/ReferencesResponseRequired" }
 				}
@@ -41,12 +36,11 @@
 		},
 		"required": [ "code", "message" ]
 	},
-	"SnakResponseRequired": {
-		"required": [ "snaktype", "property", "hash" ]
-	},
 	"QualifiersResponseRequired": {
 		"additionalProperties": {
-			"items": { "$ref": "#/SnakResponseRequired" }
+			"items": {
+				"required": [ "snaktype", "property", "hash" ]
+			}
 		}
 	},
 	"ReferenceResponseRequired": {
@@ -54,7 +48,9 @@
 		"properties": {
 			"snaks": {
 				"additionalProperties": {
-					"items": { "$ref": "#/SnakResponseRequired" }
+					"items": {
+						"required": [ "snaktype", "property", "hash" ]
+					}
 				}
 			}
 		}

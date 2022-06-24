@@ -22,7 +22,7 @@
 			"tags": {
 				"type": "array",
 				"items": { "type": "string" },
-				"default": []
+				"default": [ ]
 			},
 			"bot": {
 				"type": "boolean",
@@ -30,12 +30,11 @@
 			}
 		}
 	},
-	"SnakRequestRequired": {
-		"required": [ "snaktype", "property" ]
-	},
 	"QualifiersRequestRequired": {
 		"additionalProperties": {
-			"items": { "$ref": "#/SnakRequestRequired" }
+			"items": {
+				"required": [ "snaktype", "property" ]
+			}
 		}
 	},
 	"ReferenceRequestRequired": {
@@ -43,7 +42,9 @@
 		"properties": {
 			"snaks": {
 				"additionalProperties": {
-					"items": { "$ref": "#/SnakRequestRequired" }
+					"items": {
+						"required": [ "snaktype", "property" ]
+					}
 				}
 			}
 		}
@@ -54,7 +55,7 @@
 	"StatementRequestRequired": {
 		"required": [ "mainsnak" ],
 		"properties": {
-			"mainsnak": { "$ref": "#/SnakRequestRequired" },
+			"mainsnak": { "required": [ "snaktype", "property" ] },
 			"qualifiers": { "$ref": "#/QualifiersRequestRequired" },
 			"references": { "$ref": "#/ReferencesRequestRequired" }
 		}

@@ -14,7 +14,7 @@
 		"fix:eslint": "eslint --fix .",
 		"build": "run-s build:docs build:spec",
 		"build:docs": "webpack --config docs/webpack.config.js",
-		"build:spec": "swagger-cli --dereference bundle specs/openapi.json -o ../../docs/rest-api/openapi.json"
+		"build:spec": "swagger-cli bundle specs/openapi.json -o ../../docs/rest-api/openapi.json"
 	},
 	"engines": {
 		"node": ">=14"
