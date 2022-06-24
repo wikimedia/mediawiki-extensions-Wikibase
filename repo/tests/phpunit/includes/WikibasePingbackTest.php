@@ -29,7 +29,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 
 	private const TEST_KEY = 'TEST_KEY';
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		global $wgWBRepoSettings;
@@ -86,6 +86,9 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 	public function testWikibasePingbackSchedules() {
 		MWTimestamp::setFakeTime( '20000101010000' );
 		$logger = new TestLogger( true );
+
+		// disable throttle
+		$this->setMainCache( CACHE_NONE );
 
 		$currentTime = $this->getPingbackTime();
 		$this->assertFalse( $currentTime );
