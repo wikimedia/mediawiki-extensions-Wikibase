@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\AddItemStatement;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use ValueValidators\Result;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
@@ -132,6 +133,29 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 		$response = $this->newUseCase()->execute( $request );
 		$this->assertInstanceOf( AddItemStatementErrorResponse::class, $response );
 		$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $response->getCode() );
+	}
+
+	public function testRedirect(): void {
+		$redirectSource = 'Q321';
+		$redirectTarget = 'Q123';
+
+		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
+
+		$response = $this->newUseCase()->execute(
+			new AddItemStatementRequest(
+				$redirectSource,
+				$this->getValidNoValueStatementSerialization(),
+				[],
+				false,
+				null
+			)
+		);
+
+		$this->assertInstanceOf( AddItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::ITEM_REDIRECTED, $response->getCode() );
+		$this->assertStringContainsString( $redirectTarget, $response->getMessage() );
 	}
 
 	private function newUseCase(): AddItemStatement {

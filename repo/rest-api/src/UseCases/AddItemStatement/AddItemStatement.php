@@ -49,7 +49,12 @@ class AddItemStatement {
 		$itemId = new ItemId( $request->getItemId() );
 
 		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
-		if ( !$latestRevision->itemExists() || $latestRevision->isRedirect() ) {
+		if ( $latestRevision->isRedirect() ) {
+			return new AddItemStatementErrorResponse(
+				ErrorResponse::ITEM_REDIRECTED,
+				"Item {$request->getItemId()} has been merged into {$latestRevision->getRedirectTarget()}."
+			);
+		} elseif ( !$latestRevision->itemExists() ) {
 			return new AddItemStatementErrorResponse(
 				ErrorResponse::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$request->getItemId()}"
