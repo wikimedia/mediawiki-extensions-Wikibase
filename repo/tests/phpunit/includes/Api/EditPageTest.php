@@ -6,7 +6,6 @@ use ApiUsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * Tests for blocking of direct editing.
@@ -58,7 +57,7 @@ class EditPageTest extends WikibaseApiTestCase {
 	public function testEditTextInItemNamespace() {
 		$id = new ItemId( "Q1234567" );
 		$title = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $id );
-		$page = new WikiPage( $title );
+		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 
 		$text = "hallo welt";
 

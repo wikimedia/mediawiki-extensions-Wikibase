@@ -172,7 +172,7 @@ class ViewEntityActionTest extends ActionTestCase {
 	public function testShow404() {
 		$id = new ItemId( 'q1122334455' );
 		$title = WikibaseRepo::getEntityTitleLookup()->getTitleForId( $id );
-		$page = new WikiPage( $title );
+		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 		$action = $this->createAction( 'view', $page );
 
 		/** @var \FauxResponse $response */

@@ -25,7 +25,6 @@ use Wikibase\Lib\Formatters\EntityIdValueFormatter;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
-use WikiPage;
 
 /**
  * @covers \Wikibase\Repo\Api\SetClaimValue
@@ -162,7 +161,8 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$obtainedEntity = $entityLookup->getEntity( $entityId );
 
-		$page = new WikiPage( WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $entityId ) );
+		$page = $this->getServiceContainer()->getWikiPageFactory()
+			->newFromTitle( WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $entityId ) );
 
 		$comment = $page->getRevisionRecord()->getComment( RevisionRecord::RAW );
 		$generatedSummary = $comment ? $comment->text : null;
