@@ -19,9 +19,6 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class EditFilterHookRunnerTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getWikiPageFactory' );
-
 		$this->mockService(
 			'WikibaseRepo.EntityTitleStoreLookup',
 			$this->createMock( EntityTitleStoreLookup::class )
