@@ -4,13 +4,12 @@ namespace Wikibase\Repo\Tests\RestApi\Domain\Serializers;
 
 use DataValues\StringValue;
 use Generator;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Serializers\SnakSerializer as LegacySnakSerializer;
 use Wikibase\DataModel\Serializers\TypedSnakSerializer;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -26,70 +25,55 @@ use Wikibase\Repo\RestApi\Domain\Serializers\SnakSerializer;
  */
 class SnakSerializerTest extends TestCase {
 
-	/**
-	 * @var MockObject|TypedSnakSerializer
-	 */
-	private $legacySnackSerializer;
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->legacySnackSerializer = $this->createMock( LegacySnakSerializer::class );
-		$this->legacySnackSerializer->method( 'serialize' )->willReturn( [ 'key' => 'value' ] );
-	}
+	private const STUB_SNAK_SERIALIZATION = [ 'key' => 'value' ];
+	private const PROPERTY_DATA = [
+		[ 'propertyId' => 'P1', 'datatype' => 'string' ],
+		[ 'propertyId' => 'P123', 'datatype' => 'quantity' ],
+		[ 'propertyId' => 'P321', 'datatype' => 'item' ],
+	];
 
 	/**
 	 * @dataProvider snakProvider
 	 */
 	public function testSnakContainsDatatypeField( Snak $snak, string $expectedDatatype ): void {
 		$this->assertSame(
-			[ 'key' => 'value', 'datatype' => $expectedDatatype ],
+			self::STUB_SNAK_SERIALIZATION + [ 'datatype' => $expectedDatatype ],
 			$this->newSerializer()->serialize( $snak )
 		);
 	}
 
 	public function snakProvider(): Generator {
 		yield [
-			new PropertySomeValueSnak( new NumericPropertyId( 'P1' ) ),
-			'something'
+			new PropertySomeValueSnak( new NumericPropertyId( self::PROPERTY_DATA[0]['propertyId'] ) ),
+			self::PROPERTY_DATA[0]['datatype']
 		];
 
 		yield [
-			new PropertyNoValueSnak( new NumericPropertyId( 'P2' ) ),
-			'really'
+			new PropertyNoValueSnak( new NumericPropertyId( self::PROPERTY_DATA[1]['propertyId'] ) ),
+			self::PROPERTY_DATA[1]['datatype']
 		];
 
 		yield [
-			new PropertyValueSnak( new NumericPropertyId( 'P3' ), new StringValue( 'potato' ) ),
-			'special'
+			new PropertyValueSnak( new NumericPropertyId( self::PROPERTY_DATA[2]['propertyId'] ), new StringValue( 'potato' ) ),
+			self::PROPERTY_DATA[2]['datatype']
 		];
 	}
 
-	/**
-	 * @return MockObject | PropertyDataTypeLookup
-	 */
-	private function newPropertyDataTypeLookup() {
-		$propertyDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
-		$propertyDataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->willReturnCallback( function( NumericPropertyId $propertyId ) {
-				switch ( $propertyId->getSerialization() ) {
-					case 'P1':
-						return 'something';
-					case 'P2':
-						return 'really';
-					case 'P3':
-						return 'special';
-					default:
-						throw new PropertyDataTypeLookupException( $propertyId );
-				}
-			} );
+	private function newPropertyDataTypeLookup(): PropertyDataTypeLookup {
+		$propertyDataTypeLookup = new InMemoryDataTypeLookup();
+		foreach ( self::PROPERTY_DATA as $property ) {
+			$propertyDataTypeLookup->setDataTypeForProperty( new NumericPropertyId( $property['propertyId'] ), $property['datatype'] );
+		}
 
 		return $propertyDataTypeLookup;
 	}
 
 	private function newSerializer(): SnakSerializer {
+		$legacySerializer = $this->createStub( LegacySnakSerializer::class );
+		$legacySerializer->method( 'serialize' )->willReturn( self::STUB_SNAK_SERIALIZATION );
+
 		return new SnakSerializer(
-			new TypedSnakSerializer( $this->legacySnackSerializer ),
+			new TypedSnakSerializer( $legacySerializer ),
 			$this->newPropertyDataTypeLookup()
 		);
 	}
