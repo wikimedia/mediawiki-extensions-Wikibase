@@ -27,5 +27,6 @@
 	"wikibase-rcfilters-hide-wikibase-description": "Babakan nang asalnya matan {{WBREPONAME}}.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Saringan ngini bacakut lawan satu atawa labih saringan Kualitas Sumbangan atawa Niat Pamakai. Kikiraan Kualitas wan Niat kada tasadia gasan babakan {{WBREPONAME}}.",
 	"wikibase-watchlist-show-changes-pref": "Tampaiakan babakan {{WBREPONAME}} pada daptar itihan Pian",
-	"wikibase-otherprojects": "Dalam rangka gawian lain"
+	"wikibase-otherprojects": "Dalam rangka gawian lain",
+	"echo-pref-tooltip-wikibase-action": "Padahi ulun amun sasaurang mahubungakan laman nang {{GENDER:|ulun ulah}} ka item {{WBREPONAME}}."
 }

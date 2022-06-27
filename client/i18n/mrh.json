@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Laitei",
 			"Teitei Para"
 		]
@@ -10,6 +11,8 @@
 	"wikibase-dataitem": "{{WBREPONAME}} hmodâh",
 	"wikibase-editlinks": "Linkzy taopathi",
 	"wikibase-editlinkstitle": "Interlanguage links taopathi",
+	"wikibase-linkitem-input-site": "Reihchâ:",
+	"wikibase-linkitem-input-page": "Châhmia:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Nyu",
 	"wikibase-rc-hide-wikidata-show": "Palâ",
