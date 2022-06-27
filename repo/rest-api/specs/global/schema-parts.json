@@ -19,12 +19,7 @@
 		"type": "object",
 		"additionalProperties": {
 			"type": "array",
-			"items": {
-				"allOf": [
-					{ "$ref": "./schemas.json#/Statement" },
-					{ "required": [ "id", "mainsnak", "rank", "qualifiers", "qualifiers-order", "references" ] }
-				]
-			}
+			"items": { "$ref": "./schemas.json#/Statement" }
 		},
 		"example": {
 			"P103": [
@@ -148,9 +143,9 @@
 						"snaktype": "value"
 					},
 					"rank": "normal",
-					"qualifiers": {},
-					"qualifiers-order": [],
-					"references": []
+					"qualifiers": { },
+					"qualifiers-order": [ ],
+					"references": [ ]
 				},
 				{
 					"id": "Q42$E13E619F-63EF-4B72-99D9-7A45C7C6AD34",
@@ -169,9 +164,9 @@
 						"snaktype": "value"
 					},
 					"rank": "normal",
-					"qualifiers": {},
-					"qualifiers-order": [],
-					"references": []
+					"qualifiers": { },
+					"qualifiers-order": [ ],
+					"references": [ ]
 				}
 			]
 		}

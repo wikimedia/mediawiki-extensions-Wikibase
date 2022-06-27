@@ -202,7 +202,9 @@
 		},
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "./schemas.json#/Item" }
+				"schema": {
+					"$ref": "./response-parts.json#/ItemResponse"
+				}
 			}
 		}
 	},
@@ -231,10 +233,7 @@
 		"content": {
 			"application/json": {
 				"schema": {
-					"allOf": [
-						{ "$ref": "./schemas.json#/Statement" },
-						{ "required": [ "id", "rank", "qualifiers", "qualifiers-order", "references" ] }
-					]
+					"$ref": "./response-parts.json#/StatementResponse"
 				}
 			}
 		}
@@ -263,7 +262,9 @@
 		},
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "./schema-parts.json#/Statements" }
+				"schema": {
+					"$ref": "./response-parts.json#/StatementsResponse"
+				}
 			}
 		}
 	},

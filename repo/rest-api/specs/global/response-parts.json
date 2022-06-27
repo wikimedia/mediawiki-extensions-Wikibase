@@ -1,4 +1,38 @@
 {
+	"ItemResponse": {
+		"allOf": [
+			{ "$ref": "./schemas.json#/Item" },
+			{
+				"required": [ "id", "type", "labels", "descriptions", "aliases", "statements", "sitelinks" ],
+				"properties": {
+					"statements": { "$ref": "#/StatementsResponse" }
+				}
+			}
+		]
+	},
+	"StatementsResponse": {
+		"allOf": [
+			{ "$ref": "./schema-parts.json#/Statements" },
+			{
+				"additionalProperties": {
+					"items": { "$ref": "#/StatementResponse" }
+				}
+			}
+		]
+	},
+	"StatementResponse": {
+		"allOf": [
+			{ "$ref": "./schemas.json#/Statement" },
+			{
+				"required": [ "id", "mainsnak", "rank", "qualifiers", "qualifiers-order", "references" ],
+				"properties": {
+					"mainsnak": { "$ref": "#/SnakResponseRequired" },
+					"qualifiers": { "$ref": "#/QualifiersResponseRequired" },
+					"references": { "$ref": "#/ReferencesResponseRequired" }
+				}
+			}
+		]
+	},
 	"Error": {
 		"type": "object",
 		"properties": {
@@ -6,5 +40,26 @@
 			"message": { "type": "string" }
 		},
 		"required": [ "code", "message" ]
+	},
+	"SnakResponseRequired": {
+		"required": [ "snaktype", "property", "hash" ]
+	},
+	"QualifiersResponseRequired": {
+		"additionalProperties": {
+			"items": { "$ref": "#/SnakResponseRequired" }
+		}
+	},
+	"ReferenceResponseRequired": {
+		"required": [ "hash", "snaks", "snaks-order" ],
+		"properties": {
+			"snaks": {
+				"additionalProperties": {
+					"items": { "$ref": "#/SnakResponseRequired" }
+				}
+			}
+		}
+	},
+	"ReferencesResponseRequired": {
+		"items": { "$ref": "#/ReferenceResponseRequired" }
 	}
 }

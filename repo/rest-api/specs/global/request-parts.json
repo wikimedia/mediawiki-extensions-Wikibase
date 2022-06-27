@@ -1,4 +1,21 @@
 {
+	"StatementRequest": {
+		"allOf": [
+			{
+				"type": "object",
+				"properties": {
+					"statement": {
+						"allOf": [
+							{ "$ref": "./schemas.json#/Statement" },
+							{ "$ref": "#/StatementRequestRequired" }
+						]
+					}
+				},
+				"required": [ "statement" ]
+			},
+			{ "$ref": "./request-parts.json#/MediawikiEdit" }
+		]
+	},
 	"MediawikiEdit": {
 		"type": "object",
 		"properties": {
@@ -11,6 +28,35 @@
 				"type": "boolean",
 				"default": false
 			}
+		}
+	},
+	"SnakRequestRequired": {
+		"required": [ "snaktype", "property" ]
+	},
+	"QualifiersRequestRequired": {
+		"additionalProperties": {
+			"items": { "$ref": "#/SnakRequestRequired" }
+		}
+	},
+	"ReferenceRequestRequired": {
+		"required": [ "snaks", "snaks-order" ],
+		"properties": {
+			"snaks": {
+				"additionalProperties": {
+					"items": { "$ref": "#/SnakRequestRequired" }
+				}
+			}
+		}
+	},
+	"ReferencesRequestRequired": {
+		"items": { "$ref": "#/ReferenceRequestRequired" }
+	},
+	"StatementRequestRequired": {
+		"required": [ "mainsnak" ],
+		"properties": {
+			"mainsnak": { "$ref": "#/SnakRequestRequired" },
+			"qualifiers": { "$ref": "#/QualifiersRequestRequired" },
+			"references": { "$ref": "#/ReferencesRequestRequired" }
 		}
 	}
 }
