@@ -62,7 +62,10 @@ class AddItemStatement {
 		$item = $this->itemRetriever->getItem( $itemId );
 		$item->getStatements()->addStatement( $statement );
 
-		$newRevision = $this->itemUpdater->update( $item, new EditMetadata( $request->getEditTags(), $request->isBot() ) );
+		$newRevision = $this->itemUpdater->update(
+			$item,
+			new EditMetadata( $request->getEditTags(), $request->isBot(), $request->getComment() )
+		);
 
 		return new AddItemStatementSuccessResponse(
 			$newRevision->getItem()->getStatements()->getFirstStatementWithGuid( $newStatementGuid ),

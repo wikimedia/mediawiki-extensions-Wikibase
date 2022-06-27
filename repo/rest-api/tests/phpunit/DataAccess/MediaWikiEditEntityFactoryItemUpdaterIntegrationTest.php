@@ -31,7 +31,7 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 			RequestContext::getMain(),
 			WikibaseRepo::getEditEntityFactory()
 		);
-		$newRevision = $updater->update( $itemToUpdate, new EditMetadata( [], false ) );
+		$newRevision = $updater->update( $itemToUpdate, new EditMetadata( [], false, null ) );
 
 		$this->assertSame(
 			$newLabel,

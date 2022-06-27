@@ -9,10 +9,12 @@ class EditMetadata {
 
 	private $tags;
 	private $isBot;
+	private $comment;
 
-	public function __construct( array $tags, bool $isBot ) {
+	public function __construct( array $tags, bool $isBot, ?string $comment ) {
 		$this->tags = $tags;
 		$this->isBot = $isBot;
+		$this->comment = $comment;
 	}
 
 	public function getTags(): array {
@@ -21,6 +23,10 @@ class EditMetadata {
 
 	public function isBot(): bool {
 		return $this->isBot;
+	}
+
+	public function getComment(): ?string {
+		return $this->comment;
 	}
 
 }

@@ -79,11 +79,13 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 
 			assertValid201Response( response );
 		} );
-		it( 'can add a statement to an item with bot and tags provided', async () => {
+		it( 'can add a statement to an item with edit metadata provided', async () => {
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const editSummary = 'omg look i made an edit';
 			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
 				.withJsonBodyParam( 'tags', [ tag ] )
 				.withJsonBodyParam( 'bot', true )
+				.withJsonBodyParam( 'comment', editSummary )
 				.assertValidRequest()
 				.makeRequest( 'POST' );
 
@@ -93,11 +95,12 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				list: 'recentchanges',
 				rctitle: `Item:${testItemId}`,
 				rclimit: 1,
-				rcprop: 'tags|flags'
+				rcprop: 'tags|flags|comment'
 			} );
 			const editMetadata = recentChanges.query.recentchanges[ 0 ];
 			assert.deepEqual( editMetadata.tags, [ tag ] );
 			assert.property( editMetadata, 'bot' );
+			assert.strictEqual( editMetadata.comment, editSummary );
 		} );
 	} );
 
@@ -137,6 +140,19 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			assert.strictEqual( response.body.fieldName, 'bot' );
 			assert.strictEqual( response.body.expectedType, 'boolean' );
 		} );
+
+		it( 'invalid comment', async () => {
+			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
+				.withJsonBodyParam( 'comment', 1234 )
+				.assertInvalidRequest()
+				.makeRequest( 'POST' );
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'comment' );
+			assert.strictEqual( response.body.expectedType, 'string' );
+		} );
+
 		it( 'invalid statement data', async () => {
 			const invalidStatement = {
 				invalidKey: []

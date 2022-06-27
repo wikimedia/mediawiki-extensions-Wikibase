@@ -15,6 +15,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
  */
 class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 
+	public const DEFAULT_COMMENT = 'TBD default comment';
+
 	private $context;
 	private $editEntityFactory;
 
@@ -28,7 +30,7 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 
 		$status = $editEntity->attemptSave(
 			$item,
-			'TODO SUMMARY',
+			$editMetadata->getComment() ?? self::DEFAULT_COMMENT,
 			EDIT_UPDATE | ( $editMetadata->isBot() ? EDIT_FORCE_BOT : 0 ),
 			false,
 			false,

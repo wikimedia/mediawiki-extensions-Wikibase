@@ -43,7 +43,7 @@ class AddItemStatementValidatorTest extends TestCase {
 
 	public function testValidatePass(): void {
 		$error = $this->newAddItemStatementValidator()->validate(
-			new AddItemStatementRequest( 'Q42', [ 'valid' => 'statement' ], [], false )
+			new AddItemStatementRequest( 'Q42', [ 'valid' => 'statement' ], [], false, null )
 		);
 
 		$this->assertNull( $error );
@@ -52,7 +52,7 @@ class AddItemStatementValidatorTest extends TestCase {
 	public function testWithInvalidItemId(): void {
 		$itemId = 'X123';
 		$error = $this->newAddItemStatementValidator()->validate(
-			new AddItemStatementRequest( $itemId, [ 'valid' => 'statement' ], [], false )
+			new AddItemStatementRequest( $itemId, [ 'valid' => 'statement' ], [], false, null )
 		);
 
 		$this->assertNotNull( $error );
@@ -69,7 +69,7 @@ class AddItemStatementValidatorTest extends TestCase {
 			->willReturn( $expectedError );
 
 		$error = $this->newAddItemStatementValidator()->validate(
-			new AddItemStatementRequest( 'Q42', $invalidStatement, [], false )
+			new AddItemStatementRequest( 'Q42', $invalidStatement, [], false, null )
 		);
 
 		$this->assertSame( $expectedError, $error );
@@ -85,7 +85,7 @@ class AddItemStatementValidatorTest extends TestCase {
 			->willReturn( $expectedError );
 
 		$error = $this->newAddItemStatementValidator()->validate(
-			new AddItemStatementRequest( 'Q42', [ 'valid' => 'statement' ], $invalidTags, false )
+			new AddItemStatementRequest( 'Q42', [ 'valid' => 'statement' ], $invalidTags, false, null )
 		);
 
 		$this->assertSame( $expectedError, $error );

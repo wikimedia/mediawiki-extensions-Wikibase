@@ -24,12 +24,10 @@ use Wikibase\Repo\Tests\NewItem;
 class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 
 	/**
-	 * @dataProvider isBotProvider
+	 * @dataProvider editMetadataProvider
 	 */
-	public function testUpdate( bool $isBot ): void {
+	public function testUpdate( EditMetadata $editMetadata, string $expectedComment ): void {
 		$itemToUpdate = NewItem::withId( 'Q123' )->build();
-		$editMeta = new EditMetadata( [ 'tag', 'also a tag' ], $isBot );
-
 		$expectedRevisionId = 234;
 		$expectedRevisionTimestamp = '20221111070707';
 		$expectedRevisionItem = $this->createStub( Item::class );
@@ -41,11 +39,11 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 			->method( 'attemptSave' )
 			->with(
 				$itemToUpdate,
-				$this->anything(),
-				$isBot ? EDIT_UPDATE | EDIT_FORCE_BOT : EDIT_UPDATE,
+				$expectedComment,
+				$editMetadata->isBot() ? EDIT_UPDATE | EDIT_FORCE_BOT : EDIT_UPDATE,
 				false,
 				false,
-				$editMeta->getTags()
+				$editMetadata->getTags()
 			)
 			->willReturn( Status::newGood( [
 				'revision' => new EntityRevision( $expectedRevisionItem, $expectedRevisionId, $expectedRevisionTimestamp ),
@@ -58,21 +56,33 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 			->willReturn( $editEntity );
 
 		$updater = new MediaWikiEditEntityFactoryItemUpdater( $context, $editEntityFactory );
-		$itemRevision = $updater->update( $itemToUpdate, $editMeta );
+		$itemRevision = $updater->update( $itemToUpdate, $editMetadata );
 
 		$this->assertSame( $expectedRevisionItem, $itemRevision->getItem() );
 		$this->assertSame( $expectedRevisionId, $itemRevision->getRevisionId() );
 		$this->assertSame( $expectedRevisionTimestamp, $itemRevision->getLastModified() );
 	}
 
-	public function isBotProvider(): Generator {
-		yield 'bot' => [ true ];
-		yield 'not a bot' => [ false ];
+	public function editMetadataProvider(): Generator {
+		$someUserProvidedComment = 'im a comment';
+
+		yield 'bot edit' => [
+			new EditMetadata( [], true, $someUserProvidedComment ),
+			$someUserProvidedComment,
+		];
+		yield 'user edit' => [
+			new EditMetadata( [], false, $someUserProvidedComment ),
+			$someUserProvidedComment,
+		];
+		yield 'default edit comment is used if user provides none' => [
+			new EditMetadata( [], false, null ),
+			MediaWikiEditEntityFactoryItemUpdater::DEFAULT_COMMENT
+		];
 	}
 
 	public function testGivenSavingFails_returnsNull(): void {
 		$itemToUpdate = NewItem::withId( 'Q123' )->build();
-		$editMeta = new EditMetadata( [ 'tag', 'also a tag' ], false );
+		$editMeta = new EditMetadata( [ 'tag', 'also a tag' ], false, 'im a comment' );
 
 		$context = $this->createStub( IContextSource::class );
 
