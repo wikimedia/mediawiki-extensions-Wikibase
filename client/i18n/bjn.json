@@ -6,6 +6,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "Tautan gasan mahubungakan butir pada wadah panyimpanan data",
+	"wikibase-after-page-move": "Pamindahan Pian mustinya [$1 talihat di tautan basa item {{WBREPONAME}}]. Kami maminta Pian mamariksa apakah ngini sudah kajadian.",
 	"wikibase-comment-update": "Item {{WBREPONAME}} baubah",
 	"wikibase-dataitem": "Item di {{WBREPONAME}}",
 	"wikibase-editlinks": "Babak interwiki",
@@ -19,7 +20,12 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Sungkupakan",
 	"wikibase-rc-hide-wikidata-show": "Tampaiakan",
+	"wikibase-rc-show-wikidata-pref": "Tampaiakan babakan {{WBREPONAME}} di paubahan pahanyarnya",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Babakan {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Babakan {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Babakan nang asalnya matan {{WBREPONAME}}.",
+	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Saringan ngini bacakut lawan satu atawa labih saringan Kualitas Sumbangan atawa Niat Pamakai. Kikiraan Kualitas wan Niat kada tasadia gasan babakan {{WBREPONAME}}.",
+	"wikibase-watchlist-show-changes-pref": "Tampaiakan babakan {{WBREPONAME}} pada daptar itihan Pian",
 	"wikibase-otherprojects": "Dalam rangka gawian lain"
 }

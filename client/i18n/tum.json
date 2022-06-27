@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Tumbuka Arch"
+			"Tumbuka Arch",
+			"Amire80"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} chinthu",
@@ -10,7 +11,7 @@
 	"wikibase-linkitem-title": "Lumikiza na peji",
 	"wikibase-linkitem-linkpage": "Lumikiza na peji",
 	"wikibase-linkitem-selectlink": "Chonde sankhani site na peji ilo mukukhumba kulumikiza ku peji ili.",
-	"wikibase-linkitem-input-site": "Chiyowoyelo",
+	"wikibase-linkitem-input-site": "Chiyowoyelo:",
 	"wikibase-linkitem-input-page": "Peji:",
 	"wikibase-rc-hide-wikidata-hide": "Bisa",
 	"wikibase-rc-hide-wikidata-show": "Oneska",
