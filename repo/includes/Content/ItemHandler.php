@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Content;
 
 use Content;
 use IContextSource;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Revision\SlotRenderingProvider;
 use Page;
 use ParserOptions;
@@ -165,6 +166,12 @@ class ItemHandler extends EntityHandler {
 				[ $this->siteLinkStore, 'deleteLinksOfItem' ],
 				$id
 			);
+			LoggerFactory::getInstance( 'WikibaseTerms' )
+				->debug( __METHOD__ . ': schedule deleteTermsOfEntity for {id}', [
+					'id' => $id->getSerialization(),
+					'target' => $content->getEntityRedirect()->getTargetId(),
+					'phab' => 'T311307',
+				] );
 			$updates[] = new DataUpdateAdapter(
 				[ $this->entityTermStoreWriter, 'deleteTermsOfEntity' ],
 				$id
@@ -174,6 +181,11 @@ class ItemHandler extends EntityHandler {
 			'@phan-var ItemContent $content';
 			$item = $content->getItem();
 
+			LoggerFactory::getInstance( 'WikibaseTerms' )
+				->debug( __METHOD__ . ': schedule saveTermsOfEntity for {id}', [
+					'id' => $id->getSerialization(),
+					'phab' => 'T311307',
+				] );
 			$updates[] = new DataUpdateAdapter(
 				[ $this->entityTermStoreWriter, 'saveTermsOfEntity' ],
 				$item
