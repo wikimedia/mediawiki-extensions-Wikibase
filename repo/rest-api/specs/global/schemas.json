@@ -139,6 +139,7 @@
 				"$ref": "./schema-parts.json#/Hash"
 			},
 			"datatype": {
+				"description": "The property data type",
 				"type": "string",
 				"readOnly": true
 			},
