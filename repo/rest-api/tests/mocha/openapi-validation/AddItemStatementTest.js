@@ -1,7 +1,7 @@
 'use strict';
 
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
-const { createUniqueStringProperty, createEntity } = require( '../helpers/entityHelper' );
+const { createUniqueStringProperty, createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
 const expect = require( 'chai' ).expect;
 
 function newAddItemStatementRequestBuilder( itemId, statement ) {
@@ -63,6 +63,17 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 		).makeRequest( 'POST' );
 
 		expect( response.status ).to.equal( 400 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
+	it( '409 Conflict is valid for redirected Item', async () => {
+		const redirectSource = await createRedirectForItem( itemId );
+		const response = await newAddItemStatementRequestBuilder(
+			redirectSource,
+			validStatementSerialization
+		).makeRequest( 'POST' );
+
+		expect( response.status ).to.equal( 409 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
