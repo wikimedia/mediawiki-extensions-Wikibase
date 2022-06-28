@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\UseCases\AddItemStatement;
 
+use CommentStore;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
@@ -70,6 +71,22 @@ class AddItemStatementValidatorTest extends TestCase {
 
 		$error = $this->newAddItemStatementValidator()->validate(
 			new AddItemStatementRequest( 'Q42', $invalidStatement, [], false, null, null )
+		);
+
+		$this->assertSame( $expectedError, $error );
+	}
+
+	public function testWithCommentTooLong(): void {
+		$comment = str_repeat( 'x', CommentStore::COMMENT_CHARACTER_LIMIT + 1 );
+		$expectedError = new ValidationError( "500", AddItemStatementValidator::SOURCE_COMMENT );
+
+		$this->editMetadataValidator = $this->createMock( EditMetadataValidator::class );
+		$this->editMetadataValidator->method( 'validateComment' )
+			->with( $comment, AddItemStatementValidator::SOURCE_COMMENT )
+			->willReturn( $expectedError );
+
+		$error = $this->newAddItemStatementValidator()->validate(
+			new AddItemStatementRequest( 'Q42', [ 'valid' => 'statement' ], [], false, $comment, null )
 		);
 
 		$this->assertSame( $expectedError, $error );

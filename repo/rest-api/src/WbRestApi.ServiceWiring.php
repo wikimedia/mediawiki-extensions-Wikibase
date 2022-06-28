@@ -40,7 +40,10 @@ return [
 						WikibaseRepo::getDataTypeValidatorFactory( $services )
 					)
 				),
-				new EditMetadataValidator( ChangeTags::listExplicitlyDefinedTags() )
+				new EditMetadataValidator(
+					CommentStore::COMMENT_CHARACTER_LIMIT,
+					ChangeTags::listExplicitlyDefinedTags()
+				)
 			),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )

@@ -15,6 +15,7 @@ class AddItemStatementValidator {
 
 	public const SOURCE_ITEM_ID = 'item ID';
 	public const SOURCE_STATEMENT = 'statement';
+	public const SOURCE_COMMENT = 'comment';
 	public const SOURCE_EDIT_TAGS = 'edit tags';
 
 	private $statementValidator;
@@ -34,7 +35,8 @@ class AddItemStatementValidator {
 	public function validate( AddItemStatementRequest $request ): ?ValidationError {
 		return $this->itemIdValidator->validate( $request->getItemId(), self::SOURCE_ITEM_ID ) ?:
 			$this->statementValidator->validate( $request->getStatement(), self::SOURCE_STATEMENT ) ?:
-				$this->editMetadataValidator->validateEditTags( $request->getEditTags(), self::SOURCE_EDIT_TAGS );
+				$this->editMetadataValidator->validateComment( $request->getComment(), self::SOURCE_COMMENT ) ?:
+					$this->editMetadataValidator->validateEditTags( $request->getEditTags(), self::SOURCE_EDIT_TAGS );
 	}
 
 	public function getValidatedStatement(): ?Statement {

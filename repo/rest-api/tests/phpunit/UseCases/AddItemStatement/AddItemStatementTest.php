@@ -217,7 +217,9 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 				WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer(),
 				$snakValidator
 			),
-			new EditMetadataValidator( self::ALLOWED_TAGS )
+			new EditMetadataValidator(
+				\CommentStore::COMMENT_CHARACTER_LIMIT,
+				self::ALLOWED_TAGS )
 		);
 	}
 
