@@ -12,6 +12,7 @@ class ErrorResponse {
 	public const INVALID_STATEMENT_ID = 'invalid-statement-id';
 	public const INVALID_STATEMENT_DATA = 'invalid-statement-data';
 	public const ITEM_NOT_FOUND = 'item-not-found';
+	public const ITEM_REDIRECTED = 'redirected-item';
 	public const STATEMENT_NOT_FOUND = 'statement-not-found';
 	public const UNEXPECTED_ERROR = 'unexpected-error';
 

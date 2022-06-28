@@ -194,6 +194,23 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 		} );
 	} );
 
+	describe( '409 error response', () => {
+		it( 'item is a redirect', async () => {
+			const redirectTarget = testItemId;
+			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
+
+			const response = await newAddItemStatementRequestBuilder(
+				redirectSource,
+				testStatement
+			).makeRequest( 'POST' );
+
+			assert.strictEqual( response.status, 409 );
+			assert.include( response.body.message, redirectSource );
+			assert.include( response.body.message, redirectTarget );
+			assert.strictEqual( response.body.code, 'redirected-item' );
+		} );
+	} );
+
 	describe( 'authentication', () => {
 
 		it( 'has an X-Authenticated-User header with the logged in user', async () => {
