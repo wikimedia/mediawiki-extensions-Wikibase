@@ -38,12 +38,6 @@ class TypeValidatingJsonBodyValidatorTest extends TestCase {
 			'someArray' => [ 1, 2, 3 ],
 		];
 
-		yield 'nothing to check' => [
-			[],
-			json_encode( $payload ),
-			$payload,
-		];
-
 		yield 'all fields typed' => [
 			[
 				'someString' => [ ParamValidator::PARAM_TYPE => 'string' ],
