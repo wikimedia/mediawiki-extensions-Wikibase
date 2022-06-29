@@ -262,6 +262,42 @@
 			}
 		}
 	},
+	"StatementCreated": {
+		"description": "A single newly created Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			},
+			"Location": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "The URI of the newly created statement"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"$ref": "./response-parts.json#/StatementResponse"
+				}
+			}
+		}
+	},
 	"Statements": {
 		"description": "The statements of an Item",
 		"headers": {
