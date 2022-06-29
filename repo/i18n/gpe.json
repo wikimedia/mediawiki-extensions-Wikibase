@@ -8,5 +8,6 @@
 	"wikibase-add": "add",
 	"wikibase-label-empty": "Dem no define label",
 	"wikibase-description-empty": "Dem no define any description",
-	"wikibase-sitelinks-special": "Oda sites"
+	"wikibase-sitelinks-special": "Oda sites",
+	"wikibase-statementview-rank-normal": "Normal rank"
 }
