@@ -213,6 +213,30 @@ $specialPageAliases['fi'] = [
 	'SetSiteLink' => [ 'Aseta_sivustolinkki' ],
 ];
 
+/** Hindi (हिन्दी) **/
+$specialPageAliases['hi'] = [
+	'AvailableBadges' => [ 'उपलब्ध_बैजेस' ],
+	'DispatchStats' => [ 'तैनात_सांख्यिकी' ],
+	'EntityData' => [ 'सत्ता_डेटा' ],
+	'EntityPage' => [ 'सत्ता' ],
+	'GoToLinkedPage' => [ 'जुड़े_पृष्ठ_पर_जाएँ' ],
+	'ItemByTitle' => [ 'शीर्षक_के_अनुसार_आयटम्स' ],
+	'ItemDisambiguation' => [ 'बहुविकल्पी_आयटम्स' ],
+	'ItemsWithoutSitelinks' => [ 'बिना_साइटकड़ियों_के_आयटम्स' ],
+	'ListDatatypes' => [ 'डेटाटाइप_सूची' ],
+	'ListProperties' => [ 'गुणधर्म_सूची' ],
+	'MergeItems' => [ 'आयटम्स_मर्ज_करें', 'आयटम_मर्ज_करें' ],
+	'MyLanguageFallbackChain' => [ 'भाषा_फ़ॉलबैक_श्रृंखला' ],
+	'NewItem' => [ 'नया_आयटम', 'आयटम_बनाएँ' ],
+	'NewProperty' => [ 'नया_गुणधर्म', 'गुणधर्म_बनाएँ' ],
+	'RedirectEntity' => [ 'सत्ता_अनुप्रेषित_करें', 'सत्ता_अनुप्रेषण', 'आयटम_अनुप्रेषण', 'आयटम_अनुप्रेषित_करें' ],
+	'SetAliases' => [ 'उपनाम_जोड़ें' ],
+	'SetDescription' => [ 'विवरण_जोड़ें' ],
+	'SetLabel' => [ 'लेबल_जोड़ें' ],
+	'SetLabelDescriptionAliases' => [ 'लेबल_विवरण_उपनाम_जोड़ें' ],
+	'SetSiteLink' => [ 'साइटकड़ी_जोड़ें' ],
+];
+
 /** Icelandic (íslenska) */
 $specialPageAliases['is'] = [
 	'ItemByTitle' => [ 'Hlutur_eftir_nafni' ],
