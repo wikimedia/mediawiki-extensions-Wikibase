@@ -111,7 +111,7 @@
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|запись|записи|записей}}",
 	"wikibase-sitelinks-empty": "Нет страниц, ссылающих на этот элемент.",
 	"wikibase-sitelinks-special": "Другие сайты",
-	"wikibase-badgeselector-badge-placeholder-title": "Щелкните, чтобы назначить значок.",
+	"wikibase-badgeselector-badge-placeholder-title": "Нажмите, чтобы назначить значок.",
 	"wikibase-remove": "удалить",
 	"wikibase-undo-title": "Отмена редактирования для «$1»",
 	"wikibase-restore-title": "Восстановление старой версии для «$1»",
