@@ -98,6 +98,15 @@ $namespaceNames['he'] = [
 	WB_NS_QUERY_TALK    => 'שיחת_שאילתה',
 ];
 
+$namespaceNames['hi'] = [
+	WB_NS_ITEM          => 'आयटम',
+	WB_NS_ITEM_TALK     => 'आयटम_वार्ता',
+	WB_NS_PROPERTY      => 'गुणधर्म',
+	WB_NS_PROPERTY_TALK => 'गुणधर्म_वार्ता',
+	WB_NS_QUERY         => 'क्वेरी',
+	WB_NS_QUERY_TALK    => 'क्वेरी_वार्ता',
+];
+
 $namespaceNames['it'] = [
 	WB_NS_ITEM          => 'Elemento',
 	WB_NS_ITEM_TALK     => 'Discussioni_elemento',
