@@ -50,4 +50,8 @@ class SerializerFactory {
 		) );
 	}
 
+	public function newSiteLinkListSerializer(): SiteLinkListSerializer {
+		return new SiteLinkListSerializer( $this->legacySerializerFactory->newSiteLinkSerializer(), true );
+	}
+
 }
