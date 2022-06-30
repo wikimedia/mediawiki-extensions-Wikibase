@@ -61,7 +61,7 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
 		return new self(
 			WbRestApi::getGetItemStatements(),
-			new GetItemStatementsJsonPresenter( WbRestApi::getStatementListSerializer() ),
+			new GetItemStatementsJsonPresenter( WbRestApi::getSerializerFactory()->newStatementListSerializer() ),
 			$responseFactory,
 			new UnexpectedErrorHandler( $responseFactory, WikibaseRepo::getLogger() )
 		);

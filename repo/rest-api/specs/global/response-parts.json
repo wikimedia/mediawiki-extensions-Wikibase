@@ -21,7 +21,7 @@
 			{
 				"required": [ "id", "mainsnak", "rank", "qualifiers", "qualifiers-order", "references" ],
 				"properties": {
-					"mainsnak": { "required": [ "snaktype", "property", "hash" ] },
+					"mainsnak": { "required": [ "snaktype", "property", "datatype", "hash" ] },
 					"qualifiers": { "$ref": "#/QualifiersResponseRequired" },
 					"references": { "$ref": "#/ReferencesResponseRequired" }
 				}
@@ -39,7 +39,7 @@
 	"QualifiersResponseRequired": {
 		"additionalProperties": {
 			"items": {
-				"required": [ "snaktype", "property", "hash" ]
+				"required": [ "snaktype", "property", "datatype", "hash" ]
 			}
 		}
 	},
@@ -49,7 +49,7 @@
 			"snaks": {
 				"additionalProperties": {
 					"items": {
-						"required": [ "snaktype", "property", "hash" ]
+						"required": [ "snaktype", "property", "datatype", "hash" ]
 					}
 				}
 			}

@@ -2,13 +2,14 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Domain\Serializers;
 
+use DataValues\Serializers\DataValueSerializer;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Repo\RestApi\Domain\Serializers\StatementSerializer;
-use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\Tests\NewStatement;
 
 /**
@@ -63,7 +64,9 @@ class StatementSerializerTest extends TestCase {
 	}
 
 	private function newSerializer(): StatementSerializer {
-		return new StatementSerializer( WbRestApi::getBaseDataModelSerializerFactory()->newStatementSerializer() );
+		return new StatementSerializer( ( new SerializerFactory(
+			new DataValueSerializer(), SerializerFactory::OPTION_OBJECTS_FOR_MAPS )
+		)->newStatementSerializer() );
 	}
 
 }
