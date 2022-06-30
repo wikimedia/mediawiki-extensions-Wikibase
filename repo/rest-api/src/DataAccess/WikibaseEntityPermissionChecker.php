@@ -23,8 +23,8 @@ class WikibaseEntityPermissionChecker implements PermissionChecker {
 
 	public function canEdit( User $user, ItemId $id ): bool {
 		$mwUser = $user->isAnonymous() ?
-			$this->userFactory->newAnonymous( $user->getUsernameOrIp() ) :
-			$this->userFactory->newFromName( $user->getUsernameOrIp() );
+			$this->userFactory->newAnonymous() :
+			$this->userFactory->newFromName( $user->getUsername() );
 
 		return $this->entityPermissionChecker->getPermissionStatusForEntityId(
 			$mwUser,

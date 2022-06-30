@@ -7,20 +7,29 @@ namespace Wikibase\Repo\RestApi\Domain\Model;
  */
 class User {
 
-	private $usernameOrIp;
-	private $isAnonymous;
+	private $username;
 
-	public function __construct( string $usernameOrIp, bool $isAnonymous = false ) {
-		$this->usernameOrIp = $usernameOrIp;
-		$this->isAnonymous = $isAnonymous;
+	public static function newAnonymous(): self {
+		return new self( null );
 	}
 
-	public function getUsernameOrIp(): string {
-		return $this->usernameOrIp;
+	public static function withUsername( string $username ): self {
+		return new self( $username );
+	}
+
+	private function __construct( ?string $username ) {
+		$this->username = $username;
+	}
+
+	/**
+	 * @return string|null Returns null for anonymous user
+	 */
+	public function getUsername(): ?string {
+		return $this->username;
 	}
 
 	public function isAnonymous(): bool {
-		return $this->isAnonymous;
+		return $this->username === null;
 	}
 
 }

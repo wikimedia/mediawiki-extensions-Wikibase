@@ -25,14 +25,14 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 	 * @dataProvider permissionStatusProvider
 	 */
 	public function testCanEditAsRegisteredUser( Status $permissionStatus, bool $canEdit ): void {
-		$user = new User( 'potato' );
+		$user = User::withUsername( 'potato' );
 		$itemToEdit = new ItemId( 'Q123' );
 
 		$mwUser = $this->createStub( MediaWikiUser::class );
 		$userFactory = $this->createMock( UserFactory::class );
 		$userFactory->expects( $this->once() )
 			->method( 'newFromName' )
-			->with( $user->getUsernameOrIp() )
+			->with( $user->getUsername() )
 			->willReturn( $mwUser );
 
 		$wbPermissionChecker = $this->createMock( EntityPermissionChecker::class );
@@ -50,14 +50,12 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 	 * @dataProvider permissionStatusProvider
 	 */
 	public function testCanEditAsAnonymousUser( Status $permissionStatus, bool $canEdit ): void {
-		$user = new User( '127.0.0.1', true );
 		$itemToEdit = new ItemId( 'Q123' );
 
 		$mwUser = $this->createStub( MediaWikiUser::class );
 		$userFactory = $this->createMock( UserFactory::class );
 		$userFactory->expects( $this->once() )
 			->method( 'newAnonymous' )
-			->with( $user->getUsernameOrIp() )
 			->willReturn( $mwUser );
 
 		$wbPermissionChecker = $this->createMock( EntityPermissionChecker::class );
@@ -68,7 +66,7 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 
 		$permissionChecker = new WikibaseEntityPermissionChecker( $wbPermissionChecker, $userFactory );
 
-		$this->assertSame( $canEdit, $permissionChecker->canEdit( $user, $itemToEdit ) );
+		$this->assertSame( $canEdit, $permissionChecker->canEdit( User::newAnonymous(), $itemToEdit ) );
 	}
 
 	public function permissionStatusProvider(): Generator {
