@@ -12,13 +12,15 @@ class AddItemStatementRequest {
 	private $editTags;
 	private $isBot;
 	private $comment;
+	private $username;
 
-	public function __construct( string $itemId, array $statement, array $editTags, bool $isBot, ?string $comment ) {
+	public function __construct( string $itemId, array $statement, array $editTags, bool $isBot, ?string $comment, ?string $username ) {
 		$this->statement = $statement;
 		$this->editTags = $editTags;
 		$this->isBot = $isBot;
 		$this->itemId = $itemId;
 		$this->comment = $comment;
+		$this->username = $username;
 	}
 
 	public function getStatement(): array {
@@ -39,5 +41,13 @@ class AddItemStatementRequest {
 
 	public function getComment(): ?string {
 		return $this->comment;
+	}
+
+	public function hasUser(): bool {
+		return $this->username !== null;
+	}
+
+	public function getUsername(): ?string {
+		return $this->username;
 	}
 }
