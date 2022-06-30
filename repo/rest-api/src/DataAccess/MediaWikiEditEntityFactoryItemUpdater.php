@@ -15,7 +15,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
  */
 class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 
-	public const DEFAULT_COMMENT = 'TBD default comment';
+	public const DEFAULT_COMMENT = 'Wikibase REST API edit';
 
 	private $context;
 	private $editEntityFactory;

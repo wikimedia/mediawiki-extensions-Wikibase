@@ -19,6 +19,17 @@ function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
 }
 
+async function getLatestEditMetadata( itemId ) {
+	const recentChanges = await action.getAnon().action( 'query', {
+		list: 'recentchanges',
+		rctitle: `Item:${itemId}`,
+		rclimit: 1,
+		rcprop: 'tags|flags|comment'
+	} );
+
+	return recentChanges.query.recentchanges[ 0 ];
+}
+
 describe( 'POST /entities/items/{item_id}/statements', () => {
 	let testItemId;
 	let originalLastModified;
@@ -72,12 +83,15 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 	} );
 
 	describe( '201 success response ', () => {
-		it( 'can add a statement to an item with bot and tags omitted', async () => {
+		it( 'can add a statement to an item with edit metadata omitted', async () => {
 			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
 				.assertValidRequest()
 				.makeRequest( 'POST' );
 
 			assertValid201Response( response );
+
+			const { comment } = await getLatestEditMetadata( testItemId );
+			assert.strictEqual( comment, 'Wikibase REST API edit' );
 		} );
 		it( 'can add a statement to an item with edit metadata provided', async () => {
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
@@ -90,14 +104,8 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.makeRequest( 'POST' );
 
 			assertValid201Response( response );
-			// check that the tags and bot flag have been set correctly
-			const recentChanges = await action.getAnon().action( 'query', {
-				list: 'recentchanges',
-				rctitle: `Item:${testItemId}`,
-				rclimit: 1,
-				rcprop: 'tags|flags|comment'
-			} );
-			const editMetadata = recentChanges.query.recentchanges[ 0 ];
+
+			const editMetadata = await getLatestEditMetadata( testItemId );
 			assert.deepEqual( editMetadata.tags, [ tag ] );
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual( editMetadata.comment, editSummary );
