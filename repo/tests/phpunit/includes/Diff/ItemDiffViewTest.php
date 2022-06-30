@@ -24,7 +24,7 @@ use Wikibase\Repo\Diff\ItemDiffView;
 class ItemDiffViewTest extends \PHPUnit\Framework\TestCase {
 
 	public function diffOpProvider() {
-		$linkPath = wfMessage( 'wikibase-diffview-link' )->text();
+		$linkPath = 'LINKS'; // like wikibase-diffview-link message, but class shouldn’t care!
 
 		return [
 			'Empty' => [
