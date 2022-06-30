@@ -199,9 +199,7 @@ return [
 			$basicEntityDiffVisualizer = new BasicEntityDiffVisualizer(
 				$messageLocalizer,
 				$claimDiffer,
-				$claimDiffView,
-				$siteLookup,
-				$entityIdFormatter
+				$claimDiffView
 			);
 
 			return new ItemDiffVisualizer(

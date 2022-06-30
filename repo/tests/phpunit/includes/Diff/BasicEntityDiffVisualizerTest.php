@@ -5,13 +5,11 @@ namespace Wikibase\Repo\Tests\Diff;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
-use HashSiteStore;
 use MediaWikiIntegrationTestCase;
 use MessageLocalizer;
 use RawMessage;
 use Site;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
-use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\ClaimDiffer;
@@ -126,9 +124,7 @@ class BasicEntityDiffVisualizerTest extends MediaWikiIntegrationTestCase {
 		return new BasicEntityDiffVisualizer(
 			$this->getMockMessageLocalizer(),
 			$this->getMockClaimDiffer(),
-			$this->getMockClaimDiffVisualizer(),
-			new HashSiteStore( [ $enwiki ] ),
-			$this->createMock( EntityIdFormatter::class )
+			$this->getMockClaimDiffVisualizer()
 		);
 	}
 
