@@ -10,7 +10,10 @@
 	"wikibase-linkitem-title": "Link plus page",
 	"wikibase-linkitem-linkpage": "Link plus page",
 	"wikibase-linkitem-selectlink": "We beg make you select site den page wey you want link to de page",
+	"wikibase-linkitem-input-site": "Language:",
+	"wikibase-linkitem-input-page": "Page:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Hide am",
 	"wikibase-rc-hide-wikidata-show": "Show",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-otherprojects": "For oda projects inside"
