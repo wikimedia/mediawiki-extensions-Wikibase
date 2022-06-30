@@ -10,10 +10,10 @@ use HashSiteStore;
 use RequestContext;
 use TestSites;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\Repo\Diff\ItemDiffView;
+use Wikibase\Repo\Diff\SiteLinkDiffView;
 
 /**
- * @covers \Wikibase\Repo\Diff\ItemDiffView
+ * @covers \Wikibase\Repo\Diff\SiteLinkDiffView
  *
  * @group Wikibase
  *
@@ -21,7 +21,7 @@ use Wikibase\Repo\Diff\ItemDiffView;
  * @author Thiemo Kreuz
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class ItemDiffViewTest extends \PHPUnit\Framework\TestCase {
+class SiteLinkDiffViewTest extends \PHPUnit\Framework\TestCase {
 
 	public function diffOpProvider() {
 		$linkPath = 'LINKS'; // like wikibase-diffview-link message, but class shouldn’t care!
@@ -73,7 +73,7 @@ class ItemDiffViewTest extends \PHPUnit\Framework\TestCase {
 	 * @param string[] $path
 	 * @param Diff $diff
 	 *
-	 * @return ItemDiffView
+	 * @return SiteLinkDiffView
 	 */
 	private function getDiffView( array $path, Diff $diff ) {
 		$siteStore = new HashSiteStore( TestSites::getSites() );
@@ -82,7 +82,7 @@ class ItemDiffViewTest extends \PHPUnit\Framework\TestCase {
 		$entityIdFormatter->method( 'formatEntityId' )
 			->willReturn( 'FORMATTED BADGE ID' );
 
-		$diffView = new ItemDiffView(
+		$diffView = new SiteLinkDiffView(
 			$path,
 			$diff,
 			$siteStore,

@@ -77,18 +77,19 @@ class ItemDiffVisualizer implements EntityDiffVisualizer {
 
 		$basicHtml = $this->basicEntityDiffVisualizer->visualizeEntityContentDiff( $diff );
 
-		return $basicHtml . $this->visualizeEntityDiff( $diff->getEntityDiff() );
+		return $basicHtml . $this->visualizeSiteLinkDiff( $diff->getEntityDiff() );
 	}
 
 	/**
-	 * Generates and returns an HTML visualization of the provided EntityDiff.
+	 * Generates and returns an HTML visualization of the site link part
+	 * of the provided EntityDiff (which must really be an ItemDiff).
 	 *
 	 * @param EntityDiff $diff
 	 *
 	 * @return string
 	 */
-	protected function visualizeEntityDiff( EntityDiff $diff ) {
-		return ( new ItemDiffView(
+	private function visualizeSiteLinkDiff( EntityDiff $diff ) {
+		return ( new SiteLinkDiffView(
 			[],
 			new Diff(
 				[
