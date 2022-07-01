@@ -18,11 +18,14 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 
 /**
- * Class for generating views of DiffOp objects.
+ * Class for generating views of DiffOp objects
+ * representing diffs of an Item’s site links (including badges).
+ *
+ * Diffing of other Item data is done by {@link BasicDiffView}.
  *
  * @license GPL-2.0-or-later
  */
-class ItemDiffView implements DiffView {
+class SiteLinkDiffView implements DiffView {
 
 	/**
 	 * @var string[]
