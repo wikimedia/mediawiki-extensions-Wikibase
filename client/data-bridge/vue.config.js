@@ -61,7 +61,6 @@ module.exports = {
 					...args,
 				] );
 		}
-		config.resolve.alias.set( 'vue', '@vue/compat' );
 
 		config.module
 			.rule( 'vue' )
@@ -71,7 +70,7 @@ module.exports = {
 					...options,
 					compilerOptions: {
 						compatConfig: {
-							MODE: 2,
+							MODE: 3,
 						},
 					},
 				};
