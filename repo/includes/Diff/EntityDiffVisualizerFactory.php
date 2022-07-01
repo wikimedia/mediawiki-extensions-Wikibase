@@ -96,9 +96,7 @@ class EntityDiffVisualizerFactory {
 			return new BasicEntityDiffVisualizer(
 				$context,
 				$this->claimDiffer,
-				$claimDiffView,
-				$this->siteLookup,
-				$entityIdFormatter
+				$claimDiffView
 			);
 		}
 

@@ -9,9 +9,7 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use MessageLocalizer;
 use MWException;
-use SiteLookup;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
-use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Content\EntityContentDiff;
 
 /**
@@ -39,28 +37,14 @@ class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 	 */
 	private $claimDiffVisualizer;
 
-	/**
-	 * @var SiteLookup
-	 */
-	private $siteLookup;
-
-	/**
-	 * @var EntityIdFormatter
-	 */
-	private $entityIdFormatter;
-
 	public function __construct(
 		MessageLocalizer $messageLocalizer,
 		ClaimDiffer $claimDiffer,
-		ClaimDifferenceVisualizer $claimDiffView,
-		SiteLookup $siteLookup,
-		EntityIdFormatter $entityIdFormatter
+		ClaimDifferenceVisualizer $claimDiffView
 	) {
 		$this->messageLocalizer = $messageLocalizer;
 		$this->claimDiffer = $claimDiffer;
 		$this->claimDiffVisualizer = $claimDiffView;
-		$this->siteLookup = $siteLookup;
-		$this->entityIdFormatter = $entityIdFormatter;
 	}
 
 	/**
