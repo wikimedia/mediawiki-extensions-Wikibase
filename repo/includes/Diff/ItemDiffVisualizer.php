@@ -23,16 +23,6 @@ class ItemDiffVisualizer implements EntityDiffVisualizer {
 	private $messageLocalizer;
 
 	/**
-	 * @var ClaimDiffer|null
-	 */
-	private $claimDiffer;
-
-	/**
-	 * @var ClaimDifferenceVisualizer|null
-	 */
-	private $claimDiffVisualizer;
-
-	/**
 	 * @var SiteLookup
 	 */
 	private $siteLookup;
@@ -49,15 +39,11 @@ class ItemDiffVisualizer implements EntityDiffVisualizer {
 
 	public function __construct(
 		MessageLocalizer $messageLocalizer,
-		ClaimDiffer $claimDiffer,
-		ClaimDifferenceVisualizer $claimDiffView,
 		SiteLookup $siteLookup,
 		EntityIdFormatter $entityIdFormatter,
 		EntityDiffVisualizer $basicEntityDiffVisualizer
 	) {
 		$this->messageLocalizer = $messageLocalizer;
-		$this->claimDiffer = $claimDiffer;
-		$this->claimDiffVisualizer = $claimDiffView;
 		$this->siteLookup = $siteLookup;
 		$this->entityIdFormatter = $entityIdFormatter;
 		$this->basicEntityDiffVisualizer = $basicEntityDiffVisualizer;

@@ -204,8 +204,6 @@ return [
 
 			return new ItemDiffVisualizer(
 				$messageLocalizer,
-				$claimDiffer,
-				$claimDiffView,
 				$siteLookup,
 				$entityIdFormatter,
 				$basicEntityDiffVisualizer

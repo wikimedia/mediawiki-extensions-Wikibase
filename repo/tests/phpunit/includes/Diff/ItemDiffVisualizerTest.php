@@ -123,8 +123,6 @@ class ItemDiffVisualizerTest extends MediaWikiIntegrationTestCase {
 
 		return new ItemDiffVisualizer(
 			$this->getMockMessageLocalizer(),
-			$this->getMockClaimDiffer(),
-			$this->getMockClaimDiffVisualizer(),
 			new HashSiteStore( [ $enwiki ] ),
 			$this->createMock( EntityIdFormatter::class ),
 			$basicVisualizer
