@@ -66,15 +66,24 @@ class BasicDiffView implements DiffView {
 			if ( $op->getType() === 'add' ) {
 				/** @var DiffOpAdd $op */
 				'@phan-var DiffOpAdd $op';
-				$html .= $this->generateChangeOpHtml( null, $op->getNewValue(), $path );
+				$html .= $this->generateHtmlDiffTableRow(
+					null,
+					$this->getAddedLine( $op->getNewValue(), $path )
+				);
 			} elseif ( $op->getType() === 'remove' ) {
 				/** @var DiffOpRemove $op */
 				'@phan-var DiffOpRemove $op';
-				$html .= $this->generateChangeOpHtml( $op->getOldValue(), null, $path );
+				$html .= $this->generateHtmlDiffTableRow(
+					$this->getDeletedLine( $op->getOldValue(), $path ),
+					null
+				 );
 			} elseif ( $op->getType() === 'change' ) {
 				/** @var DiffOpChange $op */
 				'@phan-var DiffOpChange $op';
-				$html .= $this->generateChangeOpHtml( $op->getOldValue(), $op->getNewValue(), $path );
+				$html .= $this->generateHtmlDiffTableRow(
+					$this->getDeletedLine( $op->getOldValue(), $path ),
+					$this->getAddedLine( $op->getNewValue(), $path )
+				 );
 			} else {
 				throw new MWException( 'Invalid diffOp type' );
 			}
@@ -93,29 +102,30 @@ class BasicDiffView implements DiffView {
 	}
 
 	/**
-	 * Generates HTML for an change diffOp
+	 * Generates an HTML table row for a change diffOp
+	 * given HTML snippets representing old and new
+	 * sides of the Diff
 	 *
-	 * @param string|null $oldValue
-	 * @param string|null $newValue
-	 * @param string[] $path
+	 * @param string|null $oldHtml
+	 * @param string|null $newHtml
 	 *
 	 * @return string
 	 */
-	protected function generateChangeOpHtml( $oldValue, $newValue, array $path ) {
+	protected function generateHtmlDiffTableRow( $oldHtml, $newHtml ) {
 		//TODO: use WordLevelDiff!
 		$html = Html::openElement( 'tr' );
-		if ( $oldValue !== null ) {
+		if ( $oldHtml !== null ) {
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker', 'data-marker' => '−' ] );
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-deletedline' ],
-				Html::rawElement( 'div', [], $this->getDeletedLine( $oldValue, $path ) ) );
+				Html::rawElement( 'div', [], $oldHtml ) );
 		}
-		if ( $newValue !== null ) {
-			if ( $oldValue === null ) {
+		if ( $newHtml !== null ) {
+			if ( $oldHtml === null ) {
 				$html .= Html::rawElement( 'td', [ 'colspan' => '2' ], '&nbsp;' );
 			}
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker', 'data-marker' => '+' ] );
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-addedline' ],
-				Html::rawElement( 'div', [], $this->getAddedLine( $newValue, $path ) ) );
+				Html::rawElement( 'div', [], $newHtml ) );
 		}
 		$html .= Html::closeElement( 'tr' );
 
