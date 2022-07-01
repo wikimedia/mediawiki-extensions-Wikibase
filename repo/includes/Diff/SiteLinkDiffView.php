@@ -17,6 +17,7 @@ use Site;
 use SiteLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
+use WordLevelDiff;
 
 /**
  * Class for generating views of DiffOp objects
@@ -156,8 +157,12 @@ class SiteLinkDiffView implements DiffView {
 		} elseif ( $op instanceof DiffOpRemove ) {
 			$oldHtml = $this->getDeletedLine( $this->getSiteLinkElement( $siteId,  $op->getOldValue() ) );
 		} elseif ( $op instanceof DiffOpChange ) {
-			$oldHtml = $this->getDeletedLine( $this->getSiteLinkElement( $siteId, $op->getOldValue() ) );
-			$newHtml = $this->getAddedLine( $this->getSiteLinkElement( $siteId, $op->getNewValue() ) );
+			$wordLevelDiff = new WordLevelDiff(
+				[ $op->getOldValue() ],
+				[ $op->getNewValue() ]
+			);
+			$oldHtml = $this->getSiteLinkElement( $siteId, $op->getOldValue(), $wordLevelDiff->orig()[0] );
+			$newHtml = $this->getSiteLinkElement( $siteId, $op->getNewValue(), $wordLevelDiff->closing()[0] );
 		} else {
 			throw new MWException( 'Unknown DiffOp type' );
 		}
@@ -226,16 +231,20 @@ class SiteLinkDiffView implements DiffView {
 	/**
 	 * @param string $siteId
 	 * @param string $pageName
+	 * @param string|null $html Defaults to $pageName (HTML-escaped)
 	 *
 	 * @return string
 	 */
-	private function getSiteLinkElement( $siteId, $pageName ) {
+	private function getSiteLinkElement( $siteId, $pageName, $html = null ) {
 		$site = $this->siteLookup->getSite( $siteId );
 
 		$tagName = 'span';
 		$attrs = [
 			'dir' => 'auto',
 		];
+		if ( $html === null ) {
+			$html = htmlspecialchars( $pageName );
+		}
 
 		if ( $site instanceof Site ) {
 			// Otherwise it may have been deleted from the sites table
@@ -244,7 +253,7 @@ class SiteLinkDiffView implements DiffView {
 			$attrs['hreflang'] = LanguageCode::bcp47( $site->getLanguageCode() );
 		}
 
-		return Html::element( $tagName, $attrs, $pageName );
+		return Html::rawElement( $tagName, $attrs, $html );
 	}
 
 	/**

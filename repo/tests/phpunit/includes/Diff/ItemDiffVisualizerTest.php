@@ -55,12 +55,12 @@ class ItemDiffVisualizerTest extends MediaWikiIntegrationTestCase {
 		$diffViewLinkName = '(wikibase-diffview-link-name)';
 		$sitelinkTags = [
 			'has <td>links / enwiki</td>' => ">$diffViewLink / enwiki / $diffViewLinkName</td>",
-			'has <ins>O_o</ins>' => '>O_o</a></ins>',
+			'adds <ins>O_o</ins>' => '>O_o</a></ins>',
 			'has <td>links / nlwiki</td>' => ">$diffViewLink / nlwiki / $diffViewLinkName</td>",
-			'has <del>o_O</del>' => '>o_O</span></del>',
+			'removes <del>o_O</del>' => '>o_O</span></del>',
 			'has <td>links / fawiki</td>' => ">$diffViewLink / fawiki / $diffViewLinkName</td>",
-			'has <del>O_O</del>' => '>O_O</span></del>',
-			'has <ins>o_o</ins>' => '>o_o</span></ins>',
+			'changes <del>O_O</del>' => '>O_O</del></span>',
+			'changes <ins>o_o</ins>' => '>o_o</ins></span>',
 		];
 
 		$redirectDiff = new EntityContentDiff(
