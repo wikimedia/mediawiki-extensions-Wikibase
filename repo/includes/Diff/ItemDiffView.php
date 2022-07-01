@@ -50,11 +50,6 @@ class ItemDiffView implements DiffView {
 	private $messageLocalizer;
 
 	/**
-	 * @var string
-	 */
-	private $siteLinkPath;
-
-	/**
 	 * @param string[] $path
 	 * @param Diff $diff
 	 * @param SiteLookup $siteLookup
@@ -73,8 +68,6 @@ class ItemDiffView implements DiffView {
 		$this->siteLookup = $siteLookup;
 		$this->entityIdFormatter = $entityIdFormatter;
 		$this->messageLocalizer = $messageLocalizer;
-
-		$this->siteLinkPath = $this->messageLocalizer->msg( 'wikibase-diffview-link' )->text();
 	}
 
 	/**
