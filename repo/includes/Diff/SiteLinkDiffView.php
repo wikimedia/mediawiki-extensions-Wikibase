@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Diff;
 
+use Diff\DiffOp\AtomicDiffOp;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
@@ -92,7 +93,7 @@ class SiteLinkDiffView implements DiffView {
 	 * @throws MWException
 	 */
 	protected function generateOpHtml( array $path, DiffOp $op ) {
-		if ( $op->isAtomic() ) {
+		if ( $op instanceof AtomicDiffOp ) {
 			$localizedPath = $path;
 
 			$translatedLinkSubPath = $this->messageLocalizer->msg(
@@ -105,24 +106,7 @@ class SiteLinkDiffView implements DiffView {
 
 			$html = $this->generateDiffHeaderHtml( implode( ' / ', $localizedPath ) );
 
-			//TODO: no path, but localized section title
-
-			//FIXME: complex objects as values?
-			if ( $op->getType() === 'add' ) {
-				/** @var DiffOpAdd $op */
-				'@phan-var DiffOpAdd $op';
-				$html .= $this->generateChangeOpHtml( null, $op->getNewValue(), $path );
-			} elseif ( $op->getType() === 'remove' ) {
-				/** @var DiffOpRemove $op */
-				'@phan-var DiffOpRemove $op';
-				$html .= $this->generateChangeOpHtml( $op->getOldValue(), null, $path );
-			} elseif ( $op->getType() === 'change' ) {
-				/** @var DiffOpChange $op */
-				'@phan-var DiffOpChange $op';
-				$html .= $this->generateChangeOpHtml( $op->getOldValue(), $op->getNewValue(), $path );
-			} else {
-				throw new MWException( 'Invalid diffOp type' );
-			}
+			$html .= $this->generateDiffOpHtml( $path, $op );
 		} else {
 			$html = '';
 			// @phan-suppress-next-line PhanTypeNoPropertiesForeach
@@ -137,30 +121,74 @@ class SiteLinkDiffView implements DiffView {
 		return $html;
 	}
 
+	private function generateDiffOpHtml( array $path, AtomicDiffOp $op ): string {
+		if ( $path[2] === 'badges' ) {
+			return $this->generateBadgeDiffOpHtml( $op );
+		} else {
+			return $this->generateLinkDiffOpHtml( $path[1], $op );
+		}
+	}
+
+	private function generateBadgeDiffOpHtml( AtomicDiffOp $op ): string {
+		$oldHtml = null;
+		$newHtml = null;
+
+		if ( $op instanceof DiffOpAdd ) {
+			$newHtml = $this->getAddedLine( $this->getBadgeLinkElement( $op->getNewValue() ) );
+		} elseif ( $op instanceof DiffOpRemove ) {
+			$oldHtml = $this->getDeletedLine( $this->getBadgeLinkElement( $op->getOldValue() ) );
+		} elseif ( $op instanceof DiffOpChange ) {
+			$oldHtml = $this->getDeletedLine( $this->getBadgeLinkElement( $op->getOldValue() ) );
+			$newHtml = $this->getAddedLine( $this->getBadgeLinkElement( $op->getNewValue() ) );
+		} else {
+			throw new MWException( 'Unknown DiffOp type' );
+		}
+
+		return $this->generateHtmlDiffTableRow( $oldHtml, $newHtml );
+	}
+
+	private function generateLinkDiffOpHtml( string $siteId, AtomicDiffOp $op ): string {
+		$oldHtml = null;
+		$newHtml = null;
+
+		if ( $op instanceof DiffOpAdd ) {
+			$newHtml = $this->getAddedLine( $this->getSiteLinkElement( $siteId, $op->getNewValue() ) );
+		} elseif ( $op instanceof DiffOpRemove ) {
+			$oldHtml = $this->getDeletedLine( $this->getSiteLinkElement( $siteId,  $op->getOldValue() ) );
+		} elseif ( $op instanceof DiffOpChange ) {
+			$oldHtml = $this->getDeletedLine( $this->getSiteLinkElement( $siteId, $op->getOldValue() ) );
+			$newHtml = $this->getAddedLine( $this->getSiteLinkElement( $siteId, $op->getNewValue() ) );
+		} else {
+			throw new MWException( 'Unknown DiffOp type' );
+		}
+
+		return $this->generateHtmlDiffTableRow( $oldHtml, $newHtml );
+	}
+
 	/**
-	 * Generates HTML for an change diffOp
+	 * Generates an HTML table row for a change diffOp
+	 * given HTML snippets representing old and new
+	 * sides of the Diff
 	 *
-	 * @param string|null $oldValue
-	 * @param string|null $newValue
-	 * @param string[] $path
+	 * @param string|null $oldHtml
+	 * @param string|null $newHtml
 	 *
 	 * @return string
 	 */
-	protected function generateChangeOpHtml( $oldValue, $newValue, array $path ) {
-		//TODO: use WordLevelDiff!
+	protected function generateHtmlDiffTableRow( $oldHtml, $newHtml ) {
 		$html = Html::openElement( 'tr' );
-		if ( $oldValue !== null ) {
+		if ( $oldHtml !== null ) {
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker', 'data-marker' => '−' ] );
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-deletedline' ],
-				Html::rawElement( 'div', [], $this->getDeletedLine( $oldValue, $path ) ) );
+				Html::rawElement( 'div', [], $oldHtml ) );
 		}
-		if ( $newValue !== null ) {
-			if ( $oldValue === null ) {
+		if ( $newHtml !== null ) {
+			if ( $oldHtml === null ) {
 				$html .= Html::rawElement( 'td', [ 'colspan' => '2' ], '&nbsp;' );
 			}
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker', 'data-marker' => '+' ] );
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-addedline' ],
-				Html::rawElement( 'div', [], $this->getAddedLine( $newValue, $path ) ) );
+				Html::rawElement( 'div', [], $newHtml ) );
 		}
 		$html .= Html::closeElement( 'tr' );
 
@@ -168,40 +196,31 @@ class SiteLinkDiffView implements DiffView {
 	}
 
 	/**
-	 * @param string $value
-	 * @param string[] $path
+	 * @param string $html
 	 *
 	 * @return string
 	 */
-	private function getDeletedLine( $value, array $path ) {
-		return $this->getChangedLine( 'del', $value, $path );
+	private function getDeletedLine( $html ) {
+		return $this->getChangedLine( 'del', $html );
 	}
 
 	/**
-	 * @param string $value
-	 * @param string[] $path
+	 * @param string $html
 	 *
 	 * @return string
 	 */
-	private function getAddedLine( $value, array $path ) {
-		return $this->getChangedLine( 'ins', $value, $path );
+	private function getAddedLine( $html ) {
+		return $this->getChangedLine( 'ins', $html );
 	}
 
 	/**
 	 * @param string $tag
-	 * @param string $value
-	 * @param string[] $path
+	 * @param string $html
 	 *
 	 * @return string
 	 */
-	private function getChangedLine( $tag, $value, array $path ) {
-		if ( $path[2] === 'badges' ) {
-			$content = $this->getBadgeLinkElement( $value );
-		} else {
-			$content = $this->getSiteLinkElement( $path[1], $value );
-		}
-
-		return Html::rawElement( $tag, [ 'class' => 'diffchange diffchange-inline' ], $content );
+	private function getChangedLine( $tag, $html ) {
+		return Html::rawElement( $tag, [ 'class' => 'diffchange diffchange-inline' ], $html );
 	}
 
 	/**
