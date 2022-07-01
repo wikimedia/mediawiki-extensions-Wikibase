@@ -16,6 +16,7 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -76,14 +77,19 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 				$jsonBody[self::STATEMENT_BODY_PARAM],
 				$jsonBody[self::TAGS_BODY_PARAM],
 				$jsonBody[self::BOT_BODY_PARAM],
-				$jsonBody[self::COMMENT_BODY_PARAM]
+				$jsonBody[self::COMMENT_BODY_PARAM],
+				$this->getUsername()
 			)
 		);
 
 		if ( $useCaseResponse instanceof AddItemStatementSuccessResponse ) {
 			$httpResponse = $this->newSuccessHttpResponse( $useCaseResponse, $itemId );
 		} elseif ( $useCaseResponse instanceof AddItemStatementErrorResponse ) {
-			$httpResponse = $this->responseFactory->newErrorResponse( $useCaseResponse );
+			$httpResponse =
+				$useCaseResponse->getCode() === ErrorResponse::PERMISSION_DENIED ?
+					// respond with framework error, when user cannot edit Item
+					$this->getResponseFactory()->createHttpError( 403, [ 'error' => 'rest-write-denied' ] ) :
+					$this->responseFactory->newErrorResponse( $useCaseResponse );
 		} else {
 			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
@@ -194,6 +200,11 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		list( $ct ) = explode( ';', $request->getHeaderLine( 'Content-Type' ), 2 );
 
 		return strtolower( trim( $ct ) );
+	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 
 }

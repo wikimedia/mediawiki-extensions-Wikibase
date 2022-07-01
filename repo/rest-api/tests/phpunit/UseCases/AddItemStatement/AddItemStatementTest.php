@@ -8,9 +8,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
+use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
@@ -51,6 +53,10 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 	 * @var MockObject|GuidGenerator
 	 */
 	private $guidGenerator;
+	/**
+	 * @var MockObject|WikibaseEntityPermissionChecker
+	 */
+	private $permissionChecker;
 
 	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
 
@@ -61,6 +67,7 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->guidGenerator = $this->createStub( GuidGenerator::class );
+		$this->permissionChecker = $this->createStub( WikibaseEntityPermissionChecker::class );
 	}
 
 	public function testAddStatement(): void {
@@ -77,7 +84,8 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 			$this->getValidNoValueStatementSerialization(),
 			$editTags,
 			$isBot,
-			$comment
+			$comment,
+			null
 		);
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
@@ -93,6 +101,9 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 		$this->itemUpdater->method( 'update' )
 			->with( $item, $this->equalTo( new EditMetadata( $editTags, $isBot, $comment ) ) )
 			->willReturn( new ItemRevision( $item, $modificationTimestamp, $postModificationRevisionId ) );
+
+		$this->permissionChecker = $this->createStub( WikibaseEntityPermissionChecker::class );
+		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
 
 		$useCase = $this->newUseCase();
 
@@ -118,6 +129,7 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 				$this->getValidNoValueStatementSerialization(),
 				[],
 				false,
+				null,
 				null
 			)
 		);
@@ -128,7 +140,7 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testValidationError_returnsErrorResponse(): void {
-		$request = new AddItemStatementRequest( 'X123', [], [], false, null );
+		$request = new AddItemStatementRequest( 'X123', [], [], false, null, null );
 
 		$response = $this->newUseCase()->execute( $request );
 		$this->assertInstanceOf( AddItemStatementErrorResponse::class, $response );
@@ -149,6 +161,7 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 				$this->getValidNoValueStatementSerialization(),
 				[],
 				false,
+				null,
 				null
 			)
 		);
@@ -158,13 +171,39 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringContainsString( $redirectTarget, $response->getMessage() );
 	}
 
+	public function testProtectedItem_returnsErrorResponse(): void {
+		$itemId = new ItemId( 'Q123' );
+		$request = new AddItemStatementRequest(
+			$itemId->getSerialization(),
+			$this->getValidNoValueStatementSerialization(),
+			[],
+			false,
+			null,
+			null
+		);
+		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
+
+		$this->permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
+		$this->permissionChecker->expects( $this->once() )
+			->method( 'canEdit' )
+			->with( User::newAnonymous(), $itemId )
+			->willReturn( false );
+
+		$response = $this->newUseCase()->execute( $request );
+		$this->assertInstanceOf( AddItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::PERMISSION_DENIED, $response->getCode() );
+	}
+
 	private function newUseCase(): AddItemStatement {
 		return new AddItemStatement(
 			$this->newValidator(),
 			$this->revisionMetadataRetriever,
 			$this->itemRetriever,
 			$this->itemUpdater,
-			$this->guidGenerator
+			$this->guidGenerator,
+			$this->permissionChecker
 		);
 	}
 

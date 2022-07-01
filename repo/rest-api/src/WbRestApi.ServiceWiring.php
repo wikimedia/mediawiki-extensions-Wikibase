@@ -8,6 +8,7 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
 use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
+use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Serializers\SerializerFactory;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
@@ -49,7 +50,11 @@ return [
 				RequestContext::getMain(),
 				WikibaseRepo::getEditEntityFactory()
 			),
-			new GuidGenerator()
+			new GuidGenerator(),
+			new WikibaseEntityPermissionChecker(
+				WikibaseRepo::getEntityPermissionChecker( $services ),
+				$services->getUserFactory()
+			)
 		);
 	},
 
