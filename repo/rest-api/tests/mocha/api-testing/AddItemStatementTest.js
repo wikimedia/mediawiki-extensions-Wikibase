@@ -124,6 +124,19 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			assert.strictEqual( response.body.code, 'invalid-item-id' );
 			assert.include( response.body.message, itemId );
 		} );
+		it( 'comment too long', async () => {
+			const comment = 'x'.repeat( 501 );
+			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest( 'POST' );
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'comment-too-long' );
+			assert.include( response.body.message, '500' );
+		} );
+
 		it( 'invalid edit tag', async () => {
 			const invalidEditTag = 'invalid tag';
 			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )

@@ -16,7 +16,28 @@ use Wikibase\Repo\RestApi\Validation\ValidationError;
  */
 class EditMetadataValidatorTest extends TestCase {
 
+	private const MAX_COMMENT_LENGTH = 42;
 	private const ALLOWED_TAGS = [ 'tag1', 'tag2', 'tag3' ];
+
+	public function testValidateValidComment(): void {
+		$source = 'comment';
+
+		$result = $this->newEditMetadataValidator()->validateComment( "this is a valid comment", $source );
+
+		$this->assertNull( $result );
+	}
+
+	public function testValidateCommentTooLong(): void {
+		$source = 'comment';
+
+		$result = $this->newEditMetadataValidator()->validateComment(
+			"This comment is longer than 42 characters!!", $source
+		);
+
+		$this->assertInstanceOf( ValidationError::class, $result );
+		$this->assertSame( $source, $result->getSource() );
+		$this->assertSame( (string)self::MAX_COMMENT_LENGTH, $result->getValue() );
+	}
 
 	public function testValidateValidEditTags(): void {
 		$tags = [ self::ALLOWED_TAGS[2], self::ALLOWED_TAGS[0] ];
@@ -56,7 +77,7 @@ class EditMetadataValidatorTest extends TestCase {
 	}
 
 	private function newEditMetadataValidator(): EditMetadataValidator {
-		return ( new EditMetadataValidator( self::ALLOWED_TAGS ) );
+		return ( new EditMetadataValidator( self::MAX_COMMENT_LENGTH, self::ALLOWED_TAGS ) );
 	}
 
 }

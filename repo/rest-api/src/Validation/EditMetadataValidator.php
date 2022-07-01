@@ -7,13 +7,23 @@ namespace Wikibase\Repo\RestApi\Validation;
  */
 class EditMetadataValidator {
 
+	private $maxCommentLength;
 	private $allowedTags;
 
 	/**
 	 * @param string[] $allowedTags {@see \ChangeTags::listExplicitlyDefinedTags}
 	 */
-	public function __construct( array $allowedTags ) {
+	public function __construct( int $maxCommentLength, array $allowedTags ) {
+		$this->maxCommentLength = $maxCommentLength;
 		$this->allowedTags = $allowedTags;
+	}
+
+	public function validateComment( ?string $comment, string $source ): ?ValidationError {
+		if ( $comment !== null && strlen( $comment ) > $this->maxCommentLength ) {
+			return new ValidationError( (string)$this->maxCommentLength, $source );
+		}
+
+		return null;
 	}
 
 	public function validateEditTags( array $tags, string $source ): ?ValidationError {

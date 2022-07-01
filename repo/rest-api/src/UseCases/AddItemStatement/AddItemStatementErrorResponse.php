@@ -25,6 +25,12 @@ class AddItemStatementErrorResponse extends ErrorResponse {
 					"Invalid statement data provided"
 				);
 
+			case AddItemStatementValidator::SOURCE_COMMENT:
+				return new self(
+					ErrorResponse::COMMENT_TOO_LONG,
+					"Comment must not be longer than " . $validationError->getValue() . " characters."
+				);
+
 			case AddItemStatementValidator::SOURCE_EDIT_TAGS:
 				return new self(
 					ErrorResponse::INVALID_EDIT_TAG,

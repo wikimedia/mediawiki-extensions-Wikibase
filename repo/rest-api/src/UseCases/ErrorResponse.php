@@ -6,6 +6,7 @@ namespace Wikibase\Repo\RestApi\UseCases;
  * @license GPL-2.0-or-later
  */
 class ErrorResponse {
+	public const COMMENT_TOO_LONG = 'comment-too-long';
 	public const INVALID_EDIT_TAG = 'invalid-edit-tag';
 	public const INVALID_FIELD = 'invalid-field';
 	public const INVALID_ITEM_ID = 'invalid-item-id';
