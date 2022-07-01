@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Diff;
 
 use Diff\DiffOp\AtomicDiffOp;
@@ -77,10 +79,8 @@ class SiteLinkDiffView implements DiffView {
 
 	/**
 	 * Builds and returns the HTML to represent the Diff.
-	 *
-	 * @return string
 	 */
-	public function getHtml() {
+	public function getHtml(): string {
 		return $this->generateOpHtml( $this->path, $this->diff );
 	}
 
@@ -93,7 +93,7 @@ class SiteLinkDiffView implements DiffView {
 	 * @return string
 	 * @throws MWException
 	 */
-	protected function generateOpHtml( array $path, DiffOp $op ) {
+	protected function generateOpHtml( array $path, DiffOp $op ): string {
 		if ( $op instanceof AtomicDiffOp ) {
 			$localizedPath = $path;
 
@@ -174,13 +174,8 @@ class SiteLinkDiffView implements DiffView {
 	 * Generates an HTML table row for a change diffOp
 	 * given HTML snippets representing old and new
 	 * sides of the Diff
-	 *
-	 * @param string|null $oldHtml
-	 * @param string|null $newHtml
-	 *
-	 * @return string
 	 */
-	protected function generateHtmlDiffTableRow( $oldHtml, $newHtml ) {
+	protected function generateHtmlDiffTableRow( ?string $oldHtml, ?string $newHtml ): string {
 		$html = Html::openElement( 'tr' );
 		if ( $oldHtml !== null ) {
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker', 'data-marker' => '−' ] );
@@ -200,31 +195,15 @@ class SiteLinkDiffView implements DiffView {
 		return $html;
 	}
 
-	/**
-	 * @param string $html
-	 *
-	 * @return string
-	 */
-	private function getDeletedLine( $html ) {
+	private function getDeletedLine( string $html ): string {
 		return $this->getChangedLine( 'del', $html );
 	}
 
-	/**
-	 * @param string $html
-	 *
-	 * @return string
-	 */
-	private function getAddedLine( $html ) {
+	private function getAddedLine( string $html ): string {
 		return $this->getChangedLine( 'ins', $html );
 	}
 
-	/**
-	 * @param string $tag
-	 * @param string $html
-	 *
-	 * @return string
-	 */
-	private function getChangedLine( $tag, $html ) {
+	private function getChangedLine( string $tag, string $html ): string {
 		return Html::rawElement( $tag, [ 'class' => 'diffchange diffchange-inline' ], $html );
 	}
 
@@ -235,7 +214,7 @@ class SiteLinkDiffView implements DiffView {
 	 *
 	 * @return string
 	 */
-	private function getSiteLinkElement( $siteId, $pageName, $html = null ) {
+	private function getSiteLinkElement( string $siteId, string $pageName, string $html = null ): string {
 		$site = $this->siteLookup->getSite( $siteId );
 
 		$tagName = 'span';
@@ -261,7 +240,7 @@ class SiteLinkDiffView implements DiffView {
 	 *
 	 * @return string HTML
 	 */
-	private function getBadgeLinkElement( $idString ) {
+	private function getBadgeLinkElement( string $idString ): string {
 		try {
 			$itemId = new ItemId( $idString );
 		} catch ( InvalidArgumentException $ex ) {
@@ -273,12 +252,8 @@ class SiteLinkDiffView implements DiffView {
 
 	/**
 	 * Generates HTML for the header of the diff operation
-	 *
-	 * @param string $name
-	 *
-	 * @return string
 	 */
-	protected function generateDiffHeaderHtml( $name ) {
+	protected function generateDiffHeaderHtml( string $name ): string {
 		$html = Html::openElement( 'tr' );
 		$html .= Html::element( 'td', [ 'colspan' => '2', 'class' => 'diff-lineno' ], $name );
 		// @phan-suppress-next-line PhanPluginDuplicateAdjacentStatement

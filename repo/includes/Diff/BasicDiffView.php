@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Diff;
 
 use Diff\DiffOp\Diff\Diff;
@@ -39,10 +41,8 @@ class BasicDiffView implements DiffView {
 
 	/**
 	 * Builds and returns the HTML to represent the Diff.
-	 *
-	 * @return string
 	 */
-	public function getHtml() {
+	public function getHtml(): string {
 		return $this->generateOpHtml( $this->path, $this->diff );
 	}
 
@@ -110,13 +110,8 @@ class BasicDiffView implements DiffView {
 	 * Generates an HTML table row for a change diffOp
 	 * given HTML snippets representing old and new
 	 * sides of the Diff
-	 *
-	 * @param string|null $oldHtml
-	 * @param string|null $newHtml
-	 *
-	 * @return string
 	 */
-	protected function generateHtmlDiffTableRow( $oldHtml, $newHtml ) {
+	protected function generateHtmlDiffTableRow( ?string $oldHtml, ?string $newHtml ): string {
 		$html = Html::openElement( 'tr' );
 		if ( $oldHtml !== null ) {
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker', 'data-marker' => '−' ] );
@@ -136,42 +131,22 @@ class BasicDiffView implements DiffView {
 		return $html;
 	}
 
-	/**
-	 * @param string $value
-	 *
-	 * @return string
-	 */
-	private function getDeletedLine( $value ) {
+	private function getDeletedLine( string $value ): string {
 		return $this->getChangedLine( 'del', $value );
 	}
 
-	/**
-	 * @param string $value
-	 *
-	 * @return string
-	 */
-	private function getAddedLine( $value ) {
+	private function getAddedLine( string $value ): string {
 		return $this->getChangedLine( 'ins', $value );
 	}
 
-	/**
-	 * @param string $tag
-	 * @param string $value
-	 *
-	 * @return string
-	 */
-	private function getChangedLine( $tag, $value ) {
+	private function getChangedLine( string $tag, string $value ): string {
 		return Html::element( $tag, [ 'class' => 'diffchange diffchange-inline' ], $value );
 	}
 
 	/**
 	 * Generates HTML for the header of the diff operation
-	 *
-	 * @param string $name
-	 *
-	 * @return string
 	 */
-	protected function generateDiffHeaderHtml( $name ) {
+	protected function generateDiffHeaderHtml( string $name ): string {
 		$html = Html::openElement( 'tr' );
 		$html .= Html::element( 'td', [ 'colspan' => '2', 'class' => 'diff-lineno' ], $name );
 		// @phan-suppress-next-line PhanPluginDuplicateAdjacentStatement

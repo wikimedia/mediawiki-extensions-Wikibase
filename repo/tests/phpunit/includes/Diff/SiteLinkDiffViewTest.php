@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Diff;
 
 use Diff\DiffOp\Diff\Diff;
@@ -23,7 +25,7 @@ use Wikibase\Repo\Diff\SiteLinkDiffView;
  */
 class SiteLinkDiffViewTest extends \PHPUnit\Framework\TestCase {
 
-	public function diffOpProvider() {
+	public function diffOpProvider(): iterable {
 		$linkPath = 'LINKS'; // like wikibase-diffview-link message, but class shouldn’t care!
 
 		return [
@@ -63,7 +65,7 @@ class SiteLinkDiffViewTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	private function getDiffOps( $oldValue = null, $newValue = null ) {
+	private function getDiffOps( ?string $oldValue, ?string $newValue ): array {
 		$diffOps = [];
 		if ( $oldValue !== null && $newValue !== null ) {
 			$diffOps['change'] = new DiffOpChange( $oldValue, $newValue );
@@ -81,7 +83,7 @@ class SiteLinkDiffViewTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return SiteLinkDiffView
 	 */
-	private function getDiffView( array $path, Diff $diff ) {
+	private function getDiffView( array $path, Diff $diff ): SiteLinkDiffView {
 		$siteStore = new HashSiteStore( TestSites::getSites() );
 
 		$entityIdFormatter = $this->createMock( EntityIdFormatter::class );
@@ -106,7 +108,12 @@ class SiteLinkDiffViewTest extends \PHPUnit\Framework\TestCase {
 	 * @param string|null $newValue
 	 * @param string|string[] $path
 	 */
-	public function testGetHtml( $pattern, $oldValue = null, $newValue = null, $path = [] ) {
+	public function testGetHtml(
+		string $pattern,
+		?string $oldValue = null,
+		?string $newValue = null,
+		$path = []
+	): void {
 		if ( !is_array( $path ) ) {
 			$path = preg_split( '@\s*/\s*@', $path );
 		}
@@ -135,9 +142,8 @@ class SiteLinkDiffViewTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidBadgeIdProvider
-	 * @param string $badgeId
 	 */
-	public function testGivenInvalidBadgeId_getHtmlDoesNotThrowException( $badgeId ) {
+	public function testGivenInvalidBadgeId_getHtmlDoesNotThrowException( string $badgeId ): void {
 		$path = [
 			wfMessage( 'wikibase-diffview-link' )->text(),
 			'enwiki',
@@ -151,7 +157,7 @@ class SiteLinkDiffViewTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringContainsString( htmlspecialchars( $badgeId ), $html );
 	}
 
-	public function invalidBadgeIdProvider() {
+	public function invalidBadgeIdProvider(): iterable {
 		return [
 			[ 'invalidBadgeId' ],
 			[ '<a>injection</a>' ],
