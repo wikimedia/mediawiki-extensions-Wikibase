@@ -31,5 +31,7 @@
 	"wikibase-replicationnote": "Tulung dicatat amun tindakan ngini mamarluakan waktu babarapa manit sampai paubahan talihat ka samunyaan wiki.",
 	"wikibase-watchlist-show-changes-pref": "Tampaiakan babakan {{WBREPONAME}} pada daptar itihan Pian",
 	"wikibase-otherprojects": "Dalam rangka gawian lain",
+	"wikibase-otherprojects-beta-message": "Bilah higa rangka-gawi lainnya",
+	"wikibase-otherprojects-beta-description": "Tambahakan bagian \"{{int:wikibase-otherprojects}}\" ka bilah higa nang manyadiaakan tautan ka rangka-gawian Wikimédia lainnya bapandal data {{WBREPONAME}}.",
 	"echo-pref-tooltip-wikibase-action": "Padahi ulun amun sasaurang mahubungakan laman nang {{GENDER:|ulun ulah}} ka item {{WBREPONAME}}."
 }
