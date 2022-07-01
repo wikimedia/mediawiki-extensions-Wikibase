@@ -69,13 +69,13 @@ class BasicDiffView implements DiffView {
 				'@phan-var DiffOpAdd $op';
 				$html .= $this->generateHtmlDiffTableRow(
 					null,
-					$this->getAddedLine( $op->getNewValue(), $path )
+					$this->getAddedLine( $op->getNewValue() )
 				);
 			} elseif ( $op->getType() === 'remove' ) {
 				/** @var DiffOpRemove $op */
 				'@phan-var DiffOpRemove $op';
 				$html .= $this->generateHtmlDiffTableRow(
-					$this->getDeletedLine( $op->getOldValue(), $path ),
+					$this->getDeletedLine( $op->getOldValue() ),
 					null
 				 );
 			} elseif ( $op->getType() === 'change' ) {
@@ -138,32 +138,29 @@ class BasicDiffView implements DiffView {
 
 	/**
 	 * @param string $value
-	 * @param string[] $path
 	 *
 	 * @return string
 	 */
-	private function getDeletedLine( $value, array $path ) {
-		return $this->getChangedLine( 'del', $value, $path );
+	private function getDeletedLine( $value ) {
+		return $this->getChangedLine( 'del', $value );
 	}
 
 	/**
 	 * @param string $value
-	 * @param string[] $path
 	 *
 	 * @return string
 	 */
-	private function getAddedLine( $value, array $path ) {
-		return $this->getChangedLine( 'ins', $value, $path );
+	private function getAddedLine( $value ) {
+		return $this->getChangedLine( 'ins', $value );
 	}
 
 	/**
 	 * @param string $tag
 	 * @param string $value
-	 * @param string[] $path
 	 *
 	 * @return string
 	 */
-	private function getChangedLine( $tag, $value, array $path ) {
+	private function getChangedLine( $tag, $value ) {
 		return Html::element( $tag, [ 'class' => 'diffchange diffchange-inline' ], $value );
 	}
 
