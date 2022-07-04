@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiMain;
 use ApiUsageException;
+use IBufferingStatsdDataFactory;
 use Serializers\Exceptions\SerializationException;
 use Title;
 use Wikibase\DataModel\Entity\ClearableEntity;
@@ -42,6 +43,11 @@ class EditEntity extends ModifyEntity {
 	public const PARAM_CLEAR = 'clear';
 
 	/**
+	 * @var IBufferingStatsdDataFactory
+	 */
+	private $statsdDataFactory;
+
+	/**
 	 * @var EntityRevisionLookup
 	 */
 	private $revisionLookup;
@@ -74,6 +80,7 @@ class EditEntity extends ModifyEntity {
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
+		IBufferingStatsdDataFactory $statsdDataFactory,
 		EntityRevisionLookup $revisionLookup,
 		EntityIdParser $idParser,
 		array $propertyDataTypes,
@@ -84,6 +91,7 @@ class EditEntity extends ModifyEntity {
 	) {
 		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 
+		$this->statsdDataFactory = $statsdDataFactory;
 		$this->revisionLookup = $revisionLookup;
 		$this->idParser = $idParser;
 		$this->propertyDataTypes = $propertyDataTypes;
@@ -96,6 +104,7 @@ class EditEntity extends ModifyEntity {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		IBufferingStatsdDataFactory $statsdDataFactory,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityChangeOpProvider $entityChangeOpProvider,
 		EntityIdParser $entityIdParser,
@@ -105,6 +114,7 @@ class EditEntity extends ModifyEntity {
 		return new self(
 			$mainModule,
 			$moduleName,
+			$statsdDataFactory,
 			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$entityIdParser,
 			$dataTypeDefinitions->getTypeIds(),
@@ -209,9 +219,9 @@ class EditEntity extends ModifyEntity {
 
 		if ( $preparedParameters[self::PARAM_CLEAR] ) {
 			$this->dieIfNotClearable( $entity );
-			$this->getStats()->increment( 'wikibase.api.EditEntity.modifyEntity.clear' );
+			$this->statsdDataFactory->increment( 'wikibase.api.EditEntity.modifyEntity.clear' );
 		} else {
-			$this->getStats()->increment( 'wikibase.api.EditEntity.modifyEntity.no-clear' );
+			$this->statsdDataFactory->increment( 'wikibase.api.EditEntity.modifyEntity.no-clear' );
 		}
 
 		if ( !$exists ) {
@@ -220,7 +230,7 @@ class EditEntity extends ModifyEntity {
 				$entity->setDataTypeId( $data['datatype'] );
 			}
 
-			$this->getStats()->increment( 'wikibase.api.EditEntity.modifyEntity.create' );
+			$this->statsdDataFactory->increment( 'wikibase.api.EditEntity.modifyEntity.create' );
 		}
 
 		if ( $preparedParameters[self::PARAM_CLEAR] ) {

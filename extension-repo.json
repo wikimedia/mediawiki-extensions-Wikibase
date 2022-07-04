@@ -33,6 +33,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\EditEntity",
 			"factory": "\\Wikibase\\Repo\\Api\\EditEntity::factory",
 			"services": [
+				"StatsdDataFactory",
 				"WikibaseRepo.DataTypeDefinitions",
 				"WikibaseRepo.EntityChangeOpProvider",
 				"WikibaseRepo.EntityIdParser",
