@@ -2,13 +2,18 @@
 	"@metadata": {
 		"authors": [
 			"Iketsi",
-			"Nērtiks Jōrgesuns"
+			"Nērtiks Jōrgesuns",
+			"Tīgelika"
 		]
 	},
 	"wikibase-dataitem": "dātasōbjaktan",
 	"wikibase-editlinks": "Redigīs autengīnsnans",
 	"wikibase-editlinkstitle": "Redigīs sirzdabilliskans autengīnsnans",
 	"wikibase-linkitem-addlinks": "Preidāis autengīnsnans",
+	"wikibase-linkitem-title": "Senristun sēn pāusan",
+	"wikibase-linkitem-linkpage": "Senristun sēn pāusan",
+	"wikibase-linkitem-input-site": "Bilā:",
+	"wikibase-linkitem-input-page": "Pāusan:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Kliptinais",
 	"wikibase-rc-hide-wikidata-show": "Waidinnais",

@@ -5,6 +5,7 @@
 			"Fryed-peach",
 			"Omotecho",
 			"Otokoume",
+			"Saurmandal",
 			"Shirayuki",
 			"Sujiniku",
 			"Yusuke1109",
@@ -146,5 +147,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "プロパティを新規作成",
 	"wikibase-property-summary-wbeditentity-update": "プロパティを変更",
 	"wikibase-property-summary-wbeditentity-override": "プロパティを消去",
-	"wikibase-property-summary-special-create-property": "{{PLURAL:$1|1=値を持つ|0=値を持たない|複数の値を持つ}} [$2] プロパティを作成"
+	"wikibase-property-summary-special-create-property": "{{PLURAL:$1|1=値を持つ|0=値を持たない|複数の値を持つ}} [$2] プロパティを作成",
+	"wikibase-reference-formatter-snak-terminator": "．"
 }
