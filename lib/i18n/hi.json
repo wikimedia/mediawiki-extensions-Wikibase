@@ -10,7 +10,7 @@
 			"Saurmandal"
 		]
 	},
-	"specialpages-group-wikibase": "विकिबैस",
+	"specialpages-group-wikibase": "विकिबेस",
 	"wikibase-deletedentity-item": "हटाई हुई वस्तु",
 	"wikibase-deletedentity-property": "हटाया हुआ गुण",
 	"wikibase-deletedentity-query": "हटाया हुआ क्वारी",
@@ -44,7 +44,7 @@
 	"datatypes-type-wikibase-property": "गुणधर्म",
 	"datatypes-type-commonsMedia": "कॉमन्स मीडिया फ़ाइल",
 	"datatypes-type-tabular-data": "टेबुलर डाटा",
-	"version-wikibase": "विकिबैस",
+	"version-wikibase": "विकिबेस",
 	"wikibase-time-precision-century": "$1. देश",
 	"wikibase-time-precision-10annum": "$1s",
 	"wikibase-entity-summary-wbsetitem": "नई वस्तु बनाएँ",

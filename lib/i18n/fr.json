@@ -158,7 +158,7 @@
 	"wikibase-entity-summary-clientsitelink-remove": "Page en [$3] supprimée",
 	"wikibase-entity-summary-wbsetqualifier-add": "Qualificatif{{PLURAL:$1||s}} ajouté{{PLURAL:$1||s}}",
 	"wikibase-entity-summary-wbsetqualifier-update": "Qualificatif{{PLURAL:$1||s}} modifié{{PLURAL:$1||s}}",
-	"wikibase-entity-summary-wbremovequalifiers-remove": "Qualificatif{{PLURAL:$1||s}} supprimé{{PLURAL:$1||s}}",
+	"wikibase-entity-summary-wbremovequalifiers-remove": "Qualificatif{{PLURAL:$1||s}} retiré{{PLURAL:$1||s}}",
 	"wikibase-entity-summary-wbremovereferences-remove": "Référence{{PLURAL:$3||s}} supprimée{{PLURAL:$3||s}} dans une affirmation",
 	"wikibase-entity-summary-wbmergeitems-from": "Élément fusionné depuis $3",
 	"wikibase-entity-summary-wbmergeitems-to": "Élément fusionné vers $3",

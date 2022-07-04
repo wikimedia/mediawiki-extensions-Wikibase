@@ -3,13 +3,17 @@
 		"authors": [
 			"Amire80",
 			"Gildo Máquina",
-			"Jacinto Jeque"
+			"Jacinto Jeque",
+			"Tomas Armando Moz"
 		]
 	},
 	"wikibase-dataitem": "Ekaruma {{WBREPONAME}}",
 	"wikibase-editlinks": "Ohimya ephiro",
 	"wikibase-editlinkstitle": "Ohimya ephiro yooluttelela ntattaava",
 	"wikibase-linkitem-addlinks": "Otakaaha iphiro",
+	"wikibase-linkitem-title": "Olupaanya nnikukhu",
+	"wikibase-linkitem-linkpage": "Olupaanya nnikukhu",
+	"wikibase-linkitem-selectlink": "Xontte, muthanle  nipuro ni nikukhu muntthuna anyu olupaanyerya nnikina",
 	"wikibase-linkitem-input-site": "Nttaava:",
 	"wikibase-linkitem-input-page": "Opuro:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
