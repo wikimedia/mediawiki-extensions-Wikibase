@@ -70,10 +70,12 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @param string[] $otherProjects
 	 * @param int $unconnectedPagePagePropMigrationStage One of the MIGRATION_* constants.
+	 * @param bool $unconnectedPagePagePropMigrationLegacyFormat
 	 */
 	private function newInstance(
 		array $otherProjects = [],
-		int $unconnectedPagePagePropMigrationStage = MIGRATION_WRITE_BOTH
+		int $unconnectedPagePagePropMigrationStage = MIGRATION_WRITE_BOTH,
+		bool $unconnectedPagePagePropMigrationLegacyFormat = false
 	): ClientParserOutputDataUpdater {
 		$this->mockRepo = new MockRepository();
 
@@ -87,7 +89,8 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$this->mockRepo,
 			$this->newUsageAccumulatorFactory(),
 			'srwiki',
-			$unconnectedPagePagePropMigrationStage
+			$unconnectedPagePagePropMigrationStage,
+			$unconnectedPagePagePropMigrationLegacyFormat
 		);
 	}
 
@@ -274,6 +277,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$this->newUsageAccumulatorFactory(),
 			'srwiki',
 			MIGRATION_WRITE_BOTH,
+			false,
 			$logger
 		);
 
@@ -303,6 +307,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$this->newUsageAccumulatorFactory(),
 			'srwiki',
 			MIGRATION_WRITE_BOTH,
+			false,
 			$logger
 		);
 
@@ -369,13 +374,20 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 				'migrationStage' => MIGRATION_OLD,
 			],
 			'Unlinked page without expectedUnconnectedPage (MIGRATION_WRITE_BOTH)' => [
-				'expectedPageProps' => [ 'unexpectedUnconnectedPage' => NS_PROJECT ],
+				'expectedPageProps' => [ 'unexpectedUnconnectedPage' => -NS_PROJECT ],
 				'priorPageProps' => [],
 				'titleText' => 'Foo xx',
 				'migrationStage' => MIGRATION_WRITE_BOTH,
 			],
-			'Unlinked page without expectedUnconnectedPage (MIGRATION_NEW)' => [
+			'Unlinked page without expectedUnconnectedPage, old format (MIGRATION_NEW)' => [
 				'expectedPageProps' => [ 'unexpectedUnconnectedPage' => NS_PROJECT ],
+				'priorPageProps' => [],
+				'titleText' => 'Foo xx',
+				'migrationStage' => MIGRATION_NEW,
+				'migrationLegacyFormat' => true,
+			],
+			'Unlinked page without expectedUnconnectedPage (MIGRATION_NEW)' => [
+				'expectedPageProps' => [ 'unexpectedUnconnectedPage' => -NS_PROJECT ],
 				'priorPageProps' => [],
 				'titleText' => 'Foo xx',
 				'migrationStage' => MIGRATION_NEW,
@@ -385,6 +397,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 				'priorPageProps' => [],
 				'titleText' => 'Foo xx',
 				'migrationStage' => MIGRATION_NEW,
+				'migrationLegacyFormat' => false,
 				'isRedirect' => true,
 			],
 		];
@@ -398,6 +411,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		array $priorPageProps,
 		string $titleText,
 		int $migrationStage,
+		bool $migrationLegacyFormat = false,
 		bool $isRedirect = false
 	): void {
 		$parserOutput = new ParserOutput();
@@ -416,7 +430,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$title->getPrefixedText();
 		}
 
-		$instance = $this->newInstance( [], $migrationStage );
+		$instance = $this->newInstance( [], $migrationStage, $migrationLegacyFormat );
 
 		$instance->updateUnconnectedPageProperty( $content, $title, $parserOutput );
 

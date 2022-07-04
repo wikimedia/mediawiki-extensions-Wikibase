@@ -6,6 +6,7 @@ use MediaWiki\Tests\Maintenance\MaintenanceBaseTestCase;
 use Title;
 use Wikibase\Client\Maintenance\PopulateUnexpectedUnconnectedPagePageProp;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\Lib\SettingsArray;
 use Wikimedia\Rdbms\IDatabase;
 
 // files in maintenance/ are not autoloaded, so load explicitly
@@ -35,6 +36,12 @@ class PopulateUnexpectedUnconnectedPagePagePropTest extends MaintenanceBaseTestC
 				'WikibaseClient.NamespaceChecker' => function() {
 					return new NamespaceChecker( [], [ $this->getDefaultWikitextNS() ] );
 				},
+				'WikibaseClient.Settings' => function() {
+					return new SettingsArray( [
+						'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH,
+						'tmpUnconnectedPagePagePropMigrationLegacyFormat' => false
+					] );
+				}
 			]
 		);
 

@@ -653,6 +653,7 @@ return [
 			WikibaseClient::getUsageAccumulatorFactory( $services ),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' ),
+			$settings->getSetting( 'tmpUnconnectedPagePagePropMigrationLegacyFormat' ),
 			WikibaseClient::getLogger( $services )
 		);
 	},

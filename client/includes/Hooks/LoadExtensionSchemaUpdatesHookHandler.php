@@ -56,7 +56,7 @@ class LoadExtensionSchemaUpdatesHookHandler implements LoadExtensionSchemaUpdate
 			)
 		);
 
-		$primer->insertPageProp();
+		$primer->setPageProps();
 		$dbUpdater->insertUpdateRow( self::UPDATE_KEY_UNEXPECTED_UNCONNECTED_PAGE );
 	}
 

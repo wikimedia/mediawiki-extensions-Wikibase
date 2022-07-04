@@ -44,6 +44,9 @@ class SpecialUnconnectedPages extends QueryPage {
 	/** @var int */
 	private $unconnectedPagePagePropMigrationStage;
 
+	/** @var bool */
+	private $unconnectedPagePagePropMigrationLegacyFormat;
+
 	public function __construct(
 		NamespaceInfo $namespaceInfo,
 		TitleFactory $titleFactory,
@@ -58,6 +61,7 @@ class SpecialUnconnectedPages extends QueryPage {
 		$this->db = $db->newLocalDb();
 		$this->setDBLoadBalancer( $this->db->loadBalancer() );
 		$this->unconnectedPagePagePropMigrationStage = $settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' );
+		$this->unconnectedPagePagePropMigrationLegacyFormat = $settings->getSetting( 'tmpUnconnectedPagePagePropMigrationLegacyFormat' );
 	}
 
 	/**
@@ -91,8 +95,16 @@ class SpecialUnconnectedPages extends QueryPage {
 		if ( $this->unconnectedPagePagePropMigrationStage >= MIGRATION_NEW ) {
 			if ( $ns !== null && in_array( $ns, $wbNamespaces ) ) {
 				$conds['pp_sortkey'] = $ns;
+				if ( !$this->unconnectedPagePagePropMigrationLegacyFormat ) {
+					$conds['pp_sortkey'] = -$ns;
+				}
 			} else {
 				$conds['pp_sortkey'] = $wbNamespaces;
+				if ( !$this->unconnectedPagePagePropMigrationLegacyFormat ) {
+					foreach ( $conds['pp_sortkey'] as &$ns ) {
+						$ns = -$ns;
+					}
+				}
 			}
 		} else {
 			// b/c: We can't yet use the new "unexpectedUnconnectedPage" page property.
@@ -163,7 +175,10 @@ class SpecialUnconnectedPages extends QueryPage {
 	}
 
 	protected function sortDescending(): bool {
-		return $this->unconnectedPagePagePropMigrationStage < MIGRATION_NEW;
+		if ( $this->unconnectedPagePagePropMigrationStage < MIGRATION_NEW || !$this->unconnectedPagePagePropMigrationLegacyFormat ) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
