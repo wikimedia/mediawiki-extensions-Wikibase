@@ -369,13 +369,13 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 				'migrationStage' => MIGRATION_OLD,
 			],
 			'Unlinked page without expectedUnconnectedPage (MIGRATION_WRITE_BOTH)' => [
-				'expectedPageProps' => [ 'unexpectedUnconnectedPage' => NS_PROJECT ],
+				'expectedPageProps' => [ 'unexpectedUnconnectedPage' => -NS_PROJECT ],
 				'priorPageProps' => [],
 				'titleText' => 'Foo xx',
 				'migrationStage' => MIGRATION_WRITE_BOTH,
 			],
 			'Unlinked page without expectedUnconnectedPage (MIGRATION_NEW)' => [
-				'expectedPageProps' => [ 'unexpectedUnconnectedPage' => NS_PROJECT ],
+				'expectedPageProps' => [ 'unexpectedUnconnectedPage' => -NS_PROJECT ],
 				'priorPageProps' => [],
 				'titleText' => 'Foo xx',
 				'migrationStage' => MIGRATION_NEW,

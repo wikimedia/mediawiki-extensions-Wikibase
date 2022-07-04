@@ -21,7 +21,7 @@ use Wikibase\Client\WikibaseClient;
  */
 class LoadExtensionSchemaUpdatesHookHandler implements LoadExtensionSchemaUpdatesHook {
 
-	public const UPDATE_KEY_UNEXPECTED_UNCONNECTED_PAGE = 'Wikibase-Client-primeUnexpectedUnconnectedPage-v2';
+	public const UPDATE_KEY_UNEXPECTED_UNCONNECTED_PAGE = 'Wikibase-Client-primeUnexpectedUnconnectedPage-v3';
 
 	/**
 	 * Applies any schema updates
@@ -29,9 +29,10 @@ class LoadExtensionSchemaUpdatesHookHandler implements LoadExtensionSchemaUpdate
 	 * @param DatabaseUpdater $updater DatabaseUpdater subclass
 	 */
 	public function onLoadExtensionSchemaUpdates( $updater ): void {
+		$settings = WikibaseClient::getSettings();
 		if (
 			!$updater->updateRowExists( self::UPDATE_KEY_UNEXPECTED_UNCONNECTED_PAGE ) &&
-			WikibaseClient::getSettings()->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' ) >= MIGRATION_WRITE_BOTH
+			$settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' ) >= MIGRATION_WRITE_BOTH
 		) {
 			$updater->addExtensionUpdate( [
 				[ __CLASS__, 'primeUnexpectedUnconnectedPage' ],
@@ -56,7 +57,7 @@ class LoadExtensionSchemaUpdatesHookHandler implements LoadExtensionSchemaUpdate
 			)
 		);
 
-		$primer->insertPageProp();
+		$primer->setPageProps();
 		$dbUpdater->insertUpdateRow( self::UPDATE_KEY_UNEXPECTED_UNCONNECTED_PAGE );
 	}
 

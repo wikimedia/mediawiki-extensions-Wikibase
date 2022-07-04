@@ -90,9 +90,12 @@ class SpecialUnconnectedPages extends QueryPage {
 
 		if ( $this->unconnectedPagePagePropMigrationStage >= MIGRATION_NEW ) {
 			if ( $ns !== null && in_array( $ns, $wbNamespaces ) ) {
-				$conds['pp_sortkey'] = $ns;
+				$conds['pp_sortkey'] = -$ns;
 			} else {
-				$conds['pp_sortkey'] = $wbNamespaces;
+				$conds['pp_sortkey'] = [];
+				foreach ( $wbNamespaces as $wbNs ) {
+					$conds['pp_sortkey'][] = -$wbNs;
+				}
 			}
 		} else {
 			// b/c: We can't yet use the new "unexpectedUnconnectedPage" page property.
@@ -163,7 +166,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	}
 
 	protected function sortDescending(): bool {
-		return $this->unconnectedPagePagePropMigrationStage < MIGRATION_NEW;
+		return true;
 	}
 
 	/**

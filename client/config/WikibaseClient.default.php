@@ -298,7 +298,7 @@ return call_user_func( function() {
 	$defaults['addEntityUsagesBatchSize'] = 500;
 
 	/**
-	 * @note This config options is primarily added for the Wikimedia transition use-case and can be
+	 * @note This config option is primarily added for the Wikimedia transition use-case and can be
 	 * considered temporary. It could be removed in the future with no warning.
 	 *
 	 * (tmp) Migration stage (one of the MIGRATION_* constants) indicating, whether the

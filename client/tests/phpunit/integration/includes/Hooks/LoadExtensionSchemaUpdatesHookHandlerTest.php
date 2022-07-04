@@ -80,7 +80,7 @@ class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTest
 	}
 
 	public function testOnLoadExtensionSchemaUpdates() {
-		$namespaceInt = $this->getDefaultWikitextNS();
+		$namespaceInt = -$this->getDefaultWikitextNS();
 		$namespaceString = strval( $namespaceInt );
 		$namespaceFloat = $namespaceInt + 0.0;
 
@@ -95,7 +95,9 @@ class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTest
 		$this->overrideMwServices( null, [
 			'WikibaseClient.Settings' => function () use ( $settings ) {
 				return new SettingsArray(
-					[ 'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH ] + $settings
+					[
+						'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH,
+					] + $settings
 				);
 			},
 			'WikibaseClient.NamespaceChecker' => function() {

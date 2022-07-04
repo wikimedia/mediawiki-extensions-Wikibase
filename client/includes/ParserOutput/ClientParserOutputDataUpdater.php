@@ -163,8 +163,14 @@ class ClientParserOutputDataUpdater {
 
 		$pageProperties = $parserOutput->getPageProperties();
 
+		/*
+		 * the page prop value is the *negative* namespace,
+		 * so that ORDER BY pp_sortkey DESC, page_id DESC orders by ascending namespace and descending page ID,
+		 * i.e. Special:UnconnectedPages shows newest main-namespace pages first
+		 */
+		$value = -$title->getNamespace();
 		if ( !isset( $pageProperties['expectedUnconnectedPage'] ) ) {
-			$parserOutput->setPageProperty( 'unexpectedUnconnectedPage', $title->getNamespace() );
+			$parserOutput->setPageProperty( 'unexpectedUnconnectedPage', $value );
 		}
 	}
 

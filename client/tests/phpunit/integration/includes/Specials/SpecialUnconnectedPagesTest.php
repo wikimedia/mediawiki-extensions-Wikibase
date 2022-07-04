@@ -118,7 +118,9 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 			$services->getTitleFactory(),
 			WikibaseClient::getClientDomainDbFactory( $services ),
 			$namespaceChecker ?: WikibaseClient::getNamespaceChecker( $services ),
-			new SettingsArray( [ 'tmpUnconnectedPagePagePropMigrationStage' => $migrationStage ] )
+			new SettingsArray( [
+				'tmpUnconnectedPagePagePropMigrationStage' => $migrationStage,
+			] )
 		);
 	}
 
@@ -134,7 +136,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 			],
 			'MIGRATION_NEW' => [
 				'migrationStage' => MIGRATION_NEW,
-				'descending' => false,
+				'descending' => true,
 			],
 		];
 	}
@@ -217,14 +219,14 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		$this->insertUnexpectedUnconnectedPagePageProp();
 
 		$namespace = $this->getDefaultWikitextNS();
-		$specialPage = $this->newSpecialPage( null, MIGRATION_NEW );
+		$specialPage = $this->newSpecialPage( null, MIGRATION_NEW, false );
 		$specialPage->getRequest()->setVal( 'namespace', $namespace );
 		$res = $specialPage->reallyDoQuery( 1, 1 );
 		$this->assertSame( 1, $res->numRows() );
 		$this->assertSame( [
-				'value' => '400',
+				'value' => '200',
 				'namespace' => strval( $namespace ),
-				'title' => 'SpecialUnconnectedPagesTest-unconnected2'
+				'title' => 'SpecialUnconnectedPagesTest-unconnected'
 			],
 			(array)$res->fetchObject()
 		);
@@ -238,7 +240,11 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	/**
 	 * @dataProvider provideBuildNamespaceConditionals
 	 */
-	public function testBuildNamespaceConditionals( ?int $ns, array $expected, int $migrationStage ) {
+	public function testBuildNamespaceConditionals(
+		?int $ns,
+		array $expected,
+		int $migrationStage
+	) {
 		$checker = new NamespaceChecker( [ 2 ], [ 0, 4 ] );
 		$page = $this->newSpecialPage( $checker, $migrationStage );
 		$page->getRequest()->setVal( 'namespace', $ns );
@@ -263,8 +269,8 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		];
 		yield 'no namespace (MIGRATION_NEW)' => [
 			null,
-			[ 'pp_sortkey' => [ 0, 4 ] ],
-			MIGRATION_NEW,
+			[ 'pp_sortkey' => [ 0, -4 ] ],
+			MIGRATION_NEW
 		];
 		yield 'included namespace (MIGRATION_NEW)' => [
 			0,
@@ -273,7 +279,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		];
 		yield 'excluded namespace (MIGRATION_NEW)' => [
 			2,
-			[ 'pp_sortkey' => [ 0, 4 ] ],
+			[ 'pp_sortkey' => [ 0, -4 ] ],
 			MIGRATION_NEW,
 		];
 	}
@@ -335,7 +341,9 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 			$titleFactoryMock,
 			WikibaseClient::getClientDomainDbFactory( $services ),
 			$namespaceChecker ?: WikibaseClient::getNamespaceChecker( $services ),
-			new SettingsArray( [ 'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH ] )
+			new SettingsArray( [
+				'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH,
+			] )
 		);
 
 		$this->assertFalse( $specialPage->formatResult( $skin, $result ) );
