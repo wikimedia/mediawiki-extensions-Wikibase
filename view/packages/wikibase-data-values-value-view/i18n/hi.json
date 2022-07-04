@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Bhatakati aatma",
+			"Saurmandal",
 			"Sfic",
 			"Shyamal",
 			"चक्रपाणी"
@@ -10,12 +11,12 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" मानों का संचालन अभी तक समर्थित नहीं है।",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "$1 डेटा टाइप की वैल्यूज़ की हैंडलिंग अभी सपोर्टेड नहीं है।",
 	"valueview-expert-emptyvalue-empty": "खाली",
-	"valueview-expert-globecoordinateinput-precision": "सूक्ष्मता",
+	"valueview-expert-globecoordinateinput-precision": "सटीकता:",
 	"valueview-expert-globecoordinateinput-nullprecision": "अविनिर्दिष्ट",
 	"valueview-expert-globecoordinateinput-customprecision": "विशेष ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "ग्रेगोरियन",
 	"valueview-expert-timevalue-calendar-julian": "जूलियन",
-	"valueview-expert-timeinput-precision": "सूक्ष्मता",
+	"valueview-expert-timeinput-precision": "सटीकता:",
 	"valueview-expert-timeinput-calendar": "दिनदर्शिका",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "भाषा (अनिवार्य):",
