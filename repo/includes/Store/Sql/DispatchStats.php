@@ -47,47 +47,39 @@ class DispatchStats {
 	}
 
 	private function loadLimitedNumberOfChanges( DBConnRef $db, $limit ): int {
-		return $db->selectRowCount(
-			'wb_changes',
-			'*',
-			'',
-			__METHOD__,
-			[ 'LIMIT' => $limit + 1 ]
-		);
+		return $db->newSelectQueryBuilder()
+			->select( '*' )
+			->from( 'wb_changes' )
+			->limit( $limit + 1 )
+			->caller( __METHOD__ )
+			->fetchRowCount();
 	}
 
 	private function getWbChangesRowEstimate( DBConnRef $db ): int {
-		return $db->estimateRowCount(
-			'wb_changes',
-			'*',
-			'',
-			__METHOD__
-		);
+		return $db->newSelectQueryBuilder()
+			->select( '*' )
+			->from( 'wb_changes' )
+			->caller( __METHOD__ )
+			->estimateRowCount();
 	}
 
 	private function loadNumberOfEntities( DBConnRef $db ): int {
-		$statsRow = $db->selectRow(
-			'wb_changes',
-			[
-				'COUNT( DISTINCT change_object_id ) AS numberOfEntities',
-			],
-			'',
-			__METHOD__
-		);
-
-		return (int)$statsRow->numberOfEntities;
+		return (int)$db->newSelectQueryBuilder()
+			->select( 'COUNT( DISTINCT change_object_id )' )
+			->from( 'wb_changes' )
+			->caller( __METHOD__ )
+			->fetchField();
 	}
 
 	private function loadChangeTimes( DBConnRef $db ): array {
-		$statsRow = $db->selectRow(
-			'wb_changes',
-			[
-				'MIN( change_time ) AS stalestTime',
-				'MAX( change_time ) AS freshestTime',
-			],
-			'',
-			__METHOD__
-		);
+		$statsRow = $db->newSelectQueryBuilder()
+			->select( [
+				'stalestTime' => 'MIN( change_time )',
+				'freshestTime' => 'MAX( change_time )',
+			] )
+			->from( 'wb_changes' )
+			->caller( __METHOD__ )
+			->fetchRow();
 
 		return get_object_vars( $statsRow );
 	}
