@@ -122,12 +122,12 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 
 		$dbr = $this->getReadConnection();
 
-		$res = $dbr->selectField(
-			self::TABLE_NAME,
-			'pi_info',
-			[ 'pi_property_id' => $propertyId->getNumericId() ],
-			__METHOD__
-		);
+		$res = $dbr->newSelectQueryBuilder()
+			->select( 'pi_info' )
+			->from( self::TABLE_NAME )
+			->where( [ 'pi_property_id' => $propertyId->getNumericId() ] )
+			->caller( __METHOD__ )
+			->fetchField();
 
 		if ( $res === false ) {
 			$info = null;
@@ -153,12 +153,12 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 	public function getPropertyInfoForDataType( $dataType ) {
 		$dbr = $this->getReadConnection();
 
-		$res = $dbr->select(
-			self::TABLE_NAME,
-			[ 'pi_property_id', 'pi_info' ],
-			[ 'pi_type' => $dataType ],
-			__METHOD__
-		);
+		$res = $dbr->newSelectQueryBuilder()
+			->select( [ 'pi_property_id', 'pi_info' ] )
+			->from( self::TABLE_NAME )
+			->where( [ 'pi_type' => $dataType ] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 
 		$infos = $this->decodeResult( $res );
 
@@ -174,12 +174,11 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 	public function getAllPropertyInfo() {
 		$dbr = $this->getReadConnection();
 
-		$res = $dbr->select(
-			self::TABLE_NAME,
-			[ 'pi_property_id', 'pi_info' ],
-			[],
-			__METHOD__
-		);
+		$res = $dbr->newSelectQueryBuilder()
+			->select( [ 'pi_property_id', 'pi_info' ] )
+			->from( self::TABLE_NAME )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 
 		$infos = $this->decodeResult( $res );
 
