@@ -48,6 +48,12 @@ class SiteLinkDiffViewTest extends \PHPUnit\Framework\TestCase {
 				'NEW',
 				$linkPath . '/enwiki'
 			],
+			'Link has changed part highlighted' => [
+				'@THE ?<del\b[^>]*> ?OLD ?</del> ?TITLE.*THE ?<ins\b[^>]*> ?NEW ?</ins> ?TITLE@',
+				'THE OLD TITLE',
+				'THE NEW TITLE',
+				$linkPath . '/enwiki'
+			],
 			'Badge is linked correctly' => [
 				'@FORMATTED BADGE ID@',
 				null,
