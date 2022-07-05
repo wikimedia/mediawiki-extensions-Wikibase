@@ -243,15 +243,15 @@ class SiteLinkTable implements SiteLinkStore {
 
 		$dbr = $this->db->connections()->getReadConnectionRef();
 
-		$result = $dbr->selectRow(
-			$this->table,
-			[ 'ips_item_id' ],
-			[
+		$result = $dbr->newSelectQueryBuilder()
+			->select( 'ips_item_id' )
+			->from( $this->table )
+			->where( [
 				'ips_site_id' => $globalSiteId,
 				'ips_site_page' => $pageTitle,
-			],
-			__METHOD__
-		);
+			] )
+			->caller( __METHOD__ )
+			->fetchRow();
 
 		return $result === false ? null : ItemId::newFromNumber( (int)$result->ips_item_id );
 	}
@@ -299,16 +299,16 @@ class SiteLinkTable implements SiteLinkStore {
 		}
 
 		$dbr = $this->db->connections()->getReadConnectionRef();
-		$links = $dbr->select(
-			$this->table,
-			[
+		$links = $dbr->newSelectQueryBuilder()
+			->select( [
 				'ips_site_id',
 				'ips_site_page',
 				'ips_item_id',
-			],
-			$conditions,
-			__METHOD__
-		);
+			] )
+			->from( $this->table )
+			->where( $conditions )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 
 		$siteLinks = [];
 
@@ -336,16 +336,12 @@ class SiteLinkTable implements SiteLinkStore {
 
 		$dbr = $this->db->connections()->getReadConnectionRef();
 
-		$rows = $dbr->select(
-			$this->table,
-			[
-				'ips_site_id', 'ips_site_page'
-			],
-			[
-				'ips_item_id' => $numericId
-			],
-			__METHOD__
-		);
+		$rows = $dbr->newSelectQueryBuilder()
+			->select( [ 'ips_site_id', 'ips_site_page' ] )
+			->from( $this->table )
+			->where( [ 'ips_item_id' => $numericId ] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 
 		$siteLinks = [];
 
