@@ -37,6 +37,11 @@ class BasicDiffViewTest extends \PHPUnit\Framework\TestCase {
 				'@<del\b[^>]*>OLD</del>.*<ins\b[^>]*>NEW</ins>@',
 				'OLD',
 				'NEW',
+			],
+			'Change operation highlights changed word being deleted and inserted' => [
+				'@THE ?<del\b[^>]*> ?OLD ?</del> ?WORD.*THE ?<ins\b[^>]*> ?NEW ?</ins> ?WORD@',
+				'THE OLD WORD',
+				'THE NEW WORD',
 			]
 		];
 	}

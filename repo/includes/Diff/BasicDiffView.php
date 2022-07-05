@@ -9,6 +9,7 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Html;
 use MWException;
+use WordLevelDiff;
 
 /**
  * Class for generating views of DiffOp objects.
@@ -80,9 +81,13 @@ class BasicDiffView implements DiffView {
 			} elseif ( $op->getType() === 'change' ) {
 				/** @var DiffOpChange $op */
 				'@phan-var DiffOpChange $op';
+				$wordLevelDiff = new WordLevelDiff(
+					[ $op->getOldValue() ],
+					[ $op->getNewValue() ]
+				);
 				$html .= $this->generateHtmlDiffTableRow(
-					$this->getDeletedLine( $op->getOldValue(), $path ),
-					$this->getAddedLine( $op->getNewValue(), $path )
+					$wordLevelDiff->orig()[0],
+					$wordLevelDiff->closing()[0]
 				 );
 			} else {
 				throw new MWException( 'Invalid diffOp type' );
@@ -112,7 +117,6 @@ class BasicDiffView implements DiffView {
 	 * @return string
 	 */
 	protected function generateHtmlDiffTableRow( $oldHtml, $newHtml ) {
-		//TODO: use WordLevelDiff!
 		$html = Html::openElement( 'tr' );
 		if ( $oldHtml !== null ) {
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker', 'data-marker' => '−' ] );
