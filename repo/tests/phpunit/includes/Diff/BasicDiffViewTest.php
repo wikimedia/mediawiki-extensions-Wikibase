@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Diff;
 
 use Diff\DiffOp\Diff\Diff;
@@ -19,7 +21,7 @@ use Wikibase\Repo\Diff\BasicDiffView;
  */
 class BasicDiffViewTest extends \PHPUnit\Framework\TestCase {
 
-	public function diffOpProvider() {
+	public function diffOpProvider(): iterable {
 		return [
 			'Empty' => [
 				'@^$@',
@@ -46,7 +48,7 @@ class BasicDiffViewTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	private function getDiffOps( $oldValue = null, $newValue = null ) {
+	private function getDiffOps( ?string $oldValue, ?string $newValue ): array {
 		$diffOps = [];
 		if ( $oldValue !== null && $newValue !== null ) {
 			$diffOps['change'] = new DiffOpChange( $oldValue, $newValue );
@@ -65,7 +67,12 @@ class BasicDiffViewTest extends \PHPUnit\Framework\TestCase {
 	 * @param string|null $newValue
 	 * @param string|string[] $path
 	 */
-	public function testGetHtml( $pattern, $oldValue = null, $newValue = null, $path = [] ) {
+	public function testGetHtml(
+		string $pattern,
+		?string $oldValue = null,
+		?string $newValue = null,
+		array $path = []
+	): void {
 		if ( !is_array( $path ) ) {
 			$path = preg_split( '@\s*/\s*@', $path );
 		}
