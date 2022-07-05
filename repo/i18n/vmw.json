@@ -2,11 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Gildo Máquina",
-			"Amire80"
+			"Amire80",
+			"Tomas Armando Moz"
 		]
 	},
 	"wikibase-edit": "okhaliha saana",
 	"wikibase-add": "Ophitaanya",
+	"wikibase-label-empty": "Etiitulu yoohithalakasiwa",
 	"wikibase-description-empty": "Yoolempwa yohikupaleeliwa",
 	"wikibase-sitelinks-special": "Malaka makina",
 	"wikibase-statementview-rank-normal": "Moonelelo piriyele"

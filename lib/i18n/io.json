@@ -8,6 +8,8 @@
 	"wikibase-error-save-generic": "Ne povis sparar la modifiko pro eroro.",
 	"wikibase-error-ui-no-external-page": "Ne esis posibla trovar la pagino \"$2\" en \"$1\".",
 	"wikibase-timedetails-isotime": "Dato e horo",
+	"wikibase-timedetails-before": "Ante",
+	"wikibase-timedetails-after": "Pose",
 	"wikibase-sitelinks-wikipedia": "Wikipedio",
 	"datatypes-type-string": "Kateno di karakteri",
 	"datatypes-type-quantity": "Quanto",
