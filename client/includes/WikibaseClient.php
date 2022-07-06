@@ -64,6 +64,7 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolverFactory;
 use Wikibase\Lib\StringNormalizer;
@@ -536,6 +537,13 @@ final class WikibaseClient {
 	public static function getHookRunner( ContainerInterface $services = null ): WikibaseClientHookRunner {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.HookRunner' );
+	}
+
+	public static function getRedirectResolvingLatestRevisionLookup(
+		ContainerInterface $services = null
+	): RedirectResolvingLatestRevisionLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.RedirectResolvingLatestRevisionLookup' );
 	}
 
 }

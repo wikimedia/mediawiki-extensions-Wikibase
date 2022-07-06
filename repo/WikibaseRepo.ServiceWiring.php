@@ -557,14 +557,13 @@ return [
 		MediaWikiServices $services
 	): WikibaseValueFormatterBuilders {
 		$settings = WikibaseRepo::getSettings( $services );
-		$revisionLookup = WikibaseRepo::getEntityRevisionLookup( $services );
 		$termFallbackCache = WikibaseRepo::getTermFallbackCache( $services );
 
 		return new WikibaseValueFormatterBuilders(
 			new FormatterLabelDescriptionLookupFactory(
 				WikibaseRepo::getTermLookup( $services ),
 				$termFallbackCache,
-				new RedirectResolvingLatestRevisionLookup( $revisionLookup )
+				WikibaseRepo::getRedirectResolvingLatestRevisionLookup( $services )
 			),
 			WikibaseRepo::getLanguageNameLookup( $services ),
 			WikibaseRepo::getItemUrlParser( $services ),
@@ -572,7 +571,7 @@ return [
 			$settings->getSetting( 'tabularDataStorageBaseUrl' ),
 			$termFallbackCache,
 			WikibaseRepo::getEntityLookup( $services ),
-			$revisionLookup,
+			WikibaseRepo::getEntityRevisionLookup( $services ),
 			$settings->getSetting( 'entitySchemaNamespace' ),
 			WikibaseRepo::getEntityExistenceChecker( $services ),
 			WikibaseRepo::getEntityTitleTextLookup( $services ),
@@ -1657,6 +1656,12 @@ return [
 			$repoSettings->getSetting( 'pagePropertiesRdf' ) ?: [],
 			$repoSettings->getSetting( 'rdfDataRightsUrl' )
 		);
+	},
+
+	'WikibaseRepo.RedirectResolvingLatestRevisionLookup' => function (
+		MediaWikiServices $services
+	): RedirectResolvingLatestRevisionLookup {
+		return new RedirectResolvingLatestRevisionLookup( WikibaseRepo::getEntityRevisionLookup( $services ) );
 	},
 
 	'WikibaseRepo.ReferenceNormalizer' => function ( MediaWikiServices $services ): ReferenceNormalizer {
