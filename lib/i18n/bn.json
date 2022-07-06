@@ -11,7 +11,8 @@
 			"Mahir256",
 			"TMg",
 			"আজিজ",
-			"আফতাবুজ্জামান"
+			"আফতাবুজ্জামান",
+			"Saurmandal"
 		]
 	},
 	"specialpages-group-wikibase": "উইকিবেজ",
@@ -140,5 +141,7 @@
 	"wikibase-property-summary-wbeditentity-create": "নতুন বৈশিষ্ট্য তৈরি হয়েছে",
 	"wikibase-property-summary-wbeditentity-create-property": "নতুন বৈশিষ্ট্য তৈরি হয়েছে",
 	"wikibase-property-summary-wbeditentity-update": "বৈশিষ্ট্য পরিবর্তন করা হয়েছে",
-	"wikibase-property-summary-wbeditentity-override": "বৈশিষ্ট্য পরিষ্কার করা হয়েছে"
+	"wikibase-property-summary-wbeditentity-override": "বৈশিষ্ট্য পরিষ্কার করা হয়েছে",
+	"wikibase-reference-formatter-snak-separator": "।&#32;",
+	"wikibase-reference-formatter-snak-terminator": "।"
 }
