@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
@@ -32,9 +31,6 @@ class DefaultValueFormatterBuildersTest extends ServiceWiringTestCase {
 		$store->expects( $this->once() )
 			->method( 'getSiteLinkLookup' )
 			->willReturn( new HashSiteLinkStore() );
-		$store->expects( $this->once() )
-			->method( 'getEntityRevisionLookup' )
-			->willReturn( $this->createMock( EntityRevisionLookup::class ) );
 		$this->mockService( 'WikibaseClient.Store',
 			$store );
 		$this->mockService( 'WikibaseClient.Settings',
