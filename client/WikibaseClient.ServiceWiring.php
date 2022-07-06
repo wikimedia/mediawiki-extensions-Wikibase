@@ -107,6 +107,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
@@ -478,6 +479,18 @@ return [
 		}
 		$interwikiPrefix = $interwikiPrefixes[0];
 		return new ExternalUserNames( $interwikiPrefix, false );
+	},
+
+	'WikibaseClient.FallbackLabelDescriptionLookupFactory' => function (
+		MediaWikiServices $services
+	): FallbackLabelDescriptionLookupFactory {
+		return new FallbackLabelDescriptionLookupFactory(
+			WikibaseClient::getLanguageFallbackChainFactory( $services ),
+			WikibaseClient::getRedirectResolvingLatestRevisionLookup( $services ),
+			WikibaseClient::getTermFallbackCache( $services ),
+			WikibaseClient::getTermLookup( $services ),
+			WikibaseClient::getTermBuffer( $services )
+		);
 	},
 
 	'WikibaseClient.HookRunner' => function ( MediaWikiServices $services ): WikibaseClientHookRunner {

@@ -62,6 +62,7 @@ use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
@@ -544,6 +545,13 @@ final class WikibaseClient {
 	): RedirectResolvingLatestRevisionLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.RedirectResolvingLatestRevisionLookup' );
+	}
+
+	public static function getFallbackLabelDescriptionLookupFactory(
+		ContainerInterface $services = null
+	): FallbackLabelDescriptionLookupFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.FallbackLabelDescriptionLookupFactory' );
 	}
 
 }

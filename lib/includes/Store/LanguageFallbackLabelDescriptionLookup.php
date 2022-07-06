@@ -10,6 +10,10 @@ use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
+ * A lookup for labels and descriptions in a given language.
+ * Applies language fallbacks; does not resolve redirects.
+ * Use {@link FallbackLabelDescriptionLookupFactory} instead of using this class directly.
+ *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
