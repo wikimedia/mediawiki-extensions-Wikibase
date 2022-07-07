@@ -87,6 +87,9 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		MWTimestamp::setFakeTime( '20000101010000' );
 		$logger = new TestLogger( true );
 
+		// disable throttle
+		$this->setMainCache( CACHE_NONE );
+
 		$currentTime = $this->getPingbackTime();
 		$this->assertFalse( $currentTime );
 
