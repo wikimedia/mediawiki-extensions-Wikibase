@@ -18,7 +18,7 @@
 	"StatementId": {
 		"in": "path",
 		"name": "statement_id",
-		"description": "The id of the required Statement",
+		"description": "The ID of the required Statement",
 		"required": true,
 		"schema": {
 			"type": "string",
@@ -44,7 +44,7 @@
 	"IfNoneMatch": {
 		"name": "If-None-Match",
 		"in": "header",
-		"description": "Conditionally request a resource only if changed since specified entity revision number",
+		"description": "Conditionally request a resource only if changed since the specified entity revision number",
 		"schema": {
 			"type": "array",
 			"items": {
@@ -66,7 +66,39 @@
 	"IfModifiedSince": {
 		"name": "If-Modified-Since",
 		"in": "header",
-		"description": "Conditionally request a resource only if it changed since specified date",
+		"description": "Conditionally request a resource only if it changed since the specified date",
+		"schema": {
+			"type": "string",
+			"format": "http-date"
+		},
+		"example": "Sat, 06 Jun 2020 16:38:47 GMT"
+	},
+	"IfMatch": {
+		"name": "If-Match",
+		"in": "header",
+		"description": "Conditionally modify a resource only if it hasn't changed since the specified entity revision number",
+		"schema": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^(?:\".+\"|\\*)$"
+			}
+		},
+		"examples": {
+			"strong-etag": {
+				"summary": "Single ETag",
+				"value": [ "\"1276705620\"" ]
+			},
+			"multiple-etags": {
+				"summary": "Multiple ETags",
+				"value": [ "\"1276703231\"", "\"1276705620\"" ]
+			}
+		}
+	},
+	"IfUnmodifiedSince": {
+		"name": "If-Unmodified-Since",
+		"in": "header",
+		"description": "Conditionally modify a resource only if it hasn't changed since the specified date",
 		"schema": {
 			"type": "string",
 			"format": "http-date"

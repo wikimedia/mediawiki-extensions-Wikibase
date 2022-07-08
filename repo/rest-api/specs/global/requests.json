@@ -9,5 +9,16 @@
 				}
 			}
 		}
+	},
+	"Edit": {
+		"description": "Edit payload containing edit meta data",
+		"required": false,
+		"content": {
+			"application/json": {
+				"schema": {
+					"$ref": "./request-parts.json#/MediawikiEdit"
+				}
+			}
+		}
 	}
 }
