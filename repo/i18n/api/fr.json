@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ajeje Brazorf",
+			"Cigaryno",
 			"Derugon",
 			"Envlh",
 			"Gomoko",
@@ -178,6 +179,8 @@
 	"apihelp-wbsearchentities-param-props": "Renvoyer ces propriétés pour chaque entité.",
 	"apihelp-wbsearchentities-param-limit": "Nombre maximal de résultats",
 	"apihelp-wbsearchentities-param-continue": "Décalage à partir duquel continuer une recherche",
+	"apihelp-wbsearchentities-param-profile": "Le profil de recherche à utiliser.",
+	"apihelp-wbsearchentities-paramvalue-profile-default": "Le profil par défaut, adapté à la plupart des besoins.",
 	"apihelp-wbsearchentities-example-1": "Rechercher « abc » en anglais, avec un type et une limite par défaut",
 	"apihelp-wbsearchentities-example-2": "Rechercher « abc » en anglais avec une limite de 50",
 	"apihelp-wbsearchentities-example-3": "Rechercher « alphabet » en anglais pour le type propriété",
@@ -208,6 +211,8 @@
 	"apihelp-query+wbsearch-param-strictlanguage": "S’il faut désactiver la langue de secours",
 	"apihelp-query+wbsearch-param-type": "Rechercher ce type d’entité.",
 	"apihelp-query+wbsearch-param-limit": "Nombre maximal de résultats",
+	"apihelp-query+wbsearch-param-profile": "Le profil de recherche à utiliser.",
+	"apihelp-query+wbsearch-paramvalue-profile-default": "Le profil par défaut, adapté à la plupart des besoins.",
 	"apihelp-query+wbsearch-example-1": "Rechercher « abc » en anglais, avec un type et une limite par défaut",
 	"apihelp-query+wbsearch-example-2": "Rechercher « abc » en anglais avec une limite de 50",
 	"apihelp-query+wbsearch-example-3": "Rechercher « alphabet » en anglais pour le type propriété",
