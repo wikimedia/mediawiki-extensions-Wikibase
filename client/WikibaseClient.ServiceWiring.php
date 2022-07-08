@@ -299,13 +299,12 @@ return [
 			$settings->getSetting( 'siteGlobalID' )
 		);
 		$termFallbackCache = WikibaseClient::getTermFallbackCache( $services );
-		$revisionLookup = $clientStore->getEntityRevisionLookup();
 
 		return new WikibaseValueFormatterBuilders(
 			new FormatterLabelDescriptionLookupFactory(
 				WikibaseClient::getTermLookup( $services ),
 				$termFallbackCache,
-				new RedirectResolvingLatestRevisionLookup( $revisionLookup )
+				WikibaseClient::getRedirectResolvingLatestRevisionLookup( $services )
 			),
 			new LanguageNameLookup( WikibaseClient::getUserLanguage( $services )->getCode() ),
 			WikibaseClient::getRepoItemUriParser( $services ),
@@ -313,7 +312,7 @@ return [
 			$settings->getSetting( 'tabularDataStorageBaseUrl' ),
 			$termFallbackCache,
 			WikibaseClient::getEntityLookup( $services ),
-			$revisionLookup,
+			$clientStore->getEntityRevisionLookup(),
 			$settings->getSetting( 'entitySchemaNamespace' ),
 			new TitleLookupBasedEntityExistenceChecker(
 				$entityTitleLookup,
@@ -773,6 +772,14 @@ return [
 			WikibaseClient::getClientDomainDbFactory( $services )->newLocalDb(),
 			$services->getCentralIdLookupFactory()->getNonLocalLookup(),
 			WikibaseClient::getExternalUserNames( $services )
+		);
+	},
+
+	'WikibaseClient.RedirectResolvingLatestRevisionLookup' => function (
+		MediaWikiServices $services
+	): RedirectResolvingLatestRevisionLookup {
+		return new RedirectResolvingLatestRevisionLookup(
+			WikibaseClient::getStore( $services )->getEntityRevisionLookup()
 		);
 	},
 

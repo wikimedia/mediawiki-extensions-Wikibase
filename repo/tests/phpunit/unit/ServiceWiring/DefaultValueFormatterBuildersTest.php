@@ -17,6 +17,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -52,6 +53,11 @@ class DefaultValueFormatterBuildersTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.TermLookup',
 			$this->createMock( TermLookup::class )
+		);
+
+		$this->mockService(
+			'WikibaseRepo.RedirectResolvingLatestRevisionLookup',
+			$this->createMock( RedirectResolvingLatestRevisionLookup::class )
 		);
 
 		$this->mockService(

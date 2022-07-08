@@ -15,6 +15,7 @@ use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\HashSiteLinkStore;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 
 /**
@@ -49,6 +50,8 @@ class DefaultValueFormatterBuildersTest extends ServiceWiringTestCase {
 			->method( 'getParserFactory' );
 		$this->mockService( 'WikibaseClient.TermLookup',
 			new NullPrefetchingTermLookup() );
+		$this->mockService( 'WikibaseClient.RedirectResolvingLatestRevisionLookup',
+			$this->createMock( RedirectResolvingLatestRevisionLookup::class ) );
 		$userLanguage = $this->createMock( Language::class );
 		$userLanguage->expects( $this->once() )
 			->method( 'getCode' )

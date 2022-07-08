@@ -29,7 +29,6 @@ use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
-use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityRedirectTargetLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
 
@@ -267,7 +266,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		$labelDescriptionLookup = new CachingFallbackLabelDescriptionLookup(
 			WikibaseClient::getTermFallbackCache(),
-			new RedirectResolvingLatestRevisionLookup( WikibaseClient::getStore()->getEntityRevisionLookup() ),
+			WikibaseClient::getRedirectResolvingLatestRevisionLookup(),
 			$nonCachingLookup,
 			$this->getLanguageFallbackChain()
 		);
@@ -293,7 +292,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		$termLookup = new CachingFallbackBasedTermLookup(
 			WikibaseClient::getTermFallbackCache( $mediaWikiServices ),
-			new RedirectResolvingLatestRevisionLookup( $store->getEntityRevisionLookup() ),
+			WikibaseClient::getRedirectResolvingLatestRevisionLookup( $mediaWikiServices ),
 			new LanguageFallbackLabelDescriptionLookupFactory(
 				WikibaseClient::getLanguageFallbackChainFactory( $mediaWikiServices ),
 				WikibaseClient::getTermLookup( $mediaWikiServices )

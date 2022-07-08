@@ -75,6 +75,7 @@ use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolverFactory;
@@ -1079,6 +1080,13 @@ class WikibaseRepo {
 	public static function getDispatchStats( ContainerInterface $services = null ): DispatchStats {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.DispatchStats' );
+	}
+
+	public static function getRedirectResolvingLatestRevisionLookup(
+		ContainerInterface $services = null
+	): RedirectResolvingLatestRevisionLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.RedirectResolvingLatestRevisionLookup' );
 	}
 
 }
