@@ -9,6 +9,9 @@ use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
+ * Wraps another label description lookup to resolve redirects and add caching.
+ * Use {@link FallbackLabelDescriptionLookupFactory} instead of using this class directly.
+ *
  * @license GPL-2.0-or-later
  *
  * @note The class uses immutable cache approach: cached data never changes once persisted.

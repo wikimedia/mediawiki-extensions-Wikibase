@@ -72,6 +72,7 @@ use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
@@ -1087,6 +1088,13 @@ class WikibaseRepo {
 	): RedirectResolvingLatestRevisionLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.RedirectResolvingLatestRevisionLookup' );
+	}
+
+	public static function getFallbackLabelDescriptionLookupFactory(
+		ContainerInterface $services = null
+	): FallbackLabelDescriptionLookupFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.FallbackLabelDescriptionLookupFactory' );
 	}
 
 }

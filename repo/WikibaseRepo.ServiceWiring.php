@@ -113,6 +113,7 @@ use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
@@ -1150,6 +1151,18 @@ return [
 
 	'WikibaseRepo.ExternalFormatStatementDeserializer' => function ( MediaWikiServices $services ): Deserializer {
 		return WikibaseRepo::getBaseDataModelDeserializerFactory( $services )->newStatementDeserializer();
+	},
+
+	'WikibaseRepo.FallbackLabelDescriptionLookupFactory' => function (
+		MediaWikiServices $services
+	): FallbackLabelDescriptionLookupFactory {
+		return new FallbackLabelDescriptionLookupFactory(
+			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
+			WikibaseRepo::getRedirectResolvingLatestRevisionLookup( $services ),
+			WikibaseRepo::getTermFallbackCache( $services ),
+			WikibaseRepo::getTermLookup( $services ),
+			WikibaseRepo::getTermBuffer( $services )
+		);
 	},
 
 	'WikibaseRepo.FederatedPropertiesServiceFactory' => function ( MediaWikiServices $services ): ApiServiceFactory {
