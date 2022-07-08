@@ -15,6 +15,7 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
  *
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @deprecated Use {@link FallbackLabelDescriptionLookupFactory} instead.
  */
 class LanguageFallbackLabelDescriptionLookupFactory {
 
