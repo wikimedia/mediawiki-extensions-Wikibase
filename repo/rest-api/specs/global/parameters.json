@@ -1,5 +1,5 @@
 {
-	"itemId": {
+	"ItemId": {
 		"in": "path",
 		"name": "item_id",
 		"description": "The ID of the required Item",
@@ -15,7 +15,7 @@
 			}
 		}
 	},
-	"statementId": {
+	"StatementId": {
 		"in": "path",
 		"name": "statement_id",
 		"description": "The id of the required Statement",
@@ -26,7 +26,7 @@
 		},
 		"example": "Q42$F078E5B3-F9A8-480E-B7AC-D97778CBBEF9"
 	},
-	"fields": {
+	"Fields": {
 		"in": "query",
 		"name": "_fields",
 		"description": "Comma separated list of fields to include in each response object.",
@@ -41,7 +41,7 @@
 		"explode": false,
 		"style": "form"
 	},
-	"ifNoneMatch": {
+	"IfNoneMatch": {
 		"name": "If-None-Match",
 		"in": "header",
 		"description": "Conditionally request a resource only if changed since specified entity revision number",
@@ -63,7 +63,7 @@
 			}
 		}
 	},
-	"ifModifiedSince": {
+	"IfModifiedSince": {
 		"name": "If-Modified-Since",
 		"in": "header",
 		"description": "Conditionally request a resource only if it changed since specified date",
@@ -73,7 +73,7 @@
 		},
 		"example": "Sat, 06 Jun 2020 16:38:47 GMT"
 	},
-	"authorization": {
+	"Authorization": {
 		"name": "Authorization",
 		"in": "header",
 		"description": "Make authenticated request using a provided bearer token",
