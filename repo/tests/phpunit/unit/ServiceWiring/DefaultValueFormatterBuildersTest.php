@@ -13,7 +13,6 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityRedirectChecker;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
@@ -78,11 +77,6 @@ class DefaultValueFormatterBuildersTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.EntityLookup',
 			$this->createMock( EntityLookup::class )
-		);
-
-		$this->mockService(
-			'WikibaseRepo.EntityRevisionLookup',
-			$this->createMock( EntityRevisionLookup::class )
 		);
 
 		$this->mockService(

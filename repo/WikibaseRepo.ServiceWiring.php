@@ -559,12 +559,13 @@ return [
 	): WikibaseValueFormatterBuilders {
 		$settings = WikibaseRepo::getSettings( $services );
 		$termFallbackCache = WikibaseRepo::getTermFallbackCache( $services );
+		$redirectResolvingLatestRevisionLookup = WikibaseRepo::getRedirectResolvingLatestRevisionLookup( $services );
 
 		return new WikibaseValueFormatterBuilders(
 			new FormatterLabelDescriptionLookupFactory(
 				WikibaseRepo::getTermLookup( $services ),
 				$termFallbackCache,
-				WikibaseRepo::getRedirectResolvingLatestRevisionLookup( $services )
+				$redirectResolvingLatestRevisionLookup
 			),
 			WikibaseRepo::getLanguageNameLookup( $services ),
 			WikibaseRepo::getItemUrlParser( $services ),
@@ -572,7 +573,7 @@ return [
 			$settings->getSetting( 'tabularDataStorageBaseUrl' ),
 			$termFallbackCache,
 			WikibaseRepo::getEntityLookup( $services ),
-			WikibaseRepo::getEntityRevisionLookup( $services ),
+			$redirectResolvingLatestRevisionLookup,
 			$settings->getSetting( 'entitySchemaNamespace' ),
 			WikibaseRepo::getEntityExistenceChecker( $services ),
 			WikibaseRepo::getEntityTitleTextLookup( $services ),

@@ -34,7 +34,6 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityRedirectChecker;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
@@ -122,7 +121,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			self::TABULAR_DATA_STORAGE_FRONTEND_URL,
 			$this->createCache(),
 			$this->createMock( EntityLookup::class ),
-			$this->createMock( EntityRevisionLookup::class ),
+			$redirectResolvingLatestRevisionLookup,
 			1,
 			$this->createMock( EntityExistenceChecker::class ),
 			$this->createMock( EntityTitleTextLookup::class ),

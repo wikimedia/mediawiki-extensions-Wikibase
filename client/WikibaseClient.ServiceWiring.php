@@ -300,12 +300,13 @@ return [
 			$settings->getSetting( 'siteGlobalID' )
 		);
 		$termFallbackCache = WikibaseClient::getTermFallbackCache( $services );
+		$redirectResolvingLatestRevisionLookup = WikibaseClient::getRedirectResolvingLatestRevisionLookup( $services );
 
 		return new WikibaseValueFormatterBuilders(
 			new FormatterLabelDescriptionLookupFactory(
 				WikibaseClient::getTermLookup( $services ),
 				$termFallbackCache,
-				WikibaseClient::getRedirectResolvingLatestRevisionLookup( $services )
+				$redirectResolvingLatestRevisionLookup
 			),
 			new LanguageNameLookup( WikibaseClient::getUserLanguage( $services )->getCode() ),
 			WikibaseClient::getRepoItemUriParser( $services ),
@@ -313,7 +314,7 @@ return [
 			$settings->getSetting( 'tabularDataStorageBaseUrl' ),
 			$termFallbackCache,
 			WikibaseClient::getEntityLookup( $services ),
-			$clientStore->getEntityRevisionLookup(),
+			$redirectResolvingLatestRevisionLookup,
 			$settings->getSetting( 'entitySchemaNamespace' ),
 			new TitleLookupBasedEntityExistenceChecker(
 				$entityTitleLookup,

@@ -23,7 +23,6 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityRedirectChecker;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
@@ -91,9 +90,9 @@ class WikibaseValueFormatterBuilders {
 	private $entityLookup;
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var RedirectResolvingLatestRevisionLookup
 	 */
-	private $entityRevisionLookup;
+	private $redirectResolvingLatestRevisionLookup;
 
 	/**
 	 * @var TermFallbackCacheFacade
@@ -153,7 +152,7 @@ class WikibaseValueFormatterBuilders {
 		string $tabularDataStorageBaseUrl,
 		TermFallbackCacheFacade $termFallbackCacheFacade,
 		EntityLookup $entityLookup,
-		EntityRevisionLookup $entityRevisionLookup,
+		RedirectResolvingLatestRevisionLookup $redirectResolvingLatestRevisionLookup,
 		int $entitySchemaNamespace,
 		EntityExistenceChecker $entityExistenceChecker,
 		EntityTitleTextLookup $entityTitleTextLookup,
@@ -170,7 +169,7 @@ class WikibaseValueFormatterBuilders {
 		$this->geoShapeStorageBaseUrl = $geoShapeStorageBaseUrl;
 		$this->tabularDataStorageBaseUrl = $tabularDataStorageBaseUrl;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->entityRevisionLookup = $entityRevisionLookup;
+		$this->redirectResolvingLatestRevisionLookup = $redirectResolvingLatestRevisionLookup;
 		$this->entityLookup = $entityLookup;
 		$this->cache = $termFallbackCacheFacade;
 		$this->snakFormat = new SnakFormat();
@@ -276,7 +275,7 @@ class WikibaseValueFormatterBuilders {
 	private function getLabelDescriptionLookup( FormatterOptions $options ) {
 		return new CachingFallbackLabelDescriptionLookup(
 			$this->cache,
-			new RedirectResolvingLatestRevisionLookup( $this->entityRevisionLookup ),
+			$this->redirectResolvingLatestRevisionLookup,
 			$this->getNonCachingLookup( $options ),
 			$options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN )
 		);
