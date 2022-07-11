@@ -3,11 +3,11 @@
 		"tags": [ "items" ],
 		"summary": "Retrieve a single Wikibase Item by ID",
 		"parameters": [
-			{ "$ref": "../../global/parameters.json#/itemId" },
-			{ "$ref": "../../global/parameters.json#/fields" },
-			{ "$ref": "../../global/parameters.json#/ifNoneMatch" },
-			{ "$ref": "../../global/parameters.json#/ifModifiedSince" },
-			{ "$ref": "../../global/parameters.json#/authorization" }
+			{ "$ref": "../../global/parameters.json#/ItemId" },
+			{ "$ref": "../../global/parameters.json#/Fields" },
+			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
+			{ "$ref": "../../global/parameters.json#/IfModifiedSince" },
+			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Item" },
