@@ -4,6 +4,12 @@
 			"Singkiring57"
 		]
 	},
+	"wikibase-editlinks": "𑢺𑣂𑣊𑣌 𑣌𑣉 𑣉𑣚-𑣞𑣁𑣋𑣉𑣖 𑣜𑣃𑣈𑣈",
+	"wikibase-linkitem-addlinks": "𑢺𑣉𑣊𑣌𑣌𑣉 𑣈𑣖-𑣖𑣂𑣞𑣈𑣈",
+	"wikibase-linkitem-title": "𑢾𑣁𑣌𑣁𑣖 𑣚𑣉𑣄 𑣕𑣈 𑣗𑣉𑣜-𑣕𑣉𑣚𑣈",
+	"wikibase-linkitem-linkpage": "𑢾𑣁𑣌𑣁𑣖 𑣚𑣉𑣄 𑣕𑣈 𑣗𑣉𑣜-𑣕𑣉𑣚𑣈",
+	"wikibase-linkitem-input-site": "𑢮𑣁𑣋𑣁𑣜:",
+	"wikibase-linkitem-input-page": "𑢾𑣁𑣌𑣁𑣖:",
 	"wikibase-rc-hide-wikidata-hide": "𑢧𑣌𑣃𑣆",
 	"wikibase-rc-hide-wikidata-show": "𑢧𑣔𑣃𑣗𑣈",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} 𑣕𑣋𑣈𑣓𑣈",
