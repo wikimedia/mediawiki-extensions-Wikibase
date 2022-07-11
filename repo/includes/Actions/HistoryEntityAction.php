@@ -63,10 +63,10 @@ class HistoryEntityAction extends HistoryAction {
 		if ( $label !== null ) {
 			$labelText = $label->getText();
 			return $this->msg( 'wikibase-history-title-with-label' )
-				->params( $idSerialization, $labelText )->text();
+				->plaintextParams( $idSerialization, $labelText )->parse();
 		} else {
 			return $this->msg( 'wikibase-history-title-without-label' )
-				->params( $idSerialization )->text();
+				->plaintextParams( $idSerialization )->parse();
 		}
 	}
 
