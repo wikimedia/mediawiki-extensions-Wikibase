@@ -14,9 +14,9 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -216,7 +216,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		}
 
 		$labelDescriptionLookupFactory = $this->getMockBuilder(
-			LanguageFallbackLabelDescriptionLookupFactory::class
+			FallbackLabelDescriptionLookupFactory::class
 		)
 			->disableOriginalConstructor()
 			->getMock();
@@ -279,11 +279,8 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		return $context;
 	}
 
-	/**
-	 * @return LabelDescriptionLookup
-	 */
-	public function newLabelDescriptionLookup() {
-		$lookup = $this->createMock( LabelDescriptionLookup::class );
+	public function newLabelDescriptionLookup(): FallbackLabelDescriptionLookup {
+		$lookup = $this->createMock( FallbackLabelDescriptionLookup::class );
 
 		$lookup->method( 'getLabel' )
 			->willReturnCallback( function ( EntityId $entityId ) {

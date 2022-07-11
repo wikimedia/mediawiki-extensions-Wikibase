@@ -145,7 +145,7 @@
 			"class": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler::factory",
 			"services": [
-				"WikibaseClient.LanguageFallbackLabelDescriptionLookupFactory",
+				"WikibaseClient.FallbackLabelDescriptionLookupFactory",
 				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Store"
 			]
@@ -155,7 +155,7 @@
 			"factory": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler::factory",
 			"services": [
 				"WikibaseClient.DescriptionLookup",
-				"WikibaseClient.LanguageFallbackLabelDescriptionLookupFactory",
+				"WikibaseClient.FallbackLabelDescriptionLookupFactory",
 				"WikibaseClient.NamespaceChecker",
 				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Settings",
