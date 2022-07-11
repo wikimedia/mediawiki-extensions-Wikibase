@@ -49,7 +49,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"statement-not-found": {
-						"value": { "$ref": "./examples.json#/StatementNotFoundExample" }
+						"$ref": "./examples.json#/StatementNotFoundExample"
 					}
 				}
 			}
@@ -70,10 +70,10 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"item-not-found": {
-						"value": { "$ref": "./examples.json#/ItemNotFoundExample" }
+						"$ref": "./examples.json#/ItemNotFoundExample"
 					},
 					"statement-not-found": {
-						"value": { "$ref": "./examples.json#/StatementNotFoundExample" }
+						"$ref": "./examples.json#/StatementNotFoundExample"
 					}
 				}
 			}
