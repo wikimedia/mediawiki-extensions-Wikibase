@@ -400,19 +400,37 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 	/**
 	 * @dataProvider linkTargetProvider
 	 */
-	public function testExtractForeignIdString( $linkTarget, $expectedOutput ) {
+	public function testExtractForeignIdString( ?int $namespace, ?string $linkTargetText, $expectedOutput ) {
 		$wrapper = TestingAccessWrapper::newFromObject( $this->newInstance() );
+		$this->db->insert(
+			'interwiki',
+			[
+				'iw_prefix' => 'metawikimedia',
+				'iw_url' => "https://example.com/wiki/$1",
+				'iw_api' => '',
+				'iw_wikiid' => '',
+				'iw_local' => false,
+			],
+			__METHOD__,
+			'IGNORE'
+		);
+
+		$this->setMwGlobals( 'wgExtraInterlanguageLinkPrefixes', [ 'madeuplanguage' ] );
+		$this->tablesUsed[] = 'interwiki';
+		$linkTarget = $namespace !== null ?
+			Title::makeTitle( $namespace, $linkTargetText ) :
+			Title::newFromTextThrow( $linkTargetText );
 		$output = $wrapper->extractForeignIdString( $linkTarget );
 		$this->assertSame( $expectedOutput, $output );
 	}
 
 	public function linkTargetProvider() {
 		return [
-			'NS=MAIN, title=null' => [ Title::makeTitle( NS_MAIN, null ), null ], // T260853
-			'NS=SPECIAL, title=null' => [ Title::makeTitle( NS_SPECIAL, null ), null ],
-			'NS=SPECIAL, title=EntityPage/Q123' => [ Title::newFromTextThrow( 'Special:EntityPage/Q123' ), 'Q123' ],
+			'NS=MAIN, title=null' => [ NS_MAIN, null, null ], // T260853
+			'NS=SPECIAL, title=null' => [ NS_SPECIAL, null, null ],
+			'NS=SPECIAL, title=EntityPage/Q123' => [ null, 'Special:EntityPage/Q123', 'Q123' ],
 			// One of the defaults from MediaWiki's maintenance/interwiki.list (but not Wikidata, as this might be the local test wiki name)
-			'NS=MAIN, title=Special:EntityPage/Q123' => [ Title::newFromTextThrow( 'metawikimedia:Special:EntityPage/Q123' ), 'Q123' ],
+			'NS=MAIN, title=Special:EntityPage/Q123' => [ null, 'metawikimedia:Special:EntityPage/Q123', 'Q123' ],
 		];
 	}
 
