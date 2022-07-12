@@ -68,14 +68,26 @@ class FallbackLabelDescriptionLookupFactory {
 	): FallbackLabelDescriptionLookup {
 		$languageFallbackChain = $this->languageFallbackChainFactory->newFromLanguage( $language );
 
-		$labelDescriptionLookup = new CachingFallbackLabelDescriptionLookup(
+		// this implementation actually gets terms and does language fallback
+		$languageImplementation = new LanguageFallbackLabelDescriptionLookup(
+			$this->termLookup,
+			$languageFallbackChain
+		);
+
+		// this implementation adds caching and resolves redirects
+		$cachingImplementation = new CachingFallbackLabelDescriptionLookup(
 			$this->termFallbackCache,
 			$this->redirectResolvingRevisionLookup,
-			new LanguageFallbackLabelDescriptionLookup(
-				$this->termLookup,
-				$languageFallbackChain
-			),
+			$languageImplementation,
 			$languageFallbackChain
+		);
+
+		// this implementation ensures $cachingImplementation is not used for federated properties,
+		// where it does not work as of July 2022; the missing caching is unfortunate but okay,
+		// the missing redirect resolving is not relevant for properties
+		$dispatchingImplementation = new DispatchingFallbackLabelDescriptionLookup(
+			$cachingImplementation, // use this for most entity IDs
+			$languageImplementation // use this for federated properties
 		);
 
 		// Optionally prefetch the terms of the entities passed in here
@@ -85,7 +97,7 @@ class FallbackLabelDescriptionLookupFactory {
 			$this->termBuffer->prefetchTerms( $entityIds, $termTypes, $languages );
 		}
 
-		return $labelDescriptionLookup;
+		return $dispatchingImplementation;
 	}
 
 }
