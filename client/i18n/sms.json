@@ -25,7 +25,12 @@
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Nõmm: $1",
 	"wikibase-otherprojects": "Jeeʹres projeeʹktin",
 	"wikibase-sitelinks-sitename-columnheading": "Ǩiõll",
+	"wikibase-sitelinks-link-columnheading": "Liŋkkuum seidd",
 	"wikibase-client-data-bridge-references-heading": "Teâttkääiv",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Jiõk leäkku ǩeeʹrjtõõttâm sizz",
-	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Jiõk leäkku ǩeeʹrjtõõttâm sizz"
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Muuʹtt ǩeeʹrjtõõđǩâni sizz",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Ǩeeʹrjtõõđ sizz leʹbe raaj tobdldõõǥǥ",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Jiõk leäkku ǩeeʹrjtõõttâm sizz",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Õlmstââʹtt ǩeeʹrjtõõđǩâni sizz",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Ruõkk ǩeeʹrjtõõđǩâni sizz"
 }
