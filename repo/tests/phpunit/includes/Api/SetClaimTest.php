@@ -125,6 +125,8 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function testAddClaim() {
+		$this->overrideConfigValue( 'RateLimits',
+			[ 'wikibase-idgenerator' => [ '&can-bypass' => true, 'user' => [ 1000, 60 ] ] ] );
 		$store = $this->getEntityStore();
 
 		$statements = $this->getStatements();

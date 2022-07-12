@@ -79,6 +79,8 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	}
 
 	public function testValidRequests() {
+		$this->overrideConfigValue( 'RateLimits',
+			[ 'edit' => [ '&can-bypass' => true, 'user' => [ 1000, 60 ] ] ] );
 		foreach ( $this->itemProvider() as $item ) {
 			$this->doTestValidRequestSingle( $item );
 		}
