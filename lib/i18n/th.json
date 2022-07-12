@@ -58,9 +58,9 @@
 	"version-wikibase": "วิกิเบส",
 	"wikibase-time-calendar-gregorian": "กริกอเรียน",
 	"wikibase-time-calendar-julian": "จูเลียน",
-	"wikibase-time-precision-Gannum": "$1 พันล้านปีก่อนคริสตกาล",
-	"wikibase-time-precision-Mannum": "$1 ล้านปีก่อนคริสตกาล",
-	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 ปี}}ก่อนคริสตกาล",
+	"wikibase-time-precision-Gannum": "$1 พันล้านปีคริสตกาล",
+	"wikibase-time-precision-Mannum": "$1 ล้านปีคริสตกาล",
+	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 ปี}}คริสตกาล",
 	"wikibase-time-precision-millennium": "สหัสวรรษที่ $1",
 	"wikibase-time-precision-century": "ศตวรรษที่ $1",
 	"wikibase-time-precision-10annum": "ทศวรรษที่ $1",
@@ -83,6 +83,7 @@
 	"wikibase-entity-summary-wbeditentity-update": "เปลี่ยนแปลงข้อมูลในรายการสนเทศหนึ่ง",
 	"wikibase-entity-summary-wbeditentity-override": "ล้างข้อมูลในรายการสนเทศรายการหนึ่ง",
 	"wikibase-entity-summary-wbeditentity-update-languages": "เปลี่ยนแปลงลาเบล คำอธบิาย และ/หรือชื่อทางเลือกใน $3 {{PLURAL:$3|ภาษา}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "แก้ไขป้ายกำกับ คำอธิบาย และ/หรือชื่ออื่นในภาษา{{#commaseparatedlist: $3}}",
 	"wikibase-entity-summary-wbsetreference": "ตั้งค่าการอ้างอิงรายการหนึ่ง",
 	"wikibase-entity-summary-wbsetreference-add": "เพิ่มการอ้างอิงไปยังการกล่าวอ้าง",
 	"wikibase-entity-summary-wbsetreference-set": "เปลี่ยนแปลงการอ้างอิงในการกล่าวอ้าง",
@@ -138,10 +139,11 @@
 	"wikibase-item-summary-wblinktitles-connect": "เพิ่มลิงก์ข้ามภาษาเพื่อเชื่อมโยงหน้า",
 	"wikibase-property-summary-wbcreate-new": "สร้างคุณลักษณะรายการใหม่",
 	"wikibase-property-summary-wbeditentity-create": "สร้างคุณลักษณะรายการใหม่",
+	"wikibase-property-summary-wbeditentity-create-property": "สร้างคุณลักษณะรายการใหม่",
 	"wikibase-property-summary-wbeditentity-update": "เปลี่ยนแปลงข้อมูลในคุณลักษณะหนึ่ง",
 	"wikibase-property-summary-wbeditentity-override": "ล้างข้อมูลในคุณลักษณะหนึ่ง",
 	"wikibase-property-summary-special-create-property": "สร้างคุณลักษณะหนึ่ง [$2] พร้อมด้วย{{PLURAL:$1|ค่าๆ หนึ่ง|ค่าต่างๆ}}",
 	"wikibase-reference-formatter-snak-separator": ".&#32;",
 	"wikibase-reference-formatter-snak-terminator": ".",
-	"wikibase-reference-formatter-snak-retrieved": "เข้าถึงเมื่อ"
+	"wikibase-reference-formatter-snak-retrieved": "เข้าถึงเมื่อ $1"
 }
