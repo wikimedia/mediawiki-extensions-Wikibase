@@ -10,6 +10,8 @@ use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemDataSerializer;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
@@ -44,20 +46,20 @@ class GetItemRouteHandler extends SimpleHandler {
 	private $responseFactory;
 
 	/**
-	 * @var UnexpectedErrorHandler
+	 * @var MiddlewareHandler
 	 */
-	private $errorHandler;
+	private $middlewareHandler;
 
 	public function __construct(
 		GetItem $getItem,
 		GetItemJsonPresenter $presenter,
 		ResponseFactory $responseFactory,
-		UnexpectedErrorHandler $errorHandler
+		MiddlewareHandler $middlewareHandler
 	) {
 		$this->getItem = $getItem;
 		$this->successPresenter = $presenter;
 		$this->responseFactory = $responseFactory;
-		$this->errorHandler = $errorHandler;
+		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): Handler {
@@ -70,7 +72,9 @@ class GetItemRouteHandler extends SimpleHandler {
 				$serializerFactory->newSiteLinkListSerializer()
 			) ),
 			$responseFactory,
-			new UnexpectedErrorHandler( $responseFactory, WikibaseRepo::getLogger() )
+			new MiddlewareHandler( [
+				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
+			] )
 		);
 	}
 
@@ -78,7 +82,7 @@ class GetItemRouteHandler extends SimpleHandler {
 	 * @param mixed ...$args
 	 */
 	public function run( ...$args ): Response {
-		return $this->errorHandler->runWithErrorHandling( [ $this, 'runUseCase' ], $args );
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
 	}
 
 	public function runUseCase( string $id ): Response {

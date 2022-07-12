@@ -12,6 +12,8 @@ use MediaWiki\Rest\Validator\BodyValidator;
 use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
@@ -35,18 +37,18 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 	private $addItemStatement;
 	private $successPresenter;
 	private $responseFactory;
-	private $errorHandler;
+	private $middlewareHandler;
 
 	public function __construct(
 		AddItemStatement $addItemStatement,
 		StatementJsonPresenter $successPresenter,
 		ResponseFactory $responseFactory,
-		UnexpectedErrorHandler $errorHandler
+		MiddlewareHandler $middlewareHandler
 	) {
 		$this->addItemStatement = $addItemStatement;
 		$this->successPresenter = $successPresenter;
 		$this->responseFactory = $responseFactory;
-		$this->errorHandler = $errorHandler;
+		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): Handler {
@@ -55,7 +57,9 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 			WbRestApi::getAddItemStatement(),
 			new StatementJsonPresenter( WbRestApi::getSerializerFactory()->newStatementSerializer() ),
 			$responseFactory,
-			new UnexpectedErrorHandler( $responseFactory, WikibaseRepo::getLogger() )
+			new MiddlewareHandler( [
+				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
+			] )
 		);
 	}
 
@@ -63,7 +67,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 	 * @param mixed ...$args
 	 */
 	public function run( ...$args ): Response {
-		return $this->errorHandler->runWithErrorHandling( [ $this, 'runUseCase' ], $args );
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
 	}
 
 	/**

@@ -1,15 +1,17 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\RouteHandlers;
+namespace Wikibase\Repo\RestApi\RouteHandlers\Middleware;
 
+use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use Psr\Log\LoggerInterface;
+use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
 /**
  * @license GPL-2.0-or-later
  */
-class UnexpectedErrorHandler {
+class UnexpectedErrorHandlerMiddleware implements Middleware {
 
 	private $responseFactory;
 	private $logger;
@@ -19,12 +21,9 @@ class UnexpectedErrorHandler {
 		$this->logger = $logger;
 	}
 
-	/**
-	 * @return mixed|Response
-	 */
-	public function runWithErrorHandling( callable $run, array $args ) {
+	public function run( Handler $handler, callable $runNext ): Response {
 		try {
-			return $run( ...$args );
+			return $runNext();
 		} catch ( \Throwable $exception ) {
 			$this->logger->debug( (string)$exception );
 
