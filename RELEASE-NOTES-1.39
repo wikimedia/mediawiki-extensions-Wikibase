@@ -73,6 +73,7 @@ Monolingual entries removed as they are now natively supported by MediaWiki:
 
 === Breaking changes in 1.39 ===
 
+* (T114577) The maintenance script populateInterwiki.php was removed, use the same script from core.
 * (T12345) ...
 
 === Deprecations in 1.39 ===
