@@ -33,7 +33,6 @@ use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\Store\CachingPrefetchingTermLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
@@ -217,11 +216,8 @@ return [
 						new EntityIdSearchHelper(
 							WikibaseRepo::getEntityLookup(),
 							WikibaseRepo::getEntityIdParser(),
-							new LanguageFallbackLabelDescriptionLookup(
-								WikibaseRepo::getTermLookup(),
-								$languageFallbackChainFactory
-									->newFromLanguage( $language )
-							),
+							WikibaseRepo::getFallbackLabelDescriptionLookupFactory()
+								->newLabelDescriptionLookup( $language ),
 							WikibaseRepo::getEntityTypeToRepositoryMapping()
 						),
 						new EntityTermSearchHelper(
@@ -418,11 +414,9 @@ return [
 						new EntityIdSearchHelper(
 							WikibaseRepo::getEntityLookup(),
 							WikibaseRepo::getEntityIdParser(),
-							new LanguageFallbackLabelDescriptionLookup(
-								WikibaseRepo::getTermLookup(),
-								$languageFallbackChainFactory
-									->newFromLanguage( $language )
-							),
+
+							WikibaseRepo::getFallbackLabelDescriptionLookupFactory()
+								->newLabelDescriptionLookup( $language ),
 							WikibaseRepo::getEntityTypeToRepositoryMapping()
 						),
 						new EntityTermSearchHelper(
