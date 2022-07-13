@@ -448,10 +448,8 @@ return [
 			);
 		},
 		Def::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK => function( Language $language ) {
-			// TODO use FallbackLabelDescriptionLookupFactory instead
-			// (once it no longer crashes for federated properties)
-			$languageLabelLookupFactory = WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory();
-			$languageLabelLookup = $languageLabelLookupFactory->newLabelDescriptionLookup( $language );
+			$languageLabelLookup = WikibaseRepo::getFallbackLabelDescriptionLookupFactory()
+				->newLabelDescriptionLookup( $language );
 			return new LabelsProviderEntityIdHtmlLinkFormatter(
 				$languageLabelLookup,
 				WikibaseRepo::getLanguageNameLookup(),
