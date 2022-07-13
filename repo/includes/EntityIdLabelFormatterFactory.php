@@ -33,7 +33,7 @@ class EntityIdLabelFormatterFactory implements EntityIdFormatterFactory {
 	 */
 	public function getEntityIdFormatter( Language $language ) {
 		// TODO inject factory as service
-		$labelDescriptionLookup = WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory()
+		$labelDescriptionLookup = WikibaseRepo::getFallbackLabelDescriptionLookupFactory()
 			->newLabelDescriptionLookup( $language );
 
 		return new EntityIdLabelFormatter( $labelDescriptionLookup );
