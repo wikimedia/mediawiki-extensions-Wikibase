@@ -249,7 +249,7 @@ return [
 				->newLabelDescriptionLookup( $language );
 			return new LabelsProviderEntityIdHtmlLinkFormatter(
 				$languageLabelLookup,
-				WikibaseRepo::getLanguageNameLookup(),
+				WikibaseRepo::getLanguageNameLookupFactory()->getForLanguage( $language ),
 				WikibaseRepo::getEntityExistenceChecker(),
 				WikibaseRepo::getEntityTitleTextLookup(),
 				WikibaseRepo::getEntityUrlLookup(),
@@ -452,7 +452,7 @@ return [
 				->newLabelDescriptionLookup( $language );
 			return new LabelsProviderEntityIdHtmlLinkFormatter(
 				$languageLabelLookup,
-				WikibaseRepo::getLanguageNameLookup(),
+				WikibaseRepo::getLanguageNameLookupFactory()->getForLanguage( $language ),
 				WikibaseRepo::getEntityExistenceChecker(),
 				WikibaseRepo::getEntityTitleTextLookup(),
 				WikibaseRepo::getEntityUrlLookup(),
