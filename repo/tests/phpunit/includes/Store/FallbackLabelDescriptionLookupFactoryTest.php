@@ -18,6 +18,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @covers \Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory
  * @covers \Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup
  * @covers \Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup
+ * @covers \Wikibase\Lib\Store\DispatchingFallbackLabelDescriptionLookup
  *
  * @group Wikibase
  * @group WikibaseStore
