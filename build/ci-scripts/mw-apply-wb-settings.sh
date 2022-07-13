@@ -1,4 +1,6 @@
 #!/bin/bash
+# Used in .github/workflows/secondaryCI.yml
+# The script used in Wikimedia CI is in build/jenkins/mw-apply-wb-settings.sh
 
 set -x
 
