@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Repo\Actions\EditEntityAction;
 use Wikibase\Repo\Actions\HistoryEntityAction;
@@ -51,7 +51,7 @@ class PropertyHandler extends EntityHandler {
 	private $entityIdLookup;
 
 	/**
-	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 * @var FallbackLabelDescriptionLookupFactory
 	 */
 	private $labelLookupFactory;
 
@@ -67,7 +67,7 @@ class PropertyHandler extends EntityHandler {
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdLookup $entityIdLookup
-	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory
+	 * @param FallbackLabelDescriptionLookupFactory $labelLookupFactory
 	 * @param PropertyInfoStore $infoStore
 	 * @param PropertyInfoBuilder $propertyInfoBuilder
 	 * @param FieldDefinitions $propertyFieldDefinitions
@@ -80,7 +80,7 @@ class PropertyHandler extends EntityHandler {
 		ValidatorErrorLocalizer $errorLocalizer,
 		EntityIdParser $entityIdParser,
 		EntityIdLookup $entityIdLookup,
-		LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory,
+		FallbackLabelDescriptionLookupFactory $labelLookupFactory,
 		PropertyInfoStore $infoStore,
 		PropertyInfoBuilder $propertyInfoBuilder,
 		FieldDefinitions $propertyFieldDefinitions,
