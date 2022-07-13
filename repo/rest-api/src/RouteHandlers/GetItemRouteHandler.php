@@ -10,6 +10,7 @@ use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Domain\Serializers\ItemDataSerializer;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
@@ -74,6 +75,7 @@ class GetItemRouteHandler extends SimpleHandler {
 			$responseFactory,
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
+				new AuthenticationMiddleware(),
 			] )
 		);
 	}
@@ -98,8 +100,6 @@ class GetItemRouteHandler extends SimpleHandler {
 		} else {
 			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
-
-		$this->addAuthHeaderIfAuthenticated( $httpResponse );
 
 		return $httpResponse;
 	}
@@ -159,13 +159,6 @@ class GetItemRouteHandler extends SimpleHandler {
 
 	public function needsWriteAccess(): bool {
 		return false;
-	}
-
-	private function addAuthHeaderIfAuthenticated( Response $response ): void {
-		$user = $this->getAuthority()->getUser();
-		if ( $user->isRegistered() ) {
-			$response->setHeader( 'X-Authenticated-User', $user->getName() );
-		}
 	}
 
 }

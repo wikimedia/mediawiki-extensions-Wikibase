@@ -8,6 +8,7 @@ use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
@@ -52,6 +53,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 			$responseFactory,
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
+				new AuthenticationMiddleware(),
 			] )
 		);
 	}
@@ -75,8 +77,6 @@ class GetStatementRouteHandler extends SimpleHandler {
 		} else {
 			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
-
-		$this->addAuthHeaderIfAuthenticated( $httpResponse );
 
 		return $httpResponse;
 	}
@@ -118,13 +118,6 @@ class GetStatementRouteHandler extends SimpleHandler {
 		);
 
 		return $httpResponse;
-	}
-
-	private function addAuthHeaderIfAuthenticated( Response $httpResponse ): void {
-		$user = $this->getAuthority()->getUser();
-		if ( $user->isRegistered() ) {
-			$httpResponse->setHeader( 'X-Authenticated-User', $user->getName() );
-		}
 	}
 
 	private function setEtagFromRevId( Response $httpResponse, int $revId ): void {
