@@ -19,6 +19,7 @@
 	"wikibase-linkitem-input-site": "Basa:",
 	"wikibase-linkitem-input-page": "Laman:",
 	"wikibase-linkitem-confirmitem-text": "Laman nang Pian pilih sudah tataut pada [$1 item di pusat panabunan data kami]. Silakan ditagasi {{PLURAL:$2|laman}} nang ditampaiakan di bawah ngini {{PLURAL:$2|adalah}} {{PLURAL:$2|laman}} nang handak Pian tautakan.",
+	"wikibase-linkitem-success-link": "Laman sudah bahasil ditautakan. Pian kawa mahaga butir baisi tautan itu pada [$1 ruang panabunan data pusat] kami.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Suhukakan",
 	"wikibase-rc-hide-wikidata-show": "Tampaiakan",

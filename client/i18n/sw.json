@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Hussein m mmbaga",
 			"Kipala",
 			"Yasen igra"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} kifungu",
 	"wikibase-editlinks": "Hariri viungo",
 	"wikibase-editlinkstitle": "Hariri viungo vya lugha zingine",
 	"wikibase-addlinkstitle": "Ongeza viungo vya lugha zingine",
@@ -14,6 +16,7 @@
 	"wikibase-linkitem-selectlink": "Teua tovuti na ukurasa unavyotaka kuunga na ukurasa huu",
 	"wikibase-linkitem-input-site": "Lugha:",
 	"wikibase-linkitem-input-page": "Ukurasa:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ficha",
 	"wikibase-rc-hide-wikidata-show": "Onyesha",
 	"wikibase-otherprojects": "Miradi mingine"
