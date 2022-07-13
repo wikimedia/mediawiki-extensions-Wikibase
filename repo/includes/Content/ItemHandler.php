@@ -22,7 +22,7 @@ use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Repo\Actions\EditEntityAction;
 use Wikibase\Repo\Actions\HistoryEntityAction;
@@ -57,7 +57,7 @@ class ItemHandler extends EntityHandler {
 	private $entityIdLookup;
 
 	/**
-	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 * @var FallbackLabelDescriptionLookupFactory
 	 */
 	private $labelLookupFactory;
 
@@ -86,7 +86,7 @@ class ItemHandler extends EntityHandler {
 		SiteLinkStore $siteLinkStore,
 		BagOStuffSiteLinkConflictLookup $bagOStuffSiteLinkConflictLookup,
 		EntityIdLookup $entityIdLookup,
-		LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory,
+		FallbackLabelDescriptionLookupFactory $labelLookupFactory,
 		FieldDefinitions $itemFieldDefinitions,
 		PropertyDataTypeLookup $dataTypeLookup,
 		RepoDomainDb $db,

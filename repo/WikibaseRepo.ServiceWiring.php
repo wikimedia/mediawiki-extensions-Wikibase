@@ -1269,7 +1269,7 @@ return [
 				->newSiteLinkStore(),
 			WikibaseRepo::getBagOStuffSiteLinkConflictLookup( $services ),
 			WikibaseRepo::getEntityIdLookup( $services ),
-			WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory( $services ),
+			WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services ),
 			WikibaseRepo::getFieldDefinitionsFactory( $services )
 				->getFieldDefinitionsByType( Item::ENTITY_TYPE ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
