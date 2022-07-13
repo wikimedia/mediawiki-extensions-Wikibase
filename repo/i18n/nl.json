@@ -31,7 +31,8 @@
 			"Southparkfan",
 			"User555",
 			"Wiki13",
-			"아라"
+			"아라",
+			"Elderson"
 		]
 	},
 	"wikibase-desc": "Opslagplaats voor gestructureerde gegevens",
@@ -168,7 +169,7 @@
 	"wikibase-validator-bad-value-type": "Onjuist waardetype $1, verwacht was $2",
 	"wikibase-validator-bad-data-type": "Ongeldig gegevenstype: $1",
 	"wikibase-validator-bad-url": "URL's mogen bepaalde tekens zoals spaties en vierkante haken niet bevatten: $1",
-	"wikibase-validator-url-scheme-missing": "Deze URL mist een protocol zoals \"https://\": $1",
+	"wikibase-validator-url-scheme-missing": "Deze URL mist een protocol zoals \"https://\" of \"mailto:\": $1",
 	"wikibase-validator-bad-url-scheme": "Het URL-protocol \"$1\" wordt niet ondersteund.",
 	"wikibase-validator-unknown-unit": "Onbekende eenheid: $1",
 	"wikibase-validator-not-allowed": "Ongeldige waarde: $1",
