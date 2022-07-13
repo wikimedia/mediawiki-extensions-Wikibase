@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
@@ -47,7 +47,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	private $badgeItems;
 
 	/**
-	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 * @var FallbackLabelDescriptionLookupFactory
 	 */
 	private $labelDescriptionLookupFactory;
 
@@ -86,7 +86,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 * @param string[] $siteLinkGroups
 	 * @param string[] $badgeItems
-	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
+	 * @param FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
 	 */
 	public function __construct(
@@ -98,7 +98,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		array $siteLinkGroups,
 		array $badgeItems,
-		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		SiteLinkChangeOpFactory $siteLinkChangeOpFactory
 	) {
 		parent::__construct(
@@ -121,7 +121,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		MediawikiEditEntityFactory $editEntityFactory,
 		EntityTitleLookup $entityTitleLookup,
-		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		SettingsArray $repoSettings,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		SummaryFormatter $summaryFormatter
