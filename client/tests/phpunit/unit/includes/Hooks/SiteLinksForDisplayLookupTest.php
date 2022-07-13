@@ -81,7 +81,8 @@ class SiteLinksForDisplayLookupTest extends \MediaWikiUnitTestCase {
 	}
 
 	public function testGetSiteLinksForPageTitle_knownEntity() {
-		$title = Title::newFromTextThrow( 'Foo sr' );
+		$title = $this->createMock( Title::class );
+		$title->method( 'getPrefixedText' )->willReturn( 'Foo sr' );
 		$item = new Item( new ItemId( 'Q1' ) );
 		$item->setLabel( 'en', 'Foo' );
 		$links = $item->getSiteLinkList();
