@@ -14,7 +14,7 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 
 /**
  * Adds the Entity usage data in ActionEdit.
@@ -35,14 +35,14 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 	private $usageLookup;
 
 	/**
-	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 * @var FallbackLabelDescriptionLookupFactory
 	 */
 	private $labelDescriptionLookupFactory;
 
 	public function __construct(
 		RepoLinker $repoLinker,
 		UsageLookup $usageLookup,
-		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
+		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	) {
 		$this->repoLinker = $repoLinker;
 		$this->usageLookup = $usageLookup;
@@ -50,7 +50,7 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 	}
 
 	public static function factory(
-		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		RepoLinker $repoLinker,
 		ClientStore $store
 	): self {

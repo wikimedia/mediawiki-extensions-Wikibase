@@ -14,7 +14,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -49,7 +49,7 @@ class InfoActionHookHandler implements InfoActionHook {
 	private $usageLookup;
 
 	/**
-	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 * @var FallbackLabelDescriptionLookupFactory
 	 */
 	private $labelDescriptionLookupFactory;
 
@@ -64,7 +64,7 @@ class InfoActionHookHandler implements InfoActionHook {
 		SiteLinkLookup $siteLinkLookup,
 		$siteId,
 		UsageLookup $usageLookup,
-		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		DescriptionLookup $descriptionLookup
 	) {
 		$this->namespaceChecker = $namespaceChecker;
@@ -78,7 +78,7 @@ class InfoActionHookHandler implements InfoActionHook {
 
 	public static function factory(
 		DescriptionLookup $descriptionLookup,
-		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		NamespaceChecker $namespaceChecker,
 		RepoLinker $repoLinker,
 		SettingsArray $clientSettings,
