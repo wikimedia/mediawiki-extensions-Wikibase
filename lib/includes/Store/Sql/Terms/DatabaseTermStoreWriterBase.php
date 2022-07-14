@@ -4,8 +4,6 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use JobQueueGroup;
-use MediaWiki\Logger\LoggerFactory;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
@@ -57,40 +55,24 @@ abstract class DatabaseTermStoreWriterBase {
 
 	protected function delete( Int32EntityId $entityId ): void {
 		$termInLangIdsToClean = $this->deleteTermsWithoutClean( $entityId );
-		$this->submitJobToCleanTermStorageRowsIfUnused( $entityId, $termInLangIdsToClean );
+		$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
 	}
 
 	protected function store( Int32EntityId $entityId, Fingerprint $fingerprint ): void {
 		$termInLangIdsToClean = $this->acquireAndInsertTerms( $entityId, $fingerprint );
-		$this->submitJobToCleanTermStorageRowsIfUnused( $entityId, $termInLangIdsToClean );
+		$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
 	}
 
-	private function submitJobToCleanTermStorageRowsIfUnused( Int32EntityId $entityId, array $termInLangIdsToClean ): void {
+	private function submitJobToCleanTermStorageRowsIfUnused( array $termInLangIdsToClean ): void {
 		if ( $termInLangIdsToClean === [] ) {
 			return;
 		}
 
-		/** @var EntityId $entityId */
-		'@phan-var EntityId $entityId';
-		$entityIdSerialization = $entityId->getSerialization();
-		$method = __METHOD__;
-
-		$this->getDbw()->onTransactionCommitOrIdle( function() use (
-			$entityIdSerialization,
-			$termInLangIdsToClean,
-			$method
-		) {
+		$this->getDbw()->onTransactionCommitOrIdle( function() use ( $termInLangIdsToClean ) {
 			foreach ( $termInLangIdsToClean as $termInLangId ) {
-				LoggerFactory::getInstance( 'WikibaseTerms' )
-					->debug( $method . ': schedule CleanTermsIfUnusedJob for {id}', [
-						'id' => $entityIdSerialization,
-						'target' => $termInLangId,
-						'phab' => 'T311307',
-					] );
 				$this->jobQueueGroup->push(
 					CleanTermsIfUnusedJob::getJobSpecificationNoTitle( [
 						CleanTermsIfUnusedJob::TERM_IN_LANG_IDS => [ $termInLangId ],
-						CleanTermsIfUnusedJob::ENTITY_ID => $entityIdSerialization,
 					] )
 				);
 			}
