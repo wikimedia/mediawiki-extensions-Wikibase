@@ -56,7 +56,10 @@
 	"wikibase-parse-error": "Vââǥǥlaž ärvv.",
 	"wikibase-listdatatypes-monolingualtext-head": "Õõutǩiõllsaž teʹkstt",
 	"wikibase-listdatatypes-multilingualtext-head": "Määŋgǩiõllsaž teʹkstt",
+	"wikibase-listdatatypes-string-head": "Miârkkräidd",
 	"wikibase-listdatatypes-url-head": "URL",
+	"wikibase-listdatavaluetypes-name-string": "miârkkräidd",
+	"wikibase-listdatavaluetypes-name-monolingualtext": "õõutǩiõllsaž teʹkstt",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-query": "Wikibase-kõjldõs"
 }
