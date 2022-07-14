@@ -3,13 +3,16 @@
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemStatementsJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\NotModifiedPreconditionMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsErrorResponse;
@@ -24,8 +27,6 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class GetItemStatementsRouteHandler extends SimpleHandler {
-	use ConditionalRequestsHelper;
-
 	private const ID_PATH_PARAM = 'id';
 
 	/**
@@ -69,6 +70,14 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
 				new AuthenticationMiddleware(),
+				new NotModifiedPreconditionMiddleware(
+					new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+						WikibaseRepo::getEntityRevisionLookup()
+					),
+					function ( RequestInterface $request ): string {
+						return $request->getPathParam( self::ID_PATH_PARAM );
+					}
+				),
 			] )
 		);
 	}
@@ -97,18 +106,10 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 	}
 
 	private function newSuccessHttpResponse( GetItemStatementsSuccessResponse $useCaseResponse ): Response {
-		$revId = $useCaseResponse->getRevisionId();
-
-		// This performs a *precondition* check post use case execution. Maybe needs to be moved into the use case in other scenarios.
-		// A drawback of doing this check here is that we already fetched and serialized a whole Item object.
-		if ( $this->isNotModified( $revId, $useCaseResponse->getLastModified() ) ) {
-			return $this->newNotModifiedResponse( $revId );
-		}
-
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
-		$this->setEtagFromRevId( $httpResponse, $revId );
+		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
 		$httpResponse->setBody( new StringStream( $this->successPresenter->getJson( $useCaseResponse ) ) );
 
 		return $httpResponse;
