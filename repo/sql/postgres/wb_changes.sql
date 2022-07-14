@@ -5,7 +5,7 @@
 CREATE TABLE wb_changes (
   change_id SERIAL NOT NULL,
   change_type VARCHAR(25) NOT NULL,
-  change_time TEXT NOT NULL,
+  change_time TIMESTAMPTZ NOT NULL,
   change_object_id TEXT NOT NULL,
   change_revision_id INT NOT NULL,
   change_user_id INT NOT NULL,

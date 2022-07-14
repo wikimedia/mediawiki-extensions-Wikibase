@@ -5,7 +5,7 @@
 CREATE TABLE /*_*/wb_changes (
   change_id INT UNSIGNED AUTO_INCREMENT NOT NULL,
   change_type VARCHAR(25) NOT NULL,
-  change_time VARBINARY(14) NOT NULL,
+  change_time BINARY(14) NOT NULL,
   change_object_id VARBINARY(14) NOT NULL,
   change_revision_id INT UNSIGNED NOT NULL,
   change_user_id INT UNSIGNED NOT NULL,

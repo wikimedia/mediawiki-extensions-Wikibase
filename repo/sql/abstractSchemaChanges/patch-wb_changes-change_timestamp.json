@@ -1,0 +1,111 @@
+{
+	"comment": "Adding index on change_object_id (T291086)",
+	"before": {
+		"name": "wb_changes",
+		"comment": "Change feed.",
+		"columns": [
+			{
+				"name": "change_id",
+				"type": "integer",
+				"comment": "Id of change",
+				"options": { "unsigned": true, "notnull": true, "autoincrement": true }
+			},
+			{
+				"name": "change_type",
+				"type": "string",
+				"comment": "Type of the change",
+				"options": { "length": 25, "notnull": true }
+			},
+			{
+				"name": "change_time",
+				"type": "binary",
+				"comment": "Time the change was made",
+				"options": { "length": 14, "notnull": true }
+			},
+			{
+				"name": "change_object_id",
+				"type": "binary",
+				"comment": "The full id of the object (ie item, query) the change affects",
+				"options": { "length": 14, "notnull": true }
+			},
+			{
+				"name": "change_revision_id",
+				"type": "integer",
+				"comment": "The id of the revision on the repo that made the change",
+				"options": { "unsigned": true, "notnull": true }
+			},
+			{
+				"name": "change_user_id",
+				"type": "integer",
+				"comment": "The id of the user on the repo that made the change",
+				"options": { "unsigned": true, "notnull": true }
+			},
+			{
+				"name": "change_info",
+				"type": "blob",
+				"comment": "Holds additional info about the change, inc diff and stuff",
+				"options": { "length": 16777215, "notnull": true }
+			}
+		],
+		"indexes": [
+			{ "name": "wb_changes_change_time", "columns": [ "change_time" ], "unique": false },
+			{ "name": "wb_changes_change_revision_id", "columns": [ "change_revision_id" ], "unique": false },
+			{ "name": "change_object_id", "columns": [ "change_object_id" ], "unique": false }
+		],
+		"pk": [ "change_id" ]
+	},
+	"after": {
+		"name": "wb_changes",
+		"comment": "Change feed.",
+		"columns": [
+			{
+				"name": "change_id",
+				"type": "integer",
+				"comment": "Id of change",
+				"options": { "unsigned": true, "notnull": true, "autoincrement": true }
+			},
+			{
+				"name": "change_type",
+				"type": "string",
+				"comment": "Type of the change",
+				"options": { "length": 25, "notnull": true }
+			},
+			{
+				"name": "change_time",
+				"type": "mwtimestamp",
+				"comment": "Time the change was made",
+				"options": { "notnull": true }
+			},
+			{
+				"name": "change_object_id",
+				"type": "binary",
+				"comment": "The full id of the object (ie item, query) the change affects",
+				"options": { "length": 14, "notnull": true }
+			},
+			{
+				"name": "change_revision_id",
+				"type": "integer",
+				"comment": "The id of the revision on the repo that made the change",
+				"options": { "unsigned": true, "notnull": true }
+			},
+			{
+				"name": "change_user_id",
+				"type": "integer",
+				"comment": "The id of the user on the repo that made the change",
+				"options": { "unsigned": true, "notnull": true }
+			},
+			{
+				"name": "change_info",
+				"type": "blob",
+				"comment": "Holds additional info about the change, inc diff and stuff",
+				"options": { "length": 16777215, "notnull": true }
+			}
+		],
+		"indexes": [
+			{ "name": "wb_changes_change_time", "columns": [ "change_time" ], "unique": false },
+			{ "name": "wb_changes_change_revision_id", "columns": [ "change_revision_id" ], "unique": false },
+			{ "name": "change_object_id", "columns": [ "change_object_id" ], "unique": false }
+		],
+		"pk": [ "change_id" ]
+	}
+}

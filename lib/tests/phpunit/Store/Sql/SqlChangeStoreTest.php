@@ -154,7 +154,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 		$expected = [
 			'change_id' => (string)$change->getId(),
 			'change_type' => 'wikibase-item~add',
-			'change_time' => '20121026200049',
+			'change_time' => $this->db->timestamp( '20121026200049' ),
 			'change_object_id' => 'Q21389475',
 			'change_revision_id' => '0',
 			'change_user_id' => '0',

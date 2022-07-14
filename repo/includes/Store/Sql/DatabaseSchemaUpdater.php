@@ -90,6 +90,13 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			'change_object_id',
 			$this->getUpdateScriptPath( 'patch-wb_changes-change_object_id-index', $db->getType() )
 		);
+		if ( $type !== 'sqlite' ) {
+			$updater->modifyExtensionField(
+				'wb_changes',
+				'change_time',
+				$this->getUpdateScriptPath( 'patch-wb_changes-change_timestamp', $type )
+			);
+		}
 
 		$updater->dropExtensionTable( 'wb_changes_dispatch' );
 	}
