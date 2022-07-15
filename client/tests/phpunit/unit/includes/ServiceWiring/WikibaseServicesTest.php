@@ -2,11 +2,17 @@
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
+use DataValues\Deserializers\DataValueDeserializer;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
+use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\WikibaseServices;
+use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
@@ -32,10 +38,22 @@ class WikibaseServicesTest extends ServiceWiringTestCase {
 				) ],
 				new SubEntityTypesMapper( [] )
 			) );
-		$this->mockService(
-			'WikibaseClient.SingleEntitySourceServicesFactory',
-			$this->createMock( SingleEntitySourceServicesFactory::class )
-		);
+		$this->mockService( 'WikibaseClient.EntityIdParser',
+			new DispatchingEntityIdParser( [] ) );
+		$this->mockService( 'WikibaseClient.EntityIdComposer',
+			new EntityIdComposer( [] ) );
+		$this->mockService( 'WikibaseClient.DataValueDeserializer',
+			new DataValueDeserializer() );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getNameTableStoreFactory' );
+		$this->mockService( 'WikibaseClient.DataAccessSettings',
+			new DataAccessSettings( 0 ) );
+		$this->mockService( 'WikibaseClient.LanguageFallbackChainFactory',
+			$this->createMock( LanguageFallbackChainFactory::class ) );
+		$this->mockService( 'WikibaseClient.EntityTypeDefinitions',
+			new EntityTypeDefinitions( [] ) );
+		$this->mockService( 'WikibaseClient.RepoDomainDbFactory',
+			$this->createMock( RepoDomainDbFactory::class ) );
 
 		$this->assertInstanceOf(
 			WikibaseServices::class,

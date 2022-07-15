@@ -1696,25 +1696,6 @@ return [
 		return WikibaseSettings::getRepoSettings();
 	},
 
-	// TODO: This service is just a convenience service to simplify the transition away from SingleEntitySourceServices,
-	//       and thus should eventually be removed. See T277731.
-	'WikibaseRepo.SingleEntitySourceServicesFactory' => function (
-		MediaWikiServices $services
-	): SingleEntitySourceServicesFactory {
-		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
-		return new SingleEntitySourceServicesFactory(
-			WikibaseRepo::getEntityIdParser( $services ),
-			WikibaseRepo::getEntityIdComposer( $services ),
-			WikibaseRepo::getDataValueDeserializer( $services ),
-			$services->getNameTableStoreFactory(),
-			WikibaseRepo::getDataAccessSettings( $services ),
-			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
-			WikibaseRepo::getStorageEntitySerializer( $services ),
-			$entityTypeDefinitions,
-			WikibaseRepo::getRepoDomainDbFactory( $services )
-		);
-	},
-
 	'WikibaseRepo.SiteLinkBadgeChangeOpSerializationValidator' => function (
 		MediaWikiServices $services
 	): SiteLinkBadgeChangeOpSerializationValidator {
@@ -2126,7 +2107,17 @@ return [
 
 	'WikibaseRepo.WikibaseServices' => function ( MediaWikiServices $services ): WikibaseServices {
 		$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions( $services );
-		$singleEntitySourceServicesFactory = WikibaseRepo::getSingleEntitySourceServicesFactory( $services );
+		$singleEntitySourceServicesFactory = new SingleEntitySourceServicesFactory(
+			WikibaseRepo::getEntityIdParser( $services ),
+			WikibaseRepo::getEntityIdComposer( $services ),
+			WikibaseRepo::getDataValueDeserializer( $services ),
+			$services->getNameTableStoreFactory(),
+			WikibaseRepo::getDataAccessSettings( $services ),
+			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
+			WikibaseRepo::getStorageEntitySerializer( $services ),
+			WikibaseRepo::getEntityTypeDefinitions( $services ),
+			WikibaseRepo::getRepoDomainDbFactory( $services )
+		);
 
 		$singleSourceServices = [];
 
