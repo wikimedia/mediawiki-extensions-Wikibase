@@ -7,12 +7,8 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 use Language;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
-use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 
 /**
  * @coversNothing
@@ -24,21 +20,9 @@ use Wikibase\Lib\TermLanguageFallbackChain;
 class SidebarLinkBadgeDisplayTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
-		$fallbackChain = $this->createMock( TermLanguageFallbackChain::class );
-		$fallbackChain->method( 'getFetchLanguageCodes' )
-			->willReturn( [ 'somecode' ] );
-
-		$fallbackChainFactory = $this->createMock( LanguageFallbackChainFactory::class );
-		$fallbackChainFactory->method( 'newFromLanguage' )
-			->willReturn( $fallbackChain );
-
 		$this->mockService(
-			'WikibaseClient.LanguageFallbackLabelDescriptionLookupFactory',
-			new LanguageFallbackLabelDescriptionLookupFactory(
-				$fallbackChainFactory,
-				$this->createMock( TermLookup::class ),
-				$this->createMock( TermBuffer::class )
-			)
+			'WikibaseClient.FallbackLabelDescriptionLookupFactory',
+			$this->createMock( FallbackLabelDescriptionLookupFactory::class )
 		);
 		$this->mockService(
 			'WikibaseClient.Settings',
