@@ -7,7 +7,6 @@ use Psr\Log\LoggerInterface;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Hooks\WikibaseClientHookRunner;
-use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\SettingsArray;
@@ -23,16 +22,9 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 class ChangeHandlerTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$mockStore = $this->createMock( ClientStore::class );
-		$mockRevisionLookup = $this->createMock( EntityRevisionLookup::class );
-
-		$mockStore->expects( $this->once() )
-			->method( 'getEntityRevisionLookup' )
-			->willReturn( $mockRevisionLookup );
-
 		$this->mockService(
-			'WikibaseClient.Store',
-			$mockStore
+			'WikibaseClient.EntityRevisionLookup',
+			$this->createMock( EntityRevisionLookup::class )
 		);
 
 		$this->mockService(

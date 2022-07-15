@@ -62,6 +62,7 @@ use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
@@ -170,6 +171,11 @@ final class WikibaseClient {
 	public static function getEntityLookup( ContainerInterface $services = null ): EntityLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntityLookup' );
+	}
+
+	public static function getEntityRevisionLookup( ContainerInterface $services = null ): EntityRevisionLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.EntityRevisionLookup' );
 	}
 
 	public static function getTermBuffer( ContainerInterface $services = null ): TermBuffer {

@@ -107,6 +107,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
@@ -171,7 +172,7 @@ return [
 		$pageUpdater->setRecentChangesBatchSize( $settings->getSetting( 'recentChangesBatchSize' ) );
 
 		$changeListTransformer = new ChangeRunCoalescer(
-			WikibaseClient::getStore( $services )->getEntityRevisionLookup(),
+			WikibaseClient::getEntityRevisionLookup( $services ),
 			WikibaseClient::getEntityChangeFactory( $services ),
 			$logger,
 			$settings->getSetting( 'siteGlobalID' )
@@ -413,6 +414,10 @@ return [
 			},
 			new EntityNamespaceLookup( [], [] )
 		);
+	},
+
+	'WikibaseClient.EntityRevisionLookup' => function ( MediaWikiServices $services ): EntityRevisionLookup {
+		return WikibaseClient::getStore( $services )->getEntityRevisionLookup();
 	},
 
 	'WikibaseClient.EntitySourceAndTypeDefinitions' => function ( MediaWikiServices $services ): EntitySourceAndTypeDefinitions {
@@ -793,7 +798,7 @@ return [
 		MediaWikiServices $services
 	): RedirectResolvingLatestRevisionLookup {
 		return new RedirectResolvingLatestRevisionLookup(
-			WikibaseClient::getStore( $services )->getEntityRevisionLookup()
+			WikibaseClient::getEntityRevisionLookup( $services )
 		);
 	},
 
@@ -1037,7 +1042,7 @@ return [
 			new EntityUsageFactory( WikibaseClient::getEntityIdParser( $services ) ),
 			new UsageDeduplicator( $usageModifierLimits ),
 			new RevisionBasedEntityRedirectTargetLookup(
-				WikibaseClient::getStore( $services )->getEntityRevisionLookup()
+				WikibaseClient::getEntityRevisionLookup( $services )
 			)
 		);
 	},
