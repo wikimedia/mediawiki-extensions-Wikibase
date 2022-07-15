@@ -4,13 +4,13 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use SpecialPageTestBase;
 use Title;
-use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\DataTypeFactory;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
@@ -52,16 +52,16 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		return $propertyInfoLookup;
 	}
 
-	/**
-	 * @return PrefetchingTermLookup
-	 */
-	private function getPrefetchingTermLookup() {
-		$lookup = $this->getMockBuilder( PrefetchingTermLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$lookup->method( 'getLabels' )
-			->willReturnCallback( function( PropertyId $id ) {
-				return [ 'en' => 'Property with label ' . $id->getSerialization() ];
+	private function getFallbackLabelDescriptionLookup(): FallbackLabelDescriptionLookup {
+		$lookup = $this->createMock( FallbackLabelDescriptionLookup::class );
+		$lookup->method( 'getLabel' )
+			->willReturnCallback( function( PropertyId $id ): TermFallback {
+				return new TermFallback(
+					'en',
+					'Property with label ' . $id->getSerialization(),
+					'en',
+					'en'
+				);
 			} );
 		return $lookup;
 	}
@@ -88,20 +88,15 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		$entityIdFormatterFactory = new EntityIdHtmlLinkFormatterFactory(
 			$this->getEntityTitleLookup()
 		);
-		$termLookup = $this->getPrefetchingTermLookup();
-		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
-		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
-			$languageFallbackChainFactory,
-			$termLookup
-		);
+		$labelDescriptionLookupFactory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
+		$labelDescriptionLookupFactory->method( 'newLabelDescriptionLookup' )
+			->willReturn( $this->getFallbackLabelDescriptionLookup() );
 		$specialPage = new SpecialListProperties(
 			$this->getDataTypeFactory(),
 			$this->getPropertyInfoStore(),
 			$labelDescriptionLookupFactory,
 			$entityIdFormatterFactory,
-			$this->getEntityTitleLookup(),
-			$termLookup,
-			$languageFallbackChainFactory
+			$this->getEntityTitleLookup()
 		);
 
 		return $specialPage;

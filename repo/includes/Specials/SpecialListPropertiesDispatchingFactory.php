@@ -3,12 +3,10 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Specials;
 
-use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\DataTypeFactory;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
 use Wikibase\Repo\Store\Store;
 use Wikibase\View\EntityIdFormatterFactory;
@@ -31,9 +29,7 @@ class SpecialListPropertiesDispatchingFactory {
 		DataTypeFactory $dataTypeFactory,
 		EntityIdFormatterFactory $entityIdFormatterFactory,
 		EntityTitleLookup $entityTitleLookup,
-		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
-		PrefetchingTermLookup $prefetchingTermLookup,
+		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		SettingsArray $repoSettings,
 		Store $store
 	) {
@@ -49,9 +45,7 @@ class SpecialListPropertiesDispatchingFactory {
 			$store->getPropertyInfoLookup(),
 			$labelDescriptionLookupFactory,
 			$entityIdFormatterFactory,
-			$entityTitleLookup,
-			$prefetchingTermLookup,
-			$languageFallbackChainFactory
+			$entityTitleLookup
 		);
 	}
 }
