@@ -32,7 +32,6 @@ class CleanTermsIfUnusedJob extends Job {
 
 	public const JOB_NAME = 'CleanTermsIfUnused';
 	public const TERM_IN_LANG_IDS = 'termInLangIds';
-	public const ENTITY_ID = 'entityId';
 
 	/**
 	 * @param Title $unused But required due to the code in Job::factory currently.
@@ -66,23 +65,7 @@ class CleanTermsIfUnusedJob extends Job {
 	 */
 	public function run() {
 		$termInLangIds = $this->params[self::TERM_IN_LANG_IDS];
-		if ( isset( $this->params[self::ENTITY_ID] ) ) {
-			LoggerFactory::getInstance( 'WikibaseTerms' )
-				->debug( __METHOD__ . ': running CleanTermsIfUnusedJob for {id}', [
-					'id' => $this->params[self::ENTITY_ID],
-					'target' => $termInLangIds,
-					'phab' => 'T311307',
-				] );
-		}
 		$this->termInLangIdsCleaner->cleanTermInLangIds( $termInLangIds );
-		if ( isset( $this->params[self::ENTITY_ID] ) ) {
-			LoggerFactory::getInstance( 'WikibaseTerms' )
-				->debug( __METHOD__ . ': ran CleanTermsIfUnusedJob for {id}', [
-					'id' => $this->params[self::ENTITY_ID],
-					'target' => $termInLangIds,
-					'phab' => 'T311307',
-				] );
-		}
 		return true;
 	}
 }
