@@ -5,9 +5,9 @@ namespace Wikibase\Client\Tests\Integration\Specials;
 use SpecialPageTestBase;
 use Wikibase\Client\Specials\SpecialPagesWithBadges;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\DataModel\Term\TermFallback;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 
 /**
  * @covers \Wikibase\Client\Specials\SpecialPagesWithBadges
@@ -28,33 +28,28 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 		$this->setUserLang( 'qqx' );
 	}
 
-	/**
-	 * @return LabelDescriptionLookup
-	 */
-	private function getLabelLookup() {
-		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
+	private function getLabelLookup(): FallbackLabelDescriptionLookup {
+		$labelLookup = $this->createMock( FallbackLabelDescriptionLookup::class );
 		$labelLookup->method( 'getLabel' )
-			->willReturnCallback( function( ItemId $id ) {
-				return new Term( 'en', 'Label of ' . $id->getSerialization() );
+			->willReturnCallback( function( ItemId $id ): ?TermFallback {
+				return new TermFallback(
+					'en',
+					'Label of ' . $id->getSerialization(),
+					'en',
+					'en'
+				);
 			} );
 
 		return $labelLookup;
 	}
 
-	/**
-	 * @return LanguageFallbackLabelDescriptionLookupFactory
-	 */
-	private function getLabelDescriptionLookupFactory() {
+	private function getLabelDescriptionLookupFactory(): FallbackLabelDescriptionLookupFactory {
 		$itemIds = [
 			new ItemId( 'Q123' ),
 			new ItemId( 'Q456' )
 		];
 
-		$labelDescriptionLookupFactory = $this->getMockBuilder(
-				LanguageFallbackLabelDescriptionLookupFactory::class
-			)
-			->disableOriginalConstructor()
-			->getMock();
+		$labelDescriptionLookupFactory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
 		$labelDescriptionLookupFactory->expects( $this->once() )
 			->method( 'newLabelDescriptionLookup' )
 			->with( $this->anything(), $itemIds )
