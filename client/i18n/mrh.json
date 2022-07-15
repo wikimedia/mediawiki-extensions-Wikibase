@@ -3,6 +3,7 @@
 		"authors": [
 			"Amire80",
 			"Laitei",
+			"Taytay",
 			"Teitei Para"
 		]
 	},
@@ -12,11 +13,11 @@
 	"wikibase-editlinks": "Linkzy taopathi",
 	"wikibase-editlinkstitle": "Interlanguage links taopathi",
 	"wikibase-linkitem-addlinks": "Linkzy khô teh",
-	"wikibase-linkitem-title": "Châhmia nah pazao teh",
-	"wikibase-linkitem-linkpage": "Châhmia nah pazao teh",
-	"wikibase-linkitem-selectlink": "He châhmia nah na pazao khohpa châ hmia acv site kha atlyh bei teh",
+	"wikibase-linkitem-title": "Hmia nah pazao teh",
+	"wikibase-linkitem-linkpage": "Hmia nah pazao teh",
+	"wikibase-linkitem-selectlink": "He hmia nah na pazao khohpa châ hmia cvk site kha atlyh bei teh.",
 	"wikibase-linkitem-input-site": "Reihchâ:",
-	"wikibase-linkitem-input-page": "Châhmia:",
+	"wikibase-linkitem-input-page": "Hmia:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Nyu",
 	"wikibase-rc-hide-wikidata-show": "Palâ",
