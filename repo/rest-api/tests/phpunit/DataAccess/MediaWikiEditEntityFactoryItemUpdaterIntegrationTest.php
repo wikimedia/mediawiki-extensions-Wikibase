@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\RestApi\DataAccess;
 
 use MediaWikiIntegrationTestCase;
+use Psr\Log\NullLogger;
 use RequestContext;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Statement\StatementGuid;
@@ -32,7 +33,8 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 
 		$updater = new MediaWikiEditEntityFactoryItemUpdater(
 			RequestContext::getMain(),
-			WikibaseRepo::getEditEntityFactory()
+			WikibaseRepo::getEditEntityFactory(),
+			new NullLogger()
 		);
 		$newRevision = $updater->update( $itemToUpdate, new EditMetadata( [], false, null ) );
 
@@ -57,7 +59,8 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 
 		$updater = new MediaWikiEditEntityFactoryItemUpdater(
 			RequestContext::getMain(),
-			WikibaseRepo::getEditEntityFactory()
+			WikibaseRepo::getEditEntityFactory(),
+			new NullLogger()
 		);
 		$newRevision = $updater->update( $itemToUpdate, new EditMetadata( [], false, null ) );
 

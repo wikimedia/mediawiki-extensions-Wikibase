@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\RemoveItemStatement;
 
 use CommentStore;
-use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -97,38 +96,6 @@ class RemoveItemStatementTest extends TestCase {
 
 		$response = $this->newUseCase()->execute( $request );
 		$this->assertInstanceOf( RemoveItemStatementSuccessResponse::class, $response );
-	}
-
-	public function testRemoveStatement_itemNotDeleted(): void {
-		$itemId = 'Q123';
-		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$statement = NewStatement::forProperty( 'P123' )->withGuid( $statementId )->withValue( 'statement value' )->build();
-		$item = NewItem::withId( $itemId )->andStatement( $statement )->build();
-
-		$requestData = [
-			'$statementId' => $statementId,
-			'$editTags' => [ 'some', 'tags' ],
-			'$isBot' => false,
-			'$comment' => 'potato',
-			'$username' => null,
-			'$itemId' => $itemId
-		];
-		$request = $this->newUseCaseRequest( $requestData );
-
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->expects( $this->once() )->method( 'getItem' )->willReturn( $item );
-
-		$editMetadata = new EditMetadata(
-			$requestData['$editTags'], $requestData['$isBot'], $requestData['$comment']
-		);
-		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->expects( $this->once() )
-			->method( 'update' )
-			->with( $item, $this->equalTo( $editMetadata ) )
-			->willReturn( null );
-
-		$this->expectException( Exception::class );
-		$this->newUseCase()->execute( $request );
 	}
 
 	public function testRemoveStatement_invalidRequest(): void {

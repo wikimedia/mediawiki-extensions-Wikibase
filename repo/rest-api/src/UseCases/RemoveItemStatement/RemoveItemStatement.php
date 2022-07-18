@@ -57,11 +57,7 @@ class RemoveItemStatement {
 		$item->getStatements()->removeStatementsWithGuid( $statementId );
 
 		$editMetadata = new EditMetadata( $request->getEditTags(), $request->isBot(), $request->getComment() );
-		$itemRevision = $this->itemUpdater->update( $item, $editMetadata );
-		if ( !$itemRevision
-			 || $itemRevision->getItem()->getStatements()->getFirstStatementWithGuid( $statementId ) ) {
-			throw new Exception( 'Item update failed' );
-		}
+		$this->itemUpdater->update( $item, $editMetadata );
 
 		return new RemoveItemStatementSuccessResponse();
 	}

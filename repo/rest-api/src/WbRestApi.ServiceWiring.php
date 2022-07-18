@@ -51,7 +51,8 @@ return [
 			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup() ),
 			new MediaWikiEditEntityFactoryItemUpdater(
 				RequestContext::getMain(),
-				WikibaseRepo::getEditEntityFactory()
+				WikibaseRepo::getEditEntityFactory(),
+				WikibaseRepo::getLogger( $services )
 			),
 			new GuidGenerator(),
 			new WikibaseEntityPermissionChecker(
