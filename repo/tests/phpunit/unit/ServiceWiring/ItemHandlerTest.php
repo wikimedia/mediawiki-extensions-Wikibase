@@ -11,8 +11,8 @@ use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\HashSiteLinkStore;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Search\Fields\FieldDefinitionsFactory;
 use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
@@ -51,8 +51,8 @@ class ItemHandlerTest extends ServiceWiringTestCase {
 			$this->createMock( BagOStuffSiteLinkConflictLookup::class ) );
 		$this->mockService( 'WikibaseRepo.EntityIdLookup',
 			$this->createMock( EntityIdLookup::class ) );
-		$this->mockService( 'WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory',
-			$this->createMock( LanguageFallbackLabelDescriptionLookupFactory::class ) );
+		$this->mockService( 'WikibaseRepo.FallbackLabelDescriptionLookupFactory',
+			$this->createMock( FallbackLabelDescriptionLookupFactory::class ) );
 		$fieldDefinitionsFactory = $this->createMock( FieldDefinitionsFactory::class );
 		$fieldDefinitionsFactory->expects( $this->once() )
 			->method( 'getFieldDefinitionsByType' )
