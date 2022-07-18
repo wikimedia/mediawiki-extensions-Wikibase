@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\UseCases\RemoveItemStatement;
 
+use CommentStore;
 use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -13,9 +14,15 @@ use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
+use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
+use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\Tests\NewStatement;
 
@@ -44,6 +51,8 @@ class RemoveItemStatementTest extends TestCase {
 	 */
 	private $itemUpdater;
 
+	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -66,7 +75,7 @@ class RemoveItemStatementTest extends TestCase {
 			'$username' => null,
 			'$itemId' => $itemId
 		];
-		$request = new RemoveItemStatementRequest( ...array_values( $requestData ) );
+		$request = $this->newUseCaseRequest( $requestData );
 
 		$newItemRevision = new ItemRevision(
 			NewItem::withId( $itemId )->build(),
@@ -104,8 +113,7 @@ class RemoveItemStatementTest extends TestCase {
 			'$username' => null,
 			'$itemId' => $itemId
 		];
-
-		$request = new RemoveItemStatementRequest( ...array_values( $requestData ) );
+		$request = $this->newUseCaseRequest( $requestData );
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->expects( $this->once() )->method( 'getItem' )->willReturn( $item );
@@ -123,12 +131,47 @@ class RemoveItemStatementTest extends TestCase {
 		$this->newUseCase()->execute( $request );
 	}
 
+	public function testRemoveStatement_invalidRequest(): void {
+		$requestData = [
+			'$statementId' => 'INVALID-STATEMENT-ID',
+			'$editTags' => [],
+			'$isBot' => false,
+			'$comment' => null,
+			'$username' => null,
+			'$itemId' => null
+		];
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( $requestData )
+		);
+
+		$this->assertInstanceOf( RemoveItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::INVALID_STATEMENT_ID, $response->getCode() );
+	}
+
 	private function newUseCase(): RemoveItemStatement {
+		$itemIdParser = new ItemIdParser();
 		return new RemoveItemStatement(
+			new RemoveItemStatementValidator(
+				new ItemIdValidator(),
+				new StatementIdValidator( $itemIdParser ),
+				new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
+			),
 			$this->revisionMetadataRetriever,
-			new StatementGuidParser( new ItemIdParser() ),
+			new StatementGuidParser( $itemIdParser ),
 			$this->itemRetriever,
 			$this->itemUpdater
+		);
+	}
+
+	private function newUseCaseRequest( array $requestData ): RemoveItemStatementRequest {
+		return new RemoveItemStatementRequest(
+			$requestData['$statementId'],
+			$requestData['$editTags'],
+			$requestData['$isBot'],
+			$requestData['$comment'] ?? null,
+			$requestData['$username'] ?? null,
+			$requestData['$itemId'] ?? null
 		);
 	}
 }

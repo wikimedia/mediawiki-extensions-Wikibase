@@ -15,17 +15,20 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
  */
 class RemoveItemStatement {
 
+	private $validator;
 	private $revisionMetadataRetriever;
 	private $statementIdParser;
 	private $itemRetriever;
 	private $itemUpdater;
 
 	public function __construct(
+		RemoveItemStatementValidator $validator,
 		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
 		StatementGuidParser $statementGuidParser,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater
 	) {
+		$this->validator = $validator;
 		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
 		$this->statementIdParser = $statementGuidParser;
 		$this->itemRetriever = $itemRetriever;
@@ -33,10 +36,14 @@ class RemoveItemStatement {
 	}
 
 	/**
+	 * @return RemoveItemStatementSuccessResponse | RemoveItemStatementErrorResponse
 	 * @throws Exception
 	 */
-	public function execute( RemoveItemStatementRequest $request ): RemoveItemStatementSuccessResponse {
-		// T312552: validate
+	public function execute( RemoveItemStatementRequest $request ) {
+		$validationError = $this->validator->validate( $request );
+		if ( $validationError ) {
+			return RemoveItemStatementErrorResponse::newFromValidationError( $validationError );
+		}
 
 		$statementId = $this->statementIdParser->parse( $request->getStatementId() );
 		$requestedItemId = $request->getItemId();
@@ -44,7 +51,7 @@ class RemoveItemStatement {
 		$itemId = $requestedItemId ? new ItemId( $requestedItemId ) : $statementId->getEntityId();
 		'@phan-var ItemId $itemId';
 
-		// T312559: handle latest revision not matching request, item not found, and item redirect
+		// T312559: handle item not found and item redirect
 
 		$item = $this->itemRetriever->getItem( $itemId );
 		$item->getStatements()->removeStatementsWithGuid( $statementId );
