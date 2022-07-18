@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Kai theos en ho logos",
 			"Pare Mo",
 			"Redhotchili23"
 		]
@@ -8,6 +9,8 @@
 	"wikibase-edit": "bayluhan",
 	"wikibase-add": "dugangan",
 	"wikibase-label-empty": "Walay naibutang nga etiketa",
+	"wikibase-description-empty": "Wala hatag nga paghulagway",
 	"wikibase-statementsection-statements": "Mga Panaysay",
-	"wikibase-sitelinks-special": "Ibang sityo"
+	"wikibase-sitelinks-special": "Ibang sityo",
+	"wikibase-statementview-rank-normal": "Normal nga kahamtangan"
 }

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Gilbert Ndihokubwayo"
 		]
 	},
@@ -13,6 +14,7 @@
 	"wikibase-linkitem-input-site": "Ururimi",
 	"wikibase-linkitem-input-page": "Urupapuro:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Hide",
 	"wikibase-rc-hide-wikidata-show": "Erekana",
 	"wikibase-otherprojects": "Mu yindi migambi"
 }
