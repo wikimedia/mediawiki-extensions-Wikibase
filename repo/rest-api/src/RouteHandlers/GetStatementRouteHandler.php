@@ -8,6 +8,8 @@ use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
@@ -28,18 +30,18 @@ class GetStatementRouteHandler extends SimpleHandler {
 	private $getItemStatement;
 	private $successPresenter;
 	private $responseFactory;
-	private $errorHandler;
+	private $middlewareHandler;
 
 	public function __construct(
 		GetItemStatement $getItemStatement,
 		StatementJsonPresenter $successPresenter,
 		ResponseFactory $responseFactory,
-		UnexpectedErrorHandler $errorHandler
+		MiddlewareHandler $middlewareHandler
 	) {
 		$this->getItemStatement = $getItemStatement;
 		$this->successPresenter = $successPresenter;
 		$this->responseFactory = $responseFactory;
-		$this->errorHandler = $errorHandler;
+		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): Handler {
@@ -48,7 +50,9 @@ class GetStatementRouteHandler extends SimpleHandler {
 			WbRestApi::getGetItemStatement(),
 			new StatementJsonPresenter( WbRestApi::getSerializerFactory()->newStatementSerializer() ),
 			$responseFactory,
-			new UnexpectedErrorHandler( $responseFactory, WikibaseRepo::getLogger() )
+			new MiddlewareHandler( [
+				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
+			] )
 		);
 	}
 
@@ -56,7 +60,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 	 * @param mixed ...$args
 	 */
 	public function run( ...$args ): Response {
-		return $this->errorHandler->runWithErrorHandling( [ $this, 'runUseCase' ], $args );
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
 	}
 
 	public function runUseCase( string $statementId ): Response {
