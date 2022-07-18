@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
 /**
  * @license GPL-2.0-or-later
@@ -51,14 +52,36 @@ class RemoveItemStatement {
 		$itemId = $requestedItemId ? new ItemId( $requestedItemId ) : $statementId->getEntityId();
 		'@phan-var ItemId $itemId';
 
-		// T312559: handle item not found and item redirect
+		$revisionMetadata = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
+		if ( $requestedItemId && !$revisionMetadata->itemExists() ) {
+			return new RemoveItemStatementErrorResponse(
+				ErrorResponse::ITEM_NOT_FOUND,
+				"Could not find an item with the ID: {$itemId}"
+			);
+		} elseif ( !$revisionMetadata->itemExists() ||
+			$revisionMetadata->isRedirect() ||
+			!$itemId->equals( $statementId->getEntityId() )
+		) {
+			return $this->newStatementNotFoundResponse( $request->getStatementId() );
+		}
 
 		$item = $this->itemRetriever->getItem( $itemId );
+		if ( !$item->getStatements()->getFirstStatementWithGuid( $request->getStatementId() ) ) {
+			return $this->newStatementNotFoundResponse( $request->getStatementId() );
+		}
+
 		$item->getStatements()->removeStatementsWithGuid( $statementId );
 
 		$editMetadata = new EditMetadata( $request->getEditTags(), $request->isBot(), $request->getComment() );
 		$this->itemUpdater->update( $item, $editMetadata );
 
 		return new RemoveItemStatementSuccessResponse();
+	}
+
+	private function newStatementNotFoundResponse( string $statementId ): RemoveItemStatementErrorResponse {
+		return new RemoveItemStatementErrorResponse(
+			ErrorResponse::STATEMENT_NOT_FOUND,
+			"Could not find a statement with the ID: $statementId"
+		);
 	}
 }
