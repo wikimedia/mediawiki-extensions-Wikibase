@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\PropertyInfoBuilder;
@@ -41,8 +41,8 @@ class PropertyHandlerTest extends ServiceWiringTestCase {
 			new BasicEntityIdParser() );
 		$this->mockService( 'WikibaseRepo.EntityIdLookup',
 			$this->createMock( EntityIdLookup::class ) );
-		$this->mockService( 'WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory',
-			$this->createMock( LanguageFallbackLabelDescriptionLookupFactory::class ) );
+		$this->mockService( 'WikibaseRepo.FallbackLabelDescriptionLookupFactory',
+			$this->createMock( FallbackLabelDescriptionLookupFactory::class ) );
 		$store = $this->createMock( Store::class );
 		$store->expects( $this->once() )
 			->method( 'getPropertyInfoStore' )

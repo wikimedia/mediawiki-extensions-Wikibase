@@ -1584,7 +1584,7 @@ return [
 			WikibaseRepo::getValidatorErrorLocalizer( $services ),
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getEntityIdLookup( $services ),
-			WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory( $services ),
+			WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services ),
 			WikibaseRepo::getStore( $services )
 				->getPropertyInfoStore(),
 			WikibaseRepo::getPropertyInfoBuilder( $services ),
