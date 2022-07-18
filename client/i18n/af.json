@@ -3,7 +3,8 @@
 		"authors": [
 			"Arnobarnard",
 			"Joris Darlington Quarshie",
-			"Naudefj"
+			"Naudefj",
+			"Rooiratel"
 		]
 	},
 	"wikibase-client-desc": "Kliënt vir die Wikibase-uitbreiding",
@@ -28,7 +29,7 @@
 	"wikibase-linkitem-failure": "'n Onbekende fout het tydens die skakeling na die gegewe bladsy voorgekom.",
 	"wikibase-linkitem-title": "Skakel met bladsy",
 	"wikibase-linkitem-linkpage": "Skakel met bladsy",
-	"wikibase-linkitem-selectlink": "Kies die webwerf en bladsy na waarheen u die bladsy wil skakel.",
+	"wikibase-linkitem-selectlink": "Kies asseblief 'n webwerf en 'n bladsy wat jy aan hierdie bladsy wil koppel.",
 	"wikibase-linkitem-input-site": "Taal:",
 	"wikibase-linkitem-input-page": "Bladsy:",
 	"wikibase-linkitem-confirmitem-text": "Die bladsy wat u gekies het is reeds aan 'n [$1 item in ons sentrale data-resevoir] gekoppel. Bevestig dat die onderstaande bladsye inderdaad die bladsye is waaraan u hierdie bladsy wil skakel.",

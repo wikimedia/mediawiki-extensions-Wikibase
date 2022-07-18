@@ -95,6 +95,8 @@
 	"wikibase-client-data-bridge-somevalue-error-head": "$1 vērtības labošana šobrīd nav atbalstīta",
 	"wikibase-client-data-bridge-novalue-error-head": "$1 vērtības labošana šobrīd nav atbalstīta",
 	"wikibase-client-data-bridge-saving-error-heading": "Neizdevās saglabāt izmaiņas",
+	"wikibase-client-data-bridge-saving-error-message": "Tavas izmaiņas nevarēja saglabāt kļūdas dēļ. Lūdzu, mēģini saglabāt vēlreiz.",
+	"wikibase-client-data-bridge-edit-conflict-error-heading": "Noteikts labošanas konflikts",
 	"wikibase-client-data-bridge-unknown-error-heading": "Kaut kas nogāja greizi",
 	"wikibase-client-data-bridge-error-reload-bridge": "Pārlādēt",
 	"wikibase-client-data-bridge-error-reload-page": "Pārlādēt lapu",
