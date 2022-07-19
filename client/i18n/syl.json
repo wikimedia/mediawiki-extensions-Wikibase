@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"এম আবু সাঈদ"
+			"এম আবু সাঈদ",
+			"ꠢꠣꠍꠘ ꠞꠣꠎꠣ"
 		]
 	},
 	"tooltip-t-wikibase": "ꠒꠦꠁꠐꠣ ꠞꠤꠙꠎꠤꠐꠞꠤ ꠀꠁꠐꠦꠝꠞ ꠟꠉꠦ ꠟꠣꠉꠣꠅ",
@@ -10,6 +11,14 @@
 	"wikibase-editlinks": "ꠡꠋꠎꠥꠉ ꠟꠦꠈ",
 	"wikibase-editlinkstitle": "ꠀꠘ꠆ꠔꠃꠁꠇꠤ ꠡꠋꠎꠥꠉ ꠟꠦꠈ",
 	"wikibase-linkitem-addlinks": "ꠟꠤꠋꠇ ꠟꠣꠉꠣꠅ",
+	"wikibase-linkitem-title": "ꠙꠦꠁꠎꠞ ꠟꠉꠦ ꠟꠣꠉꠣꠁꠘ",
+	"wikibase-linkitem-linkpage": "ꠙꠣꠔꠣꠞ ꠟꠉꠦ ꠎꠥꠠꠣ",
+	"wikibase-linkitem-selectlink": "ꠖꠄꠀꠇꠞꠤ ꠄꠉꠥ ꠇꠥꠑꠣ ꠀꠞ ꠙꠣꠔꠣ ꠛꠣꠌꠂꠇ꠆ꠇꠣ ꠎꠦꠇꠐꠣ ꠀꠙꠘꠦ ꠅꠇꠣꠘꠅ ꠟꠣꠉꠣꠁꠔꠣ ꠍꠣꠁꠞꠣ",
+	"wikibase-linkitem-input-site": "ꠝꠣꠔ",
+	"wikibase-linkitem-input-page": "ꠙꠣꠔꠣ:",
+	"wikibase-rc-hide-wikidata-hide": "ꠟꠥꠇꠣꠁꠘ",
+	"wikibase-rc-hide-wikidata-show": "ꠖꠦꠈꠣꠁꠘ",
 	"wikibase-rc-wikibase-edit-letter": "ꠒꠤ",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ꠟꠦꠈ"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ꠟꠦꠈ",
+	"wikibase-otherprojects": "ꠅꠘ꠆ꠘ ꠎꠦꠉꠣꠞ ꠇꠣꠝꠅꠇꠟ"
 }

@@ -3,11 +3,20 @@
 		"authors": [
 			"Pare Mo",
 			"Redhotchili23",
-			"Xerxesbcd"
+			"Xerxesbcd",
+			"Kai theos en ho logos"
 		]
 	},
 	"wikibase-comment-update": "Nabag·o ang {{WBREPONAME}}",
+	"wikibase-dataitem": "{{WBREPONAME}} butáng",
 	"wikibase-editlinks": "Liwaton ang mga enlase",
+	"wikibase-linkitem-addlinks": "Dugang mga káw-id",
+	"wikibase-linkitem-title": "I-káwad sa panid",
+	"wikibase-linkitem-linkpage": "I-sugpon sa panid",
+	"wikibase-linkitem-selectlink": "Lihog magpili sang isa ka website kag isa ka pahina nga gusto mo i-sugpon ang ini nga pahina.",
+	"wikibase-linkitem-input-site": "Pamúlong",
+	"wikibase-linkitem-input-page": "Pahina:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Itago",
 	"wikibase-rc-hide-wikidata-show": "Ipakita",
 	"wikibase-rc-wikibase-edit-title": "liwaton",

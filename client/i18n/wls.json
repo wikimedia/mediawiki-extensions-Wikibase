@@ -1,13 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Lea.Fakauvea"
+			"Lea.Fakauvea",
+			"Lea.fakauvea"
 		]
 	},
 	"wikibase-dataitem": "ki te {{WBREPONAME}}",
-	"wikibase-editlinks": "Fetogi te 'u no'o",
+	"wikibase-editlinks": "Fetogi te tāpiki",
 	"wikibase-editlinkstitle": "Fetogi te 'u no'o lea",
-	"wikibase-linkitem-addlinks": "No'o fo'ou",
+	"wikibase-linkitem-addlinks": "Tāpiki fo'ou",
+	"wikibase-linkitem-title": "Pipiki ki te pāsina",
+	"wikibase-linkitem-linkpage": "Tāpiki ki te pāsina",
+	"wikibase-linkitem-selectlink": "Fili he site mo he pāsina e ke fia tāpiki ki te pāsina 'aeni.",
+	"wikibase-linkitem-input-site": "Lea:",
+	"wikibase-linkitem-input-page": "Pāsina:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Fufū",
 	"wikibase-rc-hide-wikidata-show": "Fakahā",

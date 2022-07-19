@@ -35,8 +35,12 @@
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|teâttkäivv|teâttkääiv|teâttkäivvad}}",
 	"wikibase-entityselector-notfound": "Ni mâiʹd ij käunnʼjam",
 	"wikibase-anonymouseditwarning-heading": "Jiõk leäkku ǩeeʹrjtõõttâm sizz",
+	"wikibase-anonymouseditwarning-dismiss-button": "Muuʹtt ǩeeʹrjtõõđǩâni sizz",
+	"wikibase-itembytitle-lookup-site": "Seiddõs:",
 	"wikibase-itembytitle-lookup-page": "Seidd:",
 	"wikibase-itembytitle-submit": "Ooʒʒ",
+	"special-gotolinkedpage": "Mõõn liŋkkuum sijddu",
+	"wikibase-gotolinkedpage-lookup-site": "Seiddõs:",
 	"wikibase-gotolinkedpage-submit": "Mõõn",
 	"wikibase-itemdisambiguation-lookup-language": "Ǩiõllkoodd:",
 	"wikibase-itemdisambiguation-lookup-label": "Nõmm:",
@@ -54,7 +58,10 @@
 	"wikibase-parse-error": "Vââǥǥlaž ärvv.",
 	"wikibase-listdatatypes-monolingualtext-head": "Õõutǩiõllsaž teʹkstt",
 	"wikibase-listdatatypes-multilingualtext-head": "Määŋgǩiõllsaž teʹkstt",
+	"wikibase-listdatatypes-string-head": "Miârkkräidd",
 	"wikibase-listdatatypes-url-head": "URL",
+	"wikibase-listdatavaluetypes-name-string": "miârkkräidd",
+	"wikibase-listdatavaluetypes-name-monolingualtext": "õõutǩiõllsaž teʹkstt",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-query": "Wikibase-kõjldõs"
 }
