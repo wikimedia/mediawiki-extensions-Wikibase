@@ -42,7 +42,7 @@ class RecentChangesFinder {
 			[
 				'rc_namespace' => $attribs['rc_namespace'],
 				'rc_title' => $attribs['rc_title'],
-				'rc_timestamp' => $attribs['rc_timestamp'],
+				'rc_timestamp' => $db->timestamp( $attribs['rc_timestamp'] ),
 				'rc_source' => RecentChangeFactory::SRC_WIKIBASE
 			],
 			__METHOD__
