@@ -129,6 +129,24 @@ class StatementList implements IteratorAggregate, Countable {
 	}
 
 	/**
+	 * @param StatementGuid $statementGuid The guid of the statement to be replaced
+	 * @param Statement $statement The new statement. If it has a guid already, it will be replaced.
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function replaceStatement( StatementGuid $statementGuid, Statement $newStatement ): void {
+		$index = $this->getIndexOfFirstStatementWithGuid( (string)$statementGuid );
+		if ( $index === null ) {
+			throw new InvalidArgumentException( 'Statement with guid $statementGuid not found' );
+		}
+
+		$newStatement->setGuid( (string)$statementGuid );
+
+		// remove statement at old statement's index and replace it with new statement
+		array_splice( $this->statements, $index, 1, [ $newStatement ] );
+	}
+
+	/**
 	 * Statements that have a main snak already in the list are filtered out.
 	 * The last occurrences are retained.
 	 *
@@ -315,9 +333,19 @@ class StatementList implements IteratorAggregate, Countable {
 	 * @return Statement|null The first statement with the given GUID or null if not found.
 	 */
 	public function getFirstStatementWithGuid( $statementGuid ) {
-		foreach ( $this->statements as $statement ) {
+		$index = $this->getIndexOfFirstStatementWithGuid( $statementGuid );
+		return $this->statements[ $index ] ?? null;
+	}
+
+	/**
+	 * @param string $statementGuid
+	 *
+	 * @return int|null The index of the first statement with the given GUID or null if not found.
+	 */
+	private function getIndexOfFirstStatementWithGuid( $statementGuid ) {
+		foreach ( $this->statements as $index => $statement ) {
 			if ( $statement->getGuid() === $statementGuid ) {
-				return $statement;
+				return $index;
 			}
 		}
 
