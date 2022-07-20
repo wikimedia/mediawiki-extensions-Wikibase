@@ -6,6 +6,7 @@ use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use RequestContext;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -65,6 +66,34 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 		$newRevision = $updater->update( $itemToUpdate, new EditMetadata( [], false, null ) );
 
 		$this->assertTrue( $newRevision->getItem()->getStatements()->isEmpty() );
+	}
+
+	public function testUpdate_replaceStatementOnItem(): void {
+		$itemId = 'Q345';
+		$statementGuid = new StatementGuid( new ItemId( $itemId ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+		$oldStatement = NewStatement::forProperty( 'P123' )
+			->withGuid( $statementGuid )
+			->withValue( 'old statement value' )
+			->build();
+		$newStatement = NewStatement::forProperty( 'P123' )
+			->withGuid( $statementGuid )
+			->withValue( 'new statement value' )
+			->build();
+		$itemToUpdate = NewItem::withId( $itemId )->andStatement( $oldStatement )->build();
+
+		$this->saveNewItem( $itemToUpdate );
+
+		$itemToUpdate->getStatements()->replaceStatement( $statementGuid, $newStatement );
+
+		$updater = new MediaWikiEditEntityFactoryItemUpdater(
+			RequestContext::getMain(),
+			WikibaseRepo::getEditEntityFactory(),
+			new NullLogger()
+		);
+		$newRevision = $updater->update( $itemToUpdate, new EditMetadata( [], false, null ) );
+		$statementList = $newRevision->getItem()->getStatements();
+		$this->assertNotContains( $oldStatement, $statementList );
+		$this->assertContains( $newStatement, $statementList );
 	}
 
 	private function saveNewItem( Item $item ): void {
