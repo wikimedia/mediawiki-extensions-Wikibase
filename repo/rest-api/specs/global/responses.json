@@ -166,6 +166,51 @@
 			}
 		}
 	},
+	"InvalidReplacedStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-bot-flag": { "$ref": "./examples.json#/InvalidBotFlagExample" },
+					"invalid-statement-data": { "$ref": "./examples.json#/InvalidStatementDataExample" },
+					"invalid-operation-change-statement-id": { "$ref": "./examples.json#/InvalidOperationChangeStatementId" },
+					"invalid-operation-change-property-of-statement": { "$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidReplacedItemStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-bot-flag": { "$ref": "./examples.json#/InvalidBotFlagExample" },
+					"invalid-statement-data": { "$ref": "./examples.json#/InvalidStatementDataExample" },
+					"invalid-operation-change-statement-id": { "$ref": "./examples.json#/InvalidOperationChangeStatementId" },
+					"invalid-operation-change-property-of-statement": { "$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidStatementInput": {
 		"description": "The request cannot be processed",
 		"content": {

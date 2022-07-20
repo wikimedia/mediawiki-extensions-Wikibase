@@ -23,6 +23,25 @@
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	},
+	"put": {
+		"tags": [ "statements" ],
+		"summary": "Replace a single Statement of an Item",
+		"description": "This endpoint is also accessible through `/statements/{statement_id}`",
+		"parameters": [
+			{ "$ref": "../../global/parameters.json#/ItemId" },
+			{ "$ref": "../../global/parameters.json#/StatementId" },
+			{ "$ref": "../../global/parameters.json#/IfMatch" },
+			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
+		],
+		"requestBody": { "$ref": "../../global/requests.json#/Statement" },
+		"responses": {
+			"200": { "$ref": "../../global/responses.json#/Statement" },
+			"400": { "$ref": "../../global/responses.json#/InvalidReplacedItemStatementInput" },
+			"404": { "$ref": "../../global/responses.json#/ItemStatementNotFound" },
+			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
+	},
 	"delete": {
 		"tags": [ "statements" ],
 		"summary": "Delete a single Statement from an Item",

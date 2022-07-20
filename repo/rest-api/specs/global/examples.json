@@ -29,6 +29,24 @@
 			"message": "Not a valid statement ID: {statement_id}"
 		}
 	},
+	"InvalidStatementDataExample": {
+		"value": {
+			"code": "invalid-statement-data",
+			"message": "Invalid statement data provided"
+		}
+	},
+	"InvalidOperationChangeStatementId": {
+		"value": {
+			"code": "invalid-operation-change-statement-id",
+			"message": "Cannot change the ID of the existing statement"
+		}
+	},
+	"InvalidOperationChangePropertyOfStatement": {
+		"value": {
+			"code": "invalid-operation-change-property-of-statement",
+			"message": "Cannot change the property of the existing statement"
+		}
+	},
 	"ItemNotFoundExample": {
 		"value": {
 			"code": "item-not-found",
