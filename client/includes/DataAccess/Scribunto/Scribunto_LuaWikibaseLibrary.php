@@ -318,7 +318,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$mediaWikiServices->getTitleFormatter(),
 			$mediaWikiServices->getTitleParser(),
 			$settings->getSetting( 'siteGlobalID' ),
-			new RevisionBasedEntityRedirectTargetLookup( $store->getEntityRevisionLookup() )
+			new RevisionBasedEntityRedirectTargetLookup(
+				WikibaseClient::getEntityRevisionLookup( $mediaWikiServices ) )
 		);
 	}
 
