@@ -33,7 +33,6 @@ use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\Store\CachingPrefetchingTermLookup;
-use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
@@ -458,8 +457,6 @@ return [
 		},
 		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( DatabaseEntitySource $entitySource ) {
 			$mwServices = MediaWikiServices::getInstance();
-			$entitySourceServices = WikibaseRepo::getSingleEntitySourceServicesFactory( $mwServices )
-				->getServicesForSource( $entitySource );
 
 			$cacheSecret = hash( 'sha256', $mwServices->getMainConfig()->get( 'SecretKey' ) );
 			$bagOStuff = $mwServices->getLocalServerObjectCache();
@@ -486,14 +483,11 @@ return [
 					'hit' => 'wikibase.prefetchingPropertyTermLookupCache.hit'
 				]
 			);
-			$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup(
-				$entitySourceServices->getEntityRevisionLookup()
-			);
 
 			return new CachingPrefetchingTermLookup(
 				$cache,
 				$prefetchingPropertyTermLookup,
-				$redirectResolvingRevisionLookup,
+				WikibaseRepo::getRedirectResolvingLatestRevisionLookup( $mwServices ),
 				WikibaseRepo::getTermsLanguages( $mwServices )
 			);
 		},
