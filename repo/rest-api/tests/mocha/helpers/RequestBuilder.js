@@ -94,6 +94,11 @@ class RequestBuilder {
 					.set( this.headers )
 					.query( this.queryParams )
 					.send( body );
+			case 'PUT':
+				return rest.req.put( basePath + this.makePath() )
+					.set( this.headers )
+					.query( this.queryParams )
+					.send( body );
 			default:
 				throw new Error( `The "${method}" method is not supported by ${this.constructor.name}` );
 		}
