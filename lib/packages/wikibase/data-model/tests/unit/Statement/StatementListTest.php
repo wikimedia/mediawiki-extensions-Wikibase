@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Tests\Statement;
 use ArrayObject;
 use DataValues\StringValue;
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -15,6 +16,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\ReferencedStatementFilter;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
@@ -285,6 +287,40 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 		$list->addStatement( $statement2, 1 );
 		$this->assertEquals( new StatementList( $statement1, $statement2, $statement3 ), $list );
 		$this->assertSame( [ 0, 1, 2 ], array_keys( $list->toArray() ), 'array keys' );
+	}
+
+	public function testReplaceStatement() {
+		$statementGuid = new StatementGuid( new ItemId( 'Q123' ), 'AAA-BBB-CCC' );
+		$index = 2;
+		$statement1 = new Statement( new PropertyNoValueSnak( 1 ) );
+		$statement2 = new Statement( new PropertyNoValueSnak( 2 ) );
+		$statement3 = new Statement( new PropertyNoValueSnak( 3 ) );
+		$oldStatement = new Statement(
+			$this->newSnak( 'P42', 'foo' ),
+			null,
+			null,
+			(string)$statementGuid
+		);
+		$newStatement = new Statement( $this->newSnak( 'P42', 'bar' ) );
+
+		$list = new StatementList( $statement1, $statement2, $statement3 );
+		$list->addStatement( $oldStatement, $index );
+
+		$list->replaceStatement( $statementGuid,  $newStatement );
+
+		$this->assertEquals( 4, $list->count() );
+		$replacedStatement = $list->toArray()[ $index ];
+		$this->assertEquals( $newStatement,  $replacedStatement );
+		$this->assertEquals( (string)$statementGuid, $replacedStatement->getGuid() );
+	}
+
+	public function testGivenNotPresentGuid_replaceStatementThrows() {
+		$list = new StatementList();
+		$this->expectException( InvalidArgumentException::class );
+		$list->replaceStatement(
+			new StatementGuid( new ItemId( 'Q42' ), 'this-guid-does-not-exist' ),
+			new Statement( new PropertyNoValueSnak( 42 ) )
+		);
 	}
 
 	public function testGivenGuidOfPresentStatement_statementIsRemoved() {
