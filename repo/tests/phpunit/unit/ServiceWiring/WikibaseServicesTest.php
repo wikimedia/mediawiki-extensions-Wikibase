@@ -3,10 +3,17 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use DataValues\Deserializers\DataValueDeserializer;
+use Serializers\Serializer;
+use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
-use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
+use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -43,9 +50,24 @@ class WikibaseServicesTest extends ServiceWiringTestCase {
 
 		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions',
 			new EntitySourceDefinitions( $entitySources, new SubEntityTypesMapper( [] ) ) );
-		$this->mockService( 'WikibaseRepo.SingleEntitySourceServicesFactory',
-			$this->createMock( SingleEntitySourceServicesFactory::class )
-		);
+		$this->mockService( 'WikibaseRepo.EntityIdParser',
+			new DispatchingEntityIdParser( [] ) );
+		$this->mockService( 'WikibaseRepo.EntityIdComposer',
+			new EntityIdComposer( [] ) );
+		$this->mockService( 'WikibaseRepo.DataValueDeserializer',
+			new DataValueDeserializer() );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getNameTableStoreFactory' );
+		$this->mockService( 'WikibaseRepo.DataAccessSettings',
+			new DataAccessSettings( 0 ) );
+		$this->mockService( 'WikibaseRepo.LanguageFallbackChainFactory',
+			$this->createMock( LanguageFallbackChainFactory::class ) );
+		$this->mockService( 'WikibaseRepo.StorageEntitySerializer',
+			$this->createMock( Serializer::class ) );
+		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
+			new EntityTypeDefinitions( [] ) );
+		$this->mockService( 'WikibaseRepo.RepoDomainDbFactory',
+			$this->createMock( RepoDomainDbFactory::class ) );
 
 		$this->assertInstanceOf(
 			MultipleEntitySourceServices::class,

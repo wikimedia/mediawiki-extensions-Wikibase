@@ -874,25 +874,6 @@ return [
 		);
 	},
 
-	// TODO: This service is just a convenience service to simplify the transition away from SingleEntitySourceServices,
-	// 		 and thus should eventually be removed. See T277731.
-	'WikibaseClient.SingleEntitySourceServicesFactory' => function (
-		MediaWikiServices $services
-	): SingleEntitySourceServicesFactory {
-		$entityTypeDefinitions = WikibaseClient::getEntityTypeDefinitions( $services );
-		return new SingleEntitySourceServicesFactory(
-			WikibaseClient::getEntityIdParser( $services ),
-			WikibaseClient::getEntityIdComposer( $services ),
-			WikibaseClient::getDataValueDeserializer( $services ),
-			$services->getNameTableStoreFactory(),
-			WikibaseClient::getDataAccessSettings( $services ),
-			WikibaseClient::getLanguageFallbackChainFactory( $services ),
-			new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
-			$entityTypeDefinitions,
-			WikibaseClient::getRepoDomainDbFactory( $services )
-		);
-	},
-
 	'WikibaseClient.Site' => function ( MediaWikiServices $services ): Site {
 		$settings = WikibaseClient::getSettings( $services );
 		$globalId = $settings->getSetting( 'siteGlobalID' );
@@ -1080,7 +1061,17 @@ return [
 
 	'WikibaseClient.WikibaseServices' => function ( MediaWikiServices $services ): WikibaseServices {
 		$entitySourceDefinitions = WikibaseClient::getEntitySourceDefinitions( $services );
-		$singleEntitySourceServicesFactory = WikibaseClient::getSingleEntitySourceServicesFactory( $services );
+		$singleEntitySourceServicesFactory = new SingleEntitySourceServicesFactory(
+			WikibaseClient::getEntityIdParser( $services ),
+			WikibaseClient::getEntityIdComposer( $services ),
+			WikibaseClient::getDataValueDeserializer( $services ),
+			$services->getNameTableStoreFactory(),
+			WikibaseClient::getDataAccessSettings( $services ),
+			WikibaseClient::getLanguageFallbackChainFactory( $services ),
+			new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
+			WikibaseClient::getEntityTypeDefinitions( $services ),
+			WikibaseClient::getRepoDomainDbFactory( $services )
+		);
 
 		$singleSourceServices = [];
 		foreach ( $entitySourceDefinitions->getSources() as $source ) {
