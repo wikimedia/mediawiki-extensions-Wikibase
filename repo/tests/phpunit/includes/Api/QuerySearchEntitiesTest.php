@@ -100,7 +100,8 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 				$params['wbslanguage'],
 				$params['wbstype'],
 				$params['wbslimit'],
-				false
+				false,
+				null
 			);
 		if ( $failureStatus !== null ) {
 			$invocation->willThrowException( new EntitySearchException( $failureStatus ) );
@@ -152,7 +153,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 			$this->getMockTitleLookup(),
 			$this->getContentLanguages(),
 			[ 'item', 'property' ],
-			[ 'default' => null ]
+			[ 'default' => null, 'unused' => 'unused-internal' ]
 		);
 
 		$continuationManager = new ApiContinuationManager( $api, [ $api ] );
