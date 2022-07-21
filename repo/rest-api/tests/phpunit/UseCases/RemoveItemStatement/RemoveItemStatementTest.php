@@ -76,19 +76,14 @@ class RemoveItemStatementTest extends TestCase {
 			'$username' => null,
 			'$itemId' => $itemId
 		];
-		$request = $this->newUseCaseRequest( $requestData );
-
-		$newItemRevision = new ItemRevision(
-			NewItem::withId( $itemId )->build(),
-			'20220809030405',
-			322
-		);
 
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
 			LatestItemRevisionMetadataResult::concreteRevision( 223, '20210809030405' )
 		);
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->expects( $this->once() )->method( 'getItem' )->willReturn( $item );
+		$this->itemRetriever->expects( $this->once() )
+			->method( 'getItem' )
+			->willReturn( $item );
 
 		$editMetadata = new EditMetadata(
 			$requestData['$editTags'], $requestData['$isBot'], $requestData['$comment']
@@ -96,11 +91,13 @@ class RemoveItemStatementTest extends TestCase {
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->expects( $this->once() )
 			->method( 'update' )
-			->with( $item, $this->equalTo( $editMetadata ) )
-			->willReturn( $newItemRevision );
+			->with( $item, $editMetadata )
+			->willReturn( new ItemRevision( $item, '20220809030405', 322 ) );
 
-		$response = $this->newUseCase()->execute( $request );
+		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( $requestData ) );
+
 		$this->assertInstanceOf( RemoveItemStatementSuccessResponse::class, $response );
+		$this->assertTrue( $item->getStatements()->isEmpty() );
 	}
 
 	public function testRemoveStatement_invalidRequest(): void {
@@ -124,10 +121,12 @@ class RemoveItemStatementTest extends TestCase {
 	public function testRequestedItemNotFound_returnsItemNotFound(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
 
-		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
-			'$itemId' => 'Q42',
-			'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-		] ) );
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$itemId' => 'Q42',
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+			] )
+		);
 
 		$this->assertInstanceOf( RemoveItemStatementErrorResponse::class, $response );
 		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $response->getCode() );
@@ -136,9 +135,11 @@ class RemoveItemStatementTest extends TestCase {
 	public function testItemForStatementNotFound_returnsStatementNotFound(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
 
-		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
-			'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-		] ) );
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+			] )
+		);
 
 		$this->assertInstanceOf( RemoveItemStatementErrorResponse::class, $response );
 		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
@@ -149,9 +150,11 @@ class RemoveItemStatementTest extends TestCase {
 			LatestItemRevisionMetadataResult::redirect( new ItemId( 'Q321' ) )
 		);
 
-		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
-			'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-		] ) );
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+			] )
+		);
 
 		$this->assertInstanceOf( RemoveItemStatementErrorResponse::class, $response );
 		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
@@ -162,10 +165,12 @@ class RemoveItemStatementTest extends TestCase {
 			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
 		);
 
-		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
-			'$itemId' => 'Q666',
-			'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-		] ) );
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$itemId' => 'Q666',
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+			] )
+		);
 
 		$this->assertInstanceOf( RemoveItemStatementErrorResponse::class, $response );
 		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
@@ -178,9 +183,11 @@ class RemoveItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( 'Q42' )->build() );
 
-		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
-			'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-		] ) );
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+			] )
+		);
 
 		$this->assertInstanceOf( RemoveItemStatementErrorResponse::class, $response );
 		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
