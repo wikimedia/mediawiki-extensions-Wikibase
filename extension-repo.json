@@ -448,7 +448,7 @@
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityTitleLookup",
-				"WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory",
+				"WikibaseRepo.FallbackLabelDescriptionLookupFactory",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.SiteLinkTargetProvider",
 				"WikibaseRepo.SummaryFormatter"

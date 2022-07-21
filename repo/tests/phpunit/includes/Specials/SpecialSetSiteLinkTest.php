@@ -78,8 +78,6 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		$copyrightView = new SpecialPageCopyrightView( new CopyrightMessageBuilder(), '', '' );
 
-		$labelDescriptionLookupFactory = WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory();
-
 		return new SpecialSetSiteLink(
 			self::TAGS,
 			$copyrightView,
@@ -89,7 +87,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			$siteLinkTargetProvider,
 			[ 'wikipedia' ],
 			$settings->getSetting( 'badgeItems' ),
-			$labelDescriptionLookupFactory,
+			WikibaseRepo::getFallbackLabelDescriptionLookupFactory(),
 			$siteLinkChangeOpFactory
 		);
 	}
