@@ -136,6 +136,11 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	 * @throws \ApiUsageException
 	 */
 	private function getSearchResults( array $params ): array {
+		$profile = null;
+		if ( count( $this->searchProfiles ) > 1 ) {
+			// TODO remove this check once profile param always available (T307869)
+			$profile = $this->searchProfiles[$params['profile']];
+		}
 		try {
 			return $this->entitySearchHelper->getRankedSearchResults(
 				$params['search'],
@@ -143,7 +148,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 				$params['type'],
 				$params['limit'],
 				$params['strictlanguage'],
-				$params['profile'] ?? null
+				$profile
 			);
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );

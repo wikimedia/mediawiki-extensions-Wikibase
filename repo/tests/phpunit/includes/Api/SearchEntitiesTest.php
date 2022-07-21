@@ -82,7 +82,8 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'strictlanguage' => false,
 			'type' => 'item',
 			'limit' => 7,
-			'continue' => 0
+			'continue' => 0,
+			'profile' => 'default',
 		], $params );
 
 		$mock = $this->createMock( EntitySearchHelper::class );
@@ -93,7 +94,8 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 				$params['language'],
 				$params['type'],
 				$params['continue'] + $params['limit'] + 1,
-				$params['strictlanguage']
+				$params['strictlanguage'],
+				$params['profile'] == 'other' ? 'other-internal' : null
 			)
 			->willReturn( $returnResults );
 
@@ -139,7 +141,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->newMockArticleIdLookup(),
 			$this->createMock( ApiErrorReporter::class ),
 			[ 'item', 'property' ],
-			[ 'default' => null ]
+			[ 'default' => null, 'other' => 'other-internal' ]
 		);
 
 		$module->execute();
@@ -357,6 +359,11 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 				[ $q333Match ],
 				[ $q333ResultWithoutUrl ],
 			],
+			'other profile' => [
+				[ 'profile' => 'other' ],
+				[ $q111Match ],
+				[ $q111Result ],
+			],
 		];
 	}
 
@@ -405,7 +412,8 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'action' => 'wbsearchentities',
 			'search' => 'nyan',
 			'type' => 'kitten',
-			'language' => 'en'
+			'language' => 'en',
+			'profile' => 'default',
 		];
 
 		$match = new TermSearchResult(

@@ -144,6 +144,11 @@ class SearchEntities extends ApiBase {
 	 * @throws \ApiUsageException
 	 */
 	private function getSearchEntries( array $params ): array {
+		$profile = null;
+		if ( count( $this->searchProfiles ) > 1 ) {
+			// TODO remove this check once profile param always available (T307869)
+			$profile = $this->searchProfiles[$params['profile']];
+		}
 		try {
 			$searchResults = $this->entitySearchHelper->getRankedSearchResults(
 				$params['search'],
@@ -151,7 +156,7 @@ class SearchEntities extends ApiBase {
 				$params['type'],
 				$params['continue'] + $params['limit'] + 1,
 				$params['strictlanguage'],
-				$params['profile'] ?? null
+				$profile
 			);
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );
