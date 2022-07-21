@@ -529,9 +529,7 @@
 				"WikibaseRepo.DataTypeFactory",
 				"WikibaseRepo.EntityIdHtmlLinkFormatterFactory",
 				"WikibaseRepo.EntityTitleLookup",
-				"WikibaseRepo.LanguageFallbackChainFactory",
-				"WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory",
-				"WikibaseRepo.PrefetchingTermLookup",
+				"WikibaseRepo.FallbackLabelDescriptionLookupFactory",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.Store"
 			]

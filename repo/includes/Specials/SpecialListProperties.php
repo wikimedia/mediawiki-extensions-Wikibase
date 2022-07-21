@@ -4,13 +4,14 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use HTMLForm;
-use Wikibase\DataAccess\PrefetchingTermLookup;
+use LogicException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\DataTypeFactory;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Repo\DataTypeSelector;
 use Wikibase\View\EntityIdFormatterFactory;
@@ -50,17 +51,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	private $titleLookup;
 
 	/**
-	 * @var PrefetchingTermLookup
-	 */
-	private $prefetchingTermLookup;
-
-	/**
-	 * @var LanguageFallbackChainFactory
-	 */
-	private $languageFallbackChainFactory;
-
-	/**
-	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 * @var FallbackLabelDescriptionLookupFactory
 	 */
 	private $labelDescriptionLookupFactory;
 
@@ -69,14 +60,15 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	private $entityIdFormatterFactory;
 
+	/** @var FallbackLabelDescriptionLookup */
+	private $labelDescriptionLookup;
+
 	public function __construct(
 		DataTypeFactory $dataTypeFactory,
 		PropertyInfoLookup $propertyInfoLookup,
-		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		EntityIdFormatterFactory $entityIdFormatterFactory,
-		EntityTitleLookup $titleLookup,
-		PrefetchingTermLookup $prefetchingTermLookup,
-		LanguageFallbackChainFactory $languageFallbackChainFactory
+		EntityTitleLookup $titleLookup
 	) {
 		parent::__construct( 'ListProperties' );
 
@@ -85,8 +77,6 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->entityIdFormatterFactory = $entityIdFormatterFactory;
 		$this->titleLookup = $titleLookup;
-		$this->prefetchingTermLookup = $prefetchingTermLookup;
-		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 	}
 
 	/**
@@ -179,8 +169,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 				->formatEntityId( $propertyId );
 		}
 
-		$labelTerm = $this->labelDescriptionLookupFactory
-			->newLabelDescriptionLookup( $language )
+		$labelTerm = $this->getLabelDescriptionLookup()
 			->getLabel( $propertyId );
 
 		$row = Html::rawElement(
@@ -223,10 +212,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		$orderedPropertyInfo = array_slice( $orderedPropertyInfo, $offset, $limit, true );
 
 		$propertyIds = array_values( $orderedPropertyInfo );
-
-		$languageChain = $this->languageFallbackChainFactory->newFromLanguage( $this->getContext()->getLanguage() )
-			->getFetchLanguageCodes();
-		$this->prefetchingTermLookup->prefetchTerms( $propertyIds, [ 'label' ], $languageChain );
+		$this->initLabelDescriptionLookup( $propertyIds );
 
 		return $propertyIds;
 	}
@@ -266,6 +252,25 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	protected function getSubpagesForPrefixSearch() {
 		return $this->dataTypeFactory->getTypeIds();
+	}
+
+	/** Initialize the label+description lookup, prefetching labels for the given entity IDs. */
+	private function initLabelDescriptionLookup( array $entityIds ): void {
+		if ( $this->labelDescriptionLookup !== null ) {
+			throw new LogicException( 'LabelDescriptionLookup already initialized!' );
+		}
+
+		$this->labelDescriptionLookup = $this->labelDescriptionLookupFactory
+			->newLabelDescriptionLookup( $this->getLanguage(), $entityIds, [ TermTypes::TYPE_LABEL ] );
+	}
+
+	/** Get the label+description lookup, asserting that it has already been initialized. */
+	private function getLabelDescriptionLookup(): FallbackLabelDescriptionLookup {
+		if ( $this->labelDescriptionLookup === null ) {
+			throw new LogicException( 'LabelDescriptionLookup not initialized!' );
+		}
+
+		return $this->labelDescriptionLookup;
 	}
 
 }
