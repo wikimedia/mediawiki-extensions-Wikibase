@@ -83,9 +83,15 @@ class RequestBuilder {
 			this.validateRequest( spec, method );
 		}
 
-		const body = this.headers[ 'content-type' ] === 'multipart/form-data' ?
-			new URLSearchParams( this.jsonBodyParams ).toString() :
-			this.jsonBodyParams;
+		let body = null;
+		switch ( this.headers[ 'content-type' ] ) {
+			case 'multipart/form-data':
+				body = new URLSearchParams( this.jsonBodyParams ).toString();
+				break;
+			case 'application/json':
+				body = this.jsonBodyParams;
+				break;
+		}
 
 		switch ( method.toUpperCase() ) {
 			case 'GET':

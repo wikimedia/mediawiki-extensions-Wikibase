@@ -5,6 +5,7 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Serializers\SerializerFactory as LegacySerializerFactory;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
 use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
@@ -19,6 +20,8 @@ use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsValidator;
+use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
+use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
@@ -95,6 +98,29 @@ return [
 			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
+			)
+		);
+	},
+
+	'WbRestApi.RemoveItemStatement' => function( MediaWikiServices $services ): RemoveItemStatement {
+		return new RemoveItemStatement(
+			new RemoveItemStatementValidator(
+				new ItemIdValidator(),
+				new StatementIdValidator( new ItemIdParser() ),
+				new EditMetadataValidator(
+					CommentStore::COMMENT_CHARACTER_LIMIT,
+					ChangeTags::listExplicitlyDefinedTags()
+				)
+			),
+			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+				WikibaseRepo::getEntityRevisionLookup( $services )
+			),
+			new StatementGuidParser( new ItemIdParser() ),
+			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup() ),
+			new MediaWikiEditEntityFactoryItemUpdater(
+				RequestContext::getMain(),
+				WikibaseRepo::getEditEntityFactory(),
+				WikibaseRepo::getLogger( $services )
 			)
 		);
 	},

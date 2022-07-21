@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
+use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 
 /**
@@ -44,6 +45,11 @@ class WbRestApi {
 	public static function getReplaceItemStatement( ContainerInterface $services = null ): ReplaceItemStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.ReplaceItemStatement' );
+	}
+
+	public static function getRemoveItemStatement( ContainerInterface $services = null ): RemoveItemStatement {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.RemoveItemStatement' );
 	}
 
 }
