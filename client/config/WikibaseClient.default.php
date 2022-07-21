@@ -15,7 +15,8 @@ require_once __DIR__ . '/../includes/Usage/EntityUsage.php';
 /**
  * This file assigns the default values to all Wikibase Client settings.
  *
- * This file is NOT an entry point the Wikibase Client extension. Use WikibaseClient.php.
+ * This file is NOT an entry point the Wikibase Client extension. Use this instead:
+ * wfLoadExtension( 'WikibaseClient', "$IP/extensions/Wikibase/extension-client.json" );
  * It should furthermore not be included from outside the extension.
  *
  * @license GPL-2.0-or-later

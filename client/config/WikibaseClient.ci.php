@@ -7,7 +7,8 @@
  * but adds settings that are not part of the default config yet,
  * and also configures an example Repo for testing Client without Repo enabled.
  *
- * This file is NOT an entry point the Wikibase Client extension. Use WikibaseClient.php.
+ * This file is NOT an entry point the Wikibase Client extension. Use this instead:
+ * wfLoadExtension( 'WikibaseClient', "$IP/extensions/Wikibase/extension-client.json" )
  * It should furthermore not be included from outside the extension.
  *
  * @see docs/options.wiki
