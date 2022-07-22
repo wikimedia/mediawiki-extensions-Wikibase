@@ -12,8 +12,8 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 
@@ -42,8 +42,11 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 	/** @var RedirectResolvingLatestRevisionLookup */
 	private $redirectResolvingLatestRevisionLookup;
 
-	/** @var LanguageFallbackLabelDescriptionLookupFactory */
-	private $lookupFactory;
+	/** @var LanguageFallbackChainFactory */
+	private $languageFallbackChainFactory;
+
+	/** @var TermLookup */
+	private $termLookup;
 
 	/** @var LanguageFactory */
 	private $languageFactory;
@@ -57,13 +60,15 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 	public function __construct(
 		TermFallbackCacheFacade $termFallbackCacheFacade,
 		RedirectResolvingLatestRevisionLookup $redirectResolvingLatestRevisionLookup,
-		LanguageFallbackLabelDescriptionLookupFactory $lookupFactory,
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		TermLookup $termLookup,
 		LanguageFactory $languageFactory,
 		ContentLanguages $contentLanguages
 	) {
 		$this->termFallbackCache = $termFallbackCacheFacade;
 		$this->redirectResolvingLatestRevisionLookup = $redirectResolvingLatestRevisionLookup;
-		$this->lookupFactory = $lookupFactory;
+		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
+		$this->termLookup = $termLookup;
 		$this->languageFactory = $languageFactory;
 		$this->contentLanguages = $contentLanguages;
 	}
@@ -149,7 +154,10 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 
 	private function getLookup( Language $language ): LanguageFallbackLabelDescriptionLookup {
 		if ( !isset( $this->lookups[ $language->getCode() ] ) ) {
-			$this->lookups[ $language->getCode() ] = $this->lookupFactory->newLabelDescriptionLookup( $language );
+			$this->lookups[ $language->getCode() ] = new LanguageFallbackLabelDescriptionLookup(
+				$this->termLookup,
+				$this->languageFallbackChainFactory->newFromLanguage( $language )
+			);
 		}
 		return $this->lookups[ $language->getCode() ];
 	}

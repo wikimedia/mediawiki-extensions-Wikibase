@@ -9,13 +9,15 @@ use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Client\DataAccess\Scribunto\CachingFallbackBasedTermLookup;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Client\DataAccess\Scribunto\CachingFallbackBasedTermLookup
@@ -32,7 +34,8 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 
 	private $termFallbackCache;
 	private $revisionLookup;
-	private $lookupFactory;
+	private $languageFallbackChainFactory;
+	private $termLookup;
 	private $factoryReturnLookup;
 	/**
 	 * @var LanguageFactory|\PHPUnit\Framework\MockObject\MockObject
@@ -47,7 +50,8 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 		parent::setUp();
 		$this->termFallbackCache = $this->createMock( TermFallbackCacheFacade::class );
 		$this->revisionLookup = $this->createMock( RedirectResolvingLatestRevisionLookup::class );
-		$this->lookupFactory = $this->createMock( LanguageFallbackLabelDescriptionLookupFactory::class );
+		$this->languageFallbackChainFactory = $this->createMock( LanguageFallbackChainFactory::class );
+		$this->termLookup = $this->createMock( TermLookup::class );
 		$this->factoryReturnLookup = $this->createMock( LanguageFallbackLabelDescriptionLookup::class );
 		$this->languageFactory = $this->createMock( LanguageFactory::class );
 		$this->contentLanguages = $this->createMock( ContentLanguages::class );
@@ -58,14 +62,28 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 			->willReturn( $englishLanguage );
 	}
 
-	public function getLookup(): CachingFallbackBasedTermLookup {
-		return new CachingFallbackBasedTermLookup(
+	/**
+	 * @param LanguageFallbackLabelDescriptionLookup[] $languageFallbackLabelDescriptionLookups
+	 * internal lookups that the returned lookup should use (language code => lookup)
+	 */
+	public function getLookup(
+		array $languageFallbackLabelDescriptionLookups = []
+	): CachingFallbackBasedTermLookup {
+		$lookup = new CachingFallbackBasedTermLookup(
 			$this->termFallbackCache,
 			$this->revisionLookup,
-			$this->lookupFactory,
+			$this->languageFallbackChainFactory,
+			$this->termLookup,
 			$this->languageFactory,
 			$this->contentLanguages
 		);
+
+		if ( $languageFallbackLabelDescriptionLookups !== [] ) {
+			TestingAccessWrapper::newFromObject( $lookup )
+				->lookups = $languageFallbackLabelDescriptionLookups;
+		}
+
+		return $lookup;
 	}
 
 	public function testGetLabelChecksTheCacheAndUsesIfValueThere() {
@@ -169,7 +187,7 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 		$this->mockCacheEmpty( $itemId );
 
 		// should return a fallback
-		$this->mockInternalLookupWithContent( $itemId, $termFallback, $methodName );
+		$internalLookup = $this->getInternalLookupWithContent( $itemId, $termFallback, $methodName );
 
 		// should store this in the cache
 		$this->mockCacheSetExpectation(
@@ -180,7 +198,9 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 			$termType
 		);
 
-		$lookup = $this->getLookup();
+		$lookup = $this->getLookup( [
+			$language->getCode() => $internalLookup,
+		] );
 
 		$this->assertEquals(
 			$expectedTerm,
@@ -232,11 +252,9 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 			->withConsecutive( [ $itemOneId ], [ $itemTwoId ] )
 			->willReturnOnConsecutiveCalls( $termFallbackOne, $termFallbackTwo );
 
-		$this->lookupFactory->expects( $this->once() )
-			->method( 'newLabelDescriptionLookup' )
-			->willReturn( $this->factoryReturnLookup );
-
-		$lookup = $this->getLookup();
+		$lookup = $this->getLookup( [
+			$language->getCode() => $this->factoryReturnLookup,
+		] );
 
 		$this->assertEquals(
 			'cat',
@@ -263,9 +281,12 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 			} );
 		$this->mockHasContentLanguage( true );
 		$this->mockCacheEmpty( $itemId );
-		$this->mockInternalLookupWithContent( $itemId, $enTerm, $getOne );
+		$internalLookup = $this->getInternalLookupWithContent( $itemId, $enTerm, $getOne );
 
-		$lookup = $this->getLookup();
+		$lookup = $this->getLookup( [
+			'en' => $internalLookup,
+			'sv' => $internalLookup,
+		] );
 
 		$this->assertEquals(
 			[ 'en' => 'cat' ],
@@ -319,19 +340,17 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 			->with( $termFallback, $targetEntityId, $revisionId, $languageCode, $termType );
 	}
 
-	private function mockInternalLookupWithContent(
+	private function getInternalLookupWithContent(
 		$itemId,
 		?TermFallback $termFallback,
 		string $methodName
-	): void {
+	): LanguageFallbackLabelDescriptionLookup {
 
 		$this->factoryReturnLookup->expects( $this->once() )
 			->method( $methodName )
 			->with( $itemId )
 			->willReturn( $termFallback );
 
-		$this->lookupFactory->expects( $this->once() )
-			->method( 'newLabelDescriptionLookup' )
-			->willReturn( $this->factoryReturnLookup );
+		return $this->factoryReturnLookup;
 	}
 }
