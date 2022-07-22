@@ -70,7 +70,7 @@ class RemoveItemStatement {
 			return $this->newStatementNotFoundResponse( $request->getStatementId() );
 		}
 
-		$item->getStatements()->removeStatementsWithGuid( $statementId );
+		$item->getStatements()->removeStatementsWithGuid( (string)$statementId );
 
 		$editMetadata = new EditMetadata( $request->getEditTags(), $request->isBot(), $request->getComment() );
 		$this->itemUpdater->update( $item, $editMetadata );
