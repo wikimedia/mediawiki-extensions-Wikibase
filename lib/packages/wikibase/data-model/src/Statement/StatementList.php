@@ -141,9 +141,7 @@ class StatementList implements IteratorAggregate, Countable {
 		}
 
 		$newStatement->setGuid( (string)$statementGuid );
-
-		// remove statement at old statement's index and replace it with new statement
-		array_splice( $this->statements, $index, 1, [ $newStatement ] );
+		$this->statements[ $index ] = $newStatement;
 	}
 
 	/**
