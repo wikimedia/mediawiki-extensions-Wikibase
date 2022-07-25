@@ -232,7 +232,7 @@ return [
 			WikibaseClient::getSnakFormatterFactory( $services ),
 			WikibaseClient::getPropertyDataTypeLookup( $services ),
 			WikibaseClient::getRepoItemUriParser( $services ),
-			WikibaseClient::getLanguageFallbackLabelDescriptionLookupFactory( $services ),
+			WikibaseClient::getFallbackLabelDescriptionLookupFactory( $services ),
 			Wikibaseclient::getSettings( $services )->getSetting( 'allowDataAccessInUserLanguage' )
 		);
 	},

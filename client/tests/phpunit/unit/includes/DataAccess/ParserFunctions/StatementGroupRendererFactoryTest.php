@@ -37,8 +37,8 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 
 /**
  * @covers \Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory
@@ -213,7 +213,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 				$formatterFactory,
 				new InMemoryDataTypeLookup(),
 				new ItemIdParser(),
-				$this->getLanguageFallbackLabelDescriptionLookupFactory()
+				$this->getFallbackLabelDescriptionLookupFactory()
 			),
 			$this->newUsageAccumulatorFactory(),
 			$this->createMock( LanguageConverterFactory::class ),
@@ -243,7 +243,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 				$this->getSnakFormatterFactory(),
 				new InMemoryDataTypeLookup(),
 				new ItemIdParser(),
-				$this->getLanguageFallbackLabelDescriptionLookupFactory()
+				$this->getFallbackLabelDescriptionLookupFactory()
 			),
 			$this->newUsageAccumulatorFactory(),
 			MediaWikiServices::getInstance()->getLanguageConverterFactory(),
@@ -349,15 +349,9 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		return $parserOptions;
 	}
 
-	private function getLanguageFallbackLabelDescriptionLookupFactory(): LanguageFallbackLabelDescriptionLookupFactory {
-		$languageFallbackLabelDescriptionLookup = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$languageFallbackLabelDescriptionLookupFactory = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookupFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
-
+	private function getFallbackLabelDescriptionLookupFactory(): FallbackLabelDescriptionLookupFactory {
+		$languageFallbackLabelDescriptionLookup = $this->createMock( FallbackLabelDescriptionLookup::class );
+		$languageFallbackLabelDescriptionLookupFactory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
 		$languageFallbackLabelDescriptionLookupFactory->method( 'newLabelDescriptionLookup' )
 			->willReturn( $languageFallbackLabelDescriptionLookup );
 

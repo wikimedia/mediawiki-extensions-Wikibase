@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 
 /**
  * @coversNothing
@@ -39,8 +39,8 @@ class DataAccessSnakFormatterFactoryTest extends ServiceWiringTestCase {
 			$this->createMock( EntityIdParser::class )
 		);
 		$this->mockService(
-			'WikibaseClient.LanguageFallbackLabelDescriptionLookupFactory',
-			$this->createMock( LanguageFallbackLabelDescriptionLookupFactory::class )
+			'WikibaseClient.FallbackLabelDescriptionLookupFactory',
+			$this->createMock( FallbackLabelDescriptionLookupFactory::class )
 		);
 		$this->mockService(
 			'WikibaseClient.Settings',
