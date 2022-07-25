@@ -109,12 +109,7 @@ class EntityConstraintProviderTest extends \PHPUnit\Framework\TestCase {
 	private function assertValidators( $expectedValidatorTypes, $validators ) {
 		$this->assertIsArray( $validators );
 
-		$validatorTypes = array_map(
-			function ( $validator ) {
-				return get_class( $validator );
-			},
-			$validators
-		);
+		$validatorTypes = array_map( 'get_class', $validators );
 
 		$this->assertEquals( $expectedValidatorTypes, $validatorTypes );
 	}

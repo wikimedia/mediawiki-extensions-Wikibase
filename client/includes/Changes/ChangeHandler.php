@@ -256,10 +256,7 @@ class ChangeHandler {
 			->fetchPageRecords();
 
 		return array_map(
-			function ( $pageRecord ) {
-				return $this->titleFactory
-					->castFromPageIdentity( $pageRecord );
-			},
+			[ $this->titleFactory, 'castFromPageIdentity' ],
 			iterator_to_array( $pageRecords )
 		);
 	}

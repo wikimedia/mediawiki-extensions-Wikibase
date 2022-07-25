@@ -48,9 +48,7 @@ class UserPreferredContentLanguagesLookup {
 				[ $uiLanguage ],
 				$this->userLanguageLookup->getAllUserLanguages( $user )
 			) ),
-			function ( $language ) {
-				return $this->contentLanguages->hasLanguage( $language );
-			}
+			[ $this->contentLanguages, 'hasLanguage' ]
 		);
 		return count( $validLanguages ) === 0 ? [ $this->wikiDefaultContentLanguage ] : $validLanguages;
 	}
