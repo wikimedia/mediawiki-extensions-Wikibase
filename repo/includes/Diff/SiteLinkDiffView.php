@@ -178,7 +178,7 @@ class SiteLinkDiffView implements DiffView {
 	protected function generateHtmlDiffTableRow( ?string $oldHtml, ?string $newHtml ): string {
 		$html = Html::openElement( 'tr' );
 		if ( $oldHtml !== null ) {
-			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker', 'data-marker' => '−' ] );
+			$html .= Html::element( 'td', [ 'class' => 'diff-marker', 'data-marker' => '−' ] );
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-deletedline' ],
 				Html::rawElement( 'div', [], $oldHtml ) );
 		}
