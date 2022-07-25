@@ -7,30 +7,29 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseFactory;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\NotModifiedPreconditionMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ModifiedPreconditionMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheckResult;
 
 /**
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\Middleware\NotModifiedPreconditionMiddleware
+ * @covers \Wikibase\Repo\RestApi\RouteHandlers\Middleware\ModifiedPreconditionMiddleware
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class NotModifiedPreconditionMiddlewareTest extends TestCase {
+class ModifiedPreconditionMiddlewareTest extends TestCase {
 
-	public function testGivenHeadersMatchRevision_respondsNotModified(): void {
-		$revId = 123;
+	public function testGivenPreconditionCheckReturns412_respondsWith412(): void {
 		$preconditionCheck = $this->createStub( RequestPreconditionCheck::class );
 		$preconditionCheck->method( 'checkPreconditions' )->willReturn(
 			RequestPreconditionCheckResult::newFromMatch(
 				LatestItemRevisionMetadataResult::concreteRevision( 123, '20201111070707' ),
-				304
+				412
 			)
 		);
 
-		$middleware = new NotModifiedPreconditionMiddleware( $preconditionCheck );
+		$middleware = new ModifiedPreconditionMiddleware( $preconditionCheck );
 
 		$response = $middleware->run(
 			$this->newHandler(),
@@ -39,15 +38,14 @@ class NotModifiedPreconditionMiddlewareTest extends TestCase {
 			}
 		);
 
-		$this->assertSame( 304, $response->getStatusCode() );
-		$this->assertEquals( "\"$revId\"", $response->getHeaderLine( 'ETag' ) );
+		$this->assertSame( 412, $response->getStatusCode() );
 	}
 
-	public function testGivenHeadersDontMatchRevision_doesNothing(): void {
+	public function testGivenPreconditionMismatchResult_doesNothing(): void {
 		$preconditionCheck = $this->createStub( RequestPreconditionCheck::class );
 		$preconditionCheck->method( 'checkPreconditions' )->willReturn( RequestPreconditionCheckResult::newMismatchResult() );
 
-		$middleware = new NotModifiedPreconditionMiddleware( $preconditionCheck );
+		$middleware = new ModifiedPreconditionMiddleware( $preconditionCheck );
 		$expectedResponse = $this->createStub( Response::class );
 		$response = $middleware->run( $this->createStub( Handler::class ), function () use ( $expectedResponse ) {
 			return $expectedResponse;
