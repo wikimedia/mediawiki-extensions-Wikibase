@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aey Tai Nuea",
 			"咽頭べさ"
 		]
 	},
-	"wikibase-edit": "ᥛᥨᥢᥳᥛᥦᥰ",
-	"wikibase-add": "ᥗᥦᥛᥴᥔᥬᥱ",
-	"wikibase-label-empty": "ᥙᥭᥱᥘᥭᥲᥛᥐᥰᥛᥢᥲᥝᥭᥳᥓᥪᥲ",
-	"wikibase-description-empty": "ᥑᥩᥲᥔᥙᥰᥘᥦᥒᥰ ᥙᥭᥱᥙᥣᥲᥛᥐᥰᥛᥢᥲᥝᥭᥳ",
-	"wikibase-sitelinks-special": "ᥘᥤᥢᥲ ᥖᥣᥒᥱᥟᥢᥴ",
+	"wikibase-edit": "ᥛᥨᥢᥳ ᥛᥥᥰ",
+	"wikibase-add": "ᥗᥦᥛᥴ ᥔᥬᥱ",
+	"wikibase-label-empty": "ᥙᥭᥱ ᥘᥭᥲ ᥛᥐᥴ ᥛᥢᥲ ᥝᥭᥳ ᥓᥪ",
+	"wikibase-description-empty": "ᥑᥨᥝᥲ ᥔᥙᥴ ᥘᥦᥒᥰ ᥙᥭᥱ ᥙᥣᥲ ᥛᥐᥴ ᥛᥢᥲ ᥝᥭᥳ",
+	"wikibase-sitelinks-special": "ᥖᥣᥒᥱ ᥟᥢ",
 	"wikibase-statementview-rank-normal": "ᥓᥢᥳᥙᥨᥒᥱᥐᥣᥒᥴ"
 }

@@ -427,7 +427,7 @@
 	"wikibase-save-unresolved-redirect": "Beim Versuch, eine Änderung zu speichern, ist eine ungelöste Weiterleitung von $1 nach $2 aufgetreten.",
 	"wikibase-restoreold": "zurücksetzen",
 	"wikibase-entity-summary-restore": "Die Version $3 von [[Special:Contributions/$4|{{GENDER:$4|$4}}]] wurde wiederhergestellt.",
-	"wikibase-entity-summary-undo": "Version $3 von [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|Diskussion]]) rückgängig machen",
+	"wikibase-entity-summary-undo": "Version $3 von [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|Diskussion]]) rückgängig gemacht",
 	"wikibase-non-entity-diff": "Es können keine Unterschiede von Datenobjekten mit dem Inhalt von Nicht-Datenobjekten angezeigt werden.",
 	"wikibase-no-direct-editing": "Direktes Bearbeiten ist im Namensraum $1 nicht möglich",
 	"wikibase-noentity": "Dieses Objekt ist nicht vorhanden. Du kannst [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} die Logbücher durchsuchen], um herauszufinden, was mit dem Objekt passiert ist.",
