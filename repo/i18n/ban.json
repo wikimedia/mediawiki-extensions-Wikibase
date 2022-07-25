@@ -30,6 +30,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Ring basa lianan",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Pangaturan",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Sinahang label, parab, miwah déskripsi ring samian basa sané tiang pilih ri kala kaca kamuat",
+	"wikibase-entitytermsforlanguagelistview-aliases": "Kaloktah taler dados",
 	"wikibase-entitytermsforlanguagelistview-description": "Déskripsi",
 	"wikibase-entitytermsforlanguagelistview-label": "Label",
 	"wikibase-entitytermsforlanguagelistview-language": "Basa",
@@ -53,5 +54,6 @@
 	"special-newitem": "Kardi item anyar",
 	"wikibase-newentity-language": "Basa:",
 	"wikibase-newentity-submit": "Kardi",
-	"wikibase-modifyterm-language": "Kode basa:"
+	"wikibase-modifyterm-language": "Kode basa:",
+	"wikibase-concept-uri": "Konsép Pangidéntifikasi Wit Seragam (URI)"
 }

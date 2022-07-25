@@ -52,6 +52,8 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Nõmm:",
 	"wikibase-modifyentity-id": "Tobdstõk:",
 	"wikibase-modifyterm-language": "Ǩiõllkoodd:",
+	"wikibase-history-title-with-label": "Seeid \"$2\" ($1) muʹttemhistoria",
+	"wikibase-history-title-without-label": "Seeid $1 muʹttemhistoria",
 	"wikibase-listproperties-submit": "Ooʒʒ",
 	"wikibase-entitydata-bad-id": "Vââǥǥlaž tobdstõk: $1.",
 	"wikibase-entitypage-bad-id": "Vââǥǥlaž tobdstõk: $1.",

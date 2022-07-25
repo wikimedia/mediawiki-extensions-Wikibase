@@ -129,6 +129,7 @@
 	"notification-header-page-connection": "Страница <strong>$3</strong> была {{GENDER:$2|присоединена}} к {{PLURAL:$4|-1=элементу {{grammar:genitive|{{WBREPONAME}}}}|элементу {{grammar:genitive|{{WBREPONAME}}}} $4}}, который содержит данные, относящиеся к её теме.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> и {{PLURAL:$4|ещё $4 страница|ещё $4 страницы|ещё $4 страниц|1=ещё одна страница|100=ещё 99+ страниц}} были {{GENDER:$2|привязаны}} к  элементам {{GRAMMAR:genitive|{{WBREPONAME}}}}, где могли быть собраны данные, относящиеся к этим темам.",
 	"notification-link-text-view-item": "{{GENDER:$1|Посмотреть}} элемент",
+	"notification-subject-page-connection": "{{GENDER:$3|Созданная}} вами на сайте «{{SITENAME}}» страница была {{GENDER:$2|подключена}} к элементу {{WBREPONAME}}",
 	"unresolved-property-category": "Страницы с недоступными свойствами",
 	"unresolved-property-category-desc": "В эту категорию попадают страницы, которые ссылаются на свойства {{WBREPONAME}}, которые не могут быть найдены ни по ID свойства, ни по имени.",
 	"connected-redirect-category": "Перенаправления, связанные с элементом {{grammar:genitive|{{WBREPONAME}}}}",

@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rebelagent"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} Selo",
+	"wikibase-editlinks": "Fetola dikgolaganyo",
+	"wikibase-linkitem-addlinks": "Tsenya dikgolaganyo",
+	"wikibase-linkitem-title": "Golaganya le tsebe",
+	"wikibase-linkitem-linkpage": "Golaganya le tsebe",
+	"wikibase-linkitem-selectlink": "Ka tswetswe thopa maranyane le tsebe e o batlang go e kopanya le tsebe ye.",
+	"wikibase-linkitem-input-site": "Teme:",
+	"wikibase-linkitem-input-page": "Tsebe:",
+	"wikibase-rc-hide-wikidata-hide": "Fitha",
+	"wikibase-rc-hide-wikidata-show": "Supa"
+}

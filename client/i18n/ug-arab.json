@@ -3,7 +3,8 @@
 		"authors": [
 			"AlimOmar",
 			"Sahran",
-			"Uzdil"
+			"Uzdil",
+			"TayfunEt."
 		]
 	},
 	"tooltip-t-wikibase": "ئۇلىنىشنىڭ سانلىق ئۇچۇر ساقلاش ئامبىرى تۈرىنى كۆرۈش",
@@ -12,6 +13,8 @@
 	"wikibase-editlinks": "ئۇلىنىش تەھرىرلەش",
 	"wikibase-editlinkstitle": "تىل ھالقىغان ئۇلىنىشنى تەھرىرلەش",
 	"wikibase-linkitem-addlinks": "ئۇلانما قوش",
+	"wikibase-linkitem-input-site": "تىل:",
+	"wikibase-linkitem-input-page": "بەت:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "يوشۇرۇش",
 	"wikibase-rc-hide-wikidata-show": "كۆرسەت",

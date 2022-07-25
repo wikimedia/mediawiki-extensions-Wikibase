@@ -17,7 +17,8 @@
 			"아라",
 			"Akmaie Ajam",
 			"Daud I.F. Argana",
-			"RXerself"
+			"RXerself",
+			"Chinamoonroll"
 		]
 	},
 	"wikibase-desc": "Penyimpanan data terstruktur",
@@ -176,6 +177,7 @@
 	"wikibase-validator-no-such-sitelink": "Tidak dapat menemukan sebuah pranala interwiki untuk \"$1\" ketika mencoba menyunting lencana.",
 	"wikibase-validator-page-not-exists": "Halaman \"$1\" tidak ada.",
 	"wikibase-validator-not-a-language": "\"$1\" bukan kode bahasa yang dikenal.",
+	"wikibase-itemlink": "$2 $1",
 	"wikibase-itemlink-id-wrapper": "($1)",
 	"wikibase-itemlink-userlang-wrapper": "&nbsp;($1: $2)",
 	"wikibase-itemlink-title": "$1 | $2",
@@ -367,6 +369,7 @@
 	"special-mylanguagefallbackchain": "Bahasa sekunder saya",
 	"wikibase-mylanguagefallbackchain-text": "Bahasa sekunder dipergunakan untuk menampilkan label entitas untuk Anda terdapat di bawah ini.",
 	"wikibase-mylanguagefallbackchain-babel": "Anda bisa menyuntingnya dengan memasukkan <nowiki>{{#babel: }}</nowiki> pada [[Special:MyPage|laman pengguna]] {{GENDER:$1|Anda}}",
+	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 - $2",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, ubah dari $3 - $4",
 	"wikibase-api-cant-load-entity-content": "Tidak bisa mengakses konten, revisinya mungkin dihapus.",
 	"wikibase-api-unresolved-redirect": "Penanda entitas khusus merujuk pada sebuah laman pengalihan, yang tidak didukung dalam konteks ini.",
@@ -504,5 +507,6 @@
 	"special-setaliases-parameterized": "Atur alias $1",
 	"special-setlabel-parameterized": "Atur label $1",
 	"special-setdescription-parameterized": "Atur deskripsi $1",
-	"special-setlabeldescriptionaliases-parameterized": "Atur label, deskripsi dan alias $1"
+	"special-setlabeldescriptionaliases-parameterized": "Atur label, deskripsi dan alias $1",
+	"special-parameterized-description-separator": "/"
 }

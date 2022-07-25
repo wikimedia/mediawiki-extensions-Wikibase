@@ -7,6 +7,8 @@
 	},
 	"wikibase-edit": "hinyanyura",
 	"wikibase-add": "Ongereza",
+	"wikibase-label-empty": "Nta parati isiguye",
 	"wikibase-description-empty": "Nta nsiguro itanzwe",
-	"wikibase-sitelinks-special": "Iyindi mirongo"
+	"wikibase-sitelinks-special": "Iyindi mirongo",
+	"wikibase-statementview-rank-normal": "Urwego rusanzwe"
 }
