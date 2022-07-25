@@ -16,7 +16,7 @@ use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 
 /**
  * A factory for SnakFormatters in a client context, to be reused in different methods that "access
@@ -66,9 +66,9 @@ class DataAccessSnakFormatterFactory {
 	private $repoItemUriParser;
 
 	/**
-	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 * @var FallbackLabelDescriptionLookupFactory
 	 */
-	private $languageFallbackLabelDescriptionLookupFactory;
+	private $fallbackLabelDescriptionLookupFactory;
 
 	/**
 	 * @var bool
@@ -80,7 +80,7 @@ class DataAccessSnakFormatterFactory {
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityIdParser $repoItemUriParser,
-		LanguageFallbackLabelDescriptionLookupFactory $languageFallbackLabelDescriptionLookupFactory,
+		FallbackLabelDescriptionLookupFactory $fallbackLabelDescriptionLookupFactory,
 		$trackUsagesInAllLanguages = false
 	) {
 		if ( !is_bool( $trackUsagesInAllLanguages ) ) {
@@ -91,7 +91,7 @@ class DataAccessSnakFormatterFactory {
 		$this->snakFormatterFactory = $snakFormatterFactory;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->repoItemUriParser = $repoItemUriParser;
-		$this->languageFallbackLabelDescriptionLookupFactory = $languageFallbackLabelDescriptionLookupFactory;
+		$this->fallbackLabelDescriptionLookupFactory = $fallbackLabelDescriptionLookupFactory;
 		$this->trackUsagesInAllLanguages = $trackUsagesInAllLanguages;
 	}
 
@@ -128,7 +128,7 @@ class DataAccessSnakFormatterFactory {
 			$usageAccumulator,
 			$this->repoItemUriParser,
 			new UsageTrackingLanguageFallbackLabelDescriptionLookup(
-				$this->languageFallbackLabelDescriptionLookupFactory->newLabelDescriptionLookup( $language ),
+				$this->fallbackLabelDescriptionLookupFactory->newLabelDescriptionLookup( $language ),
 				$usageAccumulator,
 				$fallbackChain,
 				$this->trackUsagesInAllLanguages
