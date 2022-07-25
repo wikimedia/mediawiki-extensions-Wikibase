@@ -9,11 +9,8 @@ use QueryPage;
 use Skin;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 
 /**
  * Show a list of pages with a given badge.
@@ -24,7 +21,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 class SpecialPagesWithBadges extends QueryPage {
 
 	/**
-	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 * @var FallbackLabelDescriptionLookupFactory
 	 */
 	private $labelDescriptionLookupFactory;
 
@@ -46,12 +43,12 @@ class SpecialPagesWithBadges extends QueryPage {
 	/**
 	 * @see SpecialPage::__construct
 	 *
-	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
+	 * @param FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param string[] $badgeIds
 	 * @param string $siteId
 	 */
 	public function __construct(
-		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		array $badgeIds,
 		$siteId
 	) {
@@ -63,17 +60,11 @@ class SpecialPagesWithBadges extends QueryPage {
 	}
 
 	public static function factory(
-		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		SettingsArray $clientSettings,
-		TermBuffer $termBuffer,
-		TermLookup $termLookup
+		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		SettingsArray $clientSettings
 	): self {
 		return new self(
-			new LanguageFallbackLabelDescriptionLookupFactory(
-				$languageFallbackChainFactory,
-				$termLookup,
-				$termBuffer
-			),
+			$labelDescriptionLookupFactory,
 			array_keys( $clientSettings->getSetting( 'badgeClassNames' ) ),
 			$clientSettings->getSetting( 'siteGlobalID' )
 		);

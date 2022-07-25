@@ -483,10 +483,8 @@
 			"class": "Wikibase\\Client\\Specials\\SpecialPagesWithBadges",
 			"factory": "Wikibase\\Client\\Specials\\SpecialPagesWithBadges::factory",
 			"services": [
-				"WikibaseClient.LanguageFallbackChainFactory",
-				"WikibaseClient.Settings",
-				"WikibaseClient.TermBuffer",
-				"WikibaseClient.TermLookup"
+				"WikibaseClient.FallbackLabelDescriptionLookupFactory",
+				"WikibaseClient.Settings"
 			]
 		},
 		"EntityUsage": {
