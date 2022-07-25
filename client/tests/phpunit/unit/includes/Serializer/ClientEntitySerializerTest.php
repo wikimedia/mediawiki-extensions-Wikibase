@@ -32,9 +32,7 @@ class ClientEntitySerializerTest extends \PHPUnit\Framework\TestCase {
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
 
-		$fallbackChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$fallbackChain = $this->createMock( TermLanguageFallbackChain::class );
 		$fallbackChain->method( 'extractPreferredValue' )
 			->willReturn( [ 'source' => '<SOURCE>' ] );
 

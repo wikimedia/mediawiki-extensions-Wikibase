@@ -6,6 +6,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms\Util;
 
 use IJobSpecification;
 use JobQueueGroup;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Store\Sql\Terms\CleanTermsIfUnusedJob;
 
@@ -50,7 +51,7 @@ class MockJobQueueFactory {
 		return $jobQueueGroupMock;
 	}
 
-	public function getMockJobQueue(): JobQueueGroup {
+	private function getMockJobQueue(): MockObject {
 		return $this->test->getMockBuilder( JobQueueGroup::class )
 				->disableOriginalConstructor()
 				->disableOriginalClone()

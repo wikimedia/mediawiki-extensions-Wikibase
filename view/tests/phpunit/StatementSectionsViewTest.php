@@ -36,9 +36,7 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 		$statementGrouper->method( 'groupStatements' )
 			->willReturn( $statementLists );
 
-		$statementListView = $this->getMockBuilder( StatementGroupListView::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$statementListView = $this->createMock( StatementGroupListView::class );
 		$statementListView->method( 'getHtml' )
 			->willReturn( '<LIST>' );
 

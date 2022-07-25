@@ -88,9 +88,7 @@ class VariantsAwareRendererTest extends \PHPUnit\Framework\TestCase {
 	 * @return LanguageAwareRenderer
 	 */
 	private function getLanguageAwareRenderer( $languageCode ) {
-		$languageRenderer = $this->getMockBuilder( LanguageAwareRenderer::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$languageRenderer = $this->createMock( LanguageAwareRenderer::class );
 
 		$languageRenderer->method( 'render' )
 			->willReturnCallback(

@@ -260,9 +260,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 	}
 
 	public function testIncrementStatsKey() {
-		$luaFunctionCallTracker = $this->getMockBuilder( LuaFunctionCallTracker::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$luaFunctionCallTracker = $this->createMock( LuaFunctionCallTracker::class );
 		$luaFunctionCallTracker->expects( $this->once() )
 			->method( 'incrementKey' )
 			->with( 'a-key.suffix' );

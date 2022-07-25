@@ -99,9 +99,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @return Title
 	 */
 	private function newTitle( $ns, $text, $pageId, $revId, $length ) {
-		$title = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$title = $this->createMock( Title::class );
 
 		$title->method( 'getNamespace' )
 			->willReturn( $ns );

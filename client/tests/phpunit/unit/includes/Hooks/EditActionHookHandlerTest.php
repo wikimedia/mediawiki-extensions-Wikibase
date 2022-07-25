@@ -105,35 +105,24 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			} );
 
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
-
 		$siteLinkLookup->method( 'getItemIdForLink' )
 			->willReturn( $entityId );
 
-		$sqlUsageTracker = $this->getMockBuilder( SqlUsageTracker::class )
-			->disableOriginalConstructor()
-			->getMock();
-
+		$sqlUsageTracker = $this->createMock( SqlUsageTracker::class );
 		$entityUsage = $entityId ? [ new EntityUsage( $entityId, 'S' ) ] : [];
 		$sqlUsageTracker->expects( $this->once() )
 			->method( 'getUsagesForPage' )
 			->willReturn( $entityUsage );
 
-		$labelDescriptionLookupFactory = $this->getMockBuilder(
-			FallbackLabelDescriptionLookupFactory::class
-		)
-			->disableOriginalConstructor()
-			->getMock();
-
+		$labelDescriptionLookupFactory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
 		$labelDescriptionLookupFactory->method( 'newLabelDescriptionLookup' )
 			->willReturnCallback( [ $this, 'newLabelDescriptionLookup' ] );
 
-		$hookHandler = new EditActionHookHandler(
+		return new EditActionHookHandler(
 			$repoLinker,
 			$sqlUsageTracker,
 			$labelDescriptionLookupFactory
 		);
-
-		return $hookHandler;
 	}
 
 	/**
@@ -172,9 +161,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	private function getEditPage() {
 		$title = $this->getTitle();
 
-		$editor = $this->getMockBuilder( EditPage::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$editor = $this->createMock( EditPage::class );
 
 		$editor->method( 'getTitle' )
 			->willReturn( $title );
@@ -188,9 +175,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @return Title
 	 */
 	private function getTitle() {
-		$title = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$title = $this->createMock( Title::class );
 
 		$title->method( 'exists' )
 			->willReturn( true );

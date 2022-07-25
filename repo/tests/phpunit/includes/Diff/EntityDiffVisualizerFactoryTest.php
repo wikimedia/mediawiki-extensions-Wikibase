@@ -88,7 +88,7 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 		return new EntityDiffVisualizerFactory(
 			$instantiators,
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			$this->getMockBuilder( SiteLookup::class )->getMock(),
+			$this->createMock( SiteLookup::class ),
 			WikibaseRepo::getEntityIdHTMLLinkFormatterFactory(),
 			WikibaseRepo::getSnakFormatterFactory()
 		);

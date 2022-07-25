@@ -53,9 +53,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getResultBuilder( ApiResult $result, $addMetaData = false ) {
-		$mockTitle = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mockTitle = $this->createMock( Title::class );
 		$mockTitle->method( 'getArticleID' )
 			->willReturn( 123 );
 		$mockTitle->method( 'getNamespace' )
@@ -1394,9 +1392,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	public function testAddRevisionIdFromStatusToResult() {
 		$result = $this->getDefaultResult();
-		$mockRevision = $this->getMockBuilder( EntityRevision::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mockRevision = $this->createMock( EntityRevision::class );
 		$mockRevision->expects( $this->once() )
 			->method( 'getRevisionId' )
 			->willReturn( 123 );

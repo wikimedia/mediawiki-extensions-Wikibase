@@ -96,9 +96,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 	 * @return EditFilterHookRunner
 	 */
 	public function getMockEditFilterHookRunner() {
-		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( EditFilterHookRunner::class );
 
 		$mock->method( 'run' )
 			->willReturn( Status::newGood() );

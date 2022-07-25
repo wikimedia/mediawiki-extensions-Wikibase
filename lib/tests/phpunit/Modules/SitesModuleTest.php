@@ -25,10 +25,7 @@ use Wikibase\Lib\SettingsArray;
 class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 
 	private function getContext(): Context {
-		$context = $this->getMockBuilder( Context::class )
-			->disableOriginalConstructor()
-			->getMock();
-
+		$context = $this->createMock( Context::class );
 		$context->method( 'msg' )
 			->willReturnCallback( function ( $key ) {
 				return new RawMessage( "($key)" );

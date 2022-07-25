@@ -30,9 +30,7 @@ class DatabaseSchemaUpdaterTest extends \PHPUnit\Framework\TestCase {
 			->method( 'getType' )
 			->willReturn( 'mysql' );
 
-		$updater = $this->getMockBuilder( MysqlUpdater::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$updater = $this->createMock( MysqlUpdater::class );
 
 		$updater->expects( $this->atLeastOnce() )
 			->method( 'getDB' )

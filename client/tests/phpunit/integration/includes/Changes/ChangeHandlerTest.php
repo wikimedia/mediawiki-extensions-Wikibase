@@ -60,9 +60,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @return ChangeRunCoalescer
 	 */
 	private function getChangeRunCoalescer() {
-		$transformer = $this->getMockBuilder( ChangeRunCoalescer::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$transformer = $this->createMock( ChangeRunCoalescer::class );
 
 		$transformer->method( 'transformChangeList' )
 			->willReturnArgument( 0 );
@@ -627,9 +625,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 	) {
 		$updater = new MockPageUpdater();
 
-		$affectedPagesFinder = $this->getMockBuilder( AffectedPagesFinder::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$affectedPagesFinder = $this->createMock( AffectedPagesFinder::class );
 		$affectedPagesFinder->method( 'getAffectedUsagesByPage' )
 			->willReturn( $usages );
 

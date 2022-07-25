@@ -38,9 +38,7 @@ use Wikimedia\TestingAccessWrapper;
 class InjectRCRecordsJobTest extends TestCase {
 
 	private function getRCFactoryMock(): RecentChangeFactory {
-		$rcFactory = $this->getMockBuilder( RecentChangeFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$rcFactory = $this->createMock( RecentChangeFactory::class );
 
 		$rcFactory->method( 'prepareChangeAttributes' )
 			->willReturn( [] );
@@ -52,9 +50,7 @@ class InjectRCRecordsJobTest extends TestCase {
 	 * @param EntityChange[] $knownChanges
 	 */
 	private function getEntityChangeLookupMock( array $knownChanges = [] ): EntityChangeLookup {
-		$changeLookup = $this->getMockBuilder( EntityChangeLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$changeLookup = $this->createMock( EntityChangeLookup::class );
 
 		$changes = [];
 		foreach ( $knownChanges as $change ) {
@@ -79,9 +75,7 @@ class InjectRCRecordsJobTest extends TestCase {
 	}
 
 	private function getRCDupeDetectorMock(): RecentChangesFinder {
-		$rcDupeDetector = $this->getMockBuilder( RecentChangesFinder::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$rcDupeDetector = $this->createMock( RecentChangesFinder::class );
 
 		return $rcDupeDetector;
 	}
@@ -99,9 +93,7 @@ class InjectRCRecordsJobTest extends TestCase {
 	}
 
 	private function getTitleMock( string $text, int $id = 23 ): Title {
-		$title = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$title = $this->createMock( Title::class );
 
 		$title->method( 'getArticleID' )
 			->willReturn( $id );
@@ -124,9 +116,7 @@ class InjectRCRecordsJobTest extends TestCase {
 	private function getEntityChangeMock( int $id = 77, array $fields = [] ): EntityChange {
 		$info = $fields['info'] ?? [];
 
-		$change = $this->getMockBuilder( EntityChange::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$change = $this->createMock( EntityChange::class );
 
 		$change->method( 'getId' )
 			->willReturn( $id );
@@ -147,9 +137,7 @@ class InjectRCRecordsJobTest extends TestCase {
 	}
 
 	private function getRecentChangeMock(): RecentChange {
-		$change = $this->getMockBuilder( RecentChange::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$change = $this->createMock( RecentChange::class );
 
 		return $change;
 	}

@@ -105,9 +105,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	private function getOtherProjectsSidebarGeneratorFactory( array $otherProjects ): OtherProjectsSidebarGeneratorFactory {
 		$generator = $this->getOtherProjectsSidebarGenerator( $otherProjects );
 
-		$factory = $this->getMockBuilder( OtherProjectsSidebarGeneratorFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$factory = $this->createMock( OtherProjectsSidebarGeneratorFactory::class );
 
 		$factory->method( 'getOtherProjectsSidebarGenerator' )
 			->willReturn( $generator );
@@ -135,9 +133,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	 * @param string[] $otherProjects
 	 */
 	private function getOtherProjectsSidebarGenerator( array $otherProjects ): OtherProjectsSidebarGenerator {
-		$generator = $this->getMockBuilder( OtherProjectsSidebarGenerator::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$generator = $this->createMock( OtherProjectsSidebarGenerator::class );
 
 		$generator->method( 'buildProjectLinkSidebar' )
 			->willReturn( $otherProjects );

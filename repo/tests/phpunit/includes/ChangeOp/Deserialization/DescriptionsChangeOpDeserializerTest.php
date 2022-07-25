@@ -35,9 +35,7 @@ class DescriptionsChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenInvalidChangeRequest_createEntityChangeOpThrowsError() {
 		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
 			function() {
-				$validator = $this->getMockBuilder( TermChangeOpSerializationValidator::class )
-					->disableOriginalConstructor()
-					->getMock();
+				$validator = $this->createMock( TermChangeOpSerializationValidator::class );
 
 				$validator->method( $this->anything() )
 					->willThrowException(

@@ -35,9 +35,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 		parent::setUp();
 		$this->setUserLang( 'qqx' );
 
-		$this->copyrightView = $this->getMockBuilder( SpecialPageCopyrightView::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$this->copyrightView = $this->createMock( SpecialPageCopyrightView::class );
 	}
 
 	//TODO: Add test checking copyright rendering
@@ -63,9 +61,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 
 	public function testExceptionWhenUserBlockedOnNamespace() {
 		$user = $this->getTestUser()->getUser();
-		$block = $this->getMockBuilder( AbstractBlock::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$block = $this->createMock( AbstractBlock::class );
 		$block->expects( $this->once() )
 			->method( 'appliesToNamespace' )
 			->with( $this->isType( 'integer' ) )
@@ -74,9 +70,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 			->willReturn( false );
 		$block->method( 'getReasonComment' )
 			->willReturn( CommentStoreComment::newUnsavedComment( '' ) );
-		$blockManager = $this->getMockBuilder( BlockManager::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$blockManager = $this->createMock( BlockManager::class );
 		$blockManager->method( 'getUserBlock' )
 			->with( $user )
 			->willReturn( $block );

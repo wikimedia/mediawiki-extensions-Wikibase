@@ -47,9 +47,7 @@ class WikibaseLanguageDependentLuaBindingsTest extends \PHPUnit\Framework\TestCa
 	 * @return LanguageFallbackLabelDescriptionLookup
 	 */
 	private function getLabelDescriptionLookup() {
-		$labelDescriptionLookup = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$labelDescriptionLookup = $this->createMock( LanguageFallbackLabelDescriptionLookup::class );
 
 		$labelDescriptionLookup->method( 'getLabel' )
 			->willReturn(

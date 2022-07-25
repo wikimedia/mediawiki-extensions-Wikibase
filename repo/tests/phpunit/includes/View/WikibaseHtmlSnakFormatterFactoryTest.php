@@ -25,11 +25,7 @@ class WikibaseHtmlSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 		$languageFallbackChain = new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) );
 
-		$outputFormatSnakFormatterFactory = $this->getMockBuilder(
-				OutputFormatSnakFormatterFactory::class
-			)
-			->disableOriginalConstructor()
-			->getMock();
+		$outputFormatSnakFormatterFactory = $this->createMock( OutputFormatSnakFormatterFactory::class );
 
 		$outputFormatSnakFormatterFactory->expects( $this->once() )
 			->method( 'getSnakFormatter' )

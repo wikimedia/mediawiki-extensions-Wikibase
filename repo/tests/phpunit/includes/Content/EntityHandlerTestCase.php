@@ -578,7 +578,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	public function testFieldsForSearchIndex() {
 		$handler = $this->getHandler();
 
-		$searchEngine = $this->getMockBuilder( SearchEngine::class )->getMock();
+		$searchEngine = $this->createMock( SearchEngine::class );
 
 		$searchEngine->method( 'makeSearchFieldMapping' )
 			->willReturnCallback( static function ( $name, $type ) {
@@ -619,9 +619,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	): Article {
 		$wikiPage = $this->getMockWikiPage( $handler );
 
-		$article = $this->getMockBuilder( Article::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$article = $this->createMock( Article::class );
 		$article->method( 'getTitle' )
 			->willReturn( $wikiPage->getTitle() );
 		$article->method( 'getPage' )
@@ -649,9 +647,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		// Tests fail when run with WikibaseMediaInfo unless Page::getRevisionRecord
 		// actually returns something.
 		// Introduced in https://gerrit.wikimedia.org/r/#/c/mediawiki/extensions/Wikibase/+/464365/
-		$revisionRecord = $this->getMockBuilder( RevisionRecord::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$revisionRecord = $this->createMock( RevisionRecord::class );
 		$revisionRecord->method( 'hasSlot' )
 			->willReturn( false );
 

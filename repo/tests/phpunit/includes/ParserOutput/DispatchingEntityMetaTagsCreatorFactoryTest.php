@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use InvalidArgumentException;
 use Language;
 use LogicException;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\View\DefaultMetaTagsCreator;
@@ -34,17 +33,10 @@ class DispatchingEntityMetaTagsCreatorFactoryTest extends TestCase {
 
 		$newMetaTags = $factory->newEntityMetaTags(
 			'unknown',
-			$this->getMockLanguage()
+			$this->createMock( Language::class )
 		);
 
 		$this->assertInstanceOf( DefaultMetaTagsCreator::class, $newMetaTags );
-	}
-
-	/**
-	 * @return MockObject|Language
-	 */
-	private function getMockLanguage() {
-		return $this->createMock( Language::class );
 	}
 
 	public function testNoEntityMetaTagsReturned() {
@@ -59,12 +51,12 @@ class DispatchingEntityMetaTagsCreatorFactoryTest extends TestCase {
 		$this->expectException( LogicException::class );
 		$factory->newEntityMetaTags(
 			'dummy-entity-type',
-			$this->getMockLanguage()
+			$this->createMock( Language::class )
 		);
 	}
 
 	public function testNewEntityMetaTags() {
-		$language = $this->getMockLanguage();
+		$language = $this->createMock( Language::class );
 
 		$entityMetaTags = $this->createMock( EntityMetaTagsCreator::class );
 

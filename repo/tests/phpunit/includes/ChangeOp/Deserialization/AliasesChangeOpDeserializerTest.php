@@ -57,9 +57,7 @@ class AliasesChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenInvalidLanguage_createEntityChangeOpThrowsError() {
 		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
 			function() {
-				$validator = $this->getMockBuilder( TermChangeOpSerializationValidator::class )
-					->disableOriginalConstructor()
-					->getMock();
+				$validator = $this->createMock( TermChangeOpSerializationValidator::class );
 
 				$validator->method( $this->anything() )
 					->willThrowException(

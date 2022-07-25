@@ -38,17 +38,14 @@ class EntityParserOutputGeneratorFactoryTest extends MediaWikiIntegrationTestCas
 
 	private function getEntityParserOutputGeneratorFactory() {
 		return new EntityParserOutputGeneratorFactory(
-			$this->getMockBuilder( DispatchingEntityViewFactory::class )
-				->disableOriginalConstructor()->getMock(),
+			$this->createMock( DispatchingEntityViewFactory::class ),
 			$this->createMock( DispatchingEntityMetaTagsCreatorFactory::class ),
 			$this->createMock( EntityTitleLookup::class ),
 			new LanguageFallbackChainFactory(),
 			$this->createMock( EntityDataFormatProvider::class ),
 			new InMemoryDataTypeLookup(),
-			$this->getMockBuilder( EntityReferenceExtractorDelegator::class )
-				->disableOriginalConstructor()->getMock(),
-			$this->getMockBuilder( CachingKartographerEmbeddingHandler::class )
-				->disableOriginalConstructor()->getMock(),
+			$this->createMock( EntityReferenceExtractorDelegator::class ),
+			$this->createMock( CachingKartographerEmbeddingHandler::class ),
 			new NullStatsdDataFactory(),
 			$this->createMock( RepoGroup::class )
 		);

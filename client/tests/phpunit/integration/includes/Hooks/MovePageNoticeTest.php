@@ -61,9 +61,7 @@ class MovePageNoticeTest extends MediaWikiIntegrationTestCase {
 			$this->getRepoLinker()
 		);
 
-		$outputPage = $this->getMockBuilder( OutputPage::class )
-				->disableOriginalConstructor()
-				->getMock();
+		$outputPage = $this->createMock( OutputPage::class );
 
 		$outputPage->expects( $this->once() )
 				->method( 'addHTML' )

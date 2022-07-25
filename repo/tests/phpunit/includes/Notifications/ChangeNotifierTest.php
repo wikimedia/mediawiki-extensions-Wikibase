@@ -80,9 +80,7 @@ class ChangeNotifierTest extends MediaWikiIntegrationTestCase {
 	 * @return RevisionRecord
 	 */
 	private function makeRevision( Content $content, UserIdentity $user, $revisionId, $timestamp, $parent_id = 0 ) {
-		$revisionRecord = $this->getMockBuilder( RevisionRecord::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$revisionRecord = $this->createMock( RevisionRecord::class );
 
 		$revisionRecord->method( 'getContent' )
 			->with( SlotRecord::MAIN )

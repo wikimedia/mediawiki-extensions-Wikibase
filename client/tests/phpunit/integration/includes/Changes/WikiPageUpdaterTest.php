@@ -32,9 +32,7 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 	 * @return JobQueueGroup|MockObject
 	 */
 	private function getJobQueueGroupMock() {
-		$jobQueueGroup = $this->getMockBuilder( JobQueueGroup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$jobQueueGroup = $this->createMock( JobQueueGroup::class );
 
 		return $jobQueueGroup;
 	}
@@ -46,9 +44,7 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 	 * @return Title
 	 */
 	private function getTitleMock( $text, $id ) {
-		$title = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$title = $this->createMock( Title::class );
 
 		$title->method( 'getArticleID' )
 			->willReturn( $id );

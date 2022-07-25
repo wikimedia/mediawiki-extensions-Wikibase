@@ -21,7 +21,7 @@ use Wikibase\DataModel\Snak\SnakList;
 class ReferenceDeserializerTest extends DispatchableDeserializerTest {
 
 	protected function buildDeserializer() {
-		$snaksDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$snaksDeserializerMock = $this->createMock( Deserializer::class );
 		$snaksDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [] ) )
@@ -71,7 +71,7 @@ class ReferenceDeserializerTest extends DispatchableDeserializerTest {
 	}
 
 	public function testSnaksOrderDeserialization() {
-		$snaksDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$snaksDeserializerMock = $this->createMock( Deserializer::class );
 		$snaksDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [

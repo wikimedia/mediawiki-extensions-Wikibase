@@ -70,9 +70,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 	 * @return Title
 	 */
 	public function getMockTitle() {
-		$mock = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( Title::class );
 		$mock->method( 'getNamespace' )
 			->willReturn( 0 );
 		$mock->method( 'getPrefixedText' )
@@ -90,9 +88,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 	 * @return EntityTermSearchHelper
 	 */
 	private function getMockEntitySearchHelper( array $params, array $matches, ?Status $failureStatus ): EntityTermSearchHelper {
-		$mock = $this->getMockBuilder( EntityTermSearchHelper::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( EntityTermSearchHelper::class );
 		$invocation = $mock->expects( $this->atLeastOnce() )
 			->method( 'getRankedSearchResults' )
 			->with(
@@ -118,9 +114,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 	 * @return ApiPageSet
 	 */
 	private function getMockApiPageSet( array $expected ) {
-		$mock = $this->getMockBuilder( ApiPageSet::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( ApiPageSet::class );
 
 		$i = 0;
 		foreach ( $expected as $entry ) {
@@ -287,9 +281,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 
 	public function testSearchBackendErrorIsPropagatedDuringExecuteGenerator() {
 		$errorStatus = Status::newFatal( 'search-backend-error' );
-		$mock = $this->getMockBuilder( ApiPageSet::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( ApiPageSet::class );
 		try {
 			$this->callApi( [ 'wbssearch' => 'Foo' ], [], $mock, $errorStatus );
 			$this->fail( "Exception must be thrown" );

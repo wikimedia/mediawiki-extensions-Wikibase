@@ -150,9 +150,7 @@ class SkinAfterPortletHandlerTest extends TestCase {
 			->getContentHandlerFactory()
 			->getContentHandler( CONTENT_MODEL_WIKITEXT );
 
-		$wikiPage = $this->getMockBuilder( WikiPage::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$wikiPage = $this->createMock( WikiPage::class );
 		$wikiPage->method( 'getActionOverrides' )
 			->willReturn( [] );
 		$wikiPage->method( 'getContentHandler' )

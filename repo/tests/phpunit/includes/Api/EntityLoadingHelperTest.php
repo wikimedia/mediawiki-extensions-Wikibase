@@ -106,9 +106,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 	 * @return ApiErrorReporter
 	 */
 	protected function getMockErrorReporter( $expectedExceptionCode, $expectedErrorCode ) {
-		$mock = $this->getMockBuilder( ApiErrorReporter::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( ApiErrorReporter::class );
 		$apiUsageException = ApiUsageException::newWithMessage( null, 'mockApiUsageException' );
 
 		if ( $expectedExceptionCode ) {
@@ -143,9 +141,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 	protected function getMockRevision() {
 		$entity = $this->createMock( EntityDocument::class );
 
-		$revision = $this->getMockBuilder( EntityRevision::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$revision = $this->createMock( EntityRevision::class );
 
 		$revision->method( 'getEntity' )
 			->willReturn( $entity );

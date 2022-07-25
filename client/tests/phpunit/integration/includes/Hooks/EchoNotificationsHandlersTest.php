@@ -47,23 +47,17 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 			$this->markTestSkipped( "Echo not loaded" );
 		}
 
-		$this->repoLinker = $this->getMockBuilder( RepoLinker::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$this->repoLinker = $this->createMock( RepoLinker::class );
 		$this->repoLinker
 			->method( 'getEntityUrl' )
 			->willReturn( 'foo' );
 
-		$this->namespaceChecker = $this->getMockBuilder( NamespaceChecker::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$this->namespaceChecker = $this->createMock( NamespaceChecker::class );
 		$this->namespaceChecker
 			->method( 'isWikibaseEnabled' )
 			->willReturn( true );
 
-		$this->userOptionsManager = $this->getMockBuilder( UserOptionsManager::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$this->userOptionsManager = $this->createMock( UserOptionsManager::class );
 	}
 
 	/**
@@ -214,9 +208,7 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider localUserCreatedProvider
 	 */
 	public function testLocalUserCreated( $enabled, $times, $auto ) {
-		$user = $this->getMockBuilder( User::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$user = $this->createMock( User::class );
 
 		$this->userOptionsManager->expects( $this->exactly( $times ) )
 			->method( 'setOption' );

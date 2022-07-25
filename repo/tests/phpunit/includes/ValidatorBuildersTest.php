@@ -90,9 +90,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 	 * @return MediaWikiPageNameNormalizer
 	 */
 	private function getMediaWikiPageNameNormalizer() {
-		$pageNormalizer = $this->getMockBuilder( MediaWikiPageNameNormalizer::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$pageNormalizer = $this->createMock( MediaWikiPageNameNormalizer::class );
 
 		$pageNormalizer->method( 'normalizePageName' )
 			->willReturnCallback( function( $pageName ) {
@@ -106,9 +104,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 	 * @return CachingCommonsMediaFileNameLookup
 	 */
 	private function getCachingCommonsMediaFileNameLookup() {
-		$fileNameLookup = $this->getMockBuilder( CachingCommonsMediaFileNameLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$fileNameLookup = $this->createMock( CachingCommonsMediaFileNameLookup::class );
 
 		$fileNameLookup->method( 'lookupFileName' )
 			->with( $this->isType( 'string' ) )

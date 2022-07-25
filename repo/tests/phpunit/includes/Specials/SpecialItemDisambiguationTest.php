@@ -43,9 +43,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	 * @return ItemDisambiguation
 	 */
 	private function getMockItemDisambiguation() {
-		$mock = $this->getMockBuilder( ItemDisambiguation::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( ItemDisambiguation::class );
 		$mock->method( 'getHTML' )
 			->willReturnCallback( function ( $searchResult ) {
 				return '<span class="mock-span" >ItemDisambiguationHTML-' . count( $searchResult ) . '</span>';

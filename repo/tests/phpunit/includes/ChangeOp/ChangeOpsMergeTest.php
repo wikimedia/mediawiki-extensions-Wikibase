@@ -60,7 +60,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 		parent::__construct( $name, $data, $dataName );
 
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
-		$this->statementsMerger = $this->newMockStatementsMerger();
+		$this->statementsMerger = $this->createMock( StatementsMerger::class );
 	}
 
 	protected function makeChangeOpsMerge(
@@ -84,9 +84,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 				return Result::newSuccess();
 			} );
 
-		$constraintProvider = $this->getMockBuilder( EntityConstraintProvider::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$constraintProvider = $this->createMock( EntityConstraintProvider::class );
 		$constraintProvider->method( 'getUpdateValidators' )
 			->willReturn( [ $siteLinkUniquenessValidator ] );
 
@@ -542,10 +540,6 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 		$this->expectException( ChangeOpException::class );
 		$this->expectExceptionMessage( 'The two items cannot be merged because one of them links to the other using the properties: P42' );
 		$changeOps->apply();
-	}
-
-	private function newMockStatementsMerger() {
-		return $this->createMock( StatementsMerger::class );
 	}
 
 	private function newRealStatementsMerger() {

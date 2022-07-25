@@ -24,7 +24,7 @@ class TypedSnakSerializerTest extends TestCase {
 	private $serializer;
 
 	protected function setUp(): void {
-		$snakSerializer = $this->getMockBuilder( Serializer::class )->getMock();
+		$snakSerializer = $this->createMock( Serializer::class );
 
 		$snakSerializer->expects( $this->any() )
 			->method( 'serialize' )
@@ -48,7 +48,7 @@ class TypedSnakSerializerTest extends TestCase {
 	public function serializationProvider() {
 		$argLists = [];
 
-		$mockSnak = $this->getMockBuilder( Snak::class )->getMock();
+		$mockSnak = $this->createMock( Snak::class );
 
 		$argLists[] = [
 			new TypedSnak( $mockSnak, 'string' ),

@@ -73,9 +73,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		$item = new Item();
 		$actual = [];
 
-		$parserOutput = $this->getMockBuilder( ParserOutput::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$parserOutput = $this->createMock( ParserOutput::class );
 		$parserOutput->expects( $this->exactly( count( $expectedEntityIds ) ) )
 			->method( 'addLink' )
 			->willReturnCallback( function( Title $title ) use ( &$actual ) {

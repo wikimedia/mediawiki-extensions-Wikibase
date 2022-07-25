@@ -303,9 +303,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetPositionReturnsZeroWhenNothingFetchedYet() {
-		$entityNamespaceLookup = $this->getMockBuilder( EntityNamespaceLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$entityNamespaceLookup = $this->createMock( EntityNamespaceLookup::class );
 
 		$pager = new SqlEntityIdPager(
 			$entityNamespaceLookup,

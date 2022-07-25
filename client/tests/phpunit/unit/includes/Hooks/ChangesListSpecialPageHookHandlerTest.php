@@ -478,9 +478,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 	 * @return User
 	 */
 	private function getUser( array $userOptions ) {
-		$user = $this->getMockBuilder( User::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$user = $this->createMock( User::class );
 
 		$user->method( 'getOption' )
 			->willReturnCallback( static function ( $optionName ) use ( $userOptions ) {

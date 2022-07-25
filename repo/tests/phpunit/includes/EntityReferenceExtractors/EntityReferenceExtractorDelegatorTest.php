@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\EntityReferenceExtractors;
 
 use InvalidArgumentException;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -27,13 +26,13 @@ class EntityReferenceExtractorDelegatorTest extends TestCase {
 	 */
 	public function testGivenNonCallables_throwsException( $nonCallables ) {
 		$this->expectException( InvalidArgumentException::class );
-		new EntityReferenceExtractorDelegator( $nonCallables, $this->getMockStatementEntityReferenceExtractor() );
+		new EntityReferenceExtractorDelegator( $nonCallables, $this->createMock( StatementEntityReferenceExtractor::class ) );
 	}
 
 	public function testGivenEntityReferenceExtractorsForEntityType_extractEntityIdsDelegates() {
 		$entity = new Item();
 		$expected = [ new ItemId( 'Q123' ) ];
-		$mockEntityReferenceExtractor = $this->getMockBuilder( EntityReferenceExtractor::class )->getMock();
+		$mockEntityReferenceExtractor = $this->createMock( EntityReferenceExtractor::class );
 		$mockEntityReferenceExtractor->expects( $this->once() )
 			->method( 'extractEntityIds' )
 			->with( $entity )
@@ -45,7 +44,7 @@ class EntityReferenceExtractorDelegatorTest extends TestCase {
 			'item' => function () use ( $mockEntityReferenceExtractor ) {
 				return $mockEntityReferenceExtractor;
 			},
-		], $this->getMockStatementEntityReferenceExtractor() );
+		], $this->createMock( StatementEntityReferenceExtractor::class ) );
 
 		$this->assertSame(
 			$expected,
@@ -56,7 +55,7 @@ class EntityReferenceExtractorDelegatorTest extends TestCase {
 	public function testGivenUnknownStatementListProvidingEntityType_usesStatementEntityReferenceExtractor() {
 		$entity = new Item();
 		$expected = [ new NumericPropertyId( 'P123' ), new ItemId( 'Q123' ) ];
-		$statementEntityReferenceExtractor = $this->getMockStatementEntityReferenceExtractor();
+		$statementEntityReferenceExtractor = $this->createMock( StatementEntityReferenceExtractor::class );
 		$statementEntityReferenceExtractor->expects( $this->once() )
 			->method( 'extractEntityIds' )
 			->with( $entity )
@@ -67,11 +66,11 @@ class EntityReferenceExtractorDelegatorTest extends TestCase {
 	}
 
 	public function testGivenUnknownNonStatementListProvidingEntitytype_returnsEmptyArray() {
-		$mockEntity = $this->getMockBuilder( EntityDocument::class )->getMock();
+		$mockEntity = $this->createMock( EntityDocument::class );
 		$mockEntity->expects( $this->once() )
 			->method( 'getType' )
 			->willReturn( 'unknown-entity-type' );
-		$statementEntityReferenceExtractor = $this->getMockStatementEntityReferenceExtractor();
+		$statementEntityReferenceExtractor = $this->createMock( StatementEntityReferenceExtractor::class );
 		$statementEntityReferenceExtractor->expects( $this->never() )
 			->method( 'extractEntityIds' );
 		$delegator = new EntityReferenceExtractorDelegator( [], $statementEntityReferenceExtractor );
@@ -86,15 +85,6 @@ class EntityReferenceExtractorDelegatorTest extends TestCase {
 			[ [ function () {
 			}, null ] ],
 		];
-	}
-
-	/**
-	 * @return StatementEntityReferenceExtractor|MockObject
-	 */
-	private function getMockStatementEntityReferenceExtractor() {
-		return $this->getMockBuilder( StatementEntityReferenceExtractor::class )
-			->disableOriginalConstructor()
-			->getMock();
 	}
 
 }

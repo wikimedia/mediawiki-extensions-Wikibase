@@ -182,9 +182,7 @@ class DescriptionLookupTest extends TestCase {
 	 */
 	private function makeTitle( $pageId, $pageLanguageCode ) {
 		$language = Language::factory( $pageLanguageCode );
-		$title = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$title = $this->createMock( Title::class );
 		$title->method( 'getArticleID' )
 			->willReturn( $pageId );
 		$title->method( 'getPageLanguage' )
@@ -200,9 +198,7 @@ class DescriptionLookupTest extends TestCase {
 	 * @return PageProps
 	 */
 	private function mockPageProps( array $localDescriptions ): PageProps {
-		$pageProps = $this->getMockBuilder( PageProps::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$pageProps = $this->createMock( PageProps::class );
 		$pageProps->method( 'getProperties' )
 			->with( $this->anything(), DescriptionLookup::LOCAL_PROPERTY_NAME )
 			->willReturnCallback( function ( $titlesByPageId ) use ( $localDescriptions ) {
@@ -260,9 +256,7 @@ class DescriptionLookupTest extends TestCase {
 	 * @return MockObject|TermBuffer
 	 */
 	private function getTermBuffer( array $centralDescriptions ) {
-		$termBuffer = $this->getMockBuilder( TermBuffer::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$termBuffer = $this->createMock( TermBuffer::class );
 		$termBuffer->method( 'getPrefetchedTerm' )
 			->willReturnCallback(
 				function ( $entityId, $termType, $langCode ) use ( $centralDescriptions ) {

@@ -57,12 +57,9 @@ class TemplateModuleTest extends \PHPUnit\Framework\TestCase {
 	 * @return Context
 	 */
 	private function getResourceLoaderContext() {
-		$context = $this->getMockBuilder( Context::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$context = $this->createMock( Context::class );
 		$context->method( 'getLanguage' )
 			->willReturn( 'en' );
-
 		return $context;
 	}
 

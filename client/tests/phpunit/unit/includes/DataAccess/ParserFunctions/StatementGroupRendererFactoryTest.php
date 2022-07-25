@@ -185,13 +185,9 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider allowDataAccessInUserLanguageProvider
 	 */
 	public function testNewRendererFromParser_languageOption( bool $allowDataAccessInUserLanguage ): void {
-		$labelResolver = $this->getMockBuilder( PropertyLabelResolver::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$labelResolver = $this->createMock( PropertyLabelResolver::class );
 
-		$formatterFactory = $this->getMockBuilder( OutputFormatSnakFormatterFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$formatterFactory = $this->createMock( OutputFormatSnakFormatterFactory::class );
 		$formatterFactory->expects( $this->once() )
 			->method( 'getSnakFormatter' )
 			->willReturnCallback(
@@ -230,9 +226,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getStatementGroupRendererFactory( bool $allowDataAccessInUserLanguage = false ): StatementGroupRendererFactory {
-		$labelResolver = $this->getMockBuilder( PropertyLabelResolver::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$labelResolver = $this->createMock( PropertyLabelResolver::class );
 
 		return new StatementGroupRendererFactory(
 			$labelResolver,
@@ -286,9 +280,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$snakFormatter->method( 'formatSnak' )
 			->willReturn( 'Kittens!' );
 
-		$snakFormatterFactory = $this->getMockBuilder( OutputFormatSnakFormatterFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$snakFormatterFactory = $this->createMock( OutputFormatSnakFormatterFactory::class );
 
 		$snakFormatterFactory->method( 'getSnakFormatter' )
 			->willReturn( $snakFormatter );
@@ -350,10 +342,9 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getFallbackLabelDescriptionLookupFactory(): FallbackLabelDescriptionLookupFactory {
-		$languageFallbackLabelDescriptionLookup = $this->createMock( FallbackLabelDescriptionLookup::class );
 		$languageFallbackLabelDescriptionLookupFactory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
 		$languageFallbackLabelDescriptionLookupFactory->method( 'newLabelDescriptionLookup' )
-			->willReturn( $languageFallbackLabelDescriptionLookup );
+			->willReturn( $this->createMock( FallbackLabelDescriptionLookup::class ) );
 
 		return $languageFallbackLabelDescriptionLookupFactory;
 	}

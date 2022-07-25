@@ -41,11 +41,11 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 		parent::setUp();
 		$this->script = new MockAddUnits();
 		$this->client =
-			$this->getMockBuilder( SparqlClient::class )->disableOriginalConstructor()->getMock();
+			$this->createMock( SparqlClient::class );
 		$this->script->setClient( $this->client );
 		$this->script->initializeWriter( 'http://acme.test/', 'nt' );
 		$this->uc =
-			$this->getMockBuilder( UnitConverter::class )->disableOriginalConstructor()->getMock();
+			$this->createMock( UnitConverter::class );
 		$this->script->setUnitConverter( $this->uc );
 		$this->script->initializeBuilder();
 		$this->helper = new NTriplesRdfTestHelper(

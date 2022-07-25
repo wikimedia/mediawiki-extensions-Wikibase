@@ -141,7 +141,7 @@ class StatementsMergerTest extends TestCase {
 	}
 
 	public function nonEntityDocumentProvider() {
-		$nonEntity = $this->getMockBuilder( StatementListProvider::class )->getMock();
+		$nonEntity = $this->createMock( StatementListProvider::class );
 
 		yield 'source not an entity' => [
 			$nonEntity,

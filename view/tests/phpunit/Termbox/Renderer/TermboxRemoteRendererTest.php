@@ -76,7 +76,7 @@ class TermboxRemoteRendererTest extends TestCase {
 		$preferredLanguages = [ 'en', 'fr', 'es' ];
 		$fallbackChain = $this->newLanguageFallbackChain( $preferredLanguages );
 
-		$requestFactory = $this->newHttpRequestFactory();
+		$requestFactory = $this->createMock( HttpRequestFactory::class );
 		$requestFactory->expects( $this->once() )
 			->method( 'create' )
 			->with(
@@ -305,13 +305,6 @@ class TermboxRemoteRendererTest extends TestCase {
 			$this->logger,
 			$this->stats
 		);
-	}
-
-	/**
-	 * @return MockObject|HttpRequestFactory
-	 */
-	private function newHttpRequestFactory() {
-		return $this->createMock( HttpRequestFactory::class );
 	}
 
 	/**

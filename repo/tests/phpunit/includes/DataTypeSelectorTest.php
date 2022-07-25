@@ -26,9 +26,7 @@ class DataTypeSelectorTest extends \PHPUnit\Framework\TestCase {
 	 * @return DataType
 	 */
 	private function newDataType( $propertyType, $messageKey ) {
-		$dataType = $this->getMockBuilder( DataType::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$dataType = $this->createMock( DataType::class );
 
 		$dataType->method( 'getId' )
 			->willReturn( $propertyType );

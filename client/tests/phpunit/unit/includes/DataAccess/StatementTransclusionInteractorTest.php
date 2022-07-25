@@ -171,9 +171,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @return SnaksFinder
 	 */
 	private function getSnaksFinder( array $snaks ) {
-		$snaksFinder = $this->getMockBuilder( SnaksFinder::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$snaksFinder = $this->createMock( SnaksFinder::class );
 
 		$snaksFinder->method( 'findSnaks' )
 			->willReturn( $snaks );
@@ -185,9 +183,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @return PropertyIdResolver
 	 */
 	private function getPropertyIdResolver() {
-		$propertyIdResolver = $this->getMockBuilder( PropertyIdResolver::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$propertyIdResolver = $this->createMock( PropertyIdResolver::class );
 
 		$propertyIdResolver->method( 'resolvePropertyId' )
 			->willReturn( new NumericPropertyId( 'P1337' ) );
@@ -199,9 +195,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @return PropertyIdResolver
 	 */
 	private function getPropertyIdResolverForPropertyNotFound() {
-		$propertyIdResolver = $this->getMockBuilder( PropertyIdResolver::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$propertyIdResolver = $this->createMock( PropertyIdResolver::class );
 
 		$propertyIdResolver->method( 'resolvePropertyId' )
 			->willReturnCallback( function( $propertyLabelOrId, $languageCode ) {

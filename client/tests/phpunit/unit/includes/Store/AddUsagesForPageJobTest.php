@@ -95,9 +95,7 @@ class AddUsagesForPageJobTest extends \PHPUnit\Framework\TestCase {
 			'usages' => [ $usageQ5X->asArray() ]
 		];
 
-		$usageUpdater = $this->getMockBuilder( UsageUpdater::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$usageUpdater = $this->createMock( UsageUpdater::class );
 
 		$usageUpdater->expects( $this->once() )
 			->method( 'addUsagesForPage' )

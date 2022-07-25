@@ -24,9 +24,7 @@ class InterWikiLinkExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 	 * @return MediaWikiPageNameNormalizer
 	 */
 	private function getMediaWikiPageNameNormalizer() {
-		$pageNormalizer = $this->getMockBuilder( MediaWikiPageNameNormalizer::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$pageNormalizer = $this->createMock( MediaWikiPageNameNormalizer::class );
 
 		$pageNormalizer->method( 'normalizePageName' )
 			->with( $this->isType( 'string' ), $this->anything() )

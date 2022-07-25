@@ -35,9 +35,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit\Framework\TestCase {
 	private function getWikibaseSnakFormatterBuilders() {
 		$p1 = new NumericPropertyId( 'P1' );
 
-		$valueFormatterBuilders = $this->getMockBuilder( WikibaseValueFormatterBuilders::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$valueFormatterBuilders = $this->createMock( WikibaseValueFormatterBuilders::class );
 
 		$valueFormatterBuilders->method( 'newStringFormatter' )
 			->willReturn( new StringFormatter() );

@@ -18,7 +18,7 @@ use Wikibase\DataModel\Entity\ItemId;
 class EntityIdDeserializerTest extends TestCase {
 
 	private function buildDeserializer() {
-		$entityIdParserMock = $this->getMockBuilder( EntityIdParser::class )->getMock();
+		$entityIdParserMock = $this->createMock( EntityIdParser::class );
 		$entityIdParserMock->expects( $this->any() )
 			->method( 'parse' )
 			->with( $this->equalTo( 'Q42' ) )
@@ -66,7 +66,7 @@ class EntityIdDeserializerTest extends TestCase {
 	}
 
 	public function testDeserializeWithEntityIdParsingException() {
-		$entityIdParserMock = $this->getMockBuilder( EntityIdParser::class )->getMock();
+		$entityIdParserMock = $this->createMock( EntityIdParser::class );
 		$entityIdParserMock->expects( $this->any() )
 			->method( 'parse' )
 			->will( $this->throwException( new EntityIdParsingException() ) );

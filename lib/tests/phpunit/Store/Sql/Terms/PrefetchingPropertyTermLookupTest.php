@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
+use JobQueueGroup;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -18,7 +19,6 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
-use Wikibase\Lib\Tests\Store\Sql\Terms\Util\MockJobQueueFactory;
 use Wikibase\Lib\WikibaseSettings;
 
 /**
@@ -73,7 +73,7 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiIntegrationTestCase {
 
 		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter(
 			$repoDb,
-			( new MockJobQueueFactory( $this ) )->getMockJobQueue(),
+			$this->createMock( JobQueueGroup::class ),
 			new DatabaseTermInLangIdsAcquirer(
 				$repoDb,
 				$typeIdsStore

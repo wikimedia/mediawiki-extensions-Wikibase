@@ -28,15 +28,6 @@ use Wikibase\Repo\Api\ResultBuilder;
 class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 
 	/**
-	 * @return ApiBase
-	 */
-	private function getApiBaseMock() {
-		return $this->getMockBuilder( ApiBase::class )
-			->disableOriginalConstructor()
-			->getMock();
-	}
-
-	/**
 	 * @return SiteLookup
 	 */
 	public function getSiteLookupMock() {
@@ -55,9 +46,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 	 * @return ResultBuilder
 	 */
 	public function getResultBuilderMock( $expectedNormalizedTitle = 0 ) {
-		$apiResultBuilderMock = $this->getMockBuilder( ResultBuilder::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$apiResultBuilderMock = $this->createMock( ResultBuilder::class );
 		$apiResultBuilderMock->expects( $this->exactly( $expectedNormalizedTitle ) )
 			->method( 'addNormalizedTitle' );
 
@@ -83,7 +72,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 		$expectedEntityId = $expectedEntityId->getSerialization();
 
 		$entityByTitleHelper = new EntityByTitleHelper(
-			$this->getApiBaseMock(),
+			$this->createMock( ApiBase::class ),
 			$this->getResultBuilderMock(),
 			$this->getEntityByLinkedTitleLookupMock( new ItemId( 'Q123' ) ),
 			$this->getSiteLookupMock(),
@@ -105,8 +94,8 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetEntityIdNormalized() {
 		$entityByTitleHelper = new EntityByTitleHelper(
-			$this->getApiBaseMock(),
-		// Two values should be added: The normalization and the failure to find an entity
+			$this->createMock( ApiBase::class ),
+			// Two values should be added: The normalization and the failure to find an entity
 			$this->getResultBuilderMock( 1 ),
 			$this->getEntityByLinkedTitleLookupMock( null ),
 			$this->getSiteLookupMock(),
@@ -128,8 +117,8 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetEntityIdsNotFound() {
 		$entityByTitleHelper = new EntityByTitleHelper(
-			$this->getApiBaseMock(),
-		// Two result values should be added (for both titles which wont be found)
+			$this->createMock( ApiBase::class ),
+			// Two result values should be added (for both titles which wont be found)
 			$this->getResultBuilderMock(),
 			$this->getEntityByLinkedTitleLookupMock( false ),
 			$this->getSiteLookupMock(),
@@ -149,7 +138,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 		$this->expectException( ApiUsageException::class );
 
 		$entityByTitleHelper = new EntityByTitleHelper(
-			$this->getApiBaseMock(),
+			$this->createMock( ApiBase::class ),
 			$this->getResultBuilderMock(),
 			$this->getEntityByLinkedTitleLookupMock( 1 ),
 			$this->getSiteLookupMock(),
@@ -186,7 +175,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 		$dummySite = new MediaWikiSite();
 
 		$entityByTitleHelper = new EntityByTitleHelper(
-			$this->getApiBaseMock(),
+			$this->createMock( ApiBase::class ),
 			$this->getResultBuilderMock( $expectedAddNormalizedCalls ),
 			$this->getEntityByLinkedTitleLookupMock( $expectedEntityId ),
 			$this->getSiteLookupMock(),
@@ -224,7 +213,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 		$this->expectException( ApiUsageException::class );
 
 		$entityByTitleHelper = new EntityByTitleHelper(
-			$this->getApiBaseMock(),
+			$this->createMock( ApiBase::class ),
 			$this->getResultBuilderMock(),
 			$this->getEntityByLinkedTitleLookupMock( new ItemId( 'Q123' ) ),
 			$this->getSiteLookupMock(),

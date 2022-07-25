@@ -29,33 +29,25 @@ class WrappingEntityIdFormatterFactoryTest extends TestCase {
 		$mock->method( 'getOutputFormat' )
 			->willReturn( 'OUTPUT' );
 		$mock->method( 'getEntityIdFormatter' )
-			->with( $this->mockLanguage() )
+			->with( $this->createMock( Language::class ) )
 			->willReturn( $this->createMock( EntityIdFormatter::class ) );
 		return $mock;
 	}
 
-	/**
-	 * @return Language|MockObject
-	 */
-	private function mockLanguage() {
-		return $this->createMock( Language::class );
-	}
-
-	private function newWrappingEntityIdFormatterFactory(): WrappingEntityIdFormatterFactory {
-		return new WrappingEntityIdFormatterFactory( $this->mockEntityIdFormatterFactory() );
-	}
-
 	public function testGetOutputFormat() {
+		$factory = new WrappingEntityIdFormatterFactory( $this->mockEntityIdFormatterFactory() );
 		$this->assertEquals(
 			'OUTPUT',
-			$this->newWrappingEntityIdFormatterFactory()->getOutputFormat()
+			$factory->getOutputFormat()
 		);
 	}
 
 	public function testGetEntityIdFormatter() {
+		$factory = new WrappingEntityIdFormatterFactory( $this->mockEntityIdFormatterFactory() );
+		$formatter = $factory->getEntityIdFormatter( $this->createMock( Language::class ) );
 		$this->assertInstanceOf(
 			EntityIdFormatter::class,
-			$this->newWrappingEntityIdFormatterFactory()->getEntityIdFormatter( $this->mockLanguage() )
+			$formatter
 		);
 	}
 

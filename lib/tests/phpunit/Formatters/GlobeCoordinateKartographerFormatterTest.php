@@ -78,9 +78,7 @@ class GlobeCoordinateKartographerFormatterTest extends \PHPUnit\Framework\TestCa
 		$isPreview = false,
 		$returnValue = '<kartographer-html/>'
 	) {
-		$handler = $this->getMockBuilder( CachingKartographerEmbeddingHandler::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$handler = $this->createMock( CachingKartographerEmbeddingHandler::class );
 
 		$handler->expects( $this->exactly( $totalCalls ) )
 			->method( $isPreview ? 'getPreviewHtml' : 'getHtml' )

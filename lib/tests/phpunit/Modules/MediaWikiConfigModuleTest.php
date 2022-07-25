@@ -22,10 +22,7 @@ class MediaWikiConfigModuleTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetScript_returnsJavaScript() {
-		$context = $this->getMockBuilder( RL\Context::class )
-			->disableOriginalConstructor()
-			->getMock();
-
+		$context = $this->createMock( RL\Context::class );
 		$context->expects( $this->never() )
 			->method( $this->anything() );
 

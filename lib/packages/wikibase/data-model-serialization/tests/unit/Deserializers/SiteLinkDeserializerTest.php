@@ -20,7 +20,7 @@ use Wikibase\DataModel\SiteLink;
 class SiteLinkDeserializerTest extends TestCase {
 
 	private function buildDeserializer() {
-		$entityIdDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$entityIdDeserializerMock = $this->createMock( Deserializer::class );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( 'Q42' ) )
@@ -95,7 +95,7 @@ class SiteLinkDeserializerTest extends TestCase {
 	}
 
 	public function testDeserializeItemIdFilterPropertyId() {
-		$entityIdDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$entityIdDeserializerMock = $this->createMock( Deserializer::class );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( 'P42' ) )
@@ -111,7 +111,7 @@ class SiteLinkDeserializerTest extends TestCase {
 	}
 
 	public function testAssertBadgesIsArray() {
-		$entityIdDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$entityIdDeserializerMock = $this->createMock( Deserializer::class );
 		$deserializer = new SiteLinkDeserializer( $entityIdDeserializerMock );
 
 		$this->expectException( InvalidAttributeException::class );

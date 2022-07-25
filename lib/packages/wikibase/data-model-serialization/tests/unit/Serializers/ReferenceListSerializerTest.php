@@ -17,7 +17,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 class ReferenceListSerializerTest extends DispatchableSerializerTest {
 
 	protected function buildSerializer() {
-		$referenceSerializerFake = $this->getMockBuilder( Serializer::class )->getMock();
+		$referenceSerializerFake = $this->createMock( Serializer::class );
 		$referenceSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnValue( [

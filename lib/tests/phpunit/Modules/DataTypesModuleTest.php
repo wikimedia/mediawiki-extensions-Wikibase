@@ -127,7 +127,7 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$module = new DataTypesModule( $definition );
-		$summary = $module->getDefinitionSummary( $this->getContext() );
+		$summary = $module->getDefinitionSummary( $this->createMock( Context::class ) );
 
 		$this->assertIsArray( $summary );
 		$this->assertArrayHasKey( 0, $summary );
@@ -147,7 +147,7 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 		$module1 = new DataTypesModule( $definition1 );
 		$module2 = new DataTypesModule( $definition2 );
 
-		$context = $this->getContext();
+		$context = $this->createMock( Context::class );
 
 		$summary1 = $module1->getDefinitionSummary( $context );
 		$summary2 = $module2->getDefinitionSummary( $context );
@@ -160,15 +160,6 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 			'datatypesconfigvarname' => 'foo123',
 			'datatypefactory' => new DataTypeFactory( $dataTypes )
 		];
-	}
-
-	/**
-	 * @return Context
-	 */
-	private function getContext() {
-		return $this->getMockBuilder( Context::class )
-			->disableOriginalConstructor()
-			->getMock();
 	}
 
 }

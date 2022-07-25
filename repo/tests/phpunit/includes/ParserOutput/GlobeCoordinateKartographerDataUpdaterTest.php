@@ -90,9 +90,7 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 	 * @return CachingKartographerEmbeddingHandler
 	 */
 	private function newCachingKartographerEmbeddingHandler() {
-		$handler = $this->getMockBuilder( CachingKartographerEmbeddingHandler::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$handler = $this->createMock( CachingKartographerEmbeddingHandler::class );
 
 		$handler->expects( $this->once() )
 			->method( 'getParserOutput' )

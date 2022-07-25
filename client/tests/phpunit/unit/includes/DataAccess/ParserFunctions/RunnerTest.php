@@ -160,9 +160,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testRunPropertyParserFunction_arbitraryAccessNotFound() {
-		$rendererFactory = $this->getMockBuilder( StatementGroupRendererFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$rendererFactory = $this->createMock( StatementGroupRendererFactory::class );
 
 		$runner = new Runner(
 			$rendererFactory,
@@ -219,15 +217,13 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 	 * @return PPFrame
 	 */
 	private function getFromFrame( $itemIdSerialization ) {
-		$frame = $this->getMockBuilder( PPFrame::class )
-			->getMock();
+		$frame = $this->createMock( PPFrame::class );
 		$frame->expects( $this->once() )
 			->method( 'expand' )
 			->with( 'Cat' )
 			->willReturn( 'Cat' );
 
-		$childFrame = $this->getMockBuilder( PPFrame::class )
-			->getMock();
+		$childFrame = $this->createMock( PPFrame::class );
 		$childFrame->expects( $this->once() )
 			->method( 'getArgument' )
 			->with( 'from' )
@@ -250,9 +246,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 	private function getStatementGroupRendererFactory( EntityId $entityId, $propertyLabelOrId, $type ) {
 		$renderer = $this->getRenderer( $entityId, $propertyLabelOrId );
 
-		$rendererFactory = $this->getMockBuilder( StatementGroupRendererFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$rendererFactory = $this->createMock( StatementGroupRendererFactory::class );
 
 		$rendererFactory->method( 'newRendererFromParser' )
 			->with( $this->isInstanceOf( Parser::class ), $type )

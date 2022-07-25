@@ -89,9 +89,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 	 * @return JobQueueGroup
 	 */
 	private function getJobQueueGroupMock() {
-		$jobQueueGroupMock = $this->getMockBuilder( JobQueueGroup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$jobQueueGroupMock = $this->createMock( JobQueueGroup::class );
 
 		$jobQueueGroupMock->expects( $this->once() )
 			->method( 'push' )

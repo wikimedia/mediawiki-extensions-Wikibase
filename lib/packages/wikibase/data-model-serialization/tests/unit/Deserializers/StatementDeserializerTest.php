@@ -21,7 +21,7 @@ use Wikibase\DataModel\Statement\Statement;
 class StatementDeserializerTest extends DispatchableDeserializerTest {
 
 	protected function buildDeserializer() {
-		$snakDeserializer = $this->getMockBuilder( Deserializer::class )->getMock();
+		$snakDeserializer = $this->createMock( Deserializer::class );
 		$snakDeserializer->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [
@@ -30,7 +30,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 			] ) )
 			->will( $this->returnValue( new PropertyNoValueSnak( 42 ) ) );
 
-		$snakListDeserializer = $this->getMockBuilder( Deserializer::class )->getMock();
+		$snakListDeserializer = $this->createMock( Deserializer::class );
 		$snakListDeserializer->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [
@@ -45,7 +45,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 				new PropertyNoValueSnak( 42 )
 			] ) ) );
 
-		$referenceListDeserializer = $this->getMockBuilder( Deserializer::class )->getMock();
+		$referenceListDeserializer = $this->createMock( Deserializer::class );
 		$referenceListDeserializer->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [] ) )
@@ -276,7 +276,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 	}
 
 	public function testQualifiersOrderDeserialization() {
-		$snakDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$snakDeserializerMock = $this->createMock( Deserializer::class );
 		$snakDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [
@@ -285,7 +285,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 			] ) )
 			->will( $this->returnValue( new PropertyNoValueSnak( 42 ) ) );
 
-		$snaksDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$snaksDeserializerMock = $this->createMock( Deserializer::class );
 		$snaksDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [
@@ -313,7 +313,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 				new PropertyNoValueSnak( 42 )
 			] ) ) );
 
-		$referencesDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$referencesDeserializerMock = $this->createMock( Deserializer::class );
 		$statementDeserializer = new StatementDeserializer(
 			$snakDeserializerMock,
 			$snaksDeserializerMock,

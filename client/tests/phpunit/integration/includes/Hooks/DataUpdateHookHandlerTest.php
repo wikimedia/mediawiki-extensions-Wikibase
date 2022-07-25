@@ -48,9 +48,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		bool $add = true,
 		bool $replace = false
 	): UsageUpdater {
-		$usageUpdater = $this->getMockBuilder( UsageUpdater::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$usageUpdater = $this->createMock( UsageUpdater::class );
 
 		if ( $expectedUsages === null || $replace || !$add ) {
 			$usageUpdater->expects( $this->never() )
@@ -94,9 +92,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		array $expectedUsages = null,
 		bool $useJobQueue = false
 	): JobQueueGroup {
-		$jobScheduler = $this->getMockBuilder( JobQueueGroup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$jobScheduler = $this->createMock( JobQueueGroup::class );
 
 		if ( empty( $expectedUsages ) || !$useJobQueue ) {
 			$jobScheduler->expects( $this->never() )
@@ -134,8 +130,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	private function newUsageLookup(
 		array $currentUsages = null
 	): UsageLookup {
-		$usageLookup = $this->getMockBuilder( UsageLookup::class )
-			->getMock();
+		$usageLookup = $this->createMock( UsageLookup::class );
 		$currentUsages = ( $currentUsages == null ) ? [] : $currentUsages;
 
 		$usageLookup->method( 'getUsagesForPage' )
@@ -196,9 +191,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newTitle( int $id, int $ns, string $text ): Title {
-		$title = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$title = $this->createMock( Title::class );
 
 		$title->method( 'getArticleID' )
 			->willReturn( $id );
@@ -219,9 +212,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	private function newLinksUpdate( Title $title, array $usages = null ): LinksUpdate {
 		$pout = $this->newParserOutput( $usages );
 
-		$linksUpdate = $this->getMockBuilder( LinksUpdate::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$linksUpdate = $this->createMock( LinksUpdate::class );
 
 		$linksUpdate->method( 'getPageId' )
 			->willReturn( $title->getArticleID() );
@@ -294,9 +285,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
 		// Assertions are done by the JobScheduler mock
-		$usageUpdater = $this->getMockBuilder( UsageUpdater::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$usageUpdater = $this->createMock( UsageUpdater::class );
 
 		$jobScheduler = $this->newJobScheduler( $title, $usages, false );
 		$usageLookup = $this->newUsageLookup( $usages );
@@ -328,9 +317,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
 		// Assertions are done by the JobScheduler mock
-		$usageUpdater = $this->getMockBuilder( UsageUpdater::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$usageUpdater = $this->createMock( UsageUpdater::class );
 
 		$jobScheduler = $this->newJobScheduler( $title, $expected, true );
 		$usageLookup = $this->newUsageLookup( $currentUsages );

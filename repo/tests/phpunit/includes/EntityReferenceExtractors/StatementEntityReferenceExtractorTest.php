@@ -104,9 +104,7 @@ class StatementEntityReferenceExtractorTest extends TestCase {
 	}
 
 	private function getMockEntityIdParser() {
-		$entityIdParser = $this->getMockBuilder( SuffixEntityIdParser::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$entityIdParser = $this->createMock( SuffixEntityIdParser::class );
 		$entityIdParser->method( 'parse' )
 			->willReturnCallback( function ( $id ) {
 				return new ItemId(

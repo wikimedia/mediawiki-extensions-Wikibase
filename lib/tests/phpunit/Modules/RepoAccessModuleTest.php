@@ -15,18 +15,9 @@ use Wikibase\Lib\Modules\RepoAccessModule;
  */
 class RepoAccessModuleTest extends \PHPUnit\Framework\TestCase {
 
-	/**
-	 * @return Context
-	 */
-	private function getContext() {
-		return $this->getMockBuilder( Context::class )
-			->disableOriginalConstructor()
-			->getMock();
-	}
-
 	public function testGetScript() {
 		$module = new RepoAccessModule();
-		$script = $module->getScript( $this->getContext() );
+		$script = $module->getScript( $this->createMock( Context::class ) );
 		$this->assertStringStartsWith( 'mw.config.set({"wbRepo":', $script );
 		$this->assertStringEndsWith( '});', $script );
 	}

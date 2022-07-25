@@ -289,9 +289,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @return Title
 	 */
 	private function getTitle( $titleExists ) {
-		$title = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$title = $this->createMock( Title::class );
 
 		$title->method( 'exists' )
 			->willReturn( $titleExists );
@@ -305,9 +303,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @return User
 	 */
 	private function getUser( $loggedIn ) {
-		$user = $this->getMockBuilder( User::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$user = $this->createMock( User::class );
 
 		$user->method( 'isRegistered' )
 			->willReturn( $loggedIn );
@@ -321,9 +317,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @return NamespaceChecker
 	 */
 	private function getNamespaceChecker( $wikibaseEnabled ) {
-		$namespaceChecker = $this->getMockBuilder( NamespaceChecker::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$namespaceChecker = $this->createMock( NamespaceChecker::class );
 
 		$namespaceChecker->method( 'isWikibaseEnabled' )
 			->willReturn( $wikibaseEnabled );

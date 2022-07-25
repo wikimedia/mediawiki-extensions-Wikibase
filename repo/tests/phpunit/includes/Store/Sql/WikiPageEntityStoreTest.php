@@ -64,9 +64,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	 * @return EntityHandler
 	 */
 	private function newCustomEntityHandler() {
-		$handler = $this->getMockBuilder( EntityHandler::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$handler = $this->createMock( EntityHandler::class );
 
 		$handler->method( 'canCreateWithCustomId' )
 			->willReturn( true );
@@ -242,9 +240,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			->method( 'isValid' )
 			->willReturn( false );
 
-		$contentFactory = $this->getMockBuilder( EntityContentFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$contentFactory = $this->createMock( EntityContentFactory::class );
 
 		$contentFactory->expects( $this->once() )
 			->method( 'getContentHandlerForType' )
