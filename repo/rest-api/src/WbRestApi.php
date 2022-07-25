@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
+use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 
 /**
  * @license GPL-2.0-or-later
@@ -38,6 +39,11 @@ class WbRestApi {
 	public static function getAddItemStatement( ContainerInterface $services = null ): AddItemStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.AddItemStatement' );
+	}
+
+	public static function getReplaceItemStatement( ContainerInterface $services = null ): ReplaceItemStatement {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.ReplaceItemStatement' );
 	}
 
 }

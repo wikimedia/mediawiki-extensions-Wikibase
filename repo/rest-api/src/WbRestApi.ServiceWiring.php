@@ -19,6 +19,8 @@ use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsValidator;
+use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
+use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
@@ -93,6 +95,30 @@ return [
 			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
+			)
+		);
+	},
+
+	'WbRestApi.ReplaceItemStatement' => function( MediaWikiServices $services ): ReplaceItemStatement {
+		return new ReplaceItemStatement(
+			new ReplaceItemStatementValidator(
+				new SnakValidatorStatementValidator(
+					WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer(),
+					new SnakValidator(
+						WikibaseRepo::getPropertyDataTypeLookup( $services ),
+						WikibaseRepo::getDataTypeFactory( $services ),
+						WikibaseRepo::getDataTypeValidatorFactory( $services )
+					)
+				)
+			),
+			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+				WikibaseRepo::getEntityRevisionLookup( $services )
+			),
+			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup() ),
+			new MediaWikiEditEntityFactoryItemUpdater(
+				RequestContext::getMain(),
+				WikibaseRepo::getEditEntityFactory(),
+				WikibaseRepo::getLogger( $services )
 			)
 		);
 	},
