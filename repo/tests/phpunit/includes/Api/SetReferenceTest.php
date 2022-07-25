@@ -279,7 +279,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		try {
 			$this->doApiRequestWithToken( $params );
-			$this->assertFalse( true, 'Invalid request should raise an exception' );
+			$this->fail( 'Invalid request should raise an exception' );
 		} catch ( ApiUsageException $e ) {
 			$msg = TestingAccessWrapper::newFromObject( $e )->getApiMessage();
 			$this->assertEquals(

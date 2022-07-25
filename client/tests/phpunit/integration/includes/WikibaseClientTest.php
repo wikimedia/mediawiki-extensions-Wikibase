@@ -96,7 +96,7 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 				case 'callable':
 					return 'is_null';
 				default:
-					$this->assertTrue( false, "unknown builtin type {$type->getName()}" );
+					$this->fail( "unknown builtin type {$type->getName()}" );
 			}
 		}
 		return $this->createMock( $type->getName() );

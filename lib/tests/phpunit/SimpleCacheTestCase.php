@@ -341,7 +341,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			} elseif ( $key === 'key1' ) {
 				$this->assertNull( $r );
 			} else {
-				$this->assertFalse( true, 'This should not happend' );
+				$this->fail( 'This should not happend' );
 			}
 		}
 		sort( $keys );
