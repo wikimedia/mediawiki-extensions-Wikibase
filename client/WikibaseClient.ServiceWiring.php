@@ -864,7 +864,7 @@ return [
 
 	'WikibaseClient.SidebarLinkBadgeDisplay' => function ( MediaWikiServices $services ): SidebarLinkBadgeDisplay {
 		$badgeClassNames = WikibaseClient::getSettings( $services )->getSetting( 'badgeClassNames' );
-		$labelDescriptionLookupFactory = WikibaseClient::getLanguageFallbackLabelDescriptionLookupFactory( $services );
+		$labelDescriptionLookupFactory = WikibaseClient::getFallbackLabelDescriptionLookupFactory( $services );
 		$lang = WikibaseClient::getUserLanguage( $services );
 
 		return new SidebarLinkBadgeDisplay(
