@@ -278,7 +278,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			it( 'responds with an error given an invalid bearer token', async () => {
 				const response = newAddItemStatementRequestBuilder( testItemId, testStatement )
 					.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
-					.makeRequest();
+					.makeRequest( 'POST' );
 
 				assert.strictEqual( response.status, 403 );
 			} );
