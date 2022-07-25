@@ -113,12 +113,7 @@ class ChunkCacheTest extends MediaWikiIntegrationTestCase {
 		$realStore = new MockChunkAccess( $data );
 		$store = $this->createMock( ChunkAccess::class );
 		$store->method( 'loadChunk' )
-			->withConsecutive( ...array_merge( ...array_map(
-				function ( $action ) {
-					return $action['expectedAccess'];
-				},
-				$sequence
-			) ) )
+			->withConsecutive( ...array_merge( ...array_column( $sequence, 'expectedAccess' ) ) )
 			->willReturnCallback( [ $realStore, 'loadChunk' ] );
 		$store->method( 'getRecordId' )
 			->willReturnCallback( [ $realStore, 'getRecordId' ] );
