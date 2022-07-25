@@ -25,8 +25,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingClosestReferencedEntityIdLookup;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\RevisionBasedEntityRedirectTargetLookup;
@@ -259,17 +257,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	private function newLanguageDependentLuaBindings(): WikibaseLanguageDependentLuaBindings {
-		$nonCachingLookup = new LanguageFallbackLabelDescriptionLookup(
-			WikibaseClient::getTermLookup(),
-			$this->getLanguageFallbackChain()
-		);
-
-		$labelDescriptionLookup = new CachingFallbackLabelDescriptionLookup(
-			WikibaseClient::getTermFallbackCache(),
-			WikibaseClient::getRedirectResolvingLatestRevisionLookup(),
-			$nonCachingLookup,
-			$this->getLanguageFallbackChain()
-		);
+		$labelDescriptionLookup = WikibaseClient::getFallbackLabelDescriptionLookupFactory()
+			->newLabelDescriptionLookup( $this->getLanguage() );
 
 		$usageTrackingLabelDescriptionLookup = new UsageTrackingLanguageFallbackLabelDescriptionLookup(
 			$labelDescriptionLookup,
