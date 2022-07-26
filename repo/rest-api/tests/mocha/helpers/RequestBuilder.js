@@ -21,6 +21,7 @@ class RequestBuilder {
 
 	constructor() {
 		this.route = null;
+		this.method = null;
 		this.pathParams = {};
 		this.queryParams = {};
 		this.jsonBodyParams = {};
@@ -30,10 +31,12 @@ class RequestBuilder {
 	}
 
 	/**
+	 * @param {string} method HTTP method to use for the request
 	 * @param {string} route the route as it appears in the spec, e.g. '/entities/items/{item_id}'
 	 * @return {this}
 	 */
-	withRoute( route ) {
+	withRoute( method, route ) {
+		this.method = method;
 		this.route = route;
 		return this;
 	}
@@ -76,11 +79,11 @@ class RequestBuilder {
 		return this;
 	}
 
-	async makeRequest( method = 'GET' ) {
+	async makeRequest() {
 		const spec = await getOrLoadSpec();
-		this.validateRouteAndMethod( spec, method );
+		this.validateRouteAndMethod( spec );
 		if ( this.validate ) {
-			this.validateRequest( spec, method );
+			this.validateRequest( spec );
 		}
 
 		let body = null;
@@ -93,9 +96,9 @@ class RequestBuilder {
 				break;
 		}
 
-		switch ( method.toUpperCase() ) {
+		switch ( this.method.toUpperCase() ) {
 			case 'GET':
-				return rest.request( this.makePath(), method, this.queryParams, this.headers );
+				return rest.request( this.makePath(), this.method, this.queryParams, this.headers );
 			case 'POST':
 				return rest.req.post( basePath + this.makePath() )
 					.set( this.headers )
@@ -112,20 +115,23 @@ class RequestBuilder {
 					.query( this.queryParams )
 					.send( body );
 			default:
-				throw new Error( `The "${method}" method is not supported by ${this.constructor.name}` );
+				throw new Error( `The "${this.method}" method is not supported by ${this.constructor.name}` );
 		}
 
 	}
 
-	validateRouteAndMethod( spec, method ) {
+	validateRouteAndMethod( spec ) {
+		if ( !this.method ) {
+			throw new Error( 'No HTTP method provided.' );
+		}
 		if ( !this.route ) {
 			throw new Error( 'No route provided.' );
 		}
 		if ( !spec.paths[ this.route ] ) {
 			throw new Error( `The route "${this.route}" does not exist in the spec.` );
 		}
-		if ( !spec.paths[ this.route ][ method.toLowerCase() ] ) {
-			throw new Error( `The route "${this.route}" does not allow method "${method}".` );
+		if ( !spec.paths[ this.route ][ this.method.toLowerCase() ] ) {
+			throw new Error( `The route "${this.route}" does not allow method "${this.method}".` );
 		}
 	}
 
@@ -144,8 +150,8 @@ class RequestBuilder {
 		return path;
 	}
 
-	validateRequest( spec, method ) {
-		const requestSpec = spec.paths[ this.route ][ method.toLowerCase() ];
+	validateRequest( spec ) {
+		const requestSpec = spec.paths[ this.route ][ this.method.toLowerCase() ];
 		const specParameters = { parameters: requestSpec.parameters };
 		// copy, since the unchanged request is still needed
 		const coercedRequest = JSON.parse( JSON.stringify( {

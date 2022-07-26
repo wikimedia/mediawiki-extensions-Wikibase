@@ -9,7 +9,7 @@ const basePath = 'rest.php/wikibase/v0';
 
 function newAddItemStatementRequestBuilder( itemId, statement ) {
 	return new RequestBuilder()
-		.withRoute( '/entities/items/{item_id}/statements' )
+		.withRoute( 'POST', '/entities/items/{item_id}/statements' )
 		.withPathParam( 'item_id', itemId )
 		.withHeader( 'content-type', 'application/json' )
 		.withJsonBodyParam( 'statement', statement );
@@ -86,7 +86,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 		it( 'can add a statement to an item with edit metadata omitted', async () => {
 			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
 				.assertValidRequest()
-				.makeRequest( 'POST' );
+				.makeRequest();
 
 			assertValid201Response( response );
 
@@ -101,7 +101,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.withJsonBodyParam( 'bot', true )
 				.withJsonBodyParam( 'comment', editSummary )
 				.assertValidRequest()
-				.makeRequest( 'POST' );
+				.makeRequest();
 
 			assertValid201Response( response );
 
@@ -117,7 +117,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			const itemId = 'X123';
 			const response = await newAddItemStatementRequestBuilder( itemId, testStatement )
 				.assertInvalidRequest()
-				.makeRequest( 'POST' );
+				.makeRequest();
 
 			assert.strictEqual( response.status, 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
@@ -129,7 +129,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
 				.withJsonBodyParam( 'comment', comment )
 				.assertValidRequest()
-				.makeRequest( 'POST' );
+				.makeRequest();
 
 			assert.strictEqual( response.status, 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
@@ -142,7 +142,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] )
 				.assertValidRequest()
-				.makeRequest( 'POST' );
+				.makeRequest();
 
 			assert.strictEqual( response.status, 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
@@ -154,7 +154,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
 				.withJsonBodyParam( 'bot', 'should be a boolean' )
 				.assertInvalidRequest()
-				.makeRequest( 'POST' );
+				.makeRequest();
 
 			assert.strictEqual( response.status, 400 );
 			assert.strictEqual( response.body.code, 'invalid-request-body' );
@@ -166,7 +166,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
 				.withJsonBodyParam( 'comment', 1234 )
 				.assertInvalidRequest()
-				.makeRequest( 'POST' );
+				.makeRequest();
 
 			assert.strictEqual( response.status, 400 );
 			assert.strictEqual( response.body.code, 'invalid-request-body' );
@@ -180,7 +180,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			};
 			const response = await newAddItemStatementRequestBuilder( testItemId, invalidStatement )
 				.assertInvalidRequest()
-				.makeRequest( 'POST' );
+				.makeRequest();
 
 			assert.strictEqual( response.status, 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
@@ -205,7 +205,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			const response =
 				await newAddItemStatementRequestBuilder( protectedItemId, testStatement )
 					.assertValidRequest()
-					.makeRequest( 'POST' );
+					.makeRequest();
 
 			assert.strictEqual( response.status, 403 );
 			assert.strictEqual( response.body.httpCode, 403 );
@@ -219,7 +219,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			const itemId = 'Q999999';
 			const response = await newAddItemStatementRequestBuilder( itemId, testStatement )
 				.assertValidRequest()
-				.makeRequest( 'POST' );
+				.makeRequest();
 
 			assert.strictEqual( response.status, 404 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
@@ -233,7 +233,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			const contentType = 'multipart/form-data';
 			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
 				.withHeader( 'content-type', contentType )
-				.makeRequest( 'POST' );
+				.makeRequest();
 
 			assert.strictEqual( response.status, 415 );
 			assert.strictEqual( response.body.message, 'Unsupported Content-Type' );
@@ -249,7 +249,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			const response = await newAddItemStatementRequestBuilder(
 				redirectSource,
 				testStatement
-			).makeRequest( 'POST' );
+			).makeRequest();
 
 			assert.strictEqual( response.status, 409 );
 			assert.include( response.body.message, redirectSource );
@@ -278,7 +278,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			it( 'responds with an error given an invalid bearer token', async () => {
 				const response = newAddItemStatementRequestBuilder( testItemId, testStatement )
 					.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
-					.makeRequest( 'POST' );
+					.makeRequest();
 
 				assert.strictEqual( response.status, 403 );
 			} );
