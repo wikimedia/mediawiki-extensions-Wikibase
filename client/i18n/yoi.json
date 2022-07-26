@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kainuguni"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}}項目",
+	"wikibase-editlinks": "リンク直ん",
+	"wikibase-linkitem-addlinks": "リンク追加きるん",
+	"wikibase-linkitem-title": "ページとぅぬリンク",
+	"wikibase-linkitem-linkpage": "ページとぅリンク",
+	"wikibase-linkitem-selectlink": "其ぬページんきリンクきみ欲さるサイトとぅページ選び取らし居り。",
+	"wikibase-linkitem-input-site": "物言",
+	"wikibase-linkitem-input-page": "ページ:"
+}

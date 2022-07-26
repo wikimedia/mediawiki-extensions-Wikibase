@@ -180,7 +180,7 @@
 	"wikibase-validator-invalid": "Valeur non valide",
 	"wikibase-validator-missing-field": "Champ obligatoire « $1 » manquant",
 	"wikibase-validator-bad-type": "$2 au lieu de $1",
-	"wikibase-validator-too-long": "La longueur ne doit pas dépasser $1 caractère{{PLURAL:$1||s}}.",
+	"wikibase-validator-too-long": "L’entrée ne doit pas dépasser $1 caractère{{PLURAL:$1||s}}.",
 	"wikibase-validator-label-too-long": "Le libellé ne doit pas dépasser $1 caractère{{PLURAL:$1||s}}.",
 	"wikibase-validator-label-too-short": "Le libellé doit comprendre au moins {{PLURAL:$1|un caractère|$1 caractères}}",
 	"wikibase-validator-description-too-long": "La description ne doit pas dépasser $1 caractère{{PLURAL:$1||s}}.",
