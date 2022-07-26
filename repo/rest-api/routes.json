@@ -25,6 +25,11 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetStatementRouteHandler::factory"
 	},
 	{
+		"path": "/wikibase/v0/entities/items/{item_id}/statements/{statement_id}",
+		"method": "PUT",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\ReplaceItemStatementRouteHandler::factory"
+	},
+	{
 		"path": "/wikibase/v0/statements/{statement_id}",
 		"method": "PUT",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\ReplaceStatementRouteHandler::factory"
