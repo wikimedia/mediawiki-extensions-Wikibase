@@ -305,9 +305,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertIsArray( $data, 'decode failed: ' . $json );
 
-		$actualIds = array_map( function( $entityData ) {
-			return $entityData['id'];
-		}, $data );
+		$actualIds = array_column( $data, 'id' );
 
 		$this->assertEquals( $expectedIds, $actualIds );
 
@@ -370,9 +368,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 			$data = json_decode( $json, true );
 			$this->assertIsArray( $data, 'decode failed: ' . $json );
 
-			$shardIds = array_map( function( $entityData ) {
-				return $entityData['id'];
-			}, $data );
+			$shardIds = array_column( $data, 'id' );
 
 			// check shard
 			$this->assertEquals(

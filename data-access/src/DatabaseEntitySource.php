@@ -5,7 +5,6 @@ namespace Wikibase\DataAccess;
 use Wikimedia\Assert\Assert;
 
 /**
- *
  * @license GPL-2.0-or-later
  */
 class DatabaseEntitySource implements EntitySource {
@@ -25,17 +24,17 @@ class DatabaseEntitySource implements EntitySource {
 	/**
 	 * @var string[]
 	 */
-	private $entityTypes;
+	private $entityTypes = [];
 
 	/**
 	 * @var int[]
 	 */
-	private $entityNamespaceIds;
+	private $entityNamespaceIds = [];
 
 	/**
 	 * @var string[]
 	 */
-	private $entitySlots;
+	private $entitySlots = [];
 
 	/**
 	 * @var string
@@ -79,7 +78,6 @@ class DatabaseEntitySource implements EntitySource {
 		Assert::parameterType( 'string', $rdfNodeNamespacePrefix, '$rdfNodeNamespacePrefix' );
 		Assert::parameterType( 'string', $rdfPredicateNamespacePrefix, '$rdfPredicateNamespacePrefix' );
 		Assert::parameterType( 'string', $interwikiPrefix, '$interwikiPrefix' );
-		$this->assertEntityNamespaceIdsAndSlots( $entityNamespaceIdsAndSlots );
 
 		$this->sourceName = $name;
 		$this->databaseName = $databaseName;
@@ -90,19 +88,10 @@ class DatabaseEntitySource implements EntitySource {
 		$this->setEntityTypeData( $entityNamespaceIdsAndSlots );
 	}
 
-	private function assertEntityNamespaceIdsAndSlots( array $entityNamespaceIdsAndSlots ) {
+	private function setEntityTypeData( array $entityNamespaceIdsAndSlots ) {
 		foreach ( $entityNamespaceIdsAndSlots as $entityType => $namespaceIdAndSlot ) {
 			if ( !is_string( $entityType ) ) {
 				throw new \InvalidArgumentException( 'Entity type name not a string: ' . $entityType );
-			}
-			if ( !is_array( $namespaceIdAndSlot ) ) {
-				throw new \InvalidArgumentException( 'Namespace and slot not defined for entity type: ' . $entityType );
-			}
-			if ( !array_key_exists( 'namespaceId', $namespaceIdAndSlot ) ) {
-				throw new \InvalidArgumentException( 'Namespace ID not defined for entity type: ' . $entityType );
-			}
-			if ( !array_key_exists( 'slot', $namespaceIdAndSlot ) ) {
-				throw new \InvalidArgumentException( 'Slot not defined for entity type: ' . $entityType );
 			}
 			if ( !is_int( $namespaceIdAndSlot['namespaceId'] ) ) {
 				throw new \InvalidArgumentException( 'Namespace ID for entity type must be an integer: ' . $entityType );
@@ -110,23 +99,11 @@ class DatabaseEntitySource implements EntitySource {
 			if ( !is_string( $namespaceIdAndSlot['slot'] ) ) {
 				throw new \InvalidArgumentException( 'Slot for entity type must be a string: ' . $entityType );
 			}
-		}
-	}
 
-	private function setEntityTypeData( array $entityNamespaceIdsAndSlots ) {
-		$this->entityTypes = array_keys( $entityNamespaceIdsAndSlots );
-		$this->entityNamespaceIds = array_map(
-			function ( $x ) {
-				return $x['namespaceId'];
-			},
-			$entityNamespaceIdsAndSlots
-		);
-		$this->entitySlots = array_map(
-			function ( $x ) {
-				return $x['slot'];
-			},
-			$entityNamespaceIdsAndSlots
-		);
+			$this->entityTypes[] = $entityType;
+			$this->entityNamespaceIds[$entityType] = $namespaceIdAndSlot['namespaceId'];
+			$this->entitySlots[$entityType] = $namespaceIdAndSlot['slot'];
+		}
 	}
 
 	/**

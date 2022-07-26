@@ -5,6 +5,7 @@ namespace Wikibase\DataAccess\Tests;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
+use Wikimedia\AtEase\AtEase;
 
 /**
  * @covers \Wikibase\DataAccess\DatabaseEntitySource
@@ -28,6 +29,7 @@ class DatabaseEntitySourceTest extends TestCase {
 		$interwikiPrefix
 	) {
 		$this->expectException( InvalidArgumentException::class );
+		AtEase::suppressWarnings();
 		new DatabaseEntitySource(
 			$slotName,
 			$databaseName,
@@ -37,6 +39,7 @@ class DatabaseEntitySourceTest extends TestCase {
 			$validRdfPredicateNamespacePrefix,
 			$interwikiPrefix
 		);
+		AtEase::restoreWarnings();
 	}
 
 	public function provideInvalidConstructorArguments() {
