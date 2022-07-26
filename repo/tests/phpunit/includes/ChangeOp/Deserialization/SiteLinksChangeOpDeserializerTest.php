@@ -32,13 +32,6 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	private const BADGE_ITEM_ID = 'Q3000';
 
-	/**
-	 * @return SiteLinkBadgeChangeOpSerializationValidator
-	 */
-	private function newBadgeSerializationValidator() {
-		return $this->createMock( SiteLinkBadgeChangeOpSerializationValidator::class );
-	}
-
 	private function newSiteLinkTargetProvider() {
 		$wiki = new Site();
 		$wiki->setGlobalId( self::SITE_ID );
@@ -49,7 +42,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	private function newSiteLinksChangeOpDeserializer() {
 		return new SiteLinksChangeOpDeserializer(
-			$this->newBadgeSerializationValidator(),
+			$this->createMock( SiteLinkBadgeChangeOpSerializationValidator::class ),
 			new SiteLinkChangeOpFactory( [ self::BADGE_ITEM_ID ] ),
 			$this->newSiteLinkTargetProvider(),
 			new ItemIdParser(),
@@ -116,9 +109,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenInvalidBadgesData_createEntityChangeOpThrowsException() {
-		$badgeValidator = $this->getMockBuilder( SiteLinkBadgeChangeOpSerializationValidator::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$badgeValidator = $this->createMock( SiteLinkBadgeChangeOpSerializationValidator::class );
 
 		$badgeValidator->method( $this->anything() )
 			->willThrowException(
@@ -156,7 +147,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( false );
 
 		$deserializer = new SiteLinksChangeOpDeserializer(
-			$this->newBadgeSerializationValidator(),
+			$this->createMock( SiteLinkBadgeChangeOpSerializationValidator::class ),
 			new SiteLinkChangeOpFactory( [] ),
 			new SiteLinkTargetProvider( new HashSiteStore( [ $site ] ) ),
 			new ItemIdParser(),
@@ -305,7 +296,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$newBadgeId = 'Q4000';
 
 		$deserializer = new SiteLinksChangeOpDeserializer(
-			$this->newBadgeSerializationValidator(),
+			$this->createMock( SiteLinkBadgeChangeOpSerializationValidator::class ),
 			new SiteLinkChangeOpFactory( [ self::BADGE_ITEM_ID, $newBadgeId ] ),
 			$this->newSiteLinkTargetProvider(),
 			new ItemIdParser(),

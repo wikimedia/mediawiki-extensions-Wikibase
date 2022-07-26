@@ -24,9 +24,7 @@ class TokenCheckInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @return User
 	 */
 	private function getMockUser() {
-		$user = $this->getMockBuilder( User::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$user = $this->createMock( User::class );
 		$user->method( 'matchEditToken' )
 			->willReturnCallback(
 				function ( $token ) {

@@ -34,17 +34,11 @@ use Wikibase\Repo\SummaryFormatter;
 class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	private function newApiHelperFactory() {
-		$summaryFormatter = $this->getMockBuilder( SummaryFormatter::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$summaryFormatter = $this->createMock( SummaryFormatter::class );
 
-		$editEntityFactory = $this->getMockBuilder( MediawikiEditEntityFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$editEntityFactory = $this->createMock( MediawikiEditEntityFactory::class );
 
-		$serializerFactory = $this->getMockBuilder( SerializerFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$serializerFactory = $this->createMock( SerializerFactory::class );
 
 		$services = MediaWikiServices::getInstance();
 
@@ -71,13 +65,9 @@ class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function newApiModule() {
 		$language = Language::factory( 'en' );
 
-		$result = $this->getMockBuilder( ApiResult::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$result = $this->createMock( ApiResult::class );
 
-		$api = $this->getMockBuilder( ApiBase::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$api = $this->createMock( ApiBase::class );
 
 		$api->method( 'getResult' )
 			->willReturn( $result );

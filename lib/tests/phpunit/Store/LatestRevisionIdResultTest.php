@@ -69,7 +69,7 @@ class LatestRevisionIdResultTest extends TestCase {
 	}
 
 	public function testMap_EntityRevisionIsRedirect_ReturnsValueReturnedByRedirectHandler() {
-		$someItemId = $this->someEntityId();
+		$someItemId = $this->createMock( EntityId::class );
 
 		$redirectResult = LatestRevisionIdResult::redirect( 1, $someItemId );
 		$shouldNotBeCalled = function () {
@@ -120,7 +120,7 @@ class LatestRevisionIdResultTest extends TestCase {
 	}
 
 	public function testMap_Redirect_PassesRevisionIdAndEntityIdToTheHandler() {
-		$givenEntityId = $this->someEntityId();
+		$givenEntityId = $this->createMock( EntityId::class );
 		$redirectResult = LatestRevisionIdResult::redirect( 1, $givenEntityId );
 		$shouldNotBeCalled = function () {
 			$this->fail( "Should not be called" );
@@ -142,11 +142,7 @@ class LatestRevisionIdResultTest extends TestCase {
 
 	public function testRedirect_ZeroRevisionId_ThrowsAnException() {
 		$this->expectException( \Exception::class );
-		LatestRevisionIdResult::redirect( 0, $this->someEntityId() );
-	}
-
-	protected function someEntityId(): EntityId {
-		return $this->createMock( EntityId::class );
+		LatestRevisionIdResult::redirect( 0, $this->createMock( EntityId::class ) );
 	}
 
 }

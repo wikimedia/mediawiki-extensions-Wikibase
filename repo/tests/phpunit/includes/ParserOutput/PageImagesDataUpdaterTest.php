@@ -75,9 +75,7 @@ class PageImagesDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		array $propertyIds,
 		$expected
 	) {
-		$parserOutput = $this->getMockBuilder( ParserOutput::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$parserOutput = $this->createMock( ParserOutput::class );
 
 		if ( $expected !== null ) {
 			$parserOutput->expects( $this->once() )

@@ -28,7 +28,7 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 		$this->setUserLang( 'qqx' );
 	}
 
-	private function getLabelLookup(): FallbackLabelDescriptionLookup {
+	private function getLabelDescriptionLookupFactory(): FallbackLabelDescriptionLookupFactory {
 		$labelLookup = $this->createMock( FallbackLabelDescriptionLookup::class );
 		$labelLookup->method( 'getLabel' )
 			->willReturnCallback( function( ItemId $id ): ?TermFallback {
@@ -40,10 +40,6 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 				);
 			} );
 
-		return $labelLookup;
-	}
-
-	private function getLabelDescriptionLookupFactory(): FallbackLabelDescriptionLookupFactory {
 		$itemIds = [
 			new ItemId( 'Q123' ),
 			new ItemId( 'Q456' )
@@ -53,7 +49,7 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 		$labelDescriptionLookupFactory->expects( $this->once() )
 			->method( 'newLabelDescriptionLookup' )
 			->with( $this->anything(), $itemIds )
-			->willReturn( $this->getLabelLookup() );
+			->willReturn( $labelLookup );
 
 		return $labelDescriptionLookupFactory;
 	}

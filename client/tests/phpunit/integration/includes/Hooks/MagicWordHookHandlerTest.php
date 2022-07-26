@@ -70,9 +70,7 @@ class MagicWordHookHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testDoParserGetVariableValueSwitch_wbreponame() {
-		$parser = $this->getMockBuilder( Parser::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$parser = $this->createMock( Parser::class );
 
 		// Configure the stub.
 		$parser->method( 'getTargetLanguage' )
@@ -101,9 +99,7 @@ class MagicWordHookHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testDoParserGetVariableValueSwitch_noexternallanglinks() {
-		$parser = $this->getMockBuilder( Parser::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$parser = $this->createMock( Parser::class );
 
 		$parserOutput = new ParserOutput();
 		$parser->method( 'getOutput' )

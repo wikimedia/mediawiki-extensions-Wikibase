@@ -20,7 +20,6 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
@@ -87,9 +86,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$mockTitle->method( 'getPrefixedText' )->willReturn( "Prefix:$title" );
 		$mockTitle->method( 'getFullText' )->willReturn( "Prefix:$title" );
 
-		$searchResult = $this->getMockBuilder( SearchResult::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$searchResult = $this->createMock( SearchResult::class );
 		$searchResult->method( 'getTitle' )->willReturn( $mockTitle );
 
 		return $searchResult;
@@ -167,10 +164,6 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		return $factory;
 	}
 
-	private function getEntityTitleTextLookupMock() {
-		return $this->createMock( EntityTitleTextLookup::class );
-	}
-
 	/**
 	 * @param string[] $languages
 	 * @return TermLanguageFallbackChain
@@ -211,9 +204,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @return EntityContentFactory
 	 */
 	private function getEntityContentFactory() {
-		$entityContentFactory = $this->getMockBuilder( EntityContentFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$entityContentFactory = $this->createMock( EntityContentFactory::class );
 
 		$entityContentFactory->method( 'isEntityContentModel' )
 			->willReturn( true );

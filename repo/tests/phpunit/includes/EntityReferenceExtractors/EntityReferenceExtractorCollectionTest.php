@@ -70,7 +70,7 @@ class EntityReferenceExtractorCollectionTest extends TestCase {
 	}
 
 	private function getMockEntityReferenceExtractor( $entity, $extracted ) {
-		$mockEntityReferenceExtractor = $this->getMockBuilder( EntityReferenceExtractor::class )->getMock();
+		$mockEntityReferenceExtractor = $this->createMock( EntityReferenceExtractor::class );
 		$mockEntityReferenceExtractor->expects( $this->once() )
 			->method( 'extractEntityIds' )
 			->with( $entity )

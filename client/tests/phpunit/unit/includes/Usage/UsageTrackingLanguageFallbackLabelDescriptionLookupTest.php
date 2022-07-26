@@ -139,9 +139,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends \PHPUnit\F
 		array $fetchLanguageCodes,
 		$trackUsagesInAllLanguages
 	) {
-		$languageFallbackChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$languageFallbackChain = $this->createMock( TermLanguageFallbackChain::class );
 		$languageFallbackChain->expects( $this->exactly( $trackUsagesInAllLanguages ? 0 : 1 ) )
 			->method( 'getFetchLanguageCodes' )
 			->willReturn( $fetchLanguageCodes );
@@ -164,9 +162,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends \PHPUnit\F
 	 * @return LanguageFallbackLabelDescriptionLookup
 	 */
 	private function getLanguageFallbackLabelDescriptionLookup( $method, ItemId $item, TermFallback $value = null ) {
-		$languageFallbackLabelDescriptionLookup = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$languageFallbackLabelDescriptionLookup = $this->createMock( LanguageFallbackLabelDescriptionLookup::class );
 
 		$languageFallbackLabelDescriptionLookup->expects( $this->once() )
 			->method( $method )

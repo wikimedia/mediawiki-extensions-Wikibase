@@ -32,9 +32,7 @@ class DumpEntitiesTest extends \PHPUnit\Framework\TestCase {
 	) {
 		$dumper = $this->getMockForAbstractClass( DumpEntities::class );
 		$dumper->setDumpEntitiesServices(
-			$this->getMockBuilder( SqlEntityIdPagerFactory::class )
-				->disableOriginalConstructor()
-				->getMock(),
+			$this->createMock( SqlEntityIdPagerFactory::class ),
 			$existingEntityTypes,
 			$entityTypesToExcludeFromOutput
 		);

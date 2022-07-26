@@ -23,9 +23,7 @@ use Wikibase\View\TermsListView;
 class PlaceholderEmittingEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 
 	private function newEntityTermsView( TextInjector $textInjector ) {
-		$termsListView = $this->getMockBuilder( TermsListView::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$termsListView = $this->createMock( TermsListView::class );
 
 		return new PlaceholderEmittingEntityTermsView(
 			$this->createMock( HtmlTermRenderer::class ),

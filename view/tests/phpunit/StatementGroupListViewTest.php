@@ -194,9 +194,7 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 	 * @return StatementHtmlGenerator
 	 */
 	private function getStatementHtmlGenerator() {
-		$statementHtmlGenerator = $this->getMockBuilder( StatementHtmlGenerator::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$statementHtmlGenerator = $this->createMock( StatementHtmlGenerator::class );
 
 		$statementHtmlGenerator->method( 'getHtmlForStatement' )
 			->willReturnCallback( function( Statement $statement, $editSectionHtml = null ) {

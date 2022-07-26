@@ -145,9 +145,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testOnAPIQuerySiteInfoGeneralInfo() {
-		$api = $this->getMockBuilder( ApiQuerySiteinfo::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$api = $this->createMock( ApiQuerySiteinfo::class );
 
 		$actual = [];
 		RepoHooks::onAPIQuerySiteInfoGeneralInfo( $api, $actual );
@@ -738,22 +736,16 @@ XML
 
 	public function testOnApiMainOnExceptionIncrementPing() {
 		$this->getSettings()->setSetting( 'idGeneratorInErrorPingLimiter', 10 );
-		$user = $this->getMockBuilder( User::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$user = $this->createMock( User::class );
 		$user->expects( $this->once() )
 			->method( 'pingLimiter' )
 			->with( RateLimitingIdGenerator::RATELIMIT_NAME, 10 );
 
-		$apiModule = $this->getMockBuilder( EditEntity::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$apiModule = $this->createMock( EditEntity::class );
 		$apiModule->method( 'isFreshIdAssigned' )
 			->willreturn( true );
 
-		$apiMain = $this->getMockBuilder( ApiMain::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$apiMain = $this->createMock( ApiMain::class );
 		$apiMain->method( 'getModule' )
 			->willreturn( $apiModule );
 		$apiMain->method( 'getUser' )
@@ -764,21 +756,15 @@ XML
 
 	public function testOnApiMainOnExceptionNoop() {
 		$this->getSettings()->setSetting( 'idGeneratorInErrorPingLimiter', 10 );
-		$user = $this->getMockBuilder( User::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$user = $this->createMock( User::class );
 		$user->expects( $this->never() )
 			->method( 'pingLimiter' );
 
-		$apiModule = $this->getMockBuilder( EditEntity::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$apiModule = $this->createMock( EditEntity::class );
 		$apiModule->method( 'isFreshIdAssigned' )
 			->willreturn( false );
 
-		$apiMain = $this->getMockBuilder( ApiMain::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$apiMain = $this->createMock( ApiMain::class );
 		$apiMain->method( 'getModule' )
 			->willreturn( $apiModule );
 		$apiMain->method( 'getUser' )
@@ -789,22 +775,16 @@ XML
 
 	public function testOnApiMainOnExceptionNoopOnDisabledConfig() {
 		$this->getSettings()->setSetting( 'idGeneratorInErrorPingLimiter', 0 );
-		$user = $this->getMockBuilder( User::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$user = $this->createMock( User::class );
 		$user->expects( $this->never() )
 			->method( 'pingLimiter' );
 
-		$apiModule = $this->getMockBuilder( EditEntity::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$apiModule = $this->createMock( EditEntity::class );
 		$apiModule
 			->expects( $this->never() )
 			->method( 'isFreshIdAssigned' );
 
-		$apiMain = $this->getMockBuilder( ApiMain::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$apiMain = $this->createMock( ApiMain::class );
 		$apiMain->method( 'getModule' )
 			->willreturn( $apiModule );
 		$apiMain->method( 'getUser' )

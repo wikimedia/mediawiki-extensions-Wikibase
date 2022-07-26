@@ -6,7 +6,6 @@ use DataValues\DataValue;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use OutOfBoundsException;
-use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
@@ -60,25 +59,19 @@ class ChangeOpTestMockProvider {
 	}
 
 	/**
-	 * @see TestCase::getMockBuilder
-	 *
-	 * @param string $class
-	 *
-	 * @return MockBuilder
-	 */
-	private function getMockBuilder( $class ) {
-		return $this->mockBuilderFactory->getMockBuilder( $class );
-	}
-
-	/**
-	 * @see TestCase::getMock
+	 * @see TestCase::createMock
 	 *
 	 * @param string $class
 	 *
 	 * @return MockObject
 	 */
 	private function createMock( $class ) {
-		return $this->mockBuilderFactory->getMockBuilder( $class )->getMock();
+		return $this->mockBuilderFactory->getMockBuilder( $class )
+			->disableOriginalConstructor()
+			->disableOriginalClone()
+			->disableArgumentCloning()
+			->disallowMockingUnknownTypes()
+			->getMock();
 	}
 
 	/**
@@ -117,9 +110,7 @@ class ChangeOpTestMockProvider {
 	 * @return StatementGuidValidator
 	 */
 	public function getMockGuidValidator() {
-		$mock = $this->getMockBuilder( StatementGuidValidator::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( StatementGuidValidator::class );
 		$mock->method( 'validate' )
 			->willReturn( true );
 		$mock->method( 'validateFormat' )
@@ -169,9 +160,7 @@ class ChangeOpTestMockProvider {
 			'string' => $stringType
 		];
 
-		$mock = $this->getMockBuilder( DataTypeFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( DataTypeFactory::class );
 		$mock->method( 'getType' )
 			->willReturnCallback( function( $id ) use ( $types ) {
 				if ( !isset( $types[$id] ) ) {
@@ -240,17 +229,13 @@ class ChangeOpTestMockProvider {
 	 * @return StatementGuidParser
 	 */
 	public function getMockGuidParser( EntityId $entityId ) {
-		$guid = $this->getMockBuilder( StatementGuid::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$guid = $this->createMock( StatementGuid::class );
 		$guid->method( 'getSerialization' )
 			->willReturn( 'theValidatorIsMockedSoMeh! :D' );
 		$guid->method( 'getEntityId' )
 			->willReturn( $entityId );
 
-		$mock = $this->getMockBuilder( StatementGuidParser::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( StatementGuidParser::class );
 		$mock->method( 'parse' )
 			->willReturn( $guid );
 		return $mock;
@@ -360,9 +345,7 @@ class ChangeOpTestMockProvider {
 	 * @return TermValidatorFactory
 	 */
 	public function getMockTermValidatorFactory() {
-		$mock = $this->getMockBuilder( TermValidatorFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( TermValidatorFactory::class );
 
 		$mock->method( 'getLabelDescriptionNotEqualValidator' )
 			->willReturnCallback(

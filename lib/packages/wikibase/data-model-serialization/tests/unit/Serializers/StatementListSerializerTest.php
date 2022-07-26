@@ -21,7 +21,7 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
-		$statementSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
+		$statementSerializerMock = $this->createMock( Serializer::class );
 		$statementSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( $statement ) )
@@ -99,7 +99,7 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 	public function testStatementListSerializerWithOptionObjectsForMaps() {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
-		$statementSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
+		$statementSerializerMock = $this->createMock( Serializer::class );
 		$statementSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( $statement ) )

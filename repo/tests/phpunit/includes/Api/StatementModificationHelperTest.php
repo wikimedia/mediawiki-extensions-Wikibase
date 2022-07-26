@@ -193,7 +193,7 @@ class StatementModificationHelperTest extends MediaWikiIntegrationTestCase {
 		$entityIdParser = new ItemIdParser();
 
 		return new StatementModificationHelper(
-			$this->getMockBuilder( SnakFactory::class )->disableOriginalConstructor()->getMock(),
+			$this->createMock( SnakFactory::class ),
 			$entityIdParser,
 			new StatementGuidValidator( $entityIdParser ),
 			$errorReporter ?: $this->newApiErrorReporter()
@@ -204,9 +204,7 @@ class StatementModificationHelperTest extends MediaWikiIntegrationTestCase {
 	 * @return ApiErrorReporter
 	 */
 	private function newApiErrorReporter() {
-		$errorReporter = $this->getMockBuilder( ApiErrorReporter::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$errorReporter = $this->createMock( ApiErrorReporter::class );
 
 		$errorReporter->method( 'dieException' )
 			->willReturnCallback( function ( $exception, $message ) {

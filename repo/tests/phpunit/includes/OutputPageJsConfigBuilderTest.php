@@ -67,46 +67,13 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @return User
-	 */
-	public function getUser() {
-		return $this->createMock( User::class );
-	}
-
-	/**
-	 * @return Title
-	 */
-	private function getTitle() {
-		return $this->createMock( Title::class );
-	}
-
-	/**
 	 * @return OutputPage
 	 */
 	private function getOutputPage() {
-		$out = $this->getMockBuilder( OutputPage::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$user = $this->getUser();
-
-		$out->method( 'getUser' )
-			->willReturnCallback( function() use ( $user ) {
-				return $user;
-			} );
-
-		$out->method( 'getLanguage' )
-			->willReturnCallback( function() {
-				return Language::factory( 'qqx' );
-			} );
-
-		$title = $this->getTitle();
-
-		$out->method( 'getTitle' )
-			->willReturnCallback( function() use( $title ) {
-				return $title;
-			} );
-
+		$out = $this->createMock( OutputPage::class );
+		$out->method( 'getUser' )->willReturn( $this->createMock( User::class ) );
+		$out->method( 'getLanguage' )->willReturn( Language::factory( 'qqx' ) );
+		$out->method( 'getTitle' )->willReturn( $this->createMock( Title::class ) );
 		return $out;
 	}
 

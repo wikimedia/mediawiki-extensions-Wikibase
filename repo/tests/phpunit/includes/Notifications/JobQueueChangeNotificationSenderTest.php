@@ -24,9 +24,7 @@ class JobQueueChangeNotificationSenderTest extends \PHPUnit\Framework\TestCase {
 	 * @return JobQueueChangeNotificationSender
 	 */
 	private function getSender( $batchSize, $expectedChunks ) {
-		$jobQueueGroup = $this->getMockBuilder( JobQueueGroup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$jobQueueGroup = $this->createMock( JobQueueGroup::class );
 
 		$jobQueueGroup->expects( $this->exactly( $expectedChunks ? 1 : 0 ) )
 			->method( 'lazyPush' )

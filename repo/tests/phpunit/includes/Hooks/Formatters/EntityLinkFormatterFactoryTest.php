@@ -19,9 +19,9 @@ use Wikimedia\Assert\ParameterElementTypeException;
 class EntityLinkFormatterFactoryTest extends MediaWikiIntegrationTestCase {
 
 	public function testGivenEntityTypeWithRegisteredCallback_returnsCallbackResult() {
-		$factory = new EntityLinkFormatterFactory( $this->getEntityTitleTextLookup(), [
+		$factory = new EntityLinkFormatterFactory( $this->createMock( EntityTitleTextLookup::class ), [
 			'item' => function ( $language ) {
-				return new DefaultEntityLinkFormatter( $language, $this->getEntityTitleTextLookup() );
+				return new DefaultEntityLinkFormatter( $language, $this->createMock( EntityTitleTextLookup::class ) );
 			},
 		] );
 
@@ -31,12 +31,8 @@ class EntityLinkFormatterFactoryTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function getEntityTitleTextLookup() {
-		return $this->createMock( EntityTitleTextLookup::class );
-	}
-
 	public function testGivenUnknownEntityType_returnsDefaultFormatter() {
-		$factory = new EntityLinkFormatterFactory( $this->getEntityTitleTextLookup(),  [] );
+		$factory = new EntityLinkFormatterFactory( $this->createMock( EntityTitleTextLookup::class ),  [] );
 
 		$this->assertInstanceOf(
 			DefaultEntityLinkFormatter::class,
@@ -49,13 +45,13 @@ class EntityLinkFormatterFactoryTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testGivenNotArrayOfCallbacks_throwsException( $notCallbacks ) {
 		$this->expectException( ParameterElementTypeException::class );
-		new EntityLinkFormatterFactory( $this->getEntityTitleTextLookup(), $notCallbacks );
+		new EntityLinkFormatterFactory( $this->createMock( EntityTitleTextLookup::class ), $notCallbacks );
 	}
 
 	public function testGivenSameTypeAndLanguage_getLinkFormatterCachesResult() {
-		$factory = new EntityLinkFormatterFactory( $this->getEntityTitleTextLookup(), [
+		$factory = new EntityLinkFormatterFactory( $this->createMock( EntityTitleTextLookup::class ), [
 			'item' => function ( $language ) {
-				return new DefaultEntityLinkFormatter( $language, $this->getEntityTitleTextLookup() );
+				return new DefaultEntityLinkFormatter( $language, $this->createMock( EntityTitleTextLookup::class ) );
 			},
 		] );
 

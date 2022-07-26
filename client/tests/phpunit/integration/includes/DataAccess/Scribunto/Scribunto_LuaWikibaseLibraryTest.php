@@ -225,9 +225,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	}
 
 	private function getRepoLinker() {
-		$repoLinker = $this->getMockBuilder( RepoLinker::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$repoLinker = $this->createMock( RepoLinker::class );
 
 		$repoLinker->method( 'getEntityUrl' )
 			->with( new ItemId( 'Q1' ) )
@@ -536,9 +534,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	}
 
 	public function testIncrementStatsKey() {
-		$luaFunctionCallTracker = $this->getMockBuilder( LuaFunctionCallTracker::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$luaFunctionCallTracker = $this->createMock( LuaFunctionCallTracker::class );
 		$luaFunctionCallTracker->expects( $this->once() )
 			->method( 'incrementKey' )
 			->with( 'a-key.suffix' );

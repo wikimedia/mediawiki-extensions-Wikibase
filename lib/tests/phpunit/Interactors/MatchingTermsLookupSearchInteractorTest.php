@@ -82,9 +82,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 	 * @return PrefetchingTermLookup
 	 */
 	private function getMockPrefetchingTermLookup() {
-		$mock = $this->getMockBuilder( PrefetchingTermLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( PrefetchingTermLookup::class );
 		$mock->method( 'getLabels' )
 			->willReturnCallback( function( EntityId $entityId, $languageCodes ) {
 				$labels = [];
@@ -115,9 +113,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 	 * @return LanguageFallbackChainFactory
 	 */
 	private function getMockLanguageFallbackChainFactory() {
-		$mockFactory = $this->getMockBuilder( LanguageFallbackChainFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mockFactory = $this->createMock( LanguageFallbackChainFactory::class );
 		$mockFactory->method( 'newFromLanguageCode' )
 			->willReturnCallback( function( $langCode ) {
 				return $this->getMockLanguageFallbackChainFromLanguage( $langCode );
@@ -131,9 +127,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 	 * @return TermLanguageFallbackChain
 	 */
 	public function getMockLanguageFallbackChainFromLanguage( $langCode ) {
-		$mockFallbackChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mockFallbackChain = $this->createMock( TermLanguageFallbackChain::class );
 		$mockFallbackChain->method( 'getFetchLanguageCodes' )
 			->willReturnCallback( function () use( $langCode ) {
 				if ( $langCode === 'en-gb' || $langCode === 'en-ca' ) {

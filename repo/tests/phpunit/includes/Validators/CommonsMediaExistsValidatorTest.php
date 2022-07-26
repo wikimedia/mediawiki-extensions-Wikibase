@@ -22,9 +22,7 @@ class CommonsMediaExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 	 * @return CachingCommonsMediaFileNameLookup
 	 */
 	private function getCachingCommonsMediaFileNameLookup() {
-		$fileNameLookup = $this->getMockBuilder( CachingCommonsMediaFileNameLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$fileNameLookup = $this->createMock( CachingCommonsMediaFileNameLookup::class );
 
 		$fileNameLookup->method( 'lookupFileName' )
 			->with( $this->isType( 'string' ) )

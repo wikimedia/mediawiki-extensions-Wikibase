@@ -18,9 +18,7 @@ use Wikibase\Repo\Notifications\HookChangeTransmitter;
 class HookChangeTransmitterTest extends MediaWikiIntegrationTestCase {
 
 	public function testTransmitChange() {
-		$change = $this->getMockBuilder( EntityChange::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$change = $this->createMock( EntityChange::class );
 
 		$called = false;
 		$this->mergeMwGlobalArrayValue( 'wgHooks', [

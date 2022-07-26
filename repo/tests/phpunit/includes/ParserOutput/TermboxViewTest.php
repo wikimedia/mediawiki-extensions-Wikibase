@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -41,9 +40,9 @@ class TermboxViewTest extends TestCase {
 
 		$termbox = new TermboxView(
 			$this->createMock( LanguageFallbackChainFactory::class ),
-			$this->newTermboxRenderer(),
-			$this->newLocalizedTextProvider(),
-			$this->newSpecialPageLinker(),
+			$this->createMock( TermboxRenderer::class ),
+			$this->createMock( LocalizedTextProvider::class ),
+			$this->createMock( SpecialPageLinker::class ),
 			$textInjector
 		);
 
@@ -76,9 +75,9 @@ class TermboxViewTest extends TestCase {
 
 		$termbox = new TermboxView(
 			$fallbackChainFactory,
-			$this->newTermboxRenderer(),
-			$this->newLocalizedTextProvider(),
-			$this->newSpecialPageLinker(),
+			$this->createMock( TermboxRenderer::class ),
+			$this->createMock( LocalizedTextProvider::class ),
+			$this->createMock( SpecialPageLinker::class ),
 			$textInjector
 		);
 
@@ -103,7 +102,7 @@ class TermboxViewTest extends TestCase {
 			->with( $language )
 			->willReturn( $fallbackChain );
 
-		$renderer = $this->newTermboxRenderer();
+		$renderer = $this->createMock( TermboxRenderer::class );
 		$renderer->expects( $this->once() )
 			->method( 'getContent' )
 			->with( $item->getId(), $revision, $language, $editLinkUrl, $fallbackChain )
@@ -111,7 +110,7 @@ class TermboxViewTest extends TestCase {
 
 		$placeholders = $this->newTermbox(
 			$renderer,
-			$this->newLocalizedTextProvider(),
+			$this->createMock( LocalizedTextProvider::class ),
 			$this->newLinkingSpecialPageLinker( $item->getId(), $editLinkUrl ),
 			$fallbackChainFactory
 		)->getPlaceholders(
@@ -131,12 +130,17 @@ class TermboxViewTest extends TestCase {
 		$item = new Item( new ItemId( 'Q42' ) );
 		$revision = 4711;
 
-		$renderer = $this->newTermboxRenderer();
+		$renderer = $this->createMock( TermboxRenderer::class );
 		$renderer->expects( $this->once() )
 			->method( 'getContent' )
 			->willThrowException( new TermboxRenderingException( 'specific reason of failure' ) );
 
-		$placeholders = $this->newTermbox( $renderer, $this->newLocalizedTextProvider(), $this->newSpecialPageLinker() )->getPlaceholders(
+		$termbox = $this->newTermbox(
+			$renderer,
+			$this->createMock( LocalizedTextProvider::class ),
+			$this->createMock( SpecialPageLinker::class )
+		);
+		$placeholders = $termbox->getPlaceholders(
 			$item,
 			$revision,
 			$language
@@ -152,11 +156,16 @@ class TermboxViewTest extends TestCase {
 		$item = new Item( new ItemId( 'Q42' ) );
 		$revision = EntityRevision::UNSAVED_REVISION;
 
-		$renderer = $this->newTermboxRenderer();
+		$renderer = $this->createMock( TermboxRenderer::class );
 		$renderer->expects( $this->never() )
 			->method( 'getContent' );
 
-		$placeholders = $this->newTermbox( $renderer, $this->newLocalizedTextProvider(), $this->newSpecialPageLinker() )->getPlaceholders(
+		$termbox = $this->newTermbox(
+			$renderer,
+			$this->createMock( LocalizedTextProvider::class ),
+			$this->createMock( SpecialPageLinker::class )
+		);
+		$placeholders = $termbox->getPlaceholders(
 			$item,
 			$revision,
 			$language
@@ -170,32 +179,16 @@ class TermboxViewTest extends TestCase {
 	public function testGetTitleHtml_returnsHtmlWithEntityId() {
 		$entityId = new ItemId( 'Q42' );
 
-		$textProvider = new DummyLocalizedTextProvider();
-
 		$termbox = $this->newTermbox(
-			$this->newTermboxRenderer(),
-			$textProvider,
-			$this->newSpecialPageLinker()
+			$this->createMock( TermboxRenderer::class ),
+			new DummyLocalizedTextProvider(),
+			$this->createMock( SpecialPageLinker::class )
 		);
 
 		$this->assertSame(
 			'(parentheses: Q42)',
 			$termbox->getTitleHtml( $entityId )
 		);
-	}
-
-	/**
-	 * @return TermboxRenderer|MockObject
-	 */
-	private function newTermboxRenderer(): TermboxRenderer {
-		return $this->createMock( TermboxRenderer::class );
-	}
-
-	/**
-	 * @return LocalizedTextProvider|MockObject
-	 */
-	private function newLocalizedTextProvider(): LocalizedTextProvider {
-		return $this->createMock( LocalizedTextProvider::class );
 	}
 
 	private function newTermbox(
@@ -215,19 +208,12 @@ class TermboxViewTest extends TestCase {
 	}
 
 	private function newLinkingSpecialPageLinker( $itemId, $editLinkUrl ) {
-		$specialPageLinker = $this->newSpecialPageLinker();
+		$specialPageLinker = $this->createMock( SpecialPageLinker::class );
 		$specialPageLinker->expects( $this->once() )
 			->method( 'getLink' )
 			->with( EntityTermsView::TERMS_EDIT_SPECIAL_PAGE, [ $itemId ] )
 			->willReturn( $editLinkUrl );
 		return $specialPageLinker;
-	}
-
-	/**
-	 * @return MockObject|SpecialPageLinker
-	 */
-	private function newSpecialPageLinker() {
-		return $this->createMock( SpecialPageLinker::class );
 	}
 
 }

@@ -176,9 +176,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$localDescription,
 		$centralDescription
 	) {
-		$namespaceChecker = $this->getMockBuilder( NamespaceChecker::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$namespaceChecker = $this->createMock( NamespaceChecker::class );
 
 		$namespaceChecker->method( 'isWikibaseEnabled' )
 			->willReturn( $enabled );
@@ -201,32 +199,21 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			} );
 
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
-
 		$siteLinkLookup->method( 'getItemIdForLink' )
 			->willReturn( $itemId );
 
-		$sqlUsageTracker = $this->getMockBuilder( SqlUsageTracker::class )
-			->disableOriginalConstructor()
-			->getMock();
-
+		$sqlUsageTracker = $this->createMock( SqlUsageTracker::class );
 		if ( $itemId ) {
 			$entityUsage = [ new EntityUsage( $itemId, 'S' ) ];
 			$sqlUsageTracker->method( 'getUsagesForPage' )
 				->willReturn( $entityUsage );
 		}
 
-		$labelDescriptionLookupFactory = $this->getMockBuilder(
-			FallbackLabelDescriptionLookupFactory::class
-		)
-			->disableOriginalConstructor()
-			->getMock();
-
+		$labelDescriptionLookupFactory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
 		$labelDescriptionLookupFactory->method( 'newLabelDescriptionLookup' )
 			->willReturnCallback( [ $this, 'newLabelDescriptionLookup' ] );
 
-		$descriptionLookup = $this->getMockBuilder( DescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$descriptionLookup = $this->createMock( DescriptionLookup::class );
 
 		$descriptionLookup->expects( $this->at( 0 ) )
 			->method( 'getDescription' )
@@ -238,7 +225,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->with( $this->anything(), DescriptionLookup::SOURCE_CENTRAL )
 			->willReturn( $centralDescription );
 
-		$hookHandler = new InfoActionHookHandler(
+		return new InfoActionHookHandler(
 			$namespaceChecker,
 			$repoLinker,
 			$siteLinkLookup,
@@ -247,17 +234,13 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$labelDescriptionLookupFactory,
 			$descriptionLookup
 		);
-
-		return $hookHandler;
 	}
 
 	/**
 	 * @return IContextSource
 	 */
 	private function getContext() {
-		$title = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$title = $this->createMock( Title::class );
 
 		$title->method( 'exists' )
 			->willReturn( true );

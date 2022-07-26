@@ -91,9 +91,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				new OutOfBoundsException( 'unknown datatype ' . $dataType ) );
 		}
 
-		$typeFactory = $this->getMockBuilder( DataTypeFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$typeFactory = $this->createMock( DataTypeFactory::class );
 
 		$typeFactory->method( 'getType' )
 			->will( $getValueTypeIdForPropertyResult );
@@ -225,9 +223,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		$typeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
 
-		$typeFactory = $this->getMockBuilder( DataTypeFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$typeFactory = $this->createMock( DataTypeFactory::class );
 
 		$typeFactory->expects( $this->never() )->method( 'getType' );
 
@@ -248,9 +244,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 			'VT:string' => $this->getMockFormatter( 'VT:string' ),
 		] );
 
-		$typeFactory = $this->getMockBuilder( DataTypeFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$typeFactory = $this->createMock( DataTypeFactory::class );
 
 		$typeFactory->expects( $this->never() )
 			->method( 'getType' );

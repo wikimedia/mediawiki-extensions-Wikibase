@@ -114,9 +114,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	 * @return ItemRedirectCreationInteractor
 	 */
 	public function getMockRedirectCreationInteractor( EntityRedirect $redirect = null ) {
-		$mock = $this->getMockBuilder( ItemRedirectCreationInteractor::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( ItemRedirectCreationInteractor::class );
 
 		if ( $redirect ) {
 			$mock->expects( $this->once() )
@@ -178,10 +176,8 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$apiResultBuilder = new ResultBuilder(
 			$main->getResult(),
 			$this->getEntityTitleStoreLookup(),
-			$this->getMockBuilder( SerializerFactory::class )
-				->disableOriginalConstructor()
-				->getMock(),
-			$this->getMockBuilder( ItemSerializer::class )->disableOriginalConstructor()->getMock(),
+			$this->createMock( SerializerFactory::class ),
+			$this->createMock( ItemSerializer::class ),
 			$this->createMock( SiteLookup::class ),
 			new InMemoryDataTypeLookup(),
 			WikibaseRepo::getEntityIdParser()
@@ -216,9 +212,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	 * @return EntityConstraintProvider
 	 */
 	private function getConstraintProvider() {
-		$constraintProvider = $this->getMockBuilder( EntityConstraintProvider::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$constraintProvider = $this->createMock( EntityConstraintProvider::class );
 
 		$constraintProvider->method( 'getUpdateValidators' )
 			->willReturn( [] );
@@ -230,9 +224,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	 * @return SnakValidator
 	 */
 	private function getSnakValidator() {
-		$snakValidator = $this->getMockBuilder( SnakValidator::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$snakValidator = $this->createMock( SnakValidator::class );
 
 		$snakValidator->method( 'validate' )
 			->willReturn( Status::newGood() );

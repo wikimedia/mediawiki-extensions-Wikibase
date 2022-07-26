@@ -34,9 +34,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 	 * @return DifferencesSnakVisualizer
 	 */
 	public function newDifferencesSnakVisualizer() {
-		$instance = $this->getMockBuilder( DifferencesSnakVisualizer::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$instance = $this->createMock( DifferencesSnakVisualizer::class );
 
 		$instance->method( 'getPropertyAndDetailedValue' )
 			->willReturnCallback( function( PropertyValueSnak $snak ) {

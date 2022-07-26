@@ -88,9 +88,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 * @return EditFilterHookRunner
 	 */
 	public function getMockEditFilterHookRunner() {
-		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( EditFilterHookRunner::class );
 
 		$mock->method( 'run' )
 			->willReturn( Status::newGood() );
@@ -171,9 +169,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			WikibaseRepo::getTokenCheckInteractor()
 		);
 
-		$linkRenderer = $this->getMockBuilder( LinkRenderer::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$linkRenderer = $this->createMock( LinkRenderer::class );
 		$linkRenderer->method( 'makeKnownLink' )
 			->willReturnArgument( 1 );
 		$linkRenderer->method( 'makePreloadedLink' )

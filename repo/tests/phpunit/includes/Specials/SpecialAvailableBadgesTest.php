@@ -30,11 +30,11 @@ class SpecialAvailableBadgesTest extends SpecialPageTestBase {
 	}
 
 	protected function newSpecialPage() {
-		$prefetchingTermLookup = $this->getMockBuilder( PrefetchingTermLookup::class )->getMock();
+		$prefetchingTermLookup = $this->createMock( PrefetchingTermLookup::class );
 		$prefetchingTermLookup->method( 'getDescription' )
 			->willReturn( 'Test badge item' );
 
-		$entityTitleLookup = $this->getMockBuilder( EntityTitleLookup::class )->getMock();
+		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->method( 'getTitleForId' )
 			->willReturnCallback( function ( ItemId $itemId ) {
 				return Title::makeTitle( 0, $itemId->getSerialization() );

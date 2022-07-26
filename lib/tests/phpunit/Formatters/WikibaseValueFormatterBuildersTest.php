@@ -135,9 +135,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newKartographerEmbeddingHandler() {
-		$handler = $this->getMockBuilder( CachingKartographerEmbeddingHandler::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$handler = $this->createMock( CachingKartographerEmbeddingHandler::class );
 
 		$handler->method( 'getHtml' )
 			->with(

@@ -29,9 +29,7 @@ class DescriptionProviderHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$lookupResults,
 		$hookResults
 	) {
-		$descriptionLookup = $this->getMockBuilder( DescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$descriptionLookup = $this->createMock( DescriptionLookup::class );
 
 		$descriptionLookup->expects( $this->once() )
 			->method( 'getDescriptions' )

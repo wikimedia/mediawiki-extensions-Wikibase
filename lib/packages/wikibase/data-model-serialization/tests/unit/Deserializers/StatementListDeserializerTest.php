@@ -22,7 +22,7 @@ class StatementListDeserializerTest extends TestCase {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
-		$statementDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$statementDeserializerMock = $this->createMock( Deserializer::class );
 		$statementDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [

@@ -46,9 +46,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 	 * @return TermLanguageFallbackChain
 	 */
 	protected function newLanguageFallbackChain() {
-		$fallbackChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$fallbackChain = $this->createMock( TermLanguageFallbackChain::class );
 
 		$fallbackChain->method( 'extractPreferredValue' )
 			->willReturnCallback( function( $labels ) {
@@ -94,9 +92,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 	 * @return DispatchingEntityViewFactory
 	 */
 	public function mockEntityViewFactory( $createView ) {
-		$entityViewFactory = $this->getMockBuilder( DispatchingEntityViewFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$entityViewFactory = $this->createMock( DispatchingEntityViewFactory::class );
 
 		$entityViewFactory->expects( $createView ? $this->once() : $this->never() )
 			->method( 'newEntityView' )
@@ -173,9 +169,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 	 * @return ParserOutputJsConfigBuilder
 	 */
 	protected function getConfigBuilderMock() {
-		$configBuilder = $this->getMockBuilder( ParserOutputJsConfigBuilder::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$configBuilder = $this->createMock( ParserOutputJsConfigBuilder::class );
 
 		$configBuilder->method( 'build' )
 			->willReturn( [ '<JS>' ] );
@@ -215,15 +209,11 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 				return new EntityReferenceExtractorCollection( [
 					new SiteLinkBadgeItemReferenceExtractor(),
 					new StatementEntityReferenceExtractor(
-						$this->getMockBuilder( SuffixEntityIdParser::class )
-							->disableOriginalConstructor()
-							->getMock()
+						$this->createMock( SuffixEntityIdParser::class )
 					)
 				] );
 			}
-		], $this->getMockBuilder( StatementEntityReferenceExtractor::class )
-			->disableOriginalConstructor()
-			->getMock() );
+		], $this->createMock( StatementEntityReferenceExtractor::class ) );
 	}
 
 }

@@ -33,9 +33,7 @@ class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 	 * @return SnakHtmlGenerator
 	 */
 	private function getSnakHtmlGeneratorMock() {
-		$snakHtmlGenerator = $this->getMockBuilder( SnakHtmlGenerator::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$snakHtmlGenerator = $this->createMock( SnakHtmlGenerator::class );
 
 		$snakHtmlGenerator->method( 'getSnakHtml' )
 			->willReturn( 'SNAK HTML' );

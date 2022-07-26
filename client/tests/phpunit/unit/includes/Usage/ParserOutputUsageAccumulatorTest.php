@@ -43,9 +43,7 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testDeduplicatorIsCalledOnce() {
-		$deduplicator = $this->getMockBuilder( UsageDeduplicator::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$deduplicator = $this->createMock( UsageDeduplicator::class );
 		$deduplicator->expects( $this->once() )
 			->method( 'deduplicate' )
 			->with( $this->containsOnlyInstancesOf( EntityUsage::class ) )

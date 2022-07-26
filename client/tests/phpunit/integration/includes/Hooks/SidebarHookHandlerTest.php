@@ -178,9 +178,7 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @return Skin
 	 */
 	private function newSkin( IContextSource $context ) {
-		$skin = $this->getMockBuilder( Skin::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$skin = $this->createMock( Skin::class );
 
 		$skin->method( 'getContext' )
 			->willReturn( $context );

@@ -106,9 +106,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @return LanguageLinkBadgeDisplay
 	 */
 	private function getLanguageLinkBadgeDisplay() {
-		$badgeDisplay = $this->getMockBuilder( LanguageLinkBadgeDisplay::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$badgeDisplay = $this->createMock( LanguageLinkBadgeDisplay::class );
 
 		$badgeDisplay->method( 'attachBadgesToOutput' )
 			->willReturnCallback( function ( array $siteLinks, ParserOutput $parserOutput ) {

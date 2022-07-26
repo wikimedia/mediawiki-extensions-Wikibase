@@ -44,9 +44,7 @@ class EntityTermsTest extends MediaWikiLangTestCase {
 
 		$main = new ApiMain( $context );
 
-		$pageSet = $this->getMockBuilder( ApiPageSet::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$pageSet = $this->createMock( ApiPageSet::class );
 
 		$pageSet->method( 'getGoodTitles' )
 			->willReturn( $titles );

@@ -24,13 +24,13 @@ use Wikibase\DataModel\Term\TermList;
 class PropertyDeserializerTest extends DispatchableDeserializerTest {
 
 	protected function buildDeserializer() {
-		$entityIdDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$entityIdDeserializerMock = $this->createMock( Deserializer::class );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( 'P42' ) )
 			->will( $this->returnValue( new NumericPropertyId( 'P42' ) ) );
 
-		$termListDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$termListDeserializerMock = $this->createMock( Deserializer::class );
 		$termListDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [
@@ -41,7 +41,7 @@ class PropertyDeserializerTest extends DispatchableDeserializerTest {
 			] ) )
 			->will( $this->returnValue( new TermList( [ new Term( 'en', 'foo' ) ] ) ) );
 
-		$aliasGroupListDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$aliasGroupListDeserializerMock = $this->createMock( Deserializer::class );
 		$aliasGroupListDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [
@@ -57,7 +57,7 @@ class PropertyDeserializerTest extends DispatchableDeserializerTest {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
-		$statementListDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$statementListDeserializerMock = $this->createMock( Deserializer::class );
 		$statementListDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [

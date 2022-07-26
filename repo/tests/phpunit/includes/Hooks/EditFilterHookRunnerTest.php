@@ -34,9 +34,7 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
 class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 
 	public function getEditFilterHookRunner(): MediawikiEditFilterHookRunner {
-		$namespaceLookup = $this->getMockBuilder( EntityNamespaceLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$namespaceLookup = $this->createMock( EntityNamespaceLookup::class );
 		$namespaceLookup->method( 'getEntitySlotRole' )->willReturn( 'main' );
 
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
@@ -45,9 +43,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 				return Title::newFromTextThrow( $id->getSerialization(), NS_MAIN );
 			} );
 
-		$entityContentFactory = $this->getMockBuilder( EntityContentFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$entityContentFactory = $this->createMock( EntityContentFactory::class );
 		$entityContentFactory->method( 'newFromEntity' )
 			->with( $this->isInstanceOf( EntityDocument::class ) )
 			->willReturn( new ItemContent( new EntityInstanceHolder( new Item() ) ) );

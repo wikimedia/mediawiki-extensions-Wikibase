@@ -25,9 +25,7 @@ class GetClaimsStatementFilterTest extends \PHPUnit\Framework\TestCase {
 	 * @return ApiErrorReporter
 	 */
 	private function getApiErrorReporter( $expectsError = false ) {
-		$errorReporter = $this->getMockBuilder( ApiErrorReporter::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$errorReporter = $this->createMock( ApiErrorReporter::class );
 
 		if ( !$expectsError ) {
 			$errorReporter->expects( $this->never() )

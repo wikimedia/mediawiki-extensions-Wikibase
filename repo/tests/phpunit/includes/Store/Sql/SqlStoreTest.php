@@ -40,17 +40,11 @@ use Wikibase\Repo\Store\Store;
 class SqlStoreTest extends MediaWikiIntegrationTestCase {
 
 	public function newInstance() {
-		$changeFactory = $this->getMockBuilder( EntityChangeFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$changeFactory = $this->createMock( EntityChangeFactory::class );
 
-		$entityIdComposer = $this->getMockBuilder( EntityIdComposer::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$entityIdComposer = $this->createMock( EntityIdComposer::class );
 
-		$prefetchingAccessor = $this->getMockBuilder( PrefetchingWikiPageEntityMetaDataAccessor::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$prefetchingAccessor = $this->createMock( PrefetchingWikiPageEntityMetaDataAccessor::class );
 
 		$wikibaseServices = $this->createMock( WikibaseServices::class );
 

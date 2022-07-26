@@ -37,19 +37,16 @@ class PropertyTermStoreWriterAdapterTest extends TestCase {
 
 	public function testSaveTermsThrowsExceptionWhenGivenUnsupportedEntityType() {
 		$writer = $this->newTermStoreWriter();
+		$unsupportedEntity = $this->createMock( EntityDocument::class );
 
 		$this->expectException( \InvalidArgumentException::class );
-		$writer->saveTermsOfEntity( $this->newUnsupportedEntity() );
+		$writer->saveTermsOfEntity( $unsupportedEntity );
 	}
 
 	private function newTermStoreWriter(): PropertyTermStoreWriterAdapter {
 		return new PropertyTermStoreWriterAdapter(
 			$this->propertyTermStoreWriter
 		);
-	}
-
-	private function newUnsupportedEntity() {
-		return $this->createMock( EntityDocument::class );
 	}
 
 	private function newPropertyTermStoreWriter(): PropertyTermStoreWriter {
@@ -76,13 +73,10 @@ class PropertyTermStoreWriterAdapterTest extends TestCase {
 
 	public function testDeleteTermsThrowsExceptionWhenGivenUnsupportedEntityId() {
 		$writer = $this->newTermStoreWriter();
+		$unsupportedId = $this->createMock( EntityId::class );
 
 		$this->expectException( \InvalidArgumentException::class );
-		$writer->deleteTermsOfEntity( $this->newUnsupportedId() );
-	}
-
-	public function newUnsupportedId() {
-		return $this->createMock( EntityId::class );
+		$writer->deleteTermsOfEntity( $unsupportedId );
 	}
 
 	public function testSaveTermsSavesProperties() {

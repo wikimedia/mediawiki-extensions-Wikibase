@@ -96,9 +96,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiIntegrationTes
 	 * @return TermLanguageFallbackChain
 	 */
 	private function getLanguageFallbackChain( $languageCode ) {
-		$languageFallbackChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$languageFallbackChain = $this->createMock( TermLanguageFallbackChain::class );
 
 		$languageFallbackChain->method( 'extractPreferredValue' )
 			->willReturnCallback( function( array $fallbackData ) use ( $languageCode ) {

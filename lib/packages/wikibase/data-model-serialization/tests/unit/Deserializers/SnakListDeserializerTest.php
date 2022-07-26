@@ -18,7 +18,7 @@ use Wikibase\DataModel\Snak\SnakList;
 class SnakListDeserializerTest extends TestCase {
 
 	private function buildDeserializer() {
-		$snakDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$snakDeserializerMock = $this->createMock( Deserializer::class );
 
 		$snakDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )

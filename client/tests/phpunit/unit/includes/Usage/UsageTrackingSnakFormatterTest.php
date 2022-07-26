@@ -57,9 +57,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @return UsageTrackingLanguageFallbackLabelDescriptionLookup
 	 */
 	private function getUsageTrackingLabelDescriptionLookup( EntityId $formatEntity = null ) {
-		$usageTrackingLabelDescriptionLookup = $this->getMockBuilder( UsageTrackingLanguageFallbackLabelDescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$usageTrackingLabelDescriptionLookup = $this->createMock( UsageTrackingLanguageFallbackLabelDescriptionLookup::class );
 
 		$getLabelInvocationMocker = $usageTrackingLabelDescriptionLookup->expects( $this->exactly( $formatEntity ? 1 : 0 ) )
 			->method( 'getLabel' )

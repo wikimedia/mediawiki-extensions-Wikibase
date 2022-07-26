@@ -104,9 +104,7 @@ class PropertyViewTest extends EntityViewTestCase {
 			$templateFactory,
 			$termsView,
 			$this->createMock( LanguageDirectionalityLookup::class ),
-			$this->getMockBuilder( StatementSectionsView::class )
-				->disableOriginalConstructor()
-				->getMock(),
+			$this->createMock( StatementSectionsView::class ),
 			$this->getDataTypeFactory(),
 			'en',
 			$this->createMock( LocalizedTextProvider::class )

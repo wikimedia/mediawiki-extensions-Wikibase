@@ -30,17 +30,13 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit\Framework\TestCase {
 	 * @return WikibaseLuaEntityBindings
 	 */
 	private function getWikibaseLuaEntityBindings( HashUsageAccumulator $usageAccumulator = null ) {
-		$plainTextTransclusionInteractor = $this->getMockBuilder( StatementTransclusionInteractor::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$plainTextTransclusionInteractor = $this->createMock( StatementTransclusionInteractor::class );
 
 		$plainTextTransclusionInteractor->method( 'render' )
 				->with( new ItemId( 'Q12' ), 'some label', [ Statement::RANK_DEPRECATED ] )
 				->willReturn( 'Kittens > Cats' );
 
-		$richWikitextTransclusionInteractor = $this->getMockBuilder( StatementTransclusionInteractor::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$richWikitextTransclusionInteractor = $this->createMock( StatementTransclusionInteractor::class );
 
 		$richWikitextTransclusionInteractor->method( 'render' )
 				->with( new ItemId( 'Q12' ), 'some label', [ Statement::RANK_DEPRECATED ] )

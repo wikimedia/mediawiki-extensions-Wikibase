@@ -18,7 +18,7 @@ use Wikibase\DataModel\ReferenceList;
 class ReferenceListDeserializerTest extends TestCase {
 
 	private function buildDeserializer() {
-		$referenceDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
+		$referenceDeserializerMock = $this->createMock( Deserializer::class );
 
 		$referenceDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )

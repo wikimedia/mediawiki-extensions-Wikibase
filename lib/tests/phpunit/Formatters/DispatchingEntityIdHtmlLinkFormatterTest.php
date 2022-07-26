@@ -24,7 +24,7 @@ class DispatchingEntityIdHtmlLinkFormatterTest extends TestCase {
 	private $defaultFormatter;
 
 	protected function setUp(): void {
-		$this->defaultFormatter = $this->newMockFormatter();
+		$this->defaultFormatter = $this->createMock( EntityIdFormatter::class );
 	}
 
 	public function testGivenFormatterMissing_UseDefaultFormatter() {
@@ -35,7 +35,7 @@ class DispatchingEntityIdHtmlLinkFormatterTest extends TestCase {
 	}
 
 	public function testGivenFormatterExists_FormatterUsed() {
-		$formatter = $this->newMockFormatter();
+		$formatter = $this->createMock( EntityIdFormatter::class );
 		$formatter->expects( $this->once() )
 			->method( 'formatEntityId' );
 		$formatters = [ 'foo' => $formatter ];
@@ -53,10 +53,6 @@ class DispatchingEntityIdHtmlLinkFormatterTest extends TestCase {
 
 		$this->expectException( InvalidArgumentException::class );
 		new DispatchingEntityIdHtmlLinkFormatter( $formatters, $this->defaultFormatter );
-	}
-
-	private function newMockFormatter() {
-		return $this->createMock( EntityIdFormatter::class );
 	}
 
 }

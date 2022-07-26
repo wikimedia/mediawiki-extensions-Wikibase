@@ -24,9 +24,7 @@ class ExternalLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	 * @return ExternalLinksDataUpdater
 	 */
 	private function newInstance() {
-		$matcher = $this->getMockBuilder( PropertyDataTypeMatcher::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$matcher = $this->createMock( PropertyDataTypeMatcher::class );
 		$matcher->method( 'isMatchingDataType' )
 			->willReturnCallback( function( PropertyId $id, $type ) {
 				return $id->getSerialization() === 'P1';
@@ -52,9 +50,7 @@ class ExternalLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	public function testUpdateParserOutput( StatementList $statements, array $expected ) {
 		$actual = [];
 
-		$parserOutput = $this->getMockBuilder( ParserOutput::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$parserOutput = $this->createMock( ParserOutput::class );
 		$parserOutput->expects( $this->exactly( count( $expected ) ) )
 			->method( 'addExternalLink' )
 			->willReturnCallback( function( $url ) use ( &$actual ) {

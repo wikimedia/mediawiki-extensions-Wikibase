@@ -39,9 +39,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 	 * @return WikiPage
 	 */
 	private function getWikiPage( Title $title ): WikiPage {
-		$wikiPage = $this->getMockBuilder( WikiPage::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$wikiPage = $this->createMock( WikiPage::class );
 		$wikiPage->method( 'getTitle' )
 			->willReturn( $title );
 
@@ -53,22 +51,13 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function getArticle(): Article {
 		$title = Title::newFromTextThrow( 'Page title' );
-		$article = $this->getMockBuilder( Article::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$article = $this->createMock( Article::class );
 		$article->method( 'getTitle' )
 			->willReturn( $title );
 		$article->method( 'getPage' )
 			->willReturn( $this->getWikiPage( $title ) );
 
 		return $article;
-	}
-
-	/**
-	 * @return MockObject
-	 */
-	private function getOutput() {
-		return $this->createMock( OutputPage::class );
 	}
 
 	/**
@@ -150,7 +139,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 		$labelLookup->method( 'getLabel' )
 			->willReturn( $label );
 
-		$output = $this->getOutput();
+		$output = $this->createMock( OutputPage::class );
 		$output->expects( $this->once() )
 			->method( 'setPageTitle' )
 			->with( $expected );

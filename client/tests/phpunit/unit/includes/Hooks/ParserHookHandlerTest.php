@@ -22,9 +22,7 @@ use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 class ParserHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testOnParserLimitReportPrepare() {
-		$restrictedEntityLookup = $this->getMockBuilder( RestrictedEntityLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$restrictedEntityLookup = $this->createMock( RestrictedEntityLookup::class );
 
 		$restrictedEntityLookup->expects( $this->once() )
 			->method( 'getEntityAccessCount' )

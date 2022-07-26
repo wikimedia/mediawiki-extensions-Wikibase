@@ -178,9 +178,7 @@ class UpdateRepoHookHandlerTest extends TestCase {
 		bool $propagateChangesToRepo,
 		?ItemId $itemId
 	): UpdateRepoHookHandler {
-		$namespaceChecker = $this->getMockBuilder( NamespaceChecker::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$namespaceChecker = $this->createMock( NamespaceChecker::class );
 		$namespaceChecker->method( 'isWikibaseEnabled' )
 			->willReturn( $isWikibaseEnabled );
 
@@ -191,9 +189,7 @@ class UpdateRepoHookHandlerTest extends TestCase {
 		$jobQueue->method( 'supportsDelayedJobs' )
 			->willReturn( true );
 
-		$jobQueueGroup = $this->getMockBuilder( JobQueueGroup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$jobQueueGroup = $this->createMock( JobQueueGroup::class );
 		if ( $jobName !== null ) {
 			$jobQueueGroup->expects( $this->once() )
 				->method( 'push' )

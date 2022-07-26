@@ -256,9 +256,7 @@ class DescriptionTest extends MediaWikiIntegrationTestCase {
 		$descriptionsToReturn,
 		$sourcesToReturn
 	) {
-		$descriptionLookup = $this->getMockBuilder( DescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$descriptionLookup = $this->createMock( DescriptionLookup::class );
 		$descriptionLookup->expects( $this->once() )
 			->method( 'getDescriptions' )
 			->willReturnCallback( function ( $titles, $sources, &$actualSources )
@@ -297,21 +295,15 @@ class DescriptionTest extends MediaWikiIntegrationTestCase {
 		?int $fitLimit,
 		DescriptionLookup $descriptionLookup
 	) {
-		$main = $this->getMockBuilder( ApiMain::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$main = $this->createMock( ApiMain::class );
 		$main->method( 'canApiHighLimits' )
 			->willReturn( false );
 
-		$pageSet = $this->getMockBuilder( \ApiPageSet::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$pageSet = $this->createMock( \ApiPageSet::class );
 		$pageSet->method( 'getGoodTitles' )
 			->willReturn( $this->makeTitles( $requestedPageIds ) );
 
-		$result = $this->getMockBuilder( \ApiResult::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$result = $this->createMock( \ApiResult::class );
 		$result->method( 'addValue' )
 			->willReturnCallback( function ( $path, $name, $value ) use ( $fitLimit ) {
 				static $fitCount = 0;
@@ -369,9 +361,7 @@ class DescriptionTest extends MediaWikiIntegrationTestCase {
 	private function makeTitles( $requestedPageIds ) {
 		$en = Language::factory( 'en' );
 		return array_map( function ( $pageId ) use ( $en ) {
-			$title = $this->getMockBuilder( Title::class )
-				->disableOriginalConstructor()
-				->getMock();
+			$title = $this->createMock( Title::class );
 			$title->method( 'getArticleID' )
 				->willReturn( $pageId );
 			$title->method( 'getPageLanguage' )

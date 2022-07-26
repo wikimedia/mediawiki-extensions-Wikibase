@@ -324,9 +324,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
 		$namespaceChecker = new NamespaceChecker( [] );
 
-		$titleFactoryMock = $this->getMockBuilder( \TitleFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$titleFactoryMock = $this->createMock( \TitleFactory::class );
 
 		$titleFactoryMock->method( 'newFromID' )
 			->willReturn( null );

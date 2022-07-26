@@ -36,9 +36,7 @@ class ItemsPerSiteBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getSiteLinkTable(): SiteLinkTable {
-		$mock = $this->getMockBuilder( SiteLinkTable::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( SiteLinkTable::class );
 
 		$item = $this->getTestItem();
 		$mock->expects( $this->exactly( 10 ) )

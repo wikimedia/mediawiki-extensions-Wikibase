@@ -115,9 +115,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 	 * @return Title
 	 */
 	private function getTitle( $fullText ) {
-		$title = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$title = $this->createMock( Title::class );
 
 		$title->method( 'getPrefixedText' )
 			->willReturn( $fullText );

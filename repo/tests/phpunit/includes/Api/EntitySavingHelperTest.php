@@ -59,13 +59,6 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		}
 	}
 
-	/**
-	 * @return SummaryFormatter
-	 */
-	private function getMockSummaryFormatter() {
-		return $this->createMock( SummaryFormatter::class );
-	}
-
 	private function getMockEditEntity( ?int $calls, ?Status $status ): EditEntity {
 		$mock = $this->createMock( EditEntity::class );
 		$mock->expects( $calls === null ? $this->any() : $this->exactly( $calls ) )
@@ -382,7 +375,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 				$config['dieExceptionCode'] ?? null,
 				$config['dieErrorCode'] ?? null
 			),
-			$this->getMockSummaryFormatter(),
+			$this->createMock( SummaryFormatter::class ),
 			$this->getMockEditEntityFactory(
 				$config['newEditEntityCalls'] ?? null,
 				$config['attemptSaveStatus'] ?? null

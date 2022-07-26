@@ -25,17 +25,11 @@ use Wikibase\Client\RecentChanges\RecentChangeFactory;
  */
 class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 
-	private function getChangeLineFormatter() {
-		return $this->createMock( ChangeLineFormatter::class );
-	}
-
 	private function getChangeFactory( int $times = 0 ): ExternalChangeFactory {
 		$changeFactory = $this->createMock( ExternalChangeFactory::class );
 		$changeFactory->expects( $this->exactly( $times ) )
 			->method( 'newFromRecentChange' )
-			->willReturn( $this->getMockBuilder( ExternalChange::class )
-				->disableOriginalConstructor()
-				->getMock()
+			->willReturn( $this->createMock( ExternalChange::class )
 			);
 
 		return $changeFactory;
@@ -62,21 +56,18 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider nonWikibaseChangeProvider
 	 */
 	public function testOldChangesListLineNotTouched( $source ) {
-		$formatter = $this->getChangeLineFormatter();
+		$formatter = $this->createMock( ChangeLineFormatter::class );
 		$formatter->expects( $this->never() )
 			->method( 'format' );
 		$handler = new ChangesListLinesHandler(
 			$this->getChangeFactory(),
 			$formatter
 		);
-		$changesList = $this->createMock( OldChangesList::class );
-
-		$recentChange = $this->getRecentChange( $source );
 
 		$handler->onOldChangesListRecentChangesLine(
-			$changesList,
+			$this->createMock( OldChangesList::class ),
 			$line,
-			$recentChange,
+			$this->getRecentChange( $source ),
 			$classes
 		);
 	}
@@ -87,17 +78,14 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testEnhancedChangesListBlockLineDataOnlyTouchedFlag( $source ) {
 		$handler = new ChangesListLinesHandler(
 			$this->getChangeFactory(),
-			$this->getChangeLineFormatter()
+			$this->createMock( ChangeLineFormatter::class )
 		);
-		$changesList = $this->createMock( EnhancedChangesList::class );
-
-		$recentChange = $this->getRecentChange( $source );
 
 		$data = [];
 		$handler->onEnhancedChangesListModifyBlockLineData(
-			$changesList,
+			$this->createMock( EnhancedChangesList::class ),
 			$data,
-			$recentChange
+			$this->getRecentChange( $source )
 		);
 
 		$this->assertEquals( [ 'recentChangesFlags' => [ 'wikibase-edit' => false ] ], $data );
@@ -109,19 +97,16 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testEnhancedChangesListLineDataOnlyTouchedFlag( $source ) {
 		$handler = new ChangesListLinesHandler(
 			$this->getChangeFactory(),
-			$this->getChangeLineFormatter()
+			$this->createMock( ChangeLineFormatter::class )
 		);
-		$changesList = $this->createMock( EnhancedChangesList::class );
-
-		$recentChange = $this->getRecentChange( $source );
 
 		$data = [];
 		$classes = [];
 		$handler->onEnhancedChangesListModifyLineData(
-			$changesList,
+			$this->createMock( EnhancedChangesList::class ),
 			$data,
 			[],
-			$recentChange,
+			$this->getRecentChange( $source ),
 			$classes
 		);
 
@@ -141,7 +126,7 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testOldChangesListLine() {
 		$changeFactory = $this->getChangeFactory( 1 );
 
-		$formatter = $this->getChangeLineFormatter();
+		$formatter = $this->createMock( ChangeLineFormatter::class );
 		$formatter->expects( $this->once() )
 			->method( 'format' )
 			->willReturn( 'Formatted line' );
@@ -196,7 +181,7 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testOldChangesListLineFlags( array $attributes, string $expected ) {
 		$changeFactory = $this->getChangeFactory( 1 );
 
-		$formatter = $this->getChangeLineFormatter();
+		$formatter = $this->createMock( ChangeLineFormatter::class );
 		$formatter->expects( $this->once() )
 			->method( 'format' )
 			->willReturnArgument( 3 ); // $flags
@@ -229,7 +214,7 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testEnhancedChangesListModifyBlockLineData() {
 		$changeFactory = $this->getChangeFactory( 1 );
 
-		$formatter = $this->getChangeLineFormatter();
+		$formatter = $this->createMock( ChangeLineFormatter::class );
 		$formatter->expects( $this->once() )
 			->method( 'formatDataForEnhancedBlockLine' );
 
@@ -252,7 +237,7 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testEnhancedChangesListModifyLineData() {
 		$changeFactory = $this->getChangeFactory( 1 );
 
-		$formatter = $this->getChangeLineFormatter();
+		$formatter = $this->createMock( ChangeLineFormatter::class );
 		$formatter->expects( $this->once() )
 			->method( 'formatDataForEnhancedLine' );
 

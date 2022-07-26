@@ -35,19 +35,16 @@ class ItemTermStoreWriterAdapterTest extends TestCase {
 
 	public function testSaveTermsThrowsExceptionWhenGivenUnsupportedEntityType() {
 		$writer = $this->newTermStoreWriter();
+		$unsupportedEntity = $this->createMock( EntityDocument::class );
 
 		$this->expectException( \InvalidArgumentException::class );
-		$writer->saveTermsOfEntity( $this->newUnsupportedEntity() );
+		$writer->saveTermsOfEntity( $unsupportedEntity );
 	}
 
 	private function newTermStoreWriter() {
 		return new ItemTermStoreWriterAdapter(
 			$this->itemTermStoreWriter
 		);
-	}
-
-	private function newUnsupportedEntity() {
-		return $this->createMock( EntityDocument::class );
 	}
 
 	private function newItemTermStoreWriter(): ItemTermStoreWriter {
@@ -74,13 +71,10 @@ class ItemTermStoreWriterAdapterTest extends TestCase {
 
 	public function testDeleteTermsThrowsExceptionWhenGivenUnsupportedEntityId() {
 		$writer = $this->newTermStoreWriter();
+		$unsupportedId = $this->createMock( EntityId::class );
 
 		$this->expectException( \InvalidArgumentException::class );
-		$writer->deleteTermsOfEntity( $this->newUnsupportedId() );
-	}
-
-	public function newUnsupportedId() {
-		return $this->createMock( EntityId::class );
+		$writer->deleteTermsOfEntity( $unsupportedId );
 	}
 
 	private function newFingerprint(): Fingerprint {

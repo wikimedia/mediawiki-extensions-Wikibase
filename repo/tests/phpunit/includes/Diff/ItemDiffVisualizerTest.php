@@ -95,20 +95,6 @@ class ItemDiffVisualizerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @return ClaimDiffer
-	 */
-	private function getMockClaimDiffer() {
-		return $this->createMock( ClaimDiffer::class );
-	}
-
-	/**
-	 * @return ClaimDifferenceVisualizer
-	 */
-	private function getMockClaimDiffVisualizer() {
-		return $this->createMock( ClaimDifferenceVisualizer::class );
-	}
-
-	/**
 	 * @return ItemDiffVisualizer
 	 */
 	private function getVisualizer() {
@@ -117,8 +103,8 @@ class ItemDiffVisualizerTest extends MediaWikiIntegrationTestCase {
 
 		$basicVisualizer = new BasicEntityDiffVisualizer(
 			$this->getMockMessageLocalizer(),
-			$this->getMockClaimDiffer(),
-			$this->getMockClaimDiffVisualizer()
+			$this->createMock( ClaimDiffer::class ),
+			$this->createMock( ClaimDifferenceVisualizer::class )
 		);
 
 		return new ItemDiffVisualizer(
