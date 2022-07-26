@@ -21,38 +21,12 @@ class AddItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
 
-	private $itemId;
-	private $statement;
-	private $tags;
-	private $bot;
-
-	protected function setUp(): void {
-		parent::setUp();
-		$this->itemId = 'Q123';
-		$this->statement = [
-			'mainsnak' => [
-				'snaktype' => "value",
-				'property' => "P1",
-				'datavalue' => [
-					'type' => "string",
-					'value' => "I am a goat"
-				],
-				'hash' => "455481eeac76e6a8af71a6b493c073d54788e7e9"
-			],
-			'rank' => "preferred",
-			'references' => []
-
-		];
-		$this->tags = [ 'edit', 'tags' ];
-		$this->bot = true;
-	}
-
 	public function testHandlesUnexpectedErrors(): void {
 		$useCase = $this->createStub( AddItemStatement::class );
 		$useCase->method( 'execute' )->willThrowException( new \RuntimeException() );
 		$this->setService( 'WbRestApi.AddItemStatement', $useCase );
 
-		$routeHandler = $this->newRequest();
+		$routeHandler = $this->newHandlerWithValidRequest();
 		$this->validateHandler( $routeHandler );
 
 		$response = $routeHandler->execute();
@@ -62,13 +36,13 @@ class AddItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testReadWriteAccess(): void {
-		$routeHandler = $this->newRequest();
+		$routeHandler = $this->newHandlerWithValidRequest();
 
 		$this->assertTrue( $routeHandler->needsReadAccess() );
 		$this->assertTrue( $routeHandler->needsWriteAccess() );
 	}
 
-	private function newRequest(): Handler {
+	private function newHandlerWithValidRequest(): Handler {
 		$routeHandler = AddItemStatementRouteHandler::factory();
 		$this->initHandler(
 			$routeHandler,
@@ -76,12 +50,25 @@ class AddItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 					'method' => 'POST',
 					'headers' => [ 'Content-Type' => 'application/json' ],
 					'pathParams' => [
-						AddItemStatementRouteHandler::ITEM_ID_PATH_PARAM => $this->itemId
+						AddItemStatementRouteHandler::ITEM_ID_PATH_PARAM => 'Q123'
 					],
 					'bodyContents' => json_encode( [
-						'statement' => $this->statement,
-						'tags' => $this->tags,
-						'bot' => $this->bot,
+						'statement' => [
+							'mainsnak' => [
+								'snaktype' => "value",
+								'property' => "P1",
+								'datavalue' => [
+									'type' => "string",
+									'value' => "I am a goat"
+								],
+								'hash' => "455481eeac76e6a8af71a6b493c073d54788e7e9"
+							],
+							'rank' => "preferred",
+							'references' => []
+
+						],
+						'tags' => [ 'edit', 'tags' ],
+						'bot' => true,
 					] )
 				]
 			)
