@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, action } = require( 'api-testing' );
+const { assert, action, utils } = require( 'api-testing' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const { createSingleItem } = require( '../helpers/entityHelper' );
 
@@ -20,18 +20,35 @@ function assertValid200Response( response, revisionId, lastModified ) {
 	assert.equal( response.header.etag, makeEtag( revisionId ) );
 }
 
+function newStatementWithRandomStringValue( property ) {
+	return {
+		mainsnak: {
+			snaktype: 'value',
+			datavalue: {
+				type: 'string',
+				value: 'random-string-value-' + utils.uniq()
+			},
+			property
+		},
+		type: 'statement'
+	};
+}
+
 describe( 'Conditional requests', () => {
 
 	let itemId;
 	let statementId;
+	let statementPropertyId;
 	let latestRevisionId;
 	let lastModifiedDate;
 
 	before( async () => {
 		const createSingleItemResponse = await createSingleItem();
 		itemId = createSingleItemResponse.entity.id;
-		const claims = createSingleItemResponse.entity.claims;
-		statementId = Object.values( claims )[ 0 ][ 0 ].id;
+		const statements = createSingleItemResponse.entity.claims;
+		const firstStatement = Object.values( statements )[ 0 ][ 0 ];
+		statementId = firstStatement.id;
+		statementPropertyId = firstStatement.mainsnak.property;
 
 		const getItemMetadata = await action.getAnon().action( 'wbgetentities', {
 			ids: itemId
@@ -210,6 +227,90 @@ describe( 'Conditional requests', () => {
 				} );
 			} );
 		} );
+	} );
+
+	describe( 'Conditional edit requests', () => {
+
+		beforeEach( async () => {
+			// restore the item state in between tests that may or may not edit its data
+			const editEntityResponse = await action.getAnon().action( 'wbeditentity', {
+				id: itemId,
+				token: '+\\',
+				data: JSON.stringify( {
+					claims: [ newStatementWithRandomStringValue( statementPropertyId ) ]
+				} )
+			}, 'POST' );
+			const firstStatement = Object.values( editEntityResponse.entity.claims )[ 0 ][ 0 ];
+			statementId = firstStatement.id;
+
+			const getItemMetadata = await action.getAnon().action( 'wbgetentities', {
+				ids: itemId
+			} );
+			lastModifiedDate = new Date( getItemMetadata.entities[ itemId ].modified )
+				.toUTCString();
+			latestRevisionId = getItemMetadata.entities[ itemId ].lastrevid;
+		} );
+
+		[ // eslint-disable-line mocha/no-setup-in-describe
+			{
+				route: '/statements/{statement_id}',
+				newRequestBuilder: () => new RequestBuilder()
+					.withRoute( 'PUT', '/statements/{statement_id}' )
+					.withPathParam( 'statement_id', statementId )
+					.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( statementPropertyId ) )
+			},
+			{
+				route: '/entities/items/{item_id}/statements/{statement_id}',
+				newRequestBuilder: () => new RequestBuilder()
+					.withRoute( 'PUT', '/entities/items/{item_id}/statements/{statement_id}' )
+					.withPathParam( 'item_id', itemId )
+					.withPathParam( 'statement_id', statementId )
+					.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( statementPropertyId ) )
+			},
+			{
+				route: '/statements/{statement_id}',
+				newRequestBuilder: () => new RequestBuilder()
+					.withRoute( 'DELETE', '/statements/{statement_id}' )
+					.withPathParam( 'statement_id', statementId )
+			}
+		].forEach( ( { route, newRequestBuilder } ) => {
+			describe( `If-Match - ${route}`, () => {
+				it( 'responds with 412 given an outdated revision id', async () => {
+					const response = await newRequestBuilder()
+						.withHeader( 'If-Match', makeEtag( latestRevisionId - 1 ) )
+						.makeRequest();
+
+					assert.strictEqual( response.status, 412 );
+				} );
+
+				it( 'responds with 200 and makes the edit given the latest revision id', async () => {
+					const response = await newRequestBuilder()
+						.withHeader( 'If-Match', makeEtag( latestRevisionId ) )
+						.makeRequest();
+
+					assert.strictEqual( response.status, 200 );
+				} );
+			} );
+
+			describe( `If-Unmodified-Since - ${route}`, () => {
+				it( 'responds with 412 given an outdated last modified date', async () => {
+					const response = await newRequestBuilder()
+						.withHeader( 'If-Unmodified-Since', 'Wed, 27 Jul 2022 08:24:29 GMT' )
+						.makeRequest();
+
+					assert.strictEqual( response.status, 412 );
+				} );
+
+				it( 'responds with 200 and makes the edit given the latest modified date', async () => {
+					const response = await newRequestBuilder()
+						.withHeader( 'If-Unmodified-Since', lastModifiedDate )
+						.makeRequest();
+
+					assert.strictEqual( response.status, 200 );
+				} );
+			} );
+		} );
 
 	} );
+
 } );
