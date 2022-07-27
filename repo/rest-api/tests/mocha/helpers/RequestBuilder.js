@@ -54,6 +54,7 @@ class RequestBuilder {
 	}
 
 	withJsonBodyParam( name, value ) {
+		this.headers[ 'content-type' ] = 'application/json';
 		this.jsonBodyParams[ name ] = value;
 		return this;
 	}
