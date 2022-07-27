@@ -111,7 +111,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityRedirectTargetLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
@@ -588,16 +587,6 @@ return [
 			$services->getLanguageFactory(),
 			$services->getLanguageConverterFactory(),
 			$services->getLanguageFallback()
-		);
-	},
-
-	'WikibaseClient.LanguageFallbackLabelDescriptionLookupFactory' => function (
-		MediaWikiServices $services
-	): LanguageFallbackLabelDescriptionLookupFactory {
-		return new LanguageFallbackLabelDescriptionLookupFactory(
-			WikibaseClient::getLanguageFallbackChainFactory( $services ),
-			WikibaseClient::getTermLookup( $services ),
-			WikibaseClient::getTermBuffer( $services )
 		);
 	},
 

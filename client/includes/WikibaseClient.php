@@ -63,7 +63,6 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
@@ -203,13 +202,6 @@ final class WikibaseClient {
 	public static function getLanguageFallbackChainFactory( ContainerInterface $services = null ): LanguageFallbackChainFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.LanguageFallbackChainFactory' );
-	}
-
-	public static function getLanguageFallbackLabelDescriptionLookupFactory(
-		ContainerInterface $services = null
-	): LanguageFallbackLabelDescriptionLookupFactory {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WikibaseClient.LanguageFallbackLabelDescriptionLookupFactory' );
 	}
 
 	public static function getStore( ContainerInterface $services = null ): ClientStore {
