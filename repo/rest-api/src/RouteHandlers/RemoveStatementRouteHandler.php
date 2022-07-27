@@ -29,23 +29,8 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 	public const BOT_BODY_PARAM = 'bot';
 	public const COMMENT_BODY_PARAM = 'comment';
 
-	private const TAGS_PARAM_SETTINGS = [
-		self::PARAM_SOURCE => 'body',
-		ParamValidator::PARAM_TYPE => 'array',
-		ParamValidator::PARAM_REQUIRED => false,
-		ParamValidator::PARAM_DEFAULT => []
-	];
-	private const BOT_PARAM_SETTINGS = [
-		self::PARAM_SOURCE => 'body',
-		ParamValidator::PARAM_TYPE => 'boolean',
-		ParamValidator::PARAM_REQUIRED => false,
-		ParamValidator::PARAM_DEFAULT => false
-	];
-	private const COMMENT_PARAM_SETTINGS = [
-		self::PARAM_SOURCE => 'body',
-		ParamValidator::PARAM_TYPE => 'string',
-		ParamValidator::PARAM_REQUIRED => false,
-	];
+	private const TAGS_PARAM_DEFAULT = [];
+	private const BOT_PARAM_DEFAULT = false;
 
 	private $removeItemStatement;
 	private $responseFactory;
@@ -84,8 +69,8 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 		$requestBody = $this->getValidatedBody();
 		$useCaseResponse = $this->removeItemStatement->execute( new RemoveItemStatementRequest(
 			$statementId,
-			$requestBody[self::TAGS_BODY_PARAM] ?? self::TAGS_PARAM_SETTINGS[ ParamValidator::PARAM_DEFAULT ],
-			$requestBody[self::BOT_BODY_PARAM] ?? self::BOT_PARAM_SETTINGS[ ParamValidator::PARAM_DEFAULT ],
+			$requestBody[self::TAGS_BODY_PARAM] ?? self::TAGS_PARAM_DEFAULT,
+			$requestBody[self::BOT_BODY_PARAM] ?? self::BOT_PARAM_DEFAULT,
 			$requestBody[self::COMMENT_BODY_PARAM],
 			$this->getUsername()
 		) );
@@ -116,9 +101,23 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 	 */
 	public function getBodyValidator( $contentType ): BodyValidator {
 		return new TypeValidatingJsonBodyValidator( [
-			self::TAGS_BODY_PARAM => self::TAGS_PARAM_SETTINGS,
-			self::BOT_BODY_PARAM => self::BOT_PARAM_SETTINGS,
-			self::COMMENT_BODY_PARAM => self::COMMENT_PARAM_SETTINGS
+				self::TAGS_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'array',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => self::TAGS_PARAM_DEFAULT
+				],
+				self::BOT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'boolean',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => self::BOT_PARAM_DEFAULT
+				],
+				self::COMMENT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => false,
+				]
 		] );
 	}
 
