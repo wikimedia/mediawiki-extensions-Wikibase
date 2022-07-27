@@ -85,7 +85,7 @@ The entity types repository is an associative array mapping entity type identifi
 * entity-id-lookup-callback (client only)
   * A callback for creating an [EntityIdLookup] to resolve Title instances to EntityIds for entities of this types
 * prefetching-term-lookup-callback
-  * A callable that returns a [PrefetchingTermLookup] instance. When no callback is provided for an entity type, a `NullPrefetchingTermLookup` is used as a fallback. The `PrefetchingTermLookup` is used to prefetch terms for all entities that appear on the page in all languages in the `TermLanguageFallbackChain` to minimize the number of term lookups when an entity page is being rendered. This happens in `LanguageFallbackLabelDescriptionLookupFactory::newLabelDescriptionLookup`.
+  * A callable that returns a [PrefetchingTermLookup] instance. When no callback is provided for an entity type, a `NullPrefetchingTermLookup` is used as a fallback. The `PrefetchingTermLookup` is used to prefetch terms for all entities that appear on the page in all languages in the `TermLanguageFallbackChain` to minimize the number of term lookups when an entity page is being rendered. This happens in `FallbackLabelDescriptionLookupFactory::newLabelDescriptionLookup`.
 * meta-tags-creator-callback (repo only)
   * A callable for creating an [EntityMetaTagsCreator] for entities of this type. Takes a Language object as argument.
 * article-id-lookup-callback (repo only)

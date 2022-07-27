@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
+use MWDebug;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\NullPrefetchingTermLookup;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -26,6 +27,8 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends ServiceWiringTes
 			$prefetchingTermLookup );
 		$this->mockService( 'WikibaseClient.TermBuffer',
 			$prefetchingTermLookup );
+
+		MWDebug::filterDeprecationForTest( '/LanguageFallbackLabelDescriptionLookupFactory/' );
 
 		$this->assertInstanceOf(
 			LanguageFallbackLabelDescriptionLookupFactory::class,

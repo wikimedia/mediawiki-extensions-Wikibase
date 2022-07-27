@@ -46,6 +46,12 @@ class LanguageFallbackLabelDescriptionLookupFactory {
 		TermLookup $termLookup,
 		TermBuffer $termBuffer = null
 	) {
+		wfDeprecatedMsg(
+			'Use of LanguageFallbackLabelDescriptionLookupFactory was deprecated in Wikibase 1.39. ' .
+			'Use FallbackLabelDescriptionLookupFactory instead.',
+			'1.39',
+			'Wikibase'
+		);
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->termLookup = $termLookup;
 		$this->termBuffer = $termBuffer;

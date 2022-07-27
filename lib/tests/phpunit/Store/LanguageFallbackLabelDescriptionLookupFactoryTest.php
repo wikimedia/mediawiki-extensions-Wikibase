@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use Language;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -19,7 +20,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\TestCase {
+class LanguageFallbackLabelDescriptionLookupFactoryTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @return TermLookup
@@ -56,6 +57,8 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit\Framewo
 	}
 
 	public function testNewLabelDescriptionLookup() {
+		$this->hideDeprecated( 'LanguageFallbackLabelDescriptionLookupFactory' );
+
 		$factory = new LanguageFallbackLabelDescriptionLookupFactory(
 			new LanguageFallbackChainFactory(),
 			$this->getTermLookupMock(),
