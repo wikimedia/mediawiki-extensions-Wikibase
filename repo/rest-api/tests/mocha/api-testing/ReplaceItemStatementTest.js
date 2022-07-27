@@ -32,17 +32,6 @@ function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
 }
 
-async function getLatestEditMetadata( itemId ) {
-	const recentChanges = await action.getAnon().action( 'query', {
-		list: 'recentchanges',
-		rctitle: `Item:${itemId}`,
-		rclimit: 1,
-		rcprop: 'tags|flags|comment'
-	} );
-
-	return recentChanges.query.recentchanges[ 0 ];
-}
-
 describe( 'PUT /entities/items/{item_id}/statements/{statement_id}', () => {
 	let testItemId;
 	let testStatementId;
@@ -72,13 +61,9 @@ describe( 'PUT /entities/items/{item_id}/statements/{statement_id}', () => {
 		testItemId = createEntityResponse.entity.id;
 		testStatementId = createEntityResponse.entity.claims[ testPropertyId ][ 0 ].id;
 
-		const entities = await action.getAnon().action( 'wbgetentities', {
-			ids: testItemId
-		} );
-		const item = entities.entities[ testItemId ];
-
-		originalLastModified = new Date( item.modified );
-		originalRevisionId = item.lastrevid;
+		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
+		originalLastModified = new Date( testItemCreationMetadata.timestamp );
+		originalRevisionId = testItemCreationMetadata.revid;
 
 		// wait 1s before modifications to verify the last-modified timestamps are different
 		await new Promise( ( resolve ) => {
@@ -101,7 +86,7 @@ describe( 'PUT /entities/items/{item_id}/statements/{statement_id}', () => {
 				response.body.mainsnak.datavalue,
 				statementSerialization.mainsnak.datavalue
 			);
-			const { comment } = await getLatestEditMetadata( testItemId );
+			const { comment } = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.strictEqual( comment, 'Wikibase REST API edit' );
 		} );
 
@@ -125,7 +110,7 @@ describe( 'PUT /entities/items/{item_id}/statements/{statement_id}', () => {
 				statementSerialization.mainsnak.datavalue
 			);
 
-			const editMetadata = await getLatestEditMetadata( testItemId );
+			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.deepEqual( editMetadata.tags, [ tag ] );
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual( editMetadata.comment, editSummary );

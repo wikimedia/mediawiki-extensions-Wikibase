@@ -1,7 +1,7 @@
 'use strict';
 
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
-const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
+const { createEntity, createRedirectForItem, getLatestEditMetadata } = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const { action, assert, clientFactory, utils } = require( 'api-testing' );
 
@@ -49,12 +49,9 @@ describe( 'GET /entities/items/{id} ', () => {
 		} );
 		testItemId = createItemResponse.entity.id;
 
-		const getItemMetadata = await action.getAnon().action( 'wbgetentities', {
-			ids: testItemId
-		} );
-
-		testModified = new Date( getItemMetadata.entities[ testItemId ].modified ).toUTCString();
-		testRevisionId = getItemMetadata.entities[ testItemId ].lastrevid;
+		const testItemCreationMetadata = await getLatestEditMetadata( testItemId );
+		testModified = testItemCreationMetadata.timestamp;
+		testRevisionId = testItemCreationMetadata.revid;
 	} );
 
 	it( 'can GET an item with metadata', async () => {

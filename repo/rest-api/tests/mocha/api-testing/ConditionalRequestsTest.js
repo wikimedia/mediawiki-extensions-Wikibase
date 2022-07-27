@@ -2,7 +2,7 @@
 
 const { assert, action, utils } = require( 'api-testing' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
-const { createSingleItem } = require( '../helpers/entityHelper' );
+const { createSingleItem, getLatestEditMetadata } = require( '../helpers/entityHelper' );
 
 function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
@@ -50,11 +50,9 @@ describe( 'Conditional requests', () => {
 		statementId = firstStatement.id;
 		statementPropertyId = firstStatement.mainsnak.property;
 
-		const getItemMetadata = await action.getAnon().action( 'wbgetentities', {
-			ids: itemId
-		} );
-		lastModifiedDate = new Date( getItemMetadata.entities[ itemId ].modified ).toUTCString();
-		latestRevisionId = getItemMetadata.entities[ itemId ].lastrevid;
+		const testItemCreationMetadata = await getLatestEditMetadata( itemId );
+		lastModifiedDate = testItemCreationMetadata.timestamp;
+		latestRevisionId = testItemCreationMetadata.revid;
 	} );
 
 	[ // eslint-disable-line mocha/no-setup-in-describe
@@ -243,12 +241,9 @@ describe( 'Conditional requests', () => {
 			const firstStatement = Object.values( editEntityResponse.entity.claims )[ 0 ][ 0 ];
 			statementId = firstStatement.id;
 
-			const getItemMetadata = await action.getAnon().action( 'wbgetentities', {
-				ids: itemId
-			} );
-			lastModifiedDate = new Date( getItemMetadata.entities[ itemId ].modified )
-				.toUTCString();
-			latestRevisionId = getItemMetadata.entities[ itemId ].lastrevid;
+			const testItemCreationMetadata = await getLatestEditMetadata( itemId );
+			lastModifiedDate = new Date( testItemCreationMetadata.timestamp );
+			latestRevisionId = testItemCreationMetadata.revid;
 		} );
 
 		[ // eslint-disable-line mocha/no-setup-in-describe
