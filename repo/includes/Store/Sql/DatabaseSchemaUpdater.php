@@ -97,6 +97,11 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 				$this->getUpdateScriptPath( 'patch-wb_changes-change_timestamp', $type )
 			);
 		}
+		$updater->dropExtensionIndex(
+			'wb_id_counters',
+			'wb_id_counters_type',
+			$this->getUpdateScriptPath( 'patch-wb_id_counters-unique-to-pk', $type )
+		);
 
 		$updater->dropExtensionTable( 'wb_changes_dispatch' );
 	}

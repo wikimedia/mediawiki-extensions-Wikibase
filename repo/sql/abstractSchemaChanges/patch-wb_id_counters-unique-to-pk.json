@@ -1,0 +1,41 @@
+{
+	"comment": "Convert unique index to primary key (T312255)",
+	"before": {
+		"name": "wb_id_counters",
+		"comment": "Unique ID generator.",
+		"columns": [
+			{
+				"name": "id_value",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true }
+			},
+			{
+				"name": "id_type",
+				"type": "binary",
+				"options": { "length": 32, "notnull": true }
+			}
+		],
+		"indexes": [
+			{ "name": "wb_id_counters_type", "columns": [ "id_type" ], "unique": true }
+		],
+		"pk": []
+	},
+	"after": {
+		"name": "wb_id_counters",
+		"comment": "Unique ID generator.",
+		"columns": [
+			{
+				"name": "id_value",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true }
+			},
+			{
+				"name": "id_type",
+				"type": "binary",
+				"options": { "length": 32, "notnull": true }
+			}
+		],
+		"indexes": [],
+		"pk": [ "id_type" ]
+	}
+}

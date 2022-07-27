@@ -3,7 +3,7 @@
 -- Do not modify this file directly.
 -- See https://www.mediawiki.org/wiki/Manual:Schema_changes
 CREATE TABLE wb_id_counters (
-  id_value INT NOT NULL, id_type TEXT NOT NULL
+  id_type TEXT NOT NULL,
+  id_value INT NOT NULL,
+  PRIMARY KEY(id_type)
 );
-
-CREATE UNIQUE INDEX wb_id_counters_type ON wb_id_counters (id_type);

@@ -14,9 +14,7 @@
 				"options": { "length": 32, "notnull": true }
 			}
 		],
-		"indexes": [
-			{ "name": "wb_id_counters_type", "columns": [ "id_type" ], "unique": true }
-		],
-		"pk": []
+		"indexes": [],
+		"pk": [ "id_type" ]
 	}
 ]

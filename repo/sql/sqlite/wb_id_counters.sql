@@ -3,8 +3,7 @@
 -- Do not modify this file directly.
 -- See https://www.mediawiki.org/wiki/Manual:Schema_changes
 CREATE TABLE /*_*/wb_id_counters (
+  id_type BLOB NOT NULL,
   id_value INTEGER UNSIGNED NOT NULL,
-  id_type BLOB NOT NULL
+  PRIMARY KEY(id_type)
 );
-
-CREATE UNIQUE INDEX wb_id_counters_type ON /*_*/wb_id_counters (id_type);
