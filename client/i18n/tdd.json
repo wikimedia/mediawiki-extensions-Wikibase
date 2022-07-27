@@ -1,19 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"咽頭べさ"
+			"咽頭べさ",
+			"Aey Tai Nuea"
 		]
 	},
-	"wikibase-dataitem": "{{WBREPONAME}} ᥛᥤᥱᥐᥤᥰ",
-	"wikibase-editlinks": "ᥛᥦᥰᥗᥖᥰᥞᥥᥒᥰᥐᥩᥒᥳ",
-	"wikibase-linkitem-addlinks": "ᥗᥦᥛᥴᥔᥬᥱ ᥞᥥᥒᥰᥐᥩᥒᥳ",
-	"wikibase-linkitem-title": "ᥐᥩᥒᥳᥖᥒᥰ ᥢᥣᥲᥘᥤᥐᥲ",
-	"wikibase-linkitem-linkpage": "ᥐᥩᥒᥳᥖᥒᥰ ᥢᥣᥲᥘᥤᥐᥲ",
-	"wikibase-linkitem-selectlink": "ᥑᥦᥢᥰᥖᥩᥰ ᥘᥫᥐᥲᥙᥢᥴ ᥝᥦᥙᥳᥔᥣᥭᥳ ᥘᥦᥲ ᥢᥣᥲᥘᥤᥐᥲ ᥟᥢᥴᥓᥝᥲᥐᥝᥱ ᥑᥬᥲᥟᥝᥴ ᥢᥣᥲᥘᥤᥐᥲᥢᥭᥳ ᥐᥣᥱᥐᥩᥒᥳᥓᥧᥰᥢᥢᥳ.",
-	"wikibase-linkitem-input-site": "ᥚᥣᥱᥔᥣᥱᥐᥣᥛᥰ:",
-	"wikibase-linkitem-input-page": "ᥢᥣᥲᥘᥤᥐᥲ:",
+	"wikibase-dataitem": "{{WBREPONAME}} ᥛᥤᥱ ᥐᥤᥰ",
+	"wikibase-editlinks": "ᥛᥥᥰ ᥗᥖᥴ ᥞᥥᥒᥰ ᥐᥩᥒᥳ",
+	"wikibase-linkitem-addlinks": "ᥗᥦᥛᥴ ᥔᥬᥱ ᥞᥥᥒᥰ ᥐᥩᥒᥳ",
+	"wikibase-linkitem-title": "ᥐᥩᥒᥳ ᥖᥒᥰ ᥘᥣᥲ ᥘᥤᥐ",
+	"wikibase-linkitem-linkpage": "ᥐᥩᥒᥳ ᥖᥒᥰ ᥘᥣᥲ ᥘᥤᥐ",
+	"wikibase-linkitem-selectlink": "ᥑᥦᥢᥰ ᥖᥨᥝ ᥘᥫᥐ ᥙᥢ ᥝᥦᥙᥳ ᥔᥣᥭᥳ ᥘᥦᥲ ᥘᥣᥲ ᥘᥤᥐ ᥟᥢ ᥓᥝᥲ ᥐᥝᥱ ᥑᥬᥲ ᥟᥝ ᥘᥣᥲ ᥘᥤᥐ ᥘᥭᥳ ᥐᥣᥱ ᥐᥩᥒᥳ ᥓᥧᥰ ᥘᥢᥳ.",
+	"wikibase-linkitem-input-site": "ᥚᥣᥱ ᥔᥣᥱ ᥑᥣᥛᥰ:",
+	"wikibase-linkitem-input-page": "ᥘᥣᥲ ᥘᥤᥐ:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ᥔᥫᥒᥱ",
-	"wikibase-rc-hide-wikidata-show": "ᥢᥦᥴ",
-	"wikibase-otherprojects": "ᥖᥤᥲᥢᥬᥰᥢᥣᥲᥐᥣᥢᥴᥖᥣᥒᥱᥟᥢᥴ"
+	"wikibase-rc-hide-wikidata-show": "ᥘᥥᥴ",
+	"wikibase-otherprojects": "ᥖᥤ ᥘᥬᥰ ᥘᥣᥲ ᥐᥣᥢ ᥖᥣᥒᥱ ᥟᥢ"
 }

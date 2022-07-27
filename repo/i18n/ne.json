@@ -8,7 +8,8 @@
 			"बिप्लब आनन्द",
 			"राम प्रसाद जोशी",
 			"सरोज कुमार ढकाल",
-			"हिमाल सुबेदी"
+			"हिमाल सुबेदी",
+			"Bada Kaji"
 		]
 	},
 	"wikibase-entity": "एकाइ",
@@ -18,7 +19,7 @@
 	"wikibase-edit": "सम्पादन",
 	"wikibase-save": "संग्रह गर्ने",
 	"wikibase-publish": "प्रकाशन गर्नुहोस्",
-	"wikibase-cancel": "रद्द गर्ने",
+	"wikibase-cancel": "रद्द गर्नुहोस्",
 	"wikibase-add": "जोड्ने",
 	"wikibase-addreference": "सन्दर्भ थप्न",
 	"wikibase-save-inprogress": "रक्षण हुदै...",

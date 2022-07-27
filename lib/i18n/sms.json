@@ -6,6 +6,7 @@
 	},
 	"wikibase-deletedentity-query": "Jaukkuum kõjldõs",
 	"wikibase-error-unexpected": "Vââʹǩǩ: $1.",
+	"wikibase-error-ui-no-external-page": "Seidd \"$2\" ij käunnʼjam seiddõõzzâst \"$1\".",
 	"wikibase-timedetails-isotime": "Äiʹǧǧštemppal",
 	"wikibase-timedetails-timezone": "Äiʹǧǧvuʹvdd",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
