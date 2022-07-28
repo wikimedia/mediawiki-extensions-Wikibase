@@ -316,11 +316,12 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenNotPresentGuid_replaceStatementThrows() {
 		$list = new StatementList();
+		$statementId = new StatementGuid( new ItemId( 'Q42' ), 'this-guid-does-not-exist' );
+
 		$this->expectException( InvalidArgumentException::class );
-		$list->replaceStatement(
-			new StatementGuid( new ItemId( 'Q42' ), 'this-guid-does-not-exist' ),
-			new Statement( new PropertyNoValueSnak( 42 ) )
-		);
+		$this->expectExceptionMessageMatches( '/' . preg_quote( $statementId ) . '/' );
+
+		$list->replaceStatement( $statementId, new Statement( new PropertyNoValueSnak( 42 ) ) );
 	}
 
 	public function testGivenGuidOfPresentStatement_statementIsRemoved() {
