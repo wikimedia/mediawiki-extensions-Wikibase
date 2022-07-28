@@ -18,6 +18,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ModifiedPreconditionMiddlewar
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
+use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementSuccessResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
@@ -38,15 +39,18 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 	private $replaceItemStatement;
 	private $successPresenter;
 	private $middlewareHandler;
+	private $responseFactory;
 
 	public function __construct(
 		ReplaceItemStatement $replaceItemStatement,
 		StatementJsonPresenter $successPresenter,
-		MiddlewareHandler $middlewareHandler
+		MiddlewareHandler $middlewareHandler,
+		ResponseFactory $responseFactory
 	) {
 		$this->replaceItemStatement = $replaceItemStatement;
 		$this->successPresenter = $successPresenter;
 		$this->middlewareHandler = $middlewareHandler;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
@@ -70,7 +74,8 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 						new ConditionalHeaderUtil()
 					)
 				),
-			] )
+			] ),
+			$responseFactory
 		);
 	}
 
@@ -99,7 +104,13 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 			$this->getUsername()
 		) );
 
-		return $this->newSuccessHttpResponse( $useCaseResponse );
+		if ( $useCaseResponse instanceof ReplaceItemStatementSuccessResponse ) {
+			return $this->newSuccessHttpResponse( $useCaseResponse );
+		} elseif ( $useCaseResponse instanceof ReplaceItemStatementErrorResponse ) {
+			return $this->responseFactory->newErrorResponse( $useCaseResponse );
+		} else {
+			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
+		}
 	}
 
 	public function getParamSettings(): array {
