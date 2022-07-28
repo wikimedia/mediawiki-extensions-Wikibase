@@ -20,6 +20,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\SiteLinkPageNormalizer;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\SummaryFormatter;
 
@@ -30,6 +31,9 @@ use Wikibase\Repo\SummaryFormatter;
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
 class SpecialSetSiteLink extends SpecialModifyEntity {
+
+	/** @var SiteLinkPageNormalizer */
+	private $siteLinkPageNormalizer;
 
 	/**
 	 * @var SiteLinkTargetProvider
@@ -95,6 +99,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediawikiEditEntityFactory $editEntityFactory,
+		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		array $siteLinkGroups,
 		array $badgeItems,
@@ -110,6 +115,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$editEntityFactory
 		);
 
+		$this->siteLinkPageNormalizer = $siteLinkPageNormalizer;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->badgeItems = $badgeItems;
@@ -123,6 +129,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		EntityTitleLookup $entityTitleLookup,
 		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		SettingsArray $repoSettings,
+		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		SummaryFormatter $summaryFormatter
 	): self {
@@ -140,6 +147,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory,
+			$siteLinkPageNormalizer,
 			$siteLinkTargetProvider,
 			$repoSettings->getSetting( 'siteLinkGroups' ),
 			$repoSettings->getSetting( 'badgeItems' ),
@@ -499,7 +507,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				return $status;
 			}
 		} else {
-			$pageName = $site->normalizePageName( $pageName );
+			$pageName = $this->siteLinkPageNormalizer->normalize(
+				$site, $pageName, $badgeIds );
 
 			if ( $pageName === false ) {
 				$status->fatal( 'wikibase-error-ui-no-external-page', $siteId, $this->page );

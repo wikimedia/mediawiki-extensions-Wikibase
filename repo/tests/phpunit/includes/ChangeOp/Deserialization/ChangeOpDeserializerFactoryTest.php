@@ -11,6 +11,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\LabelsChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinksChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
+use Wikibase\Repo\SiteLinkPageNormalizer;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -71,6 +72,7 @@ class ChangeOpDeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
 				[]
 			),
 			WikibaseRepo::getExternalFormatStatementDeserializer(),
+			new SiteLinkPageNormalizer( [] ),
 			new SiteLinkTargetProvider( MediaWikiServices::getInstance()->getSiteLookup(), [] ),
 			WikibaseRepo::getEntityIdParser(),
 			WikibaseRepo::getStringNormalizer(),

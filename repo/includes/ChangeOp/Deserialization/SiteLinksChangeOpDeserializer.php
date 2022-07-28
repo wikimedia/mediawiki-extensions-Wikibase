@@ -10,6 +10,7 @@ use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\Repo\SiteLinkPageNormalizer;
 use Wikibase\Repo\SiteLinkTargetProvider;
 
 /**
@@ -30,6 +31,9 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 	 * @var SiteLinkChangeOpFactory
 	 */
 	private $siteLinkChangeOpFactory;
+
+	/** @var SiteLinkPageNormalizer */
+	private $siteLinkPageNormalizer;
 
 	/**
 	 * @var SiteLinkTargetProvider
@@ -54,6 +58,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 	/**
 	 * @param SiteLinkBadgeChangeOpSerializationValidator $badgeChangeOpSerializationValidator
 	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
+	 * @param SiteLinkPageNormalizer $siteLinkPageNormalizer
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 * @param EntityIdParser $entityIdParser
 	 * @param StringNormalizer $stringNormalizer
@@ -62,6 +67,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 	public function __construct(
 		SiteLinkBadgeChangeOpSerializationValidator $badgeChangeOpSerializationValidator,
 		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
+		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		EntityIdParser $entityIdParser,
 		StringNormalizer $stringNormalizer,
@@ -69,6 +75,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 	) {
 		$this->badgeChangeOpSerializationValidator = $badgeChangeOpSerializationValidator;
 		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
+		$this->siteLinkPageNormalizer = $siteLinkPageNormalizer;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 		$this->entityIdParser = $entityIdParser;
 		$this->stringNormalizer = $stringNormalizer;
@@ -108,7 +115,11 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 					: null;
 
 				if ( isset( $serialization['title'] ) ) {
-					$linkPage = $linkSite->normalizePageName( $this->stringNormalizer->trimWhitespace( $serialization['title'] ) );
+					$linkPage = $this->siteLinkPageNormalizer->normalize(
+						$linkSite,
+						$this->stringNormalizer->trimWhitespace( $serialization['title'] ),
+						$serialization['badges'] ?? []
+					);
 
 					if ( $linkPage === false ) {
 						throw new ChangeOpDeserializationException(

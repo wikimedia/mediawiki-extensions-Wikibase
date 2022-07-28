@@ -8,6 +8,7 @@ use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\SiteLinkPageNormalizer;
 use Wikibase\Repo\SiteLinkTargetProvider;
 
 /**
@@ -48,6 +49,9 @@ class ChangeOpDeserializerFactory {
 	 */
 	private $statementDeserializer;
 
+	/** @var SiteLinkPageNormalizer */
+	private $siteLinkPageNormalizer;
+
 	/**
 	 * @var SiteLinkTargetProvider
 	 */
@@ -75,6 +79,7 @@ class ChangeOpDeserializerFactory {
 	 * @param TermChangeOpSerializationValidator $termChangeOpSerializationValidator
 	 * @param SiteLinkBadgeChangeOpSerializationValidator $badgeChangeOpSerializationValidator
 	 * @param Deserializer $statementDeserializer
+	 * @param SiteLinkPageNormalizer $siteLinkPageNormalizer
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 * @param EntityIdParser $entityIdParser
 	 * @param StringNormalizer $stringNormalizer
@@ -87,6 +92,7 @@ class ChangeOpDeserializerFactory {
 		TermChangeOpSerializationValidator $termChangeOpSerializationValidator,
 		SiteLinkBadgeChangeOpSerializationValidator $badgeChangeOpSerializationValidator,
 		Deserializer $statementDeserializer,
+		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		EntityIdParser $entityIdParser,
 		StringNormalizer $stringNormalizer,
@@ -98,6 +104,7 @@ class ChangeOpDeserializerFactory {
 		$this->termChangeOpSerializationValidator = $termChangeOpSerializationValidator;
 		$this->badgeChangeOpSerializationValidator = $badgeChangeOpSerializationValidator;
 		$this->statementDeserializer = $statementDeserializer;
+		$this->siteLinkPageNormalizer = $siteLinkPageNormalizer;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 		$this->entityIdParser = $entityIdParser;
 		$this->stringNormalizer = $stringNormalizer;
@@ -148,6 +155,7 @@ class ChangeOpDeserializerFactory {
 		return new SiteLinksChangeOpDeserializer(
 			$this->badgeChangeOpSerializationValidator,
 			$this->siteLinkChangeOpFactory,
+			$this->siteLinkPageNormalizer,
 			$this->siteLinkTargetProvider,
 			$this->entityIdParser,
 			$this->stringNormalizer,

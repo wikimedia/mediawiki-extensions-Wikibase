@@ -280,6 +280,7 @@
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.SiteLinkBadgeChangeOpSerializationValidator",
+				"WikibaseRepo.SiteLinkPageNormalizer",
 				"WikibaseRepo.SiteLinkTargetProvider"
 			]
 		}
@@ -450,6 +451,7 @@
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.FallbackLabelDescriptionLookupFactory",
 				"WikibaseRepo.Settings",
+				"WikibaseRepo.SiteLinkPageNormalizer",
 				"WikibaseRepo.SiteLinkTargetProvider",
 				"WikibaseRepo.SummaryFormatter"
 			]

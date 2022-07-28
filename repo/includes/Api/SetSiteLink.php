@@ -18,6 +18,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\Repo\SiteLinkPageNormalizer;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -39,6 +40,9 @@ class SetSiteLink extends ModifyEntity {
 	 */
 	private $badgeSerializationValidator;
 
+	/** @var SiteLinkPageNormalizer */
+	private $siteLinkPageNormalizer;
+
 	/**
 	 * @var SiteLinkTargetProvider
 	 */
@@ -54,6 +58,7 @@ class SetSiteLink extends ModifyEntity {
 		string $moduleName,
 		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
 		SiteLinkBadgeChangeOpSerializationValidator $badgeSerializationValidator,
+		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		bool $federatedPropertiesEnabled,
 		array $sandboxEntityIds
@@ -62,6 +67,7 @@ class SetSiteLink extends ModifyEntity {
 
 		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
 		$this->badgeSerializationValidator = $badgeSerializationValidator;
+		$this->siteLinkPageNormalizer = $siteLinkPageNormalizer;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
@@ -72,6 +78,7 @@ class SetSiteLink extends ModifyEntity {
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		SettingsArray $repoSettings,
 		SiteLinkBadgeChangeOpSerializationValidator $siteLinkBadgeChangeOpSerializationValidator,
+		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider
 	): self {
 
@@ -81,6 +88,7 @@ class SetSiteLink extends ModifyEntity {
 			$changeOpFactoryProvider
 				->getSiteLinkChangeOpFactory(),
 			$siteLinkBadgeChangeOpSerializationValidator,
+			$siteLinkPageNormalizer,
 			$siteLinkTargetProvider,
 			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
 			$repoSettings->getSetting( 'sandboxEntityIds' )
@@ -177,7 +185,11 @@ class SetSiteLink extends ModifyEntity {
 			}
 
 			if ( isset( $preparedParameters['linktitle'] ) ) {
-				$page = $site->normalizePageName( $this->stringNormalizer->trimWhitespace( $preparedParameters['linktitle'] ) );
+				$page = $this->siteLinkPageNormalizer->normalize(
+					$site,
+					$this->stringNormalizer->trimWhitespace( $preparedParameters['linktitle'] ),
+					$preparedParameters['badges'] ?? []
+				);
 
 				if ( $page === false ) {
 					$this->errorReporter->dieWithError(

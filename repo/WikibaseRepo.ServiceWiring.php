@@ -373,6 +373,7 @@ return [
 			new TermChangeOpSerializationValidator( WikibaseRepo::getTermsLanguages( $services ) ),
 			WikibaseRepo::getSiteLinkBadgeChangeOpSerializationValidator( $services ),
 			WikibaseRepo::getExternalFormatStatementDeserializer( $services ),
+			WikibaseRepo::getSiteLinkPageNormalizer( $services ),
 			WikibaseRepo::getSiteLinkTargetProvider( $services ),
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getStringNormalizer( $services ),

@@ -16,6 +16,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationVal
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\SiteLinkPageNormalizer;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -56,6 +57,8 @@ class ChangeOpDeserializerFactoryTest extends ServiceWiringTestCase {
 			new ItemIdParser() );
 		$this->mockService( 'WikibaseRepo.StringNormalizer',
 			new StringNormalizer() );
+		$this->mockService( 'WikibaseRepo.SiteLinkPageNormalizer',
+			new SiteLinkPageNormalizer( [] ) );
 		$this->mockService( 'WikibaseRepo.SiteLinkTargetProvider',
 			new SiteLinkTargetProvider( new HashSiteStore() ) );
 
