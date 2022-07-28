@@ -6,7 +6,7 @@ const expect = require( 'chai' ).expect;
 
 function newAddItemStatementRequestBuilder( itemId, statement ) {
 	return new RequestBuilder()
-		.withRoute( '/entities/items/{item_id}/statements' )
+		.withRoute( 'POST', '/entities/items/{item_id}/statements' )
 		.withPathParam( 'item_id', itemId )
 		.withJsonBodyParam( 'statement', statement );
 }
@@ -32,7 +32,7 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 		const response = await newAddItemStatementRequestBuilder(
 			itemId,
 			validStatementSerialization
-		).makeRequest( 'POST' );
+		).makeRequest();
 
 		expect( response.status ).to.equal( 201 );
 		expect( response ).to.satisfyApiSpec;
@@ -40,7 +40,7 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 
 	it( '404 Not Found is valid for non-existent Item', async () => {
 		const response = await newAddItemStatementRequestBuilder( 'Q9999999', validStatementSerialization )
-			.makeRequest( 'POST' );
+			.makeRequest();
 
 		expect( response.status ).to.equal( 404 );
 		expect( response ).to.satisfyApiSpec;
@@ -50,7 +50,7 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 		const response = await newAddItemStatementRequestBuilder(
 			itemId,
 			{ invalid: 'statement' }
-		).makeRequest( 'POST' );
+		).makeRequest();
 
 		expect( response.status ).to.equal( 400 );
 		expect( response ).to.satisfyApiSpec;
@@ -60,7 +60,7 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 		const response = await newAddItemStatementRequestBuilder(
 			itemId,
 			'invalid statement param type'
-		).makeRequest( 'POST' );
+		).makeRequest();
 
 		expect( response.status ).to.equal( 400 );
 		expect( response ).to.satisfyApiSpec;
@@ -71,7 +71,7 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 		const response = await newAddItemStatementRequestBuilder(
 			redirectSource,
 			validStatementSerialization
-		).makeRequest( 'POST' );
+		).makeRequest();
 
 		expect( response.status ).to.equal( 409 );
 		expect( response ).to.satisfyApiSpec;

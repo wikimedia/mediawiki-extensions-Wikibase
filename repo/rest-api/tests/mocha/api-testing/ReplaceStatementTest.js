@@ -7,7 +7,7 @@ const { requireExtensions } = require( '../../../../../tests/api-testing/utils' 
 
 function newReplaceStatementRequestBuilder( statementId, statement ) {
 	return new RequestBuilder()
-		.withRoute( '/statements/{statement_id}' )
+		.withRoute( 'PUT', '/statements/{statement_id}' )
 		.withPathParam( 'statement_id', statementId )
 		.withHeader( 'content-type', 'application/json' )
 		.withJsonBodyParam( 'statement', statement );
@@ -91,7 +91,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 			const response = await newReplaceStatementRequestBuilder(
 				testStatementId,
 				statementSerialization
-			).assertValidRequest().makeRequest( 'PUT' );
+			).assertValidRequest().makeRequest();
 
 			assertValid200Response( response );
 
@@ -114,7 +114,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 				.withJsonBodyParam( 'bot', true )
 				.withJsonBodyParam( 'comment', editSummary )
 				.assertValidRequest()
-				.makeRequest( 'PUT' );
+				.makeRequest();
 
 			assertValid200Response( response );
 			assert.deepEqual(
@@ -135,8 +135,8 @@ describe( 'PUT /statements/{statement_id}', () => {
 				statementSerialization
 			).assertValidRequest();
 
-			const response1 = await requestTemplate.makeRequest( 'PUT' );
-			const response2 = await requestTemplate.makeRequest( 'PUT' );
+			const response1 = await requestTemplate.makeRequest();
+			const response2 = await requestTemplate.makeRequest();
 
 			assertValid200Response( response1 );
 			assertValid200Response( response2 );
@@ -161,10 +161,10 @@ describe( 'PUT /statements/{statement_id}', () => {
 			await newReplaceStatementRequestBuilder(
 				originalSecondStatement.id,
 				newSecondStatement
-			).makeRequest( 'PUT' );
+			).makeRequest();
 
 			const actualSecondStatement = ( await new RequestBuilder()
-				.withRoute( '/entities/items/{item_id}/statements' )
+				.withRoute( 'GET', '/entities/items/{item_id}/statements' )
 				.withPathParam( 'item_id', item.id )
 				.makeRequest() ).body[ testPropertyId ][ 1 ];
 
@@ -204,7 +204,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 					newStatementWithRandomStringValue( testPropertyId )
 				)
 					.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
-					.makeRequest( 'PUT' );
+					.makeRequest();
 
 				assert.strictEqual( response.status, 403 );
 			} );

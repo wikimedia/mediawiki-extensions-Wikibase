@@ -44,26 +44,26 @@ describe( 'Conditional requests', () => {
 		{
 			route: '/entities/items/{item_id}',
 			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( '/entities/items/{item_id}' )
+				.withRoute( 'GET', '/entities/items/{item_id}' )
 				.withPathParam( 'item_id', itemId )
 		},
 		{
 			route: '/entities/items/{item_id}/statements',
 			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( '/entities/items/{item_id}/statements' )
+				.withRoute( 'GET', '/entities/items/{item_id}/statements' )
 				.withPathParam( 'item_id', itemId )
 		},
 		{
 			route: '/entities/items/{item_id}/statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( '/entities/items/{item_id}/statements/{statement_id}' )
+				.withRoute( 'GET', '/entities/items/{item_id}/statements/{statement_id}' )
 				.withPathParam( 'item_id', itemId )
 				.withPathParam( 'statement_id', statementId )
 		},
 		{
 			route: '/statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( '/statements/{statement_id}' )
+				.withRoute( 'GET', '/statements/{statement_id}' )
 				.withPathParam( 'statement_id', statementId )
 		}
 	].forEach( ( { route, newRequestBuilder } ) => {

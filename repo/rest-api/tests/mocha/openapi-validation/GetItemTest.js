@@ -7,7 +7,7 @@ const expect = chai.expect;
 
 function newGetItemRequestBuilder( itemId ) {
 	return new RequestBuilder()
-		.withRoute( '/entities/items/{item_id}' )
+		.withRoute( 'GET', '/entities/items/{item_id}' )
 		.withPathParam( 'item_id', itemId );
 }
 

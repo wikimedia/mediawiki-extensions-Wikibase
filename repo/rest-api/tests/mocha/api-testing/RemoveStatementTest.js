@@ -9,7 +9,7 @@ const basePath = 'rest.php/wikibase/v0';
 
 function newRemoveStatementRequestBuilder( statementId ) {
 	return new RequestBuilder()
-		.withRoute( '/statements/{statement_id}' )
+		.withRoute( 'DELETE', '/statements/{statement_id}' )
 		.withPathParam( 'statement_id', statementId );
 }
 
@@ -35,7 +35,7 @@ describe( 'DELETE /statements/{statement_id}', () => {
 
 	async function verifyStatementDeleted( statementId ) {
 		const verifyStatement = await new RequestBuilder()
-			.withRoute( '/statements/{statement_id}' )
+			.withRoute( 'GET', '/statements/{statement_id}' )
 			.withPathParam( 'statement_id', statementId )
 			.makeRequest();
 
@@ -54,7 +54,7 @@ describe( 'DELETE /statements/{statement_id}', () => {
 		it( 'can remove a statement without request body', async () => {
 			const response = await newRemoveStatementRequestBuilder( testStatement.id )
 				.assertValidRequest()
-				.makeRequest( 'DELETE' );
+				.makeRequest();
 
 			assertValid200Response( response );
 			await verifyStatementDeleted( testStatement.id );
@@ -68,7 +68,7 @@ describe( 'DELETE /statements/{statement_id}', () => {
 				.withJsonBodyParam( 'bot', true )
 				.withJsonBodyParam( 'comment', editSummary )
 				.assertValidRequest()
-				.makeRequest( 'DELETE' );
+				.makeRequest();
 
 			assertValid200Response( response );
 			await verifyStatementDeleted( testStatement.id );
@@ -167,7 +167,7 @@ describe( 'DELETE /statements/{statement_id}', () => {
 			it( 'responds with an error given an invalid bearer token', async () => {
 				const response = newRemoveStatementRequestBuilder( testStatement.id )
 					.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
-					.makeRequest( 'DELETE' );
+					.makeRequest();
 
 				assert.equal( response.status, 403 );
 			} );

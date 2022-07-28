@@ -7,7 +7,7 @@ const { action, assert, clientFactory, utils } = require( 'api-testing' );
 
 function newGetItemRequestBuilder( itemId ) {
 	return new RequestBuilder()
-		.withRoute( '/entities/items/{item_id}' )
+		.withRoute( 'GET', '/entities/items/{item_id}' )
 		.withPathParam( 'item_id', itemId );
 }
 

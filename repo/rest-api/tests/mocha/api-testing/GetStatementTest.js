@@ -9,7 +9,7 @@ const basePath = 'rest.php/wikibase/v0';
 
 function newGetStatementRequestBuilder( statementId ) {
 	return new RequestBuilder()
-		.withRoute( '/statements/{statement_id}' )
+		.withRoute( 'GET', '/statements/{statement_id}' )
 		.withPathParam( 'statement_id', statementId );
 }
 
