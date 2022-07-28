@@ -211,6 +211,15 @@ With this class name it is possible to change the icon of a specific badge.
 
 EXAMPLE: ```[ 'Q101' => 'wb-badge-goodarticle' ]```
 
+#### redirectBadgeItems
+These item IDs are badges which can be used to mark sitelinks to redirects.
+A sitelink to a redirect may only be created when it includes one of these badges.
+Note: all listed items have to be included in `badgeItems`.
+
+This setting expects an array of serialized item IDs.
+
+EXAMPLE: ```[ 'Q102', 'Q103' ]```
+
 #### preferredPageImagesProperties
 List of image property ID strings, in order of preference, that should be considered for the `page_image` [page property].
 
