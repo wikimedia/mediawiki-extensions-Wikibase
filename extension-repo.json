@@ -602,7 +602,7 @@
 	"attributes": {
 		"EventLogging": {
 			"Schemas": {
-				"WikibaseTermboxInteraction": 18726648
+				"WikibaseTermboxInteraction": "/analytics/legacy/wikibasetermboxinteraction/1.0.0"
 			}
 		}
 	},
