@@ -1024,4 +1024,4 @@ Below is an example of an extract of a complete entity represented in JSON.
 [astronomical year numbering]: https://en.wikipedia.org/wiki/astronomical_year_numbering
 [year zero and ISO 8601]: https://en.wikipedia.org/wiki/0_(year)#ISO_8601
 [Julian day]: https://en.wikipedia.org/wiki/Julian_day
-[Hebrew calendar]: https://en.wikipedia.org/wiki/Hebrew calendar
+[Hebrew calendar]: https://en.wikipedia.org/wiki/Hebrew_calendar
