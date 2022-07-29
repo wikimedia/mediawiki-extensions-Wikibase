@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\ReplaceItemStatement;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use ValueValidators\Result;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
@@ -13,7 +14,9 @@ use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
+use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementSuccessResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
@@ -111,6 +114,86 @@ class ReplaceItemStatementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 	}
 
+	public function testRequestedItemNotFound_returnsItemNotFound(): void {
+		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$itemId' => 'Q42',
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				'$statement' => $this->getValidStatementSerialization(),
+			] )
+		);
+
+		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $response->getCode() );
+	}
+
+	public function testItemForStatementNotFound_returnsStatementNotFound(): void {
+		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				'$statement' => $this->getValidStatementSerialization(),
+			] )
+		);
+
+		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+	}
+
+	public function testItemForStatementIsRedirect_returnsStatementNotFound(): void {
+		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
+			LatestItemRevisionMetadataResult::redirect( new ItemId( 'Q321' ) )
+		);
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				'$statement' => $this->getValidStatementSerialization(),
+			] )
+		);
+
+		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+	}
+
+	public function testStatementIdMismatchingItemId_returnsStatementNotFound(): void {
+		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
+			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
+		);
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$itemId' => 'Q666',
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				'$statement' => $this->getValidStatementSerialization(),
+			] )
+		);
+
+		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+	}
+
+	public function testStatementNotFoundOnItem_returnsStatementNotFound(): void {
+		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
+			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
+		);
+		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( 'Q42' )->build() );
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				'$statement' => $this->getValidStatementSerialization(),
+			] )
+		);
+
+		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+	}
+
 	private function newUseCase(): ReplaceItemStatement {
 		return new ReplaceItemStatement(
 			$this->newValidator(),
@@ -124,8 +207,8 @@ class ReplaceItemStatementTest extends \PHPUnit\Framework\TestCase {
 		return new ReplaceItemStatementRequest(
 			$requestData['$statementId'],
 			$requestData['$statement'],
-			$requestData['$editTags'],
-			$requestData['$isBot'],
+			$requestData['$editTags'] ?? [],
+			$requestData['$isBot'] ?? false,
 			$requestData['$comment'] ?? null,
 			$requestData['$username'] ?? null,
 			$requestData['$itemId'] ?? null
@@ -147,6 +230,17 @@ class ReplaceItemStatementTest extends \PHPUnit\Framework\TestCase {
 	private function getStatementSerialization( Statement $statement ): array {
 		$serializer = WikibaseRepo::getBaseDataModelSerializerFactory()->newStatementSerializer();
 		return $serializer->serialize( $statement );
+	}
+
+	private function getValidStatementSerialization(): array {
+		return $this->getStatementSerialization( NewStatement::noValueFor( 'P666' )->build() );
+	}
+
+	private function newItemMetadataRetriever( LatestItemRevisionMetadataResult $result ): ItemRevisionMetadataRetriever {
+		$metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$metadataRetriever->method( 'getLatestRevisionMetadata' )->willReturn( $result );
+
+		return $metadataRetriever;
 	}
 
 }

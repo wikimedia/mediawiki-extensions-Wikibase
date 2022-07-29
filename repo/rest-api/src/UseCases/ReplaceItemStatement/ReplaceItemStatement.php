@@ -2,14 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement;
 
-use Exception;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
 /**
  * @license GPL-2.0-or-later
@@ -34,27 +35,38 @@ class ReplaceItemStatement {
 	}
 
 	/**
-	 * @throws Exception
+	 * @return ReplaceItemStatementSuccessResponse|ReplaceItemStatementErrorResponse
 	 */
-	public function execute( ReplaceItemStatementRequest $request ): ReplaceItemStatementSuccessResponse {
+	public function execute( ReplaceItemStatementRequest $request ) {
 		$this->validator->validate( $request ); // T313021: complete validation
 
 		$requestedItemId = $request->getItemId();
 		$statementIdParser = new StatementGuidParser( new ItemIdParser() );
-		$statementGuid = $statementIdParser->parse( $request->getStatementId() );
+		$statementId = $statementIdParser->parse( $request->getStatementId() );
 		/** @var ItemId $itemId */
-		$itemId = $requestedItemId ? new ItemId( $requestedItemId ) : $statementGuid->getEntityId();
+		$itemId = $requestedItemId ? new ItemId( $requestedItemId ) : $statementId->getEntityId();
 		'@phan-var ItemId $itemId';
 
 		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
-		if ( !$latestRevision->itemExists() || $latestRevision->isRedirect() ) {
-			throw new \Exception(); // T313022: handle item not found and item redirect
+		if ( $requestedItemId && !$latestRevision->itemExists() ) {
+			return new ReplaceItemStatementErrorResponse(
+				ErrorResponse::ITEM_NOT_FOUND,
+				"Could not find an item with the ID: {$itemId}"
+			);
+		} elseif ( !$latestRevision->itemExists() ||
+			$latestRevision->isRedirect() ||
+			!$itemId->equals( $statementId->getEntityId() ) ) {
+			return $this->newStatementNotFoundErrorResponse( $statementId );
 		}
 
 		$newStatement = $this->validator->getValidatedStatement();
 
 		$item = $this->itemRetriever->getItem( $itemId );
-		$item->getStatements()->replaceStatement( $statementGuid, $newStatement );
+		if ( !$item->getStatements()->getFirstStatementWithGuid( (string)$statementId ) ) {
+			return $this->newStatementNotFoundErrorResponse( $statementId );
+		}
+
+		$item->getStatements()->replaceStatement( $statementId, $newStatement );
 
 		$newRevision = $this->itemUpdater->update(
 			$item,
@@ -62,9 +74,16 @@ class ReplaceItemStatement {
 		);
 
 		return new ReplaceItemStatementSuccessResponse(
-			$newRevision->getItem()->getStatements()->getFirstStatementWithGuid( (string)$statementGuid ),
+			$newRevision->getItem()->getStatements()->getFirstStatementWithGuid( (string)$statementId ),
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId()
+		);
+	}
+
+	private function newStatementNotFoundErrorResponse( StatementGuid $statementId ): ReplaceItemStatementErrorResponse {
+		return new ReplaceItemStatementErrorResponse(
+			ErrorResponse::STATEMENT_NOT_FOUND,
+			"Could not find a statement with the ID: $statementId"
 		);
 	}
 
