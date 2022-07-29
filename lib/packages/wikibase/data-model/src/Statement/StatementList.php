@@ -130,14 +130,14 @@ class StatementList implements IteratorAggregate, Countable {
 
 	/**
 	 * @param StatementGuid $statementGuid The guid of the statement to be replaced
-	 * @param Statement $statement The new statement. If it has a guid already, it will be replaced.
+	 * @param Statement $newStatement The new statement. If it has a guid already, it will be replaced.
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function replaceStatement( StatementGuid $statementGuid, Statement $newStatement ): void {
 		$index = $this->getIndexOfFirstStatementWithGuid( (string)$statementGuid );
 		if ( $index === null ) {
-			throw new InvalidArgumentException( 'Statement with guid $statementGuid not found' );
+			throw new InvalidArgumentException( "Statement with guid '$statementGuid' not found" );
 		}
 
 		$newStatement->setGuid( (string)$statementGuid );
