@@ -35,16 +35,16 @@ class PreconditionMiddlewareFactoryTest extends TestCase {
 				return $itemId->getSerialization();
 			} );
 
-		$middleware->run( $this->newHandler(), function () {
+		$middleware->run( $this->newRouteHandler(), function () {
 			return $this->createStub( Response::class );
 		} );
 	}
 
-	private function newHandler(): Handler {
-		$handler = $this->createStub( Handler::class );
-		$handler->method( 'getRequest' )->willReturn( new RequestData() );
+	private function newRouteHandler(): Handler {
+		$routeHandler = $this->createStub( Handler::class );
+		$routeHandler->method( 'getRequest' )->willReturn( new RequestData() );
 
-		return $handler;
+		return $routeHandler;
 	}
 
 }

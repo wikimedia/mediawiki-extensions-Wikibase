@@ -21,7 +21,7 @@ class UnexpectedErrorHandlerMiddleware implements Middleware {
 		$this->logger = $logger;
 	}
 
-	public function run( Handler $handler, callable $runNext ): Response {
+	public function run( Handler $routeHandler, callable $runNext ): Response {
 		try {
 			return $runNext();
 		} catch ( \Throwable $exception ) {

@@ -10,6 +10,6 @@ use MediaWiki\Rest\Response;
  */
 interface Middleware {
 
-	public function run( Handler $handler, callable $runNext ): Response;
+	public function run( Handler $routeHandler, callable $runNext ): Response;
 
 }
