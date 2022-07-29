@@ -23,7 +23,7 @@ class ModifiedPreconditionMiddlewareTest extends TestCase {
 	public function testGivenPreconditionCheckReturns412_respondsWith412(): void {
 		$preconditionCheck = $this->createStub( RequestPreconditionCheck::class );
 		$preconditionCheck->method( 'checkPreconditions' )->willReturn(
-			RequestPreconditionCheckResult::newFromMatch(
+			RequestPreconditionCheckResult::newConditionMetResult(
 				LatestItemRevisionMetadataResult::concreteRevision( 123, '20201111070707' ),
 				412
 			)
@@ -43,7 +43,7 @@ class ModifiedPreconditionMiddlewareTest extends TestCase {
 
 	public function testGivenPreconditionMismatchResult_doesNothing(): void {
 		$preconditionCheck = $this->createStub( RequestPreconditionCheck::class );
-		$preconditionCheck->method( 'checkPreconditions' )->willReturn( RequestPreconditionCheckResult::newMismatchResult() );
+		$preconditionCheck->method( 'checkPreconditions' )->willReturn( RequestPreconditionCheckResult::newConditionUnmetResult() );
 
 		$middleware = new ModifiedPreconditionMiddleware( $preconditionCheck );
 		$expectedResponse = $this->createStub( Response::class );

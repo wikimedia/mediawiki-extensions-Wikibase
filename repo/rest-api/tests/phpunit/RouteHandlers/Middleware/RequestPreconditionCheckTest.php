@@ -105,7 +105,7 @@ class RequestPreconditionCheckTest extends TestCase {
 		);
 
 		$this->assertEquals(
-			RequestPreconditionCheckResult::newMismatchResult(),
+			RequestPreconditionCheckResult::newConditionUnmetResult(),
 			$preconditionCheck->checkPreconditions( new RequestData() )
 		);
 	}
@@ -127,7 +127,7 @@ class RequestPreconditionCheckTest extends TestCase {
 		);
 
 		$this->assertEquals(
-			RequestPreconditionCheckResult::newMismatchResult(),
+			RequestPreconditionCheckResult::newConditionUnmetResult(),
 			$preconditionCheck->checkPreconditions( new RequestData() )
 		);
 	}
