@@ -2,18 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
-use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\NotModifiedPreconditionMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
@@ -57,18 +54,12 @@ class GetStatementRouteHandler extends SimpleHandler {
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
 				new AuthenticationMiddleware(),
-				new NotModifiedPreconditionMiddleware(
-					new RequestPreconditionCheck(
-						new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-							WikibaseRepo::getEntityRevisionLookup()
-						),
-						function ( RequestInterface $request ): string {
-							return RequestPreconditionCheck::getItemIdPrefixFromStatementId(
-								$request->getPathParam( self::ID_PATH_PARAM )
-							);
-						},
-						new ConditionalHeaderUtil()
-					)
+				WbRestApi::getPreconditionMiddlewareFactory()->newNotModifiedPreconditionMiddleware(
+					function ( RequestInterface $request ): string {
+						return RequestPreconditionCheck::getItemIdPrefixFromStatementId(
+							$request->getPathParam( self::ID_PATH_PARAM )
+						);
+					}
 				),
 			] )
 		);

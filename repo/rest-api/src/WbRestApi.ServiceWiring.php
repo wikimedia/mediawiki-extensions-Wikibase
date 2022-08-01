@@ -2,6 +2,7 @@
 
 use DataValues\Serializers\DataValueSerializer;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Rest\ConditionalHeaderUtil;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Serializers\SerializerFactory as LegacySerializerFactory;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -12,6 +13,7 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Serializers\SerializerFactory;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
@@ -99,6 +101,15 @@ return [
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			)
+		);
+	},
+
+	'WbRestApi.PreconditionMiddlewareFactory' => function( MediaWikiServices $services ): PreconditionMiddlewareFactory {
+		return new PreconditionMiddlewareFactory(
+			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+				WikibaseRepo::getEntityRevisionLookup( $services )
+			),
+			new ConditionalHeaderUtil()
 		);
 	},
 
