@@ -8,7 +8,8 @@
 			"बिप्लब आनन्द",
 			"राम प्रसाद जोशी",
 			"सरोज कुमार ढकाल",
-			"हिमाल सुबेदी"
+			"हिमाल सुबेदी",
+			"Bada Kaji"
 		]
 	},
 	"wikibase-entity": "एकाइ",
@@ -18,7 +19,7 @@
 	"wikibase-edit": "सम्पादन",
 	"wikibase-save": "संग्रह गर्ने",
 	"wikibase-publish": "प्रकाशन गर्नुहोस्",
-	"wikibase-cancel": "रद्द गर्ने",
+	"wikibase-cancel": "रद्द गर्नुहोस्",
 	"wikibase-add": "जोड्ने",
 	"wikibase-addreference": "सन्दर्भ थप्न",
 	"wikibase-save-inprogress": "रक्षण हुदै...",
@@ -63,7 +64,7 @@
 	"wikibase-validator-invalid": "गलत मिति",
 	"wikibase-itembytitle-lookup-site": "स्थान :",
 	"wikibase-itembytitle-lookup-page": "पृष्ठ:",
-	"wikibase-itembytitle-submit": "खोज्ने",
+	"wikibase-itembytitle-submit": "खोज्नुहोस्",
 	"wikibase-gotolinkedpage-lookup-site": "स्थान :",
 	"wikibase-gotolinkedpage-submit": "जाने",
 	"wikibase-itemdisambiguation-lookup-language": "भाषाकोड :",
@@ -94,7 +95,7 @@
 	"wikibase-dispatchstats-pos": "स्थान",
 	"wikibase-dispatchstats-lag-num": "थाँतीरहेको",
 	"wikibase-dispatchstats-lag-time": "विलम्ब",
-	"wikibase-listproperties-submit": "खोज्ने",
+	"wikibase-listproperties-submit": "खोज्नुहोस्",
 	"wikibase-restoreold": "पूर्वावस्थामा ल्याउनुहोस्",
 	"wikibase-listdatatypes-wikibase-property-head": "गुणधर्म",
 	"wikibase-listdatatypes-quantity-head": "मात्रा",
