@@ -38,7 +38,10 @@ class ReplaceItemStatement {
 	 * @return ReplaceItemStatementSuccessResponse|ReplaceItemStatementErrorResponse
 	 */
 	public function execute( ReplaceItemStatementRequest $request ) {
-		$this->validator->validate( $request ); // T313021: complete validation
+		$validationError = $this->validator->validate( $request );
+		if ( $validationError ) {
+			return ReplaceItemStatementErrorResponse::newFromValidationError( $validationError );
+		}
 
 		$requestedItemId = $request->getItemId();
 		$statementIdParser = new StatementGuidParser( new ItemIdParser() );
