@@ -14,17 +14,6 @@ function newRemoveItemStatementRequestBuilder( itemId, statementId ) {
 		.withPathParam( 'statement_id', statementId );
 }
 
-async function getLatestEditMetadata( itemId ) {
-	const recentChanges = await action.getAnon().action( 'query', {
-		list: 'recentchanges',
-		rctitle: `Item:${itemId}`,
-		rclimit: 1,
-		rcprop: 'tags|flags|comment'
-	} );
-
-	return recentChanges.query.recentchanges[ 0 ];
-}
-
 describe( 'DELETE /entities/items/{item_id}/statements/{statement_id}', () => {
 	let testItemId;
 	let testStatement;
@@ -77,7 +66,7 @@ describe( 'DELETE /entities/items/{item_id}/statements/{statement_id}', () => {
 			assertValid200Response( response );
 			await verifyStatementDeleted( testStatement.id );
 
-			const editMetadata = await getLatestEditMetadata( testItemId );
+			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.deepEqual( editMetadata.tags, [ tag ] );
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual( editMetadata.comment, editSummary );
