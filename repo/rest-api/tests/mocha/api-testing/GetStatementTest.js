@@ -36,13 +36,9 @@ describe( 'GET /statements/{statement_id}', () => {
 		const claims = createSingleItemResponse.entity.claims;
 		testStatement = Object.values( claims )[ 0 ][ 0 ];
 
-		const itemMetadata = await action.getAnon().action( 'wbgetentities', {
-			ids: testItemId
-		} );
-
-		testLastModified = new Date( itemMetadata.entities[ testItemId ].modified ).toUTCString();
-		testRevisionId = itemMetadata.entities[ testItemId ].lastrevid;
-
+		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
+		testLastModified = testItemCreationMetadata.timestamp;
+		testRevisionId = testItemCreationMetadata.revid;
 	} );
 
 	it( 'can GET a statement with metadata', async () => {

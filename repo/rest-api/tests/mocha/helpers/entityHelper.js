@@ -75,9 +75,24 @@ async function createRedirectForItem( redirectTarget ) {
 	return redirectSource;
 }
 
+async function getLatestEditMetadata( itemId ) {
+	const editMetadata = ( await action.getAnon().action( 'query', {
+		list: 'recentchanges',
+		rctitle: `Item:${itemId}`,
+		rclimit: 1,
+		rcprop: 'tags|flags|comment|ids|timestamp|user'
+	} ) ).query.recentchanges[ 0 ];
+
+	return {
+		...editMetadata,
+		timestamp: new Date( editMetadata.timestamp ).toUTCString()
+	};
+}
+
 module.exports = {
 	createEntity,
 	createSingleItem,
 	createUniqueStringProperty,
-	createRedirectForItem
+	createRedirectForItem,
+	getLatestEditMetadata
 };
