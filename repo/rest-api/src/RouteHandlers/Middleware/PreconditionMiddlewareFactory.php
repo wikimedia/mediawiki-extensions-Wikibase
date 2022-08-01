@@ -18,16 +18,8 @@ class PreconditionMiddlewareFactory {
 		$this->conditionalHeaderUtil = $conditionalHeaderUtil;
 	}
 
-	public function newNotModifiedPreconditionMiddleware( callable $getItemFromRequest ): NotModifiedPreconditionMiddleware {
-		return new NotModifiedPreconditionMiddleware( new RequestPreconditionCheck(
-			$this->metadataRetriever,
-			$getItemFromRequest,
-			$this->conditionalHeaderUtil
-		) );
-	}
-
-	public function newModifiedPreconditionMiddleware( callable $getItemFromRequest ): ModifiedPreconditionMiddleware {
-		return new ModifiedPreconditionMiddleware( new RequestPreconditionCheck(
+	public function newPreconditionMiddleware( callable $getItemFromRequest ): PreconditionMiddleware {
+		return new PreconditionMiddleware( new RequestPreconditionCheck(
 			$this->metadataRetriever,
 			$getItemFromRequest,
 			$this->conditionalHeaderUtil

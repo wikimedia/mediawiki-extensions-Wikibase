@@ -13,7 +13,7 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMet
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ModifiedPreconditionMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
@@ -60,7 +60,7 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
 				new AuthenticationMiddleware(),
-				new ModifiedPreconditionMiddleware(
+				new PreconditionMiddleware(
 					new RequestPreconditionCheck(
 						new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 							WikibaseRepo::getEntityRevisionLookup()

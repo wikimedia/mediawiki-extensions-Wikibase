@@ -21,28 +21,19 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory
  */
 class PreconditionMiddlewareFactoryTest extends TestCase {
 
-	public function testNewNotModifiedPreconditionMiddleware(): void {
+	public function testNewPreconditionMiddleware(): void {
 		$itemId = new ItemId( 'Q42' );
-		$middleware = ( new PreconditionMiddlewareFactory(
-			$this->newMetadataRetrieverExpectingItemId( $itemId ),
-			new ConditionalHeaderUtil()
-		) )->newNotModifiedPreconditionMiddleware( function () use ( $itemId ) {
-			return $itemId->getSerialization();
-		} );
 
-		$middleware->run( $this->newHandler(), function () {
-			return $this->createStub( Response::class );
-		} );
-	}
+		$metadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
+		$metadataRetriever->expects( $this->once() )
+			->method( 'getLatestRevisionMetadata' )
+			->with( $itemId )
+			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
 
-	public function testNewModifiedPreconditionMiddleware(): void {
-		$itemId = new ItemId( 'Q42' );
-		$middleware = ( new PreconditionMiddlewareFactory(
-			$this->newMetadataRetrieverExpectingItemId( $itemId ),
-			new ConditionalHeaderUtil()
-		) )->newModifiedPreconditionMiddleware( function () use ( $itemId ) {
-			return $itemId->getSerialization();
-		} );
+		$middleware = ( new PreconditionMiddlewareFactory( $metadataRetriever, new ConditionalHeaderUtil() ) )
+			->newPreconditionMiddleware( function () use ( $itemId ) {
+				return $itemId->getSerialization();
+			} );
 
 		$middleware->run( $this->newHandler(), function () {
 			return $this->createStub( Response::class );
@@ -54,16 +45,6 @@ class PreconditionMiddlewareFactoryTest extends TestCase {
 		$handler->method( 'getRequest' )->willReturn( new RequestData() );
 
 		return $handler;
-	}
-
-	private function newMetadataRetrieverExpectingItemId( ItemId $itemId ): ItemRevisionMetadataRetriever {
-		$metadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
-		$metadataRetriever->expects( $this->once() )
-			->method( 'getLatestRevisionMetadata' )
-			->with( $itemId )
-			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
-
-		return $metadataRetriever;
 	}
 
 }

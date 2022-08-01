@@ -6,11 +6,9 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 
 /**
- * Middleware handling conditional requests with If-None-Match and If-Modified-Since headers.
- *
  * @license GPL-2.0-or-later
  */
-class NotModifiedPreconditionMiddleware implements Middleware {
+class PreconditionMiddleware implements Middleware {
 
 	private $preconditionCheck;
 
@@ -20,11 +18,18 @@ class NotModifiedPreconditionMiddleware implements Middleware {
 
 	public function run( Handler $handler, callable $runNext ): Response {
 		$preconditionCheckResult = $this->preconditionCheck->checkPreconditions( $handler->getRequest() );
-		if ( $preconditionCheckResult->getStatusCode() === 304 ) {
-			return $this->newNotModifiedResponse( $handler,  $preconditionCheckResult->getRevisionMetadata()->getRevisionId() );
-		}
 
-		return $runNext();
+		switch ( $preconditionCheckResult->getStatusCode() ) {
+			case 304:
+				return $this->newNotModifiedResponse(
+					$handler,
+					$preconditionCheckResult->getRevisionMetadata()->getRevisionId()
+				);
+			case 412:
+				return $this->newPreconditionFailedResponse( $handler );
+			default:
+				return $runNext();
+		}
 	}
 
 	private function newNotModifiedResponse( Handler $handler, int $revId ): Response {
@@ -32,6 +37,13 @@ class NotModifiedPreconditionMiddleware implements Middleware {
 		$notModifiedResponse->setHeader( 'ETag', "\"$revId\"" );
 
 		return $notModifiedResponse;
+	}
+
+	private function newPreconditionFailedResponse( Handler $handler ): Response {
+		$response = $handler->getResponseFactory()->createNoContent();
+		$response->setStatus( 412 );
+
+		return $response;
 	}
 
 }

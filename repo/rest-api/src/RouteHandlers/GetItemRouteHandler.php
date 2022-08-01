@@ -75,7 +75,7 @@ class GetItemRouteHandler extends SimpleHandler {
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
 				new AuthenticationMiddleware(),
-				WbRestApi::getPreconditionMiddlewareFactory()->newNotModifiedPreconditionMiddleware(
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					function ( RequestInterface $request ): string {
 							return $request->getPathParam( self::ID_PATH_PARAM );
 					}

@@ -58,7 +58,7 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
 				new AuthenticationMiddleware(),
-				WbRestApi::getPreconditionMiddlewareFactory()->newModifiedPreconditionMiddleware(
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					function ( RequestInterface $request ): string {
 						return RequestPreconditionCheck::getItemIdPrefixFromStatementId(
 							$request->getPathParam( self::STATEMENT_ID_PATH_PARAM )

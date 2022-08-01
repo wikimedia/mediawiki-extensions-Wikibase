@@ -10,8 +10,8 @@ use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 
 /**
- * Wrapper around an ItemRevisionMetadataRetriever and ConditionalHeaderUtil to check whether a request meets the preconditions for a
- * certain response code. This is intended to be used with *PreconditionMiddleware classes.
+ * Wrapper around an ItemRevisionMetadataRetriever and ConditionalHeaderUtil to check whether
+ * a request meets the preconditions for a certain response code.
  *
  * @license GPL-2.0-or-later
  */
