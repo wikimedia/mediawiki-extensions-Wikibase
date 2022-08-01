@@ -219,6 +219,7 @@ use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Search\Fields\FieldDefinitionsFactory;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
+use Wikibase\Repo\SiteLinkPageNormalizer;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\StatementGrouperBuilder;
@@ -1719,6 +1720,14 @@ return [
 				'wikibase.siteLinkGlobalIdentifiersProvider.',
 				$cacheSecret
 			)
+		);
+	},
+
+	'WikibaseRepo.SiteLinkPageNormalizer' => function (
+		MediaWikiServices $services
+	): SiteLinkPageNormalizer {
+		return new SiteLinkPageNormalizer(
+			WikibaseRepo::getSettings( $services )->getSetting( 'redirectBadgeItems' )
 		);
 	},
 

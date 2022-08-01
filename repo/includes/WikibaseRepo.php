@@ -397,6 +397,13 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.SiteLinkGlobalIdentifiersProvider' );
 	}
 
+	public static function getSiteLinkPageNormalizer(
+		ContainerInterface $services = null
+	): SiteLinkPageNormalizer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.SiteLinkPageNormalizer' );
+	}
+
 	public static function getSiteLinkTargetProvider(
 		ContainerInterface $services = null
 	): SiteLinkTargetProvider {
