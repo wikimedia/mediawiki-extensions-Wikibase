@@ -14,7 +14,7 @@ use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\UseCases\GetItemStatement\AddItemStatementValidator
+ * @covers \Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator
  *
  * @group Wikibase
  *
