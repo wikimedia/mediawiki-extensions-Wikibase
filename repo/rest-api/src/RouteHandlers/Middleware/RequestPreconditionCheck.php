@@ -44,15 +44,15 @@ class RequestPreconditionCheck {
 			);
 		} catch ( Exception $e ) {
 			// Malformed IDs will be caught by validation later.
-			return RequestPreconditionCheckResult::newMismatchResult();
+			return RequestPreconditionCheckResult::newConditionUnmetResult();
 		}
 
 		$itemMetadata = $this->metadataRetriever->getLatestRevisionMetadata( $itemId );
 		$preconditionStatusCode = $this->getStatusCodeFromRequestAndMetadata( $request, $itemMetadata );
 
 		return $preconditionStatusCode ?
-			RequestPreconditionCheckResult::newFromMatch( $itemMetadata, $preconditionStatusCode ) :
-			RequestPreconditionCheckResult::newMismatchResult();
+			RequestPreconditionCheckResult::newConditionMetResult( $itemMetadata, $preconditionStatusCode ) :
+			RequestPreconditionCheckResult::newConditionUnmetResult();
 	}
 
 	private function getStatusCodeFromRequestAndMetadata(

@@ -17,11 +17,11 @@ class RequestPreconditionCheckResult {
 		$this->statusCode = $statusCode;
 	}
 
-	public static function newFromMatch( LatestItemRevisionMetadataResult $revisionMetadata, int $statusCode ): self {
+	public static function newConditionMetResult( LatestItemRevisionMetadataResult $revisionMetadata, int $statusCode ): self {
 		return new self( $revisionMetadata, $statusCode );
 	}
 
-	public static function newMismatchResult(): self {
+	public static function newConditionUnmetResult(): self {
 		return new self( null, null );
 	}
 

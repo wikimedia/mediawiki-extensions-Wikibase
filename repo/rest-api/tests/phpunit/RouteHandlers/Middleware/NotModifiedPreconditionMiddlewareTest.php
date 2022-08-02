@@ -24,7 +24,7 @@ class NotModifiedPreconditionMiddlewareTest extends TestCase {
 		$revId = 123;
 		$preconditionCheck = $this->createStub( RequestPreconditionCheck::class );
 		$preconditionCheck->method( 'checkPreconditions' )->willReturn(
-			RequestPreconditionCheckResult::newFromMatch(
+			RequestPreconditionCheckResult::newConditionMetResult(
 				LatestItemRevisionMetadataResult::concreteRevision( 123, '20201111070707' ),
 				304
 			)
@@ -45,7 +45,7 @@ class NotModifiedPreconditionMiddlewareTest extends TestCase {
 
 	public function testGivenHeadersDontMatchRevision_doesNothing(): void {
 		$preconditionCheck = $this->createStub( RequestPreconditionCheck::class );
-		$preconditionCheck->method( 'checkPreconditions' )->willReturn( RequestPreconditionCheckResult::newMismatchResult() );
+		$preconditionCheck->method( 'checkPreconditions' )->willReturn( RequestPreconditionCheckResult::newConditionUnmetResult() );
 
 		$middleware = new NotModifiedPreconditionMiddleware( $preconditionCheck );
 		$expectedResponse = $this->createStub( Response::class );
