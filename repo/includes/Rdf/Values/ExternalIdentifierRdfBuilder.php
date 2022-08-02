@@ -48,7 +48,6 @@ class ExternalIdentifierRdfBuilder implements ValueSnakRdfBuilder {
 		$snakNamespace,
 		PropertyValueSnak $snak
 	) {
-		// @phan-suppress-next-next-line PhanTypeMismatchArgument It doesn't check that it's a StringValue
 		// @fixme Add a check for that!
 		$id = $this->getValueId( $snak->getDataValue() );
 		$uriPattern = $this->uriPatternProvider->getPropertyInfo( $snak->getPropertyId() );

@@ -97,6 +97,7 @@ abstract class EntityRedirectCreationInteractor {
 	 * @throws RedirectCreationException If creating the redirect fails. Calling code may use
 	 * RedirectCreationException::getErrorCode() to get further information about the cause of
 	 * the failure. An explanation of the error codes can be obtained from getErrorCodeInfo().
+	 * @suppress PhanTypeMismatchDeclaredParam
 	 */
 	public function createRedirect(
 		EntityId $fromId,

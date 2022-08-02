@@ -142,7 +142,6 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 	 * @see EntityRdfBuilder::addEntity
 	 *
 	 * @param EntityDocument $entity the entity to output.
-	 * @suppress PhanTypeMismatchArgument
 	 */
 	public function addEntity( EntityDocument $entity ) {
 		$entityId = $entity->getId();

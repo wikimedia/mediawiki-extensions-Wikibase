@@ -495,6 +495,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 	 * @param LinkRenderer $linkRenderer
 	 *
 	 * @return bool
+	 * @suppress PhanTypeMismatchDeclaredParam
 	 */
 	private function shouldConvert( Title $currentTitle, LinkRenderer $linkRenderer ) {
 		return $linkRenderer->isForComment() ||

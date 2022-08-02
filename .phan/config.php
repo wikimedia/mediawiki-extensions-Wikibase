@@ -84,6 +84,14 @@ $cfg['exclude_analysis_directory_list'] = array_merge(
 $cfg['suppress_issue_types'] = array_merge(
 	$cfg['suppress_issue_types'],
 	[
+		// Disabled when upgrading to 0.11.1
+		'PhanPluginNeverReturnMethod',
+		'PhanPluginSimplifyExpressionBool',
+		'PhanTypeMismatchReturn',
+		'PhanTypeMismatchArgumentSuperType',
+		'PhanTypeMismatchReturnSuperType',
+		'PhanPluginUnreachableCode',
+
 		// Both local and global vendor directories have to be analysed
 		"PhanRedefinedClassReference",
 		"PhanRedefinedExtendedClass",

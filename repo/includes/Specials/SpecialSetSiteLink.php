@@ -270,6 +270,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$this->page = $this->site === null ? '' : $this->getSiteLink( $entity, $this->site );
 		}
 		if ( empty( $this->badges ) ) {
+			// @phan-suppress-next-line PhanImpossibleTypeComparison
 			$this->badges = $this->site === null ? [] : $this->getBadges( $entity, $this->site );
 		}
 		$pageinput = [

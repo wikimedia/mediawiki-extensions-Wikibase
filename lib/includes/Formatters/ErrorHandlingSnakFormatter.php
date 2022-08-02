@@ -63,6 +63,7 @@ class ErrorHandlingSnakFormatter implements SnakFormatter {
 	 * @return string Either plain text, wikitext or HTML, depending on the SnakFormatter provided.
 	 */
 	public function formatSnak( Snak $snak ) {
+		$warningText = '';
 		try {
 			return $this->snakFormatter->formatSnak( $snak );
 		} catch ( MismatchingDataValueTypeException $ex ) {

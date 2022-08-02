@@ -127,7 +127,7 @@ class ChangeOpAliases extends ChangeOpBase {
 		}
 
 		return new ChangeOpAliasesResult(
-			$entity->getId(), // @phan-suppress-current-line PhanUndeclaredMethod
+			$entity->getId(),
 			$this->languageCode,
 			$oldAliases,
 			$newAliases,

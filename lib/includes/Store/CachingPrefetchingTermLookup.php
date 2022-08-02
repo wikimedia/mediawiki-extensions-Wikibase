@@ -97,6 +97,7 @@ final class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 
 	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
 		if ( isset( $this->prefetchedTerms[$entityId->getSerialization()][TermTypes::TYPE_ALIAS][$languageCode] ) ) {
+			// @phan-suppress-next-line PhanTypeArraySuspiciousNullable
 			return $this->prefetchedTerms[$entityId->getSerialization()][TermTypes::TYPE_ALIAS][$languageCode];
 		}
 		return $this->lookup->getPrefetchedAliases( $entityId, $languageCode );
