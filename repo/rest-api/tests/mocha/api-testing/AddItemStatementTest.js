@@ -178,14 +178,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			const createEntityResponse = await entityHelper.createEntity( 'item', {} );
 			const protectedItemId = createEntityResponse.entity.id;
 
-			// protect the newly created Item
-			const mindy = await action.mindy();
-			await mindy.action( 'protect', {
-				title: `Item:${protectedItemId}`,
-				token: await mindy.token(),
-				protections: 'edit=sysop',
-				expiry: 'infinite'
-			}, 'POST' );
+			await entityHelper.protectItem( protectedItemId );
 
 			const response =
 				await newAddItemStatementRequestBuilder( protectedItemId, testStatement )

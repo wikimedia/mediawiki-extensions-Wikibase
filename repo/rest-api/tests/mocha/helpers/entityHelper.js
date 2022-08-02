@@ -89,10 +89,21 @@ async function getLatestEditMetadata( itemId ) {
 	};
 }
 
+async function protectItem( itemId ) {
+	const mindy = await action.mindy();
+	await mindy.action( 'protect', {
+		title: `Item:${itemId}`,
+		token: await mindy.token(),
+		protections: 'edit=sysop',
+		expiry: 'infinite'
+	}, 'POST' );
+}
+
 module.exports = {
 	createEntity,
 	createSingleItem,
 	createUniqueStringProperty,
 	createRedirectForItem,
-	getLatestEditMetadata
+	getLatestEditMetadata,
+	protectItem
 };
