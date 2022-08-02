@@ -21,7 +21,7 @@ function requireExtensions( requiredExtensions ) {
 			'extensions',
 		) ).map( ( extension ) => extension.name );
 		const missingExtensions = requiredExtensions.filter(
-			( requiredExtension ) => installedExtensions.includes( requiredExtension ),
+			( requiredExtension ) => !installedExtensions.includes( requiredExtension ),
 		);
 		if ( missingExtensions.length ) {
 			this.skip();
