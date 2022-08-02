@@ -80,6 +80,11 @@ class RequestBuilder {
 	}
 
 	async makeRequest() {
+		const XDEBUG_SESSION = process.env.XDEBUG_SESSION;
+		if ( XDEBUG_SESSION ) {
+			this.withHeader( 'Cookie', `XDEBUG_SESSION=${XDEBUG_SESSION}` );
+		}
+
 		const spec = await getOrLoadSpec();
 		this.validateRouteAndMethod( spec );
 		if ( this.validate ) {
