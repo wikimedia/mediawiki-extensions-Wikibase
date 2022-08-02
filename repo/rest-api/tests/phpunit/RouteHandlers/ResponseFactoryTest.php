@@ -48,4 +48,16 @@ class ResponseFactoryTest extends TestCase {
 		yield [ ErrorResponse::UNEXPECTED_ERROR,  500 ];
 	}
 
+	public function testGivenAuthorizationError_newErrorResponseReturnsRestWriteDenied(): void {
+		$useCaseResponse = new ErrorResponse( ErrorResponse::PERMISSION_DENIED, 'item protected' );
+
+		$errorPresenter = $this->createMock( ErrorJsonPresenter::class );
+		$errorPresenter->expects( $this->never() )->method( $this->anything() );
+
+		$httpResponse = ( new ResponseFactory( $errorPresenter ) )->newErrorResponse( $useCaseResponse );
+
+		$this->assertSame( 403, $httpResponse->getStatusCode() );
+		$this->assertStringContainsString( 'rest-write-denied', $httpResponse->getBody()->getContents() );
+	}
+
 }

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use HttpStatus;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Presentation\ErrorResponseToHttpStatus;
@@ -20,6 +21,11 @@ class ResponseFactory {
 	}
 
 	public function newErrorResponse( ErrorResponse $useCaseResponse ): Response {
+		// respond with framework error, when user cannot edit the Item
+		if ( $useCaseResponse->getCode() === ErrorResponse::PERMISSION_DENIED ) {
+			return $this->newFrameworkAlikePermissionDeniedResponse();
+		}
+
 		$httpResponse = new Response();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader( 'Content-Language', 'en' );
@@ -28,4 +34,18 @@ class ResponseFactory {
 
 		return $httpResponse;
 	}
+
+	private function newFrameworkAlikePermissionDeniedResponse(): Response {
+		$httpResponse = new Response();
+		$httpResponse->setHeader( 'Content-Type', 'application/json' );
+		$httpResponse->setStatus( 403 );
+		$httpResponse->setBody( new StringStream( json_encode( [
+			'error' => 'rest-write-denied',
+			'httpCode' => 403,
+			'httpReason' => HttpStatus::getMessage( 403 ),
+		] ) ) );
+
+		return $httpResponse;
+	}
+
 }
