@@ -65,7 +65,7 @@ class AddItemStatement {
 				"Could not find an item with the ID: {$request->getItemId()}"
 			);
 		}
-		$user = ( $request->hasUser() ) ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
+		$user = $request->hasUser() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
 			return new AddItemStatementErrorResponse(
 				ErrorResponse::PERMISSION_DENIED,

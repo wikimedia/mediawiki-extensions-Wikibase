@@ -156,6 +156,10 @@ return [
 				RequestContext::getMain(),
 				WikibaseRepo::getEditEntityFactory(),
 				WikibaseRepo::getLogger( $services )
+			),
+			new WikibaseEntityPermissionChecker(
+				WikibaseRepo::getEntityPermissionChecker( $services ),
+				$services->getUserFactory()
 			)
 		);
 	},

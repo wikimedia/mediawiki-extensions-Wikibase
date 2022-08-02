@@ -8,12 +8,15 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
+use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementErrorResponse;
@@ -46,6 +49,10 @@ class ReplaceItemStatementTest extends \PHPUnit\Framework\TestCase {
 	 * @var MockObject|ItemUpdater
 	 */
 	private $itemUpdater;
+	/**
+	 * @var MockObject|PermissionChecker
+	 */
+	private $permissionChecker;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -53,6 +60,8 @@ class ReplaceItemStatementTest extends \PHPUnit\Framework\TestCase {
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
+		$this->permissionChecker = $this->createStub( PermissionChecker::class );
+		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
 	}
 
 	public function testReplaceStatement(): void {
@@ -194,12 +203,33 @@ class ReplaceItemStatementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
 	}
 
+	public function testProtectedItem_returnsErrorResponse(): void {
+		$itemId = new ItemId( 'Q123' );
+		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
+
+		$this->permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
+		$this->permissionChecker->expects( $this->once() )
+			->method( 'canEdit' )
+			->with( User::newAnonymous(), $itemId )
+			->willReturn( false );
+
+		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
+			'$statementId' => "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+				'$statement' => $this->getValidStatementSerialization(),
+		] ) );
+		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::PERMISSION_DENIED, $response->getCode() );
+	}
+
 	private function newUseCase(): ReplaceItemStatement {
 		return new ReplaceItemStatement(
 			$this->newValidator(),
 			$this->revisionMetadataRetriever,
 			$this->itemRetriever,
-			$this->itemUpdater
+			$this->itemUpdater,
+			$this->permissionChecker
 		);
 	}
 

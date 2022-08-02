@@ -14,6 +14,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
@@ -99,7 +100,10 @@ class ReplaceItemStatementRouteHandler extends SimpleHandler {
 		if ( $useCaseResponse instanceof ReplaceItemStatementSuccessResponse ) {
 			return $this->newSuccessHttpResponse( $useCaseResponse );
 		} elseif ( $useCaseResponse instanceof ReplaceItemStatementErrorResponse ) {
-			return $this->responseFactory->newErrorResponse( $useCaseResponse );
+			return $useCaseResponse->getCode() === ErrorResponse::PERMISSION_DENIED ?
+				// respond with framework error, when user cannot edit Item
+				$this->getResponseFactory()->createHttpError( 403, [ 'error' => 'rest-write-denied' ] ) :
+				$this->responseFactory->newErrorResponse( $useCaseResponse );
 		} else {
 			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}

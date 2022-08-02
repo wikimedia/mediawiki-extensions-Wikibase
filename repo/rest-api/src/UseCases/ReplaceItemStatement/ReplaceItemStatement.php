@@ -7,9 +7,11 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
 /**
@@ -21,17 +23,20 @@ class ReplaceItemStatement {
 	private $revisionMetadataRetriever;
 	private $itemRetriever;
 	private $itemUpdater;
+	private $permissionChecker;
 
 	public function __construct(
 		ReplaceItemStatementValidator $validator,
 		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
 		ItemRetriever $itemRetriever,
-		ItemUpdater $itemUpdater
+		ItemUpdater $itemUpdater,
+		PermissionChecker $permissionChecker
 	) {
 		$this->validator = $validator;
 		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -57,6 +62,14 @@ class ReplaceItemStatement {
 			$latestRevision->isRedirect() ||
 			!$itemId->equals( $statementId->getEntityId() ) ) {
 			return $this->newStatementNotFoundErrorResponse( $statementId );
+		}
+
+		$user = $request->hasUser() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
+		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
+			return new ReplaceItemStatementErrorResponse(
+				ErrorResponse::PERMISSION_DENIED,
+				"You have no permission to edit this item."
+			);
 		}
 
 		$newStatement = $this->validator->getValidatedStatement();
