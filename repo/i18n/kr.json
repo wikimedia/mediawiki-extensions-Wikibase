@@ -4,5 +4,9 @@
 			"Mohammedbama123"
 		]
 	},
-	"wikibase-edit": "Yasa"
+	"wikibase-edit": "Yasa",
+	"wikibase-add": "Yirai",
+	"wikibase-label-empty": "Label bawo",
+	"wikibase-description-empty": "Description bawo",
+	"wikibase-sitelinks-special": "Sites gade lan"
 }

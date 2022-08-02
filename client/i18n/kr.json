@@ -1,15 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Aliyu shaba"
+			"Aliyu shaba",
+			"Amire80",
+			"Mohammedbama123"
 		]
 	},
 	"wikibase-dataitem": "Awodoy {{WBREPONAME}}",
 	"wikibase-editlinks": "Links yasa",
 	"wikibase-linkitem-addlinks": "Links yiko",
-	"wikibase-linkitem-title": "Link with page",
-	"wikibase-linkitem-linkpage": "Killee nasha diya",
+	"wikibase-linkitem-title": "Shafi ya kəlta",
+	"wikibase-linkitem-linkpage": "Shafi ya kəlta",
 	"wikibase-linkitem-selectlink": "Site do ra,amadi karnə süro page ra,amaduro yikəə",
-	"wikibase-linkitem-input-site": "Yarənza",
-	"wikibase-linkitem-input-page": "Nasha,a"
+	"wikibase-linkitem-input-site": "Tǝlam:",
+	"wikibase-linkitem-input-page": "Shafi",
+	"wikibase-rc-hide-wikidata-hide": "Grane",
+	"wikibase-rc-hide-wikidata-show": "Fuleta",
+	"wikibase-otherprojects": "Projects gade lan"
 }

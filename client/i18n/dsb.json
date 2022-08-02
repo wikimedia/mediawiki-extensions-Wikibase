@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Michawiki"
+			"Michawiki",
+			"Vlad5250"
 		]
 	},
 	"wikibase-client-desc": "Klient za rozšyrjenje Wikibase",
@@ -33,6 +34,8 @@
 	"wikibase-linkitem-success-link": "Boki su se wuspěšnje zwězali. Móžoš element, kótaryž wopśimujo wótkaze, w našom [$1 centralnem datowem repozitoriumje] namakaś.",
 	"wikibase-property-notfound": "Kakosć $1 njejo se namakała.",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "Schowaś",
+	"wikibase-rc-hide-wikidata-show": "Pokazaś",
 	"wikibase-rc-show-wikidata-pref": "Změny {{WBREPONAME}} w aktualnych změnach pokazaś",
 	"wikibase-replicationnote": "Pšosym źiwaj na to, až móžo někotare minuty traś, až změny njejsu widobne na wšych wikijach.",
 	"wikibase-watchlist-show-changes-pref": "Změny {{WBREPONAME}} w twójich wobglědowańkach pokazaś",

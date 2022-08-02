@@ -61,6 +61,7 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|linganbo interłenguistego|linganbo interłenguisteghi}} in te ła pàjina)",
 	"wikibase-unconnectedpages-submit": "Mostra pàjine",
 	"pageswithbadges": "Pàjine co insegne",
+	"entityusage": "Dove ven doparà na entità",
 	"wikibase-pageinfo-entity-usage": "Entità {{WBREPONAME}} doparae inte sta voze",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Declarasion: $1",
 	"wikibase-otherprojects": "In altri projeti",
