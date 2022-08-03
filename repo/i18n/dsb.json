@@ -4,7 +4,8 @@
 			"Derbeth",
 			"Ladsgroup",
 			"Macofe",
-			"Michawiki"
+			"Michawiki",
+			"Vlad5250"
 		]
 	},
 	"wikibase-desc": "Repozitorium strukturěrowanych datow",
@@ -18,9 +19,9 @@
 	"wikibase-addreference": "žrědło pśidaś",
 	"wikibase-save-inprogress": "Składujo se...",
 	"wikibase-remove-inprogress": "Wótpórajo se...",
-	"wikibase-label-empty": "Hyšći njejo se žedne pomjenjenje definěrowało.",
+	"wikibase-label-empty": "Žedne pomjenjenje definěrowane",
 	"wikibase-label-edit-placeholder": "pomjenjenje zapódaś",
-	"wikibase-description-empty": "Hyšće njejo se žedne wopisanje definěrowało",
+	"wikibase-description-empty": "Žedne wopisanje definěrowane",
 	"wikibase-description-edit-placeholder": "wopisanje zapódaś",
 	"wikibase-diffview-reference": "referenca",
 	"wikibase-diffview-rank": "rěd",

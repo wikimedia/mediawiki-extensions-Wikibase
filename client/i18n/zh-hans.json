@@ -28,7 +28,8 @@
 			"乌拉跨氪",
 			"予弦",
 			"神樂坂秀吉",
-			"铁桶"
+			"铁桶",
+			"Stang"
 		]
 	},
 	"wikibase-client-desc": "Wikibase扩展的客户端",
@@ -186,7 +187,7 @@
 	"wikibase-client-data-bridge-unknown-error-message": "发生错误，此时无法编辑所选值。请尝试重新加载。",
 	"wikibase-client-data-bridge-error-report": "<p>如果错误仍然存在，请[$1 报告此问题]描述您的操作并提供以下信息：</p>\n<ul>\n<li>$2</li>\n<li>$4的$3</li>\n<li>错误代码：$5</li>\n</ul>",
 	"wikibase-client-data-bridge-error-reload-bridge": "重新加载",
-	"wikibase-client-data-bridge-error-reload-page": "重新载入页面",
+	"wikibase-client-data-bridge-error-reload-page": "重新加载页面",
 	"wikibase-client-data-bridge-error-go-back": "返回",
 	"wikibase-client-data-bridge-error-retry-save": "重试保存",
 	"wikibase-client-data-bridge-login-warning": "登录后，<strong>请关闭此标签页并返回原始标签页</strong>以重新尝试保存。",
