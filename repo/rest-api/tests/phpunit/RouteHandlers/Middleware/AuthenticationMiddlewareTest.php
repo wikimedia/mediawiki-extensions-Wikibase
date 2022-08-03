@@ -53,10 +53,10 @@ class AuthenticationMiddlewareTest extends TestCase {
 		$authority = $this->createStub( Authority::class );
 		$authority->method( 'getUser' )->willReturn( $user );
 
-		$handler = $this->createStub( Handler::class );
-		$handler->method( 'getAuthority' )->willReturn( $authority );
+		$routeHandler = $this->createStub( Handler::class );
+		$routeHandler->method( 'getAuthority' )->willReturn( $authority );
 
-		return $handler;
+		return $routeHandler;
 	}
 
 }

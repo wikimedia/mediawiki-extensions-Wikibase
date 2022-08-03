@@ -16,6 +16,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
  * @license GPL-2.0-or-later
  */
 class RequestPreconditionCheck {
+
 	private $metadataRetriever;
 	private $getItemIdFromRequest;
 	private $conditionalHeaderUtil;
@@ -55,6 +56,10 @@ class RequestPreconditionCheck {
 			RequestPreconditionCheckResult::newConditionUnmetResult();
 	}
 
+	/**
+	 * @return int|null The status code to return without processing the request further,
+	 * or null to continue processing the request.
+	 */
 	private function getStatusCodeFromRequestAndMetadata(
 		RequestInterface $request,
 		LatestItemRevisionMetadataResult $revisionMetadata

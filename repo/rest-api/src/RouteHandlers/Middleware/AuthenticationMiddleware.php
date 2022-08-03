@@ -12,9 +12,9 @@ class AuthenticationMiddleware implements Middleware {
 
 	public const USER_AUTHENTICATED_HEADER = 'X-Authenticated-User';
 
-	public function run( Handler $handler, callable $runNext ): Response {
+	public function run( Handler $routeHandler, callable $runNext ): Response {
 		$response = $runNext();
-		$user = $handler->getAuthority()->getUser();
+		$user = $routeHandler->getAuthority()->getUser();
 		if ( $user->isRegistered() ) {
 			$response->setHeader( self::USER_AUTHENTICATED_HEADER, $user->getName() );
 		}

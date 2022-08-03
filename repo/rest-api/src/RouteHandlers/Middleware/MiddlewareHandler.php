@@ -25,27 +25,31 @@ class MiddlewareHandler {
 		$this->middlewares = $middlewares;
 	}
 
-	public function run( Handler $handler, callable $runRoute, array $args ): Response {
+	public function run( Handler $routeHandler, callable $runRoute, array $args ): Response {
 		return $this->callMiddlewaresRecursively(
 			$this->middlewares,
-			$handler,
-			function () use ( $runRoute, $args ) {
+			$routeHandler,
+			function() use ( $runRoute, $args ) {
 				return $runRoute( ...$args );
 			}
 		);
 	}
 
-	private function callMiddlewaresRecursively( array $remainingMiddlewares, Handler $handler, callable $runRouteWithArgs ): Response {
+	private function callMiddlewaresRecursively(
+		array $remainingMiddlewares,
+		Handler $routeHandler,
+		callable $runRouteWithArgs
+	): Response {
 		$currentMiddleware = array_shift( $remainingMiddlewares );
 
 		// Each middleware runs the next one. The last one runs $runRouteWithArgs.
 		$runNext = empty( $remainingMiddlewares ) ?
 			$runRouteWithArgs :
-			function () use ( $remainingMiddlewares, $handler, $runRouteWithArgs ) {
-				return $this->callMiddlewaresRecursively( $remainingMiddlewares, $handler, $runRouteWithArgs );
+			function() use ( $remainingMiddlewares, $routeHandler, $runRouteWithArgs ) {
+				return $this->callMiddlewaresRecursively( $remainingMiddlewares, $routeHandler, $runRouteWithArgs );
 			};
 
-		return $currentMiddleware->run( $handler, $runNext );
+		return $currentMiddleware->run( $routeHandler, $runNext );
 	}
 
 }

@@ -21,7 +21,7 @@ class ResponseHeaderCountingTestMiddleware implements Middleware {
 		$this->expectedCount = $expectedCount;
 	}
 
-	public function run( Handler $handler, callable $runNext ): Response {
+	public function run( Handler $routeHandler, callable $runNext ): Response {
 		/** @var Response $response */
 		$response = $runNext();
 		$callCount = intval( $response->getHeaderLine( self::MIDDLEWARE_COUNT_HEADER ) ) + 1;

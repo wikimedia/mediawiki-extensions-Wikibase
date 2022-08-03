@@ -32,7 +32,7 @@ class PreconditionMiddlewareTest extends TestCase {
 		$middleware = new PreconditionMiddleware( $preconditionCheck );
 
 		$response = $middleware->run(
-			$this->newHandler(),
+			$this->newRouteHandler(),
 			function (): Response {
 				$this->fail( 'This function should never be called in this scenario.' );
 			}
@@ -54,7 +54,7 @@ class PreconditionMiddlewareTest extends TestCase {
 		$middleware = new PreconditionMiddleware( $preconditionCheck );
 
 		$response = $middleware->run(
-			$this->newHandler(),
+			$this->newRouteHandler(),
 			function (): Response {
 				$this->fail( 'This function should never be called in this scenario.' );
 			}
@@ -77,11 +77,11 @@ class PreconditionMiddlewareTest extends TestCase {
 		$this->assertSame( $expectedResponse, $response );
 	}
 
-	private function newHandler(): Handler {
-		$handler = $this->createStub( Handler::class );
-		$handler->method( 'getResponseFactory' )->willReturn( new ResponseFactory( [] ) );
+	private function newRouteHandler(): Handler {
+		$routeHandler = $this->createStub( Handler::class );
+		$routeHandler->method( 'getResponseFactory' )->willReturn( new ResponseFactory( [] ) );
 
-		return $handler;
+		return $routeHandler;
 	}
 
 }
