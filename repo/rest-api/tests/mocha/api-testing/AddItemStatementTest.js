@@ -214,8 +214,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.makeRequest();
 
 			assert.strictEqual( response.status, 415 );
-			assert.strictEqual( response.body.message, 'Unsupported Content-Type' );
-			assert.strictEqual( response.body.content_type, contentType );
+			assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
 		} );
 	} );
 

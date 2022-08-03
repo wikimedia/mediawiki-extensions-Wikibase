@@ -3,16 +3,14 @@
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\Rest\Handler;
-use MediaWiki\Rest\HttpException;
-use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
-use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
@@ -61,6 +59,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
 				new AuthenticationMiddleware(),
+				new ContentTypeCheckMiddleware( [ ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON ] ),
 			] )
 		);
 	}
@@ -101,20 +100,6 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		}
 
 		return $httpResponse;
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function validate( Validator $restValidator ) {
-		$contentType = $this->getContentType( $this->getRequest() );
-		if ( $contentType !== 'application/json' ) {
-			throw new HttpException(
-				"Unsupported Content-Type", 415, [ 'content_type' => $contentType ]
-			);
-		}
-
-		parent::validate( $restValidator );
 	}
 
 	public function getParamSettings(): array {
@@ -191,13 +176,6 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		);
 
 		$httpResponse->setHeader( 'Location', $newStatementUrl );
-	}
-
-	// use the helper method if Ie8650198c4afde4721da78ca506548f32732765d gets merged
-	private function getContentType( RequestInterface $request ): string {
-		list( $ct ) = explode( ';', $request->getHeaderLine( 'Content-Type' ), 2 );
-
-		return strtolower( trim( $ct ) );
 	}
 
 	private function getUsername(): ?string {
