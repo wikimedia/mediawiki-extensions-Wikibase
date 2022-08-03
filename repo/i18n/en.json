@@ -336,6 +336,7 @@
 	"wikibase-entitypage-title": "Entity Page",
 	"wikibase-entitypage-text": "This page redirects to the entity page on the repository it belongs to. Please provide the entity ID in the URL, using subpage syntax.",
 	"wikibase-entitypage-bad-id": "Invalid ID: $1.",
+	"wikibase-error-entity-not-local": "Entity type $1 cannot be edited on this wiki.",
 	"wikibase-error-entity-too-big": "The entity is too big. The maximum allowed entity size is $1.",
 	"wikibase-parse-error": "Malformed value.",
 	"wikibase-parse-error-coordinate": "The coordinate value is malformed.",

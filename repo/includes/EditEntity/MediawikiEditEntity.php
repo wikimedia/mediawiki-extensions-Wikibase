@@ -6,6 +6,7 @@ use IContextSource;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\User\UserOptionsLookup;
+use Message;
 use MWException;
 use ReadOnlyError;
 use Status;
@@ -621,10 +622,13 @@ class MediawikiEditEntity implements EditEntity {
 		return in_array( $entity->getType(), $readOnlyTypes );
 	}
 
-	private function checkLocal( EntityDocument $entity ) {
+	/** Modifies $this->status and $this->errorType. Does not throw. */
+	private function checkLocal( EntityDocument $entity ): void {
 		if ( !$this->entityTypeIsLocal( $entity ) ) {
-			throw new InvalidArgumentException(
-				'Entity type ' . $entity->getType() . ' cannot be edited on this wiki.'
+			$this->errorType |= EditEntity::PRECONDITION_FAILED;
+			$this->status->fatal(
+				'wikibase-error-entity-not-local',
+				Message::plaintextParam( $entity->getType() )
 			);
 		}
 	}
@@ -662,14 +666,15 @@ class MediawikiEditEntity implements EditEntity {
 	 * @see    EntityStore::saveEntity
 	 */
 	public function attemptSave( EntityDocument $newEntity, string $summary, $flags, $token, $watch = null, array $tags = [] ) {
-		$this->checkReadOnly( $newEntity );
-		$this->checkLocal( $newEntity );
-		$this->checkEntityId( $newEntity->getId() );
+		$this->checkReadOnly( $newEntity ); // throws, exception formatted by MediaWiki (cf. MWExceptionRenderer::getExceptionTitle)
+		$this->checkEntityId( $newEntity->getId() ); // throws internal error (unexpected condition)
 
 		$watch = $this->getDesiredWatchState( $watch );
 
 		$this->status = Status::newGood();
 		$this->errorType = 0;
+
+		$this->checkLocal( $newEntity ); // modifies $this->status
 
 		if ( $token !== false && !$this->isTokenOK( $token ) ) {
 			//@todo: This is redundant to the error code set in isTokenOK().
@@ -677,6 +682,9 @@ class MediawikiEditEntity implements EditEntity {
 			//       and only set the correct error code, in one place, probably here.
 			$this->errorType |= EditEntity::TOKEN_ERROR;
 			$this->status->fatal( 'sessionfailure' );
+		}
+
+		if ( !$this->status->isOK() ) {
 			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
 			return $this->status;
 		}
@@ -732,9 +740,6 @@ class MediawikiEditEntity implements EditEntity {
 
 		if ( !$this->status->isOK() ) {
 			$this->errorType |= EditEntity::PRECONDITION_FAILED;
-		}
-
-		if ( !$this->status->isOK() ) {
 			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
 			return $this->status;
 		}
