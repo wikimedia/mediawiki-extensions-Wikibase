@@ -29,6 +29,7 @@
 			"400": { "$ref": "../../global/responses.json#/InvalidNewStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
 			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
+			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	}
