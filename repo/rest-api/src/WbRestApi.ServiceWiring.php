@@ -139,6 +139,8 @@ return [
 	'WbRestApi.ReplaceItemStatement' => function( MediaWikiServices $services ): ReplaceItemStatement {
 		return new ReplaceItemStatement(
 			new ReplaceItemStatementValidator(
+				new ItemIdValidator(),
+				new StatementIdValidator( new ItemIdParser() ),
 				new SnakValidatorStatementValidator(
 					WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer(),
 					new SnakValidator(
@@ -146,6 +148,10 @@ return [
 						WikibaseRepo::getDataTypeFactory( $services ),
 						WikibaseRepo::getDataTypeValidatorFactory( $services )
 					)
+				),
+				new EditMetadataValidator(
+					CommentStore::COMMENT_CHARACTER_LIMIT,
+					ChangeTags::listExplicitlyDefinedTags()
 				)
 			),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(

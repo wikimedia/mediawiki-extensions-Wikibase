@@ -3,8 +3,10 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\ReplaceItemStatement;
 
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
@@ -20,6 +22,9 @@ use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementErro
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementSuccessResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
+use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\Tests\NewStatement;
 use Wikibase\Repo\Validators\SnakValidator;
@@ -32,7 +37,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @license GPL-2.0-or-later
  */
-class ReplaceItemStatementTest extends \PHPUnit\Framework\TestCase {
+class ReplaceItemStatementTest extends TestCase {
 
 	/**
 	 * @var MockObject|ItemRevisionMetadataRetriever
@@ -46,6 +51,8 @@ class ReplaceItemStatementTest extends \PHPUnit\Framework\TestCase {
 	 * @var MockObject|ItemUpdater
 	 */
 	private $itemUpdater;
+
+	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -112,6 +119,26 @@ class ReplaceItemStatementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $newStatement, $response->getStatement() );
 		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
+	}
+
+	public function testInvalidStatementId_returnsInvalidStatementId(): void {
+		$newStatement = NewStatement::noValueFor( 'P123' )->build();
+		$requestData = [
+			'$statementId' => 'INVALID-STATEMENT-ID',
+			'$statement' => $this->getStatementSerialization( $newStatement ),
+			'$editTags' => [],
+			'$isBot' => false,
+			'$comment' => null,
+			'$username' => null,
+			'$itemId' => null
+		];
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( $requestData )
+		);
+
+		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::INVALID_STATEMENT_ID, $response->getCode() );
 	}
 
 	public function testRequestedItemNotFound_returnsItemNotFound(): void {
@@ -219,11 +246,15 @@ class ReplaceItemStatementTest extends \PHPUnit\Framework\TestCase {
 		$snakValidator = $this->createStub( SnakValidator::class );
 		$snakValidator->method( 'validateStatementSnaks' )->willReturn( Result::newSuccess() );
 
+		$itemIdParser = new ItemIdParser();
 		return new ReplaceItemStatementValidator(
+			new ItemIdValidator(),
+			new StatementIdValidator( $itemIdParser ),
 			new SnakValidatorStatementValidator(
 				WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer(),
 				$snakValidator
-			)
+			),
+			new EditMetadataValidator( \CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
 		);
 	}
 

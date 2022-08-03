@@ -166,6 +166,132 @@ describe( 'PUT /statements/{statement_id}', () => {
 
 	} );
 
+	describe( '400 error response', () => {
+		function assertValid400Response( response, responseBodyErrorCode ) {
+			assert.strictEqual( response.status, 400 );
+			assert.header( response, 'Content-Language', 'en' );
+			assert.strictEqual( response.body.code, responseBodyErrorCode );
+		}
+
+		it( 'statement ID contains invalid entity ID', async () => {
+			const statementId = testStatementId.replace( 'Q', 'X' );
+			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const response = await newReplaceStatementRequestBuilder( statementId, statementSerialization )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assertValid400Response( response, 'invalid-statement-id' );
+			assert.include( response.body.message, statementId );
+		} );
+
+		it( 'statement ID is invalid format', async () => {
+			const statementId = 'not-a-valid-format';
+			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const response = await newReplaceStatementRequestBuilder( statementId, statementSerialization )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assertValid400Response( response, 'invalid-statement-id' );
+			assert.include( response.body.message, statementId );
+		} );
+
+		it( 'statement is not on an item', async () => {
+			const statementId = testStatementId.replace( 'Q', 'P' );
+			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const response = await newReplaceStatementRequestBuilder( statementId, statementSerialization )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid400Response( response, 'invalid-statement-id' );
+			assert.include( response.body.message, statementId );
+		} );
+
+		it( 'comment too long', async () => {
+			const comment = 'x'.repeat( 501 );
+			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const response = await newReplaceStatementRequestBuilder( testStatementId, statementSerialization )
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid400Response( response, 'comment-too-long' );
+			assert.include( response.body.message, '500' );
+		} );
+
+		it( 'invalid statement data', async () => {
+			const invalidStatement = {
+				invalidKey: []
+			};
+			const response = await newReplaceStatementRequestBuilder( testStatementId, invalidStatement )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assertValid400Response( response, 'invalid-statement-data' );
+		} );
+
+		it( 'invalid edit tag', async () => {
+			const invalidEditTag = 'invalid tag';
+			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const response = await newReplaceStatementRequestBuilder( testStatementId, statementSerialization )
+				.withJsonBodyParam( 'tags', [ invalidEditTag ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid400Response( response, 'invalid-edit-tag' );
+			assert.include( response.body.message, invalidEditTag );
+		} );
+
+		it( 'invalid edit tag type', async () => {
+			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const response = await newReplaceStatementRequestBuilder( testStatementId, statementSerialization )
+				.withJsonBodyParam( 'tags', 'not an array' )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'tags' );
+			assert.strictEqual( response.body.expectedType, 'array' );
+		} );
+
+		it( 'invalid bot flag type', async () => {
+			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const response = await newReplaceStatementRequestBuilder( testStatementId, statementSerialization )
+				.withJsonBodyParam( 'bot', 'should be a boolean' )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'bot' );
+			assert.strictEqual( response.body.expectedType, 'boolean' );
+		} );
+
+		it( 'invalid comment type', async () => {
+			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const response = await newReplaceStatementRequestBuilder( testStatementId, statementSerialization )
+				.withJsonBodyParam( 'comment', 1234 )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'comment' );
+			assert.strictEqual( response.body.expectedType, 'string' );
+		} );
+
+		it( 'invalid statement type', async () => {
+			const response = await newReplaceStatementRequestBuilder( testStatementId, 'invalid' )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'statement' );
+			assert.strictEqual( response.body.expectedType, 'object' );
+		} );
+	} );
+
 	describe( '404 error response', () => {
 		it( 'statement not found on item', async () => {
 			const statementId = testItemId + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
