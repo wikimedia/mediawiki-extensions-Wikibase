@@ -1,17 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Bfpage",
 			"Tisave"
 		]
 	},
-	"tooltip-t-wikibase": "Link nan done konekte atik repozitwa",
+	"tooltip-t-wikibase": "Relye nan eleman nan depo done konekte",
 	"wikibase-dataitem": "Eleman {{WBREPONAME}}",
 	"wikibase-editlinks": "Chanje lyen yo",
 	"wikibase-editlinkstitle": "Chanje lyen entèlang yo",
+	"wikibase-linkitem-addlinks": "Ajoute lyen",
+	"wikibase-linkitem-title": "Relye ak yon paj",
+	"wikibase-linkitem-linkpage": "Relye ak yon paj",
+	"wikibase-linkitem-input-site": "Lang :",
+	"wikibase-linkitem-input-page": "Paj :",
 	"wikibase-rc-hide-wikidata-hide": "Kache",
 	"wikibase-rc-hide-wikidata-show": "Montre",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Chanjman {{WBREPONAME}}",
-	"wikibase-otherprojects": "Lòt pwojè"
+	"wikibase-otherprojects": "Nan lòt pwojè yo"
 }

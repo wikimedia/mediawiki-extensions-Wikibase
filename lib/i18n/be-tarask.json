@@ -51,6 +51,7 @@
 	"datatypes-type-time": "Момант часу",
 	"datatypes-type-wikibase-item": "Аб’ект",
 	"datatypes-type-commonsMedia": "Мэдыяфайл зь Вікісховішча",
+	"datatypes-type-tabular-data": "Таблічныя зьвесткі",
 	"datatypes-type-external-id": "Вонкавы ідэнтыфікатар",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-CE": "$1 н. э.",
