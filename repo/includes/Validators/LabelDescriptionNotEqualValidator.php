@@ -20,7 +20,6 @@ class LabelDescriptionNotEqualValidator implements EntityValidator {
 	 * @param EntityDocument $entity
 	 *
 	 * @return Result
-	 * @suppress PhanUndeclaredMethod Phan is confused by intersection types
 	 */
 	public function validateEntity( EntityDocument $entity ) {
 		if ( $entity instanceof LabelsProvider && $entity instanceof DescriptionsProvider ) {

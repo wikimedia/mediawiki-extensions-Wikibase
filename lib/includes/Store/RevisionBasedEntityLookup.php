@@ -76,6 +76,7 @@ class RevisionBasedEntityLookup implements EntityLookup {
 			return $revisionIdResult
 				->onConcreteRevision( $returnTrue )
 				->onNonexistentEntity( $returnFalse )
+				// @phan-suppress-next-line PhanPluginNeverReturnFunction
 				->onRedirect( function ( $revisionId, EntityId $redirectsTo ) use ( $entityId ) {
 
 					throw new UnresolvedEntityRedirectException( $entityId, $redirectsTo );

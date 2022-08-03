@@ -79,7 +79,6 @@ class ItemView extends EntityView {
 
 	/**
 	 * @inheritDoc
-	 * @suppress PhanUndeclaredMethod Phan is confused by intersection types
 	 */
 	public function getTitleHtml( EntityDocument $entity ) {
 		if ( $entity instanceof LabelsProvider ) {
@@ -113,7 +112,6 @@ class ItemView extends EntityView {
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string HTML
-	 * @suppress PhanTypeMismatchArgument
 	 */
 	protected function getMainHtml( EntityDocument $item ) {
 		if ( !( $item instanceof StatementListProvider ) ) {
@@ -177,7 +175,6 @@ class ItemView extends EntityView {
 	 * @param EntityDocument $entity
 	 *
 	 * @return string HTML
-	 * @suppress PhanUndeclaredMethod Phan is confused by intersection types
 	 */
 	protected function getHtmlForTerms( EntityDocument $entity ) {
 		$id = $entity->getId();

@@ -24,6 +24,7 @@ class TermLanguageFallbackChain {
 	/**
 	 * @param LanguageWithConversion[] $chain
 	 * @param ContentLanguages|null $termLanguages
+	 * @suppress PhanTypeMismatchDeclaredParam
 	 */
 	public function __construct( array $chain, ContentLanguages $termLanguages ) {
 		$this->chain = array_values( array_filter(

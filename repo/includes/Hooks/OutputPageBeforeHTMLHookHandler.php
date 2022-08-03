@@ -202,6 +202,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 				$entityIdParser
 			),
 			$entityFactory,
+			// @phan-suppress-next-line PhanPossiblyUndeclaredVariable
 			$wgCookiePrefix,
 			new OutputPageEditability(),
 			TermboxFlag::getInstance()->shouldRenderTermbox(),

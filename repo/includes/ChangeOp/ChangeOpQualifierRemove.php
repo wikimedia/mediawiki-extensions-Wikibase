@@ -76,7 +76,6 @@ class ChangeOpQualifierRemove extends ChangeOpBase {
 
 		$statement->setQualifiers( $qualifiers );
 
-		// @phan-suppress-next-line PhanUndeclaredMethod Phan is confused by intersection types
 		return new GenericChangeOpResult( $entity->getId(), true );
 	}
 

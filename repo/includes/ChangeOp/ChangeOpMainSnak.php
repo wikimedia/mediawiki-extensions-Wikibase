@@ -86,7 +86,6 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws ChangeOpException
-	 * @suppress PhanUndeclaredMethod Phan is confused by intersection types
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof StatementListProvider ) ) {

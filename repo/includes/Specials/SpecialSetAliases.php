@@ -131,7 +131,6 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 *
 	 * @throws UserInputException|InvalidArgumentException
 	 * @return Summary
-	 * @suppress PhanTypeMismatchArgument
 	 */
 	protected function setValue( EntityDocument $entity, $languageCode, $value ) {
 		if ( !( $entity instanceof AliasesProvider ) ) {
