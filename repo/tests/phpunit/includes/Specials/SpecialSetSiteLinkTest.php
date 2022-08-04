@@ -107,16 +107,9 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			$this->addBadgeMatcher();
 		}
 
-		$settings = WikibaseRepo::getSettings();
-		self::$oldBadgeItemsSetting = $settings->getSetting( 'badgeItems' );
+		$settings = clone WikibaseRepo::getSettings();
 		$settings->setSetting( 'badgeItems', [ self::$badgeId => '' ] );
-	}
-
-	protected function tearDown(): void {
-		$settings = WikibaseRepo::getSettings();
-		$settings->setSetting( 'badgeItems', self::$oldBadgeItemsSetting );
-
-		parent::tearDown();
+		$this->setService( 'WikibaseRepo.Settings', $settings );
 	}
 
 	private function createItems() {
