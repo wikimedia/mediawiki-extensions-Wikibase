@@ -1,12 +1,11 @@
 'use strict';
 
-const { REST, assert } = require( 'api-testing' );
+const { assert, clientFactory } = require( 'api-testing' );
 const SwaggerParser = require( '@apidevtools/swagger-parser' );
 const { default: OpenAPIRequestCoercer } = require( 'openapi-request-coercer' );
 const { default: OpenAPIRequestValidator } = require( 'openapi-request-validator' );
 
 const basePath = 'rest.php/wikibase/v0';
-const rest = new REST( basePath );
 
 // "static" because it can be shared across requests, and we don't want to dereference it every time
 let openApiSpec = null;
@@ -26,6 +25,7 @@ class RequestBuilder {
 		this.queryParams = {};
 		this.jsonBodyParams = {};
 		this.headers = {};
+		this.user = null;
 		this.validate = false;
 		this.assertValid = false;
 	}
@@ -67,6 +67,15 @@ class RequestBuilder {
 		return this;
 	}
 
+	/**
+	 * @param {Object} user e.g. `await action.mindy()`
+	 * @return {this}
+	 */
+	withUser( user ) {
+		this.user = user;
+		return this;
+	}
+
 	assertValidRequest() {
 		this.validate = true;
 		this.assertValid = true;
@@ -100,6 +109,8 @@ class RequestBuilder {
 				body = this.jsonBodyParams;
 				break;
 		}
+
+		const rest = clientFactory.getRESTClient( basePath, this.user );
 
 		switch ( this.method.toUpperCase() ) {
 			case 'GET':

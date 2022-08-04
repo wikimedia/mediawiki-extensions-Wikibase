@@ -3,7 +3,7 @@
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 const { createEntity, createRedirectForItem, getLatestEditMetadata } = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
-const { action, assert, clientFactory, utils } = require( 'api-testing' );
+const { action, assert, utils } = require( 'api-testing' );
 
 function newGetItemRequestBuilder( itemId ) {
 	return new RequestBuilder()
@@ -15,7 +15,6 @@ function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
 }
 
-const basePath = 'rest.php/wikibase/v0';
 const germanLabel = 'a-German-label-' + utils.uniq();
 const englishLabel = 'an-English-label-' + utils.uniq();
 const englishDescription = 'an-English-description-' + utils.uniq();
@@ -137,8 +136,9 @@ describe( 'GET /entities/items/{id} ', () => {
 		it( 'has an X-Authenticated-User header with the logged in user', async () => {
 			const mindy = await action.mindy();
 
-			const response = await clientFactory.getRESTClient( basePath, mindy )
-				.get( `/entities/items/${testItemId}` );
+			const response = await newGetItemRequestBuilder( testItemId )
+				.withUser( mindy )
+				.makeRequest();
 
 			assertValid200Response( response );
 			assert.header( response, 'X-Authenticated-User', mindy.username );
@@ -172,7 +172,7 @@ describe( 'GET /entities/items/{id} ', () => {
 			assert.equal( response.status, 308 );
 
 			const redirectLocation = new URL( response.headers.location );
-			assert.isTrue( redirectLocation.pathname.endsWith( `${basePath}/entities/items/${testItemId}` ) );
+			assert.isTrue( redirectLocation.pathname.endsWith( `rest.php/wikibase/v0/entities/items/${testItemId}` ) );
 			assert.empty( redirectLocation.search );
 		} );
 

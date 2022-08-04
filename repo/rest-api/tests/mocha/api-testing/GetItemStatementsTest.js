@@ -1,6 +1,6 @@
 'use strict';
 
-const { action, assert, clientFactory } = require( 'api-testing' );
+const { action, assert } = require( 'api-testing' );
 const {
 	createEntity,
 	createSingleItem,
@@ -9,8 +9,6 @@ const {
 } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
-
-const basePath = 'rest.php/wikibase/v0';
 
 function newGetItemStatementsRequestBuilder( itemId ) {
 	return new RequestBuilder()
@@ -101,7 +99,7 @@ describe( 'GET /entities/items/{id}/statements', () => {
 
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
-				.endsWith( `${basePath}/entities/items/${redirectTarget}/statements` )
+				.endsWith( `rest.php/wikibase/v0/entities/items/${redirectTarget}/statements` )
 		);
 	} );
 
@@ -110,8 +108,9 @@ describe( 'GET /entities/items/{id}/statements', () => {
 		it( 'has an X-Authenticated-User header with the logged in user', async () => {
 			const mindy = await action.mindy();
 
-			const response = await clientFactory.getRESTClient( basePath, mindy )
-				.get( `/entities/items/${testItemId}/statements` );
+			const response = await newGetItemStatementsRequestBuilder( testItemId )
+				.withUser( mindy )
+				.makeRequest();
 
 			assert.equal( response.status, 200 );
 			assert.header( response, 'X-Authenticated-User', mindy.username );

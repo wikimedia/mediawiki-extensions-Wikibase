@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, action, clientFactory } = require( 'api-testing' );
+const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
@@ -378,11 +378,12 @@ describe( 'PUT /entities/items/{item_id}/statements/{statement_id}', () => {
 
 		it( 'has an X-Authenticated-User header with the logged in user', async () => {
 			const mindy = await action.mindy();
-			const response = await clientFactory.getRESTClient( 'rest.php/wikibase/v0', mindy ).put(
-				`/entities/items/${testItemId}/statements/${testStatementId}`,
-				{ statement: entityHelper.newStatementWithRandomStringValue( testPropertyId ) },
-				{ 'content-type': 'application/json' }
-			);
+
+			const response = await newReplaceItemStatementRequestBuilder(
+				testItemId,
+				testStatementId,
+				entityHelper.newStatementWithRandomStringValue( testPropertyId )
+			).withUser( mindy ).makeRequest();
 
 			assertValid200Response( response );
 			assert.header( response, 'X-Authenticated-User', mindy.username );
