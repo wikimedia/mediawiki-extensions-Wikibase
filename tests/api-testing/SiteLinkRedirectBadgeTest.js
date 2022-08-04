@@ -98,147 +98,199 @@ describe( 'sitelink redirect behavior with badges', () => {
 		return response.title;
 	}
 
-	// Redirects are NOT allowed as separate sitelinks
-	// if NO redirect badge is added in the same edit
-	it( 'disallows redirect sitelink without redirect badge', async () => {
-		const redirectTarget = await createRedirectTarget( 'target' ),
-			redirect = await createRedirect( 'redirect', redirectTarget ),
-			item = await createItem( 'item where we try to add a sitelink to a redirect' ),
-			itemLinkedToTarget = await createItem( 'item linked to redirect target', {
-				sitelinks: {
-					[ siteId ]: {
-						site: siteId,
-						title: redirectTarget,
-						badges: [],
+	const wbSetSiteLinkAction = {
+		name: 'wbsetsitelink',
+		expectActionSuccess: async ( itemId, redirectTargetTitle, badges ) => {
+			return alice.action( 'wbsetsitelink', {
+				id: itemId,
+				linksite: siteId,
+				linktitle: redirectTargetTitle,
+				badges: badges,
+				token: await alice.token( 'csrf' ),
+			}, 'POST' );
+		},
+		expectActionError: async ( itemId, redirectTargetTitle, badges ) => {
+			return alice.actionError( 'wbsetsitelink', {
+				id: itemId,
+				linksite: siteId,
+				linktitle: redirectTargetTitle,
+				badges: badges,
+				token: await alice.token( 'csrf' ),
+			}, 'POST' );
+		},
+	};
+
+	const wbEditEntityAction = {
+		name: 'wbeditentity',
+		expectActionSuccess: async ( itemId, redirectTargetTitle, badges ) => {
+			if ( typeof badges === 'string' ) {
+				badges = [ badges ];
+			}
+			return alice.action( 'wbeditentity', {
+				id: itemId,
+				data: JSON.stringify( {
+					sitelinks: {
+						[ siteId ]: {
+							site: siteId,
+							title: redirectTargetTitle,
+							badges: badges,
+						},
 					},
-				},
-			} );
-
-		const error = await alice.actionError( 'wbsetsitelink', {
-			id: item,
-			linksite: siteId,
-			linktitle: redirect,
-			badges: goodArticleBadgeId,
-			token: await alice.token( 'csrf' ),
-		}, 'POST' );
-
-		assert.strictEqual( error.code, 'failed-save' );
-		const sitelinkConflict = error.messages.find( ( message ) =>
-			message.name === 'wikibase-validator-sitelink-conflict' );
-		assert.isNotNull( sitelinkConflict );
-		assert.include( sitelinkConflict.parameters[ 1 ], itemLinkedToTarget );
-	} );
-
-	// Redirects are allowed as separate sitelinks
-	// if a redirect badge is added in the same edit
-	it( 'allows redirect sitelink with redirect badge', async () => {
-		const redirectTarget = await createRedirectTarget( 'target' ),
-			redirect = await createRedirect( 'redirect', redirectTarget ),
-			item = await createItem( 'item where we add a sitelink to a redirect' );
-
-		const response = await alice.action( 'wbsetsitelink', {
-			id: item,
-			linksite: siteId,
-			linktitle: redirect,
-			badges: sitelinkToRedirectBadgeId,
-			token: await alice.token( 'csrf' ),
-		}, 'POST' );
-		assert.strictEqual( response.entity.sitelinks[ siteId ].title, redirect );
-	} );
-
-	// Redirect badges can be added to existing sitelinks even if they are redirects
-	it( 'allows adding redirect badge to redirect sitelink', async () => {
-		const redirectTarget = await createRedirectTarget( 'target' ),
-			redirect = await createRedirectTarget( 'redirect' ), // not yet a redirect
-			item = await createItem( 'item with sitelink to redirect', {
-				sitelinks: {
-					[ siteId ]: {
-						site: siteId,
-						title: redirect,
-						badges: [],
+				} ),
+				token: await alice.token( 'csrf' ),
+			}, 'POST' );
+		},
+		expectActionError: async ( itemId, redirectTargetTitle, badges ) => {
+			if ( typeof badges === 'string' ) {
+				badges = [ badges ];
+			}
+			return alice.actionError( 'wbeditentity', {
+				id: itemId,
+				data: JSON.stringify( {
+					sitelinks: {
+						[ siteId ]: {
+							site: siteId,
+							title: redirectTargetTitle,
+							badges: badges,
+						},
 					},
-				},
-			} );
+				} ),
+				token: await alice.token( 'csrf' ),
+			}, 'POST' );
+		},
+	};
 
-		await alice.edit( redirect, {
-			text: `#REDIRECT [[${redirectTarget}]]`,
+	/* eslint-disable-next-line mocha/no-setup-in-describe */
+	[ wbSetSiteLinkAction, wbEditEntityAction ].forEach( ( setSiteLinkEndpoint ) => {
+
+		// Redirects are NOT allowed as separate sitelinks
+		// if NO redirect badge is added in the same edit
+		it( setSiteLinkEndpoint.name + ': disallows redirect sitelink without redirect badge', async () => {
+			const redirectTarget = await createRedirectTarget( 'target' ),
+				redirect = await createRedirect( 'redirect', redirectTarget ),
+				item = await createItem( 'item where we try to add a sitelink to a redirect' ),
+				itemLinkedToTarget = await createItem( 'item linked to redirect target', {
+					sitelinks: {
+						[ siteId ]: {
+							site: siteId,
+							title: redirectTarget,
+							badges: [],
+						},
+					},
+				} );
+
+			const error = await setSiteLinkEndpoint.expectActionError(
+				item,
+				redirect,
+				goodArticleBadgeId,
+			);
+
+			assert.strictEqual( error.code, 'failed-save' );
+			const sitelinkConflict = error.messages.find( ( message ) =>
+				message.name === 'wikibase-validator-sitelink-conflict' );
+			assert.isNotNull( sitelinkConflict );
+			assert.include( sitelinkConflict.parameters[ 1 ], itemLinkedToTarget );
 		} );
 
-		const response = await alice.action( 'wbsetsitelink', {
-			id: item,
-			linksite: siteId,
-			linktitle: redirect,
-			badges: sitelinkToRedirectBadgeId,
-			token: await alice.token( 'csrf' ),
-		}, 'POST' );
-		assert.strictEqual( response.entity.sitelinks[ siteId ].title, redirect );
-		assert.deepEqual( response.entity.sitelinks[ siteId ].badges,
-			[ sitelinkToRedirectBadgeId ] );
-	} );
+		// Redirects are allowed as separate sitelinks
+		// if a redirect badge is added in the same edit
+		it( setSiteLinkEndpoint.name + ': allows redirect sitelink with redirect badge', async () => {
+			const redirectTarget = await createRedirectTarget( 'target' ),
+				redirect = await createRedirect( 'redirect', redirectTarget ),
+				item = await createItem( 'item where we add a sitelink to a redirect' );
 
-	// Redirect badges can NOT be removed from sitelinks
-	// if the redirected target is used as a sitelink for a different Item
-	it( 'disallows removing redirect badge from redirect sitelink', async () => {
-		const redirectTarget = await createRedirectTarget( 'target' ),
-			redirect = await createRedirect( 'redirect', redirectTarget ),
-			item = await createItem( 'item where we try to remove a redirect badge', {
-				sitelinks: {
-					[ siteId ]: {
-						site: siteId,
-						title: redirect,
-						badges: [ sitelinkToRedirectBadgeId ],
+			const response = await setSiteLinkEndpoint.expectActionSuccess(
+				item,
+				redirect,
+				sitelinkToRedirectBadgeId,
+			);
+			assert.strictEqual( response.entity.sitelinks[ siteId ].title, redirect );
+		} );
+
+		// Redirect badges can be added to existing sitelinks even if they are redirects
+		it( setSiteLinkEndpoint.name + ': allows adding redirect badge to redirect sitelink', async () => {
+			const redirectTarget = await createRedirectTarget( 'target' ),
+				redirect = await createRedirectTarget( 'redirect' ), // not yet a redirect
+				item = await createItem( 'item with sitelink to redirect', {
+					sitelinks: {
+						[ siteId ]: {
+							site: siteId,
+							title: redirect,
+							badges: [],
+						},
 					},
-				},
-			} ),
-			itemLinkedToTarget = await createItem( 'item linked to redirect target', {
-				sitelinks: {
-					[ siteId ]: {
-						site: siteId,
-						title: redirectTarget,
-						badges: [],
-					},
-				},
+				} );
+
+			await alice.edit( redirect, {
+				text: `#REDIRECT [[${redirectTarget}]]`,
 			} );
 
-		const error = await alice.actionError( 'wbsetsitelink', {
-			id: item,
-			linksite: siteId,
-			linktitle: redirect,
-			badges: '',
-			token: await alice.token( 'csrf' ),
-		}, 'POST' );
+			const response = await setSiteLinkEndpoint.expectActionSuccess(
+				item,
+				redirect,
+				sitelinkToRedirectBadgeId,
+			);
+			assert.strictEqual( response.entity.sitelinks[ siteId ].title, redirect );
+			assert.deepEqual( response.entity.sitelinks[ siteId ].badges,
+				[ sitelinkToRedirectBadgeId ] );
+		} );
 
-		assert.strictEqual( error.code, 'failed-save' );
-		const sitelinkConflict = error.messages.find( ( message ) =>
-			message.name === 'wikibase-validator-sitelink-conflict' );
-		assert.isNotNull( sitelinkConflict );
-		assert.include( sitelinkConflict.parameters[ 1 ], itemLinkedToTarget );
-	} );
-
-	// A redirect badge can always be switched with another redirect badge in the same edit
-	it( 'allows replacing redirect badge with another', async () => {
-		const redirectTarget = await createRedirectTarget( 'target' ),
-			redirect = await createRedirect( 'redirect', redirectTarget ),
-			item = await createItem( 'item where we replace a redirect badge', {
-				sitelinks: {
-					[ siteId ]: {
-						site: siteId,
-						title: redirect,
-						badges: [ sitelinkToRedirectBadgeId ],
+		// Redirect badges can NOT be removed from sitelinks
+		// if the redirected target is used as a sitelink for a different Item
+		it( setSiteLinkEndpoint.name + ': disallows removing redirect badge from redirect sitelink', async () => {
+			const redirectTarget = await createRedirectTarget( 'target' ),
+				redirect = await createRedirect( 'redirect', redirectTarget ),
+				item = await createItem( 'item where we try to remove a redirect badge', {
+					sitelinks: {
+						[ siteId ]: {
+							site: siteId,
+							title: redirect,
+							badges: [ sitelinkToRedirectBadgeId ],
+						},
 					},
-				},
-			} );
+				} ),
+				itemLinkedToTarget = await createItem( 'item linked to redirect target', {
+					sitelinks: {
+						[ siteId ]: {
+							site: siteId,
+							title: redirectTarget,
+							badges: [],
+						},
+					},
+				} );
 
-		const response = await alice.action( 'wbsetsitelink', {
-			id: item,
-			linksite: siteId,
-			linktitle: redirect,
-			badges: intentionalSitelinkToRedirectBadgeId,
-			token: await alice.token( 'csrf' ),
-		}, 'POST' );
-		assert.strictEqual( response.entity.sitelinks[ siteId ].title, redirect );
-		assert.deepEqual( response.entity.sitelinks[ siteId ].badges,
-			[ intentionalSitelinkToRedirectBadgeId ] );
+			const error = await setSiteLinkEndpoint.expectActionError( item, redirect, [] );
+
+			assert.strictEqual( error.code, 'failed-save' );
+			const sitelinkConflict = error.messages.find( ( message ) =>
+				message.name === 'wikibase-validator-sitelink-conflict' );
+			assert.isNotNull( sitelinkConflict );
+			assert.include( sitelinkConflict.parameters[ 1 ], itemLinkedToTarget );
+		} );
+
+		// A redirect badge can always be switched with another redirect badge in the same edit
+		it( setSiteLinkEndpoint.name + ': allows replacing redirect badge with another', async () => {
+			const redirectTarget = await createRedirectTarget( 'target' ),
+				redirect = await createRedirect( 'redirect', redirectTarget ),
+				item = await createItem( 'item where we replace a redirect badge', {
+					sitelinks: {
+						[ siteId ]: {
+							site: siteId,
+							title: redirect,
+							badges: [ sitelinkToRedirectBadgeId ],
+						},
+					},
+				} );
+
+			const response = await setSiteLinkEndpoint.expectActionSuccess(
+				item,
+				redirect,
+				intentionalSitelinkToRedirectBadgeId,
+			);
+			assert.strictEqual( response.entity.sitelinks[ siteId ].title, redirect );
+			assert.deepEqual( response.entity.sitelinks[ siteId ].badges,
+				[ intentionalSitelinkToRedirectBadgeId ] );
+		} );
 	} );
 
 } );
