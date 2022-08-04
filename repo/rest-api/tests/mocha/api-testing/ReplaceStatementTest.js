@@ -85,7 +85,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 				statementSerialization.mainsnak.datavalue
 			);
 			const { comment } = await entityHelper.getLatestEditMetadata( testItemId );
-			assert.strictEqual( comment, 'Wikibase REST API edit' );
+			assert.empty( comment );
 		} );
 
 		it( 'can replace a statement to an item with edit metadata provided', async () => {

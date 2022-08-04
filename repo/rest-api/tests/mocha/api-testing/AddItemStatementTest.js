@@ -76,7 +76,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			assertValid201Response( response );
 
 			const { comment } = await entityHelper.getLatestEditMetadata( testItemId );
-			assert.strictEqual( comment, 'Wikibase REST API edit' );
+			assert.empty( comment );
 		} );
 		it( 'can add a statement to an item with edit metadata provided', async () => {
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
