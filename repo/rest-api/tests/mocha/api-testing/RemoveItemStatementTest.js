@@ -50,6 +50,7 @@ describe( 'DELETE /entities/items/{item_id}/statements/{statement_id}', () => {
 		} );
 
 		it( "can remove an item's statement with edit metadata provided", async () => {
+			const user = await action.mindy();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
 			const editSummary = 'omg look i removed a statement';
 			const response =
@@ -57,7 +58,7 @@ describe( 'DELETE /entities/items/{item_id}/statements/{statement_id}', () => {
 					.withJsonBodyParam( 'tags', [ tag ] )
 					.withJsonBodyParam( 'bot', true )
 					.withJsonBodyParam( 'comment', editSummary )
-					.withHeader( 'content-type', 'application/json' )
+					.withUser( user )
 					.assertValidRequest()
 					.makeRequest();
 
@@ -68,6 +69,7 @@ describe( 'DELETE /entities/items/{item_id}/statements/{statement_id}', () => {
 			assert.deepEqual( editMetadata.tags, [ tag ] );
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual( editMetadata.comment, editSummary );
+			assert.strictEqual( editMetadata.user, user.username );
 		} );
 	} );
 

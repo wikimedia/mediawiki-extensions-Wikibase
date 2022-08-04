@@ -77,12 +77,14 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			assert.strictEqual( comment, 'Wikibase REST API edit' );
 		} );
 		it( 'can add a statement to an item with edit metadata provided', async () => {
+			const user = await action.mindy();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
 			const editSummary = 'omg look i made an edit';
 			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
 				.withJsonBodyParam( 'tags', [ tag ] )
 				.withJsonBodyParam( 'bot', true )
 				.withJsonBodyParam( 'comment', editSummary )
+				.withUser( user )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -92,6 +94,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			assert.deepEqual( editMetadata.tags, [ tag ] );
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual( editMetadata.comment, editSummary );
+			assert.strictEqual( editMetadata.user, user.username );
 		} );
 	} );
 

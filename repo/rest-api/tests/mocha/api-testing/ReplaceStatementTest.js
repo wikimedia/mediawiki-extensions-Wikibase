@@ -69,6 +69,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 		} );
 
 		it( 'can replace a statement to an item with edit metadata provided', async () => {
+			const user = await action.mindy();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
 			const editSummary = 'omg look i made an edit';
 			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
@@ -78,6 +79,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 			).withJsonBodyParam( 'tags', [ tag ] )
 				.withJsonBodyParam( 'bot', true )
 				.withJsonBodyParam( 'comment', editSummary )
+				.withUser( user )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -91,6 +93,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 			assert.deepEqual( editMetadata.tags, [ tag ] );
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual( editMetadata.comment, editSummary );
+			assert.strictEqual( editMetadata.user, user.username );
 		} );
 
 		it( 'repeating the same request only results in one edit', async () => {
