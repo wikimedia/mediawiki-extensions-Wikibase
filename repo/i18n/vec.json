@@ -4,6 +4,7 @@
 			"Candalua",
 			"Fierodelveneto",
 			"Ladsgroup",
+			"Lucas Werkmeister (WMDE)",
 			"Macofe"
 		]
 	},
@@ -99,7 +100,7 @@
 	"wikibase-shortcopyrightwarning": "Strucando su \"$1\", te aceti le [[$2|condision de uso]], e te aceti irevocabilmente a rilasiar el to contributo in base a la [$3 $4].",
 	"wikibase-copyrighttooltip-acknowledge": "Aceto sti termini par le me future modifiche. No sta mostrarme da novo sto mesajo.",
 	"wikibase-entityselector-more": "piassè",
-	"wikibase-anonymouseditwarning": "Ocio: no te ghè mia fato el login.\nIn te la cronologia de $1 vegnarà registrà el to indiriso IP.",
+	"wikibase-anonymouseditwarning": "Ocio: no te ghè mia fato el login.\nIn te la cronologia de entità vegnarà registrà el to indiriso IP.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Sèvita a modìfegare sensa ver faxesto l'entrada",
 	"wikibase-move-error": "No te pol mia spostar pagine che xe nel namespace dei dati, e no te pol mia spostar pagine su de elo.",
 	"wikibase-validator-label-conflict": "N'altra proprietà ($3) la ga zà l'eticheta \"$1\" asocià col còdese lengua $2",

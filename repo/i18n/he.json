@@ -331,6 +331,7 @@
 	"wikibase-entitypage-title": "דף ישות",
 	"wikibase-entitypage-text": "הדף הזה מפנה לדף הישות במאגר שהוא שייך אליו. נא לספק את מזהה הישות ב־URL, באמצעות תחביר דף־משנה.",
 	"wikibase-entitypage-bad-id": "מזהה בלתי־תקין: $1.",
+	"wikibase-error-entity-not-local": "לא ניתן לערוך ישויות מסוג $1 בוויקי הזה.",
 	"wikibase-error-entity-too-big": "הישות הזאת גדולה מדי. גודל הישות המרבי המותר הוא $1.",
 	"wikibase-parse-error": "ערך פגום.",
 	"wikibase-parse-error-coordinate": "ערך נקודת הציון פגום.",

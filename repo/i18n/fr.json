@@ -380,6 +380,7 @@
 	"wikibase-entitypage-title": "Page d’entité",
 	"wikibase-entitypage-text": "Cette page redirige vers la page d’entité sur le dépôt auquel elle appartient. Veuillez fournir l’identifiant de l’entité dans l’URL en utilisant la syntaxe d’une sous-page.",
 	"wikibase-entitypage-bad-id": "Identifiant non valide : $1.",
+	"wikibase-error-entity-not-local": "Le type d’entité $1 ne peut pas être modifié sur ce wiki.",
 	"wikibase-error-entity-too-big": "L’entité est trop grande. La taille maximale permise pour l’entité est $1.",
 	"wikibase-parse-error": "Valeur mal formée.",
 	"wikibase-parse-error-coordinate": "La valeur de la coordonnée n’a pas le bon format.",

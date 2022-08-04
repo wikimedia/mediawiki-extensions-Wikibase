@@ -348,6 +348,7 @@
 	"wikibase-entitypage-title": "Objektseite",
 	"wikibase-entitypage-text": "Diese Seite leitet auf die Objektseite auf dem Repositorium weiter, zu der sie gehört. Bitte gib mithilfe der Unterseitensyntax die Objektkennung in der URL an.",
 	"wikibase-entitypage-bad-id": "Ungültige Kennung: $1.",
+	"wikibase-error-entity-not-local": "Objekttyp $1 kann in diesem Wiki nicht bearbeitet werden.",
 	"wikibase-error-entity-too-big": "Das Objekt ist zu groß. Die maximal erlaubte Objektgröße ist $1.",
 	"wikibase-parse-error": "Fehlerhafter Wert.",
 	"wikibase-parse-error-coordinate": "Der Koordinatenwert ist ungültig.",
