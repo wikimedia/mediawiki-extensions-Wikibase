@@ -249,6 +249,20 @@
 	"PreconditionFailedError": {
 		"description": "The condition defined by the `If-Match` or `If-Unmodified-Since` header is not fulfilled"
 	},
+	"InvalidMediaType": {
+		"description": "The media type specified by the `Content-Type` header is not allowed on this endpoint",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"example": {
+					"code": "unsupported-content-type",
+					"message": "Unsupported Content-Type: 'application/x-www-form-urlencoded'",
+					"httpCode": 415,
+					"httpReason": "Unsupported Media Type"
+				}
+			}
+		}
+	},
 	"UnexpectedError": {
 		"description": "An unexpected error has occurred",
 		"content": {

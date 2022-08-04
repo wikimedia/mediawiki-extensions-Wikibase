@@ -39,6 +39,7 @@
 			"400": { "$ref": "../../global/responses.json#/InvalidReplacedItemStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemStatementNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	},
@@ -58,6 +59,7 @@
 			"400": { "$ref": "../../global/responses.json#/InvalidItemStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemStatementNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	}
