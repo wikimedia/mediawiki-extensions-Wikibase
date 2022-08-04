@@ -1,8 +1,12 @@
 'use strict';
 
-const { assert, action, utils } = require( 'api-testing' );
+const { assert, action } = require( 'api-testing' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
-const { createSingleItem, getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const {
+	createSingleItem,
+	getLatestEditMetadata,
+	newStatementWithRandomStringValue
+} = require( '../helpers/entityHelper' );
 
 function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
@@ -18,20 +22,6 @@ function assertValid200Response( response, revisionId, lastModified ) {
 	assert.equal( response.status, 200 );
 	assert.equal( response.header[ 'last-modified' ], lastModified );
 	assert.equal( response.header.etag, makeEtag( revisionId ) );
-}
-
-function newStatementWithRandomStringValue( property ) {
-	return {
-		mainsnak: {
-			snaktype: 'value',
-			datavalue: {
-				type: 'string',
-				value: 'random-string-value-' + utils.uniq()
-			},
-			property
-		},
-		type: 'statement'
-	};
 }
 
 describe( 'Conditional requests', () => {

@@ -1,23 +1,12 @@
 'use strict';
 
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
-const { createUniqueStringProperty, createEntity } = require( '../helpers/entityHelper' );
-const { utils } = require( 'api-testing' );
+const {
+	createUniqueStringProperty,
+	createEntity,
+	newStatementWithRandomStringValue
+} = require( '../helpers/entityHelper' );
 const expect = require( 'chai' ).expect;
-
-function newStatementWithRandomStringValue( property ) {
-	return {
-		mainsnak: {
-			snaktype: 'value',
-			datavalue: {
-				type: 'string',
-				value: 'random-string-value-' + utils.uniq()
-			},
-			property
-		},
-		type: 'statement'
-	};
-}
 
 function newReplaceItemStatementRequestBuilder( itemId, statementId, statement ) {
 	return new RequestBuilder()

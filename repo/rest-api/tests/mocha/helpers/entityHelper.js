@@ -99,11 +99,26 @@ async function protectItem( itemId ) {
 	}, 'POST' );
 }
 
+function newStatementSerializationWithRandomStringValue( property ) {
+	return {
+		mainsnak: {
+			snaktype: 'value',
+			datavalue: {
+				type: 'string',
+				value: 'random-string-value-' + utils.uniq()
+			},
+			property
+		},
+		type: 'statement'
+	};
+}
+
 module.exports = {
 	createEntity,
 	createSingleItem,
 	createUniqueStringProperty,
 	createRedirectForItem,
 	getLatestEditMetadata,
-	protectItem
+	protectItem,
+	newStatementWithRandomStringValue: newStatementSerializationWithRandomStringValue
 };

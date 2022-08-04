@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, action, utils, clientFactory } = require( 'api-testing' );
+const { assert, action, clientFactory } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
@@ -11,20 +11,6 @@ function newReplaceStatementRequestBuilder( statementId, statement ) {
 		.withPathParam( 'statement_id', statementId )
 		.withHeader( 'content-type', 'application/json' )
 		.withJsonBodyParam( 'statement', statement );
-}
-
-function newStatementWithRandomStringValue( property ) {
-	return {
-		mainsnak: {
-			snaktype: 'value',
-			datavalue: {
-				type: 'string',
-				value: 'random-string-value-' + utils.uniq()
-			},
-			property
-		},
-		type: 'statement'
-	};
 }
 
 function makeEtag( ...revisionIds ) {
@@ -49,13 +35,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 	before( async () => {
 		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 		const createEntityResponse = await entityHelper.createEntity( 'item', {
-			claims: [ {
-				mainsnak: {
-					snaktype: 'novalue',
-					property: testPropertyId
-				},
-				type: 'statement'
-			} ]
+			claims: [ entityHelper.newStatementWithRandomStringValue( testPropertyId ) ]
 		} );
 		testItemId = createEntityResponse.entity.id;
 		testStatementId = createEntityResponse.entity.claims[ testPropertyId ][ 0 ].id;
@@ -72,7 +52,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 
 	describe( '200 success response ', () => {
 		it( 'can replace a statement to an item with edit metadata omitted', async () => {
-			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 			const response = await newReplaceStatementRequestBuilder(
 				testStatementId,
 				statementSerialization
@@ -91,7 +71,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 		it( 'can replace a statement to an item with edit metadata provided', async () => {
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
 			const editSummary = 'omg look i made an edit';
-			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 			const response = await newReplaceStatementRequestBuilder(
 				testStatementId,
 				statementSerialization
@@ -114,7 +94,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 		} );
 
 		it( 'repeating the same request only results in one edit', async () => {
-			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 			const requestTemplate = newReplaceStatementRequestBuilder(
 				testStatementId,
 				statementSerialization
@@ -135,13 +115,13 @@ describe( 'PUT /statements/{statement_id}', () => {
 			// and then checking that it's still in the middle afterwards.
 			const item = ( await entityHelper.createEntity( 'item', {
 				claims: [
-					newStatementWithRandomStringValue( testPropertyId ),
-					newStatementWithRandomStringValue( testPropertyId ),
-					newStatementWithRandomStringValue( testPropertyId )
+					entityHelper.newStatementWithRandomStringValue( testPropertyId ),
+					entityHelper.newStatementWithRandomStringValue( testPropertyId ),
+					entityHelper.newStatementWithRandomStringValue( testPropertyId )
 				]
 			} ) ).entity;
 			const originalSecondStatement = item.claims[ testPropertyId ][ 1 ];
-			const newSecondStatement = newStatementWithRandomStringValue( testPropertyId );
+			const newSecondStatement = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 
 			await newReplaceStatementRequestBuilder(
 				originalSecondStatement.id,
@@ -175,7 +155,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 
 		it( 'statement ID contains invalid entity ID', async () => {
 			const statementId = testStatementId.replace( 'Q', 'X' );
-			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 			const response = await newReplaceStatementRequestBuilder( statementId, statementSerialization )
 				.assertInvalidRequest()
 				.makeRequest();
@@ -186,7 +166,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 
 		it( 'statement ID is invalid format', async () => {
 			const statementId = 'not-a-valid-format';
-			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 			const response = await newReplaceStatementRequestBuilder( statementId, statementSerialization )
 				.assertInvalidRequest()
 				.makeRequest();
@@ -197,7 +177,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 
 		it( 'statement is not on an item', async () => {
 			const statementId = testStatementId.replace( 'Q', 'P' );
-			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 			const response = await newReplaceStatementRequestBuilder( statementId, statementSerialization )
 				.assertValidRequest()
 				.makeRequest();
@@ -208,7 +188,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 
 		it( 'comment too long', async () => {
 			const comment = 'x'.repeat( 501 );
-			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 			const response = await newReplaceStatementRequestBuilder( testStatementId, statementSerialization )
 				.withJsonBodyParam( 'comment', comment )
 				.assertValidRequest()
@@ -231,7 +211,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 
 		it( 'invalid edit tag', async () => {
 			const invalidEditTag = 'invalid tag';
-			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 			const response = await newReplaceStatementRequestBuilder( testStatementId, statementSerialization )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] )
 				.assertValidRequest()
@@ -242,7 +222,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 		} );
 
 		it( 'invalid edit tag type', async () => {
-			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 			const response = await newReplaceStatementRequestBuilder( testStatementId, statementSerialization )
 				.withJsonBodyParam( 'tags', 'not an array' )
 				.assertInvalidRequest()
@@ -255,7 +235,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 		} );
 
 		it( 'invalid bot flag type', async () => {
-			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 			const response = await newReplaceStatementRequestBuilder( testStatementId, statementSerialization )
 				.withJsonBodyParam( 'bot', 'should be a boolean' )
 				.assertInvalidRequest()
@@ -268,7 +248,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 		} );
 
 		it( 'invalid comment type', async () => {
-			const statementSerialization = newStatementWithRandomStringValue( testPropertyId );
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 			const response = await newReplaceStatementRequestBuilder( testStatementId, statementSerialization )
 				.withJsonBodyParam( 'comment', 1234 )
 				.assertInvalidRequest()
@@ -296,7 +276,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 		it( 'statement not found on item', async () => {
 			const statementId = testItemId + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newReplaceStatementRequestBuilder( statementId )
-				.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( testPropertyId ) )
+				.withJsonBodyParam( 'statement', entityHelper.newStatementWithRandomStringValue( testPropertyId ) )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -309,7 +289,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 		it( 'item not found', async () => {
 			const statementId = 'Q9999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newReplaceStatementRequestBuilder( statementId )
-				.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( testPropertyId ) )
+				.withJsonBodyParam( 'statement', entityHelper.newStatementWithRandomStringValue( testPropertyId ) )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -323,7 +303,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 	describe( '403 error response', () => {
 		it( 'user cannot edit Item', async () => {
 			const createEntityResponse = await entityHelper.createEntity( 'item', {
-				claims: [ newStatementWithRandomStringValue( testPropertyId ) ]
+				claims: [ entityHelper.newStatementWithRandomStringValue( testPropertyId ) ]
 			} );
 			const protectedItemId = createEntityResponse.entity.id;
 			const statementId = Object.values( createEntityResponse.entity.claims )[ 0 ][ 0 ].id;
@@ -332,7 +312,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 
 			const response = await newReplaceStatementRequestBuilder(
 				statementId,
-				newStatementWithRandomStringValue( testPropertyId )
+				entityHelper.newStatementWithRandomStringValue( testPropertyId )
 			)
 				.assertValidRequest()
 				.makeRequest();
@@ -348,7 +328,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 		it( 'unsupported media type', async () => {
 			const contentType = 'multipart/form-data';
 			const response = await newReplaceStatementRequestBuilder(
-				testStatementId, newStatementWithRandomStringValue( testPropertyId )
+				testStatementId, entityHelper.newStatementWithRandomStringValue( testPropertyId )
 			)
 				.withHeader( 'content-type', contentType )
 				.makeRequest();
@@ -364,7 +344,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 			const mindy = await action.mindy();
 			const response = await clientFactory.getRESTClient( 'rest.php/wikibase/v0', mindy ).put(
 				`/statements/${testStatementId}`,
-				{ statement: newStatementWithRandomStringValue( testPropertyId ) },
+				{ statement: entityHelper.newStatementWithRandomStringValue( testPropertyId ) },
 				{ 'content-type': 'application/json' }
 			);
 
@@ -378,7 +358,7 @@ describe( 'PUT /statements/{statement_id}', () => {
 			it( 'responds with an error given an invalid bearer token', async () => {
 				const response = newReplaceStatementRequestBuilder(
 					testItemId,
-					newStatementWithRandomStringValue( testPropertyId )
+					entityHelper.newStatementWithRandomStringValue( testPropertyId )
 				)
 					.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
 					.makeRequest();
