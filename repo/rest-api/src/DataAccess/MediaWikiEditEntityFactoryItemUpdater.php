@@ -17,8 +17,6 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
  */
 class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 
-	public const DEFAULT_COMMENT = 'Wikibase REST API edit';
-
 	private $context;
 	private $editEntityFactory;
 	private $logger;
@@ -34,7 +32,7 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 
 		$status = $editEntity->attemptSave(
 			$item,
-			$editMetadata->getComment() ?? self::DEFAULT_COMMENT,
+			$editMetadata->getComment() ?? '',
 			EDIT_UPDATE | ( $editMetadata->isBot() ? EDIT_FORCE_BOT : 0 ),
 			false,
 			false,

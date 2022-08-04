@@ -80,7 +80,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 		];
 		yield 'default edit comment is used if user provides none' => [
 			new EditMetadata( [], false, null ),
-			MediaWikiEditEntityFactoryItemUpdater::DEFAULT_COMMENT
+			''
 		];
 	}
 

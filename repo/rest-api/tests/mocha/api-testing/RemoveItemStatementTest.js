@@ -48,6 +48,8 @@ describe( 'DELETE /entities/items/{item_id}/statements/{statement_id}', () => {
 					.makeRequest();
 
 			assertValid200Response( response );
+			const { comment } = await entityHelper.getLatestEditMetadata( testItemId );
+			assert.empty( comment );
 			await verifyStatementDeleted( testStatement.id );
 		} );
 
