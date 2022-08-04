@@ -4,6 +4,7 @@ const { assert, action, clientFactory } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
+const { newStatementWithRandomStringValue } = require( '../helpers/entityHelper' );
 
 const basePath = 'rest.php/wikibase/v0';
 
@@ -123,6 +124,28 @@ describe( 'DELETE /entities/items/{item_id}/statements/{statement_id}', () => {
 			assert.header( response, 'Content-Language', 'en' );
 			assert.equal( response.body.code, 'invalid-statement-id' );
 			assert.include( response.body.message, statementId );
+		} );
+	} );
+
+	describe( '403 error response', () => {
+		it( 'user cannot edit Item', async () => {
+			const propertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const createEntityResponse = await entityHelper.createEntity( 'item', {
+				claims: [ newStatementWithRandomStringValue( propertyId ) ]
+			} );
+			const protectedItemId = createEntityResponse.entity.id;
+			const statementId = Object.values( createEntityResponse.entity.claims )[ 0 ][ 0 ].id;
+
+			await entityHelper.protectItem( protectedItemId );
+
+			const response = await newRemoveItemStatementRequestBuilder( protectedItemId, statementId )
+				.assertValidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 403 );
+			assert.strictEqual( response.body.httpCode, 403 );
+			assert.strictEqual( response.body.httpReason, 'Forbidden' );
+			assert.strictEqual( response.body.error, 'rest-write-denied' );
 		} );
 	} );
 

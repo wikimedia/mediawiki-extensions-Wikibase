@@ -6,9 +6,11 @@ use Exception;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
 /**
@@ -21,19 +23,22 @@ class RemoveItemStatement {
 	private $statementIdParser;
 	private $itemRetriever;
 	private $itemUpdater;
+	private $permissionChecker;
 
 	public function __construct(
 		RemoveItemStatementValidator $validator,
 		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
 		StatementGuidParser $statementGuidParser,
 		ItemRetriever $itemRetriever,
-		ItemUpdater $itemUpdater
+		ItemUpdater $itemUpdater,
+		PermissionChecker $permissionChecker
 	) {
 		$this->validator = $validator;
 		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
 		$this->statementIdParser = $statementGuidParser;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -63,6 +68,14 @@ class RemoveItemStatement {
 			!$itemId->equals( $statementId->getEntityId() )
 		) {
 			return $this->newStatementNotFoundResponse( $request->getStatementId() );
+		}
+
+		$user = $request->hasUser() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
+		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
+			return new RemoveItemStatementErrorResponse(
+				ErrorResponse::PERMISSION_DENIED,
+				"You have no permission to edit this item."
+			);
 		}
 
 		$item = $this->itemRetriever->getItem( $itemId );
