@@ -465,7 +465,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		}
 
 		// -- do the request --------------------------------------------------
-		list( $result, , ) = $this->doApiRequestWithToken( $params );
+		[ $result, , ] = $this->doApiRequestWithToken( $params );
 
 		//@todo all of the below is very similar to the code in ModifyTermTestCase
 		//This might be able to go in the same place
@@ -605,7 +605,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			);
 		}
 
-		list( $result, ) = $this->doApiRequestWithToken( $params );
+		[ $result, ] = $this->doApiRequestWithToken( $params );
 
 		$warning = $result['warnings']['wbsetsitelink']['warnings'];
 		$this->assertStringContainsString( 'Unrecognized value for parameter "badges"', $warning );
@@ -621,7 +621,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
-		list( $result, ) = $this->doApiRequestWithToken(
+		[ $result, ] = $this->doApiRequestWithToken(
 			$this->getSetSiteLinkRequestParams( $newItem->getId() ),
 			null,
 			$userWithAllPermissions
@@ -673,7 +673,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			'*' => [ 'read' => true, 'writeapi' => true ]
 		] );
 
-		list( $result, ) = $this->doApiRequestWithToken(
+		[ $result, ] = $this->doApiRequestWithToken(
 			$this->getCreateItemAndSetSiteLinkRequestParams(),
 			null,
 			$userWithAllPermissions

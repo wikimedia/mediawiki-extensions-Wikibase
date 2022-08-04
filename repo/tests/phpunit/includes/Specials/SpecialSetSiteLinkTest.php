@@ -148,7 +148,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	public function testExecuteEmptyForm() {
 		$matchers = self::$matchers;
 		// Execute with no subpage value
-		list( $output, ) = $this->executeSpecialPage( '', null, 'de' );
+		[ $output, ] = $this->executeSpecialPage( '', null, 'de' );
 
 		$this->assertHtmlContainsTagsMatching( $output, $matchers );
 	}
@@ -157,7 +157,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$matchers = self::$matchers;
 		// Execute with one subpage value
 		// Note: use language fallback de-ch => de
-		list( $output, ) = $this->executeSpecialPage( self::$itemId, null, 'de-ch' );
+		[ $output, ] = $this->executeSpecialPage( self::$itemId, null, 'de-ch' );
 
 		$matchers['id'] = both( tagMatchingOutline( '<div id="wb-modifyentity-id"/>' ) )->andAlso(
 			havingChild( both( tagMatchingOutline( '<input name="id"/>' ) )->andAlso(
@@ -172,7 +172,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$matchers = self::$matchers;
 		// Execute with two subpage values
 		// Note: use language fallback de-ch => de
-		list( $output, ) = $this->executeSpecialPage( self::$itemId . '/dewiki', null, 'de-ch' );
+		[ $output, ] = $this->executeSpecialPage( self::$itemId . '/dewiki', null, 'de-ch' );
 
 		$itemId = self::$itemId;
 		$matchers['id'] = tagMatchingOutline(
@@ -198,7 +198,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$matchers = self::$matchers;
 		// Execute with two subpage values
 		// Note: language fallback will fail, no label for en
-		list( $output, ) = $this->executeSpecialPage( self::$itemId . '/dewiki', null, 'en' );
+		[ $output, ] = $this->executeSpecialPage( self::$itemId . '/dewiki', null, 'en' );
 
 		// already covered by testExecuteTwoValuesPreset()
 		unset( $matchers['id'] );
@@ -221,7 +221,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	}
 
 	public function testExecuteRedirect() {
-		list( $output, ) = $this->executeSpecialPage( self::$redirectId . '/dewiki', null, 'qqx' );
+		[ $output, ] = $this->executeSpecialPage( self::$redirectId . '/dewiki', null, 'qqx' );
 
 		$this->assertRegExp(
 			'@<p class="error">\(wikibase-wikibaserepopage-unresolved-redirect: .*?\)</p>@',
@@ -237,7 +237,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			'page' => '',
 		], true );
 
-		list( $output, ) = $this->executeSpecialPage( '', $request );
+		[ $output, ] = $this->executeSpecialPage( '', $request );
 
 		$this->assertThatHamcrest(
 			$output,
@@ -263,7 +263,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		)->willReturnArgument( 1 );
 		$this->setService( 'WikibaseRepo.SiteLinkPageNormalizer', $pageNormalizer );
 
-		list( , $response ) = $this->executeSpecialPage( '', $request );
+		[ , $response ] = $this->executeSpecialPage( '', $request );
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
 
 		$this->assertStringContainsString( self::$itemId, $redirect, "Should redirect to item page" );
@@ -291,7 +291,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			'remove' => true,
 		], true );
 
-		list( , $response ) = $this->executeSpecialPage( '', $request );
+		[ , $response ] = $this->executeSpecialPage( '', $request );
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
 
 		$this->assertStringContainsString( self::$itemId, $redirect, "Should redirect to item page" );
