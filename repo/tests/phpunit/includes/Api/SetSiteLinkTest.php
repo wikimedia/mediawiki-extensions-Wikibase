@@ -48,7 +48,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 	public function provideData() {
 		return [
-			[ //0 set new link using id
+			'set new link using id' => [
 				'p' => [
 					'handle' => 'Leipzig',
 					'linksite' => 'dewiki',
@@ -62,7 +62,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					] ]
 				]
 			],
-			[ //1 set new link using sitelink
+			'set new link using sitelink' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
@@ -77,7 +77,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'indb' => 5
 				]
 			],
-			[ //2 modify link using id
+			'modify link using id' => [
 				'p' => [
 					'handle' => 'Leipzig',
 					'linksite' => 'dewiki',
@@ -91,7 +91,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					] ]
 				]
 			],
-			[ //3 modify link using sitelink
+			'modify link using sitelink' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
@@ -106,7 +106,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'indb' => 5
 				]
 			],
-			[ //4 remove link using id (with a summary)
+			'remove link using id (with a summary)' => [
 				'p' => [
 					'handle' => 'Leipzig',
 					'linksite' => 'dewiki',
@@ -114,7 +114,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'summary' => 'WooSummary'
 				],
 				'e' => [ 'value' => [] ] ],
-			[ //5 remove link using sitelink
+			'remove link using sitelink' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
@@ -122,7 +122,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'linktitle' => ''
 				],
 				'e' => [ 'value' => [], 'indb' => 4 ] ],
-			[ //6 add badges to existing sitelink
+			'add badges to existing sitelink' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
@@ -138,7 +138,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'indb' => 4
 				]
 			],
-			[ //7 add duplicate badges to existing sitelink
+			'add duplicate badges to existing sitelink' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
@@ -154,7 +154,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'indb' => 4
 				]
 			],
-			[ //8 no change
+			'no change' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
@@ -170,7 +170,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'indb' => 4
 				]
 			],
-			[ //9 change only title, badges should be intact
+			'change only title, badges should be intact' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
@@ -185,7 +185,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'indb' => 4
 				]
 			],
-			[ //10 change both title and badges
+			'change both title and badges' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin Two',
@@ -201,7 +201,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'indb' => 4
 				]
 			],
-			[ //11 change only badges, title intact
+			'change only badges, title intact' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
@@ -216,7 +216,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'indb' => 4
 				]
 			],
-			[ //12 set new link using id (without badges)
+			'set new link using id (without badges)' => [
 				'p' => [
 					'handle' => 'Berlin',
 					'linksite' => 'svwiki',
@@ -230,7 +230,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'indb' => 5
 				]
 			],
-			[ //13 delete link by not providing neither title nor badges
+			'delete link by not providing neither title nor badges' => [
 				'p' => [ 'handle' => 'Berlin', 'linksite' => 'svwiki' ],
 				'e' => [ 'value' => [], 'indb' => 4 ]
 			],
@@ -239,7 +239,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 	public function provideExceptionData() {
 		return [
-			[ //0 badtoken
+			'missing token' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
@@ -256,7 +256,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				] ],
 				'token' => false
 			],
-			[ //1
+			'invalid token' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
@@ -271,20 +271,20 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				] ],
 				'token' => false
 			],
-			[ //2 testSetSiteLinkWithNoId
+			'Set SiteLink With No Id' => [
 				'p' => [
 					'linksite' => 'enwiki',
 					'linktitle' => 'testSetSiteLinkWithNoId'
 				],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class ] ] ],
-			[ //3 testSetSiteLinkWithBadId
+			'Set SiteLink With Bad Id' => [
 				'p' => [
 					'id' => 123456789,
 					'linksite' => 'enwiki',
 					'linktitle' => 'testSetSiteLinkWithNoId'
 				],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class ] ] ],
-			[ //4 testSetSiteLinkWithBadSite
+			'Set SiteLink With Bad Site' => [
 				'p' => [
 					'site' => 'dewiktionary',
 					'title' => 'Berlin',
@@ -292,7 +292,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'linktitle' => 'Berlin'
 				],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class ] ] ],
-			[ //5 testSetSiteLinkWithBadTitle
+			'Set SiteLink With Bad Title' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'BadTitle_de',
@@ -300,7 +300,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'linktitle' => 'BadTitle_en'
 				],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class ] ] ],
-			[ //6 testSetSiteLinkWithBadTargetSite
+			'Set SiteLink With Bad Target Site' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
@@ -308,7 +308,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'linktitle' => 'Berlin'
 				],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class ] ] ],
-			[ //7 badge item does not exist
+			'badge item does not exist' => [
 				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
@@ -321,7 +321,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'code' => 'no-such-entity'
 				] ]
 			],
-			[ //8 no sitelink - cannot change badges
+			'no sitelink - cannot change badges' => [
 				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
@@ -339,7 +339,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 	public function provideBadBadgeData() {
 		return [
-			[ //0 bad badge id
+			'bad badge id' => [
 				[ 'site' => 'enwiki',
 					'title' => 'Berlin',
 					'linksite' => 'enwiki',
@@ -347,7 +347,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'badges' => 'abc|{faItem}'
 				],
 			],
-			[ //1 badge id is not an item id
+			'badge id is not an item id' => [
 				[ 'site' => 'enwiki',
 					'title' => 'Berlin',
 					'linksite' => 'enwiki',
@@ -355,7 +355,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'badges' => 'P2|{faItem}'
 				],
 			],
-			[ //2 badge id is not specified
+			'badge id is not specified' => [
 				[ 'site' => 'enwiki',
 					'title' => 'Berlin',
 					'linksite' => 'enwiki',
