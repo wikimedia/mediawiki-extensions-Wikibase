@@ -5,7 +5,8 @@ const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const {
 	createEntity,
 	createUniqueStringProperty,
-	newStatementWithRandomStringValue
+	newStatementWithRandomStringValue,
+	protectItem
 } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 
@@ -24,7 +25,7 @@ describe( 'Auth', () => {
 		statementId = createEntityResponse.entity.claims[ stringPropertyId ][ 0 ].id;
 	} );
 
-	[ // eslint-disable-line mocha/no-setup-in-describe
+	const editRequests = [
 		{
 			route: 'POST /entities/items/{item_id}/statements',
 			newRequestBuilder: () => new RequestBuilder()
@@ -32,31 +33,6 @@ describe( 'Auth', () => {
 				.withPathParam( 'item_id', itemId )
 				.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( stringPropertyId ) ),
 			expectedStatusCode: 201
-		},
-		{
-			route: 'GET /entities/items/{id}/statements',
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'GET', '/entities/items/{item_id}/statements' )
-				.withPathParam( 'item_id', itemId )
-		},
-		{
-			route: 'GET /entities/items/{item_id}/statements/{statement_id}',
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'GET', '/entities/items/{item_id}/statements/{statement_id}' )
-				.withPathParam( 'item_id', itemId )
-				.withPathParam( 'statement_id', statementId )
-		},
-		{
-			route: 'GET /entities/items/{id}',
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'GET', '/entities/items/{item_id}' )
-				.withPathParam( 'item_id', itemId )
-		},
-		{
-			route: 'GET /statements/{statement_id}',
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'GET', '/statements/{statement_id}' )
-				.withPathParam( 'statement_id', statementId )
 		},
 		{
 			route: 'PUT /entities/items/{item_id}/statements/{statement_id}',
@@ -88,6 +64,35 @@ describe( 'Auth', () => {
 				.withPathParam( 'statement_id', statementId ),
 			isDestructive: true
 		}
+	];
+
+	[ // eslint-disable-line mocha/no-setup-in-describe
+		{
+			route: 'GET /entities/items/{id}/statements',
+			newRequestBuilder: () => new RequestBuilder()
+				.withRoute( 'GET', '/entities/items/{item_id}/statements' )
+				.withPathParam( 'item_id', itemId )
+		},
+		{
+			route: 'GET /entities/items/{item_id}/statements/{statement_id}',
+			newRequestBuilder: () => new RequestBuilder()
+				.withRoute( 'GET', '/entities/items/{item_id}/statements/{statement_id}' )
+				.withPathParam( 'item_id', itemId )
+				.withPathParam( 'statement_id', statementId )
+		},
+		{
+			route: 'GET /entities/items/{id}',
+			newRequestBuilder: () => new RequestBuilder()
+				.withRoute( 'GET', '/entities/items/{item_id}' )
+				.withPathParam( 'item_id', itemId )
+		},
+		{
+			route: 'GET /statements/{statement_id}',
+			newRequestBuilder: () => new RequestBuilder()
+				.withRoute( 'GET', '/statements/{statement_id}' )
+				.withPathParam( 'statement_id', statementId )
+		},
+		...editRequests
 	].forEach( ( { route, newRequestBuilder, expectedStatusCode = 200, isDestructive } ) => {
 		describe( `Authentication - ${route}`, () => {
 
@@ -121,6 +126,24 @@ describe( 'Auth', () => {
 
 					assert.strictEqual( response.status, 403 );
 				} );
+			} );
+		} );
+	} );
+
+	describe( 'Authorization', () => {
+		before( async () => {
+			await protectItem( itemId );
+		} );
+
+		// eslint-disable-next-line mocha/no-setup-in-describe
+		editRequests.forEach( ( { route, newRequestBuilder } ) => {
+			it( `Permission denied for protected item - ${route}`, async () => {
+				const response = await newRequestBuilder().makeRequest();
+
+				assert.strictEqual( response.status, 403 );
+				assert.strictEqual( response.body.httpCode, 403 );
+				assert.strictEqual( response.body.httpReason, 'Forbidden' );
+				assert.strictEqual( response.body.error, 'rest-write-denied' );
 			} );
 		} );
 	} );

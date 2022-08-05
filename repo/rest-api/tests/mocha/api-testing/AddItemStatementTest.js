@@ -173,25 +173,6 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 		} );
 	} );
 
-	describe( '403 error response', () => {
-		it( 'user cannot edit Item', async () => {
-			const createEntityResponse = await entityHelper.createEntity( 'item', {} );
-			const protectedItemId = createEntityResponse.entity.id;
-
-			await entityHelper.protectItem( protectedItemId );
-
-			const response =
-				await newAddItemStatementRequestBuilder( protectedItemId, testStatement )
-					.assertValidRequest()
-					.makeRequest();
-
-			assert.strictEqual( response.status, 403 );
-			assert.strictEqual( response.body.httpCode, 403 );
-			assert.strictEqual( response.body.httpReason, 'Forbidden' );
-			assert.strictEqual( response.body.error, 'rest-write-denied' );
-		} );
-	} );
-
 	describe( '404 error response', () => {
 		it( 'item not found', async () => {
 			const itemId = 'Q999999';

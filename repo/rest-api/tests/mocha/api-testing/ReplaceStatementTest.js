@@ -301,30 +301,6 @@ describe( 'PUT /statements/{statement_id}', () => {
 		} );
 	} );
 
-	describe( '403 error response', () => {
-		it( 'user cannot edit Item', async () => {
-			const createEntityResponse = await entityHelper.createEntity( 'item', {
-				claims: [ entityHelper.newStatementWithRandomStringValue( testPropertyId ) ]
-			} );
-			const protectedItemId = createEntityResponse.entity.id;
-			const statementId = Object.values( createEntityResponse.entity.claims )[ 0 ][ 0 ].id;
-
-			await entityHelper.protectItem( protectedItemId );
-
-			const response = await newReplaceStatementRequestBuilder(
-				statementId,
-				entityHelper.newStatementWithRandomStringValue( testPropertyId )
-			)
-				.assertValidRequest()
-				.makeRequest();
-
-			assert.strictEqual( response.status, 403 );
-			assert.strictEqual( response.body.httpCode, 403 );
-			assert.strictEqual( response.body.httpReason, 'Forbidden' );
-			assert.strictEqual( response.body.error, 'rest-write-denied' );
-		} );
-	} );
-
 	describe( '415 error response', () => {
 		it( 'unsupported media type', async () => {
 			const contentType = 'multipart/form-data';
