@@ -1,9 +1,8 @@
 'use strict';
 
-const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 const { createEntity, createRedirectForItem, getLatestEditMetadata } = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
-const { action, assert, utils } = require( 'api-testing' );
+const { assert, utils } = require( 'api-testing' );
 
 function newGetItemRequestBuilder( itemId ) {
 	return new RequestBuilder()
@@ -19,7 +18,7 @@ const germanLabel = 'a-German-label-' + utils.uniq();
 const englishLabel = 'an-English-label-' + utils.uniq();
 const englishDescription = 'an-English-description-' + utils.uniq();
 
-describe( 'GET /entities/items/{id} ', () => {
+describe( 'GET /entities/items/{id}', () => {
 	let testItemId;
 	let testModified;
 	let testRevisionId;
@@ -129,34 +128,6 @@ describe( 'GET /entities/items/{id} ', () => {
 		assert.header( response, 'Content-Language', 'en' );
 		assert.equal( response.body.code, 'item-not-found' );
 		assert.include( response.body.message, itemId );
-	} );
-
-	describe( 'authentication', () => {
-
-		it( 'has an X-Authenticated-User header with the logged in user', async () => {
-			const mindy = await action.mindy();
-
-			const response = await newGetItemRequestBuilder( testItemId )
-				.withUser( mindy )
-				.makeRequest();
-
-			assertValid200Response( response );
-			assert.header( response, 'X-Authenticated-User', mindy.username );
-		} );
-
-		describe.skip( 'OAuth', () => { // Skipping due to apache auth header issues. See T305709
-			before( requireExtensions( [ 'OAuth' ] ) );
-
-			it( 'responds with an error given an invalid bearer token', async () => {
-				const response = await newGetItemRequestBuilder( testItemId )
-					.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
-					.makeRequest();
-
-				assert.equal( response.status, 403 );
-			} );
-
-		} );
-
 	} );
 
 	describe( 'redirects', () => {

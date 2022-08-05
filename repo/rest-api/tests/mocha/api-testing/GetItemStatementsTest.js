@@ -1,13 +1,12 @@
 'use strict';
 
-const { action, assert } = require( 'api-testing' );
+const { assert } = require( 'api-testing' );
 const {
 	createEntity,
 	createSingleItem,
 	createRedirectForItem,
 	getLatestEditMetadata
 } = require( '../helpers/entityHelper' );
-const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 
 function newGetItemStatementsRequestBuilder( itemId ) {
@@ -101,34 +100,6 @@ describe( 'GET /entities/items/{id}/statements', () => {
 			new URL( response.headers.location ).pathname
 				.endsWith( `rest.php/wikibase/v0/entities/items/${redirectTarget}/statements` )
 		);
-	} );
-
-	describe( 'authentication', () => {
-
-		it( 'has an X-Authenticated-User header with the logged in user', async () => {
-			const mindy = await action.mindy();
-
-			const response = await newGetItemStatementsRequestBuilder( testItemId )
-				.withUser( mindy )
-				.makeRequest();
-
-			assert.equal( response.status, 200 );
-			assert.header( response, 'X-Authenticated-User', mindy.username );
-		} );
-
-		describe.skip( 'OAuth', () => { // Skipping due to apache auth header issues. See T305709
-			before( requireExtensions( [ 'OAuth' ] ) );
-
-			it( 'responds with an error given an invalid bearer token', async () => {
-				const response = await newGetItemStatementsRequestBuilder( testItemId )
-					.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
-					.makeRequest();
-
-				assert.equal( response.status, 403 );
-			} );
-
-		} );
-
 	} );
 
 } );

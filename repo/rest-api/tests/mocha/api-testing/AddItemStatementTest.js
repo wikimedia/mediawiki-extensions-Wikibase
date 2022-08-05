@@ -3,7 +3,6 @@
 const { assert, action, utils } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
-const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 
 function newAddItemStatementRequestBuilder( itemId, statement ) {
 	return new RequestBuilder()
@@ -234,33 +233,5 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			assert.include( response.body.message, redirectTarget );
 			assert.strictEqual( response.body.code, 'redirected-item' );
 		} );
-	} );
-
-	describe( 'authentication', () => {
-
-		it( 'has an X-Authenticated-User header with the logged in user', async () => {
-			const mindy = await action.mindy();
-
-			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
-				.withUser( mindy )
-				.makeRequest();
-
-			assertValid201Response( response );
-			assert.header( response, 'X-Authenticated-User', mindy.username );
-		} );
-
-		describe.skip( 'OAuth', () => { // Skipping due to apache auth header issues. See T305709
-			before( requireExtensions( [ 'OAuth' ] ) );
-
-			it( 'responds with an error given an invalid bearer token', async () => {
-				const response = newAddItemStatementRequestBuilder( testItemId, testStatement )
-					.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
-					.makeRequest();
-
-				assert.strictEqual( response.status, 403 );
-			} );
-
-		} );
-
 	} );
 } );

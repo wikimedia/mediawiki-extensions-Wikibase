@@ -3,14 +3,12 @@
 const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
-const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 
 function newReplaceItemStatementRequestBuilder( itemId, statementId, statement ) {
 	return new RequestBuilder()
 		.withRoute( 'PUT', '/entities/items/{item_id}/statements/{statement_id}' )
 		.withPathParam( 'item_id', itemId )
 		.withPathParam( 'statement_id', statementId )
-		.withHeader( 'content-type', 'application/json' )
 		.withJsonBodyParam( 'statement', statement );
 }
 
@@ -376,39 +374,4 @@ describe( 'PUT /entities/items/{item_id}/statements/{statement_id}', () => {
 			assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
 		} );
 	} );
-
-	describe( 'authentication', () => {
-
-		it( 'has an X-Authenticated-User header with the logged in user', async () => {
-			const mindy = await action.mindy();
-
-			const response = await newReplaceItemStatementRequestBuilder(
-				testItemId,
-				testStatementId,
-				entityHelper.newStatementWithRandomStringValue( testPropertyId )
-			).withUser( mindy ).makeRequest();
-
-			assertValid200Response( response );
-			assert.header( response, 'X-Authenticated-User', mindy.username );
-		} );
-
-		describe.skip( 'OAuth', () => { // Skipping due to apache auth header issues. See T305709
-			before( requireExtensions( [ 'OAuth' ] ) );
-
-			it( 'responds with an error given an invalid bearer token', async () => {
-				const response = newReplaceItemStatementRequestBuilder(
-					testItemId,
-					testStatementId,
-					entityHelper.newStatementWithRandomStringValue( testPropertyId )
-				)
-					.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
-					.makeRequest();
-
-				assert.strictEqual( response.status, 403 );
-			} );
-
-		} );
-
-	} );
-
 } );
