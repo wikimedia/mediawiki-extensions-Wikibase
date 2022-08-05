@@ -319,6 +319,7 @@
 	"special-entitypage": "Pagina dell'entità",
 	"wikibase-entitypage-title": "Pagina dell'entità",
 	"wikibase-entitypage-bad-id": "ID non valido: $1.",
+	"wikibase-error-entity-not-local": "Il tipo di entità $1 non può essere modificato su questo wiki.",
 	"wikibase-error-entity-too-big": "L'entità è troppo grande. La dimensione massima consentita dell'entità è $1.",
 	"wikibase-parse-error": "Valore malformato.",
 	"wikibase-parse-error-coordinate": "Il valore della coordinata non è corretto.",

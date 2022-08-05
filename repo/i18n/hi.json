@@ -334,6 +334,7 @@
 	"wikibase-entitypage-title": "सत्ते का पृष्ठ",
 	"wikibase-entitypage-text": "यह पृष्ठ उस रिपॉज़िटरी में सत्ते के पृष्ठ पर अनुप्रेषित होता है जिसमें यह मौजूद है। कृपया उपपृष्ठ सिनटैक्स की मदद से URL में सत्ते का एक ID प्रदान करें।",
 	"wikibase-entitypage-bad-id": "अमान्य ID: $1",
+	"wikibase-error-entity-not-local": "सत्ता प्रकार $1 को इस विकि पर सम्पादित नहीं किया जा सकता।",
 	"wikibase-error-entity-too-big": "सत्ता कुछ ज़्यादा ही बड़ा है। सत्ते का अधिकतम आकार $1 हो सकता है।",
 	"wikibase-parse-error": "विकृत वैल्यू।",
 	"wikibase-parse-error-coordinate": "नियामक का वैल्यू विकृत है।",
