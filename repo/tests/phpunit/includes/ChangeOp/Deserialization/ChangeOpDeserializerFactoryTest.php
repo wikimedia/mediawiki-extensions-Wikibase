@@ -75,6 +75,7 @@ class ChangeOpDeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
 			new SiteLinkPageNormalizer( [] ),
 			new SiteLinkTargetProvider( MediaWikiServices::getInstance()->getSiteLookup(), [] ),
 			WikibaseRepo::getEntityIdParser(),
+			WikibaseRepo::getEntityLookup(),
 			WikibaseRepo::getStringNormalizer(),
 			[]
 		);

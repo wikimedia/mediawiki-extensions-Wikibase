@@ -4,6 +4,7 @@ namespace Wikibase\Repo\ChangeOp\Deserialization;
 
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
@@ -63,6 +64,11 @@ class ChangeOpDeserializerFactory {
 	private $entityIdParser;
 
 	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
 	 * @var StringNormalizer
 	 */
 	private $stringNormalizer;
@@ -82,6 +88,7 @@ class ChangeOpDeserializerFactory {
 	 * @param SiteLinkPageNormalizer $siteLinkPageNormalizer
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntityLookup $entityLookup
 	 * @param StringNormalizer $stringNormalizer
 	 * @param string[] $siteLinkGroups
 	 */
@@ -95,6 +102,7 @@ class ChangeOpDeserializerFactory {
 		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		EntityIdParser $entityIdParser,
+		EntityLookup $entityLookup,
 		StringNormalizer $stringNormalizer,
 		array $siteLinkGroups
 	) {
@@ -107,6 +115,7 @@ class ChangeOpDeserializerFactory {
 		$this->siteLinkPageNormalizer = $siteLinkPageNormalizer;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 		$this->entityIdParser = $entityIdParser;
+		$this->entityLookup = $entityLookup;
 		$this->stringNormalizer = $stringNormalizer;
 		$this->siteLinkGroups = $siteLinkGroups;
 	}
@@ -158,6 +167,7 @@ class ChangeOpDeserializerFactory {
 			$this->siteLinkPageNormalizer,
 			$this->siteLinkTargetProvider,
 			$this->entityIdParser,
+			$this->entityLookup,
 			$this->stringNormalizer,
 			$this->siteLinkGroups
 		);

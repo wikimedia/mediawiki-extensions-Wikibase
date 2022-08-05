@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -184,21 +185,20 @@ class SetSiteLink extends ModifyEntity {
 				);
 			}
 
-			if ( isset( $preparedParameters['linktitle'] ) ) {
-				$page = $this->siteLinkPageNormalizer->normalize(
-					$site,
-					$this->stringNormalizer->trimWhitespace( $preparedParameters['linktitle'] ),
-					$preparedParameters['badges'] ?? []
-				);
+			$effectiveLinkTitle = isset( $preparedParameters['linktitle'] )
+				? $this->stringNormalizer->trimWhitespace( $preparedParameters['linktitle'] )
+				: $this->getLinkTitleFromExistingSiteLink( $entity, $linksite );
+			$page = $this->siteLinkPageNormalizer->normalize(
+				$site,
+				$effectiveLinkTitle,
+				$preparedParameters['badges'] ?? []
+			);
 
-				if ( $page === false ) {
-					$this->errorReporter->dieWithError(
-						[ 'wikibase-api-no-external-page', $linksite, $preparedParameters['linktitle'] ],
-						'no-external-page'
-					);
-				}
-			} else {
-				$page = null;
+			if ( $page === false ) {
+				$this->errorReporter->dieWithError(
+					[ 'wikibase-api-no-external-page', $linksite, $effectiveLinkTitle ],
+					'no-external-page'
+				);
 			}
 
 			$badges = ( isset( $preparedParameters['badges'] ) )
@@ -207,6 +207,22 @@ class SetSiteLink extends ModifyEntity {
 
 			return $this->siteLinkChangeOpFactory->newSetSiteLinkOp( $linksite, $page, $badges );
 		}
+	}
+
+	private function getLinkTitleFromExistingSiteLink( EntityDocument $entity, string $linksite ) {
+		if ( !( $entity instanceof Item ) ) {
+			$this->errorReporter->dieWithError( "The given entity is not an item", "not-item" );
+		}
+		$item = $entity;
+		try {
+			$siteLink = $item->getSiteLinkList()->getBySiteId( $linksite );
+		} catch ( OutOfBoundsException $ex ) {
+			$this->errorReporter->dieWithError(
+				[ 'wikibase-validator-no-such-sitelink', $linksite ],
+				'no-such-sitelink'
+			);
+		}
+		return $siteLink->getPageName();
 	}
 
 	private function parseSiteLinkBadges( array $badges ): array {

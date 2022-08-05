@@ -8,9 +8,11 @@ use Site;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\StringNormalizer;
+use Wikibase\Repo\ChangeOp\ChangeOpSiteLink;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinksChangeOpDeserializer;
@@ -41,13 +43,21 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		return new SiteLinkTargetProvider( new HashSiteStore( [ $wiki ] ) );
 	}
 
-	private function newSiteLinksChangeOpDeserializer() {
+	private function newSiteLinksChangeOpDeserializer( Item $item = null ): SiteLinksChangeOpDeserializer {
+		$entityLookupMock = $this->createStub( EntityLookup::class );
+		if ( $item !== null ) {
+			$entityLookupMock->method( 'getEntity' )
+				->with( $this->equalTo( $item->getId() ) )
+				->willReturn( $item );
+		}
+
 		return new SiteLinksChangeOpDeserializer(
 			$this->createMock( SiteLinkBadgeChangeOpSerializationValidator::class ),
 			new SiteLinkChangeOpFactory( [ self::BADGE_ITEM_ID ] ),
 			new SiteLinkPageNormalizer( [] ),
 			$this->newSiteLinkTargetProvider(),
 			new ItemIdParser(),
+			$entityLookupMock,
 			new StringNormalizer(),
 			[ 'testwikis' ]
 		);
@@ -124,6 +134,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			new SiteLinkPageNormalizer( [] ),
 			$this->newSiteLinkTargetProvider(),
 			new ItemIdParser(),
+			$this->createMock( EntityLookup::class ),
 			new StringNormalizer(),
 			[ 'testwikis' ]
 		);
@@ -155,6 +166,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			new SiteLinkPageNormalizer( [] ),
 			new SiteLinkTargetProvider( new HashSiteStore( [ $site ] ) ),
 			new ItemIdParser(),
+			$this->createMock( EntityLookup::class ),
 			new StringNormalizer(),
 			[ 'testwikis' ]
 		);
@@ -179,7 +191,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getItemWithSiteLink() {
-		$item = new Item();
+		$item = new Item( new ItemId( 'Q42' ) );
 
 		$item->setSiteLinkList( new SiteLinkList( [ new SiteLink( self::SITE_ID, self::SITE_LINK_TITLE ) ] ) );
 
@@ -187,7 +199,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getItemWithSiteLinkWithBadges() {
-		$item = new Item();
+		$item = new Item( new ItemId( 'Q42' ) );
 
 		$item->setSiteLinkList( new SiteLinkList( [
 			new SiteLink( self::SITE_ID, self::SITE_LINK_TITLE, [ new ItemId( self::BADGE_ITEM_ID ) ] )
@@ -255,6 +267,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			$pageNormalizer,
 			$this->newSiteLinkTargetProvider(),
 			new ItemIdParser(),
+			$this->createMock( EntityLookup::class ),
 			new StringNormalizer(),
 			[ 'testwikis' ]
 		);
@@ -294,11 +307,34 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenSiteAndBadgesAndSiteLinkForSiteExistsWithNoBadges_changeOpAddsBadge() {
 		$item = $this->getItemWithSiteLink();
+		$entityLookupMock = $this->createMock( EntityLookup::class );
+		$entityLookupMock->expects( $this->once() )->method( 'getEntity' )
+			->with( $this->equalTo( $item->getId() ) )
+			->willReturn( $item );
 
-		$deserializer = $this->newSiteLinksChangeOpDeserializer();
+		$siteLinkChangeOpFactoryMock = $this->createMock( SiteLinkChangeOpFactory::class );
+		$siteLinkChangeOpFactoryMock->expects( $this->once() )->method( 'newSetSiteLinkOp' )->with(
+			$this->equalTo( self::SITE_ID ),
+			$this->equalTo( self::SITE_LINK_TITLE ),
+			$this->equalTo( [ new ItemId( self::BADGE_ITEM_ID ) ] )
+		)->willReturn( new ChangeOpSiteLink( self::SITE_ID, self::SITE_LINK_TITLE, [ new ItemId( self::BADGE_ITEM_ID ) ] ) );
+
+		$deserializer = new SiteLinksChangeOpDeserializer(
+			$this->createMock( SiteLinkBadgeChangeOpSerializationValidator::class ),
+			$siteLinkChangeOpFactoryMock,
+			new SiteLinkPageNormalizer( [] ),
+			$this->newSiteLinkTargetProvider(),
+			new ItemIdParser(),
+			$entityLookupMock,
+			new StringNormalizer(),
+			[ 'testwikis' ]
+		);
 
 		$changeOp = $deserializer->createEntityChangeOp(
-			[ 'sitelinks' => [ self::SITE_ID => [ 'site' => self::SITE_ID, 'badges' => [ self::BADGE_ITEM_ID ] ] ] ]
+			[
+				'id' => $item->getId()->getSerialization(),
+				'sitelinks' => [ self::SITE_ID => [ 'site' => self::SITE_ID, 'badges' => [ self::BADGE_ITEM_ID ] ] ],
+			]
 		);
 
 		$changeOp->apply( $item );
@@ -310,8 +346,30 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
+	public function testGivenSiteAndBadgesAndSiteLinkForSiteNotExists_returnsError(): void {
+		$item = $this->getItemWithoutSiteLinks();
+		$item->setId( new ItemId( 'Q5' ) );
+
+		$deserializer = $this->newSiteLinksChangeOpDeserializer( $item );
+
+		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
+			function () use ( $deserializer, $item ) {
+				$deserializer->createEntityChangeOp(
+					[
+						'id' => $item->getId()->getSerialization(),
+						'sitelinks' => [ self::SITE_ID => [ 'site' => self::SITE_ID, 'badges' => [ self::BADGE_ITEM_ID ] ] ],
+					]
+				);
+			},
+			'no-such-sitelink'
+		);
+	}
+
 	public function testGivenSiteAndBadgesAndSiteLinkForSiteExistsWithBadges_changeOpSetsNewSetOfBadges() {
 		$item = $this->getItemWithSiteLinkWithBadges();
+		$entityLookup = $this->createStub( EntityLookup::class );
+		$entityLookup->expects( $this->once() )->method( 'getEntity' )
+			->willReturn( $item );
 
 		$newBadgeId = 'Q4000';
 
@@ -321,12 +379,16 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			new SiteLinkPageNormalizer( [] ),
 			$this->newSiteLinkTargetProvider(),
 			new ItemIdParser(),
+			$entityLookup,
 			new StringNormalizer(),
 			[ 'testwikis' ]
 		);
 
 		$changeOp = $deserializer->createEntityChangeOp(
-			[ 'sitelinks' => [ self::SITE_ID => [ 'site' => self::SITE_ID, 'badges' => [ $newBadgeId ] ] ] ]
+			[
+				'id' => $item->getId()->getSerialization(),
+				'sitelinks' => [ self::SITE_ID => [ 'site' => self::SITE_ID, 'badges' => [ $newBadgeId ] ] ],
+			]
 		);
 
 		$changeOp->apply( $item );
@@ -341,10 +403,10 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenSiteAndEmptyBadgesAndSiteLinkForSiteExistsWithBadges_changeOpClearsBadges() {
 		$item = $this->getItemWithSiteLinkWithBadges();
 
-		$deserializer = $this->newSiteLinksChangeOpDeserializer();
+		$deserializer = $this->newSiteLinksChangeOpDeserializer( $item );
 
 		$changeOp = $deserializer->createEntityChangeOp(
-			[ 'sitelinks' => [ self::SITE_ID => [ 'site' => self::SITE_ID, 'badges' => [] ] ] ]
+			[ 'id' => $item->getId()->getSerialization(), 'sitelinks' => [ self::SITE_ID => [ 'site' => self::SITE_ID, 'badges' => [] ] ] ]
 		);
 
 		$changeOp->apply( $item );

@@ -303,6 +303,10 @@ class EditEntity extends ModifyEntity {
 	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ): ChangeOp {
 		$data = $preparedParameters[self::PARAM_DATA];
 
+		if ( isset( $preparedParameters['id'] ) || $entity->getId() ) {
+			$data['id'] = $preparedParameters['id'] ?? $entity->getId()->getSerialization();
+		}
+
 		try {
 			return $this->entityChangeOpProvider->newEntityChangeOp( $entity->getType(), $data );
 		} catch ( ChangeOpDeserializationException $exception ) {
