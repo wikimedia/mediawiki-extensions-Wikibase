@@ -9,6 +9,7 @@ use MediaWiki\MediaWikiServices;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\SiteLinkPageNormalizer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -420,6 +421,27 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			}
 		}
 		return $value;
+	}
+
+	public function testBadgePassedToNormalizer() {
+
+		$params = [
+			'action' => 'wbsetsitelink',
+			'id' => EntityTestHelper::getId( 'Leipzig' ),
+			'linksite' => 'dewiki',
+			'linktitle' => 'leipzig',
+			'badges' => self::$gaItemId->getSerialization()
+		];
+
+		$pageNormalizerMock = $this->createMock( SiteLinkPageNormalizer::class );
+		$pageNormalizerMock->expects( $this->once() )->method( 'normalize' )->with(
+			$this->anything(),
+			$this->equalTo( $params['linktitle'] ),
+			$this->equalTo( [ $params['badges'] ] )
+		)->willReturnArgument( 1 );
+		$this->setService( 'WikibaseRepo.SiteLinkPageNormalizer', $pageNormalizerMock );
+
+		$this->doApiRequestWithToken( $params );
 	}
 
 	/**

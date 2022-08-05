@@ -15,6 +15,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinksChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\Repo\SiteLinkPageNormalizer;
 use Wikibase\Repo\SiteLinkTargetProvider;
 
 /**
@@ -44,6 +45,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		return new SiteLinksChangeOpDeserializer(
 			$this->createMock( SiteLinkBadgeChangeOpSerializationValidator::class ),
 			new SiteLinkChangeOpFactory( [ self::BADGE_ITEM_ID ] ),
+			new SiteLinkPageNormalizer( [] ),
 			$this->newSiteLinkTargetProvider(),
 			new ItemIdParser(),
 			new StringNormalizer(),
@@ -119,6 +121,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$deserializer = new SiteLinksChangeOpDeserializer(
 			$badgeValidator,
 			new SiteLinkChangeOpFactory( [] ),
+			new SiteLinkPageNormalizer( [] ),
 			$this->newSiteLinkTargetProvider(),
 			new ItemIdParser(),
 			new StringNormalizer(),
@@ -149,6 +152,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$deserializer = new SiteLinksChangeOpDeserializer(
 			$this->createMock( SiteLinkBadgeChangeOpSerializationValidator::class ),
 			new SiteLinkChangeOpFactory( [] ),
+			new SiteLinkPageNormalizer( [] ),
 			new SiteLinkTargetProvider( new HashSiteStore( [ $site ] ) ),
 			new ItemIdParser(),
 			new StringNormalizer(),
@@ -237,7 +241,23 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 		$pageTitle = 'Cool Article';
 
-		$deserializer = $this->newSiteLinksChangeOpDeserializer();
+		$pageNormalizer = $this->createMock( SiteLinkPageNormalizer::class );
+		$pageNormalizer->expects( $this->once() )->method( 'normalize' )
+			->with(
+				$this->anything(),
+				$this->equalTo( $pageTitle ),
+				$this->equalTo( [ self::BADGE_ITEM_ID ] )
+			)
+			->willReturn( $pageTitle );
+		$deserializer = new SiteLinksChangeOpDeserializer(
+			$this->createMock( SiteLinkBadgeChangeOpSerializationValidator::class ),
+			new SiteLinkChangeOpFactory( [ self::BADGE_ITEM_ID ] ),
+			$pageNormalizer,
+			$this->newSiteLinkTargetProvider(),
+			new ItemIdParser(),
+			new StringNormalizer(),
+			[ 'testwikis' ]
+		);
 
 		$changeOp = $deserializer->createEntityChangeOp(
 			[ 'sitelinks' => [ self::SITE_ID => [ 'site' => self::SITE_ID, 'title' => $pageTitle, 'badges' => [ self::BADGE_ITEM_ID ] ] ] ]
@@ -298,6 +318,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$deserializer = new SiteLinksChangeOpDeserializer(
 			$this->createMock( SiteLinkBadgeChangeOpSerializationValidator::class ),
 			new SiteLinkChangeOpFactory( [ self::BADGE_ITEM_ID, $newBadgeId ] ),
+			new SiteLinkPageNormalizer( [] ),
 			$this->newSiteLinkTargetProvider(),
 			new ItemIdParser(),
 			new StringNormalizer(),

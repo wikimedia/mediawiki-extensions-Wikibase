@@ -14,6 +14,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
 use Wikibase\Repo\ChangeOp\Deserialization\PropertyChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
+use Wikibase\Repo\SiteLinkPageNormalizer;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -48,6 +49,7 @@ class PropertyChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 				[]
 			),
 			WikibaseRepo::getExternalFormatStatementDeserializer(),
+			new SiteLinkPageNormalizer( [] ),
 			new SiteLinkTargetProvider( new HashSiteStore() ),
 			WikibaseRepo::getEntityIdParser(),
 			WikibaseRepo::getStringNormalizer(),

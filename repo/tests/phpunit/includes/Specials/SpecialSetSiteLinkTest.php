@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\CopyrightMessageBuilder;
+use Wikibase\Repo\SiteLinkPageNormalizer;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetSiteLink;
@@ -84,6 +85,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
 			WikibaseRepo::getEditEntityFactory(),
+			WikibaseRepo::getSiteLinkPageNormalizer(),
 			$siteLinkTargetProvider,
 			[ 'wikipedia' ],
 			$settings->getSetting( 'badgeItems' ),
@@ -250,7 +252,16 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			'id' => self::$itemId,
 			'site' => 'dewiki',
 			'page' => 'Wikipedia',
+			'badges' => [ self::$badgeId ],
 		], true );
+
+		$pageNormalizer = $this->createMock( SiteLinkPageNormalizer::class );
+		$pageNormalizer->expects( $this->once() )->method( 'normalize' )->with(
+			$this->anything(),
+			$this->equalTo( 'Wikipedia' ),
+			$this->equalTo( [ self::$badgeId ] )
+		)->willReturnArgument( 1 );
+		$this->setService( 'WikibaseRepo.SiteLinkPageNormalizer', $pageNormalizer );
 
 		list( , $response ) = $this->executeSpecialPage( '', $request );
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
