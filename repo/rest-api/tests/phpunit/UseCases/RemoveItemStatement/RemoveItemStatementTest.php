@@ -9,12 +9,15 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementErrorResponse;
@@ -52,6 +55,11 @@ class RemoveItemStatementTest extends TestCase {
 	 */
 	private $itemUpdater;
 
+	/**
+	 * @var MockObject|PermissionChecker
+	 */
+	private $permissionChecker;
+
 	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
 
 	protected function setUp(): void {
@@ -60,6 +68,8 @@ class RemoveItemStatementTest extends TestCase {
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
+		$this->permissionChecker = $this->createStub( PermissionChecker::class );
+		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
 	}
 
 	public function testRemoveStatement_success(): void {
@@ -193,6 +203,28 @@ class RemoveItemStatementTest extends TestCase {
 		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
 	}
 
+	public function testProtectedItem_returnsErrorResponse(): void {
+		$itemId = new ItemId( 'Q123' );
+
+		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
+			LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' )
+		);
+
+		$this->permissionChecker = $this->createStub( WikibaseEntityPermissionChecker::class );
+		$this->permissionChecker->expects( $this->once() )
+			->method( 'canEdit' )
+			->with( User::newAnonymous(), $itemId )
+			->willReturn( false );
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+			] )
+		);
+		$this->assertInstanceOf( RemoveItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::PERMISSION_DENIED, $response->getCode() );
+	}
+
 	private function newUseCase(): RemoveItemStatement {
 		$itemIdParser = new ItemIdParser();
 		return new RemoveItemStatement(
@@ -204,7 +236,8 @@ class RemoveItemStatementTest extends TestCase {
 			$this->revisionMetadataRetriever,
 			new StatementGuidParser( $itemIdParser ),
 			$this->itemRetriever,
-			$this->itemUpdater
+			$this->itemUpdater,
+			$this->permissionChecker
 		);
 	}
 
