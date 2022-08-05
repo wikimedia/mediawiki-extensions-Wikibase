@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, action, utils } = require( 'api-testing' );
+const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
@@ -41,23 +41,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 		originalRevisionId = testItemCreationMetadata.revid;
 
 		const stringPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-
-		testStatement = {
-			// TODO: 'type' is currently required for validation to pass
-			type: 'statement',
-			mainsnak: {
-				snaktype: 'value',
-				property: stringPropertyId,
-				datavalue: {
-					type: 'string',
-					value: `unique-string-value-${utils.uniq()}`
-				}
-			},
-			rank: 'preferred',
-			qualifiers: {},
-			'qualifiers-order': [],
-			references: []
-		};
+		testStatement = entityHelper.newStatementWithRandomStringValue( stringPropertyId );
 
 		// wait 1s before adding any statements to verify the last-modified timestamps are different
 		await new Promise( ( resolve ) => {
