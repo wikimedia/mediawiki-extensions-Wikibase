@@ -1,11 +1,9 @@
 'use strict';
 
-const { assert, action, clientFactory } = require( 'api-testing' );
+const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
-
-const basePath = 'rest.php/wikibase/v0';
 
 function newGetStatementRequestBuilder( statementId ) {
 	return new RequestBuilder()
@@ -117,8 +115,9 @@ describe( 'GET /statements/{statement_id}', () => {
 		it( 'has an X-Authenticated-User header with the logged in user', async () => {
 			const mindy = await action.mindy();
 
-			const response = await clientFactory.getRESTClient( basePath, mindy )
-				.get( `/statements/${testStatement.id}` );
+			const response = await newGetStatementRequestBuilder( testStatement.id )
+				.withUser( mindy )
+				.makeRequest();
 
 			assertValid200Response( response );
 			assert.header( response, 'X-Authenticated-User', mindy.username );
