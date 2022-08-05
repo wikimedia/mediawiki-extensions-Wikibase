@@ -4,6 +4,19 @@ const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 
+async function addStatementWithRandomStringValue( itemId, propertyId ) {
+	const response = await new RequestBuilder()
+		.withRoute( 'POST', '/entities/items/{item_id}/statements' )
+		.withPathParam( 'item_id', itemId )
+		.withHeader( 'content-type', 'application/json' )
+		.withJsonBodyParam(
+			'statement',
+			entityHelper.newStatementWithRandomStringValue( propertyId )
+		).makeRequest();
+
+	return response.body;
+}
+
 function newRemoveStatementRequestBuilder( statementId ) {
 	return new RequestBuilder()
 		.withRoute( 'DELETE', '/statements/{statement_id}' )
@@ -12,7 +25,12 @@ function newRemoveStatementRequestBuilder( statementId ) {
 
 describe( 'DELETE /statements/{statement_id}', () => {
 	let testItemId;
-	let testStatement;
+	let testPropertyId;
+
+	before( async () => {
+		testItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+	} );
 
 	function assertValid200Response( response ) {
 		assert.equal( response.status, 200 );
@@ -29,12 +47,11 @@ describe( 'DELETE /statements/{statement_id}', () => {
 
 	}
 
-	describe( '200 success response ', () => {
+	describe( '200 success response', () => {
+		let testStatement;
+
 		beforeEach( async () => {
-			const createSingleItemResponse = await entityHelper.createSingleItem();
-			testItemId = createSingleItemResponse.entity.id;
-			const claims = createSingleItemResponse.entity.claims;
-			testStatement = Object.values( claims )[ 0 ][ 0 ];
+			testStatement = await addStatementWithRandomStringValue( testItemId, testPropertyId );
 		} );
 
 		it( 'can remove a statement without request body', async () => {
@@ -64,7 +81,7 @@ describe( 'DELETE /statements/{statement_id}', () => {
 			await verifyStatementDeleted( testStatement.id );
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
-			assert.deepEqual( editMetadata.tags, [ tag ] );
+			assert.include( editMetadata.tags, tag );
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual( editMetadata.comment, editSummary );
 			assert.strictEqual( editMetadata.user, user.username );
