@@ -11,6 +11,7 @@ use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
@@ -163,7 +164,7 @@ class BulkSubscriptionUpdater {
 		$dbr = $this->localConnectionManager->getReadConnectionRef();
 
 		if ( empty( $continuation ) ) {
-			$continuationCondition = '1';
+			$continuationCondition = IDatabase::ALL_ROWS;
 		} else {
 			[ $fromEntityId ] = $continuation;
 			$continuationCondition = 'eu_entity_id > ' . $dbr->addQuotes( $fromEntityId );
@@ -171,12 +172,13 @@ class BulkSubscriptionUpdater {
 
 		$res = $dbr->select(
 			EntityUsageTable::DEFAULT_TABLE_NAME,
-			[ 'DISTINCT eu_entity_id' ],
+			[ 'eu_entity_id' ],
 			$continuationCondition,
 			__METHOD__,
 			[
 				'ORDER BY' => 'eu_entity_id',
 				'LIMIT' => $this->batchSize,
+				'DISTINCT',
 			]
 		);
 
