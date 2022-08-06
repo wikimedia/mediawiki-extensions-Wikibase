@@ -128,7 +128,7 @@ abstract class ChangeModificationNotificationJob extends Job {
 
 		$timestamps = [];
 		foreach ( $revisionIdentifiers as $revisionIdentifier ) {
-			$timestamps[] = $revisionIdentifier->getRevisionTimestamp();
+			$timestamps[] = $dbr->timestamp( $revisionIdentifier->getRevisionTimestamp() );
 		}
 
 		return $dbr->select(

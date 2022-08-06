@@ -28,7 +28,7 @@ class RepoRevisionIdentifierFactory {
 
 		return new RepoRevisionIdentifier(
 			$data['entityIdSerialization'],
-			$data['revisionTimestamp'],
+			wfTimestamp( TS_MW, $data['revisionTimestamp'] ),
 			$data['revisionId']
 		);
 	}
