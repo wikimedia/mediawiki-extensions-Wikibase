@@ -130,6 +130,32 @@ class ReplaceItemStatementTest extends TestCase {
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 	}
 
+	public function testRejectsPropertyIdChange(): void {
+		$itemId = new ItemId( 'Q123' );
+		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+		$originalStatement = NewStatement::noValueFor( 'P123' )
+			->withGuid( (string)$statementId )
+			->build();
+		$newStatement = NewStatement::someValueFor( 'P321' )->build();
+
+		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
+
+		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
+
+		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
+
+		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
+			'$statementId' => (string)$statementId,
+			'$statement' => $this->getStatementSerialization( $newStatement ),
+		] ) );
+
+		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
+		$this->assertSame( ReplaceItemStatementErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY, $response->getCode() );
+	}
+
 	public function testInvalidStatementId_returnsInvalidStatementId(): void {
 		$newStatement = NewStatement::noValueFor( 'P123' )->build();
 		$requestData = [

@@ -138,6 +138,10 @@ class StatementList implements IteratorAggregate, Countable {
 		$index = $this->getIndexOfFirstStatementWithGuid( (string)$statementGuid );
 		if ( $index === null ) {
 			throw new InvalidArgumentException( "Statement with guid '$statementGuid' not found" );
+		} elseif ( !$this->statements[$index]->getMainSnak()->getPropertyId()->equals( $newStatement->getMainSnak()->getPropertyId() ) ) {
+			throw new InvalidArgumentException(
+				'The new statement must not have a different Property ID than the original'
+			);
 		}
 
 		$newStatement->setGuid( (string)$statementGuid );

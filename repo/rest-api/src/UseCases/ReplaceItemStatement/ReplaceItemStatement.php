@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -82,7 +83,14 @@ class ReplaceItemStatement {
 			return $this->newStatementNotFoundErrorResponse( $statementId );
 		}
 
-		$item->getStatements()->replaceStatement( $statementId, $newStatement );
+		try {
+			$item->getStatements()->replaceStatement( $statementId, $newStatement );
+		} catch ( InvalidArgumentException $exception ) {
+			return new ReplaceItemStatementErrorResponse(
+				ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY,
+				'Cannot change the property of the existing statement'
+			);
+		}
 
 		$newRevision = $this->itemUpdater->update(
 			$item,

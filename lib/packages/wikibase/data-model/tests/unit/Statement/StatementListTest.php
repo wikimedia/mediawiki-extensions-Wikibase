@@ -324,6 +324,23 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 		$list->replaceStatement( $statementId, new Statement( new PropertyNoValueSnak( 42 ) ) );
 	}
 
+	public function testGivenNewStatementWithDifferentPropertyId_replaceStatementThrows(): void {
+		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAA-BBB-CCC' );
+		$originalStatement = new Statement(
+			new PropertyNoValueSnak( new NumericPropertyId( 'P123' ) ),
+			null,
+			null,
+			(string)$statementId
+		);
+		$newStatement = new Statement( new PropertySomeValueSnak( new NumericPropertyId( 'P321' ) ) );
+		$list = new StatementList( $originalStatement );
+
+		$this->expectException( InvalidArgumentException::class );
+		$this->expectExceptionMessage( 'The new statement must not have a different Property ID than the original' );
+
+		$list->replaceStatement( $statementId, $newStatement );
+	}
+
 	public function testGivenGuidOfPresentStatement_statementIsRemoved() {
 		$statement1 = new Statement( $this->newSnak( 'P24', 'foo' ), null, null, 'foo' );
 		$statement2 = new Statement( $this->newSnak( 'P32', 'bar' ), null, null, 'bar' );
