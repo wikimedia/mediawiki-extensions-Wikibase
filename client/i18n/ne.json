@@ -60,6 +60,6 @@
 	"wikibase-otherprojects": "अन्य परियोजनाहरू",
 	"wikibase-otherprojects-beta-message": "अन्य प्रोजेक्ट साइडबार",
 	"wikibase-sitelinks-sitename-columnheading": "भाषा",
-	"wikibase-client-data-bridge-dialog-title": "सम्पादन गर्ने $1",
+	"wikibase-client-data-bridge-dialog-title": "$1 सम्पादन गर्नुहोस्",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "{{WBREPONAME}}मा मान सम्पादन गर्नुहाेस्"
 }

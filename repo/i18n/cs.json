@@ -327,6 +327,7 @@
 	"wikibase-entitypage-title": "Stránka entity",
 	"wikibase-entitypage-text": "Tato stránka přesměrovává na stránku entity v úložišti, do kterého patří. Uveďte ID entity v URL použitím syntaxe pro podstránky.",
 	"wikibase-entitypage-bad-id": "Chybné ID: $1.",
+	"wikibase-error-entity-not-local": "Typ entity $1 nelze na této wiki upravovat.",
 	"wikibase-error-entity-too-big": "Entity je příliš velká. Největší dovolená velikost entity je $1.",
 	"wikibase-parse-error": "Chybně formátovaná hodnota.",
 	"wikibase-parse-error-coordinate": "Souřadnice nemají správný formát.",
