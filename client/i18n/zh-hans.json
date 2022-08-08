@@ -28,7 +28,8 @@
 			"神樂坂秀吉",
 			"铁桶",
 			"GuoPC",
-			"SkyEye FAST"
+			"SkyEye FAST",
+			"Stang"
 		]
 	},
 	"wikibase-client-desc": "Wikibase扩展的客户端",
@@ -187,7 +188,7 @@
 	"wikibase-client-data-bridge-unknown-error-heading": "出问题了",
 	"wikibase-client-data-bridge-unknown-error-message": "发生错误，此时无法编辑所选值。请尝试重新加载。",
 	"wikibase-client-data-bridge-error-reload-bridge": "重新加载",
-	"wikibase-client-data-bridge-error-reload-page": "重新载入页面",
+	"wikibase-client-data-bridge-error-reload-page": "重新加载页面",
 	"wikibase-client-data-bridge-error-go-back": "返回",
 	"wikibase-client-data-bridge-error-retry-save": "重试保存",
 	"wikibase-client-data-bridge-login-warning": "登录后，<strong>请关闭此标签页并返回原始标签页</strong>以重新尝试保存。",

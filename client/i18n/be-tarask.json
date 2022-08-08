@@ -4,7 +4,8 @@
 			"Red Winged Duck",
 			"Renessaince",
 			"Wizardist",
-			"Zedlik"
+			"Zedlik",
+			"Nieszczarda2"
 		]
 	},
 	"wikibase-client-desc": "Кліент для пашырэньня Wikibase",
@@ -36,7 +37,7 @@
 	"wikibase-linkitem-selectlink": "Калі ласка, абярыце сайт і старонку, зь якімі Вы хочаце злучыць гэтую старонку.",
 	"wikibase-linkitem-input-site": "Мова:",
 	"wikibase-linkitem-input-page": "Старонка:",
-	"wikibase-linkitem-confirmitem-text": "Старонка, якую вы выбралі, ужо далучаная да [$1 аб’екта ў цэнтральным рэпазыторыі]. Пацьвердзіце, калі ласка, што {{PLURAL:$2|1=паказаная ніжэй старонка ёсьць той, зь якой|паказаныя ніжэй старонкі ёсьць тымі, зь якімі}} вы хочаце злучыць гэтую старонку.",
+	"wikibase-linkitem-confirmitem-text": "Старонка, якую вы выбралі, ужо далучаная да [$1 аб’екта ў цэнтральным рэпазыторыі]. Калі ласка, пацьвердзьце, што вы хочаце злучыць вашую старонку з {{PLURAL:$2|1=паказанай|паказанымі}} ніжэй.",
 	"wikibase-linkitem-confirmitem-button": "Пацьвердзіць",
 	"wikibase-linkitem-not-loggedin-title": "Вы мусіце ўвайсьці ў сыстэму",
 	"wikibase-linkitem-not-loggedin": "Для карыстаньня гэтай функцыяй вы мусіце ўвайсьці ў гэтую вікі і [$1 цэнтральны рэпазыторый].",
