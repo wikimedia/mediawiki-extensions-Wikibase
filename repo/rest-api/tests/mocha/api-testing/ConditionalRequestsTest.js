@@ -257,6 +257,13 @@ describe( 'Conditional requests', () => {
 				newRequestBuilder: () => new RequestBuilder()
 					.withRoute( 'DELETE', '/statements/{statement_id}' )
 					.withPathParam( 'statement_id', statementId )
+			},
+			{
+				route: '/entities/items/{item_id}/statements/{statement_id}',
+				newRequestBuilder: () => new RequestBuilder()
+					.withRoute( 'DELETE', '/entities/items/{item_id}/statements/{statement_id}' )
+					.withPathParam( 'item_id', itemId )
+					.withPathParam( 'statement_id', statementId )
 			}
 		].forEach( ( { route, newRequestBuilder } ) => {
 			describe( `If-Match - ${route}`, () => {

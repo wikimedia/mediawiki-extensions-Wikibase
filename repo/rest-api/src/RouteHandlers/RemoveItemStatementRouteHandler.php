@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
@@ -61,8 +62,20 @@ class RemoveItemStatementRouteHandler extends SimpleHandler {
 					ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON,
 					ContentTypeCheckMiddleware::TYPE_NONE,
 				] ),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					function ( RequestInterface $request ): string {
+						return $request->getPathParam( self::ITEM_ID_PATH_PARAM );
+					}
+				),
 			] )
 		);
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function checkPreconditions() {
+		return null; // preconditions are checked via ModifiedPreconditionMiddleware
 	}
 
 	/**
