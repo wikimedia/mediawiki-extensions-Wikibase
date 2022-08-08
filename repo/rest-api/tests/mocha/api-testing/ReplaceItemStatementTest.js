@@ -237,6 +237,22 @@ describe( 'PUT /entities/items/{item_id}/statements/{statement_id}', () => {
 			assertValid400Response( response, 'invalid-statement-data' );
 		} );
 
+		it( 'invalid operation - new statement has a different Property ID', async () => {
+			const differentPropertyId = ( await entityHelper.createEntity(
+				'property',
+				{ datatype: 'string' }
+			) ).entity.id;
+			const response = await newReplaceItemStatementRequestBuilder(
+				testItemId,
+				testStatementId,
+				entityHelper.newStatementWithRandomStringValue( differentPropertyId )
+			)
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid400Response( response, 'invalid-operation-change-property-of-statement' );
+		} );
+
 		it( 'invalid edit tag', async () => {
 			const invalidEditTag = 'invalid tag';
 			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
