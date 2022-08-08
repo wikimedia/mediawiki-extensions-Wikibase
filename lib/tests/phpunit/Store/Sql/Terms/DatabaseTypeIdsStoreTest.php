@@ -8,7 +8,6 @@ use WANObjectCache;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
@@ -34,11 +33,7 @@ class DatabaseTypeIdsStoreTest extends MediaWikiIntegrationTestCase {
 
 		$loadBalancer = $this->createMock( ILoadBalancer::class );
 		$loadBalancer->method( 'getConnection' )->willReturn( $this->db );
-		$loadBalancer->method( 'getConnectionRef' )->willReturnCallback(
-			function ( $i, $g, $domain, $flg ) use ( $loadBalancer ) {
-				return new DBConnRef( $loadBalancer, $this->db, $i );
-			}
-		);
+		$loadBalancer->method( 'getConnectionInternal' )->willReturn( $this->db );
 		$repoDb = $this->createMock( RepoDomainDb::class );
 		$repoDb->method( 'loadbalancer' )->willReturn( $loadBalancer );
 
