@@ -111,7 +111,7 @@ describe( 'GET /entities/items/{item_id}/statements/{statement_id}', () => {
 			assert.include( response.body.message, statementId );
 		} );
 		it( 'requested item not found', async () => {
-			const itemId = 'Q321';
+			const itemId = 'Q999999';
 			const statementId = `${itemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 			const response = await newGetItemStatementRequestBuilder( itemId, statementId )
 				.assertValidRequest()
