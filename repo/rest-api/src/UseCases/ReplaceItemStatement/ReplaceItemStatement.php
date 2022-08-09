@@ -62,9 +62,9 @@ class ReplaceItemStatement {
 				ErrorResponse::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$itemId}"
 			);
-		} elseif ( !$latestRevision->itemExists() ||
-			$latestRevision->isRedirect() ||
-			!$itemId->equals( $statementId->getEntityId() ) ) {
+		} elseif ( !$latestRevision->itemExists()
+				   || $latestRevision->isRedirect()
+				   || !$itemId->equals( $statementId->getEntityId() ) ) {
 			return $this->newStatementNotFoundErrorResponse( $statementId );
 		}
 

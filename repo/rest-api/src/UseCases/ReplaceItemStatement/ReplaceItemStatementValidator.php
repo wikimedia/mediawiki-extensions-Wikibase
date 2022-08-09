@@ -17,6 +17,7 @@ class ReplaceItemStatementValidator {
 	public const SOURCE_ITEM_ID = 'item ID';
 	public const SOURCE_STATEMENT_ID = 'statement ID';
 	public const SOURCE_STATEMENT = 'statement';
+	public const SOURCE_CHANGED_STATEMENT_ID = 'changed statement ID';
 	public const SOURCE_COMMENT = 'comment';
 	public const SOURCE_EDIT_TAGS = 'edit tags';
 
@@ -42,7 +43,8 @@ class ReplaceItemStatementValidator {
 			$this->statementIdValidator->validate( $request->getStatementId(), self::SOURCE_STATEMENT_ID ) ?:
 				$this->statementValidator->validate( $request->getStatement(), self::SOURCE_STATEMENT ) ?:
 					$this->editMetadataValidator->validateEditTags( $request->getEditTags(), self::SOURCE_EDIT_TAGS ) ?:
-						$this->editMetadataValidator->validateComment( $request->getComment(), self::SOURCE_COMMENT );
+						$this->editMetadataValidator->validateComment( $request->getComment(), self::SOURCE_COMMENT ) ?:
+							$this->validateStatementIdsMatch( $request->getStatementId(), $request->getStatement() );
 	}
 
 	public function getValidatedStatement(): ?Statement {
@@ -51,5 +53,13 @@ class ReplaceItemStatementValidator {
 
 	private function validateItemId( ?string $itemId ): ?ValidationError {
 		return $itemId ? $this->itemIdValidator->validate( $itemId, self::SOURCE_ITEM_ID ) : null;
+	}
+
+	private function validateStatementIdsMatch( string $statementId, array $statement ): ?ValidationError {
+		if ( array_key_exists( 'id', $statement ) && $statementId !== $statement['id'] ) {
+			return new ValidationError( '', self::SOURCE_CHANGED_STATEMENT_ID );
+		}
+
+		return null;
 	}
 }

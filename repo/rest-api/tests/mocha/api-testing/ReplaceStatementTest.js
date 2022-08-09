@@ -210,6 +210,19 @@ describe( 'PUT /statements/{statement_id}', () => {
 			assertValid400Response( response, 'invalid-statement-data' );
 		} );
 
+		it( 'invalid operation - new statement has a different Statement ID', async () => {
+			const newStatementData = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+			newStatementData.id = testItemId + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newReplaceStatementRequestBuilder(
+				testStatementId,
+				newStatementData
+			)
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assertValid400Response( response, 'invalid-operation-change-statement-id' );
+		} );
+
 		it( 'invalid operation - new statement has a different Property ID', async () => {
 			const differentPropertyId = ( await entityHelper.createEntity(
 				'property',
