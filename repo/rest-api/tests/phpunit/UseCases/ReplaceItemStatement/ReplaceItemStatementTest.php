@@ -130,6 +130,38 @@ class ReplaceItemStatementTest extends TestCase {
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 	}
 
+	public function testRejectsStatementIdChange(): void {
+		$itemId = new ItemId( 'Q123' );
+		$originalStatementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+		$originalStatement = NewStatement::noValueFor( 'P123' )
+			->withGuid( (string)$originalStatementId )
+			->build();
+		$newStatementId = new StatementGuid( $itemId, 'LLLLLLL-MMMM-NNNN-OOOO-PPPPPPPPPPPP' );
+		$newStatement = NewStatement::someValueFor( 'P123' )
+			->withGuid( (string)$newStatementId )
+			->build();
+
+		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
+
+		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
+
+		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
+
+		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
+			'$statementId' => (string)$originalStatementId,
+			'$statement' => $this->getStatementSerialization( $newStatement ),
+		] ) );
+
+		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
+		$this->assertSame(
+			ReplaceItemStatementErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID,
+			$response->getCode()
+		);
+	}
+
 	public function testRejectsPropertyIdChange(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
@@ -153,7 +185,10 @@ class ReplaceItemStatementTest extends TestCase {
 		] ) );
 
 		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
-		$this->assertSame( ReplaceItemStatementErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY, $response->getCode() );
+		$this->assertSame(
+			ReplaceItemStatementErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY,
+			$response->getCode()
+		);
 	}
 
 	public function testInvalidStatementId_returnsInvalidStatementId(): void {
