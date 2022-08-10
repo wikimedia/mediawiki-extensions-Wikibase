@@ -13,6 +13,7 @@
 			"Sohom Datta",
 			"Titodutta",
 			"ZI Jony",
+			"আজিজ",
 			"আফতাবুজ্জামান"
 		]
 	},
@@ -260,6 +261,7 @@
 	"special-entitypage": "সত্তা পাতা",
 	"wikibase-entitypage-title": "সত্তার পাতা",
 	"wikibase-entitypage-bad-id": "অবৈধ আইডি: $1।",
+	"wikibase-error-entity-not-local": "$1 প্রকারের সত্তা এই উইকিতে সম্পাদনা করা যাবে না।",
 	"wikibase-parse-error": "ত্রুটিপূর্ণভাবে গঠিত মান।",
 	"wikibase-parse-error-time": "সময়ের মানটি বিকৃত।",
 	"special-redirectentity": "একটি সত্তা পুনঃনির্দেশ করুন",

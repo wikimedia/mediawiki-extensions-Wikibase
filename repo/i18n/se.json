@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Trondtr",
 			"Yupik"
 		]
 	},
+	"wikibase-edit": "rievdat",
 	"wikibase-addreference": "lasit gáldu",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Eará gielaide",
 	"wikibase-entitytermsforlanguagelistview-description": "Govvádus",
