@@ -28,7 +28,8 @@
 			"TheRukk",
 			"Vituzzu",
 			"Yiyi",
-			"Zolo"
+			"Zolo",
+			"GpieroMW"
 		]
 	},
 	"wikibase-desc": "Archivio di dati strutturati",
@@ -342,7 +343,7 @@
 	"wikibase-api-not-recognized-siteid": "L'identificatore del sito fornito non è stato riconosciuto.",
 	"wikibase-api-not-recognized": "È stata richiesta una proprietà non valida: $1.",
 	"wikibase-api-not-recognized-array": "Una matrice era prevista ma non è stata trovata.",
-	"wikibase-api-not-recognized-language": "L'identificatore di lingua fornito non è stato riconosciuto.",
+	"wikibase-api-not-recognized-language": "Il codice lingua fornito non è stato riconosciuto.",
 	"wikibase-api-not-recognized-string": "Una stringa era prevista, ma non è stata riconosciuta.",
 	"wikibase-api-wrong-class": "Il contenuto della pagina trovata non è di un tipo corretto.",
 	"wikibase-api-target-not-empty": "Il reindirizzamento può essere creato solo sopra a un'entità vuota o cancellata.",

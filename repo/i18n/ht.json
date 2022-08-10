@@ -2,11 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Bfpage",
-			"Tisave"
+			"Tisave",
+			"Amire80"
 		]
 	},
 	"wikibase-edit": "chanje",
 	"wikibase-add": "ajoute",
+	"wikibase-label-empty": "Pa gen etikèt defini",
+	"wikibase-description-empty": "Pa gen deskripsyon defini",
 	"wikibase-sitelinks-special": "Lòt sit",
 	"wikibase-statementview-rank-normal": "Ran nòmal"
 }

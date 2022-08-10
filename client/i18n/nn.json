@@ -85,5 +85,6 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong> og {{PLURAL:$4|éi anna side|$4 andre sider|100=99+ andre sider}} vart {{GENDER:$2|knytte til}} {{WBREPONAME}}-element.",
 	"notification-subject-page-connection": "Ei side på {{SITENAME}} som du {{GENDER:$3|oppretta}} vart {{GENDER:$2|knytt til}} eit {{WBREPONAME}}-element",
 	"unresolved-property-category": "Sider med uavklara eigenskapar",
-	"connected-redirect-category": "Omdirigeringar knytt til eit {{WBREPONAME}}-objekt"
+	"connected-redirect-category": "Omdirigeringar knytt til eit {{WBREPONAME}}-objekt",
+	"wikibase-client-data-bridge-references-heading": "Referansar"
 }

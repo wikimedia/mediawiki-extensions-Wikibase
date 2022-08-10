@@ -325,6 +325,7 @@
 	"wikibase-api-illegal-entity-remove": "Элемэнт ня можа быць выдалены з дапамогай ключа <var>remove</var> найвышэйшага ўзроўню.",
 	"wikibase-api-illegal-id-or-site-page-selector": "Вам трэба падаць ці <var>id</var> элемэнту, ці камбінацыю <var>site</var> і <var>page</var>, але ня ўсё адразу.",
 	"wikibase-api-illegal-ids-or-sites-titles-selector": "Ці прывядзіце «ids» элемэнту, ці пару «sites» і «titles» для адпаведнай старонкі",
+	"wikibase-api-invalid-snak": "Хібныя зьвесткі снэку.",
 	"wikibase-api-no-external-page": "Сайт вонкавага кліенту «$1» не падаў зьвесткі старонкі для «$2».",
 	"wikibase-api-no-such-entity": "Не атрымалася знайсьці элемэнт з ідэнтыфікатарам «$1».",
 	"wikibase-api-no-such-sitelink": "Не атрымалася знайсьці спасылку на «$1» пры спробе рэдагаваць адзнакі.",

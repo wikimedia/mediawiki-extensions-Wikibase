@@ -56,7 +56,7 @@
 	"unconnectedpages-summary": "Această pagină enumeră paginile care nu sunt asociate unui element Wikidata (din spațiile de nume care suportă asocierea elementelor). Lista este ordonată descrescător după ID-ul paginii, astfel încât paginile noi sunt listate primele.",
 	"wikibase-unconnectedpages-submit": "Arată paginile",
 	"wikibase-pageinfo-entity-id": "ID element {{WBREPONAME}}",
-	"wikibase-pageinfo-entity-id-none": "Nimic",
+	"wikibase-pageinfo-entity-id-none": "Niciunul",
 	"wikibase-pageinfo-description-central": "Descriere centrală",
 	"wikibase-property-render-error": "Nu s-a putut reda proprietatea $1: $2",
 	"wikibase-otherprojects": "În alte proiecte",
