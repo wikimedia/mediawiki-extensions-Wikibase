@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Ibrahima",
 			"Ibrahima Malal Sarr",
 			"Musaddam Idriss"
@@ -11,8 +12,8 @@
 	"wikibase-dataitem": "Temre {{WBREPONAME}}",
 	"wikibase-editlinks": "Taƴto jokkorɗe",
 	"wikibase-editlinkstitle": "Taƴto jokkorɗe hakkunde ɗemɗe",
-	"wikibase-linkitem-input-site": "Ɗemngal",
-	"wikibase-linkitem-input-page": "Ɗerewol",
+	"wikibase-linkitem-input-site": "Ɗemngal:",
+	"wikibase-linkitem-input-page": "Ɗerewol:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Suuɗ",
 	"wikibase-rc-hide-wikidata-show": "Hollu",
