@@ -1,7 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ibrahima"
+			"Ibrahima",
+			"Amire80",
+			"Ibrahima Malal Sarr",
+			"Musaddam Idriss"
 		]
 	},
 	"tooltip-t-wikibase": "Jokkol faade to temre resorde keɓe ceŋiiɗe",
@@ -9,6 +12,8 @@
 	"wikibase-dataitem": "Temre {{WBREPONAME}}",
 	"wikibase-editlinks": "Taƴto jokkorɗe",
 	"wikibase-editlinkstitle": "Taƴto jokkorɗe hakkunde ɗemɗe",
+	"wikibase-linkitem-input-site": "Ɗemngal:",
+	"wikibase-linkitem-input-page": "Ɗerewol:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Suuɗ",
 	"wikibase-rc-hide-wikidata-show": "Hollu",

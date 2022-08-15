@@ -68,7 +68,7 @@
 	"wikibase-entitydata-bad-id": "Vââǥǥlaž tobdstõk: $1.",
 	"wikibase-entitypage-bad-id": "Vââǥǥlaž tobdstõk: $1.",
 	"wikibase-parse-error": "Vââǥǥlaž ärvv.",
-	"wikibase-entity-summary-undo": "Õõʹnni [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4| saǥstõõllmõš]]) muuttâs $3 lij kååʹmtum",
+	"wikibase-entity-summary-undo": "Õõʹnni [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|saǥstõõllmõš]]) muuttâs $3 lij kååʹmtum",
 	"wikibase-listdatatypes-monolingualtext-head": "Õõutǩiõllsaž teʹkstt",
 	"wikibase-listdatatypes-multilingualtext-head": "Määŋgǩiõllsaž teʹkstt",
 	"wikibase-listdatatypes-string-head": "Miârkkräidd",

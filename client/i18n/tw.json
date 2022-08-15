@@ -11,7 +11,7 @@
 	"wikibase-after-page-delete": "Anka ɛwɔ sɛ woyi ayɔnkofa a ɛda kratafa yi mu firi\n[$1 the associated {{WBREPONAME}} item]. Yesrɛ wo hwɛ sɛ ade yi asi.",
 	"wikibase-comment-sitelink-change": "Language link changed from $1 to $2",
 	"wikibase-comment-sitelink-remove": "Yi kasa nkutahodie firi mu: $1",
-	"wikibase-comment-multi": "$1 {{PLURAL : $1|sesa|nsesae}}",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|sesa|nsesae}}",
 	"wikibase-dataitem": "{{WBREPONAME}} ade",
 	"wikibase-editlinks": "Sesa links no",
 	"wikibase-linkitem-addlinks": "Fa links ɛka ho",
