@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Pacha Tchernof",
 			"פוילישער"
 		]
 	},
@@ -11,7 +12,7 @@
 	"valueview-expert-timevalue-calendar-gregorian": "גרעגאריאניש",
 	"valueview-expert-timevalue-calendar-julian": "יוליאניש",
 	"valueview-expert-timeinput-precision": "גענויקייט:",
-	"valueview-expert-timeinput-calendar": "קאלאענדאר:",
+	"valueview-expert-timeinput-calendar": "קאַלענדאַר:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "שפראך (פֿליכטלעך)",
 	"valueview-expertextender-unitsuggester-label": "איינהייט (אפציאנאַל):"
