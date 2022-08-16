@@ -81,7 +81,7 @@
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Tikedenn : $1",
 	"wikibase-pageinfo-entity-usage-T": "Titl",
 	"wikibase-pageinfo-entity-usage-X": "Holl roadennoù an entite",
-	"wikibase-pageinfo-entity-usage-O": "Traoù all (disklêriadurioù)",
+	"wikibase-pageinfo-entity-usage-O": "Traoù all (d.s. aliasoù, bezañs entite)",
 	"wikibase-property-render-error": "N'eus ket bet gallet ezteurel ar perzh $1 : $2",
 	"wikibase-otherprojects": "E raktresoù all",
 	"wikibase-otherprojects-beta-message": "Barrennoù-kostez raktresoù all",
@@ -103,5 +103,9 @@
 	"wikibase-client-data-bridge-error-retry-save": "Klask enrollañ adarre",
 	"wikibase-client-data-bridge-thank-you-head": "Trugarez deoc'h evit ho kemmoù !",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Gallout a rit embann daveennoù ar perzh-mañ war {{WBREPONAME}} en ur glikañ war ar bouton a-is.",
-	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Embann daveenn war {{WBREPONAME}}"
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Embann daveenn war {{WBREPONAME}}",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "N'oc'h ket kevreet",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Embann hep kevreañ",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Enrollañ hep kevreañ",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Kenderc'hel da aozañ"
 }

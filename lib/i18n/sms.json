@@ -6,6 +6,8 @@
 	},
 	"wikibase-deletedentity-query": "Jaukkuum kõjldõs",
 	"wikibase-error-unexpected": "Vââʹǩǩ: $1.",
+	"wikibase-error-save-generic": "Ruõkkmõš ij oʹnnstam vââʹjj diõtt.",
+	"wikibase-error-remove-generic": "Jaukkummuš ij oʹnnstam vââʹjj diõtt.",
 	"wikibase-error-ui-no-external-page": "Seidd \"$2\" ij käunnʼjam seiddõõzzâst \"$1\".",
 	"wikibase-timedetails-isotime": "Äiʹǧǧštemppal",
 	"wikibase-timedetails-timezone": "Äiʹǧǧvuʹvdd",

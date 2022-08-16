@@ -165,7 +165,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "Un element con quell ID chì el gh'è no",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" a l'è un ID de l'element minmga valid.",
 	"wikibase-wikibaserepopage-invalid-langcode": "El codes de la lengua \"$1\" l'è minga conossud. Drova un code del la lengua che 'l sistema 'l le conossa, compagn che \"lmo\".",
-	"wikibase-wikibaserepopage-pipe-in-alias": "I alias che gh'hann denter di sbarre verticai i poden vesser modificade domà in su la pagina de l'entità medesima (con el JavaScript ativad) o per mezz de l'API",
+	"wikibase-wikibaserepopage-pipe-in-alias": "I alias che gh'hann denter di sbarre verticai i poden vesser modificade domà in su la pagina de l'entità medema (con el JavaScript ativad) o per mez de l'API",
 	"wikibase-wikibaserepopage-invalid-id": "L'ID \"$1\" l'è minga conossud del sistema. Drova  ID de entità valid.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 l'è una redirezzion.",
 	"wikibase-wikibaserepopage-storage-exception": "A l'è capitad un eror intanta che $1 l'era 'dree a caregass: $2.",
