@@ -340,7 +340,7 @@ class StatementList implements IteratorAggregate, Countable {
 	}
 
 	/**
-	 * @param string $statementGuid
+	 * @param string|null $statementGuid
 	 *
 	 * @return int|null The index of the first statement with the given GUID or null if not found.
 	 */
