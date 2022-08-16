@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Kareyac",
 			"Sagan",
 			"Азат Хәлилов",
 			"Айсар",
@@ -13,9 +14,11 @@
 	"wikibase-add": "өҫтәргә",
 	"wikibase-label-empty": "Тамға (исем) юҡ",
 	"wikibase-description-empty": "Тасуирлама тултырылмаған",
+	"wikibase-sitelink-page-edit-placeholder": "бит",
 	"wikibase-statementsection-statements": "Раҫлауҙар",
 	"wikibase-sitelinks-special": "Башҡа сайттар",
 	"wikibase-statementview-rank-normal": "Нормаль ранг",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|сығанаҡ}}",
+	"wikibase-itembytitle-lookup-page": "Бит:",
 	"wikibase-redirectentity-success": "$1 $2 битенә кире йүнәлтелгән."
 }
