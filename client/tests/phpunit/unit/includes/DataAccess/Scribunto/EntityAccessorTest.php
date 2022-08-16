@@ -266,10 +266,10 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		$statement->getQualifiers()->addSnak( new PropertyValueSnak( $p65, new StringValue( 'string!' ) ) );
 		$statement->getQualifiers()->addSnak( new PropertySomeValueSnak( $p65 ) );
 
-		$statement->addNewReference( [
+		$statement->addNewReference(
 			new PropertySomeValueSnak( $p65 ),
 			new PropertySomeValueSnak( $p68 )
-		] );
+		);
 
 		$statement->setGuid( 'imaguid' );
 

@@ -1,8 +1,9 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace Wikibase\DataModel\Tests\Statement;
 
 use DataValues\StringValue;
+use Generator;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
@@ -51,7 +52,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	 * @return array array of arrays:
 	 * [ [ Snak $mainSnak, ?SnakList $qualifiers, ?ReferenceList $references, ?string $guid ], ... ]
 	 */
-	public function provideValidConstructorArguments() {
+	public function provideValidConstructorArguments(): array {
 		$snak = new PropertyNoValueSnak( 1 );
 		$qualifiers = new SnakList( [ $snak ] );
 		$references = new ReferenceList( [ new Reference( [ $snak ] ) ] );
@@ -114,7 +115,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	public function testSerialize( Statement $statement ) {
 		$copy = unserialize( serialize( $statement ) );
 
-		$this->assertSame( $statement->getHash(), $copy->getHash(), 'Serialization roundtrip should not affect hash' );
+		$this->assertSame( $statement->getHash(), $copy->getHash(), 'Serialization round-trip should not affect hash' );
 	}
 
 	public function testGuidDoesNotAffectHash() {
@@ -127,35 +128,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $statement0->getHash(), $statement1->getHash() );
 	}
 
-	/**
-	 * @dataProvider provideInvalidGuid
-	 */
-	public function testGivenInvalidGuid_constructorThrowsException( $guid ) {
-		$this->expectException( InvalidArgumentException::class );
-		new Statement( new PropertyNoValueSnak( 1 ), null, null, $guid );
-	}
-
-	/**
-	 * @dataProvider provideInvalidGuid
-	 */
-	public function testGivenInvalidGuid_setGuidThrowsException( $guid ) {
-		$this->expectException( InvalidArgumentException::class );
-		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
-		$statement->setGuid( $guid );
-	}
-
-	public function provideInvalidGuid() {
-		$snak = new PropertyNoValueSnak( 1 );
-
-		return [
-			"boolean 'false'" => [ false ],
-			"integer '1'" => [ 1 ],
-			"PropertyNoValueSnak" => [ $snak ],
-			"Statement" => [ new Statement( $snak ) ]
-		];
-	}
-
-	public function provideStatement() {
+	public function provideStatement(): Generator {
 		$propertyId = new NumericPropertyId( 'P42' );
 		$baseStatement = new Statement( new PropertyNoValueSnak( $propertyId ) );
 
@@ -222,19 +195,6 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 
 		$expectedSnaks = [ $snak1, $snak2 ];
 		$this->assertTrue( $statement->getReferences()->hasReference( new Reference( $expectedSnaks ) ) );
-	}
-
-	/**
-	 * @dataProvider provideStatement
-	 */
-	public function testAddNewReferenceWithAnArrayOfSnaks( Statement $statement ) {
-		$snaks = [
-			new PropertyNoValueSnak( 256 ),
-			new PropertySomeValueSnak( 42 ),
-		];
-		$statement->addNewReference( $snaks );
-
-		$this->assertTrue( $statement->getReferences()->hasReference( new Reference( $snaks ) ) );
 	}
 
 	/**
@@ -389,7 +349,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return array array of arrays: [ [ Statement $statement, Statement $target ], ... ]
 	 */
-	public function provideNonEqualStatements() {
+	public function provideNonEqualStatements(): array {
 		$statement = $this->newStatement();
 
 		$statementWithoutQualifiers = $this->newStatement();
@@ -412,7 +372,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	private function newStatement() {
+	private function newStatement(): Statement {
 		$statement = new Statement(
 			new PropertyNoValueSnak( 42 ),
 			new SnakList( [ new PropertyNoValueSnak( 23 ) ] ),

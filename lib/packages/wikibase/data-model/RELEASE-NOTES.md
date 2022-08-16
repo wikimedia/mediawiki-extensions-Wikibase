@@ -1,5 +1,12 @@
 # Wikibase DataModel release notes
 
+## Version 10.0.0 (TBD)
+
+* Removed support for calling `Statement::addNewReference()` with a single array argument, which was
+  deprecated in `Version 9.6.0 (2021-03-31)`. This should now be called with a variadic argument list.
+* Added native type hints to the `Statement` class
+* Added `strict_types=1` to the `Statement.php` file and related test files
+
 ## Version 9.6.1 (2021-04-01)
 
 * `Snak` now declares `getHash()` and `equals()` methods again,
@@ -26,7 +33,7 @@
 
 ## Version 9.5.0 (2020-06-02)
 
-* Added PHP 7.4 support 
+* Added PHP 7.4 support
 
 ## Version 9.4.0 (2020-04-03)
 
@@ -453,7 +460,7 @@ Other breaking changes:
 ## Version 2.1.0 (2014-10-27)
 
 * `ReferenceList` now implements `Serializable`
-* Enhanced 32 bit compatibility for numeric ids 
+* Enhanced 32 bit compatibility for numeric ids
 
 ## Version 2.0.2 (2014-10-23)
 
@@ -644,7 +651,7 @@ Other breaking changes:
 #### Additions
 
 * Made these classes implement `Comparable`:
-	* `TermList` 
+	* `TermList`
 	* `AliasGroupList`
 	* `Fingerprint`
 	* `SiteLink`

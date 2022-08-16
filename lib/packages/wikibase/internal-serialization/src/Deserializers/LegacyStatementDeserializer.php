@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace Wikibase\InternalSerialization\Deserializers;
 
@@ -6,7 +6,7 @@ use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\MissingAttributeException;
-use InvalidArgumentException;
+use TypeError;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Statement\Statement;
@@ -61,17 +61,19 @@ class LegacyStatementDeserializer implements DispatchableDeserializer {
 	}
 
 	private function newStatement( array $serialization ) {
-		$statement = new Statement(
-			$this->snakDeserializer->deserialize( $serialization['m'] ),
-			$this->snakListDeserializer->deserialize( $serialization['q'] ),
-			$this->getReferences( $serialization['refs'] )
-		);
+		/* @var Snak $snak */
+		$snak = $this->snakDeserializer->deserialize( $serialization['m'] );
+		/* @var SnakList $snakList */
+		$snakList = $this->snakListDeserializer->deserialize( $serialization['q'] );
+		$statement = new Statement( $snak, $snakList, $this->getReferences( $serialization['refs'] ) );
 
 		try {
 			$statement->setRank( $serialization['rank'] );
 			$statement->setGuid( $serialization['g'] );
-		} catch ( InvalidArgumentException $ex ) {
-			throw new DeserializationException( $ex->getMessage(), $ex );
+		} catch ( TypeError $ex ) {
+			// DeserializationException only accepts Exception instead of Throwable, like it's parent
+			// TODO: uncomment $ex when DeserializationException accepts Throwable
+			throw new DeserializationException( $ex->getMessage() /*, $ex*/ );
 		}
 
 		return $statement;
@@ -98,8 +100,8 @@ class LegacyStatementDeserializer implements DispatchableDeserializer {
 	 */
 	public function isDeserializerFor( $serialization ) {
 		return is_array( $serialization )
-			// This element is called 'mainsnak' in the current serialization.
-			&& array_key_exists( 'm', $serialization );
+			   // This element is called 'mainsnak' in the current serialization.
+			   && array_key_exists( 'm', $serialization );
 	}
 
 }
