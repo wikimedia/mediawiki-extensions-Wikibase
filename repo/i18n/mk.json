@@ -322,6 +322,7 @@
 	"wikibase-entitypage-title": "Страница на единицата",
 	"wikibase-entitypage-text": "Оваа страница пренасочува кон единица во складиштето на која ѝ припаѓа. Во URL-то внесете назака на единицата користејќи синтакса за потстраници.",
 	"wikibase-entitypage-bad-id": "Неважечка назнака: $1.",
+	"wikibase-error-entity-not-local": "Единицата од типот $1 не може да се уредува на ова вики.",
 	"wikibase-error-entity-too-big": "Единицата е преголема. Се допушта највеќе $1.",
 	"wikibase-parse-error": "Погрешно срочена вредност.",
 	"wikibase-parse-error-coordinate": "Вредноста за координата е неправилно срочена.",
