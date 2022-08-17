@@ -3,7 +3,8 @@
 		"authors": [
 			"Comp1089",
 			"Ләйсән",
-			"Рустам Нурыев"
+			"Рустам Нурыев",
+			"Kareyac"
 		]
 	},
 	"tooltip-t-wikibase": "Мәғлүмәт репозитарийҙағы үҙара бәйле элементҡа һылтанма",
@@ -12,6 +13,7 @@
 	"wikibase-editlinks": "Һылтанмаларҙы төҙәт",
 	"wikibase-editlinkstitle": "Башҡа телдәргә һылтанмаларҙы төҙәтеү",
 	"wikibase-linkitem-addlinks": "Һылтанмалар өҫтәү",
+	"wikibase-linkitem-input-page": "Бит:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Йәшерергә",
 	"wikibase-rc-hide-wikidata-show": "Күрһәтергә",
