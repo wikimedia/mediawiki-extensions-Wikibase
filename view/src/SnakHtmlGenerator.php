@@ -79,7 +79,7 @@ class SnakHtmlGenerator {
 		$formattedValue = $this->getFormattedSnakValue( $snak );
 
 		if ( $formattedValue === '' ) {
-			$formattedValue = '&nbsp;';
+			$formattedValue = "\u{00A0}";
 		}
 
 		$propertyLink = $showPropertyLink ? $this->makePropertyLink( $snak ) : '';

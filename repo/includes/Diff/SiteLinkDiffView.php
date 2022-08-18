@@ -184,7 +184,7 @@ class SiteLinkDiffView implements DiffView {
 		}
 		if ( $newHtml !== null ) {
 			if ( $oldHtml === null ) {
-				$html .= Html::rawElement( 'td', [ 'colspan' => '2' ], '&nbsp;' );
+				$html .= Html::element( 'td', [ 'colspan' => '2' ], "\u{00A0}" );
 			}
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker', 'data-marker' => '+' ] );
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-addedline' ],

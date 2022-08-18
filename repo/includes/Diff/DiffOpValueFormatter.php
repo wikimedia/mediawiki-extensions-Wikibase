@@ -97,7 +97,7 @@ class DiffOpValueFormatter {
 	 * @return string HTML
 	 */
 	private function generateEmptyCells() {
-		$html = Html::rawElement( 'td', [ 'colspan' => '2' ], '&nbsp;' );
+		$html = Html::element( 'td', [ 'colspan' => '2' ], "\u{00A0}" );
 
 		return $html;
 	}
