@@ -220,14 +220,12 @@ class Statement implements PropertyIdProvider {
 	 * @return string
 	 */
 	public function getHash() {
-		return sha1( implode(
-			'|',
-			[
-				sha1( $this->mainSnak->getHash() . $this->qualifiers->getHash() ),
-				$this->rank,
-				$this->references->getValueHash(),
-			]
-		) );
+		$hashParts = [
+			sha1( $this->mainSnak->getHash() . $this->qualifiers->getHash() ),
+			$this->rank,
+			$this->references->getValueHash(),
+		];
+		return sha1( implode( '|', $hashParts ) );
 	}
 
 	/**
