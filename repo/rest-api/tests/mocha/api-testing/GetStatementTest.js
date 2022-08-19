@@ -97,7 +97,7 @@ describe( 'GET /statements/{statement_id}', () => {
 			assert.include( response.body.message, statementId );
 		} );
 		it( 'item not found', async () => {
-			const statementId = 'Q321$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const statementId = 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newGetStatementRequestBuilder( statementId )
 				.assertValidRequest()
 				.makeRequest();
