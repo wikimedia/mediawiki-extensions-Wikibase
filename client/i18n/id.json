@@ -12,6 +12,7 @@
 			"Rachmat04",
 			"Snidata",
 			"Taylor",
+			"Veracious",
 			"පසිඳු කාවින්ද"
 		]
 	},
@@ -130,7 +131,14 @@
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Sunting tanpa masuk log",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Masuk log atau Buat akun",
 	"wikibase-client-data-bridge-license-heading": "Penggunaan dan lisensi",
+	"wikibase-client-data-bridge-bailout-heading": "Sebagai gantinya, Anda dapat melakukan hal berikut:",
+	"wikibase-client-data-bridge-saving-error-heading": "Tidak dapat menyimpan perubahan",
+	"wikibase-client-data-bridge-edit-conflict-error-heading": "Konflik penyuntingan terdeteksi",
+	"wikibase-client-data-bridge-unknown-error-heading": "Ada yang tidak beres",
+	"wikibase-client-data-bridge-error-reload-bridge": "Muat ulang",
+	"wikibase-client-data-bridge-error-reload-page": "Muat ulang halaman",
 	"wikibase-client-data-bridge-error-go-back": "Kembali",
+	"wikibase-client-data-bridge-error-retry-save": "Coba simpan lagi",
 	"wikibase-client-data-bridge-thank-you-head": "Terima kasih atas suntingan Anda!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Anda bisa menyunting rujukan untuk atribut ini di {{WBREPONAME}} dengan menekan tombol di bawah.",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Sunting rujukan di {{WBREPONAME}}",
