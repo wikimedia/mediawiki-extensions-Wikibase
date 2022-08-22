@@ -3,7 +3,9 @@
 		"authors": [
 			"Arystanbek",
 			"Fontan 030",
-			"Нұрлан Рахымжанов"
+			"Нұрлан Рахымжанов",
+			"Hedeyohu22",
+			"СеніңШешең"
 		]
 	},
 	"tooltip-t-wikibase": "Сілтеме дерек қойма данасымен байланысқан",
@@ -20,16 +22,16 @@
 	"wikibase-comment-sitelink-change": "Тіл сілтемесін $1 дегеннен $2 дегенге өзгертті",
 	"wikibase-comment-sitelink-remove": "Тіл сілтемесін аласталды: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|өзгеріс|өзгеріс}}",
-	"wikibase-dataitem": "{{WBREPONAME}} данасы",
+	"wikibase-dataitem": "{{WBREPONAME}} элементі",
 	"wikibase-editlinks": "Сілтемелерді өңдеу",
 	"wikibase-editlinkstitle": "Тіларалық сілтемелерді өңдеу",
 	"wikibase-addlinkstitle": "Тіларалық сілтемелерді қосу",
-	"wikibase-linkitem-addlinks": "Сілтемелер қосу",
+	"wikibase-linkitem-addlinks": "Сілтеме қосу",
 	"wikibase-linkitem-close": "Диалогты жабу және бетті қайта жүктеу",
 	"wikibase-linkitem-failure": "Белгісіз қателік орын алды осы бетті қайтадан сілтетіп көру.",
 	"wikibase-linkitem-title": "Бетке сілтеу",
 	"wikibase-linkitem-linkpage": "Бетке сілтеу",
-	"wikibase-linkitem-selectlink": "Бұл бетке сілтегіңіз келген сайтты және бетті таңдаңыз.",
+	"wikibase-linkitem-selectlink": "Бұл бетке сілтегіңіз келетін сайт пен бет таңдаңыз.",
 	"wikibase-linkitem-input-site": "Тіл:",
 	"wikibase-linkitem-input-page": "Бет:",
 	"wikibase-linkitem-confirmitem-button": "Құптау",

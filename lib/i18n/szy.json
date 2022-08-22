@@ -3,10 +3,10 @@
 		"authors": [
 			"Benel",
 			"Bunukwiki",
-			"Tokoabibi"
+			"Tokoabibi",
+			"Akamycoco"
 		]
 	},
-	"wikibase-lib-desc": "Wikibase atu Wikibase kulayangtu sacunus sapikapulungan a sasahicaan",
 	"wikibase-deletedentity-item": "masiputu tu kasacacay",
 	"wikibase-deletedentity-property": "masiputu tu susin",
 	"wikibase-deletedentity-query": "masiputu tu palalitemuh tu kawaw",
@@ -26,7 +26,7 @@
 	"wikibase-globedetails-latitude": "wyitu",
 	"wikibase-globedetails-precision": "cingtu",
 	"wikibase-globedetails-globe": "taenengan nu lala’-liwliw",
-	"wikibase-sitelinks-wikipedia": "Wyici-payke",
+	"wikibase-sitelinks-wikipedia": "Wikipitiya",
 	"wikibase-snakview-snaktypeselector-somevalue": "caay kapulita ku sulyang",
 	"wikibase-snakview-snaktypeselector-novalue": "inayi’ ku sulyang",
 	"datatypes-type-quantity": "nikayadah",
