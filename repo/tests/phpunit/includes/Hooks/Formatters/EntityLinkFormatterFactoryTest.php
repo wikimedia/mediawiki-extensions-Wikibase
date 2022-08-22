@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Repo\Tests\Hooks\Formatters;
 
 use Language;
@@ -55,9 +57,11 @@ class EntityLinkFormatterFactoryTest extends MediaWikiIntegrationTestCase {
 			},
 		] );
 
+		$languageMock = $this->createMock( Language::class );
+		$languageMock->method( 'getCode' )->willReturn( 'en' );
 		$this->assertSame(
-			$factory->getLinkFormatter( 'item', Language::factory( 'en' ) ),
-			$factory->getLinkFormatter( 'item', Language::factory( 'en' ) )
+			$factory->getLinkFormatter( 'item', $languageMock ),
+			$factory->getLinkFormatter( 'item', $languageMock )
 		);
 	}
 
