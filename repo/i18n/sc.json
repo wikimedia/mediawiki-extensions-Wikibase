@@ -6,5 +6,7 @@
 	},
 	"wikibase-edit": "modìfica",
 	"wikibase-add": "annanghe",
+	"wikibase-label-empty": "Peruna eticheta definida",
+	"wikibase-description-empty": "Peruna descritzione definida",
 	"wikibase-sitelinks-special": "Àteros sitos"
 }

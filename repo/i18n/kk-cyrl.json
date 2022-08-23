@@ -4,7 +4,8 @@
 			"Arystanbek",
 			"Ladsgroup",
 			"Macofe",
-			"Нұрлан Рахымжанов"
+			"Нұрлан Рахымжанов",
+			"СеніңШешең"
 		]
 	},
 	"wikibase-desc": "Құрылымданған дерек қоймасы",
@@ -28,7 +29,7 @@
 	"wikibase-label-empty": "Анықталған деңгейі жоқ",
 	"wikibase-label-edit-placeholder": "сипаттамасын енгізіңіз",
 	"wikibase-label-edit-placeholder-language-aware": "$1 тілінде белгісін енгізіңіз",
-	"wikibase-description-empty": "Анықталған сипаттамасы жоқ",
+	"wikibase-description-empty": "Сипаттама анықталмаған",
 	"wikibase-description-edit-placeholder": "сипаттама енгізу",
 	"wikibase-description-edit-placeholder-language-aware": "$1 тілінде сипаттамасын енгізіңіз",
 	"wikibase-diffview-reference": "дереккөз",

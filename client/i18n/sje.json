@@ -9,6 +9,8 @@
 	"wikibase-editlinks": "Rävvdadä liŋkajt",
 	"wikibase-editlinkstitle": "Rävvdadä giellagasskasatj liŋkajt",
 	"wikibase-linkitem-addlinks": "Lasedä liŋkajt",
+	"wikibase-linkitem-input-site": "Giella:",
+	"wikibase-linkitem-input-page": "Bielle:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Tjiega",
 	"wikibase-rc-hide-wikidata-show": "Vuosedä",

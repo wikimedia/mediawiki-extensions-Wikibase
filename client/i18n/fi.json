@@ -12,7 +12,9 @@
 			"Stryn",
 			"Valtlait",
 			"VezonThunder",
-			"Zache"
+			"Zache",
+			"Kyykaarme",
+			"Rönttönen"
 		]
 	},
 	"wikibase-client-desc": "Wikibase-laajennuksen asiakasohjelma",
@@ -89,7 +91,7 @@
 	"wikibase-sitelinks-sitename-columnheading": "Kieli",
 	"wikibase-sitelinks-link-columnheading": "Linkitetty sivu",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Yhteys|Yhteydet}} {{WBREPONAME}}an",
-	"echo-pref-tooltip-wikibase-action": "Ilmoita minulle, kun joku yhdistää sivun {{GENDER:|jonka loin}} {{WBREPONAME}}-kohteeseen.",
+	"echo-pref-tooltip-wikibase-action": "Ilmoita minulle, kun joku yhdistää {{GENDER:|luomani}} sivun {{WBREPONAME}}-kohteeseen.",
 	"notification-header-page-connection": "Sivu <strong>$3</strong> {{GENDER:$2|yhdistettiin}} {{PLURAL:$4|-1={{WBREPONAME}}-kohteeseen|{{WBREPONAME}}-kohteeseen $4}}, missä aiheeseen liittyviä tietoja voidaan kerätä.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> ja {{PLURAL:$4|yksi muu sivu|$4 muuta sivua|100=99+ muuta sivua}} {{GENDER:$2|yhdistettiin}} {{WBREPONAME}}-kohteisiin, missä aiheeseen liittyviä tietoja voidaan kerätä.",
 	"notification-link-text-view-item": "{{GENDER:$1|Näytä}} kohde",
