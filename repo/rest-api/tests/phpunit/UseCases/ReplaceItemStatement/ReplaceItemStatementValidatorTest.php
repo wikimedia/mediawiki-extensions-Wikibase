@@ -139,28 +139,6 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 		$this->assertSame( $expectedError, $error );
 	}
 
-	public function testValidate_withChangedStatementId(): void {
-		$error = $this->newReplaceItemStatementValidator()->validate(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$statement' => [
-					'id' => 'Q123$LLLLLLLL-MMMM-NNNN-OOOO-PPPPPPPPPPPP',
-					'valid' => 'statement'
-				],
-				'$editTags' => [],
-				'$isBot' => false,
-				'$comment' => null,
-				'$username' => null,
-				'$itemId' => null
-			] )
-		);
-
-		$this->assertEquals(
-			new ValidationError( '', ReplaceItemStatementValidator::SOURCE_CHANGED_STATEMENT_ID ),
-			$error
-		);
-	}
-
 	public function testValidate_withCommentTooLong(): void {
 		$comment = str_repeat( 'x', CommentStore::COMMENT_CHARACTER_LIMIT + 1 );
 		$error = $this->newReplaceItemStatementValidator()->validate(
