@@ -66,7 +66,7 @@ describe( 'item', function () {
 		ItemPage.valueInputField.waitForExist( { reverse: true } );
 	} );
 
-	it( 'old revisions do not have an edit link', function () {
+	it.skip( 'old revisions do not have an edit link', function () {
 		const itemId = browser.call( () => WikibaseApi.createItem( Util.getTestString( 'T95406-' ) ) );
 		const entity = browser.call( () => WikibaseApi.getEntity( itemId ) );
 
