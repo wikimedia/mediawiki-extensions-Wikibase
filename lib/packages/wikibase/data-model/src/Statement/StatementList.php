@@ -9,6 +9,9 @@ use Iterator;
 use IteratorAggregate;
 use Traversable;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Exception\PropertyChangedException;
+use Wikibase\DataModel\Exception\StatementGuidChangedException;
+use Wikibase\DataModel\Exception\StatementNotFoundException;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
@@ -129,18 +132,24 @@ class StatementList implements IteratorAggregate, Countable {
 	}
 
 	/**
-	 * @param StatementGuid $statementGuid The guid of the statement to be replaced
-	 * @param Statement $newStatement The new statement. If it has a guid already, it will be replaced.
+	 * @param StatementGuid $statementGuid The GUID of the Statement to be replaced
+	 * @param Statement $newStatement The new Statement
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws StatementNotFoundException if the Statement with $statementGuid can't be found
+	 * @throws StatementGuidChangedException if the $newStatement has a different StatementGuid
+	 * @throws PropertyChangedException if the $newStatement has a different MainSnak Property
 	 */
 	public function replaceStatement( StatementGuid $statementGuid, Statement $newStatement ): void {
 		$index = $this->getIndexOfFirstStatementWithGuid( (string)$statementGuid );
 		if ( $index === null ) {
-			throw new InvalidArgumentException( "Statement with guid '$statementGuid' not found" );
+			throw new StatementNotFoundException( "Statement with GUID '$statementGuid' not found" );
+		} elseif ( $newStatement->getGuid() && (string)$statementGuid !== $newStatement->getGuid() ) {
+			throw new StatementGuidChangedException(
+				'The new Statement must not have a different Statement GUID than the original'
+			);
 		} elseif ( !$this->statements[$index]->getMainSnak()->getPropertyId()->equals( $newStatement->getMainSnak()->getPropertyId() ) ) {
-			throw new InvalidArgumentException(
-				'The new statement must not have a different Property ID than the original'
+			throw new PropertyChangedException(
+				'The new Statement must not have a different Property than the original'
 			);
 		}
 
