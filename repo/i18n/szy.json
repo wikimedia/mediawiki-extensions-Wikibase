@@ -3,7 +3,8 @@
 		"authors": [
 			"Benel",
 			"Bunukwiki",
-			"Tokoabibi"
+			"Tokoabibi",
+			"Akamycoco"
 		]
 	},
 	"wikibase-desc": "pacudunen kalunasulitan misuped-sulu",
@@ -129,7 +130,7 @@
 	"wikibase-itembytitle-lookup-site": "calay-kakacawan(wangcan):",
 	"wikibase-itembytitle-lookup-page": "kasabelih:",
 	"wikibase-itembytitle-submit": "kilim",
-	"wikibase-itembytitle-error-site": "pisaungay izaway a calay-kakacawan(wangcan) misawantan-sakaluk, tinaku\"enwiki\" saku Wyici-payke(Wikipedia).",
+	"wikibase-itembytitle-error-site": "pisaungay izaway a calay-kakacawan(wangcan) misawantan-sakaluk, tinaku\"enwiki\" saku Wikipitiya(Wikipedia).",
 	"wikibase-itembytitle-error-item": "cay katepa masasiketay a kasacacay.",
 	"wikibase-itembytitle-create": "kapah tu kisu [$1 patizeng kasacacay]",
 	"wikibase-itembytitle-summary": "Special:ItemByTitle sakay papatun i masasiket calay-kakacawan(wangcan) a patatapalen kasacacay.<br /> sakacacay ngatu, \"{{int:wikibase-itembytitle-lookup-site}}\", ku musulit kamu atu calay-kakacawan(wangcan) kodo a niyazu’.<br /> u sakatusa ngatu, \"{{int:wikibase-itembytitle-lookup-page}}\", kanca kisu misulit kasabelih a leku satangahan, zaygan tina taneng paazih i makasasiketay a calay-kakacawan(wangcan).",

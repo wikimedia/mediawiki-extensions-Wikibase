@@ -10,7 +10,8 @@
 			"MuratTheTurkish",
 			"Pymouss",
 			"Y-M D",
-			"VIGNERON"
+			"VIGNERON",
+			"Huñvreüs"
 		]
 	},
 	"wikibase-desc": "Kavlec'h roadennoù frammet",
@@ -358,7 +359,7 @@
 	"wikibase-listdatatypes-monolingualtext-body": "Maezienn roadennoù lizherennel evit un neudennad n'eo ket troet e yezhoù all. Seurt neudennadoù a vez termenet ur wech hag adimplijet goude-se en holl yezhoù. An implij skouer a zo anvioù douaroniel skrivet er yezh lec'hel, un anaouder bennak, ur formulenn gimiek pe c'hoazh un anv skiantel e latin.\n* yezh – talvoud ezpleg evit anavezout yezh al lodenn testenn\n* talvoud – talvoud ezpleg evit an neudennad en ur stumm bennak eus ar yezh",
 	"wikibase-listdatatypes-multilingualtext-head": "Skrid liesyezhek",
 	"wikibase-listdatatypes-multilingualtext-body": "Maezienn roadennoù lizherennel evit un neudennad a rank bezañ troet e yezhoù all. An implij skouer a zo evit anv un entite a sell ouzh an holl hag en deus stummoù skrivet anlec'hel.  Gallout a reont bezañ disheñvel ken er yezhoù ken er reizhiadoù skrivañ. \n* yezh – talvoud ezpleg evit anavezout yezh ul lodenn testenn\n* talvoud – talvoud ezpleg evit an neudennad en adstumm dibar eus ar yezh",
-	"wikibase-listdatatypes-string-head": "Neudennad",
+	"wikibase-listdatatypes-string-head": "Chadenn",
 	"wikibase-listdatatypes-string-body": "Maezienn roadennoù lizherennel evit un neudennad glifoù. Un implij skouer a sell ouzh an anaouderioù o deus stummoù skrivet n'int ket diouzh yezh al lenner.\n* talvoud – talvoud ezpleg evit an neudennad e stumm dibar ar yezh",
 	"wikibase-listdatatypes-time-head": "Eur",
 	"wikibase-listdatatypes-time-body": "Maezienn roadennoù lizherennel evit ur poent en amzer. Roet d'un deiziad ha d'un eur gant bevennoù ha spisderioù zo. Enrollet eo an amzer en diabarzh e patron an deiziadur spisaet.\n* time – talvoud ezpleg evit ar poent en amzer, taolennet e stumm un eurdeiziañ a denn da ISO 8601, da sk. +2013-01-01T00:00:00Z. Atav e vez sinet ha klokaet ar bloaz evit bezañ etre 4 ha 16 sifr ennañ.\n* timezone – talvoud ezpleg e stumm un niver anterin sinet. Un dilec'hiadur e munutenneoù eus an UTC eo an titouroù war al linkadur eur.\n* before – talvoud anterin ezpleg evit an niver a unanennoù posupl a-raok an eurdeizañ roet. Dre ar pizhder eo roet an unanenn.\n* after – talvoud anterin ezpleg evit an niver a unanennoù kent an eurdeiziañ roet. Dre ar pizhder eo roet an unanenn.\n* precision – talvoud enkodet ezpleg e niveroù anterin berr. An dalvoudegezh da heul zo gant an niveroù : 0 - miliadroù a vloavezhioù, 1 - kantmilionoù a vloavezhioù, ..., 6 - milved, 7 - kantved, 8 - dekved, 9 - bloaz, 10 - miz, 11 - deiz, 12 - eur, 13 - munutenn, 14 - eilenn.\n* calendarmodel – talvoud ezpleg pourvezet e stumm un URI. Gwiriekaat a ra patrom deiziadur an eurdeiziañ.",
@@ -366,7 +367,7 @@
 	"wikibase-listdatatypes-url-body": "Maezienn roadennoù lihzerennel evit un URL. Bevennet eo an URLoù d'ar protokoloù kemeret e kont evit liammoù diavaez ar wikitestenn ivez.",
 	"wikibase-listdatatypes-external-id-head": "Anaouder diavaez",
 	"wikibase-listdatatypes-external-id-body": "Maezienn roadennoù lizherennel evit un anaouder diavaez. Gallout a ra an anouderioù diavaez bezañ liammet ent emgefre ouzh ur vammenn aotreet evit an diskwel.",
-	"wikibase-listdatavaluetypes-name-string": "neudennad",
+	"wikibase-listdatavaluetypes-name-string": "chadenn",
 	"wikibase-listdatavaluetypes-name-globecoordinate": "Davennoù ar blanedenn",
 	"wikibase-listdatavaluetypes-name-monolingualtext": "testenn unyezhek",
 	"wikibase-listdatavaluetypes-name-quantity": "kementad",
