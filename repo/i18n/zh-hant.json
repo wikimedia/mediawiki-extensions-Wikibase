@@ -345,6 +345,7 @@
 	"wikibase-entitypage-title": "項目頁面",
 	"wikibase-entitypage-text": "此頁面重新導向至所隸屬儲存庫上的實體頁面。請使用子頁面語法來提供 URL 裡的實體 ID。",
 	"wikibase-entitypage-bad-id": "無效的 ID：$1。",
+	"wikibase-error-entity-not-local": "無法在此wiki編輯實體類型$1。",
 	"wikibase-error-entity-too-big": "實體太大。允許的實體大小最多為：$1。",
 	"wikibase-parse-error": "值的格式不正確。",
 	"wikibase-parse-error-coordinate": "座標值不正確。",
