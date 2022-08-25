@@ -127,6 +127,9 @@
 	"wikibase-anonymouseditwarning-dismiss-persist": "Kemenn din bep tro ma n'on ket kevreet.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Kemmañ hep kevreañ",
 	"wikibase-move-error": "Ne c'hallit ket dilec'hiañ pajennoù a zo en un esaouenn roadennoù na ne c'hallit ket dilec'hiañ pajennoù war-zu al lec'h-se.",
+	"wikibase-validator-bad-type": "$2 e lec’h $1",
+	"wikibase-validator-no-such-entity": "$1 n'eo ket bet kavet",
+	"wikibase-validator-no-such-property": "N'eo ket bet kavet ar perzh $1",
 	"wikibase-validator-no-validators": "Difennet",
 	"wikibase-validator-sitelink-conflict": "Implijet eo c'hoazh al liamm $1 gant an elfenn $2. Gallout a rit e lemel diwar $2 ma n'emañ ket en e blas eno pe gallout a rit kendeuziñ an elfennoù ma tennont rik d'an hevelep danvez.",
 	"wikibase-validator-label-conflict": "Un dikedenn \"$1\" zo c'hoazh d'ar perzh $3 kevreet ouzh ar c'hod yezh $2.",
@@ -412,5 +415,7 @@
 	"wikibase-tainted-ref-popper-help-link-title": "Pajenn skoazellañ evit ar seurtoù rediennoù-se",
 	"wikibase-tainted-ref-popper-help-link-text": "Skoazell",
 	"wikibase-tainted-ref-popper-remove-warning": "Lemel ar c'hemenn-diwall",
-	"wikibase-tainted-ref-tainted-icon-title": "Kudennek e c'hallfe bezañ ar gemennadenn-mañ."
+	"wikibase-tainted-ref-tainted-icon-title": "Kudennek e c'hallfe bezañ ar gemennadenn-mañ.",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Nullañ",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Klask en-dro"
 }
