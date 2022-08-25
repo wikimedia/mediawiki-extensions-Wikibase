@@ -9,8 +9,8 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\Serializers\StatementSerializer;
-use Wikibase\Repo\Tests\NewStatement;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Domain\Serializers\StatementSerializer

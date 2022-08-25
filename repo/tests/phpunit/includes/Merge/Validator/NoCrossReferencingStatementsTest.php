@@ -5,9 +5,9 @@ namespace Wikibase\Repo\Tests\Merge\Validator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Tests\NewItem;
+use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\Merge\Validator\NoCrossReferencingStatements;
-use Wikibase\Repo\Tests\NewItem;
-use Wikibase\Repo\Tests\NewStatement;
 
 /**
  * @covers \Wikibase\Repo\Merge\Validator\NoCrossReferencingStatements

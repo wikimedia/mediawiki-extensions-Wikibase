@@ -7,7 +7,7 @@ namespace Wikibase\Repo\Tests\Store;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\Tests\NewItem;
+use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

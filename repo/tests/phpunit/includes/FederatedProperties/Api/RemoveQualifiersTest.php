@@ -13,7 +13,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Repo\Tests\NewStatement;
+use Wikibase\DataModel\Tests\NewStatement;
 
 /**
  * @covers \Wikibase\Repo\Api\RemoveQualifiers

@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Repo\Tests\NewStatement;
+use Wikibase\DataModel\Tests\NewStatement;
 
 /**
  * @covers \Wikibase\Repo\Api\SetReference
