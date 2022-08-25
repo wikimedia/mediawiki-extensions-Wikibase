@@ -32,12 +32,6 @@ class ReplaceItemStatementErrorResponse extends ErrorResponse {
 					"Invalid statement data provided"
 				);
 
-			case ReplaceItemStatementValidator::SOURCE_CHANGED_STATEMENT_ID:
-				return new self(
-					ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID,
-					"Cannot change the ID of the existing statement"
-				);
-
 			case ReplaceItemStatementValidator::SOURCE_EDIT_TAGS:
 				return new self(
 					ErrorResponse::INVALID_EDIT_TAG,

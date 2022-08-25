@@ -2,9 +2,11 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement;
 
-use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Exception\PropertyChangedException;
+use Wikibase\DataModel\Exception\StatementGuidChangedException;
+use Wikibase\DataModel\Exception\StatementNotFoundException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -76,16 +78,19 @@ class ReplaceItemStatement {
 			);
 		}
 
-		$newStatement = $this->validator->getValidatedStatement();
-
 		$item = $this->itemRetriever->getItem( $itemId );
-		if ( !$item->getStatements()->getFirstStatementWithGuid( (string)$statementId ) ) {
-			return $this->newStatementNotFoundErrorResponse( $statementId );
-		}
+		$newStatement = $this->validator->getValidatedStatement();
 
 		try {
 			$item->getStatements()->replaceStatement( $statementId, $newStatement );
-		} catch ( InvalidArgumentException $exception ) {
+		} catch ( StatementNotFoundException $e ) {
+			return $this->newStatementNotFoundErrorResponse( $statementId );
+		} catch ( StatementGuidChangedException $e ) {
+			return new ReplaceItemStatementErrorResponse(
+				ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID,
+				'Cannot change the ID of the existing statement'
+			);
+		} catch ( PropertyChangedException $e ) {
 			return new ReplaceItemStatementErrorResponse(
 				ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY,
 				'Cannot change the property of the existing statement'
