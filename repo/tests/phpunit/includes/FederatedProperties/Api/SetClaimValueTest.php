@@ -9,7 +9,7 @@ use FormatJson;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Repo\Tests\NewStatement;
+use Wikibase\DataModel\Tests\NewStatement;
 
 /**
  * @covers \Wikibase\Repo\Api\SetClaimValue

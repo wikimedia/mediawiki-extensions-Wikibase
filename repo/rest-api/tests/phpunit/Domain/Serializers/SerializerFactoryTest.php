@@ -9,9 +9,9 @@ use Wikibase\DataModel\Serializers\SerializerFactory as LegacySerializerFactory;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Domain\Serializers\SerializerFactory;
-use Wikibase\Repo\Tests\NewStatement;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Domain\Serializers\SerializerFactory

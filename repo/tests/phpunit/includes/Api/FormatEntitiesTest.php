@@ -10,8 +10,8 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\Api\FormatEntities;
-use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 

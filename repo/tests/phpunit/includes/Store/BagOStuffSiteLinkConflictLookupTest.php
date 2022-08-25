@@ -7,8 +7,8 @@ namespace Wikibase\Repo\Tests\Store;
 use HashBagOStuff;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
-use Wikibase\Repo\Tests\NewItem;
 
 /**
  * @covers \Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup
