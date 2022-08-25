@@ -7,6 +7,9 @@ use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Exception\PropertyChangedException;
+use Wikibase\DataModel\Exception\StatementGuidChangedException;
+use Wikibase\DataModel\Exception\StatementNotFoundException;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -318,13 +321,37 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 		$list = new StatementList();
 		$statementId = new StatementGuid( new ItemId( 'Q42' ), 'this-guid-does-not-exist' );
 
-		$this->expectException( InvalidArgumentException::class );
+		$this->expectException( StatementNotFoundException::class );
 		$this->expectExceptionMessageMatches( '/' . preg_quote( $statementId ) . '/' );
 
 		$list->replaceStatement( $statementId, new Statement( new PropertyNoValueSnak( 42 ) ) );
 	}
 
-	public function testGivenNewStatementWithDifferentPropertyId_replaceStatementThrows(): void {
+	public function testGivenNewStatementWithDifferentStatementId_replaceStatementThrows(): void {
+		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAA-BBB-CCC' );
+		$originalStatement = new Statement(
+			new PropertyNoValueSnak( new NumericPropertyId( 'P123' ) ),
+			null,
+			null,
+			(string)$statementId
+		);
+		$newStatement = new Statement(
+			new PropertySomeValueSnak( new NumericPropertyId( 'P321' ) ),
+			null,
+			null,
+			'Q123$XXX-YYY-ZZZ'
+		);
+		$list = new StatementList( $originalStatement );
+
+		$this->expectException( StatementGuidChangedException::class );
+		$this->expectExceptionMessage(
+			'The new Statement must not have a different Statement GUID than the original'
+		);
+
+		$list->replaceStatement( $statementId, $newStatement );
+	}
+
+	public function testGivenNewStatementWithDifferentProperty_replaceStatementThrows(): void {
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAA-BBB-CCC' );
 		$originalStatement = new Statement(
 			new PropertyNoValueSnak( new NumericPropertyId( 'P123' ) ),
@@ -335,8 +362,8 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 		$newStatement = new Statement( new PropertySomeValueSnak( new NumericPropertyId( 'P321' ) ) );
 		$list = new StatementList( $originalStatement );
 
-		$this->expectException( InvalidArgumentException::class );
-		$this->expectExceptionMessage( 'The new statement must not have a different Property ID than the original' );
+		$this->expectException( PropertyChangedException::class );
+		$this->expectExceptionMessage( 'The new Statement must not have a different Property than the original' );
 
 		$list->replaceStatement( $statementId, $newStatement );
 	}
