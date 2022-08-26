@@ -38,6 +38,26 @@
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	},
+	"patch": {
+		"tags": [ "statements" ],
+		"summary": "Change elements of a single Statement",
+		"description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}`",
+		"parameters": [
+			{ "$ref": "../../global/parameters.json#/StatementId" },
+			{ "$ref": "../../global/parameters.json#/IfMatch" },
+			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
+		],
+		"requestBody": { "$ref": "../../global/requests.json#/StatementPatch" },
+		"responses": {
+			"200": { "$ref": "../../global/responses.json#/Statement" },
+			"400": { "$ref": "../../global/responses.json#/InvalidStatementPatch" },
+			"404": { "$ref": "../../global/responses.json#/StatementNotFound" },
+			"409": { "$ref": "../../global/responses.json#/CannotApplyStatementPatch" },
+			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"422": { "$ref": "../../global/responses.json#/InvalidPatchedStatement" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
+	},
 	"delete": {
 		"tags": [ "statements" ],
 		"summary": "Delete a single Statement",

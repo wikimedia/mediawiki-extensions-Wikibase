@@ -7,7 +7,7 @@ module.exports = function ( _ ) {
 	this.addContextDependency( path.dirname( this.resourcePath ) );
 
 	SwaggerParser
-		.bundle(
+		.dereference(
 			this.resourcePath,
 			{
 				resolve: {

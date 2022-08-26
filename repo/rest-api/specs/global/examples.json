@@ -47,6 +47,24 @@
 			"message": "Cannot change the property of the existing statement"
 		}
 	},
+	"InvalidPatchExample": {
+		"value": {
+			"code": "invalid-patch",
+			"message": "The provided patch is invalid"
+		}
+	},
+	"CannotApplyPatchExample": {
+		"value": {
+			"code": "cannot-apply-patch",
+			"message": "The provided patch cannot be applied to the statement {statement_id})"
+		}
+	},
+	"PatchTestFailedExample": {
+		"value": {
+			"code": "patch-test-failed",
+			"message": "Test operation in the patch provided failed"
+		}
+	},
 	"ItemNotFoundExample": {
 		"value": {
 			"code": "item-not-found",
