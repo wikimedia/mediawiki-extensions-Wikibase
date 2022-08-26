@@ -26,7 +26,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class GetStatementRouteHandler extends SimpleHandler {
 
-	public const ID_PATH_PARAM = 'statement_id';
+	public const STATEMENT_ID_PATH_PARAM = 'statement_id';
 
 	private $getItemStatement;
 	private $successPresenter;
@@ -57,7 +57,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					function ( RequestInterface $request ): string {
 						return RequestPreconditionCheck::getItemIdPrefixFromStatementId(
-							$request->getPathParam( self::ID_PATH_PARAM )
+							$request->getPathParam( self::STATEMENT_ID_PATH_PARAM )
 						);
 					}
 				),
@@ -90,7 +90,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 
 	public function getParamSettings(): array {
 		return [
-			self::ID_PATH_PARAM => [
+			self::STATEMENT_ID_PATH_PARAM => [
 				self::PARAM_SOURCE => 'path',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,

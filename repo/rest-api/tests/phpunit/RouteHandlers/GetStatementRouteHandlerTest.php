@@ -27,7 +27,7 @@ class GetStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$routeHandler = GetStatementRouteHandler::factory();
 		$this->initHandler( $routeHandler, new RequestData(
-			[ 'pathParams' => [ GetStatementRouteHandler::ID_PATH_PARAM => 'Q123$some-guid' ] ]
+			[ 'pathParams' => [ GetStatementRouteHandler::STATEMENT_ID_PATH_PARAM => 'Q123$some-guid' ] ]
 		) );
 		$this->validateHandler( $routeHandler );
 
