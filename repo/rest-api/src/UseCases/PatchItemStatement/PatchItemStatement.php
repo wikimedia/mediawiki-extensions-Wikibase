@@ -44,7 +44,7 @@ class PatchItemStatement {
 
 		$item = $this->itemRetriever->getItem( $itemId );
 		$statementToPatch = $item->getStatements()->getFirstStatementWithGuid( (string)$statementId );
-		$patchedStatement = $this->statementPatcher->patchStatement( $statementToPatch, $request->getPatch() );
+		$patchedStatement = $this->statementPatcher->patch( $statementToPatch, $request->getPatch() );
 
 		// TODO: handle errors caused by patching (T316319)
 		// TODO: validate patched statement (T316316)

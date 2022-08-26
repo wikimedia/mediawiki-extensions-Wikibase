@@ -104,7 +104,7 @@ class PatchItemStatementTest extends TestCase {
 
 		$this->statementPatcher = $this->createStub( StatementPatcher::class );
 		$this->statementPatcher
-			->method( 'patchStatement' )
+			->method( 'patch' )
 			->with( $statement, $patch )
 			->willReturn( $patchedStatement );
 

@@ -39,7 +39,8 @@
 		"psr/log": "^1.1.3",
 		"psr/http-message": "^1.0.1",
 		"onoi/message-reporter": "~1.4",
-		"symfony/polyfill-php73": "^1.26.0"
+		"symfony/polyfill-php73": "^1.26.0",
+		"swaggest/json-diff": "^3.9"
 	},
 	"require-dev": {
 		"mediawiki/mediawiki-codesniffer": "38.0.0",
