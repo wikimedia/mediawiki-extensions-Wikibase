@@ -211,14 +211,14 @@ $magicWords['yi'] = [
 	'property' => [ 0, 'אייגנשאפט' ],
 ];
 
-/** Simplified Chinese (中文（简体）‎) */
+/** Simplified Chinese (中文（简体）) */
 $magicWords['zh-hans'] = [
 	'noexternallanglinks' => [ 0, '无外部语言连接' ],
 	'property' => [ 0, '属性' ],
 	'wbreponame' => [ 0, 'wb报告名' ],
 ];
 
-/** Traditional Chinese (中文（繁體）‎) */
+/** Traditional Chinese (中文（繁體）) */
 $magicWords['zh-hant'] = [
 	'noexternallanglinks' => [ 0, '隱藏跨語言連結' ],
 	'property' => [ 0, '屬性' ],

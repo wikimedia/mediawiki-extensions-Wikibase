@@ -467,7 +467,7 @@ $specialPageAliases['vi'] = [
 	'SetSiteLink' => [ 'Đặt_liên_kết_dịch_vụ' ],
 ];
 
-/** Simplified Chinese (中文（简体）‎) */
+/** Simplified Chinese (中文（简体）) */
 $specialPageAliases['zh-hans'] = [
 	'DispatchStats' => [ '发送统计' ],
 	'EntityData' => [ '实体数据' ],
@@ -487,7 +487,7 @@ $specialPageAliases['zh-hans'] = [
 	'SetSiteLink' => [ '设置网站链接' ],
 ];
 
-/** Traditional Chinese (中文（繁體）‎) */
+/** Traditional Chinese (中文（繁體）) */
 $specialPageAliases['zh-hant'] = [
 	'DispatchStats' => [ '發佈統計' ],
 	'EntityData' => [ '實體資料' ],
@@ -507,7 +507,7 @@ $specialPageAliases['zh-hant'] = [
 	'SetSiteLink' => [ '設定網站連結' ],
 ];
 
-/** Chinese (Taiwan) (中文（台灣）‎) */
+/** Chinese (Taiwan) (中文（台灣）) */
 $specialPageAliases['zh-tw'] = [
 	'NewItem' => [ '建立項目' ],
 	'NewProperty' => [ '新增屬性' ],

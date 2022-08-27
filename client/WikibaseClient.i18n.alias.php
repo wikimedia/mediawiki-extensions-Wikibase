@@ -160,12 +160,12 @@ $specialPageAliases['vi'] = [
 	'UnconnectedPages' => [ 'Trang_không_kết_nối', 'Trang_không_có_liên_kết_site' ],
 ];
 
-/** Simplified Chinese (中文（简体）‎) */
+/** Simplified Chinese (中文（简体）) */
 $specialPageAliases['zh-hans'] = [
 	'UnconnectedPages' => [ '未链接页面', '丢失链接页面' ],
 ];
 
-/** Traditional Chinese (中文（繁體）‎) */
+/** Traditional Chinese (中文（繁體）) */
 $specialPageAliases['zh-hant'] = [
 	'UnconnectedPages' => [ '無連接頁面', '失去連接', '失去站點連接' ],
 ];
