@@ -26,7 +26,7 @@ class GetItemRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->setService( 'WbRestApi.GetItem', $useCase );
 
 		$routeHandler = GetItemRouteHandler::factory();
-		$this->initHandler( $routeHandler, new RequestData( [ 'pathParams' => [ 'id' => 'Q123' ] ] ) );
+		$this->initHandler( $routeHandler, new RequestData( [ 'pathParams' => [ 'item_id' => 'Q123' ] ] ) );
 		$this->validateHandler( $routeHandler );
 
 		$response = $routeHandler->execute();
@@ -42,7 +42,7 @@ class GetItemRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$routeHandler = GetItemRouteHandler::factory();
 		$this->initHandler(
 			$routeHandler,
-			new RequestData( [ 'pathParams' => [ 'id' => 'Q123' ] ] )
+			new RequestData( [ 'pathParams' => [ 'item_id' => 'Q123' ] ] )
 		);
 
 		$this->assertTrue( $routeHandler->needsReadAccess() );

@@ -1,11 +1,11 @@
 [
 	{
-		"path": "/wikibase/v0/entities/items/{id}",
+		"path": "/wikibase/v0/entities/items/{item_id}",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemRouteHandler::factory"
 	},
 	{
-		"path": "/wikibase/v0/entities/items/{id}/statements",
+		"path": "/wikibase/v0/entities/items/{item_id}/statements",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemStatementsRouteHandler::factory"
 	},

@@ -25,7 +25,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class GetItemStatementsRouteHandler extends SimpleHandler {
-	private const ID_PATH_PARAM = 'id';
+	private const ITEM_ID_PATH_PARAM = 'item_id';
 
 	/**
 	 * @var GetItemStatements
@@ -70,7 +70,7 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 				new AuthenticationMiddleware(),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					function ( RequestInterface $request ): string {
-						return $request->getPathParam( self::ID_PATH_PARAM );
+						return $request->getPathParam( self::ITEM_ID_PATH_PARAM );
 					}
 				),
 			] )
@@ -114,7 +114,7 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader(
 			'Location',
-			$this->getRouteUrl( [ self::ID_PATH_PARAM => $useCaseResponse->getRedirectTargetId() ] )
+			$this->getRouteUrl( [ self::ITEM_ID_PATH_PARAM => $useCaseResponse->getRedirectTargetId() ] )
 		);
 		$httpResponse->setStatus( 308 );
 
@@ -127,7 +127,7 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 
 	public function getParamSettings(): array {
 		return [
-			self::ID_PATH_PARAM => [
+			self::ITEM_ID_PATH_PARAM => [
 				self::PARAM_SOURCE => 'path',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
