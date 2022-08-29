@@ -110,13 +110,16 @@ describe( 'sitelink redirect behavior with badges', () => {
 			}, 'POST' );
 		},
 		expectActionError: async ( itemId, redirectTargetTitle, badges ) => {
-			return alice.actionError( 'wbsetsitelink', {
+			const params = {
 				id: itemId,
 				linksite: siteId,
-				linktitle: redirectTargetTitle,
 				badges: badges,
 				token: await alice.token( 'csrf' ),
-			}, 'POST' );
+			};
+			if ( redirectTargetTitle !== null && redirectTargetTitle !== undefined ) {
+				params.linktitle = redirectTargetTitle;
+			}
+			return alice.actionError( 'wbsetsitelink', params, 'POST' );
 		},
 	};
 
@@ -144,17 +147,20 @@ describe( 'sitelink redirect behavior with badges', () => {
 			if ( typeof badges === 'string' ) {
 				badges = [ badges ];
 			}
+			const dataPayload = {
+				sitelinks: {
+					[ siteId ]: {
+						site: siteId,
+						badges: badges,
+					},
+				},
+			};
+			if ( redirectTargetTitle !== null && redirectTargetTitle !== undefined ) {
+				dataPayload.sitelinks[ siteId ].title = redirectTargetTitle;
+			}
 			return alice.actionError( 'wbeditentity', {
 				id: itemId,
-				data: JSON.stringify( {
-					sitelinks: {
-						[ siteId ]: {
-							site: siteId,
-							title: redirectTargetTitle,
-							badges: badges,
-						},
-					},
-				} ),
+				data: JSON.stringify( dataPayload ),
 				token: await alice.token( 'csrf' ),
 			}, 'POST' );
 		},
@@ -291,6 +297,41 @@ describe( 'sitelink redirect behavior with badges', () => {
 			assert.deepEqual( response.entity.sitelinks[ siteId ].badges,
 				[ intentionalSitelinkToRedirectBadgeId ] );
 		} );
-	} );
 
+		// Redirect badges can NOT be removed from sitelinks
+		// if the redirected target is used as a sitelink for a different Item
+		// Not even if there is no title in the request
+		it( setSiteLinkEndpoint.name + ': disallows removing redirect badge from redirect sitelink with no title provided', async () => {
+			const redirectTarget = await createRedirectTarget( 'target' ),
+				redirect = await createRedirect( 'redirect', redirectTarget ),
+				item = await createItem( 'item where we try to remove a redirect badge', {
+					sitelinks: {
+						[ siteId ]: {
+							site: siteId,
+							title: redirect,
+							badges: [ sitelinkToRedirectBadgeId ],
+						},
+					},
+				} ),
+				itemLinkedToTarget = await createItem( 'item linked to redirect target', {
+					sitelinks: {
+						[ siteId ]: {
+							site: siteId,
+							title: redirectTarget,
+							badges: [],
+						},
+					},
+				} );
+
+			const error = await setSiteLinkEndpoint.expectActionError(
+				item,
+				null,
+				goodArticleBadgeId,
+			);
+			assert.strictEqual( error.code, 'failed-save' );
+			const sitelinkConflict = error.messages.find( ( message ) => message.name === 'wikibase-validator-sitelink-conflict' );
+			assert.isNotNull( sitelinkConflict );
+			assert.include( sitelinkConflict.parameters[ 1 ], itemLinkedToTarget );
+		} );
+	} );
 } );

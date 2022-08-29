@@ -44,7 +44,7 @@ $wgWBRepoSettings['federatedPropertiesEnabled'] = true;
 $wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = 'https://wikidata.beta.wmflabs.org/w/';
 
 // make sitelinks to the current wiki work
-$wgWBRepoSettings['siteLinkGroups'] = [ 'CI' ];
+$wgWBRepoSettings['siteLinkGroups'][] = 'CI';
 
 $originalBadgeItems = $wgWBRepoSettings['badgeItems'] ?? [];
 $originalRedirectBadgeItems = $wgWBRepoSettings['redirectBadgeItems'] ?? [];
