@@ -1,11 +1,27 @@
 {
 	"Statement": {
-		"description": "Payload containing a Wikibase Statement object",
+		"description": "Payload containing a Wikibase Statement object and edit metadata",
 		"required": true,
 		"content": {
 			"application/json": {
 				"schema": {
 					"$ref": "./request-parts.json#/StatementRequest"
+				}
+			}
+		}
+	},
+	"StatementPatch": {
+		"description": "Payload containing a JSON Patch document to be applied to a Statement and edit metadata",
+		"required": true,
+		"content": {
+			"application/json-patch+json": {
+				"schema": {
+					"$ref": "./request-parts.json#/StatementPatchRequest"
+				}
+			},
+			"application/json": {
+				"schema": {
+					"$ref": "./request-parts.json#/StatementPatchRequest"
 				}
 			}
 		}

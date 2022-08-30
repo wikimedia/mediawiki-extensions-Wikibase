@@ -246,6 +246,93 @@
 			}
 		}
 	},
+	"InvalidStatementPatch": {
+		"description": "The provided JSON Patch is invalid",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"invalid-operation-change-statement-id": {
+						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
+					},
+					"invalid-operation-change-property-of-statement": {
+						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
+					},
+					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidItemStatementPatch": {
+		"description": "The provided JSON Patch is invalid",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"invalid-operation-change-statement-id": {
+						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
+					},
+					"invalid-operation-change-property-of-statement": {
+						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
+					},
+					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"CannotApplyStatementPatch": {
+		"description": "The provided JSON Patch cannot be applied to the given statement",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"cannot-apply-patch": { "$ref": "./examples.json#/CannotApplyPatchExample" },
+					"patch-test-failed": { "$ref": "./examples.json#/PatchTestFailedExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidPatchedStatement": {
+		"description": "Applying the provided JSON Patch results in an invalid statement",
+		"content": {
+			"application/json": {
+				"schema": {
+					"$ref": "./response-parts.json#/Error"
+				},
+				"example": {
+					"code": "patched-statement-invalid",
+					"message": "The patch results in an invalid statement which cannot be stored"
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"PreconditionFailedError": {
 		"description": "The condition defined by the `If-Match` or `If-Unmodified-Since` header is not fulfilled"
 	},

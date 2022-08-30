@@ -16,6 +16,50 @@
 			{ "$ref": "./request-parts.json#/MediawikiEdit" }
 		]
 	},
+	"StatementPatchRequest": {
+		"allOf": [
+			{
+				"type": "object",
+				"properties": {
+					"patch": {
+						"description": "A JSON Patch document as defined by RFC 6902",
+						"type": "array",
+						"items": {
+							"properties": {
+								"op": {
+									"description": "The operation to perform",
+									"type": "string",
+									"enum": [
+										"add",
+										"copy",
+										"move",
+										"remove",
+										"replace",
+										"test"
+									]
+								},
+								"path": {
+									"description": "A JSON-Pointer for the property to manipulate",
+									"type": "string",
+									"example": "/mainsnak/datavalue/value"
+								},
+								"value": {
+									"description": "The value to be used within the operation",
+									"type": "string",
+									"example": "patched value"
+								}
+							},
+							"required": [
+								"op",
+								"path"
+							]
+						}
+					}
+				}
+			},
+			{ "$ref": "./request-parts.json#/MediawikiEdit" }
+		]
+	},
 	"MediawikiEdit": {
 		"type": "object",
 		"properties": {
