@@ -95,6 +95,7 @@
 	"wikibase-dispatchstats-pos": "स्थान",
 	"wikibase-dispatchstats-lag-num": "थाँतीरहेको",
 	"wikibase-dispatchstats-lag-time": "विलम्ब",
+	"wikibase-history-title-with-label": "($1) \"$2\"को इतिहास",
 	"wikibase-listproperties-submit": "खोज्नुहोस्",
 	"wikibase-restoreold": "पूर्वावस्थामा ल्याउनुहोस्",
 	"wikibase-listdatatypes-wikibase-property-head": "गुणधर्म",
