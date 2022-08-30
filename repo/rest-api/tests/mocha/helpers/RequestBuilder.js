@@ -106,6 +106,7 @@ class RequestBuilder {
 				body = new URLSearchParams( this.jsonBodyParams ).toString();
 				break;
 			case 'application/json':
+			case 'application/json-patch+json':
 				body = this.jsonBodyParams;
 				break;
 		}
@@ -116,17 +117,10 @@ class RequestBuilder {
 			case 'GET':
 				return rest.request( this.makePath(), this.method, this.queryParams, this.headers );
 			case 'POST':
-				return rest.req.post( basePath + this.makePath() )
-					.set( this.headers )
-					.query( this.queryParams )
-					.send( body );
 			case 'PUT':
-				return rest.req.put( basePath + this.makePath() )
-					.set( this.headers )
-					.query( this.queryParams )
-					.send( body );
+			case 'PATCH':
 			case 'DELETE':
-				return rest.req.del( basePath + this.makePath() )
+				return rest.req[ this.method.toLowerCase() ]( basePath + this.makePath() )
 					.set( this.headers )
 					.query( this.queryParams )
 					.send( body );
