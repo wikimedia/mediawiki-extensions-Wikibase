@@ -12,6 +12,7 @@ use MediaWiki\Rest\Response;
 class ContentTypeCheckMiddleware implements Middleware {
 
 	public const TYPE_APPLICATION_JSON = 'application/json';
+	public const TYPE_JSON_PATCH = 'application/json-patch+json';
 	public const TYPE_NONE = '';
 
 	private $allowedContentTypes;
