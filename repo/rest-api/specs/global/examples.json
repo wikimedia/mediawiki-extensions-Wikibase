@@ -56,7 +56,7 @@
 	"CannotApplyPatchExample": {
 		"value": {
 			"code": "cannot-apply-patch",
-			"message": "The provided patch cannot be applied to the statement {statement_id})"
+			"message": "The provided patch cannot be applied to the statement {statement_id}"
 		}
 	},
 	"PatchTestFailedExample": {
