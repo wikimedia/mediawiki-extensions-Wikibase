@@ -909,6 +909,7 @@ return call_user_func( function() {
 					},
 				],
 			],
+			'es6' => true,
 			'targets' => 'mobile',
 			'dependencies' => [
 				'wikibase.termbox.styles',
@@ -953,6 +954,7 @@ return call_user_func( function() {
 			],
 			'remoteExtPath' => 'Wikibase/view/lib/wikibase-tainted-ref/dist',
 			'localBasePath' => __DIR__ . '/lib/wikibase-tainted-ref/dist',
+			'es6' => true,
 		],
 		'jquery.wikibase.wbtooltip' => $moduleTemplate + [
 			'scripts' => [
