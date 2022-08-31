@@ -8,6 +8,7 @@ const {
 	newStatementWithRandomStringValue,
 	protectItem
 } = require( '../helpers/entityHelper' );
+const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 
 describe( 'Auth', () => {
@@ -66,7 +67,7 @@ describe( 'Auth', () => {
 		}
 	];
 
-	[ // eslint-disable-line mocha/no-setup-in-describe
+	const allRoutes = [
 		{
 			route: 'GET /entities/items/{id}/statements',
 			newRequestBuilder: () => new RequestBuilder()
@@ -92,8 +93,13 @@ describe( 'Auth', () => {
 				.withRoute( 'GET', '/statements/{statement_id}' )
 				.withPathParam( 'statement_id', statementId )
 		},
-		/* blocked on T316245 since api-testing uses mediawiki/vendor in CI
-		{ // TODO move this to `editRequests` to also check authorization (T313906)
+		...editRequests
+	];
+
+	// eslint-disable-next-line mocha/no-setup-in-describe
+	if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
+		// eslint-disable-next-line mocha/no-setup-in-describe
+		allRoutes.push( { // TODO move this to `editRequests` to also check authorization (T313906)
 			route: 'PATCH /entities/items/{item_id}/statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
@@ -106,10 +112,11 @@ describe( 'Auth', () => {
 						value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
 					}
 				] )
-		},
-		*/
-		...editRequests
-	].forEach( ( { route, newRequestBuilder, expectedStatusCode = 200, isDestructive } ) => {
+		} );
+	}
+
+	// eslint-disable-next-line mocha/no-setup-in-describe
+	allRoutes.forEach( ( { route, newRequestBuilder, expectedStatusCode = 200, isDestructive } ) => {
 		describe( `Authentication - ${route}`, () => {
 
 			afterEach( async () => {

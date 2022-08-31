@@ -7,6 +7,7 @@ const {
 	getLatestEditMetadata,
 	newStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
+const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 
 function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
@@ -236,7 +237,7 @@ describe( 'Conditional requests', () => {
 			latestRevisionId = testItemCreationMetadata.revid;
 		} );
 
-		[ // eslint-disable-line mocha/no-setup-in-describe
+		const editRoutes = [
 			{
 				route: '/statements/{statement_id}',
 				newRequestBuilder: () => new RequestBuilder()
@@ -252,22 +253,6 @@ describe( 'Conditional requests', () => {
 					.withPathParam( 'statement_id', statementId )
 					.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( statementPropertyId ) )
 			},
-			/* blocked on T316245 since api-testing uses mediawiki/vendor in CI
-			{
-				route: 'PATCH /entities/items/{item_id}/statements/{statement_id}',
-				newRequestBuilder: () => new RequestBuilder()
-					.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
-					.withPathParam( 'item_id', itemId )
-					.withPathParam( 'statement_id', statementId )
-					.withJsonBodyParam( 'patch', [
-						{
-							op: 'replace',
-							path: '/mainsnak',
-							value: newStatementWithRandomStringValue( statementPropertyId ).mainsnak
-						}
-					] )
-			},
-			*/
 			{
 				route: '/statements/{statement_id}',
 				newRequestBuilder: () => new RequestBuilder()
@@ -281,7 +266,29 @@ describe( 'Conditional requests', () => {
 					.withPathParam( 'item_id', itemId )
 					.withPathParam( 'statement_id', statementId )
 			}
-		].forEach( ( { route, newRequestBuilder } ) => {
+		];
+
+		// eslint-disable-next-line mocha/no-setup-in-describe
+		if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
+			// eslint-disable-next-line mocha/no-setup-in-describe
+			editRoutes.push( {
+				route: 'PATCH /entities/items/{item_id}/statements/{statement_id}',
+				newRequestBuilder: () => new RequestBuilder()
+					.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
+					.withPathParam( 'item_id', itemId )
+					.withPathParam( 'statement_id', statementId )
+					.withJsonBodyParam( 'patch', [
+						{
+							op: 'replace',
+							path: '/mainsnak',
+							value: newStatementWithRandomStringValue( statementPropertyId ).mainsnak
+						}
+					] )
+			} );
+		}
+
+		// eslint-disable-next-line mocha/no-setup-in-describe
+		editRoutes.forEach( ( { route, newRequestBuilder } ) => {
 			describe( `If-Match - ${route}`, () => {
 				it( 'responds with 412 given an outdated revision id', async () => {
 					const response = await newRequestBuilder()

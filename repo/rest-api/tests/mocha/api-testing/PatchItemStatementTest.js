@@ -2,6 +2,7 @@
 
 const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
+const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 
 function newPatchItemStatementRequestBuilder( itemId, statementId, patch ) {
@@ -16,15 +17,18 @@ function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
 }
 
-// blocked on T316245 since api-testing uses mediawiki/vendor in CI
-describe.skip( 'PATCH /entities/items/{item_id}/statements/{statement_id}', () => {
+describe( 'PATCH /entities/items/{item_id}/statements/{statement_id}', () => {
 	let testItemId;
 	let testPropertyId;
 	let testStatementId;
 	let originalLastModified;
 	let originalRevisionId;
 
-	before( async () => {
+	before( async function () {
+		if ( !hasJsonDiffLib() ) {
+			this.skip(); // awaiting security review (T316245)
+		}
+
 		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 
 		const createItemResponse = await entityHelper.createEntity( 'item', {
