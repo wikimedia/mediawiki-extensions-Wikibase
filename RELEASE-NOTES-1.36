@@ -1,5 +1,13 @@
 = Wikibase 1.36 =
 
+== Wikibase 1.36.4-wmde.8 ==
+
+This is a security and maintenance release of the Wikibase 1.36 branch.
+
+=== Changes since Wikibase 1.36.3-wmde.5 ===
+
+* (T302215) Escape message in hook handler
+* Translation changes.
 
 == Wikibase 1.36.3-wmde.5 ==
 
