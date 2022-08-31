@@ -87,6 +87,7 @@
 	"wikibase-modifyterm-language": "भाषा कोड:",
 	"special-mergeitems": "दुई वस्तुहरू जोड्नुहोस्",
 	"wikibase-mergeitems-submit": "वस्तुहरू जोड्नुहोस्",
+	"wikibase-history-title-with-label": "($1) \"$2\"को इतिहास",
 	"wikibase-listproperties-submit": "खोज्नुहोस्",
 	"wikibase-restoreold": "पूर्वावस्थामा ल्याउनुहोस्",
 	"wikibase-listdatatypes-wikibase-property-head": "गुणधर्म",

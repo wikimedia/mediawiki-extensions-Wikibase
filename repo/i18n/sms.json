@@ -8,6 +8,7 @@
 	"wikibase-edit": "muuʹtt",
 	"wikibase-save": "ruõkk",
 	"wikibase-publish": "õlmstââʹtt",
+	"wikibase-cancel": "jõõsk",
 	"wikibase-add": "lââʹzzet",
 	"wikibase-addreference": "lââʹzzet teâttkääiv",
 	"wikibase-statementlistview-add": "lââʹzzet äärv",
@@ -20,6 +21,7 @@
 	"wikibase-label-empty": "Nõmm ij leäkku lââʹzztum",
 	"wikibase-label-edit-placeholder": "ǩeeʹrjet nõõm",
 	"wikibase-label-edit-placeholder-language-aware": "ǩeeʹrjet nõõm ǩiõʹlle $1",
+	"wikibase-description-empty": "Deskriptt ij leäkku lââʹzztum",
 	"wikibase-description-edit-placeholder": "lââʹzzet deskriipt",
 	"wikibase-description-edit-placeholder-language-aware": "lââʹzzet deskriipt ǩiõʹlle $1",
 	"wikibase-content-language-edit-label": "Ǩiõll:",
@@ -70,6 +72,7 @@
 	"wikibase-entitydata-bad-id": "Vââǥǥlaž tobdstõk: $1.",
 	"wikibase-entitypage-bad-id": "Vââǥǥlaž tobdstõk: $1.",
 	"wikibase-parse-error": "Vââǥǥlaž ärvv.",
+	"wikibase-api-failed-save": "Ruõkkmõš ij oʹnnstam.",
 	"wikibase-entity-summary-undo": "Õõʹnni [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|saǥstõõllmõš]]) muuttâs $3 lij kååʹmtum",
 	"wikibase-listdatatypes-monolingualtext-head": "Õõutǩiõllsaž teʹkstt",
 	"wikibase-listdatatypes-multilingualtext-head": "Määŋgǩiõllsaž teʹkstt",
@@ -78,5 +81,8 @@
 	"wikibase-listdatavaluetypes-name-string": "miârkkräidd",
 	"wikibase-listdatavaluetypes-name-monolingualtext": "õõutǩiõllsaž teʹkstt",
 	"datatypes-type-url": "URL",
-	"content-model-wikibase-query": "Wikibase-kõjldõs"
+	"content-model-wikibase-query": "Wikibase-kõjldõs",
+	"wikibase-tainted-ref-popper-remove-warning": "Jaukkâd vaartõõzz",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Jõõsk",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Mottmõš ij oʹnnstam"
 }
