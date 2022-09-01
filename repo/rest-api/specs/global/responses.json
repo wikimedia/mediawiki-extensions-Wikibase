@@ -176,8 +176,12 @@
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"invalid-bot-flag": { "$ref": "./examples.json#/InvalidBotFlagExample" },
 					"invalid-statement-data": { "$ref": "./examples.json#/InvalidStatementDataExample" },
-					"invalid-operation-change-statement-id": { "$ref": "./examples.json#/InvalidOperationChangeStatementId" },
-					"invalid-operation-change-property-of-statement": { "$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement" }
+					"invalid-operation-change-statement-id": {
+						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
+					},
+					"invalid-operation-change-property-of-statement": {
+						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
+					}
 				}
 			}
 		},
@@ -199,8 +203,12 @@
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"invalid-bot-flag": { "$ref": "./examples.json#/InvalidBotFlagExample" },
 					"invalid-statement-data": { "$ref": "./examples.json#/InvalidStatementDataExample" },
-					"invalid-operation-change-statement-id": { "$ref": "./examples.json#/InvalidOperationChangeStatementId" },
-					"invalid-operation-change-property-of-statement": { "$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement" }
+					"invalid-operation-change-statement-id": {
+						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
+					},
+					"invalid-operation-change-property-of-statement": {
+						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
+					}
 				}
 			}
 		},
