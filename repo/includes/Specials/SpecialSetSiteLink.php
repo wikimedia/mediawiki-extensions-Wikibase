@@ -502,18 +502,14 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		// when $pageName is an empty string, we want to remove the site link
 		if ( $pageName === '' ) {
-			if ( !$item->hasLinkToSite( $siteId ) ) {
-				$status->fatal( 'wikibase-setsitelink-remove-failed' );
-				return $status;
-			}
-		} else {
-			$pageName = $this->siteLinkPageNormalizer->normalize(
-				$site, $pageName, $badgeIds );
+			return $this->removeSiteLink( $item, $siteId, $summary );
+		}
 
-			if ( $pageName === false ) {
-				$status->fatal( 'wikibase-error-ui-no-external-page', $siteId, $this->page );
-				return $status;
-			}
+		$pageName = $this->siteLinkPageNormalizer->normalize( $site, $pageName, $badgeIds );
+
+		if ( $pageName === false ) {
+			$status->fatal( 'wikibase-error-ui-no-external-page', $siteId, $this->page );
+			return $status;
 		}
 
 		$badges = $this->parseBadges( $badgeIds, $status );
@@ -526,6 +522,17 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$this->applyChangeOp( $changeOp, $item, $summary );
 
 		return $status;
+	}
+
+	private function removeSiteLink( Item $item, string $siteId, Summary $summary ): Status {
+		if ( !$item->hasLinkToSite( $siteId ) ) {
+			return Status::newFatal( 'wikibase-setsitelink-remove-failed' );
+		}
+
+		$changeOp = $this->siteLinkChangeOpFactory->newRemoveSiteLinkOp( $siteId );
+		$this->applyChangeOp( $changeOp, $item, $summary );
+
+		return Status::newGood();
 	}
 
 	private function getSiteLinkTargetSite( string $siteId ): ?Site {

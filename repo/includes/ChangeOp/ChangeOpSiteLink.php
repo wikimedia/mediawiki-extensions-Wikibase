@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\ChangeOp;
 
 use InvalidArgumentException;
-use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -25,7 +24,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	private $siteId;
 
 	/**
-	 * @var string|null
+	 * @var string
 	 */
 	private $pageName;
 
@@ -36,7 +35,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 
 	/**
 	 * @param string $siteId
-	 * @param string|null $pageName Null to remove the sitelink (if $badges are also null)
+	 * @param string $pageName
 	 * @param ItemId[]|null $badges Null for no-op
 	 *
 	 * @throws InvalidArgumentException
@@ -46,8 +45,12 @@ class ChangeOpSiteLink extends ChangeOpBase {
 			throw new InvalidArgumentException( '$siteId needs to be a string' );
 		}
 
-		if ( !is_string( $pageName ) && $pageName !== null ) {
-			throw new InvalidArgumentException( '$linkPage needs to be a string or null' );
+		if ( !is_string( $pageName ) ) {
+			throw new InvalidArgumentException( '$linkPage needs to be a string' );
+		}
+
+		if ( $pageName === '' ) {
+			throw new InvalidArgumentException( '$linkPage must not be empty. For deletions use ChangeOpRemoveSiteLink' );
 		}
 
 		if ( $badges !== null ) {
@@ -117,30 +120,20 @@ class ChangeOpSiteLink extends ChangeOpBase {
 
 		$siteLinks = $entity->getSiteLinkList();
 
-		if ( ( $this->pageName === null && $this->badges === null ) || $this->pageName === '' ) {
-			if ( $siteLinks->hasLinkWithSiteId( $this->siteId ) ) {
-				$this->updateSummary( $summary, 'remove', $this->siteId, $siteLinks->getBySiteId( $this->siteId )->getPageName() );
-				$siteLinks->removeLinkWithSiteId( $this->siteId );
-			} else {
-				//TODO: throw error? currently ignoring and declaring no changes to entity
-				return new GenericChangeOpResult( $entity->getId(), false );
-			}
-		} else {
-			$commentArgs = [];
+		$commentArgs = [];
 
-			if ( $this->isSiteLinkNewOrPageNameChanged( $siteLinks ) ) {
-				$commentArgs[] = $this->pageName;
-			}
-
-			$action = $siteLinks->hasLinkWithSiteId( $this->siteId ) ? 'set' : 'add';
-			$badges = $this->applyBadges( $siteLinks, $action, $commentArgs );
-
-			$this->updateSummary( $summary, $action, $this->siteId, $commentArgs );
-
-			// FIXME: Use SiteLinkList::setNewSiteLink.
-			$siteLinks->removeLinkWithSiteId( $this->siteId );
-			$siteLinks->addNewSiteLink( $this->siteId, $this->pageName, $badges );
+		if ( $this->isSiteLinkNewOrPageNameChanged( $siteLinks ) ) {
+			$commentArgs[] = $this->pageName;
 		}
+
+		$action = $siteLinks->hasLinkWithSiteId( $this->siteId ) ? 'set' : 'add';
+		$badges = $this->applyBadges( $siteLinks, $action, $commentArgs );
+
+		$this->updateSummary( $summary, $action, $this->siteId, $commentArgs );
+
+		// FIXME: Use SiteLinkList::setNewSiteLink.
+		$siteLinks->removeLinkWithSiteId( $this->siteId );
+		$siteLinks->addNewSiteLink( $this->siteId, $this->pageName, $badges );
 
 		return new GenericChangeOpResult( $entity->getId(), true );
 	}
@@ -165,14 +158,6 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	public function validate( EntityDocument $entity ) {
 		if ( !( $entity instanceof Item ) ) {
 			throw new InvalidArgumentException( 'ChangeOpSiteLink can only be applied to Item instances' );
-		}
-
-		if ( $this->pageName === null && $this->badges !== null ) {
-			if ( !$entity->getSiteLinkList()->hasLinkWithSiteId( $this->siteId ) ) {
-				return Result::newError( [
-					Error::newError( 'The sitelink does not exist', null, 'no-such-sitelink', [ $this->siteId ] )
-				] );
-			}
 		}
 
 		return Result::newSuccess();

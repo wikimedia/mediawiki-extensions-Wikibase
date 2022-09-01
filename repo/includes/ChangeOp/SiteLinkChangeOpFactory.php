@@ -51,7 +51,7 @@ class SiteLinkChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newRemoveSiteLinkOp( $siteId ) {
-		return new ChangeOpSiteLink( $siteId, null );
+		return new ChangeOpRemoveSiteLink( $siteId );
 	}
 
 	/**

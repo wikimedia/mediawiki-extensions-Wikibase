@@ -64,13 +64,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 			array_merge( $existingSiteLinks, [ $enSiteLink ] )
 		];
 
-		// deleting sitelink
-		$args[] = [
-			$existingSiteLinks,
-			new ChangeOpSiteLink( 'dewiki', null ),
-			[ $plSiteLink ]
-		];
-
 		// setting badges on existing sitelink
 		$args[] = [
 			$existingSiteLinks,
@@ -128,26 +121,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 			array_values( $item->getSiteLinkList()->toArray() )
 		);
 		$this->assertTrue( $changeOpResult->isEntityChanged() );
-	}
-
-	public function testGivenAttemptToRemoveNonExistentSiteLink_applyIndicatesNoChange() {
-		$changeOp = new ChangeOpSiteLink( 'enwiki', null );
-
-		$changeOpResult = $changeOp->apply( new Item() );
-
-		$this->assertFalse( $changeOpResult->isEntityChanged() );
-	}
-
-	public function testGivenNoSitelinkOnSiteAndBadgeChangeRequested_validateReturnsError() {
-		$item = new Item();
-		$item->setSiteLinkList( new SiteLinkList( [ new SiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q42' ) ] ) ] ) );
-
-		$changeOp = new ChangeOpSiteLink( 'enwiki', null, [ new ItemId( 'Q149' ) ] );
-
-		$result = $changeOp->validate( $item );
-
-		$this->assertFalse( $result->isValid() );
-		$this->assertEquals( 'no-such-sitelink', $result->getErrors()[0]->getCode() );
 	}
 
 	public function summaryTestProvider() {
