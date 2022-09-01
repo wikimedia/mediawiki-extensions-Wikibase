@@ -113,6 +113,20 @@ describe( 'Auth', () => {
 					}
 				] )
 		} );
+		// eslint-disable-next-line mocha/no-setup-in-describe
+		allRoutes.push( { // TODO move this to `editRequests` to also check authorization (T313906)
+			route: 'PATCH /statements/{statement_id}',
+			newRequestBuilder: () => new RequestBuilder()
+				.withRoute( 'PATCH', '/statements/{statement_id}' )
+				.withPathParam( 'statement_id', statementId )
+				.withJsonBodyParam( 'patch', [
+					{
+						op: 'replace',
+						path: '/mainsnak',
+						value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
+					}
+				] )
+		} );
 	}
 
 	// eslint-disable-next-line mocha/no-setup-in-describe

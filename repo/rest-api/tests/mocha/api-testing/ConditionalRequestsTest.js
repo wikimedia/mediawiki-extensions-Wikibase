@@ -285,6 +285,20 @@ describe( 'Conditional requests', () => {
 						}
 					] )
 			} );
+			// eslint-disable-next-line mocha/no-setup-in-describe
+			editRoutes.push( {
+				route: 'PATCH /statements/{statement_id}',
+				newRequestBuilder: () => new RequestBuilder()
+					.withRoute( 'PATCH', '/statements/{statement_id}' )
+					.withPathParam( 'statement_id', statementId )
+					.withJsonBodyParam( 'patch', [
+						{
+							op: 'replace',
+							path: '/mainsnak',
+							value: newStatementWithRandomStringValue( statementPropertyId ).mainsnak
+						}
+					] )
+			} );
 		}
 
 		// eslint-disable-next-line mocha/no-setup-in-describe
