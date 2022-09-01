@@ -2,10 +2,11 @@
 
 ## Version 10.0.0 (TBD)
 
-* Removed support for calling `Statement::addNewReference()` with a single array argument, which was
-  deprecated in `Version 9.6.0 (2021-03-31)`. This should now be called with a variadic argument list.
-* Added native type hints to the `Statement` class
-* Added `strict_types=1` to the `Statement.php` file and related test files
+* Removed support for calling `Statement::addNewReference()` and `StatementList` constructor with a
+  single array argument, which was deprecated in `Version 9.6.0 (2021-03-31)`. These should now be
+  called with a variadic argument list.
+* Added native type hints to the `Statement` and `StatementList` classes
+* Added `strict_types=1` to `Statement.php`, `StatementList.php`, and related test files
 
 ## Version 9.6.1 (2021-04-01)
 

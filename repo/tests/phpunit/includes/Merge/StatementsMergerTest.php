@@ -29,8 +29,8 @@ class StatementsMergerTest extends TestCase {
 	 * @dataProvider statementsProvider
 	 */
 	public function testMergeStatements( $sourceStatements, $targetStatements, $afterMergeTargetStatements ) {
-		$source = new Item( new ItemId( 'Q123' ), null, null, new StatementList( $sourceStatements ) );
-		$target = new Item( new ItemId( 'Q321' ), null, null, new StatementList( $targetStatements ) );
+		$source = new Item( new ItemId( 'Q123' ), null, null, new StatementList( ...$sourceStatements ) );
+		$target = new Item( new ItemId( 'Q321' ), null, null, new StatementList( ...$targetStatements ) );
 
 		$merger = $this->newStatementsMerger();
 		$merger->merge( $source, $target );

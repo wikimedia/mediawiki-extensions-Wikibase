@@ -197,16 +197,16 @@ class EntityChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory = $this->getEntityChangeFactory();
 
 		$item = new Item( new ItemId( 'Q3' ) );
-		$statementList = new StatementList( [
+		$statementList = new StatementList(
 			new Statement( new PropertyNoValueSnak( 9000 ) )
-		] );
+		);
 
 		$item->setStatements( $statementList );
 
 		$updatedItem = new Item( new ItemId( 'Q3' ) );
-		$statementList = new StatementList( [
+		$statementList = new StatementList(
 			new Statement( new PropertyNoValueSnak( 10 ) )
-		] );
+		);
 
 		$updatedItem->setStatements( $statementList );
 

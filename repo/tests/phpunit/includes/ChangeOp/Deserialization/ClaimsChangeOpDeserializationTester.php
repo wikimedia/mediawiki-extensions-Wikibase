@@ -62,7 +62,7 @@ trait ClaimsChangeOpDeserializationTester {
 		$statement = new Statement( new PropertyNoValueSnak( $property ) );
 		$statement->setGuid( 'test-guid' );
 		$entity = $this->getEntity();
-		$entity->setStatements( new StatementList( [ $statement ] ) );
+		$entity->setStatements( new StatementList( $statement ) );
 
 		return [
 			'numeric index format' => [
@@ -104,7 +104,7 @@ trait ClaimsChangeOpDeserializationTester {
 		$statement = new Statement( new PropertyValueSnak( $property, new StringValue( 'foo' ) ) );
 		$entity = $this->getEntity();
 		$statement->setGuid( ( new GuidGenerator() )->newGuid( $entity->getId() ) );
-		$entity->setStatements( new StatementList( [ $statement ] ) );
+		$entity->setStatements( new StatementList( $statement ) );
 		$statementSerialization = $this->getStatementSerializer()->serialize( $statement );
 		$statementSerialization['mainsnak']['datavalue']['value'] = 'bar';
 

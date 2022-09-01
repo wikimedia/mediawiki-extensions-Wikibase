@@ -278,16 +278,16 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		);
 		$statementItem = new Statement( new PropertyNoValueSnak( new NumericPropertyId( 'P13' ) ) );
 
-		$statementListNoIdentifier = new StatementList( [ $statementString ] );
-		$statementListOneIdentifier = new StatementList( [ $statementIdentifier ] );
+		$statementListNoIdentifier = new StatementList( $statementString );
+		$statementListOneIdentifier = new StatementList( $statementIdentifier );
 		$statementListOneIdentifierAndMore = new StatementList(
-			[ $statementIdentifier, $statementString, $statementItem ]
+			$statementIdentifier, $statementString, $statementItem
 		);
 		$statementListTwoIdentifiers = new StatementList(
-			[ $statementIdentifier, $statementIdentifier ]
+			$statementIdentifier, $statementIdentifier
 		);
 		$statementListTwoIdentifiersAndMore = new StatementList(
-			[ $statementIdentifier, $statementIdentifier, $statementString, $statementItem ]
+			$statementIdentifier, $statementIdentifier, $statementString, $statementItem
 		);
 
 		return [

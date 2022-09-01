@@ -176,7 +176,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		}
 
 		if ( $statements !== null ) {
-			$item->setStatements( new StatementList( $statements ) );
+			$item->setStatements( new StatementList( ...$statements ) );
 		}
 
 		if ( $siteLinks !== null ) {

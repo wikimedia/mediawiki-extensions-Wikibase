@@ -153,7 +153,7 @@ class GetClaimsTest extends ApiTestCase {
 	 * @param Statement[] $statements
 	 */
 	public function doTestValidRequest( array $params, array $statements ) {
-		$statements = new StatementList( $statements );
+		$statements = new StatementList( ...$statements );
 
 		$serializer = $this->serializerFactory->newStatementListSerializer();
 		$expected = $serializer->serialize( $statements );

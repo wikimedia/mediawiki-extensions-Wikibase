@@ -106,13 +106,13 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 		$p2 = new NumericPropertyId( 'P2' );
 
 		$noValueP1Statement = new Statement( new PropertyNoValueSnak( $p1 ) );
-		$noValueP1Statements = new StatementList( [ $noValueP1Statement ] );
+		$noValueP1Statements = new StatementList( $noValueP1Statement );
 
 		$noValueP2Statement = new Statement( new PropertyNoValueSnak( $p2 ) );
-		$noValueP2Statements = new StatementList( [ $noValueP2Statement ] );
+		$noValueP2Statements = new StatementList( $noValueP2Statement );
 
 		$someValueStatement = new Statement( new PropertySomeValueSnak( $p2 ) );
-		$someValueStatements = new StatementList( [ $someValueStatement ] );
+		$someValueStatements = new StatementList( $someValueStatement );
 
 		$emptyItem = new Item( $q2, null, null, null );
 		$emptyProperty = new Property( $p2, null, 'hey', null );

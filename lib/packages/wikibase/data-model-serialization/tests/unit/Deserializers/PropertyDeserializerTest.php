@@ -72,7 +72,7 @@ class PropertyDeserializerTest extends DispatchableDeserializerTest {
 					]
 				]
 			] ) )
-			->will( $this->returnValue( new StatementList( [ $statement ] ) ) );
+			->will( $this->returnValue( new StatementList( $statement ) ) );
 
 		return new PropertyDeserializer(
 			$entityIdDeserializerMock,

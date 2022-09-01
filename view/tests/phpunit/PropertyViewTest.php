@@ -45,7 +45,7 @@ class PropertyViewTest extends EntityViewTestCase {
 		$property->setLabel( 'en', "label:$id" );
 		$property->setDescription( 'en', "description:$id" );
 
-		$property->setStatements( new StatementList( $statements ) );
+		$property->setStatements( new StatementList( ...$statements ) );
 
 		return $property;
 	}

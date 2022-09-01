@@ -44,20 +44,9 @@ class StatementListSerializationRoundtripTest extends TestCase {
 		$statement2->setGuid( 'test2' );
 
 		return [
-			[
-				new StatementList()
-			],
-			[
-				new StatementList( [
-					$statement
-				] )
-			],
-			[
-				new StatementList( [
-					$statement,
-					$statement2
-				] )
-			],
+			[ new StatementList() ],
+			[ new StatementList( $statement ) ],
+			[ new StatementList( $statement, $statement2 ) ],
 		];
 	}
 

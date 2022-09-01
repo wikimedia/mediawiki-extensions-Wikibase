@@ -56,11 +56,11 @@ class EntityDataSerializationServiceIntegrationTest extends MediaWikiIntegration
 		$labelText2 = 'some uniquish string - 354981328';
 		$item2 = new Item(
 			null, $this->getFingerprintWithLabel( $labelText2 ), null, new StatementList(
-				[ new Statement(
+				new Statement(
 					new PropertyValueSnak(
 						$property->getId(), new EntityIdValue( $item1->getId() )
 					)
-				) ]
+				)
 			)
 		);
 

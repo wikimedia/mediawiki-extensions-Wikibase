@@ -124,7 +124,7 @@ final class TestChanges {
 			$statement = new Statement( $snak );
 			$statement->setGuid( 'TEST$test-guid' );
 
-			$statements = new StatementList( [ $statement ] );
+			$statements = new StatementList( $statement );
 			$new->setStatements( $statements );
 			$changes['add-claim'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();

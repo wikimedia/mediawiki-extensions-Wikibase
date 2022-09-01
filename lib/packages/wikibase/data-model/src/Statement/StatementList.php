@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace Wikibase\DataModel\Statement;
 
@@ -7,7 +7,6 @@ use Countable;
 use InvalidArgumentException;
 use Iterator;
 use IteratorAggregate;
-use Traversable;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Exception\PropertyChangedException;
 use Wikibase\DataModel\Exception\StatementGuidChangedException;
@@ -36,33 +35,13 @@ class StatementList implements IteratorAggregate, Countable {
 	/**
 	 * @var Statement[]
 	 */
-	private $statements = [];
+	private $statements;
 
 	/**
 	 * @param Statement ...$statements
-	 * (passing a single Statement[] or Traversable is still supported but deprecated)
-	 *
-	 * @throws InvalidArgumentException
 	 */
-	public function __construct( ...$statements ) {
-		if ( count( $statements ) === 1 && (
-			is_array( $statements[0] ) || $statements[0] instanceof Traversable
-		) ) {
-			// TODO stop supporting this
-			$statements = $statements[0];
-		}
-
-		if ( !is_array( $statements ) && !( $statements instanceof Traversable ) ) {
-			throw new InvalidArgumentException( '$statements must be an array or an instance of Traversable' );
-		}
-
-		foreach ( $statements as $statement ) {
-			if ( !( $statement instanceof Statement ) ) {
-				throw new InvalidArgumentException( 'Every element in $statements must be an instance of Statement' );
-			}
-
-			$this->statements[] = $statement;
-		}
+	public function __construct( Statement ...$statements ) {
+		$this->statements = $statements;
 	}
 
 	/**
@@ -71,7 +50,7 @@ class StatementList implements IteratorAggregate, Countable {
 	 *
 	 * @return PropertyId[] Array indexed by property id serialization.
 	 */
-	public function getPropertyIds() {
+	public function getPropertyIds(): array {
 		$propertyIds = [];
 
 		foreach ( $this->statements as $statement ) {
@@ -82,18 +61,19 @@ class StatementList implements IteratorAggregate, Countable {
 	}
 
 	/**
-	 * @since 1.0, setting an index is supported since 6.1
 	 * @see ReferenceList::addReference
+	 *
+	 * @since 1.0, setting an index is supported since 6.1
 	 *
 	 * @param Statement $statement
 	 * @param int|null $index New position of the added statement, or null to append.
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addStatement( Statement $statement, $index = null ) {
+	public function addStatement( Statement $statement, int $index = null ): void {
 		if ( $index === null ) {
 			$this->statements[] = $statement;
-		} elseif ( is_int( $index ) && $index >= 0 ) {
+		} elseif ( $index >= 0 ) {
 			array_splice( $this->statements, $index, 0, [ $statement ] );
 		} else {
 			throw new InvalidArgumentException( '$index must be a non-negative integer or null' );
@@ -106,7 +86,9 @@ class StatementList implements IteratorAggregate, Countable {
 	 * @param Reference[]|ReferenceList|null $references
 	 * @param string|null $guid
 	 */
-	public function addNewStatement( Snak $mainSnak, $qualifiers = null, $references = null, $guid = null ) {
+	public function addNewStatement(
+		Snak $mainSnak, $qualifiers = null, $references = null, string $guid = null
+	): void {
 		$qualifiers = is_array( $qualifiers ) ? new SnakList( $qualifiers ) : $qualifiers;
 		$references = is_array( $references ) ? new ReferenceList( $references ) : $references;
 
@@ -121,7 +103,7 @@ class StatementList implements IteratorAggregate, Countable {
 	 *
 	 * @param string|null $guid
 	 */
-	public function removeStatementsWithGuid( $guid ) {
+	public function removeStatementsWithGuid( ?string $guid ): void {
 		foreach ( $this->statements as $index => $statement ) {
 			if ( $statement->getGuid() === $guid ) {
 				unset( $this->statements[$index] );
@@ -154,7 +136,7 @@ class StatementList implements IteratorAggregate, Countable {
 		}
 
 		$newStatement->setGuid( (string)$statementGuid );
-		$this->statements[ $index ] = $newStatement;
+		$this->statements[$index] = $newStatement;
 	}
 
 	/**
@@ -165,14 +147,14 @@ class StatementList implements IteratorAggregate, Countable {
 	 *
 	 * @return self
 	 */
-	public function getWithUniqueMainSnaks() {
+	public function getWithUniqueMainSnaks(): self {
 		$statements = [];
 
 		foreach ( $this->statements as $statement ) {
 			$statements[$statement->getMainSnak()->getHash()] = $statement;
 		}
 
-		return new self( $statements );
+		return new self( ...array_values( $statements ) );
 	}
 
 	/**
@@ -182,7 +164,7 @@ class StatementList implements IteratorAggregate, Countable {
 	 *
 	 * @return self
 	 */
-	public function getByPropertyId( PropertyId $id ) {
+	public function getByPropertyId( PropertyId $id ): self {
 		$statementList = new self();
 
 		foreach ( $this->statements as $statement ) {
@@ -201,7 +183,7 @@ class StatementList implements IteratorAggregate, Countable {
 	 *
 	 * @return self
 	 */
-	public function getByRank( $acceptableRanks ) {
+	public function getByRank( $acceptableRanks ): self {
 		$acceptableRanks = array_flip( (array)$acceptableRanks );
 		$statementList = new self();
 
@@ -223,7 +205,7 @@ class StatementList implements IteratorAggregate, Countable {
 	 *
 	 * @return self
 	 */
-	public function getBestStatements() {
+	public function getBestStatements(): self {
 		$statements = $this->getByRank( Statement::RANK_PREFERRED );
 
 		if ( !$statements->isEmpty() ) {
@@ -244,7 +226,7 @@ class StatementList implements IteratorAggregate, Countable {
 	 *
 	 * @return Snak[] Numerically indexed (non-sparse) array.
 	 */
-	public function getAllSnaks() {
+	public function getAllSnaks(): array {
 		$snaks = [];
 
 		foreach ( $this->statements as $statement ) {
@@ -261,7 +243,7 @@ class StatementList implements IteratorAggregate, Countable {
 	 *
 	 * @return Snak[] Numerically indexed (non-sparse) array.
 	 */
-	public function getMainSnaks() {
+	public function getMainSnaks(): array {
 		$snaks = [];
 
 		foreach ( $this->statements as $statement ) {
@@ -274,14 +256,14 @@ class StatementList implements IteratorAggregate, Countable {
 	/**
 	 * @return Iterator|Statement[]
 	 */
-	public function getIterator() {
+	public function getIterator(): ArrayIterator {
 		return new ArrayIterator( $this->statements );
 	}
 
 	/**
 	 * @return Statement[] Numerically indexed (non-sparse) array.
 	 */
-	public function toArray() {
+	public function toArray(): array {
 		return $this->statements;
 	}
 
@@ -290,7 +272,7 @@ class StatementList implements IteratorAggregate, Countable {
 	 *
 	 * @return int
 	 */
-	public function count() {
+	public function count(): int {
 		return count( $this->statements );
 	}
 
@@ -300,13 +282,13 @@ class StatementList implements IteratorAggregate, Countable {
 	 *
 	 * @return bool
 	 */
-	public function equals( $target ) {
+	public function equals( $target ): bool {
 		if ( $this === $target ) {
 			return true;
 		}
 
 		if ( !( $target instanceof self )
-			|| $this->count() !== $target->count()
+			 || $this->count() !== $target->count()
 		) {
 			return false;
 		}
@@ -314,7 +296,7 @@ class StatementList implements IteratorAggregate, Countable {
 		return $this->statementsEqual( $target->statements );
 	}
 
-	private function statementsEqual( array $statements ) {
+	private function statementsEqual( array $statements ): bool {
 		reset( $statements );
 
 		foreach ( $this->statements as $statement ) {
@@ -331,21 +313,22 @@ class StatementList implements IteratorAggregate, Countable {
 	/**
 	 * @return bool
 	 */
-	public function isEmpty() {
+	public function isEmpty(): bool {
 		return empty( $this->statements );
 	}
 
 	/**
-	 * @since 3.0
 	 * @see StatementByGuidMap
+	 *
+	 * @since 3.0
 	 *
 	 * @param string|null $statementGuid
 	 *
 	 * @return Statement|null The first statement with the given GUID or null if not found.
 	 */
-	public function getFirstStatementWithGuid( $statementGuid ) {
+	public function getFirstStatementWithGuid( ?string $statementGuid ): ?Statement {
 		$index = $this->getIndexOfFirstStatementWithGuid( $statementGuid );
-		return $this->statements[ $index ] ?? null;
+		return $this->statements[$index] ?? null;
 	}
 
 	/**
@@ -353,7 +336,7 @@ class StatementList implements IteratorAggregate, Countable {
 	 *
 	 * @return int|null The index of the first statement with the given GUID or null if not found.
 	 */
-	private function getIndexOfFirstStatementWithGuid( $statementGuid ) {
+	private function getIndexOfFirstStatementWithGuid( ?string $statementGuid ): ?int {
 		foreach ( $this->statements as $index => $statement ) {
 			if ( $statement->getGuid() === $statementGuid ) {
 				return $index;
@@ -370,7 +353,7 @@ class StatementList implements IteratorAggregate, Countable {
 	 *
 	 * @return self
 	 */
-	public function filter( StatementFilter $filter ) {
+	public function filter( StatementFilter $filter ): self {
 		$statementList = new self();
 
 		foreach ( $this->statements as $statement ) {
@@ -387,7 +370,7 @@ class StatementList implements IteratorAggregate, Countable {
 	 *
 	 * @since 7.0
 	 */
-	public function clear() {
+	public function clear(): void {
 		$this->statements = [];
 	}
 
