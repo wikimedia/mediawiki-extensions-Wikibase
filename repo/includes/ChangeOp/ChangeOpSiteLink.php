@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\ChangeOp;
 
 use InvalidArgumentException;
@@ -40,15 +42,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $siteId, $pageName, array $badges = null ) {
-		if ( !is_string( $siteId ) ) {
-			throw new InvalidArgumentException( '$siteId needs to be a string' );
-		}
-
-		if ( !is_string( $pageName ) ) {
-			throw new InvalidArgumentException( '$linkPage needs to be a string' );
-		}
-
+	public function __construct( string $siteId, string $pageName, array $badges = null ) {
 		if ( $pageName === '' ) {
 			throw new InvalidArgumentException( '$linkPage must not be empty. For deletions use ChangeOpRemoveSiteLink' );
 		}
@@ -67,7 +61,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 *
 	 * @return bool
 	 */
-	private function badgesAreEmptyAndUnchanged( SiteLinkList $siteLinks ) {
+	private function badgesAreEmptyAndUnchanged( SiteLinkList $siteLinks ): bool {
 		return ( !$siteLinks->hasLinkWithSiteId( $this->siteId )
 			|| $siteLinks->getBySiteId( $this->siteId )->getBadges() === [] )
 			&& $this->badges === [];
@@ -80,7 +74,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 *
 	 * @return ItemId[]
 	 */
-	private function applyBadges( SiteLinkList $siteLinks, &$action, array &$commentArgs ) {
+	private function applyBadges( SiteLinkList $siteLinks, string &$action, array &$commentArgs ): array {
 		// If badges are not set in the change make sure they remain intact
 		if ( $this->badges === null ) {
 			return $siteLinks->hasLinkWithSiteId( $this->siteId )
@@ -153,7 +147,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 *
 	 * @return Result
 	 */
-	public function validate( EntityDocument $entity ) {
+	public function validate( EntityDocument $entity ): Result {
 		if ( !( $entity instanceof Item ) ) {
 			throw new InvalidArgumentException( 'ChangeOpSiteLink can only be applied to Item instances' );
 		}

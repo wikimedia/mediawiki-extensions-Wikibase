@@ -1,8 +1,11 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -23,13 +26,11 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @author Michał Łazowik
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
+class ChangeOpSiteLinkTest extends TestCase {
 
-	public function invalidConstructorProvider() {
+	public function invalidConstructorProvider(): array {
 		$argLists = [];
 
-		$argLists[] = [ 'enwiki', 1234 ];
-		$argLists[] = [ 1234, 'Berlin' ];
 		$argLists[] = [ 'plwiki', 'Warszawa', [ 'FA', 'GA' ] ];
 		$argLists[] = [ 'plwiki', 'Warszawa', [ new ItemId( 'Q42' ), 'FA' ] ];
 		$argLists[] = [ 'plwiki', 'Warszawa', [ new NumericPropertyId( 'P42' ) ] ];
@@ -40,12 +41,12 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider invalidConstructorProvider
 	 */
-	public function testConstructorWithInvalidArguments( $siteId, $linkPage, array $badges = null ) {
+	public function testConstructorWithInvalidArguments( $siteId, $linkPage, array $badges = null ): void {
 		$this->expectException( InvalidArgumentException::class );
 		new ChangeOpSiteLink( $siteId, $linkPage, $badges );
 	}
 
-	public function changeOpSiteLinkProvider() {
+	public function changeOpSiteLinkProvider(): array {
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
 		$enSiteLink = new SiteLink( 'enwiki', 'Berlin', [ new ItemId( 'Q149' ) ] );
 		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q42' ) ] );
@@ -110,7 +111,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider changeOpSiteLinkProvider
 	 */
-	public function testApply( array $existingSiteLinks, ChangeOpSiteLink $changeOpSiteLink, array $expectedSiteLinks ) {
+	public function testApply( array $existingSiteLinks, ChangeOpSiteLink $changeOpSiteLink, array $expectedSiteLinks ): void {
 		$item = new Item();
 		$item->setSiteLinkList( new SiteLinkList( $existingSiteLinks ) );
 
@@ -123,7 +124,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
-	public function summaryTestProvider() {
+	public function summaryTestProvider(): array {
 		$sitelinks = [
 			new SiteLink( 'dewiki', 'Berlin' ),
 			new SiteLink( 'ruwiki', 'Берлин', [ new ItemId( 'Q42' ) ] )
@@ -191,7 +192,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 		array $expectedArguments,
 		array $sitelinks,
 		ChangeOpSiteLink $changeOpSiteLink
-	) {
+	): void {
 		$item = new Item();
 		$item->setSiteLinkList( new SiteLinkList( $sitelinks ) );
 
@@ -206,7 +207,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function testGetActions() {
+	public function testGetActions(): void {
 		$changeOp = new ChangeOpSiteLink( 'enwiki', 'Berlin' );
 
 		$this->assertEquals( [ EntityPermissionChecker::ACTION_EDIT ], $changeOp->getActions() );
