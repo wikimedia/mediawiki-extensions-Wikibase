@@ -131,9 +131,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 
 		$this->updateSummary( $summary, $action, $this->siteId, $commentArgs );
 
-		// FIXME: Use SiteLinkList::setNewSiteLink.
-		$siteLinks->removeLinkWithSiteId( $this->siteId );
-		$siteLinks->addNewSiteLink( $this->siteId, $this->pageName, $badges );
+		$siteLinks->setNewSiteLink( $this->siteId, $this->pageName, $badges );
 
 		return new GenericChangeOpResult( $entity->getId(), true );
 	}
