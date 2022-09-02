@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
+use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementSuccessResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
@@ -36,15 +37,18 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 	private $useCase;
 	private $middlewareHandler;
 	private $successPresenter;
+	private $responseFactory;
 
 	public function __construct(
 		PatchItemStatement $useCase,
 		MiddlewareHandler $middlewareHandler,
-		StatementJsonPresenter $successPresenter
+		StatementJsonPresenter $successPresenter,
+		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->middlewareHandler = $middlewareHandler;
 		$this->successPresenter = $successPresenter;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
@@ -63,7 +67,8 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 					}
 				),
 			] ),
-			new StatementJsonPresenter( WbRestApi::getSerializerFactory()->newStatementSerializer() )
+			new StatementJsonPresenter( WbRestApi::getSerializerFactory()->newStatementSerializer() ),
+			new ResponseFactory( new ErrorJsonPresenter() )
 		);
 	}
 
@@ -94,7 +99,15 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 			$itemId
 		) );
 
-		return $this->newSuccessHttpResponse( $useCaseResponse );
+		if ( $useCaseResponse instanceof PatchItemStatementSuccessResponse ) {
+			$httpResponse = $this->newSuccessHttpResponse( $useCaseResponse );
+		} elseif ( $useCaseResponse instanceof PatchItemStatementErrorResponse ) {
+			$httpResponse = $this->responseFactory->newErrorResponse( $useCaseResponse );
+		} else {
+			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
+		}
+
+		return $httpResponse;
 	}
 
 	public function getParamSettings(): array {

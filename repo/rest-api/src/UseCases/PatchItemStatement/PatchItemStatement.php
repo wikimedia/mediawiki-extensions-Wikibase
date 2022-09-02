@@ -14,25 +14,34 @@ use Wikibase\Repo\RestApi\Domain\Services\StatementPatcher;
  */
 class PatchItemStatement {
 
+	private $validator;
 	private $statementIdParser;
 	private $itemRetriever;
 	private $statementPatcher;
 	private $itemUpdater;
 
 	public function __construct(
+		PatchItemStatementValidator $validator,
 		StatementGuidParser $statementIdParser,
 		ItemRetriever $itemRetriever,
 		StatementPatcher $statementPatcher,
 		ItemUpdater $itemUpdater
 	) {
+		$this->validator = $validator;
 		$this->statementIdParser = $statementIdParser;
 		$this->itemRetriever = $itemRetriever;
 		$this->statementPatcher = $statementPatcher;
 		$this->itemUpdater = $itemUpdater;
 	}
 
-	public function execute( PatchItemStatementRequest $request ): PatchItemStatementSuccessResponse {
-		// TODO: request validation (T316243)
+	/**
+	 * @return PatchItemStatementSuccessResponse|PatchItemStatementErrorResponse
+	 */
+	public function execute( PatchItemStatementRequest $request ) {
+		$validationError = $this->validator->validate( $request );
+		if ( $validationError ) {
+			return PatchItemStatementErrorResponse::newFromValidationError( $validationError );
+		}
 
 		$requestedItemId = $request->getItemId();
 		$statementId = $this->statementIdParser->parse( $request->getStatementId() );

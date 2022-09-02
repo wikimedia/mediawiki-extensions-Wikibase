@@ -14,9 +14,13 @@ use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementPatcher;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
+use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
+use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement
@@ -26,6 +30,11 @@ use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementSuccessR
  * @license GPL-2.0-or-later
  */
 class PatchItemStatementTest extends TestCase {
+
+	/**
+	 * @var MockObject|PatchItemStatementValidator
+	 */
+	private $validator;
 
 	/**
 	 * @var MockObject|ItemRetriever
@@ -45,12 +54,13 @@ class PatchItemStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->validator = $this->createStub( PatchItemStatementValidator::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->statementPatcher = $this->createStub( StatementPatcher::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
 
-	public function testPatchItemStatement(): void {
+	public function testPatchItemStatement_success(): void {
 		$itemId = 'Q123';
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		$oldStatementValue = "old statement value";
@@ -122,8 +132,35 @@ class PatchItemStatementTest extends TestCase {
 		$this->assertSame( $response->getRevisionId(), $postModificationRevisionId );
 	}
 
+	public function testPatchItemStatement_requestValidationError(): void {
+		$requestData = [
+			'$statementId' => 'INVALID-STATEMENT-ID',
+			'$patch' => [ 'INVALID-PATCH' ],
+			'$editTags' => [],
+			'$isBot' => false,
+			'$comment' => null,
+			'$username' => null,
+			'$itemId' => null
+		];
+
+		$request = $this->newUseCaseRequest( $requestData );
+		$this->validator = $this->createStub( PatchItemStatementValidator::class );
+		$this->validator
+			->method( 'validate' )
+			->with( $request )
+			->willReturn(
+				new ValidationError( 'INVALID-ID', PatchItemStatementValidator::SOURCE_ITEM_ID )
+			);
+
+		$response = $this->newUseCase()->execute( $request );
+
+		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $response->getCode() );
+	}
+
 	private function newUseCase(): PatchItemStatement {
 			return new PatchItemStatement(
+				$this->validator,
 				new StatementGuidParser( new ItemIdParser() ),
 				$this->itemRetriever,
 				$this->statementPatcher,

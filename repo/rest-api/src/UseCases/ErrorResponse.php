@@ -14,6 +14,7 @@ class ErrorResponse {
 	public const INVALID_STATEMENT_DATA = 'invalid-statement-data';
 	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
 	public const INVALID_OPERATION_CHANGED_PROPERTY = 'invalid-operation-change-property-of-statement';
+	public const INVALID_PATCH = 'invalid-patch';
 	public const ITEM_NOT_FOUND = 'item-not-found';
 	public const ITEM_REDIRECTED = 'redirected-item';
 	public const PERMISSION_DENIED = 'permission-denied';

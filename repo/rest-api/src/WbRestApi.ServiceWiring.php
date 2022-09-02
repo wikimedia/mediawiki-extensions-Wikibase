@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Serializers\SerializerFactory;
+use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
@@ -24,6 +25,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsValidator;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
+use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
@@ -108,6 +110,15 @@ return [
 
 	'WbRestApi.PatchItemStatement' => function( MediaWikiServices $services ): PatchItemStatement {
 		return new PatchItemStatement(
+			new PatchItemStatementValidator(
+				new ItemIdValidator(),
+				new StatementIdValidator( new ItemIdParser() ),
+				new JsonDiffJsonPatchValidator(),
+				new EditMetadataValidator(
+					CommentStore::COMMENT_CHARACTER_LIMIT,
+					ChangeTags::listExplicitlyDefinedTags()
+				)
+			),
 			new StatementGuidParser( new ItemIdParser() ),
 			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new JsonDiffStatementPatcher(
