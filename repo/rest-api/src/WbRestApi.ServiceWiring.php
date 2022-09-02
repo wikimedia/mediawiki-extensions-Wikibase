@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Serializers\SerializerFactory;
+use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
@@ -22,6 +23,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsValidator;
+use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
@@ -55,10 +57,10 @@ return [
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
-			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup() ),
+			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new MediaWikiEditEntityFactoryItemUpdater(
 				RequestContext::getMain(),
-				WikibaseRepo::getEditEntityFactory(),
+				WikibaseRepo::getEditEntityFactory( $services ),
 				WikibaseRepo::getLogger( $services )
 			),
 			new GuidGenerator(),
@@ -104,6 +106,22 @@ return [
 		);
 	},
 
+	'WbRestApi.PatchItemStatement' => function( MediaWikiServices $services ): PatchItemStatement {
+		return new PatchItemStatement(
+			new StatementGuidParser( new ItemIdParser() ),
+			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
+			new JsonDiffStatementPatcher(
+				WikibaseRepo::getBaseDataModelSerializerFactory( $services )->newStatementSerializer(),
+				WikibaseRepo::getBaseDataModelDeserializerFactory( $services )->newStatementDeserializer()
+			),
+			new MediaWikiEditEntityFactoryItemUpdater(
+				RequestContext::getMain(),
+				WikibaseRepo::getEditEntityFactory( $services ),
+				WikibaseRepo::getLogger( $services )
+			)
+		);
+	},
+
 	'WbRestApi.PreconditionMiddlewareFactory' => function( MediaWikiServices $services ): PreconditionMiddlewareFactory {
 		return new PreconditionMiddlewareFactory(
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
@@ -127,10 +145,10 @@ return [
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
 			new StatementGuidParser( new ItemIdParser() ),
-			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup() ),
+			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new MediaWikiEditEntityFactoryItemUpdater(
 				RequestContext::getMain(),
-				WikibaseRepo::getEditEntityFactory(),
+				WikibaseRepo::getEditEntityFactory( $services ),
 				WikibaseRepo::getLogger( $services )
 			),
 			new WikibaseEntityPermissionChecker(
@@ -161,10 +179,10 @@ return [
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
-			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup() ),
+			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new MediaWikiEditEntityFactoryItemUpdater(
 				RequestContext::getMain(),
-				WikibaseRepo::getEditEntityFactory(),
+				WikibaseRepo::getEditEntityFactory( $services ),
 				WikibaseRepo::getLogger( $services )
 			),
 			new WikibaseEntityPermissionChecker(

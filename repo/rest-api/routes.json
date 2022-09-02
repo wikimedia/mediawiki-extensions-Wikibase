@@ -43,5 +43,10 @@
 		"path": "/wikibase/v0/statements/{statement_id}",
 		"method": "DELETE",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemoveStatementRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/entities/items/{item_id}/statements/{statement_id}",
+		"method": "PATCH",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemStatementRouteHandler::factory"
 	}
 ]

@@ -10,6 +10,7 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
+use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 
@@ -56,6 +57,11 @@ class WbRestApi {
 	public static function getPreconditionMiddlewareFactory( ContainerInterface $services = null ): PreconditionMiddlewareFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.PreconditionMiddlewareFactory' );
+	}
+
+	public static function getPatchItemStatement( ContainerInterface $services = null ): PatchItemStatement {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.PatchItemStatement' );
 	}
 
 }

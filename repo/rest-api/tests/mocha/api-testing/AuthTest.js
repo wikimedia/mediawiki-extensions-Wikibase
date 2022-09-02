@@ -92,6 +92,22 @@ describe( 'Auth', () => {
 				.withRoute( 'GET', '/statements/{statement_id}' )
 				.withPathParam( 'statement_id', statementId )
 		},
+		/* blocked on T316245 since api-testing uses mediawiki/vendor in CI
+		{ // TODO move this to `editRequests` to also check authorization (T313906)
+			route: 'PATCH /entities/items/{item_id}/statements/{statement_id}',
+			newRequestBuilder: () => new RequestBuilder()
+				.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
+				.withPathParam( 'item_id', itemId )
+				.withPathParam( 'statement_id', statementId )
+				.withJsonBodyParam( 'patch', [
+					{
+						op: 'replace',
+						path: '/mainsnak',
+						value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
+					}
+				] )
+		},
+		*/
 		...editRequests
 	].forEach( ( { route, newRequestBuilder, expectedStatusCode = 200, isDestructive } ) => {
 		describe( `Authentication - ${route}`, () => {

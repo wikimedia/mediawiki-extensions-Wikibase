@@ -252,6 +252,22 @@ describe( 'Conditional requests', () => {
 					.withPathParam( 'statement_id', statementId )
 					.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( statementPropertyId ) )
 			},
+			/* blocked on T316245 since api-testing uses mediawiki/vendor in CI
+			{
+				route: 'PATCH /entities/items/{item_id}/statements/{statement_id}',
+				newRequestBuilder: () => new RequestBuilder()
+					.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
+					.withPathParam( 'item_id', itemId )
+					.withPathParam( 'statement_id', statementId )
+					.withJsonBodyParam( 'patch', [
+						{
+							op: 'replace',
+							path: '/mainsnak',
+							value: newStatementWithRandomStringValue( statementPropertyId ).mainsnak
+						}
+					] )
+			},
+			*/
 			{
 				route: '/statements/{statement_id}',
 				newRequestBuilder: () => new RequestBuilder()
