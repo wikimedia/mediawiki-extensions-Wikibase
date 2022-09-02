@@ -522,7 +522,7 @@ class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 	 * It is just here to catch unintentional changes.
 	 */
 	public function testSerializationStability() {
-		$this->markTestSkipped( 'Skipping temporarily to unblock CI' );
+		$this->markTestSkipped( 'Skipping temporarily until Wikimedia has fully migrated to PHP 7.4 (see T316923)' );
 		$list = new ReferenceList();
 		$list->addNewReference( new PropertyNoValueSnak( 1 ) );
 
