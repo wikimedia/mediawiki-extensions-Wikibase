@@ -31,9 +31,9 @@ class EntityContentDiffViewTest extends FederatedPropertiesTestCase {
 
 		$item = new Item( new ItemId( 'Q11' ) );
 		$item2 = new Item( new ItemId( 'Q12' ) );
-		$item2->setStatements( new StatementList( [ new Statement(
+		$item2->setStatements( new StatementList( new Statement(
 			new PropertyNoValueSnak( $this->newFederatedPropertyIdFromPId( 'P10' ) )
-		) ] ) );
+		) ) );
 		$itemContent = ItemContent::newFromItem( $item );
 		$itemContent2 = ItemContent::newFromItem( $item2 );
 

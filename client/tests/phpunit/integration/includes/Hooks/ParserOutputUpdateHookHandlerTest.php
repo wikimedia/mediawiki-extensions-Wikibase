@@ -400,12 +400,14 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			new ItemId( $itemId ),
 			null,
 			new SiteLinkList( [ $siteLink ] ),
-			new StatementList( [
-				new Statement( new PropertyValueSnak(
-					new NumericPropertyId( 'P100' ),
-					new UnmappedEntityIdValue( 'X808' )
-				) )
-			] )
+			new StatementList(
+				new Statement(
+					new PropertyValueSnak(
+						new NumericPropertyId( 'P100' ),
+						new UnmappedEntityIdValue( 'X808' )
+					)
+				)
+			)
 		);
 		$mockRepo->putEntity( $item );
 

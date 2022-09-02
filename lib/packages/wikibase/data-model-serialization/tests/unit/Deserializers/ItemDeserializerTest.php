@@ -73,7 +73,7 @@ class ItemDeserializerTest extends DispatchableDeserializerTest {
 					]
 				]
 			] ) )
-			->will( $this->returnValue( new StatementList( [ $statement ] ) ) );
+			->will( $this->returnValue( new StatementList( $statement ) ) );
 
 		$siteLinkDeserializerMock = $this->createMock( Deserializer::class );
 		$siteLinkDeserializerMock->expects( $this->any() )

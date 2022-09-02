@@ -83,9 +83,7 @@ class StatementListDeserializerTest extends TestCase {
 				[]
 			],
 			[
-				new StatementList( [
-					$statement
-				] ),
+				new StatementList( $statement ),
 				[
 					'P42' => [
 						[

@@ -90,7 +90,7 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 		$changeOpStatement = $this->newChangeOpStatement( $statement, $index );
 		$changeOpResult = $changeOpStatement->apply( $entity );
 
-		$expectedStatementList = new StatementList( $expected );
+		$expectedStatementList = new StatementList( ...$expected );
 		$this->assertEquals( $expectedStatementList, $entity->getStatements() );
 		$this->assertTrue( $entity->getStatements()->equals( $expectedStatementList ) );
 		$this->assertTrue( $changeOpResult->isEntityChanged() );
@@ -224,7 +224,7 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 		$property->setId( new NumericPropertyId( 'P73923' ) );
 
 		$statement = new Statement( new PropertyNoValueSnak( 45 ) );
-		$expected = new StatementList( [ $statement ] );
+		$expected = new StatementList( $statement );
 
 		$changeOpStatement = $this->newChangeOpStatement( $statement );
 		$changeOpResult = $changeOpStatement->apply( $property );

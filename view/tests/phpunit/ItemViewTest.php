@@ -43,7 +43,7 @@ class ItemViewTest extends EntityViewTestCase {
 		$item->setLabel( 'en', "label:$id" );
 		$item->setDescription( 'en', "description:$id" );
 
-		$item->setStatements( new StatementList( $statements ) );
+		$item->setStatements( new StatementList( ...$statements ) );
 
 		return $item;
 	}

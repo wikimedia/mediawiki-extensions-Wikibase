@@ -763,7 +763,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 					new ItemId( 'Q321' ),
 					null,
 					null,
-					new StatementList( [ $this->newStatement() ] )
+					new StatementList( $this->newStatement() )
 				)
 			]
 		];

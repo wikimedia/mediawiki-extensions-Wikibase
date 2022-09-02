@@ -188,9 +188,9 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 		$propertyId = new NumericPropertyId( 'P666' );
 		$property = new Property( $propertyId, null, 'wikibase-coolentity' );
 
-		$statements = new StatementList( [
+		$statements = new StatementList(
 			new Statement( new PropertyValueSnak( $propertyId, new UnmappedEntityIdValue( 'X303' ) ) )
-		] );
+		);
 		$item = new Item( new ItemId( 'Q999' ), null, null, $statements );
 
 		// inserting entities through site link lookup is a nasty hack needed/allowed by MockClientStore

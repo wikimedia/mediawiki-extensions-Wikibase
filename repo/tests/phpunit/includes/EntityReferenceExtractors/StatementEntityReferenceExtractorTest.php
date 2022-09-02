@@ -33,7 +33,7 @@ class StatementEntityReferenceExtractorTest extends TestCase {
 	 * @dataProvider statementsAndExtractedIdsProvider
 	 */
 	public function testExtractEntityIds( $statements, $expectedExtractedIds ) {
-		$entity = new Item( null, null, null, new StatementList( $statements ) );
+		$entity = new Item( null, null, null, new StatementList( ...$statements ) );
 		$extractor = new StatementEntityReferenceExtractor( $this->getMockEntityIdParser() );
 
 		$this->assertEquals(

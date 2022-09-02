@@ -118,7 +118,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 
 			$this->assertNull( $obtainedStatements->getFirstStatementWithGuid( $statement->getGuid() ) );
 
-			$currentStatements = new StatementList( $statements );
+			$currentStatements = new StatementList( ...$statements );
 
 			$this->assertTrue( $obtainedStatements->equals( $currentStatements ) );
 		}

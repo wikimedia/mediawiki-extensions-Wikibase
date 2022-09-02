@@ -73,8 +73,8 @@ class JsonDataTypeInjectorTest extends TestCase {
 		$snakList->addSnak( new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
 
 		return [
-				'basic usage' => [
-					new Item(
+			'basic usage' => [
+				new Item(
 					new ItemId( 'Q2' ),
 					new Fingerprint(
 						new TermList( [
@@ -94,7 +94,7 @@ class JsonDataTypeInjectorTest extends TestCase {
 						new SiteLink( 'enwiki', 'Berlin' ),
 						new SiteLink( 'dewiki', 'England', [ new ItemId( 'Q1' ) ] )
 					] ),
-					new StatementList( [
+					new StatementList(
 						new Statement(
 							new PropertySomeValueSnak( new NumericPropertyId( 'P12' ) ),
 							null,
@@ -112,10 +112,10 @@ class JsonDataTypeInjectorTest extends TestCase {
 							] ),
 							'GUID2'
 						)
-					] )
+					)
 				)
-				]
-			];
+			]
+		];
 	}
 
 	/**

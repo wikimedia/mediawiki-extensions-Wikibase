@@ -42,14 +42,8 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		$statement->setGuid( 'test' );
 
 		return [
-			[
-				new StatementList()
-			],
-			[
-				new StatementList( [
-					$statement
-				] )
-			],
+			[ new StatementList() ],
+			[ new StatementList( $statement ) ],
 		];
 	}
 
@@ -89,9 +83,7 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 						]
 					]
 				],
-				new StatementList( [
-					$statement
-				] )
+				new StatementList( $statement )
 			],
 		];
 	}
@@ -109,7 +101,7 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 			] ) );
 		$serializer = new StatementListSerializer( $statementSerializerMock, true );
 
-		$statementList = new StatementList( [ $statement ] );
+		$statementList = new StatementList( $statement );
 
 		$serial = new stdClass();
 		$serial->P42 = [ [
