@@ -79,13 +79,13 @@ class NoCrossReferencingStatementsTest extends TestCase {
 			->withValue( new ItemId( 'Q47' ) )
 			->withSomeGuid()
 			->build();
-		$statementWithReference->addNewReference( [
+		$statementWithReference->addNewReference(
 			NewStatement::forProperty( 'P48' )
 				->withValue( new ItemId( 'Q2' ) )
 				->withSomeGuid()
 				->build()
 				->getMainSnak()
-		] );
+		);
 
 		yield 'item with cross-reference in statement\'s references' => [
 			false,

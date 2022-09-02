@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace Wikibase\DataModel\Statement;
 
@@ -69,7 +69,7 @@ class Statement implements PropertyIdProvider {
 		Snak $mainSnak,
 		SnakList $qualifiers = null,
 		ReferenceList $references = null,
-		$guid = null
+		string $guid = null
 	) {
 		$this->mainSnak = $mainSnak;
 		$this->qualifiers = $qualifiers ?: new SnakList();
@@ -82,7 +82,7 @@ class Statement implements PropertyIdProvider {
 	 *
 	 * @return string|null
 	 */
-	public function getGuid() {
+	public function getGuid(): ?string {
 		return $this->guid;
 	}
 
@@ -92,14 +92,8 @@ class Statement implements PropertyIdProvider {
 	 * @since 0.2
 	 *
 	 * @param string|null $guid
-	 *
-	 * @throws InvalidArgumentException
 	 */
-	public function setGuid( $guid ) {
-		if ( !is_string( $guid ) && $guid !== null ) {
-			throw new InvalidArgumentException( '$guid must be a string or null' );
-		}
-
+	public function setGuid( ?string $guid ): void {
 		$this->guid = $guid;
 	}
 
@@ -110,7 +104,7 @@ class Statement implements PropertyIdProvider {
 	 *
 	 * @return Snak
 	 */
-	public function getMainSnak() {
+	public function getMainSnak(): Snak {
 		return $this->mainSnak;
 	}
 
@@ -121,7 +115,7 @@ class Statement implements PropertyIdProvider {
 	 *
 	 * @param Snak $mainSnak
 	 */
-	public function setMainSnak( Snak $mainSnak ) {
+	public function setMainSnak( Snak $mainSnak ): void {
 		$this->mainSnak = $mainSnak;
 	}
 
@@ -132,7 +126,7 @@ class Statement implements PropertyIdProvider {
 	 *
 	 * @return SnakList
 	 */
-	public function getQualifiers() {
+	public function getQualifiers(): SnakList {
 		return $this->qualifiers;
 	}
 
@@ -143,7 +137,7 @@ class Statement implements PropertyIdProvider {
 	 *
 	 * @param SnakList $propertySnaks
 	 */
-	public function setQualifiers( SnakList $propertySnaks ) {
+	public function setQualifiers( SnakList $propertySnaks ): void {
 		$this->qualifiers = $propertySnaks;
 	}
 
@@ -154,7 +148,7 @@ class Statement implements PropertyIdProvider {
 	 *
 	 * @return ReferenceList
 	 */
-	public function getReferences() {
+	public function getReferences(): ReferenceList {
 		return $this->references;
 	}
 
@@ -165,7 +159,7 @@ class Statement implements PropertyIdProvider {
 	 *
 	 * @param ReferenceList $references
 	 */
-	public function setReferences( ReferenceList $references ) {
+	public function setReferences( ReferenceList $references ): void {
 		$this->references = $references;
 	}
 
@@ -173,17 +167,9 @@ class Statement implements PropertyIdProvider {
 	 * @since 2.0
 	 *
 	 * @param Snak ...$snaks
-	 * (passing a single Snak[] is still supported but deprecated)
-	 *
-	 * @throws InvalidArgumentException
 	 */
-	public function addNewReference( ...$snaks ) {
-		if ( count( $snaks ) === 1 && is_array( $snaks[0] ) ) {
-			// TODO stop supporting this
-			$snaks = $snaks[0];
-		}
-
-		$this->references->addNewReference( $snaks );
+	public function addNewReference( Snak ...$snaks ) {
+		$this->references->addNewReference( ...$snaks );
 	}
 
 	/**
@@ -193,9 +179,10 @@ class Statement implements PropertyIdProvider {
 	 * @since 0.1
 	 *
 	 * @param integer $rank
+	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function setRank( $rank ) {
+	public function setRank( int $rank ): void {
 		$ranks = [ self::RANK_DEPRECATED, self::RANK_NORMAL, self::RANK_PREFERRED ];
 
 		if ( !in_array( $rank, $ranks, true ) ) {
@@ -210,7 +197,7 @@ class Statement implements PropertyIdProvider {
 	 *
 	 * @return integer
 	 */
-	public function getRank() {
+	public function getRank(): int {
 		return $this->rank;
 	}
 
@@ -219,7 +206,7 @@ class Statement implements PropertyIdProvider {
 	 *
 	 * @return string
 	 */
-	public function getHash() {
+	public function getHash(): string {
 		$hashParts = [
 			sha1( $this->mainSnak->getHash() . $this->qualifiers->getHash() ),
 			$this->rank,
@@ -238,7 +225,7 @@ class Statement implements PropertyIdProvider {
 	 *
 	 * @return PropertyId
 	 */
-	public function getPropertyId() {
+	public function getPropertyId(): PropertyId {
 		return $this->getMainSnak()->getPropertyId();
 	}
 
@@ -251,7 +238,7 @@ class Statement implements PropertyIdProvider {
 	 *
 	 * @return Snak[]
 	 */
-	public function getAllSnaks() {
+	public function getAllSnaks(): array {
 		$snaks = [ $this->mainSnak ];
 
 		foreach ( $this->qualifiers as $qualifier ) {
@@ -276,17 +263,17 @@ class Statement implements PropertyIdProvider {
 	 *
 	 * @return bool
 	 */
-	public function equals( $target ) {
+	public function equals( $target ): bool {
 		if ( $this === $target ) {
 			return true;
 		}
 
 		return $target instanceof self
-			&& $this->guid === $target->guid
-			&& $this->rank === $target->rank
-			&& $this->mainSnak->equals( $target->mainSnak )
-			&& $this->qualifiers->equals( $target->qualifiers )
-			&& $this->references->equals( $target->references );
+			   && $this->guid === $target->guid
+			   && $this->rank === $target->rank
+			   && $this->mainSnak->equals( $target->mainSnak )
+			   && $this->qualifiers->equals( $target->qualifiers )
+			   && $this->references->equals( $target->references );
 	}
 
 	/**
