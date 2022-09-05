@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use Deserializers\Deserializer;
 use HashSiteStore;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\StringNormalizer;
@@ -55,6 +56,8 @@ class ChangeOpDeserializerFactoryTest extends ServiceWiringTestCase {
 			$this->createMock( Deserializer::class ) );
 		$this->mockService( 'WikibaseRepo.EntityIdParser',
 			new ItemIdParser() );
+		$this->mockService( 'WikibaseRepo.EntityLookup',
+			$this->createMock( EntityLookup::class ) );
 		$this->mockService( 'WikibaseRepo.StringNormalizer',
 			new StringNormalizer() );
 		$this->mockService( 'WikibaseRepo.SiteLinkPageNormalizer',

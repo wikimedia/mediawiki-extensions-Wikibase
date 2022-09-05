@@ -376,6 +376,7 @@ return [
 			WikibaseRepo::getSiteLinkPageNormalizer( $services ),
 			WikibaseRepo::getSiteLinkTargetProvider( $services ),
 			WikibaseRepo::getEntityIdParser( $services ),
+			WikibaseRepo::getEntityLookup( $services ),
 			WikibaseRepo::getStringNormalizer( $services ),
 			$settings->getSetting( 'siteLinkGroups' )
 		);

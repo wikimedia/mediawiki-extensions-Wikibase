@@ -2,9 +2,12 @@
 
 namespace Wikibase\Repo\ChangeOp\Deserialization;
 
+use OutOfBoundsException;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
@@ -51,6 +54,11 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 	private $entityIdParser;
 
 	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
 	 * @var StringNormalizer
 	 */
 	private $stringNormalizer;
@@ -61,6 +69,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 	 * @param SiteLinkPageNormalizer $siteLinkPageNormalizer
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntityLookup $entityLookup
 	 * @param StringNormalizer $stringNormalizer
 	 * @param string[] $siteLinkGroups
 	 */
@@ -70,6 +79,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		EntityIdParser $entityIdParser,
+		EntityLookup $entityLookup,
 		StringNormalizer $stringNormalizer,
 		array $siteLinkGroups
 	) {
@@ -78,6 +88,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 		$this->siteLinkPageNormalizer = $siteLinkPageNormalizer;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 		$this->entityIdParser = $entityIdParser;
+		$this->entityLookup = $entityLookup;
 		$this->stringNormalizer = $stringNormalizer;
 		$this->siteLinkGroups = $siteLinkGroups;
 	}
@@ -85,7 +96,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 	/**
 	 * @see ChangeOpDeserializer::createEntityChangeOp
 	 *
-	 * @param array[] $changeRequest
+	 * @param array $changeRequest
 	 *
 	 * @return ChangeOp
 	 *
@@ -114,22 +125,22 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 					? $this->getBadgeItemIds( $serialization['badges'] )
 					: null;
 
-				if ( isset( $serialization['title'] ) ) {
-					$linkPage = $this->siteLinkPageNormalizer->normalize(
-						$linkSite,
-						$this->stringNormalizer->trimWhitespace( $serialization['title'] ),
-						$serialization['badges'] ?? []
-					);
+				$effectiveLinkTitle = isset( $serialization['title'] )
+					? $this->stringNormalizer->trimWhitespace( $serialization['title'] )
+					: $this->getLinkTitleFromExistingSiteLink( $changeRequest['id'], $globalSiteId );
 
-					if ( $linkPage === false ) {
-						throw new ChangeOpDeserializationException(
-							'A page "' . $serialization['title'] . '" could not be found on "' . $globalSiteId . '"',
-							'no-external-page',
-							[ $globalSiteId,  $serialization['title'] ]
-						);
-					}
-				} else {
-					$linkPage = null;
+				$linkPage = $this->siteLinkPageNormalizer->normalize(
+					$linkSite,
+					$effectiveLinkTitle,
+					$serialization['badges'] ?? []
+				);
+
+				if ( $linkPage === false ) {
+					throw new ChangeOpDeserializationException(
+						'A page "' . $serialization['title'] . '" could not be found on "' . $globalSiteId . '"',
+						'no-external-page',
+						[ $globalSiteId,  $serialization['title'] ]
+					);
 				}
 
 				$siteLinksChangeOps->add( $this->siteLinkChangeOpFactory->newSetSiteLinkOp( $globalSiteId, $linkPage, $badges ) );
@@ -137,6 +148,27 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 		}
 
 		return $siteLinksChangeOps;
+	}
+
+	private function getLinkTitleFromExistingSiteLink( string $id, string $linkSite ): string {
+		$entityId = $this->entityIdParser->parse( $id );
+		$entity = $this->entityLookup->getEntity( $entityId );
+		if ( $entity === null ) {
+			throw new ChangeOpDeserializationException( 'The given entity does not exist', 'not-existing' );
+		}
+		if ( !( $entity instanceof Item ) ) {
+			throw new ChangeOpDeserializationException( 'The given entity is not an item', 'not-item' );
+		}
+		try {
+			$siteLink = $entity->getSiteLinkList()->getBySiteId( $linkSite );
+		} catch ( OutOfBoundsException $e ) {
+			throw new ChangeOpDeserializationException(
+				"The given entity does not have a sitelink to $linkSite",
+				'no-such-sitelink',
+				[ $linkSite ]
+			);
+		}
+		return $siteLink->getPageName();
 	}
 
 	/**
