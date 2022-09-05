@@ -28,13 +28,20 @@ function newPatchStatementRequestBuilder( statementId, patch ) {
 		.withJsonBodyParam( 'patch', patch );
 }
 
-let testItemId;
-let testPropertyId;
-let testStatementId;
-let originalLastModified;
-let originalRevisionId;
+function newPatchItemStatementRequestBuilder( itemId, statementId, patch ) {
+	return new RequestBuilder()
+		.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
+		.withPathParam( 'item_id', itemId )
+		.withPathParam( 'statement_id', statementId )
+		.withJsonBodyParam( 'patch', patch );
+}
 
-describe( 'PATCH statement tests ', () => {
+describe( 'PATCH statement tests', () => {
+	let testItemId;
+	let testPropertyId;
+	let testStatementId;
+	let originalLastModified;
+	let originalRevisionId;
 
 	before( async function () {
 		if ( !hasJsonDiffLib() ) {
@@ -62,11 +69,8 @@ describe( 'PATCH statement tests ', () => {
 	[ // eslint-disable-line mocha/no-setup-in-describe
 		{
 			route: 'PATCH /entities/items/{item_id}/statements/{statement_id}',
-			newPatchRequestBuilder: ( statementId, patch ) => new RequestBuilder()
-				.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
-				.withPathParam( 'item_id', testItemId )
-				.withPathParam( 'statement_id', statementId )
-				.withJsonBodyParam( 'patch', patch )
+			newPatchRequestBuilder: ( statementId, patch ) =>
+				newPatchItemStatementRequestBuilder( testItemId, statementId, patch )
 		},
 		{
 			route: 'PATCH /statements/{statement_id}',
@@ -259,17 +263,10 @@ describe( 'PATCH statement tests ', () => {
 	} );
 
 	describe( 'long route specific errors', () => {
-		function newPatchItemStatementRequestBuilder( itemId, statementId, patch ) {
-			return new RequestBuilder()
-				.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
-				.withPathParam( 'item_id', itemId )
-				.withPathParam( 'statement_id', statementId )
-				.withJsonBodyParam( 'patch', patch );
-		}
 
 		it( 'responds 400 for invalid item ID', async () => {
 			const itemId = 'X123';
-			const response = await newPatchItemStatementRequestBuilder( itemId, testStatementId, { } )
+			const response = await newPatchItemStatementRequestBuilder( itemId, testStatementId, [] )
 				.assertInvalidRequest()
 				.makeRequest();
 
