@@ -1,8 +1,17 @@
 {
-	"openapi": "3.0.2",
+	"openapi": "3.0.3",
 	"info": {
 		"title": "Wikibase REST API",
-		"version": "0.1"
+		"version": "0.1",
+		"description": "OpenAPI definition of Wikibase REST API",
+		"contact": {
+			"name": "Wikimedia Deutschland - Wikibase Product Platform Team",
+			"url": "https://phabricator.wikimedia.org/project/board/5771/"
+		},
+		"license": {
+			"name": "GNU General Public License v2.0 or later",
+			"url": "https://spdx.org/licenses/GPL-2.0-or-later.html"
+		}
 	},
 	"paths": {
 		"$ref": "./resources/index.json"

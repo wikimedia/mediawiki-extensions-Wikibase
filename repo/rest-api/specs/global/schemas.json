@@ -84,13 +84,16 @@
 		"properties": {
 			"id": {
 				"type": "string",
+				"description": "The globally unique identfier for this Statement",
 				"readOnly": true
 			},
 			"mainsnak": {
 				"$ref": "#/Snak"
 			},
 			"rank": {
-				"type": "string"
+				"type": "string",
+				"default": "normal",
+				"enum": [ "deprecated", "normal", "preferred" ]
 			},
 			"qualifiers": {
 				"$ref": "./schema-parts.json#/Qualifiers"
