@@ -126,12 +126,12 @@ class WikibasePingback {
 	private function checkIfSent() {
 		$dbr = $this->repoConnections->getReadConnection();
 
-		$timestamp = $dbr->selectField(
-			'updatelog',
-			'ul_value',
-			[ 'ul_key' => $this->key ],
-			__METHOD__
-		);
+		$timestamp = $dbr->newSelectQueryBuilder()
+			->select( 'ul_value' )
+			->from( 'updatelog' )
+			->where( [ 'ul_key' => $this->key ] )
+			->caller( __METHOD__ )
+			->fetchField();
 
 		if ( $timestamp === false ) {
 			return false;
@@ -277,8 +277,12 @@ class WikibasePingback {
 		if ( !$this->id ) {
 			$dbr = $this->repoConnections->getReadConnection();
 
-			$id = $dbr->selectField(
-				'updatelog', 'ul_value', [ 'ul_key' => 'WikibasePingback' ], __METHOD__ );
+			$id = $dbr->newSelectQueryBuilder()
+				->select( 'ul_value' )
+				->from( 'updatelog' )
+				->where( [ 'ul_key' => 'WikibasePingback' ] )
+				->caller( __METHOD__ )
+				->fetchField();
 
 			if ( $id === false ) {
 				$id = MWCryptRand::generateHex( 32 );
@@ -291,8 +295,12 @@ class WikibasePingback {
 				);
 
 				if ( !$dbw->affectedRows() ) {
-					$id = $dbw->selectField(
-						'updatelog', 'ul_value', [ 'ul_key' => 'WikibasePingback' ], __METHOD__ );
+					$id = $dbw->newSelectQueryBuilder()
+						->select( 'ul_value' )
+						->from( 'updatelog' )
+						->where( [ 'ul_key' => 'WikibasePingback' ] )
+						->caller( __METHOD__ )
+						->fetchField();
 				}
 			}
 
