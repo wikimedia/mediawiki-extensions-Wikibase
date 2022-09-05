@@ -12,6 +12,7 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IResultWrapper;
+use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
  * SqlEntityIdPager is a cursor for iterating over the EntityIds stored in
@@ -108,32 +109,36 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 	 */
 	public function fetchIds( $limit ) {
 		Assert::parameter( is_int( $limit ) && $limit > 0, '$limit', '$limit must be a positive integer' );
-		$tables = [ 'page' ];
-		if ( $this->redirectMode !== self::INCLUDE_REDIRECTS ) {
-			$tables[] = 'redirect';
+
+		$queryBuilder = $this->db->connections()->getReadConnection()->newSelectQueryBuilder();
+
+		$queryBuilder->select( LinkCache::getSelectFields() )
+			->from( 'page' )
+			->where( [
+				'page_id > ' . (int)$this->position,
+				'page_namespace' => $this->getEntityNamespaces( $this->entityTypes ),
+			] );
+
+		if ( $this->cutoffPosition !== null ) {
+			$queryBuilder->andWhere( 'page_id <= ' . (int)$this->cutoffPosition );
 		}
 
-		$orderBy = 'page_id ASC';
 		if ( $this->redirectMode === self::ONLY_REDIRECTS ) {
+			$queryBuilder->join( 'redirect', null, 'page_id = rd_from' );
 			// Allow the SELECT to be based on the redirect table in this case,
 			// rd_from equals page_id anyway.
-			$orderBy = 'rd_from ASC';
+			$queryBuilder->orderBy( 'rd_from', SelectQueryBuilder::SORT_ASC );
+		} else {
+			$queryBuilder->orderBy( 'page_id', SelectQueryBuilder::SORT_ASC );
+			if ( $this->redirectMode === self::NO_REDIRECTS ) {
+				$queryBuilder->leftJoin( 'redirect', null, 'page_id = rd_from' )
+					->andWhere( 'rd_from IS NULL' );
+			}
 		}
 
-		$dbr = $this->db->connections()->getReadConnectionRef();
-		$fields = array_unique( array_merge( LinkCache::getSelectFields(),
-				[ 'page_id', 'page_title', 'page_namespace' ] ) );
-		$rows = $dbr->select(
-			$tables,
-			$fields,
-			$this->getWhere( $this->position ),
-			__METHOD__,
-			[
-				'ORDER BY' => $orderBy,
-				'LIMIT' => $limit
-			],
-			$this->getJoinConditions()
-		);
+		$queryBuilder->limit( $limit );
+
+		$rows = $queryBuilder->caller( __METHOD__ )->fetchResultSet();
 
 		list( $entityIds, $position ) = $this->processRows( $rows );
 		if ( $position !== null ) {
@@ -164,27 +169,6 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 		$this->cutoffPosition = $cutoffPosition;
 	}
 
-	/**
-	 * @param int $position
-	 *
-	 * @return array
-	 */
-	private function getWhere( $position ) {
-		$where = [ 'page_id > ' . (int)$position ];
-
-		if ( $this->cutoffPosition !== null ) {
-			$where[] = 'page_id <= ' . (int)$this->cutoffPosition;
-		}
-
-		$where['page_namespace'] = $this->getEntityNamespaces( $this->entityTypes );
-
-		if ( $this->redirectMode === self::NO_REDIRECTS ) {
-			$where[] = 'rd_from IS NULL';
-		}
-
-		return $where;
-	}
-
 	private function getEntityNamespaces( array $entityTypes ) {
 		if ( empty( $entityTypes ) ) {
 			return $this->entityNamespaceLookup->getEntityNamespaces();
@@ -194,21 +178,6 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 			[ $this->entityNamespaceLookup, 'getEntityNamespace' ],
 			$entityTypes
 		);
-	}
-
-	/**
-	 * @return array
-	 */
-	private function getJoinConditions() {
-		$joinConds = [];
-
-		if ( $this->redirectMode === self::NO_REDIRECTS ) {
-			$joinConds['redirect'] = [ 'LEFT JOIN', 'page_id = rd_from' ];
-		} elseif ( $this->redirectMode === self::ONLY_REDIRECTS ) {
-			$joinConds['redirect'] = [ 'INNER JOIN', 'page_id = rd_from' ];
-		}
-
-		return $joinConds;
 	}
 
 	/**

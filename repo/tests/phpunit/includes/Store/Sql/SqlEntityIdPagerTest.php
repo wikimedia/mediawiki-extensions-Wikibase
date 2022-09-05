@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use LinkCache;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -377,6 +378,16 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 			$ids
 		);
 		$this->assertSame( $itemPage->getId() + 2, $pager->getPosition() );
+	}
+
+	public function testLinkCacheSelectFieldsIncludePageId(): void {
+		/*
+		 * In SqlEntityIdPager::fetchIds(), we only select LinkCache::getSelectFields(),
+		 * but later use $row->page_id in processRows().
+		 * Assert that the page_id is one of the selected fields/columns.
+		 * (This is simpler than merging it into the select fields.)
+		 */
+		$this->assertContains( 'page_id', LinkCache::getSelectFields() );
 	}
 
 }
