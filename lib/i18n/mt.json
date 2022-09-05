@@ -2,9 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Chrisportelli",
-			"Leli Forte"
+			"Leli Forte",
+			"ToniSant"
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "Wikipedija",
-	"datatypes-type-number": "Numru"
+	"datatypes-type-number": "Numru",
+	"wikibase-entity-summary-wbsetsitelink-add": "Ħolqa għal [$2] miżjuda",
+	"wikibase-entity-summary-wblinktitles-connect": "Ħolqa tal-lingwa miżjuda biex tagħqad il-paġni",
+	"wikibase-item-summary-wblinktitles-connect": "Ħolqa tal-lingwa miżjuda biex tagħqad il-paġni"
 }

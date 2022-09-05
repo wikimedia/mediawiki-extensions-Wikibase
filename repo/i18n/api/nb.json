@@ -42,7 +42,7 @@
 	"apihelp-wbeditentity-param-tags": "Endringstagger som skal brukes på revisjonen.",
 	"apihelp-wbeditentity-example-1": "Opprett et nytt tomt element, returner full entitetsstruktur",
 	"apihelp-wbeditentity-example-2": "Opprett et nytt element og sett etiketter for <var>de</var> og <var>en</var>",
-	"apihelp-wbeditentity-example-3": "Opprett en ny egenskap med JSON-data, returner full entitetsstrktur",
+	"apihelp-wbeditentity-example-3": "Opprett en ny egenskap med JSON-data, returner full entitetsstruktur",
 	"apihelp-wbeditentity-example-4": "Tøm all data fra entiteten med ID <samp>Q42</samp>",
 	"apihelp-wbeditentity-example-5": "Tøm alle data fra entiteten med ID <samp>Q42</samp> og sett en etikett for <var>en</var>",
 	"apihelp-wbeditentity-example-6": "Setter sidelenke for <var>nowiki</var>, overskriver den om det allerede finnes en",

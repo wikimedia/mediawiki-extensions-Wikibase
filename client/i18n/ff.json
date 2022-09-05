@@ -12,6 +12,8 @@
 	"wikibase-dataitem": "Temre {{WBREPONAME}}",
 	"wikibase-editlinks": "Taƴto jokkorɗe",
 	"wikibase-editlinkstitle": "Taƴto jokkorɗe hakkunde ɗemɗe",
+	"wikibase-linkitem-title": "Dobundurde hello",
+	"wikibase-linkitem-linkpage": "Dobundurde hello",
 	"wikibase-linkitem-input-site": "Ɗemngal:",
 	"wikibase-linkitem-input-page": "Ɗerewol:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

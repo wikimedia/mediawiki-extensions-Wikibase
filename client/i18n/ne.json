@@ -36,7 +36,7 @@
 	"wikibase-linkitem-input-site": "भाषा:",
 	"wikibase-linkitem-input-page": "पृष्ठ:",
 	"wikibase-linkitem-confirmitem-text": "जुन पृष्ठ तपाईंले छान्नु भएको छ त्यो [$1  केन्द्रीय डाटा रिपोजिटरी] सँग पहिला नै जोडी सकिएको छ । कृपया सुनिश्चित गर्नुहोस् यहाँ देखाइएको {{PLURAL:$2|page|पृष्ठ}} त्यही हो जुन तपाईं {{PLURAL:$2|is|यो}} पृष्ठ सँग {{PLURAL:$2|one|जोड्न}} चाहनुहुन्छ।",
-	"wikibase-linkitem-confirmitem-button": "निश्चित गर्ने",
+	"wikibase-linkitem-confirmitem-button": "निश्चित गर्नुहोस्",
 	"wikibase-linkitem-not-loggedin-title": "तपाईंलाई प्रवेश गर्नु आवश्यक छ",
 	"wikibase-linkitem-not-loggedin": "यो सुविधाको उपयोग गर्नका लागि तपाईं यो विकि तथा [$1 केन्द्रीय डाटा रिपोजिटरी] मा प्रवेश गर्नु आवश्यक छ ।",
 	"wikibase-linkitem-success-link": "पृष्ठ सफलतापूर्वक जोडिएको छ। तपाईं लिङ्क जोडिएको आइटम आफ्नो [$1 केन्द्रीय डाटा रिपोजिटरी] मा खोज्न सक्नुहुन्छ।",
