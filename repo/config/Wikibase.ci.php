@@ -15,7 +15,7 @@
  * @license GPL-2.0-or-later
  */
 
-require __DIR__ . '/Wikibase.example.php';
+require_once __DIR__ . '/Wikibase.example.php';
 
 // Wikibase Cirrus search should not be used in browser tests
 $wgWBCSUseCirrus = false;
@@ -42,3 +42,25 @@ $wgWBRepoSettings['tmpNormalizeDataValues'] = true;
 $wgWBRepoSettings['federatedPropertiesEnabled'] = true;
 // Overriding the default source URL so that no default API Entity Source gets added via DefaultFederatedPropertiesEntitySourceAdder
 $wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = 'https://wikidata.beta.wmflabs.org/w/';
+
+// make sitelinks to the current wiki work
+$wgWBRepoSettings['siteLinkGroups'] = [ 'CI' ];
+
+$originalBadgeItems = $wgWBRepoSettings['badgeItems'] ?? [];
+$originalRedirectBadgeItems = $wgWBRepoSettings['redirectBadgeItems'] ?? [];
+$wgWBRepoSettings['badgeItems'] = static function () use ( $originalBadgeItems ) {
+	global $wgRequest;
+
+	$badges = $wgRequest->getHeader( 'X-Wikibase-CI-Badges', WebRequest::GETHEADER_LIST ) ?: [];
+	return $originalBadgeItems + array_fill_keys( $badges, 'CI-badge-class' );
+};
+$wgWBRepoSettings['redirectBadgeItems'] = static function () use ( $originalRedirectBadgeItems ) {
+	global $wgRequest;
+
+	return array_merge(
+		$originalRedirectBadgeItems,
+		$wgRequest->getHeader( 'X-Wikibase-CI-Redirect-Badges', WebRequest::GETHEADER_LIST ) ?: []
+	);
+};
+unset( $originalBadgeItems );
+unset( $originalRedirectBadgeItems );
