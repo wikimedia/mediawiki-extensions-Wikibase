@@ -94,7 +94,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 		// change badges without modifying title
 		$args[] = [
 			$existingSiteLinks,
-			new ChangeOpSiteLink( 'plwiki', null, [ new ItemId( 'Q149' ) ] ),
+			new ChangeOpSiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q149' ) ] ),
 			[
 				$deSiteLink,
 				new SiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q149' ) ] )
@@ -104,7 +104,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 		// add duplicate badges
 		$args[] = [
 			$existingSiteLinks,
-			new ChangeOpSiteLink( 'plwiki', null, [ new ItemId( 'q42' ), new ItemId( 'Q149' ), new ItemId( 'Q42' ) ] ),
+			new ChangeOpSiteLink( 'plwiki', 'Berlin', [ new ItemId( 'q42' ), new ItemId( 'Q149' ), new ItemId( 'Q42' ) ] ),
 			[
 				$deSiteLink,
 				new SiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q42' ), new ItemId( 'Q149' ) ] )
@@ -188,7 +188,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 			'set-badges',
 			[ [ $badge ] ],
 			$sitelinks,
-			new ChangeOpSiteLink( 'dewiki', null, [ $badge ] )
+			new ChangeOpSiteLink( 'dewiki', 'Berlin', [ $badge ] )
 		];
 
 		// Set page name and badges for existing sitelink
@@ -204,7 +204,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 			'set-badges',
 			[ [ $badge ] ],
 			$sitelinks,
-			new ChangeOpSiteLink( 'ruwiki', null, [ $badge ] )
+			new ChangeOpSiteLink( 'ruwiki', 'Берлин', [ $badge ] )
 		];
 
 		return $cases;

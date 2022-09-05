@@ -89,7 +89,12 @@ class ChangeOpSiteLink extends ChangeOpBase {
 			return [];
 		}
 
-		$action .= $this->pageName === null ? '-badges' : '-both';
+		if ( $this->isSiteLinkNewOrPageNameChanged( $siteLinks ) ) {
+			$action .= '-both';
+		} else {
+			$action .= '-badges';
+		}
+
 		$commentArgs[] = $this->badges;
 
 		return $this->badges;
@@ -123,12 +128,8 @@ class ChangeOpSiteLink extends ChangeOpBase {
 		} else {
 			$commentArgs = [];
 
-			if ( $this->pageName === null ) {
-				// If page name is not set (but badges are) make sure that it remains intact
-				$pageName = $siteLinks->getBySiteId( $this->siteId )->getPageName();
-			} else {
-				$pageName = $this->pageName;
-				$commentArgs[] = $pageName;
+			if ( $this->isSiteLinkNewOrPageNameChanged( $siteLinks ) ) {
+				$commentArgs[] = $this->pageName;
 			}
 
 			$action = $siteLinks->hasLinkWithSiteId( $this->siteId ) ? 'set' : 'add';
@@ -138,10 +139,18 @@ class ChangeOpSiteLink extends ChangeOpBase {
 
 			// FIXME: Use SiteLinkList::setNewSiteLink.
 			$siteLinks->removeLinkWithSiteId( $this->siteId );
-			$siteLinks->addNewSiteLink( $this->siteId, $pageName, $badges );
+			$siteLinks->addNewSiteLink( $this->siteId, $this->pageName, $badges );
 		}
 
 		return new GenericChangeOpResult( $entity->getId(), true );
+	}
+
+	private function isSiteLinkNewOrPageNameChanged( SiteLinkList $siteLinks ): bool {
+		if ( !$siteLinks->hasLinkWithSiteId( $this->siteId ) ) {
+			return true;
+		}
+		$originalPageName = $siteLinks->getBySiteId( $this->siteId )->getPageName();
+		return $originalPageName !== $this->pageName;
 	}
 
 	/**
