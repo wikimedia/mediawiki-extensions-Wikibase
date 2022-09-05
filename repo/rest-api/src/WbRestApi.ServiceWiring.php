@@ -129,6 +129,9 @@ return [
 				RequestContext::getMain(),
 				WikibaseRepo::getEditEntityFactory( $services ),
 				WikibaseRepo::getLogger( $services )
+			),
+			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+				WikibaseRepo::getEntityRevisionLookup( $services )
 			)
 		);
 	},
