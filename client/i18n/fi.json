@@ -65,7 +65,7 @@
 	"wikibase-error-invalid-entity-id": "Tunniste ”$2” on järjestelmälle tuntematon. Käytä kelvollista tunnistetta.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Liian monta mw.wikibase.getReferencedEntityId-kutsua. Enintään $2 {{PLURAL:$2|kutsu|kutsua}} sallittu.",
 	"unconnectedpages": "Sivut, joita ei ole liitetty kohteisiin",
-	"unconnectedpages-summary": "Tällä sivulla listataan sivut, joita ei ole liitetty datakohteeseen (nimiavaruuksissa, jotka tukevat kohteisiin liittämistä). Luettelo on laskevassa järjestyksessä sivutunnisteen mukaan, joten uudemmat sivut ovat luettelossa ensimmäisenä.",
+	"unconnectedpages-summary": "Tällä sivulla listataan sivut, joita ei ole liitetty datakohteeseen (nimiavaruuksissa, jotka tukevat kohteisiin liittämistä).",
 	"wikibase-unconnectedpages-submit": "Näytä sivut",
 	"pageswithbadges": "Sivut, joissa on arvomerkkejä",
 	"pageswithbadges-summary": "Tämä sivu luetteloi sivut, joissa on arvomerkkejä (esim. hyvä tai suositeltu artikkeli). Luettelo on järjestetty laskevaan järjestykseen sivun tunnistenumeron mukaan, joten uusimmat sivut ovat luettelon ylimpänä.",
