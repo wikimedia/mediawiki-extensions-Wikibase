@@ -92,7 +92,6 @@ describe( 'Lua Wikibase integration', () => {
 			token: await mindy.token( 'csrf' ),
 			fromid: redirectedItemId,
 			toid: testItemId,
-			ignoreconflicts: [ 'description', 'sitelink', 'statement' ],
 			summary: 'Merge the items to test redirects',
 		}, 'POST' );
 
