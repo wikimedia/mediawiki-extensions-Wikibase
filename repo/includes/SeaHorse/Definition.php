@@ -5,6 +5,8 @@ namespace Wikibase\Repo\SeaHorse;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Serializers\SerializerFactory;
+use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
+use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 
 return [
 	Def::CONTENT_MODEL_ID => SeaHorseSaddle::CONTENT_ID,
@@ -27,5 +29,15 @@ return [
 	},
 	Def::ENTITY_DIFFER_STRATEGY_BUILDER => static function () {
 		return new SeaHorseDiffer();
+	},
+	Def::ARTICLE_ID_LOOKUP_CALLBACK => static function () {
+		return new TitleLookupBasedEntityArticleIdLookup(
+			WikibaseRepo::getEntityTitleLookup()
+		);
+	},
+	Def::TITLE_TEXT_LOOKUP_CALLBACK => static function () {
+		return new TitleLookupBasedEntityTitleTextLookup(
+			WikibaseRepo::getEntityTitleLookup()
+		);
 	},
 ];

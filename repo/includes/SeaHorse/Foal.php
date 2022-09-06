@@ -61,16 +61,12 @@ class Foal extends SpecialPage {
 					$entity = new SeaHorse( new SeaHorseId(bin2hex(random_bytes(16))), $data['content'] );
 					$summary = "Neigh";
 
-					\Wikibase\Repo\WikibaseRepo::getEntityStore()->saveEntity(
+					$entityRevision = \Wikibase\Repo\WikibaseRepo::getEntityStore()->saveEntity(
 						$entity,
 						$summary,
 						$this->getContext()->getUser(),
 						EDIT_NEW
 					);
-
-					if ( !$saveStatus->isGood() ) {
-						return $saveStatus;
-					}
 
 					return Status::newGood( $entity );
 				}
