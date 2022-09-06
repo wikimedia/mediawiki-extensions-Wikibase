@@ -38,5 +38,6 @@
 	"wikibase-client-data-bridge-license-heading": "Âânnmõš da liseʹnss",
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Jiõk leäkku ǩeeʹrjtõõttâm sizz",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Õlmstââʹtt ǩeeʹrjtõõđǩâni sizz",
-	"wikibase-client-data-bridge-saving-error-assertuser-save": "Ruõkk ǩeeʹrjtõõđǩâni sizz"
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Ruõkk ǩeeʹrjtõõđǩâni sizz",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Ǩeeʹrjtõõđ sizz (ävvan ođđ kõskklõʹstte)"
 }

@@ -24,7 +24,8 @@
 			"Pegna",
 			"Silverie04",
 			"Themasterriot",
-			"Vivaelcelta"
+			"Vivaelcelta",
+			"Yupik"
 		]
 	},
 	"wikibase-client-desc": "Cliente para la extensión Wikibase",
@@ -146,6 +147,6 @@
 	"wikibase-client-data-bridge-saving-error-assertuser-message": "Puedes publicar tus cambios sin iniciar sesión. Tu dirección IP quedará registrada en el historial de ediciones de la página. También puedes iniciar sesión otra vez y tratar de publicar de nuevo.",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Publicar sin iniciar sesión",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Guardar sin iniciar sesión",
-	"wikibase-client-data-bridge-saving-error-assertuser-login": "Iniciar sesión (se abre en una nueva ventana)",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Iniciar sesión (se abre en una nueva pestaña)",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Seguir editando"
 }
