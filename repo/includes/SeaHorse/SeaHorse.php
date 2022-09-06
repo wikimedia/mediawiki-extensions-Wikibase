@@ -89,4 +89,8 @@ class SeaHorse implements EntityDocument {
 		return new self( clone $this->id, $this->content );
 	}
 
+	public function getContent() {
+		return $this->content;
+	}
+
 }
