@@ -277,23 +277,17 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		 * an optional argument to self::acquireIds() for instance, the current solution
 		 * in here can be a fallback when that isn't given.
 		 */
-		$selectColumns = array_keys( $neededRecords[0] );
-		$selectColumns[] = $this->idColumn;
-
-		$existingRows = $db->select(
-			$this->table,
-			$selectColumns,
-			$db->makeList( $recordsSelectConditions, IDatabase::LIST_OR ),
-			__METHOD__
-		);
+		$existingRows = $db->newSelectQueryBuilder()
+			->select( array_keys( $neededRecords[0] ) )
+			->select( $this->idColumn )
+			->from( $this->table )
+			->where( $db->makeList( $recordsSelectConditions, IDatabase::LIST_OR ) )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 
 		$existingRecords = [];
 		foreach ( $existingRows as $row ) {
-			$existingRecord = [];
-			foreach ( $selectColumns as $column ) {
-				$existingRecord[$column] = $row->$column;
-			}
-			$existingRecords[] = $existingRecord;
+			$existingRecords[] = (array)$row;
 		}
 
 		return $existingRecords;
