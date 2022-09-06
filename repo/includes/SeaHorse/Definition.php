@@ -25,4 +25,7 @@ return [
 	Def::STORAGE_SERIALIZER_FACTORY_CALLBACK => function( SerializerFactory $serializerFactory ) {
 		return new SeaHorseSerializer();
 	},
+	Def::ENTITY_DIFFER_STRATEGY_BUILDER => static function () {
+		return new SeaHorseDiffer();
+	},
 ];
