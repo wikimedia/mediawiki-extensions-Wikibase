@@ -42,6 +42,8 @@ $namespaceNames['en'] = [
 
 	WB_NS_QUERY      => 'Query',
 	WB_NS_QUERY_TALK => 'Query_talk',
+
+	4269 => 'Horse'
 ];
 
 $namespaceNames['be-tarask'] = [
