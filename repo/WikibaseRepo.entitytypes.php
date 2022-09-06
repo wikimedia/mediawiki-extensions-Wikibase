@@ -73,8 +73,11 @@ use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\FingerprintableEntityMetaTagsCreator;
 use Wikimedia\Purtle\RdfWriter;
+use Wikibase\Repo\SeaHorse\SeaHorseSaddle;
 
 return [
+	// Loading the entity type here for now, but this could just as well be added via the existing hook.
+	SeaHorseSaddle::ENTITY_TYPE => require __DIR__ . '/includes/SeaHorse/Definition.php',
 	'item' => [
 		Def::ARTICLE_ID_LOOKUP_CALLBACK => function () {
 			return new TitleLookupBasedEntityArticleIdLookup(

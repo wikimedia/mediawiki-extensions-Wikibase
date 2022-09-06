@@ -31,6 +31,7 @@ $specialPageAliases['en'] = [
 	'SetLabel' => [ 'SetLabel' ],
 	'SetLabelDescriptionAliases' => [ 'SetLabelDescriptionAliases' ],
 	'SetSiteLink' => [ 'SetSiteLink' ],
+	'Foal' => [ 'Foal' ],
 ];
 
 /** Arabic (العربية) */
