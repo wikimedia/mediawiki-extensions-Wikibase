@@ -25,7 +25,7 @@ class ResubmitChanges extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
-		$this->addDescription( 'Prune the Wikibase changes table to a maximum number of entries' );
+		$this->addDescription( 'Resubmit DispatchChanges jobs, based on entries in the wb_changes table.' );
 
 		$this->addOption( 'minimum-age', 'Only resubmit jobs older than this number of seconds', false, true );
 		$this->setBatchSize( 500 );
