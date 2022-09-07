@@ -115,7 +115,6 @@ use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
@@ -1372,16 +1371,6 @@ return [
 			$services->getLanguageFactory(),
 			$services->getLanguageConverterFactory(),
 			$services->getLanguageFallback()
-		);
-	},
-
-	'WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory' => function (
-		MediaWikiServices $services
-	): LanguageFallbackLabelDescriptionLookupFactory {
-		return new LanguageFallbackLabelDescriptionLookupFactory(
-			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
-			WikibaseRepo::getTermLookup( $services ),
-			WikibaseRepo::getTermBuffer( $services )
 		);
 	},
 

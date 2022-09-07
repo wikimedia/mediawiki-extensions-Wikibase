@@ -68,6 +68,9 @@ Monolingual entries removed as they are now natively supported by MediaWiki:
 
 === Breaking changes in 1.40 ===
 
+* (T312224) The LanguageFallbackLabelDescriptionLookupFactory service,
+deprecated in the previous release, has been removed.
+Use FallbackLabelDescriptionLookupFactory instead (already available in 1.39).
 * (T12345) ...
 
 === Deprecations in 1.40 ===

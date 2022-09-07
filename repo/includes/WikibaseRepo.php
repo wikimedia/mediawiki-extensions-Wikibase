@@ -72,7 +72,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
@@ -424,13 +423,6 @@ class WikibaseRepo {
 	public static function getLanguageFallbackChainFactory( ContainerInterface $services = null ): LanguageFallbackChainFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.LanguageFallbackChainFactory' );
-	}
-
-	public static function getLanguageFallbackLabelDescriptionLookupFactory(
-		ContainerInterface $services = null
-	): LanguageFallbackLabelDescriptionLookupFactory {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory' );
 	}
 
 	public static function getStatementGuidValidator( ContainerInterface $service = null ): StatementGuidValidator {
