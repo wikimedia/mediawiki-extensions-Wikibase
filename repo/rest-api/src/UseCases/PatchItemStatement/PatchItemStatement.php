@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\RestApi\UseCases\PatchItemStatement;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Exception\PropertyChangedException;
+use Wikibase\DataModel\Exception\StatementGuidChangedException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -79,7 +81,19 @@ class PatchItemStatement {
 		// TODO: handle errors caused by patching (T316319)
 		// TODO: validate patched statement (T316316)
 
-		$item->getStatements()->replaceStatement( $statementId, $patchedStatement );
+		try {
+			$item->getStatements()->replaceStatement( $statementId, $patchedStatement );
+		} catch ( PropertyChangedException $e ) {
+			return new PatchItemStatementErrorResponse(
+				ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY,
+				'Cannot change the property of the existing statement'
+			);
+		} catch ( StatementGuidChangedException $e ) {
+			return new PatchItemStatementErrorResponse(
+				ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID,
+				'Cannot change the ID of the existing statement'
+			);
+		}
 
 		$newRevision = $this->itemUpdater->update(
 			$item,
