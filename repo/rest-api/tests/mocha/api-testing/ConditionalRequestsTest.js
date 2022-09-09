@@ -198,7 +198,7 @@ describe( 'Conditional requests', () => {
 				it( 'If-Modified-Since header is same as current revision', async () => {
 					const response = await newRequestBuilder()
 						.assertValidRequest()
-						.withHeader( 'If-Modified-Since', `${lastModifiedDate}` )
+						.withHeader( 'If-Modified-Since', lastModifiedDate )
 						.makeRequest();
 					assertValid304Response( response, latestRevisionId );
 				} );
