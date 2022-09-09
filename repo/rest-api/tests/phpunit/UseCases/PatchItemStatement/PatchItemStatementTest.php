@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\PatchItemStatement;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
@@ -11,7 +12,9 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
+use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementPatcher;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
@@ -51,6 +54,11 @@ class PatchItemStatementTest extends TestCase {
 	 */
 	private $itemUpdater;
 
+	/**
+	 * @var MockObject|ItemRevisionMetadataRetriever
+	 */
+	private $revisionMetadataRetriever;
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -58,6 +66,7 @@ class PatchItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->statementPatcher = $this->createStub( StatementPatcher::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
+		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 	}
 
 	public function testPatchItemStatement_success(): void {
@@ -86,13 +95,7 @@ class PatchItemStatementTest extends TestCase {
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 
-		$patch = [
-			[
-				'op' => 'replace',
-				'path' => '/mainsnak/datavalue/value',
-				'value' => $newStatementValue
-			],
-		];
+		$patch = $this->getValidValueReplacingPatch( $newStatementValue );
 
 		$requestData = [
 			'$statementId' => $statementId,
@@ -123,6 +126,11 @@ class PatchItemStatementTest extends TestCase {
 			->method( 'update' )
 			->with( $item, new EditMetadata( $editTags, $isBot, $comment ) )
 			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $postModificationRevisionId ) );
+
+		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )->willReturn(
+			LatestItemRevisionMetadataResult::concreteRevision( 456, '20221111070607' )
+		);
 
 		$response = $this->newUseCase()->execute( $request );
 
@@ -158,13 +166,94 @@ class PatchItemStatementTest extends TestCase {
 		$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $response->getCode() );
 	}
 
+	public function testRequestedItemNotFound_returnsItemNotFound(): void {
+		$this->revisionMetadataRetriever = $this->newItemRevisionMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$itemId' => 'Q42',
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				'$patch' => $this->getValidValueReplacingPatch(),
+			] )
+		);
+
+		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $response->getCode() );
+	}
+
+	public function testItemForStatementNotFound_returnsStatementNotFound(): void {
+		$this->revisionMetadataRetriever = $this->newItemRevisionMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				'$patch' => $this->getValidValueReplacingPatch(),
+			] )
+		);
+
+		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+	}
+
+	public function testItemForStatementIsRedirect_returnsStatementNotFound(): void {
+		$this->revisionMetadataRetriever = $this->newItemRevisionMetadataRetriever(
+			LatestItemRevisionMetadataResult::redirect( new ItemId( 'Q321' ) )
+		);
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				'$patch' => $this->getValidValueReplacingPatch(),
+			] )
+		);
+
+		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+	}
+
+	public function testStatementIdMismatchingItemId_returnsStatementNotFound(): void {
+		$this->revisionMetadataRetriever = $this->newItemRevisionMetadataRetriever(
+			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
+		);
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$itemId' => 'Q666',
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				'$patch' => $this->getValidValueReplacingPatch(),
+			] )
+		);
+
+		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+	}
+
+	public function testStatementNotFoundOnItem_returnsStatementNotFound(): void {
+		$this->revisionMetadataRetriever = $this->newItemRevisionMetadataRetriever(
+			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
+		);
+		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( 'Q42' )->build() );
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				'$patch' => $this->getValidValueReplacingPatch(),
+			] )
+		);
+
+		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+	}
+
 	private function newUseCase(): PatchItemStatement {
 			return new PatchItemStatement(
 				$this->validator,
 				new StatementGuidParser( new ItemIdParser() ),
 				$this->itemRetriever,
 				$this->statementPatcher,
-				$this->itemUpdater
+				$this->itemUpdater,
+				$this->revisionMetadataRetriever
 			);
 	}
 
@@ -178,6 +267,23 @@ class PatchItemStatementTest extends TestCase {
 			$requestData['$username'] ?? null,
 			$requestData['$itemId'] ?? null
 		);
+	}
+
+	private function newItemRevisionMetadataRetriever( LatestItemRevisionMetadataResult $result ): ItemRevisionMetadataRetriever {
+		$metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$metadataRetriever->method( 'getLatestRevisionMetadata' )->willReturn( $result );
+
+		return $metadataRetriever;
+	}
+
+	private function getValidValueReplacingPatch( string $newStatementValue = '' ): array {
+		return [
+			[
+				'op' => 'replace',
+				'path' => '/mainsnak/datavalue/value',
+				'value' => $newStatementValue
+			],
+		];
 	}
 
 }

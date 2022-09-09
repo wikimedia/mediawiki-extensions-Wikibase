@@ -15,6 +15,19 @@ function assertValid400Response( response, responseBodyErrorCode ) {
 	assert.strictEqual( response.body.code, responseBodyErrorCode );
 }
 
+function assertValid404Response( response, responseBodyErrorCode ) {
+	assert.strictEqual( response.status, 404 );
+	assert.header( response, 'Content-Language', 'en' );
+	assert.strictEqual( response.body.code, responseBodyErrorCode );
+}
+
+function newPatchStatementRequestBuilder( statementId, patch ) {
+	return new RequestBuilder()
+		.withRoute( 'PATCH', '/statements/{statement_id}' )
+		.withPathParam( 'statement_id', statementId )
+		.withJsonBodyParam( 'patch', patch );
+}
+
 let testItemId;
 let testPropertyId;
 let testStatementId;
@@ -57,10 +70,7 @@ describe( 'PATCH statement tests ', () => {
 		},
 		{
 			route: 'PATCH /statements/{statement_id}',
-			newPatchRequestBuilder: ( statementId, patch ) => new RequestBuilder()
-				.withRoute( 'PATCH', '/statements/{statement_id}' )
-				.withPathParam( 'statement_id', statementId )
-				.withJsonBodyParam( 'patch', patch )
+			newPatchRequestBuilder: newPatchStatementRequestBuilder
 		}
 	].forEach( ( { route, newPatchRequestBuilder } ) => {
 		describe( route, () => {
@@ -232,11 +242,23 @@ describe( 'PATCH statement tests ', () => {
 
 			} );
 
+			describe( '404 statement not found', () => {
+				it( 'responds 404 statement-not-found for nonexistent statement', async () => {
+					const statementId = `${testItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+					const response = await newPatchRequestBuilder( statementId, [] )
+						.assertValidRequest()
+						.makeRequest();
+
+					assertValid404Response( response, 'statement-not-found' );
+					assert.include( response.body.message, statementId );
+				} );
+			} );
+
 		} );
 
 	} );
 
-	describe( 'item specific 400 error response', () => {
+	describe( 'long route specific errors', () => {
 		function newPatchItemStatementRequestBuilder( itemId, statementId, patch ) {
 			return new RequestBuilder()
 				.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
@@ -245,7 +267,7 @@ describe( 'PATCH statement tests ', () => {
 				.withJsonBodyParam( 'patch', patch );
 		}
 
-		it( 'invalid item ID', async () => {
+		it( 'responds 400 for invalid item ID', async () => {
 			const itemId = 'X123';
 			const response = await newPatchItemStatementRequestBuilder( itemId, testStatementId, { } )
 				.assertInvalidRequest()
@@ -255,6 +277,28 @@ describe( 'PATCH statement tests ', () => {
 			assert.include( response.body.message, itemId );
 		} );
 
+		it( 'responds 404 item-not-found for nonexistent item', async () => {
+			const itemId = 'Q999999999';
+			const response = await newPatchItemStatementRequestBuilder( itemId, testStatementId, [] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid404Response( response, 'item-not-found' );
+			assert.include( response.body.message, itemId );
+		} );
+
+	} );
+
+	describe( 'short route specific errors', () => {
+		it( 'responds 404 statement-not-found for nonexistent item', async () => {
+			const statementId = 'Q999999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newPatchStatementRequestBuilder( statementId, [] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid404Response( response, 'statement-not-found' );
+			assert.include( response.body.message, statementId );
+		} );
 	} );
 
 } );
