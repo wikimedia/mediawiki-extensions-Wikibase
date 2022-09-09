@@ -4,8 +4,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use HamcrestPHPUnitIntegration;
 use MediaWikiIntegrationTestCase;
-use Prophecy\Argument;
-use Prophecy\Prophecy\ObjectProphecy;
+use PHPUnit\Framework\MockObject\MockObject;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -33,13 +32,13 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	use HamcrestPHPUnitIntegration;
 
-	/** @var EntityTitleLookup|ObjectProphecy */
+	/** @var EntityTitleLookup|MockObject */
 	private $entityTitleLookup;
 
-	/** @var LanguageFallbackLabelDescriptionLookup|ObjectProphecy */
+	/** @var LanguageFallbackLabelDescriptionLookup|MockObject */
 	private $labelDescriptionLookup;
 
-	/** @var LanguageNameLookup|ObjectProphecy */
+	/** @var LanguageNameLookup|MockObject */
 	private $languageNameLookup;
 
 	protected $currentUserLanguage;
@@ -63,18 +62,17 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		parent::setUp();
 
 		$this->nonExistingEntityIdHtmlFormatter = new NonExistingEntityIdHtmlFormatter( 'wikibase-deletedentity-' );
-		$this->entityTitleLookup = $this->prophesize( EntityTitleLookup::class );
-		$this->labelDescriptionLookup = $this->prophesize(
+		$this->entityTitleLookup = $this->createMock( EntityTitleLookup::class );
+		$this->labelDescriptionLookup = $this->createMock(
 			LanguageFallbackLabelDescriptionLookup::class
 		);
-		$this->languageNameLookup = $this->prophesize( LanguageNameLookup::class );
+		$this->languageNameLookup = $this->createMock( LanguageNameLookup::class );
 
 		$currentUserLanguage = &$this->currentUserLanguage;
 
-		$this->languageNameLookup->getName( Argument::any() )
-			->will(
-				function ( $args ) use ( &$currentUserLanguage ) {
-					$languageCode = $args[0];
+		$this->languageNameLookup->method( 'getName' )
+			->willReturnCallback(
+				function ( $languageCode ) use ( &$currentUserLanguage ) {
 					$languageNamesIn = [
 						'en' => [
 							'en' => 'English',
@@ -201,9 +199,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$entityIdHtmlLinkFormatter = $this->createFormatter();
 		$result = $entityIdHtmlLinkFormatter->formatEntityId( new ItemId( 'Q1' ) );
 
-		$languageFallbackIndicator = new LanguageFallbackIndicator(
-			$this->languageNameLookup->reveal()
-		);
+		$languageFallbackIndicator = new LanguageFallbackIndicator( $this->languageNameLookup );
 		$fallbackMarker = $languageFallbackIndicator->getHtml(
 			new TermFallback( 'de', 'Label in English', 'en', 'en' )
 		);
@@ -218,7 +214,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$entityIdHtmlLinkFormatter = $this->createFormatter();
 		$result = $entityIdHtmlLinkFormatter->formatEntityId( new ItemId( 'Q1' ) );
 
-		$languageFallbackIndicator = new LanguageFallbackIndicator( $this->languageNameLookup->reveal() );
+		$languageFallbackIndicator = new LanguageFallbackIndicator( $this->languageNameLookup );
 		$fallbackMarker = $languageFallbackIndicator->getHtml(
 			new TermFallback( 'crh-latn', self::SOME_TRANSLITERATED_TEXT, 'crh-latn', 'crh-cyrl' )
 		);
@@ -390,9 +386,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$entityIdHtmlLinkFormatter = $this->createFormatter();
 		$result = $entityIdHtmlLinkFormatter->formatEntityId( new NumericPropertyId( 'P1' ) );
 
-		$languageFallbackIndicator = new LanguageFallbackIndicator(
-			$this->languageNameLookup->reveal()
-		);
+		$languageFallbackIndicator = new LanguageFallbackIndicator( $this->languageNameLookup );
 		$fallbackMarker = $languageFallbackIndicator->getHtml(
 			new TermFallback( 'de', 'Label in English', 'en', 'en' )
 		);
@@ -407,7 +401,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$entityIdHtmlLinkFormatter = $this->createFormatter();
 		$result = $entityIdHtmlLinkFormatter->formatEntityId( new NumericPropertyId( 'P1' ) );
 
-		$languageFallbackIndicator = new LanguageFallbackIndicator( $this->languageNameLookup->reveal() );
+		$languageFallbackIndicator = new LanguageFallbackIndicator( $this->languageNameLookup );
 		$fallbackMarker = $languageFallbackIndicator->getHtml(
 			new TermFallback( 'crh-latn', self::SOME_TRANSLITERATED_TEXT, 'crh-latn', 'crh-cyrl' )
 		);
@@ -435,9 +429,9 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	 */
 	protected function createFormatter() {
 		return new ItemPropertyIdHtmlLinkFormatter(
-			$this->labelDescriptionLookup->reveal(),
-			$this->entityTitleLookup->reveal(),
-			$this->languageNameLookup->reveal(),
+			$this->labelDescriptionLookup,
+			$this->entityTitleLookup,
+			$this->languageNameLookup,
 			$this->nonExistingEntityIdHtmlFormatter
 		);
 	}
@@ -468,16 +462,16 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function givenItemHasLabel( $itemId, $labelLanguage, $labelText ) {
-		$this->givenItemExists( 'Q1' );
+		$this->givenItemExists( $itemId );
 
 		$this->givenEntityHasLabel( new ItemId( $itemId ), $labelLanguage, $labelText );
 	}
 
 	private function givenEntityHasLabel( EntityId $id, $labelLanguage, $labelText ) {
 		$testCase = $this;
-		$this->labelDescriptionLookup
-			->getLabel( $id )
-			->will(
+		$this->labelDescriptionLookup->method( 'getLabel' )
+			->with( $id )
+			->willReturnCallback(
 				function () use (
 					$labelLanguage,
 					$labelText,
@@ -531,49 +525,59 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	 * @param string $itemId
 	 */
 	private function givenItemDoesNotExist( $itemId ) {
-		$title = $this->prophesize( Title::class );
-		$title->isKnown()->willReturn( false );
+		$title = $this->createMock( Title::class );
+		$title->method( 'isKnown' )->willReturn( false );
 
 		$this->entityTitleLookup
-			->getTitleForId( new ItemId( $itemId ) )
-			->willReturn( $title->reveal() );
+			->method( 'getTitleForId' )
+			->with( new ItemId( $itemId ) )
+			->willReturn( $title );
 	}
 
 	/**
 	 * @param string $itemId
 	 */
 	private function givenItemExists( $itemId ) {
-		$title = $this->prophesize( Title::class );
-		$title->isLocal()->willReturn( true );
-		$title->isKnown()->willReturn( true );
-		$title->isRedirect()->willReturn( false );
-		$title->getLocalURL()->willReturn( $this->itemPageUrl( $itemId ) );
-		$title->getPrefixedText()->willReturn( $itemId );
+		$title = $this->createMock( Title::class );
+		$isLocal = true;
+		$isRedirect = false;
+		$title->method( 'isLocal' )->willReturnCallback( function () use ( &$isLocal ) {
+			return $isLocal;
+		} );
+		$title->method( 'isRedirect' )->willReturnCallback( function () use ( &$isRedirect ) {
+			return $isRedirect;
+		} );
+		$title->method( 'isKnown' )->willReturn( true );
+		$title->method( 'isRedirect' )->willReturn( false );
+		$title->method( 'getLocalURL' )->willReturn( $this->itemPageUrl( $itemId ) );
+		$title->method( 'getPrefixedText' )->willReturn( $itemId );
 
-		$this->entityTitleLookup->getTitleForId( new ItemId( $itemId ) )->willReturn(
-			$title->reveal()
-		);
+		$this->entityTitleLookup->method( 'getTitleForId' )
+			->with( new ItemId( $itemId ) )
+			->willReturn( $title );
 
-		return new class( $title ) {
+		return new class( $title, $isLocal, $isRedirect ) {
 
-			public function __construct( $title ) {
+			public function __construct( $title, &$isLocal, &$isRedirect ) {
 				$this->title = $title;
+				$this->isLocal = &$isLocal;
+				$this->isRedirect = &$isRedirect;
 			}
 
 			public function andIsRedirect() {
-				$this->title->isRedirect()->willReturn( true );
+				$this->isRedirect = true;
 			}
 
 			public function andIsNotLocal() {
-				$this->title->isLocal()->willReturn( false );
-				$this->title->getFullURL()->willReturn( 'http://some.url/' );
+				$this->isLocal = false;
+				$this->title->method( 'getFullURL' )->willReturn( 'http://some.url/' );
 			}
 
 		};
 	}
 
 	private function givenPropertyHasLabel( $propertyId, $labelLanguage, $labelText ) {
-		$this->givenPropertyExists( 'P1' );
+		$this->givenPropertyExists( $propertyId );
 
 		$this->givenEntityHasLabel( new NumericPropertyId( $propertyId ), $labelLanguage, $labelText );
 	}
@@ -586,39 +590,44 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	 * @param string $propertyId
 	 */
 	private function givenPropertyDoesNotExist( $propertyId ) {
-		$title = $this->prophesize( Title::class );
-		$title->isKnown()->willReturn( false );
-		$title->isLocal()->willReturn( true );
+		$title = $this->createMock( Title::class );
+		$title->method( 'isKnown' )->willReturn( false );
+		$title->method( 'isLocal' )->willReturn( true );
 
 		$this->entityTitleLookup
-			->getTitleForId( new NumericPropertyId( $propertyId ) )
-			->willReturn( $title->reveal() );
+			->method( 'getTitleForId' )
+			->with( new NumericPropertyId( $propertyId ) )
+			->willReturn( $title );
 	}
 
 	/**
 	 * @param string $propertyId
 	 */
 	private function givenPropertyExists( $propertyId ) {
-		$title = $this->prophesize( Title::class );
-		$title->isLocal()->willReturn( true );
-		$title->isKnown()->willReturn( true );
-		$title->isRedirect()->willReturn( false );
-		$title->getLocalURL()->willReturn( $this->propertyPageUrl( $propertyId ) );
-		$title->getPrefixedText()->willReturn( $propertyId );
+		$title = $this->createMock( Title::class );
+		$isLocal = true;
+		$title->method( 'isLocal' )->willReturnCallback( function () use ( &$isLocal ) {
+			return $isLocal;
+		} );
+		$title->method( 'isKnown' )->willReturn( true );
+		$title->method( 'isRedirect' )->willReturn( false );
+		$title->method( 'getLocalURL' )->willReturn( $this->propertyPageUrl( $propertyId ) );
+		$title->method( 'getPrefixedText' )->willReturn( $propertyId );
 
-		$this->entityTitleLookup->getTitleForId( new NumericPropertyId( $propertyId ) )->willReturn(
-			$title->reveal()
-		);
+		$this->entityTitleLookup->method( 'getTitleForId' )
+			->with( new NumericPropertyId( $propertyId ) )
+			->willReturn( $title );
 
-		return new class( $title ) {
+		return new class( $title, $isLocal ) {
 
-			public function __construct( $title ) {
+			public function __construct( $title, &$isLocal ) {
 				$this->title = $title;
+				$this->isLocal = &$isLocal;
 			}
 
 			public function andIsNotLocal() {
-				$this->title->isLocal()->willReturn( false );
-				$this->title->getFullURL()->willReturn( 'http://some.url/' );
+				$this->isLocal = false;
+				$this->title->method( 'getFullURL' )->willReturn( 'http://some.url/' );
 			}
 
 		};
