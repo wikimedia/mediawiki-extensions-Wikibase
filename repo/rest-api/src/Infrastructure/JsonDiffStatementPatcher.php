@@ -12,8 +12,10 @@ use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Services\StatementPatcher;
+use Wikibase\Repo\Validators\SnakValidator;
 
 /**
  * @license GPL-2.0-or-later
@@ -22,10 +24,16 @@ class JsonDiffStatementPatcher implements StatementPatcher {
 
 	private $serializer;
 	private $deserializer;
+	private $snakValidator;
 
-	public function __construct( StatementSerializer $serializer, StatementDeserializer $deserializer ) {
+	public function __construct(
+		StatementSerializer $serializer,
+		StatementDeserializer $deserializer,
+		SnakValidator $snakValidator
+	) {
 		$this->serializer = $serializer;
 		$this->deserializer = $deserializer;
+		$this->snakValidator = $snakValidator;
 	}
 
 	/**
@@ -51,9 +59,15 @@ class JsonDiffStatementPatcher implements StatementPatcher {
 		}
 
 		try {
-			return $this->deserializer->deserialize( $statementSerialization );
+			$patchedStatement = $this->deserializer->deserialize( $statementSerialization );
 		} catch ( Exception $e ) {
 			throw new InvalidPatchedSerializationException( $e->getMessage() );
 		}
+
+		if ( !$this->snakValidator->validateStatementSnaks( $patchedStatement )->isValid() ) {
+			throw new InvalidPatchedStatementException();
+		}
+
+		return $patchedStatement;
 	}
 }

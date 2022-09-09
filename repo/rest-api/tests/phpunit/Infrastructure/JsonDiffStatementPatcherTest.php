@@ -4,14 +4,18 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
 use Generator;
 use InvalidArgumentException;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Swaggest\JsonDiff\JsonDiff;
+use ValueValidators\Result;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
+use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -23,8 +27,18 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class JsonDiffStatementPatcherTest extends TestCase {
 
+	/**
+	 * @var MockObject|SnakValidator
+	 */
+	private $snakValidator;
+
 	protected function setUp(): void {
 		parent::setUp();
+
+		$this->snakValidator = $this->createStub( SnakValidator::class );
+		$this->snakValidator
+			->method( 'validateStatementSnaks' )
+			->willReturn( Result::newSuccess() );
 
 		if ( !class_exists( JsonDiff::class ) ) {
 			$this->markTestSkipped( 'Skipping while swaggest/json-diff has not made it to mediawiki/vendor yet (T316245).' );
@@ -129,6 +143,28 @@ class JsonDiffStatementPatcherTest extends TestCase {
 		);
 	}
 
+	public function testGivenPatchResultsIsInvalidStatement_throwsException(): void {
+		$this->snakValidator = $this->createMock( SnakValidator::class );
+		$this->snakValidator
+			->method( 'validateStatementSnaks' )
+			->willReturn( Result::newError( [] ) );
+
+		$this->expectException( InvalidPatchedStatementException::class );
+
+		$this->newStatementPatcher()->patch(
+			NewStatement::forProperty( 'P1' )
+				->withValue( 'abc' )
+				->build(),
+			[
+				[
+					'op' => 'replace',
+					'path' => '/mainsnak/datavalue/type',
+					'value' => 'wikibase-entityid'
+				]
+			]
+		);
+	}
+
 	public function invalidPatchProvider(): Generator {
 		yield 'patch operation is not an array' => [
 			[ 'potato' ],
@@ -146,7 +182,8 @@ class JsonDiffStatementPatcherTest extends TestCase {
 			WikibaseRepo::getBaseDataModelSerializerFactory()
 				->newStatementSerializer(),
 			WikibaseRepo::getBaseDataModelDeserializerFactory()
-				->newStatementDeserializer()
+				->newStatementDeserializer(),
+			$this->snakValidator
 		);
 	}
 

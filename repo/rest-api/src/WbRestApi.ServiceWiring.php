@@ -123,7 +123,12 @@ return [
 			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new JsonDiffStatementPatcher(
 				WikibaseRepo::getBaseDataModelSerializerFactory( $services )->newStatementSerializer(),
-				WikibaseRepo::getBaseDataModelDeserializerFactory( $services )->newStatementDeserializer()
+				WikibaseRepo::getBaseDataModelDeserializerFactory( $services )->newStatementDeserializer(),
+				new SnakValidator(
+					WikibaseRepo::getPropertyDataTypeLookup( $services ),
+					WikibaseRepo::getDataTypeFactory( $services ),
+					WikibaseRepo::getDataTypeValidatorFactory( $services )
+				)
 			),
 			new MediaWikiEditEntityFactoryItemUpdater(
 				RequestContext::getMain(),
