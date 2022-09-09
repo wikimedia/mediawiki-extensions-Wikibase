@@ -7,6 +7,10 @@ use Wikibase\DataModel\Exception\PropertyChangedException;
 use Wikibase\DataModel\Exception\StatementGuidChangedException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
@@ -76,9 +80,25 @@ class PatchItemStatement {
 			return $this->newStatementNotFoundErrorResponse( $statementId );
 		}
 
-		$patchedStatement = $this->statementPatcher->patch( $statementToPatch, $request->getPatch() );
+		try {
+			$patchedStatement = $this->statementPatcher->patch( $statementToPatch, $request->getPatch() );
+		} catch ( InvalidPatchedSerializationException | InvalidPatchedStatementException $e ) {
+			return new PatchItemStatementErrorResponse(
+				ErrorResponse::PATCHED_STATEMENT_INVALID,
+				'The patch results in an invalid statement which cannot be stored'
+			);
+		} catch ( InapplicablePatchException $e ) {
+			return new PatchItemStatementErrorResponse(
+				ErrorResponse::CANNOT_APPLY_PATCH,
+				"The provided patch cannot be applied to the statement $statementId"
+			);
+		} catch ( PatchTestConditionFailedException $e ) {
+			return new PatchItemStatementErrorResponse(
+				ErrorResponse::PATCH_TEST_FAILED,
+				'Test operation in the patch provided failed'
+			);
+		}
 
-		// TODO: handle errors caused by patching (T316319)
 		// TODO: validate patched statement (T316316)
 
 		try {
