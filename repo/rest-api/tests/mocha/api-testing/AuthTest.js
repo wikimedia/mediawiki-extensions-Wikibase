@@ -96,9 +96,7 @@ describe( 'Auth', () => {
 		...editRequests
 	];
 
-	// eslint-disable-next-line mocha/no-setup-in-describe
 	if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
-		// eslint-disable-next-line mocha/no-setup-in-describe
 		allRoutes.push( { // TODO move this to `editRequests` to also check authorization (T313906)
 			route: 'PATCH /entities/items/{item_id}/statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
@@ -113,7 +111,6 @@ describe( 'Auth', () => {
 					}
 				] )
 		} );
-		// eslint-disable-next-line mocha/no-setup-in-describe
 		allRoutes.push( { // TODO move this to `editRequests` to also check authorization (T313906)
 			route: 'PATCH /statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
@@ -129,7 +126,6 @@ describe( 'Auth', () => {
 		} );
 	}
 
-	// eslint-disable-next-line mocha/no-setup-in-describe
 	allRoutes.forEach( ( { route, newRequestBuilder, expectedStatusCode = 200, isDestructive } ) => {
 		describe( `Authentication - ${route}`, () => {
 
@@ -172,7 +168,6 @@ describe( 'Auth', () => {
 			await protectItem( itemId );
 		} );
 
-		// eslint-disable-next-line mocha/no-setup-in-describe
 		editRequests.forEach( ( { route, newRequestBuilder } ) => {
 			it( `Permission denied for protected item - ${route}`, async () => {
 				const response = await newRequestBuilder().makeRequest();

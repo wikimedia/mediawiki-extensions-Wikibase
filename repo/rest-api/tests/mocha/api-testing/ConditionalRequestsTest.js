@@ -46,7 +46,7 @@ describe( 'Conditional requests', () => {
 		latestRevisionId = testItemCreationMetadata.revid;
 	} );
 
-	[ // eslint-disable-line mocha/no-setup-in-describe
+	[
 		{
 			route: '/entities/items/{item_id}',
 			newRequestBuilder: () => new RequestBuilder()
@@ -268,9 +268,7 @@ describe( 'Conditional requests', () => {
 			}
 		];
 
-		// eslint-disable-next-line mocha/no-setup-in-describe
 		if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
-			// eslint-disable-next-line mocha/no-setup-in-describe
 			editRoutes.push( {
 				route: 'PATCH /entities/items/{item_id}/statements/{statement_id}',
 				newRequestBuilder: () => new RequestBuilder()
@@ -285,7 +283,6 @@ describe( 'Conditional requests', () => {
 						}
 					] )
 			} );
-			// eslint-disable-next-line mocha/no-setup-in-describe
 			editRoutes.push( {
 				route: 'PATCH /statements/{statement_id}',
 				newRequestBuilder: () => new RequestBuilder()
@@ -301,7 +298,6 @@ describe( 'Conditional requests', () => {
 			} );
 		}
 
-		// eslint-disable-next-line mocha/no-setup-in-describe
 		editRoutes.forEach( ( { route, newRequestBuilder } ) => {
 			describe( `If-Match - ${route}`, () => {
 				it( 'responds with 412 given an outdated revision id', async () => {

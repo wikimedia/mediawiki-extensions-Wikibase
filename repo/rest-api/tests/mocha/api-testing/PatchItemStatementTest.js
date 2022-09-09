@@ -66,7 +66,7 @@ describe( 'PATCH statement tests', () => {
 		} );
 	} );
 
-	[ // eslint-disable-line mocha/no-setup-in-describe
+	[
 		{
 			route: 'PATCH /entities/items/{item_id}/statements/{statement_id}',
 			newPatchRequestBuilder: ( statementId, patch ) =>
