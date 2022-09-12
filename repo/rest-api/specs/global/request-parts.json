@@ -45,7 +45,6 @@
 								},
 								"value": {
 									"description": "The value to be used within the operation",
-									"type": "string",
 									"example": "patched value"
 								}
 							},
