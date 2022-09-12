@@ -345,7 +345,7 @@ describe( 'PATCH statement tests', () => {
 						}
 					];
 					const response = await newPatchRequestBuilder( testStatementId, patch )
-						// TODO Missing `.assertValidRequest()` here due to a schema issue. Will fix in a follow-up.
+						.assertValidRequest()
 						.makeRequest();
 
 					assert.strictEqual( response.statusCode, 422 );
