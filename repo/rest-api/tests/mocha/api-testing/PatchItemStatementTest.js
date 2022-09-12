@@ -244,6 +244,34 @@ describe( 'PATCH statement tests', () => {
 					assert.strictEqual( response.body.expectedType, 'string' );
 				} );
 
+				it( 'rejects Property ID change', async () => {
+					const otherStringProperty = ( await entityHelper.createEntity(
+						'property',
+						{ datatype: 'string' }
+					) ).entity.id;
+					const patch = [ {
+						op: 'replace',
+						path: '/mainsnak/property',
+						value: otherStringProperty
+					} ];
+					const response = await newPatchRequestBuilder( testStatementId, patch )
+						.assertValidRequest().makeRequest();
+					assert.strictEqual( response.status, 400 );
+					assert.strictEqual( response.body.code, 'invalid-operation-change-property-of-statement' );
+				} );
+
+				it( 'rejects Statement ID change', async () => {
+					const patch = [ {
+						op: 'replace',
+						path: '/id',
+						value: `${testItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`
+					} ];
+					const response = await newPatchRequestBuilder( testStatementId, patch )
+						.assertValidRequest().makeRequest();
+					assert.strictEqual( response.status, 400 );
+					assert.strictEqual( response.body.code, 'invalid-operation-change-statement-id' );
+				} );
+
 			} );
 
 			describe( '404 statement not found', () => {

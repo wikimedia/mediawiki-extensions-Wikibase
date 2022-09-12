@@ -212,9 +212,7 @@ class PatchItemStatementTest extends TestCase {
 	}
 
 	public function testStatementIdMismatchingItemId_returnsStatementNotFound(): void {
-		$this->revisionMetadataRetriever = $this->newItemRevisionMetadataRetriever(
-			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
-		);
+		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
 
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
@@ -229,9 +227,7 @@ class PatchItemStatementTest extends TestCase {
 	}
 
 	public function testStatementNotFoundOnItem_returnsStatementNotFound(): void {
-		$this->revisionMetadataRetriever = $this->newItemRevisionMetadataRetriever(
-			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
-		);
+		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( 'Q42' )->build() );
 
@@ -244,6 +240,55 @@ class PatchItemStatementTest extends TestCase {
 
 		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
 		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+	}
+
+	public function testRejectsPropertyIdChange(): void {
+		$itemId = 'Q123';
+		$guid = $itemId . '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$originalStatement = NewStatement::noValueFor( 'P123' )->withGuid( $guid )->build();
+		$patchedStatement = NewStatement::noValueFor( 'P321' )->withGuid( $guid )->build();
+		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
+
+		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
+
+		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
+
+		$this->statementPatcher = $this->createStub( StatementPatcher::class );
+		$this->statementPatcher->method( 'patch' )->willReturn( $patchedStatement );
+
+		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
+			'$statementId' => $originalStatement->getGuid(),
+			'$patch' => [ [ 'op' => 'replace', 'path' => '/mainsnak/property', 'value' => 'P321' ] ],
+		] ) );
+
+		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
+		$this->assertSame( $response->getCode(), ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY );
+	}
+
+	public function testRejectsStatementIdChange(): void {
+		$itemId = 'Q123';
+		$originalGuid = $itemId . '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$newGuid = $itemId . '$FFFFFFFF-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$originalStatement = NewStatement::noValueFor( 'P123' )->withGuid( $originalGuid )->build();
+		$patchedStatement = NewStatement::noValueFor( 'P123' )->withGuid( $newGuid )->build();
+		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
+
+		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
+
+		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
+
+		$this->statementPatcher = $this->createStub( StatementPatcher::class );
+		$this->statementPatcher->method( 'patch' )->willReturn( $patchedStatement );
+
+		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
+			'$statementId' => $originalStatement->getGuid(),
+			'$patch' => [ [ 'op' => 'replace', 'path' => '/id', 'value' => $newGuid ] ],
+		] ) );
+
+		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
+		$this->assertSame( $response->getCode(), ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID );
 	}
 
 	private function newUseCase(): PatchItemStatement {
@@ -284,6 +329,12 @@ class PatchItemStatementTest extends TestCase {
 				'value' => $newStatementValue
 			],
 		];
+	}
+
+	private function newRevisionMetadataRetrieverWithSomeConcreteRevision(): ItemRevisionMetadataRetriever {
+		return $this->newItemRevisionMetadataRetriever(
+			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
+		);
 	}
 
 }
