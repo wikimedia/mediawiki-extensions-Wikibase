@@ -14,6 +14,9 @@ class ErrorResponse {
 	public const INVALID_STATEMENT_DATA = 'invalid-statement-data';
 	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
 	public const INVALID_OPERATION_CHANGED_PROPERTY = 'invalid-operation-change-property-of-statement';
+	public const PATCHED_STATEMENT_INVALID = 'patched-statement-invalid';
+	public const CANNOT_APPLY_PATCH = 'cannot-apply-patch';
+	public const PATCH_TEST_FAILED = 'patch-test-failed';
 	public const INVALID_PATCH = 'invalid-patch';
 	public const ITEM_NOT_FOUND = 'item-not-found';
 	public const ITEM_REDIRECTED = 'redirected-item';

@@ -286,6 +286,72 @@ describe( 'PATCH statement tests', () => {
 				} );
 			} );
 
+			describe( '409 conflict', () => {
+				it( 'patch cannot be applied', async () => {
+					const patch = [ {
+						op: 'remove',
+						path: '/this/path/does/not/exist'
+					} ];
+					const response = await newPatchRequestBuilder( testStatementId, patch )
+						.assertValidRequest()
+						.makeRequest();
+
+					assert.strictEqual( response.statusCode, 409 );
+					assert.strictEqual( response.body.code, 'cannot-apply-patch' );
+					assert.include( response.body.message, testStatementId );
+				} );
+
+				it( 'patch test condition failed', async () => {
+					const patch = [ {
+						op: 'test',
+						path: '/mainsnak/datavalue/value',
+						value: 'potato'
+					} ];
+					const response = await newPatchRequestBuilder( testStatementId, patch )
+						.assertValidRequest()
+						.makeRequest();
+
+					assert.strictEqual( response.statusCode, 409 );
+					assert.strictEqual( response.body.code, 'patch-test-failed' );
+				} );
+			} );
+
+			describe( '422 Unprocessable Entity', () => {
+				it( 'malformed statement serialization', async () => {
+					const patch = [ {
+						op: 'remove',
+						path: '/mainsnak'
+					} ];
+					const response = await newPatchRequestBuilder( testStatementId, patch )
+						.assertValidRequest()
+						.makeRequest();
+
+					assert.strictEqual( response.statusCode, 422 );
+					assert.strictEqual( response.body.code, 'patched-statement-invalid' );
+				} );
+
+				it( 'mismatching value type', async () => {
+					const patch = [
+						{
+							op: 'replace',
+							path: '/mainsnak/datavalue',
+							value: {
+								value: {
+									'entity-type': 'item',
+									id: testItemId
+								},
+								type: 'wikibase-entityid'
+							}
+						}
+					];
+					const response = await newPatchRequestBuilder( testStatementId, patch )
+						// TODO Missing `.assertValidRequest()` here due to a schema issue. Will fix in a follow-up.
+						.makeRequest();
+
+					assert.strictEqual( response.statusCode, 422 );
+					assert.strictEqual( response.body.code, 'patched-statement-invalid' );
+				} );
+			} );
 		} );
 
 	} );

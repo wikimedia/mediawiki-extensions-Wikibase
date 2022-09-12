@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\UseCases\PatchItemStatement;
 
+use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
@@ -10,6 +11,10 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
@@ -289,6 +294,54 @@ class PatchItemStatementTest extends TestCase {
 
 		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
 		$this->assertSame( $response->getCode(), ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID );
+	}
+
+	/**
+	 * @dataProvider patchExceptionProvider
+	 */
+	public function testGivenPatcherThrows_returnsCorrespondingErrorResponse(
+		\Exception $patcherException,
+		string $expectedErrorCode
+	): void {
+		$originalStatement = NewStatement::noValueFor( 'P123' )
+			->withGuid( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+			->build();
+		$item = NewItem::withId( 'Q123' )->andStatement( $originalStatement )->build();
+
+		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
+
+		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
+
+		$this->statementPatcher = $this->createStub( StatementPatcher::class );
+		$this->statementPatcher->method( 'patch' )->willThrowException( $patcherException );
+
+		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
+			'$statementId' => $originalStatement->getGuid(),
+			'$patch' => $this->getValidValueReplacingPatch(),
+		] ) );
+
+		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
+		$this->assertSame( $response->getCode(), $expectedErrorCode );
+	}
+
+	public function patchExceptionProvider(): Generator {
+		yield [
+			new InvalidPatchedSerializationException(),
+			'patched-statement-invalid'
+		];
+		yield [
+			new InvalidPatchedStatementException(),
+			'patched-statement-invalid'
+		];
+		yield [
+			new InapplicablePatchException(),
+			'cannot-apply-patch'
+		];
+		yield [
+			new PatchTestConditionFailedException(),
+			'patch-test-failed'
+		];
 	}
 
 	private function newUseCase(): PatchItemStatement {
