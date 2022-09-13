@@ -1,7 +1,7 @@
 {
-	"name": "wikibase-rest-api-specs",
+	"name": "wikibase-rest-api-definition",
 	"version": "0.1.0",
-	"description": "OpenAPI specification of Wikibase REST API",
+	"description": "OpenAPI definition of Wikibase REST API",
 	"scripts": {
 		"test": "npm run lint",
 		"api-testing:e2e": "mocha --timeout 0 --recursive tests/mocha/api-testing",
