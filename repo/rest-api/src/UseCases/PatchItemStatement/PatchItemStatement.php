@@ -99,8 +99,6 @@ class PatchItemStatement {
 			);
 		}
 
-		// TODO: validate patched statement (T316316)
-
 		try {
 			$item->getStatements()->replaceStatement( $statementId, $patchedStatement );
 		} catch ( PropertyChangedException $e ) {
