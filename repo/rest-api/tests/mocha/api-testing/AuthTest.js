@@ -67,7 +67,37 @@ describe( 'Auth', () => {
 		}
 	];
 
-	const allRoutes = [
+	if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
+		editRequests.push( {
+			route: 'PATCH /entities/items/{item_id}/statements/{statement_id}',
+			newRequestBuilder: () => new RequestBuilder()
+				.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
+				.withPathParam( 'item_id', itemId )
+				.withPathParam( 'statement_id', statementId )
+				.withJsonBodyParam( 'patch', [
+					{
+						op: 'replace',
+						path: '/mainsnak',
+						value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
+					}
+				] )
+		} );
+		editRequests.push( {
+			route: 'PATCH /statements/{statement_id}',
+			newRequestBuilder: () => new RequestBuilder()
+				.withRoute( 'PATCH', '/statements/{statement_id}' )
+				.withPathParam( 'statement_id', statementId )
+				.withJsonBodyParam( 'patch', [
+					{
+						op: 'replace',
+						path: '/mainsnak',
+						value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
+					}
+				] )
+		} );
+	}
+
+	[
 		{
 			route: 'GET /entities/items/{id}/statements',
 			newRequestBuilder: () => new RequestBuilder()
@@ -94,39 +124,7 @@ describe( 'Auth', () => {
 				.withPathParam( 'statement_id', statementId )
 		},
 		...editRequests
-	];
-
-	if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
-		allRoutes.push( { // TODO move this to `editRequests` to also check authorization (T313906)
-			route: 'PATCH /entities/items/{item_id}/statements/{statement_id}',
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
-				.withPathParam( 'item_id', itemId )
-				.withPathParam( 'statement_id', statementId )
-				.withJsonBodyParam( 'patch', [
-					{
-						op: 'replace',
-						path: '/mainsnak',
-						value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
-					}
-				] )
-		} );
-		allRoutes.push( { // TODO move this to `editRequests` to also check authorization (T313906)
-			route: 'PATCH /statements/{statement_id}',
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'PATCH', '/statements/{statement_id}' )
-				.withPathParam( 'statement_id', statementId )
-				.withJsonBodyParam( 'patch', [
-					{
-						op: 'replace',
-						path: '/mainsnak',
-						value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
-					}
-				] )
-		} );
-	}
-
-	allRoutes.forEach( ( { route, newRequestBuilder, expectedStatusCode = 200, isDestructive } ) => {
+	].forEach( ( { route, newRequestBuilder, expectedStatusCode = 200, isDestructive } ) => {
 		describe( `Authentication - ${route}`, () => {
 
 			afterEach( async () => {

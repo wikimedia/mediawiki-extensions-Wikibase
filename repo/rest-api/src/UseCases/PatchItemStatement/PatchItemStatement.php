@@ -12,9 +12,11 @@ use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Services\StatementPatcher;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
@@ -29,6 +31,7 @@ class PatchItemStatement {
 	private $statementPatcher;
 	private $itemUpdater;
 	private $revisionMetadataRetriever;
+	private $permissionChecker;
 
 	public function __construct(
 		PatchItemStatementValidator $validator,
@@ -36,7 +39,8 @@ class PatchItemStatement {
 		ItemRetriever $itemRetriever,
 		StatementPatcher $statementPatcher,
 		ItemUpdater $itemUpdater,
-		ItemRevisionMetadataRetriever $revisionMetadataRetriever
+		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
+		PermissionChecker $permissionChecker
 	) {
 		$this->validator = $validator;
 		$this->statementIdParser = $statementIdParser;
@@ -44,6 +48,7 @@ class PatchItemStatement {
 		$this->statementPatcher = $statementPatcher;
 		$this->itemUpdater = $itemUpdater;
 		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -78,6 +83,14 @@ class PatchItemStatement {
 
 		if ( !$statementToPatch ) {
 			return $this->newStatementNotFoundErrorResponse( $statementId );
+		}
+
+		$user = $request->getUsername() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
+		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
+			return new PatchItemStatementErrorResponse(
+				ErrorResponse::PERMISSION_DENIED,
+				"You have no permission to edit this item."
+			);
 		}
 
 		try {

@@ -137,6 +137,10 @@ return [
 			),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
+			),
+			new WikibaseEntityPermissionChecker(
+				WikibaseRepo::getEntityPermissionChecker( $services ),
+				$services->getUserFactory()
 			)
 		);
 	},
