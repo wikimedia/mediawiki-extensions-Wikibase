@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
@@ -18,9 +19,11 @@ use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Services\StatementPatcher;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
@@ -64,6 +67,11 @@ class PatchItemStatementTest extends TestCase {
 	 */
 	private $revisionMetadataRetriever;
 
+	/**
+	 * @var MockObject|PermissionChecker
+	 */
+	private $permissionChecker;
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -72,6 +80,8 @@ class PatchItemStatementTest extends TestCase {
 		$this->statementPatcher = $this->createStub( StatementPatcher::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->permissionChecker = $this->createStub( PermissionChecker::class );
+		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
 	}
 
 	public function testPatchItemStatement_success(): void {
@@ -344,6 +354,34 @@ class PatchItemStatementTest extends TestCase {
 		];
 	}
 
+	public function testGivenProtectedItem_returnsErrorResponse(): void {
+		$itemId = new ItemId( 'Q123' );
+		$statementId = "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE";
+
+		$this->permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
+		$this->permissionChecker->expects( $this->once() )
+			->method( 'canEdit' )
+			->with( User::newAnonymous(), $itemId )
+			->willReturn( false );
+
+		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
+
+		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( $itemId )
+			->andStatement( NewStatement::forProperty( 'P123' )
+				->withGuid( $statementId )
+				->withValue( 'abc' )
+				->build()
+			)->build() );
+
+		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
+			'$statementId' => $statementId,
+			'$patch' => $this->getValidValueReplacingPatch(),
+		] ) );
+		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::PERMISSION_DENIED, $response->getCode() );
+	}
+
 	private function newUseCase(): PatchItemStatement {
 			return new PatchItemStatement(
 				$this->validator,
@@ -351,7 +389,8 @@ class PatchItemStatementTest extends TestCase {
 				$this->itemRetriever,
 				$this->statementPatcher,
 				$this->itemUpdater,
-				$this->revisionMetadataRetriever
+				$this->revisionMetadataRetriever,
+				$this->permissionChecker
 			);
 	}
 
