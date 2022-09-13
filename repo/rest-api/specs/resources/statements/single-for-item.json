@@ -60,6 +60,7 @@
 			"404": { "$ref": "../../global/responses.json#/ItemStatementNotFound" },
 			"409": { "$ref": "../../global/responses.json#/CannotApplyStatementPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
 			"422": { "$ref": "../../global/responses.json#/InvalidPatchedStatement" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}

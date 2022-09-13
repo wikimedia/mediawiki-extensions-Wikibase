@@ -120,8 +120,7 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 				expect( response ).to.satisfyApiSpec;
 			} );
 
-			// 415 not in our OpenAPI definition - will fix in follow up
-			it.skip( '415 - unsupported media type', async () => {
+			it( '415 - unsupported media type', async () => {
 				const response = await newPatchRequestBuilder(
 					testStatementId,
 					[
