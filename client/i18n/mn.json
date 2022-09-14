@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
+			"Chinneeb",
 			"Elvonudinium",
 			"MongolWiki"
 		]
@@ -15,5 +16,6 @@
 	"wikibase-rc-hide-wikidata-hide": "Нуух",
 	"wikibase-rc-hide-wikidata-show": "Үзүүлэх",
 	"wikibase-rc-wikibase-edit-letter": "ө",
-	"wikibase-rc-wikibase-edit-title": "Вики өгөгдөл засвар"
+	"wikibase-rc-wikibase-edit-title": "Вики өгөгдөл засвар",
+	"wikibase-otherprojects": "Бусад төсөл"
 }
