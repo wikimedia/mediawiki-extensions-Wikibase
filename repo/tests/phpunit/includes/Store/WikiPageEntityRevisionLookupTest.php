@@ -11,7 +11,6 @@ use MediaWiki\Revision\RevisionStore;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Storage\BlobStore;
 use PHPUnit\Framework\MockObject\MockObject;
-use Prophecy\Prophecy\ObjectProphecy;
 use Title;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -271,15 +270,14 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		/** @var MockObject|RevisionStore $mockRevisionStore */
 		$mockRevisionStore = $this->createMock( RevisionStore::class );
 
-		/** @var BlobStore|ObjectProphecy $mockBlobStore */
-		$mockBlobStore = $this->prophesize( BlobStore::class )->reveal();
+		/** @var MockObject|BlobStore $mockBlobStore */
+		$mockBlobStore = $this->createMock( BlobStore::class );
 
-		/** @var WikiPageEntityMetaDataAccessor|ObjectProphecy $mockMetaDataAccessor */
-		$mockMetaDataAccessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
-		$mockMetaDataAccessor
-			->loadRevisionInformation( [ $entityId ], LookupConstants::LATEST_FROM_MASTER )
+		/** @var MockObject|WikiPageEntityMetaDataAccessor $mockMetaDataAccessor */
+		$mockMetaDataAccessor = $this->createMock( WikiPageEntityMetaDataAccessor::class );
+		$mockMetaDataAccessor->method( 'loadRevisionInformation' )
+			->with( [ $entityId ], LookupConstants::LATEST_FROM_MASTER )
 			->willReturn( [ 'Q6654' => false ] );
-		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$mockMetaDataAccessor,
@@ -298,15 +296,15 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		/** @var MockObject|RevisionStore $mockRevisionStore */
 		$mockRevisionStore = $this->createMock( RevisionStore::class );
 
-		/** @var BlobStore|ObjectProphecy $mockBlobStore */
-		$mockBlobStore = $this->prophesize( BlobStore::class )->reveal();
+		/** @var MockObject|BlobStore $mockBlobStore */
+		$mockBlobStore = $this->createMock( BlobStore::class );
 
-		/** @var WikiPageEntityMetaDataAccessor|ObjectProphecy $mockMetaDataAccessor */
-		$mockMetaDataAccessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
-		$mockMetaDataAccessor
-			->loadRevisionInformationByRevisionId( $entityId, $revId, LookupConstants::LATEST_FROM_MASTER )
+		/** @var MockObject|WikiPageEntityMetaDataAccessor $mockMetaDataAccessor */
+		$mockMetaDataAccessor = $this->createMock( WikiPageEntityMetaDataAccessor::class );
+		$mockMetaDataAccessor->method( 'loadRevisionInformationByRevisionId' )
+			->with( $entityId, $revId, LookupConstants::LATEST_FROM_MASTER )
 			->willReturn( false );
-		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
+		$mockMetaDataAccessor = $mockMetaDataAccessor;
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$mockMetaDataAccessor,
@@ -357,12 +355,11 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			->with( $revId )
 			->willReturn( $revision );
 
-		/** @var WikiPageEntityMetaDataAccessor|ObjectProphecy $mockMetaDataAccessor */
-		$mockMetaDataAccessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
-		$mockMetaDataAccessor
-			->loadRevisionInformation( [ $newEntityId ], $lookupMode )
+		/** @var MockObject|WikiPageEntityMetaDataAccessor $mockMetaDataAccessor */
+		$mockMetaDataAccessor = $this->createMock( WikiPageEntityMetaDataAccessor::class );
+		$mockMetaDataAccessor->method( 'loadRevisionInformation' )
+			->with( [ $newEntityId ], $lookupMode )
 			->willReturn( [ $newEntityId->getSerialization() => (object)[ 'rev_id' => $revId ] ] );
-		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
 
 		$entityDataLoader = $this->createMock( WikiPageEntityDataLoader::class );
 		$entityDataLoader->method( 'loadEntityDataFromWikiPageRevision' )
@@ -422,10 +419,10 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			->method( 'getRevisionById' )
 			->willReturn( $revision );
 
-		/** @var WikiPageEntityMetaDataAccessor|ObjectProphecy $mockMetaDataAccessor */
-		$mockMetaDataAccessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
-		$mockMetaDataAccessor
-			->loadRevisionInformation( [ $entityId ], $lookupMode )
+		/** @var MockObject|WikiPageEntityMetaDataAccessor $mockMetaDataAccessor */
+		$mockMetaDataAccessor = $this->createMock( WikiPageEntityMetaDataAccessor::class );
+		$mockMetaDataAccessor->method( 'loadRevisionInformation' )
+			->with( [ $entityId ], $lookupMode )
 			->willReturn( [
 				$entityId->getSerialization() => (object)[
 					'page_latest' => $revId,
@@ -434,7 +431,6 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 					'role_name' => $slotRole,
 				]
 			] );
-		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
 
 		$entityDataLoader = $this->createMock( WikiPageEntityDataLoader::class );
 		$entityDataLoader
@@ -468,15 +464,14 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		/** @var MockObject|RevisionStore $mockRevisionStore */
 		$mockRevisionStore = $this->createMock( RevisionStore::class );
 
-		/** @var BlobStore|ObjectProphecy $mockBlobStore */
-		$mockBlobStore = $this->prophesize( BlobStore::class )->reveal();
+		/** @var MockObject|BlobStore $mockBlobStore */
+		$mockBlobStore = $this->createMock( BlobStore::class );
 
-		/** @var WikiPageEntityMetaDataAccessor|ObjectProphecy $mockMetaDataAccessor */
-		$mockMetaDataAccessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
-		$mockMetaDataAccessor
-			->loadRevisionInformation( [ $entityId ], LookupConstants::LATEST_FROM_MASTER )
+		/** @var MockObject|WikiPageEntityMetaDataAccessor $mockMetaDataAccessor */
+		$mockMetaDataAccessor = $this->createMock( WikiPageEntityMetaDataAccessor::class );
+		$mockMetaDataAccessor->method( 'loadRevisionInformation' )
+			->with( [ $entityId ], LookupConstants::LATEST_FROM_MASTER )
 			->willReturn( [ 'Q6654' => false ] );
-		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$mockMetaDataAccessor,
