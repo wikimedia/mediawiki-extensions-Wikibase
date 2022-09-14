@@ -6,6 +6,7 @@ use Exception;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
@@ -63,9 +64,9 @@ class RemoveItemStatement {
 				ErrorResponse::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$itemId}"
 			);
-		} elseif ( !$revisionMetadata->itemExists() ||
-			$revisionMetadata->isRedirect() ||
-			!$itemId->equals( $statementId->getEntityId() )
+		} elseif ( !$revisionMetadata->itemExists()
+				   || $revisionMetadata->isRedirect()
+				   || !$itemId->equals( $statementId->getEntityId() )
 		) {
 			return $this->newStatementNotFoundResponse( $request->getStatementId() );
 		}
@@ -79,13 +80,18 @@ class RemoveItemStatement {
 		}
 
 		$item = $this->itemRetriever->getItem( $itemId );
-		if ( !$item->getStatements()->getFirstStatementWithGuid( $request->getStatementId() ) ) {
+		$statement = $item->getStatements()->getFirstStatementWithGuid( $request->getStatementId() );
+		if ( !$statement ) {
 			return $this->newStatementNotFoundResponse( $request->getStatementId() );
 		}
 
 		$item->getStatements()->removeStatementsWithGuid( (string)$statementId );
 
-		$editMetadata = new EditMetadata( $request->getEditTags(), $request->isBot(), $request->getComment() );
+		$editMetadata = new EditMetadata(
+			$request->getEditTags(),
+			$request->isBot(),
+			StatementEditSummary::newRemoveSummary( $request->getComment(), $statement )
+		);
 		$this->itemUpdater->update( $item, $editMetadata );
 
 		return new RemoveItemStatementSuccessResponse();

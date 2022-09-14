@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\UseCases\AddItemStatement;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
@@ -79,10 +80,12 @@ class AddItemStatement {
 		$item = $this->itemRetriever->getItem( $itemId );
 		$item->getStatements()->addStatement( $statement );
 
-		$newRevision = $this->itemUpdater->update(
-			$item,
-			new EditMetadata( $request->getEditTags(), $request->isBot(), $request->getComment() )
+		$editMetadata = new EditMetadata(
+			$request->getEditTags(),
+			$request->isBot(),
+			StatementEditSummary::newAddSummary( $request->getComment(), $statement )
 		);
+		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
 		return new AddItemStatementSuccessResponse(
 			$newRevision->getItem()->getStatements()->getFirstStatementWithGuid( $newStatementGuid ),

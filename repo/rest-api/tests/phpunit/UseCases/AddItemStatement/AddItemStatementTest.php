@@ -10,7 +10,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -25,6 +25,7 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
+use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -36,6 +37,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
+
+	use EditMetadataHelper;
 
 	/**
 	 * @var MockObject|ItemRevisionMetadataRetriever
@@ -99,7 +102,7 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->method( 'update' )
-			->with( $item, $this->equalTo( new EditMetadata( $editTags, $isBot, $comment ) ) )
+			->with( $item, $this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION ) )
 			->willReturn( new ItemRevision( $item, $modificationTimestamp, $postModificationRevisionId ) );
 
 		$this->permissionChecker = $this->createStub( WikibaseEntityPermissionChecker::class );
@@ -219,7 +222,8 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 			),
 			new EditMetadataValidator(
 				\CommentStore::COMMENT_CHARACTER_LIMIT,
-				self::ALLOWED_TAGS )
+				self::ALLOWED_TAGS
+			)
 		);
 	}
 

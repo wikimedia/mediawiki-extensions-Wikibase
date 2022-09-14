@@ -12,6 +12,7 @@ use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
@@ -73,8 +74,8 @@ class PatchItemStatement {
 				"Could not find an item with the ID: {$itemId}"
 			);
 		} elseif ( !$latestRevision->itemExists()
-			|| $latestRevision->isRedirect()
-			|| !$itemId->equals( $statementId->getEntityId() ) ) {
+				   || $latestRevision->isRedirect()
+				   || !$itemId->equals( $statementId->getEntityId() ) ) {
 			return $this->newStatementNotFoundErrorResponse( $statementId );
 		}
 
@@ -126,10 +127,12 @@ class PatchItemStatement {
 			);
 		}
 
-		$newRevision = $this->itemUpdater->update(
-			$item,
-			new EditMetadata( $request->getEditTags(), $request->isBot(), $request->getComment() )
+		$editMetadata = new EditMetadata(
+			$request->getEditTags(),
+			$request->isBot(),
+			StatementEditSummary::newPatchSummary( $request->getComment(), $patchedStatement )
 		);
+		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
 		return new PatchItemStatementSuccessResponse(
 			$newRevision->getItem()->getStatements()->getFirstStatementWithGuid( (string)$statementId ),

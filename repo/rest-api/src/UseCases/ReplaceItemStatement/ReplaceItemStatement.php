@@ -10,6 +10,7 @@ use Wikibase\DataModel\Exception\StatementNotFoundException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
@@ -97,10 +98,12 @@ class ReplaceItemStatement {
 			);
 		}
 
-		$newRevision = $this->itemUpdater->update(
-			$item,
-			new EditMetadata( $request->getEditTags(), $request->isBot(), $request->getComment() )
+		$editMetadata = new EditMetadata(
+			$request->getEditTags(),
+			$request->isBot(),
+			StatementEditSummary::newReplaceSummary( $request->getComment(), $newStatement )
 		);
+		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
 		return new ReplaceItemStatementSuccessResponse(
 			$newRevision->getItem()->getStatements()->getFirstStatementWithGuid( (string)$statementId ),
