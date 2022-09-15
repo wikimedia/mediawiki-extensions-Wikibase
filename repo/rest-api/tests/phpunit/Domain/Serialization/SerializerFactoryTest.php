@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\Serializers;
+namespace Wikibase\Repo\Tests\RestApi\Domain\Serialization;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
@@ -11,10 +11,10 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
-use Wikibase\Repo\RestApi\Domain\Serializers\SerializerFactory;
+use Wikibase\Repo\RestApi\Domain\Serialization\SerializerFactory;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\Serializers\SerializerFactory
+ * @covers \Wikibase\Repo\RestApi\Domain\Serialization\SerializerFactory
  *
  * @group Wikibase
  *

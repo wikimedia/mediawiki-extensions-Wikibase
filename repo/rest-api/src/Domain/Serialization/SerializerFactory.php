@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Domain\Serializers;
+namespace Wikibase\Repo\RestApi\Domain\Serialization;
 
 use Wikibase\DataModel\Serializers\ReferenceListSerializer;
 use Wikibase\DataModel\Serializers\ReferenceSerializer;

@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\Serializers;
+namespace Wikibase\Repo\Tests\RestApi\Domain\Serialization;
 
 use DataValues\Serializers\DataValueSerializer;
 use PHPUnit\Framework\TestCase;
@@ -10,10 +10,10 @@ use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Domain\Serializers\StatementSerializer;
+use Wikibase\Repo\RestApi\Domain\Serialization\StatementSerializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\Serializers\StatementSerializer
+ * @covers \Wikibase\Repo\RestApi\Domain\Serialization\StatementSerializer
  *
  * @group Wikibase
  *

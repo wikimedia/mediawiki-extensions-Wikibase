@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\Serializers;
+namespace Wikibase\Repo\Tests\RestApi\Domain\Serialization;
 
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -18,10 +18,10 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
-use Wikibase\Repo\RestApi\Domain\Serializers\ItemDataSerializer;
+use Wikibase\Repo\RestApi\Domain\Serialization\ItemDataSerializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\Serializers\ItemDataSerializer
+ * @covers \Wikibase\Repo\RestApi\Domain\Serialization\ItemDataSerializer
  *
  * @group Wikibase
  *

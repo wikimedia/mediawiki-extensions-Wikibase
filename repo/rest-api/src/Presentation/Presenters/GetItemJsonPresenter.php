@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Presentation\Presenters;
 
-use Wikibase\Repo\RestApi\Domain\Serializers\ItemDataSerializer;
+use Wikibase\Repo\RestApi\Domain\Serialization\ItemDataSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
 
 /**
