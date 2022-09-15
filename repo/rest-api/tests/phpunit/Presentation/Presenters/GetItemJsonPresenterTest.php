@@ -10,7 +10,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
-use Wikibase\Repo\RestApi\Domain\Serializers\ItemDataSerializer;
+use Wikibase\Repo\RestApi\Domain\Serialization\ItemDataSerializer;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
 

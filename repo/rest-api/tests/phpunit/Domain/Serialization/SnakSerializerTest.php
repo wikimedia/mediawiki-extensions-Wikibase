@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\Serializers;
+namespace Wikibase\Repo\Tests\RestApi\Domain\Serialization;
 
 use DataValues\StringValue;
 use Generator;
@@ -14,10 +14,10 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Repo\RestApi\Domain\Serializers\SnakSerializer;
+use Wikibase\Repo\RestApi\Domain\Serialization\SnakSerializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\Serializers\SnakSerializer
+ * @covers \Wikibase\Repo\RestApi\Domain\Serialization\SnakSerializer
  *
  * @group Wikibase
  *

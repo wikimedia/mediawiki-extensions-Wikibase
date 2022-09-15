@@ -8,7 +8,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
-use Wikibase\Repo\RestApi\Domain\Serializers\ItemDataSerializer;
+use Wikibase\Repo\RestApi\Domain\Serialization\ItemDataSerializer;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;

@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\Presentation\Presenters;
 
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\RestApi\Domain\Serializers\StatementSerializer;
+use Wikibase\Repo\RestApi\Domain\Serialization\StatementSerializer;
 
 /**
  * @license GPL-2.0-or-later
