@@ -4,7 +4,6 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\Tests;
 
 use HashBagOStuff;
-use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
@@ -109,12 +108,13 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 	}
 
 	public function testGet_GivenSignatureIsWrong_LoggsTheEvent() {
-		$logger = $this->prophesize( LoggerInterface::class );
+		$logger = $this->createMock( LoggerInterface::class );
+		$logger->expects( $this->atLeastOnce() )->method( 'alert' );
 
 		$inner = new HashBagOStuff();
 
 		$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix', 'some secret' );
-		$cache->setLogger( $logger->reveal() );
+		$cache->setLogger( $logger );
 		$cache->set( 'key', 'some_string' );
 		$key = $inner->makeKey( 'prefix', 'key' );
 		$value = $inner->get( $key );
@@ -122,8 +122,6 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 		$inner->set( $key, json_encode( [ 'wrong signature', $data ] ) );
 
 		$got = $cache->get( 'key', 'some default value' );
-
-		$logger->alert( Argument::any(), Argument::any() )->shouldHaveBeenCalled();
 	}
 
 	public function testCachedValueCannotBeUnserialized_ReturnsDefaultValue() {

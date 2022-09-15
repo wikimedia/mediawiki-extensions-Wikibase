@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Modules;
 
-use Prophecy\Prophecy\ObjectProphecy;
+use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\Lib\Modules\SettingsValueProvider;
 use Wikibase\Lib\SettingsArray;
 
@@ -27,13 +27,13 @@ class SettingsValueProviderTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetValueReturnsSettingWithGivenName() {
 
-		/** @var SettingsArray|ObjectProphecy $settings */
-		$settings = $this->prophesize( SettingsArray::class );
+		/** @var SettingsArray|MockObject $settings */
+		$settings = $this->createMock( SettingsArray::class );
 
-		$settings->getSetting( 'setting_name' )->willReturn( 'setting value' );
+		$settings->method( 'getSetting' )->willReturn( 'setting value' );
 
 		$settingsValueProvider = new SettingsValueProvider(
-			$settings->reveal(),
+			$settings,
 			'does not matter',
 			'setting_name'
 		);
