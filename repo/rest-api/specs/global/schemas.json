@@ -84,7 +84,7 @@
 		"properties": {
 			"id": {
 				"type": "string",
-				"description": "The globally unique identfier for this Statement",
+				"description": "The globally unique identifier for this Statement",
 				"readOnly": true
 			},
 			"mainsnak": {
@@ -117,7 +117,7 @@
 				"type": "object",
 				"properties": {
 					"hash": {
-						"description": "Hash of a reference"
+						"description": "Hash of the reference"
 					},
 					"snaks": {
 						"$ref": "./schema-parts.json#/Snaks"
@@ -138,7 +138,7 @@
 			{
 				"properties": {
 					"hash": {
-						"description": "Hash of a qualifier"
+						"description": "Hash of the qualifier"
 					}
 				}
 			}
@@ -157,7 +157,7 @@
 						"type": "string"
 					},
 					"hash": {
-						"description": "Hash of a snak"
+						"description": "Hash of the snak"
 					},
 					"datatype": {
 						"description": "The property data type",
