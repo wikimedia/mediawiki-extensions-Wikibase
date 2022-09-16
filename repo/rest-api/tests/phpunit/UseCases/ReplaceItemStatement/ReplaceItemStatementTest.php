@@ -13,7 +13,7 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -30,6 +30,7 @@ use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementVali
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
+use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -41,6 +42,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class ReplaceItemStatementTest extends TestCase {
+
+	use EditMetadataHelper;
 
 	/**
 	 * @var MockObject|ItemRevisionMetadataRetriever
@@ -116,7 +119,7 @@ class ReplaceItemStatementTest extends TestCase {
 
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->method( 'update' )
-			->with( $item, $this->equalTo( new EditMetadata( $editTags, $isBot, $comment ) ) )
+			->with( $item, $this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::REPLACE_ACTION ) )
 			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $postModificationRevisionId ) );
 
 		$useCase = $this->newUseCase();
@@ -150,10 +153,12 @@ class ReplaceItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
 
-		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
-			'$statementId' => (string)$originalStatementId,
-			'$statement' => $this->getStatementSerialization( $newStatement ),
-		] ) );
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => (string)$originalStatementId,
+				'$statement' => $this->getStatementSerialization( $newStatement ),
+			] )
+		);
 
 		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
 		$this->assertSame(
@@ -179,10 +184,12 @@ class ReplaceItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
 
-		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
-			'$statementId' => (string)$statementId,
-			'$statement' => $this->getStatementSerialization( $newStatement ),
-		] ) );
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => (string)$statementId,
+				'$statement' => $this->getStatementSerialization( $newStatement ),
+			] )
+		);
 
 		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
 		$this->assertSame(
@@ -303,10 +310,12 @@ class ReplaceItemStatementTest extends TestCase {
 			->with( User::newAnonymous(), $itemId )
 			->willReturn( false );
 
-		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
-			'$statementId' => "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
 				'$statement' => $this->getValidStatementSerialization(),
-		] ) );
+			] )
+		);
 		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
 		$this->assertSame( ErrorResponse::PERMISSION_DENIED, $response->getCode() );
 	}

@@ -12,7 +12,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -29,6 +29,7 @@ use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementValida
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
+use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement
@@ -39,6 +40,8 @@ use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
  *
  */
 class RemoveItemStatementTest extends TestCase {
+
+	use EditMetadataHelper;
 
 	/**
 	 * @var MockObject|ItemRevisionMetadataRetriever
@@ -95,13 +98,18 @@ class RemoveItemStatementTest extends TestCase {
 			->method( 'getItem' )
 			->willReturn( $item );
 
-		$editMetadata = new EditMetadata(
-			$requestData['$editTags'], $requestData['$isBot'], $requestData['$comment']
-		);
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->expects( $this->once() )
 			->method( 'update' )
-			->with( $item, $editMetadata )
+			->with(
+				$item,
+				$this->expectEquivalentMetadata(
+					$requestData['$editTags'],
+					$requestData['$isBot'],
+					$requestData['$comment'],
+					EditSummary::REMOVE_ACTION
+				)
+			)
 			->willReturn( new ItemRevision( $item, '20220809030405', 322 ) );
 
 		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( $requestData ) );

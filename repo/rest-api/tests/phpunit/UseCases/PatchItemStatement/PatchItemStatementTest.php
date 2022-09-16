@@ -16,7 +16,7 @@ use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -32,6 +32,7 @@ use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementSuccessResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
+use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement
@@ -41,6 +42,8 @@ use Wikibase\Repo\RestApi\Validation\ValidationError;
  * @license GPL-2.0-or-later
  */
 class PatchItemStatementTest extends TestCase {
+
+	use EditMetadataHelper;
 
 	/**
 	 * @var MockObject|PatchItemStatementValidator
@@ -139,7 +142,7 @@ class PatchItemStatementTest extends TestCase {
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->itemUpdater
 			->method( 'update' )
-			->with( $item, new EditMetadata( $editTags, $isBot, $comment ) )
+			->with( $item, $this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::PATCH_ACTION ) )
 			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $postModificationRevisionId ) );
 
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
@@ -272,10 +275,12 @@ class PatchItemStatementTest extends TestCase {
 		$this->statementPatcher = $this->createStub( StatementPatcher::class );
 		$this->statementPatcher->method( 'patch' )->willReturn( $patchedStatement );
 
-		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
-			'$statementId' => $originalStatement->getGuid(),
-			'$patch' => [ [ 'op' => 'replace', 'path' => '/mainsnak/property', 'value' => 'P321' ] ],
-		] ) );
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => $originalStatement->getGuid(),
+				'$patch' => [ [ 'op' => 'replace', 'path' => '/mainsnak/property', 'value' => 'P321' ] ],
+			] )
+		);
 
 		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
 		$this->assertSame( $response->getCode(), ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY );
@@ -297,10 +302,12 @@ class PatchItemStatementTest extends TestCase {
 		$this->statementPatcher = $this->createStub( StatementPatcher::class );
 		$this->statementPatcher->method( 'patch' )->willReturn( $patchedStatement );
 
-		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
-			'$statementId' => $originalStatement->getGuid(),
-			'$patch' => [ [ 'op' => 'replace', 'path' => '/id', 'value' => $newGuid ] ],
-		] ) );
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => $originalStatement->getGuid(),
+				'$patch' => [ [ 'op' => 'replace', 'path' => '/id', 'value' => $newGuid ] ],
+			] )
+		);
 
 		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
 		$this->assertSame( $response->getCode(), ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID );
@@ -326,10 +333,12 @@ class PatchItemStatementTest extends TestCase {
 		$this->statementPatcher = $this->createStub( StatementPatcher::class );
 		$this->statementPatcher->method( 'patch' )->willThrowException( $patcherException );
 
-		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
-			'$statementId' => $originalStatement->getGuid(),
-			'$patch' => $this->getValidValueReplacingPatch(),
-		] ) );
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => $originalStatement->getGuid(),
+				'$patch' => $this->getValidValueReplacingPatch(),
+			] )
+		);
 
 		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
 		$this->assertSame( $response->getCode(), $expectedErrorCode );
@@ -367,31 +376,36 @@ class PatchItemStatementTest extends TestCase {
 		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( $itemId )
-			->andStatement( NewStatement::forProperty( 'P123' )
-				->withGuid( $statementId )
-				->withValue( 'abc' )
-				->build()
-			)->build() );
+		$this->itemRetriever->method( 'getItem' )->willReturn(
+			NewItem::withId( $itemId )
+				->andStatement(
+					NewStatement::forProperty( 'P123' )
+						->withGuid( $statementId )
+						->withValue( 'abc' )
+						->build()
+				)->build()
+		);
 
-		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( [
-			'$statementId' => $statementId,
-			'$patch' => $this->getValidValueReplacingPatch(),
-		] ) );
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => $statementId,
+				'$patch' => $this->getValidValueReplacingPatch(),
+			] )
+		);
 		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
 		$this->assertSame( ErrorResponse::PERMISSION_DENIED, $response->getCode() );
 	}
 
 	private function newUseCase(): PatchItemStatement {
-			return new PatchItemStatement(
-				$this->validator,
-				new StatementGuidParser( new ItemIdParser() ),
-				$this->itemRetriever,
-				$this->statementPatcher,
-				$this->itemUpdater,
-				$this->revisionMetadataRetriever,
-				$this->permissionChecker
-			);
+		return new PatchItemStatement(
+			$this->validator,
+			new StatementGuidParser( new ItemIdParser() ),
+			$this->itemRetriever,
+			$this->statementPatcher,
+			$this->itemUpdater,
+			$this->revisionMetadataRetriever,
+			$this->permissionChecker
+		);
 	}
 
 	private function newUseCaseRequest( array $requestData ): PatchItemStatementRequest {

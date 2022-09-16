@@ -12,6 +12,8 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -31,13 +33,17 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 		$newLabel = 'potato';
 		$newLabelLanguageCode = 'en';
 		$itemToUpdate->setLabel( $newLabelLanguageCode, $newLabel );
+		$editSummary = $this->createMock( EditSummary::class );
 
 		$updater = new MediaWikiEditEntityFactoryItemUpdater(
 			RequestContext::getMain(),
 			WikibaseRepo::getEditEntityFactory(),
 			new NullLogger()
 		);
-		$newRevision = $updater->update( $itemToUpdate, new EditMetadata( [], false, null ) );
+		$newRevision = $updater->update(
+			$itemToUpdate,
+			new EditMetadata( [], false, $editSummary )
+		);
 
 		$this->assertSame(
 			$newLabel,
@@ -63,7 +69,10 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 			WikibaseRepo::getEditEntityFactory(),
 			new NullLogger()
 		);
-		$newRevision = $updater->update( $itemToUpdate, new EditMetadata( [], false, null ) );
+		$newRevision = $updater->update(
+			$itemToUpdate,
+			new EditMetadata( [], false, StatementEditSummary::newRemoveSummary( null, $statementToRemove ) )
+		);
 
 		$this->assertTrue( $newRevision->getItem()->getStatements()->isEmpty() );
 	}
@@ -90,7 +99,10 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 			WikibaseRepo::getEditEntityFactory(),
 			new NullLogger()
 		);
-		$newRevision = $updater->update( $itemToUpdate, new EditMetadata( [], false, null ) );
+		$newRevision = $updater->update(
+			$itemToUpdate,
+			new EditMetadata( [], false, StatementEditSummary::newReplaceSummary( null, $newStatement ) )
+		);
 		$statementList = $newRevision->getItem()->getStatements();
 		$this->assertNotContains( $oldStatement, $statementList );
 		$this->assertContains( $newStatement, $statementList );

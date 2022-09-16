@@ -15,6 +15,7 @@ use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdateFailed;
 
@@ -49,9 +50,11 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 				false,
 				$editMetadata->getTags()
 			)
-			->willReturn( Status::newGood( [
-				'revision' => new EntityRevision( $expectedRevisionItem, $expectedRevisionId, $expectedRevisionTimestamp ),
-			] ) );
+			->willReturn(
+				Status::newGood( [
+					'revision' => new EntityRevision( $expectedRevisionItem, $expectedRevisionId, $expectedRevisionTimestamp ),
+				] )
+			);
 
 		$editEntityFactory = $this->createMock( MediawikiEditEntityFactory::class );
 		$editEntityFactory->expects( $this->once() )
@@ -71,22 +74,22 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 		$someUserProvidedComment = 'im a comment';
 
 		yield 'bot edit' => [
-			new EditMetadata( [], true, $someUserProvidedComment ),
+			new EditMetadata( [], true, $this->createEditSummary( $someUserProvidedComment ) ),
 			$someUserProvidedComment,
 		];
 		yield 'user edit' => [
-			new EditMetadata( [], false, $someUserProvidedComment ),
+			new EditMetadata( [], false, $this->createEditSummary( $someUserProvidedComment ) ),
 			$someUserProvidedComment,
 		];
 		yield 'default edit comment is used if user provides none' => [
-			new EditMetadata( [], false, null ),
+			new EditMetadata( [], false, $this->createEditSummary( null ) ),
 			''
 		];
 	}
 
 	public function testGivenSavingFails_throwsException(): void {
 		$itemToUpdate = NewItem::withId( 'Q123' )->build();
-		$editMeta = new EditMetadata( [ 'tag', 'also a tag' ], false, 'im a comment' );
+		$editMeta = new EditMetadata( [ 'tag', 'also a tag' ], false, $this->createEditSummary() );
 		$errorStatus = Status::newFatal( 'failed to save. sad times.' );
 
 		$editEntity = $this->createStub( EditEntity::class );
@@ -135,6 +138,13 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 			ItemRevision::class,
 			$updater->update( $this->createStub( Item::class ), $this->createStub( EditMetadata::class ) )
 		);
+	}
+
+	private function createEditSummary( ?string $comment = null ): EditSummary {
+		$editSummary = $this->createMock( EditSummary::class );
+		$editSummary->expects( $this->once() )->method( 'getUserComment' )->willReturn( $comment );
+
+		return $editSummary;
 	}
 
 }

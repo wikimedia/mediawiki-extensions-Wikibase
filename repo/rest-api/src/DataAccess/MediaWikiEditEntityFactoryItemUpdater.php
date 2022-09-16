@@ -32,7 +32,7 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 
 		$status = $editEntity->attemptSave(
 			$item,
-			$editMetadata->getComment() ?? '',
+			$editMetadata->getSummary()->getUserComment() ?? '',
 			EDIT_UPDATE | ( $editMetadata->isBot() ? EDIT_FORCE_BOT : 0 ),
 			false,
 			false,
