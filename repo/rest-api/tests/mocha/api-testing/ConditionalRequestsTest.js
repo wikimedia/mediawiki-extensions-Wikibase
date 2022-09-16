@@ -48,26 +48,26 @@ describe( 'Conditional requests', () => {
 
 	[
 		{
-			route: '/entities/items/{item_id}',
+			route: 'GET /entities/items/{item_id}',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'GET', '/entities/items/{item_id}' )
 				.withPathParam( 'item_id', itemId )
 		},
 		{
-			route: '/entities/items/{item_id}/statements',
+			route: 'GET /entities/items/{item_id}/statements',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'GET', '/entities/items/{item_id}/statements' )
 				.withPathParam( 'item_id', itemId )
 		},
 		{
-			route: '/entities/items/{item_id}/statements/{statement_id}',
+			route: 'GET /entities/items/{item_id}/statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'GET', '/entities/items/{item_id}/statements/{statement_id}' )
 				.withPathParam( 'item_id', itemId )
 				.withPathParam( 'statement_id', statementId )
 		},
 		{
-			route: '/statements/{statement_id}',
+			route: 'GET /statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'GET', '/statements/{statement_id}' )
 				.withPathParam( 'statement_id', statementId )
@@ -239,14 +239,14 @@ describe( 'Conditional requests', () => {
 
 		const editRoutes = [
 			{
-				route: '/statements/{statement_id}',
+				route: 'PUT /statements/{statement_id}',
 				newRequestBuilder: () => new RequestBuilder()
 					.withRoute( 'PUT', '/statements/{statement_id}' )
 					.withPathParam( 'statement_id', statementId )
 					.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( statementPropertyId ) )
 			},
 			{
-				route: '/entities/items/{item_id}/statements/{statement_id}',
+				route: 'PUT /entities/items/{item_id}/statements/{statement_id}',
 				newRequestBuilder: () => new RequestBuilder()
 					.withRoute( 'PUT', '/entities/items/{item_id}/statements/{statement_id}' )
 					.withPathParam( 'item_id', itemId )
@@ -254,13 +254,13 @@ describe( 'Conditional requests', () => {
 					.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( statementPropertyId ) )
 			},
 			{
-				route: '/statements/{statement_id}',
+				route: 'DELETE /statements/{statement_id}',
 				newRequestBuilder: () => new RequestBuilder()
 					.withRoute( 'DELETE', '/statements/{statement_id}' )
 					.withPathParam( 'statement_id', statementId )
 			},
 			{
-				route: '/entities/items/{item_id}/statements/{statement_id}',
+				route: 'DELETE /entities/items/{item_id}/statements/{statement_id}',
 				newRequestBuilder: () => new RequestBuilder()
 					.withRoute( 'DELETE', '/entities/items/{item_id}/statements/{statement_id}' )
 					.withPathParam( 'item_id', itemId )
