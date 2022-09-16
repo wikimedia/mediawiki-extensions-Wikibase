@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
 use Generator;
-use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
@@ -17,7 +16,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @license GPL-2.0-or-later
  */
-class FormatableSummaryConverterTest extends TestCase {
+class FormatableSummaryConverterTest extends \MediaWikiLangTestCase {
 
 	/**
 	 * @dataProvider editSummaryProvider
