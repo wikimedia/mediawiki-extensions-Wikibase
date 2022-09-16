@@ -6,34 +6,33 @@ use Generator;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
-use Wikibase\Repo\RestApi\Infrastructure\FormatableSummaryConverter;
+use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\FormatableSummaryConverter
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class FormatableSummaryConverterTest extends \MediaWikiLangTestCase {
+class EditSummaryFormatterTest extends \MediaWikiLangTestCase {
 
 	/**
 	 * @dataProvider editSummaryProvider
 	 */
-	public function testConvert( EditSummary $editSummary, string $formattedSummary ): void {
-		$formatableSummary = ( new FormatableSummaryConverter() )->convert( $editSummary );
-
+	public function testFormat( EditSummary $editSummary, string $formattedSummary ): void {
 		$this->assertSame(
 			$formattedSummary,
-			WikibaseRepo::getSummaryFormatter()->formatSummary( $formatableSummary )
+			( new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter() ) )
+				->format( $editSummary )
 		);
 	}
 
 	public function editSummaryProvider(): Generator {
 		// not using statements with values here because in order to format them, SummaryFormatter needs to look up the Property's data type
 		// which means it needs to be persisted. This is unnecessary here, since we're testing the summary conversion and can assume that
-		// SummaryFormatter works fine.
+		// the inner SummaryFormatter works fine.
 
 		yield 'add' => [
 			StatementEditSummary::newAddSummary(

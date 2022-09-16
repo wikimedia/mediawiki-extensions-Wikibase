@@ -6,13 +6,26 @@ use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
+use Wikibase\Repo\SummaryFormatter;
 
 /**
  * @license GPL-2.0-or-later
  */
-class FormatableSummaryConverter {
+class EditSummaryFormatter {
 
-	public function convert( EditSummary $summary ): FormatableSummary {
+	private $summaryFormatter;
+
+	public function __construct( SummaryFormatter $summaryFormatter ) {
+		$this->summaryFormatter = $summaryFormatter;
+	}
+
+	public function format( EditSummary $summary ): string {
+		return $this->summaryFormatter->formatSummary(
+			$this->convertToFormattableSummary( $summary )
+		);
+	}
+
+	private function convertToFormattableSummary( EditSummary $summary ): FormatableSummary {
 		if ( $summary instanceof StatementEditSummary ) {
 			switch ( $summary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
