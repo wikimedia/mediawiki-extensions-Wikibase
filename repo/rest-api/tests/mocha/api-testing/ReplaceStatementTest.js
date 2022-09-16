@@ -3,6 +3,7 @@
 const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
+const formatStatementEditSummary = require( '../helpers/formatStatementEditSummary' );
 
 function newReplaceStatementRequestBuilder( statementId, statement ) {
 	return new RequestBuilder()
@@ -63,7 +64,10 @@ describe( 'PUT /statements/{statement_id}', () => {
 				statementSerialization.mainsnak.datavalue
 			);
 			const { comment } = await entityHelper.getLatestEditMetadata( testItemId );
-			assert.empty( comment );
+			assert.strictEqual(
+				comment,
+				formatStatementEditSummary( 'wbsetclaim', 'update', statementSerialization.mainsnak )
+			);
 		} );
 
 		it( 'can replace a statement to an item with edit metadata provided', async () => {
@@ -90,7 +94,15 @@ describe( 'PUT /statements/{statement_id}', () => {
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.deepEqual( editMetadata.tags, [ tag ] );
 			assert.property( editMetadata, 'bot' );
-			assert.strictEqual( editMetadata.comment, editSummary );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatStatementEditSummary(
+					'wbsetclaim',
+					'update',
+					statementSerialization.mainsnak,
+					editSummary
+				)
+			);
 			assert.strictEqual( editMetadata.user, user.username );
 		} );
 

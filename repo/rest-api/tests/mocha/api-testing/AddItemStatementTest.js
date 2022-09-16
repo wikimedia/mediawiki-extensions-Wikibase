@@ -3,6 +3,7 @@
 const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
+const formatStatementEditSummary = require( '../helpers/formatStatementEditSummary' );
 
 function newAddItemStatementRequestBuilder( itemId, statement ) {
 	return new RequestBuilder()
@@ -57,7 +58,10 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			assertValid201Response( response );
 
 			const { comment } = await entityHelper.getLatestEditMetadata( testItemId );
-			assert.empty( comment );
+			assert.strictEqual(
+				comment,
+				formatStatementEditSummary( 'wbsetclaim', 'create', testStatement.mainsnak )
+			);
 		} );
 		it( 'can add a statement to an item with edit metadata provided', async () => {
 			const user = await action.mindy();
@@ -76,7 +80,10 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.deepEqual( editMetadata.tags, [ tag ] );
 			assert.property( editMetadata, 'bot' );
-			assert.strictEqual( editMetadata.comment, editSummary );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatStatementEditSummary( 'wbsetclaim', 'create', testStatement.mainsnak, editSummary )
+			);
 			assert.strictEqual( editMetadata.user, user.username );
 		} );
 	} );

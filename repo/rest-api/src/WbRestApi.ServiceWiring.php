@@ -13,6 +13,8 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Serialization\SerializerFactory;
+use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
@@ -33,6 +35,7 @@ use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementVali
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
+use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -60,11 +63,7 @@ return [
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
 			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
-			new MediaWikiEditEntityFactoryItemUpdater(
-				RequestContext::getMain(),
-				WikibaseRepo::getEditEntityFactory( $services ),
-				WikibaseRepo::getLogger( $services )
-			),
+			WbRestApi::getItemUpdater( $services ),
 			new GuidGenerator(),
 			new WikibaseEntityPermissionChecker(
 				WikibaseRepo::getEntityPermissionChecker( $services ),
@@ -108,6 +107,15 @@ return [
 		);
 	},
 
+	'WbRestApi.ItemUpdater' => function( MediaWikiServices $services ): ItemUpdater {
+		return new MediaWikiEditEntityFactoryItemUpdater(
+			RequestContext::getMain(),
+			WikibaseRepo::getEditEntityFactory( $services ),
+			WikibaseRepo::getLogger( $services ),
+			new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter( $services ) )
+		);
+	},
+
 	'WbRestApi.PatchItemStatement' => function( MediaWikiServices $services ): PatchItemStatement {
 		return new PatchItemStatement(
 			new PatchItemStatementValidator(
@@ -130,11 +138,7 @@ return [
 					WikibaseRepo::getDataTypeValidatorFactory( $services )
 				)
 			),
-			new MediaWikiEditEntityFactoryItemUpdater(
-				RequestContext::getMain(),
-				WikibaseRepo::getEditEntityFactory( $services ),
-				WikibaseRepo::getLogger( $services )
-			),
+			WbRestApi::getItemUpdater( $services ),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
@@ -169,11 +173,7 @@ return [
 			),
 			new StatementGuidParser( new ItemIdParser() ),
 			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
-			new MediaWikiEditEntityFactoryItemUpdater(
-				RequestContext::getMain(),
-				WikibaseRepo::getEditEntityFactory( $services ),
-				WikibaseRepo::getLogger( $services )
-			),
+			WbRestApi::getItemUpdater( $services ),
 			new WikibaseEntityPermissionChecker(
 				WikibaseRepo::getEntityPermissionChecker( $services ),
 				$services->getUserFactory()
@@ -203,11 +203,7 @@ return [
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
 			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
-			new MediaWikiEditEntityFactoryItemUpdater(
-				RequestContext::getMain(),
-				WikibaseRepo::getEditEntityFactory( $services ),
-				WikibaseRepo::getLogger( $services )
-			),
+			WbRestApi::getItemUpdater( $services ),
 			new WikibaseEntityPermissionChecker(
 				WikibaseRepo::getEntityPermissionChecker( $services ),
 				$services->getUserFactory()

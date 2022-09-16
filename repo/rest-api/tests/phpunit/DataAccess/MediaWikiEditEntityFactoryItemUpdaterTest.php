@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Tests\RestApi\DataAccess;
 
 use Generator;
 use IContextSource;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Tests\NewItem;
@@ -18,6 +18,7 @@ use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdateFailed;
+use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 
 /**
  * @covers \Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater
@@ -29,22 +30,56 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdateFailed;
 class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 
 	/**
+	 * @var MockObject|IContextSource
+	 */
+	private $context;
+
+	/**
+	 * @var MockObject|MediawikiEditEntityFactory
+	 */
+	private $editEntityFactory;
+
+	/**
+	 * @var MockObject|LoggerInterface
+	 */
+	private $logger;
+
+	/**
+	 * @var MockObject|EditSummaryFormatter
+	 */
+	private $summaryFormatter;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->context = $this->createStub( IContextSource::class );
+		$this->editEntityFactory = $this->createStub( MediawikiEditEntityFactory::class );
+		$this->logger = $this->createStub( LoggerInterface::class );
+		$this->summaryFormatter = $this->createStub( EditSummaryFormatter::class );
+	}
+
+	/**
 	 * @dataProvider editMetadataProvider
 	 */
-	public function testUpdate( EditMetadata $editMetadata, string $expectedComment ): void {
+	public function testUpdate( EditMetadata $editMetadata ): void {
 		$itemToUpdate = NewItem::withId( 'Q123' )->build();
 		$expectedRevisionId = 234;
 		$expectedRevisionTimestamp = '20221111070707';
 		$expectedRevisionItem = $this->createStub( Item::class );
+		$expectedFormattedSummary = 'FORMATTED SUMMARY';
 
-		$context = $this->createStub( IContextSource::class );
+		$this->summaryFormatter = $this->createMock( EditSummaryFormatter::class );
+		$this->summaryFormatter->expects( $this->once() )
+			->method( 'format' )
+			->with( $editMetadata->getSummary() )
+			->willReturn( $expectedFormattedSummary );
 
 		$editEntity = $this->createMock( EditEntity::class );
 		$editEntity->expects( $this->once() )
 			->method( 'attemptSave' )
 			->with(
 				$itemToUpdate,
-				$expectedComment,
+				$expectedFormattedSummary,
 				$editMetadata->isBot() ? EDIT_UPDATE | EDIT_FORCE_BOT : EDIT_UPDATE,
 				false,
 				false,
@@ -56,14 +91,13 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 				] )
 			);
 
-		$editEntityFactory = $this->createMock( MediawikiEditEntityFactory::class );
-		$editEntityFactory->expects( $this->once() )
+		$this->editEntityFactory = $this->createMock( MediawikiEditEntityFactory::class );
+		$this->editEntityFactory->expects( $this->once() )
 			->method( 'newEditEntity' )
-			->with( $context, $itemToUpdate->getId() )
+			->with( $this->context, $itemToUpdate->getId() )
 			->willReturn( $editEntity );
 
-		$updater = new MediaWikiEditEntityFactoryItemUpdater( $context, $editEntityFactory, new NullLogger() );
-		$itemRevision = $updater->update( $itemToUpdate, $editMetadata );
+		$itemRevision = $this->newItemUpdater()->update( $itemToUpdate, $editMetadata );
 
 		$this->assertSame( $expectedRevisionItem, $itemRevision->getItem() );
 		$this->assertSame( $expectedRevisionId, $itemRevision->getRevisionId() );
@@ -71,38 +105,26 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 	}
 
 	public function editMetadataProvider(): Generator {
-		$someUserProvidedComment = 'im a comment';
-
 		yield 'bot edit' => [
-			new EditMetadata( [], true, $this->createEditSummary( $someUserProvidedComment ) ),
-			$someUserProvidedComment,
+			new EditMetadata( [], true, $this->createStub( EditSummary::class ) ),
 		];
 		yield 'user edit' => [
-			new EditMetadata( [], false, $this->createEditSummary( $someUserProvidedComment ) ),
-			$someUserProvidedComment,
-		];
-		yield 'default edit comment is used if user provides none' => [
-			new EditMetadata( [], false, $this->createEditSummary( null ) ),
-			''
+			new EditMetadata( [], false, $this->createStub( EditSummary::class ) ),
 		];
 	}
 
 	public function testGivenSavingFails_throwsException(): void {
 		$itemToUpdate = NewItem::withId( 'Q123' )->build();
-		$editMeta = new EditMetadata( [ 'tag', 'also a tag' ], false, $this->createEditSummary() );
+		$editMeta = new EditMetadata( [ 'tag', 'also a tag' ], false, $this->createStub( EditSummary::class ) );
 		$errorStatus = Status::newFatal( 'failed to save. sad times.' );
 
 		$editEntity = $this->createStub( EditEntity::class );
 		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
 
-		$editEntityFactory = $this->createStub( MediawikiEditEntityFactory::class );
-		$editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
+		$this->editEntityFactory = $this->createStub( MediawikiEditEntityFactory::class );
+		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
 
-		$updater = new MediaWikiEditEntityFactoryItemUpdater(
-			$this->createStub( IContextSource::class ),
-			$editEntityFactory,
-			new NullLogger()
-		);
+		$updater = $this->newItemUpdater();
 
 		$this->expectException( ItemUpdateFailed::class );
 		$this->expectErrorMessage( (string)$errorStatus );
@@ -117,34 +139,33 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 		$saveStatus->merge( Status::newFatal( 'saving succeeded but something else went wrong' ) );
 		$saveStatus->setOK( true );
 
-		$logger = $this->createMock( LoggerInterface::class );
-		$logger->expects( $this->once() )
+		$this->logger = $this->createMock( LoggerInterface::class );
+		$this->logger->expects( $this->once() )
 			->method( 'warning' )
 			->with( (string)$saveStatus );
 
 		$editEntity = $this->createStub( EditEntity::class );
 		$editEntity->method( 'attemptSave' )->willReturn( $saveStatus );
 
-		$editEntityFactory = $this->createStub( MediawikiEditEntityFactory::class );
-		$editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
-
-		$updater = new MediaWikiEditEntityFactoryItemUpdater(
-			$this->createStub( IContextSource::class ),
-			$editEntityFactory,
-			$logger
-		);
+		$this->editEntityFactory = $this->createStub( MediawikiEditEntityFactory::class );
+		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
 
 		$this->assertInstanceOf(
 			ItemRevision::class,
-			$updater->update( $this->createStub( Item::class ), $this->createStub( EditMetadata::class ) )
+			$this->newItemUpdater()->update(
+				$this->createStub( Item::class ),
+				$this->createStub( EditMetadata::class )
+			)
 		);
 	}
 
-	private function createEditSummary( ?string $comment = null ): EditSummary {
-		$editSummary = $this->createMock( EditSummary::class );
-		$editSummary->expects( $this->once() )->method( 'getUserComment' )->willReturn( $comment );
-
-		return $editSummary;
+	private function newItemUpdater(): MediaWikiEditEntityFactoryItemUpdater {
+		return new MediaWikiEditEntityFactoryItemUpdater(
+			$this->createStub( IContextSource::class ),
+			$this->editEntityFactory,
+			$this->logger,
+			$this->summaryFormatter
+		);
 	}
 
 }

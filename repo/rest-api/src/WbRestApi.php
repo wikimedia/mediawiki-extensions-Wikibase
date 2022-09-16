@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\RestApi\Domain\Serialization\SerializerFactory;
+use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
@@ -62,6 +63,11 @@ class WbRestApi {
 	public static function getPatchItemStatement( ContainerInterface $services = null ): PatchItemStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.PatchItemStatement' );
+	}
+
+	public static function getItemUpdater( ContainerInterface $services = null ): ItemUpdater {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.ItemUpdater' );
 	}
 
 }

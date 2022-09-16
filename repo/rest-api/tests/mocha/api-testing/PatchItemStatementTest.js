@@ -4,6 +4,7 @@ const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
+const formatStatementEditSummary = require( '../helpers/formatStatementEditSummary' );
 
 function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
@@ -153,7 +154,15 @@ describe( 'PATCH statement tests', () => {
 					const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 					assert.include( editMetadata.tags, tag );
 					assert.property( editMetadata, 'bot' );
-					assert.strictEqual( editMetadata.comment, editSummary );
+					assert.strictEqual(
+						editMetadata.comment,
+						formatStatementEditSummary(
+							'wbsetclaim',
+							'update',
+							response.body.mainsnak,
+							editSummary
+						)
+					);
 					assert.strictEqual( editMetadata.user, user.username );
 				} );
 

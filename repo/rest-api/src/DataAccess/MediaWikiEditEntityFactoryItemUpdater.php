@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdateFailed;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 
 /**
  * @license GPL-2.0-or-later
@@ -20,11 +21,18 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 	private $context;
 	private $editEntityFactory;
 	private $logger;
+	private $summaryFormatter;
 
-	public function __construct( IContextSource $context, MediawikiEditEntityFactory $editEntityFactory, LoggerInterface $logger ) {
+	public function __construct(
+		IContextSource $context,
+		MediawikiEditEntityFactory $editEntityFactory,
+		LoggerInterface $logger,
+		EditSummaryFormatter $summaryFormatter
+	) {
 		$this->context = $context;
 		$this->editEntityFactory = $editEntityFactory;
 		$this->logger = $logger;
+		$this->summaryFormatter = $summaryFormatter;
 	}
 
 	public function update( Item $item, EditMetadata $editMetadata ): ItemRevision {
@@ -32,7 +40,7 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 
 		$status = $editEntity->attemptSave(
 			$item,
-			$editMetadata->getSummary()->getUserComment() ?? '',
+			$this->summaryFormatter->format( $editMetadata->getSummary() ),
 			EDIT_UPDATE | ( $editMetadata->isBot() ? EDIT_FORCE_BOT : 0 ),
 			false,
 			false,

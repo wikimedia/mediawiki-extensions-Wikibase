@@ -3,6 +3,7 @@
 const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
+const formatStatementEditSummary = require( '../helpers/formatStatementEditSummary' );
 
 async function addStatementWithRandomStringValue( itemId, propertyId ) {
 	const response = await new RequestBuilder()
@@ -61,7 +62,10 @@ describe( 'DELETE /statements/{statement_id}', () => {
 
 			assertValid200Response( response );
 			const { comment } = await entityHelper.getLatestEditMetadata( testItemId );
-			assert.empty( comment );
+			assert.strictEqual(
+				comment,
+				formatStatementEditSummary( 'wbremoveclaims', 'remove', testStatement.mainsnak )
+			);
 			await verifyStatementDeleted( testStatement.id );
 		} );
 
@@ -83,7 +87,14 @@ describe( 'DELETE /statements/{statement_id}', () => {
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.include( editMetadata.tags, tag );
 			assert.property( editMetadata, 'bot' );
-			assert.strictEqual( editMetadata.comment, editSummary );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatStatementEditSummary( 'wbremoveclaims',
+					'remove',
+					testStatement.mainsnak,
+					editSummary
+				)
+			);
 			assert.strictEqual( editMetadata.user, user.username );
 		} );
 	} );

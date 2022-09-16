@@ -14,6 +14,7 @@ use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
+use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -38,7 +39,8 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 		$updater = new MediaWikiEditEntityFactoryItemUpdater(
 			RequestContext::getMain(),
 			WikibaseRepo::getEditEntityFactory(),
-			new NullLogger()
+			new NullLogger(),
+			$this->createStub( EditSummaryFormatter::class )
 		);
 		$newRevision = $updater->update(
 			$itemToUpdate,
@@ -67,7 +69,8 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 		$updater = new MediaWikiEditEntityFactoryItemUpdater(
 			RequestContext::getMain(),
 			WikibaseRepo::getEditEntityFactory(),
-			new NullLogger()
+			new NullLogger(),
+			$this->createStub( EditSummaryFormatter::class )
 		);
 		$newRevision = $updater->update(
 			$itemToUpdate,
@@ -97,7 +100,8 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 		$updater = new MediaWikiEditEntityFactoryItemUpdater(
 			RequestContext::getMain(),
 			WikibaseRepo::getEditEntityFactory(),
-			new NullLogger()
+			new NullLogger(),
+			$this->createStub( EditSummaryFormatter::class )
 		);
 		$newRevision = $updater->update(
 			$itemToUpdate,
