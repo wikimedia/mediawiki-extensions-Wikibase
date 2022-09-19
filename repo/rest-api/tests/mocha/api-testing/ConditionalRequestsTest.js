@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, action } = require( 'api-testing' );
+const { assert } = require( 'api-testing' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const {
 	createSingleItem,
@@ -222,15 +222,12 @@ describe( 'Conditional requests', () => {
 
 		beforeEach( async () => {
 			// restore the item state in between tests that may or may not edit its data
-			const editEntityResponse = await action.getAnon().action( 'wbeditentity', {
-				id: itemId,
-				token: '+\\',
-				data: JSON.stringify( {
-					claims: [ newStatementWithRandomStringValue( statementPropertyId ) ]
-				} )
-			}, 'POST' );
-			const firstStatement = Object.values( editEntityResponse.entity.claims )[ 0 ][ 0 ];
-			statementId = firstStatement.id;
+			const addStatementResponse = await new RequestBuilder()
+				.withRoute( 'POST', '/entities/items/{item_id}/statements' )
+				.withPathParam( 'item_id', itemId )
+				.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( statementPropertyId ) )
+				.makeRequest();
+			statementId = addStatementResponse.body.id;
 
 			const testItemCreationMetadata = await getLatestEditMetadata( itemId );
 			lastModifiedDate = new Date( testItemCreationMetadata.timestamp );
