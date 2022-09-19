@@ -189,6 +189,10 @@ class RequestBuilder {
 		}
 	}
 
+	getRouteDescription() {
+		return `${this.method} ${this.route}`;
+	}
+
 }
 
 module.exports = { RequestBuilder };

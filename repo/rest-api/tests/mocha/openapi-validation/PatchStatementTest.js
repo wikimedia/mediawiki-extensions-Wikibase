@@ -9,12 +9,9 @@ const {
 const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 const expect = require( 'chai' ).expect;
 
-const shortRoute = '/statements/{statement_id}';
-const longRoute = '/entities/items/{item_id}/statements/{statement_id}';
-
 function newPatchStatementRequestBuilder( statementId, patch ) {
 	return new RequestBuilder()
-		.withRoute( 'PATCH', shortRoute )
+		.withRoute( 'PATCH', '/statements/{statement_id}' )
 		.withPathParam( 'statement_id', statementId )
 		.withJsonBodyParam( 'patch', patch )
 		.withHeader( 'content-type', 'application/json-patch+json' );
@@ -22,7 +19,7 @@ function newPatchStatementRequestBuilder( statementId, patch ) {
 
 function newPatchItemStatementRequestBuilder( itemId, statementId, patch ) {
 	return new RequestBuilder()
-		.withRoute( 'PATCH', longRoute )
+		.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
 		.withPathParam( 'item_id', itemId )
 		.withPathParam( 'statement_id', statementId )
 		.withJsonBodyParam( 'patch', patch );
@@ -47,17 +44,10 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 	} );
 
 	[
-		{
-			route: longRoute,
-			newPatchRequestBuilder: ( statementId, patch ) =>
-				newPatchItemStatementRequestBuilder( testItemId, statementId, patch )
-		},
-		{
-			route: shortRoute,
-			newPatchRequestBuilder: newPatchStatementRequestBuilder
-		}
-	].forEach( ( { route, newPatchRequestBuilder } ) => {
-		describe( route, () => {
+		( statementId, patch ) => newPatchItemStatementRequestBuilder( testItemId, statementId, patch ),
+		newPatchStatementRequestBuilder
+	].forEach( ( newPatchRequestBuilder ) => {
+		describe( newPatchRequestBuilder().getRouteDescription(), () => {
 
 			it( '200', async () => {
 				const response = await newPatchRequestBuilder(

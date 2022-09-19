@@ -29,17 +29,10 @@ describe( 'validate DELETE endpoints against OpenAPI definition', () => {
 	} );
 
 	[
-		{
-			route: '/entities/items/{item_id}/statements/{statement_id}',
-			newRemoveRequestBuilder: ( statementId, patch ) =>
-				newRemoveItemStatementRequestBuilder( testItemId, statementId, patch )
-		},
-		{
-			route: '/statements/{statement_id}',
-			newRemoveRequestBuilder: newRemoveStatementRequestBuilder
-		}
-	].forEach( ( { route, newRemoveRequestBuilder } ) => {
-		describe( route, () => {
+		( statementId, patch ) => newRemoveItemStatementRequestBuilder( testItemId, statementId, patch ),
+		newRemoveStatementRequestBuilder
+	].forEach( ( newRemoveRequestBuilder ) => {
+		describe( newRemoveRequestBuilder().getRouteDescription(), () => {
 
 			describe( 'DELETE on newly created statements', () => {
 				let testStatementId;

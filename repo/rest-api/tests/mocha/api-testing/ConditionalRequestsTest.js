@@ -47,33 +47,21 @@ describe( 'Conditional requests', () => {
 	} );
 
 	[
-		{
-			route: 'GET /entities/items/{item_id}',
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'GET', '/entities/items/{item_id}' )
-				.withPathParam( 'item_id', itemId )
-		},
-		{
-			route: 'GET /entities/items/{item_id}/statements',
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'GET', '/entities/items/{item_id}/statements' )
-				.withPathParam( 'item_id', itemId )
-		},
-		{
-			route: 'GET /entities/items/{item_id}/statements/{statement_id}',
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'GET', '/entities/items/{item_id}/statements/{statement_id}' )
-				.withPathParam( 'item_id', itemId )
-				.withPathParam( 'statement_id', statementId )
-		},
-		{
-			route: 'GET /statements/{statement_id}',
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'GET', '/statements/{statement_id}' )
-				.withPathParam( 'statement_id', statementId )
-		}
-	].forEach( ( { route, newRequestBuilder } ) => {
-		describe( `If-None-Match - ${route}`, () => {
+		() => new RequestBuilder()
+			.withRoute( 'GET', '/entities/items/{item_id}' )
+			.withPathParam( 'item_id', itemId ),
+		() => new RequestBuilder()
+			.withRoute( 'GET', '/entities/items/{item_id}/statements' )
+			.withPathParam( 'item_id', itemId ),
+		() => new RequestBuilder()
+			.withRoute( 'GET', '/entities/items/{item_id}/statements/{statement_id}' )
+			.withPathParam( 'item_id', itemId )
+			.withPathParam( 'statement_id', statementId ),
+		() => new RequestBuilder()
+			.withRoute( 'GET', '/statements/{statement_id}' )
+			.withPathParam( 'statement_id', statementId )
+	].forEach( ( newRequestBuilder ) => {
+		describe( `If-None-Match - ${newRequestBuilder().getRouteDescription()}`, () => {
 			describe( '200 response', () => {
 				it( 'if the current item revision is newer than the ID provided', async () => {
 					const response = await newRequestBuilder()
@@ -183,7 +171,7 @@ describe( 'Conditional requests', () => {
 			} );
 		} );
 
-		describe( `If-Modified-Since - ${route}`, () => {
+		describe( `If-Modified-Since - ${newRequestBuilder().getRouteDescription()}`, () => {
 			describe( '200 response', () => {
 				it( 'If-Modified-Since header is older than current revision', async () => {
 					const response = await newRequestBuilder()
@@ -235,68 +223,50 @@ describe( 'Conditional requests', () => {
 		} );
 
 		const editRoutes = [
-			{
-				route: 'PUT /statements/{statement_id}',
-				newRequestBuilder: () => new RequestBuilder()
-					.withRoute( 'PUT', '/statements/{statement_id}' )
-					.withPathParam( 'statement_id', statementId )
-					.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( statementPropertyId ) )
-			},
-			{
-				route: 'PUT /entities/items/{item_id}/statements/{statement_id}',
-				newRequestBuilder: () => new RequestBuilder()
-					.withRoute( 'PUT', '/entities/items/{item_id}/statements/{statement_id}' )
-					.withPathParam( 'item_id', itemId )
-					.withPathParam( 'statement_id', statementId )
-					.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( statementPropertyId ) )
-			},
-			{
-				route: 'DELETE /statements/{statement_id}',
-				newRequestBuilder: () => new RequestBuilder()
-					.withRoute( 'DELETE', '/statements/{statement_id}' )
-					.withPathParam( 'statement_id', statementId )
-			},
-			{
-				route: 'DELETE /entities/items/{item_id}/statements/{statement_id}',
-				newRequestBuilder: () => new RequestBuilder()
-					.withRoute( 'DELETE', '/entities/items/{item_id}/statements/{statement_id}' )
-					.withPathParam( 'item_id', itemId )
-					.withPathParam( 'statement_id', statementId )
-			}
+			() => new RequestBuilder()
+				.withRoute( 'PUT', '/statements/{statement_id}' )
+				.withPathParam( 'statement_id', statementId )
+				.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( statementPropertyId ) ),
+			() => new RequestBuilder()
+				.withRoute( 'PUT', '/entities/items/{item_id}/statements/{statement_id}' )
+				.withPathParam( 'item_id', itemId )
+				.withPathParam( 'statement_id', statementId )
+				.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( statementPropertyId ) ),
+			() => new RequestBuilder()
+				.withRoute( 'DELETE', '/statements/{statement_id}' )
+				.withPathParam( 'statement_id', statementId ),
+			() => new RequestBuilder()
+				.withRoute( 'DELETE', '/entities/items/{item_id}/statements/{statement_id}' )
+				.withPathParam( 'item_id', itemId )
+				.withPathParam( 'statement_id', statementId )
 		];
 
 		if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
-			editRoutes.push( {
-				route: 'PATCH /entities/items/{item_id}/statements/{statement_id}',
-				newRequestBuilder: () => new RequestBuilder()
-					.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
-					.withPathParam( 'item_id', itemId )
-					.withPathParam( 'statement_id', statementId )
-					.withJsonBodyParam( 'patch', [
-						{
-							op: 'replace',
-							path: '/mainsnak',
-							value: newStatementWithRandomStringValue( statementPropertyId ).mainsnak
-						}
-					] )
-			} );
-			editRoutes.push( {
-				route: 'PATCH /statements/{statement_id}',
-				newRequestBuilder: () => new RequestBuilder()
-					.withRoute( 'PATCH', '/statements/{statement_id}' )
-					.withPathParam( 'statement_id', statementId )
-					.withJsonBodyParam( 'patch', [
-						{
-							op: 'replace',
-							path: '/mainsnak',
-							value: newStatementWithRandomStringValue( statementPropertyId ).mainsnak
-						}
-					] )
-			} );
+			editRoutes.push( () => new RequestBuilder()
+				.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
+				.withPathParam( 'item_id', itemId )
+				.withPathParam( 'statement_id', statementId )
+				.withJsonBodyParam( 'patch', [
+					{
+						op: 'replace',
+						path: '/mainsnak',
+						value: newStatementWithRandomStringValue( statementPropertyId ).mainsnak
+					}
+				] ) );
+			editRoutes.push( () => new RequestBuilder()
+				.withRoute( 'PATCH', '/statements/{statement_id}' )
+				.withPathParam( 'statement_id', statementId )
+				.withJsonBodyParam( 'patch', [
+					{
+						op: 'replace',
+						path: '/mainsnak',
+						value: newStatementWithRandomStringValue( statementPropertyId ).mainsnak
+					}
+				] ) );
 		}
 
-		editRoutes.forEach( ( { route, newRequestBuilder } ) => {
-			describe( `If-Match - ${route}`, () => {
+		editRoutes.forEach( ( newRequestBuilder ) => {
+			describe( `If-Match - ${newRequestBuilder().getRouteDescription()}`, () => {
 				it( 'responds with 412 given an outdated revision id', async () => {
 					const response = await newRequestBuilder()
 						.withHeader( 'If-Match', makeEtag( latestRevisionId - 1 ) )
@@ -314,7 +284,7 @@ describe( 'Conditional requests', () => {
 				} );
 			} );
 
-			describe( `If-Unmodified-Since - ${route}`, () => {
+			describe( `If-Unmodified-Since - ${newRequestBuilder().getRouteDescription()}`, () => {
 				it( 'responds with 412 given an outdated last modified date', async () => {
 					const response = await newRequestBuilder()
 						.withHeader( 'If-Unmodified-Since', 'Wed, 27 Jul 2022 08:24:29 GMT' )

@@ -28,7 +28,6 @@ describe( 'Auth', () => {
 
 	const editRequests = [
 		{
-			route: 'POST /entities/items/{item_id}/statements',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'POST', '/entities/items/{item_id}/statements' )
 				.withPathParam( 'item_id', itemId )
@@ -36,7 +35,6 @@ describe( 'Auth', () => {
 			expectedStatusCode: 201
 		},
 		{
-			route: 'PUT /entities/items/{item_id}/statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'PUT', '/entities/items/{item_id}/statements/{statement_id}' )
 				.withPathParam( 'item_id', itemId )
@@ -44,14 +42,12 @@ describe( 'Auth', () => {
 				.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( stringPropertyId ) )
 		},
 		{
-			route: 'PUT /statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'PUT', '/statements/{statement_id}' )
 				.withPathParam( 'statement_id', statementId )
 				.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( stringPropertyId ) )
 		},
 		{
-			route: 'DELETE /entities/items/{item_id}/statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'DELETE', '/entities/items/{item_id}/statements/{statement_id}' )
 				.withPathParam( 'item_id', itemId )
@@ -59,7 +55,6 @@ describe( 'Auth', () => {
 			isDestructive: true
 		},
 		{
-			route: 'DELETE /statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'DELETE', '/statements/{statement_id}' )
 				.withPathParam( 'statement_id', statementId ),
@@ -69,7 +64,6 @@ describe( 'Auth', () => {
 
 	if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
 		editRequests.push( {
-			route: 'PATCH /entities/items/{item_id}/statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
 				.withPathParam( 'item_id', itemId )
@@ -83,7 +77,6 @@ describe( 'Auth', () => {
 				] )
 		} );
 		editRequests.push( {
-			route: 'PATCH /statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'PATCH', '/statements/{statement_id}' )
 				.withPathParam( 'statement_id', statementId )
@@ -99,33 +92,29 @@ describe( 'Auth', () => {
 
 	[
 		{
-			route: 'GET /entities/items/{id}/statements',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'GET', '/entities/items/{item_id}/statements' )
 				.withPathParam( 'item_id', itemId )
 		},
 		{
-			route: 'GET /entities/items/{item_id}/statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'GET', '/entities/items/{item_id}/statements/{statement_id}' )
 				.withPathParam( 'item_id', itemId )
 				.withPathParam( 'statement_id', statementId )
 		},
 		{
-			route: 'GET /entities/items/{id}',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'GET', '/entities/items/{item_id}' )
 				.withPathParam( 'item_id', itemId )
 		},
 		{
-			route: 'GET /statements/{statement_id}',
 			newRequestBuilder: () => new RequestBuilder()
 				.withRoute( 'GET', '/statements/{statement_id}' )
 				.withPathParam( 'statement_id', statementId )
 		},
 		...editRequests
-	].forEach( ( { route, newRequestBuilder, expectedStatusCode = 200, isDestructive } ) => {
-		describe( `Authentication - ${route}`, () => {
+	].forEach( ( { newRequestBuilder, expectedStatusCode = 200, isDestructive } ) => {
+		describe( `Authentication - ${newRequestBuilder().getRouteDescription()}`, () => {
 
 			afterEach( async () => {
 				if ( isDestructive ) {
@@ -166,8 +155,8 @@ describe( 'Auth', () => {
 			await protectItem( itemId );
 		} );
 
-		editRequests.forEach( ( { route, newRequestBuilder } ) => {
-			it( `Permission denied for protected item - ${route}`, async () => {
+		editRequests.forEach( ( { newRequestBuilder } ) => {
+			it( `Permission denied for protected item - ${newRequestBuilder().getRouteDescription()}`, async () => {
 				const response = await newRequestBuilder().makeRequest();
 
 				assert.strictEqual( response.status, 403 );

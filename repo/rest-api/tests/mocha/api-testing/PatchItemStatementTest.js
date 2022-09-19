@@ -68,17 +68,10 @@ describe( 'PATCH statement tests', () => {
 	} );
 
 	[
-		{
-			route: 'PATCH /entities/items/{item_id}/statements/{statement_id}',
-			newPatchRequestBuilder: ( statementId, patch ) =>
-				newPatchItemStatementRequestBuilder( testItemId, statementId, patch )
-		},
-		{
-			route: 'PATCH /statements/{statement_id}',
-			newPatchRequestBuilder: newPatchStatementRequestBuilder
-		}
-	].forEach( ( { route, newPatchRequestBuilder } ) => {
-		describe( route, () => {
+		( statementId, patch ) => newPatchItemStatementRequestBuilder( testItemId, statementId, patch ),
+		newPatchStatementRequestBuilder
+	].forEach( ( newPatchRequestBuilder ) => {
+		describe( newPatchRequestBuilder().getRouteDescription(), () => {
 
 			function assertValid200Response( response ) {
 				assert.strictEqual( response.status, 200 );

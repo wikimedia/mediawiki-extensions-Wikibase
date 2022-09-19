@@ -29,17 +29,10 @@ describe( 'DELETE statement', () => {
 	} );
 
 	[
-		{
-			route: 'DELETE /entities/items/{item_id}/statements/{statement_id}',
-			newRemoveRequestBuilder: ( statementId, patch ) =>
-				newRemoveItemStatementRequestBuilder( testItemId, statementId, patch )
-		},
-		{
-			route: 'DELETE /statements/{statement_id}',
-			newRemoveRequestBuilder: newRemoveStatementRequestBuilder
-		}
-	].forEach( ( { route, newRemoveRequestBuilder } ) => {
-		describe( route, () => {
+		( statementId, patch ) => newRemoveItemStatementRequestBuilder( testItemId, statementId, patch ),
+		newRemoveStatementRequestBuilder
+	].forEach( ( newRemoveRequestBuilder ) => {
+		describe( newRemoveRequestBuilder().getRouteDescription(), () => {
 
 			describe( '200 success response', () => {
 				let testStatement;
