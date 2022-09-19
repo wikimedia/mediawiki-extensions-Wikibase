@@ -20,7 +20,6 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 		itemId = ( await createEntity( 'item', {} ) ).entity.id;
 		const propertyId = ( await createUniqueStringProperty() ).entity.id;
 		validStatementSerialization = {
-			type: 'statement',
 			mainsnak: {
 				snaktype: 'novalue',
 				property: propertyId

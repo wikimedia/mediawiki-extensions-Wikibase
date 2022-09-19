@@ -5,9 +5,9 @@ namespace Wikibase\Repo\Tests\RestApi\DataAccess;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ValueValidators\Result;
-use Wikibase\DataModel\Deserializers\StatementDeserializer;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
+use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
@@ -34,7 +34,9 @@ class SnakValidatorStatementValidatorTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->deserializer = WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer();
+		$this->deserializer = new StatementDeserializer(
+			WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer()
+		);
 		$this->snakValidator = $this->createStub( SnakValidator::class );
 		$this->snakValidator->method( 'validateStatementSnaks' )->willReturn( Result::newSuccess() );
 	}
@@ -54,8 +56,7 @@ class SnakValidatorStatementValidatorTest extends TestCase {
 				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P123',
-				],
-				'type' => 'statement'
+				]
 			],
 			'statement'
 		);
@@ -68,7 +69,6 @@ class SnakValidatorStatementValidatorTest extends TestCase {
 		// The data type <-> value type mismatch isn't really tested here since we don't need to test SnakValidator internals.
 		// This sort of error happens if e.g. P321 is a string Property, but we're giving it an Item ID as a value here.
 		$serialization = [
-			'type' => 'statement',
 			'mainsnak' => [
 				'snaktype' => 'value',
 				'property' => 'P321',

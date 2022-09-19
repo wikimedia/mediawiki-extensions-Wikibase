@@ -56,7 +56,6 @@ class ReplaceItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase 
 					],
 					'bodyContents' => json_encode( [
 						'statement' => [
-							'type' => 'statement',
 							'mainsnak' => [
 								'snaktype' => 'novalue',
 								'property' => 'P1',

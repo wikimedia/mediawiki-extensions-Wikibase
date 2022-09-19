@@ -21,6 +21,9 @@ async function createUniqueStringProperty() {
  * @param {Array} statements
  */
 async function createItemWithStatements( statements ) {
+	statements.forEach( ( statement ) => {
+		statement.type = 'statement';
+	} );
 	const item = {
 		claims: statements
 	};
@@ -118,8 +121,7 @@ function newStatementSerializationWithRandomStringValue( property ) {
 				value: 'random-string-value-' + utils.uniq()
 			},
 			property
-		},
-		type: 'statement'
+		}
 	};
 }
 

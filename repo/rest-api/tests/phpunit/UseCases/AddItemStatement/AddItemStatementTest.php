@@ -25,9 +25,9 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Validators\SnakValidator;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement
@@ -217,7 +217,7 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 		return new AddItemStatementValidator(
 			new ItemIdValidator(),
 			new SnakValidatorStatementValidator(
-				WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer(),
+				WbRestApi::getStatementDeserializer(),
 				$snakValidator
 			),
 			new EditMetadataValidator(
@@ -232,8 +232,7 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 			'mainsnak' => [
 				'snaktype' => 'novalue',
 				'property' => 'P123',
-			],
-			'type' => 'statement'
+			]
 		];
 	}
 

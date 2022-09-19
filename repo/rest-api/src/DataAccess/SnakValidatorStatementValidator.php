@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\DataAccess;
 
-use Wikibase\DataModel\Deserializers\StatementDeserializer;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 use Wikibase\Repo\Validators\SnakValidator;
