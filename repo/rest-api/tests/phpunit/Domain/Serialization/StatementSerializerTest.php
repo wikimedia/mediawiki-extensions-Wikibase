@@ -45,6 +45,7 @@ class StatementSerializerTest extends TestCase {
 			$this->assertArrayHasKey( $field, $serialization );
 			$this->assertEquals( $value, $serialization[$field] );
 		}
+		$this->assertArrayNotHasKey( 'type', $serialization );
 	}
 
 	public function testEmptyFieldDefaultsGetOverridden(): void {

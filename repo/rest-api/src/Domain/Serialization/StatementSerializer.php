@@ -24,13 +24,16 @@ class StatementSerializer implements Serializer {
 	 */
 	// phpcs:ignore SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	public function serialize( $statement ): array {
+		$serialization = $this->statementSerializer->serialize( $statement );
+		unset( $serialization['type'] );
+
 		return array_merge(
 			[
 				'qualifiers' => (object)[],
 				'qualifiers-order' => [],
 				'references' => [],
 			],
-			$this->statementSerializer->serialize( $statement )
+			$serialization
 		);
 	}
 
