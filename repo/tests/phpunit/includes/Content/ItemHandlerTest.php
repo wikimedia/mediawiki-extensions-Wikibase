@@ -305,8 +305,9 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$engine = $this->createMock( \SearchEngine::class );
 
 		$page = $this->getMockWikiPage( $handler );
+		$revision = $page->getRevisionRecord();
 
-		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
+		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine, $revision );
 		$this->assertSame( ItemContent::CONTENT_MODEL_ID, $data['content_model'], 'content_modek' );
 		$this->assertSame( "Kitten\nKitten", $data['text'], 'text' );
 	}

@@ -188,8 +188,9 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 		$engine = $this->createMock( \SearchEngine::class );
 
 		$page = $this->getMockWikiPage( $handler );
+		$revision = $page->getRevisionRecord();
 
-		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
+		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine, $revision );
 		$this->assertSame( PropertyContent::CONTENT_MODEL_ID, $data['content_model'], 'content_modek' );
 		$this->assertSame( "Kitten", $data['text'], 'text' );
 	}
