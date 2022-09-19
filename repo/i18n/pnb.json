@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Abbas dhothar",
+			"Bgo eiu",
 			"Khalid Mahmood",
 			"Ladsgroup"
 		]
@@ -16,7 +17,7 @@
 	"wikibase-description-empty": "کوئی گل نہیں دسی گئی",
 	"wikibase-content-language-edit-label": "بولی:",
 	"wikibase-diffview-description": "تفصیل",
-	"wikibase-statementsection-statements": "واتاں",
+	"wikibase-statementsection-statements": "بیان",
 	"wikibase-sitelinks-special": "ہور سائیٹاں",
 	"wikibase-statementview-rank-normal": "نارمل رینک",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|اتہ پتہ|اتے پتے}}",
