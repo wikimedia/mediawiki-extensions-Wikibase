@@ -30,6 +30,7 @@ use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementVali
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
+use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
@@ -351,7 +352,7 @@ class ReplaceItemStatementTest extends TestCase {
 			new ItemIdValidator(),
 			new StatementIdValidator( $itemIdParser ),
 			new SnakValidatorStatementValidator(
-				WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer(),
+				WbRestApi::getStatementDeserializer(),
 				$snakValidator
 			),
 			new EditMetadataValidator( \CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )

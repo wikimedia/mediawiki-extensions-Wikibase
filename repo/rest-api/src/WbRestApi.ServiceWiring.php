@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Serialization\SerializerFactory;
+use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
@@ -47,7 +48,7 @@ return [
 			new AddItemStatementValidator(
 				new ItemIdValidator(),
 				new SnakValidatorStatementValidator(
-					WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer(),
+					WbRestApi::getStatementDeserializer(),
 					new SnakValidator(
 						WikibaseRepo::getPropertyDataTypeLookup( $services ),
 						WikibaseRepo::getDataTypeFactory( $services ),
@@ -131,7 +132,7 @@ return [
 			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new JsonDiffStatementPatcher(
 				WikibaseRepo::getBaseDataModelSerializerFactory( $services )->newStatementSerializer(),
-				WikibaseRepo::getBaseDataModelDeserializerFactory( $services )->newStatementDeserializer(),
+				WbRestApi::getStatementDeserializer( $services ),
 				new SnakValidator(
 					WikibaseRepo::getPropertyDataTypeLookup( $services ),
 					WikibaseRepo::getDataTypeFactory( $services ),
@@ -187,7 +188,7 @@ return [
 				new ItemIdValidator(),
 				new StatementIdValidator( new ItemIdParser() ),
 				new SnakValidatorStatementValidator(
-					WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer(),
+					WbRestApi::getStatementDeserializer(),
 					new SnakValidator(
 						WikibaseRepo::getPropertyDataTypeLookup( $services ),
 						WikibaseRepo::getDataTypeFactory( $services ),
@@ -220,5 +221,11 @@ return [
 
 		return new SerializerFactory( $legacySerializerFactory, WikibaseRepo::getPropertyDataTypeLookup( $services ) );
 	},
+
+	'WbRestApi.StatementDeserializer' => function( MediaWikiServices $services ): StatementDeserializer {
+		return new StatementDeserializer(
+			WikibaseRepo::getBaseDataModelDeserializerFactory( $services )->newStatementDeserializer()
+		);
+	}
 
 ];

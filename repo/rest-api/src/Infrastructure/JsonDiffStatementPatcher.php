@@ -7,13 +7,13 @@ use InvalidArgumentException;
 use Swaggest\JsonDiff\JsonPatch;
 use Swaggest\JsonDiff\PatchTestOperationFailedException;
 use Throwable;
-use Wikibase\DataModel\Deserializers\StatementDeserializer;
 use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
+use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Domain\Services\StatementPatcher;
 use Wikibase\Repo\Validators\SnakValidator;
 
