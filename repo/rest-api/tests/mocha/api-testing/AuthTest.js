@@ -3,7 +3,7 @@
 const { assert, action } = require( 'api-testing' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const {
-	createEntity,
+	createItemWithStatements,
 	createUniqueStringProperty,
 	newStatementWithRandomStringValue,
 	protectItem
@@ -19,9 +19,9 @@ describe( 'Auth', () => {
 
 	before( async () => {
 		stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		const createEntityResponse = await createEntity( 'item', {
-			claims: [ newStatementWithRandomStringValue( stringPropertyId ) ]
-		} );
+		const createEntityResponse = await createItemWithStatements( [
+			newStatementWithRandomStringValue( stringPropertyId )
+		] );
 		itemId = createEntityResponse.entity.id;
 		statementId = createEntityResponse.entity.claims[ stringPropertyId ][ 0 ].id;
 	} );

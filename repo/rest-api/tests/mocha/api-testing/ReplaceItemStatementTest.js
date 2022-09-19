@@ -34,11 +34,11 @@ describe( 'PUT /entities/items/{item_id}/statements/{statement_id}', () => {
 
 	before( async () => {
 		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-		const createEntityResponse = await entityHelper.createEntity( 'item', {
-			claims: [ entityHelper.newStatementWithRandomStringValue( testPropertyId ) ]
-		} );
-		testItemId = createEntityResponse.entity.id;
-		testStatementId = createEntityResponse.entity.claims[ testPropertyId ][ 0 ].id;
+		const createItemResponse = await entityHelper.createItemWithStatements( [
+			entityHelper.newStatementWithRandomStringValue( testPropertyId )
+		] );
+		testItemId = createItemResponse.entity.id;
+		testStatementId = createItemResponse.entity.claims[ testPropertyId ][ 0 ].id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
@@ -130,13 +130,11 @@ describe( 'PUT /entities/items/{item_id}/statements/{statement_id}', () => {
 		it( 'replaces the statement in place without changing the order', async () => {
 			// This is tested here by creating an item with 3 statements, replacing the middle one
 			// and then checking that it's still in the middle afterwards.
-			const item = ( await entityHelper.createEntity( 'item', {
-				claims: [
-					entityHelper.newStatementWithRandomStringValue( testPropertyId ),
-					entityHelper.newStatementWithRandomStringValue( testPropertyId ),
-					entityHelper.newStatementWithRandomStringValue( testPropertyId )
-				]
-			} ) ).entity;
+			const item = ( await entityHelper.createItemWithStatements( [
+				entityHelper.newStatementWithRandomStringValue( testPropertyId ),
+				entityHelper.newStatementWithRandomStringValue( testPropertyId ),
+				entityHelper.newStatementWithRandomStringValue( testPropertyId )
+			] ) ).entity;
 			const originalSecondStatement = item.claims[ testPropertyId ][ 1 ];
 			const newSecondStatement = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 

@@ -17,6 +17,16 @@ async function createUniqueStringProperty() {
 	} );
 }
 
+/**
+ * @param {Array} statements
+ */
+async function createItemWithStatements( statements ) {
+	const item = {
+		claims: statements
+	};
+	return await createEntity( 'item', item );
+}
+
 async function createSingleItem() {
 	const stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
 
@@ -116,6 +126,7 @@ function newStatementSerializationWithRandomStringValue( property ) {
 module.exports = {
 	createEntity,
 	createSingleItem,
+	createItemWithStatements,
 	createUniqueStringProperty,
 	createRedirectForItem,
 	getLatestEditMetadata,

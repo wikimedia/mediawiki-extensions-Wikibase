@@ -3,7 +3,7 @@
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const {
 	createUniqueStringProperty,
-	createEntity,
+	createItemWithStatements,
 	newStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
 const expect = require( 'chai' ).expect;
@@ -25,11 +25,11 @@ describe( 'validate PUT /entities/items/{item_id}/statements/{statement_id}', ()
 
 	before( async () => {
 		stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		const createEntityResponse = await createEntity( 'item', {
-			claims: [ newStatementWithRandomStringValue( stringPropertyId ) ]
-		} );
-		itemId = createEntityResponse.entity.id;
-		statementId = createEntityResponse.entity.claims[ stringPropertyId ][ 0 ].id;
+		const createItemResponse = await createItemWithStatements( [
+			newStatementWithRandomStringValue( stringPropertyId )
+		] );
+		itemId = createItemResponse.entity.id;
+		statementId = createItemResponse.entity.claims[ stringPropertyId ][ 0 ].id;
 	} );
 
 	it( '200', async () => {

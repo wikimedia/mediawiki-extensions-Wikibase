@@ -51,9 +51,9 @@ describe( 'PATCH statement tests', () => {
 
 		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 
-		const createItemResponse = await entityHelper.createEntity( 'item', {
-			claims: [ entityHelper.newStatementWithRandomStringValue( testPropertyId ) ]
-		} );
+		const createItemResponse = await entityHelper.createItemWithStatements( [
+			entityHelper.newStatementWithRandomStringValue( testPropertyId )
+		] );
 		testItemId = createItemResponse.entity.id;
 		testStatementId = createItemResponse.entity.claims[ testPropertyId ][ 0 ].id;
 
