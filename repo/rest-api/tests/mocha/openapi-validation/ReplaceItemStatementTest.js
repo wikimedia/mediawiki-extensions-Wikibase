@@ -8,6 +8,13 @@ const {
 } = require( '../helpers/entityHelper' );
 const expect = require( 'chai' ).expect;
 
+function newReplaceStatementRequestBuilder( statementId, statement ) {
+	return new RequestBuilder()
+		.withRoute( 'PUT', '/statements/{statement_id}' )
+		.withPathParam( 'statement_id', statementId )
+		.withJsonBodyParam( 'statement', statement );
+}
+
 function newReplaceItemStatementRequestBuilder( itemId, statementId, statement ) {
 	return new RequestBuilder()
 		.withRoute( 'PUT', '/entities/items/{item_id}/statements/{statement_id}' )
@@ -17,79 +24,84 @@ function newReplaceItemStatementRequestBuilder( itemId, statementId, statement )
 		.withJsonBodyParam( 'statement', statement );
 }
 
-describe( 'validate PUT /entities/items/{item_id}/statements/{statement_id}', () => {
+describe( 'validate PUT endpoints against OpenAPI definition', () => {
 
-	let itemId;
+	let testItemId;
+	let testStatementId;
 	let stringPropertyId;
-	let statementId;
 
 	before( async () => {
 		stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const createItemResponse = await createItemWithStatements( [
 			newStatementWithRandomStringValue( stringPropertyId )
 		] );
-		itemId = createItemResponse.entity.id;
-		statementId = createItemResponse.entity.claims[ stringPropertyId ][ 0 ].id;
+		testItemId = createItemResponse.entity.id;
+		testStatementId = createItemResponse.entity.claims[ stringPropertyId ][ 0 ].id;
 	} );
 
-	it( '200', async () => {
-		const response = await newReplaceItemStatementRequestBuilder(
-			itemId,
-			statementId,
-			newStatementWithRandomStringValue( stringPropertyId )
-		).makeRequest();
+	[
+		( statementId, patch ) => newReplaceItemStatementRequestBuilder( testItemId, statementId, patch ),
+		newReplaceStatementRequestBuilder
+	].forEach( ( newReplaceRequestBuilder ) => {
+		describe( newReplaceRequestBuilder().getRouteDescription(), () => {
 
-		expect( response.status ).to.equal( 200 );
-		expect( response ).to.satisfyApiSpec;
-	} );
+			it( '200', async () => {
+				const response = await newReplaceRequestBuilder(
+					testStatementId,
+					newStatementWithRandomStringValue( stringPropertyId )
+				).makeRequest();
 
-	it( '400 - invalid statement serialization', async () => {
-		const response = await newReplaceItemStatementRequestBuilder(
-			itemId,
-			statementId,
-			{ invalid: 'statement' }
-		).makeRequest();
+				expect( response.status ).to.equal( 200 );
+				expect( response ).to.satisfyApiSpec;
+			} );
 
-		expect( response.status ).to.equal( 400 );
-		expect( response ).to.satisfyApiSpec;
-	} );
+			it( '400 - invalid statement serialization', async () => {
+				const response = await newReplaceRequestBuilder(
+					testStatementId,
+					{ invalid: 'statement' }
+				).makeRequest();
 
-	it( '404 - statement does not exist', async () => {
-		const response = await newReplaceItemStatementRequestBuilder(
-			itemId,
-			`${itemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`,
-			newStatementWithRandomStringValue( stringPropertyId )
-		).makeRequest();
+				expect( response.status ).to.equal( 400 );
+				expect( response ).to.satisfyApiSpec;
+			} );
 
-		expect( response.status ).to.equal( 404 );
-		expect( response ).to.satisfyApiSpec;
-	} );
+			it( '404 - statement does not exist', async () => {
+				const response = await newReplaceRequestBuilder(
+					`${testItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`,
+					newStatementWithRandomStringValue( stringPropertyId )
+				).makeRequest();
 
-	it( '412 - precondition failed', async () => {
-		const yesterday = new Date( Date.now() - 24 * 60 * 60 * 1000 ).toUTCString();
-		const response = await newReplaceItemStatementRequestBuilder(
-			itemId,
-			statementId,
-			newStatementWithRandomStringValue( stringPropertyId )
-		)
-			.withHeader( 'If-Unmodified-Since', yesterday )
-			.makeRequest();
+				expect( response.status ).to.equal( 404 );
+				expect( response ).to.satisfyApiSpec;
+			} );
 
-		expect( response.status ).to.equal( 412 );
-		expect( response ).to.satisfyApiSpec;
-	} );
+			it( '412 - precondition failed', async () => {
+				const yesterday = new Date( Date.now() - 24 * 60 * 60 * 1000 ).toUTCString();
+				const response = await newReplaceRequestBuilder(
+					testStatementId,
+					newStatementWithRandomStringValue( stringPropertyId )
+				)
+					.withHeader( 'If-Unmodified-Since', yesterday )
+					.makeRequest();
 
-	it( '415 - unsupported media type', async () => {
-		const response = await newReplaceItemStatementRequestBuilder(
-			itemId,
-			statementId,
-			newStatementWithRandomStringValue( stringPropertyId )
-		)
-			.withHeader( 'Content-Type', 'text/plain' )
-			.makeRequest();
+				expect( response.status ).to.equal( 412 );
+				expect( response ).to.satisfyApiSpec;
+			} );
 
-		expect( response.status ).to.equal( 415 );
-		expect( response ).to.satisfyApiSpec;
+			it( '415 - unsupported media type', async () => {
+				const response = await newReplaceRequestBuilder(
+					testStatementId,
+					newStatementWithRandomStringValue( stringPropertyId )
+				)
+					.withHeader( 'Content-Type', 'text/plain' )
+					.makeRequest();
+
+				expect( response.status ).to.equal( 415 );
+				expect( response ).to.satisfyApiSpec;
+			} );
+
+		} );
+
 	} );
 
 } );
