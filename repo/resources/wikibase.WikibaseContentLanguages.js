@@ -22,7 +22,6 @@
 			}
 
 			this._languageCodes = contentLanguages;
-			this._languageNameMap = mw.config.get( 'wgULSLanguages' );
 		}
 	);
 
@@ -35,12 +34,6 @@
 	};
 
 	$.extend( SELF.prototype, {
-		/**
-		 * @type {Object|null}
-		 * @private
-		 */
-		_languageNameMap: null,
-
 		/**
 		 * @type {string[]|null}
 		 * @private
@@ -58,7 +51,7 @@
 		 * @inheritdoc
 		 */
 		getName: function ( code ) {
-			return this._languageNameMap ? this._languageNameMap[ code ] : null;
+			return wb.getLanguageNameByCode( code );
 		},
 
 		getLanguageNameMap: function () {

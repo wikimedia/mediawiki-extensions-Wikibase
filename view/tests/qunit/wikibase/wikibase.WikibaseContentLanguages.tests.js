@@ -25,31 +25,24 @@
 	} );
 
 	QUnit.test( 'getName', function ( assert ) {
-		var ulsLanguageMap = {
-			eo: 'Esperanto'
-		};
-		sandbox.stub( mw.config, 'get' ).returns( ulsLanguageMap );
+		sandbox.stub( wb, 'getLanguageNameByCode' ).withArgs( 'eo' ).returns( 'Esperanto' );
 
 		assert.strictEqual(
 			( new wb.WikibaseContentLanguages( [ 'eo' ] ) ).getName( 'eo' ),
-			ulsLanguageMap.eo
+			'Esperanto'
 		);
 	} );
 
 	QUnit.test( 'getLanguageNameMap', function ( assert ) {
-		var ulsLanguageMap = {
-			en: 'English'
-		};
+		var callback = sandbox.stub( wb, 'getLanguageNameByCode' );
+		callback.withArgs( 'en' ).returns( 'English' );
+		callback.withArgs( 'eo' ).returns( 'Esperanto' );
 
-		sandbox.stub( mw.config, 'get' ).returns( ulsLanguageMap );
-
-		var result = ( new wb.WikibaseContentLanguages( [ 'en' ] ) ).getLanguageNameMap();
-		assert.strictEqual(
-			result.en,
-			ulsLanguageMap.en
+		var result = ( new wb.WikibaseContentLanguages( [ 'en', 'eo' ] ) ).getLanguageNameMap();
+		assert.deepEqual(
+			result,
+			{ en: 'English', eo: 'Esperanto' }
 		);
-
-		assert.notStrictEqual( result, ulsLanguageMap );
 	} );
 
 	QUnit.test( 'getMonolingualTextLanguages', function ( assert ) {

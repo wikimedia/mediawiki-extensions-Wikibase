@@ -948,6 +948,7 @@ final class RepoHooks {
 					'util.ContentLanguages',
 					'util.inherit',
 					'wikibase',
+					'wikibase.getLanguageNameByCode',
 				],
 				'targets' => [ 'desktop', 'mobile' ],
 			],
