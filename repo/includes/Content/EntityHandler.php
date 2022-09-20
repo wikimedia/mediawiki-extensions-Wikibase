@@ -687,7 +687,7 @@ abstract class EntityHandler extends ContentHandler {
 		SearchEngine $engine,
 		RevisionRecord $revision = null
 	) {
-		$fieldsData = parent::getDataForSearchIndex( $page, $parserOutput, $engine );
+		$fieldsData = parent::getDataForSearchIndex( $page, $parserOutput, $engine, $revision );
 
 		$content = $revision != null ? $revision->getContent( SlotRecord::MAIN ) : $page->getContent();
 		if ( ( $content instanceof EntityContent ) && !$content->isRedirect() ) {

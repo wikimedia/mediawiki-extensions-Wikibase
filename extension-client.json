@@ -276,7 +276,11 @@
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
 		"ResourceLoaderRegisterModules": "LibHooks",
 		"ScribuntoExternalLibraries": "\\Wikibase\\Client\\ClientHooks::onScribuntoExternalLibraries",
-		"SearchDataForIndex": "Trivial",
+		"SearchDataForIndex": {
+			"handler": "Trivial",
+			"deprecated": true
+		},
+		"SearchDataForIndex2": "Trivial",
 		"SearchIndexFields": "Trivial",
 		"SearchResultProvideDescription": "DescriptionProvider",
 		"SidebarBeforeOutput": "Sidebar",
