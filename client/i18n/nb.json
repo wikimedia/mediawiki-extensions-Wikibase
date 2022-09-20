@@ -8,7 +8,9 @@
 			"Jon Harald Søby",
 			"Kjetil r",
 			"Tarjeimo",
-			"Abuluntu"
+			"Abuluntu",
+			"Avilena",
+			"EdoAug"
 		]
 	},
 	"wikibase-client-desc": "Klient for Wikibase-utvidelsen",
@@ -180,5 +182,5 @@
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Publiser uten å logge inn",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Lagre uten å logge inn",
 	"wikibase-client-data-bridge-saving-error-assertuser-login": "Logg inn (åpnes i ny fane)",
-	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Fortsett redigering"
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Fortsett å redigere"
 }
