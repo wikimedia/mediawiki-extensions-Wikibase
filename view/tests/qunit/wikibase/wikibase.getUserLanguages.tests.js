@@ -18,102 +18,154 @@
 		} );
 	}
 
-	QUnit.test( 'getUserLanguages provides languages of babel if they are defined', function ( assert ) {
+	QUnit.test( 'getUserLanguages provides preferred languages if defined', function ( assert ) {
 		var mwConfigStub = sandbox.stub( mw.config, 'get' );
 		var mwUlsConfigStub = sandbox.spy( mw.uls, 'getFrequentLanguageList' );
-		var babelLanguages = [ 'de', 'he', 'fr' ];
-		var userLanguage = 'de';
+		var preferredContentLanguages = [ 'de-at', 'de', 'en', 'pt' ];
+		var specifiedLanguages = [ 'en', 'pt' ];
+		var userLanguage = 'de-at';
 
 		simulateUlsInstalled( true );
-		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages' ).returns( babelLanguages );
-		mwConfigStub.withArgs( 'wgUserLanguage' ).returns( userLanguage );
+		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages', [] )
+			.returns( specifiedLanguages );
+		mwConfigStub.withArgs( 'wbUserPreferredContentLanguages', specifiedLanguages )
+			.returns( preferredContentLanguages );
+		mwConfigStub.withArgs( 'wgUserLanguage' )
+			.returns( userLanguage );
 
-		assert.deepEqual( wb.getUserLanguages(), babelLanguages );
+		assert.deepEqual( wb.getUserLanguages(), preferredContentLanguages );
 		assert.true( mwUlsConfigStub.notCalled );
 	} );
 
-	QUnit.test( 'getUserLanguages moves user language to front of babel', function ( assert ) {
+	QUnit.test( 'getUserLanguages provides specified languages if preferred languages not defined', function ( assert ) {
 		var mwConfigStub = sandbox.stub( mw.config, 'get' );
 		var mwUlsConfigStub = sandbox.spy( mw.uls, 'getFrequentLanguageList' );
-		var babelLanguages = [ 'de', 'he', 'fr' ];
-		var userLanguage = 'he';
-
-		simulateUlsInstalled( true );
-		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages' ).returns( babelLanguages );
-		mwConfigStub.withArgs( 'wgUserLanguage' ).returns( userLanguage );
-
-		assert.deepEqual( wb.getUserLanguages(), [ 'he', 'de', 'fr' ] );
-		assert.true( mwUlsConfigStub.notCalled );
-	} );
-
-	QUnit.test( 'getUserLanguages adds user language to babel languages if not included', function ( assert ) {
-		var mwConfigStub = sandbox.stub( mw.config, 'get' );
-		var mwUlsConfigStub = sandbox.spy( mw.uls, 'getFrequentLanguageList' );
-		var babelLanguages = [ 'de', 'he', 'fr' ];
+		var specifiedLanguages = [ 'en', 'pt' ];
 		var userLanguage = 'en';
 
 		simulateUlsInstalled( true );
-		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages' ).returns( babelLanguages );
-		mwConfigStub.withArgs( 'wgUserLanguage' ).returns( userLanguage );
+		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages', [] )
+			.returns( specifiedLanguages );
+		mwConfigStub.withArgs( 'wbUserPreferredContentLanguages', specifiedLanguages )
+			.returns( specifiedLanguages );
+		mwConfigStub.withArgs( 'wgUserLanguage' )
+			.returns( userLanguage );
 
-		assert.deepEqual( wb.getUserLanguages(), [ 'en', 'de', 'he', 'fr' ] );
+		assert.deepEqual( wb.getUserLanguages(), specifiedLanguages );
 		assert.true( mwUlsConfigStub.notCalled );
 	} );
 
-	QUnit.test( 'getUserLanguages uses uls languages if babel is not defined', function ( assert ) {
+	QUnit.test( 'getUserLanguages moves user language to front', function ( assert ) {
 		var mwConfigStub = sandbox.stub( mw.config, 'get' );
-		var mwUlsConfigStub = sandbox.stub( mw.uls, 'getFrequentLanguageList' );
-		var ulsLanguages = [ 'de', 'en', 'fr', 'zh' ];
-		var babelLanguages = [];
+		var mwUlsConfigStub = sandbox.spy( mw.uls, 'getFrequentLanguageList' );
+		var preferredContentLanguages = [ 'de', 'de-at', 'en', 'pt' ];
+		var specifiedLanguages = [ 'en', 'pt' ];
+		var userLanguage = 'de-at';
+
+		simulateUlsInstalled( true );
+		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages', [] )
+			.returns( specifiedLanguages );
+		mwConfigStub.withArgs( 'wbUserPreferredContentLanguages', specifiedLanguages )
+			.returns( preferredContentLanguages );
+		mwConfigStub.withArgs( 'wgUserLanguage' )
+			.returns( userLanguage );
+
+		assert.deepEqual( wb.getUserLanguages(), [ 'de-at', 'de', 'en', 'pt' ] );
+		assert.true( mwUlsConfigStub.notCalled );
+	} );
+
+	QUnit.test( 'getUserLanguages adds user language in front', function ( assert ) {
+		var mwConfigStub = sandbox.stub( mw.config, 'get' );
+		var mwUlsConfigStub = sandbox.spy( mw.uls, 'getFrequentLanguageList' );
+		var specifiedLanguages = [ 'en', 'pt' ];
 		var userLanguage = 'de';
 
 		simulateUlsInstalled( true );
-		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages' ).returns( babelLanguages );
-		mwConfigStub.withArgs( 'wgUserLanguage' ).returns( userLanguage );
+		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages', [] )
+			.returns( specifiedLanguages );
+		mwConfigStub.withArgs( 'wbUserPreferredContentLanguages', specifiedLanguages )
+			.returns( specifiedLanguages );
+		mwConfigStub.withArgs( 'wgUserLanguage' )
+			.returns( userLanguage );
+
+		assert.deepEqual( wb.getUserLanguages(), [ 'de', 'en', 'pt' ] );
+		assert.true( mwUlsConfigStub.notCalled );
+	} );
+
+	QUnit.test( 'getUserLanguages adds ULS languages if specified languages empty', function ( assert ) {
+		var mwConfigStub = sandbox.stub( mw.config, 'get' );
+		var mwUlsConfigStub = sandbox.stub( mw.uls, 'getFrequentLanguageList' );
+		var ulsLanguages = [ 'de-at', 'de', 'fr', 'bar', 'zh' ];
+		var preferredContentLanguages = [ 'de-at' ];
+		var specifiedLanguages = [];
+		var userLanguage = 'de-at';
+
+		simulateUlsInstalled( true );
+		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages', [] )
+			.returns( specifiedLanguages );
+		mwConfigStub.withArgs( 'wbUserPreferredContentLanguages', specifiedLanguages )
+			.returns( preferredContentLanguages );
+		mwConfigStub.withArgs( 'wgUserLanguage' )
+			.returns( userLanguage );
 		mwUlsConfigStub.returns( ulsLanguages );
 
-		assert.deepEqual( wb.getUserLanguages(), ulsLanguages );
+		assert.deepEqual( wb.getUserLanguages(), [ 'de-at', 'de', 'fr', 'bar' ] );
 		assert.true( mwUlsConfigStub.calledOnce );
 	} );
 
-	QUnit.test( 'getUserLanguages returns just the given userLanguage if uls languages and babel is not defined', function ( assert ) {
+	QUnit.test( 'getUserLanguages returns user language if other sources empty', function ( assert ) {
 		var mwConfigStub = sandbox.stub( mw.config, 'get' );
 		var mwUlsConfigStub = sandbox.stub( mw.uls, 'getFrequentLanguageList' );
 		var ulsLanguages = [];
-		var babelLanguages = [];
-		var userLanguage = 'de';
+		var preferredContentLanguages = [];
+		var specifiedLanguages = [];
+		var userLanguage = 'de-at';
 
 		simulateUlsInstalled( true );
-		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages' ).returns( babelLanguages );
-		mwConfigStub.withArgs( 'wgUserLanguage' ).returns( userLanguage );
+		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages', [] )
+			.returns( specifiedLanguages );
+		mwConfigStub.withArgs( 'wbUserPreferredContentLanguages', specifiedLanguages )
+			.returns( preferredContentLanguages );
+		mwConfigStub.withArgs( 'wgUserLanguage' )
+			.returns( userLanguage );
 		mwUlsConfigStub.returns( ulsLanguages );
 
 		assert.deepEqual( wb.getUserLanguages(), [ userLanguage ] );
 		assert.true( mwUlsConfigStub.calledOnce );
 	} );
 
-	QUnit.test( 'getUserLanguages returns just the given userLanguage if uls is not installed and babel empty', function ( assert ) {
+	QUnit.test( 'getUserLanguages returns user language if other sources empty and ULS not installed', function ( assert ) {
 		var mwConfigStub = sandbox.stub( mw.config, 'get' );
-		var mwUlsConfigStub = sandbox.stub( mw.uls, 'getFrequentLanguageList' );
-		var babelLanguages = [];
-		var userLanguage = 'de';
+		var mwUlsConfigStub = sandbox.spy( mw.uls, 'getFrequentLanguageList' );
+		var preferredContentLanguages = [];
+		var specifiedLanguages = [];
+		var userLanguage = 'de-at';
 
 		simulateUlsInstalled( false );
-		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages' ).returns( babelLanguages );
-		mwConfigStub.withArgs( 'wgUserLanguage' ).returns( userLanguage );
+		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages', [] )
+			.returns( specifiedLanguages );
+		mwConfigStub.withArgs( 'wbUserPreferredContentLanguages', specifiedLanguages )
+			.returns( preferredContentLanguages );
+		mwConfigStub.withArgs( 'wgUserLanguage' )
+			.returns( userLanguage );
 
 		assert.deepEqual( wb.getUserLanguages(), [ userLanguage ] );
 		assert.true( mwUlsConfigStub.notCalled );
 	} );
 
-	QUnit.test( 'filters out invalid term languages', function ( assert ) {
-		var babelLanguages = [ 'de', 'en', 'tokipona', 'nonsense' ];
-		var userLanguage = 'de';
+	QUnit.test( 'getUserLanguages filters out invalid term languages', function ( assert ) {
 		var mwConfigStub = sandbox.stub( mw.config, 'get' );
+		var preferredContentLanguages = [ 'de', 'en', 'tokipona', 'nonsense' ];
+		var specifiedLanguages = [ 'en', 'tokipona', 'nonsense' ];
+		var userLanguage = 'de';
 
 		simulateUlsInstalled( false );
-		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages' ).returns( babelLanguages );
-		mwConfigStub.withArgs( 'wgUserLanguage' ).returns( userLanguage );
+		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages', [] )
+			.returns( specifiedLanguages );
+		mwConfigStub.withArgs( 'wbUserPreferredContentLanguages', specifiedLanguages )
+			.returns( preferredContentLanguages );
+		mwConfigStub.withArgs( 'wgUserLanguage' )
+			.returns( userLanguage );
 
 		assert.deepEqual( wb.getUserLanguages(), [ 'de', 'en' ] );
 	} );

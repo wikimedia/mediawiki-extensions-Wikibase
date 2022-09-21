@@ -842,6 +842,7 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\MakeGlobalVariablesScriptHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\MakeGlobalVariablesScriptHookHandler::factory",
 			"services": [
+				"ContentLanguage",
 				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermsLanguages"
