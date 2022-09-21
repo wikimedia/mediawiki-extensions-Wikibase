@@ -107,7 +107,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Algumas declarações",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Declaração: $1",
 	"wikibase-pageinfo-entity-usage-X": "Todos os tipos de entidades",
-	"wikibase-pageinfo-entity-usage-O": "Outros (Declarações)",
+	"wikibase-pageinfo-entity-usage-O": "Diversos (por exemplo, nomes alternativos, existência de entidade)",
 	"wikibase-property-render-error": "Erro ao renderizar a propriedade $1: $2",
 	"wikibase-otherprojects": "Em outros projetos",
 	"wikibase-otherprojects-beta-message": "Barra lateral de outros projetos",
