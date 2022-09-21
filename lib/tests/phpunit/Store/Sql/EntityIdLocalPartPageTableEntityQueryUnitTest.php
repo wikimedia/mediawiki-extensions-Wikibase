@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use ArrayObject;
+use Error;
 use MediaWiki\Storage\NameTableStore;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
@@ -22,40 +23,35 @@ use Wikimedia\Rdbms\IDatabase;
  */
 class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 
-	/**
-	 * @param string $type
-	 * @param string $localPart
-	 * @return EntityId
-	 */
-	private function getMockEntityId( $type, $localPart ) {
-		$id = $this->prophesize( EntityId::class );
-		$id->getLocalPart()->willReturn( $localPart );
-		$id->getEntityType()->willReturn( $type );
-
-		return $id->reveal();
+	private function getMockEntityId( string $type, string $localPart ): EntityId {
+		$id = $this->createMock( EntityId::class );
+		$id->method( 'getLocalPart' )->willReturn( $localPart );
+		$id->method( 'getEntityType' )->willReturn( $type );
+		return $id;
 	}
 
 	public function testSelectRowsSimple_noSlottedEntities() {
 		$query = new EntityIdLocalPartPageTableEntityQuery(
 			new EntityNamespaceLookup( [ 'item' => 0 ], [] ),
-			$this->prophesize( NameTableStore::class )->reveal()
+			$this->createMock( NameTableStore::class )
 		);
 
-		$database = $this->prophesize( IDatabase::class );
-		// For regular entities no slot_role_id should be requested
-		$database->makeList( [ 'page_title' => 'Q1', 'page_namespace' => 0 ], LIST_AND )->will(
-			function () {
-				return 'Q1-condition';
-			}
-		);
-		$database->makeList( [ "Q1-condition" ], LIST_OR )->will(
-			function () {
-				return 'combined-condition';
-			}
-		);
+		$database = $this->createMock( IDatabase::class );
+		$database->method( 'makeList' )
+			->willReturnCallback( static function ( array $a, $mode ) {
+				// For regular entities no slot_role_id should be requested
+				if ( $a === [ 'page_title' => 'Q1', 'page_namespace' => 0 ] && $mode === LIST_AND ) {
+					return 'Q1-condition';
+				} elseif ( $a === [ "Q1-condition" ] && $mode === LIST_OR ) {
+					return 'combined-condition';
+				} else {
+					throw new Error( 'Unexpected makeList() call' );
+				}
+			} );
 		// Extra fields, tables and joins passed to the method should also be requested
 		// No join on the slots table should happen, as we are not looking at a slotted entity
-		$database->select(
+		$database->method( 'select' )
+			->with(
 			[ "page", "extraTable" ],
 			[ "extraField", "page_title" ],
 			"combined-condition",
@@ -75,7 +71,7 @@ class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 			[ 'extraField' ],
 			[ 'extraTable' => 'extraJoin' ],
 			[ $this->getMockEntityId( 'item', 'Q1' ) ],
-			$database->reveal()
+			$database
 		);
 
 		// Result should be indexed by entity ID / by page_title
@@ -88,37 +84,34 @@ class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 	}
 
 	public function testSelectRowsCombination() {
-		$slotRoleStore = $this->prophesize( NameTableStore::class );
-		$slotRoleStore->getId( 'otherSlot' )->willReturn( 76 );
+		$slotRoleStore = $this->createMock( NameTableStore::class );
+		$slotRoleStore->method( 'getId' )
+			->with( 'otherSlot' )
+			->willReturn( 76 );
 
 		$query = new EntityIdLocalPartPageTableEntityQuery(
 			new EntityNamespaceLookup( [ 'item' => 0, 'other' => 2 ], [ 'other' => 'otherSlot' ] ),
-			$slotRoleStore->reveal()
+			$slotRoleStore
 		);
 
-		$database = $this->prophesize( IDatabase::class );
-		// For regular entities no slot_role_id should be requested
-		$database->makeList( [ 'page_title' => 'Q1', 'page_namespace' => 0 ], LIST_AND )->will(
-			function () {
-				return 'Q1-condition';
-			}
-		);
-		// For entities in slots the slot role ID should be in the query
-		$database->makeList(
-			[ "page_title" => "ooo123", "page_namespace" => 2, "slot_role_id" => 76 ],
-			LIST_AND
-		)->will(
-			function () {
-				return 'ooo123-condition';
-			}
-		);
-		$database->makeList( [ "Q1-condition", "ooo123-condition" ], LIST_OR )->will(
-			function () {
-				return 'combined-condition';
-			}
-		);
+		$database = $this->createMock( IDatabase::class );
+		$database->method( 'makeList' )
+			->willReturnCallback( static function ( array $a, $mode ) {
+				if ( $a === [ 'page_title' => 'Q1', 'page_namespace' => 0 ] && $mode === LIST_AND ) {
+					// For regular entities no slot_role_id should be requested
+					return 'Q1-condition';
+				} elseif ( $a === [ "page_title" => "ooo123", "page_namespace" => 2, "slot_role_id" => 76 ] && $mode == LIST_AND ) {
+					// For entities in slots the slot role ID should be in the query
+					return 'ooo123-condition';
+				} elseif ( $a === [ "Q1-condition", "ooo123-condition" ] && $mode === LIST_OR ) {
+					return 'combined-condition';
+				} else {
+					throw new Error( 'Unexpected makeList() call' );
+				}
+			} );
 		// Extra fields, tables and joins passed to the method should also be requested
-		$database->select(
+		$database->method( 'select' )
+			->with(
 			[ "page", "extraTable", "slots" ],
 			[ "extraField", "page_title" ],
 			"combined-condition",
@@ -139,7 +132,7 @@ class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 			[ 'extraField' ],
 			[ 'extraTable' => 'extraJoin' ],
 			[ $this->getMockEntityId( 'item', 'Q1' ), $this->getMockEntityId( 'other', 'ooo123' ) ],
-			$database->reveal()
+			$database
 		);
 
 		// Result should be indexed by entity ID / by page_title
