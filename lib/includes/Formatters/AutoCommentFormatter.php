@@ -94,14 +94,17 @@ class AutoCommentFormatter {
 
 		// look up the message
 		$msg = $this->getSummaryMessage( $matches[1] );
-
 		if ( $msg === false ) {
 			return null;
 		}
 
-		// no message requires wikitext params and some args are user-controlled
-		$args = array_map( 'wfEscapeWikiText', $args );
-
+		$args = array_map( function ( $arg ) {
+			// MediaWiki HTML-escaped the auto-comment already,
+			// undo that, then wikitext-escape the args for the message
+			// (no message requires formatted params and some args are user-controlled)
+			$arg = htmlspecialchars_decode( $arg, ENT_QUOTES | ENT_SUBSTITUTE );
+			return wfEscapeWikiText( $arg );
+		}, $args );
 		// render the autocomment
 		$auto = $msg->params( $args )->parse();
 		return $auto;
