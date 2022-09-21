@@ -352,7 +352,7 @@
 	"wikibase-api-failed-add-sitelink": "El conligament al sit el po minga vesser salvad.",
 	"wikibase-api-failed-modify": "Tentativ de modifica de l'articol fallad.",
 	"wikibase-api-failed-save": "El salvament l'è fallad.",
-	"wikibase-api-illegal-entity-remove": "DI entità i poden vesser minga scancelade cont el fornì una ciav <var>remove</var> de nivel superior.",
+	"wikibase-api-illegal-entity-remove": "I entità a poden vesser minga scancellade per mez d'ona ciav <var>remove</var> de nivel superior.",
 	"wikibase-api-illegal-id-or-site-page-selector": "Te gh'hee de fornì un <var>id</var> d'entità, o 'na combinazzion de <var>site</var> e <var>page</var>, ma minga tucc e du.",
 	"wikibase-api-illegal-ids-or-sites-titles-selector": "Forniss i \"id\" de l'element o i cobie de \"sit\" e \"titol\" per la pagina corispondenta",
 	"wikibase-api-inconsistent-language": "Lengua incompatibil rilevada.",
