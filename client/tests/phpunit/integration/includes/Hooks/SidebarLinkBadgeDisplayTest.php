@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
+use Error;
 use Language;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
@@ -24,16 +25,21 @@ class SidebarLinkBadgeDisplayTest extends MediaWikiIntegrationTestCase {
 	 * @return LabelDescriptionLookup
 	 */
 	private function getLabelDescriptionLookup() {
-		$labelDescriptionLookup = $this->prophesize( LabelDescriptionLookup::class );
+		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
 
-		$labelDescriptionLookup->getLabel( new ItemId( 'Q3' ) )->willReturn(
-			new Term( 'de', 'Lesenswerter Artikel' )
-		);
-		$labelDescriptionLookup->getLabel( new ItemId( 'Q4' ) )->willReturn(
-			new Term( 'de', 'Exzellenter Artikel' )
-		);
+		$labelDescriptionLookup->method( 'getLabel' )
+			->willReturnCallback( static function ( ItemId $itemId ) {
+				$idSerialization = $itemId->getSerialization();
+				if ( $idSerialization === 'Q3' ) {
+					return new Term( 'de', 'Lesenswerter Artikel' );
+				} elseif ( $idSerialization === 'Q4' ) {
+					return new Term( 'de', 'Exzellenter Artikel' );
+				} else {
+					throw new Error( 'Unexpected getLabel() call' );
+				}
+			} );
 
-		return $labelDescriptionLookup->reveal();
+		return $labelDescriptionLookup;
 	}
 
 	/**
