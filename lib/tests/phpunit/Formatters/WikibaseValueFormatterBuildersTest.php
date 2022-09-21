@@ -623,7 +623,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 
 	private function createCache() {
 		return new TermFallbackCacheFacade(
-			$this->prophesize( CacheInterface::class )->reveal(),
+			$this->createMock( CacheInterface::class ),
 			10
 		);
 	}
