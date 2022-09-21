@@ -52,7 +52,6 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 			->willReturn( new ItemContent( new EntityInstanceHolder( new Item() ) ) );
 
 		return new MediawikiEditFilterHookRunner(
-			$this->getServiceContainer()->getWikiPageFactory(),
 			$namespaceLookup,
 			$entityTitleLookup,
 			$entityContentFactory

@@ -6,7 +6,6 @@ use DerivativeContext;
 use Hooks;
 use IContextSource;
 use InvalidArgumentException;
-use MediaWiki\Page\WikiPageFactory;
 use RuntimeException;
 use Status;
 use Title;
@@ -25,9 +24,6 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
  */
 class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 
-	/** @var WikiPageFactory */
-	private $wikiPageFactory;
-
 	/**
 	 * @var EntityNamespaceLookup
 	 */
@@ -44,12 +40,10 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 	private $entityContentFactory;
 
 	public function __construct(
-		WikiPageFactory $wikiPageFactory,
 		EntityNamespaceLookup $namespaceLookup,
 		EntityTitleStoreLookup $titleLookup,
 		EntityContentFactory $entityContentFactory
 	) {
-		$this->wikiPageFactory = $wikiPageFactory;
 		$this->namespaceLookup = $namespaceLookup;
 		$this->titleLookup = $titleLookup;
 		$this->entityContentFactory = $entityContentFactory;
@@ -139,7 +133,6 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 		}
 
 		$context->setTitle( $title );
-		$context->setWikiPage( $this->wikiPageFactory->newFromTitle( $title ) );
 
 		return $context;
 	}
