@@ -76,7 +76,7 @@ class AutoCommentFormatter {
 	 * strings that may be in the database.
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/FormatAutocomments
-	 * @see docs/summaries.txt
+	 * @see @ref md_docs_topics_summaries
 	 *
 	 * @param string $auto the autocomment unformatted
 	 *

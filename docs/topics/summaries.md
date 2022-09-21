@@ -1,66 +1,70 @@
 # Summaries
 
-Wikibase uses “magic” edit summaries that can later be parsed and localized for display.
-This is done via the Format-Autocomment hook, handled by Summary::onFormat.
+Wikibase uses “magic” edit summaries so that users can understand the contents of edits in their own language.
+They are created by SummaryFormatter, saved in the database,
+and later parsed and localized for display by AutoCommentFormatter.
 
-## Magic summaries
+The usual general structure of a Wikibase edit summary looks as follows:
 
-Below are examples of the magic summaries currently used.
+```
+/* key:scount|lang|carg1|carg2 */ sarg1, sarg2
+```
 
-''NOTE'': The block between the /* and the */ (the “auto-comment”) specifies a system message and the parameters for that message (the “comment arguments”).
-By convention, the first comment argument is a count, used to trigger the plural version of the message when needed.
-The second argument, if present, is a language code or a site code.
+The entire part in `/* ... */` is called the **autocomment**,
+and the Wikibase-generated part after it is called the **autosummary**.
+Any custom user-provided summary is appended to the autosummary after a comma,
+and cannot be distinguished from the autosummary after the edit has been saved.
+The autocomment and autosummary are further divided as follows:
 
-* wbsetsitelink
+- **key** is the message key for translation.
+  The full message key used is “wikibase-<i>entitytype</i>-summary-<i>key</i>”,
+  where *entitytype* is the Entity type of the Entity being edited and *key* is the key in the summary.
+  The *entitytype* falls back to `entity` if no message for the specific Entity type exists;
+  thus, the *key* `wbcreate-new` used on an Item will use the message `wikibase-item-summary-wbcreate-new`,
+  while the *key* `wbeditentity` used on an Item will use the message `wikibase-entity-summary-wbeditentity`,
+  because the more specific message `wikibase-item-summary-wbeditentity` does not exist.
+  The *key* is often related to the API module or ChangeOp used to make the edit.
+- **scount** is the number of autosummary arguments (see *sargs* below).
+  It is available in the message as $1, and used for {{PLURAL}} (“added alias” or “added aliases”).
+- **lang** is the language or site ID of the change.
+  It is available in the message as $2 (“edited \[en\] label”, “added link to \[enwiki\]”).
+  If not applicable to the edit (e.g. statement changes have no language or site ID), this is empty.
+- **cargs** are autocomment arguments.
+  They are available in the message as $3, $4, etc.
+- **sargs** are autosummary arguments.
+  They are just plain text, and not used in the translation, but shown after the message.
+  Generally, the bulk of the user input goes here, not in the comment arguments:
+  for example, label/description/alias texts, sitelink titles, statement values etc. are usually summary arguments.
+
+Note that the roles of *scount*, *lang* and *cargs* are not always guaranteed
+(especially for older edit summaries), and should not be relied on.
+All the autocomment parts after the key should be passed into the message
+as $1, $2, $3, $4, etc.
+
+Annotated example summary:
+
+```
+/* wbsetaliases-add:2|en */ test item alias 1, test item alias 2, add two test item aliases
+--------------------------- ------------------------------------  -------------------------
+|  ~~~~~~~~~~~~~~~~ ^ __    |                                     |
+|  key              | |     |                                     |
+|             scount| |     |                                     |
+|                 lang|     |                                     |
+|autocomment                |autosummary                          |user-provided summary
+```
+
+This summary may be localized as:
+
+> Added \[en\] aliases: test item alias 1, test item alias 2, add two test item aliases
+
+Some more examples of magic summaries:
   * <code>/* wbsetsitelink-add:1|site */</code> linktitle
   * <code>/* wbsetsitelink-set:1|site */</code> linktitle
   * <code>/* wbsetsitelink-remove:1|site */</code>
-* wbsetlabel
   * <code>/* wbsetlabel-add:1|lang */</code> value
-  * <code>/* wbsetlabel-set:1|lang */</code> value
-  * <code>/* wbsetlabel-remove:1|lang */</code> value
-* wbsetdescription
-  * <code>/* wbsetdescription-add:1|lang */</code> value
   * <code>/* wbsetdescription-set:1|lang */</code> value
-  * <code>/* wbsetdescription-remove:1|lang */</code> value
-* wbeditentiry
-  * <code>/* wbeditentity-update: */</code>
-  * <code>/* wbeditentity-override: */</code>
-  * <code>/* wbeditentity-create: */</code>
-* wbsetalias
-  * <code>/* wbsetaliases-set:1|lang */</code> values...
   * <code>/* wbsetaliases-remove:1|lang */</code> values...
-  * <code>/* wbsetaliases-add:1|lang */</code> values...
-* wblinktitles
+  * <code>/* wbeditentity-update: */</code>
+  * <code>/* wbeditentity-update:0| */</code>
   * <code>/* wblinktitles-create:2| */</code> fromSite:fromPage, toSite:toPage
-  * <code>/* wblinktitles-connect:2| */</code> fromSite:fromPage, toSite:toPage
-* wbsetclaimvalue
-  * <code>/* wbsetclaimvalue:1 */</code> p123
   * <code>/* wbremoveclaims:n */</code> props...
-  * <code>/* wbremoveclaims-remove:1 */</code> props...
-* wbcreateclaim
-  * <code>/* wbcreateclaim-value: */</code> p123
-  * <code>/* wbcreateclaim-novalue: */</code> p123
-  * <code>/* wbcreateclaim-somevalue: */</code> p123
-* wbsetclaim
-  * <code>/* wbsetclaim-update: */</code> p123
-  * <code>/* wbsetclaim-create: */</code> p123
-  * <code>/* wbsetclaim-update-qualifiers: */</code> p123 (claim)|p4 (qualifier)
-  * <code>/* wbsetclaim-update-references: */</code> p123 (claim)|p4 (reference)
-  * <code>/* wbsetclaim-update-rank: */</code> p123
-
-The following summaries are not yet fully implemented and just included for reference:
-* wbsetclaim
-  * <code>/* wbsetclaim:1 */</code> p123
-* wbremovereferences
-  * <code>/* wbremovereferences:n */</code> p123
-* wbsetreference
-  * <code>/* wbsetreference:1 */</code> p123
-* wbremovequalifiers
-  * <code>/* wbremovequalifiers:n */</code> p123
-* wbsetqualifiers
-  * <code>/* wbsetqualifier:1 */</code> p123(claim)|p567(qualifier)
-* wbsetstatementrank
-  * <code>/* wbsetstatementrank-deprecated:1 */</code> p123
-  * <code>/* wbsetstatementrank-normal:1 */</code> p123
-  * <code>/* wbsetstatementrank-preferred:1 */</code> p123
