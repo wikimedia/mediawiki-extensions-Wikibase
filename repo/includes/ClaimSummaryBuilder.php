@@ -52,16 +52,12 @@ class ClaimSummaryBuilder {
 	 * @return Summary
 	 */
 	public function buildClaimSummary( ?Statement $oldStatement, Statement $newStatement ) {
-		$guid = $newStatement->getGuid();
-
 		$summary = new Summary( $this->apiModuleName );
 		// Only one statement touched, so we're always having singular here.
 		$summary->addAutoCommentArgs( 1 );
-		$summaryArgs = $this->buildSummaryArgs(
-			$newStatement,
-			$guid
-		);
-		$summary->addAutoSummaryArgs( $summaryArgs );
+		$summary->addAutoSummaryArgs( [
+			[ $newStatement->getPropertyId()->getSerialization() => $newStatement->getMainSnak() ]
+		] );
 
 		if ( $oldStatement !== null ) {
 			//claim is changed
@@ -93,33 +89,6 @@ class ClaimSummaryBuilder {
 		}
 
 		return $summary;
-	}
-
-	/**
-	 * Builds an associative array that can be used as summary arguments. It uses property IDs as
-	 * array keys and builds arrays of the main Snaks of all statements given by the GUIDs.
-	 *
-	 * @param Statement $newStatement
-	 * @param string $guid
-	 *
-	 * @return array[] Associative array that contains property ID => array of main Snaks
-	 */
-	private function buildSummaryArgs( Statement $newStatement, $guid ) {
-		$pairs = [];
-
-		if ( $newStatement->getGuid() === $guid ) {
-			$snak = $newStatement->getMainSnak();
-			$key = $snak->getPropertyId()->getSerialization();
-
-			// @phan-suppress-next-line PhanImpossibleTypeComparison
-			if ( !array_key_exists( $key, $pairs ) ) {
-				$pairs[$key] = [];
-			}
-
-			$pairs[$key][] = $snak;
-		}
-
-		return [ $pairs ];
 	}
 
 }

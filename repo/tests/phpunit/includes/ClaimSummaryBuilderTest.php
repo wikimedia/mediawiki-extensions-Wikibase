@@ -135,8 +135,12 @@ class ClaimSummaryBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		foreach ( $newStatements as $newStatement ) {
 			$summary = $claimSummaryBuilder->buildClaimSummary( null, $newStatement );
-			$this->assertInstanceOf( Summary::class, $summary, 'this should return a Summary object' );
+			$this->assertInstanceOf( Summary::class, $summary );
 			$this->assertEquals( 'wbsetclaim-create', $summary->getMessageKey() );
+			$this->assertSame(
+				[ [ $newStatement->getPropertyId()->getSerialization() => $newStatement->getMainSnak() ] ],
+				$summary->getAutoSummaryArgs()
+			);
 		}
 	}
 
@@ -154,8 +158,12 @@ class ClaimSummaryBuilderTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$summary = $claimSummaryBuilder->buildClaimSummary( $originalStatement, $modifiedStatement );
-		$this->assertInstanceOf( Summary::class, $summary, 'this should return a Summary object' );
+		$this->assertInstanceOf( Summary::class, $summary );
 		$this->assertEquals( 'wbsetclaim-' . $action, $summary->getMessageKey() );
+		$this->assertSame(
+			[ [ $modifiedStatement->getPropertyId()->getSerialization() => $modifiedStatement->getMainSnak() ] ],
+			$summary->getAutoSummaryArgs()
+		);
 	}
 
 }
