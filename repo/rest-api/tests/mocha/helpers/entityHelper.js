@@ -32,11 +32,23 @@ async function createItemWithStatements( statements ) {
 
 async function createSingleItem() {
 	const stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
+	const siteId = ( await action.getAnon().meta(
+		'wikibase',
+		{ wbprop: 'siteid' }
+	) ).siteid;
+	const pageWithSiteLink = utils.title( 'SiteLink Test' );
+	await action.getAnon().edit( pageWithSiteLink, { text: 'sitelink test' } );
 
 	const item = {
 		labels: { en: { language: 'en', value: `non-empty-item-${utils.uniq()}` } },
 		descriptions: { en: { language: 'en', value: 'non-empty-item-description' } },
 		aliases: { en: [ { language: 'en', value: 'non-empty-item-alias' } ] },
+		sitelinks: {
+			[ siteId ]: {
+				site: siteId,
+				title: pageWithSiteLink
+			}
+		},
 		claims: [
 			{ // with value, without qualifiers or references
 				mainsnak: {
