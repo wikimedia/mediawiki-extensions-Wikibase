@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use HashSiteStore;
 use PHPUnit\Framework\MockObject\MockObject;
-use Prophecy\Argument;
 use Psr\Log\NullLogger;
 use Site;
 use SiteLookup;
@@ -71,14 +70,18 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	 * @return SiteLinkLookup
 	 */
 	private function getMockSiteLinkLookup() {
-		$siteLinkLookup = $this->prophesize( SiteLinkLookup::class );
+		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 
-		$siteLinkLookup->getItemIdForLink( self::EXISTING_WIKI, self::EXISTING_PAGE )
-			->willReturn( new ItemId( self::EXISTING_ITEM_ID ) );
+		$siteLinkLookup->method( 'getItemIdForLink' )
+			->willReturnCallback( function ( $wiki, $page ) {
+				if ( $wiki === self::EXISTING_WIKI && $page === self::EXISTING_PAGE ) {
+					return new ItemId( self::EXISTING_ITEM_ID );
+				} else {
+					return null;
+				}
+			} );
 
-		$siteLinkLookup->getItemIdForLink( Argument::any(), Argument::any() )->willReturn( null );
-
-		return $siteLinkLookup->reveal();
+		return $siteLinkLookup;
 	}
 
 	/**

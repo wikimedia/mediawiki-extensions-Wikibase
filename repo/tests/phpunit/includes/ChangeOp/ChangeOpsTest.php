@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Prophecy\Argument;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -224,57 +223,60 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testApply_HasTwoChangeOps_DoesNotPassSummaryObject() {
-		$changeOp1 = $this->prophesize( ChangeOp::class );
-		$changeOp2 = $this->prophesize( ChangeOp::class );
+		$changeOp1 = $this->createMock( ChangeOp::class );
+		$changeOp2 = $this->createMock( ChangeOp::class );
 
-		$changeOps = new ChangeOps( [ $changeOp1->reveal(), $changeOp2->reveal() ] );
+		$changeOps = new ChangeOps( [ $changeOp1, $changeOp2 ] );
+
+		$changeOp1->expects( $this->once() )->method( 'apply' )->with( $this->anything(), null );
+		$changeOp2->expects( $this->once() )->method( 'apply' )->with( $this->anything(), null );
+
 		$changeOps->apply(
-			$this->prophesize( EntityDocument::class )->reveal(),
-			$this->prophesize( Summary::class )->reveal()
+			$this->createMock( EntityDocument::class ),
+			$this->createMock( Summary::class )
 		);
-
-		$changeOp1->apply( Argument::any(), null )->shouldHaveBeenCalled();
-		$changeOp2->apply( Argument::any(), null )->shouldHaveBeenCalled();
 	}
 
 	public function testApply_HasOneChangeOp_PassesSummaryObject() {
-		$changeOp = $this->prophesize( ChangeOp::class );
+		$changeOp = $this->createMock( ChangeOp::class );
 
-		$changeOps = new ChangeOps( [ $changeOp->reveal() ] );
+		$changeOps = new ChangeOps( [ $changeOp ] );
+
+		$changeOp->expects( $this->once() )
+			->method( 'apply' )
+			->with( $this->anything(), $this->isInstanceOf( Summary::class ) );
+
 		$changeOps->apply(
-			$this->prophesize( EntityDocument::class )->reveal(),
-			$this->prophesize( Summary::class )->reveal()
+			$this->createMock( EntityDocument::class ),
+			$this->createMock( Summary::class )
 		);
-
-		$changeOp->apply( Argument::any(), Argument::type( Summary::class ) )
-			->shouldHaveBeenCalled();
 	}
 
 	public function testApply_HasTwoChangeOps_SetsGenericSummaryMessage() {
 		$changeOps = new ChangeOps( [
-			$this->prophesize( ChangeOp::class )->reveal(),
-			$this->prophesize( ChangeOp::class )->reveal()
+			$this->createMock( ChangeOp::class ),
+			$this->createMock( ChangeOp::class )
 		] );
 
-		$summary = $this->prophesize( Summary::class );
-		$changeOps->apply(
-			$this->prophesize( EntityDocument::class )->reveal(),
-			$summary->reveal()
-		);
+		$summary = $this->createMock( Summary::class );
 
-		$summary->setAction( 'update' )->shouldHaveBeenCalled();
+		$summary->expects( $this->once() )->method( 'setAction' )->with( 'update' );
+		$changeOps->apply(
+			$this->createMock( EntityDocument::class ),
+			$summary
+		);
 	}
 
 	public function testApply_HasZeroChangeOps_DoesNotUpdateSummaryAction() {
 		$changeOps = new ChangeOps( [] );
 
-		$summary = $this->prophesize( Summary::class );
+		$summary = $this->createMock( Summary::class );
 		$changeOps->apply(
-			$this->prophesize( EntityDocument::class )->reveal(),
-			$summary->reveal()
+			$this->createMock( EntityDocument::class ),
+			$summary
 		);
 
-		$summary->setAction( Argument::any() )->shouldNotHaveBeenCalled();
+		$summary->expects( $this->never() )->method( 'setAction' );
 	}
 
 }
