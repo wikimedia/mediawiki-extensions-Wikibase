@@ -58,7 +58,7 @@ class UserPreferredContentLanguagesLookupTest extends TestCase {
 
 		$lookup = $this->newUserPreferredTermsLanguagesLookup();
 
-		$this->assertEquals( [ 'en', 'fr' ], array_values( $lookup->getLanguages( 'en', $user ) ) );
+		$this->assertEquals( [ 'en', 'fr' ], $lookup->getLanguages( 'en', $user ) );
 	}
 
 	public function testGivenNoValidUserLanguages_returnsWikiDefaultContentLanguage() {
