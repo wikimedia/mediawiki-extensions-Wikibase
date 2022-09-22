@@ -1,7 +1,7 @@
 'use strict';
 
 const chai = require( 'chai' );
-const { createSingleItem } = require( '../helpers/entityHelper' );
+const entityHelper = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const expect = chai.expect;
 
@@ -25,10 +25,13 @@ describe( 'validate GET statement responses', () => {
 	let lastRevId;
 
 	before( async () => {
-		const createSingleItemResponse = await createSingleItem();
-		testItemId = createSingleItemResponse.entity.id;
-		testStatementId = Object.values( createSingleItemResponse.entity.claims )[ 0 ][ 0 ].id;
-		lastRevId = createSingleItemResponse.entity.lastrevid;
+		const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const createItemResponse = await entityHelper.createItemWithStatements( [
+			entityHelper.newStatementWithRandomStringValue( statementPropertyId )
+		] );
+		testItemId = createItemResponse.entity.id;
+		testStatementId = Object.values( createItemResponse.entity.claims )[ 0 ][ 0 ].id;
+		lastRevId = createItemResponse.entity.lastrevid;
 	} );
 
 	[

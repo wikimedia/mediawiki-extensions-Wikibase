@@ -3,9 +3,10 @@
 const { assert } = require( 'api-testing' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const {
-	createSingleItem,
 	getLatestEditMetadata,
-	newStatementWithRandomStringValue
+	newStatementWithRandomStringValue,
+	createUniqueStringProperty,
+	createItemWithStatements
 } = require( '../helpers/entityHelper' );
 const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 
@@ -34,12 +35,12 @@ describe( 'Conditional requests', () => {
 	let lastModifiedDate;
 
 	before( async () => {
-		const createSingleItemResponse = await createSingleItem();
-		itemId = createSingleItemResponse.entity.id;
-		const statements = createSingleItemResponse.entity.claims;
-		const firstStatement = Object.values( statements )[ 0 ][ 0 ];
-		statementId = firstStatement.id;
-		statementPropertyId = firstStatement.mainsnak.property;
+		statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		const createItemResponse = await createItemWithStatements( [
+			newStatementWithRandomStringValue( statementPropertyId )
+		] );
+		itemId = createItemResponse.entity.id;
+		statementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
 
 		const testItemCreationMetadata = await getLatestEditMetadata( itemId );
 		lastModifiedDate = testItemCreationMetadata.timestamp;
