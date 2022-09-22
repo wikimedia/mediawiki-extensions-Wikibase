@@ -2,20 +2,22 @@
 	"@metadata": {
 		"authors": [
 			"Abbas dhothar",
-			"Khalid Mahmood"
+			"Khalid Mahmood",
+			"Bgo eiu"
 		]
 	},
 	"tooltip-t-wikibase": "ریپوزیٹری آئیٹم نال جوڑ",
 	"wikibase-comment-update": "{{WBREPONAME}} آئیٹم بدل دتی",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|تبدیلی|تبدیلیاں}}",
 	"wikibase-dataitem": "{{WBREPONAME}} آئیٹم",
-	"wikibase-editlinks": "جوڑ لکھو",
+	"wikibase-editlinks": "لنک لکھو",
 	"wikibase-editlinkstitle": "بولیاں دے آپسی جوڑ لکھو",
-	"wikibase-linkitem-addlinks": "جوڑ رلاؤ",
+	"wikibase-linkitem-addlinks": "لنک پاؤ",
 	"wikibase-linkitem-close": "بند کر کے صفحہ سجرا کرو",
 	"wikibase-linkitem-title": "صفحے نال جوڑو",
 	"wikibase-linkitem-linkpage": "صفحے نال جوڑو",
-	"wikibase-linkitem-selectlink": "ایس صفحے نوں تسیں جس سائٹ تے صفحے نال جوڑنا چاہندے او ، براہ مہربانی ایہنوں  درج کرو۔",
-	"wikibase-linkitem-input-site": "بولی:",
+	"wikibase-linkitem-selectlink": "ایس صفحے نوں تسیں جس سائٹ تے صفحے نال جوڑنا چاہندے او، براہ مہربانی ایہنوں  درج کرو۔",
+	"wikibase-linkitem-input-site": "بھاشا:",
 	"wikibase-linkitem-input-page": "صفحہ:",
 	"wikibase-linkitem-confirmitem-text": "جس صفحہ نو‏‏ں تسیں اس صفحہ دے نال جوڑ بنانے دے لئی منتخب کيتا اے اوہ پہلے ہی تو‏ں [$1 ساڈے مرکزی ڈیٹا مخزن دے آئٹم] نال جڑیا ا‏‏ے۔ براہ مہربانی تصدیق کر لو کہ جو {{PLURAL:$2|صفحہ تھلے دکھائی دے رہیا اے اوہ اوہی صفحہ اے |صفحے تھلے دکھائی دے رہے نيں انہاں وچو‏ں اوہ اوہی صفحہ اے}} جس دے نال تسیں جوڑ بنانا چاہندے او۔",
 	"wikibase-linkitem-confirmitem-button": "پکا کرو",
@@ -40,6 +42,7 @@
 	"wikibase-pageinfo-entity-usage": "ایس صفحے وچ ورتے{{WBREPONAME}} دے موجودات",
 	"wikibase-pageinfo-entity-usage-S": "سائٹ لنک",
 	"wikibase-pageinfo-entity-usage-T": "سرخی",
+	"wikibase-pageinfo-entity-usage-C-with-modifier": "بیان:&#x061C; $1",
 	"wikibase-otherprojects": "ہور منصوبےآں وچ",
 	"wikibase-sitelinks-sitename-columnheading": "بولی",
 	"wikibase-sitelinks-link-columnheading": "جڑے صفحے",

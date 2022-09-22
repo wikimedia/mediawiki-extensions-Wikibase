@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ahmedadeljaff"
+		]
+	},
+	"wikibase-dataitem": "عنـصر {{WBREPONAME}}",
+	"wikibase-editlinks": "عدل الوصلات",
+	"wikibase-linkitem-addlinks": "ضيف وصلات",
+	"wikibase-linkitem-title": "اربط مع الصفحه",
+	"wikibase-linkitem-linkpage": "اربط مع الصفحه",
+	"wikibase-linkitem-selectlink": " اختار موقع وصفحة للربط مع هاي الصفحة.",
+	"wikibase-linkitem-input-site": "لغة:",
+	"wikibase-linkitem-input-page": "صفحه:",
+	"wikibase-rc-hide-wikidata-hide": "ضم",
+	"wikibase-rc-hide-wikidata-show": "طلعها"
+}
