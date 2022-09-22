@@ -20,7 +20,6 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
@@ -61,16 +60,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	 * @var TemplateFactory
 	 */
 	private $templateFactory;
-
-	/**
-	 * @var UserLanguageLookup
-	 */
-	private $userLanguageLookup;
-
-	/**
-	 * @var ContentLanguages
-	 */
-	private $termsLanguages;
 
 	/**
 	 * @var EntityRevisionLookup
@@ -131,8 +120,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		IBufferingStatsdDataFactory $statsdDataFactory,
 		SettingsArray $repoSettings,
 		TemplateFactory $templateFactory,
-		UserLanguageLookup $userLanguageLookup,
-		ContentLanguages $termsLanguages,
 		EntityRevisionLookup $entityRevisionLookup,
 		LanguageNameLookup $languageNameLookup,
 		OutputPageEntityIdReader $outputPageEntityIdReader,
@@ -150,8 +137,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$this->statsDataFactory = $statsdDataFactory;
 		$this->repoSettings = $repoSettings;
 		$this->templateFactory = $templateFactory;
-		$this->userLanguageLookup = $userLanguageLookup;
-		$this->termsLanguages = $termsLanguages;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->outputPageEntityIdReader = $outputPageEntityIdReader;
@@ -185,7 +170,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	): self {
 		global $wgLang, $wgCookiePrefix;
 
-		$babelUserLanguageLookup = new BabelUserLanguageLookup();
 		$entityViewChecker = new OutputPageEntityViewChecker( $entityContentFactory );
 
 		return new self(
@@ -193,8 +177,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			$statsdDataFactory,
 			$settings,
 			TemplateFactory::getDefaultInstance(),
-			$babelUserLanguageLookup,
-			$termsLanguages,
 			$entityRevisionLookup,
 			new LanguageNameLookup( $wgLang->getCode() ),
 			new OutputPageEntityIdReader(
@@ -208,7 +190,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			TermboxFlag::getInstance()->shouldRenderTermbox(),
 			new UserPreferredContentLanguagesLookup(
 				$termsLanguages,
-				$babelUserLanguageLookup,
+				new BabelUserLanguageLookup(),
 				$contentLanguage->getCode()
 			),
 			$entityViewChecker,
@@ -232,7 +214,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		}
 
 		$html = $this->replacePlaceholders( $out, $html );
-		$this->addJsUserLanguages( $out );
 		$html = $this->showOrHideEditLinks( $out, $html );
 	}
 
@@ -259,19 +240,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		}
 
 		return $injector->inject( $html, $getHtmlCallback );
-	}
-
-	private function addJsUserLanguages( OutputPage $out ) {
-		$out->addJsConfigVars(
-			'wbUserSpecifiedLanguages',
-			// All user-specified languages, that are valid term languages
-			// Reindex the keys so that JavaScript still works if an unknown
-			// language code in the babel box causes an index to miss
-			array_values( array_intersect(
-				$this->userLanguageLookup->getUserSpecifiedLanguages( $out->getUser() ),
-				$this->termsLanguages->getLanguages()
-			) )
-		);
 	}
 
 	/**

@@ -16,10 +16,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;
@@ -41,7 +39,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	private $editability;
 	private $uiLanguageCode;
-	private $userLanguageLookup;
 	private $entityRevisionLookup;
 	private $outputPageEntityIdReader;
 	private $entityFactory;
@@ -52,11 +49,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	private $itemId;
 	private $languageNameLookup;
 	private $preferredLanguageLookup;
-
-	/**
-	 * @var StaticContentLanguages
-	 */
-	private $contentLanguages;
 
 	/**
 	 * @var bool
@@ -73,8 +65,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->itemId = new ItemId( 'Q1' );
 		$this->uiLanguageCode = 'en';
 
-		$this->userLanguageLookup = $this->createMock( UserLanguageLookup::class );
-		$this->contentLanguages = new StaticContentLanguages( [ 'en', 'es', 'ru' ] );
 		$this->entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$this->languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$this->outputPageEntityIdReader = $this->createMock( OutputPageEntityIdReader::class );
@@ -84,7 +74,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$this->preferredLanguageLookup = $this->createMock( UserPreferredContentLanguagesLookup::class );
 		$this->preferredLanguageLookup->method( 'getLanguages' )
-			->willReturn( [ [ $this->uiLanguageCode, 'de', 'es', 'ru' ] ] );
+			->willReturn( [ $this->uiLanguageCode, 'de', 'es', 'ru' ] );
 
 		$this->entityViewChecker = $this->createMock( OutputPageEntityViewChecker::class );
 		$this->entityViewChecker->method( 'hasEntityView' )
@@ -114,8 +104,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 			new NullStatsdDataFactory(),
 			WikibaseRepo::getSettings(),
 			TemplateFactory::getDefaultInstance(),
-			$this->userLanguageLookup,
-			$this->contentLanguages,
 			$this->entityRevisionLookup,
 			$this->languageNameLookup,
 			$this->outputPageEntityIdReader,
@@ -136,17 +124,14 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testOutputPageBeforeHTMLHookHandler() {
 		$out = $this->newOutputPage();
 
-		$this->userLanguageLookup = $this->getUserLanguageLookupReturnsSpecifiedLangs();
 		$this->languageNameLookup->expects( $this->never() )
 			->method( 'getName' );
 
 		$this->outputPageEntityIdReader = $this->getOutputPageEntityIdReaderReturningEntity( $this->itemId );
 		$this->entityRevisionLookup = $this->getEntityRevisionLookupReturningEntity( $this->itemId );
 
-		$this->preferredLanguageLookup->expects( $this->once() )
-			->method( 'getLanguages' )
-			->with( $this->uiLanguageCode, $out->getUser() )
-			->willReturn( [ [ $this->uiLanguageCode, 'de', 'es', 'ru' ] ] );
+		$this->preferredLanguageLookup->method( 'getLanguages' )
+			->with( $this->uiLanguageCode, $out->getUser() ); // return value already mocked in setUp
 
 		$outputPageBeforeHTMLHookHandler = $this->getHookHandler();
 
@@ -159,20 +144,11 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$out->setArticleFlag( true );
 
 		$outputPageBeforeHTMLHookHandler->onOutputPageBeforeHTML( $out, $html );
-
-		// Verify the wbUserSpecifiedLanguages JS variable
-		$jsConfigVars = $out->getJsConfigVars();
-		$wbUserSpecifiedLanguages = $jsConfigVars['wbUserSpecifiedLanguages'];
-
-		$this->assertSame( [ 'es', 'ru' ], $wbUserSpecifiedLanguages );
 	}
 
 	public function testOutputPageBeforeHTMLHookHandlerShouldNotWorkOnNonEntityViewPages() {
 		$out = $this->newOutputPage();
-		$this->userLanguageLookup->expects( $this->never() )
-			->method( 'getUserSpecifiedLanguages' );
-		$this->userLanguageLookup->expects( $this->never() )
-			->method( 'getAllUserLanguages' );
+		$this->editability->expects( $this->never() )->method( 'validate' );
 
 		$html = '';
 		$this->entityViewChecker = $this->createMock( OutputPageEntityViewChecker::class );
@@ -182,17 +158,13 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$this->getHookHandler()->onOutputPageBeforeHTML( $out, $html );
 
-		// Verify the wbUserSpecifiedLanguages JS variable
-		$jsConfigVars = $out->getJsConfigVars();
-		$this->assertFalse( isset( $jsConfigVars['wbUserSpecifiedLanguages'] ) );
+		$this->assertSame( '', $html );
 	}
 
 	public function testGivenDeletedRevision_hookHandlerDoesNotFail() {
 		$this->outputPageEntityIdReader->expects( $this->once() )
 			->method( 'getEntityIdFromOutputPage' )
 			->willReturn( null );
-
-		$this->userLanguageLookup = $this->getUserLanguageLookupReturnsSpecifiedLangs();
 
 		$out = $this->newOutputPage();
 		$out->setProperty( 'wikibase-view-chunks', [ '$1' => [ 'termbox' ] ] );
@@ -207,9 +179,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->entityFactory->expects( $this->once() )
 			->method( 'newEmpty' )
 			->willReturn( new Item( $this->itemId ) );
-		$this->userLanguageLookup->expects( $this->once() )
-			->method( 'getUserSpecifiedLanguages' )
-			->willReturn( [] );
 		$this->isExternallyRendered = true;
 
 		$this->outputPageEntityIdReader = $this->getOutputPageEntityIdReaderReturningEntity( $this->itemId );
@@ -226,15 +195,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->getHookHandler()->onOutputPageBeforeHTML( $out, $html );
 
 		$this->assertSame( $expectedHtml, $html );
-	}
-
-	private function newUserLanguageLookup() {
-		$userLanguageLookup = $this->createMock( UserLanguageLookup::class );
-		$userLanguageLookup->method( 'getUserSpecifiedLanguages' )
-			->willReturn( [] );
-		$userLanguageLookup->method( 'getAllUserLanguages' )
-			->willReturn( [] );
-		return $userLanguageLookup;
 	}
 
 	/**
@@ -268,7 +228,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$editLink2 = 'edit link 2';
 		$html = "<wb:sectionedit>$editLink1</wb:sectionedit> $contentBetweenEditLinks <wb:sectionedit>$editLink2</wb:sectionedit>";
 		$out = $this->newOutputPage();
-		$this->userLanguageLookup = $this->newUserLanguageLookup();
 
 		$this->getHookHandler()->onOutputPageBeforeHTML( $out, $html );
 
@@ -279,7 +238,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$contentBetweenEditLinks = 'hello';
 		$html = "<wb:sectionedit>edit link 1</wb:sectionedit>$contentBetweenEditLinks<wb:sectionedit>edit link 2</wb:sectionedit>";
 		$out = $this->newOutputPage();
-		$this->userLanguageLookup = $this->newUserLanguageLookup();
 		$this->editability = $this->mockEditabilityDismissive();
 
 		$this->getHookHandler()->onOutputPageBeforeHTML( $out, $html );
@@ -295,14 +253,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	private function mockEditabilityDismissive() {
 		return $this->mockEditability( false );
-	}
-
-	private function getUserLanguageLookupReturnsSpecifiedLangs(): UserLanguageLookup {
-		$userLanguageLookup = $this->createMock( UserLanguageLookup::class );
-		$userLanguageLookup->expects( $this->once() )
-			->method( 'getUserSpecifiedLanguages' )
-			->willReturn( [ 'de', 'es', 'ru' ] );
-		return $userLanguageLookup;
 	}
 
 }

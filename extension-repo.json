@@ -838,6 +838,15 @@
 		"LibHooks": {
 			"class": "\\Wikibase\\Lib\\LibHooks"
 		},
+		"MakeGlobalVariablesScript": {
+			"class": "\\Wikibase\\Repo\\Hooks\\MakeGlobalVariablesScriptHookHandler",
+			"factory": "\\Wikibase\\Repo\\Hooks\\MakeGlobalVariablesScriptHookHandler::factory",
+			"services": [
+				"WikibaseRepo.EntityContentFactory",
+				"WikibaseRepo.Settings",
+				"WikibaseRepo.TermsLanguages"
+			]
+		},
 		"OutputPageBeforeHTML": {
 			"class": "Wikibase\\Repo\\Hooks\\OutputPageBeforeHTMLHookHandler",
 			"factory": "Wikibase\\Repo\\Hooks\\OutputPageBeforeHTMLHookHandler::factory",
@@ -854,14 +863,6 @@
 				"WikibaseRepo.Logger",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermsLanguages"
-			]
-		},
-		"OutputPageJsConfig": {
-			"class": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler",
-			"factory": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler::factory",
-			"services": [
-				"WikibaseRepo.EntityNamespaceLookup",
-				"WikibaseRepo.Settings"
 			]
 		},
 		"PageHistoryPagerHookHandler": {
@@ -927,11 +928,9 @@
 		"InfoAction": "\\Wikibase\\Repo\\RepoHooks::onInfoAction",
 		"LoadExtensionSchemaUpdates": "DatabaseSchemaUpdater",
 		"MaintenanceShellStart": "\\Wikibase\\Repo\\RepoHooks::onMaintenanceShellStart",
+		"MakeGlobalVariablesScript": "MakeGlobalVariablesScript",
 		"NamespaceIsMovable": "\\Wikibase\\Repo\\RepoHooks::onNamespaceIsMovable",
-		"OutputPageBeforeHTML": [
-			"OutputPageBeforeHTML",
-			"OutputPageJsConfig"
-		],
+		"OutputPageBeforeHTML": "OutputPageBeforeHTML",
 		"OutputPageBodyAttributes": "\\Wikibase\\Repo\\RepoHooks::onOutputPageBodyAttributes",
 		"OutputPageParserOutput": "\\Wikibase\\Repo\\RepoHooks::onOutputPageParserOutput",
 		"PageHistoryLineEnding": "\\Wikibase\\Repo\\RepoHooks::onPageHistoryLineEnding",
