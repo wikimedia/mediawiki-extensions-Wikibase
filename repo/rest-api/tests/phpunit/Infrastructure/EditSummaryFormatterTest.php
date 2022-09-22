@@ -39,7 +39,7 @@ class EditSummaryFormatterTest extends \MediaWikiLangTestCase {
 				'user comment',
 				NewStatement::noValueFor( 'P123' )->build()
 			),
-			'/* wbsetclaim-create:1| */ [[Property:P123]]: no value, user comment',
+			'/* wbsetclaim-create:1||1 */ [[Property:P123]]: no value, user comment',
 		];
 
 		yield 'remove' => [
@@ -55,7 +55,7 @@ class EditSummaryFormatterTest extends \MediaWikiLangTestCase {
 				'user comment 3',
 				NewStatement::noValueFor( 'P123' )->build()
 			),
-			'/* wbsetclaim-update:1| */ [[Property:P123]]: no value, user comment 3',
+			'/* wbsetclaim-update:1||1 */ [[Property:P123]]: no value, user comment 3',
 		];
 
 		yield 'patch' => [
@@ -63,7 +63,7 @@ class EditSummaryFormatterTest extends \MediaWikiLangTestCase {
 				'user comment 4',
 				NewStatement::noValueFor( 'P123' )->build()
 			),
-			'/* wbsetclaim-update:1| */ [[Property:P123]]: no value, user comment 4',
+			'/* wbsetclaim-update:1||1 */ [[Property:P123]]: no value, user comment 4',
 		];
 
 		yield 'no user comment' => [
@@ -71,7 +71,7 @@ class EditSummaryFormatterTest extends \MediaWikiLangTestCase {
 				null,
 				NewStatement::noValueFor( 'P123' )->build()
 			),
-			'/* wbsetclaim-create:1| */ [[Property:P123]]: no value',
+			'/* wbsetclaim-create:1||1 */ [[Property:P123]]: no value',
 		];
 	}
 
