@@ -3,9 +3,11 @@
 const { assert } = require( 'api-testing' );
 const {
 	createEntity,
-	createSingleItem,
 	createRedirectForItem,
-	getLatestEditMetadata
+	createUniqueStringProperty,
+	getLatestEditMetadata,
+	newStatementWithRandomStringValue,
+	createItemWithStatements
 } = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 
@@ -25,12 +27,17 @@ describe( 'GET /entities/items/{id}/statements', () => {
 	let testPropertyId;
 	let testModified;
 	let testRevisionId;
+	let testStatements;
 
 	before( async () => {
-		const createSingleItemResponse = await createSingleItem();
+		testPropertyId = ( await createUniqueStringProperty() ).entity.id;
 
-		testItemId = createSingleItemResponse.entity.id;
-		testPropertyId = Object.keys( createSingleItemResponse.entity.claims )[ 0 ];
+		testStatements = [
+			newStatementWithRandomStringValue( testPropertyId ),
+			newStatementWithRandomStringValue( testPropertyId )
+		];
+		const createItemResponse = await createItemWithStatements( testStatements );
+		testItemId = createItemResponse.entity.id;
 
 		const testItemCreationMetadata = await getLatestEditMetadata( testItemId );
 		testModified = testItemCreationMetadata.timestamp;
@@ -44,8 +51,14 @@ describe( 'GET /entities/items/{id}/statements', () => {
 
 		assert.equal( response.status, 200 );
 		assert.exists( response.body[ testPropertyId ] );
-		assert.equal( response.body[ testPropertyId ][ 0 ].mainsnak.snaktype, 'value' );
-		assert.equal( response.body[ testPropertyId ][ 1 ].mainsnak.snaktype, 'novalue' );
+		assert.equal(
+			response.body[ testPropertyId ][ 0 ].mainsnak.datavalue.value,
+			testStatements[ 0 ].mainsnak.datavalue.value
+		);
+		assert.equal(
+			response.body[ testPropertyId ][ 1 ].mainsnak.datavalue.value,
+			testStatements[ 1 ].mainsnak.datavalue.value
+		);
 		assert.equal( response.header[ 'last-modified' ], testModified );
 		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
 	} );

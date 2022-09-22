@@ -1,8 +1,9 @@
 'use strict';
 
 const chai = require( 'chai' );
-const { createEntity, createSingleItem, createRedirectForItem } = require( '../helpers/entityHelper' );
+const entityHelper = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
+const { action, utils } = require( 'api-testing' );
 const expect = chai.expect;
 
 function newGetItemRequestBuilder( itemId ) {
@@ -11,13 +12,66 @@ function newGetItemRequestBuilder( itemId ) {
 		.withPathParam( 'item_id', itemId );
 }
 
+async function createItemWithAllFields() {
+	const stringPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+	const siteId = ( await action.getAnon().meta(
+		'wikibase',
+		{ wbprop: 'siteid' }
+	) ).siteid;
+	const pageWithSiteLink = utils.title( 'SiteLink Test' );
+	await action.getAnon().edit( pageWithSiteLink, { text: 'sitelink test' } );
+
+	return entityHelper.createEntity( 'item', {
+		labels: { en: { language: 'en', value: `non-empty-item-${utils.uniq()}` } },
+		descriptions: { en: { language: 'en', value: 'non-empty-item-description' } },
+		aliases: { en: [ { language: 'en', value: 'non-empty-item-alias' } ] },
+		sitelinks: {
+			[ siteId ]: {
+				site: siteId,
+				title: pageWithSiteLink
+			}
+		},
+		claims: [
+			{ // with value, without qualifiers or references
+				mainsnak: {
+					snaktype: 'value',
+					property: stringPropertyId,
+					datavalue: { value: 'im a statement value', type: 'string' }
+				}, type: 'statement', rank: 'normal'
+			},
+			{ // no value, with qualifier and reference
+				mainsnak: {
+					snaktype: 'novalue',
+					property: stringPropertyId
+				},
+				type: 'statement',
+				rank: 'normal',
+				qualifiers: [
+					{
+						snaktype: 'value',
+						property: stringPropertyId,
+						datavalue: { value: 'im a qualifier value', type: 'string' }
+					}
+				],
+				references: [ {
+					snaks: [ {
+						snaktype: 'value',
+						property: stringPropertyId,
+						datavalue: { value: 'im a reference value', type: 'string' }
+					} ]
+				} ]
+			}
+		]
+	} );
+}
+
 describe( 'validate GET /entities/items/{id} responses against OpenAPI document', () => {
 
 	let itemId;
 	let latestRevisionId;
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {} );
+		const createItemResponse = await entityHelper.createEntity( 'item', {} );
 		itemId = createItemResponse.entity.id;
 		latestRevisionId = createItemResponse.entity.lastrevid;
 	} );
@@ -30,7 +84,7 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 	} );
 
 	it( '200 OK response is valid for a non-empty item', async () => {
-		const { entity: { id } } = await createSingleItem();
+		const { entity: { id } } = await createItemWithAllFields();
 		const response = await newGetItemRequestBuilder( id ).makeRequest();
 
 		expect( response.status ).to.equal( 200 );
@@ -38,7 +92,7 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 	} );
 
 	it( '308 Permanent Redirect response is valid for a redirected item', async () => {
-		const redirectSourceId = await createRedirectForItem( itemId );
+		const redirectSourceId = await entityHelper.createRedirectForItem( itemId );
 
 		const response = await newGetItemRequestBuilder( redirectSourceId ).makeRequest();
 

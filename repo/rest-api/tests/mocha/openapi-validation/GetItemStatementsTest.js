@@ -1,7 +1,13 @@
 'use strict';
 
 const chai = require( 'chai' );
-const { createEntity, createSingleItem, createRedirectForItem } = require( '../helpers/entityHelper' );
+const {
+	createEntity,
+	createRedirectForItem,
+	createItemWithStatements,
+	createUniqueStringProperty,
+	newStatementWithRandomStringValue
+} = require( '../helpers/entityHelper' );
 const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const expect = chai.expect;
 
@@ -30,7 +36,11 @@ describe( 'validate GET /entities/items/{id}/statements responses against OpenAP
 	} );
 
 	it( '200 OK response is valid for an Item with statements', async () => {
-		const { entity: { id } } = await createSingleItem();
+		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		const { entity: { id } } = await createItemWithStatements( [
+			newStatementWithRandomStringValue( statementPropertyId ),
+			newStatementWithRandomStringValue( statementPropertyId )
+		] );
 		const response = await newGetItemStatementsRequestBuilder( id ).makeRequest();
 
 		expect( response.status ).to.equal( 200 );

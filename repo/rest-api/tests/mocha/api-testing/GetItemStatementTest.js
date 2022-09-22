@@ -35,10 +35,12 @@ describe( 'GET statement', () => {
 	}
 
 	before( async () => {
-		const createSingleItemResponse = await entityHelper.createSingleItem();
-		testItemId = createSingleItemResponse.entity.id;
-		const claims = createSingleItemResponse.entity.claims;
-		testStatement = Object.values( claims )[ 0 ][ 0 ];
+		const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const createItemResponse = await entityHelper.createItemWithStatements( [
+			entityHelper.newStatementWithRandomStringValue( statementPropertyId )
+		] );
+		testItemId = createItemResponse.entity.id;
+		testStatement = createItemResponse.entity.claims[ statementPropertyId ][ 0 ];
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		testLastModified = testItemCreationMetadata.timestamp;

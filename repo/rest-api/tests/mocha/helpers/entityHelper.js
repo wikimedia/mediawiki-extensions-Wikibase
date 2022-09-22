@@ -30,61 +30,6 @@ async function createItemWithStatements( statements ) {
 	return await createEntity( 'item', item );
 }
 
-async function createSingleItem() {
-	const stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
-	const siteId = ( await action.getAnon().meta(
-		'wikibase',
-		{ wbprop: 'siteid' }
-	) ).siteid;
-	const pageWithSiteLink = utils.title( 'SiteLink Test' );
-	await action.getAnon().edit( pageWithSiteLink, { text: 'sitelink test' } );
-
-	const item = {
-		labels: { en: { language: 'en', value: `non-empty-item-${utils.uniq()}` } },
-		descriptions: { en: { language: 'en', value: 'non-empty-item-description' } },
-		aliases: { en: [ { language: 'en', value: 'non-empty-item-alias' } ] },
-		sitelinks: {
-			[ siteId ]: {
-				site: siteId,
-				title: pageWithSiteLink
-			}
-		},
-		claims: [
-			{ // with value, without qualifiers or references
-				mainsnak: {
-					snaktype: 'value',
-					property: stringPropertyId,
-					datavalue: { value: 'im a statement value', type: 'string' }
-				}, type: 'statement', rank: 'normal'
-			},
-			{ // no value, with qualifier and reference
-				mainsnak: {
-					snaktype: 'novalue',
-					property: stringPropertyId
-				},
-				type: 'statement',
-				rank: 'normal',
-				qualifiers: [
-					{
-						snaktype: 'value',
-						property: stringPropertyId,
-						datavalue: { value: 'im a qualifier value', type: 'string' }
-					}
-				],
-				references: [ {
-					snaks: [ {
-						snaktype: 'value',
-						property: stringPropertyId,
-						datavalue: { value: 'im a reference value', type: 'string' }
-					} ]
-				} ]
-			}
-		]
-	};
-
-	return await createEntity( 'item', item );
-}
-
 /**
  * @param {string} redirectTarget - the id of the item to redirect to (target)
  * @return {Promise<string>} - the id of the item to redirect from (source)
@@ -139,7 +84,6 @@ function newStatementSerializationWithRandomStringValue( property ) {
 
 module.exports = {
 	createEntity,
-	createSingleItem,
 	createItemWithStatements,
 	createUniqueStringProperty,
 	createRedirectForItem,
