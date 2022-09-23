@@ -10,7 +10,7 @@
 	"wikibase-comment-update": "{{WBREPONAME}} آئیٹم بدل دتی",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|تبدیلی|تبدیلیاں}}",
 	"wikibase-dataitem": "{{WBREPONAME}} آئیٹم",
-	"wikibase-editlinks": "لنک لکھو",
+	"wikibase-editlinks": "لنک سودھو",
 	"wikibase-editlinkstitle": "بولیاں دے آپسی جوڑ لکھو",
 	"wikibase-linkitem-addlinks": "لنک پاؤ",
 	"wikibase-linkitem-close": "بند کر کے صفحہ سجرا کرو",
