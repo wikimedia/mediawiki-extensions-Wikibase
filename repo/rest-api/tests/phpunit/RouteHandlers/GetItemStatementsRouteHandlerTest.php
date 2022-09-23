@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
+use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
@@ -25,11 +26,7 @@ class GetItemStatementsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$useCase->method( 'execute' )->willThrowException( new \RuntimeException() );
 		$this->setService( 'WbRestApi.GetItemStatements', $useCase );
 
-		$routeHandler = GetItemStatementsRouteHandler::factory();
-		$this->initHandler( $routeHandler, new RequestData( [ 'pathParams' => [ 'item_id' => 'Q123' ] ] ) );
-		$this->validateHandler( $routeHandler );
-
-		$response = $routeHandler->execute();
+		$response = $this->newHandlerWithValidRequest()->execute();
 		$responseBody = json_decode( $response->getBody()->getContents() );
 		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
 		$this->assertSame(
@@ -39,13 +36,23 @@ class GetItemStatementsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testReadWriteAccess(): void {
-		$routeHandler = GetItemStatementsRouteHandler::factory();
-		$this->initHandler(
-			$routeHandler,
-			new RequestData( [ 'pathParams' => [ 'item_id' => 'Q123' ] ] )
-		);
+		$routeHandler = $this->newHandlerWithValidRequest();
 
 		$this->assertTrue( $routeHandler->needsReadAccess() );
 		$this->assertFalse( $routeHandler->needsWriteAccess() );
 	}
+
+	private function newHandlerWithValidRequest(): Handler {
+		$routeHandler = GetItemStatementsRouteHandler::factory();
+		$this->initHandler(
+			$routeHandler,
+			new RequestData( [
+				'headers' => [ 'User-Agent' => 'PHPUnit Test' ],
+				'pathParams' => [ 'item_id' => 'Q123' ]
+			] )
+		);
+		$this->validateHandler( $routeHandler );
+		return $routeHandler;
+	}
+
 }

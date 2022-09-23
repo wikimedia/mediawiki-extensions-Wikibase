@@ -48,7 +48,10 @@ class PatchStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 			$routeHandler,
 			new RequestData( [
 					'method' => 'PATCH',
-					'headers' => [ 'Content-Type' => 'application/json' ],
+					'headers' => [
+						'User-Agent' => 'PHPUnit Test',
+						'Content-Type' => 'application/json'
+					],
 					'pathParams' => [
 						PatchStatementRouteHandler::STATEMENT_ID_PATH_PARAM => 'Q123$some-guid'
 					],

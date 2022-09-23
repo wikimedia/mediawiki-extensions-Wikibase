@@ -48,7 +48,10 @@ class AddItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 			$routeHandler,
 			new RequestData( [
 					'method' => 'POST',
-					'headers' => [ 'Content-Type' => 'application/json' ],
+					'headers' => [
+						'User-Agent' => 'PHPUnit Test',
+						'Content-Type' => 'application/json'
+					],
 					'pathParams' => [
 						AddItemStatementRouteHandler::ITEM_ID_PATH_PARAM => 'Q123'
 					],
