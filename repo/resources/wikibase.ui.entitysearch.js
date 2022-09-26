@@ -4,7 +4,7 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function () {
+( function ( mw ) {
 	'use strict';
 	require( './jquery.wikibase/jquery.wikibase.entitysearch.js' );
 
@@ -78,6 +78,7 @@
 			);
 
 		var searchContaining = new $.ui.ooMenu.CustomItem( $searchContaining, null, function () {
+			mw.track( 'counter.MediaWiki.wikibase.repo.searchbox.footer.submit' );
 			$searchForm.trigger( 'submit' );
 		}, 'wb-entitysearch-suggestions' );
 
@@ -148,4 +149,4 @@
 
 	} );
 
-}() );
+}( mw ) );
