@@ -29,11 +29,15 @@ class EditSummaryFormatter {
 		if ( $summary instanceof StatementEditSummary ) {
 			switch ( $summary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
-					return $this->newFormatableSummaryForStatementEdit(
+					$formatableSummary = $this->newFormatableSummaryForStatementEdit(
 						$summary,
 						'wbsetclaim',
 						'create'
 					);
+					// the "1" signifies the number of edited statements in wbsetclaim-related messages
+					$formatableSummary->addAutoCommentArgs( 1 );
+
+					return $formatableSummary;
 				case EditSummary::REMOVE_ACTION:
 					return $this->newFormatableSummaryForStatementEdit(
 						$summary,
@@ -42,11 +46,15 @@ class EditSummaryFormatter {
 					);
 				case EditSummary::REPLACE_ACTION:
 				case EditSummary::PATCH_ACTION:
-					return $this->newFormatableSummaryForStatementEdit(
+					$formatableSummary = $this->newFormatableSummaryForStatementEdit(
 						$summary,
 						'wbsetclaim',
 						'update'
 					);
+					// the "1" signifies the number of edited statements in wbsetclaim-related messages
+					$formatableSummary->addAutoCommentArgs( 1 );
+
+					return $formatableSummary;
 			}
 		}
 
