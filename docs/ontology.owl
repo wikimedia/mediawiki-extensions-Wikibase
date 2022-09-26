@@ -217,6 +217,12 @@
       <rdf:type rdf:resource="&wikibase;PropertyType"/>
   </owl:NamedIndividual>
 
+  <owl:NamedIndividual rdf:about="&wikibase;MusicalNotation">
+      <rdfs:label>MusicalNotation</rdfs:label>
+      <rdfs:comment>Type for storing musical scores written in LilyPond notation as supported by the Score extension.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
   <!--
   ///////////////////////////////////////////////////////////////////////////////////////
   //
