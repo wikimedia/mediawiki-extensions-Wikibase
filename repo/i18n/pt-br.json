@@ -383,7 +383,7 @@
 	"wikibase-api-illegal-entity-remove": "As entidades não podem ser excluídas fornecendo uma chave <var>remove</var> de nível superior.",
 	"wikibase-api-illegal-id-or-site-page-selector": "Você precisa fornecer uma entidade <var>id</var>, ou uma combinação <var>site</var> e <var>page</var>, mas não ambas.",
 	"wikibase-api-illegal-ids-or-sites-titles-selector": "Forneça os \"ids\" do objeto, ou pares com \"sites\" e \"titles\" para a página correspondente",
-	"wikibase-api-no-data": "Não há quaisquer dados para operar.",
+	"wikibase-api-no-data": "Não há dados para tratar.",
 	"wikibase-api-no-external-page": "O site do cliente externo \"$1\" não forneceu informações da página \"$2\".",
 	"wikibase-api-no-such-entity": "Não foi possível encontrar uma entidade com o identificador \"$1\".",
 	"wikibase-api-no-such-sitelink": "Não foi possível encontrar um sitelink para \"$1\" ao tentar editar emblemas.",

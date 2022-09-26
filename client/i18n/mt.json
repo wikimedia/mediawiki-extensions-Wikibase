@@ -13,6 +13,11 @@
 	"wikibase-editlinks": "Immodifika l-ħoloq",
 	"wikibase-editlinkstitle": "Immodifika l-ħoloq interlingwi",
 	"wikibase-linkitem-addlinks": "Żid ħoloq",
+	"wikibase-linkitem-title": "Orbot ma' paġna oħra",
+	"wikibase-linkitem-linkpage": "Orbot ma' paġna",
+	"wikibase-linkitem-selectlink": "Għażel sit u paġna li tixtieq li torbot ma' din il-paġna.",
+	"wikibase-linkitem-input-site": "Lingwa:",
+	"wikibase-linkitem-input-page": "Paġna:",
 	"wikibase-linkitem-not-loggedin-title": "Trid tkun dħalt fil-kont tiegħek",
 	"wikibase-linkitem-not-loggedin": "Sabiex tuża' din il-funzjoni trid tkun dħalt fil-kont tiegħek u fir-[$1 repożitorju tad-data ċentralizzata].",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
@@ -21,5 +26,5 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Modifika ta' {{WBREPONAME}}",
 	"unconnectedpages": "Paġni mhux imwaħħda ma' elementi",
-	"wikibase-otherprojects": "F'proġetti oħra"
+	"wikibase-otherprojects": "Fi proġetti oħra"
 }

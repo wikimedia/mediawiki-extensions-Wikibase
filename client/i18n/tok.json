@@ -5,6 +5,11 @@
 			"LesVisages"
 		]
 	},
+	"wikibase-editlinks": "o ante e linja",
+	"wikibase-linkitem-addlinks": "o pana e linja",
+	"wikibase-linkitem-title": "o linja e lipu ante",
+	"wikibase-linkitem-linkpage": "o linja e lipu ante",
+	"wikibase-linkitem-selectlink": "sina wile linja e lipu ante tawa lipu ni la o luka e lipu ante.",
 	"wikibase-linkitem-input-site": "toki:",
 	"wikibase-linkitem-input-page": "lipu:",
 	"wikibase-sitelinks-sitename-columnheading": "toki"

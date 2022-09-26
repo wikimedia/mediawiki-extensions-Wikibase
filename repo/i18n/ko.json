@@ -364,6 +364,7 @@
 	"wikibase-api-not-recognized-array": "배열을 예상했지만 찾을 수 없습니다.",
 	"wikibase-api-not-recognized-language": "지정한 언어 식별자는 인식하지 않았습니다.",
 	"wikibase-api-not-recognized-string": "문자열을 예상했지만 찾을 수 없습니다.",
+	"wikibase-api-permissiondenied": "이 작업의 수행에 필요한 권한이 없습니다.",
 	"wikibase-api-wrong-class": "찾은 페이지의 내용은 올바른 형식이 아닙니다.",
 	"wikibase-api-tags-invalid": "태그 변수가 유효하지 않습니다.",
 	"wikibase-api-target-is-redirect": "넘겨주기의 대상 또한 넘겨주기가 될 수 없습니다.",
