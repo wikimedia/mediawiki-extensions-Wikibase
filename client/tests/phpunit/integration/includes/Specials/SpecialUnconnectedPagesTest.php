@@ -110,7 +110,8 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage(
 		NamespaceChecker $namespaceChecker = null,
-		int $migrationStage = MIGRATION_WRITE_BOTH
+		int $migrationStage = MIGRATION_WRITE_BOTH,
+		bool $migrationLegacyFormat = false
 	): SpecialUnconnectedPages {
 		$services = $this->getServiceContainer();
 		return new SpecialUnconnectedPages(
@@ -118,7 +119,10 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 			$services->getTitleFactory(),
 			WikibaseClient::getClientDomainDbFactory( $services ),
 			$namespaceChecker ?: WikibaseClient::getNamespaceChecker( $services ),
-			new SettingsArray( [ 'tmpUnconnectedPagePagePropMigrationStage' => $migrationStage ] )
+			new SettingsArray( [
+				'tmpUnconnectedPagePagePropMigrationStage' => $migrationStage,
+				'tmpUnconnectedPagePagePropMigrationLegacyFormat' => $migrationLegacyFormat,
+			] )
 		);
 	}
 
@@ -132,9 +136,14 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 				'migrationStage' => MIGRATION_WRITE_BOTH,
 				'descending' => true,
 			],
-			'MIGRATION_NEW' => [
+			'MIGRATION_NEW (legacy format)' => [
 				'migrationStage' => MIGRATION_NEW,
 				'descending' => false,
+				'migrationLegacyFormat' => true,
+			],
+			'MIGRATION_NEW' => [
+				'migrationStage' => MIGRATION_NEW,
+				'descending' => true,
 			],
 		];
 	}
@@ -142,7 +151,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	/**
 	 * @dataProvider migrationStageProvider
 	 */
-	public function testReallyDoQuery( int $migrationStage, bool $descending ) {
+	public function testReallyDoQuery( int $migrationStage, bool $descending, bool $migrationLegacyFormat = false ) {
 		// Remove old stray page props
 		$this->db->delete( 'page_props', IDatabase::ALL_ROWS, __METHOD__ );
 
@@ -154,7 +163,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		}
 
 		$namespace = $this->getDefaultWikitextNS();
-		$specialPage = $this->newSpecialPage( null, $migrationStage );
+		$specialPage = $this->newSpecialPage( null, $migrationStage, $migrationLegacyFormat );
 
 		$expectedRows = [
 			[
@@ -217,14 +226,14 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		$this->insertUnexpectedUnconnectedPagePageProp();
 
 		$namespace = $this->getDefaultWikitextNS();
-		$specialPage = $this->newSpecialPage( null, MIGRATION_NEW );
+		$specialPage = $this->newSpecialPage( null, MIGRATION_NEW, false );
 		$specialPage->getRequest()->setVal( 'namespace', $namespace );
 		$res = $specialPage->reallyDoQuery( 1, 1 );
 		$this->assertSame( 1, $res->numRows() );
 		$this->assertSame( [
-				'value' => '400',
+				'value' => '200',
 				'namespace' => strval( $namespace ),
-				'title' => 'SpecialUnconnectedPagesTest-unconnected2'
+				'title' => 'SpecialUnconnectedPagesTest-unconnected'
 			],
 			(array)$res->fetchObject()
 		);
@@ -238,9 +247,14 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	/**
 	 * @dataProvider provideBuildNamespaceConditionals
 	 */
-	public function testBuildNamespaceConditionals( ?int $ns, array $expected, int $migrationStage ) {
+	public function testBuildNamespaceConditionals(
+		?int $ns,
+		array $expected,
+		int $migrationStage,
+		bool $migrationLegacyFormat = false
+	) {
 		$checker = new NamespaceChecker( [ 2 ], [ 0, 4 ] );
-		$page = $this->newSpecialPage( $checker, $migrationStage );
+		$page = $this->newSpecialPage( $checker, $migrationStage, $migrationLegacyFormat );
 		$page->getRequest()->setVal( 'namespace', $ns );
 		$this->assertSame( $expected, $page->buildNamespaceConditionals() );
 	}
@@ -261,19 +275,31 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 			[ 'page_namespace' => [ 0, 4 ] ],
 			MIGRATION_WRITE_NEW,
 		];
-		yield 'no namespace (MIGRATION_NEW)' => [
+		yield 'no namespace (MIGRATION_NEW), legacy format' => [
 			null,
 			[ 'pp_sortkey' => [ 0, 4 ] ],
 			MIGRATION_NEW,
+			true
+		];
+		yield 'no namespace (MIGRATION_NEW), new format' => [
+			null,
+			[ 'pp_sortkey' => [ 0, -4 ] ],
+			MIGRATION_NEW
 		];
 		yield 'included namespace (MIGRATION_NEW)' => [
 			0,
 			[ 'pp_sortkey' => 0 ],
 			MIGRATION_NEW,
 		];
-		yield 'excluded namespace (MIGRATION_NEW)' => [
+		yield 'excluded namespace (MIGRATION_NEW), legacy format' => [
 			2,
 			[ 'pp_sortkey' => [ 0, 4 ] ],
+			MIGRATION_NEW,
+			true
+		];
+		yield 'excluded namespace (MIGRATION_NEW), new format' => [
+			2,
+			[ 'pp_sortkey' => [ 0, -4 ] ],
 			MIGRATION_NEW,
 		];
 	}
@@ -335,7 +361,10 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 			$titleFactoryMock,
 			WikibaseClient::getClientDomainDbFactory( $services ),
 			$namespaceChecker ?: WikibaseClient::getNamespaceChecker( $services ),
-			new SettingsArray( [ 'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH ] )
+			new SettingsArray( [
+				'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH,
+				'tmpUnconnectedPagePagePropMigrationLegacyFormat' => false,
+			] )
 		);
 
 		$this->assertFalse( $specialPage->formatResult( $skin, $result ) );

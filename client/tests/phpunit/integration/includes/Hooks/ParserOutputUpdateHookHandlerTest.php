@@ -161,6 +161,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'namespaces' => [ NS_MAIN, NS_CATEGORY ],
 			'otherProjectsLinks' => [ 'commonswiki' ],
 			'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH,
+			'tmpUnconnectedPagePagePropMigrationLegacyFormat' => false,
 		];
 
 		return new SettingsArray( $defaults );
@@ -361,7 +362,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$handler->doContentAlterParserOutput( $content, $title, $parserOutput );
 
 		$this->assertNull( $parserOutput->getPageProperty( 'wikibase_item' ) );
-		$this->assertSame( NS_MAIN, $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
+		$this->assertSame( -NS_MAIN, $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
 
 		$this->assertSame( [], $parserOutput->getLanguageLinks() );
 		$this->assertSame( [], $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
@@ -476,7 +477,8 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$mockRepo,
 			$this->newUsageAccumulatorFactory(),
 			$settings->getSetting( 'siteGlobalID' ),
-			$settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' )
+			$settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' ),
+			$settings->getSetting( 'tmpUnconnectedPagePagePropMigrationLegacyFormat' )
 		);
 	}
 

@@ -17,7 +17,7 @@ $basePath = getenv( 'MW_INSTALL_PATH' ) !== false
 require_once $basePath . '/maintenance/Maintenance.php';
 
 /**
- * Maintenance script for populating the 'unexpectedUnconnectedPage' page property.
+ * Maintenance script for populating or updating the 'unexpectedUnconnectedPage' page property.
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch <mail@mariushoch.de>
@@ -50,6 +50,15 @@ class PopulateUnexpectedUnconnectedPagePageProp extends Maintenance {
 			$this->output( "You need to have WikibaseClient enabled in order to use this maintenance script!\n\n" );
 			exit;
 		}
+		$settings = WikibaseClient::getSettings();
+		if ( $settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' ) < MIGRATION_WRITE_BOTH
+			|| $settings->getSetting( 'tmpUnconnectedPagePagePropMigrationLegacyFormat' ) ) {
+			$this->fatalError(
+				'This script should only be used if the "unexpectedUnconnectedPage" page prop is being ' .
+				'written ("tmpUnconnectedPagePagePropMigrationStage" setting) and the new format ' .
+				'("tmpUnconnectedPagePagePropMigrationLegacyFormat" setting) is selected.'
+			);
+		}
 
 		$reporter = new CallbackMessageReporter( [ $this, 'report' ] );
 
@@ -70,7 +79,7 @@ class PopulateUnexpectedUnconnectedPagePageProp extends Maintenance {
 			$primer->setMaxPageId( intval( $lastPageId ) );
 		}
 
-		$primer->insertPageProp();
+		$primer->setPageProps();
 
 		return true;
 	}

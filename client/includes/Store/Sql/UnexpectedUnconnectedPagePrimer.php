@@ -10,10 +10,11 @@ use Onoi\MessageReporter\NullMessageReporter;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikimedia\Rdbms\ConnectionManager;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
- * Maintenance helper which adds the "unexpectedUnconnectedPage" page property
- * to all relevant pages.
+ * Maintenance helper which adds or updates the "unexpectedUnconnectedPage" page property
+ * for all relevant pages.
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch <mail@mariushoch.de>
@@ -119,7 +120,7 @@ class UnexpectedUnconnectedPagePrimer {
 	/**
 	 * Add the "unexpectedUnconnectedPage" page prop for all relevant pages.
 	 */
-	public function insertPageProp(): void {
+	public function setPageProps(): void {
 		$highestPageId = $this->getMaximumPageIdToCheck();
 		$maxPageId = min( $this->maxPageId ?: PHP_INT_MAX, $highestPageId );
 
@@ -128,7 +129,7 @@ class UnexpectedUnconnectedPagePrimer {
 
 			if ( $count > 0 ) {
 				$this->progressReporter->reportMessage(
-					'Added the "unexpectedUnconnectedPage" page property for ' . $count . ' pages, ' .
+					'Added or updated the "unexpectedUnconnectedPage" page property for ' . $count . ' pages, ' .
 					'up to page ID ' . $this->position . ' (inclusive).'
 				);
 				$this->clientDb->replication()->wait();
@@ -150,28 +151,26 @@ class UnexpectedUnconnectedPagePrimer {
 			return 0;
 		}
 
-		$count = $this->insertUnexpectedUnconnectedBatch( $pages );
+		$count = $this->persistUnexpectedUnconnectedBatch( $pages );
 		return $count;
 	}
 
 	/**
 	 * @param int[][] $pages Page id, page namespace pairs
 	 *
-	 * @return int The number of rows inserted.
+	 * @return int The number of rows affected.
 	 */
-	private function insertUnexpectedUnconnectedBatch( array $pages ): int {
+	private function persistUnexpectedUnconnectedBatch( array $pages ): int {
 		$rows = $this->makeUnexpectedUnconnectedRows( $pages );
 
 		$dbw = $this->localConnectionManager->getWriteConnectionRef();
 		$dbw->startAtomic( __METHOD__ );
 
-		$dbw->insert(
+		$dbw->replace(
 			'page_props',
+			[ [ 'pp_page', 'pp_propname' ] ],
 			$rows,
-			__METHOD__,
-			[
-				'IGNORE'
-			]
+			__METHOD__
 		);
 
 		$count = $dbw->affectedRows();
@@ -181,7 +180,7 @@ class UnexpectedUnconnectedPagePrimer {
 	}
 
 	/**
-	 * Returns a list of rows for insertion, using DatabaseBase's multi-row insert mechanism.
+	 * Returns a list of page_props rows for the given pages.
 	 *
 	 * @param int[][] $pages Page id, page namespace pairs
 	 *
@@ -194,8 +193,8 @@ class UnexpectedUnconnectedPagePrimer {
 			$rows[] = [
 				'pp_page' => $page[0],
 				'pp_propname' => 'unexpectedUnconnectedPage',
-				'pp_value' => $page[1],
-				'pp_sortkey' => $page[1],
+				'pp_value' => -$page[1],
+				'pp_sortkey' => -$page[1],
 			];
 		}
 
@@ -213,11 +212,22 @@ class UnexpectedUnconnectedPagePrimer {
 			[ 'page', 'page_props' ],
 			[ 'page_id', 'page_namespace' ],
 			[
-				'pp_propname' => null,
 				'page_namespace' => $this->namespaceChecker->getWikibaseNamespaces(),
 				'page_is_redirect' => 0,
 				'page_id > ' . $this->position,
 				'page_id <= ' . $lastPosition,
+				// Either the propname needs to be null (the page prop is not set yet), or the
+				// propname matches and the value is larger than 0 (which is the legacy format
+				// where we used positive sort keys).
+				$dbr->makeList( [
+						'pp_propname IS NULL',
+						$dbr->makeList( [
+							'pp_propname = ' . $dbr->addQuotes( 'unexpectedUnconnectedPage' ),
+							'pp_sortkey > 0'
+						], IDatabase::LIST_AND )
+					],
+					IDatabase::LIST_OR
+				)
 			],
 			__METHOD__,
 			[

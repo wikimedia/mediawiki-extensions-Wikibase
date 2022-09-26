@@ -298,7 +298,7 @@ return call_user_func( function() {
 	$defaults['addEntityUsagesBatchSize'] = 500;
 
 	/**
-	 * @note This config options is primarily added for the Wikimedia transition use-case and can be
+	 * @note This config option is primarily added for the Wikimedia transition use-case and can be
 	 * considered temporary. It could be removed in the future with no warning.
 	 *
 	 * (tmp) Migration stage (one of the MIGRATION_* constants) indicating, whether the
@@ -308,6 +308,21 @@ return call_user_func( function() {
 	 * MIGRATION_NEW: Read the "unexpectedUnconnectedPage" page prop in SpecialUnconnectedPages.
 	 */
 	$defaults['tmpUnconnectedPagePagePropMigrationStage'] = MIGRATION_WRITE_BOTH;
+
+	/**
+	 * @note This config option is primarily added for the Wikimedia transition use-case and can be
+	 * considered temporary. It could be removed in the future with no warning.
+	 *
+	 * (tmp) Migration setting indicating, whether the "unexpectedUnconnectedPage" page prop should
+	 * be written with the inverted (new format, better for querying) or unaltered namespace id
+	 * (old format) as value/ search key.
+	 *
+	 * false: Write the "unexpectedUnconnectedPage" page property with
+	 *    inverted NS id as value/ search key (which aids querying/ result sorting).
+	 * true: Write the "unexpectedUnconnectedPage" page property with
+	 *    original/ positive NS id as value/ search key (old format).
+	 */
+	$defaults['tmpUnconnectedPagePagePropMigrationLegacyFormat'] = true;
 
 	return $defaults;
 } );
