@@ -212,7 +212,7 @@
   <!-- Individual property types supported by known Wikibase extensions -->
 
   <owl:NamedIndividual rdf:about="&wikibase;Math">
-      <rdfs:label>Mathematial expression</rdfs:label>
+      <rdfs:label>Mathematical expression</rdfs:label>
       <rdfs:comment>Type for mathematical expressions as supported by the Math extension.</rdfs:comment>
       <rdf:type rdf:resource="&wikibase;PropertyType"/>
   </owl:NamedIndividual>
