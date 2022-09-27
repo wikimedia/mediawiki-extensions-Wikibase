@@ -10,7 +10,7 @@ accepted
 
 Federated Properties v2 aims to make it possible for users to enable Federated Properties even if their Wikibase already contains data, so that they can choose to use both remote & local Properties to make statements.
 
-Dispatching by entity type is a widely used mechanism in Wikibase that allows the dispatching service to handle entity ids of different types by delegating to the service implementation defined in the [entity type definitions](https://doc.wikimedia.org/Wikibase/master/php/md_docs_topics_entitytypes.html), thus enabling entity type specific behavior within a single service. With Federated Properties v2 the entity type ("property") no longer uniquely identifies the desired service implementation, since local Properties' services need to be handled by database-backed implementations, whereas Federated Properties use API-backed services. In order to work with local and remote Properties, dispatching services need to be aware of the entity's source as well as the type.
+Dispatching by entity type is a widely used mechanism in Wikibase that allows the dispatching service to handle entity ids of different types by delegating to the service implementation defined in the [entity type definitions], thus enabling entity type specific behavior within a single service. With Federated Properties v2 the entity type ("property") no longer uniquely identifies the desired service implementation, since local Properties' services need to be handled by database-backed implementations, whereas Federated Properties use API-backed services. In order to work with local and remote Properties, dispatching services need to be aware of the entity's source as well as the type.
 
 ## Considered Actions
 
@@ -32,3 +32,5 @@ Make all relevant services source and type dispatching.
 Type dispatching services that should behave differently for local and Federated Properties, mainly the ones involving persistence, become source and type dispatching. We created an EntitySourceLookup to look up the EntitySource object corresponding to a given entity id, as well as a EntitySourceAndTypeDefinitions class to build the source + entity type to service callback mapping, similar to how EntityTypeDefinitions works, but with the added source dimension.
 
 We added a "type" field to EntitySource in order to tell whether a source is local (db-backed) or remote (API-backed). EntitySourceAndTypeDefinitions uses the entity source type to get the service creation callback from either WikibaseRepo.entitytypes.php for local entities or from WikibaseRepo.FederatedProperties.entitytypes.php (likely to be renamed in the future) for remote entities.
+
+[entity type definitions]: @ref md_docs_topics_entitytypes

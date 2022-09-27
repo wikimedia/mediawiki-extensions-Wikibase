@@ -1,6 +1,6 @@
 This table holds links from items to Client articles.
 
-Part of the \ref md_docs_storage_sitelinks storage system.
+Part of the @ref md_docs_storage_sitelinks storage system.
 
 **Fields:**
 

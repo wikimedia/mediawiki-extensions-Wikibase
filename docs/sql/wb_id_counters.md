@@ -1,4 +1,4 @@
-Part of the \ref md_docs_storage_id-counters storage system.
+Part of the @ref md_docs_storage_id-counters storage system.
 
 **Fields:**
 
