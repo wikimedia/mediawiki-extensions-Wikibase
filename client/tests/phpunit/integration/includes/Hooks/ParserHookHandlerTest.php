@@ -7,7 +7,6 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
-use Parser;
 use ParserOptions;
 use Title;
 use User;
@@ -41,19 +40,18 @@ class ParserHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$popt = new ParserOptions( User::newFromId( 0 ), Language::factory( 'en' ) );
 
 		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
-		$parser->parse( '{{#property:P1234|from=Q1}}', $title, $popt, Parser::OT_HTML );
+		$parser->parse( '{{#property:P1234|from=Q1}}', $title, $popt );
 
 		$this->assertSame( 1, $restrictedEntityLookup->getEntityAccessCount() );
 
-		$parser->parse( '{{#property:P1234|from=Q2}}', $title, $popt, Parser::OT_HTML );
+		$parser->parse( '{{#property:P1234|from=Q2}}', $title, $popt );
 		// Count got reset between parser runs
 		$this->assertSame( 1, $restrictedEntityLookup->getEntityAccessCount() );
 
 		$parser->parse(
 			'{{#property:P1234|from=Q1}}{{#property:P1234|from=Q3}}',
 			$title,
-			$popt,
-			Parser::OT_HTML
+			$popt
 		);
 
 		// Count got reset between parser runs and Q1 is counted again, although it has been accessed before

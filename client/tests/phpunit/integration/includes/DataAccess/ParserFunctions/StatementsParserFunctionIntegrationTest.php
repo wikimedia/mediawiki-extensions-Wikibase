@@ -2,11 +2,9 @@
 
 namespace Wikibase\Client\Tests\Integration\DataAccess\ParserFunctions;
 
-use ExtensionRegistry;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
-use Parser;
 use ParserOptions;
 use ParserOutput;
 use Title;
@@ -70,6 +68,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 		$this->store = $store;
 
 		$this->setContentLang( 'de' );
+		$this->setMwGlobals( 'wgKartographerMapServer', 'http://192.0.2.0' );
 
 		$setupHelper = new WikibaseDataAccessTestItemSetUpHelper( $store );
 		$setupHelper->setUp();
@@ -240,11 +239,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 	}
 
 	public function testStatementsParserFunction_maplink() {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) ) {
-			$this->markTestSkipped(
-				'Kartographer is needed to test maplinks'
-			);
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'Kartographer' );
 		$result = $this->parseWikitextToHtml( '{{#statements:P625|from=Q32489}}' );
 
 		$text = $result->getText( [ 'unwrap' => true ] );
@@ -261,7 +256,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 	private function parseWikitextToHtml( $wikiText, $title = 'WikibaseClientDataAccessTest' ) {
 		$popt = new ParserOptions( User::newFromId( 0 ), Language::factory( 'en' ) );
 		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
-		return $parser->parse( $wikiText, Title::newFromTextThrow( $title ), $popt, Parser::OT_HTML );
+		return $parser->parse( $wikiText, Title::newFromTextThrow( $title ), $popt );
 	}
 
 }
