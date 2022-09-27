@@ -4,6 +4,7 @@
 			"Nurlan"
 		]
 	},
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|ózgeris|ózgerisler}}",
 	"wikibase-dataitem": "{{WBREPONAME}} elementi",
 	"wikibase-editlinks": "Siltemeni redaktorlaw",
 	"wikibase-linkitem-addlinks": "Silteme qosıw",
