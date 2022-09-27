@@ -12,7 +12,7 @@ use Wikimedia\Rdbms\IDatabase;
  * Unused wbt_term_in_lang, wbt_text_in_lang and wbt_text rows are automatically removed.
  * Unused type rows are never cleaned up.
  *
- * @see @ref md_docs_storage_terms
+ * @see @ref docs_storage_terms
  * @license GPL-2.0-or-later
  */
 class DatabaseInnerTermStoreCleaner {

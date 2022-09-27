@@ -33,4 +33,4 @@ Type dispatching services that should behave differently for local and Federated
 
 We added a "type" field to EntitySource in order to tell whether a source is local (db-backed) or remote (API-backed). EntitySourceAndTypeDefinitions uses the entity source type to get the service creation callback from either WikibaseRepo.entitytypes.php for local entities or from WikibaseRepo.FederatedProperties.entitytypes.php (likely to be renamed in the future) for remote entities.
 
-[entity type definitions]: @ref md_docs_topics_entitytypes
+[entity type definitions]: @ref docs_topics-entitytypes

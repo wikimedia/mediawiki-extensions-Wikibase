@@ -33,7 +33,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * as part of the search result for the page (typically on mobile),
  * even if it is never used in the page itself.
  *
- * @see @ref md_docs_topics_usagetracking for virtual usage,
+ * @see @ref docs_topics_usagetracking for virtual usage,
  * a similar but separate concept.
  *
  * @license GPL-2.0-or-later

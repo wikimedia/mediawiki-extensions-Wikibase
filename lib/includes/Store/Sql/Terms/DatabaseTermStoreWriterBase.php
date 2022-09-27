@@ -14,7 +14,7 @@ use Wikimedia\Rdbms\IDatabase;
 /**
  * Base class for item/property TermStoreWriters.
  *
- * @see @ref md_docs_storage_terms
+ * @see @ref docs_storage_terms
  * @license GPL-2.0-or-later
  */
 abstract class DatabaseTermStoreWriterBase {

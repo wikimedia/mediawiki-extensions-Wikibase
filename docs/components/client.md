@@ -6,4 +6,4 @@ Usually, you would not use them in a single wiki.
 This is being used on the Wikipedias.
 
 The extension has multiple sub components:
-  - @subpage md_docs_components_client-databridge
+  - @subpage docs_components_client-databridge

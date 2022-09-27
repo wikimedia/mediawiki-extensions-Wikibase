@@ -13,7 +13,7 @@ but this is a read-only view.
 To contribute to the library,
 please submit a change to the Wikibase project on [Gerrit][].
 
-[change propagation]: @ref md_docs_topics_change-propagation
+[change propagation]: @ref docs_topics_change-propagation
 [Wikibase]: https://wikiba.se/
 [lib/packages/wikibase/changes/]: https://gerrit.wikimedia.org/g/mediawiki/extensions/Wikibase/+/master/lib/packages/wikibase/changes/
 [wikimedia/wikibase-changes]: https://github.com/wikimedia/wikibase-changes

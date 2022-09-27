@@ -1,6 +1,8 @@
+# wbt_text_in_lang
+
 Stores a record per term text per language.
 
-Part of the @ref md_docs_storage_terms storage system.
+Part of the @ref docs_storage_terms storage system.
 
 **Fields:**
 
@@ -22,4 +24,4 @@ Part of the @ref md_docs_storage_terms storage system.
  - UNIQUE wbxl_text_id, wbxl_language
  - wbxl_language
 
-[wbt_text]: @ref md_docs_sql_wbt_text
+[wbt_text]: @ref docs_sql_wbt_text

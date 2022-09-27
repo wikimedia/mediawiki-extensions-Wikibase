@@ -71,7 +71,7 @@ Parameters:
 #### WikibaseChangeNotification {#WikibaseChangeNotification}
 Triggered from ChangeNotifier via a [HookChangeTransmitter] to notify any listeners of changes to entities.
 
-For performance reasons, does not include statement, description and alias diffs (see [T113468](https://phabricator.wikimedia.org/T113468), [T163465](https://phabricator.wikimedia.org/T163465)).
+For performance reasons, does not include statement, description and alias diffs (see [T113468], [T163465]).
 
 Parameters:
 * $change
@@ -165,6 +165,9 @@ Parameters:
 * $usageAccumulator
   * A [UsageAccumulator] to track the usages of Wikibase entities done by the hook handlers.
 
+
+[T113468]: https://phabricator.wikimedia.org/T113468
+[T163465]: https://phabricator.wikimedia.org/T163465
 [WikibaseClient]: @ref Wikibase::Client::WikibaseClient
 [WikibaseClient::getEntityNamespaceLookup()]: @ref Wikibase::Client::WikibaseClient::getEntityNamespaceLookup()
 [WikibaseRepo]: @ref Wikibase::Repo::WikibaseRepo
@@ -177,5 +180,5 @@ Parameters:
 [OtherProjectsSidebarGenerator]: @ref Wikibase::Client::Hooks::OtherProjectsSidebarGenerator
 [ChangeHandler::handleChange()]: @ref Wikibase::Client::Changes::ChangeHandler::handleChange()
 [UsageAccumulator]: @ref Wikibase::Client::Usage::UsageAccumulator
-[entitytypes documentation]: @ref md_docs_topics_entitytypes
-[datatypes documentation]: @ref md_docs_topics_datatypes
+[entitytypes documentation]: @ref docs_topics_entitytypes
+[datatypes documentation]: @ref docs_topics_datatypes

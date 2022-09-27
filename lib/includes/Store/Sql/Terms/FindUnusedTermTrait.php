@@ -8,7 +8,7 @@ use Wikimedia\Rdbms\IDatabase;
 /**
  * Trait for code-sharing method for finding unused terms based on the "NN_term_in_lang_id" relation
  *
- * @see @ref md_docs_storage_terms
+ * @see @ref docs_storage_terms
  * @license GPL-2.0-or-later
  */
 trait FindUnusedTermTrait {

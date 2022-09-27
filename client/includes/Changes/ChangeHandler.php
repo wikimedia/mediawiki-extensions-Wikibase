@@ -18,7 +18,7 @@ use Wikibase\Lib\Changes\EntityChange;
  * Interface for change handling. Whenever a change is detected,
  * it should be fed to this service which then takes care handling it.
  *
- * @see @ref md_docs_topics_change-propagation for an overview of the change propagation mechanism.
+ * @see @ref docs_topics_change-propagation for an overview of the change propagation mechanism.
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

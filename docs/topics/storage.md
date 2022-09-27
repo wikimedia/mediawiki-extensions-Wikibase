@@ -2,38 +2,38 @@
 
 ## Topic Areas
 
-* @subpage md_docs_storage_entities
-* @subpage md_docs_storage_id-counters
-* @subpage md_docs_storage_propertyinfo
-* @subpage md_docs_storage_sitelinks
-* @subpage md_docs_storage_terms
-* @subpage md_docs_storage_terms-caching
+* @subpage docs_storage_entities
+* @subpage docs_storage_id-counters
+* @subpage docs_storage_propertyinfo
+* @subpage docs_storage_sitelinks
+* @subpage docs_storage_terms
+* @subpage docs_storage_terms-caching
 
 ## SQL Tables {#sql_tables}
 
 **Repo**
 
-* @ref md_docs_topics_change-propagation
-  * @subpage md_docs_sql_wb_changes
-  * @subpage md_docs_sql_wb_changes_subscription
-* @ref md_docs_storage_id-counters
-  * @subpage md_docs_sql_wb_id_counters
-* @ref md_docs_storage_sitelinks
-  * @subpage md_docs_sql_wb_items_per_site
-* @ref md_docs_storage_propertyinfo
-  * @subpage md_docs_sql_wb_property_info
-* @ref md_docs_storage_terms
-  * @subpage md_docs_sql_wbt_item_terms
-  * @subpage md_docs_sql_wbt_property_terms
-  * @subpage md_docs_sql_wbt_term_in_lang
-  * @subpage md_docs_sql_wbt_text_in_lang
-  * @subpage md_docs_sql_wbt_type
-  * @subpage md_docs_sql_wbt_text
+* @ref docs_topics_change-propagation
+  * @subpage docs_sql_wb_changes
+  * @subpage docs_sql_wb_changes_subscription
+* @ref docs_storage_id-counters
+  * @subpage docs_sql_wb_id_counters
+* @ref docs_storage_sitelinks
+  * @subpage docs_sql_wb_items_per_site
+* @ref docs_storage_propertyinfo
+  * @subpage docs_sql_wb_property_info
+* @ref docs_storage_terms
+  * @subpage docs_sql_wbt_item_terms
+  * @subpage docs_sql_wbt_property_terms
+  * @subpage docs_sql_wbt_term_in_lang
+  * @subpage docs_sql_wbt_text_in_lang
+  * @subpage docs_sql_wbt_type
+  * @subpage docs_sql_wbt_text
 
 **Client**
 
-* @ref md_docs_topics_change-propagation
-  * @subpage md_docs_sql_wbc_entity_usage (See also @ref md_docs_topics_usagetracking)
+* @ref docs_topics_change-propagation
+  * @subpage docs_sql_wbc_entity_usage (See also @ref docs_topics_usagetracking)
 
 ## Existing table changes
 

@@ -15,10 +15,10 @@ As of March 2017:
 
 ## Configuration
 
-* A Wikibase Repository is configured as documented in @ref md_docs_topics_options.
+* A Wikibase Repository is configured as documented in @ref docs_topics_options.
 * In order for federation to work foreign sources must be configured using the `entitySources` setting.
 
 To see an example please look at the dedicated [entitysources] topic.
 
-[options documentation]: @ref md_docs_topics_options
-[entitysources]: @ref md_docs_topics_entitysources
+[options documentation]: @ref docs_topics_options
+[entitysources]: @ref docs_topics_entitysources

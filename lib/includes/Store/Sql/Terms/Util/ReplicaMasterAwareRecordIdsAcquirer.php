@@ -16,7 +16,7 @@ use Wikimedia\Rdbms\ILoadBalancer;
  * records into a read-write master database and getting those
  * ids as well from the master database after insertion.
  *
- * @see @ref md_docs_storage_terms
+ * @see @ref docs_storage_terms
  * @license GPL-2.0-or-later
  */
 class ReplicaMasterAwareRecordIdsAcquirer {

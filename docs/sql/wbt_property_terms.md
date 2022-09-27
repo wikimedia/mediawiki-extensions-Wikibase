@@ -1,7 +1,9 @@
+# wbt_property_terms
+
 Stores a record per term per property per language.
 This table is very similar to / identical to [wbt_item_terms], but for properties.
 
-Part of the @ref md_docs_storage_terms storage system.
+Part of the @ref docs_storage_terms storage system.
 
 **Fields:**
 
@@ -33,5 +35,5 @@ Using an integer to represent the item identifier was a design decision allowing
 | 6        | 9                 | 1111                  |
 | 7        | 10                | 888                   |
 
-[wbt_item_terms]: @ref md_docs_sql_wbt_item_terms
-[wbt_term_in_lang]: @ref md_docs_sql_wbt_term_in_lang
+[wbt_item_terms]: @ref docs_sql_wbt_item_terms
+[wbt_term_in_lang]: @ref docs_sql_wbt_term_in_lang

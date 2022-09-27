@@ -13,7 +13,7 @@ use Wikimedia\Rdbms\IResultWrapper;
 /**
  * Term in lang ID resolver using the normalized database schema.
  *
- * @see @ref md_docs_storage_terms
+ * @see @ref docs_storage_terms
  * @license GPL-2.0-or-later
  */
 class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {

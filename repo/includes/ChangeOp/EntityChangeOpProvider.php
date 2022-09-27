@@ -40,7 +40,7 @@ class EntityChangeOpProvider {
 
 	/**
 	 * @param string $entityType
-	 * @param array $changeRequest Data of change to apply, @see @ref md_docs_topics_changeop-serializations for format specification
+	 * @param array $changeRequest Data of change to apply, @see @ref docs_topics_changeop-serializations for format specification
 	 *
 	 * @throws ChangeOpDeserializationException
 	 *

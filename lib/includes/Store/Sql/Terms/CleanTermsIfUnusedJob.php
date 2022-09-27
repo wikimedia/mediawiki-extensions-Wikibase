@@ -21,7 +21,7 @@ use Title;
  *
  * @todo Execute the cleanup of each table in its own transaction to further reduce lock contention
  *
- * @see @ref md_docs_storage_terms
+ * @see @ref docs_storage_terms
  * @author Addshore
  * @license GPL-2.0-or-later
  */

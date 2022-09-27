@@ -11,8 +11,8 @@ The Repo client relationship allows:
  - Clients to use data from a repo
 
 Various mechanisms come into play here, and you may find the following topics useful:
- - @ref md_docs_topics_change-propagation
- - @ref md_docs_topics_usagetracking
+ - @ref docs_topics_change-propagation
+ - @ref docs_topics_usagetracking
 
 ## Setups
 
@@ -60,5 +60,5 @@ In situations like this the `populateSitesTable.php` maintenance script can be u
 
 entitySources will still need to be configured as above.
 
-[entitysources]: @ref md_docs_topics_entitysources
+[entitysources]: @ref docs_topics_entitysources
 [SiteMatrix]: https://www.mediawiki.org/wiki/Extension:SiteMatrix

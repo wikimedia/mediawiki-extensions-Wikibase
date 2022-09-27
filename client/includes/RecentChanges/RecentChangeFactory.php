@@ -233,7 +233,7 @@ class RecentChangeFactory {
 
 		// Temporary compatibility until Ie7b9c482cf6a0dd7215b34841efd86fb51be651a
 		// has been deployed long enough that all rows have it.
-		// See @ref md_docs_topics_change-propagation for why it can be 0 other than pre-deploy rows.
+		// See @ref docs_topics_change-propagation for why it can be 0 other than pre-deploy rows.
 		if ( $this->centralIdLookup
 			&& isset( $metadata['central_user_id'] )
 			&& $metadata['central_user_id'] !== 0

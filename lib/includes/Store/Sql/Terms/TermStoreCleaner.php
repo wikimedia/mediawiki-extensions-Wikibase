@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
  * Interface for deleting IDs acquired from a {@link TermInLangIdsAcquirer},
  * including any further cleanup if necessary.
  *
- * @see @ref md_docs_storage_terms
+ * @see @ref docs_storage_terms
  * @license GPL-2.0-or-later
  */
 interface TermStoreCleaner {

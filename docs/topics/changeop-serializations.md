@@ -87,4 +87,4 @@ Each sitelink can contain as many badges as you want, but typically contains at 
 * https://www.wikidata.org/wiki/Wikidata:Stable_Interface_Policy
 
 [Wikibase DataModel Serialization]: https://github.com/wmde/WikibaseDataModelSerialization
-[JSON topic]: @ref md_docs_topics_json
+[JSON topic]: @ref docs_topics_json

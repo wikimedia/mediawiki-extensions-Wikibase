@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 /**
  * Trait for code reuse of mapping for entity term storage
  *
- * @see @ref md_docs_storage_terms
+ * @see @ref docs_storage_terms
  * @license GPL-2.0-or-later
  */
 trait NormalizedTermStorageMappingTrait {

@@ -22,7 +22,7 @@ interface UsageTracker {
 	 * @param int $pageId The ID of the page the entities are used on.
 	 * @param EntityUsage[] $usages A list of entity usages.
 	 *
-	 * @see @ref md_docs_topics_usagetracking for details.
+	 * @see @ref docs_topics_usagetracking for details.
 	 */
 	public function addUsedEntities( int $pageId, array $usages ): void;
 
@@ -33,7 +33,7 @@ interface UsageTracker {
 	 * @param int $pageId The ID of the page the entities are used on.
 	 * @param EntityUsage[] $usages A list of entity usages.
 	 *
-	 * @see @ref md_docs_topics_usagetracking for details.
+	 * @see @ref docs_topics_usagetracking for details.
 	 *
 	 * @return EntityUsage[] Usages that have been removed
 	 */
