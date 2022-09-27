@@ -26,7 +26,7 @@ If you want to use the sitelink functionality you will need to add a MediaWiki s
 You can do this using the `addSite.php` maintenance script in MediaWiki core, for example:
 
 ```
-php maintenance/addSite.php mywiki default --interwiki-id --pagepath http://localhost/w/index.php?title=\$1 --filepath http://localhost/w/\$1
+php maintenance/addSite.php mywiki default --interwiki-id mywiki --pagepath http://localhost/w/index.php?title=\$1 --filepath http://localhost/w/\$1
 ```
 
 This will add the site to the default site group, which is enabled by default.
