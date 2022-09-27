@@ -1,28 +1,15 @@
 'use strict';
 
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const {
 	createUniqueStringProperty,
 	createItemWithStatements,
 	newStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
+const {
+	newReplaceItemStatementRequestBuilder,
+	newReplaceStatementRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const expect = require( 'chai' ).expect;
-
-function newReplaceStatementRequestBuilder( statementId, statement ) {
-	return new RequestBuilder()
-		.withRoute( 'PUT', '/statements/{statement_id}' )
-		.withPathParam( 'statement_id', statementId )
-		.withJsonBodyParam( 'statement', statement );
-}
-
-function newReplaceItemStatementRequestBuilder( itemId, statementId, statement ) {
-	return new RequestBuilder()
-		.withRoute( 'PUT', '/entities/items/{item_id}/statements/{statement_id}' )
-		.withPathParam( 'item_id', itemId )
-		.withPathParam( 'statement_id', statementId )
-		.withHeader( 'content-type', 'application/json' )
-		.withJsonBodyParam( 'statement', statement );
-}
 
 describe( 'validate PUT endpoints against OpenAPI definition', () => {
 

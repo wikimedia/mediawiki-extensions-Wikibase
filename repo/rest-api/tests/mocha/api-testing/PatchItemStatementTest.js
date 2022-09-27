@@ -3,8 +3,12 @@
 const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const formatStatementEditSummary = require( '../helpers/formatStatementEditSummary' );
+const {
+	newPatchItemStatementRequestBuilder,
+	newPatchStatementRequestBuilder,
+	newReplaceStatementRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
@@ -20,21 +24,6 @@ function assertValid404Response( response, responseBodyErrorCode ) {
 	assert.strictEqual( response.status, 404 );
 	assert.header( response, 'Content-Language', 'en' );
 	assert.strictEqual( response.body.code, responseBodyErrorCode );
-}
-
-function newPatchStatementRequestBuilder( statementId, patch ) {
-	return new RequestBuilder()
-		.withRoute( 'PATCH', '/statements/{statement_id}' )
-		.withPathParam( 'statement_id', statementId )
-		.withJsonBodyParam( 'patch', patch );
-}
-
-function newPatchItemStatementRequestBuilder( itemId, statementId, patch ) {
-	return new RequestBuilder()
-		.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
-		.withPathParam( 'item_id', itemId )
-		.withPathParam( 'statement_id', statementId )
-		.withJsonBodyParam( 'patch', patch );
 }
 
 describe( 'PATCH statement tests', () => {
@@ -84,14 +73,10 @@ describe( 'PATCH statement tests', () => {
 			describe( '200 success response', () => {
 
 				afterEach( async () => {
-					await new RequestBuilder() // reset after successful edit
-						.withRoute( 'PUT', '/statements/{statement_id}' )
-						.withPathParam( 'statement_id', testStatementId )
-						.withJsonBodyParam(
-							'statement',
-							entityHelper.newStatementWithRandomStringValue( testPropertyId )
-						)
-						.makeRequest();
+					await newReplaceStatementRequestBuilder( // reset after successful edit
+						testStatementId,
+						entityHelper.newStatementWithRandomStringValue( testPropertyId )
+					).makeRequest();
 				} );
 
 				it( 'can patch a statement', async () => {

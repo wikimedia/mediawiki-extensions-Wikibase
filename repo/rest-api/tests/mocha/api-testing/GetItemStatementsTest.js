@@ -9,13 +9,7 @@ const {
 	newStatementWithRandomStringValue,
 	createItemWithStatements
 } = require( '../helpers/entityHelper' );
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
-
-function newGetItemStatementsRequestBuilder( itemId ) {
-	return new RequestBuilder()
-		.withRoute( 'GET', '/entities/items/{item_id}/statements' )
-		.withPathParam( 'item_id', itemId );
-}
+const { newGetItemStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( 'GET /entities/items/{id}/statements', () => {
 

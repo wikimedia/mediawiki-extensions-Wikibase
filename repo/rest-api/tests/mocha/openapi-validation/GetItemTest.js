@@ -2,15 +2,9 @@
 
 const chai = require( 'chai' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const { action, utils } = require( 'api-testing' );
+const { newGetItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const expect = chai.expect;
-
-function newGetItemRequestBuilder( itemId ) {
-	return new RequestBuilder()
-		.withRoute( 'GET', '/entities/items/{item_id}' )
-		.withPathParam( 'item_id', itemId );
-}
 
 async function createItemWithAllFields() {
 	const stringPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;

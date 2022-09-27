@@ -1,7 +1,7 @@
 'use strict';
 
 const { assert } = require( 'api-testing' );
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
+const rbf = require( '../helpers/RequestBuilderFactory' );
 const {
 	createItemWithStatements,
 	createUniqueStringProperty,
@@ -31,68 +31,48 @@ describe( 'User-Agent requests', () => {
 	} );
 
 	const editRequests = [
-		() => new RequestBuilder()
-			.withRoute( 'POST', '/entities/items/{item_id}/statements' )
-			.withPathParam( 'item_id', itemId )
-			.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( stringPropertyId ) ),
-		() => new RequestBuilder()
-			.withRoute( 'PUT', '/entities/items/{item_id}/statements/{statement_id}' )
-			.withPathParam( 'item_id', itemId )
-			.withPathParam( 'statement_id', statementId )
-			.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( stringPropertyId ) ),
-		() => new RequestBuilder()
-			.withRoute( 'PUT', '/statements/{statement_id}' )
-			.withPathParam( 'statement_id', statementId )
-			.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( stringPropertyId ) ),
-		() => new RequestBuilder()
-			.withRoute( 'DELETE', '/entities/items/{item_id}/statements/{statement_id}' )
-			.withPathParam( 'item_id', itemId )
-			.withPathParam( 'statement_id', statementId ),
-		() => new RequestBuilder()
-			.withRoute( 'DELETE', '/statements/{statement_id}' )
-			.withPathParam( 'statement_id', statementId )
+		() => rbf.newAddItemStatementRequestBuilder(
+			itemId,
+			newStatementWithRandomStringValue( stringPropertyId )
+		),
+		() => rbf.newReplaceItemStatementRequestBuilder(
+			itemId,
+			statementId,
+			newStatementWithRandomStringValue( stringPropertyId )
+		),
+		() => rbf.newReplaceStatementRequestBuilder(
+			statementId,
+			newStatementWithRandomStringValue( stringPropertyId )
+		),
+		() => rbf.newRemoveItemStatementRequestBuilder( itemId, statementId ),
+		() => rbf.newRemoveStatementRequestBuilder( statementId )
 	];
 
 	if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
-		editRequests.push( () => new RequestBuilder()
-			.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
-			.withPathParam( 'item_id', itemId )
-			.withPathParam( 'statement_id', statementId )
-			.withJsonBodyParam( 'patch', [
-				{
-					op: 'replace',
-					path: '/mainsnak',
-					value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
-				}
-			] )
-		);
-		editRequests.push( () => new RequestBuilder()
-			.withRoute( 'PATCH', '/statements/{statement_id}' )
-			.withPathParam( 'statement_id', statementId )
-			.withJsonBodyParam( 'patch', [
-				{
-					op: 'replace',
-					path: '/mainsnak',
-					value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
-				}
-			] )
-		);
+		editRequests.push( () => rbf.newPatchItemStatementRequestBuilder(
+			itemId,
+			statementId,
+			[ {
+				op: 'replace',
+				path: '/mainsnak',
+				value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
+			} ]
+		) );
+		editRequests.push( () => rbf.newPatchStatementRequestBuilder(
+			statementId,
+			[ {
+				op: 'replace',
+				path: '/mainsnak',
+				value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
+			} ]
+		) );
 	}
 
 	[
-		() => new RequestBuilder()
-			.withRoute( 'GET', '/entities/items/{item_id}/statements' )
-			.withPathParam( 'item_id', itemId ),
-		() => new RequestBuilder()
-			.withRoute( 'GET', '/entities/items/{item_id}/statements/{statement_id}' )
-			.withPathParam( 'item_id', itemId )
-			.withPathParam( 'statement_id', statementId ),
-		() => new RequestBuilder()
-			.withRoute( 'GET', '/entities/items/{item_id}' )
-			.withPathParam( 'item_id', itemId ),
-		() => new RequestBuilder()
-			.withRoute( 'GET', '/statements/{statement_id}' )
-			.withPathParam( 'statement_id', statementId ),
+		() => rbf.newGetItemStatementsRequestBuilder( itemId ),
+		() => rbf.newGetItemStatementRequestBuilder( itemId, statementId ),
+		() => rbf.newGetItemRequestBuilder( itemId ),
+		() => rbf.newGetStatementRequestBuilder( statementId ),
 		...editRequests
 	].forEach( ( newRequestBuilder ) => {
 		describe( newRequestBuilder().getRouteDescription(), () => {
