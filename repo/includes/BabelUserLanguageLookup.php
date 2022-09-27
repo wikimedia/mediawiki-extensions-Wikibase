@@ -92,7 +92,7 @@ class BabelUserLanguageLookup implements UserLanguageLookup {
 		$userSpecifiedLanguages = $this->getUserSpecifiedLanguages( $user );
 		if ( !empty( $userSpecifiedLanguages ) ) {
 			$languages = array_merge( $languages, $userSpecifiedLanguages );
-			$languages = array_unique( $languages );
+			$languages = array_values( array_unique( $languages ) );
 		}
 
 		return $languages;

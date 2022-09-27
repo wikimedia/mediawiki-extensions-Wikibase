@@ -58,8 +58,8 @@ class BabelUserLanguageLookupTest extends MediaWikiIntegrationTestCase {
 		$userOptionsManager->setOption( $user, 'babelLanguages', $babelLanguages );
 		$userLanguageLookup = new BabelUserLanguageLookupDouble( $user );
 
-		$this->assertEquals( $allExpected, array_values(
-			$userLanguageLookup->getAllUserLanguages( $user ) ), $message . '1' );
+		$this->assertEquals( $allExpected,
+			$userLanguageLookup->getAllUserLanguages( $user ), $message . '1' );
 		$this->assertEquals( $userSpecifiedLanguages,
 			$userLanguageLookup->getUserSpecifiedLanguages( $user ), $message . '5' );
 	}

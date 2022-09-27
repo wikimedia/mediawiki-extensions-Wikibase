@@ -50,7 +50,9 @@ class UserPreferredContentLanguagesLookup {
 			) ),
 			[ $this->contentLanguages, 'hasLanguage' ]
 		);
-		return count( $validLanguages ) === 0 ? [ $this->wikiDefaultContentLanguage ] : $validLanguages;
+		return count( $validLanguages ) === 0 ?
+			[ $this->wikiDefaultContentLanguage ] :
+			array_values( $validLanguages );
 	}
 
 }
