@@ -4,9 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Tests;
 
-use ExtensionRegistry;
 use Language;
-use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\LanguageNameLookupFactory;
 
 /**
@@ -16,10 +14,10 @@ use Wikibase\Lib\LanguageNameLookupFactory;
  *
  * @license GPL-2.0-or-later
  */
-class LanguageNameLookupFactoryTest extends TestCase {
+class LanguageNameLookupFactoryTest extends \MediaWikiIntegrationTestCase {
 
 	public function testForLanguage(): void {
-		$this->requireCldr();
+		$this->markTestSkippedIfExtensionNotLoaded( 'CLDR' );
 
 		$language = $this->createMock( Language::class );
 		$language->expects( $this->once() )
@@ -33,19 +31,13 @@ class LanguageNameLookupFactoryTest extends TestCase {
 	}
 
 	public function testForLanguageCode(): void {
-		$this->requireCldr();
+		$this->markTestSkippedIfExtensionNotLoaded( 'CLDR' );
 
 		$languageNameLookupFactory = new LanguageNameLookupFactory();
 
 		$languageNameLookup = $languageNameLookupFactory->getForLanguageCode( 'de' );
 
 		$this->assertSame( 'Englisch', $languageNameLookup->getName( 'en' ) );
-	}
-
-	private function requireCldr(): void {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CLDR' ) ) {
-			$this->markTestSkipped( 'CLDR extension required for full language name support' );
-		}
 	}
 
 }

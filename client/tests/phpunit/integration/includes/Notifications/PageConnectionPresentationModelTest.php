@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\Integration\Notifications;
 
 use EchoEvent;
 use EchoEventPresentationModel;
-use ExtensionRegistry;
 use Language;
 use MediaWikiIntegrationTestCase;
 use Message;
@@ -27,9 +26,7 @@ class PageConnectionPresentationModelTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
-			$this->markTestSkipped( "Echo not loaded" );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'Echo' );
 	}
 
 	/**

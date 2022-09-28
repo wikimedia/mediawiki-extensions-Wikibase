@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use ExtensionRegistry;
 use MediaWiki\User\UserOptionsManager;
 use MediaWikiIntegrationTestCase;
 use Title;
@@ -43,9 +42,7 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
-			$this->markTestSkipped( "Echo not loaded" );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'Echo' );
 
 		$this->repoLinker = $this->createMock( RepoLinker::class );
 		$this->repoLinker

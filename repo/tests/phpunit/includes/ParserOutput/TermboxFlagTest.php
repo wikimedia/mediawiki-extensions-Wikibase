@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 
 use ExtensionRegistry;
 use MobileContext;
-use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 
@@ -15,7 +14,7 @@ use Wikibase\Repo\ParserOutput\TermboxFlag;
  *
  * @license GPL-2.0-or-later
  */
-class TermboxFlagTest extends TestCase {
+class TermboxFlagTest extends \MediaWikiIntegrationTestCase {
 
 	public function testGetInstance() {
 		$this->assertInstanceOf( TermboxFlag::class, TermboxFlag::getInstance() );
@@ -38,9 +37,7 @@ class TermboxFlagTest extends TestCase {
 	}
 
 	public function testAllTrue_shouldRenderTermboxReturnsTrue() {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) ) {
-			$this->markTestSkipped();
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'MobileFrontend' );
 		$flag = new TermboxFlag(
 			$this->newSettingsWithFeatureFlag( true ),
 			$this->newExtensionRegistryWithMobileExtension( true )

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use ExtensionRegistry;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EchoSetupHookHandler;
@@ -43,9 +42,7 @@ class EchoSetupHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider beforeCreateEchoEventProvider
 	 */
 	public function testBeforeCreateEchoEvent( $register, $icon, $expectedIcon ) {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
-			$this->markTestSkipped( "Echo not loaded" );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'Echo' );
 
 		$notifications = [];
 		$categories = [];

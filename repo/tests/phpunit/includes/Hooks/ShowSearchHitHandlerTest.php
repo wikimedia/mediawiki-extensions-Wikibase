@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Hooks;
 
 use ContextSource;
-use ExtensionRegistry;
 use HtmlArmor;
 use Language;
 use MediaWikiIntegrationTestCase;
@@ -262,10 +261,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		array $languages,
 		string $expected
 	) {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CLDR' ) ) {
-			// This test uses language names from CLDR
-			$this->markTestSkipped( 'cldr not installed, skipping' );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'CLDR' );
 
 		$testFile = __DIR__ . '/../../data/searchHits/' . $expected . ".plain.html";
 
