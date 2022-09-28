@@ -8,31 +8,23 @@
 
 	QUnit.module( 'wikibase.getLanguageNameByCode' );
 
-	QUnit.test( 'wikibase.getLanguageNameByCode()', function ( assert ) {
-		// TODO: Don't assume global state, control what languages are available for this test!
-		// Better might be to turn this into a LanguageNameLookup service and set language
-		// name in getEntityTermsView in ViewFactory. Then, all places that need language name
-		// would then have it.
+	QUnit.test( 'getLanguageNameByCode( de )', function ( assert ) {
+		// this test relies on a bunch of global state :/
+
+		var allowedLanguageNames = [
+			'German',
+			'Deutsch'
+		];
 		if ( $.fn.uls ) {
-			assert.strictEqual(
-				wb.getLanguageNameByCode( 'de' ),
-				$.fn.uls.defaults.languages.de,
-				'getLanguageNameByCode() returns localized language name.'
-			);
-		} else if ( $.uls ) {
-			assert.strictEqual(
-				wb.getLanguageNameByCode( 'de' ),
-				'Deutsch',
-				'getLanguageNameByCode() returns native language name.'
-			);
-		} else {
-			assert.strictEqual(
-				wb.getLanguageNameByCode( 'de' ),
-				'de',
-				'getLanguageNameByCode() returns language code (ULS not loaded).'
-			);
+			allowedLanguageNames.push( $.fn.uls.defaults.languages.de );
 		}
 
+		var languageName = wb.getLanguageNameByCode( 'de' );
+		assert.true( allowedLanguageNames.indexOf( languageName ) !== -1,
+			languageName + ' should be one of ' + allowedLanguageNames.join( ', ' ) );
+	} );
+
+	QUnit.test( 'getLanguageNameByCode( nonexistantlanguagecode )', function ( assert ) {
 		assert.strictEqual(
 			wb.getLanguageNameByCode( 'nonexistantlanguagecode' ),
 			'nonexistantlanguagecode',
