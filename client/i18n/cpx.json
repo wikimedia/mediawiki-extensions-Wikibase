@@ -1,11 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"ChoiChong"
+			"ChoiChong",
+			"Kahin He"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}}項目",
 	"wikibase-editlinks": "修改連結",
-	"wikibase-rc-hide-wikidata-show": "顯示",
+	"wikibase-linkitem-addlinks": "添加链接",
+	"wikibase-linkitem-selectlink": "请选蜀个汝卜链接遘者个页面兮网站合页面。",
+	"wikibase-linkitem-input-site": "语言：",
+	"wikibase-linkitem-input-page": "頁面：",
+	"wikibase-rc-hide-wikidata-hide": "隐藏",
+	"wikibase-rc-hide-wikidata-show": "显示",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}修改"
 }

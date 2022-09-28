@@ -213,6 +213,7 @@
 	"wikibase-listdatatypes-time-head": "Čas",
 	"wikibase-listdatatypes-url-head": "Spletni naslov",
 	"wikibase-concept-uri": "URI koncepta",
+	"wikibase-concept-uri-tooltip": "URI, ki določa koncept, ki ga opisuje ta predmet",
 	"datatypes-type-url": "Spletni naslov",
 	"action-item-merge": "združi Objekte",
 	"right-item-merge": "Združi Objekte",
