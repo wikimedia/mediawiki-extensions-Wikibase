@@ -49,7 +49,10 @@ class ReplaceItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase 
 			$routeHandler,
 			new RequestData( [
 					'method' => 'PUT',
-					'headers' => [ 'Content-Type' => 'application/json' ],
+					'headers' => [
+						'User-Agent' => 'PHPUnit Test',
+						'Content-Type' => 'application/json'
+					],
 					'pathParams' => [
 						ReplaceItemStatementRouteHandler::ITEM_ID_PATH_PARAM => 'Q1',
 						ReplaceItemStatementRouteHandler::STATEMENT_ID_PATH_PARAM => 'Q1$1e63e3d9-4bd4-7671-706c-b745db23c3f1',

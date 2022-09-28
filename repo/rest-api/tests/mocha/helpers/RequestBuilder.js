@@ -24,7 +24,7 @@ class RequestBuilder {
 		this.pathParams = {};
 		this.queryParams = {};
 		this.jsonBodyParams = {};
-		this.headers = {};
+		this.headers = { 'user-agent': 'e2e tests' };
 		this.user = null;
 		this.validate = false;
 		this.assertValid = false;

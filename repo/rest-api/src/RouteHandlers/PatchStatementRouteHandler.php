@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
@@ -56,6 +57,7 @@ class PatchStatementRouteHandler extends SimpleHandler {
 			WbRestApi::getPatchItemStatement(),
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( new ResponseFactory( new ErrorJsonPresenter() ), WikibaseRepo::getLogger() ),
+				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
 				new ContentTypeCheckMiddleware( [
 					ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON,

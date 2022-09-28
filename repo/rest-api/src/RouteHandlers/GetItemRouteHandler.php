@@ -14,6 +14,7 @@ use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
@@ -74,6 +75,7 @@ class GetItemRouteHandler extends SimpleHandler {
 			$responseFactory,
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
+				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					function ( RequestInterface $request ): string {
