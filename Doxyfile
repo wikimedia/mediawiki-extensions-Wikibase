@@ -14,7 +14,9 @@ USE_MDFILE_AS_MAINPAGE = docs/index.md
 
 INPUT                  = docs/index.md .
 
-EXCLUDE                = docs/php vendor
+EXCLUDE                = docs/adr/NNNN-adr-template.md
+EXCLUDE               += docs/php
+EXCLUDE               += vendor
 
 EXCLUDE_PATTERNS       = */node_modules/* \
                          */lib/resources/*/*.md \
@@ -27,7 +29,6 @@ EXCLUDE_PATTERNS       = */node_modules/* \
                          */view/lib/wikibase-termbox/*.md \
                          */tests/* \
                          */jmeter/*
-EXCLUDE                = docs/adr/NNNN-adr-template.md
 
 FILE_PATTERNS          = *.php \
                          *.sql \
