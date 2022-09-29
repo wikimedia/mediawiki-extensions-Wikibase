@@ -74,10 +74,12 @@ class RemoveItemStatementRouteHandler extends SimpleHandler {
 	}
 
 	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 *
 	 * @inheritDoc
 	 */
 	public function checkPreconditions() {
-		return null; // preconditions are checked via ModifiedPreconditionMiddleware
+		return null;
 	}
 
 	/**
