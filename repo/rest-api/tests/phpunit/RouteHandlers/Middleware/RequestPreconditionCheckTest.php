@@ -28,7 +28,8 @@ class RequestPreconditionCheckTest extends TestCase {
 	public function testMeetsPreconditionForStatusCode(
 		array $headers,
 		LatestItemRevisionMetadataResult $revisionMetadataResult,
-		?int $expectedStatusCode
+		?int $expectedStatusCode,
+		string $method = 'GET'
 	): void {
 		$itemId = new ItemId( 'Q42' );
 		$preconditionCheck = new RequestPreconditionCheck(
@@ -42,6 +43,7 @@ class RequestPreconditionCheckTest extends TestCase {
 		$result = $preconditionCheck->checkPreconditions(
 			new RequestData( [
 				'headers' => $headers,
+				'method' => $method,
 			] )
 		);
 
@@ -66,6 +68,12 @@ class RequestPreconditionCheckTest extends TestCase {
 			'headers' => [ 'If-None-Match' => '"41"' ],
 			'revisionMetadataResult' => LatestItemRevisionMetadataResult::concreteRevision( 42, '20201111070707' ),
 			'statusCodeToCheck' => null,
+		];
+		yield 'If-None-Match - non-GET request with wildcard' => [
+			'headers' => [ 'If-None-Match' => '*' ],
+			'revisionMetadataResult' => LatestItemRevisionMetadataResult::concreteRevision( 42, '20201111070707' ),
+			'statusCodeToCheck' => 412,
+			'method' => 'POST',
 		];
 
 		yield 'If-Match - revision id mismatch' => [

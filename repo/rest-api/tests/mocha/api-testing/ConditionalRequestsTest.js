@@ -284,6 +284,16 @@ describe( 'Conditional requests', () => {
 					assert.strictEqual( response.status, 200 );
 				} );
 			} );
+
+			describe( `If-None-Match - ${newRequestBuilder().getRouteDescription()}`, () => {
+				it( 'responds with 412 given a wildcard', async () => {
+					const response = await newRequestBuilder()
+						.withHeader( 'If-None-Match', '*' )
+						.makeRequest();
+
+					assert.strictEqual( response.status, 412 );
+				} );
+			} );
 		} );
 
 	} );
