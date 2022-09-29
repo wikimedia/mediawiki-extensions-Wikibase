@@ -198,6 +198,31 @@ describe( 'Conditional requests', () => {
 				} );
 			} );
 		} );
+
+		describe( 'If-Unmodified-Since', () => {
+			describe( '200 response', () => {
+				it( 'If-Unmodified-Since header is same as current revision', async () => {
+					const response = await newRequestBuilder()
+						.assertValidRequest()
+						.withHeader( 'If-Unmodified-Since', lastModifiedDate )
+						.makeRequest();
+
+					assertValid200Response( response, latestRevisionId, lastModifiedDate );
+				} );
+
+				it( 'If-Unmodified-Since header is after current revision', async () => {
+					const futureDate = new Date(
+						new Date( lastModifiedDate ).getTime() + 5000
+					).toUTCString();
+					const response = await newRequestBuilder()
+						.assertValidRequest()
+						.withHeader( 'If-Unmodified-Since', futureDate )
+						.makeRequest();
+
+					assertValid200Response( response, latestRevisionId, lastModifiedDate );
+				} );
+			} );
+		} );
 	} );
 
 	describe( 'Conditional edit requests', () => {
