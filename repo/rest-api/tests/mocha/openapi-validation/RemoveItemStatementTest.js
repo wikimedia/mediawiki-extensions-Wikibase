@@ -2,21 +2,12 @@
 
 const chai = require( 'chai' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
+const {
+	newRemoveItemStatementRequestBuilder,
+	newRemoveStatementRequestBuilder,
+	newAddItemStatementRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const expect = chai.expect;
-
-function newRemoveStatementRequestBuilder( statementId ) {
-	return new RequestBuilder()
-		.withRoute( 'DELETE', '/statements/{statement_id}' )
-		.withPathParam( 'statement_id', statementId );
-}
-
-function newRemoveItemStatementRequestBuilder( itemId, statementId ) {
-	return new RequestBuilder()
-		.withRoute( 'DELETE', '/entities/items/{item_id}/statements/{statement_id}' )
-		.withPathParam( 'item_id', itemId )
-		.withPathParam( 'statement_id', statementId );
-}
 
 describe( 'validate DELETE endpoints against OpenAPI definition', () => {
 	let testItemId;
@@ -38,14 +29,10 @@ describe( 'validate DELETE endpoints against OpenAPI definition', () => {
 				let testStatementId;
 
 				beforeEach( async () => {
-					testStatementId = ( await new RequestBuilder()
-						.withRoute( 'POST', '/entities/items/{item_id}/statements' )
-						.withPathParam( 'item_id', testItemId )
-						.withHeader( 'content-type', 'application/json' )
-						.withJsonBodyParam(
-							'statement',
-							entityHelper.newStatementWithRandomStringValue( testPropertyId )
-						).makeRequest() ).body.id;
+					testStatementId = ( await newAddItemStatementRequestBuilder(
+						testItemId,
+						entityHelper.newStatementWithRandomStringValue( testPropertyId )
+					).makeRequest() ).body.id;
 				} );
 
 				it( '200 OK response is valid', async () => {

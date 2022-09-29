@@ -8,14 +8,8 @@ const {
 	createUniqueStringProperty,
 	newStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
+const { newGetItemStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const expect = chai.expect;
-
-function newGetItemStatementsRequestBuilder( itemId ) {
-	return new RequestBuilder()
-		.withRoute( 'GET', '/entities/items/{item_id}/statements' )
-		.withPathParam( 'item_id', itemId );
-}
 
 describe( 'validate GET /entities/items/{id}/statements responses against OpenAPI spec', () => {
 

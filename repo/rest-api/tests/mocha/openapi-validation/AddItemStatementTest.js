@@ -1,15 +1,8 @@
 'use strict';
 
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const { createUniqueStringProperty, createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
+const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const expect = require( 'chai' ).expect;
-
-function newAddItemStatementRequestBuilder( itemId, statement ) {
-	return new RequestBuilder()
-		.withRoute( 'POST', '/entities/items/{item_id}/statements' )
-		.withPathParam( 'item_id', itemId )
-		.withJsonBodyParam( 'statement', statement );
-}
 
 describe( 'validate POST /entities/items/{id}/statements', () => {
 

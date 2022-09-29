@@ -1,14 +1,8 @@
 'use strict';
 
 const { createEntity, createRedirectForItem, getLatestEditMetadata } = require( '../helpers/entityHelper' );
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const { assert, utils } = require( 'api-testing' );
-
-function newGetItemRequestBuilder( itemId ) {
-	return new RequestBuilder()
-		.withRoute( 'GET', '/entities/items/{item_id}' )
-		.withPathParam( 'item_id', itemId );
-}
+const { newGetItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );

@@ -1,29 +1,16 @@
 'use strict';
 
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const {
 	createUniqueStringProperty,
 	createItemWithStatements,
 	newStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
 const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
+const {
+	newPatchItemStatementRequestBuilder,
+	newPatchStatementRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const expect = require( 'chai' ).expect;
-
-function newPatchStatementRequestBuilder( statementId, patch ) {
-	return new RequestBuilder()
-		.withRoute( 'PATCH', '/statements/{statement_id}' )
-		.withPathParam( 'statement_id', statementId )
-		.withJsonBodyParam( 'patch', patch )
-		.withHeader( 'content-type', 'application/json-patch+json' );
-}
-
-function newPatchItemStatementRequestBuilder( itemId, statementId, patch ) {
-	return new RequestBuilder()
-		.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
-		.withPathParam( 'item_id', itemId )
-		.withPathParam( 'statement_id', statementId )
-		.withJsonBodyParam( 'patch', patch );
-}
 
 describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 	let testItemId;

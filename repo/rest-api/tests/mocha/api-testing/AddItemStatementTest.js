@@ -2,16 +2,8 @@
 
 const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const formatStatementEditSummary = require( '../helpers/formatStatementEditSummary' );
-
-function newAddItemStatementRequestBuilder( itemId, statement ) {
-	return new RequestBuilder()
-		.withRoute( 'POST', '/entities/items/{item_id}/statements' )
-		.withPathParam( 'item_id', itemId )
-		.withHeader( 'content-type', 'application/json' )
-		.withJsonBodyParam( 'statement', statement );
-}
+const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );

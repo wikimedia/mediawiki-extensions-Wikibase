@@ -1,7 +1,7 @@
 'use strict';
 
 const { assert, action } = require( 'api-testing' );
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
+const rbf = require( '../helpers/RequestBuilderFactory' );
 const {
 	createItemWithStatements,
 	createUniqueStringProperty,
@@ -28,89 +28,71 @@ describe( 'Auth', () => {
 
 	const editRequests = [
 		{
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'POST', '/entities/items/{item_id}/statements' )
-				.withPathParam( 'item_id', itemId )
-				.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( stringPropertyId ) ),
+			newRequestBuilder: () => rbf.newAddItemStatementRequestBuilder(
+				itemId,
+				newStatementWithRandomStringValue( stringPropertyId )
+			),
 			expectedStatusCode: 201
 		},
 		{
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'PUT', '/entities/items/{item_id}/statements/{statement_id}' )
-				.withPathParam( 'item_id', itemId )
-				.withPathParam( 'statement_id', statementId )
-				.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( stringPropertyId ) )
+			newRequestBuilder: () => rbf.newReplaceItemStatementRequestBuilder(
+				itemId,
+				statementId,
+				newStatementWithRandomStringValue( stringPropertyId )
+			)
 		},
 		{
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'PUT', '/statements/{statement_id}' )
-				.withPathParam( 'statement_id', statementId )
-				.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( stringPropertyId ) )
+			newRequestBuilder: () => rbf.newReplaceStatementRequestBuilder(
+				statementId,
+				newStatementWithRandomStringValue( stringPropertyId )
+			)
 		},
 		{
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'DELETE', '/entities/items/{item_id}/statements/{statement_id}' )
-				.withPathParam( 'item_id', itemId )
-				.withPathParam( 'statement_id', statementId ),
+			newRequestBuilder: () => rbf.newRemoveItemStatementRequestBuilder( itemId, statementId ),
 			isDestructive: true
 		},
 		{
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'DELETE', '/statements/{statement_id}' )
-				.withPathParam( 'statement_id', statementId ),
+			newRequestBuilder: () => rbf.newRemoveStatementRequestBuilder( statementId ),
 			isDestructive: true
 		}
 	];
 
 	if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
 		editRequests.push( {
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
-				.withPathParam( 'item_id', itemId )
-				.withPathParam( 'statement_id', statementId )
-				.withJsonBodyParam( 'patch', [
-					{
-						op: 'replace',
-						path: '/mainsnak',
-						value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
-					}
-				] )
+			newRequestBuilder: () => rbf.newPatchItemStatementRequestBuilder(
+				itemId,
+				statementId,
+				[ {
+					op: 'replace',
+					path: '/mainsnak',
+					value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
+				} ]
+			)
 		} );
 		editRequests.push( {
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'PATCH', '/statements/{statement_id}' )
-				.withPathParam( 'statement_id', statementId )
-				.withJsonBodyParam( 'patch', [
-					{
-						op: 'replace',
-						path: '/mainsnak',
-						value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
-					}
-				] )
+			newRequestBuilder: () => rbf.newPatchStatementRequestBuilder(
+				statementId,
+				[ {
+					op: 'replace',
+					path: '/mainsnak',
+					value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
+				} ]
+			)
 		} );
 	}
 
 	[
 		{
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'GET', '/entities/items/{item_id}/statements' )
-				.withPathParam( 'item_id', itemId )
+			newRequestBuilder: () => rbf.newGetItemStatementsRequestBuilder( itemId )
 		},
 		{
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'GET', '/entities/items/{item_id}/statements/{statement_id}' )
-				.withPathParam( 'item_id', itemId )
-				.withPathParam( 'statement_id', statementId )
+			newRequestBuilder: () => rbf.newGetItemStatementRequestBuilder( itemId, statementId )
 		},
 		{
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'GET', '/entities/items/{item_id}' )
-				.withPathParam( 'item_id', itemId )
+			newRequestBuilder: () => rbf.newGetItemRequestBuilder( itemId )
 		},
 		{
-			newRequestBuilder: () => new RequestBuilder()
-				.withRoute( 'GET', '/statements/{statement_id}' )
-				.withPathParam( 'statement_id', statementId )
+			newRequestBuilder: () => rbf.newGetStatementRequestBuilder( statementId )
 		},
 		...editRequests
 	].forEach( ( { newRequestBuilder, expectedStatusCode = 200, isDestructive } ) => {
@@ -118,12 +100,10 @@ describe( 'Auth', () => {
 
 			afterEach( async () => {
 				if ( isDestructive ) {
-					const createStatementResponse = await new RequestBuilder()
-						.withRoute( 'POST', '/entities/items/{item_id}/statements' )
-						.withPathParam( 'item_id', itemId )
-						.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( stringPropertyId ) )
-						.makeRequest();
-					statementId = createStatementResponse.body.id;
+					statementId = ( await rbf.newAddItemStatementRequestBuilder(
+						itemId,
+						newStatementWithRandomStringValue( stringPropertyId )
+					).makeRequest() ).body.id;
 				}
 			} );
 

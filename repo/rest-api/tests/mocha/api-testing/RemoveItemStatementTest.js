@@ -2,21 +2,13 @@
 
 const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const formatStatementEditSummary = require( '../helpers/formatStatementEditSummary' );
-
-function newRemoveItemStatementRequestBuilder( itemId, statementId ) {
-	return new RequestBuilder()
-		.withRoute( 'DELETE', '/entities/items/{item_id}/statements/{statement_id}' )
-		.withPathParam( 'item_id', itemId )
-		.withPathParam( 'statement_id', statementId );
-}
-
-function newRemoveStatementRequestBuilder( statementId ) {
-	return new RequestBuilder()
-		.withRoute( 'DELETE', '/statements/{statement_id}' )
-		.withPathParam( 'statement_id', statementId );
-}
+const {
+	newAddItemStatementRequestBuilder,
+	newRemoveItemStatementRequestBuilder,
+	newRemoveStatementRequestBuilder,
+	newGetStatementRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 describe( 'DELETE statement', () => {
 
@@ -38,23 +30,14 @@ describe( 'DELETE statement', () => {
 				let testStatement;
 
 				async function addStatementWithRandomStringValue( itemId, propertyId ) {
-					const response = await new RequestBuilder()
-						.withRoute( 'POST', '/entities/items/{item_id}/statements' )
-						.withPathParam( 'item_id', itemId )
-						.withHeader( 'content-type', 'application/json' )
-						.withJsonBodyParam(
-							'statement',
-							entityHelper.newStatementWithRandomStringValue( propertyId )
-						).makeRequest();
-
-					return response.body;
+					return ( await newAddItemStatementRequestBuilder(
+						itemId,
+						entityHelper.newStatementWithRandomStringValue( propertyId )
+					).makeRequest() ).body;
 				}
 
 				async function verifyStatementDeleted( statementId ) {
-					const verifyStatement = await new RequestBuilder()
-						.withRoute( 'GET', '/statements/{statement_id}' )
-						.withPathParam( 'statement_id', statementId )
-						.makeRequest();
+					const verifyStatement = await newGetStatementRequestBuilder( statementId ).makeRequest();
 
 					assert.equal( verifyStatement.status, 404 );
 

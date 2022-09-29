@@ -2,23 +2,12 @@
 
 const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
 const formatStatementEditSummary = require( '../helpers/formatStatementEditSummary' );
-
-function newReplaceStatementRequestBuilder( statementId, statement ) {
-	return new RequestBuilder()
-		.withRoute( 'PUT', '/statements/{statement_id}' )
-		.withPathParam( 'statement_id', statementId )
-		.withJsonBodyParam( 'statement', statement );
-}
-
-function newReplaceItemStatementRequestBuilder( itemId, statementId, statement ) {
-	return new RequestBuilder()
-		.withRoute( 'PUT', '/entities/items/{item_id}/statements/{statement_id}' )
-		.withPathParam( 'item_id', itemId )
-		.withPathParam( 'statement_id', statementId )
-		.withJsonBodyParam( 'statement', statement );
-}
+const {
+	newReplaceItemStatementRequestBuilder,
+	newReplaceStatementRequestBuilder,
+	newGetItemStatementsRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
@@ -171,10 +160,9 @@ describe( 'PUT statement tests', () => {
 						newSecondStatement
 					).makeRequest();
 
-					const actualSecondStatement = ( await new RequestBuilder()
-						.withRoute( 'GET', '/entities/items/{item_id}/statements' )
-						.withPathParam( 'item_id', newTestItem.id )
-						.makeRequest() ).body[ testPropertyId ][ 1 ];
+					const actualSecondStatement = ( await newGetItemStatementsRequestBuilder(
+						newTestItem.id
+					).makeRequest() ).body[ testPropertyId ][ 1 ];
 
 					assert.strictEqual( actualSecondStatement.id, originalSecondStatement.id );
 					assert.strictEqual(

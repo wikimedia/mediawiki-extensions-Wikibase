@@ -2,20 +2,10 @@
 
 const { assert } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
-
-function newGetItemStatementRequestBuilder( itemId, statementId ) {
-	return new RequestBuilder()
-		.withRoute( 'GET', '/entities/items/{item_id}/statements/{statement_id}' )
-		.withPathParam( 'item_id', itemId )
-		.withPathParam( 'statement_id', statementId );
-}
-
-function newGetStatementRequestBuilder( statementId ) {
-	return new RequestBuilder()
-		.withRoute( 'GET', '/statements/{statement_id}' )
-		.withPathParam( 'statement_id', statementId );
-}
+const {
+	newGetItemStatementRequestBuilder,
+	newGetStatementRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );

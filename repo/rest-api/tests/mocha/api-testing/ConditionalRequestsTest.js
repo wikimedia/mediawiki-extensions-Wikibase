@@ -1,7 +1,7 @@
 'use strict';
 
 const { assert } = require( 'api-testing' );
-const { RequestBuilder } = require( '../helpers/RequestBuilder' );
+const rbf = require( '../helpers/RequestBuilderFactory' );
 const {
 	getLatestEditMetadata,
 	newStatementWithRandomStringValue,
@@ -9,6 +9,8 @@ const {
 	createItemWithStatements
 } = require( '../helpers/entityHelper' );
 const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
+const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const entityHelper = require( '../helpers/entityHelper' );
 
 function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
@@ -48,19 +50,10 @@ describe( 'Conditional requests', () => {
 	} );
 
 	[
-		() => new RequestBuilder()
-			.withRoute( 'GET', '/entities/items/{item_id}' )
-			.withPathParam( 'item_id', itemId ),
-		() => new RequestBuilder()
-			.withRoute( 'GET', '/entities/items/{item_id}/statements' )
-			.withPathParam( 'item_id', itemId ),
-		() => new RequestBuilder()
-			.withRoute( 'GET', '/entities/items/{item_id}/statements/{statement_id}' )
-			.withPathParam( 'item_id', itemId )
-			.withPathParam( 'statement_id', statementId ),
-		() => new RequestBuilder()
-			.withRoute( 'GET', '/statements/{statement_id}' )
-			.withPathParam( 'statement_id', statementId )
+		() => rbf.newGetItemRequestBuilder( itemId ),
+		() => rbf.newGetItemStatementsRequestBuilder( itemId ),
+		() => rbf.newGetItemStatementsRequestBuilder( itemId, statementId ),
+		() => rbf.newGetStatementRequestBuilder( statementId )
 	].forEach( ( newRequestBuilder ) => {
 		describe( `If-None-Match - ${newRequestBuilder().getRouteDescription()}`, () => {
 			describe( '200 response', () => {
@@ -211,12 +204,10 @@ describe( 'Conditional requests', () => {
 
 		beforeEach( async () => {
 			// restore the item state in between tests that may or may not edit its data
-			const addStatementResponse = await new RequestBuilder()
-				.withRoute( 'POST', '/entities/items/{item_id}/statements' )
-				.withPathParam( 'item_id', itemId )
-				.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( statementPropertyId ) )
-				.makeRequest();
-			statementId = addStatementResponse.body.id;
+			statementId = ( await newAddItemStatementRequestBuilder(
+				itemId,
+				entityHelper.newStatementWithRandomStringValue( statementPropertyId )
+			).makeRequest() ).body.id;
 
 			const testItemCreationMetadata = await getLatestEditMetadata( itemId );
 			lastModifiedDate = new Date( testItemCreationMetadata.timestamp );
@@ -224,46 +215,37 @@ describe( 'Conditional requests', () => {
 		} );
 
 		const editRoutes = [
-			() => new RequestBuilder()
-				.withRoute( 'PUT', '/statements/{statement_id}' )
-				.withPathParam( 'statement_id', statementId )
-				.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( statementPropertyId ) ),
-			() => new RequestBuilder()
-				.withRoute( 'PUT', '/entities/items/{item_id}/statements/{statement_id}' )
-				.withPathParam( 'item_id', itemId )
-				.withPathParam( 'statement_id', statementId )
-				.withJsonBodyParam( 'statement', newStatementWithRandomStringValue( statementPropertyId ) ),
-			() => new RequestBuilder()
-				.withRoute( 'DELETE', '/statements/{statement_id}' )
-				.withPathParam( 'statement_id', statementId ),
-			() => new RequestBuilder()
-				.withRoute( 'DELETE', '/entities/items/{item_id}/statements/{statement_id}' )
-				.withPathParam( 'item_id', itemId )
-				.withPathParam( 'statement_id', statementId )
+			() => rbf.newReplaceStatementRequestBuilder(
+				statementId,
+				newStatementWithRandomStringValue( statementPropertyId )
+			),
+			() => rbf.newReplaceItemStatementRequestBuilder(
+				itemId,
+				statementId,
+				newStatementWithRandomStringValue( statementPropertyId )
+			),
+			() => rbf.newRemoveStatementRequestBuilder( statementId ),
+			() => rbf.newRemoveItemStatementRequestBuilder( itemId, statementId )
 		];
 
 		if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
-			editRoutes.push( () => new RequestBuilder()
-				.withRoute( 'PATCH', '/entities/items/{item_id}/statements/{statement_id}' )
-				.withPathParam( 'item_id', itemId )
-				.withPathParam( 'statement_id', statementId )
-				.withJsonBodyParam( 'patch', [
-					{
-						op: 'replace',
-						path: '/mainsnak',
-						value: newStatementWithRandomStringValue( statementPropertyId ).mainsnak
-					}
-				] ) );
-			editRoutes.push( () => new RequestBuilder()
-				.withRoute( 'PATCH', '/statements/{statement_id}' )
-				.withPathParam( 'statement_id', statementId )
-				.withJsonBodyParam( 'patch', [
-					{
-						op: 'replace',
-						path: '/mainsnak',
-						value: newStatementWithRandomStringValue( statementPropertyId ).mainsnak
-					}
-				] ) );
+			editRoutes.push( () => rbf.newPatchItemStatementRequestBuilder(
+				itemId,
+				statementId,
+				[ {
+					op: 'replace',
+					path: '/mainsnak',
+					value: newStatementWithRandomStringValue( statementPropertyId ).mainsnak
+				} ]
+			) );
+			editRoutes.push( () => rbf.newPatchStatementRequestBuilder(
+				statementId,
+				[ {
+					op: 'replace',
+					path: '/mainsnak',
+					value: newStatementWithRandomStringValue( statementPropertyId ).mainsnak
+				} ]
+			) );
 		}
 
 		editRoutes.forEach( ( newRequestBuilder ) => {
