@@ -4,20 +4,20 @@
  - Generated with Doxygen ([manual](http://www.doxygen.nl/manual))
  - Configuration: Doxyfile (in the root of this repo)
 
-Mainpage.md is the main entry point to the generated documentation site.
+[docs/index.md](index.md) is the main entry point to the generated documentation site.
 
 ### Generating doc site locally
 
 You can use the composer command ```composer doxygen-docker```.
-This will generate the static HTML for the docs site in `docs/php` in this repo.
+This will generate the static HTML for the docs site in the `docs/php` directory of this repo.
 
-The command uses the `docker-registry.wikimedia.org/releng/doxygen:latest` docker image.
+The command uses the [`docker-registry.wikimedia.org/releng/doxygen:latest`][releng/doxygen] docker image ([releng/doxygen source]).
 
 ### Structure
 
-The structure of the site is dictated by the subpage relations.
+The structure of the site is dictated by the [`@subpage`] relations.
 
-The top level of the tree of pages is Mainpage.md
+The top level of the tree of pages is [docs/index.md](index.md).
 
 ### Markdown
 
@@ -27,14 +27,32 @@ Markdown documentation: http://doxygen.nl/manual/markdown.html
 
 The easiest way to link to another markdown file it to use md_ prefixed reference and add the full link to the bottom of the file.
 
-```md
-Foo bar baz [wbc_entity_usage] talks about the [wbc_entity_usage] table.
+NOTE: special characters, including dash (`-`), are replaces with an underscore (`_`) - see example below.
 
-[wbc_entity_usage]: @ref md_docs_sql_wbc_entity_usage
+```md
+Basic link to the [Data Access] page. The text between the square brackets is used as the link text.\n
+Link to the [Wikibase Client][wb-client] page with custom link text (markdown version).\n
+Link to the [wb-repo] page with custom link text (`@ref` version).\n
+
+[Data Access]: @ref md_docs_components_data_access
+[wb-client]: @ref md_docs_components_client
+[wb-repo]: @ref md_docs_components_repo "Wikibase Repo"
 ```
 
+The example above will render as between the horizontal lines below:
+
+- - -
+Basic link to the [Data Access] page. The text between the square brackets is used as the link text.\n
+Link to the [Wikibase Client][wb-client] page with custom link text (markdown version).\n
+Link to the [wb-repo] page with custom link text (`@ref` version).\n
+
+[Data Access]: @ref md_docs_components_data_access
+[wb-client]: @ref md_docs_components_client
+[wb-repo]: @ref md_docs_components_repo "Wikibase Repo"
+- - -
+
 This allows the main text to be easily read while only having to specify the target once.
-This also avoid manually maintaining [header attributes](http://doxygen.nl/manual/markdown.html#md_header_id) at the top of files.
+This also avoids manually maintaining [header attributes] at the top of files.
 
 ### Diagrams
 
@@ -53,3 +71,8 @@ The ones we currently use are listed below:
  - Spec docs: http://www.mcternan.me.uk/mscgen/
  - Visual tool: https://mscgen.js.org/
  - Example: @ref md_docs_topics_change-propagation
+
+[header attributes]: http://doxygen.nl/manual/markdown.html#md_header_id
+[releng/doxygen]: https://docker-registry.wikimedia.org/releng/doxygen/tags/
+[releng/doxygen source]: https://gerrit.wikimedia.org/r/plugins/gitiles/integration/config/+/refs/heads/master/dockerfiles/doxygen/
+[`@subpage`]: https://doxygen.nl/manual/commands.html#cmdsubpage
