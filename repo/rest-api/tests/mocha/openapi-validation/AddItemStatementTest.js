@@ -69,4 +69,14 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
+	it( '412 - precondition failed', async () => {
+		const yesterday = new Date( Date.now() - 24 * 60 * 60 * 1000 ).toUTCString();
+		const response = await newAddItemStatementRequestBuilder( itemId, validStatementSerialization )
+			.withHeader( 'If-Unmodified-Since', yesterday )
+			.makeRequest();
+
+		expect( response.status ).to.equal( 412 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
 } );

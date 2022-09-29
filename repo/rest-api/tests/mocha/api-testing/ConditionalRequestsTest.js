@@ -225,7 +225,11 @@ describe( 'Conditional requests', () => {
 				newStatementWithRandomStringValue( statementPropertyId )
 			),
 			() => rbf.newRemoveStatementRequestBuilder( statementId ),
-			() => rbf.newRemoveItemStatementRequestBuilder( itemId, statementId )
+			() => rbf.newRemoveItemStatementRequestBuilder( itemId, statementId ),
+			() => rbf.newAddItemStatementRequestBuilder(
+				itemId,
+				newStatementWithRandomStringValue( statementPropertyId )
+			)
 		];
 
 		if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
@@ -258,12 +262,15 @@ describe( 'Conditional requests', () => {
 					assert.strictEqual( response.status, 412 );
 				} );
 
-				it( 'responds with 200 and makes the edit given the latest revision id', async () => {
+				it( 'responds with 2xx and makes the edit given the latest revision id', async () => {
 					const response = await newRequestBuilder()
 						.withHeader( 'If-Match', makeEtag( latestRevisionId ) )
 						.makeRequest();
 
-					assert.strictEqual( response.status, 200 );
+					assert.ok(
+						response.status >= 200 && response.status < 300,
+						`expected 2xx status, but got ${response.status}`
+					);
 				} );
 			} );
 
@@ -276,12 +283,15 @@ describe( 'Conditional requests', () => {
 					assert.strictEqual( response.status, 412 );
 				} );
 
-				it( 'responds with 200 and makes the edit given the latest modified date', async () => {
+				it( 'responds with 2xx and makes the edit given the latest modified date', async () => {
 					const response = await newRequestBuilder()
 						.withHeader( 'If-Unmodified-Since', lastModifiedDate )
 						.makeRequest();
 
-					assert.strictEqual( response.status, 200 );
+					assert.ok(
+						response.status >= 200 && response.status < 300,
+						`expected 2xx status, but got ${response.status}`
+					);
 				} );
 			} );
 
