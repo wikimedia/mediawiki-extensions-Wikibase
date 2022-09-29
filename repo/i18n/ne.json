@@ -61,7 +61,7 @@
 	"wikibase-snakformat-invalid-value": "अमान्य मान।",
 	"wikibase-entityselector-more": "थप",
 	"wikibase-entityselector-notfound": "कुनै पनि मिल्दोजुल्दो सामग्री फेला परेन",
-	"wikibase-anonymouseditwarning-message": "यदि तपाईले कुनै सम्पादन गर्नुभयो भने तपाईको आइपी ठेगाना सार्वजनिक रुपमा देखिनेछ। यदि तपाई प्रवेश गर्नुहुन्छ वा खाता सृजना गर्नुहुन्छ भने, अन्य फाइदाहरूका बीच तपाईका सम्पादनहरूले तपाईको प्रयोगकर्तानामलाई श्रेय दिनेछ।",
+	"wikibase-anonymouseditwarning-message": "यदि तपाईंले कुनै सम्पादन गर्नुभयो भने तपाईको आइपी ठेगाना सार्वजनिक रुपमा देखिनेछ। यदि तपाईं प्रवेश गर्नुहुन्छ वा खाता सृजना गर्नुहुन्छ भने, अन्य फाइदाहरूका बीच तपाईका सम्पादनहरूले तपाईंको प्रयोगकर्तानामलाई श्रेय दिनेछ।",
 	"wikibase-validator-invalid": "गलत मिति",
 	"wikibase-itembytitle-lookup-site": "स्थान :",
 	"wikibase-itembytitle-lookup-page": "पृष्ठ:",
