@@ -1,6 +1,6 @@
 Stores a record per term text per language.
 
-Part of the \ref md_docs_storage_terms storage system.
+Part of the @ref md_docs_storage_terms storage system.
 
 **Fields:**
 

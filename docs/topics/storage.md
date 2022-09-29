@@ -13,16 +13,16 @@
 
 **Repo**
 
-* \ref md_docs_topics_change-propagation
+* @ref md_docs_topics_change-propagation
   * @subpage md_docs_sql_wb_changes
   * @subpage md_docs_sql_wb_changes_subscription
-* \ref md_docs_storage_id-counters
+* @ref md_docs_storage_id-counters
   * @subpage md_docs_sql_wb_id_counters
-* \ref md_docs_storage_sitelinks
+* @ref md_docs_storage_sitelinks
   * @subpage md_docs_sql_wb_items_per_site
-* \ref md_docs_storage_propertyinfo
+* @ref md_docs_storage_propertyinfo
   * @subpage md_docs_sql_wb_property_info
-* \ref md_docs_storage_terms
+* @ref md_docs_storage_terms
   * @subpage md_docs_sql_wbt_item_terms
   * @subpage md_docs_sql_wbt_property_terms
   * @subpage md_docs_sql_wbt_term_in_lang
@@ -32,8 +32,8 @@
 
 **Client**
 
-* \ref md_docs_topics_change-propagation
-  * @subpage md_docs_sql_wbc_entity_usage (See also \ref md_docs_topics_usagetracking)
+* @ref md_docs_topics_change-propagation
+  * @subpage md_docs_sql_wbc_entity_usage (See also @ref md_docs_topics_usagetracking)
 
 ## Existing table changes
 

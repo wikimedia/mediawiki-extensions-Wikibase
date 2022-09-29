@@ -53,7 +53,7 @@ The overall syntax of the JSON “data” blob you must provide in an edit reque
 
 Statements must be provided via the element key “claims”. This is for compatibility with older versions of the Wikibase software.
 
-* To add a statement, provide a full statement serialization as supported by the StatementDeserializer in the [https://github.com/wmde/WikibaseDataModelSerialization Wikibase DataModel Serialization component]. See @ref md_docs_topics_json.
+* To add a statement, provide a full statement serialization as supported by the StatementDeserializer in the [Wikibase DataModel Serialization] component. See the [JSON topic].
 * To edit an existing statement, do as above and make sure to include the “id” of the existing statement.
 * To remove a statement, you must provide its “id” and the key “remove”. The content of the “remove” element can be whatever you want, typically an empty string.
 
@@ -83,5 +83,8 @@ Each sitelink can contain as many badges as you want, but typically contains at 
 
 ## See also
 
-* @ref md_docs_topics_json for a detailed description of the canonical JSON format used to represent Wikibase entities.
+* The [JSON topic] for a detailed description of the canonical JSON format used to represent Wikibase entities.
 * https://www.wikidata.org/wiki/Wikidata:Stable_Interface_Policy
+
+[Wikibase DataModel Serialization]: https://github.com/wmde/WikibaseDataModelSerialization
+[JSON topic]: @ref md_docs_topics_json

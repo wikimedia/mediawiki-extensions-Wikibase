@@ -154,7 +154,7 @@ Parameters:
 
 #### WikibaseClientSiteLinksForItem {#WikibaseClientSiteLinksForItem}
 Called by [OtherProjectsSidebarGenerator] to allow altering the sitelinks used
-in language links and the other projects sidebar.
+in language links and the other project's sidebar.
 Only called in case the page we are on is linked with an item.
 
 Parameters:
@@ -176,5 +176,6 @@ Parameters:
 [HookChangeTransmitter]: @ref Wikibase::Repo::Notifications::HookChangeTransmitter
 [OtherProjectsSidebarGenerator]: @ref Wikibase::Client::Hooks::OtherProjectsSidebarGenerator
 [ChangeHandler::handleChange()]: @ref Wikibase::Client::Changes::ChangeHandler::handleChange()
+[UsageAccumulator]: @ref Wikibase::Client::Usage::UsageAccumulator
 [entitytypes documentation]: @ref md_docs_topics_entitytypes
 [datatypes documentation]: @ref md_docs_topics_datatypes

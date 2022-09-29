@@ -2,7 +2,7 @@ Stores a record per term per item per language.
 This table is expected to be the tallest in this group of tables.
 This table is very similar to / identical to [wbt_property_terms], but for items.
 
-Part of the \ref md_docs_storage_terms storage system.
+Part of the @ref md_docs_storage_terms storage system.
 
 **Fields:**
 

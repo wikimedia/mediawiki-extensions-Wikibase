@@ -2,7 +2,7 @@ The change buffer holds information about each change, stored in the wb_changes 
 This is similar to MediaWiki's recentchanges table.
 The table structure is as follows:
 
-Part of the \ref md_docs_topics_change-propagation system on a Repo.
+Part of the @ref md_docs_topics_change-propagation system on a Repo.
 
 **Fields:**
 
