@@ -69,7 +69,7 @@ Properties will not include sitelinks, but will include a datatype.
 {
   "id": "P30",
   "type": "property",
-  "datatype": "wikibase-item"
+  "datatype": "wikibase-item",
   "labels": {},
   "descriptions": {},
   "aliases": {},
@@ -134,50 +134,50 @@ API modules also often return extra information related to the entity and the wi
 ```json
 {
   "labels": {
-"en": {
-  "language": "en",
-  "value": "New York City"
-},
-"ar": {
-  "language": "ar",
-  "value": "\u0645\u062f\u064a\u0646\u0629 \u0646\u064a\u0648 \u064a\u0648\u0631\u0643"
-}
+    "en": {
+    "language": "en",
+      "value": "New York City"
+    },
+    "ar": {
+      "language": "ar",
+      "value": "\u0645\u062f\u064a\u0646\u0629 \u0646\u064a\u0648 \u064a\u0648\u0631\u0643"
+    }
   },
   "descriptions": {
-"en": {
-  "language": "en",
-  "value": "largest city in New York and the United States of America"
-},
-"it": {
-  "language": "it",
-  "value": "citt\u00e0 degli Stati Uniti d'America"
-}
+    "en": {
+      "language": "en",
+      "value": "largest city in New York and the United States of America"
+    },
+    "it": {
+      "language": "it",
+      "value": "citt\u00e0 degli Stati Uniti d'America"
+    }
   },
   "aliases": {
-"en": [
-  {
-	"language": "en",
-	"value": "New York"
-  },
-],
-"fr": [
-  {
-	"language": "fr",
-	"value": "New York City"
-  },
-  {
-	"language": "fr",
-	"value": "NYC"
-  },
-  {
-	"language": "fr",
-	"value": "The City"
-  },
-  {
-	"language": "fr",
-	"value": "La grosse pomme"
-  }
-]
+    "en": [
+      {
+        "language": "en",
+        "value": "New York"
+      }
+    ],
+    "fr": [
+      {
+        "language": "fr",
+        "value": "New York City"
+      },
+      {
+        "language": "fr",
+        "value": "NYC"
+      },
+      {
+        "language": "fr",
+        "value": "The City"
+      },
+      {
+        "language": "fr",
+        "value": "La grosse pomme"
+      }
+    ]
   }
 }
 ```
@@ -198,24 +198,24 @@ while for labels and descriptions the record is associated directly with the lan
 ```json
 {
   "claims": {
-	"P17": [
-	  {
-		"id": "q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB",
-		"mainsnak": {},
-		"type": "statement",
-		"rank": "normal",
-		"qualifiers": {
-		  "P580": [],
-		  "P5436": []
-		 }
-		"references": [
-		   {
-			 "hash": "d103e3541cc531fa54adcaffebde6bef28d87d32",
-			 "snaks": []
-		   }
-		 ]
-	  }
-	]
+    "P17": [
+      {
+        "id": "q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB",
+        "mainsnak": {},
+        "type": "statement",
+        "rank": "normal",
+        "qualifiers": {
+          "P580": [],
+          "P5436": []
+        },
+        "references": [
+          {
+            "hash": "d103e3541cc531fa54adcaffebde6bef28d87d32",
+            "snaks": []
+          }
+        ]
+      }
+    ]
   }
 }
 ```
@@ -247,42 +247,42 @@ Traces of this distinction may still be found in the serialization or in outdate
 ```json
 {
   "claims": {
-	"P17": [
-	  {
-		"mainsnak": {
-		  "snaktype": "value",
-		  "property": "P17",
-		  "datatype": "wikibase-item",
-		  "datavalue": {
-			"value": {
-			  "entity-type": "item",
-			  "id": "Q30",
-			  "numeric-id": 30
-			},
-			"type": "wikibase-entityid"
-		  }
-		},
-	  },
-	  {
-		"mainsnak": {
-		  "snaktype": "somevalue",
-		  "property": "P17",
-		},
-	  }
-	],
-	"P356": [
-	  {
-		"mainsnak": {
-		  "snaktype": "value",
-		  "property": "P356",
-		  "datatype": "string",
-		  "datavalue": {
-			"value": "SomePicture.jpg",
-			"type": "string"
-		  }
-		},
-	  }
-	]
+    "P17": [
+      {
+        "mainsnak": {
+          "snaktype": "value",
+          "property": "P17",
+          "datatype": "wikibase-item",
+          "datavalue": {
+            "value": {
+              "entity-type": "item",
+              "id": "Q30",
+              "numeric-id": 30
+            },
+            "type": "wikibase-entityid"
+          }
+        }
+      },
+      {
+        "mainsnak": {
+          "snaktype": "somevalue",
+          "property": "P17"
+        }
+      }
+    ],
+    "P356": [
+      {
+        "mainsnak": {
+          "snaktype": "value",
+          "property": "P356",
+          "datatype": "string",
+          "datavalue": {
+            "value": "SomePicture.jpg",
+            "type": "string"
+          }
+        }
+      }
+    ]
   }
 }
 ```
@@ -303,20 +303,24 @@ A Snak is represented by providing the following fields:
 #### Data Values {#json_datavalues}
 
 ```json
-"datavalue": {
-  "value": {
-	"entity-type": "item",
-	"id": "Q30",
-	"numeric-id": 30
-  },
-  "type": "wikibase-entityid"
+{
+  "datavalue": {
+    "value": {
+      "entity-type": "item",
+      "id": "Q30",
+      "numeric-id": 30
+    },
+    "type": "wikibase-entityid"
+  }
 }
 ```
 
 ```json
-"datavalue": {
-  "value": "SomePicture.jpg",
-  "type": "string"
+{
+  "datavalue": {
+    "value": "SomePicture.jpg",
+    "type": "string"
+  }
 }
 ```
 
@@ -332,9 +336,11 @@ Some value types and their structure are defined in the following sections.
 ##### string {#json_datavalues_string}
 
 ```json
-"datavalue": {
-  "value": "SomePicture.jpg",
-  "type": "string"
+{
+  "datavalue": {
+    "value": "SomePicture.jpg",
+    "type": "string"
+  }
 }
 ```
 
@@ -343,13 +349,15 @@ Strings are given as simple string literals.
 ##### wikibase-entityid {#json_datavalues_entityid}
 
 ```json
-"datavalue": {
-  "value": {
-	"entity-type": "item",
-	"id": "Q30",
-	"numeric-id": 30
-  },
-  "type": "wikibase-entityid"
+{
+  "datavalue": {
+    "value": {
+      "entity-type": "item",
+      "id": "Q30",
+      "numeric-id": 30
+    },
+    "type": "wikibase-entityid"
+  }
 }
 ```
 
@@ -365,15 +373,17 @@ by a map structure containing three fields:
 ##### globecoordinate {#json_datavalues_globe}
 
 ```json
-"datavalue": {
-  "value": {
-	"latitude": 52.516666666667,
-	"longitude": 13.383333333333,
-	"altitude": null,
-	"precision": 0.016666666666667,
-	"globe": "http:\/\/www.wikidata.org\/entity\/Q2"
-  },
-  "type": "globecoordinate"
+{
+  "datavalue": {
+    "value": {
+      "latitude": 52.516666666667,
+      "longitude": 13.383333333333,
+      "altitude": null,
+      "precision": 0.016666666666667,
+      "globe": "http:\/\/www.wikidata.org\/entity\/Q2"
+    },
+    "type": "globecoordinate"
+  }
 }
 ```
 
@@ -391,14 +401,16 @@ by a map structure containing three fields:
 ##### quantity {#json_datavalues_quantity}
 
 ```json
-"datavalue": {
-  "value":{
-	"amount":"+10.38",
-	"upperBound":"+10.375",
-	"lowerBound":"+10.385",
-	"unit":"http://www.wikidata.org/entity/Q712226"
-  },
-  "type":"quantity"
+{
+  "datavalue": {
+    "value": {
+      "amount": "+10.38",
+      "upperBound": "+10.375",
+      "lowerBound": "+10.385",
+      "unit": "http://www.wikidata.org/entity/Q712226"
+    },
+    "type": "quantity"
+  }
 }
 ```
 
@@ -416,16 +428,18 @@ Quantity values are given as a map with the following fields:
 ##### time {#json_datavalues_time}
 
 ```json
-"datavalue": {
-  "value": {
-	"time": "+2001-12-31T00:00:00Z",
-	"timezone": 0,
-	"before": 0,
-	"after": 0,
-	"precision": 11,
-	"calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
-  },
-  "type": "time"
+{
+  "datavalue": {
+    "value": {
+      "time": "+2001-12-31T00:00:00Z",
+      "timezone": 0,
+      "before": 0,
+      "after": 0,
+      "precision": 11,
+      "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+    },
+    "type": "time"
+  }
 }
 ```
 
@@ -465,45 +479,47 @@ Time values are given as a map with the following fields:
 ### Qualifiers {#json_qualifiers}
 
 ```json
-"qualifiers": {
-  "P580": [
-	{
-	  "hash": "sssde3541cc531fa54adcaffebde6bef28g6hgjd",
-	  "snaktype": "value",
-	  "property": "P580",
-	  "datatype": "time",
-	  "datavalue": {
-"value": {
-  "time": "+00000001994-01-01T00:00:00Z",
-  "timezone": 0,
-  "before": 0,
-  "after": 0,
-  "precision": 11,
-  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
-},
-"type": "time"
-	  }
-	}
-  ],
-  "P582": [
-	{
-	  "hash": "f803e3541cc531fa54n7a9ffebde6bef28d87ddv",
-	  "snaktype": "value",
-	  "property": "P582",
-	  "datatype": "time",
-	  "datavalue": {
-"value": {
-  "time": "+00000002001-12-31T00:00:00Z",
-  "timezone": 0,
-  "before": 0,
-  "after": 0,
-  "precision": 11,
-  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
-},
-"type": "time"
-	  }
-	}
-  ]
+{
+  "qualifiers": {
+    "P580": [
+      {
+        "hash": "sssde3541cc531fa54adcaffebde6bef28g6hgjd",
+        "snaktype": "value",
+        "property": "P580",
+        "datatype": "time",
+        "datavalue": {
+          "value": {
+            "time": "+00000001994-01-01T00:00:00Z",
+            "timezone": 0,
+            "before": 0,
+            "after": 0,
+            "precision": 11,
+            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+          },
+          "type": "time"
+        }
+      }
+    ],
+    "P582": [
+      {
+        "hash": "f803e3541cc531fa54n7a9ffebde6bef28d87ddv",
+        "snaktype": "value",
+        "property": "P582",
+        "datatype": "time",
+        "datavalue": {
+          "value": {
+            "time": "+00000002001-12-31T00:00:00Z",
+            "timezone": 0,
+            "before": 0,
+            "after": 0,
+            "precision": 11,
+            "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+          },
+          "type": "time"
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -514,45 +530,45 @@ resulting in a map which associates property IDs with one list of snaks each.
 ### References {#json_references}
 
 ```json
+{
   "references": [
-      {
-          "hash": "7eb64cf9621d34c54fd4bd040ed4b61a88c4a1a0",
-          "snaks": {
-              "P143": [
-                  {
-                      "snaktype": "value",
-                      "property": "P143",
-                      "datatype": "wikibase-item",
-                      "datavalue": {
-                          "value": {
-                              "entity-type": "item",
-                              "id": "Q328",
-                              "numeric-id": 328
-                          },
-                          "type": "wikibase-entityid"
-                      }
-                  }
-              ],
-              "P854": [
-                  {
-                      "snaktype": "value",
-                      "property": "P854",
-                      "datatype": "url",
-                      "datavalue": {
-                          "value": "http: //www.nytimes.com/2002/01/02/opinion/the-bloomberg-era-begins.html",
-                          "type": "string"
-                      }
-                  }
-              ]
-          },
-          "snaks-order": [
-              "P143",
-              "P854"
-          ]
-      }
-    ]
-  }
-]
+    {
+      "hash": "7eb64cf9621d34c54fd4bd040ed4b61a88c4a1a0",
+      "snaks": {
+        "P143": [
+          {
+            "snaktype": "value",
+            "property": "P143",
+            "datatype": "wikibase-item",
+            "datavalue": {
+              "value": {
+                "entity-type": "item",
+                "id": "Q328",
+                "numeric-id": 328
+              },
+              "type": "wikibase-entityid"
+            }
+          }
+        ],
+        "P854": [
+          {
+            "snaktype": "value",
+            "property": "P854",
+            "datatype": "url",
+            "datavalue": {
+              "value": "http: //www.nytimes.com/2002/01/02/opinion/the-bloomberg-era-begins.html",
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "snaks-order": [
+        "P143",
+        "P854"
+      ]
+    }
+  ]
+}
 ```
 
 References provide provenance/authority information for the main Snak and qualifiers of an individual Statement.
@@ -565,35 +581,35 @@ using the property IDs as keys. By *snaks-order* the order of those snaks is sho
 ```json
 {
   "sitelinks": {
-	"afwiki": {
-	  "site": "afwiki",
-	  "title": "New York Stad",
-	  "badges": []
-	},
-	"frwiki": {
-	  "site": "frwiki",
-	  "title": "New York City",
-	  "badges": []
-	},
-	"nlwiki": {
-	  "site": "nlwiki",
-	  "title": "New York City",
-	  "badges": [
-		"Q17437796"
-	  ]
-	},
-	"enwiki": {
-	  "site": "enwiki",
-	  "title": "New York City",
-	  "badges": []
-	},
-	"dewiki": {
-	  "site": "dewiki",
-	  "title": "New York City",
-	  "badges": [
-		"Q17437798"
-	  ]
-	}
+    "afwiki": {
+      "site": "afwiki",
+      "title": "New York Stad",
+      "badges": []
+    },
+    "frwiki": {
+      "site": "frwiki",
+      "title": "New York City",
+      "badges": []
+    },
+    "nlwiki": {
+      "site": "nlwiki",
+      "title": "New York City",
+      "badges": [
+        "Q17437796"
+      ]
+    },
+    "enwiki": {
+      "site": "enwiki",
+      "title": "New York City",
+      "badges": []
+    },
+    "dewiki": {
+      "site": "dewiki",
+      "title": "New York City",
+      "badges": [
+        "Q17437798"
+      ]
+    }
   }
 }
 ```
