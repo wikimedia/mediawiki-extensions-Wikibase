@@ -690,6 +690,21 @@ abstract class EntityHandler extends ContentHandler {
 		$fieldsData = parent::getDataForSearchIndex( $page, $parserOutput, $engine, $revision );
 
 		$content = $revision != null ? $revision->getContent( SlotRecord::MAIN ) : $page->getContent();
+		return $this->getContentDataForSearchIndex( $content ) + $fieldsData;
+	}
+
+	/**
+	 * Extract fields data for the search index but only the fields
+	 * related to the slot content.
+	 * Useful for EntityHandlers that may work on non-main slot contents.
+	 *
+	 * @stable to override
+	 * @param Content $content the Content to extract search data from
+	 * @return array fields to be indexed by the search engine
+	 * @throws MWException
+	 */
+	public function getContentDataForSearchIndex( Content $content ): array {
+		$fieldsData = [];
 		if ( ( $content instanceof EntityContent ) && !$content->isRedirect() ) {
 			$entity = $content->getEntity();
 			$fields = $this->fieldDefinitions->getFields();
@@ -698,7 +713,6 @@ abstract class EntityHandler extends ContentHandler {
 				$fieldsData[$fieldName] = $field->getFieldData( $entity );
 			}
 		}
-
 		return $fieldsData;
 	}
 
