@@ -142,7 +142,7 @@ class UnexpectedUnconnectedPagePrimer {
 	}
 
 	/**
-	 * @return int Number of changes performed.
+	 * @return int The number of pages affected.
 	 */
 	private function processUnexpectedUnconnectedBatch() {
 		$pages = $this->getUnexpectedUnconnectedBatch();
@@ -158,7 +158,7 @@ class UnexpectedUnconnectedPagePrimer {
 	/**
 	 * @param int[][] $pages Page id, page namespace pairs
 	 *
-	 * @return int The number of rows affected.
+	 * @return int The number of pages affected.
 	 */
 	private function persistUnexpectedUnconnectedBatch( array $pages ): int {
 		$rows = $this->makeUnexpectedUnconnectedRows( $pages );
@@ -173,10 +173,9 @@ class UnexpectedUnconnectedPagePrimer {
 			__METHOD__
 		);
 
-		$count = $dbw->affectedRows();
 		$dbw->endAtomic( __METHOD__ );
 
-		return $count;
+		return count( $rows );
 	}
 
 	/**
