@@ -15,43 +15,31 @@ jobs:
             DBTYPE: sqlite
             LANG: ru
             WB: both
-          php-versions: '7.3.27'
+          php-versions: '7.4.32'
         - env:
             MW_BRANCH: master
             DBTYPE: sqlite
             LANG: en
             WB: client
-          php-versions: '7.2.34'
+          php-versions: '7.4.32'
         - env:
             MW_BRANCH: master
             DBTYPE: mysql
             LANG: en
             WB: repo
-          php-versions: '7.2.34'
+          php-versions: '7.4.32'
         - env:
             MW_BRANCH: master
             DBTYPE: sqlite
             LANG: ar
             WB: both
-          php-versions: '7.3.27'
+          php-versions: '7.4.32'
         - env:
             MW_BRANCH: master
             DBTYPE: mysql
             LANG: en
             WB: both
-          php-versions: '7.2.34'
-        - env:
-            MW_BRANCH: master
-            DBTYPE: mysql
-            LANG: en
-            WB: both
-          php-versions: '7.3.27'
-        - env:
-            MW_BRANCH: master
-            DBTYPE: mysql
-            LANG: en
-            WB: both
-          php-versions: '7.4.15'
+          php-versions: '7.4.32'
     steps:
     - name: Checkout
       uses: actions/checkout@v3
