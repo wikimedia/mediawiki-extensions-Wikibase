@@ -44,6 +44,7 @@
 	"wikibase-remove": "ہٹاؤ",
 	"wikibase-statementview-rank-normal": "عام درجہ",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|اتہ پتہ|اتے پتے}}",
+	"wikibase-shortcopyrightwarning": "تسیں ”$1“ بٹن کریئے، [[$2|terms of use]] نال تسیں راضی ہندے اے، اتے تہاڈے کم لئی [$3 $4] ورتوگے سی۔",
 	"wikibase-entityselector-more": "ہور",
 	"wikibase-itembytitle-lookup-site": "سائٹ:",
 	"wikibase-itembytitle-lookup-page": "صفحہ:",
