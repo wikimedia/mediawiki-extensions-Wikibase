@@ -208,6 +208,7 @@ return [
 	// Mapping of globe URIs to canonical names, as recognized and used by GeoData extension
 	// when indexing and querying for coordinates.
 	'globeUris' => [
+		// (same order as in GeoData includes/Globe.php)
 		'http://www.wikidata.org/entity/Q2' => 'earth',
 		'http://www.wikidata.org/entity/Q308' => 'mercury',
 		'http://www.wikidata.org/entity/Q313' => 'venus',
@@ -234,7 +235,34 @@ return [
 		'http://www.wikidata.org/entity/Q3322' => 'titania',
 		'http://www.wikidata.org/entity/Q3332' => 'oberon',
 		'http://www.wikidata.org/entity/Q3359' => 'triton',
-		'http://www.wikidata.org/entity/Q339' => 'pluto'
+		'http://www.wikidata.org/entity/Q339' => 'pluto',
+
+		// additional globes not recognized by GeoData as of 2022-09-30;
+		// not a problem, it mainly means distance calculation is unavailable
+		// (sorted by numerical item ID)
+		'http://www.wikidata.org/entity/Q193' => 'saturn',
+		'http://www.wikidata.org/entity/Q319' => 'jupiter',
+		'http://www.wikidata.org/entity/Q324' => 'uranus',
+		'http://www.wikidata.org/entity/Q596' => 'ceres',
+		'http://www.wikidata.org/entity/Q3030' => 'vesta',
+		'http://www.wikidata.org/entity/Q3257' => 'amalthea',
+		'http://www.wikidata.org/entity/Q6604' => 'charon',
+		'http://www.wikidata.org/entity/Q11558' => 'bennu',
+		'http://www.wikidata.org/entity/Q15662' => 'puck',
+		'http://www.wikidata.org/entity/Q16081' => 'proteus',
+		'http://www.wikidata.org/entity/Q16765' => 'thebe',
+		'http://www.wikidata.org/entity/Q16711' => 'eros',
+		'http://www.wikidata.org/entity/Q17751' => 'epimetheus',
+		'http://www.wikidata.org/entity/Q17754' => 'janus',
+		'http://www.wikidata.org/entity/Q107556' => 'lutetia',
+		'http://www.wikidata.org/entity/Q149012' => 'ida',
+		'http://www.wikidata.org/entity/Q149374' => 'itokawa',
+		'http://www.wikidata.org/entity/Q149417' => 'mathilde',
+		'http://www.wikidata.org/entity/Q150249' => 'steins',
+		'http://www.wikidata.org/entity/Q158244' => 'gaspra',
+		'http://www.wikidata.org/entity/Q510728' => 'dactyl',
+		'http://www.wikidata.org/entity/Q844672' => 'churyumov',
+		'http://www.wikidata.org/entity/Q1385178' => 'ryugu',
 	],
 
 	// Map between page properties and Wikibase predicates
