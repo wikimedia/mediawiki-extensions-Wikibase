@@ -342,7 +342,7 @@
 		}
 	},
 	"PreconditionFailedError": {
-		"description": "The condition defined by the `If-Match` or `If-Unmodified-Since` header is not fulfilled"
+		"description": "The condition defined by a conditional request header is not fulfilled"
 	},
 	"InvalidMediaType": {
 		"description": "The media type specified by the `Content-Type` header is not allowed on this endpoint",
