@@ -44,7 +44,7 @@
 	"IfNoneMatch": {
 		"name": "If-None-Match",
 		"in": "header",
-		"description": "Conditionally request a resource only if changed since the specified entity revision number",
+		"description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
 		"schema": {
 			"type": "array",
 			"items": {
@@ -66,7 +66,7 @@
 	"IfModifiedSince": {
 		"name": "If-Modified-Since",
 		"in": "header",
-		"description": "Conditionally request a resource only if it changed since the specified date",
+		"description": "Conditionally perform the request only if the resource has been modified after the specified date",
 		"schema": {
 			"type": "string",
 			"format": "http-date"
@@ -76,7 +76,7 @@
 	"IfMatch": {
 		"name": "If-Match",
 		"in": "header",
-		"description": "Conditionally modify a resource only if it hasn't changed since the specified entity revision number",
+		"description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
 		"schema": {
 			"type": "array",
 			"items": {
@@ -98,7 +98,7 @@
 	"IfUnmodifiedSince": {
 		"name": "If-Unmodified-Since",
 		"in": "header",
-		"description": "Conditionally modify a resource only if it hasn't changed since the specified date",
+		"description": "Conditionally perform the request only if the resource has not been modified after the specified date",
 		"schema": {
 			"type": "string",
 			"format": "http-date"
