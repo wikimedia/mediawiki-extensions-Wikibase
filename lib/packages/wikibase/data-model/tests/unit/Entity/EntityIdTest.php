@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\SerializableEntityId;
 
 /**
- * @covers \Wikibase\DataModel\Entity\EntityId
+ * @coversNothing
  * @uses \Wikibase\DataModel\Entity\ItemId
  * @uses \Wikibase\DataModel\Entity\NumericPropertyId
  *

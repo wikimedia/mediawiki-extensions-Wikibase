@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @covers \Wikibase\DataModel\Entity\ItemId
- * @covers \Wikibase\DataModel\Entity\EntityId
  *
  * @group Wikibase
  * @group WikibaseDataModel
