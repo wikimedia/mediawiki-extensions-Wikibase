@@ -62,11 +62,12 @@
 	"wikibase-pageswithbadges-submit": "Prikaži strani",
 	"entityusage": "Uporaba objekta",
 	"entityusage-summary": "Na tej strani so navedene strani, ki uporabljajo določen objekt (npr. Q42). Seznam je razvrščen padajoče po ID-ju strani, tako da so novejše strani navedene najprej.",
-	"wikibase-entityusage-legend": "Seznam strani, ki uporabljajo določen objekt",
+	"wikibase-entityusage-legend": "Seznam strani, ki uporabljajo določen predmet",
 	"wikibase-entityusage-entity": "Objekt:",
 	"wikibase-entityusage-submit": "Prikaži strani",
-	"wikibase-pageinfo-entity-id": "ID objekta v Wikipodatkih",
+	"wikibase-pageinfo-entity-id": "ID predmeta v Wikipodatkih",
 	"wikibase-pageinfo-entity-id-none": "Brez",
+	"wikibase-pageinfo-description-central": "Centralni opis",
 	"wikibase-pageinfo-entity-usage": "Predmeti v Wikipodatkih, uporabljeni na tej strani",
 	"wikibase-pageinfo-entity-usage-S": "Povezava s stranjo",
 	"wikibase-pageinfo-entity-usage-L": "Nekatere oznake",
@@ -88,5 +89,8 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong> in {{PLURAL:$4|še $4 stran je {{GENDER:$2|$2 povezal|$2 povezala|povezanih}}|še $4 drugi strani je {{GENDER:$2|$2 povezal|$2 povezala|povezanih}}|še $4 druge strani je {{GENDER:$2|$2 povezal|$2 povezala|povezanih}}|še $4 drugih strani je {{GENDER:$2|$2 povezal|$2 povezala|povezanih}}|100=99+ drugih strani je {{GENDER:$2|$2 povezal|$2 povezala|povezanih}}}} s predmeti v shrambi {{WBREPONAME}}, kjer se lahko zbirajo podatki, relevantni za temo.",
 	"notification-link-text-view-item": "{{GENDER:$1|Ogled}} predmeta",
 	"notification-subject-page-connection": "Stran {{SITENAME}}, ki ste jo {{GENDER:$3|ustvarili}}, je bila {{GENDER:$2|povezana}} s predmetom v {{WBREPONAME}}",
+	"unresolved-property-category-desc": "V tej kategoriji so navedene strani z lastnostmi Wikipodatkov, ki jih ni mogoče najti niti po ID-ju lastnosti niti po oznaki.",
+	"connected-redirect-category": "Preusmeritve, povezane s predmetom v Wikipodatkih",
+	"connected-redirect-category-desc": "V tej kategoriji so navedene strani, ki se povezujejo s predmetom v Wikipodatkih.",
 	"wikibase-client-data-bridge-edit-decision-heading": "Prosimo, izberite vrsto urejanja, ki ste ga opravili:"
 }

@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"ChoiChong"
+			"ChoiChong",
+			"Kahin He"
 		]
 	},
-	"wikibase-edit": "修改"
+	"wikibase-edit": "修改",
+	"wikibase-add": "添加",
+	"wikibase-sitelinks-special": "其他网站"
 }

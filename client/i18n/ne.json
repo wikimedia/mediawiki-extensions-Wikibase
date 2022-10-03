@@ -7,7 +7,8 @@
 			"राम प्रसाद जोशी",
 			"सरोज कुमार ढकाल",
 			"हिमाल सुबेदी",
-			"Bada Kaji"
+			"Bada Kaji",
+			"बडा काजी"
 		]
 	},
 	"wikibase-client-desc": "विकिबेस वृद्दिको लागि क्लाइन्ट",
@@ -49,7 +50,7 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} सम्पादन",
 	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}}मा उत्पन्न हुने सम्पादनहरू",
 	"wikibase-replicationnote": "कृपया ध्यान दिनुहोला जुन पृष्ठ तपईंले अहिले जोड्नु भएको हुनुहुन्छ त्यो अन्य विकिमा देखिन केही समय लाग्न सक्छ।",
-	"wikibase-watchlist-show-changes-pref": "तपाईँ आफ्नो निगरानीसूचीमा {{WBREPONAME}} सम्पादन देखाउनुहोस्",
+	"wikibase-watchlist-show-changes-pref": "तपाईं आफ्नो निगरानीसूचीमा {{WBREPONAME}} सम्पादन देखाउनुहोस्",
 	"wikibase-error-serialize-error": "डाटालाई मिलाउन असफल।",
 	"unconnectedpages": "पृष्ठ आइटम सँग जोडिएन",
 	"wikibase-unconnectedpages-submit": "जाउ",
