@@ -17,6 +17,7 @@
 			"RXerself",
 			"Rachmat.Wahidi",
 			"Rachmat04",
+			"Veracious",
 			"පසිඳු කාවින්ද",
 			"아라"
 		]
@@ -304,6 +305,7 @@
 	"wikibase-tokencheck-badtoken": "Token penyuntingan galat (mungkin sesi Anda sudah kedaluwarsa).",
 	"special-dispatchstats": "Perubahan pengiriman statistik",
 	"wikibase-dispatchstats-intro": "Halaman ini menyediakan statistik tentang pengiriman perubahan kepada klien. Wiki klien akan diberitahukan tentang suatu perubahan pada {{SITENAME}} saat perubahan sudah dikirimkan pada wiki terkait dan antrean pekerjaan pada wiki terkait sudah memproses notifikasinya.",
+	"wikibase-dispatchstats-above": "Ada {{PLURAL:$1|lebih dari $1 perubahan}}.",
 	"special-listdatatypes": "Daftar semua jenis data yang tersedia",
 	"wikibase-listdatatypes-intro": "Ini adalah daftar dari semua jenis data beserta jenis nilai yang sesuai yang tersedia pada penginstalan ini:",
 	"wikibase-listdatatypes-listproperties": "Daftar atribut dengan jenis data ini",
@@ -355,6 +357,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Anda bisa menyuntingnya dengan memasukkan <nowiki>{{#babel: }}</nowiki> pada [[Special:MyPage|laman pengguna]] {{GENDER:$1|Anda}}",
 	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 - $2",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, ubah dari $3 - $4",
+	"wikibase-api-badtoken": "Token buruk terdeteksi.",
 	"wikibase-api-cant-load-entity-content": "Tidak bisa mengakses konten, revisinya mungkin dihapus.",
 	"wikibase-api-unresolved-redirect": "Penanda entitas khusus merujuk pada sebuah laman pengalihan, yang tidak didukung dalam konteks ini.",
 	"wikibase-api-editconflict": "Konflik penyuntingan. Tidak bisa menyimpan revisi terbaru.",
@@ -366,6 +369,9 @@
 	"wikibase-api-illegal-ids-or-sites-titles-selector": "Berikan \"ids\" butir atau pasangan \"sites\" dan \"titles\" dari halaman yang sesuai",
 	"wikibase-api-inconsistent-language": "Terdeteksi bahasa yang tidak konsisten.",
 	"wikibase-api-inconsistent-site": "Terdeteksi situs yang tidak konsisten.",
+	"wikibase-api-invalid-json": "Json dalam permintaan tidak valid.",
+	"wikibase-api-invalid-snak": "Data snak tidak valid.",
+	"wikibase-api-invalid-list": "Data daftar tidak valid.",
 	"wikibase-api-invalid-property-id": "ID Atribut tidak sah.",
 	"wikibase-api-invalid-entity-id": "ID entitas tidak sah.",
 	"wikibase-api-no-data": "Tidak ada data untuk dioperasikan.",
