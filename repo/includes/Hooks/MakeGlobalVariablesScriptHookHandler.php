@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Hooks;
 
+use Language;
 use MediaWiki\Hook\MakeGlobalVariablesScriptHook;
 use OutputPage;
 use Wikibase\Lib\ContentLanguages;
@@ -12,6 +13,7 @@ use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
+use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;
 use Wikibase\Repo\OutputPageJsConfigBuilder;
 
 /**
@@ -30,6 +32,9 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 
 	/** @var UserLanguageLookup */
 	private $userLanguageLookup;
+
+	/** @var UserPreferredContentLanguagesLookup */
+	private $userPreferredContentLanguagesLookup;
 
 	/** @var string */
 	private $dataRightsUrl;
@@ -51,6 +56,7 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 		OutputPageJsConfigBuilder $outputPageJsConfigBuilder,
 		ContentLanguages $termsLanguages,
 		UserLanguageLookup $userLanguageLookup,
+		UserPreferredContentLanguagesLookup $userPreferredContentLanguagesLookup,
 		string $dataRightsUrl,
 		string $dataRightsText,
 		array $badgeItems,
@@ -61,6 +67,7 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 		$this->outputPageJsConfigBuilder = $outputPageJsConfigBuilder;
 		$this->termsLanguages = $termsLanguages;
 		$this->userLanguageLookup = $userLanguageLookup;
+		$this->userPreferredContentLanguagesLookup = $userPreferredContentLanguagesLookup;
 		$this->dataRightsUrl = $dataRightsUrl;
 		$this->dataRightsText = $dataRightsText;
 		$this->badgeItems = $badgeItems;
@@ -69,15 +76,23 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 	}
 
 	public static function factory(
+		Language $contentLanguage,
 		EntityContentFactory $entityContentFactory,
 		SettingsArray $repoSettings,
 		ContentLanguages $termsLanguages
 	): self {
+		$userLanguageLookup = new BabelUserLanguageLookup();
+
 		return new self(
 			new OutputPageEntityViewChecker( $entityContentFactory ),
 			new OutputPageJsConfigBuilder(),
 			$termsLanguages,
-			new BabelUserLanguageLookup(),
+			$userLanguageLookup,
+			new UserPreferredContentLanguagesLookup(
+				$termsLanguages,
+				$userLanguageLookup,
+				$contentLanguage->getCode()
+			),
 			$repoSettings->getSetting( 'dataRightsUrl' ),
 			$repoSettings->getSetting( 'dataRightsText' ),
 			$repoSettings->getSetting( 'badgeItems' ),
@@ -95,11 +110,17 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 			return;
 		}
 
-		// All user-specified languages, that are valid term languages
-		// Reindex the keys so that JavaScript still works if an unknown
-		// language code in the babel box causes an index to miss
+		$language = $out->getLanguage();
+		$user = $out->getUser();
+		// the languages that the server-side termbox was rendered with, in the same order
+		$vars['wbUserPreferredContentLanguages'] = $this->userPreferredContentLanguagesLookup->getLanguages(
+			$language->getCode(),
+			$user
+		);
+		// the languages that the user explicitly specified,
+		// used to determine whether client-side should show extra languages based on ULS data
 		$vars['wbUserSpecifiedLanguages'] = array_values( array_intersect(
-			$this->userLanguageLookup->getUserSpecifiedLanguages( $out->getUser() ),
+			$this->userLanguageLookup->getUserSpecifiedLanguages( $user ),
 			$this->termsLanguages->getLanguages()
 		) );
 
