@@ -2,10 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"DonCamillo",
-			"Em-em"
+			"Em-em",
+			"Amire80"
 		]
 	},
-	"wikibase-edit": "Gyara",
+	"wikibase-edit": "gyara",
+	"wikibase-publish": "wallafa",
+	"wikibase-cancel": "soke",
 	"wikibase-add": "ƙara",
 	"wikibase-label-empty": "Ba suna a kai",
 	"wikibase-description-empty": "Ba'a bayyana ma'ana ba",

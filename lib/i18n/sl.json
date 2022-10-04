@@ -81,7 +81,7 @@
 	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|Dodano drugo ime|Dodani drugi imeni|Dodana druga imena}} za [$2]",
 	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|Dodano drugo ime|Dodani drugi imeni|Dodana druga imena}} za [$2]",
 	"wikibase-entity-summary-wbsetaliases-update": "{{PLURAL:$1|Posodobljeno drugo ime|Posodobljeni drugi imeni|Posodobljena druga imena}} za [$2]",
-	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Sprememba oznake opisa in drugih imen predmeta [$2]",
+	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Sprememba oznake, opisa in sopomenk predmeta [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add": "Dodana povezava na [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "Dodana povezava z značkami pri [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set": "Sprememba povezave pri [$2]",
@@ -115,5 +115,5 @@
 	"wikibase-property-summary-wbcreate-new": "Ustvarjena nova Lastnost",
 	"wikibase-property-summary-wbeditentity-create": "Ustvarjena nova Lastnost",
 	"wikibase-property-summary-wbeditentity-create-property": "Ustvarjena nova Lastnost",
-	"wikibase-property-summary-wbeditentity-update": "Spremenjena Lastnost"
+	"wikibase-property-summary-wbeditentity-update": "Spremenjena lastnost"
 }
