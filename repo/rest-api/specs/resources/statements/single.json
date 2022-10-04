@@ -29,6 +29,7 @@
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/StatementId" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
+			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/Statement" },
@@ -48,6 +49,7 @@
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/StatementId" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
+			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/StatementPatch" },
@@ -69,6 +71,7 @@
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/StatementId" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
+			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/Edit" },
