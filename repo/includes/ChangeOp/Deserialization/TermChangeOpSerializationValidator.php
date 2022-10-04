@@ -26,7 +26,7 @@ class TermChangeOpSerializationValidator {
 	 * @param int|string $languageCode Key from the term list array, related to $serialization.
 	 *                                 If a string its value must match $serialization['language'].
 	 *
-	 * @see @ref md_docs_topics_changeop-serializations for information on term serialization format
+	 * @see @ref docs_topics_changeop-serializations for information on term serialization format
 	 *
 	 * @throws ChangeOpDeserializationException
 	 */

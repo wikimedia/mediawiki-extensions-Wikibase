@@ -5,7 +5,7 @@ Tracking happens on two levels:
 - The client wiki tracks which pages use (which aspect of) which entity (from which repo).
 - Each repo tracks which client uses which entity.
 
-This is used to optimize change notifications on two levels (see @ref md_docs_topics_change-propagation):
+This is used to optimize change notifications on two levels (see @ref docs_topics_change-propagation):
 
 - The repo sends notifications to the clients that use the modified entity in question.
 - The client compares incoming notifications with it's local tracking table to decide which pages to purge/update.
@@ -99,8 +99,8 @@ Each repo tracks which client uses which entity. This is done in the [wb_changes
 This table is updated whenever the client side tracking table is updated.
 To do this, the client wiki must, whenever a page is edited, determine which entities are used (in order to record this in the local tracking table), but in addition to this, detect whether an entity that wasn't used previously anywhere on the wiki is now used by the edited page, or whether the edit removed the last usage of any of the entities previously used on the page.
 
-[wb_changes_subscription]: @ref md_docs_sql_wb_changes_subscription
-[wbc_entity_usage]: @ref md_docs_sql_wbc_entity_usage
+[wb_changes_subscription]: @ref docs_sql_wb_changes_subscription
+[wbc_entity_usage]: @ref docs_sql_wbc_entity_usage
 [LinksUpdateComplete]: https://www.mediawiki.org/wiki/Manual:Hooks/LinksUpdateComplete
 [ParserCacheSave]: https://www.mediawiki.org/wiki/Manual:Hooks/ParserCacheSave
 [ArticleDeleteComplete]: https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete

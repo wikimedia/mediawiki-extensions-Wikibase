@@ -1,6 +1,8 @@
+# wbt_term_in_lang
+
 Stores a record per term with type in a language.
 
-Part of the @ref md_docs_storage_terms storage system.
+Part of the @ref docs_storage_terms storage system.
 
 **Fields:**
 
@@ -22,5 +24,5 @@ Part of the @ref md_docs_storage_terms storage system.
  - UNIQUE wbtl_text_in_lang_id, wbtl_type_id
  - wbtl_type_id
 
-[wbt_type]: @ref md_docs_sql_wbt_type
-[wbt_text_in_lang]: @ref md_docs_sql_wbt_text_in_lang
+[wbt_type]: @ref docs_sql_wbt_type
+[wbt_text_in_lang]: @ref docs_sql_wbt_text_in_lang

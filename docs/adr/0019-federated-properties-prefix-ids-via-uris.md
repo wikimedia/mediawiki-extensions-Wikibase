@@ -8,7 +8,7 @@ proposed
 
 ## Context
 
-The Federated Properties MVP introduced a [federatedPropertiesEnabled setting] which enables a Wikibase instance (local wiki) to read all Properties from a remote Wikibase (source wiki). A wiki with this setting enabled can only use federated Properties and disallows the creation or use of any local Properties.
+The Federated Properties MVP introduced a [federatedPropertiesEnabled] setting which enables a Wikibase instance (local wiki) to read all Properties from a remote Wikibase (source wiki). A wiki with this setting enabled can only use federated Properties and disallows the creation or use of any local Properties.
 Federated Properties v2 aims to make it possible for users to enable Federated Properties even if their Wikibase already contains data, so that they can choose to use both remote & local Properties to make statements.
 
 To achieve that we need to be able to differentiate between local and federated Properties.
@@ -58,4 +58,4 @@ Build source information into the Property IDs via Concept URIs, treating them l
 It's out of our control when/if URIs change. We acknowledge that this is a real problem and can potentially be reported by people who use the API and treat the URIs as URLs.
 
 
-[federatedPropertiesEnabled setting]: @ref #repo_federatedPropertiesEnabled
+[federatedPropertiesEnabled]: @ref repo_federatedPropertiesEnabled

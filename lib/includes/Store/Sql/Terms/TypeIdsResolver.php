@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
  * A service to turn type IDs into types,
  * the inverse of {@link TypeIdsAcquirer}.
  *
- * @see @ref md_docs_storage_terms
+ * @see @ref docs_storage_terms
  * @license GPL-2.0-or-later
  */
 interface TypeIdsResolver {

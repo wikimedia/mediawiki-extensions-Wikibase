@@ -194,7 +194,7 @@ class AffectedPagesFinder {
 	 *
 	 * @return Traversable of PageEntityUsages
 	 *
-	 * @see @ref md_docs_topics_usagetracking for details about virtual usages
+	 * @see @ref docs_topics_usagetracking for details about virtual usages
 	 */
 	private function getAffectedPages( EntityChange $change ) {
 		$entityId = $change->getEntityId();

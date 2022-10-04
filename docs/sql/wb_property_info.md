@@ -1,4 +1,6 @@
-Part of the @ref md_docs_storage_propertyinfo storage system.
+# wb_items_per_site
+
+Part of the @ref docs_storage_propertyinfo storage system.
 
 **Fields:**
 

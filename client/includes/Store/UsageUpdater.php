@@ -62,7 +62,7 @@ class UsageUpdater {
 	 *
 	 * @param int $pageId The ID of the page the entities are used on.
 	 * @param EntityUsage[] $usages A list of EntityUsage objects.
-	 * See @ref md_docs_topics_usagetracking for details.
+	 * See @ref docs_topics_usagetracking for details.
 	 *
 	 * @see UsageTracker::trackUsedEntities
 	 *
@@ -93,7 +93,7 @@ class UsageUpdater {
 	 *
 	 * @param int $pageId The ID of the page the entities are used on.
 	 * @param EntityUsage[] $usages A list of EntityUsage objects.
-	 * See @ref md_docs_topics_usagetracking for details.
+	 * See @ref docs_topics_usagetracking for details.
 	 *
 	 * @see UsageTracker::replaceUsedEntities
 	 *

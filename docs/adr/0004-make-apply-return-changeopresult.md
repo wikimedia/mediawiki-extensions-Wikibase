@@ -1,4 +1,4 @@
-# 4) Make [ChangeOp::apply()] return [ChangeOpResult]  {#adr_0004}
+# 4) Make ChangeOp::apply() return ChangeOpResult  {#adr_0004}
 
 Date of submission: 2019-06-21
 

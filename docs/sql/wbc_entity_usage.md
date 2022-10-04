@@ -1,10 +1,12 @@
-Part of the @ref md_docs_topics_usagetracking system on a Client.
+# wbc_entity_usage
+
+Part of the @ref docs_topics_usagetracking system on a Client.
 
 **Fields:**
 
  - eu_row_id - auto-increment row ID for internal use. Primary key.
  - eu_entity_id - Serialized entity ID for the entity that has usage
- - eu_aspect - Which aspect of the entity is being used. (See @ref md_docs_topics_usagetracking)
+ - eu_aspect - Which aspect of the entity is being used. (See @ref docs_topics_usagetracking)
  - eu_page_id - the ID of the page using the entity; refers to page.page_id.
 
 ```

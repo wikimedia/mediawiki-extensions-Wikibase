@@ -18,7 +18,7 @@ use Wikibase\Lib\StringNormalizer;
 /**
  * Factory for creating writer objects relating to the 2019 SQL based terms storage.
  *
- * @see @ref md_docs_storage_terms
+ * @see @ref docs_storage_terms
  * @license GPL-2.0-or-later
  */
 class TermStoreWriterFactory {

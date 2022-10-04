@@ -9,7 +9,7 @@ use Wikibase\Lib\StringNormalizer;
  * Trait for code reuse between DatabaseItemTermStoreWriter and DatabasePropertyTermStoreWriter
  *
  * @author Addshore
- * @see @ref md_docs_storage_terms
+ * @see @ref docs_storage_terms
  * @license GPL-2.0-or-later
  */
 trait FingerprintableEntityTermStoreTrait {

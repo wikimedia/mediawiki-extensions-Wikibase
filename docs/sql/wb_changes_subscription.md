@@ -1,5 +1,7 @@
-Part of the @ref md_docs_topics_change-propagation system on a Repo.
-See also @ref md_docs_topics_usagetracking.
+# wb_changes_subscription
+
+Part of the @ref docs_topics_change-propagation system on a Repo.
+See also @ref docs_topics_usagetracking.
 
 **Fields:**
 

@@ -1,6 +1,8 @@
+# wbt_text
+
 Stores a record per text value that are used in different terms in different languages.
 
-Part of the @ref md_docs_storage_terms storage system.
+Part of the @ref docs_storage_terms storage system.
 
 **Fields:**
 

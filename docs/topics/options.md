@@ -40,7 +40,7 @@ EXAMPLE: ```[ 'commons', 'meta', 'wikidata' ]```
 
 ### Change Propagation
 
-See @ref md_docs_topics_change-propagation
+See @ref docs_topics_change-propagation
 
 #### useChangesTable
 Whether to record changes in the database, so they can be pushed to clients.
@@ -174,14 +174,14 @@ EXAMPLE: ```['http://www.wikidata.org/entity/Q2' => 'earth']```
 ### Properties & Items
 
 #### idGenerator {#repo_idGenerator}
-Allows the entity id generator to be chosen. (See @ref md_docs_storage_id-counters)
+Allows the entity id generator to be chosen. (See @ref docs_storage_id-counters)
 
 DEFAULT: ```original```
 
 Allows values: `original`, `mysql-upsert`, or `auto`
 
 #### idGeneratorSeparateDbConnection {#repo_idGeneratorSeparateDbConnection}
-Should a separate DB connection be used to generate entity IDs?  (See @ref md_docs_storage_id-counters)
+Should a separate DB connection be used to generate entity IDs?  (See @ref docs_storage_id-counters)
 
 DEFAULT: ```false```
 
@@ -252,7 +252,7 @@ EXAMPLE: On wikidata.org, this is set to `P1921`, a string property named “URI
 #### localClientDatabases {#client_localClientDatabases}
 An array of locally accessible client databases, for use by the dispatchChanges.php script.
 
-See @ref md_docs_topics_change-propagation
+See @ref docs_topics_change-propagation
 This setting determines to which wikis changes are pushed directly.
 It must be given either as an associative array, mapping site global IDs to logical database names, or, of the database names are the same as the site global IDs, as a list of databases.
 
@@ -733,7 +733,7 @@ DEFAULT: Everything in the Wikibase [siteLinkGroups] setting.
 Whether changes on the repository should be injected into this wiki's recent changes table, so they show up on watchlists, etc.
 
 Requires the dispatchChanges.php script to run, and this wiki to be listed in the [localClientDatabases] setting on the repository.
-See @ref md_docs_topics_change-propagation
+See @ref docs_topics_change-propagation
 
 #### showExternalRecentChanges
 Whether changes on the repository should be displayed on Special:RecentChanges, Special:Watchlist, etc on the client wiki.
@@ -919,8 +919,8 @@ DEFAULT: array mapping each well-known name to `null`.
 [purgeCacheBatchSize]: #client_purgeCacheBatchSize
 [wikiPageUpdaterDbBatchSize]: #client_wikiPageUpdaterDbBatchSize
 [siteGlobalID]: #client_siteGlobalID
-[entitysources topic]: @ref md_docs_topics_entitysources
-[wbc_entity_usage]: @ref md_docs_sql_wbc_entity_usage
+[entitysources topic]: @ref docs_topics_entitysources
+[wbc_entity_usage]: @ref docs_sql_wbc_entity_usage
 [reference URL]: https://www.wikidata.org/wiki/Property:P854
 [title]: https://www.wikidata.org/wiki/Property:P1476
 [stated in]: https://www.wikidata.org/wiki/Property:P248

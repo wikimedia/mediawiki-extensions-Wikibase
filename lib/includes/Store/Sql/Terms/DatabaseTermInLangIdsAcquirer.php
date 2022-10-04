@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
  * will be truncated, and different terms that only differ after the first
  * 255 bytes will get the same term in lang ID (and thus same other ids too).
  *
- * @see @ref md_docs_storage_terms
+ * @see @ref docs_storage_terms
  * @license GPL-2.0-or-later
  */
 class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {

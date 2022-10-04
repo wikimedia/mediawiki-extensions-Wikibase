@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\Fingerprint;
  *
  * This can only be used to write to Property term stores on the local database.
  *
- * @see @ref md_docs_storage_terms
+ * @see @ref docs_storage_terms
  * @license GPL-2.0-or-later
  */
 class DatabasePropertyTermStoreWriter extends DatabaseTermStoreWriterBase implements PropertyTermStoreWriter {

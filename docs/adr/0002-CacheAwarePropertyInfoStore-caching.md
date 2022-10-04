@@ -1,4 +1,4 @@
-# 2) [CacheAwarePropertyInfoStore] caching method  {#adr_0002}
+# 2) CacheAwarePropertyInfoStore caching method  {#adr_0002}
 
 Date: 2018-12-19
 
@@ -43,6 +43,6 @@ We will need to work again on this area and either:
    - This will slowly lead to increased time before all servers are in sync.
 
 [T97368]: https://phabricator.wikimedia.org/T97368
-[wb_property_info]: @ref md_docs_topics_propertyinfo-storage
+[wb_property_info]: @ref docs_topics_propertyinfo-storage
 [PropertyInfoStore]: @ref Wikibase::Lib::Store::PropertyInfoStore
 [CacheAwarePropertyInfoStore]: @ref Wikibase::Lib::Store::CacheAwarePropertyInfoStore

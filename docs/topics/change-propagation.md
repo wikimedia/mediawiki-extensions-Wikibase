@@ -17,10 +17,10 @@ On the Repo, we need:
 
 On each Client, there needs to be:
 
-* Usage tracking (see @ref md_docs_topics_usagetracking).
+* Usage tracking (see @ref docs_topics_usagetracking).
 * Access to sitelinks stored in the repository.
 * [ChangeHandler] for processing changes on the repo, triggered by [EntityChangeNotificationJob]s being executed.
-* [AffectedPagesFinder], a mechanism to determine which pages are affected by which change, based on usage tracking information (see @ref md_docs_topics_usagetracking).
+* [AffectedPagesFinder], a mechanism to determine which pages are affected by which change, based on usage tracking information (see @ref docs_topics_usagetracking).
 * [WikiPageUpdater], for updating the client wiki's state.
 
 ### On the Repo
@@ -51,7 +51,7 @@ The main work on the Repo side of things is done by the [DispatchChangesJob], wh
 
 **Usage Tracking and Subscription Management**
 
-Usage tracking and subscription management are described in detail in @ref md_docs_topics_usagetracking.
+Usage tracking and subscription management are described in detail in @ref docs_topics_usagetracking.
 
 **Change Buffer**
 
@@ -69,7 +69,7 @@ This information is stored in the [wb_items_per_site] table in the repo's databa
 The [ChangeHandler::handleChanges()] method gets called with a list of changes provided by a [EntityChangeNotificationJob]s.
 A [ChangeRunCoalescer] is then used to merge consecutive changes by the same user to the same entity, reducing the number of logical events to be processed on the client, and to be presented to the user.
 
-ChangeHandler will then for each change determine the affected pages using the [AffectedPagesFinder], which uses information from the wbc_entity_usage table (see @ref md_docs_topics_usagetracking).
+ChangeHandler will then for each change determine the affected pages using the [AffectedPagesFinder], which uses information from the wbc_entity_usage table (see @ref docs_topics_usagetracking).
 It then uses a [WikiPageUpdater] to update the client wiki's state: rows are injected into the recentchanges database table, pages using the affected entity's data are re-parsed, and the web cache for these pages is purged.
 
 **WikiPageUpdater**
@@ -97,7 +97,7 @@ The [WikiPageUpdater] class defines three methods for updating the client wikis 
 [EntityChangeNotificationJob]: @ref Wikibase::Client::EntityChangeNotificationJob
 [ClientStore::getSiteLinkLookup()]: @ref Wikibase::Client::Store::ClientStore::getSiteLinkLookup()
 [SiteLinkLookup]: @ref Wikibase::Lib::Store::SiteLinkLookup
-[wb_changes]: @ref md_docs_sql_wb_changes
-[wb_items_per_site]: @ref md_docs_sql_wb_items_per_site
+[wb_changes]: @ref docs_sql_wb_changes
+[wb_items_per_site]: @ref docs_sql_wb_items_per_site
 [purgeCacheBatchSize]: @ref client_purgeCacheBatchSize
 [recentChangesBatchSize]: @ref client_recentChangesBatchSize

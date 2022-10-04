@@ -136,12 +136,12 @@ AND wbx_text = 'instance of';
 The tables in the store are cleaned up so that data that is totally removed from entities is also totally removed from the store.
 This is important for cases such as Wikidata that has publicly accessible database replicas of this information.
 
-[wbt_item_terms]: @ref md_docs_sql_wbt_item_terms
-[wbt_property_terms]: @ref md_docs_sql_wbt_property_terms
-[wbt_term_in_lang]: @ref md_docs_sql_wbt_term_in_lang
-[wbt_text_in_lang]: @ref md_docs_sql_wbt_text_in_lang
-[wbt_text]: @ref md_docs_sql_wbt_text
-[wbt_type]: @ref md_docs_sql_wbt_type
+[wbt_item_terms]: @ref docs_sql_wbt_item_terms
+[wbt_property_terms]: @ref docs_sql_wbt_property_terms
+[wbt_term_in_lang]: @ref docs_sql_wbt_term_in_lang
+[wbt_text_in_lang]: @ref docs_sql_wbt_text_in_lang
+[wbt_text]: @ref docs_sql_wbt_text
+[wbt_type]: @ref docs_sql_wbt_type
 [ItemHandler::getSecondaryDataUpdates()]: @ref Wikibase::Repo::Content::ItemHandler::getSecondaryDataUpdates()
 [PropertyHandler::getSecondaryDataUpdates()]: @ref Wikibase::Repo::Content::PropertyHandler::getSecondaryDataUpdates()
 [EntityTermStoreWriter]: @ref Wikibase::Lib::Store::EntityTermStoreWriter

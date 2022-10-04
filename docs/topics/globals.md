@@ -8,10 +8,10 @@ PHP globals used by Wikibase.
 
 Settings array for a repository.
 
-See @ref md_docs_topics_options
+See @ref docs_topics_options
 
 #### wgWBClientSettings {#wgWBClientSettings}
 
 Settings array for a client.
 
-See @ref md_docs_topics_options
+See @ref docs_topics_options

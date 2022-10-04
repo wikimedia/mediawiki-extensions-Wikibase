@@ -101,7 +101,8 @@ The entity types repository is an associative array mapping entity type identifi
 * property-data-type-lookup-callback (repo only)
   * A callable for creating an [PropertyDataTypeLookup] for entities of the property type, called without arguments.
 
-Extensions that wish to register an entity type should use the [WikibaseRepoEntityTypes] and/or [WikibaseClientEntityTypes] hooks to provide additional entity type definitions. (See @ref md_docs_topics_hooks-php)
+Extensions that wish to register an entity type should use the [WikibaseRepoEntityTypes] and/or
+[WikibaseClientEntityTypes] hooks to provide additional entity type definitions. (See @ref docs_topics_hooks-php)
 
 ## Programmatic Access
 

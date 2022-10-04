@@ -30,4 +30,4 @@ To access properties of a different item, it has to be specified explicitly by Q
 {{#property:P17|from=Q64}}
 ```
 
-[LUA]: @ref md_docs_topics_lua
+[LUA]: @ref docs_topics_lua

@@ -86,9 +86,9 @@ $wgWBClientSettings['entitySources'] = $entitySources;
 $wgWBClientSettings['itemAndPropertySourceName'] = 'wikidata';
 ```
 
-[federation]: @ref md_docs_topics_federation
-[Federated Properties]: @ref md_docs_components_repo-federated-properties
-[client repo relationship]: @ref md_docs_topics_repo-client-relationship
+[federation]: @ref docs_topics_federation
+[Federated Properties]: @ref docs_components_repo-federated-properties
+[client repo relationship]: @ref docs_topics_repo-client-relationship
 [EntitySource]: @ref Wikibase::DataAccess::EntitySource
 [EntitySourceDefinitions]: @ref Wikibase::DataAccess::EntitySourceDefinitions
 [EntitySourceDefinitionsConfigParser]: @ref Wikibase::Repo::EntitySourceDefinitionsConfigParser

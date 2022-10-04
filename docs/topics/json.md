@@ -88,15 +88,15 @@ These JSON representations consist of the following fields in the top level stru
 * datatype
   * The datatype to be used with the Property (Properties only)
 * labels
-  * Contains the labels in different languages, see @ref #json_fingerprint.
+  * Contains the labels in different languages, see @ref json_fingerprint.
 * descriptions
-  * Contains the descriptions in different languages, see @ref #json_fingerprint.
+  * Contains the descriptions in different languages, see @ref json_fingerprint.
 * aliases
-  * Contains aliases in different languages, see @ref #json_fingerprint.
+  * Contains aliases in different languages, see @ref json_fingerprint.
 * claims
-  * Contains any number of statements, groups by property. Note: WikibaseMediaInfo uses the "statements" key instead. See @ref #json_statements.
+  * Contains any number of statements, groups by property. Note: WikibaseMediaInfo uses the "statements" key instead. See @ref json_statements.
 * sitelinks
-  * Contains sitelinks to pages on different sites describing the item, see @ref #json_sitelinks (Items only).
+  * Contains sitelinks to pages on different sites describing the item, see @ref json_sitelinks (Items only).
 
 API modules currently handle the revision and date modified slightly differently using the fields below.
 
@@ -231,13 +231,13 @@ A Statement record uses the following fields:
 * type
   * Always *statement*. (Historically, *claim* used to be another valid value here.)
 * mainsnak
-  * The Snak representing the value to be associated with the property. See @ref #json_snaks below. The Property specified in the main Snak must be the same as the Property the Statement is associated with.
+  * The Snak representing the value to be associated with the property. See @ref json_snaks below. The Property specified in the main Snak must be the same as the Property the Statement is associated with.
 * rank
   * The rank expresses whether this value will be used in queries, and shown be visible per default on a client system. The value is either *preferred*, *normal* or *deprecated*.
 * qualifiers
-  * Qualifiers provide a context for the primary value, such as the point in time of measurement. Qualifiers are given as lists of snaks, each associated with one property. See @ref #json_qualifiers below.
+  * Qualifiers provide a context for the primary value, such as the point in time of measurement. Qualifiers are given as lists of snaks, each associated with one property. See @ref json_qualifiers below.
 * references
-  * References record provenance information for the data in the main Snak and qualifiers. They are given as a list of reference records; see @ref #json_references below.
+  * References record provenance information for the data in the main Snak and qualifiers. They are given as a list of reference records; see @ref json_references below.
 
 (Historically, there was a distinction between Claims, which had only a main snak and qualifiers, and Statements, which also had references.
 Traces of this distinction may still be found in the serialization or in outdated documentation.)
@@ -298,7 +298,7 @@ A Snak is represented by providing the following fields:
 * datatype
   * The *datatype* field indicates how the value of the Snak can be interpreted. The datatypes could be any other of the datatypes listed on https://www.wikidata.org/wiki/Special:ListDatatypes.
 * datavalue
-  * If the snaktype is *value*, there is a *datavalue* field that contains the actual value the Snak associates with the Property. See @ref #json_datavalues below.
+  * If the snaktype is *value*, there is a *datavalue* field that contains the actual value the Snak associates with the Property. See @ref json_datavalues below.
 
 #### Data Values {#json_datavalues}
 

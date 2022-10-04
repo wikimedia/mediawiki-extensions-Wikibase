@@ -1,6 +1,8 @@
+# wbt_type
+
 Normalized term type names.
 
-Part of the @ref md_docs_storage_terms storage system.
+Part of the @ref docs_storage_terms storage system.
 
 This table:
  - Allows storing the knowledge of an integer to term type mapping in the DB (rather than the application).

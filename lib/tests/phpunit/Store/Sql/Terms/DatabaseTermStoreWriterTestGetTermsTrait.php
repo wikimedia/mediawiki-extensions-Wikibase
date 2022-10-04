@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
  *
  * @author Addshore
  * @author Marius Hoch
- * @see @ref md_docs_storage_terms
+ * @see @ref docs_storage_terms
  * @license GPL-2.0-or-later
  */
 trait DatabaseTermStoreWriterTestGetTermsTrait {

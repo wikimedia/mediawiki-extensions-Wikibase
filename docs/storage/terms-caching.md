@@ -25,7 +25,7 @@ The contents are stored in a local server cache as configured in [WikibaseLib.en
 
 Cache entries are considered immutable which means that they don't change once they're created. To make this possible cache keys must therefore contain the revision ID alongside the entity ID, language, and term type of the stored term value. A [TermCacheKeyBuilder] utility trait exists for the creation of such keys.
 
-[secondary terms storage]: @ref md_docs_storage_terms
+[secondary terms storage]: @ref docs_storage_terms
 [configured shared cache]: @ref common_sharedCacheType
 [CachingFallbackLabelDescriptionLookup]: @ref Wikibase::Lib::Store::CachingFallbackLabelDescriptionLookup
 [CachingPrefetchingTermLookup]: @ref Wikibase::Lib::Store::CachingPrefetchingTermLookup
