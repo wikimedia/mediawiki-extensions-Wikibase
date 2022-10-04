@@ -9,6 +9,8 @@
 			{ "$ref": "../../global/parameters.json#/StatementId" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfModifiedSince" },
+			{ "$ref": "../../global/parameters.json#/IfMatch" },
+			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" },
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
@@ -16,6 +18,7 @@
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/StatementNotFound" },
+			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	},
