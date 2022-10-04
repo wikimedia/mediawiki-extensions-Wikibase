@@ -199,6 +199,17 @@ describe( 'Conditional requests', () => {
 			} );
 		} );
 
+		describe( 'If-Match', () => {
+			it( 'responds 412 given an outdated revision ID', async () => {
+				const response = await newRequestBuilder()
+					.withHeader( 'If-Match', makeEtag( latestRevisionId - 1 ) )
+					.assertValidRequest()
+					.makeRequest();
+
+				assert.strictEqual( response.status, 412 );
+			} );
+		} );
+
 		describe( 'If-Unmodified-Since', () => {
 			describe( '200 response', () => {
 				it( 'If-Unmodified-Since header is same as current revision', async () => {
@@ -221,6 +232,16 @@ describe( 'Conditional requests', () => {
 
 					assertValid200Response( response, latestRevisionId, lastModifiedDate );
 				} );
+			} );
+
+			it( 'responds 412 given the specified date is older than current revision', async () => {
+				const yesterday = new Date( Date.now() - 24 * 60 * 60 * 1000 ).toUTCString();
+				const response = await newRequestBuilder()
+					.withHeader( 'If-Unmodified-Since', yesterday )
+					.assertValidRequest()
+					.makeRequest();
+
+				assert.strictEqual( response.status, 412 );
 			} );
 		} );
 	} );
