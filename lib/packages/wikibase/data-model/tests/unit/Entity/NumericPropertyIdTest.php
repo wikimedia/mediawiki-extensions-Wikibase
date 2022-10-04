@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 
 /**
  * @covers \Wikibase\DataModel\Entity\NumericPropertyId
- * @covers \Wikibase\DataModel\Entity\EntityId
  *
  * @group Wikibase
  * @group WikibaseDataModel
