@@ -322,7 +322,7 @@ return call_user_func( function() {
 	 * true: Write the "unexpectedUnconnectedPage" page property with
 	 *    original/ positive NS id as value/ search key (old format).
 	 */
-	$defaults['tmpUnconnectedPagePagePropMigrationLegacyFormat'] = true;
+	$defaults['tmpUnconnectedPagePagePropMigrationLegacyFormat'] = false;
 
 	return $defaults;
 } );
