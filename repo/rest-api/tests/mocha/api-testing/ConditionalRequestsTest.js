@@ -172,6 +172,62 @@ describe( 'Conditional requests', () => {
 			} );
 		} );
 
+		describe( `If-Match - ${newRequestBuilder().getRouteDescription()}`, () => {
+			describe( '200 response', () => {
+				it( 'if the current item revision matches the ID provided', async () => {
+					const response = await newRequestBuilder()
+						.withHeader( 'If-Match', makeEtag( latestRevisionId ) )
+						.assertValidRequest()
+						.makeRequest();
+					assertValid200Response( response, latestRevisionId, lastModifiedDate );
+				} );
+
+				it( 'if the header is *', async () => {
+					const response = await newRequestBuilder()
+						.withHeader( 'If-Match', '*' )
+						.assertValidRequest()
+						.makeRequest();
+					assertValid200Response( response, latestRevisionId, lastModifiedDate );
+				} );
+
+				it( 'if the current revision matches one of the IDs provided', async () => {
+					const response = await newRequestBuilder()
+						.withHeader( 'If-Match', makeEtag( latestRevisionId - 1, latestRevisionId ) )
+						.assertValidRequest()
+						.makeRequest();
+					assertValid200Response( response, latestRevisionId, lastModifiedDate );
+				} );
+
+			} );
+
+			describe( '412 response', () => {
+				it( 'if the provided revision ID is outdated', async () => {
+					const response = await newRequestBuilder()
+						.withHeader( 'If-Match', makeEtag( latestRevisionId - 1 ) )
+						.assertValidRequest()
+						.makeRequest();
+					assertValid412Response( response );
+				} );
+
+				it( 'if all of the provided revision IDs are outdated', async () => {
+					const response = await newRequestBuilder()
+						.withHeader( 'If-Match', makeEtag( latestRevisionId - 1, latestRevisionId - 2 ) )
+						.assertValidRequest()
+						.makeRequest();
+					assertValid412Response( response );
+				} );
+
+				it( 'if the provided ETag is not a valid revision ID', async () => {
+					const response = await newRequestBuilder()
+						.withHeader( 'If-Match', '"foo"' )
+						.assertValidRequest()
+						.makeRequest();
+					assertValid412Response( response );
+				} );
+
+			} );
+		} );
+
 		describe( `If-Modified-Since - ${newRequestBuilder().getRouteDescription()}`, () => {
 			describe( '200 response', () => {
 				it( 'If-Modified-Since header is older than current revision', async () => {
