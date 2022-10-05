@@ -113,7 +113,7 @@
 	"wikibase-entityusage-legend": "Liste des pages qui utilisent une entité donnée",
 	"wikibase-entityusage-entity": "Entité :",
 	"wikibase-entityusage-submit": "Afficher les pages",
-	"wikibase-pageinfo-entity-id": "ID de l’élément de {{WBREPONAME}}",
+	"wikibase-pageinfo-entity-id": "Identifiant d’élément de {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Aucun",
 	"wikibase-pageinfo-description-local": "Description locale",
 	"wikibase-pageinfo-description-central": "Description centrale",
