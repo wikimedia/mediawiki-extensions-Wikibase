@@ -52,7 +52,7 @@ describe( 'Conditional requests', () => {
 	[
 		() => rbf.newGetItemRequestBuilder( itemId ),
 		() => rbf.newGetItemStatementsRequestBuilder( itemId ),
-		() => rbf.newGetItemStatementsRequestBuilder( itemId, statementId ),
+		() => rbf.newGetItemStatementRequestBuilder( itemId, statementId ),
 		() => rbf.newGetStatementRequestBuilder( statementId )
 	].forEach( ( newRequestBuilder ) => {
 		describe( `If-None-Match - ${newRequestBuilder().getRouteDescription()}`, () => {
