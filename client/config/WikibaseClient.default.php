@@ -309,20 +309,5 @@ return call_user_func( function() {
 	 */
 	$defaults['tmpUnconnectedPagePagePropMigrationStage'] = MIGRATION_NEW;
 
-	/**
-	 * @note This config option is primarily added for the Wikimedia transition use-case and can be
-	 * considered temporary. It could be removed in the future with no warning.
-	 *
-	 * (tmp) Migration setting indicating, whether the "unexpectedUnconnectedPage" page prop should
-	 * be written with the inverted (new format, better for querying) or unaltered namespace id
-	 * (old format) as value/ search key.
-	 *
-	 * false: Write the "unexpectedUnconnectedPage" page property with
-	 *    inverted NS id as value/ search key (which aids querying/ result sorting).
-	 * true: Write the "unexpectedUnconnectedPage" page property with
-	 *    original/ positive NS id as value/ search key (old format).
-	 */
-	$defaults['tmpUnconnectedPagePagePropMigrationLegacyFormat'] = false;
-
 	return $defaults;
 } );

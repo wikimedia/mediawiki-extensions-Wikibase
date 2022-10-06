@@ -51,12 +51,10 @@ class PopulateUnexpectedUnconnectedPagePageProp extends Maintenance {
 			exit;
 		}
 		$settings = WikibaseClient::getSettings();
-		if ( $settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' ) < MIGRATION_WRITE_BOTH
-			|| $settings->getSetting( 'tmpUnconnectedPagePagePropMigrationLegacyFormat' ) ) {
+		if ( $settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' ) < MIGRATION_WRITE_BOTH ) {
 			$this->fatalError(
 				'This script should only be used if the "unexpectedUnconnectedPage" page prop is being ' .
-				'written ("tmpUnconnectedPagePagePropMigrationStage" setting) and the new format ' .
-				'("tmpUnconnectedPagePagePropMigrationLegacyFormat" setting) is selected.'
+				'written ("tmpUnconnectedPagePagePropMigrationStage" setting).'
 			);
 		}
 
