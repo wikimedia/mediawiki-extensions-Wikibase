@@ -8,7 +8,7 @@ For a specification of the semantics of the data structures described here, see 
 
 Changes to the JSON format are subject to [Stable Interface Policy].
 
-**NOTE: The canonical copy of this document is in Wikibase.git. Changes can be requested by filing a ticket on [Phabricator](https://phabricator.wikimedia.org).**
+**NOTE: The canonical copy of this document is in Wikibase.git. Changes can be requested by filing a ticket on** [**Phabricator**](https://phabricator.wikimedia.org).
 
 ## JSON Flavor {#json_flavour}
 
@@ -88,15 +88,15 @@ These JSON representations consist of the following fields in the top level stru
 * datatype
   * The datatype to be used with the Property (Properties only)
 * labels
-  * Contains the labels in different languages, see @ref json_fingerprint.
+  * Contains the labels in different languages, see [Labels, Descriptions and Aliases].
 * descriptions
-  * Contains the descriptions in different languages, see @ref json_fingerprint.
+  * Contains the descriptions in different languages, see [Labels, Descriptions and Aliases].
 * aliases
-  * Contains aliases in different languages, see @ref json_fingerprint.
+  * Contains aliases in different languages, see [Labels, Descriptions and Aliases].
 * claims
-  * Contains any number of statements, groups by property. Note: WikibaseMediaInfo uses the "statements" key instead. See @ref json_statements.
+  * Contains any number of statements, groups by property. Note: WikibaseMediaInfo uses the "statements" key instead. See [Statements].
 * sitelinks
-  * Contains sitelinks to pages on different sites describing the item, see @ref json_sitelinks (Items only).
+  * Contains sitelinks to pages on different sites describing the item, see [Sitelinks] (Items only).
 
 API modules currently handle the revision and date modified slightly differently using the fields below.
 
@@ -231,13 +231,13 @@ A Statement record uses the following fields:
 * type
   * Always *statement*. (Historically, *claim* used to be another valid value here.)
 * mainsnak
-  * The Snak representing the value to be associated with the property. See @ref json_snaks below. The Property specified in the main Snak must be the same as the Property the Statement is associated with.
+  * The Snak representing the value to be associated with the property. See [Snaks] below. The Property specified in the main Snak must be the same as the Property the Statement is associated with.
 * rank
   * The rank expresses whether this value will be used in queries, and shown be visible per default on a client system. The value is either *preferred*, *normal* or *deprecated*.
 * qualifiers
-  * Qualifiers provide a context for the primary value, such as the point in time of measurement. Qualifiers are given as lists of snaks, each associated with one property. See @ref json_qualifiers below.
+  * Qualifiers provide a context for the primary value, such as the point in time of measurement. Qualifiers are given as lists of snaks, each associated with one property. See [Qualifiers] below.
 * references
-  * References record provenance information for the data in the main Snak and qualifiers. They are given as a list of reference records; see @ref json_references below.
+  * References record provenance information for the data in the main Snak and qualifiers. They are given as a list of reference records; see [References] below.
 
 (Historically, there was a distinction between Claims, which had only a main snak and qualifiers, and Statements, which also had references.
 Traces of this distinction may still be found in the serialization or in outdated documentation.)
@@ -298,7 +298,7 @@ A Snak is represented by providing the following fields:
 * datatype
   * The *datatype* field indicates how the value of the Snak can be interpreted. The datatypes could be any other of the datatypes listed on https://www.wikidata.org/wiki/Special:ListDatatypes.
 * datavalue
-  * If the snaktype is *value*, there is a *datavalue* field that contains the actual value the Snak associates with the Property. See @ref json_datavalues below.
+  * If the snaktype is *value*, there is a *datavalue* field that contains the actual value the Snak associates with the Property. See [Data Values] below.
 
 #### Data Values {#json_datavalues}
 
@@ -1013,15 +1013,23 @@ Below is an example of an extract of a complete entity represented in JSON.
 }
 ```
 
-[RFC 7159]: https://tools.ietf.org/html/rfc7159
-[Glossary]: https://www.wikidata.org/wiki/Wikidata:Glossary
-[Stable Interface Policy]: https://www.wikidata.org/wiki/Wikidata:Stable_Interface_Policy
-[Wikibase Data Model]: https://www.mediawiki.org/wiki/Wikibase/DataModel
-[ResultBuilder]: @ref Wikibase::Repo::Api::ResultBuilder
-[Wikibase/DataModel#Dates and times]: https://www.mediawiki.org/wiki/Wikibase/DataModel#Dates_and_times
-[RDF mapping]: https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format
-[proleptic Gregorian calendar]: https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar
 [astronomical year numbering]: https://en.wikipedia.org/wiki/astronomical_year_numbering
-[year zero and ISO 8601]: https://en.wikipedia.org/wiki/0_(year)#ISO_8601
-[Julian day]: https://en.wikipedia.org/wiki/Julian_day
+[Data Values]: @ref json_datavalues
+[Glossary]: https://www.wikidata.org/wiki/Wikidata:Glossary
 [Hebrew calendar]: https://en.wikipedia.org/wiki/Hebrew_calendar
+[Julian day]: https://en.wikipedia.org/wiki/Julian_day
+[Labels, Descriptions and Aliases]: @ref json_fingerprint
+[Phabricator]: https://phabricator.wikimedia.org
+[proleptic Gregorian calendar]: https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar
+[Qualifiers]: @ref json_qualifiers
+[RDF mapping]: https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format
+[References]: @ref json_references
+[ResultBuilder]: @ref Wikibase::Repo::Api::ResultBuilder
+[RFC 7159]: https://tools.ietf.org/html/rfc7159
+[Sitelinks]: @ref json_sitelinks
+[Snaks]: @ref json_snaks
+[Stable Interface Policy]: https://www.wikidata.org/wiki/Wikidata:Stable_Interface_Policy
+[Statements]: @ref json_statements
+[Wikibase Data Model]: https://www.mediawiki.org/wiki/Wikibase/DataModel
+[Wikibase/DataModel#Dates and times]: https://www.mediawiki.org/wiki/Wikibase/DataModel#Dates_and_times
+[year zero and ISO 8601]: https://en.wikipedia.org/wiki/0_(year)#ISO_8601
