@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
-use ExtensionRegistry;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
@@ -26,10 +25,8 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 
 	protected function setUp(): void {
 		parent::setUp();
-
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) ) {
-			$this->markTestSkipped( 'Kartographer not installed' );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'Kartographer' );
+		$this->setMwGlobals( 'wgKartographerMapServer', 'http://192.0.2.0' );
 	}
 
 	public function testGetHtml() {
