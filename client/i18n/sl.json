@@ -7,7 +7,7 @@
 			"Yerpo"
 		]
 	},
-	"wikibase-client-desc": "Klient za razširitev Wikibase",
+	"wikibase-client-desc": "Razširitev Odjemalec za Wikibazo",
 	"tooltip-t-wikibase": "Povežite na ustrezni predmet v podatkovnem odložišču",
 	"wikibase-after-page-move": "Vaša prestavitev bi se morala odraziti tudi s spremembo [$1 jezikovne povezave v projektu {{WBREPONAME}}]. Prosimo, preverite, ali se je to res zgodilo.",
 	"wikibase-comment-add": "Ustvarjen je bil predmet v Wikipodatkih.",
