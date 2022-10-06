@@ -29,9 +29,9 @@
 	},
 	"devDependencies": {
 		"eslint-config-wikimedia": "0.20.0",
-		"grunt": "^1.4.1",
+		"grunt": "1.5.3",
 		"grunt-contrib-qunit": "^5.1.0",
-		"grunt-eslint": "23.0.0",
+		"grunt-eslint": "24.0.0",
 		"phantomjs-prebuilt": "^2.1.16",
 		"qunit": "^2.16.0",
 		"sinon": "^13.0.0"
