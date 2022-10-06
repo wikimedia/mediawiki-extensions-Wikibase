@@ -262,18 +262,7 @@ describe( 'Conditional requests', () => {
 			} );
 		} );
 
-		describe( 'If-Match', () => {
-			it( 'responds 412 given an outdated revision ID', async () => {
-				const response = await newRequestBuilder()
-					.withHeader( 'If-Match', makeEtag( latestRevisionId - 1 ) )
-					.assertValidRequest()
-					.makeRequest();
-
-				assertValid412Response( response );
-			} );
-		} );
-
-		describe( 'If-Unmodified-Since', () => {
+		describe( `If-Unmodified-Since - ${newRequestBuilder().getRouteDescription()}`, () => {
 			describe( '200 response', () => {
 				it( 'If-Unmodified-Since header is same as current revision', async () => {
 					const response = await newRequestBuilder()
