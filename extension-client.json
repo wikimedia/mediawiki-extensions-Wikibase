@@ -476,8 +476,7 @@
 				"NamespaceInfo",
 				"TitleFactory",
 				"WikibaseClient.ClientDomainDbFactory",
-				"WikibaseClient.NamespaceChecker",
-				"WikibaseClient.Settings"
+				"WikibaseClient.NamespaceChecker"
 			]
 		},
 		"PagesWithBadges": {
