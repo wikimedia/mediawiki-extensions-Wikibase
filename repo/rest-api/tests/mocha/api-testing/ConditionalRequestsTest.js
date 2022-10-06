@@ -22,6 +22,13 @@ function assertValid304Response( response, revisionId ) {
 	assert.equal( response.text, '' );
 }
 
+function assertValid412Response( response ) {
+	assert.equal( response.status, 412 );
+	assert.isUndefined( response.header.etag );
+	assert.isUndefined( response.header[ 'last-modified' ] );
+	assert.isEmpty( response.text );
+}
+
 function assertValid200Response( response, revisionId, lastModified ) {
 	assert.equal( response.status, 200 );
 	assert.equal( response.header[ 'last-modified' ], lastModified );
@@ -206,7 +213,7 @@ describe( 'Conditional requests', () => {
 					.assertValidRequest()
 					.makeRequest();
 
-				assert.strictEqual( response.status, 412 );
+				assertValid412Response( response );
 			} );
 		} );
 
@@ -241,7 +248,7 @@ describe( 'Conditional requests', () => {
 					.assertValidRequest()
 					.makeRequest();
 
-				assert.strictEqual( response.status, 412 );
+				assertValid412Response( response );
 			} );
 		} );
 	} );
@@ -305,7 +312,7 @@ describe( 'Conditional requests', () => {
 						.withHeader( 'If-Match', makeEtag( latestRevisionId - 1 ) )
 						.makeRequest();
 
-					assert.strictEqual( response.status, 412 );
+					assertValid412Response( response );
 				} );
 
 				it( 'responds with 2xx and makes the edit given the latest revision id', async () => {
@@ -326,7 +333,7 @@ describe( 'Conditional requests', () => {
 						.withHeader( 'If-Unmodified-Since', 'Wed, 27 Jul 2022 08:24:29 GMT' )
 						.makeRequest();
 
-					assert.strictEqual( response.status, 412 );
+					assertValid412Response( response );
 				} );
 
 				it( 'responds with 2xx and makes the edit given the latest modified date', async () => {
@@ -347,7 +354,7 @@ describe( 'Conditional requests', () => {
 						.withHeader( 'If-None-Match', '*' )
 						.makeRequest();
 
-					assert.strictEqual( response.status, 412 );
+					assertValid412Response( response );
 				} );
 			} );
 		} );
