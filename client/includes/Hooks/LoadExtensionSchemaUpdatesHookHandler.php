@@ -32,8 +32,7 @@ class LoadExtensionSchemaUpdatesHookHandler implements LoadExtensionSchemaUpdate
 		$settings = WikibaseClient::getSettings();
 		if (
 			!$updater->updateRowExists( self::UPDATE_KEY_UNEXPECTED_UNCONNECTED_PAGE ) &&
-			$settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' ) >= MIGRATION_WRITE_BOTH &&
-			!$settings->getSetting( 'tmpUnconnectedPagePagePropMigrationLegacyFormat' )
+			$settings->getSetting( 'tmpUnconnectedPagePagePropMigrationStage' ) >= MIGRATION_WRITE_BOTH
 		) {
 			$updater->addExtensionUpdate( [
 				[ __CLASS__, 'primeUnexpectedUnconnectedPage' ],

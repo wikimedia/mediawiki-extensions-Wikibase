@@ -58,11 +58,6 @@ class ClientParserOutputDataUpdater {
 	private $unconnectedPagePagePropMigrationStage;
 
 	/**
-	 * @var bool
-	 */
-	private $unconnectedPagePagePropMigrationLegacyFormat;
-
-	/**
 	 * @var LoggerInterface
 	 */
 	private $logger;
@@ -76,8 +71,6 @@ class ClientParserOutputDataUpdater {
 	 * @param string $siteId The global site ID for the local wiki
 	 * @param int $unconnectedPagePagePropMigrationStage One of the MIGRATION_* constants,
 	 *            indicating which page prop(s) to write for unconnected pages.
-	 * @param bool $unconnectedPagePagePropMigrationLegacyFormat Indicating how the
-	 *            unexpectedUnconnectedPage page prop should be written.
 	 * @param LoggerInterface|null $logger
 	 *
 	 * @throws InvalidArgumentException
@@ -89,7 +82,6 @@ class ClientParserOutputDataUpdater {
 		UsageAccumulatorFactory $usageAccumulatorFactory,
 		string $siteId,
 		int $unconnectedPagePagePropMigrationStage,
-		bool $unconnectedPagePagePropMigrationLegacyFormat,
 		LoggerInterface $logger = null
 	) {
 		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
@@ -98,7 +90,6 @@ class ClientParserOutputDataUpdater {
 		$this->usageAccumulatorFactory = $usageAccumulatorFactory;
 		$this->siteId = $siteId;
 		$this->unconnectedPagePagePropMigrationStage = $unconnectedPagePagePropMigrationStage;
-		$this->unconnectedPagePagePropMigrationLegacyFormat = $unconnectedPagePagePropMigrationLegacyFormat;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -172,10 +163,12 @@ class ClientParserOutputDataUpdater {
 
 		$pageProperties = $parserOutput->getPageProperties();
 
-		$value = $title->getNamespace();
-		if ( !$this->unconnectedPagePagePropMigrationLegacyFormat ) {
-			$value = -$value;
-		}
+		/*
+		 * the page prop value is the *negative* namespace,
+		 * so that ORDER BY pp_sortkey DESC, page_id DESC orders by ascending namespace and descending page ID,
+		 * i.e. Special:UnconnectedPages shows newest main-namespace pages first
+		 */
+		$value = -$title->getNamespace();
 		if ( !isset( $pageProperties['expectedUnconnectedPage'] ) ) {
 			$parserOutput->setPageProperty( 'unexpectedUnconnectedPage', $value );
 		}

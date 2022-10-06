@@ -97,7 +97,6 @@ class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTest
 				return new SettingsArray(
 					[
 						'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH,
-						'tmpUnconnectedPagePagePropMigrationLegacyFormat' => false,
 					] + $settings
 				);
 			},

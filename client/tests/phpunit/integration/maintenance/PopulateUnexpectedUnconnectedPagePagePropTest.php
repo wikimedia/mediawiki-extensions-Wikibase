@@ -39,7 +39,6 @@ class PopulateUnexpectedUnconnectedPagePagePropTest extends MaintenanceBaseTestC
 				'WikibaseClient.Settings' => function() {
 					return new SettingsArray( [
 						'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH,
-						'tmpUnconnectedPagePagePropMigrationLegacyFormat' => false
 					] );
 				}
 			]
