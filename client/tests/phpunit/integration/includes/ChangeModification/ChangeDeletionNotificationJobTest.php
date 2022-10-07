@@ -64,7 +64,7 @@ class ChangeDeletionNotificationJobTest extends RecentChangesModificationTest {
 			]
 		);
 
-		$this->assertRegExp( '/^ChangeDeletionNotification/', $job->toString() );
+		$this->assertMatchesRegularExpression( '/^ChangeDeletionNotification/', $job->toString() );
 	}
 
 	/**

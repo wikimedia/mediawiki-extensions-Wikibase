@@ -246,7 +246,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 		$formatter = $this->callFactoryFunction( $functionName, $format, $options );
 
 		$text = $formatter->format( $value );
-		$this->assertRegExp( $expected, $text );
+		$this->assertMatchesRegularExpression( $expected, $text );
 	}
 
 	public function provideNewFormatter() {
@@ -556,7 +556,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 		$formatter = $this->callFactoryFunction( $functionName, $format, $options );
 
 		$text = $formatter->format( $value );
-		$this->assertRegExp( $expected, $text );
+		$this->assertMatchesRegularExpression( $expected, $text );
 	}
 
 	public function provideNewFormatter_noTitleLookup() {
@@ -590,7 +590,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 		$formatter = $this->callFactoryFunction( $functionName, SnakFormatter::FORMAT_HTML, $options );
 
 		$text = $formatter->format( $value );
-		$this->assertRegExp( $expected, $text );
+		$this->assertMatchesRegularExpression( $expected, $text );
 	}
 
 	public function provideNewFormatter_LabelDescriptionLookupOption() {

@@ -109,7 +109,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		}
 
 		foreach ( $patterns as $pattern ) {
-			$this->assertRegExp( $pattern, $formattedLine );
+			$this->assertMatchesRegularExpression( $pattern, $formattedLine );
 		}
 	}
 
@@ -191,7 +191,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		}
 
 		foreach ( $patterns as $pattern ) {
-			$this->assertRegExp( $pattern, $formattedLine );
+			$this->assertMatchesRegularExpression( $pattern, $formattedLine );
 		}
 	}
 
@@ -275,7 +275,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		}
 
 		foreach ( $patterns as $pattern ) {
-			$this->assertRegExp( $pattern, $formattedLine );
+			$this->assertMatchesRegularExpression( $pattern, $formattedLine );
 		}
 	}
 

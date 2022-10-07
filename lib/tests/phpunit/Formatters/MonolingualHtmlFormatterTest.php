@@ -33,9 +33,9 @@ class MonolingualHtmlFormatterTest extends MediaWikiIntegrationTestCase {
 		$text = $formatter->format( $value );
 
 		if ( $not === 'not' ) {
-			$this->assertNotRegExp( $pattern, $text );
+			$this->assertDoesNotMatchRegularExpression( $pattern, $text );
 		} else {
-			$this->assertRegExp( $pattern, $text );
+			$this->assertMatchesRegularExpression( $pattern, $text );
 		}
 	}
 

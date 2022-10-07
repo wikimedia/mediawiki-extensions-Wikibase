@@ -152,7 +152,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 			]
 		);
 
-		$this->assertRegExp( '/^ChangeVisibilityNotification/', $job->toString() );
+		$this->assertMatchesRegularExpression( '/^ChangeVisibilityNotification/', $job->toString() );
 	}
 
 	private function getClientDomainDb(): ClientDomainDb {

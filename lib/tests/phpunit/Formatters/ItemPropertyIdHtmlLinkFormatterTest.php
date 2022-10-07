@@ -237,7 +237,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 			preg_quote( wfMessage( 'parentheses', wfMessage( 'wikibase-deletedentity-item' )->text() )->text(), '/' ) .
 			'</';
 
-		$this->assertRegExp( $expectedPattern, $formatter->formatEntityId( new ItemId( 'Q123' ) ) );
+		$this->assertMatchesRegularExpression( $expectedPattern, $formatter->formatEntityId( new ItemId( 'Q123' ) ) );
 	}
 
 	public function testGivenForeignItemId_fullUrlIsUsedInTheOutput() {

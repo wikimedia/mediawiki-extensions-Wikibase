@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests\Units;
 
 use DataValues\DecimalValue;
 use DataValues\QuantityValue;
+use MediaWikiTestCaseTrait;
 use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Lib\Units\UnitStorage;
 
@@ -15,6 +16,7 @@ use Wikibase\Lib\Units\UnitStorage;
  * @license GPL-2.0-or-later
  */
 class UnitConverterTest extends \PHPUnit\Framework\TestCase {
+	use MediaWikiTestCaseTrait;
 
 	public function getConverterPairs() {
 		return [
@@ -61,7 +63,7 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase {
 		$q = new QuantityValue( $decimal, $fromUnit, $decimal, $decimal );
 		$qConverted = $uc->toStandardUnits( $q );
 
-		$this->assertRegExp( "/^\\$toValue/", $qConverted->getAmount()->getValue(), 'Wrong amount' );
+		$this->assertMatchesRegularExpression( "/^\\$toValue/", $qConverted->getAmount()->getValue(), 'Wrong amount' );
 		$this->assertEquals( $toUnit, $qConverted->getUnit(), 'Wrong unit' );
 	}
 

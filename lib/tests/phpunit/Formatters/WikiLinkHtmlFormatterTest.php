@@ -6,6 +6,7 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use MediaWikiCoversValidator;
+use MediaWikiTestCaseTrait;
 use Wikibase\Lib\Formatters\CommonsLinkFormatter;
 use Wikibase\Lib\Formatters\WikiLinkHtmlFormatter;
 
@@ -18,6 +19,7 @@ use Wikibase\Lib\Formatters\WikiLinkHtmlFormatter;
  */
 class WikiLinkHtmlFormatterTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiCoversValidator;
+	use MediaWikiTestCaseTrait;
 
 	public function linkFormatProvider() {
 		return [
@@ -51,7 +53,7 @@ class WikiLinkHtmlFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatter = new WikiLinkHtmlFormatter( 1 );
 
 		$html = $formatter->format( $value );
-		$this->assertRegExp( $pattern, $html );
+		$this->assertMatchesRegularExpression( $pattern, $html );
 	}
 
 	public function testFormatError() {

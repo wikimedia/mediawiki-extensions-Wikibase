@@ -333,7 +333,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		// -- check the result --------------------------------------------
 		$this->assertNoError( $html );
-		$this->assertRegExp( '!\(wikibase-mergeitems-success: Q1, \d+, Q2, \d+\)!', $html, 'Expected success message' );
+		$this->assertMatchesRegularExpression( '!\(wikibase-mergeitems-success: Q1, \d+, Q2, \d+\)!', $html, 'Expected success message' );
 
 		// -- check the items --------------------------------------------
 		$actualFrom = $this->entityModificationTestHelper->getEntity( 'Q1', true );

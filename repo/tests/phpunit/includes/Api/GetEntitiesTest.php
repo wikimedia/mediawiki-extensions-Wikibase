@@ -300,7 +300,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		$this->assertGreaterThanOrEqual( 0, $entity['lastrevid'] );
 
 		$this->assertArrayHasKey( 'modified', $entity, 'An entity is missing the modified value' );
-		$this->assertRegExp(
+		$this->assertMatchesRegularExpression(
 			'/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z$/',
 			$entity['modified'],
 			"should be in ISO 8601 format"

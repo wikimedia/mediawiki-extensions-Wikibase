@@ -111,7 +111,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		$this->assertStringContainsString( 'wikibase-listproperties-summary', $output );
 		$this->assertStringContainsString( 'wikibase-listproperties-legend', $output );
 		$this->assertStringNotContainsString( 'wikibase-listproperties-invalid-datatype', $output );
-		$this->assertRegExp( '/P45.*P123.*P789/', $output ); // order is relevant
+		$this->assertMatchesRegularExpression( '/P45.*P123.*P789/', $output ); // order is relevant
 	}
 
 	public function testOffsetAndLimit() {

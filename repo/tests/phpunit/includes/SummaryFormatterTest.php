@@ -457,7 +457,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		if ( $expected === null ) {
 			$this->assertNull( $comment, 'Didn\'t find the expected null' );
 		} else {
-			$this->assertRegExp( $expected, $comment, "Didn't find the expected final comment" );
+			$this->assertMatchesRegularExpression( $expected, $comment, "Didn't find the expected final comment" );
 		}
 	}
 

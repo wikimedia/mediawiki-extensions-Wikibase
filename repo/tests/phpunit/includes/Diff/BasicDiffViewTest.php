@@ -8,6 +8,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use MediaWikiTestCaseTrait;
 use Wikibase\Repo\Diff\BasicDiffView;
 
 /**
@@ -20,6 +21,7 @@ use Wikibase\Repo\Diff\BasicDiffView;
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class BasicDiffViewTest extends \PHPUnit\Framework\TestCase {
+	use MediaWikiTestCaseTrait;
 
 	public function diffOpProvider(): iterable {
 		return [
@@ -89,14 +91,14 @@ class BasicDiffViewTest extends \PHPUnit\Framework\TestCase {
 			$header = substr( $html, 0, $pos );
 			$html = substr( $html, $pos );
 
-			$this->assertRegExp(
+			$this->assertMatchesRegularExpression(
 				'@^<tr><td\b[^>]* colspan="2"[^>]*>[^<]*</td><td\b[^>]* colspan="2"[^>]*>[^<]*</td></tr>$@',
 				$header,
 				'Diff table header line'
 			);
 		}
 
-		$this->assertRegExp( $pattern, $html, 'Diff table content line' );
+		$this->assertMatchesRegularExpression( $pattern, $html, 'Diff table content line' );
 	}
 
 }

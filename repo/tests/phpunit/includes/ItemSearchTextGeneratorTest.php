@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWikiTestCaseTrait;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\ItemSearchTextGenerator;
 
@@ -15,6 +16,7 @@ use Wikibase\Repo\ItemSearchTextGenerator;
  * @author Thiemo Kreuz
  */
 class ItemSearchTextGeneratorTest extends \PHPUnit\Framework\TestCase {
+	use MediaWikiTestCaseTrait;
 
 	public function generateProvider() {
 		$item = new Item();
@@ -55,7 +57,7 @@ class ItemSearchTextGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$text = $generator->generate( $item );
 
 		foreach ( $patterns as $pattern ) {
-			$this->assertRegExp( $pattern . 'm', $text );
+			$this->assertMatchesRegularExpression( $pattern . 'm', $text );
 		}
 	}
 

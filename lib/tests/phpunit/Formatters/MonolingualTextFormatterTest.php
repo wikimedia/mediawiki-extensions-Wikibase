@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\MonolingualTextValue;
+use MediaWikiTestCaseTrait;
 use Wikibase\Lib\Formatters\MonolingualTextFormatter;
 
 /**
@@ -16,6 +17,7 @@ use Wikibase\Lib\Formatters\MonolingualTextFormatter;
  * @author Daniel Kinzler
  */
 class MonolingualTextFormatterTest extends \PHPUnit\Framework\TestCase {
+	use MediaWikiTestCaseTrait;
 
 	/**
 	 * @dataProvider monolingualTextFormatProvider
@@ -24,7 +26,7 @@ class MonolingualTextFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatter = new MonolingualTextFormatter();
 
 		$text = $formatter->format( $value );
-		$this->assertRegExp( $pattern, $text );
+		$this->assertMatchesRegularExpression( $pattern, $text );
 	}
 
 	public function monolingualTextFormatProvider() {

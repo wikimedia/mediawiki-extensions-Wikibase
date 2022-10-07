@@ -3,6 +3,7 @@
 namespace Wikibase\View\Tests;
 
 use DataValues\StringValue;
+use MediaWikiTestCaseTrait;
 use ValueFormatters\BasicNumberLocalizer;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -28,6 +29,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author H. Snater < mediawiki@snater.com >
  */
 class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
+	use MediaWikiTestCaseTrait;
 
 	/**
 	 * @return SnakHtmlGenerator
@@ -64,7 +66,7 @@ class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$html = $statementHtmlGenerator->getHtmlForStatement( $statement, 'edit' );
 
 		foreach ( $patterns as $message => $pattern ) {
-			$this->assertRegExp( $pattern, $html, $message );
+			$this->assertMatchesRegularExpression( $pattern, $html, $message );
 		}
 	}
 

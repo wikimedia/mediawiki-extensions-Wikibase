@@ -6,6 +6,7 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Language;
+use MediaWikiTestCaseTrait;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use ValueFormatters\StringFormatter;
@@ -32,6 +33,7 @@ use Wikibase\Lib\TermLanguageFallbackChain;
  * @author Daniel Kinzler
  */
 class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
+	use MediaWikiTestCaseTrait;
 
 	/**
 	 * @dataProvider constructorErrorsProvider
@@ -85,7 +87,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 
 		// assert that the formatter we got conforms to the expected behavior
 		$actual = $formatter->formatValue( $value, $datatype );
-		$this->assertRegExp( $expectedPattern, $actual );
+		$this->assertMatchesRegularExpression( $expectedPattern, $actual );
 	}
 
 	public function provideGetValueFormatter() {

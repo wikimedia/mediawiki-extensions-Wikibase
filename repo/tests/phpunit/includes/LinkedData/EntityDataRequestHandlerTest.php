@@ -293,18 +293,18 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			ob_end_clean();
 
 			$this->assertEquals( $expectedStatusCode, $response->getStatusCode(), 'status code' );
-			$this->assertRegExp( $expectedOutput, $text, 'output' );
+			$this->assertMatchesRegularExpression( $expectedOutput, $text, 'output' );
 
 			foreach ( $expectedHeaders as $name => $exp ) {
 				$value = $response->getHeader( $name );
 				$this->assertNotNull( $value, "header: $name" );
 				$this->assertIsString( $value, "header: $name" );
-				$this->assertRegExp( $exp, $value, "header: $name" );
+				$this->assertMatchesRegularExpression( $exp, $value, "header: $name" );
 			}
 		} catch ( HttpError $e ) {
 			ob_end_clean();
 			$this->assertEquals( $expectedStatusCode, $e->getStatusCode(), 'status code' );
-			$this->assertRegExp( $expectedOutput, $e->getHTML(), 'error output' );
+			$this->assertMatchesRegularExpression( $expectedOutput, $e->getHTML(), 'error output' );
 		}
 
 		// We always set "Access-Control-Allow-Origin: *"
