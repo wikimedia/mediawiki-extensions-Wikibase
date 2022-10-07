@@ -66,7 +66,7 @@ abstract class EntityViewTestCase extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( [], $output->getPlaceholders() );
 
 		$html = $output->getHtml();
-		$this->assertRegexp( $regexp, $html );
+		$this->assertMatchesRegularExpression( $regexp, $html );
 
 		$entityId = $entity->getId()->getSerialization();
 		$this->assertMatchesRegularExpression( '/id="wb-[a-z]+-' . $entityId . '"/', $html );

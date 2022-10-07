@@ -215,15 +215,16 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$descriptionLookup = $this->createMock( DescriptionLookup::class );
 
-		$descriptionLookup->expects( $this->at( 0 ) )
+		$descriptionLookup->expects( $this->atLeast( 2 ) )
 			->method( 'getDescription' )
-			->with( $this->anything(), DescriptionLookup::SOURCE_LOCAL )
-			->willReturn( $localDescription );
-
-		$descriptionLookup->expects( $this->at( 1 ) )
-			->method( 'getDescription' )
-			->with( $this->anything(), DescriptionLookup::SOURCE_CENTRAL )
-			->willReturn( $centralDescription );
+			->withConsecutive(
+				[ $this->anything(), DescriptionLookup::SOURCE_LOCAL ],
+				[ $this->anything(), DescriptionLookup::SOURCE_CENTRAL ]
+			)
+			->willReturnOnConsecutiveCalls(
+				$localDescription,
+				$centralDescription
+			);
 
 		return new InfoActionHookHandler(
 			$namespaceChecker,

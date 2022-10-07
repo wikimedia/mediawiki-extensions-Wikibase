@@ -79,12 +79,13 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 	private function getStatsdDataFactoryMock( array $expectedStats ) {
 		$stats = $this->createMock( StatsdDataFactoryInterface::class );
 
-		$i = 0;
+		$expectedArgs = [];
 		foreach ( $expectedStats as $updateType => $delta ) {
-			$stats->expects( $this->at( $i++ ) )
-				->method( 'updateCount' )
-				->with( 'wikibase.client.pageupdates.' . $updateType, $delta );
+			$expectedArgs[] = [ 'wikibase.client.pageupdates.' . $updateType, $delta ];
 		}
+		$stats
+			->method( 'updateCount' )
+			->withConsecutive( ...$expectedArgs );
 
 		return $stats;
 	}

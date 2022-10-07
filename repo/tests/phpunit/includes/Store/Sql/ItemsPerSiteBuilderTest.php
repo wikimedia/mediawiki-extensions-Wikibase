@@ -81,21 +81,10 @@ class ItemsPerSiteBuilderTest extends MediaWikiIntegrationTestCase {
 			$this->getTestItemId()
 		];
 
-		$mock->expects( $this->at( 0 ) )
+		$mock
 			->method( 'fetchIds' )
-			->willReturn( $itemIds )
-			->with( self::BATCH_SIZE );
-
-		$mock->expects( $this->at( 1 ) )
-			->method( 'fetchIds' )
-			->willReturn( $itemIds )
-			->with( self::BATCH_SIZE );
-
-		$mock->expects( $this->at( 2 ) )
-			->method( 'fetchIds' )
-			->willReturn( [] )
-			->with( self::BATCH_SIZE );
-
+			->with( self::BATCH_SIZE )
+			->willReturnOnConsecutiveCalls( $itemIds, $itemIds, [] );
 		return $mock;
 	}
 

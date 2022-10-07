@@ -116,15 +116,16 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 	private function getMockApiPageSet( array $expected ) {
 		$mock = $this->createMock( ApiPageSet::class );
 
-		$i = 0;
+		$expectedParams = [];
 		foreach ( $expected as $entry ) {
-			$mock->expects( $this->at( $i++ ) )
-				->method( 'setGeneratorData' )
-				->with(
-					$this->getMockTitle(),
-					[ 'displaytext' => $entry['displaytext'] ]
-				);
+			$expectedParams[] = [
+				$this->getMockTitle(),
+				[ 'displaytext' => $entry['displaytext'] ]
+			];
 		}
+		$mock
+			->method( 'setGeneratorData' )
+			->withConsecutive( ...$expectedParams );
 
 		$mock->expects( $this->once() )
 			->method( 'populateFromTitles' );

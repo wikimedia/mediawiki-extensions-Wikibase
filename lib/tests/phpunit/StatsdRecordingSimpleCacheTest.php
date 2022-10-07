@@ -42,13 +42,12 @@ class StatsdRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetMultipleIncrementsMetric() {
 		$stats = $this->getMockForAbstractClass( StatsdDataFactoryInterface::class );
-		$stats->expects( $this->at( 0 ) )
+		$stats->expects( $this->atLeast( 2 ) )
 			->method( 'updateCount' )
-			->with( 'statsKeyMiss', 2 );
-
-		$stats->expects( $this->at( 1 ) )
-			->method( 'updateCount' )
-			->with( 'statsKeyHit', 1 );
+			->withConsecutive(
+				[ 'statsKeyMiss', 2 ],
+				[ 'statsKeyHit', 1 ]
+			);
 
 		// Inner cache that returns the default that has been passed to the get method (cache miss)
 		$innerCache = $this->getMockForAbstractClass( CacheInterface::class );
@@ -87,13 +86,12 @@ class StatsdRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetMultipleDoesNotIncrementMetrics() {
 		$stats = $this->getMockForAbstractClass( StatsdDataFactoryInterface::class );
-		$stats->expects( $this->at( 0 ) )
+		$stats->expects( $this->atLeast( 2 ) )
 			->method( 'updateCount' )
-			->with( 'statsKeyMiss', 1 );
-
-		$stats->expects( $this->at( 1 ) )
-			->method( 'updateCount' )
-			->with( 'statsKeyHit', 1 );
+			->withConsecutive(
+				[ 'statsKeyMiss', 1 ],
+				[ 'statsKeyHit', 1 ]
+			);
 
 		// Inner cache that returns the default that has been passed to the get method (cache miss)
 		$innerCache = $this->getMockForAbstractClass( CacheInterface::class );
