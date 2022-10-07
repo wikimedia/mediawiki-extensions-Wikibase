@@ -43,7 +43,7 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 			$actualInfo = ApiErrorFormatter::stripMarkup(
 				$msg->inLanguage( 'en' )->useDatabase( false )->text()
 			);
-			$this->assertRegExp( $info, $actualInfo, 'error info message' );
+			$this->assertMatchesRegularExpression( $info, $actualInfo, 'error info message' );
 		}
 
 		if ( $code !== null ) {
@@ -71,7 +71,7 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 
 		if ( preg_match( '/^([^\s\w\d]).*\1[a-zA-Z]*$/', $expected ) ) {
 			$this->assertIsString( $data, $name );
-			$this->assertRegExp( $expected, $data, $name );
+			$this->assertMatchesRegularExpression( $expected, $data, $name );
 		} else {
 			$this->assertSame( $expected, $data, $name );
 		}

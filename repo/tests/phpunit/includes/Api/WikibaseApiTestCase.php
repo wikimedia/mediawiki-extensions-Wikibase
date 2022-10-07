@@ -440,7 +440,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 		$comment = $revRecord->getComment();
 		$this->assertInstanceOf( CommentStoreComment::class, $comment );
-		$this->assertRegExp( $regex, $comment->text );
+		$this->assertMatchesRegularExpression( $regex, $comment->text );
 	}
 
 	protected function assertCanTagSuccessfulRequest(

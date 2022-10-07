@@ -6,6 +6,7 @@ use DataValues\NumberValue;
 use DataValues\QuantityValue;
 use DataValues\UnboundedQuantityValue;
 use InvalidArgumentException;
+use MediaWikiTestCaseTrait;
 use ValueFormatters\BasicNumberLocalizer;
 use ValueFormatters\NumberLocalizer;
 use ValueFormatters\ValueFormatter;
@@ -22,6 +23,7 @@ use Wikibase\Lib\Formatters\QuantityDetailsFormatter;
  * @author Thiemo Kreuz
  */
 class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
+	use MediaWikiTestCaseTrait;
 
 	private function newFormatter( NumberLocalizer $numberLocalizer = null ) {
 		$vocabularyUriFormatter = $this->createMock( ValueFormatter::class );
@@ -45,7 +47,7 @@ class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatter = $this->newFormatter();
 
 		$html = $formatter->format( $value );
-		$this->assertRegExp( $pattern, $html );
+		$this->assertMatchesRegularExpression( $pattern, $html );
 	}
 
 	public function quantityFormatProvider() {

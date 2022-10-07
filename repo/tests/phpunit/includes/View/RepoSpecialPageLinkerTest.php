@@ -46,7 +46,7 @@ class RepoSpecialPageLinkerTest extends MediaWikiLangTestCase {
 
 		$link = $linker->getLink( $specialPageName, $subPageParams );
 
-		$this->assertRegExp( $expectedMatch, $link );
+		$this->assertMatchesRegularExpression( $expectedMatch, $link );
 	}
 
 	public function getLinkProvider() {

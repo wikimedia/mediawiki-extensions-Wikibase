@@ -168,7 +168,7 @@ class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 		$uriManager = $this->makeUriManager();
 
 		$actual = $uriManager->getDocUrl( $id, $format, $revision );
-		$this->assertRegExp( $expectedExp, $actual );
+		$this->assertMatchesRegularExpression( $expectedExp, $actual );
 	}
 
 	public function testCacheableOrPotentiallyCachedUrls_withoutRevisionId() {

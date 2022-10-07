@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
+use MediaWikiTestCaseTrait;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\Formatters\HtmlUrlFormatter;
 
@@ -19,6 +20,7 @@ use Wikibase\Lib\Formatters\HtmlUrlFormatter;
  * @author Daniel Kinzler
  */
 class HtmlUrlFormatterTest extends \PHPUnit\Framework\TestCase {
+	use MediaWikiTestCaseTrait;
 
 	/**
 	 * @dataProvider urlFormatProvider
@@ -27,7 +29,7 @@ class HtmlUrlFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatter = new HtmlUrlFormatter( $options );
 
 		$html = $formatter->format( $value );
-		$this->assertRegExp( $pattern, $html );
+		$this->assertMatchesRegularExpression( $pattern, $html );
 	}
 
 	public function urlFormatProvider() {

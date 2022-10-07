@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use InvalidArgumentException;
 use MediaWikiCoversValidator;
+use MediaWikiTestCaseTrait;
 use OutOfBoundsException;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
@@ -37,6 +38,7 @@ use Wikibase\Lib\Formatters\UnmappedEntityIdValueFormatter;
  */
 class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiCoversValidator;
+	use MediaWikiTestCaseTrait;
 
 	/**
 	 * @dataProvider constructorErrorsProvider
@@ -122,7 +124,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 
 		$actual = $formatter->formatSnak( $snak );
 
-		$this->assertRegExp( $expected, $actual );
+		$this->assertMatchesRegularExpression( $expected, $actual );
 	}
 
 	/**

@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\StringValue;
 use MediaWikiCoversValidator;
+use MediaWikiTestCaseTrait;
 use Wikibase\Lib\Formatters\WikiLinkWikitextFormatter;
 
 /**
@@ -15,6 +16,7 @@ use Wikibase\Lib\Formatters\WikiLinkWikitextFormatter;
  */
 class WikiLinkWikitextFormatterTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiCoversValidator;
+	use MediaWikiTestCaseTrait;
 
 	public function linkFormatProvider() {
 		return [
@@ -36,7 +38,7 @@ class WikiLinkWikitextFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatter = new WikiLinkWikitextFormatter( 1 );
 
 		$html = $formatter->format( $value );
-		$this->assertRegExp( $pattern, $html );
+		$this->assertMatchesRegularExpression( $pattern, $html );
 	}
 
 }

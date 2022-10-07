@@ -145,7 +145,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 
 		$result = $this->newFormatter()->formatEntityId( $entityId );
 
-		$this->assertRegExp( $expectedPattern, $result );
+		$this->assertMatchesRegularExpression( $expectedPattern, $result );
 	}
 
 	/**
@@ -157,7 +157,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 
 		$result = $this->newFormatter()->formatEntityId( $entityId );
 
-		$this->assertRegExp( $expectedPattern, $result );
+		$this->assertMatchesRegularExpression( $expectedPattern, $result );
 	}
 
 	public function testGivenEntityIdWithNullTitle_htmlForNonExistentEntityIsDisplayed() {
@@ -168,7 +168,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 			preg_quote( wfMessage( 'parentheses', wfMessage( 'wikibase-deletedentity-item' )->text() )->text(), '@' ) .
 			'<@';
 
-		$this->assertRegExp( $expectedPattern, $this->newFormatter()->formatEntityId( $entityId ) );
+		$this->assertMatchesRegularExpression( $expectedPattern, $this->newFormatter()->formatEntityId( $entityId ) );
 	}
 
 	public function testUsesUrlFromLookup() {
@@ -178,7 +178,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 
 		$expectedPattern = '@href="' . $url . '".*>@';
 
-		$this->assertRegExp( $expectedPattern, $this->newFormatter()->formatEntityId( $entityId ) );
+		$this->assertMatchesRegularExpression( $expectedPattern, $this->newFormatter()->formatEntityId( $entityId ) );
 	}
 
 	public function testFormat_redirectHasClass() {

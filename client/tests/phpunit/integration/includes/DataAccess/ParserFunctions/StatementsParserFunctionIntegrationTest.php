@@ -211,7 +211,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 	public function testStatementsParserFunction_byNonExistent() {
 		$result = $this->parseWikitextToHtml( '{{#statements:P2147483645}}' );
 
-		$this->assertRegExp(
+		$this->assertMatchesRegularExpression(
 			'/<p.*class=".*wikibase-error.*">.*P2147483645.*<\/p>/',
 			$result->getText( [ 'unwrap' => true ] )
 		);

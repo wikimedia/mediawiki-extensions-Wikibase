@@ -909,7 +909,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$out = $this->callAction( $action, $page, $params, $post );
 
 		if ( $htmlPattern !== null && $htmlPattern !== false ) {
-			$this->assertRegExp( $htmlPattern, $out->getHTML() );
+			$this->assertMatchesRegularExpression( $htmlPattern, $out->getHTML() );
 		}
 
 		if ( $expectedProps ) {
@@ -927,7 +927,7 @@ class EditEntityActionTest extends ActionTestCase {
 						$this->assertContains( $element, $act, $p );
 					}
 				} else {
-					$this->assertRegExp( $pattern, $act, $p );
+					$this->assertMatchesRegularExpression( $pattern, $act, $p );
 				}
 			}
 		}
@@ -1065,7 +1065,7 @@ class EditEntityActionTest extends ActionTestCase {
 
 		$out = $this->callAction( 'submit', $page, $params, true );
 
-		$this->assertRegExp( '![:/=]Q\d+$!', $out->getRedirect(), 'successful operation should return a redirect' );
+		$this->assertMatchesRegularExpression( '![:/=]Q\d+$!', $out->getRedirect(), 'successful operation should return a redirect' );
 
 		if ( isset( $expected['redirect'] ) ) {
 			$targetHandle = $this->loadTestRedirect( $handle );
@@ -1143,11 +1143,11 @@ class EditEntityActionTest extends ActionTestCase {
 		$out = $this->callAction( $action, $page, $params, true );
 
 		if ( $error ) {
-			$this->assertRegExp( $error, $out->getHTML() );
+			$this->assertMatchesRegularExpression( $error, $out->getHTML() );
 
 			$this->assertSame( '', $out->getRedirect(), 'operation should not trigger a redirect' );
 		} else {
-			$this->assertRegExp( '![:/=]Q\d+$!', $out->getRedirect(), 'successful operation should return a redirect' );
+			$this->assertMatchesRegularExpression( '![:/=]Q\d+$!', $out->getRedirect(), 'successful operation should return a redirect' );
 		}
 
 		self::resetTestItem( $handle );

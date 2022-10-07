@@ -73,9 +73,9 @@ class CommonsInlineImageFormatterTest extends MediaWikiIntegrationTestCase {
 
 		$html = $formatter->format( $value );
 		if ( $shouldContain ) {
-			$this->assertRegExp( $pattern, $html );
+			$this->assertMatchesRegularExpression( $pattern, $html );
 		} else {
-			$this->assertNotRegExp( $pattern, $html );
+			$this->assertDoesNotMatchRegularExpression( $pattern, $html );
 		}
 	}
 
@@ -92,7 +92,7 @@ class CommonsInlineImageFormatterTest extends MediaWikiIntegrationTestCase {
 		$html = $formatter->format( new StringValue( 'example.jpg' ) );
 
 		// fallback to using CommonsInLineImageFormatter::FALLBACK_THUMBNAIL_WIDTH
-		$this->assertRegExp( '/320px-Example\.jpg/', $html );
+		$this->assertMatchesRegularExpression( '/320px-Example\.jpg/', $html );
 	}
 
 	private function newSubjectInstance(

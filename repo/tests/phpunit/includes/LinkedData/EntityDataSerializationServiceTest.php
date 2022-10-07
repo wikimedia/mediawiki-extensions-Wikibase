@@ -441,11 +441,11 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expectedMimeType, $mimeType );
 
 		foreach ( $expectedDataExpressions as $key => $expectedDataRegex ) {
-			$this->assertRegExp( $expectedDataRegex, $data, "expected: $key" );
+			$this->assertMatchesRegularExpression( $expectedDataRegex, $data, "expected: $key" );
 		}
 
 		foreach ( $unexpectedDataExpressions as $key => $unexpectedDataRegex ) {
-			$this->assertNotRegExp( $unexpectedDataRegex, $data, "unexpected: $key" );
+			$this->assertDoesNotMatchRegularExpression( $unexpectedDataRegex, $data, "unexpected: $key" );
 		}
 	}
 

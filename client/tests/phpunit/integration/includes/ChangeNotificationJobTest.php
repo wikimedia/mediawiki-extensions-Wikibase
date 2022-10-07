@@ -46,7 +46,7 @@ class ChangeNotificationJobTest extends MediaWikiIntegrationTestCase {
 
 		// toString used to fail on some platforms if a job contained a non-primitive parameter.
 		$s = $job->toString();
-		$this->assertRegExp( $regex, $s );
+		$this->assertMatchesRegularExpression( $regex, $s );
 	}
 
 }

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Unit;
 
+use MediaWikiTestCaseTrait;
 use Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoItemLinkGenerator;
@@ -22,6 +23,7 @@ use Wikibase\Lib\SubEntityTypesMapper;
  * @author Marius Hoch < hoo@online.de >
  */
 class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
+	use MediaWikiTestCaseTrait;
 
 	private function getRepoLinker() {
 		$baseUrl = 'http://www.example.com';
@@ -155,7 +157,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 		if ( $expected === null ) {
 			$this->assertNull( $link );
 		} else {
-			$this->assertRegExp( $expected, $link );
+			$this->assertMatchesRegularExpression( $expected, $link );
 		}
 	}
 

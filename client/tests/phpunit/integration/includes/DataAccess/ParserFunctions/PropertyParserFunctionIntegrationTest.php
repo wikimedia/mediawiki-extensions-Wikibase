@@ -157,7 +157,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 	public function testPropertyParserFunction_byNonExistent() {
 		$result = $this->parseWikitextToHtml( '{{#property:P2147483647}}' );
 
-		$this->assertRegExp(
+		$this->assertMatchesRegularExpression(
 			'/<p.*class=".*wikibase-error.*">.*P2147483647.*<\/p>/',
 			$result->getText( [ 'unwrap' => true ] )
 		);

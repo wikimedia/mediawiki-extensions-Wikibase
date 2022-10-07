@@ -66,7 +66,7 @@ class CommonsLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$formatter = new CommonsLinkFormatter( $options );
 
 		$html = $formatter->format( $value );
-		$this->assertRegExp( $pattern, $html );
+		$this->assertMatchesRegularExpression( $pattern, $html );
 	}
 
 	public function testFormatError() {

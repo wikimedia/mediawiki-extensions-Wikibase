@@ -7,6 +7,7 @@ use ApiUsageException;
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use FauxRequest;
 use Language;
+use MediaWikiTestCaseTrait;
 use ValueParsers\NullParser;
 use ValueParsers\ParseException;
 use Wikibase\DataModel\Entity\Int32EntityId;
@@ -32,6 +33,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  */
 class ParseValueTest extends \PHPUnit\Framework\TestCase {
+	use MediaWikiTestCaseTrait;
 
 	/**
 	 * @param string[] $params
@@ -324,7 +326,7 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 
 		if ( is_string( $expected ) && preg_match( '/^([^\s\w\d]).*\1[a-zA-Z]*$/', $expected ) ) {
 			$this->assertIsString( $data, $name );
-			$this->assertRegExp( $expected, $data, $name );
+			$this->assertMatchesRegularExpression( $expected, $data, $name );
 		} else {
 			$this->assertEquals( $expected, $data, $name );
 		}

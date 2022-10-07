@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Diff;
 
+use MediaWikiTestCaseTrait;
 use Wikibase\Repo\Diff\DiffOpValueFormatter;
 
 /**
@@ -13,6 +14,7 @@ use Wikibase\Repo\Diff\DiffOpValueFormatter;
  * @author Daniel Kinzler
  */
 class DiffOpValueFormatterTest extends \PHPUnit\Framework\TestCase {
+	use MediaWikiTestCaseTrait;
 
 	/**
 	 * @dataProvider provideGenerateHtml
@@ -21,7 +23,7 @@ class DiffOpValueFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatter = new DiffOpValueFormatter( $name, $name, $oldValues, $newValues );
 
 		$html = $formatter->generateHtml();
-		$this->assertRegExp( $pattern, $html );
+		$this->assertMatchesRegularExpression( $pattern, $html );
 	}
 
 	public function provideGenerateHtml() {

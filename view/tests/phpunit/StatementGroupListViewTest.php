@@ -3,6 +3,7 @@
 namespace Wikibase\View\Tests;
 
 use DataValues\StringValue;
+use MediaWikiTestCaseTrait;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -34,6 +35,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
+	use MediaWikiTestCaseTrait;
 
 	public function testGetHtml() {
 		$propertyId = new NumericPropertyId( 'P77' );
@@ -86,7 +88,7 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 		];
 		$view = $this->newStatementGroupListView();
 		$html = $view->getHtml( $statements );
-		$this->assertRegExp( '/^[^$]*\$' . implode( '\n[^$]*\$', [
+		$this->assertMatchesRegularExpression( '/^[^$]*\$' . implode( '\n[^$]*\$', [
 			'P101',
 			'P102',
 			'P103',

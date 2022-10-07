@@ -120,7 +120,7 @@ class ApiConventionsTest extends MediaWikiIntegrationTestCase {
 		$this->assertNotEmpty( $examples, 'there are no examples for ' . $moduleClass );
 
 		foreach ( $examples as $url => $example ) {
-			$this->assertRegExp(
+			$this->assertMatchesRegularExpression(
 				'/^action=\w/',
 				$url,
 				'the key ' . $url . ' is not an url at ' . $moduleClass

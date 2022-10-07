@@ -372,13 +372,13 @@ XML
 		$this->assertSame( EntityHandler::PARSER_VERSION, $pOpts->getOption( 'wb' ) );
 		$this->assertSame( [ 'wb' => true ], $used );
 		$this->assertTrue( $pOpts->isSafeToCache() );
-		$this->assertRegExp(
+		$this->assertMatchesRegularExpression(
 			'/(?:^|!)wb=' . EntityHandler::PARSER_VERSION . '(?:!|$)/',
 			$pOpts->optionsHash( [ 'wb' ] )
 		);
 
 		$pOpts2 = ParserOptions::newFromAnon();
-		$this->assertRegExp(
+		$this->assertMatchesRegularExpression(
 			'/(?:^|!)wb=' . EntityHandler::PARSER_VERSION . '(?:!|$)/',
 			$pOpts2->optionsHash( [ 'wb' ] )
 		);

@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\NumberValue;
 use DataValues\TimeValue;
 use InvalidArgumentException;
+use MediaWikiTestCaseTrait;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\Formatters\TimeDetailsFormatter;
@@ -21,6 +22,7 @@ use Wikibase\Lib\Formatters\TimeDetailsFormatter;
  * @author Thiemo Kreuz
  */
 class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
+	use MediaWikiTestCaseTrait;
 
 	/**
 	 * @param string $formattedHeading
@@ -92,7 +94,7 @@ class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatter = $this->getFormatter( '<a>HTML</a>' );
 
 		$html = $formatter->format( $value );
-		$this->assertRegExp( $pattern, $html );
+		$this->assertMatchesRegularExpression( $pattern, $html );
 	}
 
 	public function quantityFormatProvider() {

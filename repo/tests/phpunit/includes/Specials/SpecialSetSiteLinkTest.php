@@ -223,7 +223,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	public function testExecuteRedirect() {
 		[ $output, ] = $this->executeSpecialPage( self::$redirectId . '/dewiki', null, 'qqx' );
 
-		$this->assertRegExp(
+		$this->assertMatchesRegularExpression(
 			'@<p class="error">\(wikibase-wikibaserepopage-unresolved-redirect: .*?\)</p>@',
 			$output,
 			'Expected error message'

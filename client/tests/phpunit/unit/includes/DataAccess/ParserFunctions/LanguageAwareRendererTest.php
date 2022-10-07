@@ -6,6 +6,7 @@ namespace Wikibase\Client\Tests\Unit\DataAccess\ParserFunctions;
 
 use DataValues\StringValue;
 use Language;
+use MediaWikiTestCaseTrait;
 use ParserOutput;
 use Title;
 use Wikibase\Client\DataAccess\ParserFunctions\LanguageAwareRenderer;
@@ -36,6 +37,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  * @author Daniel Kinzler
  */
 class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
+	use MediaWikiTestCaseTrait;
 
 	/**
 	 * @param PropertyIdResolver $propertyIdResolver
@@ -120,12 +122,12 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 		);
 		$result = $renderer->render( new ItemId( 'Q4' ), 'invalidLabel' );
 
-		$this->assertRegExp(
+		$this->assertMatchesRegularExpression(
 			'/<(?:strong|span|p|div)\s(?:[^\s>]*\s+)*?class="(?:[^"\s>]*\s+)*?error(?:\s[^">]*)?"/',
 			$result
 		);
 
-		$this->assertRegExp(
+		$this->assertMatchesRegularExpression(
 			'/wikibase-property-render-error.*invalidLabel.*qqx/',
 			$result
 		);
@@ -166,12 +168,12 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 		$renderer->render( new ItemId( 'Q3' ), 'tooManyEntities' );
 		$result = $renderer->render( new ItemId( 'Q4' ), 'tooManyEntities' );
 
-		$this->assertRegExp(
+		$this->assertMatchesRegularExpression(
 			'/<(?:strong|span|p|div)\s(?:[^\s>]*\s+)*?class="(?:[^"\s>]*\s+)*?error(?:\s[^">]*)?"/',
 			$result
 		);
 
-		$this->assertRegExp(
+		$this->assertMatchesRegularExpression(
 			'/wikibase-property-render-error.*tooManyEntities.*/',
 			$result
 		);
