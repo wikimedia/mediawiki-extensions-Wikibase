@@ -55,6 +55,10 @@ class NumericPropertyId extends SerializableEntityId implements PropertyId, Int3
 		return 'property';
 	}
 
+	public function __serialize(): array {
+		return [ 'serialization' => $this->serialization ];
+	}
+
 	/**
 	 * @see Serializable::serialize
 	 *
@@ -62,6 +66,12 @@ class NumericPropertyId extends SerializableEntityId implements PropertyId, Int3
 	 */
 	public function serialize() {
 		return $this->serialization;
+	}
+
+	public function __unserialize( array $data ): void {
+		$this->serialization = $data['serialization'];
+		list( $this->repositoryName, $this->localPart ) =
+			self::extractRepositoryNameAndLocalPart( $this->serialization );
 	}
 
 	/**

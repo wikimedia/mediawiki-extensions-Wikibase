@@ -12,6 +12,10 @@ use Wikibase\DataModel\Entity\SerializableEntityId;
  */
 class CustomEntityId extends SerializableEntityId {
 
+	public function __serialize(): array {
+		return [ 'serialization' => $this->serialization ];
+	}
+
 	/**
 	 * @see Serializable::serialize
 	 *
@@ -19,6 +23,12 @@ class CustomEntityId extends SerializableEntityId {
 	 */
 	public function serialize() {
 		return $this->serialization;
+	}
+
+	public function __unserialize( array $data ): void {
+		$this->serialization = $data['serialization'];
+		$this->repositoryName = '';
+		$this->localPart = $data['serialization'];
 	}
 
 	/**

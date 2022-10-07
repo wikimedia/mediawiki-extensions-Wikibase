@@ -70,8 +70,20 @@ abstract class SnakObject implements Snak {
 	/**
 	 * @return string
 	 */
-	public function getHash() {
-		return sha1( serialize( $this ) );
+	public function getHash(): string {
+		return sha1( $this->getSerializationForHash() );
+	}
+
+	/**
+	 * The serialization to use for hashing, for compatibility reasons this is
+	 * equivalent to the old (pre 7.4) PHP serialization.
+	 *
+	 * @return string
+	 */
+	public function getSerializationForHash(): string {
+		$data = $this->serialize();
+		return 'C:' . strlen( static::class ) . ':"' . static::class .
+			'":' . strlen( $data ) . ':{' . $data . '}';
 	}
 
 	/**
