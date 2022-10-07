@@ -246,11 +246,7 @@ class EntityModificationTestHelper {
 
 		$entry = $this->mockRepository->getLogEntry( $revid );
 		Assert::assertNotNull( $entry, "revision not found: $revid" );
-		if ( method_exists( Assert::class, 'assertMatchesRegularExpression' ) ) {
-			Assert::assertMatchesRegularExpression( $regex, $entry['summary'], $message );
-		} else {
-			Assert::assertRegExp( $regex, $entry['summary'], $message );
-		}
+		Assert::assertMatchesRegularExpression( $regex, $entry['summary'], $message );
 	}
 
 }
