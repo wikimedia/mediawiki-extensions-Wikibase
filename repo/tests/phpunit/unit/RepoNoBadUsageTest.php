@@ -10,6 +10,7 @@ use Wikibase\Lib\Tests\NoBadUsageTest;
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
+ * @coversNothing
  */
 class RepoNoBadUsageTest extends NoBadUsageTest {
 

@@ -16,6 +16,7 @@ use Wikibase\View\EntityDocumentView;
  *
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @coversNothing
  */
 class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 

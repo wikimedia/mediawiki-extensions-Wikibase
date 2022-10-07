@@ -10,6 +10,7 @@ use Wikibase\DataAccess\ApiEntitySource;
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
+ * @covers \Wikibase\DataAccess\ApiEntitySource
  */
 class ApiEntitySourceTest extends TestCase {
 

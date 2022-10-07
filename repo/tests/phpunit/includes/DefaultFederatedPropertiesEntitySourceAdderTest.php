@@ -12,6 +12,7 @@ use const false;
 /**
  * @group Wikibase
  * @license GPL-2.0-or-later
+ * @covers \Wikibase\Repo\FederatedProperties\DefaultFederatedPropertiesEntitySourceAdder
  */
 class DefaultFederatedPropertiesEntitySourceAdderTest extends TestCase {
 

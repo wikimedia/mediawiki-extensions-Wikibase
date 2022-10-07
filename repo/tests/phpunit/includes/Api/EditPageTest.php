@@ -20,6 +20,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @group Database
  * @group medium
+ * @covers \Wikibase\Repo\RepoHooks::onApiCheckCanExecute
  */
 class EditPageTest extends WikibaseApiTestCase {
 

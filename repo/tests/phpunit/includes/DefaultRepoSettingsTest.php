@@ -9,6 +9,7 @@ use Wikibase\Lib\SettingsArray;
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @coversNothing
  */
 class DefaultRepoSettingsTest extends \PHPUnit\Framework\TestCase {
 

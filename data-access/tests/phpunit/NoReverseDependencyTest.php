@@ -10,6 +10,7 @@ use SplFileInfo;
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
+ * @coversNothing
  */
 class NoReverseDependencyTest extends \PHPUnit\Framework\TestCase {
 

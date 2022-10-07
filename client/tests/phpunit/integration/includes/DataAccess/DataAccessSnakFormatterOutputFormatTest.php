@@ -38,6 +38,7 @@ use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch
+ * @covers \Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory
  */
 class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCase {
 

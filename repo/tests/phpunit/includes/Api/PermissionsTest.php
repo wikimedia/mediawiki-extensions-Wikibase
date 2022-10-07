@@ -63,6 +63,7 @@ class PermissionsTest extends PermissionsTestCase {
 
 	/**
 	 * @dataProvider provideReadPermissions
+	 * @covers \Wikibase\Repo\Api\GetEntities
 	 */
 	public function testGetEntities( ?array $permissions, $expectedError ) {
 		$params = [
@@ -86,6 +87,7 @@ class PermissionsTest extends PermissionsTestCase {
 
 	/**
 	 * @dataProvider provideCreateEntityPermissions
+	 * @covers \Wikibase\Repo\Api\EditEntity
 	 */
 	public function testCreateItem( ?array $permissions, $expectedError ) {
 		$itemData = [
@@ -114,6 +116,7 @@ class PermissionsTest extends PermissionsTestCase {
 
 	/**
 	 * @dataProvider provideCreatePropertyPermissions
+	 * @covers \Wikibase\Repo\Api\EditEntity
 	 */
 	public function testCreateProperty( ?array $permissions, $expectedError ) {
 		$itemData = [
@@ -143,6 +146,7 @@ class PermissionsTest extends PermissionsTestCase {
 
 	/**
 	 * @dataProvider provideItemTermPermissions
+	 * @covers \Wikibase\Repo\Api\SetLabel
 	 */
 	public function testSetLabel( ?array $permissions, $expectedError ) {
 		$params = [
@@ -156,6 +160,7 @@ class PermissionsTest extends PermissionsTestCase {
 
 	/**
 	 * @dataProvider provideItemTermPermissions
+	 * @covers \Wikibase\Repo\Api\SetDescription
 	 */
 	public function testSetDescription( ?array $permissions, $expectedError ) {
 		$params = [
@@ -181,6 +186,7 @@ class PermissionsTest extends PermissionsTestCase {
 
 	/**
 	 * @dataProvider provideMergeItemsPermissions
+	 * @covers \Wikibase\Repo\Api\MergeItems
 	 */
 	public function testMergeItems( ?array $permissions, $expectedError ) {
 		$params = [

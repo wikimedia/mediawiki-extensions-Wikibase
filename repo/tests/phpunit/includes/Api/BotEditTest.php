@@ -20,6 +20,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group medium
  *
  * @license GPL-2.0-or-later
+ * @coversNothing
  */
 class BotEditTest extends WikibaseApiTestCase {
 

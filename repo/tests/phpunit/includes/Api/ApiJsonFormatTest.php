@@ -95,6 +95,9 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 		return json_decode( $printer->getBuffer(), true );
 	}
 
+	/**
+	 * @covers \Wikibase\Repo\Api\GetEntities
+	 */
 	public function testGetEntitiesJsonFormat() {
 		$entityRevision = $this->getNewEntityRevision( true );
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
@@ -112,6 +115,9 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 		$this->assertEquals( $this->getExpectedJson( 'getentities' ), $actual );
 	}
 
+	/**
+	 * @covers \Wikibase\Repo\Api\SetLabel
+	 */
 	public function testSetLabelJsonFormat() {
 		$entityRevision = $this->getNewEntityRevision();
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();

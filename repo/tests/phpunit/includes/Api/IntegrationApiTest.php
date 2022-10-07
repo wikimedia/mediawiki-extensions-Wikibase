@@ -19,6 +19,7 @@ use TestSites;
  *
  * @license GPL-2.0-or-later
  * @author Addshore
+ * @coversNothing
  */
 class IntegrationApiTest extends ApiTestCase {
 

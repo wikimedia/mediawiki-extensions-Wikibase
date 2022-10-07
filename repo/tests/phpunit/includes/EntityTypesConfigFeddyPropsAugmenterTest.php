@@ -10,6 +10,7 @@ use Wikibase\Repo\EntityTypesConfigFeddyPropsAugmenter;
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
+ * @covers \Wikibase\Repo\EntityTypesConfigFeddyPropsAugmenter
  */
 class EntityTypesConfigFeddyPropsAugmenterTest extends TestCase {
 
