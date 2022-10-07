@@ -126,6 +126,7 @@
 	<rule ref="Generic.Metrics.NestingLevel" />
 
 	<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing">
+		<exclude name="SlevomatCodingStandard.Files.TypeNameMatchesFileName.NoMatchBetweenTypeNameAndFileName" />
 		<properties>
 			<property name="spacesCountBeforeColon" value="0" />
 		</properties>
