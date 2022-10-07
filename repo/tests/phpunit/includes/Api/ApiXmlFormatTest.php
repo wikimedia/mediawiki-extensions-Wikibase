@@ -49,6 +49,9 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'SiteLookup' );
 	}
 
+	/**
+	 * @covers \Wikibase\Repo\Api\GetEntities
+	 */
 	public function testGetEntitiesXmlFormat() {
 		$entityRevision = $this->getNewEntityRevision( true );
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
@@ -66,6 +69,9 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'getentities' ), $actual );
 	}
 
+	/**
+	 * @covers \Wikibase\Repo\Api\GetClaims
+	 */
 	public function testGetClaimsXmlFormat() {
 		$entityRevision = $this->getNewEntityRevision( true );
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
@@ -82,6 +88,9 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'getclaims' ), $actual );
 	}
 
+	/**
+	 * @covers \Wikibase\Repo\Api\SetLabel
+	 */
 	public function testSetLabelXmlFormat() {
 		$entityRevision = $this->getNewEntityRevision();
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
@@ -113,6 +122,9 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setlabel-removed' ), $actual );
 	}
 
+	/**
+	 * @covers \Wikibase\Repo\Api\SetDescription
+	 */
 	public function testSetDescriptionXmlFormat() {
 		$entityRevision = $this->getNewEntityRevision();
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
@@ -144,6 +156,9 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setdescription-removed' ), $actual );
 	}
 
+	/**
+	 * @covers \Wikibase\Repo\Api\SetAliases
+	 */
 	public function testSetAliasesXmlFormat() {
 		$entityRevision = $this->getNewEntityRevision();
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
@@ -175,6 +190,9 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setaliases-removed' ), $actual );
 	}
 
+	/**
+	 * @covers \Wikibase\Repo\Api\SetSiteLink
+	 */
 	public function testSetSitelinkXmlFormat() {
 		$entityRevision = $this->getNewEntityRevision();
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
@@ -216,6 +234,9 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setsitelink-removed' ), $actual );
 	}
 
+	/**
+	 * @covers \Wikibase\Repo\Api\SetClaim
+	 */
 	public function testSetClaimXmlFormat() {
 		$this->getNewEntityRevision( true );
 
@@ -234,6 +255,9 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setclaim' ), $actual );
 	}
 
+	/**
+	 * @covers \Wikibase\Repo\Api\SetReference
+	 */
 	public function testSetReferenceXmlFormat() {
 		$entityRevision = $this->getNewEntityRevision( true );
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
@@ -254,6 +278,9 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setreference' ), $actual );
 	}
 
+	/**
+	 * @covers \Wikibase\Repo\Api\SetQualifier
+	 */
 	public function testSetQualiferXmlFormat() {
 		$entityRevision = $this->getNewEntityRevision( true );
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
@@ -274,6 +301,9 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setqualifier' ), $actual );
 	}
 
+	/**
+	 * @covers \Wikibase\Repo\Api\EditEntity
+	 */
 	public function testEditEntityXmlFormat() {
 		$this->storeNewProperty();
 		$entityRevision = $this->getNewEntityRevision();

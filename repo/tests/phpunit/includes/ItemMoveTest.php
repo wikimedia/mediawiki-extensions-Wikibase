@@ -23,6 +23,9 @@ use WikitextContent;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
+ * @covers \Wikibase\Repo\RepoHooks::onNamespaceIsMovable
+ * @covers \Wikibase\Repo\RepoHooks::isNamespaceUsedByLocalEntities
+ * @covers \Wikibase\Lib\Store\EntityNamespaceLookup
  */
 class ItemMoveTest extends MediaWikiIntegrationTestCase {
 

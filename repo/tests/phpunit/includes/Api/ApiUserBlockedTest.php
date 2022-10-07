@@ -15,6 +15,7 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
  * @group WikibaseAPI
  * @group medium
  * @group Database
+ * @coversNothing
  */
 class ApiUserBlockedTest extends WikibaseApiTestCase {
 
@@ -213,10 +214,6 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		];
 	}
 
-	/**
-	 * @param $apiKey
-	 * @param $otherApiData
-	 */
 	public function testBlock() {
 		$testuser = self::getTestUser()->getUser();
 

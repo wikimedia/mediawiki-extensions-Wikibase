@@ -112,10 +112,6 @@
 	<rule ref="MediaWiki.Usage.ForbiddenFunctions.shell_exec">
 		<exclude-pattern>PidLock\.php</exclude-pattern>
 	</rule>
-	<rule ref="MediaWiki.Commenting.MissingCovers">
-		<!-- FIXME: Add missing @covers -->
-		<exclude-pattern>tests/phpunit/*</exclude-pattern>
-	</rule>
 
 	<rule ref="Generic.Metrics.CyclomaticComplexity">
 		<properties>

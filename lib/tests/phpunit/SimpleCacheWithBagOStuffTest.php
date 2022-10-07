@@ -12,6 +12,7 @@ use Wikibase\Lib\SimpleCacheWithBagOStuff;
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
+ * @covers \Wikibase\Lib\SimpleCacheWithBagOStuff
  */
 class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 

@@ -22,6 +22,8 @@ use WikitextContent;
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
+ * @covers \Wikibase\Client\Store\UsageUpdater
+ * @covers \Wikibase\Client\Usage\Sql\SqlUsageTracker
  */
 class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 

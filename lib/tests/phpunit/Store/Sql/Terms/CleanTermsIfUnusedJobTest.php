@@ -10,6 +10,7 @@ use Wikibase\Lib\WikibaseSettings;
 /**
  * @group Wikibase
  * @license GPL-2.0-or-later
+ * @covers \Wikibase\Lib\Store\Sql\Terms\CleanTermsIfUnusedJob
  */
 class CleanTermsIfUnusedJobTest extends MediaWikiIntegrationTestCase {
 

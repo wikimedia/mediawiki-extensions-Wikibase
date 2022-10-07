@@ -32,6 +32,8 @@ use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
+ * @covers \Wikibase\Client\DataAccess\ParserFunctions\Runner
+ * @covers \Wikibase\Client\Usage\ParserOutputUsageAccumulator
  */
 class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase {
 

@@ -11,6 +11,7 @@ use Wikibase\Lib\SettingsArray;
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
+ * @covers \Wikibase\Lib\EntityTypeDefinitions
  */
 class EntityTypeDefinitionsIntegrationTest extends MediaWikiIntegrationTestCase {
 	public function testEntityTypeDefinitionsUsesNativeSearch_FedPropsDisabled() {

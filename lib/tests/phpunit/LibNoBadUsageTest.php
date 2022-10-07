@@ -8,6 +8,7 @@ namespace Wikibase\Lib\Tests;
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
+ * @coversNothing
  */
 class LibNoBadUsageTest extends NoBadUsageTest {
 

@@ -12,6 +12,7 @@ use Wikibase\Lib\WikibaseSettings;
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
+ * @coversNothing
  */
 class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 

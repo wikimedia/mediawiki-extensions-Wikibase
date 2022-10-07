@@ -26,6 +26,7 @@ use Wikimedia\Rdbms\LBFactory;
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch
+ * @coversNothing
  */
 class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase {
 

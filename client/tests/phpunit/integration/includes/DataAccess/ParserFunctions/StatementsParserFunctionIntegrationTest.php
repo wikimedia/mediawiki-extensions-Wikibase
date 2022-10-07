@@ -39,6 +39,8 @@ use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
+ * @covers \Wikibase\Client\Usage\ParserOutputUsageAccumulator
+ * @covers \Wikibase\Client\DataAccess\ParserFunctions\Runner
  */
 class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase {
 
