@@ -39,7 +39,7 @@ namespace Wikibase\Client\Api;
 namespace Wikibase\Client\Changes;
 
 /**
- * @brief Root namespace for the CLient component DataBridge
+ * @brief Root namespace for the Client component DataBridge
  */
 namespace Wikibase\Client\DataBridge;
 
