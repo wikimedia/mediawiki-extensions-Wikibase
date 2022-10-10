@@ -7,6 +7,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "ریپوزیٹری آئیٹم نال جوڑ",
+	"wikibase-comment-remove": "{{WPREPONAME}} دا آئیٹم مٹایا گیا سی۔ بولیاں دیاں کڑیاں ہٹایاں سی۔",
 	"wikibase-comment-update": "{{WBREPONAME}} آئیٹم بدل دتی",
 	"wikibase-comment-sitelink-add": "بولی دی کڑی پایئیا: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|تبدیلی|تبدیلیاں}}",
@@ -36,7 +37,9 @@
 	"wikibase-unconnectedpages-submit": "صفحے دکھاؤ",
 	"wikibase-pageswithbadges-badge": "بیج:",
 	"wikibase-pageswithbadges-submit": "صفحے دکھاؤ",
+	"entityusage": "چیز ورتݨ",
 	"wikibase-entityusage-invalid-id": "\"$1\" کوئی پکی آئی ڈی نئیں اے۔",
+	"wikibase-entityusage-entity": "چیز:",
 	"wikibase-entityusage-submit": "صفحے دکھاؤ",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} آئٹم آئی ڈی",
 	"wikibase-pageinfo-entity-id-none": "کوئی نئیں",

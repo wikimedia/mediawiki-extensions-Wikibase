@@ -34,7 +34,7 @@
 	},
 	"wikibase-client-desc": "Wikibase扩展的客户端",
 	"tooltip-t-wikibase": "链接到连接的数据仓库项目",
-	"wikibase-after-page-move": "您的移动现在应当[$1 体现在{{WBREPONAME}}项目]的语言链接中。我们要求您检查是否发生了这种情况。",
+	"wikibase-after-page-move": "您的移动现在应当[$1 体现在{{WBREPONAME}}项目]的语言链接中。请检查对语言链接的改动是否生效。",
 	"wikibase-after-page-delete": "至该页面的链接应当已从[$1 相关的{{WBREPONAME}}项目]中移除。我们要求您检查这是否发生。",
 	"wikibase-after-page-delete-queued": "与此页面相关联的[$1 {{WBREPONAME}}项目]将自动更新。请注意这可能不会立刻发生。",
 	"wikibase-comment-add": "{{WBREPONAME}}项目已创建。",

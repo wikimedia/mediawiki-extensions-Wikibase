@@ -66,7 +66,7 @@
 	"wikibase-sitelink-page-edit-placeholder": "stran",
 	"wikibase-alias-edit-placeholder": "vnesite drugo ime",
 	"wikibase-label-input-help-message": "Vnesite naslov tega nabora podatkov v jeziku $1.",
-	"wikibase-entitytermsview-input-help-message": "Vnesite oznako tega objekta, kratek opis in druga imena v različnih jezikih.",
+	"wikibase-entitytermsview-input-help-message": "Vnesite oznako te entitete, kratek opis in sopomenke v različnih jezikih.",
 	"wikibase-statementsection-statements": "Izjave",
 	"wikibase-statementsection-identifiers": "Identifikatorji",
 	"wikibase-sitelinks": "Povezave na stran",
