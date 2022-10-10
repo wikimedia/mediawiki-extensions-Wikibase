@@ -99,7 +99,7 @@ class StatementByGuidMap implements IteratorAggregate, Countable {
 	 * @see Countable::count
 	 * @return int
 	 */
-	public function count() {
+	public function count(): int {
 		return count( $this->statements );
 	}
 

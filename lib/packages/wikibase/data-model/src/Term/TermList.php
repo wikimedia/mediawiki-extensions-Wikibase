@@ -38,7 +38,7 @@ class TermList implements Countable, IteratorAggregate {
 	 * @see Countable::count
 	 * @return int
 	 */
-	public function count() {
+	public function count(): int {
 		return count( $this->terms );
 	}
 
