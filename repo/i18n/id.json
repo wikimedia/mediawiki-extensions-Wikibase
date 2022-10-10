@@ -18,7 +18,8 @@
 			"Akmaie Ajam",
 			"Daud I.F. Argana",
 			"RXerself",
-			"Chinamoonroll"
+			"Chinamoonroll",
+			"Veracious"
 		]
 	},
 	"wikibase-desc": "Penyimpanan data terstruktur",
@@ -371,6 +372,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Anda bisa menyuntingnya dengan memasukkan <nowiki>{{#babel: }}</nowiki> pada [[Special:MyPage|laman pengguna]] {{GENDER:$1|Anda}}",
 	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 - $2",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, ubah dari $3 - $4",
+	"wikibase-api-badtoken": "Token buruk terdeteksi.",
 	"wikibase-api-cant-load-entity-content": "Tidak bisa mengakses konten, revisinya mungkin dihapus.",
 	"wikibase-api-unresolved-redirect": "Penanda entitas khusus merujuk pada sebuah laman pengalihan, yang tidak didukung dalam konteks ini.",
 	"wikibase-api-editconflict": "Konflik penyuntingan. Tidak bisa menyimpan revisi terbaru.",
@@ -382,6 +384,9 @@
 	"wikibase-api-illegal-ids-or-sites-titles-selector": "Berikan \"ids\" butir atau pasangan \"sites\" dan \"titles\" dari halaman yang sesuai",
 	"wikibase-api-inconsistent-language": "Terdeteksi bahasa yang tidak konsisten.",
 	"wikibase-api-inconsistent-site": "Terdeteksi situs yang tidak konsisten.",
+	"wikibase-api-invalid-json": "Json dalam permintaan tidak valid.",
+	"wikibase-api-invalid-snak": "Data snak tidak valid.",
+	"wikibase-api-invalid-list": "Data daftar tidak valid.",
 	"wikibase-api-invalid-property-id": "ID Atribut tidak sah.",
 	"wikibase-api-invalid-entity-id": "ID entitas tidak sah.",
 	"wikibase-api-no-data": "Tidak ada data untuk dioperasikan.",

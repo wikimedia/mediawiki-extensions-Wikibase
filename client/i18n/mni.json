@@ -13,6 +13,8 @@
 	"wikibase-editlinkstitle": "ꯂꯣꯟ ꯑꯃꯥꯥ ꯑꯃꯥ ꯒꯤ ꯁꯝꯅꯐꯝꯒꯤ ꯁꯦꯝꯒꯠꯐꯝ",
 	"wikibase-linkitem-addlinks": "ꯁꯝꯅꯐꯝꯁꯤꯡ ꯍꯥꯞꯆꯤꯟꯂꯨ",
 	"wikibase-linkitem-title": "ꯂꯃꯥꯏ ꯂꯣꯏꯅꯅ ꯁꯝꯅꯕ",
+	"wikibase-linkitem-linkpage": "ꯂꯃꯥꯏ ꯂꯣꯏꯅꯅ ꯁꯝꯅꯕ",
+	"wikibase-linkitem-selectlink": "ꯆꯥꯟꯕꯤꯗꯨꯅꯥ ꯂꯃꯥꯏ ꯑꯁꯤꯒꯥ ꯂꯤꯡꯛ ꯇꯧꯕꯥ ꯄꯥꯝꯂꯤꯕ ꯁꯥꯏꯠ ꯑꯃꯥ ꯑꯃꯁꯨꯡ ꯂꯃꯥꯏ ꯑꯃꯥ ꯈꯟꯕꯤꯌꯨ ꯫",
 	"wikibase-linkitem-input-site": "ꯂꯣꯟ:",
 	"wikibase-linkitem-input-page": "ꯂꯃꯥꯏ:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

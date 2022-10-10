@@ -4,5 +4,30 @@
 			"Eleassar"
 		]
 	},
-	"apihelp-wbavailablebadges-summary": "Razišče razpoložljive predmete značk."
+	"apihelp-wbavailablebadges-summary": "Razišče razpoložljive predmete značk.",
+	"apihelp-wbeditentity-description": "V Wikipodatkih ustvari nov predmet s serializiranimi podatki",
+	"apihelp-wbeditentity-param-id": "Označevalec entitete, vključno s predpono.\nUporabite bodisi <var>id</var> ali <var>site</var> in <var>title</var> skupaj.",
+	"apihelp-wbeditentity-param-site": "Označevalec mesta, v katerem je stran.\nUporabite skupaj s <var>title</var>, da ustvarite popolno povezavo mesta.",
+	"apihelp-wbeditentity-param-title": "Naslov strani za povezavo.\nUporabite skupaj s <var>site</var>; da ustvarite popolno povezavo mesta.",
+	"apihelp-wbeditentity-param-baserevid": "Številski označevalec redakcije, ki je izhodišče za spremembo.\nTo se uporablja za zaznavanje navzkrižij pri shranjevanju.",
+	"apihelp-wbeditentity-param-summary": "Povzetek za urejanje.\nPredpripet bo samodejno ustvarjenemu komentarju. Omejitev dolžine avtokomentarja skupaj s povzetkom je 260 znakov. Upoštevajte, da bo vse, kar presega to omejitev, odrezano.",
+	"apihelp-wbeditentity-param-bot": "Označi to urejanje kot urejanje bota. Ta URL-zastavica bo upoštevana samo, če uporabnik pripada skupini »{{int:group-bot}}«.",
+	"apihelp-wbeditentity-param-data": "Serializirani objekt, ki se uporablja kot vir podatkov \nNovoustvarjeni entiteti bo dodeljen »ID«.",
+	"apihelp-wbeditentity-param-clear": "Če je nastavljeno, se celotna entiteta pred nadaljevanjem izprazni.\nEntiteta ne bo shranjena, preden bo izpolnjena z »<code>data</code>«, morda z izključenimi deli.",
+	"apihelp-wbeditentity-param-new": "Če je nastavljeno, bo ustvarjena nova entiteta.\nTo nastavite na vrsto entitete, ki jo želite ustvariti.\nTega ni dovoljeno nastavljati, kadar je nastavljen tudi <var>id</var>.",
+	"apihelp-wbeditentity-param-tags": "Spremenite oznake, uporabljene pri redakciji.",
+	"apihelp-wbeditentity-example-1": "Ustvari nov prazen predmet, vrni celotno strukturo entitete",
+	"apihelp-wbeditentity-example-2": "Ustvari nov predmet in nastavi oznake za <var>de</var> in <var>en</var>",
+	"apihelp-wbeditentity-example-3": "Ustvari novo lastnost, ki vsebuje podatke JSON; vrne celotno strukturo entitete",
+	"apihelp-wbeditentity-example-6": "Nastavi oznako mesta za <var>nowiki</var>, ki jo prepiše, če že obstaja",
+	"apihelp-wbeditentity-example-7": "Nastavi opis za <var>nb</var>, ki ga prepiše, če že obstaja.",
+	"apihelp-wbeditentity-example-8": "V predmetu ustvari novo izjavo za lastnost <samp>P56</samp> in vrednost »<var>ExampleString</var>«",
+	"apihelp-wbeditentity-example-11": "Doda oznako, vendar je ne prepiše, če že obstaja.",
+	"apihelp-wbeditentity-example-12": "Odstrani oznako",
+	"apihelp-wbmergeitems-description": "Združitev več predmetov.",
+	"apihelp-wbmergeitems-summary": "Združi več predmetov.",
+	"apihelp-wbmergeitems-param-fromid": "Izvorni ID za združitev",
+	"apihelp-wbsetaliases-description": "Nastavi sopomenke za entiteto Wikibase.",
+	"apihelp-wbsetaliases-summary": "Nastavi sopomenke za entiteto Wikibase.",
+	"apihelp-wbsetaliases-param-language": "Jezik za nastavitev sopomenk"
 }

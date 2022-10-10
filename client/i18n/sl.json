@@ -7,7 +7,7 @@
 			"Yerpo"
 		]
 	},
-	"wikibase-client-desc": "Klient za razširitev Wikibase",
+	"wikibase-client-desc": "Razširitev Odjemalec za Wikibazo",
 	"tooltip-t-wikibase": "Povežite na ustrezni predmet v podatkovnem odložišču",
 	"wikibase-after-page-move": "Vaša prestavitev bi se morala odraziti tudi s spremembo [$1 jezikovne povezave v projektu {{WBREPONAME}}]. Prosimo, preverite, ali se je to res zgodilo.",
 	"wikibase-after-page-move-queued": "[$1 Objekt v {{GRAMMAR:mestnik|{{WBREPONAME}}}}], povezan s to stranjo, bo v kratkem samodejno posodobljen. Pomnite, da se to morda ne zgodi takoj.",
