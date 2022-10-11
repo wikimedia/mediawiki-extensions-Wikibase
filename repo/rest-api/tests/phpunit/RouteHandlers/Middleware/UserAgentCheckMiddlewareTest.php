@@ -29,9 +29,7 @@ class UserAgentCheckMiddlewareTest extends TestCase {
 
 		$response = $middleware->run(
 			$this->newHandlerWithRequest( $request ),
-			function() use ( $expectedResponse ): Response {
-				return $expectedResponse;
-			}
+			fn(): Response => $expectedResponse
 		);
 
 		$this->assertSame( $expectedResponse, $response );
@@ -43,9 +41,7 @@ class UserAgentCheckMiddlewareTest extends TestCase {
 
 		$response = $middleware->run(
 			$this->newHandlerWithRequest( $request ),
-			function(): Response {
-				$this->fail( 'This function should never be called in this scenario.' );
-			}
+			fn() => $this->fail( 'This function should never be called in this scenario.' )
 		);
 
 		$this->assertSame( 400, $response->getStatusCode() );
@@ -57,9 +53,7 @@ class UserAgentCheckMiddlewareTest extends TestCase {
 
 		$response = $middleware->run(
 			$this->newHandlerWithRequest( new RequestData() ),
-			function(): Response {
-				$this->fail( 'This function should never be called in this scenario.' );
-			}
+			fn() => $this->fail( 'This function should never be called in this scenario.' )
 		);
 
 		$this->assertSame( 400, $response->getStatusCode() );

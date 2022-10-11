@@ -29,9 +29,7 @@ class MiddlewareHandler {
 		return $this->callMiddlewaresRecursively(
 			$this->middlewares,
 			$routeHandler,
-			function() use ( $runRoute, $args ) {
-				return $runRoute( ...$args );
-			}
+			fn() => $runRoute( ...$args )
 		);
 	}
 
@@ -45,9 +43,7 @@ class MiddlewareHandler {
 		// Each middleware runs the next one. The last one runs $runRouteWithArgs.
 		$runNext = empty( $remainingMiddlewares ) ?
 			$runRouteWithArgs :
-			function() use ( $remainingMiddlewares, $routeHandler, $runRouteWithArgs ) {
-				return $this->callMiddlewaresRecursively( $remainingMiddlewares, $routeHandler, $runRouteWithArgs );
-			};
+			fn() => $this->callMiddlewaresRecursively( $remainingMiddlewares, $routeHandler, $runRouteWithArgs );
 
 		return $currentMiddleware->run( $routeHandler, $runNext );
 	}
