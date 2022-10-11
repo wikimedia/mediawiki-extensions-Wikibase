@@ -113,14 +113,14 @@ since it will be a read-only Git mirror just like the many Gerrit mirrors.
 In order to give the action permission to push to the new repository, you must:
 * generate a new SSH key pair
 * add the private key to the Wikibase GitHub repository using the [GitHub UI][Wikibase secrets]
-** name the secret <code>SSH_PRIVATE_KEY_<var>repo_name</var></code>
+  * name the secret <code>SSH_PRIVATE_KEY_<var>repo_name</var></code>
 * add the public key as a deployment key to your new repository using the GitHub UI
 * destroy this key pair from your local machine
 
 To set up the GitHub action:
 * edit `.github/workflows/main.yml` in Wikibase.git to add another job, based on the existing “filter” jobs.
-** make sure to add the key and tweak the secret name appropriately
-** adjust the `targetRepo` and `filterArguments` as necessary
+  * make sure to add the key and tweak the secret name appropriately
+  * adjust the `targetRepo` and `filterArguments` as necessary
 * upload these changes to Gerrit and merge them there
 
 The next time the code is mirrored to GitHub the GitHub action should populate the target repository
