@@ -12,7 +12,6 @@ use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Repo\Hooks\RecentChangeSaveHookHandler;
 use Wikibase\Repo\Notifications\ChangeHolder;
-use Wikibase\Repo\Store\SubscriptionLookup;
 
 /**
  * @covers \Wikibase\Repo\Hooks\RecentChangeSaveHookHandler
@@ -37,10 +36,6 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @var null|CentralIdLookup|MockObject
 	 */
 	private $centralIdLookup;
-	/**
-	 * @var SubscriptionLookup|MockObject
-	 */
-	private $subscriptionLookup;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -48,7 +43,6 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->changeHolder = new ChangeHolder();
 		$this->changeStore = $this->createStub( ChangeStore::class );
 		$this->centralIdLookup = null; // CentralIdLookupFactory::getNonLocalLookup() may return null in the hook's factory function
-		$this->subscriptionLookup = $this->createMock( SubscriptionLookup::class );
 	}
 
 	public function testGivenRecentChangeForEntityChange_addsMetaDataToEntityChange() {
@@ -66,8 +60,6 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$entityChange = $this->newEntityChange();
 
 		$this->changeHolder->transmitChange( $entityChange );
-		$this->subscriptionLookup->method( 'getSubscribers' )
-			->willReturn( [ 'enwiki' ] );
 
 		$this->newHookHandler()->onRecentChange_save( $recentChange );
 
@@ -93,8 +85,6 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$entityChange = $this->newEntityChange();
 
 		$this->changeHolder->transmitChange( $entityChange );
-		$this->subscriptionLookup->method( 'getSubscribers' )
-			->willReturn( [ 'enwiki' ] );
 
 		$this->centralIdLookup = $this->createMock( CentralIdLookup::class );
 		$this->centralIdLookup->expects( $this->once() )
@@ -110,39 +100,10 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $expectedUserId, $changeMetaData['central_user_id'] );
 	}
 
-	public function testGivenRecentChangeForEntityChange_skipsAddingMetaDataToEntityChange() {
-		$recentChangeAttrs = [
-			'rc_timestamp' => 1234567890,
-			'rc_bot' => 1,
-			'rc_cur_id' => 42,
-			'rc_last_oldid' => 776,
-			'rc_this_oldid' => 777,
-			'rc_comment' => 'edit summary',
-			'rc_user' => 321,
-			'rc_user_text' => 'some_user',
-		];
-		$recentChange = $this->newStubRecentChangeWithAttributes( $recentChangeAttrs );
-		$entityChange = $this->newEntityChange();
-
-		$this->changeHolder->transmitChange( $entityChange );
-		$this->subscriptionLookup->method( 'getSubscribers' )
-			->willReturn( [] );
-
-		$this->newHookHandler()->onRecentChange_save( $recentChange );
-
-		$changeMetaData = $entityChange->getMetadata();
-		$this->assertArrayNotHasKey( 'bot', $changeMetaData );
-		$this->assertArrayNotHasKey( 'page_id', $changeMetaData );
-		$this->assertArrayNotHasKey( 'rev_id', $changeMetaData );
-		$this->assertArrayNotHasKey( 'parent_id', $changeMetaData );
-		$this->assertArrayNotHasKey( 'comment', $changeMetaData );
-	}
-
 	private function newHookHandler(): RecentChangeSaveHookHandler {
 		return new RecentChangeSaveHookHandler(
 			$this->changeStore,
 			$this->changeHolder,
-			$this->subscriptionLookup,
 			$this->centralIdLookup
 		);
 	}
@@ -158,7 +119,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newEntityChange(): EntityChange {
-		return new EntityChange( [ 'type' => 'wikibase-someEntity~update', 'object_id' => 'Q1' ] );
+		return new EntityChange( [ 'type' => 'wikibase-someEntity~update' ] );
 	}
 
 }
