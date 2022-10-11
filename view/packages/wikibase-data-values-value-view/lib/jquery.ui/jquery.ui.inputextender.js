@@ -186,6 +186,7 @@ $.widget( 'ui.inputextender', {
 		} )
 		.on( 'blur.' + this.widgetName, function( event ) {
 			if ( self.__extensionFocused ) {
+				// The focus went to the extension, don't close
 				delete self.__extensionFocused;
 				return;
 			}
@@ -497,6 +498,12 @@ $.widget( 'ui.inputextender', {
 		var $extension = $( '<div/>', {
 			class: this.widgetBaseClass + '-extension ui-widget-content'
 		} );
+		var focusToExtension = function() {
+			// Indicate that the extension is focused now and, if needed, stop the hiding of the preview.
+			self.__extensionFocused = true;
+			clearTimeout( self._animationTimeout );
+			self.showExtension();
+		};
 
 		$closeButton.append( this.options.content );
 
@@ -504,10 +511,11 @@ $.widget( 'ui.inputextender', {
 		.append( $closeButton )
 		.on( 'mousedown.' + this.widgetName, function( event ) {
 			if ( !$( event.target ).closest( $closeButton ).length ) {
-				self.__extensionFocused = true;
-				clearTimeout( self._animationTimeout );
-				self.showExtension();
+				focusToExtension();
 			}
+		} )
+		.on( 'focusin.' + this.widgetName, function( event ) {
+			focusToExtension();
 		} )
 		.on( this.options.contentAnimationEvents, function( animationEvent ) {
 			self._reposition();
