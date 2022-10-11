@@ -506,9 +506,3 @@ $specialPageAliases['zh-hant'] = [
 	'SetLabelDescriptionAliases' => [ '設定標籤說明和別名' ],
 	'SetSiteLink' => [ '設定網站連結' ],
 ];
-
-/** Chinese (Taiwan) (中文（台灣）) */
-$specialPageAliases['zh-tw'] = [
-	'NewItem' => [ '建立項目' ],
-	'NewProperty' => [ '新增屬性' ],
-];
