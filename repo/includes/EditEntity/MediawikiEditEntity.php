@@ -303,7 +303,7 @@ class MediawikiEditEntity implements EditEntity {
 	/**
 	 * Does this entity belong to a new page?
 	 * (An entity may {@link isNew be new}, and yet not belong to a new page,
-	 * e. g. if it is stored in a non-main slot.)
+	 * e.g. if it is stored in a non-main slot.)
 	 *
 	 * @return bool
 	 */

@@ -38,7 +38,7 @@ interface EntityLinkFormatter {
 	 * This is necessary for subentities, where the link
 	 * points to a section of the parent entity’s page;
 	 * if the anchor of that section changes
-	 * (e. g. from including the parent entity ID to not including it),
+	 * (e.g. from including the parent entity ID to not including it),
 	 * we want to update the fragment in old links to that entity accordingly.
 	 * See T208423 for an example of this.
 	 *

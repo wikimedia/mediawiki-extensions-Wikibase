@@ -38,7 +38,7 @@ but are also published separately.
 
 Where possible, sections of Wikibase Lib will be extracted into separate libraries.
 Dependencies on MediaWiki are removed
-(or replaced with suitable MediaWiki libraries, e. g. [wikimedia/timestamp][] instead of `wfTimestamp()`).
+(or replaced with suitable MediaWiki libraries, e.g. [wikimedia/timestamp][] instead of `wfTimestamp()`).
 Their source code is moved from subdirectories of `lib/includes/` and `lib/tests/phpunit/` into a subdirectory of `lib/packages/`
 (adjusting the paths in extension `AutoloadNamespaces` and elsewhere),
 named after the prospective Composer package name,

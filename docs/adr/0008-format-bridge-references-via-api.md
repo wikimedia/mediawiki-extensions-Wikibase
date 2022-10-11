@@ -90,7 +90,7 @@ The properties themselves (or their labels) are not included, and items in the v
 ## Differentiation from recent Wikibase Repository approach and outlook for frontend architecture in Wikibase
 
 At the time of writing, this ADR saw some controversy around the technological approach suggested,
-as adding an API to render markup in PHP is in stark contrast to the direction 
+as adding an API to render markup in PHP is in stark contrast to the direction
 (TypeScript/JavaScript with optional [server-side rendering][SSR])
 which has been taken for presentation work over the last years in Wikibase Repository.
 
@@ -110,15 +110,15 @@ In Wikibase Client, Wikibase’s content is not merely presented, but becomes an
 following the receiving wiki’s rules, which then is presented.
 As such, different rules can and will apply.
 
-Entirely switching to one or the other approach for presentation in both MediaWiki and Wikibase 
+Entirely switching to one or the other approach for presentation in both MediaWiki and Wikibase
 (“JS SSR page rendering for all”) may eliminate the apparent inconsistencies technologically,
 but at the time of writing it is not possible to achieve a higher level of synergy between the solutions in Wikibase Repository and Wikibase Client than described here.
 In addition, from a product perspective, a difference in requirements may remain irrespective of technological limitations.
 
 We will ensure that we stay flexible for inevitable change through clear isolation of concerns
-(e. g. see isolation of the logic in a service),
+(e.g. see isolation of the logic in a service),
 ensure that this is feasible to move away from as we slowly develop our technological abilities,
-both within Wikibase as well as (e. g. as part of [Frontend Architecture Working Group][FAWG]) in MediaWiki.
+both within Wikibase as well as (e.g. as part of [Frontend Architecture Working Group][FAWG]) in MediaWiki.
 
 [South Pole Telescope]: https://en.wikipedia.org/wiki/South_Pole_Telescope
 [Q955267]: https://www.wikidata.org/wiki/Q955267

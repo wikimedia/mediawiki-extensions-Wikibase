@@ -32,7 +32,7 @@ class DataAccessSnakFormatterFactory {
 	 * A plain text format, escaped for wikitext.
 	 *
 	 * Values are formatted in simple, textual formats,
-	 * and any wikitext syntax they might contain (e. g. in string values) is escaped.
+	 * and any wikitext syntax they might contain (e.g. in string values) is escaped.
 	 * The only exception are URLs, which are not escaped.
 	 */
 	public const TYPE_ESCAPED_PLAINTEXT = 'escaped-plaintext';
@@ -40,7 +40,7 @@ class DataAccessSnakFormatterFactory {
 	 * A rich wikitext format.
 	 *
 	 * Values may contain markup, such as hyperlinks or `<span>`s with language tags.
-	 * Individual formatters still wikitext-escape their contents as needed (e. g. for strings).
+	 * Individual formatters still wikitext-escape their contents as needed (e.g. for strings).
 	 * The result is always wrapped in an outer `<span>`.
 	 */
 	public const TYPE_RICH_WIKITEXT = 'rich-wikitext';

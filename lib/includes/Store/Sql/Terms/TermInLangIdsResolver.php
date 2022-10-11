@@ -51,7 +51,7 @@ interface TermInLangIdsResolver {
 	 * where the values belong to the term in lang IDs corresponding to that key.
 	 * One call to this method is effectively equivalent to multiple calls to
 	 * {@link resolveTermInLangIds} with the individual term in lang ID arrays, but may be
-	 * more efficient than that, e. g. resolving all the term in lang IDs in one batch
+	 * more efficient than that, e.g. resolving all the term in lang IDs in one batch
 	 * and then grouping them correctly afterwards.
 	 *
 	 * @param int[][] $groupedTermInLangIds

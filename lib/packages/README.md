@@ -102,7 +102,7 @@ rm -rf Wikibase/ && git clone --no-local /path/to/extensions/Wikibase/ && (cd Wi
 
 (`/path/to/extensions/Wikibase/` would be the path to your normal Wikibase clone,
 probably in a MediaWiki `extensions/` directory.
-It may include some unmerged commits, e. g. a version of the `composer.json` file that you’re still testing.)
+It may include some unmerged commits, e.g. a version of the `composer.json` file that you’re still testing.)
 
 ### Set up the automatic Git repository extraction
 
