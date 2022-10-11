@@ -717,7 +717,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		// Lua tables start at 1
 		$orderedPropertiesResult = array_combine(
-				range( 1, count( $orderedProperties ) ), array_values( $orderedProperties )
+				range( 1, count( $orderedProperties ) ), $orderedProperties
 		);
 		return [ $orderedPropertiesResult ];
 	}

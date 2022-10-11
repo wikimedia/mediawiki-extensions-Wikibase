@@ -110,7 +110,7 @@ abstract class DatabaseTermStoreWriterBase {
 		// lock them with FOR UPDATE
 		if ( $oldTermInLangIds !== [] ) {
 			$selectArgs[] = [ 'FOR UPDATE' ];
-			$oldTermInLangIds = $dbw->selectFieldValues(
+			$oldTermInLangIds = $dbw->selectFieldValues( // @phan-suppress-current-line PhanParamTooFewUnpack
 				...$selectArgs
 			);
 		}

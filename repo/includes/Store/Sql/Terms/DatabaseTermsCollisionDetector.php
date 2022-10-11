@@ -104,6 +104,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 			return null;
 		}
 
+		// @phan-suppress-next-line SecurityCheck-SQLInjection
 		$entityId = $this->findEntityIdsWithTermInLang(
 			$lang,
 			$description,
