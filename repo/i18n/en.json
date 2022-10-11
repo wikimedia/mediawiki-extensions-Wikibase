@@ -11,7 +11,8 @@
 			"Addshore",
 			"Bene*",
 			"Lucie-Aimée Kaffee",
-			"Abián"
+			"Abián",
+			"Winston Sung"
 		]
 	},
 	"wikibase-desc": "Structured data repository",
@@ -19,6 +20,12 @@
 	"wikibase-entity-item": "Item",
 	"wikibase-entity-property": "Property",
 	"wikibase-entity-query": "Query",
+	"nstab-item": "Item",
+	"tooltip-ca-nstab-item": "View the Item",
+	"nstab-property": "Property",
+	"tooltip-ca-nstab-property": "View the Property",
+	"nstab-query": "Query",
+	"tooltip-ca-nstab-query": "View the Query",
 	"wikibase-edit": "edit",
 	"wikibase-save": "save",
 	"wikibase-publish": "publish",
