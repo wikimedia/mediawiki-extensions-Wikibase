@@ -299,4 +299,26 @@
 		testGetInstancesWithVisibleExtensions( assert, extenders );
 	} );
 
+	QUnit.test( 'extension stays open, if focus moves inside it', function( assert ) {
+		var $input = $( '<input/>' ).appendTo( $( 'body' ) ).focus();
+		if ( !$input.is( ':focus' ) ) {
+			assert.ok( true, 'Could not test since focussing does not work.' );
+			// eslint-disable-next-line qunit/no-early-return
+			return;
+		}
+		var done = assert.async();
+		var spy = sinon.spy();
+		var instance = newTestInputextender( {}, $input );
+
+		$input.on( 'inputextenderaftertoggle', spy );
+
+		// Add an input to the extension and move focus there (without clicking).
+		$( '<input/>' ).appendTo( instance._$extension ).focus();
+
+		setTimeout( function() {
+			sinon.assert.notCalled( spy );
+			assert.ok( instance.extensionIsVisible() );
+			done();
+		}, 300 );
+	} );
 }() );
