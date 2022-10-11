@@ -13,8 +13,8 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  */
 class WikibaseEntityPermissionChecker implements PermissionChecker {
 
-	private $entityPermissionChecker;
-	private $userFactory;
+	private EntityPermissionChecker $entityPermissionChecker;
+	private UserFactory $userFactory;
 
 	public function __construct( EntityPermissionChecker $entityPermissionChecker, UserFactory $userFactory ) {
 		$this->entityPermissionChecker = $entityPermissionChecker;

@@ -34,10 +34,10 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 	public const BOT_BODY_PARAM = 'bot';
 	public const COMMENT_BODY_PARAM = 'comment';
 
-	private $addItemStatement;
-	private $successPresenter;
-	private $responseFactory;
-	private $middlewareHandler;
+	private AddItemStatement $addItemStatement;
+	private StatementJsonPresenter $successPresenter;
+	private ResponseFactory $responseFactory;
+	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
 		AddItemStatement $addItemStatement,

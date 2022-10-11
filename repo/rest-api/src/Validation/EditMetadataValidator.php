@@ -7,8 +7,8 @@ namespace Wikibase\Repo\RestApi\Validation;
  */
 class EditMetadataValidator {
 
-	private $maxCommentLength;
-	private $allowedTags;
+	private int $maxCommentLength;
+	private array $allowedTags;
 
 	/**
 	 * @param string[] $allowedTags {@see \ChangeTags::listExplicitlyDefinedTags}

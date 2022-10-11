@@ -13,8 +13,8 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\Middleware;
 class ResponseHeaderCountingTestMiddleware implements Middleware {
 	public const MIDDLEWARE_COUNT_HEADER = 'X-MIDDLEWARES-CALL-COUNT';
 
-	private $test;
-	private $expectedCount;
+	private TestCase $test;
+	private int $expectedCount;
 
 	public function __construct( TestCase $test, int $expectedCount ) {
 		$this->test = $test;

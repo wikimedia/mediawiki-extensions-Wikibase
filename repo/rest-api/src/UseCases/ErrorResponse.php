@@ -24,8 +24,8 @@ class ErrorResponse {
 	public const STATEMENT_NOT_FOUND = 'statement-not-found';
 	public const UNEXPECTED_ERROR = 'unexpected-error';
 
-	private $code;
-	private $message;
+	private string $code;
+	private string $message;
 
 	public function __construct( string $code, string $message ) {
 		$this->code = $code;

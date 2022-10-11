@@ -13,9 +13,9 @@ use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
  */
 class GetItemStatements {
 
-	private $validator;
-	private $statementsRetriever;
-	private $revisionMetadataRetriever;
+	private GetItemStatementsValidator $validator;
+	private ItemStatementsRetriever $statementsRetriever;
+	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
 
 	public function __construct(
 		GetItemStatementsValidator $validator,

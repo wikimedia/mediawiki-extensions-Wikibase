@@ -9,14 +9,14 @@ use Wikibase\DataModel\Statement\StatementList;
  */
 class GetItemStatementsSuccessResponse {
 
-	private $statements;
+	private StatementList $statements;
 
 	/**
 	 * @var string timestamp in MediaWiki format 'YYYYMMDDhhmmss'
 	 */
-	private $lastModified;
+	private string $lastModified;
 
-	private $revisionId;
+	private int $revisionId;
 
 	public function __construct( StatementList $serializedStatements, string $lastModified, int $revisionId ) {
 		$this->statements = $serializedStatements;

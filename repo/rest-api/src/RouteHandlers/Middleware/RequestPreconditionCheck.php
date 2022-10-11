@@ -17,9 +17,10 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
  */
 class RequestPreconditionCheck {
 
-	private $metadataRetriever;
+	private ItemRevisionMetadataRetriever $metadataRetriever;
+	/** @var callable */
 	private $getItemIdFromRequest;
-	private $conditionalHeaderUtil;
+	private ConditionalHeaderUtil $conditionalHeaderUtil;
 
 	public function __construct(
 		ItemRevisionMetadataRetriever $metadataRetriever,

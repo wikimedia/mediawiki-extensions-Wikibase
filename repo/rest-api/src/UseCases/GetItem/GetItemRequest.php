@@ -9,8 +9,8 @@ use Wikibase\Repo\RestApi\Domain\Model\ItemData;
  */
 class GetItemRequest {
 
-	private $itemId;
-	private $fields;
+	private string $itemId;
+	private array $fields;
 
 	public function __construct( string $itemId, array $fields = ItemData::VALID_FIELDS ) {
 		$this->itemId = $itemId;

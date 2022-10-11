@@ -7,7 +7,7 @@ namespace Wikibase\Repo\RestApi\UseCases;
  */
 class ItemRedirectResponse {
 
-	private $redirectTargetId;
+	private string $redirectTargetId;
 
 	public function __construct( string $redirectTargetId ) {
 		$this->redirectTargetId = $redirectTargetId;

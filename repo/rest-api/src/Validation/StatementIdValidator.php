@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
  */
 class StatementIdValidator {
 
-	private $entityIdParser;
+	private EntityIdParser $entityIdParser;
 
 	public function __construct( EntityIdParser $entityIdParser ) {
 		$this->entityIdParser = $entityIdParser;

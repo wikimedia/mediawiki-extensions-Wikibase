@@ -23,11 +23,11 @@ use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
  */
 class ReplaceItemStatement {
 
-	private $validator;
-	private $revisionMetadataRetriever;
-	private $itemRetriever;
-	private $itemUpdater;
-	private $permissionChecker;
+	private ReplaceItemStatementValidator $validator;
+	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
+	private ItemRetriever $itemRetriever;
+	private ItemUpdater $itemUpdater;
+	private PermissionChecker $permissionChecker;
 
 	public function __construct(
 		ReplaceItemStatementValidator $validator,

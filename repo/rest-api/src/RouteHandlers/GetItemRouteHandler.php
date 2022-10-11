@@ -32,25 +32,13 @@ class GetItemRouteHandler extends SimpleHandler {
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const FIELDS_QUERY_PARAM = '_fields';
 
-	/**
-	 * @var GetItem
-	 */
-	private $getItem;
+	private GetItem $getItem;
 
-	/**
-	 * @var GetItemJsonPresenter
-	 */
-	private $successPresenter;
+	private GetItemJsonPresenter $successPresenter;
 
-	/**
-	 * @var ResponseFactory
-	 */
-	private $responseFactory;
+	private ResponseFactory $responseFactory;
 
-	/**
-	 * @var MiddlewareHandler
-	 */
-	private $middlewareHandler;
+	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
 		GetItem $getItem,

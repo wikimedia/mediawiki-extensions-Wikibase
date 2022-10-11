@@ -10,7 +10,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
  */
 class GetItemJsonPresenter {
 
-	private $itemDataSerializer;
+	private ItemDataSerializer $itemDataSerializer;
 
 	public function __construct( ItemDataSerializer $itemDataSerializer ) {
 		$this->itemDataSerializer = $itemDataSerializer;

@@ -13,8 +13,8 @@ use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
  */
 class UnexpectedErrorHandlerMiddleware implements Middleware {
 
-	private $responseFactory;
-	private $logger;
+	private ResponseFactory $responseFactory;
+	private LoggerInterface $logger;
 
 	public function __construct( ResponseFactory $responseFactory, LoggerInterface $logger ) {
 		$this->responseFactory = $responseFactory;

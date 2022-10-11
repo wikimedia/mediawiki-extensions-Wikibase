@@ -19,10 +19,10 @@ class PatchItemStatementValidator {
 	public const SOURCE_COMMENT = 'comment';
 	public const SOURCE_EDIT_TAGS = 'edit tags';
 
-	private $itemIdValidator;
-	private $statementIdValidator;
-	private $jsonPatchValidator;
-	private $editMetadataValidator;
+	private ItemIdValidator $itemIdValidator;
+	private StatementIdValidator $statementIdValidator;
+	private JsonPatchValidator $jsonPatchValidator;
+	private EditMetadataValidator $editMetadataValidator;
 
 	public function __construct(
 		ItemIdValidator $itemIdValidator,

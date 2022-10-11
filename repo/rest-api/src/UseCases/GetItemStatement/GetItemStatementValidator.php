@@ -14,8 +14,8 @@ class GetItemStatementValidator {
 	public const SOURCE_STATEMENT_ID = 'statement ID';
 	public const SOURCE_ITEM_ID = 'item ID';
 
-	private $statementIdValidator;
-	private $itemIdValidator;
+	private StatementIdValidator $statementIdValidator;
+	private ItemIdValidator $itemIdValidator;
 
 	public function __construct(
 		StatementIdValidator $statementIdValidator,

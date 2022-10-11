@@ -10,7 +10,7 @@ use MediaWiki\Rest\Response;
  */
 class PreconditionMiddleware implements Middleware {
 
-	private $preconditionCheck;
+	private RequestPreconditionCheck $preconditionCheck;
 
 	public function __construct( RequestPreconditionCheck $preconditionCheck ) {
 		$this->preconditionCheck = $preconditionCheck;

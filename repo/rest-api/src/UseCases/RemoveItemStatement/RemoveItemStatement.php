@@ -19,12 +19,12 @@ use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
  */
 class RemoveItemStatement {
 
-	private $validator;
-	private $revisionMetadataRetriever;
-	private $statementIdParser;
-	private $itemRetriever;
-	private $itemUpdater;
-	private $permissionChecker;
+	private RemoveItemStatementValidator $validator;
+	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
+	private StatementGuidParser $statementIdParser;
+	private ItemRetriever $itemRetriever;
+	private ItemUpdater $itemUpdater;
+	private PermissionChecker $permissionChecker;
 
 	public function __construct(
 		RemoveItemStatementValidator $validator,

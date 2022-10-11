@@ -14,9 +14,9 @@ use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
  */
 class GetItemStatement {
 
-	private $statementRetriever;
-	private $revisionMetadataRetriever;
-	private $validator;
+	private ItemStatementRetriever $statementRetriever;
+	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
+	private GetItemStatementValidator $validator;
 
 	public function __construct(
 		GetItemStatementValidator $validator,

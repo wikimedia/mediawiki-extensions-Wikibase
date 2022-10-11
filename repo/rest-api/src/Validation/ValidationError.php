@@ -6,8 +6,8 @@ namespace Wikibase\Repo\RestApi\Validation;
  * @license GPL-2.0-or-later
  */
 class ValidationError {
-	private $value;
-	private $source;
+	private string $value;
+	private string $source;
 
 	public function __construct( string $value, string $source ) {
 		$this->value = $value;

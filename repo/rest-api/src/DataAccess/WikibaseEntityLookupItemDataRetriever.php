@@ -21,7 +21,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
  */
 class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemStatementsRetriever, ItemStatementRetriever, ItemRetriever {
 
-	private $entityLookup;
+	private EntityLookup $entityLookup;
 
 	public function __construct( EntityLookup $entityLookup ) {
 		$this->entityLookup = $entityLookup;

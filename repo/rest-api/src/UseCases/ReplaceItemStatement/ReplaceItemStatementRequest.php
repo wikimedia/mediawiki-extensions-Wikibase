@@ -7,13 +7,13 @@ namespace Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement;
  */
 class ReplaceItemStatementRequest {
 
-	private $itemId;
-	private $statementId;
-	private $statement;
-	private $editTags;
-	private $isBot;
-	private $comment;
-	private $username;
+	private ?string $itemId;
+	private string $statementId;
+	private array $statement;
+	private array $editTags;
+	private bool $isBot;
+	private ?string $comment;
+	private ?string $username;
 
 	public function __construct(
 		string $statementId,

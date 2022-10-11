@@ -9,17 +9,14 @@ use Wikibase\Repo\RestApi\Domain\Model\ItemData;
  */
 class GetItemSuccessResponse {
 
-	private $itemData;
+	private ItemData $itemData;
 
 	/**
 	 * @var string timestamp in MediaWiki format 'YYYYMMDDhhmmss'
 	 */
-	private $lastModified;
+	private string $lastModified;
 
-	/**
-	 * @var int
-	 */
-	private $revisionId;
+	private int $revisionId;
 
 	public function __construct( ItemData $itemData, string $lastModified, int $revisionId ) {
 		$this->itemData = $itemData;

@@ -13,8 +13,8 @@ use Wikibase\DataModel\Snak\TypedSnak;
  */
 class SnakSerializer implements Serializer {
 
-	private $typedSnakSerializer;
-	private $propertyDataTypeLookup;
+	private TypedSnakSerializer $typedSnakSerializer;
+	private PropertyDataTypeLookup $propertyDataTypeLookup;
 
 	public function __construct(
 		TypedSnakSerializer $typedSnakSerializer,

@@ -7,13 +7,13 @@ namespace Wikibase\Repo\RestApi\UseCases\PatchItemStatement;
  */
 class PatchItemStatementRequest {
 
-	private $itemId;
-	private $statementId;
-	private $patch;
-	private $editTags;
-	private $isBot;
-	private $comment;
-	private $username;
+	private ?string $itemId;
+	private string $statementId;
+	private array $patch;
+	private array $editTags;
+	private bool $isBot;
+	private ?string $comment;
+	private ?string $username;
 
 	public function __construct(
 		string $statementId,

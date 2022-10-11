@@ -7,9 +7,9 @@ namespace Wikibase\Repo\RestApi\Domain\Model;
  */
 class EditMetadata {
 
-	private $tags;
-	private $isBot;
-	private $summary;
+	private array $tags;
+	private bool $isBot;
+	private EditSummary $summary;
 
 	public function __construct( array $tags, bool $isBot, EditSummary $summary ) {
 		$this->tags = $tags;

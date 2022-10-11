@@ -9,9 +9,9 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class ReplaceItemStatementSuccessResponse {
 
-	private $statement;
-	private $lastModified;
-	private $revisionId;
+	private Statement $statement;
+	private string $lastModified;
+	private int $revisionId;
 
 	public function __construct( Statement $statement, string $lastModified, int $revisionId ) {
 		$this->statement = $statement;

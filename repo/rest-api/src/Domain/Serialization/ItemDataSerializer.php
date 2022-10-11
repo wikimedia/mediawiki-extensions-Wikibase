@@ -12,8 +12,8 @@ use Wikibase\Repo\RestApi\Domain\Model\ItemData;
  */
 class ItemDataSerializer {
 
-	private $statementsSerializer;
-	private $siteLinksSerializer;
+	private StatementListSerializer $statementsSerializer;
+	private SiteLinkListSerializer $siteLinksSerializer;
 
 	/**
 	 * @param StatementListSerializer $statementsSerializer should have $useObjectsForMaps set to true when used within a json presenter

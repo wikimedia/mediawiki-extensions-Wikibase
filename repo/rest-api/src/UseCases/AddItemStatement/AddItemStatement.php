@@ -18,12 +18,12 @@ use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
  */
 class AddItemStatement {
 
-	private $validator;
-	private $revisionMetadataRetriever;
-	private $itemRetriever;
-	private $itemUpdater;
-	private $guidGenerator;
-	private $permissionChecker;
+	private AddItemStatementValidator $validator;
+	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
+	private ItemRetriever $itemRetriever;
+	private ItemUpdater $itemUpdater;
+	private GuidGenerator $guidGenerator;
+	private PermissionChecker $permissionChecker;
 
 	public function __construct(
 		AddItemStatementValidator $validator,

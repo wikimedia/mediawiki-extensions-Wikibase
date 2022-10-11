@@ -35,10 +35,10 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 	public const BOT_BODY_PARAM = 'bot';
 	public const COMMENT_BODY_PARAM = 'comment';
 
-	private $replaceItemStatement;
-	private $successPresenter;
-	private $middlewareHandler;
-	private $responseFactory;
+	private ReplaceItemStatement $replaceItemStatement;
+	private StatementJsonPresenter $successPresenter;
+	private MiddlewareHandler $middlewareHandler;
+	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		ReplaceItemStatement $replaceItemStatement,

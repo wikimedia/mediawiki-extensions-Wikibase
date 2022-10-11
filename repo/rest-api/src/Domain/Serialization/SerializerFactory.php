@@ -17,8 +17,8 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
  */
 class SerializerFactory {
 
-	private $legacySerializerFactory;
-	private $dataTypeLookup;
+	private LegacySerializerFactory $legacySerializerFactory;
+	private PropertyDataTypeLookup $dataTypeLookup;
 
 	public function __construct( LegacySerializerFactory $legacySerializerFactory, PropertyDataTypeLookup $dataTypeLookup ) {
 		$this->legacySerializerFactory = $legacySerializerFactory;

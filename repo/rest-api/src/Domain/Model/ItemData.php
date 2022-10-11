@@ -27,13 +27,13 @@ class ItemData {
 		self::FIELD_SITELINKS,
 	];
 
-	private $id;
-	private $type;
-	private $labels;
-	private $descriptions;
-	private $aliases;
-	private $statements;
-	private $siteLinks;
+	private ItemId $id;
+	private ?string $type;
+	private ?TermList $labels;
+	private ?TermList $descriptions;
+	private ?AliasGroupList $aliases;
+	private ?StatementList $statements;
+	private ?SiteLinkList $siteLinks;
 
 	public function __construct(
 		ItemId $id,

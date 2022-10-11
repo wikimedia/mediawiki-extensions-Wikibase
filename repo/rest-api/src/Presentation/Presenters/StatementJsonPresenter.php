@@ -10,7 +10,7 @@ use Wikibase\Repo\RestApi\Domain\Serialization\StatementSerializer;
  */
 class StatementJsonPresenter {
 
-	private $serializer;
+	private StatementSerializer $serializer;
 
 	public function __construct( StatementSerializer $serializer ) {
 		$this->serializer = $serializer;

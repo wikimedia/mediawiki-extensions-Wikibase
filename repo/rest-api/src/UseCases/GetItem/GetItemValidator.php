@@ -13,7 +13,7 @@ class GetItemValidator {
 	public const SOURCE_ITEM_ID = 'item ID';
 	public const SOURCE_FIELDS = 'fields';
 
-	private $itemIdValidator;
+	private ItemIdValidator $itemIdValidator;
 
 	public function __construct( ItemIdValidator $itemIdValidator ) {
 		$this->itemIdValidator = $itemIdValidator;

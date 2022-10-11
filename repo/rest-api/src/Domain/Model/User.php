@@ -7,7 +7,7 @@ namespace Wikibase\Repo\RestApi\Domain\Model;
  */
 class User {
 
-	private $username;
+	private ?string $username;
 
 	public static function newAnonymous(): self {
 		return new self( null );

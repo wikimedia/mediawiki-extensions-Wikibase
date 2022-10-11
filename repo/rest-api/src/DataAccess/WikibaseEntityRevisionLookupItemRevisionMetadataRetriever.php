@@ -12,7 +12,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
  */
 class WikibaseEntityRevisionLookupItemRevisionMetadataRetriever implements ItemRevisionMetadataRetriever {
 
-	private $revisionLookup;
+	private EntityRevisionLookup $revisionLookup;
 
 	public function __construct( EntityRevisionLookup $revisionLookup ) {
 		$this->revisionLookup = $revisionLookup;
