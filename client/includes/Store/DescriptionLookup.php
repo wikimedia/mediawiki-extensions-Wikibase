@@ -112,6 +112,7 @@ class DescriptionLookup {
 
 		$pageId = $title->getArticleID();
 		if ( array_key_exists( $pageId, $descriptions ) ) {
+			// @phan-suppress-next-line PhanTypeArraySuspiciousNullable has the same keys as $descriptions after getDescriptions() call
 			$actualSource = $actualSources[$pageId];
 			return $descriptions[$pageId];
 		} else {
