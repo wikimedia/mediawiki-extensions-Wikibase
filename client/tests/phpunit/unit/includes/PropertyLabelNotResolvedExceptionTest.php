@@ -19,10 +19,11 @@ use Wikibase\Client\PropertyLabelNotResolvedException;
 class PropertyLabelNotResolvedExceptionTest extends \PHPUnit\Framework\TestCase {
 
 	public function testAsMessageException() {
-		$ex = new PropertyLabelNotResolvedException( '<LABEL>', '<LANGUAGECODE>' );
+		$ex = new PropertyLabelNotResolvedException( '<LABEL>', '<LANGUAGECODE>', 'foobar' );
 
 		$this->assertSame( 'wikibase-property-notfound', $ex->getKey() );
 		$this->assertSame( [ '<LABEL>', '<LANGUAGECODE>' ], $ex->getParams() );
+		$this->assertSame( 'foobar', $ex->getMessage() );
 	}
 
 	public function testAsException() {
@@ -33,6 +34,12 @@ class PropertyLabelNotResolvedExceptionTest extends \PHPUnit\Framework\TestCase 
 
 		$this->assertSame( $message, $ex->getMessage() );
 		$this->assertSame( $previous, $ex->getPrevious() );
+	}
+
+	public function testDefaultMessage() {
+		$ex = new PropertyLabelNotResolvedException( 'Ein Label!', 'de' );
+
+		$this->assertSame( "Could not find a property with label 'Ein Label!'@de", $ex->getMessage() );
 	}
 
 }
