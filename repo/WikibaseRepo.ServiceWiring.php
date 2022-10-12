@@ -199,8 +199,8 @@ use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\Normalization\CommonsMediaValueNormalizer;
-use Wikibase\Repo\Notifications\ChangeHolder;
 use Wikibase\Repo\Notifications\ChangeNotifier;
+use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\Notifications\WikiPageActionEntityChangeFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
@@ -320,10 +320,6 @@ return [
 		);
 	},
 
-	'WikibaseRepo.ChangeHolder' => function ( MediaWikiServices $services ): ChangeHolder {
-		return new ChangeHolder();
-	},
-
 	'WikibaseRepo.ChangeNotifier' => function ( MediaWikiServices $services ): ChangeNotifier {
 		$transmitters = [
 			new HookChangeTransmitter(
@@ -334,7 +330,8 @@ return [
 
 		$settings = WikibaseRepo::getSettings( $services );
 		if ( $settings->getSetting( 'useChangesTable' ) ) {
-			$transmitters[] = WikibaseRepo::getChangeHolder( $services );
+			$changeStore = WikibaseRepo::getStore( $services )->getChangeStore();
+			$transmitters[] = new DatabaseChangeTransmitter( $changeStore );
 		}
 
 		return new ChangeNotifier(
