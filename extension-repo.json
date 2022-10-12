@@ -869,7 +869,6 @@
 			"factory": "\\Wikibase\\Repo\\Hooks\\RecentChangeSaveHookHandler::factory",
 			"services": [
 				"CentralIdLookupFactory",
-				"WikibaseRepo.ChangeHolder",
 				"WikibaseRepo.Store"
 			]
 		},

@@ -10,8 +10,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 use RecentChange;
 use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Hooks\RecentChangeSaveHookHandler;
-use Wikibase\Repo\Notifications\ChangeHolder;
 
 /**
  * @covers \Wikibase\Repo\Hooks\RecentChangeSaveHookHandler
@@ -23,9 +23,9 @@ use Wikibase\Repo\Notifications\ChangeHolder;
 class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
-	 * @var ChangeHolder
+	 * @var EntityChangeLookup|MockObject
 	 */
-	private $changeHolder;
+	private $changeLookup;
 
 	/**
 	 * @var ChangeStore|MockObject
@@ -40,7 +40,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->changeHolder = new ChangeHolder();
+		$this->changeLookup = $this->createStub( EntityChangeLookup::class );
 		$this->changeStore = $this->createStub( ChangeStore::class );
 		$this->centralIdLookup = null; // CentralIdLookupFactory::getNonLocalLookup() may return null in the hook's factory function
 	}
@@ -59,7 +59,11 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$recentChange = $this->newStubRecentChangeWithAttributes( $recentChangeAttrs );
 		$entityChange = $this->newEntityChange();
 
-		$this->changeHolder->transmitChange( $entityChange );
+		$this->changeLookup = $this->createMock( EntityChangeLookup::class );
+		$this->changeLookup->expects( $this->once() )
+			->method( 'loadByRevisionId' )
+			->with( $recentChangeAttrs['rc_this_oldid'] )
+			->willReturn( $entityChange );
 
 		$this->newHookHandler()->onRecentChange_save( $recentChange );
 
@@ -84,7 +88,11 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $testUser );
 		$entityChange = $this->newEntityChange();
 
-		$this->changeHolder->transmitChange( $entityChange );
+		$this->changeLookup = $this->createMock( EntityChangeLookup::class );
+		$this->changeLookup->expects( $this->once() )
+			->method( 'loadByRevisionId' )
+			->with( $recentChangeAttrs['rc_this_oldid'] )
+			->willReturn( $entityChange );
 
 		$this->centralIdLookup = $this->createMock( CentralIdLookup::class );
 		$this->centralIdLookup->expects( $this->once() )
@@ -102,8 +110,8 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	private function newHookHandler(): RecentChangeSaveHookHandler {
 		return new RecentChangeSaveHookHandler(
+			$this->changeLookup,
 			$this->changeStore,
-			$this->changeHolder,
 			$this->centralIdLookup
 		);
 	}

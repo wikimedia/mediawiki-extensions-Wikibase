@@ -9,7 +9,7 @@ use MediaWiki\User\CentralId\CentralIdLookupFactory;
 use RecentChange;
 use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Lib\Changes\EntityChange;
-use Wikibase\Repo\Notifications\ChangeHolder;
+use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Store\Store;
 
 //phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
@@ -21,30 +21,29 @@ use Wikibase\Repo\Store\Store;
  */
 class RecentChangeSaveHookHandler {
 
+	private $changeLookup;
+
 	private $changeStore;
 
 	private $centralIdLookup;
 
-	private $changeHolder;
-
 	public function __construct(
+		EntityChangeLookup $changeLookup,
 		ChangeStore $changeStore,
-		ChangeHolder $changeHolder,
 		?CentralIdLookup $centralIdLookup
 	) {
+		$this->changeLookup = $changeLookup;
 		$this->changeStore = $changeStore;
 		$this->centralIdLookup = $centralIdLookup;
-		$this->changeHolder = $changeHolder;
 	}
 
 	public static function factory(
 		CentralIdLookupFactory $centralIdLookupFactory,
-		ChangeHolder $changeHolder,
 		Store $store
 	): self {
 		return new self(
+			$store->getEntityChangeLookup(),
 			$store->getChangeStore(),
-			$changeHolder,
 			$centralIdLookupFactory->getNonLocalLookup()
 		);
 	}
@@ -61,7 +60,9 @@ class RecentChangeSaveHookHandler {
 		}
 
 		if ( $logType === null || ( $logType === 'delete' && $logAction === 'restore' ) ) {
-			foreach ( $this->changeHolder->getChanges() as  $change ) {
+			$change = $this->changeLookup->loadByRevisionId( $revId, EntityChangeLookup::FROM_MASTER );
+
+			if ( $change ) {
 				if ( $this->centralIdLookup === null ) {
 					$centralUserId = 0;
 				} else {

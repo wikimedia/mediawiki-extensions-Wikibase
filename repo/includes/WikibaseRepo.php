@@ -110,7 +110,6 @@ use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Normalization\CommonsMediaValueNormalizer;
-use Wikibase\Repo\Notifications\ChangeHolder;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
@@ -560,11 +559,6 @@ class WikibaseRepo {
 	public static function getChangeNotifier( ContainerInterface $services = null ): ChangeNotifier {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.ChangeNotifier' );
-	}
-
-	public static function getChangeHolder( ContainerInterface $services = null ): ChangeHolder {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WikibaseRepo.ChangeHolder' );
 	}
 
 	/**
