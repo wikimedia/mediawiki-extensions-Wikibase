@@ -7,6 +7,7 @@ use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
 use OutOfBoundsException;
+use Traversable;
 
 /**
  * Unordered list of AliasGroup objects.
@@ -53,7 +54,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	 * @see IteratorAggregate::getIterator
 	 * @return Iterator|AliasGroup[]
 	 */
-	public function getIterator() {
+	public function getIterator(): Traversable {
 		return new ArrayIterator( $this->groups );
 	}
 

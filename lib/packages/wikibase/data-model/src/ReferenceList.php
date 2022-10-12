@@ -318,7 +318,7 @@ class ReferenceList implements Countable, IteratorAggregate, Serializable {
 	 *
 	 * @return Iterator|Reference[]
 	 */
-	public function getIterator() {
+	public function getIterator(): Traversable {
 		return new ArrayIterator( array_values( $this->references ) );
 	}
 

@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use Iterator;
 use IteratorAggregate;
 use OutOfBoundsException;
+use Traversable;
 
 /**
  * Unordered list of Term objects.
@@ -61,7 +62,7 @@ class TermList implements Countable, IteratorAggregate {
 	 * @see IteratorAggregate::getIterator
 	 * @return Iterator|Term[]
 	 */
-	public function getIterator() {
+	public function getIterator(): Traversable {
 		return new ArrayIterator( $this->terms );
 	}
 
