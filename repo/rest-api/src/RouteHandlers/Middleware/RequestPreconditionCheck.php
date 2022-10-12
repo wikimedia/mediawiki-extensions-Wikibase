@@ -68,11 +68,6 @@ class RequestPreconditionCheck {
 			return null;
 		}
 
-		if ( !in_array( $request->getMethod(), [ 'HEAD', 'GET' ] ) &&
-			$request->getHeaderLine( 'if-none-match' ) === '*' ) {
-			return 412;
-		}
-
 		$this->conditionalHeaderUtil->setValidators(
 			"\"{$revisionMetadata->getRevisionId()}\"",
 			$revisionMetadata->getRevisionTimestamp(),
