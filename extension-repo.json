@@ -884,7 +884,6 @@
 			"services": [
 				"CentralIdLookupFactory",
 				"WikibaseRepo.ChangeHolder",
-				"WikibaseRepo.RepoDomainDbFactory",
 				"WikibaseRepo.Store"
 			]
 		},

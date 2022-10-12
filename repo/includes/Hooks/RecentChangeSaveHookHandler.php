@@ -8,22 +8,17 @@ use CentralIdLookup;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\User\CentralId\CentralIdLookupFactory;
 use RecentChange;
-use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Lib\Changes\EntityChange;
-use Wikibase\Lib\Changes\ItemChange;
-use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Repo\ChangeModification\DispatchChangesJob;
 use Wikibase\Repo\Notifications\ChangeHolder;
-use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\Repo\Store\Store;
-use Wikibase\Repo\Store\SubscriptionLookup;
 
 //phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
 /**
- * Inject change information from RC into the change notification created
- * by the onRevisionFromEditComplete hook handler and save it to wb_changes table.
+ * Nasty hack to inject information from RC into the change notification saved earlier
+ * by the onRevisionFromEditComplete hook handler.
  *
  * @license GPL-2.0-or-later
  */
@@ -35,30 +30,24 @@ class RecentChangeSaveHookHandler {
 
 	private $changeHolder;
 
-	private $subscriptionLookup;
-
 	public function __construct(
 		ChangeStore $changeStore,
 		ChangeHolder $changeHolder,
-		SubscriptionLookup $subscriptionLookup,
 		?CentralIdLookup $centralIdLookup
 	) {
 		$this->changeStore = $changeStore;
 		$this->centralIdLookup = $centralIdLookup;
 		$this->changeHolder = $changeHolder;
-		$this->subscriptionLookup = $subscriptionLookup;
 	}
 
 	public static function factory(
 		CentralIdLookupFactory $centralIdLookupFactory,
 		ChangeHolder $changeHolder,
-		RepoDomainDbFactory $repoDomainDbFactory,
 		Store $store
 	): self {
 		return new self(
 			$store->getChangeStore(),
 			$changeHolder,
-			new SqlSubscriptionLookup( $repoDomainDbFactory->newRepoDb() ),
 			$centralIdLookupFactory->getNonLocalLookup()
 		);
 	}
@@ -66,48 +55,28 @@ class RecentChangeSaveHookHandler {
 	public function onRecentChange_save( RecentChange $recentChange ): void {
 		$logType = $recentChange->getAttribute( 'rc_log_type' );
 		$logAction = $recentChange->getAttribute( 'rc_log_action' );
+		$revId = $recentChange->getAttribute( 'rc_this_oldid' );
 
-		if ( $recentChange->getAttribute( 'rc_this_oldid' ) <= 0 ) {
+		if ( $revId <= 0 ) {
 			// If we don't have a revision ID, we have no chance to find the right change to update.
 			// NOTE: As of February 2015, RC entries for undeletion have rc_this_oldid = 0.
 			return;
 		}
 
 		if ( $logType === null || ( $logType === 'delete' && $logAction === 'restore' ) ) {
-			foreach ( $this->changeHolder->getChanges() as $change ) {
-				$this->handleChange( $change, $recentChange );
+			foreach ( $this->changeHolder->getChanges() as  $change ) {
+				if ( $this->centralIdLookup === null ) {
+					$centralUserId = 0;
+				} else {
+					$centralUserId = $this->centralIdLookup->centralIdFromLocalUser(
+						$recentChange->getPerformerIdentity()
+					);
+				}
+
+				$this->setChangeMetaData( $change, $recentChange, $centralUserId );
+				$this->changeStore->saveChange( $change );
 			}
 		}
-	}
-
-	private function handleChange( Change $change, RecentChange $recentChange ) {
-		if ( $this->centralIdLookup === null ) {
-			$centralUserId = 0;
-		} else {
-			$centralUserId = $this->centralIdLookup->centralIdFromLocalUser(
-				$recentChange->getPerformerIdentity()
-			);
-		}
-
-		if ( !$change instanceof EntityChange ) {
-			return;
-		}
-
-		if ( !$this->changeNeedsDispatching( $change ) ) {
-			return;
-		}
-
-		$this->setChangeMetaData( $change, $recentChange, $centralUserId );
-		$this->changeStore->saveChange( $change );
-
-		$this->enqueueDispatchChangesJob(
-			$change->getEntityId()->getSerialization()
-		);
-	}
-
-	private function changeNeedsDispatching( EntityChange $change ) {
-		return $this->subscriptionLookup->getSubscribers( $change->getEntityId() ) ||
-			( $change instanceof ItemChange && $change->getSiteLinkDiff()->getOperations() );
 	}
 
 	private function setChangeMetaData( EntityChange $change, RecentChange $rc, int $centralUserId ): void {
