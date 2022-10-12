@@ -365,9 +365,9 @@
 		var $entityview = $( '.wikibase-entityview' );
 		var canEdit = isEditable();
 
-		wb.EntityInitializer.newFromEntityLoadedHook().getEntity().done( function ( entity ) {
+		wb.EntityInitializer.newFromEntityLoadedHook().getEntity().then( function ( entity ) {
 			var viewNamePromise = createEntityView( entity, $entityview.first() );
-			viewNamePromise.then( function ( viewName ) {
+			return viewNamePromise.then( function ( viewName ) {
 				if ( canEdit ) {
 					attachAnonymousEditWarningTrigger( $entityview, viewName, entity.getType() );
 					attachWatchLinkUpdater( $entityview, viewName );
@@ -377,7 +377,7 @@
 
 				mwPerformance.mark( 'wbInitEnd' );
 			} );
-		} );
+		} ).catch( mw.log.error );
 
 		if ( canEdit ) {
 			$entityview
