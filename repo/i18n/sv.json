@@ -18,7 +18,8 @@
 			"Skalman",
 			"Vivaelcelta",
 			"Warrakkk",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"Winston Sung"
 		]
 	},
 	"wikibase-desc": "Strukturerad datalagring",
@@ -26,6 +27,7 @@
 	"wikibase-entity-item": "objekt",
 	"wikibase-entity-property": "egenskap",
 	"wikibase-entity-query": "fråga",
+	"nstab-item": "Objekt",
 	"wikibase-edit": "redigera",
 	"wikibase-save": "spara",
 	"wikibase-publish": "publicera",

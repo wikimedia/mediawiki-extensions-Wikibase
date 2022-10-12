@@ -14,6 +14,7 @@
 			"Tacsipacsi",
 			"Tgr",
 			"Vivaelcelta",
+			"Winston Sung",
 			"Zolo"
 		]
 	},
@@ -22,6 +23,8 @@
 	"wikibase-entity-item": "elem",
 	"wikibase-entity-property": "tulajdonság",
 	"wikibase-entity-query": "lekérdezés",
+	"nstab-item": "Elem",
+	"nstab-property": "Tulajdonság",
 	"wikibase-edit": "szerkesztés",
 	"wikibase-save": "mentés",
 	"wikibase-publish": "közzététel",

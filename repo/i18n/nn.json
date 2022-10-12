@@ -6,7 +6,8 @@
 			"Macofe",
 			"Njardarlogar",
 			"Ranveig",
-			"Roarjo"
+			"Roarjo",
+			"Winston Sung"
 		]
 	},
 	"wikibase-desc": "Strukturert datalager",
@@ -14,6 +15,8 @@
 	"wikibase-entity-item": "element",
 	"wikibase-entity-property": "eigenskap",
 	"wikibase-entity-query": "spørjing",
+	"nstab-item": "Element",
+	"nstab-property": "Eigenskap",
 	"wikibase-edit": "endre",
 	"wikibase-save": "lagre",
 	"wikibase-publish": "publiser",

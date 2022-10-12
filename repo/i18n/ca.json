@@ -19,6 +19,7 @@
 			"Toniher",
 			"Vogone",
 			"Vriullop",
+			"Winston Sung",
 			"පසිඳු කාවින්ද"
 		]
 	},
@@ -27,6 +28,7 @@
 	"wikibase-entity-item": "element",
 	"wikibase-entity-property": "propietat",
 	"wikibase-entity-query": "consulta",
+	"nstab-item": "Element",
 	"wikibase-edit": "modifica",
 	"wikibase-save": "desa",
 	"wikibase-publish": "publica",

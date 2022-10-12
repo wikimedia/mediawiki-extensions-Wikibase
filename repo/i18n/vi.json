@@ -12,6 +12,7 @@
 			"Thienhau2003",
 			"Trần Nguyễn Minh Huy",
 			"Vinhtantran",
+			"Winston Sung",
 			"Zolo",
 			"පසිඳු කාවින්ද"
 		]
@@ -21,6 +22,9 @@
 	"wikibase-entity-item": "Khoản mục",
 	"wikibase-entity-property": "Thuộc tính",
 	"wikibase-entity-query": "Truy vấn",
+	"nstab-item": "Khoản mục",
+	"nstab-property": "Thuộc tính",
+	"nstab-query": "Truy vấn",
 	"wikibase-edit": "sửa",
 	"wikibase-save": "lưu",
 	"wikibase-publish": "đăng",

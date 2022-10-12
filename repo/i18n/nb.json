@@ -8,7 +8,8 @@
 			"Kingu",
 			"Kjetil r",
 			"Macofe",
-			"Njardarlogar"
+			"Njardarlogar",
+			"Winston Sung"
 		]
 	},
 	"wikibase-desc": "Tjenertutvidelse for Wikibase, det strukturerte datalageret",
@@ -16,6 +17,8 @@
 	"wikibase-entity-item": "element",
 	"wikibase-entity-property": "egenskap",
 	"wikibase-entity-query": "spørring",
+	"nstab-item": "Element",
+	"nstab-property": "Egenskap",
 	"wikibase-edit": "rediger",
 	"wikibase-save": "lagre",
 	"wikibase-publish": "publiser",

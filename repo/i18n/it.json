@@ -28,6 +28,7 @@
 			"Statix64",
 			"TheRukk",
 			"Vituzzu",
+			"Winston Sung",
 			"Yiyi",
 			"Zolo"
 		]
@@ -37,6 +38,8 @@
 	"wikibase-entity-item": "Elemento",
 	"wikibase-entity-property": "Proprietà",
 	"wikibase-entity-query": "Interrogazione",
+	"nstab-item": "Elemento",
+	"nstab-property": "Proprietà",
 	"wikibase-edit": "modifica",
 	"wikibase-save": "salva",
 	"wikibase-publish": "pubblica",

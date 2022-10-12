@@ -27,6 +27,7 @@
 			"Rtemis",
 			"Shirayuki",
 			"Taha",
+			"Winston Sung",
 			"Zolo",
 			"ZxxZxxZ",
 			"درفش کاویانی"
@@ -37,6 +38,8 @@
 	"wikibase-entity-item": "آیتم",
 	"wikibase-entity-property": "ویژگی",
 	"wikibase-entity-query": "پرسمان",
+	"nstab-item": "آیتم",
+	"nstab-property": "ویژگی",
 	"wikibase-edit": "ویرایش",
 	"wikibase-save": "ذخیره",
 	"wikibase-publish": "انتشار",

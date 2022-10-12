@@ -18,7 +18,8 @@
 			"Paxt",
 			"Utar",
 			"Vks",
-			"Vogone"
+			"Vogone",
+			"Winston Sung"
 		]
 	},
 	"wikibase-desc": "Strukturované úložiště dat",
@@ -26,6 +27,8 @@
 	"wikibase-entity-item": "položka",
 	"wikibase-entity-property": "vlastnost",
 	"wikibase-entity-query": "dotaz",
+	"nstab-item": "Položka",
+	"nstab-property": "Vlastnost",
 	"wikibase-edit": "editovat",
 	"wikibase-save": "uložit",
 	"wikibase-publish": "zveřejnit",

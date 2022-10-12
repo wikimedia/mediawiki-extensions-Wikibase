@@ -1,10 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajiniyaz Nurniyazov",
 			"Inabat Allanova",
 			"Nurlan"
 		]
 	},
+	"nstab-item": "Zat",
+	"tooltip-ca-nstab-item": "Elementti kóriw",
+	"nstab-property": "Múlk",
+	"tooltip-ca-nstab-property": "Múlkti kóriw",
+	"nstab-query": "Soraw",
+	"tooltip-ca-nstab-query": "Sorawdı kóriw",
 	"wikibase-edit": "redaktorlaw",
 	"wikibase-add": "qosıw",
 	"wikibase-label-empty": "Belgilenbegen",

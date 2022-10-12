@@ -48,6 +48,7 @@
 			"Shirayuki",
 			"The Anonymouse",
 			"Vivaelcelta",
+			"Winston Sung",
 			"YoViajo",
 			"Zolo",
 			"아라"
@@ -58,6 +59,7 @@
 	"wikibase-entity-item": "elemento",
 	"wikibase-entity-property": "propiedad",
 	"wikibase-entity-query": "consulta",
+	"nstab-item": "Elemento",
 	"wikibase-edit": "editar",
 	"wikibase-save": "guardar",
 	"wikibase-publish": "publicar",

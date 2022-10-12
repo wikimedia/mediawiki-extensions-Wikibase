@@ -22,6 +22,7 @@
 			"Valtlait",
 			"Veikk0.ma",
 			"VezonThunder",
+			"Winston Sung",
 			"Zolo",
 			"Тест"
 		]
@@ -31,6 +32,8 @@
 	"wikibase-entity-item": "kohde",
 	"wikibase-entity-property": "ominaisuus",
 	"wikibase-entity-query": "kysely",
+	"nstab-item": "Kohde",
+	"nstab-property": "Ominaisuus",
 	"wikibase-edit": "muokkaa",
 	"wikibase-save": "tallenna",
 	"wikibase-publish": "julkaise",
