@@ -131,4 +131,12 @@ abstract class SnakObject implements Snak {
 		}
 	}
 
+	public function __serialize(): array {
+		return [ $this->propertyId->getSerialization() ];
+	}
+
+	public function __unserialize( array $serialized ): void {
+		$this->propertyId = new NumericPropertyId( $serialized[0] );
+	}
+
 }

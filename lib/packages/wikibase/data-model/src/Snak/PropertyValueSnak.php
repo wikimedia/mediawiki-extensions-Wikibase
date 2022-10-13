@@ -89,7 +89,7 @@ class PropertyValueSnak extends SnakObject {
 	 * @return string
 	 */
 	public function serialize() {
-		return serialize( [ $this->propertyId->getSerialization(), $this->dataValue ] );
+		return serialize( $this->__serialize() );
 	}
 
 	/**
@@ -100,7 +100,15 @@ class PropertyValueSnak extends SnakObject {
 	 * @param string $serialized
 	 */
 	public function unserialize( $serialized ) {
-		list( $propertyId, $this->dataValue ) = unserialize( $serialized );
+		$this->__unserialize( unserialize( $serialized ) );
+	}
+
+	public function __serialize(): array {
+		return [ $this->propertyId->getSerialization(), $this->dataValue ];
+	}
+
+	public function __unserialize( array $serialized ): void {
+		list( $propertyId, $this->dataValue ) = $serialized;
 
 		if ( is_string( $propertyId ) ) {
 			$this->propertyId = new NumericPropertyId( $propertyId );
