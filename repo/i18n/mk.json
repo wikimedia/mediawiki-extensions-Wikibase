@@ -162,6 +162,7 @@
 	"wikibase-validator-label-with-description-conflict": "Својството $3 веќе има натпис „$1“ поврзан со јазичниот код $2, користејќи го истиот описен текст.",
 	"wikibase-validator-label-equals-description": "Натписот и описот за јазичниот код $1 не може да имаат иста вредност.",
 	"wikibase-validator-label-no-entityid": "Натписот мора да биде важечка назнака на единица.",
+	"wikibase-validator-illegal-string-chars": "Низата не треба да почнува или завршува со празно место, ниту пак да има вертикални празни места или табулатори: $1",
 	"wikibase-validator-illegal-file-chars": "Податотечните имиња не смеат да имаат знаци како две точки и коси црти.",
 	"wikibase-validator-check-file-type": "Недостасува податотечна наставка.",
 	"wikibase-validator-illegal-geo-shape-title": "Вредноста мора да почнува со <code>Data:</code> и да завршува со <code>.map</code>. Покрај тоа, насловот не треба да содржи знаци како две точки, тараба или права црта.",

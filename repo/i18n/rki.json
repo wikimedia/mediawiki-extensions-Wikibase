@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cakkaparla",
+			"ReyLon Mrat"
+		]
+	},
+	"nstab-item": "အမျိုးအစား",
+	"tooltip-ca-nstab-item": "အမျိုးအစားကိုကြည့်ပါ",
+	"nstab-property": "ပါဝင်ရေအချက်လက်",
+	"tooltip-ca-nstab-property": "ပါဝင်စွတိကိုကြေ့",
+	"nstab-query": "မိန်းခြင်း",
+	"tooltip-ca-nstab-query": "မိန်းခြင်းကိုကြေ့ပါ",
+	"wikibase-validator-illegal-string-chars": "စာတန်းသည် နိနိရာအလွတ်ဖြင့် အစ သို့မဟုတ် အဆုံး မဖြစ်သင့်ပိုင် ဒေါင်လိုက် အဖြူရောင်နေရာလွတ် သို့မဟုတ် တဘ်များ မပါဝင်သင့်ပါ- $1"
+}
