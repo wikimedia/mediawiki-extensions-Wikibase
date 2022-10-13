@@ -188,6 +188,10 @@ abstract class SerializableEntityId implements EntityId {
 			&& $target->serialization === $this->serialization;
 	}
 
+	abstract public function __serialize(): array;
+
+	abstract public function __unserialize( array $serialized ): void;
+
 	/**
 	 * Returns a pair (repository name, local part of ID) from the given ID serialization.
 	 * Note: this does not perform any validation of the given input. Calling code should take
