@@ -18,10 +18,10 @@ use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
  */
 class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 
-	private $context;
-	private $editEntityFactory;
-	private $logger;
-	private $summaryFormatter;
+	private IContextSource $context;
+	private MediawikiEditEntityFactory $editEntityFactory;
+	private LoggerInterface $logger;
+	private EditSummaryFormatter $summaryFormatter;
 
 	public function __construct(
 		IContextSource $context,

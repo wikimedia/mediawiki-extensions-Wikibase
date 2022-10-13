@@ -9,12 +9,12 @@ use Wikibase\DataModel\Entity\Item;
  */
 class ItemRevision {
 
-	private $item;
+	private Item $item;
 	/**
 	 * @var string timestamp in MediaWiki format 'YYYYMMDDhhmmss'
 	 */
-	private $lastModified;
-	private $revisionId;
+	private string $lastModified;
+	private int $revisionId;
 
 	public function __construct( Item $item, string $lastModified, int $revisionId ) {
 		$this->item = $item;

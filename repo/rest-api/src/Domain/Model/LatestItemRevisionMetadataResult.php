@@ -9,20 +9,9 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 final class LatestItemRevisionMetadataResult {
 
-	/**
-	 * @var ?int
-	 */
-	private $revisionId;
-
-	/**
-	 * @var ?string
-	 */
-	private $revisionTimestamp;
-
-	/**
-	 * @var ?ItemId
-	 */
-	private $redirectTarget;
+	private ?int $revisionId = null;
+	private ?string $revisionTimestamp = null;
+	private ?ItemId $redirectTarget = null;
 
 	public static function concreteRevision( int $revisionId, string $revisionTimestamp ): self {
 		$result = new self();

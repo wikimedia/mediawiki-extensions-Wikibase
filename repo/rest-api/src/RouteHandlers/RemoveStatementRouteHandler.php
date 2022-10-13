@@ -37,9 +37,9 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 	private const BOT_PARAM_DEFAULT = false;
 	private const COMMENT_PARAM_DEFAULT = null;
 
-	private $removeItemStatement;
-	private $responseFactory;
-	private $middlewareHandler;
+	private RemoveItemStatement $removeItemStatement;
+	private ResponseFactory $responseFactory;
+	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
 		RemoveItemStatement $removeItemStatement,

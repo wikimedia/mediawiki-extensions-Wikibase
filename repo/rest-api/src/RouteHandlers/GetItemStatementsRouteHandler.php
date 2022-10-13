@@ -29,25 +29,13 @@ use Wikimedia\ParamValidator\ParamValidator;
 class GetItemStatementsRouteHandler extends SimpleHandler {
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 
-	/**
-	 * @var GetItemStatements
-	 */
-	private $getItemStatements;
+	private GetItemStatements $getItemStatements;
 
-	/**
-	 * @var GetItemStatementsJsonPresenter
-	 */
-	private $successPresenter;
+	private GetItemStatementsJsonPresenter $successPresenter;
 
-	/**
-	 * @var ResponseFactory
-	 */
-	private $responseFactory;
+	private ResponseFactory $responseFactory;
 
-	/**
-	 * @var MiddlewareHandler
-	 */
-	private $middlewareHandler;
+	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
 		GetItemStatements $getItemStatements,

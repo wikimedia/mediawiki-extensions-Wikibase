@@ -17,7 +17,7 @@ class TypeValidatingJsonBodyValidator extends JsonBodyValidator {
 	public const TYPE_MISMATCH_CODE = 'invalid-request-body';
 	public const TYPE_MISMATCH_MESSAGE = 'Invalid field type';
 
-	private $settings;
+	private array $settings;
 
 	public function __construct( array $settings ) {
 		parent::__construct( $settings );

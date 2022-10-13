@@ -26,13 +26,13 @@ use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
  */
 class PatchItemStatement {
 
-	private $validator;
-	private $statementIdParser;
-	private $itemRetriever;
-	private $statementPatcher;
-	private $itemUpdater;
-	private $revisionMetadataRetriever;
-	private $permissionChecker;
+	private PatchItemStatementValidator $validator;
+	private StatementGuidParser $statementIdParser;
+	private ItemRetriever $itemRetriever;
+	private StatementPatcher $statementPatcher;
+	private ItemUpdater $itemUpdater;
+	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
+	private PermissionChecker $permissionChecker;
 
 	public function __construct(
 		PatchItemStatementValidator $validator,

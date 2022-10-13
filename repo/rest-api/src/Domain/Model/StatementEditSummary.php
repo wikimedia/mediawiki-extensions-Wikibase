@@ -9,9 +9,9 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class StatementEditSummary implements EditSummary {
 
-	private $editAction;
-	private $userComment;
-	private $statement;
+	private string $editAction;
+	private ?string $userComment;
+	private Statement $statement;
 
 	public static function newAddSummary( ?string $userComment, Statement $statement ): self {
 		$summary = new self();

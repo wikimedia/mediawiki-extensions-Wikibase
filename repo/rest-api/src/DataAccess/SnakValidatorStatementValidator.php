@@ -13,10 +13,10 @@ use Wikibase\Repo\Validators\SnakValidator;
  */
 class SnakValidatorStatementValidator implements StatementValidator {
 
-	private $deserializer;
-	private $snakValidator;
+	private StatementDeserializer $deserializer;
+	private SnakValidator $snakValidator;
 
-	private $deserializedStatement = null;
+	private ?Statement $deserializedStatement = null;
 
 	public function __construct( StatementDeserializer $deserializer, SnakValidator $snakValidator ) {
 		$this->deserializer = $deserializer;

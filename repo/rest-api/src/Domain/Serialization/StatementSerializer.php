@@ -10,7 +10,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @license GPL-2.0-or-later
  */
 class StatementSerializer implements Serializer {
-	private $statementSerializer;
+	private LegacyStatementSerializer $statementSerializer;
 
 	/**
 	 * @param LegacyStatementSerializer $statementSerializer Should have $useObjectsForMaps (e.g. for qualifiers) set to true.

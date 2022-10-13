@@ -7,12 +7,12 @@ namespace Wikibase\Repo\RestApi\UseCases\AddItemStatement;
  */
 class AddItemStatementRequest {
 
-	private $itemId;
-	private $statement;
-	private $editTags;
-	private $isBot;
-	private $comment;
-	private $username;
+	private string $itemId;
+	private array $statement;
+	private array $editTags;
+	private bool $isBot;
+	private ?string $comment;
+	private ?string $username;
 
 	public function __construct( string $itemId, array $statement, array $editTags, bool $isBot, ?string $comment, ?string $username ) {
 		$this->statement = $statement;

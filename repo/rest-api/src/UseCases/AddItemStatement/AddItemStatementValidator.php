@@ -18,9 +18,9 @@ class AddItemStatementValidator {
 	public const SOURCE_COMMENT = 'comment';
 	public const SOURCE_EDIT_TAGS = 'edit tags';
 
-	private $statementValidator;
-	private $itemIdValidator;
-	private $editMetadataValidator;
+	private StatementValidator $statementValidator;
+	private ItemIdValidator $itemIdValidator;
+	private EditMetadataValidator $editMetadataValidator;
 
 	public function __construct(
 		ItemIdValidator $itemIdValidator,

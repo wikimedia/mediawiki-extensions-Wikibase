@@ -22,9 +22,9 @@ use Wikibase\Repo\Validators\SnakValidator;
  */
 class JsonDiffStatementPatcher implements StatementPatcher {
 
-	private $serializer;
-	private $deserializer;
-	private $snakValidator;
+	private StatementSerializer $serializer;
+	private StatementDeserializer $deserializer;
+	private SnakValidator $snakValidator;
 
 	public function __construct(
 		StatementSerializer $serializer,

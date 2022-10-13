@@ -14,7 +14,7 @@ class MiddlewareHandler {
 	/**
 	 * @var Middleware[]
 	 */
-	private $middlewares;
+	private array $middlewares;
 
 	public function __construct( array $middlewares ) {
 		Assert::parameter(

@@ -13,7 +13,7 @@ use Wikibase\Repo\SummaryFormatter;
  */
 class EditSummaryFormatter {
 
-	private $summaryFormatter;
+	private SummaryFormatter $summaryFormatter;
 
 	public function __construct( SummaryFormatter $summaryFormatter ) {
 		$this->summaryFormatter = $summaryFormatter;

@@ -9,8 +9,8 @@ use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
  */
 class RequestPreconditionCheckResult {
 
-	private $revisionMetadata;
-	private $statusCode;
+	private ?LatestItemRevisionMetadataResult $revisionMetadata;
+	private ?int $statusCode;
 
 	private function __construct( ?LatestItemRevisionMetadataResult $revisionMetadata, ?int $statusCode ) {
 		$this->revisionMetadata = $revisionMetadata;

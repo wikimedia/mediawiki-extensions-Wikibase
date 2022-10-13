@@ -7,12 +7,12 @@ namespace Wikibase\Repo\RestApi\UseCases\RemoveItemStatement;
  */
 class RemoveItemStatementRequest {
 
-	private $statementId;
-	private $editTags;
-	private $isBot;
-	private $comment;
-	private $username;
-	private $itemId;
+	private string $statementId;
+	private array $editTags;
+	private bool $isBot;
+	private ?string $comment;
+	private ?string $username;
+	private ?string $itemId;
 
 	public function __construct(
 		string $statementId,

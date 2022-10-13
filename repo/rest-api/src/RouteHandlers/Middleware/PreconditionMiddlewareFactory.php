@@ -10,8 +10,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
  */
 class PreconditionMiddlewareFactory {
 
-	private $metadataRetriever;
-	private $conditionalHeaderUtil;
+	private ItemRevisionMetadataRetriever $metadataRetriever;
+	private ConditionalHeaderUtil $conditionalHeaderUtil;
 
 	public function __construct( ItemRevisionMetadataRetriever $metadataRetriever, ConditionalHeaderUtil $conditionalHeaderUtil ) {
 		$this->metadataRetriever = $metadataRetriever;

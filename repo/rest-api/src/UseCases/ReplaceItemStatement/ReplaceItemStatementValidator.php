@@ -20,10 +20,10 @@ class ReplaceItemStatementValidator {
 	public const SOURCE_COMMENT = 'comment';
 	public const SOURCE_EDIT_TAGS = 'edit tags';
 
-	private $itemIdValidator;
-	private $statementIdValidator;
-	private $editMetadataValidator;
-	private $statementValidator;
+	private ItemIdValidator $itemIdValidator;
+	private StatementIdValidator $statementIdValidator;
+	private EditMetadataValidator $editMetadataValidator;
+	private StatementValidator $statementValidator;
 
 	public function __construct(
 		ItemIdValidator $itemIdValidator,

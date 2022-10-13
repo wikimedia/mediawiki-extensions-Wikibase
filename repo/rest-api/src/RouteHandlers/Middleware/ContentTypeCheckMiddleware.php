@@ -15,7 +15,7 @@ class ContentTypeCheckMiddleware implements Middleware {
 	public const TYPE_JSON_PATCH = 'application/json-patch+json';
 	public const TYPE_NONE = '';
 
-	private $allowedContentTypes;
+	private array $allowedContentTypes;
 
 	public function __construct( array $allowedContentTypes ) {
 		$this->allowedContentTypes = $allowedContentTypes;

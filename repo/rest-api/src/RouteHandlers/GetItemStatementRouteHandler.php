@@ -31,10 +31,10 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 	public const STATEMENT_ID_PATH_PARAM = 'statement_id';
 	public const ROUTE = '/wikibase/v0/entities/items/{item_id}/statements/{statement_id}';
 
-	private $getItemStatement;
-	private $successPresenter;
-	private $responseFactory;
-	private $middlewareHandler;
+	private GetItemStatement $getItemStatement;
+	private StatementJsonPresenter $successPresenter;
+	private ResponseFactory $responseFactory;
+	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
 		GetItemStatement $getItemStatement,

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class StatementDeserializer implements Deserializer {
 
-	private $statementDeserializer;
+	private LegacyStatementDeserializer $statementDeserializer;
 
 	public function __construct( LegacyStatementDeserializer $statementDeserializer ) {
 

@@ -17,9 +17,9 @@ class RemoveItemStatementValidator {
 	public const SOURCE_COMMENT = 'comment';
 	public const SOURCE_EDIT_TAGS = 'edit tags';
 
-	private $statementIdValidator;
-	private $itemIdValidator;
-	private $editMetadataValidator;
+	private StatementIdValidator $statementIdValidator;
+	private ItemIdValidator $itemIdValidator;
+	private EditMetadataValidator $editMetadataValidator;
 
 	public function __construct(
 		ItemIdValidator $itemIdValidator,

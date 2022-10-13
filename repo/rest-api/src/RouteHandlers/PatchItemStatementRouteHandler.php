@@ -35,10 +35,10 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 	public const BOT_BODY_PARAM = 'bot';
 	public const COMMENT_BODY_PARAM = 'comment';
 
-	private $useCase;
-	private $middlewareHandler;
-	private $successPresenter;
-	private $responseFactory;
+	private PatchItemStatement $useCase;
+	private MiddlewareHandler $middlewareHandler;
+	private StatementJsonPresenter $successPresenter;
+	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		PatchItemStatement $useCase,

@@ -14,7 +14,7 @@ use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
  */
 class ResponseFactory {
 
-	private $errorPresenter;
+	private ErrorJsonPresenter $errorPresenter;
 
 	public function __construct( ErrorJsonPresenter $errorPresenter ) {
 		$this->errorPresenter = $errorPresenter;

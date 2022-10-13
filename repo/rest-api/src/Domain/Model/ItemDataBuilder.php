@@ -13,13 +13,13 @@ use Wikibase\DataModel\Term\TermList;
  */
 class ItemDataBuilder {
 
-	private $id;
-	private $type = null;
-	private $labels = null;
-	private $descriptions = null;
-	private $aliases = null;
-	private $statements = null;
-	private $siteLinks = null;
+	private ItemId $id;
+	private ?string $type = null;
+	private ?TermList $labels = null;
+	private ?TermList $descriptions = null;
+	private ?AliasGroupList $aliases = null;
+	private ?StatementList $statements = null;
+	private ?SiteLinkList $siteLinks = null;
 
 	public function setId( ItemId $id ): self {
 		$this->id = $id;

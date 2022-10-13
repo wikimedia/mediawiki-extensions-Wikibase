@@ -10,7 +10,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsSuccessRes
  */
 class GetItemStatementsJsonPresenter {
 
-	private $serializer;
+	private StatementListSerializer $serializer;
 
 	/**
 	 * @param StatementListSerializer $serializer Should have $useObjectsForMaps (e.g. for qualifiers) set to true.

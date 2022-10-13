@@ -7,7 +7,7 @@ namespace Wikibase\Repo\RestApi\UseCases\GetItemStatements;
  */
 class GetItemStatementsRequest {
 
-	private $itemId;
+	private string $itemId;
 
 	public function __construct( string $itemId ) {
 		$this->itemId = $itemId;
