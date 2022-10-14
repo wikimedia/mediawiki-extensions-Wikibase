@@ -37,6 +37,7 @@ class EntitySearchHelperTest extends ServiceWiringTestCase {
 	}
 
 	public function testConstructionWithFederatedPropertiesEnabled(): void {
+		$this->markTestSkipped( 'federatedPropertiesEnabled is forced to false for REL1_37' );
 
 		$this->mockService(
 			'WikibaseRepo.Settings',

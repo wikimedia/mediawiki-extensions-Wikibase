@@ -23,6 +23,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 	public function testFactoryNoFederation() {
+		$this->markTestSkipped( 'federatedPropertiesEnabled is forced to false for REL1_37' );
 		$specialPage = SpecialListPropertiesDispatchingFactory::factory(
 			new DataTypeFactory( [] ),
 			WikibaseRepo::getEntityIdHtmlLinkFormatterFactory(),

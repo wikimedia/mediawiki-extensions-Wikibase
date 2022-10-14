@@ -59,6 +59,7 @@ class EntityIdParserTest extends ServiceWiringTestCase {
 
 		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions', $entityTypeDefinitions );
 
+		$this->markTestSkipped( 'federatedPropertiesEnabled is forced to false for REL1_37' );
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
 				'federatedPropertiesEnabled' => true,

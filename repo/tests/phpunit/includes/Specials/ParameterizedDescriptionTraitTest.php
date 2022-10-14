@@ -35,6 +35,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function setFederatedPropertiesEnabled() {
+		$this->markTestSkipped( 'federatedPropertiesEnabled is forced to false for REL1_37' );
 		$settings = WikibaseRepo::getSettings();
 		$settings->setSetting( 'federatedPropertiesEnabled', true );
 	}

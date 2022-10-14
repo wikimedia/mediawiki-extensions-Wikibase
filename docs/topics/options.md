@@ -564,18 +564,6 @@ Enable/Disable the tainted reference feature.
 
 DEFAULT: ```false```
 
-#### federatedPropertiesEnabled {#repo_federatedPropertiesEnabled}
-Enable the federated properties feature. **Note that** once this feature is enable (set true), it must not be disabled (set false) again.
-The behaviour is unpredicted if it is disabled after it was enabled.
-
-DEFAULT: ```false```
-
-#### federatedPropertiesSourceScriptUrl {#repo_federatedPropertiesSourceScriptUrl}
-A url path for the location of the source wikibase instance.
-The set url path should allow access to both `index.php` and `api.php`
-
-DEFAULT: ```https://www.wikidata.org/w/```
-
 #### changeVisibilityNotificationClientRCMaxAge {#repo_changeVisibilityNotificationClientRCMaxAge}
 Value of the `$wgRCMaxAge` setting, which specifies the max age (in seconds) of entries in the `recentchanges` table, on the client wikis.
 

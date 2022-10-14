@@ -14,6 +14,7 @@ abstract class FederatedPropertiesTestCase extends MediaWikiIntegrationTestCase 
 
 	protected function setUp(): void {
 		parent::setUp();
+		$this->markTestSkipped( 'federatedPropertiesEnabled is forced to false for REL1_37' );
 		$this->setFederatedPropertiesEnabled();
 	}
 

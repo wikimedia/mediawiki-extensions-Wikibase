@@ -64,6 +64,7 @@ class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 	}
 
 	public function testGetEntitySourceDefinitionsFromSettingsInitializesFederatedPropertiesDefaults() {
+		$this->markTestSkipped( 'federatedPropertiesEnabled is forced to false for REL1_37' );
 		$itemNamespaceId = 120;
 		$propertyNamespaceId = 122;
 		$settingsArray = [
