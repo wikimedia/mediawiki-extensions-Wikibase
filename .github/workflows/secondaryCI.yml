@@ -1,7 +1,6 @@
 name: Wikibase Secondary CI
 on:
   push:
-    branches: [ master ]
 
 jobs:
   secondary-ci:
