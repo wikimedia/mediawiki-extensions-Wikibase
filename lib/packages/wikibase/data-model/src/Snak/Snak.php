@@ -37,4 +37,8 @@ interface Snak extends Serializable, PropertyIdProvider {
 	 */
 	public function equals( $value );
 
+	public function __serialize(): array;
+
+	public function __unserialize( array $serialized ): void;
+
 }
