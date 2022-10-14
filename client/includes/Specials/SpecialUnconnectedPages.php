@@ -83,7 +83,7 @@ class SpecialUnconnectedPages extends QueryPage {
 		$ns = $this->getRequest()->getIntOrNull( 'namespace' );
 
 		if ( $ns !== null && in_array( $ns, $wbNamespaces ) ) {
-			$conds['pp_sortkey'] = $ns;
+			$conds['pp_sortkey'] = -$ns;
 		} else {
 			$conds['pp_sortkey'] = [];
 			foreach ( $wbNamespaces as $wbNs ) {
