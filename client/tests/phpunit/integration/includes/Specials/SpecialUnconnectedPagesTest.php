@@ -223,6 +223,10 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 			0,
 			[ 'pp_sortkey' => 0 ],
 		];
+		yield 'included nonzero namespace' => [
+			4,
+			[ 'pp_sortkey' => -4 ],
+		];
 		yield 'excluded namespace' => [
 			2,
 			[ 'pp_sortkey' => [ 0, -4 ] ],
