@@ -25,6 +25,7 @@ trait FederatedPropertiesTestTrait {
 	}
 
 	protected function setFederatedPropertiesEnabled( bool $withLocalPropertySource = false ): void {
+		$this->markTestSkipped( 'federatedPropertiesEnabled is forced to false for REL1_37' );
 		$this->setWbSetting( 'federatedPropertiesEnabled', true );
 
 		$localEntitySource = [
@@ -120,6 +121,7 @@ trait FederatedPropertiesTestTrait {
 
 	public function testFederatedPropertiesEnabled() {
 		$settings = WikibaseRepo::getSettings();
+		$this->markTestSkipped( 'federatedPropertiesEnabled is forced to false for REL1_37' );
 		$this->assertSame( true, $settings->getSetting( 'federatedPropertiesEnabled' ) );
 	}
 

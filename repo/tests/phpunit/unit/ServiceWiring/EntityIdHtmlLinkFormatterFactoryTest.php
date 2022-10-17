@@ -7,7 +7,6 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
-use Wikibase\Repo\FederatedProperties\WrappingEntityIdFormatterFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -47,9 +46,9 @@ class EntityIdHtmlLinkFormatterFactoryTest extends ServiceWiringTestCase {
 			'federatedPropertiesEnabled' => false
 		], EntityIdHtmlLinkFormatterFactory::class ];
 
-		yield 'federated properties enabled' => [ [
-			'federatedPropertiesEnabled' => true
-		], WrappingEntityIdFormatterFactory::class ];
+		// yield 'federated properties enabled' => [ [
+		// 	'federatedPropertiesEnabled' => true
+		// ], WrappingEntityIdFormatterFactory::class ];
 	}
 
 }

@@ -25,6 +25,7 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class FederatedPropertiesServiceFactoryTest extends ServiceWiringTestCase {
 
 	public function testFederatedPropertiesEnabled(): void {
+		$this->markTestSkipped( 'federatedPropertiesEnabled is forced to false for REL1_37' );
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
 				'federatedPropertiesEnabled' => true,
@@ -71,9 +72,9 @@ class FederatedPropertiesServiceFactoryTest extends ServiceWiringTestCase {
 		yield 'federated properties not enabled' => [ [
 			'federatedPropertiesEnabled' => false,
 		] ];
-		yield 'source script URL not configured' => [ [
-			'federatedPropertiesEnabled' => true,
-		] ];
+		// yield 'source script URL not configured' => [ [
+		// 	'federatedPropertiesEnabled' => true,
+		// ] ];
 	}
 
 }

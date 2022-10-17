@@ -50,6 +50,22 @@ class WikibaseSettings {
 		$twoDArrayMerge = [ 'string-limits', 'pagePropertiesRdf' ];
 		$falseMeansRemove = [ 'urlSchemes', 'canonicalLanguageCodes', 'globeUris' ];
 
+		// Hack to force federated properties to be disabled in 1.37 release of Wikibase
+		// This code only ever existed on the REL1_37 branch
+		// https://phabricator.wikimedia.org/T317890
+		// https://github.com/wmde/wikibase-release-pipeline/pull/357
+		// https://mattermost.wikimedia.de/swe/pl/jihgcddpi3ri7dd9e3r8ng1yty
+		if (
+			array_key_exists( 'federatedPropertiesEnabled', $wgWBRepoSettings ) &&
+			$wgWBRepoSettings['federatedPropertiesEnabled']
+		) {
+			wfLogWarning(
+				__METHOD__ . ': federatedPropertiesEnabled is not allowed to be true in this version, '
+				. 'setting to false'
+			);
+			$wgWBRepoSettings['federatedPropertiesEnabled'] = false;
+		}
+
 		return self::mergeSettings(
 			$repoSettings,
 			$wgWBRepoSettings ?? [],
