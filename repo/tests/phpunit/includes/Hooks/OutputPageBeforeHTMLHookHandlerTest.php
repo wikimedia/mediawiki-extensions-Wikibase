@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use FauxRequest;
 use Language;
+use MediaWiki\User\StaticUserOptionsLookup;
 use MediaWikiIntegrationTestCase;
 use NullHttpRequestFactory;
 use NullStatsdDataFactory;
@@ -114,7 +115,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$this->preferredLanguageLookup,
 			$this->entityViewChecker,
 			WikibaseRepo::getLanguageFallbackChainFactory(),
-			$this->getServiceContainer()->getUserOptionsLookup()
+			new StaticUserOptionsLookup( [] )
 		);
 	}
 
