@@ -25,12 +25,13 @@
 			"Yfdyh000",
 			"一個正常人",
 			"乌拉跨氪",
-			"Hello903hello"
+			"Hello903hello",
+			"SunAfterRain"
 		]
 	},
 	"wikibase-client-desc": "Wikibase 擴充套件客戶端",
 	"tooltip-t-wikibase": "連結至已連接的資料儲存庫項目",
-	"wikibase-after-page-move": "您的移動現應是[$1 對應到{{WBREPONAME}}項目]的語言連結。我們請您確認這是否有發生。",
+	"wikibase-after-page-move": "您的移動現在應當[$1 體現在{{WBREPONAME}}項目]的語言連結中。請檢查對語言連結的改動是否生效。",
 	"wikibase-after-page-move-queued": "與此頁面關聯的 [$1 {{WBREPONAME}} 項目] 將會於稍後自動更新。 請注意這不代表會立即更新。",
 	"wikibase-after-page-delete": "至此頁面的連結應已從[$1 相關{{WBREPONAME}}項目]中移除。我們請您確認這是否有發生。",
 	"wikibase-after-page-delete-queued": "與此頁面關聯的 [$1 {{WBREPONAME}} 項目] 將會於稍後自動更新。 請注意這不代表會立即更新。",

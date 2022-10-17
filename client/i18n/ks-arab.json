@@ -21,5 +21,9 @@
 	"wikibase-rc-wikibase-edit-letter": "ڑ",
 	"wikibase-pageinfo-entity-usage-S": "سایِٹ لِنک",
 	"wikibase-otherprojects": "باقؠن مَنصوٗبَن مَنٛز",
+	"wikibase-client-data-bridge-references-heading": "حَوالہٕ",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "دٲخٕل یا کھاتہٕ تَخلیٖق",
+	"wikibase-client-data-bridge-error-reload-bridge": "رِلوڈ",
+	"wikibase-client-data-bridge-error-go-back": "واپَس گٔژھِو",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "اؠڈِٹ تھٲوِو جٲری"
 }
