@@ -13,13 +13,6 @@
 			"Usandaru555"
 		]
 	},
-	"nstab-item": "အမျိုးအစား",
-	"tooltip-ca-nstab-item": "အမျိုးအစားကိုကြည့်ပါ",
-	"nstab-property": "ဝန်ဆန်",
-	"tooltip-ca-nstab-property": "ဝန်ဆန်များကိုကြည့်ပါ",
-	"nstab-query": "မြိန်းခွန်း",
-	"tooltip-ca-nstab-query": "မြိန်းခွန်းကိုကြည့်ပါ",
-	"wikibase-validator-illegal-string-chars": "စာတန်းသည် နိန်ရာအလွတ်ဖြင့် အစ သို့မဟုတ် အဆုံး မဖြစ်သင့်ပိုင် ဒေါင်လိုက် အဖြူရောင်ရာနိန်လွတ် သို့မဟုတ် တဘ်များ မပါဝင်သင့်ပါ- $1",
 	"wikibase-newitem-not-recognized-siteid": "The provided site identifier was not recognised.",
 	"wikibase-api-not-recognized-siteid": "The supplied site identifier was not recognised.",
 	"wikibase-api-not-recognized-array": "An array was expected, but not recognised.",

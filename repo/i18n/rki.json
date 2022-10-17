@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Boke",
 			"Cakkaparla",
+			"Nay Thu Rin",
 			"ReyLon Mrat",
+			"Tejoebāsa",
 			"YaThaWinTha"
 		]
 	},
@@ -13,5 +16,9 @@
 	"nstab-query": "မိန်းခြင်း",
 	"tooltip-ca-nstab-query": "မိန်းခြင်းကိုကြေ့ပါ",
 	"wikibase-edit": "တီးဖြတ်",
-	"wikibase-validator-illegal-string-chars": "စာတန်းသည် နိနိရာအလွတ်ဖြင့် အစ သို့မဟုတ် အဆုံး မဖြစ်သင့်ပိုင် ဒေါင်လိုက် အဖြူရောင်နေရာလွတ် သို့မဟုတ် တဘ်များ မပါဝင်သင့်ပါ- $1"
+	"wikibase-add": "ပေါင်းထည့်",
+	"wikibase-label-empty": "တံဆိပ်သတ်မှတ်ထားစာမဟိန့်ပါ",
+	"wikibase-description-empty": "ဖော်ပြချက် သက်မှက်လို့မထားပါ",
+	"wikibase-sitelinks-special": "အခြားအရွယ်များ",
+	"wikibase-validator-illegal-string-chars": "စာတန်းသည် နိရာအလွတ်နန့် ယပိုင်မဟုတ်ကေ အဆုံး မဖြစ်သင့်ပိုင် ဒေါင်လိုက် အဖြူရောင်နေရာလွတ် သို့မဟုတ် တဘ်များ မပါဝင်သင့်ပါ- $1"
 }

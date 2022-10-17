@@ -7,6 +7,7 @@
 	},
 	"wikibase-edit": "修改",
 	"wikibase-add": "添加",
+	"wikibase-label-empty": "未定義標籤",
 	"wikibase-description-empty": "未定義描述",
 	"wikibase-sitelinks-special": "其他网站"
 }

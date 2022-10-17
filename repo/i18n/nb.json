@@ -166,6 +166,7 @@
 	"wikibase-validator-label-with-description-conflict": "Element $3 har allerede etiketten «$1» knyttet til språkkoden $2, med samme beskrivelse.",
 	"wikibase-validator-label-equals-description": "Etiketten og beskrivelsen for språkkoden $1 kan ikke ha samme verdi.",
 	"wikibase-validator-label-no-entityid": "Etiketten kan ikke være et gyldig element-id.",
+	"wikibase-validator-illegal-string-chars": "Strenger bør ikke starte eller slutte med mellomrom eller inkludere vertikalt mellomrom eller tabulatorer: $1",
 	"wikibase-validator-illegal-file-chars": "Filnavn kan ikke inneholde tegn som kolon og skråstreker",
 	"wikibase-validator-check-file-type": "Filendelsen mangler.",
 	"wikibase-validator-illegal-geo-shape-title": "Verdien må starte med <code>Data:</code> og slutte på <code>.map</code>. I tillegg kan den ikke inneholde tegn som kolon (:), nummertegn (#) eller vertikal strek (|).",
