@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajiniyaz Nurniyazov",
 			"Nurlan"
 		]
 	},
@@ -10,10 +11,10 @@
 	"wikibase-linkitem-addlinks": "Silteme qosıw",
 	"wikibase-linkitem-title": "Betke silteme",
 	"wikibase-linkitem-linkpage": "Betke silteme",
-	"wikibase-linkitem-selectlink": "Bul betke baylanıstırmaqshı bolǵan sayttı hám betti tanlań",
+	"wikibase-linkitem-selectlink": "Bul betke baylanıstırmaqshı bolǵan sayttı hám betti tańlań",
 	"wikibase-linkitem-input-site": "Til:",
 	"wikibase-linkitem-input-page": "Bet:",
-	"wikibase-rc-hide-wikidata-hide": "Jasır",
-	"wikibase-rc-hide-wikidata-show": "Kórset",
-	"wikibase-otherprojects": "Basqa joybarlar"
+	"wikibase-rc-hide-wikidata-hide": "Jasırıw",
+	"wikibase-rc-hide-wikidata-show": "Kórsetiw",
+	"wikibase-otherprojects": "Basqa joybarlarda"
 }
