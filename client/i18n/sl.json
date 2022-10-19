@@ -59,7 +59,7 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "Vsa urejanja v projektu {{WBREPONAME}} so označena kot »manjša«, zato je filter »Urejanja v projektu {{WBREPONAME}}« v navzkrižju s filtrom »Urejanja, ki niso manjša«.",
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "Vsa urejanja v projektu {{WBREPONAME}} so označena kot »manjša«, zato je filter »Urejanja v projektu {{WBREPONAME}}« v navzkrižju s filtrom »Urejanja, ki niso manjša«.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Vsa urejanja v projektu {{WBREPONAME}} so označena kot »manjša«, zato je filter »Urejanja v projektu {{WBREPONAME}}« v navzkrižju s filtrom »Urejanja, ki niso manjša«.",
-	"wikibase-replicationnote": "Spremembe se bodo na vseh wikijih morda prikazale šele po več minutah.",
+	"wikibase-replicationnote": "Spremembe se bodo v vseh vikijih morda prikazale šele po več minutah.",
 	"wikibase-watchlist-show-changes-pref": "Na spisku nadzorov pokaži urejanja Wikipodatkov",
 	"wikibase-error-deserialize-error": "Deserializacija podatkov ni uspela.",
 	"wikibase-error-serialize-error": "Serializacija podatkov ni uspela.",
