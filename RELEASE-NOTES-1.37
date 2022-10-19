@@ -1,7 +1,5 @@
 = Wikibase 1.37 =
 
-This is not a release yet!
-
 == Upgrading notes for 1.37 ==
 
 Don't forget to always back up your database before upgrading!
@@ -15,6 +13,12 @@ and save it in the Wikibase folder of your mediawiki installation.
 
 Execute it as a normal maintenance script and replace the legacy repositories
 configuration with the new entitySources one.
+
+...
+
+The prototype feature "Federated Properties" is disabled this this release.
+If you are using "Federated Properties" and upgrade to this release, the feature
+will be disabled and no properties will appear to exist.
 
 ...
 
@@ -44,6 +48,8 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 * (client) (T286539) repoNamespaces has been removed.
 * (client) (T287242) repoDatabase has been removed.
 * (repo) (T287486) conceptBaseUri has been removed.
+* (repo) (T317890) federatedPropertiesEnabled has been removed.
+* (repo) (T317890) federatedPropertiesSourceScriptUrl has been removed.
 
 === New user-facing features in 1.37 ===
 
