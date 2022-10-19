@@ -22,7 +22,8 @@
 			"Sujiniku",
 			"TKsdik8900",
 			"Yusuke1109",
-			"にょきにょき"
+			"にょきにょき",
+			"Kokage si"
 		]
 	},
 	"wikibase-client-desc": "ウィキベース拡張機能のクライアント",
@@ -104,7 +105,7 @@
 	"wikibase-otherprojects-beta-description": "サイドバーに他のウィキメディアプロジェクトへのリンクを {{WBREPONAME}} データに基づいて提供する「{{int:wikibase-otherprojects}}」セクションを追加する。",
 	"wikibase-sitelinks-sitename-columnheading": "言語",
 	"wikibase-sitelinks-link-columnheading": "リンクされているページ",
-	"echo-category-title-wikibase-action": "{{WBREPONAME}}からの{{PLURAL:$1|接続}}",
+	"echo-category-title-wikibase-action": "{{WBREPONAME}}と{{PLURAL:$1|接続}}",
 	"echo-pref-tooltip-wikibase-action": "{{GENDER:|自分が作成した}}ページが{{WBREPONAME}}項目に接続されたときに通知する。",
 	"notification-header-page-connection": "ページ <strong>$3</strong>は、この主題に関連したデータが収集されている、{{PLURAL:$4|-1={{WBREPONAME}}の項目|{{WBREPONAME}}の項目 $4}} に{{GENDER:$2|結び付けられ}}ました。",
 	"notification-bundle-header-page-connection": "<strong>$3</strong>と{{PLURAL:$4|もう一件のページ|$4件のページ|100=99件以上のページ}}が、この主題に関連したデータが収集されている、{{WBREPONAME}}の項目に{{GENDER:$2|結び付けられ}}ました。",
