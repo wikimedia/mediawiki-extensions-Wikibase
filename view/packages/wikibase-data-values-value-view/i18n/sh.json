@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vlad5250"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Obrada vrijednosti za tip \"$1\" još nije podržana.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Obrada vrijednosti za tip podatka \"$1\" još nije podržana.",
+	"valueview-expert-emptyvalue-empty": "prazno",
+	"valueview-expert-globecoordinateinput-precision": "Preciznost:",
+	"valueview-expert-globecoordinateinput-nullprecision": "neodređeno",
+	"valueview-expert-globecoordinateinput-customprecision": "posebno ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregorijanski",
+	"valueview-expert-timevalue-calendar-julian": "Julijanski",
+	"valueview-expert-timeinput-precision": "Preciznost:",
+	"valueview-expert-timeinput-precision-year1k": "milenijum",
+	"valueview-expert-timeinput-precision-year100": "vijek",
+	"valueview-expert-timeinput-precision-year10": "decenija",
+	"valueview-expert-timeinput-precision-year": "godina",
+	"valueview-expert-timeinput-precision-month": "mjesec",
+	"valueview-expert-timeinput-precision-day": "dan",
+	"valueview-expert-timeinput-precision-hour": "sat",
+	"valueview-expert-timeinput-precision-minute": "minuta",
+	"valueview-expert-timeinput-precision-second": "sekunda",
+	"valueview-expert-timeinput-calendar": "Kalendar:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Jezik (obavezno):",
+	"valueview-expertextender-unitsuggester-label": "Jedinica (neobavezno):"
+}
