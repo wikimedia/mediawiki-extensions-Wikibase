@@ -89,7 +89,7 @@
 	"wikibase-undo-badpage": "Лоша измена: Измена $2 не припада страници [[:$1]].",
 	"wikibase-undo-firstrev": "Није могуће поништити прављење странице",
 	"wikibase-undo-nocontent": "Није могуће учитати садржај измене $2 странице $1",
-	"wikibase-summary-generated": "Резиме (биће придодат аутоматски генерисаном резимеу):",
+	"wikibase-summary-generated": "Опис (биће придодат аутоматски генерисаном опису):",
 	"wikibase-disambiguation-title": "Вишезначност за „$1“",
 	"wikibase-aliases-input-help-message": "Да би олакшали проналажење ентитета можете унети алтернативне називе.",
 	"wikibase-propertypage-datatype": "Врста податка",

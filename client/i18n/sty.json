@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Khanmarat"
+			"Khanmarat",
+			"TayfunEt."
 		]
 	},
 	"tooltip-t-wikibase": "Пелешмәле репозиторийтағы пәйләнкән элементҡа ссылка",
@@ -9,6 +10,8 @@
 	"wikibase-dataitem": "{{WBREPONAME}}ның элементы",
 	"wikibase-editlinks": "Ссылкаларны төсәткәле",
 	"wikibase-editlinkstitle": "Пашҡа телләртәге ссылкаларны төсәткәле",
+	"wikibase-linkitem-input-site": "Тел:",
+	"wikibase-linkitem-input-page": "Пит:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Йәшергәле",
 	"wikibase-rc-hide-wikidata-show": "Күргәскәле",
