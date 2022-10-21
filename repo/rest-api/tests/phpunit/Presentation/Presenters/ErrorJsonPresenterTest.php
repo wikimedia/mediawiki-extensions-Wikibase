@@ -16,13 +16,28 @@ use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
  */
 class ErrorJsonPresenterTest extends TestCase {
 
-	public function testGetJson(): void {
+	public function testGetJson_withoutContext(): void {
 		$error = new GetItemErrorResponse( ErrorResponse::ITEM_NOT_FOUND, 'Could not find an item with the ID Q123' );
 
 		$presenter = new ErrorJsonPresenter();
 
 		$this->assertJsonStringEqualsJsonString(
 			'{"code":"' . ErrorResponse::ITEM_NOT_FOUND . '","message":"Could not find an item with the ID Q123"}',
+			$presenter->getJson( $error )
+		);
+	}
+
+	public function testGetJson_withContext(): void {
+		$error = new ErrorResponse(
+			'test-error-code',
+			'Test error message',
+			[ "testing" => "with", "context" => 42 ]
+		);
+
+		$presenter = new ErrorJsonPresenter();
+
+		$this->assertJsonStringEqualsJsonString(
+			'{"code":"test-error-code","message":"Test error message","context":{"testing":"with","context":42}}',
 			$presenter->getJson( $error )
 		);
 	}
