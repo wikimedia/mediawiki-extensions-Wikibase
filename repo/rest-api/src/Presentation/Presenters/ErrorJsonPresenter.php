@@ -16,7 +16,8 @@ class ErrorJsonPresenter {
 				'code' => $error->getCode(),
 				'message' => $error->getMessage(),
 				'context' => $error->getContext()
-			] )
+			] ),
+			JSON_UNESCAPED_SLASHES
 		);
 	}
 

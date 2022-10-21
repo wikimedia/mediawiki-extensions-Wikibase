@@ -109,7 +109,11 @@ class PatchItemStatement {
 		} catch ( PatchTestConditionFailedException $e ) {
 			return new PatchItemStatementErrorResponse(
 				ErrorResponse::PATCH_TEST_FAILED,
-				'Test operation in the patch provided failed'
+				"Test operation in the provided patch failed. " .
+				"At path '" . $e->getOperation()['path'] .
+				"' expected '" . json_encode( $e->getOperation()['value'], JSON_FORCE_OBJECT ) .
+				"', actual: '" . json_encode( $e->getActualValue() ) . "'",
+				[ "operation" => $e->getOperation(), "actual-value" => $e->getActualValue() ]
 			);
 		}
 

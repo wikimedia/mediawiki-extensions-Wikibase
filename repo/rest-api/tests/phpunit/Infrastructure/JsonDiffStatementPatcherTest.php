@@ -116,18 +116,21 @@ class JsonDiffStatementPatcherTest extends TestCase {
 	}
 
 	public function testGivenPatchTestConditionFailed_throwsException(): void {
-		$this->expectException( PatchTestConditionFailedException::class );
+		$testOperation = [
+			'op' => 'test',
+			'path' => '/mainsnak/snaktype',
+			'value' => 'value',
+		];
 
-		$this->newStatementPatcher()->patch(
-			NewStatement::noValueFor( 'P1' )->build(),
-			[
-				[
-					'op' => 'test',
-					'path' => '/mainsnak/snaktype',
-					'value' => 'value',
-				],
-			]
-		);
+		try {
+			$this->newStatementPatcher()->patch(
+				NewStatement::noValueFor( 'P1' )->build(),
+				[ $testOperation ]
+			);
+		} catch ( PatchTestConditionFailedException $exception ) {
+			$this->assertEquals( $testOperation, $exception->getOperation() );
+			$this->assertEquals( 'novalue', $exception->getActualValue() );
+		}
 	}
 
 	public function testGivenPatchCannotBeApplied_throwsException(): void {

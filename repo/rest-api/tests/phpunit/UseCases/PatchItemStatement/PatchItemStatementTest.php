@@ -318,7 +318,9 @@ class PatchItemStatementTest extends TestCase {
 	 */
 	public function testGivenPatcherThrows_returnsCorrespondingErrorResponse(
 		\Exception $patcherException,
-		string $expectedErrorCode
+		string $expectedMessage,
+		string $expectedErrorCode,
+		array $expectedContext = null
 	): void {
 		$originalStatement = NewStatement::noValueFor( 'P123' )
 			->withGuid( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
@@ -341,25 +343,44 @@ class PatchItemStatementTest extends TestCase {
 		);
 
 		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( $response->getCode(), $expectedErrorCode );
+		$this->assertEquals( $expectedMessage, $response->getMessage() );
+		$this->assertEquals( $expectedErrorCode, $response->getCode() );
+		$this->assertEquals( $expectedContext, $response->getContext() );
 	}
 
 	public function patchExceptionProvider(): Generator {
 		yield [
 			new InvalidPatchedSerializationException(),
+			'The patch results in an invalid statement which cannot be stored',
 			'patched-statement-invalid'
 		];
 		yield [
 			new InvalidPatchedStatementException(),
+			'The patch results in an invalid statement which cannot be stored',
 			'patched-statement-invalid'
 		];
 		yield [
 			new InapplicablePatchException(),
+			'The provided patch cannot be applied to the statement Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 			'cannot-apply-patch'
 		];
+		$testOperation = [
+			'op' => 'test',
+			'path' => '/mainsnak/snaktype',
+			'value' => 'value',
+		];
 		yield [
-			new PatchTestConditionFailedException(),
-			'patch-test-failed'
+			new PatchTestConditionFailedException(
+				'message',
+				$testOperation,
+				[ 'key' => 'actualValue' ]
+			),
+			"Test operation in the provided patch failed. At path '${testOperation['path']}' " .
+			"expected '" . json_encode( $testOperation[ 'value' ] ) . "', " .
+			"actual: '" . json_encode( [ 'key' => 'actualValue' ] ) . "'",
+			'patch-test-failed',
+			[ "operation" => $testOperation, "actual-value" => [ 'key' => 'actualValue' ] ]
+
 		];
 	}
 
