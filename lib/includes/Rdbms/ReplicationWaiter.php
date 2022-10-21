@@ -44,7 +44,7 @@ class ReplicationWaiter {
 	}
 
 	public function getMaxLag(): array {
-		return $this->lbFactory->getMainLB( $this->domainId )->getMaxLag( $this->domainId );
+		return $this->lbFactory->getMainLB( $this->domainId )->getMaxLag();
 	}
 
 }
