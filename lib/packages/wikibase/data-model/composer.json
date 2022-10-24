@@ -28,7 +28,7 @@
 	},
 	"require": {
 		"php": "^8.0|^7.1",
-		"data-values/data-values": "~0.1|~1.0|~2.0|~3.0",
+		"data-values/data-values": "^3.1.0",
 		"wikimedia/assert": "~0.2.2|~0.3.0|~0.4.0|~0.5.0"
 	},
 	"require-dev": {
