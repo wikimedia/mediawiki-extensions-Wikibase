@@ -13,7 +13,7 @@
 	"wikibase-deletedentity-property": "izbrisana lastnost",
 	"wikibase-deletedentity-query": "izbrisana poizvedba",
 	"wikibase-error-unexpected": "Napaka: $1.",
-	"wikibase-error-unknown": "Pojavila se je napaka.",
+	"wikibase-error-unknown": "Prišlo je do napake.",
 	"wikibase-error-save-generic": "Shranjevanje zaradi napake ni uspelo.",
 	"wikibase-error-remove-generic": "Odstranitev zaradi napake ni uspela.",
 	"wikibase-error-save-timeout": "Trenutno imamo tehnične težave. Poskusite znova.",

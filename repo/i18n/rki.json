@@ -3,8 +3,15 @@
 		"authors": [
 			"Cakkaparla",
 			"ReyLon Mrat",
-			"YaThaWinTha"
+			"YaThaWinTha",
+			"Boke",
+			"Nay Thu Rin",
+			"Tejoebāsa"
 		]
 	},
-	"wikibase-edit": "တီးဖြတ်"
+	"wikibase-edit": "တီးဖြတ်",
+	"wikibase-add": "ပေါင်းထည့်",
+	"wikibase-label-empty": "တံဆိပ်သတ်မှတ်ထားစာမဟိန့်ပါ",
+	"wikibase-description-empty": "ဖော်ပြချက် သက်မှက်လို့မထားပါ",
+	"wikibase-sitelinks-special": "အခြားအရွယ်များ"
 }

@@ -3,7 +3,8 @@
 		"authors": [
 			"Cakkaparla",
 			"ReyLon Mrat",
-			"YaThaWinTha"
+			"YaThaWinTha",
+			"Nay Thu Rin"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} item",
@@ -13,5 +14,8 @@
 	"wikibase-linkitem-linkpage": "ဆက်စပ်ပီးမှုနန့်စာမျက်နှာ",
 	"wikibase-linkitem-selectlink": "ဒေစာမျက်နှာကို မင်းဆက်စပ်ပီးချင်ရေဆိုက်တစ်ခုနန့် စာမျက်နှာတစ်ခုကို ရွီးပါ။",
 	"wikibase-linkitem-input-site": "ဘာသာစကား။",
-	"wikibase-linkitem-input-page": "စာမျက်နှာ-"
+	"wikibase-linkitem-input-page": "စာမျက်နှာ-",
+	"wikibase-rc-hide-wikidata-hide": "ဝှက်ရေ",
+	"wikibase-rc-hide-wikidata-show": "ပြရေ",
+	"wikibase-otherprojects": "မတူစွာစီမံကိန်းအများကြီးတွင်"
 }
