@@ -10,7 +10,14 @@ use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 class ErrorJsonPresenter {
 
 	public function getJson( ErrorResponse $error ): string {
-		return json_encode( [ 'code' => $error->getCode(), 'message' => $error->getMessage() ] );
+		return json_encode(
+			// use array_filter to remove 'context' from array if $error->getContext() is NULL
+			array_filter( [
+				'code' => $error->getCode(),
+				'message' => $error->getMessage(),
+				'context' => $error->getContext()
+			] )
+		);
 	}
 
 }

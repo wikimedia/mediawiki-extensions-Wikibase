@@ -26,10 +26,12 @@ class ErrorResponse {
 
 	private string $code;
 	private string $message;
+	private ?array $context;
 
-	public function __construct( string $code, string $message ) {
+	public function __construct( string $code, string $message, array $context = null ) {
 		$this->code = $code;
 		$this->message = $message;
+		$this->context = $context;
 	}
 
 	public function getCode(): string {
@@ -38,5 +40,9 @@ class ErrorResponse {
 
 	public function getMessage(): string {
 		return $this->message;
+	}
+
+	public function getContext(): ?array {
+		return $this->context;
 	}
 }
