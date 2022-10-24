@@ -78,7 +78,11 @@ final class RepoHooks {
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
 		$settings = WikibaseRepo::getSettings();
 		if ( $settings->getSetting( 'enableEntitySearchUI' ) === true ) {
-			$out->addModules( 'wikibase.ui.entitysearch' );
+			if ( $skin->getSkinName() === 'vector-2022' ) {
+				$out->addModules( 'wikibase.vector.searchClient' );
+			} else {
+				$out->addModules( 'wikibase.ui.entitysearch' );
+			}
 		}
 
 		if ( $settings->getSetting( 'wikibasePingback' ) ) {
