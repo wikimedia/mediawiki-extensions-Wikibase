@@ -24,7 +24,8 @@
 			"Zolo",
 			"Ата",
 			"Капитан Джон Шепард",
-			"Максим Підліснюк"
+			"Максим Підліснюк",
+			"Пан Хаунд"
 		]
 	},
 	"wikibase-desc": "Сховище структурованих даних",
@@ -33,6 +34,7 @@
 	"wikibase-entity-property": "властивість",
 	"wikibase-entity-query": "запит",
 	"nstab-item": "Елемент",
+	"nstab-property": "Властивість",
 	"wikibase-edit": "редагувати",
 	"wikibase-save": "зберегти",
 	"wikibase-publish": "опублікувати",

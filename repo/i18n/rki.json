@@ -17,8 +17,8 @@
 	"tooltip-ca-nstab-query": "မိန်းခြင်းကိုကြေ့ပါ",
 	"wikibase-edit": "တီးဖြတ်",
 	"wikibase-add": "ပေါင်းထည့်",
-	"wikibase-label-empty": "တံဆိပ်သတ်မှတ်ထားစာမဟိန့်ပါ",
-	"wikibase-description-empty": "ဖော်ပြချက် သက်မှက်လို့မထားပါ",
-	"wikibase-sitelinks-special": "အခြားအရွယ်များ",
+	"wikibase-label-empty": "နာမည်ညွှန်း မပီးထားပါ",
+	"wikibase-description-empty": "ဖော်ပြချက် သတ်မှတ်လို့မထားပါ",
+	"wikibase-sitelinks-special": "အခြား ဆိုဒ်တိ",
 	"wikibase-validator-illegal-string-chars": "စာတန်းသည် နိရာအလွတ်နန့် ယပိုင်မဟုတ်ကေ အဆုံး မဖြစ်သင့်ပိုင် ဒေါင်လိုက် အဖြူရောင်နေရာလွတ် သို့မဟုတ် တဘ်များ မပါဝင်သင့်ပါ- $1"
 }

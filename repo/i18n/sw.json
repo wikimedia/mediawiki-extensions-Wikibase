@@ -2,10 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Denomain",
+			"Wangombe",
 			"Yasen igra"
 		]
 	},
 	"wikibase-edit": "hariri",
+	"wikibase-add": "ongeza",
+	"wikibase-label-empty": "Hakuna lebo iliyofafanuliwa",
+	"wikibase-description-empty": "Hakuna maelezo yaliyofafanuliwa",
 	"wikibase-sitelinks-special": "Tovuti nyingine",
 	"wikibase-entity-not-viewable-title": "Aina ya yaliyomo hailingani: Yaliyomo hayawezi kuonyeshwa",
 	"wikibase-entity-not-viewable": "Yaliyomo yaliyopatianwa ya aina ya \"$1\" sio chombo na hayawezi kuonyeshwa na Wikibase."
