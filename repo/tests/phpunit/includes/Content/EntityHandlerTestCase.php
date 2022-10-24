@@ -651,6 +651,8 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$revisionRecord->method( 'hasSlot' )
 			->willReturn( false );
 
+		$revisionRecord->method( 'getContent' )->willReturn( $this->getTestContent() );
+
 		$page->method( 'getContent' )->willReturn( $this->getTestContent() );
 		$page->method( 'getTitle' )->willReturn( $title );
 		$page->method( 'getRevisionRecord' )->willReturn( $revisionRecord );

@@ -13,6 +13,8 @@ use Language;
 use MediaWiki\Content\Renderer\ContentParseParams;
 use MediaWiki\Content\ValidationParams;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
 use MWContentSerializationException;
 use MWException;
 use ParserCache;
@@ -677,20 +679,17 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * @param WikiPage $page
-	 * @param ParserOutput $parserOutput
-	 * @param SearchEngine $engine
-	 *
-	 * @return array Wikibase fields data, map of name=>value for fields
+	 * @inheritDoc
 	 */
 	public function getDataForSearchIndex(
 		WikiPage $page,
 		ParserOutput $parserOutput,
-		SearchEngine $engine
+		SearchEngine $engine,
+		RevisionRecord $revision = null
 	) {
 		$fieldsData = parent::getDataForSearchIndex( $page, $parserOutput, $engine );
 
-		$content = $page->getContent();
+		$content = $revision != null ? $revision->getContent( SlotRecord::MAIN ) : $page->getContent();
 		if ( ( $content instanceof EntityContent ) && !$content->isRedirect() ) {
 			$entity = $content->getEntity();
 			$fields = $this->fieldDefinitions->getFields();
@@ -707,11 +706,9 @@ abstract class EntityHandler extends ContentHandler {
 	 * Produce page output suitable for indexing.
 	 * Does not include HTML.
 	 *
-	 * @param WikiPage $page
-	 * @param ParserCache|null $cache
-	 * @return bool|ParserOutput|null
+	 * @inheritDoc
 	 */
-	public function getParserOutputForIndexing( WikiPage $page, ParserCache $cache = null ) {
+	public function getParserOutputForIndexing( WikiPage $page, ParserCache $cache = null, RevisionRecord $revision = null ) {
 		$parserOptions = $page->makeParserOptions( 'canonical' );
 		if ( $cache ) {
 			$parserOutput = $cache->get( $page, $parserOptions );
