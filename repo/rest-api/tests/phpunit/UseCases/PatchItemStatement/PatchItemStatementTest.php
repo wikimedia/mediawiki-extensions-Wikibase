@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
@@ -358,6 +359,20 @@ class PatchItemStatementTest extends TestCase {
 			new InvalidPatchedStatementException(),
 			'The patch results in an invalid statement which cannot be stored',
 			'patched-statement-invalid'
+		];
+		$op = [
+			'op' => 'replace',
+			'path' => '/does/not/exist',
+			'value' => 'x'
+		];
+		yield [
+			new PatchPathException( '-', $op, 'path' ),
+			"Target '${op['path']}' not found on the resource",
+			'patch-target-not-found',
+			[
+				'operation' => $op,
+				'field' => 'path'
+			]
 		];
 		yield [
 			new InapplicablePatchException(),

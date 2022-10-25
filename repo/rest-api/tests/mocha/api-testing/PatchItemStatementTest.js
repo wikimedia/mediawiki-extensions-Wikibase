@@ -276,18 +276,37 @@ describe( 'PATCH statement tests', () => {
 			} );
 
 			describe( '409 conflict', () => {
-				it( 'patch cannot be applied', async () => {
-					const patch = [ {
+				it( '"path" field target does not exist', async () => {
+					const operation = {
 						op: 'remove',
 						path: '/this/path/does/not/exist'
-					} ];
-					const response = await newPatchRequestBuilder( testStatementId, patch )
+					};
+					const response = await newPatchRequestBuilder( testStatementId, [ operation ] )
 						.assertValidRequest()
 						.makeRequest();
 
 					assert.strictEqual( response.statusCode, 409 );
-					assert.strictEqual( response.body.code, 'cannot-apply-patch' );
-					assert.include( response.body.message, testStatementId );
+					assert.strictEqual( response.body.code, 'patch-target-not-found' );
+					assert.include( response.body.message, operation.path );
+					assert.strictEqual( response.body.context.field, 'path' );
+					assert.deepEqual( response.body.context.operation, operation );
+				} );
+
+				it( '"from" field target does not exist', async () => {
+					const operation = {
+						op: 'move',
+						from: '/this/path/does/not/exist',
+						path: '/somewhere'
+					};
+					const response = await newPatchRequestBuilder( testStatementId, [ operation ] )
+						.assertValidRequest()
+						.makeRequest();
+
+					assert.strictEqual( response.statusCode, 409 );
+					assert.strictEqual( response.body.code, 'patch-target-not-found' );
+					assert.include( response.body.message, operation.from );
+					assert.strictEqual( response.body.context.field, 'from' );
+					assert.deepEqual( response.body.context.operation, operation );
 				} );
 
 				it( 'patch test condition failed', async () => {
