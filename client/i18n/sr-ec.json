@@ -95,7 +95,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Неке изјаве",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Изјава: $1",
 	"wikibase-pageinfo-entity-usage-X": "Сви подаци о ентитетима",
-	"wikibase-pageinfo-entity-usage-O": "Остало (изјаве)",
+	"wikibase-pageinfo-entity-usage-O": "Разно (нпр. изјаве, постојање ентитета итд.)",
 	"wikibase-otherprojects": "На другим пројектима",
 	"wikibase-otherprojects-beta-message": "Други пројекти на бочној траци",
 	"wikibase-otherprojects-beta-description": "Додаје одељак „{{int:wikibase-otherprojects}}“ на бочној траци с везама на остале Викимедијине пројекте на основу података из Викибазе.",
@@ -114,6 +114,7 @@
 	"wikibase-client-data-bridge-references-heading": "Референце",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Нисте пријављени",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Уреди без пријаве",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Пријава/регистрација",
 	"wikibase-client-data-bridge-license-heading": "Употреба и лиценца",
 	"wikibase-client-data-bridge-bailout-heading": "Уместо тога, урадите следеће:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Уреди вредност на пројекту {{WBREPONAME}}",
@@ -134,5 +135,6 @@
 	"wikibase-client-data-bridge-saving-error-assertuser-message": "Можете објавити ваше измене без пријављивања. Ваша IP адреса ће бити сачувана у историји измена странице. Такође се можете пријавити и покушати поново објављивање.",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Објави без пријаве",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Сачувај без пријаве",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Пријава (отвара се у новој картици)",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Настави уређивање"
 }

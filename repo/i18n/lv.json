@@ -42,6 +42,8 @@
 	"wikibase-label-edit-placeholder": "ievadi nosaukumu",
 	"wikibase-description-empty": "Nav apraksta",
 	"wikibase-description-edit-placeholder": "ievadiet aprakstu",
+	"wikibase-aliases-edit-placeholder": "ievadi citus nosaukumus",
+	"wikibase-aliases-edit-label": "Citi nosaukumi, atdalīti ar vertikālu svītru:",
 	"wikibase-content-language-edit-label": "Valoda:",
 	"wikibase-content-language-edit-not-recognized-language": "Norādītais valodas kods netika atpazīts.",
 	"wikibase-diffview-reference": "atsauce",
