@@ -29,6 +29,7 @@ function assertValid404Response( response, responseBodyErrorCode ) {
 describe( 'PATCH statement tests', () => {
 	let testItemId;
 	let testPropertyId;
+	let testStatement;
 	let testStatementId;
 	let originalLastModified;
 	let originalRevisionId;
@@ -44,7 +45,8 @@ describe( 'PATCH statement tests', () => {
 			entityHelper.newStatementWithRandomStringValue( testPropertyId )
 		] );
 		testItemId = createItemResponse.entity.id;
-		testStatementId = createItemResponse.entity.claims[ testPropertyId ][ 0 ].id;
+		testStatement = createItemResponse.entity.claims[ testPropertyId ][ 0 ];
+		testStatementId = testStatement.id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
@@ -75,7 +77,7 @@ describe( 'PATCH statement tests', () => {
 				afterEach( async () => {
 					await newReplaceStatementRequestBuilder( // reset after successful edit
 						testStatementId,
-						entityHelper.newStatementWithRandomStringValue( testPropertyId )
+						testStatement
 					).makeRequest();
 				} );
 
@@ -289,17 +291,23 @@ describe( 'PATCH statement tests', () => {
 				} );
 
 				it( 'patch test condition failed', async () => {
-					const patch = [ {
+					const patchOperation = {
 						op: 'test',
 						path: '/mainsnak/datavalue/value',
-						value: 'potato'
-					} ];
-					const response = await newPatchRequestBuilder( testStatementId, patch )
+						value: { vegetable: 'potato' }
+					};
+					const response = await newPatchRequestBuilder( testStatementId, [ patchOperation ] )
 						.assertValidRequest()
 						.makeRequest();
 
 					assert.strictEqual( response.statusCode, 409 );
+					assert.include( response.body.message, 'Test operation in the provided patch failed.' );
+					assert.include( response.body.message, patchOperation.path );
+					assert.include( response.body.message, JSON.stringify( patchOperation.value ) );
+					assert.include( response.body.message, testStatement.mainsnak.datavalue.value );
 					assert.strictEqual( response.body.code, 'patch-test-failed' );
+					assert.deepEqual( response.body.context.operation, patchOperation );
+					assert.deepEqual( response.body.context[ 'actual-value' ], testStatement.mainsnak.datavalue.value );
 				} );
 			} );
 

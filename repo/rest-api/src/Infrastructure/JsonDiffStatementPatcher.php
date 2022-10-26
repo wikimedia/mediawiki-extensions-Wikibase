@@ -53,7 +53,11 @@ class JsonDiffStatementPatcher implements StatementPatcher {
 		try {
 			$patchDocument->apply( $statementSerialization );
 		} catch ( PatchTestOperationFailedException $e ) {
-			throw new PatchTestConditionFailedException();
+			throw new PatchTestConditionFailedException(
+				$e->getMessage(),
+				(array)$e->getOperation(),
+				$e->getActualValue()
+			);
 		} catch ( Exception $e ) {
 			throw new InapplicablePatchException();
 		}
