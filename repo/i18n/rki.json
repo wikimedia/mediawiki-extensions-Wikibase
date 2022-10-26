@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aggasena",
 			"Boke",
 			"Cakkaparla",
 			"Nay Thu Rin",
@@ -15,7 +16,7 @@
 	"tooltip-ca-nstab-property": "ပါဝင်စွတိကိုကြေ့",
 	"nstab-query": "မိန်းခြင်း",
 	"tooltip-ca-nstab-query": "မိန်းခြင်းကိုကြေ့ပါ",
-	"wikibase-edit": "တီးဖြတ်",
+	"wikibase-edit": "တီးဖြတ်ပါ",
 	"wikibase-add": "ပေါင်းထည့်",
 	"wikibase-label-empty": "နာမည်ညွှန်း မပီးထားပါ",
 	"wikibase-description-empty": "ဖော်ပြချက် သတ်မှတ်လို့မထားပါ",
