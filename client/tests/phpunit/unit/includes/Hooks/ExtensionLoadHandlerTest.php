@@ -3,6 +3,8 @@
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use ExtensionRegistry;
+use MediaWiki\HookContainer\HookContainer;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Client\Api\ApiFormatReference;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandler;
@@ -19,14 +21,33 @@ use Wikibase\Client\Hooks\ExtensionLoadHandler;
  */
 class ExtensionLoadHandlerTest extends TestCase {
 
+	/**
+	 * @param &$hooks
+	 *
+	 * @return MockObject&HookContainer
+	 */
+	private function getFauxHookContainer( &$hooks ) {
+		$container = $this->createMock( HookContainer::class );
+		$container->method( 'register' )->willReturnCallback(
+			function ( $name, $handler ) use ( &$hooks ) {
+				$hooks[$name][] = $handler;
+			}
+		);
+
+		return $container;
+	}
+
 	public function testGetHooks_withEcho() {
 		$extensionRegistry = $this->createMock( ExtensionRegistry::class );
 		$extensionRegistry->method( 'isLoaded' )
 			->with( 'Echo' )
 			->willReturn( true );
-		$handler = new ExtensionLoadHandler( $extensionRegistry );
 
-		$actualHooks = $handler->getHooks();
+		$actualHooks = [];
+		$container = $this->getFauxHookContainer( $actualHooks );
+
+		$handler = new ExtensionLoadHandler( $extensionRegistry, $container );
+		$handler->registerHooks();
 
 		$expectedHooks = [
 			'LocalUserCreated' => [
@@ -47,9 +68,12 @@ class ExtensionLoadHandlerTest extends TestCase {
 		$extensionRegistry->method( 'isLoaded' )
 			->with( 'Echo' )
 			->willReturn( false );
-		$handler = new ExtensionLoadHandler( $extensionRegistry );
 
-		$actualHooks = $handler->getHooks();
+		$actualHooks = [];
+		$container = $this->getFauxHookContainer( $actualHooks );
+
+		$handler = new ExtensionLoadHandler( $extensionRegistry, $container );
+		$handler->registerHooks();
 
 		$expectedHooks = [
 			'ChangesListSpecialPageStructuredFilters' => [
@@ -60,7 +84,7 @@ class ExtensionLoadHandlerTest extends TestCase {
 	}
 
 	public function testGetApiFormatReferenceSpec_settingTrue() {
-		$handler = new ExtensionLoadHandler( $this->createMock( ExtensionRegistry::class ) );
+		$handler = new ExtensionLoadHandler( $this->createMock( ExtensionRegistry::class ), $this->createMock( HookContainer::class ) );
 
 		$spec = $handler->getApiFormatReferenceSpec( [ 'dataBridgeEnabled' => true ] );
 
@@ -70,7 +94,7 @@ class ExtensionLoadHandlerTest extends TestCase {
 
 	/** @dataProvider provideNotTrueDataBridgeEnabledSettings */
 	public function testGetApiFormatReferenceSpec_settingNotTrue( array $settings ) {
-		$handler = new ExtensionLoadHandler( $this->createMock( ExtensionRegistry::class ) );
+		$handler = new ExtensionLoadHandler( $this->createMock( ExtensionRegistry::class ), $this->createMock( HookContainer::class ) );
 
 		$spec = $handler->getApiFormatReferenceSpec( $settings );
 

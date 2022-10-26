@@ -4,6 +4,8 @@ namespace Wikibase\Client\Hooks;
 
 use ApiMain;
 use ExtensionRegistry;
+use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\MediaWikiServices;
 use Parser;
 use Wikibase\Client\Api\ApiFormatReference;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
@@ -25,24 +27,34 @@ class ExtensionLoadHandler {
 	/** @var ExtensionRegistry */
 	private $extensionRegistry;
 
+	/** @var HookContainer */
+	private $hookContainer;
+
+	/**
+	 * @param ExtensionRegistry $extensionRegistry
+	 * @param HookContainer $hookContainer
+	 */
 	public function __construct(
-		ExtensionRegistry $extensionRegistry
+		ExtensionRegistry $extensionRegistry,
+		HookContainer $hookContainer
 	) {
 		$this->extensionRegistry = $extensionRegistry;
+		$this->hookContainer = $hookContainer;
 	}
 
 	public static function factory(): self {
 		return new self(
-			ExtensionRegistry::getInstance()
+			ExtensionRegistry::getInstance(),
+			MediaWikiServices::getInstance()->getHookContainer()
 		);
 	}
 
 	public static function onExtensionLoad() {
-		global $wgHooks, $wgWBClientSettings, $wgAPIModules;
+		global $wgWBClientSettings, $wgAPIModules;
 
 		$handler = self::factory();
 
-		$wgHooks = array_merge_recursive( $wgHooks, $handler->getHooks() );
+		$handler->registerHooks();
 
 		if ( $wgWBClientSettings === null ) {
 			$wgWBClientSettings = [];
@@ -54,13 +66,14 @@ class ExtensionLoadHandler {
 		}
 	}
 
-	public function getHooks(): array {
-		$hooks = [];
-
+	/**
+	 * Register the appropriate hooks in the HookContainer passed to the constructor.
+	 */
+	public function registerHooks(): void {
 		// These hooks should only be run if we use the Echo extension
 		if ( $this->extensionRegistry->isLoaded( 'Echo' ) ) {
-			$hooks['LocalUserCreated'][] = EchoNotificationsHandlers::class . '::onLocalUserCreated';
-			$hooks['WikibaseHandleChange'][] = EchoNotificationsHandlers::class . '::onWikibaseHandleChange';
+			$this->hookContainer->register( 'LocalUserCreated', EchoNotificationsHandlers::class . '::onLocalUserCreated' );
+			$this->hookContainer->register( 'WikibaseHandleChange', EchoNotificationsHandlers::class . '::onWikibaseHandleChange' );
 		}
 
 		// This is in onExtensionLoad to ensure we register our
@@ -69,10 +82,8 @@ class ExtensionLoadHandler {
 		// However, ORES is not required.
 		//
 		// recent changes / watchlist hooks
-		$hooks['ChangesListSpecialPageStructuredFilters'][] =
-			ChangesListSpecialPageHookHandler::class . '::onChangesListSpecialPageStructuredFilters';
-
-		return $hooks;
+		$this->hookContainer->register( 'ChangesListSpecialPageStructuredFilters',
+			ChangesListSpecialPageHookHandler::class . '::onChangesListSpecialPageStructuredFilters' );
 	}
 
 	public function getApiFormatReferenceSpec( array $clientSettings ): ?array {

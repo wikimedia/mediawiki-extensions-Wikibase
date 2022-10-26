@@ -21,14 +21,13 @@ class HookChangeTransmitterTest extends MediaWikiIntegrationTestCase {
 		$change = $this->createMock( EntityChange::class );
 
 		$called = false;
-		$this->mergeMwGlobalArrayValue( 'wgHooks', [
-			'HookChangeTransmitterTest' => [
-				function ( $actualChange ) use ( $change, &$called ) {
-					self::assertEquals( $change, $actualChange );
-					$called = true;
-				},
-			],
-		] );
+		$this->setTemporaryHook(
+			'HookChangeTransmitterTest',
+			function ( $actualChange ) use ( $change, &$called ) {
+				self::assertEquals( $change, $actualChange );
+				$called = true;
+			}
+		);
 
 		$transmitter = new HookChangeTransmitter(
 			$this->getServiceContainer()->getHookContainer(),
