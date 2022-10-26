@@ -59,6 +59,8 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->markTestSkipped( 'T321517: multiple flapping tests' );
+
 		if ( !$this->data ) {
 			$user = $this->getTestUser()->getUser();
 
