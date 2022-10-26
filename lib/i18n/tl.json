@@ -13,6 +13,7 @@
 	"wikibase-error-ui-no-external-page": "Hindi matagpuan ang tinukoy na artikulo sa ibabaw ng kaukol na pook.",
 	"wikibase-error-ui-edit-conflict": "Nagkaroon ng isang pagsasalungatan sa pamamatnugot. Paki muling ikarga at sagiping muli.",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
+	"wikibase-time-calendar-julian": "Huliyano",
 	"wikibase-entity-summary-wbsetitem": "Nilikha ang isang bagong bagay",
 	"wikibase-entity-summary-wbsetlabel-set": "Binago ang [$2] katatakan",
 	"wikibase-entity-summary-wbsetlabel-remove": "Tinanggal ang [$2] katatakan",
