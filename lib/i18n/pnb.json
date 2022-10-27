@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bgo eiu",
 			"Khalid Mahmood"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "وکیپیڈیا"
+	"wikibase-sitelinks-wikipedia": "وکیپیڈیا",
+	"datatypes-type-wikibase-property": "وشیشتا"
 }
