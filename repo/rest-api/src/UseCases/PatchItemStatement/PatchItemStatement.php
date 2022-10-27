@@ -10,6 +10,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
@@ -100,6 +101,16 @@ class PatchItemStatement {
 			return new PatchItemStatementErrorResponse(
 				ErrorResponse::PATCHED_STATEMENT_INVALID,
 				'The patch results in an invalid statement which cannot be stored'
+			);
+		} catch ( PatchPathException $e ) {
+			$path = $e->getOperation()[$e->getField()];
+			return new PatchItemStatementErrorResponse(
+				ErrorResponse::PATCH_TARGET_NOT_FOUND,
+				"Target '$path' not found on the resource",
+				[
+					'operation' => $e->getOperation(),
+					'field' => $e->getField(),
+				]
 			);
 		} catch ( InapplicablePatchException $e ) {
 			return new PatchItemStatementErrorResponse(

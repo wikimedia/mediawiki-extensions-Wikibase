@@ -10,9 +10,9 @@ use Swaggest\JsonDiff\JsonDiff;
 use ValueValidators\Result;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
 use Wikibase\Repo\RestApi\WbRestApi;
@@ -134,17 +134,22 @@ class JsonDiffStatementPatcherTest extends TestCase {
 	}
 
 	public function testGivenPatchCannotBeApplied_throwsException(): void {
-		$this->expectException( InapplicablePatchException::class );
+		$problematicPathField = 'path';
+		$operation = [
+			'op' => 'remove',
+			'path' => '/field/does/not/exist',
+		];
 
-		$this->newStatementPatcher()->patch(
-			NewStatement::noValueFor( 'P1' )->build(),
-			[
-				[
-					'op' => 'remove',
-					'path' => '/field/does/not/exist',
-				],
-			]
-		);
+		try {
+			$this->newStatementPatcher()->patch(
+				NewStatement::noValueFor( 'P1' )->build(),
+				[ $operation ]
+			);
+		} catch ( \Exception $exception ) {
+			$this->assertInstanceOf( PatchPathException::class, $exception );
+			$this->assertSame( $problematicPathField, $exception->getField() );
+			$this->assertSame( $operation, $exception->getOperation() );
+		}
 	}
 
 	public function testGivenPatchResultsIsInvalidStatement_throwsException(): void {

@@ -28,6 +28,7 @@ class ErrorResponseToHttpStatus {
 		ErrorResponse::PATCHED_STATEMENT_INVALID => 422,
 		ErrorResponse::CANNOT_APPLY_PATCH => 409,
 		ErrorResponse::PATCH_TEST_FAILED => 409,
+		ErrorResponse::PATCH_TARGET_NOT_FOUND => 409,
 		ErrorResponse::UNEXPECTED_ERROR => 500
 	];
 

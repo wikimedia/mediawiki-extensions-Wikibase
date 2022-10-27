@@ -7,6 +7,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 
 /**
@@ -18,6 +19,7 @@ interface StatementPatcher {
 	 * @throws InvalidArgumentException for an invalid patch
 	 * @throws PatchTestConditionFailedException if a "test" op in the patch fails
 	 * @throws InapplicablePatchException if the patch cannot be applied
+	 * @throws PatchPathException if a path target provided in the patch does not exist
 	 * @throws InvalidPatchedSerializationException if the patch result cannot be deserialized to a valid statement
 	 * @throws InvalidPatchedStatementException if the patch result can be deserialized, but yields an otherwise invalid statement
 	 */
