@@ -111,7 +111,7 @@ class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 			[ '["","string"]', 'string' ],
 			[ '["",""]', '' ],
 			[ '["",2]', 2 ],
-			[ '["",null]', null ],
+			[ '["",null]', '' ],
 			[ '', '' ],
 		];
 	}

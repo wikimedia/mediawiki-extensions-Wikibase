@@ -82,6 +82,7 @@ class NumericPropertyId extends SerializableEntityId implements PropertyId, Int3
 	public function unserialize( $serialized ) {
 		$array = json_decode( $serialized );
 		$this->serialization = is_array( $array ) ? $array[1] : $serialized;
+		$this->serialization = $this->serialization ?? '';
 		list( $this->repositoryName, $this->localPart ) =
 			self::extractRepositoryNameAndLocalPart( $this->serialization );
 	}
