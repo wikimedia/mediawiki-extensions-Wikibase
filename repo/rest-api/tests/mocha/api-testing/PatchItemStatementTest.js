@@ -204,7 +204,10 @@ describe( 'PATCH statement tests', () => {
 					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
 						.assertInvalidRequest().makeRequest();
 
-					assertValid400Response( response, 'missing-json-patch-field', { operation: invalidOperation } );
+					assertValid400Response(
+						response,
+						'missing-json-patch-field',
+						{ operation: invalidOperation, field: 'op' } );
 					assert.include( response.body.message, "'op'" );
 				} );
 
@@ -212,8 +215,11 @@ describe( 'PATCH statement tests', () => {
 					const invalidOperation = { op: 'remove' };
 					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
 						.assertInvalidRequest().makeRequest();
-
-					assertValid400Response( response, 'missing-json-patch-field', { operation: invalidOperation } );
+					assertValid400Response(
+						response,
+						'missing-json-patch-field',
+						{ operation: invalidOperation, field: 'path' }
+					);
 					assert.include( response.body.message, "'path'" );
 				} );
 
@@ -222,7 +228,11 @@ describe( 'PATCH statement tests', () => {
 					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
 						.makeRequest();
 
-					assertValid400Response( response, 'missing-json-patch-field', { operation: invalidOperation } );
+					assertValid400Response(
+						response,
+						'missing-json-patch-field',
+						{ operation: invalidOperation, field: 'value' }
+					);
 					assert.include( response.body.message, "'value'" );
 				} );
 
@@ -231,7 +241,11 @@ describe( 'PATCH statement tests', () => {
 					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
 						.makeRequest();
 
-					assertValid400Response( response, 'missing-json-patch-field', { operation: invalidOperation } );
+					assertValid400Response(
+						response,
+						'missing-json-patch-field',
+						{ operation: invalidOperation, field: 'from' }
+					);
 					assert.include( response.body.message, "'from'" );
 				} );
 
@@ -249,8 +263,14 @@ describe( 'PATCH statement tests', () => {
 					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
 						.assertInvalidRequest().makeRequest();
 
-					assertValid400Response( response, 'invalid-patch-field-type', { operation: invalidOperation } );
+					assertValid400Response(
+						response,
+						'invalid-patch-field-type',
+						{ operation: invalidOperation, field: 'op' }
+					);
 					assert.include( response.body.message, "'op'" );
+					assert.deepEqual( response.body.context.operation, invalidOperation );
+					assert.strictEqual( response.body.context.field, 'op' );
 				} );
 
 				it( "invalid patch - 'path' is not a string", async () => {
@@ -258,7 +278,11 @@ describe( 'PATCH statement tests', () => {
 					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
 						.assertInvalidRequest().makeRequest();
 
-					assertValid400Response( response, 'invalid-patch-field-type', { operation: invalidOperation } );
+					assertValid400Response(
+						response,
+						'invalid-patch-field-type',
+						{ operation: invalidOperation, field: 'path' }
+					);
 					assert.include( response.body.message, "'path'" );
 				} );
 
@@ -267,7 +291,11 @@ describe( 'PATCH statement tests', () => {
 					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
 						.makeRequest();
 
-					assertValid400Response( response, 'invalid-patch-field-type', { operation: invalidOperation } );
+					assertValid400Response(
+						response,
+						'invalid-patch-field-type',
+						{ operation: invalidOperation, field: 'from' }
+					);
 					assert.include( response.body.message, "'from'" );
 				} );
 
