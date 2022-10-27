@@ -6,12 +6,13 @@
 			"Nay Thu Rin",
 			"ReyLon Mrat",
 			"Tejoebāsa",
-			"YaThaWinTha"
+			"YaThaWinTha",
+			"Aggasena"
 		]
 	},
-	"wikibase-edit": "တီးဖြတ်",
+	"wikibase-edit": "တီးဖြတ်ပါ",
 	"wikibase-add": "ပေါင်းထည့်",
-	"wikibase-label-empty": "တံဆိပ်သတ်မှတ်ထားစာမဟိန့်ပါ",
-	"wikibase-description-empty": "ဖော်ပြချက် သက်မှက်လို့မထားပါ",
-	"wikibase-sitelinks-special": "အခြားအရွယ်များ"
+	"wikibase-label-empty": "နာမည်ညွှန်း မပီးထားပါ",
+	"wikibase-description-empty": "ဖော်ပြချက် သတ်မှတ်လို့မထားပါ",
+	"wikibase-sitelinks-special": "တခြား ဆိုဒ်တိ"
 }
