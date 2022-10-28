@@ -127,9 +127,14 @@ class DerivedPropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 			[ 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ]
 		);
 
-		$this->assertSame(
-			'a:2:{i:0;s:5:"P9001";i:1;C:22:"DataValues\StringValue":2:{bc}}',
-			$snak->serialize()
+		$this->assertContains(
+			$snak->serialize(),
+			[
+				// data-values/data-values <= 3.0.0 or PHP < 7.4
+				'a:2:{i:0;s:5:"P9001";i:1;C:22:"DataValues\StringValue":2:{bc}}',
+				// data-values/data-values >= 3.1.0 and PHP >= 7.4
+				'a:2:{i:0;s:5:"P9001";i:1;O:22:"DataValues\StringValue":1:{i:0;s:2:"bc";}}',
+			]
 		);
 	}
 

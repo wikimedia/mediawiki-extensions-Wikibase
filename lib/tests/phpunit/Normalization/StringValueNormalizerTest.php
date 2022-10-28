@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Tests\Normalization;
 
-use DataValues\DataValue;
 use DataValues\StringValue;
+use DataValues\UnknownValue;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Wikibase\Lib\Normalization\StringValueNormalizer;
@@ -59,7 +59,7 @@ class StringValueNormalizerTest extends TestCase {
 		$stringNormalizer->expects( $this->never() )
 			->method( 'cleanupToNFC' );
 		$normalizer = $this->getStringValueNormalizer( $stringNormalizer );
-		$value = $this->createMock( DataValue::class );
+		$value = new UnknownValue( null );
 
 		$normalized = $normalizer->normalize( $value );
 

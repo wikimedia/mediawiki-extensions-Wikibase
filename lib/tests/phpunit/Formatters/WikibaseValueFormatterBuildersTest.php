@@ -451,14 +451,14 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 				SnakFormatter::FORMAT_HTML_VERBOSE,
 				$this->newFormatterOptions( 'de' ),
 				new GlobeCoordinateValue( new LatLongValue( -55.755786, 37.25633 ), 0.25 ),
-				'@^<div><kartographer-html/><div class="wikibase-kartographer-caption">55°45\'S, 37°15\'E</div></div>$@'
+				'@^<div><kartographer-html/><div class="wikibase-kartographer-caption">55°45&apos;S, 37°15&apos;E</div></div>$@'
 			],
 			'coordinate kartographer preview html' => [
 				'GlobeCoordinate',
 				SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW,
 				$this->newFormatterOptions( 'de' ),
 				new GlobeCoordinateValue( new LatLongValue( -55.755786, 37.25633 ), 0.25 ),
-				'@^<div><kartographer-preview-html/><div class="wikibase-kartographer-caption">55°45\'S, 37°15\'E</div></div>$@'
+				'@^<div><kartographer-preview-html/><div class="wikibase-kartographer-caption">55°45&apos;S, 37°15&apos;E</div></div>$@'
 			],
 
 			// Quantity

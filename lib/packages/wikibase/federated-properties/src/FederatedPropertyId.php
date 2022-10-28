@@ -33,9 +33,17 @@ class FederatedPropertyId implements PropertyId {
 		return $this->serialization;
 	}
 
+	public function __serialize(): array {
+		return [ $this->serialize() ];
+	}
+
 	public function unserialize( $serialization ): void {
 		self::assertValidSerialization( $serialization );
 		$this->serialization = $serialization;
+	}
+
+	public function __unserialize( array $data ): void {
+		$this->unserialize( $data[0] );
 	}
 
 	public function getEntityType(): string {

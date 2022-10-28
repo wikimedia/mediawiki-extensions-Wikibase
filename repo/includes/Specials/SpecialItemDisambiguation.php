@@ -105,7 +105,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		parent::execute( $subPage );
 
 		$request = $this->getRequest();
-		$subPageParts = $subPage === '' ? [] : explode( '/', $subPage, 2 );
+		$subPageParts = $subPage ? explode( '/', $subPage, 2 ) : [];
 
 		$languageCode = $this->extractLanguageCode( $request, $subPageParts );
 		$label = $this->extractLabel( $request, $subPageParts );

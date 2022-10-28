@@ -204,7 +204,7 @@ class SnakList extends ArrayObject {
 	 *
 	 * @param int|string $index
 	 */
-	public function offsetUnset( $index ) {
+	public function offsetUnset( $index ): void {
 		if ( $this->offsetExists( $index ) ) {
 			/**
 			 * @var Snak $element
@@ -222,7 +222,7 @@ class SnakList extends ArrayObject {
 	 *
 	 * @param Snak $value
 	 */
-	public function append( $value ) {
+	public function append( $value ): void {
 		$this->setElement( null, $value );
 	}
 
@@ -232,7 +232,7 @@ class SnakList extends ArrayObject {
 	 * @param int|string $index
 	 * @param Snak $value
 	 */
-	public function offsetSet( $index, $value ) {
+	public function offsetSet( $index, $value ): void {
 		$this->setElement( $index, $value );
 	}
 
@@ -269,7 +269,7 @@ class SnakList extends ArrayObject {
 	 *
 	 * @return string
 	 */
-	public function serialize() {
+	public function serialize(): string {
 		return serialize( $this->__serialize() );
 	}
 
@@ -278,7 +278,7 @@ class SnakList extends ArrayObject {
 	 *
 	 * @param string $serialized
 	 */
-	public function unserialize( $serialized ) {
+	public function unserialize( $serialized ): void {
 		$serializationData = unserialize( $serialized );
 		$this->__unserialize( $serializationData );
 	}

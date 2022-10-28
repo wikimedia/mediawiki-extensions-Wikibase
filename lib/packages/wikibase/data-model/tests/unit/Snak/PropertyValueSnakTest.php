@@ -127,11 +127,21 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 
 		return [
 			'string' => [
-				'a:2:{i:0;s:2:"P2";i:1;C:22:"DataValues\StringValue":1:{b}}',
+				[
+					// data-values/data-values <= 3.0.0 or PHP < 7.4
+					'a:2:{i:0;s:2:"P2";i:1;C:22:"DataValues\StringValue":1:{b}}',
+					// data-values/data-values >= 3.1.0 and PHP >= 7.4
+					'a:2:{i:0;s:2:"P2";i:1;O:22:"DataValues\StringValue":1:{i:0;s:1:"b";}}',
+				],
 				new PropertyValueSnak( $p2, $value ),
 			],
 			'foreign' => [
-				'a:2:{i:0;s:6:"foo:P2";i:1;C:22:"DataValues\StringValue":1:{b}}',
+				[
+					// data-values/data-values <= 3.0.0 or PHP < 7.4
+					'a:2:{i:0;s:6:"foo:P2";i:1;C:22:"DataValues\StringValue":1:{b}}',
+					// data-values/data-values >= 3.1.0 and PHP >= 7.4
+					'a:2:{i:0;s:6:"foo:P2";i:1;O:22:"DataValues\StringValue":1:{i:0;s:1:"b";}}',
+				],
 				new PropertyValueSnak( $p2foo, $value ),
 			],
 		];
@@ -142,7 +152,11 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testSerialize( $expected, Snak $snak ) {
 		$serialized = $snak->serialize();
-		$this->assertSame( $expected, $serialized );
+		if ( is_array( $expected ) ) {
+			$this->assertContains( $serialized, $expected );
+		} else {
+			$this->assertSame( $expected, $serialized );
+		}
 
 		$snak2 = new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) );
 		$snak2->unserialize( $serialized );
@@ -155,17 +169,27 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 		$value = new StringValue( 'b' );
 
 		return [
-			'legacy' => [
+			'legacy (int property ID)' => [
 				new PropertyValueSnak( $p2, $value ),
 				'a:2:{i:0;i:2;i:1;C:22:"DataValues\StringValue":1:{b}}'
 			],
-			'current' => [
+			'legacy (PHP < 7.4 serialization, local property ID)' => [
 				new PropertyValueSnak( $p2, $value ),
 				'a:2:{i:0;s:2:"P2";i:1;C:22:"DataValues\StringValue":1:{b}}'
 			],
-			'foreign' => [
+			'legacy (PHP < 7.4 serialization, foreign property ID)' => [
 				new PropertyValueSnak( $p2foo, $value ),
 				'a:2:{i:0;s:6:"foo:P2";i:1;C:22:"DataValues\StringValue":1:{b}}'
+			],
+			'local property ID' => [
+				new PropertyValueSnak( $p2, $value ),
+				'a:2:{i:0;s:2:"P2";i:1;O:22:"DataValues\StringValue":1:{i:0;s:1:"b";}}',
+				true,
+			],
+			'foreign property ID' => [
+				new PropertyValueSnak( $p2foo, $value ),
+				'a:2:{i:0;s:6:"foo:P2";i:1;O:22:"DataValues\StringValue":1:{i:0;s:1:"b";}}',
+				true,
 			],
 		];
 	}
@@ -173,7 +197,11 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideDataToUnserialize
 	 */
-	public function testUnserialize( $expected, $serialized ) {
+	public function testUnserialize( $expected, $serialized, $skippable = false ) {
+		// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+		if ( $skippable && @unserialize( $serialized ) === false ) {
+			$this->markTestSkipped( 'new serialization not yet supported (T301249)' );
+		}
 		$snak = new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) );
 		$snak->unserialize( $serialized );
 		$this->assertTrue( $snak->equals( $expected ) );

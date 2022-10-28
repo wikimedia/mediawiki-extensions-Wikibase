@@ -100,6 +100,7 @@ class ItemDiffVisualizerTest extends MediaWikiIntegrationTestCase {
 	private function getVisualizer() {
 		$enwiki = new Site();
 		$enwiki->setGlobalId( 'enwiki' );
+		$enwiki->setLanguageCode( 'en' );
 
 		$basicVisualizer = new BasicEntityDiffVisualizer(
 			$this->getMockMessageLocalizer(),

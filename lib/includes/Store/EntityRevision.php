@@ -42,8 +42,12 @@ class EntityRevision {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityDocument $entity, $revisionId = self::UNSAVED_REVISION, $mwTimestamp = '' ) {
-		if ( !is_int( $revisionId ) || $revisionId < 0 ) {
+	public function __construct(
+		EntityDocument $entity,
+		int $revisionId = self::UNSAVED_REVISION,
+		string $mwTimestamp = ''
+	) {
+		if ( $revisionId < 0 ) {
 			throw new InvalidArgumentException( 'Revision ID must be a non-negative integer.' );
 		}
 

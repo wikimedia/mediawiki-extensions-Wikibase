@@ -38,9 +38,7 @@ class EntityDataSerializationServiceIntegrationTest extends MediaWikiIntegration
 		$property = new Property(
 			null, $this->getFingerprintWithLabel( $propertyLabel ), 'wikibase-item'
 		);
-
 		$store = WikibaseRepo::getEntityStore();
-
 		$store->saveEntity(
 			$item1,
 			'add some item',
@@ -53,23 +51,29 @@ class EntityDataSerializationServiceIntegrationTest extends MediaWikiIntegration
 			$this->getTestUser()->getUser(),
 			EDIT_NEW
 		);
+
 		$labelText2 = 'some uniquish string - 354981328';
 		$item2 = new Item(
-			null, $this->getFingerprintWithLabel( $labelText2 ), null, new StatementList(
-				new Statement(
-					new PropertyValueSnak(
-						$property->getId(), new EntityIdValue( $item1->getId() )
-					)
-				)
-			)
+			null, $this->getFingerprintWithLabel( $labelText2 ), null, null
 		);
-
+		$store->assignFreshId( $item2 );
+		$item2->setStatements( new StatementList(
+			new Statement(
+				new PropertyValueSnak(
+					$property->getId(), new EntityIdValue( $item1->getId() )
+				),
+				null,
+				null,
+				"{$item2->getId()->getSerialization()}\$7b104d3a-95e5-4ed5-9675-5df817343361"
+			)
+		) );
 		$item2Revision = $store->saveEntity(
 			$item2,
 			'some item',
 			$this->getTestUser()->getUser(),
 			EDIT_NEW
 		);
+
 		$entityDataSerializationService = $this->getEntityDataSerializationService();
 		$serialisedData = $entityDataSerializationService->getSerializedData(
 			'ttl',

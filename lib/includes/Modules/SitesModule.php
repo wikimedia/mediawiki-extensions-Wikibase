@@ -149,10 +149,15 @@ class SitesModule extends RL\Module {
 		// special according to the specialSiteLinkGroups setting
 		$group = $site->getGroup();
 		if ( in_array( $group, $specialGroups ) ) {
-			$languageName = $this->getSpecialSiteLanguageName( $site, $localizer );
+			$name = $this->getSpecialSiteLanguageName( $site, $localizer );
 			$groupName = 'special';
 		} else {
-			$languageName = $languageNameLookup->getName( $site->getLanguageCode() );
+			$languageCode = $site->getLanguageCode();
+			if ( $languageCode !== null ) {
+				$name = $languageNameLookup->getName( $languageCode );
+			} else {
+				$name = $site->getGlobalId(); // better than nothing
+			}
 			$groupName = $group;
 		}
 
@@ -167,8 +172,8 @@ class SitesModule extends RL\Module {
 		);
 
 		return [
-			'shortName' => $languageName,
-			'name' => $languageName, // use short name for both, for now
+			'shortName' => $name,
+			'name' => $name, // use short name for both, for now
 			'id' => $site->getGlobalId(),
 			'pageUrl' => $pageUrl,
 			'apiUrl' => $apiUrl,

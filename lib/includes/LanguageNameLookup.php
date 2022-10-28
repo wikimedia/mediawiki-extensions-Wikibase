@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib;
 
 use Language;
@@ -21,19 +23,15 @@ class LanguageNameLookup {
 	 * @param string|null $inLanguage Language code of the language in which to return the language
 	 *  names. Use null for autonyms (returns each language name in it's own language).
 	 */
-	public function __construct( $inLanguage = null ) {
+	public function __construct( ?string $inLanguage = null ) {
 		if ( $inLanguage !== null ) {
 			$this->inLanguage = $this->normalize( $inLanguage );
 		}
 	}
 
-	/**
-	 * @param string $languageCode
-	 *
-	 * @return string
-	 */
-	public function getName( $languageCode ) {
+	public function getName( string $languageCode ): string {
 		$languageCode = $this->normalize( $languageCode );
+		// TODO inject LanguageNameUtils
 		$name = Language::fetchLanguageName( $languageCode, $this->inLanguage );
 
 		if ( $name === '' ) {
@@ -43,12 +41,7 @@ class LanguageNameLookup {
 		return $name;
 	}
 
-	/**
-	 * @param string $languageCode
-	 *
-	 * @return string
-	 */
-	private function normalize( $languageCode ) {
+	private function normalize( string $languageCode ): string {
 		return str_replace( '_', '-', $languageCode );
 	}
 

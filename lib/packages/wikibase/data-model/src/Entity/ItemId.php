@@ -59,6 +59,10 @@ class ItemId extends SerializableEntityId implements Int32EntityId {
 		return 'item';
 	}
 
+	public function __serialize(): array {
+		return [ 'serialization' => $this->serialization ];
+	}
+
 	/**
 	 * @see Serializable::serialize
 	 *
@@ -68,6 +72,12 @@ class ItemId extends SerializableEntityId implements Int32EntityId {
 	 */
 	public function serialize() {
 		return $this->serialization;
+	}
+
+	public function __unserialize( array $data ): void {
+		$this->serialization = $data['serialization'];
+		list( $this->repositoryName, $this->localPart ) =
+			self::extractRepositoryNameAndLocalPart( $this->serialization );
 	}
 
 	/**

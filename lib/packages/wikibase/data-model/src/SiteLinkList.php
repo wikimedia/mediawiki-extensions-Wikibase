@@ -105,7 +105,7 @@ class SiteLinkList implements IteratorAggregate, Countable {
 	 *
 	 * @return Iterator|SiteLink[]
 	 */
-	public function getIterator() {
+	public function getIterator(): Traversable {
 		return new ArrayIterator( $this->siteLinks );
 	}
 
@@ -114,7 +114,7 @@ class SiteLinkList implements IteratorAggregate, Countable {
 	 *
 	 * @return int
 	 */
-	public function count() {
+	public function count(): int {
 		return count( $this->siteLinks );
 	}
 

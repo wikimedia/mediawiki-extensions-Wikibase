@@ -295,7 +295,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	private function extractInput( $subPage ) {
 		$request = $this->getRequest();
 
-		$parts = $subPage === '' ? [] : explode( '/', $subPage, 2 );
+		$parts = $subPage ? explode( '/', $subPage, 2 ) : [];
 		$this->languageCode = $request->getRawVal( 'language', $parts[1] ?? '' );
 
 		$label = $request->getVal( 'label', '' );

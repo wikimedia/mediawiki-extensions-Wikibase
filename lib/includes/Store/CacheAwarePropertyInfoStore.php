@@ -21,8 +21,6 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
  */
 class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 
-	private const SINGLE_PROPERTY_CACHE_KEY_SEPARATOR = ':';
-
 	public const CACHE_CLASS = 'CacheAwarePropertyInfoStore';
 
 	/**
@@ -92,7 +90,6 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		// update primary store
 		$this->innerStore->setPropertyInfo( $propertyId, $info );
 
-		$allPropertyInfo = $this->cache->get( $this->getFullTableCacheKey() );
 		$id = $propertyId->getSerialization();
 
 		// Update per property cache
@@ -108,11 +105,8 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		$this->deleteCacheKeyForProperty( $propertyId );
 		$this->deleteFullTableCacheKey();
 
-		// Set for current Data Center only
-		// Note: when set for current DC during a write a shorter ttl could be used to ensure a read away from writes recaches
-		// the data in the not too distant future...
-		$this->cache->set( $this->getSinglePropertyCacheKey( $propertyId ), $info, $this->cacheDuration );
-		$this->cache->set( $this->getFullTableCacheKey(), $allPropertyInfo, $this->cacheDuration );
+		// Trying to set the same key would be ignored if it is within the
+		// tombstone TTL, so don't do that.
 	}
 
 	/**
@@ -133,10 +127,6 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 			return false;
 		}
 
-		$allPropertyInfo = $this->cache->get( $this->getFullTableCacheKey() );
-
-		unset( $allPropertyInfo[$id] );
-
 		// Update external cache
 		$this->logger->debug(
 			'{method}: updating cache after removing property {id}',
@@ -150,11 +140,8 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		$this->deleteCacheKeyForProperty( $propertyId );
 		$this->deleteFullTableCacheKey();
 
-		// Set for current Data Center only
-		// Note: when set for current DC during a write a shorter ttl could be used to ensure a read away from writes recaches
-		// the data in the not too distant future...
-		$this->cache->set( $this->getFullTableCacheKey(), $allPropertyInfo, $this->cacheDuration );
-
+		// Trying to set the same key would be ignored if it is within the
+		// tombstone TTL, so don't do that.
 		return true;
 	}
 
