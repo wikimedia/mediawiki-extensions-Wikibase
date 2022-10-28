@@ -4,6 +4,7 @@ namespace Wikibase\Repo\IO;
 
 use InvalidArgumentException;
 use Iterator;
+use LogicException;
 
 /**
  * LineReader allows iterating over the lines of a file.
@@ -98,7 +99,10 @@ class LineReader implements Iterator {
 	 * @see http://php.net/manual/en/iterator.current.php
 	 * @return string
 	 */
-	public function current() {
+	public function current(): string {
+		if ( !$this->valid() ) {
+			throw new LogicException( 'Current position is not valid' );
+		}
 		return $this->current;
 	}
 
@@ -107,7 +111,7 @@ class LineReader implements Iterator {
 	 *
 	 * @see http://php.net/manual/en/iterator.next.php
 	 */
-	public function next() {
+	public function next(): void {
 		$this->current = fgets( $this->fileHandle );
 
 		if ( $this->valid() ) {
@@ -122,7 +126,7 @@ class LineReader implements Iterator {
 	 * @see http://php.net/manual/en/iterator.key.php
 	 * @return int
 	 */
-	public function key() {
+	public function key(): int {
 		return $this->line;
 	}
 
@@ -133,7 +137,7 @@ class LineReader implements Iterator {
 	 * @see http://php.net/manual/en/iterator.valid.php
 	 * @return boolean whether there is a current line
 	 */
-	public function valid() {
+	public function valid(): bool {
 		return is_string( $this->current );
 	}
 
@@ -144,7 +148,7 @@ class LineReader implements Iterator {
 	 * @see http://php.net/manual/en/iterator.rewind.php
 	 * @return void Any returned value is ignored.
 	 */
-	public function rewind() {
+	public function rewind(): void {
 		if ( $this->fileHandle ) {
 			fseek( $this->fileHandle, 0 );
 			$this->current = null;
