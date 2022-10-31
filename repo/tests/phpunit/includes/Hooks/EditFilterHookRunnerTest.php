@@ -59,7 +59,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testRun_noHooksRegisteredGoodStatus() {
-		$this->mergeMwGlobalArrayValue( 'wgHooks', [ 'EditFilterMergedContent' => [] ] );
+		$this->clearHook( 'EditFilterMergedContent' );
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
@@ -141,36 +141,32 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider runData
 	 */
 	public function testRun_hooksAreCalled( Status $inputStatus, $new, array $expected ) {
-		$hooks = array_merge(
-			$GLOBALS['wgHooks'],
-			[ 'EditFilterMergedContent' => [] ]
+		$this->clearHook( 'EditFilterMergedContent' );
+
+		$this->setTemporaryHook(
+			'EditFilterMergedContent',
+			function(
+				IContextSource $context,
+				Content $content,
+				Status $status,
+				$summary,
+				User $user,
+				$minoredit
+			) use ( $expected, $inputStatus ) {
+				$wikiPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $context->getTitle() );
+				$this->assertSame( $expected['title'], $context->getTitle()->getFullText() );
+				$this->assertSame( $context->getTitle(), $wikiPage->getTitle() );
+				$this->assertSame( $expected['namespace'], $context->getTitle()->getNamespace() );
+				$this->assertEquals( new ItemContent( new EntityInstanceHolder( new Item() ) ), $content );
+				$this->assertTrue( $status->isGood() );
+				$this->assertIsString( $summary );
+				$this->assertSame( 'EditFilterHookRunnerTestUser', $user->getName() );
+				$this->assertIsBool( $minoredit );
+
+				// Change the status
+				$status->merge( $inputStatus );
+			}
 		);
-
-		$hooks['EditFilterMergedContent'][] = function(
-			IContextSource $context,
-			Content $content,
-			Status $status,
-			$summary,
-			User $user,
-			$minoredit
-		) use ( $expected, $inputStatus ) {
-			$wikiPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $context->getTitle() );
-			$this->assertSame( $expected['title'], $context->getTitle()->getFullText() );
-			$this->assertSame( $context->getTitle(), $wikiPage->getTitle() );
-			$this->assertSame( $expected['namespace'], $context->getTitle()->getNamespace() );
-			$this->assertEquals( new ItemContent( new EntityInstanceHolder( new Item() ) ), $content );
-			$this->assertTrue( $status->isGood() );
-			$this->assertIsString( $summary );
-			$this->assertSame( 'EditFilterHookRunnerTestUser', $user->getName() );
-			$this->assertIsBool( $minoredit );
-
-			// Change the status
-			$status->merge( $inputStatus );
-		};
-
-		$this->setMwGlobals( [
-			'wgHooks' => $hooks
-		] );
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );

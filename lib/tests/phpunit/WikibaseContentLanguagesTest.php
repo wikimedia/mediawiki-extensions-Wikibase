@@ -49,15 +49,14 @@ class WikibaseContentLanguagesTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetDefaultInstance_withHook() {
 		$testLanguages = new StaticContentLanguages( [ 'test' ] );
-		$this->mergeMwGlobalArrayValue( 'wgHooks', [
-			'WikibaseContentLanguages' => [
-				function ( array &$contentLanguages ) use ( $testLanguages ) {
-					$contentLanguages['test'] = $testLanguages;
-				},
-			],
-		] );
-		$wcl = WikibaseContentLanguages::getDefaultInstance();
+		$this->setTemporaryHook(
+			'WikibaseContentLanguages',
+			function ( array &$contentLanguages ) use ( $testLanguages ) {
+				$contentLanguages['test'] = $testLanguages;
+			}
+		);
 
+		$wcl = WikibaseContentLanguages::getDefaultInstance();
 		$this->assertSame( $testLanguages, $wcl->getContentLanguages( 'test' ) );
 	}
 

@@ -31,7 +31,7 @@ class EditEntityActionTest extends ActionTestCase {
 		parent::setUp();
 
 		// Remove handlers for the "OutputPageParserOutput" hook
-		$this->mergeMwGlobalArrayValue( 'wgHooks', [ 'OutputPageParserOutput' => [] ] );
+		$this->clearHook( 'OutputPageParserOutput' );
 	}
 
 	public function testActionForPage() {

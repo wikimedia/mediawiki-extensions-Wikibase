@@ -113,17 +113,16 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		$entityContent = $this->newBlank();
 		$this->setLabel( $entityContent->getEntity(), 'en', "cake" );
 
-		$this->mergeMwGlobalArrayValue( 'wgHooks', [
-			'WikibaseTextForSearchIndex' => [
-				function ( $actualEntityContent, &$text ) use ( $entityContent ) {
-					$this->assertSame( $entityContent, $actualEntityContent );
-					$this->assertSame( 'cake', $text );
+		$this->setTemporaryHook(
+			'WikibaseTextForSearchIndex',
+			function ( $actualEntityContent, &$text ) use ( $entityContent ) {
+				$this->assertSame( $entityContent, $actualEntityContent );
+				$this->assertSame( 'cake', $text );
 
-					$text .= "\nHOOK";
-					return true;
-				},
-			],
-		] );
+				$text .= "\nHOOK";
+				return true;
+			}
+		);
 
 		$text = $entityContent->getTextForSearchIndex();
 		$this->assertSame( "cake\nHOOK", $text, 'Text for search index should be updated by the hook' );
@@ -133,13 +132,12 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		$entityContent = $this->newBlank();
 		$this->setLabel( $entityContent->getEntity(), 'en', "cake" );
 
-		$this->mergeMwGlobalArrayValue( 'wgHooks', [
-			'WikibaseTextForSearchIndex' => [
-				static function () {
-					return false;
-				},
-			],
-		] );
+		$this->setTemporaryHook(
+			'WikibaseTextForSearchIndex',
+			static function () {
+				return false;
+			}
+		);
 
 		$text = $entityContent->getTextForSearchIndex();
 		$this->assertSame( '', $text, 'Text for search index should be empty if the hook returned false' );
