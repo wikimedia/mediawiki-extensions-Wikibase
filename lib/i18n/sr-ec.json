@@ -10,15 +10,17 @@
 			"TheStefan12345",
 			"Zoranzoki21",
 			"Милан Јелисавчић",
-			"Сербијана"
+			"Сербијана",
+			"Kizule",
+			"Srđan"
 		]
 	},
-	"wikibase-lib-desc": "Садржи заједничке функционалности за Викибазу и проширења за клијента Викибазе",
 	"specialpages-group-wikibase": "Викибаза",
 	"wikibase-deletedentity-item": "Избрисана ставка",
 	"wikibase-deletedentity-property": "Избрисано својство",
 	"wikibase-deletedentity-query": "Избрисани упит",
 	"wikibase-error-unexpected": "Грешка: $1.",
+	"wikibase-error-unknown": "Дошло је до грешке.",
 	"wikibase-error-save-generic": "Не могу да сачувам због грешке.",
 	"wikibase-error-remove-generic": "Не могу да уклоним због грешке.",
 	"wikibase-error-save-timeout": "Тренутно имамо техничке потешкоће. Покушајте касније.",
@@ -70,6 +72,7 @@
 	"wikibase-time-precision-millennium": "$1. миленијум",
 	"wikibase-time-precision-century": "$1. век",
 	"wikibase-time-precision-10annum": "$1те",
+	"wikibase-time-precision-BCE": "$1 п.н.е.",
 	"wikibase-time-precision-BCE-Gannum": "$1 милијарди година п.н.е.",
 	"wikibase-time-precision-BCE-Mannum": "$1 милиона година п.н.е.",
 	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 године|$1 година}} п.н.е.",

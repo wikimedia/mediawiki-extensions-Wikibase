@@ -6,7 +6,6 @@
 			"LR Guanzon"
 		]
 	},
-	"wikibase-lib-desc": "Naghahawak ng karaniwang panunungkulan para sa mga pandugtong ng Wikibase at Wikibase Client",
 	"wikibase-error-save-generic": "Naganap ang isang kamalian habang sinusubukang isagawa ang pagsagip at dahil dito, hindi makumpleto ang mga pagbabago.",
 	"wikibase-error-remove-generic": "Naganap ang isang kamalian habang sinusubukang isagawa ang pagtanggal at dahil dito, hindi makukumpleto ang mga binago mo.",
 	"wikibase-error-save-timeout": "Nakakaranas kami ng mga suliraning teknikal, at dahil dito hindi mabuo ang iyong \"pagsagip\".",
@@ -14,6 +13,7 @@
 	"wikibase-error-ui-no-external-page": "Hindi matagpuan ang tinukoy na artikulo sa ibabaw ng kaukol na pook.",
 	"wikibase-error-ui-edit-conflict": "Nagkaroon ng isang pagsasalungatan sa pamamatnugot. Paki muling ikarga at sagiping muli.",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
+	"wikibase-time-calendar-julian": "Huliyano",
 	"wikibase-entity-summary-wbsetitem": "Nilikha ang isang bagong bagay",
 	"wikibase-entity-summary-wbsetlabel-set": "Binago ang [$2] katatakan",
 	"wikibase-entity-summary-wbsetlabel-remove": "Tinanggal ang [$2] katatakan",

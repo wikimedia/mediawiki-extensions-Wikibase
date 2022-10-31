@@ -22,7 +22,8 @@
 			"WTM",
 			"Wizardist",
 			"Woytecr",
-			"Mkazberuk"
+			"Mkazberuk",
+			"Msz2001"
 		]
 	},
 	"wikibase-desc": "Repozytorium danych strukturalnych",
@@ -117,7 +118,7 @@
 	"wikibase-statementview-rank-tooltip-normal": "Wartość prawidłowa, choć być może historyczna",
 	"wikibase-statementview-rank-deprecated": "Ranga nieaktualna",
 	"wikibase-statementview-rank-tooltip-deprecated": "Wiadomo, że wartość jest zła, ale jest ogólnie przyjęta",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|odnośnik|odnośniki|odnośników}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|przypis|przypisy|przypisów}}",
 	"wikibase-snakview-property-input-placeholder": "właściwość",
 	"wikibase-snakview-unsupportedsnaktype": "Snak typu „$1”. Snak tego rodzaju nie jest jeszcze obsługiwany.",
 	"wikibase-snakview-choosesnaktype": "Wybierz typ wartości.",
