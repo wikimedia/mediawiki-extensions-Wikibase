@@ -21,6 +21,8 @@ class ErrorResponseToHttpStatus {
 		ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID => 400,
 		ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY => 400,
 		ErrorResponse::INVALID_PATCH => 400,
+		ErrorResponse::INVALID_PATCH_OPERATION => 400,
+		ErrorResponse::MISSING_JSON_PATCH_FIELD => 400,
 		ErrorResponse::PERMISSION_DENIED => 403,
 		ErrorResponse::ITEM_NOT_FOUND => 404,
 		ErrorResponse::ITEM_REDIRECTED => 409,

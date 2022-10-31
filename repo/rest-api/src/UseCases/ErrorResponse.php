@@ -19,6 +19,8 @@ class ErrorResponse {
 	public const CANNOT_APPLY_PATCH = 'cannot-apply-patch';
 	public const PATCH_TEST_FAILED = 'patch-test-failed';
 	public const INVALID_PATCH = 'invalid-patch';
+	public const INVALID_PATCH_OPERATION = 'invalid-patch-operation';
+	public const MISSING_JSON_PATCH_FIELD = 'missing-json-patch-field';
 	public const ITEM_NOT_FOUND = 'item-not-found';
 	public const ITEM_REDIRECTED = 'redirected-item';
 	public const PERMISSION_DENIED = 'permission-denied';

@@ -4,6 +4,8 @@ namespace Wikibase\Repo\RestApi\UseCases\PatchItemStatement;
 
 use LogicException;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\Validation\PatchInvalidOpValidationError;
+use Wikibase\Repo\RestApi\Validation\PatchMissingFieldValidationError;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
@@ -27,11 +29,27 @@ class PatchItemStatementErrorResponse extends ErrorResponse {
 				);
 
 			case PatchItemStatementValidator::SOURCE_PATCH:
-				return new self(
-					ErrorResponse::INVALID_PATCH,
-					"The provided patch is invalid"
-				);
-
+				switch ( true ) {
+					case $validationError instanceof PatchInvalidOpValidationError:
+						$op = $validationError->getValue();
+						return new self(
+							ErrorResponse::INVALID_PATCH_OPERATION,
+							"Incorrect JSON patch operation: '$op'",
+							$validationError->getContext()
+						);
+					case $validationError instanceof PatchMissingFieldValidationError:
+						$field = $validationError->getValue();
+						return new self(
+							ErrorResponse::MISSING_JSON_PATCH_FIELD,
+							"Missing '$field' in JSON patch",
+							$validationError->getContext()
+						);
+					default:
+						return new self(
+							ErrorResponse::INVALID_PATCH,
+							"The provided patch is invalid"
+						);
+				}
 			case PatchItemStatementValidator::SOURCE_EDIT_TAGS:
 				return new self(
 					ErrorResponse::INVALID_EDIT_TAG,

@@ -6,6 +6,8 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
+use Wikibase\Repo\RestApi\Validation\PatchInvalidOpValidationError;
+use Wikibase\Repo\RestApi\Validation\PatchMissingFieldValidationError;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
@@ -23,12 +25,14 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 	public function testNewFromValidationError(
 		ValidationError $validationError,
 		string $expectedCode,
-		string $expectedMessage
+		string $expectedMessage,
+		array $expectedContext = null
 	): void {
 		$response = PatchItemStatementErrorResponse::newFromValidationError( $validationError );
 
 		$this->assertEquals( $expectedCode, $response->getCode() );
 		$this->assertEquals( $expectedMessage, $response->getMessage() );
+		$this->assertEquals( $expectedContext, $response->getContext() );
 	}
 
 	public function provideValidationError(): \Generator {
@@ -48,6 +52,22 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 			new ValidationError( '', PatchItemStatementValidator::SOURCE_PATCH ),
 			ErrorResponse::INVALID_PATCH,
 			'The provided patch is invalid'
+		];
+
+		$context = [ 'operation' => [ 'path' => '/a/b/c', 'value' => 'test' ] ];
+		yield 'from missing patch field' => [
+			new PatchMissingFieldValidationError( 'op', PatchItemStatementValidator::SOURCE_PATCH, $context ),
+			ErrorResponse::MISSING_JSON_PATCH_FIELD,
+			"Missing 'op' in JSON patch",
+			$context
+		];
+
+		$context = [ 'operation' => [ 'op' => 'bad', 'path' => '/a/b/c', 'value' => 'test' ] ];
+		yield 'from invalid patch operation' => [
+			new PatchInvalidOpValidationError( 'bad', PatchItemStatementValidator::SOURCE_PATCH, $context ),
+			ErrorResponse::INVALID_PATCH_OPERATION,
+			"Incorrect JSON patch operation: 'bad'",
+			$context
 		];
 
 		yield 'from comment too long' => [

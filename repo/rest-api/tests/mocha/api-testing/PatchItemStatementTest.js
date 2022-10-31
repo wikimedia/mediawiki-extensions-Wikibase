@@ -14,10 +14,15 @@ function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
 }
 
-function assertValid400Response( response, responseBodyErrorCode ) {
+function assertValid400Response( response, responseBodyErrorCode, context = null ) {
 	assert.strictEqual( response.status, 400 );
 	assert.header( response, 'Content-Language', 'en' );
 	assert.strictEqual( response.body.code, responseBodyErrorCode );
+	if ( context === null ) {
+		assert.notProperty( response.body, 'context' );
+	} else {
+		assert.deepStrictEqual( response.body.context, context );
+	}
 }
 
 function assertValid404Response( response, responseBodyErrorCode ) {
@@ -187,11 +192,56 @@ describe( 'PATCH statement tests', () => {
 				} );
 
 				it( 'invalid patch', async () => {
-					const invalidPatch = { patch: 'this is not a valid JSON Patch' };
+					const invalidPatch = { foo: 'this is not a valid JSON Patch' };
 					const response = await newPatchRequestBuilder( testStatementId, invalidPatch )
 						.assertInvalidRequest().makeRequest();
 
 					assertValid400Response( response, 'invalid-patch' );
+				} );
+
+				it( "invalid patch - missing 'op' field", async () => {
+					const invalidOperation = { path: '/a/b/c', value: 'test' };
+					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
+						.assertInvalidRequest().makeRequest();
+
+					assertValid400Response( response, 'missing-json-patch-field', { operation: invalidOperation } );
+					assert.include( response.body.message, "'op'" );
+				} );
+
+				it( "invalid patch - missing 'path' field", async () => {
+					const invalidOperation = { op: 'remove' };
+					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
+						.assertInvalidRequest().makeRequest();
+
+					assertValid400Response( response, 'missing-json-patch-field', { operation: invalidOperation } );
+					assert.include( response.body.message, "'path'" );
+				} );
+
+				it( "invalid patch - missing 'value' field", async () => {
+					const invalidOperation = { op: 'add', path: '/a/b/c' };
+					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
+						.makeRequest();
+
+					assertValid400Response( response, 'missing-json-patch-field', { operation: invalidOperation } );
+					assert.include( response.body.message, "'value'" );
+				} );
+
+				it( "invalid patch - missing 'from' field", async () => {
+					const invalidOperation = { op: 'move', path: '/a/b/c' };
+					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
+						.makeRequest();
+
+					assertValid400Response( response, 'missing-json-patch-field', { operation: invalidOperation } );
+					assert.include( response.body.message, "'from'" );
+				} );
+
+				it( "invalid patch - invalid 'op' field", async () => {
+					const invalidOperation = { op: 'foobar', path: '/a/b/c', value: 'test' };
+					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
+						.assertInvalidRequest().makeRequest();
+
+					assertValid400Response( response, 'invalid-patch-operation', { operation: invalidOperation } );
+					assert.include( response.body.message, "'foobar'" );
 				} );
 
 				it( 'invalid edit tag', async () => {
