@@ -84,11 +84,23 @@ Below only new and removed languages are listed, as well as changes to languages
 because of Phabricator reports.
 New monolingual support:
 
-* (T12345) ...
+* (T180771) Min Dong cdo-hani
+* (T154589) American English en-us
+* (T262922) Alsatian gsw-fr
+* (T180771) Hakka hak-hans
+* (T180771) Hakka hak-hant
+* (T265296) Omaha-Ponca oma
+* (T265297) Osage osa-latn
+* (T283364) Wendat wya
+* (T252198) Tundra Yukaghir ykg
 
 Monolingual entries removed as they are now natively supported by MediaWiki:
 
-* (T12345) ...
+* (T283168) Dagbani dag
+* (T282085) Malay ms-arab
+* (T284002) Paiwan pwn
+* (T259360) Shawiya shy
+* (T283480) Wallisian wls
 
 === Breaking changes in 1.37 ===
 
