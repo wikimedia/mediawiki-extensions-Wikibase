@@ -28,6 +28,7 @@
 	"wikibase-sitelink-page-edit-placeholder": "sijđo",
 	"wikibase-statementsection-identifiers": "Tubdâldâsah",
 	"wikibase-sitelinks-special": "Eres siijđoh",
+	"wikibase-remove": "siho",
 	"wikibase-statementview-rank-normal": "Táválâš sajattâh",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|käldee|käldee|käldee|kälded|0=Iä lah käldeeh}}",
 	"wikibase-anonymouseditwarning": "<strong>Váruttâs:</strong> Jieh lah čälittâm jieijâd siisâ. IP-čujottâsâd uáinoo almolávt puohháid, jis hammiih. Jis <strong>[[Special:UserLogin|čälittah jieijâd siisâ]]</strong> teikâ <strong>[[Special:CreateAccount|rááhtáh tubdâlduv]]</strong>, tuu hammim čálloo tuu kevtteetubdâlduvâi rähtim hammiimin já siämmást tun finniih kiävtun ávhálijd piergâsijd.",
@@ -48,5 +49,6 @@
 	"wikibase-listdatatypes-time-head": "Äigi",
 	"wikibase-listdatavaluetypes-name-string": "merkkâráiđu",
 	"wikibase-tainted-ref-popper-help-link-text": "Iše",
+	"wikibase-tainted-ref-popper-remove-warning": "Siho váruttâs",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Jooskâ"
 }

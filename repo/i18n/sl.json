@@ -475,7 +475,7 @@
 	"wikibase-search-namespace-mix": "Mešanje imenskih prostorov entitet in člankov pri iskanju trenutno ni podprto. Preiskani bodo samo imenski prostori entitet.",
 	"wikibase-search-config-notfound": "Konfiguracije iskanja po celotnem besedilu ni bilo mogoče najti: $1",
 	"wikibase-search-config-badclass": "Slab razred gradilnika poizvedb: $1",
-	"wikibase-refresh-for-missing-datatype": "Podatkovne vrste $1 ni bilo mogoče najti v skriptu lokalnega odjemalca. To je lahko posledica zastarelega predpomnjenega skripta. Da odpravite težavo, poskusite popolnoma osvežiti brskalnik, tako da obidete lokalni predpomnilnik (Ctrl+dvigalka+R ali Cmd+dvigalka+R v večini brskalnikov).",
+	"wikibase-refresh-for-missing-datatype": "Podatkovne vrste $1 ni bilo mogoče najti v skriptu lokalnega odjemalca. To je lahko posledica zastarelega predpomnjenega skripta. Da odpravite težavo, poskusite popolnoma osvežiti brskalnik, tako da obidete lokalno predpomnjenje (Ctrl+dvigalka+R ali Cmd+dvigalka+R v večini brskalnikov).",
 	"wikibase-outdated-client-script": "Uh, potrebna je prisilna osvežitev!",
 	"wikibase-shortcopyrightwarning-heading": "Navedba licence",
 	"wikibase-entity-save-error-heading": "Nekaj je šlo narobe",
