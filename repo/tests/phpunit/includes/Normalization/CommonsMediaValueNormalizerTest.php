@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Normalization;
 
-use DataValues\DataValue;
+use DataValues\BooleanValue;
 use DataValues\StringValue;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
@@ -62,7 +62,7 @@ class CommonsMediaValueNormalizerTest extends TestCase {
 		$fileNameLookup->expects( $this->never() )
 			->method( 'lookupFileName' );
 		$normalizer = $this->getCommonsMediaValueNormalizer( $fileNameLookup );
-		$value = $this->createMock( DataValue::class );
+		$value = new BooleanValue( true );
 
 		$normalized = $normalizer->normalize( $value );
 
