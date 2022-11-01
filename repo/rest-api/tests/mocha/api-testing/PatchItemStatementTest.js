@@ -244,6 +244,33 @@ describe( 'PATCH statement tests', () => {
 					assert.include( response.body.message, "'foobar'" );
 				} );
 
+				it( "invalid patch - 'op' is not a string", async () => {
+					const invalidOperation = { op: { foo: [ 'bar' ], baz: 42 }, path: '/a/b/c', value: 'test' };
+					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
+						.assertInvalidRequest().makeRequest();
+
+					assertValid400Response( response, 'invalid-patch-field-type', { operation: invalidOperation } );
+					assert.include( response.body.message, "'op'" );
+				} );
+
+				it( "invalid patch - 'path' is not a string", async () => {
+					const invalidOperation = { op: 'add', path: { foo: [ 'bar' ], baz: 42 }, value: 'test' };
+					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
+						.assertInvalidRequest().makeRequest();
+
+					assertValid400Response( response, 'invalid-patch-field-type', { operation: invalidOperation } );
+					assert.include( response.body.message, "'path'" );
+				} );
+
+				it( "invalid patch - 'from' is not a string", async () => {
+					const invalidOperation = { op: 'move', from: { foo: [ 'bar' ], baz: 42 }, path: '/a/b/c' };
+					const response = await newPatchRequestBuilder( testStatementId, [ invalidOperation ] )
+						.makeRequest();
+
+					assertValid400Response( response, 'invalid-patch-field-type', { operation: invalidOperation } );
+					assert.include( response.body.message, "'from'" );
+				} );
+
 				it( 'invalid edit tag', async () => {
 					const invalidEditTag = 'invalid tag';
 					const response = await newPatchRequestBuilder( testStatementId, [] )

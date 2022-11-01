@@ -6,6 +6,7 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use Swaggest\JsonDiff\JsonDiff;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
+use Wikibase\Repo\RestApi\Validation\PatchInvalidFieldTypeValidationError;
 use Wikibase\Repo\RestApi\Validation\PatchInvalidOpValidationError;
 use Wikibase\Repo\RestApi\Validation\PatchMissingFieldValidationError;
 
@@ -85,6 +86,38 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 			PatchInvalidOpValidationError::class,
 			[ $invalidOperationObject ],
 			'invalid',
+			[ 'operation' => $invalidOperationObject ]
+		];
+
+		$invalidOperationObject = [ 'op' => true, 'path' => '/a/b/c', 'value' => 'foo' ];
+		yield 'invalid field type - "op" is a boolean not a string' => [
+			PatchInvalidFieldTypeValidationError::class,
+			[ $invalidOperationObject ],
+			'op',
+			[ 'operation' => $invalidOperationObject ]
+		];
+
+		$invalidOperationObject = [ 'op' => [ 'foo' => [ 'bar' ], 'baz' => 42 ], 'path' => '/a/b/c', 'value' => 'foo' ];
+		yield 'invalid field type - "op" is an object not a string' => [
+			PatchInvalidFieldTypeValidationError::class,
+			[ $invalidOperationObject ],
+			'op',
+			[ 'operation' => $invalidOperationObject ]
+		];
+
+		$invalidOperationObject = [ 'op' => 'add', 'path' => [ 'foo', 'bar', 'baz' ], 'value' => 'foo' ];
+		yield 'invalid field type - "path" is not a string' => [
+			PatchInvalidFieldTypeValidationError::class,
+			[ $invalidOperationObject ],
+			'path',
+			[ 'operation' => $invalidOperationObject ]
+		];
+
+		$invalidOperationObject = [ 'op' => 'move', 'from' => 42, 'path' => '/a/b/c' ];
+		yield 'invalid field type - "from" is not a string' => [
+			PatchInvalidFieldTypeValidationError::class,
+			[ $invalidOperationObject ],
+			'from',
 			[ 'operation' => $invalidOperationObject ]
 		];
 	}
