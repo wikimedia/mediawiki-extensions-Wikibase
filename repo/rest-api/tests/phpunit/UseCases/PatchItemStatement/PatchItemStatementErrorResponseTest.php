@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
+use Wikibase\Repo\RestApi\Validation\PatchInvalidFieldTypeValidationError;
 use Wikibase\Repo\RestApi\Validation\PatchInvalidOpValidationError;
 use Wikibase\Repo\RestApi\Validation\PatchMissingFieldValidationError;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
@@ -67,6 +68,14 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 			new PatchInvalidOpValidationError( 'bad', PatchItemStatementValidator::SOURCE_PATCH, $context ),
 			ErrorResponse::INVALID_PATCH_OPERATION,
 			"Incorrect JSON patch operation: 'bad'",
+			$context
+		];
+
+		$context = [ 'operation' => [ 'op' => [ 'not', [ 'a' => 'string' ] ], 'path' => '/a/b/c', 'value' => 'test' ] ];
+		yield 'from invalid patch field type' => [
+			new PatchInvalidFieldTypeValidationError( 'op', PatchItemStatementValidator::SOURCE_PATCH, $context ),
+			ErrorResponse::INVALID_PATCH_FIELD_TYPE,
+			"The value of 'op' must be of type string",
 			$context
 		];
 

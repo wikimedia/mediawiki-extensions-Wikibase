@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\UseCases\PatchItemStatement;
 
 use LogicException;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\Validation\PatchInvalidFieldTypeValidationError;
 use Wikibase\Repo\RestApi\Validation\PatchInvalidOpValidationError;
 use Wikibase\Repo\RestApi\Validation\PatchMissingFieldValidationError;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
@@ -35,6 +36,13 @@ class PatchItemStatementErrorResponse extends ErrorResponse {
 						return new self(
 							ErrorResponse::INVALID_PATCH_OPERATION,
 							"Incorrect JSON patch operation: '$op'",
+							$validationError->getContext()
+						);
+					case $validationError instanceof PatchInvalidFieldTypeValidationError:
+						$field = $validationError->getValue();
+						return new self(
+							ErrorResponse::INVALID_PATCH_FIELD_TYPE,
+							"The value of '$field' must be of type string",
 							$validationError->getContext()
 						);
 					case $validationError instanceof PatchMissingFieldValidationError:
