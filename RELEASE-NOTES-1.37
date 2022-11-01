@@ -51,10 +51,6 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 * (repo) (T317890) federatedPropertiesEnabled has been removed.
 * (repo) (T317890) federatedPropertiesSourceScriptUrl has been removed.
 
-=== New user-facing features in 1.37 ===
-
-* ...
-
 === External library changes in 1.37 ===
 
 ==== Changed external libraries ====
@@ -71,14 +67,6 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 * Removed wikibase/data-model-serialization - library is provided as a part of Wikibase code
 * Removed wikibase/internal-serialization - library is provided as a part of Wikibase code
 * Removed wikibase/data-model-services - library is provided as a part of Wikibase code
-
-=== Bug fixes in 1.37 ===
-
-* (T12345) ...
-
-=== Action API changes in 1.37 ===
-
-* (T12345) ...
 
 === Languages updated in 1.37 ===
 
@@ -104,14 +92,6 @@ Monolingual entries removed as they are now natively supported by MediaWiki:
 * (T284002) Paiwan pwn
 * (T259360) Shawiya shy
 * (T283480) Wallisian wls
-
-=== Breaking changes in 1.37 ===
-
-* (T12345) ...
-
-=== Deprecations in 1.37 ===
-
-* (T12345) ...
 
 === Other changes in 1.37 ===
 
