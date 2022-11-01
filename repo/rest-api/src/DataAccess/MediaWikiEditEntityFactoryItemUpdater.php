@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\RestApi\DataAccess;
 
 use IContextSource;
+use MediaWiki\Permissions\PermissionManager;
 use Psr\Log\LoggerInterface;
+use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
@@ -22,20 +24,25 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 	private MediawikiEditEntityFactory $editEntityFactory;
 	private LoggerInterface $logger;
 	private EditSummaryFormatter $summaryFormatter;
+	private PermissionManager $permissionManager;
 
 	public function __construct(
 		IContextSource $context,
 		MediawikiEditEntityFactory $editEntityFactory,
 		LoggerInterface $logger,
-		EditSummaryFormatter $summaryFormatter
+		EditSummaryFormatter $summaryFormatter,
+		PermissionManager $permissionManager
 	) {
 		$this->context = $context;
 		$this->editEntityFactory = $editEntityFactory;
 		$this->logger = $logger;
 		$this->summaryFormatter = $summaryFormatter;
+		$this->permissionManager = $permissionManager;
 	}
 
 	public function update( Item $item, EditMetadata $editMetadata ): ItemRevision {
+		$this->checkBotRightIfProvided( $this->context->getUser(), $editMetadata->isBot() );
+
 		$editEntity = $this->editEntityFactory->newEditEntity( $this->context, $item->getId() );
 
 		$status = $editEntity->attemptSave(
@@ -60,6 +67,13 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 		'@phan-var Item $savedItem';
 
 		return new ItemRevision( $savedItem, $entityRevision->getTimestamp(), $entityRevision->getRevisionId() );
+	}
+
+	private function checkBotRightIfProvided( User $user, bool $isBot ): void {
+		// This is only a low-level safeguard and should be checked and handled properly before using this service.
+		if ( $isBot && !$this->permissionManager->userHasRight( $user, 'bot' ) ) {
+			throw new \RuntimeException( 'Attempted bot edit with insufficient rights' );
+		}
 	}
 
 }

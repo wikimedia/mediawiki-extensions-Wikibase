@@ -88,7 +88,7 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'can replace a statement to an item with edit metadata provided', async () => {
-					const user = await action.mindy();
+					const user = await action.robby(); // robby is a bot
 					const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
 					const editSummary = 'omg look i made an edit';
 					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
