@@ -28,21 +28,21 @@ class JsonDiffJsonPatchValidator implements JsonPatchValidator {
 				return new PatchInvalidFieldTypeValidationError(
 					'op',
 					$source,
-					[ 'operation' => $operation ]
+					[ 'operation' => $operation, 'field' => 'op' ]
 				);
 			}
 			if ( array_key_exists( 'path', $operation ) && !is_string( $operation['path'] ) ) {
 				return new PatchInvalidFieldTypeValidationError(
 					'path',
 					$source,
-					[ 'operation' => $operation ]
+					[ 'operation' => $operation, 'field' => 'path' ]
 				);
 			}
 			if ( array_key_exists( 'from', $operation ) && !is_string( $operation['from'] ) ) {
 				return new PatchInvalidFieldTypeValidationError(
 					'from',
 					$source,
-					[ 'operation' => $operation ]
+					[ 'operation' => $operation, 'field' => 'from' ]
 				);
 			}
 		}
@@ -53,7 +53,7 @@ class JsonDiffJsonPatchValidator implements JsonPatchValidator {
 			return new PatchMissingFieldValidationError(
 				$e->getMissingField(),
 				$source,
-				[ 'operation' => (array)$e->getOperation() ]
+				[ 'operation' => (array)$e->getOperation(), 'field' => $e->getMissingField() ]
 			);
 		} catch ( UnknownOperationException $e ) {
 			return new PatchInvalidOpValidationError(

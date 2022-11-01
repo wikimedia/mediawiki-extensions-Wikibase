@@ -54,7 +54,7 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 			PatchMissingFieldValidationError::class,
 			[ $invalidOperationObject ],
 			'op',
-			[ 'operation' => $invalidOperationObject ]
+			[ 'operation' => $invalidOperationObject, 'field' => 'op' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'add', 'value' => 'foo' ];
@@ -62,7 +62,7 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 			PatchMissingFieldValidationError::class,
 			[ $invalidOperationObject ],
 			'path',
-			[ 'operation' => $invalidOperationObject ]
+			[ 'operation' => $invalidOperationObject, 'field' => 'path' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'add', 'path' => '/a/b/c' ];
@@ -70,7 +70,7 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 			PatchMissingFieldValidationError::class,
 			[ $invalidOperationObject ],
 			'value',
-			[ 'operation' => $invalidOperationObject ]
+			[ 'operation' => $invalidOperationObject, 'field' => 'value' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'copy', 'path' => '/a/b/c' ];
@@ -78,7 +78,7 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 			PatchMissingFieldValidationError::class,
 			[ $invalidOperationObject ],
 			'from',
-			[ 'operation' => $invalidOperationObject ]
+			[ 'operation' => $invalidOperationObject, 'field' => 'from' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'invalid', 'path' => '/a/b/c', 'value' => 'foo' ];
@@ -94,7 +94,7 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 			PatchInvalidFieldTypeValidationError::class,
 			[ $invalidOperationObject ],
 			'op',
-			[ 'operation' => $invalidOperationObject ]
+			[ 'operation' => $invalidOperationObject, 'field' => 'op' ]
 		];
 
 		$invalidOperationObject = [ 'op' => [ 'foo' => [ 'bar' ], 'baz' => 42 ], 'path' => '/a/b/c', 'value' => 'foo' ];
@@ -102,7 +102,7 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 			PatchInvalidFieldTypeValidationError::class,
 			[ $invalidOperationObject ],
 			'op',
-			[ 'operation' => $invalidOperationObject ]
+			[ 'operation' => $invalidOperationObject, 'field' => 'op' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'add', 'path' => [ 'foo', 'bar', 'baz' ], 'value' => 'foo' ];
@@ -110,7 +110,7 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 			PatchInvalidFieldTypeValidationError::class,
 			[ $invalidOperationObject ],
 			'path',
-			[ 'operation' => $invalidOperationObject ]
+			[ 'operation' => $invalidOperationObject, 'field' => 'path' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'move', 'from' => 42, 'path' => '/a/b/c' ];
@@ -118,7 +118,7 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 			PatchInvalidFieldTypeValidationError::class,
 			[ $invalidOperationObject ],
 			'from',
-			[ 'operation' => $invalidOperationObject ]
+			[ 'operation' => $invalidOperationObject, 'field' => 'from' ]
 		];
 	}
 
