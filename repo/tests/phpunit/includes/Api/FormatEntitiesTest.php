@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiTestCase;
 use ApiUsageException;
 use HashBagOStuff;
+use MediaWiki\MainConfigNames;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -25,6 +26,11 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  */
 class FormatEntitiesTest extends ApiTestCase {
+
+	/**
+	 * @var string Fake value for $wgServer
+	 */
+	private const BASE_URL = 'http://a.test';
 
 	private function saveEntity( EntityDocument $entity ) {
 		$store = WikibaseRepo::getEntityStore();
@@ -49,7 +55,7 @@ class FormatEntitiesTest extends ApiTestCase {
 			'ids' => "$itemId|$propertyId",
 		];
 
-		list( $resultArray, ) = $this->doApiRequest( $params );
+		[ $resultArray, ] = $this->doApiRequest( $params );
 		$this->assertArrayHasKey( 'wbformatentities', $resultArray );
 		$results = $resultArray['wbformatentities'];
 
@@ -81,7 +87,7 @@ class FormatEntitiesTest extends ApiTestCase {
 	 * returns the input HTML snippet and the expected result
 	 */
 	public function provideHtmlSnippets() {
-		$foo = wfExpandUrl( '/foo', PROTO_CANONICAL );
+		$foo = self::BASE_URL . '/foo';
 
 		return [
 			'plain text' => [
@@ -93,8 +99,8 @@ class FormatEntitiesTest extends ApiTestCase {
 				'<span class="other-message">oops</span>',
 			],
 			'simple absolute link' => [
-				'<a href="http://a.test/">link</a>',
-				'<a href="http://a.test/">link</a>',
+				'<a href="http://another.test/">link</a>',
+				'<a href="http://another.test/">link</a>',
 			],
 			'simple relative link' => [
 				'<a href="/foo">link</a>',
@@ -151,6 +157,11 @@ class FormatEntitiesTest extends ApiTestCase {
 	 * @dataProvider provideHtmlSnippets
 	 */
 	public function testMakeLinksAbsolute( $html, $expected ) {
+		$this->overrideConfigValues( [
+			MainConfigNames::Server => self::BASE_URL,
+			MainConfigNames::CanonicalServer => self::BASE_URL,
+		] );
+
 		$actual = TestingAccessWrapper::newFromClass( FormatEntities::class )
 			->makeLinksAbsolute( $html );
 
