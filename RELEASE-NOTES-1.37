@@ -57,17 +57,20 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 
 === External library changes in 1.37 ===
 
-==== New external libraries ====
-
-* ...
-
 ==== Changed external libraries ====
 
-* ...
+* Updated data-values/data-values from 2.0.0 to 3.0.0
+* Updated data-values/common from 0.4.0 to 1.0.0
+* Updated data-values/interfaces from 0.2.0 to 1.0.0
+* Updated data-values/time from 1.0.2 to 1.0.4
+* Updated data-values/serialization from 1.2.1 to 1.2.4
 
 ==== Removed external libraries ====
 
-* (T12345) ...
+* Removed wikibase/data-model - library is provided as a part of Wikibase code
+* Removed wikibase/data-model-serialization - library is provided as a part of Wikibase code
+* Removed wikibase/internal-serialization - library is provided as a part of Wikibase code
+* Removed wikibase/data-model-services - library is provided as a part of Wikibase code
 
 === Bug fixes in 1.37 ===
 
