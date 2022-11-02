@@ -80,10 +80,10 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 				[ $site1, $site2 ],
 				[ 'allowedgroup', 'othergroup' ],
 				[],
-				'{"mywiki":{"shortName":"","name":"","id":"mywiki",' .
+				'{"mywiki":{"shortName":"mywiki","name":"mywiki","id":"mywiki",' .
 				'"pageUrl":"//my.test/wiki/$1","apiUrl":"//my.test/w/api.php",' .
 				'"languageCode":null,"group":"allowedgroup"},' .
-				'"otherwiki":{"shortName":"","name":"","id":"otherwiki",' .
+				'"otherwiki":{"shortName":"otherwiki","name":"otherwiki","id":"otherwiki",' .
 				'"pageUrl":"//other.test/wiki/$1","apiUrl":"//other.test/w/api.php",' .
 				'"languageCode":null,"group":"othergroup"}}'
 			],
