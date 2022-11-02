@@ -124,6 +124,13 @@ $specialPageAliases['nn'] = [
 	'UnconnectedPages' => [ 'Ikkje-tilknytta_sider' ],
 ];
 
+/** Polish (polski) */
+$specialPageAliases['pl'] = [
+	'EntityUsage' => [ 'Wykorzystanie_obiektów', 'Wykorzystanie_elementów' ],
+	'PagesWithBadges' => [ 'Strony_z_odznakami' ],
+	'UnconnectedPages' => [ 'Niepołączone_strony', 'Strony_bez_interwiki', 'Strony_bez_Wikidanych' ],
+];
+
 /** Portuguese (português) */
 $specialPageAliases['pt'] = [
 	'UnconnectedPages' => [ 'Páginas_sem_conexões' ],
