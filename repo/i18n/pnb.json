@@ -94,7 +94,7 @@
 	"wikibase-snakview-snaktypeselector-value": "چݨیا مُل",
 	"wikibase-snakformat-invalid-value": "اینمُٹ وچ مُل منع۔",
 	"wikibase-snakformat-propertynotfound": "وشیشتا نہیں لبھیا۔",
-	"wikibase-shortcopyrightwarning": "تسیں ”$1“ بٹن کریئے، [[$2|ورتن شرطاں]] نال تسیں راضی ہندے اے، اتے تہاڈے کم لئی [$3 کریاٹیو کامنز سی‌سی 0 لئیسنس<!--$4-->] ورتوگے سی۔",
+	"wikibase-shortcopyrightwarning": "تسیں ”بݨا“ بٹن کریئے، ورتݨ دیاں شرطاں نال تسیں راضی ہندے اے، اتے تہاڈے کم لئی کریاٹیو کامنز سی‌سی 0 لئیسنس  ورتوگے سی۔\n<!-- جے ایہہ سنیہا تسیں دکھے، وِکی لکھت نال غلت ہو گئی۔ $1 [[$2]] $3 $4 -->",
 	"wikibase-entityselector-more": "ہور",
 	"wikibase-anonymouseditwarning-heading": "تسیں نہیں لوگ‌این کیتے",
 	"wikibase-validator-no-such-entity": "چیز $1 نہیں لبھی",
