@@ -2,11 +2,11 @@
 
 namespace Wikibase\Lib;
 
-use Babel;
 use ExtensionRegistry;
 use IContextSource;
 use Language;
 use LanguageConverter;
+use MediaWiki\Babel\Babel;
 use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Languages\LanguageFallback;
