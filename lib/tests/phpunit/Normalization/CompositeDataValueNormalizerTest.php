@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Tests\Normalization;
 
-use DataValues\DataValue;
+use DataValues\UnknownValue;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Normalization\CompositeDataValueNormalizer;
 use Wikibase\Lib\Normalization\DataValueNormalizer;
@@ -19,17 +19,17 @@ use Wikibase\Lib\Normalization\DataValueNormalizer;
 class CompositeDataValueNormalizerTest extends TestCase {
 
 	public function testEmpty(): void {
-		$value = $this->createMock( DataValue::class );
+		$value = new UnknownValue( null );
 		$normalizer = new CompositeDataValueNormalizer( [] );
 
 		$this->assertSame( $value, $normalizer->normalize( $value ) );
 	}
 
 	public function testThreeNormalizers(): void {
-		$value0 = $this->createMock( DataValue::class );
-		$value1 = $this->createMock( DataValue::class );
-		$value2 = $this->createMock( DataValue::class );
-		$value3 = $this->createMock( DataValue::class );
+		$value0 = new UnknownValue( null );
+		$value1 = new UnknownValue( null );
+		$value2 = new UnknownValue( null );
+		$value3 = new UnknownValue( null );
 
 		$normalizer1 = $this->createMock( DataValueNormalizer::class );
 		$normalizer1->expects( $this->once() )
