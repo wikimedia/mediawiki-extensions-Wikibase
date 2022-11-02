@@ -53,6 +53,43 @@
 			"message": "The provided patch is invalid"
 		}
 	},
+	"InvalidPatchOperationExample": {
+		"value": {
+			"code": "invalid-patch-operation",
+			"message": "Incorrect JSON patch operation: '{op}'",
+			"context": {
+				"operation": {
+					"op": "{op}",
+					"path": "/some/path"
+				}
+			}
+		}
+	},
+	"InvalidPatchFieldTypeExample": {
+		"value": {
+			"code": "invalid-patch-field-type",
+			"message": "The value of '{field}' must be of type string",
+			"context": {
+				"operation": {
+					"op": "remove",
+					"path": [ "not", "a", "string" ]
+				},
+				"field": "path"
+			}
+		}
+	},
+	"MissingJsonPatchFieldExample": {
+		"value": {
+			"code": "missing-json-patch-field",
+			"message": "Missing '{field}' in JSON patch",
+			"context": {
+				"operation": {
+					"op": "remove"
+				},
+				"field": "path"
+			}
+		}
+	},
 	"CannotApplyPatchExample": {
 		"value": {
 			"code": "cannot-apply-patch",
@@ -62,7 +99,56 @@
 	"PatchTestFailedExample": {
 		"value": {
 			"code": "patch-test-failed",
-			"message": "Test operation in the patch provided failed"
+			"message": "Test operation in the provided patch failed. At path '{path}' expected '{expected}', actual: '{actual}'",
+			"context": {
+				"operation": {
+					"op": "test",
+					"path": "/some/path",
+					"value": "expected value"
+				},
+				"actual-value": "actual value"
+			}
+		}
+	},
+	"PatchTargetNotFoundExample": {
+		"value": {
+			"code": "patch-target-not-found",
+			"message": "Target '{target}' not found on the resource",
+			"context": {
+				"operation": {
+					"op": "replace",
+					"path": "/some/path",
+					"value": "some value"
+				},
+				"field": "path"
+			}
+		}
+	},
+	"PatchedStatementInvalidExample": {
+		"value": {
+			"code": "patched-statement-invalid",
+			"message": "The patch results in an invalid statement which cannot be stored"
+		}
+	},
+	"PatchedStatementValueTypeMismatchExample": {
+		"value": {
+			"code": "patched-statement-value-type-mismatch",
+			"message": "Value of '{property-id}' does not match property data type after the changes",
+			"context": {
+				"patched-statement": {
+					"id": "Q42$b7526300-4ac5-a529-3a91-c8a0120673be",
+					"mainsnak": {
+						"snaktype": "value",
+						"datatype": "string",
+						"datavalue": {
+							"type": "string",
+							"value": "potato"
+						},
+						"property": "P31"
+					}
+				},
+				"property-id": "P31"
+			}
 		}
 	},
 	"ItemNotFoundExample": {

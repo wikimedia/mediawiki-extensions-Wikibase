@@ -36,6 +36,18 @@
 		},
 		"required": [ "code", "message" ]
 	},
+	"ContextError": {
+		"allOf": [
+			{ "$ref": "#/Error" },
+			{
+				"properties": {
+					"context": {
+						"type": "object"
+					}
+				}
+			}
+		]
+	},
 	"QualifiersResponseRequired": {
 		"additionalProperties": {
 			"items": {

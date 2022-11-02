@@ -258,7 +258,7 @@
 		"description": "The provided JSON Patch is invalid",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
 				"examples": {
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
 					"invalid-operation-change-statement-id": {
@@ -267,7 +267,10 @@
 					"invalid-operation-change-property-of-statement": {
 						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
 					},
-					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" }
+					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
+					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
+					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
+					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
 				}
 			}
 		},
@@ -282,7 +285,7 @@
 		"description": "The provided JSON Patch is invalid",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
@@ -292,7 +295,10 @@
 					"invalid-operation-change-property-of-statement": {
 						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
 					},
-					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" }
+					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
+					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
+					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
+					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
 				}
 			}
 		},
@@ -307,10 +313,11 @@
 		"description": "The provided JSON Patch cannot be applied to the given statement",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
 				"examples": {
 					"cannot-apply-patch": { "$ref": "./examples.json#/CannotApplyPatchExample" },
-					"patch-test-failed": { "$ref": "./examples.json#/PatchTestFailedExample" }
+					"patch-test-failed": { "$ref": "./examples.json#/PatchTestFailedExample" },
+					"patch-target-not-found": { "$ref": "./examples.json#/PatchTargetNotFoundExample" }
 				}
 			}
 		},
@@ -326,11 +333,11 @@
 		"content": {
 			"application/json": {
 				"schema": {
-					"$ref": "./response-parts.json#/Error"
+					"$ref": "./response-parts.json#/ContextError"
 				},
-				"example": {
-					"code": "patched-statement-invalid",
-					"message": "The patch results in an invalid statement which cannot be stored"
+				"examples": {
+					"patched-statement-invalid": { "$ref": "./examples.json#/PatchedStatementInvalidExample" },
+					"patched-statement-value-type-mismatch": { "$ref": "./examples.json#/PatchedStatementValueTypeMismatchExample" }
 				}
 			}
 		},
