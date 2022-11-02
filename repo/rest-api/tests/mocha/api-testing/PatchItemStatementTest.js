@@ -350,8 +350,8 @@ describe( 'PATCH statement tests', () => {
 					} ];
 					const response = await newPatchRequestBuilder( testStatementId, patch )
 						.assertValidRequest().makeRequest();
-					assert.strictEqual( response.status, 400 );
-					assert.strictEqual( response.body.code, 'invalid-operation-change-property-of-statement' );
+
+					assertValid400Response( response, 'invalid-operation-change-property-of-statement' );
 				} );
 
 				it( 'rejects Statement ID change', async () => {
@@ -362,8 +362,8 @@ describe( 'PATCH statement tests', () => {
 					} ];
 					const response = await newPatchRequestBuilder( testStatementId, patch )
 						.assertValidRequest().makeRequest();
-					assert.strictEqual( response.status, 400 );
-					assert.strictEqual( response.body.code, 'invalid-operation-change-statement-id' );
+
+					assertValid400Response( response, 'invalid-operation-change-statement-id' );
 				} );
 
 			} );
