@@ -71,7 +71,6 @@ class AddItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 						],
 						'tags' => [ 'edit', 'tags' ],
-						'bot' => true,
 					] )
 				]
 			)

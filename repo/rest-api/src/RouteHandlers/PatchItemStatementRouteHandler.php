@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
@@ -11,6 +12,7 @@ use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
@@ -53,10 +55,11 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 	}
 
 	public static function factory(): Handler {
+		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
 		return new self(
 			WbRestApi::getPatchItemStatement(),
 			new MiddlewareHandler( [
-				new UnexpectedErrorHandlerMiddleware( new ResponseFactory( new ErrorJsonPresenter() ), WikibaseRepo::getLogger() ),
+				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
 				new ContentTypeCheckMiddleware( [
@@ -68,9 +71,10 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 						return $request->getPathParam( self::ITEM_ID_PATH_PARAM );
 					}
 				),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 			] ),
 			new StatementJsonPresenter( WbRestApi::getSerializerFactory()->newStatementSerializer() ),
-			new ResponseFactory( new ErrorJsonPresenter() )
+			$responseFactory
 		);
 	}
 

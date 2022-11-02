@@ -57,7 +57,6 @@ class RemoveStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 					],
 					'bodyContents' => json_encode( [
 						'tags' => [ 'edit', 'tags' ],
-						'bot' => true,
 					] )
 				]
 			)

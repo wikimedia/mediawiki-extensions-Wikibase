@@ -59,12 +59,12 @@ async function getLatestEditMetadata( itemId ) {
 	};
 }
 
-async function protectItem( itemId ) {
+async function changeItemProtectionStatus( itemId, allowedUserGroup ) {
 	const mindy = await action.mindy();
 	await mindy.action( 'protect', {
 		title: `Item:${itemId}`,
 		token: await mindy.token(),
-		protections: 'edit=sysop',
+		protections: `edit=${allowedUserGroup}`,
 		expiry: 'infinite'
 	}, 'POST' );
 }
@@ -88,6 +88,6 @@ module.exports = {
 	createUniqueStringProperty,
 	createRedirectForItem,
 	getLatestEditMetadata,
-	protectItem,
+	changeItemProtectionStatus,
 	newStatementWithRandomStringValue: newStatementSerializationWithRandomStringValue
 };
