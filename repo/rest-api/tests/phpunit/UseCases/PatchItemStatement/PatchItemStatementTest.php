@@ -350,22 +350,24 @@ class PatchItemStatementTest extends TestCase {
 	}
 
 	public function patchExceptionProvider(): Generator {
-		yield [
+		yield 'InvalidPatchedSerializationException' => [
 			new InvalidPatchedSerializationException(),
 			'The patch results in an invalid statement which cannot be stored',
 			'patched-statement-invalid'
 		];
-		yield [
+
+		yield 'InvalidPatchedStatementException' => [
 			new InvalidPatchedStatementException(),
 			'The patch results in an invalid statement which cannot be stored',
 			'patched-statement-invalid'
 		];
+
 		$op = [
 			'op' => 'replace',
 			'path' => '/does/not/exist',
 			'value' => 'x'
 		];
-		yield [
+		yield 'PatchPathException' => [
 			new PatchPathException( '-', $op, 'path' ),
 			"Target '${op['path']}' not found on the resource",
 			'patch-target-not-found',
@@ -374,24 +376,26 @@ class PatchItemStatementTest extends TestCase {
 				'field' => 'path'
 			]
 		];
-		yield [
+
+		yield 'InapplicablePatchException' => [
 			new InapplicablePatchException(),
 			'The provided patch cannot be applied to the statement Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 			'cannot-apply-patch'
 		];
+
 		$testOperation = [
 			'op' => 'test',
 			'path' => '/mainsnak/snaktype',
 			'value' => 'value',
 		];
-		yield [
+		yield 'PatchTestConditionFailedException' => [
 			new PatchTestConditionFailedException(
 				'message',
 				$testOperation,
 				[ 'key' => 'actualValue' ]
 			),
 			"Test operation in the provided patch failed. At path '${testOperation['path']}' " .
-			"expected '" . json_encode( $testOperation[ 'value' ] ) . "', " .
+			"expected '" . json_encode( $testOperation['value'] ) . "', " .
 			"actual: '" . json_encode( [ 'key' => 'actualValue' ] ) . "'",
 			'patch-test-failed',
 			[ "operation" => $testOperation, "actual-value" => [ 'key' => 'actualValue' ] ]
