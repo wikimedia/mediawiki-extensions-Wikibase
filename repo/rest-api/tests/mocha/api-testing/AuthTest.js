@@ -6,7 +6,7 @@ const {
 	createItemWithStatements,
 	createUniqueStringProperty,
 	newStatementWithRandomStringValue,
-	protectItem
+	changeItemProtectionStatus
 } = require( '../helpers/entityHelper' );
 const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
@@ -131,18 +131,34 @@ describe( 'Auth', () => {
 	} );
 
 	describe( 'Authorization', () => {
-		before( async () => {
-			await protectItem( itemId );
-		} );
+		function assertPermissionDenied( response ) {
+			assert.strictEqual( response.status, 403 );
+			assert.strictEqual( response.body.httpCode, 403 );
+			assert.strictEqual( response.body.httpReason, 'Forbidden' );
+			assert.strictEqual( response.body.error, 'rest-write-denied' );
+		}
 
 		editRequests.forEach( ( { newRequestBuilder } ) => {
-			it( `Permission denied for protected item - ${newRequestBuilder().getRouteDescription()}`, async () => {
-				const response = await newRequestBuilder().makeRequest();
+			describe( 'Protected item', () => {
+				before( async () => {
+					await changeItemProtectionStatus( itemId, 'sysop' ); // protect
+				} );
 
-				assert.strictEqual( response.status, 403 );
-				assert.strictEqual( response.body.httpCode, 403 );
-				assert.strictEqual( response.body.httpReason, 'Forbidden' );
-				assert.strictEqual( response.body.error, 'rest-write-denied' );
+				after( async () => {
+					await changeItemProtectionStatus( itemId, 'all' ); // unprotect
+				} );
+
+				it( `Permission denied - ${newRequestBuilder().getRouteDescription()}`, async () => {
+					assertPermissionDenied( await newRequestBuilder().makeRequest() );
+				} );
+			} );
+
+			it( `Unauthorized bot edit - ${newRequestBuilder().getRouteDescription()}`, async () => {
+				assertPermissionDenied(
+					await newRequestBuilder()
+						.withJsonBodyParam( 'bot', true )
+						.makeRequest()
+				);
 			} );
 		} );
 	} );
