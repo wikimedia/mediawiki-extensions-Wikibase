@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\DataAccess;
 
+use MediaWiki\Permissions\PermissionManager;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use RequestContext;
@@ -36,13 +37,7 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 		$itemToUpdate->setLabel( $newLabelLanguageCode, $newLabel );
 		$editSummary = $this->createMock( EditSummary::class );
 
-		$updater = new MediaWikiEditEntityFactoryItemUpdater(
-			RequestContext::getMain(),
-			WikibaseRepo::getEditEntityFactory(),
-			new NullLogger(),
-			$this->createStub( EditSummaryFormatter::class )
-		);
-		$newRevision = $updater->update(
+		$newRevision = $this->newItemUpdater()->update(
 			$itemToUpdate,
 			new EditMetadata( [], false, $editSummary )
 		);
@@ -66,13 +61,7 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 
 		$itemToUpdate->getStatements()->removeStatementsWithGuid( $statementId );
 
-		$updater = new MediaWikiEditEntityFactoryItemUpdater(
-			RequestContext::getMain(),
-			WikibaseRepo::getEditEntityFactory(),
-			new NullLogger(),
-			$this->createStub( EditSummaryFormatter::class )
-		);
-		$newRevision = $updater->update(
+		$newRevision = $this->newItemUpdater()->update(
 			$itemToUpdate,
 			new EditMetadata( [], false, StatementEditSummary::newRemoveSummary( null, $statementToRemove ) )
 		);
@@ -97,13 +86,7 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 
 		$itemToUpdate->getStatements()->replaceStatement( $statementGuid, $newStatement );
 
-		$updater = new MediaWikiEditEntityFactoryItemUpdater(
-			RequestContext::getMain(),
-			WikibaseRepo::getEditEntityFactory(),
-			new NullLogger(),
-			$this->createStub( EditSummaryFormatter::class )
-		);
-		$newRevision = $updater->update(
+		$newRevision = $this->newItemUpdater()->update(
 			$itemToUpdate,
 			new EditMetadata( [], false, StatementEditSummary::newReplaceSummary( null, $newStatement ) )
 		);
@@ -118,6 +101,19 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 			__METHOD__,
 			$this->getTestUser()->getUser(),
 			EDIT_NEW
+		);
+	}
+
+	private function newItemUpdater(): MediaWikiEditEntityFactoryItemUpdater {
+		$permissionManager = $this->createStub( PermissionManager::class );
+		$permissionManager->method( $this->anything() )->willReturn( true );
+
+		return new MediaWikiEditEntityFactoryItemUpdater(
+			RequestContext::getMain(),
+			WikibaseRepo::getEditEntityFactory(),
+			new NullLogger(),
+			$this->createStub( EditSummaryFormatter::class ),
+			$permissionManager
 		);
 	}
 

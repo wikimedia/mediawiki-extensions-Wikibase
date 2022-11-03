@@ -68,7 +68,7 @@ describe( 'DELETE statement', () => {
 				} );
 
 				it( 'can remove a statement with edit metadata provided', async () => {
-					const user = await action.mindy();
+					const user = await action.robby(); // robby is a bot
 					const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
 					const editSummary = 'omg look i removed a statement';
 					const response =

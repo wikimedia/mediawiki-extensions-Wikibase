@@ -4,10 +4,12 @@ namespace Wikibase\Repo\Tests\RestApi\DataAccess;
 
 use Generator;
 use IContextSource;
+use MediaWiki\Permissions\PermissionManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Status;
+use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Lib\Store\EntityRevision;
@@ -49,13 +51,21 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 	 */
 	private $summaryFormatter;
 
+	/**
+	 * @var MockObject|PermissionManager
+	 */
+	private $permissionManager;
+
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->context = $this->createStub( IContextSource::class );
+		$this->context->method( 'getUser' )->willReturn( $this->createStub( User::class ) );
 		$this->editEntityFactory = $this->createStub( MediawikiEditEntityFactory::class );
 		$this->logger = $this->createStub( LoggerInterface::class );
 		$this->summaryFormatter = $this->createStub( EditSummaryFormatter::class );
+		$this->permissionManager = $this->createStub( PermissionManager::class );
+		$this->permissionManager->method( 'userHasRight' )->willReturn( true );
 	}
 
 	/**
@@ -159,12 +169,28 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 		);
 	}
 
+	public function testGivenUserWithoutBotRight_throwsForBotEdit(): void {
+		$this->permissionManager = $this->createMock( PermissionManager::class );
+		$this->permissionManager->expects( $this->once() )
+			->method( 'userHasRight' )
+			->with( $this->context->getUser(), 'bot' )
+			->willReturn( false );
+
+		$this->expectException( \RuntimeException::class );
+
+		$this->newItemUpdater()->update(
+			$this->createStub( Item::class ),
+			new EditMetadata( [], true, $this->createStub( EditSummary::class ) )
+		);
+	}
+
 	private function newItemUpdater(): MediaWikiEditEntityFactoryItemUpdater {
 		return new MediaWikiEditEntityFactoryItemUpdater(
-			$this->createStub( IContextSource::class ),
+			$this->context,
 			$this->editEntityFactory,
 			$this->logger,
-			$this->summaryFormatter
+			$this->summaryFormatter,
+			$this->permissionManager
 		);
 	}
 

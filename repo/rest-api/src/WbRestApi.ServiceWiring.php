@@ -113,7 +113,8 @@ return [
 			RequestContext::getMain(),
 			WikibaseRepo::getEditEntityFactory( $services ),
 			WikibaseRepo::getLogger( $services ),
-			new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter( $services ) )
+			new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter( $services ) ),
+			$services->getPermissionManager()
 		);
 	},
 
