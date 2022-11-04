@@ -69,6 +69,7 @@ class PatchStatementRouteHandler extends SimpleHandler {
 					ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON,
 					ContentTypeCheckMiddleware::TYPE_JSON_PATCH,
 				] ),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					function ( RequestInterface $request ): string {
 						return RequestPreconditionCheck::getItemIdPrefixFromStatementId(
@@ -76,7 +77,6 @@ class PatchStatementRouteHandler extends SimpleHandler {
 						);
 					}
 				),
-				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 			] ),
 			new StatementJsonPresenter( $statementSerializer ),
 			$responseFactory
