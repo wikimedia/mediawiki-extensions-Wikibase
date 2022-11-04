@@ -139,21 +139,36 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 		);
 		// TODO: Fix case insensitive: T242644
 
-		$conditions = [];
-		// Note: Order of tables is important here for proper joins
-		$tables = [ 'wbt_term_in_lang', 'wbt_text_in_lang', 'wbt_text' ];
+		$queryBuilder = $dbr->newSelectQueryBuilder();
+
+		$queryBuilder->select( [ 'wbtl_id', 'wbtl_type_id', 'wbxl_language', 'wbx_text' ] );
+
+		if ( $entityType === 'item' ) {
+			$queryBuilder->select( 'wbit_item_id' )
+				->from( 'wbt_item_terms' )
+				->join( 'wbt_term_in_lang', null, 'wbit_term_in_lang_id=wbtl_id' );
+		} elseif ( $entityType === 'property' ) {
+			$queryBuilder->select( 'wbpt_property_id' )
+				->from( 'wbt_property_terms' )
+				->join( 'wbt_term_in_lang', null, 'wbpt_term_in_lang_id=wbtl_id' );
+		} else {
+			throw new InvalidArgumentException( 'Unknown entity type for search: ' . $entityType );
+		}
+
+		$queryBuilder->join( 'wbt_text_in_lang', null, 'wbtl_text_in_lang_id=wbxl_id' )
+			->join( 'wbt_text', null, 'wbxl_text_id=wbx_id' );
 
 		$language = $mask->getLanguage();
 		if ( $language !== null ) {
-			$conditions['wbxl_language'] = $language;
+			$queryBuilder->where( [ 'wbxl_language' => $language ] );
 		}
 
 		$text = $mask->getText();
 		if ( $text !== null ) {
 			if ( $options['prefixSearch'] ) {
-				$conditions[] = 'wbx_text' . $dbr->buildLike( $text, $dbr->anyString() );
+				$queryBuilder->where( 'wbx_text' . $dbr->buildLike( $text, $dbr->anyString() ) );
 			} else {
-				$conditions['wbx_text'] = $text;
+				$queryBuilder->where( [ 'wbx_text' => $text ] );
 			}
 		}
 
@@ -162,7 +177,9 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 		}
 		if ( $termType !== null ) {
 			try {
-				$conditions['wbtl_type_id'] = $this->typeIdsAcquirer->acquireTypeIds( [ $termType ] )[$termType];
+				$queryBuilder->where( [
+					'wbtl_type_id' => $this->typeIdsAcquirer->acquireTypeIds( [ $termType ] )[$termType],
+				] );
 			} catch ( NameTableAccessException $e ) {
 				// Edge case: attempting to do a term lookup before the first insert of the respective term type. Unlikely to happen in
 				// production, but annoying/confusing if it happens in tests.
@@ -170,37 +187,11 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 			}
 		}
 
-		$fields = [ 'wbtl_id', 'wbtl_type_id', 'wbxl_language', 'wbx_text' ];
-		$joinConditions = [
-			'wbt_text_in_lang' => [ 'JOIN', 'wbtl_text_in_lang_id=wbxl_id' ],
-			'wbt_text' => [ 'JOIN', 'wbxl_text_id=wbx_id' ],
-		];
-
-		if ( $entityType === 'item' ) {
-			$tables[] = 'wbt_item_terms';
-			$fields[] = 'wbit_item_id';
-			$joinConditions['wbt_term_in_lang'] = [ 'JOIN', 'wbit_term_in_lang_id=wbtl_id' ];
-		} elseif ( $entityType === 'property' ) {
-			$tables[] = 'wbt_property_terms';
-			$fields[] = 'wbpt_property_id';
-			$joinConditions['wbt_term_in_lang'] = [ 'JOIN', 'wbpt_term_in_lang_id=wbtl_id' ];
-		} else {
-			throw new InvalidArgumentException( 'Unknown entity type for search: ' . $entityType );
-		}
-
-		$queryOptions = [];
 		if ( isset( $options['LIMIT'] ) && $options['LIMIT'] > 0 ) {
-			$queryOptions['LIMIT'] = $options['LIMIT'];
+			$queryBuilder->limit( $options['LIMIT'] );
 		}
 
-		return $dbr->select(
-			$tables,
-			$fields,
-			$conditions,
-			__METHOD__,
-			$queryOptions,
-			$joinConditions
-		);
+		return $queryBuilder->caller( __METHOD__ )->fetchResultSet();
 	}
 
 	/**
