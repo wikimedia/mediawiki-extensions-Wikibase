@@ -122,16 +122,14 @@ class PageHistoryPagerHookHandlerTest extends TestCase {
 			return $object;
 		}, $availableProperties );
 
-		$hasNext = [];
+		$valid = [];
 		for ( $i = 1; $i < count( $summaries ); $i++ ) {
-			$hasNext[] = true;
+			$valid[] = true;
 		}
-
-		$this->resultWrapper->method( 'next' )
-			->willReturnOnConsecutiveCalls( ...$hasNext );
+		$valid[] = false;
 
 		$this->resultWrapper->method( 'valid' )
-			->willReturnOnConsecutiveCalls( ...$hasNext );
+			->willReturnOnConsecutiveCalls( ...$valid );
 
 		$this->resultWrapper->method( 'current' )
 			->willReturnOnConsecutiveCalls( ...$summaries );
