@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests;
 
 use Language;
 use MediaWiki\Languages\LanguageFallback;
+use MediaWiki\MainConfigNames;
 use MediaWikiIntegrationTestCase;
 use MWException;
 use RequestContext;
@@ -24,6 +25,12 @@ use Wikibase\Lib\WikibaseContentLanguages;
  * @author Liangent < liangent@gmail.com >
  */
 class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
+
+	public function setUp(): void {
+		parent::setUp();
+
+		$this->overrideConfigValue( MainConfigNames::UsePigLatinVariant, false );
+	}
 
 	/**
 	 * @param array $expectedItems
