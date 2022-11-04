@@ -60,12 +60,14 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		$site1 = new MediaWikiSite();
 		$site1->setGlobalId( 'mywiki' );
 		$site1->setGroup( 'allowedgroup' );
-		$site1->setLinkPath( 'https://my.test/$1' );
+		$site1->setLinkPath( 'https://my.test/wiki/$1' );
+		$site1->setFilePath( 'https://my.test/w/$1' );
 
 		$site2 = new MediaWikiSite();
 		$site2->setGlobalId( 'otherwiki' );
 		$site2->setGroup( 'othergroup' );
-		$site2->setLinkPath( 'https://other.test/$1' );
+		$site2->setLinkPath( 'https://other.test/wiki/$1' );
+		$site2->setFilePath( 'https://other.test/w/$1' );
 
 		$nonMwSite = new Site();
 		$nonMwSite->setGlobalId( 'mysite' );
@@ -78,10 +80,12 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 				[ $site1, $site2 ],
 				[ 'allowedgroup', 'othergroup' ],
 				[],
-				'{"mywiki":{"shortName":"","name":"","id":"mywiki","pageUrl":"//my.test/$1",' .
-				'"apiUrl":"","languageCode":null,"group":"allowedgroup"},' .
-				'"otherwiki":{"shortName":"","name":"","id":"otherwiki","pageUrl":"//other.test/$1",' .
-				'"apiUrl":"","languageCode":null,"group":"othergroup"}}'
+				'{"mywiki":{"shortName":"","name":"","id":"mywiki",' .
+				'"pageUrl":"//my.test/wiki/$1","apiUrl":"//my.test/w/api.php",' .
+				'"languageCode":null,"group":"allowedgroup"},' .
+				'"otherwiki":{"shortName":"","name":"","id":"otherwiki",' .
+				'"pageUrl":"//other.test/wiki/$1","apiUrl":"//other.test/w/api.php",' .
+				'"languageCode":null,"group":"othergroup"}}'
 			],
 			'single site in special group' => [
 				[ $site1 ],
@@ -89,8 +93,8 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 				[ 'allowedgroup' ],
 				'{"mywiki":{"shortName":"(wikibase-sitelinks-sitename-mywiki)",' .
 				'"name":"(wikibase-sitelinks-sitename-mywiki)",' .
-				'"id":"mywiki","pageUrl":"//my.test/$1",' .
-				'"apiUrl":"","languageCode":null,"group":"special"}}'
+				'"id":"mywiki","pageUrl":"//my.test/wiki/$1",' .
+				'"apiUrl":"//my.test/w/api.php","languageCode":null,"group":"special"}}'
 			],
 			'single non-MediaWiki site in sitelinkgroups' => [
 				[ $nonMwSite ],
@@ -160,11 +164,13 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		$site1 = new MediaWikiSite();
 		$site1->setGlobalId( 'wiki1' );
 		$site1->setGroup( 'group1' );
-		$site1->setLinkPath( 'https://one.test/$1' );
+		$site1->setLinkPath( 'https://one.test/wiki/$1' );
+		$site1->setFilePath( 'https://one.test/w/$1' );
 		$site2 = new MediaWikiSite();
 		$site2->setGlobalId( 'wiki2' );
 		$site2->setGroup( 'group2' );
-		$site2->setLinkPath( 'https://two.test/$1' );
+		$site2->setLinkPath( 'https://two.test/wiki/$1' );
+		$site2->setFilePath( 'https://two.test/w/$1' );
 		$module = new SitesModule(
 			$clientSettings,
 			$repoSettings,
@@ -211,6 +217,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		$site = new MediaWikiSite();
 		$site->setGlobalId( 'siteid' );
 		$site->setGroup( 'allowedgroup' );
+		$site->setFilePath( 'https://site.test/w/$1' );
 
 		return [
 			'empty result' => [
