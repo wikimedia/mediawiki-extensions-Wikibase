@@ -38,6 +38,13 @@ class MonolingualTextParser extends StringValueParser {
 		}
 
 		$lang = $this->getOption( 'valuelang' );
+		if ( !is_string( $lang ) ) {
+			throw new ParseException(
+				'MonolingualTextValue language option must be a string.',
+				$value,
+				self::FORMAT_NAME
+			);
+		}
 
 		try {
 			return new MonolingualTextValue( trim( $lang ), trim( $value ) );
