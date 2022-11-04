@@ -7,6 +7,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
@@ -15,6 +16,7 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementValueTypeException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
@@ -360,6 +362,18 @@ class PatchItemStatementTest extends TestCase {
 			new InvalidPatchedStatementException(),
 			'The patch results in an invalid statement which cannot be stored',
 			'patched-statement-invalid'
+		];
+
+		$propertyId = new NumericPropertyId( 'P123' );
+		$patchedStatement = NewStatement::forProperty( $propertyId )
+			->withGuid( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+			->withValue( 'potato' )
+			->build();
+		yield 'InvalidPatchedStatementValueTypeException' => [
+			new InvalidPatchedStatementValueTypeException( $patchedStatement, $propertyId ),
+			"Value of '$propertyId' does not match property data type after the changes",
+			'patched-statement-value-type-mismatch',
+			[ 'patched-statement' => $patchedStatement, 'property-id' => $propertyId ]
 		];
 
 		$op = [

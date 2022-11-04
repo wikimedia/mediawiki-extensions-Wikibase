@@ -10,6 +10,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementValueTypeException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -97,6 +98,16 @@ class PatchItemStatement {
 
 		try {
 			$patchedStatement = $this->statementPatcher->patch( $statementToPatch, $request->getPatch() );
+		} catch ( InvalidPatchedStatementValueTypeException $e ) {
+			$propertyId = $e->getPropertyId()->getSerialization();
+			return new PatchItemStatementErrorResponse(
+				ErrorResponse::PATCHED_STATEMENT_VALUE_TYPE_MISMATCH,
+				"Value of '$propertyId' does not match property data type after the changes",
+				[
+					'patched-statement' => $e->getPatchedStatement(),
+					'property-id' => $propertyId
+				]
+			);
 		} catch ( InvalidPatchedSerializationException | InvalidPatchedStatementException $e ) {
 			return new PatchItemStatementErrorResponse(
 				ErrorResponse::PATCHED_STATEMENT_INVALID,

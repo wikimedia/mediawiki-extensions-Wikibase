@@ -450,27 +450,32 @@ describe( 'PATCH statement tests', () => {
 				} );
 
 				it( 'mismatching value type', async () => {
+					const datavalue = {
+						value: {
+							amount: '+10.38',
+							upperBound: '+10.385',
+							lowerBound: '+10.375',
+							unit: 'http://www.wikidata.org/entity/Q712226'
+						},
+						type: 'quantity'
+					};
 					const patch = [
-						{
-							op: 'replace',
-							path: '/mainsnak/datavalue',
-							value: {
-								value: {
-									'entity-type': 'item',
-									id: testItemId
-								},
-								type: 'wikibase-entityid'
-							}
-						}
+						{ op: 'replace', path: '/mainsnak/datavalue', value: datavalue }
 					];
+
 					const response = await newPatchRequestBuilder( testStatementId, patch )
 						.assertValidRequest()
 						.makeRequest();
 
 					assert.strictEqual( response.statusCode, 422 );
-					assert.strictEqual( response.body.code, 'patched-statement-invalid' );
+					const body = response.body;
+					assert.strictEqual( body.code, 'patched-statement-value-type-mismatch' );
+					assert.include( body.message, `'${testPropertyId}'` );
+					assert.strictEqual( body.context[ 'property-id' ], testPropertyId );
+					assert.deepStrictEqual( body.context[ 'patched-statement' ].mainsnak.datavalue, datavalue );
 				} );
 			} );
+
 		} );
 
 	} );
