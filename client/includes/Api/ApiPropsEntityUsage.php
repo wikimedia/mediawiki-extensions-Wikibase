@@ -126,19 +126,14 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 
 		if ( $params['continue'] !== null ) {
 			$db = $this->getDB();
-			[ $pageContinueSql, $entityContinueSql, $aspectContinueSql ] = explode( '|', $params['continue'], 3 );
-			$pageContinue = (int)$pageContinueSql;
-			$entityContinue = $db->addQuotes( $entityContinueSql );
-			$aspectContinue = $db->addQuotes( $aspectContinueSql );
+			[ $pageContinue, $entityContinue, $aspectContinue ] = explode( '|', $params['continue'], 3 );
 			// Filtering out results that have been shown already and
 			// starting the query from where it ended.
-			$this->addWhere(
-				"eu_page_id > $pageContinue OR " .
-				"(eu_page_id = $pageContinue AND " .
-				"(eu_entity_id > $entityContinue OR " .
-				"(eu_entity_id = $entityContinue AND " .
-				"eu_aspect >= $aspectContinue)))"
-			);
+			$this->addWhere( $db->buildComparison( '>=', [
+				'eu_page_id' => (int)$pageContinue,
+				'eu_entity_id' => $entityContinue,
+				'eu_aspect' => $aspectContinue,
+			] ) );
 		}
 
 		$orderBy = [ 'eu_page_id' , 'eu_entity_id' ];

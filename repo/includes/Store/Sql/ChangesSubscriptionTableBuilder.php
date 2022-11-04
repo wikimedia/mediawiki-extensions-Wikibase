@@ -191,12 +191,10 @@ class ChangesSubscriptionTableBuilder {
 			$continuationCondition = '1=1';
 		} else {
 			list( $fromItemId, $fromRowId ) = $continuation;
-			$continuationCondition = 'ips_item_id > ' . (int)$fromItemId
-				. ' OR ( '
-					. 'ips_item_id = ' . (int)$fromItemId
-					. ' AND '
-					. 'ips_row_id > ' . $fromRowId
-				. ' )';
+			$continuationCondition = $db->buildComparison( '>', [
+				'ips_item_id' => (int)$fromItemId,
+				'ips_row_id' => $fromRowId,
+			] );
 		}
 
 		$res = $db->select(
