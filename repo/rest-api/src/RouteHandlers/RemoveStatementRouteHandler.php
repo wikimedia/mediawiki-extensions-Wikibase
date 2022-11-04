@@ -62,6 +62,11 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
+				new ContentTypeCheckMiddleware( [
+					ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON,
+					ContentTypeCheckMiddleware::TYPE_NONE,
+				] ),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					function ( RequestInterface $request ): string {
 						return RequestPreconditionCheck::getItemIdPrefixFromStatementId(
@@ -69,11 +74,6 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 						);
 					}
 				),
-				new ContentTypeCheckMiddleware( [
-					ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON,
-					ContentTypeCheckMiddleware::TYPE_NONE,
-				] ),
-				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 			] )
 		);
 	}

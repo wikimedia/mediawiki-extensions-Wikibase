@@ -66,12 +66,12 @@ class RemoveItemStatementRouteHandler extends SimpleHandler {
 					ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON,
 					ContentTypeCheckMiddleware::TYPE_NONE,
 				] ),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					function ( RequestInterface $request ): string {
 						return $request->getPathParam( self::ITEM_ID_PATH_PARAM );
 					}
 				),
-				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 			] )
 		);
 	}
