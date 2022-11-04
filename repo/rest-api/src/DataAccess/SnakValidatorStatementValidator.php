@@ -24,7 +24,7 @@ class SnakValidatorStatementValidator implements StatementValidator {
 	}
 
 	public function validate( array $statementSerialization, string $source ): ?ValidationError {
-		$error = new ValidationError( '', $source );
+		$error = new ValidationError( $source );
 
 		try {
 			$deserializedStatement = $this->deserializer->deserialize( $statementSerialization );

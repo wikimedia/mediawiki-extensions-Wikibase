@@ -58,12 +58,12 @@ class AddItemStatementValidatorTest extends TestCase {
 
 		$this->assertNotNull( $error );
 		$this->assertSame( AddItemStatementValidator::SOURCE_ITEM_ID, $error->getSource() );
-		$this->assertSame( $itemId, $error->getValue() );
+		$this->assertSame( $itemId, $error->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE] );
 	}
 
 	public function testWithInvalidStatement(): void {
 		$invalidStatement = [ 'this is' => 'not a valid statement' ];
-		$expectedError = new ValidationError( '', AddItemStatementValidator::SOURCE_STATEMENT );
+		$expectedError = new ValidationError( AddItemStatementValidator::SOURCE_STATEMENT );
 		$this->statementValidator = $this->createMock( StatementValidator::class );
 		$this->statementValidator->method( 'validate' )
 			->with( $invalidStatement, AddItemStatementValidator::SOURCE_STATEMENT )
@@ -78,7 +78,10 @@ class AddItemStatementValidatorTest extends TestCase {
 
 	public function testWithCommentTooLong(): void {
 		$comment = str_repeat( 'x', CommentStore::COMMENT_CHARACTER_LIMIT + 1 );
-		$expectedError = new ValidationError( "500", AddItemStatementValidator::SOURCE_COMMENT );
+		$expectedError = new ValidationError(
+			AddItemStatementValidator::SOURCE_COMMENT,
+			[ EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH ]
+		);
 
 		$this->editMetadataValidator = $this->createMock( EditMetadataValidator::class );
 		$this->editMetadataValidator->method( 'validateComment' )
@@ -94,7 +97,10 @@ class AddItemStatementValidatorTest extends TestCase {
 
 	public function testWithInvalidEditTags(): void {
 		$invalidTags = [ 'bad', 'tags' ];
-		$expectedError = new ValidationError( json_encode( $invalidTags ), AddItemStatementValidator::SOURCE_EDIT_TAGS );
+		$expectedError = new ValidationError(
+			AddItemStatementValidator::SOURCE_EDIT_TAGS,
+			[ EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE => json_encode( $invalidTags ) ]
+		);
 
 		$this->editMetadataValidator = $this->createMock( EditMetadataValidator::class );
 		$this->editMetadataValidator->method( 'validateEditTags' )

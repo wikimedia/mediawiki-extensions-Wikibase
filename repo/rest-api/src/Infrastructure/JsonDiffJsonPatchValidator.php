@@ -22,27 +22,24 @@ class JsonDiffJsonPatchValidator implements JsonPatchValidator {
 		// https://github.com/swaggest/json-diff/pull/60
 		foreach ( $patch as $operation ) {
 			if ( !is_array( $operation ) ) {
-				return new ValidationError( '', $source );
+				return new ValidationError( $source );
 			}
 			if ( array_key_exists( 'op', $operation ) && !is_string( $operation['op'] ) ) {
 				return new PatchInvalidFieldTypeValidationError(
-					'op',
 					$source,
-					[ 'operation' => $operation, 'field' => 'op' ]
+					[ self::ERROR_CONTEXT_OPERATION => $operation, self::ERROR_CONTEXT_FIELD => 'op' ]
 				);
 			}
 			if ( array_key_exists( 'path', $operation ) && !is_string( $operation['path'] ) ) {
 				return new PatchInvalidFieldTypeValidationError(
-					'path',
 					$source,
-					[ 'operation' => $operation, 'field' => 'path' ]
+					[ self::ERROR_CONTEXT_OPERATION => $operation, self::ERROR_CONTEXT_FIELD => 'path' ]
 				);
 			}
 			if ( array_key_exists( 'from', $operation ) && !is_string( $operation['from'] ) ) {
 				return new PatchInvalidFieldTypeValidationError(
-					'from',
 					$source,
-					[ 'operation' => $operation, 'field' => 'from' ]
+					[ self::ERROR_CONTEXT_OPERATION => $operation, self::ERROR_CONTEXT_FIELD => 'from' ]
 				);
 			}
 		}
@@ -51,18 +48,16 @@ class JsonDiffJsonPatchValidator implements JsonPatchValidator {
 			JsonPatch::import( $patch );
 		} catch ( MissingFieldException $e ) {
 			return new PatchMissingFieldValidationError(
-				$e->getMissingField(),
 				$source,
-				[ 'operation' => (array)$e->getOperation(), 'field' => $e->getMissingField() ]
+				[ self::ERROR_CONTEXT_OPERATION => (array)$e->getOperation(), self::ERROR_CONTEXT_FIELD => $e->getMissingField() ]
 			);
 		} catch ( UnknownOperationException $e ) {
 			return new PatchInvalidOpValidationError(
-				$e->getOperation()->op,
 				$source,
-				[ 'operation' => (array)$e->getOperation() ]
+				[ self::ERROR_CONTEXT_OPERATION => (array)$e->getOperation() ]
 			);
 		} catch ( Exception $e ) {
-			return new ValidationError( '', $source );
+			return new ValidationError( $source );
 		}
 
 		return null;

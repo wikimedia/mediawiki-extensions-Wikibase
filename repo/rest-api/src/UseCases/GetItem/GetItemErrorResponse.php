@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
@@ -16,13 +17,13 @@ class GetItemErrorResponse extends ErrorResponse {
 			case GetItemValidator::SOURCE_ITEM_ID:
 				return new self(
 					ErrorResponse::INVALID_ITEM_ID,
-					"Not a valid item ID: " . $validationError->getValue()
+					"Not a valid item ID: " . $validationError->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE]
 				);
 
 			case GetItemValidator::SOURCE_FIELDS:
 				return new self(
 					ErrorResponse::INVALID_FIELD,
-					"Not a valid field: " . $validationError->getValue()
+					"Not a valid field: " . $validationError->getContext()[GetItemValidator::ERROR_CONTEXT_FIELD_VALUE]
 				);
 
 			default:

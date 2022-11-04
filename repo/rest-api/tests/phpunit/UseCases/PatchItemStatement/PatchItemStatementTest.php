@@ -34,6 +34,7 @@ use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorRes
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementSuccessResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
@@ -178,7 +179,7 @@ class PatchItemStatementTest extends TestCase {
 			->method( 'validate' )
 			->with( $request )
 			->willReturn(
-				new ValidationError( 'INVALID-ID', PatchItemStatementValidator::SOURCE_ITEM_ID )
+				new ValidationError( PatchItemStatementValidator::SOURCE_ITEM_ID, [ ItemIdValidator::ERROR_CONTEXT_VALUE => 'INVALID-ID' ] )
 			);
 
 		$response = $this->newUseCase()->execute( $request );

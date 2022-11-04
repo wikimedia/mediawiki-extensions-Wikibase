@@ -21,7 +21,7 @@ class ItemIdValidatorTest extends TestCase {
 		$error = ( new ItemIdValidator() )->validate( $invalidId, $source );
 
 		$this->assertSame( $source, $error->getSource() );
-		$this->assertSame( $invalidId, $error->getValue() );
+		$this->assertSame( $invalidId, $error->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE] );
 	}
 
 	public function testWithValidId(): void {

@@ -7,6 +7,9 @@ namespace Wikibase\Repo\RestApi\Validation;
  */
 class EditMetadataValidator {
 
+	public const ERROR_CONTEXT_COMMENT_MAX_LENGTH = 'comment-max-length';
+	public const ERROR_CONTEXT_TAG_VALUE = 'tag-value';
+
 	private int $maxCommentLength;
 	private array $allowedTags;
 
@@ -20,7 +23,7 @@ class EditMetadataValidator {
 
 	public function validateComment( ?string $comment, string $source ): ?ValidationError {
 		if ( $comment !== null && strlen( $comment ) > $this->maxCommentLength ) {
-			return new ValidationError( (string)$this->maxCommentLength, $source );
+			return new ValidationError( $source, [ self::ERROR_CONTEXT_COMMENT_MAX_LENGTH => (string)$this->maxCommentLength ] );
 		}
 
 		return null;
@@ -29,7 +32,7 @@ class EditMetadataValidator {
 	public function validateEditTags( array $tags, string $source ): ?ValidationError {
 		foreach ( $tags as $tag ) {
 			if ( !in_array( $tag, $this->allowedTags ) ) {
-				return new ValidationError( json_encode( $tag ), $source );
+				return new ValidationError( $source, [ self::ERROR_CONTEXT_TAG_VALUE => json_encode( $tag ) ] );
 			}
 		}
 

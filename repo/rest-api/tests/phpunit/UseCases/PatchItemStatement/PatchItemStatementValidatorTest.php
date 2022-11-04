@@ -93,7 +93,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 
 		$this->assertNotNull( $error );
 		$this->assertSame( PatchItemStatementValidator::SOURCE_ITEM_ID, $error->getSource() );
-		$this->assertSame( $itemId, $error->getValue() );
+		$this->assertSame( $itemId, $error->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE] );
 	}
 
 	public function testValidate_withInvalidStatementId(): void {
@@ -113,12 +113,12 @@ class PatchItemStatementValidatorTest extends TestCase {
 
 		$this->assertNotNull( $error );
 		$this->assertSame( PatchItemStatementValidator::SOURCE_STATEMENT_ID, $error->getSource() );
-		$this->assertSame( $statementId, $error->getValue() );
+		$this->assertSame( $statementId, $error->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE] );
 	}
 
 	public function testValidate_withInvalidPatch(): void {
 		$invalidPatch = [ 'this is' => 'not a valid patch' ];
-		$expectedError = new ValidationError( '', PatchItemStatementValidator::SOURCE_PATCH );
+		$expectedError = new ValidationError( PatchItemStatementValidator::SOURCE_PATCH );
 		$this->jsonPatchValidator = $this->createMock( JsonPatchValidator::class );
 		$this->jsonPatchValidator->method( 'validate' )
 			->with( $invalidPatch, PatchItemStatementValidator::SOURCE_PATCH )
@@ -154,7 +154,10 @@ class PatchItemStatementValidatorTest extends TestCase {
 		);
 
 		$this->assertEquals(
-			new ValidationError( "500", PatchItemStatementValidator::SOURCE_COMMENT ),
+			new ValidationError(
+				PatchItemStatementValidator::SOURCE_COMMENT,
+				[ EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH => '500' ]
+			),
 			$error
 		);
 	}
@@ -174,7 +177,10 @@ class PatchItemStatementValidatorTest extends TestCase {
 		);
 
 		$this->assertEquals(
-			new ValidationError( json_encode( $invalid ), PatchItemStatementValidator::SOURCE_EDIT_TAGS ),
+			new ValidationError(
+				PatchItemStatementValidator::SOURCE_EDIT_TAGS,
+				[ EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE => json_encode( $invalid ) ]
+			),
 			$error
 		);
 	}

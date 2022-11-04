@@ -4,8 +4,11 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\RemoveItemStatement;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementErrorResponse;
-use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
+use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
@@ -33,25 +36,34 @@ class RemoveItemStatementErrorResponseTest extends TestCase {
 
 	public function provideValidationError(): \Generator {
 		yield 'from invalid item ID' => [
-			new ValidationError( 'X123', RemoveItemStatementValidator::SOURCE_ITEM_ID ),
+			new ValidationError( PatchItemStatementValidator::SOURCE_ITEM_ID, [ ItemIdValidator::ERROR_CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
 			'Not a valid item ID: X123'
 		];
 
 		yield 'from invalid statement ID' => [
-			new ValidationError( 'Q123$INVALID_STATEMENT_ID', RemoveItemStatementValidator::SOURCE_STATEMENT_ID ),
+			new ValidationError(
+				PatchItemStatementValidator::SOURCE_STATEMENT_ID,
+				[ StatementIdValidator::ERROR_CONTEXT_VALUE => 'Q123$INVALID_STATEMENT_ID' ]
+			),
 			ErrorResponse::INVALID_STATEMENT_ID,
 			'Not a valid statement ID: Q123$INVALID_STATEMENT_ID'
 		];
 
 		yield 'from comment too long' => [
-			new ValidationError( '500', RemoveItemStatementValidator::SOURCE_COMMENT ),
+			new ValidationError(
+				PatchItemStatementValidator::SOURCE_COMMENT,
+				[ EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH => '500' ]
+			),
 			ErrorResponse::COMMENT_TOO_LONG,
 			'Comment must not be longer than 500 characters.'
 		];
 
 		yield 'from invalid tag' => [
-			new ValidationError( 'bad tag', RemoveItemStatementValidator::SOURCE_EDIT_TAGS ),
+			new ValidationError(
+				PatchItemStatementValidator::SOURCE_EDIT_TAGS,
+				[ EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE => 'bad tag' ]
+			),
 			ErrorResponse::INVALID_EDIT_TAG,
 			'Invalid MediaWiki tag: bad tag'
 		];
@@ -61,7 +73,7 @@ class RemoveItemStatementErrorResponseTest extends TestCase {
 		$this->expectException( \LogicException::class );
 
 		RemoveItemStatementErrorResponse::newFromValidationError(
-			new ValidationError( 'X123', 'unknown' )
+			new ValidationError( 'unknown' )
 		);
 	}
 

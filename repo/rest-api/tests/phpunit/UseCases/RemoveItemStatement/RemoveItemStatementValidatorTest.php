@@ -38,13 +38,13 @@ class RemoveItemStatementValidatorTest extends TestCase {
 	/**
 	 * @dataProvider provideInvalidRequest
 	 */
-	public function testValidateFails( array $requestData, string $errorValue, string $errorSource ): void {
+	public function testValidateFails( array $requestData, array $errorContext, string $errorSource ): void {
 		$error = $this->newRemoveItemStatementValidator()->validate(
 			$this->newUseCaseRequest( $requestData )
 		);
 
 		$this->assertNotNull( $error );
-		$this->assertSame( $errorValue, $error->getValue() );
+		$this->assertSame( $errorContext, $error->getContext() );
 		$this->assertSame( $errorSource, $error->getSource() );
 	}
 
@@ -83,7 +83,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => $itemId
 			],
-			$itemId,
+			[ ItemIdValidator::ERROR_CONTEXT_VALUE => $itemId ],
 			RemoveItemStatementValidator::SOURCE_ITEM_ID
 		];
 
@@ -98,7 +98,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => $itemId
 			],
-			$statementId,
+			[ StatementIdValidator::ERROR_CONTEXT_VALUE => $statementId ],
 			RemoveItemStatementValidator::SOURCE_STATEMENT_ID
 		];
 		yield 'Invalid statement ID (without item ID)' => [
@@ -110,7 +110,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => null
 			],
-			$statementId,
+			[ StatementIdValidator::ERROR_CONTEXT_VALUE => $statementId ],
 			RemoveItemStatementValidator::SOURCE_STATEMENT_ID
 		];
 
@@ -125,7 +125,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => $itemId
 			],
-			strval( CommentStore::COMMENT_CHARACTER_LIMIT ),
+			[ EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH => strval( CommentStore::COMMENT_CHARACTER_LIMIT ) ],
 			RemoveItemStatementValidator::SOURCE_COMMENT
 		];
 
@@ -140,7 +140,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => null
 			],
-			json_encode( $invalidTag ),
+			[ EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE => json_encode( $invalidTag ) ],
 			RemoveItemStatementValidator::SOURCE_EDIT_TAGS
 		];
 	}

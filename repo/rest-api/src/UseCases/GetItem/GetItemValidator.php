@@ -13,6 +13,8 @@ class GetItemValidator {
 	public const SOURCE_ITEM_ID = 'item ID';
 	public const SOURCE_FIELDS = 'fields';
 
+	public const ERROR_CONTEXT_FIELD_VALUE = 'field-value';
+
 	private ItemIdValidator $itemIdValidator;
 
 	public function __construct( ItemIdValidator $itemIdValidator ) {
@@ -27,7 +29,7 @@ class GetItemValidator {
 	private function validateFields( array $fields ): ?ValidationError {
 		foreach ( $fields as $field ) {
 			if ( !in_array( $field, ItemData::VALID_FIELDS ) ) {
-				return new ValidationError( $field, self::SOURCE_FIELDS );
+				return new ValidationError( self::SOURCE_FIELDS, [ self::ERROR_CONTEXT_FIELD_VALUE => $field ] );
 			}
 		}
 		return null;

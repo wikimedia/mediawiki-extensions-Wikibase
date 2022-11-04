@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
@@ -29,13 +30,13 @@ class AddItemStatementErrorResponseTest extends TestCase {
 
 	public function validationErrorDataProvider(): \Generator {
 		yield "from invalid item ID" => [
-			new ValidationError( "X123", AddItemStatementValidator::SOURCE_ITEM_ID ),
+			new ValidationError( AddItemStatementValidator::SOURCE_ITEM_ID, [ ItemIdValidator::ERROR_CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
 			"Not a valid item ID: X123"
 		];
 
 		yield "from invalid statement data" => [
-			new ValidationError( json_encode( [ "invalid" => "statement" ] ), AddItemStatementValidator::SOURCE_STATEMENT ),
+			new ValidationError( AddItemStatementValidator::SOURCE_STATEMENT ),
 			ErrorResponse::INVALID_STATEMENT_DATA,
 			"Invalid statement data provided"
 		];
@@ -45,7 +46,7 @@ class AddItemStatementErrorResponseTest extends TestCase {
 		$this->expectException( \LogicException::class );
 
 		AddItemStatementErrorResponse::newFromValidationError(
-			new ValidationError( "X123", 'unknown' )
+			new ValidationError( 'unknown' )
 		);
 	}
 

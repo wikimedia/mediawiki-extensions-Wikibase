@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
@@ -29,13 +30,13 @@ class GetItemErrorResponseTest extends TestCase {
 
 	public function validationErrorDataProvider(): \Generator {
 		yield "from invalid item ID" => [
-			new ValidationError( "X123", GetItemValidator::SOURCE_ITEM_ID ),
+			new ValidationError( GetItemValidator::SOURCE_ITEM_ID, [ ItemIdValidator::ERROR_CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
 			"Not a valid item ID: X123"
 		];
 
 		yield "from invalid field" => [
-			new ValidationError( "unknown_field", GetItemValidator::SOURCE_FIELDS ),
+			new ValidationError( GetItemValidator::SOURCE_FIELDS, [ GetItemValidator::ERROR_CONTEXT_FIELD_VALUE => 'unknown_field' ] ),
 			ErrorResponse::INVALID_FIELD,
 			"Not a valid field: unknown_field"
 		];
@@ -45,7 +46,7 @@ class GetItemErrorResponseTest extends TestCase {
 		$this->expectException( \LogicException::class );
 
 		GetItemErrorResponse::newFromValidationError(
-			new ValidationError( "X123", 'unknown' )
+			new ValidationError( 'unknown' )
 		);
 	}
 

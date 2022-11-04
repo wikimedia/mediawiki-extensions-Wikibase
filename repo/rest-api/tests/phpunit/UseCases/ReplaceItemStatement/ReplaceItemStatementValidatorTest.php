@@ -93,7 +93,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 
 		$this->assertNotNull( $error );
 		$this->assertSame( ReplaceItemStatementValidator::SOURCE_ITEM_ID, $error->getSource() );
-		$this->assertSame( $itemId, $error->getValue() );
+		$this->assertSame( $itemId, $error->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE] );
 	}
 
 	public function testValidate_withInvalidStatementId(): void {
@@ -113,12 +113,12 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 
 		$this->assertNotNull( $error );
 		$this->assertSame( ReplaceItemStatementValidator::SOURCE_STATEMENT_ID, $error->getSource() );
-		$this->assertSame( $statementId, $error->getValue() );
+		$this->assertSame( $statementId, $error->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE] );
 	}
 
 	public function testValidate_withInvalidStatement(): void {
 		$invalidStatement = [ 'this is' => 'not a valid statement' ];
-		$expectedError = new ValidationError( '', ReplaceItemStatementValidator::SOURCE_STATEMENT );
+		$expectedError = new ValidationError( ReplaceItemStatementValidator::SOURCE_STATEMENT );
 		$this->statementValidator = $this->createMock( StatementValidator::class );
 		$this->statementValidator->method( 'validate' )
 			->with( $invalidStatement, ReplaceItemStatementValidator::SOURCE_STATEMENT )
@@ -154,7 +154,10 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 		);
 
 		$this->assertEquals(
-			new ValidationError( "500", ReplaceItemStatementValidator::SOURCE_COMMENT ),
+			new ValidationError(
+				ReplaceItemStatementValidator::SOURCE_COMMENT,
+				[ EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH => '500' ]
+			),
 			$error
 		);
 	}
@@ -174,7 +177,10 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 		);
 
 		$this->assertEquals(
-			new ValidationError( json_encode( $invalid ), ReplaceItemStatementValidator::SOURCE_EDIT_TAGS ),
+			new ValidationError(
+				ReplaceItemStatementValidator::SOURCE_EDIT_TAGS,
+				[ EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE => json_encode( $invalid ) ]
+			),
 			$error
 		);
 	}
