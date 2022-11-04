@@ -166,7 +166,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 		$text = $mask->getText();
 		if ( $text !== null ) {
 			if ( $options['prefixSearch'] ) {
-				$queryBuilder->where( 'wbx_text' . $dbr->buildLike( $text, $dbr->anyString() ) );
+				$queryBuilder->where( 'wbx_text ' . $dbr->buildLike( $text, $dbr->anyString() ) );
 			} else {
 				$queryBuilder->where( [ 'wbx_text' => $text ] );
 			}
