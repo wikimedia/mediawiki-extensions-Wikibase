@@ -142,15 +142,12 @@ class ListSubscribers extends ApiQueryBase {
 				'param-invalid'
 			);
 		}
-		$entityContinueSql = $db->addQuotes( $continueParams[0] );
-		$wikiContinueSql = $db->addQuotes( $continueParams[1] );
 		// Filtering out results that have been shown already and
 		// starting the query from where it ended.
-		$this->addWhere(
-			"cs_entity_id > $entityContinueSql OR " .
-			"(cs_entity_id = $entityContinueSql AND " .
-			"cs_subscriber_id >= $wikiContinueSql)"
-		);
+		$this->addWhere( $db->buildComparison( '>=', [
+			'cs_entity_id' => $continueParams[0],
+			'cs_subscriber_id' => $continueParams[1],
+		] ) );
 	}
 
 	/**

@@ -195,19 +195,14 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 	private function addContinue( string $continueParam ): void {
 		$db = $this->getDB();
-		[ $pageContinueSql, $entityContinueSql, $aspectContinueSql ] = explode( '|', $continueParam, 3 );
-		$pageContinueSql = (int)$pageContinueSql;
-		$entityContinueSql = $db->addQuotes( $entityContinueSql );
-		$aspectContinueSql = $db->addQuotes( $aspectContinueSql );
+		[ $pageContinue, $entityContinue, $aspectContinue ] = explode( '|', $continueParam, 3 );
 		// Filtering out results that have been shown already and
 		// starting the query from where it ended.
-		$this->addWhere(
-			"eu_page_id > $pageContinueSql OR " .
-			"(eu_page_id = $pageContinueSql AND " .
-			"(eu_entity_id > $entityContinueSql OR " .
-			"(eu_entity_id = $entityContinueSql AND " .
-			"eu_aspect >= $aspectContinueSql)))"
-		);
+		$this->addWhere( $db->buildComparison( '>=', [
+			'eu_page_id' => (int)$pageContinue,
+			'eu_entity_id' => $entityContinue,
+			'eu_aspect' => $aspectContinue,
+		] ) );
 	}
 
 	public function getAllowedParams(): array {
