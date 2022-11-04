@@ -5,6 +5,7 @@
 * Removed support for calling `Statement::addNewReference()` and `StatementList` constructor with a
   single array argument, which was deprecated in `Version 9.6.0 (2021-03-31)`. These should now be
   called with a variadic argument list.
+* Added `__serialize()` and `__unserialize()` methods to the `EntityId` interface.
 * Added native type hints to the `Statement` and `StatementList` classes
 * Added `strict_types=1` to `Statement.php`, `StatementList.php`, and related test files
 

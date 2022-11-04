@@ -48,4 +48,24 @@ interface EntityId extends Serializable {
 	 */
 	public function getRepositoryName();
 
+	/**
+	 * This method replaces {@link Serializable::serialize()}.
+	 * Do not call it manually.
+	 * Also, consider using {@link getSerialization()} and an {@link EntityIdParser}
+	 * instead of PHP serialization.
+	 *
+	 * @see https://www.php.net/manual/en/language.oop5.magic.php#object.serialize
+	 */
+	public function __serialize(): array;
+
+	/**
+	 * This method replaces {@link Serializable::unserialize()}.
+	 * Do not call it manually.
+	 * Also, consider using {@link getSerialization()} and an {@link EntityIdParser}
+	 * instead of PHP serialization.
+	 *
+	 * @see https://www.php.net/manual/en/language.oop5.magic.php#object.unserialize
+	 */
+	public function __unserialize( array $data );
+
 }
