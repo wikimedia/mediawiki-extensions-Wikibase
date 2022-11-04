@@ -9,10 +9,12 @@ use Swaggest\JsonDiff\PatchTestOperationFailedException;
 use Swaggest\JsonDiff\PathException;
 use Throwable;
 use Wikibase\DataModel\Serializers\StatementSerializer;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementValueTypeException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer;
@@ -72,10 +74,48 @@ class JsonDiffStatementPatcher implements StatementPatcher {
 			throw new InvalidPatchedSerializationException( $e->getMessage() );
 		}
 
-		if ( !$this->snakValidator->validateStatementSnaks( $patchedStatement )->isValid() ) {
-			throw new InvalidPatchedStatementException();
-		}
+		$this->validateStatementSnaks( $patchedStatement );
 
 		return $patchedStatement;
 	}
+
+	/**
+	 * @throws InvalidPatchedStatementException
+	 */
+	private function validateStatementSnaks( Statement $statement ): void {
+		$snak = $statement->getMainSnak();
+		$this->validateStatementSnak( $statement, $snak );
+
+		foreach ( $statement->getQualifiers() as $snak ) {
+			$this->validateStatementSnak( $statement, $snak );
+		}
+
+		foreach ( $statement->getReferences() as $reference ) {
+			foreach ( $reference->getSnaks() as $snak ) {
+				$this->validateStatementSnak( $statement, $snak );
+			}
+		}
+	}
+
+	/**
+	 * @throws InvalidPatchedStatementException
+	 */
+	private function validateStatementSnak( Statement $statement, Snak $snak ): void {
+		$result = $this->snakValidator->validate( $snak );
+		if ( $result->isValid() ) {
+			return;
+		}
+
+		foreach ( $result->getErrors() as $error ) {
+			if ( $error->getCode() === 'bad-value-type' ) {
+				throw new InvalidPatchedStatementValueTypeException(
+					$statement,
+					$snak->getPropertyId()
+				);
+			}
+		}
+
+		throw new InvalidPatchedStatementException();
+	}
+
 }

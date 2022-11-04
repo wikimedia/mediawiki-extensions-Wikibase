@@ -2,16 +2,21 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
+use Exception;
 use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Swaggest\JsonDiff\JsonDiff;
+use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
+use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementValueTypeException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
@@ -37,9 +42,7 @@ class JsonDiffStatementPatcherTest extends TestCase {
 		parent::setUp();
 
 		$this->snakValidator = $this->createStub( SnakValidator::class );
-		$this->snakValidator
-			->method( 'validateStatementSnaks' )
-			->willReturn( Result::newSuccess() );
+		$this->snakValidator->method( 'validate' )->willReturn( Result::newSuccess() );
 
 		if ( !class_exists( JsonDiff::class ) ) {
 			$this->markTestSkipped( 'Skipping while swaggest/json-diff has not made it to mediawiki/vendor yet (T316245).' );
@@ -115,6 +118,38 @@ class JsonDiffStatementPatcherTest extends TestCase {
 		);
 	}
 
+	public function testGivenPatchResultChangesValueType_throwsException(): void {
+		$this->snakValidator = $this->createStub( SnakValidator::class );
+		$this->snakValidator
+			->method( 'validate' )
+			->willReturn( Result::newError( [ Error::newError( '', null, 'bad-value-type' ), ] ) );
+
+		$propertyId = 'P1';
+		$originalStatement = NewStatement::forProperty( $propertyId )
+			->withValue( 'unpatched' )
+			->build();
+		$patchOperation = [
+			'op' => 'replace',
+			'path' => '/mainsnak/datavalue',
+			'value' => [
+				'type' => 'globecoordinate',
+				'value' => [ 'latitude' => 100, 'longitude' => 100 ]
+			]
+		];
+		$expectedPatchedStatement = NewStatement::forProperty( $propertyId )
+			->withValue( new GlobeCoordinateValue( new LatLongValue( 100, 100 ) ) )
+			->build();
+
+		try {
+			$this->newStatementPatcher()->patch( $originalStatement, [ $patchOperation ] );
+			$this->fail( "Exception not thrown" );
+		} catch ( Exception $e ) {
+			$this->assertInstanceOf( InvalidPatchedStatementValueTypeException::class, $e );
+			$this->assertEquals( $propertyId, $e->getPropertyId()->getSerialization() );
+			$this->assertEquals( $expectedPatchedStatement, $e->getPatchedStatement() );
+		}
+	}
+
 	public function testGivenPatchTestConditionFailed_throwsException(): void {
 		$testOperation = [
 			'op' => 'test',
@@ -155,8 +190,8 @@ class JsonDiffStatementPatcherTest extends TestCase {
 	public function testGivenPatchResultsIsInvalidStatement_throwsException(): void {
 		$this->snakValidator = $this->createMock( SnakValidator::class );
 		$this->snakValidator
-			->method( 'validateStatementSnaks' )
-			->willReturn( Result::newError( [] ) );
+			->method( 'validate' )
+			->willReturn( Result::newError( [ Error::newError() ] ) );
 
 		$this->expectException( InvalidPatchedStatementException::class );
 
