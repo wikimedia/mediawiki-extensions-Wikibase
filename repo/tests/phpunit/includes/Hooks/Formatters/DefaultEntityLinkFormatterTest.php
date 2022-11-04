@@ -28,6 +28,8 @@ class DefaultEntityLinkFormatterTest extends TestCase {
 		parent::setUp();
 
 		$this->language = $this->createMock( Language::class );
+		$this->language->method( 'getHtmlCode' )->willReturn( 'en' );
+		$this->language->method( 'getDir' )->willReturn( 'ltr' );
 		$this->titleTextLookup = $this->createMock( EntityTitleTextLookup::class );
 	}
 
