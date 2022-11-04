@@ -19,8 +19,6 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class CachingPropertyInfoLookup implements PropertyInfoLookup {
 
-	private const SINGLE_PROPERTY_CACHE_KEY_SEPARATOR = ':';
-
 	/**
 	 * @var PropertyInfoLookup
 	 */
